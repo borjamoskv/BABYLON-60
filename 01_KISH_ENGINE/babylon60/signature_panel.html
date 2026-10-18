@@ -1,0 +1,80 @@
+<style>
+  .moskv-signature {
+    color-scheme: light dark;
+    --s-bg: #fff; --s-soft: #f4f6fa; --s-text: #202735; --s-muted: #5c677a;
+    --s-line: #dce2ec; --s-accent: #4052bc; --s-tint: #eef1ff;
+    --s-bg: light-dark(#fff, #191d27); --s-soft: light-dark(#f4f6fa, #242b39);
+    --s-text: light-dark(#202735, #eef2f9); --s-muted: light-dark(#5c677a, #b2bdd0);
+    --s-line: light-dark(#dce2ec, #3b465b); --s-accent: light-dark(#4052bc, #b2beff);
+    --s-tint: light-dark(#eef1ff, #303b61);
+    box-sizing: border-box; width: 100%; margin: 0; border: 1px solid var(--s-line);
+    border-radius: 18px; background: var(--s-bg); color: var(--s-text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 14px; line-height: 1.5; overflow-wrap: anywhere;
+  }
+  .moskv-signature * { box-sizing: border-box; }
+  .moskv-signature h2, .moskv-signature p, .moskv-signature dl { margin: 0; }
+  .moskv-signature .s-header { padding: 18px 22px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; border-bottom: 1px solid var(--s-line); }
+  .moskv-signature .s-identity { display: flex; align-items: center; gap: 11px; }
+  .moskv-signature .s-mark { width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center; background: var(--s-tint); color: var(--s-accent); font-size: 23px; }
+  .moskv-signature .s-name { font-size: 15px; font-weight: 600; letter-spacing: .025em; }
+  .moskv-signature .s-small, .moskv-signature .s-meta { font-size: 12px; color: var(--s-muted); }
+  .moskv-signature .s-chip { padding: 4px 9px; border-radius: 6px; background: var(--s-tint); color: var(--s-accent); font-size: 11px; }
+  .moskv-signature .s-main { padding: 22px; }
+  .moskv-signature .s-hero { display: grid; grid-template-columns: 1fr; gap: 22px; }
+  .moskv-signature .s-has-effort { grid-template-columns: 1.35fr 1fr; }
+  .moskv-signature .s-label { color: var(--s-muted); font-size: 12px; }
+  .moskv-signature .s-model { font-size: clamp(22px, 4vw, 30px); font-weight: 600; line-height: 1.25; letter-spacing: -.035em; margin: 6px 0 7px; }
+  .moskv-signature .s-effort { padding-left: 22px; border-left: 1px solid var(--s-line); }
+  .moskv-signature .s-effort-value { font-size: 18px; font-weight: 600; margin: 7px 0; }
+  .moskv-signature .s-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 10px; margin-top: 22px; }
+  .moskv-signature .s-metric { padding: 14px; border-radius: 10px; background: var(--s-soft); }
+  .moskv-signature .s-icon { display: block; margin-bottom: 8px; color: var(--s-accent); font-size: 19px; }
+  .moskv-signature .s-value { font-size: 15px; font-weight: 600; margin: 5px 0; font-variant-numeric: tabular-nums; }
+  .moskv-signature .s-note { font-size: 11px; color: var(--s-muted); }
+  .moskv-signature .s-change, .moskv-signature .s-context { margin-top: 16px; }
+  .moskv-signature .s-context-value { display: block; color: var(--s-text); margin-bottom: 4px; }
+  .moskv-signature details { margin-top: 15px; }
+  .moskv-signature summary { color: var(--s-accent); padding: 10px 0; min-height: 44px; cursor: pointer; font-size: 12px; }
+  .moskv-signature summary:focus-visible { outline: 2px solid var(--s-accent); outline-offset: 3px; border-radius: 3px; }
+  .moskv-signature .s-source { display: grid; grid-template-columns: 140px 1fr; gap: 16px; padding: 10px 0; border-top: 1px solid var(--s-line); }
+  .moskv-signature dt { font-size: 12px; font-weight: 600; }
+  .moskv-signature dd { margin: 0; color: var(--s-muted); font-size: 12px; }
+  .moskv-signature .s-footer { padding: 12px 22px; border-top: 1px solid var(--s-line); display: flex; flex-wrap: wrap; gap: 6px 18px; justify-content: space-between; color: var(--s-muted); font-size: 11px; }
+  @media (max-width: 520px) {
+    .moskv-signature .s-header, .moskv-signature .s-main, .moskv-signature .s-footer { padding: 16px; }
+    .moskv-signature .s-hero { grid-template-columns: 1fr; gap: 16px; }
+    .moskv-signature .s-effort { padding: 13px 0 0; border-left: 0; border-top: 1px solid var(--s-line); }
+    .moskv-signature .s-grid { grid-template-columns: 1fr; }
+    .moskv-signature .s-metric { display: grid; grid-template-columns: 22px 1fr; gap: 0 10px; }
+    .moskv-signature .s-icon { grid-row: 1 / 4; margin: 0; }
+    .moskv-signature .s-value, .moskv-signature .s-note { grid-column: 2; }
+    .moskv-signature .s-source { grid-template-columns: 1fr; gap: 4px; }
+  }
+</style>
+<article class="moskv-signature" aria-label="Firma de esta respuesta" data-signature-version="2" data-signature-observed-at="$OBSERVED_AT">
+  <header class="s-header">
+    <div class="s-identity">
+      <span class="s-mark" aria-hidden="true">◈</span>
+      <div><h2 class="s-name" data-signature-field="TOPOLOGÍA ACTIVA">$TOPOLOGY</h2><div class="s-small">Firma de respuesta</div></div>
+    </div>
+    <span class="s-chip">Observación declarada</span>
+  </header>
+  <div class="s-main">
+    <div class="s-hero $HERO_CLASS">
+      <div><div class="s-label">Modelo informado</div><div class="s-model" data-signature-field="LLM">$MODEL</div><div class="s-meta">Fuente: <span data-signature-source="LLM">$MODEL_SOURCE</span></div></div>
+      $EFFORT_SECTION
+    </div>
+    $METRICS_SECTION
+    $CHANGE_SECTION
+    $CONTEXT_SECTION
+    <details>
+      <summary>Fuentes y alcance</summary>
+      <dl>
+        <div class="s-source"><dt>Topología</dt><dd data-signature-source="TOPOLOGÍA ACTIVA">$TOPOLOGY_SOURCE</dd></div>
+      </dl>
+      <p class="s-note">Las fuentes son declaraciones del emisor. Esta presentación no certifica su veracidad ni su vigencia.</p>
+    </details>
+  </div>
+  <footer class="s-footer"><time datetime="$OBSERVED_AT">$OBSERVED_AT</time><span>Sin atestación criptográfica</span></footer>
+</article>

@@ -1,0 +1,9 @@
+[package]
+name = "cadt_mediator"
+version = "0.1.0"
+license-file = "../../LICENSE"
+publish = false
+edition = "2024"
+
+[dependencies]
+babylon60-kernel = { path = "../../00_ABZU_KERNEL/crates/babylon60-kernel", default-features = false }

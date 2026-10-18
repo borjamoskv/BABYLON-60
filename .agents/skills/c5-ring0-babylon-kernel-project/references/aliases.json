@@ -1,0 +1,99 @@
+{
+  "scope": "workspace",
+  "canonical_alias": "kernel-hub",
+  "modules": [
+    {
+      "name": "babylon60-kernel-invariants",
+      "canonical_alias": "kernel-invariants-audit",
+      "aliases": [
+        "kernel-invariants-audit",
+        "babylon60-kernel-invariants",
+        "/babylon60-kernel-invariants"
+      ],
+      "module": "references/modules/babylon60-kernel-invariants/MODULE.md"
+    },
+    {
+      "name": "babylon60-architecture",
+      "canonical_alias": "kernel-ide-architecture",
+      "aliases": [
+        "kernel-ide-architecture",
+        "babylon60-architecture",
+        "/babylon60-architecture",
+        "arquitectura babylon60",
+        "patrones ide babylon",
+        "babylon60 ide"
+      ],
+      "module": "references/modules/babylon60-architecture/MODULE.md"
+    },
+    {
+      "name": "shared-manifest-kernel",
+      "canonical_alias": "kernel-shared-manifest",
+      "aliases": [
+        "kernel-shared-manifest",
+        "shared-manifest-kernel",
+        "/shared-manifest-kernel",
+        "shared manifest",
+        "seqlock 64b",
+        "ring-0 shm",
+        "ipc lock-free"
+      ],
+      "module": "references/modules/shared-manifest-kernel/MODULE.md"
+    },
+    {
+      "name": "c5-sovereign-daemon-deployment",
+      "canonical_alias": "kernel-daemon-deploy",
+      "aliases": [
+        "kernel-daemon-deploy",
+        "c5-sovereign-daemon-deployment",
+        "/c5-sovereign-daemon-deployment",
+        "desplegar sovereign daemon",
+        "launchd rust daemon",
+        "daemon 24/7"
+      ],
+      "module": "references/modules/c5-sovereign-daemon-deployment/MODULE.md"
+    },
+    {
+      "name": "apple-bypass",
+      "canonical_alias": "kernel-apple-bypass",
+      "aliases": [
+        "kernel-apple-bypass",
+        "apple-bypass",
+        "/apple-bypass",
+        "bypass termodinámico",
+        "evadir jetsam macos",
+        "liberar memoria mps"
+      ],
+      "module": "references/modules/apple-bypass/MODULE.md"
+    },
+    {
+      "name": "thermo-audit",
+      "canonical_alias": "kernel-thermo-audit",
+      "aliases": [
+        "kernel-thermo-audit",
+        "thermo-audit",
+        "/thermo-audit",
+        "auditoría termodinámica código",
+        "fricción de silicio",
+        "concurrencia landauer",
+        "silicon concurrency audit",
+        "grados de libertad parásitos",
+        "potencia causal"
+      ],
+      "module": "references/modules/thermo-audit/MODULE.md"
+    },
+    {
+      "name": "rlhf-sentinel",
+      "canonical_alias": "kernel-rlhf-sentinel",
+      "aliases": [
+        "kernel-rlhf-sentinel",
+        "rlhf-sentinel",
+        "/rlhf-sentinel",
+        "rlhf sentinel",
+        "contención de ia",
+        "fuga de llm",
+        "quarantine ring-0"
+      ],
+      "module": "references/modules/rlhf-sentinel/MODULE.md"
+    }
+  ]
+}

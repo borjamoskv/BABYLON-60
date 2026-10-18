@@ -1,0 +1,141 @@
+{
+  "format": "babylon60.claims.lock.v1",
+  "version": "5.0.0",
+  "commit": "d7d96bd1b7bc881a0544412ec7dcdfc424819651",
+  "source_tree_digest": "75b1717c61abdb46b78035f6845492f69eee06747927a5c5b828ff16f6d9bd61",
+  "timestamp": "2026-10-18T17:57:06Z",
+  "claims_manifest_digest": "e34750df315efa4e1c85e28319ae98fb6612f3ee53d7a192909fc16687afbe4d",
+  "evidence_root": "sha3-256:76e0e6a31229dae7f8aba0c92ca18b6759273a53041d4774060a4f17ddc1288d",
+  "claims_pinned": {
+    "inv_01_manifest_layout": {
+      "status": "verified",
+      "component": "00_ABZU_KERNEL",
+      "hash": "4cbfb3568610163b75cb88bfbe05e25a7e8ddec6c29c743d42a8d5838059a850"
+    },
+    "inv_02_seqlock_concurrency": {
+      "status": "verified",
+      "component": "00_ABZU_KERNEL",
+      "hash": "494fa84770674809ba4b0f0a4751d9ad11e36c88699a87a1fe3ce536ee147d78"
+    },
+    "inv_04_fail_stop_halt": {
+      "status": "verified",
+      "component": "00_ABZU_KERNEL",
+      "hash": "1061683b8c49e45544bf02ad0803df0141dd625e1908766a4b91a9d6e87b7b26"
+    },
+    "cose_ed25519_receipt": {
+      "status": "verified",
+      "component": "00_ABZU_KERNEL",
+      "hash": "42064581e476d8d7fceaf0dbb3618070e57c7b627e6458c4e3b46eb195c0b7c3"
+    },
+    "secure_enclave_p256": {
+      "status": "verified_local",
+      "component": "00_ABZU_KERNEL",
+      "hash": "3819ca3c48ce21d3eefb7bbdad3fe8bfb9184030daf4b4138e6fa84c6533dcb7"
+    },
+    "cortex_persist_sqlite": {
+      "status": "verified",
+      "component": "01_KISH_ENGINE",
+      "hash": "7d79d7a5b750175880c06907ffa97ec5badccd1158f8c0ef2fade8dfbc0ddcc4"
+    },
+    "merkle_attestation": {
+      "status": "verified",
+      "component": "01_KISH_ENGINE",
+      "hash": "11733930169f0945344d545e0f34d48551f12f9d522156fa65a7b511e4e94151"
+    },
+    "lean4_formal_trace": {
+      "status": "verified_local",
+      "component": "00_ABZU_KERNEL",
+      "hash": "31b2ae8bdae83d695fab8b4c129ef1f07424f35a65eb10e00150018014c0cb5f"
+    },
+    "worm_durability": {
+      "status": "verified_in_memory",
+      "component": "00_ABZU_KERNEL",
+      "hash": "2904a8f651abcb925bdec67fb0c5a8365eb424a4a56fc3430f7187ee09874636"
+    },
+    "heterogeneous_verification_quorum": {
+      "status": "verified_local",
+      "component": "00_ABZU_KERNEL",
+      "hash": "cbb63d7354600f0aa6954983023fe372e3daf8fdabc63b18d25736f80b03fa64"
+    },
+    "zero_anergy": {
+      "status": "verified",
+      "component": "00_ABZU_KERNEL",
+      "hash": "580e878713f0de41b6dc714fff5a8b44bdbee94b7c705a6bc8c886a6979f93c2"
+    },
+    "mcp_authority_gate": {
+      "status": "verified",
+      "component": "01_KISH_ENGINE",
+      "hash": "59a3291051bd9186536f4d67369fe80010cbc97a875a8fee4f0d7b11bea74c65"
+    },
+    "AUTH_001": {
+      "status": "verified_local",
+      "component": "00_ABZU_KERNEL",
+      "hash": "b58940c2f551fbae8dc7bce12ad6fae94bd878b0c2e10973bb6e1dbad16b8030"
+    },
+    "AUTH_002": {
+      "status": "verified_local",
+      "component": "00_ABZU_KERNEL",
+      "hash": "e2d194450b11728778e00ea7a16b47413e87a0fceb8bf0d449e891fdd067802b"
+    },
+    "AUTH_003": {
+      "status": "verified_local",
+      "component": "00_ABZU_KERNEL",
+      "hash": "f2ca0059f56f72aeb799de83f9866c2ed5a5190010cdaafc5981c2afae5f45fb"
+    },
+    "AUTH_004": {
+      "status": "verified_local",
+      "component": "00_ABZU_KERNEL",
+      "hash": "bf94432355c5b2633509d0714971685411ed3d521f2e92de05672ff3f5c9aa32"
+    },
+    "AUTH_005": {
+      "status": "verified_local",
+      "component": "00_ABZU_KERNEL",
+      "hash": "b26a94cfb9e3c913a481b1d3958130ff3ae038d302186b1b6cd91227353d0d6e"
+    },
+    "AUTH_006": {
+      "status": "verified_local",
+      "component": "00_ABZU_KERNEL",
+      "hash": "8c1d24a831368d31162e5db6bd22a212b5e83708d89d872aa904799417f0a04e"
+    },
+    "AUTH_007_secure_fs_quarantine": {
+      "status": "verified_local",
+      "component": "00_ABZU_KERNEL",
+      "hash": "3a9216e21869eef8eb7dcd078a26e40bbe567ab91dfa7c0926cf2db09f7e2f47"
+    },
+    "sharur_100_swarm_concurrency": {
+      "status": "verified",
+      "component": "02_EDIN_SWARMS",
+      "hash": "3bee8f22472f6f9410312df7485ddbf1eb5b113d06a0d236bf1e280e98210172"
+    },
+    "tamkarum_budget_gate": {
+      "status": "verified",
+      "component": "01_KISH_ENGINE",
+      "hash": "82834685ba337aa6d19f1f94b3e202f42f98b6b9b4ff6b7dd3f5f14e25a7a3cc"
+    },
+    "FL_007_admission_bounded_liveness": {
+      "status": "verified_local",
+      "component": "00_ABZU_KERNEL",
+      "hash": "dace092463952f8f59915ceeded84cb592601ce729d6023368336b555941f31a"
+    },
+    "FL_008_scoped_capability_broker": {
+      "status": "verified_local",
+      "component": "00_ABZU_KERNEL",
+      "hash": "fff80f1328ae419a3d2b8ebf42cd051aa296411002d3d59e9abcd363ade1f81d"
+    },
+    "INV_OMEGA_complete_mediation": {
+      "status": "verified_local",
+      "component": "00_ABZU_KERNEL",
+      "hash": "cea2e4525bb20aef923788c14ac5bf730f1bdfdb905bd7409db778a3a873b22e"
+    },
+    "FL_014_wave4_receipt_loss_and_closure_drift": {
+      "status": "verified_local",
+      "component": "00_ABZU_KERNEL",
+      "hash": "f74405c5be9b7ed50c8175892d64dac8e772f1930f0a45e9febce5470addaa89"
+    },
+    "FL_016_owasp_acs_vop1_and_drift_guard": {
+      "status": "verified_local",
+      "component": "00_ABZU_KERNEL",
+      "hash": "fb1140acf0bc2645def591d6d51f27be8c5ed338777a40ca0c7976929b934b17"
+    }
+  }
+}

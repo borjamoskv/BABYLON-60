@@ -1,0 +1,30 @@
+name: BABYLON-60 Sanity CI
+on: { push: { branches: [main] }, pull_request: }
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+jobs:
+  sanity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Validate JSON Files
+        run: |
+          python3 -c '
+          import os, json, sys
+          for root, _, files in os.walk("."):
+              if any(x in root for x in [".git", ".worktrees", ".lake", "scratch"]): continue
+              for f in files:
+                  if f.endswith(".json"):
+                      path = os.path.join(root, f)
+                      try:
+                          with open(path) as file:
+                              json.load(file)
+                      except Exception as e:
+                          print(f"Invalid JSON in {path}: {e}")
+                          sys.exit(1)
+          '
+      - run: test -f AGENTS.md && test -d .agents/skills

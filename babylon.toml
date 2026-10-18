@@ -1,0 +1,22 @@
+# ============================================================================
+# BABYLON-60 — SINGLE SOURCE OF TRUTH (VERSION & RELEASE SPECIFICATION)
+# ============================================================================
+[release]
+version = "5.0.0"
+state = "candidate"
+edition = "2026"
+author = "Borja Fernández Angulo <borja@babylon60.com>"
+license = "MIT OR Apache-2.0"
+description = "Deterministic Agent Trust Kernel & Evidence-Carrying Runtime (AX-0)"
+axiom = "AX-0: No stochastic component may authorize its own irreversible effects (LLM != authority)"
+
+[topology]
+kernel = "00_ABZU_KERNEL"
+engine = "01_KISH_ENGINE"
+swarms = "02_EDIN_SWARMS"
+verification = "NERGAL_VERIFICATION_PLANE"
+
+[verification_targets]
+claims_manifest = "CLAIMS.toml"
+evidence_lock = "claims.lock"
+release_manifest = "RELEASE_MANIFEST.json"

@@ -1,0 +1,18 @@
+{
+  "name": "kimi_audit",
+  "description": "Sends a snippet of code or architecture description to Kimi for a rigorous C5-REAL aligned audit.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "code_snippet": {
+        "description": "The code, schema, or system logs to audit.",
+        "type": "string"
+      },
+      "context_files": {
+        "description": "Optional context (like file paths or surrounding architectures) to help Kimi.",
+        "type": "string"
+      }
+    },
+    "required": ["code_snippet"]
+  }
+}

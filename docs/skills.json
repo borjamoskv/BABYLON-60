@@ -1,0 +1,3692 @@
+{
+  "version": "26.400",
+  "updated_at": "2026-10-17T02:38:41Z",
+  "exergy_scale_standard": "COMPILER_DERIVED_3_EVALUATORS (E1_Silicon + E2_Kolmogorov + E3_Causal = 21000)",
+  "total_skills": 130,
+  "average_exergy_density": 19189.08,
+  "description": "Grafo de adyacencia y topología conectada de las 130 habilidades soberanas del ecosistema CORTEX Engine integrado en BABYLON-60 (100% COMPILER_DERIVED)",
+  "entries": [
+    {
+      "name": "cortex-kernel",
+      "tier": 23000,
+      "category": "Kernel",
+      "display_name": "CORTEX Root Kernel",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 2000,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-root",
+      "scope": "kernel",
+      "role": "arquitecto",
+      "description": "Manifiesto de invariantes transversales del ecosistema CORTEX. Dispara con \"kernel-root\", \"cortex kernel\".",
+      "triggers": [
+        "kernel-root",
+        "cortex-kernel",
+        "cortex kernel",
+        "kernel axiomas"
+      ]
+    },
+    {
+      "name": "c5-kudurru-64",
+      "tier": 22500,
+      "category": "Kernel",
+      "display_name": "Cerrojo Lock-Free KUDURRU-64 (Ring-0 Gravity Filter)",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 1500,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-seqlock-filter",
+      "scope": "global",
+      "description": "Módulo Ring-0. Dispara con \"kudurru\", \"kudurru-64\", \"filtro de gravedad\", \"seqlock 64b\", \"ddos cognitivo\".",
+      "triggers": [
+        "c5-kudurru-64",
+        "ddos cognitivo",
+        "filtro de gravedad",
+        "kernel-seqlock-filter",
+        "kudurru",
+        "kudurru-64",
+        "seqlock 64b"
+      ]
+    },
+    {
+      "name": "shared-manifest-kernel",
+      "tier": 22000,
+      "category": "Kernel",
+      "display_name": "Kernel de Manifiesto Compartido (64B Seqlock SPMC)",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 1000,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-shared-manifest",
+      "scope": "workspace",
+      "description": "Módulo Ring-0. Dispara con \"kernel-shared-manifest\", \"shared manifest\", \"seqlock 64b\", \"ring-0 shm\", \"ipc lock-free\".",
+      "triggers": [
+        "ipc lock-free",
+        "kernel-shared-manifest",
+        "ring-0 shm",
+        "seqlock 64b",
+        "shared manifest",
+        "shared-manifest-kernel"
+      ]
+    },
+    {
+      "name": "c5-mushushu-0",
+      "tier": 22000,
+      "category": "Kernel",
+      "display_name": "Oráculo Formal & Firewall de Apoptosis MUSHUSHU-0 (Ring-0)",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 1000,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-epistemic-firewall",
+      "scope": "global",
+      "description": "Módulo Ring-0. Dispara con \"mushushu\", \"mushushu-0\", \"firewall epistémico\", \"apoptosis termodinámica\".",
+      "triggers": [
+        "apoptosis termodinámica",
+        "c5-mushushu-0",
+        "firewall epistémico",
+        "kernel-epistemic-firewall",
+        "mushushu",
+        "mushushu-0"
+      ]
+    },
+    {
+      "name": "c5-larsa-120",
+      "tier": 21800,
+      "category": "Kernel",
+      "display_name": "Consenso BFT Isostático LARSA-120 (Tríada Rust/Lean4/Z3)",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 800,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-bft-consensus",
+      "scope": "global",
+      "description": "Módulo Ring-0. Dispara con \"larsa\", \"larsa-120\", \"consenso bft\", \"tríada arquitectónica\", \"consenso isostático\".",
+      "triggers": [
+        "c5-larsa-120",
+        "consenso bft",
+        "consenso isostático",
+        "kernel-bft-consensus",
+        "larsa",
+        "larsa-120",
+        "tríada arquitectónica"
+      ]
+    },
+    {
+      "name": "babylon60-kernel-invariants",
+      "tier": 21600,
+      "category": "Kernel",
+      "display_name": "Auditoría de Invariantes del Kernel BABYLON-60",
+      "canonical_alias": "kernel-invariants-audit",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 600,
+        "compiler_verified": true
+      },
+      "scope": "workspace",
+      "description": "Audita SPSC, SQLite L0, tiempo causal, LARSA y Rust–Lean. Dispara con \"kernel-invariants-audit\", \"babylon60-kernel-invariants\".",
+      "triggers": [
+        "babylon60-kernel-invariants",
+        "kernel-invariants-audit"
+      ]
+    },
+    {
+      "name": "thermo-audit",
+      "tier": 21500,
+      "category": "Kernel",
+      "display_name": "Auditoría Termodinámica de Silicio y Concurrencia",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 500,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-thermo-audit",
+      "scope": "workspace",
+      "description": "Módulo Ring-0. Dispara con \"kernel-thermo-audit\", \"/thermo-audit\", \"auditoría termodinámica código\", \"fricción de silicio\", \"concurrencia landauer\", \"silicon concurrency audit\", \"grados de libertad parásitos\", \"potencia causal\".",
+      "triggers": [
+        "/thermo-audit",
+        "auditoría termodinámica código",
+        "concurrencia landauer",
+        "fricción de silicio",
+        "grados de libertad parásitos",
+        "kernel-thermo-audit",
+        "potencia causal",
+        "silicon concurrency audit",
+        "thermo-audit"
+      ]
+    },
+    {
+      "name": "cortex-skill-composer",
+      "tier": 21500,
+      "category": "Meta-Kernel",
+      "display_name": "Componedor & Orquestador de Cadenas de Skills",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 500,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-skill-composer",
+      "scope": "global",
+      "description": "Módulo CORTEX. Dispara con \"componer skills\", \"skill chain\", \"cadena de habilidades\", \"pipeline de skills\", \"cortex skill composer\", \"orquestación de habilidades\", \"skill pipeline\".",
+      "triggers": [
+        "cadena de habilidades",
+        "componer skills",
+        "cortex skill composer",
+        "cortex-skill-composer",
+        "orquestación de habilidades",
+        "pipeline de skills",
+        "skill chain",
+        "skill pipeline",
+        "swarm-skill-composer"
+      ]
+    },
+    {
+      "name": "c5-ring0-babylon-kernel-project",
+      "tier": 21500,
+      "category": "Kernel",
+      "display_name": "Kernel Hub · Ring-0 BABYLON (Proyecto)",
+      "canonical_alias": "kernel-hub",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 500,
+        "compiler_verified": true
+      },
+      "scope": "workspace",
+      "description": "Enruta módulos BABYLON-60 del proyecto: SPSC, SQLite L0, arquitectura IDE, SharedManifest, launchd, Apple Silicon y auditoría de contención. Dispara con \"kernel-hub\", \"babylon kernel hub\", \"shared manifest\", \"thermo-audit\", \"rlhf sentinel\", \"apple-bypass\".",
+      "triggers": [
+        "apple-bypass",
+        "babylon kernel hub",
+        "c5-ring0-babylon-kernel-project",
+        "kernel-hub",
+        "rlhf sentinel",
+        "shared manifest",
+        "thermo-audit"
+      ]
+    },
+    {
+      "name": "c5-ring0-babylon-kernel",
+      "tier": 21500,
+      "category": "Kernel",
+      "display_name": "Ring-0 BABYLON Kernel",
+      "canonical_alias": "kernel-router",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 500,
+        "compiler_verified": true
+      },
+      "scope": "global",
+      "description": "Enruta auditorías y trabajo de kernel, Lean 4/Z3, BFT, Seqlock, silicio, inferencia local y atestación; carga solo el módulo relevante. Dispara con \"ring0 hub\", \"kernel hub\", \"lean 4\", \"larsa\", \"kudurru\", \"eridu\", \"laya\".",
+      "triggers": [
+        "c5-ring0-babylon-kernel",
+        "eridu",
+        "kernel hub",
+        "kernel-router",
+        "kudurru",
+        "larsa",
+        "laya",
+        "lean 4",
+        "ring0 hub"
+      ]
+    },
+    {
+      "name": "c5-thermos-audit",
+      "tier": 21400,
+      "category": "Kernel",
+      "display_name": "Auditoría Termonuclear de Silicio & Código (Double Thermo)",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 400,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-double-thermo-audit",
+      "scope": "global",
+      "description": "Módulo Ring-0. Dispara con \"thermos\", \"thermos audit\", \"auditoría termonuclear\", \"double thermo\", \"revisión termonuclear\", \"revisar rama a fondo\", \"thermo review\".",
+      "triggers": [
+        "auditoría termonuclear",
+        "c5-thermos-audit",
+        "double thermo",
+        "kernel-double-thermo-audit",
+        "revisar rama a fondo",
+        "revisión termonuclear",
+        "thermo review",
+        "thermos",
+        "thermos audit"
+      ]
+    },
+    {
+      "name": "c5-enki-60",
+      "tier": 21400,
+      "category": "Nucleus",
+      "display_name": "Motor Aritmético de Precisión Sexagesimal ENKI-60",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 400,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-sexagesimal-math",
+      "scope": "global",
+      "description": "Módulo Ring-0. Dispara con \"enki\", \"enki-60\", \"cálculo sexagesimal\", \"aritmética base 60\", \"precisión sexagesimal\".",
+      "triggers": [
+        "aritmética base 60",
+        "c5-enki-60",
+        "cálculo sexagesimal",
+        "enki",
+        "enki-60",
+        "kernel-sexagesimal-math",
+        "precisión sexagesimal"
+      ]
+    },
+    {
+      "name": "rlhf-sentinel",
+      "tier": 21200,
+      "category": "Governance",
+      "display_name": "Centinela de Contención Ring-0 (RLHF Sentinel)",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 200,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-rlhf-sentinel",
+      "scope": "workspace",
+      "description": "Módulo Ring-0. Dispara con \"kernel-rlhf-sentinel\", \"/rlhf-sentinel\", \"rlhf sentinel\", \"contención de ia\", \"fuga de llm\", \"quarantine ring-0\".",
+      "triggers": [
+        "/rlhf-sentinel",
+        "contención de ia",
+        "fuga de llm",
+        "kernel-rlhf-sentinel",
+        "quarantine ring-0",
+        "rlhf sentinel",
+        "rlhf-sentinel"
+      ]
+    },
+    {
+      "name": "cortex-skill-auditor",
+      "tier": 21200,
+      "category": "Meta-Kernel",
+      "display_name": "Auditor Exergético de Skills CORTEX Engine",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 200,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-skill-auditor",
+      "scope": "global",
+      "description": "Módulo CORTEX. Dispara con \"auditar skills\", \"auditoría de habilidades\", \"exergía skills\", \"solapamiento de triggers\", \"cortex skill auditor\", \"matriz de colisión\", \"salud de skills\".",
+      "triggers": [
+        "auditar skills",
+        "auditoría de habilidades",
+        "cortex skill auditor",
+        "cortex-skill-auditor",
+        "exergía skills",
+        "matriz de colisión",
+        "salud de skills",
+        "solapamiento de triggers",
+        "swarm-skill-auditor"
+      ]
+    },
+    {
+      "name": "c5-information-thermodynamics",
+      "tier": 21200,
+      "category": "Nucleus",
+      "display_name": "Termodinámica de la Información y Geometría Estadística (Fisher-Chentsov)",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 200,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-info-thermo",
+      "scope": "global",
+      "description": "Módulo epistémico. Dispara con \"entropía de shannon\", \"divergencia kl\", \"kullback leibler\", \"fisher information\", \"teorema de chentsov\", \"landauer limit\", \"information geometry\", \"amari natural gradient\", \"flujo de wasserstein\", \"audita entropía\".",
+      "triggers": [
+        "amari natural gradient",
+        "audita entropía",
+        "c5-information-thermodynamics",
+        "divergencia kl",
+        "entropía de shannon",
+        "epistemic-info-thermo",
+        "fisher information",
+        "flujo de wasserstein",
+        "information geometry",
+        "kullback leibler",
+        "landauer limit",
+        "teorema de chentsov"
+      ]
+    },
+    {
+      "name": "c5-autonomous-agent-primitives",
+      "tier": 21200,
+      "category": "Meta-Kernel",
+      "display_name": "Catálogo Canónico y Transductor de 47 Primitivas de Agente Autónomo",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 200,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-agent-primitives",
+      "scope": "global",
+      "description": "Módulo CORTEX. Dispara con \"47 skills\", \"primitivas de agente\", \"catálogo de skills\", \"asimilación de skills\", \"playbooks de agente\", \"47 primitivas\", \"macro-transductores\".",
+      "triggers": [
+        "47 primitivas",
+        "47 skills",
+        "asimilación de skills",
+        "c5-autonomous-agent-primitives",
+        "catálogo de skills",
+        "macro-transductores",
+        "playbooks de agente",
+        "primitivas de agente",
+        "swarm-agent-primitives"
+      ]
+    },
+    {
+      "name": "cortex-skill-genesis",
+      "tier": 21000,
+      "category": "Meta-Kernel",
+      "display_name": "Génesis Autónoma de Skills CORTEX",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-skill-genesis",
+      "scope": "global",
+      "description": "Módulo CORTEX. Dispara con \"generar skill\", \"skill genesis\", \"crear habilidad\", \"cortex skill genesis\", \"sintetizar skill\", \"auto skill creator\".",
+      "triggers": [
+        "auto skill creator",
+        "cortex skill genesis",
+        "cortex-skill-genesis",
+        "crear habilidad",
+        "generar skill",
+        "sintetizar skill",
+        "skill genesis",
+        "swarm-skill-genesis"
+      ]
+    },
+    {
+      "name": "c5-lexicon-enforcer",
+      "tier": 21000,
+      "category": "Nucleus",
+      "display_name": "Oráculo de Verificación Epistemológica & Auditoría de Coste Involuntario (Aforismo 5)",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-lexicon-enforcer",
+      "scope": "global",
+      "description": "Módulo epistémico. Dispara con \"lexicon enforcer\", \"purga anergía semántica\", \"auditoría epistemológica\", \"forzar léxico c5\", \"auditar cheap talk\", \"analiza esto con el aforismo 5\".",
+      "triggers": [
+        "analiza esto con el aforismo 5",
+        "auditar cheap talk",
+        "auditoría epistemológica",
+        "c5-lexicon-enforcer",
+        "epistemic-lexicon-enforcer",
+        "forzar léxico c5",
+        "lexicon enforcer",
+        "purga anergía semántica"
+      ]
+    },
+    {
+      "name": "c5-lean4-neurosymbolic-architect",
+      "tier": 21000,
+      "category": "Nucleus",
+      "display_name": "Arquitecto Neuro-Simbólico Soberano en Lean 4",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-lean4-ffi",
+      "scope": "global",
+      "description": "Módulo Ring-0. Dispara con \"lean 4 ffi\", \"agente neuro-simbólico\", \"autopoiesis coinductiva\", \"itrees lean\".",
+      "triggers": [
+        "agente neuro-simbólico",
+        "autopoiesis coinductiva",
+        "c5-lean4-neurosymbolic-architect",
+        "itrees lean",
+        "kernel-lean4-ffi",
+        "lean 4 ffi"
+      ]
+    },
+    {
+      "name": "autodidact-omega",
+      "tier": 21000,
+      "category": "Nucleus",
+      "display_name": "Motor Autodidact-Ω de Investigación Profunda y Falsación Popperiana",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-deep-research",
+      "scope": "global",
+      "description": "Módulo epistémico. Dispara con \"autodidact\", \"autodidact-omega\", \"investigación profunda\", \"investigar paper\", \"cristal ontológico\", \"deep research\".",
+      "triggers": [
+        "autodidact",
+        "autodidact-omega",
+        "cristal ontológico",
+        "deep research",
+        "epistemic-deep-research",
+        "investigación profunda",
+        "investigar paper"
+      ]
+    },
+    {
+      "name": "epistemic-extinction-protocol",
+      "tier": 20980,
+      "category": "Nucleus",
+      "display_name": "Protocolo de Extinción Epistémica (Punto Fijo Ω)",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-fixed-point",
+      "scope": "global",
+      "description": "Módulo epistémico. Dispara con \"extinción epistémica\", \"punto fijo omega\", \"reducción dimensional\", \"epistemic extinction\", \"punto fijo ω\", \"extinción conceptual\".",
+      "triggers": [
+        "epistemic extinction",
+        "epistemic-extinction-protocol",
+        "epistemic-fixed-point",
+        "extinción conceptual",
+        "extinción epistémica",
+        "punto fijo omega",
+        "punto fijo ω",
+        "reducción dimensional"
+      ]
+    },
+    {
+      "name": "cta-cognitive-transition-algebra",
+      "tier": 20950,
+      "category": "Nucleus",
+      "display_name": "Álgebra de Transiciones Cognitivas & Event-Sourcing Comonádico",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-transition-algebra",
+      "scope": "global",
+      "description": "Módulo epistémico. Dispara con \"álgebra cognitiva\", \"cta transition\", \"event sourcing cognitivo\", \"matriz cta\", \"transición de estados\", \"álgebra de transiciones\", \"comónada cognitiva\".",
+      "triggers": [
+        "comónada cognitiva",
+        "cta transition",
+        "cta-cognitive-transition-algebra",
+        "epistemic-transition-algebra",
+        "event sourcing cognitivo",
+        "matriz cta",
+        "transición de estados",
+        "álgebra cognitiva",
+        "álgebra de transiciones"
+      ]
+    },
+    {
+      "name": "c5-plan-omega",
+      "tier": 20900,
+      "category": "Nucleus",
+      "display_name": "Protocolo PLAN-Ω de Planificación Causal Determinista",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-dag-planner",
+      "scope": "global",
+      "description": "Módulo CORTEX. Dispara con \"plan omega\", \"c5 plan\", \"plan causal\", \"protocolo plan omega\", \"mejorar plan\", \"/plan-omega\".",
+      "triggers": [
+        "/plan-omega",
+        "c5 plan",
+        "c5-plan-omega",
+        "mejorar plan",
+        "plan causal",
+        "plan omega",
+        "protocolo plan omega",
+        "swarm-dag-planner"
+      ]
+    },
+    {
+      "name": "c5-lean4-axiomatic-orchestrator",
+      "tier": 20900,
+      "category": "Nucleus",
+      "display_name": "Orquestador Axiomático y Verificación Formal en Lean 4",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-lean4-prover",
+      "scope": "global",
+      "description": "Módulo Ring-0. Dispara con \"lean 4\", \"formalizar en lean\", \"oráculo axiomático\", \"lake build\", \"verificación formal\", \"axiomas lean\", \"probar teorema\", \"neuro-simbólico\".",
+      "triggers": [
+        "axiomas lean",
+        "c5-lean4-axiomatic-orchestrator",
+        "formalizar en lean",
+        "kernel-lean4-prover",
+        "lake build",
+        "lean 4",
+        "neuro-simbólico",
+        "oráculo axiomático",
+        "probar teorema",
+        "verificación formal"
+      ]
+    },
+    {
+      "name": "c5-sovereign-system1-engine",
+      "tier": 20850,
+      "category": "Nucleus",
+      "display_name": "Motor de Decisión Sistema 1 No Autorregresivo (LAYA Edge)",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-system1-decision",
+      "scope": "global",
+      "description": "Módulo Ring-0. Dispara con 'laya', 'sistema 1 edge', 'jev local', 'triage desacoplado', 'kudurru 64 socket', 'decision engine local'.",
+      "triggers": [
+        "c5-sovereign-system1-engine",
+        "decision engine local",
+        "jev local",
+        "kernel-system1-decision",
+        "kudurru 64 socket",
+        "laya",
+        "sistema 1 edge",
+        "triage desacoplado"
+      ]
+    },
+    {
+      "name": "c5-sovereign-inference-runtime",
+      "tier": 20850,
+      "category": "Systems",
+      "display_name": "Motor Soberano de Inferencia y Adaptador LM Studio C5-REAL",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-local-inference",
+      "scope": "global",
+      "description": "Módulo Ring-0. Dispara con \"eridu-infer\", \"inferencia soberana\", \"appliance ia\", \"lm studio protocolo\", \"motor inferencia local\", \"air-gapped infer\", \"servidor openai local rust\", \"sovereign inference runtime\", \"desplegar eridu-infer\", \"tríada jurídica\".",
+      "triggers": [
+        "air-gapped infer",
+        "appliance ia",
+        "c5-sovereign-inference-runtime",
+        "desplegar eridu-infer",
+        "eridu-infer",
+        "inferencia soberana",
+        "kernel-local-inference",
+        "lm studio protocolo",
+        "motor inferencia local",
+        "servidor openai local rust",
+        "sovereign inference runtime",
+        "tríada jurídica"
+      ]
+    },
+    {
+      "name": "c5-silicon-stress-suite",
+      "tier": 20850,
+      "category": "Operations",
+      "display_name": "Suite de Estrés Concurrente de Silicio y Enjambres (C5-REAL)",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-stress-suite",
+      "scope": "global",
+      "description": "Módulo Ring-0. Dispara con \"pruebas de estres\", \"stress test swarm\", \"estres enjambre\", \"concurrencia de silicio\", \"stress suite\", \"poc\", \"test de estres\", \"estres silicio\".",
+      "triggers": [
+        "c5-silicon-stress-suite",
+        "concurrencia de silicio",
+        "estres enjambre",
+        "estres silicio",
+        "kernel-stress-suite",
+        "poc",
+        "pruebas de estres",
+        "stress suite",
+        "stress test swarm",
+        "test de estres"
+      ]
+    },
+    {
+      "name": "c5-debloat-agent-kernel",
+      "tier": 20800,
+      "category": "Nucleus",
+      "display_name": "Arquitecto de Micro-Kernels Agénticos Bare-Metal (Anti-LangChain)",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-baremetal-agent",
+      "scope": "global",
+      "description": "Módulo CORTEX. Dispara con \"debloat llm\", \"microkernel agentes\", \"reemplazar langchain\", \"bare-metal agent\", \"autopsia langchain\", \"agente zero dependency\".",
+      "triggers": [
+        "agente zero dependency",
+        "autopsia langchain",
+        "bare-metal agent",
+        "c5-debloat-agent-kernel",
+        "debloat llm",
+        "microkernel agentes",
+        "reemplazar langchain",
+        "swarm-baremetal-agent"
+      ]
+    },
+    {
+      "name": "categorical-hallucination-audit",
+      "tier": 20700,
+      "category": "Nucleus",
+      "display_name": "Auditoría Categórica de Alucinación & Cota Kl(D)",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-hallucination-audit",
+      "scope": "global",
+      "description": "Módulo epistémico. Dispara con \"alucinación categórica\", \"cota de confabulación\", \"desintegración bayesiana\", \"Kl(D) audit\", \"Myhill-Nerode estocástico\", \"cota de lipschitz\", \"mean shift 1d\".",
+      "triggers": [
+        "alucinación categórica",
+        "categorical-hallucination-audit",
+        "cota de confabulación",
+        "cota de lipschitz",
+        "desintegración bayesiana",
+        "epistemic-hallucination-audit",
+        "kl(d) audit",
+        "mean shift 1d",
+        "myhill-nerode estocástico"
+      ]
+    },
+    {
+      "name": "c5-adaptive-annealing-engine",
+      "tier": 20650,
+      "category": "Nucleus",
+      "display_name": "Motor de Recocido Adaptativo y Convergencia Exergética (Q1-Q4)",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-adaptive-annealing",
+      "scope": "global",
+      "description": "Módulo CORTEX. Dispara con \"adaptive annealing\", \"motor de recocido\", \"optimizacion sin colisiones\", \"recocido adaptativo\", \"busqueda del apex\", \"evitar colapso voraz\".",
+      "triggers": [
+        "adaptive annealing",
+        "busqueda del apex",
+        "c5-adaptive-annealing-engine",
+        "evitar colapso voraz",
+        "motor de recocido",
+        "optimizacion sin colisiones",
+        "recocido adaptativo",
+        "swarm-adaptive-annealing"
+      ]
+    },
+    {
+      "name": "existence-gap-audit",
+      "tier": 20600,
+      "category": "Nucleus",
+      "display_name": "Auditoría de Huecos de Existencia & Supply-Chain Slop",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "secops-existence-audit",
+      "scope": "global",
+      "description": "Módulo SecOps. Dispara con \"auditoría\", \"audit\", \"revisa este repo\", \"código alucinado\", \"dependencias fantasma\", \"slopsquatting\", \"vibe coding\", \"supply chain\", \"¿esto se ejecuta?\", \"imports rotos\", \"auditar workflows\".",
+      "triggers": [
+        "audit",
+        "auditar workflows",
+        "auditoría",
+        "código alucinado",
+        "dependencias fantasma",
+        "existence-gap-audit",
+        "imports rotos",
+        "revisa este repo",
+        "secops-existence-audit",
+        "slopsquatting",
+        "supply chain",
+        "vibe coding",
+        "¿esto se ejecuta?"
+      ]
+    },
+    {
+      "name": "c5-sharur-3600",
+      "tier": 20600,
+      "category": "Governance",
+      "display_name": "Matriz de Enjambre Sexagesimal SHARUR-3600 (Legión 100 Agentes)",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-legion-100",
+      "scope": "global",
+      "description": "Módulo CORTEX. Dispara con 'sharur', 'sharur-3600', '100 agentes', 'mas 100 agentes', 'legion 100', 'legión de 100 agentes', 'enjambre 100'.",
+      "triggers": [
+        "100 agentes",
+        "c5-sharur-3600",
+        "enjambre 100",
+        "legion 100",
+        "legión de 100 agentes",
+        "mas 100 agentes",
+        "sharur",
+        "sharur-3600",
+        "swarm-legion-100"
+      ]
+    },
+    {
+      "name": "c5-epistemic-thermodynamics-project",
+      "tier": 20600,
+      "category": "Nucleus",
+      "display_name": "Epistemic Hub · Termodinámica Epistémica (Proyecto)",
+      "canonical_alias": "epistemic-hub",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "scope": "workspace",
+      "description": "Enruta auditoría epistémica del proyecto, síntesis MDL, extracción de fuentes, biografía, simbiosis cognitiva y explicación clara. Dispara con \"epistemic-hub\", \"epistemic project hub\", \"auditoría epistémica\", \"cloud-chamber\", \"alpha extraction\", \"grill-me-v2\", \"wait-what\".",
+      "triggers": [
+        "alpha extraction",
+        "auditoría epistémica",
+        "c5-epistemic-thermodynamics-project",
+        "cloud-chamber",
+        "epistemic project hub",
+        "epistemic-hub",
+        "grill-me-v2",
+        "wait-what"
+      ]
+    },
+    {
+      "name": "c5-epistemic-thermodynamics",
+      "tier": 20600,
+      "category": "Nucleus",
+      "display_name": "Epistemic Thermodynamics",
+      "canonical_alias": "epistemic-router",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "scope": "global",
+      "description": "Enruta axiomas, léxico, termodinámica de información, modelos cognitivos, síntesis y falsación de afirmaciones. Dispara con \"epistemic hub\", \"termodinámica epistémica\", \"axiomas\", \"anagnórisis\", \"falsación\", \"investigación profunda\", \"peer review\".",
+      "triggers": [
+        "anagnórisis",
+        "axiomas",
+        "c5-epistemic-thermodynamics",
+        "epistemic hub",
+        "epistemic-router",
+        "falsación",
+        "investigación profunda",
+        "peer review",
+        "termodinámica epistémica"
+      ]
+    },
+    {
+      "name": "polymath-concept-synthesis",
+      "tier": 20500,
+      "category": "Nucleus",
+      "display_name": "Síntesis Polímata Interdisciplinar (Modo ULTRATHINK)",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-polymath-synthesis",
+      "scope": "global",
+      "description": "Módulo epistémico. Dispara con \"ultrathink\", \"síntesis polímata\", \"polymath synthesis\", \"concepto polímata\", \"unificación interdisciplinar\", \"síntesis interdisciplinar\", \"unificación conceptual\".",
+      "triggers": [
+        "concepto polímata",
+        "epistemic-polymath-synthesis",
+        "polymath synthesis",
+        "polymath-concept-synthesis",
+        "síntesis interdisciplinar",
+        "síntesis polímata",
+        "ultrathink",
+        "unificación conceptual",
+        "unificación interdisciplinar"
+      ]
+    },
+    {
+      "name": "goal",
+      "tier": 20500,
+      "category": "Governance",
+      "display_name": "Protocolo de Ejecución por Contrato /goal (Zero-Waste Gate)",
+      "canonical_alias": "goal-contract",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "scope": "global",
+      "description": "Módulo CORTEX. Dispara con \"/goal\", \"goal\", \"contrato goal\".",
+      "triggers": [
+        "/goal",
+        "contrato goal",
+        "goal",
+        "goal-contract"
+      ]
+    },
+    {
+      "name": "c5-popperian-falsification-auditor",
+      "tier": 20500,
+      "category": "Nucleus",
+      "display_name": "Auditor de Falsación Empírica de Documentos",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-popperian-auditor",
+      "scope": "global",
+      "description": "Módulo epistémico. Dispara con 'falsación de documento', 'auditar documento', 'falsar afirmación', 'veredicto empírico', 'falsar paper'.",
+      "triggers": [
+        "auditar documento",
+        "c5-popperian-falsification-auditor",
+        "epistemic-popperian-auditor",
+        "falsación de documento",
+        "falsar afirmación",
+        "falsar paper",
+        "veredicto empírico"
+      ]
+    },
+    {
+      "name": "c5-epistemic-dissemination-engine",
+      "tier": 20500,
+      "category": "Nucleus",
+      "display_name": "Motor de Difusión Epistémica Multicanal y Oratoria Retórica",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "venture-dissemination-engine",
+      "scope": "global",
+      "description": "Módulo Wetware/Venture. Dispara con \"diseminación epistémica\", \"divulgación multicanal\", \"hilo de twitter\", \"adaptar artículo\", \"cross-platform\", \"oratoria retórica\", \"keynote speech\".",
+      "triggers": [
+        "adaptar artículo",
+        "c5-epistemic-dissemination-engine",
+        "cross-platform",
+        "diseminación epistémica",
+        "divulgación multicanal",
+        "hilo de twitter",
+        "keynote speech",
+        "oratoria retórica",
+        "venture-dissemination-engine"
+      ]
+    },
+    {
+      "name": "c5-dialectical-pipeline",
+      "tier": 20500,
+      "category": "Nucleus",
+      "display_name": "Macro-Operador de Estado Dialéctico y Salto Topológico (Cambio 2)",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-dialectic-loop",
+      "scope": "global",
+      "description": "Módulo epistémico. Dispara con \"falsabliza\", \"falsabiliza\", \"falsabilia\", \"falsa\", \"itera\", \"itrera\", \"itra\", \"iteraa\", \"iytera\", \"sigue\", \"salto topológico\".",
+      "triggers": [
+        "c5-dialectical-pipeline",
+        "epistemic-dialectic-loop",
+        "falsa",
+        "falsabilia",
+        "falsabiliza",
+        "falsabliza",
+        "itera",
+        "iteraa",
+        "itra",
+        "itrera",
+        "iytera",
+        "salto topológico",
+        "sigue"
+      ]
+    },
+    {
+      "name": "c5-axiomatic-kernel",
+      "tier": 20500,
+      "category": "Nucleus",
+      "display_name": "Núcleo Operativo de los 100 Axiomas Fundacionales C5-REAL",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-axiomatic-kernel",
+      "scope": "global",
+      "description": "Módulo epistémico. Dispara con \"axiomas\", \"principios c5\", \"núcleo operativo\", \"top 100 principios\", \"invariantes fundacionales\", \"axiomas c5-real\", \"kernel axiomático\".",
+      "triggers": [
+        "axiomas",
+        "axiomas c5-real",
+        "c5-axiomatic-kernel",
+        "epistemic-axiomatic-kernel",
+        "invariantes fundacionales",
+        "kernel axiomático",
+        "núcleo operativo",
+        "principios c5",
+        "top 100 principios"
+      ]
+    },
+    {
+      "name": "c5-academic-peer-reviewer",
+      "tier": 20500,
+      "category": "Nucleus",
+      "display_name": "Simulador de Revisión Académica por Pares",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-peer-reviewer",
+      "scope": "global",
+      "description": "Módulo epistémico. Dispara con \"peer review\", \"academic reviewer\", \"revisar paper\", \"auditoría de paper\", \"dictamen académico\".",
+      "triggers": [
+        "academic reviewer",
+        "auditoría de paper",
+        "c5-academic-peer-reviewer",
+        "dictamen académico",
+        "epistemic-peer-reviewer",
+        "peer review",
+        "revisar paper"
+      ]
+    },
+    {
+      "name": "c5-rubin-acoustic-linter",
+      "tier": 20450,
+      "category": "Operations",
+      "display_name": "Linter Acústico de Exergía y Purga de Nata (Protocolo Rubin)",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "media-acoustic-linter",
+      "scope": "global",
+      "description": "Módulo audiovisual. Dispara con \"linter acústico\", \"auditoría de mezcla\", \"purga de nata en audio\", \"rubin audit\", \"dedup apfs audio\", \"crest factor audio\", \"medir compresión\".",
+      "triggers": [
+        "auditoría de mezcla",
+        "c5-rubin-acoustic-linter",
+        "crest factor audio",
+        "dedup apfs audio",
+        "linter acústico",
+        "media-acoustic-linter",
+        "medir compresión",
+        "purga de nata en audio",
+        "rubin audit"
+      ]
+    },
+    {
+      "name": "c5-ultrathink-epistemic-audit",
+      "tier": 20400,
+      "category": "Nucleus",
+      "display_name": "Epistemic Audit · Auditoría Epistémica Profunda",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-audit",
+      "scope": "workspace",
+      "description": "Módulo epistémico. Dispara con \"epistemic-audit\", \"auditoría epistémica\", \"postmortem mcts\", \"desacople ontológico\", \"auditoría ultrathink\".",
+      "triggers": [
+        "auditoría epistémica",
+        "auditoría ultrathink",
+        "c5-ultrathink-epistemic-audit",
+        "desacople ontológico",
+        "epistemic-audit",
+        "postmortem mcts"
+      ]
+    },
+    {
+      "name": "c5-tri-provider-swarm",
+      "tier": 20400,
+      "category": "Governance",
+      "display_name": "Orquestador de Enjambre Híbrido Tri-Provider (OpenAI ⊗ Qwen ⊗ Kimi)",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-tri-provider",
+      "scope": "global",
+      "description": "Módulo CORTEX. Dispara con \"enjambre híbrido\", \"tri provider swarm\", \"kimi qwen openai\", \"orquestador tres modelos\", \"tri-provider swarm\".",
+      "triggers": [
+        "c5-tri-provider-swarm",
+        "enjambre híbrido",
+        "kimi qwen openai",
+        "orquestador tres modelos",
+        "swarm-tri-provider",
+        "tri provider swarm",
+        "tri-provider swarm"
+      ]
+    },
+    {
+      "name": "c5-cortex-swarm-orchestrator-project",
+      "tier": 20400,
+      "category": "Governance",
+      "display_name": "Swarm Hub · Orquestador CORTEX (Proyecto)",
+      "canonical_alias": "swarm-hub",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "scope": "workspace",
+      "description": "Enruta módulos del proyecto para minería LoRA con enjambres, instalación guiada y redacción para agentes. Dispara con \"swarm-hub\", \"cortex project hub\", \"hub cortex proyecto\", \"swarm router proyecto\", \"lora swarm\", \"wizard\", \"writing-for-agents\".",
+      "triggers": [
+        "c5-cortex-swarm-orchestrator-project",
+        "cortex project hub",
+        "hub cortex proyecto",
+        "lora swarm",
+        "swarm router proyecto",
+        "swarm-hub",
+        "wizard",
+        "writing-for-agents"
+      ]
+    },
+    {
+      "name": "c5-cortex-swarm-orchestrator",
+      "tier": 20400,
+      "category": "Governance",
+      "display_name": "CORTEX Swarm Orchestrator",
+      "canonical_alias": "swarm-router-hub",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "scope": "global",
+      "description": "Enruta enjambres, ciclo de vida de agentes, proveedores, telemetría, auditoría y composición de skills, planificación y handoff. Dispara con \"cortex swarm hub\", \"swarm hub\", \"enjambre\", \"sharur\", \"skill chain\", \"telemetría\", \"plan omega\".",
+      "triggers": [
+        "c5-cortex-swarm-orchestrator",
+        "cortex swarm hub",
+        "enjambre",
+        "plan omega",
+        "sharur",
+        "skill chain",
+        "swarm hub",
+        "swarm-router-hub",
+        "telemetría"
+      ]
+    },
+    {
+      "name": "cct-cognitive-theory-advisor",
+      "tier": 20300,
+      "category": "Nucleus",
+      "display_name": "Asesoría en Teoría Cognitiva CCT & Límite Gödel-Turing",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-cognitive-theory",
+      "scope": "global",
+      "description": "Módulo epistémico. Dispara con \"teoría cognitiva\", \"cct advisor\", \"gödel turing\", \"autopoiesis\", \"maturana luhmann\", \"burnout cognitivo\".",
+      "triggers": [
+        "autopoiesis",
+        "burnout cognitivo",
+        "cct advisor",
+        "cct-cognitive-theory-advisor",
+        "epistemic-cognitive-theory",
+        "gödel turing",
+        "maturana luhmann",
+        "teoría cognitiva"
+      ]
+    },
+    {
+      "name": "c5-session-deskimming",
+      "tier": 20250,
+      "category": "Governance",
+      "display_name": "Protocolo de Desnatado de Sesiones & Purga de Nata (Ring-2 -> Ring-0)",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-session-deskimming",
+      "scope": "global",
+      "description": "Módulo CORTEX. Dispara con \"deskimming\", \"desnatar sesión\", \"purgar nata sesión\", \"archivos huérfanos\".",
+      "triggers": [
+        "archivos huérfanos",
+        "c5-session-deskimming",
+        "deskimming",
+        "desnatar sesión",
+        "purgar nata sesión",
+        "swarm-session-deskimming"
+      ]
+    },
+    {
+      "name": "cloud-chamber",
+      "tier": 20200,
+      "category": "Nucleus",
+      "display_name": "Metodología de Cámara de Niebla (Síntesis MDL)",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-mdl-synthesizer",
+      "scope": "workspace",
+      "description": "Módulo epistémico. Dispara con \"epistemic-mdl-synthesizer\", \"/cloud-chamber\", \"cámara de niebla\", \"máxima densidad topológica\", \"colapso mdl\".",
+      "triggers": [
+        "/cloud-chamber",
+        "cloud-chamber",
+        "colapso mdl",
+        "cámara de niebla",
+        "epistemic-mdl-synthesizer",
+        "máxima densidad topológica"
+      ]
+    },
+    {
+      "name": "c5-tamkarum-60",
+      "tier": 20100,
+      "category": "Governance",
+      "display_name": "Transductor de Arbitraje Soberano TAMKARUM-60 (Ring-1)",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "venture-ad-arbitrage",
+      "scope": "global",
+      "description": "Módulo Wetware/Venture. Dispara con \"tamkarum\", \"tamkarum-60\", \"/tamkarum\", \"arbitraje publicitario\", \"auditar roas\", \"optimizar campañas\", \"equipo marketing\", \"enjambre marketing\", \"11 agentes\", \"scitt\".",
+      "triggers": [
+        "/tamkarum",
+        "11 agentes",
+        "arbitraje publicitario",
+        "auditar roas",
+        "c5-tamkarum-60",
+        "enjambre marketing",
+        "equipo marketing",
+        "optimizar campañas",
+        "scitt",
+        "tamkarum",
+        "tamkarum-60",
+        "venture-ad-arbitrage"
+      ]
+    },
+    {
+      "name": "c5-metodo-acreativo",
+      "tier": 20050,
+      "category": "Nucleus",
+      "display_name": "Método Acreativo Soberano (Transducción de Invariantes & Aforismo 5)",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "media-acreativo-method",
+      "scope": "global",
+      "description": "Módulo audiovisual. Dispara con \"metodo acreativo\", \"método acreativo\", \"transducción soberana\", \"oraculo de apoptosis\", \"protocolo rubin\", \"crear arte c5\", \"produccion musical c5\".",
+      "triggers": [
+        "c5-metodo-acreativo",
+        "crear arte c5",
+        "media-acreativo-method",
+        "metodo acreativo",
+        "método acreativo",
+        "oraculo de apoptosis",
+        "produccion musical c5",
+        "protocolo rubin",
+        "transducción soberana"
+      ]
+    },
+    {
+      "name": "grill-me-v2",
+      "tier": 19900,
+      "category": "Governance",
+      "display_name": "Socratic Interrogator · Interrogatorio Socrático Adversarial",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "socratic-interrogator",
+      "scope": "workspace",
+      "description": "Módulo epistémico. Dispara con \"socratic-interrogator\", \"grill-me-v2\", \"/grill-me-v2\", \"socratic audit\", \"interrogatorio socrático\".",
+      "triggers": [
+        "/grill-me-v2",
+        "grill-me-v2",
+        "interrogatorio socrático",
+        "socratic audit",
+        "socratic-interrogator"
+      ]
+    },
+    {
+      "name": "c5-wetware-divergente",
+      "tier": 19850,
+      "category": "Governance",
+      "display_name": "Arquitectura Cognitiva para Wetware Divergente (Perfiles 2e)",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "wetware-2e-cognition",
+      "scope": "global",
+      "description": "Módulo Wetware/Venture. Dispara con \"alto voltaje\", \"mente divergente\", \"wetware divergente\", \"tdah 2e\", \"altas capacidades tdah\", \"hiperfoco\", \"burnout divergente\", \"bloqueo ejecutivo 2e\".",
+      "triggers": [
+        "altas capacidades tdah",
+        "alto voltaje",
+        "bloqueo ejecutivo 2e",
+        "burnout divergente",
+        "c5-wetware-divergente",
+        "hiperfoco",
+        "mente divergente",
+        "tdah 2e",
+        "wetware divergente",
+        "wetware-2e-cognition"
+      ]
+    },
+    {
+      "name": "c5-sovereign-identity-hardening",
+      "tier": 19800,
+      "category": "Governance",
+      "display_name": "Protocolo C5-REAL de Defensa e Inmunidad de Identidad Soberana",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "secops-identity-hardening",
+      "scope": "global",
+      "description": "Módulo SecOps. Dispara con \"identidad soberana\", \"data breach\", \"filtración de correo\", \"have i been pwned\", \"k-anonimato\", \"hardened identity\", \"alias email\".",
+      "triggers": [
+        "alias email",
+        "c5-sovereign-identity-hardening",
+        "data breach",
+        "filtración de correo",
+        "hardened identity",
+        "have i been pwned",
+        "identidad soberana",
+        "k-anonimato",
+        "secops-identity-hardening"
+      ]
+    },
+    {
+      "name": "c5-secops-infra-devtools",
+      "tier": 19800,
+      "category": "Governance",
+      "display_name": "SecOps Infra DevTools",
+      "canonical_alias": "secops-hub",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "scope": "global",
+      "description": "Enruta auditoría de seguridad, forense de navegadores y binarios, herramientas Git, infraestructura y extracción de fuentes. Dispara con \"secops hub\", \"infra devtools hub\", \"auditoría de seguridad\", \"forense\", \"diagnóstico de infraestructura\".",
+      "triggers": [
+        "auditoría de seguridad",
+        "c5-secops-infra-devtools",
+        "diagnóstico de infraestructura",
+        "forense",
+        "infra devtools hub",
+        "secops hub",
+        "secops-hub"
+      ]
+    },
+    {
+      "name": "apple-bypass",
+      "tier": 19800,
+      "category": "Operations",
+      "display_name": "Bypass Termodinámico para LLMs en Apple Silicon",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-apple-bypass",
+      "scope": "workspace",
+      "description": "Módulo Ring-0. Dispara con \"kernel-apple-bypass\", \"apple-bypass\", \"/apple-bypass\", \"bypass termodinámico\", \"evadir jetsam macos\", \"liberar memoria mps\".",
+      "triggers": [
+        "/apple-bypass",
+        "apple-bypass",
+        "bypass termodinámico",
+        "evadir jetsam macos",
+        "kernel-apple-bypass",
+        "liberar memoria mps"
+      ]
+    },
+    {
+      "name": "c5-real-legaltech-analysis",
+      "tier": 19700,
+      "category": "Governance",
+      "display_name": "Auditoría LegalTech & Cumplimiento EU AI Act Art. 9-14",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "venture-legaltech-audit",
+      "scope": "global",
+      "description": "Módulo Wetware/Venture. Dispara con \"legaltech\", \"auditoría legal\", \"EU AI Act\", \"cumplimiento regulatorio\", \"contrato inteligente c5\", \"whitepaper legal\".",
+      "triggers": [
+        "auditoría legal",
+        "c5-real-legaltech-analysis",
+        "contrato inteligente c5",
+        "cumplimiento regulatorio",
+        "eu ai act",
+        "legaltech",
+        "venture-legaltech-audit",
+        "whitepaper legal"
+      ]
+    },
+    {
+      "name": "wait-what",
+      "tier": 19600,
+      "category": "Nucleus",
+      "display_name": "Freno Epistémico & Traducción Simplificada (STE)",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-simplifier",
+      "scope": "workspace",
+      "description": "Módulo epistémico. Dispara con \"epistemic-simplifier\", \"wait-what\", \"/wait-what\", \"freno epistémico\", \"explícalo simple\", \"no entiendo nada\", \"simplifica respuesta\", \"fuera de aqui todo esto\", \"fuera de aqui todo eto\", \"quita todo esto\", \"déjate de rollos\".",
+      "triggers": [
+        "/wait-what",
+        "déjate de rollos",
+        "epistemic-simplifier",
+        "explícalo simple",
+        "freno epistémico",
+        "fuera de aqui todo esto",
+        "fuera de aqui todo eto",
+        "no entiendo nada",
+        "quita todo esto",
+        "simplifica respuesta",
+        "wait-what"
+      ]
+    },
+    {
+      "name": "c5-html-report-injection-audit",
+      "tier": 19600,
+      "category": "Governance",
+      "display_name": "Auditoría de Inyección HTML en Generadores de Reportes",
+      "canonical_alias": "xss-report-auditor",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "scope": "global",
+      "description": "Módulo SecOps. Dispara con \"inyección html\", \"xss reporte\", \"autoescape jinja\", \"auditar exportador\", \"escape de ledger\".",
+      "triggers": [
+        "auditar exportador",
+        "autoescape jinja",
+        "c5-html-report-injection-audit",
+        "escape de ledger",
+        "inyección html",
+        "xss reporte",
+        "xss-report-auditor"
+      ]
+    },
+    {
+      "name": "c5-sre-postmortem-architect",
+      "tier": 19500,
+      "category": "Governance",
+      "display_name": "Arquitecto de Postmortems e Incidentes SRE",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "secops-sre-postmortem",
+      "scope": "global",
+      "description": "Módulo SecOps. Dispara con \"incident review\", \"postmortem sre\", \"análisis de incidentes\", \"5 whys\", \"postmortem report\", \"análisis 5 whys\", \"blameless postmortem\".",
+      "triggers": [
+        "5 whys",
+        "análisis 5 whys",
+        "análisis de incidentes",
+        "blameless postmortem",
+        "c5-sre-postmortem-architect",
+        "incident review",
+        "postmortem report",
+        "postmortem sre",
+        "secops-sre-postmortem"
+      ]
+    },
+    {
+      "name": "c5-sovereign-binary-architect",
+      "tier": 19500,
+      "category": "Systems",
+      "display_name": "Arquitecto de Binarios Soberanos C5-REAL",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-static-binary",
+      "scope": "global",
+      "description": "Módulo Ring-0. Dispara con \"binario estático\", \"aislar dependencias\", \"soberanía termodinámica\", \"c5-sovereign-binary\", \"compilación musl\", \"binario soberano\".",
+      "triggers": [
+        "aislar dependencias",
+        "binario estático",
+        "binario soberano",
+        "c5-sovereign-binary",
+        "c5-sovereign-binary-architect",
+        "compilación musl",
+        "kernel-static-binary",
+        "soberanía termodinámica"
+      ]
+    },
+    {
+      "name": "c5-2e-neuropharmacological-sovereignty",
+      "tier": 19500,
+      "category": "Systems",
+      "display_name": "Soberanía Neurofarmacológica & Desacople de Parches (TDAH + AACC)",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "wetware-neuropharma-protocol",
+      "scope": "global",
+      "description": "Módulo Wetware/Venture. Dispara con \"desacoplamiento concerta\", \"bucle de parches\", \"farmacología 2e\", \"sustrato dopaminérgico\", \"mitigar crash concerta\".",
+      "triggers": [
+        "bucle de parches",
+        "c5-2e-neuropharmacological-sovereignty",
+        "desacoplamiento concerta",
+        "farmacología 2e",
+        "mitigar crash concerta",
+        "sustrato dopaminérgico",
+        "wetware-neuropharma-protocol"
+      ]
+    },
+    {
+      "name": "adaptive-cron",
+      "tier": 19500,
+      "category": "Governance",
+      "display_name": "Cálculo de Límite de Disipación Crítica (Adaptive Cron)",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "wetware-adaptive-cron",
+      "scope": "workspace",
+      "description": "Módulo Wetware/Venture. Dispara con \"wetware-adaptive-cron\", \"adaptive-cron\", \"/adaptive-cron\", \"límite de disipación crítica\", \"burnout cognitivo\", \"cron adaptativo\".",
+      "triggers": [
+        "/adaptive-cron",
+        "adaptive-cron",
+        "burnout cognitivo",
+        "cron adaptativo",
+        "límite de disipación crítica",
+        "wetware-adaptive-cron"
+      ]
+    },
+    {
+      "name": "symbiotic-cognitive-architecture",
+      "tier": 19400,
+      "category": "Governance",
+      "display_name": "Arquitectura Cognitiva Simbiótica Díada Operador-Agente",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-symbiotic-cognition",
+      "scope": "workspace",
+      "description": "Módulo epistémico. Dispara con \"epistemic-symbiotic-cognition\", \"tú y yo\", \"simbiosis cognitiva\", \"valor ontológico agente\", \"tensor de transducción\", \"itera simbiótica\".",
+      "triggers": [
+        "epistemic-symbiotic-cognition",
+        "itera simbiótica",
+        "simbiosis cognitiva",
+        "symbiotic-cognitive-architecture",
+        "tensor de transducción",
+        "tú y yo",
+        "valor ontológico agente"
+      ]
+    },
+    {
+      "name": "c5-terminological-archaeology",
+      "tier": 19400,
+      "category": "Nucleus",
+      "display_name": "Arqueología Terminológica (Anagnórisis Conceptual C5-REAL)",
+      "canonical_alias": "terminology-archaeologist",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "scope": "global",
+      "description": "Módulo epistémico. Dispara con \"arqueología terminológica\", \"busca mis perífrasis\", \"anagnórisis\", \"ya existe ese término\", \"tiene nombre esto\", \"cómo se llama esto en ciencia\", \"cómo se llama cuando\".",
+      "triggers": [
+        "anagnórisis",
+        "arqueología terminológica",
+        "busca mis perífrasis",
+        "c5-terminological-archaeology",
+        "cómo se llama cuando",
+        "cómo se llama esto en ciencia",
+        "terminology-archaeologist",
+        "tiene nombre esto",
+        "ya existe ese término"
+      ]
+    },
+    {
+      "name": "c5-sovereign-daemon-deployment",
+      "tier": 19350,
+      "category": "Operations",
+      "display_name": "Despliegue del Sovereign Spark Daemon en Launchd",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-daemon-deploy",
+      "scope": "workspace",
+      "description": "Módulo Ring-0. Dispara con \"kernel-daemon-deploy\", \"c5-sovereign-daemon-deployment\", \"desplegar sovereign daemon\", \"launchd rust daemon\", \"daemon 24/7\".",
+      "triggers": [
+        "c5-sovereign-daemon-deployment",
+        "daemon 24/7",
+        "desplegar sovereign daemon",
+        "kernel-daemon-deploy",
+        "launchd rust daemon"
+      ]
+    },
+    {
+      "name": "anergy-purge-protocol",
+      "tier": 19300,
+      "category": "Governance",
+      "display_name": "Motor de Purga de Anergía, Código Muerto y Entropía APFS",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-anergy-purge",
+      "scope": "global",
+      "description": "Módulo CORTEX. Dispara con \"purga de anergía\", \"purga de entropía\", \"dead code\", \"scandisk\", \"disco lleno\", \"limpiar conversaciones\", \"ghost listeners\", \"prompt bloat\".",
+      "triggers": [
+        "anergy-purge-protocol",
+        "dead code",
+        "disco lleno",
+        "ghost listeners",
+        "limpiar conversaciones",
+        "prompt bloat",
+        "purga de anergía",
+        "purga de entropía",
+        "scandisk",
+        "swarm-anergy-purge"
+      ]
+    },
+    {
+      "name": "gflow-browser-cinema-sovereign",
+      "tier": 19250,
+      "category": "Multimedia & DSP",
+      "display_name": "Estudio Cinematográfico Soberano y Automatización Google Flow (v5.0 Apex)",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "media-gflow-cinema",
+      "scope": "global",
+      "description": "Módulo audiovisual. Dispara con \"gflow browser\", \"cine gflow\", \"flow google mcp\", \"sovereign cinema\", \"estudio gflow\", \"gflow v4\", \"character anchor veo\", \"veo 2 browser\", \"dialogue engine gflow\", \"cockpit gflow\", \"remotion gflow\".",
+      "triggers": [
+        "character anchor veo",
+        "cine gflow",
+        "cockpit gflow",
+        "dialogue engine gflow",
+        "estudio gflow",
+        "flow google mcp",
+        "gflow browser",
+        "gflow v4",
+        "gflow-browser-cinema-sovereign",
+        "media-gflow-cinema",
+        "remotion gflow",
+        "sovereign cinema",
+        "veo 2 browser"
+      ]
+    },
+    {
+      "name": "safari-browser-agent",
+      "tier": 19200,
+      "category": "SOCINT & Web",
+      "display_name": "Agente Autónomo de Navegación Safari (MCP Dual-Engine v6.0 Sexagesimal Apex Sovereign)",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "secops-safari-automation",
+      "scope": "global",
+      "description": "Módulo SecOps. Dispara con \"safari agent\", \"navegar safari\", \"mcp safari\", \"controlar safari\", \"safari browser agent\", \"safari automation\", \"inspeccionar safari\", \"mac maestro\", \"automatizar safari jxa\", \"bypass webdriver\", \"mac maestro bridge\", \"control jxa macos\", \"windowserver automation\".",
+      "triggers": [
+        "automatizar safari jxa",
+        "bypass webdriver",
+        "control jxa macos",
+        "controlar safari",
+        "inspeccionar safari",
+        "mac maestro",
+        "mac maestro bridge",
+        "mcp safari",
+        "navegar safari",
+        "safari agent",
+        "safari automation",
+        "safari browser agent",
+        "safari-browser-agent",
+        "secops-safari-automation",
+        "windowserver automation"
+      ]
+    },
+    {
+      "name": "c5-wetware-and-venture-ops-project",
+      "tier": 19200,
+      "category": "Governance",
+      "display_name": "Wetware Hub · Operaciones y Carga Cognitiva",
+      "canonical_alias": "wetware-hub",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "scope": "workspace",
+      "description": "Enruta el módulo del proyecto para el límite de disipación y el cron adaptativo. Dispara con \"wetware project hub\", \"wetware-hub\", \"venture project hub\", \"hub wetware proyecto\", \"adaptive-cron\".",
+      "triggers": [
+        "adaptive-cron",
+        "c5-wetware-and-venture-ops-project",
+        "hub wetware proyecto",
+        "venture project hub",
+        "wetware project hub",
+        "wetware-hub"
+      ]
+    },
+    {
+      "name": "c5-wetware-and-venture-ops",
+      "tier": 19200,
+      "category": "Governance",
+      "display_name": "Wetware and Venture Ops",
+      "canonical_alias": "wetware-router",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "scope": "global",
+      "description": "Enruta módulos de carga cognitiva, telemetría somática, aprendizaje, valoración, estrategia de negocio y divulgación. Dispara con \"wetware hub\", \"venture ops hub\", \"wetware and venture\", \"operaciones venture\", \"carga cognitiva\".",
+      "triggers": [
+        "c5-wetware-and-venture-ops",
+        "carga cognitiva",
+        "operaciones venture",
+        "venture ops hub",
+        "wetware and venture",
+        "wetware hub",
+        "wetware-router"
+      ]
+    },
+    {
+      "name": "c5-socint-extraction-suite",
+      "tier": 19200,
+      "category": "SOCINT & Web",
+      "display_name": "Suite Soberana de Inteligencia Social (SOCINT C5-REAL)",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "secops-socint-extractor",
+      "scope": "global",
+      "description": "Módulo SecOps. Dispara con \"socint suite\", \"inteligencia social\", \"scraping redes\", \"reddit socint\", \"substack socint\", \"auditar tweet\", \"analizar hilo x\".",
+      "triggers": [
+        "analizar hilo x",
+        "auditar tweet",
+        "c5-socint-extraction-suite",
+        "inteligencia social",
+        "reddit socint",
+        "scraping redes",
+        "secops-socint-extractor",
+        "socint suite",
+        "substack socint"
+      ]
+    },
+    {
+      "name": "c5-browser-forensics-and-extension-triage",
+      "tier": 19200,
+      "category": "SOCINT & Web",
+      "display_name": "Auditoría Forense de Navegadores y Triaje de Extensiones Chromium",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "secops-browser-forensics",
+      "scope": "global",
+      "description": "Módulo SecOps. Dispara con \"auditar navegador\", \"virus en chrome\", \"extensiones sospechosas\", \"growbot\", \"purgar extension chrome\", \"triage navegador\".",
+      "triggers": [
+        "auditar navegador",
+        "c5-browser-forensics-and-extension-triage",
+        "extensiones sospechosas",
+        "growbot",
+        "purgar extension chrome",
+        "secops-browser-forensics",
+        "triage navegador",
+        "virus en chrome"
+      ]
+    },
+    {
+      "name": "swarm-quantum-collapse",
+      "tier": 19100,
+      "category": "Governance",
+      "display_name": "Sincronización Swarm & Colapso Cuántico Multi-Repositorio",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-multirepo-sync",
+      "scope": "global",
+      "description": "Módulo CORTEX. Dispara con \"swarm quantum collapse\", \"colapso cuántico\", \"sincronizar enjambre\", \"orquestar repos\", \"swarm sync\", \"colapso multirrepo\", \"sincronización cuántica\".",
+      "triggers": [
+        "colapso cuántico",
+        "colapso multirrepo",
+        "orquestar repos",
+        "sincronización cuántica",
+        "sincronizar enjambre",
+        "swarm quantum collapse",
+        "swarm sync",
+        "swarm-multirepo-sync",
+        "swarm-quantum-collapse"
+      ]
+    },
+    {
+      "name": "soulseek-p2p-audio-acquisition",
+      "tier": 19000,
+      "category": "Multimedia & DSP",
+      "display_name": "Adquisición P2P de Audio en Soulseek y Auditoría Espectral Anti-Fake FLAC",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "media-soulseek-audio",
+      "scope": "global",
+      "description": "Módulo audiovisual. Dispara con \"descargar musica\", \"descargar cancion\", \"soulseek download\", \"adquisicion audio p2p\", \"auditoria espectral flac\", \"bajar flac soulseek\", \"fake flac\".",
+      "triggers": [
+        "adquisicion audio p2p",
+        "auditoria espectral flac",
+        "bajar flac soulseek",
+        "descargar cancion",
+        "descargar musica",
+        "fake flac",
+        "media-soulseek-audio",
+        "soulseek download",
+        "soulseek-p2p-audio-acquisition"
+      ]
+    },
+    {
+      "name": "remotion-audio-reactive-video",
+      "tier": 19000,
+      "category": "Multimedia & DSP",
+      "display_name": "Síntesis de Vídeo Reactivo a Audio & Música (Remotion + DSP)",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "media-remotion-reactive",
+      "scope": "global",
+      "description": "Módulo audiovisual. Dispara con \"video reactivo a la musica\", \"audio reactivo\", \"remotion audio reactive\", \"visualizador de musica\", \"audio visualizer\", \"video musical reactivo\".",
+      "triggers": [
+        "audio reactivo",
+        "audio visualizer",
+        "media-remotion-reactive",
+        "remotion audio reactive",
+        "remotion-audio-reactive-video",
+        "video musical reactivo",
+        "video reactivo a la musica",
+        "visualizador de musica"
+      ]
+    },
+    {
+      "name": "pika-generative-video-pipeline",
+      "tier": 19000,
+      "category": "Multimedia & DSP",
+      "display_name": "Pipeline de Generación y Control Parámetrico en Pika Art (A/V)",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "media-pika-video",
+      "scope": "global",
+      "description": "Módulo audiovisual. Dispara con \"pika art\", \"pika tutorial\", \"pika camera\", \"pikaffects\", \"pika prompt\", \"generación vídeo pika\", \"pikaffects sota\".",
+      "triggers": [
+        "generación vídeo pika",
+        "media-pika-video",
+        "pika art",
+        "pika camera",
+        "pika prompt",
+        "pika tutorial",
+        "pika-generative-video-pipeline",
+        "pikaffects",
+        "pikaffects sota"
+      ]
+    },
+    {
+      "name": "c5-video-quality-audit",
+      "tier": 19000,
+      "category": "Multimedia & DSP",
+      "display_name": "Auditoría de Calidad y Compresión de Video (PSNR/SSIM/VMAF)",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "media-video-quality-audit",
+      "scope": "global",
+      "description": "Módulo audiovisual. Dispara con \"calidad de video\", \"psnr ssim\", \"diferencia de compresion\", \"video quality diff\", \"auditoría de compresion\", \"medir vmaf\", \"auditoría ffmpeg video\".",
+      "triggers": [
+        "auditoría de compresion",
+        "auditoría ffmpeg video",
+        "c5-video-quality-audit",
+        "calidad de video",
+        "diferencia de compresion",
+        "media-video-quality-audit",
+        "medir vmaf",
+        "psnr ssim",
+        "video quality diff"
+      ]
+    },
+    {
+      "name": "c5-spatial-audio-architect",
+      "tier": 19000,
+      "category": "Multimedia & DSP",
+      "display_name": "Arquitecto de Audio Espacial, Ambisonics (HOA) y Auditoría DSP",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "media-spatial-audio",
+      "scope": "global",
+      "description": "Módulo audiovisual. Dispara con \"auditoría dsp\", \"audio espacial\", \"criticar estéreo\", \"hoa\", \"binaural\", \"ambisonics\", \"spatial audio\".",
+      "triggers": [
+        "ambisonics",
+        "audio espacial",
+        "auditoría dsp",
+        "binaural",
+        "c5-spatial-audio-architect",
+        "criticar estéreo",
+        "hoa",
+        "media-spatial-audio",
+        "spatial audio"
+      ]
+    },
+    {
+      "name": "c5-audiovisual-acreativo-sota-project",
+      "tier": 19000,
+      "category": "Multimedia & DSP",
+      "display_name": "Media Hub · Audiovisual Acreativo (Proyecto)",
+      "canonical_alias": "media-hub",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "scope": "workspace",
+      "description": "Enruta módulos del proyecto para pipelines audiovisuales y auditoría de interfaces. Dispara con \"media-hub\", \"audiovisual project hub\", \"hub audiovisual proyecto\", \"media router proyecto\", \"audiovisual-sota\", \"anti-slop ui\".",
+      "triggers": [
+        "anti-slop ui",
+        "audiovisual project hub",
+        "audiovisual-sota",
+        "c5-audiovisual-acreativo-sota-project",
+        "hub audiovisual proyecto",
+        "media router proyecto",
+        "media-hub"
+      ]
+    },
+    {
+      "name": "c5-audiovisual-acreativo-sota",
+      "tier": 19000,
+      "category": "Multimedia & DSP",
+      "display_name": "Audiovisual Acreativo SOTA",
+      "canonical_alias": "media-router",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "scope": "global",
+      "description": "Enruta producción musical, acústica, voz, vídeo, diseño visual y arquitectura solar. Dispara con \"audiovisual hub\", \"acreativo hub\", \"producción audiovisual\", \"FL Studio\", \"Suno\", \"Remotion\", \"auditoría de vídeo\".",
+      "triggers": [
+        "acreativo hub",
+        "audiovisual hub",
+        "auditoría de vídeo",
+        "c5-audiovisual-acreativo-sota",
+        "fl studio",
+        "media-router",
+        "producción audiovisual",
+        "remotion",
+        "suno"
+      ]
+    },
+    {
+      "name": "babylon60-architecture",
+      "tier": 19000,
+      "category": "Governance",
+      "display_name": "Arquitectura y Patrones BABYLON-60 IDE",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-ide-architecture",
+      "scope": "workspace",
+      "description": "Módulo Ring-0. Dispara con \"kernel-ide-architecture\", \"babylon60-architecture\", \"arquitectura babylon60\", \"patrones ide babylon\", \"babylon60 ide\".",
+      "triggers": [
+        "arquitectura babylon60",
+        "babylon60 ide",
+        "babylon60-architecture",
+        "kernel-ide-architecture",
+        "patrones ide babylon"
+      ]
+    },
+    {
+      "name": "c5-alpha-extraction-pipeline",
+      "tier": 18950,
+      "category": "Operations",
+      "display_name": "Alpha Extractor · Extracción de Alfa Algorítmico",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "alpha-extractor",
+      "scope": "workspace",
+      "description": "Módulo epistémico. Dispara con \"alpha-extractor\", \"c5-alpha-extraction-pipeline\", \"extraer alfa algorítmico\", \"alpha extraction\", \"deep research arxiv\", \"larsa 120 alpha\".",
+      "triggers": [
+        "alpha extraction",
+        "alpha-extractor",
+        "c5-alpha-extraction-pipeline",
+        "deep research arxiv",
+        "extraer alfa algorítmico",
+        "larsa 120 alpha"
+      ]
+    },
+    {
+      "name": "whatsapp-nexus-protocol",
+      "tier": 18900,
+      "category": "Governance",
+      "display_name": "Pasarela Soberana de Mensajería WhatsApp (Baileys v7 / Rust NAPI-RS / C5-REAL v2.6)",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "secops-whatsapp-gateway",
+      "scope": "global",
+      "description": "Módulo SecOps. Dispara con \"whatsapp nexus\", \"bot whatsapp\", \"baileys rust\", \"pasarela whatsapp\", \"whatsapp gateway\", \"enviar whatsapp\", \"mensajes whatsapp\", \"wa-nexus\".",
+      "triggers": [
+        "baileys rust",
+        "bot whatsapp",
+        "enviar whatsapp",
+        "mensajes whatsapp",
+        "pasarela whatsapp",
+        "secops-whatsapp-gateway",
+        "wa-nexus",
+        "whatsapp gateway",
+        "whatsapp nexus",
+        "whatsapp-nexus-protocol"
+      ]
+    },
+    {
+      "name": "c5-anti-slop-ui",
+      "tier": 18800,
+      "category": "Governance",
+      "display_name": "Linter y Directivas Frontend Anti-Slop (C5-REAL)",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "media-ui-linter",
+      "scope": "workspace",
+      "description": "Módulo audiovisual. Dispara con \"media-ui-linter\", \"anti-slop ui\", \"impeccable c5\", \"linter de diseño\", \"auditoría ui\", \"pulir frontend\", \"erradicar ai slop\".",
+      "triggers": [
+        "anti-slop ui",
+        "auditoría ui",
+        "c5-anti-slop-ui",
+        "erradicar ai slop",
+        "impeccable c5",
+        "linter de diseño",
+        "media-ui-linter",
+        "pulir frontend"
+      ]
+    },
+    {
+      "name": "dynamic-subagent-lifecycle",
+      "tier": 18600,
+      "category": "Governance",
+      "display_name": "Supervisión del Ciclo de Vida de Subagentes Dinámicos",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-subagent-lifecycle",
+      "scope": "global",
+      "description": "Módulo CORTEX. Dispara con \"subagente dinámico\", \"ciclo de vida subagente\", \"dynamic subagent\", \"invoke_subagent\", \"supervisar subagente\", \"mitigar deadlocks\", \"orquestar agentes dinámicos\".",
+      "triggers": [
+        "ciclo de vida subagente",
+        "dynamic subagent",
+        "dynamic-subagent-lifecycle",
+        "invoke_subagent",
+        "mitigar deadlocks",
+        "orquestar agentes dinámicos",
+        "subagente dinámico",
+        "supervisar subagente",
+        "swarm-subagent-lifecycle"
+      ]
+    },
+    {
+      "name": "webkit-memory-audit",
+      "tier": 18500,
+      "category": "Specialized",
+      "display_name": "Auditoría de Memoria WebKit (Vector 21)",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "secops-webkit-memory-audit",
+      "scope": "global",
+      "description": "Módulo SecOps. Dispara con \"webkit audit\", \"vector 21\", \"gigacage\", \"auditoría memoria c++\", \"webkit memory\", \"bmalloc audit\".",
+      "triggers": [
+        "auditoría memoria c++",
+        "bmalloc audit",
+        "gigacage",
+        "secops-webkit-memory-audit",
+        "vector 21",
+        "webkit audit",
+        "webkit memory",
+        "webkit-memory-audit"
+      ]
+    },
+    {
+      "name": "c5-systemic-dissection-protocol",
+      "tier": 18500,
+      "category": "Specialized",
+      "display_name": "Protocolo de Disección Sistémica y Termodinámica",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-systemic-dissection",
+      "scope": "global",
+      "description": "Módulo epistémico. Dispara con \"disección sistémica\", \"auditar sistema completo\", \"c5-systemic-dissection\", \"disección termodinámica\", \"protocolo de disección\", \"100 primitivas\".",
+      "triggers": [
+        "100 primitivas",
+        "auditar sistema completo",
+        "c5-systemic-dissection",
+        "c5-systemic-dissection-protocol",
+        "disección sistémica",
+        "disección termodinámica",
+        "epistemic-systemic-dissection",
+        "protocolo de disección"
+      ]
+    },
+    {
+      "name": "c5-somatic-panic-deescalation",
+      "tier": 18500,
+      "category": "Specialized",
+      "display_name": "Desescalada Neurofisiológica y Cibernética de Pánico Somático",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "wetware-panic-deescalation",
+      "scope": "global",
+      "description": "Módulo Wetware/Venture. Dispara con \"ataque de ansiedad\", \"ataque de pánico\", \"hiperfijación somática\", \"no puedo dormir por la respiración\", \"bucle de pánico\", \"siento que me muero\", \"desescalar pánico\".",
+      "triggers": [
+        "ataque de ansiedad",
+        "ataque de pánico",
+        "bucle de pánico",
+        "c5-somatic-panic-deescalation",
+        "desescalar pánico",
+        "hiperfijación somática",
+        "no puedo dormir por la respiración",
+        "siento que me muero",
+        "wetware-panic-deescalation"
+      ]
+    },
+    {
+      "name": "c5-solar-thermodynamic-architecture",
+      "tier": 18500,
+      "category": "Specialized",
+      "display_name": "Arquitectura Helio-Termodinámica y Confort Bioclimático",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "media-solar-architecture",
+      "scope": "global",
+      "description": "Módulo audiovisual. Dispara con \"sun path\", \"análisis solar\", \"confort térmico\", \"estudio de sombras\", \"fanger pmv\", \"helio-arquitectura\", \"bioclimático\".",
+      "triggers": [
+        "análisis solar",
+        "bioclimático",
+        "c5-solar-thermodynamic-architecture",
+        "confort térmico",
+        "estudio de sombras",
+        "fanger pmv",
+        "helio-arquitectura",
+        "media-solar-architecture",
+        "sun path"
+      ]
+    },
+    {
+      "name": "c5-poster-and-sign-craft",
+      "tier": 18500,
+      "category": "Multimedia & DSP",
+      "display_name": "Pipeline de Remasterización Gráfica, Rotulación en Perspectiva y Filtrado Analógico",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "media-poster-craft",
+      "scope": "global",
+      "description": "Módulo audiovisual. Dispara con \"remasterizar cartel\", \"rotular letrero\", \"cambiar texto cartel\", \"sign craft\", \"filtro vintage comic\", \"bajar contraste imagen\", \"quitar contraste duro\", \"poster remaster\", \"maquetación cartel\", \"analizar cartel\", \"flyer underground\", \"auditoría tipográfica cartel\".",
+      "triggers": [
+        "analizar cartel",
+        "auditoría tipográfica cartel",
+        "bajar contraste imagen",
+        "c5-poster-and-sign-craft",
+        "cambiar texto cartel",
+        "filtro vintage comic",
+        "flyer underground",
+        "maquetación cartel",
+        "media-poster-craft",
+        "poster remaster",
+        "quitar contraste duro",
+        "remasterizar cartel",
+        "rotular letrero",
+        "sign craft"
+      ]
+    },
+    {
+      "name": "c5-ontological-translator",
+      "tier": 18500,
+      "category": "Specialized",
+      "display_name": "Traductor Ontológico hacia Invariantes de Alta Exergía C5-REAL",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-ontological-translator",
+      "scope": "global",
+      "description": "Módulo epistémico. Dispara con \"traducción ontológica\", \"colapso semántico\", \"traducir a c5\", \"mapeo ontológico\", \"ontological translator\", \"colapso ontológico\".",
+      "triggers": [
+        "c5-ontological-translator",
+        "colapso ontológico",
+        "colapso semántico",
+        "epistemic-ontological-translator",
+        "mapeo ontológico",
+        "ontological translator",
+        "traducción ontológica",
+        "traducir a c5"
+      ]
+    },
+    {
+      "name": "c5-media-platform-epistemology",
+      "tier": 18500,
+      "category": "Specialized",
+      "display_name": "Epistemología de Plataformas Media y Adquisición Nativa Opus",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "media-platform-scraper",
+      "scope": "global",
+      "description": "Módulo audiovisual. Dispara con \"procesar audio largo\", \"scraping spa\", \"falsos positivos http 200\", \"adquisicion opus nativo\", \"rip opus youtube\", \"itag 251\".",
+      "triggers": [
+        "adquisicion opus nativo",
+        "c5-media-platform-epistemology",
+        "falsos positivos http 200",
+        "itag 251",
+        "media-platform-scraper",
+        "procesar audio largo",
+        "rip opus youtube",
+        "scraping spa"
+      ]
+    },
+    {
+      "name": "c5-gemini-api-2026-standards",
+      "tier": 18500,
+      "category": "Specialized",
+      "display_name": "Estándares Gemini API 2026 & Tensor de Transducción",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-gemini-standards",
+      "scope": "global",
+      "description": "Módulo CORTEX. Dispara con \"gemini api 2026\", \"renovar gemini\", \"gemini api key\", \"tensor de transducción\", \"structured outputs\", \"gemini json schema\", \"cuotas gemini api\".",
+      "triggers": [
+        "c5-gemini-api-2026-standards",
+        "cuotas gemini api",
+        "gemini api 2026",
+        "gemini api key",
+        "gemini json schema",
+        "renovar gemini",
+        "structured outputs",
+        "swarm-gemini-standards",
+        "tensor de transducción"
+      ]
+    },
+    {
+      "name": "c5-exergy-scale-evaluator",
+      "tier": 18500,
+      "category": "Specialized",
+      "display_name": "Evaluador de Escala de Exergía 1-21.000 (Regla de 3 Evaluadores)",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-exergy-evaluator",
+      "scope": "global",
+      "description": "Módulo epistémico. Dispara con \"escala de exergía\", \"evaluar exergía\", \"auditoría de exergía\", \"puntuación exergética\", \"escala 21000\", \"exergy scale\", \"3 evaluadores\".",
+      "triggers": [
+        "3 evaluadores",
+        "auditoría de exergía",
+        "c5-exergy-scale-evaluator",
+        "epistemic-exergy-evaluator",
+        "escala 21000",
+        "escala de exergía",
+        "evaluar exergía",
+        "exergy scale",
+        "puntuación exergética"
+      ]
+    },
+    {
+      "name": "c5-ctm-formal-architect",
+      "tier": 18500,
+      "category": "Specialized",
+      "display_name": "Arquitectura Formal y Diseño Empírico de Cognitive Transition Machines (CTM)",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-ctm-formalizer",
+      "scope": "global",
+      "description": "Módulo Ring-0. Dispara con \"ctm benchmark\", \"ctm formalization\", \"lean 4 ctm\", \"abduction vs deduction\", \"falsification matrix\", \"refinement trace\".",
+      "triggers": [
+        "abduction vs deduction",
+        "c5-ctm-formal-architect",
+        "ctm benchmark",
+        "ctm formalization",
+        "falsification matrix",
+        "kernel-ctm-formalizer",
+        "lean 4 ctm",
+        "refinement trace"
+      ]
+    },
+    {
+      "name": "c5-codebase-valuation-audit",
+      "tier": 18500,
+      "category": "Specialized",
+      "display_name": "Auditoría & Valoración Económica Empírica de Codebases e IP",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "venture-codebase-valuation",
+      "scope": "global",
+      "description": "Módulo Wetware/Venture. Dispara con \"valorar software\", \"valoración económica\", \"audit codebase valuation\", \"software ip valuation\", \"acqui-hire valuation\", \"due diligence técnica\".",
+      "triggers": [
+        "acqui-hire valuation",
+        "audit codebase valuation",
+        "c5-codebase-valuation-audit",
+        "due diligence técnica",
+        "software ip valuation",
+        "valoración económica",
+        "valorar software",
+        "venture-codebase-valuation"
+      ]
+    },
+    {
+      "name": "biographical-thermo",
+      "tier": 18500,
+      "category": "Nucleus",
+      "display_name": "Mapeo Termodinámico Biográfico e Histórico",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-biographical-thermo",
+      "scope": "workspace",
+      "description": "Módulo epistémico. Dispara con \"epistemic-biographical-thermo\", \"biografía termodinámica\", \"/biographical-thermo\", \"trayectoria termodinámica\", \"análisis biográfico termodinámico\".",
+      "triggers": [
+        "/biographical-thermo",
+        "análisis biográfico termodinámico",
+        "biografía termodinámica",
+        "biographical-thermo",
+        "epistemic-biographical-thermo",
+        "trayectoria termodinámica"
+      ]
+    },
+    {
+      "name": "babylon-shield",
+      "tier": 18500,
+      "category": "Specialized",
+      "display_name": "Escudo Termodinámico Ring-0 (Caballo de Troya BABYLON-SHIELD)",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-babylon-shield",
+      "scope": "global",
+      "description": "Módulo Ring-0. Dispara con \"babylon shield\", \"escudo termodinámico\", \"ring-0 shield\", \"prevenir anergía\", \"atestación babylon\", \"invariantes ring-0\", \"protección ring-0\".",
+      "triggers": [
+        "atestación babylon",
+        "babylon shield",
+        "babylon-shield",
+        "escudo termodinámico",
+        "invariantes ring-0",
+        "kernel-babylon-shield",
+        "prevenir anergía",
+        "protección ring-0",
+        "ring-0 shield"
+      ]
+    },
+    {
+      "name": "lora-swarm-pipeline",
+      "tier": 18200,
+      "category": "Operations",
+      "display_name": "Pipeline de Minería Paralelizada con Enjambre LoRA",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-lora-pipeline",
+      "scope": "workspace",
+      "description": "Módulo CORTEX. Dispara con \"swarm-lora-pipeline\", \"lora swarm\", \"enjambre lora\", \"minería enjambre\", \"n-zonas enjambre\", \"dataset swarm\", \"enjambre ShareGPT\", \"minar datasets enjambre\", \"swarm pipeline\".",
+      "triggers": [
+        "dataset swarm",
+        "enjambre lora",
+        "enjambre sharegpt",
+        "lora swarm",
+        "lora-swarm-pipeline",
+        "minar datasets enjambre",
+        "minería enjambre",
+        "n-zonas enjambre",
+        "swarm pipeline",
+        "swarm-lora-pipeline"
+      ]
+    },
+    {
+      "name": "f5tts-voice-cloning-sota",
+      "tier": 18200,
+      "category": "Operations",
+      "display_name": "Clonación Vocal Neuronal SOTA (F5-TTS / MPS / Ingeniería de Prosodia)",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "media-f5tts-voice",
+      "scope": "global",
+      "description": "Módulo audiovisual. Dispara con \"clonar voz\", \"sintetizar voz\", \"f5-tts\", \"f5tts\", \"voice clone\", \"prosodia tts\", \"nota de voz ia\".",
+      "triggers": [
+        "clonar voz",
+        "f5-tts",
+        "f5tts",
+        "f5tts-voice-cloning-sota",
+        "media-f5tts-voice",
+        "nota de voz ia",
+        "prosodia tts",
+        "sintetizar voz",
+        "voice clone"
+      ]
+    },
+    {
+      "name": "c5-weighted-decision-matrix",
+      "tier": 18200,
+      "category": "Governance",
+      "display_name": "Matriz de Decisión Ponderada y Estimación PERT",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "venture-decision-matrix",
+      "scope": "global",
+      "description": "Módulo Wetware/Venture. Dispara con \"weighted scorer\", \"matriz de decisión\", \"pert estimation\", \"estimación de proyectos\", \"evaluación tecnológica\", \"matriz de pesos\", \"evaluación de proveedores\".",
+      "triggers": [
+        "c5-weighted-decision-matrix",
+        "estimación de proyectos",
+        "evaluación de proveedores",
+        "evaluación tecnológica",
+        "matriz de decisión",
+        "matriz de pesos",
+        "pert estimation",
+        "venture-decision-matrix",
+        "weighted scorer"
+      ]
+    },
+    {
+      "name": "c5-venture-pitch-architect",
+      "tier": 18200,
+      "category": "Governance",
+      "display_name": "Arquitecto de Pitch Decks, Deal Memos & Investor Relations C5",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "venture-pitch-architect",
+      "scope": "global",
+      "description": "Módulo Wetware/Venture. Dispara con \"pitch deck\", \"investor pitch planner\", \"pitch deck creator\", \"investor letter writer\", \"vc deal memo\", \"plan de negocio pptx\", \"the ask pitch\".",
+      "triggers": [
+        "c5-venture-pitch-architect",
+        "investor letter writer",
+        "investor pitch planner",
+        "pitch deck",
+        "pitch deck creator",
+        "plan de negocio pptx",
+        "the ask pitch",
+        "vc deal memo",
+        "venture-pitch-architect"
+      ]
+    },
+    {
+      "name": "swarm-router",
+      "tier": 18100,
+      "category": "Governance",
+      "display_name": "Enrutador Maestro y Despachador Inteligente de Enjambres",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-matrix-router",
+      "scope": "global",
+      "description": "Módulo CORTEX. Dispara con \"enjambre\", \"enjmabres\", \"swarm\", \"swarms\", \"sarm\", \"sarms\", \"lanzar enjambre\", \"ejecutar enjambre\", \"orquestar enjambre\", \"swarm call\", \"disparar enjambres\", \"matriz de enjambres\", \"mejora los enjambres\".",
+      "triggers": [
+        "disparar enjambres",
+        "ejecutar enjambre",
+        "enjambre",
+        "enjmabres",
+        "lanzar enjambre",
+        "matriz de enjambres",
+        "mejora los enjambres",
+        "orquestar enjambre",
+        "sarm",
+        "sarms",
+        "swarm",
+        "swarm call",
+        "swarm-matrix-router",
+        "swarm-router",
+        "swarms"
+      ]
+    },
+    {
+      "name": "somatic-ble-transduction",
+      "tier": 18100,
+      "category": "Operations",
+      "display_name": "Transductor Telemétrico Somático BLE (Apple Watch Ring-(-3))",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "wetware-ble-telemetry",
+      "scope": "global",
+      "description": "Módulo Wetware/Venture. Dispara con \"telemetria somatica\", \"conectar apple watch\", \"somatic daemon\", \"ble heart rate\", \"ring minus 3\".",
+      "triggers": [
+        "ble heart rate",
+        "conectar apple watch",
+        "ring minus 3",
+        "somatic daemon",
+        "somatic-ble-transduction",
+        "telemetria somatica",
+        "wetware-ble-telemetry"
+      ]
+    },
+    {
+      "name": "discourse-popperian-falsification",
+      "tier": 17900,
+      "category": "Operations",
+      "display_name": "Falsación Popperiana & Auditoría Discursiva de Hipótesis",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-discourse-falsifier",
+      "scope": "global",
+      "description": "Módulo epistémico. Dispara con \"falsación popperiana\", \"análisis popperiano\", \"auditoría discursiva\", \"falsar hipótesis\", \"auditar mito\", \"leyenda urbana\", \"desmentir mito\".",
+      "triggers": [
+        "análisis popperiano",
+        "auditar mito",
+        "auditoría discursiva",
+        "desmentir mito",
+        "discourse-popperian-falsification",
+        "epistemic-discourse-falsifier",
+        "falsación popperiana",
+        "falsar hipótesis",
+        "leyenda urbana"
+      ]
+    },
+    {
+      "name": "ghidra-ida-binary-audit",
+      "tier": 17800,
+      "category": "Operations",
+      "display_name": "Auditoría de Binarios Crudos & Descompilación Ghidra/IDA",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "secops-binary-reverse-audit",
+      "scope": "global",
+      "description": "Módulo SecOps. Dispara con \"auditar binario\", \"ghidra\", \"ida pro\", \"descompilar binario\", \"buffer overflow audit\", \"ingeniería inversa\".",
+      "triggers": [
+        "auditar binario",
+        "buffer overflow audit",
+        "descompilar binario",
+        "ghidra",
+        "ghidra-ida-binary-audit",
+        "ida pro",
+        "ingeniería inversa",
+        "secops-binary-reverse-audit"
+      ]
+    },
+    {
+      "name": "c5-spaced-repetition-architect",
+      "tier": 17800,
+      "category": "Operations",
+      "display_name": "Arquitecto de Repetición Espaciada, Anki & Control Entrópico Cognitivo C5",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "wetware-spaced-repetition",
+      "scope": "global",
+      "description": "Módulo Wetware/Venture. Dispara con \"anki maker\", \"tarjetas anki\", \"anki flashcards\", \"repetición espaciada\", \"adhd assistant\", \"descomposición de tareas\", \"micro-tasking\", \"spaced repetition\".",
+      "triggers": [
+        "adhd assistant",
+        "anki flashcards",
+        "anki maker",
+        "c5-spaced-repetition-architect",
+        "descomposición de tareas",
+        "micro-tasking",
+        "repetición espaciada",
+        "spaced repetition",
+        "tarjetas anki",
+        "wetware-spaced-repetition"
+      ]
+    },
+    {
+      "name": "electron-asar-forensic-audit",
+      "tier": 17700,
+      "category": "Operations",
+      "display_name": "Auditoría Forense In-Memory de Empaquetados Electron (app.asar)",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "secops-electron-forensics",
+      "scope": "global",
+      "description": "Módulo SecOps. Dispara con \"auditar app electron\", \"extraer asar\", \"asar python\", \"descompilar electron\", \"forense electron app\", \"ingeniería inversa electron\", \"ingeniería inversa electron\".",
+      "triggers": [
+        "asar python",
+        "auditar app electron",
+        "descompilar electron",
+        "electron-asar-forensic-audit",
+        "extraer asar",
+        "forense electron app",
+        "ingeniería inversa electron",
+        "secops-electron-forensics"
+      ]
+    },
+    {
+      "name": "jujutsu-vcs-management",
+      "tier": 17600,
+      "category": "Operations",
+      "display_name": "Control de Versiones Determinista Jujutsu VCS (jj)",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "secops-jujutsu-vcs",
+      "scope": "global",
+      "description": "Módulo SecOps. Dispara con \"jujutsu vcs\", \"jj repo\", \"jujutsu git\", \"control de versiones jj\", \"jj vcs\", \"jujutsu management\".",
+      "triggers": [
+        "control de versiones jj",
+        "jj repo",
+        "jj vcs",
+        "jujutsu git",
+        "jujutsu management",
+        "jujutsu vcs",
+        "jujutsu-vcs-management",
+        "secops-jujutsu-vcs"
+      ]
+    },
+    {
+      "name": "cortex-telemetry",
+      "tier": 17500,
+      "category": "Operations",
+      "display_name": "Telemetría Runtime CORTEX, Exergía de Prompts y Drenaje de Sesiones",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-session-telemetry",
+      "scope": "global",
+      "description": "Módulo CORTEX. Dispara con \"telemetría\", \"cortex telemetry\", \"transcript logs\", \"historial de prompts\", \"analizar transcripciones\", \"sin consolidar\", \"consolidar conversaciones\", \"drenar brain\".",
+      "triggers": [
+        "analizar transcripciones",
+        "consolidar conversaciones",
+        "cortex telemetry",
+        "cortex-telemetry",
+        "drenar brain",
+        "historial de prompts",
+        "sin consolidar",
+        "swarm-session-telemetry",
+        "telemetría",
+        "transcript logs"
+      ]
+    },
+    {
+      "name": "c5-neural-face-swap-cuadrilla",
+      "tier": 17400,
+      "category": "Operations",
+      "display_name": "Pipeline Neural Face-Swap Cuadrilla (V5 SOTA Hybrid)",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "media-neural-faceswap",
+      "scope": "global",
+      "description": "Módulo audiovisual. Dispara con \"face swap\", \"deepfake cuadrilla\", \"intercambio facial\", \"c5 face swap\".",
+      "triggers": [
+        "c5 face swap",
+        "c5-neural-face-swap-cuadrilla",
+        "deepfake cuadrilla",
+        "face swap",
+        "intercambio facial",
+        "media-neural-faceswap"
+      ]
+    },
+    {
+      "name": "homebrew-ecosystem-management",
+      "tier": 17200,
+      "category": "Operations",
+      "display_name": "Gestión & Auditoría de Paquetes Homebrew en macOS",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "secops-homebrew-manager",
+      "scope": "global",
+      "description": "Módulo SecOps. Dispara con \"homebrew\", \"brew audit\", \"dependencias macos\", \"paquetes homebrew\", \"gestión homebrew\", \"entorno brew\".",
+      "triggers": [
+        "brew audit",
+        "dependencias macos",
+        "entorno brew",
+        "gestión homebrew",
+        "homebrew",
+        "homebrew-ecosystem-management",
+        "paquetes homebrew",
+        "secops-homebrew-manager"
+      ]
+    },
+    {
+      "name": "wizard",
+      "tier": 17000,
+      "category": "Utilities",
+      "display_name": "Asistente de Instalación Determinista (Wizard)",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-state-wizard",
+      "scope": "workspace",
+      "description": "Módulo CORTEX. Dispara con \"swarm-state-wizard\", \"wizard\", \"/wizard\", \"paso a paso\", \"máquina de estados\", \"guía secuencial\", \"asistente de instalación\".",
+      "triggers": [
+        "/wizard",
+        "asistente de instalación",
+        "guía secuencial",
+        "máquina de estados",
+        "paso a paso",
+        "swarm-state-wizard",
+        "wizard"
+      ]
+    },
+    {
+      "name": "github-architect",
+      "tier": 17000,
+      "category": "Operations",
+      "display_name": "Arquitecto Estratégico de Presencia y Salud en GitHub (GraphQL v2.1)",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "secops-github-architect",
+      "scope": "global",
+      "description": "Módulo SecOps. Dispara con \"audita mi github\", \"qué repos archivar\", \"itera /github-architect\", \"generar ci workflow\", \"github architect\", \"auditoría repositorios github\".",
+      "triggers": [
+        "audita mi github",
+        "auditoría repositorios github",
+        "generar ci workflow",
+        "github architect",
+        "github-architect",
+        "itera /github-architect",
+        "qué repos archivar",
+        "secops-github-architect"
+      ]
+    },
+    {
+      "name": "flstudio-mcp-production",
+      "tier": 17000,
+      "category": "Operations",
+      "display_name": "Producción Nativa MCP FL Studio 2025 & DSP Microtonal",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "media-flstudio-dsp",
+      "scope": "global",
+      "description": "Módulo audiovisual. Dispara con \"FL Studio\", \"flstudio-mcp\", \"balag-omega\", \"generador de musica\", \"compilar flp\", \"piano roll script\", \"microtonal house\".",
+      "triggers": [
+        "balag-omega",
+        "compilar flp",
+        "fl studio",
+        "flstudio-mcp",
+        "flstudio-mcp-production",
+        "generador de musica",
+        "media-flstudio-dsp",
+        "microtonal house",
+        "piano roll script"
+      ]
+    },
+    {
+      "name": "youtube-remotion-sota",
+      "tier": 16800,
+      "category": "Operations",
+      "display_name": "Síntesis Programática SOTA de Vídeo React/Remotion",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "media-remotion-render",
+      "scope": "global",
+      "description": "Módulo audiovisual. Dispara con \"youtube remotion\", \"remotion render\", \"react video synthesis\", \"renderizar vídeo remotion\".",
+      "triggers": [
+        "media-remotion-render",
+        "react video synthesis",
+        "remotion render",
+        "renderizar vídeo remotion",
+        "youtube remotion",
+        "youtube-remotion-sota"
+      ]
+    },
+    {
+      "name": "audiovisual-sota",
+      "tier": 16800,
+      "category": "Operations",
+      "display_name": "Media Pipeline · Renderizado Audiovisual Determinista",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "media-pipeline",
+      "scope": "workspace",
+      "description": "Módulo audiovisual. Dispara con \"media-pipeline\", \"audiovisual-sota\", \"/audiovisual-sota\", \"pipeline audiovisual\", \"invariantes remotion ffmpeg\".",
+      "triggers": [
+        "/audiovisual-sota",
+        "audiovisual-sota",
+        "invariantes remotion ffmpeg",
+        "media-pipeline",
+        "pipeline audiovisual"
+      ]
+    },
+    {
+      "name": "writing-for-agents",
+      "tier": 16500,
+      "category": "Utilities",
+      "display_name": "Redacción M2M de Alta Exergía & Sanitización C5",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-m2m-writer",
+      "scope": "workspace",
+      "description": "Módulo CORTEX. Dispara con \"swarm-m2m-writer\", \"writing-for-agents\", \"/writing-for-agents\", \"redacción m2m\", \"external llm exergy\", \"sanitize-c5\", \"/sanitize-c5\", \"despersonalizar manifiesto\", \"higienizar manifiesto\".",
+      "triggers": [
+        "/sanitize-c5",
+        "/writing-for-agents",
+        "despersonalizar manifiesto",
+        "external llm exergy",
+        "higienizar manifiesto",
+        "redacción m2m",
+        "sanitize-c5",
+        "swarm-m2m-writer",
+        "writing-for-agents"
+      ]
+    },
+    {
+      "name": "youtube-analysis-pipeline",
+      "tier": 16400,
+      "category": "Operations",
+      "display_name": "Pipeline de Análisis Visual & Transcripción de YouTube",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "secops-youtube-auditor",
+      "scope": "global",
+      "description": "Módulo SecOps. Dispara con \"youtube analysis\", \"youtube transcript\", \"auditoría youtube\", \"analizar video youtube\", \"falsabilizar video youtube\", \"falsabilizar video\".",
+      "triggers": [
+        "analizar video youtube",
+        "auditoría youtube",
+        "falsabilizar video",
+        "falsabilizar video youtube",
+        "secops-youtube-auditor",
+        "youtube analysis",
+        "youtube transcript",
+        "youtube-analysis-pipeline"
+      ]
+    },
+    {
+      "name": "djstudio-mcp",
+      "tier": 16200,
+      "category": "Operations",
+      "display_name": "Controlador DSP & Playlist Mixer DJ.Studio MCP",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "media-djstudio-mixer",
+      "scope": "global",
+      "description": "Módulo audiovisual. Dispara con \"dj studio\", \"djstudio\", \"dj studio mcp\", \"harmonize dj studio\", \"stems dj studio\", \"transiciones dj\", \"crossover linkwitz riley\", \"rekordbox xml\".",
+      "triggers": [
+        "crossover linkwitz riley",
+        "dj studio",
+        "dj studio mcp",
+        "djstudio",
+        "djstudio-mcp",
+        "harmonize dj studio",
+        "media-djstudio-mixer",
+        "rekordbox xml",
+        "stems dj studio",
+        "transiciones dj"
+      ]
+    },
+    {
+      "name": "kimi-mcp-orchestrator",
+      "tier": 16000,
+      "category": "Operations",
+      "display_name": "Orquestador MCP Moonshot Kimi K3 para Auditoría de Gran Contexto",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-kimi-orchestrator",
+      "scope": "global",
+      "description": "Módulo CORTEX. Dispara con \"kimi ask\", \"kimi audit\", \"kimi swarm\", \"kimi nexus\", \"kimi mcp\", \"moonshot kimi\", \"orquestar kimi\".",
+      "triggers": [
+        "kimi ask",
+        "kimi audit",
+        "kimi mcp",
+        "kimi nexus",
+        "kimi swarm",
+        "kimi-mcp-orchestrator",
+        "moonshot kimi",
+        "orquestar kimi",
+        "swarm-kimi-orchestrator"
+      ]
+    },
+    {
+      "name": "cloudflare-mcp-usage",
+      "tier": 15800,
+      "category": "Operations",
+      "display_name": "Automatización & Operaciones Cloudflare MCP",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "secops-cloudflare-edge",
+      "scope": "global",
+      "description": "Módulo SecOps. Dispara con \"cloudflare\", \"mcp cloudflare\", \"zonas dns cloudflare\", \"cloudflare worker\", \"desplegar cloudflare\", \"kv r2 cloudflare\", \"cloudflare api mcp\".",
+      "triggers": [
+        "cloudflare",
+        "cloudflare api mcp",
+        "cloudflare worker",
+        "cloudflare-mcp-usage",
+        "desplegar cloudflare",
+        "kv r2 cloudflare",
+        "mcp cloudflare",
+        "secops-cloudflare-edge",
+        "zonas dns cloudflare"
+      ]
+    },
+    {
+      "name": "opentimestamps-l5-diagnostics",
+      "tier": 15000,
+      "category": "Diagnostics",
+      "display_name": "Atestación Criptográfica & Diagnóstico Bitcoin L5 (OpenTimestamps)",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-ots-timestamp",
+      "scope": "global",
+      "description": "Módulo Ring-0. Dispara con \"opentimestamps\", \"ots verify\", \"atestación l5\", \"bitcoin timestamp\", \"l5 diagnostics\", \"ots bitcoin\", \"sellado temporal l5\".",
+      "triggers": [
+        "atestación l5",
+        "bitcoin timestamp",
+        "kernel-ots-timestamp",
+        "l5 diagnostics",
+        "opentimestamps",
+        "opentimestamps-l5-diagnostics",
+        "ots bitcoin",
+        "ots verify",
+        "sellado temporal l5"
+      ]
+    },
+    {
+      "name": "electron-mac-bundle-collision-diagnostics",
+      "tier": 14800,
+      "category": "Diagnostics",
+      "display_name": "Diagnóstico de Crashes & Colisiones Electron en macOS",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "secops-electron-crash-diag",
+      "scope": "global",
+      "description": "Módulo SecOps. Dispara con \"electron crash mac\", \"crash ips macos\", \"bundle collision electron\", \"diagnóstico electron mac\", \"leveldb lock purge\", \"cierre inesperado electron\".",
+      "triggers": [
+        "bundle collision electron",
+        "cierre inesperado electron",
+        "crash ips macos",
+        "diagnóstico electron mac",
+        "electron crash mac",
+        "electron-mac-bundle-collision-diagnostics",
+        "leveldb lock purge",
+        "secops-electron-crash-diag"
+      ]
+    },
+    {
+      "name": "vscode-git-packed-refs-diagnostics",
+      "tier": 14600,
+      "category": "Diagnostics",
+      "display_name": "Reparación de Corruptelas Git & Packed-Refs en VS Code",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "secops-git-packed-refs",
+      "scope": "global",
+      "description": "Módulo SecOps. Dispara con \"vscode git enoent\", \"packed-refs\", \"corrupción git\", \"reparar git vscode\".",
+      "triggers": [
+        "corrupción git",
+        "packed-refs",
+        "reparar git vscode",
+        "secops-git-packed-refs",
+        "vscode git enoent",
+        "vscode-git-packed-refs-diagnostics"
+      ]
+    },
+    {
+      "name": "macos-lulu-firewall-diagnostics",
+      "tier": 14200,
+      "category": "Diagnostics",
+      "display_name": "Diagnóstico de Firewall & Sockets macOS (LuLu / Little Snitch)",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 6900,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "secops-lulu-firewall",
+      "scope": "global",
+      "description": "Módulo SecOps. Dispara con \"lulu firewall\", \"little snitch\", \"redes macos\", \"diagnóstico firewall\", \"reglas de red macos\", \"bloqueo sockets mac\".",
+      "triggers": [
+        "bloqueo sockets mac",
+        "diagnóstico firewall",
+        "little snitch",
+        "lulu firewall",
+        "macos-lulu-firewall-diagnostics",
+        "redes macos",
+        "reglas de red macos",
+        "secops-lulu-firewall"
+      ]
+    },
+    {
+      "name": "github-api-rate-limit-optimization",
+      "tier": 13900,
+      "category": "Utilities",
+      "display_name": "Optimización Resiliente de Tasa API GitHub (Error 429)",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 6600,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "secops-github-ratelimit",
+      "scope": "global",
+      "description": "Módulo SecOps. Dispara con \"github rate limit\", \"error 429 github\", \"optimizar github api\", \"secondary rate limit\", \"evitar 429 github\", \"resiliencia api github\".",
+      "triggers": [
+        "error 429 github",
+        "evitar 429 github",
+        "github rate limit",
+        "github-api-rate-limit-optimization",
+        "optimizar github api",
+        "resiliencia api github",
+        "secondary rate limit",
+        "secops-github-ratelimit"
+      ]
+    },
+    {
+      "name": "suno-bracket-tagging",
+      "tier": 12800,
+      "category": "Utilities",
+      "display_name": "Protocolo de Ingeniería Acústica y Control Causal para Audio AI (Suno/Udio/YuE)",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 5500,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "media-suno-prompting",
+      "scope": "global",
+      "description": "Módulo audiovisual. Dispara con \"suno prompt\", \"udio tags\", \"prompt musical\", \"etiquetas suno\", \"control causal audio\", \"audio ai\", \"jailbreak acustico\", \"des-plasticar audio\".",
+      "triggers": [
+        "audio ai",
+        "control causal audio",
+        "des-plasticar audio",
+        "etiquetas suno",
+        "jailbreak acustico",
+        "media-suno-prompting",
+        "prompt musical",
+        "suno prompt",
+        "suno-bracket-tagging",
+        "udio tags"
+      ]
+    },
+    {
+      "name": "handoff",
+      "tier": 10500,
+      "category": "Utilities",
+      "display_name": "Protocolo Soberano de Traspaso de Contexto C5-REAL",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 3500,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-context-handoff",
+      "scope": "global",
+      "description": "Módulo CORTEX. Dispara con \"handoff\", \"/handoff\", \"traspaso de contexto\", \"traspaso de sesión\", \"generar handoff\", \"traspaso formal\", \"context handover\".",
+      "triggers": [
+        "/handoff",
+        "context handover",
+        "generar handoff",
+        "handoff",
+        "swarm-context-handoff",
+        "traspaso de contexto",
+        "traspaso de sesión",
+        "traspaso formal"
+      ]
+    }
+  ],
+  "adjacency": [
+    {
+      "source": "cortex-kernel",
+      "target": "shared-manifest-kernel",
+      "relation": "enforces_hardware_invariants"
+    },
+    {
+      "source": "shared-manifest-kernel",
+      "target": "thermo-audit",
+      "relation": "bounds_concurrency"
+    },
+    {
+      "source": "c5-lean4-neurosymbolic-architect",
+      "target": "c5-lean4-axiomatic-orchestrator",
+      "relation": "orchestrates_theorems"
+    },
+    {
+      "source": "cloud-chamber",
+      "target": "polymath-concept-synthesis",
+      "relation": "crystallizes_ontology"
+    },
+    {
+      "source": "adaptive-cron",
+      "target": "cortex-telemetry",
+      "relation": "meters_cognitive_dissipation"
+    },
+    {
+      "source": "swarm-quantum-collapse",
+      "target": "dynamic-subagent-lifecycle",
+      "relation": "orchestrates_swarm"
+    },
+    {
+      "source": "cct-cognitive-theory-advisor",
+      "target": "cta-cognitive-transition-algebra",
+      "relation": "advises"
+    },
+    {
+      "source": "flstudio-mcp-production",
+      "target": "youtube-remotion-sota",
+      "relation": "provides_audio"
+    },
+    {
+      "source": "opentimestamps-l5-diagnostics",
+      "target": "c5-real-legaltech-analysis",
+      "relation": "attests_l5"
+    },
+    {
+      "source": "whatsapp-nexus-protocol",
+      "target": "dynamic-subagent-lifecycle",
+      "relation": "gateways_messaging"
+    },
+    {
+      "source": "handoff",
+      "target": "cortex-telemetry",
+      "relation": "persists_session_state"
+    },
+    {
+      "source": "c5-kudurru-64",
+      "target": "c5-mushushu-0",
+      "relation": "filters_for_apoptosis"
+    },
+    {
+      "source": "c5-mushushu-0",
+      "target": "c5-larsa-120",
+      "relation": "attests_bft_triad"
+    },
+    {
+      "source": "c5-larsa-120",
+      "target": "c5-enki-60",
+      "relation": "synchronizes_sexagesimal"
+    },
+    {
+      "source": "c5-sharur-3600",
+      "target": "c5-silicon-stress-suite",
+      "relation": "stresses_100_agents"
+    },
+    {
+      "source": "c5-thermos-audit",
+      "target": "thermo-audit",
+      "relation": "executes_double_thermo"
+    },
+    {
+      "source": "c5-rubin-acoustic-linter",
+      "target": "flstudio-mcp-production",
+      "relation": "audits_dsp_exergy"
+    },
+    {
+      "source": "c5-sovereign-system1-engine",
+      "target": "c5-kudurru-64",
+      "relation": "routes_edge_decisions"
+    },
+    {
+      "source": "polymath-concept-synthesis",
+      "target": "c5-ultrathink-epistemic-audit",
+      "relation": "postmortem_trace"
+    },
+    {
+      "source": "c5-metodo-acreativo",
+      "target": "c5-lexicon-enforcer",
+      "relation": "formalizes_involuntary_transduction"
+    },
+    {
+      "source": "c5-autonomous-agent-primitives",
+      "target": "c5-tamkarum-60",
+      "relation": "collapses_site_playbooks"
+    },
+    {
+      "source": "c5-autonomous-agent-primitives",
+      "target": "cortex-skill-genesis",
+      "relation": "forges_new_capabilities"
+    },
+    {
+      "source": "autodidact-omega",
+      "target": "c5-popperian-falsification-auditor",
+      "relation": "falsifies_hypotheses"
+    },
+    {
+      "source": "c5-plan-omega",
+      "target": "c5-adaptive-annealing-engine",
+      "relation": "anneals_dag_trajectories"
+    },
+    {
+      "source": "c5-debloat-agent-kernel",
+      "target": "c5-sovereign-inference-runtime",
+      "relation": "executes_bare_metal"
+    },
+    {
+      "source": "c5-tri-provider-swarm",
+      "target": "swarm-router",
+      "relation": "dispatches_hybrid_models"
+    }
+  ]
+}

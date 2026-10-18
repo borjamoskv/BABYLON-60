@@ -1,0 +1,34 @@
+{
+  "scope": "workspace",
+  "canonical_alias": "media-hub",
+  "modules": [
+    {
+      "name": "audiovisual-sota",
+      "canonical_alias": "media-pipeline",
+      "aliases": [
+        "media-pipeline",
+        "audiovisual-sota",
+        "/audiovisual-sota",
+        "pipeline audiovisual",
+        "invariantes remotion ffmpeg"
+      ],
+      "module": "references/modules/audiovisual-sota/MODULE.md"
+    },
+    {
+      "name": "c5-anti-slop-ui",
+      "canonical_alias": "media-ui-linter",
+      "aliases": [
+        "media-ui-linter",
+        "c5-anti-slop-ui",
+        "/c5-anti-slop-ui",
+        "anti-slop ui",
+        "impeccable c5",
+        "linter de diseño",
+        "auditoría ui",
+        "pulir frontend",
+        "erradicar ai slop"
+      ],
+      "module": "references/modules/c5-anti-slop-ui/MODULE.md"
+    }
+  ]
+}

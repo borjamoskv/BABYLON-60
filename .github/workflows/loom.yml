@@ -1,0 +1,35 @@
+name: C11 Memory Model Loom Verification
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main", "iter*" ]
+  pull_request:
+    branches: [ "main" ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  loom-verification:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+    
+    - name: Setup Rust Toolchain
+      uses: dtolnay/rust-toolchain@master
+      with:
+        toolchain: stable
+        
+    - name: Rust Cache
+      uses: Swatinem/rust-cache@v2
+        
+    - name: Run Loom Data Race Verification
+      run: cargo test --locked --test seqlock_loom --release
+      env:
+        LOOM_MAX_PREEMPTIONS: 2
+        RUSTFLAGS: "--cfg loom"

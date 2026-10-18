@@ -1,0 +1,234 @@
+# BABYLON-60 Epistemic Claims Manifest (C5-REAL / v5.0 · Iteración Ω)
+# Cada afirmación del sistema debe estar respaldada por evidencia física determinista en silicio.
+# Estados posibles: "verified" | "verified_local" | "verified_in_memory" | "partial_trace" | "experimental"
+# Niveles de evidencia (Iteración Ω):
+#   "L1_FORMAL"         — La política o especificación satisface invariantes matemáticos (no implica L2 ni L3)
+#   "L2_IMPLEMENTATION" — El ejecutor implementa fielmente la política y validación criptográfica
+#   "L3_ISOLATION"      — El agente no dispone de rutas alternativas dentro del dominio protegido
+#   "L4_EXPERIMENTAL"   — Las pruebas adversariales no consiguen violar las propiedades definidas en el SO real
+
+[metadata]
+version = "5.0.0"
+specification = "BABYLON-60: Verified Execution Authority for AI Agents"
+last_audit = "2026-10-17"
+auditor = "SHARUR-3600 Legion & Iteration Omega"
+root_axiom = "INV-OMEGA: Executed(e) => Authorized(e) & SignatureValid(e) & PolicyValid(e) & Fresh(e), and Execute(p,e) => MediatedByBABYLON(p,e)"
+
+[claim.inv_01_manifest_layout]
+statement = "SharedManifest is exactly 64 bytes and 64-byte aligned (Zero-Split Coherence)"
+evidence = "cargo test --locked --lib manifest::tests::layout_is_64_bytes_aligned_with_documented_offsets -- --exact"
+status = "verified"
+evidence_level = "L2_IMPLEMENTATION"
+notes = "Also enforced at compile time by const _LAYOUT_ASSERTS in src/manifest.rs"
+component = "00_ABZU_KERNEL"
+
+[claim.inv_02_seqlock_concurrency]
+statement = "Seqlock SPMC protocol model (loom replica of seqlock.rs, 1 writer x 1-2 readers) yields no torn read under bounded model checking (max 2 preemptions); production code is not itself model-checked"
+evidence = "LOOM_MAX_PREEMPTIONS=2 RUSTFLAGS=\"--cfg loom\" CARGO_TARGET_DIR=target/loom cargo test --locked --test seqlock_loom --release"
+status = "verified"
+evidence_level = "L1_FORMAL"
+component = "00_ABZU_KERNEL"
+
+[claim.inv_04_fail_stop_halt]
+statement = "Epistemic halt closes admission (POISONED, 0xDEAD_6060) and records SignedDurable / UnsignedDurable / PersistenceFailed evidence within a bounded budget; never a synthetic signature"
+evidence = "cargo test --locked --lib halt::tests"
+status = "verified"
+evidence_level = "L2_IMPLEMENTATION"
+component = "00_ABZU_KERNEL"
+
+[claim.cose_ed25519_receipt]
+statement = "Receipts are formatted according to RFC 9942 and cryptographically signed with Ed25519"
+evidence = "cargo test --locked --lib receipt::tests::test_receipt_ed25519_sign_verify_cycle"
+status = "verified"
+evidence_level = "L2_IMPLEMENTATION"
+component = "00_ABZU_KERNEL"
+
+[claim.secure_enclave_p256]
+statement = "Apple Secure Enclave bridge produces P-256 signatures with Touch ID gate"
+evidence = "cargo test --locked --lib enclave::tests::test_enclave_cryptographic_verification_p256"
+status = "verified_local"
+evidence_level = "L2_IMPLEMENTATION"
+notes = "Software P-256 ECDSA verification is verified in silicon; hardware Secure Enclave + Touch ID invocation requires interactive macOS LocalAuthentication"
+component = "00_ABZU_KERNEL"
+
+[claim.cortex_persist_sqlite]
+statement = "Persistent ledger with SQLite WAL, BEGIN IMMEDIATE and SHA3-256 hash chaining"
+evidence = "pytest tests/ -k test_ledger"
+status = "verified"
+evidence_level = "L2_IMPLEMENTATION"
+notes = "Normative Cryptographic Matrix: (1) Python 01_KISH_ENGINE SQLite ledger uses SHA3-256 hash chaining; (2) Rust 00_ABZU_KERNEL C-ABI / Secure Enclave P-256 pre-hashes use SHA-256 (FIPS 186-4); (3) On-wire IPC / Merkle channels use BLAKE3 (INV_C5_ONWIRE_CANON)"
+component = "01_KISH_ENGINE"
+
+[claim.merkle_attestation]
+statement = "Merkle state roots computed deterministically and queryable via MCP"
+evidence = "pytest tests/ -k test_merkle"
+status = "verified"
+evidence_level = "L2_IMPLEMENTATION"
+component = "01_KISH_ENGINE"
+
+[claim.lean4_formal_trace]
+statement = "Lean 4 machine-checks concrete execution traces and proves universal inductive soundness theorems for arbitrary traces (no torn reads and single-dispatch AX-0 invariance)"
+evidence = "lean proof/lean/BabylonTrace.lean && lean proof/lean/AX0.lean"
+status = "verified_local"
+evidence_level = "L1_FORMAL"
+notes = "Includes reflection validation of finite execution traces and universal inductive safety theorems (no_torn_reads_universal, auth_001_universal_inductive_safety) machine-checked in Lean 4."
+component = "00_ABZU_KERNEL"
+
+[claim.worm_durability]
+statement = "In-memory HashChainedLedger provides cryptographic tamper detection"
+evidence = "cargo test --locked --lib worm"
+status = "verified_in_memory"
+evidence_level = "L2_IMPLEMENTATION"
+notes = "Tamper detection and hash chaining verified in RAM unit test (tampered block is detected and rejected). Durabilidad física delegada a WAL persistente de SQLite"
+component = "00_ABZU_KERNEL"
+
+[claim.heterogeneous_verification_quorum]
+statement = "Heterogeneous 2/3 verification quorum over 3 engines (Rust, Lean 4, Z3)"
+evidence = "cargo test --locked --lib larsa_bft"
+status = "verified_local"
+evidence_level = "L2_IMPLEMENTATION"
+notes = "Quórum local multi-motor N-versión; no es un protocolo de consenso bizantino distribuido por red"
+component = "00_ABZU_KERNEL"
+
+[claim.zero_anergy]
+statement = "Pure loads on seqlock read path eliminate reader-side cacheline ownership traffic (RFO = 0)"
+evidence = "cargo run --locked --bin babylon60_kernel -- bench"
+status = "verified"
+evidence_level = "L2_IMPLEMENTATION"
+notes = "Cero contención RMW en lectores; propiedad de rendimiento de caché, no de control de acceso"
+component = "00_ABZU_KERNEL"
+
+[claim.mcp_authority_gate]
+statement = "MCP server enforces AX-0: stochastic AI clients cannot self-authorize protected actions"
+evidence = "pytest tests/test_ax0_mcp_isolation.py"
+status = "verified"
+evidence_level = "L2_IMPLEMENTATION"
+component = "01_KISH_ENGINE"
+
+[claim.AUTH_001]
+statement = "A consumed authorization cannot be dispatched a second time by the executor, including after process death and reopening the file ledger"
+required_for_release = true
+evidence_level = "L2_IMPLEMENTATION"
+scope = "executor-managed effects; single executor process per ledger; SIGKILL process death, not power loss"
+evidence_suite = "cargo test --locked --lib executor::tests::replay_rejected_after_reopening_file_ledger -- --exact"
+status = "verified_local"
+component = "00_ABZU_KERNEL"
+
+[claim.AUTH_002]
+statement = "EDIN workers cannot execute protected effects directly without verified COSE authorization over the IPC Unix socket boundary"
+required_for_release = true
+evidence_level = "L2_IMPLEMENTATION"
+scope = "privilege isolation over Unix domain socket IPC; capability retained by executor server"
+evidence_suite = "cargo test --locked --lib executor::ipc_tests --features cortex-persist,cortex-telemetry"
+status = "verified_local"
+notes = "Verified via Unix domain socket IPC boundary: unadmitted authority is denied (releasing zero mutation), valid COSE executes, and replays are rejected."
+component = "00_ABZU_KERNEL"
+
+[claim.AUTH_003]
+statement = "A dispatch without a durable result becomes UNKNOWN at restart and is never retried automatically"
+required_for_release = true
+evidence_level = "L2_IMPLEMENTATION"
+scope = "crash recovery; RESERVED entries stay blocked (no resumption implemented)"
+evidence_suite = "cargo test --locked --lib executor::tests::interrupted_after_dispatch_becomes_unknown_on_reopen -- --exact"
+status = "verified_local"
+component = "00_ABZU_KERNEL"
+
+[claim.AUTH_004]
+statement = "A resource whose precondition digest or inode identity changes between authorization and effect is rejected before mutation; for filesystem DELETE_FILE, the TOCTOU gap is closed via atomic quarantine isolation and post-rename verification"
+required_for_release = true
+evidence_level = "L4_EXPERIMENTAL"
+scope = "local filesystem under tested threat model; requires broker-exclusive quarantine on same mount (dev match), non-symlink paths, and O_NOFOLLOW/renameatx_np/renameat2 primitives. Remote and cross-device filesystems unsupported (fail-closed)"
+evidence_suite = "cargo test --locked --lib secure_fs && cargo test --locked --test adversarial_nemesis --features cortex-persist"
+status = "verified_local"
+component = "00_ABZU_KERNEL"
+
+[claim.AUTH_005]
+statement = "Signing or persistence failures produce explicit errors; no zeroed or synthetic signature is emitted"
+required_for_release = true
+evidence_level = "L2_IMPLEMENTATION"
+scope = "receipt generation and halt evidence"
+evidence_suite = "cargo test --locked --lib receipt::tests::test_receipt_signing_failure_returns_explicit_error_never_zeros -- --exact && cargo test --locked --lib halt::tests::halt_without_operational_key_is_unsigned_never_synthetic -- --exact && cargo test --locked --lib halt::tests::halt_unwritable_path_reports_persistence_failed -- --exact"
+status = "verified_local"
+component = "00_ABZU_KERNEL"
+
+[claim.AUTH_006]
+statement = "Under 1000 one-process-per-iteration runs covering 3 SIGKILL crash points and a no-crash control, no nonce produces more than one effect, no DISPATCHED survives restart, and every archived authorization replay is rejected"
+required_for_release = true
+evidence_level = "L4_EXPERIMENTAL"
+scope = "process kill (SIGKILL), file ledger, macOS; not power loss, not multi-executor"
+evidence_suite = "D=$(mktemp -d)/run && cargo run --locked --release --example poc_v5_crash_harness -- parent --iterations 1000 --dir $D"
+timeout_seconds = 1200
+status = "verified_local"
+component = "00_ABZU_KERNEL"
+
+[claim.AUTH_007_secure_fs_quarantine]
+statement = "EffectTx guarantees SAFETY and NON-INTERFERENCE for DELETE_FILE: under 100 concurrent workers and swap race attacks, unauthorized destructions == 0 and unquarantined deletions == 0"
+required_for_release = true
+evidence_level = "L4_EXPERIMENTAL"
+scope = "local filesystem, same mount/device, broker-owned quarantine (0700); macOS renameatx_np(RENAME_EXCL) and Linux renameat2(RENAME_NOREPLACE); NFS/remote FS unsupported and fail-closed"
+evidence_suite = "cargo test --locked --test adversarial_nemesis --features cortex-persist"
+status = "verified_local"
+component = "00_ABZU_KERNEL"
+
+[claim.sharur_100_swarm_concurrency]
+statement = "SHARUR-3600 Legion of 100 concurrent workers sustains ledger contention, enforces AX-0, and achieves 100% fail-closed rate across 50 adversarial attacks"
+required_for_release = true
+evidence_level = "L4_EXPERIMENTAL"
+scope = "concurrent worker isolation, SQLite WAL lock contention, and 5-cohort fail-closed adversarial rejection"
+evidence_suite = "pytest tests/test_swarm_100_concurrency.py"
+status = "verified"
+component = "02_EDIN_SWARMS"
+
+[claim.tamkarum_budget_gate]
+statement = "KudurruBudgetGate enforces 64-byte L1 cache line layout, Kelly Criterion bid caps, and MUSHUSHU-0 fail-stop apoptosis (0xDEAD_6060)"
+evidence = "cargo test --locked --lib tamkarum::tests"
+status = "verified"
+evidence_level = "L2_IMPLEMENTATION"
+component = "01_KISH_ENGINE"
+eu_ai_act_mapping = "Art. 14, 15"
+
+[claim.FL_007_admission_bounded_liveness]
+statement = "AdmissionController guarantees Little's Law latency bounds and deterministic queue depth rejection (fail-closed capacity backpressure)"
+required_for_release = true
+evidence_level = "L2_IMPLEMENTATION"
+scope = "in-memory atomic queue depth and latency budget enforcement; prevents unbounded execution queue starvation"
+evidence_suite = "cargo test --locked --features cortex-persist --test admission_capability_test test_fl007"
+status = "verified_local"
+component = "00_ABZU_KERNEL"
+
+[claim.FL_008_scoped_capability_broker]
+statement = "ScopedHandle and McpCapabilityBroker enforce: Tool Available != Tool Authorized != Effect Authorized. Under 10,000 adversarial trials across 5 attack vectors, unauthorized_effects == 0, capability_escalations == 0, stale_token_acceptances == 0, tool_identity_confusions == 0, and configuration_drifts == 0"
+required_for_release = true
+evidence_level = "L4_EXPERIMENTAL"
+scope = "OS-level descriptor-based capabilities via O_DIRECTORY/O_NOFOLLOW with physical dev/ino binding, causal parent attestation, and McpCapabilityBroker validating identity, code hash, effect kind, resource scope, argument digest, policy version, and validity epoch at t_commit"
+evidence_suite = "cargo test --locked --features cortex-persist --test admission_capability_test test_fl008"
+status = "verified_local"
+component = "00_ABZU_KERNEL"
+
+[claim.INV_OMEGA_complete_mediation]
+statement = "Confined AI agent processes cannot mutate or unlink protected OS resources or the SQLite ledger directly (macOS Seatbelt / EPERM); all reachability paths G=(V,A) from agent to protected resources are mediated by the BABYLON broker, and the 5-test Omega Campaign (BYPASS-001, AUTH-002, RACE-003, CRASH-004, REVOCATION-005) passes on real OS files"
+required_for_release = true
+evidence_level = "L3_ISOLATION"
+scope = "macOS process confinement via sandbox-exec Seatbelt profile over protected vault and ledger subpaths, combined with NEMESIS reachability graph cut verification and SovereignExecutor 5-test campaign"
+evidence_suite = "cargo test --locked --features cortex-persist --test omega_mediation_campaign"
+status = "verified_local"
+component = "00_ABZU_KERNEL"
+
+[claim.FL_014_wave4_receipt_loss_and_closure_drift]
+statement = "Under SIGKILL between physical syscall and receipt commit (FL014_RECEIPT_LOSS), blind automatic retries are rejected with AmbiguousOutcomeRequiresReconciliation and explicit inode reconciliation consolidates the receipt without duplicate effect; transitive dependency or skill/policy drift (FL015_TRANSITIVE_DRIFT / POLICY_ROLLBACK / RUNTIME_LOAD) invalidates deployment permits fail-closed"
+required_for_release = true
+evidence_level = "L4_EXPERIMENTAL"
+scope = "local APFS filesystem, WAL synchronous=FULL (.effect_wal.bin), concurrent epoch fencing, and transitive closure attestation"
+evidence_suite = "cargo test --locked -q --test nemesis_wave4 --features cortex-persist"
+status = "verified_local"
+component = "00_ABZU_KERNEL"
+
+[claim.FL_016_owasp_acs_vop1_and_drift_guard]
+statement = "BabylonAcsGuard enforces OWASP ACS v0.1.0 over AF_UNIX peer-verified sockets, rejects Fail-Open (on_decision_failure='proceed') with 0xDEAD_6060, compresses human wait stalls by >514x (n=30 cohorts, CI95), reconciles VOP-1 UNKNOWN states against physical witness digests, and invalidates capabilities upon skill/tool/policy drift (BabylonDriftGuard)"
+required_for_release = true
+evidence_level = "L4_EXPERIMENTAL"
+scope = "AF_UNIX local enforcement, 7-tuple T_auth evaluation, VOP-1 tri-state reconciliation, and Phi_BABYLON verified-work metric"
+evidence_suite = "cargo test --locked -q --test nemesis_wave3 --features cortex-persist"
+status = "verified_local"
+component = "00_ABZU_KERNEL"
+

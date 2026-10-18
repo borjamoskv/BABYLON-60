@@ -1,0 +1,87 @@
+# OPSEC-Ω TASKFORCE — barrera pre-commit (capa 0: antes de que el
+# secreto llegue a git). Instalar:  pip install pre-commit && pre-commit install
+# Ω-07 (PreCommit-Gatekeeper) + Ω-12 (Canary-Guard, post-purge).
+repos:
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.24.3
+    hooks:
+      - id: gitleaks
+        name: gitleaks (OPSEC-Ω config)
+        args: [--config=.gitleaks.toml]
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.5.0
+    hooks:
+      - id: detect-secrets
+        additional_dependencies: ['gibberish-detector']
+
+  # Ω-12 Canary-Guard: bloquea el commit si un señuelo canary desaparece
+  # del árbol (post-purga). Ejecutar `pre-commit install --hook-type pre-push`
+  # para cubrir también el push. Activar tras plantar docs/CANARY_TOKENS.md.
+  - repo: local
+    hooks:
+      - id: canary-guard
+        name: canary tokens present in tree
+        entry: python3 scripts/c5_quality_gates/canary_check.py
+        language: system
+        pass_filenames: false
+
+      - id: verify-agent-ontological-value
+        name: agent ontological value (V_A) oracle verifier
+        entry: python3 scripts/c5_verifiers/verify_agent_ontological_value.py
+        language: system
+        pass_filenames: false
+
+      - id: verify-distribution-gate
+        name: commercial distribution packaging quality gate
+        entry: python3 scripts/c5_quality_gates/verify_distribution.py
+        language: system
+        pass_filenames: false
+
+
+      - id: verify-ghost-nodes
+        name: detect ghost nodes in documentation (C5-REAL Bisimulation)
+        entry: python3 scripts/c5_quality_gates/detect_ghost_nodes.py
+        language: system
+        pass_filenames: false
+
+      - id: guard-ide-sovereignty
+        name: enforce IDE dotfiles topological sovereignty (symlinks)
+        entry: scripts/guards/c5_ide_symlink_guard.sh
+        language: system
+        pass_filenames: false
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.9.9
+    hooks:
+      - id: ruff
+      - id: ruff-format
+
+  - repo: local
+    hooks:
+      - id: cargo-check
+        name: cargo check
+        entry: cargo check --workspace
+        language: system
+        pass_filenames: false
+        types: [rust]
+
+      - id: cargo-audit
+        name: cargo audit (zero CVE invariant)
+        entry: cargo audit
+        language: system
+        pass_filenames: false
+        types: [rust]
+
+      - id: anti-slopsquatting
+        name: anti-slopsquatting dependency guard
+        entry: python3 scripts/c5_quality_gates/anti_slopsquatting_guard.py --all
+        language: system
+        pass_filenames: false

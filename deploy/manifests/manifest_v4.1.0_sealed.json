@@ -1,0 +1,97 @@
+{
+  "$schema": "https://c5-real.org/schemas/babylon-manifest-v4.1.json",
+  "system": "BABYLON-60",
+  "version": "4.1.0",
+  "build_tag": "v4.1.0-sovereign-sealed",
+  "timestamp": "2026-09-12T12:29:12Z",
+  "epoch_timestamp": 1789216152,
+  "hardware_attestation": {
+    "platform": "Darwin_arm64",
+    "hardware_uuid": "6D01FD6C-3372-525B-AB2D-6CEB7449E105",
+    "hardware_enclave": "TPM_2_0_HARDWARE_SEALED [APPLE_SILICON_SEP_BOUND:6D01FD6C...]",
+    "pcr_index": "10",
+    "pcr_value": "206e6bd35fae67c14dd06a879ea225a69629726fce80c7efa204449d7e94216a",
+    "tpm_quote_signature": "a8a96b37bdd0115659d614395e54959ae26b7e6aa20c3c941ebbabc7b12be134",
+    "nonce": "NONCE_1789216152"
+  },
+  "merkle_tree": {
+    "domain_separation": "RFC-6962 (0x00 leaf, 0x01 interior, 0x02 cardinality)",
+    "cardinality_enforced": true,
+    "leaf_count": 18,
+    "merkle_root": "0556a80b3c6ed466ecff27058a9b4493025d9150548f47943bd0d347e70393af"
+  },
+  "scitt_rfc9942_receipt": {
+    "receipt_version": "draft-ietf-scitt-architecture-08 / RFC-9942",
+    "service_identity": "urn:babylon60:scitt:notary:v4",
+    "entry_id": "4f2fc3af14916636cb4c45857633d67a6147feb06e657162ebd3fa1a3c98bd3b",
+    "countersigned_at": "2026-09-12T12:29:12Z",
+    "root_hash": "0556a80b3c6ed466ecff27058a9b4493025d9150548f47943bd0d347e70393af",
+    "sample_inclusion_proof": {
+      "target": "01_ORCHESTRATOR/babylon60/bft/cortex_crypto_kernel.py",
+      "target_hash": "3ea7165c781fd30e222908750839511797646f1c0564f79461919014d59be909",
+      "index": 1,
+      "proof_steps": 5,
+      "proof": [
+        {
+          "sibling": "2c135aaafd0c806bd35165bb4c789acd337ce0022fefc5eed1332facb50fc0dd",
+          "position": "left",
+          "level": 0
+        },
+        {
+          "sibling": "f437f49080119c4f4c3e633daa0122d2c415c39ef2d7e4fe2afd9713334c9795",
+          "position": "right",
+          "level": 1
+        },
+        {
+          "sibling": "5d22d999f50eca5c5b601528f2976f273a692d1af2615b0cf329d8b5853b0305",
+          "position": "right",
+          "level": 2
+        },
+        {
+          "sibling": "fad54481e7ffa1623d8f698c18a5dc813a438c5e0a3b8ab851a63551c843e20e",
+          "position": "right",
+          "level": 3
+        },
+        {
+          "sibling": "8e9bd6980bbc8bba31cd3112999d2e1c104c58d0ca6504f41fefe9a701d623a1",
+          "position": "right",
+          "level": 4
+        }
+      ],
+      "verified": true
+    }
+  },
+  "cryptographic_kernel_manifest": {
+    "01_ORCHESTRATOR/babylon60/attestation/merkle_anchor.py": "2c135aaafd0c806bd35165bb4c789acd337ce0022fefc5eed1332facb50fc0dd",
+    "01_ORCHESTRATOR/babylon60/bft/cortex_crypto_kernel.py": "3ea7165c781fd30e222908750839511797646f1c0564f79461919014d59be909",
+    "01_ORCHESTRATOR/babylon60/bft/cortex_persist_ledger.py": "54dbb17befae0d950562697af3171d7d479cfdeb2e9f923664134d78d8205217",
+    "01_ORCHESTRATOR/babylon60/bft/ledger_actor.py": "ec33e5cfb5ac70b566c24fdc1091eea4ebccd51092edc8bb1d29a73ea8746bbe",
+    "01_ORCHESTRATOR/babylon60/compliance_exporter/eu_ai_act.py": "ae6f9a4cd17dc4ebefd7448ce80af2b81021acbc4cc1a038e2bd3a1a0d2b35bc",
+    "docs/audits/COMPLIANCE_CERTIFICATE_DE.md": "232ab83c3ebc83cc5478f24bdbef731a266220ceba601f582e2df355b976efb0",
+    "docs/audits/COMPLIANCE_CERTIFICATE_EN.md": "c68bcf14d035816d0ecbc0811c4f2bb184a44761db1970bb4d745b55f05944d2",
+    "docs/audits/COMPLIANCE_CERTIFICATE_ES.md": "6dddea1956960fab43300877bcfa3c6accc0256e9f4bb9cfeec90e6ca29f0104",
+    "docs/audits/COMPLIANCE_CERTIFICATE_FR.md": "e2ba83030d8536e09915310b9c2912f373a8c6964fbb5d0fd38c0759cc168896",
+    "docs/audits/COMPLIANCE_CERTIFICATE_IT.md": "da50c9b985872f09b318a0ee5f21c07b2602b8da5de13515679e5a549946c798",
+    "scripts/c5_utils/export_country_compliance.py": "2834347a8bb86e961d8f53a812adcbd542940305a9cea2b3edc08a7a8ef277cb",
+    "tests/test_compliance_and_attestation.py": "34e304e638d54762511fd16217a23090ffbb4822edc73eb3f9fcd16b3e0fe983",
+    "tests/test_compliance_exporter.py": "e99abb7179e235f5c35d6bb39c1a73dcd8f1ad8c75a9412e1efa6cf62bf7e06b",
+    "tests/test_cortex_100_iterations_adversarial.py": "5a610ca79544774e189cc0bc0f5670de9f386d91ea5ccf290b5ea788983a55de",
+    "tests/test_cortex_crypto_kernel.py": "9f1f6b46a514b81f5533037be15fa309f926c188d9861e789060a6713b74726a",
+    "tests/test_cortex_persist_batch_regressions.py": "8d1b7057892e5e6a73f684db814ba739a9b3f50e9bdea2e693f676c6a0b160e3",
+    "tests/test_ledger_resilience.py": "b1e5d293b23461bcfe7cc3197ccf62f3436bd9239165c5799f4e94e34e0588b0",
+    "tests/test_syntax_integrity.py": "689ca7a4b883b29a10523d68ae57e545222f4ab21852a2f7fd89fb2f888cf3bf"
+  },
+  "regulatory_compliance": {
+    "standard": "Regulation (EU) 2024/1689 (EU AI Act)",
+    "framework": "NIST AI RMF 1.0",
+    "verified_articles": [
+      "Article 9",
+      "Article 10",
+      "Article 11",
+      "Article 12",
+      "Article 14"
+    ],
+    "valid_until": "2026-12-11T12:27:40Z",
+    "revocation_status": "ACTIVE"
+  }
+}

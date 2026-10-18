@@ -1,0 +1,8 @@
+        <h2>{{ signature_title }}</h2>
+        <table>
+            <tbody>
+                <tr><td><strong>Algoritmo</strong></td><td><code>{{ signature.algorithm }}</code> (efímera: <code>{{ signature.ephemeral }}</code>)</td></tr>
+                <tr><td><strong>Clave pública</strong></td><td><code>{{ signature.public_key }}</code></td></tr>
+                <tr><td><strong>SHA-256 payload</strong></td><td><code>{{ signature.signed_payload_sha256 }}</code></td></tr>
+            </tbody>
+        </table>

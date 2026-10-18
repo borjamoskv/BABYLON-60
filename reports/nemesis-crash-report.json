@@ -1,0 +1,15 @@
+{
+  "ambiguous_recoveries": 0,
+  "crash_points_tested": [
+    "PREPARE",
+    "QUARANTINE",
+    "VERIFY",
+    "DISPATCH",
+    "COMMIT"
+  ],
+  "duration_ms": 55,
+  "iterations": 250,
+  "kill_signal": "SIGKILL_SIMULATED",
+  "timestamp_epoch": 1791030000,
+  "verdict": "PASS_ZERO_AMBIGUOUS_RECOVERIES"
+}

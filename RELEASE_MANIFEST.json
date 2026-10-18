@@ -1,0 +1,23 @@
+{
+  "release": "5.0.0",
+  "state": "candidate",
+  "commit": "d7d96bd1b7bc881a0544412ec7dcdfc424819651",
+  "source_tree_digest": "75b1717c61abdb46b78035f6845492f69eee06747927a5c5b828ff16f6d9bd61",
+  "axiom_root": "AX-0: No stochastic component may authorize its own irreversible effects (LLM != authority)",
+  "claims_manifest_digest": "e34750df315efa4e1c85e28319ae98fb6612f3ee53d7a192909fc16687afbe4d",
+  "compiled_at_iso": "2026-10-18T17:57:06Z",
+  "claims": {
+    "verified": 10,
+    "empirical_and_bounded": 16,
+    "experimental": 0,
+    "failed": 0,
+    "total": 26
+  },
+  "evidence_root": "sha3-256:76e0e6a31229dae7f8aba0c92ca18b6759273a53041d4774060a4f17ddc1288d",
+  "signing_authority": {
+    "algorithm": null,
+    "scope": "unsigned_local_evidence",
+    "public_key": null
+  },
+  "signature": null
+}

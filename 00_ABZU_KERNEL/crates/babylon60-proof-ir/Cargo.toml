@@ -1,0 +1,11 @@
+[package]
+name = "babylon60-proof-ir"
+version = "4.3.0"
+edition = "2021"
+license-file = "../../../LICENSE"
+publish = false
+description = "Intermediate Representation and Proof Obligation Generator for BABYLON-60"
+repository = "https://github.com/borjamoskv/BABYLON-60"
+authors = ["Borja Moskv <borjamoskv@github.com>"]
+
+[dependencies]

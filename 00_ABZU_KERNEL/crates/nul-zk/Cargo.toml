@@ -1,0 +1,16 @@
+[package]
+name = "nul-zk"
+version = "4.3.0"
+edition = "2021"
+authors = ["Borja Moskv <borjamoskv@github.com>"]
+description = "Sovereign Zero-Knowledge DSL compiler and Arkworks synthesizer for BABYLON-60"
+license-file = "../../../LICENSE"
+publish = false
+repository = "https://github.com/borjamoskv/BABYLON-60"
+
+[dependencies]
+pest = "2.7"
+pest_derive = "2.7"
+serde = { version = "1.0", features = ["derive"] }
+anyhow = "1.0"
+

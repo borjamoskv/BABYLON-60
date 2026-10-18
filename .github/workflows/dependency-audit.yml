@@ -1,0 +1,27 @@
+name: Rust Dependency Security
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '30 3 * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Install auditor
+        run: cargo install cargo-audit --locked --version 0.22.2
+      - name: Fail on vulnerabilities and unsound dependencies
+        run: cargo audit --deny unsound --json > rustsec.json
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: rustsec-report
+          path: rustsec.json
