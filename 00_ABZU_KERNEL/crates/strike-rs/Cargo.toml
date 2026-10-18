@@ -31,8 +31,8 @@ prost = "0.13"
 tonic = "0.12"
 hex = "0.4.3"
 tokio-stream = "0.1.19"
-ed25519-dalek = { version = "2.1", features = ["rand_core"] }
-rand = "0.8"
+ed25519-dalek = { version = "3.0", features = ["rand_core"] }
+rand = "0.9"
 anyhow = "1.0.104"
 dashmap = "6.2.1"
 ciborium = "0.2.2"
