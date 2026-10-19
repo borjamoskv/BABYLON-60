@@ -1,0 +1,76 @@
+---
+title: Especificación de Ontología, Nombrado y Semántica Exergética
+status: Causal-Determinist
+version: 4.3.0
+---
+
+# Ontología de Exergía y Semántica (Causal-Determinist)
+
+<div align="center">
+
+[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+
+</div>
+
+> **Régimen Causal-Determinist**
+> Este documento establece las reglas mecánicas para estructurar nombres, tipologías y semánticas de código y datos con el objetivo técnico de **minimizar el consumo de tokens (BPE), reducir fallos de caché/atención en LLMs y maximizar la velocidad de compilación y verificación estática ($O(1)$ / $O(\log N)$)**.
+
+---
+
+## 1. Estructura de Nombrado (Alineación con Tokenizadores BPE y AST)
+
+El objetivo físico del nombrado no es la estética literaria, sino la **compresión algorítmica** y el **enrutamiento rápido de punteros en AST / caché de atención**.
+
+### 1.1 Minimización de Fragmentación de Tokens (BPE Alignment)
+Los tokenizadores (como `[OBSOLETO: cl100k_base]` o los de Llama/Mamba) fragmentan identificadores largos en múltiples tokens sin significado independiente, diluyendo el peso de atención del modelo.
+
+- **Regla**: Preferir `[OBSOLETO: snake_case]` con primitivas semánticas consolidadas en lugar de `[OBSOLETO: camelCase]` excesivamente verboso.
+  - ❌ *Entrópico (6 tokens)*: `[OBSOLETO: calculateTotalRevenueFromUserTransactions]`
+  - ✅ *Exergético (3 tokens)*: `[OBSOLETO: calc_user_revenue_usd]`
+- **Regla**: Mantener los identificadores por debajo de **24 caracteres** para encajar en registros de caché cortos y líneas de inspección sin saltos visuales en buffers del IDE.
+
+### 1.2 Prefijado por Dominio de Aislamiento (Namespace Indexing)
+Permite la búsqueda e indexación en $O(1)$ sin necesidad de construir el grafo completo de dependencias.
+
+| Prefijo | Dominio de Memoria/AST | Ejemplo |
+| :--- | :--- | :--- |
+| `[OBSOLETO: core_]` | Primitivas puras (sin I/O, sin estado global) | `[OBSOLETO: core_matrix_mul]` |
+| `io_` | Operaciones de disco, red o transductores de hardware | `[OBSOLETO: io_read_wal_chunk]` |
+| `mut_` | Funciones impuras que modifican estado o referencias | `[OBSOLETO: mut_append_ledger]` |
+| `cfg_` | Estructuras inmutables de configuración o constantes | `[OBSOLETO: cfg_max_timeout_ms]` |
+| `test_` | Aserciones empíricas y falsación unitaria | `[OBSOLETO: test_ssm_invariants]` |
+
+---
+
+## 2. Ontología (Topología del Grafo de Conocimiento y Tipos)
+
+Una ontología eficiente elimina dependencias implícitas, herencia profunda y bucles circulares, imponiendo una topología de **Grafo Acíclico Dirigido (DAG)** o **Conjunto Parcialmente Ordenado (Poset)**.
+
+### 2.1 Tipado Estructural Estricto (No-Any, Strict Schemas)
+- **Regla**: Toda entidad debe tener un contrato explícito de **Entrada**, **Salida** y **Modo de Fallo**. Queda prohibido el uso de tipos genéricos (`Any`, `[OBSOLETO: object]`, `dict` sin tipar) que obligan al runtime o al LLM a inferir campos dinámicamente en tiempo de ejecución.
+- **Implementación (Python)**: Uso exclusivo de `[OBSOLETO: dataclasses]`, `Pydantic v2` (con validación en Rust) o `[OBSOLETO: TypedDict]` estrictos, validados en CI por `mypy --strict`.
+
+### 2.2 Indexación por Hash (Content-Addressable Storage)
+- **Regla**: Las referencias entre nodos del sistema o artefactos no deben depender de rutas relativas frágiles (`[ANTIPATRÓN: ../../data/info.json]`) ni de descripciones textuales vagas ("el script de cálculo").
+- **Mecanismo**: Referenciar siempre por **Hash SHA256 / Git Commit ID** o por **Nombre Cualificado Absoluto (`pkg.module.Symbol`)**. Esto garantiza que la validación de integridad sea matemática y determinista.
+
+---
+
+## 3. Semántica (Gramática Causal y Determinismo)
+
+La semántica define cómo las operaciones alteran el estado del sistema. Para maximizar la exergía, debe ser inequívoca, local y verificable.
+
+### 3.1 Gramática Imperativa y Causal en Contratos
+- **Regla**: Los comentarios de documentación (`[OBSOLETO: docstrings]`) y contratos de sistema deben eliminar la prosa pasiva o descriptiva. Deben redactarse en formato de **Transición de Estado (`Precondición -> Operación -> Postcondición`)**.
+  - ❌ *Pasiva*: "Esta función revisa si el usuario tiene saldo y luego actualiza la base de datos."
+  - ✅ *Causal*: `Pre: user_id en DB -> Exec: tx_deduct(balance) -> Post: ledger_hash actualizado || raise InsufficientFunds`
+
+### 3.2 Isomorfismo Intención-Ejecución (Zero Deterministic)
+- **Regla**: No debe existir disparidad entre el nombre de un símbolo y su efecto termodinámico en el hardware. Si una función se llama `get_user()`, es **estrictamente de solo lectura (`pure/idempotent`)**. Si realiza llamadas a red o escrituras en caché, debe llamarse `io_fetch_user_cached()`.
+
+### 3.3 Falsabilidad Inmediata (Fail-Fast Boundary)
+- **Regla**: Toda violación de precondición semántica debe provocar el colapso inmediato de la ejecución (`raise ValueError`, `assert`, o `exit(1)`).
+
+> [!CAUTION]
+> Queda prohibido enmascarar errores con valores por defecto silenciosos (`return None`, `return ""` o bloques `try/except: pass`), ya que propagan datos corruptos consumiendo ciclos de cómputo inútiles aguas abajo (violación directa de la Ausencia de Anergía).

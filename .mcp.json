@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "babylon60-kernel": {
+      "command": "python3",
+      "args": [
+        "scripts/c5_cli/launch_kernel_mcp.py"
+      ]
+    }
+  }
+}

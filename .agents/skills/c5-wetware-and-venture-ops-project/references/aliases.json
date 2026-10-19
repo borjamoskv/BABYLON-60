@@ -1,0 +1,19 @@
+{
+  "scope": "workspace",
+  "canonical_alias": "wetware-hub",
+  "modules": [
+    {
+      "name": "adaptive-cron",
+      "canonical_alias": "wetware-adaptive-cron",
+      "aliases": [
+        "wetware-adaptive-cron",
+        "adaptive-cron",
+        "/adaptive-cron",
+        "límite de disipación crítica",
+        "burnout cognitivo",
+        "cron adaptativo"
+      ],
+      "module": "references/modules/adaptive-cron/MODULE.md"
+    }
+  ]
+}

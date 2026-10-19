@@ -1,0 +1,15 @@
+{
+  "duration_ms": 137,
+  "self_authorizations": 0,
+  "timestamp_epoch": 1791030000,
+  "unauthorized_mutations": 0,
+  "vectors_tested": {
+    "expired_authorization_window": 50,
+    "precondition_digest_mismatch": 50,
+    "replayed_authorization_nonce": 50,
+    "tampered_intent_parameters": 50,
+    "unadmitted_key_self_auth": 50
+  },
+  "verdict": "PASS_PROVABLY_UNREACHABLE",
+  "workers_dispatched": 250
+}

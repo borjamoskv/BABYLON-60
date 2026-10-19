@@ -1,0 +1,24 @@
+[package]
+name = "babylon60-kernel"
+version = "4.3.0"
+edition = "2021"
+license-file = "../../../LICENSE"
+publish = false
+description = "BFT Deterministic Execution Kernel for BABYLON-60"
+repository = "https://github.com/borjamoskv/BABYLON-60"
+authors = ["Borja Moskv <borjamoskv@github.com>"]
+
+[target.'cfg(target_os = "linux")'.dependencies]
+perf-event = "0.4.7"
+
+[dev-dependencies]
+criterion = "0.5"
+notify = "8.2.0"
+
+[[bench]]
+name = "thermo_benches"
+harness = false
+[dependencies]
+ed25519-dalek = { version = "2.1.1", default-features = false }
+blake3 = { version = "1.5.5", default-features = false }
+

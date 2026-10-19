@@ -1,0 +1,18 @@
+"engine: rust":
+  - changed-files:
+      - any-glob-to-any-file:
+          - "00_ABZU_KERNEL/**/*"
+          - "crates/**/*"
+          - "**/*.rs"
+
+"engine: python":
+  - changed-files:
+      - any-glob-to-any-file: "**/*.py"
+
+"config: github":
+  - changed-files:
+      - any-glob-to-any-file: ".github/**/*"
+
+"docs: artifact":
+  - changed-files:
+      - any-glob-to-any-file: "**/*.md"

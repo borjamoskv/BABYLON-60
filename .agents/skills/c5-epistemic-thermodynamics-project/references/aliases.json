@@ -1,0 +1,104 @@
+{
+  "scope": "workspace",
+  "canonical_alias": "epistemic-hub",
+  "modules": [
+    {
+      "name": "c5-ultrathink-epistemic-audit",
+      "canonical_alias": "epistemic-audit",
+      "aliases": [
+        "epistemic-audit",
+        "c5-ultrathink-epistemic-audit",
+        "/c5-ultrathink-epistemic-audit",
+        "auditoría epistémica",
+        "postmortem mcts",
+        "desacople ontológico",
+        "auditoría ultrathink"
+      ],
+      "module": "references/modules/c5-ultrathink-epistemic-audit/MODULE.md"
+    },
+    {
+      "name": "cloud-chamber",
+      "canonical_alias": "epistemic-mdl-synthesizer",
+      "aliases": [
+        "epistemic-mdl-synthesizer",
+        "cloud-chamber",
+        "/cloud-chamber",
+        "cámara de niebla",
+        "máxima densidad topológica",
+        "colapso mdl"
+      ],
+      "module": "references/modules/cloud-chamber/MODULE.md"
+    },
+    {
+      "name": "c5-alpha-extraction-pipeline",
+      "canonical_alias": "alpha-extractor",
+      "aliases": [
+        "alpha-extractor",
+        "c5-alpha-extraction-pipeline",
+        "/c5-alpha-extraction-pipeline",
+        "extraer alfa algorítmico",
+        "alpha extraction",
+        "larsa 120 alpha"
+      ],
+      "module": "references/modules/c5-alpha-extraction-pipeline/MODULE.md"
+    },
+    {
+      "name": "biographical-thermo",
+      "canonical_alias": "epistemic-biographical-thermo",
+      "aliases": [
+        "epistemic-biographical-thermo",
+        "biographical-thermo",
+        "/biographical-thermo",
+        "biografía termodinámica",
+        "trayectoria termodinámica",
+        "análisis biográfico termodinámico"
+      ],
+      "module": "references/modules/biographical-thermo/MODULE.md"
+    },
+    {
+      "name": "symbiotic-cognitive-architecture",
+      "canonical_alias": "epistemic-symbiotic-cognition",
+      "aliases": [
+        "epistemic-symbiotic-cognition",
+        "symbiotic-cognitive-architecture",
+        "/symbiotic-cognitive-architecture",
+        "tú y yo",
+        "simbiosis cognitiva",
+        "valor ontológico agente",
+        "tensor de transducción",
+        "itera simbiótica"
+      ],
+      "module": "references/modules/symbiotic-cognitive-architecture/MODULE.md"
+    },
+    {
+      "name": "grill-me-v2",
+      "canonical_alias": "socratic-interrogator",
+      "aliases": [
+        "socratic-interrogator",
+        "grill-me-v2",
+        "/grill-me-v2",
+        "socratic audit",
+        "interrogatorio socrático"
+      ],
+      "module": "references/modules/grill-me-v2/MODULE.md"
+    },
+    {
+      "name": "wait-what",
+      "canonical_alias": "epistemic-simplifier",
+      "aliases": [
+        "epistemic-simplifier",
+        "wait-what",
+        "/wait-what",
+        "freno epistémico",
+        "explícalo simple",
+        "no entiendo nada",
+        "simplifica respuesta",
+        "fuera de aqui todo esto",
+        "fuera de aqui todo eto",
+        "quita todo esto",
+        "déjate de rollos"
+      ],
+      "module": "references/modules/wait-what/MODULE.md"
+    }
+  ]
+}

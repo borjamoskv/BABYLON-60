@@ -1,0 +1,135 @@
+name: C5-REAL Matrix Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+permissions:
+  contents: read
+
+env:
+  CARGO_INCREMENTAL: '0'
+  CARGO_PROFILE_DEV_DEBUG: '0'
+  CARGO_PROFILE_TEST_DEBUG: '0'
+
+jobs:
+  rust:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+      - uses: Swatinem/rust-cache@v2
+      - uses: arduino/setup-protoc@v3
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.12'
+      - uses: astral-sh/setup-uv@v7
+      - run: uv sync --locked --extra dev --extra gemini
+      - name: Check locked workspace
+        run: cargo check --workspace --locked
+      - name: Test workspace with isolated IPC scheduling
+        run: uv run --no-sync cargo test --workspace --locked -- --test-threads=1
+      - name: Clippy
+        run: cargo clippy --locked --all-targets -- -D warnings
+
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo install cargo-audit --version 0.22.2 --locked
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.12'
+      - uses: astral-sh/setup-uv@v7
+      - run: uv sync --locked --extra dev --extra gemini
+      - run: uv run --no-sync make check
+      - run: uv run --no-sync make test-quality
+
+  claims:
+    runs-on: macos-latest
+    timeout-minutes: 45
+    permissions:
+      contents: read
+      id-token: write
+      attestations: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - uses: arduino/setup-protoc@v3
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.12'
+      - uses: astral-sh/setup-uv@v7
+      - run: uv sync --locked --extra dev --extra gemini
+      - name: Cache Lean toolchain
+        uses: actions/cache@v4
+        with:
+          path: ~/.elan
+          key: elan-${{ runner.os }}-${{ hashFiles('proof/lean/lean-toolchain') }}
+      - name: Install Lean toolchain
+        run: |
+          mkdir -p "$HOME/.elan/toolchains"
+          if [ ! -x "$HOME/.elan/bin/elan" ]; then
+            curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -o "$RUNNER_TEMP/elan-init.sh"
+            sh "$RUNNER_TEMP/elan-init.sh" -y --default-toolchain none
+          fi
+          TOOLCHAIN="$(cat proof/lean/lean-toolchain)"
+          "$HOME/.elan/bin/elan" toolchain install "$TOOLCHAIN"
+          "$HOME/.elan/bin/elan" default "$TOOLCHAIN"
+          "$HOME/.elan/bin/lean" --version
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Verify all declared claims
+        run: uv run --no-sync python scripts/c5_quality_gates/verify_claims.py
+      - name: Package release bundle & compile evidence + CycloneDX SBOMs
+        run: |
+          bash scripts/package_release.sh "$RUNNER_TEMP/dist"
+          BUNDLE_ZIP="$(ls "$RUNNER_TEMP/dist"/babylon60-*.zip | head -n 1)"
+          uv run --no-sync python scripts/c5_quality_gates/compile_claims_manifest.py --bundle "$BUNDLE_ZIP"
+          bash scripts/verify_release.sh --bundle "$BUNDLE_ZIP"
+      - name: Attest SLSA build provenance (keyless Sigstore OIDC)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: |
+            RELEASE_MANIFEST.json
+            evidence.json
+            claims.lock
+            sbom.cargo.cdx.json
+            sbom.python.cdx.json
+      - name: Entropy gate on the macOS substrate
+        run: uv run --no-sync python scripts/c5_quality_gates/audit_entropy_3strata.py
+      - name: Swarm concurrency stress gate
+        run: uv run --no-sync python scripts/c5_quality_gates/swarm_100_stress_campaign.py
+      - name: Preserve evidence, including failures
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: claims-macos
+          path: |
+            scripts/c5_quality_gates/claims_sitrep.json
+            evidence.json
+            claims.lock
+            RELEASE_MANIFEST.json
+            sbom.cargo.cdx.json
+            sbom.python.cdx.json

@@ -1,0 +1,637 @@
+{
+  "schema_version": 1,
+  "references": [
+    {
+      "path": ".agents/rules/_archive/c5_agent_topology_invariant.md",
+      "symbol": "AGENTS_ARCHI",
+      "kind": "historical",
+      "reason": "Referencia conservada en una regla archivada; no afirma disponibilidad en el runtime activo.",
+      "evidence": "Queda strictly prohibido utilizar nomenclaturas obsoletas o mezclar nomenclaturas de otros dominios (ej. `BABYLON_SHIELD`, `CORTEX_ENGINE`, `AGENTS_ARCHI`, `Centuria`, `SAGA-1`, `LEGION`). Toda interlocución, documentación y código nuevo debe adherirse a la Nomenclatura Sexagesimal Canónica vNEXT+2 C5-REAL.",
+      "context_sha256": "343ea447624cb9a4fe29c3266cbcd70e69e8efe7b45b37efc92f1b1316825267"
+    },
+    {
+      "path": ".agents/rules/_archive/c5_agent_topology_invariant.md",
+      "symbol": "AuthorizationReceipt",
+      "kind": "historical",
+      "reason": "Referencia conservada en una regla archivada; no afirma disponibilidad en el runtime activo.",
+      "evidence": "Un `AuthorizationReceipt` produce $0..1$ efectos (0 si falla, aborta o expira; jamás 2). Todo `PrivilegedEffect` exitoso tiene exactamente 1 ancestro autorizador. La relación es una función parcial sobreyectiva en los efectos:",
+      "context_sha256": "46805c3e712da416fe9961a6402d0f07e724f9b23f9b8eeae787a70b8b79df5e"
+    },
+    {
+      "path": ".agents/rules/_archive/c5_agent_topology_invariant.md",
+      "symbol": "BABYLON_SHIELD",
+      "kind": "historical",
+      "reason": "Referencia conservada en una regla archivada; no afirma disponibilidad en el runtime activo.",
+      "evidence": "Queda strictly prohibido utilizar nomenclaturas obsoletas o mezclar nomenclaturas de otros dominios (ej. `BABYLON_SHIELD`, `CORTEX_ENGINE`, `AGENTS_ARCHI`, `Centuria`, `SAGA-1`, `LEGION`). Toda interlocución, documentación y código nuevo debe adherirse a la Nomenclatura Sexagesimal Canónica vNEXT+2 C5-REAL.",
+      "context_sha256": "343ea447624cb9a4fe29c3266cbcd70e69e8efe7b45b37efc92f1b1316825267"
+    },
+    {
+      "path": ".agents/rules/_archive/c5_agent_topology_invariant.md",
+      "symbol": "CORTEX_ENGINE",
+      "kind": "historical",
+      "reason": "Referencia conservada en una regla archivada; no afirma disponibilidad en el runtime activo.",
+      "evidence": "Queda strictly prohibido utilizar nomenclaturas obsoletas o mezclar nomenclaturas de otros dominios (ej. `BABYLON_SHIELD`, `CORTEX_ENGINE`, `AGENTS_ARCHI`, `Centuria`, `SAGA-1`, `LEGION`). Toda interlocución, documentación y código nuevo debe adherirse a la Nomenclatura Sexagesimal Canónica vNEXT+2 C5-REAL.",
+      "context_sha256": "343ea447624cb9a4fe29c3266cbcd70e69e8efe7b45b37efc92f1b1316825267"
+    },
+    {
+      "path": ".agents/rules/_archive/c5_agent_topology_invariant.md",
+      "symbol": "PrivilegedEffect",
+      "kind": "historical",
+      "reason": "Referencia conservada en una regla archivada; no afirma disponibilidad en el runtime activo.",
+      "evidence": "Un `AuthorizationReceipt` produce $0..1$ efectos (0 si falla, aborta o expira; jamás 2). Todo `PrivilegedEffect` exitoso tiene exactamente 1 ancestro autorizador. La relación es una función parcial sobreyectiva en los efectos:",
+      "context_sha256": "183f9f11267c9b708746b00f60fcf7085a752ab5933ef439a0d30a69bedd10f7"
+    },
+    {
+      "path": ".agents/rules/_archive/c5_agent_topology_invariant.md",
+      "symbol": "SourceRecords",
+      "kind": "historical",
+      "reason": "Referencia conservada en una regla archivada; no afirma disponibilidad en el runtime activo.",
+      "evidence": "* **`T1 · KISH` (`kish.engine` — Deterministic Services):** Exocórtex determinista, servidor LSP Paracortex, motor de políticas BROKER, CORTEX memory custody (`SourceRecords`, Merkle Mountain Ranges).",
+      "context_sha256": "365a19bee793e5e6b89d48b2acfe87cda28940422c0d643833cffc4ed41d7cd5"
+    },
+    {
+      "path": ".agents/rules/_archive/c5_agent_topology_invariant.md",
+      "symbol": "flutter_a11y_agent",
+      "kind": "historical",
+      "reason": "Referencia conservada en una regla archivada; no afirma disponibilidad en el runtime activo.",
+      "evidence": "* `flutter_a11y_agent`: Auditor vertical experto en accesibilidad UI.",
+      "context_sha256": "3ebec2c07cb37ce6b02499398e8bed4f2f2022f2ff06d5ba28fb236ad792f26a"
+    },
+    {
+      "path": ".agents/rules/_archive/c5_frontier_and_cultural_epistemology.md",
+      "symbol": "musutxu",
+      "kind": "historical",
+      "reason": "Referencia conservada en una regla archivada; no afirma disponibilidad en el runtime activo.",
+      "evidence": "- Ante cualquier juego de palabras, coincidencia lingüística o colisión fonética introducida por el usuario (ej. `Mušḫuššu` babilónico vs `musutxu` en euskera), el agente NO debe reaccionar con risa, complacencia o trivialidad. Debe descompilar la colisión inmediatamente transformándola en una función cibernética física que enriquezca el modelo causal (ej. \"El Beso de Apoptosis / Beso Termodinámico\"), preservando la estética formal de Ring-0.",
+      "context_sha256": "75cd6b2a7c63c9cf9c8d0a82f76b9b7d800aa48d5020b4aaebde3c8632676757"
+    },
+    {
+      "path": ".agents/rules/c5_enterprise_compliance_offer_invariant.md",
+      "symbol": "AUTH_003",
+      "kind": "document_contract",
+      "reason": "Etiqueta del contrato o estado definido en documentación; su definición normativa no acredita una implementación.",
+      "evidence": "- *Idempotencia ante Caídas:* Recuperación de estado consistente sin corrupción tras parada abrupta `SIGKILL` (`AUTH_003`, `AUTH_006`).",
+      "context_sha256": "e2c9b269bb504b91b78f23ac090ce6881c251129cb457e852dc7a6fc613fedf3"
+    },
+    {
+      "path": ".agents/rules/c5_enterprise_compliance_offer_invariant.md",
+      "symbol": "AUTH_006",
+      "kind": "document_contract",
+      "reason": "Etiqueta del contrato o estado definido en documentación; su definición normativa no acredita una implementación.",
+      "evidence": "- *Idempotencia ante Caídas:* Recuperación de estado consistente sin corrupción tras parada abrupta `SIGKILL` (`AUTH_003`, `AUTH_006`).",
+      "context_sha256": "e2c9b269bb504b91b78f23ac090ce6881c251129cb457e852dc7a6fc613fedf3"
+    },
+    {
+      "path": ".agents/rules/c5_enterprise_compliance_offer_invariant.md",
+      "symbol": "AUTH_007",
+      "kind": "document_contract",
+      "reason": "Etiqueta del contrato o estado definido en documentación; su definición normativa no acredita una implementación.",
+      "evidence": "- *Intercepción Fail-Closed:* Veto de todas las operaciones no autorizadas incluidas en los casos de prueba acordados (`AUTH_002`, `AUTH_007`), con exclusiones y configuración documentadas.",
+      "context_sha256": "67b87acab8aad6f375d8486eda9d595d1770981cac5ebdbde571e3e9598b954f"
+    },
+    {
+      "path": ".agents/rules/c5_sovereign_operator_stance.md",
+      "symbol": "coinbase",
+      "kind": "external",
+      "reason": "Término de una transacción Bitcoin; no declara un símbolo de programación local.",
+      "evidence": "*   **Activo Portador Puro (*Bearer Asset*):** La acuñación en la transacción `coinbase` genera liquidez sin pasivo correlativo, sin riesgo de contraparte y matemáticamente inviolable bajo secp256k1.",
+      "context_sha256": "ee59e03a674d968bb2867fccac4a6097bb1f2e981674c8236b63e5749151f1a8"
+    },
+    {
+      "path": ".agents/skills/c5-audiovisual-acreativo-sota-project/references/modules/audiovisual-sota/MODULE.md",
+      "symbol": "showspectrum",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": ".agents/skills/c5-audiovisual-acreativo-sota-project/references/modules/audiovisual-sota/MODULE.md#showspectrum",
+      "context_sha256": "92f1c3bb98a91010c425a9a651d815cddfa7a86b23f466868f28db73c9a974d8"
+    },
+    {
+      "path": ".agents/skills/c5-audiovisual-acreativo-sota-project/references/modules/audiovisual-sota/MODULE.md",
+      "symbol": "showwaves",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": ".agents/skills/c5-audiovisual-acreativo-sota-project/references/modules/audiovisual-sota/MODULE.md#showwaves",
+      "context_sha256": "92f1c3bb98a91010c425a9a651d815cddfa7a86b23f466868f28db73c9a974d8"
+    },
+    {
+      "path": ".agents/skills/c5-cortex-swarm-orchestrator-project/references/modules/lora-swarm-pipeline/MODULE.md",
+      "symbol": "filename_zone_chunk",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": ".agents/skills/c5-cortex-swarm-orchestrator-project/references/modules/lora-swarm-pipeline/MODULE.md#filename_zone_chunk",
+      "context_sha256": "282245065b377ed6dcf324deeeb4a9ef5d06eb353128e7a6fcbf0a9d3a9b7e50"
+    },
+    {
+      "path": ".agents/skills/c5-epistemic-thermodynamics-project/references/modules/symbiotic-cognitive-architecture/MODULE.md",
+      "symbol": "MIMETIC_ITER",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": ".agents/skills/c5-epistemic-thermodynamics-project/references/modules/symbiotic-cognitive-architecture/MODULE.md#MIMETIC_ITER",
+      "context_sha256": "bf73c89b4bff935b21713d8e9bb45a7183388b532267c7989448e46587e234fb"
+    },
+    {
+      "path": ".agents/skills/c5-ring0-babylon-kernel-project/references/modules/apple-bypass/MODULE.md",
+      "symbol": "hf_transfer",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": ".agents/skills/c5-ring0-babylon-kernel-project/references/modules/apple-bypass/MODULE.md#hf_transfer",
+      "context_sha256": "4286a3e407dcfb68a6931770d83d769419d7a87759e7ab734b103a73f5d776bd"
+    },
+    {
+      "path": ".agents/skills/c5-ring0-babylon-kernel-project/references/modules/rlhf-sentinel/MODULE.md",
+      "symbol": "ACTIVE_EPOCH_PTR",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": ".agents/skills/c5-ring0-babylon-kernel-project/references/modules/rlhf-sentinel/MODULE.md#ACTIVE_EPOCH_PTR",
+      "context_sha256": "27a76e4801b3c6da4fd68bf18d5fbb0b2b43dfcc32ec252c1735733947a9d5ad"
+    },
+    {
+      "path": ".agents/skills/c5-ring0-babylon-kernel-project/references/modules/thermo-audit/MODULE.md",
+      "symbol": "external_aad",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": ".agents/skills/c5-ring0-babylon-kernel-project/references/modules/thermo-audit/MODULE.md#external_aad",
+      "context_sha256": "06166d414b54296b64c04ba26d99f37602824e692ccc152c85ccf74971466270"
+    },
+    {
+      "path": ".agents/skills/c5-ring0-babylon-kernel-project/references/modules/thermo-audit/MODULE.md",
+      "symbol": "hf_transfer",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": ".agents/skills/c5-ring0-babylon-kernel-project/references/modules/thermo-audit/MODULE.md#hf_transfer",
+      "context_sha256": "48c589ab3092eee1712ffc6658a44fa5b7ff4da7a92f099e818709f0adcaaec0"
+    },
+    {
+      "path": ".github/copilot-instructions.md",
+      "symbol": "INV_C5_ASTRO_JSX_BRACE_COLLISION",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": ".github/copilot-instructions.md#INV_C5_ASTRO_JSX_BRACE_COLLISION",
+      "context_sha256": "96d86cea40299f55b60a301fd7988d9beeb05bfdaf23b801104402cdd2b29010"
+    },
+    {
+      "path": ".github/copilot-instructions.md",
+      "symbol": "NO_MEDIDA",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": ".github/copilot-instructions.md#NO_MEDIDA",
+      "context_sha256": "93777f7554aa35d39202697da1e09ae867d7791cd7d391443606981db14870af"
+    },
+    {
+      "path": ".github/copilot-instructions.md",
+      "symbol": "NO_VERIFICADO",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": ".github/copilot-instructions.md#NO_VERIFICADO",
+      "context_sha256": "93777f7554aa35d39202697da1e09ae867d7791cd7d391443606981db14870af"
+    },
+    {
+      "path": "02_EDIN_SWARMS/README.md",
+      "symbol": "INV_C5_KIMI_AIRGAP",
+      "kind": "document_contract",
+      "reason": "Etiqueta del contrato o estado definido en documentación; su definición normativa no acredita una implementación.",
+      "evidence": "| `clients/kimi.py` | Cliente nativo Moonshot / Kimi K3 resiliente. | `INV_C5_KIMI_AIRGAP` |",
+      "context_sha256": "df786cb37d72669072e20e0bcae6a264abf0e6444d9dc11845fd0c6128c61a26"
+    },
+    {
+      "path": "02_EDIN_SWARMS/README.md",
+      "symbol": "INV_C5_OPENROUTER_ROUTING",
+      "kind": "document_contract",
+      "reason": "Etiqueta del contrato o estado definido en documentación; su definición normativa no acredita una implementación.",
+      "evidence": "| `clients/openrouter.py` | Pasarela unificada hacia OpenRouter para modelos de frontera. | `INV_C5_OPENROUTER_ROUTING` |",
+      "context_sha256": "68c93c13c875d4e50c9858ffd1ffb3b10ee36b32dcdcb332ee35b9eaceb0bb60"
+    },
+    {
+      "path": "02_EDIN_SWARMS/README.md",
+      "symbol": "INV_C5_SCITT_RFC9942",
+      "kind": "document_contract",
+      "reason": "Etiqueta del contrato o estado definido en documentación; su definición normativa no acredita una implementación.",
+      "evidence": "| `protocols/attestation.py` | Sobres criptográficos SCITT / COSE_Sign1 para mensajería inter-agente. | `INV_C5_SCITT_RFC9942` |",
+      "context_sha256": "9e9a1a774a651c3a2bd7c0af1fd922b4f78d7e786bcc97c49f7efacd11e3414a"
+    },
+    {
+      "path": "02_EDIN_SWARMS/docs/INGENIERIA_INVERSA_SWARM_ARCHITECTURES.md",
+      "symbol": "StateGraph",
+      "kind": "external",
+      "reason": "Identificador de una API externa descrita en este documento (LangGraph, CrewAI, Agents SDK o Tauri); no se declara como símbolo local.",
+      "evidence": "LangGraph implementa un modelo de computación basado en el framework Pregel de Google para procesamiento de grafos, utilizando `StateGraph` y reducers de estado (`Annotated[list, add_messages]`).",
+      "context_sha256": "992cc724ccb9a2158a5e2340c1d0c543ef1f9c2d1afb00d17a4bddc77c5d5edd"
+    },
+    {
+      "path": "02_EDIN_SWARMS/docs/INGENIERIA_INVERSA_SWARM_ARCHITECTURES.md",
+      "symbol": "add_conditional_edges",
+      "kind": "external",
+      "reason": "Identificador de una API externa descrita en este documento (LangGraph, CrewAI, Agents SDK o Tauri); no se declara como símbolo local.",
+      "evidence": "*   **Fragilidad de Edges Condicionales:** Las decisiones de bifurcación dependen de funciones condicionales (`add_conditional_edges`) que inspeccionan cadenas de texto o nombres de herramientas. La más mínima alucinación en el formato de salida rompe la transición del grafo, requiriendo manejadores de fallback que inyectan más tokens y ruido al prompt.",
+      "context_sha256": "c50d2a9adcc708e0e8ee71bbde963ec8685cd97e35f3e42bbd75a72096164504"
+    },
+    {
+      "path": "02_EDIN_SWARMS/docs/INGENIERIA_INVERSA_SWARM_ARCHITECTURES.md",
+      "symbol": "backstory",
+      "kind": "external",
+      "reason": "Identificador de una API externa descrita en este documento (LangGraph, CrewAI, Agents SDK o Tauri); no se declara como símbolo local.",
+      "evidence": "CrewAI estructura los enjambres imitando organigramas corporativos humanos: asigna `role`, `goal` y `backstory` a cada agente, orquestados por un \"Manager Agent\" o en pipelines secuenciales.",
+      "context_sha256": "3f979bd445291f8345442eb36ef5dbc2b7d17261e315f70994663b9a8c9ea895"
+    },
+    {
+      "path": "02_EDIN_SWARMS/docs/INGENIERIA_INVERSA_SWARM_ARCHITECTURES.md",
+      "symbol": "max_turns",
+      "kind": "external",
+      "reason": "Identificador de una API externa descrita en este documento (LangGraph, CrewAI, Agents SDK o Tauri); no se declara como símbolo local.",
+      "evidence": "*   **Ausencia de Atestación de Terminación (Bucle Infinito):** El paso de control entre agentes se resuelve como una función de tool calling dentro del mismo bucle de inferencia. Si el agente A transfiere a B y B a A debido a un atractor estocástico en la inferencia, el sistema entra en un ciclo infinito de handoffs consumiendo cuota hasta el límite de recursión (`max_turns`).",
+      "context_sha256": "cbb4d4061e8ae4578d5cabe8d898dc4b6d38dd69aadd20eb9f45749208819cb2"
+    },
+    {
+      "path": "AGENTS.md",
+      "symbol": "BufferError",
+      "kind": "external",
+      "reason": "Excepción estándar de la biblioteca de Python para punteros exportados sobre mmap.",
+      "evidence": "- **Aniquilación Afín en Canales de Memoria Compartida (INV_C5_MMAP_AFFINE_ANNIHILATION):** Todo puente C-ABI sobre `mmap` (`SeqlockSwarmChannel`, `SharedManifest`) DEBE implementar liberación determinista de vistas `ctypes` (`close()`, `__exit__`) antes de cerrar descriptores `mmap`, erradicando el `BufferError` de punteros exportados en Python 3.14+.",
+      "context_sha256": "09f365cb4a1d82db9d78e98cee58cbfa9e88068b04c382b1ed0b664fdb7a1381"
+    },
+    {
+      "path": "AGENTS.md",
+      "symbol": "E0277",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": "AGENTS.md#E0277",
+      "context_sha256": "c92d18a2450aec0df1e3b483ae0a41c6d19e19df1eb633aa259f21eb0097095d"
+    },
+    {
+      "path": "AGENTS.md",
+      "symbol": "TryFrom",
+      "kind": "external",
+      "reason": "Trait estándar de conversión falible de la biblioteca core de Rust.",
+      "evidence": "4. *Morfismo de Estado:* `ReceiptStage` (`ontology.rs`) DEBE acoplarse mediante conversión exhaustiva en compilación (`From`/`TryFrom`) al estado interno del executor.",
+      "context_sha256": "586ec80112647dcd4e74b04f490c3e3812c2d01dfd87206fe976b8a1e4a15709"
+    },
+    {
+      "path": "AGENTS.md",
+      "symbol": "getpeereid",
+      "kind": "external",
+      "reason": "Llamada al sistema POSIX/Darwin para verificar credenciales de peer en sockets AF_UNIX.",
+      "evidence": "3. *Ingesta de Atestación:* Prohibidos daemons HTTP sin autenticación (`babylon-attest :6060`) o inserción de payloads crudos (`{\"raw\":body}`) en el ledger WORM; toda ingesta se confina a `AF_UNIX` con verificación `getpeereid` y firma `COSE_Sign1`.",
+      "context_sha256": "85babe6fd84b5d2c64bec06b54b9cacf336589ad606c07195cd97eaf1f959f3c"
+    },
+    {
+      "path": "AGENTS.md",
+      "symbol": "kSecAttrTokenIDSecureEnclave",
+      "kind": "external",
+      "reason": "Constante de la API de Security de Apple, externa al árbol del proyecto.",
+      "evidence": "- **Límite de Autenticación Biométrica (TouchID Invariant):** Toda mutación causal exige atestación biométrica de hardware ligada al *Secure Enclave* (`kSecAttrTokenIDSecureEnclave`). Queda estrictamente prohibido intentar eludir el *sandbox* de macOS con burocracia descriptiva o simulaciones. Si la terminal o el pipeline silencian el sensor, el nodo DEBE morir deterministamente (Fail-Stop `0xDEAD_6060`). No delegar ni reintentar síncronamente. Para invocación vía CLI (INV_C5_BIOMETRIC_CLI_ALIGNMENT), estructurar `--causal-hash <hash>` obligatoriamente.",
+      "context_sha256": "13300370869f1ba21054f0dbb4199929c8bdace467614b2163ee052c1bbdd7bd"
+    },
+    {
+      "path": "CLAUDE.md",
+      "symbol": "INV_C5_ASTRO_JSX_BRACE_COLLISION",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": "CLAUDE.md#INV_C5_ASTRO_JSX_BRACE_COLLISION",
+      "context_sha256": "96d86cea40299f55b60a301fd7988d9beeb05bfdaf23b801104402cdd2b29010"
+    },
+    {
+      "path": "CLAUDE.md",
+      "symbol": "NO_MEDIDA",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": "CLAUDE.md#NO_MEDIDA",
+      "context_sha256": "93777f7554aa35d39202697da1e09ae867d7791cd7d391443606981db14870af"
+    },
+    {
+      "path": "CLAUDE.md",
+      "symbol": "NO_VERIFICADO",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": "CLAUDE.md#NO_VERIFICADO",
+      "context_sha256": "93777f7554aa35d39202697da1e09ae867d7791cd7d391443606981db14870af"
+    },
+    {
+      "path": "auditoria_ai_act.md",
+      "symbol": "CUATRECASAS_AUDIT",
+      "kind": "literal",
+      "reason": "Valor, tecla, nombre ilustrativo o etiqueta documental; no declara una función o clase local.",
+      "evidence": "**Sistema:** `SISTEMA_HIPOTECARIO_ALFA` | **Operador:** `CUATRECASAS_AUDIT`",
+      "context_sha256": "aaa3b418325f95024b49067af7196c31d20268bee5c1ed77907b544a68f3fc75"
+    },
+    {
+      "path": "auditoria_ai_act.md",
+      "symbol": "Darwin_arm64",
+      "kind": "literal",
+      "reason": "Valor, tecla, nombre ilustrativo o etiqueta documental; no declara una función o clase local.",
+      "evidence": "| Plataforma / Modelo | `Darwin_arm64` |",
+      "context_sha256": "3cc4f428c573496d99da92bd707b1a55e83686a11fce1dbc2d0f2be82841f7e1"
+    },
+    {
+      "path": "auditoria_ai_act.md",
+      "symbol": "QUARANTINE_SEAL_07cfe8cff8971c3869086ade1a7d4dc24025ec1f0f29f46c5359ec8887508060",
+      "kind": "literal",
+      "reason": "Valor, tecla, nombre ilustrativo o etiqueta documental; no declara una función o clase local.",
+      "evidence": "- **Global Merkle Root:** `QUARANTINE_SEAL_07cfe8cff8971c3869086ade1a7d4dc24025ec1f0f29f46c5359ec8887508060`",
+      "context_sha256": "10462b5510469e533c0f6f1dee97983008346ea245aad2ee8f54cb4749205dd5"
+    },
+    {
+      "path": "auditoria_ai_act.md",
+      "symbol": "SISTEMA_HIPOTECARIO_ALFA",
+      "kind": "literal",
+      "reason": "Valor, tecla, nombre ilustrativo o etiqueta documental; no declara una función o clase local.",
+      "evidence": "**Sistema:** `SISTEMA_HIPOTECARIO_ALFA` | **Operador:** `CUATRECASAS_AUDIT`",
+      "context_sha256": "aaa3b418325f95024b49067af7196c31d20268bee5c1ed77907b544a68f3fc75"
+    },
+    {
+      "path": "auditoria_ai_act.md",
+      "symbol": "e51092cd77c2d88e57c04ae343de82ccf803238bcc343d4adcae40d32dfc6942",
+      "kind": "literal",
+      "reason": "Valor, tecla, nombre ilustrativo o etiqueta documental; no declara una función o clase local.",
+      "evidence": "- **SHA-256 del payload firmado:** `e51092cd77c2d88e57c04ae343de82ccf803238bcc343d4adcae40d32dfc6942`",
+      "context_sha256": "728d91ab0dee4fa52a7f0e7e505bc3342f9f6ea30332ac79c32d4d025eaf95d9"
+    },
+    {
+      "path": "crates/eridu-infer/AGENTS.md",
+      "symbol": "INV_C5_ARGON_GOVERNANCE",
+      "kind": "document_contract",
+      "reason": "Identificador de invariante normativa de presupuesto de tokens y anti-exploración.",
+      "evidence": "## 3. Exploration Restrictions (`INV_C5_ARGON_GOVERNANCE`)",
+      "context_sha256": "aec37956bc5c9eeae147648f16802d244477aeafdf18733695280139afaa9064"
+    },
+    {
+      "path": "crates/eridu-infer/SPEC.md",
+      "symbol": "MTLStorageModeShared",
+      "kind": "external",
+      "reason": "Constante del framework Metal de Apple para almacenamiento en memoria unificada.",
+      "evidence": "- **Alineación de Memoria Unificada (UMA):** Bloques de tensores y pools de buffers alineados estrictamente a páginas de 16 KB (Darwin ARM64) y líneas de 128 bytes, garantizando paso de punteros directos a Metal Shaders (`MTLStorageModeShared`) con factor de copia cero ($RFO = 0$).",
+      "context_sha256": "af5fe45192cd0e28016499ef3ca9bbacd5684723187b572b98d92dc7282e010f"
+    },
+    {
+      "path": "data/ontologies/cortex/tauri_v2_apex_matrix.md",
+      "symbol": "AppHandle",
+      "kind": "external",
+      "reason": "Identificador de una API externa descrita en este documento (LangGraph, CrewAI, Agents SDK o Tauri); no se declara como símbolo local.",
+      "evidence": "- **TRV2-IPC-003:** `AppHandle` clonable para emitir eventos fuera del contexto del webview.",
+      "context_sha256": "2817200cd906eef3bd04288e7a12dea4f2b30cba7556525e3291396784fa65b8"
+    },
+    {
+      "path": "data/ontologies/cortex/tauri_v2_apex_matrix.md",
+      "symbol": "Uint8Array",
+      "kind": "external",
+      "reason": "Identificador de una API externa descrita en este documento (LangGraph, CrewAI, Agents SDK o Tauri); no se declara como símbolo local.",
+      "evidence": "- **TRV2-IPC-[007-099]:** *[Matriz de mutación IPC iterativa: tipado complejo, buffers binarios `Uint8Array`, streams, canales de eventos bi-direccionales y cancelación de Promesas]*",
+      "context_sha256": "5e98fff23bb0dd1e48b8644180d57ebbff7e8c4e0e25bfd2a152726e8c49965e"
+    },
+    {
+      "path": "data/ontologies/cortex/tauri_v2_apex_matrix.md",
+      "symbol": "beforeBuildCommand",
+      "kind": "external",
+      "reason": "Identificador de una API externa descrita en este documento (LangGraph, CrewAI, Agents SDK o Tauri); no se declara como símbolo local.",
+      "evidence": "- **TRV2-BLD-804:** Inyección de Vite bundler (`beforeDevCommand`, `beforeBuildCommand`).",
+      "context_sha256": "f3001d100a55544f12a25634b82e2f04a8f5a85e79ee6f97106b519e3b9a9288"
+    },
+    {
+      "path": "data/ontologies/cortex/tauri_v2_apex_matrix.md",
+      "symbol": "beforeDevCommand",
+      "kind": "external",
+      "reason": "Identificador de una API externa descrita en este documento (LangGraph, CrewAI, Agents SDK o Tauri); no se declara como símbolo local.",
+      "evidence": "- **TRV2-BLD-804:** Inyección de Vite bundler (`beforeDevCommand`, `beforeBuildCommand`).",
+      "context_sha256": "f3001d100a55544f12a25634b82e2f04a8f5a85e79ee6f97106b519e3b9a9288"
+    },
+    {
+      "path": "data/ontologies/cortex/tauri_v2_apex_matrix.md",
+      "symbol": "codegen",
+      "kind": "external",
+      "reason": "Opción de configuración externa de Tauri v2 descrita en la matriz documental.",
+      "evidence": "- **TRV2-BLD-801:** `codegen` ACL y parseo deCapabilities en build-time.",
+      "context_sha256": "2fd1efae08a6141abed540a11c2d1d28ac90b765d0838be93f2659b909920b06"
+    },
+    {
+      "path": "data/ontologies/cortex/tauri_v2_apex_matrix.md",
+      "symbol": "on_navigation",
+      "kind": "external",
+      "reason": "Identificador de una API externa descrita en este documento (LangGraph, CrewAI, Agents SDK o Tauri); no se declara como símbolo local.",
+      "evidence": "- **TRV2-SEC-406:** Bloqueo absoluto de navegación externa (`on_navigation` hook).",
+      "context_sha256": "bcf2912f3cbd51470273157f37e978d9d066bb77d5ada700e08c22e5108ca87d"
+    },
+    {
+      "path": "data/ontologies/cortex/tauri_v2_apex_matrix.md",
+      "symbol": "on_page_load",
+      "kind": "external",
+      "reason": "Identificador de una API externa descrita en este documento (LangGraph, CrewAI, Agents SDK o Tauri); no se declara como símbolo local.",
+      "evidence": "- **TRV2-PLG-303:** `on_page_load` Inyección estricta de scripts V8 (Pre-loads).",
+      "context_sha256": "333abec1e74419e8541567e64ed270206d86f0e19b0ae2a178d86444ee64d95e"
+    },
+    {
+      "path": "docs/01_spec/spec_architecture.md",
+      "symbol": "CortexClient",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": "docs/01_spec/spec_architecture.md#CortexClient",
+      "context_sha256": "7b21c9153e894052f3be17c8ac00bd1d7a98728b0cf730d22cc312c521ca9611"
+    },
+    {
+      "path": "docs/01_spec/spec_invariants.md",
+      "symbol": "INV_C5_SEMANTIC_ENTROPY_DUAL_FIREWALL",
+      "kind": "document_contract",
+      "reason": "Etiqueta del contrato o estado definido en documentación; su definición normativa no acredita una implementación.",
+      "evidence": "### 1.6 `INV_C5_SEMANTIC_ENTROPY_DUAL_FIREWALL`: Zero-Float Dual-Firewall Invariant",
+      "context_sha256": "0c82f964aac6624eda8b8cf266aa5695873633ff13f7bf03f7adc43f6fa17446"
+    },
+    {
+      "path": "docs/01_spec/spec_semantic_entropy_dual_firewall.md",
+      "symbol": "INV_C5_SEMANTIC_ENTROPY_DUAL_FIREWALL",
+      "kind": "document_contract",
+      "reason": "Etiqueta del contrato o estado definido en documentación; su definición normativa no acredita una implementación.",
+      "evidence": "> **Invariante Causal:** `INV_C5_SEMANTIC_ENTROPY_DUAL_FIREWALL`",
+      "context_sha256": "acbd6e5d13f1280519e4077513333667d6ffcd3dfbcfec66d670724085bbc79d"
+    },
+    {
+      "path": "docs/02_ontology/babylon_ontology_v1.md",
+      "symbol": "STALE",
+      "kind": "document_contract",
+      "reason": "Etiqueta del contrato o estado definido en documentación; su definición normativa no acredita una implementación.",
+      "evidence": "- `STALE`: Invalidada por deriva de código, entorno o caducidad temporal.",
+      "context_sha256": "71bafa5aa994fb9465399f0db00b7e6e15889cbf49d5f42e384c0d4f8d3d7a3c"
+    },
+    {
+      "path": "docs/03_guides/guide_babylon60_complete.md",
+      "symbol": "Enter",
+      "kind": "literal",
+      "reason": "Valor, tecla, nombre ilustrativo o etiqueta documental; no declara una función o clase local.",
+      "evidence": "* **Fast Submit Keybinding**: Pressing **`Enter`** in the prompt textarea triggers immediate prompt execution. Pressing **`Shift + Enter`** inserts a standard newline.",
+      "context_sha256": "0256bd60613255c5ec893513cbd63ff2855239cb956eb8505bfa67f711f685d3"
+    },
+    {
+      "path": "docs/03_guides/guide_signed_authorization.md",
+      "symbol": "babylon_authorityd",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": "docs/03_guides/guide_signed_authorization.md#babylon_authorityd",
+      "context_sha256": "88b824525828e4e977f34a0c64bb0a9f47211b2fc9cb08eb0376fb46d4107650"
+    },
+    {
+      "path": "docs/04_research/sota_evolution_roadmap.md",
+      "symbol": "mcp_lsp_apply_workspace_edit",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": "docs/04_research/sota_evolution_roadmap.md#mcp_lsp_apply_workspace_edit",
+      "context_sha256": "53f7d966731d96535c31ae23caf875abaaeb8dd39b586a05b541d03109e8d0bc"
+    },
+    {
+      "path": "docs/04_research/sota_evolution_roadmap.md",
+      "symbol": "mcp_lsp_extract_fn",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": "docs/04_research/sota_evolution_roadmap.md#mcp_lsp_extract_fn",
+      "context_sha256": "53f7d966731d96535c31ae23caf875abaaeb8dd39b586a05b541d03109e8d0bc"
+    },
+    {
+      "path": "docs/04_research/sota_evolution_roadmap.md",
+      "symbol": "mcp_lsp_rename",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": "docs/04_research/sota_evolution_roadmap.md#mcp_lsp_rename",
+      "context_sha256": "53f7d966731d96535c31ae23caf875abaaeb8dd39b586a05b541d03109e8d0bc"
+    },
+    {
+      "path": "docs/04_research/sota_evolution_roadmap.md",
+      "symbol": "pylsp",
+      "kind": "external",
+      "reason": "Servidor LSP externo citado como objetivo del roadmap, no módulo implementado aquí.",
+      "evidence": "* **Descripción:** Implementar un servidor MCP que actúe como proxy hacia `rust-analyzer` (Rust) y `pylsp` (Python).",
+      "context_sha256": "b21586fc710434931b78ab07c5ad6c8dd40b037d2be767e04a051e5f34acaae7"
+    },
+    {
+      "path": "docs/06_theory/AUDIT_TAUTOLOGIA_VACIA_2026.md",
+      "symbol": "INV_C5_ENTROPY_3STRATA_GATE",
+      "kind": "document_contract",
+      "reason": "Identificador de invariante normativa del gate canónico de 3 estratos de entropía.",
+      "evidence": "* **Remediación C5-REAL:** Gate de falsación popperiana y triaje de 3 estratos de entropía (`INV_C5_ENTROPY_3STRATA_GATE`).",
+      "context_sha256": "1b08d45417126909556cb634eb95876ece52a805072443fba9bd203dc622b830"
+    },
+    {
+      "path": "docs/06_theory/CONTINUIDAD_SIN_OBEDIENCIA_TEORIA_ARQUITECTONICA.md",
+      "symbol": "CapabilityToken",
+      "kind": "proposal",
+      "reason": "Tipo del ejemplo de diseño de esta sección, cuya propuesta se distingue explícitamente del runtime actual.",
+      "evidence": "El siguiente ejemplo propone representar cada frontera mediante tipos Rust. `CommittedEffect`, `CapabilityToken` y `PostconditionWitness` son tipos del modelo ilustrativo de esta sección; no son símbolos del runtime actual ni una garantía comprobada en silicio. Su construcción describe el contrato propuesto:",
+      "context_sha256": "307de253c575032bc1ca4c950258420941f5d2f8ffd02973a4e6d1e7fb4c2686"
+    },
+    {
+      "path": "docs/06_theory/CONTINUIDAD_SIN_OBEDIENCIA_TEORIA_ARQUITECTONICA.md",
+      "symbol": "CommittedEffect",
+      "kind": "proposal",
+      "reason": "Tipo del ejemplo de diseño de esta sección, cuya propuesta se distingue explícitamente del runtime actual.",
+      "evidence": "El siguiente ejemplo propone representar cada frontera mediante tipos Rust. `CommittedEffect`, `CapabilityToken` y `PostconditionWitness` son tipos del modelo ilustrativo de esta sección; no son símbolos del runtime actual ni una garantía comprobada en silicio. Su construcción describe el contrato propuesto:",
+      "context_sha256": "307de253c575032bc1ca4c950258420941f5d2f8ffd02973a4e6d1e7fb4c2686"
+    },
+    {
+      "path": "docs/06_theory/CONTINUIDAD_SIN_OBEDIENCIA_TEORIA_ARQUITECTONICA.md",
+      "symbol": "PostconditionWitness",
+      "kind": "proposal",
+      "reason": "Tipo del ejemplo de diseño de esta sección, cuya propuesta se distingue explícitamente del runtime actual.",
+      "evidence": "El siguiente ejemplo propone representar cada frontera mediante tipos Rust. `CommittedEffect`, `CapabilityToken` y `PostconditionWitness` son tipos del modelo ilustrativo de esta sección; no son símbolos del runtime actual ni una garantía comprobada en silicio. Su construcción describe el contrato propuesto:",
+      "context_sha256": "307de253c575032bc1ca4c950258420941f5d2f8ffd02973a4e6d1e7fb4c2686"
+    },
+    {
+      "path": "docs/DOCS_GRAMMAR.md",
+      "symbol": "deserializes",
+      "kind": "literal",
+      "reason": "Palabra de vocabulario permitida o prohibida en la gramática de documentación, no símbolo de código.",
+      "evidence": "`emits`, `transitions`, `invalidates`, `seals`, `compiles`, `deserializes`.",
+      "context_sha256": "f38bcf09242f28f5d3294d0ee8ff799b74371986649d30c21cf5fcb79db239b4"
+    },
+    {
+      "path": "docs/DOCS_GRAMMAR.md",
+      "symbol": "effectively",
+      "kind": "literal",
+      "reason": "Palabra de vocabulario permitida o prohibida en la gramática de documentación, no símbolo de código.",
+      "evidence": "**Prohibited:** adverbs of degree (`effectively`, `significantly`, `seamlessly`),",
+      "context_sha256": "2700f05d040bfff2d8fe347ae10e78b741374d01503a440ad3e4a54822da621b"
+    },
+    {
+      "path": "docs/DOCS_GRAMMAR.md",
+      "symbol": "enclaves",
+      "kind": "literal",
+      "reason": "Palabra de vocabulario permitida o prohibida en la gramática de documentación, no símbolo de código.",
+      "evidence": "`maps`, `writes`, `reads`, `aborts`, `signs`, `routes`, `poisons`, `enclaves`,",
+      "context_sha256": "e455e1da93735e7f2b0f5a7bb4376222d981bb12d4879514ec9a9c253bfa450f"
+    },
+    {
+      "path": "docs/DOCS_GRAMMAR.md",
+      "symbol": "poisons",
+      "kind": "literal",
+      "reason": "Palabra de vocabulario permitida o prohibida en la gramática de documentación, no símbolo de código.",
+      "evidence": "`maps`, `writes`, `reads`, `aborts`, `signs`, `routes`, `poisons`, `enclaves`,",
+      "context_sha256": "e455e1da93735e7f2b0f5a7bb4376222d981bb12d4879514ec9a9c253bfa450f"
+    },
+    {
+      "path": "docs/DOCS_GRAMMAR.md",
+      "symbol": "routes",
+      "kind": "literal",
+      "reason": "Palabra de vocabulario permitida o prohibida en la gramática de documentación, no símbolo de código.",
+      "evidence": "`maps`, `writes`, `reads`, `aborts`, `signs`, `routes`, `poisons`, `enclaves`,",
+      "context_sha256": "e455e1da93735e7f2b0f5a7bb4376222d981bb12d4879514ec9a9c253bfa450f"
+    },
+    {
+      "path": "docs/DOCS_GRAMMAR.md",
+      "symbol": "significantly",
+      "kind": "literal",
+      "reason": "Palabra de vocabulario permitida o prohibida en la gramática de documentación, no símbolo de código.",
+      "evidence": "**Prohibited:** adverbs of degree (`effectively`, `significantly`, `seamlessly`),",
+      "context_sha256": "2700f05d040bfff2d8fe347ae10e78b741374d01503a440ad3e4a54822da621b"
+    },
+    {
+      "path": "docs/RFC_OPEN_CORE_VERIFIER_SPEC.md",
+      "symbol": "Infinity",
+      "kind": "literal",
+      "reason": "Valor, tecla, nombre ilustrativo o etiqueta documental; no declara una función o clase local.",
+      "evidence": "4. **Prohibición de Valores No Estándar:** Prohibición explícita de `NaN`, `Infinity`, o `-Infinity` (`allow_nan=False`).",
+      "context_sha256": "44d50c21dffe74e8140f3279601e1ef2f34c1488568b5be0cd1fb2d0d157fcec"
+    },
+    {
+      "path": "docs/WHITEPAPER.md",
+      "symbol": "Lemma",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": "docs/WHITEPAPER.md#Lemma",
+      "context_sha256": "5f3644858fd784af1b0bc43391534a758f1507ec299fc13a79d082894e2863a8"
+    },
+    {
+      "path": "docs/papers/interoceptive-control/manuscript/paper_draft.md",
+      "symbol": "ALLOW_HALT",
+      "kind": "document_contract",
+      "reason": "Etiqueta de estado del protocolo formal descrito en el manuscrito.",
+      "evidence": "- **O5 / O6 Invariance:** A decision to halt (`ALLOW_HALT`) is not identical to physical termination; our architecture delegates the halt to an unprivileged OS/runtime signal, avoiding reliance on LLM self-interruption.",
+      "context_sha256": "b695d5feb3a61439b759ca4724a2e7b09a6377ed0551940be226d0cea0d655fd"
+    },
+    {
+      "path": "docs/security/kernel-audit-2026-10-15.md",
+      "symbol": "MIRI_SYSROOT",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": "docs/security/kernel-audit-2026-10-15.md#MIRI_SYSROOT",
+      "context_sha256": "4346a8d14763dd9dd6b9514021aaeb67fb8a448fa0006937a99299f0f6479939"
+    },
+    {
+      "path": "docs/security/kernel-audit-2026-10-15.md",
+      "symbol": "c82af23b105fc3e646c377b1423d6bb7793f2611",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": "docs/security/kernel-audit-2026-10-15.md#c82af23b105fc3e646c377b1423d6bb7793f2611",
+      "context_sha256": "30c3a4c5ea7b20220a0c0840bcb115f6e4442df1a013d5af05c56cb6579d012d"
+    },
+    {
+      "path": "docs/security/kernel-audit-2026-10-15.md",
+      "symbol": "spsc_ownership_regressions",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": "docs/security/kernel-audit-2026-10-15.md#spsc_ownership_regressions",
+      "context_sha256": "4346a8d14763dd9dd6b9514021aaeb67fb8a448fa0006937a99299f0f6479939"
+    },
+    {
+      "path": "docs/security/kernel-audit-2026-10-15.md",
+      "symbol": "test_spsc_ring_buffer",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": "docs/security/kernel-audit-2026-10-15.md#test_spsc_ring_buffer",
+      "context_sha256": "4346a8d14763dd9dd6b9514021aaeb67fb8a448fa0006937a99299f0f6479939"
+    }
+  ]
+}

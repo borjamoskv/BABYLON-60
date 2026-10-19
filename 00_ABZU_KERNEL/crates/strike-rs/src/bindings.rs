@@ -1,0 +1,408 @@
+// ============================================================================
+// BABYLON-60 v4.0 Sovereign Hardened
+// █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+// ============================================================================
+#![allow(unsafe_op_in_unsafe_fn)]
+use pyo3::prelude::*;
+use pyo3::exceptions::PyRuntimeError;
+
+use crate::ledger::MasterLedger;
+use crate::atms::Atms;
+use crate::omega0::{Statement, Modality, Justification, JustifiedStatement};
+use crate::publisher::{Publisher, ExportFormat};
+use crate::bft_engine::{BftAsyncEngine, BftNode};
+use crate::kda_memory::KdaMemoryBuffer;
+use crate::gelabp_calc::ExergyParams;
+use std::sync::Arc;
+use tokio::sync::RwLock;
+
+use crate::hypervisor::{ZeroCopyPublisher, spawn_writer_daemon};
+
+#[pyclass(unsendable)]
+pub struct CortexKernel {
+    ledger: MasterLedger,
+    atms: Atms,
+}
+
+#[pymethods]
+impl CortexKernel {
+    #[new]
+    pub fn new(db_path: &str) -> PyResult<Self> {
+        let ledger = MasterLedger::new(db_path)
+            .map_err(|e| PyRuntimeError::new_err(format!("Ledger init failed: {}", e)))?;
+        
+        // Carga síncrona obligatoria desde disco (Rule Ω4)
+        let state = ledger.replay_to_atms_state()
+            .map_err(|e| PyRuntimeError::new_err(format!("Failed to replay Ledger state: {}", e)))?;
+
+        let mut atms = Atms::new();
+        // Reconstruct ATMS nodes from historical assertions in causal order
+        if let Ok(assertions) = ledger.get_all_assertions() {
+            for (_id, stmt_hash, just_hash, _env) in assertions {
+                if let (Ok(stmt), Ok(just)) = (ledger.get_statement(&stmt_hash), ledger.get_justification(&just_hash)) {
+                    let js = JustifiedStatement { statement: stmt, justification: just };
+                    atms.install(&js);
+                }
+            }
+        }
+        // Reconstruct nogoods and trigger contradiction propagation
+        for nogood_hash in &state.nogoods {
+            if let Ok(stmt) = ledger.get_statement(nogood_hash) {
+                let node_id = if let Some(node_id) = atms.find_node_by_datum(&stmt.content) {
+                    node_id
+                } else {
+                    let js = JustifiedStatement {
+                        statement: stmt,
+                        justification: Justification::Conjecture,
+                    };
+                    atms.install(&js)
+                };
+                atms.contradict(&[node_id]);
+            }
+        }
+        
+        Ok(Self {
+            ledger,
+            atms,
+        })
+    }
+
+    /// Inyecta conocimiento en el Kernel (Causal-Determinist SQLite WAL + ATMS)
+    pub fn assert_knowledge(&mut self, content: &str, sensor: &str, environment_id: &str) -> PyResult<String> {
+        let js = JustifiedStatement {
+            statement: Statement {
+                content: content.to_string(),
+                modality: Modality::Epistemic,
+                obligations: vec![],
+            },
+            justification: Justification::Observation {
+                timestamp: 0,
+                sensor: sensor.to_string(),
+            }
+        };
+
+        // Master Ledger (SQLite)
+        let taint = self.ledger.assert_knowledge(&js, environment_id)
+            .map_err(|e| PyRuntimeError::new_err(format!("Causal-Determinist FATAL: Ledger error: {}", e)))?;
+        
+        // ATMS Memory
+        self.atms.install(&js);
+        
+        Ok(taint)
+    }
+
+    /// Inyecta una contradicción (nogood) en el Kernel y propaga DDB en ATMS
+    pub fn contradict_knowledge(&mut self, content: &str, environment_id: &str) -> PyResult<String> {
+        let stmt = Statement {
+            content: content.to_string(),
+            modality: Modality::Epistemic,
+            obligations: vec![],
+        };
+        let js = JustifiedStatement {
+            statement: stmt.clone(),
+            justification: Justification::Conjecture,
+        };
+        // Ensure statement is recorded in Master Ledger so nogood replay can find it
+        self.ledger.assert_knowledge(&js, environment_id)
+            .map_err(|e| PyRuntimeError::new_err(format!("Causal-Determinist FATAL: Ledger error asserting knowledge for nogood: {}", e)))?;
+
+        let statement_hash = MasterLedger::hash_statement(&stmt);
+        let taint = self.ledger.assert_nogood(&statement_hash, environment_id)
+            .map_err(|e| PyRuntimeError::new_err(format!("Causal-Determinist FATAL: Ledger error asserting nogood: {}", e)))?;
+            
+        let node_id = if let Some(node_id) = self.atms.find_node_by_datum(content) {
+            node_id
+        } else {
+            self.atms.install(&js)
+        };
+        self.atms.contradict(&[node_id]);
+        
+        Ok(taint)
+    }
+
+    /// Verifica si una proposición es creída en el punto fijo ATMS actual
+    pub fn is_believed(&self, content: &str) -> PyResult<bool> {
+        if let Some(node_id) = self.atms.find_node_by_datum(content) {
+            Ok(self.atms.is_believed(node_id))
+        } else {
+            Ok(false)
+        }
+    }
+
+    /// Descarga en tiempo de ejecución la obligación de no-contradicción
+    pub fn contradiction_free(&self, content: &str) -> PyResult<bool> {
+        if let Some(node_id) = self.atms.find_node_by_datum(content) {
+            Ok(self.atms.contradiction_free(node_id))
+        } else {
+            Ok(true)
+        }
+    }
+
+    /// Exporta el subgrafo BFT como Markdown o JSON
+    pub fn publish(&self, environment_id: &str, format: &str) -> PyResult<String> {
+        let publisher = Publisher::new(&self.ledger);
+        let export_format = match format.to_lowercase().as_str() {
+            "json" => ExportFormat::Json,
+            "markdown" | "md" => ExportFormat::Markdown,
+            _ => return Err(PyRuntimeError::new_err("Unsupported format. Use 'json' or 'markdown'")),
+        };
+
+        publisher.publish(environment_id, export_format)
+            .map_err(PyRuntimeError::new_err)
+    }
+
+    /// Valida formalmente una aserción contra el kernel de Harrop Ω₀
+    pub fn verify_statement_content(&self, content: &str, modality: &str, obligations: Vec<String>) -> PyResult<bool> {
+        let mod_enum = match modality.to_lowercase().as_str() {
+            "epistemic" => Modality::Epistemic,
+            "deontic" => Modality::Deontic,
+            _ => return Err(PyRuntimeError::new_err("Modalidad inválida: use 'epistemic' o 'deontic'")),
+        };
+        let mut obs_vec = Vec::new();
+        for ob in obligations {
+            match ob.to_lowercase().as_str() {
+                "provenance" => obs_vec.push(crate::omega0::Obligation::Provenance),
+                "reproducibility" => obs_vec.push(crate::omega0::Obligation::Reproducibility),
+                "contradiction" => obs_vec.push(crate::omega0::Obligation::Contradiction),
+                "confidence" => obs_vec.push(crate::omega0::Obligation::Confidence),
+                "freshness" => obs_vec.push(crate::omega0::Obligation::Freshness),
+                "completeness" => obs_vec.push(crate::omega0::Obligation::Completeness),
+                _ => {},
+            }
+        }
+        let stmt = Statement {
+            content: content.to_string(),
+            modality: mod_enum,
+            obligations: obs_vec,
+        };
+        let js = JustifiedStatement {
+            statement: stmt,
+            justification: Justification::Observation { timestamp: 0, sensor: "native_pyo3".to_string() },
+        };
+        Ok(crate::omega0::verify(&js))
+    }
+}
+
+#[pyclass(unsendable)]
+pub struct AgencyHypervisor {
+    publisher: ZeroCopyPublisher,
+    keypair: ed25519_dalek::SigningKey,
+}
+
+#[pymethods]
+impl AgencyHypervisor {
+    #[new]
+    pub fn new(service_name: &str) -> PyResult<Self> {
+        let publisher = ZeroCopyPublisher::new(service_name)
+            .map_err(|e| PyRuntimeError::new_err(format!("Failed to init zero-copy publisher: {}", e)))?;
+        let mut csprng = rand::rngs::OsRng;
+        let keypair = ed25519_dalek::SigningKey::generate(&mut csprng);
+        Ok(Self { publisher, keypair })
+    }
+
+    pub fn publish_node(&self, sender_id: u64, view: u64, seq_num: u64, payload_hash_hex: &str) -> PyResult<()> {
+        self.publisher.publish_node(sender_id, view, seq_num, payload_hash_hex, &self.keypair)
+            .map_err(|e| PyRuntimeError::new_err(format!("Publish failed: {}", e)))
+    }
+
+
+    #[staticmethod]
+    pub fn start_writer_daemon(service_name: &str, _db_path: &str) -> PyResult<()> {
+        let stop_signal = std::sync::Arc::new(std::sync::atomic::AtomicBool::new(false));
+        spawn_writer_daemon(std::sync::Arc::new(crate::hypervisor::SwarmHypervisor::new()), service_name, stop_signal, None);
+        Ok(())
+    }
+}
+
+use crate::hypervisor::ZeroCopySubscriber;
+
+#[pyclass(unsendable)]
+pub struct BftWorkerNode {
+    task_sub: ZeroCopySubscriber,
+    result_pub: ZeroCopyPublisher,
+    keypair: ed25519_dalek::SigningKey,
+}
+
+#[pymethods]
+impl BftWorkerNode {
+    #[new]
+    pub fn new(task_topic: &str, result_topic: &str) -> PyResult<Self> {
+        let task_sub = ZeroCopySubscriber::new(task_topic)
+            .map_err(|e| PyRuntimeError::new_err(format!("Failed to init task subscriber: {}", e)))?;
+        let result_pub = ZeroCopyPublisher::new(result_topic)
+            .map_err(|e| PyRuntimeError::new_err(format!("Failed to init result publisher: {}", e)))?;
+        let mut csprng = rand::rngs::OsRng;
+        let keypair = ed25519_dalek::SigningKey::generate(&mut csprng);
+        Ok(Self { task_sub, result_pub, keypair })
+    }
+
+    pub fn poll_task(&self) -> PyResult<Option<(u64, String)>> {
+        match self.task_sub.subscriber.receive() {
+            Ok(Some(sample)) => {
+                let payload_hash_hex = hex::encode(sample.payload_hash);
+                Ok(Some((sample.seq_num, payload_hash_hex)))
+            },
+            Ok(None) => Ok(None),
+            Err(e) => Err(PyRuntimeError::new_err(format!("Receive error: {}", e))),
+        }
+    }
+
+    pub fn publish_result(&self, seq_num: u64, payload_hash_hex: &str) -> PyResult<()> {
+        self.result_pub.publish_node(2, 1, seq_num, payload_hash_hex, &self.keypair)
+            .map_err(|e| PyRuntimeError::new_err(format!("Publish failed: {}", e)))
+    }
+}
+
+use crate::bft_iceoryx2::publish_exergy_packet;
+use crate::exergy_binary_ipc::ExergyPacket;
+use std::collections::BTreeMap;
+use ciborium::Value;
+
+#[pyfunction]
+fn py_publish_exergy_packet(service_name: &str, sender: &str, recipient: &str, lamport_t: u64) -> PyResult<()> {
+    let mut payload = BTreeMap::new();
+    payload.insert("type".to_string(), Value::Text("ping".to_string()));
+    let packet = ExergyPacket {
+        sender: sender.to_string(),
+        recipient: recipient.to_string(),
+        lamport_t,
+        payload,
+    };
+    
+    publish_exergy_packet(service_name, &packet)
+        .map_err(|e| pyo3::exceptions::PyRuntimeError::new_err(e.to_string()))?;
+    Ok(())
+}
+
+#[pyfunction]
+fn py_hash_statement(content: &str, modality: &str) -> PyResult<String> {
+    let mod_enum = match modality.to_lowercase().as_str() {
+        "epistemic" => Modality::Epistemic,
+        "deontic" => Modality::Deontic,
+        _ => return Err(PyRuntimeError::new_err("Modalidad inválida: use 'epistemic' o 'deontic'")),
+    };
+    let stmt = Statement {
+        content: content.to_string(),
+        modality: mod_enum,
+        obligations: vec![],
+    };
+    Ok(crate::omega0::hash_statement(&stmt))
+}
+
+#[pyfunction]
+fn py_enforce_hume_guillotine(has_deontic_premise: bool, goal_modality: &str) -> PyResult<bool> {
+    if goal_modality.eq_ignore_ascii_case("deontic") && !has_deontic_premise {
+        return Err(PyRuntimeError::new_err("Hume's Guillotine Breach (INV_C5_HUME_GUILLOTINE): Cannot derive deontic conclusion from purely epistemic premises."));
+    }
+    Ok(true)
+}
+
+#[pymodule]
+fn strike_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+    m.add_class::<CortexKernel>()?;
+    m.add_class::<BftSwarmEngine>()?;
+    m.add_class::<AgencyHypervisor>()?;
+    m.add_class::<BftWorkerNode>()?;
+    m.add_function(wrap_pyfunction!(py_publish_exergy_packet, m)?)?;
+    m.add_function(wrap_pyfunction!(py_hash_statement, m)?)?;
+    m.add_function(wrap_pyfunction!(py_enforce_hume_guillotine, m)?)?;
+    Ok(())
+}
+
+#[pyclass]
+pub struct BftSwarmEngine {
+    engine: BftAsyncEngine,
+    memory: Arc<RwLock<KdaMemoryBuffer>>,
+}
+
+#[pymethods]
+impl BftSwarmEngine {
+    #[new]
+    pub fn new(concurrency_limit: usize, memory_capacity: usize) -> Self {
+        Self {
+            engine: BftAsyncEngine::new(concurrency_limit),
+            memory: Arc::new(RwLock::new(KdaMemoryBuffer::new(memory_capacity))),
+        }
+    }
+
+    pub fn add_node(&mut self, id: String, deps: Vec<String>, payload: String, latency_ms: u64, should_fail: bool) {
+        self.engine.add_node(BftNode {
+            id,
+            deps,
+            payload,
+            latency_ms,
+            should_fail,
+        });
+    }
+
+    pub fn run_dag(&self, g: f64, l: f64, e_base: f64, db_path: String) -> PyResult<String> {
+        let rt = tokio::runtime::Builder::new_current_thread()
+            .enable_all()
+            .build()
+            .map_err(|e| PyRuntimeError::new_err(format!("Failed to build tokio runtime: {}", e)))?;
+        
+        let params = ExergyParams { g, l, a: 1.0, b: 1.0, p: 1.0, e_base };
+
+        rt.block_on(async {
+            match self.engine.run_dag(self.memory.clone(), params, &db_path).await {
+                Ok(_) => {
+                    let mem = self.memory.read().await;
+                    Ok(format!("SUCCESS: DAG executed. Memory entries: {} crystallized in {}", mem.len(), db_path))
+                },
+                Err(e) => Err(PyRuntimeError::new_err(format!("BFT Rollback Triggered: {}", e))),
+            }
+        })
+    }
+
+    pub fn stress_test_native(&mut self, count: usize) {
+        self.engine.stress_test_native(count);
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::fs;
+
+    #[test]
+    fn test_cortex_kernel_atms_hardening_and_replay() {
+        Python::initialize();
+        let db_path = "target/test_cortex_kernel_replay.db";
+        let _ = std::fs::create_dir_all("target");
+        let _ = fs::remove_file(db_path);
+
+        {
+            let mut kernel = CortexKernel::new(db_path).expect("[Causal-Determinist] FATAL: Failed to initialize CortexKernel");
+
+            // Assert empirical knowledge (Observation -> Premise in ATMS)
+            let id1 = kernel.assert_knowledge("Water is H2O", "sensor_a", "env_master")
+                .expect("[Causal-Determinist] FATAL: assert_knowledge failed");
+            assert!(!id1.is_empty() && id1.contains('-'), "Expected UUID assertion ID");
+
+            // Verify belief in ATMS
+            assert!(kernel.is_believed("Water is H2O").expect("Failed to check belief state for Water is H2O"));
+            assert!(kernel.contradiction_free("Water is H2O").expect("Failed to check contradiction state for Water is H2O"));
+
+            // Assert contradiction (nogood) against a conjecture hypothesis
+            let taint_nogood = kernel.contradict_knowledge("Alien hypothesis X", "env_master")
+                .expect("[Causal-Determinist] FATAL: contradict_knowledge failed");
+            assert!(taint_nogood.contains(":NOGOOD:"));
+
+            // Verify DDB contradiction propagation pruned the label of the contradicted conjecture
+            assert!(kernel.is_believed("Water is H2O").expect("C5-REAL: Termodinámica forzada. Unwrap purgado."), "Uncontradicted premise must remain believed");
+            assert!(!kernel.is_believed("Alien hypothesis X").expect("C5-REAL: Termodinámica forzada. Unwrap purgado."), "Contradicted hypothesis label must be pruned");
+            assert!(!kernel.contradiction_free("Alien hypothesis X").expect("C5-REAL: Termodinámica forzada. Unwrap purgado."));
+        }
+
+        // Reopen new kernel instance from same disk DB and verify exact state replay
+        {
+            let kernel_replayed = CortexKernel::new(db_path).expect("[Causal-Determinist] FATAL: Failed to reopen CortexKernel");
+            assert!(kernel_replayed.is_believed("Water is H2O").expect("C5-REAL: Termodinámica forzada. Unwrap purgado."), "Replayed uncontradicted premise must be believed");
+            assert!(kernel_replayed.contradiction_free("Water is H2O").expect("C5-REAL: Termodinámica forzada. Unwrap purgado."));
+            assert!(!kernel_replayed.is_believed("Alien hypothesis X").expect("C5-REAL: Termodinámica forzada. Unwrap purgado."), "Replayed contradicted hypothesis must remain pruned");
+            assert!(!kernel_replayed.contradiction_free("Alien hypothesis X").expect("C5-REAL: Termodinámica forzada. Unwrap purgado."), "Replayed ATMS must preserve nogood state");
+        }
+
+        let _ = fs::remove_file(db_path);
+    }
+}

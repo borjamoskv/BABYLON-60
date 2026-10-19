@@ -1,0 +1,177 @@
+{
+  "engine": "SHARUR-3600 (Sexagesimal Swarm Ring-2)",
+  "mission": "Workstation Host Topology Triage (MacBook Pro M3 Pro)",
+  "working_set": 100,
+  "latency_ms": 0.39,
+  "rfo_overhead": 0,
+  "aggregate_metrics": {
+    "avg_exergy": 19457.8,
+    "cambio_1_anergia": 40,
+    "cambio_2_exergia": 50,
+    "falsaciones_popperianas": 10
+  },
+  "cohort_breakdown": {
+    "1": {
+      "name": "Cohorte 1 (Ring-0 / Silicio & Filesystem APFS \u00b7 000\u2013019)",
+      "count": 20,
+      "avg_exergy": 19458.4,
+      "cambio_1": 8,
+      "cambio_2": 10,
+      "falsaciones": 2
+    },
+    "2": {
+      "name": "Cohorte 2 (L\u00f3gica Formal & \u00c1rbol de Repositorios \u00b7 020\u2013039)",
+      "count": 20,
+      "avg_exergy": 19458.4,
+      "cambio_1": 8,
+      "cambio_2": 10,
+      "falsaciones": 2
+    },
+    "3": {
+      "name": "Cohorte 3 (Soberan\u00eda Ling\u00fc\u00edstica & Fricci\u00f3n de Entrop\u00eda \u00b7 040\u2013059)",
+      "count": 20,
+      "avg_exergy": 19455.8,
+      "cambio_1": 8,
+      "cambio_2": 10,
+      "falsaciones": 2
+    },
+    "4": {
+      "name": "Cohorte 4 (Topolog\u00eda MASS & Workspaces de Agentes \u00b7 060\u2013079)",
+      "count": 20,
+      "avg_exergy": 19458.4,
+      "cambio_1": 8,
+      "cambio_2": 10,
+      "falsaciones": 2
+    },
+    "5": {
+      "name": "Cohorte 5 (Per\u00edmetros, Cuarentena & Apoptosis MUSHUSHU-0 \u00b7 080\u2013099)",
+      "count": 20,
+      "avg_exergy": 19458.4,
+      "cambio_1": 8,
+      "cambio_2": 10,
+      "falsaciones": 2
+    }
+  },
+  "findings_sample": [
+    {
+      "agent_id": "SHARUR_000",
+      "cohort_id": 1,
+      "cohort_name": "Cohorte 1 (Ring-0 / Silicio & Filesystem APFS \u00b7 000\u2013019)",
+      "subsystem_target": "APFS Data Volume Saturation (95% / 22 GiB Free) [APFS /dev/disk3s5]",
+      "observation": "El volumen de datos tiene 417 GiB ocupados de 460 GiB. La falta de margen (<10%) estrangula la memoria virtual din\u00e1mica y el wear-leveling del SSD.",
+      "thermodynamic_verdict": "FALSACION_POPPERIANA",
+      "exergy_score": 20450.0,
+      "kolmogorov_ratio": 0.395,
+      "shannon_entropy": 4.92,
+      "remediation_action": "Liberaci\u00f3n quir\u00fargica de al menos 40 GiB para restaurar el suelo de exerg\u00eda del kernel."
+    },
+    {
+      "agent_id": "SHARUR_001",
+      "cohort_id": 1,
+      "cohort_name": "Cohorte 1 (Ring-0 / Silicio & Filesystem APFS \u00b7 000\u2013019)",
+      "subsystem_target": "Swap / VM Partition Overhead [/System/Volumes/VM]",
+      "observation": "La partici\u00f3n de VM reporta 28 KiB estables bajo swap nominal. Sin thrashing inmediato pero en riesgo si el disco baja de 15 GiB.",
+      "thermodynamic_verdict": "CAMBIO_2_EXERGIA",
+      "exergy_score": 19617.3,
+      "kolmogorov_ratio": 0.448,
+      "shannon_entropy": 4.83,
+      "remediation_action": "Monitorear margen de presi\u00f3n de p\u00e1gina."
+    },
+    {
+      "agent_id": "SHARUR_002",
+      "cohort_id": 1,
+      "cohort_name": "Cohorte 1 (Ring-0 / Silicio & Filesystem APFS \u00b7 000\u2013019)",
+      "subsystem_target": "Symlinks Can\u00f3nicos de BABYLON-60 y CORTEX [~/{BABYLON-60*, DIARIO, KINUNU}]",
+      "observation": "7 enlaces simb\u00f3licos de primer orden en la ra\u00edz de home apuntan correctamente a 10_PROJECTS y .gemini.",
+      "thermodynamic_verdict": "CAMBIO_2_EXERGIA",
+      "exergy_score": 20217.3,
+      "kolmogorov_ratio": 0.384,
+      "shannon_entropy": 4.92,
+      "remediation_action": "Blindar punteros can\u00f3nicos. Prohibir eliminaci\u00f3n accidental de enlaces."
+    },
+    {
+      "agent_id": "SHARUR_003",
+      "cohort_id": 1,
+      "cohort_name": "Cohorte 1 (Ring-0 / Silicio & Filesystem APFS \u00b7 000\u2013019)",
+      "subsystem_target": "Scripts Ef\u00edmeros en ~/: render_insta*.py [~/render_insta*.py]",
+      "observation": "Scripts de renderizado de Reels de Instagram en la ra\u00edz sin anclaje a un repositorio.",
+      "thermodynamic_verdict": "CAMBIO_1_ANERGIA",
+      "exergy_score": 18400.0,
+      "kolmogorov_ratio": 0.485,
+      "shannon_entropy": 4.62,
+      "remediation_action": "Reubicar en 10_PROJECTS o 60_SCRIPTS."
+    },
+    {
+      "agent_id": "SHARUR_004",
+      "cohort_id": 1,
+      "cohort_name": "Cohorte 1 (Ring-0 / Silicio & Filesystem APFS \u00b7 000\u2013019)",
+      "subsystem_target": "Nata Pesada en scratch (~/.gemini/.../scratch) [~/.../scratch (1.9 GiB)]",
+      "observation": "Decenas de videos mp4/webm de pruebas, frames desglosados (frame_01 a 19), transcripciones vtt de YouTube duplicadas.",
+      "thermodynamic_verdict": "CAMBIO_1_ANERGIA",
+      "exergy_score": 18882.7,
+      "kolmogorov_ratio": 0.46,
+      "shannon_entropy": 4.68,
+      "remediation_action": "Purga selectiva de frames JPEG y mp4 intermedios ya procesados (~1.5 GiB recuperables)."
+    },
+    {
+      "agent_id": "SHARUR_005",
+      "cohort_id": 1,
+      "cohort_name": "Cohorte 1 (Ring-0 / Silicio & Filesystem APFS \u00b7 000\u2013019)",
+      "subsystem_target": "Cach\u00e9 de Aplicaciones y Navegadores (1.0 GiB) [~/Library/Caches]",
+      "observation": "Cach\u00e9s de compilaci\u00f3n, Chromium y devtools ocupando 1 GiB.",
+      "thermodynamic_verdict": "CAMBIO_2_EXERGIA",
+      "exergy_score": 19282.7,
+      "kolmogorov_ratio": 0.454,
+      "shannon_entropy": 4.76,
+      "remediation_action": "macOS y navegadores gestionan su propio ciclo de vida. No forzar purgas destructivas."
+    },
+    {
+      "agent_id": "SHARUR_006",
+      "cohort_id": 1,
+      "cohort_name": "Cohorte 1 (Ring-0 / Silicio & Filesystem APFS \u00b7 000\u2013019)",
+      "subsystem_target": "Invariante de Atestaci\u00f3n de Ring-0 (Gate Touch ID) [c5-session-deskimming]",
+      "observation": "Prohibici\u00f3n absoluta de ejecutar comandos 'rm' o 'mv' en lote de forma aut\u00f3noma sin atestaci\u00f3n del Operador Ra\u00edz.",
+      "thermodynamic_verdict": "CAMBIO_2_EXERGIA",
+      "exergy_score": 20900.0,
+      "kolmogorov_ratio": 0.364,
+      "shannon_entropy": 4.96,
+      "remediation_action": "Emitir script de remediaci\u00f3n en bloque cercado y esperar orden imperativa."
+    },
+    {
+      "agent_id": "SHARUR_007",
+      "cohort_id": 1,
+      "cohort_name": "Cohorte 1 (Ring-0 / Silicio & Filesystem APFS \u00b7 000\u2013019)",
+      "subsystem_target": "APFS Sealed System Volume (SSV) Integrity [APFS /dev/disk3s1s1]",
+      "observation": "El volumen ra\u00edz del sistema opera sellado criptogr\u00e1ficamente (12 GiB). Cero alteraci\u00f3n requerida ni posible.",
+      "thermodynamic_verdict": "CAMBIO_2_EXERGIA",
+      "exergy_score": 20117.3,
+      "kolmogorov_ratio": 0.411,
+      "shannon_entropy": 4.89,
+      "remediation_action": "Preservar intacto el sellado APFS del SO."
+    },
+    {
+      "agent_id": "SHARUR_008",
+      "cohort_id": 1,
+      "cohort_name": "Cohorte 1 (Ring-0 / Silicio & Filesystem APFS \u00b7 000\u2013019)",
+      "subsystem_target": "Preservaci\u00f3n Soberana de ~/Music (162 GiB) [~/Music/LIBRARY]",
+      "observation": "Ocupa el 39% del disco. Contiene librer\u00edas de sonido, stems, DAWs y proyectos de audio. Veto absoluto a borrado o reorganizaci\u00f3n ciega.",
+      "thermodynamic_verdict": "CAMBIO_2_EXERGIA",
+      "exergy_score": 20817.3,
+      "kolmogorov_ratio": 0.358,
+      "shannon_entropy": 4.98,
+      "remediation_action": "Mantener bajo preservaci\u00f3n ac\u00fastica inmutable (Gate Ac\u00fastico C5)."
+    },
+    {
+      "agent_id": "SHARUR_009",
+      "cohort_id": 1,
+      "cohort_name": "Cohorte 1 (Ring-0 / Silicio & Filesystem APFS \u00b7 000\u2013019)",
+      "subsystem_target": "20_VAULT Cifrado y Documentaci\u00f3n (11 GiB) [~/20_VAULT]",
+      "observation": "22 subcarpetas de investigaci\u00f3n, papers, notas y b\u00f3vedas personales.",
+      "thermodynamic_verdict": "CAMBIO_2_EXERGIA",
+      "exergy_score": 19900.0,
+      "kolmogorov_ratio": 0.406,
+      "shannon_entropy": 4.88,
+      "remediation_action": "No tocar. Almacenamiento durable de alta densidad."
+    }
+  ]
+}

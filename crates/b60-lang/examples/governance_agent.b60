@@ -1,0 +1,34 @@
+// ============================================================================
+// EJEMPLO: governance_agent.b60
+// AGENTE AUTÓNOMO DE ALTA EXERGÍA (C5-REAL / EU AI ACT ART. 14)
+// ============================================================================
+
+// 1. Empaquetar timestamp inicial sexagesimal: 0s + 20/60 (1/3 s) en R0
+SEXA_PACK 0 20
+
+// 2. Guardar en pila
+PUSH 0
+
+// 3. Empaquetar delta sexagesimal: 0s + 40/60 (2/3 s) en R0
+SEXA_PACK 0 40
+
+// 4. Recuperar de la pila en R1
+LOAD_REG 1
+
+// 5. Suma sexagesimal exacta: 20/60 + 40/60 = 60/60 = EXACTAMENTE 1.0s, 0 frac
+SEXA_ADD
+
+// 6. Auditoría de Kolmogorov de la propuesta (L=120, delta=20 -> ratio=6 <= 60: VÁLIDO)
+KOLMOGOROV_AUDIT 120 20
+
+// 7. Firma en Secure Enclave (TouchID)
+TOUCHID_SIGN
+
+// 8. Registro de contabilidad de Landauer
+LANDAUER_RECORD
+
+// 9. Inmortalización en Ledger WORM inmutable
+WORM_COMMIT
+
+// 10. Convergencia en el Punto Fijo Omega
+OMEGA_FIXED_POINT

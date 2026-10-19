@@ -1,0 +1,107 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
+# [Causal-Determinist] Exergy-Maximized — verificación de remediación shadow_router
+import asyncio
+import json
+
+from typing import TypedDict, cast
+
+import pytest
+
+from babylon60.core.crypto_utils import Ed25519Signer
+
+
+class SignatureDict(TypedDict):
+    algorithm: str
+    key_id: str
+    public_key: str
+    value: str
+
+
+class DecisionPayload(TypedDict, total=False):
+    request_commitment: str
+    response_commitment: str
+    policy_hash: str
+    candidate_set_hash: str
+    mode: str
+    provider_receipt_hash: str | None
+    shadow_eligible: bool
+
+
+class RouteReceipt(TypedDict, total=False):
+    schema: str
+    receipt_id: str
+    issued_at: str
+    payload: DecisionPayload
+    payload_hash: str
+    signature: SignatureDict
+    decision_receipt_hash: str
+
+
+def _route(prompt: str = "Explain quantum gravity") -> tuple[RouteReceipt, RouteReceipt]:
+    from babylon60.core.shadow_router import ShadowRouter
+
+    router = ShadowRouter(Ed25519Signer())
+    res = asyncio.run(router.route_request(prompt, {"contains_pii": False}))
+    return cast(tuple[RouteReceipt, RouteReceipt], res)
+
+
+def test_init_fails_fast_without_key_material(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.delenv("CORTEX_SHADOW_HMAC_KEY", raising=False)
+    monkeypatch.delenv("CORTEX_MASTER_KEY", raising=False)
+    from babylon60.core.shadow_router import ShadowRouter
+
+    with pytest.raises(RuntimeError, match="Zero static fallback"):
+        ShadowRouter(Ed25519Signer())
+
+
+def test_commitments_are_keyed_and_deterministic(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("CORTEX_SHADOW_HMAC_KEY", "clave-operador-A")
+    d1, e1 = _route()
+    d2, e2 = _route()
+    # Determinista bajo la misma clave y prompt:
+    assert d1["payload"]["request_commitment"] == d2["payload"]["request_commitment"]
+    assert e1["payload"]["response_commitment"] == e2["payload"]["response_commitment"]
+
+    # Cambia la clave → cambia el commitment (no hay clave estática global):
+    monkeypatch.setenv("CORTEX_SHADOW_HMAC_KEY", "clave-operador-B")
+    d3, _ = _route()
+    assert d3["payload"]["request_commitment"] != d1["payload"]["request_commitment"]
+
+
+def test_hashes_commit_to_real_content(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("CORTEX_SHADOW_HMAC_KEY", "clave-operador-A")
+    d1, _ = _route()
+    d2, _ = _route()
+    # policy/candidate hashes son función del contenido, no bytes aleatorios:
+    assert d1["payload"]["policy_hash"] == d2["payload"]["policy_hash"]
+    assert d1["payload"]["candidate_set_hash"] == d2["payload"]["candidate_set_hash"]
+
+
+def test_simulation_is_declared_not_fabricated(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("CORTEX_SHADOW_HMAC_KEY", "clave-operador-A")
+    d, e = _route()
+    assert d["payload"]["mode"] == "simulation"
+    assert e["payload"]["mode"] == "simulation"
+    # No se fabrica recibo de proveedor inexistente:
+    assert e["payload"]["provider_receipt_hash"] is None
+    # issued_at real, no timestamp fósil:
+    assert d["issued_at"] != "2026-07-10T14:32:08.442Z"
+    # Serializable de extremo a extremo:
+    json.dumps([d, e])
+
+
+def test_receipts_carry_verifiable_signatures(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("CORTEX_SHADOW_HMAC_KEY", "clave-operador-A")
+    from babylon60.core.shadow_router import ShadowRouter
+
+    signer = Ed25519Signer()
+    router = ShadowRouter(signer)
+    d, e = asyncio.run(router.route_request("p", {}))
+    for receipt in (d, e):
+        sig = receipt["signature"]
+        assert sig["key_id"] == signer.key_id
+        assert "mock" not in sig["key_id"]
+        assert signer.verify(receipt["payload_hash"], sig["value"])

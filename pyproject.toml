@@ -1,0 +1,152 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+
+
+[project]
+name = "babylon60"
+version = "5.0.0"
+license = { file = "LICENSE" }
+description = "BABYLON-60 C5-REAL execution kernel: BFT ledgers, onco-transducer, exergy pipelines"
+readme = "README.md"
+authors = [{ name = "Borja Moskv (borjamoskv)" }]
+requires-python = ">=3.10"
+classifiers = [
+    "Private :: Do Not Upload",
+    "License :: Other/Proprietary License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+]
+dependencies = [
+    "blake3>=1.0.9",
+    "aiosqlite>=0.19",
+    "cbor2>=6.1.5",
+    "pydantic>=2.8.0",
+    "cryptography>=50.0.2",
+    "pynacl>=1.6.2",
+    "pyyaml>=6.0.2",
+    "z3-solver>=4.12.0",
+    "pynput>=1.7.0",
+    "httpx>=0.27.2",
+    "python-dotenv>=1.2.4",
+    "numpy>=1.24",
+]
+
+[project.urls]
+Repository = "https://github.com/borjamoskv/BABYLON-60"
+Issues = "https://github.com/borjamoskv/BABYLON-60/issues"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "ruff>=0.16.10",
+    "mypy>=1.8",
+    "networkx>=3.0",
+    "pandas>=2.0",
+    "fastapi>=0.115.0",
+    "uvicorn>=0.30.0",
+    "jinja2>=3.1.4",
+    "urllib3>=2.8.0",
+    "hypothesis>=6.100.0",
+    "z3-solver>=4.12.0",
+]
+embeddings = [
+    "numpy>=1.24",
+]
+graph = [
+    "networkx>=3.0",
+]
+onco = [
+    "numpy>=1.24",
+    "networkx>=3.0",
+    "pandas>=2.0",
+]
+telemetry = [
+    "psutil>=7.2.2",
+]
+gemini = [
+    "google-genai>=0.1.0",
+    "fastmcp>=4.1.0",
+    # Security floor for the JWT dependency pulled in by the MCP stack.
+    "pyjwt>=2.15.1",
+    "lingua-language-detector>=2.0.2",
+]
+voice = [
+    "sounddevice>=0.4.6",
+    "faster-whisper>=1.1",
+]
+voice-full = [
+    "sounddevice>=0.4.6",
+    "faster-whisper>=1.1",
+    "mlx-lm>=0.21; platform_machine=='arm64' and sys_platform=='darwin'",
+    "kokoro>=0.9",
+]
+[project.scripts]
+babylon60 = "babylon60.cli.main_dispatcher:main"
+babylon60-compliance = "babylon60.compliance_exporter.eu_ai_act:main_cli"
+babylon60-license = "babylon60.cli.license_cli:main"
+babylon60-mcp = "babylon60.mcp.cortex_mcp_server:main"
+babylon60-dashboard = "babylon60.dashboard.server:main"
+babylon60-bridge = "babylon60.cli.bridge:main"
+babylon60-onco = "babylon60.cli.onco_transducer:main"
+babylon60-attest = "babylon60.cli.llm_attest:main"
+babylon60-verify = "babylon60.verifier.cli:main"
+babylon-verify = "babylon60.verifier.cli:main"
+
+
+
+
+
+[tool.hatch.build.targets.wheel]
+packages = [
+  "01_KISH_ENGINE/babylon60",
+  "02_EDIN_SWARMS/agents_archi"
+]
+exclude = [
+    
+]
+
+[tool.hatch.build.targets.wheel.force-include]
+"docs/skills.json" = "babylon60/mcp/resources/skills.json"
+".agents/skills" = "babylon60/mcp/resources/skills"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-x --tb=short"
+asyncio_mode = "auto"
+pythonpath = [".", "01_KISH_ENGINE", "02_EDIN_SWARMS"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 120
+extend-exclude = [
+    "00_ABZU_KERNEL/crates/strike-rs",
+    "src",
+    "L1_sink",
+    "BABYLON-60-fixes",
+    "c5_remotion_video",
+]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]
+ignore = ["E743"]
+
+[tool.mypy]
+python_version = "3.12"
+explicit_package_bases = true
+disallow_any_generics = false
+exclude = ["^scratch/"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["tests.*"]
+disallow_untyped_defs = false
+disallow_untyped_calls = false
+disallow_untyped_decorators = false
+
+[dependency-groups]
+dev = [
+    "hypothesis>=6.163.0",
+]

@@ -1,0 +1,8 @@
+[package]
+name = "c5_compiler"
+version = "4.3.0"
+license-file = "../../../../LICENSE"
+publish = false
+edition = "2021"
+
+[dependencies]

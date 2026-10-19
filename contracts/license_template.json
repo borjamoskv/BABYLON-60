@@ -1,0 +1,15 @@
+{
+  "$schema": "https://babylon60.com/schemas/license_v1.json",
+  "license_id": "B60-SYNTHETIC-EXAMPLE",
+  "tier": "enterprise_pilot",
+  "issued_to": "SYNTHETIC_CLIENT_ENTITY",
+  "issued_at": 1700000000,
+  "expires_at": 1731542400,
+  "silicon_seal": "0000000000000000000000000000000000000000000000000000000000000000",
+  "features": [
+    "ring0_c_abi",
+    "shared_manifest_64b",
+    "eu_ai_act_scitt_receipts",
+    "touch_id_gate"
+  ]
+}

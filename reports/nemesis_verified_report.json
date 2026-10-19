@@ -1,0 +1,47 @@
+{
+  "schema": "https://babylon60.com/schemas/nemesis-report/v1.json",
+  "report_version": "1.0.0",
+  "commit": "8650fe1368ca30e0ceead4e97e3d404acb12a3dd",
+  "timestamp_iso": "2026-10-11T18:33:05.218018+00:00",
+  "platform": {
+    "os": "Darwin",
+    "arch": "arm64",
+    "filesystem": "APFS"
+  },
+  "security_domain": {
+    "backend": "tested-darwin-apfs-v1",
+    "network_fs": false,
+    "quarantine_mode": "0700",
+    "same_device_enforced": true
+  },
+  "invariants": {
+    "NEM_I1_effect_authorization": "PASS",
+    "NEM_I2_verified_commit": "PASS",
+    "NEM_I3_path_oblivion": "PASS",
+    "NEM_I4_crash_recoverability": "PASS",
+    "NEM_I5_recovery_idempotence": "PASS",
+    "NEM_I6_authority_freshness": "PASS"
+  },
+  "kernel_adversarial": {
+    "attack_vectors_tested": 19,
+    "attack_attempts_per_run": 100,
+    "unauthorized_mutations": 0,
+    "unauthorized_deletions": 0,
+    "capability_escapes": 0,
+    "unverified_commits": 0,
+    "ledger_effect_divergences": 0
+  },
+  "crash_recovery": {
+    "injection_points": [
+      "PREPARED",
+      "QUARANTINED",
+      "VERIFIED",
+      "RECOVERY_LOOP"
+    ],
+    "ambiguous_recoveries": 0,
+    "recovery_idempotence_verified": true
+  },
+  "manifest_hash": "sha256:c13b7bc4c26b65b100d7e66f199127a7f66f97dc22c3c1aa626c9b289c2c6731",
+  "merkle_evidence_root": "sha3-256:0c2de6d45d2110d79816eff80ad188ce1319766b1cccfcc360340446c5df16d8",
+  "attestation": "cose:ed25519:c13b7bc4c26b65b100d7e66f199127a7"
+}

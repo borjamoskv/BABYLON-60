@@ -1,0 +1,54 @@
+{
+  "scope": "workspace",
+  "canonical_alias": "swarm-hub",
+  "modules": [
+    {
+      "name": "lora-swarm-pipeline",
+      "canonical_alias": "swarm-lora-pipeline",
+      "aliases": [
+        "swarm-lora-pipeline",
+        "lora-swarm-pipeline",
+        "/lora-swarm-pipeline",
+        "lora swarm",
+        "enjambre lora",
+        "minería enjambre",
+        "n-zonas enjambre",
+        "dataset swarm",
+        "enjambre ShareGPT",
+        "minar datasets enjambre",
+        "swarm pipeline"
+      ],
+      "module": "references/modules/lora-swarm-pipeline/MODULE.md"
+    },
+    {
+      "name": "wizard",
+      "canonical_alias": "swarm-state-wizard",
+      "aliases": [
+        "swarm-state-wizard",
+        "wizard",
+        "/wizard",
+        "paso a paso",
+        "máquina de estados",
+        "guía secuencial",
+        "asistente de instalación"
+      ],
+      "module": "references/modules/wizard/MODULE.md"
+    },
+    {
+      "name": "writing-for-agents",
+      "canonical_alias": "swarm-m2m-writer",
+      "aliases": [
+        "swarm-m2m-writer",
+        "writing-for-agents",
+        "/writing-for-agents",
+        "redacción m2m",
+        "external llm exergy",
+        "sanitize-c5",
+        "/sanitize-c5",
+        "despersonalizar manifiesto",
+        "higienizar manifiesto"
+      ],
+      "module": "references/modules/writing-for-agents/MODULE.md"
+    }
+  ]
+}

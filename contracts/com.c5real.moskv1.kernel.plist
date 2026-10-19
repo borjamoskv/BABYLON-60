@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.c5real.moskv1.kernel</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/borjafernandezangulo/BABYLON-60/target/kernel-mcp-venv/bin/python</string>
+        <string>/Users/borjafernandezangulo/BABYLON-60/tools/babylon60_mcp.py</string>
+        <string>--transport</string>
+        <string>openapi-http</string>
+        <string>--host</string>
+        <string>127.0.0.1</string>
+        <string>--port</string>
+        <string>6061</string>
+    </array>
+    <key>WorkingDirectory</key>
+    <string>/Users/borjafernandezangulo/BABYLON-60</string>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+    <key>StandardOutPath</key>
+    <string>/Users/borjafernandezangulo/BABYLON-60/logs/moskv1_daemon.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/borjafernandezangulo/BABYLON-60/logs/moskv1_daemon_err.log</string>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PYTHONUNBUFFERED</key>
+        <string>1</string>
+        <key>BABYLON60_MCP_BEARER_TOKEN</key>
+        <string>sovereign-kernel-loopback-token-6060</string>
+    </dict>
+</dict>
+</plist>
