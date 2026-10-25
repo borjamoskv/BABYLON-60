@@ -109,7 +109,7 @@ jobs:
           bash scripts/verify_release.sh --bundle "$BUNDLE_ZIP"
       - name: Attest SLSA build provenance (keyless Sigstore OIDC)
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: actions/attest-build-provenance@v2
+        uses: actions/attest-build-provenance@v4
         with:
           subject-path: |
             RELEASE_MANIFEST.json
