@@ -1039,7 +1039,13 @@
       const logs = document.getElementById('termLogs');
       const div = document.createElement('div');
       div.className = 'log-line';
-      div.innerHTML = `<span class="log-tag">[${tag}]</span><span>${msg}</span>`;
+      const tagSpan = document.createElement('span');
+      tagSpan.className = 'log-tag';
+      tagSpan.textContent = `[${tag}]`;
+      const messageSpan = document.createElement('span');
+      messageSpan.textContent = msg;
+      div.appendChild(tagSpan);
+      div.appendChild(messageSpan);
       logs.appendChild(div);
       logs.scrollTop = logs.scrollHeight;
     }
