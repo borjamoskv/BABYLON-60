@@ -11,6 +11,6 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "postal-mime": "^3.0.0"
+    "postal-mime": "^4.0.8"
   }
 }
