@@ -4,13 +4,13 @@
   "description": "",
   "main": "worker.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --test"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "dependencies": {
-    "postal-mime": "^3.0.0"
+    "postal-mime": "^4.2.0"
   }
 }

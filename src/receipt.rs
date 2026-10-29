@@ -503,7 +503,8 @@ impl Default for P256Signer {
 impl P256Signer {
     /// Genera un nuevo firmante P-256 efímero aleatorio para pruebas locales.
     pub fn new() -> Self {
-        let signing_key = p256::ecdsa::SigningKey::random(&mut rand::rngs::OsRng);
+        use p256::elliptic_curve::Generate;
+        let signing_key = p256::ecdsa::SigningKey::generate();
         let verifying_key = *signing_key.verifying_key();
         Self { signing_key, verifying_key }
     }

@@ -12,10 +12,12 @@ updates:
         patterns:
           - "tonic*"
           - "prost*"
+          - "tokio*"
       crypto-stack:
         patterns:
           - "rand*"
           - "ed25519-dalek*"
+          - "p256"
   - package-ecosystem: "uv"
     directory: "/"
     schedule:

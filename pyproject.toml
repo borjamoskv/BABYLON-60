@@ -11,7 +11,7 @@ license = { file = "LICENSE" }
 description = "BABYLON-60 C5-REAL execution kernel: BFT ledgers, onco-transducer, exergy pipelines"
 readme = "README.md"
 authors = [{ name = "Borja Moskv (borjamoskv)" }]
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 classifiers = [
     "Private :: Do Not Upload",
     "License :: Other/Proprietary License",
@@ -68,7 +68,7 @@ telemetry = [
 ]
 gemini = [
     "google-genai>=0.1.0",
-    "fastmcp>=4.1.0",
+    "fastmcp>=4.1.4",
     # Security floor for the JWT dependency pulled in by the MCP stack.
     "pyjwt>=2.15.1",
     "lingua-language-detector>=2.0.2",
@@ -149,4 +149,15 @@ disallow_untyped_decorators = false
 [dependency-groups]
 dev = [
     "hypothesis>=6.163.0",
+]
+
+# Security floors for dependencies supplied by optional integrations.
+[tool.uv]
+constraint-dependencies = [
+    "authlib>=1.9.1",
+    "certifi>=2026.10.23",
+    "dnspython>=2.9.1",
+    "filelock>=4.2.1",
+    "opentelemetry-api>=1.45.2",
+    "setuptools>=84.1.0",
 ]

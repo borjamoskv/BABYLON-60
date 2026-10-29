@@ -43,8 +43,8 @@ fn parse_public_key(bytes: &[u8]) -> Result<VerifyingKey, String> {
 }
 
 fn same_public_key(expected: &[u8], actual: &VerifyingKey) -> Result<bool, String> {
-    let expected = parse_public_key(expected)?.to_encoded_point(false);
-    let actual = actual.to_encoded_point(false);
+    let expected = parse_public_key(expected)?.to_sec1_point(false);
+    let actual = actual.to_sec1_point(false);
     Ok(constant_time_eq_slices(expected.as_bytes(), actual.as_bytes()))
 }
 
@@ -296,7 +296,7 @@ impl Signer for AppleSecureEnclave {
     fn get_public_key(&self) -> Vec<u8> {
         match self.public_key_bytes.read() {
             Ok(lock) => lock.as_ref().and_then(|bytes| parse_public_key(bytes).ok())
-                .map(|key| key.to_encoded_point(false).as_bytes().to_vec()).unwrap_or_default(),
+                .map(|key| key.to_sec1_point(false).as_bytes().to_vec()).unwrap_or_default(),
             Err(_) => Vec::new(),
         }
     }
@@ -359,7 +359,7 @@ mod tests {
     use super::*;
     use p256::ecdsa::SigningKey;
     use p256::pkcs8::EncodePublicKey;
-    use rand::rngs::OsRng;
+    use p256::elliptic_curve::Generate;
     use p256::ecdsa::signature::Signer as P256Signer;
 
     #[test]
@@ -376,12 +376,12 @@ mod tests {
     #[test]
     fn test_enclave_cryptographic_verification_p256() {
         // Generar un par de claves P-256 genuino para verificar la lógica de firma/verificación
-        let signing_key = SigningKey::random(&mut OsRng);
+        let signing_key = SigningKey::generate();
         let verifying_key = signing_key.verifying_key();
         let pubkey_der = verifying_key.to_public_key_der().unwrap().as_bytes().to_vec();
 
         let enclave = AppleSecureEnclave::new().with_public_key_der(pubkey_der.clone());
-        assert_eq!(enclave.get_public_key(), verifying_key.to_encoded_point(false).as_bytes());
+        assert_eq!(enclave.get_public_key(), verifying_key.to_sec1_point(false).as_bytes());
 
         let payload = b"ATTESTATION_CRITICAL_TRANSACTION";
         // Sign the original message bytes.
@@ -444,7 +444,7 @@ mod tests {
             }
         }
 
-        let signing_key = SigningKey::random(&mut OsRng);
+        let signing_key = SigningKey::generate();
         let verifying_key = signing_key.verifying_key();
         let pubkey_der = verifying_key.to_public_key_der().unwrap().as_bytes().to_vec();
 
@@ -503,7 +503,7 @@ mod gate_response_tests {
         let public_key = if spki {
             key.verifying_key().to_public_key_der().unwrap().as_bytes().to_vec()
         } else {
-            key.verifying_key().to_encoded_point(false).as_bytes().to_vec()
+            key.verifying_key().to_sec1_point(false).as_bytes().to_vec()
         };
         let signature: Signature = key.sign(payload);
         serde_json::to_vec(&serde_json::json!({
@@ -522,14 +522,14 @@ mod gate_response_tests {
             let pin = if pin_spki {
                 key.verifying_key().to_public_key_der().unwrap().as_bytes().to_vec()
             } else {
-                key.verifying_key().to_encoded_point(false).as_bytes().to_vec()
+                key.verifying_key().to_sec1_point(false).as_bytes().to_vec()
             };
             for response_spki in [false, true] {
                 let enclave = enclave(Some(pin.clone()));
                 let signature = enclave.validate_gate_response(payload, &response(&key, payload, response_spki)).unwrap();
                 assert_eq!(signature.len(), 64);
                 assert!(enclave.verify(payload, &signature));
-                assert_eq!(enclave.get_public_key(), key.verifying_key().to_encoded_point(false).as_bytes());
+                assert_eq!(enclave.get_public_key(), key.verifying_key().to_sec1_point(false).as_bytes());
             }
         }
     }
@@ -570,7 +570,7 @@ mod gate_response_tests {
         let original = key(7);
         let replacement = key(8);
         let payload = b"software pin integrity";
-        let pin = original.verifying_key().to_encoded_point(false).as_bytes().to_vec();
+        let pin = original.verifying_key().to_sec1_point(false).as_bytes().to_vec();
         let pinned = enclave(Some(pin.clone()));
         assert!(pinned.validate_gate_response(payload, &response(&replacement, payload, true)).is_err());
         assert_eq!(pinned.get_public_key(), pin);
@@ -583,7 +583,7 @@ mod gate_response_tests {
     fn pin_decoding_validates_hex_and_base64_and_rejects_invalid_configuration_before_gate() {
         let key = key(7);
         for bytes in [
-            key.verifying_key().to_encoded_point(false).as_bytes().to_vec(),
+            key.verifying_key().to_sec1_point(false).as_bytes().to_vec(),
             key.verifying_key().to_public_key_der().unwrap().as_bytes().to_vec(),
         ] {
             assert_eq!(decode_pinned_public_key(&hex::encode(&bytes)).unwrap(), bytes);
@@ -606,7 +606,7 @@ mod gate_response_tests {
         let payload = b"software stress, no hardware attestation";
         let sec1 = response(&key, payload, false);
         let spki = response(&key, payload, true);
-        let enclave = enclave(Some(key.verifying_key().to_encoded_point(false).as_bytes().to_vec()));
+        let enclave = enclave(Some(key.verifying_key().to_sec1_point(false).as_bytes().to_vec()));
         for _ in 0..64 {
             enclave.validate_gate_response(payload, &sec1).unwrap();
         }
@@ -639,7 +639,7 @@ mod p1_cose_regression {
     fn apple_adapter_cose_round_trip_with_software_helper() {
         // Software-only process fixture: exercises the real adapter, not Touch ID.
         let key = SigningKey::from_bytes((&[19u8; 32]).into()).unwrap();
-        let public = key.verifying_key().to_encoded_point(false).as_bytes().to_vec();
+        let public = key.verifying_key().to_sec1_point(false).as_bytes().to_vec();
         let payload = AuthorizationPayload {
             protocol_version: PROTOCOL_VERSION, installation_id: [1; 32], executor_id: [2; 32],
             intent_digest: [3; 32], policy_digest: [4; 32], resource_precondition_digest: [5; 32],

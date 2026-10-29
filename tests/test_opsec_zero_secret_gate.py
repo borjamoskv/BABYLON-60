@@ -25,17 +25,22 @@ def test_gitleaks_config_syntax() -> None:
     assert "regexes" in data["allowlist"], "Must define allowlisted regexes"
 
 
-def test_pre_commit_hook_installed() -> None:
-    """Ensures git pre-commit hook is active, executable, and enforces gitleaks protect."""
-    hook_path = REPO_ROOT / ".git" / "hooks" / "pre-commit"
-    if not (REPO_ROOT / ".git").is_dir():
-        pytest.skip("Not a git repository directory")
-    if not hook_path.exists() and (os.environ.get("CI") or os.environ.get("GITHUB_ACTIONS")):
-        pytest.skip("CI environment clone does not provision local git hooks by default")
-    assert hook_path.exists(), ".git/hooks/pre-commit must be installed"
+def test_pre_commit_hook_installed(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    """Installs and validates the hook without relying on the developer's Git setup."""
+    from scripts.c5_git_utils import install_git_hooks
+
+    hooks_dir = tmp_path / ".git" / "hooks"
+    hooks_dir.mkdir(parents=True)
+    hook_path = hooks_dir / "pre-commit"
+    monkeypatch.setattr(install_git_hooks, "GIT_HOOKS_DIR", hooks_dir)
+    monkeypatch.setattr(install_git_hooks, "PRE_COMMIT_HOOK_PATH", hook_path)
+    install_git_hooks.install_hooks()
+
+    assert hook_path.exists(), "installer must create the pre-commit hook"
     assert os.access(str(hook_path), os.X_OK), "pre-commit hook must be executable"
     content = hook_path.read_text(encoding="utf-8")
     assert "gitleaks protect --staged" in content, "pre-commit hook must enforce gitleaks protect"
+    subprocess.run(["sh", "-n", str(hook_path)], check=True)
 
 
 @pytest.mark.skipif(not shutil.which("gitleaks"), reason="gitleaks binary not installed")
