@@ -2,6 +2,7 @@
 
 import hashlib
 import json
+import shutil
 from pathlib import Path
 
 import pytest
@@ -11,6 +12,9 @@ from scripts.c5_quality_gates import compile_claims_manifest as compiler
 
 @pytest.fixture
 def evidence_root(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
+    # Artifact emission builds SBOMs from both lockfiles in the isolated repository.
+    for filename in ("Cargo.lock", "uv.lock"):
+        shutil.copyfile(compiler.REPO_ROOT / filename, tmp_path / filename)
     monkeypatch.setattr(compiler, "REPO_ROOT", tmp_path)
     monkeypatch.setattr(compiler, "get_git_commit", lambda: "a" * 40)
     monkeypatch.setattr(compiler, "source_tree_digest", lambda root: "d" * 64)

@@ -74,7 +74,7 @@ Los tres algoritmos coexisten con funciones y formatos distintos. No son interca
 
 ## Instalación y ejecución
 
-CLI y servidor MCP de memoria por stdio; Python 3.10+, `uv` y checkout limpio:
+CLI y servidor MCP de memoria por stdio; Python 3.11+, `uv` y checkout limpio:
 
 ```bash
 git clone https://github.com/borjamoskv/BABYLON-60.git
