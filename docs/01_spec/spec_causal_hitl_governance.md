@@ -16,7 +16,10 @@
 
 ## 1. Executive Summary
 
-Traditional LLM applications rely heavily on **Level 0 Conversational Interfaces** (chatbots/Custom GPTs) that operate in open-loop cycles without persistent state mutations. The **Causal HITL Governance Protocol** elevates agentic architectures to **Operational Workers** (Levels 1–3) capable of executing autonomous plan-tool loops while guaranteeing deterministic human oversight before high-impact state mutations occur.
+This document proposes a **Causal HITL Governance Protocol** for operational
+workers. It requires operator approval for critical actions. Enforcing that
+requirement depends on the configured executor and coverage of every protected
+effect; the state model alone does not establish supervision of arbitrary agents.
 
 ---
 
@@ -26,7 +29,7 @@ Traditional LLM applications rely heavily on **Level 0 Conversational Interfaces
 | :--- | :--- | :--- | :--- |
 | **Nivel 0** | Chatbot Conversacional | Memoryless / Transient context | Open-loop, purely text-generative. |
 | **Nivel 1** | Agente No-Code Operacional | Relational Tables / Key-Value | Tool-calling with synchronous UI modals for approval. |
-| **Nivel 2** | Grafo de Estado Programático | `[OBSOLETO: StateGraph]`, VectorDBs, Memory Trees | Asynchronous interrupt hooks (`interrupt_before/after`). |
+| **Nivel 2** | Grafo de Estado Programático | `StateGraph`, VectorDBs, Memory Trees | Asynchronous interrupt hooks (`interrupt_before/after`). |
 | **Nivel 3** | Gobernanza Causal & Formal | Invariant Proofs (Lean 4), Exergy Bounds | Non-blocking state snapshotting, causal gates & C-ABI SCITT receipts. |
 
 ---
@@ -44,7 +47,10 @@ $$\text{State}_{t+1} = \begin{cases}
 \end{cases}$$
 
 ### Cryptographic Tamper-Evident SHA-256 Receipts (SCITT Profile)
-Every state decision ($\text{APPROVED}$, $\text{REJECTED}$, $\text{PAUSED}$) emits a cryptographically linked block in the `[OBSOLETO: audit_ledger]`:
+In the proposed model, every state decision ($\text{APPROVED}$,
+$\text{REJECTED}$, $\text{PAUSED}$) emits a linked block in a conceptual
+`audit_ledger`. The formula below specifies this model, not the canonical byte
+format of the implemented Python ledger:
 
 $$H_k = \text{SHA256}\Big(\text{exec\_id} \,||\, \text{action} \,||\, \text{criticality} \,||\, \text{decision} \,||\, \text{timestamp} \,||\, H_{k-1}\Big)$$
 
@@ -55,11 +61,15 @@ Where $H_0 = 0^{64}$. Any tampering or retro-active alteration of historical dec
 ## 4. Key Architectural Properties
 
 1. **Non-Blocking Suspension & Asynchronous Resume:**
-   Pausing execution does NOT hold thread execution or consume CPU cycles. The state payload is serialized to a persistent SQLite WAL snapshot buffer (`[OBSOLETO: state_snapshots]`). The execution can be resumed asynchronously from a different shell or process using `worker.resume_execution(execution_id, decision)`.
+   The design stores paused state in a persistent snapshot buffer named
+   `state_snapshots`. The proposed `worker.resume_execution(execution_id, decision)`
+   call illustrates the resume contract; this document does not establish that
+   it is a published API or that a paused worker consumes no resources.
 2. **Action Criticality Scoping:**
-   - `[OBSOLETO: READ_ONLY]`: Autonomous execution without interrupter gates.
-   - `[OBSOLETO: COMPUTE]`: Deterministic, reversible computation (previews, simulations).
-   - `[OBSOLETO: MUTATIVE_CRITICAL]`: High-impact state mutation requiring operator sign-off.
+   These are labels of the proposed model, not a declaration of runtime enum values:
+   - `READ_ONLY`: Autonomous execution without interrupter gates.
+   - `COMPUTE`: Deterministic, reversible computation (previews, simulations).
+   - `MUTATIVE_CRITICAL`: High-impact state mutation requiring operator sign-off.
 
 ---
 

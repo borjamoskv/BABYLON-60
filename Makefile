@@ -1,8 +1,14 @@
-.PHONY: all check test test-python test-rust test-quality test-sovereign lint typecheck format sovereign quality test-deps swarm-test swarm-audit swarm-batch-sign swarm-social swarm-top swarm-attestation
+.PHONY: all check docs-check test test-python test-rust test-quality test-sovereign lint typecheck format sovereign quality test-deps swarm-test swarm-audit swarm-batch-sign swarm-social swarm-top swarm-attestation
 
 all: format lint typecheck test-rust test-python test-quality test-sovereign
 
 check: lint typecheck
+
+docs-check:
+	python3 scripts/c5_quality_gates/sync_docs_index.py --check
+	python3 scripts/c5_quality_gates/audit_semantic_contracts.py --workspace-only
+	python3 scripts/c5_quality_gates/audit_token_budget.py --workspace-only --skip-ghost-listeners
+	python3 scripts/guards/verify_active_topology.py
 
 lint:
 	ruff check 01_KISH_ENGINE/babylon60 02_EDIN_SWARMS/agents_archi tests

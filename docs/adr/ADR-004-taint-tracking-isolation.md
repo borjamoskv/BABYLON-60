@@ -38,13 +38,17 @@ El paquete `packages/babylon60/guards/` implementa decoradores de taint:
 
 Si un componente detecta una violación de invariante:
 1. El estado transiciona a `KernelState.Poisoned(code)` (formalizado en `BabylonTrace.lean`).
-2. La transición es **irreversible** (demostrado formalmente: `[OBSOLETO: poison_state_is_irreversible]`).
+2. El diseño exige que la transición sea irreversible. El nombre
+   `poison_state_is_irreversible` no corresponde a un teorema localizado en los
+   módulos Lean de esta revisión; esa demostración queda `NO_VERIFICADA`.
 3. Se genera un snapshot WORM (Write Once Read Many) del estado en el momento del fallo.
 4. El pipeline de quarantine notifica vía el sistema de attestation.
 
 ## Consecuencias
 
-- **Positivas:** Defense-in-depth con tres capas independientes. El fail-stop está verificado formalmente en Lean 4. Cumplimiento de EU AI Act Art. 9.
+- **Positivas esperadas:** Defense-in-depth con tres capas. Su independencia,
+  la irreversibilidad del fail-stop y la suficiencia para un expediente del
+  EU AI Act requieren evaluación separada; este ADR no las certifica.
 - **Negativas:** El taint tracking añade overhead cognitivo para desarrolladores. La quarantine irreversible puede causar false positives en producción.
 - **Riesgo:** El taint tracking actual es a nivel de decoradores Python, no análisis estático completo (a diferencia de sistemas como TaintDroid o Jalangi). Mitigación: complementar con CodeQL taint analysis en CI.
 
@@ -52,5 +56,6 @@ Si un componente detecta una violación de invariante:
 
 - `tests/adversarial_nemesis.rs` — Suite de validación de quarantine.
 - `tests/cortex_test.rs` — Tests de seguridad de inferencia.
-- `proof/lean/BabylonTrace.lean` — Prueba formal de irreversibilidad del estado Poisoned.
+- `proof/lean/BabylonTrace.lean` — Modelo de trazas Seqlock; no es una prueba de
+  irreversibilidad de `Poisoned`.
 - EU AI Act, Artículos 9-10: Gestión de riesgos y gobernanza de datos.

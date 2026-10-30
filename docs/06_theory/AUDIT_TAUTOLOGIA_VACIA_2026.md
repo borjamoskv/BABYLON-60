@@ -20,7 +20,7 @@ La **tautología vacía** (o *alucinación categórica con atestación nula*) es
 * **Remediación C5-REAL:** Exigir `unfold <def>` e invariantes cerrados con tácticas deterministas (`omega`, `decide`) y compilación AOT (`INV_C5_LEAN_AOT_ORACLE`).
 
 ### Tipo II: Aserción Empírica Fantasma (Ghost Claims & Ghost Tests)
-* **Manifestación:** Telemetría reportada como verificada sin sustrato ejecutable (ej. afirmar `426 tests pasados` sobre árboles de tests inexistentes, como se documentó en [AUDIT_VERDICT_C5_REAL.md](file:///Users/borjafernandezangulo/BABYLON-60/docs/06_theory/AUDIT_VERDICT_C5_REAL.md#L35)).
+* **Manifestación:** Telemetría reportada como verificada sin sustrato ejecutable (ej. afirmar `426 tests pasados` sobre árboles de tests inexistentes, como se documentó en [AUDIT_VERDICT_C5_REAL.md](AUDIT_VERDICT_C5_REAL.md)).
 * **Violación Ontológica:** Rompe la Ley **B2** (`DEFINITION ≠ EVIDENCE`) y Ley **O8** (`EVIDENCE ≠ ASSERTION`).
 * **Remediación C5-REAL:** Gate de falsación popperiana y triaje de 3 estratos de entropía (`INV_C5_ENTROPY_3STRATA_GATE`).
 
@@ -35,7 +35,18 @@ La **tautología vacía** (o *alucinación categórica con atestación nula*) es
 
 ---
 
-## 3. Estado de Telemetría en Silicio (Inspección Activa)
-* **Estrato 1 (TRNG Secure Enclave):** $H(X) = 7.9975$ bits/byte ($99.969\% \ge 99.95\%$) — **PASS**.
-* **Estrato 2 (Clones de Código Jaccard):** 1001 archivos escaneados, 0 clones ($J \ge 0.75$) — **PASS**.
-* **Estrato 3 (Densidad Exergética KISH):** Exergía mínima $99.85\%$, Slop lingüístico $0.0$ — **PASS**.
+## 3. Declaraciones históricas de telemetría
+
+El documento original publicaba los tres resultados siguientes sin identificar
+muestra, revisión, configuración ni registro reproducible. Se conservan como
+declaraciones históricas **NO_VERIFICADAS**, sin el estado `PASS`:
+
+| Declaración original | Límite de la evidencia |
+| --- | --- |
+| Entropía de 7,9975 bits/byte y pureza del 99,969 % | El valor no acredita procedencia del Secure Enclave ni pureza física de un TRNG. |
+| 1.001 archivos y cero clones con umbral Jaccard de 0,75 | Faltan el inventario, la versión del escáner y su salida. |
+| Exergía mínima del 99,85 % y slop de 0,0 | Faltan definición operacional, unidades, muestra y procedimiento. |
+
+El [informe del kernel](../security/kernel-audit-2026-10-15.md) distingue el
+muestreo de `/dev/urandom` de una medición del Secure Enclave. Estos números no
+se reutilizan como mediciones actuales ni como verificación del presente documento.

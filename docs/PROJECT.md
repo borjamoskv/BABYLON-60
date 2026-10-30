@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[Claims y niveles de evidencia](../CLAIMS.toml)
 [![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
 
 </div>
@@ -19,6 +19,11 @@
   - `README.md`: Entrypoint document summarizing architecture, setup, and usage.
 
 ## Milestones 📌
+
+Registro histórico de objetivos. Los estados `DONE`, hashes y valores de la tabla
+se conservan como declaraciones del registro original; no son resultados de una
+verificación ejecutada sobre la revisión actual ni mediciones de energía.
+
 | ID | Type | Title | Description / Due | Status | Info |
 |---|---|---|---|---|---|
 | OBJ-001 | Objective | Rust Core strike_rs GIL Bypass | Migrar caminos críticos a Rust con PyO3 para concurrencia sub-milisegundo. | DONE | Exergy: 1.00 |
@@ -45,25 +50,10 @@
 - **GitHub directory** ↔ **SOTA standards**: Evaluate presence of workflows, branching rules, PR templates, and issue templates. Output to `cortex/audits/github_sota_eval.md`.
 - **README.md** ↔ **Industrial Noir 2026**: Replaced entirely with Causal-Determinist styling, ASCII dividers, and no conversational prose.
 
-## 🔬 Verificación Formal (Lean 4)
+## Evidencia formal y alcance
 
-> [!TIP]
-> **Puente Isomorfo C5-REAL**
-> Firma topológica extraída dinámicamente para demostración formal en Lean 4.
-
-```lean
-namespace Babylon60.Theory.Project
-
-/--
-  Firma formal generada dinámicamente mediante `inject_lean4_stubs.py`.
-  Dominio: C5-REAL Formal Verification
--/
-variable {X Y : Type}
-
-/-- Axioma Cánonico por Defecto -/
-axiom ax_canonical_invariant : ∀ (x : X), True
-
-theorem formal_axiomatization (x : X) : True := by
-  exact ax_canonical_invariant x
-end Babylon60.Theory.Project
-```
+Se retiró el bloque generado que concluía únicamente `True`: no expresaba ninguna
+propiedad de estos objetivos y no constituía su verificación. Las fuentes formales
+del proyecto están en [proof/lean](../proof/lean/); los comandos y límites del
+modelo se describen en el [informe del kernel](security/kernel-audit-2026-10-15.md).
+La existencia de esas fuentes no acredita por sí sola el estado de los hitos.

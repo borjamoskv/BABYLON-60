@@ -1,78 +1,116 @@
 ---
-title: Guía de Cumplimiento Normativo EU AI Act (Artículos 9, 10, 11, 12, 14)
-status: Causal-Determinist
-version: 4.0.0
+title: Evidencia técnica para evaluar requisitos del EU AI Act
+status: Technical-evidence
+version: 5.0.0
 author: borjamoskv
 ---
 
-# ⚖️ Guía de Cumplimiento Normativo: EU AI Act en BABYLON-60
+# Evidencia técnica para evaluar requisitos del EU AI Act
 
-<div align="center">
+[![EU AI Act Evidence](https://img.shields.io/badge/EU_AI_Act-Evidencia_por_evaluar-blue?style=flat-square)](../01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py)
 
-[![EU AI Act Compliant](https://img.shields.io/badge/EU_AI_Act-Art._9--14_Verified-00F0FF?style=for-the-badge&logo=shield)](../01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py)
-[![Autoridad](https://img.shields.io/badge/Supervisión-AESIA_/_BSI_/_NIST-7B1FA2?style=for-the-badge)](./04_research/eu_ai_act_compliance_whitepaper.md)
+BABYLON-60 exporta registros y resultados de verificación criptográfica para una
+evaluación del sistema integrado. **El informe no certifica conformidad jurídica,
+supervisión humana efectiva ni ausencia de fugas de datos.** El código conserva
+el nombre `certificate` para este artefacto técnico; ese nombre no acredita una
+certificación de una autoridad o un organismo de evaluación.
 
-</div>
+La finalidad, clasificación de riesgo, papel del operador y procedimiento aplicable
+determinan las obligaciones. Consulte el [marco oficial de la Comisión Europea](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai)
+y el [Reglamento (UE) 2024/1689](https://eur-lex.europa.eu/eli/reg/2024/1689/oj).
+El [whitepaper de alcance](04_research/eu_ai_act_compliance_whitepaper.md) distingue
+controles técnicos y evaluación normativa.
 
-## 📌 Resumen Ejecutivo
+## Calendario y alcance
 
-El **Reglamento Europeo de Inteligencia Artificial (EU AI Act - Reglamento UE 2024/1689)** impone requisitos legales estrictos para los sistemas de IA de alto riesgo. BABYLON-60 v4.0 proporciona una capa de infraestructura local (*Local-First*) y determinista que transforma automáticamente las trazas de ejecución de los agentes agénticos en **certificados de auditoría criptográfica** legalmente defendibles ante la Agencia Española de Supervisión de Inteligencia Artificial (AESIA), la BSI alemana y estándares NIST AI RMF.
+Tras el Ómnibus Digital sobre IA, Reglamento (UE) 2026/1744, en vigor desde el
+27 de julio de 2026, los requisitos de alto riesgo del Anexo III aplican desde el
+**2 de diciembre de 2027**. Las reglas de transparencia del artículo 50 aplican
+desde el 2 de agosto de 2026. Las fechas y excepciones se contrastan con el
+[calendario de la Comisión](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai#application-timeline),
+consultado el 30 de octubre de 2026; no sustituyen revisar la aplicabilidad al sistema.
 
-> [!IMPORTANT]
-> **Calendario actualizado (2026-09-10):** tras el **Ómnibus Digital sobre IA (Reglamento (UE)
-> 2026/1744, en vigor desde el 27 de julio de 2026)**, las obligaciones para sistemas de alto
-> riesgo del Anexo III (Arts. 9–15, incluido el Art. 12 de conservación de registros) aplican
-> desde el **2 de diciembre de 2027** (antes: 2 de agosto de 2026). Las obligaciones de
-> transparencia del Art. 50 ya aplican desde el 2 de agosto de 2026. Planifique la
-> certificación de evidencia en consecuencia.
+La plantilla de dashboard de lectura del [quickstart](03_guides/QUICKSTART_ENTERPRISE.md)
+consulta datos de un ledger suministrado. No crea un canal de ingesta ni autoriza,
+bloquea o supervisa por sí misma todas las acciones de otro proceso. Las rutas
+protegidas por un ejecutor requieren su integración y controles específicos.
 
-> [!NOTE]
-> **Verificación de evidencia (2026-09-10):** el exportador ya no emite estados CONFORME sobre
-> evidencia no verificada. Con `--ledger <ruta>`, re-ejecuta `verify_integrity()` y la
-> comparación de la raíz Merkle contra el `global_hash` del manifiesto; ante cualquier fallo,
-> los artículos se degradan a `UNVERIFIED_*` / `*_NON_COMPLIANT` y el CLI retorna código 2.
-> Cada certificado se firma con Ed25519 (variable `[OBSOLETO: BABYLON60_SIGNING_SEED]`).
+## Qué verifica el exportador
 
----
+[`verify_evidence()`](../01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py)
+abre el ledger indicado, solicita su atestación de estado y compara la raíz Merkle
+calculada con `manifest.json.global_hash`. La coincidencia y la integridad reportada
+por ese ledger determinan `evidence_verification.verified`.
 
-## 🏛️ Matriz de Mapeo Regulatorio (Artículos 9 - 14)
+[`generate_certificate()`](../01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py)
+asigna los siguientes estados. Los nombres de artículos del informe son un índice
+técnico; no contienen una evaluación completa de cada requisito legal.
 
-| Requisito Legal (EU AI Act) | Artículo | Mecanismo Técnico BABYLON-60 v4.0 | Garantía Matemática |
-| :--- | :--- | :--- | :--- |
-| **Sistema de Gestión de Riesgos** | **Artículo 9** | Transductor Oncogénico y Filtro Popperiano. Cuarentena WORM automática ante colapso entrópico o anomalías en el DAG de razonamiento. | Falsabilidad popperiana estricta ($\Omega22$) y aislamiento preventivo en $O(1)$. |
-| **Gobernanza de Datos** | **Artículo 10** | Sanitización y redacción criptográfica no reversible en el transductor de entrada (`EUAIActComplianceExporter.redact_sensitive_data`). Cero-fugas de PII o API Keys. | Privacidad por diseño y redacción no reversible de credenciales. |
-| **Documentación Técnica** | **Artículo 11** | Registro automático de esquemas algebraicos, AST auditados y manifiesto canónico `manifest.json` firmado. | Inmutabilidad de la especificación técnica mediante raíces de Merkle. |
-| **Registro de Eventos (Logging & Record-Keeping)** | **Artículo 12** | Base de datos SQLite WAL append-only con encadenamiento de hashes SHA-3 y sincronización síncrona `synchronous=FULL`. | Hash-chain no repudiable donde cualquier alteración rompe la cadena. |
-| **Supervisión Humana (Human Oversight)** | **Artículo 14** | Contratos Saga de validación explícita. El operador humano ejerce como nodo validador BFT sobre el transductor. | Invariante $V_A$: No hay ejecución autónoma sin atestación/firma del nodo validador. |
+| Artículo | Estado si el ledger verifica | Trabajo que sigue pendiente |
+| --- | --- | --- |
+| 9: gestión de riesgos | `EVIDENCE_SECURED_PENDING_AUDIT` | Proceso de riesgos, criterios, mitigaciones y seguimiento del sistema completo. |
+| 10: gobernanza de datos | `EVIDENCE_SECURED_PENDING_AUDIT` | Calidad, procedencia, representatividad y controles sobre los datos pertinentes. |
+| 11: documentación técnica | `EVIDENCE_SECURED_PENDING_AUDIT` | Contenido, suficiencia y mantenimiento del expediente técnico. |
+| 12: registro de eventos | `CRYPTO_EVIDENCE_SECURED`, o `QUARANTINE_NON_COMPLIANT` si el manifiesto indica cuarentena | Cobertura de eventos, retención, acceso y requisitos aplicables al registro. |
+| 14: supervisión humana | `EVIDENCE_SECURED_PENDING_AUDIT` | Diseño, formación, capacidad de intervención y prueba de la supervisión efectiva. |
+| 15: robustez y ciberseguridad | `EVIDENCE_SECURED_PENDING_AUDIT` | Evaluación de precisión, robustez, amenazas y recuperación del sistema integrado. |
+| 50: transparencia | `EVIDENCE_SECURED_PENDING_AUDIT` | Obligaciones de información o marcado que correspondan al caso de uso. |
 
----
+Si la evidencia falta, la cadena falla o la raíz no coincide, los artículos reciben
+el detalle de error de `evidence_verification`, como `LEDGER_NOT_FOUND`,
+`LEDGER_CHAIN_BROKEN_NON_COMPLIANT` o el estado de discrepancia de raíz. Una firma
+Ed25519 sobre el informe no convierte esos estados en evidencia verificada.
 
-## 🛠️ Generación de Certificados de Auditoría (CLI)
+## Generar el informe con el CLI publicado
 
-Cualquier operador corporativo o auditor externo puede generar el certificado de cumplimiento normativo utilizando la herramienta CLI `cortex-compliance`:
+El paquete instala **`babylon60-compliance`**, declarado en
+[`pyproject.toml`](../pyproject.toml). Antes de exportar:
 
-### 1. Exportación en formato JSON (para integración en CI/CD y trazabilidad M2M)
+1. Prepare el bundle con su `manifest.json` y el ledger correspondiente.
+2. Establezca `BABYLON_HOME` en el directorio de datos que desea evaluar.
+3. Provisione `BABYLON60_SIGNING_SEED` por un canal de secretos: 32 bytes Ed25519
+   codificados como 64 caracteres hexadecimales. No publique la semilla en el informe,
+   Git ni los logs.
+
 ```bash
-cortex-compliance --bundle artifact_bundle_v3 --ledger "$BABYLON_HOME/dbs/agent_ledger.db" --system-id PROD-AGENT-01 --operator "Banco Corporativo" --format json --output cert.json
+uv run --locked babylon60-compliance --help
+uv run --locked babylon60-compliance \
+  --bundle artifact_bundle_v3 \
+  --ledger "$BABYLON_HOME/dbs/agent_ledger.db" \
+  --system-id PROD-AGENT-01 --operator "Operador del sistema" \
+  --locale es --format json --output cert.json
 ```
 
-### 2. Exportación en formato Markdown (para informes internos y documentación)
-```bash
-cortex-compliance --bundle artifact_bundle_v3 --ledger "$BABYLON_HOME/dbs/agent_ledger.db" --system-id PROD-AGENT-01 --operator "Banco Corporativo" --format md --output cert.md
-```
+Para Markdown o HTML, use `--format md --output cert.md` o
+`--format html --output cert.html` con los mismos argumentos de entrada.
 
-### 3. Exportación en formato HTML (con diseño Brutalist UI / Glassmorphism listo para auditoría presencial y PDF)
-```bash
-cortex-compliance --bundle artifact_bundle_v3 --ledger "$BABYLON_HOME/dbs/agent_ledger.db" --system-id PROD-AGENT-01 --operator "Banco Corporativo" --format html --output cert.html
-```
+| Resultado | Código de salida y significado |
+| --- | --- |
+| Evidencia verificada | `0`: cadena y raíz verificadas por el exportador; los artículos pendientes siguen pendientes. |
+| Evidencia no verificada | `2`: se escribe el informe con el fallo; no se debe tratar como resultado favorable. |
+| Error de entrada, firma o escritura | La ejecución falla; revise el error y no use un archivo anterior como resultado nuevo. |
 
----
+`--allow-unverified` permite devolver `0` aun cuando falle la verificación. No lo
+utilice como criterio de aceptación en CI ni como prueba de conformidad.
 
-## 🔒 Inviolabilidad Criptográfica de la Evidencia
+Sin semilla, la firma se rechaza por defecto. `BABYLON60_ALLOW_EPHEMERAL_SIGNING=1`
+habilita una clave efímera para una evaluación identificada como tal; no establece
+por sí sola una identidad persistente de confianza.
 
-Cada certificado emitido incluye:
-- **Global Merkle Root:** La raíz del Árbol de Merkle que sella en una única impronta de 32 bytes la totalidad de los eventos ejecutados por los agentes.
-- **Bloque `[OBSOLETO: evidence_verification]`:** transcripción de la re-verificación fail-closed del ledger (cadena íntegra, Merkle recomputado, coincidencia con el manifiesto, veredicto).
-- **Firma Ed25519:** firma del payload canónico del certificado (clave estable vía `[OBSOLETO: BABYLON60_SIGNING_SEED]`; clave efímera marcada explícitamente en caso contrario).
-- **Fingerprint Digital (Cert SHA-256):** Un hash combinatorio del ID del sistema, el nombre del operador, la raíz global de evidencia y la marca temporal ISO 8601 UTC.
-- **Redacción Preventiva de Secretos:** Eliminación automática de claves privadas, JWTs, AWS credentials y contraseñas previo al estampado del certificado.
+## Interpretar y conservar la evidencia
+
+- `global_merkle_root` identifica el estado comparado, no todos los eventos de
+  cualquier agente externo al flujo integrado.
+- `evidence_verification` conserva el resultado, la raíz del ledger y la referencia
+  del manifiesto. Es una interfaz vigente del informe.
+- `signature` contiene la firma Ed25519, la clave pública y la indicación
+  `ephemeral`. Verifique la identidad de la clave por un canal independiente.
+- La redacción de secretos usa los patrones implementados por el exportador;
+  revise el contenido antes de distribuirlo. No es una garantía de cero fugas.
+- La cadena de hashes detecta alteraciones frente a una referencia de confianza.
+  SQLite y una firma no impiden que el propietario del archivo borre o sustituya
+  toda la evidencia. Defina retención, copias, accesos y anclajes externos.
+
+La evaluación debe registrar la revisión del código, configuración, entradas,
+comandos y resultados. El informe firmado aporta evidencia para esa revisión;
+no decide la conformidad del sistema ni la admisibilidad de la prueba.

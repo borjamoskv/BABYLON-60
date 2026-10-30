@@ -355,6 +355,7 @@ MCP_MANIFESTS = (
     ".claude/settings.json",
     ".codex/config.toml",
 )
+OPTIONAL_MCP_MANIFESTS = {".vscode/mcp.json"}
 
 
 def validate_mcp_manifests(root: Path) -> list[str]:
@@ -362,6 +363,10 @@ def validate_mcp_manifests(root: Path) -> list[str]:
     launch_script = "scripts/c5_cli/launch_kernel_mcp.py"
     for rel_path in MCP_MANIFESTS:
         path = root / rel_path
+        # VS Code configuration is local and ignored by Git. Validate it when
+        # present, without requiring personal client configuration in a clone.
+        if rel_path in OPTIONAL_MCP_MANIFESTS and not path.exists() and not path.is_symlink():
+            continue
         if not path.is_file():
             errors.append(f"{rel_path}: missing MCP manifest file")
             continue

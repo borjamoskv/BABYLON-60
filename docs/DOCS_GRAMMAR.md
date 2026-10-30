@@ -98,7 +98,20 @@ Layer 3 — Evidence Manifest    (CLAIMS.toml link)
 
 ## 4. Audit Linter Rules (`docs-lint`)
 
-Run: `python3 scripts/docs_lint.py docs/` (or `make docs-check`)
+Run the local Markdown checks with `python3 scripts/docs_lint.py docs/`.
+The `docs/` argument is optional; the default scans that directory and checks the
+root README grammar. Use `--repo-root <path>` when checking an isolated fixture.
+
+Run `make docs-check` for the complete documentary gate: generated indexes,
+semantic contracts, workspace token budget and topology. It does not execute
+runtime claims, contact LAYA, inspect global configuration or read operator telemetry.
+The optional `--system1` probe is separate and is never part of this target.
+
+The linter implements the vocabulary rules DL-001, DL-006 and DL-007, corruption
+checks DL-008/DL-009, local destinations (including nested image badges and
+reference links), GFM heading anchors and index coverage. External URL availability,
+physical claims and mathematical truth require separate review. DL-002 through
+DL-005 below are review criteria unless an executable check is explicitly named.
 
 | Rule ID | Trigger | Action |
 | :--- | :--- | :--- |
@@ -135,7 +148,9 @@ Before merging any `docs/` change, confirm:
 - [ ] Every algebraic symbol has a row in §2 Admitted table or `CLAIMS.toml`.
 - [ ] Every synonym maps to ≥ 2 representational domains in §5.
 - [ ] No free-form changelog prose; use `CHANGELOG.md` (Layer 3 only).
-- [ ] `python3 scripts/verify_claims.py` exits 0.
+- [ ] `python3 scripts/c5_quality_gates/sync_docs_index.py --check` matches the saved documents; omit `--check` to regenerate stale indexes.
+- [ ] `make docs-check` exits 0 and its recorded output identifies the checkout checked.
+- [ ] Changes to a technical claim identify the relevant evidence suite and its latest result. `python3 scripts/verify_claims.py` only lists declarations; its exit code does not verify any claim. Explicit `--execute`/`--strict` runs evidence commands and belongs to the affected runtime/release verification, not every documentation edit.
 
 ---
 

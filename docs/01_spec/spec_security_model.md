@@ -1,98 +1,105 @@
 ---
-title: Modelo de Seguridad BABYLON-60
-status: Causal-Determinist
-version: 4.3.0
+title: Modelo de seguridad del ledger Python BABYLON-60
+status: Implementation-Reference
+version: 5.0.0
 ---
 
-# MODELO DE SEGURIDAD — cortex-persist
+# Modelo de seguridad del ledger Python
 
-<div align="center">
+Este documento delimita `CortexPersistLedger` en la base pública `00f20e7`.
+Su cadena usa **SHA3-256 sobre JSON canónico UTF-8**, según el
+[perfil criptográfico](spec_cryptographic_profile.md). El ledger Rust SHA-256 y el
+árbol BLAKE3 son implementaciones distintas.
 
-[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
-[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+Fuentes: [persistencia y verificación](../../01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py)
+y [funciones criptográficas](../../01_KISH_ENGINE/babylon60/bft/cortex_crypto_kernel.py).
+Esta descripción del código no certifica una instalación, un hardware ni el
+estado actual de una base de datos.
 
-</div>
+## 1. Propiedades y condiciones
 
-> **Régimen Causal-Determinist**
-> Este documento define el **modelo de amenazas**, **fronteras de seguridad**, y las **garantías explícitas** del ledger.
+| Propiedad | Mecanismo observado en el código | Alcance |
+| --- | --- | --- |
+| Comprobación de cadena | `verify_integrity` recalcula SHA3-256 y comprueba secuencia, hash previo y reloj de Lamport | Detecta discrepancias respecto a las reglas de la cadena almacenada; una historia reescrita necesita una referencia externa confiable para ser contrastada |
+| Atribución declarada | `cortex_taint`, `agent_id` y `domain` dentro del sobre hasheado | Vincula esos valores al contenido; no autentica a quien los declara |
+| Serialización de escrituras | Transacciones SQLite con `BEGIN IMMEDIATE` | Acota la actualización de esta base local; no demuestra consenso distribuido |
+| Idempotencia | Identificadores de evento y restricciones `UNIQUE` | Rechaza identificadores duplicados según el contrato; no demuestra equivalencia semántica de payloads distintos |
+| Restricción de modificaciones | Triggers que rechazan `UPDATE` y `DELETE` de entradas | Protege operaciones SQL mientras el esquema permanece intacto; el propietario puede eliminar los triggers |
+| Persistencia local | SQLite WAL y `PRAGMA synchronous = FULL` en las conexiones | Solicita sincronización; la durabilidad ante un fallo físico depende también del almacenamiento y requiere una prueba específica |
 
----
+Una cadena consistente no prueba que se hayan registrado todos los efectos del
+agente. El hash no es una firma: quien tiene escritura y conoce el formato puede
+recalcularlo. Contrastar una historia con un compromiso previo exige una raíz o
+recibo conservado fuera del dominio modificable por el atacante, con clave, fecha
+y confianza verificadas cuando se aleguen esas propiedades.
 
-## 1. Garantías del Ledger
+## 2. Fronteras que requieren controles adicionales
 
-| Propiedad | Mecanismo | Qué Demuestra |
-|:---|:---|:---|
-| **Integridad** | Cadena hash BLAKE3 | El contenido de la entrada no fue alterado tras su escritura |
-| **Procedencia (Provenance)** | Taint causal + `[OBSOLETO: agent_id]` | Quién escribió la entrada y bajo qué contexto |
-| **Ordenamiento** | Reloj de Lamport + WAL journal | Las escrituras están serializadas y son reproducibles |
-| **No-duplicación** | Clave de idempotencia UUID v5 | La misma escritura lógica no puede insertarse dos veces |
-| **Anclaje Temporal** | Git Sentinel (local) | La entrada existía antes de la marca de tiempo de un commit dado |
+| Propiedad | Control que no aporta la cadena por sí sola |
+| --- | --- |
+| Corrección del contenido | Validación de datos, semántica y origen de las observaciones |
+| Autorización de efectos | Política y executor que medien todas las rutas al recurso protegido |
+| Identidad y no repudio | Firma válida y atribución confiable de su clave; `agent_id` no es una credencial |
+| Almacenamiento WORM físico | Medio o servicio con retención y resistencia a modificaciones fuera del proceso |
+| Tiempo externo acreditado | Testigo independiente; un timestamp declarado de evento o commit no es por sí solo una autoridad temporal |
+| Tolerancia bizantina distribuida | Protocolo, identidad de validadores, configuración y pruebas de red del despliegue |
+| Cumplimiento regulatorio | Evaluación del sistema y procedimiento aplicable; registrar hashes no sustituye gestión de riesgos, gobernanza de datos ni supervisión humana |
 
-## 2. Lo que el Ledger NO Garantiza
+Los recibos Ed25519 o P-256 y la mediación del kernel tienen sus propios contratos.
+Una firma válida no acredita automáticamente origen hardware ni correspondencia
+entre efecto y autorización. Véase el
+[perfil COSE de autorización](../security/cose-authorization-profile.md).
 
-| Propiedad | Razón |
-|:---|:---|
-| **Corrección Semántica** | Un hash demuestra que el contenido no cambió, no que su semántica sea correcta. |
-| **Autorización** | El ledger registra *quién* escribió; no fuerza *quién tiene permiso* sin una capa externa. |
-| **Almacenamiento Tamper-proof** | Un atacante con acceso OS al filesystem puede borrar la BD. La cadena de hash solo lo detecta post-mortem. |
-| **Consenso Global** | Los niveles L1–L3 proveen consistencia local únicamente. BFT (L4) no está listo para producción. |
-| **Cumplimiento Regulatorio** | Este no es un registro auditado certificado para GDPR, SOC2 o PCI-DSS. |
+## 3. Amenazas y límites
 
----
+### Alteraciones comprobables con la cadena y su contexto
 
-## 3. Modelo de Amenazas (Threat Model)
+- Una modificación de campos conservando el hash almacenado se detecta al
+  recalcular el sobre, salvo compromiso de la primitiva criptográfica.
+- Una secuencia no contigua o un encadenado incoherente se rechaza en
+  `verify_integrity`.
+- Las colisiones de identificadores y modificaciones SQL están sujetas a las
+  restricciones y triggers del esquema instalado.
+- La recuperación transaccional corresponde a SQLite. Una comprobación posterior
+  de integridad no sustituye un ensayo de pérdida de energía del almacenamiento.
 
-### 3.1 Amenazas en Alcance (In-Scope)
+### Amenazas fuera de esta frontera
 
-| Amenaza | Mitigación |
-|:---|:---|
-| Bit-rot silente o modificación accidental histórica | La cadena BLAKE3 se rompe en lectura — detectado en verificación. |
-| Inyección de escritura duplicada por un agente | Clave de idempotencia UUID v5 rechaza duplicados. |
-| Condición de carrera entre escritores concurrentes | Cola `asyncio.Queue` single-writer + WAL journal serializa todo. |
-| Contención de lock en SQLite | Pragma de concurrencia WAL (ver [Especificación Técnica](spec_technical.md)). |
-| Escritura parcial por aniquilación de proceso | Journal WAL hace rollback automático al reiniciar. |
-| Escrituras sin atribución | `[OBSOLETO: causal_taint]` + `[OBSOLETO: agent_id]` obligatorios en toda entrada. |
+- Un proceso con permisos sobre el archivo puede borrarlo, sustituirlo o alterar
+  esquema e historia. Sin compromiso externo, una historia recalculada o una cadena
+  vacía no autentica la historia anterior.
+- Las credenciales, sistema operativo, bibliotecas y proceso escritor pertenecen
+  al modelo de confianza del despliegue.
+- La protección frente a rutas alternativas requiere aislamiento y mediación de
+  recursos; no se deduce de usar SQLite, Rust o un árbol Merkle.
+- La separación entre inquilinos debe imponerse con rutas, permisos e identidades.
+  El constructor recibe una ruta; no establece aislamiento multiinquilino.
 
-### 3.2 Amenazas Fuera de Alcance (Out-of-Scope)
+## 4. Comprobar una copia del ledger
 
-| Amenaza | Razón |
-|:---|:---|
-| Atacante con acceso a OS/Filesystem | El reemplazo total de BD esquiva la detección de hash-chain in situ. |
-| Compromiso de primitivas (BLAKE3 / SHA3-256) | Fuera del alcance del Dominio C5-REAL. |
-| Agentes Bizantinos en enjambre distribuido | Requiere BFT L4 — solo prototipo. |
-| Compromiso de cadena de suministro (Supply-chain) | Riesgos estándar de empaquetado Python/Rust aplican. |
-
----
-
-## 4. Primitivas Criptográficas
-
-| Uso | Algoritmo | Estado |
-|:---|:---|:---|
-| Hash-chain de Entradas | BLAKE3 | Activo (Python `[OBSOLETO: blake3]` o Rust `[OBSOLETO: strike_rs]`) |
-| Hash de Recibo / Auditoría | SHA3-256 | Activo |
-| Firmado Opcional | Ed25519 vía `[OBSOLETO: pynacl]` | Opcional (extra `[crypto]`) |
-| Derivación Clave/Password | Argon2 vía `argon2-cffi` | Opcional (extra `[crypto]`) |
-| Testigo Temporal L1 | OTS / BTC OP_RETURN | Investigación — no implementado |
-
----
-
-## 5. Verificación de Integridad
-
-Para verificar la cadena completa de cualquier ledger almacenado:
+La API existente devuelve un booleano, no el objeto con `broken_at` que describía
+una versión anterior de esta guía. Con el paquete instalado, este ejemplo trabaja
+sobre una copia elegida por el operador:
 
 ```python
-from babylon60.bft.ledger_actor import verify_chain
+from pathlib import Path
+from babylon60.bft.cortex_persist_ledger import CortexPersistLedger
 
-result = verify_chain(db_path="master_ledger.db")
-print(result)  # {"valid": True, "entries": 4821, "broken_at": None}
+copy_path = Path("copia/master_ledger.db")
+if not copy_path.is_file():
+    raise FileNotFoundError(copy_path)
+ledger = CortexPersistLedger(copy_path)
+print({"chain_consistent": ledger.verify_integrity()})
 ```
 
-Una cadena rota devuelve el índice exacto de la entrada y tanto el hash esperado como el actual.
+El constructor inicializa el esquema y configura conexiones; el ejemplo no es una
+apertura forense de solo lectura. Preparar una copia consistente de SQLite mediante
+el procedimiento de backup pertinente, incluyendo su estado WAL; no copiar solo
+el `.db` de un escritor activo. `True` también es posible para una cadena vacía:
+revisar por separado el número de eventos, el intervalo y la raíz externa esperados
+antes de aceptar una historia.
 
----
-
-## 6. Separación de Datos
-
-- Cada inquilino/workspace utiliza un archivo `.db` aislado.
-- No existen tablas compartidas entre inquilinos.
-- La base central `cortex.db` es de **solo-lectura** y no debe ser escrita por el SDK. Use bases sidecar (`nexus_anchors.db`, `master_ledger.db`).
+Una campaña concreta registra revisión, configuración y artefactos. Los resultados
+históricos de [la auditoría del kernel](../security/kernel-audit-2026-10-15.md)
+describen sus propios casos y límites; no certifican esta copia ni una revisión
+posterior.

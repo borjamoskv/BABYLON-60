@@ -1,60 +1,32 @@
----
-title: Índice Maestro de Guías Operativas BABYLON-60
-status: Causal-Determinist
-version: 1.0.0
----
+# Guías operativas
 
-# Índice Maestro de Guías Operativas BABYLON-60
+Índice de navegación generado a partir de los archivos Markdown guardados.
+La inclusión de un documento no certifica sus afirmaciones ni su implementación.
 
-<div align="center">
+**Entradas indexadas:** 15 (se excluye únicamente este índice).
 
-[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
-[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+| Documento | Título |
+| :--- | :--- |
+| [`QUICKSTART_ENTERPRISE.md`](QUICKSTART_ENTERPRISE.md) | Onboarding local y plantilla de observación |
+| [`guide_babylon60_complete.md`](guide_babylon60_complete.md) | BABYLON·60 — GUÍA COMPLETA DE ARQUITECTURA Y DESARROLLO |
+| [`guide_bio_silico_transduction.md`](guide_bio_silico_transduction.md) | Guía de Transducción Bio-Silicio: Mapeo Ontológico a Grafos Causal-Deterministas |
+| [`guide_c5_axiom_verification.md`](guide_c5_axiom_verification.md) | Guía de Verificación e Inyección Axiomática C5-REAL |
+| [`guide_commercial_license.md`](guide_commercial_license.md) | BABYLON-60 SOVEREIGN COMMERCIAL LICENSE (BSL / FAIR SOURCE VARIANT) |
+| [`guide_experimental.md`](guide_experimental.md) | EXPERIMENTAL — Extensiones cortex-persist |
+| [`guide_explanation.md`](guide_explanation.md) | EXECUTIVE BRIEFING — MOSKV-1 / BABYLON-60 |
+| [`guide_kernel_mcp.md`](guide_kernel_mcp.md) | Puente MCP local del kernel |
+| [`guide_legaltech_eu_ai_act.md`](guide_legaltech_eu_ai_act.md) | Guía de revisión de evidencia técnica para el EU AI Act |
+| [`guide_portable_signature.md`](guide_portable_signature.md) | Firma portable MOSKV-1 |
+| [`guide_repository_source_of_truth.md`](guide_repository_source_of_truth.md) | Fuentes de nombres, código y comprobaciones |
+| [`guide_signed_authorization.md`](guide_signed_authorization.md) | Autorización de una solicitud concreta |
+| [`guide_skill_arsenal_taxonomy.md`](guide_skill_arsenal_taxonomy.md) | MOSKV-1 — TAXONOMÍA ARSENAL DE SKILLS POR EXERGÍA (v26.200) |
+| [`guide_swarm_pxs_orchestration.md`](guide_swarm_pxs_orchestration.md) | Guía de Orquestación de Enjambres Multi-Agente Kimi K3 ($P \times S$) |
+| [`tutorial_hello_causal.md`](tutorial_hello_causal.md) | Tutorial: primer programa B60 local |
 
-</div>
+Regeneración desde la raíz del repositorio:
 
-> *"El conocimiento sin guía es entropía; el manual formal es la restricción exergética que transforma la intención en ejecución determinista."*
-
-Este módulo constituye el índice central y mapa de navegación para la suite completa de **12 guías operativas y metodológicas** del monorepo **BABYLON-60**.
-
----
-
-## 🗺️ Mapa de Grafo de Lectura Recomendada
-
-```mermaid
-graph TD
-    Start["🎯 Inicio"] --> G01["guide_babylon60_complete.md\n(Arquitectura Core)"]
-    G01 --> DevSecOps["QUICKSTART_ENTERPRISE.md\n(Puesta en Marcha)"]
-    G01 --> G02["guide_c5_axiom_verification.md\n(Verificación Axiomática C5)"]
-    G02 --> G03["guide_bio_silico_transduction.md\n(Transducción Bio-Silicio)"]
-    G02 --> G04["guide_swarm_pxs_orchestration.md\n(Enjambres Kimi K3)"]
-    G02 --> G05["guide_legaltech_eu_ai_act.md\n(Gobernanza & EU AI Act)"]
-    G01 --> G06["guide_skill_arsenal_taxonomy.md\n(Taxonomía Skills CORTEX)"]
-    G01 --> G08["tutorial_hello_causal.md\n(Tutorial Causal)"]
+```sh
+python3 scripts/c5_quality_gates/sync_docs_index.py
 ```
 
----
-
-## 📚 Catálogo Completo de Guías Operativas
-
-| # | Guía Operativa | Enfoque / Categoría | Componentes Vinculados | Invariante C5 |
-| :---: | :--- | :--- | :--- | :--- |
-| **01** | [guide_babylon60_complete.md](./guide_babylon60_complete.md) | Arquitectura & Monorepo | Interface Industrial Noir 2026, Modo Dual 2E | `[OBSOLETO: INV_C5_15]` |
-| **02** | [guide_c5_axiom_verification.md](./guide_c5_axiom_verification.md) | Verificación Axiomática | Axiomas A1–A4, `axiom_verifier_z3.py` | `[OBSOLETO: INV_C5_REAL_A4]` |
-| **03** | [guide_bio_silico_transduction.md](./guide_bio_silico_transduction.md) | Transducción Bio-Silicio | Ontología 300 Oncología, Grafos `[OBSOLETO: NodeSpec]` | `supp(f^\dagger_p(y)) \subseteq \text{supp}(p)` |
-| **04** | [guide_swarm_pxs_orchestration.md](./guide_swarm_pxs_orchestration.md) | Enjambres Multi-Agente | Kimi K3 ($P \times S$), Futex, MCTS 2.8s | `ru_nivcsw \le 2132` |
-| **05** | [guide_legaltech_eu_ai_act.md](./guide_legaltech_eu_ai_act.md) | Gobernanza & LegalTech | EU AI Act (Art. 9–14), Smart Contracts | `[OBSOLETO: RULE_CAUSAL_HITL_VERIFY_01]` |
-| **06** | [guide_skill_arsenal_taxonomy.md](./guide_skill_arsenal_taxonomy.md) | Taxonomía CORTEX | Skill Chains, Triggers, Exergía de Skills | `[OBSOLETO: INV_C5_28]` |
-| **07** | [QUICKSTART_ENTERPRISE.md](./QUICKSTART_ENTERPRISE.md) | Despliegue Enterprise | Inicialización Daemon, Entorno Soberano | `[OBSOLETO: INV_BFT_04]` |
-| **08** | [guide_experimental.md](./guide_experimental.md) | Laboratorio Experimentos | Active Inference, EFE, Comónadas CTA | `[OBSOLETO: INV_C5_CHAOS_MONAD]` |
-| **09** | [guide_explanation.md](./guide_explanation.md) | Explicación Conceptual | Energía Libre Variacional, Densidad $\Xi(T)$ | `[OBSOLETO: ZERO_ANERGY_PRINCIPLE]` |
-| **10** | [guide_repository_source_of_truth.md](./guide_repository_source_of_truth.md) | Fuente de Verdad | Jerarquía de Artefactos y Consistencia | `[OBSOLETO: MASTER_LEDGER]` |
-| **11** | [guide_commercial_license.md](./guide_commercial_license.md) | Licencia Soberana | Doble Licencia Abierta/Comercial | `[OBSOLETO: INV_C5_17]` |
-| **12** | [tutorial_hello_causal.md](./tutorial_hello_causal.md) | Tutorial Causal | Primeros Pasos Transformación Causal | `[OBSOLETO: HELLO_CAUSAL_TUTORIAL]` |
-
----
-
-## 👥 Uso Dual: Agentes AI & Investigadores Humanos
-
-- **Agentes AI (LLMs & Enjambres)**: Utilizan estas guías como **Capa 3 (Context Exergy)** para restringir el espacio de estados en inferencia, asegurando compilación sin anergía a $T=0$.
-- **Investigadores Humanos**: Utilizan este índice para auditar la arquitectura, aplicar la supervisión humana (HITL) y explorar la transferencia de conocimiento entre física, medicina, derecho y software.
+Comprueba el contenido generado con el mismo comando y `--check`.

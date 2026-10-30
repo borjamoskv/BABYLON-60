@@ -22,7 +22,7 @@ version: 4.3.0
 ## 1. Axioma Matemático: Aritmética Base-60 (BABYLON-60)
 
 > [!WARNING]
-> **Axioma 1 (Fuga Entrópica):** El uso de aritmética de punto flotante (`float`, `[OBSOLETO: float64]`) en kernels de control determinista introduce errores de redondeo acumulativos que equivalen a una disipación entrópica inaceptable ($P0$).
+> **Axioma 1 (Fuga Entrópica):** El uso de aritmética de punto flotante (`float`, `float64`) en kernels de control determinista introduce errores de redondeo acumulativos que equivalen a una disipación entrópica inaceptable ($P0$).
 
 ### 1.1 Formulación de Escalado Entero Base-60
 
@@ -66,7 +66,7 @@ El estado físico del Dominio C5-REAL está protegido contra la estocasticidad a
 ```
 
 ### 2.1 Minimal Trusted Kernel (MTK)
-- **Chokepoint:** Ninguna función fuera del MTK puede mutar el estado persistente (`INSERT`, `[OBSOLETO: UPDATE]`, `[OBSOLETO: DELETE]`).
+- **Chokepoint:** Ninguna función fuera del MTK puede mutar el estado persistente (`INSERT`, `UPDATE`, `DELETE`).
 - **Inyección de Contexto:** Toda llamada de mutación exige la presencia de un token criptográfico de un solo uso registrado en `contextvars.ContextVar`.
 
 ### 2.2 Transiciones de Estado y Atomicidad
@@ -103,11 +103,14 @@ $$\text{ConsensusState}(M) = \begin{cases}
 Todo artefacto, commit y mutación de base de datos porta el sello criptográfico implícito `borjamoskv`.
 
 ### 4.2 Propagación de Taint (`CORTEX-TAINT`)
-Todo nodo o dato derivado de un modelo de lenguaje generativo está implícitamente marcado con el tag `[OBSOLETO: TAINT_PROBABILISTIC]`. Ningún nodo con este tag puede entrar al *Minimal Trusted Kernel* sin superar una demostración determinista ($\Sigma_1$-verificación) en el motor `b60_kernel`.
+El diseño propone identificar los datos derivados de inferencia mediante la
+etiqueta `TAINT_PROBABILISTIC` y validarlos antes de admitirlos al componente
+protegido. Esa etiqueta nombra una política en esta especificación; no acredita
+una marca aplicada automáticamente ni una API del binario `b60_kernel`.
 
 ---
 
 ## 5. Cumplimiento de Invariantes de Arquitectura
 
-Todos los invariantes arquitectónicos (`[OBSOLETO: INV_BFT_04]`, `[OBSOLETO: INV_C5_15]`, etc.) han sido unificados y su definición formal se encuentra documentada en la especificación central:
+Todos los invariantes arquitectónicos (`INV_BFT_04`, `INV_C5_15`, etc.) han sido unificados y su definición formal se encuentra documentada en la especificación central:
 👉 **[Invariantes del Dominio C5-REAL BABYLON-60](spec_invariants.md)**

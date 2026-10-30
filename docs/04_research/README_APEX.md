@@ -1,10 +1,14 @@
-# 📘 🧪 APEX TRIALS (`docs/06_theory/README_APEX.md`)
-[![FDA Compliance](https://img.shields.io/badge/FDA-21_CFR_Part_11-blue?style=for-the-badge)](https://www.fda.gov/)
+# APEX TRIALS — notas históricas de un prototipo
+[![Referencia FDA](https://img.shields.io/badge/FDA-21_CFR_Part_11-blue?style=for-the-badge)](https://www.fda.gov/)
 [![Data Source](https://img.shields.io/badge/Data-ClinicalTrials.gov_API_v2-purple?style=for-the-badge)](https://clinicaltrials.gov/)
-[![Causal Ledger](https://img.shields.io/badge/Ledger-Tamper--Evident_HashChain-brightgreen?style=for-the-badge)](../../babylon60/bft/README.md)
-[![Epistemology](https://img.shields.io/badge/Epistemology-C5--REAL_Categories-purple?style=for-the-badge)](../00_MANIFESTO.md)
+[![Causal Ledger](https://img.shields.io/badge/Ledger-Tamper--Evident_HashChain-brightgreen?style=for-the-badge)](../../01_KISH_ENGINE/babylon60/bft/README.md)
+[![Epistemology](https://img.shields.io/badge/Epistemology-C5--REAL_Categories-purple?style=for-the-badge)](../../.babylon60rules)
 
-**APEX TRIALS** is a deterministic, auditable clinical-trial amendment-risk copilot built on the BABYLON-60 Ledger substrate.
+**APEX TRIALS** is described here as a clinical-trial amendment-risk prototype.
+The application and datasets referenced below are not distributed by this
+checkout. Its commands, compatibility and numerical results are historical
+claims, **NO_VERIFICADO** for this repository revision. This document does not
+certify FDA compliance or a clinical use.
 
 ---
 
@@ -12,36 +16,39 @@
 
 Under the **C5-REAL Epistemological Constitution**:
 - **Risk Assessment as a Bayesian Lens**: Clinical trial complexity scoring acts as a **Bayesian Optic Lens**, projecting protocol features onto substantive amendment probability spaces while preserving informational distance under Chentsov's Theorem.
-- **Deterministic Morphisms for Regulatory Provenance**: Every scoring function is a pure morphism ($A \to B$). Firing rules generate an unalterable `[OBSOLETO: causal_taint]` hash-chain, fulfilling FDA 21 CFR Part 11 §11.10(e) audit requirements by mathematical construction.
+- **Deterministic records:** the proposed design records rule inputs and outputs in a hash chain. Hash verification concerns recorded bytes; it does not demonstrate clinical validity, completeness of the audit trail or regulatory conformity.
 
 ---
 
 ## 🎯 The Wedge (Why This Beats a Black Box)
 
-Biorce/Aika owns the data moat (~1M curated trials, enterprise sales, $60M). We do **not** compete there. We compete where a regulated sponsor actually feels pain: **provable, reproducible, tamper-evident decisions.**
+The design proposes reproducible scores and a tamper-evident history. The
+regulatory requirements and validation of a clinical application require an
+independent assessment; a hash chain alone is insufficient.
 
-A clinical trial's regulator (FDA 21 CFR Part 11 §11.10(e)) requires a *computer-generated, time-stamped, independently verifiable* audit trail of every system-produced decision. A recommendation engine that emits a PDF does not satisfy that by construction. **APEX-TRIALS does**: every risk score is committed to the BABYLON-60 hash-chain with exact firing rules as `[OBSOLETO: causal_taint]`, reproducible byte-for-byte from the protocol input.
-
-Three properties black-box models do not expose:
+Proposed properties and their required checks:
 
 | Property | Mechanism | Proof |
 | :--- | :--- | :--- |
 | **Determinism** | Pure feature function $\to$ weighted rules | Same protocol JSON $\to$ same score $\to$ same SHA3-256 hash |
-| **Auditability** | Ledger hash-chain (`[OBSOLETO: causal_taint]`, Lamport, UUIDv5) | `apex verify` recomputes the whole chain; tampering breaks it |
+| **Auditability** | Ledger hash-chain (`causal_taint`, Lamport, UUIDv5) | `apex verify` recomputes the whole chain; tampering breaks it |
 | **Falsifiability** | Public version-history ground-truth | `apex backtest` — Spearman $\rho$(score, real amendments) |
 
-The amendment-risk signal itself is built on a source public protocol version history (`/api/int/studies/{nct}/history`), whose `[OBSOLETO: moduleLabels]` separate a *substantive* protocol amendment (Eligibility / Study Design / Arms / Outcomes) from an administrative update.
+The amendment-risk signal itself is built on a source public protocol version history (`/api/int/studies/{nct}/history`), whose `moduleLabels` separate a *substantive* protocol amendment (Eligibility / Study Design / Arms / Outcomes) from an administrative update.
 
 ---
 
 ## 🔬 📌 Integration with Causal Motor Substrate
 
 `apex_trials.ledger.AmendmentLedger` implements the exact entry contract:
-`{ id: uuid5, prev_hash: sha3_256, payload, causal_taint, lamport_t, agent_id }`, SQLite WAL, single-writer, verified-on-read — making it **drop-in contract-compatible** with `babylon60.bft.ledger_actor`. The hash covers only deterministic decision content (never wall-clock), preserving byte-for-byte reproducibility while a sidecar `[OBSOLETO: created_at]` column supplies Part 11 provenance.
+`{ id: uuid5, prev_hash: sha3_256, payload, causal_taint, lamport_t, agent_id }`, SQLite WAL, single-writer, verified-on-read — targeting compatibility with `babylon60.bft.ledger_actor`; that compatibility has not been tested here. The hash covers only deterministic decision content (never wall-clock), preserving byte-for-byte reproducibility while a sidecar `created_at` column supplies Part 11 provenance.
 
 ---
 
-## 🚀 📌 Install & Run
+## Historical commands for the external prototype
+
+These commands require the external `apex_trials` source tree and its own
+dependency manifest. They are not installation instructions for BABYLON-60.
 
 ```bash
 cd apex_trials
@@ -69,9 +76,13 @@ print(res.history.n_substantive)                   # 8 real amendments on record
 
 ---
 
-## 📊 Model & Validation Metrics
+## Historical model and validation claims
 
-Eight first-principles complexity drivers, each firing a named rule with explicit thresholds and evidence values (max 114 raw $\to$ normalized 0–100 $\to$ LOW/MODERATE/HIGH/CRITICAL):
+The following figures are retained from the original prototype note without
+a dataset digest, experiment configuration or execution log in this checkout.
+They are **NO_VERIFICADO**, not current benchmark results.
+
+Eight proposed complexity drivers, each firing a named rule with explicit thresholds and evidence values (max 114 raw $\to$ normalized 0–100 $\to$ LOW/MODERATE/HIGH/CRITICAL):
 
 `eligibility ≤30 · endpoints ≤18 · arms ≤10 · enrollment ≤12 · geography ≤14 · phase ≤10 · design ≤10 · therapeutic-area ≤6`
 
@@ -113,27 +124,11 @@ macro-AUC (held-out) = 0.664   ·   CV-AUC tracks held-out within ±0.01
 
 ---
 
-<sub>Titular Civil: Borja Fernández Angulo · AKA Borja Moskv (`borjamoskv`) · Data © ClinicalTrials.gov (Public Domain)</sub>
+<sub>Titular: Borja Moskv (`borjamoskv`) · Data © ClinicalTrials.gov (Public Domain)</sub>
 
-## 🔬 Verificación Formal (Lean 4)
+## Alcance de la evidencia formal
 
-> [!TIP]
-> **Puente Isomorfo C5-REAL**
-> Firma topológica extraída dinámicamente para demostración formal en Lean 4.
-
-```lean
-namespace Babylon60.Theory.ReadmeApex
-
-/--
-  Firma formal generada dinámicamente mediante `inject_lean4_stubs.py`.
-  Dominio: C5-REAL Formal Verification
--/
-variable {X Y : Type}
-
-/-- Axioma Cánonico por Defecto -/
-axiom ax_canonical_invariant : ∀ (x : X), True
-
-theorem formal_axiomatization (x : X) : True := by
-  exact ax_canonical_invariant x
-end Babylon60.Theory.ReadmeApex
-```
+Se retiró el bloque generado que concluía únicamente `True`: no demostraba
+exactitud de los modelos, validez clínica ni compatibilidad con el ledger.
+Las [fuentes Lean de BABYLON-60](../../proof/lean/) modelan propiedades concretas
+del kernel bajo sus hipótesis; no verifican el prototipo APEX ni estas métricas.

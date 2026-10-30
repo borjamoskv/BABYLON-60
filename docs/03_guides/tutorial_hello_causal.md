@@ -1,259 +1,100 @@
 ---
-title: Tutorial Hola Mundo Causal en BABYLON-60
-status: Causal-Determinist
-version: 1.0.0
+title: Primer programa B60 local
+status: Educational example
+version: 5.0.0
 ---
 
-# Tutorial: Hola Mundo Causal en BABYLON-60
+# Tutorial: primer programa B60 local
 
-<div align="center">
+Este ejercicio ejecuta una suma y comprueba el artefacto que escribe el
+intérprete Rust de [src/babylon60.rs](../../src/babylon60.rs). El target Cargo
+se llama `babylon60`; es distinto del CLI Python instalado con el mismo nombre
+y del target `babylon60_kernel`. Los comandos siguientes seleccionan el binario
+Rust mediante su ruta, sin depender del `PATH`.
 
-[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
-[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+## 1. Preparar el intérprete
 
-</div>
+Desde la raíz del checkout, con Rust 1.89 o posterior y Python 3:
 
-> Guía paso a paso para construir tu primer agente determinista con el DSL B60.
-> Contrasta cada mecanismo con su equivalente en Python para demostrar por qué la orquestación probabilística falla.
-
----
-
-## Prerequisitos
-
-```bash
-# Compilar el kernel
-cargo build --release
-
-# El binario resultante es b60_kernel
-./target/release/b60_kernel --help
+```sh
+cargo build --locked -p babylon60_root --bin babylon60
+mkdir -p target/docs-hello
 ```
 
----
+La primera compilación necesita acceso a las dependencias fijadas en
+`Cargo.lock`. Con la caché preparada, se admite añadir `--offline`.
+Este target recibe una ruta `.b60`; no implementa una opción `--help`.
 
-## Lección 1: Asignación de Tiempo Exacta (`F60` vs `f64`)
+## 2. Escribir y ejecutar un programa acotado
 
-### El problema en Python (Asignación de Tiempo)
+Guarda el siguiente texto en `target/docs-hello/hello_causal.b60`:
 
-```python
-# Python: 1 hora dividida entre 3
-time_slice = 1.0 / 3.0  # = 0.33333333333333337
-# Tras 1 millón de iteraciones de scheduling:
-accumulated = sum([time_slice] * 1_000_000)
-print(accumulated)  # 333333.3333333198 ← DRIFT de -0.00000135 horas
-# En HFT, esto son microsegundos perdidos. En logística, paquetes mal rutados.
-```
-
-### La solución en B60 (Asignación de Tiempo)
-
-```
+```text
 DUB
-
-# Reserva un registro de tipo F60 (fracción exacta) y un divisor entero
-ALLOC F60 R0
-ALLOC I64 R1
-
-# R0 = 1 hora en dominio temporal nativo
-NIG R0 [ Y ] UNIT.HOUR
-
-# R1 = 3 (divisor)
-NIG R1 [ YYY ]
-
-# División EXACTA: 1h ÷ 3 = F60(20, 1) = exactamente 0;20 = 20 minutos
-BA.EXACT R0 R1
-
-# Imprime la representación sexagesimal
-SAR.B60 R0
-# Output: F60(20/60) → 0;20 (EXACT, zero drift, ∀ iterations)
-HALT
-```
-
-**Resultado:** `F60` mantiene `1/3` de hora como `20 minutos exactos` sin pérdida. No importa cuántas veces se itere: el resultado es siempre idéntico. El `[OBSOLETO: replay_hash]` nunca diverge.
-
-Guarda este programa como `hello_causal.b60` y ejecútalo:
-
-```bash
-./target/release/b60_kernel hello_causal.b60
-```
-
----
-
-## Lección 2: Concurrencia Causal (`FORK` + `AWAIT` vs `[OBSOLETO: asyncio]`)
-
-### El problema en Python (Concurrencia Causal)
-
-```python
-import asyncio
-
-results = []
-
-async def agent_a():
-    await asyncio.sleep(1)
-    results.append("A completado")
-
-async def agent_b():
-    # ¿Qué pasa si B depende de que A haya terminado?
-    # asyncio no garantiza orden causal, solo temporal.
-    results.append("B completado")  # Puede ejecutarse ANTES que A
-
-async def main():
-    await asyncio.gather(agent_a(), agent_b())
-    print(results)
-    # Output posible: ["B completado", "A completado"] ← INVERSIÓN CAUSAL
-    # El audit trail es inútil: no puedes probar que B dependía de A.
-
-asyncio.run(main())
-```
-
-### La solución en B60 (Concurrencia Causal)
-
-```
-DUB
-# Despacha dos agentes como corrutinas con dependencia causal explícita
-FORK AGENT_A
-FORK AGENT_B
-
-# El hilo padre registra el génesis y se retira
-EXECUTE "ORCHESTRATION_STARTED"
-HALT
-
-# --- AGENTE A: Produce un resultado ---
-MUB AGENT_A
-ALLOC TIME R0
-NIG R0 [ Y ] UNIT.SECOND
-AFTER R0 AGENT_A_DONE
-
-MUB AGENT_A_DONE
-# Despacha el evento al Ledger (fire-and-forget, idempotente)
-EXECUTE "AGENT_A_COMPLETED"
-HALT
-
-# --- AGENTE B: DEPENDE de que A haya terminado ---
-MUB AGENT_B
-# AWAIT congela esta corrutina hasta que el Ledger
-# emita un ACK topológico para "AGENT_A_COMPLETED"
-AWAIT "AGENT_A_COMPLETED" AGENT_B_PROCEED
-
-MUB AGENT_B_PROCEED
-# Solo se ejecuta DESPUÉS de que A complete.
-# Si el scheduler intentara ejecutar esto antes del ACK,
-# el Motor de Auto-Falsación emitiría CRITICAL HALT.
-EXECUTE "AGENT_B_COMPLETED_AFTER_A"
-HALT
-```
-
-**Resultado:** El Ledger BFT registra:
-
-```
-Event 1: ORCHESTRATION_STARTED  (parents: [])
-Event 2: AGENT_A_COMPLETED      (parents: [1])
-Event 3: AGENT_B_COMPLETED_AFTER_A (parents: [2])  ← CAUSALIDAD GARANTIZADA
-```
-
-La inversión causal es **imposible por construcción**. Si ocurriera por un bug del scheduler, el `[OBSOLETO: replay_hash]` diverge y el artefacto se invalida automáticamente.
-
----
-
-## Lección 3: Auto-Falsación (El Interruptor de Hombre Muerto)
-
-### El problema en Python (Auto-Falsación)
-
-```python
-# Python: Un agente que divide repetidamente pierde precisión silenciosamente
-value = 1.0
-for _ in range(100):
-    value /= 7.0
-    value *= 7.0
-print(value)  # 0.9999999999999983 ← CONTAMINACIÓN SILENCIOSA
-# El agente sigue operando con datos corruptos. Nadie lo detecta.
-# En un diagnóstico médico o un smart contract, esto es catastrófico.
-```
-
-### La solución en B60 (Auto-Falsación)
-
-```
-DUB
-# Forzamos una división recursiva para desbordar la tupla F60
-ALLOC F60 R0
-ALLOC I64 R1
-
+ALLOC I64 R0
 NIG R0 [ Y ]
-NIG R1 [ << ]  # 20
-
-MUB DIV_LOOP
-BA.EXACT R0 R1
-
-# Si Base60_Scale se satura → la aritmética ya no es exacta
-# El kernel intercepta automáticamente y emite:
-#   CRITICAL HALT: FALSATION_ERROR: TRUNCATION
-# El log completo se purga. No se emite evidencia espuria.
-
-GIN DIV_LOOP
+DAH R0 [ YY ]
+SAR R0
+EXECUTE "HELLO_CAUSAL"
+HALT
 ```
 
-**Resultado:** El kernel se detiene antes de emitir resultados corruptos. El log dice:
+`[ Y ]` representa 1 y `[ YY ]` representa 2. `DAH` suma al registro; `SAR`
+registra su valor y `EXECUTE` añade una etiqueta al grafo de este intérprete.
+Este `EXECUTE` del DSL no despacha una acción externa.
 
-```
-[CRITICAL HALT] FALSATION_ERROR: F60 SCALE SATURATION at tick 47
-[LOG PURGED] Artifact bundle invalidated. No export to Lean 4.
-```
-
-**La ausencia de `CRITICAL HALT` en un log es una prueba positiva** de que la ejecución mantuvo todas las invariantes.
-
----
-
-## Lección 4: El Ledger como Memoria Auditable
-
-### El problema con Vector DBs
-
-```python
-# Pinecone/Milvus: guardas un embedding
-db.upsert(id="transicion_104", vector=embed("Ejecutar colapso de estado Q-01"))
-
-# 3 meses después, un auditor pregunta:
-# - ¿Cuándo se guardó esta decisión?  → No hay timestamp confiable
-# - ¿Qué información llevó a esta decisión? → No hay linaje causal
-# - ¿Se modificó después de guardarla? → No hay prueba de integridad
-# CONCLUSIÓN: El audit trail es legalmente inútil.
+```sh
+(cd target/docs-hello && ../debug/babylon60 hello_causal.b60)
 ```
 
-### La solución en B60
+La ejecución termina y escribe estos tres archivos bajo
+`target/docs-hello/artifact_bundle_v3/`:
 
-Cada `EXECUTE` en B60 genera un `DAGEvent` inmutable en el Ledger:
+- `manifest.json`: contiene `global_hash`.
+- `graph.canonical`: serializa los eventos del ejercicio.
+- `proof.ir`: contiene obligaciones intermedias; su exportación no ejecuta Lean.
 
-```rust
-DAGEvent {
-    id: "transicion_104",
-    parents: ["evaluacion_invariante_103", "filtro_z3_102"],  // LINAJE CAUSAL
-    logical_timestamp: LogicalClock(1847),
-    opcode: "EXECUTE",
-    payload: "STATE_COLLAPSE_NODE_01",
-    hash: "a3f8c1...",      // SHA-256(contenido + parents)
-    signature: "SIG_OK",    // Attestation criptográfica
-}
+El manifiesto enumera además componentes que este emisor no escribe. Este
+ejercicio comprueba sólo los tres archivos anteriores.
+
+## 3. Comprobar el resultado y el digest
+
+Desde la raíz del checkout:
+
+```sh
+python3 - <<'PY'
+from pathlib import Path
+import hashlib
+import json
+
+bundle = Path("target/docs-hello/artifact_bundle_v3")
+graph = (bundle / "graph.canonical").read_bytes()
+manifest = json.loads((bundle / "manifest.json").read_text())
+events = graph.decode("utf-8").splitlines()
+assert any("|R0=3|" in event for event in events)
+assert any("|HELLO_CAUSAL|" in event for event in events)
+assert hashlib.sha256(graph).hexdigest() == manifest["global_hash"]
+assert (bundle / "proof.ir").is_file()
+print("PASS: suma 1 + 2 y digest del grafo exportado")
+PY
 ```
 
-Un auditor puede verificar:
-- **Cuándo:** `logical_timestamp` + `PhysicalClock` en metadata
-- **Por qué:** `parents` = cadena causal completa hasta el génesis
-- **Integridad:** `hash` encadena con los padres. Modificar un evento rompe toda la cadena downstream
-- **Reproducibilidad:** Re-ejecutar el mismo seed produce el mismo `[OBSOLETO: replay_hash]` o el artefacto se invalida
+Estos controles detectan un resultado distinto de 3 o una discrepancia entre el
+grafo y su manifiesto. No demuestran autorización de efectos, identidad del
+operador, supervisión humana ni cumplimiento jurídico.
 
----
+## Límites del ejemplo
 
-## Siguiente paso
+El `main` de este intérprete introduce dos cadenas de texto como proposiciones
+simuladas en una cola SPSC. Los mensajes que las presentan como verificadas no
+son resultados de Lean. El grafo utiliza marcadores de firma del intérprete,
+sin atestación de Secure Enclave ni garantía de almacenamiento WORM. Un mensaje
+de finalización, un digest consistente o la ausencia de `CRITICAL HALT` no
+certifican todas las invariantes del sistema.
 
-Explora los programas de test incluidos en el repositorio:
-
-| Archivo | Qué demuestra |
-| :--- | :--- |
-| `causal_test.b60` | FORK asíncrono + concurrencia de timers + F60 |
-| `falsation_test.b60` | Suite de autodestrucción (saturación + data race) |
-| `navier_stokes_hunter.b60` | Aislamiento de singularidades 3D con enjambre espacial |
-| `scheduler.b60` | Swarm Clock para mitigación de procesos |
-
-Para la especificación formal completa, ver [SPECIFICATION.md](../SPECIFICATION.md).
-Para el whitepaper técnico, ver [WHITEPAPER.md](../WHITEPAPER.md).
-
----
-
-<sub>BABYLON-60 · Tutorial v1.0 · Borja Moskv</sub>
+Los programas de [tools/examples](../../tools/examples/) son material de
+experimentación. Este tutorial no atribuye a sus instrucciones `F60`, `AWAIT`
+o `AFTER` exactitud general, ausencia de carreras ni sincronización con tiempo
+físico. Consulte la [especificación](../SPECIFICATION.md) y el
+[modelo de seguridad](../01_spec/spec_security_model.md) para distinguir el
+modelo, la implementación y las propiedades aún pendientes.

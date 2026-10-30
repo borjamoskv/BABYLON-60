@@ -21,33 +21,38 @@ version: 4.3.0
 
 ## 1. Inventario de Invariantes del Dominio C5-REAL
 
-Los invariantes aquí definidos son verificados formalmente por el kernel. Cualquier violación dispara un `CRITICAL_HALT`.
+Este inventario define requisitos de diseño. Cada implementación necesita sus propias
+pruebas de aceptación; la presencia de una regla aquí no demuestra su cumplimiento
+ni que toda violación termine en `CRITICAL_HALT`.
 
-### 1.1 `[OBSOLETO: INV_BFT_04]`: Non-Silent Collision Fail-Fast
+### 1.1 `INV_BFT_04`: Non-Silent Collision Fail-Fast
 **Propósito:** Prohibir la tolerancia a fallos silenciosa en colisiones causales y temporales.
-**Mecánica:** Ejecutado en el `[OBSOLETO: SQLiteCommitter]` con verificación de `payload_hash`.
+**Mecánica requerida:** El escritor SQLite debe verificar `payload_hash`.
+`SQLiteCommitter` es el nombre de diseño usado en esta especificación, no una
+clase pública localizada en el código de esta revisión. Las implementaciones
+concretas del ledger deben comprobarse por su ruta y sus pruebas.
 - Si un evento no satisface la precondición causal (el hash de su padre no existe o su reloj de Lamport es inválido), el Dominio C5-REAL **DEBE** hacer `panic!` o descartar la mutación en $O(1)$.
 - Queda explícitamente prohibido el uso de esperas (`await sleep`), heurísticas de red o uniones de estado silentes. El tiempo es una prueba criptográfica (Witness), no una métrica de red.
-- Las colisiones de `payload_hash` disparan un `[OBSOLETO: ValueError]` instantáneo.
+- Las colisiones de `payload_hash` disparan un `ValueError` instantáneo.
 
-### 1.2 `[OBSOLETO: INV_C5_15]`: Raw 32-Byte OP_RETURN Payload Encoding
+### 1.2 `INV_C5_15`: Raw 32-Byte OP_RETURN Payload Encoding
 **Propósito:** Especificación de codificación determinista para interfaz de anclaje a Bitcoin (Sink L1 Roadmap).
 **Mecánica:**
 - El hash final de un artefacto canónico (`graph_hash` o Raíz de Merkle del Proof IR) se formatea canónicamente en un script `OP_RETURN` de 34 bytes (`6a20<root>`) mediante la suite `scripts/c5_l1_ledger/l1_sink_bitcoin.py`.
 - Este valor siempre es un hash SHA-256 codificado en exactamente 32 bytes binarios (no hexadecimales dobles).
 
-### 1.3 `[OBSOLETO: INV_C5_17]`: Sovereign Dual-Licensing Invariant
+### 1.3 `INV_C5_17`: Sovereign Dual-Licensing Invariant
 **Propósito:** Protección legal y soberana del código fuente.
 **Mecánica:**
 - Toda cabecera de compilación y empaquetado debe tener embebido el régimen de Licenciamiento Dual Soberano del proyecto, asegurando que el código no pueda ser canibalizado sin trazabilidad.
 
-### 1.4 `[OBSOLETO: INV_C5_18]`: Zero-Worktree Swarm Scaling
+### 1.4 `INV_C5_18`: Zero-Worktree Swarm Scaling
 **Propósito:** Escalabilidad in-memory de agentes distribuidos sin colisión de disco.
 **Mecánica:**
-- El escalado agéntico múltiple debe ejecutarse en memoria a través del `[OBSOLETO: AgencyHypervisor]`.
+- El escalado agéntico múltiple debe ejecutarse en memoria a través del `AgencyHypervisor`.
 - No se permiten la creación de Git Worktrees físicos paralelos para cada instancia de agente que dispare IO excesivo o contención de bloqueos.
 
-### 1.5 `[OBSOLETO: INV_C5_28]`: 1-WL Graph Isomorphism Pre-Filter
+### 1.5 `INV_C5_28`: 1-WL Graph Isomorphism Pre-Filter
 **Propósito:** Prevenir comprobaciones $NP$-hard innecesarias (isomorfismo de subgrafos VF2) utilizando reducción de colores 1-WL en $O(|V|+|E|)$.
 **Mecánica:**
 - Toda comparación entre grafos causales o de estado DEBE ejecutar un filtro 1-Weisfeiler-Lehman (1-WL) antes del algoritmo exacto.

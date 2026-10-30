@@ -1,39 +1,66 @@
 ---
-title: Fuente de Verdad Canónica del Repositorio
-status: Causal-Determinist
-version: 1.0.0
+title: Fuentes de nombres, código y comprobaciones
+status: Maintained reference
+version: 5.0.0
 ---
 
-# Fuente de Verdad Canónica del Repositorio
+# Fuentes de nombres, código y comprobaciones
 
-<div align="center">
+Los manifiestos definen los nombres instalables. La documentación describe su
+uso; un nombre histórico no crea un alias que el paquete no publica.
 
-[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
-[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+| Entidad | Nombre o ruta vigente | Fuente |
+| --- | --- | --- |
+| Distribución Python | `babylon60` | [pyproject.toml](../../pyproject.toml) |
+| Namespace Python | `babylon60` bajo `01_KISH_ENGINE/` | [paquete](../../01_KISH_ENGINE/babylon60/) |
+| CLI Python | `babylon60` | `[project.scripts]` de `pyproject.toml` |
+| Exportador | `babylon60-compliance` | `[project.scripts]` de `pyproject.toml` |
+| Paquete Cargo raíz | `babylon60_root` | [Cargo.toml](../../Cargo.toml) |
+| Intérprete DSL Rust | target Cargo `babylon60`, fuente `src/babylon60.rs` | [tutorial](tutorial_hello_causal.md) |
+| CLI del kernel Rust | target Cargo `babylon60_kernel` | [fuente](../../src/bin/babylon60_kernel.rs) |
 
-</div>
+Los dos ejecutables llamados `babylon60` pertenecen a interfaces distintas.
+`uv run --locked babylon60` selecciona el CLI Python instalado en el entorno;
+`cargo run --locked -p babylon60_root --bin babylon60 -- archivo.b60`
+selecciona el intérprete Rust. `cortex`, `cortex-persist`, `cortex-compliance` y
+`b60_kernel` son nombres históricos, no puntos de entrada publicados por estos
+manifiestos. Revise comandos heredados antes de copiarlos.
 
-BABYLON-60 is the repository and protocol project.
-`cortex-persist` is the Python distribution name.
-`babylon60` is the implementation namespace.
-`cortex` is the user-facing CLI.
+El paquete Python está marcado `Private :: Do Not Upload`. La declaración de
+su nombre no acredita una publicación en PyPI ni autoriza a subir una release.
 
-## Canonical Namespaces
+## Código y contratos de persistencia
 
-- **Active package:** `babylon60`
-- **Legacy package:** `cortex` (moved to `experimental/cortex_legacy`)
-- **Canonical ledger implementation:** `01_KISH_ENGINE/babylon60/core/cortex_persist.py` (`01_KISH_ENGINE/babylon60/core/master_ledger.sql`)
-- **Canonical tests:** `tests/`
-- **Release artifact:** `cortex-persist` PyPI wheel
+- [core/cortex_persist.py](../../01_KISH_ENGINE/babylon60/core/cortex_persist.py)
+  contiene la fachada de persistencia y utiliza el
+  [esquema core](../../01_KISH_ENGINE/babylon60/core/master_ledger.sql).
+- [bft/cortex_persist_ledger.py](../../01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py)
+  implementa `CortexPersistLedger`; su
+  [kernel criptográfico](../../01_KISH_ENGINE/babylon60/bft/cortex_crypto_kernel.py)
+  define el digest de las entradas de ese ledger.
+- El [perfil criptográfico](../01_spec/spec_cryptographic_profile.md) distingue
+  subsistemas. No intercambie bases ni hashes sólo porque compartan la palabra
+  «ledger».
+- Las pruebas versionadas residen en [tests/](../../tests/). Un contador en
+  documentación no sustituye la ejecución de la revisión evaluada.
 
-## Canonical Commands
+## Preparación y comprobaciones
 
-The single official command suite for Continuous Integration:
+Desde la raíz del checkout:
 
-```bash
-uv run pytest tests/
-uv run ruff check babylon60 tests scripts
-uv run ruff format --check babylon60 tests scripts
-uv run pyright babylon60
-uv run python -m build
+```sh
+uv sync --locked --extra dev --extra gemini
+uv run --locked babylon60 --help
+uv run --locked babylon60-compliance --help
+cargo metadata --locked --no-deps --format-version 1
 ```
+
+Para cambios documentales, ejecute `make docs-check`. Los cambios de código
+requieren las pruebas y los linters dirigidos a sus rutas; las suites completas
+están declaradas en [Makefile](../../Makefile) y los flujos de
+[CI](../../.github/workflows/ci.yml). Por ejemplo, el paquete Python se analiza
+en `01_KISH_ENGINE/babylon60`, no en un directorio `babylon60` de la raíz.
+
+Una salida satisfactoria de `cargo metadata` comprueba el inventario de targets,
+no su compilación ni ejecución. La ayuda de un CLI comprueba su interfaz, no
+la integridad de un ledger ni las garantías del runtime.

@@ -1,141 +1,152 @@
 ---
-title: BABYLON-60 Enterprise Quickstart
-status: Causal-Determinist
-version: 4.0.0
+title: Onboarding local y plantilla de observación
+status: Integration example
+version: 5.0.0
 ---
 
-# QUICKSTART: Onboarding Enterprise y Despliegue Sidecar
+# Onboarding local y plantilla de observación
 
-<div align="center">
+Esta guía parte del [Dockerfile raíz](../../Dockerfile), cuyo punto de entrada
+es el CLI Python `babylon60`. Primero comprueba ese CLI y después muestra una
+plantilla para su dashboard de lectura. No presupone una imagen publicada en
+un registro ni un sidecar de ingesta gRPC listo para producción.
 
-[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
-[![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
+El antiguo nombre de modo `READ_ONLY_SHADOW_TAP` no establece por sí solo un
+canal de ingesta, una frontera de autorización ni un cerrojo biométrico. Observar
+un ledger no impide que otro proceso ejecute acciones. Una integración con un
+agente necesita su propio contrato de entrada, permisos y controles de efectos.
 
-</div>
+## 1. Construir la imagen y comprobar el CLI
 
-**Guía DevOps e Infraestructura para Desplegar el Sidecar BABYLON-60 v4.0 en Modo Read-Only**
+Desde la raíz del checkout, con Docker instalado y acceso a las imágenes base y
+a las dependencias fijadas por el proyecto:
 
-> BABYLON-60 v4.0 Sovereign Hardened · Enterprise Onboarding Guide
+```sh
+docker build --tag babylon60-local:docs .
+docker run --rm --network none babylon60-local:docs --help
+```
 
----
+`babylon60-local:docs` es una etiqueta construida localmente. El éxito del build
+y la disponibilidad de las imágenes base deben comprobarse en el entorno de
+destino. La ayuda del CLI sólo verifica su arranque, sin lanzar el kernel nativo
+ni ejecutar aprobaciones o efectos protegidos.
 
-## 1. Prerequisites
+El dashboard actual utiliza `http.server` de la biblioteca estándar; este flujo
+no requiere los extras FastAPI o Jinja2. Los ejemplos desactivan la escritura de
+bytecode Python y fijan `BABYLON_HOME` en `/data`. Sin un volumen de datos, no se
+crea allí una base ni se configura una ingesta.
 
-Before deploying the BABYLON-60 sidecar container, ensure your environment meets the following minimum requirements:
+## 2. Docker Compose: dashboard local
 
-- **Container Runtime:** Docker 24.0+ or Kubernetes 1.28+
-- **Hardware:** 1 vCPU, 512MB RAM (Kernel is the lightweight Rust `moskv-1-apex` binary)
-- **Permissions:** Read-only access to agent execution logs / gRPC stream
-- **Handoff:** Python bridge delegating to Rust Kernel via zero-overhead `os.execv` (optional `pyo3` integration available)
-- **Hardware Enclave:** Hardware TPM 2.0 integration is currently on the roadmap (software cryptographic notary active by default).
-
----
-
-## 2. Option A: Docker Compose Sidecar Deployment
-
-Deploy BABYLON-60 as a sidecar container alongside your native agent service:
+Guarda como `compose.yaml`. Este ejemplo requiere el plugin Docker Compose y la
+imagen local construida en el paso anterior:
 
 ```yaml
-version: '3.8'
-
 services:
-  # Native Sovereign Agent over C-ABI (Direct Ring-0 Shared IPC)
-  # [Falsación: Stacks comerciales como LangChain/AutoGen quedan aislados como anergía no calibrada;
-  # los agentes soberanos operan nativamente sobre la frontera C-ABI y cerrojos KUDURRU-64]
-  native_agent_service:
-    image: your-company/native-agent-app:latest
+  babylon60_observer:
+    image: babylon60-local:docs
+    command: ["dashboard"]
     environment:
-      - B60_TELEMETRY_ENDPOINT=http://b60_kernel:50051
-      - B60_CABI_IPC=/var/run/b60/manifest.shm
-    volumes:
-      - b60_ipc_socket:/var/run/b60
+      BABYLON_HOME: "/data"
+      BABYLON_DASHBOARD_HOST: "0.0.0.0"
+      BABYLON_DASHBOARD_PORT: "8080"
+      PYTHONDONTWRITEBYTECODE: "1"
     ports:
-      - "8000:8000"
-
-  # BABYLON-60 v4.0 Sovereign Hardened Sidecar (Ring-0 Kernel)
-  b60_kernel:
-    image: babylon60/kernel:4.0.0-sovereign
-    environment:
-      - BABYLON60_LICENSE_KEY=${BABYLON60_LICENSE_KEY:-DEMO_EVALUATION_KEY}
-      - B60_MODE=READ_ONLY_SHADOW_TAP
-      - B60_WORM_QUARANTINE_PATH=/var/log/b60_quarantine
-      - B60_CABI_IPC=/var/run/b60/manifest.shm
-    volumes:
-      - b60_audit_data:/var/log/b60_quarantine
-      - b60_ipc_socket:/var/run/b60
-    # devices:
-    #   - "/dev/tpmrm0:/dev/tpmrm0" # Roadmap: Future TPM 2.0 hardware anchoring
-
-volumes:
-  b60_audit_data:
-  b60_ipc_socket:
+      - "127.0.0.1:8080:8080"
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
 ```
 
-Launch with:
-
-```bash
+```sh
+docker compose config --quiet
 docker compose up -d
+docker compose logs babylon60_observer
 ```
 
----
+La interfaz queda en `http://127.0.0.1:8080/`. El dashboard lee una base SQLite
+mediante una conexión `mode=ro`; sin la base esperada, `/api/metrics` devuelve una
+lista vacía. Para aportar datos, revise el esquema y la ruta esperados en
+[dashboard/server.py](../../01_KISH_ENGINE/babylon60/dashboard/server.py) y monte
+una exportación compatible en sólo lectura. Este ejemplo no conecta el ledger
+de un agente automáticamente ni publica una API de ingesta.
 
-## 3. Option B: Kubernetes Helm Chart Deployment
+## 3. Kubernetes: manifiesto Deployment de ejemplo
 
-Inject the BABYLON-60 container into your Kubernetes agent pod:
+Este es un manifiesto `apps/v1`, no un chart Helm. La imagen local debe estar
+disponible en cada nodo que ejecute el pod; el build local de Docker no la
+distribuye al clúster. En producción, sustituya la referencia por una imagen
+revisada de su registro y fíjela por digest.
 
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: enterprise-sovereign-agent
+  name: babylon60-observer
 spec:
-  replicas: 2
+  replicas: 1
+  selector:
+    matchLabels:
+      app: babylon60-observer
   template:
+    metadata:
+      labels:
+        app: babylon60-observer
     spec:
       containers:
-        - name: native-agent-app
-          image: your-company/native-agent-app:latest
-
-        - name: babylon60-governance-sidecar
-          image: babylon60/kernel:4.0.0-sovereign
+        - name: observer
+          image: babylon60-local:docs
+          imagePullPolicy: Never
+          args: ["dashboard"]
           env:
-            - name: B60_MODE
-              value: "READ_ONLY_SHADOW_TAP"
+            - name: BABYLON_HOME
+              value: "/data"
+            - name: BABYLON_DASHBOARD_HOST
+              value: "0.0.0.0"
+            - name: BABYLON_DASHBOARD_PORT
+              value: "8080"
+            - name: PYTHONDONTWRITEBYTECODE
+              value: "1"
+          ports:
+            - containerPort: 8080
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
           resources:
             limits:
               cpu: "500m"
               memory: "512Mi"
 ```
 
----
+`spec.selector.matchLabels` coincide con las etiquetas del pod, conforme al
+[contrato de Deployment de Kubernetes](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#selector).
+Los límites de recursos son valores de ejemplo, no capacidad o consumo medidos.
+`imagePullPolicy: Never` está limitado al ejercicio con una imagen precargada.
 
-## 4. Verification & Testing
+Guarda ese bloque como `deployment.yaml` y comprueba el esquema contra un
+clúster de pruebas compatible antes de desplegar:
 
-Verify that the BABYLON-60 sidecar is successfully ingesting telemetry and building the Merkle-Causal DAG Ledger:
-
-```bash
-# Check sidecar logs
-docker logs b60_kernel
-
-# Expected output:
-# [MOSKV APEX] Causal-Determinist Kernel v4.0.0 Initialized.
-# -> [Telemetry Tap] Ingesting agent events via gRPC stream...
-# -> [Merkle DAG] Building local tamper-evident event chain.
+```sh
+kubectl apply --dry-run=server -f deployment.yaml
 ```
 
----
+El manifiesto no crea un Service ni una exposición externa. La validación del
+servidor no confirma que la imagen arranque, que exista un ledger compatible o
+que se estén recibiendo eventos.
 
-## 5. Generating Day-7 Compliance Reports
+## 4. Verificación de datos y exportación
 
-Run the compliance exporter to generate localized audit certificates for regulators:
+Una respuesta HTTP del dashboard sólo demuestra disponibilidad del servidor.
+La ingesta, la identidad del escritor y la integridad del ledger se comprueban
+por separado con entradas y resultados conocidos.
 
-```bash
-# Inside the container or via CLI
-python3 scripts/c5_utils/export_country_compliance.py --locale es --output /var/log/b60_quarantine/CERTIFICADO_AESIA.md
+Para revisar la interfaz de exportación instalada:
+
+```sh
+uv run --locked babylon60-compliance --help
 ```
 
-The generated report is ready to submit to your compliance officer or national supervisory authority.
-
----
-
-<sub>BABYLON-60 v4.0 Sovereign Hardened · Enterprise Quickstart Guide · Borja Moskv</sub>
+La [guía de evidencia regulatoria](../05_compliance_eu_ai_act.md) describe los
+argumentos `--bundle` y `--ledger`. Un informe exportado registra evidencia y
+requisitos pendientes; no constituye por sí solo una certificación jurídica,
+atestación biométrica ni aprobación para producción.
