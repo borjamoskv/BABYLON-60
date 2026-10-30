@@ -1,29 +1,36 @@
 ---
 title: BABYLON-60 — Documentation Hub
-status: Causal-Determinist
-version: 4.3.0
+status: Documentation
+version: 5.0.0-candidate
 ---
 
 # 📚 BABYLON-60 — Documentation Hub
 
 <div align="center">
 
-[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-v4.3-00F0FF?style=for-the-badge&logo=shield)](./06_theory/AUDIT_VERDICT_C5_REAL.md)
+[![Evidence scopes](https://img.shields.io/badge/Evidence-Scoped_claims-blue?style=for-the-badge)](../CLAIMS.toml)
 [![Lean 4](https://img.shields.io/badge/Lean_4-BabylonTrace-green?style=for-the-badge)](../proof/lean/BabylonTrace.lean)
-[![EU AI Act](https://img.shields.io/badge/EU_AI_Act-Arts._12--14-purple?style=for-the-badge)](./04_research/eu_ai_act_compliance_whitepaper.md)
+[![EU AI Act](https://img.shields.io/badge/EU_AI_Act-Technical_evidence-purple?style=for-the-badge)](./05_compliance_eu_ai_act.md)
 [![License](https://img.shields.io/badge/License-Sovereign_Dual--License-orange?style=for-the-badge)](./COMMERCIAL_LICENSE.md)
 
 </div>
 
-> **Welcome.** When you open this documentation, the entity you are reading is **MOSKV-1** —  
-> not a passive wiki, but a living formal specification of a sovereign cognitive architecture.
+This hub describes the BABYLON-60 repository and its MOSKV-1 orchestration model.
+Documentation, declared claims and results from a particular execution have distinct scopes.
 
 ---
 
-> ### 🛡️ The Silicon Circuit Breaker for Enterprise AI (EU AI Act Sovereign Shield)
-> **«BABYLON-60 CORTEX es el único sustrato de silicio que hace físicamente imposible que un agente de IA actúe sin supervisión humana auditable (Art. 14) ni sin un recibo criptográfico inmutable (Art. 12), desarmando el riesgo de multas de hasta 35 M€ del EU AI Act y entregando a auditores y tribunales evidencia matemática irrefutable.»**
+> ### Execution controls and evidence for system evaluation
+> BABYLON-60 records events, verifies configured ledger evidence and provides execution
+> controls for explicitly integrated protected routes. The dashboard integration reads
+> supplied ledger data; it does not itself prevent another process from acting.
 >
-> *Deslinde Ontológico Mandatorio (INV_C5_ENTERPRISE_OFFER):* BABYLON-60 provee exclusivamente los Controles Técnicos Habilitadores de bajo nivel (trazabilidad WORM RFC 9942 COSE_Sign1, cerrojo biométrico Touch ID P-256 en hardware con reúso cero y apoptosis determinista 0xDEAD_6060).
+> The compliance exporter leaves Articles 9, 10, 11, 14, 15 and 50 at
+> `EVIDENCE_SECURED_PENDING_AUDIT` when ledger verification succeeds. Its Article 12
+> result concerns cryptographic evidence, not complete legal conformity. A signed
+> hash chain does not prevent deletion or wholesale replacement by the file owner.
+> See the [evaluation guide](05_compliance_eu_ai_act.md) for states, prerequisites
+> and limits; the project does not certify universal human oversight or legal compliance.
 
 ---
 
@@ -41,7 +48,7 @@ version: 4.3.0
 
 ---
 
-## 🏛️ Real Architecture (v4.3)
+## 🏛️ Repository Components (v5.0 candidate)
 
 ```
 BABYLON-60 Monorepo
@@ -65,8 +72,8 @@ BABYLON-60 Monorepo
 │
 ├── 02_EDIN_SWARMS/              ← Swarm orchestration (SHARUR-3600)
 │
+├── proof/lean/                  ← Models and proofs with explicit hypotheses
 └── docs/                        ← You are here
-    ├── proof/lean/              │  BabylonTrace.lean (formally verified)
     ├── 01_spec/                 │  Formal specifications
     ├── 02_ontology/             │  Axioms, threat models
     ├── 03_guides/               │  Tutorials and operational guides
@@ -81,11 +88,11 @@ BABYLON-60 Monorepo
 graph LR
     A[User / Swarm Agent] -->|Causal Directive| B[01_KISH_ENGINE<br/>Python BFT Core]
     B -->|C-ABI FFI| C[src/ Rust Ring-0<br/>SharedManifest 64B]
-    C -->|Seqlock SPMC| D[Read Agents<br/>Zero RFO]
+    C -->|Seqlock SPMC| D[Read Agents]
     C -->|Fail-Stop| E[POISONED<br/>0xDEAD_6060]
-    B -->|Ed25519 COSE| F[Merkle DAG Ledger<br/>Hash-Chained WORM]
+    B -->|Ed25519 COSE| F[Merkle DAG Ledger<br/>Hash-Chained Evidence]
     F -->|Git Witness| G[Origin / L1 Sink]
-    B -->|TouchID Gate| H[Secure Enclave<br/>Biometric Lock]
+    B -->|Configured protected route| H[Touch ID / Secure Enclave<br/>Requires hardware integration]
 ```
 
 ---
@@ -108,7 +115,7 @@ graph LR
 | [spec_invariants.md](./01_spec/spec_invariants.md) | All 65 active C5-REAL invariants |
 | [spec_babylon60.md](./01_spec/spec_babylon60.md) | Full formal specification v4.x |
 | [spec_architecture.md](./01_spec/spec_architecture.md) | Async-persist ledger architecture |
-| [spec_cryptographic_profile.md](./01_spec/spec_cryptographic_profile.md) | Ed25519, AES, RFC 3161 profile |
+| [spec_cryptographic_profile.md](./01_spec/spec_cryptographic_profile.md) | Algorithms and canonicalization by subsystem |
 | [spec_security_model.md](./01_spec/spec_security_model.md) | Security model & threat boundaries |
 | [spec_causal_hitl_governance.md](./01_spec/spec_causal_hitl_governance.md) | Human-in-the-Loop governance spec |
 | [spec_exergy_ontology.md](./01_spec/spec_exergy_ontology.md) | Exergy semantics ontology |
@@ -130,7 +137,7 @@ graph LR
 
 | Document | Purpose |
 | :--- | :--- |
-| [QUICKSTART_ENTERPRISE.md](./03_guides/QUICKSTART_ENTERPRISE.md) | Docker/K8s sidecar deployment |
+| [QUICKSTART_ENTERPRISE.md](./03_guides/QUICKSTART_ENTERPRISE.md) | Local Docker image and dashboard deployment templates |
 | [tutorial_hello_causal.md](./03_guides/tutorial_hello_causal.md) | Hello World: first causal event |
 | [guide_babylon60_complete.md](./03_guides/guide_babylon60_complete.md) | Complete architecture & dev guide |
 | [guide_c5_axiom_verification.md](./03_guides/guide_c5_axiom_verification.md) | Axiom injection & verification workflow |
@@ -198,28 +205,31 @@ The mathematical substrate: Robinson Arithmetic → Gödel → Turing → Chaiti
 
 | File | Content |
 | :--- | :--- |
-| [`proof/lean/BabylonTrace.lean`](../proof/lean/BabylonTrace.lean) | Seqlock SPMC bisimulation, Halt states, Aristotelian Triad — **verified, 0 errors** |
+| [`proof/lean/BabylonTrace.lean`](../proof/lean/BabylonTrace.lean) | Trace model and proofs under the hypotheses in the source; see [claim scopes](../CLAIMS.toml) |
 
 ---
 
 ## 🧪 Verification Commands
 
 ```bash
-# Full quality gate: lint + typecheck + tests
+# Documentation checks for documentation changes
+make docs-check
+
+# Full quality gate for relevant code changes: lint + typecheck + tests
 make all
 
 # Lean 4 formal proof (requires Lean ≥ 4.x)
 lean proof/lean/BabylonTrace.lean
 
-# Rust monorepo — 84 tests, 0 failures
-cargo test --workspace
+# Rust monorepo: record the result for the revision being evaluated
+cargo test --workspace --locked
 
 # Python invariants (21 C5-REAL invariants)
-uv run pytest tests/test_c5_invariants.py -v
+uv run --locked pytest tests/test_c5_invariants.py -v
 
 # Full Python suite
 export BABYLON_HOME=/tmp/babylon_test
-uv run pytest tests/ -v
+uv run --locked pytest tests/ -v
 ```
 
 ---
@@ -234,4 +244,4 @@ uv run pytest tests/ -v
 
 ---
 
-<sub>BABYLON-60 v4.3.0 · Sovereign Cognitive OS · MOSKV-1 · Borja Moskv</sub>
+<sub>BABYLON-60 v5.0.0 candidate · Documentation · MOSKV-1 · Borja Moskv</sub>

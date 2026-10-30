@@ -183,7 +183,7 @@ El arsenal de skills opera bajo una demarcación ontológica estricta de dos can
 | 9 | `cortex-telemetry` | Operations | `17500` | C5-REAL Standard |
 | 10 | `homebrew-ecosystem-management` | Operations | `17200` | C5-REAL Standard |
 | 11 | `github-architect` | Operations | `17000` | C5-REAL Standard |
-| 12 | `[OBSOLETO: wizard]` | Utilities | `17000` | C5-REAL Standard |
+| 12 | `wizard` | Utilities | `17000` | C5-REAL Standard |
 | 13 | `flstudio-mcp-production` | Operations | `17000` | C5-REAL Standard |
 | 14 | `youtube-remotion-sota` | Operations | `16800` | C5-REAL Standard |
 | 15 | `audiovisual-sota` | Operations | `16800` | C5-REAL Standard |
@@ -214,6 +214,6 @@ El arsenal de skills opera bajo una demarcación ontológica estricta de dos can
 > Transductores de rate limits, tagged brackets, utilidades de handoff inter-sesión y generación de sátira.
 
 | # | Skill | Categoría | Exergía ($\Xi$) | Ámbito de Acción |
-| 1 | `[OBSOLETO: handoff]` | Utilities | `10500` | C5-REAL Standard |
+| 1 | `handoff` | Utilities | `10500` | C5-REAL Standard |
 
 ---

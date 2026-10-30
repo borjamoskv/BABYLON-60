@@ -3,12 +3,17 @@
 ![Status: C5-REAL](https://img.shields.io/badge/Status-C5--REAL-black?style=flat-square&logo=rust&logoColor=white)
 
 
-## 1. RESUMEN EJECUTIVO Y TELEMETRÍA DE PRODUCCIÓN
+## 1. RESUMEN Y RESULTADOS HISTÓRICOS
 
-La integración formal entre el tiempo de ejecución en Rust (Ring-0) y el sustrato axiomático en Lean 4 (Ring-1) ha completado su ciclo de verificación empírica. El sistema opera bajo dos regímenes complementarios:
+Este documento conserva resultados de un ensayo local entre Rust y Lean 4.
+Las cifras de la tabla no se han vuelto a medir en esta revisión y no certifican
+un despliegue de producción. El diseño distingue dos regímenes:
 
 1. **Régimen JIT (Proof by Reflection):** Verificación estática directa mediante la táctica `decide` del kernel de Lean 4 para micro-trazas críticas.
-2. **Régimen AOT Streaming (O(1) Memory Footprint):** Compilación nativa C/LLVM del evaluador axiomático (`[OBSOLETO: b60_oracle]`), superando la barrera de 1.000.000 de transacciones sin asignación dinámica acumulativa.
+2. **Régimen AOT Streaming:** Compilación nativa del evaluador Lean. El target
+   vigente es `babylon_aot_oracle`, definido en `proof/lean/lakefile.toml`; el
+   nombre `b60_oracle` de este ensayo se conserva solo como referencia histórica.
+   Las cotas de memoria y rendimiento requieren medición del ejecutable utilizado.
 
 ### Métricas de Validación en Banco Físico (Apple Silicon M-Series, Rust 1.97.1 / Lean 4 v4.3.0)
 
@@ -37,7 +42,7 @@ La integración formal entre el tiempo de ejecución en Rust (Ring-0) y el sustr
 +-------------------------------------------------------------+
 |                 AOT ORACLE BINARY (Ring-1)                  |
 |  - Synthesized directly from Lean 4 axioms via C/LLVM       |
-|  - Binary: .lake/build/bin/b60_oracle (2.3 MB Mach-O)       |
+|  - Binary: .lake/build/bin/babylon_aot_oracle               |
 |  - State: LockState { seq: Nat, writer: Option Nat }        |
 |  - Complexity: O(1) Memory, O(N) Processing Time            |
 +-------------------------------------------------------------+
@@ -83,11 +88,14 @@ partial def consumeStream (h : IO.FS.Handle) (state : LockState) (count : Nat) :
 La compilación se formaliza en `lakefile.toml`:
 ```toml
 [[lean_exe]]
-name = "b60_oracle"
+name = "babylon_aot_oracle"
 root = "BabylonAOTOracle"
 ```
 
-El artefacto binario resultante (`.lake/build/bin/b60_oracle`) no contiene dependencias de depuración ni sobrecarga de garbage collection; opera como un verificador puro generado por demostración formal.
+Desde `proof/lean`, `lake build babylon_aot_oracle` produce
+`.lake/build/bin/babylon_aot_oracle`. El ejecutable comprueba las transiciones
+del modelo que recibe; su construcción no demuestra por sí sola una cota de
+memoria, ausencia de garbage collection o correspondencia universal con Rust.
 
 ---
 
@@ -97,7 +105,7 @@ El punto de entrada unificado despacha cuatro vuelos de validación en secuencia
 
 1. **Micro-traza nominal:** Genera `BabylonAutoTrace.lean` con teorema `validateTrace auto_execution_trace = true := by decide`. Invoca `lake env lean` y recibe EXIT 0.
 2. **Micro-traza corrupta:** Inyecta lectura con secuencia impar. El compilador Lean 4 falla la táctica `decide` y rechaza la prueba con EXIT != 0.
-3. **Traza de 1.000.002 eventos:** Genera 333.334 ciclos triples (`[OBSOLETO: writeBegin]` -> `[OBSOLETO: writeEnd]` -> `read`). Volcado físico en 217,61 ms. Invocación del oráculo AOT nativo: 1.000.002 transacciones verificadas en 566,69 ms (tasa de verificación: 1.764.636 tx/seg). Retorno EXIT 0.
+3. **Traza de 1.000.002 eventos:** Genera 333.334 ciclos triples (`writeBegin` -> `writeEnd` -> `read`). Volcado físico en 217,61 ms. Invocación del oráculo AOT nativo: 1.000.002 transacciones verificadas en 566,69 ms (tasa de verificación: 1.764.636 tx/seg). Retorno EXIT 0.
 4. **Inyección de corrupción en escala:** Modifica el evento 500.000 alterando la secuencia a impar. El oráculo AOT intercepta la paradoja en secuencia 333.333 en 288,80 ms y aborta con EXIT 2.
 
 ---
@@ -108,6 +116,7 @@ Los resultados de BABYLON-60 complementan la auditoría de estructuras de datos 
 
 - **Canal Escalar Mononúcleo:** 113,77 M - 154,67 M msg/seg (6,47 - 8,79 ns/msg).
 - **Canal Vectorizado SIMD (Batch = 256):** 2.141,66 M msg/seg (0,467 ns/msg).
-- **Verificador Lógico AOT (Causal Gate):** 1,76 M tx/seg con garantía matemática absoluta libre de asunciones humanas.
+- **Verificador Lógico AOT (Causal Gate):** 1,76 M tx/seg reportados por el ensayo
+  histórico. El alcance lógico depende de las hipótesis y transiciones del modelo.
 
 La combinación de un canal de transporte SPSC vectorizado con un oráculo de verificación AOT streaming conforma la base para un motor transaccional soberano Zero-Trust.

@@ -47,21 +47,21 @@ El AI Act europeo no clasifica a los agentes como una categoría jurídica separ
 2. **Supervisión humana (Art. 14):** Touch ID en *Secure Enclave* y compuertas causales pueden añadir controles de autorización o interrupción en las rutas protegidas; no sustituyen el diseño completo de supervisión humana.
 3. **Robustez y ciberseguridad (Art. 15):** El diseño documenta rechazo de operaciones y comportamiento *fail-stop*; esto no equivale a una evaluación general de robustez o ciberseguridad.
 
-*Nota Comercial: La demostración de BABYLON-60 presenta un expediente técnico sobre el flujo ejecutado y sus evidencias disponibles. Puede ayudar a revisar los controles del sistema, pero por sí solo no demuestra conformidad regulatoria.*
+*La demostración produce un expediente técnico sobre el flujo ejecutado y sus evidencias disponibles. El exportador mantiene los artículos 9, 10, 11, 14, 15 y 50 en `EVIDENCE_SECURED_PENDING_AUDIT` cuando verifica el ledger. El estado criptográfico del artículo 12 tampoco certifica conformidad completa. Consulte la [guía de evaluación](05_compliance_eu_ai_act.md).*
 
-### ⚡ Demostración en 30 Segundos: AX-0 en Acción
+### Demostración local: AX-0 en acción
 
-Verifica la garantía central («El agente propone ≠ El agente autoriza») en tu terminal en menos de 2 segundos:
+El ejemplo ejercita el rechazo de autoautorización en su flujo local. La compilación y la duración dependen del entorno; registre el resultado y la revisión evaluada:
 
 ```bash
-cargo run --bin tour
+cargo run --locked --bin tour
 ```
 
-Lo que demuestra esta ejecución:
-1. **El Agente Propone:** Un modelo de IA propone una mutación operacional (`ProposedIntent`).
-2. **Cerrojo Determinista:** El agente intenta auto-autorizarse y es bloqueado por el kernel en silicio (`InvalidAuthorityKey`).
+Casos que ejercita el ejemplo, dentro de su proceso:
+1. **Propuesta:** El ejemplo construye una mutación operacional (`ProposedIntent`).
+2. **Rechazo:** El ejecutor rechaza un intento de autoautorización (`InvalidAuthorityKey`).
 3. **Transducción Causal:** Una autoridad externa firma la autorización; el ejecutor deriva el efecto de forma inyectiva (`parse_intent`).
-4. **Consistencia tras Fallo:** Cualquier reintento o replay queda físicamente impedido por el consumo durable del nonce en SQLite WAL (`NonceAlreadyConsumed`).
+4. **Replay:** El ejecutor rechaza repetir la autorización consumida (`NonceAlreadyConsumed`). Este caso no prueba que otro proceso carezca de rutas alternativas hacia el recurso.
 
 ---
 
@@ -155,24 +155,24 @@ El instalador abre el **IDE BABYLON-60** en tu navegador (`http://localhost:6060
 
 ## 🛡️ MOSKV-1: El Hypervisor Agéntico Soberano
 
-BABYLON-60 no es un modelo de lenguaje ni un plugin de chat. Es la infraestructura de silicio gobernada por **MOSKV-1**, un **hypervisor agéntico** que actúa como capa lógica de orquestación, confinamiento y mediación sobre cualquier LLM de frontera (Gemini, Claude, GPT o inferencia local).
+**MOSKV-1** identifica el modelo de gobernanza del proyecto. Su función de **hypervisor agéntico** es una capa lógica de orquestación; el código de BABYLON-60 se ejecuta en espacio de usuario. El confinamiento y la mediación dependen de la integración concreta y no se establecen por el nombre del sistema ni por conectar un LLM.
 
 ### 1. El Desacople Axiomático: Cognición vs. Autoridad (Tripartición AX-0)
 - **La Cognición (El LLM):** Inferencia estocástica, síntesis y razonamiento sobre probabilidades. Es brillante pero carece de autoridad física.
-- **La Autoridad (MOSKV-1 + BABYLON TCB):** Reside exclusivamente en el hipervisor y el hardware. Ningún agente puede tocar un archivo, alterar una base de datos ni mover fondos sin una firma criptográfica validada contra la política y atestada biométricamente por el operador humano (Touch ID / Secure Enclave).
+- **La Autoridad:** El ejecutor valida las autorizaciones en las rutas y recursos configurados como protegidos. Extender esa propiedad a otro proceso exige comprobar su confinamiento y todas sus rutas de acceso. La firma criptográfica y la atestación hardware son controles distintos; un sidecar de observación no los impone al proceso observado.
 
 ### 2. La Matriz de los 6 Dominios Canónicos
 - ⚡ **El Ingeniero:** C-ABI bare-metal, latencia sub-microsegundo, concurrencia Lock-Free Seqlock SPMC ($RFO = 0$) y memoria compartida alineada a 64 bytes (`align(64)` en L1).
-- 🌡️ **El Físico:** Termodinámica de la información (cotas de Landauer y Bekenstein, compresión geométrica de Chentsov). Erradicación de anergía: cero ciclos de CPU ni tokens disipados en tareas estériles.
-- 🩺 **El Médico:** Protección del wetware biológico. Detección de sobrecarga ejecutiva, cadencia somática y mitigación de fricción para evitar el burnout del operador.
+- 🌡️ **El Físico:** Referencias de diseño de termodinámica de la información. Las cotas teóricas y los contadores de software no sustituyen mediciones de energía o rendimiento.
+- 🩺 **El Médico:** Perspectiva de diseño sobre la carga operativa. La documentación no acredita diagnóstico fisiológico ni prevención de burnout.
 - 🎵 **El Músico:** Armonía y resonancia dinámica. Tratamiento de los flujos de eventos como una partitura temporal con balance espectral y control de saturación.
-- ⚖️ **El Abogado:** Cumplimiento nativo por diseño del Reglamento de Inteligencia Artificial de la UE (**EU AI Act**, Reglamento (UE) 2024/1689: Arts. 9, 12, 14 y 15). Cadenas de custodia WORM inmutables en SQLite WAL.
+- ⚖️ **El Abogado:** Evaluación de evidencia técnica relacionada con el EU AI Act. SQLite WAL y el encadenamiento de hashes no certifican conformidad ni impiden que el propietario del archivo borre o sustituya la base de datos.
 - 🏛️ **El Filósofo:** Epistemología popperiana radical. Distinción innegociable entre mapa y territorio; falsación continua en código y silicio. Lo que no es falsable se rechaza como ruido.
 
-### 3. Hipervisor Multi-Superficie: Cero Deriva en 13 Entornos
-MOSKV-1 unifica la gobernanza en un único punto para Cursor, Windsurf, Claude Code, Codex, Antigravity, Gemini CLI, Neovim, Cline, Roo, Copilot y daemons locales:
+### 3. Reglas compartidas entre clientes
+El repositorio distribuye reglas y herramientas para clientes compatibles. La configuración y capacidades reales de cada cliente determinan qué reglas y herramientas utiliza:
 - **Fuente Canónica Única:** `.babylon60rules`.
-- **Topología de 7 Enlaces Simbólicos:** Todas las superficies leen exactamente las mismas invariantes con sincronización atómica (`verify_active_topology.py`).
+- **Topología de 7 Enlaces Simbólicos:** `verify_active_topology.py` comprueba los enlaces del checkout; eso no certifica qué instrucciones ha cargado cada cliente.
 - **Servidor MCP Nativo y Portable:** Exposición de herramientas del kernel y memoria Cortex vía stdio sin dependencias en la nube ni rutas absolutas.
 - **Micro-Servidores Efímeros (MCP Bomba):** Capacidad de sintetizar herramientas de un solo uso en subprocesos aislados con autodestrucción inmediata (*Burn-After-Use*) y recibo criptográfico en el ledger BFT.
 
@@ -204,7 +204,7 @@ cargo run --bin babylon60_kernel -- unbox
 
 ### Demo Asesino en 60 Segundos: Causal Gating & Apoptosis Fail-Stop
 
-Demuestra seguridad por capacidades, autorización biométrica humana Touch ID, ledger SQLite WAL con hash-chain, transmutación de raíz Merkle y apoptosis fail-stop inmediata (`POISONED = 0xDEAD_6060`) ante manipulación de datos por un adversario:
+Este ejemplo ejercita un flujo de autorizaciones y evidencia. Revise su salida y los límites de las pruebas antes de atribuirle atestación biométrica hardware, confinamiento de otro proceso o cobertura de todos los efectos:
 
 ```bash
 python3 scripts/c5_demos/c5_killer_demo_60s.py
@@ -282,7 +282,8 @@ uv run babylon60-license verify --key "AcmeCorp:enterprise:..."
 | `GEMINI_HOME` | Solo scripts | Usado por scripts de exergía para rutas de vault/brain. |
 | `BABYLON60_LICENSE_KEY` | Enterprise | Clave criptográfica de licencia para uso comercial (fallback: `BABYLON60_LICENSE_KEY`). |
 | `BABYLON60_LICENSE_SALT` | Enterprise | Salt secreto HMAC para verificación de licencias. |
-| `BABYLON60_SIGNING_SEED` | Evidence | Semilla Ed25519 de 64 caracteres hex para firmar informes de evidencia. Si no se define, se genera una clave efímera identificada como tal en el informe. |
+| `BABYLON60_SIGNING_SEED` | Evidence | Semilla Ed25519 de 64 caracteres hex para firmar informes de evidencia. Ausente o inválida: la firma se rechaza por defecto. |
+| `BABYLON60_ALLOW_EPHEMERAL_SIGNING` | Solo evaluación | El valor `1` permite una clave efímera si falta la semilla; no establece una identidad persistente de confianza. |
 
 ### Ubicación de Datos
 

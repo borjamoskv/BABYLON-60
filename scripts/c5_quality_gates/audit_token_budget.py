@@ -9,8 +9,6 @@ injections, missing trigger frontmatters, and ghost listeners.
 from __future__ import annotations
 
 import argparse
-import glob
-import os
 from pathlib import Path
 import sqlite3
 import sys
@@ -69,14 +67,9 @@ def audit_ghost_listeners(db_path: Path, fix: bool = False) -> tuple[int, int]:
                 "WHERE status = 'CASCADE_RUN_STATUS_RUNNING' OR not_fully_idle = 1"
             )
             conn.commit()
-        cur.execute(
-            "SELECT count(*) FROM conversation_summaries "
-            "WHERE status = 'CASCADE_RUN_STATUS_RUNNING'"
-        )
+        cur.execute("SELECT count(*) FROM conversation_summaries WHERE status = 'CASCADE_RUN_STATUS_RUNNING'")
         running = int(cur.fetchone()[0])
-        cur.execute(
-            "SELECT count(*) FROM conversation_summaries WHERE not_fully_idle = 1"
-        )
+        cur.execute("SELECT count(*) FROM conversation_summaries WHERE not_fully_idle = 1")
         not_idle = int(cur.fetchone()[0])
         conn.close()
         return running, not_idle
@@ -89,13 +82,13 @@ def main() -> int:
     parser.add_argument(
         "--workspace",
         type=Path,
-        default=Path(__file__).resolve().parents[2],
+        default=Path(__file__).absolute().parents[2],
         help="Path to the workspace root",
     )
     parser.add_argument(
         "--global-config",
         type=Path,
-        default=Path.home() / ".gemini" / "config",
+        default=None,
         help="Path to ~/.gemini/config",
     )
     parser.add_argument(
@@ -109,9 +102,25 @@ def main() -> int:
         action="store_true",
         help="Reset ghost listeners in conversation_summaries.db to IDLE",
     )
+    parser.add_argument(
+        "--workspace-only",
+        action="store_true",
+        help="Inspect only checkout rules; omit global configuration and host telemetry",
+    )
+    parser.add_argument(
+        "--skip-ghost-listeners",
+        action="store_true",
+        help="Do not open the host conversation telemetry database",
+    )
     args = parser.parse_args()
+    skip_telemetry = args.workspace_only or args.skip_ghost_listeners
+    if args.fix_ghosts and skip_telemetry:
+        parser.error("--fix-ghosts cannot be combined with a scope that omits host telemetry")
 
-    global_rules = scan_rules_dir(args.global_config / "rules")
+    global_rules = []
+    if not args.workspace_only:
+        global_config = args.global_config or Path.home() / ".gemini" / "config"
+        global_rules = scan_rules_dir(global_config / "rules")
     ws_rules = scan_rules_dir(args.workspace / ".agents" / "rules")
 
     errors: list[str] = []
@@ -123,6 +132,7 @@ def main() -> int:
         always_on_bytes += ws_agents_size
     else:
         ws_agents_size = 0
+        errors.append("WORKSPACE INSTRUCTIONS MISSING: AGENTS.md")
 
     global_always_on_names: set[str] = set()
     for r in global_rules:
@@ -138,23 +148,21 @@ def main() -> int:
         elif r["trigger"] == "always_on":
             always_on_bytes += int(r["size"])
             if str(r["name"]) in global_always_on_names:
-                errors.append(
-                    f"DUPLICATE ALWAYS_ON RULE IN GLOBAL & WORKSPACE: {r['name']}"
-                )
+                errors.append(f"DUPLICATE ALWAYS_ON RULE IN GLOBAL & WORKSPACE: {r['name']}")
 
     if always_on_bytes > args.max_always_on_bytes:
-        errors.append(
-            f"ALWAYS_ON BUDGET EXCEEDED: {always_on_bytes:,} B > {args.max_always_on_bytes:,} B"
-        )
+        errors.append(f"ALWAYS_ON BUDGET EXCEEDED: {always_on_bytes:,} B > {args.max_always_on_bytes:,} B")
 
-    db_path = Path.home() / ".gemini" / "antigravity" / "conversation_summaries.db"
-    running, not_idle = audit_ghost_listeners(db_path, fix=args.fix_ghosts)
+    running = not_idle = None
+    if not skip_telemetry:
+        db_path = Path.home() / ".gemini" / "antigravity" / "conversation_summaries.db"
+        running, not_idle = audit_ghost_listeners(db_path, fix=args.fix_ghosts)
 
-    tok = lambda b: b // 4
+    def tok(byte_count: int) -> int:
+        return byte_count // 4
+
     print("=== [C5-REAL] AUDITORÍA DE PRESUPUESTO DE TOKENS ===")
-    print(
-        f"■ AGENTS.md (workspace): {ws_agents_size:,} B (~{tok(ws_agents_size):,} tok)"
-    )
+    print(f"■ AGENTS.md (workspace): {ws_agents_size:,} B (~{tok(ws_agents_size):,} tok)")
     g_ao = [r for r in global_rules if r["trigger"] == "always_on"]
     w_ao = [r for r in ws_rules if r["trigger"] == "always_on"]
     print(
@@ -171,9 +179,12 @@ def main() -> int:
         f"■ Reglas condicionales (model_decision): {len(g_md)} global + {len(w_md)} workspace "
         "(0 tokens de prefill fijo; solo descripción)"
     )
-    print(
-        f"■ Ghost Listeners (conversation_summaries.db): RUNNING={running}, not_fully_idle={not_idle}"
-    )
+    if skip_telemetry:
+        print("■ Ghost Listeners: OMITIDOS (sin lectura de telemetría del anfitrión)")
+    else:
+        print(f"■ Ghost Listeners (conversation_summaries.db): RUNNING={running}, not_fully_idle={not_idle}")
+    if args.workspace_only:
+        print("■ Alcance: workspace; configuración global excluida")
 
     if errors:
         for err in errors:

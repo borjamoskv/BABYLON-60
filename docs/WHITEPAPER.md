@@ -1,393 +1,272 @@
 ---
-title: BABYLON-60 — A Formal Infrastructure for Verifiable AI Agents
-status: Causal-Determinist
-version: 4.3.0
+title: BABYLON-60 — Infrastructure and evidence boundaries
+status: Technical documentation
+version: 5.0.0
 ---
 
-# BABYLON-60: A Formal Infrastructure for Verifiable AI Agents
+# BABYLON-60: Infrastructure for Verifiable AI Agent Records
 
-<div align="center">
+[Sources and declared claims](../CLAIMS.toml) ·
+[Formal trace model](../proof/lean/BabylonTrace.lean) ·
+[Cryptographic profiles](01_spec/spec_cryptographic_profile.md)
 
-[![C5-REAL Compliant](https://img.shields.io/badge/C5--REAL-v4.3-0052CC?style=for-the-badge&logo=shield)](./06_theory/AUDIT_VERDICT_C5_REAL.md)
-[![Lean 4](https://img.shields.io/badge/Lean_4-BabylonTrace_0_errors-green?style=for-the-badge)](../proof/lean/BabylonTrace.lean)
-[![Tests](https://img.shields.io/badge/Tests-84_Rust_%7C_19_Python_C5-brightgreen?style=for-the-badge)](../tests/)
-[![License](https://img.shields.io/badge/License-Sovereign_Dual--License_v4.0-orange?style=for-the-badge)](../SECURITY.md)
+**Technical whitepaper — documentation revision, 30 October 2026**
 
-</div>
-
-**Technical Whitepaper v4.3**
-
-> Borja Moskv · babylon60.com · September 2026
-
-> [!IMPORTANT]
-> **Implementation Status (v4.3, audited 2026-09-13):**  
-> BABYLON-60 is a phased architecture. The table below maps each mechanism to its current state:
+> Borja Moskv · babylon60.com
 >
-> | Mechanism | Status | Evidence |
-> | :--- | :--- | :--- |
-> | Ring-0 SharedManifest 64B Seqlock SPMC | ✅ **Implemented** | `src/manifest.rs`, `src/seqlock.rs` — 84 tests passing |
-> | Fail-Stop Apoptosis (`0xDEAD_6060`) | ✅ **Implemented** | `src/halt.rs` |
-> | Lean 4 Bisimulation (`BabylonTrace.lean`) | ✅ **Verified** | 0 errors, 0 warnings |
-> | Hash-chained SQLite/WAL Ledger | ✅ **Implemented** | `[OBSOLETO: CortexPersistLedger]` — Ed25519 + Merkle |
-> | C5-REAL Invariant Suite (21 invariants) | ✅ **Implemented** | `tests/test_c5_invariants.py` — 19 pass, 1 xfail |
-> | Ed25519 EU AI Act Compliance Exporter | ✅ **Implemented** | `babylon60/compliance_exporter/` |
-> | F60 Sexagesimal Exact Arithmetic | 🔬 **Design stage** | Specification in §3 |
-> | B60 DSL ISA & Kernel | 🔬 **Design stage** | Compiler scaffolding in `crates/b60-lang/` |
-> | Live BFT Multi-Writer Consensus | 🗺️ **Roadmap** | Currently single-writer SQLite/WAL |
-> | Proof IR → Lean 4 Full Pipeline | 🗺️ **Roadmap** | Axiomatic sketch in `docs/proof/lean/` |
+> This document distinguishes source implementations, formal models, design
+> proposals and historical test reports. Its documentation checks do not certify
+> a running deployment, hardware isolation or legal conformity.
 
----
+## Implementation Status
+
+| Mechanism | Source or model | Evidence boundary |
+| --- | --- | --- |
+| SharedManifest and Seqlock | [manifest.rs](../src/manifest.rs), [seqlock.rs](../src/seqlock.rs) | Layout and protocol implementations; hardware traffic and latency require measurements. |
+| Fail-stop admission | [halt.rs](../src/halt.rs) | An explicit rejection path; not proof that every possible violation is detected. |
+| Formal trace validation | [BabylonTrace.lean](../proof/lean/BabylonTrace.lean) | Theorems about the model under its hypotheses; not a proof of the entire implementation. |
+| Python SQLite ledger | [cortex_persist_ledger.py](../01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py) | Local chain consistency and row-invariant checks. |
+| Evidence exporter | [eu_ai_act.py](../01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py) | Cryptographic evidence status; other article assessments remain pending. |
+| B60 interpreter and compiler | [src/babylon60.rs](../src/babylon60.rs), [b60-lang](../crates/b60-lang/) | Distinct implementations; supported examples and limits are identified in the [tutorial](03_guides/tutorial_hello_causal.md). |
+| Distributed multi-writer consensus | Architecture proposal | Local verification quorum and a single-writer ledger do not demonstrate network BFT. |
+
+Current results require a command, revision, environment and retained output.
+[CLAIMS.toml](../CLAIMS.toml) records declared claims and evidence commands; a
+listed claim is not a newly executed test result.
 
 ## Abstract
 
-We present BABYLON-60, a systems-level infrastructure for verifiable autonomous AI agents. Current agent architectures rely on probabilistic inference over floating-point arithmetic, producing decision trails that are neither reproducible nor auditable. BABYLON-60 introduces four mechanisms that jointly address this: (1) a **Ring-0 SharedManifest** — a 64-byte lock-free IPC slot with hardware-verified Seqlock SPMC protocol and formally proven bisimulation in Lean 4; (2) **F60**, a sexagesimal exact-arithmetic type system that eliminates temporal drift in agent scheduling; (3) a **Tamper-Evident Hash-Chained Ledger** providing cryptographically sealed execution traces signed with Ed25519; and (4) a **Self-Falsification Engine** that transitions to an irreversible `POISONED` state upon detecting invariant violations, preferring deterministic failure over uncalibrated operation. We describe the architecture, formal semantics, and present empirical results from the implemented substrate.
-
----
+BABYLON-60 combines a Rust state and authorization substrate, formal trace models,
+Python hash-chained records and evidence export. These mechanisms support specific
+checks on recorded state and admitted operations. Their guarantees depend on the
+entry point, trust boundary, key custody, observation path and deployment. Hash
+integrity does not establish semantic truth, completeness of an execution history
+or universal control over an agent's effects.
 
 ## 1. Introduction
 
 ### 1.1 The Problem: Similarity Is Not Lineage
 
-The dominant approach to agent memory in 2026 is vector similarity search (Pinecone, Milvus, Weaviate). A vector database can retrieve semantically similar text, but it cannot prove:
+Similarity retrieval alone does not specify event order, derivation or integrity.
+Those properties require explicit records and validation rules. A hash chain
+provides a consistency relation over recorded bytes; independent observation and
+trusted commitments are needed to connect those records to real effects.
 
-- **When** a memory was stored (temporal provenance)
-- **How** it was derived (causal lineage)
-- **Whether** the retrieval history has been tampered with (integrity)
+### 1.2 Context and Execution Limits
 
-Without causal lineage, agents suffer from *generative entropy*: they drift, hallucinate recurrently, and leave audit trails that are legally worthless. For regulated industries — banking, insurance, healthcare, autonomous vehicles — this is not a technical inconvenience but a compliance-blocking liability.
+The project uses terms such as context rot and reasoning loops to describe agent
+failure modes. They are operational concerns, not measurements of thermodynamic
+energy. Comparisons with other frameworks require a common workload and benchmark;
+Landauer's bound does not establish that a software framework is unusable.
 
-### 1.2 Context Rot, Limerence Loops, and Framework Anergy
+### 1.3 Architecture and Trust Boundaries
 
-We identify critical failure modes absent from conventional literature:
-
-**Context Rot.** The silent degradation of long-horizon context in transformer-based agents. Unlike catastrophic forgetting (a training phenomenon), context rot occurs at inference time when accumulated context tokens introduce contradictory or decayed information that the model cannot distinguish from fresh input.
-
-**Limerence Loops and Framework Anergy.** Autonomous agents trapped in infinite reasoning cycles that consume computational exergy without producing useful work. Commercial orchestration frameworks (LangChain, AutoGen, CrewAI) are **Frameworks de Anergía Falsados por el Límite de Landauer**: stacks parasitarios desacoplados de la física del silicio que carecen de mecanismos formales para acotar la profundidad de razonamiento, verificar la coherencia causal de memoria o detectar ciclos entrópicos no productivos. Al operar sobre capas interpretadas y APIs no acotadas, disipan entalpía computacional sin generar trabajo verificable.
-
-### 1.3 Sovereign Architecture vs. Vendor Consumer Stacks
-
-Where legacy orchestration models presuppose a subservient consumer layer (*«Your Agent Stack (LangChain / AutoGen / CrewAI / Ollama)»*), BABYLON-60 establishes a **Sovereign Architecture in Silicon** governed by thermodynamic and cryptographic invariants:
-
-```text
-┌────────────────────────────────────────────────────────────────────────┐
-│           BABYLON-60 SOVEREIGN ARCHITECTURE (C5-REAL KERNEL)          │
-├────────────────────────────────────────────────────────────────────────┤
-│ • Kernel en Silicio (00_ABZU_KERNEL): C-ABI / Rust / Lean 4            │
-│ • SPMC L1 Cache: SharedManifest 64B (align(64), MESI Shared, RFO = 0)  │
-│ • Barreras KUDURRU-64: Lock-free gravity filtering & Zero-Split Tool   │
-│   Binding across all agent coroutines                                  │
-│ • Oráculo de Apoptosis: MUSHUSHU-0 (0xDEAD_6060 Fail-Stop Determinista)│
-├────────────────────────────────────────────────────────────────────────┤
-│ [FALSACIÓN]: LangChain / AutoGen / CrewAI                             │
-│ Reclasificados como «Frameworks de Anergía Falsados por el Límite de   │
-│ Landauer» — Inviables para agentes autónomos verificables en Ring-0/1. │
-└────────────────────────────────────────────────────────────────────────┘
-```
-
-1. **Kernel en Silicio / C-ABI / Rust / Lean 4:** Frontera ontológica inmutable (`00_ABZU_KERNEL`) con atestación matemática por reflexión (`by decide`) y correspondencia Curry-Howard, eliminando intermediarios de software y sobrecoste de serialización.
-2. **SPMC L1 Cache & SharedManifest 64B:** Cerrojo físico de memoria de 64 bytes (`align(64)`) acoplado a la línea de caché L1 en AArch64 y x86-64, implementando el protocolo Seqlock SPMC con cero tráfico RFO (*Read For Ownership*) y lectura en tiempo de acceso sub-nanosegundo.
-3. **Barreras KUDURRU-64:** Filtro de gravedad lock-free $O(1)$ que previene el DDoS cognitivo y fuerza el aislamiento causal de agentes en silicio, erradicando los limerence loops antes de que disipen entalpía en el bus de memoria.
+The repository labels kernel, engine and swarm responsibilities as rings. These
+labels do not establish OS privilege levels or hardware virtualization. Rust,
+Python and Lean operate in the permissions and isolation supplied by the host.
+The [security model](01_spec/spec_security_model.md) states which actors and
+properties each record mechanism covers.
 
 ### 1.4 Contributions
 
-BABYLON-60 attacks these problems at the infrastructure layer, below the LLM, by imposing thermodynamic and cryptographic constraints on the agent's execution substrate. Contributions are:
+The source provides concrete mechanisms for state publication, authorization,
+record hashing and model validation. Evaluation must address each mechanism
+separately. Compilation, a valid hash and a successful model check are distinct
+observations; none substitutes for an independently observed protected effect.
 
-1. **Ring-0 SharedManifest 64B** — A formally verified lock-free IPC slot with Aristotelian Seqlock SPMC semantics (§2). ✅ *Implemented.*
-2. **F60 Exact Arithmetic** — A rational type system eliminating floating-point drift in temporal computations (§3). 🔬 *Design stage.*
-3. **Tamper-Evident DAG Ledger** — A hash-chained ledger with Ed25519 cryptographic sealing and Merkle root attestation (§4). ✅ *Implemented (single-writer form).*
-4. **Self-Falsification Engine** — A dead-man's-switch that transitions to `POISONED = 0xDEAD_6060` upon detecting invariant violations (§5). ✅ *Implemented.*
-5. **Proof IR and Lean 4 Backend** — A formal verification pipeline from execution traces to Lean 4 proof obligations (§6). 🗺️ *Roadmap; bisimulation core verified.*
-6. **Thermodynamic Routing Matrix** — Exergy-based constraints applied to the agent's reasoning AST (§7). 🔬 *Design stage.*
-
----
-
-## 2. The Implemented Ring-0: SharedManifest 64 Bytes
+## 2. SharedManifest and Seqlock
 
 ### 2.1 Physical Layout
 
-The architectural foundation of BABYLON-60 is not software — it is physics. The `SharedManifest` is a single 64-byte struct, aligned to `align(64)`, that fits exactly within one L1 cache line on x86-64 and ARMv9 processors:
+[src/manifest.rs](../src/manifest.rs) defines a 64-byte, 64-byte-aligned
+`SharedManifest` with `status_flag`, `seq`, `epoch_id`, four atomic payload words
+and padding. The hash field stores bytes selected by its producer; it does not
+choose a cryptographic profile by itself. Layout alone does not establish a
+cache-line size on every processor, absence of false sharing or access latency.
 
-```
-Offset  Size  Field          C-ABI Type        Microarchitectural Property
-0x00    4 B   status_flag    AtomicU32         RUNNING (0x1) | POISONED (0xDEAD_6060)
-0x04    4 B   seq            AtomicU32         Odd = Dynamis | Even = Entelecheia
-0x08    8 B   epoch_id       AtomicU64         Strict monotonic counter (Anti-ABA)
-0x10   32 B   payload_hash   [AtomicU64; 4]    Causal root SHAKE256 / Merkle Peak
-0x30   16 B   _padding       [u8; 16]          Alignment to 64 bytes (L1 Cache Line)
-```
+### 2.2 Protocol States
 
-### 2.2 Aristotelian Triad in Silicon
+The Seqlock uses sequence parity to distinguish a publication in progress from
+an even-sequence snapshot. Readers must apply the implemented ordering and retry
+rules. A spinning reader consumes resources. Claims about RFO traffic, contention,
+latency or power require measurements on the target hardware and workload.
 
-The Seqlock SPMC protocol maps to the Aristotelian ontological triad:
-
-- **Dynamis** (`seq mod 2 = 1`): State in potency. The single writer (*Primum Movens*) has begun publishing. Readers detect the odd sequence number and spin, consuming zero exergy.
-- **Entelecheia** (`seq mod 2 = 0`): State in act. Publication complete. Readers acquire a consistent snapshot with zero RFO traffic (MESI Shared state).
-- **Primum Movens**: The single writer. All Landauer dissipation ($\Delta Q \ge k_B T \ln 2 \cdot 384 \approx 1.10 \times 10^{-18}\text{ J}$ at 300 K) is confined here.
+The formula `k_B T ln(2)` bounds idealized logically irreversible bit erasure.
+A source constant derived from it is not a measurement of CPU energy per
+publication or proof that only the writer dissipates energy.
 
 ### 2.3 Formal Verification in Lean 4
 
-The bisimulation correctness of the Seqlock — that `Dynamis` and `Entelecheia` are disjoint and that every writer transition produces a valid `Entelecheia` state — is proven in [`proof/lean/BabylonTrace.lean`](../proof/lean/BabylonTrace.lean):
+[BabylonTrace.lean](../proof/lean/BabylonTrace.lean) contains
+`no_torn_reads_universal`:
 
 ```lean
--- Formally proven: Dynamis and Entelecheia are disjoint
-theorem entelecheia_dynamis_disjoint (s : SeqState) :
-    isEntelecheia s → ¬ isDynamis s := by revert h_dyn; decide
+-- Signature of the theorem defined and proved in the linked source.
+-- The hypothesis concerns acceptance by the model's trace validator.
+-- validateTrace trace = true → TraceReadsEven trace
 ```
 
-**Verification status: 0 errors, 0 warnings** (native Lean 4, `/opt/homebrew/bin/lean`).
+The theorem concerns the definitions and hypotheses of that model. Establishing
+correspondence with a Rust implementation also requires checking event capture,
+emission, memory ordering and assumptions. This documentation revision did not
+run Lean and does not publish a fresh compiler-success claim.
 
-### 2.4 Fail-Stop Apoptosis
+### 2.4 Fail-Stop Admission
 
-If any invariant breaks, the kernel executes an irreversible state transition:
+[src/halt.rs](../src/halt.rs) implements halt paths selected by features and
+signer availability. Receipt states distinguish signed evidence, unsigned evidence
+and persistence failure. A missing error string does not attest that all
+invariants held; error handling and the observed effect must be checked directly.
 
-```rust
-// src/halt.rs
-pub fn epistemic_halt(manifest: &SharedManifest, reason: HaltReason) -> ! {
-    manifest.status_flag.store(0xDEAD_6060, Ordering::Release);
-    eprintln!("[APOPTOSIS] CORTEX-TAINT: {:?}", reason);
-    std::process::abort()
-}
-```
+## 3. F60 and Exact Arithmetic
 
-The system **deterministically dies rather than operate uncalibrated**. The absence of `CORTEX-TAINT` in a log is itself a positive attestation of invariant preservation.
+The project explores rational and sexagesimal representations for exact values.
+Exactness is bounded by the chosen representation, supported operations and
+overflow rules. An illustrative type or formula does not establish that all
+interpreter paths reject approximation or that every fraction is representable.
+The [tutorial](03_guides/tutorial_hello_causal.md) specifies the executable and
+example supported by the current checkout. Interpreter output is not a Lean proof.
 
----
-
-## 3. F60: Sexagesimal Exact Arithmetic *(Design Stage)*
-
-### 3.1 Motivation
-
-In IEEE 754 double-precision (`f64`), the fraction `1/3` is represented as `0.333...` with an error of `~5.55e-17` per operation. Over 10⁶ scheduling iterations (a typical long-running agent lifecycle), this drift accumulates to `~5.55e-11` — sufficient to cause off-by-one tick errors in high-frequency scheduling, false singularity detection in numerical simulation, and divergent replay hashes in audit trails.
-
-### 3.2 Design
-
-BABYLON-60 defines `F60` as a compile-time rational type in the `crates/b60-lang/` compiler:
-
-```rust
-struct F60 {
-    numerator: u64,
-    base60_scale: u8,
-}
-```
-
-All temporal values are strongly typed with units (`UNIT.TICK`, `UNIT.SECOND`, `UNIT.MINUTE`, `UNIT.HOUR`). The compiler performs **sexagesimal constant folding** during SSA emission:
-
-| Expression | `f64` Result | `F60` Result | Error |
-| :--- | :--- | :--- | :--- |
-| 1 hour ÷ 3 | 0.33333… hours | `F60(20, 1)` = 0;20 = 20 min exact | **0** |
-| 1 hour ÷ 7 | 0.14285… hours | `F60(8, 1)` + remainder tracked | **bounded** |
-
-### 3.3 Overflow Protection (Truncation Firewall)
-
-If `[OBSOLETO: base60_scale]` saturates, the result cannot be represented exactly. Rather than silently truncating, the system triggers `epistemic_halt(HaltReason::F60Truncation)`. The kernel refuses to emit approximate results under any circumstance.
-
----
-
-## 4. Tamper-Evident Hash-Chained Ledger ✅
+## 4. Tamper-Evident Hash-Chained Ledger
 
 ### 4.1 Architecture
 
-The `[OBSOLETO: CortexPersistLedger]` (`01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py`) implements a hash-chained append-only log backed by SQLite/WAL:
-
-```python
-@dataclass
-class CortexEvent:
-    event_type: str
-    payload: dict[str, Any]
-    cortex_taint: str          # session / agent identifier
-
-# Each append returns:
-# {"seq": N, "event_id": "...", "entry_hash": "sha256(...)", "status": "C5_PERMANENT"}
-```
+[CortexPersistLedger](../01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py)
+implements a local SQLite/WAL record chain. Its BFT Python profile computes
+**SHA3-256 over canonical JSON**, not SHA-256 over CBOR. The hash body includes
+sequence, identifiers, payload JSON, attribution, Lamport clock, previous hash and
+`timestamp`; the inner payload remains a JSON string in the outer envelope.
 
 ### 4.2 Integrity Properties
 
-| Property | Mechanism | Guarantee |
-| :--- | :--- | :--- |
-| **Tamper evidence** | SHA-256 hash chain over sequential entries | Detectable modification |
-| **Cryptographic attestation** | Ed25519 signature over Merkle root | Non-repudiation |
-| **Deterministic replay** | `verify_integrity()` re-hashes full chain | 1:1 execution correspondence |
-| **EU AI Act Art. 12** | WORM semantics — no deletes, no updates | Forensic traceability |
+| Check | Mechanism | Scope |
+| --- | --- | --- |
+| Chain consistency | Recompute SHA3-256 entries and check row invariants | Detect mismatch against the chain being read. |
+| Root attestation | Verify a signature against an identified trusted key | Authenticate the signed statement, subject to key custody and identity binding. |
+| Completeness and provenance | Independent observation and retained trusted roots | Not established by recomputing an internally consistent database. |
+| Durability | SQLite connection policy and storage behavior | Not physical WORM protection against an administrator replacing the database. |
+
+The [cryptographic profile](01_spec/spec_cryptographic_profile.md) specifies the
+Python encoding and Merkle construction, a reproducible vector and distinct
+Rust SHA-256 and BLAKE3 profiles. These profiles are not interchangeable.
+`verify_integrity()` validates chain consistency; it does not prove that every
+execution was recorded, that a signature is trusted or that an action was legal.
 
 ### 4.3 Temporal Domain Separation
 
-Three temporal domains are strongly typed and incompatible:
+Logical ordering and physical time serve different purposes. In this Python
+profile `timestamp` is included in the digest. Its behavior must not be inferred
+from a separate Rust format or from a proposed logical-clock-only protocol.
 
-- `PhysicalClock(u128)` — wall-clock nanoseconds
-- `LogicalClock(u64)` — scheduler tick order
-- `SimulationClock(u64)` — mathematical simulation epoch
+### 4.4 Scalability Architecture
 
-### 4.4 Scalability Architecture (Roadmap)
+Distributed consensus is a separate protocol requirement. Local heterogeneous
+verification, single-writer serialization and network BFT require different
+failure models and evidence. No zero-downtime migration guarantee is established
+by this document.
 
-The current single-writer SQLite/WAL implementation (Escalón 3) is designed to evolve toward multi-writer live BFT consensus (Escalón 4) while preserving the same C-ABI interface, allowing zero-downtime migration.
+## 5. Validation and Rejection
 
----
+The repository contains runtime checks and source-quality tests. Static checks
+for a prohibited pattern do not prove that the deployed process mediates every
+effect or detects every failure. A rejection result must be checked together with
+independent evidence that the protected effect did not occur.
 
-## 5. Self-Falsification Engine ✅
+For a new evaluation, run the relevant commands with the lockfiles and retain
+actual output. Historical counts are not expected output for a later revision:
 
-### 5.1 The Dead Man's Switch
-
-BABYLON-60 halts deterministically when numerical or causal reality is contaminated. The falsification engine enforces invariants at runtime through 21 C5-REAL assertions codified in `tests/test_c5_invariants.py`:
-
-| Invariant | Trigger | Action |
-| :--- | :--- | :--- |
-| **INV_C5_13** (AST Nesting ≤ 4) | Control-flow depth exceeds 4 | Build-time rejection |
-| **INV_C5_19** (No unbounded loops) | `while True:` literal detected | Ruff lint failure |
-| **INV_C5_SHM** (No sync IO in hot path) | SQLite `synchronous=FULL` in inference loop | Architecture violation |
-| **INV_BFT_04** (Collision invariant) | Duplicate event ID with different hash | `epistemic_halt()` |
-| **Numerical Exactness** | `F60.base60_scale` saturated | `epistemic_halt(F60Truncation)` |
-
-### 5.2 Why Self-Destruct?
-
-Current AI systems, when they fail, **hallucinate silently**. BABYLON-60 takes the opposite approach: it prefers to halt and emit nothing rather than emit potentially spurious evidence. This is not a safety feature bolted on — it is the primary design constraint from which all other architecture follows.
-
-### 5.3 Empirical Validation
-
-The invariant suite is continuously verified:
-
-```bash
-# 21 C5-REAL invariants, running clean:
-uv run pytest tests/test_c5_invariants.py -v
-# Result: 19 passed, 1 skipped, 1 xfailed — 0 failures
-
-# Rust monorepo, 0 failures:
-cargo test --workspace
-# Result: 84 tests passed
-
-# Type-safety, 0 errors:
-mypy 01_KISH_ENGINE/babylon60 tests --strict --ignore-missing-imports
-# Result: 0 errors in 272 files
+```sh
+uv run --locked pytest tests/test_c5_invariants.py -q
+cargo test --workspace --locked
 ```
 
----
+These commands are test instructions, not results of this documentation change.
+They are unnecessary for a documentation-only check unless runtime behavior is
+also being evaluated.
 
 ## 6. Proof IR and Lean 4 Backend
 
-### 6.1 Verified Bisimulation (Implemented)
+### 6.1 Formal Models
 
-The Seqlock SPMC bisimulation — the core safety property of the Ring-0 SharedManifest — is **formally proven** in Lean 4. Key theorems in [`proof/lean/BabylonTrace.lean`](../proof/lean/BabylonTrace.lean):
+The actual theorem definitions and dependencies are in
+[proof/lean](../proof/lean/). Review their hypotheses and used axioms, and compile
+the selected targets before reporting a result. A theorem whose only conclusion
+is `True` supplies no evidence about concurrency, authorization or execution.
 
-```lean
--- Halt states absorb all transitions
-theorem halt_absorbs (s : BabylonState) :
-    isHalted s → ∀ (t : BabylonState), ¬ babylon_step s t
+### 6.2 Trace Pipeline
 
--- Poisoned state is terminal
-theorem poisoned_terminal (s : BabylonState) :
-    s.status = Status.POISONED → isHalted s
-```
+[crates/b60-lang](../crates/b60-lang/) contains compiler and emission code.
+The [kernel audit](security/kernel-audit-2026-10-15.md) describes specific trace,
+framing and emitter tests together with their limits. Exporting `proof.ir` from
+an interpreter does not itself invoke a proof checker.
 
-### 6.2 Full Proof IR Pipeline (Roadmap)
+### 6.3 Correspondence Obligation
 
-The long-term architecture compiles execution traces to Lean 4 proof obligations:
+A one-to-one correspondence between an observed execution and an exported trace
+requires a validated observation and translation path. Successful termination,
+ledger verification and compilation of a model are insufficient by themselves.
+The relationship must be established for the identified program and semantics.
 
-```
-Program → Typed SSA → Proof IR → [Lean 4 Emitter]
-```
+## 7. Routing and Resource Budgets
 
-The Proof IR contains exclusively: `State`, `[OBSOLETO: Transition]`, `Invariant`, `Lemma`, `[OBSOLETO: Obligation]`, `[OBSOLETO: Witness]`. The `crates/b60-lang/` crate provides the compiler scaffolding.
-
-### 6.3 The Core Theorem (Operational Version)
-
-> *"If a well-typed program terminates without `CORTEX-TAINT` and the Artifact Bundle passes `verify_integrity()`, then there exists a one-to-one correspondence between the observed runtime execution and the trace represented in the exported artifact."*
-
----
-
-## 7. Thermodynamic Routing Matrix *(Design Stage)*
-
-### 7.1 Exergy Constraints
-
-The routing matrix applies exergy bounds to the agent's reasoning AST. Each `FORK` operation has a bounded exergy budget. If a coroutine exceeds its budget without producing a measurable state transition in the DAG Ledger, it is classified as a **limerence loop** and terminated.
-
-### 7.2 B60 ISA (Compiler Scaffolding Available)
-
-The kernel operates on a minimal ISA (~25 instructions) designed for formal provability:
-
-| Opcode | Domain | Semantics |
-| :--- | :--- | :--- |
-| `ALLOC T R` | Memory | Allocate register `R` with strict type `T` |
-| `NIG R V` | Memory | Assign sexagesimal literal `V` to register `R` |
-| `BA.EXACT R V` | ALU | Exact division, result as purified `F60` tuple |
-| `FORK L` | Control | Clone frame, dispatch parallel coroutine at label `L` |
-| `AFTER R L` | Scheduling | Yield OS thread → resume at `L` after time `R` |
-| `AWAIT S L` | Causality | Freeze frame until topological ACK, resume at `L` |
-| `EXECUTE S` | Ledger | Idempotent fire-and-forget event `S` to ledger |
-
-### 7.3 Trusted Computing Base (TCB)
-
-| Trusted | Untrusted |
-| :--- | :--- |
-| Kernel, Parser, SSA Builder, Exporter | Numerical Solver, Input Programs, External Storage |
-
-The TCB is deliberately minimized: ~25 instructions, 3 special registers, strong typing, minimal heap, no reflection, no arbitrary pointers.
-
----
+A bounded agent execution needs explicit limits for steps, time, memory and
+external effects. Proposed exergy-routing terminology is a design description;
+without a measurement protocol it does not provide energy units or a physical
+budget. Each opcode and scheduler guarantee must be evaluated in its selected
+interpreter or compiler, rather than inferred from an ISA table.
 
 ## 8. Compliance and Regulatory Alignment
 
 ### 8.1 EU AI Act
 
-The EU AI Act — Regulation (EU) 2024/1689, in force since 1 August 2024 — requires that high-risk AI systems provide:
+The documentation follows the published timetable: obligations for high-risk
+systems in Annex III apply from **2 December 2027**, and Article 50 transparency
+rules apply from 2 August 2026. Consult the
+[European Commission](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai)
+and the [compliance guide](05_compliance_eu_ai_act.md) for sources and scope.
 
-- **Traceability:** Logging capabilities to enable monitoring of operation (Art. 12)
-- **Transparency:** Technical documentation sufficient to assess compliance (Art. 11)
-- **Human Oversight:** Ability to understand, interpret, and intervene (Art. 14)
+The exporter records cryptographic evidence status. Even with a verified ledger,
+its assessments of Articles 9, 10, 11, 14 and 15 remain
+`EVIDENCE_SECURED_PENDING_AUDIT`. An integrity check contributes evidence for
+record-keeping; it does not certify complete compliance with Article 12 or the
+Regulation. Purpose, risk classification, organizational measures and applicable
+assessment procedures remain external obligations.
 
-Following the Digital Omnibus on AI (Regulation (EU) 2026/1744), Article 12 record-keeping obligations apply from **2 December 2027**; Article 50 transparency obligations apply since 2 August 2026.
+### 8.2 Sector-Specific Assessment
 
-BABYLON-60's implemented ledger and compliance exporter directly address these articles:
+A hash-chain verifier does not establish explainability, suitability for trading,
+clinical validation or sector-specific legal conformity. Those claims require
+a separate assessment of the actual system and intended use.
 
-| Article | BABYLON-60 Mechanism | Implementation Status |
-| :--- | :--- | :--- |
-| Art. 11 (Technical Documentation) | Proof IR → Lean 4 obligations | 🗺️ Roadmap |
-| Art. 12 (Record-Keeping) | Hash-chained SQLite/WAL + Ed25519 | ✅ Implemented |
-| Art. 14 (Human Oversight) | Biometric TouchID Gate + HITL Governance | ✅ Implemented |
-| Art. 15 (Accuracy & Robustness) | Self-Falsification Engine (21 invariants) | ✅ Implemented |
+### 8.3 Biometric Attestation
 
-### 8.2 Financial Regulation (SEC, MiFID II)
+The [declared hardware claim](../CLAIMS.toml) distinguishes software P-256
+verification from an interactive Secure Enclave and Touch ID invocation. A
+software test or shadow-mode sidecar is not evidence of biometric authorization
+or complete mediation of every possible agent effect.
 
-Algorithmic trading systems must demonstrate that autonomous decisions are explainable and reproducible. The `verify_integrity()` determinism and `F60` exact arithmetic provide the mathematical foundation for reproducible audit trails in high-frequency trading environments.
+## 9. Historical Results
 
-### 8.3 Biometric Attestation Gate
-
-All high-energy state mutations require physical human friction via the macOS Secure Enclave TouchID Gate (`reuseDuration = 0`). This implements Aforismo 5 of C5-REAL: *"Lo voluntario vale menos que lo involuntario"* — involuntary biological signals carry higher epistemic weight than voluntary software assertions.
-
----
-
-## 9. System State Summary (v4.3, September 2026)
-
-| Dimension | Metric |
-| :--- | :--- |
-| Active C5-REAL Invariants | 65 active, 35 vacant, 5 derived theorems |
-| Lean 4 Formal Proofs | `BabylonTrace.lean` — 0 errors, 0 warnings |
-| Rust Test Suite | 84 tests — 0 failures |
-| Python C5 Invariant Suite | 19 passed, 1 skipped, 1 xfailed |
-| MyPy Strict Typecheck | 0 errors — 272 files |
-| Ruff Lint + Format | 0 errors — 272 files |
-| Git Branch | `feature/omega-10k` → merged to `origin/main` |
-
----
+The earlier v4.3 note reported 84 Rust tests, 19 Python passes, one skip, one
+expected failure and a Lean build without diagnostics. Those numbers are
+historical assertions and are **NO_VERIFICADO** for this documentation revision.
+Use a revision-bound report and retained output for an acceptance decision. The
+[kernel audit](security/kernel-audit-2026-10-15.md) provides a more specific example
+of commands, observations and stated limitations; its results also belong to its
+identified revision.
 
 ## 10. Conclusion
 
-BABYLON-60 represents a departure from the prevailing approach of wrapping probabilistic models in ad-hoc orchestration frameworks. By imposing formal constraints at the infrastructure layer — a 64-byte lock-free IPC substrate formally verified in Lean 4, cryptographic ledgers with Ed25519 attestation, self-falsification invariants enforced at both compile-time and runtime, and a biometric causal gate — we provide a substrate upon which verifiable autonomous AI agents can be built with the rigor demanded by regulated industries.
-
-The system's safety is not a claim but an empirical obligation: if the kernel terminates without `CORTEX-TAINT`, if `verify_integrity()` passes, and if the Lean 4 proof compiles clean, then the exported artifact is mathematically guaranteed to correspond to the observed execution. This is the minimum standard that the next generation of autonomous AI systems must meet.
-
----
+BABYLON-60 supplies source implementations and formal models for specific record
+and execution checks. Assess each property at its own boundary, with explicit
+hypotheses, independent observations and reproducible evidence. This document
+provides navigation to those sources; it does not certify a deployment.
 
 ## References
 
-- Bejan, A., & Lorente, S. (2008). *Design with Constructal Theory*. Wiley.
-- Edelman, G. M., & Gally, J. A. (2001). "Degeneracy and Complexity in Biological Systems". *PNAS*, 98(24), 13763–13768.
-- Eigen, M. (1971). "Selforganization of Matter and the Evolution of Biological Macromolecules". *Naturwissenschaften*, 58(10), 465–523.
-- Friston, K. (2010). "The Free-Energy Principle: A Unified Brain Theory?". *Nature Reviews Neuroscience*, 11(2), 127–138.
-- Landauer, R. (1961). "Irreversibility and Heat Generation in the Computing Process". *IBM Journal of Research and Development*, 5(3), 183–191.
 - Repository: [github.com/borjamoskv/BABYLON-60](https://github.com/borjamoskv/BABYLON-60)
-- Formal Proof: [`proof/lean/BabylonTrace.lean`](../proof/lean/BabylonTrace.lean)
-- Specification: [`docs/SPECIFICATION.md`](./SPECIFICATION.md)
-- Website: [babylon60.com](https://babylon60.com)
-
----
-
-<sub>© 2026 Borja Moskv · BABYLON-60 v4.3.0 · Sovereign Dual-License v4.0</sub>
+- Formal source: [BabylonTrace.lean](../proof/lean/BabylonTrace.lean)
+- Cryptographic formats and vector: [spec_cryptographic_profile.md](01_spec/spec_cryptographic_profile.md)
+- Threat boundaries: [spec_security_model.md](01_spec/spec_security_model.md)
+- Declared claims and commands: [CLAIMS.toml](../CLAIMS.toml)
+- License: [LICENSE](../LICENSE)

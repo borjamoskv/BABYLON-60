@@ -2,24 +2,26 @@
 
 <div align="center">
 
-[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[Claims y niveles de evidencia](../CLAIMS.toml)
 [![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
 
 </div>
 
-Este documento detalla de manera transparente qué componentes de BABYLON-60 están implementados y verificados empíricamente, cuáles son diseños teóricos o aspiracionales, y cómo ejecutar una prueba trivial de principio a fin.
+Este documento orienta hacia las fuentes, ejemplos y comprobaciones del proyecto.
+No registra una ejecución nueva de las pruebas. Los resultados dependen de la
+revisión, las dependencias y el entorno identificados en cada informe.
 
 ---
 
 ## 1. 📌 Estado Actual (Lo que está construido)
 
-La infraestructura central del **Proof Harness** está implementada y cuenta con pruebas automatizadas:
+Fuentes y pruebas disponibles para revisar el **Proof Harness**:
 
-- **DSL y Kernel (Rust):** El intérprete de `babylon60.rs` ejecuta correctamente las instrucciones base (asignación de memoria `ALLOC`/`NIG`, bifurcación asíncrona `FORK` y esperas temporales `AFTER`).
-- **Aritmética Racional (`F60`):** Las divisiones exactas (`BA.EXACT`) operan sin pérdida de precisión. El `Constant Folding` sexagesimal está integrado.
-- **Monitor de Invariantes (Auto-falsación):** Los mecanismos de seguridad (interrupción por saturación numérica `CRITICAL HALT`) están probados y funcionan como se demuestra en `falsation_test.b60`.
-- **Integración Formal (Lean 4):** El puente hacia Lean 4 está establecido (`BabylonTrace.lean`). Se pueden asimilar *Proof-Ready Logs* estructurados.
-- **Seguridad y DevOps:** Pipelines de verificación (`[OBSOLETO: verify_lean]`), auditoría de secretos y dependencias configurados. Testing basado en propiedades con `hypothesis`.
+- **DSL y Kernel (Rust):** `src/babylon60.rs` implementa el intérprete del target `babylon60`. El tutorial comprueba un ejemplo compatible y delimita las proposiciones simuladas que añade ese intérprete.
+- **Aritmética (`F60`):** Las representaciones, límites y operaciones dependen del intérprete o compilador seleccionado; una especificación de aritmética exacta no certifica todas sus rutas.
+- **Monitor de Invariantes:** Los fixtures, entre ellos `tools/examples/falsation_test.b60`, describen casos que requieren ejecución y comprobación de su resultado. La presencia del archivo no demuestra por sí sola el rechazo.
+- **Integración Formal (Lean 4):** `proof/lean/BabylonTrace.lean` define el modelo de trazas. Exportar un `proof.ir` desde el intérprete no ejecuta Lean ni acredita correspondencia con ese modelo.
+- **Seguridad y DevOps:** Fuentes de pruebas en `tests/`, compilación Lean mediante `make test-lean` y auditorías configuradas en `.github/workflows/`. Cada resultado debe vincularse a la ejecución correspondiente.
 
 ## 2. 📌 Trabajo Futuro (Lo que es aspiracional)
 
@@ -30,7 +32,10 @@ La infraestructura central del **Proof Harness** está implementada y cuenta con
 
 ## 3. 🧮 Demostración Trivial (Prueba End-to-End)
 
-Para validar que el pipeline mecánico está operativo, puedes ejecutar una prueba causal básica que demuestra la ejecución del DSL y la generación de un log determinista sin errores:
+El [tutorial causal](03_guides/tutorial_hello_causal.md) identifica el intérprete y
+los ejemplos compatibles con esta revisión. Los programas de ejemplo se guardan
+en `tools/examples/`; no en la raíz del checkout. Una ejecución del intérprete no
+certifica automáticamente que su salida corresponde a un modelo Lean.
 
 ### Prerrequisitos
 - Compilador de Rust (`cargo`)
@@ -38,46 +43,33 @@ Para validar que el pipeline mecánico está operativo, puedes ejecutar una prue
 
 ### Ejecución
 
-1. **Compilar y Ejecutar el Kernel:**
+1. **Comprobar el inventario de ejecutables:**
    ```bash
-   cargo run --bin babylon60 -- causal_test.b60
+   cargo metadata --locked --no-deps --format-version 1
    ```
-   *Salida esperada:* El motor procesará las corrutinas asíncronas y concluirá con éxito, generando un `proof_artifact.json` en la raíz.
+   Este comando lista targets y manifiestos; no ejecuta ni verifica el kernel.
 
-2. **Verificar los Invariantes Numéricos:**
+2. **Ejecutar pruebas del paquete raíz:**
    ```bash
-   cargo run --bin babylon60 -- falsation_test.b60
+   cargo test --locked -p babylon60_root --lib
    ```
-   *Salida esperada:* El motor detectará saturación o una violación del Ledger y emitirá un `CRITICAL HALT`, demostrando el cortafuegos numérico.
+   Conservar el comando, revisión, salida y recuento real. Un filtro vacío o una
+   compilación sin pruebas no cuenta como validación del comportamiento.
 
-3. **Validación Formal (Bridge Lean 4):**
+3. **Compilar las fuentes formales:**
    ```bash
-   make verify_lean
+   make test-lean
    ```
-   *Salida esperada:* Lean 4 leerá el esquema de exportación y reportará que las trazas lógicas son sintácticamente válidas.
+   Este target ejecuta `lake build` en `proof/lean`. Compila los términos del
+   modelo; no valida por sí solo cualquier ejecución del intérprete.
 
 ---
 *Nota: Todo el ecosistema periférico (contratos inteligentes, dashboards web) ha sido desaprobado para centrar el esfuerzo de ingeniería exclusivamente en la robustez del Proof Harness.*
 
-## 🔬 Verificación Formal (Lean 4)
+## Evidencia formal y límites
 
-> [!TIP]
-> **Puente Isomorfo C5-REAL**
-> Firma topológica extraída dinámicamente para demostración formal en Lean 4.
-
-```lean
-namespace Babylon60.Theory.Resultados
-
-/--
-  Firma formal generada dinámicamente mediante `inject_lean4_stubs.py`.
-  Dominio: C5-REAL Formal Verification
--/
-variable {X Y : Type}
-
-/-- Axioma Cánonico por Defecto -/
-axiom ax_canonical_invariant : ∀ (x : X), True
-
-theorem formal_axiomatization (x : X) : True := by
-  exact ax_canonical_invariant x
-end Babylon60.Theory.Resultados
-```
+El bloque generado que concluía `True` se retiró: no demostraba ninguna propiedad
+del intérprete ni de estos resultados. El modelo
+[BabylonTrace.lean](../proof/lean/BabylonTrace.lean) contiene obligaciones sobre
+trazas bajo sus hipótesis. El [informe de seguridad](security/kernel-audit-2026-10-15.md)
+delimita las ejecuciones y pruebas que se observaron en su revisión.

@@ -1,7 +1,7 @@
 # ⚡ Arquitectura Edin Swarm (`scripts/c5_edin/edin_swarm_runner.py`)
 [![Swarm Size](https://img.shields.io/badge/Swarm-100_ULTRATHINK_Agents-orange?style=for-the-badge)]()
 [![Disk Overhead](https://img.shields.io/badge/Worktree_Overhead-0_Disk_Overhead-brightgreen?style=for-the-badge)]()
-[![BFT Ledger](https://img.shields.io/badge/Ledger-BFTLedgerActor_Commit-purple?style=for-the-badge)](../../babylon60/bft/README.md)
+[![BFT Ledger](https://img.shields.io/badge/Ledger-BFTLedgerActor_Commit-purple?style=for-the-badge)](../../01_KISH_ENGINE/babylon60/bft/README.md)
 
 La **Arquitectura Edin Swarm** es el sistema de mapeo e inspección masiva de superficies de código para **BABYLON-60**.
 
