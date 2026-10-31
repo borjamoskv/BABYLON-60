@@ -14,7 +14,7 @@ status: "editorial-ready-not-deployed"
 
 **La interfaz no es la autoridad. El protocolo no es el permiso. Y disponer de una herramienta no implica estar autorizado para utilizarla.**
 
-Una pregunta aparentemente instrumental, «¿es mejor trabajar con agentes desde CLI, IDE o MCP?», abre un problema más profundo: ¿dónde reside la capacidad de actuar y quién controla los efectos de un agente?
+Una pregunta aparentemente instrumental, "¿es mejor trabajar con agentes desde CLI, IDE o MCP?", abre un problema más profundo: ¿dónde reside la capacidad de actuar y quién controla los efectos de un agente?
 
 CLI e IDE son entornos de interacción y desarrollo. MCP es un protocolo de interoperabilidad. Ninguno constituye, por sí mismo, una frontera de autorización. Las tres opciones pueden convivir en una misma arquitectura.
 
@@ -42,7 +42,7 @@ La autonomía tiene grados. La invocación de una herramienta aislada no demuest
 
 ## 2. ¿Cómo se convierte un objetivo en un contrato verificable?
 
-«Mejora este repositorio» deja sin definir el criterio de éxito. Mejorar puede significar menos latencia, menores permisos, menos dependencias o ausencia de regresiones, y esos objetivos pueden entrar en conflicto.
+"Mejora este repositorio" deja sin definir el criterio de éxito. Mejorar puede significar menos latencia, menores permisos, menos dependencias o ausencia de regresiones, y esos objetivos pueden entrar en conflicto.
 
 Un encargo verificable necesita límites sobre artefactos, acciones, presupuesto, errores tolerados y pruebas de aceptación. El modelo puede proponer un cambio, pero no debería ser su único juez.
 
@@ -63,7 +63,7 @@ Un servidor MCP que anuncia una herramienta de escritura no otorga automáticame
 
 ## 4. ¿Quién responde por una acción delegada?
 
-En un sistema multiagente intervienen solicitante, planificador, ejecutor, subagente, herramienta y servicio externo. «Lo hizo la IA» no identifica al actor responsable.
+En un sistema multiagente intervienen solicitante, planificador, ejecutor, subagente, herramienta y servicio externo. "Lo hizo la IA" no identifica al actor responsable.
 
 Una traza útil debe asociar cada efecto con el principal que lo solicitó, la cadena de delegación, la operación autorizada y el resultado observado. Un identificador de agente sin credenciales verificables ni límites de delegación no prueba autoridad.
 
