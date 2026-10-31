@@ -15,7 +15,7 @@ translation_of: "/blog/10-preguntas-fundamentales-agentes-ia/"
 
 **An interface is not an authority boundary. A protocol is not a permission. The ability to invoke a tool is not authorization to use it.**
 
-“Should I work with agents in a CLI, an IDE or through MCP?” looks like a question about developer preferences. In fact, it exposes a deeper design problem: where does an agent acquire the ability to affect the world, and who controls those effects?
+"Should I work with agents in a CLI, an IDE or through MCP?" looks like a question about developer preferences. In fact, it exposes a deeper design problem: where does an agent acquire the ability to affect the world, and who controls those effects?
 
 CLI and IDE describe interaction environments. Model Context Protocol (MCP) describes an interoperability mechanism. They can coexist. None, by itself, establishes effective authorization.
 
@@ -43,7 +43,7 @@ Autonomy is not binary. A tool call alone does not prove persistent goals, plann
 
 ## 2. What makes a goal verifiable?
 
-“Improve this repository” lacks a success criterion. Improvement might mean lower latency, fewer dependencies, stronger boundaries or fewer regressions. These goals may conflict.
+"Improve this repository" lacks a success criterion. Improvement might mean lower latency, fewer dependencies, stronger boundaries or fewer regressions. These goals may conflict.
 
 A verifiable assignment names the target artifacts, permitted operations, resource budget, failure conditions and acceptance tests. The model may propose the change; it should not be the only judge of the result.
 
@@ -64,7 +64,7 @@ Publishing a tool in MCP does not grant the agent unrestricted permission to use
 
 ## 4. Who is accountable for a delegated action?
 
-An agentic workflow may involve a user, planner, executor, subagent, tool server and remote service. “The AI did it” does not identify an accountable principal.
+An agentic workflow may involve a user, planner, executor, subagent, tool server and remote service. "The AI did it" does not identify an accountable principal.
 
 A useful trace connects each effect to a requester, a delegation chain, the authorized scope and the observed outcome. An agent identifier without enforceable delegated privileges is not sufficient authorization evidence.
 
