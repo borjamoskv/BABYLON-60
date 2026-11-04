@@ -1,0 +1,39 @@
+WHITESPACE = _{ " " | "\t" | "\r" | "\n" }
+COMMENT    = _{ "//" ~ (!"\n" ~ ANY)* }
+
+identifier = @{ ASCII_ALPHA ~ (ASCII_ALPHANUMERIC | "_")* }
+number     = @{ ASCII_DIGIT+ }
+
+type_field = { "Field" }
+param_type = { type_field }
+
+visibility = { "public" | "private" }
+
+param = { visibility ~ identifier ~ ":" ~ param_type }
+param_list = { param ~ ("," ~ param)* ~ ","? }
+
+op_add = { "+" }
+op_sub = { "-" }
+op_mul = { "*" }
+op_eq  = { "==" }
+
+expr_atom = _{ number | identifier | "(" ~ expr ~ ")" }
+expr_mul  = { expr_atom ~ (op_mul ~ expr_atom)* }
+expr_add  = { expr_mul ~ ((op_add | op_sub) ~ expr_mul)* }
+expr_cmp  = { expr_add ~ (op_eq ~ expr_add)* }
+expr      = { expr_cmp }
+
+stmt_let    = { "let" ~ identifier ~ "=" ~ expr ~ ";" }
+stmt_assert = { "assert" ~ "(" ~ expr ~ ")" ~ ";" }
+statement   = { stmt_let | stmt_assert }
+
+function = { "fn" ~ identifier ~ "(" ~ ")" ~ "{" ~ statement* ~ "}" }
+
+circuit = {
+    SOI ~
+    "circuit" ~ identifier ~ "{" ~
+        param_list? ~
+        function ~
+    "}" ~
+    EOI
+}

@@ -1,0 +1,30 @@
+name: Propuesta Arquitectónica / Contrato Formal (RFC)
+description: Propone una nueva invariante, primitiva o cambio estructural con criterio de aceptación
+title: "[RFC]: "
+labels: ["rfc", "c5-real"]
+body:
+  - type: dropdown
+    id: anillo
+    attributes:
+      label: Anillo Objetivo
+      options:
+        - "Ring-0: Kernel / Rust / Silicio"
+        - "Ring-1: Formalización Lean 4 / Z3 / KISH"
+        - "Ring-2: Gobernanza / CI / Enjambres"
+        - "Ring-3: Superficie / CLI / Documentación"
+    validations:
+      required: true
+  - type: textarea
+    id: problema
+    attributes:
+      label: Necesidad Causal e Independencia (Stage 1)
+      description: ¿Qué predice o ejecuta este componente que el sistema no haría sin él?
+    validations:
+      required: true
+  - type: textarea
+    id: aceptacion
+    attributes:
+      label: Comprobación de Aceptación y Condición de Fallo
+      description: Test determinista, propiedad formal o métrica observable que validará la implementación.
+    validations:
+      required: true

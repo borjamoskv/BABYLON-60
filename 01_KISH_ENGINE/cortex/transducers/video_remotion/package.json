@@ -1,0 +1,22 @@
+{
+  "name": "babylon60-remotion-transducer",
+  "version": "5.0.1",
+  "private": true,
+  "license": "SEE LICENSE IN ../../../../LICENSE",
+  "description": "02_TRANSDUCERS: C5-REAL Remotion Video Compiler",
+  "scripts": {
+    "start": "remotion studio src/index.ts",
+    "build": "remotion render src/index.ts BabylonMasterclass out/video.mp4",
+    "upgrade": "remotion upgrade"
+  },
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "remotion": "^4.0.523"
+  },
+  "devDependencies": {
+    "@remotion/cli": "^4.0.523",
+    "@types/react": "^18.0.0",
+    "typescript": "^5.0.0"
+  }
+}

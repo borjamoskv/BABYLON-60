@@ -1,0 +1,244 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "BABYLON-60 Sovereign Kernel Harness API",
+    "version": "1.0.0",
+    "description": "Esquema OpenAPI 3.1.0 isomorfo a tools/babylon60_mcp.py para acoplar ChatGPT Actions, xAI Grok Tool-Use, Gemini Extensions y clientes HTTP/OpenAPI al sustrato local de BABYLON-60."
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:6061",
+      "description": "Local loopback bridge (INV_C5_OPSEC_CALIBRATION)"
+    }
+  ],
+  "paths": {
+    "/tools/read_source": {
+      "post": {
+        "operationId": "read_source",
+        "x-canonical-alias": "kernel_source_read",
+        "summary": "Read up to 200 lines of a tracked source file with BLAKE3 revision.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "rel_path"
+                ],
+                "properties": {
+                  "rel_path": {
+                    "type": "string",
+                    "description": "Relative repository path under src, crates, 00_ABZU_KERNEL, 01_KISH_ENGINE, proof, or tests."
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "default": 1
+                  },
+                  "max_lines": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 200,
+                    "default": 120
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Source slice and full-file BLAKE3 hex digest."
+          }
+        }
+      }
+    },
+    "/tools/apply_atomic_patch": {
+      "post": {
+        "operationId": "apply_atomic_patch",
+        "x-canonical-alias": "kernel_patch_apply",
+        "summary": "Replace one exact block guarded by an expected BLAKE3 revision (requires --allow-patches).",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "rel_path",
+                  "old_block",
+                  "new_block",
+                  "expected_revision"
+                ],
+                "properties": {
+                  "rel_path": {
+                    "type": "string"
+                  },
+                  "old_block": {
+                    "type": "string"
+                  },
+                  "new_block": {
+                    "type": "string"
+                  },
+                  "expected_revision": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{64}$"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Patched file metadata and new BLAKE3 digest."
+          }
+        }
+      }
+    },
+    "/tools/run_nemesis_and_cargo": {
+      "post": {
+        "operationId": "run_nemesis_and_cargo",
+        "x-canonical-alias": "kernel_tests_run",
+        "summary": "Run the adversarial_nemesis target in offline/locked mode (requires --allow-execution and clean worktree).",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "test_filter": {
+                    "type": "string",
+                    "default": ""
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Cargo test execution result."
+          }
+        }
+      }
+    },
+    "/tools/audit_spsc_miri_arm64": {
+      "post": {
+        "operationId": "audit_spsc_miri_arm64",
+        "x-canonical-alias": "kernel_miri_audit",
+        "summary": "Run NEMESIS SPSC tests under Miri for aarch64-apple-darwin with strict provenance.",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "model": {
+                    "type": "string",
+                    "enum": [
+                      "stacked",
+                      "tree"
+                    ],
+                    "default": "stacked"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Miri execution report."
+          }
+        }
+      }
+    },
+    "/tools/verify_lean4_bijection": {
+      "post": {
+        "operationId": "verify_lean4_bijection",
+        "x-canonical-alias": "kernel_lean4_verify",
+        "summary": "Preflight tracked proof/lean sources for forbidden tokens and run Lake build with warnings as errors.",
+        "responses": {
+          "200": {
+            "description": "Lean 4 preflight and Lake build status."
+          }
+        }
+      }
+    },
+    "/tools/inspect_sqlite_l0_invariants": {
+      "post": {
+        "operationId": "inspect_sqlite_l0_invariants",
+        "x-canonical-alias": "kernel_sqlite_inspect",
+        "summary": "Inspect an offline checkpointed SQLite export in memory without WAL/SHM sidecars.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "db_rel_path"
+                ],
+                "properties": {
+                  "db_rel_path": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "In-memory SQLite schema inventory and BLAKE3 digest."
+          }
+        }
+      }
+    },
+    "/tools/babylon_signature_render": {
+      "post": {
+        "operationId": "babylon_signature_render",
+        "summary": "Render a response signature from current, sourced observations.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "payload"
+                ],
+                "properties": {
+                  "payload": {
+                    "type": "object"
+                  },
+                  "format": {
+                    "type": "string",
+                    "enum": [
+                      "auto",
+                      "ui",
+                      "html",
+                      "markdown",
+                      "text",
+                      "json"
+                    ],
+                    "default": "auto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Rendered signature payload."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+    "timestamp": "2026-09-21T20:05:14.996310+00:00",
+    "scan_time_ms": 590,
+    "top_threats": [
+        {
+            "id": "http://arxiv.org/abs/2609.20016v1",
+            "title": "Governance-as-Code: Translating EU AI Act Technical Requirements into Executable Compliance Pipelines for Generative AI Systems",
+            "threat_score": 3300,
+            "shield_score": 0,
+            "threat_triggers": [
+                "eu ai act",
+                "compliance",
+                "regulation"
+            ],
+            "shield_triggers": []
+        },
+        {
+            "id": "http://arxiv.org/abs/2609.19920v1",
+            "title": "Mind the Gap: How SBOM Specification Ambiguities Lead to Divergent Software Bills of Materials. An Empirical Tool Study",
+            "threat_score": 1800,
+            "shield_score": 0,
+            "threat_triggers": [
+                "compliance",
+                "mandatory"
+            ],
+            "shield_triggers": []
+        },
+        {
+            "id": "http://arxiv.org/abs/2609.21858v1",
+            "title": "Watermarkable Multi-Draft Speculative Sampling via Poisson Processes",
+            "threat_score": 1000,
+            "shield_score": 0,
+            "threat_triggers": [
+                "watermarking"
+            ],
+            "shield_triggers": []
+        }
+    ],
+    "top_shields": [
+        {
+            "id": "http://arxiv.org/abs/2609.21484v1",
+            "title": "HE-Guardrail: A Homomorphic Guardrail Against Jailbreak Attacks for Encrypted Large Language Model Inference",
+            "threat_score": 0,
+            "shield_score": 2100,
+            "threat_triggers": [],
+            "shield_triggers": [
+                "homomorphic",
+                "privacy-preserving"
+            ]
+        },
+        {
+            "id": "http://arxiv.org/abs/2609.21419v1",
+            "title": "TrustBOM: A Scalable Architecture for Confidentiality-Preserving SBOMs Across Organizations",
+            "threat_score": 0,
+            "shield_score": 1500,
+            "threat_triggers": [],
+            "shield_triggers": [
+                "zero-knowledge"
+            ]
+        },
+        {
+            "id": "http://arxiv.org/abs/2609.20532v1",
+            "title": "Towards TEE-Certified DP: Verifiable Differentially Private Training on Legacy GPUs",
+            "threat_score": 800,
+            "shield_score": 1500,
+            "threat_triggers": [
+                "enforcement"
+            ],
+            "shield_triggers": [
+                "zero-knowledge"
+            ]
+        }
+    ]
+}

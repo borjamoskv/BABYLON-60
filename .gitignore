@@ -1,0 +1,148 @@
+# Build Targets & Binaries
+/target
+b60_kernel
+*.egg-info/
+site/
+.worktrees/
+
+# B60 Programs: track canonical, ignore generated
+fuzz_test_*.b60
+test_*.b60
+
+# Environment & Secrets (Crucial Security Invariant)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.token
+*.secret
+*.p12
+*.crt
+*.canary*
+
+# Virtual Environments & Caches
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+scratch/
+scratch/*
+scratch/
+
+# Node / Web Build Assets
+node_modules/
+web/node_modules/
+web/dist/
+.wrangler/
+web/.wrangler/
+
+# Temporary Artifacts & System Files
+artifact_bundle*
+proof_artifact.json
+.DS_Store
+*.log
+
+# Entropy Purge — Prevent Re-Tracking
+.tmp_yt/
+yt-dlp
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+*.cortex_thermal_lock
+scripts/c5_demos/*.bin
+scripts/c5_demos/*_bin
+scripts/c5_demos/zk_guardrail
+scripts/c5_demos/tmp_bundle/
+scripts/c5_demos/*.csv
+scripts/c5_demos/lean_chunks/
+
+# Added by Antigravity C5-REAL Audit
+.vercel
+
+docs/PITCH_DECK.md
+docs/VALUATION_STRATEGY.md
+docs/05_gtm/
+tests/sequencer_spsc_harness
+01_KISH_ENGINE/babylon60/guards/c5_biometric_gate
+scripts/c5_demos/c5_biometric_gate
+
+# ============================================================
+# OPSEC-Ω TASKFORCE HARDENING (2026-07-19, ITERA-1 · port 2026-08-12)
+# Defensa en profundidad. Contexto y pruebas: docs/OPSEC_OMEGA_ITERA1.md
+# (*.pem, *.key, .env* ya cubiertos por la sección Environment & Secrets)
+# ============================================================
+# Bóveda privada & Estado Local del Agente (nunca versionar)
+20_VAULT/
+.kimi-code/
+.babylon60/
+.agent/
+.audit/
+.hypothesis/
+.lake/
+.cortex/
+.snapshots/
+*.keystore
+*keypair*.json
+.cortex/*.hex
+.cortex/*.key
+.cortex/*keypair*
+# Baselines/reportes de escáneres de secretos — locales, no versionar
+.secrets.baseline
+gitleaks-report.json
+secret_audit.sarif
+*.jsonl
+
+# Audio & Research Transcripts
+clean_transcript*.txt
+transcript*.vtt
+docs/04_research/transcripts/
+sample_toxic_chat.txt
+assets/voice_samples/
+assets/*whatsapp*
+
+.xtts_venv/
+
+# Trasteros locales aislados (C5-REAL Anergy Shield)
+scratch/
+archive/
+experiments/
+
+# Límite Topológico del Workspace
+data/
+*.db
+*.sqlite
+
+
+# Segregación GTM / OpSec y Documentos Pasivos
+docs/05_gtm/
+docs/pitch/
+docs/sources/
+docs/aie-book/
+docs/audits/*
+!docs/audits/COMPLIANCE_CERTIFICATE_*.md
+archive/
+*.pdf
+*.docx
+OPSEC_OMEGA_ITERA1.md
+
+data/whatsapp_nacho/
+# Classified synthetic lead matrices belong in the private vault, not Git.
+SYNTHETIC_STRESS_TEST_MATRIX_NOT_FOR_COMMERCIAL_OUTREACH__*
+leads_10000_enterprise_babylon60.csv
+PACK_SOCIOS_BABYLON60/
+campaigns/
+Babylon60.app/
+*.wav
+*.mp3
+*.mp4
+*.m4a
+*.mid
+*.flp
+proof/lean/.lake/
+01_KISH_ENGINE/cortex/transducers/video_remotion/out/
+apps/
+tools/mac_prompt/
+tools/flstudio/

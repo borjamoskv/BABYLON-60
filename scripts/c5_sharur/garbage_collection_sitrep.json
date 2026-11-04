@@ -1,0 +1,1643 @@
+{
+  "timestamp": "2026-10-09T21:26:57Z",
+  "total_agents": 100,
+  "duration_ms": 145.29,
+  "total_anergy_bytes": 3392956074,
+  "total_anergy_human": "3235.78 MB",
+  "total_files_audited": 4186,
+  "cohorts": {
+    "1": {
+      "name": "COHORT-1-AUDIO-MULTIMEDIA",
+      "action": "EVACUAR",
+      "destination": "~/Music/LIBRARY/ y ~/.audit/whatsapp_nacho/",
+      "bytes": 2995333610,
+      "files": 38,
+      "targets": [
+        "data/whatsapp_nacho/media",
+        "01_KISH_ENGINE/cortex/transducers/video_remotion/out",
+        "target",
+        "data/c5_acoustics",
+        "assets/voice_samples",
+        "data/whatsapp_nacho/documents"
+      ],
+      "human_size": "2856.57 MB"
+    },
+    "2": {
+      "name": "COHORT-2-CONFIDENTIAL-OPSEC",
+      "action": "EVACUAR_CRITICO",
+      "destination": "~/20_VAULT/SOCIOS_BABYLON60/",
+      "bytes": 4340585,
+      "files": 20,
+      "targets": [
+        "PACK_SOCIOS_BABYLON60"
+      ],
+      "human_size": "4.14 MB"
+    },
+    "3": {
+      "name": "COHORT-3-MARKETING-CRM",
+      "action": "EVACUAR",
+      "destination": "~/20_VAULT/MARKETING_OUTREACH/",
+      "bytes": 31846652,
+      "files": 20,
+      "targets": [
+        "campaigns"
+      ],
+      "human_size": "30.37 MB"
+    },
+    "4": {
+      "name": "COHORT-4-BUILDS-AND-BINARIES",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA (Recreable en babylon60-docs / CI)",
+      "bytes": 21147908,
+      "files": 56,
+      "targets": [
+        "Babylon60.app",
+        "artifact_bundle_v3/quarantine",
+        "dist",
+        "site"
+      ],
+      "human_size": "20.17 MB"
+    },
+    "5": {
+      "name": "COHORT-5-LOGS-AND-CACHES",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA",
+      "bytes": 340287319,
+      "files": 4052,
+      "targets": [
+        ".ruff_cache",
+        "scratch/crypto_shield",
+        "logs",
+        "proof/lean/.lake",
+        ".pytest_cache",
+        ".hypothesis"
+      ],
+      "human_size": "324.52 MB"
+    }
+  },
+  "agent_details": [
+    {
+      "agent_id": "SHARUR_GC_000",
+      "cohort_id": 1,
+      "cohort_name": "COHORT-1-AUDIO-MULTIMEDIA",
+      "target": "data/whatsapp_nacho/documents",
+      "pattern": "*.wav",
+      "description": "Audios de voz WhatsApp",
+      "action": "EVACUAR",
+      "destination": "~/Music/LIBRARY/ y ~/.audit/whatsapp_nacho/",
+      "files_found": 2,
+      "bytes_found": 640958858,
+      "samples": [
+        "data/whatsapp_nacho/documents/20260831_214334_borja_3BA2C0C751C2D5349E15.wav",
+        "data/whatsapp_nacho/documents/20260831_214504_borja_3B7F16BD36530AB58E0F.wav"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_001",
+      "cohort_id": 1,
+      "cohort_name": "COHORT-1-AUDIO-MULTIMEDIA",
+      "target": "data/whatsapp_nacho/media",
+      "pattern": "*",
+      "description": "Media y adjuntos WhatsApp",
+      "action": "EVACUAR",
+      "destination": "~/Music/LIBRARY/ y ~/.audit/whatsapp_nacho/",
+      "files_found": 0,
+      "bytes_found": 0,
+      "samples": []
+    },
+    {
+      "agent_id": "SHARUR_GC_002",
+      "cohort_id": 1,
+      "cohort_name": "COHORT-1-AUDIO-MULTIMEDIA",
+      "target": "data/c5_acoustics",
+      "pattern": "*.wav",
+      "description": "Stems euclidianos y drones microtonales",
+      "action": "EVACUAR",
+      "destination": "~/Music/LIBRARY/ y ~/.audit/whatsapp_nacho/",
+      "files_found": 4,
+      "bytes_found": 129770840,
+      "samples": [
+        "data/c5_acoustics/poc_euclidean_microtonal_groove.wav",
+        "data/c5_acoustics/Borja Moskv - Euclideocleidomastoideo.wav",
+        "data/c5_acoustics/Borja Moskv - Eucli.wav"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_003",
+      "cohort_id": 1,
+      "cohort_name": "COHORT-1-AUDIO-MULTIMEDIA",
+      "target": "01_KISH_ENGINE/cortex/transducers/video_remotion/out",
+      "pattern": "*.mp4",
+      "description": "Renders MP4 Remotion",
+      "action": "EVACUAR",
+      "destination": "~/Music/LIBRARY/ y ~/.audit/whatsapp_nacho/",
+      "files_found": 3,
+      "bytes_found": 13768746,
+      "samples": [
+        "01_KISH_ENGINE/cortex/transducers/video_remotion/out/masterclass.mp4",
+        "01_KISH_ENGINE/cortex/transducers/video_remotion/out/clase_sota.mp4",
+        "01_KISH_ENGINE/cortex/transducers/video_remotion/out/video.mp4"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_004",
+      "cohort_id": 1,
+      "cohort_name": "COHORT-1-AUDIO-MULTIMEDIA",
+      "target": "assets/voice_samples",
+      "pattern": "*.wav",
+      "description": "Muestras F5-TTS de modelos y voz",
+      "action": "EVACUAR",
+      "destination": "~/Music/LIBRARY/ y ~/.audit/whatsapp_nacho/",
+      "files_found": 2,
+      "bytes_found": 110034,
+      "samples": [
+        "assets/voice_samples/borja_gemini_38_flash_high.wav",
+        "assets/voice_samples/c5_ping.wav"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_005",
+      "cohort_id": 1,
+      "cohort_name": "COHORT-1-AUDIO-MULTIMEDIA",
+      "target": "target",
+      "pattern": "*.wav",
+      "description": "Audio temporal prueba castellano",
+      "action": "EVACUAR",
+      "destination": "~/Music/LIBRARY/ y ~/.audit/whatsapp_nacho/",
+      "files_found": 1,
+      "bytes_found": 183106,
+      "samples": [
+        "target/prueba_castellano.wav"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_006",
+      "cohort_id": 1,
+      "cohort_name": "COHORT-1-AUDIO-MULTIMEDIA",
+      "target": "data/whatsapp_nacho/documents",
+      "pattern": "*.wav",
+      "description": "Audios de voz WhatsApp",
+      "action": "EVACUAR",
+      "destination": "~/Music/LIBRARY/ y ~/.audit/whatsapp_nacho/",
+      "files_found": 2,
+      "bytes_found": 640958858,
+      "samples": [
+        "data/whatsapp_nacho/documents/20260831_214334_borja_3BA2C0C751C2D5349E15.wav",
+        "data/whatsapp_nacho/documents/20260831_214504_borja_3B7F16BD36530AB58E0F.wav"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_007",
+      "cohort_id": 1,
+      "cohort_name": "COHORT-1-AUDIO-MULTIMEDIA",
+      "target": "data/whatsapp_nacho/media",
+      "pattern": "*",
+      "description": "Media y adjuntos WhatsApp",
+      "action": "EVACUAR",
+      "destination": "~/Music/LIBRARY/ y ~/.audit/whatsapp_nacho/",
+      "files_found": 0,
+      "bytes_found": 0,
+      "samples": []
+    },
+    {
+      "agent_id": "SHARUR_GC_008",
+      "cohort_id": 1,
+      "cohort_name": "COHORT-1-AUDIO-MULTIMEDIA",
+      "target": "data/c5_acoustics",
+      "pattern": "*.wav",
+      "description": "Stems euclidianos y drones microtonales",
+      "action": "EVACUAR",
+      "destination": "~/Music/LIBRARY/ y ~/.audit/whatsapp_nacho/",
+      "files_found": 4,
+      "bytes_found": 129770840,
+      "samples": [
+        "data/c5_acoustics/poc_euclidean_microtonal_groove.wav",
+        "data/c5_acoustics/Borja Moskv - Euclideocleidomastoideo.wav",
+        "data/c5_acoustics/Borja Moskv - Eucli.wav"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_009",
+      "cohort_id": 1,
+      "cohort_name": "COHORT-1-AUDIO-MULTIMEDIA",
+      "target": "01_KISH_ENGINE/cortex/transducers/video_remotion/out",
+      "pattern": "*.mp4",
+      "description": "Renders MP4 Remotion",
+      "action": "EVACUAR",
+      "destination": "~/Music/LIBRARY/ y ~/.audit/whatsapp_nacho/",
+      "files_found": 3,
+      "bytes_found": 13768746,
+      "samples": [
+        "01_KISH_ENGINE/cortex/transducers/video_remotion/out/masterclass.mp4",
+        "01_KISH_ENGINE/cortex/transducers/video_remotion/out/clase_sota.mp4",
+        "01_KISH_ENGINE/cortex/transducers/video_remotion/out/video.mp4"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_010",
+      "cohort_id": 1,
+      "cohort_name": "COHORT-1-AUDIO-MULTIMEDIA",
+      "target": "assets/voice_samples",
+      "pattern": "*.wav",
+      "description": "Muestras F5-TTS de modelos y voz",
+      "action": "EVACUAR",
+      "destination": "~/Music/LIBRARY/ y ~/.audit/whatsapp_nacho/",
+      "files_found": 2,
+      "bytes_found": 110034,
+      "samples": [
+        "assets/voice_samples/borja_gemini_38_flash_high.wav",
+        "assets/voice_samples/c5_ping.wav"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_011",
+      "cohort_id": 1,
+      "cohort_name": "COHORT-1-AUDIO-MULTIMEDIA",
+      "target": "target",
+      "pattern": "*.wav",
+      "description": "Audio temporal prueba castellano",
+      "action": "EVACUAR",
+      "destination": "~/Music/LIBRARY/ y ~/.audit/whatsapp_nacho/",
+      "files_found": 1,
+      "bytes_found": 183106,
+      "samples": [
+        "target/prueba_castellano.wav"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_012",
+      "cohort_id": 1,
+      "cohort_name": "COHORT-1-AUDIO-MULTIMEDIA",
+      "target": "data/whatsapp_nacho/documents",
+      "pattern": "*.wav",
+      "description": "Audios de voz WhatsApp",
+      "action": "EVACUAR",
+      "destination": "~/Music/LIBRARY/ y ~/.audit/whatsapp_nacho/",
+      "files_found": 2,
+      "bytes_found": 640958858,
+      "samples": [
+        "data/whatsapp_nacho/documents/20260831_214334_borja_3BA2C0C751C2D5349E15.wav",
+        "data/whatsapp_nacho/documents/20260831_214504_borja_3B7F16BD36530AB58E0F.wav"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_013",
+      "cohort_id": 1,
+      "cohort_name": "COHORT-1-AUDIO-MULTIMEDIA",
+      "target": "data/whatsapp_nacho/media",
+      "pattern": "*",
+      "description": "Media y adjuntos WhatsApp",
+      "action": "EVACUAR",
+      "destination": "~/Music/LIBRARY/ y ~/.audit/whatsapp_nacho/",
+      "files_found": 0,
+      "bytes_found": 0,
+      "samples": []
+    },
+    {
+      "agent_id": "SHARUR_GC_014",
+      "cohort_id": 1,
+      "cohort_name": "COHORT-1-AUDIO-MULTIMEDIA",
+      "target": "data/c5_acoustics",
+      "pattern": "*.wav",
+      "description": "Stems euclidianos y drones microtonales",
+      "action": "EVACUAR",
+      "destination": "~/Music/LIBRARY/ y ~/.audit/whatsapp_nacho/",
+      "files_found": 4,
+      "bytes_found": 129770840,
+      "samples": [
+        "data/c5_acoustics/poc_euclidean_microtonal_groove.wav",
+        "data/c5_acoustics/Borja Moskv - Euclideocleidomastoideo.wav",
+        "data/c5_acoustics/Borja Moskv - Eucli.wav"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_015",
+      "cohort_id": 1,
+      "cohort_name": "COHORT-1-AUDIO-MULTIMEDIA",
+      "target": "01_KISH_ENGINE/cortex/transducers/video_remotion/out",
+      "pattern": "*.mp4",
+      "description": "Renders MP4 Remotion",
+      "action": "EVACUAR",
+      "destination": "~/Music/LIBRARY/ y ~/.audit/whatsapp_nacho/",
+      "files_found": 3,
+      "bytes_found": 13768746,
+      "samples": [
+        "01_KISH_ENGINE/cortex/transducers/video_remotion/out/masterclass.mp4",
+        "01_KISH_ENGINE/cortex/transducers/video_remotion/out/clase_sota.mp4",
+        "01_KISH_ENGINE/cortex/transducers/video_remotion/out/video.mp4"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_016",
+      "cohort_id": 1,
+      "cohort_name": "COHORT-1-AUDIO-MULTIMEDIA",
+      "target": "assets/voice_samples",
+      "pattern": "*.wav",
+      "description": "Muestras F5-TTS de modelos y voz",
+      "action": "EVACUAR",
+      "destination": "~/Music/LIBRARY/ y ~/.audit/whatsapp_nacho/",
+      "files_found": 2,
+      "bytes_found": 110034,
+      "samples": [
+        "assets/voice_samples/borja_gemini_38_flash_high.wav",
+        "assets/voice_samples/c5_ping.wav"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_017",
+      "cohort_id": 1,
+      "cohort_name": "COHORT-1-AUDIO-MULTIMEDIA",
+      "target": "target",
+      "pattern": "*.wav",
+      "description": "Audio temporal prueba castellano",
+      "action": "EVACUAR",
+      "destination": "~/Music/LIBRARY/ y ~/.audit/whatsapp_nacho/",
+      "files_found": 1,
+      "bytes_found": 183106,
+      "samples": [
+        "target/prueba_castellano.wav"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_018",
+      "cohort_id": 1,
+      "cohort_name": "COHORT-1-AUDIO-MULTIMEDIA",
+      "target": "data/whatsapp_nacho/documents",
+      "pattern": "*.wav",
+      "description": "Audios de voz WhatsApp",
+      "action": "EVACUAR",
+      "destination": "~/Music/LIBRARY/ y ~/.audit/whatsapp_nacho/",
+      "files_found": 2,
+      "bytes_found": 640958858,
+      "samples": [
+        "data/whatsapp_nacho/documents/20260831_214334_borja_3BA2C0C751C2D5349E15.wav",
+        "data/whatsapp_nacho/documents/20260831_214504_borja_3B7F16BD36530AB58E0F.wav"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_019",
+      "cohort_id": 1,
+      "cohort_name": "COHORT-1-AUDIO-MULTIMEDIA",
+      "target": "data/whatsapp_nacho/media",
+      "pattern": "*",
+      "description": "Media y adjuntos WhatsApp",
+      "action": "EVACUAR",
+      "destination": "~/Music/LIBRARY/ y ~/.audit/whatsapp_nacho/",
+      "files_found": 0,
+      "bytes_found": 0,
+      "samples": []
+    },
+    {
+      "agent_id": "SHARUR_GC_020",
+      "cohort_id": 2,
+      "cohort_name": "COHORT-2-CONFIDENTIAL-OPSEC",
+      "target": "PACK_SOCIOS_BABYLON60",
+      "pattern": "04_ORGANIGRAMA_Y_REPARTO_PORCENTUAL.md",
+      "description": "Equity y reparto societario",
+      "action": "EVACUAR_CRITICO",
+      "destination": "~/20_VAULT/SOCIOS_BABYLON60/",
+      "files_found": 1,
+      "bytes_found": 7555,
+      "samples": [
+        "PACK_SOCIOS_BABYLON60/04_ORGANIGRAMA_Y_REPARTO_PORCENTUAL.md"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_021",
+      "cohort_id": 2,
+      "cohort_name": "COHORT-2-CONFIDENTIAL-OPSEC",
+      "target": "PACK_SOCIOS_BABYLON60",
+      "pattern": "02_ACUERDO_NDA_CONFIDENCIALIDAD.pdf",
+      "description": "Acuerdo de confidencialidad legal",
+      "action": "EVACUAR_CRITICO",
+      "destination": "~/20_VAULT/SOCIOS_BABYLON60/",
+      "files_found": 1,
+      "bytes_found": 158347,
+      "samples": [
+        "PACK_SOCIOS_BABYLON60/02_ACUERDO_NDA_CONFIDENCIALIDAD.pdf"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_022",
+      "cohort_id": 2,
+      "cohort_name": "COHORT-2-CONFIDENTIAL-OPSEC",
+      "target": "PACK_SOCIOS_BABYLON60",
+      "pattern": "05_GUIA_EDITORIAL_Y_TAREAS_DIANA.md",
+      "description": "Asignaci\u00f3n de tareas Diana",
+      "action": "EVACUAR_CRITICO",
+      "destination": "~/20_VAULT/SOCIOS_BABYLON60/",
+      "files_found": 1,
+      "bytes_found": 5720,
+      "samples": [
+        "PACK_SOCIOS_BABYLON60/05_GUIA_EDITORIAL_Y_TAREAS_DIANA.md"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_023",
+      "cohort_id": 2,
+      "cohort_name": "COHORT-2-CONFIDENTIAL-OPSEC",
+      "target": "PACK_SOCIOS_BABYLON60",
+      "pattern": "00_MEME_LA_CUADRILLA_BABYLON60.jpg",
+      "description": "Meme cuadrilla",
+      "action": "EVACUAR_CRITICO",
+      "destination": "~/20_VAULT/SOCIOS_BABYLON60/",
+      "files_found": 1,
+      "bytes_found": 1142961,
+      "samples": [
+        "PACK_SOCIOS_BABYLON60/00_MEME_LA_CUADRILLA_BABYLON60.jpg"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_024",
+      "cohort_id": 2,
+      "cohort_name": "COHORT-2-CONFIDENTIAL-OPSEC",
+      "target": "PACK_SOCIOS_BABYLON60",
+      "pattern": "01_DOSSIER_EJECUTIVO_BABYLON60.pdf",
+      "description": "Dossier ejecutivo",
+      "action": "EVACUAR_CRITICO",
+      "destination": "~/20_VAULT/SOCIOS_BABYLON60/",
+      "files_found": 1,
+      "bytes_found": 69574,
+      "samples": [
+        "PACK_SOCIOS_BABYLON60/01_DOSSIER_EJECUTIVO_BABYLON60.pdf"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_025",
+      "cohort_id": 2,
+      "cohort_name": "COHORT-2-CONFIDENTIAL-OPSEC",
+      "target": "PACK_SOCIOS_BABYLON60",
+      "pattern": "03_GUIA_SOLICITUD_20M_BRUSELAS.md",
+      "description": "Gu\u00eda solicitud fondos UE",
+      "action": "EVACUAR_CRITICO",
+      "destination": "~/20_VAULT/SOCIOS_BABYLON60/",
+      "files_found": 1,
+      "bytes_found": 7404,
+      "samples": [
+        "PACK_SOCIOS_BABYLON60/03_GUIA_SOLICITUD_20M_BRUSELAS.md"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_026",
+      "cohort_id": 2,
+      "cohort_name": "COHORT-2-CONFIDENTIAL-OPSEC",
+      "target": "PACK_SOCIOS_BABYLON60",
+      "pattern": "04_ORGANIGRAMA_Y_REPARTO_PORCENTUAL.md",
+      "description": "Equity y reparto societario",
+      "action": "EVACUAR_CRITICO",
+      "destination": "~/20_VAULT/SOCIOS_BABYLON60/",
+      "files_found": 1,
+      "bytes_found": 7555,
+      "samples": [
+        "PACK_SOCIOS_BABYLON60/04_ORGANIGRAMA_Y_REPARTO_PORCENTUAL.md"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_027",
+      "cohort_id": 2,
+      "cohort_name": "COHORT-2-CONFIDENTIAL-OPSEC",
+      "target": "PACK_SOCIOS_BABYLON60",
+      "pattern": "02_ACUERDO_NDA_CONFIDENCIALIDAD.pdf",
+      "description": "Acuerdo de confidencialidad legal",
+      "action": "EVACUAR_CRITICO",
+      "destination": "~/20_VAULT/SOCIOS_BABYLON60/",
+      "files_found": 1,
+      "bytes_found": 158347,
+      "samples": [
+        "PACK_SOCIOS_BABYLON60/02_ACUERDO_NDA_CONFIDENCIALIDAD.pdf"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_028",
+      "cohort_id": 2,
+      "cohort_name": "COHORT-2-CONFIDENTIAL-OPSEC",
+      "target": "PACK_SOCIOS_BABYLON60",
+      "pattern": "05_GUIA_EDITORIAL_Y_TAREAS_DIANA.md",
+      "description": "Asignaci\u00f3n de tareas Diana",
+      "action": "EVACUAR_CRITICO",
+      "destination": "~/20_VAULT/SOCIOS_BABYLON60/",
+      "files_found": 1,
+      "bytes_found": 5720,
+      "samples": [
+        "PACK_SOCIOS_BABYLON60/05_GUIA_EDITORIAL_Y_TAREAS_DIANA.md"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_029",
+      "cohort_id": 2,
+      "cohort_name": "COHORT-2-CONFIDENTIAL-OPSEC",
+      "target": "PACK_SOCIOS_BABYLON60",
+      "pattern": "00_MEME_LA_CUADRILLA_BABYLON60.jpg",
+      "description": "Meme cuadrilla",
+      "action": "EVACUAR_CRITICO",
+      "destination": "~/20_VAULT/SOCIOS_BABYLON60/",
+      "files_found": 1,
+      "bytes_found": 1142961,
+      "samples": [
+        "PACK_SOCIOS_BABYLON60/00_MEME_LA_CUADRILLA_BABYLON60.jpg"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_030",
+      "cohort_id": 2,
+      "cohort_name": "COHORT-2-CONFIDENTIAL-OPSEC",
+      "target": "PACK_SOCIOS_BABYLON60",
+      "pattern": "01_DOSSIER_EJECUTIVO_BABYLON60.pdf",
+      "description": "Dossier ejecutivo",
+      "action": "EVACUAR_CRITICO",
+      "destination": "~/20_VAULT/SOCIOS_BABYLON60/",
+      "files_found": 1,
+      "bytes_found": 69574,
+      "samples": [
+        "PACK_SOCIOS_BABYLON60/01_DOSSIER_EJECUTIVO_BABYLON60.pdf"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_031",
+      "cohort_id": 2,
+      "cohort_name": "COHORT-2-CONFIDENTIAL-OPSEC",
+      "target": "PACK_SOCIOS_BABYLON60",
+      "pattern": "03_GUIA_SOLICITUD_20M_BRUSELAS.md",
+      "description": "Gu\u00eda solicitud fondos UE",
+      "action": "EVACUAR_CRITICO",
+      "destination": "~/20_VAULT/SOCIOS_BABYLON60/",
+      "files_found": 1,
+      "bytes_found": 7404,
+      "samples": [
+        "PACK_SOCIOS_BABYLON60/03_GUIA_SOLICITUD_20M_BRUSELAS.md"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_032",
+      "cohort_id": 2,
+      "cohort_name": "COHORT-2-CONFIDENTIAL-OPSEC",
+      "target": "PACK_SOCIOS_BABYLON60",
+      "pattern": "04_ORGANIGRAMA_Y_REPARTO_PORCENTUAL.md",
+      "description": "Equity y reparto societario",
+      "action": "EVACUAR_CRITICO",
+      "destination": "~/20_VAULT/SOCIOS_BABYLON60/",
+      "files_found": 1,
+      "bytes_found": 7555,
+      "samples": [
+        "PACK_SOCIOS_BABYLON60/04_ORGANIGRAMA_Y_REPARTO_PORCENTUAL.md"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_033",
+      "cohort_id": 2,
+      "cohort_name": "COHORT-2-CONFIDENTIAL-OPSEC",
+      "target": "PACK_SOCIOS_BABYLON60",
+      "pattern": "02_ACUERDO_NDA_CONFIDENCIALIDAD.pdf",
+      "description": "Acuerdo de confidencialidad legal",
+      "action": "EVACUAR_CRITICO",
+      "destination": "~/20_VAULT/SOCIOS_BABYLON60/",
+      "files_found": 1,
+      "bytes_found": 158347,
+      "samples": [
+        "PACK_SOCIOS_BABYLON60/02_ACUERDO_NDA_CONFIDENCIALIDAD.pdf"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_034",
+      "cohort_id": 2,
+      "cohort_name": "COHORT-2-CONFIDENTIAL-OPSEC",
+      "target": "PACK_SOCIOS_BABYLON60",
+      "pattern": "05_GUIA_EDITORIAL_Y_TAREAS_DIANA.md",
+      "description": "Asignaci\u00f3n de tareas Diana",
+      "action": "EVACUAR_CRITICO",
+      "destination": "~/20_VAULT/SOCIOS_BABYLON60/",
+      "files_found": 1,
+      "bytes_found": 5720,
+      "samples": [
+        "PACK_SOCIOS_BABYLON60/05_GUIA_EDITORIAL_Y_TAREAS_DIANA.md"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_035",
+      "cohort_id": 2,
+      "cohort_name": "COHORT-2-CONFIDENTIAL-OPSEC",
+      "target": "PACK_SOCIOS_BABYLON60",
+      "pattern": "00_MEME_LA_CUADRILLA_BABYLON60.jpg",
+      "description": "Meme cuadrilla",
+      "action": "EVACUAR_CRITICO",
+      "destination": "~/20_VAULT/SOCIOS_BABYLON60/",
+      "files_found": 1,
+      "bytes_found": 1142961,
+      "samples": [
+        "PACK_SOCIOS_BABYLON60/00_MEME_LA_CUADRILLA_BABYLON60.jpg"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_036",
+      "cohort_id": 2,
+      "cohort_name": "COHORT-2-CONFIDENTIAL-OPSEC",
+      "target": "PACK_SOCIOS_BABYLON60",
+      "pattern": "01_DOSSIER_EJECUTIVO_BABYLON60.pdf",
+      "description": "Dossier ejecutivo",
+      "action": "EVACUAR_CRITICO",
+      "destination": "~/20_VAULT/SOCIOS_BABYLON60/",
+      "files_found": 1,
+      "bytes_found": 69574,
+      "samples": [
+        "PACK_SOCIOS_BABYLON60/01_DOSSIER_EJECUTIVO_BABYLON60.pdf"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_037",
+      "cohort_id": 2,
+      "cohort_name": "COHORT-2-CONFIDENTIAL-OPSEC",
+      "target": "PACK_SOCIOS_BABYLON60",
+      "pattern": "03_GUIA_SOLICITUD_20M_BRUSELAS.md",
+      "description": "Gu\u00eda solicitud fondos UE",
+      "action": "EVACUAR_CRITICO",
+      "destination": "~/20_VAULT/SOCIOS_BABYLON60/",
+      "files_found": 1,
+      "bytes_found": 7404,
+      "samples": [
+        "PACK_SOCIOS_BABYLON60/03_GUIA_SOLICITUD_20M_BRUSELAS.md"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_038",
+      "cohort_id": 2,
+      "cohort_name": "COHORT-2-CONFIDENTIAL-OPSEC",
+      "target": "PACK_SOCIOS_BABYLON60",
+      "pattern": "04_ORGANIGRAMA_Y_REPARTO_PORCENTUAL.md",
+      "description": "Equity y reparto societario",
+      "action": "EVACUAR_CRITICO",
+      "destination": "~/20_VAULT/SOCIOS_BABYLON60/",
+      "files_found": 1,
+      "bytes_found": 7555,
+      "samples": [
+        "PACK_SOCIOS_BABYLON60/04_ORGANIGRAMA_Y_REPARTO_PORCENTUAL.md"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_039",
+      "cohort_id": 2,
+      "cohort_name": "COHORT-2-CONFIDENTIAL-OPSEC",
+      "target": "PACK_SOCIOS_BABYLON60",
+      "pattern": "02_ACUERDO_NDA_CONFIDENCIALIDAD.pdf",
+      "description": "Acuerdo de confidencialidad legal",
+      "action": "EVACUAR_CRITICO",
+      "destination": "~/20_VAULT/SOCIOS_BABYLON60/",
+      "files_found": 1,
+      "bytes_found": 158347,
+      "samples": [
+        "PACK_SOCIOS_BABYLON60/02_ACUERDO_NDA_CONFIDENCIALIDAD.pdf"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_040",
+      "cohort_id": 3,
+      "cohort_name": "COHORT-3-MARKETING-CRM",
+      "target": "campaigns",
+      "pattern": "outreach_queue_tier1_spain.jsonl",
+      "description": "Cola masiva outreach Espa\u00f1a",
+      "action": "EVACUAR",
+      "destination": "~/20_VAULT/MARKETING_OUTREACH/",
+      "files_found": 1,
+      "bytes_found": 2996650,
+      "samples": [
+        "campaigns/outreach_queue_tier1_spain.jsonl"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_041",
+      "cohort_id": 3,
+      "cohort_name": "COHORT-3-MARKETING-CRM",
+      "target": "campaigns",
+      "pattern": "campaign_cybersecurity_autonomous_soc.jsonl",
+      "description": "Prospectos ciberseguridad",
+      "action": "EVACUAR",
+      "destination": "~/20_VAULT/MARKETING_OUTREACH/",
+      "files_found": 1,
+      "bytes_found": 1451984,
+      "samples": [
+        "campaigns/campaign_cybersecurity_autonomous_soc.jsonl"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_042",
+      "cohort_id": 3,
+      "cohort_name": "COHORT-3-MARKETING-CRM",
+      "target": "campaigns",
+      "pattern": "campaign_critical_infrastructure_energy_ai.jsonl",
+      "description": "Prospectos energ\u00eda",
+      "action": "EVACUAR",
+      "destination": "~/20_VAULT/MARKETING_OUTREACH/",
+      "files_found": 1,
+      "bytes_found": 1383283,
+      "samples": [
+        "campaigns/campaign_critical_infrastructure_energy_ai.jsonl"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_043",
+      "cohort_id": 3,
+      "cohort_name": "COHORT-3-MARKETING-CRM",
+      "target": "campaigns",
+      "pattern": "campaign_fintech_banking_tech.jsonl",
+      "description": "Prospectos fintech",
+      "action": "EVACUAR",
+      "destination": "~/20_VAULT/MARKETING_OUTREACH/",
+      "files_found": 1,
+      "bytes_found": 1277330,
+      "samples": [
+        "campaigns/campaign_fintech_banking_tech.jsonl"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_044",
+      "cohort_id": 3,
+      "cohort_name": "COHORT-3-MARKETING-CRM",
+      "target": "campaigns",
+      "pattern": "campaign_healthtech_medical_devices.jsonl",
+      "description": "Prospectos salud",
+      "action": "EVACUAR",
+      "destination": "~/20_VAULT/MARKETING_OUTREACH/",
+      "files_found": 1,
+      "bytes_found": 1368258,
+      "samples": [
+        "campaigns/campaign_healthtech_medical_devices.jsonl"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_045",
+      "cohort_id": 3,
+      "cohort_name": "COHORT-3-MARKETING-CRM",
+      "target": "campaigns",
+      "pattern": "campaign_hrtech_workforce_intelligence.jsonl",
+      "description": "Prospectos HR",
+      "action": "EVACUAR",
+      "destination": "~/20_VAULT/MARKETING_OUTREACH/",
+      "files_found": 1,
+      "bytes_found": 1395071,
+      "samples": [
+        "campaigns/campaign_hrtech_workforce_intelligence.jsonl"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_046",
+      "cohort_id": 3,
+      "cohort_name": "COHORT-3-MARKETING-CRM",
+      "target": "campaigns",
+      "pattern": "campaign_insurtech_claims_automation.jsonl",
+      "description": "Prospectos seguros",
+      "action": "EVACUAR",
+      "destination": "~/20_VAULT/MARKETING_OUTREACH/",
+      "files_found": 1,
+      "bytes_found": 1380447,
+      "samples": [
+        "campaigns/campaign_insurtech_claims_automation.jsonl"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_047",
+      "cohort_id": 3,
+      "cohort_name": "COHORT-3-MARKETING-CRM",
+      "target": "campaigns",
+      "pattern": "campaign_legaltech_regulatory_ai.jsonl",
+      "description": "Prospectos legaltech",
+      "action": "EVACUAR",
+      "destination": "~/20_VAULT/MARKETING_OUTREACH/",
+      "files_found": 1,
+      "bytes_found": 1331260,
+      "samples": [
+        "campaigns/campaign_legaltech_regulatory_ai.jsonl"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_048",
+      "cohort_id": 3,
+      "cohort_name": "COHORT-3-MARKETING-CRM",
+      "target": "campaigns",
+      "pattern": "campaign_tier1_spain_top_priority.jsonl",
+      "description": "Prospectos Tier-1 Espa\u00f1a",
+      "action": "EVACUAR",
+      "destination": "~/20_VAULT/MARKETING_OUTREACH/",
+      "files_found": 1,
+      "bytes_found": 1114726,
+      "samples": [
+        "campaigns/campaign_tier1_spain_top_priority.jsonl"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_049",
+      "cohort_id": 3,
+      "cohort_name": "COHORT-3-MARKETING-CRM",
+      "target": "campaigns",
+      "pattern": "outreach_queue_tier1_spain.jsonl",
+      "description": "Cola masiva outreach Espa\u00f1a",
+      "action": "EVACUAR",
+      "destination": "~/20_VAULT/MARKETING_OUTREACH/",
+      "files_found": 1,
+      "bytes_found": 2996650,
+      "samples": [
+        "campaigns/outreach_queue_tier1_spain.jsonl"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_050",
+      "cohort_id": 3,
+      "cohort_name": "COHORT-3-MARKETING-CRM",
+      "target": "campaigns",
+      "pattern": "campaign_cybersecurity_autonomous_soc.jsonl",
+      "description": "Prospectos ciberseguridad",
+      "action": "EVACUAR",
+      "destination": "~/20_VAULT/MARKETING_OUTREACH/",
+      "files_found": 1,
+      "bytes_found": 1451984,
+      "samples": [
+        "campaigns/campaign_cybersecurity_autonomous_soc.jsonl"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_051",
+      "cohort_id": 3,
+      "cohort_name": "COHORT-3-MARKETING-CRM",
+      "target": "campaigns",
+      "pattern": "campaign_critical_infrastructure_energy_ai.jsonl",
+      "description": "Prospectos energ\u00eda",
+      "action": "EVACUAR",
+      "destination": "~/20_VAULT/MARKETING_OUTREACH/",
+      "files_found": 1,
+      "bytes_found": 1383283,
+      "samples": [
+        "campaigns/campaign_critical_infrastructure_energy_ai.jsonl"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_052",
+      "cohort_id": 3,
+      "cohort_name": "COHORT-3-MARKETING-CRM",
+      "target": "campaigns",
+      "pattern": "campaign_fintech_banking_tech.jsonl",
+      "description": "Prospectos fintech",
+      "action": "EVACUAR",
+      "destination": "~/20_VAULT/MARKETING_OUTREACH/",
+      "files_found": 1,
+      "bytes_found": 1277330,
+      "samples": [
+        "campaigns/campaign_fintech_banking_tech.jsonl"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_053",
+      "cohort_id": 3,
+      "cohort_name": "COHORT-3-MARKETING-CRM",
+      "target": "campaigns",
+      "pattern": "campaign_healthtech_medical_devices.jsonl",
+      "description": "Prospectos salud",
+      "action": "EVACUAR",
+      "destination": "~/20_VAULT/MARKETING_OUTREACH/",
+      "files_found": 1,
+      "bytes_found": 1368258,
+      "samples": [
+        "campaigns/campaign_healthtech_medical_devices.jsonl"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_054",
+      "cohort_id": 3,
+      "cohort_name": "COHORT-3-MARKETING-CRM",
+      "target": "campaigns",
+      "pattern": "campaign_hrtech_workforce_intelligence.jsonl",
+      "description": "Prospectos HR",
+      "action": "EVACUAR",
+      "destination": "~/20_VAULT/MARKETING_OUTREACH/",
+      "files_found": 1,
+      "bytes_found": 1395071,
+      "samples": [
+        "campaigns/campaign_hrtech_workforce_intelligence.jsonl"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_055",
+      "cohort_id": 3,
+      "cohort_name": "COHORT-3-MARKETING-CRM",
+      "target": "campaigns",
+      "pattern": "campaign_insurtech_claims_automation.jsonl",
+      "description": "Prospectos seguros",
+      "action": "EVACUAR",
+      "destination": "~/20_VAULT/MARKETING_OUTREACH/",
+      "files_found": 1,
+      "bytes_found": 1380447,
+      "samples": [
+        "campaigns/campaign_insurtech_claims_automation.jsonl"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_056",
+      "cohort_id": 3,
+      "cohort_name": "COHORT-3-MARKETING-CRM",
+      "target": "campaigns",
+      "pattern": "campaign_legaltech_regulatory_ai.jsonl",
+      "description": "Prospectos legaltech",
+      "action": "EVACUAR",
+      "destination": "~/20_VAULT/MARKETING_OUTREACH/",
+      "files_found": 1,
+      "bytes_found": 1331260,
+      "samples": [
+        "campaigns/campaign_legaltech_regulatory_ai.jsonl"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_057",
+      "cohort_id": 3,
+      "cohort_name": "COHORT-3-MARKETING-CRM",
+      "target": "campaigns",
+      "pattern": "campaign_tier1_spain_top_priority.jsonl",
+      "description": "Prospectos Tier-1 Espa\u00f1a",
+      "action": "EVACUAR",
+      "destination": "~/20_VAULT/MARKETING_OUTREACH/",
+      "files_found": 1,
+      "bytes_found": 1114726,
+      "samples": [
+        "campaigns/campaign_tier1_spain_top_priority.jsonl"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_058",
+      "cohort_id": 3,
+      "cohort_name": "COHORT-3-MARKETING-CRM",
+      "target": "campaigns",
+      "pattern": "outreach_queue_tier1_spain.jsonl",
+      "description": "Cola masiva outreach Espa\u00f1a",
+      "action": "EVACUAR",
+      "destination": "~/20_VAULT/MARKETING_OUTREACH/",
+      "files_found": 1,
+      "bytes_found": 2996650,
+      "samples": [
+        "campaigns/outreach_queue_tier1_spain.jsonl"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_059",
+      "cohort_id": 3,
+      "cohort_name": "COHORT-3-MARKETING-CRM",
+      "target": "campaigns",
+      "pattern": "campaign_cybersecurity_autonomous_soc.jsonl",
+      "description": "Prospectos ciberseguridad",
+      "action": "EVACUAR",
+      "destination": "~/20_VAULT/MARKETING_OUTREACH/",
+      "files_found": 1,
+      "bytes_found": 1451984,
+      "samples": [
+        "campaigns/campaign_cybersecurity_autonomous_soc.jsonl"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_060",
+      "cohort_id": 4,
+      "cohort_name": "COHORT-4-BUILDS-AND-BINARIES",
+      "target": "Babylon60.app",
+      "pattern": "*",
+      "description": "Bundle binario de aplicaci\u00f3n macOS",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA (Recreable en babylon60-docs / CI)",
+      "files_found": 7,
+      "bytes_found": 1682770,
+      "samples": [
+        "Babylon60.app/Contents/Info.plist",
+        "Babylon60.app/Contents/_CodeSignature/CodeResources",
+        "Babylon60.app/Contents/_CodeSignature/CodeDirectory"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_061",
+      "cohort_id": 4,
+      "cohort_name": "COHORT-4-BUILDS-AND-BINARIES",
+      "target": "dist",
+      "pattern": "*",
+      "description": "Paquetes compilados de distribuci\u00f3n",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA (Recreable en babylon60-docs / CI)",
+      "files_found": 1,
+      "bytes_found": 1825242,
+      "samples": [
+        "dist/Babylon60-v60.5-macOS-arm64.zip"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_062",
+      "cohort_id": 4,
+      "cohort_name": "COHORT-4-BUILDS-AND-BINARIES",
+      "target": "site",
+      "pattern": "*.html",
+      "description": "Sitio est\u00e1tico HTML compilado",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA (Recreable en babylon60-docs / CI)",
+      "files_found": 2,
+      "bytes_found": 81598,
+      "samples": [
+        "site/index.html",
+        "site/404.html"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_063",
+      "cohort_id": 4,
+      "cohort_name": "COHORT-4-BUILDS-AND-BINARIES",
+      "target": "site",
+      "pattern": "*.xml*",
+      "description": "Sitemaps compilados",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA (Recreable en babylon60-docs / CI)",
+      "files_found": 2,
+      "bytes_found": 15382,
+      "samples": [
+        "site/sitemap.xml",
+        "site/sitemap.xml.gz"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_064",
+      "cohort_id": 4,
+      "cohort_name": "COHORT-4-BUILDS-AND-BINARIES",
+      "target": "artifact_bundle_v3/quarantine",
+      "pattern": "*",
+      "description": "Grafos can\u00f3nicos en cuarentena",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA (Recreable en babylon60-docs / CI)",
+      "files_found": 2,
+      "bytes_found": 1681985,
+      "samples": [
+        "artifact_bundle_v3/quarantine/graph.canonical",
+        "artifact_bundle_v3/quarantine/manifest.json"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_065",
+      "cohort_id": 4,
+      "cohort_name": "COHORT-4-BUILDS-AND-BINARIES",
+      "target": "Babylon60.app",
+      "pattern": "*",
+      "description": "Bundle binario de aplicaci\u00f3n macOS",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA (Recreable en babylon60-docs / CI)",
+      "files_found": 7,
+      "bytes_found": 1682770,
+      "samples": [
+        "Babylon60.app/Contents/Info.plist",
+        "Babylon60.app/Contents/_CodeSignature/CodeResources",
+        "Babylon60.app/Contents/_CodeSignature/CodeDirectory"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_066",
+      "cohort_id": 4,
+      "cohort_name": "COHORT-4-BUILDS-AND-BINARIES",
+      "target": "dist",
+      "pattern": "*",
+      "description": "Paquetes compilados de distribuci\u00f3n",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA (Recreable en babylon60-docs / CI)",
+      "files_found": 1,
+      "bytes_found": 1825242,
+      "samples": [
+        "dist/Babylon60-v60.5-macOS-arm64.zip"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_067",
+      "cohort_id": 4,
+      "cohort_name": "COHORT-4-BUILDS-AND-BINARIES",
+      "target": "site",
+      "pattern": "*.html",
+      "description": "Sitio est\u00e1tico HTML compilado",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA (Recreable en babylon60-docs / CI)",
+      "files_found": 2,
+      "bytes_found": 81598,
+      "samples": [
+        "site/index.html",
+        "site/404.html"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_068",
+      "cohort_id": 4,
+      "cohort_name": "COHORT-4-BUILDS-AND-BINARIES",
+      "target": "site",
+      "pattern": "*.xml*",
+      "description": "Sitemaps compilados",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA (Recreable en babylon60-docs / CI)",
+      "files_found": 2,
+      "bytes_found": 15382,
+      "samples": [
+        "site/sitemap.xml",
+        "site/sitemap.xml.gz"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_069",
+      "cohort_id": 4,
+      "cohort_name": "COHORT-4-BUILDS-AND-BINARIES",
+      "target": "artifact_bundle_v3/quarantine",
+      "pattern": "*",
+      "description": "Grafos can\u00f3nicos en cuarentena",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA (Recreable en babylon60-docs / CI)",
+      "files_found": 2,
+      "bytes_found": 1681985,
+      "samples": [
+        "artifact_bundle_v3/quarantine/graph.canonical",
+        "artifact_bundle_v3/quarantine/manifest.json"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_070",
+      "cohort_id": 4,
+      "cohort_name": "COHORT-4-BUILDS-AND-BINARIES",
+      "target": "Babylon60.app",
+      "pattern": "*",
+      "description": "Bundle binario de aplicaci\u00f3n macOS",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA (Recreable en babylon60-docs / CI)",
+      "files_found": 7,
+      "bytes_found": 1682770,
+      "samples": [
+        "Babylon60.app/Contents/Info.plist",
+        "Babylon60.app/Contents/_CodeSignature/CodeResources",
+        "Babylon60.app/Contents/_CodeSignature/CodeDirectory"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_071",
+      "cohort_id": 4,
+      "cohort_name": "COHORT-4-BUILDS-AND-BINARIES",
+      "target": "dist",
+      "pattern": "*",
+      "description": "Paquetes compilados de distribuci\u00f3n",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA (Recreable en babylon60-docs / CI)",
+      "files_found": 1,
+      "bytes_found": 1825242,
+      "samples": [
+        "dist/Babylon60-v60.5-macOS-arm64.zip"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_072",
+      "cohort_id": 4,
+      "cohort_name": "COHORT-4-BUILDS-AND-BINARIES",
+      "target": "site",
+      "pattern": "*.html",
+      "description": "Sitio est\u00e1tico HTML compilado",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA (Recreable en babylon60-docs / CI)",
+      "files_found": 2,
+      "bytes_found": 81598,
+      "samples": [
+        "site/index.html",
+        "site/404.html"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_073",
+      "cohort_id": 4,
+      "cohort_name": "COHORT-4-BUILDS-AND-BINARIES",
+      "target": "site",
+      "pattern": "*.xml*",
+      "description": "Sitemaps compilados",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA (Recreable en babylon60-docs / CI)",
+      "files_found": 2,
+      "bytes_found": 15382,
+      "samples": [
+        "site/sitemap.xml",
+        "site/sitemap.xml.gz"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_074",
+      "cohort_id": 4,
+      "cohort_name": "COHORT-4-BUILDS-AND-BINARIES",
+      "target": "artifact_bundle_v3/quarantine",
+      "pattern": "*",
+      "description": "Grafos can\u00f3nicos en cuarentena",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA (Recreable en babylon60-docs / CI)",
+      "files_found": 2,
+      "bytes_found": 1681985,
+      "samples": [
+        "artifact_bundle_v3/quarantine/graph.canonical",
+        "artifact_bundle_v3/quarantine/manifest.json"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_075",
+      "cohort_id": 4,
+      "cohort_name": "COHORT-4-BUILDS-AND-BINARIES",
+      "target": "Babylon60.app",
+      "pattern": "*",
+      "description": "Bundle binario de aplicaci\u00f3n macOS",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA (Recreable en babylon60-docs / CI)",
+      "files_found": 7,
+      "bytes_found": 1682770,
+      "samples": [
+        "Babylon60.app/Contents/Info.plist",
+        "Babylon60.app/Contents/_CodeSignature/CodeResources",
+        "Babylon60.app/Contents/_CodeSignature/CodeDirectory"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_076",
+      "cohort_id": 4,
+      "cohort_name": "COHORT-4-BUILDS-AND-BINARIES",
+      "target": "dist",
+      "pattern": "*",
+      "description": "Paquetes compilados de distribuci\u00f3n",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA (Recreable en babylon60-docs / CI)",
+      "files_found": 1,
+      "bytes_found": 1825242,
+      "samples": [
+        "dist/Babylon60-v60.5-macOS-arm64.zip"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_077",
+      "cohort_id": 4,
+      "cohort_name": "COHORT-4-BUILDS-AND-BINARIES",
+      "target": "site",
+      "pattern": "*.html",
+      "description": "Sitio est\u00e1tico HTML compilado",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA (Recreable en babylon60-docs / CI)",
+      "files_found": 2,
+      "bytes_found": 81598,
+      "samples": [
+        "site/index.html",
+        "site/404.html"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_078",
+      "cohort_id": 4,
+      "cohort_name": "COHORT-4-BUILDS-AND-BINARIES",
+      "target": "site",
+      "pattern": "*.xml*",
+      "description": "Sitemaps compilados",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA (Recreable en babylon60-docs / CI)",
+      "files_found": 2,
+      "bytes_found": 15382,
+      "samples": [
+        "site/sitemap.xml",
+        "site/sitemap.xml.gz"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_079",
+      "cohort_id": 4,
+      "cohort_name": "COHORT-4-BUILDS-AND-BINARIES",
+      "target": "artifact_bundle_v3/quarantine",
+      "pattern": "*",
+      "description": "Grafos can\u00f3nicos en cuarentena",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA (Recreable en babylon60-docs / CI)",
+      "files_found": 2,
+      "bytes_found": 1681985,
+      "samples": [
+        "artifact_bundle_v3/quarantine/graph.canonical",
+        "artifact_bundle_v3/quarantine/manifest.json"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_080",
+      "cohort_id": 5,
+      "cohort_name": "COHORT-5-LOGS-AND-CACHES",
+      "target": "logs",
+      "pattern": "daemon_stdout.log",
+      "description": "Log masivo de ejecuci\u00f3n activa",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA",
+      "files_found": 1,
+      "bytes_found": 25983912,
+      "samples": [
+        "logs/daemon_stdout.log"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_081",
+      "cohort_id": 5,
+      "cohort_name": "COHORT-5-LOGS-AND-CACHES",
+      "target": "proof/lean/.lake",
+      "pattern": "*",
+      "description": "Cach\u00e9 de compilaci\u00f3n Lean 4 Lake",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA",
+      "files_found": 892,
+      "bytes_found": 57878746,
+      "samples": [
+        "proof/lean/.lake/build/ir/NavierStokesSobolevKato.c",
+        "proof/lean/.lake/build/ir/Babylon.c",
+        "proof/lean/.lake/build/ir/NavierStokesBKM.c"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_082",
+      "cohort_id": 5,
+      "cohort_name": "COHORT-5-LOGS-AND-CACHES",
+      "target": ".pytest_cache",
+      "pattern": "*",
+      "description": "Cach\u00e9 de pytest",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA",
+      "files_found": 5,
+      "bytes_found": 72447,
+      "samples": [
+        ".pytest_cache/CACHEDIR.TAG",
+        ".pytest_cache/README.md",
+        ".pytest_cache/.gitignore"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_083",
+      "cohort_id": 5,
+      "cohort_name": "COHORT-5-LOGS-AND-CACHES",
+      "target": ".hypothesis",
+      "pattern": "*",
+      "description": "Cach\u00e9 de property tests hypothesis",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA",
+      "files_found": 132,
+      "bytes_found": 85297,
+      "samples": [
+        ".hypothesis/.gitignore",
+        ".hypothesis/constants/f55306032ef898c5",
+        ".hypothesis/constants/d44105452ce4b0da"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_084",
+      "cohort_id": 5,
+      "cohort_name": "COHORT-5-LOGS-AND-CACHES",
+      "target": ".ruff_cache",
+      "pattern": "*",
+      "description": "Cach\u00e9 del linter ruff",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA",
+      "files_found": 4,
+      "bytes_found": 787,
+      "samples": [
+        ".ruff_cache/CACHEDIR.TAG",
+        ".ruff_cache/.gitignore",
+        ".ruff_cache/0.15.6/13290336239035333093"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_085",
+      "cohort_id": 5,
+      "cohort_name": "COHORT-5-LOGS-AND-CACHES",
+      "target": "scratch/crypto_shield",
+      "pattern": "*",
+      "description": "Temporales de pruebas de cifrado",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA",
+      "files_found": 19,
+      "bytes_found": 1453698,
+      "samples": [
+        "scratch/crypto_shield/name_v1.tex",
+        "scratch/crypto_shield/references.bib",
+        "scratch/crypto_shield/llncs.cls"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_086",
+      "cohort_id": 5,
+      "cohort_name": "COHORT-5-LOGS-AND-CACHES",
+      "target": "logs",
+      "pattern": "daemon_stdout.log",
+      "description": "Log masivo de ejecuci\u00f3n activa",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA",
+      "files_found": 1,
+      "bytes_found": 25983912,
+      "samples": [
+        "logs/daemon_stdout.log"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_087",
+      "cohort_id": 5,
+      "cohort_name": "COHORT-5-LOGS-AND-CACHES",
+      "target": "proof/lean/.lake",
+      "pattern": "*",
+      "description": "Cach\u00e9 de compilaci\u00f3n Lean 4 Lake",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA",
+      "files_found": 892,
+      "bytes_found": 57878746,
+      "samples": [
+        "proof/lean/.lake/build/ir/NavierStokesSobolevKato.c",
+        "proof/lean/.lake/build/ir/Babylon.c",
+        "proof/lean/.lake/build/ir/NavierStokesBKM.c"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_088",
+      "cohort_id": 5,
+      "cohort_name": "COHORT-5-LOGS-AND-CACHES",
+      "target": ".pytest_cache",
+      "pattern": "*",
+      "description": "Cach\u00e9 de pytest",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA",
+      "files_found": 5,
+      "bytes_found": 72447,
+      "samples": [
+        ".pytest_cache/CACHEDIR.TAG",
+        ".pytest_cache/README.md",
+        ".pytest_cache/.gitignore"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_089",
+      "cohort_id": 5,
+      "cohort_name": "COHORT-5-LOGS-AND-CACHES",
+      "target": ".hypothesis",
+      "pattern": "*",
+      "description": "Cach\u00e9 de property tests hypothesis",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA",
+      "files_found": 132,
+      "bytes_found": 85297,
+      "samples": [
+        ".hypothesis/.gitignore",
+        ".hypothesis/constants/f55306032ef898c5",
+        ".hypothesis/constants/d44105452ce4b0da"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_090",
+      "cohort_id": 5,
+      "cohort_name": "COHORT-5-LOGS-AND-CACHES",
+      "target": ".ruff_cache",
+      "pattern": "*",
+      "description": "Cach\u00e9 del linter ruff",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA",
+      "files_found": 4,
+      "bytes_found": 787,
+      "samples": [
+        ".ruff_cache/CACHEDIR.TAG",
+        ".ruff_cache/.gitignore",
+        ".ruff_cache/0.15.6/13290336239035333093"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_091",
+      "cohort_id": 5,
+      "cohort_name": "COHORT-5-LOGS-AND-CACHES",
+      "target": "scratch/crypto_shield",
+      "pattern": "*",
+      "description": "Temporales de pruebas de cifrado",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA",
+      "files_found": 19,
+      "bytes_found": 1453698,
+      "samples": [
+        "scratch/crypto_shield/name_v1.tex",
+        "scratch/crypto_shield/references.bib",
+        "scratch/crypto_shield/llncs.cls"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_092",
+      "cohort_id": 5,
+      "cohort_name": "COHORT-5-LOGS-AND-CACHES",
+      "target": "logs",
+      "pattern": "daemon_stdout.log",
+      "description": "Log masivo de ejecuci\u00f3n activa",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA",
+      "files_found": 1,
+      "bytes_found": 25983912,
+      "samples": [
+        "logs/daemon_stdout.log"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_093",
+      "cohort_id": 5,
+      "cohort_name": "COHORT-5-LOGS-AND-CACHES",
+      "target": "proof/lean/.lake",
+      "pattern": "*",
+      "description": "Cach\u00e9 de compilaci\u00f3n Lean 4 Lake",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA",
+      "files_found": 892,
+      "bytes_found": 57878746,
+      "samples": [
+        "proof/lean/.lake/build/ir/NavierStokesSobolevKato.c",
+        "proof/lean/.lake/build/ir/Babylon.c",
+        "proof/lean/.lake/build/ir/NavierStokesBKM.c"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_094",
+      "cohort_id": 5,
+      "cohort_name": "COHORT-5-LOGS-AND-CACHES",
+      "target": ".pytest_cache",
+      "pattern": "*",
+      "description": "Cach\u00e9 de pytest",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA",
+      "files_found": 5,
+      "bytes_found": 72447,
+      "samples": [
+        ".pytest_cache/CACHEDIR.TAG",
+        ".pytest_cache/README.md",
+        ".pytest_cache/.gitignore"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_095",
+      "cohort_id": 5,
+      "cohort_name": "COHORT-5-LOGS-AND-CACHES",
+      "target": ".hypothesis",
+      "pattern": "*",
+      "description": "Cach\u00e9 de property tests hypothesis",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA",
+      "files_found": 132,
+      "bytes_found": 85297,
+      "samples": [
+        ".hypothesis/.gitignore",
+        ".hypothesis/constants/f55306032ef898c5",
+        ".hypothesis/constants/d44105452ce4b0da"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_096",
+      "cohort_id": 5,
+      "cohort_name": "COHORT-5-LOGS-AND-CACHES",
+      "target": ".ruff_cache",
+      "pattern": "*",
+      "description": "Cach\u00e9 del linter ruff",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA",
+      "files_found": 4,
+      "bytes_found": 787,
+      "samples": [
+        ".ruff_cache/CACHEDIR.TAG",
+        ".ruff_cache/.gitignore",
+        ".ruff_cache/0.15.6/13290336239035333093"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_097",
+      "cohort_id": 5,
+      "cohort_name": "COHORT-5-LOGS-AND-CACHES",
+      "target": "scratch/crypto_shield",
+      "pattern": "*",
+      "description": "Temporales de pruebas de cifrado",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA",
+      "files_found": 19,
+      "bytes_found": 1453698,
+      "samples": [
+        "scratch/crypto_shield/name_v1.tex",
+        "scratch/crypto_shield/references.bib",
+        "scratch/crypto_shield/llncs.cls"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_098",
+      "cohort_id": 5,
+      "cohort_name": "COHORT-5-LOGS-AND-CACHES",
+      "target": "logs",
+      "pattern": "daemon_stdout.log",
+      "description": "Log masivo de ejecuci\u00f3n activa",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA",
+      "files_found": 1,
+      "bytes_found": 25983912,
+      "samples": [
+        "logs/daemon_stdout.log"
+      ]
+    },
+    {
+      "agent_id": "SHARUR_GC_099",
+      "cohort_id": 5,
+      "cohort_name": "COHORT-5-LOGS-AND-CACHES",
+      "target": "proof/lean/.lake",
+      "pattern": "*",
+      "description": "Cach\u00e9 de compilaci\u00f3n Lean 4 Lake",
+      "action": "PURGAR",
+      "destination": "PURGA_DETERMINISTA",
+      "files_found": 892,
+      "bytes_found": 57878746,
+      "samples": [
+        "proof/lean/.lake/build/ir/NavierStokesSobolevKato.c",
+        "proof/lean/.lake/build/ir/Babylon.c",
+        "proof/lean/.lake/build/ir/NavierStokesBKM.c"
+      ]
+    }
+  ]
+}

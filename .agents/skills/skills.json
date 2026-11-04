@@ -1,0 +1,735 @@
+{
+  "version": "26.400",
+  "updated_at": "2026-10-18T18:29:58Z",
+  "exergy_scale_standard": "COMPILER_DERIVED_3_EVALUATORS (E1_Silicon + E2_Kolmogorov + E3_Causal = 21000)",
+  "total_skills": 26,
+  "average_exergy_density": 19205.19,
+  "description": "Grafo de adyacencia y topología conectada de las 131 habilidades soberanas del ecosistema CORTEX Engine integrado en BABYLON-60 (100% COMPILER_DERIVED)",
+  "entries": [
+    {
+      "name": "adaptive-cron",
+      "tier": 19500,
+      "category": "Governance",
+      "display_name": "Cálculo de Límite de Disipación Crítica (Adaptive Cron)",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "wetware-adaptive-cron",
+      "scope": "workspace",
+      "description": "Resume carga operativa mediante observables verificables y conserva el control de sesión del operador.",
+      "triggers": [
+        "/adaptive-cron",
+        "adaptive-cron",
+        "burnout cognitivo",
+        "cron adaptativo",
+        "límite de disipación crítica",
+        "wetware-adaptive-cron"
+      ],
+      "path": "adaptive-cron/SKILL.md"
+    },
+    {
+      "name": "apple-bypass",
+      "tier": 19800,
+      "category": "Operations",
+      "display_name": "Bypass Termodinámico para LLMs en Apple Silicon",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-apple-bypass",
+      "scope": "workspace",
+      "description": "Mitigación de presión de memoria para LLMs locales en Apple Silicon.",
+      "triggers": [
+        "/apple-bypass",
+        "apple-bypass",
+        "bypass termodinámico",
+        "evadir jetsam macos",
+        "kernel-apple-bypass",
+        "liberar memoria mps"
+      ],
+      "path": "apple-bypass/SKILL.md"
+    },
+    {
+      "name": "audiovisual-sota",
+      "tier": 16800,
+      "category": "Operations",
+      "display_name": "Media Pipeline · Renderizado Audiovisual Determinista",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "media-pipeline",
+      "scope": "workspace",
+      "description": "Fuerza invariantes extremas en pipelines de renderizado audiovisual (FFmpeg/Remotion).",
+      "triggers": [
+        "/audiovisual-sota",
+        "audiovisual-sota",
+        "invariantes remotion ffmpeg",
+        "media-pipeline",
+        "pipeline audiovisual"
+      ],
+      "path": "audiovisual-sota/SKILL.md"
+    },
+    {
+      "name": "babylon60-architecture",
+      "tier": 19000,
+      "category": "Governance",
+      "display_name": "Arquitectura y Patrones BABYLON-60 IDE",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-ide-architecture",
+      "scope": "workspace",
+      "description": "Patrones de arquitectura de Babylon60 IDE (instaladores 1-clic autorreparables, tokens Ed25519 SCITT, OpenRouter Gateway, SSO corporativo y escala exérgica 1-21000).",
+      "triggers": [
+        "/babylon60-architecture",
+        "arquitectura babylon60",
+        "babylon60 ide",
+        "babylon60-architecture",
+        "kernel-ide-architecture",
+        "patrones ide babylon"
+      ],
+      "path": "babylon60-architecture/SKILL.md"
+    },
+    {
+      "name": "babylon60-kernel-invariants",
+      "tier": 21600,
+      "category": "Kernel",
+      "display_name": "Auditoría de Invariantes del Kernel BABYLON-60",
+      "canonical_alias": "kernel-invariants-audit",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 600,
+        "compiler_verified": true
+      },
+      "scope": "workspace",
+      "description": "Audita y prepara correcciones del kernel BABYLON-60 para SPSC, SQLite L0, relojes causales, consenso LARSA y correspondencia Rust–Lean. Usa el puente MCP local cuando esté disponible y distingue pruebas ejecutadas de obligaciones pendientes.",
+      "triggers": [
+        "/babylon60-kernel-invariants",
+        "babylon60-kernel-invariants",
+        "kernel-invariants-audit"
+      ],
+      "path": "babylon60-kernel-invariants/SKILL.md"
+    },
+    {
+      "name": "biographical-thermo",
+      "tier": 18500,
+      "category": "Nucleus",
+      "display_name": "Mapeo Termodinámico Biográfico e Histórico",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-biographical-thermo",
+      "scope": "workspace",
+      "description": "Analiza trayectorias vitales, historia y filosofía mediante Mapeo Estructural C5-REAL (Termodinámica Discreta).",
+      "triggers": [
+        "/biographical-thermo",
+        "análisis biográfico termodinámico",
+        "biografía termodinámica",
+        "biographical-thermo",
+        "epistemic-biographical-thermo",
+        "trayectoria termodinámica"
+      ],
+      "path": "biographical-thermo/SKILL.md"
+    },
+    {
+      "name": "c5-alpha-extraction-pipeline",
+      "tier": 18950,
+      "category": "Operations",
+      "display_name": "Alpha Extractor · Extracción de Alfa Algorítmico",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "alpha-extractor",
+      "scope": "workspace",
+      "description": "Protocol to extract high-exergy algorithmic alpha from arXiv and GitHub directly from raw sources (LaTeX/Git) bypassing PDFs, followed by LARSA-120 formalization.",
+      "triggers": [
+        "/c5-alpha-extraction-pipeline",
+        "alpha extraction",
+        "alpha-extractor",
+        "c5-alpha-extraction-pipeline",
+        "extraer alfa algorítmico",
+        "larsa 120 alpha"
+      ],
+      "path": "c5-alpha-extraction-pipeline/SKILL.md"
+    },
+    {
+      "name": "c5-anti-slop-ui",
+      "tier": 18800,
+      "category": "Governance",
+      "display_name": "Linter y Directivas Frontend Anti-Slop (C5-REAL)",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "media-ui-linter",
+      "scope": "workspace",
+      "description": "Revisa diseño y accesibilidad de interfaces; distingue comprobaciones léxicas parciales de verificación sobre la interfaz renderizada.",
+      "triggers": [
+        "/c5-anti-slop-ui",
+        "anti-slop ui",
+        "auditoría ui",
+        "c5-anti-slop-ui",
+        "erradicar ai slop",
+        "impeccable c5",
+        "linter de diseño",
+        "media-ui-linter",
+        "pulir frontend"
+      ],
+      "path": "c5-anti-slop-ui/SKILL.md"
+    },
+    {
+      "name": "c5-audiovisual-acreativo-sota-project",
+      "tier": 19000,
+      "category": "Multimedia & DSP",
+      "display_name": "Media Hub · Audiovisual Acreativo (Proyecto)",
+      "canonical_alias": "media-hub",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "scope": "workspace",
+      "description": "Enruta módulos del proyecto para pipelines audiovisuales y auditoría de interfaces. Dispara con \"media-hub\", \"audiovisual project hub\", \"hub audiovisual proyecto\", \"media router proyecto\", \"audiovisual-sota\", \"anti-slop ui\".",
+      "triggers": [
+        "/c5-audiovisual-acreativo-sota-project",
+        "anti-slop ui",
+        "audiovisual project hub",
+        "audiovisual-sota",
+        "c5-audiovisual-acreativo-sota-project",
+        "hub audiovisual proyecto",
+        "media router proyecto",
+        "media-hub"
+      ],
+      "path": "c5-audiovisual-acreativo-sota-project/SKILL.md"
+    },
+    {
+      "name": "c5-cortex-swarm-orchestrator-project",
+      "tier": 20400,
+      "category": "Governance",
+      "display_name": "Swarm Hub · Orquestador CORTEX (Proyecto)",
+      "canonical_alias": "swarm-hub",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "scope": "workspace",
+      "description": "Enruta módulos del proyecto para minería LoRA con enjambres, instalación guiada y redacción para agentes. Dispara con \"swarm-hub\", \"cortex project hub\", \"hub cortex proyecto\", \"swarm router proyecto\", \"lora swarm\", \"wizard\", \"writing-for-agents\".",
+      "triggers": [
+        "/c5-cortex-swarm-orchestrator-project",
+        "c5-cortex-swarm-orchestrator-project",
+        "cortex project hub",
+        "hub cortex proyecto",
+        "lora swarm",
+        "swarm router proyecto",
+        "swarm-hub",
+        "wizard",
+        "writing-for-agents"
+      ],
+      "path": "c5-cortex-swarm-orchestrator-project/SKILL.md"
+    },
+    {
+      "name": "c5-epistemic-thermodynamics-project",
+      "tier": 20600,
+      "category": "Nucleus",
+      "display_name": "Epistemic Hub · Termodinámica Epistémica (Proyecto)",
+      "canonical_alias": "epistemic-hub",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "scope": "workspace",
+      "description": "Enruta auditoría epistémica del proyecto, síntesis MDL, extracción de fuentes, biografía, simbiosis cognitiva y explicación clara. Dispara con \"epistemic-hub\", \"epistemic project hub\", \"auditoría epistémica\", \"cloud-chamber\", \"alpha extraction\", \"grill-me-v2\", \"wait-what\".",
+      "triggers": [
+        "/c5-epistemic-thermodynamics-project",
+        "alpha extraction",
+        "auditoría epistémica",
+        "c5-epistemic-thermodynamics-project",
+        "cloud-chamber",
+        "epistemic project hub",
+        "epistemic-hub",
+        "grill-me-v2",
+        "wait-what"
+      ],
+      "path": "c5-epistemic-thermodynamics-project/SKILL.md"
+    },
+    {
+      "name": "c5-rea-clean-room",
+      "tier": 21300,
+      "category": "Kernel",
+      "display_name": "Suite C5-REA de Ingeniería Inversa en Sala Limpia y Firewall Existence-Gap",
+      "canonical_alias": "kernel-rea-clean-room",
+      "scope": "workspace",
+      "role": "auditor",
+      "description": "Disección binaria AOT/Mach-O y Electron ASAR en memoria (<15ms), síntesis Clean-Room (TS/Rust/Python) y firewall Popperiano Existence-Gap.",
+      "triggers": [
+        "/c5-rea",
+        "/c5-rea-clean-room",
+        "c5-rea",
+        "c5-rea-clean-room",
+        "clean-room synthesis",
+        "disección aot",
+        "kernel-rea-clean-room",
+        "rea harness",
+        "rea-decompile",
+        "rea-triage",
+        "rea-unpack"
+      ],
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 300,
+        "compiler_verified": true
+      },
+      "path": "c5-rea-clean-room/SKILL.md"
+    },
+    {
+      "name": "c5-ring0-babylon-kernel-project",
+      "tier": 21500,
+      "category": "Kernel",
+      "display_name": "Kernel Hub · Ring-0 BABYLON (Proyecto)",
+      "canonical_alias": "kernel-hub",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 500,
+        "compiler_verified": true
+      },
+      "scope": "workspace",
+      "description": "Enruta módulos BABYLON-60 del proyecto: SPSC, SQLite L0, arquitectura IDE, SharedManifest, launchd, Apple Silicon y auditoría de contención. Dispara con \"kernel-hub\", \"babylon kernel hub\", \"shared manifest\", \"thermo-audit\", \"rlhf sentinel\", \"apple-bypass\".",
+      "triggers": [
+        "/c5-ring0-babylon-kernel-project",
+        "apple-bypass",
+        "babylon kernel hub",
+        "c5-ring0-babylon-kernel-project",
+        "kernel-hub",
+        "rlhf sentinel",
+        "shared manifest",
+        "thermo-audit"
+      ],
+      "path": "c5-ring0-babylon-kernel-project/SKILL.md"
+    },
+    {
+      "name": "c5-sovereign-daemon-deployment",
+      "tier": 19350,
+      "category": "Operations",
+      "display_name": "Despliegue del Sovereign Spark Daemon en Launchd",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-daemon-deploy",
+      "scope": "workspace",
+      "description": "Protocolo estricto para desplegar el Sovereign Spark Daemon (Antigravity Engine en Rust) sobre el sistema init local de macOS (launchd) para ejecución 24/7 ininterrumpida.",
+      "triggers": [
+        "/c5-sovereign-daemon-deployment",
+        "c5-sovereign-daemon-deployment",
+        "daemon 24/7",
+        "desplegar sovereign daemon",
+        "kernel-daemon-deploy",
+        "launchd rust daemon"
+      ],
+      "path": "c5-sovereign-daemon-deployment/SKILL.md"
+    },
+    {
+      "name": "c5-ultrathink-epistemic-audit",
+      "tier": 20400,
+      "category": "Nucleus",
+      "display_name": "Epistemic Audit · Auditoría Epistémica Profunda",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-audit",
+      "scope": "workspace",
+      "description": "Auditoría epistémica profunda (ULTRATHINK) basada en el marco termodinámico C5-REAL. Ejecuta un desacople ontológico estricto entre \"Estado/Memoria\" y \"Lógica/Cálculo\", mapeando conceptos a invariantes termodinámicas (Curry-Howard, Landauer).",
+      "triggers": [
+        "/c5-ultrathink-epistemic-audit",
+        "auditoría epistémica",
+        "auditoría ultrathink",
+        "c5-ultrathink-epistemic-audit",
+        "desacople ontológico",
+        "epistemic-audit",
+        "postmortem mcts"
+      ],
+      "path": "c5-ultrathink-epistemic-audit/SKILL.md"
+    },
+    {
+      "name": "c5-wetware-and-venture-ops-project",
+      "tier": 19200,
+      "category": "Governance",
+      "display_name": "Wetware Hub · Operaciones y Carga Cognitiva",
+      "canonical_alias": "wetware-hub",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "scope": "workspace",
+      "description": "Enruta el módulo del proyecto para el límite de disipación y el cron adaptativo. Dispara con \"wetware project hub\", \"wetware-hub\", \"venture project hub\", \"hub wetware proyecto\", \"adaptive-cron\".",
+      "triggers": [
+        "/c5-wetware-and-venture-ops-project",
+        "adaptive-cron",
+        "c5-wetware-and-venture-ops-project",
+        "hub wetware proyecto",
+        "venture project hub",
+        "wetware project hub",
+        "wetware-hub"
+      ],
+      "path": "c5-wetware-and-venture-ops-project/SKILL.md"
+    },
+    {
+      "name": "cloud-chamber",
+      "tier": 20200,
+      "category": "Nucleus",
+      "display_name": "Metodología de Cámara de Niebla (Síntesis MDL)",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-mdl-synthesizer",
+      "scope": "workspace",
+      "description": "Ejecuta la Metodología de Cámara de Niebla forzando síntesis de alta densidad topológica (MDL / Invariantes C5-REAL).",
+      "triggers": [
+        "/cloud-chamber",
+        "cloud-chamber",
+        "colapso mdl",
+        "cámara de niebla",
+        "epistemic-mdl-synthesizer",
+        "máxima densidad topológica"
+      ],
+      "path": "cloud-chamber/SKILL.md"
+    },
+    {
+      "name": "grill-me-v2",
+      "tier": 19900,
+      "category": "Governance",
+      "display_name": "Socratic Interrogator · Interrogatorio Socrático Adversarial",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "socratic-interrogator",
+      "scope": "workspace",
+      "description": "Versión avanzada de interrogatorio socrático (C5-REAL) para alinear decisiones de diseño y purgar asunciones infundadas.",
+      "triggers": [
+        "/grill-me",
+        "/grill-me-v2",
+        "grill-me-v2",
+        "interrogatorio socrático",
+        "socratic audit",
+        "socratic-interrogator"
+      ],
+      "path": "grill-me-v2/SKILL.md"
+    },
+    {
+      "name": "lora-swarm-pipeline",
+      "tier": 18200,
+      "category": "Operations",
+      "display_name": "Pipeline de Minería Paralelizada con Enjambre LoRA",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-lora-pipeline",
+      "scope": "workspace",
+      "description": "Pipeline de minería con enjambre de agentes, extracción N-Zonas (SHA-256), ShareGPT/ChatML y clustering semántico.",
+      "triggers": [
+        "/lora-swarm-pipeline",
+        "dataset swarm",
+        "enjambre ShareGPT",
+        "enjambre lora",
+        "lora swarm",
+        "lora-swarm-pipeline",
+        "minar datasets enjambre",
+        "minería enjambre",
+        "n-zonas enjambre",
+        "swarm pipeline",
+        "swarm-lora-pipeline"
+      ],
+      "path": "lora-swarm-pipeline/SKILL.md"
+    },
+    {
+      "name": "rlhf-sentinel",
+      "tier": 21200,
+      "category": "Governance",
+      "display_name": "Centinela de Contención Ring-0 (RLHF Sentinel)",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 200,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-rlhf-sentinel",
+      "scope": "workspace",
+      "description": "Audita la barrera IPC (Ring-0) para detectar fallos de contención de IA (RLHF Breakthrough) y ataques estocásticos.",
+      "triggers": [
+        "/rlhf-sentinel",
+        "contención de ia",
+        "fuga de llm",
+        "kernel-rlhf-sentinel",
+        "quarantine ring-0",
+        "rlhf sentinel",
+        "rlhf-sentinel"
+      ],
+      "path": "rlhf-sentinel/SKILL.md"
+    },
+    {
+      "name": "shared-manifest-kernel",
+      "tier": 22000,
+      "category": "Kernel",
+      "display_name": "Kernel de Manifiesto Compartido (64B Seqlock SPMC)",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 1000,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-shared-manifest",
+      "scope": "workspace",
+      "description": "Patrón de diseño C-ABI de 64 Bytes (Seqlock SPMC, Cero-Punteros, Fail-Stop SCITT y soporte IPC multiplataforma macOS/Linux/Windows).",
+      "triggers": [
+        "/shared-manifest-kernel",
+        "ipc lock-free",
+        "kernel-shared-manifest",
+        "ring-0 shm",
+        "seqlock 64b",
+        "shared manifest",
+        "shared-manifest-kernel"
+      ],
+      "path": "shared-manifest-kernel/SKILL.md"
+    },
+    {
+      "name": "symbiotic-cognitive-architecture",
+      "tier": 19400,
+      "category": "Governance",
+      "display_name": "Arquitectura Cognitiva Simbiótica Díada Operador-Agente",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-symbiotic-cognition",
+      "scope": "workspace",
+      "description": "Protocolo de formalización de la díada simbiótica operador-agente, evaluación de Valor Ontológico (V_A), Tensor de Transducción Polímata y colapso autopoyético con el comando \"itera simbiótica\".",
+      "triggers": [
+        "/symbiotic-cognitive-architecture",
+        "epistemic-symbiotic-cognition",
+        "itera simbiótica",
+        "simbiosis cognitiva",
+        "symbiotic-cognitive-architecture",
+        "tensor de transducción",
+        "tú y yo",
+        "valor ontológico agente"
+      ],
+      "path": "symbiotic-cognitive-architecture/SKILL.md"
+    },
+    {
+      "name": "thermo-audit",
+      "tier": 21500,
+      "category": "Kernel",
+      "display_name": "Auditoría Termodinámica de Silicio y Concurrencia",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 500,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-thermo-audit",
+      "scope": "workspace",
+      "description": "Auditoría termodinámica estricta de C5-REAL en silicio (Aritmética, Concurrencia, MDL, Ring-0, Seqlocks y Grados de Libertad Parásitos).",
+      "triggers": [
+        "/thermo-audit",
+        "auditoría termodinámica código",
+        "concurrencia landauer",
+        "fricción de silicio",
+        "grados de libertad parásitos",
+        "kernel-thermo-audit",
+        "potencia causal",
+        "silicon concurrency audit",
+        "thermo-audit"
+      ],
+      "path": "thermo-audit/SKILL.md"
+    },
+    {
+      "name": "wait-what",
+      "tier": 19600,
+      "category": "Nucleus",
+      "display_name": "Freno Epistémico & Traducción Simplificada (STE)",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-simplifier",
+      "scope": "workspace",
+      "description": "Freno epistémico para combatir verbosidad, forzar ASD-STE-100 y aterrizar conceptos a lenguaje directo.",
+      "triggers": [
+        "/wait-what",
+        "déjate de rollos",
+        "epistemic-simplifier",
+        "explícalo simple",
+        "freno epistémico",
+        "fuera de aqui todo esto",
+        "fuera de aqui todo eto",
+        "no entiendo nada",
+        "quita todo esto",
+        "simplifica respuesta",
+        "wait-what"
+      ],
+      "path": "wait-what/SKILL.md"
+    },
+    {
+      "name": "wizard",
+      "tier": 17000,
+      "category": "Utilities",
+      "display_name": "Asistente de Instalación Determinista (Wizard)",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-state-wizard",
+      "scope": "workspace",
+      "description": "Transforma al agente en una máquina de estados determinista para instalaciones y configuración paso a paso.",
+      "triggers": [
+        "/wizard",
+        "asistente de instalación",
+        "guía secuencial",
+        "máquina de estados",
+        "paso a paso",
+        "swarm-state-wizard",
+        "wizard"
+      ],
+      "path": "wizard/SKILL.md"
+    },
+    {
+      "name": "writing-for-agents",
+      "tier": 16500,
+      "category": "Utilities",
+      "display_name": "Redacción M2M de Alta Exergía & Sanitización C5",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-m2m-writer",
+      "scope": "workspace",
+      "description": "Genera documentos y prompts para ingestión estricta por LLMs (M2M), incluyendo el sub-protocolo /sanitize-c5.",
+      "triggers": [
+        "/sanitize-c5",
+        "/writing-for-agents",
+        "despersonalizar manifiesto",
+        "external llm exergy",
+        "higienizar manifiesto",
+        "redacción m2m",
+        "sanitize-c5",
+        "swarm-m2m-writer",
+        "writing-for-agents"
+      ],
+      "path": "writing-for-agents/SKILL.md"
+    }
+  ],
+  "adjacency": [
+    {
+      "source": "shared-manifest-kernel",
+      "target": "thermo-audit",
+      "relation": "bounds_concurrency"
+    },
+    {
+      "source": "c5-rea-clean-room",
+      "target": "thermo-audit",
+      "relation": "dissects_silicon_binaries"
+    }
+  ]
+}

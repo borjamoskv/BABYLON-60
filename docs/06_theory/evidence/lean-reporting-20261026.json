@@ -1,0 +1,156 @@
+{
+  "date": "2026-10-26",
+  "toolchain": "leanprover/lean4:v4.34.0-rc2",
+  "scope": "messages on synthetic local inputs, expected compiler rejection, isolated widget elaboration; no production certification",
+  "reporting_cases": [
+    {
+      "case": "csv_empty",
+      "expected_exit": 0,
+      "exit_code": 0,
+      "input_hex": "",
+      "output": "[TRACE_CSV] Lectura de traza: <fixture>\n[TRACE_CSV] Fin de entrada: los registros leídos fueron aceptados por el modelo de secuencias.\n"
+    },
+    {
+      "case": "csv_nominal",
+      "expected_exit": 0,
+      "exit_code": 0,
+      "input_hex": "312c312c300a312c322c310a322c322c320a",
+      "output": "[TRACE_CSV] Lectura de traza: <fixture>\n[TRACE_CSV] Fin de entrada: los registros leídos fueron aceptados por el modelo de secuencias.\n"
+    },
+    {
+      "case": "csv_rejected",
+      "expected_exit": 2,
+      "exit_code": 2,
+      "input_hex": "312c312c300a322c312c320a",
+      "output": "[TRACE_CSV] Lectura de traza: <fixture>\n[TRACE_CSV] Registro rechazado por el modelo: seq=1, thread=2.\n"
+    },
+    {
+      "case": "csv_invalid",
+      "expected_exit": 1,
+      "exit_code": 1,
+      "input_hex": "696e76616c69640a",
+      "output": "[TRACE_CSV] Lectura de traza: <fixture>\n[TRACE_CSV] Registro CSV inválido: invalid\n\n"
+    },
+    {
+      "case": "binary_empty",
+      "expected_exit": 0,
+      "exit_code": 0,
+      "input_hex": "",
+      "output": "[TRACE_BIN] Lectura de traza: <fixture>\n[TRACE_BIN] Fin de entrada: 0 registros aceptados por el modelo de secuencias.\n"
+    },
+    {
+      "case": "binary_nominal",
+      "expected_exit": 0,
+      "exit_code": 0,
+      "input_hex": "000100000100000001010000020000000202000002000000",
+      "output": "[TRACE_BIN] Lectura de traza: <fixture>\n[TRACE_BIN] Fin de entrada: 3 registros aceptados por el modelo de secuencias.\n"
+    },
+    {
+      "case": "binary_truncated",
+      "expected_exit": 1,
+      "exit_code": 1,
+      "input_hex": "000102",
+      "output": "[TRACE_BIN] Lectura de traza: <fixture>\n[TRACE_BIN] Registro incompleto en byte 0: 3 bytes pendientes.\n"
+    },
+    {
+      "case": "binary_invalid",
+      "expected_exit": 1,
+      "exit_code": 1,
+      "input_hex": "ff00000000000000",
+      "output": "[TRACE_BIN] Lectura de traza: <fixture>\n[TRACE_BIN] Registro binario inválido en byte 0.\n"
+    },
+    {
+      "case": "binary_rejected",
+      "expected_exit": 2,
+      "exit_code": 2,
+      "input_hex": "0202000001000000",
+      "output": "[TRACE_BIN] Lectura de traza: <fixture>\n[TRACE_BIN] Registro rechazado por el modelo: seq=1, thread=2.\n"
+    },
+    {
+      "case": "fluid_empty",
+      "expected_exit": 0,
+      "exit_code": 0,
+      "input_hex": "",
+      "output": "[FLUID_MODEL] Lectura de eventos: <fixture>\n[FLUID_MODEL] Clasificación del autómata: isDepleted=true; indicador=100. No demuestra regularidad PDE.\n"
+    },
+    {
+      "case": "fluid_candidate",
+      "expected_exit": 10,
+      "exit_code": 10,
+      "input_hex": "312c312c31300a322c322c353030300a332c332c300a",
+      "output": "[FLUID_MODEL] Lectura de eventos: <fixture>\n[FLUID_MODEL] Clasificación del autómata: candidato por umbral; tick=3, acumulado=5000, indicador=10. No demuestra singularidad PDE.\n"
+    },
+    {
+      "case": "fluid_unquarantined_high_counter",
+      "expected_exit": 0,
+      "exit_code": 0,
+      "input_hex": "312c312c31300a322c322c353030300a",
+      "output": "[FLUID_MODEL] Lectura de eventos: <fixture>\n[FLUID_MODEL] Clasificación del autómata: sin cuarentena e isDepleted=false; acumulado=5000. No demuestra regularidad PDE.\n"
+    },
+    {
+      "case": "fluid_invalid",
+      "expected_exit": 1,
+      "exit_code": 1,
+      "input_hex": "696e76616c69640a",
+      "output": "[FLUID_MODEL] Lectura de eventos: <fixture>\n[FLUID_MODEL] Registro CSV inválido: invalid\n\n"
+    }
+  ],
+  "negative_controls": [
+    {
+      "file": "NominalControl.lean",
+      "exit_code": 0,
+      "classification": "positive_control"
+    },
+    {
+      "file": "BabylonAutoTrace.lean",
+      "exit_code": 1,
+      "classification": "expected_semantic_rejection",
+      "diagnostic": "BabylonAutoTrace.lean:22:2: error: Tactic `decide` proved that the proposition\n  validateTrace auto_execution_trace = true\nis false\n"
+    },
+    {
+      "file": "BabylonStressCorrupt.lean",
+      "exit_code": 1,
+      "classification": "expected_semantic_rejection",
+      "diagnostic": "BabylonStressCorrupt.lean:1523:2: error: Tactic `decide` proved that the proposition\n  validateTrace auto_execution_trace = true\nis false\n"
+    }
+  ],
+  "proofwidgets_modules": [
+    {
+      "module": "ProofWidgets/Compat.lean",
+      "exit_code": 0
+    },
+    {
+      "module": "ProofWidgets/Util.lean",
+      "exit_code": 0
+    },
+    {
+      "module": "ProofWidgets/Component/Basic.lean",
+      "exit_code": 0
+    },
+    {
+      "module": "ProofWidgets/Data/Html.lean",
+      "exit_code": 0
+    },
+    {
+      "module": "ProofWidgets/Component/HtmlDisplay.lean",
+      "exit_code": 0
+    },
+    {
+      "module": "HolographicPoC.lean",
+      "exit_code": 0
+    }
+  ],
+  "proofwidgets_final": {
+    "module": "HolographicPoC.lean",
+    "exit_code": 0,
+    "mode": "five locally resolved modules compiled into temporary LEAN_PATH; no install/update/npm",
+    "visual_render_verified": false
+  },
+  "proofwidgets_revision": "a8acbfd87375ff4abe14ce09db5b7664d383bc7f",
+  "limits": [
+    "Rust generators inspected but not executed or hardened",
+    "Expected compiler rejection requires nominal control and decide diagnosis, not any nonzero exit",
+    "ProofWidgets artifacts were built only in a temporary import path; no npm/install/update",
+    "No visual Infoview or PDE/hardware validation"
+  ]
+}

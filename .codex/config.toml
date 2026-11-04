@@ -1,0 +1,7 @@
+model = "gpt-6-astra"
+model_reasoning_effort = "xhigh"
+
+[mcp_servers.babylon60_kernel]
+command = "python3"
+args = ["scripts/c5_cli/launch_kernel_mcp.py"]
+

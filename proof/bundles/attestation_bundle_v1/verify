@@ -1,0 +1,333 @@
+#!/usr/bin/env python3
+"""Verify selected-file snapshots; legacy bundles cannot prove this contract.
+
+Unsigned integrity requires an explicit mode. Signature verification requires
+an external P-256 trust key. Neither operation certifies tests or hardware.
+This file is also the import-safe implementation used by both generators.
+"""
+import argparse
+import json
+import os
+from pathlib import Path
+import platform
+import re
+import stat
+import subprocess
+import sys
+import time
+from typing import Any
+
+from blake3 import blake3
+
+SCHEMA = 'babylon60.evidence.snapshot.v3'
+DOMAIN = b'BABYLON60:EVIDENCE:SNAPSHOT:v3\0'
+SIGNATURE_CONTRACT = 'ECDSA_P256_SHA256(domain+canonical-manifest)'
+MAX_FILE = 64 * 1024 * 1024
+MAX_TOTAL = 256 * 1024 * 1024
+MAX_METADATA = 4 * 1024 * 1024
+DEFAULT_ARTIFACTS = (
+    'CLAIMS.toml', 'Cargo.toml', 'SECURITY.md', 'src/lib.rs', 'src/ontology.rs',
+    'src/secure_fs.rs', 'src/executor.rs', 'src/admission.rs', 'src/capability.rs',
+    'src/bin/fl005_toctou_stress.rs', 'src/bin/fl006_crash_consistency.rs',
+    'src/bin/fl007_admission_stress.rs', 'src/bin/fl008_confused_deputy.rs',
+)
+TEST_RESULTS: dict[str, Any] = dict(schema='babylon60.test-results.pending.v1', status='NOT_EXECUTED',
+                    suites=[], executed_at=None, provenance='NO_RUNNER_EVIDENCE_SUPPLIED')
+COMPONENTS = {'claims.snapshot', 'test-results.json', 'environment.json', 'verify'}
+MANIFEST_KEYS = {'schema', 'producer', 'artifact_scope', 'digest_algorithm', 'commit',
+                 'commit_relation', 'created_at', 'artifacts', 'artifact_digest', 'components',
+                 'test_execution', 'hw_provenance', 'certification', 'signature_contract'}
+
+
+def canonical(value):
+    return json.dumps(value, sort_keys=True, separators=(',', ':'), ensure_ascii=False,
+                      allow_nan=False).encode('utf-8')
+
+
+def digest(data):
+    return blake3(data).hexdigest()
+
+
+def unique(pairs):
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError('duplicate JSON key')
+        result[key] = value
+    return result
+
+
+def invalid_constant(_):
+    raise ValueError('non-finite JSON constant')
+
+
+def parse_json(data):
+    value = json.loads(data, object_pairs_hook=unique, parse_constant=invalid_constant)
+    canonical(value)  # Reject finite-looking numeric literals that overflow to infinity.
+    return value
+
+
+def safe_parts(name):
+    if not isinstance(name, str) or not name or '\\' in name or any(ord(c) < 32 for c in name):
+        raise ValueError('invalid relative artifact path')
+    parts = name.split('/')
+    if any(p in ('', '.', '..') or p.casefold() == '.git' or p.strip() != p for p in parts):
+        raise ValueError('unsafe relative artifact path')
+    return parts
+
+
+def open_root(path):
+    return os.open(Path(path).absolute(), os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+
+
+def read_relative(root_fd, name, limit=MAX_FILE):
+    parts = safe_parts(name)
+    parent = os.dup(root_fd)
+    try:
+        for part in parts[:-1]:
+            child = os.open(part, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=parent)
+            os.close(parent)
+            parent = child
+        fd = os.open(parts[-1], os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=parent)
+        with os.fdopen(fd, 'rb') as stream:
+            before = os.fstat(stream.fileno())
+            if not stat.S_ISREG(before.st_mode) or before.st_size > limit:
+                raise ValueError('artifact is not a bounded regular file')
+            data = stream.read(limit+1)
+            after = os.fstat(stream.fileno())
+            def identity(item):
+                return item.st_dev, item.st_ino, item.st_size, item.st_mtime_ns, item.st_ctime_ns
+            if len(data) != before.st_size or len(data) > limit or identity(before) != identity(after):
+                raise ValueError('artifact changed or exceeded read budget')
+            return data
+    finally:
+        os.close(parent)
+
+
+def file_record(name, data):
+    return dict(path=name, type='regular', size=len(data), blake3=digest(data))
+
+
+def check_record(record, name, data):
+    if (not isinstance(record, dict) or set(record) != {'path', 'type', 'size', 'blake3'}
+            or type(record.get('size')) is not int or record != file_record(name, data)):
+        raise ValueError('artifact/component bytes differ from manifest')
+
+
+def write_new_bundle(output, files):
+    output = Path(output).absolute()
+    safe_parts(output.name)
+    parent = open_root(output.parent)
+    target = None
+    created = False
+    written = []
+    try:
+        os.mkdir(output.name, 0o700, dir_fd=parent)  # Never replace even an empty existing bundle.
+        created = True
+        target = os.open(output.name, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=parent)
+        for name, data in files.items():
+            safe_parts(name)
+            fd = os.open(name, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600, dir_fd=target)
+            written.append(name)
+            with os.fdopen(fd, 'wb') as stream:
+                stream.write(data)
+                if name == 'verify':
+                    os.fchmod(stream.fileno(), 0o700)
+                stream.flush()
+                os.fsync(stream.fileno())
+        os.fsync(target)
+        os.fsync(parent)
+    except Exception:
+        if created and target is not None:
+            for name in reversed(written):
+                os.unlink(name, dir_fd=target)
+            os.rmdir(output.name, dir_fd=parent)
+        raise
+    finally:
+        if target is not None:
+            os.close(target)
+        os.close(parent)
+
+
+def build_snapshot(root, output, artifacts, producer):
+    names = sorted(artifacts)
+    if (not 1 <= len(names) <= 256 or len(names) != len(set(names)) or 'CLAIMS.toml' not in names):
+        raise ValueError('select 1..256 distinct artifacts including CLAIMS.toml')
+    root_fd = open_root(root)
+    try:
+        captured = {}
+        total = 0
+        for name in names:
+            data = read_relative(root_fd, name, MAX_METADATA if name == 'CLAIMS.toml' else MAX_FILE)
+            total += len(data)
+            if total > MAX_TOTAL:
+                raise ValueError('selected artifact budget exceeded')
+            captured[name] = data
+    finally:
+        os.close(root_fd)
+    records = [file_record(name, captured[name]) for name in names]
+    observed = dict(os=platform.system(), arch=platform.machine(), release=platform.release(),
+                    python=platform.python_version())
+    environment = {key: value if isinstance(value, str) and value.strip() else 'UNKNOWN'
+                   for key, value in observed.items()}
+    environment.update(provenance='OBSERVED_PLATFORM_ONLY', hw_provenance='UNVERIFIED')
+    files = {'claims.snapshot': captured['CLAIMS.toml'], 'test-results.json': canonical(TEST_RESULTS),
+             'environment.json': canonical(environment), 'verify': Path(__file__).read_bytes()}
+    if any(len(data) > MAX_METADATA for data in files.values()):
+        raise ValueError('snapshot component budget exceeded')
+    try:
+        commit = subprocess.check_output(['git', '--no-replace-objects', 'rev-parse', 'HEAD'],
+                                         cwd=root, stderr=subprocess.DEVNULL).decode('ascii').strip()
+    except (OSError, subprocess.SubprocessError, UnicodeError):
+        commit = 'UNKNOWN'
+    if not re.fullmatch(r'[0-9a-f]{40}|[0-9a-f]{64}|UNKNOWN', commit):
+        raise ValueError('invalid observed Git HEAD')
+    manifest = dict(schema=SCHEMA, producer=producer, artifact_scope='SELECTED_FILES',
+                    digest_algorithm='BLAKE3', commit=commit, commit_relation='OBSERVED_HEAD_ONLY',
+                    created_at=int(time.time()), artifacts=records, artifact_digest=digest(canonical(records)),
+                    components={name:file_record(name, data) for name, data in files.items()},
+                    test_execution='NOT_EXECUTED', hw_provenance='UNVERIFIED', certification='NONE',
+                    signature_contract=SIGNATURE_CONTRACT)
+    raw = canonical(manifest)+b'\n'
+    if len(raw) > MAX_METADATA:
+        raise ValueError('snapshot manifest budget exceeded')
+    files.update({'artifact.blake3': (manifest['artifact_digest']+'\n').encode(),
+                  'manifest.blake3': (digest(raw)+'\n').encode(), 'manifest.json':raw})
+    write_new_bundle(output, files)
+    return manifest
+
+
+def signature_message(manifest):
+    return DOMAIN+canonical(manifest)
+
+
+def verify_bundle(bundle, artifact_root, *, integrity_only=False, trusted_key=None,
+                  max_age=86400, now=None):
+    bundle_fd = open_root(bundle)
+    source_fd = None
+    try:
+        raw = read_relative(bundle_fd, 'manifest.json', MAX_METADATA)
+        manifest = parse_json(raw)
+        if not isinstance(manifest, dict) or manifest.get('schema') != SCHEMA:
+            raise ValueError('LEGACY_UNBOUND_OR_UNKNOWN_SCHEMA')
+        if set(manifest) != MANIFEST_KEYS or raw != canonical(manifest)+b'\n':
+            raise ValueError('noncanonical or unknown manifest fields')
+        expected = dict(artifact_scope='SELECTED_FILES', digest_algorithm='BLAKE3',
+                        commit_relation='OBSERVED_HEAD_ONLY', test_execution='NOT_EXECUTED',
+                        hw_provenance='UNVERIFIED', certification='NONE', signature_contract=SIGNATURE_CONTRACT)
+        if any(manifest.get(k) != v for k, v in expected.items()):
+            raise ValueError('unsupported or overclaimed snapshot contract')
+        if manifest['producer'] not in ('v1-wrapper', 'v2-wrapper'):
+            raise ValueError('unknown producer contract')
+        if not isinstance(manifest['commit'], str) or not re.fullmatch(r'[0-9a-f]{40}|[0-9a-f]{64}|UNKNOWN', manifest['commit']):
+            raise ValueError('invalid observed commit')
+        timestamp = manifest['created_at']
+        current = time.time() if now is None else now
+        if type(max_age) is not int or not 1 <= max_age <= 31536000:
+            raise ValueError('max-age must be 1..31536000 seconds')
+        if type(timestamp) is not int or not -5 <= current-timestamp <= max_age:
+            raise ValueError('snapshot timestamp is stale or in the future')
+        if read_relative(bundle_fd, 'manifest.blake3', 128) != (digest(raw)+'\n').encode():
+            raise ValueError('manifest digest mismatch')
+        components = manifest['components']
+        if not isinstance(components, dict) or set(components) != COMPONENTS:
+            raise ValueError('invalid component inventory')
+        with os.scandir(bundle_fd) as entries:
+            names = {entry.name for entry in entries}
+        required = COMPONENTS | {'manifest.json', 'manifest.blake3', 'artifact.blake3'}
+        if not required <= names or names-required-{'signature.der'}:
+            raise ValueError('missing or unexpected bundle entries')
+        captured = {}
+        for name, record in components.items():
+            data = read_relative(bundle_fd, name, MAX_METADATA)
+            check_record(record, name, data)
+            captured[name] = data
+        if parse_json(captured['test-results.json']) != TEST_RESULTS:
+            raise ValueError('runner evidence unsupported; test status must remain NOT_EXECUTED')
+        environment = parse_json(captured['environment.json'])
+        if (not isinstance(environment, dict)
+                or set(environment) != {'os', 'arch', 'release', 'python', 'provenance', 'hw_provenance'}
+                or not all(isinstance(v, str) and v for v in environment.values())
+                or environment.get('provenance') != 'OBSERVED_PLATFORM_ONLY'
+                or environment.get('hw_provenance') != 'UNVERIFIED'):
+            raise ValueError('unverified platform cannot certify hardware')
+        records = manifest['artifacts']
+        if not isinstance(records, list) or not 1 <= len(records) <= 256:
+            raise ValueError('invalid selected artifact inventory')
+        if not all(isinstance(r, dict) and isinstance(r.get('path'), str) for r in records):
+            raise ValueError('invalid selected artifact record')
+        paths = [r['path'] for r in records]
+        if paths != sorted(set(paths)) or 'CLAIMS.toml' not in paths:
+            raise ValueError('artifact paths must be sorted, distinct and include claims')
+        source_fd = open_root(artifact_root)
+        total = 0
+        for record in records:
+            name = record['path']
+            data = read_relative(source_fd, name)
+            total += len(data)
+            if total > MAX_TOTAL:
+                raise ValueError('selected artifact budget exceeded')
+            check_record(record, name, data)
+            if name == 'CLAIMS.toml' and data != captured['claims.snapshot']:
+                raise ValueError('claims snapshot differs from selected artifact')
+        if (digest(canonical(records)) != manifest['artifact_digest']
+                or read_relative(bundle_fd, 'artifact.blake3', 128) != (manifest['artifact_digest']+'\n').encode()):
+            raise ValueError('artifact inventory digest mismatch')
+        signature = 'NOT_VERIFIED'
+        if trusted_key is not None:
+            from cryptography.hazmat.primitives import hashes, serialization
+            from cryptography.hazmat.primitives.asymmetric import ec
+            public = serialization.load_pem_public_key(Path(trusted_key).read_bytes())
+            if not isinstance(public, ec.EllipticCurvePublicKey) or not isinstance(public.curve, ec.SECP256R1):
+                raise ValueError('external trust key must be P-256')
+            public.verify(read_relative(bundle_fd, 'signature.der', 1024), signature_message(manifest),
+                          ec.ECDSA(hashes.SHA256()))
+            signature = 'VERIFIED_AGAINST_EXTERNAL_KEY'
+        elif not integrity_only:
+            return dict(integrity='CHECKED', signature=signature, result='NOT_AUTHENTICATED',
+                        tests='NOT_EXECUTED', hw_provenance='UNVERIFIED', certification='NONE'), 2
+        elif 'signature.der' in names:
+            raise ValueError('signature present but no external trust key supplied')
+        return dict(integrity='CHECKED', signature=signature, result='SIGNED_INTEGRITY_ONLY' if trusted_key else 'UNAUTHENTICATED_INTEGRITY_ONLY',
+                    tests='NOT_EXECUTED', hw_provenance='UNVERIFIED', certification='NONE'), 0
+    finally:
+        if source_fd is not None:
+            os.close(source_fd)
+        os.close(bundle_fd)
+
+
+def generator_cli(producer, default_root, argv=None):
+    parser = argparse.ArgumentParser(description='Create a new unsigned selected-file snapshot; no tests or signing are performed.')
+    parser.add_argument('--root', type=Path, default=default_root)
+    parser.add_argument('--output', type=Path, required=True, help='New directory; its parent must exist. Existing bundles are never overwritten.')
+    parser.add_argument('--artifact', action='append', help='Selected relative regular file, repeatable; include CLAIMS.toml. Default: declared core selection.')
+    args = parser.parse_args(argv)
+    try:
+        build_snapshot(args.root, args.output, args.artifact or DEFAULT_ARTIFACTS, producer)
+    except Exception as error:
+        print('Snapshot refused: '+(str(error) if type(error) is ValueError else type(error).__name__), file=sys.stderr)
+        return 1
+    print('Snapshot created: UNSIGNED; tests NOT_EXECUTED; hardware UNVERIFIED; certification NONE.')
+    return 0
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('bundle', type=Path, nargs='?', default=Path(__file__).absolute().parent)
+    parser.add_argument('--artifact-root', type=Path, required=True)
+    parser.add_argument('--integrity-only', action='store_true', help='Explicitly allow unauthenticated integrity checking; no execution/certification claim.')
+    parser.add_argument('--trusted-public-key', type=Path, help='External PEM P-256 trust anchor; bundle-supplied keys are never trusted.')
+    parser.add_argument('--max-age-seconds', type=int, default=86400)
+    args = parser.parse_args(argv)
+    try:
+        result, status = verify_bundle(args.bundle, args.artifact_root, integrity_only=args.integrity_only,
+                                       trusted_key=args.trusted_public_key, max_age=args.max_age_seconds)
+    except Exception as error:
+        print('Verification refused: '+(str(error) if type(error) is ValueError else type(error).__name__), file=sys.stderr)
+        return 1
+    print(json.dumps(result, sort_keys=True))
+    return status
+
+
+if __name__ == '__main__':
+    sys.exit(main())

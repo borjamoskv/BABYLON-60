@@ -1,0 +1,3 @@
+# Cargo Audit Configuration for BABYLON-60
+[advisories]
+ignore = []

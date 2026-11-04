@@ -1,0 +1,295 @@
+{
+  "timestamp_iso": "2026-11-03T16:09:22Z",
+  "source_commit": "bc0f98c5c6fb3a325f85bfc0977ebfce693b0a87",
+  "source_tree_digest": "c973b9ffec04d7026bd8d03d388756c5e87cb03fcc6693e359a201452482ac49",
+  "claims_manifest_digest": "464a0834a568b6d589d77808314c2b0d40998da565783d4939cbaea0f788d5a4",
+  "environment_digest": "aeca6fa7e3697e1c1b2553f47405e844d61eae784d6724b396ba9c7775b1bf7c",
+  "total_claims": 28,
+  "verified_count": 9,
+  "partial_count": 19,
+  "experimental_count": 0,
+  "failed_count": 0,
+  "merkle_evidence_root": "sha3-256:411e0639ecb6239f73bee9483865abae653b4931dcfa49b984f5340f38eeea20",
+  "evidence_entries": [
+    {
+      "id": "inv_01_manifest_layout",
+      "component": "00_ABZU_KERNEL",
+      "statement": "SharedManifest layout is 64 bytes with 64-byte alignment and documented field offsets; layout alone does not establish cache coherence, RFO traffic or performance",
+      "status": "verified",
+      "verified": true,
+      "suite_passed": true,
+      "duration_s": 0.301,
+      "leaf_hash": "c0f1c88f062f169ca5cc40211502a4ad25b43719b21a7fac9fddf6cc2a04cfe0"
+    },
+    {
+      "id": "inv_02_seqlock_concurrency",
+      "component": "00_ABZU_KERNEL",
+      "statement": "Seqlock SPMC protocol model (loom replica of seqlock.rs, 1 writer x 1-2 readers) yields no torn read under bounded model checking (max 2 preemptions); production code is not itself model-checked",
+      "status": "verified",
+      "verified": true,
+      "suite_passed": true,
+      "duration_s": 170.515,
+      "leaf_hash": "494fa84770674809ba4b0f0a4751d9ad11e36c88699a87a1fe3ce536ee147d78"
+    },
+    {
+      "id": "inv_04_fail_stop_halt",
+      "component": "00_ABZU_KERNEL",
+      "statement": "Epistemic halt closes admission (POISONED, 0xDEAD_6060) and records SignedDurable / UnsignedDurable / PersistenceFailed evidence within a bounded budget; never a synthetic signature",
+      "status": "verified",
+      "verified": true,
+      "suite_passed": true,
+      "duration_s": 0.284,
+      "leaf_hash": "1061683b8c49e45544bf02ad0803df0141dd625e1908766a4b91a9d6e87b7b26"
+    },
+    {
+      "id": "cose_ed25519_receipt",
+      "component": "00_ABZU_KERNEL",
+      "statement": "Receipts are formatted according to RFC 9942 and cryptographically signed with Ed25519",
+      "status": "verified",
+      "verified": true,
+      "suite_passed": true,
+      "duration_s": 0.11,
+      "leaf_hash": "42064581e476d8d7fceaf0dbb3618070e57c7b627e6458c4e3b46eb195c0b7c3"
+    },
+    {
+      "id": "secure_enclave_p256",
+      "component": "00_ABZU_KERNEL",
+      "statement": "The Apple Secure Enclave bridge verifies P-256 signatures; its automated cryptographic test uses software keys",
+      "status": "verified_local",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 0.125,
+      "leaf_hash": "651e13f39271c4a996b7c0670c684e8cf9948804e908c48058763fbea8e6de12"
+    },
+    {
+      "id": "cortex_persist_sqlite",
+      "component": "01_KISH_ENGINE",
+      "statement": "Persistent ledger with SQLite WAL, BEGIN IMMEDIATE and legacy SHA3-256 row hash chaining",
+      "status": "verified",
+      "verified": true,
+      "suite_passed": true,
+      "duration_s": 10.24,
+      "leaf_hash": "2adde720dd416b9411b69e4b4ba749bc878607f0dce13e17700c35599a2283cc"
+    },
+    {
+      "id": "merkle_attestation",
+      "component": "01_KISH_ENGINE",
+      "statement": "Merkle state roots computed deterministically and queryable via MCP",
+      "status": "verified",
+      "verified": true,
+      "suite_passed": true,
+      "duration_s": 11.006,
+      "leaf_hash": "11733930169f0945344d545e0f34d48551f12f9d522156fa65a7b511e4e94151"
+    },
+    {
+      "id": "lean4_formal_trace",
+      "component": "00_ABZU_KERNEL",
+      "statement": "For accepted abstract traces, BabylonTrace proves even declared read sequences (TraceReadsEven), and AX0 proves countDispatches <= 1 from Proposed; neither theorem models Rust payload loads or physical memory ordering",
+      "status": "verified_local",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 3.353,
+      "leaf_hash": "29db672ed24cb349efcf514b82e3ecdb06848c5ca8986dee330954547b0838e8"
+    },
+    {
+      "id": "worm_durability",
+      "component": "00_ABZU_KERNEL",
+      "statement": "In-memory HashChainedLedger provides cryptographic tamper detection",
+      "status": "verified_in_memory",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 0.199,
+      "leaf_hash": "2904a8f651abcb925bdec67fb0c5a8365eb424a4a56fc3430f7187ee09874636"
+    },
+    {
+      "id": "heterogeneous_verification_quorum",
+      "component": "00_ABZU_KERNEL",
+      "statement": "Heterogeneous 2/3 verification quorum over 3 engines (Rust, Lean 4, Z3)",
+      "status": "verified_local",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 0.111,
+      "leaf_hash": "cbb63d7354600f0aa6954983023fe372e3daf8fdabc63b18d25736f80b03fa64"
+    },
+    {
+      "id": "zero_anergy",
+      "component": "00_ABZU_KERNEL",
+      "statement": "The local benchmark reports elapsed time, throughput and average latency for 1,000,000 sequential seqlock publish/read iterations; it does not measure RFO traffic, idle CPU or energy consumption",
+      "status": "partial_trace",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 4.185,
+      "leaf_hash": "9feabe477f3d8fc94ef2c5daa6c8acd53dea16e5e4fe4fc83a99917e8b8819d6"
+    },
+    {
+      "id": "mcp_authority_gate",
+      "component": "01_KISH_ENGINE",
+      "statement": "MCP server enforces AX-0: stochastic AI clients cannot self-authorize protected actions",
+      "status": "verified",
+      "verified": true,
+      "suite_passed": true,
+      "duration_s": 0.601,
+      "leaf_hash": "59a3291051bd9186536f4d67369fe80010cbc97a875a8fee4f0d7b11bea74c65"
+    },
+    {
+      "id": "AUTH_001",
+      "component": "00_ABZU_KERNEL",
+      "statement": "A consumed authorization cannot be dispatched a second time by the executor, including after process death and reopening the file ledger",
+      "status": "verified_local",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 0.181,
+      "leaf_hash": "b58940c2f551fbae8dc7bce12ad6fae94bd878b0c2e10973bb6e1dbad16b8030"
+    },
+    {
+      "id": "AUTH_002",
+      "component": "00_ABZU_KERNEL",
+      "statement": "EDIN workers cannot execute protected effects directly without verified COSE authorization over the IPC Unix socket boundary",
+      "status": "verified_local",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 3.729,
+      "leaf_hash": "e2d194450b11728778e00ea7a16b47413e87a0fceb8bf0d449e891fdd067802b"
+    },
+    {
+      "id": "AUTH_003",
+      "component": "00_ABZU_KERNEL",
+      "statement": "A dispatch without a durable result becomes UNKNOWN at restart and is never retried automatically",
+      "status": "verified_local",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 0.174,
+      "leaf_hash": "f2ca0059f56f72aeb799de83f9866c2ed5a5190010cdaafc5981c2afae5f45fb"
+    },
+    {
+      "id": "AUTH_004",
+      "component": "00_ABZU_KERNEL",
+      "statement": "A resource whose precondition digest or inode identity changes between authorization and effect is rejected before mutation; for filesystem DELETE_FILE, the TOCTOU gap is closed via atomic quarantine isolation and post-rename verification",
+      "status": "verified_local",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 3.784,
+      "leaf_hash": "bf94432355c5b2633509d0714971685411ed3d521f2e92de05672ff3f5c9aa32"
+    },
+    {
+      "id": "AUTH_005",
+      "component": "00_ABZU_KERNEL",
+      "statement": "Signing or persistence failures produce explicit errors; no zeroed or synthetic signature is emitted",
+      "status": "verified_local",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 0.351,
+      "leaf_hash": "b26a94cfb9e3c913a481b1d3958130ff3ae038d302186b1b6cd91227353d0d6e"
+    },
+    {
+      "id": "AUTH_006",
+      "component": "00_ABZU_KERNEL",
+      "statement": "Under 1000 one-process-per-iteration runs covering 3 SIGKILL crash points and a no-crash control, no nonce produces more than one effect, no DISPATCHED survives restart, and every archived authorization replay is rejected",
+      "status": "verified_local",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 45.331,
+      "leaf_hash": "8c1d24a831368d31162e5db6bd22a212b5e83708d89d872aa904799417f0a04e"
+    },
+    {
+      "id": "AUTH_007_secure_fs_quarantine",
+      "component": "00_ABZU_KERNEL",
+      "statement": "EffectTx guarantees SAFETY and NON-INTERFERENCE for DELETE_FILE: under 100 concurrent workers and swap race attacks, unauthorized destructions == 0 and unquarantined deletions == 0",
+      "status": "verified_local",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 1.423,
+      "leaf_hash": "3a9216e21869eef8eb7dcd078a26e40bbe567ab91dfa7c0926cf2db09f7e2f47"
+    },
+    {
+      "id": "sharur_100_swarm_concurrency",
+      "component": "02_EDIN_SWARMS",
+      "statement": "SHARUR-3600 Legion of 100 concurrent workers sustains ledger contention, enforces AX-0, and achieves 100% fail-closed rate across 50 adversarial attacks",
+      "status": "verified",
+      "verified": true,
+      "suite_passed": true,
+      "duration_s": 0.534,
+      "leaf_hash": "3bee8f22472f6f9410312df7485ddbf1eb5b113d06a0d236bf1e280e98210172"
+    },
+    {
+      "id": "tamkarum_budget_gate",
+      "component": "01_KISH_ENGINE",
+      "statement": "KudurruBudgetGate enforces 64-byte L1 cache line layout, Kelly Criterion bid caps, and MUSHUSHU-0 fail-stop apoptosis (0xDEAD_6060)",
+      "status": "verified",
+      "verified": true,
+      "suite_passed": true,
+      "duration_s": 0.111,
+      "leaf_hash": "82834685ba337aa6d19f1f94b3e202f42f98b6b9b4ff6b7dd3f5f14e25a7a3cc"
+    },
+    {
+      "id": "FL_007_admission_bounded_liveness",
+      "component": "00_ABZU_KERNEL",
+      "statement": "AdmissionController checks the observed atomic depth against capacity and a service-time estimate multiplied by depth cast to u32 before reserving a slot; this heuristic does not guarantee actual waiting time or starvation freedom",
+      "status": "verified_local",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 0.667,
+      "leaf_hash": "d8b4435670fcc75cc8a38e6d1306536f1a60d832d259bcf98d6e6285d2bb21c4"
+    },
+    {
+      "id": "FL_008_scoped_capability_broker",
+      "component": "00_ABZU_KERNEL",
+      "statement": "ScopedHandle and McpCapabilityBroker enforce: Tool Available != Tool Authorized != Effect Authorized. Under 10,000 adversarial trials across 5 attack vectors, unauthorized_effects == 0, capability_escalations == 0, stale_token_acceptances == 0, tool_identity_confusions == 0, and configuration_drifts == 0",
+      "status": "verified_local",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 0.201,
+      "leaf_hash": "fff80f1328ae419a3d2b8ebf42cd051aa296411002d3d59e9abcd363ade1f81d"
+    },
+    {
+      "id": "INV_OMEGA_complete_mediation",
+      "component": "00_ABZU_KERNEL",
+      "statement": "Confined AI agent processes cannot mutate or unlink protected OS resources or the SQLite ledger directly (macOS Seatbelt / EPERM); all reachability paths G=(V,A) from agent to protected resources are mediated by the BABYLON broker, and the 5-test Omega Campaign (BYPASS-001, AUTH-002, RACE-003, CRASH-004, REVOCATION-005) passes on real OS files",
+      "status": "verified_local",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 1.192,
+      "leaf_hash": "cea2e4525bb20aef923788c14ac5bf730f1bdfdb905bd7409db778a3a873b22e"
+    },
+    {
+      "id": "FL_014_wave4_receipt_loss_and_closure_drift",
+      "component": "00_ABZU_KERNEL",
+      "statement": "Under SIGKILL between physical syscall and receipt commit (FL014_RECEIPT_LOSS), blind automatic retries are rejected with AmbiguousOutcomeRequiresReconciliation and explicit inode reconciliation consolidates the receipt without duplicate effect; transitive dependency or skill/policy drift (FL015_TRANSITIVE_DRIFT / POLICY_ROLLBACK / RUNTIME_LOAD) invalidates deployment permits fail-closed",
+      "status": "verified_local",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 0.813,
+      "leaf_hash": "f74405c5be9b7ed50c8175892d64dac8e772f1930f0a45e9febce5470addaa89"
+    },
+    {
+      "id": "FL_016_owasp_acs_vop1_and_drift_guard",
+      "component": "00_ABZU_KERNEL",
+      "statement": "BabylonAcsGuard enforces OWASP ACS v0.1.0 over AF_UNIX peer-verified sockets, rejects Fail-Open (on_decision_failure='proceed') with 0xDEAD_6060, compresses human wait stalls by >514x (n=30 cohorts, CI95), reconciles VOP-1 UNKNOWN states against physical witness digests, and invalidates capabilities upon skill/tool/policy drift (BabylonDriftGuard)",
+      "status": "verified_local",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 1.625,
+      "leaf_hash": "fb1140acf0bc2645def591d6d51f27be8c5ed338777a40ca0c7976929b934b17"
+    },
+    {
+      "id": "signed_dispatch_intent",
+      "component": "00_ABZU_KERNEL",
+      "statement": "P-256 verification binds the complete canonical CBOR dispatch intent and consumes its nonce in SQLite WAL/FULL before dispatch, rejecting replay across connections and after SIGKILL",
+      "status": "verified_local",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 0.209,
+      "leaf_hash": "68fc60baae585b6127e8fdf0ff797f6127cbe18447de59bc6f2008318959f510"
+    },
+    {
+      "id": "mcp_seatbelt_confinement",
+      "component": "01_KISH_ENGINE",
+      "statement": "The macOS MCP backend checks the real stdio protocol and Seatbelt confinement before admitting a candidate, with bounded execution and fail-closed rejection",
+      "status": "verified_local",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 3.08,
+      "leaf_hash": "a6e3ee16fcf428c3838642e478bba1c20f84fa48d0f4b166cf461bb57df2aab5"
+    }
+  ]
+}

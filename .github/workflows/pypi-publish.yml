@@ -1,0 +1,91 @@
+name: Sovereign Python Workspace Verification (PyPI Publish Frozen per INV_C5_LICENSE_PARITY_GATE)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pypi-publish
+  cancel-in-progress: false
+
+jobs:
+  verify-release:
+    name: Require validated main commit before packaging
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Require main and successful gates for the exact commit
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          test "$GITHUB_REF" = refs/heads/main
+          test "$(gh api "repos/$GITHUB_REPOSITORY/commits/main" --jq .sha)" = "$GITHUB_SHA"
+          for workflow in ci.yml python-tests.yml gitleaks.yml dependency-audit.yml verify_ledger.yml; do
+            gh run list --repo "$GITHUB_REPOSITORY" --workflow "$workflow" \
+              --commit "$GITHUB_SHA" --branch main --event push --limit 1 \
+              --json headSha,status,conclusion,event,headBranch \
+              | python3 scripts/guards/verify_publish_run.py
+          done
+
+  build:
+    name: Build package without publishing credentials
+    needs: verify-release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.12'
+      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78
+        with:
+          version: '0.13.5'
+          checksum: f68d291c75783122dad58ab77def0e13f3233f358731db5d6d7e8715603b928f
+      - name: Check committed dependency lock
+        run: uv lock --check
+      - name: Build package with fixed backend
+        run: |
+          printf 'hatchling==1.32.4\n' > "$RUNNER_TEMP/build-constraints.txt"
+          uv build --build-constraint "$RUNNER_TEMP/build-constraints.txt"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: python-distributions
+          path: dist/*
+          if-no-files-found: error
+
+  verify-frozen-publish:
+    name: Verify Sovereign Package Lock & Frozen Registry
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+        with:
+          name: python-distributions
+          path: dist
+      - name: Assert PyPI Publish Freeze (INV_C5_LICENSE_PARITY_GATE)
+        shell: bash
+        run: |
+          set -e
+          echo "==> Publicación en PyPI congelada permanentemente bajo Sovereign Dual-License (INV_C5_LICENSE_PARITY_GATE)"
+          test -d dist
+          ls -la dist/
+          tar -ztvf dist/*.tar.gz | grep -E "LICENSE" || {
+            echo "ERROR: El artefacto empaquetado carece de LICENSE soberana"
+            exit 1
+          }
+          echo "✓ Artefacto Python verificado en silicio con licencia soberana. Cero subida a registros públicos."
