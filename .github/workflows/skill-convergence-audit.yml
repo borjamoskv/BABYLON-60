@@ -44,7 +44,7 @@ jobs:
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
         with:
           python-version: '3.12'
-      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2
       - name: Locked regression suite
         run: uv run --locked pytest --noconftest tests/test_skill_library_convergence.py tests/test_skill_intent_routing.py tests/test_skill_maintenance.py tests/test_semantic_contracts_gate.py tests/test_skills_manifest.py tests/test_skill_links.py tests/test_skills_installed_distribution.py -q
       - name: Generate and check distributions
@@ -63,7 +63,7 @@ jobs:
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
         with:
           python-version: '3.12'
-      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2
       - run: uv run --locked python scripts/c5_skills_ontology/build_skill_library.py --environment codex --output .artifacts/codex
       - name: Strict remote link and anchor audit
         run: python3 scripts/c5_quality_gates/audit_skill_links.py --root .artifacts/codex --output .artifacts/remote-links.json

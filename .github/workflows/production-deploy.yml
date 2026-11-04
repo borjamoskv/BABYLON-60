@@ -88,7 +88,7 @@ jobs:
         with:
           name: prepared-oci-${{ github.run_attempt }}
           path: ${{ runner.temp }}/prepared
-      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2
       - name: Load protected policy and fetch execution-bound authorization
         env:
           POLICY_JSON: ${{ vars.EU_AI_ACT_POLICY_JSON }}
@@ -128,7 +128,7 @@ jobs:
         with:
           name: checked-regulatory-${{ github.run_attempt }}
           path: ${{ runner.temp }}/previous-regulatory
-      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2
       - name: Refresh protected policy and revocations after approval
         env:
           POLICY_JSON: ${{ vars.EU_AI_ACT_POLICY_JSON }}
