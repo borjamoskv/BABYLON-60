@@ -1,8 +1,12 @@
 //! Isolated test fixtures. Fixture-byte pinning here is not production trust discovery.
 #![allow(dead_code)]
-use babylon60_compiler::semantic_solver::{AdapterConfigError, SolverLimits, Z3Adapter};
+use babylon60_compiler::semantic_solver::{
+    AdapterConfigError, SolverLimits, Z3Adapter, MAX_SOLVER_BINARY_BYTES,
+};
 use babylon60_compiler::solver_replay::ReplayJournal;
 use kernel::semantic_entropy::solver_binary_digest;
+use std::fs::OpenOptions;
+use std::io::Read;
 use std::ops::Deref;
 use std::path::{Path, PathBuf};
 use std::sync::atomic::{AtomicU64, Ordering};
@@ -46,15 +50,53 @@ impl Drop for TempDir {
 }
 
 pub fn z3_path() -> PathBuf {
-    let path = if let Some(path) = std::env::var_os("BABYLON_Z3_BIN") {
-        PathBuf::from(path)
-    } else {
-        std::env::split_paths(&std::env::var_os("PATH").unwrap_or_default())
-            .map(|p| p.join("z3"))
-            .find(|p| p.is_absolute() && p.is_file())
-            .expect("Real tests require Z3 and an approved pin")
-    };
-    std::fs::canonicalize(path).unwrap()
+    if let Some(path) = std::env::var_os("BABYLON_Z3_BIN") {
+        // An explicit executable never falls back to another candidate. The
+        // adapter must still authenticate it against the independently set pin.
+        return std::fs::canonicalize(path).unwrap();
+    }
+    find_pinned_executable(
+        std::env::split_paths(&std::env::var_os("PATH").unwrap_or_default()).map(|p| p.join("z3")),
+        real_pin(),
+    )
+    .expect("Real tests require a Z3 on PATH matching the approved pin")
+}
+
+fn find_pinned_executable(
+    paths: impl IntoIterator<Item = PathBuf>,
+    expected: [u8; 32],
+) -> Option<PathBuf> {
+    paths
+        .into_iter()
+        .filter(|p| p.is_absolute())
+        .find_map(|path| {
+            let path = std::fs::canonicalize(path).ok()?;
+            let mut options = OpenOptions::new();
+            options.read(true);
+            #[cfg(unix)]
+            {
+                use std::os::unix::fs::OpenOptionsExt;
+                // Match the adapter's supported Unix descriptor flags: do not
+                // block on a FIFO or follow a replacement leaf symlink.
+                let flags = match std::env::consts::OS {
+                    "macos" => 0x100 | 0x4,
+                    "linux" => 0x20000 | 0x800,
+                    _ => return None,
+                };
+                options.custom_flags(flags);
+            }
+            let file = options.open(&path).ok()?;
+            let metadata = file.metadata().ok()?;
+            if !metadata.is_file() || metadata.len() > MAX_SOLVER_BINARY_BYTES as u64 {
+                return None;
+            }
+            let mut bytes = Vec::new();
+            file.take(MAX_SOLVER_BINARY_BYTES as u64 + 1)
+                .read_to_end(&mut bytes)
+                .ok()?;
+            (bytes.len() <= MAX_SOLVER_BINARY_BYTES && solver_binary_digest(&bytes) == expected)
+                .then_some(path)
+        })
 }
 
 pub fn real_pin() -> [u8; 32] {
@@ -131,4 +173,68 @@ pub fn secure_temp(
         journal,
         _root: root,
     })
+}
+
+#[cfg(test)]
+mod discovery_tests {
+    use super::*;
+
+    #[test]
+    fn discovery_skips_an_unapproved_first_candidate() {
+        let root = TempDir::new();
+        let foreign = root.0.join("foreign-z3");
+        let approved = root.0.join("approved-z3");
+        std::fs::write(&foreign, b"unapproved isolated fixture").unwrap();
+        let approved_bytes = b"approved isolated fixture";
+        std::fs::write(&approved, approved_bytes).unwrap();
+        assert_eq!(
+            find_pinned_executable(
+                [foreign, approved.clone()],
+                solver_binary_digest(approved_bytes),
+            ),
+            Some(std::fs::canonicalize(approved).unwrap()),
+        );
+    }
+
+    #[test]
+    fn discovery_returns_none_without_an_approved_candidate() {
+        let root = TempDir::new();
+        let foreign = root.0.join("foreign-z3");
+        std::fs::write(&foreign, b"unapproved isolated fixture").unwrap();
+        assert_eq!(
+            find_pinned_executable(
+                [foreign],
+                solver_binary_digest(b"approved isolated fixture")
+            ),
+            None,
+        );
+    }
+
+    #[test]
+    fn discovery_rejects_a_changed_expected_pin() {
+        let root = TempDir::new();
+        let candidate = root.0.join("isolated-z3");
+        let bytes = b"isolated fixture";
+        std::fs::write(&candidate, bytes).unwrap();
+        let mut pin = solver_binary_digest(bytes);
+        pin[0] ^= 1;
+        assert_eq!(find_pinned_executable([candidate], pin), None);
+    }
+
+    #[test]
+    fn discovery_rejects_missing_directory_and_oversize_candidates() {
+        let root = TempDir::new();
+        let oversize = root.0.join("oversize-z3");
+        std::fs::File::create(&oversize)
+            .unwrap()
+            .set_len(MAX_SOLVER_BINARY_BYTES as u64 + 1)
+            .unwrap();
+        assert_eq!(
+            find_pinned_executable(
+                [root.0.join("absent-z3"), root.0.clone(), oversize],
+                solver_binary_digest(b""),
+            ),
+            None,
+        );
+    }
 }
