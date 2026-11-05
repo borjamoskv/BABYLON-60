@@ -1,9 +1,11 @@
 # Revisión independiente de la PR #48 — 5 de noviembre de 2026
 
-**Dictamen: 20 hallazgos aceptados en su alcance local, H09 y H10 parciales,
-y H08 aplazado por decisión del operador.** Las 22 correcciones de código y
-documentación están presentes, pero falta evidencia para declarar completos
-los 22 criterios de aceptación. La PR permanece abierta, sin merge.
+**Dictamen actualizado: 21 hallazgos aceptados en su alcance local, H09 parcial
+y H08 aplazado por decisión del operador.** H10 se cierra tras la
+[construcción y prueba de la imagen Docker](H10_DOCKER_VALIDATION_2026-11-05.md).
+Las 22 correcciones de código y documentación están presentes; falta la
+validación remota de H09 para completar sus criterios. La PR permanece abierta,
+sin merge.
 
 Repositorio: [borjamoskv/BABYLON-60](https://github.com/borjamoskv/BABYLON-60).
 [PR #48](https://github.com/borjamoskv/BABYLON-60/pull/48).
@@ -57,7 +59,7 @@ alcance indicado. No equivale a certificación de todo el sistema.
 | H07 | Aceptado | RustSec exit 0, sin vulnerabilidades ni unsound; 15 tests software P-256/COSE/gate/IPC pasan. Una fixture Swift ignorada. Sin afirmación de firma hardware. |
 | H08 | Aplazado | Actions bloqueado por facturación. Se mantiene pendiente por instrucción del operador. Sin pagos ni datos de cuenta modificados. |
 | H09 | Parcial | Existen los ocho contextos requeridos y pasan 17 casos locales de selección. La ejecución remota no se acredita mientras Actions esté bloqueado. |
-| H10 | Parcial | Recursos obligatorios copiados antes de instalar; contexto de instalación corregido. Construcción y arranque de la imagen final NO_VERIFICADOS por falta de motor Docker operativo. |
+| H10 | Aceptado | Imagen completa Linux ARM64 construida sin caché; CLI, Z3 nativo, recursos empaquetados, MCP stdio/EOF y dashboard HTTP/healthcheck pasan como UID 1000. Sin red exterior ni estado del host; detalle en el informe H10. |
 | H11 | Aceptado | Perfil público pasa; omisiones no declaradas y perfil completo incompleto rechazan. Ocho documentos y scopes obligatorios ensayados; fixture del bloque de proyección. |
 | H12 | Aceptado | Cuatro tests, 69 rutas CLI y 16 listados respetan rol o selección vacía. Es selección de metadatos, no autorización de efectos. |
 | H13 | Aceptado | 75 tests con HTTP loopback real y canario de dispatch; negativos de autenticación, headers, cuerpo y replay no alcanzan provisioner. No se emitieron licencias reales. |
@@ -122,9 +124,9 @@ declara una instalación sin avisos ni ejecución de todos los extras.
 H09 restaura el contexto que faltaba, pero presencia de checks no equivale a
 ejecución aprobada. También se observaron condiciones previas en las que claims
 se omite en PR y SAST se omite tras un requisito fallido; las protecciones no se
-modificaron. H10 necesita una construcción y un smoke de la imagen final. El
-contexto sin dockerignore y la publicación de puertos con listener loopback son
-observaciones previas cuyo efecto en la imagen no se ha verificado.
+modificaron. H10 tiene construcción y smoke completos en Linux ARM64; se añadió
+dockerignore y se comprobó la exclusión de estado local. El listener sigue en
+loopback del contenedor y no se presenta como accesible con un publish bridge.
 
 Los límites del prover se describen en [PROOFS.md](../../crates/b60-lang/PROOFS.md):
 subconjunto puro, host confiable y limpieza de descendientes comprobada en Unix.
@@ -133,7 +135,8 @@ legal, efectos productivos o una nueva certificación de release.
 
 Los trailers del commit conservan el ámbito `source-snapshot`: BLAKE3 de rutas
 ordenadas, NUL, longitud de ocho bytes big-endian y contenido, usando el destino
-literal para symlinks. La secuencia 1 continúa la declaración inicial; no es un
+literal para symlinks. Las secuencias 0, 1 y 2 acompañan las iteraciones de
+fuentes de esta PR; no es un
 ledger BFT ni un recibo de runtime. Se conserva la firma SSH y los hooks Git.
 
 No se han realizado pagos, cambios de protección, release, merge ni auto-merge.

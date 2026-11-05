@@ -8,9 +8,10 @@ certifica un despliegue ni renueva la evidencia del release histórico.
 
 La [revisión independiente posterior de la PR #48](PR48_INDEPENDENT_REVIEW_2026-11-05.md)
 detectó y corrigió defectos residuales en H05, el límite de salida de H04 y la
-presentación de H20/H21. Su dictamen sustituye el cierre inicial: **20 hallazgos
-con aceptación local completa**, H09 y H10 con aceptación parcial, y H08
-aplazado. Los resultados siguientes conservan la evidencia del primer commit;
+presentación de H20/H21. El [cierre posterior de H10](H10_DOCKER_VALIDATION_2026-11-05.md)
+añade construcción y prueba Docker completas: **21 hallazgos con aceptación
+local completa**, H09 con aceptación parcial y H08 aplazado.
+Los resultados siguientes conservan la evidencia del primer commit;
 la revisión enlazada recoge las comprobaciones del candidato corregido.
 
 ## Estado por hallazgo
@@ -26,7 +27,7 @@ la revisión enlazada recoge las comprobaciones del candidato corregido.
 | H07 | P2 | Familias P-256 y Tokio actualizadas y API adaptada. cargo audit --deny unsound pasa con cero vulnerabilidades y cero unsound. |
 | H08 | P2 | Pendiente: facturación de GitHub Actions; no se cambian pagos ni datos de cuenta. |
 | H09 | P2 | El workflow restaura el contexto requerido rust (macos-latest). La clasificación dentro del workflow evita checks pendientes por filtros de rutas; ante clasificación desconocida se ejecuta el test nativo. |
-| H10 | P2 | Docker copia recursos obligatorios antes de instalar. Los contextos exactos de instalación construyen wheel y editable; imagen completa pendiente de motor Docker. |
+| H10 | P2 | Cerrado posteriormente: imagen Linux ARM64 completa construida sin caché y probada; CLI, Z3, MCP y dashboard/healthcheck pasan. Véase el informe H10 enlazado. |
 | H11 | P2 | Perfil público declarado mediante marker y generado por mirror. El perfil completo sigue rechazando fuentes ausentes y el público informa su omisión explícita. |
 | H12 | P2 | El enrutamiento filtra rol antes de seleccionar y no devuelve candidatos de otro rol. |
 | H13 | P2 | Pedidos HTTP autenticados y ligados al contenido; validación de Host, Origin, cabeceras y replay antes del provisioner. No se emitieron licencias reales durante las pruebas. |
@@ -98,7 +99,8 @@ hardware. La firma SSH del commit conserva su propio ámbito de autenticidad Git
   JUMP. Los efectos y el resto de la ISA quedan fuera del modelo y se rechazan.
 - H09 requiere que el workflow llegue a la rama correspondiente y se ejecute
   remotamente; la protección de rama no se debilita ni se modifica aquí.
-- Docker completo y ejecución remota quedan sin verificar. H08 sigue pendiente.
+- Docker completo se verificó posteriormente en Linux ARM64, según el informe
+  H10. La ejecución remota de H09 y H08 siguen pendientes.
 - El manifiesto histórico de release no se regenera: su verificador rechaza el
   nuevo árbol por diferencias de hashes. Esta rama no es una nueva certificación
   de release ni autoriza su publicación.
