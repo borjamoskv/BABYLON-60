@@ -6,6 +6,13 @@ H08, el bloqueo de facturación de GitHub Actions, queda pendiente por decisión
 del operador. Este documento registra resultados locales y sus límites; no
 certifica un despliegue ni renueva la evidencia del release histórico.
 
+La [revisión independiente posterior de la PR #48](PR48_INDEPENDENT_REVIEW_2026-11-05.md)
+detectó y corrigió defectos residuales en H05, el límite de salida de H04 y la
+presentación de H20/H21. Su dictamen sustituye el cierre inicial: **20 hallazgos
+con aceptación local completa**, H09 y H10 con aceptación parcial, y H08
+aplazado. Los resultados siguientes conservan la evidencia del primer commit;
+la revisión enlazada recoge las comprobaciones del candidato corregido.
+
 ## Estado por hallazgo
 
 | ID | Prioridad | Corrección y aceptación local |

@@ -25,11 +25,21 @@ limit. Program counter and fuel use `BitVec 64`; proof iteration and list indice
 are bounded metadata. This is a model of the listed control instructions, not a
 proof of the whole ISA or compiler correctness.
 
-The CLI returns success only after the pinned Lean checker returns success. It
-prints the source and bytecode BLAKE3 digests and the proof path. A missing or
-rejecting checker returns an error; a file emitted before that error remains
-unverified. This command does not provide hardware attestation or authorize an
-effect.
+The CLI passes captured proof bytes to the pinned Lean checker over standard
+input from a private invocation directory. Success requires both a successful
+exit and the expected proof marker. Only then does it atomically publish the
+proof file. A missing, rejecting or timed-out checker returns an error and
+preserves any previous published file.
+
+The receipt prints source, bytecode and full proof BLAKE3 digests. The proof path
+is a replaceable alias: concurrent invocations check their own captured bytes,
+and the last successful publication replaces that alias. `proof_blake3`
+identifies the bytes checked by that invocation. Source/output aliases are
+rejected to preserve the input. The checker defaults to a 30-second deadline;
+`--checker-timeout-ms` accepts 1 through 120,000 milliseconds. On Unix, cleanup
+terminates the isolated checker process group; other platforms terminate the
+direct child only. This command does not provide hardware attestation or
+authorize an effect.
 
 Run the CLI regressions, including the real pinned checker and a mutated encoding
 that Lean must reject, with:
@@ -38,6 +48,8 @@ that Lean must reject, with:
 cargo test --locked -p b60-lang --test prove_cli -- --include-ignored
 ```
 
-The positive checker tests are explicitly ignored in ordinary Rust test runs
-because they require the pinned Lean installation. The other rejection tests do
-not require Lean and never use a fake checker to establish successful proof.
+Tests requiring the pinned Lean installation are explicitly ignored in ordinary
+Rust test runs. The full command includes real-checker acceptance, mutated-proof
+rejection, flag-like filenames, concurrent publication, source aliases and
+timeout cleanup. Negative launcher fixtures test rejection and lifecycle only;
+no fake checker establishes successful proof.

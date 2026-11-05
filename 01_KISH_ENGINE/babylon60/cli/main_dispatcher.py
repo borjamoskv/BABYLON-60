@@ -218,7 +218,7 @@ def cmd_mcp_bomb(args: argparse.Namespace) -> int:
         print(f"   Status:                 {receipt.get('status')}")
         print(f"   Code Hash (BLAKE3):     {receipt.get('code_hash')}")
         print(
-            f"   Autodestrucción (Disk): {'✓ VERIFICADA (CERO HUELLA)' if receipt.get('self_destruct_verified') else '✗ FALLIDA'}"
+            f"   Limpieza lógica (ruta/registro): {'✓ COMPROBADA' if receipt.get('self_destruct_verified') else '✗ INCOMPLETA'}"
         )
         print(f"   Latencia:               {receipt.get('latency_ms', 0):.2f} ms")
         print(f"   Resultado:              {json.dumps(receipt.get('tool_output'), ensure_ascii=False)}")

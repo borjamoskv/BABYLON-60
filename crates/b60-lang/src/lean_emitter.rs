@@ -7,6 +7,8 @@ use std::fs::File;
 use std::io::{BufWriter, Write, Result as IoResult};
 use std::path::Path;
 use std::process::Command;
+use std::process::{Output, Stdio};
+use std::time::{Duration, Instant};
 
 use crate::dag::CompiledCausalPlan;
 
@@ -108,6 +110,95 @@ impl AtomicProofFile {
 }
 impl Drop for AtomicProofFile {
     fn drop(&mut self) { let _ = std::fs::remove_file(&self.temporary); }
+}
+
+// Each invocation owns its scratch directory. The checker receives captured
+// memory bytes on stdin; it never reopens the replaceable final proof pathname.
+struct PrivateProofDir(std::path::PathBuf);
+
+impl PrivateProofDir {
+    fn new(parent: &Path) -> IoResult<Self> {
+        use std::sync::atomic::{AtomicU64, Ordering};
+        static NEXT: AtomicU64 = AtomicU64::new(0);
+        for _ in 0..100 {
+            let path = parent.join(format!(".b60-check-{}-{}", std::process::id(), NEXT.fetch_add(1, Ordering::Relaxed)));
+            let mut builder = std::fs::DirBuilder::new();
+            #[cfg(unix)] {
+                use std::os::unix::fs::DirBuilderExt;
+                builder.mode(0o700);
+            }
+            match builder.create(&path) {
+                Ok(()) => return Ok(Self(path)),
+                Err(error) if error.kind() == std::io::ErrorKind::AlreadyExists => continue,
+                Err(error) => return Err(error),
+            }
+        }
+        Err(std::io::Error::new(std::io::ErrorKind::AlreadyExists, "cannot allocate private proof directory"))
+    }
+}
+
+impl Drop for PrivateProofDir {
+    fn drop(&mut self) { let _ = std::fs::remove_dir_all(&self.0); }
+}
+
+/// Provenance of the checked bytes. `path` is a replaceable publication alias,
+/// not a promise that a later invocation cannot replace its contents.
+pub struct VerifiedBytecodeProof {
+    pub path: std::path::PathBuf,
+    pub proof_blake3: blake3::Hash,
+    pub checker: &'static str,
+}
+
+fn stop_checker_group(child: &mut std::process::Child) {
+    #[cfg(unix)]
+    let _ = Command::new("/bin/kill")
+        .args(["-KILL", "--", &format!("-{}", child.id())])
+        .stdout(Stdio::null()).stderr(Stdio::null()).status();
+    let _ = child.kill();
+    let _ = child.wait();
+}
+
+fn check_captured_bytes(bytes: &[u8], directory: &Path, checker: &str, timeout: Duration) -> Result<Output, String> {
+    let stdout_path = directory.join("stdout");
+    let stderr_path = directory.join("stderr");
+    let mut command = Command::new("elan");
+    command.args(["run", checker, "lean", "--stdin"])
+        .current_dir(directory)
+        .stdin(Stdio::piped())
+        .stdout(File::options().write(true).create_new(true).open(&stdout_path).map_err(|e| e.to_string())?)
+        .stderr(File::options().write(true).create_new(true).open(&stderr_path).map_err(|e| e.to_string())?);
+    #[cfg(unix)] {
+        use std::os::unix::process::CommandExt;
+        command.process_group(0);
+    }
+    let mut child = command.spawn().map_err(|e| format!("cannot execute pinned Lean verifier: {e}"))?;
+    let mut input = child.stdin.take().expect("piped checker stdin");
+    let captured = bytes.to_vec();
+    // A checker may stop before consuming its input; keep the deadline active
+    // even when a large proof would otherwise block write_all on the pipe.
+    let writer = std::thread::spawn(move || input.write_all(&captured));
+    let started = Instant::now();
+    let status = loop {
+        match child.try_wait() {
+            Ok(Some(status)) => break Ok(status),
+            Err(error) => break Err(format!("Lean wait failed: {error}")),
+            Ok(None) if started.elapsed() >= timeout => break Err(format!("Lean timeout after {}ms", timeout.as_millis())),
+            Ok(None) => std::thread::sleep(Duration::from_millis(10)),
+        }
+    };
+    // Also terminate any descendants left behind by the checker launcher.
+    // Unix owns an isolated group; other platforms can terminate the child only.
+    stop_checker_group(&mut child);
+    let input_result = writer.join().map_err(|_| "Lean stdin writer panicked".to_string())?;
+    let status = status?;
+    if status.success() {
+        input_result.map_err(|e| format!("Lean did not consume the proof: {e}"))?;
+    }
+    Ok(Output {
+        status,
+        stdout: std::fs::read(stdout_path).map_err(|e| e.to_string())?,
+        stderr: std::fs::read(stderr_path).map_err(|e| e.to_string())?,
+    })
 }
 
 fn output_basename(name: &str) -> Result<(), String> {
@@ -331,6 +422,36 @@ impl Lean4Emitter {
         let mut output = AtomicProofFile::new(file_path).map_err(|e| e.to_string())?;
         output.writer.write_all(proof.as_bytes()).map_err(|e| e.to_string())?;
         output.commit().map_err(|e| e.to_string())
+    }
+
+    /// Check the exact captured bytes before publishing the final pathname.
+    /// This isolates concurrent normal invocations, not a compromised host/UID.
+    pub fn verify_bytecode_trace_proof(bytecode: &[u8], file_path: &Path, timeout: Duration) -> Result<VerifiedBytecodeProof, String> {
+        if timeout < Duration::from_millis(1) || timeout > Duration::from_secs(120) {
+            return Err("checker timeout must be within 1..=120000ms".into());
+        }
+        let mut proof = Self::emit_bytecode_trace_proof(bytecode, "CompiledSource")?;
+        let marker = format!("B60_PROOF_CHECKED_{}", blake3::hash(proof.as_bytes()));
+        proof.push_str(&format!("\n#eval IO.println \"{marker}\"\n"));
+        let bytes = proof.into_bytes();
+        let destination = std::path::absolute(file_path).map_err(|e| e.to_string())?;
+        // Reject known symlink aliases before starting a potentially long check.
+        if std::fs::symlink_metadata(&destination).is_ok_and(|m| m.file_type().is_symlink()) {
+            return Err("proof output is a symlink".into());
+        }
+        let directory = PrivateProofDir::new(destination.parent().ok_or("proof output has no parent")?)
+            .map_err(|e| e.to_string())?;
+        const CHECKER: &str = include_str!("../../../proof/lean/lean-toolchain");
+        let output = check_captured_bytes(&bytes, &directory.0, CHECKER.trim(), timeout)?;
+        if !output.status.success() || String::from_utf8_lossy(&output.stdout).trim() != marker
+            || !output.stderr.is_empty() {
+            return Err(format!("Lean rejected the emitted proof ({}); NOT VERIFIED\n{}{}", output.status,
+                String::from_utf8_lossy(&output.stdout), String::from_utf8_lossy(&output.stderr)));
+        }
+        let mut published = AtomicProofFile::new(&destination).map_err(|e| e.to_string())?;
+        published.writer.write_all(&bytes).map_err(|e| e.to_string())?;
+        published.commit().map_err(|e| e.to_string())?;
+        Ok(VerifiedBytecodeProof { path: destination, proof_blake3: blake3::hash(&bytes), checker: CHECKER.trim() })
     }
 
 }

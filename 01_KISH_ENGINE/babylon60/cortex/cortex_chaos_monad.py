@@ -15,12 +15,17 @@ from typing import TypedDict, Literal
 from blake3 import blake3
 
 
+_MAX_STREAM_BYTES = 2 * 1024 * 1024
+_MAX_RESULT_TEXT_BYTES = 1024 * 1024
+_READ_CHUNK_BYTES = 8192
+
+
 class SecurityError(Exception):
     pass
 
 
 class ScittResult(TypedDict):
-    """Compatibility shape; execution observations are never SCITT signatures."""
+    """Untrusted worker observations; status is neither authority nor attestation."""
     status: Literal["Success", "Falsified", "Timeout_Entropy_Death", "SecurityError", "RuntimeError", "ByzantineFault"]
     stdout: str
     error: str
@@ -197,6 +202,82 @@ def _purge_zombies(process: asyncio.subprocess.Process) -> None:
         process.kill()
 
 
+class _OutputLimitExceeded(Exception):
+    pass
+
+
+async def _read_bounded(stream: asyncio.StreamReader) -> bytes:
+    """Enforce the raw byte budget outside the arbitrary-code worker."""
+    output = bytearray()
+    while True:
+        chunk = await stream.read(min(_READ_CHUNK_BYTES, _MAX_STREAM_BYTES - len(output) + 1))
+        if not chunk:
+            return bytes(output)
+        if len(output) + len(chunk) > _MAX_STREAM_BYTES:
+            raise _OutputLimitExceeded
+        output.extend(chunk)
+
+
+async def _feed_source(stream: asyncio.StreamWriter, source: bytes) -> None:
+    try:
+        stream.write(source)
+        await stream.drain()
+    except (BrokenPipeError, ConnectionResetError):
+        pass
+    finally:
+        stream.close()
+
+
+async def _collect_bounded(process: asyncio.subprocess.Process, source: bytes) -> bytes:
+    if process.stdin is None or process.stdout is None or process.stderr is None:
+        raise RuntimeError("Execution streams are unavailable")
+    stdout_task = asyncio.create_task(_read_bounded(process.stdout))
+    tasks = [
+        asyncio.create_task(_feed_source(process.stdin, source)),
+        stdout_task,
+        asyncio.create_task(_read_bounded(process.stderr)),
+        asyncio.create_task(process.wait()),
+    ]
+    try:
+        await asyncio.gather(*tasks)
+        return stdout_task.result()
+    finally:
+        for task in tasks:
+            if not task.done():
+                task.cancel()
+        await asyncio.gather(*tasks, return_exceptions=True)
+
+
+async def _discard_stream(stream: asyncio.StreamReader | None) -> None:
+    if stream is not None:
+        while await stream.read(_READ_CHUNK_BYTES):
+            pass
+
+
+async def _stop_and_reap(process: asyncio.subprocess.Process) -> None:
+    if process.returncode is None:
+        _purge_zombies(process)
+    # Drain without retaining bytes: a paused pipe can otherwise prevent wait()
+    # from completing after SIGKILL. All bounded readers have been cancelled.
+    await asyncio.gather(
+        _discard_stream(process.stdout), _discard_stream(process.stderr), process.wait(),
+        return_exceptions=True,
+    )
+
+
+async def _finish_reaping(process: asyncio.subprocess.Process) -> None:
+    cleanup = asyncio.create_task(_stop_and_reap(process))
+    cancelled = False
+    while not cleanup.done():
+        try:
+            await asyncio.shield(cleanup)
+        except asyncio.CancelledError:
+            cancelled = True
+    cleanup.result()
+    if cancelled:
+        raise asyncio.CancelledError
+
+
 def _sandbox_command() -> list[str]:
     """Build the supported read-only Darwin runtime, with no fallback.
 
@@ -252,7 +333,9 @@ async def run_chaos_monad(
 
     Darwin supports a read-only Python runtime. Other platforms and unavailable
     providers fail closed. ``frontier_tick`` is retained for compatibility; this
-    function issues no cryptographic signature or SCITT attestation.
+    function issues no cryptographic signature or SCITT attestation. Worker
+    status and text remain untrusted data, even after schema validation.
+    Each raw stream is capped at 2 MiB; decoded stdout/error at 1 MiB each.
     """
     try:
         validate_ast_markov_blanket(source_code)
@@ -272,18 +355,22 @@ async def run_chaos_monad(
             stderr=asyncio.subprocess.PIPE,
             env={}, cwd="/",
             start_new_session=True,
+            limit=64 * 1024,
         )
     except OSError:
         return {"status": "SecurityError", "stdout": "", "error": "OS confinement failed to start", "scitt_receipt": {}}
 
     try:
         try:
-            stdout_bytes, stderr_bytes = await asyncio.wait_for(
-                process.communicate(input=source_code.encode("utf-8")), timeout=timeout_ms / 1000.0
+            stdout_bytes = await asyncio.wait_for(
+                _collect_bounded(process, source_code.encode("utf-8")), timeout=timeout_ms / 1000.0
             )
+        except _OutputLimitExceeded:
+            return {
+                "status": "RuntimeError", "stdout": "",
+                "error": "Execution output exceeded parent byte budget", "scitt_receipt": {},
+            }
         except asyncio.TimeoutError:
-            # Turing Markov Blanket Chaos Isolation
-            _purge_zombies(process)
             return {
                 "status": "Timeout_Entropy_Death",
                 "stdout": "",
@@ -291,23 +378,25 @@ async def run_chaos_monad(
                 "scitt_receipt": {},
             }
     finally:
-        # Guarantee no zombie processes or runaway processes remain
-        if process.returncode is None:
-            _purge_zombies(process)
-            try:
-                await process.wait()
-            except (ProcessLookupError, OSError, asyncio.CancelledError):
-                pass
+        await _finish_reaping(process)
 
-    stdout_str = stdout_bytes.decode("utf-8", errors="replace")
     if process.returncode != 0:
         return {"status": "SecurityError", "stdout": "", "error": "OS-confined runtime did not complete", "scitt_receipt": {}}
     try:
-        parsed = json.loads(stdout_str)
-        if not isinstance(parsed, dict) or parsed.get("status") not in {"Success", "RuntimeError", "SecurityError"}:
+        parsed = json.loads(stdout_bytes.decode("utf-8"))
+        if not isinstance(parsed, dict) or set(parsed) != {"status", "stdout", "error"}:
+            raise ValueError("Invalid execution response")
+        if parsed["status"] not in {"Success", "RuntimeError", "SecurityError"}:
             raise ValueError("Invalid execution response")
         if not isinstance(parsed.get("stdout"), str) or not isinstance(parsed.get("error"), str):
             raise ValueError("Invalid execution response")
+        if any(len(parsed[key].encode("utf-8")) > _MAX_RESULT_TEXT_BYTES for key in ("stdout", "error")):
+            return {
+                "status": "RuntimeError", "stdout": "",
+                "error": "Execution output exceeded parent byte budget", "scitt_receipt": {},
+            }
+        if parsed["status"] == "Success" and parsed["error"]:
+            raise ValueError("Invalid execution response")
         return {"status": parsed["status"], "stdout": parsed["stdout"], "error": parsed["error"], "scitt_receipt": {}}
-    except (ValueError, TypeError):
+    except (ValueError, TypeError, RecursionError):
         return {"status": "RuntimeError", "stdout": "", "error": "Invalid OS-confined execution response", "scitt_receipt": {}}

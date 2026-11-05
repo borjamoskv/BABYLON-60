@@ -5,7 +5,7 @@
 
 use clap::{Parser, Subcommand};
 use std::fs;
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 use std::time::Instant;
 
 use b60_lang::compiler::B60Compiler;
@@ -36,6 +36,9 @@ enum Commands {
     Prove {
         /// Ruta al archivo fuente .b60
         file: PathBuf,
+        /// Tiempo máximo del comprobador Lean en milisegundos
+        #[arg(long, default_value_t = 30_000, value_parser = clap::value_parser!(u64).range(1..=120_000))]
+        checker_timeout_ms: u64,
     },
     /// Transduce y evalúa una acción agéntica bajo la compuerta epistémica C5-REAL
     Transduce {
@@ -60,6 +63,31 @@ enum Commands {
     },
     /// Muestra la información de arquitectura, invariantes y estado exergético
     Info,
+}
+
+fn proof_destination(source: &Path) -> Result<PathBuf, String> {
+    let destination = source.with_extension("lean");
+    // Resolve these existing file objects only to detect aliases, not to choose
+    // a workspace root. This also covers case-insensitive filename aliases.
+    let input = fs::canonicalize(source).map_err(|e| format!("read source: {e}"))?;
+    match fs::canonicalize(&destination) {
+        Ok(output) => {
+            if input == output {
+                return Err("source and proof output refer to the same file".into());
+            }
+            #[cfg(unix)] {
+                use std::os::unix::fs::MetadataExt;
+                let left = fs::metadata(&input).map_err(|e| e.to_string())?;
+                let right = fs::metadata(&output).map_err(|e| e.to_string())?;
+                if left.dev() == right.dev() && left.ino() == right.ino() {
+                    return Err("source and proof output refer to the same file".into());
+                }
+            }
+        }
+        Err(error) if error.kind() == std::io::ErrorKind::NotFound => {}
+        Err(error) => return Err(format!("inspect proof output: {error}")),
+    }
+    Ok(destination)
 }
 
 fn main() {
@@ -166,26 +194,19 @@ fn main() {
             println!("  -> Tiempo de cálculo F60:         {:.2} ms", el_f60.as_secs_f64() * 1000.0);
             println!("==================================================================");
         }
-        Commands::Prove { file } => {
+        Commands::Prove { file, checker_timeout_ms } => {
             let result = (|| -> Result<(), String> {
+                let proof_path = proof_destination(&file)?;
                 let source = fs::read_to_string(&file).map_err(|e| format!("read source: {e}"))?;
                 let bytecode = B60Compiler::compile_source(&source)?;
-                let proof_path = file.with_extension("lean");
-                b60_lang::Lean4Emitter::write_bytecode_trace_proof(&bytecode, &proof_path)?;
-                // Pin the checker independently of cwd and the user's default toolchain.
-                const TOOLCHAIN: &str = include_str!("../../../proof/lean/lean-toolchain");
-                let status = std::process::Command::new("elan")
-                    .args(["run", TOOLCHAIN.trim(), "lean"])
-                    .arg(&proof_path)
-                    .status()
-                    .map_err(|e| format!("cannot execute pinned Lean verifier: {e}"))?;
-                if !status.success() {
-                    return Err(format!("Lean rejected the emitted proof ({status}); NOT VERIFIED"));
-                }
+                let verified = b60_lang::Lean4Emitter::verify_bytecode_trace_proof(
+                    &bytecode, &proof_path, std::time::Duration::from_millis(checker_timeout_ms))?;
                 println!("VERIFIED: compiled HALT/NOOP bytecode reaches HALT.");
                 println!("source_blake3={} bytecode_blake3={}",
                     blake3::hash(source.as_bytes()), blake3::hash(&bytecode));
-                println!("proof={} checker={}", proof_path.display(), TOOLCHAIN.trim());
+                println!("proof={} proof_blake3={} checker={}", verified.path.display(),
+                    verified.proof_blake3, verified.checker);
+                println!("The proof path is a replaceable alias; proof_blake3 identifies these checked bytes.");
                 println!("Scope: compiled HALT/NOOP control flow; compiler correctness and the full ISA are not certified.");
                 Ok(())
             })();

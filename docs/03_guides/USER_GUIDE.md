@@ -94,8 +94,10 @@ babylon60 compliance --bundle /ruta/paquete_evidencia --ledger /ruta/ledger.db \
 El resultado identifica `legal_conformity=NOT_DETERMINED` y
 `publication_authorized=false`. La integridad de la evidencia no verifica por sí
 sola gestión de riesgos, supervisión humana ni los demás controles pendientes de
-auditoría. La falta de evidencia válida produce salida 2; `--allow-unverified`
-solo permite generar un informe diagnóstico y no concede autorización. Consulta
+auditoría. Un informe generado con evidencia no verificada devuelve salida 2
+salvo que se use `--allow-unverified`: en ese caso devuelve salida 0, conserva
+su carácter diagnóstico y no concede autorización. Una ruta de `--bundle` inexistente falla
+antes de generar el informe y devuelve salida 1. Consulta
 la [guía de evaluación y autorización regulatoria](../05_compliance_eu_ai_act.md)
 para el procedimiento separado de evaluación, revisión y aprobación.
 
@@ -120,7 +122,9 @@ babylon60 mcp-bomb \
   --code "def run(n): return [x for x in range(2, n) if all(x % d != 0 for d in range(2, int(x**0.5)+1))]" \
   --args '{"n": 50}'
 ```
-La ausencia de la ruta activa no acredita borrado físico del medio ni ausencia
+El campo JSON heredado `self_destruct_verified` indica únicamente la comprobación
+de limpieza lógica de la ruta y del registro, que también muestra la salida de
+texto. La ausencia de la ruta activa no acredita borrado físico del medio ni ausencia
 de copias, backups o cachés. El resultado devuelto y su hash de código tampoco
 constituyen por sí solos un recibo firmado y persistido en un ledger. La entrada
 efímera se purga; conserva por separado la evidencia que necesite tu auditoría.
