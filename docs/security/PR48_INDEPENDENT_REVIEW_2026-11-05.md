@@ -60,7 +60,7 @@ alcance indicado. No equivale a certificación de todo el sistema.
 | H03 | Aceptado | 46 tests y sondas CLI/MCP de aprobación, estado y revocación. Una conexión existente observa revocación. Firmas software de prueba; no atestación hardware. |
 | H04 | Aceptado | Canario exterior intacto y rechazos OS independientes del AST. Exceso nativo y error grande rechazan; 44 tests pasan tras el cambio final de tipos. Diez cancelaciones repetidas recogen el worker. Alcance: proveedor Darwin y efectos ensayados. |
 | H05 | Aceptado | 14 tests CLI, incluidos casos con Lean real: nombres opción, carrera entre comprobadores, mutación y timeout; también se rechazan aliases de fuente. Modelo compilado HALT/NOOP; no corrección del compilador ni ISA completa. |
-| H06 | Aceptado con salvedad | Quince auditorías de seguridad sin vulnerabilidades/estados adversos, lock y 47 tests dirigidos; MCP real en Python 3.11. Persiste un aviso previo de metadatos del wheel Z3, explicado abajo. |
+| H06 | Aceptado | Criterio de seguridad y MCP comprobado. La salvedad de distribución Z3 se resolvió posteriormente con el wheel oficial corregido y comprobaciones limpias, según el informe enlazado abajo. |
 | H07 | Aceptado | RustSec exit 0, sin vulnerabilidades ni unsound; 15 tests software P-256/COSE/gate/IPC pasan. Una fixture Swift ignorada. Sin afirmación de firma hardware. |
 | H08 | Aplazado | Actions bloqueado por facturación. Se mantiene pendiente por instrucción del operador. Sin pagos ni datos de cuenta modificados. |
 | H09 | Parcial | Existen los ocho contextos requeridos y pasan 17 casos locales de selección. La ejecución remota no se acredita mientras Actions esté bloqueado. |
@@ -120,11 +120,11 @@ python3 scripts/guards/verify_active_topology.py --staged
 
 ## Límites y pendientes
 
-H06 satisface su criterio original de seguridad, pruebas y MCP. `uv pip check`
-sigue terminando en 1 por etiquetas de plataforma contradictorias del wheel
-upstream de `z3-solver`: el registro del lock es idéntico al de la base y la
-importación real funciona. Se conserva como seguimiento de distribución; no se
-declara una instalación sin avisos ni ejecución de todos los extras.
+H06 satisface su criterio original de seguridad, pruebas y MCP. El fallo anterior
+de `uv pip check` se conservó como evidencia histórica y se ha
+[resuelto con la actualización oficial de Z3](Z3_INSTALLATION_VALIDATION_2026-11-05.md).
+Las instalaciones nuevas comprobadas pasan sin avisos; el informe delimita
+perfiles, plataformas y controles realizados.
 
 H09 restaura el contexto que faltaba, pero presencia de checks no equivale a
 ejecución aprobada. También se observaron condiciones previas en las que claims

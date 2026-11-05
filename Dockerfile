@@ -26,7 +26,8 @@ COPY README.md LICENSE ./
 COPY docs/skills.json docs/skills-lock.json ./docs/
 COPY .agents/skills ./.agents/skills
 
-RUN uv sync --locked --no-dev --no-editable
+RUN uv sync --locked --no-dev --no-editable \
+    && uv pip check
 COPY . .
 
 # Stage 2: Minimal Runtime environment (Non-root user)

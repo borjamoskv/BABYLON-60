@@ -9,6 +9,11 @@ La iteración parte de `7ff9b5efaf1e115552df7512dd45b8a3e28b87c9` de la
 [PR #48](https://github.com/borjamoskv/BABYLON-60/pull/48). El resultado actual de
 la auditoría es **21 hallazgos aceptados localmente, H09 parcial y H08 aplazado**.
 
+La [validación posterior de Z3](Z3_INSTALLATION_VALIDATION_2026-11-05.md)
+reconstruye esta imagen con Z3 5.3.3.0 y el nuevo control de compatibilidad;
+registra el ID actualizado. Las observaciones siguientes conservan la primera
+construcción de H10 con Z3 5.1.0.
+
 ## Correcciones
 
 - `.dockerignore` excluye bases de datos, credenciales locales, Git, entornos y

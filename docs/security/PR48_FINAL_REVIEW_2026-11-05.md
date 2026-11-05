@@ -1,7 +1,9 @@
 # Revisión final independiente de la PR #48
 
-**Confirmados 21 arreglos en su alcance local.** H06 conserva la salvedad de
-metadatos Z3 descrita abajo. H08 sigue aplazado y la validación remota de H09
+**Confirmados 21 arreglos en su alcance local.** La
+[salvedad de metadatos Z3 está resuelta](Z3_INSTALLATION_VALIDATION_2026-11-05.md)
+mediante una distribución oficial corregida e instalaciones limpias comprobadas.
+H08 sigue aplazado y la validación remota de H09
 permanece pendiente. No se realiza merge ni auto-merge.
 
 Seis revisores nuevos, distintos de los implementadores anteriores, examinaron
@@ -30,8 +32,11 @@ Las evidencias de fallo del head inicial se conservan separadas de los reintento
    La prueba ejecuta el bloque extraído de la guía con CLI, ledger, firmador y
    exportador reales, con identidad y clave explícitas de prueba.
 
-No se modificaron las bibliotecas de ejecución, las dependencias ni los lockfiles.
-Las correcciones afectan al ejemplo Rust, la guía y su prueba de integración.
+En aquella revisión, publicada en `c15cf7b`, no se modificaron las bibliotecas
+de ejecución, las dependencias ni los lockfiles: las correcciones afectaban al
+ejemplo Rust, la guía y su prueba de integración. La iteración posterior de Z3
+sí actualiza su requisito y lock, y añade controles de instalación y un nuevo
+build Docker, documentados en el informe de Z3 enlazado.
 
 ## Matriz de cierre local
 
@@ -42,11 +47,11 @@ Las correcciones afectan al ejemplo Rust, la guía y su prueba de integración.
 | H03 | Aceptado | 28 comprobaciones de setup/gate y lector MCP persistente: autorización ligada al contenido y revocación visible inmediatamente. |
 | H04 | Aceptado | Proveedor Darwin real, canario externo intacto, denegaciones OS, salida nativa acotada y cancelación con procesos recogidos; sin aumento de descriptores observado. |
 | H05 | Aceptado | 14 tests CLI y matriz externa del checker: bytes/marca/digests, nombres opción, concurrencia, publicación y timeout con descendientes ausentes. |
-| H06 | Aceptado con salvedad | 24 auditorías de base/extras/plataformas/versiones sin avisos de seguridad, lock y MCP probados; salvedad Z3 conservada. |
+| H06 | Aceptado | 24 auditorías sin avisos de seguridad. Z3 actualizado a una distribución oficial con tags coherentes; instalaciones limpias base/dev+gemini en Python 3.11/3.12/3.14 pasan ambos comprobadores sin avisos. |
 | H07 | Aceptado | RustSec sin vulnerabilidades/unsound; 15 tests software de P-256, gate e IPC pasan. Una fixture Swift ignorada y dos avisos de mantenimiento declarados. |
 | H08 | Aplazado | Pendiente por instrucción del operador; sin cambios de pagos o cuenta. |
 | H09 | Local verificado; remoto pendiente | 31 tests dirigidos, 17 escenarios de selección nativa, actionlint y revisión de nombres requeridos. No se certifica ejecución hosted. |
-| H10 | Aceptado Linux ARM64 | Build previo sin caché inspeccionado y runtime nuevo del mismo ID, con 30 pasos correctos; CLI, Z3, MCP/EOF, HTTP y healthcheck, UID 1000 y aislamiento. |
+| H10 | Aceptado Linux ARM64 | Build original y runtime comprobados; la iteración posterior de Z3 añade otro build sin caché con el nuevo lock y control de compatibilidad. CLI, Z3, MCP/EOF, HTTP/healthcheck, UID 1000 y aislamiento pasan, según el informe Z3. |
 | H11 | Aceptado | Perfiles público/completo, omisiones negativas y fixture real del mirror pasan. |
 | H12 | Aceptado | 64 casos de rol/ámbito/consulta sin selecciones incompatibles; caso sin coincidencia rechaza. |
 | H13 | Aceptado | HTTP loopback real: autenticación, contenido, origen y replay comprobados antes del canario de dispatch. No licencias reales. |
@@ -66,6 +71,12 @@ pero su criterio remoto sigue pendiente junto con H08.
 
 ## Verificación integrada y reproducción
 
+El cierre posterior de Z3 repite la batería ampliada: **614 pruebas y 94
+subtests** pasan, con cuatro skips y 33 deselecciones declarados. Comprueba
+además instalaciones limpias y una nueva imagen Docker. Los resultados que
+siguen corresponden a la revisión anterior `c15cf7b`; el informe de Z3 detalla
+la nueva ejecución y sus límites.
+
 - **570 pruebas Python aprobadas**, 87 subtests aparte, tres skips por PowerShell
   ausente y seis deselecciones del alcance original. Antes de las dos nuevas
   pruebas del ejemplo documentado se habían repetido 568 casos sobre el head inicial.
@@ -81,10 +92,10 @@ pero su criterio remoto sigue pendiente junto con H08.
 - Formal: 18 tests Rust dirigidos, 21 casos externos y elaboración Lean del
   teorema Merkle pasan. La enumeración diferencial es finita, no una prueba de
   toda la ISA ni de corrección del compilador.
-- Docker: se vuelve a probar la imagen
+- Docker de aquella revisión: se vuelve a probar la imagen
   `sha256:7c514bcb3085ff9d3fc89e4ba9f69a39cf8388448077fabda420b5b3e9949a10`.
-  Dockerfile, lock, aplicación y recursos contrastados; los cambios posteriores
-  de esta revisión son guía, prueba y ejemplo Rust. No se repite ni se atribuye
+  Dockerfile, lock, aplicación y recursos contrastados; los cambios que entonces
+  seguían eran guía, prueba y ejemplo Rust. No se repite ni se atribuye
   un nuevo build a la ejecución `runtime_only`. El perfil queda detenido y el
   contexto original permanece intacto. Véase el [informe H10](H10_DOCKER_VALIDATION_2026-11-05.md).
 
@@ -105,10 +116,10 @@ excluyen configuración global y omiten explícitamente telemetría de listeners
 
 ## Límites retenidos
 
-El fallo previo de `uv pip check` por etiquetas de plataforma contradictorias
-del wheel upstream Z3 en macOS se conserva: su registro no cambió y la prueba
-SAT funciona. H06 satisface el criterio original de seguridad/pruebas/MCP; no se
-declara una instalación sin avisos ni ejecución de todos los extras.
+El fallo previo de `uv pip check` por etiquetas contradictorias queda como
+evidencia histórica: la actualización oficial de Z3 y la instalación sin avisos
+se describen en el informe enlazado. No se afirma ejecución de todos los extras
+o de plataformas distintas de las comprobadas.
 
 Pruebas finitas y de software no certifican todos los entrelazados, hardware,
 latencia, RFO, false sharing, borrado físico, conformidad legal o producción.
