@@ -85,9 +85,16 @@ La CLI principal (`babylon60`) unifica el acceso a todos los motores del sistema
 ### 1. Auditoría y Cumplimiento EU AI Act (`babylon60 compliance`)
 Genera informes de evidencia técnica para la revisión del sistema. El informe no
 determina conformidad jurídica ni autoriza aprobación o publicación reguladas.
-Usa un paquete de evidencia y un ledger reales de tu instalación:
+Usa un paquete de evidencia y un ledger reales de tu instalación. Configura antes
+`BABYLON60_SIGNING_SEED` en el entorno mediante el mecanismo seguro de secretos de
+tu instalación: requiere una semilla Ed25519 de 32 bytes, expresada como 64
+caracteres hexadecimales. No escribas su valor en argumentos ni en comandos que
+queden en el historial. Esta firma por software no constituye atestación hardware
+o biométrica ni autoriza publicación. El ejemplo exige la variable ya exportada
+y no habilita firmas con claves efímeras:
 ```bash
 # Sustituye las rutas por el paquete y el ledger que vas a verificar:
+: "${BABYLON60_SIGNING_SEED:?Configura BABYLON60_SIGNING_SEED con 64 caracteres hexadecimales mediante el mecanismo seguro de secretos de tu instalación}" && \
 babylon60 compliance --bundle /ruta/paquete_evidencia --ledger /ruta/ledger.db \
   --format html --output reporte_evidencia.html
 ```

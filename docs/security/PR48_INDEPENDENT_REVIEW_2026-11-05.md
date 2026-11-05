@@ -7,6 +7,11 @@ Las 22 correcciones de código y documentación están presentes; falta la
 validación remota de H09 para completar sus criterios. La PR permanece abierta,
 sin merge.
 
+La [revisión final con seis revisores nuevos](PR48_FINAL_REVIEW_2026-11-05.md)
+confirma los 21 cierres locales tras corregir un consumidor Rust que no compilaba
+y declarar el requisito de firma del ejemplo de exportación. Contiene la matriz
+y las comprobaciones finales sobre los cambios congelados.
+
 Repositorio: [borjamoskv/BABYLON-60](https://github.com/borjamoskv/BABYLON-60).
 [PR #48](https://github.com/borjamoskv/BABYLON-60/pull/48).
 Base auditada: `930981ea47a5a4524e9c841338f1fd1a1caceb68`.
@@ -70,7 +75,7 @@ alcance indicado. No equivale a certificación de todo el sistema.
 | H18 | Aceptado | Decoder rechaza opcodes, truncamiento, saltos inválidos, ciclos e ISA no soportada; modelo HALT/NOOP/JUMP y mutación en Lean comprobados. Sin garantía de tiempo para todas las entradas de 4.096 bytes. |
 | H19 | Aceptado | Guía y exportador describen evidencia técnica, legal_conformity NOT_DETERMINED y publication_authorized false. No constituye evaluación regulatoria. |
 | H20 | Aceptado | Consola y guía limitadas a limpieza lógica; JSON heredado conserva ese alcance explícito. No acredita borrado físico ni ausencia de backups. |
-| H21 | Aceptado | Forwarding HTML/JSON/Markdown real y códigos de salida 2/0/1 comprobados; nueve tests dirigidos de presentación/exportación. Sin autorización regulatoria. |
+| H21 | Aceptado | Forwarding HTML/JSON/Markdown y códigos 2/0/1 comprobados. La revisión final añade el requisito de clave de software y ejecuta el bloque literal de la guía con y sin configuración; sin autorización regulatoria. |
 | H22 | Aceptado | 172 documentos Markdown y 786 enlaces locales sin roturas; 261 referencias históricas marcadas como material no distribuido. URLs externas fuera de esta comprobación. |
 | H23 | Aceptado | Proposición y nombre limitados al predecesor compartido; Lean y auditoría de axiomas pasan. No se afirma identidad de entradas ni inyectividad Merkle. |
 
@@ -135,7 +140,7 @@ legal, efectos productivos o una nueva certificación de release.
 
 Los trailers del commit conservan el ámbito `source-snapshot`: BLAKE3 de rutas
 ordenadas, NUL, longitud de ocho bytes big-endian y contenido, usando el destino
-literal para symlinks. Las secuencias 0, 1 y 2 acompañan las iteraciones de
+literal para symlinks. Las secuencias declaradas acompañan las iteraciones de
 fuentes de esta PR; no es un
 ledger BFT ni un recibo de runtime. Se conserva la firma SSH y los hooks Git.
 

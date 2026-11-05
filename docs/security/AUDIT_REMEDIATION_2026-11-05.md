@@ -11,6 +11,8 @@ detectó y corrigió defectos residuales en H05, el límite de salida de H04 y l
 presentación de H20/H21. El [cierre posterior de H10](H10_DOCKER_VALIDATION_2026-11-05.md)
 añade construcción y prueba Docker completas: **21 hallazgos con aceptación
 local completa**, H09 con aceptación parcial y H08 aplazado.
+La [revisión final independiente](PR48_FINAL_REVIEW_2026-11-05.md) vuelve a
+comprobar esos cierres y registra las dos últimas correcciones verificadas.
 Los resultados siguientes conservan la evidencia del primer commit;
 la revisión enlazada recoge las comprobaciones del candidato corregido.
 
