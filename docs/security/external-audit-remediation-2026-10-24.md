@@ -1,5 +1,7 @@
 # Contraste y corrección de la auditoría externa
 
+> Alcance de la distribución pública: las referencias marcadas como material no distribuido identifican evidencia o herramientas excluidas deliberadamente de este checkout. Se conservan sus rutas y los resultados históricos; esos soportes no pueden verificarse desde esta distribución.
+
 Revisión: 24 de octubre de 2026, Europe/Madrid. Entrada: transcripción adjunta
 de 2.728 líneas, con informes v1–v7. Encargo confirmado: contrastar y corregir
 fallos reproducidos. No se adopta como evidencia ninguna afirmación del auditor
@@ -72,7 +74,7 @@ el runtime ni firma los informes históricos de la release.
 | npm run build | 111 archivos revisados, 0 errores/avisos; 48 páginas construidas |
 | npm run verify | Gates de copy, enlaces, evidencia, recursos, AI Act y ensayos pasan; 42 tests Node pasan |
 | Playwright local: Research ES y Enterprise EN | Insignias y premisas correctas, sin los textos retirados, sin desbordamiento horizontal en el viewport observado y sin scripts ejecutables |
-| Semántica, presupuesto y topología locales | Los tres comandos exigidos pasan; [salidas completas](evidence/external-audit-remediation-2026-10-24/quality-gates.json). Se omiten configuración global y telemetría Ghost Listeners explícitamente. |
+| Semántica, presupuesto y topología locales | Los tres comandos exigidos pasan; salidas completas (material no distribuido: `evidence/external-audit-remediation-2026-10-24/quality-gates.json`). Se omiten configuración global y telemetría Ghost Listeners explícitamente. |
 
 La CSP se comprueba en un servidor local que aplica la cabecera de `dist/_headers`.
 Cloudflare aplica ese archivo a activos estáticos; las respuestas de Functions
@@ -113,7 +115,7 @@ La publicación web no se da por completada. El proxy inspeccionado conserva las
 cabeceras de Pages; no se le atribuye la causa de la CSP antigua sin comprobarla.
 El borrador legal permanece fuera de `dist` y no se publica.
 
-[Estado de publicación y pruebas](evidence/external-audit-remediation-2026-10-24/publication-status.json).
+Estado de publicación y pruebas (material no distribuido: `evidence/external-audit-remediation-2026-10-24/publication-status.json`).
 
 ### Intento de migración autorizado posteriormente
 
@@ -132,7 +134,7 @@ regresión reproduce el fallo antes del cambio; las 11 pruebas dirigidas pasan
 después. La previsualización nativa confirma el texto de origen sin solicitar
 biometría. Se conserva el rechazo de claves extrañas, hashes distintos,
 caducidad y replay. La parte legal continúa pendiente y fuera de la publicación.
-[Estado de migración](evidence/external-audit-remediation-2026-10-24/key-migration-status.json).
+Estado de migración (material no distribuido: `evidence/external-audit-remediation-2026-10-24/key-migration-status.json`).
 
 Para una release autenticada faltan una revisión fijada y la ejecución pertinente,
 la firma con identidad de confianza y la validación de hardware que corresponda.

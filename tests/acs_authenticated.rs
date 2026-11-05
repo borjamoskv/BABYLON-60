@@ -4,6 +4,8 @@ use babylon60::acs_bridge::authenticated::*;
 use babylon60::acs_bridge::*;
 use babylon60::ontology::babylon::*;
 use ed25519_dalek::{Signer, SigningKey};
+use p256::ecdsa::signature::Signer as _;
+use p256::elliptic_curve::Generate;
 use std::os::unix::fs::PermissionsExt;
 use std::os::unix::net::UnixStream;
 use std::path::PathBuf;
@@ -492,11 +494,11 @@ fn forensic_all_fields_and_outcomes_are_signed() {
 fn p256_request_and_forensic_signature_verify() {
     let lab = Lab::new();
     let s = Setup::new();
-    let signer = p256::ecdsa::SigningKey::random(&mut rand::rngs::OsRng);
+    let signer = p256::ecdsa::SigningKey::generate();
     let key = VerificationKey::P256(
         signer
             .verifying_key()
-            .to_encoded_point(false)
+            .to_sec1_point(false)
             .as_bytes()
             .to_vec(),
     );

@@ -398,6 +398,11 @@ GIT_INDEX_FILE="$WORK/index" git rm --cached -r -q --ignore-unmatch \
     assets/brand/github-art-brut.svg \
     assets/AppIcon.icns \
     assets/babylon60_brutalist_logo_1024.png
+PUBLIC_PROFILE_BLOB="$(printf '%s\n' \
+    '{"schema":"babylon60.public-projection.v1","profile":"public","omitted_scopes":[".agents/rules"]}' \
+    | git hash-object -w --stdin)"
+GIT_INDEX_FILE="$WORK/index" git update-index --add --cacheinfo \
+    100644 "$PUBLIC_PROFILE_BLOB" .babylon60-public-projection.json
 CLEAN_TREE="$(GIT_INDEX_FILE="$WORK/index" git write-tree)"
 readonly CLEAN_TREE
 # Raw blobs include export-ignored files. No worktree, attributes or symlinks can

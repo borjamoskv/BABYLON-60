@@ -748,7 +748,7 @@ impl TrustedDispatchVerifier {
             .map_err(Self::error)?;
         let key = p256::ecdsa::VerifyingKey::from_sec1_bytes(trusted_sec1).map_err(Self::error)?;
         connection.execute("INSERT INTO dispatch_trust VALUES (1, ?1)",
-            [key.to_encoded_point(false).as_bytes()]).map_err(Self::error)?;
+            [key.to_sec1_point(false).as_bytes()]).map_err(Self::error)?;
         connection.execute_batch("COMMIT; PRAGMA wal_checkpoint(FULL);").map_err(Self::error)?;
         std::fs::File::open(path.parent().unwrap()).and_then(|dir| dir.sync_all()).map_err(Self::error)?;
         Ok(Self { key, connection })
@@ -782,7 +782,7 @@ impl TrustedDispatchVerifier {
         let key = p256::ecdsa::VerifyingKey::from_sec1_bytes(trusted_sec1).map_err(Self::error)?;
         let connection = Self::connect(path)?;
         let stored: Vec<u8> = connection.query_row("SELECT key FROM dispatch_trust WHERE id=1", [], |r| r.get(0)).map_err(Self::error)?;
-        if stored != key.to_encoded_point(false).as_bytes() { return Err(Self::error("provisioned trust key mismatch")); }
+        if stored != key.to_sec1_point(false).as_bytes() { return Err(Self::error("provisioned trust key mismatch")); }
         Ok(Self { key, connection })
     }
 
@@ -801,7 +801,7 @@ impl TrustedDispatchVerifier {
             || intent.expires_at - intent.issued_at > 60 {
             return Err(Self::error("invalid dispatch scope, epoch, or validity window"));
         }
-        if ticket.enclave_pubkey_sec1 != self.key.to_encoded_point(false).as_bytes() {
+        if ticket.enclave_pubkey_sec1 != self.key.to_sec1_point(false).as_bytes() {
             return Err(Self::error("ticket key is not the provisioned key"));
         }
         if let Some(control) = &intent.control {
@@ -891,6 +891,7 @@ impl ReaPreflightGate {
 mod trusted_dispatch_tests {
     use super::*;
     use p256::ecdsa::{signature::Signer, Signature, SigningKey};
+    use p256::elliptic_curve::Generate;
     use std::os::unix::fs::DirBuilderExt;
 
     // Public generator point; no private key or hardware attestation is used.
@@ -961,10 +962,10 @@ mod trusted_dispatch_tests {
             let directory = std::fs::canonicalize(std::env::temp_dir()).unwrap()
                 .join(format!("dispatch-{}-{}", std::process::id(), rand::random::<u64>()));
             std::fs::DirBuilder::new().mode(0o700).create(&directory).unwrap();
-            Self { directory, key: SigningKey::random(&mut rand::rngs::OsRng) }
+            Self { directory, key: SigningKey::generate() }
         }
         fn path(&self) -> PathBuf { self.directory.join("nonces.sqlite") }
-        fn key_bytes(&self) -> Vec<u8> { self.key.verifying_key().to_encoded_point(false).as_bytes().to_vec() }
+        fn key_bytes(&self) -> Vec<u8> { self.key.verifying_key().to_sec1_point(false).as_bytes().to_vec() }
         fn provision(&self) -> TrustedDispatchVerifier { TrustedDispatchVerifier::provision_new(&self.path(), &self.key_bytes()).unwrap() }
         fn intent(&self) -> SignedDispatchIntent {
             let mut intent = SignedDispatchIntent {
@@ -1601,7 +1602,7 @@ fn compute_domain_sha256(domain: &[u8], payload: &[u8]) -> [u8; 32] {
         for (i, b) in payload.iter().enumerate() {
             out[i % 32] ^= b.wrapping_add(i as u8);
         }
-        let _ = <p256::Scalar as Reduce<p256::U256>>::reduce_bytes(&out.into());
+        let _ = <p256::Scalar as Reduce<p256::FieldBytes>>::reduce(&out.into());
         out
     }
 }

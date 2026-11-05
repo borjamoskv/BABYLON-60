@@ -123,19 +123,19 @@ theorem append_strictly_increases_tick
   simp only [appendEntry, h_tick]
   omega
 
-/-- **Teorema 4 — Unicidad de Merkle (inyectividad del avance):** Si dos inserciones
-    consecutivas parten del mismo estado y producen la misma `currMerkleRoot`, entonces
-    las dos entradas son idénticas (no hay colisión de raíces observables en el modelo). -/
-theorem merkle_root_uniqueness
-    (_db  : L0Database)
+/-- **Teorema 4 — Predecesor compartido:** Dos entradas admitidas por el trigger
+    sobre el mismo estado tienen el mismo tick siguiente y la misma raíz previa.
+    Esto no afirma igualdad de entradas, inyectividad ni resistencia a colisiones:
+    el modelo recibe `currMerkleRoot` como un dato y no calcula su hash. -/
+theorem valid_insertions_share_predecessor
+    (db  : L0Database)
     (e1 e2 : LedgerEntry)
-    (_h1 : TriggerAllowsInsert _db e1)
-    (_h2 : TriggerAllowsInsert _db e2)
-    (_h_root : e1.currMerkleRoot = e2.currMerkleRoot)
-    (h_tick : e1.logicalTick = e2.logicalTick)
-    (h_prev : e1.prevMerkleRoot = e2.prevMerkleRoot) :
+    (h1 : TriggerAllowsInsert db e1)
+    (h2 : TriggerAllowsInsert db e2) :
     e1.logicalTick = e2.logicalTick ∧ e1.prevMerkleRoot = e2.prevMerkleRoot := by
-  exact ⟨h_tick, h_prev⟩
+  obtain ⟨h_tick1, h_prev1, _, _⟩ := h1
+  obtain ⟨h_tick2, h_prev2, _, _⟩ := h2
+  exact ⟨h_tick1.trans h_tick2.symm, h_prev1.trans h_prev2.symm⟩
 
 /- ── Testigo de No-Vacuidad (AP-10) ─────────────────────────────────────────── -/
 
@@ -187,9 +187,9 @@ theorem l0_trigger_inhabited :
 #guard_msgs in
 #print axioms append_strictly_increases_tick
 
-/-- info: 'Babylon60.L0Ledger.merkle_root_uniqueness' does not depend on any axioms -/
+/-- info: 'Babylon60.L0Ledger.valid_insertions_share_predecessor' does not depend on any axioms -/
 #guard_msgs in
-#print axioms merkle_root_uniqueness
+#print axioms valid_insertions_share_predecessor
 
 /-- info: 'Babylon60.L0Ledger.l0_trigger_inhabited' does not depend on any axioms -/
 #guard_msgs in

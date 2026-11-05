@@ -1,5 +1,7 @@
 # Lote 2: diarios SQLite y conservación de datos — 28/10/2026
 
+> Alcance de la distribución pública: las referencias marcadas como material no distribuido identifican evidencia o herramientas excluidas deliberadamente de este checkout. Se conservan sus rutas y los resultados históricos; esos soportes no pueden verificarse desde esta distribución.
+
 ## Contrato previo a las ediciones
 
 Ejecutar el [plan](PLAN_SWARM100_LOTE2_2026-10-28.md) solo en sus cinco fuentes:
@@ -45,15 +47,15 @@ su corrección. Se modificaron únicamente las cinco fuentes previstas.
 
 ## Verificación ejecutada
 
-- [Hashes iniciales](evidence/swarm100-lot2-20261028/before-source-manifest.json):
+- Hashes iniciales (material no distribuido: `evidence/swarm100-lot2-20261028/before-source-manifest.json`):
   cinco fuentes coincidentes con el plan antes de editar.
-- [PoC de consolidación](evidence/swarm100-lot2-20261028/consolidation-before.json):
+- PoC de consolidación (material no distribuido: `evidence/swarm100-lot2-20261028/consolidation-before.json`):
   el helper original eliminó **tres filas SQLite reales y no guardó reemplazo**,
   únicamente en una base temporal con payloads sintéticos.
-- [Regresiones previas](evidence/swarm100-lot2-20261028/before-tests-confined.log):
+- Regresiones previas (material no distribuido: `evidence/swarm100-lot2-20261028/before-tests-confined.log`):
   **44 failed, 2 passed**, con HOME lógico y cwd temporales antes de importar.
   La primera ejecución equivalente y su código de test también se conservan.
-- [Batería final relacionada](evidence/swarm100-lot2-20261028/related-tests.log):
+- Batería final relacionada (material no distribuido: `evidence/swarm100-lot2-20261028/related-tests.log`):
   **322 passed, 1 skipped**, catorce archivos. Incluye 80 regresiones del lote.
   La omisión existente requiere `strike_rs`, no construido en este entorno;
   no se afirma haber ejecutado toda la suite del repositorio.
@@ -64,14 +66,14 @@ su corrección. Se modificaron únicamente las cinco fuentes previstas.
   En ambas copias hay tres rondas de calentamiento más veinte intercalaciones
   programadas con un escritor SQLite real en otro hilo; sobreviven las 24 filas
   y `integrity_check` devuelve `ok`. No se mide rendimiento.
-- [Revisión independiente](evidence/swarm100-lot2-20261028/independent-review.json):
+- Revisión independiente (material no distribuido: `evidence/swarm100-lot2-20261028/independent-review.json`):
   80 regresiones y siete ensayos adversariales aprobados; sin bloqueantes en
   el alcance. Incluye fallo de unlink, FIFO, cambio de inode antes de la
   revalidación y rechazo antes de convertir db_path.
 - Ruff y MyPy pasan en las cinco fuentes. Se retiraron dos variables/imports
   sin uso y se renombró una variable de recibo para corregir deuda de tipos
   preexistente; no cambió la lógica de las demás cohortes.
-- [Validación final](evidence/swarm100-lot2-20261028/validation.json): comandos,
+- Validación final (material no distribuido: `evidence/swarm100-lot2-20261028/validation.json`): comandos,
   salidas, hashes, enlaces, controles documentales y contabilidad.
 
 La reproducción ITERA tradujo exclusivamente los comandos find heredados a
@@ -109,10 +111,10 @@ OPEN fuera de los 598 IDs originales. La reducción desde 562 combina cuatro
 correcciones P1, una mitigación P1 y una deduplicación P2. En los 582 IDs de la
 ronda: 557 OPEN + 18 FIXED + 3 MITIGATED + 4 NOT_APPLICABLE = 582.
 
-Los [cambios por ID](evidence/swarm100-lot2-20261028/candidate-status-updates.json)
+Los cambios por ID (material no distribuido: `evidence/swarm100-lot2-20261028/candidate-status-updates.json`)
 conservan historia y hash vigente. El validador distingue rangos históricos
 de archivos posteriormente acortados y exige límites actuales a los nuevos
-dictámenes; su [control dirigido](evidence/swarm100-lot2-20261028/validator-check.json)
+dictámenes; su control dirigido (material no distribuido: `evidence/swarm100-lot2-20261028/validator-check.json`)
 confirma que un rango actual inválido sigue rechazándose.
 
 El [Lote 3](PLAN_SWARM100_LOTE3_2026-10-28.md) está preparado sobre autorización

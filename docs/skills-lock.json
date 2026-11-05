@@ -1,7 +1,7 @@
 {
   "schema_version": "3.1.0",
   "catalog_sha256": "ff03e61c32555bc32fa0fd3fe93e94d762abc19f640a8f5190f81f4b7d9fb6b4",
-  "snapshot_root_sha256": "a9514a6ab25886c3399a531123cd0905d6f02571d25000ff1ad3fd2e2d8308ff",
+  "snapshot_root_sha256": "6acb4327e05ce6e1f421fc69b7b28020b95477822b9fb30557185b17c54f6a61",
   "total_skills": 131,
   "skills": {
     "adaptive-cron": {
@@ -1787,8 +1787,8 @@
       "skill_id": "c5-ring0-babylon-kernel-project",
       "canonical_alias": "kernel-hub",
       "version": "1.0.0",
-      "artifact_sha256": "840f18f067ceb0cc2eb799ca27fb559aa72c0d00027eeb645897e65cf9797293",
-      "tool_identity_hash": "76129fd6dae2b6d5969e69b3b061a9fc9adf5936ec19350a929b48ca009b25eb",
+      "artifact_sha256": "d42491f9852c0a76c853699c1b949dde2413812953ba17c4b6f7aed0b58dde59",
+      "tool_identity_hash": "cc0a50fd62cf75876a916ca180f11ad63f42397e1bfcbe28d076d904c3235760",
       "lockfile_ref": "skills-lock.json#c5-ring0-babylon-kernel-project@1.0.0",
       "domain": "kernel",
       "summary": "Enruta módulos BABYLON-60 del proyecto: SPSC, SQLite L0, arquitectura IDE, SharedManifest, launchd, Apple Silicon y auditoría de contención. Dispara con \"kernel-hub\", \"babylon kernel hub\", \"shared manifest\", \"thermo-audit\", \"rlhf sentinel\", \"apple-bypass\".",

@@ -8,8 +8,11 @@ import sys
 import json
 import os
 import signal
-import hashlib
+from pathlib import Path
+import sysconfig
 from typing import TypedDict, Literal
+
+from blake3 import blake3
 
 
 class SecurityError(Exception):
@@ -17,6 +20,7 @@ class SecurityError(Exception):
 
 
 class ScittResult(TypedDict):
+    """Compatibility shape; execution observations are never SCITT signatures."""
     status: Literal["Success", "Falsified", "Timeout_Entropy_Death", "SecurityError", "RuntimeError", "ByzantineFault"]
     stdout: str
     error: str
@@ -56,9 +60,11 @@ def _check_ast_node(node: ast.AST, reflection_funcs: set[str], allowed_imports: 
 
 def validate_ast_markov_blanket(source_code: str) -> tuple[bool, str]:
     """
-    Evaluates AST for forbidden introspection and memory escapes.
-    Implements RULE_AST_REFLECT_01: Validates string constants used in reflections.
+    Screen known AST patterns; acceptance is not permission or OS isolation.
+    Implements RULE_AST_REFLECT_01 for string constants used in reflections.
     """
+    if len(source_code.encode("utf-8")) > 1024 * 1024:
+        raise SecurityError("Source exceeds the 1 MiB static-screening limit")
     reflection_funcs = {
         "getattr",
         "setattr",
@@ -78,7 +84,7 @@ def validate_ast_markov_blanket(source_code: str) -> tuple[bool, str]:
         for node in ast.walk(tree):
             _check_ast_node(node, reflection_funcs, allowed_imports)
 
-        ast_hash = hashlib.sha256(ast.dump(tree).encode("utf-8")).hexdigest()
+        ast_hash = blake3(ast.dump(tree).encode("utf-8")).hexdigest()
         return True, ast_hash
     except SecurityError:
         raise
@@ -126,7 +132,7 @@ class BoundedStringIO(StringIO):
 
 code = sys.stdin.read()
 
-# Stripped down builtins for strict isolation
+# Additional syntax restrictions; the OS profile is the isolation boundary.
 # Removed: getattr, hasattr, issubclass, exec, eval, open, etc. Added safe __import__.
 def _safe_import(name, globals=None, locals=None, fromlist=(), level=0):
     allowed_imports = {"numpy", "networkx", "typing"}
@@ -150,7 +156,7 @@ safe_builtins = {
     'slice': slice, 'sorted': sorted, 'str': str, 'sum': sum, 'tuple': tuple,
     'type': type, 'zip': zip
 }
-# Execute within a restricted global scope (La Monada Estricta)
+# Execute only after the parent has required operating-system confinement.
 env = {"__builtins__": safe_builtins, "__name__": "__main__"}
 
 stdout_capture = BoundedStringIO()
@@ -173,7 +179,6 @@ except MemoryError as e:
 except Exception as e:
     result = {"status": "RuntimeError", "stdout": stdout_capture.getvalue(), "error": str(e)}
 
-print("---JSON_OUTPUT_MARKER---")
 print(json.dumps(result))
 """
 
@@ -192,44 +197,84 @@ def _purge_zombies(process: asyncio.subprocess.Process) -> None:
         process.kill()
 
 
-async def run_chaos_monad(
-    source_code: str, frontier_tick: str = "GENESIS_TICK", timeout_ms: int = 1000, use_seatbelt: bool = False
-) -> ScittResult:
+def _sandbox_command() -> list[str]:
+    """Build the supported read-only Darwin runtime, with no fallback.
+
+    File metadata is visible, but file contents are restricted to the Python
+    runtime and installed packages. The profile grants no writes, network,
+    process forks, desktop access or arbitrary program execution.
     """
-    Executes dynamic code in a strict subprocess sandbox.
-    Returns a strict Monad Result to protect the core from entropy.
+    sandbox = Path("/usr/bin/sandbox-exec")
+    if sys.platform != "darwin" or not sandbox.is_file() or not os.access(sandbox, os.X_OK):
+        raise SecurityError("No verified OS confinement backend is available on this platform")
+    runtime = os.path.realpath(sys.base_prefix)
+    framework_python = Path(runtime) / "Resources/Python.app/Contents/MacOS/Python"
+    if not framework_python.is_file():
+        raise SecurityError("No verified OS confinement backend is available for this Python runtime")
+    executable = str(framework_python)
+    packages = sorted({os.path.realpath(sysconfig.get_path(key)) for key in ("purelib", "platlib")})
+    runtime_paths = sorted({
+        runtime, *packages,
+        "/System/Library", "/System/Volumes/Preboot/Cryptexes/OS/System/Library/dyld",
+        "/usr/lib", "/usr/share",
+    })
+    # Never turn an unusual Python installation into broad host access.
+    forbidden_roots = {
+        "/", "/Users", "/System", "/System/Volumes", "/System/Volumes/Data", "/usr", "/usr/local",
+        "/opt", "/opt/homebrew", "/opt/homebrew/Cellar", "/Library", "/Library/Frameworks", str(Path.home()),
+    }
+    home = os.path.realpath(str(Path.home()))
+    home_aliases = {home, "/System/Volumes/Data" + home}
+    if any(
+        path in forbidden_roots or not os.path.isabs(path)
+        or any(os.path.commonpath((path, user_home)) == path for user_home in home_aliases)
+        for path in runtime_paths
+    ):
+        raise SecurityError("Python runtime paths cannot provide bounded OS confinement")
+    profile = (
+        "(version 1)(deny default)"
+        f"(allow process-exec (literal {json.dumps(executable)}))"
+        "(allow sysctl-read)(allow file-read-metadata)"
+        "(allow file-read* "
+        + "".join(f"(subpath {json.dumps(path)})" for path in runtime_paths)
+        + '(literal "/")(literal "/dev/random")(literal "/dev/urandom"))'
+    )
+    # -S prevents site hooks before confinement; these package directories are
+    # the exact read-only directories admitted by the OS profile above.
+    wrapper = f"import sys\nsys.path.extend({packages!r})\n" + _SUBPROCESS_WRAPPER
+    return [str(sandbox), "-p", profile, executable, "-I", "-S", "-B", "-c", wrapper]
+
+
+async def run_chaos_monad(
+    source_code: str, frontier_tick: str = "GENESIS_TICK", timeout_ms: int = 1000, use_seatbelt: bool = True
+) -> ScittResult:
+    """Execute only in the supported OS sandbox; deny every unsafe fallback.
+
+    Darwin supports a read-only Python runtime. Other platforms and unavailable
+    providers fail closed. ``frontier_tick`` is retained for compatibility; this
+    function issues no cryptographic signature or SCITT attestation.
     """
     try:
-        is_valid, ast_hash = validate_ast_markov_blanket(source_code)
+        validate_ast_markov_blanket(source_code)
+        if use_seatbelt is not True:
+            raise SecurityError("OS confinement is mandatory; unconfined execution is disabled")
+        if not isinstance(timeout_ms, int) or not 1 <= timeout_ms <= 60_000:
+            raise SecurityError("Execution timeout must be between 1 and 60000 milliseconds")
+        cmd = _sandbox_command()
     except SecurityError as e:
         return {"status": "SecurityError", "stdout": "", "error": str(e), "scitt_receipt": {}}
 
-    # Spawn subprocess
-    cmd = [sys.executable, "-I", "-c", _SUBPROCESS_WRAPPER]
-    if use_seatbelt and sys.platform == "darwin":
-        cmd = [
-            "sandbox-exec",
-            "-p",
-            '(version 1)(deny default)(allow file-read* (subpath "/System"))(allow file-read* (subpath "/Library"))(allow file-read* (subpath "/usr/lib"))',
-        ] + cmd
-
-    if sys.platform != "win32":
+    try:
         process = await asyncio.create_subprocess_exec(
             *cmd,
             stdin=asyncio.subprocess.PIPE,
             stdout=asyncio.subprocess.PIPE,
             stderr=asyncio.subprocess.PIPE,
-            env={},
+            env={}, cwd="/",
             start_new_session=True,
         )
-    else:
-        process = await asyncio.create_subprocess_exec(
-            *cmd,
-            stdin=asyncio.subprocess.PIPE,
-            stdout=asyncio.subprocess.PIPE,
-            stderr=asyncio.subprocess.PIPE,
-            env={},
-        )
+    except OSError:
+        return {"status": "SecurityError", "stdout": "", "error": "OS confinement failed to start", "scitt_receipt": {}}
 
     try:
         try:
@@ -254,29 +299,15 @@ async def run_chaos_monad(
             except (ProcessLookupError, OSError, asyncio.CancelledError):
                 pass
 
-    stdout_str = stdout_bytes.decode("utf-8")
-    stderr_str = stderr_bytes.decode("utf-8")
-
-    def generate_receipt(final_status: str, out_text: str) -> dict[str, str]:
-        # Emula la firma COSE Sign1 (SCITT) anclando el AST y la frontera
-        payload = f"{frontier_tick}|{ast_hash}|{final_status}|{len(out_text)}"
-        signature = hashlib.sha256(payload.encode("utf-8")).hexdigest()
-        return {"frontier_tick": frontier_tick, "ast_hash": ast_hash, "signature": signature}
-
-    if "---JSON_OUTPUT_MARKER---" in stdout_str:
-        parts = stdout_str.split("---JSON_OUTPUT_MARKER---")
-        try:
-            parsed = json.loads(parts[1].strip())
-            status = parsed.get("status", "RuntimeError")
-            error_str = parsed.get("error", "")
-
-            # Defensa Bizantina: Interceptamos AssertionError del código ejecutado
-            if "AssertionError" in error_str or "AssertionError" in stderr_str:
-                status = "Falsified"
-
-            receipt = generate_receipt(status, parsed.get("stdout", ""))
-            return {"status": status, "stdout": parsed.get("stdout", ""), "error": error_str, "scitt_receipt": receipt}
-        except json.JSONDecodeError:
-            return {"status": "RuntimeError", "stdout": parts[0], "error": "Failed to decode JSON", "scitt_receipt": {}}
-
-    return {"status": "RuntimeError", "stdout": stdout_str, "error": stderr_str, "scitt_receipt": {}}
+    stdout_str = stdout_bytes.decode("utf-8", errors="replace")
+    if process.returncode != 0:
+        return {"status": "SecurityError", "stdout": "", "error": "OS-confined runtime did not complete", "scitt_receipt": {}}
+    try:
+        parsed = json.loads(stdout_str)
+        if not isinstance(parsed, dict) or parsed.get("status") not in {"Success", "RuntimeError", "SecurityError"}:
+            raise ValueError("Invalid execution response")
+        if not isinstance(parsed.get("stdout"), str) or not isinstance(parsed.get("error"), str):
+            raise ValueError("Invalid execution response")
+        return {"status": parsed["status"], "stdout": parsed["stdout"], "error": parsed["error"], "scitt_receipt": {}}
+    except (ValueError, TypeError):
+        return {"status": "RuntimeError", "stdout": "", "error": "Invalid OS-confined execution response", "scitt_receipt": {}}

@@ -1,10 +1,12 @@
 # Lote 7 ejecutado: gate y reporte sin falsas garantías — 29/10/2026
 
+> Alcance de la distribución pública: las referencias marcadas como material no distribuido identifican evidencia o herramientas excluidas deliberadamente de este checkout. Se conservan sus rutas y los resultados históricos; esos soportes no pueden verificarse desde esta distribución.
+
 C0556 y C0557 pasan a FIXED para sus defectos de falso éxito y recibo
 fabricado/sin vinculación al contenido. La única fuente productiva editada es
 `scripts/c5_verifiers/fast_smt_gate.py`. El
-[registro reconciliado](evidence/swarm100-round3-20261028/registry.json)
-y la [validación final](evidence/swarm100-lot7-20261029/validation.json)
+registro reconciliado (material no distribuido: `evidence/swarm100-round3-20261028/registry.json`)
+y la validación final (material no distribuido: `evidence/swarm100-lot7-20261029/validation.json`)
 conservan estados, comandos, hashes y límites.
 
 **Las 25 propiedades siguen NOT_EXECUTED: no se ha implementado un solver ni
@@ -14,8 +16,8 @@ invariantes del sistema.
 
 ## Reproducción y verificación
 
-Las [siete reproducciones anteriores al parche](evidence/swarm100-lot7-20261029/before-tests.log)
-fallaron contra el [hash previsto](evidence/swarm100-lot7-20261029/before-source-manifest.json).
+Las siete reproducciones anteriores al parche (material no distribuido: `evidence/swarm100-lot7-20261029/before-tests.log`)
+fallaron contra el hash previsto (material no distribuido: `evidence/swarm100-lot7-20261029/before-source-manifest.json`).
 Presencia de README/.agents, modos de salida, resultados/detalles alterados,
 pseudo-firma y exportación vacía demostraban el defecto en una copia temporal.
 No se ejecutó el mantenimiento ni se accedió a datos del operador.
@@ -26,7 +28,7 @@ con el módulo bloqueado antes de recoger las pruebas. Pasan MyPy con
 check-untyped-defs, Ruff y los controles documentales. Los hashes productivo y
 de regresiones son idénticos antes y después de esa ejecución.
 
-La [revisión independiente](evidence/swarm100-lot7-20261029/independent-review.json)
+La revisión independiente (material no distribuido: `evidence/swarm100-lot7-20261029/independent-review.json`)
 aprueba nueve controles propios (24 combinaciones de salida, 13 entradas
 inválidas y 22 campos del cuerpo ligados) y repite las 71 regresiones. Conserva
 sus límites y no deja hallazgos accionables abiertos en estos dos IDs. Detectó que
@@ -75,7 +77,7 @@ de generación del reporte; smt_verification_latency_ms es None.
 Se extrajo únicamente phase_4_quality_gates del consumidor a un namespace de
 prueba. Tres dobles de subprocess observan el rechazo del código no cero del
 gate presente; ningún auto-fixer ni canary real se ejecutó. El
-[control de alcance](evidence/swarm100-lot7-20261029/scope-check.json)
+control de alcance (material no distribuido: `evidence/swarm100-lot7-20261029/scope-check.json`)
 confirma intactos daily_sovereign_maintenance, dependencias y lockfiles.
 **Su rama que deja smt_ok=True si falta el script sigue fuera de este parche.**
 

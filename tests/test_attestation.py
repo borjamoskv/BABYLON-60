@@ -1,33 +1,30 @@
-import asyncio
+"""Dynamic execution without verified OS confinement must never claim attestation."""
+
 import pytest
+
+from babylon60.cortex import cortex_chaos_monad
 from babylon60.cortex.cortex_chaos_monad import run_chaos_monad
-import json
 
 
 @pytest.mark.asyncio
-async def test_attestation() -> None:
-
-    with open("scripts/c5_isomorphisms/cancer_isomorphism_pipeline.py", "r") as f:
-        payload_code = f.read()
-
-    print("[ORCHESTRATOR] Inyectando payload en la Mónada del Caos (Test Harness)...")
-    result = await run_chaos_monad(source_code=payload_code, frontier_tick="TICK_90f2b3a1_EMPIRICAL", timeout_ms=5000)
-
-    print("\n[RESULTADO MONADA]")
-    print(f"Status: {result.get('status')}")
-
-    receipt = result.get("scitt_receipt", {})
-    print("\n[RECIBO SCITT / COSE]")
-    print(json.dumps(receipt, indent=2))
-
-    if result.get("status") == "Falsified":
-        print("\n[DEFENSA] El oráculo interceptó una Falsificación (AssertionError). ¡El agente fue repudiado!")
-    elif result.get("status") == "Success":
-        print("\n[ATTESTATION] Éxito. El hash del AST está criptográficamente sellado.")
-    else:
-        print("\n[ERROR] El script falló o fue bloqueado por seguridad.")
-        print(f"Error trace:\n{result.get('error')}")
+async def test_attestation_explicitly_rejects_unavailable_confinement(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(cortex_chaos_monad.sys, "platform", "unsupported")
+    result = await run_chaos_monad(
+        source_code="print('must not execute')",
+        frontier_tick="test-no-confinement",
+        timeout_ms=500,
+    )
+    assert result["status"] == "SecurityError"
+    assert "confinement" in result["error"].lower()
+    assert result["stdout"] == ""
+    assert result["scitt_receipt"] == {}
 
 
-if __name__ == "__main__":
-    asyncio.run(test_attestation())
+@pytest.mark.asyncio
+@pytest.mark.parametrize("source", ["import os", "open('state', 'w')", "def broken("])
+async def test_attestation_rejects_invalid_source_without_a_receipt(source: str) -> None:
+    result = await run_chaos_monad(source_code=source, frontier_tick="test-invalid-source")
+    assert result["status"] == "SecurityError"
+    assert result["error"]
+    assert result["stdout"] == ""
+    assert result["scitt_receipt"] == {}

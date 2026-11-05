@@ -3,6 +3,7 @@
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 # ============================================================================
 import pytest
+import sys
 from babylon60.cortex.cortex_chaos_monad import validate_ast_markov_blanket, run_chaos_monad, SecurityError
 
 
@@ -36,6 +37,10 @@ class TestASTMarkovBlanketEvasion:
     @pytest.mark.asyncio
     async def test_execution_success(self) -> None:
         result = await run_chaos_monad("print('hello world')")
+        if sys.platform != "darwin":
+            assert result["status"] == "SecurityError"
+            assert "confinement" in result["error"]
+            return
         assert result["status"] == "Success"
         assert result["stdout"].strip() == "hello world"
 
@@ -43,6 +48,10 @@ class TestASTMarkovBlanketEvasion:
     async def test_execution_timeout(self) -> None:
         # A while True loop should trigger Timeout_Entropy_Death
         result = await run_chaos_monad("while True: pass", timeout_ms=100)
+        if sys.platform != "darwin":
+            assert result["status"] == "SecurityError"
+            assert "confinement" in result["error"]
+            return
         assert result["status"] == "Timeout_Entropy_Death"
 
     @pytest.mark.asyncio
@@ -83,6 +92,10 @@ while True:
     a = a + a
 """
         result = await run_chaos_monad(code, timeout_ms=3000)
+        if sys.platform != "darwin":
+            assert result["status"] == "SecurityError"
+            assert "confinement" in result["error"]
+            return
         # Depending on OS, it might be SecurityError (MemoryError caught) or just get killed
         assert result["status"] in ["SecurityError", "RuntimeError", "Timeout_Entropy_Death"]
         if result["status"] == "SecurityError":
@@ -93,5 +106,9 @@ while True:
         # Try to flood STDOUT buffer and cause pipe deadlock
         code = "print('A' * (2 * 1024 * 1024))"
         result = await run_chaos_monad(code)
+        if sys.platform != "darwin":
+            assert result["status"] == "SecurityError"
+            assert "confinement" in result["error"]
+            return
         assert result["status"] == "RuntimeError"
         assert "STDOUT Buffer Overflow" in result["error"]

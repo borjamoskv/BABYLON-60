@@ -140,8 +140,6 @@ const _: () = {
 // Con Apoptosis Asimétrica Externa (INV_C5_APPLE_128B_PING_PONG & INV_C5_ASYMMETRIC_APOPTOSIS)
 // ---------------------------------------------------------------------------
 
-use core::cell::UnsafeCell;
-
 /// Umbral máximo de ticks lógicos que un lector FFI puede retener un slot antes de apoptosis.
 pub const MAX_FFI_HOLD_TICKS: u64 = 64;
 /// Bit 63 reservado para la bandera ortogonal de veneno (evita colisión con la generación).
@@ -150,14 +148,17 @@ pub const POISON_BIT: u64 = 1 << 63;
 pub const POISON_SENTINEL: u64 = POISON_BIT | 0x5EAD_6060_0000_0000;
 /// Constante de compatibilidad heredada.
 pub const BABYLON_POISONED_U64: u64 = POISON_SENTINEL;
-/// Valor inactivo del pin de lectura FFI.
+/// Inactive reader presence value; logical tick zero is not reserved.
 pub const UNPINNED: u64 = 0;
+// Writer ownership is separate from both terminal poison and the active index.
+const WRITER_BUSY: u64 = 1 << 62;
+const MAX_GENERATION: u64 = (WRITER_BUSY - 1) >> 1;
 
-/// Línea 0 (128B): exclusiva de escritura del productor Ring-0.
+/// Control line shared by Ring-0 publishers and the terminal watchdog.
 #[repr(C, align(128))]
 pub struct WriterControlLine {
-    /// bit 0: active_idx | bits 1..62: monotonic_gen | bit 63: POISON_BIT
-    pub control_word: AtomicU64,
+    // bit 0: active_idx; bits 1..61: generation; bit 62: writer; bit 63: poison.
+    control_word: AtomicU64,
     /// Padding explícito para completar 128 bytes.
     pub _pad: [u8; 120],
 }
@@ -178,13 +179,14 @@ impl Default for WriterControlLine {
     }
 }
 
-/// Línea 1 (128B): exclusiva de escritura del consumidor FFI.
+/// Monitoring line for one logical FFI reader lease.
 #[repr(C, align(128))]
 pub struct ReaderPinLine {
-    /// Escrito por el consumidor FFI; leído por el productor Ring-0.
-    pub ffi_reader_pin_tick: AtomicU64,
+    // A separate presence word keeps every logical tick, including zero, valid.
+    ffi_reader_pin_tick: AtomicU64,
+    ffi_reader_active: AtomicU64,
     /// Padding explícito para completar 128 bytes.
-    pub _pad: [u8; 120],
+    pub _pad: [u8; 112],
 }
 
 impl ReaderPinLine {
@@ -192,7 +194,8 @@ impl ReaderPinLine {
     pub const fn new() -> Self {
         Self {
             ffi_reader_pin_tick: AtomicU64::new(UNPINNED),
-            _pad: [0; 120],
+            ffi_reader_active: AtomicU64::new(UNPINNED),
+            _pad: [0; 112],
         }
     }
 }
@@ -210,7 +213,7 @@ const _: () = {
     assert!(core::mem::align_of::<ReaderPinLine>() == 128);
 };
 
-/// Slot de datos atómicamente aislado a 128 bytes (tamaño de línea de coherencia en Apple Silicon M1-M4).
+/// Owned payload copied into or out of the shared atomic storage.
 #[repr(C, align(128))]
 pub struct PayloadSlot {
     /// Tick lógico causal de la transición.
@@ -248,23 +251,74 @@ const _: () = {
     assert!(core::mem::align_of::<PayloadSlot>() == 128);
 };
 
-/// Registro Ping-Pong Left-Right con cuádruple aislamiento de línea de caché de 128B (512B total):
-/// 1. Línea 0 (128B): Exclusiva de escritura del productor Ring-0 (control_word).
-/// 2. Línea 1 (128B): Exclusiva de escritura del consumidor FFI (ffi_reader_pin_tick).
-/// 3. Línea 2 (128B): Slot A Payload.
-/// 4. Línea 3 (128B): Slot B Payload.
+// The representation has the same size, alignment and byte offsets as PayloadSlot.
+// Atomics, rather than post-copy validation alone, make slot reuse data-race-free.
+#[repr(C, align(128))]
+struct AtomicPayloadSlot {
+    logical_tick: AtomicU64,
+    state_hash: [AtomicU64; 4],
+    metrics: [AtomicU64; 10],
+    padding: AtomicU64,
+}
+
+impl AtomicPayloadSlot {
+    const fn new() -> Self {
+        Self {
+            logical_tick: AtomicU64::new(0),
+            state_hash: [const { AtomicU64::new(0) }; 4],
+            metrics: [const { AtomicU64::new(0) }; 10],
+            padding: AtomicU64::new(0),
+        }
+    }
+
+    fn store(&self, payload: &PayloadSlot) {
+        self.logical_tick
+            .store(payload.logical_tick, Ordering::Relaxed);
+        for (word, bytes) in self
+            .state_hash
+            .iter()
+            .zip(payload.state_hash.chunks_exact(8))
+        {
+            word.store(
+                u64::from_ne_bytes(bytes.try_into().unwrap()),
+                Ordering::Relaxed,
+            );
+        }
+        for (word, value) in self.metrics.iter().zip(payload.metrics) {
+            word.store(value, Ordering::Relaxed);
+        }
+        self.padding
+            .store(u64::from_ne_bytes(payload._pad), Ordering::Relaxed);
+    }
+
+    fn load(&self) -> PayloadSlot {
+        let mut state_hash = [0; 32];
+        for (bytes, word) in state_hash.chunks_exact_mut(8).zip(&self.state_hash) {
+            bytes.copy_from_slice(&word.load(Ordering::Relaxed).to_ne_bytes());
+        }
+        PayloadSlot {
+            logical_tick: self.logical_tick.load(Ordering::Relaxed),
+            state_hash,
+            metrics: core::array::from_fn(|i| self.metrics[i].load(Ordering::Relaxed)),
+            _pad: self.padding.load(Ordering::Relaxed).to_ne_bytes(),
+        }
+    }
+}
+
+/// Two atomic payload slots in four 128-byte lines (512 bytes total).
+/// Writers claim control with CAS and reject contention. Readers use only loads
+/// and bounded retries; this protocol does not claim wait-free publication.
+/// The offsets are retained, but this protocol requires atomic slot accesses by
+/// every participant; do not share it with clients using the earlier raw-copy ABI.
 #[repr(C, align(128))]
 pub struct SharedManifestRing0 {
-    /// Línea 0 (128B): exclusiva de escritura Ring-0.
+    /// Writer ownership, generation and terminal poison (first 128 bytes).
     pub writer_ctl: WriterControlLine,
     /// Línea 1 (128B): exclusiva de escritura FFI.
     pub reader_pin: ReaderPinLine,
     /// Líneas 2 y 3 (256B): Ping-Pong A/B.
-    pub slots: [UnsafeCell<PayloadSlot>; 2],
+    slots: [AtomicPayloadSlot; 2],
 }
-
-unsafe impl Sync for SharedManifestRing0 {}
-unsafe impl Send for SharedManifestRing0 {}
 
 impl SharedManifestRing0 {
     /// Crea un nuevo manifiesto Ring-0 con 512 bytes de aislamiento.
@@ -272,66 +326,88 @@ impl SharedManifestRing0 {
         Self {
             writer_ctl: WriterControlLine::new(),
             reader_pin: ReaderPinLine::new(),
-            slots: [
-                UnsafeCell::new(PayloadSlot::zeroed()),
-                UnsafeCell::new(PayloadSlot::zeroed()),
-            ],
+            slots: [const { AtomicPayloadSlot::new() }; 2],
         }
     }
 
-    /// Comprueba o dispara apoptosis asimétrica externa en silicio.
+    /// Check the single-reader watchdog using wrapping logical elapsed ticks.
+    /// A backward clock is treated as an expired lease and fails closed.
     #[inline(always)]
     pub fn check_or_trigger_apoptosis(&self, current_tick: u64) -> Result<u64, u64> {
         let ctl = self.writer_ctl.control_word.load(Ordering::Acquire);
         if (ctl & POISON_BIT) != 0 {
             return Err(ctl);
         }
-        let pinned_tick = self.reader_pin.ffi_reader_pin_tick.load(Ordering::Acquire);
-        if pinned_tick != UNPINNED && current_tick.saturating_sub(pinned_tick) > MAX_FFI_HOLD_TICKS {
-            self.writer_ctl.control_word.store(POISON_SENTINEL, Ordering::Release);
-            return Err(POISON_SENTINEL);
+        if self.reader_pin.ffi_reader_active.load(Ordering::Acquire) != UNPINNED {
+            let pinned_tick = self.reader_pin.ffi_reader_pin_tick.load(Ordering::Relaxed);
+            if current_tick.wrapping_sub(pinned_tick) > MAX_FFI_HOLD_TICKS {
+                self.writer_ctl
+                    .control_word
+                    .store(POISON_SENTINEL, Ordering::Release);
+                return Err(POISON_SENTINEL);
+            }
         }
         Ok(ctl)
     }
 
-    /// Publicación Wait-Free O(1) en Ring-0 con auditoría asimétrica.
+    /// Publish a coherent payload, rejecting a concurrent writer or terminal poison.
+    /// An error with bit 62 set is transient writer contention; bit 63 is terminal.
     pub fn publish_and_audit(&self, next_data: &PayloadSlot, current_tick: u64) -> Result<(), u64> {
         let ctl = self.check_or_trigger_apoptosis(current_tick)?;
-
-        // Escritura en el slot inactivo (cero colisión con lectores concurrentes)
+        if ctl & WRITER_BUSY != 0 {
+            return Err(ctl);
+        }
+        let owned = ctl | WRITER_BUSY;
+        self.writer_ctl
+            .control_word
+            .compare_exchange(ctl, owned, Ordering::Acquire, Ordering::Acquire)
+            .map_err(|actual| actual | WRITER_BUSY)?;
+        // Pair with the reader's acquire fence: observing any later payload word
+        // requires its final control load to observe ownership or a later commit.
+        fence(Ordering::Release);
+        let current_gen = (ctl >> 1) & MAX_GENERATION;
+        if current_gen == MAX_GENERATION {
+            // Never wrap the generation: that would permit an ABA snapshot.
+            let _ = self.writer_ctl.control_word.compare_exchange(
+                owned,
+                POISON_SENTINEL,
+                Ordering::Release,
+                Ordering::Acquire,
+            );
+            return Err(self.writer_ctl.control_word.load(Ordering::Acquire));
+        }
         let active_idx = (ctl & 1) as usize;
         let write_idx = active_idx ^ 1;
-
-        unsafe {
-            let slot_ptr = self.slots[write_idx].get();
-            *slot_ptr = *next_data;
-        }
-
-        // Generación monótona en bits 1..62, bit 0 = active_idx, bit 63 = 0
-        let current_gen = (ctl >> 1) & ((1 << 62) - 1);
-        let next_gen = current_gen.wrapping_add(1) & ((1 << 62) - 1);
-        let next_ctrl = (next_gen << 1) | (write_idx as u64);
-        self.writer_ctl.control_word.store(next_ctrl, Ordering::Release);
+        self.slots[write_idx].store(next_data);
+        let next_ctrl = ((current_gen + 1) << 1) | (write_idx as u64);
+        // Poison prevents committing the in-flight copy; it does not physically
+        // freeze every slot store already in progress. The CAS cannot erase it.
+        self.writer_ctl.control_word.compare_exchange(
+            owned,
+            next_ctrl,
+            Ordering::Release,
+            Ordering::Acquire,
+        )?;
         Ok(())
     }
 
     /// Lectura consistente con validación post-copia del control_word.
     pub fn read_snapshot(&self, out_buf: &mut PayloadSlot) -> Result<(), u64> {
-        for _ in 0..10_000 {
+        for _ in 0..MAX_RETRIES {
             let ctrl_before = self.writer_ctl.control_word.load(Ordering::Acquire);
             if (ctrl_before & POISON_BIT) != 0 {
                 return Err(ctrl_before);
             }
-
-            let active_idx = (ctrl_before & 1) as usize;
-            unsafe {
-                let slot_ptr = self.slots[active_idx].get();
-                *out_buf = *slot_ptr;
+            if ctrl_before & WRITER_BUSY != 0 {
+                core::hint::spin_loop();
+                continue;
             }
-
+            let active_idx = (ctrl_before & 1) as usize;
+            let snapshot = self.slots[active_idx].load();
             fence(Ordering::Acquire);
             let ctrl_after = self.writer_ctl.control_word.load(Ordering::Acquire);
             if ctrl_before == ctrl_after {
+                *out_buf = snapshot;
                 return Ok(());
             }
             core::hint::spin_loop();
@@ -339,17 +415,25 @@ impl SharedManifestRing0 {
         Err(self.writer_ctl.control_word.load(Ordering::Acquire))
     }
 
-    /// Fija el pin de lectura de la C-FFI para el centinela de apoptosis.
+    /// Pin one logical FFI reader for the watchdog, including at tick zero.
+    /// This single-reader lease is monitoring, not payload memory synchronization.
     #[inline(always)]
     pub fn ffi_pin(&self, tick: u64) {
-        self.reader_pin.ffi_reader_pin_tick.store(tick, Ordering::Release);
+        self.reader_pin
+            .ffi_reader_pin_tick
+            .store(tick, Ordering::Relaxed);
+        self.reader_pin
+            .ffi_reader_active
+            .store(1, Ordering::Release);
         fence(Ordering::SeqCst);
     }
 
     /// Libera el pin de lectura de la C-FFI.
     #[inline(always)]
     pub fn ffi_unpin(&self) {
-        self.reader_pin.ffi_reader_pin_tick.store(UNPINNED, Ordering::Release);
+        self.reader_pin
+            .ffi_reader_active
+            .store(UNPINNED, Ordering::Release);
     }
 }
 
@@ -360,6 +444,8 @@ impl Default for SharedManifestRing0 {
 }
 
 const _: () = {
+    assert!(core::mem::size_of::<AtomicPayloadSlot>() == 128);
+    assert!(core::mem::align_of::<AtomicPayloadSlot>() == 128);
     assert!(core::mem::size_of::<SharedManifestRing0>() == 512);
     assert!(core::mem::align_of::<SharedManifestRing0>() == 128);
 };
@@ -443,7 +529,7 @@ mod protocol_regressions {
     }
 
     #[test]
-    fn ring0_ping_pong_wait_free_roundtrip() {
+    fn ring0_atomic_payload_roundtrip() {
         let manifest = SharedManifestRing0::new();
         let mut slot = PayloadSlot::zeroed();
         slot.logical_tick = 42;
@@ -465,7 +551,7 @@ mod protocol_regressions {
         let mut slot = PayloadSlot::zeroed();
 
         // 1. Simular lector FFI anclado en tick 100
-        manifest.reader_pin.ffi_reader_pin_tick.store(100, Ordering::Release);
+        manifest.ffi_pin(100);
 
         // 2. Productor avanza dentro del presupuesto permitido (delta = 50 <= 64)
         slot.logical_tick = 150;
@@ -476,10 +562,148 @@ mod protocol_regressions {
         slot.logical_tick = 170;
         let res = manifest.publish_and_audit(&slot, 170);
         assert_eq!(res, Err(BABYLON_POISONED_U64));
-        assert_eq!(manifest.writer_ctl.control_word.load(Ordering::Acquire), BABYLON_POISONED_U64);
+        assert_eq!(
+            manifest.writer_ctl.control_word.load(Ordering::Acquire),
+            BABYLON_POISONED_U64
+        );
 
         // 4. Posteriores lecturas fallan por estado POISONED
         let mut read_buf = PayloadSlot::zeroed();
-        assert_eq!(manifest.read_snapshot(&mut read_buf), Err(BABYLON_POISONED_U64));
+        assert_eq!(
+            manifest.read_snapshot(&mut read_buf),
+            Err(BABYLON_POISONED_U64)
+        );
+    }
+
+    #[test]
+    fn ring0_layout_remains_four_128_byte_lines() {
+        use core::mem::{align_of, offset_of, size_of};
+        assert_eq!(size_of::<SharedManifestRing0>(), 512);
+        assert_eq!(align_of::<SharedManifestRing0>(), 128);
+        assert_eq!(offset_of!(SharedManifestRing0, writer_ctl), 0);
+        assert_eq!(offset_of!(SharedManifestRing0, reader_pin), 128);
+        assert_eq!(offset_of!(SharedManifestRing0, slots), 256);
+        assert_eq!(size_of::<AtomicPayloadSlot>(), size_of::<PayloadSlot>());
+        assert_eq!(
+            offset_of!(AtomicPayloadSlot, state_hash),
+            offset_of!(PayloadSlot, state_hash)
+        );
+        assert_eq!(
+            offset_of!(AtomicPayloadSlot, metrics),
+            offset_of!(PayloadSlot, metrics)
+        );
+    }
+
+    #[test]
+    fn ring0_tick_zero_and_wrapping_clock_obey_the_64_tick_budget() {
+        for pinned_at in [0, 1, u64::MAX - 10, u64::MAX] {
+            let manifest = SharedManifestRing0::new();
+            manifest.ffi_pin(pinned_at);
+            assert!(manifest
+                .check_or_trigger_apoptosis(pinned_at.wrapping_add(64))
+                .is_ok());
+            assert_eq!(
+                manifest.check_or_trigger_apoptosis(pinned_at.wrapping_add(65)),
+                Err(POISON_SENTINEL)
+            );
+            manifest.ffi_unpin();
+            assert_eq!(
+                manifest.publish_and_audit(&PayloadSlot::zeroed(), 0),
+                Err(POISON_SENTINEL)
+            );
+        }
+        let manifest = SharedManifestRing0::new();
+        manifest.ffi_pin(0);
+        manifest.ffi_unpin();
+        assert!(manifest.check_or_trigger_apoptosis(65).is_ok());
+    }
+
+    #[test]
+    fn ring0_rejects_busy_writers_and_never_wraps_the_generation() {
+        let manifest = SharedManifestRing0::new();
+        manifest
+            .writer_ctl
+            .control_word
+            .store(WRITER_BUSY, Ordering::Release);
+        assert_eq!(
+            manifest.publish_and_audit(&PayloadSlot::zeroed(), 0),
+            Err(WRITER_BUSY)
+        );
+        let mut unchanged = PayloadSlot::zeroed();
+        unchanged.logical_tick = 999;
+        assert!(manifest.read_snapshot(&mut unchanged).is_err());
+        assert_eq!(unchanged.logical_tick, 999);
+        manifest
+            .writer_ctl
+            .control_word
+            .store(MAX_GENERATION << 1, Ordering::Release);
+        assert_eq!(
+            manifest.publish_and_audit(&PayloadSlot::zeroed(), 0),
+            Err(POISON_SENTINEL)
+        );
+        assert_eq!(manifest.read_snapshot(&mut unchanged), Err(POISON_SENTINEL));
+    }
+
+    #[test]
+    fn ring0_concurrent_writers_publish_only_coherent_snapshots() {
+        let manifest = SharedManifestRing0::new();
+        let done = AtomicU32::new(0);
+        let iterations = if cfg!(miri) { 4 } else { 512 };
+        thread::scope(|scope| {
+            for writer in 1..=2 {
+                let manifest = &manifest;
+                let done = &done;
+                scope.spawn(move || {
+                    for index in 1..=iterations {
+                        let tick = (writer << 32) | index;
+                        let mut payload = PayloadSlot::zeroed();
+                        payload.logical_tick = tick;
+                        payload.metrics = [tick; 10];
+                        payload.state_hash = tick.to_ne_bytes().repeat(4).try_into().unwrap();
+                        payload._pad = tick.to_ne_bytes();
+                        while let Err(control) = manifest.publish_and_audit(&payload, 0) {
+                            assert_eq!(control & POISON_BIT, 0);
+                            thread::yield_now();
+                        }
+                    }
+                    done.fetch_add(1, Ordering::Release);
+                });
+            }
+            let mut output = PayloadSlot::zeroed();
+            while done.load(Ordering::Acquire) != 2 {
+                if manifest.read_snapshot(&mut output).is_ok() {
+                    let tick = output.logical_tick;
+                    assert_eq!(output.metrics, [tick; 10]);
+                    assert_eq!(output.state_hash, tick.to_ne_bytes().repeat(4).as_slice());
+                    assert_eq!(output._pad, tick.to_ne_bytes());
+                }
+                thread::yield_now();
+            }
+        });
+    }
+
+    #[test]
+    fn ring0_watchdog_poison_survives_an_in_flight_writer() {
+        let manifest = SharedManifestRing0::new();
+        manifest.ffi_pin(0);
+        thread::scope(|scope| {
+            scope.spawn(|| {
+                let _ = manifest.publish_and_audit(&PayloadSlot::zeroed(), 0);
+            });
+            scope.spawn(|| {
+                assert_eq!(
+                    manifest.check_or_trigger_apoptosis(65),
+                    Err(POISON_SENTINEL)
+                );
+            });
+        });
+        assert_eq!(
+            manifest.publish_and_audit(&PayloadSlot::zeroed(), 0),
+            Err(POISON_SENTINEL)
+        );
+        assert_eq!(
+            manifest.read_snapshot(&mut PayloadSlot::zeroed()),
+            Err(POISON_SENTINEL)
+        );
     }
 }

@@ -1,6 +1,6 @@
 """Keep general CI on Linux and preserve deliberate native macOS coverage."""
 
-from fnmatch import fnmatchcase
+import importlib.util
 from pathlib import Path
 from typing import TypedDict, cast
 
@@ -101,20 +101,30 @@ def test_full_macos_certification_requires_a_release_or_explicit_opt_in() -> Non
         ("tests/test_response_signature.py", False),
     ],
 )
-def test_native_workflow_only_triggers_for_native_inputs(event: str, path: str, native_required: bool) -> None:
+def test_native_workflow_reports_a_context_for_every_main_change(event: str, path: str, native_required: bool) -> None:
     native = workflow("macos-native.yml")
     trigger = native["on"][event]
     assert trigger["branches"] == ["main"]
-    assert any(fnmatchcase(path, pattern) for pattern in trigger["paths"]) is native_required
+    assert "paths" not in trigger and "paths-ignore" not in trigger
+    spec = importlib.util.spec_from_file_location("native_ci_scope", ROOT / "scripts/guards/native_ci_scope.py")
+    assert spec and spec.loader
+    scope = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(scope)
+    assert scope.native_path(path) is native_required
 
 
 def test_native_job_checks_the_real_darwin_boundary_with_a_time_limit() -> None:
     native = workflow("macos-native.yml")
     job = native["jobs"]["seatbelt"]
+    assert job["name"] == "rust (macos-latest)"
+    assert job["needs"] == "native-inputs"
+    assert "needs.native-inputs.result != 'success'" in job["if"]
+    assert "needs.native-inputs.outputs.required != 'false'" in job["if"]
     assert job["runs-on"] == "macos-15"
     assert job["timeout-minutes"] == "20"
     assert native["concurrency"]["cancel-in-progress"] == "true"
-    assert any(step.get("uses") == "arduino/setup-protoc@v3" for step in job["steps"])
+    assert any(step.get("uses") == "arduino/setup-protoc@c65c819552d16ad3c9b72d9dfd5ba5237b9c906b"
+               for step in job["steps"])
     command = job["steps"][-1]["run"]
     assert "--locked" in command and "--exact" in command
     test_name = "test_omega_bypass_001_os_blocks_direct_agent_access_and_broker_executes_authorized"

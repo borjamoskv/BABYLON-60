@@ -1,5 +1,7 @@
 # Auditoría de cambios concurrentes en main — 30 de octubre de 2026
 
+> Alcance de la distribución pública: las referencias marcadas como material no distribuido identifican evidencia o herramientas excluidas deliberadamente de este checkout. Se conservan sus rutas y los resultados históricos; esos soportes no pueden verificarse desde esta distribución.
+
 Aceptación local de una captura acotada, sobre `2aef1202a019daa36b3985f8e957e846c2400671`. Se consolidan
 20 unidades funcionales, 22 fuentes productivas y sus regresiones en 33 rutas.
 Candidato de código: `065da849438170720d0fb2a4938cc194ffb78aad`. No se ejecutó push.
@@ -8,7 +10,7 @@ al contenido de los commits, no a ejecutar el árbol sucio completo.
 
 ## Evidencia y reproducción
 
-[Resumen, hashes, comandos y commits](evidence/concurrent-main-audit-20261030/summary.json).
+Resumen, hashes, comandos y commits (material no distribuido: `evidence/concurrent-main-audit-20261030/summary.json`).
 Cada unidad se aplicó incrementalmente en un checkout aislado y pasó sus pruebas,
 Ruff y MyPy cuando correspondían. El conjunto pasó **354 pruebas, sin fallos ni
 omisiones**, más cuatro fixtures del Worker JavaScript. MyPy pasó sobre 30 fuentes.

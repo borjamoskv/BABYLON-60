@@ -32,7 +32,7 @@ enum Commands {
         #[arg(short, long, default_value_t = 1_000_000)]
         iterations: u64,
     },
-    /// Genera la prueba formal en Lean 4 y la compila para verificación matemática absoluta
+    /// Verifica en Lean el bytecode HALT/NOOP de la fuente; rechaza operaciones no modeladas
     Prove {
         /// Ruta al archivo fuente .b60
         file: PathBuf,
@@ -167,49 +167,32 @@ fn main() {
             println!("==================================================================");
         }
         Commands::Prove { file } => {
-            println!("==================================================================");
-            println!("         B60 FORMAL PROOF EMITTER (LEAN 4 BACKEND)                ");
-            println!("==================================================================");
-            println!("  [+] Analizando script para verificación formal: {:?}", file);
-            let _source = match fs::read_to_string(&file) {
-                Ok(s) => s,
-                Err(e) => {
-                    eprintln!("  [!] Error leyendo archivo: {}", e);
-                    std::process::exit(1);
+            let result = (|| -> Result<(), String> {
+                let source = fs::read_to_string(&file).map_err(|e| format!("read source: {e}"))?;
+                let bytecode = B60Compiler::compile_source(&source)?;
+                let proof_path = file.with_extension("lean");
+                b60_lang::Lean4Emitter::write_bytecode_trace_proof(&bytecode, &proof_path)?;
+                // Pin the checker independently of cwd and the user's default toolchain.
+                const TOOLCHAIN: &str = include_str!("../../../proof/lean/lean-toolchain");
+                let status = std::process::Command::new("elan")
+                    .args(["run", TOOLCHAIN.trim(), "lean"])
+                    .arg(&proof_path)
+                    .status()
+                    .map_err(|e| format!("cannot execute pinned Lean verifier: {e}"))?;
+                if !status.success() {
+                    return Err(format!("Lean rejected the emitted proof ({status}); NOT VERIFIED"));
                 }
-            };
-
-            println!("  [+] Verificando contratibilidad de geodésica en Z60...");
-            let sample_phases = vec![15, 20, 25]; // Fases canónicas de convergencia
-            match b60_lang::homotopy::HomotopyVerifier::verify_path(&sample_phases) {
-                b60_lang::homotopy::HomotopyResult::ContractibleGeodesic { topological_winding, .. } => {
-                    println!("  [✓] Contratibilidad HoTT demostrada: Winding = {}, Residuo = 0", topological_winding);
-                }
-                _ => {
-                    eprintln!("  [!] Falla en verificación homotópica");
-                    std::process::exit(1);
-                }
-            }
-
-            println!("  [+] Emitiendo teorema formal en Lean 4...");
-            let lean_theorem = format!(
-                "-- Auto-generated formal proof by B60 Compiler for {:?}\n\
-                import Babylon\n\n\
-                namespace Babylon.GeneratedTrace\n\
-                theorem trace_exactness : (Babylon.add_tick60 (Babylon.Tick60.mk 0 4320000 (by decide)) (Babylon.Tick60.mk 0 8640000 (by decide))).sexa_fraction = 0 := by\n\
-                  decide\n\
-                end Babylon.GeneratedTrace\n",
-                file
-            );
-
-            let out_lean = file.with_extension("lean");
-            if let Err(e) = fs::write(&out_lean, &lean_theorem) {
-                eprintln!("  [!] Error escribiendo prueba Lean: {}", e);
+                println!("VERIFIED: compiled HALT/NOOP bytecode reaches HALT.");
+                println!("source_blake3={} bytecode_blake3={}",
+                    blake3::hash(source.as_bytes()), blake3::hash(&bytecode));
+                println!("proof={} checker={}", proof_path.display(), TOOLCHAIN.trim());
+                println!("Scope: compiled HALT/NOOP control flow; compiler correctness and the full ISA are not certified.");
+                Ok(())
+            })();
+            if let Err(error) = result {
+                eprintln!("NOT VERIFIED: {error}");
                 std::process::exit(1);
             }
-            println!("  [+] Archivo Lean generado: {:?}", out_lean);
-            println!("  [✓] TEOREMA FORMAL CONSTRUIDO Y COMPILADO EXITOSAMENTE");
-            println!("==================================================================");
         }
         Commands::Transduce { agent_id, tool, reasoning_len, payload_len, budget } => {
             println!("==================================================================");

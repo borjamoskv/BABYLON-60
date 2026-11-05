@@ -33,6 +33,8 @@ COPY 00_ABZU_KERNEL ./00_ABZU_KERNEL
 COPY 01_KISH_ENGINE ./01_KISH_ENGINE
 COPY 02_EDIN_SWARMS ./02_EDIN_SWARMS
 COPY README.md LICENSE ./
+COPY docs/skills.json docs/skills-lock.json ./docs/
+COPY .agents/skills ./.agents/skills
 
 RUN uv venv \
     && uv pip install maturin cffi setuptools \

@@ -1,5 +1,7 @@
 # Recuperación con evidencia durable
 
+> Alcance de la distribución pública: las referencias marcadas como material no distribuido identifican evidencia o herramientas excluidas deliberadamente de este checkout. Se conservan sus rutas y los resultados históricos; esos soportes no pueden verificarse desde esta distribución.
+
 26 de octubre de 2026. Se corrigen los dos caminos de confirmación sin evidencia
 identificados en la [auditoría inicial](experimental-audit-plan-2026-10-26.md).
 La recuperación conserva la incertidumbre cuando falta una intención durable
@@ -96,7 +98,7 @@ migración explícita.
 
 No se ha ejecutado la campaña comparativa completa A/B/C de 5.000 casos,
 compactación de contexto ni aislamiento de procedencia entre sesiones. La
-[sonda original](evidence/recovery-audit-2026-10-26.rs) conserva las aserciones
+sonda original (material no distribuido: `evidence/recovery-audit-2026-10-26.rs`) conserva las aserciones
 del contraejemplo histórico: con el código corregido deja de reproducirlo y
 falla intencionadamente. Las regresiones de aceptación vigentes son las once
 pruebas enlazadas arriba.

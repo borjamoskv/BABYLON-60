@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import ast
 from dataclasses import dataclass
+import json
 from pathlib import Path
 import re
 import sys
@@ -20,6 +21,31 @@ if __package__:
     from .governance_documents import GOVERNANCE_DOCUMENTS, validate_local_links
 else:
     from governance_documents import GOVERNANCE_DOCUMENTS, validate_local_links
+
+
+PUBLIC_PROFILE_MARKER = ".babylon60-public-projection.json"
+PUBLIC_PROFILE = {
+    "schema": "babylon60.public-projection.v1",
+    "profile": "public",
+    "omitted_scopes": [".agents/rules"],
+}
+
+
+def select_profile(root: Path, requested: str | None) -> str:
+    """A public omission requires the exact, explicit projection declaration."""
+    marker = root / PUBLIC_PROFILE_MARKER
+    if marker.is_symlink():
+        raise ValueError(f"Projection declaration must be a regular file: {marker}")
+    if not marker.exists():
+        if requested == "public":
+            raise ValueError(f"Public profile requires projection declaration: {marker}")
+        return "full"
+    if not marker.is_file():
+        raise ValueError(f"Projection declaration must be a regular file: {marker}")
+    declaration = json.loads(marker.read_text(encoding="utf-8"))
+    if declaration != PUBLIC_PROFILE:
+        raise ValueError(f"Unsupported public projection declaration: {marker}")
+    return requested or "public"
 
 
 @dataclass(frozen=True)
@@ -250,14 +276,31 @@ def main() -> int:
         help="Additional skills roots; repeat to scan multiple libraries (must exist)",
     )
     parser.add_argument("--workspace-only", action="store_true", help="Explicitly omit the default Antigravity library")
+    parser.add_argument(
+        "--profile", choices=("full", "public"),
+        help="Full requires workspace rules; public requires the explicit projection declaration",
+    )
     args = parser.parse_args()
     root = args.repo_root
     rules, skills = root / ".agents/rules", root / ".agents/skills"
     gates = root / "scripts/c5_quality_gates"
-    for directory in (rules, skills, gates):
+    try:
+        profile = select_profile(root, args.profile)
+    except (OSError, UnicodeError, ValueError) as exc:
+        print(f"NO_VERIFICADO: {exc}", file=sys.stderr)
+        return 2
+    print(f"Profile: {profile}")
+    required = (rules, skills, gates) if profile == "full" else (skills, gates)
+    for directory in required:
         if not directory.is_dir():
             print(f"NO_VERIFICADO: missing scope: {directory}", file=sys.stderr)
             return 2
+    if profile == "public":
+        if rules.exists() and not rules.is_dir():
+            print(f"NO_VERIFICADO: invalid rules scope: {rules}", file=sys.stderr)
+            return 2
+        if not rules.is_dir():
+            print(f"NOT_CHECKED: .agents/rules omitted by {PUBLIC_PROFILE_MARKER}; other scopes remain required")
     try:
         governance = [root / name for name in GOVERNANCE_DOCUMENTS] + sorted(rules.glob("*.md"))
         markdown = governance + list(iter_skill_markdown_files([skills]))

@@ -8,24 +8,24 @@ from __future__ import annotations
 
 import argparse
 import os
+import sqlite3
 import sys
 from io import TextIOWrapper
+from contextlib import closing
 from pathlib import Path
-
-VERSION = "5.1.0"
-BABYLON_BASE_PATH = Path(os.getenv("BABYLON_HOME", str(Path.home() / ".babylon60")))
-DEFAULT_CAUSAL_GATE_PATH = Path(
-    os.getenv(
-        "BABYLON_CAUSAL_GATE_DB",
-        str(Path(__file__).resolve().parents[3] / ".cortex" / "causal_gate.db"),
-    )
-)
-DEFAULT_LEDGER_PATH = BABYLON_BASE_PATH / "mcp_ledger.db"
 
 # Bootstrap import path when run from repository checkout
 _pkg_root = Path(__file__).resolve().parent.parent.parent
 if str(_pkg_root) not in sys.path:
     sys.path.insert(0, str(_pkg_root))
+
+from babylon60.state_paths import causal_gate_path, state_home  # noqa: E402
+
+VERSION = "5.1.0"
+# Fallbacks are import-safe; commands resolve the active environment after parsing.
+BABYLON_BASE_PATH = Path.home() / ".babylon60"
+DEFAULT_CAUSAL_GATE_PATH = BABYLON_BASE_PATH / "causal_gate.db"
+DEFAULT_LEDGER_PATH = BABYLON_BASE_PATH / "mcp_ledger.db"
 
 
 def cmd_status(args: argparse.Namespace) -> int:
@@ -34,18 +34,40 @@ def cmd_status(args: argparse.Namespace) -> int:
     print(f"BABYLON-60 Sovereign Trust Kernel v{VERSION}")
     print("Root Axiom: AX-0 (proposer != authorizer)")
     print("=" * 60)
-    print(f"Base Directory: {BABYLON_BASE_PATH}")
+    try:
+        base_path = state_home()
+        gate_path = causal_gate_path(getattr(args, "db", None))
+    except ValueError as exc:
+        print(f"Gate Integrity: NO_VERIFICADO ({exc})", file=sys.stderr)
+        return 1
+    print(f"Base Directory: {base_path}")
     print(
-        f"Causal Gate DB: {DEFAULT_CAUSAL_GATE_PATH} ({'EXISTS' if DEFAULT_CAUSAL_GATE_PATH.exists() else 'NOT FOUND'})"
+        f"Causal Gate DB: {gate_path} ({'EXISTS' if gate_path.exists() else 'NOT FOUND'})"
     )
-    print(f"BFT Ledger DB:  {DEFAULT_LEDGER_PATH} ({'EXISTS' if DEFAULT_LEDGER_PATH.exists() else 'NOT FOUND'})")
+    ledger_path = base_path / "mcp_ledger.db"
+    print(f"BFT Ledger DB:  {ledger_path} ({'EXISTS' if ledger_path.exists() else 'NOT FOUND'})")
+    if not gate_path.is_file():
+        print("Gate Integrity: NO_VERIFICADO (authorization ledger not initialized)")
+        return 1
 
     from babylon60.verification.verification_gate import VerificationGate
 
-    gate = VerificationGate(db_path=str(DEFAULT_CAUSAL_GATE_PATH))
-    integrity = gate.verify_ledger_integrity()
-    print(f"Gate Integrity: {'🟢 OK (Chain Verified)' if integrity else '🔴 CORRUPT / EMPTY'}")
-    return 0
+    try:
+        with closing(sqlite3.connect(f"{gate_path.as_uri()}?mode=ro", uri=True)) as connection:
+            count = connection.execute("SELECT COUNT(*) FROM audit_ledger").fetchone()[0]
+        if not count:
+            print("Gate Integrity: NO_VERIFICADO (no recorded authorization evidence)")
+            return 1
+        gate = VerificationGate(db_path=str(gate_path))
+        try:
+            integrity = gate.verify_ledger_integrity()
+        finally:
+            gate._conn.close()
+    except sqlite3.Error as exc:
+        print(f"Gate Integrity: NO_VERIFICADO ({exc})", file=sys.stderr)
+        return 1
+    print(f"Gate Integrity: {'🟢 OK (Chain Verified)' if integrity else '🔴 CORRUPT'}")
+    return 0 if integrity else 1
 
 
 def cmd_approve(args: argparse.Namespace) -> int:
@@ -54,7 +76,11 @@ def cmd_approve(args: argparse.Namespace) -> int:
 
     import json
 
-    gate_path = Path(args.db) if args.db else DEFAULT_CAUSAL_GATE_PATH
+    try:
+        gate_path = causal_gate_path(args.db)
+    except ValueError as exc:
+        print(f"Authorization denied: {exc}", file=sys.stderr)
+        return 1
     if args.decision == "REJECTED":
         gate_path.parent.mkdir(parents=True, exist_ok=True)
         gate = VerificationGate(db_path=str(gate_path))
@@ -88,7 +114,14 @@ def cmd_verify(args: argparse.Namespace) -> int:
     """Verify causal gate and BFT ledger integrity."""
     from babylon60.verification.verification_gate import VerificationGate
 
-    gate_path = Path(args.db) if args.db else DEFAULT_CAUSAL_GATE_PATH
+    try:
+        gate_path = causal_gate_path(args.db)
+    except ValueError as exc:
+        print(f"Verification unavailable: {exc}", file=sys.stderr)
+        return 1
+    if not gate_path.is_file():
+        print(f"Authorization ledger not initialized: {gate_path}", file=sys.stderr)
+        return 1
     gate = VerificationGate(db_path=str(gate_path))
     ok = gate.verify_ledger_integrity()
     if ok:
@@ -103,7 +136,10 @@ def cmd_compliance(args: argparse.Namespace) -> int:
     """Delegate to EU AI Act Compliance Exporter."""
     from babylon60.compliance_exporter.eu_ai_act import main_cli as compliance_main
 
-    sys.argv = [sys.argv[0]] + (args.compliance_args or [])
+    forwarded = args.compliance_args or []
+    if forwarded[:1] == ["--"]:
+        forwarded = forwarded[1:]
+    sys.argv = [sys.argv[0]] + forwarded
     return int(compliance_main() or 0)
 
 
@@ -441,6 +477,8 @@ def cmd_skills(args: argparse.Namespace) -> int:
         best_score = 0.0
         for s in loaded_skills.values():
             if scope_filter != "all" and s["scope"] != scope_filter:
+                continue
+            if role_filter != "all" and s["role"] != role_filter:
                 continue
             score = 0.0
             if q_norm in {str(s["name"]).lower(), str(s["canonical_alias"]).lower()}:
@@ -991,6 +1029,9 @@ def main() -> None:
         for stream in (sys.stdout, sys.stderr):
             if isinstance(stream, TextIOWrapper):
                 stream.reconfigure(encoding="utf-8")
+    # The exporter owns its options and validation, including its help output.
+    if sys.argv[1:2] == ["compliance"]:
+        sys.exit(cmd_compliance(argparse.Namespace(compliance_args=sys.argv[2:])))
     parser = argparse.ArgumentParser(
         prog="babylon60",
         description=f"BABYLON-60 Sovereign Trust Kernel v{VERSION} (C5-REAL)",
@@ -1049,6 +1090,7 @@ def main() -> None:
 
     # status
     p_status = subparsers.add_parser("status", help="Inspect kernel and ledger status")
+    p_status.add_argument("--db", default=None, help="Path to authoritative causal gate database")
     p_status.set_defaults(func=cmd_status)
 
     # approve

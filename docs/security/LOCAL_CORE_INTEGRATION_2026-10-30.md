@@ -1,5 +1,7 @@
 # BABYLON-60/Cortex: cierre local — 30/10/2026
 
+> Alcance de la distribución pública: las referencias marcadas como material no distribuido identifican evidencia o herramientas excluidas deliberadamente de este checkout. Se conservan sus rutas y los resultados históricos; esos soportes no pueden verificarse desde esta distribución.
+
 Estado: **aceptación local aprobada, incluida la prueba hardware**.
 El candidato ejecutado fue `b9640a52ca031d1978232255d31e69efb011f9b9`.
 El commit posterior de evidencia solo añade documentación y resultados; no cambia
@@ -15,7 +17,7 @@ aprobación, un evento tras ejecución, persistencia tras reiniciar y replay
 rechazado. Una comprobación separada con la tarea original confirmó que el consumo
 persistido impide volver a ejecutar, independientemente del cambio de sesión MCP.
 
-El [verificador independiente](evidence/local-core-20261030/review/hardware-final-review.json)
+El verificador independiente (material no distribuido: `evidence/local-core-20261030/review/hardware-final-review.json`)
 aprobó firma, operador, bytes almacenados, efecto y consumo: **una aprobación,
 un evento, un consumo y un intento biométrico**. Hash causal SHA-256:
 `14a9dcf83236795386c679ead54f1b3e4fda32f66650c877bd267908e557274e`.
@@ -31,7 +33,7 @@ externamente a `71a4d56a059f5709882e6ee628f2bc890ad4f18a`; ninguna de las 1048
 rutas capturadas perdió o cambió sus bytes durante nuestra comprobación final.
 Contenido, tipo y modo fueron contrastados; ACL/xattrs no se han certificado.
 
-La [partición revisada](evidence/local-core-20261030/partition-review.json)
+La partición revisada (material no distribuido: `evidence/local-core-20261030/partition-review.json`)
 seleccionó 29 archivos en ocho commits y preservó otros 1019 fuera del hito.
 Se separó `work_run_checks`, perteneciente a Babylon Work. Las correcciones de
 llm_attest permanecen con sus pruebas fuera de este recorrido.
@@ -47,8 +49,8 @@ llm_attest permanecen con sus pruebas fuera de este recorrido.
 
 Los especialistas partieron del commit común `eb28fa97bb0440d59878b955222aa0617a1c236b`
 en worktrees aislados, después de aprobar la partición. La
-[secuencia de consolidación](evidence/local-core-20261030/consolidation.json) y los
-[hashes importados](evidence/local-core-20261030/imported.json) permiten reconstruirla.
+secuencia de consolidación (material no distribuido: `evidence/local-core-20261030/consolidation.json`) y los
+hashes importados (material no distribuido: `evidence/local-core-20261030/imported.json`) permiten reconstruirla.
 
 ## Cambios adicionales verificados
 
@@ -68,28 +70,28 @@ en worktrees aislados, después de aprobar la partición. La
 
 | Ámbito | Evidencia y resultado |
 | --- | --- |
-| Candidato integrado independiente | [135 PASS, 0 fallos, 0 skips](evidence/local-core-20261030/review/final-native-run/report.json); 27 casos nativos obligatorios ejecutados. Un test de otro servidor MCP Rust fue excluido explícitamente. |
-| Recuperación Rust | [77 pruebas](evidence/local-core-20261030/ring0/run-summary.json); 15 de enclave/COSE adicionales y check/build con features Python. |
-| Persistencia | [210 pruebas](evidence/local-core-20261030/ring2/manifest.json); bases temporales y variantes de fallo/rollback/recuperación. |
-| Lean real | [Tres modelos y harness](evidence/local-core-20261030/ring1/status.json); prueba ignorada por defecto ejecutada expresamente y ambas CLI con nominal/negativo. |
-| Onboarding | [29 pruebas](evidence/local-core-20261030/integration/onboarding-final.json): instalación aislada, idempotencia y retirada conservan preferencias ajenas. |
-| Calidad | [Ruff y MyPy](evidence/local-core-20261030/integration/final-quality.json) correctos; diez fuentes comprobadas por tipos. Semántica, presupuesto y topología locales correctos. |
-| Hardware | [Recibo](evidence/local-core-20261030/hardware-final/hardware-receipt.json), [proof exacto](evidence/local-core-20261030/hardware-final/signed-proof.json) y [aceptación independiente](evidence/local-core-20261030/review/hardware-final-review.json). |
+| Candidato integrado independiente | 135 PASS, 0 fallos, 0 skips (material no distribuido: `evidence/local-core-20261030/review/final-native-run/report.json`); 27 casos nativos obligatorios ejecutados. Un test de otro servidor MCP Rust fue excluido explícitamente. |
+| Recuperación Rust | 77 pruebas (material no distribuido: `evidence/local-core-20261030/ring0/run-summary.json`); 15 de enclave/COSE adicionales y check/build con features Python. |
+| Persistencia | 210 pruebas (material no distribuido: `evidence/local-core-20261030/ring2/manifest.json`); bases temporales y variantes de fallo/rollback/recuperación. |
+| Lean real | Tres modelos y harness (material no distribuido: `evidence/local-core-20261030/ring1/status.json`); prueba ignorada por defecto ejecutada expresamente y ambas CLI con nominal/negativo. |
+| Onboarding | 29 pruebas (material no distribuido: `evidence/local-core-20261030/integration/onboarding-final.json`): instalación aislada, idempotencia y retirada conservan preferencias ajenas. |
+| Calidad | Ruff y MyPy (material no distribuido: `evidence/local-core-20261030/integration/final-quality.json`) correctos; diez fuentes comprobadas por tipos. Semántica, presupuesto y topología locales correctos. |
+| Hardware | Recibo (material no distribuido: `evidence/local-core-20261030/hardware-final/hardware-receipt.json`), proof exacto (material no distribuido: `evidence/local-core-20261030/hardware-final/signed-proof.json`) y aceptación independiente (material no distribuido: `evidence/local-core-20261030/review/hardware-final-review.json`). |
 
 Los conteos de suites se solapan y no se suman. Todos los
-[criterios fijados](evidence/local-core-20261030/criteria.json) tienen evidencia.
-Los [hashes del gate y biblioteca](evidence/local-core-20261030/candidate-b9640a52ca/artifacts.json)
+criterios fijados (material no distribuido: `evidence/local-core-20261030/criteria.json`) tienen evidencia.
+Los hashes del gate y biblioteca (material no distribuido: `evidence/local-core-20261030/candidate-b9640a52ca/artifacts.json`)
 permanecieron intactos durante las pruebas. Los procesos Python, incluidos los
 hijos con `-I`, importaron desde el worktree candidato.
 
 ## Reproducción y límites
 
 Los comandos exactos, toolchains y resultados quedan en los manifiestos enlazados.
-El [lanzamiento hardware registrado](evidence/local-core-20261030/hardware-launch.json)
+El lanzamiento hardware registrado (material no distribuido: `evidence/local-core-20261030/hardware-launch.json`)
 es evidencia del único intento realizado; no es una instrucción de reintento.
 Las bases SQLite, WAL y binarios se conservan fuera de Git en la ubicación del
-[registro de retención](evidence/local-core-20261030/retention.json). No se copió
-material privado de la clave. El [comprobador independiente](evidence/local-core-20261030/review/independent_evidence_check.py)
+registro de retención (material no distribuido: `evidence/local-core-20261030/retention.json`). No se copió
+material privado de la clave. El comprobador independiente (material no distribuido: `evidence/local-core-20261030/review/independent_evidence_check.py`)
 permite revisar el proof y las bases conservadas sin invocar biometría.
 
 La aceptación cubre este recorrido local en este host y candidato. No constituye

@@ -36,7 +36,7 @@ fn response(key: &SigningKey, data: &[u8]) -> Vec<u8> {
     serde_json::to_vec(&serde_json::json!({
         "status": "ATTESTED", "causal_hash": causal_hash(data),
         "test_source": "SOFTWARE_ONLY",
-        "public_key": Base64::encode_string(key.verifying_key().to_encoded_point(false).as_bytes()),
+        "public_key": Base64::encode_string(key.verifying_key().to_sec1_point(false).as_bytes()),
         "secure_enclave_signature": Base64::encode_string(signature.to_der().as_bytes()),
     }))
     .unwrap()
@@ -65,7 +65,7 @@ fn raw_payload_cose_roundtrip_accepts_sec1_and_spki_pins() {
     let key = key();
     for pin in [
         key.verifying_key()
-            .to_encoded_point(false)
+            .to_sec1_point(false)
             .as_bytes()
             .to_vec(),
         key.verifying_key()
@@ -88,7 +88,7 @@ fn status_hash_and_signature_are_bound_to_the_requested_bytes() {
     let key = key();
     let pin = key
         .verifying_key()
-        .to_encoded_point(false)
+        .to_sec1_point(false)
         .as_bytes()
         .to_vec();
     let data = b"software contract";
@@ -161,7 +161,7 @@ fn swift_response_round_trips_through_rust_cose() {
     let key = key();
     let mut signer = enclave(
         key.verifying_key()
-            .to_encoded_point(false)
+            .to_sec1_point(false)
             .as_bytes()
             .to_vec(),
     );

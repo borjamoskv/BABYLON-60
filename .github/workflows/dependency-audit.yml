@@ -1,4 +1,4 @@
-name: Rust Dependency Security
+name: Dependency Security
 on:
   push:
     branches: [main]
@@ -13,6 +13,38 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 jobs:
+  python-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78
+        with:
+          version: '0.13.5'
+          checksum: f68d291c75783122dad58ab77def0e13f3233f358731db5d6d7e8715603b928f
+      - name: Audit locked Python extras and groups across supported targets
+        shell: bash
+        run: |
+          uv lock --check
+          mkdir -p "$RUNNER_TEMP/python-audit"
+          status=0
+          # uv audit includes every extra and dependency group without installing them.
+          for platform in linux macos windows; do
+            for version in 3.11 3.12 3.13 3.14; do
+              uv audit --locked --python-platform "$platform" --python-version "$version" \
+                --output-format json > "$RUNNER_TEMP/python-audit/$platform-$version.json" || status=1
+            done
+          done
+          exit "$status"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always()
+        with:
+          name: python-security-reports
+          path: ${{ runner.temp }}/python-audit/
+          if-no-files-found: error
+
   audit:
     runs-on: ubuntu-latest
     timeout-minutes: 15

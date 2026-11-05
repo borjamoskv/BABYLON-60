@@ -503,7 +503,8 @@ impl Default for P256Signer {
 impl P256Signer {
     /// Genera un nuevo firmante P-256 efímero aleatorio para pruebas locales.
     pub fn new() -> Self {
-        let signing_key = p256::ecdsa::SigningKey::random(&mut rand::rngs::OsRng);
+        use p256::elliptic_curve::Generate;
+        let signing_key = p256::ecdsa::SigningKey::generate();
         let verifying_key = *signing_key.verifying_key();
         Self { signing_key, verifying_key }
     }
@@ -601,6 +602,21 @@ mod tests {
         assert_eq!(summary.epoch, 100);
         assert_eq!(summary.timestamp, 1774300000);
         assert_eq!(summary.motivo, "HASH_MISMATCH");
+    }
+
+    #[test]
+    fn test_receipt_p256_sign_verify_and_reject_tampering() {
+        let signer = P256Signer::new();
+        let manifest = SharedManifest::new();
+        let mut receipt = emit_halt_receipt_with_timestamp(
+            &manifest, HaltReason::HashMismatch, &signer, 1774300000,
+        ).expect("P-256 receipt must sign");
+        verify_and_parse_halt_receipt(&receipt, &signer).expect("P-256 receipt must verify");
+
+        let last = receipt.len() - 1;
+        receipt[last] ^= 0xFF;
+        assert_eq!(verify_and_parse_halt_receipt(&receipt, &signer), Err(ReceiptError::InvalidSignature));
+        assert!(!signer.verify(b"message", b"malformed-signature"));
     }
 
     #[test]

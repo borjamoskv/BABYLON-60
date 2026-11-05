@@ -1,5 +1,7 @@
 # Lote 4 ejecutado: integridad de bundles — 28/10/2026
 
+> Alcance de la distribución pública: las referencias marcadas como material no distribuido identifican evidencia o herramientas excluidas deliberadamente de este checkout. Se conservan sus rutas y los resultados históricos; esos soportes no pueden verificarse desde esta distribución.
+
 Resultado: C0061, C0083, C0086 y C0087 pasan a FIXED. También C0060 y C0088,
 colaterales reproducidos en las mismas tres fuentes. Se preservan los materiales
 históricos firmados; el código del verificador v1 era una de las fuentes
@@ -7,17 +9,17 @@ autorizadas. El verificador histórico v2 permanece intacto y C0135/C0136 OPEN.
 
 ## Evidencia
 
-Las [13 reproducciones previas](evidence/swarm100-lot4-20261028/before-tests.log)
-fallaron contra los [hashes aprobados](evidence/swarm100-lot4-20261028/before-source-manifest.json).
+Las 13 reproducciones previas (material no distribuido: `evidence/swarm100-lot4-20261028/before-tests.log`)
+fallaron contra los hashes aprobados (material no distribuido: `evidence/swarm100-lot4-20261028/before-source-manifest.json`).
 Los generadores originales se ejecutaron únicamente copiados a roots temporales,
 con Git inerte, plataforma sintética y claves de software de fixture. No se
 importaron sus efectos sobre el repositorio real ni se consultaron claves reales.
 
-La [validación final](evidence/swarm100-lot4-20261028/validation.json) contiene
+La validación final (material no distribuido: `evidence/swarm100-lot4-20261028/validation.json`) contiene
 comandos, logs y hashes antes/después: **496 pruebas aprobadas, 1 omitida**;
 **88 regresiones nuevas**. La omitida requiere strike_rs compilado. Pasan Ruff,
 MyPy con check-untyped-defs y análisis sintáctico de las tres fuentes. La
-[revisión independiente](evidence/swarm100-lot4-20261028/independent-review.json)
+revisión independiente (material no distribuido: `evidence/swarm100-lot4-20261028/independent-review.json`)
 confirma las 88 regresiones, 11 controles propios y los hashes finales.
 
 | ID | Corrección ejecutable |
@@ -76,7 +78,7 @@ Las firmas históricas no se reinterpretan como firmas de este contrato nuevo.
 - Los controles usan descriptores y verificaciones de identidad. No se certifica
   un snapshot transaccional de un worktree vivo, atomicidad frente a SIGKILL o
   aislamiento frente a otro escritor con el mismo UID.
-- Los [hashes históricos](evidence/swarm100-lot4-20261028/historical-components-before.json),
+- Los hashes históricos (material no distribuido: `evidence/swarm100-lot4-20261028/historical-components-before.json`),
   el verificador v2, dependencias/lockfiles y la fuente del Lote 5 se comprobaron
   intactos. Configuración y telemetría global no inspeccionadas.
 - C0135/C0136 siguen OPEN/P2 en la copia histórica v2. Se refrescó la referencia

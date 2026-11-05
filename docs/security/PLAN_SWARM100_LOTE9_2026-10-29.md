@@ -1,11 +1,13 @@
 # Lote 9 propuesto: Git del monitor de estado — 29/10/2026
 
+> Alcance de la distribución pública: las referencias marcadas como material no distribuido identifican evidencia o herramientas excluidas deliberadamente de este checkout. Se conservan sus rutas y los resultados históricos; esos soportes no pueden verificarse desde esta distribución.
+
 Estado: ejecutado por instrucción del operador; véase el
 [informe de cierre](REMEDIATION_SWARM100_LOTE9_2026-10-29.md).
 La planificación inicial seleccionó un P1 CONFIRMED_STATIC/OPEN:
 C0438, en la única fuente productiva prevista
 `scripts/c5_thermo/c5_exergy_optimizer_monitor.py`. La
-[selección con hash](evidence/swarm100-lot8-20261029/lot9-selection.json)
+selección con hash (material no distribuido: `evidence/swarm100-lot8-20261029/lot9-selection.json`)
 conserva evidencia estática y versión anterior a cualquier futuro parche.
 No quedan P1 OPEN previamente reproducidos; este lote continúa la familia de
 commits que incluyen trabajo ajeno y omiten controles.

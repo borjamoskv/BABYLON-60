@@ -155,6 +155,37 @@ def test_dry_run_has_no_managed_writes_or_cli_mutations(client: tuple[Path, Path
     assert all(call[1] == "get" for call in _calls(home))
 
 
+def test_setup_records_same_explicit_gate_as_cli(
+    client: tuple[Path, Path], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    from babylon60.state_paths import causal_gate_path
+
+    home, data = client
+    chosen = data.parent / "existing authority" / "gate.db"
+    monkeypatch.setenv("BABYLON_CAUSAL_GATE_DB", str(chosen))
+    assert onboarding.setup_codex()["ok"] is True
+    transport = _object(_servers(home)["babylon60"]["transport"])
+    assert _object(transport["env"])["BABYLON_CAUSAL_GATE_DB"] == str(causal_gate_path()) == str(chosen)
+    assert not chosen.exists()
+
+
+def test_remove_integration_preserves_legacy_gate_without_selecting_it(
+    client: tuple[Path, Path], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    from babylon60 import state_paths
+
+    home, data = client
+    assert onboarding.setup_codex()["ok"] is True
+    legacy = data.parent / "legacy" / "causal_gate.db"
+    legacy.parent.mkdir()
+    legacy.write_bytes(b"legacy-must-not-change")
+    monkeypatch.setattr(state_paths, "legacy_causal_gate_path", lambda: legacy)
+    assert onboarding.setup_codex(remove=True, dry_run=True)["status"] == "dry_run"
+    assert onboarding.setup_codex(remove=True)["status"] == "removed"
+    assert _servers(home) == {"foreign": {"untouched": True}}
+    assert legacy.read_bytes() == b"legacy-must-not-change"
+
+
 def test_new_codex_home_can_be_previewed_then_initialized(client: tuple[Path, Path]) -> None:
     home, data = client
     home.rmdir()

@@ -1,16 +1,18 @@
 # Lote 9 ejecutado: Git del monitor de estado — 29/10/2026
 
+> Alcance de la distribución pública: las referencias marcadas como material no distribuido identifican evidencia o herramientas excluidas deliberadamente de este checkout. Se conservan sus rutas y los resultados históricos; esos soportes no pueden verificarse desde esta distribución.
+
 C0438 pasa a FIXED para la inclusión de trabajo ajeno, omisión de controles y
 falso éxito de las operaciones Git del monitor. La única fuente productiva
 editada es `scripts/c5_thermo/c5_exergy_optimizer_monitor.py`. El
-[registro reconciliado](evidence/swarm100-round3-20261028/registry.json)
-y la [validación final](evidence/swarm100-lot9-20261029/validation.json)
+registro reconciliado (material no distribuido: `evidence/swarm100-round3-20261028/registry.json`)
+y la validación final (material no distribuido: `evidence/swarm100-lot9-20261029/validation.json`)
 conservan estados, comandos, hashes y límites.
 
 ## Reproducción y aceptación
 
-Las [ocho reproducciones previas](evidence/swarm100-lot9-20261029/before-tests.log)
-fallaron contra el [hash del plan](evidence/swarm100-lot9-20261029/before-source-manifest.json):
+Las ocho reproducciones previas (material no distribuido: `evidence/swarm100-lot9-20261029/before-tests.log`)
+fallaron contra el hash del plan (material no distribuido: `evidence/swarm100-lot9-20261029/before-source-manifest.json`):
 error de Git convertido en salida vacía, configuración de firma omitida,
 índice preparado consumido, ruta obsoleta que ocultaba un commit fallido,
 hook omitido, COMPLETE tras rechazo, doble commit con reemplazo histórico y
@@ -22,7 +24,7 @@ con el módulo bloqueado antes de recoger los tests. Pasan MyPy con
 check-untyped-defs, Ruff y los controles documentales. Fuente y tests conservan
 los mismos hashes antes/después de la ejecución.
 
-La [revisión independiente](evidence/swarm100-lot9-20261029/independent-review.json)
+La revisión independiente (material no distribuido: `evidence/swarm100-lot9-20261029/independent-review.json`)
 aprueba **10 controles en 15 repositorios temporales**, repite las 47 regresiones
 y Ruff y no deja hallazgos accionables abiertos dentro de C0438. Verifica firma
 configurada mediante caller, tres hooks rechazados sin reintento, preflight
@@ -61,7 +63,7 @@ presentar el HEAD existente como un commit nuevo. Los fallos se propagan.
 Se probaron rutas con espacios, contenido binario, un worktree vinculado,
 intercalaciones de índice/HEAD y warmup más cuatro commits secuenciales. Estos
 casos comprueban comportamiento, no rendimiento o aislamiento físico. El
-[control AST y de alcance](evidence/swarm100-lot9-20261029/scope-check.json)
+control AST y de alcance (material no distribuido: `evidence/swarm100-lot9-20261029/scope-check.json`)
 confirma intactas las funciones de censo, métricas, cálculo SHA3 y append, y las
 fases de auditoría del caller. Los lotes 7/8, dependencias y lockfiles conservan
 sus hashes.
