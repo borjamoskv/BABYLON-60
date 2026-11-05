@@ -12,7 +12,6 @@ Authorship: Telmo Dinámico de Moskv (borjamoskv)
 import asyncio
 from collections.abc import Iterator
 import json
-import os
 from pathlib import Path
 import sqlite3
 import sys
@@ -26,12 +25,11 @@ from babylon60.mcp.skills_snapshot import GATEWAY_EXPECTED_AUDIENCE, derive_v31_
 
 
 @pytest.fixture
-def mcp_runtime_directory(monkeypatch: pytest.MonkeyPatch) -> Iterator[Path]:
-    # Keep Unix socket names below the OS limit even when pytest's base is long.
-    with tempfile.TemporaryDirectory(prefix="mcp-", dir="/tmp" if os.name == "posix" else None) as directory:
-        runtime = Path(os.path.realpath(directory))
-        monkeypatch.setattr(tempfile, "tempdir", str(runtime))
-        yield runtime
+def mcp_runtime_directory(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Iterator[Path]:
+    runtime = tmp_path / "mcp-runtime"
+    runtime.mkdir()
+    monkeypatch.setattr(tempfile, "tempdir", str(runtime))
+    yield runtime
 
 
 def test_mcp_initialize(tmp_path: Path) -> None:
