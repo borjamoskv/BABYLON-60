@@ -7,15 +7,16 @@
   "scripts": {
     "start": "remotion studio src/index.ts",
     "build": "remotion render src/index.ts BabylonMasterclass out/video.mp4",
-    "upgrade": "remotion upgrade"
+    "upgrade": "remotion upgrade",
+    "test:security": "node --test test/dependency-security.test.cjs"
   },
   "dependencies": {
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "remotion": "^4.0.523"
+    "remotion": "^4.0.540"
   },
   "devDependencies": {
-    "@remotion/cli": "^4.0.523",
+    "@remotion/cli": "^4.0.540",
     "@types/react": "^18.0.0",
     "typescript": "^5.0.0"
   }
