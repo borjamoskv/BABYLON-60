@@ -1,0 +1,44 @@
+{
+  "swarm_name": "SHARUR-3600 (Legi\u00f3n-100)",
+  "working_set_active": 100,
+  "cohorts": 5,
+  "total_duration_ms": 1.26,
+  "global_mean_exergy": 20206.0,
+  "cohort_stats": {
+    "1": {
+      "name": "Ring-0 / Silicio & VideoToolbox Hardware Pipeline",
+      "agents_count": 20,
+      "mean_exergy": 20149.0,
+      "cambio_2_count": 13,
+      "falsacion_count": 7
+    },
+    "2": {
+      "name": "L\u00f3gica Formal, SMT & Verificaci\u00f3n Lean 4",
+      "agents_count": 20,
+      "mean_exergy": 20206.5,
+      "cambio_2_count": 13,
+      "falsacion_count": 7
+    },
+    "3": {
+      "name": "Soberan\u00eda Ling\u00fc\u00edstica, Entrop\u00eda Shannon & M\u00e9trica de Chentsov",
+      "agents_count": 20,
+      "mean_exergy": 20191.5,
+      "cambio_2_count": 14,
+      "falsacion_count": 6
+    },
+    "4": {
+      "name": "Topolog\u00eda MASS, Asignaci\u00f3n Facial D\u00eddac->Mitxu / Coto->Alain",
+      "agents_count": 20,
+      "mean_exergy": 20249.0,
+      "cambio_2_count": 13,
+      "falsacion_count": 7
+    },
+    "5": {
+      "name": "Per\u00edmetros, Atestaci\u00f3n SCITT COSE_Sign1 & Apoptosis Gate",
+      "agents_count": 20,
+      "mean_exergy": 20234.0,
+      "cambio_2_count": 13,
+      "falsacion_count": 7
+    }
+  }
+}

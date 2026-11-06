@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Política de Seguridad y Divulgación de Vulnerabilidades
+    url: https://github.com/borjamoskv/BABYLON-60/blob/main/SECURITY.md
+    about: Reporte confidencial de vulnerabilidades criptográficas, de memoria o de contención Ring-0.
+  - name: Contratos Técnicos y Guía de Trabajo (AGENTS.md)
+    url: https://github.com/borjamoskv/BABYLON-60/blob/main/AGENTS.md
+    about: Consulta los contratos por anillo (Ring-0 a Ring-3) antes de proponer cambios.

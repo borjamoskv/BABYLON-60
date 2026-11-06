@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you cite this research or software, please use these metadata."
+title: "BABYLON-60: Tamper-Evident Cryptographic Ledger and Causal Verification Architecture for Autonomous AI Agents"
+authors:
+  - family-names: "Fernández Angulo"
+    given-names: "Borja"
+    alias: "borjamoskv"
+version: "5.0.1"
+date-released: "2026-10-24"
+repository-code: "https://github.com/borjamoskv/BABYLON-60"
+keywords:
+  - "cryptography"
+  - "autonomous-agents"
+  - "formal-verification"
+  - "lean-4"
+  - "sqlite-wal"
+  - "byzantine-fault-tolerance"
+  - "information-thermodynamics"
+license: "Custom"

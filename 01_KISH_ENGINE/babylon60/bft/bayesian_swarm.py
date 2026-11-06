@@ -1,0 +1,107 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
+"""
+INV_BFT_04 / Thermodynamic Valve Extension
+Bayesian Swarm module with Logarithmic Opinion Pooling (LogOP).
+Faithful to Gelfand & Dey.
+"""
+
+import asyncio
+from typing import List, Dict, Optional
+import math
+
+
+class BayesianSwarm:
+    def __init__(self, agents: List[str]) -> None:
+        """
+        agents: List of BFT agent identifiers.
+        """
+        self.agents = agents
+        # [FRENTE-037] Mutex to serialize async belief pool updates across concurrent coroutines
+        self._lock: Optional[asyncio.Lock] = None
+        self._current_beliefs: Dict[str, float] = {}
+
+    def _get_lock(self) -> asyncio.Lock:
+        if self._lock is None:
+            self._lock = asyncio.Lock()
+        return self._lock
+
+    async def async_pool_and_update(
+        self, opinions: Dict[str, Dict[str, float]], weights: Dict[str, float] | None = None
+    ) -> Dict[str, float]:
+        """
+        [FRENTE-037] Thread-safe/coroutine-safe asynchronous opinion pool update.
+        Acquires asyncio.Lock to prevent lost updates or dirty reads under swarm concurrency.
+        """
+        async with self._get_lock():
+            result = self.logarithmic_opinion_pool(opinions, weights)
+            self._current_beliefs = result
+            return result
+
+    def get_beliefs(self) -> Dict[str, float]:
+        """Returns the latest consolidated beliefs."""
+        return dict(self._current_beliefs)
+
+    def logarithmic_opinion_pool(
+        self, opinions: Dict[str, Dict[str, float]], weights: Dict[str, float] | None = None
+    ) -> Dict[str, float]:
+        """
+        Computes the Logarithmic Opinion Pool (LogOP) of multiple categorical distributions.
+
+        opinions: Dict mapping agent_id -> Dict[hypothesis -> probability]
+        weights: Optional dict mapping agent_id -> weight. Defaults to uniform weights.
+
+        Returns a normalized categorical distribution Dict[hypothesis -> probability].
+        """
+        if not opinions:
+            return {}
+
+        # Default to uniform weights if none provided
+        if weights is None:
+            w = 1.0 / len(opinions)
+            weights = {agent: w for agent in opinions.keys()}
+
+        # Collect all hypotheses
+        hypotheses: set[str] = set()
+        for dist in opinions.values():
+            hypotheses.update(dist.keys())
+
+        aggregated_unnormalized: Dict[str, float] = {}
+
+        for hyp in hypotheses:
+            log_sum = 0.0
+            vetoed = False
+            for agent, dist in opinions.items():
+                p = dist.get(hyp, 0.0)
+                w = weights.get(agent, 0.0)
+
+                if p <= 0.0:
+                    vetoed = True
+                    break  # Veto absolute (LogOP property)
+
+                # Geometric weighted component in logarithmic domain to prevent underflow
+                p_clamped = max(p, 1e-300)
+                try:
+                    val = math.log(p_clamped)
+                    if math.isinf(val):
+                        vetoed = True
+                        break
+                    log_sum += w * val
+                except ValueError:
+                    vetoed = True
+                    break
+
+            if vetoed:
+                aggregated_unnormalized[hyp] = 0.0
+            else:
+                aggregated_unnormalized[hyp] = math.exp(log_sum)
+
+        # Normalize
+        total_mass = sum(aggregated_unnormalized.values())
+        if total_mass == 0.0:
+            # If all hypotheses were vetoed or total mass is 0
+            return {hyp: 0.0 for hyp in hypotheses}
+
+        return {hyp: val / total_mass for hyp, val in aggregated_unnormalized.items()}

@@ -1,0 +1,9 @@
+{
+  "arch": "arm64",
+  "os": "Darwin",
+  "release": "25.6.0",
+  "platform": "Apple Silicon (ARM64)",
+  "runtime": "Darwin 26.6.2",
+  "python": "3.14.7",
+  "provenance": "LOCAL_UNVERIFIED_EXTERNALLY"
+}

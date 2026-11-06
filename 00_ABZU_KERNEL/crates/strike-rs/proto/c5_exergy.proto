@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package c5real;
+
+// Protocolo de sincronización soberana de exergía entre Rust y Node.js
+service ExergyBridge {
+  rpc SyncInvariant (ExergyState) returns (ExergyAck) {}
+  rpc StreamLedger (LedgerRequest) returns (stream ExergyState) {}
+}
+
+message ExergyState {
+  string block_hash = 1;
+  uint64 sequence_id = 2;
+  double exergy_level = 3;
+  bytes cryptographic_proof = 4;
+}
+
+message ExergyAck {
+  bool verified = 1;
+  string error_code = 2;
+}
+
+message LedgerRequest {
+  uint64 from_sequence = 1;
+}

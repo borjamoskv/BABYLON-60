@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="{{ locale }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - {{ certificate_id }}</title>
+    <style>
+{{ theme_css|safe }}
+    </style>
+</head>
+<body>
+    <div class="container">
+{% include "header.html.j2" %}
+{% include "metadata_grid.html.j2" %}
+{% include "executive_summary.html.j2" %}
+{% include "evidence_verification.html.j2" %}
+{% include "signature_block.html.j2" %}
+{% include "compliance_matrix.html.j2" %}
+{% include "footer.html.j2" %}
+    </div>
+</body>
+</html>

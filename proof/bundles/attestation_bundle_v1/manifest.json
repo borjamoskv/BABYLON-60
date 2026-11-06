@@ -1,0 +1,10 @@
+{
+  "bundle_version": "1.0.0",
+  "target": "BABYLON-60 Core & Edge",
+  "commit": "a9fdfa3c9ba8ab940ee61e7b79e230d59b195014",
+  "binary_sha3": "91981c51b861ad435f69f3b25b476c04ed3bb3687c2a7139afef13987c53d8f0",
+  "causal_hash": "7051c124fa673f00a2b2383daaaf390e48cb4db1b48687a00dac4989599e7872",
+  "timestamp": 1791133842,
+  "hw_provenance": "UNVERIFIED",
+  "certification": "NONE"
+}

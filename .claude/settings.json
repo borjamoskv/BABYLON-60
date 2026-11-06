@@ -1,0 +1,19 @@
+{
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "babylon60-kernel"
+  ],
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash scripts/guards/c5_ide_symlink_guard.sh >/dev/null"
+          }
+        ]
+      }
+    ]
+  }
+}

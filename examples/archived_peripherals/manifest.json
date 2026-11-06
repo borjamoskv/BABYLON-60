@@ -1,0 +1,32 @@
+{
+  "format_version": 1,
+  "archive_date": "2026-10-14",
+  "scope": "Historical illustrative peripheral sources; excluded from active Python packages and script discovery.",
+  "files": [
+    {
+      "former_path": "scripts/c5_cli/codex_virtual_hud.py",
+      "snapshot": "codex_virtual_hud.py.disabled",
+      "sha256": "fc613eea726d06ae2bf064f03cdda075cf6c407501ac857e9f47278bc4f67ee9"
+    },
+    {
+      "former_path": "scripts/c5_simulations/prigogine_boltzmann_simulation.py",
+      "snapshot": "prigogine_boltzmann_simulation.py.disabled",
+      "sha256": "04e6ab83c429721153ad1a38a71f99c0a03d77baa2661cbeba67153a71300086"
+    },
+    {
+      "former_path": "scripts/c5_simulations/luhmann_autopoiesis_simulation.py",
+      "snapshot": "luhmann_autopoiesis_simulation.py.disabled",
+      "sha256": "feedea68d27d997b3c282d8e8d2082628cd4b0eb4c41615432397804b929200c"
+    },
+    {
+      "former_path": "scripts/c5_simulations/ouroboros_infinity.py",
+      "snapshot": "ouroboros_infinity.py.disabled",
+      "sha256": "ed6e66cc0026d44ce7ba9727fbe63f4e39453561813273b6cb5c7350307a66c6"
+    },
+    {
+      "former_path": "01_KISH_ENGINE/babylon60/core/sharded_ledger_ring.py",
+      "snapshot": "sharded_ledger_ring.py.disabled",
+      "sha256": "9b0764d5ee03c8b0372fa5a97f2bd076818ea538862f93f2ecedc95c866f692e"
+    }
+  ]
+}

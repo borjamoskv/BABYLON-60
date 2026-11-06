@@ -1,0 +1,28 @@
+[package]
+name = "babylon-skills-mcp"
+version.workspace = true
+edition = "2021"
+license-file = "../../LICENSE"
+publish = false
+description = "Immutable SEP-2640 Skills Snapshot & Read-Only MCP Gateway coupled to McpCapabilityBroker"
+repository = "https://github.com/borjamoskv/BABYLON-60"
+authors = ["Borja Moskv <borjamoskv@github.com>"]
+
+[lib]
+name = "babylon_skills_mcp"
+path = "src/lib.rs"
+
+[[bin]]
+name = "babylon-skills-mcp"
+path = "src/main.rs"
+
+[dependencies]
+babylon60 = { package = "babylon60_root", path = "../..", default-features = false, features = ["microkernel"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+sha2 = "0.10"
+hex = "0.4"
+libc = "0.2"
+
+[dev-dependencies]
+tempfile = "3.10"

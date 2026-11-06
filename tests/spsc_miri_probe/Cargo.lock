@@ -1,0 +1,5 @@
+version = 3
+
+[[package]]
+name = "babylon60-spsc-miri-probe"
+version = "0.0.0"

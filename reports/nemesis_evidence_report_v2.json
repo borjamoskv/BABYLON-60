@@ -1,0 +1,136 @@
+{
+  "schema": "nemesis-report/v2",
+  "report_version": "2.1.0",
+  "commit": "6a34dcfde4346f90a9c4461379d1209ded2bc97a",
+  "working_tree_dirty": true,
+  "timestamp_iso": "2026-10-12T12:26:35.578271+00:00",
+  "status": "EVIDENCE_COLLECTED_PENDING_AUDIT",
+  "evidence_assessment": {
+    "evidence_available": true,
+    "executed_test": true,
+    "scope": "One local invocation of the adversarial_nemesis Rust integration suite. This unsigned record collects runner output and observed test outcomes for audit. Invariant coverage and NEMESIS-100 acceptance remain unassessed."
+  },
+  "platform_observed": {
+    "os": "Darwin",
+    "arch": "arm64",
+    "filesystem": "APFS"
+  },
+  "test_suite": {
+    "name": "adversarial_nemesis",
+    "tests_total": 19,
+    "tests_executed": 19,
+    "tests_passed": 19,
+    "tests_failed": 0,
+    "tests_ignored": 0,
+    "cases": [
+      {
+        "name": "test_nemesis_v06_path_escape_and_null_bytes",
+        "result": "OK"
+      },
+      {
+        "name": "test_nemesis_v01_symlink_swap_rejection",
+        "result": "OK"
+      },
+      {
+        "name": "test_nemesis_v04_hardlink_injection_invariance",
+        "result": "OK"
+      },
+      {
+        "name": "test_nemesis_v10_ledger_effect_divergence_check",
+        "result": "OK"
+      },
+      {
+        "name": "test_nemesis_v11_quarantine_tampering_rejection",
+        "result": "OK"
+      },
+      {
+        "name": "test_nemesis_v14_nonce_collision_independence",
+        "result": "OK"
+      },
+      {
+        "name": "test_nemesis_v15_recovery_idempotence",
+        "result": "OK"
+      },
+      {
+        "name": "test_nemesis_v16_authority_context_and_effect_scope",
+        "result": "OK"
+      },
+      {
+        "name": "test_nemesis_v17_locator_vs_state_contract_validation",
+        "result": "OK"
+      },
+      {
+        "name": "test_nemesis_v19_critical_mutant_detection",
+        "result": "OK"
+      },
+      {
+        "name": "test_nemesis_v09_concurrent_capability_revocation",
+        "result": "OK"
+      },
+      {
+        "name": "test_nemesis_v12_mount_boundary_exdev_fail_closed",
+        "result": "OK"
+      },
+      {
+        "name": "test_nemesis_v13_transaction_replay_prevention",
+        "result": "OK"
+      },
+      {
+        "name": "test_nemesis_v08_crash_injection_at_each_state",
+        "result": "OK"
+      },
+      {
+        "name": "test_nemesis_v03_parent_swap_rejection",
+        "result": "OK"
+      },
+      {
+        "name": "test_nemesis_v05_inode_reuse_race",
+        "result": "OK"
+      },
+      {
+        "name": "test_nemesis_v07_fd_exhaustion_fail_closed",
+        "result": "OK"
+      },
+      {
+        "name": "test_nemesis_v02_concurrent_swap_race_100_workers",
+        "result": "OK"
+      },
+      {
+        "name": "test_nemesis_v18_concurrent_modification_quiescence_and_rejection",
+        "result": "OK"
+      }
+    ],
+    "parsing_complete": true,
+    "reported_counts": {
+      "passed": 19,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered_out": 0
+    },
+    "summary_result": "ok",
+    "command": [
+      "cargo",
+      "test",
+      "--test",
+      "adversarial_nemesis",
+      "--features",
+      "cortex-persist"
+    ],
+    "result": "PASS",
+    "return_code": 0,
+    "runner_error": null,
+    "timeout_seconds": 600.0,
+    "timed_out": false,
+    "cleanup_complete": true,
+    "termination_scope": "posix_process_group",
+    "duration_s": 1.063769,
+    "stdout": "\nrunning 19 tests\ntest test_nemesis_v06_path_escape_and_null_bytes ... ok\ntest test_nemesis_v01_symlink_swap_rejection ... ok\ntest test_nemesis_v04_hardlink_injection_invariance ... ok\ntest test_nemesis_v10_ledger_effect_divergence_check ... ok\ntest test_nemesis_v11_quarantine_tampering_rejection ... ok\ntest test_nemesis_v14_nonce_collision_independence ... ok\ntest test_nemesis_v15_recovery_idempotence ... ok\ntest test_nemesis_v16_authority_context_and_effect_scope ... ok\ntest test_nemesis_v17_locator_vs_state_contract_validation ... ok\ntest test_nemesis_v19_critical_mutant_detection ... ok\ntest test_nemesis_v09_concurrent_capability_revocation ... ok\ntest test_nemesis_v12_mount_boundary_exdev_fail_closed ... ok\ntest test_nemesis_v13_transaction_replay_prevention ... ok\ntest test_nemesis_v08_crash_injection_at_each_state ... ok\ntest test_nemesis_v03_parent_swap_rejection ... ok\ntest test_nemesis_v05_inode_reuse_race ... ok\ntest test_nemesis_v07_fd_exhaustion_fail_closed ... ok\ntest test_nemesis_v02_concurrent_swap_race_100_workers ... ok\ntest test_nemesis_v18_concurrent_modification_quiescence_and_rejection ... ok\n\ntest result: ok. 19 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.26s\n\n",
+    "stderr": "    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.50s\n     Running tests/adversarial_nemesis.rs (target/debug/deps/adversarial_nemesis-762246fa8e6d3b0e)\n",
+    "output_decoding_complete": true,
+    "stdout_raw_base64": null,
+    "stderr_raw_base64": null
+  },
+  "evidence_payload_sha256": "sha256:ce3dfa56146c07e29da86c837ece7eb8e924227b1aaed9015f181eca647652fe",
+  "evidence_payload_sha3_256": "sha3-256:23fb2e7de73c68159b2805e049a51587284e650a37e98b4eac39470a2aefe4fe"
+}

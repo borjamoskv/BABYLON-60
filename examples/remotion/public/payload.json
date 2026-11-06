@@ -1,0 +1,39 @@
+{
+  "title": "Estética SOTA 2026",
+  "sessionHash": "AX-GPT4O",
+  "scenes": [
+    {
+      "durationInFrames": 200,
+      "text": "El Brutalismo Matemático redefine el diseño: solidez en el caos.",
+      "physics": {
+        "mass": 2.0,
+        "damping": 15,
+        "stiffness": 70
+      },
+      "phaseId": 1,
+      "phaseTitle": "FASE 1: LA GEOMETRÍA DEL FLUIDO"
+    },
+    {
+      "durationInFrames": 200,
+      "text": "La Física Semántica conecta universos de significado.",
+      "physics": {
+        "mass": 1.6,
+        "damping": 15,
+        "stiffness": 60
+      },
+      "phaseId": 2,
+      "phaseTitle": "FASE 2: CONVERGENCIA TERMODINÁMICA"
+    },
+    {
+      "durationInFrames": 200,
+      "text": "2026: la fusión del cálculo y la forma.",
+      "physics": {
+        "mass": 0.5,
+        "damping": 15,
+        "stiffness": 150
+      },
+      "phaseId": 3,
+      "phaseTitle": "FASE 3: APOPTOSIS DETERMINISTA"
+    }
+  ]
+}

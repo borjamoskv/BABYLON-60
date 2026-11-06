@@ -1,0 +1,86 @@
+DUB
+# ====================================================================
+# SINCRONIZACIÓN DE CONTADORES B60
+# Dos corrutinas coordinan contadores hasta que R10 alcanza un umbral.
+# Ejecutar con: cargo run --locked --bin babylon60-dsl -- tools/examples/counter_sync.b60
+# ====================================================================
+
+# 1. Umbral entero; F60 solo es una etiqueta en este intérprete
+ALLOC F60 R0
+# Una posición sexagesimal: 50 + 9 = 59. Los espacios separan posiciones.
+NIG R0 [ <<<<<YYYYYYYYY ] # 59
+
+# 2. Retardo en ticks del planificador
+ALLOC TIME R1
+NIG R1 [ Y ] # Un tick lógico; sin equivalencia con tiempo físico
+
+# 3. Corrutinas cooperativas del ejemplo (un solo hilo)
+FORK COUNTER_ALPHA
+FORK COUNTER_OMEGA
+
+# La corrutina padre registra una señal en memoria y termina
+EXECUTE "SYMBOLIC_EXAMPLE_INITIALIZED"
+HALT
+
+# ====================================================================
+# CORRUTINA A: contador observado R10
+# ====================================================================
+MUB COUNTER_ALPHA
+ALLOC F60 R10
+NIG R10 [ Y ]
+
+MUB ALPHA_LOOP
+# Incremento entero del contador
+DAH R10 [ Y ]
+
+# Espera la señal de OMEGA antes de comprobar el umbral
+AWAIT "COUNTER_SYNC" ALPHA_CHECK
+
+MUB ALPHA_CHECK
+# Diferencia entera: R11 = R0 - R10
+ALLOC F60 R11
+NIG R11 R0
+LAL R11 R10
+
+# Si R11 == 0, el contador ha alcanzado el umbral configurado
+NU R11 THRESHOLD_REACHED
+
+# Confirma la recepción antes de esperar la siguiente señal
+EXECUTE "COUNTER_ACK"
+# Continuar si todavía no se ha alcanzado el umbral
+AFTER R1 ALPHA_LOOP
+
+
+# ====================================================================
+# CORRUTINA B: contador auxiliar y emisión de señales
+# ====================================================================
+MUB COUNTER_OMEGA
+ALLOC F60 R20
+NIG R20 [ Y ]
+
+MUB OMEGA_LOOP
+DAH R20 [ Y ]
+
+# Reanuda ALPHA si está esperando esta señal
+EXECUTE "COUNTER_SYNC"
+AWAIT "COUNTER_ACK" OMEGA_CHECK
+
+MUB OMEGA_CHECK
+ALLOC F60 R21
+NIG R21 R0
+LAL R21 R20
+NU R21 OMEGA_DONE
+AFTER R1 OMEGA_LOOP
+
+MUB OMEGA_DONE
+SAR R20
+HALT
+
+# ====================================================================
+# TERMINACIÓN NORMAL AL ALCANZAR EL UMBRAL
+# ====================================================================
+MUB THRESHOLD_REACHED
+# Libera la última espera de OMEGA; ambas corrutinas terminan con HALT
+EXECUTE "COUNTER_ACK"
+SAR R10
+HALT

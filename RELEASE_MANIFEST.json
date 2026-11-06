@@ -1,0 +1,98 @@
+{
+  "manifest_schema": "babylon60.release.v5",
+  "release": "5.1.0",
+  "version": "5.1.0",
+  "state": "stable-terminal-mcp",
+  "commit": "cd9762abe25808b5b00c79ad82b6076e7d3e28b2",
+  "source_tree_digest": "73729a97edcb7b6ef92f6616ab0dcab7d9a9541e8f0134d5d6e21a12b794478e",
+  "axiom_root": "AX-0: No stochastic component may authorize its own irreversible effects (LLM != authority)",
+  "claims_manifest_digest": "d4ca80d4e82978ce6e0ff5572a425f4126179e9e891fae2b3fe1b97c850e070d",
+  "compiled_at_iso": "2026-11-06T23:54:16Z",
+  "prior_release": {
+    "version": "5.1.0",
+    "commit": "86e71bd273afeb1b7ca778254787142ee2415ec5",
+    "manifest_schema": "babylon60.release.v5",
+    "manifest_sha256": "b244793876d5b66c0faca0e5821000b9c021700e6fd217bd4296265d886bcade"
+  },
+  "version_sync": {
+    "babylon_toml": "5.1.0",
+    "claims_toml": "5.1.0",
+    "cargo_workspace": "5.1.0",
+    "pyproject": "5.1.0"
+  },
+  "substrate": {
+    "branch": "main",
+    "merged_integration": "codex/local-core-integration",
+    "platform_primary": "darwin-arm64",
+    "platform_ci_bounds": [
+      "linux-arm64",
+      "windows-contained"
+    ],
+    "web_edge_surface": "PURGED"
+  },
+  "gate_attestations": {
+    "v1_kernel_gate": "PASSED",
+    "nemesis_adversarial_waves": "PASSED",
+    "semantic_entropy_solver": "VERIFIED",
+    "lean4_harness": {
+      "status": "PASSED",
+      "observable_branches": [
+        "ACCEPT",
+        "REJECT"
+      ],
+      "sorry_count": 0,
+      "admit_count": 0
+    },
+    "hardware_enclave_witness": {
+      "mechanism": "SecureEnclave_TouchID_P256_COSE_Sign1",
+      "independent_observation": true,
+      "post_restart_verification": "DECOUPLED_VERIFIED"
+    },
+    "mcp_confinement": {
+      "scope": "PER_INVOCATION_LIFECYCLE",
+      "effect_tx_quarantine": "ACTIVE",
+      "token_replay_window": 0
+    },
+    "storage_and_consensus": {
+      "sqlite_cortex_teardown": "DETERMINISTIC_ON_QUERY_AND_FAILURE",
+      "ledger_idempotency": "VERIFIED",
+      "atomic_file_writes": "VERIFIED",
+      "bft_collision_barrier": "BftCollisionError"
+    }
+  },
+  "gate_attestations_basis": "Declared in babylon.toml [release.gate_attestations]; executable evidence is bound only by evidence_root.",
+  "artifacts_sha256": {
+    ".babylon60rules": "bcfb2b61ffadc56ee46efda5ddd30a28d133ab4fcc728fa4347a6d7b329421ea",
+    "CLAIMS.toml": "d4ca80d4e82978ce6e0ff5572a425f4126179e9e891fae2b3fe1b97c850e070d",
+    "babylon.toml": "d70d8161bc53a574bece514bdfb68032b1f3ee07f46ea73bc06e7842f18d6bac",
+    "Cargo.toml": "16a8932ff60d70ad4a6e535c2093c32f5647f122875d7ca150029aa754317b0f",
+    "Cargo.lock": "f8a08143601478fdbfd7f482163a652e04db41264725ab61605ba3d77057f6b4",
+    "pyproject.toml": "0e9715c762366ec60d3b84338e4c41df08f12853b006fd39237ab2e89ba4e2c0",
+    "uv.lock": "a3cadcf95ff05374408bbf063ffc6c116eeae41d8d563f145387a713644600ef",
+    "LICENSE": "4c0feb0f48586176789f42815859e2714a0486cccc72fbc9e3422eb29d155536",
+    "README.md": "346fa2617a8899530585e65f5b3dcddd951684fef6f5ac4d45d659e427655a04",
+    "WHY_BABYLON_60.md": "f885f7bc582eb23be91634ea8ccdd0c9e4cd5a2265de726e4bcdc913710ae812"
+  },
+  "claims": {
+    "verified": 9,
+    "empirical_and_bounded": 19,
+    "experimental": 0,
+    "failed": 0,
+    "total": 28
+  },
+  "evidence_root": "sha3-256:411e0639ecb6239f73bee9483865abae653b4931dcfa49b984f5340f38eeea20",
+  "sbom": {
+    "format": "CycloneDX-1.5",
+    "cargo_sbom_sha256": "9df8f6cbc94ffc2b521d1cd77bb9bc5d1bc6047513d75040ad15b4e402b3a95c",
+    "cargo_components": 498,
+    "python_sbom_sha256": "de03f88abb3e5420191911dd6c9fb6a92da3f3fdd36f4df3c460858a13688be0",
+    "python_components": 203
+  },
+  "release_bundle": null,
+  "signing_authority": {
+    "algorithm": null,
+    "scope": "unsigned_local_evidence",
+    "public_key": null
+  },
+  "signature": null
+}

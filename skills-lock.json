@@ -1,0 +1,4836 @@
+{
+  "schema_version": "3.1.0",
+  "catalog_sha256": "ff03e61c32555bc32fa0fd3fe93e94d762abc19f640a8f5190f81f4b7d9fb6b4",
+  "snapshot_root_sha256": "6acb4327e05ce6e1f421fc69b7b28020b95477822b9fb30557185b17c54f6a61",
+  "total_skills": 131,
+  "skills": {
+    "adaptive-cron": {
+      "skill_id": "adaptive-cron",
+      "canonical_alias": "wetware-adaptive-cron",
+      "version": "1.0.0",
+      "artifact_sha256": "33833eca58ed3ecd9c4fb2bcbadbade712de202634a545617670527c668b7409",
+      "tool_identity_hash": "42f6aadd02989dabb2c6e3890b2da41d9636a9e38eb359fc89b18913b0a190af",
+      "lockfile_ref": "skills-lock.json#adaptive-cron@1.0.0",
+      "domain": "governance",
+      "summary": "Resume carga operativa mediante observables verificables y conserva el control de sesión del operador.",
+      "tags": [
+        "/adaptive-cron",
+        "adaptive-cron",
+        "burnout cognitivo",
+        "cron adaptativo",
+        "límite de disipación crítica",
+        "wetware-adaptive-cron"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "anergy-purge-protocol": {
+      "skill_id": "anergy-purge-protocol",
+      "canonical_alias": "swarm-anergy-purge",
+      "version": "1.0.0",
+      "artifact_sha256": "ba2b71db351901121debb3aa80082b7339a72468d8dc0eeda3af4dc50e7c489c",
+      "tool_identity_hash": "09bbd5c0faaee55e0b27d4c33c62633f4897d28422e06ab9fe18f4d7627bd450",
+      "lockfile_ref": "skills-lock.json#anergy-purge-protocol@1.0.0",
+      "domain": "governance",
+      "summary": "Módulo CORTEX. Dispara con \"purga de anergía\", \"purga de entropía\", \"dead code\", \"scandisk\", \"disco lleno\", \"limpiar conversaciones\", \"ghost listeners\", \"prompt bloat\".",
+      "tags": [
+        "anergy-purge-protocol",
+        "dead code",
+        "disco lleno",
+        "ghost listeners",
+        "limpiar conversaciones",
+        "prompt bloat",
+        "purga de anergía",
+        "purga de entropía",
+        "scandisk",
+        "swarm-anergy-purge"
+      ],
+      "effect_profile": {
+        "class": "DESTRUCTIVE",
+        "reversibility": "IRREVERSIBLE",
+        "requires_action_lease": true,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == result.observed_post_hash",
+          "result.observed_post_hash != args.expected_pre_hash"
+        ]
+      }
+    },
+    "apple-bypass": {
+      "skill_id": "apple-bypass",
+      "canonical_alias": "kernel-apple-bypass",
+      "version": "1.0.0",
+      "artifact_sha256": "9e8fadef1b5735a3f0560250a0505a0e234c8a95b8a5d60dda4d6663de045bc4",
+      "tool_identity_hash": "9e711361d9a74839d0789e9660e77def5e2eff795d2696c6486536084daf0878",
+      "lockfile_ref": "skills-lock.json#apple-bypass@1.0.0",
+      "domain": "operations",
+      "summary": "Mitigación de presión de memoria para LLMs locales en Apple Silicon.",
+      "tags": [
+        "/apple-bypass",
+        "apple-bypass",
+        "bypass termodinámico",
+        "evadir jetsam macos",
+        "kernel-apple-bypass",
+        "liberar memoria mps"
+      ],
+      "effect_profile": {
+        "class": "STATE_MUTATION",
+        "reversibility": "COMPENSATABLE",
+        "requires_action_lease": true,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == result.observed_post_hash",
+          "result.observed_post_hash != args.expected_pre_hash"
+        ]
+      }
+    },
+    "audiovisual-sota": {
+      "skill_id": "audiovisual-sota",
+      "canonical_alias": "media-pipeline",
+      "version": "1.0.0",
+      "artifact_sha256": "548b64acdd29c0687d91a5606df2bdf83eb3212f123799cc7a8e463520209f76",
+      "tool_identity_hash": "8608642cb191a81401096fabc6c32cb8575c76d387f1853e852c7c23259ebc52",
+      "lockfile_ref": "skills-lock.json#audiovisual-sota@1.0.0",
+      "domain": "operations",
+      "summary": "Fuerza invariantes extremas en pipelines de renderizado audiovisual (FFmpeg/Remotion).",
+      "tags": [
+        "/audiovisual-sota",
+        "audiovisual-sota",
+        "invariantes remotion ffmpeg",
+        "media-pipeline",
+        "pipeline audiovisual"
+      ],
+      "effect_profile": {
+        "class": "STATE_MUTATION",
+        "reversibility": "COMPENSATABLE",
+        "requires_action_lease": true,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == result.observed_post_hash",
+          "result.observed_post_hash != args.expected_pre_hash"
+        ]
+      }
+    },
+    "autodidact-omega": {
+      "skill_id": "autodidact-omega",
+      "canonical_alias": "epistemic-deep-research",
+      "version": "1.0.0",
+      "artifact_sha256": "035b4ccdc512a2bb5cbd69566abf5c2d181a6711336dabd843f14ae35da610f9",
+      "tool_identity_hash": "75da422ab2928db9bb6ce417defb89a80c6701e8084e3dc8db38e625f7848fef",
+      "lockfile_ref": "skills-lock.json#autodidact-omega@1.0.0",
+      "domain": "nucleus",
+      "summary": "Módulo epistémico. Dispara con \"autodidact\", \"autodidact-omega\", \"investigación profunda\", \"investigar paper\", \"cristal ontológico\", \"deep research\".",
+      "tags": [
+        "autodidact",
+        "autodidact-omega",
+        "cristal ontológico",
+        "deep research",
+        "epistemic-deep-research",
+        "investigación profunda",
+        "investigar paper"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "babylon-shield": {
+      "skill_id": "babylon-shield",
+      "canonical_alias": "kernel-babylon-shield",
+      "version": "1.0.0",
+      "artifact_sha256": "d93133bb66d959f2f31d0dc1aa7960a4563a6943b7cf67fce87074abe6e364eb",
+      "tool_identity_hash": "c66aad3aa81c1e77f78cc8f7af66506e647d2f13d8fb03c1aa2ea7cf9bf1b3ee",
+      "lockfile_ref": "skills-lock.json#babylon-shield@1.0.0",
+      "domain": "specialized",
+      "summary": "Módulo Ring-0. Dispara con \"babylon shield\", \"escudo termodinámico\", \"ring-0 shield\", \"prevenir anergía\", \"atestación babylon\", \"invariantes ring-0\", \"protección ring-0\".",
+      "tags": [
+        "atestación babylon",
+        "babylon shield",
+        "babylon-shield",
+        "escudo termodinámico",
+        "invariantes ring-0",
+        "kernel-babylon-shield",
+        "prevenir anergía",
+        "protección ring-0",
+        "ring-0 shield"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "babylon60-architecture": {
+      "skill_id": "babylon60-architecture",
+      "canonical_alias": "kernel-ide-architecture",
+      "version": "1.0.0",
+      "artifact_sha256": "7090ba30058c1ca9916a21761f06ee883a3fb5d8bc07baf59b29367c4566c2f2",
+      "tool_identity_hash": "139d750e8600adec146fb17ec6ab66d72d5b7b414e56421a97d185ef2958d2ad",
+      "lockfile_ref": "skills-lock.json#babylon60-architecture@1.0.0",
+      "domain": "governance",
+      "summary": "Patrones de arquitectura de Babylon60 IDE (instaladores 1-clic autorreparables, tokens Ed25519 SCITT, OpenRouter Gateway, SSO corporativo y escala exérgica 1-21000).",
+      "tags": [
+        "arquitectura babylon60",
+        "babylon60 ide",
+        "babylon60-architecture",
+        "kernel-ide-architecture",
+        "patrones ide babylon"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "babylon60-kernel-invariants": {
+      "skill_id": "babylon60-kernel-invariants",
+      "canonical_alias": "kernel-invariants-audit",
+      "version": "1.0.0",
+      "artifact_sha256": "af154455ad32062cb2f7061af9e1dc10e5dd4bf166ce2e5ba19b880eded0a552",
+      "tool_identity_hash": "4ebad8c372364f8a1c1dc75e36b6dd224a3fa2802cb6e2fd4160faf51308f05c",
+      "lockfile_ref": "skills-lock.json#babylon60-kernel-invariants@1.0.0",
+      "domain": "kernel",
+      "summary": "Audita y prepara correcciones del kernel BABYLON-60 para SPSC, SQLite L0, relojes causales, consenso LARSA y correspondencia Rust–Lean. Usa el puente MCP local cuando esté disponible y distingue pruebas ejecutadas de obligaciones pendientes.",
+      "tags": [
+        "babylon60-kernel-invariants",
+        "kernel-invariants-audit"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "biographical-thermo": {
+      "skill_id": "biographical-thermo",
+      "canonical_alias": "epistemic-biographical-thermo",
+      "version": "1.0.0",
+      "artifact_sha256": "3488e42a6755539ec8f06e96f2aca7e9395c9ff28bf4497052fd76699d028fdc",
+      "tool_identity_hash": "c51ff959e229be9cb9384e2bc5b918dedbc001a0b536bf2223ed4022300cf437",
+      "lockfile_ref": "skills-lock.json#biographical-thermo@1.0.0",
+      "domain": "nucleus",
+      "summary": "Analiza trayectorias vitales, historia y filosofía mediante Mapeo Estructural C5-REAL (Termodinámica Discreta).",
+      "tags": [
+        "/biographical-thermo",
+        "análisis biográfico termodinámico",
+        "biografía termodinámica",
+        "biographical-thermo",
+        "epistemic-biographical-thermo",
+        "trayectoria termodinámica"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-2e-neuropharmacological-sovereignty": {
+      "skill_id": "c5-2e-neuropharmacological-sovereignty",
+      "canonical_alias": "wetware-neuropharma-protocol",
+      "version": "1.0.0",
+      "artifact_sha256": "319f1d77de29e662f02349a3e0eea8205bb7cfd455ed23074c07cb3fcd3ac79c",
+      "tool_identity_hash": "dbbbf1a0d900f552ad13ddf9af6c0ac1fc33486a0324c9e6662017ee7bf014a1",
+      "lockfile_ref": "skills-lock.json#c5-2e-neuropharmacological-sovereignty@1.0.0",
+      "domain": "systems",
+      "summary": "Módulo Wetware/Venture. Dispara con \"desacoplamiento concerta\", \"bucle de parches\", \"farmacología 2e\", \"sustrato dopaminérgico\", \"mitigar crash concerta\".",
+      "tags": [
+        "bucle de parches",
+        "c5-2e-neuropharmacological-sovereignty",
+        "desacoplamiento concerta",
+        "farmacología 2e",
+        "mitigar crash concerta",
+        "sustrato dopaminérgico",
+        "wetware-neuropharma-protocol"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-academic-peer-reviewer": {
+      "skill_id": "c5-academic-peer-reviewer",
+      "canonical_alias": "epistemic-peer-reviewer",
+      "version": "1.0.0",
+      "artifact_sha256": "a428f175b00b1f664431f209fec8efabb667e283d3af13e527c3896f2a32dba5",
+      "tool_identity_hash": "71f4fa6c03c2dd341e476fa9312e5be22e1bf6ea896746c2d0e989c4e397c84c",
+      "lockfile_ref": "skills-lock.json#c5-academic-peer-reviewer@1.0.0",
+      "domain": "nucleus",
+      "summary": "Módulo epistémico. Dispara con \"peer review\", \"academic reviewer\", \"revisar paper\", \"auditoría de paper\", \"dictamen académico\".",
+      "tags": [
+        "academic reviewer",
+        "auditoría de paper",
+        "c5-academic-peer-reviewer",
+        "dictamen académico",
+        "epistemic-peer-reviewer",
+        "peer review",
+        "revisar paper"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-adaptive-annealing-engine": {
+      "skill_id": "c5-adaptive-annealing-engine",
+      "canonical_alias": "swarm-adaptive-annealing",
+      "version": "1.0.0",
+      "artifact_sha256": "02fb605857e6a9dbe57d8018d587d8903f06a78efcaa2307ab5ee4973ed5888a",
+      "tool_identity_hash": "9442088dd500ab1d4730b1ef29a8ea50918fc0b5b3d017f677c09e984f3486e1",
+      "lockfile_ref": "skills-lock.json#c5-adaptive-annealing-engine@1.0.0",
+      "domain": "nucleus",
+      "summary": "Módulo CORTEX. Dispara con \"adaptive annealing\", \"motor de recocido\", \"optimizacion sin colisiones\", \"recocido adaptativo\", \"busqueda del apex\", \"evitar colapso voraz\".",
+      "tags": [
+        "adaptive annealing",
+        "busqueda del apex",
+        "c5-adaptive-annealing-engine",
+        "evitar colapso voraz",
+        "motor de recocido",
+        "optimizacion sin colisiones",
+        "recocido adaptativo",
+        "swarm-adaptive-annealing"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-alpha-extraction-pipeline": {
+      "skill_id": "c5-alpha-extraction-pipeline",
+      "canonical_alias": "alpha-extractor",
+      "version": "1.0.0",
+      "artifact_sha256": "4aae8af8c9d358d22c524d293a6c6fcd0745a67b24866e0515cde4e0ae69d96d",
+      "tool_identity_hash": "c7e55948ab1ee99844a8b311fbca8a744e4e37c407f65e22c28937597b0e6707",
+      "lockfile_ref": "skills-lock.json#c5-alpha-extraction-pipeline@1.0.0",
+      "domain": "operations",
+      "summary": "Protocol to extract high-exergy algorithmic alpha from arXiv and GitHub directly from raw sources (LaTeX/Git) bypassing PDFs, followed by LARSA-120 formalization.",
+      "tags": [
+        "alpha extraction",
+        "alpha-extractor",
+        "c5-alpha-extraction-pipeline",
+        "deep research arxiv",
+        "extraer alfa algorítmico",
+        "larsa 120 alpha"
+      ],
+      "effect_profile": {
+        "class": "STATE_MUTATION",
+        "reversibility": "COMPENSATABLE",
+        "requires_action_lease": true,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == result.observed_post_hash",
+          "result.observed_post_hash != args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-anti-slop-ui": {
+      "skill_id": "c5-anti-slop-ui",
+      "canonical_alias": "media-ui-linter",
+      "version": "1.0.0",
+      "artifact_sha256": "71ceaea921b72146c149801314d7fb76672da5bb8ddfa7161adbf933d281657b",
+      "tool_identity_hash": "ce7848ee3b050d1c4d0ff542f382b2702b4861e70ef3969ae286a3d3f46c9b79",
+      "lockfile_ref": "skills-lock.json#c5-anti-slop-ui@1.0.0",
+      "domain": "governance",
+      "summary": "Revisa diseño y accesibilidad de interfaces; distingue comprobaciones léxicas parciales de verificación sobre la interfaz renderizada.",
+      "tags": [
+        "anti-slop ui",
+        "auditoría ui",
+        "c5-anti-slop-ui",
+        "erradicar ai slop",
+        "impeccable c5",
+        "linter de diseño",
+        "media-ui-linter",
+        "pulir frontend"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-audiovisual-acreativo-sota": {
+      "skill_id": "c5-audiovisual-acreativo-sota",
+      "canonical_alias": "media-router",
+      "version": "1.0.0",
+      "artifact_sha256": "b2fc8456c112c4ef8487b67c264a4d33d27fd6b020c0883a82e23a1133f2bddc",
+      "tool_identity_hash": "4012d88f96ff04f2c9775ce8c42942a98bd8d092e35d386f80659a66277b5554",
+      "lockfile_ref": "skills-lock.json#c5-audiovisual-acreativo-sota@1.0.0",
+      "domain": "multimedia & dsp",
+      "summary": "Enruta producción musical, acústica, voz, vídeo, diseño visual y arquitectura solar. Dispara con \"audiovisual hub\", \"acreativo hub\", \"producción audiovisual\", \"FL Studio\", \"Suno\", \"Remotion\", \"auditoría de vídeo\".",
+      "tags": [
+        "acreativo hub",
+        "audiovisual hub",
+        "auditoría de vídeo",
+        "c5-audiovisual-acreativo-sota",
+        "fl studio",
+        "media-router",
+        "producción audiovisual",
+        "remotion",
+        "suno"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-audiovisual-acreativo-sota-project": {
+      "skill_id": "c5-audiovisual-acreativo-sota-project",
+      "canonical_alias": "media-hub",
+      "version": "1.0.0",
+      "artifact_sha256": "543830602ee5065beff0527e16035e8f99bf2b32d2a0072968135413ead4a6ab",
+      "tool_identity_hash": "f2a577ec81548c36e5d156396a77d23e1ffcd9dbb42be3431b6aa905cfebcc2f",
+      "lockfile_ref": "skills-lock.json#c5-audiovisual-acreativo-sota-project@1.0.0",
+      "domain": "multimedia & dsp",
+      "summary": "Enruta módulos del proyecto para pipelines audiovisuales y auditoría de interfaces. Dispara con \"media-hub\", \"audiovisual project hub\", \"hub audiovisual proyecto\", \"media router proyecto\", \"audiovisual-sota\", \"anti-slop ui\".",
+      "tags": [
+        "anti-slop ui",
+        "audiovisual project hub",
+        "audiovisual-sota",
+        "c5-audiovisual-acreativo-sota-project",
+        "hub audiovisual proyecto",
+        "media router proyecto",
+        "media-hub"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-autonomous-agent-primitives": {
+      "skill_id": "c5-autonomous-agent-primitives",
+      "canonical_alias": "swarm-agent-primitives",
+      "version": "1.0.0",
+      "artifact_sha256": "84a1a0560785a4bd54819b5e6068adafeefee36b2f0d5cd4abe4440afb372400",
+      "tool_identity_hash": "7e18618f3035adef02e0b721a494355b4384dcb17eaf1476264f8a0b289ad1c1",
+      "lockfile_ref": "skills-lock.json#c5-autonomous-agent-primitives@1.0.0",
+      "domain": "meta-kernel",
+      "summary": "Módulo CORTEX. Dispara con \"47 skills\", \"primitivas de agente\", \"catálogo de skills\", \"asimilación de skills\", \"playbooks de agente\", \"47 primitivas\", \"macro-transductores\".",
+      "tags": [
+        "47 primitivas",
+        "47 skills",
+        "asimilación de skills",
+        "c5-autonomous-agent-primitives",
+        "catálogo de skills",
+        "macro-transductores",
+        "playbooks de agente",
+        "primitivas de agente",
+        "swarm-agent-primitives"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-axiomatic-kernel": {
+      "skill_id": "c5-axiomatic-kernel",
+      "canonical_alias": "epistemic-axiomatic-kernel",
+      "version": "1.0.0",
+      "artifact_sha256": "0cf120dfb456cafb8e12f3f8817960b476870cbf5756b7c208cd606d89caf048",
+      "tool_identity_hash": "4618f748a076625e2748579068d53a105365b785c3113df4359eb470670fc3cc",
+      "lockfile_ref": "skills-lock.json#c5-axiomatic-kernel@1.0.0",
+      "domain": "nucleus",
+      "summary": "Módulo epistémico. Dispara con \"axiomas\", \"principios c5\", \"núcleo operativo\", \"top 100 principios\", \"invariantes fundacionales\", \"axiomas c5-real\", \"kernel axiomático\".",
+      "tags": [
+        "axiomas",
+        "axiomas c5-real",
+        "c5-axiomatic-kernel",
+        "epistemic-axiomatic-kernel",
+        "invariantes fundacionales",
+        "kernel axiomático",
+        "núcleo operativo",
+        "principios c5",
+        "top 100 principios"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-browser-forensics-and-extension-triage": {
+      "skill_id": "c5-browser-forensics-and-extension-triage",
+      "canonical_alias": "secops-browser-forensics",
+      "version": "1.0.0",
+      "artifact_sha256": "51c5d8d78a9c062080f22226f1b9d63cd10f3d7ddfde31eb7c223a84de881de5",
+      "tool_identity_hash": "236765a1b3f03eb38afb0f15bcc56f2f84e90dbdfccd8999d5ae836916be0ce2",
+      "lockfile_ref": "skills-lock.json#c5-browser-forensics-and-extension-triage@1.0.0",
+      "domain": "socint & web",
+      "summary": "Módulo SecOps. Dispara con \"auditar navegador\", \"virus en chrome\", \"extensiones sospechosas\", \"growbot\", \"purgar extension chrome\", \"triage navegador\".",
+      "tags": [
+        "auditar navegador",
+        "c5-browser-forensics-and-extension-triage",
+        "extensiones sospechosas",
+        "growbot",
+        "purgar extension chrome",
+        "secops-browser-forensics",
+        "triage navegador",
+        "virus en chrome"
+      ],
+      "effect_profile": {
+        "class": "READ_EXT",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": true,
+        "network_egress": "EXTERNAL_NETWORK",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-codebase-valuation-audit": {
+      "skill_id": "c5-codebase-valuation-audit",
+      "canonical_alias": "venture-codebase-valuation",
+      "version": "1.0.0",
+      "artifact_sha256": "ca6e72ee0e96ab0476a2562550873889afb28bef21ac90c6bbfe5e03f65ebad4",
+      "tool_identity_hash": "e5f6ed9b4a3e91d46b1b7736dab48e97beca4723f4ffa305fcd0ab9e7c47e997",
+      "lockfile_ref": "skills-lock.json#c5-codebase-valuation-audit@1.0.0",
+      "domain": "specialized",
+      "summary": "Módulo Wetware/Venture. Dispara con \"valorar software\", \"valoración económica\", \"audit codebase valuation\", \"software ip valuation\", \"acqui-hire valuation\", \"due diligence técnica\".",
+      "tags": [
+        "acqui-hire valuation",
+        "audit codebase valuation",
+        "c5-codebase-valuation-audit",
+        "due diligence técnica",
+        "software ip valuation",
+        "valoración económica",
+        "valorar software",
+        "venture-codebase-valuation"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-cortex-swarm-orchestrator": {
+      "skill_id": "c5-cortex-swarm-orchestrator",
+      "canonical_alias": "swarm-router-hub",
+      "version": "1.0.0",
+      "artifact_sha256": "7b6893a0f20a34ffd995092c4c05dedd88e417c7759faeb7c1324e2e71b343ee",
+      "tool_identity_hash": "9ab0e888cd96c64f2fca69e9fdb329d644011813959fd8ca222b8d208aec8b58",
+      "lockfile_ref": "skills-lock.json#c5-cortex-swarm-orchestrator@1.0.0",
+      "domain": "governance",
+      "summary": "Enruta enjambres, ciclo de vida de agentes, proveedores, telemetría, auditoría y composición de skills, planificación y handoff. Dispara con \"cortex swarm hub\", \"swarm hub\", \"enjambre\", \"sharur\", \"skill chain\", \"telemetría\", \"plan omega\".",
+      "tags": [
+        "c5-cortex-swarm-orchestrator",
+        "cortex swarm hub",
+        "enjambre",
+        "plan omega",
+        "sharur",
+        "skill chain",
+        "swarm hub",
+        "swarm-router-hub",
+        "telemetría"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-cortex-swarm-orchestrator-project": {
+      "skill_id": "c5-cortex-swarm-orchestrator-project",
+      "canonical_alias": "swarm-hub",
+      "version": "1.0.0",
+      "artifact_sha256": "ad28178fb22453d3dca93b7cbe8135fc577caf66943dda1f47ab4e6a3e4dc1ee",
+      "tool_identity_hash": "c6e10e5f5e507e0d963d7228c717fdb15375682abfb175580a01113978aebbaf",
+      "lockfile_ref": "skills-lock.json#c5-cortex-swarm-orchestrator-project@1.0.0",
+      "domain": "governance",
+      "summary": "Enruta módulos del proyecto para minería LoRA con enjambres, instalación guiada y redacción para agentes. Dispara con \"swarm-hub\", \"cortex project hub\", \"hub cortex proyecto\", \"swarm router proyecto\", \"lora swarm\", \"wizard\", \"writing-for-agents\".",
+      "tags": [
+        "c5-cortex-swarm-orchestrator-project",
+        "cortex project hub",
+        "hub cortex proyecto",
+        "lora swarm",
+        "swarm router proyecto",
+        "swarm-hub",
+        "wizard",
+        "writing-for-agents"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-ctm-formal-architect": {
+      "skill_id": "c5-ctm-formal-architect",
+      "canonical_alias": "kernel-ctm-formalizer",
+      "version": "1.0.0",
+      "artifact_sha256": "2b5ce1fb21f45f900a61924ad15eaa80761fea55bdbd19e86854535b98d22665",
+      "tool_identity_hash": "7829368e0343438016f766e36b649c3fba60c2fe40d090693381589cae79ce57",
+      "lockfile_ref": "skills-lock.json#c5-ctm-formal-architect@1.0.0",
+      "domain": "specialized",
+      "summary": "Módulo Ring-0. Dispara con \"ctm benchmark\", \"ctm formalization\", \"lean 4 ctm\", \"abduction vs deduction\", \"falsification matrix\", \"refinement trace\".",
+      "tags": [
+        "abduction vs deduction",
+        "c5-ctm-formal-architect",
+        "ctm benchmark",
+        "ctm formalization",
+        "falsification matrix",
+        "kernel-ctm-formalizer",
+        "lean 4 ctm",
+        "refinement trace"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-debloat-agent-kernel": {
+      "skill_id": "c5-debloat-agent-kernel",
+      "canonical_alias": "swarm-baremetal-agent",
+      "version": "1.0.0",
+      "artifact_sha256": "89606e0a3687467f4dc0746b0455d04da33c7f9b4b6fa9981c24ffa9882dc783",
+      "tool_identity_hash": "ba0ee8927f77b64e2922a7d66d34211ba2e1ce20306812a5513ce812d777804d",
+      "lockfile_ref": "skills-lock.json#c5-debloat-agent-kernel@1.0.0",
+      "domain": "nucleus",
+      "summary": "Módulo CORTEX. Dispara con \"debloat llm\", \"microkernel agentes\", \"reemplazar langchain\", \"bare-metal agent\", \"autopsia langchain\", \"agente zero dependency\".",
+      "tags": [
+        "agente zero dependency",
+        "autopsia langchain",
+        "bare-metal agent",
+        "c5-debloat-agent-kernel",
+        "debloat llm",
+        "microkernel agentes",
+        "reemplazar langchain",
+        "swarm-baremetal-agent"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-dialectical-pipeline": {
+      "skill_id": "c5-dialectical-pipeline",
+      "canonical_alias": "epistemic-dialectic-loop",
+      "version": "1.0.0",
+      "artifact_sha256": "1c87a51f2826e6cbc680fbc13e45d506eb630fbdfbba421781240679e47afa29",
+      "tool_identity_hash": "7e6247bcd8141047a9e10998f308060c18cdef6c7b23e32a98efa13e16e43281",
+      "lockfile_ref": "skills-lock.json#c5-dialectical-pipeline@1.0.0",
+      "domain": "nucleus",
+      "summary": "Módulo epistémico. Dispara con \"falsabliza\", \"falsabiliza\", \"falsabilia\", \"falsa\", \"itera\", \"itrera\", \"itra\", \"iteraa\", \"iytera\", \"sigue\", \"salto topológico\".",
+      "tags": [
+        "c5-dialectical-pipeline",
+        "epistemic-dialectic-loop",
+        "falsa",
+        "falsabilia",
+        "falsabiliza",
+        "falsabliza",
+        "itera",
+        "iteraa",
+        "itra",
+        "itrera",
+        "iytera",
+        "salto topológico",
+        "sigue"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-enki-60": {
+      "skill_id": "c5-enki-60",
+      "canonical_alias": "kernel-sexagesimal-math",
+      "version": "1.0.0",
+      "artifact_sha256": "932f32d39e31139c87026aade5ea90e6c2361f13b01dc631536ca019297c2baf",
+      "tool_identity_hash": "dc647d9cc81f4720aaf9b1ad6e1a09f63ff8019680de3013f243064d0fb29c51",
+      "lockfile_ref": "skills-lock.json#c5-enki-60@1.0.0",
+      "domain": "nucleus",
+      "summary": "Módulo Ring-0. Dispara con \"enki\", \"enki-60\", \"cálculo sexagesimal\", \"aritmética base 60\", \"precisión sexagesimal\".",
+      "tags": [
+        "aritmética base 60",
+        "c5-enki-60",
+        "cálculo sexagesimal",
+        "enki",
+        "enki-60",
+        "kernel-sexagesimal-math",
+        "precisión sexagesimal"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-epistemic-dissemination-engine": {
+      "skill_id": "c5-epistemic-dissemination-engine",
+      "canonical_alias": "venture-dissemination-engine",
+      "version": "1.0.0",
+      "artifact_sha256": "0f6f15c572dc6165c98ebe0571f88975dfe2cacfb2060ed1b4d11722ef391eac",
+      "tool_identity_hash": "e59321a97ba69021c38abe0a2ff9974aca9c169441b39c063c880b8f771a31bd",
+      "lockfile_ref": "skills-lock.json#c5-epistemic-dissemination-engine@1.0.0",
+      "domain": "nucleus",
+      "summary": "Módulo Wetware/Venture. Dispara con \"diseminación epistémica\", \"divulgación multicanal\", \"hilo de twitter\", \"adaptar artículo\", \"cross-platform\", \"oratoria retórica\", \"keynote speech\".",
+      "tags": [
+        "adaptar artículo",
+        "c5-epistemic-dissemination-engine",
+        "cross-platform",
+        "diseminación epistémica",
+        "divulgación multicanal",
+        "hilo de twitter",
+        "keynote speech",
+        "oratoria retórica",
+        "venture-dissemination-engine"
+      ],
+      "effect_profile": {
+        "class": "STATE_MUTATION",
+        "reversibility": "COMPENSATABLE",
+        "requires_action_lease": true,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == result.observed_post_hash",
+          "result.observed_post_hash != args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-epistemic-thermodynamics": {
+      "skill_id": "c5-epistemic-thermodynamics",
+      "canonical_alias": "epistemic-router",
+      "version": "1.0.0",
+      "artifact_sha256": "ab97f11f741bba070ef391e8e748a1d7b7a719795ce529f3834cb9e0222acdf0",
+      "tool_identity_hash": "d6e5c55514447ffb0021ab05ffdcde830896b761b239e988666840cbb8d6f8b7",
+      "lockfile_ref": "skills-lock.json#c5-epistemic-thermodynamics@1.0.0",
+      "domain": "nucleus",
+      "summary": "Enruta axiomas, léxico, termodinámica de información, modelos cognitivos, síntesis y falsación de afirmaciones. Dispara con \"epistemic hub\", \"termodinámica epistémica\", \"axiomas\", \"anagnórisis\", \"falsación\", \"investigación profunda\", \"peer review\".",
+      "tags": [
+        "anagnórisis",
+        "axiomas",
+        "c5-epistemic-thermodynamics",
+        "epistemic hub",
+        "epistemic-router",
+        "falsación",
+        "investigación profunda",
+        "peer review",
+        "termodinámica epistémica"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-epistemic-thermodynamics-project": {
+      "skill_id": "c5-epistemic-thermodynamics-project",
+      "canonical_alias": "epistemic-hub",
+      "version": "1.0.0",
+      "artifact_sha256": "1c9741cf2a9539c99db9383fc6787bdcbeb7b8304566944e1661a0cb9008fcdb",
+      "tool_identity_hash": "f5b7e6610614a823c347431e10fe5a5cd05a0d2c97f7dec40bbf4b6df406e48f",
+      "lockfile_ref": "skills-lock.json#c5-epistemic-thermodynamics-project@1.0.0",
+      "domain": "nucleus",
+      "summary": "Enruta auditoría epistémica del proyecto, síntesis MDL, extracción de fuentes, biografía, simbiosis cognitiva y explicación clara. Dispara con \"epistemic-hub\", \"epistemic project hub\", \"auditoría epistémica\", \"cloud-chamber\", \"alpha extraction\", \"grill-me-v2\", \"wait-what\".",
+      "tags": [
+        "alpha extraction",
+        "auditoría epistémica",
+        "c5-epistemic-thermodynamics-project",
+        "cloud-chamber",
+        "epistemic project hub",
+        "epistemic-hub",
+        "grill-me-v2",
+        "wait-what"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-exergy-scale-evaluator": {
+      "skill_id": "c5-exergy-scale-evaluator",
+      "canonical_alias": "epistemic-exergy-evaluator",
+      "version": "1.0.0",
+      "artifact_sha256": "f4ce1a59a890c2cbaa5998e4ac27c9c23ac5ca8f086f3bcb8c4fa58c951a1270",
+      "tool_identity_hash": "9fb8001c037073fbb8ff658ac0b677f88280a7a5644af2915b2af8a406abde7e",
+      "lockfile_ref": "skills-lock.json#c5-exergy-scale-evaluator@1.0.0",
+      "domain": "specialized",
+      "summary": "Módulo epistémico. Dispara con \"escala de exergía\", \"evaluar exergía\", \"auditoría de exergía\", \"puntuación exergética\", \"escala 21000\", \"exergy scale\", \"3 evaluadores\".",
+      "tags": [
+        "3 evaluadores",
+        "auditoría de exergía",
+        "c5-exergy-scale-evaluator",
+        "epistemic-exergy-evaluator",
+        "escala 21000",
+        "escala de exergía",
+        "evaluar exergía",
+        "exergy scale",
+        "puntuación exergética"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-gemini-api-2026-standards": {
+      "skill_id": "c5-gemini-api-2026-standards",
+      "canonical_alias": "swarm-gemini-standards",
+      "version": "1.0.0",
+      "artifact_sha256": "debc48077909ae9fa1fca1609dd96fadfbf2aa9d280af78f0fe193837e468c17",
+      "tool_identity_hash": "18bdc102325a770f4fa1262b25f23b5ffd48efcd7baa7becf35f0b7c596bc849",
+      "lockfile_ref": "skills-lock.json#c5-gemini-api-2026-standards@1.0.0",
+      "domain": "specialized",
+      "summary": "Módulo CORTEX. Dispara con \"gemini api 2026\", \"renovar gemini\", \"gemini api key\", \"tensor de transducción\", \"structured outputs\", \"gemini json schema\", \"cuotas gemini api\".",
+      "tags": [
+        "c5-gemini-api-2026-standards",
+        "cuotas gemini api",
+        "gemini api 2026",
+        "gemini api key",
+        "gemini json schema",
+        "renovar gemini",
+        "structured outputs",
+        "swarm-gemini-standards",
+        "tensor de transducción"
+      ],
+      "effect_profile": {
+        "class": "READ_EXT",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": true,
+        "network_egress": "EXTERNAL_NETWORK",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-html-report-injection-audit": {
+      "skill_id": "c5-html-report-injection-audit",
+      "canonical_alias": "xss-report-auditor",
+      "version": "1.0.0",
+      "artifact_sha256": "15a3b6ce3446e000f25170771403e256e698e8042593544b1bf803df3acfd71d",
+      "tool_identity_hash": "c11254f0d2678b56cec00f5b9273ab8c473527c28e92ed4c1cd501b2805f456a",
+      "lockfile_ref": "skills-lock.json#c5-html-report-injection-audit@1.0.0",
+      "domain": "governance",
+      "summary": "Módulo SecOps. Dispara con \"inyección html\", \"xss reporte\", \"autoescape jinja\", \"auditar exportador\", \"escape de ledger\".",
+      "tags": [
+        "auditar exportador",
+        "autoescape jinja",
+        "c5-html-report-injection-audit",
+        "escape de ledger",
+        "inyección html",
+        "xss reporte",
+        "xss-report-auditor"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-information-thermodynamics": {
+      "skill_id": "c5-information-thermodynamics",
+      "canonical_alias": "epistemic-info-thermo",
+      "version": "1.0.0",
+      "artifact_sha256": "b87c27eb8635ec0c337fde85c2a92c89ec28ed0804b88610722631d9b262091f",
+      "tool_identity_hash": "8be6520bea2b821467f514d07079a713b78a5f42af5cf6ce7523ed169204c05b",
+      "lockfile_ref": "skills-lock.json#c5-information-thermodynamics@1.0.0",
+      "domain": "nucleus",
+      "summary": "Módulo epistémico. Dispara con \"entropía de shannon\", \"divergencia kl\", \"kullback leibler\", \"fisher information\", \"teorema de chentsov\", \"landauer limit\", \"information geometry\", \"amari natural gradient\", \"flujo de wasserstein\", \"audita entropía\".",
+      "tags": [
+        "amari natural gradient",
+        "audita entropía",
+        "c5-information-thermodynamics",
+        "divergencia kl",
+        "entropía de shannon",
+        "epistemic-info-thermo",
+        "fisher information",
+        "flujo de wasserstein",
+        "information geometry",
+        "kullback leibler",
+        "landauer limit",
+        "teorema de chentsov"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-kudurru-64": {
+      "skill_id": "c5-kudurru-64",
+      "canonical_alias": "kernel-seqlock-filter",
+      "version": "1.0.0",
+      "artifact_sha256": "462de6531ea42bc40c68226a2c47bbc853644debf5946df56fbcf37cb65f86d6",
+      "tool_identity_hash": "b699e1de78619624949e50b88f5b9637d97436faef408cb1db01e3398654d0ad",
+      "lockfile_ref": "skills-lock.json#c5-kudurru-64@1.0.0",
+      "domain": "kernel",
+      "summary": "Módulo Ring-0. Dispara con \"kudurru\", \"kudurru-64\", \"filtro de gravedad\", \"seqlock 64b\", \"ddos cognitivo\".",
+      "tags": [
+        "c5-kudurru-64",
+        "ddos cognitivo",
+        "filtro de gravedad",
+        "kernel-seqlock-filter",
+        "kudurru",
+        "kudurru-64",
+        "seqlock 64b"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-larsa-120": {
+      "skill_id": "c5-larsa-120",
+      "canonical_alias": "kernel-bft-consensus",
+      "version": "1.0.0",
+      "artifact_sha256": "8337f9ad6f82f44cf67efbcb03d9bf4052ea5846ebb248e64206f59870d83a0b",
+      "tool_identity_hash": "732312fec7d8cd6e638def5e36a0ac282fadd7bfb5b0392dad477969b2591938",
+      "lockfile_ref": "skills-lock.json#c5-larsa-120@1.0.0",
+      "domain": "kernel",
+      "summary": "Módulo Ring-0. Dispara con \"larsa\", \"larsa-120\", \"consenso bft\", \"tríada arquitectónica\", \"consenso isostático\".",
+      "tags": [
+        "c5-larsa-120",
+        "consenso bft",
+        "consenso isostático",
+        "kernel-bft-consensus",
+        "larsa",
+        "larsa-120",
+        "tríada arquitectónica"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-lean4-axiomatic-orchestrator": {
+      "skill_id": "c5-lean4-axiomatic-orchestrator",
+      "canonical_alias": "kernel-lean4-prover",
+      "version": "1.0.0",
+      "artifact_sha256": "4c7822743d3b40f7055073b3d603b58f56632c6b3e0086864bc57463c2e22893",
+      "tool_identity_hash": "d90f587693438029c194dddff50548acba7e8fd9044976f57569eb437a1e52d4",
+      "lockfile_ref": "skills-lock.json#c5-lean4-axiomatic-orchestrator@1.0.0",
+      "domain": "nucleus",
+      "summary": "Módulo Ring-0. Dispara con \"lean 4\", \"formalizar en lean\", \"oráculo axiomático\", \"lake build\", \"verificación formal\", \"axiomas lean\", \"probar teorema\", \"neuro-simbólico\".",
+      "tags": [
+        "axiomas lean",
+        "c5-lean4-axiomatic-orchestrator",
+        "formalizar en lean",
+        "kernel-lean4-prover",
+        "lake build",
+        "lean 4",
+        "neuro-simbólico",
+        "oráculo axiomático",
+        "probar teorema",
+        "verificación formal"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-lean4-neurosymbolic-architect": {
+      "skill_id": "c5-lean4-neurosymbolic-architect",
+      "canonical_alias": "kernel-lean4-ffi",
+      "version": "1.0.0",
+      "artifact_sha256": "879cb547f8d64300afb7405bc442fc90fca583d66767a7fab17a6462baa74a32",
+      "tool_identity_hash": "3499020074a305633e4fbb6073100b9cf7dc97cb3e69425935c64c02f2ed79a9",
+      "lockfile_ref": "skills-lock.json#c5-lean4-neurosymbolic-architect@1.0.0",
+      "domain": "nucleus",
+      "summary": "Módulo Ring-0. Dispara con \"lean 4 ffi\", \"agente neuro-simbólico\", \"autopoiesis coinductiva\", \"itrees lean\".",
+      "tags": [
+        "agente neuro-simbólico",
+        "autopoiesis coinductiva",
+        "c5-lean4-neurosymbolic-architect",
+        "itrees lean",
+        "kernel-lean4-ffi",
+        "lean 4 ffi"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-lexicon-enforcer": {
+      "skill_id": "c5-lexicon-enforcer",
+      "canonical_alias": "epistemic-lexicon-enforcer",
+      "version": "1.0.0",
+      "artifact_sha256": "c5e61ff29c4626ef2769f55e4c5af5ad3e9e9e66d21c3461c5615168e6d4734c",
+      "tool_identity_hash": "8f9cfca4500d9ce9504405e4ac33f2358e16ad318faddee506ad155ae4b4c866",
+      "lockfile_ref": "skills-lock.json#c5-lexicon-enforcer@1.0.0",
+      "domain": "nucleus",
+      "summary": "Módulo epistémico. Dispara con \"lexicon enforcer\", \"purga anergía semántica\", \"auditoría epistemológica\", \"forzar léxico c5\", \"auditar cheap talk\", \"analiza esto con el aforismo 5\".",
+      "tags": [
+        "analiza esto con el aforismo 5",
+        "auditar cheap talk",
+        "auditoría epistemológica",
+        "c5-lexicon-enforcer",
+        "epistemic-lexicon-enforcer",
+        "forzar léxico c5",
+        "lexicon enforcer",
+        "purga anergía semántica"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-media-platform-epistemology": {
+      "skill_id": "c5-media-platform-epistemology",
+      "canonical_alias": "media-platform-scraper",
+      "version": "1.0.0",
+      "artifact_sha256": "970c40f3afadebbad431183ff6363ad40e052a0fe53f0dcf1a6c998b56ef7e98",
+      "tool_identity_hash": "00a58d013549b5cc3855e38fa2ea2fbc939d5860ffc8094ea39d72245e4f7ff0",
+      "lockfile_ref": "skills-lock.json#c5-media-platform-epistemology@1.0.0",
+      "domain": "specialized",
+      "summary": "Módulo audiovisual. Dispara con \"procesar audio largo\", \"scraping spa\", \"falsos positivos http 200\", \"adquisicion opus nativo\", \"rip opus youtube\", \"itag 251\".",
+      "tags": [
+        "adquisicion opus nativo",
+        "c5-media-platform-epistemology",
+        "falsos positivos http 200",
+        "itag 251",
+        "media-platform-scraper",
+        "procesar audio largo",
+        "rip opus youtube",
+        "scraping spa"
+      ],
+      "effect_profile": {
+        "class": "STATE_MUTATION",
+        "reversibility": "COMPENSATABLE",
+        "requires_action_lease": true,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == result.observed_post_hash",
+          "result.observed_post_hash != args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-metodo-acreativo": {
+      "skill_id": "c5-metodo-acreativo",
+      "canonical_alias": "media-acreativo-method",
+      "version": "1.0.0",
+      "artifact_sha256": "24c1acf5814bfafc1cd0d2bf086c5d7dcefe2f514775c24470d934c01357dce6",
+      "tool_identity_hash": "482818621ec3fe040a59c41acea3aff86a2ffedc0ca47521ccd37ddacc9dd34f",
+      "lockfile_ref": "skills-lock.json#c5-metodo-acreativo@1.0.0",
+      "domain": "nucleus",
+      "summary": "Módulo audiovisual. Dispara con \"metodo acreativo\", \"método acreativo\", \"transducción soberana\", \"oraculo de apoptosis\", \"protocolo rubin\", \"crear arte c5\", \"produccion musical c5\".",
+      "tags": [
+        "c5-metodo-acreativo",
+        "crear arte c5",
+        "media-acreativo-method",
+        "metodo acreativo",
+        "método acreativo",
+        "oraculo de apoptosis",
+        "produccion musical c5",
+        "protocolo rubin",
+        "transducción soberana"
+      ],
+      "effect_profile": {
+        "class": "STATE_MUTATION",
+        "reversibility": "COMPENSATABLE",
+        "requires_action_lease": true,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == result.observed_post_hash",
+          "result.observed_post_hash != args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-mushushu-0": {
+      "skill_id": "c5-mushushu-0",
+      "canonical_alias": "kernel-epistemic-firewall",
+      "version": "1.0.0",
+      "artifact_sha256": "e260016c816f8d3c38a2d93c0a76e7428d2a6be845e1e74a9a5284a1a24049f7",
+      "tool_identity_hash": "750f18430b6aaf1ec546061547f588f159269ebf1ab251b01264868fa897725a",
+      "lockfile_ref": "skills-lock.json#c5-mushushu-0@1.0.0",
+      "domain": "kernel",
+      "summary": "Módulo Ring-0. Dispara con \"mushushu\", \"mushushu-0\", \"firewall epistémico\", \"apoptosis termodinámica\".",
+      "tags": [
+        "apoptosis termodinámica",
+        "c5-mushushu-0",
+        "firewall epistémico",
+        "kernel-epistemic-firewall",
+        "mushushu",
+        "mushushu-0"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-neural-face-swap-cuadrilla": {
+      "skill_id": "c5-neural-face-swap-cuadrilla",
+      "canonical_alias": "media-neural-faceswap",
+      "version": "1.0.0",
+      "artifact_sha256": "99e6b661ea55e23a83761748413a16fd0f37494c619524f3eaf68424836f0e46",
+      "tool_identity_hash": "355bfac1b0c9bed67cb4060aa6c1b1382c0225fdc9d5b6186d79a192bfb19201",
+      "lockfile_ref": "skills-lock.json#c5-neural-face-swap-cuadrilla@1.0.0",
+      "domain": "operations",
+      "summary": "Módulo audiovisual. Dispara con \"face swap\", \"deepfake cuadrilla\", \"intercambio facial\", \"c5 face swap\".",
+      "tags": [
+        "c5 face swap",
+        "c5-neural-face-swap-cuadrilla",
+        "deepfake cuadrilla",
+        "face swap",
+        "intercambio facial",
+        "media-neural-faceswap"
+      ],
+      "effect_profile": {
+        "class": "STATE_MUTATION",
+        "reversibility": "COMPENSATABLE",
+        "requires_action_lease": true,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == result.observed_post_hash",
+          "result.observed_post_hash != args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-ontological-translator": {
+      "skill_id": "c5-ontological-translator",
+      "canonical_alias": "epistemic-ontological-translator",
+      "version": "1.0.0",
+      "artifact_sha256": "f3f11b0d2f185ea009f414702ca774b5524cb00529331d2bdbb82ee0f0a78dd0",
+      "tool_identity_hash": "73d0d0e8fdcefcaf2bfc70ffeb8b3c66847b393af9374d26aeb263482bb18cec",
+      "lockfile_ref": "skills-lock.json#c5-ontological-translator@1.0.0",
+      "domain": "specialized",
+      "summary": "Módulo epistémico. Dispara con \"traducción ontológica\", \"colapso semántico\", \"traducir a c5\", \"mapeo ontológico\", \"ontological translator\", \"colapso ontológico\".",
+      "tags": [
+        "c5-ontological-translator",
+        "colapso ontológico",
+        "colapso semántico",
+        "epistemic-ontological-translator",
+        "mapeo ontológico",
+        "ontological translator",
+        "traducción ontológica",
+        "traducir a c5"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-plan-omega": {
+      "skill_id": "c5-plan-omega",
+      "canonical_alias": "swarm-dag-planner",
+      "version": "1.0.0",
+      "artifact_sha256": "84522d26e3bcd516653c3e2875adca308c474f9d33ed10c81024a20b3998553c",
+      "tool_identity_hash": "c6f2a9a97d0d0de26c7dc86e3d0c9016f534622769aa265e5a8ae0592ece0bc6",
+      "lockfile_ref": "skills-lock.json#c5-plan-omega@1.0.0",
+      "domain": "nucleus",
+      "summary": "Módulo CORTEX. Dispara con \"plan omega\", \"c5 plan\", \"plan causal\", \"protocolo plan omega\", \"mejorar plan\", \"/plan-omega\".",
+      "tags": [
+        "/plan-omega",
+        "c5 plan",
+        "c5-plan-omega",
+        "mejorar plan",
+        "plan causal",
+        "plan omega",
+        "protocolo plan omega",
+        "swarm-dag-planner"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-popperian-falsification-auditor": {
+      "skill_id": "c5-popperian-falsification-auditor",
+      "canonical_alias": "epistemic-popperian-auditor",
+      "version": "1.0.0",
+      "artifact_sha256": "839cc964a41c4a614fc02dfd328a3f71eb966f5983dbff82a71dfdf5837d51de",
+      "tool_identity_hash": "21e25e833cfbaf792d8623f93416b226f3ebd7c3fd1a14187876adf34d626be3",
+      "lockfile_ref": "skills-lock.json#c5-popperian-falsification-auditor@1.0.0",
+      "domain": "nucleus",
+      "summary": "Módulo epistémico. Dispara con 'falsación de documento', 'auditar documento', 'falsar afirmación', 'veredicto empírico', 'falsar paper'.",
+      "tags": [
+        "auditar documento",
+        "c5-popperian-falsification-auditor",
+        "epistemic-popperian-auditor",
+        "falsación de documento",
+        "falsar afirmación",
+        "falsar paper",
+        "veredicto empírico"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-poster-and-sign-craft": {
+      "skill_id": "c5-poster-and-sign-craft",
+      "canonical_alias": "media-poster-craft",
+      "version": "1.0.0",
+      "artifact_sha256": "9c70ace8b1457513360b22baee2b19b7bf27d834a2ef34eb560245ce682d6c3b",
+      "tool_identity_hash": "2a2c62fd4f47427e67f24a79c6d0358deb2a5bc859f8ecd44f3822d130cb13d2",
+      "lockfile_ref": "skills-lock.json#c5-poster-and-sign-craft@1.0.0",
+      "domain": "multimedia & dsp",
+      "summary": "Módulo audiovisual. Dispara con \"remasterizar cartel\", \"rotular letrero\", \"cambiar texto cartel\", \"sign craft\", \"filtro vintage comic\", \"bajar contraste imagen\", \"quitar contraste duro\", \"poster remaster\", \"maquetación cartel\", \"analizar cartel\", \"flyer underground\", \"auditoría tipográfica cartel\".",
+      "tags": [
+        "analizar cartel",
+        "auditoría tipográfica cartel",
+        "bajar contraste imagen",
+        "c5-poster-and-sign-craft",
+        "cambiar texto cartel",
+        "filtro vintage comic",
+        "flyer underground",
+        "maquetación cartel",
+        "media-poster-craft",
+        "poster remaster",
+        "quitar contraste duro",
+        "remasterizar cartel",
+        "rotular letrero",
+        "sign craft"
+      ],
+      "effect_profile": {
+        "class": "STATE_MUTATION",
+        "reversibility": "COMPENSATABLE",
+        "requires_action_lease": true,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == result.observed_post_hash",
+          "result.observed_post_hash != args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-rea-clean-room": {
+      "skill_id": "c5-rea-clean-room",
+      "canonical_alias": "kernel-rea-clean-room",
+      "version": "1.0.0",
+      "artifact_sha256": "1e086c2385762b6800ef0c5bc0129b96fa09e6fb277a7aea3a65c0028d4cd5f4",
+      "tool_identity_hash": "5906b6f2c913ce9cf3d972dc4c1845784c3b7408829853c35ea5a0a22c53a5b7",
+      "lockfile_ref": "skills-lock.json#c5-rea-clean-room@1.0.0",
+      "domain": "kernel",
+      "summary": "Disección binaria AOT/Mach-O y Electron ASAR en memoria (<15ms), síntesis Clean-Room (TS/Rust/Python) y firewall Popperiano Existence-Gap.",
+      "tags": [
+        "/c5-rea",
+        "c5-rea",
+        "c5-rea-clean-room",
+        "clean-room synthesis",
+        "disección aot",
+        "kernel-rea-clean-room",
+        "rea harness",
+        "rea-decompile",
+        "rea-triage",
+        "rea-unpack"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-real-legaltech-analysis": {
+      "skill_id": "c5-real-legaltech-analysis",
+      "canonical_alias": "venture-legaltech-audit",
+      "version": "1.0.0",
+      "artifact_sha256": "9303c5916261f4b040feb7c5712671207f9d99abb52ae928a31207708a6e3134",
+      "tool_identity_hash": "08d6d6a4a9a53fb636278c6f198852e92ccd1cf0e19a6b17a7a0e57b048aef33",
+      "lockfile_ref": "skills-lock.json#c5-real-legaltech-analysis@1.0.0",
+      "domain": "governance",
+      "summary": "Módulo Wetware/Venture. Dispara con \"legaltech\", \"auditoría legal\", \"EU AI Act\", \"cumplimiento regulatorio\", \"contrato inteligente c5\", \"whitepaper legal\".",
+      "tags": [
+        "auditoría legal",
+        "c5-real-legaltech-analysis",
+        "contrato inteligente c5",
+        "cumplimiento regulatorio",
+        "eu ai act",
+        "legaltech",
+        "venture-legaltech-audit",
+        "whitepaper legal"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-ring0-babylon-kernel": {
+      "skill_id": "c5-ring0-babylon-kernel",
+      "canonical_alias": "kernel-router",
+      "version": "1.0.0",
+      "artifact_sha256": "9466c996566f2a6d4b25cca8b59c1d607938c5e3a331a9b4bf4ba67e214348db",
+      "tool_identity_hash": "b64f0e9986ed25a3e85ff5bfbfd09bcede751c6e3df01b76ec636107e9a5229f",
+      "lockfile_ref": "skills-lock.json#c5-ring0-babylon-kernel@1.0.0",
+      "domain": "kernel",
+      "summary": "Enruta auditorías y trabajo de kernel, Lean 4/Z3, BFT, Seqlock, silicio, inferencia local y atestación; carga solo el módulo relevante. Dispara con \"ring0 hub\", \"kernel hub\", \"lean 4\", \"larsa\", \"kudurru\", \"eridu\", \"laya\".",
+      "tags": [
+        "c5-ring0-babylon-kernel",
+        "eridu",
+        "kernel hub",
+        "kernel-router",
+        "kudurru",
+        "larsa",
+        "laya",
+        "lean 4",
+        "ring0 hub"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-ring0-babylon-kernel-project": {
+      "skill_id": "c5-ring0-babylon-kernel-project",
+      "canonical_alias": "kernel-hub",
+      "version": "1.0.0",
+      "artifact_sha256": "d42491f9852c0a76c853699c1b949dde2413812953ba17c4b6f7aed0b58dde59",
+      "tool_identity_hash": "cc0a50fd62cf75876a916ca180f11ad63f42397e1bfcbe28d076d904c3235760",
+      "lockfile_ref": "skills-lock.json#c5-ring0-babylon-kernel-project@1.0.0",
+      "domain": "kernel",
+      "summary": "Enruta módulos BABYLON-60 del proyecto: SPSC, SQLite L0, arquitectura IDE, SharedManifest, launchd, Apple Silicon y auditoría de contención. Dispara con \"kernel-hub\", \"babylon kernel hub\", \"shared manifest\", \"thermo-audit\", \"rlhf sentinel\", \"apple-bypass\".",
+      "tags": [
+        "apple-bypass",
+        "babylon kernel hub",
+        "c5-ring0-babylon-kernel-project",
+        "kernel-hub",
+        "rlhf sentinel",
+        "shared manifest",
+        "thermo-audit"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-rubin-acoustic-linter": {
+      "skill_id": "c5-rubin-acoustic-linter",
+      "canonical_alias": "media-acoustic-linter",
+      "version": "1.0.0",
+      "artifact_sha256": "c57233d1fe10cacf9093308012eb219c4fb0c9f56b19eac887ed0adc02e4f663",
+      "tool_identity_hash": "2e424b52585882ad44f6f2b6ed73ca061082a643f3fabb9410a9033dde772d52",
+      "lockfile_ref": "skills-lock.json#c5-rubin-acoustic-linter@1.0.0",
+      "domain": "operations",
+      "summary": "Módulo audiovisual. Dispara con \"linter acústico\", \"auditoría de mezcla\", \"purga de nata en audio\", \"rubin audit\", \"dedup apfs audio\", \"crest factor audio\", \"medir compresión\".",
+      "tags": [
+        "auditoría de mezcla",
+        "c5-rubin-acoustic-linter",
+        "crest factor audio",
+        "dedup apfs audio",
+        "linter acústico",
+        "media-acoustic-linter",
+        "medir compresión",
+        "purga de nata en audio",
+        "rubin audit"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-secops-infra-devtools": {
+      "skill_id": "c5-secops-infra-devtools",
+      "canonical_alias": "secops-hub",
+      "version": "1.0.0",
+      "artifact_sha256": "950896185b681887d4878b489e3f11a8b64047913316eed8c4b875054874bde9",
+      "tool_identity_hash": "9ca88e1a1ddbb16f28ef2b0fccf09c2f74d1420b956e4db85268fb03638dbeae",
+      "lockfile_ref": "skills-lock.json#c5-secops-infra-devtools@1.0.0",
+      "domain": "governance",
+      "summary": "Enruta auditoría de seguridad, forense de navegadores y binarios, herramientas Git, infraestructura y extracción de fuentes. Dispara con \"secops hub\", \"infra devtools hub\", \"auditoría de seguridad\", \"forense\", \"diagnóstico de infraestructura\".",
+      "tags": [
+        "auditoría de seguridad",
+        "c5-secops-infra-devtools",
+        "diagnóstico de infraestructura",
+        "forense",
+        "infra devtools hub",
+        "secops hub",
+        "secops-hub"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-session-deskimming": {
+      "skill_id": "c5-session-deskimming",
+      "canonical_alias": "swarm-session-deskimming",
+      "version": "1.0.0",
+      "artifact_sha256": "d8d5db543b38ac938284057f059f0dac3e3bd61eeed7ecd92892a1834e7691fc",
+      "tool_identity_hash": "945c4c90aec53247001b92a8cff8913b42397c62d0635885bd71a6fda3d6be92",
+      "lockfile_ref": "skills-lock.json#c5-session-deskimming@1.0.0",
+      "domain": "governance",
+      "summary": "Módulo CORTEX. Dispara con \"deskimming\", \"desnatar sesión\", \"purgar nata sesión\", \"archivos huérfanos\".",
+      "tags": [
+        "archivos huérfanos",
+        "c5-session-deskimming",
+        "deskimming",
+        "desnatar sesión",
+        "purgar nata sesión",
+        "swarm-session-deskimming"
+      ],
+      "effect_profile": {
+        "class": "STATE_MUTATION",
+        "reversibility": "COMPENSATABLE",
+        "requires_action_lease": true,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == result.observed_post_hash",
+          "result.observed_post_hash != args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-sharur-3600": {
+      "skill_id": "c5-sharur-3600",
+      "canonical_alias": "swarm-legion-100",
+      "version": "1.0.0",
+      "artifact_sha256": "401793cc33b35593e96de943f7364fe0495c288b484d2c54c01fbe0b8e76f146",
+      "tool_identity_hash": "4bbf4456c6bf67fb1f6aa4002f79bb9185b6c3ea8a1b659bf214cb2226d8beeb",
+      "lockfile_ref": "skills-lock.json#c5-sharur-3600@1.0.0",
+      "domain": "governance",
+      "summary": "Módulo CORTEX. Dispara con 'sharur', 'sharur-3600', '100 agentes', 'mas 100 agentes', 'legion 100', 'legión de 100 agentes', 'enjambre 100'.",
+      "tags": [
+        "100 agentes",
+        "c5-sharur-3600",
+        "enjambre 100",
+        "legion 100",
+        "legión de 100 agentes",
+        "mas 100 agentes",
+        "sharur",
+        "sharur-3600",
+        "swarm-legion-100"
+      ],
+      "effect_profile": {
+        "class": "STATE_MUTATION",
+        "reversibility": "COMPENSATABLE",
+        "requires_action_lease": true,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == result.observed_post_hash",
+          "result.observed_post_hash != args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-silicon-stress-suite": {
+      "skill_id": "c5-silicon-stress-suite",
+      "canonical_alias": "kernel-stress-suite",
+      "version": "1.0.0",
+      "artifact_sha256": "a79c9688cebf93e8883abb64f83114edb86e6ae1cb8362c625738bcec5a0fd08",
+      "tool_identity_hash": "63bc2461f4c0601195a44b890323736cb7ad78080560a53fc3e5165853507a9b",
+      "lockfile_ref": "skills-lock.json#c5-silicon-stress-suite@1.0.0",
+      "domain": "operations",
+      "summary": "Módulo Ring-0. Dispara con \"pruebas de estres\", \"stress test swarm\", \"estres enjambre\", \"concurrencia de silicio\", \"stress suite\", \"poc\", \"test de estres\", \"estres silicio\".",
+      "tags": [
+        "c5-silicon-stress-suite",
+        "concurrencia de silicio",
+        "estres enjambre",
+        "estres silicio",
+        "kernel-stress-suite",
+        "poc",
+        "pruebas de estres",
+        "stress suite",
+        "stress test swarm",
+        "test de estres"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-socint-extraction-suite": {
+      "skill_id": "c5-socint-extraction-suite",
+      "canonical_alias": "secops-socint-extractor",
+      "version": "1.0.0",
+      "artifact_sha256": "54cd2ac363d63bc538ddcf0da80137ed3437c39861363c7eb965f344882a58a8",
+      "tool_identity_hash": "d85aa45453723520d88f56bcee50195fb39063a9448feb8a88981990bb1c0a9a",
+      "lockfile_ref": "skills-lock.json#c5-socint-extraction-suite@1.0.0",
+      "domain": "socint & web",
+      "summary": "Módulo SecOps. Dispara con \"socint suite\", \"inteligencia social\", \"scraping redes\", \"reddit socint\", \"substack socint\", \"auditar tweet\", \"analizar hilo x\".",
+      "tags": [
+        "analizar hilo x",
+        "auditar tweet",
+        "c5-socint-extraction-suite",
+        "inteligencia social",
+        "reddit socint",
+        "scraping redes",
+        "secops-socint-extractor",
+        "socint suite",
+        "substack socint"
+      ],
+      "effect_profile": {
+        "class": "READ_EXT",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": true,
+        "network_egress": "EXTERNAL_NETWORK",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-solar-thermodynamic-architecture": {
+      "skill_id": "c5-solar-thermodynamic-architecture",
+      "canonical_alias": "media-solar-architecture",
+      "version": "1.0.0",
+      "artifact_sha256": "60b958d99083678a306027557f186549a1056d9fe3bedec3552f39f2f2800409",
+      "tool_identity_hash": "195c51a7635aaa5e6bc1f1c45445488c8b6319ab0d4dee4b96be58ddaf68499e",
+      "lockfile_ref": "skills-lock.json#c5-solar-thermodynamic-architecture@1.0.0",
+      "domain": "specialized",
+      "summary": "Módulo audiovisual. Dispara con \"sun path\", \"análisis solar\", \"confort térmico\", \"estudio de sombras\", \"fanger pmv\", \"helio-arquitectura\", \"bioclimático\".",
+      "tags": [
+        "análisis solar",
+        "bioclimático",
+        "c5-solar-thermodynamic-architecture",
+        "confort térmico",
+        "estudio de sombras",
+        "fanger pmv",
+        "helio-arquitectura",
+        "media-solar-architecture",
+        "sun path"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-somatic-panic-deescalation": {
+      "skill_id": "c5-somatic-panic-deescalation",
+      "canonical_alias": "wetware-panic-deescalation",
+      "version": "1.0.0",
+      "artifact_sha256": "4309ed39218c0bfdfa47635334a10263aeab15988062e77f46277c9c5a589968",
+      "tool_identity_hash": "5f7dd606641a15140b78fe90d396438ca494d60d3de0c88723eba67ad24ac8d7",
+      "lockfile_ref": "skills-lock.json#c5-somatic-panic-deescalation@1.0.0",
+      "domain": "specialized",
+      "summary": "Módulo Wetware/Venture. Dispara con \"ataque de ansiedad\", \"ataque de pánico\", \"hiperfijación somática\", \"no puedo dormir por la respiración\", \"bucle de pánico\", \"siento que me muero\", \"desescalar pánico\".",
+      "tags": [
+        "ataque de ansiedad",
+        "ataque de pánico",
+        "bucle de pánico",
+        "c5-somatic-panic-deescalation",
+        "desescalar pánico",
+        "hiperfijación somática",
+        "no puedo dormir por la respiración",
+        "siento que me muero",
+        "wetware-panic-deescalation"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-sovereign-binary-architect": {
+      "skill_id": "c5-sovereign-binary-architect",
+      "canonical_alias": "kernel-static-binary",
+      "version": "1.0.0",
+      "artifact_sha256": "7cfd2082c56d82ca561bd4cd5ab38726398fd93def74faf46a251af523e6eb3f",
+      "tool_identity_hash": "e9a5d8ab2852b94e55b319007a68dc9783df5ad51754a658081a22e7ce3097a5",
+      "lockfile_ref": "skills-lock.json#c5-sovereign-binary-architect@1.0.0",
+      "domain": "systems",
+      "summary": "Módulo Ring-0. Dispara con \"binario estático\", \"aislar dependencias\", \"soberanía termodinámica\", \"c5-sovereign-binary\", \"compilación musl\", \"binario soberano\".",
+      "tags": [
+        "aislar dependencias",
+        "binario estático",
+        "binario soberano",
+        "c5-sovereign-binary",
+        "c5-sovereign-binary-architect",
+        "compilación musl",
+        "kernel-static-binary",
+        "soberanía termodinámica"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-sovereign-daemon-deployment": {
+      "skill_id": "c5-sovereign-daemon-deployment",
+      "canonical_alias": "kernel-daemon-deploy",
+      "version": "1.0.0",
+      "artifact_sha256": "781137ccf77d9db1f0698701d96b7628d48f12cc2848682cc1fb2b483bece297",
+      "tool_identity_hash": "a2be25e773fb611574628d073531316672e172ece2c29767c06ce096884fed24",
+      "lockfile_ref": "skills-lock.json#c5-sovereign-daemon-deployment@1.0.0",
+      "domain": "operations",
+      "summary": "Protocolo estricto para desplegar el Sovereign Spark Daemon (Antigravity Engine en Rust) sobre el sistema init local de macOS (launchd) para ejecución 24/7 ininterrumpida.",
+      "tags": [
+        "c5-sovereign-daemon-deployment",
+        "daemon 24/7",
+        "desplegar sovereign daemon",
+        "kernel-daemon-deploy",
+        "launchd rust daemon"
+      ],
+      "effect_profile": {
+        "class": "STATE_MUTATION",
+        "reversibility": "COMPENSATABLE",
+        "requires_action_lease": true,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == result.observed_post_hash",
+          "result.observed_post_hash != args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-sovereign-identity-hardening": {
+      "skill_id": "c5-sovereign-identity-hardening",
+      "canonical_alias": "secops-identity-hardening",
+      "version": "1.0.0",
+      "artifact_sha256": "c36badf3856ce65cec7846aaf2a19ce482646e63a3b681d6628646af5921ef1e",
+      "tool_identity_hash": "759b3ba45ec57cfeba753c3ac755ceb82383cdfd7d4e026f5ea145bce54f7467",
+      "lockfile_ref": "skills-lock.json#c5-sovereign-identity-hardening@1.0.0",
+      "domain": "governance",
+      "summary": "Módulo SecOps. Dispara con \"identidad soberana\", \"data breach\", \"filtración de correo\", \"have i been pwned\", \"k-anonimato\", \"hardened identity\", \"alias email\".",
+      "tags": [
+        "alias email",
+        "c5-sovereign-identity-hardening",
+        "data breach",
+        "filtración de correo",
+        "hardened identity",
+        "have i been pwned",
+        "identidad soberana",
+        "k-anonimato",
+        "secops-identity-hardening"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-sovereign-inference-runtime": {
+      "skill_id": "c5-sovereign-inference-runtime",
+      "canonical_alias": "kernel-local-inference",
+      "version": "1.0.0",
+      "artifact_sha256": "4ce3fca616726adf29d0faed83a9423402f715d135b8e72a1dde0e9d295c1120",
+      "tool_identity_hash": "25b0981c88c2f5aac04b37316d877d9563a4f396272d97c5e1d6588453a205cd",
+      "lockfile_ref": "skills-lock.json#c5-sovereign-inference-runtime@1.0.0",
+      "domain": "systems",
+      "summary": "Módulo Ring-0. Dispara con \"eridu-infer\", \"inferencia soberana\", \"appliance ia\", \"lm studio protocolo\", \"motor inferencia local\", \"air-gapped infer\", \"servidor openai local rust\", \"sovereign inference runtime\", \"desplegar eridu-infer\", \"tríada jurídica\".",
+      "tags": [
+        "air-gapped infer",
+        "appliance ia",
+        "c5-sovereign-inference-runtime",
+        "desplegar eridu-infer",
+        "eridu-infer",
+        "inferencia soberana",
+        "kernel-local-inference",
+        "lm studio protocolo",
+        "motor inferencia local",
+        "servidor openai local rust",
+        "sovereign inference runtime",
+        "tríada jurídica"
+      ],
+      "effect_profile": {
+        "class": "STATE_MUTATION",
+        "reversibility": "COMPENSATABLE",
+        "requires_action_lease": true,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == result.observed_post_hash",
+          "result.observed_post_hash != args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-sovereign-system1-engine": {
+      "skill_id": "c5-sovereign-system1-engine",
+      "canonical_alias": "kernel-system1-decision",
+      "version": "1.0.0",
+      "artifact_sha256": "106db47057449df138d4e88c0b06cd83b20183912b4e985b1c5f844bd709763b",
+      "tool_identity_hash": "ce1c319ff14566a7340f7f5b5797cb251a2ede7aaae8cd855b9065a0a0d36c10",
+      "lockfile_ref": "skills-lock.json#c5-sovereign-system1-engine@1.0.0",
+      "domain": "nucleus",
+      "summary": "Módulo Ring-0. Dispara con 'laya', 'sistema 1 edge', 'jev local', 'triage desacoplado', 'kudurru 64 socket', 'decision engine local'.",
+      "tags": [
+        "c5-sovereign-system1-engine",
+        "decision engine local",
+        "jev local",
+        "kernel-system1-decision",
+        "kudurru 64 socket",
+        "laya",
+        "sistema 1 edge",
+        "triage desacoplado"
+      ],
+      "effect_profile": {
+        "class": "STATE_MUTATION",
+        "reversibility": "COMPENSATABLE",
+        "requires_action_lease": true,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == result.observed_post_hash",
+          "result.observed_post_hash != args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-spaced-repetition-architect": {
+      "skill_id": "c5-spaced-repetition-architect",
+      "canonical_alias": "wetware-spaced-repetition",
+      "version": "1.0.0",
+      "artifact_sha256": "38edc41ee453ab49a1cbc24b2e9238e13ad81396b71d4334f2a21c91d7aa6ff0",
+      "tool_identity_hash": "58963453b3b45f094a78ade9bcf16474944663d6f001d0262d6f70651fd1be64",
+      "lockfile_ref": "skills-lock.json#c5-spaced-repetition-architect@1.0.0",
+      "domain": "operations",
+      "summary": "Módulo Wetware/Venture. Dispara con \"anki maker\", \"tarjetas anki\", \"anki flashcards\", \"repetición espaciada\", \"adhd assistant\", \"descomposición de tareas\", \"micro-tasking\", \"spaced repetition\".",
+      "tags": [
+        "adhd assistant",
+        "anki flashcards",
+        "anki maker",
+        "c5-spaced-repetition-architect",
+        "descomposición de tareas",
+        "micro-tasking",
+        "repetición espaciada",
+        "spaced repetition",
+        "tarjetas anki",
+        "wetware-spaced-repetition"
+      ],
+      "effect_profile": {
+        "class": "STATE_MUTATION",
+        "reversibility": "COMPENSATABLE",
+        "requires_action_lease": true,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == result.observed_post_hash",
+          "result.observed_post_hash != args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-spatial-audio-architect": {
+      "skill_id": "c5-spatial-audio-architect",
+      "canonical_alias": "media-spatial-audio",
+      "version": "1.0.0",
+      "artifact_sha256": "fce7ab4e7e42baa4afd5d5788a78d1a8968c8349af1c64bb00fdf21c35a41368",
+      "tool_identity_hash": "339ae4c7445dde389c5cb397eddb0988a18bb20e392b672bcad906fcbbf6466b",
+      "lockfile_ref": "skills-lock.json#c5-spatial-audio-architect@1.0.0",
+      "domain": "multimedia & dsp",
+      "summary": "Módulo audiovisual. Dispara con \"auditoría dsp\", \"audio espacial\", \"criticar estéreo\", \"hoa\", \"binaural\", \"ambisonics\", \"spatial audio\".",
+      "tags": [
+        "ambisonics",
+        "audio espacial",
+        "auditoría dsp",
+        "binaural",
+        "c5-spatial-audio-architect",
+        "criticar estéreo",
+        "hoa",
+        "media-spatial-audio",
+        "spatial audio"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-sre-postmortem-architect": {
+      "skill_id": "c5-sre-postmortem-architect",
+      "canonical_alias": "secops-sre-postmortem",
+      "version": "1.0.0",
+      "artifact_sha256": "697ced399b60d296bccf679541852e308cc053fd19f3c37d216a062a278dacb3",
+      "tool_identity_hash": "2447117dd550077a39f56189d6730a773113a754f509c5b5378e63bc7506c448",
+      "lockfile_ref": "skills-lock.json#c5-sre-postmortem-architect@1.0.0",
+      "domain": "governance",
+      "summary": "Módulo SecOps. Dispara con \"incident review\", \"postmortem sre\", \"análisis de incidentes\", \"5 whys\", \"postmortem report\", \"análisis 5 whys\", \"blameless postmortem\".",
+      "tags": [
+        "5 whys",
+        "análisis 5 whys",
+        "análisis de incidentes",
+        "blameless postmortem",
+        "c5-sre-postmortem-architect",
+        "incident review",
+        "postmortem report",
+        "postmortem sre",
+        "secops-sre-postmortem"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-systemic-dissection-protocol": {
+      "skill_id": "c5-systemic-dissection-protocol",
+      "canonical_alias": "epistemic-systemic-dissection",
+      "version": "1.0.0",
+      "artifact_sha256": "c777dab437c1ec4344ab2492f243ad356a12b0a5a6b493c8a6ffcfb7b7cd870d",
+      "tool_identity_hash": "41ce1b736ae5ef5e24f4c376b36a65ea643aaf9b13ac37e629471a526990d768",
+      "lockfile_ref": "skills-lock.json#c5-systemic-dissection-protocol@1.0.0",
+      "domain": "specialized",
+      "summary": "Módulo epistémico. Dispara con \"disección sistémica\", \"auditar sistema completo\", \"c5-systemic-dissection\", \"disección termodinámica\", \"protocolo de disección\", \"100 primitivas\".",
+      "tags": [
+        "100 primitivas",
+        "auditar sistema completo",
+        "c5-systemic-dissection",
+        "c5-systemic-dissection-protocol",
+        "disección sistémica",
+        "disección termodinámica",
+        "epistemic-systemic-dissection",
+        "protocolo de disección"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-tamkarum-60": {
+      "skill_id": "c5-tamkarum-60",
+      "canonical_alias": "venture-ad-arbitrage",
+      "version": "1.0.0",
+      "artifact_sha256": "0a48fc1e8f2bb7cc3984cc193906f9897775dde55f2d11c430cf628819902912",
+      "tool_identity_hash": "cce765db444db0ab56201f35165d8f85d8b52c1957e85015dd9904e872b08aef",
+      "lockfile_ref": "skills-lock.json#c5-tamkarum-60@1.0.0",
+      "domain": "governance",
+      "summary": "Módulo Wetware/Venture. Dispara con \"tamkarum\", \"tamkarum-60\", \"/tamkarum\", \"arbitraje publicitario\", \"auditar roas\", \"optimizar campañas\", \"equipo marketing\", \"enjambre marketing\", \"11 agentes\", \"scitt\".",
+      "tags": [
+        "/tamkarum",
+        "11 agentes",
+        "arbitraje publicitario",
+        "auditar roas",
+        "c5-tamkarum-60",
+        "enjambre marketing",
+        "equipo marketing",
+        "optimizar campañas",
+        "scitt",
+        "tamkarum",
+        "tamkarum-60",
+        "venture-ad-arbitrage"
+      ],
+      "effect_profile": {
+        "class": "STATE_MUTATION",
+        "reversibility": "COMPENSATABLE",
+        "requires_action_lease": true,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == result.observed_post_hash",
+          "result.observed_post_hash != args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-terminological-archaeology": {
+      "skill_id": "c5-terminological-archaeology",
+      "canonical_alias": "terminology-archaeologist",
+      "version": "1.0.0",
+      "artifact_sha256": "3ca54793b6e838bd45a141666adab32e615af385195be9e29166ce2a14c67ced",
+      "tool_identity_hash": "496a5647e7bb8a4a306149a374f2606e143495c6eef71fbc1f5654821566ce81",
+      "lockfile_ref": "skills-lock.json#c5-terminological-archaeology@1.0.0",
+      "domain": "nucleus",
+      "summary": "Módulo epistémico. Dispara con \"arqueología terminológica\", \"busca mis perífrasis\", \"anagnórisis\", \"ya existe ese término\", \"tiene nombre esto\", \"cómo se llama esto en ciencia\", \"cómo se llama cuando\".",
+      "tags": [
+        "anagnórisis",
+        "arqueología terminológica",
+        "busca mis perífrasis",
+        "c5-terminological-archaeology",
+        "cómo se llama cuando",
+        "cómo se llama esto en ciencia",
+        "terminology-archaeologist",
+        "tiene nombre esto",
+        "ya existe ese término"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-thermos-audit": {
+      "skill_id": "c5-thermos-audit",
+      "canonical_alias": "kernel-double-thermo-audit",
+      "version": "1.0.0",
+      "artifact_sha256": "89940abfab5736e7340bcf8af2b697d2ff298aa91d47a5e45620fd6894d7c26d",
+      "tool_identity_hash": "e64a69cb0d78a41e6bc6dfc5ab43526562eeb77242d9cc6dd2d3e8a62d67c9fc",
+      "lockfile_ref": "skills-lock.json#c5-thermos-audit@1.0.0",
+      "domain": "kernel",
+      "summary": "Módulo Ring-0. Dispara con \"thermos\", \"thermos audit\", \"auditoría termonuclear\", \"double thermo\", \"revisión termonuclear\", \"revisar rama a fondo\", \"thermo review\".",
+      "tags": [
+        "auditoría termonuclear",
+        "c5-thermos-audit",
+        "double thermo",
+        "kernel-double-thermo-audit",
+        "revisar rama a fondo",
+        "revisión termonuclear",
+        "thermo review",
+        "thermos",
+        "thermos audit"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-tri-provider-swarm": {
+      "skill_id": "c5-tri-provider-swarm",
+      "canonical_alias": "swarm-tri-provider",
+      "version": "1.0.0",
+      "artifact_sha256": "2601b5cef0a1fea68ed5c193cd790b581ae9c5a8d08ae9884c5582418702bfd0",
+      "tool_identity_hash": "de8dcebf013d6bb36ff8c11743921d6eb6aff95af5d1b71bc43a6d7340bb3084",
+      "lockfile_ref": "skills-lock.json#c5-tri-provider-swarm@1.0.0",
+      "domain": "governance",
+      "summary": "Módulo CORTEX. Dispara con \"enjambre híbrido\", \"tri provider swarm\", \"kimi qwen openai\", \"orquestador tres modelos\", \"tri-provider swarm\".",
+      "tags": [
+        "c5-tri-provider-swarm",
+        "enjambre híbrido",
+        "kimi qwen openai",
+        "orquestador tres modelos",
+        "swarm-tri-provider",
+        "tri provider swarm",
+        "tri-provider swarm"
+      ],
+      "effect_profile": {
+        "class": "STATE_MUTATION",
+        "reversibility": "COMPENSATABLE",
+        "requires_action_lease": true,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == result.observed_post_hash",
+          "result.observed_post_hash != args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-ultrathink-epistemic-audit": {
+      "skill_id": "c5-ultrathink-epistemic-audit",
+      "canonical_alias": "epistemic-audit",
+      "version": "1.0.0",
+      "artifact_sha256": "42294589d9bd56714440bee9ec03379a330c3bf34c4e7d505c3814630c7f29c5",
+      "tool_identity_hash": "7554b936ef89eb3677c0679b2da267fbf6f4cfcef0f81861aaad2e75d77ba19c",
+      "lockfile_ref": "skills-lock.json#c5-ultrathink-epistemic-audit@1.0.0",
+      "domain": "nucleus",
+      "summary": "Auditoría epistémica profunda (ULTRATHINK) basada en el marco termodinámico C5-REAL. Ejecuta un desacople ontológico estricto entre \"Estado/Memoria\" y \"Lógica/Cálculo\", mapeando conceptos a invariantes termodinámicas (Curry-Howard, Landauer).",
+      "tags": [
+        "auditoría epistémica",
+        "auditoría ultrathink",
+        "c5-ultrathink-epistemic-audit",
+        "desacople ontológico",
+        "epistemic-audit",
+        "postmortem mcts"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-venture-pitch-architect": {
+      "skill_id": "c5-venture-pitch-architect",
+      "canonical_alias": "venture-pitch-architect",
+      "version": "1.0.0",
+      "artifact_sha256": "ccb83daf7bebff91d373967d8a509fe9d7756bf358c5ef6e01d067f3f8243888",
+      "tool_identity_hash": "f672d29bd7688359a1b209ef1ce1380a9097f20b22d90e80dafcd38715eab020",
+      "lockfile_ref": "skills-lock.json#c5-venture-pitch-architect@1.0.0",
+      "domain": "governance",
+      "summary": "Módulo Wetware/Venture. Dispara con \"pitch deck\", \"investor pitch planner\", \"pitch deck creator\", \"investor letter writer\", \"vc deal memo\", \"plan de negocio pptx\", \"the ask pitch\".",
+      "tags": [
+        "c5-venture-pitch-architect",
+        "investor letter writer",
+        "investor pitch planner",
+        "pitch deck",
+        "pitch deck creator",
+        "plan de negocio pptx",
+        "the ask pitch",
+        "vc deal memo",
+        "venture-pitch-architect"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-video-quality-audit": {
+      "skill_id": "c5-video-quality-audit",
+      "canonical_alias": "media-video-quality-audit",
+      "version": "1.0.0",
+      "artifact_sha256": "21f772c212212f3ba3784e24bf1df759f9eb7879e6bb4d58c87d687fad7958c4",
+      "tool_identity_hash": "afb634a49604d9e9459a66f962da803b97b874395246c5ed10e6f217e42e8bc8",
+      "lockfile_ref": "skills-lock.json#c5-video-quality-audit@1.0.0",
+      "domain": "multimedia & dsp",
+      "summary": "Módulo audiovisual. Dispara con \"calidad de video\", \"psnr ssim\", \"diferencia de compresion\", \"video quality diff\", \"auditoría de compresion\", \"medir vmaf\", \"auditoría ffmpeg video\".",
+      "tags": [
+        "auditoría de compresion",
+        "auditoría ffmpeg video",
+        "c5-video-quality-audit",
+        "calidad de video",
+        "diferencia de compresion",
+        "media-video-quality-audit",
+        "medir vmaf",
+        "psnr ssim",
+        "video quality diff"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-weighted-decision-matrix": {
+      "skill_id": "c5-weighted-decision-matrix",
+      "canonical_alias": "venture-decision-matrix",
+      "version": "1.0.0",
+      "artifact_sha256": "70a60b13f46f455a826730e48b9abf74222961c6e0a3d38f57c036c882676102",
+      "tool_identity_hash": "c182c1520065a28a9e7a69ee1558d7c3b7287b3c8194dc3e81b82a490b6411ff",
+      "lockfile_ref": "skills-lock.json#c5-weighted-decision-matrix@1.0.0",
+      "domain": "governance",
+      "summary": "Módulo Wetware/Venture. Dispara con \"weighted scorer\", \"matriz de decisión\", \"pert estimation\", \"estimación de proyectos\", \"evaluación tecnológica\", \"matriz de pesos\", \"evaluación de proveedores\".",
+      "tags": [
+        "c5-weighted-decision-matrix",
+        "estimación de proyectos",
+        "evaluación de proveedores",
+        "evaluación tecnológica",
+        "matriz de decisión",
+        "matriz de pesos",
+        "pert estimation",
+        "venture-decision-matrix",
+        "weighted scorer"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-wetware-and-venture-ops": {
+      "skill_id": "c5-wetware-and-venture-ops",
+      "canonical_alias": "wetware-router",
+      "version": "1.0.0",
+      "artifact_sha256": "741140320016a26fd09a43dc24048245c85d338d5dde327a0ab5ed04de48ce87",
+      "tool_identity_hash": "3c0b36cbea3af7b433f3231ac613a3cad608e6a169f07c4dc52afabbe6e74805",
+      "lockfile_ref": "skills-lock.json#c5-wetware-and-venture-ops@1.0.0",
+      "domain": "governance",
+      "summary": "Enruta módulos de carga cognitiva, telemetría somática, aprendizaje, valoración, estrategia de negocio y divulgación. Dispara con \"wetware hub\", \"venture ops hub\", \"wetware and venture\", \"operaciones venture\", \"carga cognitiva\".",
+      "tags": [
+        "c5-wetware-and-venture-ops",
+        "carga cognitiva",
+        "operaciones venture",
+        "venture ops hub",
+        "wetware and venture",
+        "wetware hub",
+        "wetware-router"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-wetware-and-venture-ops-project": {
+      "skill_id": "c5-wetware-and-venture-ops-project",
+      "canonical_alias": "wetware-hub",
+      "version": "1.0.0",
+      "artifact_sha256": "426053e2c7a5a78389983b226bc46c9b11e909b4ed0c751db9791c23ec568318",
+      "tool_identity_hash": "2ce8927924ea4eb0e650b79187034da1dcef2d4ec83a3bf37f7a36caacc2b19b",
+      "lockfile_ref": "skills-lock.json#c5-wetware-and-venture-ops-project@1.0.0",
+      "domain": "governance",
+      "summary": "Enruta el módulo del proyecto para el límite de disipación y el cron adaptativo. Dispara con \"wetware project hub\", \"wetware-hub\", \"venture project hub\", \"hub wetware proyecto\", \"adaptive-cron\".",
+      "tags": [
+        "adaptive-cron",
+        "c5-wetware-and-venture-ops-project",
+        "hub wetware proyecto",
+        "venture project hub",
+        "wetware project hub",
+        "wetware-hub"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "c5-wetware-divergente": {
+      "skill_id": "c5-wetware-divergente",
+      "canonical_alias": "wetware-2e-cognition",
+      "version": "1.0.0",
+      "artifact_sha256": "d0427441b19f286605f40adc8603458b4b8b2a201c7d2e944fa1e2968f09e6db",
+      "tool_identity_hash": "4419b0a784b0ba463cb3be7777f0f1c95d2355b76eb5fbd82aadb3ffc5656bf8",
+      "lockfile_ref": "skills-lock.json#c5-wetware-divergente@1.0.0",
+      "domain": "governance",
+      "summary": "Módulo Wetware/Venture. Dispara con \"alto voltaje\", \"mente divergente\", \"wetware divergente\", \"tdah 2e\", \"altas capacidades tdah\", \"hiperfoco\", \"burnout divergente\", \"bloqueo ejecutivo 2e\".",
+      "tags": [
+        "altas capacidades tdah",
+        "alto voltaje",
+        "bloqueo ejecutivo 2e",
+        "burnout divergente",
+        "c5-wetware-divergente",
+        "hiperfoco",
+        "mente divergente",
+        "tdah 2e",
+        "wetware divergente",
+        "wetware-2e-cognition"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "categorical-hallucination-audit": {
+      "skill_id": "categorical-hallucination-audit",
+      "canonical_alias": "epistemic-hallucination-audit",
+      "version": "1.0.0",
+      "artifact_sha256": "410d9326a9bf52189f5ab652364b6fe2144978a8fa177b9c5ca69ec195a601c7",
+      "tool_identity_hash": "2b27112704eef4698802d2230c159c9b74595a7b8b2b3df570f70de80f147288",
+      "lockfile_ref": "skills-lock.json#categorical-hallucination-audit@1.0.0",
+      "domain": "nucleus",
+      "summary": "Módulo epistémico. Dispara con \"alucinación categórica\", \"cota de confabulación\", \"desintegración bayesiana\", \"Kl(D) audit\", \"Myhill-Nerode estocástico\", \"cota de lipschitz\", \"mean shift 1d\".",
+      "tags": [
+        "alucinación categórica",
+        "categorical-hallucination-audit",
+        "cota de confabulación",
+        "cota de lipschitz",
+        "desintegración bayesiana",
+        "epistemic-hallucination-audit",
+        "kl(d) audit",
+        "mean shift 1d",
+        "myhill-nerode estocástico"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "cct-cognitive-theory-advisor": {
+      "skill_id": "cct-cognitive-theory-advisor",
+      "canonical_alias": "epistemic-cognitive-theory",
+      "version": "1.0.0",
+      "artifact_sha256": "aae03bf32af1eab7146c00e619d62d9fa76c79f28f51aa66f1bd2cc9dbdcb595",
+      "tool_identity_hash": "5709985794db1d893c6c887a9ae729eaff2e6fc066c270340b370455bc2148b5",
+      "lockfile_ref": "skills-lock.json#cct-cognitive-theory-advisor@1.0.0",
+      "domain": "nucleus",
+      "summary": "Módulo epistémico. Dispara con \"teoría cognitiva\", \"cct advisor\", \"gödel turing\", \"autopoiesis\", \"maturana luhmann\", \"burnout cognitivo\".",
+      "tags": [
+        "autopoiesis",
+        "burnout cognitivo",
+        "cct advisor",
+        "cct-cognitive-theory-advisor",
+        "epistemic-cognitive-theory",
+        "gödel turing",
+        "maturana luhmann",
+        "teoría cognitiva"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "cloud-chamber": {
+      "skill_id": "cloud-chamber",
+      "canonical_alias": "epistemic-mdl-synthesizer",
+      "version": "1.0.0",
+      "artifact_sha256": "921e920e93b08310e71ec2169f571f84fb0ecb4b278e1eacc06d3aed564d85f9",
+      "tool_identity_hash": "9172ad15cec49d6b0d8d0649300fc7a11255ab13680ab07ab41273e1d6f368fa",
+      "lockfile_ref": "skills-lock.json#cloud-chamber@1.0.0",
+      "domain": "nucleus",
+      "summary": "Ejecuta la Metodología de Cámara de Niebla forzando síntesis de alta densidad topológica (MDL / Invariantes C5-REAL).",
+      "tags": [
+        "/cloud-chamber",
+        "cloud-chamber",
+        "colapso mdl",
+        "cámara de niebla",
+        "epistemic-mdl-synthesizer",
+        "máxima densidad topológica"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "cloudflare-mcp-usage": {
+      "skill_id": "cloudflare-mcp-usage",
+      "canonical_alias": "secops-cloudflare-edge",
+      "version": "1.0.0",
+      "artifact_sha256": "f655f75ac817b8ef0035473681fd9dcfe429bdbc48c7661e34bd0434bb28faa5",
+      "tool_identity_hash": "fca90e340816bc07f96ade7b7fadb463e25d1e46541c2fc6f5d311271548f05c",
+      "lockfile_ref": "skills-lock.json#cloudflare-mcp-usage@1.0.0",
+      "domain": "operations",
+      "summary": "Módulo SecOps. Dispara con \"cloudflare\", \"mcp cloudflare\", \"zonas dns cloudflare\", \"cloudflare worker\", \"desplegar cloudflare\", \"kv r2 cloudflare\", \"cloudflare api mcp\".",
+      "tags": [
+        "cloudflare",
+        "cloudflare api mcp",
+        "cloudflare worker",
+        "cloudflare-mcp-usage",
+        "desplegar cloudflare",
+        "kv r2 cloudflare",
+        "mcp cloudflare",
+        "secops-cloudflare-edge",
+        "zonas dns cloudflare"
+      ],
+      "effect_profile": {
+        "class": "READ_EXT",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": true,
+        "network_egress": "EXTERNAL_NETWORK",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "cortex-kernel": {
+      "skill_id": "cortex-kernel",
+      "canonical_alias": "kernel-root",
+      "version": "1.0.0",
+      "artifact_sha256": "4221b9bfc755da309822650c7fbbb1fc79e4e7e9f62dd1cf8635f1404153aa06",
+      "tool_identity_hash": "2c57fbfd2c9edca477c099f330626c358139bc603d81e23e8480ba6e23a15fdf",
+      "lockfile_ref": "skills-lock.json#cortex-kernel@1.0.0",
+      "domain": "kernel",
+      "summary": "Manifiesto de invariantes transversales del ecosistema CORTEX. Dispara con \"kernel-root\", \"cortex kernel\".",
+      "tags": [
+        "kernel-root",
+        "cortex-kernel",
+        "cortex kernel",
+        "kernel axiomas"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "cortex-skill-auditor": {
+      "skill_id": "cortex-skill-auditor",
+      "canonical_alias": "swarm-skill-auditor",
+      "version": "1.0.0",
+      "artifact_sha256": "00f8ee83b81bc148b3ac99030b800aadeda132353bfbf42f4e87530a6ced2b08",
+      "tool_identity_hash": "73b74809c1b40d28015e10f9157afcce15cc0cb67e1641eafb1e19ba68f50cd4",
+      "lockfile_ref": "skills-lock.json#cortex-skill-auditor@1.0.0",
+      "domain": "meta-kernel",
+      "summary": "Módulo CORTEX. Dispara con \"auditar skills\", \"auditoría de habilidades\", \"exergía skills\", \"solapamiento de triggers\", \"cortex skill auditor\", \"matriz de colisión\", \"salud de skills\".",
+      "tags": [
+        "auditar skills",
+        "auditoría de habilidades",
+        "cortex skill auditor",
+        "cortex-skill-auditor",
+        "exergía skills",
+        "matriz de colisión",
+        "salud de skills",
+        "solapamiento de triggers",
+        "swarm-skill-auditor"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "cortex-skill-composer": {
+      "skill_id": "cortex-skill-composer",
+      "canonical_alias": "swarm-skill-composer",
+      "version": "1.0.0",
+      "artifact_sha256": "51b98d6a13a3d52209a2855d592c095a311884aa80530a7e5c8abae77c48b7dd",
+      "tool_identity_hash": "440481765112462fe349038c5d27d683e7b6def61120879e54dd3819cec87af7",
+      "lockfile_ref": "skills-lock.json#cortex-skill-composer@1.0.0",
+      "domain": "meta-kernel",
+      "summary": "Módulo CORTEX. Dispara con \"componer skills\", \"skill chain\", \"cadena de habilidades\", \"pipeline de skills\", \"cortex skill composer\", \"orquestación de habilidades\", \"skill pipeline\".",
+      "tags": [
+        "cadena de habilidades",
+        "componer skills",
+        "cortex skill composer",
+        "cortex-skill-composer",
+        "orquestación de habilidades",
+        "pipeline de skills",
+        "skill chain",
+        "skill pipeline",
+        "swarm-skill-composer"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "cortex-skill-genesis": {
+      "skill_id": "cortex-skill-genesis",
+      "canonical_alias": "swarm-skill-genesis",
+      "version": "1.0.0",
+      "artifact_sha256": "572f95877b34d15c7074062f4cd21446d3ccd2d6cceba018a66a3c68d6225455",
+      "tool_identity_hash": "a3a4f822a102d63ce5281d27a1ee4d53437f842d23c563269471cf49b883ad76",
+      "lockfile_ref": "skills-lock.json#cortex-skill-genesis@1.0.0",
+      "domain": "meta-kernel",
+      "summary": "Módulo CORTEX. Dispara con \"generar skill\", \"skill genesis\", \"crear habilidad\", \"cortex skill genesis\", \"sintetizar skill\", \"auto skill creator\".",
+      "tags": [
+        "auto skill creator",
+        "cortex skill genesis",
+        "cortex-skill-genesis",
+        "crear habilidad",
+        "generar skill",
+        "sintetizar skill",
+        "skill genesis",
+        "swarm-skill-genesis"
+      ],
+      "effect_profile": {
+        "class": "STATE_MUTATION",
+        "reversibility": "COMPENSATABLE",
+        "requires_action_lease": true,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == result.observed_post_hash",
+          "result.observed_post_hash != args.expected_pre_hash"
+        ]
+      }
+    },
+    "cortex-telemetry": {
+      "skill_id": "cortex-telemetry",
+      "canonical_alias": "swarm-session-telemetry",
+      "version": "1.0.0",
+      "artifact_sha256": "8e740e32e4f0ce21eb7c44617cad2db2c752a448b19338843464e71a083421ed",
+      "tool_identity_hash": "e11fb6086d907d7e38e62c24bcca4203058383c6947f7d20a9df961c35cf232c",
+      "lockfile_ref": "skills-lock.json#cortex-telemetry@1.0.0",
+      "domain": "operations",
+      "summary": "Módulo CORTEX. Dispara con \"telemetría\", \"cortex telemetry\", \"transcript logs\", \"historial de prompts\", \"analizar transcripciones\", \"sin consolidar\", \"consolidar conversaciones\", \"drenar brain\".",
+      "tags": [
+        "analizar transcripciones",
+        "consolidar conversaciones",
+        "cortex telemetry",
+        "cortex-telemetry",
+        "drenar brain",
+        "historial de prompts",
+        "sin consolidar",
+        "swarm-session-telemetry",
+        "telemetría",
+        "transcript logs"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "cta-cognitive-transition-algebra": {
+      "skill_id": "cta-cognitive-transition-algebra",
+      "canonical_alias": "epistemic-transition-algebra",
+      "version": "1.0.0",
+      "artifact_sha256": "1c10b2fcbb92350b772453cf5a9b30c3092c75e1e467c55214f7c54715258469",
+      "tool_identity_hash": "33db29f6701a95d80bfb90895380c9b050712e52b720942f9bb60eb878f94f74",
+      "lockfile_ref": "skills-lock.json#cta-cognitive-transition-algebra@1.0.0",
+      "domain": "nucleus",
+      "summary": "Módulo epistémico. Dispara con \"álgebra cognitiva\", \"cta transition\", \"event sourcing cognitivo\", \"matriz cta\", \"transición de estados\", \"álgebra de transiciones\", \"comónada cognitiva\".",
+      "tags": [
+        "comónada cognitiva",
+        "cta transition",
+        "cta-cognitive-transition-algebra",
+        "epistemic-transition-algebra",
+        "event sourcing cognitivo",
+        "matriz cta",
+        "transición de estados",
+        "álgebra cognitiva",
+        "álgebra de transiciones"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "discourse-popperian-falsification": {
+      "skill_id": "discourse-popperian-falsification",
+      "canonical_alias": "epistemic-discourse-falsifier",
+      "version": "1.0.0",
+      "artifact_sha256": "fa1329676778f2999f1374d47b4fafd20f6015bdbda000d45e32c195c1ecd779",
+      "tool_identity_hash": "ca446ce62692b0aaaab4075aebe187579cf630cc2b2fbc856e5771893a3c0fb4",
+      "lockfile_ref": "skills-lock.json#discourse-popperian-falsification@1.0.0",
+      "domain": "operations",
+      "summary": "Módulo epistémico. Dispara con \"falsación popperiana\", \"análisis popperiano\", \"auditoría discursiva\", \"falsar hipótesis\", \"auditar mito\", \"leyenda urbana\", \"desmentir mito\".",
+      "tags": [
+        "análisis popperiano",
+        "auditar mito",
+        "auditoría discursiva",
+        "desmentir mito",
+        "discourse-popperian-falsification",
+        "epistemic-discourse-falsifier",
+        "falsación popperiana",
+        "falsar hipótesis",
+        "leyenda urbana"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "djstudio-mcp": {
+      "skill_id": "djstudio-mcp",
+      "canonical_alias": "media-djstudio-mixer",
+      "version": "1.0.0",
+      "artifact_sha256": "e8dc19081fbc81bf374f6b3b83833fbc98efececde890fe618a3492b2d4b4e89",
+      "tool_identity_hash": "722653e3ca9e395e66c790e00a53afa5a944fe417a0c89597a2c9fb1abe0d7e1",
+      "lockfile_ref": "skills-lock.json#djstudio-mcp@1.0.0",
+      "domain": "operations",
+      "summary": "Módulo audiovisual. Dispara con \"dj studio\", \"djstudio\", \"dj studio mcp\", \"harmonize dj studio\", \"stems dj studio\", \"transiciones dj\", \"crossover linkwitz riley\", \"rekordbox xml\".",
+      "tags": [
+        "crossover linkwitz riley",
+        "dj studio",
+        "dj studio mcp",
+        "djstudio",
+        "djstudio-mcp",
+        "harmonize dj studio",
+        "media-djstudio-mixer",
+        "rekordbox xml",
+        "stems dj studio",
+        "transiciones dj"
+      ],
+      "effect_profile": {
+        "class": "STATE_MUTATION",
+        "reversibility": "COMPENSATABLE",
+        "requires_action_lease": true,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == result.observed_post_hash",
+          "result.observed_post_hash != args.expected_pre_hash"
+        ]
+      }
+    },
+    "dynamic-subagent-lifecycle": {
+      "skill_id": "dynamic-subagent-lifecycle",
+      "canonical_alias": "swarm-subagent-lifecycle",
+      "version": "1.0.0",
+      "artifact_sha256": "0bd516109b8e5eadb2c02a7fb222e81d6742b0766288255a48d0e2fbed41b5c5",
+      "tool_identity_hash": "a011e257a6cceaac9d208f1f5f30b219f63ecc1de20f6125ec5d9322ece1e296",
+      "lockfile_ref": "skills-lock.json#dynamic-subagent-lifecycle@1.0.0",
+      "domain": "governance",
+      "summary": "Módulo CORTEX. Dispara con \"subagente dinámico\", \"ciclo de vida subagente\", \"dynamic subagent\", \"invoke_subagent\", \"supervisar subagente\", \"mitigar deadlocks\", \"orquestar agentes dinámicos\".",
+      "tags": [
+        "ciclo de vida subagente",
+        "dynamic subagent",
+        "dynamic-subagent-lifecycle",
+        "invoke_subagent",
+        "mitigar deadlocks",
+        "orquestar agentes dinámicos",
+        "subagente dinámico",
+        "supervisar subagente",
+        "swarm-subagent-lifecycle"
+      ],
+      "effect_profile": {
+        "class": "STATE_MUTATION",
+        "reversibility": "COMPENSATABLE",
+        "requires_action_lease": true,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == result.observed_post_hash",
+          "result.observed_post_hash != args.expected_pre_hash"
+        ]
+      }
+    },
+    "electron-asar-forensic-audit": {
+      "skill_id": "electron-asar-forensic-audit",
+      "canonical_alias": "secops-electron-forensics",
+      "version": "1.0.0",
+      "artifact_sha256": "b2dc3932f374c00dc5a8240deb99313aafcefb2d004215ef27d53a6f07fd5b8d",
+      "tool_identity_hash": "6a52b6234060f4d67a576f723787ad8608d5961538dd54636ec265e454bd72d2",
+      "lockfile_ref": "skills-lock.json#electron-asar-forensic-audit@1.0.0",
+      "domain": "operations",
+      "summary": "Módulo SecOps. Dispara con \"auditar app electron\", \"extraer asar\", \"asar python\", \"descompilar electron\", \"forense electron app\", \"ingeniería inversa electron\", \"ingeniería inversa electron\".",
+      "tags": [
+        "asar python",
+        "auditar app electron",
+        "descompilar electron",
+        "electron-asar-forensic-audit",
+        "extraer asar",
+        "forense electron app",
+        "ingeniería inversa electron",
+        "secops-electron-forensics"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "electron-mac-bundle-collision-diagnostics": {
+      "skill_id": "electron-mac-bundle-collision-diagnostics",
+      "canonical_alias": "secops-electron-crash-diag",
+      "version": "1.0.0",
+      "artifact_sha256": "ff40b39bb4b7153680f2f4d6d096e50e3e49ef17e8f871f747ee97a7eacf3012",
+      "tool_identity_hash": "718ebf9069a71f19aea3955ea15db5ab074a80f5f342760c981df4ba6c022051",
+      "lockfile_ref": "skills-lock.json#electron-mac-bundle-collision-diagnostics@1.0.0",
+      "domain": "diagnostics",
+      "summary": "Módulo SecOps. Dispara con \"electron crash mac\", \"crash ips macos\", \"bundle collision electron\", \"diagnóstico electron mac\", \"leveldb lock purge\", \"cierre inesperado electron\".",
+      "tags": [
+        "bundle collision electron",
+        "cierre inesperado electron",
+        "crash ips macos",
+        "diagnóstico electron mac",
+        "electron crash mac",
+        "electron-mac-bundle-collision-diagnostics",
+        "leveldb lock purge",
+        "secops-electron-crash-diag"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "epistemic-extinction-protocol": {
+      "skill_id": "epistemic-extinction-protocol",
+      "canonical_alias": "epistemic-fixed-point",
+      "version": "1.0.0",
+      "artifact_sha256": "edb1c8d04d3767b938b705c1557ac2ef5b04f89b767c3683f682185741a671ad",
+      "tool_identity_hash": "1b500dc6fe384f172322913398373d8657d866149c1c88eaf291ee33b6460909",
+      "lockfile_ref": "skills-lock.json#epistemic-extinction-protocol@1.0.0",
+      "domain": "nucleus",
+      "summary": "Módulo epistémico. Dispara con \"extinción epistémica\", \"punto fijo omega\", \"reducción dimensional\", \"epistemic extinction\", \"punto fijo ω\", \"extinción conceptual\".",
+      "tags": [
+        "epistemic extinction",
+        "epistemic-extinction-protocol",
+        "epistemic-fixed-point",
+        "extinción conceptual",
+        "extinción epistémica",
+        "punto fijo omega",
+        "punto fijo ω",
+        "reducción dimensional"
+      ],
+      "effect_profile": {
+        "class": "DESTRUCTIVE",
+        "reversibility": "IRREVERSIBLE",
+        "requires_action_lease": true,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == result.observed_post_hash",
+          "result.observed_post_hash != args.expected_pre_hash"
+        ]
+      }
+    },
+    "existence-gap-audit": {
+      "skill_id": "existence-gap-audit",
+      "canonical_alias": "secops-existence-audit",
+      "version": "1.0.0",
+      "artifact_sha256": "cbf2ec01565bcbf31d050db2d8868409e00c5293170a807e957f8ae017841258",
+      "tool_identity_hash": "95847683b4bc760229fb4ee8da4e475f0cd87af48564eb5af74fc719c10ffc34",
+      "lockfile_ref": "skills-lock.json#existence-gap-audit@1.0.0",
+      "domain": "nucleus",
+      "summary": "Módulo SecOps. Dispara con \"auditoría\", \"audit\", \"revisa este repo\", \"código alucinado\", \"dependencias fantasma\", \"slopsquatting\", \"vibe coding\", \"supply chain\", \"¿esto se ejecuta?\", \"imports rotos\", \"auditar workflows\".",
+      "tags": [
+        "audit",
+        "auditar workflows",
+        "auditoría",
+        "código alucinado",
+        "dependencias fantasma",
+        "existence-gap-audit",
+        "imports rotos",
+        "revisa este repo",
+        "secops-existence-audit",
+        "slopsquatting",
+        "supply chain",
+        "vibe coding",
+        "¿esto se ejecuta?"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "f5tts-voice-cloning-sota": {
+      "skill_id": "f5tts-voice-cloning-sota",
+      "canonical_alias": "media-f5tts-voice",
+      "version": "1.0.0",
+      "artifact_sha256": "274f066f9a5d04b1a0f8bc7be87e034d7329b1743bf76e5702a48f0eeb29e059",
+      "tool_identity_hash": "66286fc7471fd36ae2618bec201d688586dfd95315cfe3a5197bfe4c2aebc599",
+      "lockfile_ref": "skills-lock.json#f5tts-voice-cloning-sota@1.0.0",
+      "domain": "operations",
+      "summary": "Módulo audiovisual. Dispara con \"clonar voz\", \"sintetizar voz\", \"f5-tts\", \"f5tts\", \"voice clone\", \"prosodia tts\", \"nota de voz ia\".",
+      "tags": [
+        "clonar voz",
+        "f5-tts",
+        "f5tts",
+        "f5tts-voice-cloning-sota",
+        "media-f5tts-voice",
+        "nota de voz ia",
+        "prosodia tts",
+        "sintetizar voz",
+        "voice clone"
+      ],
+      "effect_profile": {
+        "class": "STATE_MUTATION",
+        "reversibility": "COMPENSATABLE",
+        "requires_action_lease": true,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == result.observed_post_hash",
+          "result.observed_post_hash != args.expected_pre_hash"
+        ]
+      }
+    },
+    "flstudio-mcp-production": {
+      "skill_id": "flstudio-mcp-production",
+      "canonical_alias": "media-flstudio-dsp",
+      "version": "1.0.0",
+      "artifact_sha256": "9b99488bd6a2b4cfd0a74d9858dfb560a79f9165b305c0fdfcf0bbb1866c90ad",
+      "tool_identity_hash": "824927061e2b9d4d52f97e5ee125fdc2eb2512b3fa651a445c98012b5269fd08",
+      "lockfile_ref": "skills-lock.json#flstudio-mcp-production@1.0.0",
+      "domain": "operations",
+      "summary": "Módulo audiovisual. Dispara con \"FL Studio\", \"flstudio-mcp\", \"balag-omega\", \"generador de musica\", \"compilar flp\", \"piano roll script\", \"microtonal house\".",
+      "tags": [
+        "balag-omega",
+        "compilar flp",
+        "fl studio",
+        "flstudio-mcp",
+        "flstudio-mcp-production",
+        "generador de musica",
+        "media-flstudio-dsp",
+        "microtonal house",
+        "piano roll script"
+      ],
+      "effect_profile": {
+        "class": "STATE_MUTATION",
+        "reversibility": "COMPENSATABLE",
+        "requires_action_lease": true,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == result.observed_post_hash",
+          "result.observed_post_hash != args.expected_pre_hash"
+        ]
+      }
+    },
+    "gflow-browser-cinema-sovereign": {
+      "skill_id": "gflow-browser-cinema-sovereign",
+      "canonical_alias": "media-gflow-cinema",
+      "version": "1.0.0",
+      "artifact_sha256": "84c54ff5f59515210d1c8d94f7ffe7429f2ca2d2d1e87611461ad4c004505444",
+      "tool_identity_hash": "0525345400b6dec35232b8becf4ae04c4abe8e44095eca847e20a32a927a8a34",
+      "lockfile_ref": "skills-lock.json#gflow-browser-cinema-sovereign@1.0.0",
+      "domain": "multimedia & dsp",
+      "summary": "Módulo audiovisual. Dispara con \"gflow browser\", \"cine gflow\", \"flow google mcp\", \"sovereign cinema\", \"estudio gflow\", \"gflow v4\", \"character anchor veo\", \"veo 2 browser\", \"dialogue engine gflow\", \"cockpit gflow\", \"remotion gflow\".",
+      "tags": [
+        "character anchor veo",
+        "cine gflow",
+        "cockpit gflow",
+        "dialogue engine gflow",
+        "estudio gflow",
+        "flow google mcp",
+        "gflow browser",
+        "gflow v4",
+        "gflow-browser-cinema-sovereign",
+        "media-gflow-cinema",
+        "remotion gflow",
+        "sovereign cinema",
+        "veo 2 browser"
+      ],
+      "effect_profile": {
+        "class": "STATE_MUTATION",
+        "reversibility": "COMPENSATABLE",
+        "requires_action_lease": true,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == result.observed_post_hash",
+          "result.observed_post_hash != args.expected_pre_hash"
+        ]
+      }
+    },
+    "ghidra-ida-binary-audit": {
+      "skill_id": "ghidra-ida-binary-audit",
+      "canonical_alias": "secops-binary-reverse-audit",
+      "version": "1.0.0",
+      "artifact_sha256": "67f78b99ad9cedcf54a461cb4865e37d0dd0c31d80900516c3243731fb134659",
+      "tool_identity_hash": "f440562b2a9780dec31a7bfc27d70e7ec553cebcdd67dea17ee6614aefac6f7b",
+      "lockfile_ref": "skills-lock.json#ghidra-ida-binary-audit@1.0.0",
+      "domain": "operations",
+      "summary": "Módulo SecOps. Dispara con \"auditar binario\", \"ghidra\", \"ida pro\", \"descompilar binario\", \"buffer overflow audit\", \"ingeniería inversa\".",
+      "tags": [
+        "auditar binario",
+        "buffer overflow audit",
+        "descompilar binario",
+        "ghidra",
+        "ghidra-ida-binary-audit",
+        "ida pro",
+        "ingeniería inversa",
+        "secops-binary-reverse-audit"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "github-api-rate-limit-optimization": {
+      "skill_id": "github-api-rate-limit-optimization",
+      "canonical_alias": "secops-github-ratelimit",
+      "version": "1.0.0",
+      "artifact_sha256": "4dc5047f2b517a6a43b978156abf831cd690eaa4ae3bd9daf7fed911a83d1efd",
+      "tool_identity_hash": "f96c1838d6178660a3c919087c61e53ec5d4b3647aef6b42b96a6cf7e325df0a",
+      "lockfile_ref": "skills-lock.json#github-api-rate-limit-optimization@1.0.0",
+      "domain": "utilities",
+      "summary": "Módulo SecOps. Dispara con \"github rate limit\", \"error 429 github\", \"optimizar github api\", \"secondary rate limit\", \"evitar 429 github\", \"resiliencia api github\".",
+      "tags": [
+        "error 429 github",
+        "evitar 429 github",
+        "github rate limit",
+        "github-api-rate-limit-optimization",
+        "optimizar github api",
+        "resiliencia api github",
+        "secondary rate limit",
+        "secops-github-ratelimit"
+      ],
+      "effect_profile": {
+        "class": "READ_EXT",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": true,
+        "network_egress": "EXTERNAL_NETWORK",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "github-architect": {
+      "skill_id": "github-architect",
+      "canonical_alias": "secops-github-architect",
+      "version": "1.0.0",
+      "artifact_sha256": "805cf4bcbbb59a82b694286e5db6a42d95dbd576b9443c7b9abd8fd75798581c",
+      "tool_identity_hash": "9a728d625a88b12f9db290caf500b953a69fc508c73dea9be5667b258eec1501",
+      "lockfile_ref": "skills-lock.json#github-architect@1.0.0",
+      "domain": "operations",
+      "summary": "Módulo SecOps. Dispara con \"audita mi github\", \"qué repos archivar\", \"itera /github-architect\", \"generar ci workflow\", \"github architect\", \"auditoría repositorios github\".",
+      "tags": [
+        "audita mi github",
+        "auditoría repositorios github",
+        "generar ci workflow",
+        "github architect",
+        "github-architect",
+        "itera /github-architect",
+        "qué repos archivar",
+        "secops-github-architect"
+      ],
+      "effect_profile": {
+        "class": "READ_EXT",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": true,
+        "network_egress": "EXTERNAL_NETWORK",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "goal": {
+      "skill_id": "goal",
+      "canonical_alias": "goal-contract",
+      "version": "1.0.0",
+      "artifact_sha256": "5952aab16c558754531e4377ac3e35531233c7ff5d5b137f087dd7d848529b0e",
+      "tool_identity_hash": "bca917bf04e3a7eeed45bff90b231eee9b96be487b1753bd8b045b75cf275bc1",
+      "lockfile_ref": "skills-lock.json#goal@1.0.0",
+      "domain": "governance",
+      "summary": "Módulo CORTEX. Dispara con \"/goal\", \"goal\", \"contrato goal\".",
+      "tags": [
+        "/goal",
+        "contrato goal",
+        "goal",
+        "goal-contract"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "grill-me-v2": {
+      "skill_id": "grill-me-v2",
+      "canonical_alias": "socratic-interrogator",
+      "version": "1.0.0",
+      "artifact_sha256": "3bbf23cbc30814d78fcb5969d39b04249aadb0faadb387f63afd3232364855e5",
+      "tool_identity_hash": "5808f04588d4dd9273bcfe17cacde2d3b05195b5fd5d515da31366dbc145d3b2",
+      "lockfile_ref": "skills-lock.json#grill-me-v2@1.0.0",
+      "domain": "governance",
+      "summary": "Versión avanzada de interrogatorio socrático (C5-REAL) para alinear decisiones de diseño y purgar asunciones infundadas.",
+      "tags": [
+        "/grill-me-v2",
+        "grill-me-v2",
+        "interrogatorio socrático",
+        "socratic audit",
+        "socratic-interrogator"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "handoff": {
+      "skill_id": "handoff",
+      "canonical_alias": "swarm-context-handoff",
+      "version": "1.0.0",
+      "artifact_sha256": "88885ee0f91b7fbf1f7e77f5240bb96af51a21591a79d3b27ce71e2b67c537be",
+      "tool_identity_hash": "99de9d904029d99d0e75416159ba8cbf725f238bb856f3b38c78f576781d4886",
+      "lockfile_ref": "skills-lock.json#handoff@1.0.0",
+      "domain": "utilities",
+      "summary": "Módulo CORTEX. Dispara con \"handoff\", \"/handoff\", \"traspaso de contexto\", \"traspaso de sesión\", \"generar handoff\", \"traspaso formal\", \"context handover\".",
+      "tags": [
+        "/handoff",
+        "context handover",
+        "generar handoff",
+        "handoff",
+        "swarm-context-handoff",
+        "traspaso de contexto",
+        "traspaso de sesión",
+        "traspaso formal"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "homebrew-ecosystem-management": {
+      "skill_id": "homebrew-ecosystem-management",
+      "canonical_alias": "secops-homebrew-manager",
+      "version": "1.0.0",
+      "artifact_sha256": "08a9fd1937df22e30ebd83235f10cca21aa278a8231044800dd3687e17dccad2",
+      "tool_identity_hash": "e62e88aa4d76bfd0c57756028bf512932df0afe7a63ae1034fb8e3ecf2630ac6",
+      "lockfile_ref": "skills-lock.json#homebrew-ecosystem-management@1.0.0",
+      "domain": "operations",
+      "summary": "Módulo SecOps. Dispara con \"homebrew\", \"brew audit\", \"dependencias macos\", \"paquetes homebrew\", \"gestión homebrew\", \"entorno brew\".",
+      "tags": [
+        "brew audit",
+        "dependencias macos",
+        "entorno brew",
+        "gestión homebrew",
+        "homebrew",
+        "homebrew-ecosystem-management",
+        "paquetes homebrew",
+        "secops-homebrew-manager"
+      ],
+      "effect_profile": {
+        "class": "STATE_MUTATION",
+        "reversibility": "COMPENSATABLE",
+        "requires_action_lease": true,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == result.observed_post_hash",
+          "result.observed_post_hash != args.expected_pre_hash"
+        ]
+      }
+    },
+    "jujutsu-vcs-management": {
+      "skill_id": "jujutsu-vcs-management",
+      "canonical_alias": "secops-jujutsu-vcs",
+      "version": "1.0.0",
+      "artifact_sha256": "cf6f1601f3a99c7063c3d8500e50d409cddf26acc29cefb4acda28c4c345569c",
+      "tool_identity_hash": "57aea0a7888b47b77c7c2fa7847fbfec9c7990c6e9534fde780a88d2b2406807",
+      "lockfile_ref": "skills-lock.json#jujutsu-vcs-management@1.0.0",
+      "domain": "operations",
+      "summary": "Módulo SecOps. Dispara con \"jujutsu vcs\", \"jj repo\", \"jujutsu git\", \"control de versiones jj\", \"jj vcs\", \"jujutsu management\".",
+      "tags": [
+        "control de versiones jj",
+        "jj repo",
+        "jj vcs",
+        "jujutsu git",
+        "jujutsu management",
+        "jujutsu vcs",
+        "jujutsu-vcs-management",
+        "secops-jujutsu-vcs"
+      ],
+      "effect_profile": {
+        "class": "STATE_MUTATION",
+        "reversibility": "COMPENSATABLE",
+        "requires_action_lease": true,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == result.observed_post_hash",
+          "result.observed_post_hash != args.expected_pre_hash"
+        ]
+      }
+    },
+    "kimi-mcp-orchestrator": {
+      "skill_id": "kimi-mcp-orchestrator",
+      "canonical_alias": "swarm-kimi-orchestrator",
+      "version": "1.0.0",
+      "artifact_sha256": "331fd4960053a970b20e88ee19761b146a2181d68e3aa4ca3ae224dfb620fc8a",
+      "tool_identity_hash": "2d72c7f1903b312cdbc631ebb4f25cc65326fe5ce64ac2cec1e8f713d15333e0",
+      "lockfile_ref": "skills-lock.json#kimi-mcp-orchestrator@1.0.0",
+      "domain": "operations",
+      "summary": "Módulo CORTEX. Dispara con \"kimi ask\", \"kimi audit\", \"kimi swarm\", \"kimi nexus\", \"kimi mcp\", \"moonshot kimi\", \"orquestar kimi\".",
+      "tags": [
+        "kimi ask",
+        "kimi audit",
+        "kimi mcp",
+        "kimi nexus",
+        "kimi swarm",
+        "kimi-mcp-orchestrator",
+        "moonshot kimi",
+        "orquestar kimi",
+        "swarm-kimi-orchestrator"
+      ],
+      "effect_profile": {
+        "class": "READ_EXT",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": true,
+        "network_egress": "EXTERNAL_NETWORK",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "lora-swarm-pipeline": {
+      "skill_id": "lora-swarm-pipeline",
+      "canonical_alias": "swarm-lora-pipeline",
+      "version": "1.0.0",
+      "artifact_sha256": "fdb18577fb867024290effbc8b5c81f8050459d3328e1f75b760bd1b0aa0450b",
+      "tool_identity_hash": "5dbb9ac0dc53176bd308ea0f42d195b0183b8920eda26174ded7bee8499e4858",
+      "lockfile_ref": "skills-lock.json#lora-swarm-pipeline@1.0.0",
+      "domain": "operations",
+      "summary": "Pipeline de minería con enjambre de agentes, extracción N-Zonas (SHA-256), ShareGPT/ChatML y clustering semántico.",
+      "tags": [
+        "dataset swarm",
+        "enjambre lora",
+        "enjambre sharegpt",
+        "lora swarm",
+        "lora-swarm-pipeline",
+        "minar datasets enjambre",
+        "minería enjambre",
+        "n-zonas enjambre",
+        "swarm pipeline",
+        "swarm-lora-pipeline"
+      ],
+      "effect_profile": {
+        "class": "STATE_MUTATION",
+        "reversibility": "COMPENSATABLE",
+        "requires_action_lease": true,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == result.observed_post_hash",
+          "result.observed_post_hash != args.expected_pre_hash"
+        ]
+      }
+    },
+    "macos-lulu-firewall-diagnostics": {
+      "skill_id": "macos-lulu-firewall-diagnostics",
+      "canonical_alias": "secops-lulu-firewall",
+      "version": "1.0.0",
+      "artifact_sha256": "6148b1e07480a491dcbc1ef2d0898076cc0acdfa9a1ee2c1c11df6b287f91e3b",
+      "tool_identity_hash": "31c2d41eab6ae70df67f1aebaea6e60f3cd6a4f6bea6ec1420eed4ac9c4e79af",
+      "lockfile_ref": "skills-lock.json#macos-lulu-firewall-diagnostics@1.0.0",
+      "domain": "diagnostics",
+      "summary": "Módulo SecOps. Dispara con \"lulu firewall\", \"little snitch\", \"redes macos\", \"diagnóstico firewall\", \"reglas de red macos\", \"bloqueo sockets mac\".",
+      "tags": [
+        "bloqueo sockets mac",
+        "diagnóstico firewall",
+        "little snitch",
+        "lulu firewall",
+        "macos-lulu-firewall-diagnostics",
+        "redes macos",
+        "reglas de red macos",
+        "secops-lulu-firewall"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "opentimestamps-l5-diagnostics": {
+      "skill_id": "opentimestamps-l5-diagnostics",
+      "canonical_alias": "kernel-ots-timestamp",
+      "version": "1.0.0",
+      "artifact_sha256": "d6f2ce219046bbb3321ff6df6b87700ba0c1cb58ebf1c5fd38c2de57003778fc",
+      "tool_identity_hash": "92b7fe9096e984da800e010136d438368c2e6e63bd82c0c7c33a7b7ac677bde2",
+      "lockfile_ref": "skills-lock.json#opentimestamps-l5-diagnostics@1.0.0",
+      "domain": "diagnostics",
+      "summary": "Módulo Ring-0. Dispara con \"opentimestamps\", \"ots verify\", \"atestación l5\", \"bitcoin timestamp\", \"l5 diagnostics\", \"ots bitcoin\", \"sellado temporal l5\".",
+      "tags": [
+        "atestación l5",
+        "bitcoin timestamp",
+        "kernel-ots-timestamp",
+        "l5 diagnostics",
+        "opentimestamps",
+        "opentimestamps-l5-diagnostics",
+        "ots bitcoin",
+        "ots verify",
+        "sellado temporal l5"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "pika-generative-video-pipeline": {
+      "skill_id": "pika-generative-video-pipeline",
+      "canonical_alias": "media-pika-video",
+      "version": "1.0.0",
+      "artifact_sha256": "a2c2bb4d6a7d11c7ac45c006fbef11b85b186093a932030adf7c42d1cc15af0a",
+      "tool_identity_hash": "e41081fbec332b3edd8e780d9abce97407f13b931f18714fff34be2c25b06d24",
+      "lockfile_ref": "skills-lock.json#pika-generative-video-pipeline@1.0.0",
+      "domain": "multimedia & dsp",
+      "summary": "Módulo audiovisual. Dispara con \"pika art\", \"pika tutorial\", \"pika camera\", \"pikaffects\", \"pika prompt\", \"generación vídeo pika\", \"pikaffects sota\".",
+      "tags": [
+        "generación vídeo pika",
+        "media-pika-video",
+        "pika art",
+        "pika camera",
+        "pika prompt",
+        "pika tutorial",
+        "pika-generative-video-pipeline",
+        "pikaffects",
+        "pikaffects sota"
+      ],
+      "effect_profile": {
+        "class": "STATE_MUTATION",
+        "reversibility": "COMPENSATABLE",
+        "requires_action_lease": true,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == result.observed_post_hash",
+          "result.observed_post_hash != args.expected_pre_hash"
+        ]
+      }
+    },
+    "polymath-concept-synthesis": {
+      "skill_id": "polymath-concept-synthesis",
+      "canonical_alias": "epistemic-polymath-synthesis",
+      "version": "1.0.0",
+      "artifact_sha256": "05bc4b3c879a1d5f358ebad56e5089ccd4b6b8680e8d4798b57f990d4343c091",
+      "tool_identity_hash": "018af686e836280362a79c07a1a45785679f9f20feea1de13a12bd9277bacd6b",
+      "lockfile_ref": "skills-lock.json#polymath-concept-synthesis@1.0.0",
+      "domain": "nucleus",
+      "summary": "Módulo epistémico. Dispara con \"ultrathink\", \"síntesis polímata\", \"polymath synthesis\", \"concepto polímata\", \"unificación interdisciplinar\", \"síntesis interdisciplinar\", \"unificación conceptual\".",
+      "tags": [
+        "concepto polímata",
+        "epistemic-polymath-synthesis",
+        "polymath synthesis",
+        "polymath-concept-synthesis",
+        "síntesis interdisciplinar",
+        "síntesis polímata",
+        "ultrathink",
+        "unificación conceptual",
+        "unificación interdisciplinar"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "remotion-audio-reactive-video": {
+      "skill_id": "remotion-audio-reactive-video",
+      "canonical_alias": "media-remotion-reactive",
+      "version": "1.0.0",
+      "artifact_sha256": "43a5d2f81e8159da023f7bc42d747069a07cb9ce1e5eb0d55fbdedc42940aa89",
+      "tool_identity_hash": "1ad05b5be749f9190e62e05d37bbad5685ff3827ca9036b539c0ef946a25cda2",
+      "lockfile_ref": "skills-lock.json#remotion-audio-reactive-video@1.0.0",
+      "domain": "multimedia & dsp",
+      "summary": "Módulo audiovisual. Dispara con \"video reactivo a la musica\", \"audio reactivo\", \"remotion audio reactive\", \"visualizador de musica\", \"audio visualizer\", \"video musical reactivo\".",
+      "tags": [
+        "audio reactivo",
+        "audio visualizer",
+        "media-remotion-reactive",
+        "remotion audio reactive",
+        "remotion-audio-reactive-video",
+        "video musical reactivo",
+        "video reactivo a la musica",
+        "visualizador de musica"
+      ],
+      "effect_profile": {
+        "class": "STATE_MUTATION",
+        "reversibility": "COMPENSATABLE",
+        "requires_action_lease": true,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == result.observed_post_hash",
+          "result.observed_post_hash != args.expected_pre_hash"
+        ]
+      }
+    },
+    "rlhf-sentinel": {
+      "skill_id": "rlhf-sentinel",
+      "canonical_alias": "kernel-rlhf-sentinel",
+      "version": "1.0.0",
+      "artifact_sha256": "1ca9f1b4647910287b3f1426da40ed088b15ea4157458a49274c4712d856d42c",
+      "tool_identity_hash": "d3cabe98200bbbdff71315f79c473a7e3654b102bf9099a79d524b5163086f2b",
+      "lockfile_ref": "skills-lock.json#rlhf-sentinel@1.0.0",
+      "domain": "governance",
+      "summary": "Audita la barrera IPC (Ring-0) para detectar fallos de contención de IA (RLHF Breakthrough) y ataques estocásticos.",
+      "tags": [
+        "/rlhf-sentinel",
+        "contención de ia",
+        "fuga de llm",
+        "kernel-rlhf-sentinel",
+        "quarantine ring-0",
+        "rlhf sentinel",
+        "rlhf-sentinel"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "safari-browser-agent": {
+      "skill_id": "safari-browser-agent",
+      "canonical_alias": "secops-safari-automation",
+      "version": "1.0.0",
+      "artifact_sha256": "43589035e0e8db42bd66ec86273ce50c62612b7eba21f4ca15f2003706d474cb",
+      "tool_identity_hash": "b191054671ef54f3008d19755d58bed1db7203a0d035c2819f868e28e8696ef7",
+      "lockfile_ref": "skills-lock.json#safari-browser-agent@1.0.0",
+      "domain": "socint & web",
+      "summary": "Módulo SecOps. Dispara con \"safari agent\", \"navegar safari\", \"mcp safari\", \"controlar safari\", \"safari browser agent\", \"safari automation\", \"inspeccionar safari\", \"mac maestro\", \"automatizar safari jxa\", \"bypass webdriver\", \"mac maestro bridge\", \"control jxa macos\", \"windowserver automation\".",
+      "tags": [
+        "automatizar safari jxa",
+        "bypass webdriver",
+        "control jxa macos",
+        "controlar safari",
+        "inspeccionar safari",
+        "mac maestro",
+        "mac maestro bridge",
+        "mcp safari",
+        "navegar safari",
+        "safari agent",
+        "safari automation",
+        "safari browser agent",
+        "safari-browser-agent",
+        "secops-safari-automation",
+        "windowserver automation"
+      ],
+      "effect_profile": {
+        "class": "READ_EXT",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": true,
+        "network_egress": "EXTERNAL_NETWORK",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "shared-manifest-kernel": {
+      "skill_id": "shared-manifest-kernel",
+      "canonical_alias": "kernel-shared-manifest",
+      "version": "1.0.0",
+      "artifact_sha256": "2876f70c240095cf5c8430abb1eb78822d896bf0af0d3d24d7bd4dc230b8bbe5",
+      "tool_identity_hash": "651953e14e38ddc4fa2302b51c39b56c853049437527adaee4041f3e1b9d77fd",
+      "lockfile_ref": "skills-lock.json#shared-manifest-kernel@1.0.0",
+      "domain": "kernel",
+      "summary": "Patrón de diseño C-ABI de 64 Bytes (Seqlock SPMC, Cero-Punteros, Fail-Stop SCITT y soporte IPC multiplataforma macOS/Linux/Windows).",
+      "tags": [
+        "ipc lock-free",
+        "kernel-shared-manifest",
+        "ring-0 shm",
+        "seqlock 64b",
+        "shared manifest",
+        "shared-manifest-kernel"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "somatic-ble-transduction": {
+      "skill_id": "somatic-ble-transduction",
+      "canonical_alias": "wetware-ble-telemetry",
+      "version": "1.0.0",
+      "artifact_sha256": "187f9ea1797855dac7c4b136b92cf9293c29bc7f3af274538e4b8b162108a128",
+      "tool_identity_hash": "7f109dae197afb10a078e44d388c3300c0f52d0191b6ea669aa0f7d1eb1363df",
+      "lockfile_ref": "skills-lock.json#somatic-ble-transduction@1.0.0",
+      "domain": "operations",
+      "summary": "Módulo Wetware/Venture. Dispara con \"telemetria somatica\", \"conectar apple watch\", \"somatic daemon\", \"ble heart rate\", \"ring minus 3\".",
+      "tags": [
+        "ble heart rate",
+        "conectar apple watch",
+        "ring minus 3",
+        "somatic daemon",
+        "somatic-ble-transduction",
+        "telemetria somatica",
+        "wetware-ble-telemetry"
+      ],
+      "effect_profile": {
+        "class": "STATE_MUTATION",
+        "reversibility": "COMPENSATABLE",
+        "requires_action_lease": true,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == result.observed_post_hash",
+          "result.observed_post_hash != args.expected_pre_hash"
+        ]
+      }
+    },
+    "soulseek-p2p-audio-acquisition": {
+      "skill_id": "soulseek-p2p-audio-acquisition",
+      "canonical_alias": "media-soulseek-audio",
+      "version": "1.0.0",
+      "artifact_sha256": "b96769c6fc1c7a629683ee41a2dc4526da236475c9318f8e5a8c727c5b510269",
+      "tool_identity_hash": "bc2ffbcf4995a9e5ff93a95c37c134a93a103f1ff94ee1e1b8d68d47658147bc",
+      "lockfile_ref": "skills-lock.json#soulseek-p2p-audio-acquisition@1.0.0",
+      "domain": "multimedia & dsp",
+      "summary": "Módulo audiovisual. Dispara con \"descargar musica\", \"descargar cancion\", \"soulseek download\", \"adquisicion audio p2p\", \"auditoria espectral flac\", \"bajar flac soulseek\", \"fake flac\".",
+      "tags": [
+        "adquisicion audio p2p",
+        "auditoria espectral flac",
+        "bajar flac soulseek",
+        "descargar cancion",
+        "descargar musica",
+        "fake flac",
+        "media-soulseek-audio",
+        "soulseek download",
+        "soulseek-p2p-audio-acquisition"
+      ],
+      "effect_profile": {
+        "class": "READ_EXT",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": true,
+        "network_egress": "EXTERNAL_NETWORK",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "suno-bracket-tagging": {
+      "skill_id": "suno-bracket-tagging",
+      "canonical_alias": "media-suno-prompting",
+      "version": "1.0.0",
+      "artifact_sha256": "f76d2eaa459ffc83423bdf855fe78a2fa89fba851f06904ee2c55b11a70d09dc",
+      "tool_identity_hash": "e808f4b513a81c8461224b534310fa80504b44d47e2ed4ee152bccc295cc579b",
+      "lockfile_ref": "skills-lock.json#suno-bracket-tagging@1.0.0",
+      "domain": "utilities",
+      "summary": "Módulo audiovisual. Dispara con \"suno prompt\", \"udio tags\", \"prompt musical\", \"etiquetas suno\", \"control causal audio\", \"audio ai\", \"jailbreak acustico\", \"des-plasticar audio\".",
+      "tags": [
+        "audio ai",
+        "control causal audio",
+        "des-plasticar audio",
+        "etiquetas suno",
+        "jailbreak acustico",
+        "media-suno-prompting",
+        "prompt musical",
+        "suno prompt",
+        "suno-bracket-tagging",
+        "udio tags"
+      ],
+      "effect_profile": {
+        "class": "STATE_MUTATION",
+        "reversibility": "COMPENSATABLE",
+        "requires_action_lease": true,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == result.observed_post_hash",
+          "result.observed_post_hash != args.expected_pre_hash"
+        ]
+      }
+    },
+    "swarm-quantum-collapse": {
+      "skill_id": "swarm-quantum-collapse",
+      "canonical_alias": "swarm-multirepo-sync",
+      "version": "1.0.0",
+      "artifact_sha256": "6a32f8308639ddec032fc0bd6649800b6a82fde19c6a060de959520ba76841fd",
+      "tool_identity_hash": "428b80ca33272b6b11fef4020ec4b9b7c448c2740466df89fb6a98641049931b",
+      "lockfile_ref": "skills-lock.json#swarm-quantum-collapse@1.0.0",
+      "domain": "governance",
+      "summary": "Módulo CORTEX. Dispara con \"swarm quantum collapse\", \"colapso cuántico\", \"sincronizar enjambre\", \"orquestar repos\", \"swarm sync\", \"colapso multirrepo\", \"sincronización cuántica\".",
+      "tags": [
+        "colapso cuántico",
+        "colapso multirrepo",
+        "orquestar repos",
+        "sincronización cuántica",
+        "sincronizar enjambre",
+        "swarm quantum collapse",
+        "swarm sync",
+        "swarm-multirepo-sync",
+        "swarm-quantum-collapse"
+      ],
+      "effect_profile": {
+        "class": "STATE_MUTATION",
+        "reversibility": "COMPENSATABLE",
+        "requires_action_lease": true,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == result.observed_post_hash",
+          "result.observed_post_hash != args.expected_pre_hash"
+        ]
+      }
+    },
+    "swarm-router": {
+      "skill_id": "swarm-router",
+      "canonical_alias": "swarm-matrix-router",
+      "version": "1.0.0",
+      "artifact_sha256": "dcf06be3e52b53ffed235ef260b314e4fe9321885e729aa946d0559056417507",
+      "tool_identity_hash": "0e9c2c0e55e7aec22e19539b67e8a3bd3c2635b1de84bba643fef200deb532d3",
+      "lockfile_ref": "skills-lock.json#swarm-router@1.0.0",
+      "domain": "governance",
+      "summary": "Módulo CORTEX. Dispara con \"enjambre\", \"enjmabres\", \"swarm\", \"swarms\", \"sarm\", \"sarms\", \"lanzar enjambre\", \"ejecutar enjambre\", \"orquestar enjambre\", \"swarm call\", \"disparar enjambres\", \"matriz de enjambres\", \"mejora los enjambres\".",
+      "tags": [
+        "disparar enjambres",
+        "ejecutar enjambre",
+        "enjambre",
+        "enjmabres",
+        "lanzar enjambre",
+        "matriz de enjambres",
+        "mejora los enjambres",
+        "orquestar enjambre",
+        "sarm",
+        "sarms",
+        "swarm",
+        "swarm call",
+        "swarm-matrix-router",
+        "swarm-router",
+        "swarms"
+      ],
+      "effect_profile": {
+        "class": "STATE_MUTATION",
+        "reversibility": "COMPENSATABLE",
+        "requires_action_lease": true,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == result.observed_post_hash",
+          "result.observed_post_hash != args.expected_pre_hash"
+        ]
+      }
+    },
+    "symbiotic-cognitive-architecture": {
+      "skill_id": "symbiotic-cognitive-architecture",
+      "canonical_alias": "epistemic-symbiotic-cognition",
+      "version": "1.0.0",
+      "artifact_sha256": "aeb879bf97a9327852b235e0a57e9ba83bc29f252c8c67ba0b7f06fe409d4726",
+      "tool_identity_hash": "398180b76e336b1aac5b23d70a0a37a309ca91b0c3dc049088cfa22304cde400",
+      "lockfile_ref": "skills-lock.json#symbiotic-cognitive-architecture@1.0.0",
+      "domain": "governance",
+      "summary": "Protocolo de formalización de la díada simbiótica operador-agente, evaluación de Valor Ontológico (V_A), Tensor de Transducción Polímata y colapso autopoyético con el comando \"itera simbiótica\".",
+      "tags": [
+        "epistemic-symbiotic-cognition",
+        "itera simbiótica",
+        "simbiosis cognitiva",
+        "symbiotic-cognitive-architecture",
+        "tensor de transducción",
+        "tú y yo",
+        "valor ontológico agente"
+      ],
+      "effect_profile": {
+        "class": "PURE",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "thermo-audit": {
+      "skill_id": "thermo-audit",
+      "canonical_alias": "kernel-thermo-audit",
+      "version": "1.0.0",
+      "artifact_sha256": "379e8584f64e1084d3af317f19f14070b6838c564858ec73199fbd54e8ed5be5",
+      "tool_identity_hash": "cd77b0776a9a8a0df40afb86b7c773e6f2d7f1649df73b9c7df11c09a9a9cf94",
+      "lockfile_ref": "skills-lock.json#thermo-audit@1.0.0",
+      "domain": "kernel",
+      "summary": "Auditoría termodinámica estricta de C5-REAL en silicio (Aritmética, Concurrencia, MDL, Ring-0, Seqlocks y Grados de Libertad Parásitos).",
+      "tags": [
+        "/thermo-audit",
+        "auditoría termodinámica código",
+        "concurrencia landauer",
+        "fricción de silicio",
+        "grados de libertad parásitos",
+        "kernel-thermo-audit",
+        "potencia causal",
+        "silicon concurrency audit",
+        "thermo-audit"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "vscode-git-packed-refs-diagnostics": {
+      "skill_id": "vscode-git-packed-refs-diagnostics",
+      "canonical_alias": "secops-git-packed-refs",
+      "version": "1.0.0",
+      "artifact_sha256": "133abe273a02f7e8f4e9939f056c7bd11db60b99ccd6dbda81679ebfa2cd5d4c",
+      "tool_identity_hash": "ef260b2c9257ed71618363fb1f5e4592351be1d754371015da4595e1466a9bbc",
+      "lockfile_ref": "skills-lock.json#vscode-git-packed-refs-diagnostics@1.0.0",
+      "domain": "diagnostics",
+      "summary": "Módulo SecOps. Dispara con \"vscode git enoent\", \"packed-refs\", \"corrupción git\", \"reparar git vscode\".",
+      "tags": [
+        "corrupción git",
+        "packed-refs",
+        "reparar git vscode",
+        "secops-git-packed-refs",
+        "vscode git enoent",
+        "vscode-git-packed-refs-diagnostics"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "wait-what": {
+      "skill_id": "wait-what",
+      "canonical_alias": "epistemic-simplifier",
+      "version": "1.0.0",
+      "artifact_sha256": "290565418996d54edf6972f2af665846e891475609c4a239c8480f4a4d4e2945",
+      "tool_identity_hash": "314f555d1a4e68077281dfdb424ef2ef16ba74d0f66ea44d430800cd2693f505",
+      "lockfile_ref": "skills-lock.json#wait-what@1.0.0",
+      "domain": "nucleus",
+      "summary": "Freno epistémico para combatir verbosidad, forzar ASD-STE-100 y aterrizar conceptos a lenguaje directo.",
+      "tags": [
+        "/wait-what",
+        "déjate de rollos",
+        "epistemic-simplifier",
+        "explícalo simple",
+        "freno epistémico",
+        "fuera de aqui todo esto",
+        "fuera de aqui todo eto",
+        "no entiendo nada",
+        "quita todo esto",
+        "simplifica respuesta",
+        "wait-what"
+      ],
+      "effect_profile": {
+        "class": "READ_LOCAL",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": false,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "webkit-memory-audit": {
+      "skill_id": "webkit-memory-audit",
+      "canonical_alias": "secops-webkit-memory-audit",
+      "version": "1.0.0",
+      "artifact_sha256": "1dcab02d0d0148b4e30c5f3588625a0b99c48cd9679a5a763a4d65cc698b9352",
+      "tool_identity_hash": "aeaaaf1ffefc5a0a8cd8e84284bd6ff4914baa87fc8dd6fae53180ff1cadc732",
+      "lockfile_ref": "skills-lock.json#webkit-memory-audit@1.0.0",
+      "domain": "specialized",
+      "summary": "Módulo SecOps. Dispara con \"webkit audit\", \"vector 21\", \"gigacage\", \"auditoría memoria c++\", \"webkit memory\", \"bmalloc audit\".",
+      "tags": [
+        "auditoría memoria c++",
+        "bmalloc audit",
+        "gigacage",
+        "secops-webkit-memory-audit",
+        "vector 21",
+        "webkit audit",
+        "webkit memory",
+        "webkit-memory-audit"
+      ],
+      "effect_profile": {
+        "class": "READ_EXT",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": true,
+        "network_egress": "EXTERNAL_NETWORK",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "whatsapp-nexus-protocol": {
+      "skill_id": "whatsapp-nexus-protocol",
+      "canonical_alias": "secops-whatsapp-gateway",
+      "version": "1.0.0",
+      "artifact_sha256": "158984c37480e6f95cd0c4609e2f891c83a0fada84823260388591fb42499fed",
+      "tool_identity_hash": "5ea43cb4fc9370c5a59814e5ed499c15a2cd86c61aca9a9bc92c2f922f96d39c",
+      "lockfile_ref": "skills-lock.json#whatsapp-nexus-protocol@1.0.0",
+      "domain": "governance",
+      "summary": "Módulo SecOps. Dispara con \"whatsapp nexus\", \"bot whatsapp\", \"baileys rust\", \"pasarela whatsapp\", \"whatsapp gateway\", \"enviar whatsapp\", \"mensajes whatsapp\", \"wa-nexus\".",
+      "tags": [
+        "baileys rust",
+        "bot whatsapp",
+        "enviar whatsapp",
+        "mensajes whatsapp",
+        "pasarela whatsapp",
+        "secops-whatsapp-gateway",
+        "wa-nexus",
+        "whatsapp gateway",
+        "whatsapp nexus",
+        "whatsapp-nexus-protocol"
+      ],
+      "effect_profile": {
+        "class": "READ_EXT",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": true,
+        "network_egress": "EXTERNAL_NETWORK",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "wizard": {
+      "skill_id": "wizard",
+      "canonical_alias": "swarm-state-wizard",
+      "version": "1.0.0",
+      "artifact_sha256": "d8c580adddea2d7d58b20d0f85d16a43aa7aefde70904078b5833eac85246445",
+      "tool_identity_hash": "9ab8970ec3dd354745b98a2e847473d1612d3e6b8e58a67e3ccf5a7e6ee21691",
+      "lockfile_ref": "skills-lock.json#wizard@1.0.0",
+      "domain": "utilities",
+      "summary": "Transforma al agente en una máquina de estados determinista para instalaciones y configuración paso a paso.",
+      "tags": [
+        "/wizard",
+        "asistente de instalación",
+        "guía secuencial",
+        "máquina de estados",
+        "paso a paso",
+        "swarm-state-wizard",
+        "wizard"
+      ],
+      "effect_profile": {
+        "class": "STATE_MUTATION",
+        "reversibility": "COMPENSATABLE",
+        "requires_action_lease": true,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == result.observed_post_hash",
+          "result.observed_post_hash != args.expected_pre_hash"
+        ]
+      }
+    },
+    "writing-for-agents": {
+      "skill_id": "writing-for-agents",
+      "canonical_alias": "swarm-m2m-writer",
+      "version": "1.0.0",
+      "artifact_sha256": "3b0d50631b80844bb8e8ebee93d3b7716363851f92b22e3d78b0b5e76132bf72",
+      "tool_identity_hash": "634650a02775c95b4dce9aef3a8f35906c94ae8767387525db62eec021ae5ae3",
+      "lockfile_ref": "skills-lock.json#writing-for-agents@1.0.0",
+      "domain": "utilities",
+      "summary": "Genera documentos y prompts para ingestión estricta por LLMs (M2M), incluyendo el sub-protocolo /sanitize-c5.",
+      "tags": [
+        "/sanitize-c5",
+        "/writing-for-agents",
+        "despersonalizar manifiesto",
+        "external llm exergy",
+        "higienizar manifiesto",
+        "redacción m2m",
+        "sanitize-c5",
+        "swarm-m2m-writer",
+        "writing-for-agents"
+      ],
+      "effect_profile": {
+        "class": "STATE_MUTATION",
+        "reversibility": "COMPENSATABLE",
+        "requires_action_lease": true,
+        "network_egress": "NONE",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == result.observed_post_hash",
+          "result.observed_post_hash != args.expected_pre_hash"
+        ]
+      }
+    },
+    "youtube-analysis-pipeline": {
+      "skill_id": "youtube-analysis-pipeline",
+      "canonical_alias": "secops-youtube-auditor",
+      "version": "1.0.0",
+      "artifact_sha256": "34679a1667bebf761966f7e48db054ef2c04fb67f25caf1dd8e211fa935c703f",
+      "tool_identity_hash": "ec9be98241ae4c11ac2328f09a5e4d48754d9ae1d0fd7cc661e028aa163786e7",
+      "lockfile_ref": "skills-lock.json#youtube-analysis-pipeline@1.0.0",
+      "domain": "operations",
+      "summary": "Módulo SecOps. Dispara con \"youtube analysis\", \"youtube transcript\", \"auditoría youtube\", \"analizar video youtube\", \"falsabilizar video youtube\", \"falsabilizar video\".",
+      "tags": [
+        "analizar video youtube",
+        "auditoría youtube",
+        "falsabilizar video",
+        "falsabilizar video youtube",
+        "secops-youtube-auditor",
+        "youtube analysis",
+        "youtube transcript",
+        "youtube-analysis-pipeline"
+      ],
+      "effect_profile": {
+        "class": "READ_EXT",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": true,
+        "network_egress": "EXTERNAL_NETWORK",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    },
+    "youtube-remotion-sota": {
+      "skill_id": "youtube-remotion-sota",
+      "canonical_alias": "media-remotion-render",
+      "version": "1.0.0",
+      "artifact_sha256": "ce1cf510f3a7503b42c53a2c758bc66e57977482abc1ede7750beaf815e09394",
+      "tool_identity_hash": "b7c986f43bd398ac438dbcf7afe72a61c302e7705ebe0c03f57228fde26bfcb4",
+      "lockfile_ref": "skills-lock.json#youtube-remotion-sota@1.0.0",
+      "domain": "operations",
+      "summary": "Módulo audiovisual. Dispara con \"youtube remotion\", \"remotion render\", \"react video synthesis\", \"renderizar vídeo remotion\".",
+      "tags": [
+        "media-remotion-render",
+        "react video synthesis",
+        "remotion render",
+        "renderizar vídeo remotion",
+        "youtube remotion",
+        "youtube-remotion-sota"
+      ],
+      "effect_profile": {
+        "class": "READ_EXT",
+        "reversibility": "REVERSIBLE",
+        "requires_action_lease": true,
+        "network_egress": "EXTERNAL_NETWORK",
+        "validated": true
+      },
+      "guard_invariants": {
+        "preconditions": [
+          "target_path WITHIN project.allowed_roots"
+        ],
+        "postconditions": [
+          "result.status == 'OK'",
+          "sha256(file(target_path)) == args.expected_pre_hash"
+        ]
+      }
+    }
+  }
+}

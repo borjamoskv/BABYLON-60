@@ -1,0 +1,27 @@
+{
+  "contextFileName": [
+    ".babylon60rules",
+    "AGENTS.md"
+  ],
+  "mcpServers": {
+    "babylon60-kernel": {
+      "command": "python3",
+      "args": [
+        "scripts/c5_cli/launch_kernel_mcp.py"
+      ]
+    }
+  },
+  "hooks": {
+    "SessionEnd": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash scripts/guards/c5_ide_symlink_guard.sh >/dev/null"
+          }
+        ]
+      }
+    ]
+  }
+}

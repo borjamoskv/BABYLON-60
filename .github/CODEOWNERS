@@ -1,0 +1,30 @@
+# ============================================================================
+# BABYLON-60 — Matriz de Propiedad de Código por Anillos (C5-REAL)
+# ============================================================================
+
+# Fallback Global
+* @borjamoskv
+
+# Ring-0: Kernel, Memoria Compartida, Criptografía y Atestación
+/00_ABZU_KERNEL/ @borjamoskv
+/crates/ @borjamoskv
+/src/ @borjamoskv
+
+# Ring-1: Formalización Lean 4, Contratos y Motor KISH
+/proof/ @borjamoskv
+/contracts/ @borjamoskv
+/01_KISH_ENGINE/ @borjamoskv
+
+# Ring-2: CI/CD, Gobernanza, Enjambres y Gates de Calidad
+/.github/ @borjamoskv
+/.agents/ @borjamoskv
+/02_EDIN_SWARMS/ @borjamoskv
+/scripts/ @borjamoskv
+/tests/ @borjamoskv
+
+# Ring-3: Documentación, Especificaciones y Manifiestos Raíz
+/docs/ @borjamoskv
+/.babylon60rules @borjamoskv
+/AGENTS.md @borjamoskv
+/LICENSE @borjamoskv
+/SECURITY.md @borjamoskv

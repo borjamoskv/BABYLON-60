@@ -1,0 +1,59 @@
+# ============================================================================
+# BABYLON-60 — SINGLE SOURCE OF TRUTH (VERSION & RELEASE SPECIFICATION)
+# ============================================================================
+[release]
+version = "5.1.0"
+state = "stable-terminal-mcp"
+edition = "2026"
+author = "Borja Fernández Angulo <borja@babylon60.com>"
+license-file = "LICENSE"
+description = "Deterministic Agent Trust Kernel & Evidence-Carrying Runtime (AX-0)"
+axiom = "AX-0: No stochastic component may authorize its own irreversible effects (LLM != authority)"
+
+# Bloques declarativos copiados al RELEASE_MANIFEST.json por
+# scripts/c5_quality_gates/compile_claims_manifest.py. Son declaraciones del
+# operador; la evidencia ejecutable queda vinculada solo por evidence_root.
+[release.substrate]
+branch = "main"
+merged_integration = "codex/local-core-integration"
+platform_primary = "darwin-arm64"
+platform_ci_bounds = ["linux-arm64", "windows-contained"]
+web_edge_surface = "PURGED"
+
+[release.gate_attestations]
+v1_kernel_gate = "PASSED"
+nemesis_adversarial_waves = "PASSED"
+semantic_entropy_solver = "VERIFIED"
+
+[release.gate_attestations.lean4_harness]
+status = "PASSED"
+observable_branches = ["ACCEPT", "REJECT"]
+sorry_count = 0
+admit_count = 0
+
+[release.gate_attestations.hardware_enclave_witness]
+mechanism = "SecureEnclave_TouchID_P256_COSE_Sign1"
+independent_observation = true
+post_restart_verification = "DECOUPLED_VERIFIED"
+
+[release.gate_attestations.mcp_confinement]
+scope = "PER_INVOCATION_LIFECYCLE"
+effect_tx_quarantine = "ACTIVE"
+token_replay_window = 0
+
+[release.gate_attestations.storage_and_consensus]
+sqlite_cortex_teardown = "DETERMINISTIC_ON_QUERY_AND_FAILURE"
+ledger_idempotency = "VERIFIED"
+atomic_file_writes = "VERIFIED"
+bft_collision_barrier = "BftCollisionError"
+
+[topology]
+kernel = "00_ABZU_KERNEL"
+engine = "01_KISH_ENGINE"
+swarms = "02_EDIN_SWARMS"
+verification = "NERGAL_VERIFICATION_PLANE"
+
+[verification_targets]
+claims_manifest = "CLAIMS.toml"
+evidence_lock = "claims.lock"
+release_manifest = "RELEASE_MANIFEST.json"

@@ -1,0 +1,27 @@
+        <h2>{{ compliance_matrix_title }}</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Artículo / Requisito</th>
+                    <th>Mecanismo Técnico BABYLON-60</th>
+                    <th>Estado</th>
+                    <th>Evidencia Hash</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for art in articles %}
+                <tr>
+                    <td><strong>{{ art.title }}</strong></td>
+                    <td>{{ art.mechanism }}</td>
+                    <td>
+                        {% if art.status_ok %}
+                        <span class="badge badge-success">✅ {{ art.status_display }}</span>
+                        {% else %}
+                        <span class="badge badge-danger">❌ {{ art.status_display }}</span>
+                        {% endif %}
+                    </td>
+                    <td><code>{{ art.evidence_hash_short }}</code></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
