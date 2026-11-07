@@ -1,0 +1,150 @@
+{
+  "framework": "BABYLON-60 C5-REAL Sovereign Trust Substrate",
+  "compliance_target": "Regulation (EU) 2024/1689 (EU Artificial Intelligence Act)",
+  "report_type": "SOURCE_CLAIMS_EXPORT",
+  "test_execution_status": "NOT_EXECUTED_BY_EXPORTER",
+  "regulatory_assessment": "PENDING_REVIEW",
+  "legal_conformity": "NOT_DETERMINED",
+  "publication_authorized": false,
+  "attestation": {
+    "attestation_status": "SOFTWARE_METADATA_ONLY",
+    "hardware_attestation_verified": false,
+    "evidence_source": "os.uname",
+    "sysname": "Darwin",
+    "nodename": "host-b19d78c0981b",
+    "release": "25.6.0",
+    "machine": "arm64",
+    "timestamp": "2026-11-06T16:24:00.785418+00:00"
+  },
+  "summary": {
+    "articles_covered": [
+      12,
+      14,
+      15
+    ],
+    "total_evidence_points": 8,
+    "testable_points": 8,
+    "evidence_collection_ratio": "100.0%",
+    "verdict": "EVIDENCE_COLLECTED_PENDING_AUDIT"
+  },
+  "sections": [
+    {
+      "article": "Article 12: Record-Keeping & Automatic Logging",
+      "legal_mandate": "High-risk and autonomous AI systems must technically enable automatic recording of events (logs) throughout lifecycle, ensuring tamper-evident traceability.",
+      "silicon_solution": "RFC 9942 COSE_Sign1 cryptographic receipts per action dispatch + WORM SQLite WAL with SHA3-256 hash chaining.",
+      "claims_evidence": [
+        {
+          "claim_id": "cose_ed25519_receipt",
+          "statement": "Receipts are formatted according to RFC 9942 and cryptographically signed with Ed25519",
+          "source_claim_status": "verified",
+          "evidence_available": true,
+          "evidence_availability_basis": "DECLARED_SOURCE_STATUS_NOT_REVALIDATED",
+          "test_execution_status": "NOT_EXECUTED_BY_EXPORTER",
+          "executed_test": "pending_conformity_assessment",
+          "result": "NOT_EVALUATED",
+          "scope": "Requires definition",
+          "pending_evaluation": true
+        },
+        {
+          "claim_id": "cortex_persist_sqlite",
+          "statement": "Persistent ledger with SQLite WAL, BEGIN IMMEDIATE and legacy SHA3-256 row hash chaining",
+          "source_claim_status": "verified",
+          "evidence_available": true,
+          "evidence_availability_basis": "DECLARED_SOURCE_STATUS_NOT_REVALIDATED",
+          "test_execution_status": "NOT_EXECUTED_BY_EXPORTER",
+          "executed_test": "pending_conformity_assessment",
+          "result": "NOT_EVALUATED",
+          "scope": "SQLite WAL (PRAGMA synchronous=FULL) under OS process faults (SIGKILL); physical power loss (corte eléctrico) and NVMe controller volatile cache retention remain NO_VERIFICADO without hardware power-fault injection",
+          "pending_evaluation": true
+        },
+        {
+          "claim_id": "merkle_attestation",
+          "statement": "Merkle state roots computed deterministically and queryable via MCP",
+          "source_claim_status": "verified",
+          "evidence_available": true,
+          "evidence_availability_basis": "DECLARED_SOURCE_STATUS_NOT_REVALIDATED",
+          "test_execution_status": "NOT_EXECUTED_BY_EXPORTER",
+          "executed_test": "pending_conformity_assessment",
+          "result": "NOT_EVALUATED",
+          "scope": "Requires definition",
+          "pending_evaluation": true
+        }
+      ]
+    },
+    {
+      "article": "Article 14: Human Oversight & Capability Invariants",
+      "legal_mandate": "Natural persons must be enabled to oversee the AI system, prevent or minimize risks, and exercise an effective stop mechanism.",
+      "silicon_solution": "Apple Secure Enclave P-256 biometric friction (Touch ID with zero reuse duration) for irreversible side-effects + 64-byte SharedManifest gate.",
+      "claims_evidence": [
+        {
+          "claim_id": "secure_enclave_p256",
+          "statement": "The Apple Secure Enclave bridge verifies P-256 signatures; its automated cryptographic test uses software keys",
+          "source_claim_status": "verified_local",
+          "evidence_available": true,
+          "evidence_availability_basis": "DECLARED_SOURCE_STATUS_NOT_REVALIDATED",
+          "test_execution_status": "NOT_EXECUTED_BY_EXPORTER",
+          "executed_test": "pending_conformity_assessment",
+          "result": "NOT_EVALUATED",
+          "scope": "Requires definition",
+          "pending_evaluation": true
+        },
+        {
+          "claim_id": "inv_01_manifest_layout",
+          "statement": "SharedManifest layout is 64 bytes with 64-byte alignment and documented field offsets; layout alone does not establish cache coherence, RFO traffic or performance",
+          "source_claim_status": "verified",
+          "evidence_available": true,
+          "evidence_availability_basis": "DECLARED_SOURCE_STATUS_NOT_REVALIDATED",
+          "test_execution_status": "NOT_EXECUTED_BY_EXPORTER",
+          "executed_test": "pending_conformity_assessment",
+          "result": "NOT_EVALUATED",
+          "scope": "Requires definition",
+          "pending_evaluation": true
+        }
+      ]
+    },
+    {
+      "article": "Article 15: Accuracy, Robustness & Cybersecurity",
+      "legal_mandate": "AI systems must achieve an appropriate level of accuracy, robustness, fail-safe operation, and resilience against adversarial inputs or hallucinations.",
+      "silicon_solution": "Deterministic apoptosis (0xDEAD_6060 / Fail-Stop) on capability taint + Seqlock SPMC (RFO=0) + Lean 4 machine-checked trace induction.",
+      "claims_evidence": [
+        {
+          "claim_id": "inv_04_fail_stop_halt",
+          "statement": "Epistemic halt closes admission (POISONED, 0xDEAD_6060) and records SignedDurable / UnsignedDurable / PersistenceFailed evidence within a bounded budget; never a synthetic signature",
+          "source_claim_status": "verified",
+          "evidence_available": true,
+          "evidence_availability_basis": "DECLARED_SOURCE_STATUS_NOT_REVALIDATED",
+          "test_execution_status": "NOT_EXECUTED_BY_EXPORTER",
+          "executed_test": "pending_conformity_assessment",
+          "result": "NOT_EVALUATED",
+          "scope": "Requires definition",
+          "pending_evaluation": true
+        },
+        {
+          "claim_id": "inv_02_seqlock_concurrency",
+          "statement": "Seqlock SPMC protocol model (loom replica of seqlock.rs, 1 writer x 1-2 readers) yields no torn read under bounded model checking (max 2 preemptions); production code is not itself model-checked",
+          "source_claim_status": "verified",
+          "evidence_available": true,
+          "evidence_availability_basis": "DECLARED_SOURCE_STATUS_NOT_REVALIDATED",
+          "test_execution_status": "NOT_EXECUTED_BY_EXPORTER",
+          "executed_test": "pending_conformity_assessment",
+          "result": "NOT_EVALUATED",
+          "scope": "Requires definition",
+          "pending_evaluation": true
+        },
+        {
+          "claim_id": "lean4_formal_trace",
+          "statement": "For accepted abstract traces, BabylonTrace proves even declared read sequences (TraceReadsEven), and AX0 proves countDispatches <= 1 from Proposed; neither theorem models Rust payload loads or physical memory ordering",
+          "source_claim_status": "verified_local",
+          "evidence_available": true,
+          "evidence_availability_basis": "DECLARED_SOURCE_STATUS_NOT_REVALIDATED",
+          "test_execution_status": "NOT_EXECUTED_BY_EXPORTER",
+          "executed_test": "pending_conformity_assessment",
+          "result": "NOT_EVALUATED",
+          "scope": "Requires definition",
+          "pending_evaluation": true
+        }
+      ]
+    }
+  ],
+  "report_sha256": "5f88e6e4e5065e48ce59ef28e2458a8077a0368b2b1ce2b46293975cbfbe795b"
+}

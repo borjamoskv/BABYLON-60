@@ -1,0 +1,26 @@
+# Restricted (read-only) launch for acceptance scenario C. Distinct serverName,
+# distinct process, distinct binding. Use instead of, or alongside, the writer overlay.
+#   .venv/bin/python -m babylon60.mcp.cortex_memory_mcp issue-binding --key ~/.cortex-memory/op.key \
+#       --actor dsh-reader --project babylon60 --caps read --out ~/.cortex-memory/reader.json
+- insert:
+    - id: memory-cortex-ro
+      name: '@deepseek-ai/dsh-mcp-client'
+      config:
+        serverName: cortex-memory-ro
+        transport: stdio
+        command: !!js process.env.HOME + '/BABYLON-60/.venv/bin/python'
+        args:
+          - -m
+          - babylon60.mcp.cortex_memory_mcp
+          - serve
+          - --binding
+          - !!js process.env.HOME + '/.cortex-memory/reader.json'
+          - --trust-pubkey
+          - !!js process.env.HOME + '/.cortex-memory/op.key.pub'
+          - --ledger
+          - !!js process.env.HOME + '/.cortex-memory/ledger.db'
+          - --broker-lib
+          - !!js process.env.HOME + '/BABYLON-60/target/debug/libbabylon60.dylib'
+        env: {}
+        cwd: !!js process.env.HOME + '/BABYLON-60'
+        failOnStartupError: true

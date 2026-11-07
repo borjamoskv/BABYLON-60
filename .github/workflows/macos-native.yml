@@ -1,0 +1,62 @@
+name: macOS Native Isolation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'crates/**'
+      - '00_ABZU_KERNEL/**'
+      - '01_KISH_ENGINE/cortex/**'
+      - 'Cargo.toml'
+      - 'Cargo.lock'
+      - 'build.rs'
+      - 'rust-toolchain*'
+      - '.cargo/**'
+      - 'tests/omega_mediation_campaign.rs'
+      - '.github/workflows/macos-native.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'crates/**'
+      - '00_ABZU_KERNEL/**'
+      - '01_KISH_ENGINE/cortex/**'
+      - 'Cargo.toml'
+      - 'Cargo.lock'
+      - 'build.rs'
+      - 'rust-toolchain*'
+      - '.cargo/**'
+      - 'tests/omega_mediation_campaign.rs'
+      - '.github/workflows/macos-native.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  CARGO_INCREMENTAL: '0'
+  CARGO_PROFILE_DEV_DEBUG: '0'
+  CARGO_PROFILE_TEST_DEBUG: '0'
+
+jobs:
+  seatbelt:
+    # BYPASS-001 requires Darwin sandbox-exec; Linux explicitly skips this test.
+    runs-on: macos-15
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: dtolnay/rust-toolchain@b725eda525362e7cf34af9a7243cac1e3f01a7ec
+      - uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0
+      - uses: arduino/setup-protoc@c65c819552d16ad3c9b72d9dfd5ba5237b9c906b
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Verify real macOS process confinement
+        run: >-
+          cargo test --locked --features cortex-persist --test omega_mediation_campaign
+          test_omega_bypass_001_os_blocks_direct_agent_access_and_broker_executes_authorized
+          -- --exact --nocapture

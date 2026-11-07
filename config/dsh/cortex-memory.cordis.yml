@@ -1,0 +1,40 @@
+# Reference overlay: CORTEX Memory MCP adapter for DeepSeek Harness (default-off).
+# Shape follows the official "Bring another MCP server" row:
+# https://deepseek-harness.github.io/deepseek-harness/en/guide/mcp-memory#bring-another-mcp-server
+#
+# Enable for one run:   dsh web --patch "$PWD/config/dsh/cortex-memory.cordis.yml"
+# Persist: merge this single insert into $DSH_HOME/profiles/<name>/cordis.patch.yml (do not overwrite it).
+#
+# Authority: binding + trusted public key are passed as ARGS, not env.
+# DSH stdio drops ambient names matching /KEY|PASSWORD|SECRET|TOKEN/i and DSH_*;
+# no secret is needed by the child: the binding is a signed public statement and
+# the operator private key never reaches the adapter. Only `!!js` expressions
+# documented by DSH are used here; no shell `${VAR}` expansion is assumed.
+#
+# Prerequisites (operator, once):
+#   .venv/bin/python -m babylon60.mcp.cortex_memory_mcp keygen --out ~/.cortex-memory/op.key
+#   .venv/bin/python -m babylon60.mcp.cortex_memory_mcp issue-binding --key ~/.cortex-memory/op.key \
+#       --actor dsh-desktop --project babylon60 --caps read,append,supersede,forget --out ~/.cortex-memory/writer.json
+#   cargo build --locked --features python   # produces target/debug/libbabylon60.dylib (native broker)
+- insert:
+    - id: memory-cortex
+      name: '@deepseek-ai/dsh-mcp-client'
+      config:
+        serverName: cortex-memory
+        transport: stdio
+        command: !!js process.env.HOME + '/BABYLON-60/.venv/bin/python'
+        args:
+          - -m
+          - babylon60.mcp.cortex_memory_mcp
+          - serve
+          - --binding
+          - !!js process.env.HOME + '/.cortex-memory/writer.json'
+          - --trust-pubkey
+          - !!js process.env.HOME + '/.cortex-memory/op.key.pub'
+          - --ledger
+          - !!js process.env.HOME + '/.cortex-memory/ledger.db'
+          - --broker-lib
+          - !!js process.env.HOME + '/BABYLON-60/target/debug/libbabylon60.dylib'
+        env: {}
+        cwd: !!js process.env.HOME + '/BABYLON-60'
+        failOnStartupError: true

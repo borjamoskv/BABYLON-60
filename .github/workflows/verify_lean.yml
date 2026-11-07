@@ -1,0 +1,142 @@
+name: Verify Lean Proofs (C5-REAL)
+
+# Verificación mecánica del teorema causal (proof/lean/Babylon.lean).
+# `lake build` type-checkea cada prueba; si alguna no cierra, el job FALLA.
+# Anti-teatro: la corrección del teorema se demuestra en cada push, no se afirma.
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'examples/poc_lean4_emitter.rs'
+      - 'examples/navier_stokes_larsa_oracle.rs'
+      - 'tests/example_regressions.rs'
+      - 'proof/lean/**'
+      - 'src/omega_mediation.rs'
+      - 'src/acs_bridge.rs'
+      - 'tests/acs_cbor_golden.txt'
+      - 'tests/acs_authenticated.rs'
+      - 'tests/test_lean_envelope_bijection.py'
+      - '00_ABZU_KERNEL/crates/babylon60-compiler/lean_backend.py'
+      - 'tests/test_audit_lean_backend.py'
+      - 'Cargo.toml'
+      - 'Cargo.lock'
+      - 'pyproject.toml'
+      - 'uv.lock'
+      - 'scripts/c5_quality_gates/test_lean_aot_stream.py'
+      - '.github/workflows/verify_lean.yml'
+  pull_request:
+    paths:
+      - 'examples/poc_lean4_emitter.rs'
+      - 'examples/navier_stokes_larsa_oracle.rs'
+      - 'tests/example_regressions.rs'
+      - 'proof/lean/**'
+      - 'src/omega_mediation.rs'
+      - 'src/acs_bridge.rs'
+      - 'tests/acs_cbor_golden.txt'
+      - 'tests/acs_authenticated.rs'
+      - 'tests/test_lean_envelope_bijection.py'
+      - '00_ABZU_KERNEL/crates/babylon60-compiler/lean_backend.py'
+      - 'tests/test_audit_lean_backend.py'
+      - 'Cargo.toml'
+      - 'Cargo.lock'
+      - 'pyproject.toml'
+      - 'uv.lock'
+      - 'scripts/c5_quality_gates/test_lean_aot_stream.py'
+      - '.github/workflows/verify_lean.yml'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  verify-lean:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: proof/lean
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+      - name: Cache elan + toolchains
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: ~/.elan
+          key: elan-v4.2.4-${{ runner.os }}-${{ hashFiles('proof/lean/lean-toolchain') }}
+
+      - name: Install elan (Lean toolchain manager)
+        run: |
+          set -euo pipefail
+          case "$(uname -s)-$(uname -m)" in
+            Linux-x86_64)
+              target=x86_64-unknown-linux-gnu
+              digest=42b94d4244e8353142c456ec0e4ca6528fd898a6c604d4059f494e706e431f63 ;;
+            Darwin-arm64)
+              target=aarch64-apple-darwin
+              digest=7ad829861392c718dfebde3a83b5c8508df47be02af68894b094b0b3952616e5 ;;
+            Darwin-x86_64)
+              target=x86_64-apple-darwin
+              digest=8a340b309d8ed2e96f930761fa223b3af57a38f5d253b53ac90293c9516f8cd4 ;;
+            *) echo "Unsupported elan platform" >&2; exit 1 ;;
+          esac
+          archive="$RUNNER_TEMP/elan.tar.gz"
+          curl --fail --silent --show-error --location "https://github.com/leanprover/elan/releases/download/v4.2.4/elan-${target}.tar.gz" -o "$archive"
+          printf '%s  %s\n' "$digest" "$archive" | shasum -a 256 --check --strict
+          mkdir -p "$RUNNER_TEMP/elan-verified"
+          tar -xzf "$archive" -C "$RUNNER_TEMP/elan-verified"
+          "$RUNNER_TEMP/elan-verified/elan-init" -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - name: Build & verify proofs (fail-fast on unclosed goals)
+        run: lake --wfail build
+
+      - name: Verify canonical envelope bijections with pinned Lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          proof_dir="$(mktemp -d)"
+          trap 'rm -rf "$proof_dir"' EXIT
+          export LEAN_PATH="$proof_dir"
+          pin="$(cat lean-toolchain)"
+          for module in CanonicalHead CanonicalEnvelope TicketEnvelope AcsEnvelope ExampleSeqlockTrace; do
+            if rg -n '\b(sorry|admit|axiom)\b' "$module.lean"; then
+              echo "Forbidden unproved declaration" >&2
+              exit 1
+            fi
+            elan run "$pin" lean -o "$proof_dir/$module.olean" "$module.lean"
+          done
+
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.12'
+      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78
+      - uses: dtolnay/rust-toolchain@b725eda525362e7cf34af9a7243cac1e3f01a7ec
+        with:
+          toolchain: stable
+      - uses: arduino/setup-protoc@c65c819552d16ad3c9b72d9dfd5ba5237b9c906b
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Prepare locked cross-language tests
+        working-directory: ${{ github.workspace }}
+        run: |
+          uv sync --locked --extra dev
+          cargo test --locked -p babylon60_root --lib --test acs_authenticated --no-run
+      - name: Require Lean and Rust wire agreement
+        working-directory: ${{ github.workspace }}
+        env:
+          BABYLON60_REQUIRE_LEAN_ENVELOPES: '1'
+        run: uv run --locked --no-sync pytest tests/test_lean_envelope_bijection.py tests/test_audit_lean_backend.py -q
+
+      - name: Build native streaming oracle
+        run: lake --wfail build babylon_aot_oracle navier_stokes_oracle
+
+      - name: Check example regressions with pinned Lean and native oracle
+        working-directory: ${{ github.workspace }}
+        run: cargo test --locked -p babylon60_root --test example_regressions -- --include-ignored
+
+      - name: Reject malformed native traces
+        run: python3 ../../scripts/c5_quality_gates/test_lean_aot_stream.py -v

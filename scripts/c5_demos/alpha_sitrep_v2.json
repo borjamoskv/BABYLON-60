@@ -1,0 +1,56 @@
+{
+    "timestamp": "2026-09-21T20:02:00.768156+00:00",
+    "scan_time_ms": 1188,
+    "top_targets": [
+        {
+            "source": "arXiv",
+            "id": "http://arxiv.org/abs/2609.21996v1",
+            "title": "A Lie Detector Test for Language Models: Reading Knowledge a Model Won't Reveal",
+            "exergy": 7825,
+            "triggers": [
+                "causal"
+            ]
+        },
+        {
+            "source": "arXiv",
+            "id": "http://arxiv.org/abs/2609.21870v1",
+            "title": "Neural Cellular Automata Learn General Features in their Hidden Channels",
+            "exergy": 7805,
+            "triggers": [
+                "invariant"
+            ]
+        },
+        {
+            "source": "arXiv",
+            "id": "http://arxiv.org/abs/2609.21888v1",
+            "title": "Detecting Pretraining Data in Large Language Models from a Free-Energy Perspective",
+            "exergy": 7479,
+            "triggers": [
+                "entropy"
+            ]
+        },
+        {
+            "source": "GitHub",
+            "id": "https://github.com/Ariazonaa/jellysic",
+            "title": "Ariazonaa/jellysic (Rust)",
+            "exergy": 5143,
+            "triggers": [
+                "audio"
+            ]
+        },
+        {
+            "source": "GitHub",
+            "id": "https://github.com/kyzmapiratov/Menagerie",
+            "title": "kyzmapiratov/Menagerie (Rust)",
+            "exergy": 5018,
+            "triggers": []
+        },
+        {
+            "source": "GitHub",
+            "id": "https://github.com/heyaozh/jev-rust-crate",
+            "title": "heyaozh/jev-rust-crate (Rust)",
+            "exergy": 4937,
+            "triggers": []
+        }
+    ]
+}

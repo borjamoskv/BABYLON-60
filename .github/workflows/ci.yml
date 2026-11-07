@@ -1,0 +1,212 @@
+name: C5-REAL Matrix Build
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      full_release_evidence:
+        description: 'Run the full macOS release certification (uses paid runner minutes beyond the included allowance)'
+        type: boolean
+        default: false
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+permissions:
+  contents: read
+
+env:
+  CARGO_INCREMENTAL: '0'
+  CARGO_PROFILE_DEV_DEBUG: '0'
+  CARGO_PROFILE_TEST_DEBUG: '0'
+
+jobs:
+  rust:
+    strategy:
+      fail-fast: false
+      matrix:
+        # General Rust coverage stays on Linux. Native coverage is a focused workflow.
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: dtolnay/rust-toolchain@b725eda525362e7cf34af9a7243cac1e3f01a7ec
+        with:
+          components: clippy
+      - uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0
+      - uses: arduino/setup-protoc@c65c819552d16ad3c9b72d9dfd5ba5237b9c906b
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.12'
+      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78
+      - run: uv sync --locked --extra dev --extra gemini
+      - name: Check locked workspace
+        run: cargo check --workspace --locked
+      - name: B60 DSL engine and CLI regressions
+        run: cargo test --locked -p babylon60_root --bin babylon60-dsl --test b60_dsl_cli
+      - name: Test workspace with isolated IPC scheduling
+        run: uv run --no-sync cargo test --workspace --locked -- --test-threads=1
+      - name: FL-019 native geometry and persistent lineage
+        run: |
+          cargo build --locked --lib --features python
+          BABYLON60_TEST_GEOMETRY_LIBRARY="$GITHUB_WORKSPACE/target/debug/libbabylon60.so" uv run --locked pytest tests/test_fl019_geometry_workflow.py -q
+      - name: Regulatory rejection and native bridge regressions (no production authority)
+        run: |
+          cargo test --locked --lib ring0 --features cortex-persist,test_mock_hardware -q
+          cargo build --locked --bin babylon60_regulatory_gate --features test_mock_hardware
+          cp target/debug/babylon60_regulatory_gate "$RUNNER_TEMP/regulatory-gate-mock"
+          cargo build --locked --bin babylon60_regulatory_gate
+          BABYLON60_TEST_MOCK_GATE_BINARY="$RUNNER_TEMP/regulatory-gate-mock" uv run --locked pytest tests/test_regulatory_assessment.py tests/test_regulatory_native_validation.py tests/test_audit_release_gates.py -q
+      - name: Clippy
+        run: cargo clippy --locked --all-targets -- -D warnings
+
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: dtolnay/rust-toolchain@b725eda525362e7cf34af9a7243cac1e3f01a7ec
+      - uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0
+      - run: cargo install cargo-audit --version 0.22.2 --locked
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.12'
+      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78
+      - run: uv sync --locked --extra dev --extra gemini
+      - name: Agent semantic contracts and token budget
+        run: |
+          python3 scripts/c5_quality_gates/audit_semantic_contracts.py --workspace-only
+          python3 scripts/c5_quality_gates/audit_token_budget.py --workspace-only --skip-ghost-listeners
+          python3 scripts/guards/verify_active_topology.py
+          python3 scripts/guards/verify_active_topology.py --staged
+      - name: Agent contract regression tests
+        run: >-
+          uv run --locked pytest tests/test_semantic_contracts_gate.py tests/test_governance_gates.py
+          tests/test_visual_signature_guard.py tests/test_signature_panel_render.py
+          tests/test_terminal_distribution.py tests/test_skills_manifest.py tests/test_skill_library_convergence.py -q
+      - run: uv run --no-sync make check
+      - run: uv run --no-sync make test-quality
+
+  claims:
+    # Full certification includes macOS-only evidence; keep it intact for releases.
+    if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && inputs.full_release_evidence)
+    runs-on: macos-15
+    timeout-minutes: 45
+    permissions:
+      contents: read
+      id-token: write
+      attestations: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: dtolnay/rust-toolchain@b725eda525362e7cf34af9a7243cac1e3f01a7ec
+      - uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0
+      - uses: arduino/setup-protoc@c65c819552d16ad3c9b72d9dfd5ba5237b9c906b
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.12'
+      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78
+      - run: uv sync --locked --extra dev --extra gemini
+      - name: Cache Lean toolchain
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: ~/.elan
+          key: elan-v4.2.4-${{ runner.os }}-${{ hashFiles('proof/lean/lean-toolchain') }}
+      - name: Install Lean toolchain
+        run: |
+          mkdir -p "$HOME/.elan/toolchains"
+          set -euo pipefail
+          case "$(uname -s)-$(uname -m)" in
+            Linux-x86_64)
+              target=x86_64-unknown-linux-gnu
+              digest=42b94d4244e8353142c456ec0e4ca6528fd898a6c604d4059f494e706e431f63 ;;
+            Darwin-arm64)
+              target=aarch64-apple-darwin
+              digest=7ad829861392c718dfebde3a83b5c8508df47be02af68894b094b0b3952616e5 ;;
+            Darwin-x86_64)
+              target=x86_64-apple-darwin
+              digest=8a340b309d8ed2e96f930761fa223b3af57a38f5d253b53ac90293c9516f8cd4 ;;
+            *) echo "Unsupported elan platform" >&2; exit 1 ;;
+          esac
+          archive="$RUNNER_TEMP/elan.tar.gz"
+          curl --fail --silent --show-error --location "https://github.com/leanprover/elan/releases/download/v4.2.4/elan-${target}.tar.gz" -o "$archive"
+          printf '%s  %s\n' "$digest" "$archive" | shasum -a 256 --check --strict
+          mkdir -p "$RUNNER_TEMP/elan-verified"
+          tar -xzf "$archive" -C "$RUNNER_TEMP/elan-verified"
+          "$RUNNER_TEMP/elan-verified/elan-init" -y --default-toolchain none
+          TOOLCHAIN="$(cat proof/lean/lean-toolchain)"
+          "$HOME/.elan/bin/elan" toolchain install "$TOOLCHAIN"
+          "$HOME/.elan/bin/elan" default "$TOOLCHAIN"
+          "$HOME/.elan/bin/lean" --version
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Verify all declared claims
+        run: uv run --no-sync python scripts/c5_quality_gates/verify_claims.py
+      - name: Package release bundle & compile evidence + CycloneDX SBOMs
+        id: release_bundle
+        run: |
+          BUNDLE_ZIP="$(bash scripts/package_release.sh "$RUNNER_TEMP/dist")"
+          test -f "$BUNDLE_ZIP"
+          echo "path=$BUNDLE_ZIP" >> "$GITHUB_OUTPUT"
+          uv run --no-sync python scripts/c5_quality_gates/compile_claims_manifest.py --bundle "$BUNDLE_ZIP"
+          bash scripts/verify_release.sh --bundle "$BUNDLE_ZIP"
+      - name: Record GitHub attestation backend availability
+        id: provenance_backend
+        env:
+          REPOSITORY_PRIVATE: ${{ github.event.repository.private }}
+          REPOSITORY_OWNER_TYPE: ${{ github.event.repository.owner.type }}
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          unavailable = os.environ["REPOSITORY_PRIVATE"] == "true" and os.environ["REPOSITORY_OWNER_TYPE"] == "User"
+          status = "unavailable_private_personal_repository" if unavailable else "provider_verification_required"
+          data = {"provider": "GitHub artifact attestations", "status": status, "source_commit": os.environ["GITHUB_SHA"]}
+          Path("provenance-status.json").write_text(json.dumps(data, indent=2) + "\n")
+          with open(os.environ["GITHUB_OUTPUT"], "a") as output:
+              output.write(f"can_attempt={'false' if unavailable else 'true'}\n")
+          if unavailable:
+              message = "GitHub artifact attestations are unavailable for this private personal repository. No SLSA signature is claimed."
+              print(f"::notice title=Attestation unavailable::{message}")
+              with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as summary:
+                  summary.write(message + "\n")
+          PY
+      - name: Attest SLSA build provenance (keyless Sigstore OIDC)
+        id: attest
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') && steps.provenance_backend.outputs.can_attempt == 'true'
+        uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8
+        with:
+          subject-path: |
+            ${{ steps.release_bundle.outputs.path }}
+            RELEASE_MANIFEST.json
+            evidence.json
+            claims.lock
+            sbom.cargo.cdx.json
+            sbom.python.cdx.json
+      - name: Entropy gate on the macOS substrate
+        run: uv run --no-sync python scripts/c5_quality_gates/audit_entropy_3strata.py
+      - name: Swarm concurrency stress gate
+        run: uv run --no-sync python scripts/c5_quality_gates/swarm_100_stress_campaign.py
+      - name: Preserve evidence, including failures
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: claims-macos
+          path: |
+            scripts/c5_quality_gates/claims_sitrep.json
+            evidence.json
+            claims.lock
+            RELEASE_MANIFEST.json
+            sbom.cargo.cdx.json
+            sbom.python.cdx.json
+            provenance-status.json
+            ${{ steps.attest.outputs.bundle-path }}

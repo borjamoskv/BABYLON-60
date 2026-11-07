@@ -1,0 +1,22 @@
+name: CI Canary
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Canary runner healthcheck
+        run: |
+          echo "BABYLON60_CI_RUNNER_HEALTHCHECK: PASS"

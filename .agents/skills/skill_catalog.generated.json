@@ -1,0 +1,1577 @@
+{
+  "version": 2,
+  "skills": {
+    "c5-wetware-and-venture-ops-project": {
+      "name": "c5-wetware-and-venture-ops-project",
+      "canonical_alias": "wetware-hub",
+      "display_name": "Wetware Hub · Operaciones y Carga Cognitiva",
+      "description": "Enruta el módulo del proyecto para el límite de disipación y el cron adaptativo. Dispara con \"wetware project hub\", \"wetware-hub\", \"venture project hub\", \"hub wetware proyecto\", \"adaptive-cron\".",
+      "role": "arquitecto",
+      "allowed_roles": [
+        "arquitecto",
+        "ejecutor",
+        "auditor"
+      ],
+      "directives": {
+        "worktree_mode": "spec-only",
+        "phase": "design",
+        "handoff": {
+          "upstream": "operador",
+          "downstream": "ejecutor"
+        }
+      }
+    },
+    "lora-swarm-pipeline": {
+      "name": "lora-swarm-pipeline",
+      "canonical_alias": "swarm-lora-pipeline",
+      "display_name": "Pipeline de Minería Paralelizada con Enjambre LoRA",
+      "description": "Pipeline de minería con enjambre de agentes, extracción N-Zonas (SHA-256), ShareGPT/ChatML y clustering semántico.",
+      "role": "ejecutor",
+      "allowed_roles": [
+        "ejecutor"
+      ],
+      "directives": {
+        "worktree_mode": "read-write",
+        "phase": "implementation",
+        "handoff": {
+          "upstream": "arquitecto",
+          "downstream": "auditor"
+        }
+      }
+    },
+    "symbiotic-cognitive-architecture": {
+      "name": "symbiotic-cognitive-architecture",
+      "canonical_alias": "epistemic-symbiotic-cognition",
+      "display_name": "Arquitectura Cognitiva Simbiótica Díada Operador-Agente",
+      "description": "Protocolo de formalización de la díada simbiótica operador-agente, evaluación de Valor Ontológico (V_A), Tensor de Transducción Polímata y colapso autopoyético con el comando \"itera simbiótica\".",
+      "role": "arquitecto",
+      "allowed_roles": [
+        "arquitecto"
+      ],
+      "directives": {
+        "worktree_mode": "spec-only",
+        "phase": "design",
+        "handoff": {
+          "upstream": "operador",
+          "downstream": "ejecutor"
+        }
+      }
+    },
+    "writing-for-agents": {
+      "name": "writing-for-agents",
+      "canonical_alias": "swarm-m2m-writer",
+      "display_name": "Redacción M2M de Alta Exergía & Sanitización C5",
+      "description": "Genera documentos y prompts para ingestión estricta por LLMs (M2M), incluyendo el sub-protocolo /sanitize-c5.",
+      "role": "ejecutor",
+      "allowed_roles": [
+        "ejecutor"
+      ],
+      "directives": {
+        "worktree_mode": "read-write",
+        "phase": "implementation",
+        "handoff": {
+          "upstream": "arquitecto",
+          "downstream": "auditor"
+        }
+      }
+    },
+    "wait-what": {
+      "name": "wait-what",
+      "canonical_alias": "epistemic-simplifier",
+      "display_name": "Freno Epistémico & Traducción Simplificada (STE)",
+      "description": "Freno epistémico para combatir verbosidad, forzar ASD-STE-100 y aterrizar conceptos a lenguaje directo.",
+      "role": "auditor",
+      "allowed_roles": [
+        "auditor"
+      ],
+      "directives": {
+        "worktree_mode": "audit-only",
+        "phase": "verification",
+        "handoff": {
+          "upstream": "ejecutor",
+          "downstream": "operador"
+        }
+      }
+    },
+    "biographical-thermo": {
+      "name": "biographical-thermo",
+      "canonical_alias": "epistemic-biographical-thermo",
+      "display_name": "Mapeo Termodinámico Biográfico e Histórico",
+      "description": "Analiza trayectorias vitales, historia y filosofía mediante Mapeo Estructural C5-REAL (Termodinámica Discreta).",
+      "role": "auditor",
+      "allowed_roles": [
+        "auditor"
+      ],
+      "directives": {
+        "worktree_mode": "audit-only",
+        "phase": "verification",
+        "handoff": {
+          "upstream": "ejecutor",
+          "downstream": "operador"
+        }
+      }
+    },
+    "shared-manifest-kernel": {
+      "name": "shared-manifest-kernel",
+      "canonical_alias": "kernel-shared-manifest",
+      "display_name": "Kernel de Manifiesto Compartido (64B Seqlock SPMC)",
+      "description": "Patrón de diseño C-ABI de 64 Bytes (Seqlock SPMC, Cero-Punteros, Fail-Stop SCITT y soporte IPC multiplataforma macOS/Linux/Windows).",
+      "role": "arquitecto",
+      "allowed_roles": [
+        "arquitecto"
+      ],
+      "directives": {
+        "worktree_mode": "spec-only",
+        "phase": "design",
+        "handoff": {
+          "upstream": "operador",
+          "downstream": "ejecutor"
+        }
+      }
+    },
+    "grill-me-v2": {
+      "name": "grill-me-v2",
+      "canonical_alias": "socratic-interrogator",
+      "display_name": "Socratic Interrogator · Interrogatorio Socrático Adversarial",
+      "description": "Versión avanzada de interrogatorio socrático (C5-REAL) para alinear decisiones de diseño y purgar asunciones infundadas.",
+      "role": "auditor",
+      "allowed_roles": [
+        "auditor"
+      ],
+      "directives": {
+        "worktree_mode": "audit-only",
+        "phase": "verification",
+        "handoff": {
+          "upstream": "ejecutor",
+          "downstream": "operador"
+        }
+      }
+    },
+    "wizard": {
+      "name": "wizard",
+      "canonical_alias": "swarm-state-wizard",
+      "display_name": "Asistente de Instalación Determinista (Wizard)",
+      "description": "Transforma al agente en una máquina de estados determinista para instalaciones y configuración paso a paso.",
+      "role": "ejecutor",
+      "allowed_roles": [
+        "ejecutor"
+      ],
+      "directives": {
+        "worktree_mode": "read-write",
+        "phase": "implementation",
+        "handoff": {
+          "upstream": "arquitecto",
+          "downstream": "auditor"
+        }
+      }
+    },
+    "adaptive-cron": {
+      "name": "adaptive-cron",
+      "canonical_alias": "wetware-adaptive-cron",
+      "display_name": "Cálculo de Límite de Disipación Crítica (Adaptive Cron)",
+      "description": "Resume carga operativa mediante observables verificables y conserva el control de sesión del operador.",
+      "role": "arquitecto",
+      "allowed_roles": [
+        "arquitecto"
+      ],
+      "directives": {
+        "worktree_mode": "spec-only",
+        "phase": "design",
+        "handoff": {
+          "upstream": "operador",
+          "downstream": "ejecutor"
+        }
+      }
+    },
+    "c5-epistemic-thermodynamics-project": {
+      "name": "c5-epistemic-thermodynamics-project",
+      "canonical_alias": "epistemic-hub",
+      "display_name": "Epistemic Hub · Termodinámica Epistémica (Proyecto)",
+      "description": "Enruta auditoría epistémica del proyecto, síntesis MDL, extracción de fuentes, biografía, simbiosis cognitiva y explicación clara. Dispara con \"epistemic-hub\", \"epistemic project hub\", \"auditoría epistémica\", \"cloud-chamber\", \"alpha extraction\", \"grill-me-v2\", \"wait-what\".",
+      "role": "arquitecto",
+      "allowed_roles": [
+        "arquitecto",
+        "ejecutor",
+        "auditor"
+      ],
+      "directives": {
+        "worktree_mode": "spec-only",
+        "phase": "design",
+        "handoff": {
+          "upstream": "operador",
+          "downstream": "ejecutor"
+        }
+      }
+    },
+    "cloud-chamber": {
+      "name": "cloud-chamber",
+      "canonical_alias": "epistemic-mdl-synthesizer",
+      "display_name": "Metodología de Cámara de Niebla (Síntesis MDL)",
+      "description": "Ejecuta la Metodología de Cámara de Niebla forzando síntesis de alta densidad topológica (MDL / Invariantes C5-REAL).",
+      "role": "arquitecto",
+      "allowed_roles": [
+        "arquitecto"
+      ],
+      "directives": {
+        "worktree_mode": "spec-only",
+        "phase": "design",
+        "handoff": {
+          "upstream": "operador",
+          "downstream": "ejecutor"
+        }
+      }
+    },
+    "c5-ultrathink-epistemic-audit": {
+      "name": "c5-ultrathink-epistemic-audit",
+      "canonical_alias": "epistemic-audit",
+      "display_name": "Epistemic Audit · Auditoría Epistémica Profunda",
+      "description": "Auditoría epistémica profunda (ULTRATHINK) basada en el marco termodinámico C5-REAL. Ejecuta un desacople ontológico estricto entre \"Estado/Memoria\" y \"Lógica/Cálculo\", mapeando conceptos a invariantes termodinámicas (Curry-Howard, Landauer).",
+      "role": "auditor",
+      "allowed_roles": [
+        "auditor"
+      ],
+      "directives": {
+        "worktree_mode": "audit-only",
+        "phase": "verification",
+        "handoff": {
+          "upstream": "ejecutor",
+          "downstream": "operador"
+        }
+      }
+    },
+    "c5-rea-clean-room": {
+      "name": "c5-rea-clean-room",
+      "canonical_alias": "kernel-rea-clean-room",
+      "display_name": "Suite C5-REA de Ingeniería Inversa en Sala Limpia y Firewall Existence-Gap",
+      "description": "Disección binaria AOT/Mach-O y Electron ASAR en memoria (<15ms), síntesis Clean-Room (TS/Rust/Python) y firewall Popperiano Existence-Gap.",
+      "role": "auditor",
+      "allowed_roles": [
+        "arquitecto",
+        "ejecutor",
+        "auditor"
+      ],
+      "directives": {
+        "worktree_mode": "audit-only",
+        "phase": "verification",
+        "handoff": {
+          "upstream": "ejecutor",
+          "downstream": "operador"
+        }
+      }
+    },
+    "c5-ring0-babylon-kernel-project": {
+      "name": "c5-ring0-babylon-kernel-project",
+      "canonical_alias": "kernel-hub",
+      "display_name": "Kernel Hub · Ring-0 BABYLON (Proyecto)",
+      "description": "Enruta módulos BABYLON-60 del proyecto: SPSC, SQLite L0, arquitectura IDE, SharedManifest, launchd, Apple Silicon y auditoría de contención. Dispara con \"kernel-hub\", \"babylon kernel hub\", \"shared manifest\", \"thermo-audit\", \"rlhf sentinel\", \"apple-bypass\".",
+      "role": "arquitecto",
+      "allowed_roles": [
+        "arquitecto",
+        "ejecutor",
+        "auditor"
+      ],
+      "directives": {
+        "worktree_mode": "spec-only",
+        "phase": "design",
+        "handoff": {
+          "upstream": "operador",
+          "downstream": "ejecutor"
+        }
+      }
+    },
+    "babylon60-architecture": {
+      "name": "babylon60-architecture",
+      "canonical_alias": "kernel-ide-architecture",
+      "display_name": "Arquitectura y Patrones BABYLON-60 IDE",
+      "description": "Patrones de arquitectura de Babylon60 IDE (instaladores 1-clic autorreparables, tokens Ed25519 SCITT, OpenRouter Gateway, SSO corporativo y escala exérgica 1-21000).",
+      "role": "arquitecto",
+      "allowed_roles": [
+        "arquitecto"
+      ],
+      "directives": {
+        "worktree_mode": "spec-only",
+        "phase": "design",
+        "handoff": {
+          "upstream": "operador",
+          "downstream": "ejecutor"
+        }
+      }
+    },
+    "c5-anti-slop-ui": {
+      "name": "c5-anti-slop-ui",
+      "canonical_alias": "media-ui-linter",
+      "display_name": "Linter y Directivas Frontend Anti-Slop (C5-REAL)",
+      "description": "Revisa diseño y accesibilidad de interfaces; distingue comprobaciones léxicas parciales de verificación sobre la interfaz renderizada.",
+      "role": "auditor",
+      "allowed_roles": [
+        "auditor",
+        "ejecutor"
+      ],
+      "directives": {
+        "worktree_mode": "audit-only",
+        "phase": "verification",
+        "handoff": {
+          "upstream": "ejecutor",
+          "downstream": "operador"
+        }
+      }
+    },
+    "c5-cortex-swarm-orchestrator-project": {
+      "name": "c5-cortex-swarm-orchestrator-project",
+      "canonical_alias": "swarm-hub",
+      "display_name": "Swarm Hub · Orquestador CORTEX (Proyecto)",
+      "description": "Enruta módulos del proyecto para minería LoRA con enjambres, instalación guiada y redacción para agentes. Dispara con \"swarm-hub\", \"cortex project hub\", \"hub cortex proyecto\", \"swarm router proyecto\", \"lora swarm\", \"wizard\", \"writing-for-agents\".",
+      "role": "arquitecto",
+      "allowed_roles": [
+        "arquitecto",
+        "ejecutor",
+        "auditor"
+      ],
+      "directives": {
+        "worktree_mode": "spec-only",
+        "phase": "design",
+        "handoff": {
+          "upstream": "operador",
+          "downstream": "ejecutor"
+        }
+      }
+    },
+    "babylon60-kernel-invariants": {
+      "name": "babylon60-kernel-invariants",
+      "canonical_alias": "kernel-invariants-audit",
+      "description": "Audita y prepara correcciones del kernel BABYLON-60 para SPSC, SQLite L0, relojes causales, consenso LARSA y correspondencia Rust–Lean. Usa el puente MCP local cuando esté disponible y distingue pruebas ejecutadas de obligaciones pendientes.",
+      "display_name": "Auditoría de Invariantes del Kernel BABYLON-60",
+      "role": "auditor",
+      "allowed_roles": [
+        "auditor"
+      ],
+      "directives": {
+        "worktree_mode": "audit-only",
+        "phase": "verification",
+        "handoff": {
+          "upstream": "ejecutor",
+          "downstream": "operador"
+        }
+      }
+    },
+    "c5-sovereign-daemon-deployment": {
+      "name": "c5-sovereign-daemon-deployment",
+      "canonical_alias": "kernel-daemon-deploy",
+      "display_name": "Despliegue del Sovereign Spark Daemon en Launchd",
+      "description": "Protocolo estricto para desplegar el Sovereign Spark Daemon (Antigravity Engine en Rust) sobre el sistema init local de macOS (launchd) para ejecución 24/7 ininterrumpida.",
+      "role": "ejecutor",
+      "allowed_roles": [
+        "ejecutor"
+      ],
+      "directives": {
+        "worktree_mode": "read-write",
+        "phase": "implementation",
+        "handoff": {
+          "upstream": "arquitecto",
+          "downstream": "auditor"
+        }
+      }
+    },
+    "thermo-audit": {
+      "name": "thermo-audit",
+      "canonical_alias": "kernel-thermo-audit",
+      "display_name": "Auditoría Termodinámica de Silicio y Concurrencia",
+      "description": "Auditoría termodinámica estricta de C5-REAL en silicio (Aritmética, Concurrencia, MDL, Ring-0, Seqlocks y Grados de Libertad Parásitos).",
+      "role": "auditor",
+      "allowed_roles": [
+        "auditor"
+      ],
+      "directives": {
+        "worktree_mode": "audit-only",
+        "phase": "verification",
+        "handoff": {
+          "upstream": "ejecutor",
+          "downstream": "operador"
+        }
+      }
+    },
+    "audiovisual-sota": {
+      "name": "audiovisual-sota",
+      "canonical_alias": "media-pipeline",
+      "display_name": "Media Pipeline · Renderizado Audiovisual Determinista",
+      "description": "Fuerza invariantes extremas en pipelines de renderizado audiovisual (FFmpeg/Remotion).",
+      "role": "ejecutor",
+      "allowed_roles": [
+        "ejecutor"
+      ],
+      "directives": {
+        "worktree_mode": "read-write",
+        "phase": "implementation",
+        "handoff": {
+          "upstream": "arquitecto",
+          "downstream": "auditor"
+        }
+      }
+    },
+    "rlhf-sentinel": {
+      "name": "rlhf-sentinel",
+      "canonical_alias": "kernel-rlhf-sentinel",
+      "display_name": "Centinela de Contención Ring-0 (RLHF Sentinel)",
+      "description": "Audita la barrera IPC (Ring-0) para detectar fallos de contención de IA (RLHF Breakthrough) y ataques estocásticos.",
+      "role": "auditor",
+      "allowed_roles": [
+        "auditor"
+      ],
+      "directives": {
+        "worktree_mode": "audit-only",
+        "phase": "verification",
+        "handoff": {
+          "upstream": "ejecutor",
+          "downstream": "operador"
+        }
+      }
+    },
+    "c5-audiovisual-acreativo-sota-project": {
+      "name": "c5-audiovisual-acreativo-sota-project",
+      "canonical_alias": "media-hub",
+      "display_name": "Media Hub · Audiovisual Acreativo (Proyecto)",
+      "description": "Enruta módulos del proyecto para pipelines audiovisuales y auditoría de interfaces. Dispara con \"media-hub\", \"audiovisual project hub\", \"hub audiovisual proyecto\", \"media router proyecto\", \"audiovisual-sota\", \"anti-slop ui\".",
+      "role": "arquitecto",
+      "allowed_roles": [
+        "arquitecto",
+        "ejecutor",
+        "auditor"
+      ],
+      "directives": {
+        "worktree_mode": "spec-only",
+        "phase": "design",
+        "handoff": {
+          "upstream": "operador",
+          "downstream": "ejecutor"
+        }
+      }
+    },
+    "c5-alpha-extraction-pipeline": {
+      "name": "c5-alpha-extraction-pipeline",
+      "canonical_alias": "alpha-extractor",
+      "display_name": "Alpha Extractor · Extracción de Alfa Algorítmico",
+      "description": "Protocol to extract high-exergy algorithmic alpha from arXiv and GitHub directly from raw sources (LaTeX/Git) bypassing PDFs, followed by LARSA-120 formalization.",
+      "role": "ejecutor",
+      "allowed_roles": [
+        "ejecutor"
+      ],
+      "directives": {
+        "worktree_mode": "read-write",
+        "phase": "implementation",
+        "handoff": {
+          "upstream": "arquitecto",
+          "downstream": "auditor"
+        }
+      }
+    },
+    "apple-bypass": {
+      "name": "apple-bypass",
+      "canonical_alias": "kernel-apple-bypass",
+      "display_name": "Bypass Termodinámico para LLMs en Apple Silicon",
+      "description": "Mitigación de presión de memoria para LLMs locales en Apple Silicon.",
+      "role": "ejecutor",
+      "allowed_roles": [
+        "ejecutor"
+      ],
+      "directives": {
+        "worktree_mode": "read-write",
+        "phase": "implementation",
+        "handoff": {
+          "upstream": "arquitecto",
+          "downstream": "auditor"
+        }
+      }
+    }
+  },
+  "capabilities": {
+    "c5-wetware-and-venture-ops-project": {
+      "aliases": [
+        "/c5-wetware-and-venture-ops-project",
+        "adaptive-cron",
+        "c5-wetware-and-venture-ops-project",
+        "hub wetware proyecto",
+        "venture project hub",
+        "wetware project hub",
+        "wetware-hub"
+      ],
+      "intent": {
+        "actions": [
+          "analiza",
+          "analizar",
+          "audita",
+          "auditar",
+          "revisa",
+          "revisar",
+          "verifica",
+          "verificar",
+          "comprueba",
+          "comprobar",
+          "diagnostica",
+          "diagnosticar",
+          "investiga",
+          "investigar",
+          "corrige",
+          "corregir",
+          "arregla",
+          "repara",
+          "reparar",
+          "crea",
+          "crear",
+          "genera",
+          "generar",
+          "construye",
+          "construir",
+          "implementa",
+          "implementar",
+          "optimiza",
+          "optimizar",
+          "configura",
+          "configurar",
+          "prepara",
+          "preparar",
+          "calcula",
+          "calcular",
+          "mide",
+          "medir",
+          "evalua",
+          "evaluar",
+          "compara",
+          "comparar",
+          "organiza",
+          "organizar",
+          "extrae",
+          "extraer",
+          "convierte",
+          "convertir",
+          "adapta",
+          "adaptar",
+          "formaliza",
+          "formalizar",
+          "demuestra",
+          "demostrar",
+          "resuelve",
+          "resolver",
+          "limpia",
+          "limpiar",
+          "purga",
+          "purgar",
+          "despliega",
+          "desplegar",
+          "instala",
+          "instalar",
+          "conecta",
+          "conectar",
+          "abre",
+          "abrir",
+          "navega",
+          "navegar",
+          "controla",
+          "controlar",
+          "traduce",
+          "traducir",
+          "sintetiza",
+          "sintetizar",
+          "quiero",
+          "necesito",
+          "ayudame"
+        ],
+        "topics": []
+      }
+    },
+    "lora-swarm-pipeline": {
+      "aliases": [
+        "/lora-swarm-pipeline",
+        "dataset swarm",
+        "enjambre ShareGPT",
+        "enjambre lora",
+        "lora swarm",
+        "lora-swarm-pipeline",
+        "minar datasets enjambre",
+        "minería enjambre",
+        "n-zonas enjambre",
+        "swarm pipeline",
+        "swarm-lora-pipeline"
+      ],
+      "intent": {
+        "topics": [
+          "dataset swarm",
+          "enjambre ShareGPT",
+          "enjambre lora",
+          "lora swarm",
+          "minar datasets enjambre",
+          "minería enjambre",
+          "n-zonas enjambre",
+          "swarm pipeline",
+          "swarm-lora-pipeline"
+        ]
+      },
+      "module": {
+        "hub": "c5-cortex-swarm-orchestrator-project",
+        "path": "references/modules/lora-swarm-pipeline/MODULE.md"
+      }
+    },
+    "symbiotic-cognitive-architecture": {
+      "aliases": [
+        "/symbiotic-cognitive-architecture",
+        "epistemic-symbiotic-cognition",
+        "itera simbiótica",
+        "simbiosis cognitiva",
+        "symbiotic-cognitive-architecture",
+        "tensor de transducción",
+        "tú y yo",
+        "valor ontológico agente"
+      ],
+      "intent": {
+        "topics": [
+          "epistemic-symbiotic-cognition",
+          "itera simbiótica",
+          "simbiosis cognitiva",
+          "tensor de transducción",
+          "tú y yo",
+          "valor ontológico agente"
+        ]
+      },
+      "module": {
+        "hub": "c5-epistemic-thermodynamics-project",
+        "path": "references/modules/symbiotic-cognitive-architecture/MODULE.md"
+      }
+    },
+    "writing-for-agents": {
+      "aliases": [
+        "/sanitize-c5",
+        "/writing-for-agents",
+        "despersonalizar manifiesto",
+        "external llm exergy",
+        "higienizar manifiesto",
+        "redacción m2m",
+        "sanitize-c5",
+        "swarm-m2m-writer",
+        "writing-for-agents"
+      ],
+      "intent": {
+        "topics": [
+          "despersonalizar manifiesto",
+          "external llm exergy",
+          "higienizar manifiesto",
+          "redacción m2m",
+          "sanitize-c5",
+          "swarm-m2m-writer"
+        ]
+      },
+      "module": {
+        "hub": "c5-cortex-swarm-orchestrator-project",
+        "path": "references/modules/writing-for-agents/MODULE.md"
+      }
+    },
+    "wait-what": {
+      "aliases": [
+        "/wait-what",
+        "déjate de rollos",
+        "epistemic-simplifier",
+        "explícalo simple",
+        "freno epistémico",
+        "fuera de aqui todo esto",
+        "fuera de aqui todo eto",
+        "no entiendo nada",
+        "quita todo esto",
+        "simplifica respuesta",
+        "wait-what"
+      ],
+      "intent": {
+        "topics": [
+          "déjate de rollos",
+          "epistemic-simplifier",
+          "explícalo simple",
+          "freno epistémico",
+          "fuera de aqui todo esto",
+          "fuera de aqui todo eto",
+          "no entiendo nada",
+          "quita todo esto",
+          "simplifica respuesta"
+        ]
+      },
+      "module": {
+        "hub": "c5-epistemic-thermodynamics-project",
+        "path": "references/modules/wait-what/MODULE.md"
+      }
+    },
+    "biographical-thermo": {
+      "aliases": [
+        "/biographical-thermo",
+        "análisis biográfico termodinámico",
+        "biografía termodinámica",
+        "biographical-thermo",
+        "epistemic-biographical-thermo",
+        "trayectoria termodinámica"
+      ],
+      "intent": {
+        "topics": [
+          "análisis biográfico termodinámico",
+          "biografía termodinámica",
+          "epistemic-biographical-thermo",
+          "trayectoria termodinámica"
+        ]
+      },
+      "module": {
+        "hub": "c5-epistemic-thermodynamics-project",
+        "path": "references/modules/biographical-thermo/MODULE.md"
+      }
+    },
+    "shared-manifest-kernel": {
+      "aliases": [
+        "/shared-manifest-kernel",
+        "ipc lock-free",
+        "kernel-shared-manifest",
+        "ring-0 shm",
+        "seqlock 64b",
+        "shared manifest",
+        "shared-manifest-kernel"
+      ],
+      "intent": {
+        "topics": [
+          "ipc lock-free",
+          "kernel-shared-manifest",
+          "ring-0 shm",
+          "seqlock 64b",
+          "shared manifest"
+        ]
+      },
+      "module": {
+        "hub": "c5-ring0-babylon-kernel-project",
+        "path": "references/modules/shared-manifest-kernel/MODULE.md"
+      }
+    },
+    "grill-me-v2": {
+      "aliases": [
+        "/grill-me",
+        "/grill-me-v2",
+        "grill-me-v2",
+        "interrogatorio socrático",
+        "socratic audit",
+        "socratic-interrogator"
+      ],
+      "intent": {
+        "topics": [
+          "interrogatorio socrático",
+          "socratic audit",
+          "socratic-interrogator"
+        ]
+      },
+      "module": {
+        "hub": "c5-epistemic-thermodynamics-project",
+        "path": "references/modules/grill-me-v2/MODULE.md"
+      }
+    },
+    "wizard": {
+      "aliases": [
+        "/wizard",
+        "asistente de instalación",
+        "guía secuencial",
+        "máquina de estados",
+        "paso a paso",
+        "swarm-state-wizard",
+        "wizard"
+      ],
+      "intent": {
+        "topics": [
+          "asistente de instalación",
+          "guía secuencial",
+          "máquina de estados",
+          "paso a paso",
+          "swarm-state-wizard"
+        ]
+      },
+      "module": {
+        "hub": "c5-cortex-swarm-orchestrator-project",
+        "path": "references/modules/wizard/MODULE.md"
+      }
+    },
+    "adaptive-cron": {
+      "aliases": [
+        "/adaptive-cron",
+        "adaptive-cron",
+        "burnout cognitivo",
+        "cron adaptativo",
+        "límite de disipación crítica",
+        "wetware-adaptive-cron"
+      ],
+      "intent": {
+        "topics": [
+          "burnout cognitivo",
+          "cron adaptativo",
+          "límite de disipación crítica",
+          "wetware-adaptive-cron"
+        ]
+      },
+      "module": {
+        "hub": "c5-wetware-and-venture-ops-project",
+        "path": "references/modules/adaptive-cron/MODULE.md"
+      }
+    },
+    "c5-epistemic-thermodynamics-project": {
+      "aliases": [
+        "/c5-epistemic-thermodynamics-project",
+        "alpha extraction",
+        "auditoría epistémica",
+        "c5-epistemic-thermodynamics-project",
+        "cloud-chamber",
+        "epistemic project hub",
+        "epistemic-hub",
+        "grill-me-v2",
+        "wait-what"
+      ],
+      "intent": {
+        "actions": [
+          "analiza",
+          "analizar",
+          "audita",
+          "auditar",
+          "revisa",
+          "revisar",
+          "verifica",
+          "verificar",
+          "comprueba",
+          "comprobar",
+          "diagnostica",
+          "diagnosticar",
+          "investiga",
+          "investigar",
+          "corrige",
+          "corregir",
+          "arregla",
+          "repara",
+          "reparar",
+          "crea",
+          "crear",
+          "genera",
+          "generar",
+          "construye",
+          "construir",
+          "implementa",
+          "implementar",
+          "optimiza",
+          "optimizar",
+          "configura",
+          "configurar",
+          "prepara",
+          "preparar",
+          "calcula",
+          "calcular",
+          "mide",
+          "medir",
+          "evalua",
+          "evaluar",
+          "compara",
+          "comparar",
+          "organiza",
+          "organizar",
+          "extrae",
+          "extraer",
+          "convierte",
+          "convertir",
+          "adapta",
+          "adaptar",
+          "formaliza",
+          "formalizar",
+          "demuestra",
+          "demostrar",
+          "resuelve",
+          "resolver",
+          "limpia",
+          "limpiar",
+          "purga",
+          "purgar",
+          "despliega",
+          "desplegar",
+          "instala",
+          "instalar",
+          "conecta",
+          "conectar",
+          "abre",
+          "abrir",
+          "navega",
+          "navegar",
+          "controla",
+          "controlar",
+          "traduce",
+          "traducir",
+          "sintetiza",
+          "sintetizar",
+          "quiero",
+          "necesito",
+          "ayudame"
+        ],
+        "topics": []
+      }
+    },
+    "cloud-chamber": {
+      "aliases": [
+        "/cloud-chamber",
+        "cloud-chamber",
+        "colapso mdl",
+        "cámara de niebla",
+        "epistemic-mdl-synthesizer",
+        "máxima densidad topológica"
+      ],
+      "intent": {
+        "topics": [
+          "colapso mdl",
+          "cámara de niebla",
+          "epistemic-mdl-synthesizer",
+          "máxima densidad topológica"
+        ]
+      },
+      "module": {
+        "hub": "c5-epistemic-thermodynamics-project",
+        "path": "references/modules/cloud-chamber/MODULE.md"
+      }
+    },
+    "c5-ultrathink-epistemic-audit": {
+      "aliases": [
+        "/c5-ultrathink-epistemic-audit",
+        "auditoría epistémica",
+        "auditoría ultrathink",
+        "c5-ultrathink-epistemic-audit",
+        "desacople ontológico",
+        "epistemic-audit",
+        "postmortem mcts"
+      ],
+      "intent": {
+        "topics": [
+          "desacople ontológico",
+          "epistemic-audit",
+          "epistémica",
+          "postmortem mcts",
+          "ultrathink"
+        ]
+      },
+      "module": {
+        "hub": "c5-epistemic-thermodynamics-project",
+        "path": "references/modules/c5-ultrathink-epistemic-audit/MODULE.md"
+      }
+    },
+    "c5-rea-clean-room": {
+      "aliases": [
+        "/c5-rea",
+        "/c5-rea-clean-room",
+        "c5-rea",
+        "c5-rea-clean-room",
+        "clean-room synthesis",
+        "disección aot",
+        "kernel-rea-clean-room",
+        "rea harness",
+        "rea-decompile",
+        "rea-triage",
+        "rea-unpack"
+      ],
+      "intent": {
+        "topics": [
+          "c5-rea",
+          "clean-room synthesis",
+          "disección aot",
+          "kernel-rea-clean-room",
+          "rea harness",
+          "rea-decompile",
+          "rea-triage",
+          "rea-unpack"
+        ]
+      },
+      "module": {
+        "hub": "c5-ring0-babylon-kernel-project",
+        "path": "references/modules/c5-rea-clean-room/MODULE.md"
+      }
+    },
+    "c5-ring0-babylon-kernel-project": {
+      "aliases": [
+        "/c5-ring0-babylon-kernel-project",
+        "apple-bypass",
+        "babylon kernel hub",
+        "c5-ring0-babylon-kernel-project",
+        "kernel-hub",
+        "rlhf sentinel",
+        "shared manifest",
+        "thermo-audit"
+      ],
+      "intent": {
+        "actions": [
+          "analiza",
+          "analizar",
+          "audita",
+          "auditar",
+          "revisa",
+          "revisar",
+          "verifica",
+          "verificar",
+          "comprueba",
+          "comprobar",
+          "diagnostica",
+          "diagnosticar",
+          "investiga",
+          "investigar",
+          "corrige",
+          "corregir",
+          "arregla",
+          "repara",
+          "reparar",
+          "crea",
+          "crear",
+          "genera",
+          "generar",
+          "construye",
+          "construir",
+          "implementa",
+          "implementar",
+          "optimiza",
+          "optimizar",
+          "configura",
+          "configurar",
+          "prepara",
+          "preparar",
+          "calcula",
+          "calcular",
+          "mide",
+          "medir",
+          "evalua",
+          "evaluar",
+          "compara",
+          "comparar",
+          "organiza",
+          "organizar",
+          "extrae",
+          "extraer",
+          "convierte",
+          "convertir",
+          "adapta",
+          "adaptar",
+          "formaliza",
+          "formalizar",
+          "demuestra",
+          "demostrar",
+          "resuelve",
+          "resolver",
+          "limpia",
+          "limpiar",
+          "purga",
+          "purgar",
+          "despliega",
+          "desplegar",
+          "instala",
+          "instalar",
+          "conecta",
+          "conectar",
+          "abre",
+          "abrir",
+          "navega",
+          "navegar",
+          "controla",
+          "controlar",
+          "traduce",
+          "traducir",
+          "sintetiza",
+          "sintetizar",
+          "quiero",
+          "necesito",
+          "ayudame"
+        ],
+        "topics": []
+      }
+    },
+    "babylon60-architecture": {
+      "aliases": [
+        "/babylon60-architecture",
+        "arquitectura babylon60",
+        "babylon60 ide",
+        "babylon60-architecture",
+        "kernel-ide-architecture",
+        "patrones ide babylon"
+      ],
+      "intent": {
+        "topics": [
+          "arquitectura babylon60",
+          "babylon60 ide",
+          "kernel-ide-architecture",
+          "patrones ide babylon"
+        ]
+      },
+      "module": {
+        "hub": "c5-ring0-babylon-kernel-project",
+        "path": "references/modules/babylon60-architecture/MODULE.md"
+      }
+    },
+    "c5-anti-slop-ui": {
+      "aliases": [
+        "/c5-anti-slop-ui",
+        "anti-slop ui",
+        "auditoría ui",
+        "c5-anti-slop-ui",
+        "erradicar ai slop",
+        "impeccable c5",
+        "linter de diseño",
+        "media-ui-linter",
+        "pulir frontend"
+      ],
+      "intent": {
+        "topics": [
+          "anti-slop ui",
+          "erradicar ai slop",
+          "impeccable c5",
+          "linter de diseño",
+          "media-ui-linter",
+          "pulir frontend"
+        ]
+      },
+      "module": {
+        "hub": "c5-audiovisual-acreativo-sota-project",
+        "path": "references/modules/c5-anti-slop-ui/MODULE.md"
+      }
+    },
+    "c5-cortex-swarm-orchestrator-project": {
+      "aliases": [
+        "/c5-cortex-swarm-orchestrator-project",
+        "c5-cortex-swarm-orchestrator-project",
+        "cortex project hub",
+        "hub cortex proyecto",
+        "lora swarm",
+        "swarm router proyecto",
+        "swarm-hub",
+        "wizard",
+        "writing-for-agents"
+      ],
+      "intent": {
+        "actions": [
+          "analiza",
+          "analizar",
+          "audita",
+          "auditar",
+          "revisa",
+          "revisar",
+          "verifica",
+          "verificar",
+          "comprueba",
+          "comprobar",
+          "diagnostica",
+          "diagnosticar",
+          "investiga",
+          "investigar",
+          "corrige",
+          "corregir",
+          "arregla",
+          "repara",
+          "reparar",
+          "crea",
+          "crear",
+          "genera",
+          "generar",
+          "construye",
+          "construir",
+          "implementa",
+          "implementar",
+          "optimiza",
+          "optimizar",
+          "configura",
+          "configurar",
+          "prepara",
+          "preparar",
+          "calcula",
+          "calcular",
+          "mide",
+          "medir",
+          "evalua",
+          "evaluar",
+          "compara",
+          "comparar",
+          "organiza",
+          "organizar",
+          "extrae",
+          "extraer",
+          "convierte",
+          "convertir",
+          "adapta",
+          "adaptar",
+          "formaliza",
+          "formalizar",
+          "demuestra",
+          "demostrar",
+          "resuelve",
+          "resolver",
+          "limpia",
+          "limpiar",
+          "purga",
+          "purgar",
+          "despliega",
+          "desplegar",
+          "instala",
+          "instalar",
+          "conecta",
+          "conectar",
+          "abre",
+          "abrir",
+          "navega",
+          "navegar",
+          "controla",
+          "controlar",
+          "traduce",
+          "traducir",
+          "sintetiza",
+          "sintetizar",
+          "quiero",
+          "necesito",
+          "ayudame"
+        ],
+        "topics": []
+      }
+    },
+    "babylon60-kernel-invariants": {
+      "aliases": [
+        "/babylon60-kernel-invariants",
+        "babylon60-kernel-invariants",
+        "kernel-invariants-audit"
+      ],
+      "intent": {
+        "topics": [
+          "kernel-invariants-audit"
+        ]
+      },
+      "module": {
+        "hub": "c5-ring0-babylon-kernel-project",
+        "path": "references/modules/babylon60-kernel-invariants/MODULE.md"
+      }
+    },
+    "c5-sovereign-daemon-deployment": {
+      "aliases": [
+        "/c5-sovereign-daemon-deployment",
+        "c5-sovereign-daemon-deployment",
+        "daemon 24/7",
+        "desplegar sovereign daemon",
+        "kernel-daemon-deploy",
+        "launchd rust daemon"
+      ],
+      "intent": {
+        "topics": [
+          "daemon 24/7",
+          "desplegar sovereign daemon",
+          "kernel-daemon-deploy",
+          "launchd rust daemon"
+        ]
+      },
+      "module": {
+        "hub": "c5-ring0-babylon-kernel-project",
+        "path": "references/modules/c5-sovereign-daemon-deployment/MODULE.md"
+      }
+    },
+    "thermo-audit": {
+      "aliases": [
+        "/thermo-audit",
+        "auditoría termodinámica código",
+        "concurrencia landauer",
+        "fricción de silicio",
+        "grados de libertad parásitos",
+        "kernel-thermo-audit",
+        "potencia causal",
+        "silicon concurrency audit",
+        "thermo-audit"
+      ],
+      "intent": {
+        "topics": [
+          "concurrencia landauer",
+          "fricción de silicio",
+          "grados de libertad parásitos",
+          "kernel-thermo-audit",
+          "potencia causal",
+          "silicon concurrency audit",
+          "termodinámica código"
+        ]
+      },
+      "module": {
+        "hub": "c5-ring0-babylon-kernel-project",
+        "path": "references/modules/thermo-audit/MODULE.md"
+      }
+    },
+    "audiovisual-sota": {
+      "aliases": [
+        "/audiovisual-sota",
+        "audiovisual-sota",
+        "invariantes remotion ffmpeg",
+        "media-pipeline",
+        "pipeline audiovisual"
+      ],
+      "intent": {
+        "topics": [
+          "invariantes remotion ffmpeg",
+          "media-pipeline",
+          "pipeline audiovisual"
+        ]
+      },
+      "module": {
+        "hub": "c5-audiovisual-acreativo-sota-project",
+        "path": "references/modules/audiovisual-sota/MODULE.md"
+      }
+    },
+    "rlhf-sentinel": {
+      "aliases": [
+        "/rlhf-sentinel",
+        "contención de ia",
+        "fuga de llm",
+        "kernel-rlhf-sentinel",
+        "quarantine ring-0",
+        "rlhf sentinel",
+        "rlhf-sentinel"
+      ],
+      "intent": {
+        "topics": [
+          "contención de ia",
+          "fuga de llm",
+          "kernel-rlhf-sentinel",
+          "quarantine ring-0",
+          "rlhf sentinel"
+        ]
+      },
+      "module": {
+        "hub": "c5-ring0-babylon-kernel-project",
+        "path": "references/modules/rlhf-sentinel/MODULE.md"
+      }
+    },
+    "c5-audiovisual-acreativo-sota-project": {
+      "aliases": [
+        "/c5-audiovisual-acreativo-sota-project",
+        "anti-slop ui",
+        "audiovisual project hub",
+        "audiovisual-sota",
+        "c5-audiovisual-acreativo-sota-project",
+        "hub audiovisual proyecto",
+        "media router proyecto",
+        "media-hub"
+      ],
+      "intent": {
+        "actions": [
+          "analiza",
+          "analizar",
+          "audita",
+          "auditar",
+          "revisa",
+          "revisar",
+          "verifica",
+          "verificar",
+          "comprueba",
+          "comprobar",
+          "diagnostica",
+          "diagnosticar",
+          "investiga",
+          "investigar",
+          "corrige",
+          "corregir",
+          "arregla",
+          "repara",
+          "reparar",
+          "crea",
+          "crear",
+          "genera",
+          "generar",
+          "construye",
+          "construir",
+          "implementa",
+          "implementar",
+          "optimiza",
+          "optimizar",
+          "configura",
+          "configurar",
+          "prepara",
+          "preparar",
+          "calcula",
+          "calcular",
+          "mide",
+          "medir",
+          "evalua",
+          "evaluar",
+          "compara",
+          "comparar",
+          "organiza",
+          "organizar",
+          "extrae",
+          "extraer",
+          "convierte",
+          "convertir",
+          "adapta",
+          "adaptar",
+          "formaliza",
+          "formalizar",
+          "demuestra",
+          "demostrar",
+          "resuelve",
+          "resolver",
+          "limpia",
+          "limpiar",
+          "purga",
+          "purgar",
+          "despliega",
+          "desplegar",
+          "instala",
+          "instalar",
+          "conecta",
+          "conectar",
+          "abre",
+          "abrir",
+          "navega",
+          "navegar",
+          "controla",
+          "controlar",
+          "traduce",
+          "traducir",
+          "sintetiza",
+          "sintetizar",
+          "quiero",
+          "necesito",
+          "ayudame"
+        ],
+        "topics": []
+      }
+    },
+    "c5-alpha-extraction-pipeline": {
+      "aliases": [
+        "/c5-alpha-extraction-pipeline",
+        "alpha extraction",
+        "alpha-extractor",
+        "c5-alpha-extraction-pipeline",
+        "extraer alfa algorítmico",
+        "larsa 120 alpha"
+      ],
+      "intent": {
+        "topics": [
+          "alpha extraction",
+          "alpha-extractor",
+          "extraer alfa algorítmico",
+          "larsa 120 alpha"
+        ]
+      },
+      "module": {
+        "hub": "c5-epistemic-thermodynamics-project",
+        "path": "references/modules/c5-alpha-extraction-pipeline/MODULE.md"
+      }
+    },
+    "apple-bypass": {
+      "aliases": [
+        "/apple-bypass",
+        "apple-bypass",
+        "bypass termodinámico",
+        "evadir jetsam macos",
+        "kernel-apple-bypass",
+        "liberar memoria mps"
+      ],
+      "intent": {
+        "topics": [
+          "bypass termodinámico",
+          "evadir jetsam macos",
+          "kernel-apple-bypass",
+          "liberar memoria mps"
+        ]
+      },
+      "module": {
+        "hub": "c5-ring0-babylon-kernel-project",
+        "path": "references/modules/apple-bypass/MODULE.md"
+      }
+    }
+  },
+  "policy": {
+    "continuations": [
+      "sigue",
+      "continúa",
+      "continua",
+      "adelante",
+      "hazlo",
+      "aplícalo",
+      "aplicalo"
+    ],
+    "generic": [
+      "audit",
+      "auditar",
+      "auditoria",
+      "auditoría",
+      "falsa",
+      "itera",
+      "iteraa",
+      "itra",
+      "itrera",
+      "iytera",
+      "sigue"
+    ],
+    "routing": "explicit-name-or-action-and-domain",
+    "automatic_execution": false,
+    "default_actions": [
+      "analiza",
+      "analizar",
+      "audita",
+      "auditar",
+      "revisa",
+      "revisar",
+      "verifica",
+      "verificar",
+      "comprueba",
+      "comprobar",
+      "diagnostica",
+      "diagnosticar",
+      "investiga",
+      "investigar",
+      "corrige",
+      "corregir",
+      "arregla",
+      "repara",
+      "reparar",
+      "crea",
+      "crear",
+      "genera",
+      "generar",
+      "construye",
+      "construir",
+      "implementa",
+      "implementar",
+      "optimiza",
+      "optimizar",
+      "configura",
+      "configurar",
+      "prepara",
+      "preparar",
+      "calcula",
+      "calcular",
+      "mide",
+      "medir",
+      "evalua",
+      "evaluar",
+      "compara",
+      "comparar",
+      "organiza",
+      "organizar",
+      "extrae",
+      "extraer",
+      "convierte",
+      "convertir",
+      "adapta",
+      "adaptar",
+      "formaliza",
+      "formalizar",
+      "demuestra",
+      "demostrar",
+      "resuelve",
+      "resolver",
+      "limpia",
+      "limpiar",
+      "purga",
+      "purgar",
+      "despliega",
+      "desplegar",
+      "instala",
+      "instalar",
+      "conecta",
+      "conectar",
+      "abre",
+      "abrir",
+      "navega",
+      "navegar",
+      "controla",
+      "controlar",
+      "traduce",
+      "traducir",
+      "sintetiza",
+      "sintetizar"
+    ]
+  }
+}

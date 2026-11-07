@@ -1,0 +1,24 @@
+{
+  "name": "kimi_ask",
+  "description": "Sends a general prompt to Kimi K3 (Moonshot AI) and returns the response.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "prompt": {
+        "description": "The query or instruction to send to Kimi.",
+        "type": "string"
+      },
+      "model": {
+        "description": "The model to use (default: moonshot-v1-32k, others: moonshot-v1-8k, moonshot-v1-128k).",
+        "type": "string",
+        "default": "moonshot-v1-32k"
+      },
+      "temperature": {
+        "description": "Controls randomness (default: 0.3 for analytical tasks).",
+        "type": "number",
+        "default": 0.3
+      }
+    },
+    "required": ["prompt"]
+  }
+}

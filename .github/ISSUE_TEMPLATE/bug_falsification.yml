@@ -1,0 +1,31 @@
+name: Reporte de Falsación Popperiana (Bug / Contraejemplo)
+description: Refuta una hipótesis operativa o invariante del sistema con evidencia reproducible
+title: "[FALSACIÓN]: "
+labels: ["falsacion", "c5-real"]
+body:
+  - type: dropdown
+    id: anillo
+    attributes:
+      label: Anillo Afectado
+      description: Selecciona el estrato topológico donde ocurre el fallo.
+      options:
+        - "Ring-0: Kernel, Memoria Compartida, IPC, Biometría"
+        - "Ring-1: Lean 4, Z3, Contratos Formales, Motor KISH"
+        - "Ring-2: CI/CD, Ledger, Dependencias, Gobernanza"
+        - "Ring-3: CLI, Documentación, Presentación, Distribución"
+    validations:
+      required: true
+  - type: textarea
+    id: hipotesis
+    attributes:
+      label: Hipótesis o Invariante Falsada
+      description: ¿Qué propiedad o contrato (`INV_C5_*`) se esperaba que se cumpliera?
+    validations:
+      required: true
+  - type: textarea
+    id: contraejemplo
+    attributes:
+      label: Contraejemplo Empírico Reproducible
+      description: Comando exacto, revisión Git (`git rev-parse HEAD`) y traza de salida que demuestran el fallo.
+    validations:
+      required: true

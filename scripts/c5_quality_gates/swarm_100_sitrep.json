@@ -1,0 +1,77 @@
+{
+  "timestamp_iso": "2026-10-17T22:42:53Z",
+  "environment": {
+    "os": "Darwin",
+    "release": "25.6.0",
+    "machine": "arm64",
+    "cpu_cores": 11,
+    "rlimit_nofile_soft": 1048575,
+    "rlimit_nofile_hard": 9223372036854775807,
+    "is_apple_silicon": true,
+    "concurrency_target": 100
+  },
+  "metrics": {
+    "total_workers": 100,
+    "total_wall_time_ms": 158.27,
+    "effective_throughput_tx_s": 315.91,
+    "p50_latency_ms": 1.53,
+    "p95_latency_ms": 117.97,
+    "p99_latency_ms": 146.65,
+    "avg_lock_contention_ms": 40.56,
+    "p95_lock_contention_ms": 124.83
+  },
+  "adjudication": {
+    "legitimate_expected": 50,
+    "legitimate_accepted": 50,
+    "adversarial_expected": 50,
+    "adversarial_blocked_fail_closed": 50,
+    "critical_errors": 0,
+    "fail_closed_rate_pct": 100.0,
+    "ledger_total_entries": 50,
+    "merkle_integrity_verified": true,
+    "merkle_root": "f13e5895756e61f51cc958f297825c2799020fbc4db2139bb467820194396637",
+    "mmr_root": "95170874a7020016115b19d67a7eda7c39221c1ecaa87d95610e902a55ec9037"
+  },
+  "cohort_breakdown": {
+    "Cohorte_1": {
+      "name": "Ring-0 / Silicio (KUDURRU-64)",
+      "role": "IMPLEMENTATION_PROPOSER",
+      "total_workers": 20,
+      "accepted": 20,
+      "rejected_fail_closed": 0,
+      "errors": 0
+    },
+    "Cohorte_2": {
+      "name": "Lógica Formal & SMT (Lean/Z3)",
+      "role": "AUDIT_VERIFIER",
+      "total_workers": 20,
+      "accepted": 20,
+      "rejected_fail_closed": 0,
+      "errors": 0
+    },
+    "Cohorte_3": {
+      "name": "Soberanía Lingüística & Entropía",
+      "role": "IMPLEMENTATION_PROPOSER",
+      "total_workers": 20,
+      "accepted": 10,
+      "rejected_fail_closed": 10,
+      "errors": 0
+    },
+    "Cohorte_4": {
+      "name": "Topología MASS & Chaining",
+      "role": "IMPLEMENTATION_PROPOSER",
+      "total_workers": 20,
+      "accepted": 0,
+      "rejected_fail_closed": 20,
+      "errors": 0
+    },
+    "Cohorte_5": {
+      "name": "Perímetros & Apoptosis (MUSHUSHU-0)",
+      "role": "AUDIT_VERIFIER",
+      "total_workers": 20,
+      "accepted": 0,
+      "rejected_fail_closed": 20,
+      "errors": 0
+    }
+  }
+}

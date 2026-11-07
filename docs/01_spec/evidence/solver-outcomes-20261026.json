@@ -1,0 +1,585 @@
+{
+  "date": "2026-10-26",
+  "status": "typed_solver_inconclusive_and_error_rejection_with_bounded_regression_evidence",
+  "scope": "Pure entropy classifier API, typed Lean summary model, local synthetic callers, regressions and audit documentation. No real solver invocation or protected runtime effect.",
+  "api": {
+    "solver_error": [
+      "Timeout",
+      "Transport",
+      "Protocol",
+      "Execution"
+    ],
+    "solver_outcome": [
+      "Sat",
+      "Unsat",
+      "Unknown",
+      "Error(SolverError)"
+    ],
+    "new_verdicts": [
+      "SolverUnknown",
+      "SolverFailure { error: SolverError }"
+    ],
+    "input_validation_precedes_solver_outcome": true,
+    "boolean_compatibility_api": false
+  },
+  "checks": {
+    "rust": {
+      "typed-check": {
+        "name": "typed-check",
+        "command": [
+          "cargo",
+          "check",
+          "-q",
+          "--locked",
+          "-p",
+          "babylon60-kernel"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 1.3163549900054932,
+        "working_directory": ".",
+        "stdout": "",
+        "stderr": ""
+      },
+      "unit-debug": {
+        "name": "unit-debug",
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "-p",
+          "babylon60-kernel",
+          "--lib",
+          "semantic_entropy::tests::"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 1.1545100212097168,
+        "working_directory": ".",
+        "stdout": "\nrunning 4 tests\ntest semantic_entropy::tests::test_genuine_knowledge_quadrant1 ... ok\ntest semantic_entropy::tests::test_polysemy_quadrant4 ... ok\ntest semantic_entropy::tests::test_incorrect_belief_quadrant3 ... ok\ntest semantic_entropy::tests::test_confabulation_quadrant2 ... ok\n\ntest result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 25 filtered out; finished in 0.00s\n\n",
+        "stderr": "   Compiling babylon60-kernel v5.0.1 (<repo>/00_ABZU_KERNEL/crates/babylon60-kernel)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.73s\n     Running unittests src/lib.rs (target/debug/deps/babylon60_kernel-9265b6522013a53e)\n"
+      },
+      "regressions-debug": {
+        "name": "regressions-debug",
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "-p",
+          "babylon60-kernel",
+          "--test",
+          "semantic_entropy_regressions",
+          "--test",
+          "semantic_solver_outcomes"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 1.5584590435028076,
+        "working_directory": ".",
+        "stdout": "\nrunning 11 tests\ntest a_row_outside_the_declared_domain_is_not_admitted ... ok\ntest an_asymmetric_reflexive_relation_is_not_admitted ... ok\ntest a_non_reflexive_relation_is_not_admitted ... ok\ntest a_symmetric_nontransitive_relation_is_not_admitted ... ok\ntest eight_sample_clique_has_one_class ... ok\ntest a_column_outside_the_declared_domain_is_not_admitted ... ok\ntest out_of_range_sample_counts_are_not_admitted ... ok\ntest exact_endpoint_and_existing_nominal_values_are_preserved ... ok\ntest invalid_inputs_have_typed_errors_under_either_conclusive_outcome ... ok\ntest all_n4_relations_match_an_independent_equivalence_predicate ... ok\ntest all_5295_partitions_match_independent_arithmetic_and_permutations ... ok\n\ntest result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.16s\n\n\nrunning 5 tests\ntest invalid_input_has_precedence_over_every_solver_outcome ... ok\ntest conclusive_quadrants_keep_their_payloads ... ok\ntest zero_entropy_and_eight_sample_maximum_do_not_override_solver_rejection ... ok\ntest mixed_calls_are_deterministic_without_retaining_previous_admission ... ok\ntest all_5295_partitions_cover_all_seven_solver_outcomes ... ok\n\ntest result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s\n\n",
+        "stderr": "   Compiling babylon60-kernel v5.0.1 (<repo>/00_ABZU_KERNEL/crates/babylon60-kernel)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.53s\n     Running tests/semantic_entropy_regressions.rs (target/debug/deps/semantic_entropy_regressions-79004bf74127f26a)\n     Running tests/semantic_solver_outcomes.rs (target/debug/deps/semantic_solver_outcomes-30a5221b22acdfa3)\n"
+      },
+      "unit-release": {
+        "name": "unit-release",
+        "command": [
+          "cargo",
+          "test",
+          "--release",
+          "--locked",
+          "-p",
+          "babylon60-kernel",
+          "--lib",
+          "semantic_entropy::tests::"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 6.105674982070923,
+        "working_directory": ".",
+        "stdout": "\nrunning 4 tests\ntest semantic_entropy::tests::test_confabulation_quadrant2 ... ok\ntest semantic_entropy::tests::test_genuine_knowledge_quadrant1 ... ok\ntest semantic_entropy::tests::test_incorrect_belief_quadrant3 ... ok\ntest semantic_entropy::tests::test_polysemy_quadrant4 ... ok\n\ntest result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 25 filtered out; finished in 0.00s\n\n",
+        "stderr": "   Compiling babylon60-kernel v5.0.1 (<repo>/00_ABZU_KERNEL/crates/babylon60-kernel)\n    Finished `release` profile [optimized] target(s) in 5.80s\n     Running unittests src/lib.rs (target/release/deps/babylon60_kernel-027e708f0acad1b2)\n"
+      },
+      "regressions-release": {
+        "name": "regressions-release",
+        "command": [
+          "cargo",
+          "test",
+          "--release",
+          "--locked",
+          "-p",
+          "babylon60-kernel",
+          "--test",
+          "semantic_entropy_regressions",
+          "--test",
+          "semantic_solver_outcomes"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 5.544515132904053,
+        "working_directory": ".",
+        "stdout": "\nrunning 11 tests\ntest a_column_outside_the_declared_domain_is_not_admitted ... ok\ntest a_symmetric_nontransitive_relation_is_not_admitted ... ok\ntest a_row_outside_the_declared_domain_is_not_admitted ... ok\ntest a_non_reflexive_relation_is_not_admitted ... ok\ntest an_asymmetric_reflexive_relation_is_not_admitted ... ok\ntest eight_sample_clique_has_one_class ... ok\ntest exact_endpoint_and_existing_nominal_values_are_preserved ... ok\ntest invalid_inputs_have_typed_errors_under_either_conclusive_outcome ... ok\ntest out_of_range_sample_counts_are_not_admitted ... ok\ntest all_n4_relations_match_an_independent_equivalence_predicate ... ok\ntest all_5295_partitions_match_independent_arithmetic_and_permutations ... ok\n\ntest result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s\n\n\nrunning 5 tests\ntest invalid_input_has_precedence_over_every_solver_outcome ... ok\ntest conclusive_quadrants_keep_their_payloads ... ok\ntest zero_entropy_and_eight_sample_maximum_do_not_override_solver_rejection ... ok\ntest mixed_calls_are_deterministic_without_retaining_previous_admission ... ok\ntest all_5295_partitions_cover_all_seven_solver_outcomes ... ok\n\ntest result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s\n\n",
+        "stderr": "   Compiling babylon60-kernel v5.0.1 (<repo>/00_ABZU_KERNEL/crates/babylon60-kernel)\n    Finished `release` profile [optimized] target(s) in 5.22s\n     Running tests/semantic_entropy_regressions.rs (target/release/deps/semantic_entropy_regressions-99725b2f5055f373)\n     Running tests/semantic_solver_outcomes.rs (target/release/deps/semantic_solver_outcomes-843145b719e6a427)\n"
+      },
+      "bool-contract-green": {
+        "name": "bool-contract-green",
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "-p",
+          "babylon60-kernel",
+          "--doc",
+          "semantic_entropy::BitmaskSemanticKernel::evaluate"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 0.3207731246948242,
+        "working_directory": ".",
+        "stdout": "\nrunning 1 test\ntest 00_ABZU_KERNEL/crates/babylon60-kernel/src/semantic_entropy.rs - semantic_entropy::BitmaskSemanticKernel::evaluate (line 139) - compile fail ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.10s\n\n",
+        "stderr": "    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.11s\n   Doc-tests babylon60_kernel\n"
+      },
+      "stress-compile-debug": {
+        "name": "stress-compile-debug",
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "-p",
+          "babylon60-kernel",
+          "--test",
+          "stress_semantic_entropy_100k",
+          "--no-run"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 0.25000667572021484,
+        "working_directory": ".",
+        "stdout": "",
+        "stderr": "   Compiling babylon60-kernel v5.0.1 (<repo>/00_ABZU_KERNEL/crates/babylon60-kernel)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.22s\n  Executable tests/stress_semantic_entropy_100k.rs (target/debug/deps/stress_semantic_entropy_100k-9f77f3f9f5494438)\n"
+      },
+      "stress-compile-release": {
+        "name": "stress-compile-release",
+        "command": [
+          "cargo",
+          "test",
+          "--release",
+          "--locked",
+          "-p",
+          "babylon60-kernel",
+          "--test",
+          "stress_semantic_entropy_100k",
+          "--no-run"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 5.600732326507568,
+        "working_directory": ".",
+        "stdout": "",
+        "stderr": "   Compiling babylon60-kernel v5.0.1 (<repo>/00_ABZU_KERNEL/crates/babylon60-kernel)\n    Finished `release` profile [optimized] target(s) in 5.57s\n  Executable tests/stress_semantic_entropy_100k.rs (target/release/deps/stress_semantic_entropy_100k-6ce860828b019737)\n"
+      },
+      "rustfmt": {
+        "name": "rustfmt",
+        "command": [
+          "rustfmt",
+          "--edition",
+          "2021",
+          "--check",
+          "00_ABZU_KERNEL/crates/babylon60-kernel/src/semantic_entropy.rs",
+          "00_ABZU_KERNEL/crates/babylon60-kernel/tests/semantic_entropy_regressions.rs",
+          "00_ABZU_KERNEL/crates/babylon60-kernel/tests/stress_semantic_entropy_100k.rs",
+          "00_ABZU_KERNEL/crates/babylon60-kernel/tests/semantic_solver_outcomes.rs"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 0.07230520248413086,
+        "working_directory": ".",
+        "stdout": "",
+        "stderr": ""
+      }
+    },
+    "root": {
+      "lean-green": {
+        "command": [
+          "uv",
+          "run",
+          "--locked",
+          "pytest",
+          "tests/test_semantic_entropy_lean_alignment.py",
+          "tests/test_audit_public_claims.py",
+          "-q"
+        ],
+        "working_directory": ".",
+        "environment": {
+          "BABYLON_REQUIRE_LEAN": "1"
+        },
+        "exit_code": 0,
+        "output": ".....                                                                    [100%]\n5 passed in 4.99s\nUninstalled 1 package in 2ms\nInstalled 1 package in 2ms\n",
+        "source_sha256": {
+          "scripts/c5_demos/SemanticEntropyApoptosis.lean": "60404fc42537b71063183fcbf78ec43b19afd37357485bf261e815d5d1c227d1",
+          "tests/test_semantic_entropy_lean_alignment.py": "aa29234617ea5a7d4230db2d7bf846ae00a3308878acd048990dce05d888ee39"
+        }
+      },
+      "ruff": {
+        "command": [
+          "uv",
+          "run",
+          "--locked",
+          "ruff",
+          "check",
+          "tests/test_semantic_entropy_lean_alignment.py"
+        ],
+        "working_directory": ".",
+        "environment": {
+          "BABYLON_REQUIRE_LEAN": "1"
+        },
+        "exit_code": 0,
+        "output": "All checks passed!\nUninstalled 1 package in 2ms\nInstalled 1 package in 3ms\n",
+        "source_sha256": {
+          "scripts/c5_demos/SemanticEntropyApoptosis.lean": "60404fc42537b71063183fcbf78ec43b19afd37357485bf261e815d5d1c227d1",
+          "tests/test_semantic_entropy_lean_alignment.py": "aa29234617ea5a7d4230db2d7bf846ae00a3308878acd048990dce05d888ee39"
+        }
+      },
+      "final-document-links": {
+        "command": [
+          "python3",
+          ".audit/solver-outcomes-20261026/check_documents.py"
+        ],
+        "working_directory": ".",
+        "environment": {
+          "BABYLON_REQUIRE_LEAN": "1"
+        },
+        "exit_code": 0,
+        "output": "{\n  \"links\": 397,\n  \"failures\": [],\n  \"coverage\": {\n    \"docs/01_spec in docs/00_index.md\": {\n      \"documents\": 14,\n      \"missing\": []\n    },\n    \"docs/01_spec in docs/README.md\": {\n      \"documents\": 14,\n      \"missing\": []\n    },\n    \"docs/06_theory in docs/00_index.md\": {\n      \"documents\": 31,\n      \"missing\": []\n    },\n    \"docs/06_theory in docs/README.md\": {\n      \"documents\": 31,\n      \"missing\": []\n    },\n    \"docs/06_theory in docs/06_theory/00_index.md\": {\n      \"documents\": 31,\n      \"missing\": []\n    }\n  },\n  \"preserved_files\": 16\n}\n",
+        "source_sha256": {
+          "scripts/c5_demos/SemanticEntropyApoptosis.lean": "60404fc42537b71063183fcbf78ec43b19afd37357485bf261e815d5d1c227d1",
+          "tests/test_semantic_entropy_lean_alignment.py": "aa29234617ea5a7d4230db2d7bf846ae00a3308878acd048990dce05d888ee39"
+        }
+      },
+      "final-semantic-contracts": {
+        "command": [
+          "python3",
+          "scripts/c5_quality_gates/audit_semantic_contracts.py",
+          "--workspace-only"
+        ],
+        "working_directory": ".",
+        "environment": {
+          "BABYLON_REQUIRE_LEAN": "1"
+        },
+        "exit_code": 0,
+        "output": "PASS: known semantic patterns (62 documents, 41 Python files), local links/anchors in 15 governance documents; not a proof of semantic consistency or runtime.\n",
+        "source_sha256": {
+          "scripts/c5_demos/SemanticEntropyApoptosis.lean": "60404fc42537b71063183fcbf78ec43b19afd37357485bf261e815d5d1c227d1",
+          "tests/test_semantic_entropy_lean_alignment.py": "aa29234617ea5a7d4230db2d7bf846ae00a3308878acd048990dce05d888ee39"
+        }
+      },
+      "final-token-budget": {
+        "command": [
+          "python3",
+          "scripts/c5_quality_gates/audit_token_budget.py",
+          "--workspace-only",
+          "--skip-ghost-listeners"
+        ],
+        "working_directory": ".",
+        "environment": {
+          "BABYLON_REQUIRE_LEAN": "1"
+        },
+        "exit_code": 0,
+        "output": "=== [C5-REAL] AUDITORÍA DE PRESUPUESTO DE TOKENS ===\n■ .babylon60rules (workspace, counted once): 5,082 B (~1,270 estimated tokens)\n■ AGENTS.md (workspace, counted once): 4,808 B (~1,202 estimated tokens)\n■ Global rules: NOT_CHECKED (workspace-only)\n■ Reglas always_on (Global: 0, Workspace: 0): 0 B (~0 estimated tokens)\n■ INSPECTED ALWAYS_ON: 9,890 B / 40,000 B (~2,472 estimated tokens; actual client context not measured)\n■ Reglas condicionales (model_decision): 0 global + 7 workspace (bodies excluded from this budget; client loading not measured)\n■ Ghost Listeners (conversation_summaries.db): NOT_CHECKED (explicitly skipped)\nPASS: Workspace token budget within inline ceiling; global rules and cross-scope duplicates not checked.\n",
+        "source_sha256": {
+          "scripts/c5_demos/SemanticEntropyApoptosis.lean": "60404fc42537b71063183fcbf78ec43b19afd37357485bf261e815d5d1c227d1",
+          "tests/test_semantic_entropy_lean_alignment.py": "aa29234617ea5a7d4230db2d7bf846ae00a3308878acd048990dce05d888ee39"
+        }
+      },
+      "final-active-topology": {
+        "command": [
+          "python3",
+          "scripts/guards/verify_active_topology.py"
+        ],
+        "working_directory": ".",
+        "environment": {
+          "BABYLON_REQUIRE_LEAN": "1"
+        },
+        "exit_code": 0,
+        "output": "PASS: instruction files, required direct symlinks and MCP registration references (worktree; VS Code if present)\n",
+        "source_sha256": {
+          "scripts/c5_demos/SemanticEntropyApoptosis.lean": "60404fc42537b71063183fcbf78ec43b19afd37357485bf261e815d5d1c227d1",
+          "tests/test_semantic_entropy_lean_alignment.py": "aa29234617ea5a7d4230db2d7bf846ae00a3308878acd048990dce05d888ee39"
+        }
+      },
+      "final-diff-check": {
+        "command": [
+          "git",
+          "diff",
+          "--check",
+          "--",
+          "00_ABZU_KERNEL/crates/babylon60-kernel/src/semantic_entropy.rs",
+          "00_ABZU_KERNEL/crates/babylon60-kernel/tests/semantic_entropy_regressions.rs",
+          "00_ABZU_KERNEL/crates/babylon60-kernel/tests/semantic_solver_outcomes.rs",
+          "00_ABZU_KERNEL/crates/babylon60-kernel/tests/stress_semantic_entropy_100k.rs",
+          "scripts/c5_demos/SemanticEntropyApoptosis.lean",
+          "tests/test_semantic_entropy_lean_alignment.py",
+          "docs/01_spec/AUDIT_SCIENTIFIC_GUARANTEES_2026.md",
+          "docs/01_spec/spec_semantic_entropy_dual_firewall.md",
+          "docs/01_spec/spec_invariants.md",
+          "docs/00_index.md",
+          "docs/README.md"
+        ],
+        "working_directory": ".",
+        "environment": {
+          "BABYLON_REQUIRE_LEAN": "1"
+        },
+        "exit_code": 0,
+        "output": "",
+        "source_sha256": {
+          "scripts/c5_demos/SemanticEntropyApoptosis.lean": "60404fc42537b71063183fcbf78ec43b19afd37357485bf261e815d5d1c227d1",
+          "tests/test_semantic_entropy_lean_alignment.py": "aa29234617ea5a7d4230db2d7bf846ae00a3308878acd048990dce05d888ee39"
+        }
+      }
+    }
+  },
+  "tests": {
+    "rust_unit_unique": 4,
+    "rust_existing_regression_unique": 11,
+    "rust_new_solver_outcome_regression_unique": 5,
+    "rust_profiles": [
+      "debug",
+      "release"
+    ],
+    "compile_fail_doctest_unique": 1,
+    "python_total_unique": 5,
+    "python_lean_alignment": 1,
+    "python_public_contracts": 4,
+    "unique_total": 26,
+    "additional_release_repetitions": 20,
+    "lean_axiom_guards": 37,
+    "lean_source_theorems": 10,
+    "lean_finite_alignment_cases": 27
+  },
+  "finite_coverage": {
+    "valid_partitions_n_1_through_8": 5295,
+    "outcomes_per_partition": 7,
+    "partition_outcome_combinations": 37065,
+    "inconclusive_partition_outcome_combinations": 26475,
+    "invalid_cases": 12,
+    "invalid_outcome_combinations": 84,
+    "all_n4_binary_relations_in_existing_suite": 65536
+  },
+  "red_control": {
+    "command": [
+      "cargo",
+      "test",
+      "--locked",
+      "-p",
+      "babylon60-kernel",
+      "--doc",
+      "semantic_entropy::BitmaskSemanticKernel::evaluate"
+    ],
+    "exit_code": 101,
+    "elapsed_seconds": 3.0338010787963867,
+    "expected": "doctest fails because the old boolean API compiles the prohibited call",
+    "stdout": "\nrunning 1 test\ntest 00_ABZU_KERNEL/crates/babylon60-kernel/src/semantic_entropy.rs - semantic_entropy::BitmaskSemanticKernel::evaluate (line 117) - compile fail ... FAILED\n\nfailures:\n\n---- 00_ABZU_KERNEL/crates/babylon60-kernel/src/semantic_entropy.rs - semantic_entropy::BitmaskSemanticKernel::evaluate (line 117) stdout ----\nTest compiled successfully, but it's marked `compile_fail`.\n\nfailures:\n    00_ABZU_KERNEL/crates/babylon60-kernel/src/semantic_entropy.rs - semantic_entropy::BitmaskSemanticKernel::evaluate (line 117)\n\ntest result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.70s\n\n",
+    "stderr": "   Compiling babylon60-kernel v5.0.1 (<repo>/00_ABZU_KERNEL/crates/babylon60-kernel)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.02s\n   Doc-tests babylon60_kernel\nerror: doctest failed, to rerun pass `-p babylon60-kernel --doc`\n",
+    "snapshot_sha256": "a877403c1278fc61352a3550982a34c0f3a66b2803510a3c617bc3ba64ceac1e"
+  },
+  "green_boolean_type_diagnostic": {
+    "command": [
+      "cargo",
+      "test",
+      "--locked",
+      "-p",
+      "babylon60-kernel",
+      "--doc",
+      "semantic_entropy::BitmaskSemanticKernel::evaluate",
+      "--",
+      "--nocapture"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 1.1543660163879395,
+    "e0308_present": true,
+    "expected_type_diagnostic_present": true,
+    "stdout": "\nrunning 1 test\ntest 00_ABZU_KERNEL/crates/babylon60-kernel/src/semantic_entropy.rs - semantic_entropy::BitmaskSemanticKernel::evaluate (line 139) - compile fail ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.24s\n\n",
+    "stderr": "    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.30s\n   Doc-tests babylon60_kernel\nerror[E0308]: mismatched types\n   --> 00_ABZU_KERNEL/crates/babylon60-kernel/src/semantic_entropy.rs:142:47\n    |\n142 | let _ = BitmaskSemanticKernel::evaluate(1, 1, true);\n    |         -------------------------------       ^^^^ expected `SolverOutcome`, found `bool`\n    |         |\n    |         arguments to this function are incorrect\n    |\nnote: associated function defined here\n   --> 00_ABZU_KERNEL/crates/babylon60-kernel/src/semantic_entropy.rs:144:12\n    |\n144 |     pub fn evaluate(adj_matrix: u64, n: usize, outcome: SolverOutcome) -> SemanticEntropyVerdict {\n    |            ^^^^^^^^\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.\n"
+  },
+  "failed_lean_implementation_attempts": {
+    "lean-initial-proof-attempt": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "pytest",
+        "tests/test_semantic_entropy_lean_alignment.py",
+        "-q"
+      ],
+      "working_directory": ".",
+      "environment": {
+        "BABYLON_REQUIRE_LEAN": "1"
+      },
+      "exit_code": 1,
+      "output": "F\n=================================== FAILURES ===================================\n______________ test_lean_summary_thresholds_and_codes_match_rust _______________\ntests/test_semantic_entropy_lean_alignment.py:93: in test_lean_summary_thresholds_and_codes_match_rust\n    assert result.returncode == 0, result.stdout + result.stderr\nE   AssertionError: <temp>/SemanticEntropyAlignment.lean:97:11: error: Type mismatch\nE       hs\nE     has type\nE       claim.solverOutcome = SolverOutcome.Sat\nE     but is expected to have type\nE       SolverOutcome.Sat = SolverOutcome.Sat\nE     <temp>/SemanticEntropyAlignment.lean:101:19: error: Dependent elimination failed: Failed to solve equation\nE       CausalStatus.Verified =\nE         Decidable.rec (fun h => (fun x => CausalStatus.Apoptosis errIncorrectBelief) h)\nE           (fun h => (fun x => CausalStatus.Apoptosis errConfabulation) h) (claim.tauSem.decLt claim.hSemScaled)\nE     'Babylon60.Epistemology.falsity_never_reaches_ring1_commit' depends on axioms: [sorryAx]\nE     <temp>/SemanticEntropyAlignment.lean:272:0: error: ❌️ Docstring on `#guard_msgs` does not match generated message:\nE     \nE     - info: 'Babylon60.Epistemology.falsity_never_reaches_ring1_commit' does not depend on any axioms\nE     + info: 'Babylon60.Epistemology.falsity_never_reaches_ring1_commit' depends on axioms: [sorryAx]\nE     'Babylon60.Epistemology.verified_requires_solver_sat' depends on axioms: [sorryAx]\nE     <temp>/SemanticEntropyAlignment.lean:275:0: error: ❌️ Docstring on `#guard_msgs` does not match generated message:\nE     \nE     - info: 'Babylon60.Epistemology.verified_requires_solver_sat' does not depend on any axioms\nE     + info: 'Babylon60.Epistemology.verified_requires_solver_sat' depends on axioms: [sorryAx]\nE     'Babylon60.Epistemology.verified_iff_solver_sat' depends on axioms: [sorryAx]\nE     <temp>/SemanticEntropyAlignment.lean:281:0: error: ❌️ Docstring on `#guard_msgs` does not match generated message:\nE     \nE     - info: 'Babylon60.Epistemology.verified_iff_solver_sat' does not depend on any axioms\nE     + info: 'Babylon60.Epistemology.verified_iff_solver_sat' depends on axioms: [sorryAx]\nE     'Babylon60.Epistemology.unknown_never_reaches_verified' depends on axioms: [sorryAx]\nE     <temp>/SemanticEntropyAlignment.lean:284:0: error: ❌️ Docstring on `#guard_msgs` does not match generated message:\nE     \nE     - info: 'Babylon60.Epistemology.unknown_never_reaches_verified' does not depend on any axioms\nE     + info: 'Babylon60.Epistemology.unknown_never_reaches_verified' depends on axioms: [sorryAx]\nE     'Babylon60.Epistemology.solver_error_never_reaches_verified' depends on axioms: [sorryAx]\nE     <temp>/SemanticEntropyAlignment.lean:287:0: error: ❌️ Docstring on `#guard_msgs` does not match generated message:\nE     \nE     - info: 'Babylon60.Epistemology.solver_error_never_reaches_verified' does not depend on any axioms\nE     + info: 'Babylon60.Epistemology.solver_error_never_reaches_verified' depends on axioms: [sorryAx]\nE     \nE   assert 1 == 0\nE    +  where 1 = CompletedProcess(args=['/opt/homebrew/bin/lean', '/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-b...xioms\\n+ info: 'Babylon60.Epistemology.solver_error_never_reaches_verified' depends on axioms: [sorryAx]\\n\", stderr='').returncode\n=========================== short test summary info ============================\nFAILED tests/test_semantic_entropy_lean_alignment.py::test_lean_summary_thresholds_and_codes_match_rust\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 5.00s\nUninstalled 1 package in 3ms\nInstalled 1 package in 3ms\n",
+      "source_sha256": {
+        "scripts/c5_demos/SemanticEntropyApoptosis.lean": "46159bdc948033eb2a84b91f5b608aa7a2a7d4d532610e511c1a55db30627e8b",
+        "tests/test_semantic_entropy_lean_alignment.py": "aa29234617ea5a7d4230db2d7bf846ae00a3308878acd048990dce05d888ee39"
+      },
+      "source_reconstruction": "Hash-matched reconstruction from final source; failed attempt, not accepted proof"
+    },
+    "lean-proof-corrected": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "pytest",
+        "tests/test_semantic_entropy_lean_alignment.py",
+        "-q"
+      ],
+      "working_directory": ".",
+      "environment": {
+        "BABYLON_REQUIRE_LEAN": "1"
+      },
+      "exit_code": 1,
+      "output": "F\n=================================== FAILURES ===================================\n______________ test_lean_summary_thresholds_and_codes_match_rust _______________\ntests/test_semantic_entropy_lean_alignment.py:93: in test_lean_summary_thresholds_and_codes_match_rust\n    assert result.returncode == 0, result.stdout + result.stderr\nE   AssertionError: <temp>/SemanticEntropyAlignment.lean:102:10: error: `if_pos` has been deprecated: Use `ite_eq_left` instead\nE     <temp>/SemanticEntropyAlignment.lean:104:10: error: `if_neg` has been deprecated: Use `ite_eq_right` instead\nE     \nE   assert 1 == 0\nE    +  where 1 = CompletedProcess(args=['/opt/homebrew/bin/lean', '<temp>/SemanticEntropyAlignment.lean:104:10: error: `if_neg` has been deprecated: Use `ite_eq_right` instead\\n', stderr='').returncode\n=========================== short test summary info ============================\nFAILED tests/test_semantic_entropy_lean_alignment.py::test_lean_summary_thresholds_and_codes_match_rust\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 3.57s\nUninstalled 1 package in 8ms\nInstalled 1 package in 15ms\n",
+      "source_sha256": {
+        "scripts/c5_demos/SemanticEntropyApoptosis.lean": "edf20b3266ebd4bc06e2e783fc8c6c00343e6b6f2887e310f19e8dc8e8a3dbe5",
+        "tests/test_semantic_entropy_lean_alignment.py": "aa29234617ea5a7d4230db2d7bf846ae00a3308878acd048990dce05d888ee39"
+      },
+      "source_reconstruction": "Hash-matched reconstruction from final source; failed attempt, not accepted proof"
+    }
+  },
+  "lean_model": {
+    "source": "scripts/c5_demos/SemanticEntropyApoptosis.lean",
+    "toolchain": "leanprover/lean4:v4.34.0-rc2",
+    "universal_property": "evaluateCausalGate(c) = Verified iff c.solverOutcome = Sat",
+    "universal_rejections": [
+      "Unknown",
+      "Error(reason) for every SolverError"
+    ],
+    "finite_rejections": {
+      "entropies_q16": [
+        0,
+        55706,
+        55707,
+        196608
+      ],
+      "errors": [
+        "Timeout",
+        "Transport",
+        "Protocol",
+        "Execution"
+      ]
+    },
+    "axioms": "All ten source theorems and 27 finite alignment theorems require empty axiom dependencies; no accepted sorryAx or Classical.choice/propext dependencies",
+    "limits": [
+      "Summary model only: no matrix validation or LUT algorithm in Lean",
+      "Verified merges both positive Rust variants; no full Rust-Lean refinement proof",
+      "No solver provenance, external factual proposition, commit or physical effect"
+    ]
+  },
+  "discovery": {
+    "project": "babylon-60",
+    "root": ".",
+    "index_mode": "fast",
+    "index_finished_at_utc": "2026-10-26T21:00:44Z",
+    "limits": "Watch was false and Lean/untracked-test coverage incomplete. Graph name-based edges toward cortex-guard::evaluate were checked against imports/signatures and rejected as unrelated. Final source and literal caller scan supplement the graph; absence is not inferred from it.",
+    "actual_callers_found": [
+      "Four unit tests",
+      "semantic_entropy_regressions.rs",
+      "semantic_solver_outcomes.rs",
+      "stress_semantic_entropy_100k.rs"
+    ]
+  },
+  "documentation": {
+    "local_links_checked": 397,
+    "failures": [],
+    "coverage": {
+      "docs/01_spec in docs/00_index.md": {
+        "documents": 14,
+        "missing": []
+      },
+      "docs/01_spec in docs/README.md": {
+        "documents": 14,
+        "missing": []
+      },
+      "docs/06_theory in docs/00_index.md": {
+        "documents": 31,
+        "missing": []
+      },
+      "docs/06_theory in docs/README.md": {
+        "documents": 31,
+        "missing": []
+      },
+      "docs/06_theory in docs/06_theory/00_index.md": {
+        "documents": 31,
+        "missing": []
+      }
+    },
+    "preserved_sha256": {
+      "Cargo.lock": "7c772f6e6ffd29594c5b9bdadb004be09c57af67b60b7be1b56c034a174491b4",
+      "uv.lock": "d78739746ac5d442a074ad73cbc7fc06d6e803558126f65fbc3d6d251d4c1fb4",
+      "pyproject.toml": "50d4594dd2125fcbe7df0578394b5d2c2e6ac7c7dddb4b5fc9be68229eb8d0cd",
+      "00_ABZU_KERNEL/crates/babylon60-kernel/Cargo.toml": "1fce7afd9c97f75f4cf542bbfa7aa5f6c8b66370629ddab0c8e06a3b2432b8d1",
+      "proof/lean/lean-toolchain": "108ca2895820de2c74101f81de81756b41ca0165dfdc8ced16a82c3f810152d0",
+      "proof/lean/lake-manifest.json": "9325276f014362af0d80077ed4126abdec7dc79d64bf576708cc542b155220fa",
+      "scripts/c5_demos/poc_graph_isomorphism_wl.py": "ac10dfda74ebe68926f6ad7b82e6f3611ed736f2bef819c09fb638de5d7cc095",
+      "scripts/c5_isomorphisms/c5_ultimate_causal_determinant.py": "138dcb231d90607494c8f48f3146433188beda2cc2aff6ca73b58092e35bece1",
+      "tests/test_graph_isomorphism_regressions.py": "583eb19d54347d1fde441853111281b770f49e64512f942981a1146d206c2632",
+      "tests/test_inv_c5_28_falsification.py": "a1d46874571b8d2bb78061a6311362b7755582b36f4af662172419a488971686",
+      "docs/01_spec/evidence/algorithm-repairs-20261026.json": "ab5acb7b8744d26bc065ff24fb2a60c06b7c93fb5a215be29f3257ae243bfa2e",
+      "docs/01_spec/evidence/scientific-guarantees-20261026.json": "344d700347f7e6ae65c7f9a38711702c07224b5c15b77fa9a0c2b0f3ceaff075",
+      "docs/06_theory/evidence/lean-scope-20261025.json": "d69b85b123e211928c100cc2f16f193702ad7a1e0385f3961473df2bc45a1806",
+      "docs/06_theory/evidence/lean-naming-20261026.json": "e38296a0764fda98468853141d9b4600665372d8e2b4b2d4baad0220eef74a26",
+      "docs/06_theory/evidence/lean-reporting-20261026.json": "28b6041bd363afe77a4db4136a01ad5ea15cec73b098670bedfeb8725061d52c",
+      "docs/06_theory/evidence/lean-harness-20261026.json": "ac7f462b8cc7a9bae8511bef7e0a04c6680cf47883a29d09d3f42ae74c25dfc2"
+    },
+    "LUT_and_Rust_threshold_unchanged": true,
+    "documents": [
+      "README.md",
+      "docs/README.md",
+      "docs/00_index.md",
+      "docs/06_theory/00_index.md",
+      "docs/06_theory/BABYLON60_PROOF_CARRYING_EXECUTION.md",
+      "docs/01_spec/AUDIT_SCIENTIFIC_GUARANTEES_2026.md",
+      "docs/01_spec/spec_architecture.md",
+      "docs/01_spec/spec_cryptographic_profile.md",
+      "docs/01_spec/spec_exergy_ontology.md",
+      "docs/01_spec/spec_graph_canonical.md",
+      "docs/01_spec/spec_invariants.md",
+      "docs/01_spec/spec_security_model.md",
+      "docs/01_spec/spec_semantic_entropy_dual_firewall.md"
+    ]
+  },
+  "source_sha256": {
+    "00_ABZU_KERNEL/crates/babylon60-kernel/src/semantic_entropy.rs": "d40052fb9c4a616ef4772ed0e1372e7f2bbcfe9d33ce3620bdbfea82a9fb738c",
+    "00_ABZU_KERNEL/crates/babylon60-kernel/tests/semantic_entropy_regressions.rs": "a14f30e7da74e6c676d346924bc82601bda4035d39fc6708a31e5b58aac8cc59",
+    "00_ABZU_KERNEL/crates/babylon60-kernel/tests/semantic_solver_outcomes.rs": "907f9b7cc1dcc9652bf719a8764b4ba532c426fa0cd3923d16315a91927ad7cd",
+    "00_ABZU_KERNEL/crates/babylon60-kernel/tests/stress_semantic_entropy_100k.rs": "ad7fbd66505a043fff51c74187e3026801a4c267a382138e73ece3f5f056df3a",
+    "scripts/c5_demos/SemanticEntropyApoptosis.lean": "60404fc42537b71063183fcbf78ec43b19afd37357485bf261e815d5d1c227d1",
+    "tests/test_semantic_entropy_lean_alignment.py": "aa29234617ea5a7d4230db2d7bf846ae00a3308878acd048990dce05d888ee39"
+  },
+  "document_sha256": {
+    "docs/01_spec/AUDIT_SCIENTIFIC_GUARANTEES_2026.md": "2cec3bdd54783af8adaffc51aee09af6c9a14b4e82abda5f16d2ce23cf30aaa8",
+    "docs/01_spec/spec_semantic_entropy_dual_firewall.md": "7fbfd86847eb53aa84c396ba1f4dac5d4fa81fb8b38eab3df827b37855eb96f5",
+    "docs/01_spec/spec_invariants.md": "ec76e3e69f0ce3f71b65dd9cecc922e3a1dd32163a690fb7376f10e025365aba",
+    "docs/00_index.md": "fb66b519729c3f6a0476f0fcb5926b6a6f321743bf00da608ec32c2ef3b265b5",
+    "docs/README.md": "72dfecee6b1e73d5e6ba90c5dfb343d5dd19c275b72ee2597ab9e05126ace432"
+  },
+  "preservation": {
+    "compute_quotient_entropy_source_unchanged": true,
+    "entropy_lut_source_unchanged": true,
+    "manifest_and_locks_unchanged": {
+      "00_ABZU_KERNEL/crates/babylon60-kernel/Cargo.toml": true,
+      "Cargo.lock": true,
+      "uv.lock": true
+    },
+    "comment_cleanup_did_not_change_production_source": true
+  },
+  "compatibility": {
+    "breaking_api_change": "evaluate third argument is SolverOutcome, not bool; no bool wrapper/conversion. Exhaustive verdict matches must handle SolverUnknown and SolverFailure.",
+    "invalid_input_precedence": "Input validation occurs before solver classification for all seven supplied values",
+    "valid_conclusive_behavior": "SAT/UNSAT preserve four former variants, payloads, LUT, threshold and codes"
+  },
+  "independent_review": "Read-only review of Rust/Lean/Python/docs found no blocking issue; actual tests are recorded separately. Two wording suggestions incorporated.",
+  "documentation_lookup": "Context7 resolve for Lean 4 failed due monthly quota; current conditional theorem names confirmed in the installed pinned toolchain Init/Core.lean lines 1178-1197 and by real Lean compilation.",
+  "limits": [
+    "Caller-reported Sat remains forgeable: no real solver adapter, provenance, formula/query binding or correctness check is implemented here",
+    "SAT is satisfiability of supplied constraints, not factual truth or universal absence of hallucination",
+    "Finite Rust regressions are not a universal formal proof over all u64 relations; exhaustive 5295-partition and n4-relation domains are explicit",
+    "Returned enum does not prove production rejection, persistent commit, abort or confinement",
+    "Stress target compiled in both profiles only; no timing, energy or factual-accuracy benchmark",
+    "No full repository test run, dependency changes, deployment, commit, push or release certification",
+    "Historical audit JSONs and 16 selected preserved artifacts retained unchanged; unrelated dirty work not reverted",
+    "Global rules and ghost-listener telemetry omitted by workspace-only scope"
+  ],
+  "historical_evidence": [
+    "docs/01_spec/evidence/scientific-guarantees-20261026.json",
+    "docs/01_spec/evidence/algorithm-repairs-20261026.json"
+  ]
+}

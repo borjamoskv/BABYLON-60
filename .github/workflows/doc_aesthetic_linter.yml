@@ -1,0 +1,38 @@
+name: C5-REAL Documentation Aesthetics & Rigor Linter
+
+on:
+  push:
+    paths:
+      - 'docs/**/*.md'
+      - 'scripts/c5_quality_gates/lint_doc_aesthetics.py'
+  pull_request:
+    paths:
+      - 'docs/**/*.md'
+      - 'scripts/c5_quality_gates/lint_doc_aesthetics.py'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  audit-documentation-aesthetics:
+    name: Audit Markdown Visual Invariants
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.11'
+
+      - name: Execute C5-REAL Documentation Aesthetic Linter
+        run: |
+          python3 scripts/c5_quality_gates/lint_doc_aesthetics.py

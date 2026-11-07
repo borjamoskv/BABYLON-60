@@ -1,0 +1,23 @@
+{
+  "funnel_comparison": {
+    "policy_premium_annual_usd": 450.0,
+    "classic_ad_acquisition_cost_usd": 60.0,
+    "agentic_brokerage_revenue_usd": 81.0,
+    "revenue_expansion_factor": 1.35
+  },
+  "informational_channel_bandwidth": {
+    "visual_screen_effective_bps": 1026.7,
+    "acoustic_voice_effective_bps": 117.3,
+    "visual_to_acoustic_deficit_factor": 8.75
+  },
+  "hardware_and_energy_constraints": {
+    "battery_ratio_phone_vs_wearable": 13.6,
+    "total_voice_roundtrip_latency_ms": 775.0,
+    "stand_alone_5g_thermal_penalty": "High (cauterio t\u00e9rmico en silicio <15g)"
+  },
+  "epistemic_calibration": {
+    "thesis_core_funnel_control": "VALIDADA (Transici\u00f3n de Ad Network a Corredor Ag\u00e9ntico)",
+    "thesis_hardware_friction": "VALIDADA (El metaverso VR fracas\u00f3 por fricci\u00f3n de acceso masivo)",
+    "thesis_displacing_apple": "HIPERB\u00d3LICA / FALACIA DE DESINTERMEDIACI\u00d3N (D\u00e9ficit visual y atadura de hardware)"
+  }
+}

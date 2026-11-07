@@ -1,0 +1,16 @@
+[package]
+name = "babylon60-spsc-miri-probe"
+version = "0.0.0"
+edition = "2021"
+rust-version = "1.89"
+license-file = "../../LICENSE"
+publish = false
+
+[workspace]
+
+[lib]
+name = "babylon60"
+
+[[test]]
+name = "ownership"
+path = "../spsc_ownership_regressions.rs"

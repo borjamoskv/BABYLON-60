@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# ============================================================================
+# BABYLON-60 Sovereign Hardened
+# █ BABYLON SOCIAL AGENT LAUNCHER | DOMAIN: tools.social | STATE: C5-REAL
+# ============================================================================
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BASE_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
+
+export PYTHONPATH="${BASE_DIR}:${BASE_DIR}/02_EDIN_SWARMS:${PYTHONPATH:-}"
+
+exec python3 -m 02_EDIN_SWARMS.social_agent.cli "$@"
