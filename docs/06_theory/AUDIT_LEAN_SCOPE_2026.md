@@ -1,7 +1,7 @@
 ---
 title: Auditoría de alcance científico de proof/lean
 status: Compilacion-y-proposiciones-con-alcance-explicito
-version: 1.3.0
+version: 1.4.0
 ---
 
 # Auditoría de alcance científico de proof/lean
@@ -224,3 +224,24 @@ Las 144 declaraciones `theorem` se clasifican mecánicamente en seis categorías
 6. **`NEG-FIXTURE` (2 — 1,4 %):** Fixtures negativos (`#060` y `#066`) donde el rechazo de `= true` por `decide` es el comportamiento esperado. En conjunto, `I-DEC + NEG-FIXTURE` suman **39 comprobaciones de instancias cerradas (27,1 %)** frente a **105 resultados universales o testigos existenciales (72,9 %)**.
 
 En [BabylonL0Ledger.lean](../../proof/lean/BabylonL0Ledger.lean), el teorema `#064` (`Babylon60.L0Ledger.merkle_root_uniqueness`) fue fortalecido eliminando las hipótesis redundantes `h_tick` y `h_prev`, de modo que deduce constructivamente `e1.logicalTick = e2.logicalTick ∧ e1.prevMerkleRoot = e2.prevMerkleRoot ∧ e1 = e2` a partir de `TriggerAllowsInsert db e1`, `TriggerAllowsInsert db e2` y `(appendEntry db e1).entries = (appendEntry db e2).entries`, con dependencias axiomáticas vacías (`does not depend on any axioms`). Las 23 fuentes históricas cubiertas por [lean-scope-20261025.json](evidence/lean-scope-20261025.json) se preservan intactas byte a byte, documentando explícitamente el alcance de `#044` (implicación identidad que devuelve `h_contractive`) y `#132` (evaluación booleana de tres indicadores fijados en `true`). El exportador determinista [export_lean_census.py](../../scripts/c5_quality_gates/export_lean_census.py) verifica estas invariantes mediante `--verify`.
+
+## 12. Sinceramiento editorial del censo (2026-11-08)
+
+La [vista pública del censo reconciliado](LEAN_CENSUS_SCOPE_2026.md) se incorpora como presentación trazable de las 144 declaraciones y las 275 construcciones no-teorema inventariadas por [lean-census-372-v511.json](evidence/lean-census-372-v511.json). **No es una recompilación nueva** ni modifica términos, nombres, axiomas o definiciones Lean. El inventario JSON contiene los hashes, firmas y notas de alcance correspondientes a su revisión de origen; el Markdown conserva explícitamente esa procedencia y no atribuye validación en el HEAD local de hoy.
+
+### 12.1 Correcciones de terminología en el documento ejecutivo
+
+| Entrada | Identificador histórico Lean preservado | Alias editorial de alcance | Hecho formal y límite |
+|:--|:--|:--|:--|
+| `#044` | `theorem_chentsov_markov_monotonicity` | `chentsov_contraction_hypothesis_passthrough` | Devuelve la hipótesis `fisher_out ≤ fisher_in`; no demuestra Chentsov-Markov. |
+| `#064` | `merkle_root_uniqueness` | `append_entry_injective` | Inyectividad de append y alineación de campos bajo `TriggerAllowsInsert` y listas resultantes iguales; no resistencia a colisiones Merkle. |
+| `#071` | `no_torn_reads_universal` | `trace_reads_even_on_validation` | Las lecturas de trazas aceptadas declaran secuencia par; no se modelan atomics, payload ni orden de memoria Rust. |
+| `#132` | `millennium_navier_stokes_regular_by_decide` | `bkm_monitor_flags_accepted_by_decide` | Evalúa una conjunción de tres flags verdaderos; no demuestra regularidad de ecuaciones diferenciales. |
+
+Los alias son **descriptores editoriales**, no símbolos Lean alternativos. La clase `NEG-FIXTURE` señala `#060` y `#066`: el rechazo de sus afirmaciones `= true` es esperado y **no debe contabilizarse como prueba positiva compilada**. La reconciliación aritmética es `22 + 4 = 26`, `144 + 228 = 372` y `144 + 228 + 34 + 13 = 419`; las últimas 47 son `structure` y `abbrev` que no estaban comprendidas en las 372.
+
+### 12.2 Regla de transferencia de garantías
+
+Una propiedad del modelo `P(modelo)` no implica `P(runtime)` sin una relación de refinamiento explícita y evidencia de correspondencia de observables, efectos y supuestos. Del mismo modo, un predicado booleano de monitor no prueba condiciones analíticas de existencia, unicidad o suavidad de una PDE. Estas son **obligaciones de prueba abiertas**, no defectos del kernel Lean. Los nombres históricos pueden conservarse como compatibilidad; solo la proposición elaborada, sus dependencias y su vínculo probado con el ejecutable determinan el alcance certificable.
+
+**Validación de esta actualización:** reconciliación de entradas del JSON versionado y edición exclusivamente documental. No se ha ejecutado `lake build`, `lean4checker`, `#print axioms` ni el harness Rust durante esta publicación.

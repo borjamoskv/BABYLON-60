@@ -1,6 +1,8 @@
 # Alcance de las fuentes Lean
 
-Revisión: 2026-10-26. [Informe de auditoría](../../docs/06_theory/AUDIT_LEAN_SCOPE_2026.md) · [Inventario y axiomas](../../docs/06_theory/evidence/lean-scope-20261025.json).
+Revisión: 2026-10-26 (histórica). [Informe de auditoría](../../docs/06_theory/AUDIT_LEAN_SCOPE_2026.md) · [Inventario y axiomas de 2026-10-25](../../docs/06_theory/evidence/lean-scope-20261025.json).
+
+Actualización documental de 2026-11-08: [censo público con alcance explícito de 144 declaraciones y 275 construcciones](../../docs/06_theory/LEAN_CENSUS_SCOPE_2026.md), respaldado por [evidencia JSON del inventario de 26 módulos](../../docs/06_theory/evidence/lean-census-372-v511.json). Conserva símbolos Lean originales y separa lemas del modelo, instancias cerradas, fixtures negativos y garantías analíticas o de runtime todavía no demostradas.
 
 Las 23 fuentes directas contienen modelos abstractos, codecs, ejemplos finitos, parsers IO y un widget. Los nombres heredados no certifican propiedades físicas ni del código Rust. Se preservan API, definiciones, tácticas, validadores y códigos de salida. La revisión del 25 corrigió comentarios; la del 26 corrige también los mensajes de los ejemplos, sin atribuirles garantías físicas.
 
