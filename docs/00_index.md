@@ -141,6 +141,7 @@
 | [`AUDIT_TAUTOLOGIA_VACIA_2026.md`](06_theory/AUDIT_TAUTOLOGIA_VACIA_2026.md) | `06_theory/AUDIT_TAUTOLOGIA_VACIA_2026.md` | Tautologías y evidencia — Auditoría documental limitada |
 | [`AUDIT_SCIENTIFIC_STATUS_2026.md`](06_theory/AUDIT_SCIENTIFIC_STATUS_2026.md) | `06_theory/AUDIT_SCIENTIFIC_STATUS_2026.md` | Auditoría científica del corpus — alcance documental |
 | [`AUDIT_LEAN_SCOPE_2026.md`](06_theory/AUDIT_LEAN_SCOPE_2026.md) | `06_theory/AUDIT_LEAN_SCOPE_2026.md` | Auditoría de alcance Lean — hipótesis, fixtures y verificación bajo demanda |
+| [`LEAN_CENSUS_SCOPE_2026.md`](06_theory/LEAN_CENSUS_SCOPE_2026.md) | `06_theory/LEAN_CENSUS_SCOPE_2026.md` | Censo 1:1 de 144 declaraciones Lean y 275 construcciones — alcance formal explícito |
 | [`axiom_moloch_landauer_balance.md`](06_theory/axiom_moloch_landauer_balance.md) | `06_theory/axiom_moloch_landauer_balance.md` | Modelo contable Moloch — sin garantía física o de incentivos |
 
 ### 📁 Adr
