@@ -46,7 +46,8 @@ Seguimiento externo a este corpus: [garantías de las especificaciones técnicas
 | [axiom_tonnetz_oversight.md](axiom_tonnetz_oversight.md) | Monitor Tonnetz | Revisión previa: propuesta |
 | [c5_thermodynamic_invariants_compendium.md](c5_thermodynamic_invariants_compendium.md) | Compendio C5-REAL corregido | Revisión previa: Lean discreto acotado |
 | [AUDIT_SCIENTIFIC_STATUS_2026.md](AUDIT_SCIENTIFIC_STATUS_2026.md) | Cobertura, hallazgos, fuentes y controles | Auditoría documental; no certificación de runtime |
-| [AUDIT_LEAN_SCOPE_2026.md](AUDIT_LEAN_SCOPE_2026.md) | Alcance de las 23 fuentes Lean, hipótesis y compilación | Modelos, fixtures y verificación Lean bajo demanda con errores separados del rechazo |
+| [AUDIT_LEAN_SCOPE_2026.md](AUDIT_LEAN_SCOPE_2026.md) | Auditoría de alcance Lean: revisión histórica de 23 fuentes y reconciliación posterior de 26 módulos | Hipótesis, fixtures y verificación bajo demanda; sin certificación del runtime |
+| [LEAN_CENSUS_SCOPE_2026.md](LEAN_CENSUS_SCOPE_2026.md) | 144 declaraciones de teoremas y 275 construcciones, clasificadas 1:1 | Inventario documental del modelo; no garantiza propiedades físicas, PDE ni Rust |
 
 ## Lectura y autoridad
 
