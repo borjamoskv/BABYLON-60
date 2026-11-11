@@ -82,7 +82,7 @@ jobs:
       - run: uv sync --locked --extra dev --extra gemini
       - name: Agent semantic contracts and token budget
         run: |
-          python3 scripts/c5_quality_gates/audit_semantic_contracts.py --workspace-only
+          python3 scripts/c5_quality_gates/audit_semantic_contracts.py --workspace-only --public-projection
           python3 scripts/c5_quality_gates/audit_token_budget.py --workspace-only --skip-ghost-listeners
           python3 scripts/guards/verify_active_topology.py
           python3 scripts/guards/verify_active_topology.py --staged

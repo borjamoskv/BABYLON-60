@@ -128,6 +128,34 @@ def test_semantic_cli_checks_core_and_rule_links(governance: Path) -> None:
     assert "missing local anchor" in result.stderr
 
 
+def test_missing_rules_scope_is_no_verificado_unless_public_projection(governance: Path) -> None:
+    (governance / ".agents/rules").rmdir()
+    result = semantic_cli(governance)
+    assert result.returncode == 2
+    assert "NO_VERIFICADO: missing scope" in result.stderr
+    projected = subprocess.run(
+        [
+            sys.executable,
+            str(ROOT / "scripts/c5_quality_gates/audit_semantic_contracts.py"),
+            "--repo-root",
+            str(governance),
+            "--workspace-only",
+            "--public-projection",
+        ],
+        cwd=governance.parent,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert projected.returncode == 0, projected.stderr
+    assert "NOT_CHECKED: vault-only workspace rules" in projected.stdout
+    write(governance, "AGENTS.md", "Toda mutación causal exige atestación biométrica.\n")
+    (governance / ".agents/skills").rmdir()
+    failed = subprocess.run(projected.args, cwd=governance.parent, capture_output=True, text=True, check=False)
+    assert failed.returncode == 2
+    assert "NO_VERIFICADO: missing scope" in failed.stderr
+
+
 def test_budget_counts_canonical_file_once_despite_seven_aliases(governance: Path) -> None:
     write(governance, ".babylon60rules", "m" * 2000)
     write(governance, "AGENTS.md", "a" * 1000)
