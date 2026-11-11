@@ -287,9 +287,8 @@ def test_run_reexecutes_itself_without_the_withheld_variables(sandbox: dict[str,
         assert process.stdout is not None and process.stdin is not None
         launcher_pid, leaked_marker = process.stdout.readline().split()
         environ = Path(f"/proc/{int(launcher_pid)}/environ").read_bytes()  # read from outside the sandbox
-        process.stdin.write(b"\n")
-        process.stdin.close()
-        _out, err = process.communicate(timeout=120)
+        # The newline goes through communicate(): Python 3.12 refuses communicate() on a stdin closed beforehand.
+        _out, err = process.communicate(b"\n", timeout=120)
     finally:
         if process.poll() is None:
             process.kill()
