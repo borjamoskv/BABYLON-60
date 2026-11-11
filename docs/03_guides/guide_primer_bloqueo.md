@@ -69,6 +69,16 @@ control válido; 9.202 eventos encadenados y verificados, en 111 s. En la CI de
 GitHub (`confine.yml`, `ubuntu-latest`, usuario sin privilegios) pasan 58 tests
 de confinamiento con Landlock real.
 
+La misma demo, grabada por `confine.yml` en la CI de GitHub (revisión `b999514`):
+
+| Entorno | Resultado | Evidencia |
+| --- | --- | --- |
+| Linux x86_64, kernel 7.0 (azure), Landlock ABI 8, uid 1001 | 13 vectores contados, 13 bloqueados, 0 pasaron; V12 sin control válido porque el runner no permite el bind mount ni sin confinar | [`ci-demo-linux-x86_64-b999514.json`](../../reports/confine/ci-demo-linux-x86_64-b999514.json) |
+| macOS 15 (Darwin 24.6) arm64, Seatbelt, uid 501 | 10 vectores aplicables, 10 bloqueados con `EPERM`, 0 pasaron; L1 (`stat`) también cerrado | [`ci-demo-macos-arm64-b999514.json`](../../reports/confine/ci-demo-macos-arm64-b999514.json) |
+
+En macOS no hay testigo de aperturas sin privilegios: el recuento se apoya en el
+error devuelto y en el escaneo del token en salidas, workspace y TMPDIR.
+
 `babylon60 log` vuelve a verificar la cadena. `babylon60 demo --json evidence.json`
 escribe el documento completo con su autodigest BLAKE3, y
 `babylon60 demo --check evidence.json` lo recalcula y compara el
@@ -123,8 +133,9 @@ Se ejecutan aparte y nunca cuentan como bloqueados.
 - **Persistencia.** Si el agente edita algo que luego se ejecuta fuera del
   sandbox (`.git/hooks`, `.mcp.json`, `~/.claude/settings.json`, etc.), `run`
   lo detecta, avisa y lo registra; no lo impide.
-- **macOS.** El backend Seatbelt queda `NO_VERIFICADO` hasta que pase
-  `confine-macos.yml` o una ejecución propia.
+- **macOS.** Seatbelt pasa los tests y la demo en el runner `macos-15` de
+  GitHub. Falta una ejecución en un Mac propio, y no hay testigo de aperturas
+  sin privilegios.
 
 ## Con tu agente
 

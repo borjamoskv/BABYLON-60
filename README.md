@@ -28,7 +28,8 @@ sandbox comprueba el resultado y un diario encadenado lo registra.
 Ejecución registrada en Linux x86_64 (uid 65534, revisión `7b0e291`):
 14 vectores, 14 bloqueados y 0 pasaron. En estrés, 200 repeticiones dan 2.800
 intentos confinados, 2.800 bloqueados y 0 pasaron. Los 3 límites declarados
-siguen abiertos y macOS está `NO_VERIFICADO`.
+siguen abiertos. En la CI de GitHub, macOS 15 (Seatbelt) bloquea 10 de 10
+vectores aplicables.
 [Guía, cifras y límites](docs/03_guides/guide_primer_bloqueo.md).
 
 **Funciona con:**
