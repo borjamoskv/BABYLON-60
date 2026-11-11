@@ -59,7 +59,7 @@ import sys
 from babylon60.confine.policy import Policy
 from babylon60.kernel.mcp_sandbox_validator import SANDBOX_EXEC, _literal
 
-__all__ = ["SANDBOX_EXEC", "render_profile", "available"]
+__all__ = ["SANDBOX_EXEC", "render_profile", "rule_refusal", "available"]
 
 # Firmlinks from the system volume into the data volume (/usr/share/firmlinks).
 DATA_VOLUME = "/System/Volumes/Data"
@@ -184,6 +184,18 @@ def _expand(paths: Iterable[str]) -> list[str]:
 
 def _filters(kind: str, paths: Iterable[str]) -> list[str]:
     return [f"({kind} {_quote(form)})" for form in _expand(paths)]
+
+
+def rule_refusal(path: str) -> str | None:
+    """Why a rule naming ``path`` cannot be rendered (``render_profile`` would raise ``ValueError``), or None.
+
+    A control character, or a form of the path (``_forms``) longer than a string literal may be.
+    """
+    try:
+        _filters("literal", [path])
+    except ValueError as exc:
+        return str(exc)
+    return None
 
 
 def _rule(action: str, operations: str, filters: Iterable[str]) -> str:

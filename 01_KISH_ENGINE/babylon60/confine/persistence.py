@@ -1428,7 +1428,7 @@ def parse_git_config_lines(data: bytes) -> list[tuple[int, str, str]]:
     text = data.decode("utf-8", "surrogateescape")
     entries: list[tuple[int, str, str]] = []
     section: str | None = None
-    pos, end = 0, len(text)
+    pos, end = (1 if text.startswith("\ufeff") else 0), len(text)  # git skips one UTF-8 byte order mark
     line, counted = 1, 0  # newlines are counted up to ``counted``, once
     while pos < end:
         char = text[pos]

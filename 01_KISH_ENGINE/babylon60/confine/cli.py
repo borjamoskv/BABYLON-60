@@ -5,11 +5,12 @@ a ``demo --check`` document that cannot be read or whose self digest does not
 match, and for ``log`` a broken chain, an unusable journal or an absent
 ``--expect-head`` digest; 2 demo INCONCLUSIVE, usage error or a malformed
 ``--expect-head``; 3 for ``run`` no confinement backend, uid 0 without
-``--allow-root``, a refused policy, a launcher that imports from a write grant,
-an unusable journal (or one with more than one hard link) or no private
-pseudo-terminal, and for ``demo`` no backend or an unusable journal; 126 the
-trampoline refused to start the target; 127 command not found; otherwise the
-confined command's own exit code (128 + n when signal n ended the session).
+``--allow-root``, a refused policy (or, on macOS, one naming a path Seatbelt
+cannot hold), a launcher that imports from a write grant, an unusable journal
+(or one with more than one hard link) or no private pseudo-terminal, and for
+``demo`` no backend or an unusable journal; 126 the trampoline refused to start
+the target; 127 command not found; otherwise the confined command's own exit
+code (128 + n when signal n ended the session).
 """
 
 from __future__ import annotations
@@ -808,14 +809,19 @@ def run_command(args: argparse.Namespace) -> int:
             try:
                 launcher.become_subreaper()
                 stdin, stdout, stderr = terminal.agent_stdio() if terminal else (None, None, None)
-                process, status = launcher.spawn(
-                    launch,
-                    env=env,
-                    cwd=str(workspace),
-                    stdin=stdin,
-                    stdout=stdout,
-                    stderr=stderr,
-                )
+                try:
+                    process, status = launcher.spawn(
+                        launch,
+                        env=env,
+                        cwd=str(workspace),
+                        stdin=stdin,
+                        stdout=stdout,
+                        stderr=stderr,
+                    )
+                except ValueError as exc:  # macOS: a granted path Seatbelt cannot name in its profile
+                    journal.append("run_refused", {"error": str(exc)})
+                    print(f"babylon60 run: cannot start the confined command: {exc}", file=sys.stderr)
+                    return EXIT_UNAVAILABLE
                 if not status.get("ok"):
                     process.wait()
                     journal.append("run_refused", {"error": status.get("error", "unknown")})

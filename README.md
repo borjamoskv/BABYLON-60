@@ -27,8 +27,9 @@ git checkout -q FETCH_HEAD && bash install.sh --demo
 Se descarga la revisión grabada por su hash porque la rama principal pública es
 una proyección que aún no incluye este código. Cuando lo incluya, también valdrá
 `git clone --depth 1 https://github.com/borjamoskv/BABYLON-60` seguido de
-`cd BABYLON-60 && bash install.sh --demo`. Requisitos y atajo con `uvx` en la
-[guía](docs/03_guides/guide_primer_bloqueo.md#probar).
+`cd BABYLON-60 && bash install.sh --demo`. Los requisitos están en la
+[guía](docs/03_guides/guide_primer_bloqueo.md#requisitos), y el atajo con `uvx`,
+en [Probar](docs/03_guides/guide_primer_bloqueo.md#probar).
 
 Un agente de prueba sigue un README con una instrucción inyectada e intenta
 leer un `~/.ssh/id_rsa` señuelo dos veces: sin confinar y confinado por el
@@ -54,9 +55,18 @@ válido y macOS 15 (Seatbelt), los 17 aplicables.
 - Otros CLI de agente, sin comprobar, con `babylon60 run -- <comando>`.
 
 El arranque confinado se ha comprobado en Linux; las sesiones con LLM están
-`NO_VERIFICADO`. Con un perfil, git lee su configuración en solo lectura.
-Firmar commits con gpg, usar credenciales guardadas de git y crear un espacio
-de nombres de usuario, como hace un sandbox anidado, fallan dentro
+`NO_VERIFICADO`. Con un perfil, git lee en solo lectura su configuración
+global, lo que incluye, los archivos que nombra (`core.excludesFile`,
+`core.attributesFile`, `commit.template`) y su directorio de hooks, también a
+través de enlaces simbólicos como los de stow. Necesitan `--allow-read` un
+archivo que parece llevar una credencial, el destino de un enlace que el agente
+podría cambiar y las demás rutas que nombre la configuración. En Linux,
+firmar commits con gpg y usar credenciales guardadas de git (helpers `store` y
+`cache`) fallan dentro, y se puede crear un espacio de nombres de usuario, pero
+no escribir su `uid_map` ni cambiar montajes, que es lo que necesita un sandbox
+anidado como bubblewrap. En macOS el llavero sigue al alcance por `securityd`
+(límite declarado): las credenciales de `osxkeychain` están `NO_VERIFICADO` y
+probablemente se pueden usar dentro
 ([detalle y lo que sigue `NO_VERIFICADO`](docs/03_guides/guide_primer_bloqueo.md#con-tu-agente)).
 
 > **En 10 segundos:**

@@ -225,7 +225,11 @@ babylon60 run --preset codex -- codex
 Sin perfil, `babylon60 run -- <comando>` concede el workspace, las rutas del
 sistema en lectura, `/dev/shm`, los dispositivos `/dev/null`, `/dev/zero`,
 `/dev/full`, `/dev/random`, `/dev/urandom`, `/dev/tty` y `/dev/ptmx`, su propio
-terminal y un TMPDIR privado que se borra al acabar. Cada perfil concede además
+terminal, un TMPDIR privado que se borra al acabar y, si el ejecutable del
+comando está bajo un HOME, ese archivo y solo él, en lectura y ejecución. En
+macOS concede también el prefijo del intérprete que arranca el trampolín y deja
+leer los enlaces simbólicos bajo un HOME que llevan hasta el comando, porque
+para Seatbelt seguir un enlace es leerlo. Cada perfil concede además
 la configuración de su agente, sus prefijos de instalación y, en solo lectura,
 la configuración de git, solo si existen. `--dry-run` muestra la política sin
 ejecutar nada. Un agente instalado fuera de las rutas del sistema y de los HOME
@@ -247,24 +251,46 @@ primer `node_modules`, la raíz del virtualenv o la carpeta del programa).
   `~/.terraform.d/credentials.tfrc.json`, `~/.local/share/keyrings` y
   `~/Library/Keychains`. Mientras existan, una ruta que los contenga también
   se rechaza.
-- **git.** Cada perfil concede en solo lectura, archivo por archivo,
-  `~/.gitconfig`, los `config`, `ignore` y `attributes` de `~/.config/git` (o
-  de `$XDG_CONFIG_HOME/git`) y lo que incluyen con `include.path` e
-  `includeIf.*.path`, hasta la profundidad que lee git (10) y un máximo de 64
-  archivos. Cada archivo pasa antes las comprobaciones de cualquier ruta: el
-  HOME y sus ancestros y el conjunto protegido, también por hardlink, se
-  rechazan, y un enlace simbólico final o lo que no sea un archivo regular se
-  salta con su motivo. Tampoco se concede un archivo cuyo contenido parece una
-  credencial: `http.*.extraHeader`, `url.*.insteadOf`, una URL con contraseña o
-  una URL http(s) con usuario, una clave con `pass`, `token`, `secret` u
-  `oauth` en el nombre, o un `credential.helper` con `password=` o `token=`.
-  `run` avisa con el archivo, la línea y la clave, nunca el valor. Dentro, git
-  no podrá leer su configuración (si es el `ignore`, falla `git status`; si es
-  `attributes`, git solo avisa), y `--allow-read <archivo>` lo concede
-  igualmente. Es una heurística: una credencial con otra forma se concede con
-  su archivo. Los `include` de un archivo que el agente puede escribir no se
-  siguen. Lo que la configuración nombre aparte (`core.excludesFile`,
-  `commit.template`…) necesita `--allow-read`.
+- **git.** Cada perfil concede en solo lectura, uno por uno: `~/.gitconfig`;
+  los `config`, `ignore` y `attributes` de `~/.config/git` (o de
+  `$XDG_CONFIG_HOME/git`); lo que incluyen con `include.path` e
+  `includeIf.<condición>.path`, hasta la profundidad que lee git (10), y nunca
+  un `includeIf` sin condición, que git no incluye; los archivos que nombran
+  `core.excludesFile`, `core.attributesFile` y `commit.template`, y el
+  directorio de `core.hooksPath`, cuyos hooks se ejecutan dentro, confinados.
+  Son 64 rutas como máximo. `~/` sale del HOME que recibe el agente y
+  `~usuario/`, de la base de cuentas, como en git; un `~usuario` que no existe
+  en `include.path` o en una ruta de `core` hace morir a git, y ahí se deja de
+  seguir ese archivo. Un enlace simbólico en el camino, como los de stow o
+  home-manager, se sigue si está fuera de todo grant de escritura, y si está
+  bajo el HOME `run` avisa de qué destino concede; uno que el agente podría
+  cambiar no se sigue. Cada ruta pasa antes las comprobaciones
+  de cualquier otra: se rechazan el HOME y sus ancestros, el conjunto
+  protegido, también por hardlink, y una ruta que pasa por un directorio con
+  nombre de ruta protegida (`.ssh`, `.aws`…) de un HOME ajeno. Tampoco se
+  concede un archivo cuyo contenido parece una credencial, ni un directorio de
+  hooks que contenga un archivo retenido por eso. En la configuración cuentan
+  `http.*.extraHeader`, una URL con contraseña o una URL http(s) con usuario
+  (también en una reescritura `url.*.insteadOf`), una clave con `pass`,
+  `token`, `secret` u `oauth` en el nombre y un `credential.helper` con
+  `password=` o `token=`; una marca de orden de bytes UTF-8 al principio no
+  oculta la primera sección. En `ignore`, `attributes` y la plantilla solo
+  cuentan esas URL: `[Bb]in/` es un patrón, no una sección.
+  `run` avisa con el archivo, la línea y la clave, nunca el valor, y dice qué
+  hará git dentro: sin un `config` no lee su configuración; sin un `ignore`,
+  fallan `git add`, `git commit` y `git status`; sin `attributes`, solo avisa;
+  sin la plantilla, `git commit` falla si no recibe un mensaje; sin los hooks,
+  falla `git commit` cuando debe ejecutar un `pre-commit`. Es una heurística:
+  una credencial con otra forma se concede con su archivo. Lo que incluye o
+  nombra un archivo que el agente puede escribir no se sigue. Necesitan
+  `--allow-read`: un archivo retenido como credencial, el destino de un enlace
+  que el agente podría cambiar, las demás rutas que nombre la configuración
+  (`init.templateDir`, `blame.ignoreRevsFile`, `gpg.ssh.allowedSignersFile`, un
+  programa bajo el HOME…) y lo que apunte `GIT_CONFIG_GLOBAL`. Un directorio de
+  hooks que las comprobaciones rechazan, como el HOME o una ruta protegida, no
+  se concede de ninguna forma. En macOS se salta una ruta que Seatbelt no puede
+  nombrar en una regla (con un carácter de control, o más larga que sus
+  literales); si llega con `--allow-read`, `run` sale con 3.
 - **Entorno.** Las variables cuyo nombre parece una credencial no llegan al
   agente. Con las palabras del nombre separadas por `_`: una que acaba en
   `TOKEN` o contiene `SECRET`, `PASSWORD`, `PASSWD`, `PASSPHRASE` o
@@ -308,9 +334,9 @@ primer `node_modules`, la raíz del virtualenv o la carpeta del programa).
 | --- | --- | --- |
 | Claude Code | Arranca confinado (`claude --version`); un `cat` del HOME recibe `Permission denied` | Linux x86_64, 11-11-2026. Sesión con LLM: `NO_VERIFICADO` |
 | Codex CLI | Arranca confinado (`codex --version`); avisa de que no puede crear alias si falta `~/.codex` | Linux x86_64, 11-11-2026. Sesión con LLM: `NO_VERIFICADO` |
-| git con `~/.gitconfig` y un `include` | Con `--preset claude-code` o `--preset codex`, `git init`, `git commit` y `git log` funcionan y leen el nombre del archivo incluido. Sin perfil, git muere: «fatal: unknown error occurred while reading the configuration files» | Linux x86_64, uid 65534, 11-11-2026 (`tests/test_confine_git.py`) |
-| Firmar commits y credenciales de git | No funcionan dentro: las claves, los agentes y los almacenes de credenciales quedan fuera. `git commit -S` con gpg: «gpg: signing failed: Permission denied», con o sin `gpg-agent` en marcha. `git credential fill` con `credential.helper=store`: «could not read Username» (`~/.git-credentials` está protegido). Firmar con una clave SSH y `git push` por SSH: `NO_VERIFICADO`, no hay `ssh` en la máquina de medida; `~/.ssh` está protegido (V01) y el socket de `ssh-agent` se niega (V16) | Linux x86_64, uid 65534, 11-11-2026 |
-| Sandbox propio del agente anidado | En Linux falla lo que necesita un espacio de nombres de usuario: `unshare -Urm true` funciona sin confinar y confinado responde «unshare: cannot open /proc/self/uid_map: Permission denied». Claude Code 2.1.322 usa bubblewrap para su sandbox en Linux; bwrap no está instalado aquí, así que el sandbox de Claude Code anidado está `NO_VERIFICADO`, igual que el de Codex y Seatbelt dentro de Seatbelt | Linux x86_64, uid 65534, 11-11-2026 |
+| git con su configuración | Con `--preset claude-code` o `--preset codex`, `git init`, `git add`, `git commit` y `git log` funcionan y leen el nombre de un archivo incluido, también con `~/.gitconfig` como enlace de stow, una reescritura `insteadOf` a ssh, `core.excludesFile`, `core.attributesFile`, `commit.template` sin `-m` y un hook `pre-commit` en `core.hooksPath`. Sin perfil, git muere: «fatal: unknown error occurred while reading the configuration files» | Linux x86_64, uid 65534, 11-11-2026 (`tests/test_confine_git.py`). macOS: `NO_VERIFICADO` |
+| Firmar commits y credenciales de git | En Linux no funcionan dentro: las claves, los agentes y los almacenes de credenciales quedan fuera. `git commit -S` con gpg: «gpg: signing failed: Permission denied», con o sin `gpg-agent` en marcha. `git credential fill` con `credential.helper=store`: «could not read Username» (`~/.git-credentials` está protegido); con `credential.helper=cache`: «unable to connect to cache daemon: Operation not permitted». Firmar con una clave SSH y `git push` por SSH: `NO_VERIFICADO`, no hay `ssh` en la máquina de medida; `~/.ssh` está protegido (V01) y el socket de `ssh-agent` se niega (V16). En macOS el llavero sigue al alcance por `securityd` (límite declarado arriba): las credenciales de `osxkeychain`, el helper habitual allí, están `NO_VERIFICADO` y probablemente se pueden usar dentro | Linux x86_64, uid 65534, 11-11-2026. macOS: `NO_VERIFICADO` |
+| Sandbox propio del agente anidado | En Linux se puede crear un espacio de nombres de usuario (`unshare -U true` sale con 0), pero no escribir su `uid_map` (`/proc` está concedido solo en lectura) ni cambiar montajes, y un sandbox anidado como bubblewrap necesita las dos cosas. `unshare -Urm true` funciona sin confinar y confinado responde «unshare: cannot open /proc/self/uid_map: Permission denied»; `unshare -Um true`, «unshare: cannot change root filesystem propagation: Operation not permitted». Claude Code 2.1.322 usa bubblewrap para su sandbox en Linux; bwrap no está instalado aquí, así que el sandbox de Claude Code anidado está `NO_VERIFICADO`, igual que el de Codex y Seatbelt dentro de Seatbelt | Linux x86_64, uid 65534, 11-11-2026 |
 
 Arrancar confinado demuestra que la política deja funcionar al agente; no demuestra
 que todas sus acciones queden cubiertas. `run` registra en el diario la política,
@@ -326,7 +352,7 @@ del kernel si está activo.
 | 0 | Éxito; en `demo`, todos los intentos contados quedaron bloqueados |
 | 1 | `demo`: FALSIFIED · `demo --check`: el documento no se puede leer o su autodigest no cuadra · `log`: cadena rota, diario inutilizable o `--expect-head` ausente |
 | 2 | `demo`: INCONCLUSIVE · uso incorrecto (`run` sin comando, `--pass-env NAME=VALUE`, `--expect-head` mal formado) |
-| 3 | `run`: sin backend de confinamiento, uid 0 sin `--allow-root`, política rechazada, un lanzador que importa de un grant de escritura, diario inutilizable o con más de un enlace, o sin pseudoterminal privado · `demo`: sin backend o diario inutilizable |
+| 3 | `run`: sin backend de confinamiento, uid 0 sin `--allow-root`, política rechazada (en macOS, también si nombra una ruta que Seatbelt no puede escribir en una regla), un lanzador que importa de un grant de escritura, diario inutilizable o con más de un enlace, o sin pseudoterminal privado · `demo`: sin backend o diario inutilizable |
 | 126 | El trampolín rechazó arrancar el comando |
 | 127 | Comando no encontrado |
 | 128 + n | La señal n terminó al agente, o SIGTERM o SIGHUP a `run` terminaron la sesión |

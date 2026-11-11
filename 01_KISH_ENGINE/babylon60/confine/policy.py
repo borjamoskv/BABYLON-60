@@ -97,7 +97,8 @@ PROTECTED_RELATIVE = (
 SHARED_DIR_BITS = stat.S_ISVTX | stat.S_IWOTH
 
 # Agent presets grant only the agent's own state and common install prefixes. Every preset also
-# grants the global git configuration read-only, file by file (gitconfig.py, origin "preset:<name>:git").
+# grants the global git configuration read-only, file by file, and its hooks directory (gitconfig.py,
+# origin "preset:<name>:git").
 PRESETS: dict[str, dict[str, tuple[str, ...]]] = {
     "claude-code": {
         "write": ("~/.claude", "~/.claude.json", "~/.cache/claude"),
@@ -638,6 +639,7 @@ def build_policy(
         add(_expand(path, homes[0]), "ro", "user", strict=True)
     for path in write:
         add(_expand(path, homes[0]), "rw", "user", strict=True)
+    git_links: list[str] = []  # symbolic links git follows to its configuration, readable like links
     if preset:
         # Last, so a file another grant already covers gets no grant of its own, and includes named
         # by a file the agent can write are ignored.
@@ -651,6 +653,7 @@ def build_policy(
             origin=f"preset:{preset}:git",
             skipped=skipped,
             warnings=warnings,
+            links=git_links,
         )
     # Post-pass: mounts below directory grants (bind mounts of protected paths or homes).
     refused = guard.mount_refusals(grants.values())
@@ -661,10 +664,11 @@ def build_policy(
         del grants[grant.path]
         skipped.append(f"{grant.path}: {refused[grant.path]}")
     warnings.extend(guard.warnings)
-    # Symbolic links on the way to the command: Seatbelt checks following a link as a read of the
-    # link itself (Landlock does not mediate it). Only the links are allowed, never their directories.
+    # Symbolic links on the way to the command, and to the git configuration: Seatbelt checks following
+    # a link as a read of the link itself (Landlock does not mediate it). Only the links are allowed,
+    # never their directories.
     readable_links: list[str] = []
-    for link in links:
+    for link in [*links, *git_links]:
         link = _absolute(link)
         try:
             if not stat.S_ISLNK(os.lstat(link).st_mode):
