@@ -31,6 +31,7 @@ GLOBAL_SKILLS_DIR = Path.home() / ".gemini" / "config" / "skills"
 WS_SKILLS_DIR = REPO_ROOT / ".agents" / "skills"
 GLOBAL_SKILLS_JSON = GLOBAL_SKILLS_DIR / "skills.json"
 DOCS_SKILLS_JSON = REPO_ROOT / "docs" / "skills.json"
+KERNEL_ROOT = "cortex-kernel"
 
 
 def _norm_text(s: str) -> str:
@@ -116,8 +117,8 @@ def collect_all_skills() -> Dict[str, Dict[str, Any]]:
     # 1. Parse Root Kernel manifest if present
     kernel_md = GLOBAL_SKILLS_DIR / "KERNEL.md"
     if kernel_md.exists():
-        skills["cortex-kernel"] = {
-            "name": "cortex-kernel",
+        skills[KERNEL_ROOT] = {
+            "name": KERNEL_ROOT,
             "canonical_alias": "kernel-root",
             "display_name": "CORTEX Root Kernel",
             "description": "Manifiesto de invariantes transversales del ecosistema CORTEX.",
@@ -205,7 +206,25 @@ def collect_all_skills() -> Dict[str, Dict[str, Any]]:
 
     scan(GLOBAL_SKILLS_DIR, "global")
     scan(WS_SKILLS_DIR, "workspace")
+    apply_catalog_triggers(skills, load_canonical_data()[0])
     return skills
+
+
+def apply_catalog_triggers(skills: Dict[str, Dict[str, Any]], entries: Dict[str, Any]) -> None:
+    """Merge the canonical catalog's triggers into the physical skills.
+
+    SKILL.md descriptions no longer carry their trigger phrases; sync_skills_registry.py records
+    each skill's declared aliases in the catalog, so the router reads them from there. The kernel
+    root stays one node with its catalog scope and triggers, whether virtual or physical.
+    """
+    for name, data in skills.items():
+        entry = entries.get(name)
+        if not isinstance(entry, dict):
+            continue
+        declared = {str(t).strip().lower() for t in entry.get("triggers", []) if len(str(t).strip()) > 2}
+        data["triggers"] = sorted(set(data["triggers"]) | declared)
+        if name == KERNEL_ROOT:
+            data["scope"] = str(entry.get("scope") or "kernel")
 
 
 def score_skills_for_query(query: str, skills: Dict[str, Dict[str, Any]]) -> List[Tuple[str, float]]:
@@ -220,7 +239,7 @@ def score_skills_for_query(query: str, skills: Dict[str, Dict[str, Any]]) -> Lis
     scored_skills: List[Tuple[str, float]] = []
 
     for s_name, s_data in skills.items():
-        if s_name == "cortex-kernel":
+        if s_name == KERNEL_ROOT:
             continue
         trig_scores: List[float] = []
         for t in s_data.get("triggers", []):
@@ -389,7 +408,7 @@ def cmd_lint() -> bool:
                 errors.append(f"Skill '{name}' referencia POST-CADENA inexistente: '{p}'")
 
     # 4. Trigger collisions
-    skill_list = [s for s in skills.values() if s["name"] != "cortex-kernel"]
+    skill_list = [s for s in skills.values() if s["name"] != KERNEL_ROOT]
     for i in range(len(skill_list)):
         s1 = skill_list[i]
         t1 = set(s1["triggers"])
