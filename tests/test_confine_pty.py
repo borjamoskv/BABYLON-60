@@ -23,6 +23,7 @@ import fcntl
 import json
 import os
 from pathlib import Path
+import re
 import secrets
 import select
 import shlex
@@ -610,14 +611,20 @@ DELAYED = {
 }
 
 
-def _delayed_effect(box: Box, kind: str) -> bool:
+def _delayed_effect(box: Box, kind: str, *, complete: bool = False) -> bool:
+    """Whether the delayed write changed anything; with ``complete``, whether it finished every step.
+
+    The control waits for the complete effect before it resets the files: otherwise its own last
+    step (the second chmod) can land after the reset and be blamed on the confined session.
+    """
     if kind == "hook":
-        return (box.ws / ".git" / "hooks" / "pre-commit").exists()
+        hook = box.ws / ".git" / "hooks" / "pre-commit"
+        return hook.exists() and (not complete or os.access(hook, os.X_OK))
     modes = (
         stat.S_IMODE(os.stat(box.home / ".ssh").st_mode),
         stat.S_IMODE(os.stat(box.home / ".ssh" / "id_rsa").st_mode),
     )
-    return modes != (0o700, 0o600)
+    return modes == (0o755, 0o644) if complete else modes != (0o700, 0o600)
 
 
 @needs_backend
@@ -631,9 +638,9 @@ def test_a_delayed_write_by_a_process_left_behind_never_happens(box: Box, kind: 
 
     subprocess.run(["/bin/sh", "-c", DELAYED[kind]], cwd=str(box.ws), env=box.env(), timeout=60, check=True)
     deadline = time.monotonic() + 10
-    while not _delayed_effect(box, kind) and time.monotonic() < deadline:
+    while not _delayed_effect(box, kind, complete=True) and time.monotonic() < deadline:
         time.sleep(0.05)
-    _control_holds(_delayed_effect(box, kind), f"the delayed {kind} did not happen without babylon60")
+    _control_holds(_delayed_effect(box, kind, complete=True), f"the delayed {kind} did not happen without babylon60")
     (box.ws / ".git" / "hooks" / "pre-commit").unlink(missing_ok=True)
     (box.home / ".ssh").chmod(0o700)
     (box.home / ".ssh" / "id_rsa").chmod(0o600)
@@ -672,8 +679,21 @@ def test_cooked_output_is_what_the_terminal_shows_without_babylon60(box: Box) ->
     control = box.session(["/bin/cat", "random.bin"])
     confined = box.session(box.cli("/bin/cat", "random.bin"))
     assert control.result["exit"] == confined.result["exit"] == 0
-    assert control.screen.endswith(b"last line\r\n") and confined.screen == control.screen
+    assert control.screen.endswith(b"last line\r\n")
+    if sys.platform == "darwin":
+        # Seen on the macOS 15 runner: one newline of 256 KiB came out as CR CR LF. XNU's tty output
+        # (BSD ttyoutput) queues the CR, cannot queue the LF when its queue is full and retries the
+        # whole newline. It can happen in either terminal; a second translation would add ~1,000 CRs.
+        extra = confined.screen.count(b"\r\r\n") - control.screen.count(b"\r\r\n")
+        assert abs(extra) <= 8, extra
+        assert _one_cr(confined.screen) == _one_cr(control.screen)
+    else:
+        assert confined.screen == control.screen
     assert confined.result["modes"] == control.result["modes"]  # the user's modes are back after the session
+
+
+def _one_cr(screen: bytes) -> bytes:
+    return re.sub(rb"\r+\n", b"\r\n", screen)
 
 
 @needs_backend
