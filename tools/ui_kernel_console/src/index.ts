@@ -20,7 +20,9 @@ export {
   rejectionVerdict,
   verifyExecutionPayload,
   verifyExecutionPayloadJson,
+  verifyExecutionPayloadUtf8,
 } from "./crypto/sealVerifier.ts";
+export { MAX_JSON_DEPTH } from "./crypto/jsonText.ts";
 export type { ReceiptVerifier, VerifierEnvironment } from "./crypto/sealVerifier.ts";
 export type {
   AcceptedReceipt,

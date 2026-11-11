@@ -27,6 +27,7 @@ import {
 } from "./canonical.ts";
 import { ambientSubtle, createEd25519Verifier, type Ed25519Verifier, type SubtleVerifyLike } from "./ed25519.ts";
 import { classifyPoint } from "./ed25519Point.ts";
+import { JSON_FORM_DETAIL, jsonTextIssue } from "./jsonText.ts";
 import { FailureCollector, LIMITS, parseExecutionPayload, preview, sanitizeDetail } from "./schema.ts";
 import { topologicalOrder } from "../dag/topology.ts";
 import type {
@@ -400,9 +401,34 @@ export async function verifyExecutionPayloadJson(
   try {
     value = JSON.parse(text) as unknown;
   } catch {
-    return rejectionVerdict("SCHEMA_INVALID", "el texto recibido no es JSON válido");
+    return rejectionVerdict("SCHEMA_INVALID", JSON_FORM_DETAIL);
   }
+  // Mismos textos que acepta `serde_json` en el crate de referencia (ver jsonText.ts).
+  const issue = jsonTextIssue(text);
+  if (issue !== null) return rejectionVerdict("SCHEMA_INVALID", issue);
   return verify(value, policy);
+}
+
+/**
+ * Verifica un recibo tal como llegó del transporte: bytes que deben ser UTF-8 válido. No retira
+ * una marca BOM inicial (`JSON.parse` la rechaza, igual que `serde_json`).
+ */
+export async function verifyExecutionPayloadUtf8(
+  bytes: Uint8Array,
+  policy: TrustPolicy,
+  verify: ReceiptVerifier = verifyExecutionPayload
+): Promise<VerificationVerdict> {
+  if (!(bytes instanceof Uint8Array)) return rejectionVerdict("SCHEMA_INVALID", "el transporte no entregó bytes");
+  if (bytes.length > 3 * MAX_JSON_TEXT_LENGTH) {
+    return rejectionVerdict("SCHEMA_INVALID", `${bytes.length} bytes superan el máximo admitido`);
+  }
+  let text: string;
+  try {
+    text = new TextDecoder("utf-8", { fatal: true, ignoreBOM: true }).decode(bytes);
+  } catch {
+    return rejectionVerdict("SCHEMA_INVALID", "el recibo no es UTF-8 válido");
+  }
+  return verifyExecutionPayloadJson(text, policy, verify);
 }
 
 /** Tope de fallos que lista un veredicto negativo. */
