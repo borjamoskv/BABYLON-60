@@ -310,7 +310,9 @@ def test_run_reexecutes_itself_without_the_withheld_variables(sandbox: dict[str,
 def test_password_conventions_and_urls_with_passwords_are_withheld() -> None:
     """CODE-1 and CODE-3 (round 3): DB_PASS-style names and secret-bearing URLs reached the agent."""
     names = ["SMTP_PASS", "RABBITMQ_DEFAULT_PASS", "REDIS_PASS", "ORACLE_PWD", "DB_PWD", "ADMIN_PWD"]
+    names += ["SMTP_PASS_1", "DB_PASS_PROD"]
     lookalikes = ["PWD", "OLDPWD", "BYPASS", "PASSENGER_APP_ENV", "SSL_BYPASS", "COMPASS_HOME"]
+    lookalikes += ["GIT_ASKPASS", "SSH_ASKPASS", "SUDO_ASKPASS", "PASS_THROUGH"]
     assert [name for name in names if not credential_like(name)] == []
     assert [name for name in lookalikes if credential_like(name)] == []
     secret_values = [
@@ -413,3 +415,15 @@ def test_run_refuses_a_pythonpath_into_a_write_grant(sandbox: dict[str, Path], t
     refused = _launch(sandbox, "-P", env={"PYTHONPATH": pythonpath}, options=("--allow-write", str(shared)))
     assert refused.returncode == 3 and "agent-ran" not in refused.stdout, refused.stderr
     assert f"imports its Python modules from {shared}" in refused.stderr
+
+
+def test_demo_reports_an_unusable_journal_as_unavailable_not_falsified(sandbox: dict[str, Path]) -> None:
+    """Exit 1 means FALSIFIED: an unusable journal is not a vector that passed (CLAIMS-16, round 3)."""
+    garbage = sandbox["journal"].parent / "garbage.db"
+    garbage.parent.mkdir(parents=True, exist_ok=True)
+    garbage.write_bytes(b"not a database" * 300)
+    result = _cli(sandbox, "demo", "--journal", str(garbage))
+    assert result.returncode == 3 and "Unusable journal" in result.stderr, result.stderr
+    assert "Traceback" not in result.stderr
+    unreadable = _cli(sandbox, "demo", "--check", str(garbage))
+    assert unreadable.returncode == 1 and "cannot read" in unreadable.stderr and "Traceback" not in unreadable.stderr

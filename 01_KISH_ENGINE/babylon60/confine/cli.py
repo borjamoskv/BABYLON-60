@@ -53,9 +53,10 @@ CREDENTIAL_VARS = frozenset(
 )
 CREDENTIAL_WORDS = ("SECRET", "PASSWORD", "PASSWD", "PASSPHRASE", "CREDENTIAL")  # anywhere in the name
 CREDENTIAL_LAST_WORDS = ("KEY", "APIKEY", "PAT", "AUTH")  # NAME_KEY, NAME_API_KEY, NAME_PAT, NPM_CONFIG__AUTH
-# The bare password conventions, as the last word after a prefix: DB_PASS, SMTP_PASS, ORACLE_PWD.
-# Alone they are something else: PWD and OLDPWD are the shell's working directories.
-PASSWORD_LAST_WORDS = ("PASS", "PWD")
+# The bare password conventions, as any word but the first: DB_PASS, SMTP_PASS_1, ORACLE_PWD.
+# First or alone they are something else: PWD and OLDPWD are the shell's working directories,
+# and GIT_ASKPASS names a program (ASKPASS is one word).
+PASSWORD_WORDS = ("PASS", "PWD")
 # A value that carries a password whatever its name: a URL with one in its userinfo
 # (DATABASE_URL=postgres://user:secret@host, PIP_EXTRA_INDEX_URL=https://user:token@host).
 URL_WITH_PASSWORD = re.compile(r"[A-Za-z][A-Za-z0-9+.-]*://[^/?#@\s:]*:[^/?#@\s]+@")
@@ -371,8 +372,9 @@ def credential_like(name: str) -> bool:
     Words are separated by ``_``: one ending in ``TOKEN`` (not ``MAX_THINKING_TOKENS``
     or ``TOKENIZERS_PARALLELISM``), one containing ``SECRET``, ``PASSWORD``, ``PASSWD``,
     ``PASSPHRASE`` or ``CREDENTIAL``, a last word ``KEY``, ``APIKEY``, ``PAT`` or ``AUTH``,
-    a last word ``PASS`` or ``PWD`` after a prefix (``SMTP_PASS``, ``ORACLE_PWD``; never
-    ``PWD``), ``..._KEY_ID``, ``OP_SESSION_*`` and the names in ``CREDENTIAL_VARS``.
+    a word ``PASS`` or ``PWD`` other than the first (``SMTP_PASS``, ``DB_PASS_PROD``,
+    ``ORACLE_PWD``; never ``PWD`` itself), ``..._KEY_ID``, ``OP_SESSION_*`` and the names in
+    ``CREDENTIAL_VARS``.
     """
     upper = name.upper()
     if upper in CREDENTIAL_VARS or upper.startswith("OP_SESSION_"):
@@ -382,7 +384,7 @@ def credential_like(name: str) -> bool:
         return False
     if any(word.endswith("TOKEN") or any(part in word for part in CREDENTIAL_WORDS) for word in words):
         return True
-    if len(words) > 1 and words[-1] in PASSWORD_LAST_WORDS:
+    if any(word in PASSWORD_WORDS for word in words[1:]):
         return True
     return words[-1] in CREDENTIAL_LAST_WORDS or words[-2:] == ["KEY", "ID"]
 
@@ -811,10 +813,16 @@ def run_command(args: argparse.Namespace) -> int:
 
 def demo_command(args: argparse.Namespace) -> int:
     from babylon60.confine.demo import check_evidence, run_demo
+    from babylon60.confine.journal import JournalError
     from babylon60.confine.launcher import ConfinementUnavailable
 
     if args.check:
-        result = check_evidence(json.loads(Path(args.check).read_text(encoding="utf-8")))
+        try:
+            document = json.loads(Path(args.check).read_text(encoding="utf-8"))
+        except (OSError, ValueError) as exc:
+            print(f"babylon60 demo --check: cannot read {args.check}: {exc}", file=sys.stderr)
+            return 1  # nothing verified
+        result = check_evidence(document)
         print(f"self digest: {'ok' if result['self_digest_ok'] else 'MISMATCH'}")
         print("  a checksum of the document, not a signature: whoever edits it can recompute it")
         print(
@@ -827,7 +835,7 @@ def demo_command(args: argparse.Namespace) -> int:
             repeat=max(1, args.repeat),
             workers=max(1, args.workers),
         )
-    except ConfinementUnavailable as exc:
+    except (ConfinementUnavailable, JournalError) as exc:  # 1 means FALSIFIED: never for an unusable journal
         print(f"babylon60 demo: {exc}", file=sys.stderr)
         return EXIT_UNAVAILABLE
     print("\n".join(report.transcript))
