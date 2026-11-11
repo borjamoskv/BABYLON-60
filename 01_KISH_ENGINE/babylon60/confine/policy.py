@@ -18,6 +18,7 @@ import os
 import pwd
 import stat
 
+from babylon60.confine import aliases
 from babylon60.confine.journal import digest
 
 # Landlock filesystem access rights (include/uapi/linux/landlock.h).
@@ -231,10 +232,19 @@ def account_home() -> str:
 
 
 def default_homes() -> tuple[str, ...]:
+    """The account home, ``$HOME`` and, under ``sudo``, the home of the user who invoked it."""
     homes = [account_home()]
     env_home = os.environ.get("HOME")
     if env_home and os.path.abspath(env_home) not in homes:
         homes.append(os.path.abspath(env_home))
+    sudo_user = os.environ.get("SUDO_USER")
+    if sudo_user:
+        try:
+            sudo_home = pwd.getpwnam(sudo_user).pw_dir
+        except (KeyError, ValueError, OSError):
+            sudo_home = ""
+        if sudo_home and os.path.abspath(sudo_home) not in homes:
+            homes.append(os.path.abspath(sudo_home))
     return tuple(homes)
 
 
@@ -244,8 +254,47 @@ def _expand(path: str, home: str) -> str:
     return os.path.abspath(path)
 
 
+def _future_ancestry(path: str) -> list[Identity]:
+    """Ancestry of ``path`` or, while it does not exist yet, of the directory it would be created in.
+
+    The longest existing prefix is resolved by the kernel, ``..`` and symbolic
+    links included. The missing rest is applied to that chain the way
+    ``mkdir -p`` lays it out: a name goes one level down into a directory still
+    to be created and ``..`` climbs back up.
+    """
+    head, rest = path, []
+    while True:
+        try:
+            chain = ancestry(head or ".")
+            break
+        except (FileNotFoundError, NotADirectoryError):
+            parent, name = os.path.split(head)
+            if parent == head:
+                raise
+            rest.append(name)
+            head = parent
+    if len(chain) > 1 and not stat.S_ISDIR(os.stat(head or ".").st_mode):
+        # ``ancestry`` takes a file's directory lexically; resolve it as the kernel does, ``..`` included.
+        chain = chain[:1] + ancestry(os.path.dirname(head) or ".")
+    below = 0
+    for name in reversed(rest):
+        if name == "..":
+            if below:
+                below -= 1
+            elif len(chain) > 1:
+                chain = chain[1:]
+        elif name not in ("", "."):
+            below += 1
+    return chain
+
+
 class _Guard:
+    """Identity checks for one policy. Findings that refuse nothing go to ``warnings``."""
+
+    LINK_WARNINGS = 16  # protected files with outside links named one by one; the rest are counted
+
     def __init__(self, homes: Sequence[str], protected: Sequence[str], self_paths: Sequence[str]) -> None:
+        self.warnings: list[str] = []
         self.home_ids: list[set[Identity]] = []  # ancestry of each home, home itself first
         for home in homes:
             try:
@@ -253,6 +302,7 @@ class _Guard:
             except FileNotFoundError:
                 continue
         self.protected_ids: dict[Identity, str] = {}
+        self.protected_parents: dict[Identity, list[Identity]] = {}
         self.protected_chains: list[tuple[str, list[Identity]]] = []
         for path in protected:
             try:
@@ -260,29 +310,140 @@ class _Guard:
             except FileNotFoundError:
                 continue
             self.protected_ids[chain[0]] = path
+            self.protected_parents[chain[0]] = chain[1:2]
             self.protected_chains.append((path, chain))
-        self.self_chains: list[tuple[str, list[Identity]]] = []
-        for path in self_paths:
+        # Directories and regular files below a protected directory: a grant with one of these
+        # identities is another name for protected content (a hardlink or a bind mount).
+        self.members: dict[Identity, str] = {}
+        self._scan_protected()
+        # A self path that does not exist yet (the journal before its first use) is protected
+        # through the directory it will be created in.
+        self.self_chains: list[tuple[str, list[Identity]]] = [(path, _future_ancestry(path)) for path in self_paths]
+
+    def _scan_protected(self) -> None:
+        visited: set[Identity] = set()
+        links: dict[Identity, tuple[str, int, set[tuple[Identity, str]]]] = {}
+        for path, chain in self.protected_chains:
             try:
-                self.self_chains.append((path, ancestry(path)))
+                scan = aliases.scan_tree(path, visited=visited)
+            except NotADirectoryError:
+                if chain[0] in visited:  # the same file through another home
+                    continue
+                visited.add(chain[0])
+                try:
+                    st = os.stat(path)
+                except OSError:
+                    continue
+                if stat.S_ISREG(st.st_mode) and st.st_nlink > 1:
+                    first, nlink, names = links.get(chain[0], (path, st.st_nlink, set()))
+                    names.add((chain[1], os.path.basename(path)))
+                    links[chain[0]] = (min(first, path), nlink, names)
+                continue
             except FileNotFoundError:
                 continue
+            except OSError as exc:
+                self.warnings.append(
+                    f"{path} could not be listed ({exc.strerror}); hardlinks and bind mounts of its entries are not detected"
+                )
+                continue
+            for ident, member in scan.entries.items():
+                self.members.setdefault(ident, member)
+            for item in scan.linked:
+                first, nlink, names = links.get(item.ident, (item.path, item.nlink, set()))
+                names.add(item.dentry)
+                links[item.ident] = (min(first, item.path), nlink, names)
+            if scan.stopped:
+                self.warnings.append(
+                    f"{path}: alias scan stopped at {scan.stopped}; hardlinks and bind mounts of entries beyond it are not detected"
+                )
+            if scan.errors:
+                self.warnings.append(
+                    f"{path}: {len(scan.errors)} directories below it could not be listed (first: {scan.errors[0]}); "
+                    "hardlinks and bind mounts of their entries are not detected"
+                )
+        # A link count above the names found inside the protected paths means a name elsewhere.
+        outside = sorted((path, nlink) for path, nlink, names in links.values() if len(names) < nlink)
+        for path, nlink in outside[: self.LINK_WARNINGS]:
+            self.warnings.append(f"{path} has {nlink} links; another path to it may be readable (declared limit L2)")
+        if len(outside) > self.LINK_WARNINGS:
+            self.warnings.append(
+                f"{len(outside) - self.LINK_WARNINGS} more protected files have links outside the protected paths "
+                "(declared limit L2)"
+            )
 
     def check(self, path: str, access: str, chain: list[Identity]) -> None:
         own = chain[0]
         for ids in self.home_ids:
             if own in ids:
                 raise PolicyError(f"Refusing to grant a home directory or one of its ancestors: {path}")
-        for ident in chain:
+        for index, ident in enumerate(chain):
             if ident in self.protected_ids:
+                if index == 0 and chain[1:2] != self.protected_parents[ident]:
+                    raise PolicyError(f"Refusing an alias of protected {self.protected_ids[ident]}: {path}")
                 raise PolicyError(f"Refusing a grant inside protected path {self.protected_ids[ident]}: {path}")
         for protected, protected_chain in self.protected_chains:
             if own in protected_chain:
                 raise PolicyError(f"Refusing a grant that contains protected path {protected}: {path}")
+        for index, ident in enumerate(chain):  # an ancestor also covers entries beyond the scan bounds
+            if ident in self.members:
+                if index == 0:
+                    raise PolicyError(f"Refusing an alias of protected {self.members[ident]}: {path}")
+                raise PolicyError(f"Refusing a grant inside an alias of protected {self.members[ident]}: {path}")
         if access == "rw":
-            for target, target_chain in self.self_chains:
-                if own in target_chain:
-                    raise PolicyError(f"Refusing write access over the launcher's own state ({target}): {path}")
+            own_state = self._own_state(own)
+            if own_state:
+                raise PolicyError(f"Refusing write access over {own_state}: {path}")
+
+    def _exposed(self, ident: Identity) -> str | None:
+        """What a mount whose root has identity ``ident`` exposes, if ``check`` refuses it for every access."""
+        if any(ident in ids for ids in self.home_ids):
+            return "a home directory or one of its ancestors"
+        if ident in self.protected_ids:
+            return f"protected path {self.protected_ids[ident]}"
+        for protected, protected_chain in self.protected_chains:
+            if ident in protected_chain:
+                return f"an ancestor of protected path {protected}"
+        if ident in self.members:
+            return f"protected {self.members[ident]}"
+        return None
+
+    def _own_state(self, ident: Identity) -> str | None:
+        for target, target_chain in self.self_chains:
+            if ident in target_chain:
+                return f"the launcher's own state ({target})"
+        return None
+
+    def mount_refusals(self, grants: Iterable[Grant]) -> dict[str, str]:
+        """``{path: reason}`` for directory grants with a mount below them that ``check`` would refuse.
+
+        Landlock follows the mount hierarchy of the path used, so a rule on a
+        directory also covers every mount below it, wherever the mounted tree
+        lives. A mount's root is judged as a grant with the directory's access
+        would be: a home or an ancestor of one, a protected path, an ancestor of
+        one or an entry below one, and for write access the launcher's own state.
+        """
+        directories: dict[Identity, list[Grant]] = {}
+        for grant in grants:
+            if grant.is_dir:
+                directories.setdefault((grant.dev, grant.ino), []).append(grant)
+        if not directories:
+            return {}
+        try:
+            mounts = aliases.read_mountinfo()
+        except (OSError, aliases.MountinfoError) as exc:
+            self.warnings.append(f"Mount table unreadable ({exc}); mounts inside the grants were not checked")
+            return {}
+        refusals: dict[str, str] = {}
+        for mount, containing, root in aliases.mounts_beneath(directories, mounts or (), ancestry):
+            exposed = self._exposed(root)
+            for ident in containing:
+                for grant in directories[ident]:
+                    what = exposed or (self._own_state(root) if grant.access == "rw" else None)
+                    if what and grant.path not in refusals:
+                        refusals[grant.path] = (
+                            f"Refusing a grant with a mount of {what} inside it ({mount.mount_point}): {grant.path}"
+                        )
+        return refusals
 
 
 def build_policy(
@@ -376,6 +537,15 @@ def build_policy(
         add(_expand(path, homes[0]), "ro", "user", strict=True)
     for path in write:
         add(_expand(path, homes[0]), "rw", "user", strict=True)
+    # Post-pass: mounts below directory grants (bind mounts of protected paths or homes).
+    refused = guard.mount_refusals(grants.values())
+    strict_tmp = os.path.abspath(private_tmp) if private_tmp else None
+    for grant in [g for g in grants.values() if g.path in refused]:
+        if grant.origin in ("workspace", "user") or grant.path == strict_tmp:
+            raise PolicyError(refused[grant.path])
+        del grants[grant.path]
+        skipped.append(f"{grant.path}: {refused[grant.path]}")
+    warnings.extend(guard.warnings)
     return Policy(workspace_path, homes, protected, tuple(grants.values()), tuple(skipped), tuple(warnings), allow_ptys)
 
 
