@@ -258,7 +258,9 @@ async def test_live_poll_delivers_frames_in_logical_tick_order(monkeypatch: pyte
 
     async def handler(request: httpx.Request) -> httpx.Response:
         if request.url.path == "/advisories":
-            await code4rena_packed.wait()
+            # Bounded: an implementation that polls the feeds one after another must
+            # fail this test (no frames from this feed), not hang the suite.
+            await asyncio.wait_for(code4rena_packed.wait(), 5)
             return httpx.Response(200, json=advisories)
         if request.url.path == "/orgs/code-423n4/repos":
             return httpx.Response(200, json=repositories)
