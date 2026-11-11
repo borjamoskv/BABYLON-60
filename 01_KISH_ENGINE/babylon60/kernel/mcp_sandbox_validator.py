@@ -25,7 +25,7 @@ from .mcp_deductive_engine import McpCandidateContract
 SANDBOX_EXEC = "/usr/bin/sandbox-exec"
 MAX_BYTES = 1024 * 1024
 MAX_TIMEOUT = 30.0
-KILLED_PIPE_DRAIN_SECONDS = 1.0
+_CLEANUP_DRAIN_SECONDS = 1.0
 
 # This trusted bootstrap sets hard resource limits before loading generated code.
 _BOOTSTRAP = """import resource, sys
@@ -246,11 +246,6 @@ async def _run_confined(
         return returncode, out, err
     finally:
 
-        async def discard_until_eof(stream: asyncio.StreamReader | None) -> None:
-            if stream is not None:
-                while await stream.read(65_536):
-                    pass
-
         async def cleanup() -> None:
             # A successful/reaped leader can leave live descendants in its group.
             try:
@@ -261,22 +256,23 @@ async def _run_confined(
                 if not task.done():
                     task.cancel()
             await asyncio.gather(*tasks, return_exceptions=True)
-            # Before CPython 3.13 (gh-119710) Process.wait() resolves only after every
-            # pipe reports EOF, and a reader stopped at the output budget leaves its
-            # pipe paused. Discard what the killed group left so EOF can arrive; the
-            # bound covers a pipe held open by a process that escaped the group.
+
+            # Before Python 3.13, Process.wait() resolves only after every pipe has
+            # disconnected, and a reader stopped at the output budget leaves its
+            # transport paused, so waiting first deadlocked on 3.11/3.12. Drain the
+            # killed group's pipes to EOF (bounded: a process that escaped the group
+            # may hold them) and confirm reaping through returncode, which the child
+            # watcher sets on exit independently of the pipes.
+            async def drain() -> None:
+                for stream in (process.stdout, process.stderr):
+                    if stream is not None:
+                        while await stream.read(65_536):
+                            pass
+
             try:
-                await asyncio.wait_for(
-                    asyncio.gather(
-                        discard_until_eof(process.stdout),
-                        discard_until_eof(process.stderr),
-                        return_exceptions=True,
-                    ),
-                    KILLED_PIPE_DRAIN_SECONDS,
-                )
+                await asyncio.wait_for(drain(), _CLEANUP_DRAIN_SECONDS)
             except asyncio.TimeoutError:
                 pass
-            # The exit status is set when the leader exits, independently of the pipes.
             while process.returncode is None:
                 await asyncio.sleep(0.01)
 

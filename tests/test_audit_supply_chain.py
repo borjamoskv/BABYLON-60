@@ -48,13 +48,14 @@ class SupplyChainTests(unittest.TestCase):
         steps = workflow("conformance.yml")["jobs"]["conformance"]["steps"]
         commands = [s["run"] for s in steps if "run" in s]
         self.assertEqual(commands[0], "uv sync --locked --all-extras")
-        # Every later command reuses that environment or the Cargo lockfile as is.
-        for command in commands[1:]:
-            if command.startswith("uv "):
-                self.assertTrue(command.startswith("uv run --no-sync "), command)
-            else:
-                self.assertRegex(command, r"^cargo build --locked ", command)
+        # The only other command builds, from Cargo.lock, the Rust binary the suite
+        # exercises offline (test_rust_babylon_skills_mcp_stdio_interop); the
+        # conformance script itself runs last without re-resolving.
+        self.assertEqual(commands[1:-1], ["cargo build --locked -p babylon-skills-mcp"])
         self.assertTrue(commands[-1].startswith("uv run --no-sync "))
+        for step in steps:
+            if "uses" in step:
+                self.assertRegex(step["uses"], r"@[0-9a-f]{40}$")
         setup = next(s for s in steps if "setup-uv@" in s.get("uses", ""))
         self.assertRegex(setup["uses"], r"@[0-9a-f]{40}$")
         self.assertRegex(setup["with"]["version"], r"^\d+\.\d+\.\d+$")
