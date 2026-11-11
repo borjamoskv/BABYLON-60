@@ -1,16 +1,45 @@
 """macOS Seatbelt rendering of a confinement policy.
 
-Seatbelt starts from ``(allow default)`` so agents keep network and process
-access; the filesystem rules then deny every home directory (the account home
-from ``pwd``, ``$HOME`` and any synthetic demo home), re-allow the granted
-paths and finally deny the protected set again. In SBPL a later matching rule
-overrides an earlier one; that precedence is exercised by the macOS CI job and
-stays NO_VERIFICADO until it runs there.
+The profile keeps ``(allow default)`` for processes, Mach services and IP
+networking, and narrows the rest:
+
+* reads: every home directory (the account home from ``pwd``, ``$HOME`` and any
+  synthetic demo home) and ``/Users`` are denied, the grants are re-allowed and
+  the protected set is denied again, last;
+* writes: denied everywhere, then allowed only on read-write grants, on the
+  session's own terminals (grants of origin ``tty``) and on ``/dev/null``,
+  ``/dev/zero``, ``/dev/dtracehelper``, ``/dev/tty`` and ``/dev/fd`` (re-opening a
+  descriptor the process already holds). Nothing on ``PATH`` outside the grants,
+  such as ``/opt/homebrew/bin`` or ``/usr/local/bin``, stays writable;
+* hard links and clones: denied unless their source is a grant (clone: any
+  grant; link: read-write grants only, since a link would let writes through to
+  its source). Apple's own version-1 profiles deny ``file-link`` and
+  ``file-clone`` explicitly because ``default`` does not cover them. Ancestors
+  of the protected set can be neither cloned nor renamed, so a protected path
+  created inside a grant after the policy was built cannot be carried away;
+* ``F_MAKECOMPRESSED`` and ``F_TRANSFEREXTENTS``, which change a file through a
+  read-only descriptor, are denied;
+* other terminals (``/dev/ttysN``) are denied unless the policy allows ptys,
+  which also makes ``/dev/ptmx`` and the ttys writable;
+* ``connect`` to pathname Unix sockets is denied except mDNSResponder (DNS) and
+  syslog, unless the launch allows Unix sockets.
+
+Precedence: among rules that carry a filter the last match wins; an unfiltered
+rule is only the operation's fallback, and a rule naming an operation outright
+outranks one that reaches it through a wildcard. Every override below is both
+later and at least as specific, so it holds under either reading.
 
 Seatbelt matches resolved vnode paths (``/var`` is ``/private/var``), so every
-rule is emitted for the logical path and, when it differs, for its real path.
-This is rule rendering, not a root decision: the grants themselves were already
-checked by inode identity in ``policy.py``.
+path rule is emitted for the logical path, its real path and, below a firmlink
+of the data volume (``/Users``, ``/private``, ``/opt``, ``/usr/local``, ...), the
+same path through ``/System/Volumes/Data``. Deny rules also get a regex that
+matches any ASCII letter case, for case-insensitive volumes; allow rules stay
+exact, so a case-sensitive volume never gains a sibling grant. This is rule
+rendering, not a root decision: the grants were already checked by inode
+identity in ``policy.py``.
+
+Seatbelt's runtime behaviour described here is NO_VERIFICADO until the macOS CI
+job runs ``tests/test_confine_seatbelt.py``.
 """
 
 from __future__ import annotations
@@ -23,26 +52,136 @@ from babylon60.kernel.mcp_sandbox_validator import SANDBOX_EXEC, _literal
 
 __all__ = ["SANDBOX_EXEC", "render_profile", "available"]
 
+# Firmlinks from the system volume into the data volume (/usr/share/firmlinks).
+DATA_VOLUME = "/System/Volumes/Data"
+FIRMLINKS = (
+    "/AppleInternal",
+    "/Applications",
+    "/Library",
+    "/System/Library/Caches",
+    "/System/Library/Assets",
+    "/System/Library/PreinstalledAssets",
+    "/System/Library/AssetsV2",
+    "/System/Library/PreinstalledAssetsV2",
+    "/System/Library/CoreServices/CoreTypes.bundle/Contents/Library",
+    "/System/Library/Speech",
+    "/Users",
+    "/Volumes",
+    "/cores",
+    "/opt",
+    "/private",
+    "/usr/local",
+    "/usr/libexec/cups",
+    "/usr/share/snmp",
+)
+DEVICE_WRITES = ("/dev/null", "/dev/zero", "/dev/dtracehelper", "/dev/tty")
+DESCRIPTOR_DIR = "/dev/fd"
+PTY_MASTER = "/dev/ptmx"
+TERMINALS = "^/dev/ttys[0-9]+$"
+TERMINAL_ORIGINS = ("tty", "ptys")
+UNIX_SOCKET_EXCEPTIONS = ("/private/var/run/mDNSResponder", "/private/var/run/syslog")
+MUTATING_FCNTLS = (80, 110)  # F_MAKECOMPRESSED, F_TRANSFEREXTENTS (sys/fcntl.h)
+# sandbox-exec rejects a string literal longer than 1025 bytes and then the whole profile.
+MAX_STRING_BYTES = 1000
+_REGEX_SPECIAL = frozenset(".^$*+?()[]{}|\\")
+
 
 def available() -> bool:
     return os.path.isfile(SANDBOX_EXEC)
 
 
+def _quote(text: str) -> str:
+    quoted = _literal(text)
+    if len(quoted.encode("utf-8")) > MAX_STRING_BYTES:
+        raise ValueError(f"Path too long for a Seatbelt string literal ({len(quoted.encode('utf-8'))} bytes)")
+    return quoted
+
+
+def _under(path: str, root: str) -> bool:
+    return path == root or path.startswith(root + "/")
+
+
+def _data_volume_twin(path: str) -> str | None:
+    """The same path through the other side of a firmlink, if it crosses one."""
+    if _under(path, DATA_VOLUME):
+        rest = path[len(DATA_VOLUME) :]
+        return rest if any(_under(rest, root) for root in FIRMLINKS) else None
+    return DATA_VOLUME + path if any(_under(path, root) for root in FIRMLINKS) else None
+
+
 def _forms(path: str) -> list[str]:
-    forms = [os.path.abspath(path)]
-    real = os.path.realpath(path)
-    if real not in forms:
-        forms.append(real)
+    """Logical path, real path and their data-volume twins, in that order and without repeats."""
+    forms: list[str] = []
+    for base in (os.path.abspath(path), os.path.realpath(path)):
+        for form in (base, _data_volume_twin(base)):
+            if form is not None and form not in forms:
+                forms.append(form)
     return forms
 
 
-def _filters(kind: str, paths: Iterable[str]) -> str:
-    seen: list[str] = []
-    for path in paths:
-        for form in _forms(path):
-            if form not in seen:
-                seen.append(form)
-    return " ".join(f"({kind} {_literal(p)})" for p in seen)
+def _expand(paths: Iterable[str]) -> list[str]:
+    return list(dict.fromkeys(form for path in paths for form in _forms(path)))
+
+
+def _filters(kind: str, paths: Iterable[str]) -> list[str]:
+    return [f"({kind} {_quote(form)})" for form in _expand(paths)]
+
+
+def _rule(action: str, operations: str, filters: Iterable[str]) -> str:
+    return f"({action} {operations} {' '.join(filters)})"
+
+
+def _fold(text: str) -> str:
+    return "".join(char.lower() if char.isascii() else char for char in text)
+
+
+def _any_case(text: str) -> str:
+    """Regex for ``text`` with ASCII letters in either case and metacharacters escaped."""
+    parts: list[str] = []
+    for char in text:
+        if char.isascii() and char.isalpha():
+            parts.append(f"[{char.upper()}{char.lower()}]")
+        elif char in _REGEX_SPECIAL:
+            parts.append("\\" + char)
+        else:
+            parts.append(char)
+    return "".join(parts)
+
+
+def _outermost(paths: Iterable[str]) -> list[str]:
+    """Drop paths already inside another path of the list, compared in any ASCII case."""
+    unique = list(dict.fromkeys(paths))
+    folded = [_fold(path) for path in unique]
+    return [
+        path
+        for path, own in zip(unique, folded)
+        if not any(other != own and own.startswith(other.rstrip("/") + "/") for other in folded)
+    ]
+
+
+def _any_case_filters(paths: Iterable[str]) -> list[str]:
+    """Regex filters for each path and its subtree in any ASCII letter case.
+
+    Siblings share one regex per parent directory, split so that no string
+    literal exceeds ``MAX_STRING_BYTES``.
+    """
+    groups: dict[str, dict[str, None]] = {}
+    for path in _outermost(paths):
+        parent, name = os.path.split(path)
+        if name:
+            groups.setdefault(parent, {})[_any_case(name)] = None
+    filters: list[str] = []
+    for parent, names in groups.items():
+        head, tail = "^" + _any_case(parent.rstrip("/")) + "/(", ")(/.*)?$"
+        chunk: list[str] = []
+        for name in names:
+            candidate = head + "|".join([*chunk, name]) + tail
+            if chunk and len(_literal(candidate).encode("utf-8")) > MAX_STRING_BYTES:
+                filters.append(f"(regex {_quote(head + '|'.join(chunk) + tail)})")
+                chunk = []
+            chunk.append(name)
+        filters.append(f"(regex {_quote(head + '|'.join(chunk) + tail)})")
+    return filters
 
 
 def _ancestors(path: str) -> list[str]:
@@ -56,19 +195,66 @@ def _ancestors(path: str) -> list[str]:
 
 def render_profile(policy: Policy, *, unix_sockets: bool = False) -> str:
     deny_roots = ["/Users", *policy.homes]
-    granted = [g for g in policy.grants if g.origin != "system"]
-    rw = [g.path for g in granted if g.access == "rw"]
-    ro = [g.path for g in granted if g.access == "ro"]
+    terminals = [g for g in policy.grants if g.origin in TERMINAL_ORIGINS]
+    granted = [
+        g
+        for g in policy.grants
+        if g.origin != "system" and g.origin not in TERMINAL_ORIGINS and g.access in ("rw", "ro")
+    ]
     lines = ["(version 1)", "(allow default)"]
-    lines.append(f"(deny file-read* file-write* {_filters('subpath', deny_roots)})")
+    lines.append(
+        _rule(
+            "deny",
+            "file-read* file-write*",
+            [*_filters("subpath", deny_roots), *_any_case_filters(_expand(deny_roots))],
+        )
+    )
+    # Writes, hard links and clones become an allow-list; unfiltered rules are only fallbacks.
+    lines.append("(deny file-write*)")
+    lines.append("(deny file-link file-clone)")
+    fcntls = " ".join(str(command) for command in MUTATING_FCNTLS)
+    lines.append(f"(when (defined? 'system-fcntl) (deny system-fcntl (fcntl-command {fcntls})))")
+    devices = [f"(literal {_quote(path)})" for path in DEVICE_WRITES]
+    lines.append(_rule("allow", "file-write*", [*devices, f"(subpath {_quote(DESCRIPTOR_DIR)})"]))
     metadata = sorted({a for g in granted for a in _ancestors(g.path)})
     if metadata:
-        lines.append(f"(allow file-read-metadata {_filters('literal', metadata)})")
+        lines.append(_rule("allow", "file-read-metadata", _filters("literal", metadata)))
     for grant in granted:
         kind = "subpath" if grant.is_dir else "literal"
-        operations = "file-read* file-write*" if grant.path in rw else "file-read*"
-        if grant.path in rw or grant.path in ro:
-            lines.append(f"(allow {operations} {_filters(kind, [grant.path])})")
+        if grant.access == "rw":
+            operations = "file-read* file-write* file-link file-clone"
+        else:
+            operations = "file-read* file-clone"
+        lines.append(_rule("allow", operations, _filters(kind, [grant.path])))
+    if policy.allow_ptys:
+        lines.append(
+            _rule(
+                "allow", "file-read* file-write*", [f"(literal {_quote(PTY_MASTER)})", f"(regex {_quote(TERMINALS)})"]
+            )
+        )
+    else:
+        lines.append(_rule("deny", "file-read* file-write*", [f"(regex {_quote(TERMINALS)})"]))
+    if terminals:
+        own = [
+            *_filters("literal", [g.path for g in terminals if not g.is_dir]),
+            *_filters("subpath", [g.path for g in terminals if g.is_dir]),
+        ]
+        lines.append(_rule("allow", "file-read* file-write*", own))
+    if not unix_sockets:
+        lines.append("(deny network-outbound (remote unix-socket))")
+        exceptions = [f"(remote unix-socket (path-literal {_quote(path)}))" for path in UNIX_SOCKET_EXCEPTIONS]
+        lines.append(_rule("allow", "network-outbound", exceptions))
     if policy.protected:
-        lines.append(f"(deny file-read* file-write* {_filters('subpath', policy.protected)})")
+        protected = _expand(policy.protected)
+        # A protected path created after the policy was built can sit inside a grant; renaming
+        # or cloning one of its ancestors would carry it past the path rules below.
+        ancestors = sorted({a for path in protected for a in _ancestors(path)})
+        lines.append(_rule("deny", "file-write-unlink file-clone", [f"(literal {_quote(a)})" for a in ancestors]))
+        lines.append(
+            _rule(
+                "deny",
+                "file-read* file-write* file-link file-clone",
+                [*_filters("subpath", policy.protected), *_any_case_filters(protected)],
+            )
+        )
     return "\n".join(lines) + "\n"
