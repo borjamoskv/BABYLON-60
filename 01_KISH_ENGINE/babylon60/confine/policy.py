@@ -179,6 +179,12 @@ def _identity_of_fd(fd: int) -> Identity:
     return st.st_dev, st.st_ino
 
 
+def _absolute(path: str | os.PathLike[str]) -> str:
+    """Absolute path without lexical normalization: the kernel resolves ``..`` after symbolic links."""
+    text = os.fspath(path)
+    return text if os.path.isabs(text) else os.path.join(os.getcwd(), text)
+
+
 def ancestry(path: str | os.PathLike[str]) -> list[Identity]:
     """Identities of ``path`` and every physical ancestor up to ``/``."""
     if not hasattr(os, "O_PATH"):
@@ -188,7 +194,7 @@ def ancestry(path: str | os.PathLike[str]) -> list[Identity]:
     try:
         if not stat.S_ISDIR(os.fstat(fd).st_mode):
             chain.append(_identity_of_fd(fd))
-            parent_path = os.path.dirname(os.path.abspath(path)) or "/"
+            parent_path = os.path.dirname(_absolute(path)) or "/"
             parent = os.open(parent_path, os.O_PATH | os.O_CLOEXEC | os.O_DIRECTORY)
             os.close(fd)
             fd = parent
@@ -210,7 +216,7 @@ def _ancestry_by_stat(path: str | os.PathLike[str]) -> list[Identity]:
     Nothing is opened, so device nodes such as ``/dev/tty`` without a controlling
     terminal and directories without read permission are handled too.
     """
-    current = os.path.abspath(path)
+    current = _absolute(path)
     st = os.stat(current)
     chain: list[Identity] = []
     if not stat.S_ISDIR(st.st_mode):

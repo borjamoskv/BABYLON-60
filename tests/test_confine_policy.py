@@ -160,3 +160,10 @@ def test_stat_ancestry_matches_descriptor_ancestry(layout: dict[str, Path]) -> N
     alias.symlink_to(layout["home"])
     for path in (layout["ws"], layout["home"] / ".ssh" / "id_rsa", alias / "project", Path("/"), Path("/dev/null")):
         assert pol._ancestry_by_stat(path) == pol.ancestry(path), path
+    # ``..`` after a symbolic link is resolved by the kernel, never lexically, on both variants.
+    (layout["home"] / "notes.txt").write_text("x")
+    assert pol._ancestry_by_stat(f"{alias}/../home/notes.txt") == pol.ancestry(f"{alias}/../home/notes.txt")
+    for missing in (f"{alias}/new/..", f"{alias}/new/../.."):
+        for variant in (pol._ancestry_by_stat, pol.ancestry):
+            with pytest.raises(FileNotFoundError):
+                variant(missing)
