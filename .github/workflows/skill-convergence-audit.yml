@@ -46,7 +46,7 @@ jobs:
           python-version: '3.12'
       - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78
       - name: Locked regression suite
-        run: uv run --locked pytest --noconftest tests/test_skill_library_convergence.py tests/test_skill_intent_routing.py tests/test_skill_maintenance.py tests/test_semantic_contracts_gate.py tests/test_skills_manifest.py tests/test_skill_links.py tests/test_skills_installed_distribution.py -q
+        run: uv run --locked --extra dev pytest --noconftest tests/test_skill_library_convergence.py tests/test_skill_intent_routing.py tests/test_skill_maintenance.py tests/test_semantic_contracts_gate.py tests/test_skills_manifest.py tests/test_skill_links.py tests/test_skills_installed_distribution.py -q
       - name: Generate and check distributions
         run: |
           uv run --locked python scripts/c5_skills_ontology/build_skill_library.py --environment codex --output .artifacts/codex

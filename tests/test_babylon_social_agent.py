@@ -89,7 +89,10 @@ def test_d1_otp_extraction():
     # Instagram
     body1 = "Hi babylon60.ai, please use the following code to confirm your identity: 729649 If this wasn't you..."
     assert D1MailListener.extract_otp_from_text(body1) == "729649"
-    assert D1MailListener.detect_platform("security@mail.instagram.com", "instagram@babylon60.com", "Verify") == "instagram"
+    assert (
+        D1MailListener.detect_platform("security@mail.instagram.com", "instagram@babylon60.com", "Verify")
+        == "instagram"
+    )
 
     body2 = "182743 is your Instagram code"
     assert D1MailListener.extract_otp_from_text(body2) == "182743"
@@ -102,7 +105,9 @@ def test_d1_otp_extraction():
     # LinkedIn
     body_li = "LinkedIn: Introduce tu código de verificación 849201 para confirmar linkedin@babylon60.com"
     assert D1MailListener.extract_otp_from_text(body_li) == "849201"
-    assert D1MailListener.detect_platform("security-noreply@linkedin.com", "linkedin@babylon60.com", body_li) == "linkedin"
+    assert (
+        D1MailListener.detect_platform("security-noreply@linkedin.com", "linkedin@babylon60.com", body_li) == "linkedin"
+    )
 
 
 def test_instagram_client_simulation():
@@ -114,7 +119,9 @@ def test_instagram_client_simulation():
     )
     assert res.success
     assert res.is_simulation
+    assert res.media_id is not None
     assert res.media_id.startswith("sim_media_")
+    assert res.container_id is not None
     assert res.container_id.startswith("sim_container_")
 
 
@@ -140,6 +147,7 @@ def test_linkedin_formatting_and_simulation():
     res = client.publish_text_post(post_text, dry_run=True)
     assert res.success
     assert res.is_simulation
+    assert res.post_urn is not None
     assert res.post_urn.startswith("urn:li:share:sim_")
 
 
