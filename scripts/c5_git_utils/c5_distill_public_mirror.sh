@@ -395,6 +395,15 @@ GIT_INDEX_FILE="$WORK/index" git rm --cached -r -q --ignore-unmatch \
     .playwright-mcp \
     docs/security/evidence \
     tools/skill_library \
+    tests/test_project_skills_regressions.py \
+    tests/test_regulatory_native_evidence.py \
+    tests/test_skill_intent_routing.py \
+    tests/test_skill_library_convergence.py \
+    tests/test_skill_maintenance.py \
+    tests/test_swarm100_lot1_private_skill_regressions.py \
+    tests/test_swarm100_lot2_private_skill_regressions.py \
+    tests/test_swarm100_lot12_s5_yt_regressions.py \
+    tests/test_swarm100_round2_private_skill_regressions.py \
     assets/brand/github-art-brut.svg \
     assets/AppIcon.icns \
     assets/babylon60_brutalist_logo_1024.png

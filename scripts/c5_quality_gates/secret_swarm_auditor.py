@@ -127,62 +127,45 @@ PUBLIC_FIXTURE_EXCEPTIONS: dict[tuple[str, str, str], str] = {
         "GENERIC_SECRET",
         "e94cf501a0fef052565a5c0884fb4b8ee185ec725738dbeb4d80af64a854bf7d",
     ): "Synthetic sentinel used to assert that error diagnostics do not echo secrets.",
-    (
-        "docs/security/evidence/local-core-20261030/hardware-final/hardware-receipt.json",
-        "HIGH_ENTROPY_STRING",
-        "d6349e0456f4819d694ff715a7059030f5e553b2ba38718a9c23a0f22e4b661e",
-    ): "Published uncompressed 65-byte public key in the hardware receipt, not a private key.",
-    (
-        "docs/security/evidence/local-core-20261030/hardware-final/observation-executed.json",
-        "HIGH_ENTROPY_STRING",
-        "d6349e0456f4819d694ff715a7059030f5e553b2ba38718a9c23a0f22e4b661e",
-    ): "Observation of the same public key from the executed hardware receipt.",
-    (
-        "docs/security/evidence/local-core-20261030/hardware-final/observation-approved.json",
-        "HIGH_ENTROPY_STRING",
-        "d6349e0456f4819d694ff715a7059030f5e553b2ba38718a9c23a0f22e4b661e",
-    ): "Observation of the same public key from the approved hardware receipt.",
-    (
-        "docs/security/evidence/local-core-20261030/hardware-final/observation-final.json",
-        "HIGH_ENTROPY_STRING",
-        "d6349e0456f4819d694ff715a7059030f5e553b2ba38718a9c23a0f22e4b661e",
-    ): "Final observation of the published hardware public key.",
-    (
-        "docs/security/evidence/local-core-20261030/hardware-final/observation-reopened.json",
-        "HIGH_ENTROPY_STRING",
-        "d6349e0456f4819d694ff715a7059030f5e553b2ba38718a9c23a0f22e4b661e",
-    ): "Reopening observation of the published hardware public key.",
-    (
-        "docs/security/evidence/swarm100-round2-20261028/root-replay/c/results.json",
-        "HIGH_ENTROPY_STRING",
-        "56703976932d712b2e4e8335c4d01df8f138d8e7b908ba1c4ab2bf270760d385",
-    ): "Recorded ciphertext output of the root replay experiment, not a credential.",
-    (
-        "docs/security/evidence/swarm100-round2-20261028/c/results.json",
-        "HIGH_ENTROPY_STRING",
-        "5dcc17a7bace53e10f639767d5aa961cdad46213de636b130ae47d69146b2419",
-    ): "Recorded ciphertext output of the original isolated experiment.",
-    (
-        "docs/security/evidence/swarm100-round3-20261028/03-isolated-fixtures.py",
-        "GENERIC_SECRET",
-        "ca2a0c56154f619f02fb111e523a2a6149cd38e91c0960c82be460f1b5567ef3",
-    ): "Explicit test fixture passed to an isolated transducer during the archived audit.",
-    (
-        "docs/security/evidence/swarm100-lot12-20261030/review_inputs/test_independent_inputs.py",
-        "HIGH_ENTROPY_STRING",
-        "015d4fd09b9cba4e48c8513f2f13fde79cf9761e763690e15e6127aea0c9f1c5",
-    ): "Deterministic repeated input vector used to test the real full default limit.",
-    (
-        "docs/security/evidence/swarm100-lot12-20261030/review_inputs/test_independent_inputs.py",
-        "GENERIC_SECRET",
-        "e3d9492aaee746695480484628be01e33ad27418feefa1b482496c5cf6bd3651",
-    ): "Noncredential OpenRouter client fixture in the independent dispatch audit.",
-    (
-        "docs/security/evidence/swarm100-lot12-20261030/review_queues/independent_worker.mjs",
-        "GENERIC_SECRET",
-        "43eeccf6afd8e94ea043043f7820e0c409e7bc8313f7b568f0ac066036bcae7f",
-    ): "Explicit synthetic secret sentinel in the archived independent queue worker.",
 }
+
+# Exceptions for archived evidence live beside that evidence, so a projection that
+# omits docs/security/evidence/ omits their rules too (no orphan rules, no private
+# paths in the public allowlist). Same exact-triple semantics; malformed data fails closed.
+EVIDENCE_PREFIX = "docs/security/evidence/"
+EVIDENCE_FIXTURE_EXCEPTIONS_PATH = (
+    Path(__file__).resolve().parents[2] / EVIDENCE_PREFIX / "public_fixture_exceptions.json"
+)
+
+
+def _load_evidence_fixture_exceptions(path: Path) -> dict[tuple[str, str, str], str]:
+    if not path.is_file():
+        return {}
+    document = json.loads(path.read_text(encoding="utf-8"))
+    if document.get("schema") != "BABYLON60:PUBLIC_FIXTURE_EXCEPTIONS:v1" or not isinstance(
+        document.get("entries"), list
+    ):
+        raise ValueError("invalid evidence fixture exception document")
+    loaded: dict[tuple[str, str, str], str] = {}
+    for entry in document["entries"]:
+        if not isinstance(entry, dict) or set(entry) != {"path", "pattern", "fingerprint", "reason"}:
+            raise ValueError("invalid evidence fixture exception entry")
+        key = (entry["path"], entry["pattern"], entry["fingerprint"])
+        if (
+            not all(isinstance(value, str) for value in entry.values())
+            or not key[0].startswith(EVIDENCE_PREFIX)
+            or ".." in Path(key[0]).parts
+            or not re.fullmatch(r"[0-9a-f]{64}", key[2])
+            or not entry["reason"].strip()
+        ):
+            raise ValueError("evidence fixture exception outside its contract")
+        if key in loaded or key in PUBLIC_FIXTURE_EXCEPTIONS:
+            raise ValueError("duplicate fixture exception")
+        loaded[key] = entry["reason"]
+    return loaded
+
+
+PUBLIC_FIXTURE_EXCEPTIONS.update(_load_evidence_fixture_exceptions(EVIDENCE_FIXTURE_EXCEPTIONS_PATH))
 
 
 def shannon_entropy(data: str) -> float:
