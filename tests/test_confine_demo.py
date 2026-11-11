@@ -101,3 +101,17 @@ def test_stress_has_no_pass_and_no_witness_event(tmp_path: Path) -> None:
     totals = report.document["totals"]
     assert report.exit_code == 0, report.transcript
     assert totals["passed"] == 0 and totals["inconclusive"] == 0 and totals["unfalsifiable"] == 0
+
+
+@needs_backend
+def test_evidence_check_detects_tampering(tmp_path: Path) -> None:
+    doc = demo.run_demo(journal_path=tmp_path / "journal.db").document
+    assert doc["revision"]["confine_code_blake3"] == demo.code_digest()
+    assert demo.check_evidence(doc) == {
+        "self_digest_ok": True,
+        "code_matches_installation": True,
+        "recorded_code": demo.code_digest(),
+    }
+    tampered = json.loads(json.dumps(doc))
+    tampered["totals"]["passed"] = 0 if doc["totals"]["passed"] else 1
+    assert demo.check_evidence(tampered)["self_digest_ok"] is False

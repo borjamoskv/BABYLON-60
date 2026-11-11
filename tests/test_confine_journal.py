@@ -128,3 +128,21 @@ def test_entries_limit_returns_the_tail(tmp_path: Path) -> None:
             journal.append("vector", {"index": index})
         assert [e.body["index"] for e in journal.entries(limit=2)] == [3, 4]
         assert journal.entries(limit=0) == []
+
+
+def test_append_many_writes_one_contiguous_chained_batch(tmp_path: Path) -> None:
+    with ConfineJournal(tmp_path / "j.db") as journal:
+        journal.append("session_start", {})
+        batch = journal.append_many([("vector", {"index": index}) for index in range(5)])
+        assert [entry.logical_tick for entry in batch] == [2, 3, 4, 5, 6]
+        assert all(later.prev == earlier.digest for earlier, later in zip(batch, batch[1:]))
+        assert journal.append_many([]) == []
+        assert journal.verify().ok and journal.head()[1] == batch[-1].digest
+
+
+def test_failed_batch_leaves_no_partial_events(tmp_path: Path) -> None:
+    with ConfineJournal(tmp_path / "j.db") as journal:
+        journal.append("session_start", {})
+        with pytest.raises(JournalError):
+            journal.append_many([("vector", {"ok": 1}), ("vector", {"bad": math.nan})])
+        assert journal.verify().events == 1

@@ -123,3 +123,16 @@ def test_log_without_journal_is_not_an_error(sandbox: dict[str, Path]) -> None:
     result = _cli(sandbox, "log", "--journal", str(sandbox["journal"]))
     assert result.returncode == 0 and "no journal" in result.stdout
     assert not sandbox["journal"].exists()
+
+
+@needs_backend
+def test_demo_check_verifies_and_rejects_evidence(sandbox: dict[str, Path], tmp_path: Path) -> None:
+    evidence = tmp_path / "evidence.json"
+    assert _cli(sandbox, "demo", "--journal", str(sandbox["journal"]), "--json", str(evidence)).returncode == 0
+    good = _cli(sandbox, "demo", "--check", str(evidence))
+    assert good.returncode == 0 and "self digest: ok" in good.stdout and "same as this installation" in good.stdout
+    document = json.loads(evidence.read_text())
+    document["verdict"] = "EDITED"
+    evidence.write_text(json.dumps(document))
+    bad = _cli(sandbox, "demo", "--check", str(evidence))
+    assert bad.returncode == 1 and "MISMATCH" in bad.stdout

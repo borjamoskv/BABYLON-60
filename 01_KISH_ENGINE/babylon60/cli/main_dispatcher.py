@@ -1083,6 +1083,7 @@ def main() -> None:
     )
     p_demo.add_argument("--json", metavar="PATH", help="Write the evidence document (- for stdout)")
     p_demo.add_argument("--evidence-dir", metavar="DIR", help="Also write demo-<os>-<arch>-<date>.json into DIR")
+    p_demo.add_argument("--check", metavar="FILE", help="Verify a recorded evidence document instead of running")
     p_demo.set_defaults(func=cmd_demo)
 
     p_log = subparsers.add_parser("log", help="Show and verify the confinement journal")

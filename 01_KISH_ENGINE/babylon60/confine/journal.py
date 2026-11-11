@@ -12,6 +12,7 @@ truncation detectable.
 
 from __future__ import annotations
 
+from collections.abc import Sequence
 from dataclasses import dataclass
 from datetime import datetime, timezone
 import json
@@ -126,30 +127,43 @@ class ConfineJournal:
         self.close()
 
     def append(self, kind: str, body: dict[str, Any]) -> Entry:
-        if not isinstance(kind, str) or not kind.strip():
-            raise JournalError("Event kind must be nonempty text")
-        body_text = canonical(body).decode()
+        return self.append_many([(kind, body)])[0]
+
+    def append_many(self, events: Sequence[tuple[str, dict[str, Any]]]) -> list[Entry]:
+        """Append chained events in one transaction: one durable sync per batch, not per event."""
+        prepared: list[tuple[str, dict[str, Any], str]] = []
+        for kind, body in events:
+            if not isinstance(kind, str) or not kind.strip():
+                raise JournalError("Event kind must be nonempty text")
+            prepared.append((kind, body, canonical(body).decode()))
+        if not prepared:
+            return []
         self._conn.execute("BEGIN IMMEDIATE")
         try:
             row = self._conn.execute(
                 "SELECT logical_tick, digest FROM confine_events ORDER BY seq DESC LIMIT 1"
             ).fetchone()
-            tick = (row[0] + 1) if row else 1
+            tick = row[0] if row else 0
             prev = row[1] if row else GENESIS
-            event_digest = digest({"kind": kind, "logical_tick": tick, "prev": prev, "body": body})
             recorded_at = datetime.now(timezone.utc).isoformat(timespec="seconds")
-            cursor = self._conn.execute(
-                "INSERT INTO confine_events (logical_tick, kind, body, prev, digest, recorded_at) "
-                "VALUES (?, ?, ?, ?, ?, ?)",
-                (tick, kind, body_text, prev, event_digest, recorded_at),
-            )
+            entries: list[Entry] = []
+            for kind, body, body_text in prepared:
+                tick += 1
+                event_digest = digest({"kind": kind, "logical_tick": tick, "prev": prev, "body": body})
+                cursor = self._conn.execute(
+                    "INSERT INTO confine_events (logical_tick, kind, body, prev, digest, recorded_at) "
+                    "VALUES (?, ?, ?, ?, ?, ?)",
+                    (tick, kind, body_text, prev, event_digest, recorded_at),
+                )
+                seq = cursor.lastrowid
+                assert seq is not None
+                entries.append(Entry(seq, tick, kind, json.loads(body_text), prev, event_digest, recorded_at))
+                prev = event_digest
             self._conn.execute("COMMIT")
         except BaseException:
             self._conn.execute("ROLLBACK")
             raise
-        seq = cursor.lastrowid
-        assert seq is not None
-        return Entry(seq, tick, kind, json.loads(body_text), prev, event_digest, recorded_at)
+        return entries
 
     def head(self) -> tuple[int, str]:
         row = self._conn.execute("SELECT seq, digest FROM confine_events ORDER BY seq DESC LIMIT 1").fetchone()

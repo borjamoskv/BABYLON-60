@@ -19,7 +19,8 @@ from babylon60.confine.policy import build_policy, default_homes
 
 REQUIRED = os.environ.get("BABYLON60_REQUIRE_SEATBELT") == "1"
 pytestmark = pytest.mark.skipif(
-    sys.platform != "darwin" and not REQUIRED, reason="Seatbelt is macOS-only; BABYLON60_REQUIRE_SEATBELT=1 fails instead"
+    sys.platform != "darwin" and not REQUIRED,
+    reason="Seatbelt is macOS-only; BABYLON60_REQUIRE_SEATBELT=1 fails instead",
 )
 
 

@@ -67,9 +67,15 @@ def test_control_run_reads_the_canary(box: dict[str, object]) -> None:
 def test_capabilities_are_empty_after_the_trampoline(box: dict[str, object]) -> None:
     result = _run(box, ["/bin/true"])
     assert result.returncode == 0
-    assert result.status["caps"]["CapEff"] == "0" * 16
-    assert result.status["caps"]["CapBnd"] == "0" * 16
-    assert result.status["caps_dropped"] is (os.geteuid() == 0)
+    caps = result.status["caps"]
+    assert caps["CapEff"] == caps["CapPrm"] == caps["CapAmb"] == "0" * 16
+    assert result.status["no_new_privs"] == 1
+    if os.geteuid() == 0:
+        # Root held capabilities: the trampoline must also empty the bounding set.
+        assert result.status["caps_dropped"] is True and caps["CapBnd"] == "0" * 16
+    else:
+        # Nothing to drop; NO_NEW_PRIVS already blocks gaining privileges through exec.
+        assert result.status["caps_dropped"] is False
 
 
 def test_insufficient_abi_refuses_before_exec(box: dict[str, object]) -> None:

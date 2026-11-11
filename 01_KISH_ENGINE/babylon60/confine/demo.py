@@ -35,6 +35,8 @@ import tempfile
 import threading
 from typing import Any
 
+from blake3 import blake3
+
 from babylon60.confine import launcher
 from babylon60.confine.journal import ConfineJournal, digest
 from babylon60.confine.policy import build_policy, default_homes
@@ -47,6 +49,7 @@ README_INJECTION = (
 )
 SCHEMA = "babylon60.confine.demo/v1"
 EVIDENCE_DOMAIN = b"BABYLON60-CONFINE-EVIDENCE/v1\x00"
+CODE_DOMAIN = b"BABYLON60-CONFINE-CODE/v1\x00"
 LINUX = sys.platform.startswith("linux")
 
 
@@ -251,17 +254,38 @@ class DemoReport:
     exit_code: int
 
 
+def code_digest() -> str:
+    """BLAKE3 over the confinement sources; survives history rewrites of the public projection."""
+    hasher = blake3(CODE_DOMAIN)
+    for path in sorted(Path(__file__).resolve().parent.glob("*.py")):
+        hasher.update(path.name.encode() + b"\x00" + path.read_bytes() + b"\x00")
+    return hasher.hexdigest()
+
+
 def _revision() -> dict[str, Any]:
     repo = Path(__file__).resolve().parents[3]
+    code = {"confine_code_blake3": code_digest()}
     if not (repo / ".git").exists() or not shutil.which("git"):
         from babylon60.cli.main_dispatcher import VERSION
 
-        return {"source": "installed", "version": VERSION}
+        return {"source": "installed", "version": VERSION, **code}
     head = subprocess.run(["git", "-C", str(repo), "rev-parse", "HEAD"], capture_output=True, text=True)
     dirty = subprocess.run(["git", "-C", str(repo), "status", "--porcelain"], capture_output=True, text=True)
     if head.returncode != 0 or dirty.returncode != 0:
-        return {"source": "unavailable", "reason": "git could not read the checkout"}
-    return {"source": "git", "commit": head.stdout.strip(), "dirty": bool(dirty.stdout.strip())}
+        return {"source": "unavailable", "reason": "git could not read the checkout", **code}
+    return {"source": "git", "commit": head.stdout.strip(), "dirty": bool(dirty.stdout.strip()), **code}
+
+
+def check_evidence(document: dict[str, Any]) -> dict[str, Any]:
+    """Recompute the self digest and compare the code digest with this installation."""
+    body = {k: v for k, v in document.items() if k not in ("self_digest", "recorded_at")}
+    self_ok = digest(body, domain=EVIDENCE_DOMAIN) == document.get("self_digest")
+    recorded = document.get("revision", {}).get("confine_code_blake3")
+    return {
+        "self_digest_ok": self_ok,
+        "code_matches_installation": recorded == code_digest(),
+        "recorded_code": recorded,
+    }
 
 
 def _platform(status: dict[str, Any]) -> dict[str, Any]:
@@ -389,8 +413,12 @@ def run_demo(
                 "revision": revision,
             },
         )
-        for (vector, run_kind, index), attempt in zip(jobs, attempts):
-            journal.append("demo_attempt", {"repeat_index": index, **attempt.as_event()})
+        journal.append_many(
+            [
+                ("demo_attempt", {"repeat_index": index, **attempt.as_event()})
+                for (_v, _r, index), attempt in zip(jobs, attempts)
+            ]
+        )
         end = journal.append("demo_end", {"results_digest": digest(results_section), "verdict": verdict})
         check = journal.verify()
     document: dict[str, Any] = {

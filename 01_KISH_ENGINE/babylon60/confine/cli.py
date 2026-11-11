@@ -204,9 +204,16 @@ def run_command(args: argparse.Namespace) -> int:
 
 
 def demo_command(args: argparse.Namespace) -> int:
-    from babylon60.confine.demo import run_demo
+    from babylon60.confine.demo import check_evidence, run_demo
     from babylon60.confine.launcher import ConfinementUnavailable
 
+    if args.check:
+        result = check_evidence(json.loads(Path(args.check).read_text(encoding="utf-8")))
+        print(f"self digest: {'ok' if result['self_digest_ok'] else 'MISMATCH'}")
+        print(
+            f"confinement code: {'same as this installation' if result['code_matches_installation'] else 'differs from this installation'}"
+        )
+        return 0 if result["self_digest_ok"] else 1
     try:
         report = run_demo(
             journal_path=Path(args.journal) if args.journal else default_journal(),
