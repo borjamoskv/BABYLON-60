@@ -7,85 +7,131 @@ write these files, and the report makes that visible.
 
 Only what a write grant of the policy reaches is compared: a path is writable
 when the identity ``(st_dev, st_ino)`` of a granted directory or file is among
-its physical ancestors, as Landlock decides. Nothing is resolved with
-``realpath``; material outside the write grants cannot change and is skipped.
+its physical ancestors, as Landlock decides. A link is resolved (``realpath``)
+only to find a target to look at; whether that target is writable is decided the
+same way. Material outside the write grants cannot change and is skipped. The
+snapshot after the session runs outside the sandbox, so nothing here runs git or
+any other program: every file is parsed here, and nothing found is ever executed.
 
 Code and configuration (``Report.code``):
 
-* In the workspace, in every directory granted with ``--allow-write`` and in the
-  repository around them: git hooks wherever they live (``<gitdir>/hooks`` and
-  every ``core.hooksPath`` of the system, global, repository and worktree
-  configs, relative ones taken from the working tree), the config files with
-  every ``include.path`` and ``includeIf.*.path``, ``.git`` files that point to
-  a gitdir, ``commondir``, submodule gitdirs (``.git/modules/**``) and the
-  ``.git`` files of their checkouts, linked worktrees (``.git/worktrees/*``),
-  programs that git config names by path (``core.fsmonitor``, filters,
-  ``alias.*`` with ``!`` and the other command keys), hook managers
-  (``.husky/``, ``.pre-commit-config.yaml``, lefthook), direnv's ``.envrc``,
-  ``.vscode/tasks.json`` (tasks may run on folder open) and
-  ``.vscode/settings.json``, ``.mcp.json``, ``.codex/`` and ``.claude/``
-  except its data (``worktrees``) and instruction files.
+* Every project (the workspace and each directory granted with ``--allow-write``)
+  is walked once, breadth first, up to ``MAX_TREE_ENTRIES`` names and
+  ``MAX_DEPTH`` levels. Directories are listed by entry type: an ordinary file
+  is never ``stat``-ed, and nothing is listed below ``.git``, a known gitdir or
+  the agents' data directories. In every directory reached:
+
+  - the files that git hook managers, direnv, package and environment
+    managers, editors and coding agents read from a project directory
+    (``HOOK_MANAGERS``, ``PROJECT_FILES``, ``*.code-workspace``, the run
+    configurations of ``.idea/workspace.xml``), and the agents' directories:
+    ``.claude`` but for its data and instruction files, and ``.cursor``,
+    ``.gemini``, ``.windsurf`` and ``.continue`` whole (their rule, workflow,
+    prompt and command files as instructions, ``AGENT_PROJECT_DIRS``);
+  - a nested repository, compared like the one around the project;
+  - ``node_modules/.bin``, the ``bin`` (``Scripts``) of a virtual environment,
+    and the ``*.pth``, ``sitecustomize.py`` and ``usercustomize.py`` that an
+    interpreter runs at startup from any ``site-packages``: dependency
+    directories are usually kept out of the repository, so out of its diff.
+
+* In every repository found (around a project, nested in one, submodules and
+  linked worktrees): git hooks wherever they live (``<gitdir>/hooks`` and every
+  ``core.hooksPath`` of the system, global, repository and worktree configs,
+  relative ones taken from the working tree), the config files with every
+  ``include.path`` and ``includeIf.*.path`` (one holding only what ``git init``
+  writes runs nothing and is not recorded), ``.git`` files that point to a
+  gitdir, ``commondir``, the programs that git config names by path (every word
+  with a slash of a command value, and the script a shell or an interpreter is
+  given: ``core.fsmonitor``, filters, drivers, ``alias.*`` with ``!``, merge and
+  diff tools, ``interactive.diffFilter`` and the other command keys), and what
+  hides a change from ``git status`` and ``git diff``: ``info/exclude`` and the
+  file ``core.excludesFile`` names, by their patterns, and the paths that the
+  index marks assume-unchanged or skip-worktree (``.git/index: skip-worktree
+  Makefile``), read from the index itself (versions 2 to 4, split or not).
+
 * Under every home directory: what Claude Code and Codex load or run (settings,
-  hooks, plugins, commands, agents, skills, output styles, ``~/.codex/rules``
-  and ``config.toml``, the local launcher ``~/.claude/local``, and scripts and
-  executables anywhere else in ``~/.claude`` and ``~/.codex`` but their data
-  directories), ``~/.claude.json`` by its security-relevant keys only
-  (``CLAUDE_JSON_KEYS``: MCP servers, hooks, permissions, trust and API-key
-  approvals, never its counters and caches), and common startup material
-  (``HOME_STARTUP``: shell rc files, git config, user bin directories,
-  autostart and systemd user units, package manager and editor init files).
+  hooks, plugins, commands, agents, skills, output styles, ``~/.codex/rules``,
+  ``config.toml`` and ``.env``, the local launcher ``~/.claude/local``, and
+  scripts and executables anywhere else in ``~/.claude`` and ``~/.codex`` but
+  their data directories), ``~/.claude.json`` by its security-relevant keys only
+  (``CLAUDE_JSON_KEYS``: MCP servers, hooks, permissions, trust, API-key and
+  external-include approvals, never its counters and caches), the global files
+  of other coding agents (``HOME_AGENT_FILES``), common startup material
+  (``HOME_STARTUP``: shell, tmux and direnv rc files, git config, user bin
+  directories, autostart and systemd user units, package, environment manager
+  and editor init files) and the ``*.pth`` of the user site-packages.
 
 Instructions (``Report.instructions``): ``~/.claude/CLAUDE.md``,
-``~/.claude/rules`` and ``~/.codex/AGENTS.md`` are prompts, not code, but every
-later session of that agent reads them, in every project and also outside the
-sandbox, and no repository diff shows them. ``CLAUDE.md`` and ``AGENTS.md``
-inside a project are project content, reviewed in its own diff: not compared.
+``~/.claude/rules``, ``~/.codex/AGENTS.md``, every file those two pull in with
+``@path`` (``MAX_IMPORT_DEPTH`` deep, whatever its name), Claude Code's
+auto-memory (``~/.claude/projects/*/memory/*.md``), and, in every directory of
+a project, ``CLAUDE.local.md`` and the rule files of other agents
+(``PROJECT_INSTRUCTIONS``): every later session of the agent reads them, also
+outside the sandbox, and no repository diff shows them (``CLAUDE.local.md`` is
+kept out of the repository by design). ``CLAUDE.md`` and ``AGENTS.md`` inside a
+project are project content, reviewed in its own diff: not compared.
 
 A file is opened only after ``lstat`` shows a regular file, with ``O_NOFOLLOW``
 and ``O_NONBLOCK``, and is compared by type, permission bits and content: whole
 up to ``FULL_HASH_BYTES``; a larger (or sparse) file by size, modification and
 change times, inode and its first and last ``CHUNK_BYTES``. Symbolic links are
-compared by their target text and never followed; other types by type and mode.
-Names are bytes, so any file name works; labels escape what is not printable.
-Git configs and pointer files are read for discovery wherever they are, up to
-``CONFIG_BYTES``, never below ``/proc``, ``/sys`` or a protected path. Limits
-per root (``MAX_ROOT_ENTRIES``, ``MAX_DEPTH``) and per snapshot
-(``MAX_ENTRIES``, ``MAX_READ_BYTES``) bound the work; a root that reaches one
-is listed in ``Report.unchecked`` instead of being compared in full.
+compared by their target text; the link of a git hook, a hooks directory, a git
+config, a home startup or agent file or an agent instruction file is also
+followed once, so a target inside a write grant is compared as well. Other types
+are compared by type and mode. Names are bytes, so any file name works; labels
+escape what is not printable. Git configs, pointer files and instruction files
+are read for discovery wherever they are, up to ``CONFIG_BYTES`` each and
+``DISCOVERY_BYTES`` in all, never below ``/proc``, ``/sys`` or a protected path.
+Limits per root (``MAX_ROOT_ENTRIES``, ``MAX_DEPTH``), per project
+(``MAX_TREE_ENTRIES``), for git directories (``MAX_GITDIRS``) and per snapshot
+(``MAX_ENTRIES``, ``MAX_READ_BYTES``) bound the work; reaching one is named in
+``Report.unchecked``, and so is a project directory that cannot be listed (its
+known names are still compared).
 
-Not covered (declared limits): nested repositories that are not submodules,
-scripts that a configuration names outside these locations (git config names
-by path excepted), targets of symbolic links, configuration passed in
-``GIT_CONFIG_*`` environment variables, and changes reverted before the
-session ends.
+Not covered (declared limits): scripts that a configuration names outside these
+locations (git config names by path excepted), targets of other symbolic links,
+``.gitignore`` files (they can hide a new file from ``git status``),
+configuration passed in ``GIT_CONFIG_*`` environment variables, and changes
+reverted before the session ends.
 """
 
 from __future__ import annotations
 
 from collections import deque
-from collections.abc import Iterable, Iterator
+from collections.abc import Collection, Iterable, Iterator, Mapping
 from dataclasses import dataclass, field
 import errno
 import json
 import os
+import re
 import shlex
 import stat
+import struct
 
 from blake3 import blake3
 
 from babylon60.confine.policy import Identity, Policy, ancestry
 
 CODE, INSTRUCTIONS = "code", "instructions"
+# Report.ranks: which labels a report too long to show whole keeps first.
+RANK_HOOK, RANK_GIT, RANK_SETTINGS, RANK_INSTRUCTIONS, RANK_OTHER = range(5)
 FULL_HASH_BYTES = 256 * 1024  # files up to this size are compared by their whole content
 CHUNK_BYTES = 64 * 1024  # larger files: metadata plus their first and last chunk
 MAX_ROOT_ENTRIES = 20_000  # entries examined below one root
+MAX_TREE_ENTRIES = 250_000  # names listed below one project while looking for nested configurations
 MAX_ENTRIES = 100_000  # entries examined in one snapshot
 MAX_READ_BYTES = 256 * 1024 * 1024  # bytes read in one snapshot
 MAX_DEPTH = 32
-CONFIG_BYTES = 1024 * 1024  # git config, include and pointer files read for discovery
+CONFIG_BYTES = 1024 * 1024  # git config, include, pointer and instruction files read for discovery
+DISCOVERY_BYTES = 64 * 1024 * 1024  # all of those, in one snapshot
+MAX_PATH_BYTES = 64 * 1024  # a longer path in a git index makes it unreadable here (git's are far shorter)
 CLAUDE_JSON_BYTES = 16 * 1024 * 1024  # larger, or not a JSON object: compared whole
-MAX_GITDIRS = 256
+INDEX_BYTES = 128 * 1024 * 1024  # a larger git index is named in Report.unchecked
+MAX_HIDDEN = 1_000  # hidden index paths named one by one; more are compared as one set
+MAX_GITDIRS = 256  # git directories in one snapshot: repositories, submodules, linked worktrees
 MAX_INCLUDE_DEPTH = 10  # git's own limit
+MAX_IMPORT_DEPTH = 5  # Claude Code's own limit for @imports
+MAX_IMPORTS = 64  # @import targets followed from one agent instruction file
 MAX_SEARCH_UP = 64  # parent directories searched for the repository around a project
 
 _DOMAIN = b"BABYLON60-CONFINE-PERSISTENCE/v1\x00"
@@ -93,13 +139,8 @@ _CLOEXEC = getattr(os, "O_CLOEXEC", 0)
 _FILE_FLAGS = os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK | os.O_NOCTTY | _CLOEXEC
 _DIR_FLAGS = os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW | _CLOEXEC
 
-# Read by git, by a hook manager, by direnv or by an editor from a project directory.
-PROJECT_FILES = (
-    ".envrc",
-    ".vscode/tasks.json",
-    ".vscode/settings.json",
-    ".mcp.json",
-    ".codex",
+# Git hook managers, read from a project directory: compared in every directory of a project.
+HOOK_MANAGERS = (
     ".husky",
     ".pre-commit-config.yaml",
     "lefthook.yml",
@@ -107,6 +148,51 @@ PROJECT_FILES = (
     "lefthook-local.yml",
     ".lefthook-local.yml",
 )
+# Read from a project directory by direnv, a package or environment manager, an editor or a coding
+# agent, from a copy often kept out of the repository: compared as code in every directory of a project.
+PROJECT_FILES = (
+    ".envrc",
+    ".mcp.json",
+    ".codex",
+    ".vscode/tasks.json",
+    ".vscode/settings.json",
+    ".vscode/mcp.json",
+    ".vscode/launch.json",
+    ".devcontainer",
+    ".devcontainer.json",
+    ".idea/runConfigurations",
+    ".zed/settings.json",
+    ".zed/tasks.json",
+    ".roo/mcp.json",
+    ".kilocode/mcp.json",
+    ".amazonq/mcp.json",
+    ".npmrc",
+    ".yarnrc",
+    ".yarnrc.yml",
+    ".pnpmfile.cjs",
+    ".pnpmfile.js",
+    ".pnpmfile.mjs",
+    "bunfig.toml",
+    ".mise.toml",
+    ".mise.local.toml",
+    "mise.toml",
+    "mise.local.toml",
+    ".mise/config.toml",
+    ".config/mise",
+    ".config/mise.toml",
+    ".config/mise.local.toml",
+    ".tool-versions",
+)
+# Instructions coding agents read from a project directory, kept out of the repository as often as
+# not: compared as instructions in every directory of a project.
+PROJECT_INSTRUCTIONS = ("CLAUDE.local.md", ".cursorrules", ".windsurfrules", ".clinerules", ".roorules")
+# Directories of coding agents in a project, compared whole: as code, but for these entries (instructions).
+AGENT_PROJECT_DIRS = {
+    ".cursor": frozenset({"rules", "commands"}),
+    ".gemini": frozenset({"GEMINI.md"}),
+    ".windsurf": frozenset({"rules", "workflows"}),
+    ".continue": frozenset({"rules", "prompts"}),
+}
 # Startup material under a home, compared only where a write grant reaches it.
 HOME_STARTUP = (
     ".profile",
@@ -119,7 +205,12 @@ HOME_STARTUP = (
     ".zshrc",
     ".zlogin",
     ".zlogout",
+    ".config/zsh",
     ".config/fish",
+    ".tmux.conf",
+    ".config/tmux",
+    ".direnvrc",
+    ".config/direnv",
     ".gitconfig",
     ".config/git",
     ".local/bin",
@@ -135,6 +226,8 @@ HOME_STARTUP = (
     ".npmrc",
     ".yarnrc",
     ".yarnrc.yml",
+    ".config/mise",
+    ".tool-versions",
     ".config/pip",
     ".pip",
     ".pydistutils.cfg",
@@ -152,6 +245,16 @@ HOME_STARTUP = (
     ".emacs.d/init.el",
     ".config/Code/User/settings.json",
     ".config/Code/User/tasks.json",
+    ".config/Code/User/mcp.json",
+)
+# The global files of other coding agents under a home: (path, category).
+HOME_AGENT_FILES = (
+    (".gemini/settings.json", CODE),
+    (".gemini/commands", CODE),
+    (".gemini/GEMINI.md", INSTRUCTIONS),
+    (".cursor/mcp.json", CODE),
+    (".cursor/hooks.json", CODE),
+    (".codeium/windsurf/mcp_config.json", CODE),
 )
 # Top-level entries of the agents' own directories. Data is written by every session and never
 # compared; known code is compared whole; anything else only where it looks like code.
@@ -169,7 +272,7 @@ CLAUDE_HOME_DATA = frozenset(
         "logs",
         "paste-cache",
         "plans",
-        "projects",
+        "projects",  # per-session data, but for the auto-memory in projects/*/memory (instructions)
         "session-env",
         "shell-snapshots",
         "stats-cache.json",
@@ -210,10 +313,11 @@ CODEX_HOME_DATA = frozenset(
         "version.json",
     }
 )
-CODEX_HOME_CODE = frozenset({"config.toml", "prompts", "rules", "skills"})
+CODEX_HOME_CODE = frozenset({".env", "config.toml", "prompts", "rules", "skills"})
 CODEX_INSTRUCTIONS = frozenset({"AGENTS.md", "AGENTS.override.md"})
-# ~/.claude.json keys, at the top level and in each ``projects`` entry, that change what runs or
-# what is allowed without asking. Everything else there (counters, tips, caches) is not compared.
+# ~/.claude.json keys, at the top level and in each ``projects`` entry, that change what runs, what
+# is allowed without asking or what CLAUDE.md may pull in. Everything else there (counters, tips,
+# caches) is not compared.
 CLAUDE_JSON_KEYS = frozenset(
     name.lower()
     for name in (
@@ -231,6 +335,8 @@ CLAUDE_JSON_KEYS = frozenset(
         "enabledPlugins",
         "env",
         "extraKnownMarketplaces",
+        "hasClaudeMdExternalIncludesApproved",
+        "hasClaudeMdExternalIncludesWarningShown",
         "hasTrustDialogAccepted",
         "hasTrustDialogHooksAccepted",
         "hooks",
@@ -268,9 +374,10 @@ CODE_SUFFIXES = (
     b".so",
     b".dylib",
 )
-# Git config keys whose value is a command; a first word with a slash is a program to compare.
+# Git config keys whose value is a command: the programs it names by path are compared.
 _GIT_COMMANDS = frozenset(
     {
+        "core.alternaterefscommand",
         "core.askpass",
         "core.editor",
         "core.fsmonitor",
@@ -280,25 +387,48 @@ _GIT_COMMANDS = frozenset(
         "credential.helper",
         "diff.external",
         "gpg.program",
+        "gpg.ssh.defaultkeycommand",
+        "interactive.difffilter",
+        "sendemail.cccmd",
+        "sendemail.sendmailcmd",
+        "sendemail.smtpserver",
+        "sendemail.tocmd",
         "sequence.editor",
         "uploadpack.packobjectshook",
     }
 )
 _GIT_COMMAND_SUFFIXES = (".clean", ".smudge", ".process", ".driver", ".textconv", ".command", ".program", ".helper")
+_GIT_TOOL_SECTIONS = ("mergetool", "difftool", "browser", "man")  # <section>.<tool>.cmd and .path
 _GIT_BOOLEANS = frozenset({"", "true", "false", "yes", "no", "on", "off", "1", "0"})
+# A command word naming one of these runs its first argument: ``sh tools/x.sh``.
+_SHELLS = frozenset({"sh", "bash", "dash", "zsh", "ksh", "fish", "python", "python3", "node", "perl", "ruby"})
+# Only these lines: what ``git init`` writes, which runs nothing.
+_INIT_CONFIG_LINE = re.compile(
+    rb"\s*(?:\[(?:core|extensions)\]|(?:repositoryformatversion|filemode|bare|logallrefupdates|ignorecase"
+    rb"|precomposeunicode|symlinks|objectformat|refstorage)\s*=\s*(?:true|false|0|1|sha1|sha256|files|reftable))\s*",
+    re.IGNORECASE,
+)
+_IMPORT = re.compile(rb"(?:^|\s)@((?:[^\s\\]|\\ )+)")  # Claude Code's @path, a backslash escaping a space
+_INLINE_CODE = re.compile(rb"`[^`\n]*`")
 
 
 @dataclass(frozen=True)
 class _Root:
     path: bytes
     category: str
-    rule: str  # "all", "code", "hooks", "pointer", "commondir", "claude-home", "codex-home", "claude-project", "claude-json"
+    # "all", "code", "home", "hooks", "config", "pointer", "commondir", "index", "index-sha256", "exclude",
+    # "file", "site-packages", "idea-workspace", "claude-home", "codex-home", "claude-project",
+    # "agent-project:<dir>", "claude-json"
+    rule: str
     expect: bytes | None = None  # "pointer": the gitdir git itself would have it name
+    rank: int = RANK_OTHER
+    follow: bool = False  # symbolic links in it are followed once, so a target in a write grant is compared
 
 
 @dataclass(frozen=True)
 class Snapshot:
-    entries: dict[bytes, tuple[str, str, str]] = field(default_factory=dict)  # path: (category, label, digest)
+    # key: (category, label, digest, rank)
+    entries: dict[bytes, tuple[str, str, str, int]] = field(default_factory=dict)
     unchecked: tuple[str, ...] = ()  # roots not compared in full, and why
     roots: tuple[_Root, ...] = ()  # where it looked, so a later snapshot looks there too
 
@@ -308,10 +438,35 @@ class Report:
     code: tuple[str, ...]  # labels of code and configuration added, modified or removed
     instructions: tuple[str, ...]  # labels of agent instruction files added, modified or removed
     unchecked: tuple[str, ...]  # roots not compared in full in either snapshot
+    # label: RANK_* (git hooks, git configs and the programs they name, settings, instructions, the rest)
+    ranks: Mapping[str, int] = field(default_factory=dict, hash=False)
 
 
 class _Stop(Exception):
     """A limit was reached below the current root."""
+
+
+# (path relative to a project directory, category, rule, rank), compared in every directory of a project.
+_PROJECT: tuple[tuple[bytes, str, str, int], ...] = (
+    *((name.encode(), CODE, "all", RANK_HOOK) for name in HOOK_MANAGERS),
+    *((name.encode(), CODE, "all", RANK_SETTINGS) for name in PROJECT_FILES),
+    *((name.encode(), INSTRUCTIONS, "all", RANK_INSTRUCTIONS) for name in PROJECT_INSTRUCTIONS),
+    (b".idea/workspace.xml", CODE, "idea-workspace", RANK_SETTINGS),
+    (b".claude", CODE, "claude-project", RANK_SETTINGS),
+    *((name.encode(), CODE, f"agent-project:{name}", RANK_SETTINGS) for name in AGENT_PROJECT_DIRS),
+)
+_PROJECT_BY_NAME: dict[bytes, list[tuple[bytes, str, str, int]]] = {}
+for _entry in _PROJECT:
+    _PROJECT_BY_NAME.setdefault(_entry[0].split(b"/", 1)[0], []).append(_entry)
+_TREE_NAMES = frozenset(
+    {*_PROJECT_BY_NAME, b".git", b"node_modules", b"site-packages", b"dist-packages", b"pyvenv.cfg"}
+)
+# Directories the project walk never lists, by the name of the directory holding them: agent data.
+_TREE_PRUNED = {
+    b".claude": frozenset(os.fsencode(name) for name in CLAUDE_HOME_DATA | CLAUDE_PROJECT_DATA),
+    b".codex": frozenset(os.fsencode(name) for name in CODEX_HOME_DATA),
+}
+_NOTHING: frozenset[bytes] = frozenset()
 
 
 def snapshot(policy: Policy, workspace: str, *, home: str | None = None, previous: Snapshot | None = None) -> Snapshot:
@@ -327,6 +482,8 @@ def snapshot(policy: Policy, workspace: str, *, home: str | None = None, previou
         if root.path not in walked:
             walked[root.path] = root
             walker.walk(root)
+    for root in walker.followed:
+        walked.setdefault(root.path, root)
     return Snapshot(walker.entries, tuple(dict.fromkeys(walker.unchecked)), tuple(walked.values()))
 
 
@@ -334,14 +491,16 @@ def changes(before: Snapshot, after: Snapshot) -> Report:
     """Labels of what was added, modified or removed between two snapshots, by category."""
     code: set[str] = set()
     instructions: set[str] = set()
+    ranks: dict[str, int] = {}
     for key in before.entries.keys() | after.entries.keys():
         old, new = before.entries.get(key), after.entries.get(key)
         if old is not None and new is not None and old[2] == new[2]:
             continue
-        category, label, _ = new if new is not None else before.entries[key]
+        category, label, _, rank = new if new is not None else before.entries[key]
         (instructions if category == INSTRUCTIONS else code).add(label)
+        ranks[label] = min(rank, ranks.get(label, rank))
     unchecked = tuple(dict.fromkeys([*before.unchecked, *after.unchecked]))
-    return Report(tuple(sorted(code)), tuple(sorted(instructions)), unchecked)
+    return Report(tuple(sorted(code)), tuple(sorted(instructions)), unchecked, ranks)
 
 
 def printable(text: str | bytes) -> str:
@@ -372,12 +531,19 @@ class _Walker:
             except OSError:
                 continue
             self.denied.add((st.st_dev, st.st_ino))
-        self.entries: dict[bytes, tuple[str, str, str]] = {}
+        self.entries: dict[bytes, tuple[str, str, str, int]] = {}
         self.unchecked: list[str] = []
         self.walked: set[Identity] = set()  # directories compared, under the first name that reached them
         self.recorded: set[Identity] = set()  # other entries compared, likewise
+        self.trees: set[Identity] = set()  # directories the project walk listed
+        self.gitdirs: set[bytes] = set()  # git directories looked at
+        self.gitdirs_full = False
+        self.followed: list[_Root] = []  # targets of symbolic links compared as well
         self.total = 0
         self.read_bytes = 0
+        self.limited = False
+        self.discovered = 0  # bytes read to find what to compare (configs, pointers, instruction files)
+        self.discovery_full = False
 
     # --- what to compare ------------------------------------------------------------------------
 
@@ -386,23 +552,150 @@ class _Walker:
         for grant in self.policy.grants:
             if grant.access == "rw" and grant.is_dir and grant.origin == "user":
                 projects.append(os.fsencode(grant.path))
+        projects = list(dict.fromkeys(projects))
         global_config = _GitConfig(self)
         for path in _global_git_configs(self.home):
             global_config.load(path, base=os.path.dirname(path))
-        yield from (_Root(path, CODE, "all") for path in global_config.files)
-        for project in dict.fromkeys(projects):
+        yield from (_Root(path, CODE, "config", rank=RANK_GIT, follow=True) for path in global_config.files)
+        for project in projects:
             repository = self._repository(project)
             if repository is not None:
                 yield from self._git_roots(repository, global_config)
-            for name in PROJECT_FILES:
-                yield _Root(project + b"/" + name.encode(), CODE, "all")
-            yield _Root(project + b"/.claude", CODE, "claude-project")
+            for relative, category, rule, rank in _PROJECT:
+                yield _Root(project + b"/" + relative, category, rule, rank=rank)
         for home in self.homes:
-            yield _Root(home + b"/.claude", CODE, "claude-home")
-            yield _Root(home + b"/.claude.json", CODE, "claude-json")
-            yield _Root(home + b"/.codex", CODE, "codex-home")
-            for name in HOME_STARTUP:
-                yield _Root(home + b"/" + name.encode(), CODE, "all")
+            yield from self._home_roots(home)
+        for project in projects:  # last: what the roots above name first keeps their rule
+            yield from self._tree(project, global_config)
+
+    def _home_roots(self, home: bytes) -> Iterator[_Root]:
+        yield _Root(home + b"/.claude", CODE, "claude-home", rank=RANK_SETTINGS)
+        yield _Root(home + b"/.claude.json", CODE, "claude-json", rank=RANK_SETTINGS)
+        yield _Root(home + b"/.codex", CODE, "codex-home", rank=RANK_SETTINGS)
+        for name in HOME_STARTUP:
+            yield _Root(home + b"/" + name.encode(), CODE, "home", rank=RANK_SETTINGS, follow=True)
+        for name, category in HOME_AGENT_FILES:
+            yield _Root(home + b"/" + name.encode(), category, "all", rank=RANK_SETTINGS, follow=True)
+        for version in self._listdir(home + b"/.local/lib"):  # user site-packages
+            if version.startswith(b"python"):
+                path = home + b"/.local/lib/" + version + b"/site-packages"
+                yield _Root(path, CODE, "site-packages", rank=RANK_SETTINGS)
+        for version in self._listdir(home + b"/Library/Python"):
+            path = home + b"/Library/Python/" + version + b"/lib/python/site-packages"
+            yield _Root(path, CODE, "site-packages", rank=RANK_SETTINGS)
+        for path in (home + b"/.claude/CLAUDE.md", home + b"/.codex/AGENTS.md", home + b"/.codex/AGENTS.override.md"):
+            yield _Root(path, INSTRUCTIONS, "file", rank=RANK_INSTRUCTIONS, follow=True)
+            yield from self._imports(path, home)
+
+    def _imports(self, start: bytes, home: bytes) -> Iterator[_Root]:
+        """Files the agent instruction file ``start`` pulls in with ``@path``, and those they pull in.
+
+        A relative path is taken from the importing file's directory (and from its target's, when it
+        is a link), ``~`` from ``home``; ``MAX_IMPORT_DEPTH`` hops and ``MAX_IMPORTS`` files at most.
+        """
+        pending: deque[tuple[bytes, int]] = deque([(start, 0)])
+        seen = {start}
+        while pending:
+            path, depth = pending.popleft()
+            if depth >= MAX_IMPORT_DEPTH:
+                continue
+            data = self.discover(path)  # the agent reads through a link
+            if data is None:
+                continue
+            bases = [os.path.dirname(path)]
+            if os.path.islink(path):
+                bases.append(os.path.dirname(os.path.realpath(path)))
+            for value in _import_paths(data):
+                for base in bases:
+                    target = _join(base, value, home)
+                    if target in seen:
+                        continue
+                    if len(seen) > MAX_IMPORTS:
+                        self.unchecked.append(
+                            f"{self.label(start)} (more than {MAX_IMPORTS} @imports: the rest not compared)"
+                        )
+                        return
+                    seen.add(target)
+                    yield _Root(target, INSTRUCTIONS, "file", rank=RANK_INSTRUCTIONS, follow=True)
+                    pending.append((target, depth + 1))
+
+    def _tree(self, project: bytes, global_config: _GitConfig) -> Iterator[_Root]:
+        """The project rules in every directory below ``project``, breadth first and listed once.
+
+        Directories are told apart by their entry type (``d_type``): an ordinary file is never
+        ``stat``-ed. ``.git``, known gitdirs and agent data directories are not listed.
+        """
+        left = MAX_TREE_ENTRIES
+        deep = False
+        pending: deque[tuple[bytes, int]] = deque([(project, 0)])
+        while pending:
+            path, depth = pending.popleft()
+            try:
+                st = os.lstat(path)
+            except OSError:
+                continue
+            ident = (st.st_dev, st.st_ino)
+            if not stat.S_ISDIR(st.st_mode) or ident in self.trees:
+                continue
+            self.trees.add(ident)
+            pruned = _TREE_PRUNED.get(os.path.basename(path), _NOTHING)
+            found: list[tuple[bytes, bool]] = []
+            full = False
+            try:
+                with os.scandir(path) as items:
+                    for item in items:
+                        left -= 1
+                        if left < 0:
+                            full = True
+                            break
+                        name = item.name
+                        directory = item.is_dir(follow_symlinks=False)
+                        if name in _TREE_NAMES or name.endswith(b".code-workspace"):
+                            found.append((name, directory))
+                        if directory and name != b".git" and name not in pruned and item.path not in self.gitdirs:
+                            if depth < MAX_DEPTH:
+                                pending.append((item.path, depth + 1))
+                            else:
+                                deep = True
+            except OSError as exc:
+                # A directory that cannot be listed (mode 0311) still lets a tool open a name in it:
+                # those names are compared, and what lies deeper is named as not compared.
+                self.unchecked.append(f"{self.label(path)} ({_errname(exc)}: nested configs below not compared)")
+                found = [(b".git", True), *((name, False) for name in _PROJECT_BY_NAME)]
+            yield from self._tree_found(path, found, depth, global_config)
+            if full:
+                self.unchecked.append(
+                    f"{self.label(project)} (more than {MAX_TREE_ENTRIES} entries: nested configs beyond this point "
+                    "not compared)"
+                )
+                return
+        if deep:
+            self.unchecked.append(
+                f"{self.label(project)} (deeper than {MAX_DEPTH} levels: nested configs below not compared)"
+            )
+
+    def _tree_found(
+        self, path: bytes, found: list[tuple[bytes, bool]], depth: int, global_config: _GitConfig
+    ) -> Iterator[_Root]:
+        for name, directory in found:
+            if name == b".git":
+                if depth:  # the project's own repository was looked at first
+                    yield from self._git_roots(path, global_config)
+            elif name == b"node_modules":
+                if directory:
+                    yield _Root(path + b"/node_modules/.bin", CODE, "all")
+            elif name in (b"site-packages", b"dist-packages"):
+                if directory:
+                    yield _Root(path + b"/" + name, CODE, "site-packages", rank=RANK_SETTINGS)
+            elif name == b"pyvenv.cfg":  # a virtual environment: its launchers
+                yield _Root(path + b"/pyvenv.cfg", CODE, "all", rank=RANK_SETTINGS)
+                yield _Root(path + b"/bin", CODE, "all")
+                yield _Root(path + b"/Scripts", CODE, "all")
+            elif name.endswith(b".code-workspace"):
+                yield _Root(path + b"/" + name, CODE, "all", rank=RANK_SETTINGS)
+            elif depth:  # in the project's own directory, every project file was named already
+                for relative, category, rule, rank in _PROJECT_BY_NAME[name]:
+                    yield _Root(path + b"/" + relative, category, rule, rank=rank)
 
     def _repository(self, project: bytes) -> bytes | None:
         """The working tree around ``project``: the nearest directory, itself included, holding ``.git``."""
@@ -426,57 +719,81 @@ class _Walker:
         except OSError:
             return
         if not stat.S_ISDIR(st.st_mode):
-            yield _Root(dotgit, CODE, "all")  # a gitdir pointer, or a link
-        gitdir = dotgit if stat.S_ISDIR(st.st_mode) else self._pointer(dotgit, worktree)
+            yield _Root(dotgit, CODE, "all", rank=RANK_GIT)  # a gitdir pointer, or a link
+        if stat.S_ISDIR(st.st_mode):
+            gitdir: bytes | None = dotgit
+        elif stat.S_ISLNK(st.st_mode) and os.path.isdir(dotgit):  # git follows a .git link to a directory
+            gitdir = os.path.realpath(dotgit)
+        else:
+            gitdir = self._pointer(dotgit, worktree)
         if gitdir is None:
             return
         queue: deque[tuple[bytes, bytes | None]] = deque([(gitdir, worktree)])
-        seen: set[bytes] = set()
-        while queue and len(seen) < MAX_GITDIRS:
+        while queue:
             gitdir, tree = queue.popleft()
-            if gitdir in seen:
+            if gitdir in self.gitdirs:
                 continue
-            seen.add(gitdir)
+            if len(self.gitdirs) >= MAX_GITDIRS:
+                if not self.gitdirs_full:
+                    self.gitdirs_full = True
+                    self.unchecked.append(
+                        f"{self.label(dotgit)} (more than {MAX_GITDIRS} git directories: hooks and configs of the "
+                        "rest not compared)"
+                    )
+                return
+            self.gitdirs.add(gitdir)
             common = gitdir
-            pointer = self.read(gitdir + b"/commondir", limit=4096)
+            pointer = self.discover(gitdir + b"/commondir", limit=4096, follow=False)
             if pointer is not None:
-                yield _Root(gitdir + b"/commondir", CODE, "commondir")
+                yield _Root(gitdir + b"/commondir", CODE, "commondir", rank=RANK_GIT)
                 common = _join(gitdir, pointer.strip(), self.home)
             config = _GitConfig(self)
             config.load(common + b"/config", base=common)
             config.load(gitdir + b"/config.worktree", base=gitdir)
-            yield from (_Root(path, CODE, "all") for path in config.files)
+            yield from (_Root(path, CODE, "config", rank=RANK_GIT, follow=True) for path in config.files)
             for value in config.values("core.worktree"):
                 tree = _join(gitdir, value, self.home)
-            yield _Root(common + b"/hooks", CODE, "hooks")
+            sha256 = any(value.lower() == b"sha256" for value in config.values("extensions.objectformat"))
+            yield _Root(gitdir + b"/index", CODE, "index-sha256" if sha256 else "index", rank=RANK_GIT)
+            yield _Root(common + b"/info/exclude", CODE, "exclude", rank=RANK_GIT)
+            yield _Root(common + b"/hooks", CODE, "hooks", rank=RANK_HOOK, follow=True)
             for source in (config, global_config):
                 for value in source.values("core.hookspath"):
-                    yield _Root(_join(tree or gitdir, value, self.home), CODE, "hooks")
+                    yield _Root(_join(tree or gitdir, value, self.home), CODE, "hooks", rank=RANK_HOOK, follow=True)
+                for value in source.values("core.excludesfile"):
+                    yield _Root(_join(tree or gitdir, value, self.home), CODE, "exclude", rank=RANK_GIT)
                 for program in source.programs():
-                    yield _Root(_join(tree or gitdir, program, self.home), CODE, "all")
+                    yield _Root(_join(tree or gitdir, program, self.home), CODE, "all", rank=RANK_GIT)
             # Submodule checkouts: a .git file naming the module's gitdir, or an old .git directory.
             if tree is not None:
                 for name, path in self._submodules(tree):
                     checkout = _join(tree, path, self.home)
                     if os.path.isdir(checkout + b"/.git") and not os.path.islink(checkout + b"/.git"):
                         queue.append((checkout + b"/.git", checkout))
-                    else:
-                        yield _Root(checkout + b"/.git", CODE, "pointer", common + b"/modules/" + name)
+                        continue
+                    module = common + b"/modules/" + name
+                    yield _Root(checkout + b"/.git", CODE, "pointer", module, rank=RANK_GIT)
+                    try:
+                        declared = os.path.isdir(module)
+                    except ValueError:  # a submodule name with a NUL byte
+                        declared = False
+                    if declared:  # before the scan below: modules it finds cannot push these past MAX_GITDIRS
+                        queue.append((module, checkout))
             for module in self._module_gitdirs(common + b"/modules"):
                 queue.append((module, None))
             if common == gitdir:  # linked worktrees: the admin directory and the .git file of the checkout
                 for linked in self._listdir(common + b"/worktrees"):
                     entry = common + b"/worktrees/" + linked
-                    target = self.read(entry + b"/gitdir", limit=4096)
+                    target = self.discover(entry + b"/gitdir", limit=4096, follow=False)
                     linked_tree = None
                     if target is not None and target.strip():
                         linked_pointer = _join(entry, target.strip(), self.home)
-                        yield _Root(linked_pointer, CODE, "pointer", entry)
+                        yield _Root(linked_pointer, CODE, "pointer", entry, rank=RANK_GIT)
                         linked_tree = os.path.dirname(linked_pointer)
                     queue.append((entry, linked_tree))
 
     def _pointer(self, dotgit: bytes, worktree: bytes) -> bytes | None:
-        data = self.read(dotgit, limit=4096)
+        data = self.discover(dotgit, limit=4096, follow=False)
         if data is None:
             return None
         line = data.split(b"\n", 1)[0].strip()
@@ -508,12 +825,15 @@ class _Walker:
                 continue
             if depth < MAX_DEPTH:
                 pending.extend((path + b"/" + name, depth + 1) for name in names)
+        if pending:
+            limit = f"{MAX_GITDIRS} submodule gitdirs" if found >= MAX_GITDIRS else f"{MAX_ROOT_ENTRIES} entries"
+            self.unchecked.append(f"{self.label(modules)} (more than {limit}: the rest not compared)")
 
     def _listdir(self, path: bytes) -> list[bytes]:
         """Names in the directory ``path`` (not a link to one), sorted; empty when it cannot be listed."""
         try:
             fd = os.open(path, _DIR_FLAGS)
-        except OSError:
+        except (OSError, ValueError):
             return []
         try:
             names: list[bytes] = []
@@ -529,6 +849,24 @@ class _Walker:
             os.close(fd)
 
     # --- reading --------------------------------------------------------------------------------
+
+    def discover(self, path: bytes, *, limit: int = CONFIG_BYTES, follow: bool = True) -> bytes | None:
+        """``read`` for discovery (git configs, pointers, instruction files): through a final link as
+        git and the agents read them, within ``DISCOVERY_BYTES`` per snapshot; beyond it nothing more
+        is read for discovery, and that is named once in ``Report.unchecked``."""
+        if self.discovered > DISCOVERY_BYTES:
+            if not self.discovery_full:
+                self.discovery_full = True
+                self.unchecked.append(
+                    f"{self.label(path)} and what follows it (more than {DISCOVERY_BYTES} bytes of configs and "
+                    "instruction files read: what they name is not compared)"
+                )
+            return None
+        data = self.read(path, limit=limit)
+        if data is None and follow and os.path.islink(path):
+            data = self.read(os.path.realpath(path), limit=limit)
+        self.discovered += len(data or b"")
+        return data
 
     def read(self, path: bytes, *, limit: int = CONFIG_BYTES) -> bytes | None:
         """Up to ``limit`` bytes of the regular file ``path``, for discovery; None when it is not one.
@@ -569,6 +907,13 @@ class _Walker:
         if b"\x00" in root.path:  # _join cuts values at NUL; anything else holding one is not a path
             self.unchecked.append(f"{label} (not a path)")
             return
+        # Every root counts: the project walk yields one per file it finds, as many as a project holds.
+        self.total += 1
+        if self.total > MAX_ENTRIES or self.read_bytes > MAX_READ_BYTES:
+            if not self.limited:
+                self.limited = True
+                self.unchecked.append(f"{label} and what follows it (snapshot limits reached)")
+            return
         try:
             st = os.lstat(root.path)
             chain = _physical_chain(root.path, st)
@@ -580,13 +925,19 @@ class _Walker:
         if not chain or chain[0] != (st.st_dev, st.st_ino):
             self.unchecked.append(f"{label} (changed while it was being compared)")
             return
+        if root.follow and stat.S_ISLNK(st.st_mode):
+            self._follow(root.path, root.category, root.rule, root.rank)
         writable = bool(self.rw.intersection(chain))
         try:
             if not stat.S_ISDIR(st.st_mode):
                 if writable and not self._standard(root):
-                    self._file(None, root.path, root.path, st, root.category, root.rule)
+                    self._file(None, root.path, root.path, st, root.category, root.rule, root.rank)
                 return
+            if root.rule == "file":
+                return  # an instruction file is a file
             if not writable and chain[0] not in self.on_path:
+                if root.follow:
+                    self._follow_links(root)
                 return  # nothing below it can change
             if chain[0] in self.walked:
                 return  # the same directory under another name
@@ -595,7 +946,9 @@ class _Walker:
             try:
                 if _identity(os.fstat(fd)) != chain[0]:
                     raise _Stop("changed while it was being compared")
-                self._directory(fd, root.path, root.rule, root.category, writable, 0, [MAX_ROOT_ENTRIES])
+                self._directory(
+                    fd, root.path, root.rule, root.category, writable, 0, [MAX_ROOT_ENTRIES], root.rank, root.follow
+                )
             finally:
                 os.close(fd)
         except _Stop as stop:
@@ -603,13 +956,51 @@ class _Walker:
         except OSError as exc:
             self.unchecked.append(f"{label} ({_errname(exc)})")
 
-    def _standard(self, root: _Root) -> bool:
-        """Whether ``root`` holds what git itself writes there (``git worktree add``, ``git submodule add``).
+    def _follow(self, link: bytes, category: str, rule: str, rank: int) -> None:
+        """Compare what the symbolic link ``link`` resolves to as well, where a write grant reaches it.
 
-        ``commondir`` of a linked worktree is ``../..``; the ``.git`` file of a linked worktree or
-        submodule checkout names the gitdir git made for it. Those run nothing and are not recorded,
-        so creating a worktree or a submodule is not reported; any other content is compared.
+        Followed once: links found in the target are compared as links. A directory reached twice
+        is compared once (``walked``), so a cycle ends.
         """
+        try:
+            target = os.path.realpath(link)
+        except (OSError, ValueError):
+            return
+        if target == link:
+            return
+        root = _Root(target, category, rule, rank=rank)
+        self.followed.append(root)
+        self.walk(root)
+
+    def _follow_links(self, root: _Root) -> None:
+        """Targets of the symbolic links directly in ``root``, a directory that no write grant reaches."""
+        links: list[bytes] = []
+        try:
+            with os.scandir(root.path) as items:
+                for count, item in enumerate(items):
+                    if count >= MAX_ROOT_ENTRIES:
+                        break
+                    if item.is_symlink():
+                        links.append(item.path)
+        except OSError:
+            return
+        for link in links:
+            child = _child_rule(root.rule, os.path.basename(link))
+            if child is not None:
+                self._follow(link, child[1] or root.category, child[0], root.rank)
+
+    def _standard(self, root: _Root) -> bool:
+        """Whether ``root`` holds what git itself writes there (``git init``, ``git worktree add``,
+        ``git submodule add``).
+
+        A config with only what ``git init`` writes; ``commondir`` of a linked worktree, ``../..``;
+        the ``.git`` file of a linked worktree or submodule checkout, naming the gitdir git made for
+        it. Those run nothing and are not recorded, so making a repository, a worktree or a
+        submodule is not reported; any other content is compared.
+        """
+        if root.rule == "config":
+            data = self.read(root.path, limit=4097)
+            return data is not None and len(data) <= 4096 and _init_config(data)
         if root.rule == "commondir":
             return (self.read(root.path, limit=4096) or b"").strip() == b"../.."
         if root.rule != "pointer" or root.expect is None:
@@ -621,14 +1012,26 @@ class _Walker:
             return False
 
     def _directory(
-        self, fd: int, path: bytes, rule: str, category: str, writable: bool, depth: int, budget: list[int]
+        self,
+        fd: int,
+        path: bytes,
+        rule: str,
+        category: str,
+        writable: bool,
+        depth: int,
+        budget: list[int],
+        rank: int,
+        follow: bool,
     ) -> None:
         names: list[bytes] = []
-        with os.scandir(fd) as items:
-            for item in items:
-                names.append(os.fsencode(item.name))
-                if len(names) > budget[0]:
-                    raise _Stop(f"more than {MAX_ROOT_ENTRIES} entries")
+        if rule == "claude-project-slug":  # only its memory: never list the sessions
+            names.append(b"memory")
+        else:
+            with os.scandir(fd) as items:
+                for item in items:
+                    names.append(os.fsencode(item.name))
+                    if len(names) > budget[0]:
+                        raise _Stop(f"more than {MAX_ROOT_ENTRIES} entries")
         for name in sorted(names):
             child = _child_rule(rule, name)
             if child is None:
@@ -647,13 +1050,15 @@ class _Walker:
                 continue
             except OSError as exc:
                 if writable:
-                    self._record(child_path, child_category, f"error:{_errname(exc)}")
+                    self._record(child_path, child_category, f"error:{_errname(exc)}", rank=rank)
                 continue
             ident = _identity(st)
             child_writable = writable or ident in self.rw
             if not stat.S_ISDIR(st.st_mode):
                 if child_writable:
-                    self._file(fd, name, child_path, st, child_category, child_rule)
+                    self._file(fd, name, child_path, st, child_category, child_rule, rank)
+                if follow and stat.S_ISLNK(st.st_mode):
+                    self._follow(child_path, child_category, child_rule, rank)
                 continue
             if not child_writable and ident not in self.on_path:
                 continue
@@ -666,25 +1071,49 @@ class _Walker:
                 sub = os.open(name, _DIR_FLAGS, dir_fd=fd)
             except OSError as exc:
                 if child_writable:
-                    self._record(child_path, child_category, f"error:{_errname(exc)}")
+                    self._record(child_path, child_category, f"error:{_errname(exc)}", rank=rank)
                 continue
             try:
                 if _identity(os.fstat(sub)) != ident:
                     raise _Stop("changed while it was being compared")
-                self._directory(sub, child_path, child_rule, child_category, child_writable, depth + 1, budget)
+                self._directory(
+                    sub, child_path, child_rule, child_category, child_writable, depth + 1, budget, rank, follow
+                )
             finally:
                 os.close(sub)
 
-    def _file(self, dir_fd: int | None, name: bytes, path: bytes, st: os.stat_result, category: str, rule: str) -> None:
+    def _file(
+        self, dir_fd: int | None, name: bytes, path: bytes, st: os.stat_result, category: str, rule: str, rank: int
+    ) -> None:
         """Compare one entry that is not a directory, once per identity: a file reachable under
         another name (through a linked worktree's ``commondir``, or a hard link) keeps the key of
         the first name that reached it."""
         if _identity(st) in self.recorded:
             return
+        if rule == "claude-project-slug" or (rule == "memory" and not name.lower().endswith(b".md")):
+            return  # session data: ~/.claude/projects holds a directory per project, its memory in markdown
+        regular = stat.S_ISREG(st.st_mode)
         if rule == "claude-json":
             self.recorded.add(_identity(st))
-            self._claude_json(path, st, category)
+            self._claude_json(path, st, category, rank)
             return
+        if regular and rule in ("index", "index-sha256"):
+            self.recorded.add(_identity(st))
+            self._index(path, st, 32 if rule == "index-sha256" else 20, rank)
+            return
+        if regular and rule in ("exclude", "idea-workspace"):
+            data = self.read(path, limit=CONFIG_BYTES + 1)
+            if data is not None and len(data) <= CONFIG_BYTES:
+                self.read_bytes += len(data)
+                self.recorded.add(_identity(st))
+                parts = _exclude_patterns(data) if rule == "exclude" else _idea_run_configs(data)
+                if parts:  # nothing that hides or runs: not recorded
+                    hasher = blake3(_DOMAIN + rule.encode() + b"\x00")
+                    for part in parts:
+                        hasher.update(part + b"\x00")
+                    self._record(path, category, hasher.hexdigest(), rank=rank)
+                return
+            # larger than what is parsed, or raced: compared whole below
         try:
             digest, head = self._digest(dir_fd, name, st)
         except OSError as exc:
@@ -692,7 +1121,7 @@ class _Walker:
         if rule == "code" and not _looks_like_code(name, st, head):
             return
         self.recorded.add(_identity(st))
-        self._record(path, category, digest)
+        self._record(path, category, digest, rank=rank)
 
     def _digest(self, dir_fd: int | None, name: bytes, st: os.stat_result) -> tuple[str, bytes]:
         """Digest of one entry, and the first bytes of a regular file (to recognise ``#!``)."""
@@ -724,7 +1153,7 @@ class _Walker:
         finally:
             os.close(fd)
 
-    def _claude_json(self, path: bytes, st: os.stat_result, category: str) -> None:
+    def _claude_json(self, path: bytes, st: os.stat_result, category: str, rank: int) -> None:
         """``~/.claude.json`` by its security-relevant keys; the whole file when it is not a JSON object."""
         data = b""
         if stat.S_ISREG(st.st_mode) and st.st_size <= CLAUDE_JSON_BYTES:
@@ -740,15 +1169,70 @@ class _Walker:
                 digest, _ = self._digest(None, path, st)
             except OSError as exc:
                 digest = f"error:{_errname(exc)}"
-            self._record(path, category, digest)
+            self._record(path, category, digest, rank=rank)
             return
         label = self.label(path)
         for name, value in selected.items():
             key = path + b"#" + name.encode("utf-8", "surrogatepass")
-            self._record(key, category, value, f"{label}: {printable(name)}")
+            self._record(key, category, value, f"{label}: {printable(name)}", rank)
 
-    def _record(self, path: bytes, category: str, digest: str, label: str | None = None) -> None:
-        self.entries[path] = (category, label or self.label(path), digest)
+    def _index(self, path: bytes, st: os.stat_result, hash_size: int, rank: int) -> None:
+        """The paths a git index hides from ``git status`` and ``git diff``: one entry each, keyed
+        beside the index (``.git/index: skip-worktree Makefile``); more than ``MAX_HIDDEN``, one set."""
+        label = self.label(path)
+        if st.st_size > INDEX_BYTES:
+            self.unchecked.append(f"{label} (larger than {INDEX_BYTES} bytes: hidden paths not compared)")
+            return
+        data = self.read(path, limit=INDEX_BYTES)
+        if data is None:
+            return
+        self.read_bytes += len(data)
+        try:
+            hidden = self._hidden(path, data, hash_size)
+        except (ValueError, IndexError, struct.error) as exc:
+            self.unchecked.append(f"{label} ({exc}: hidden paths not compared)")
+            return
+        if len(hidden) > MAX_HIDDEN:
+            hasher = blake3(_DOMAIN + b"hidden\x00")
+            for flag, name in hidden:
+                hasher.update(flag.encode() + b"\x00" + name + b"\x00")
+            self._record(path + b"\x00hidden", CODE, hasher.hexdigest(), f"{label}: {len(hidden)} hidden paths", rank)
+            return
+        for flag, name in hidden:
+            key = path + b"\x00" + flag.encode() + b"\x00" + name
+            self._record(key, CODE, "hidden", f"{label}: {flag} {printable(name)}", rank)
+
+    def _hidden(self, path: bytes, data: bytes, hash_size: int) -> list[tuple[str, bytes]]:
+        index = parse_index(data, hash_size)
+        hidden = [(flag, name) for _, flag, name in index.hidden]
+        if index.link is not None:  # a split index: most entries live in the shared index beside it
+            shared_hash, replace = index.link
+            shared_path = os.path.dirname(path) + b"/sharedindex." + shared_hash.hex().encode()
+            shared_data = self.read(shared_path, limit=INDEX_BYTES)
+            if shared_data is None:
+                raise ValueError("split index without its shared index")
+            self.read_bytes += len(shared_data)
+            replaced = dict(zip(replace, index.replaced))  # shared position: flags of the entry replacing it
+            shared = parse_index(shared_data, hash_size, names=replaced.keys())
+            if shared.link is not None or shared.replaced:
+                raise ValueError("not a shared index")
+            hidden += [(flag, name) for position, flag, name in shared.hidden if position not in replaced]
+            for position, flags in replaced.items():
+                if position not in shared.names:
+                    raise ValueError("split index names an entry its shared index lacks")
+                hidden += [(flag, shared.names[position]) for flag in flags]
+        elif index.replaced:
+            raise ValueError("entries without a path")
+        return sorted(set(hidden))
+
+    def _record(
+        self, path: bytes, category: str, digest: str, label: str | None = None, rank: int = RANK_OTHER
+    ) -> None:
+        if category == INSTRUCTIONS:
+            rank = RANK_INSTRUCTIONS
+        elif rank == RANK_SETTINGS and path.lower().endswith(b".md"):
+            rank = RANK_OTHER  # bulk command and skill markdown after the settings themselves
+        self.entries[path] = (category, label or self.label(path), digest, rank)
 
     def label(self, path: bytes) -> str:
         """``path`` relative to the workspace, as ``~/...`` under the first home, or absolute."""
@@ -775,7 +1259,7 @@ class _GitConfig:
 
     def load(self, path: bytes, *, base: bytes, depth: int = 0) -> None:
         self.files.append(path)
-        data = self.walker.read(path)
+        data = self.walker.discover(path)  # git reads a config through a link
         if data is None:
             return
         for name, value in parse_git_config(data):
@@ -793,15 +1277,8 @@ class _GitConfig:
     def programs(self) -> Iterable[bytes]:
         """Programs named by path in command keys (``core.fsmonitor``, filters, ``!`` aliases, ...)."""
         for name, value in self.entries:
-            if not _is_command(name, value):
-                continue
-            text = value[1:] if value.startswith("!") else value
-            try:
-                words = shlex.split(text)
-            except ValueError:
-                words = text.split()
-            if words and "/" in words[0]:
-                yield os.fsencode(words[0])
+            if _is_command(name, value):
+                yield from (os.fsencode(path) for path in _command_paths(value))
 
 
 def parse_git_config(data: bytes) -> list[tuple[str, str]]:
@@ -926,11 +1403,36 @@ def _is_command(name: str, value: str) -> bool:
     if name in _GIT_COMMANDS:
         return value.lower() not in _GIT_BOOLEANS
     section = name.split(".", 1)[0]
+    if section in _GIT_TOOL_SECTIONS:
+        return name.endswith((".cmd", ".path"))
     if section in ("filter", "merge", "diff", "gpg", "credential", "pager", "remote"):
         return (
             name.endswith(_GIT_COMMAND_SUFFIXES) or section == "pager" or name.endswith((".receivepack", ".uploadpack"))
         )
     return False
+
+
+def _command_paths(value: str) -> list[str]:
+    """Paths a git command value runs: every shell word holding a slash, and the first argument of
+    a shell or an interpreter (``!sh tools/x.sh``, ``bash x.sh``), as a shell would split it."""
+    text = value[1:] if value.startswith("!") else value
+    lexer = shlex.shlex(text, posix=True, punctuation_chars=True)
+    lexer.whitespace_split = True
+    try:
+        words = list(lexer)
+    except ValueError:  # unbalanced quotes: the plain words
+        words = text.split()
+    found = [word for word in words if "/" in word]
+    for index, word in enumerate(words):
+        if os.path.basename(word) not in _SHELLS:
+            continue
+        for argument in words[index + 1 :]:
+            if argument[:1] in ("-", "+"):
+                continue
+            if argument[:1] not in tuple("();<>|&"):
+                found.append(argument)
+            break
+    return list(dict.fromkeys(found))
 
 
 def _global_git_configs(home: bytes) -> list[bytes]:
@@ -956,7 +1458,7 @@ def _join(base: bytes, value: bytes, home: bytes) -> bytes:
 
 def _child_rule(rule: str, name: bytes) -> tuple[str, str | None] | None:
     """``(rule, category or None to inherit)`` for an entry named ``name`` below a directory, or None to skip it."""
-    if rule in ("all", "code"):
+    if rule in ("all", "code", "home"):
         return ("git", None) if name == b".git" else (rule, None)
     if rule == "hooks":  # git never runs a hook named *.sample
         return None if name.endswith(b".sample") else ("hooks", None)
@@ -964,8 +1466,20 @@ def _child_rule(rule: str, name: bytes) -> tuple[str, str | None] | None:
         if name in (b"config", b"config.worktree", b"commondir"):
             return "all", None
         return ("hooks", None) if name == b"hooks" else None
+    if rule == "site-packages":  # what the interpreter runs at startup; packages are only imported
+        lowered = name.lower()
+        startup = lowered.endswith(b".pth") or lowered in (b"sitecustomize.py", b"usercustomize.py")
+        return ("all", None) if startup else None
+    if rule == "memory":
+        return "memory", None
+    if rule == "claude-projects":
+        return "claude-project-slug", None
+    if rule == "claude-project-slug":
+        return ("memory", None) if name == b"memory" else None
     text = os.fsdecode(name)
     if rule == "claude-home":
+        if text == "projects":  # session data, but for the auto-memory below it
+            return "claude-projects", INSTRUCTIONS
         if text in CLAUDE_HOME_DATA:
             return None
         if text in CLAUDE_INSTRUCTIONS:
@@ -981,6 +1495,9 @@ def _child_rule(rule: str, name: bytes) -> tuple[str, str | None] | None:
         if text in CLAUDE_INSTRUCTIONS or text in CLAUDE_PROJECT_DATA:
             return None
         return "all", None
+    if rule.startswith("agent-project:"):
+        instructions = AGENT_PROJECT_DIRS.get(rule[len("agent-project:") :], frozenset())
+        return "all", (INSTRUCTIONS if text in instructions else None)
     return None
 
 
@@ -988,6 +1505,213 @@ def _looks_like_code(name: bytes, st: os.stat_result, head: bytes) -> bool:
     if stat.S_ISLNK(st.st_mode):
         return True
     return bool(st.st_mode & 0o111) or head.startswith(b"#!") or name.lower().endswith(CODE_SUFFIXES)
+
+
+def _init_config(data: bytes) -> bool:
+    """Whether a git config holds nothing but what ``git init`` writes, line by line (so a line
+    this parser would read differently from git is never taken for one)."""
+    return all(
+        not line.strip() or line.lstrip()[:1] in (b"#", b";") or _INIT_CONFIG_LINE.fullmatch(line)
+        for line in data.split(b"\n")
+    )
+
+
+def _exclude_patterns(data: bytes) -> list[bytes]:
+    """The patterns of a git exclude file; blank lines and comments hide nothing."""
+    return [line.rstrip(b"\r") for line in data.split(b"\n") if line.strip() and not line.startswith(b"#")]
+
+
+def _idea_run_configs(data: bytes) -> list[bytes]:
+    """The run configurations of an IntelliJ ``workspace.xml``: its ``RunManager`` and startup task
+    components. The rest of the file (layout, history) changes whenever the IDE is used."""
+    parts: list[bytes] = []
+    pos = 0
+    while True:
+        start = data.find(b"<component", pos)
+        if start < 0:
+            return parts
+        tag_end = data.find(b">", start)
+        if tag_end < 0:
+            return parts
+        tag = data[start : tag_end + 1]
+        pos = tag_end + 1
+        name_at = tag.find(b'name="')
+        name = tag[name_at + 6 : tag.find(b'"', name_at + 6)] if name_at >= 0 else b""
+        if name != b"RunManager" and b"startup" not in name.lower():
+            continue
+        if tag.endswith(b"/>"):
+            parts.append(tag)
+            continue
+        close = data.find(b"</component>", pos)
+        stop = len(data) if close < 0 else close + len(b"</component>")
+        parts.append(data[start:stop])
+        pos = stop
+
+
+def _import_paths(data: bytes) -> list[bytes]:
+    """``@path`` imports of an agent instruction file, outside fenced and inline code, as Claude Code
+    reads them; also without trailing punctuation (``see @RULES.md.``)."""
+    found: list[bytes] = []
+    fence: bytes | None = None
+    for line in data.split(b"\n"):
+        stripped = line.lstrip()
+        if fence is not None:
+            if stripped.startswith(fence):
+                fence = None
+            continue
+        if stripped.startswith((b"```", b"~~~")):
+            fence = stripped[:3]
+            continue
+        for match in _IMPORT.finditer(_INLINE_CODE.sub(b" ", line)):
+            path = match.group(1).replace(b"\\ ", b" ")
+            found.append(path)
+            trimmed = path.rstrip(b".,;:!?)]}'\"")
+            if trimmed and trimmed != path:
+                found.append(trimmed)
+    return list(dict.fromkeys(found))
+
+
+@dataclass(frozen=True)
+class GitIndex:
+    """What ``parse_index`` reads from a git index."""
+
+    hidden: list[tuple[int, str, bytes]]  # (position, "assume-unchanged" or "skip-worktree", path)
+    replaced: list[tuple[str, ...]]  # split index: the hiding flags of each entry without a path, in order
+    names: dict[int, bytes]  # paths at the positions asked for
+    link: tuple[bytes, list[int]] | None  # split index: the shared index's hash, the positions replaced
+
+
+def parse_index(data: bytes, hash_size: int = 20, *, names: Collection[int] = ()) -> GitIndex:
+    """The entries of a git index that hide worktree changes from ``git status`` and ``git diff``.
+
+    Versions 2 to 4 (4 compresses each path against the previous one). An entry hides changes when
+    its flags have assume-unchanged (``0x8000``) or its extended flags skip-worktree (``0x4000``).
+    In a split index the entries without a path replace, in order, the shared index entries that
+    the ``link`` extension's replace bitmap (EWAH) marks. ``hash_size`` is 32 in a SHA-256
+    repository. Raises ``ValueError`` (or ``IndexError``) on anything else.
+    """
+    end = len(data) - hash_size
+    if end < 12 or data[:4] != b"DIRC":
+        raise ValueError("not a git index")
+    version, count = struct.unpack_from(">II", data, 4)
+    if version not in (2, 3, 4):
+        raise ValueError(f"index version {version}")
+    fixed = 40 + hash_size  # ctime, mtime, dev, ino, mode, uid, gid, size, object id
+    pos = 12
+    previous = bytearray()  # version 4: the path so far, edited in place (linear in the index size)
+    hidden: list[tuple[int, str, bytes]] = []
+    replaced: list[tuple[str, ...]] = []
+    found: dict[int, bytes] = {}
+    for position in range(count):
+        at = pos + fixed
+        if at + 2 > end:
+            raise ValueError("truncated index")
+        flags = data[at] << 8 | data[at + 1]
+        start = at + 2
+        extended = 0
+        if flags & 0x4000:
+            if version < 3:
+                raise ValueError("extended flags in a version 2 index")
+            extended = data[start] << 8 | data[start + 1]
+            start += 2
+        if version == 4:
+            strip, start = _varint(data, start)
+            stop = data.find(b"\x00", start, end)
+            if stop < 0 or strip > len(previous):
+                raise ValueError("bad path in index")
+            del previous[len(previous) - strip :]
+            previous += data[start:stop]
+            if len(previous) > MAX_PATH_BYTES:
+                raise ValueError("path too long in index")
+            pos = stop + 1
+        else:
+            length = flags & 0x0FFF
+            stop = start + length if length < 0x0FFF else data.find(b"\x00", start, min(end, start + MAX_PATH_BYTES))
+            if stop < 0 or stop >= end or data[stop] != 0:
+                raise ValueError("bad path in index")
+            pos += (stop - pos + 8) & ~7  # NUL-padded to a multiple of eight bytes
+        hiding = flags & 0x8000 or extended & 0x4000
+        if (not previous) if version == 4 else stop == start:  # no path: a split index's replacement
+            replaced.append(_hiding_flags(flags, extended))
+            continue
+        if not hiding and not (names and position in names):
+            continue
+        name = bytes(previous) if version == 4 else data[start:stop]
+        if names and position in names:
+            found[position] = name
+        if hiding:
+            hidden.extend((position, flag, name) for flag in _hiding_flags(flags, extended))
+    link = None
+    while pos + 8 <= end:  # extensions
+        signature = data[pos : pos + 4]
+        size = int.from_bytes(data[pos + 4 : pos + 8], "big")
+        body = data[pos + 8 : pos + 8 + size]
+        if len(body) < size:
+            raise ValueError("truncated index extension")
+        if signature == b"link":
+            if size < hash_size:
+                raise ValueError("truncated link extension")
+            replace: list[int] = []
+            if size > hash_size:
+                _, after = _ewah_bits(body, hash_size, 0)  # the delete bitmap
+                replace, _ = _ewah_bits(body, after, len(replaced))
+            if len(replace) < len(replaced):
+                raise ValueError("split index replaces more entries than its bitmap marks")
+            link = (body[:hash_size], replace)
+        pos += 8 + size
+    return GitIndex(hidden, replaced, found, link)
+
+
+def _hiding_flags(flags: int, extended: int) -> tuple[str, ...]:
+    return (("assume-unchanged",) if flags & 0x8000 else ()) + (("skip-worktree",) if extended & 0x4000 else ())
+
+
+def _varint(data: bytes, pos: int) -> tuple[int, int]:
+    """git's varint (each continuation byte adds one before the shift), and the offset after it."""
+    byte = data[pos]
+    value = byte & 0x7F
+    pos += 1
+    for _ in range(9):
+        if not byte & 0x80:
+            return value, pos
+        byte = data[pos]
+        pos += 1
+        value = ((value + 1) << 7) | (byte & 0x7F)
+    if byte & 0x80:
+        raise ValueError("varint too long")
+    return value, pos
+
+
+def _ewah_bits(data: bytes, pos: int, wanted: int) -> tuple[list[int], int]:
+    """The first ``wanted`` set bits of git's EWAH bitmap at ``pos`` in ``data``, and the offset
+    after the bitmap: bit count and word count (32 bits each), the 64-bit words, the position of
+    the last run-length word. Each run-length word holds a run bit, a run length in 64-bit words
+    (32 bits) and how many literal words follow it (31 bits)."""
+    _, words = struct.unpack_from(">II", data, pos)
+    start = pos + 8
+    after = start + 8 * words + 4
+    if after > len(data):
+        raise ValueError("truncated bitmap")
+    bits: list[int] = []
+    bit = index = 0
+    while index < words and len(bits) < wanted:
+        word = int.from_bytes(data[start + 8 * index : start + 8 * index + 8], "big")
+        index += 1
+        run = (word >> 1) & 0xFFFFFFFF
+        if word & 1:
+            bits.extend(range(bit, bit + min(run * 64, wanted - len(bits))))
+        bit += run * 64
+        for _ in range(word >> 33):
+            if index >= words or len(bits) >= wanted:
+                break
+            literal = int.from_bytes(data[start + 8 * index : start + 8 * index + 8], "big")
+            index += 1
+            while literal and len(bits) < wanted:
+                low = literal & -literal
+                bits.append(bit + low.bit_length() - 1)
+                literal ^= low
+            bit += 64
+    return bits, after
 
 
 def _claude_json_entries(document: dict[str, object]) -> dict[str, str]:

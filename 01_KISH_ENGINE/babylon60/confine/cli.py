@@ -483,7 +483,15 @@ def writable_import_paths(policy: Policy, entries: Iterable[str]) -> list[str]:
     return found
 
 
-def _bounded(labels: Sequence[str], limit: int) -> list[str]:
+def _bounded(labels: Sequence[str], limit: int, ranks: Mapping[str, int] | None = None) -> list[str]:
+    """At most ``limit`` labels, each shortened to ``LABEL_CHARS``, then how many were left out.
+
+    When some must be left out, ``ranks`` (``persistence.Report.ranks``) decides which stay, riskiest
+    first: git hooks, git configs and the programs they name, agent and tool settings, instruction
+    files, then the rest. So many harmless files changed at once never push a hook's name out.
+    """
+    if ranks and len(labels) > limit:
+        labels = sorted(labels, key=lambda label: (ranks.get(label, persistence.RANK_OTHER), label))
     shown = [label if len(label) <= LABEL_CHARS else label[: LABEL_CHARS - 1] + "…" for label in labels[:limit]]
     return shown + ([f"... and {len(labels) - limit} more"] if len(labels) > limit else [])
 
@@ -532,8 +540,8 @@ class SessionChecks:
         if before is not None and after is not None:
             self.report = self._attempt("persistence", lambda: persistence.changes(before, after))
         if self.report is not None:
-            end["hooks_changed"] = _bounded(self.report.code, JOURNAL_NAMES)
-            end["instructions_changed"] = _bounded(self.report.instructions, JOURNAL_NAMES)
+            end["hooks_changed"] = _bounded(self.report.code, JOURNAL_NAMES, self.report.ranks)
+            end["instructions_changed"] = _bounded(self.report.instructions, JOURNAL_NAMES, self.report.ranks)
             end["persistence_unchecked"] = _bounded(self.report.unchecked, JOURNAL_NAMES)
         meta_before = self.metadata_before
         if meta_before is not None:
@@ -551,13 +559,13 @@ class SessionChecks:
         if report is not None and report.code:
             print(
                 "babylon60 run: the agent changed files that run outside the sandbox later: "
-                + ", ".join(_bounded(report.code, SHOWN_NAMES)),
+                + ", ".join(_bounded(report.code, SHOWN_NAMES, report.ranks)),
                 file=sys.stderr,
             )
         if report is not None and report.instructions:
             print(
                 "babylon60 run: the agent changed instructions that its later sessions read (prompts, not code): "
-                + ", ".join(_bounded(report.instructions, SHOWN_NAMES)),
+                + ", ".join(_bounded(report.instructions, SHOWN_NAMES, report.ranks)),
                 file=sys.stderr,
             )
         if report is not None and report.unchecked:
