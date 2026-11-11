@@ -131,6 +131,7 @@ def test_demo_check_verifies_and_rejects_evidence(sandbox: dict[str, Path], tmp_
     assert _cli(sandbox, "demo", "--journal", str(sandbox["journal"]), "--json", str(evidence)).returncode == 0
     good = _cli(sandbox, "demo", "--check", str(evidence))
     assert good.returncode == 0 and "self digest: ok" in good.stdout and "same as this installation" in good.stdout
+    assert "not a signature" in good.stdout  # anyone who edits the document can recompute its digest
     document = json.loads(evidence.read_text())
     document["verdict"] = "EDITED"
     evidence.write_text(json.dumps(document))
@@ -182,3 +183,25 @@ def test_policy_warnings_reach_stderr(sandbox: dict[str, Path], tmp_path: Path) 
     result = _run(sandbox, "true")
     assert result.returncode == 0, result.stderr
     assert "babylon60 run: warning:" in result.stderr and "links" in result.stderr
+
+
+@needs_backend
+@pytest.mark.skipif(not sys.platform.startswith("linux"), reason="Landlock scoping is Linux-only")
+def test_signals_outside_the_sandbox_follow_the_landlock_abi_and_are_journaled(sandbox: dict[str, Path]) -> None:
+    outside = subprocess.Popen(["sleep", "120"])
+    try:
+        script = (
+            "import os, sys\n"
+            "try:\n    os.kill(int(sys.argv[1]), 0); print('signal sent')\n"
+            "except PermissionError:\n    print('signal refused')"
+        )
+        result = _run(sandbox, sys.executable, "-I", "-S", "-c", script, str(outside.pid))
+    finally:
+        outside.kill()
+        outside.wait()
+    assert result.returncode == 0, result.stderr
+    scoped = landlock_abi() >= 6  # LANDLOCK_SCOPE_SIGNAL
+    assert result.stdout.strip() == ("signal refused" if scoped else "signal sent")
+    assert ("does not scope signals" in result.stderr) == (not scoped)  # an older kernel is a declared limit
+    log = json.loads(_cli(sandbox, "log", "--journal", str(sandbox["journal"]), "--json").stdout)
+    assert log["entries"][-1]["body"]["landlock_scoped"] == (3 if scoped else 0)

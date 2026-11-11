@@ -79,8 +79,22 @@ PROTECTED_RELATIVE = (
     ".password-store",
     ".config/gcloud",
     ".config/gh",
+    ".config/hub",
+    ".config/op",
+    ".config/git/credentials",
+    ".config/containers/auth.json",
+    ".npmrc",
+    ".pypirc",
+    ".cargo/credentials",
+    ".cargo/credentials.toml",
+    ".vault-token",
+    ".terraform.d/credentials.tfrc.json",
+    ".local/share/keyrings",
     "Library/Keychains",
 )
+# Sticky and writable by everyone (/tmp, /var/tmp): other programs of the user keep sockets,
+# credential caches and private directories there. Never the workspace or a user grant.
+SHARED_DIR_BITS = stat.S_ISVTX | stat.S_IWOTH
 
 # Agent presets grant only the agent's own state and common install prefixes.
 PRESETS: dict[str, dict[str, tuple[str, ...]]] = {
@@ -492,6 +506,15 @@ def build_policy(
                 raise PolicyError(f"Refusing a symbolic link as a grant; pass its target: {path}")
             skipped.append(path)
             return
+        if (
+            origin in ("workspace", "user")
+            and stat.S_ISDIR(st.st_mode)
+            and st.st_mode & SHARED_DIR_BITS == SHARED_DIR_BITS
+        ):
+            raise PolicyError(
+                f"Refusing a shared directory that everyone can write to (sticky, like /tmp): {path}. Other programs "
+                "keep sockets and credential caches there; use a directory of your own (each run gets a private TMPDIR)"
+            )
         chain = ancestry(path)
         try:
             guard.check(path, access, chain)

@@ -284,6 +284,42 @@ def test_the_real_mount_table_parses() -> None:
     assert all(os.path.isabs(m.mount_point) for m in mounts)
 
 
+# Shared directories and credential files --------------------------------------------------------
+
+
+@pytest.mark.parametrize("where", ["workspace", "read", "write"])
+def test_a_sticky_directory_everyone_can_write_is_refused(layout: dict[str, Path], where: str) -> None:
+    shared = layout["root"] / "shared"
+    shared.mkdir()
+    shared.chmod(0o1777)  # like /tmp: other programs keep sockets and credential caches there
+    kwargs: dict[str, Any] = {"workspace": shared} if where == "workspace" else {where: [str(shared)]}
+    with pytest.raises(PolicyError, match="everyone can write"):
+        _build(layout, **kwargs)
+    project = shared / "project"
+    project.mkdir()
+    assert _build(layout, workspace=project).workspace == str(project)
+    shared.chmod(0o777)  # writable by everyone but not sticky: not refused for that
+    assert _build(layout, workspace=shared).workspace == str(shared)
+
+
+@pytest.mark.parametrize(
+    "rel", [".npmrc", ".pypirc", ".cargo/credentials.toml", ".config/git/credentials", ".vault-token"]
+)
+def test_credential_files_are_protected_and_refuse_the_grants_around_them(layout: dict[str, Path], rel: str) -> None:
+    secret = layout["home"] / rel
+    secret.parent.mkdir(parents=True, exist_ok=True)
+    secret.write_text(f"{CANARY}\n")
+    policy = _build(layout)
+    assert str(secret) in policy.protected
+    with pytest.raises(PolicyError, match="protected"):
+        _build(layout, read=[str(secret)])
+    if secret.parent != layout["home"]:
+        with pytest.raises(PolicyError, match="contains protected path"):
+            _build(layout, read=[str(secret.parent)])
+        secret.unlink()  # absent: the directory around it can be granted again
+        assert _build(layout, read=[str(secret.parent)]).grants
+
+
 # Bind mounts, made for real in a private mount namespace ---------------------------------------
 
 NAMESPACE = r"""

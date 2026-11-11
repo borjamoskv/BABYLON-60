@@ -274,7 +274,15 @@ class Box:
             for fd in (master, slave):
                 if fd >= 0:
                     os.close(fd)
-        return Session(json.loads((here / "result").read_text(encoding="utf-8")), screen.text())
+        return Session(json.loads((here / "result").read_text(encoding="utf-8")), _without_kernel_notes(screen.text()))
+
+
+def _without_kernel_notes(screen: bytes) -> bytes:
+    """The screen without run's warning about an older Landlock ABI: it depends on the kernel, not the relay."""
+    note = b"babylon60 run: warning: Landlock ABI "
+    while screen.startswith(note) and b"\r\n" in screen:
+        screen = screen.split(b"\r\n", 1)[1]
+    return screen
 
 
 def _kill_group(marker: Path) -> None:

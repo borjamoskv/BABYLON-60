@@ -370,11 +370,14 @@ def test_shebang_naming_a_tool_under_home_grants_none_of_it(box: dict[str, Any])
 
 
 @needs_backend
-def test_granting_the_whole_prefix_is_what_exposes_the_credentials(box: dict[str, Any]) -> None:
-    """Control: the grant the shebang used to add hands the canary to any script."""
+def test_granting_the_whole_prefix_around_the_credentials_is_refused(box: dict[str, Any]) -> None:
+    """Control: unconfined, the tool prints the canary. The grant the shebang used to add now fails:
+    ``~/.cargo/credentials.toml`` is protected, so a grant that contains it is refused."""
+    control = subprocess.run([str(box["cargo"])], env=box["env"], capture_output=True, text=True, timeout=60)
+    assert box["canary"] in control.stdout
     ran = _run(box, "setup-tool", options=("--allow-read", str(box["home"] / ".cargo")))
-    assert ran.returncode == 0 and "cargo ran" in ran.stdout, ran.stderr
-    assert box["canary"] in ran.stdout
+    assert ran.returncode == 3 and "contains protected path" in ran.stderr, ran.stderr
+    assert box["canary"] not in ran.stdout + ran.stderr
 
 
 @needs_backend

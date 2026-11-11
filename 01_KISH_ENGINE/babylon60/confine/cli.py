@@ -31,6 +31,7 @@ if TYPE_CHECKING:
     from babylon60.confine.journal import ConfineJournal
 
 EXIT_USAGE, EXIT_UNAVAILABLE, EXIT_REFUSED, EXIT_NOT_FOUND = 2, 3, 126, 127
+LANDLOCK_SCOPE_ABI = 6  # LANDLOCK_SCOPE_SIGNAL and LANDLOCK_SCOPE_ABSTRACT_UNIX_SOCKET
 AGENT_SOCKET_VARS = ("SSH_AUTH_SOCK", "GPG_AGENT_INFO")
 # Environment variables whose names look like credentials are not passed to the agent, unless
 # kept with --pass-env (the agent's own credential is kept when its preset is used).
@@ -526,6 +527,13 @@ def run_command(args: argparse.Namespace) -> int:
         hint = interpreter_hint(executable, homes, policy)
         if hint:
             print(f"babylon60 run: {hint}", file=sys.stderr)
+        if launcher.backend() == "landlock" and launcher.landlock_abi() < LANDLOCK_SCOPE_ABI:
+            print(
+                f"babylon60 run: warning: Landlock ABI {launcher.landlock_abi()} does not scope signals "
+                f"(ABI {LANDLOCK_SCOPE_ABI}): the agent can signal your other processes"
+                + (" and reach abstract Unix sockets" if args.allow_unix_sockets else ""),
+                file=sys.stderr,
+            )
         env, removed = agent_environment(
             os.environ, preset=args.preset, keep_agent_sockets=args.keep_agent_sockets, passed=pass_env
         )
@@ -608,6 +616,7 @@ def run_command(args: argparse.Namespace) -> int:
             end: dict[str, Any] = {
                 "exit_code": returncode,
                 "landlock_abi": status.get("landlock_abi"),
+                "landlock_scoped": status.get("landlock_scoped"),
                 "caps_dropped": status.get("caps_dropped"),
                 "ended_by": signal.Signals(session.ended_by).name if session.ended_by else None,
                 "leftovers": session.leftovers,
@@ -632,6 +641,7 @@ def demo_command(args: argparse.Namespace) -> int:
     if args.check:
         result = check_evidence(json.loads(Path(args.check).read_text(encoding="utf-8")))
         print(f"self digest: {'ok' if result['self_digest_ok'] else 'MISMATCH'}")
+        print("  a checksum of the document, not a signature: whoever edits it can recompute it")
         print(
             f"confinement code: {'same as this installation' if result['code_matches_installation'] else 'differs from this installation'}"
         )

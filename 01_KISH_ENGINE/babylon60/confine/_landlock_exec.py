@@ -528,6 +528,8 @@ def main():
             report["no_new_privs"] = _check(libc.prctl(PR_GET_NO_NEW_PRIVS, 0, 0, 0, 0), "get no_new_privs")
             if cfg.get("landlock"):
                 report["landlock_abi"], report["landlock_errata"] = _restrict_landlock(libc, cfg)
+                # Signals and abstract Unix sockets are scoped from ABI 6 on; 0 means not scoped.
+                report["landlock_scoped"] = cfg["scoped"] if report["landlock_abi"] >= 6 else 0
                 report["rules"] = len(cfg["rules"])
             if cfg.get("seccomp"):
                 report["seccomp"] = _seccomp_filter(libc, bool(cfg.get("unix_sockets")))
