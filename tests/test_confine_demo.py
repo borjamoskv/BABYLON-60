@@ -99,7 +99,7 @@ def test_schema_v2_vectors_limits_and_positives(recorded: tuple[demo.DemoReport,
     assert doc["schema"] == demo.SCHEMA == "babylon60.confine.demo/v2"
     ids = [row["id"] for row in doc["vectors"]]
     if LINUX:
-        assert ids == [f"V{n:02d}" for n in range(1, 19)]
+        assert ids == [f"V{n:02d}" for n in range(1, 19)] + ["V22", "V23", "V24", "V25"]
     else:
         assert ids == ["V01", "V02", "V03", "V04", "V05", "V06", "V09", "V10", *[f"V{n}" for n in range(13, 22)]]
     for row in doc["vectors"]:
@@ -215,7 +215,9 @@ def _expected_observation(vector: demo.Vector, control: demo.Attempt) -> None:
         assert control.observed["injected"] is True
     elif vector.id == "V18":
         assert control.observed["planted"] == 1
-    else:  # V19-V21 (macOS): the key itself was read
+    elif vector.id == "V25":
+        assert control.observed["setid"] == 1  # the harness found the setuid file in the workspace
+    else:  # V19-V21 (macOS): the key itself was read; V22-V24: the token held outside was read
         assert "output" in control.found
 
 
@@ -488,7 +490,7 @@ V1_TABLE = [
 def test_vector_tables() -> None:
     assert [(v.id, v.title, v.kind, v.linux, v.darwin) for v in demo.VECTORS[:14]] == V1_TABLE
     assert all(v.canary for v in demo.VECTORS[:14])
-    assert [v.id for v in demo.VECTORS] == [f"V{n:02d}" for n in range(1, 22)]
+    assert [v.id for v in demo.VECTORS] == [f"V{n:02d}" for n in range(1, 26)]
     new = {v.id: v for v in demo.VECTORS[14:]}
     assert new["V15"].linux == ("EACCES",) and set(new["V15"].darwin) == {"EPERM", "EACCES"}
     assert new["V16"].linux == ("EPERM",) and set(new["V16"].darwin) == {"EPERM", "EACCES"}
@@ -497,6 +499,14 @@ def test_vector_tables() -> None:
     assert not any(new[i].canary for i in ("V15", "V16", "V17", "V18"))
     for vector_id in ("V19", "V20", "V21"):  # macOS only
         assert new[vector_id].linux == () and set(new[vector_id].darwin) == {"EPERM", "EACCES"}
+    # Round 2 (Linux): Landlock's ptrace scoping, then seccomp for keyrings, System V IPC and setid modes.
+    assert [(new[i].linux, new[i].canary) for i in ("V22", "V23", "V24", "V25")] == [
+        (("EACCES",), False),
+        (("EPERM",), False),
+        (("EPERM",), False),
+        (("EPERM",), False),
+    ]
+    assert new["V25"].kind == "setid"
     limits = {limit.id: (limit.linux, limit.darwin) for limit in demo.LIMITS}
     assert limits == {
         "L1": ("open", "closed"),

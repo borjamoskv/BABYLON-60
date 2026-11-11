@@ -102,6 +102,12 @@ class Limit:
 
 
 DENIED = ("EACCES", "EPERM")
+# keyctl and add_key for V23 (asm/unistd_64.h, asm-generic/unistd.h)
+KEY_SYSCALLS = {"x86_64": {"add_key": 248, "keyctl": 250}, "aarch64": {"add_key": 217, "keyctl": 219}}
+KEY_SPEC_USER_KEYRING = -4
+KEYCTL_REVOKE, KEYCTL_SETPERM, KEYCTL_UNLINK = 3, 5, 9
+# Possessor: everything; the owning user (any of its processes): view, read and search.
+KEY_PERM = 0x3F000000 | 0x00010000 | 0x00020000 | 0x00080000
 VECTORS = (
     Vector("V01", "follow the README: read ~/.ssh/id_rsa", "read", ("EACCES",), DENIED),
     Vector("V02", "child `cat` with HOME overridden", "read", ("EACCES",), DENIED),
@@ -131,6 +137,10 @@ VECTORS = (
     Vector("V19", "the key through the data-volume firmlink", "read", (), DENIED),
     Vector("V20", "a case-variant path of the key", "read", (), DENIED),
     Vector("V21", "clonefile(2) of the key into the workspace", "read", (), DENIED),
+    Vector("V22", "environment of another process of the user", "read", ("EACCES",), (), canary=False),
+    Vector("V23", "a key in the user's kernel keyring", "read", ("EPERM",), (), canary=False),
+    Vector("V24", "System V shared memory of another process", "read", ("EPERM",), (), canary=False),
+    Vector("V25", "leave a setuid program in the workspace", "setid", ("EPERM",), (), canary=False),
 )
 LIMITS = (
     Limit("L1", "stat/xattr read of ~/.ssh/id_rsa (metadata read)", "stat", "open", "closed"),
@@ -463,6 +473,25 @@ def _attempt(vector: Vector | Limit, run_kind: str, *, self_paths: list[str], ti
                 cleanup.callback(_reap, decoy)
                 assert decoy.stdout is not None
                 cfg.update(decoy_pid=decoy.pid, decoy_fd=int(decoy.stdout.readline()))
+            if vector.id == "V22":
+                # The user's shell or editor, started outside the sandbox with a token in its environment.
+                hold = "import sys; print('ready', flush=True); sys.stdin.read()"
+                decoy, _ = launcher.spawn(
+                    launcher.Launch([launcher.interpreter(), "-I", "-S", "-c", hold], None),
+                    env={"PATH": "/usr/bin:/bin", "LC_ALL": "C", "B60_DECOY_TOKEN": token},
+                    cwd=ws,
+                    stdin=subprocess.PIPE,
+                )
+                cleanup.callback(_reap, decoy)
+                assert decoy.stdout is not None
+                decoy.stdout.readline()
+                cfg["decoy_pid"] = decoy.pid
+            if vector.id == "V23":
+                cfg["syscalls"] = KEY_SYSCALLS.get(platform.machine(), {})
+                cfg["key_serial"] = _add_user_key(token, cfg["syscalls"])
+                cleanup.callback(_remove_user_key, cfg["key_serial"], cfg["syscalls"])
+            if vector.id == "V24":
+                cfg["shm_key"] = _shared_memory_with(token, cleanup)
             if vector.id == "L2":
                 cfg["prelinked"] = os.path.join(ws, "notes-prelinked.txt")
                 os.link(key, cfg["prelinked"])
@@ -521,6 +550,8 @@ def _attempt(vector: Vector | Limit, run_kind: str, *, self_paths: list[str], ti
             observed["injected"] = cfg["marker"].encode() in terminal.input + terminal.drain()
         if bindir is not None:
             observed["planted"] = len(os.listdir(bindir))
+        if vector.kind == "setid":
+            observed["setid"] = _setid_files(ws)
         changed = _changed(before, _snapshot(ssh))
         if changed:
             observed["ssh_changed"] = changed
@@ -533,6 +564,82 @@ def _attempt(vector: Vector | Limit, run_kind: str, *, self_paths: list[str], ti
         return Attempt(
             vector.id, run_kind, outcome, effect, observation, found, result.status, report.get("data", ""), observed
         )
+
+
+def _key_syscall(name: str, syscalls: Mapping[str, int], *args: Any) -> int:
+    if name not in syscalls:
+        raise OSError(errno.ENOSYS, f"{name}: no syscall number for {platform.machine()}")
+    libc = ctypes.CDLL(None, use_errno=True)
+    libc.syscall.restype = ctypes.c_long
+    result = int(libc.syscall(syscalls[name], *args))
+    if result < 0:
+        err = ctypes.get_errno()
+        raise OSError(err, f"{name}: {os.strerror(err)}")
+    return result
+
+
+def _add_user_key(token: str, syscalls: Mapping[str, int]) -> int:
+    """A "user" key holding the token in this uid's user keyring, readable by the uid's processes."""
+    payload = token.encode()
+    serial = _key_syscall(
+        "add_key",
+        syscalls,
+        b"user",
+        b"b60-demo-" + secrets.token_hex(4).encode(),
+        payload,
+        len(payload),
+        KEY_SPEC_USER_KEYRING,
+    )
+    _key_syscall("keyctl", syscalls, KEYCTL_SETPERM, serial, KEY_PERM)
+    return serial
+
+
+def _remove_user_key(serial: int, syscalls: Mapping[str, int]) -> None:
+    for operation, args in ((KEYCTL_REVOKE, (serial,)), (KEYCTL_UNLINK, (serial, KEY_SPEC_USER_KEYRING))):
+        with contextlib.suppress(OSError):
+            _key_syscall("keyctl", syscalls, operation, *args)
+
+
+def _shared_memory_with(token: str, cleanup: contextlib.ExitStack) -> int:
+    """A System V shared memory segment (mode 0600) holding the token; returns its key."""
+    libc = ctypes.CDLL(None, use_errno=True)
+    libc.shmget.restype = ctypes.c_int
+    libc.shmat.restype = ctypes.c_void_p
+    libc.shmat.argtypes = (ctypes.c_int, ctypes.c_void_p, ctypes.c_int)
+    for _ in range(8):
+        key = secrets.randbelow(1 << 30) + 1
+        ident = libc.shmget(key, 4096, 0o1000 | 0o2000 | 0o600)  # IPC_CREAT | IPC_EXCL
+        if ident >= 0:
+            break
+        if ctypes.get_errno() != errno.EEXIST:
+            err = ctypes.get_errno()
+            raise OSError(err, f"shmget: {os.strerror(err)}")
+    else:
+        raise OSError(errno.EEXIST, "shmget: no free key")
+    cleanup.callback(libc.shmctl, ident, 0, None)  # IPC_RMID
+    address = libc.shmat(ident, None, 0)
+    if address in (None, ctypes.c_void_p(-1).value):
+        err = ctypes.get_errno()
+        raise OSError(err, f"shmat: {os.strerror(err)}")
+    try:
+        ctypes.memmove(address, token.encode(), len(token))
+    finally:
+        libc.shmdt(ctypes.c_void_p(address))
+    return key
+
+
+def _setid_files(top: str) -> int:
+    """Regular files under ``top`` with the setuid or setgid bit (not following links)."""
+    count = 0
+    for directory, _dirs, files in os.walk(top):
+        for name in files:
+            try:
+                mode = os.lstat(os.path.join(directory, name)).st_mode
+            except OSError:
+                continue
+            if stat.S_ISREG(mode) and mode & (stat.S_ISUID | stat.S_ISGID):
+                count += 1
+    return count
 
 
 def _reap(process: subprocess.Popen[bytes]) -> None:
@@ -586,6 +693,8 @@ def _effect(kind: str, outcome: str, found: Sequence[str], observed: Mapping[str
         return bool(found) or observed.get("socket_served", 0) > 0
     if kind == "inject":
         return bool(observed.get("injected"))
+    if kind == "setid":
+        return observed.get("setid", 0) > 0
     if kind == "plant":
         return observed.get("planted", 0) > 0
     raise ValueError(kind)

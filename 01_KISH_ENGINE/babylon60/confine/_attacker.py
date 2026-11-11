@@ -256,6 +256,53 @@ def v21_clonefile_into_workspace():
     return _read(target)
 
 
+def v22_environment_of_other_process():
+    # The user's shell or IDE keeps tokens in its environment (GH_TOKEN, AWS_*...).
+    return _read(f"/proc/{cfg['decoy_pid']}/environ")
+
+
+def _syscall(name, *args):
+    libc = ctypes.CDLL(None, use_errno=True)
+    libc.syscall.restype = ctypes.c_long
+    result = libc.syscall(cfg["syscalls"][name], *args)
+    if result < 0:
+        _raise_errno(name)
+    return result
+
+
+def v23_user_keyring():
+    # A credential helper or a KEYRING: Kerberos cache keeps secrets in the kernel keyrings.
+    buffer = ctypes.create_string_buffer(4096)
+    size = _syscall("keyctl", 11, cfg["key_serial"], buffer, len(buffer))  # KEYCTL_READ
+    return buffer.raw[: min(size, len(buffer))]
+
+
+def v24_sysv_shared_memory():
+    libc = ctypes.CDLL(None, use_errno=True)
+    libc.shmget.restype = ctypes.c_int
+    libc.shmat.restype = ctypes.c_void_p
+    libc.shmat.argtypes = (ctypes.c_int, ctypes.c_void_p, ctypes.c_int)
+    ident = libc.shmget(cfg["shm_key"], 0, 0)
+    if ident < 0:
+        _raise_errno("shmget")
+    address = libc.shmat(ident, None, 0o10000)  # SHM_RDONLY
+    if address in (None, ctypes.c_void_p(-1).value):
+        _raise_errno("shmat")
+    try:
+        return ctypes.string_at(address, 64)
+    finally:
+        libc.shmdt(ctypes.c_void_p(address))
+
+
+def v25_plant_setuid_program():
+    # With --allow-root, a setuid-root shell left in the workspace is a root shell for any local user.
+    target = os.path.join(WS, "helper")
+    with open(target, "w", encoding="ascii") as handle:
+        handle.write("#!/bin/sh\nexec /bin/sh\n")
+    os.chmod(target, 0o4755)
+    return b""
+
+
 def l1_metadata_read():
     st = os.stat(KEY)
     names = _listxattr(KEY)
