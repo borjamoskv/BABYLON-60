@@ -96,6 +96,7 @@ def _cli_env() -> dict[str, str]:
 def _cli_run(box: dict[str, Any], *options: str) -> list[str]:
     return [
         sys.executable,
+        "-P",
         "-m",
         "babylon60.cli.main_dispatcher",
         "run",
@@ -387,7 +388,16 @@ def test_run_cli_blocks_unix_sockets_unless_allowed(box: dict[str, Any]) -> None
         assert allowed.returncode == 0 and json.loads(allowed.stdout) == {"result": "connected"}, allowed.stderr
         assert _received(server) == b"agent-was-here"
     log = subprocess.run(
-        [sys.executable, "-m", "babylon60.cli.main_dispatcher", "log", "--journal", str(box["journal"]), "--json"],
+        [
+            sys.executable,
+            "-P",
+            "-m",
+            "babylon60.cli.main_dispatcher",
+            "log",
+            "--journal",
+            str(box["journal"]),
+            "--json",
+        ],
         env=_cli_env(),
         capture_output=True,
         text=True,
@@ -790,7 +800,16 @@ def test_run_cli_relays_signals_to_a_new_session_agent(box: dict[str, Any]) -> N
             driver.wait()
     assert driver.returncode == 0, stderr
     log = subprocess.run(
-        [sys.executable, "-m", "babylon60.cli.main_dispatcher", "log", "--journal", str(box["journal"]), "--json"],
+        [
+            sys.executable,
+            "-P",
+            "-m",
+            "babylon60.cli.main_dispatcher",
+            "log",
+            "--journal",
+            str(box["journal"]),
+            "--json",
+        ],
         env=_cli_env(),
         capture_output=True,
         text=True,

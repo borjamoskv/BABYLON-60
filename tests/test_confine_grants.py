@@ -345,7 +345,7 @@ def box(tmp_path: Path) -> dict[str, Any]:
 
 def _run(box: dict[str, Any], *command: str, options: tuple[str, ...] = ()) -> subprocess.CompletedProcess[str]:
     return subprocess.run(
-        [sys.executable, "-m", "babylon60.cli.main_dispatcher", "run", "--allow-root"]
+        [sys.executable, "-P", "-m", "babylon60.cli.main_dispatcher", "run", "--allow-root"]
         + ["--journal", str(box["journal"]), *options, "--", *command],
         env=box["env"],
         cwd=str(box["ws"]),

@@ -53,7 +53,7 @@ def _cli(box: dict[str, Path], *args: str, env: dict[str, str] | None = None) ->
     base = {k: v for k, v in os.environ.items() if not credential_like(k) and not k.startswith("GIT_CONFIG")}
     base.update(HOME=str(box["home"]), PYTHONPATH=str(ROOT / "01_KISH_ENGINE"), **(env or {}))
     return subprocess.run(
-        [sys.executable, "-m", "babylon60.cli.main_dispatcher", *args],
+        [sys.executable, "-P", "-m", "babylon60.cli.main_dispatcher", *args],
         env=base,
         cwd=str(box["ws"]),
         capture_output=True,

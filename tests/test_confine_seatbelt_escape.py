@@ -395,6 +395,7 @@ def test_run_withheld_credentials_stay_out_of_reach(tmp_path: Path) -> None:
     done = subprocess.run(
         [
             sys.executable,
+            "-P",
             "-m",
             "babylon60.cli.main_dispatcher",
             "run",
@@ -450,7 +451,7 @@ def test_the_agent_cannot_end_its_launcher(tmp_path: Path) -> None:
         [launcher.interpreter(), "-I", "-S", "-c", parent, *agent], capture_output=True, timeout=60
     )
     assert control.returncode == -9, "control: without confinement a child can SIGKILL its parent"
-    cli = [sys.executable, "-m", "babylon60.cli.main_dispatcher"]
+    cli = [sys.executable, "-P", "-m", "babylon60.cli.main_dispatcher"]
     done = subprocess.run(
         [*cli, "run", "--journal", str(journal), "--", *agent],
         env=env,

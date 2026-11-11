@@ -65,6 +65,9 @@ AGENT_CREDENTIALS = {
 }
 # Names (never values) the first launcher withheld before it re-executed itself without them.
 WITHHELD_VAR = "BABYLON60_RUN_WITHHELD"
+# The directory the first launcher imported from (sys.path[0]) when it ran without -P: the re-exec
+# runs with -P, so only this tells it whether the user started babylon60 from the workspace.
+IMPORT_DIR_VAR = "BABYLON60_RUN_IMPORT_DIR"
 JOURNAL_NAMES = 100  # labels journaled per list; the rest are counted
 SHOWN_NAMES = 20  # labels printed per list
 LABEL_CHARS = 512
@@ -436,9 +439,46 @@ def reexec_without_withheld(args: argparse.Namespace, passed: Sequence[str]) -> 
     if not removed:
         return
     env[WITHHELD_VAR] = ",".join(removed)
+    if not sys.flags.safe_path and sys.path:
+        env[IMPORT_DIR_VAR] = os.path.abspath(sys.path[0])
     sys.stdout.flush()
     sys.stderr.flush()
-    os.execve(sys.executable, [sys.executable, "-m", "babylon60.cli.main_dispatcher", *sys.argv[1:]], env)
+    argv = [sys.executable, *interpreter_flags(), "-m", "babylon60.cli.main_dispatcher", *sys.argv[1:]]
+    os.execve(sys.executable, argv, env)
+
+
+def interpreter_flags() -> list[str]:
+    """This interpreter's isolation flags for the re-exec, always with ``-P``.
+
+    ``-P`` keeps the working directory off ``sys.path``: ``python -m`` would otherwise import
+    from it, and the default workspace is the working directory, where the agent can leave a
+    ``json.py`` that the next launcher start would run outside the sandbox.
+    """
+    if sys.flags.isolated:
+        return ["-I"]  # implies -E, -P and -s
+    flags = ["-E"] if sys.flags.ignore_environment else []
+    flags += ["-s"] if sys.flags.no_user_site else []
+    flags += ["-S"] if sys.flags.no_site else []
+    return [*flags, "-P"]
+
+
+def writable_import_paths(policy: Policy, entries: Iterable[str]) -> list[str]:
+    """Entries of the launcher's import path that the agent could write (inside a rw grant).
+
+    A module or ``.pth`` file the agent leaves in one of them runs outside the sandbox the next
+    time babylon60 starts: ``python -m`` from the workspace, a ``PYTHONPATH`` or a user site
+    inside a write grant. Compared by identity, like the grants themselves.
+    """
+    writable = {(grant.dev, grant.ino) for grant in policy.grants if grant.access == "rw"}
+    found: list[str] = []
+    for entry in dict.fromkeys(os.path.abspath(entry) for entry in entries if entry is not None):
+        try:
+            chain = ancestry(entry)
+        except OSError:
+            continue  # a missing entry imports nothing
+        if any(ident in writable for ident in chain):
+            found.append(entry)
+    return found
 
 
 def _bounded(labels: Sequence[str], limit: int) -> list[str]:
@@ -638,6 +678,18 @@ def run_command(args: argparse.Namespace) -> int:
         outside = outside_grants_hint(executable, homes, policy) if launcher.backend() == "landlock" else None
         if outside:
             print(f"babylon60 run: {outside}", file=sys.stderr)
+        first = os.environ.get(IMPORT_DIR_VAR)  # set by the re-exec: where the first launcher imported from
+        unsafe = writable_import_paths(policy, [*sys.path, *([first] if first else [])])
+        if unsafe:
+            print(
+                "babylon60 run: refusing: babylon60 imports its Python modules from "
+                f"{', '.join(printable(entry) for entry in unsafe)}, which the agent could write; a module "
+                "left there would run outside the sandbox the next time babylon60 starts. Start it with "
+                "the babylon60 command or python -P -m babylon60.cli.main_dispatcher, and keep the "
+                "workspace out of PYTHONPATH.",
+                file=sys.stderr,
+            )
+            return EXIT_UNAVAILABLE
         if launcher.backend() == "landlock" and launcher.landlock_abi() < LANDLOCK_SCOPE_ABI:
             print(
                 f"babylon60 run: warning: Landlock ABI {launcher.landlock_abi()} does not scope signals "
@@ -649,6 +701,7 @@ def run_command(args: argparse.Namespace) -> int:
             os.environ, preset=args.preset, keep_agent_sockets=args.keep_agent_sockets, passed=pass_env
         )
         withheld = env.pop(WITHHELD_VAR, "")  # removed before the re-exec: names only
+        env.pop(IMPORT_DIR_VAR, None)
         removed = sorted({*removed, *(name for name in withheld.split(",") if name)})
         env_removed = [printable(name) for name in removed]
         by_name = [printable(name) for name in removed if credential_like(name)]

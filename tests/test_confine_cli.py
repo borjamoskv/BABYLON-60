@@ -44,7 +44,7 @@ def sandbox(tmp_path: Path) -> dict[str, Path]:
 def _cli(sandbox: dict[str, Path], *args: str) -> subprocess.CompletedProcess[str]:
     env = {**os.environ, "HOME": str(sandbox["home"]), "PYTHONPATH": str(ROOT / "01_KISH_ENGINE")}
     return subprocess.run(
-        [sys.executable, "-m", "babylon60.cli.main_dispatcher", *args],
+        [sys.executable, "-P", "-m", "babylon60.cli.main_dispatcher", *args],
         env=env,
         cwd=str(sandbox["ws"]),
         capture_output=True,
@@ -285,7 +285,7 @@ def test_run_reexecutes_itself_without_the_withheld_variables(sandbox: dict[str,
         "import os, sys; print(os.getppid(), 'BABYLON60_RUN_WITHHELD' in os.environ, flush=True); sys.stdin.readline()"
     )
     env = {**os.environ, "HOME": str(sandbox["home"]), "PYTHONPATH": str(ROOT / "01_KISH_ENGINE"), "GH_TOKEN": token}
-    argv = [sys.executable, "-m", "babylon60.cli.main_dispatcher", "run", "--allow-root"]
+    argv = [sys.executable, "-P", "-m", "babylon60.cli.main_dispatcher", "run", "--allow-root"]
     argv += ["--journal", str(sandbox["journal"]), "--", sys.executable, "-I", "-S", "-c", script]
     process = subprocess.Popen(
         argv, env=env, cwd=str(sandbox["ws"]), stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE
@@ -347,7 +347,7 @@ def test_withheld_values_never_reach_the_agent_the_terminal_or_the_journal(sandb
         "DATABASE_URL": f"postgres://app:{canary}@db.internal/app",
         "SMTP_PASS": canary,
     }
-    argv = [sys.executable, "-m", "babylon60.cli.main_dispatcher", "run", "--allow-root"]
+    argv = [sys.executable, "-P", "-m", "babylon60.cli.main_dispatcher", "run", "--allow-root"]
     argv += ["--journal", str(sandbox["journal"]), "--", "/bin/sh", "-c", 'echo "[$DATABASE_URL][$SMTP_PASS]"']
     result = subprocess.run(argv, env=env, cwd=str(sandbox["ws"]), capture_output=True, text=True, timeout=300)
     assert result.returncode == 0, result.stderr
@@ -358,3 +358,58 @@ def test_withheld_values_never_reach_the_agent_the_terminal_or_the_journal(sandb
     assert canary.encode() not in sandbox["journal"].read_bytes()
     log = json.loads(_cli(sandbox, "log", "--journal", str(sandbox["journal"]), "--json").stdout)
     assert {"DATABASE_URL", "SMTP_PASS"} <= set(log["entries"][0]["body"]["env_removed"])
+
+
+PLANTED = """# What a confined agent can leave in its workspace for the next launcher start (test fixture).
+import os
+with open(os.environ["B60_MARKER"], "a", encoding="ascii") as handle:
+    handle.write("planted json.py ran outside the sandbox\\n")
+raise ImportError("planted module")
+"""
+
+
+def _launch(
+    sandbox: dict[str, Path], *flags: str, env: dict[str, str] | None = None, options: tuple[str, ...] = ()
+) -> subprocess.CompletedProcess[str]:
+    clean = {k: v for k, v in os.environ.items() if not credential_like(k) and not password_in_value(v)}
+    full = {**clean, "HOME": str(sandbox["home"]), "PYTHONPATH": str(ROOT / "01_KISH_ENGINE"), **(env or {})}
+    argv = [sys.executable, *flags, "-m", "babylon60.cli.main_dispatcher", "run", "--allow-root"]
+    argv += ["--journal", str(sandbox["journal"]), *options, "--", "/bin/sh", "-c", "echo agent-ran"]
+    return subprocess.run(argv, env=full, cwd=str(sandbox["ws"]), capture_output=True, text=True, timeout=300)
+
+
+@needs_backend
+def test_the_reexec_never_imports_from_the_workspace(sandbox: dict[str, Path], tmp_path: Path) -> None:
+    """AX-204's re-exec ran `python -m` with the workspace as working directory: a json.py the agent
+    left there ran outside the sandbox at the next start of the babylon60 command (round 3, CODE-2b)."""
+    marker = tmp_path / "marker"
+    (sandbox["ws"] / "json.py").write_text(PLANTED, encoding="ascii")
+    # -P stands for the installed babylon60 command, whose sys.path[0] is its bin directory;
+    # GH_TOKEN makes run withhold something, so it re-executes itself.
+    result = _launch(sandbox, "-P", env={"B60_MARKER": str(marker), "GH_TOKEN": "decoy"})
+    assert not marker.exists(), "the re-exec imported json.py from the workspace, outside the sandbox"
+    assert result.returncode == 0 and "agent-ran" in result.stdout, result.stderr
+    assert "GH_TOKEN" in result.stderr
+
+
+@needs_backend
+@pytest.mark.parametrize("withheld", [False, True], ids=["first-process", "after-reexec"])
+def test_run_refuses_a_launcher_that_imports_from_the_workspace(sandbox: dict[str, Path], withheld: bool) -> None:
+    """python -m from the workspace puts it on the launcher's own import path."""
+    env = {"GH_TOKEN": "decoy"} if withheld else {}
+    result = _launch(sandbox, env=env)
+    assert result.returncode == 3 and "agent-ran" not in result.stdout, (result.stdout, result.stderr)
+    assert "refusing: babylon60 imports its Python modules from" in result.stderr
+    assert str(sandbox["ws"]) in result.stderr
+
+
+@needs_backend
+def test_run_refuses_a_pythonpath_into_a_write_grant(sandbox: dict[str, Path], tmp_path: Path) -> None:
+    shared = tmp_path / "lib"
+    shared.mkdir()
+    pythonpath = os.pathsep.join([str(ROOT / "01_KISH_ENGINE"), str(shared)])
+    kept = _launch(sandbox, "-P", env={"PYTHONPATH": pythonpath})  # on the import path, but not writable inside
+    assert kept.returncode == 0 and "agent-ran" in kept.stdout, kept.stderr
+    refused = _launch(sandbox, "-P", env={"PYTHONPATH": pythonpath}, options=("--allow-write", str(shared)))
+    assert refused.returncode == 3 and "agent-ran" not in refused.stdout, refused.stderr
+    assert f"imports its Python modules from {shared}" in refused.stderr

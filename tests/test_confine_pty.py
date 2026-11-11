@@ -3,7 +3,7 @@
 A pseudo-terminal pair plays the user's terminal: the test reads its master as a
 terminal emulator would and types into it. A "user shell" (a separate process)
 leads a session that owns that terminal and runs the real CLI
-(``python -m babylon60.cli.main_dispatcher run ...``) as a foreground job in a
+(``python -P -m babylon60.cli.main_dispatcher run ...``) as a foreground job in a
 process group of its own, as an interactive shell does: it hands the job the
 terminal, waits for it (stops included), takes the terminal back and can then
 read what the user typed afterwards.
@@ -204,7 +204,7 @@ class Box:
 
     def cli(self, *argv: str) -> list[str]:
         """``babylon60 run -- argv``."""
-        run = [sys.executable, "-m", "babylon60.cli.main_dispatcher", "run", "--allow-root"]
+        run = [sys.executable, "-P", "-m", "babylon60.cli.main_dispatcher", "run", "--allow-root"]
         return [*run, "--journal", str(self.journal), "--", *argv]
 
     def run_without_terminal(self, *argv: str) -> subprocess.CompletedProcess[bytes]:
@@ -220,7 +220,16 @@ class Box:
 
     def journal_entries(self, kind: str) -> list[dict[str, Any]]:
         log = subprocess.run(
-            [sys.executable, "-m", "babylon60.cli.main_dispatcher", "log", "--journal", str(self.journal), "--json"],
+            [
+                sys.executable,
+                "-P",
+                "-m",
+                "babylon60.cli.main_dispatcher",
+                "log",
+                "--journal",
+                str(self.journal),
+                "--json",
+            ],
             env=self.env(),
             capture_output=True,
             text=True,
