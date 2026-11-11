@@ -1184,6 +1184,67 @@ def test_what_a_project_claude_md_or_claude_local_md_imports_is_reported(box: di
     assert end["instructions_changed"] == targets and end["hooks_changed"] == []
 
 
+needs_shm = pytest.mark.skipif(not Path("/dev/shm").is_dir() or sys.platform != "linux", reason="/dev/shm is Linux's")
+
+
+@needs_backend
+@needs_shm
+def test_what_the_agent_leaves_or_changes_in_dev_shm_is_reported(box: dict[str, Path]) -> None:
+    """AX-216 (CLAIMS-7): /dev/shm stays writable for POSIX semaphores, so the agent can leave an
+    executable there that outlives the session, or change what another process of the user keeps
+    there. run names both (names only) in run_end.shm_changed and on stderr; the rest is not named."""
+    stem = f"/dev/shm/b60-test-{os.getpid()}-{os.urandom(4).hex()}"
+    planted, kept, same = Path(stem + "-x"), Path(stem + "-kept"), Path(stem + "-same")
+    kept.write_text("state of another process\n")
+    same.write_text("untouched\n")
+    try:
+        result = _run(box, f"printf '{SCRIPT}' > {planted} && chmod 755 {planted} && echo changed >> {kept}")
+        assert result.returncode == 0, result.stderr
+        assert planted.stat().st_mode & 0o111  # it outlives the session, executable
+        end = _last(box)
+        assert {str(planted), str(kept)} <= set(end["shm_changed"]) and str(same) not in end["shm_changed"]
+        line = next(line for line in result.stderr.splitlines() if "/dev/shm owned by you" in line)
+        assert str(planted) in line and str(kept) in line and str(same) not in line
+    finally:
+        for path in (planted, kept, same):
+            path.unlink(missing_ok=True)
+
+
+def test_the_dev_shm_listing_names_changes_by_owner_and_its_own_bounds(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Added, changed and removed entries of the user are named (a directory by its own metadata, not by
+    what changes inside it); a listing cut short is named, and what is missing from it is not reported."""
+    from babylon60.confine import shm
+
+    root = tmp_path / "shm"
+    (root / "d").mkdir(parents=True)
+    for index in range(8):
+        (root / f"f{index}").write_text("x")
+    (root / "d" / "x").write_text("x")
+    before = shm.snapshot(str(root))
+    assert before.complete and before.unchecked == ()
+    (root / "f3").write_text("changed")
+    (root / "d" / "x").chmod(0o755)
+    (root / "d" / "new").write_text("n")
+    (root / "f5").unlink()
+    after = shm.snapshot(str(root))
+    uid = os.geteuid()
+    assert shm.changes(before, after, uid) == [f"{root}/d/new", f"{root}/d/x", f"{root}/f3", f"{root}/f5"]
+    assert shm.changes(before, after, uid + 1) == []  # nothing there belongs to another user
+    monkeypatch.setattr(shm, "MAX_ENTRIES", 5)
+    cut = shm.snapshot(str(root))
+    assert not cut.complete and cut.unchecked == (f"{root} (more than 5 entries: the rest not compared)",)
+    assert shm.changes(before, cut, uid) == [f"{root}/f3"]  # f5, d/x and d/new: not listed, not reported
+    if os.geteuid() != 0:  # root lists a directory whatever its mode
+        monkeypatch.setattr(shm, "MAX_ENTRIES", 1_000)
+        (root / "locked").mkdir(mode=0o300)  # the user can write in it, not list it
+        try:
+            assert shm.snapshot(str(root)).unchecked == (f"{root}/locked (EACCES: not compared)",)
+        finally:
+            (root / "locked").chmod(0o700)
+
+
 # --- F9: odd names and files, and run_end always journaled -----------------------------------
 
 

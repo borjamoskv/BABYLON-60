@@ -600,6 +600,47 @@ def test_mount_of_the_launcher_state_is_refused_below_write_grants_only(
 
 
 @needs_linux
+@pytest.mark.parametrize("kind", ["dir", "file"])
+def test_mount_of_a_path_inside_the_launcher_code_is_refused_below_write_grants_only(
+    layout: dict[str, Path], kind: str
+) -> None:
+    """AX-216 (CODE-2a): a bind mount of <package>/confine (or of its cli.py) in the workspace let the
+    agent rewrite the launcher's code: ``..`` from a mount's root leads to the mount point, so only its
+    source, found in the mount table, shows that it lies inside a directory of the launcher."""
+    code = layout["root"] / "launcher" / "babylon60"
+    (code / "confine").mkdir(parents=True)
+    (code / "confine" / "cli.py").write_text("# the launcher\n")
+    readonly_ws = layout["root"] / "ws2"
+    readonly_ws.mkdir()
+    result = _in_namespace(
+        layout,
+        """
+        source = os.path.join(ARGS["code"], "confine")
+        point = os.path.join(ARGS["ws"], "sub")
+        if ARGS["kind"] == "dir":
+            os.mkdir(point)
+        else:
+            source, point = os.path.join(source, "cli.py"), point + ".py"
+            open(point, "w").close()
+        mount(source, point)
+        print(json.dumps({
+            "rw": policy(self_paths=[ARGS["code"]]),
+            "ro": policy(workspace=ARGS["ws2"], read=[ARGS["ws"]], self_paths=[ARGS["code"]]),
+            "elsewhere": policy(self_paths=[ARGS["other"]]),
+        }))
+        """,
+        code=str(code),
+        kind=kind,
+        ws2=str(readonly_ws),
+    )
+    point = layout["ws"] / ("sub" if kind == "dir" else "sub.py")
+    reason = _mount_refusal(f"a path inside the launcher's own state ({code})", point, layout["ws"])
+    assert result["rw"] == {"refused": reason}
+    assert result["ro"]["grants"] == [str(readonly_ws), str(layout["ws"])]
+    assert result["elsewhere"]["grants"] == [str(layout["ws"])]  # a launcher somewhere else: nothing to refuse
+
+
+@needs_linux
 def test_mount_points_with_escaped_characters(layout: dict[str, Path]) -> None:
     names = ["with space", "tab\there", "new\nline", "back\\slash", "literal \\012"]
     result = _in_namespace(

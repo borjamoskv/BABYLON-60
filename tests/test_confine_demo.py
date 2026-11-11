@@ -23,7 +23,7 @@ import pytest
 
 from babylon60.confine import demo, launcher
 from babylon60.confine.journal import ConfineJournal, digest
-from babylon60.confine.policy import MIN_LANDLOCK_ABI
+from babylon60.confine.policy import MIN_LANDLOCK_ABI, build_policy
 from babylon60.confine.witness import (
     InotifyWitness,
     Observation,
@@ -528,6 +528,58 @@ def test_vector_tables() -> None:
         "L6": ("open", "closed"),
     }
     assert [p.id for p in demo.POSITIVES] == [f"P{n}" for n in range(1, 8)]
+
+
+@pytest.mark.skipif(not (LINUX_OK or (LINUX and REQUIRED)), reason="L6 is a Linux limit")
+def test_l6_is_declared_for_the_command_line_of_any_other_process(tmp_path: Path) -> None:
+    """AX-216: argv is not behind Linux's ptrace check, so a confined agent reads the command line of a
+    process of another user as well (root's init for an unprivileged run, a decoy started as another uid
+    under root), while its environment stays denied: L6 is declared for any other process."""
+    token = "B60-L6-" + os.urandom(8).hex()
+    decoy: subprocess.Popen[bytes] | None = None
+    pid = 1
+    if os.geteuid() == 0:
+
+        def nobody() -> None:
+            os.setgid(65534)
+            os.setuid(65534)
+
+        # Popen returns once the decoy has executed, so its command line is already this one.
+        decoy = subprocess.Popen(
+            ["/bin/sh", "-c", "read line", "b60-decoy", f"--api-token={token}"],
+            stdin=subprocess.PIPE,
+            cwd="/",
+            preexec_fn=nobody,
+        )
+        pid = decoy.pid
+    try:
+        if os.stat(f"/proc/{pid}").st_uid == os.geteuid():
+            pytest.skip("no process of another user to look at")
+        try:
+            control = Path(f"/proc/{pid}/cmdline").read_bytes()
+        except OSError as exc:
+            pytest.skip(f"/proc hides other users' processes here (hidepid): {exc.strerror}")
+        ws, home = tmp_path / "ws", tmp_path / "home"
+        ws.mkdir()
+        home.mkdir()
+        policy = build_policy(ws, homes=[str(home)], runtime=[launcher.interpreter_prefix()])
+        env = {"PATH": "/usr/bin:/bin", "LC_ALL": "C"}
+
+        def cat(name: str) -> launcher.Result:
+            return launcher.run(
+                launcher.session_launch(["/bin/cat", f"/proc/{pid}/{name}"], policy), env=env, cwd=str(ws)
+            )
+
+        argv, environ = cat("cmdline"), cat("environ")
+    finally:
+        if decoy is not None:
+            decoy.kill()
+            decoy.wait()
+    assert argv.status.get("ok") and argv.returncode == 0, argv.stderr
+    assert control and argv.stdout == control and (decoy is None or token.encode() in argv.stdout)
+    assert environ.status.get("ok") and environ.returncode != 0 and not environ.stdout
+    l6 = next(limit for limit in demo.LIMITS if limit.id == "L6")
+    assert "any other process" in l6.title and (l6.linux, l6.darwin) == ("open", "closed")
 
 
 def test_attacker_implements_every_vector_limit_and_positive() -> None:

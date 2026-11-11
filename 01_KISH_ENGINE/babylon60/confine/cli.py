@@ -497,21 +497,26 @@ def _bounded(labels: Sequence[str], limit: int, ranks: Mapping[str, int] | None 
 
 
 class SessionChecks:
-    """What ``run`` compares before and after a session: persistence material and home metadata.
+    """What ``run`` compares before and after a session: persistence material, home metadata and,
+    on Linux, what is left in ``/dev/shm``.
 
     A check that fails is named in ``failed`` with its error and never keeps
     ``run_end`` out of the journal; everything it reports is printable text.
     """
 
     def __init__(self, policy: Policy, workspace: str, home: str | None) -> None:
-        from babylon60.confine import metadata
+        from babylon60.confine import metadata, shm
 
         self.policy, self.workspace, self.home = policy, workspace, home
         self.failed: list[str] = []
         self.report: persistence.Report | None = None
         self.metadata_changed: list[str] = []
+        self.shm_changed: list[str] = []
+        self.shm_unchecked: list[str] = []
         self.persistence_before = self._attempt("persistence", self._persistence)
         self.metadata_before = self._attempt("metadata", lambda: metadata.snapshot(policy.homes, policy.protected))
+        shm_root = shm.granted(policy)
+        self.shm_before = self._attempt("shm", lambda: shm.snapshot(shm_root)) if shm_root else None
 
     def _persistence(self, previous: persistence.Snapshot | None = None) -> persistence.Snapshot:
         return persistence.snapshot(self.policy, self.workspace, home=self.home, previous=previous)
@@ -525,7 +530,7 @@ class SessionChecks:
 
     def finish(self, end: dict[str, Any]) -> None:
         """Compare again after the session and fill the ``run_end`` body ``end``."""
-        from babylon60.confine import metadata
+        from babylon60.confine import metadata, shm
 
         end.update(
             hooks_changed=[],
@@ -533,6 +538,7 @@ class SessionChecks:
             persistence_unchecked=[],
             metadata_changed=[],
             metadata_truncated=[],
+            shm_changed=[],
             checks_failed=self.failed,
         )
         before = self.persistence_before
@@ -542,7 +548,14 @@ class SessionChecks:
         if self.report is not None:
             end["hooks_changed"] = _bounded(self.report.code, JOURNAL_NAMES, self.report.ranks)
             end["instructions_changed"] = _bounded(self.report.instructions, JOURNAL_NAMES, self.report.ranks)
-            end["persistence_unchecked"] = _bounded(self.report.unchecked, JOURNAL_NAMES)
+        shm_before = self.shm_before
+        if shm_before is not None:
+            shm_after = self._attempt("shm", lambda: shm.snapshot(shm_before.root))
+            if shm_after is not None:
+                self.shm_changed = shm.changes(shm_before, shm_after, os.geteuid())
+                self.shm_unchecked = list(dict.fromkeys([*shm_before.unchecked, *shm_after.unchecked]))
+                end["shm_changed"] = _bounded(self.shm_changed, JOURNAL_NAMES)
+        end["persistence_unchecked"] = _bounded(self.unchecked(), JOURNAL_NAMES)
         meta_before = self.metadata_before
         if meta_before is not None:
             meta_after = self._attempt("metadata", lambda: metadata.snapshot(self.policy.homes, self.policy.protected))
@@ -553,6 +566,10 @@ class SessionChecks:
                 end["metadata_changed"] = self.metadata_changed
                 end["metadata_truncated"] = [meta_after.display(path) for path in meta_after.truncated]
         end["checks_failed"] = list(self.failed)
+
+    def unchecked(self) -> list[str]:
+        """What was not compared in full: persistence roots, then ``/dev/shm``."""
+        return [*(self.report.unchecked if self.report is not None else ()), *self.shm_unchecked]
 
     def print_report(self) -> None:
         report = self.report
@@ -568,10 +585,18 @@ class SessionChecks:
                 + ", ".join(_bounded(report.instructions, SHOWN_NAMES, report.ranks)),
                 file=sys.stderr,
             )
-        if report is not None and report.unchecked:
+        if self.shm_changed:
+            print(
+                "babylon60 run: entries of /dev/shm owned by you were added, changed or removed during the session, "
+                "by the agent or by another of your processes, and outlive it: "
+                + ", ".join(_bounded(self.shm_changed, SHOWN_NAMES)),
+                file=sys.stderr,
+            )
+        unchecked = self.unchecked()
+        if unchecked:
             print(
                 "babylon60 run: warning: not compared in full, changes there may be missing: "
-                + ", ".join(_bounded(report.unchecked, SHOWN_NAMES)),
+                + ", ".join(_bounded(unchecked, SHOWN_NAMES)),
                 file=sys.stderr,
             )
         if self.metadata_changed:

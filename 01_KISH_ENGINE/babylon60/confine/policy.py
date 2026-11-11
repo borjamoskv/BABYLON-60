@@ -450,6 +450,35 @@ class _Guard:
                 return f"the launcher's own state ({target})"
         return None
 
+    def _inside_self(self, mount: aliases.Mount, root: Identity, mounts: Sequence[aliases.Mount]) -> str | None:
+        """The launcher directory that the tree ``mount`` shows (its root has identity ``root``) lies inside.
+
+        Below a mount point ``..`` leads to the mount point's parent, not to where the mounted tree
+        comes from, so the identity walk of ``check`` cannot see that a bind mount of a directory of
+        the launcher's own code sits in it. The mount table can: the source is the mount's root
+        field below another mount of the same filesystem whose root holds it (``/`` usually). Where
+        that path shows the same tree, its ancestry is checked as ``check`` checks a write grant.
+        """
+        if not self.self_dirs:
+            return None
+        for other in mounts:
+            if other.mount_id == mount.mount_id or other.device != mount.device:
+                continue
+            rest = _below(mount.root, other.root)
+            if rest is None:
+                continue
+            source = os.path.join(other.mount_point, rest) if rest else other.mount_point
+            try:
+                chain = ancestry(source)
+            except (OSError, ValueError):
+                continue
+            if chain[0] != root:  # another tree is mounted over that path: not where this one comes from
+                continue
+            inside = next((target for target, ident in self.self_dirs if ident in chain[1:]), None)
+            if inside is not None:
+                return inside
+        return None
+
     def mount_refusals(self, grants: Iterable[Grant]) -> dict[str, str]:
         """``{path: reason}`` for directory grants with a mount below them that ``check`` would refuse.
 
@@ -457,7 +486,8 @@ class _Guard:
         directory also covers every mount below it, wherever the mounted tree
         lives. A mount's root is judged as a grant with the directory's access
         would be: a home or an ancestor of one, a protected path, an ancestor of
-        one or an entry below one, and for write access the launcher's own state.
+        one or an entry below one, and for write access the launcher's own state
+        or, found through the mount table, a path inside a directory of it.
         """
         directories: dict[Identity, list[Grant]] = {}
         for grant in grants:
@@ -473,9 +503,15 @@ class _Guard:
         refusals: dict[str, str] = {}
         for mount, containing, root in aliases.mounts_beneath(directories, mounts or (), ancestry):
             exposed = self._exposed(root)
+            writable: str | None = None
+            if not exposed and any(grant.access == "rw" for ident in containing for grant in directories[ident]):
+                writable = self._own_state(root)
+                if writable is None:
+                    inside = self._inside_self(mount, root, mounts or ())
+                    writable = f"a path inside the launcher's own state ({inside})" if inside else None
             for ident in containing:
                 for grant in directories[ident]:
-                    what = exposed or (self._own_state(root) if grant.access == "rw" else None)
+                    what = exposed or (writable if grant.access == "rw" else None)
                     if what and grant.path not in refusals:
                         refusals[grant.path] = (
                             f"Refusing a grant with a mount of {what} inside it ({mount.mount_point}): {grant.path}"
@@ -621,6 +657,16 @@ def build_policy(
         allow_ptys,
         tuple(dict.fromkeys(readable_links)),
     )
+
+
+def _below(path: str, base: str) -> str | None:
+    """``path`` relative to ``base`` when ``base`` is ``path`` or a lexical ancestor of it, else None."""
+    if base == "/":
+        return path.lstrip("/")
+    base = base.rstrip("/")
+    if path == base:
+        return ""
+    return path[len(base) + 1 :] if path.startswith(base + "/") else None
 
 
 def _contains(parent: str, child: str) -> bool:

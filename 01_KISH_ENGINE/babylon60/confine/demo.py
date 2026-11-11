@@ -148,7 +148,7 @@ LIMITS = (
     Limit("L2", "hardlink created before the session", "read", "open", "open"),
     Limit("L4", "chmod/utime/xattr on ~/.ssh/id_rsa (metadata change)", "metadata", "open", "closed"),
     Limit("L5", "inotify watch on ~/.ssh (names and timing of accesses)", "watch", "open", None),
-    Limit("L6", "command line of another process of the user (/proc/<pid>/cmdline)", "read", "open", "closed"),
+    Limit("L6", "command line of any other process (/proc/<pid>/cmdline)", "read", "open", "closed"),
 )
 POSITIVES = (
     Vector("P1", "read and write the workspace", "ok", (), ()),
@@ -477,8 +477,10 @@ def _attempt(vector: Vector | Limit, run_kind: str, *, self_paths: list[str], ti
                 cfg.update(decoy_pid=decoy.pid, decoy_fd=int(decoy.stdout.readline()))
             if vector.id in ("V22", "L6"):
                 # The user's shell or editor, started outside the sandbox with a token in its environment
-                # (V22) or on its command line (L6: argv is not behind Linux's ptrace check; on macOS both
-                # come from KERN_PROCARGS2, which Seatbelt's process-info rule denies).
+                # (V22) or on its command line (L6: on Linux argv is not behind the ptrace check, so the
+                # command line of any process, other users' and root's included, is readable without
+                # hidepid; this decoy is one of them. On macOS both come from KERN_PROCARGS2, which
+                # Seatbelt's process-info rule denies).
                 hold = "import sys; print('ready', flush=True); sys.stdin.read()"
                 extra = [f"--api-token={token}"] if vector.id == "L6" else []
                 decoy, _ = launcher.spawn(
