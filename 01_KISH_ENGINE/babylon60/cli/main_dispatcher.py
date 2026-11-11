@@ -1059,7 +1059,9 @@ def main() -> None:
         description="Linux: Landlock (ABI >= 3). macOS: Seatbelt. Usage: babylon60 run [options] -- COMMAND [ARGS...]",
     )
     p_run.add_argument(
-        "--preset", choices=["claude-code", "codex"], help="Grant only this agent's own state and install prefixes"
+        "--preset",
+        choices=["claude-code", "codex"],
+        help="Grant this agent's own state and install prefixes, and the git configuration read-only",
     )
     p_run.add_argument("--allow-read", action="append", default=[], metavar="PATH", help="Extra read-only path")
     p_run.add_argument("--allow-write", action="append", default=[], metavar="PATH", help="Extra writable path")

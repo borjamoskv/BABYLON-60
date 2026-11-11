@@ -1420,10 +1420,16 @@ def parse_git_config(data: bytes) -> list[tuple[str, str]]:
     without ``=`` is ``"true"``. Quotes, escapes, comments and continuation lines are handled.
     Malformed lines are skipped.
     """
+    return [(name, value) for _, name, value in parse_git_config_lines(data)]
+
+
+def parse_git_config_lines(data: bytes) -> list[tuple[int, str, str]]:
+    """``(line, name, value)``: the entries of ``parse_git_config`` and the line, from 1, their key is on."""
     text = data.decode("utf-8", "surrogateescape")
-    entries: list[tuple[str, str]] = []
+    entries: list[tuple[int, str, str]] = []
     section: str | None = None
     pos, end = 0, len(text)
+    line, counted = 1, 0  # newlines are counted up to ``counted``, once
     while pos < end:
         char = text[pos]
         if char in " \t\r\n":
@@ -1447,7 +1453,9 @@ def parse_git_config(data: bytes) -> list[tuple[str, str]]:
                 pos = _line_end(text, pos)
                 continue
             if section is not None:
-                entries.append((f"{section}.{key}", value))
+                line += text.count("\n", counted, start)
+                counted = start
+                entries.append((line, f"{section}.{key}", value))
         else:
             pos = _line_end(text, pos)
     return entries
@@ -1977,6 +1985,52 @@ def _relevant(settings: dict[str, object]) -> dict[str, object]:
 def _json_digest(value: object) -> str:
     text = json.dumps(value, sort_keys=True, ensure_ascii=True, separators=(",", ":"))
     return blake3(_DOMAIN + b"json\x00" + text.encode()).hexdigest()
+
+
+def denied_identities(protected: Iterable[str]) -> set[Identity]:
+    """Identities of ``/proc``, ``/sys`` and the ``protected`` paths that exist: never read below them."""
+    found: set[Identity] = set()
+    for path in ("/proc", "/sys", *protected):
+        try:
+            st = os.stat(path)
+        except OSError:
+            continue
+        found.add((st.st_dev, st.st_ino))
+    return found
+
+
+def read_regular(
+    path: bytes, denied: Collection[Identity], *, limit: int = CONFIG_BYTES, expect: Identity | None = None
+) -> bytes | None:
+    """Up to ``limit`` bytes of the regular file ``path``; None when it is not one (or not ``expect``).
+
+    The parent path resolves as in any lookup; the file itself is never a link, and nothing
+    below a directory whose identity is in ``denied`` is read.
+    """
+    parent, name = os.path.split(path)
+    if not name or b"\x00" in path:
+        return None
+    try:
+        dir_fd = os.open(parent or b"/", os.O_RDONLY | os.O_DIRECTORY | _CLOEXEC)
+    except OSError:
+        return None
+    try:
+        if any(identity in denied for identity in _fd_chain(dir_fd, parent or b"/")):
+            return None
+        st = os.stat(name, dir_fd=dir_fd, follow_symlinks=False)
+        if not stat.S_ISREG(st.st_mode) or expect not in (None, _identity(st)):
+            return None
+        fd = os.open(name, _FILE_FLAGS, dir_fd=dir_fd)
+        try:
+            if _identity(os.fstat(fd)) != _identity(st):
+                return None
+            return _read(fd, limit)
+        finally:
+            os.close(fd)
+    except OSError:
+        return None
+    finally:
+        os.close(dir_fd)
 
 
 def _read(fd: int, limit: int) -> bytes:

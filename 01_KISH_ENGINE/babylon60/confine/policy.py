@@ -12,7 +12,7 @@ The trampoline re-opens every granted path and refuses to start if its
 
 from __future__ import annotations
 
-from collections.abc import Iterable, Sequence
+from collections.abc import Callable, Iterable, Mapping, Sequence
 from dataclasses import asdict, dataclass, field
 import os
 import pwd
@@ -96,7 +96,8 @@ PROTECTED_RELATIVE = (
 # credential caches and private directories there. Never the workspace or a user grant.
 SHARED_DIR_BITS = stat.S_ISVTX | stat.S_IWOTH
 
-# Agent presets grant only the agent's own state and common install prefixes.
+# Agent presets grant only the agent's own state and common install prefixes. Every preset also
+# grants the global git configuration read-only, file by file (gitconfig.py, origin "preset:<name>:git").
 PRESETS: dict[str, dict[str, tuple[str, ...]]] = {
     "claude-code": {
         "write": ("~/.claude", "~/.claude.json", "~/.cache/claude"),
@@ -123,7 +124,7 @@ class Grant:
     dev: int
     ino: int
     is_dir: bool
-    origin: str  # "system", "workspace", "tmp", "preset:<name>", "user", "runtime"
+    origin: str  # "system", "workspace", "tmp", "preset:<name>", "preset:<name>:git", "user", "runtime"
 
 
 @dataclass(frozen=True)
@@ -533,8 +534,14 @@ def build_policy(
     ttys: Sequence[str] = (),
     allow_ptys: bool = False,
     links: Sequence[str] = (),
+    git_env: Mapping[str, str] | None = None,
 ) -> Policy:
-    """Build and check a policy. User grants that fail a guard raise ``PolicyError``."""
+    """Build and check a policy. User grants that fail a guard raise ``PolicyError``.
+
+    ``git_env``: ``HOME`` and ``XDG_CONFIG_HOME`` as git inside the sandbox sees them, for the
+    git configuration a preset grants (the launcher passes its own environment, which the
+    agent inherits); by default ``HOME`` is the first home.
+    """
     homes = tuple(os.path.abspath(h) for h in (homes or default_homes()))
     protected = tuple(dict.fromkeys(_expand(f"~/{rel}", home) for home in homes for rel in PROTECTED_RELATIVE))
     guard = _Guard(homes, protected, self_paths)
@@ -542,7 +549,15 @@ def build_policy(
     skipped: list[str] = []
     warnings: list[str] = []
 
-    def add(path: str, access: str, origin: str, *, strict: bool) -> None:
+    def add(
+        path: str,
+        access: str,
+        origin: str,
+        *,
+        strict: bool,
+        accept: Callable[[str, os.stat_result, list[Identity]], bool] | None = None,
+    ) -> bool:
+        """Grant ``path`` when the guards and then ``accept`` allow it; whether it was granted."""
         path = os.path.abspath(path)
         try:
             st = os.lstat(path)
@@ -550,12 +565,12 @@ def build_policy(
             if strict:
                 raise PolicyError(f"Grant does not exist: {path}") from None
             skipped.append(path)
-            return
+            return False
         if stat.S_ISLNK(st.st_mode):
             if strict:
                 raise PolicyError(f"Refusing a symbolic link as a grant; pass its target: {path}")
             skipped.append(path)
-            return
+            return False
         if (
             origin in ("workspace", "user")
             and stat.S_ISDIR(st.st_mode)
@@ -572,11 +587,14 @@ def build_policy(
             if strict:
                 raise
             skipped.append(f"{path}: {exc}")
-            return
+            return False
+        if accept is not None and not accept(path, st, chain):
+            return False
         previous = grants.get(path)
         if previous and previous.access == "rw":
-            return
+            return True
         grants[path] = Grant(path, access, chain[0][0], chain[0][1], stat.S_ISDIR(st.st_mode), origin)
+        return True
 
     workspace_path = os.path.abspath(workspace)
     add(workspace_path, "rw", "workspace", strict=True)
@@ -620,6 +638,20 @@ def build_policy(
         add(_expand(path, homes[0]), "ro", "user", strict=True)
     for path in write:
         add(_expand(path, homes[0]), "rw", "user", strict=True)
+    if preset:
+        # Last, so a file another grant already covers gets no grant of its own, and includes named
+        # by a file the agent can write are ignored.
+        from babylon60.confine import gitconfig  # imports persistence, which imports this module
+
+        gitconfig.grant_global_config(
+            add,
+            git_env if git_env is not None else {"HOME": homes[0]},
+            grants.values(),
+            protected=protected,
+            origin=f"preset:{preset}:git",
+            skipped=skipped,
+            warnings=warnings,
+        )
     # Post-pass: mounts below directory grants (bind mounts of protected paths or homes).
     refused = guard.mount_refusals(grants.values())
     strict_tmp = os.path.abspath(private_tmp) if private_tmp else None

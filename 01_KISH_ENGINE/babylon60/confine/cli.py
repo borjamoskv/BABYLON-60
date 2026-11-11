@@ -1,10 +1,15 @@
 """Handlers for ``babylon60 run``, ``babylon60 demo`` and ``babylon60 log``.
 
 Exit codes: 0 success (demo: every counted attempt blocked); 1 demo FALSIFIED,
-journal chain broken or ``log --expect-head`` digest absent; 2 demo INCONCLUSIVE,
-usage error or a malformed ``--expect-head``; 3 no confinement backend, a refused
-policy or an unusable journal; 126 the trampoline refused to start the target;
-127 command not found; otherwise the confined command's own exit code.
+a ``demo --check`` document that cannot be read or whose self digest does not
+match, and for ``log`` a broken chain, an unusable journal or an absent
+``--expect-head`` digest; 2 demo INCONCLUSIVE, usage error or a malformed
+``--expect-head``; 3 for ``run`` no confinement backend, uid 0 without
+``--allow-root``, a refused policy, a launcher that imports from a write grant,
+an unusable journal (or one with more than one hard link) or no private
+pseudo-terminal, and for ``demo`` no backend or an unusable journal; 126 the
+trampoline refused to start the target; 127 command not found; otherwise the
+confined command's own exit code (128 + n when signal n ended the session).
 """
 
 from __future__ import annotations
@@ -698,15 +703,17 @@ def run_command(args: argparse.Namespace) -> int:
                 ttys=terminal.ttys if terminal else [],
                 allow_ptys=args.allow_ptys,
                 links=executable_links(executable, homes),
+                git_env=os.environ,  # the agent inherits HOME and XDG_CONFIG_HOME
             )
         except PolicyError as exc:
             print(f"babylon60 run: {exc}", file=sys.stderr)
             return EXIT_UNAVAILABLE
+        # Paths named by a git config file may hold terminal control sequences: never printed raw.
         for skipped in policy.skipped:
             if ": " in skipped:  # a guard refused it, as opposed to a missing path or a symlink
-                print(f"babylon60 run: not granted: {skipped}", file=sys.stderr)
+                print(f"babylon60 run: not granted: {printable(skipped)}", file=sys.stderr)
         for warning in policy.warnings:
-            print(f"babylon60 run: warning: {warning}", file=sys.stderr)
+            print(f"babylon60 run: warning: {printable(warning)}", file=sys.stderr)
         hint = interpreter_hint(executable, homes, policy)
         if hint:
             print(f"babylon60 run: {hint}", file=sys.stderr)
