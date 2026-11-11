@@ -435,6 +435,11 @@ def test_verify_release_rejects_governance_artifact_tampering(tmp_path: Path) ->
 
     assert is_excluded_from_public_tree("docs/security/evidence/swarm100/manifest.json")
     assert is_excluded_from_public_tree("tools/skill_library/catalog.json")
+    assert is_excluded_from_public_tree("tests/test_skill_maintenance.py")
+    assert is_excluded_from_public_tree("tests/test_swarm100_lot1_regressions_vault.py")
+    assert not is_excluded_from_public_tree("tests/test_swarm100_lot1_regressions.py")
+    assert is_excluded_from_public_tree("tests/test_regulatory_native_validation_vault.py")
+    assert not is_excluded_from_public_tree("tests/test_regulatory_native_validation.py")
     assert not is_excluded_from_public_tree("01_KISH_ENGINE/babylon60/cli/main.py")
 
     root, bundle_path, _ = _create_release_fixture(tmp_path, signed=False)
@@ -699,4 +704,3 @@ def test_packaged_release_zip_standalone_verification_without_git(tmp_path: Path
     assert "[VERIFIED]" not in res_tampered.stdout
     assert "[CHECK] source_tree_digest: FAIL [required]" in res_tampered.stderr
     assert "Public source_tree_digest mismatch" in res_tampered.stderr
-

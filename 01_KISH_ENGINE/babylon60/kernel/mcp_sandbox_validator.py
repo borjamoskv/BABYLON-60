@@ -25,6 +25,7 @@ from .mcp_deductive_engine import McpCandidateContract
 SANDBOX_EXEC = "/usr/bin/sandbox-exec"
 MAX_BYTES = 1024 * 1024
 MAX_TIMEOUT = 30.0
+_CLEANUP_DRAIN_SECONDS = 1.0
 
 # This trusted bootstrap sets hard resource limits before loading generated code.
 _BOOTSTRAP = """import resource, sys
@@ -251,11 +252,29 @@ async def _run_confined(
                 os.killpg(process.pid, signal.SIGKILL)
             except ProcessLookupError:
                 pass
-            await process.wait()
             for task in tasks:
                 if not task.done():
                     task.cancel()
             await asyncio.gather(*tasks, return_exceptions=True)
+
+            # Before Python 3.13, Process.wait() resolves only after every pipe has
+            # disconnected, and a reader stopped at the output budget leaves its
+            # transport paused, so waiting first deadlocked on 3.11/3.12. Drain the
+            # killed group's pipes to EOF (bounded: a process that escaped the group
+            # may hold them) and confirm reaping through returncode, which the child
+            # watcher sets on exit independently of the pipes.
+            async def drain() -> None:
+                for stream in (process.stdout, process.stderr):
+                    if stream is not None:
+                        while await stream.read(65_536):
+                            pass
+
+            try:
+                await asyncio.wait_for(drain(), _CLEANUP_DRAIN_SECONDS)
+            except asyncio.TimeoutError:
+                pass
+            while process.returncode is None:
+                await asyncio.sleep(0.01)
 
         reaping = asyncio.create_task(cleanup())
         cancelled = False

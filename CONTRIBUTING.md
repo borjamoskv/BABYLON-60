@@ -21,7 +21,7 @@ Toda contribución (humana o mediante agentes autónomos) se rige por los contra
 - **Verificación previa a commit / PR:**
   ```bash
   # Contratos semánticos y enlaces
-  python3 scripts/c5_quality_gates/audit_semantic_contracts.py --workspace-only
+  python3 scripts/c5_quality_gates/audit_semantic_contracts.py --workspace-only --public-projection
 
   # Presupuesto de tokens
   python3 scripts/c5_quality_gates/audit_token_budget.py --workspace-only --skip-ghost-listeners

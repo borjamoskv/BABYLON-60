@@ -45,7 +45,7 @@ def test_normative_hash_matrix_and_incident_bounds_declared():
     assert "POWER_LOSS_UNVERIFIED" in metadata["incident_bounds_normative"]
 
     sqlite_claim = manifest["claim"]["cortex_persist_sqlite"]
-    assert "BLAKE3 Canonical" in sqlite_claim["notes"]
+    assert "normative BLAKE3 profile" in sqlite_claim["notes"]
     assert "SHA-256 Hardware/Witness" in sqlite_claim["notes"]
     assert "SHA3-256 Legacy L0" in sqlite_claim["notes"]
     assert "SIGKILL" in sqlite_claim["scope"]

@@ -179,6 +179,7 @@ The mathematical substrate: Robinson Arithmetic → Gödel → Turing → Chaiti
 | [07_cross_domain.md](./06_theory/07_cross_domain.md) | Analogías entre lógica y cognición — Ensayo; analogías no demostradas |
 | [08_babylon60_architecture.md](./06_theory/08_babylon60_architecture.md) | Arquitectura propuesta — Diseño; runtime no certificado |
 | [09_formal_ontology_lean.md](./06_theory/09_formal_ontology_lean.md) | Modelos Lean y correspondencia — Fuentes formales acotadas |
+| [LEAN_CENSUS_SCOPE_2026.md](./06_theory/LEAN_CENSUS_SCOPE_2026.md) | Inventario de 144 declaraciones Lean, 275 construcciones y límites de interpretación — No acredita runtime ni análisis PDE |
 | [10_physical_realization.md](./06_theory/10_physical_realization.md) | B60: ejemplos y límites — Ejemplos; garantías no verificadas |
 | [AXIOMATIZATION_C5_REAL.md](./06_theory/AXIOMATIZATION_C5_REAL.md) | Postulados C5-REAL — Revisión previa: no certificados |
 | [TOPOLOGIA_MAESTRA.md](./06_theory/TOPOLOGIA_MAESTRA.md) | Topología conceptual — Mapa; integraciones no certificadas |

@@ -176,7 +176,9 @@ class SwarmCoordinator:
         
         config = types.GenerateContentConfig(
             response_mime_type="application/json",
-            temperature=0.0
+            temperature=0.0,
+            # Same lock as the frontier router: one billed request per call.
+            automatic_continuation=False,
         )
         
         models_pool = ["gemini-3.8-flash", "gemini-3.7-flash", "gemini-3.6-flash", "gemini-3.5-flash"]

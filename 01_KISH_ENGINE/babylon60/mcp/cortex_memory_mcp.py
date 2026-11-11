@@ -133,7 +133,7 @@ def validate_args(tool: str, args: dict[str, Any]) -> None:
     extra = sorted(set(args) - set(props))
     if extra:
         raise ValueError(f"unexpected arguments: {extra}")
-    for name in schema["required"]:  # type: ignore[union-attr, attr-defined]
+    for name in schema["required"]:  # type: ignore[attr-defined]
         if args.get(name) is None:
             raise ValueError(f"missing required argument: {name}")
     for name, value in args.items():
@@ -433,7 +433,7 @@ class Adapter:
                     "projector_version": core.PROJECTOR_VERSION,
                     "policy_version": self.binding["policy_version"],
                     "view_digest": vdigest,
-                    "delivered_item_ids": [i["memory_id"] for i in view["items"]],  # type: ignore[index, attr-defined]
+                    "delivered_item_ids": [i["memory_id"] for i in view["items"]],  # type: ignore[attr-defined]
                     "delivery": "recorded_before_send_unconfirmed",
                     "instance_id": self.instance_id,
                     "n": self.counter,
