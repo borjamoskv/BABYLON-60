@@ -54,7 +54,7 @@ def _ancestors(path: str) -> list[str]:
     return result
 
 
-def render_profile(policy: Policy) -> str:
+def render_profile(policy: Policy, *, unix_sockets: bool = False) -> str:
     deny_roots = ["/Users", *policy.homes]
     granted = [g for g in policy.grants if g.origin != "system"]
     rw = [g.path for g in granted if g.access == "rw"]

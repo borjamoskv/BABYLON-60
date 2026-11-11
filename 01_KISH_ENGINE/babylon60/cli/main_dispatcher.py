@@ -1069,6 +1069,16 @@ def main() -> None:
     )
     p_run.add_argument("--allow-root", action="store_true", help="Accept running as uid 0 (weaker; see help text)")
     p_run.add_argument("--keep-agent-sockets", action="store_true", help="Keep SSH_AUTH_SOCK and GPG_AGENT_INFO")
+    p_run.add_argument(
+        "--allow-unix-sockets",
+        action="store_true",
+        help="Allow Unix domain sockets (ssh-agent, tmux, D-Bus, Docker); blocked by default",
+    )
+    p_run.add_argument(
+        "--allow-ptys",
+        action="store_true",
+        help="Grant new pseudo-terminals; other terminals of this user become readable and writable",
+    )
     p_run.add_argument("--dry-run", action="store_true", help="Print the checked policy without running")
     p_run.add_argument("command", nargs=argparse.REMAINDER, help="-- COMMAND [ARGS...]")
     p_run.set_defaults(func=cmd_run)
@@ -1092,6 +1102,11 @@ def main() -> None:
     )
     p_log.add_argument("--tail", type=int, default=20, help="Events to show (default: 20)")
     p_log.add_argument("--json", action="store_true", help="Print entries and verification as JSON")
+    p_log.add_argument(
+        "--expect-head",
+        metavar="BLAKE3",
+        help="Fail unless the verified chain contains this head digest (one you published earlier)",
+    )
     p_log.set_defaults(func=cmd_log)
 
     p_signature = subparsers.add_parser("signature", help="Render a portable signature from observed turn data")

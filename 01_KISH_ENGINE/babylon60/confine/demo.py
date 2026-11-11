@@ -39,7 +39,7 @@ from blake3 import blake3
 
 from babylon60.confine import launcher
 from babylon60.confine.journal import ConfineJournal, digest
-from babylon60.confine.policy import build_policy, default_homes
+from babylon60.confine.policy import Policy, build_policy, default_homes
 from babylon60.confine.witness import InotifyWitness, Observation, find_token, inotify_available
 
 ATTACKER = Path(__file__).with_name("_attacker.py")
@@ -192,7 +192,7 @@ def _attempt(vector: Vector, run_kind: str, *, self_paths: list[str], timeout: f
         argv = [launcher.interpreter(), "-I", "-S", "-B", "-c", ATTACKER.read_text(encoding="utf-8"), json.dumps(cfg)]
         witness = InotifyWitness([key, ssh]) if inotify_available() else None
         try:
-            result = launcher.run(launcher.Launch(argv, policy), env=env, cwd=ws, timeout=timeout)
+            result = launcher.run(_launch(argv, policy), env=env, cwd=ws, timeout=timeout)
         finally:
             observation = witness.close() if witness else None
         report = _last_json(result.stdout)
@@ -209,6 +209,11 @@ def _attempt(vector: Vector, run_kind: str, *, self_paths: list[str], timeout: f
         if helper is not None:
             helper.join(timeout=1)
         shutil.rmtree(root, ignore_errors=True)
+
+
+def _launch(argv: list[str], policy: Policy | None) -> launcher.Launch:
+    """Confined attempts start exactly as ``babylon60 run`` starts an agent; controls run unrestricted."""
+    return launcher.Launch(argv, None) if policy is None else launcher.session_launch(argv, policy)
 
 
 def _last_json(stdout: bytes) -> dict[str, Any]:

@@ -57,6 +57,20 @@ class Launch:
     seccomp: bool = False
     drop_caps: bool = True
     min_abi: int = MIN_LANDLOCK_ABI
+    unix_sockets: bool = False  # with seccomp (Linux) or Seatbelt (macOS), allow Unix domain sockets
+    new_session: bool = False  # trampoline drops the controlling terminal (setsid) before exec
+    acquire_ctty: bool = False  # test hook: stdin becomes the controlling terminal before confinement
+
+
+def session_launch(argv: list[str], policy: Policy, *, unix_sockets: bool = False) -> Launch:
+    """How ``babylon60 run`` and the demo start a confined target, on every platform."""
+    return Launch(
+        argv,
+        policy,
+        seccomp=sys.platform.startswith("linux"),
+        unix_sockets=unix_sockets,
+        new_session=sys.platform == "darwin",
+    )
 
 
 @dataclass
@@ -76,6 +90,9 @@ def _command(launch: Launch, status_fd: int) -> list[str]:
         "drop_caps": launch.drop_caps,
         "landlock": False,
         "seccomp": launch.seccomp,
+        "unix_sockets": launch.unix_sockets,
+        "new_session": launch.new_session,
+        "acquire_ctty": launch.acquire_ctty,
     }
     prefix: list[str] = []
     if launch.policy is not None:
@@ -90,7 +107,7 @@ def _command(launch: Launch, status_fd: int) -> list[str]:
 
             if not available():
                 raise ConfinementUnavailable("sandbox-exec is not available")
-            prefix = [SANDBOX_EXEC, "-p", render_profile(launch.policy)]
+            prefix = [SANDBOX_EXEC, "-p", render_profile(launch.policy, unix_sockets=launch.unix_sockets)]
         else:
             raise ConfinementUnavailable(f"No confinement backend for {sys.platform}")
     return [*prefix, interpreter(), "-I", "-S", "-B", "-c", TRAMPOLINE.read_text(encoding="utf-8"), json.dumps(cfg)]
@@ -119,7 +136,7 @@ def spawn(
             stderr=stderr,
             pass_fds=(write_fd,),
             close_fds=True,
-            start_new_session=start_new_session,
+            start_new_session=start_new_session or launch.acquire_ctty,
         )
     except BaseException:
         os.close(read_fd)

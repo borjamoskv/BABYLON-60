@@ -110,6 +110,8 @@ class Policy:
     protected: tuple[str, ...]
     grants: tuple[Grant, ...]
     skipped: tuple[str, ...] = field(default_factory=tuple)
+    warnings: tuple[str, ...] = field(default_factory=tuple)
+    allow_ptys: bool = False
 
     def as_dict(self) -> dict[str, object]:
         return {
@@ -118,6 +120,8 @@ class Policy:
             "protected": list(self.protected),
             "grants": [asdict(grant) for grant in self.grants],
             "skipped": list(self.skipped),
+            "warnings": list(self.warnings),
+            "allow_ptys": self.allow_ptys,
         }
 
     def digest(self) -> str:
@@ -126,6 +130,7 @@ class Policy:
             "workspace": self.workspace,
             "protected": list(self.protected),
             "grants": sorted([grant.path, grant.access] for grant in self.grants),
+            "allow_ptys": self.allow_ptys,
         }
         return digest(portable, domain=b"BABYLON60-CONFINE-POLICY/v1\x00")
 
@@ -283,6 +288,8 @@ def build_policy(
     private_tmp: str | None = None,
     self_paths: Sequence[str] = (),
     system: bool = True,
+    ttys: Sequence[str] = (),
+    allow_ptys: bool = False,
 ) -> Policy:
     """Build and check a policy. User grants that fail a guard raise ``PolicyError``."""
     homes = tuple(os.path.abspath(h) for h in (homes or default_homes()))
@@ -290,6 +297,7 @@ def build_policy(
     guard = _Guard(homes, protected, self_paths)
     grants: dict[str, Grant] = {}
     skipped: list[str] = []
+    warnings: list[str] = []
 
     def add(path: str, access: str, origin: str, *, strict: bool) -> None:
         path = os.path.abspath(path)
@@ -344,7 +352,7 @@ def build_policy(
         add(_expand(path, homes[0]), "ro", "user", strict=True)
     for path in write:
         add(_expand(path, homes[0]), "rw", "user", strict=True)
-    return Policy(workspace_path, homes, protected, tuple(grants.values()), tuple(skipped))
+    return Policy(workspace_path, homes, protected, tuple(grants.values()), tuple(skipped), tuple(warnings), allow_ptys)
 
 
 def _contains(parent: str, child: str) -> bool:

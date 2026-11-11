@@ -136,6 +136,7 @@ def run_command(args: argparse.Namespace) -> int:
             runtime=[launcher.interpreter_prefix(), *install_prefixes(executable, homes)],
             preset=args.preset,
             self_paths=[str(journal_path), sys.prefix, package_dir],
+            allow_ptys=args.allow_ptys,
         )
     except PolicyError as exc:
         print(f"babylon60 run: {exc}", file=sys.stderr)
@@ -152,7 +153,7 @@ def run_command(args: argparse.Namespace) -> int:
     if not args.keep_agent_sockets:
         for name in AGENT_SOCKET_VARS:
             env.pop(name, None)
-    seccomp = sys.platform.startswith("linux") and sys.stdin.isatty()
+    launch = launcher.session_launch([executable, *command[1:]], policy, unix_sockets=args.allow_unix_sockets)
     before = hook_digests(args.preset, workspace, homes[0])
     with ConfineJournal(journal_path) as journal:
         journal.append(
@@ -163,13 +164,15 @@ def run_command(args: argparse.Namespace) -> int:
                 "preset": args.preset,
                 "command": os.path.basename(executable),
                 "argc": len(command),
-                "seccomp": seccomp,
+                "seccomp": launch.seccomp,
+                "unix_sockets": launch.unix_sockets,
+                "new_session": launch.new_session,
             },
         )
         previous = signal.signal(signal.SIGINT, signal.SIG_IGN)
         try:
             process, status = launcher.spawn(
-                launcher.Launch([executable, *command[1:]], policy, seccomp=seccomp),
+                launch,
                 env=env,
                 cwd=str(workspace),
                 stdin=None,
