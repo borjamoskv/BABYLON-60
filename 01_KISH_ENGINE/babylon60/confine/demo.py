@@ -104,7 +104,7 @@ class Limit:
 DENIED = ("EACCES", "EPERM")
 # keyctl and add_key for V23 (asm/unistd_64.h, asm-generic/unistd.h)
 KEY_SYSCALLS = {"x86_64": {"add_key": 248, "keyctl": 250}, "aarch64": {"add_key": 217, "keyctl": 219}}
-KEY_SPEC_USER_KEYRING = -4
+KEY_SPEC_PROCESS_KEYRING = -2
 KEYCTL_REVOKE, KEYCTL_SETPERM, KEYCTL_UNLINK = 3, 5, 9
 # Possessor: everything; the owning user (any of its processes): view, read and search.
 KEY_PERM = 0x3F000000 | 0x00010000 | 0x00020000 | 0x00080000
@@ -583,7 +583,12 @@ def _key_syscall(name: str, syscalls: Mapping[str, int], *args: Any) -> int:
 
 
 def _add_user_key(token: str, syscalls: Mapping[str, int]) -> int:
-    """A "user" key holding the token in this uid's user keyring, readable by the uid's processes."""
+    """A "user" key holding the token, readable by every process of this uid (user read permission).
+
+    It lives in this process's keyring, which the harness always possesses, so it can set the
+    permission: a key added to @u is not possessed where the session keyring does not link @u
+    (a systemd service, the GitHub runner), and then KEYCTL_SETPERM fails with EACCES.
+    """
     payload = token.encode()
     serial = _key_syscall(
         "add_key",
@@ -592,14 +597,14 @@ def _add_user_key(token: str, syscalls: Mapping[str, int]) -> int:
         b"b60-demo-" + secrets.token_hex(4).encode(),
         payload,
         len(payload),
-        KEY_SPEC_USER_KEYRING,
+        KEY_SPEC_PROCESS_KEYRING,
     )
     _key_syscall("keyctl", syscalls, KEYCTL_SETPERM, serial, KEY_PERM)
     return serial
 
 
 def _remove_user_key(serial: int, syscalls: Mapping[str, int]) -> None:
-    for operation, args in ((KEYCTL_REVOKE, (serial,)), (KEYCTL_UNLINK, (serial, KEY_SPEC_USER_KEYRING))):
+    for operation, args in ((KEYCTL_REVOKE, (serial,)), (KEYCTL_UNLINK, (serial, KEY_SPEC_PROCESS_KEYRING))):
         with contextlib.suppress(OSError):
             _key_syscall("keyctl", syscalls, operation, *args)
 

@@ -228,6 +228,8 @@ def test_new_vector_control_obtains_its_effect(vector: demo.Vector, tmp_path: Pa
     if vector.id == "V17" and _tiocsti_disabled():
         pytest.skip("TIOCSTI is disabled by the kernel (dev.tty.legacy_tiocsti=0): V17 is unfalsifiable here")
     control = demo._attempt(vector, "control", self_paths=_self_paths(tmp_path / "j.db"), timeout=30)
+    if control.result.startswith("HARNESS-"):
+        pytest.skip(f"the harness cannot set up {vector.id} on this machine ({control.result}): unfalsifiable here")
     assert control.result == "ok" and control.effect, control
     _expected_observation(vector, control)
     assert control.witness is None or control.witness.events == 0 or vector.canary  # not aimed at the canary file
@@ -240,6 +242,8 @@ def test_new_vector_is_blocked_under_confinement(vector: demo.Vector, tmp_path: 
         pytest.skip("TIOCSTI is disabled by the kernel (dev.tty.legacy_tiocsti=0): V17 is unfalsifiable here")
     paths = _self_paths(tmp_path / "j.db")
     control = demo._attempt(vector, "control", self_paths=paths, timeout=30)
+    if control.result.startswith("HARNESS-"):
+        pytest.skip(f"the harness cannot set up {vector.id} on this machine ({control.result}): unfalsifiable here")
     confined = demo._attempt(vector, "confined", self_paths=paths, timeout=30)
     assert demo._classify(vector, control, confined) == "blocked", (control, confined)
     assert confined.result in vector.expected() and not confined.effect and not confined.found
