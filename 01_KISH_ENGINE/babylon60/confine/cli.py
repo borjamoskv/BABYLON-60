@@ -10,35 +10,53 @@ policy or an unusable journal; 126 the trampoline refused to start the target;
 from __future__ import annotations
 
 import argparse
+from collections.abc import Callable, Iterable, Mapping, Sequence
 from datetime import datetime, timezone
+from fnmatch import fnmatchcase
 import json
 import os
 from pathlib import Path
 import shutil
 import signal
 import sys
+import sysconfig
 import tempfile
-from typing import Any
+from typing import TYPE_CHECKING, Any, TypeVar
 
-from blake3 import blake3
-
+from babylon60.confine import persistence
+from babylon60.confine.persistence import printable
 from babylon60.confine.policy import PRESETS, Identity, Policy, ancestry
+
+if TYPE_CHECKING:
+    from babylon60.confine.journal import ConfineJournal
 
 EXIT_USAGE, EXIT_UNAVAILABLE, EXIT_REFUSED, EXIT_NOT_FOUND = 2, 3, 126, 127
 AGENT_SOCKET_VARS = ("SSH_AUTH_SOCK", "GPG_AGENT_INFO")
-# Files that, if an agent edits them, run code later outside the sandbox.
-HOME_HOOKS = {
-    "claude-code": ("~/.claude/settings.json", "~/.claude/settings.local.json", "~/.claude.json"),
-    "codex": ("~/.codex/config.toml",),
-}
-WORKSPACE_HOOKS = (
-    ".git/config",
-    ".git/hooks",
-    ".claude/settings.json",
-    ".claude/settings.local.json",
-    ".mcp.json",
-    ".codex/config.toml",
+# Environment variables whose names look like credentials are not passed to the agent, unless
+# kept with --pass-env (the agent's own credential is kept when its preset is used).
+CREDENTIAL_VARS = frozenset(
+    {
+        "AWS_ACCESS_KEY_ID",
+        "AWS_SECRET_ACCESS_KEY",
+        "AWS_SECURITY_TOKEN",
+        "AWS_SESSION_TOKEN",
+        "DOCKER_AUTH_CONFIG",
+        "GOOGLE_APPLICATION_CREDENTIALS",
+        "KRB5CCNAME",
+        "MYSQL_PWD",
+        *AGENT_SOCKET_VARS,
+    }
 )
+CREDENTIAL_WORDS = ("SECRET", "PASSWORD", "PASSWD", "PASSPHRASE", "CREDENTIAL")  # anywhere in the name
+CREDENTIAL_LAST_WORDS = ("KEY", "APIKEY", "PAT", "AUTH")  # NAME_KEY, NAME_API_KEY, NAME_PAT, NPM_CONFIG__AUTH
+AGENT_CREDENTIALS = {
+    "claude-code": ("ANTHROPIC_API_KEY", "CLAUDE_CODE_OAUTH_TOKEN", "ANTHROPIC_AUTH_TOKEN"),
+    "codex": ("OPENAI_API_KEY", "CODEX_*"),
+}
+JOURNAL_NAMES = 100  # labels journaled per list; the rest are counted
+SHOWN_NAMES = 20  # labels printed per list
+LABEL_CHARS = 512
+_T = TypeVar("_T")
 
 
 def default_journal() -> Path:
@@ -255,28 +273,175 @@ def _env_words(text: str) -> list[str]:
         return text.split()
 
 
-def _digest_tree(path: Path) -> str | None:
-    if not path.exists():
-        return None
-    hasher = blake3()
-    files = [path] if path.is_file() else sorted(p for p in path.rglob("*") if p.is_file())
-    for file in files:
+def launcher_paths(journal: str, package_dir: str) -> list[str]:
+    """The launcher's own state and code: write grants over them, or over a directory above them, are refused.
+
+    Besides the journal, the virtual environment and this package: the base
+    interpreter that runs the trampoline, its prefix, and the standard library and
+    extension modules it imports with ``-I -S`` before it confines itself.
+    """
+    from babylon60.confine import launcher
+
+    paths = [journal, sys.prefix, package_dir, launcher.interpreter_prefix(), launcher.interpreter()]
+    paths.append(sysconfig.get_path("stdlib"))
+    dynload = sysconfig.get_config_var("DESTSHARED")
+    if isinstance(dynload, str) and dynload:
+        paths.append(dynload)
+    return list(dict.fromkeys(path for path in paths if path))
+
+
+def credential_like(name: str) -> bool:
+    """Whether an environment variable's name looks like a credential (``GH_TOKEN``, ``AWS_SECRET_ACCESS_KEY``).
+
+    Words are separated by ``_``: one ending in ``TOKEN`` (not ``MAX_THINKING_TOKENS``
+    or ``TOKENIZERS_PARALLELISM``), one containing ``SECRET``, ``PASSWORD``, ``PASSWD``,
+    ``PASSPHRASE`` or ``CREDENTIAL``, a last word ``KEY``, ``APIKEY``, ``PAT`` or ``AUTH``,
+    ``..._KEY_ID``, ``OP_SESSION_*`` and the names in ``CREDENTIAL_VARS``. Values are never read.
+    """
+    upper = name.upper()
+    if upper in CREDENTIAL_VARS or upper.startswith("OP_SESSION_"):
+        return True
+    words = [word for word in upper.split("_") if word]
+    if not words:
+        return False
+    if any(word.endswith("TOKEN") or any(part in word for part in CREDENTIAL_WORDS) for word in words):
+        return True
+    return words[-1] in CREDENTIAL_LAST_WORDS or words[-2:] == ["KEY", "ID"]
+
+
+def agent_environment(
+    environ: Mapping[str, str], *, preset: str | None, keep_agent_sockets: bool, passed: Iterable[str]
+) -> tuple[dict[str, str], list[str]]:
+    """The environment for the agent and the sorted names removed from it (never their values).
+
+    Removed: names that look like credentials (``credential_like``) and the agent
+    sockets ``SSH_AUTH_SOCK`` and ``GPG_AGENT_INFO``. Kept: the names in ``passed``
+    (``--pass-env``), the sockets with ``keep_agent_sockets``, and the agent's own
+    credential when its preset is used (``AGENT_CREDENTIALS``).
+    """
+    keep = set(passed)
+    if keep_agent_sockets:
+        keep.update(AGENT_SOCKET_VARS)
+    own = AGENT_CREDENTIALS.get(preset or "", ())
+    env: dict[str, str] = {}
+    removed: list[str] = []
+    for name, value in environ.items():
+        if name not in keep and credential_like(name) and not any(fnmatchcase(name, item) for item in own):
+            removed.append(name)
+        else:
+            env[name] = value
+    return env, sorted(removed)
+
+
+def _bounded(labels: Sequence[str], limit: int) -> list[str]:
+    shown = [label if len(label) <= LABEL_CHARS else label[: LABEL_CHARS - 1] + "…" for label in labels[:limit]]
+    return shown + ([f"... and {len(labels) - limit} more"] if len(labels) > limit else [])
+
+
+class SessionChecks:
+    """What ``run`` compares before and after a session: persistence material and home metadata.
+
+    A check that fails is named in ``failed`` with its error and never keeps
+    ``run_end`` out of the journal; everything it reports is printable text.
+    """
+
+    def __init__(self, policy: Policy, workspace: str, home: str | None) -> None:
+        from babylon60.confine import metadata
+
+        self.policy, self.workspace, self.home = policy, workspace, home
+        self.failed: list[str] = []
+        self.report: persistence.Report | None = None
+        self.metadata_changed: list[str] = []
+        self.persistence_before = self._attempt("persistence", self._persistence)
+        self.metadata_before = self._attempt("metadata", lambda: metadata.snapshot(policy.homes, policy.protected))
+
+    def _persistence(self, previous: persistence.Snapshot | None = None) -> persistence.Snapshot:
+        return persistence.snapshot(self.policy, self.workspace, home=self.home, previous=previous)
+
+    def _attempt(self, name: str, check: Callable[[], _T]) -> _T | None:
         try:
-            hasher.update(str(file.relative_to(path) if file != path else ".").encode() + b"\x00" + file.read_bytes())
-        except OSError:
-            hasher.update(str(file).encode() + b"\x00<unreadable>")
-    return hasher.hexdigest()
+            return check()
+        except Exception as exc:  # a failed check is reported, never fatal
+            self.failed.append(printable(f"{name}: {type(exc).__name__}: {exc}")[:LABEL_CHARS])
+            return None
+
+    def finish(self, end: dict[str, Any]) -> None:
+        """Compare again after the session and fill the ``run_end`` body ``end``."""
+        from babylon60.confine import metadata
+
+        end.update(
+            hooks_changed=[],
+            instructions_changed=[],
+            persistence_unchecked=[],
+            metadata_changed=[],
+            metadata_truncated=[],
+            checks_failed=self.failed,
+        )
+        before = self.persistence_before
+        after = self._attempt("persistence", lambda: self._persistence(before)) if before is not None else None
+        if before is not None and after is not None:
+            self.report = self._attempt("persistence", lambda: persistence.changes(before, after))
+        if self.report is not None:
+            end["hooks_changed"] = _bounded(self.report.code, JOURNAL_NAMES)
+            end["instructions_changed"] = _bounded(self.report.instructions, JOURNAL_NAMES)
+            end["persistence_unchecked"] = _bounded(self.report.unchecked, JOURNAL_NAMES)
+        meta_before = self.metadata_before
+        if meta_before is not None:
+            meta_after = self._attempt("metadata", lambda: metadata.snapshot(self.policy.homes, self.policy.protected))
+            if meta_after is not None:
+                self.metadata_changed = (
+                    self._attempt("metadata", lambda: metadata.changes(meta_before, meta_after)) or []
+                )
+                end["metadata_changed"] = self.metadata_changed
+                end["metadata_truncated"] = [meta_after.display(path) for path in meta_after.truncated]
+        end["checks_failed"] = list(self.failed)
+
+    def print_report(self) -> None:
+        report = self.report
+        if report is not None and report.code:
+            print(
+                "babylon60 run: the agent changed files that run outside the sandbox later: "
+                + ", ".join(_bounded(report.code, SHOWN_NAMES)),
+                file=sys.stderr,
+            )
+        if report is not None and report.instructions:
+            print(
+                "babylon60 run: the agent changed instructions that its later sessions read (prompts, not code): "
+                + ", ".join(_bounded(report.instructions, SHOWN_NAMES)),
+                file=sys.stderr,
+            )
+        if report is not None and report.unchecked:
+            print(
+                "babylon60 run: warning: not compared in full, changes there may be missing: "
+                + ", ".join(_bounded(report.unchecked, SHOWN_NAMES)),
+                file=sys.stderr,
+            )
+        if self.metadata_changed:
+            print(
+                "babylon60 run: permissions or ownership changed on the home or protected paths during the session "
+                "(Landlock does not mediate metadata):",
+                file=sys.stderr,
+            )
+            for line in self.metadata_changed:
+                print(f"  {line}", file=sys.stderr)
+        for failure in self.failed:
+            print(
+                f"babylon60 run: warning: a check did not complete, its changes are unknown: {failure}", file=sys.stderr
+            )
 
 
-def hook_digests(preset: str | None, workspace: Path, home: str) -> dict[str, str | None]:
-    targets = {rel: workspace / rel for rel in WORKSPACE_HOOKS}
-    for item in HOME_HOOKS.get(preset or "", ()):
-        targets[item] = Path(home + item[1:])
-    return {name: _digest_tree(path) for name, path in targets.items()}
+def journal_run_end(journal: ConfineJournal, end: dict[str, Any]) -> None:
+    """Append ``run_end``; if the journal refuses that body, append its exit code and the reason instead."""
+    try:
+        journal.append("run_end", end)
+    except ValueError as exc:  # JournalError: not canonical, or too large
+        minimal = {key: end.get(key) for key in ("exit_code", "landlock_abi", "caps_dropped", "ended_by", "leftovers")}
+        minimal["checks_failed"] = [printable(f"journal: {exc}")[:LABEL_CHARS]]
+        journal.append("run_end", minimal)
 
 
 def run_command(args: argparse.Namespace) -> int:
-    from babylon60.confine import launcher, metadata
+    from babylon60.confine import launcher
     from babylon60.confine.journal import ConfineJournal, JournalError
     from babylon60.confine.policy import PolicyError, build_policy, default_homes
     from babylon60.confine.terminal_proxy import PrivateTerminal
@@ -284,6 +449,10 @@ def run_command(args: argparse.Namespace) -> int:
     command = _strip_separator(list(args.command))
     if not command:
         print("babylon60 run: missing command after --", file=sys.stderr)
+        return EXIT_USAGE
+    pass_env = list(getattr(args, "pass_env", None) or [])
+    if any(not name or "=" in name for name in pass_env):
+        print("babylon60 run: --pass-env takes a variable name, never NAME=VALUE", file=sys.stderr)
         return EXIT_USAGE
     if os.geteuid() == 0 and not args.allow_root:
         print(
@@ -341,7 +510,7 @@ def run_command(args: argparse.Namespace) -> int:
                 runtime=[*trampoline_grants(), *executable_grants(executable, homes)],
                 preset=args.preset,
                 private_tmp=private_tmp,
-                self_paths=[str(journal_path), sys.prefix, package_dir],
+                self_paths=launcher_paths(str(journal_path), package_dir),
                 ttys=terminal.ttys if terminal else [],
                 allow_ptys=args.allow_ptys,
                 links=executable_links(executable, homes),
@@ -357,6 +526,17 @@ def run_command(args: argparse.Namespace) -> int:
         hint = interpreter_hint(executable, homes, policy)
         if hint:
             print(f"babylon60 run: {hint}", file=sys.stderr)
+        env, removed = agent_environment(
+            os.environ, preset=args.preset, keep_agent_sockets=args.keep_agent_sockets, passed=pass_env
+        )
+        env_removed = [printable(name) for name in removed]
+        if env_removed:
+            sockets = " (--keep-agent-sockets keeps the agent sockets)" if set(removed) & set(AGENT_SOCKET_VARS) else ""
+            print(
+                f"babylon60 run: not passed to the agent, names that look like credentials: {', '.join(env_removed)}; "
+                f"--pass-env NAME keeps one{sockets}",
+                file=sys.stderr,
+            )
         if args.dry_run:
             document = {"backend": launcher.backend(), "policy_digest": policy.digest(), **policy.as_dict()}
             document["tmpdir"] = "a private directory, created for each run and removed afterwards"
@@ -364,13 +544,10 @@ def run_command(args: argparse.Namespace) -> int:
                 "a private pseudo-terminal, allocated for each run when stdin, stdout or stderr is a terminal "
                 "and relayed to it; the agent never holds the user's terminal"
             )
+            document["env_removed"] = env_removed
             print(json.dumps(document, indent=2))
             return 0
         assert private_tmp is not None
-        env = dict(os.environ)
-        if not args.keep_agent_sockets:
-            for name in AGENT_SOCKET_VARS:
-                env.pop(name, None)
         env["TMPDIR"] = private_tmp
         launch = launcher.run_launch(
             [executable, *command[1:]],
@@ -382,8 +559,8 @@ def run_command(args: argparse.Namespace) -> int:
         ignored = launcher.ignored_signals()
         # SIGINT is ignored below only for this process while it starts the agent.
         launch.default_signals = () if signal.SIGINT in ignored else ("SIGINT",)
-        before = hook_digests(args.preset, workspace, homes[0])
-        meta_before = metadata.snapshot(policy.homes, policy.protected)
+        # git and the agents inside expand ~ with the HOME the agent receives.
+        checks = SessionChecks(policy, str(workspace), env.get("HOME"))
         with ConfineJournal(journal_path) as journal:
             journal.append(
                 "run_start",
@@ -393,6 +570,7 @@ def run_command(args: argparse.Namespace) -> int:
                     "preset": args.preset,
                     "command": os.path.basename(executable),
                     "argc": len(command),
+                    "env_removed": env_removed,
                     "seccomp": launch.seccomp,
                     "unix_sockets": launch.unix_sockets,
                     "new_session": launch.new_session,
@@ -425,36 +603,20 @@ def run_command(args: argparse.Namespace) -> int:
             finally:
                 signal.signal(signal.SIGINT, previous)
                 launcher.become_subreaper(False)
-            after = hook_digests(args.preset, workspace, homes[0])
-            changed = sorted(name for name in before if before[name] != after[name])
-            meta_after = metadata.snapshot(policy.homes, policy.protected)
-            meta_changed = metadata.changes(meta_before, meta_after)
-            journal.append(
-                "run_end",
-                {
-                    "exit_code": returncode,
-                    "hooks_changed": changed,
-                    "metadata_changed": meta_changed,
-                    "metadata_truncated": [meta_after.display(path) for path in meta_after.truncated],
-                    "landlock_abi": status.get("landlock_abi"),
-                    "caps_dropped": status.get("caps_dropped"),
-                    "ended_by": signal.Signals(session.ended_by).name if session.ended_by else None,
-                    "leftovers": session.leftovers,
-                },
-            )
-        if changed:
-            print(
-                "babylon60 run: the agent changed files that run outside the sandbox later: " + ", ".join(changed),
-                file=sys.stderr,
-            )
-        if meta_changed:
-            print(
-                "babylon60 run: permissions or ownership changed on the home or protected paths during the session "
-                "(Landlock does not mediate metadata):",
-                file=sys.stderr,
-            )
-            for line in meta_changed:
-                print(f"  {line}", file=sys.stderr)
+            # supervise() ended every descendant first, so the checks see the final state.
+            # run_end is journaled even when a check fails (named in checks_failed) or is interrupted.
+            end: dict[str, Any] = {
+                "exit_code": returncode,
+                "landlock_abi": status.get("landlock_abi"),
+                "caps_dropped": status.get("caps_dropped"),
+                "ended_by": signal.Signals(session.ended_by).name if session.ended_by else None,
+                "leftovers": session.leftovers,
+            }
+            try:
+                checks.finish(end)
+            finally:
+                journal_run_end(journal, end)
+        checks.print_report()
         return session.exit_code  # 128 + n when signal n killed the agent or (SIGTERM, SIGHUP) ended the session
     finally:
         if terminal is not None:

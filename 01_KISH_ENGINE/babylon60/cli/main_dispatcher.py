@@ -1070,6 +1070,13 @@ def main() -> None:
     p_run.add_argument("--allow-root", action="store_true", help="Accept running as uid 0 (weaker; see help text)")
     p_run.add_argument("--keep-agent-sockets", action="store_true", help="Keep SSH_AUTH_SOCK and GPG_AGENT_INFO")
     p_run.add_argument(
+        "--pass-env",
+        action="append",
+        default=[],
+        metavar="NAME",
+        help="Pass this environment variable although its name looks like a credential (repeatable)",
+    )
+    p_run.add_argument(
         "--allow-unix-sockets",
         action="store_true",
         help="Allow Unix domain sockets (ssh-agent, tmux, D-Bus, Docker); blocked by default",

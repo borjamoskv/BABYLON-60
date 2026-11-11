@@ -40,6 +40,7 @@ from typing import Any
 import pytest
 
 from babylon60.confine import launcher
+from babylon60.confine.cli import credential_like
 from babylon60.confine.launcher import Launch, interpreter, spawn
 from babylon60.confine.policy import default_homes
 
@@ -191,7 +192,9 @@ class Box:
     tmp: Path
 
     def env(self) -> dict[str, str]:
-        return {**os.environ, "HOME": str(self.home), "PYTHONPATH": str(ROOT / "01_KISH_ENGINE"), "LC_ALL": "C"}
+        # Without names that look like credentials: run would report them on the terminal under test.
+        base = {name: value for name, value in os.environ.items() if not credential_like(name)}
+        return {**base, "HOME": str(self.home), "PYTHONPATH": str(ROOT / "01_KISH_ENGINE"), "LC_ALL": "C"}
 
     def cli(self, *argv: str) -> list[str]:
         """``babylon60 run -- argv``."""
