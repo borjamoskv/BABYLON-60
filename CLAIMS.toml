@@ -112,6 +112,7 @@ statement = "MCP server enforces AX-0: stochastic AI clients cannot self-authori
 evidence = "pytest tests/test_ax0_mcp_isolation.py"
 status = "verified"
 evidence_level = "L2_IMPLEMENTATION"
+notes = "The evidence suite failed at e649125 (macOS arm64, CPython 3.14.7, 2026-11-07; recorded cause truncated) and 3/3 at daa0a84 (Linux x86_64; CPython 3.12.3, 3.13.18 and 3.14.6; 2026-11-11): CortexMCPServer refused to start with SKILLS_LOCK_MISMATCH because the cortex-kernel workspace skill was not pinned in docs/skills-lock.json, so no AX-0 assertion was reached. After 6ecc2b4 regenerated the skills lockfiles, the suite passed 3/3 at 6ecc2b4 on the same three interpreters, and the claim command passed at the revision that restores this status. Scope of the pass: Linux x86_64 only; macOS was not re-run and remains NO_VERIFICADO on that platform. Run record: scripts/c5_quality_gates/claims_sitrep.json (evidence_run)."
 component = "01_KISH_ENGINE"
 
 [claim.AUTH_001]
