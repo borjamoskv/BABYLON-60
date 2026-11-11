@@ -32,6 +32,9 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          # The recorded evidence must name the branch commit, not a synthetic merge commit.
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
         with:
           python-version: '3.12'
@@ -44,12 +47,26 @@ jobs:
           tests/test_confine_demo.py tests/test_confine_cli.py
         env:
           BABYLON60_REQUIRE_LANDLOCK: "1"
+      - name: Record the first-block demo as evidence
+        run: |
+          uv run --locked --no-sync babylon60 demo --journal "$RUNNER_TEMP/journal.db" --json "$RUNNER_TEMP/demo-linux.json"
+          echo "::group::first-block evidence JSON"
+          cat "$RUNNER_TEMP/demo-linux.json"
+          echo "::endgroup::"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: first-block-demo-linux
+          path: ${{ runner.temp }}/demo-linux.json
+          if-no-files-found: error
 
   seatbelt:
     runs-on: macos-15
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          # The recorded evidence must name the branch commit, not a synthetic merge commit.
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
         with:
           python-version: '3.12'
@@ -62,3 +79,14 @@ jobs:
           tests/test_confine_demo.py tests/test_confine_cli.py
         env:
           BABYLON60_REQUIRE_SEATBELT: "1"
+      - name: Record the first-block demo as evidence
+        run: |
+          uv run --locked --no-sync babylon60 demo --journal "$RUNNER_TEMP/journal.db" --json "$RUNNER_TEMP/demo-macos.json"
+          echo "::group::first-block evidence JSON"
+          cat "$RUNNER_TEMP/demo-macos.json"
+          echo "::endgroup::"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: first-block-demo-macos
+          path: ${{ runner.temp }}/demo-macos.json
+          if-no-files-found: error
