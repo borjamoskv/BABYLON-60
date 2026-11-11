@@ -10,7 +10,7 @@ import sys
 
 import pytest
 
-from babylon60.confine.cli import _strip_separator, install_prefixes
+from babylon60.confine.cli import _strip_separator, executable_grants
 from babylon60.confine.launcher import landlock_abi
 from babylon60.confine.policy import MIN_LANDLOCK_ABI
 
@@ -56,13 +56,13 @@ def test_separator_is_stripped_exactly_once() -> None:
     assert _strip_separator([]) == []
 
 
-def test_install_prefix_under_home_is_detected(tmp_path: Path) -> None:
+def test_executable_under_home_is_granted_as_one_file(tmp_path: Path) -> None:
     home = tmp_path / "home"
     tool = home / ".tools" / "agent" / "bin" / "agent"
     tool.parent.mkdir(parents=True)
     tool.write_text("#!/bin/sh\n")
-    assert install_prefixes(str(tool), (str(home),)) == [str(home / ".tools" / "agent")]
-    assert install_prefixes("/bin/sh", (str(home),)) == []
+    assert executable_grants(str(tool), (str(home),)) == [str(tool)]
+    assert executable_grants("/bin/sh", (str(home),)) == []
 
 
 def test_missing_command_is_a_usage_error(sandbox: dict[str, Path]) -> None:

@@ -20,6 +20,8 @@ from typing import Any
 
 from blake3 import blake3
 
+from babylon60.confine.policy import PRESETS, Identity, Policy, ancestry
+
 EXIT_USAGE, EXIT_UNAVAILABLE, EXIT_REFUSED, EXIT_NOT_FOUND = 2, 3, 126, 127
 AGENT_SOCKET_VARS = ("SSH_AUTH_SOCK", "GPG_AGENT_INFO")
 # Files that, if an agent edits them, run code later outside the sandbox.
@@ -47,36 +49,187 @@ def _strip_separator(command: list[str]) -> list[str]:
     return command[1:] if command[:1] == ["--"] else command
 
 
-def _shebang_interpreter(executable: str) -> str | None:
+def trampoline_grants() -> list[str]:
+    """What the trampoline itself must read while confined: nothing on Linux, its interpreter on macOS.
+
+    Landlock is applied by the trampoline after its imports; from then on it
+    opens only ``/proc/self/status`` before ``execv`` (tests/test_confine_grants.py),
+    so the agent gets no access to the launcher's Python. ``sandbox-exec``
+    applies the Seatbelt profile before the interpreter starts, so an interpreter
+    under a home directory (uv, pyenv, conda) must stay readable there.
+    """
+    from babylon60.confine import launcher
+
+    return [launcher.interpreter_prefix()] if sys.platform == "darwin" else []
+
+
+def executable_grants(executable: str, homes: tuple[str, ...]) -> list[str]:
+    """Read/exec grant for the command itself when its file lives under a home directory.
+
+    Only that file is granted: never its directory or install prefix, and nothing
+    derived from its contents (a ``#!/usr/bin/env cargo`` line would otherwise
+    expose ``~/.cargo/credentials.toml``). Install prefixes under a home come only
+    from ``--preset`` or ``--allow-read``. ``realpath`` only locates the file;
+    containment is decided by inode identity and ``build_policy`` checks the grant
+    again with its guards.
+    """
+    real = os.path.realpath(executable)
+    if not os.path.isfile(real) or not _home_ids(homes).intersection(_chain(real)[1:]):
+        return []
+    return [real]
+
+
+def interpreter_hint(executable: str, homes: tuple[str, ...], policy: Policy) -> str | None:
+    """One line for stderr when a script's ``#!`` interpreter is under a home directory and not granted.
+
+    This is the only reader of the ``#!`` line and it never adds a grant. It
+    suggests the presets that would cover the interpreter and ``--allow-read`` for
+    the directory that holds it (or its virtual environment), never a wider prefix.
+    """
+    named = _script_interpreter(executable)
+    if named is None:
+        return None
+    home_ids = _home_ids(homes)
+    granted = {(grant.dev, grant.ino) for grant in policy.grants if grant.access in ("ro", "rw")}
+    venv = os.path.dirname(os.path.dirname(named))
+    needed = [venv] if os.path.isfile(os.path.join(venv, "pyvenv.cfg")) else []
+    presets: set[str] | None = None
+    allow: list[str] = []
+    for path in [*needed, os.path.realpath(named)]:
+        chain = _chain(path)
+        if not chain or granted.intersection(chain) or not home_ids.intersection(chain[1:]):
+            continue
+        covering = _covering_presets(chain, homes[0]) if homes else set()
+        presets = covering if presets is None else presets & covering
+        allow.append(path if os.path.isdir(path) or chain[1] in home_ids else os.path.dirname(path))
+    if not allow:
+        return None
+    options = [f"--preset {name}" for name in sorted(presets or ())]
+    options.append(" ".join(f"--allow-read {path}" for path in dict.fromkeys(allow)))
+    choice = " or ".join([", ".join(options[:-1]), options[-1]] if len(options) > 1 else options)
+    hint = (
+        f"{os.path.basename(executable)} starts {named} (its #! interpreter), which is under a home "
+        f"directory and not granted; to allow it, pass {choice}"
+    )
+    # A #! line or a planted symlink can carry terminal control sequences: never print them raw.
+    return "".join(char if char.isprintable() else repr(char)[1:-1] for char in hint)
+
+
+def _home_ids(homes: tuple[str, ...]) -> set[Identity]:
+    ids: set[Identity] = set()
+    for home in homes:
+        try:
+            st = os.stat(home)
+        except OSError:
+            continue
+        ids.add((st.st_dev, st.st_ino))
+    return ids
+
+
+def _chain(path: str) -> list[Identity]:
     try:
-        with open(executable, "rb") as handle:
-            first = handle.readline(256)
+        return ancestry(path)
+    except OSError:
+        return []
+
+
+def _covering_presets(chain: list[Identity], home: str) -> set[str]:
+    """Presets with a grant (expanded in ``home`` as ``build_policy`` does) that contains the path of ``chain``."""
+    names: set[str] = set()
+    for name, spec in PRESETS.items():
+        for item in (*spec["read"], *spec["write"]):
+            path = home + item[1:]
+            if os.path.islink(path):  # build_policy skips symlinked grants
+                continue
+            try:
+                st = os.stat(path)
+            except OSError:
+                continue
+            if (st.st_dev, st.st_ino) in chain:
+                names.add(name)
+    return names
+
+
+def _script_interpreter(executable: str) -> str | None:
+    """Absolute path of the interpreter a ``#!`` line names, ``env`` lookups included (hint only)."""
+    if not os.path.isfile(executable):
+        return None
+    try:
+        fd = os.open(executable, os.O_RDONLY | os.O_NONBLOCK | os.O_NOCTTY | os.O_CLOEXEC)
+        try:
+            head = os.read(fd, 256)
+        finally:
+            os.close(fd)
     except OSError:
         return None
-    if not first.startswith(b"#!"):
+    if not head.startswith(b"#!"):
         return None
-    parts = first[2:].decode("utf-8", "replace").split()
-    if not parts:
+    words = head[2:].split(b"\n", 1)[0].decode("utf-8", "replace").split(None, 1)
+    if not words:
         return None
-    if os.path.basename(parts[0]) == "env" and len(parts) > 1:
-        return shutil.which(parts[-1])
-    return parts[0]
+    interpreter = words[0]
+    if os.path.basename(interpreter) == "env":
+        command, search = _env_command(words[1] if len(words) > 1 else "")
+        if command is None:
+            return None
+        if "/" not in command:
+            found = shutil.which(command, path=search)
+            return os.path.abspath(found) if found else None
+        interpreter = command
+    return interpreter if os.path.isabs(interpreter) else None
 
 
-def install_prefixes(executable: str, homes: tuple[str, ...]) -> list[str]:
-    """Read/exec grants for an agent installed under a home directory.
+def _env_command(argument: str) -> tuple[str | None, str | None]:
+    """The command ``env ARGUMENT`` runs and the PATH it searches (``None``: the inherited one).
 
-    ``realpath`` only locates where the binary lives; the resulting grant is
-    still checked by inode identity in ``build_policy`` and skipped if a guard fails.
+    ``-S``/``--split-string`` takes the rest of the line (Linux passes a ``#!``
+    argument as one string) and splits it with quotes and ``${NAME}``. Also
+    handled: ``-u NAME``, ``-C DIR``, ``-a ARG``, BSD ``-P PATH``, flags such as
+    ``-i`` or ``-v``, ``NAME=VALUE`` assignments (``PATH=`` changes the search), ``--``.
     """
-    prefixes: list[str] = []
-    for path in (executable, _shebang_interpreter(executable)):
-        if not path:
+    words = argument.split()
+    search: str | None = None
+    while words:
+        word = words.pop(0)
+        if word == "--":
+            break
+        if word == "-" or ("=" in word and not word.startswith("-")):
+            if word.startswith("PATH="):
+                search = word[5:]
             continue
-        real = os.path.realpath(path)
-        if any(real.startswith(home.rstrip("/") + "/") for home in homes):
-            prefixes.append(os.path.dirname(os.path.dirname(real)))
-    return prefixes
+        if not word.startswith("-"):
+            return word, search
+        split: str | None = None
+        if word.startswith("--"):
+            name, has_value, value = word[2:].partition("=")
+            if name == "split-string":
+                split = value
+            elif name in ("unset", "chdir", "argv0") and not has_value and words:
+                words.pop(0)
+        else:
+            for index, flag in enumerate(word[1:], start=2):
+                if flag == "S":
+                    split = word[index:]
+                elif flag in "uCaP":
+                    value = word[index:] or (words.pop(0) if words else "")
+                    if flag == "P":
+                        search = value
+                else:
+                    continue
+                break
+        if split is not None:
+            words = _env_words(" ".join([split, *words]))
+    return (words[0], search) if words else (None, search)
+
+
+def _env_words(text: str) -> list[str]:
+    """Split like ``env -S`` (quotes, backslashes, ``${NAME}``), closely enough for a hint."""
+    import shlex
+
+    try:
+        return shlex.split(os.path.expandvars(text))
+    except ValueError:
+        return text.split()
 
 
 def _digest_tree(path: Path) -> str | None:
@@ -145,7 +298,7 @@ def run_command(args: argparse.Namespace) -> int:
             homes=homes,
             read=args.allow_read,
             write=args.allow_write,
-            runtime=[launcher.interpreter_prefix(), *install_prefixes(executable, homes)],
+            runtime=[*trampoline_grants(), *executable_grants(executable, homes)],
             preset=args.preset,
             self_paths=[str(journal_path), sys.prefix, package_dir],
             allow_ptys=args.allow_ptys,
@@ -156,6 +309,9 @@ def run_command(args: argparse.Namespace) -> int:
     for skipped in policy.skipped:
         if ": " in skipped:  # a guard refused it, as opposed to a missing path or a symlink
             print(f"babylon60 run: not granted: {skipped}", file=sys.stderr)
+    hint = interpreter_hint(executable, homes, policy)
+    if hint:
+        print(f"babylon60 run: {hint}", file=sys.stderr)
     if args.dry_run:
         print(
             json.dumps({"backend": launcher.backend(), "policy_digest": policy.digest(), **policy.as_dict()}, indent=2)
