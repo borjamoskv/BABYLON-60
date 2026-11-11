@@ -182,6 +182,31 @@ PUBLIC_FIXTURE_EXCEPTIONS: dict[tuple[str, str, str], str] = {
         "GENERIC_SECRET",
         "43eeccf6afd8e94ea043043f7820e0c409e7bc8313f7b568f0ac066036bcae7f",
     ): "Explicit synthetic secret sentinel in the archived independent queue worker.",
+    (
+        "scripts/c5_tests/test_gemini4_frontier_router.py",
+        "GENERIC_SECRET",
+        "011b23b193c7c8cb31f0262e98f2c8b2aa956e37bcc9107b342d56a4ccf1d7b5",
+    ): "Synthetic Gemini router key for the fallback and 24h cache-hit tests.",
+    (
+        "scripts/c5_tests/test_gemini4_frontier_router.py",
+        "GENERIC_SECRET",
+        "188c25d6a779dad3d9be6fdd25e141d4eb2d735dc14da5242a0dd127cb492485",
+    ): "Synthetic Gemini router key for the provisioned-carbon resolution test.",
+    (
+        "scripts/c5_tests/test_gemini4_frontier_router.py",
+        "GENERIC_SECRET",
+        "79b4a9d253012aa3a7e6bc1487bcef483e67d745dde379ec9fcfb7174f9b198f",
+    ): "Synthetic pre-rotation key in the cache-invalidation-on-rotation test.",
+    (
+        "scripts/c5_tests/test_gemini4_frontier_router.py",
+        "GENERIC_SECRET",
+        "ccf2ac0d022defb092262a87151986a8ea3a785c4f98db6f4dd8512d8188e618",
+    ): "Synthetic post-rotation key in the cache-invalidation-on-rotation test.",
+    (
+        "scripts/c5_tests/test_gemini4_frontier_router.py",
+        "GENERIC_SECRET",
+        "3c7e5a0d44e086b6c022afb720f8d159afbd6f64e23a6fd447aeb6d84941203f",
+    ): "Synthetic key without Gemini 4 access in the governance-invariants test.",
 }
 
 
