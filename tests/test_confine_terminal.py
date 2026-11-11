@@ -48,7 +48,18 @@ needs_seccomp = pytest.mark.skipif(
     not SECCOMP or not (landlock_abi() >= MIN_LANDLOCK_ABI or REQUIRED),
     reason="seccomp filter: Linux x86_64/aarch64 with Landlock only",
 )
-DEFAULT_RULES = ["foreign_arch", "tiocsti", "tioclinux", "af_unix", "io_uring"]
+DEFAULT_RULES = [
+    "foreign_arch",
+    "tiocsti",
+    "tioclinux",
+    "af_unix",
+    "socketpair_dgram",
+    "io_uring",
+    "keyrings",
+    "sysv_ipc",
+    "openat2",
+    "setid_modes",
+]
 
 
 @pytest.fixture
@@ -158,7 +169,9 @@ def test_seccomp_reports_each_rule_it_applied(box: dict[str, Any]) -> None:
     default = _run(box, ["/bin/true"], seccomp=True)
     assert default.returncode == 0 and default.status["seccomp"] == DEFAULT_RULES
     allowed = _run(box, ["/bin/true"], seccomp=True, unix_sockets=True)
-    assert allowed.returncode == 0 and allowed.status["seccomp"] == [r for r in DEFAULT_RULES if r != "af_unix"]
+    assert allowed.returncode == 0 and allowed.status["seccomp"] == [
+        r for r in DEFAULT_RULES if r not in ("af_unix", "socketpair_dgram")
+    ]
     launch = launcher.session_launch(["/bin/true"], box["policy"])
     assert (launch.seccomp, launch.unix_sockets, launch.new_session) == (True, False, False)
 

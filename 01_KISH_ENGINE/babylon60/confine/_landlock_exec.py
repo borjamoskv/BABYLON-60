@@ -53,13 +53,36 @@ LINUX_CAPABILITY_VERSION_3 = 0x20080522
 # machine: (AUDIT_ARCH_*, __NR_ioctl, __NR_socket, x32 shares the audit arch)
 SECCOMP_ARCH = {"x86_64": (0xC000003E, 16, 41, True), "aarch64": (0xC00000B7, 29, 198, False)}
 IO_URING_SYSCALLS = (425, 426, 427)  # io_uring_setup, io_uring_enter, io_uring_register on every architecture
+# Further syscall numbers per machine (x86_64: asm/unistd_64.h; aarch64: asm-generic/unistd.h).
+SECCOMP_SYSCALLS = {
+    "x86_64": {
+        "keyrings": (248, 249, 250),  # add_key, request_key, keyctl
+        # shmget shmat shmctl shmdt, semget semop semctl semtimedop, msgget msgsnd msgrcv msgctl
+        "sysv_ipc": (29, 30, 31, 67, 64, 65, 66, 220, 68, 69, 70, 71),
+        "socketpair": 53,
+        "openat2": 437,
+        # syscall: index of its mode argument (chmod fchmod fchmodat fchmodat2 open creat openat mknod mknodat)
+        "mode_arg": {90: 1, 91: 1, 268: 2, 452: 2, 2: 2, 85: 1, 257: 3, 133: 1, 259: 2},
+    },
+    "aarch64": {
+        "keyrings": (217, 218, 219),
+        "sysv_ipc": (194, 196, 195, 197, 190, 193, 191, 192, 186, 189, 188, 187),
+        "socketpair": 199,
+        "openat2": 437,
+        "mode_arg": {52: 1, 53: 2, 452: 2, 56: 3, 33: 2},  # fchmod fchmodat fchmodat2 openat mknodat
+    },
+}
+SOCK_STREAM, SOCK_SEQPACKET, SOCK_TYPE_MASK = 1, 5, 0xF
+SETID_BITS = 0o6000  # S_ISUID | S_ISGID
 X32_SYSCALL_BIT = 0x40000000
 TIOCSTI, TIOCLINUX = 0x5412, 0x541C
 AF_UNIX = 1
-BPF_LD_W_ABS, BPF_JEQ_K, BPF_JGE_K, BPF_RET_K = 0x20, 0x15, 0x35, 0x06
+BPF_LD_W_ABS, BPF_JEQ_K, BPF_JGE_K, BPF_JSET_K, BPF_RET_K, BPF_ALU_AND_K = 0x20, 0x15, 0x35, 0x45, 0x06, 0x54
 SECCOMP_RET_ALLOW, SECCOMP_RET_EPERM = 0x7FFF0000, 0x00050000 | errno.EPERM
+SECCOMP_RET_ENOSYS = 0x00050000 | errno.ENOSYS
 # struct seccomp_data: nr, arch, then args[]; the low 32 bits of an argument come first (little endian).
 DATA_NR, DATA_ARCH, DATA_ARG0_LOW, DATA_ARG1_LOW = 0, 4, 16, 24
+DATA_ARG_LOW = {1: 24, 2: 32, 3: 40}
 
 
 class Refused(Exception):
@@ -219,20 +242,34 @@ def _assemble(lines):
 
 
 def _seccomp_program(machine, unix_sockets):
-    """Return (rule names, program): EPERM for each rule, every other syscall allowed."""
+    """Return (rule names, program): EPERM for each rule, every other syscall allowed.
+
+    Beyond terminal injection and Unix sockets, the filter closes what Landlock does not
+    mediate: kernel keyrings (Kerberos ``KEYRING:persistent`` caches, keyctl secret stores),
+    System V IPC of unconfined processes, and setuid/setgid modes on files the agent can
+    write (a planted setuid program runs with its owner's rights for any local user).
+    ``openat2`` gets ENOSYS because its mode sits in a struct the filter cannot read;
+    libraries fall back to ``openat``.
+    """
     if machine not in SECCOMP_ARCH:
         raise Refused(f"seccomp filter unsupported on {machine}")
     arch, nr_ioctl, nr_socket, has_x32 = SECCOMP_ARCH[machine]
+    numbers = SECCOMP_SYSCALLS[machine]
     rules = ["foreign_arch", "tiocsti", "tioclinux"]
     lines = [(BPF_LD_W_ABS, 0, 0, DATA_ARCH), (BPF_JEQ_K, 0, "deny", arch), (BPF_LD_W_ABS, 0, 0, DATA_NR)]
     if has_x32:
         lines.append((BPF_JGE_K, "deny", 0, X32_SYSCALL_BIT))
     lines.append((BPF_JEQ_K, "ioctl", 0, nr_ioctl))
     if not unix_sockets:
-        rules.append("af_unix")
+        rules += ["af_unix", "socketpair_dgram"]
         lines.append((BPF_JEQ_K, "socket", 0, nr_socket))
-    rules.append("io_uring")
-    lines += [(BPF_JEQ_K, "deny", 0, nr) for nr in IO_URING_SYSCALLS]
+        lines.append((BPF_JEQ_K, "socketpair", 0, numbers["socketpair"]))
+    rules += ["io_uring", "keyrings", "sysv_ipc", "openat2", "setid_modes"]
+    for nr in (*IO_URING_SYSCALLS, *numbers["keyrings"], *numbers["sysv_ipc"]):
+        lines.append((BPF_JEQ_K, "deny", 0, nr))
+    lines.append((BPF_JEQ_K, "enosys", 0, numbers["openat2"]))
+    for nr, index in numbers["mode_arg"].items():
+        lines.append((BPF_JEQ_K, f"mode{index}", 0, nr))
     lines += [
         (BPF_RET_K, 0, 0, SECCOMP_RET_ALLOW),
         "ioctl",
@@ -242,14 +279,36 @@ def _seccomp_program(machine, unix_sockets):
         (BPF_RET_K, 0, 0, SECCOMP_RET_ALLOW),
     ]
     if not unix_sockets:
-        # socketpair() stays allowed: its sockets are connected to each other, not to a path.
         lines += [
             "socket",
             (BPF_LD_W_ABS, 0, 0, DATA_ARG0_LOW),  # the domain is an int: high bits cannot hide AF_UNIX
             (BPF_JEQ_K, "deny", 0, AF_UNIX),
             (BPF_RET_K, 0, 0, SECCOMP_RET_ALLOW),
+            # A socketpair is connected to its twin, but a datagram end can still sendto() any
+            # datagram socket by path (journald, /dev/log, control sockets): keep only stream
+            # and seqpacket pairs. SOCK_RAW on AF_UNIX behaves as a datagram socket.
+            "socketpair",
+            (BPF_LD_W_ABS, 0, 0, DATA_ARG0_LOW),
+            (BPF_JEQ_K, 0, "allow", AF_UNIX),
+            (BPF_LD_W_ABS, 0, 0, DATA_ARG1_LOW),
+            (BPF_ALU_AND_K, 0, 0, SOCK_TYPE_MASK),  # drops SOCK_NONBLOCK and SOCK_CLOEXEC
+            (BPF_JEQ_K, "allow", 0, SOCK_STREAM),
+            (BPF_JEQ_K, "allow", "deny", SOCK_SEQPACKET),
         ]
-    lines += ["deny", (BPF_RET_K, 0, 0, SECCOMP_RET_EPERM)]
+    for index in sorted(set(numbers["mode_arg"].values())):
+        lines += [
+            f"mode{index}",
+            (BPF_LD_W_ABS, 0, 0, DATA_ARG_LOW[index]),  # mode_t is 32 bits
+            (BPF_JSET_K, "deny", "allow", SETID_BITS),
+        ]
+    lines += [
+        "allow",
+        (BPF_RET_K, 0, 0, SECCOMP_RET_ALLOW),
+        "enosys",
+        (BPF_RET_K, 0, 0, SECCOMP_RET_ENOSYS),
+        "deny",
+        (BPF_RET_K, 0, 0, SECCOMP_RET_EPERM),
+    ]
     return rules, _assemble(lines)
 
 
