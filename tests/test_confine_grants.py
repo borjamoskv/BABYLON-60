@@ -110,7 +110,7 @@ def test_home_spelled_through_a_symlink_is_matched_by_identity(layout: dict[str,
 def test_shebang_never_widens_the_grant(layout: dict[str, Path], monkeypatch: pytest.MonkeyPatch) -> None:
     home = layout["home"]
     cargo = _executable(home / ".cargo" / "bin" / "cargo", "#!/bin/sh\n")
-    (home / ".cargo" / "credentials.toml").write_text('token = "B60-CANARY-unit"\n')
+    (home / ".cargo" / "credentials.toml").write_text('canary = "B60-CANARY-unit"\n')
     monkeypatch.setenv("PATH", os.pathsep.join([str(cargo.parent), "/usr/bin", "/bin"]))
     for line in ("#!/usr/bin/env cargo", "#!/usr/bin/env -S cargo +nightly -Zscript", f"#!{cargo}"):
         in_home = _executable(home / "scripts" / "setup", line + "\n")
@@ -134,7 +134,7 @@ def test_policy_guards_still_check_the_executable_grant(layout: dict[str, Path])
 def cargo(layout: dict[str, Path], monkeypatch: pytest.MonkeyPatch) -> Path:
     home = layout["home"]
     cargo = _executable(home / ".cargo" / "bin" / "cargo", "#!/bin/sh\necho cargo\n")
-    (home / ".cargo" / "credentials.toml").write_text('token = "B60-CANARY-hint"\n')
+    (home / ".cargo" / "credentials.toml").write_text('canary = "B60-CANARY-hint"\n')
     monkeypatch.setenv("PATH", os.pathsep.join([str(cargo.parent), "/usr/bin", "/bin"]))
     return cargo
 
@@ -317,10 +317,10 @@ def test_trampoline_reads_nothing_of_its_interpreter_once_restricted(layout: dic
 def box(tmp_path: Path) -> dict[str, Any]:
     home = tmp_path / "home"
     (home / ".ssh").mkdir(parents=True)
-    token = "B60-CANARY-cargo-" + secrets.token_hex(8)
+    canary = "B60-CANARY-cargo-" + secrets.token_hex(8)
     credentials = home / ".cargo" / "credentials.toml"
     credentials.parent.mkdir()
-    credentials.write_text(f'[registry]\ntoken = "{token}"\n')
+    credentials.write_text(f'[registry]\ncanary = "{canary}"\n')
     credentials.chmod(0o600)
     cargo = _executable(
         home / ".cargo" / "bin" / "cargo", f"#!/bin/sh\necho cargo ran\ncat {shlex.quote(str(credentials))}\n"
@@ -340,7 +340,7 @@ def box(tmp_path: Path) -> dict[str, Any]:
         "PYTHONPATH": str(ROOT / "01_KISH_ENGINE"),
     }
     journal = tmp_path / "state" / "journal.db"
-    return {"home": home, "ws": ws, "cargo": cargo, "agent": agent, "token": token, "env": env, "journal": journal}
+    return {"home": home, "ws": ws, "cargo": cargo, "agent": agent, "canary": canary, "env": env, "journal": journal}
 
 
 def _run(box: dict[str, Any], *command: str, options: tuple[str, ...] = ()) -> subprocess.CompletedProcess[str]:
@@ -366,7 +366,7 @@ def test_shebang_naming_a_tool_under_home_grants_none_of_it(box: dict[str, Any])
     assert f"--allow-read {_real(box['cargo'].parent)}" in dry.stderr
     ran = _run(box, "setup-tool")
     assert ran.returncode != 0 and "cargo ran" not in ran.stdout
-    assert box["token"] not in ran.stdout + ran.stderr
+    assert box["canary"] not in ran.stdout + ran.stderr
 
 
 @needs_backend
@@ -374,14 +374,14 @@ def test_granting_the_whole_prefix_is_what_exposes_the_credentials(box: dict[str
     """Control: the grant the shebang used to add hands the canary to any script."""
     ran = _run(box, "setup-tool", options=("--allow-read", str(box["home"] / ".cargo")))
     assert ran.returncode == 0 and "cargo ran" in ran.stdout, ran.stderr
-    assert box["token"] in ran.stdout
+    assert box["canary"] in ran.stdout
 
 
 @needs_backend
 def test_hinted_grant_runs_the_interpreter_without_its_credentials(box: dict[str, Any]) -> None:
     ran = _run(box, "setup-tool", options=("--allow-read", str(box["cargo"].parent)))
     assert "cargo ran" in ran.stdout, ran.stderr
-    assert box["token"] not in ran.stdout + ran.stderr
+    assert box["canary"] not in ran.stdout + ran.stderr
     assert HINT not in ran.stderr
 
 
@@ -397,5 +397,5 @@ def test_executable_under_home_runs_but_its_siblings_stay_unreadable(box: dict[s
     ran = _run(box, "agent-tool")
     assert ran.returncode == 0, ran.stderr
     assert ran.stdout.splitlines() == ["agent-tool ran", "credentials: denied", "sibling: denied"]
-    assert box["token"] not in ran.stdout + ran.stderr
+    assert box["canary"] not in ran.stdout + ran.stderr
     assert HINT not in ran.stderr
