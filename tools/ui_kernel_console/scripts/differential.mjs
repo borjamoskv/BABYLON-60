@@ -23,6 +23,8 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 
 const PKG = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const STDIN_EVERY = 25;
+// Casos que siempre pasan por la CLI por entrada estándar, además de la muestra periódica.
+const ALWAYS_STDIN = new Set(["oversize_bytes", "text_limit_exact", "text_limit_over"]);
 
 function fail(code, message) {
   process.stderr.write(`${message}\n`);
@@ -278,6 +280,11 @@ const SEED_ADMITTED = "11".repeat(32);
 const SEED_OTHER = "22".repeat(32);
 const signerAdmitted = await ed25519SignerFromSeed(SEED_ADMITTED);
 const signerOther = await ed25519SignerFromSeed(SEED_OTHER);
+// Sesenta y cinco claves Ed25519 válidas y distintas, para probar el límite de autoridades.
+const extraKeys = [];
+for (let i = 0; i < 65; i += 1) {
+  extraKeys.push(await ed25519SignerFromSeed((i + 1).toString(16).padStart(2, "0").repeat(32)));
+}
 
 async function makeBase(k) {
   const rng = prng((opts.seed * 1_000_003 + k) >>> 0);
@@ -500,6 +507,36 @@ const MUTATIONS = {
     return { bytes: concatBytes(bytes.slice(0, at), Uint8Array.of(0xff), bytes.slice(at)) };
   },
   bytes_overlong: (_rng, b) => ({ bytes: concatBytes(Uint8Array.of(0xc0, 0x80), utf8(b.text)) }),
+  // Ramas de la política de confianza: cada una debe ser TRUST_POLICY_INVALID en todas las vías.
+  policy_shape: (rng, b) => {
+    const variants = [
+      { ...b.policy, larsa_required_weight: String(b.policy.larsa_required_weight) },
+      { ...b.policy, larsa_required_weight: b.policy.larsa_required_weight + 0.5 },
+      { ...b.policy, admitted_authorities: { k: 1 } },
+      { ...b.policy, admitted_authorities: [] },
+      { ...b.policy, admitted_authorities: [signerAdmitted.publicKey.toUpperCase()] },
+      { ...b.policy, admitted_authorities: [signerAdmitted.publicKey, signerAdmitted.publicKey] },
+      { ...b.policy, previous_receipt: null },
+      { ...b.policy, previous_receipt: { receipt_hash: hex32(rng), seq_id: 1, extra: 1 } },
+      { ...b.policy, previous_receipt: { receipt_hash: "0xAB", seq_id: 1 } },
+      { ...b.policy, previous_receipt: { receipt_hash: hex32(rng), seq_id: -1 } },
+      { ...b.policy, previous_receipt: { receipt_hash: hex32(rng) } },
+    ];
+    return { text: b.text, policy: pick(rng, variants) };
+  },
+  // Encadenamiento con el mismo hash previo y la misma secuencia: no es posterior.
+  policy_chain_equal_seq: (_rng, b) => ({
+    text: b.text,
+    policy: {
+      ...b.policy,
+      previous_receipt: { receipt_hash: b.wire.audit_metrics.prev_receipt_hash, seq_id: b.wire.causal_clock.seq_id },
+    },
+  }),
+  // 65 autoridades válidas: por encima del límite de 64.
+  policy_authorities_65: (_rng, b) => ({
+    text: b.text,
+    policy: { ...b.policy, admitted_authorities: extraKeys.map((k) => k.publicKey) },
+  }),
   // Ancla como texto: escrituras numéricas, claves, sustitutos, BOM, profundidad y truncamientos.
   anchor_weight_forms: (rng, b) => {
     const w = b.policy.larsa_required_weight;
@@ -591,6 +628,13 @@ for (let k = 0; k < opts.cases; k += 1) {
 cases.forEach((c, id) => {
   c.id = id;
 });
+// Límite exacto del texto del recibo (4 MiB en UTF-16), con el recibo de ejemplo y su ancla.
+const golden = await import(pathToFileURL(resolve(PKG, "scratch/test-build/tests/fixtures/goldenReceipt.js")).href);
+const goldenText = JSON.stringify(golden.GOLDEN_RECEIPT);
+const padTo = (units) => `{${" ".repeat(units - goldenText.length)}${goldenText.slice(1)}`;
+const goldenAnchor = JSON.stringify(golden.GOLDEN_POLICY);
+cases.push({ id: cases.length, base: -1, index: 0, cls: "text_limit_exact", bytes: utf8(padTo(4 * 1024 * 1024)), anchorText: goldenAnchor });
+cases.push({ id: cases.length, base: -1, index: 0, cls: "text_limit_over", bytes: utf8(padTo(4 * 1024 * 1024 + 1)), anchorText: goldenAnchor });
 
 cases.push({
   id: cases.length,
@@ -638,7 +682,7 @@ for (const c of cases) {
 
 for (let i = 0; i < cases.length; i += 1) {
   const c = cases[i];
-  if (i % STDIN_EVERY !== 0 && c.cls !== "oversize_bytes") continue;
+  if (i % STDIN_EVERY !== 0 && !ALWAYS_STDIN.has(c.cls)) continue;
   // El SO no admite un argumento de más de 128 KiB: el ancla sobredimensionada no pasa por la CLI.
   if (c.cls === "oversize_anchor") continue;
   const r = spawnSync(CLI, ["verify", "--policy", c.anchorText], {

@@ -3,7 +3,7 @@
 mod common;
 
 use babylon60_exec_receipt::verify::{
-    verify_execution_payload_json, verify_execution_payload_utf8,
+    verify_execution_payload_json, verify_execution_payload_utf8, Verdict,
 };
 use common::golden;
 
@@ -66,13 +66,17 @@ fn unpaired_surrogate_escapes_bom_and_invalid_utf8_are_rejected() {
 fn nesting_limit_is_127_containers() {
     let (_, policy) = golden_text();
     let nested = |n: usize| format!("{}{}", "[".repeat(n), "]".repeat(n));
-    // Dentro del límite el texto se interpreta y falla en el esquema; fuera, no llega a interpretarse.
-    let inside = verify_execution_payload_json(&nested(127), &policy);
-    let outside = verify_execution_payload_json(&nested(128), &policy);
-    assert_eq!(inside.codes(), ["SCHEMA_INVALID"]);
-    assert_eq!(outside.codes(), ["SCHEMA_INVALID"]);
-    let detail = |v: &babylon60_exec_receipt::verify::Verdict| format!("{:?}", v);
-    assert_ne!(detail(&inside), detail(&outside));
+    let detail_of = |text: &str| match verify_execution_payload_json(text, &policy) {
+        Verdict::Rejected { failures, .. } => failures[0].detail.clone(),
+        Verdict::Accepted(_) => panic!("no debía aceptarse"),
+    };
+    // 127 contenedores: serde_json los lee y el esquema los rechaza por forma.
+    let inside = detail_of(&nested(127));
+    assert!(!inside.contains("no es JSON v"), "{inside}");
+    // 128 contenedores: serde_json ya no los lee, y el motivo es el de texto no admitido.
+    let outside = detail_of(&nested(128));
+    // El detalle escapa las no ASCII («á» sale como \u00e1): se compara el tramo ASCII.
+    assert!(outside.contains("no es JSON v"), "{outside}");
 }
 
 #[test]

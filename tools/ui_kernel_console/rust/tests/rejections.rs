@@ -51,32 +51,57 @@ fn node_changes_break_the_leaf_and_the_root() {
     let codes = codes_after(|r| r["execution_dag"][3]["reduction_steps"] = json!(32));
     assert_eq!(codes, ["LEAF_HASH_MISMATCH", "MERKLE_ROOT_MISMATCH"]);
     let codes = codes_after(|r| r["execution_dag"][0]["smt_verified"] = json!(false));
-    assert!(codes.contains(&"COMMITTED_WITHOUT_SMT"), "{codes:?}");
+    assert_eq!(
+        codes,
+        [
+            "COMMITTED_WITHOUT_SMT",
+            "LEAF_HASH_MISMATCH",
+            "MERKLE_ROOT_MISMATCH"
+        ]
+    );
 }
 
 #[test]
 fn dag_shape_rules() {
     let dangling =
         codes_after(|r| r["execution_dag"][1]["parent_ids"] = json!(["EV_00001048_000009"]));
-    assert!(
-        dangling.contains(&"DAG_DANGLING_PARENT_REF"),
-        "{dangling:?}"
+    assert_eq!(
+        dangling,
+        [
+            "DAG_DANGLING_PARENT_REF",
+            "LEAF_HASH_MISMATCH",
+            "MERKLE_ROOT_MISMATCH"
+        ]
     );
     let cycle =
         codes_after(|r| r["execution_dag"][0]["parent_ids"] = json!(["EV_00001048_000003"]));
-    assert!(cycle.contains(&"DAG_CYCLE_DETECTED"), "{cycle:?}");
+    assert_eq!(
+        cycle,
+        [
+            "DAG_CYCLE_DETECTED",
+            "LEAF_HASH_MISMATCH",
+            "MERKLE_ROOT_MISMATCH"
+        ]
+    );
     let dup = codes_after(|r| {
         r["execution_dag"][1]["parent_ids"] = json!(["EV_00001048_000000", "EV_00001048_000000"])
     });
-    assert!(dup.contains(&"DAG_DUPLICATE_PARENT_REF"), "{dup:?}");
+    assert_eq!(
+        dup,
+        [
+            "DAG_DUPLICATE_PARENT_REF",
+            "LEAF_HASH_MISMATCH",
+            "MERKLE_ROOT_MISMATCH"
+        ]
+    );
     let empty = codes_after(|r| r["execution_dag"] = json!([]));
-    assert!(empty.contains(&"DAG_EMPTY"), "{empty:?}");
+    assert_eq!(empty, ["DAG_EMPTY"]);
 }
 
 #[test]
 fn declared_lean_status_must_be_clean() {
     let codes = codes_after(|r| r["cryptographic_seal"]["lean4_proof"]["sorry_count"] = json!(1));
-    assert!(codes.contains(&"LEAN4_PROOF_INVALID"), "{codes:?}");
+    assert_eq!(codes, ["ED25519_SIGNATURE_INVALID", "LEAN4_PROOF_INVALID"]);
 }
 
 #[test]

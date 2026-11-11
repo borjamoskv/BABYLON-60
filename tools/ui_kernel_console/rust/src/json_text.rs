@@ -12,8 +12,6 @@
 
 /// Tamaño máximo del texto, en unidades UTF-16 (como `String.length` en JavaScript).
 pub const MAX_JSON_TEXT_UTF16: usize = 4 * 1024 * 1024;
-/// Profundidad máxima de anidamiento admitida.
-pub const MAX_JSON_DEPTH: usize = 127;
 
 /// Primer número del texto que no es un entero canónico, o `None`.
 /// Precondición: `text` es JSON válido (ya analizado).

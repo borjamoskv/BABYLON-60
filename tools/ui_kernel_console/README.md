@@ -255,6 +255,8 @@ implementaciones coinciden en los casos generados, no que sean equivalentes.
   sobre, hash y sellado con la semilla de prueba) y rechazos.
 - `node scripts/differential.mjs`: paridad entre TypeScript, la CLI y el binding
   wasm sobre recibos generados y alterados.
+  Los códigos `ED25519_UNSUPPORTED_RUNTIME`, `UNVERIFIED_INPUT` y `VERIFIER_INTERNAL_ERROR` solo se
+  comprueban en TypeScript: el arnés y el crate no los cubren.
 
 Estas pruebas se ejecutan en local: ningún workflow de CI instala Node. No
 certifican propiedades del kernel.
