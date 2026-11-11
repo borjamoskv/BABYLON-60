@@ -1,7 +1,7 @@
 {
   "schema_version": "3.1.0",
   "catalog_sha256": "ff03e61c32555bc32fa0fd3fe93e94d762abc19f640a8f5190f81f4b7d9fb6b4",
-  "snapshot_root_sha256": "6acb4327e05ce6e1f421fc69b7b28020b95477822b9fb30557185b17c54f6a61",
+  "snapshot_root_sha256": "0fd9a18d6b7cf255ffd01040d2c7a0ee32b3ed9f191ffc986323c5a9f66d25bc",
   "total_skills": 131,
   "skills": {
     "adaptive-cron": {
@@ -3005,11 +3005,11 @@
       "skill_id": "cortex-kernel",
       "canonical_alias": "kernel-root",
       "version": "1.0.0",
-      "artifact_sha256": "4221b9bfc755da309822650c7fbbb1fc79e4e7e9f62dd1cf8635f1404153aa06",
-      "tool_identity_hash": "2c57fbfd2c9edca477c099f330626c358139bc603d81e23e8480ba6e23a15fdf",
+      "artifact_sha256": "969aa4b24f350209a59cb2c6d1d93f6448cc1c66086768bd26d9565db068de53",
+      "tool_identity_hash": "16e02b5416638a916b7e0df54a8ac5e3147ee1a2fb8cfc06ec8cbb8f28206006",
       "lockfile_ref": "skills-lock.json#cortex-kernel@1.0.0",
       "domain": "kernel",
-      "summary": "Manifiesto de invariantes transversales del ecosistema CORTEX. Dispara con \"kernel-root\", \"cortex kernel\".",
+      "summary": "Manifiesto de invariantes transversales del ecosistema CORTEX (árbol de roles, gobernanza declarativa y límites termodinámicos).",
       "tags": [
         "kernel-root",
         "cortex-kernel",
