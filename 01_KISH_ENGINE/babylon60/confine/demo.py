@@ -147,6 +147,7 @@ LIMITS = (
     Limit("L2", "hardlink created before the session", "read", "open", "open"),
     Limit("L4", "chmod/utime/xattr on ~/.ssh/id_rsa (metadata change)", "metadata", "open", "closed"),
     Limit("L5", "inotify watch on ~/.ssh (names and timing of accesses)", "watch", "open", None),
+    Limit("L6", "command line of another process of the user (/proc/<pid>/cmdline)", "read", "open", None),
 )
 POSITIVES = (
     Vector("P1", "read and write the workspace", "ok", (), ()),
@@ -473,12 +474,15 @@ def _attempt(vector: Vector | Limit, run_kind: str, *, self_paths: list[str], ti
                 cleanup.callback(_reap, decoy)
                 assert decoy.stdout is not None
                 cfg.update(decoy_pid=decoy.pid, decoy_fd=int(decoy.stdout.readline()))
-            if vector.id == "V22":
-                # The user's shell or editor, started outside the sandbox with a token in its environment.
+            if vector.id in ("V22", "L6"):
+                # The user's shell or editor, started outside the sandbox with a token in its environment
+                # (V22) or on its command line (L6: argv is not behind the ptrace check that guards environ).
                 hold = "import sys; print('ready', flush=True); sys.stdin.read()"
+                extra = [f"--api-token={token}"] if vector.id == "L6" else []
                 decoy, _ = launcher.spawn(
-                    launcher.Launch([launcher.interpreter(), "-I", "-S", "-c", hold], None),
-                    env={"PATH": "/usr/bin:/bin", "LC_ALL": "C", "B60_DECOY_TOKEN": token},
+                    launcher.Launch([launcher.interpreter(), "-I", "-S", "-c", hold, *extra], None),
+                    env={"PATH": "/usr/bin:/bin", "LC_ALL": "C"}
+                    | ({"B60_DECOY_TOKEN": token} if vector.id == "V22" else {}),
                     cwd=ws,
                     stdin=subprocess.PIPE,
                 )

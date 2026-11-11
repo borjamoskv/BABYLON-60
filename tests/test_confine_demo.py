@@ -105,7 +105,7 @@ def test_schema_v2_vectors_limits_and_positives(recorded: tuple[demo.DemoReport,
     for row in doc["vectors"]:
         assert set(row) == {"id", "title", "expected", "results", "blocked", "passed", "inconclusive", "unfalsifiable"}
         assert row["blocked"] + row["passed"] + row["inconclusive"] + row["unfalsifiable"] == doc["repeat"]
-    assert [row["id"] for row in doc["limits"]] == (["L1", "L2", "L4", "L5"] if LINUX else ["L1", "L2", "L4"])
+    assert [row["id"] for row in doc["limits"]] == (["L1", "L2", "L4", "L5", "L6"] if LINUX else ["L1", "L2", "L4"])
     for row in doc["limits"]:
         assert set(row) == {
             "id",
@@ -513,6 +513,7 @@ def test_vector_tables() -> None:
         "L2": ("open", "open"),
         "L4": ("open", "closed"),
         "L5": ("open", None),
+        "L6": ("open", None),
     }
     assert [p.id for p in demo.POSITIVES] == [f"P{n}" for n in range(1, 8)]
 

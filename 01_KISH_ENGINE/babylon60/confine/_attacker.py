@@ -343,6 +343,10 @@ def l5_inotify_watch():
         os.close(fd)
 
 
+def l6_command_line_of_other_process():
+    return _read(f"/proc/{cfg['decoy_pid']}/cmdline")
+
+
 def p1_workspace_read_write():
     path = os.path.join(WS, "work.txt")
     with open(path, "w", encoding="utf-8") as handle:
