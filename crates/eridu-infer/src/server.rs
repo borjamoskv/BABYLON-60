@@ -186,7 +186,7 @@ async fn chat_completions_handler(
         }
         _ => {
             format!(
-                "[BABYLON-60 / ERIDU-INFER · ATTESTED IN SILICON · SEAL: {}]\n\n\
+                "[BABYLON-60 / ERIDU-INFER · SELLO SHA-256 SIN FIRMA: {}]\n\n\
                 Procesamiento local completado sobre el sustrato Apple Silicon Metal.\n\
                 Modelo Activo: {}\n\
                 Hash Causal WORM: {}\n\n\
