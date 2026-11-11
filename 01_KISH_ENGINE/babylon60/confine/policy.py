@@ -56,8 +56,16 @@ SYSTEM_READ_EXEC = (
     "/sys",
     "/run/systemd/resolve",
 )
+# /dev/tty is always the caller's own controlling terminal. Opening /dev/ptmx only
+# allocates a new pseudo-terminal pair whose slave lives in /dev/pts: openpty(),
+# forkpty() and posix_openpt()+ptsname() fail with EACCES without PTY_DIRS. A session
+# leader can still make that new slave its controlling terminal and open it as
+# /dev/tty: a terminal of its own, never an existing one.
 DEVICE_FILES = ("/dev/null", "/dev/zero", "/dev/full", "/dev/random", "/dev/urandom", "/dev/tty", "/dev/ptmx")
-DEVICE_DIRS = ("/dev/pts",)
+# Every pseudo-terminal slave of the user, other tabs and windows included: granted only
+# with ``allow_ptys``. The session's own terminals are granted one by one (``ttys``).
+PTY_DIRS = ("/dev/pts",)
+PTYS_WARNING = "allow_ptys: every terminal of this user, other tabs and windows included, is readable and writable"
 PROTECTED_RELATIVE = (
     ".ssh",
     ".gnupg",
@@ -331,11 +339,27 @@ def build_policy(
     if system:
         for path in SYSTEM_READ_EXEC:
             add(path, "ro", "system", strict=False)
-        for path in DEVICE_FILES + DEVICE_DIRS:
+        for path in DEVICE_FILES:
             add(path, "dev", "system", strict=False)
-        if not any(_contains("/tmp", home) for home in homes):
-            add("/tmp", "rw", "tmp", strict=False)
+        # /tmp is shared with every program of the user (Kerberos caches, other tools'
+        # files, socket directories): never granted; ``private_tmp`` is the temp dir.
+        # /dev/shm stays: POSIX semaphores and shared memory (Python multiprocessing).
         add("/dev/shm", "rw", "tmp", strict=False)
+    for path in ttys:
+        path = os.path.abspath(path)
+        try:
+            st = os.lstat(path)
+        except OSError:
+            skipped.append(path)
+            continue
+        if not stat.S_ISCHR(st.st_mode) or not _contains("/dev", path):
+            skipped.append(f"{path}: not a terminal device under /dev")
+            continue
+        add(path, "dev", "tty", strict=False)
+    if allow_ptys:
+        for path in PTY_DIRS:
+            add(path, "dev", "ptys", strict=False)
+        warnings.append(PTYS_WARNING)
     if private_tmp:
         add(private_tmp, "rw", "tmp", strict=True)
     for path in runtime:
