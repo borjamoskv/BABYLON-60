@@ -176,6 +176,7 @@ def test_c0294_input_source_size_and_ast_rejected():
     ]:
         res = sandbox.safe_exec(expr)
         assert not res.success
+        assert res.error is not None
         assert "Blocked attribute" in res.error
 
 

@@ -86,7 +86,7 @@ class Client:
         assert init["result"]["serverInfo"]["name"] == "cortex-memory"
         self.notify("notifications/initialized")
 
-    def raw(self, line: str) -> dict | None:
+    def raw(self, line: str) -> dict[str, Any] | None:
         """Send an arbitrary frame; return the parsed response (None if no frame expected)."""
         assert self.proc.stdin and self.proc.stdout
         self.proc.stdin.write(line + "\n")
@@ -95,7 +95,8 @@ class Client:
         if not out:
             raise EOFError("adapter closed stdout")
         self.stdout_lines.append(out)
-        return json.loads(out)
+        frame: dict[str, Any] | None = json.loads(out)
+        return frame
 
     def ping(self) -> bool:
         return self.rpc("ping", {}).get("result") == {}
@@ -105,7 +106,7 @@ class Client:
         self.proc.stdin.write(json.dumps({"jsonrpc": "2.0", "method": method}) + "\n")
         self.proc.stdin.flush()
 
-    def rpc(self, method: str, params: dict) -> dict:
+    def rpc(self, method: str, params: dict[str, Any]) -> dict[str, Any]:
         assert self.proc.stdin and self.proc.stdout
         self.mid += 1
         self.proc.stdin.write(json.dumps({"jsonrpc": "2.0", "id": self.mid, "method": method, "params": params}) + "\n")
@@ -114,11 +115,11 @@ class Client:
         if not line:
             raise EOFError("adapter closed stdout")
         self.stdout_lines.append(line)
-        msg = json.loads(line)
+        msg: dict[str, Any] = json.loads(line)
         assert msg["id"] == self.mid
         return msg
 
-    def call(self, name: str, **args: object) -> dict:
+    def call(self, name: str, **args: object) -> dict[str, Any]:
         res = self.rpc("tools/call", {"name": name, "arguments": args})["result"]
         return {"error": res["isError"], **res["structuredContent"]}
 
@@ -136,7 +137,8 @@ class Client:
         assert rest == ""
         for line in self.stdout_lines:
             assert json.loads(line)["jsonrpc"] == "2.0"
-        return self.proc.stderr.read()
+        stderr: str = self.proc.stderr.read()  # text=True: str stream
+        return stderr
 
 
 @pytest.fixture(scope="module")
@@ -165,9 +167,23 @@ def ws(tmp_path_factory: pytest.TempPathFactory) -> Path:
     return d
 
 
-def ledger_rows(ws: Path, sql: str, params: tuple = ()) -> list[tuple]:
+def ledger_rows(ws: Path, sql: str, params: tuple[Any, ...] = ()) -> list[tuple[Any, ...]]:
     with sqlite3.connect(ws / "ledger.db") as conn:
         return conn.execute(sql, params).fetchall()
+
+
+def _heads(report: dict[str, object]) -> dict[str, str]:
+    """``core.replay()["head_state_digests"]``: project name -> full-state digest at the audited head."""
+    heads = report["head_state_digests"]
+    assert isinstance(heads, dict)
+    return heads
+
+
+def _audit_snapshot(report: dict[str, object]) -> dict[str, Any]:
+    """``core.replay()["audit_snapshot"]``: ``seq`` (int), ``head_hash`` and ``mode`` (str) of the one snapshot read."""
+    snap = report["audit_snapshot"]
+    assert isinstance(snap, dict)
+    return snap
 
 
 # ---------------------------------------------------------------- fail-closed launch
@@ -219,7 +235,7 @@ def test_fail_closed_launch(ws: Path, case: str) -> None:
         "exit": proc.returncode,
         "stdout_bytes": 0,
         "stderr": proc.stderr.strip()[-160:],
-    }  # type: ignore[index]
+    }
 
 
 # ---------------------------------------------------------------- A / B
@@ -647,7 +663,7 @@ def test_r2_state_digest_covers_items_beyond_first_page(ws: Path, tmp_path: Path
     after = core.replay(db)
     legacy1 = _first_page_digest_legacy(db)
     assert legacy0 == legacy1  # the old limit:1000 digest is blind to these mutations (the defect)
-    assert after["head_state_digests"]["proj-p"] != base["head_state_digests"]["proj-p"]
+    assert _heads(after)["proj-p"] != _heads(base)["proj-p"]
     assert after["chain_ok"] and after["receipt_mismatches"] == [] and after["receipts_checked"] == 1
     assert core.replay(db) == after
     # Isolate each mutation type: replay at intermediate seqs gives three distinct digests.
@@ -656,15 +672,15 @@ def test_r2_state_digest_covers_items_beyond_first_page(ws: Path, tmp_path: Path
         for r in steps.values():
             rows, snap, h = core.load_rows(conn, "proj-p", r["seq"])
             digests.append(core.state_digest(core.project(rows, snap, h)))
-    assert len(set(digests + [base["head_state_digests"]["proj-p"]])) == 4
-    assert page["receipt"]["snapshot_state_digest"] == after["head_state_digests"]["proj-p"]
+    assert len(set(digests + [_heads(base)["proj-p"]])) == 4
+    assert page["receipt"]["snapshot_state_digest"] == _heads(after)["proj-p"]
     assert len(page["items"]) == 100
     EVIDENCE["R2"] = {
         "active_items_seeded": 1205,
         "mutated_positions": [1101, 1150, "tail"],
         "legacy_first_1000_digest_changed": False,
-        "state_digest_before": base["head_state_digests"]["proj-p"],
-        "state_digest_after": after["head_state_digests"]["proj-p"],
+        "state_digest_before": _heads(base)["proj-p"],
+        "state_digest_after": _heads(after)["proj-p"],
         "per_step_distinct_digests": 4,
         "replay_equal": True,
     }
@@ -673,11 +689,11 @@ def test_r2_state_digest_covers_items_beyond_first_page(ws: Path, tmp_path: Path
 # ---------------------------------------------------------------- R3: two processes, one ledger
 
 
-def _race(ws: Path, args_a: dict, args_b: dict) -> tuple[dict, dict]:
+def _race(ws: Path, args_a: dict[str, Any], args_b: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
     ca, cb = Client(ws, ws / "writer.json"), Client(ws, ws / "writer.json")
     barrier, out = threading.Barrier(2), {}
 
-    def go(key: str, client: Client, args: dict) -> None:
+    def go(key: str, client: Client, args: dict[str, Any]) -> None:
         barrier.wait()
         out[key] = client.call("memory_append", **args)
 
@@ -784,7 +800,7 @@ def test_r3b_concurrent_supersede_same_target(ws: Path) -> None:
 # ---------------------------------------------------------------- R4: read-only auditor
 
 
-def _replay_cli(path: Path, *extra: str) -> subprocess.CompletedProcess:
+def _replay_cli(path: Path, *extra: str) -> subprocess.CompletedProcess[str]:
     return subprocess.run(
         [sys.executable, "-m", "babylon60.mcp.cortex_memory_core", str(path), *extra],
         capture_output=True,
@@ -966,11 +982,11 @@ def test_r5_audit_single_snapshot_with_concurrent_writer(
     monkeypatch.setattr(core, "verify_chain_readonly", verify_then_write)
     r = core.replay(db)
     monkeypatch.setattr(core, "verify_chain_readonly", real_verify)
-    snap = r["audit_snapshot"]
+    snap = _audit_snapshot(r)
     assert snap["mode"] == "read_txn" and snap["seq"] == r["events_verified"] == 50
     assert injected["head_after_write"] == 51  # the write really committed during the audit
-    assert r["head_state_digests"]["proj-p"] == _digest_at(db, 50) != _digest_at(db, 51)
-    assert core.replay(db)["audit_snapshot"]["seq"] == 51  # a fresh audit sees it
+    assert _heads(r)["proj-p"] == _digest_at(db, 50) != _digest_at(db, 51)
+    assert _audit_snapshot(core.replay(db))["seq"] == 51  # a fresh audit sees it
 
     # Stress: separate writer process appends continuously while audits run.
     script = (
@@ -982,9 +998,9 @@ def test_r5_audit_single_snapshot_with_concurrent_writer(
     audits = []
     while writer.poll() is None:
         a = core.replay(db)
-        s = a["audit_snapshot"]
+        s = _audit_snapshot(a)
         assert a["chain_ok"] and s["seq"] == a["events_verified"]
-        assert a["head_state_digests"]["proj-p"] == _digest_at(db, s["seq"])
+        assert _heads(a)["proj-p"] == _digest_at(db, s["seq"])
         audits.append(s["seq"])
     assert writer.returncode == 0
     assert len(set(audits)) >= 3, audits  # audits really overlapped distinct heads

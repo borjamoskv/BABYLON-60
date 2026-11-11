@@ -14,6 +14,8 @@ import pytest
 from babylon60.kernel import mcp_sandbox_validator as backend
 
 REAL_CREATE_SUBPROCESS_EXEC = asyncio.create_subprocess_exec
+# Dotted target: patch the launcher the backend resolves at call time, without relying on an implicit re-export.
+BACKEND_CREATE_SUBPROCESS_EXEC = f"{backend.__name__}.asyncio.create_subprocess_exec"
 
 
 @pytest.mark.asyncio
@@ -21,23 +23,23 @@ async def test_oversized_input_is_rejected_before_process_creation(tmp_path, mon
     async def forbidden(*_args, **_kwargs):
         raise AssertionError("process launched before input bound was checked")
 
-    monkeypatch.setattr(backend.asyncio, "create_subprocess_exec", forbidden)
+    monkeypatch.setattr(BACKEND_CREATE_SUBPROCESS_EXEC, forbidden)
     with pytest.raises(ValueError, match="input"):
         await backend._run_confined(
             tmp_path / "unused", sys.executable, "unused", tmp_path, 1, b"x" * (backend.MAX_BYTES + 1)
         )
 
 
-def fixture_launcher(monkeypatch, source: str):
+def fixture_launcher(monkeypatch: pytest.MonkeyPatch, source: str) -> list[asyncio.subprocess.Process]:
     """Run a fixed trusted fixture with production pipe/session options."""
-    processes = []
+    processes: list[asyncio.subprocess.Process] = []
 
     async def launch(*_args, **kwargs):
         process = await REAL_CREATE_SUBPROCESS_EXEC(sys.executable, "-I", "-c", source, **kwargs)
         processes.append(process)
         return process
 
-    monkeypatch.setattr(backend.asyncio, "create_subprocess_exec", launch)
+    monkeypatch.setattr(BACKEND_CREATE_SUBPROCESS_EXEC, launch)
     monkeypatch.setattr(backend, "_resident_bytes", lambda _pid: 0)
     return processes
 
@@ -105,7 +107,7 @@ async def test_invalid_budgets_rejected_before_launch(tmp_path, monkeypatch, bud
     async def forbidden(*_args, **_kwargs):
         raise AssertionError("process launched with invalid budgets")
 
-    monkeypatch.setattr(backend.asyncio, "create_subprocess_exec", forbidden)
+    monkeypatch.setattr(BACKEND_CREATE_SUBPROCESS_EXEC, forbidden)
     with pytest.raises(ValueError):
         await backend._run_confined(tmp_path / "unused", sys.executable, "unused", tmp_path, 1, **{budget: value})
 
@@ -116,7 +118,7 @@ async def test_invalid_timeout_rejected_before_launch(tmp_path, monkeypatch, tim
     async def forbidden(*_args, **_kwargs):
         raise AssertionError("process launched with invalid timeout")
 
-    monkeypatch.setattr(backend.asyncio, "create_subprocess_exec", forbidden)
+    monkeypatch.setattr(BACKEND_CREATE_SUBPROCESS_EXEC, forbidden)
     with pytest.raises(ValueError):
         await backend._run_confined(tmp_path / "unused", sys.executable, "unused", tmp_path, timeout)
 

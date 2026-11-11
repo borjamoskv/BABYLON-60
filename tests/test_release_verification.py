@@ -699,4 +699,3 @@ def test_packaged_release_zip_standalone_verification_without_git(tmp_path: Path
     assert "[VERIFIED]" not in res_tampered.stdout
     assert "[CHECK] source_tree_digest: FAIL [required]" in res_tampered.stderr
     assert "Public source_tree_digest mismatch" in res_tampered.stderr
-

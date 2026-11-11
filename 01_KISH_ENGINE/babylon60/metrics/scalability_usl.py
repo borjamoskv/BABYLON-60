@@ -265,4 +265,5 @@ def chinchilla_loss(
         raise ValueError("params and tokens must be > 0.0")
     if irreducible_e < 0.0 or a < 0.0 or alpha <= 0.0 or b < 0.0 or beta <= 0.0:
         raise ValueError("Scaling law constants must be non-negative with positive exponents")
-    return irreducible_e + a / (params**alpha) + b / (tokens**beta)
+    loss: float = irreducible_e + a / (params**alpha) + b / (tokens**beta)
+    return loss

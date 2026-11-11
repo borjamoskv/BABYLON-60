@@ -456,7 +456,9 @@ def test_scopes_overlap_and_blackboard_prevent_abs_handoff_and_toctou_bypasses(t
                 "db_path": bb_db,
             },
         )
-        return json.loads(out["content"][0]["text"])
+        payload = json.loads(out["content"][0]["text"])
+        assert isinstance(payload, dict)
+        return payload
 
     with ThreadPoolExecutor(max_workers=2) as pool:
         f1 = pool.submit(_worker, "agent-1", "01_KISH_ENGINE/babylon60/mcp", 1)

@@ -136,7 +136,7 @@ def evaluate_triad_gates_z3(params: TriadTopologyParameters) -> Dict[str, Any]:
     def _prove(cond: z3.BoolRef) -> bool:
         s.push()
         s.add(z3.Not(cond))
-        ok = s.check() == z3.unsat
+        ok: bool = s.check() == z3.unsat
         s.pop()
         return ok
 
