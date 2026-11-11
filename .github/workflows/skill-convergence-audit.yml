@@ -52,7 +52,10 @@ jobs:
       - name: Detect private skill library
         id: library
         run: |
-          if [ -f tools/skill_library/catalog.json ]; then
+          if [ -d tools/skill_library ]; then
+            # The projection removes the whole directory; in the vault a missing
+            # catalog is an error, not an absent library.
+            test -f tools/skill_library/catalog.json || { echo "::error title=Skill library catalog missing::tools/skill_library exists without catalog.json"; exit 1; }
             echo "present=true" >> "$GITHUB_OUTPUT"
           else
             echo "present=false" >> "$GITHUB_OUTPUT"
@@ -85,7 +88,10 @@ jobs:
       - name: Detect private skill library
         id: library
         run: |
-          if [ -f tools/skill_library/catalog.json ]; then
+          if [ -d tools/skill_library ]; then
+            # The projection removes the whole directory; in the vault a missing
+            # catalog is an error, not an absent library.
+            test -f tools/skill_library/catalog.json || { echo "::error title=Skill library catalog missing::tools/skill_library exists without catalog.json"; exit 1; }
             echo "present=true" >> "$GITHUB_OUTPUT"
           else
             echo "present=false" >> "$GITHUB_OUTPUT"
