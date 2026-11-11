@@ -26,6 +26,8 @@ use crate::schema::{
 pub const MAX_ADMITTED_AUTHORITIES: usize = 64;
 /// Tamaño máximo del texto de un ancla, en unidades UTF-16 (como `String.length`).
 pub const MAX_ANCHOR_UTF16: usize = 1024 * 1024;
+/// Tamaño máximo de un recibo en bytes: el texto admitido en UTF-16, en su peor codificación UTF-8.
+pub const MAX_RECEIPT_BYTES: usize = 3 * MAX_JSON_TEXT_UTF16;
 
 /// Ancla de confianza ya validada.
 #[derive(Debug, Clone)]
@@ -587,7 +589,7 @@ pub fn verify_execution_payload_json(text: &str, policy: &Value) -> Verdict {
 
 /// Verifica un recibo tal como llegó del transporte: bytes que deben ser UTF-8 válido.
 pub fn verify_execution_payload_utf8(bytes: &[u8], policy: &Value) -> Verdict {
-    if bytes.len() > 3 * MAX_JSON_TEXT_UTF16 {
+    if bytes.len() > MAX_RECEIPT_BYTES {
         return rejection(
             "SCHEMA_INVALID",
             &format!("{} bytes superan el máximo admitido", bytes.len()),

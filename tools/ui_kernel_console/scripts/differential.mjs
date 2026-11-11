@@ -596,6 +596,14 @@ cases.push({
   id: cases.length,
   base: -1,
   index: 0,
+  cls: "oversize_anchor",
+  bytes: utf8(JSON.stringify(seals[0].u)),
+  anchorText: "x".repeat(1024 * 1024 + 1),
+});
+cases.push({
+  id: cases.length,
+  base: -1,
+  index: 0,
   cls: "oversize_bytes",
   bytes: new Uint8Array(13 * 1024 * 1024).fill(0x20),
   anchorText: JSON.stringify(seals[0].policy),
@@ -631,6 +639,8 @@ for (const c of cases) {
 for (let i = 0; i < cases.length; i += 1) {
   const c = cases[i];
   if (i % STDIN_EVERY !== 0 && c.cls !== "oversize_bytes") continue;
+  // El SO no admite un argumento de más de 128 KiB: el ancla sobredimensionada no pasa por la CLI.
+  if (c.cls === "oversize_anchor") continue;
   const r = spawnSync(CLI, ["verify", "--policy", c.anchorText], {
     input: c.bytes,
     maxBuffer: 1 << 26,

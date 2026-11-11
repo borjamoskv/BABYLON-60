@@ -182,7 +182,7 @@ implementaciones byte a byte; no sustituye a ninguna de ellas.
 | --- | --- | --- |
 | Biblioteca | Verifica (`verify_execution_payload_utf8`) y sella con una semilla de prueba (`seal_with_test_seed`). | [src](rust/src) |
 | CLI `b60-exec-receipt` | `verify --policy <json>` lee el recibo por entrada estándar y sale con 0 si acepta, 1 si rechaza y 2 ante un uso incorrecto o un error de E/S. El ancla va como texto: si no se puede interpretar, el veredicto es `TRUST_POLICY_INVALID` (salida 1). Una entrada por encima de 16 MiB se rechaza sin interpretarla. `batch` procesa un objeto JSON por línea; `policy` puede ser el objeto o el texto del ancla, y una línea con claves repetidas recibe un error. Una línea que no es UTF-8, no es JSON o supera 64 MiB recibe una respuesta `{"error": …}` y el lote continúa. | [main.rs](rust/src/main.rs) |
-| Binding wasm | `verifyReceiptBytes(bytes, policy_json)`, solo verificación: la página nunca maneja claves privadas. | [wasm.rs](rust/src/wasm.rs) |
+| Binding wasm | `verifyReceiptBytes(bytes, anchorText)`: el recibo es un `Uint8Array` y el ancla, una cadena. Solo verificación: la página nunca maneja claves privadas. Mide la entrada en el objeto JS antes de copiarla, así que una entrada de 2 GiB devuelve un veredicto en vez de un trap. | [wasm.rs](rust/src/wasm.rs) |
 
 Comandos, desde `tools/ui_kernel_console`:
 
