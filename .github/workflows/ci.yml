@@ -54,12 +54,12 @@ jobs:
       - name: Test workspace with isolated IPC scheduling
         env:
           # Real-solver tests authenticate the exact z3 executable shipped in the
-          # z3-solver 5.1.0.0 manylinux_2_27_x86_64 wheel locked in uv.lock
-          # (sha256 dfad9e309d7010b1ff6bdb33f21570a1603ef4727373221c7117a74448f0cfef),
-          # installed by `uv sync --locked` above ("Z3 version 5.1.0 - 64 bit").
+          # z3-solver 5.4.1.0 manylinux_2_27_x86_64 wheel locked in uv.lock
+          # (sha256 e680ce083683abca5d07c3e55c2f620ff9a29cb91c548eeeea27ae29e8060522),
+          # installed by `uv sync --locked` above ("Z3 version 5.4.1 - 64 bit").
           # Any other binary fails closed with HashMismatch.
           BABYLON_Z3_BIN: ${{ github.workspace }}/.venv/bin/z3
-          BABYLON_Z3_BLAKE3: 928f564273519f18f60066245cc050d3ade73aa922243f132c23f3faa3474ee8
+          BABYLON_Z3_BLAKE3: 85f712592ae744c70de212b67478a751e5ac2cdcd8567f190530c5e2dc0cfd1f
         run: uv run --no-sync cargo test --workspace --locked -- --test-threads=1
       - name: FL-019 native geometry and persistent lineage
         run: |
