@@ -153,3 +153,10 @@ def test_seatbelt_escapes_quotes(layout: dict[str, Path]) -> None:
     odd.mkdir()
     profile = render_profile(_build(layout, read=[str(odd)]))
     assert '"' + str(odd).replace('"', '\\"') + '"' in profile
+
+
+def test_stat_ancestry_matches_descriptor_ancestry(layout: dict[str, Path]) -> None:
+    alias = layout["root"] / "alias"
+    alias.symlink_to(layout["home"])
+    for path in (layout["ws"], layout["home"] / ".ssh" / "id_rsa", alias / "project", Path("/"), Path("/dev/null")):
+        assert pol._ancestry_by_stat(path) == pol.ancestry(path), path

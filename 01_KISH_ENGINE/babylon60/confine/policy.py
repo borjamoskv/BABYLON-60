@@ -167,6 +167,8 @@ def _identity_of_fd(fd: int) -> Identity:
 
 def ancestry(path: str | os.PathLike[str]) -> list[Identity]:
     """Identities of ``path`` and every physical ancestor up to ``/``."""
+    if not hasattr(os, "O_PATH"):
+        return _ancestry_by_stat(path)
     chain: list[Identity] = []
     fd = os.open(path, os.O_PATH | os.O_CLOEXEC)
     try:
@@ -186,6 +188,28 @@ def ancestry(path: str | os.PathLike[str]) -> list[Identity]:
                 return chain
     finally:
         os.close(fd)
+
+
+def _ancestry_by_stat(path: str | os.PathLike[str]) -> list[Identity]:
+    """Platforms without ``O_PATH`` (macOS): stat ``..`` repeatedly; the kernel resolves it physically.
+
+    Nothing is opened, so device nodes such as ``/dev/tty`` without a controlling
+    terminal and directories without read permission are handled too.
+    """
+    current = os.path.abspath(path)
+    st = os.stat(current)
+    chain: list[Identity] = []
+    if not stat.S_ISDIR(st.st_mode):
+        chain.append((st.st_dev, st.st_ino))
+        current = os.path.dirname(current) or "/"
+    while True:
+        st = os.stat(current)
+        ident = (st.st_dev, st.st_ino)
+        chain.append(ident)
+        parent = os.stat(os.path.join(current, ".."))
+        if (parent.st_dev, parent.st_ino) == ident:
+            return chain
+        current = os.path.join(current, "..")
 
 
 def account_home() -> str:
