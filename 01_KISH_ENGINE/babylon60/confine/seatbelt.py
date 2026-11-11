@@ -27,9 +27,9 @@ networking, and narrows the rest:
   ``/private/var/tmp``, ``/Volumes`` and the user's ``/private/var/folders``
   directory), where the grants (the private TMPDIR) are re-allowed;
 * what would run code outside the sandbox is denied: LaunchServices opens
-  (``lsopen``), Apple Events and launchd job creation; so are signals, process
-  information and ``KERN_PROCARGS2`` for processes outside the sandbox, preference
-  writes through cfprefsd, and the pasteboard (unless ``clipboard``), Kerberos
+  (``lsopen``), Apple Events and launchd job creation; so are signals and process
+  information (``KERN_PROCARGS2`` included) for any process outside the sandbox,
+  preference writes through cfprefsd, and the pasteboard (unless ``clipboard``), Kerberos
   (GSSCred), CoreSimulator and DiskArbitration services.
 
 Precedence: among rules that carry a filter the last match wins; an unfiltered
@@ -97,12 +97,14 @@ OUTSIDE_OPERATIONS = ("lsopen", "appleevent-send", "job-creation")
 GUI_INJECTION_OPERATIONS = ("hid-control",)
 # XNU lets a user mount over any directory they own (/opt/homebrew/bin, ~/.ssh): not a file-write* operation.
 MOUNT_OPERATIONS = ("file-mount", "file-unmount")
-# Other processes of the user: signals, process information and the argv/environment area that
-# KERN_PROCARGS2 (`ps -E`) returns, where the launcher keeps every variable it withheld.
+# Other processes of the user: signals and process information, which includes the argv and
+# environment area KERN_PROCARGS2 (`ps -E`) returns. Both are denied for every target and allowed
+# back for the sandbox itself: with "(target others)" alone, a confined probe still read the
+# environment of a process in its own process group (macos-15, CI of d594608).
 PROCESS_RULES = (
     "(deny signal)",
     "(allow signal (target self) (target same-sandbox))",
-    "(deny process-info* (target others))",
+    "(deny process-info*)",
     "(allow process-info* (target self) (target same-sandbox))",
     '(deny sysctl-read (sysctl-name-prefix "kern.procargs"))',
     "(when (defined? 'mach-priv-task-port) (deny mach-priv-task-port))",

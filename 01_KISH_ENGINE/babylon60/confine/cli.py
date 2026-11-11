@@ -400,12 +400,12 @@ def agent_environment(
 def reexec_without_withheld(args: argparse.Namespace, passed: Sequence[str]) -> None:
     """Replace this process with itself, minus the variables the agent will not receive.
 
-    A process's exec-time environment stays readable to the user's other processes on
-    macOS (sysctl KERN_PROCARGS2, ``ps -E``), and Seatbelt does not mediate it (measured
-    on macos-15): the agent could read from its own launcher what ``run`` withholds.
-    Linux already refuses it (Landlock's ptrace scope); the re-exec costs one interpreter
-    start and runs on every platform. Returns only when there is nothing to withhold or
-    this process is not the ``run`` command line.
+    A process's exec-time environment stays readable to the user's other processes outside
+    any sandbox (``/proc/<pid>/environ`` on Linux, sysctl KERN_PROCARGS2 and ``ps -E`` on
+    macOS). Landlock's ptrace scope and Seatbelt's process-info rule keep the agent from
+    reading it; this is defence in depth, so the launcher no longer holds what ``run``
+    withholds at all. It costs one interpreter start and runs on every platform. Returns
+    only when there is nothing to withhold or this process is not the ``run`` command line.
     """
     if WITHHELD_VAR in os.environ or args.dry_run or "run" not in sys.argv[1:]:
         return

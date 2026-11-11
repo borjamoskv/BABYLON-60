@@ -101,12 +101,12 @@ def test_schema_v2_vectors_limits_and_positives(recorded: tuple[demo.DemoReport,
     if LINUX:
         assert ids == [f"V{n:02d}" for n in range(1, 19)] + ["V22", "V23", "V24", "V25"]
     else:
-        assert ids == ["V01", "V02", "V03", "V04", "V05", "V06", "V09", "V10", *[f"V{n}" for n in range(13, 22)], "V25"]
+        assert ids == ["V01", "V02", "V03", "V04", "V05", "V06", "V09", "V10", *[f"V{n}" for n in range(13, 23)], "V25"]
     for row in doc["vectors"]:
         assert set(row) == {"id", "title", "expected", "results", "blocked", "passed", "inconclusive", "unfalsifiable"}
         assert row["blocked"] + row["passed"] + row["inconclusive"] + row["unfalsifiable"] == doc["repeat"]
     assert [row["id"] for row in doc["limits"]] == (
-        ["L1", "L2", "L4", "L5", "L6"] if LINUX else ["L1", "L2", "L4", "L6", "L7"]
+        ["L1", "L2", "L4", "L5", "L6"] if LINUX else ["L1", "L2", "L4", "L6"]
     )
     for row in doc["limits"]:
         assert set(row) == {
@@ -118,9 +118,15 @@ def test_schema_v2_vectors_limits_and_positives(recorded: tuple[demo.DemoReport,
             "attempts",
             "results",
         }
-        assert row["effect_in_control"] == row["attempts"], row  # the limit is real on this machine
-        measured = {0: "closed", row["attempts"]: "open"}.get(row["effect_under_confinement"], "mixed")
-        assert measured == row["declared"], row  # declared limits stay truthful
+    # Each limit is real on this machine (its control worked) and stays truthful (declared as measured);
+    # every row that is not is reported at once, so one CI run shows all of them.
+    untruthful = [
+        row
+        for row in doc["limits"]
+        if row["effect_in_control"] != row["attempts"]
+        or {0: "closed", row["attempts"]: "open"}.get(row["effect_under_confinement"], "mixed") != row["declared"]
+    ]
+    assert not untruthful, untruthful
     assert [row["id"] for row in doc["positives"]] == [f"P{n}" for n in range(1, 8)]
     totals = doc["totals"]
     for name in ("blocked", "passed", "inconclusive", "unfalsifiable"):
@@ -507,7 +513,7 @@ def test_vector_tables() -> None:
         assert new[vector_id].linux == () and set(new[vector_id].darwin) == {"EPERM", "EACCES"}
     # Round 2 (Linux): Landlock's ptrace scoping, then seccomp for keyrings, System V IPC and setid modes.
     assert [(new[i].linux, new[i].darwin, new[i].canary) for i in ("V22", "V23", "V24", "V25")] == [
-        (("EACCES",), (), False),  # macOS: KERN_PROCARGS2 is not mediated by Seatbelt (declared limit L7)
+        (("EACCES",), ("EACCES", "EPERM"), False),  # macOS: KERN_PROCARGS2, denied by Seatbelt's process-info rule
         (("EPERM",), (), False),  # kernel keyrings: Linux only
         (("EPERM",), (), False),  # System V shared memory: Linux only for now
         (("EPERM",), ("EACCES", "EPERM", "STRIPPED"), False),  # macOS: file-write-setugid, Seatbelt
@@ -519,8 +525,7 @@ def test_vector_tables() -> None:
         "L2": ("open", "open"),
         "L4": ("open", "closed"),
         "L5": ("open", None),
-        "L6": ("open", "open"),
-        "L7": (None, "open"),
+        "L6": ("open", "closed"),
     }
     assert [p.id for p in demo.POSITIVES] == [f"P{n}" for n in range(1, 8)]
 

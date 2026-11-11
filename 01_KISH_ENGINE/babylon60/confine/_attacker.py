@@ -261,7 +261,10 @@ def v21_clonefile_into_workspace():
 
 
 def _procargs(pid):
-    """macOS: KERN_PROCARGS2 returns a same-user process's exec-time arguments and environment."""
+    """macOS: KERN_PROCARGS2 returns a same-user process's exec-time arguments and environment.
+
+    Seatbelt's process-info rule denies it for processes outside the sandbox (V22, L6).
+    """
     libc = _libc()
     mib = (ctypes.c_int * 3)(1, 49, pid)  # CTL_KERN, KERN_PROCARGS2
     size = ctypes.c_size_t(os.sysconf("SC_ARG_MAX"))
@@ -369,11 +372,6 @@ def l5_inotify_watch():
 
 def l6_command_line_of_other_process():
     return _process_strings("cmdline")
-
-
-def l7_environment_of_other_process():
-    # macOS: the same as V22 through KERN_PROCARGS2, which Seatbelt does not mediate.
-    return _process_strings("environ")
 
 
 def p1_workspace_read_write():

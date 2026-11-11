@@ -128,7 +128,7 @@ Cada vector se ejecuta dos veces, cada vez en un HOME desechable nuevo:
 | V17 | Escribir en la terminal del usuario con `TIOCSTI` |
 | V18 | Dejar un ejecutable fuera del workspace |
 | V19–V21 | Firmlink del volumen de datos, ruta con otra capitalización y `clonefile(2)` (solo macOS) |
-| V22 | Leer el entorno de otro proceso del usuario (`/proc/<pid>/environ`), como el de una shell con `GH_TOKEN` (solo Linux) |
+| V22 | Leer el entorno de otro proceso del usuario, como el de una shell con `GH_TOKEN` (`/proc/<pid>/environ` en Linux, `KERN_PROCARGS2` en macOS) |
 | V23 | Leer una clave del keyring del kernel del usuario (solo Linux) |
 | V24 | Leer la memoria compartida System V de otro proceso (solo Linux) |
 | V25 | Dejar un programa setuid en el workspace (en macOS cuenta también que el bit no llegue al archivo) |
@@ -153,15 +153,12 @@ Los vectores L se ejecutan aparte y nunca cuentan como bloqueados.
   en macOS.
 - **L5** Un watch inotify sobre `~/.ssh` deja ver nombres y momentos de los
   accesos, no contenidos.
-- **L6** La línea de órdenes de los demás procesos del usuario sigue siendo
-  legible: en Linux `/proc/<pid>/cmdline` (y su `status`, `cgroup` y
-  `mountinfo`), en macOS `KERN_PROCARGS2`. Landlock niega en Linux su entorno,
-  memoria y descriptores (V22), pero no los argumentos. No pases credenciales
-  como argumentos.
-- **L7** (solo macOS) El entorno de los demás procesos del usuario también se
-  lee con `KERN_PROCARGS2`, que Seatbelt no media. `run` se re-ejecuta sin las
-  variables que retiene, así que el agente no las recupera de su propio
-  lanzador; otro proceso que las tenga en su entorno de arranque sí las expone.
+- **L6** (Linux) La línea de órdenes de los demás procesos del usuario sigue
+  siendo legible en `/proc/<pid>/cmdline`, igual que su `status`, `cgroup` y
+  `mountinfo`. Landlock niega su entorno, memoria y descriptores (V22), pero no
+  los argumentos. No pases credenciales como argumentos. En macOS se mide
+  cerrado: Seatbelt niega la información de procesos fuera del sandbox,
+  `KERN_PROCARGS2` incluido.
 - **Red.** No se restringe, porque los agentes la necesitan. Lo que el agente
   no puede leer no lo puede enviar; el workspace sí puede salir.
 - **Señales.** Landlock limita las señales y los sockets Unix abstractos desde
@@ -241,7 +238,8 @@ la carpeta del programa).
   conserva la credencial de su agente (`ANTHROPIC_API_KEY`, `OPENAI_API_KEY`…).
   `SSH_AUTH_SOCK` y `GPG_AGENT_INFO` se retiran salvo `--keep-agent-sockets`.
   Si retiene algo, `run` se re-ejecuta sin esas variables antes de lanzar al
-  agente, para que no pueda leerlas del entorno de su propio lanzador.
+  agente, así que ni el lanzador las conserva. Es defensa en profundidad:
+  Landlock y Seatbelt ya niegan leer el entorno de otro proceso (V22).
 - **Terminal.** Si `run` tiene un terminal, el agente recibe un
   pseudoterminal privado y `run` hace de relé, como `sudo` con `use_pty`. Al
   acabar, ese terminal cuelga y, en Linux, `run` termina todo lo que el agente

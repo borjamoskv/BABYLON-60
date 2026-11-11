@@ -272,7 +272,7 @@ def test_the_hint_never_suggests_granting_a_shared_directory(tmp_path: Path) -> 
     not sys.platform.startswith("linux"), reason="reads the launcher's /proc/<pid>/environ from outside"
 )
 def test_run_reexecutes_itself_without_the_withheld_variables(sandbox: dict[str, Path]) -> None:
-    """macOS lets the agent read its launcher's exec-time environment (KERN_PROCARGS2): nothing withheld stays there."""
+    """Defence in depth: nothing withheld stays in the launcher's exec-time environment, read here from outside."""
     token = "B60-CANARY-" + secrets.token_hex(8)
     script = (
         "import os, sys; print(os.getppid(), 'BABYLON60_RUN_WITHHELD' in os.environ, flush=True); sys.stdin.readline()"

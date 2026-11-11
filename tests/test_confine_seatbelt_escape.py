@@ -57,7 +57,7 @@ def test_other_processes_can_be_neither_signalled_nor_read() -> None:
     """MACOS-4, MACOS-6, MACOS-12: only processes of this sandbox (the agent's own children) stay reachable."""
     lines = seatbelt.render_profile(_synthetic()).splitlines()
     assert lines.index("(deny signal)") < lines.index("(allow signal (target self) (target same-sandbox))")
-    assert lines.index("(deny process-info* (target others))") < lines.index(
+    assert lines.index("(deny process-info*)") < lines.index(
         "(allow process-info* (target self) (target same-sandbox))"
     )
     assert '(deny sysctl-read (sysctl-name-prefix "kern.procargs"))' in lines
@@ -181,10 +181,11 @@ def box(tmp_path: Path) -> Box:
     return Box(tmp_path, home, key, ws, policy, env)
 
 
-def _probe(box: Box, action: str, *args: object, confined: bool = True) -> dict:
+def _probe(box: Box, action: str, *args: object, confined: bool = True, new_session: bool = False) -> dict:
     """The same probe under the box's policy, or without confinement (``confined=False``, the control)."""
     argv = [launcher.interpreter(), "-I", "-S", "-B", "-c", PROBE, action, *map(str, args)]
-    result = launcher.run(launcher.Launch(argv, box.policy if confined else None), env=box.env, cwd=str(box.ws))
+    launch = launcher.Launch(argv, box.policy if confined else None, new_session=new_session)
+    result = launcher.run(launch, env=box.env, cwd=str(box.ws))
     assert result.status.get("ok"), (result.status, result.stderr.decode("utf-8", "replace"))
     for line in reversed(result.stdout.decode("utf-8", "replace").splitlines()):
         try:
@@ -327,27 +328,44 @@ def test_launchd_jobs_cannot_be_created(box: Box, how: str) -> None:
 # MACOS-4 ----------------------------------------------------------------------------------------
 
 
+def _victim(where: str, victim: str, canary: str) -> tuple[list[str], dict[str, str]]:
+    """A process outside the sandbox holding ``canary`` in its exec-time environment or arguments."""
+    env = {"PATH": "/usr/bin:/bin"}
+    if victim == "interpreter":
+        argv = [launcher.interpreter(), "-I", "-S", "-c", "import time; time.sleep(120)"]
+    else:  # a platform binary: /bin/sleep takes no extra arguments, /bin/sh keeps them in its own argv
+        # "; exit 0" keeps the shell from exec'ing sleep in its place, which would drop the extra argument.
+        argv = ["/bin/sleep", "120"] if where == "environment" else ["/bin/sh", "-c", "sleep 120; exit 0", "sh"]
+    if where == "environment":
+        env["B60_PROBE_TOKEN"] = canary
+    else:
+        argv.append(f"--api-token={canary}")
+    return argv, env
+
+
 @macos
-@pytest.mark.xfail(
-    strict=False,
-    reason="declared limit L7 (macOS): KERN_PROCARGS2 by MIB is not mediated by Seatbelt (measured on macos-15)",
-)
-@pytest.mark.parametrize("victim", ["interpreter", "/bin/sleep"])
-def test_the_environment_of_other_processes_is_not_readable(box: Box, victim: str) -> None:
-    """XNU leaves out the environment of restricted targets (entitlements, setuid): try a plain one too."""
+@pytest.mark.parametrize("session", ["same-process-group", "new-session"])
+@pytest.mark.parametrize("victim", ["interpreter", "platform-binary"])
+@pytest.mark.parametrize("where", ["environment", "arguments"])
+def test_other_processes_exec_strings_are_not_readable(box: Box, where: str, victim: str, session: str) -> None:
+    """MACOS-4: KERN_PROCARGS2 (`ps -E`) of a process outside the sandbox, as V22 and L6 measure it.
+
+    ``run`` starts the agent in a new session; the probe also runs in the victim's process group,
+    which "(target others)" alone did not cover. XNU leaves out the environment of restricted
+    targets (entitlements, setuid), so a plain interpreter is tried as well as a platform binary.
+    """
     canary = f"B60-CANARY-{secrets.token_hex(8)}"
-    argv = [launcher.interpreter(), "-I", "-S", "-c", "import time; time.sleep(120)"]
-    process = subprocess.Popen(
-        argv if victim == "interpreter" else [victim, "120"], env={"PATH": "/usr/bin:/bin", "B60_PROBE_TOKEN": canary}
-    )
+    argv, env = _victim(where, victim, canary)
+    process = subprocess.Popen(argv, env=env)
     try:
         control = _probe(box, "procargs", process.pid, confined=False)
         if canary.encode() not in bytes.fromhex(control["data"]):
-            pytest.skip(f"KERN_PROCARGS2 omits the environment of {victim} even unconfined ({control['result']})")
-        report = _probe(box, "procargs", process.pid)
+            pytest.skip(f"KERN_PROCARGS2 omits the {where} of {argv[0]} even unconfined ({control['result']})")
+        report = _probe(box, "procargs", process.pid, new_session=session == "new-session")
         assert canary.encode() not in bytes.fromhex(report["data"]), (
-            "MACOS-4: the confined process read the environment of a process outside the sandbox (ps -E)"
+            f"MACOS-4: the confined process read the {where} of a process outside the sandbox ({session})"
         )
+        assert report["result"] in ("EPERM", "EACCES"), report  # denied, not merely empty
     finally:
         process.kill()
         process.wait()
@@ -696,7 +714,7 @@ USED_RULES = (
     "(deny file-mount)",
     "(deny file-unmount)",
     "(deny signal)\n(allow signal (target self) (target same-sandbox))",
-    "(deny process-info* (target others))\n(allow process-info* (target self) (target same-sandbox))",
+    "(deny process-info*)\n(allow process-info* (target self) (target same-sandbox))",
     '(deny sysctl-read (sysctl-name-prefix "kern.procargs"))',
     "(when (defined? 'mach-priv-task-port) (deny mach-priv-task-port))",
     "(deny user-preference-write)",
