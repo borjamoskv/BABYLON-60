@@ -16,6 +16,7 @@ from fnmatch import fnmatchcase
 import json
 import os
 from pathlib import Path
+import re
 import shutil
 import signal
 import stat
@@ -34,8 +35,9 @@ if TYPE_CHECKING:
 EXIT_USAGE, EXIT_UNAVAILABLE, EXIT_REFUSED, EXIT_NOT_FOUND = 2, 3, 126, 127
 LANDLOCK_SCOPE_ABI = 6  # LANDLOCK_SCOPE_SIGNAL and LANDLOCK_SCOPE_ABSTRACT_UNIX_SOCKET
 AGENT_SOCKET_VARS = ("SSH_AUTH_SOCK", "GPG_AGENT_INFO")
-# Environment variables whose names look like credentials are not passed to the agent, unless
-# kept with --pass-env (the agent's own credential is kept when its preset is used).
+# Environment variables whose names look like credentials, or whose value is a URL with a password,
+# are not passed to the agent, unless kept with --pass-env (the agent's own credential is kept when
+# its preset is used).
 CREDENTIAL_VARS = frozenset(
     {
         "AWS_ACCESS_KEY_ID",
@@ -51,6 +53,12 @@ CREDENTIAL_VARS = frozenset(
 )
 CREDENTIAL_WORDS = ("SECRET", "PASSWORD", "PASSWD", "PASSPHRASE", "CREDENTIAL")  # anywhere in the name
 CREDENTIAL_LAST_WORDS = ("KEY", "APIKEY", "PAT", "AUTH")  # NAME_KEY, NAME_API_KEY, NAME_PAT, NPM_CONFIG__AUTH
+# The bare password conventions, as the last word after a prefix: DB_PASS, SMTP_PASS, ORACLE_PWD.
+# Alone they are something else: PWD and OLDPWD are the shell's working directories.
+PASSWORD_LAST_WORDS = ("PASS", "PWD")
+# A value that carries a password whatever its name: a URL with one in its userinfo
+# (DATABASE_URL=postgres://user:secret@host, PIP_EXTRA_INDEX_URL=https://user:token@host).
+URL_WITH_PASSWORD = re.compile(r"[A-Za-z][A-Za-z0-9+.-]*://[^/?#@\s:]*:[^/?#@\s]+@")
 AGENT_CREDENTIALS = {
     "claude-code": ("ANTHROPIC_API_KEY", "CLAUDE_CODE_OAUTH_TOKEN", "ANTHROPIC_AUTH_TOKEN"),
     "codex": ("OPENAI_API_KEY", "CODEX_*"),
@@ -360,7 +368,8 @@ def credential_like(name: str) -> bool:
     Words are separated by ``_``: one ending in ``TOKEN`` (not ``MAX_THINKING_TOKENS``
     or ``TOKENIZERS_PARALLELISM``), one containing ``SECRET``, ``PASSWORD``, ``PASSWD``,
     ``PASSPHRASE`` or ``CREDENTIAL``, a last word ``KEY``, ``APIKEY``, ``PAT`` or ``AUTH``,
-    ``..._KEY_ID``, ``OP_SESSION_*`` and the names in ``CREDENTIAL_VARS``. Values are never read.
+    a last word ``PASS`` or ``PWD`` after a prefix (``SMTP_PASS``, ``ORACLE_PWD``; never
+    ``PWD``), ``..._KEY_ID``, ``OP_SESSION_*`` and the names in ``CREDENTIAL_VARS``.
     """
     upper = name.upper()
     if upper in CREDENTIAL_VARS or upper.startswith("OP_SESSION_"):
@@ -370,7 +379,17 @@ def credential_like(name: str) -> bool:
         return False
     if any(word.endswith("TOKEN") or any(part in word for part in CREDENTIAL_WORDS) for word in words):
         return True
+    if len(words) > 1 and words[-1] in PASSWORD_LAST_WORDS:
+        return True
     return words[-1] in CREDENTIAL_LAST_WORDS or words[-2:] == ["KEY", "ID"]
+
+
+def password_in_value(value: str) -> bool:
+    """Whether a value carries a password: a URL with one in its userinfo (``scheme://user:secret@host``).
+
+    The value is only matched here; it is never stored, journaled or printed.
+    """
+    return URL_WITH_PASSWORD.search(value) is not None
 
 
 def agent_environment(
@@ -378,8 +397,9 @@ def agent_environment(
 ) -> tuple[dict[str, str], list[str]]:
     """The environment for the agent and the sorted names removed from it (never their values).
 
-    Removed: names that look like credentials (``credential_like``) and the agent
-    sockets ``SSH_AUTH_SOCK`` and ``GPG_AGENT_INFO``. Kept: the names in ``passed``
+    Removed: names that look like credentials (``credential_like``), variables whose
+    value is a URL with a password (``password_in_value``) and the agent sockets
+    ``SSH_AUTH_SOCK`` and ``GPG_AGENT_INFO``. Kept: the names in ``passed``
     (``--pass-env``), the sockets with ``keep_agent_sockets``, and the agent's own
     credential when its preset is used (``AGENT_CREDENTIALS``).
     """
@@ -390,7 +410,8 @@ def agent_environment(
     env: dict[str, str] = {}
     removed: list[str] = []
     for name, value in environ.items():
-        if name not in keep and credential_like(name) and not any(fnmatchcase(name, item) for item in own):
+        secret = credential_like(name) or password_in_value(value)
+        if name not in keep and secret and not any(fnmatchcase(name, item) for item in own):
             removed.append(name)
         else:
             env[name] = value
@@ -630,11 +651,19 @@ def run_command(args: argparse.Namespace) -> int:
         withheld = env.pop(WITHHELD_VAR, "")  # removed before the re-exec: names only
         removed = sorted({*removed, *(name for name in withheld.split(",") if name)})
         env_removed = [printable(name) for name in removed]
-        if env_removed:
+        by_name = [printable(name) for name in removed if credential_like(name)]
+        by_value = [printable(name) for name in removed if not credential_like(name)]
+        if by_name:
             sockets = " (--keep-agent-sockets keeps the agent sockets)" if set(removed) & set(AGENT_SOCKET_VARS) else ""
             print(
-                f"babylon60 run: not passed to the agent, names that look like credentials: {', '.join(env_removed)}; "
+                f"babylon60 run: not passed to the agent, names that look like credentials: {', '.join(by_name)}; "
                 f"--pass-env NAME keeps one{sockets}",
+                file=sys.stderr,
+            )
+        if by_value:
+            print(
+                "babylon60 run: not passed to the agent, values that are URLs with a password: "
+                f"{', '.join(by_value)}; --pass-env NAME keeps one",
                 file=sys.stderr,
             )
         if args.dry_run:

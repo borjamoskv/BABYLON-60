@@ -11,7 +11,14 @@ import sys
 
 import pytest
 
-from babylon60.confine.cli import _strip_separator, executable_grants, outside_grants_hint
+from babylon60.confine.cli import (
+    _strip_separator,
+    agent_environment,
+    credential_like,
+    executable_grants,
+    outside_grants_hint,
+    password_in_value,
+)
 from babylon60.confine.launcher import landlock_abi
 from babylon60.confine.policy import MIN_LANDLOCK_ABI, build_policy
 
@@ -298,3 +305,56 @@ def test_run_reexecutes_itself_without_the_withheld_variables(sandbox: dict[str,
     assert b"GH_TOKEN" in err and leaked_marker == b"False"  # still reported; the internal list never reaches the agent
     log = json.loads(_cli(sandbox, "log", "--journal", str(sandbox["journal"]), "--json").stdout)
     assert "GH_TOKEN" in log["entries"][0]["body"]["env_removed"]
+
+
+def test_password_conventions_and_urls_with_passwords_are_withheld() -> None:
+    """CODE-1 and CODE-3 (round 3): DB_PASS-style names and secret-bearing URLs reached the agent."""
+    names = ["SMTP_PASS", "RABBITMQ_DEFAULT_PASS", "REDIS_PASS", "ORACLE_PWD", "DB_PWD", "ADMIN_PWD"]
+    lookalikes = ["PWD", "OLDPWD", "BYPASS", "PASSENGER_APP_ENV", "SSL_BYPASS", "COMPASS_HOME"]
+    assert [name for name in names if not credential_like(name)] == []
+    assert [name for name in lookalikes if credential_like(name)] == []
+    secret_values = [
+        "postgres://app:s3cret@db.internal:5432/app",
+        "redis://:s3cret@cache:6379/0",
+        "https://user:tok3n@pypi.example.com/simple",
+        "--extra-index-url https://user:tok3n@pypi.example.com/simple",
+        "amqp://guest:guest@localhost//",
+    ]
+    plain_values = [
+        "https://key@o1.ingest.sentry.io/2",  # a DSN with a public key and no password
+        "https://example.com/path?a=b",
+        "user:pass@host",  # no scheme: not a URL
+        "/usr/local/bin:/usr/bin",
+        "ssh://git@github.com/org/repo.git",
+    ]
+    assert [value for value in secret_values if not password_in_value(value)] == []
+    assert [value for value in plain_values if password_in_value(value)] == []
+    environ = {"DATABASE_URL": secret_values[0], "SENTRY_DSN": plain_values[0], "SMTP_PASS": "x", "PATH": "/bin"}
+    env, removed = agent_environment(environ, preset=None, keep_agent_sockets=False, passed=())
+    assert removed == ["DATABASE_URL", "SMTP_PASS"] and env == {"SENTRY_DSN": plain_values[0], "PATH": "/bin"}
+    env, removed = agent_environment(environ, preset=None, keep_agent_sockets=False, passed=("DATABASE_URL",))
+    assert removed == ["SMTP_PASS"] and env["DATABASE_URL"] == secret_values[0]
+
+
+@needs_backend
+def test_withheld_values_never_reach_the_agent_the_terminal_or_the_journal(sandbox: dict[str, Path]) -> None:
+    password = "B60-CANARY-" + secrets.token_hex(8)
+    clean = {k: v for k, v in os.environ.items() if not credential_like(k) and not password_in_value(v)}
+    env = {
+        **clean,
+        "HOME": str(sandbox["home"]),
+        "PYTHONPATH": str(ROOT / "01_KISH_ENGINE"),
+        "DATABASE_URL": f"postgres://app:{password}@db.internal/app",
+        "SMTP_PASS": password,
+    }
+    argv = [sys.executable, "-m", "babylon60.cli.main_dispatcher", "run", "--allow-root"]
+    argv += ["--journal", str(sandbox["journal"]), "--", "/bin/sh", "-c", 'echo "[$DATABASE_URL][$SMTP_PASS]"']
+    result = subprocess.run(argv, env=env, cwd=str(sandbox["ws"]), capture_output=True, text=True, timeout=300)
+    assert result.returncode == 0, result.stderr
+    assert result.stdout.strip() == "[][]", result.stdout
+    assert "names that look like credentials: SMTP_PASS" in result.stderr
+    assert "values that are URLs with a password: DATABASE_URL" in result.stderr
+    assert password not in result.stderr and password not in result.stdout
+    assert password.encode() not in sandbox["journal"].read_bytes()
+    log = json.loads(_cli(sandbox, "log", "--journal", str(sandbox["journal"]), "--json").stdout)
+    assert {"DATABASE_URL", "SMTP_PASS"} <= set(log["entries"][0]["body"]["env_removed"])
