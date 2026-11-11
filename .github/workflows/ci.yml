@@ -52,6 +52,14 @@ jobs:
       - name: B60 DSL engine and CLI regressions
         run: cargo test --locked -p babylon60_root --bin babylon60-dsl --test b60_dsl_cli
       - name: Test workspace with isolated IPC scheduling
+        env:
+          # Real-solver tests authenticate the exact z3 executable shipped in the
+          # z3-solver 5.1.0.0 manylinux_2_27_x86_64 wheel locked in uv.lock
+          # (sha256 dfad9e309d7010b1ff6bdb33f21570a1603ef4727373221c7117a74448f0cfef),
+          # installed by `uv sync --locked` above ("Z3 version 5.1.0 - 64 bit").
+          # Any other binary fails closed with HashMismatch.
+          BABYLON_Z3_BIN: ${{ github.workspace }}/.venv/bin/z3
+          BABYLON_Z3_BLAKE3: 928f564273519f18f60066245cc050d3ade73aa922243f132c23f3faa3474ee8
         run: uv run --no-sync cargo test --workspace --locked -- --test-threads=1
       - name: FL-019 native geometry and persistent lineage
         run: |
