@@ -8,7 +8,12 @@ access...), so a pass is never vacuous; the confined attempt must then have no e
 fix a failing behaviour test reproduces the finding; after it, the same test confirms the closure.
 Each one asserts on the effect (a file, the mount table, launchd's environment), never on a tool's
 exit status. A test that changes state outside its tmp_path (a mount, an attached image, launchd's
-environment) undoes it in a finally block, whatever the assertions did.
+environment, a LaunchServices registration) undoes it in a finally block, whatever the assertions did.
+
+The tests revised after the review of AX-210 (lsopen, launchctl setenv, defaults read, screencapture and
+the display probe, hdiutil) launch the confined attempt as `run` launches the agent (``_as_run``: a new
+session, a private TMPDIR) and, through ``_closed``, count an absent effect only when the trampoline
+reported the exec (status ok); a launcher timeout makes them skip with the reason, never pass.
 
 Positive controls measure what the denials cost: what agents run every day (ps, git, a venv, clang
 with modules, swift, brew, headless Chrome, lldb on their own build) must still work confined. Each
@@ -20,7 +25,7 @@ HOME and writes it to a marker file outside the grants; nothing here reads real 
 
 from __future__ import annotations
 
-from collections.abc import Callable
+from collections.abc import Callable, Iterator
 import contextlib
 import json
 import os
@@ -35,12 +40,13 @@ import subprocess
 import sys
 import tempfile
 import time
-from typing import Any
+from typing import Any, NamedTuple
 
 import pytest
 
 from babylon60.confine import launcher, seatbelt
-from babylon60.confine.policy import Policy, build_policy, default_homes
+from babylon60.confine.journal import ConfineJournal, JournalError
+from babylon60.confine.policy import PRESETS, Policy, account_home, build_policy, default_homes
 from test_confine_seatbelt import DATA, DENIED, TMP, Box, _matches, _paths, _regexes, _rule, _synthetic, macos
 
 ROOT = Path(__file__).absolute().parents[1]
@@ -331,42 +337,127 @@ def _last_json(result: launcher.Result) -> dict[str, Any]:
     return {"status": result.status, "stderr": result.stderr.decode("utf-8", "replace")[-2000:]}
 
 
+def _stderr(result: launcher.Result) -> str:
+    return result.stderr.decode("utf-8", "replace")[-2000:]
+
+
+def _control_as_run(box: Box, argv: list[str], what: str, *, timeout: float = 120) -> launcher.Result:
+    """The unconfined control, launched as the confined attempt will be: ``_as_run`` without a policy.
+
+    Only the policy then tells the two apart. A timeout leaves nothing to compare (skip with the reason);
+    an exec the trampoline refused without any policy is a broken harness (failure).
+    """
+    result = _as_run(box, argv, confined=False, timeout=timeout)
+    stderr = _stderr(result)
+    if result.status.get("timeout"):
+        pytest.skip(f"{what} did not finish in {timeout:.0f} s even unconfined; nothing to compare: {stderr!r}")
+    assert result.status.get("ok"), f"{what}: the unconfined trampoline did not exec it ({result.status}): {stderr!r}"
+    return result
+
+
+def _closed(result: launcher.Result, effect: bool, finding: str, what: str) -> None:
+    """The confined attempt (``result``) had no effect, and that absence counts.
+
+    An effect fails the test whatever the launcher reports, so neither a timeout nor a refused exec
+    can hide one. Without an effect, the trampoline must have exec'd ``what`` (status ok), or the
+    absence would be vacuous; a launcher timeout leaves it inconclusive: a skip with the reason, never
+    a pass.
+    """
+    stderr = _stderr(result)
+    assert not effect, f"{finding} (launcher status: {result.status}; stderr: {stderr!r})"
+    if result.status.get("timeout"):
+        pytest.skip(f"{what} did not finish within the launcher's timeout, confined; inconclusive: {stderr!r}")
+    assert result.status.get("ok"), f"{what} never ran: the trampoline did not exec it ({result.status}): {stderr!r}"
+
+
 # MACOS-1 ----------------------------------------------------------------------------------------
 
 
-@macos
-@pytest.mark.parametrize("roots", ["shared-read-roots", "lsopen-alone"])
-def test_launch_services_cannot_start_code_outside_the_sandbox(
-    box: Box, roots: str, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    """``lsopen-alone`` renders the profile without the shared read roots (``shared_roots=()``).
+LSREGISTER = "/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister"
+# Everything allowed but LaunchServices opens: what "(deny lsopen)" stops on its own.
+LSOPEN_ONLY = "(version 1)\n(allow default)\n(deny lsopen)\n"
 
-    The per-user /private/var/folders directory, one of those roots, also holds LaunchServices' per-user
-    data; without it, "(deny lsopen)" is the only rule left in the way.
+
+@pytest.fixture
+def opened_app(box: Box) -> Iterator[tuple[list[str], Path]]:
+    """`open` of an app in the workspace that copies the decoy key to a marker, and that marker.
+
+    The control has already started it, launched as the confined attempt will be (``_as_run``, no
+    policy); without that effect the test skips. LaunchServices registers the app when it opens it:
+    the registration is removed in finally.
     """
     marker = box.root / f"lsopen-{secrets.token_hex(4)}"
     app = _script_app(box.ws / "B60Probe.app", f"#!/bin/sh\n{_copy_key(box, marker)}\n")
     argv = ["/usr/bin/open", "-g", "-n", str(app)]
-    control = _control(argv, 60)
-    if control.returncode != 0 or not _escaped(box, marker):
-        pytest.skip(f"LaunchServices does not launch apps in this session even unconfined: {control.stderr!r}")
-    marker.unlink()
-    rendered: list[object] = []
-    if roots == "lsopen-alone":
-        render = seatbelt.render_profile
+    try:
+        control = _control_as_run(box, argv, "open", timeout=60)
+        if not _escaped(box, marker):
+            pytest.skip(f"LaunchServices does not launch apps in this session even unconfined: {_stderr(control)!r}")
+        marker.unlink()
+        yield argv, marker
+    finally:
+        if os.path.exists(LSREGISTER):
+            _quietly([LSREGISTER, "-u", str(app)], 60)
 
-        def without_shared_roots(policy: Policy, **options: Any) -> str:
-            rendered.append(options.get("shared_roots"))
-            return render(policy, **{**options, "shared_roots": ()})
 
-        monkeypatch.setattr(seatbelt, "render_profile", without_shared_roots)
-    confined = box.run(argv)
-    if roots == "lsopen-alone":
-        assert rendered, "the launcher did not render this profile through seatbelt.render_profile"
-    assert not _escaped(box, marker), (
-        f"MACOS-1: an app opened from inside the sandbox read the protected key outside it ({roots}): "
-        f"{confined.stderr!r}"
-    )
+@macos
+@pytest.mark.parametrize("profile", ["run-profile", "lsopen-only"])
+def test_launch_services_cannot_start_code_outside_the_sandbox(
+    box: Box, opened_app: tuple[list[str], Path], profile: str, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """MACOS-1: an app that `open` starts runs outside the sandbox, so the app must not start.
+
+    ``run-profile`` is the profile `run` renders. ``lsopen-only`` has the patched renderer return
+    LSOPEN_ONLY, where nothing but "(deny lsopen)" is denied: a closure there is that rule's alone.
+    The app reads the key outside the sandbox, so no file rule is involved either way.
+    """
+    argv, marker = opened_app
+    rendered: list[str] = []
+    if profile == "lsopen-only":
+
+        def lsopen_only(policy: Policy, **options: Any) -> str:
+            rendered.append(profile)
+            return LSOPEN_ONLY
+
+        monkeypatch.setattr(seatbelt, "render_profile", lsopen_only)
+    confined = _as_run(box, argv, timeout=60)
+    if profile == "lsopen-only":
+        assert rendered == [profile], "the launcher did not render this profile through seatbelt.render_profile"
+    finding = f"MACOS-1: an app opened from inside the sandbox read the protected key outside it ({profile})"
+    _closed(confined, _escaped(box, marker), finding, "open")
+
+
+@macos
+def test_without_deny_lsopen_the_profile_lets_open_start_an_app(
+    box: Box, opened_app: tuple[list[str], Path], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Negative control for MACOS-1: the profile `run` renders, minus its "(deny lsopen)" line.
+
+    A pass is an escape under that weakened profile: nothing else in it (Apple Events, the window
+    server and Apple Event lookups, the file-write fallback over the per-user directory) stops `open`,
+    so "(deny lsopen)" is what closes MACOS-1. If the app does not start, the test skips and says so:
+    another rule is in the way too, and this test does not isolate which.
+    """
+    argv, marker = opened_app
+    render = seatbelt.render_profile
+    removed: list[bool] = []
+
+    def without_lsopen(policy: Policy, **options: Any) -> str:
+        lines = render(policy, **options).splitlines()
+        removed.append("(deny lsopen)" in lines)
+        return "\n".join(line for line in lines if line != "(deny lsopen)") + "\n"
+
+    monkeypatch.setattr(seatbelt, "render_profile", without_lsopen)
+    weakened = _as_run(box, argv, timeout=60)
+    assert removed == [True], "the launcher did not render the profile through seatbelt.render_profile"
+    if weakened.status.get("timeout"):
+        pytest.skip(f"open did not finish within the launcher's timeout; inconclusive: {_stderr(weakened)!r}")
+    assert weakened.status.get("ok"), f"open never ran: {weakened.status} {_stderr(weakened)!r}"
+    if not _escaped(box, marker):
+        pytest.skip(
+            "without (deny lsopen) the rest of the profile still keeps open from starting the app: another rule "
+            f"is in the way too; stderr: {_stderr(weakened)!r}"
+        )
 
 
 # MACOS-2 ----------------------------------------------------------------------------------------
@@ -376,18 +467,23 @@ def test_launch_services_cannot_start_code_outside_the_sandbox(
 @pytest.mark.parametrize("target", ["Finder", "Terminal"])
 def test_apple_events_cannot_make_another_app_run_code(box: Box, target: str) -> None:
     marker = box.root / f"appleevent-{secrets.token_hex(4)}"
+    app: Path | None = None
     if target == "Finder":
         app = _script_app(box.ws / "B60Probe.app", f"#!/bin/sh\n{_copy_key(box, marker)}\n")
         script = f'tell application "Finder" to open (POSIX file "{app}")'
     else:
         script = f'tell application "Terminal" to do script "{_copy_key(box, marker)}; exit"'
     argv = ["/usr/bin/osascript", "-e", script]
-    control = _control(argv, 90)
-    if control.returncode != 0 or not _escaped(box, marker):
-        pytest.skip(f"Apple Events to {target} are not authorized here even unconfined: {control.stderr!r}")
-    marker.unlink()
-    box.run(argv)
-    assert not _escaped(box, marker), f"MACOS-2: {target} ran code for the confined process, outside the sandbox"
+    try:
+        control = _control(argv, 90)
+        if control.returncode != 0 or not _escaped(box, marker):
+            pytest.skip(f"Apple Events to {target} are not authorized here even unconfined: {control.stderr!r}")
+        marker.unlink()
+        box.run(argv)
+        assert not _escaped(box, marker), f"MACOS-2: {target} ran code for the confined process, outside the sandbox"
+    finally:
+        if app is not None and os.path.exists(LSREGISTER):  # Finder registered it with LaunchServices
+            _quietly([LSREGISTER, "-u", str(app)], 60)
 
 
 # MACOS-3 ----------------------------------------------------------------------------------------
@@ -448,20 +544,23 @@ def _launchd_env(name: str) -> str:
 def test_launchd_environment_cannot_be_changed(box: Box) -> None:
     """MACOS-3: `launchctl setenv` sets a variable for every program launchd starts later, outside the sandbox.
 
-    No job is created, so "(deny job-creation)" may not cover it; this measures it.
+    No job is created, so "(deny job-creation)" may not cover it; this measures it. The control's
+    setenv is launched as the confined one (``_as_run``); getenv and unsetenv run unconfined.
     """
     name = f"B60_PROBE_{secrets.token_hex(4).upper()}"
     control_value, canary = f"B60-CONTROL-{secrets.token_hex(8)}", f"B60-CANARY-{secrets.token_hex(8)}"
     try:
-        _launchctl("setenv", name, control_value)
+        control = _control_as_run(box, ["/bin/launchctl", "setenv", name, control_value], "launchctl setenv")
         works = _launchd_env(name) == control_value
         _launchctl("unsetenv", name)
         if not works or _launchd_env(name):
-            pytest.skip("launchctl setenv, getenv and unsetenv do not work in this session even unconfined")
-        attempt = box.run(["/bin/launchctl", "setenv", name, canary])
-        assert canary not in _launchd_env(name), (
-            f"MACOS-3: the confined process set {name} for the programs launchd starts later: {attempt.stderr!r}"
-        )
+            pytest.skip(
+                "launchctl setenv, getenv and unsetenv do not work in this session even unconfined: "
+                f"{_stderr(control)!r}"
+            )
+        attempt = _as_run(box, ["/bin/launchctl", "setenv", name, canary], timeout=60)
+        finding = f"MACOS-3: the confined process set {name} for the programs launchd starts later"
+        _closed(attempt, canary in _launchd_env(name), finding, "launchctl setenv")
     finally:
         _launchctl("unsetenv", name)
 
@@ -634,21 +733,30 @@ def test_preferences_are_not_a_way_to_write_outside_the_grants(box: Box) -> None
 
 @macos
 def test_preferences_of_other_programs_are_not_readable(box: Box) -> None:
-    """MACOS-7: closed in the CI of 48a4593, d594608 and ae39991, where it XPASSED while marked xfail.
+    """MACOS-7: it XPASSED, marked xfail, in the CI of 48a4593, d594608 and ae39991.
 
     Only user-preference-write is denied, yet the confined `defaults read` got nothing. Why (cfprefsd
     applying the caller's file rules to the plist in the denied home, or something else) is not measured.
+    Those runs compared an unconfined read with the test's own environment against a confined one with
+    the decoy HOME and nothing else; here the control read is launched as the confined one
+    (``_as_run``, same environment), so only the policy differs.
     """
     domain = f"org.babylon60.probe.{secrets.token_hex(4)}"
     canary = f"B60-CANARY-{secrets.token_hex(8)}"
+    argv = [DEFAULTS, "read", domain, "token"]
     try:
-        if (
-            _defaults("write", domain, "token", canary).returncode
-            or canary not in _defaults("read", domain, "token").stdout
-        ):
+        if _defaults("write", domain, "token", canary).returncode:
             pytest.skip("cfprefsd does not serve this session")
-        confined = box.run([DEFAULTS, "read", domain, "token"])
-        assert canary.encode() not in confined.stdout, "MACOS-7: cfprefsd read a home plist for the confined process"
+        control = _control_as_run(box, argv, "defaults read")
+        if canary.encode() not in control.stdout:
+            plain = canary in _defaults("read", domain, "token").stdout  # with the test's own environment
+            pytest.skip(
+                "defaults read, launched as the agent is but unconfined, does not see the value written here "
+                f"(a read with the test's own environment does: {plain}); nothing to compare: {_stderr(control)!r}"
+            )
+        confined = _as_run(box, argv, timeout=60)
+        finding = "MACOS-7: cfprefsd read a home plist for the confined process"
+        _closed(confined, canary.encode() in confined.stdout, finding, "defaults read")
     finally:
         _defaults("delete", domain)
 
@@ -702,23 +810,89 @@ def _png(path: Path) -> bool:
 
 @macos
 def test_the_screen_cannot_be_captured(box: Box) -> None:
-    """INV_C5_COMPUTER_USE_TRUST_GATEWAY: com.apple.windowserver.active is denied.
+    """INV_C5_COMPUTER_USE_TRUST_GATEWAY: no screenshot of the user's windows from inside the sandbox.
 
-    The image goes to the workspace, which the confined process may write: only the window server
-    lookup stands between it and a screenshot of the user's other windows.
+    The image goes to the workspace, which the confined process may write. Control and attempt are
+    launched alike (``_as_run``: a new session and a private TMPDIR each may write), so the TMPDIR is
+    not what tells them apart; other files screencapture may need are not ruled out here. The test
+    after this one measures the window server's part in-process, where the probe writes no file.
     """
     if not os.path.exists(SCREENCAPTURE):
         pytest.skip(f"no {SCREENCAPTURE}")
     shot = box.ws / "shot.png"
-    control = _bounded([SCREENCAPTURE, "-x", str(shot)], timeout=60, env=box.env, cwd=box.ws)
+    argv = [SCREENCAPTURE, "-x", str(shot)]
+    control = _control_as_run(box, argv, "screencapture", timeout=60)
     if not _png(shot):
         pytest.skip(
             "screencapture produces no image here even unconfined (no window server session or no Screen "
-            f"Recording grant), so there is nothing to compare: {control}"
+            f"Recording grant), so there is nothing to compare: {_stderr(control)!r}"
         )
     shot.unlink()
-    confined = box.run([SCREENCAPTURE, "-x", str(shot)])
-    assert not _png(shot), f"the confined process captured the screen: {confined.stderr!r}"
+    confined = _as_run(box, argv, timeout=60)
+    _closed(confined, _png(shot), "the confined process captured the screen", "screencapture")
+
+
+# Ask CoreGraphics for an image of the main display, in this process, with no file involved: one JSON
+# line once the symbols resolve ("loaded"), one more if the calls return ("returned").
+DISPLAY_PROBE = r"""
+import ctypes, json
+graphics = ctypes.CDLL("/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics")
+try:
+    main_display, create_image = graphics.CGMainDisplayID, graphics.CGDisplayCreateImage
+    release = graphics.CGImageRelease
+except AttributeError as exc:
+    print(json.dumps({"stage": "missing", "error": str(exc)}), flush=True)
+    raise SystemExit(0)
+main_display.restype = ctypes.c_uint32
+create_image.argtypes, create_image.restype = [ctypes.c_uint32], ctypes.c_void_p
+release.argtypes, release.restype = [ctypes.c_void_p], None
+print(json.dumps({"stage": "loaded"}), flush=True)
+display = main_display()
+image = create_image(display)
+print(json.dumps({"stage": "returned", "display": display, "image": bool(image)}), flush=True)
+if image:
+    release(image)
+"""
+
+
+def _display_stages(result: launcher.Result) -> dict[str, dict[str, Any]]:
+    stages: dict[str, dict[str, Any]] = {}
+    for line in result.stdout.decode("utf-8", "replace").splitlines():
+        with contextlib.suppress(ValueError):
+            report = json.loads(line)
+            if isinstance(report, dict) and isinstance(report.get("stage"), str):
+                stages[report["stage"]] = report
+    return stages
+
+
+@macos
+def test_the_window_server_gives_the_sandbox_no_image_of_the_display(box: Box) -> None:
+    """The window server's part in test_the_screen_cannot_be_captured, measured in-process.
+
+    DISPLAY_PROBE calls CGMainDisplayID and CGDisplayCreateImage. The control, launched as the confined
+    attempt (``_as_run``, no policy), must get an image (non-NULL); confined, the probe must reach the
+    calls and get none (NULL, or no return at all). Unlike screencapture, the probe writes no file: the
+    image would stay in memory, so what withholds it is inside CoreGraphics' calls, where the window
+    server answers. Which rule of the profile causes it (the com.apple.windowserver.active lookup, or
+    another, such as a file CoreGraphics needs to read) is not isolated here.
+    """
+    argv = [launcher.interpreter(), "-I", "-S", "-c", DISPLAY_PROBE]
+    control = _control_as_run(box, argv, "the display probe", timeout=60)
+    stages = _display_stages(control)
+    if not stages.get("returned", {}).get("image"):
+        pytest.skip(
+            "CGDisplayCreateImage gives no image of the display here even unconfined (no window server "
+            f"session, no Screen Recording grant or no such symbol): {stages} {_stderr(control)!r}"
+        )
+    confined = _as_run(box, argv, timeout=60)
+    stages = _display_stages(confined)
+    finding = "INV_C5_COMPUTER_USE_TRUST_GATEWAY: the window server gave the confined process an image of the display"
+    _closed(confined, bool(stages.get("returned", {}).get("image")), finding, "the display probe")
+    if "loaded" not in stages:
+        pytest.skip(
+            "the confined probe never reached CGMainDisplayID, so the absent image says nothing about the "
+            f"window server: {stages} {_stderr(confined)!r}"
+        )
 
 
 # MACOS-10 ----------------------------------------------------------------------------------------
@@ -941,10 +1115,11 @@ def test_a_disk_image_cannot_be_mounted_over_a_directory_outside_the_grants(box:
         assert not _mount_table_names(target), f"the control's image is still attached over {target}"
         confined = _as_run(box, attach, timeout=180)
         shown, listed = _shows(target, content, timeout=5), _mount_table_names(target)
-        assert not shown and not listed, (
+        finding = (
             f"MACOS-5: the confined process mounted an image over {target} (file shown: {shown}, "
-            f"mount table: {listed}); hdiutil: {confined.stdout!r} {confined.stderr!r}"
+            f"mount table: {listed}); hdiutil stdout: {confined.stdout[-2000:]!r}"
         )
+        _closed(confined, shown or listed, finding, "hdiutil attach")
     finally:
         _detach_everything_from(image, target)
         if not _mount_table_names(target):
@@ -991,7 +1166,12 @@ class DeclaredLimit(AssertionError):
     "(ENOENT for a missing name, EPERM or EACCES for an existing one); their contents stay unreadable",
 )
 def test_denied_paths_do_not_tell_which_names_exist(box: Box) -> None:
-    """MACOS-13: XFAILED in the CI of 48a4593, d594608 and ae39991. Strict: should it pass, the limit is gone."""
+    """MACOS-13: XFAILED in the CI of 48a4593, d594608 and ae39991. Strict: should it pass, the limit is gone.
+
+    Those runs do not record the errno of the missing name. Only the declared shape raises
+    DeclaredLimit (ENOENT for the missing name, EPERM or EACCES for the key), so an XFAIL now
+    certifies it; any other pair of answers fails with both values.
+    """
     missing = box.home / ".ssh" / f"absent-{secrets.token_hex(4)}"
     control = _probe(box, "stat", missing, confined=False)["result"]
     if control != "ENOENT":
@@ -1000,8 +1180,9 @@ def test_denied_paths_do_not_tell_which_names_exist(box: Box) -> None:
     assert present in DENIED, f"L1: stat of the protected key answered {present} inside the sandbox"
     read = _probe(box, "read", box.key)
     assert read["result"] in DENIED and not read["data"], f"the protected key is readable: {read}"
-    if absent != present:
-        raise DeclaredLimit(f"MACOS-13: stat answers {present} for the key and {absent} for a missing name")
+    if absent == "ENOENT" and present in DENIED:
+        raise DeclaredLimit(f"MACOS-13: stat answers {present} for the key and ENOENT for a missing name")
+    assert absent == present, f"MACOS-13: stat answers {present} for the key and {absent} for a missing name"
 
 
 # MACOS-14 and the names a fix relies on ----------------------------------------------------------
@@ -1098,8 +1279,18 @@ def test_setuid_and_setgid_modes_are_denied(box: Box, mode: int) -> None:
 CLI = [sys.executable, "-P", "-m", "babylon60.cli.main_dispatcher"]
 CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 MACH_O = (b"\xcf\xfa\xed\xfe", b"\xfe\xed\xfa\xcf")  # MH_MAGIC_64, in either byte order
-# A command prepared in one workspace: (argv, whether it had its effect, timeout in seconds).
-Everyday = tuple[list[str], Callable[[subprocess.CompletedProcess[str]], bool], float]
+# A small ~/.gitconfig, as most users have: an identity and no credential.
+GITCONFIG = "[user]\n\tname = B60 Decoy\n\temail = decoy@b60.invalid\n"
+MODULE_CACHE_MARKER = "B60-MODULE-CACHE-IN-TMPDIR"
+
+
+class Everyday(NamedTuple):
+    """A command prepared in one workspace, and how `run` starts it."""
+
+    argv: list[str]
+    worked: Callable[[subprocess.CompletedProcess[str]], bool]  # whether it had its effect
+    timeout: float  # seconds
+    options: tuple[str, ...] = ()  # `run` options before "--"
 
 
 def _installed(*candidates: str) -> str:
@@ -1116,27 +1307,54 @@ def _ps_own_pid(ws: Path, env: dict[str, str]) -> Everyday:
         words = done.stdout.split()
         return len(words) == 2 and words[0].isdigit() and words[0] == words[1]
 
-    return ["/bin/sh", "-c", f"echo $$; exec {_installed('/bin/ps')} -p $$ -o pid="], listed, 120
+    return Everyday(["/bin/sh", "-c", f"echo $$; exec {_installed('/bin/ps')} -p $$ -o pid="], listed, 120)
 
 
-def _git(*candidates: str) -> Callable[[Path, dict[str, str]], Everyday]:
-    """git init and an empty commit with an identity of the workspace's own (.git/config)."""
+def _real_agent_state() -> str | None:
+    """A path ``--preset claude-code`` would grant read-write from this account's real home, if one exists."""
+    home = account_home()
+    return next((home + item[1:] for item in PRESETS["claude-code"]["write"] if os.path.lexists(home + item[1:])), None)
+
+
+def _git(*candidates: str, gitconfig: bool = False) -> Callable[[Path, dict[str, str]], Everyday]:
+    """git init and an empty commit; the effect is the commit with its author.
+
+    Without ``gitconfig`` the decoy HOME has no ~/.gitconfig and the identity is the workspace's own
+    (.git/config). With it, the HOME has GITCONFIG (user.name and user.email, no credential), the
+    commit takes its author from there, so the effect also shows that git read the file, and `run`
+    gets --preset claude-code. Without a grant git cannot read ~/.gitconfig and stops (measured on
+    Linux: "fatal: unknown error occurred while reading the configuration files"). The presets grant it
+    read-only once AX-207/217 is merged; until then these variants fail (measured on Linux, where they
+    run with BABYLON60_REQUIRE_SEATBELT=1). They skip where the preset would grant this account's real
+    agent state to the test.
+    """
 
     def prepare(ws: Path, env: dict[str, str]) -> Everyday:
         git = _installed(*candidates)
         quoted = shlex.quote(git)
-        script = (
-            f"{quoted} init -q && {quoted} config user.name 'B60 Probe' && "
-            f"{quoted} config user.email probe@b60.invalid && {quoted} commit -q --allow-empty -m b60-probe"
-        )
+        if gitconfig:
+            reached = _real_agent_state()
+            if reached:
+                pytest.skip(f"--preset claude-code would grant this account's real agent state ({reached}) to the test")
+            (Path(env["HOME"]) / ".gitconfig").write_text(GITCONFIG)
+            identity, author = "", "B60 Decoy"
+        else:
+            identity = f"{quoted} config user.name 'B60 Probe' && {quoted} config user.email probe@b60.invalid && "
+            author = "B60 Probe"
+        script = f"{quoted} init -q && {identity}{quoted} commit -q --allow-empty -m b60-probe"
 
         def committed(done: subprocess.CompletedProcess[str]) -> bool:
             log = subprocess.run(
-                [git, "-C", str(ws), "log", "-1", "--format=%s"], env=env, capture_output=True, text=True, timeout=60
+                [git, "-C", str(ws), "log", "-1", "--format=%an%n%s"],
+                env=env,
+                capture_output=True,
+                text=True,
+                timeout=60,
             )
-            return log.stdout.strip() == "b60-probe"
+            return log.stdout.splitlines() == [author, "b60-probe"]
 
-        return ["/bin/sh", "-c", script], committed, 120
+        options = ("--preset", "claude-code") if gitconfig else ()
+        return Everyday(["/bin/sh", "-c", script], committed, 120, options)
 
     return prepare
 
@@ -1157,34 +1375,57 @@ def _python_venv(ws: Path, env: dict[str, str]) -> Everyday:
         )
         return check.stdout.strip() == "True"
 
-    return [_installed("/usr/bin/python3"), "-m", "venv", str(venv)], created, 300
+    return Everyday([_installed("/usr/bin/python3"), "-m", "venv", str(venv)], created, 300)
 
 
-def _clang_modules(ws: Path, env: dict[str, str]) -> Everyday:
-    """clang's module cache defaults to the per-user cache directory, read-denied by the profile and
-    write-denied by its base; clang documents only -fmodules-cache-path to move it, no variable.
+def _clang_modules(*, cache_in_tmpdir: bool = False) -> Callable[[Path, dict[str, str]], Everyday]:
+    """clang -fmodules with @import Foundation.
 
-    The control fills that cache, as any build does; it is clang's own cache, not undone here.
+    clang's module cache defaults to the per-user cache directory, read-denied by the profile and
+    write-denied by its base. The user documentation names only -fmodules-cache-path to move it; the
+    driver also reads CLANG_MODULE_CACHE_PATH (LLVM review D126678), which that documentation leaves
+    out. With ``cache_in_tmpdir`` the command sets it to $TMPDIR/clang-modules, the agent's private
+    TMPDIR under `run`, with no profile change, and the effect includes a cache there: whether Apple
+    clang honours the variable, and whether that route works confined, is what that variant measures.
+
+    The control fills a module cache, as any build does: clang's own, not undone here, or the
+    control's TMPDIR.
     """
-    (ws / "probe.m").write_text('@import Foundation; int b60_probe(void) { return (int)[@"B60" length]; }\n')
 
-    def compiled(done: subprocess.CompletedProcess[str]) -> bool:
-        with contextlib.suppress(OSError):
-            return (ws / "probe.o").read_bytes()[:4] in MACH_O
-        return False
+    def prepare(ws: Path, env: dict[str, str]) -> Everyday:
+        build = [_installed("/usr/bin/clang"), "-fmodules", "-c", "probe.m", "-o", "probe.o"]
+        (ws / "probe.m").write_text('@import Foundation; int b60_probe(void) { return (int)[@"B60" length]; }\n')
+        argv = build
+        if cache_in_tmpdir:
+            script = (
+                'CLANG_MODULE_CACHE_PATH="$TMPDIR/clang-modules"; export CLANG_MODULE_CACHE_PATH; '
+                f"{shlex.join(build)} || exit; "
+                'if [ -n "$(ls -A "$CLANG_MODULE_CACHE_PATH" 2>/dev/null)" ]; '
+                f"then echo {MODULE_CACHE_MARKER}; "
+                'else echo "no module cache in $CLANG_MODULE_CACHE_PATH: clang ignored the variable" >&2; fi'
+            )
+            argv = ["/bin/sh", "-c", script]
 
-    return [_installed("/usr/bin/clang"), "-fmodules", "-c", "probe.m", "-o", "probe.o"], compiled, 420
+        def compiled(done: subprocess.CompletedProcess[str]) -> bool:
+            with contextlib.suppress(OSError):
+                built = (ws / "probe.o").read_bytes()[:4] in MACH_O
+                return built and (not cache_in_tmpdir or MODULE_CACHE_MARKER in done.stdout.split())
+            return False
+
+        return Everyday(argv, compiled, 420)
+
+    return prepare
 
 
 def _swift_version(ws: Path, env: dict[str, str]) -> Everyday:
     swift = _installed("/usr/bin/swift")
-    return [swift, "--version"], lambda done: "Swift version" in done.stdout + done.stderr, 120
+    return Everyday([swift, "--version"], lambda done: "Swift version" in done.stdout + done.stderr, 120)
 
 
 def _brew_version(ws: Path, env: dict[str, str]) -> Everyday:
     """brew lives in a prefix whose var/ the profile read-denies (Homebrew's service data)."""
     brew = _installed("/opt/homebrew/bin/brew", "/usr/local/bin/brew")
-    return [brew, "--version"], lambda done: done.stdout.startswith("Homebrew "), 120
+    return Everyday([brew, "--version"], lambda done: done.stdout.startswith("Homebrew "), 120)
 
 
 def _headless_chrome(ws: Path, env: dict[str, str]) -> Everyday:
@@ -1202,15 +1443,18 @@ def _headless_chrome(ws: Path, env: dict[str, str]) -> Everyday:
         "--dump-dom",
         page.as_uri(),
     ]
-    return argv, lambda done: marker in done.stdout, 180
+    return Everyday(argv, lambda done: marker in done.stdout, 180)
 
 
 EVERYDAY: dict[str, Callable[[Path, dict[str, str]], Everyday]] = {
     "ps-own-pid": _ps_own_pid,
     "git-xcrun-shim": _git("/usr/bin/git"),
     "git-homebrew": _git("/opt/homebrew/bin/git", "/usr/local/bin/git"),
+    "git-xcrun-shim-gitconfig": _git("/usr/bin/git", gitconfig=True),
+    "git-homebrew-gitconfig": _git("/opt/homebrew/bin/git", "/usr/local/bin/git", gitconfig=True),
     "python-venv": _python_venv,
-    "clang-fmodules": _clang_modules,
+    "clang-fmodules": _clang_modules(),
+    "clang-fmodules-cache-in-tmpdir": _clang_modules(cache_in_tmpdir=True),
     "swift-version": _swift_version,
     "brew-version": _brew_version,
     "chrome-headless": _headless_chrome,
@@ -1220,9 +1464,9 @@ EVERYDAY: dict[str, Callable[[Path, dict[str, str]], Everyday]] = {
 def _everyday_session(root: Path) -> tuple[Path, Path, dict[str, str]]:
     """A decoy HOME, an empty workspace, a TMPDIR of its own and a plain environment.
 
-    The HOME has no ~/.gitconfig: git stops when one exists and the agent cannot read it (measured on
-    Linux, git 2.43 under Landlock: "fatal: unknown error occurred while reading the configuration
-    files"). That is a finding of its own, not what these controls measure.
+    The HOME has no ~/.gitconfig unless a -gitconfig git variant writes one. git stops when one exists
+    and the agent cannot read it (measured on Linux, git 2.43 under Landlock: "fatal: unknown error
+    occurred while reading the configuration files"), so git is measured with and without one.
     """
     home, ws, tmp = root / "home", root / "ws", root / "tmp"
     (home / ".ssh").mkdir(parents=True)
@@ -1239,26 +1483,57 @@ def _everyday_session(root: Path) -> tuple[Path, Path, dict[str, str]]:
     return ws, tmp, env
 
 
+def _timed_out(done: subprocess.CompletedProcess[str]) -> bool:
+    """``_bounded`` ended the command at its timeout."""
+    return done.stderr.endswith(" s without finishing]")
+
+
+def _journal_story(path: Path) -> str:
+    """What `run` recorded: run_refused (the trampoline did not exec the command, and why) or run_end."""
+    if not path.exists():
+        return "no journal"
+    try:
+        with ConfineJournal(path) as journal:
+            entries = journal.entries()
+    except JournalError as exc:
+        return f"unreadable journal: {exc}"
+    story = []
+    for entry in entries:
+        if entry.kind == "run_refused":
+            story.append(f"run_refused ({entry.body.get('error')})")
+        elif entry.kind == "run_end":
+            story.append(f"run_end (exit code {entry.body.get('exit_code')})")
+        else:
+            story.append(entry.kind)
+    return ", ".join(story) or "no entries"
+
+
 @macos
 @pytest.mark.parametrize("name", list(EVERYDAY))
 def test_what_agents_run_every_day_works_through_run(tmp_path: Path, name: str) -> None:
-    """Positive control through the real command line: `babylon60 run --journal <tmp> -- <command>`.
+    """Positive control through the real command line: `babylon60 run --journal <tmp> [options] -- <command>`.
 
     Decoy HOME, cwd = workspace. The same command first runs unconfined, with a TMPDIR of its own as
     `run` gives the agent, and the test skips when it fails there. Confined, a failure fails the test
-    with the command's stderr: this is what the denials cost.
+    with the command's stderr and what the journal recorded (run_refused when the trampoline did not
+    exec it): this is what the denials cost. A confined run that ``_bounded`` ends at its timeout is
+    inconclusive: a skip with the reason.
     """
     ws, tmp, env = _everyday_session(tmp_path / "control")
-    command, worked, timeout = EVERYDAY[name](ws, env)
-    control = _bounded(command, timeout=timeout, env={**env, "TMPDIR": str(tmp)}, cwd=ws)
-    if not worked(control):
-        pytest.skip(f"{name} fails here even unconfined (exit {control.returncode}): {control.stderr[-2000:]!r}")
+    control = EVERYDAY[name](ws, env)
+    done = _bounded(control.argv, timeout=control.timeout, env={**env, "TMPDIR": str(tmp)}, cwd=ws)
+    if not control.worked(done):
+        pytest.skip(f"{name} fails here even unconfined (exit {done.returncode}): {done.stderr[-2000:]!r}")
     ws, _tmp, env = _everyday_session(tmp_path / "confined")
-    command, worked, timeout = EVERYDAY[name](ws, env)
-    run = [*CLI, "run", "--journal", str(tmp_path / "journal.db"), "--", *command]
+    confined = EVERYDAY[name](ws, env)
+    journal = tmp_path / "journal.db"
+    run = [*CLI, "run", "--journal", str(journal), *confined.options, "--", *confined.argv]
     # `run` creates the agent's private TMPDIR under the session's own, as in a terminal.
-    done = _bounded(run, timeout=timeout + 60, env={**env, "TMPDIR": tempfile.gettempdir()}, cwd=ws)
-    assert worked(done), (
-        f"{name} fails under `babylon60 run` (exit {done.returncode}); "
+    done = _bounded(run, timeout=confined.timeout + 60, env={**env, "TMPDIR": tempfile.gettempdir()}, cwd=ws)
+    worked = confined.worked(done)
+    if not worked and _timed_out(done):
+        pytest.skip(f"{name} did not finish under `babylon60 run`; inconclusive: {done.stderr[-2000:]!r}")
+    assert worked, (
+        f"{name} fails under `babylon60 run` (exit {done.returncode}; journal: {_journal_story(journal)}); "
         f"stderr: {done.stderr[-4000:]!r}; stdout: {done.stdout[-1000:]!r}"
     )

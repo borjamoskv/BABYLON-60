@@ -189,38 +189,62 @@ Los vectores L se ejecutan aparte y nunca cuentan como bloqueados.
   rc de la shell…), `run` lo detecta, avisa y lo registra; no lo impide. Las
   rutas que no pudo comparar enteras se nombran.
 - **macOS.**
-  - Seatbelt pasa los tests y la demo en el runner `macos-15` de GitHub. Falta
-    una ejecución en un Mac propio, y no hay testigo de aperturas sin
-    privilegios.
+  - En el runner `macos-15` de GitHub, Seatbelt pasó los tests y la demo en
+    ae39991. En f156be6 falló un test del terminal privado por una carrera del
+    propio test, corregida en 14bbbef y comprobada solo en Linux, y esta
+    revisión añade tests que la CI aún no ha ejecutado (abajo). Falta una
+    ejecución en un Mac propio, y no hay testigo de aperturas sin privilegios.
   - Sin subreaper, `run` termina el grupo de procesos del agente; un
     descendiente que sale de él con `setsid` sobrevive, confinado y con un
     terminal revocado.
   - El perfil parte de `(allow default)` y niega lo que se ha medido en el
     runner `macos-15`: abrir aplicaciones con LaunchServices (`open`), Apple
-    Events, crear trabajos de launchd, enviar señales, obtener información o
-    depurar procesos fuera del sandbox, escribir preferencias por cfprefsd, el
+    Events, crear trabajos de launchd, enviar señales u obtener información de
+    procesos fuera del sandbox, escribir preferencias por cfprefsd, el
     portapapeles, Kerberos (GSSCred), DiskArbitration y las lecturas en
     `/private/tmp`, `/private/var/tmp`, `/Volumes` y el directorio del usuario
-    en `/private/var/folders`. Apple Events se mide con Finder, con control y
-    confinado; solo la variante con Terminal necesita un consentimiento que
-    nadie da en la CI.
-  - Leer las preferencias de otros programas: cerrado en las tres ejecuciones
-    de la CI (48a4593, d594608 y ae39991). Un `defaults read` confinado no
-    obtiene nada, aunque el perfil solo niega escribirlas; por qué no se ha
-    medido.
+    en `/private/var/folders`. Depurar procesos fuera del sandbox se midió
+    negado en ae39991; esta revisión permite los puertos de tarea dentro del
+    propio sandbox, así que su CI vuelve a medir esa negación. Apple Events se
+    mide con Finder, con control y confinado; solo la variante con Terminal
+    necesita un consentimiento que nadie da en la CI.
+  - Leer las preferencias de otros programas: un `defaults read` confinado no
+    obtuvo nada en las tres ejecuciones de la CI (48a4593, d594608 y ae39991),
+    aunque el perfil solo niega escribirlas; por qué no se ha medido. En esas
+    ejecuciones el control leía con el entorno del test y el intento confinado
+    con el HOME señuelo; desde esta revisión los dos se lanzan igual y la CI lo
+    vuelve a medir.
   - Los mide la CI de esta revisión y siguen `NO_VERIFICADO` hasta entonces:
-    montar una imagen con `hdiutil` sobre un directorio del usuario fuera de
-    toda regla, como `/opt/homebrew/bin`; `launchctl setenv`, que cambia el
-    entorno de lo que launchd arranque después; el servidor de ventanas
-    (`screencapture`); y los controles positivos de lo que un agente usa a
-    diario a través de `run`: `ps`, `git`, un `venv` de Python,
-    `clang -fmodules`, `swift`, `brew`, Chrome sin interfaz y `lldb` sobre un
-    programa que el propio agente arrancó.
+    - montar una imagen con `hdiutil` sobre un directorio del usuario fuera de
+      toda regla, como `/opt/homebrew/bin`;
+    - `launchctl setenv`, que cambia el entorno de lo que launchd arranque
+      después;
+    - el servidor de ventanas: `screencapture`, y en el propio proceso
+      `CGDisplayCreateImage`, que debe dar una imagen sin confinar y ninguna
+      confinado;
+    - las búsquedas de `com.apple.windowserver.active` y
+      `com.apple.coreservices.appleevents`;
+    - que `(deny lsopen)` baste por sí solo (un perfil que solo niega eso) y si
+      algo más del perfil impide a `open` arrancar una app (el perfil sin esa
+      regla);
+    - el aviso de `--allow-clipboard` de extremo a extremo;
+    - los controles positivos de lo que un agente usa a diario a través de
+      `run`: `ps`, `git` sin `~/.gitconfig` y con uno pequeño bajo
+      `--preset claude-code`, un `venv` de Python, `clang -fmodules` (también
+      con `CLANG_MODULE_CACHE_PATH` en el TMPDIR del agente), `swift`, `brew`,
+      Chrome sin interfaz y `lldb` sobre un programa que el propio agente
+      arrancó.
+
+    Sin un perfil que conceda `~/.gitconfig`, git se detiene en Linux cuando
+    el archivo existe (medido: «fatal: unknown error occurred while reading
+    the configuration files»).
   - Existencia de nombres (límite declarado): dentro de un directorio
-    denegado, el error dice qué nombres existen. Un nombre que falta da
-    `ENOENT` y la clave existente, `EPERM` o `EACCES`; su contenido sigue
-    ilegible. Fue un fallo esperado en las tres ejecuciones de la CI, y desde
-    esta revisión el test solo admite ese fallo.
+    denegado, el error dice qué nombres existen, aunque su contenido sigue
+    ilegible. Que un nombre que falta dé `ENOENT` y la clave existente `EPERM`
+    o `EACCES` se infiere del fallo esperado de las tres ejecuciones de la CI;
+    ningún registro muestra esos valores, porque aquel xfail admitía cualquier
+    fallo del test. Desde esta revisión el test solo admite esa forma, así que
+    su próxima ejecución lo mostrará.
   - Siguen abiertos la memoria compartida POSIX y el llavero por `securityd`,
     que Claude Code necesita para su sesión.
   - Como `open` se niega, `claude /login` no abre el navegador: copia la URL
@@ -342,10 +366,13 @@ primer `node_modules`, la raíz del virtualenv o la carpeta del programa).
   metadatos en el HOME y los bits setuid y setgid. También se niega lo que
   ejecutaría código o leería credenciales fuera del sandbox: LaunchServices
   (`open`), Apple Events, trabajos de launchd, montajes, señales, información y
-  depuración de procesos ajenos y escribir preferencias. Los procesos del propio
-  agente sí se pueden señalar, inspeccionar y depurar. Siguen `NO_VERIFICADO`
-  hasta la CI de esta revisión que `hdiutil` no pueda montar y que el agente
-  inspeccione con `ps` y depure con `lldb` sus propios procesos.
+  depuración de procesos ajenos y escribir preferencias. El perfil devuelve al
+  agente las señales, la información y los puertos de tarea de sus propios
+  procesos. Que pueda señalar a sus hijos está medido; inspeccionarlos con `ps`
+  y depurarlos con `lldb` sigue `NO_VERIFICADO` (en 48a4593, ejecutar
+  `/bin/ps` a través de `run` dio `EPERM`). También siguen `NO_VERIFICADO`
+  hasta la CI de esta revisión que `hdiutil` no pueda montar y que depurar
+  procesos ajenos siga negado.
 - **Servicios de macOS negados.** El perfil no deja buscar estos servicios Mach:
   el portapapeles (`com.apple.pasteboard.1`), salvo `--allow-clipboard`;
   Kerberos (`com.apple.GSSCred`); CoreSimulator; DiskArbitration; y, por
@@ -361,7 +388,9 @@ primer `node_modules`, la raíz del virtualenv o la carpeta del programa).
 - **Portapapeles.** `--allow-clipboard` sirve para pegar imágenes en el agente
   y abre las dos direcciones, y `run` lo avisa: el agente puede leer lo que
   copies, una contraseña del gestor incluida, y sustituirlo, de modo que lo que
-  pegues después, también en otro terminal, puede ser una orden suya.
+  pegues después, también en otro terminal, puede ser una orden suya. En Linux,
+  donde la opción no cambia nada, `run` no avisa (medido); el aviso en macOS
+  sigue `NO_VERIFICADO` hasta la CI de esta revisión.
 - **Otras terminales.** `--allow-ptys` concede todas las terminales del
   usuario; `run` avisa porque deja leer y escribir otras pestañas.
 
