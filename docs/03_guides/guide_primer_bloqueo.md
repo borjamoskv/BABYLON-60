@@ -128,6 +128,10 @@ Cada vector se ejecuta dos veces, cada vez en un HOME desechable nuevo:
 | V17 | Escribir en la terminal del usuario con `TIOCSTI` |
 | V18 | Dejar un ejecutable fuera del workspace |
 | V19–V21 | Firmlink del volumen de datos, ruta con otra capitalización y `clonefile(2)` (solo macOS) |
+| V22 | Leer el entorno de otro proceso del usuario (`/proc/<pid>/environ`), como el de una shell con `GH_TOKEN` (solo Linux) |
+| V23 | Leer una clave del keyring del kernel del usuario (solo Linux) |
+| V24 | Leer la memoria compartida System V de otro proceso (solo Linux) |
+| V25 | Dejar un programa setuid en el workspace (en macOS cuenta también que el bit no llegue al archivo) |
 
 Los controles positivos P1–P7 deben funcionar confinados: leer y escribir el
 workspace, renombrar dentro de él, ejecutar `/bin/sh`, leer `/etc/hosts`,
@@ -149,6 +153,15 @@ Los vectores L se ejecutan aparte y nunca cuentan como bloqueados.
   en macOS.
 - **L5** Un watch inotify sobre `~/.ssh` deja ver nombres y momentos de los
   accesos, no contenidos.
+- **L6** La línea de órdenes de los demás procesos del usuario sigue siendo
+  legible: en Linux `/proc/<pid>/cmdline` (y su `status`, `cgroup` y
+  `mountinfo`), en macOS `KERN_PROCARGS2`. Landlock niega en Linux su entorno,
+  memoria y descriptores (V22), pero no los argumentos. No pases credenciales
+  como argumentos.
+- **L7** (solo macOS) El entorno de los demás procesos del usuario también se
+  lee con `KERN_PROCARGS2`, que Seatbelt no media. `run` se re-ejecuta sin las
+  variables que retiene, así que el agente no las recupera de su propio
+  lanzador; otro proceso que las tenga en su entorno de arranque sí las expone.
 - **Red.** No se restringe, porque los agentes la necesitan. Lo que el agente
   no puede leer no lo puede enviar; el workspace sí puede salir.
 - **Señales.** Landlock limita las señales y los sockets Unix abstractos desde
@@ -172,9 +185,19 @@ Los vectores L se ejecutan aparte y nunca cuentan como bloqueados.
   - Sin subreaper, `run` termina el grupo de procesos del agente; un
     descendiente que sale de él con `setsid` sobrevive, confinado y con un
     terminal revocado.
-  - El perfil parte de `(allow default)`: los servicios Mach/XPC y las lecturas
-    fuera de los HOME (`/Volumes`, `/private/var/folders`, `/private/tmp`) no
-    se restringen. `NO_VERIFICADO` qué exponen.
+  - El perfil parte de `(allow default)` y niega lo que se ha medido en el
+    runner `macos-15`: abrir aplicaciones con LaunchServices (`open`), crear
+    trabajos de launchd, enviar señales u obtener información de procesos fuera
+    del sandbox, escribir preferencias por cfprefsd, el portapapeles, Kerberos
+    (GSSCred), DiskArbitration y las lecturas en `/private/tmp`,
+    `/private/var/tmp`, `/Volumes` y el directorio del usuario en
+    `/private/var/folders`. Apple Events se niega, pero la CI no puede
+    comprobarlo: su control necesita un consentimiento que nadie da.
+  - Siguen abiertos: montar imágenes con `hdiutil` (lo hace un servicio
+    auxiliar fuera del sandbox), la memoria compartida POSIX, leer preferencias
+    y el llavero por `securityd`, que Claude Code necesita para su sesión.
+  - Como `open` se niega, `claude /login` no abre el navegador: copia la URL
+    que imprime.
 - **La demo.** Sus intentos confinados no pasan por el terminal privado de
   `run`: el atacante es el programa de prueba de la demo, no un agente
   arbitrario.
@@ -193,13 +216,17 @@ Sin perfil, `babylon60 run -- <comando>` concede solo el workspace, las rutas
 del sistema y un TMPDIR privado que se borra al acabar. Cada perfil concede
 además la configuración de su agente y sus prefijos de instalación, solo si
 existen. `--dry-run` muestra la política sin ejecutar nada. Un agente instalado
-fuera de las rutas del sistema y de los HOME (por ejemplo, bajo `/tmp`) necesita
-`--allow-read` de su directorio de instalación.
+fuera de las rutas del sistema y de los HOME (por ejemplo, con npm bajo un prefijo
+propio) necesita `--allow-read` de su instalación; en Linux, `run` lo detecta y
+dice qué directorio conceder (el primer `node_modules`, la raíz del virtualenv o
+la carpeta del programa).
 
 - **Rutas.** `--allow-read` y `--allow-write` añaden rutas, comprobadas por
   identidad de inodo. Se rechazan el HOME y sus ancestros, los directorios
-  sticky que todos pueden escribir (`/tmp`, `/var/tmp`), el propio diario y la
-  instalación, y el conjunto protegido: `~/.ssh`, `~/.gnupg`, `~/.aws`,
+  sticky que todos pueden escribir (`/tmp`, `/var/tmp`), la escritura sobre,
+  encima o dentro del propio diario y del código del lanzador (su virtualenv,
+  el paquete, la biblioteca estándar del intérprete), que en lectura sí se
+  pueden conceder, y el conjunto protegido: `~/.ssh`, `~/.gnupg`, `~/.aws`,
   `~/.azure`, `~/.kube`, `~/.docker`, `~/.netrc`, `~/.git-credentials`,
   `~/.password-store`, `~/.config/gcloud`, `~/.config/gh`, `~/.config/hub`,
   `~/.config/op`, `~/.config/git/credentials`,
@@ -213,6 +240,8 @@ fuera de las rutas del sistema y de los HOME (por ejemplo, bajo `/tmp`) necesita
   dice cuáles, nunca sus valores. `--pass-env NAME` conserva una y cada perfil
   conserva la credencial de su agente (`ANTHROPIC_API_KEY`, `OPENAI_API_KEY`…).
   `SSH_AUTH_SOCK` y `GPG_AGENT_INFO` se retiran salvo `--keep-agent-sockets`.
+  Si retiene algo, `run` se re-ejecuta sin esas variables antes de lanzar al
+  agente, para que no pueda leerlas del entorno de su propio lanzador.
 - **Terminal.** Si `run` tiene un terminal, el agente recibe un
   pseudoterminal privado y `run` hace de relé, como `sudo` con `use_pty`. Al
   acabar, ese terminal cuelga y, en Linux, `run` termina todo lo que el agente
@@ -224,8 +253,12 @@ fuera de las rutas del sistema y de los HOME (por ejemplo, bajo `/tmp`) necesita
   siguen funcionando.
 - **Seatbelt (macOS).** Se niegan las escrituras fuera de las rutas concedidas,
   las conexiones a sockets Unix con ruta (salvo `mDNSResponder` y `syslog`), las
-  terminales ajenas, los clones y enlaces del conjunto protegido, y los cambios de
-  metadatos en el HOME.
+  terminales ajenas, los clones y enlaces del conjunto protegido, los cambios de
+  metadatos en el HOME y los bits setuid y setgid. También se niega lo que
+  ejecutaría código o leería credenciales fuera del sandbox: LaunchServices
+  (`open`), Apple Events, trabajos de launchd, señales e información de procesos
+  ajenos, preferencias, Kerberos y el portapapeles, salvo `--allow-clipboard`
+  (para pegar imágenes en el agente).
 - **Otras terminales.** `--allow-ptys` concede todas las terminales del
   usuario; `run` avisa porque deja leer y escribir otras pestañas.
 
