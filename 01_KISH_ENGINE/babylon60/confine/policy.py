@@ -121,6 +121,7 @@ class Policy:
     skipped: tuple[str, ...] = field(default_factory=tuple)
     warnings: tuple[str, ...] = field(default_factory=tuple)
     allow_ptys: bool = False
+    links: tuple[str, ...] = field(default_factory=tuple)  # symbolic links to the command, readable (Seatbelt)
 
     def as_dict(self) -> dict[str, object]:
         return {
@@ -131,6 +132,7 @@ class Policy:
             "skipped": list(self.skipped),
             "warnings": list(self.warnings),
             "allow_ptys": self.allow_ptys,
+            "links": list(self.links),
         }
 
     def digest(self) -> str:
@@ -140,6 +142,7 @@ class Policy:
             "protected": list(self.protected),
             "grants": sorted([grant.path, grant.access] for grant in self.grants),
             "allow_ptys": self.allow_ptys,
+            "links": sorted(self.links),
         }
         return digest(portable, domain=b"BABYLON60-CONFINE-POLICY/v1\x00")
 
@@ -465,6 +468,7 @@ def build_policy(
     system: bool = True,
     ttys: Sequence[str] = (),
     allow_ptys: bool = False,
+    links: Sequence[str] = (),
 ) -> Policy:
     """Build and check a policy. User grants that fail a guard raise ``PolicyError``."""
     homes = tuple(os.path.abspath(h) for h in (homes or default_homes()))
@@ -552,7 +556,34 @@ def build_policy(
         del grants[grant.path]
         skipped.append(f"{grant.path}: {refused[grant.path]}")
     warnings.extend(guard.warnings)
-    return Policy(workspace_path, homes, protected, tuple(grants.values()), tuple(skipped), tuple(warnings), allow_ptys)
+    # Symbolic links on the way to the command: Seatbelt checks following a link as a read of the
+    # link itself (Landlock does not mediate it). Only the links are allowed, never their directories.
+    readable_links: list[str] = []
+    for link in links:
+        link = _absolute(link)
+        try:
+            if not stat.S_ISLNK(os.lstat(link).st_mode):
+                skipped.append(f"{link}: not a symbolic link")
+                continue
+            parent = ancestry(os.path.dirname(link) or "/")
+        except OSError:
+            skipped.append(link)
+            continue
+        inside = next((guard.protected_ids[ident] for ident in parent if ident in guard.protected_ids), None)
+        if inside is not None:
+            skipped.append(f"{link}: Refusing a link inside protected path {inside}")
+            continue
+        readable_links.append(link)
+    return Policy(
+        workspace_path,
+        homes,
+        protected,
+        tuple(grants.values()),
+        tuple(skipped),
+        tuple(warnings),
+        allow_ptys,
+        tuple(dict.fromkeys(readable_links)),
+    )
 
 
 def _contains(parent: str, child: str) -> bool:

@@ -216,7 +216,9 @@ def render_profile(policy: Policy, *, unix_sockets: bool = False) -> str:
     lines.append(f"(when (defined? 'system-fcntl) (deny system-fcntl (fcntl-command {fcntls})))")
     devices = [f"(literal {_quote(path)})" for path in DEVICE_WRITES]
     lines.append(_rule("allow", "file-write*", [*devices, f"(subpath {_quote(DESCRIPTOR_DIR)})"]))
-    metadata = sorted({a for g in granted for a in _ancestors(g.path)})
+    metadata = sorted(
+        {a for g in granted for a in _ancestors(g.path)} | {a for link in policy.links for a in _ancestors(link)}
+    )
     if metadata:
         lines.append(_rule("allow", "file-read-metadata", _filters("literal", metadata)))
     for grant in granted:
@@ -226,6 +228,9 @@ def render_profile(policy: Policy, *, unix_sockets: bool = False) -> str:
         else:
             operations = "file-read* file-clone"
         lines.append(_rule("allow", operations, _filters(kind, [grant.path])))
+    if policy.links:
+        # Following a symbolic link reads the link: allow exactly the links to the command.
+        lines.append(_rule("allow", "file-read*", _filters("literal", list(policy.links))))
     if policy.allow_ptys:
         lines.append(
             _rule(

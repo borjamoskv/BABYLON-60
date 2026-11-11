@@ -81,6 +81,27 @@ def executable_grants(executable: str, homes: tuple[str, ...]) -> list[str]:
     return [real]
 
 
+def executable_links(executable: str, homes: tuple[str, ...]) -> list[str]:
+    """Symbolic links under a home on the way from the command's path to its file.
+
+    Seatbelt (macOS) checks following a link as a read of the link, so ``run -- claude``
+    through ``~/.local/bin/claude`` needs that one link readable; Landlock does not
+    mediate it. A link only reveals its target path. ``build_policy`` refuses links
+    inside protected paths.
+    """
+    home_ids = _home_ids(homes)
+    links: list[str] = []
+    path = executable
+    for _ in range(40):  # the kernel's own limit on nested links
+        if not os.path.islink(path):
+            break
+        if home_ids.intersection(_chain(os.path.dirname(path) or "/")):
+            links.append(path)
+        target = os.readlink(path)
+        path = target if os.path.isabs(target) else os.path.join(os.path.dirname(path), target)
+    return links
+
+
 def interpreter_hint(executable: str, homes: tuple[str, ...], policy: Policy) -> str | None:
     """One line for stderr when a script's ``#!`` interpreter is under a home directory and not granted.
 
@@ -316,6 +337,7 @@ def run_command(args: argparse.Namespace) -> int:
                 self_paths=[str(journal_path), sys.prefix, package_dir],
                 ttys=session_ttys(),
                 allow_ptys=args.allow_ptys,
+                links=executable_links(executable, homes),
             )
         except PolicyError as exc:
             print(f"babylon60 run: {exc}", file=sys.stderr)
