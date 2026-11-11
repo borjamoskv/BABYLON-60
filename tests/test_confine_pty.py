@@ -379,11 +379,13 @@ def _after_done(then: Callable[[int, Path], None] | None = None) -> Interact:
 LINGER = r"""
 import os, select, signal, sys, time
 log_path, mode = sys.argv[1], sys.argv[2]
+# Ignored before fork, so the reader is born ignoring them: the hangup that ends the session can
+# arrive before the child would have run another line.
+for name in ("SIGTERM", "SIGHUP", "SIGTTOU", "SIGTTIN"):
+    signal.signal(getattr(signal, name), signal.SIG_IGN)
 if os.fork() == 0:
     with open(log_path + ".pid", "w") as handle:
         handle.write(str(os.getpid()))
-    for name in ("SIGTERM", "SIGHUP", "SIGTTOU", "SIGTTIN"):
-        signal.signal(getattr(signal, name), signal.SIG_IGN)
     if mode == "setsid":
         os.setsid()
     time.sleep(0.8)
