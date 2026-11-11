@@ -196,7 +196,7 @@ Comandos, desde `tools/ui_kernel_console`:
 (cd rust && cargo build --locked --release --target wasm32-unknown-unknown --lib --features wasm)
 wasm-bindgen --target nodejs --out-dir scratch/wasm-pkg \
   scratch/rust-target/wasm32-unknown-unknown/release/babylon60_exec_receipt.wasm
-printf '{"type":"commonjs"}\n' > scratch/wasm-pkg/package.json
+printf '{"type":"commonjs","private":true}\n' > scratch/wasm-pkg/package.json
 
 node scripts/differential.mjs --cases 300 --mutants 8
 ```
