@@ -1,0 +1,32 @@
+{
+  "name": "babylon60-kernel-console",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "SEE LICENSE IN ../../LICENSE",
+  "description": "Verificador de recibos de ejecucion en el cliente y consola SVG (material de demostracion)",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./console.css": "./src/components/console.css"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "pretest": "node --input-type=module -e \"import { rmSync } from 'node:fs'; rmSync('scratch/test-build', { recursive: true, force: true });\"",
+    "test": "tsc -p tsconfig.test.json && node --test \"scratch/test-build/tests/**/*.test.js\""
+  },
+  "dependencies": {
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.5",
+    "@types/react": "18.3.31",
+    "@types/react-dom": "18.3.7",
+    "@types/react-test-renderer": "18.3.2",
+    "react-test-renderer": "18.3.1",
+    "typescript": "5.9.3"
+  }
+}
