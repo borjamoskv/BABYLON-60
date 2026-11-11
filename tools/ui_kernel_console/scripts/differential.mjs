@@ -546,12 +546,14 @@ const MUTATIONS = {
     const w = b.policy.larsa_required_weight;
     return { anchor: withWeight(b, pick(rng, [`${w}.5`, "0", "0.0", `-${w}`, "4294967296", "9007199254740993", "1e400", `${w}e400`])) };
   },
+  // Con el hash real de la cadena, las variantes válidas (0.0, 0e0, -0.0, 1) llegan a aceptarse:
+  // un hash inventado hacía que toda variante se rechazara por el enlace, sin comparar el número.
   anchor_seq_forms: (rng, b) => {
     const seq = pick(rng, ["0.0", "0e0", "-0.0", "0.5", "-1", "1e400", "1"]);
     const text = JSON.stringify({
       admitted_authorities: b.policy.admitted_authorities,
       larsa_required_weight: b.policy.larsa_required_weight,
-      previous_receipt: { receipt_hash: `0x${"ab".repeat(32)}`, seq_id: 0 },
+      previous_receipt: { receipt_hash: b.wire.audit_metrics.prev_receipt_hash, seq_id: 0 },
     });
     return { anchor: text.replace('"seq_id":0', `"seq_id":${seq}`) };
   },
