@@ -20,16 +20,20 @@ git clone --depth 1 https://github.com/borjamoskv/BABYLON-60
 cd BABYLON-60 && bash install.sh --demo
 ```
 
+Hasta que la rama principal pública incluya este código, descarga la revisión
+grabada por su hash: los comandos están en la
+[guía](docs/03_guides/guide_primer_bloqueo.md#probar).
+
 Un agente de prueba sigue un README con una instrucción inyectada e intenta
 leer un `~/.ssh/id_rsa` señuelo dos veces: sin confinar y confinado por el
-sistema operativo (Landlock en Linux, Seatbelt en macOS). Un testigo fuera del
-sandbox comprueba el resultado y un diario encadenado lo registra.
+sistema operativo (Landlock y seccomp en Linux, Seatbelt en macOS). Un testigo
+fuera del sandbox comprueba el resultado y un diario encadenado lo registra.
 
-Ejecución registrada en Linux x86_64 (uid 65534, revisión `7b0e291`):
-14 vectores, 14 bloqueados y 0 pasaron. En estrés, 200 repeticiones dan 2.800
-intentos confinados, 2.800 bloqueados y 0 pasaron. Los 3 límites declarados
-siguen abiertos. En la CI de GitHub, macOS 15 (Seatbelt) bloquea 10 de 10
-vectores aplicables.
+Ejecución registrada en Linux x86_64 (uid 65534, revisión `f9543fb`):
+18 vectores, 18 bloqueados y 0 pasaron. En estrés, 200 repeticiones dan 3.600
+intentos confinados, 3.600 bloqueados y 0 pasaron. Los 4 límites declarados
+siguen abiertos en Linux. En la CI de GitHub, Linux (kernel 7.0, Landlock ABI 8)
+bloquea los 16 vectores con control válido y macOS 15 (Seatbelt), los 17 aplicables.
 [Guía, cifras y límites](docs/03_guides/guide_primer_bloqueo.md).
 
 **Funciona con:**
