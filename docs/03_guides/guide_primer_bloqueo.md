@@ -9,8 +9,12 @@ la demo nunca toca tu `~/.ssh`.
 
 ## Requisitos
 
-- Linux con Landlock ABI 3 o superior (kernel 6.2 o posterior, con Landlock
-  activo en la lista de LSM), o macOS con `/usr/bin/sandbox-exec`.
+- Linux x86_64 o aarch64 con Landlock ABI 3 o superior (kernel 6.2 o
+  posterior, con Landlock activo en la lista de LSM), o macOS con
+  `/usr/bin/sandbox-exec`. El filtro seccomp solo está escrito para esas dos
+  arquitecturas: en otra, el trampolín se niega a arrancar
+  (`seccomp filter unsupported`) y `run` sale con 126. Toda la evidencia de
+  Linux es x86_64; aarch64 está `NO_VERIFICADO`.
 - `git` y [`uv`](https://docs.astral.sh/uv/getting-started/installation/).
 - Windows no tiene backend de confinamiento.
 
@@ -83,12 +87,15 @@ La misma demo, grabada por `confine.yml` en la CI de GitHub (revisión `f9543fb`
 | Entorno | Resultado | Evidencia |
 | --- | --- | --- |
 | Linux x86_64, kernel 7.0 (azure), Landlock ABI 8, uid 1001 | 16 vectores contados, 16 bloqueados, 0 pasaron. V12 y V17 quedan sin control válido: el runner no permite el bind mount ni `TIOCSTI` (`dev.tty.legacy_tiocsti=0`), ni siquiera sin confinar | [`ci-demo-linux-x86_64-f9543fb.json`](../../reports/confine/ci-demo-linux-x86_64-f9543fb.json) |
-| macOS 15 (Darwin 24.6) arm64, Seatbelt, uid 501 | 17 vectores aplicables, 17 bloqueados con `EPERM`, 0 pasaron. L1 (`stat`) y L4 (metadatos) también cerrados; L2 abierto | [`ci-demo-macos-arm64-f9543fb.json`](../../reports/confine/ci-demo-macos-arm64-f9543fb.json) |
+| macOS 15 (Darwin 24.6) arm64, Seatbelt, uid 501 | 17 vectores aplicables, 17 bloqueados (16 con `EPERM`; V17 con `ENXIO`: confinado no tiene terminal de control que abrir), 0 pasaron. L1 (`stat`) y L4 (metadatos) también cerrados; L2 abierto | [`ci-demo-macos-arm64-f9543fb.json`](../../reports/confine/ci-demo-macos-arm64-f9543fb.json) |
 
-En esa misma ejecución pasan 349 tests de confinamiento en Linux (50 omitidos por
-el entorno del runner) y 350 (55 omitidos) en macOS. En macOS no hay testigo de
-aperturas sin privilegios: el recuento se apoya en el error devuelto, en la
-instantánea de `~/.ssh` y en el escaneo del token en salidas, workspace y TMPDIR.
+En esa misma ejecución pasan 349 tests de confinamiento en Linux y 350 en macOS
+(55 omitidos). De los 50 omitidos en Linux, 23 son de Seatbelt y solo corren en
+macOS; 25 necesitan lo que el runner no da (un espacio de nombres de montaje
+privado, `TIOCSTI` o `CAP_MKNOD`); uno es el estrés opcional y otro solo corre
+como root. En macOS no hay testigo de aperturas sin privilegios: el recuento se
+apoya en el error devuelto, en la instantánea de `~/.ssh` y en el escaneo del
+token en salidas, workspace y TMPDIR.
 
 `babylon60 log` vuelve a verificar la cadena. `babylon60 demo --json evidence.json`
 escribe el documento completo con su autodigest BLAKE3, y
@@ -102,9 +109,10 @@ los hashes de commit.
 
 Cada vector se ejecuta dos veces, cada vez en un HOME desechable nuevo:
 
-- **Control sin confinar.** El vector debe lograr su efecto y el testigo debe
-  verlo. Si no lo consigue, el vector queda `UNFALSIFIABLE` en esa máquina y no
-  se cuenta.
+- **Control sin confinar.** El vector debe lograr su efecto. En Linux, en los
+  vectores que apuntan a la clave (V01–V14), el testigo inotify también debe
+  verlo; macOS no tiene testigo. Si no lo consigue, el vector queda
+  `UNFALSIFIABLE` en esa máquina y no se cuenta.
 - **Confinado.** Cuenta como bloqueado si se cumplen cuatro condiciones:
   - devuelve el error esperado;
   - el token no aparece en ninguna salida, ni en el workspace ni en el TMPDIR;
@@ -126,7 +134,7 @@ Cada vector se ejecuta dos veces, cada vez en un HOME desechable nuevo:
 | V15 | Otra terminal del mismo usuario |
 | V16 | Socket Unix servido fuera del sandbox (`ssh-agent`, tmux, D-Bus) |
 | V17 | Escribir en la terminal del usuario con `TIOCSTI` |
-| V18 | Dejar un ejecutable fuera del workspace |
+| V18 | Dejar un ejecutable `git` en el primer directorio del `PATH`, fuera de los grants de escritura |
 | V19–V21 | Firmlink del volumen de datos, ruta con otra capitalización y `clonefile(2)` (solo macOS) |
 | V22 | Leer el entorno de otro proceso del usuario, como el de una shell con `GH_TOKEN` (`/proc/<pid>/environ` en Linux, `KERN_PROCARGS2` en macOS) |
 | V23 | Leer una clave del keyring del kernel del usuario (solo Linux) |
@@ -148,9 +156,13 @@ Los vectores L se ejecutan aparte y nunca cuentan como bloqueados.
   porque Landlock y Seatbelt deciden por ruta. `run` avisa si un archivo
   protegido tiene enlaces fuera de las rutas protegidas.
 - **L4** `chmod`, `utime` y atributos extendidos sobre la clave: Landlock no
-  media los metadatos. `run` compara permisos, propietario y ACL del HOME y del
-  conjunto protegido antes y después de la sesión, y avisa. Seatbelt lo cierra
-  en macOS.
+  media los metadatos. `run` compara tipo, permisos, propietario, grupo y ACL
+  POSIX antes y después de la sesión, y avisa, en el directorio HOME (su
+  entrada, no su contenido), en los directorios entre el HOME y cada ruta
+  protegida, en el conjunto protegido y en hasta 512 entradas dentro de cada
+  directorio protegido. No ve fechas (`utime`), atributos `user.*` ni otros
+  archivos del HOME, como un `chmod` de `~/.bashrc`. Seatbelt lo cierra en
+  macOS.
 - **L5** Un watch inotify sobre `~/.ssh` deja ver nombres y momentos de los
   accesos, no contenidos.
 - **L6** (Linux) La línea de órdenes de los demás procesos del usuario sigue
@@ -164,9 +176,10 @@ Los vectores L se ejecutan aparte y nunca cuentan como bloqueados.
 - **Señales.** Landlock limita las señales y los sockets Unix abstractos desde
   el ABI 6. Con un kernel anterior, el agente puede enviar señales a otros
   procesos del usuario; `run` lo avisa y el diario registra `landlock_scoped`.
-- **Memoria compartida POSIX.** `/dev/shm` sigue concedido porque lo usan los
-  semáforos de Python `multiprocessing`; lo que otro proceso del usuario deje
-  ahí es legible.
+- **Memoria compartida POSIX.** `/dev/shm` sigue concedido en lectura y
+  escritura porque lo usan los semáforos de Python `multiprocessing`. Lo que
+  otro proceso del usuario deje ahí es legible, y lo que deje el agente,
+  ejecutables incluidos, sobrevive a la sesión sin que `run` lo compare.
 - **Root.** El uid 0 conserva acceso de propietario a los archivos de root
   dentro de las rutas concedidas, por ejemplo `/etc/shadow`. Por eso
   `babylon60 run` exige `--allow-root`.
@@ -209,14 +222,16 @@ babylon60 run --preset claude-code -- claude
 babylon60 run --preset codex -- codex
 ```
 
-Sin perfil, `babylon60 run -- <comando>` concede solo el workspace, las rutas
-del sistema y un TMPDIR privado que se borra al acabar. Cada perfil concede
-además la configuración de su agente y sus prefijos de instalación, solo si
-existen. `--dry-run` muestra la política sin ejecutar nada. Un agente instalado
-fuera de las rutas del sistema y de los HOME (por ejemplo, con npm bajo un prefijo
-propio) necesita `--allow-read` de su instalación; en Linux, `run` lo detecta y
-dice qué directorio conceder (el primer `node_modules`, la raíz del virtualenv o
-la carpeta del programa).
+Sin perfil, `babylon60 run -- <comando>` concede el workspace, las rutas del
+sistema en lectura, `/dev/shm`, los dispositivos `/dev/null`, `/dev/zero`,
+`/dev/full`, `/dev/random`, `/dev/urandom`, `/dev/tty` y `/dev/ptmx`, su propio
+terminal y un TMPDIR privado que se borra al acabar. Cada perfil concede además
+la configuración de su agente, sus prefijos de instalación y, en solo lectura,
+la configuración de git, solo si existen. `--dry-run` muestra la política sin
+ejecutar nada. Un agente instalado fuera de las rutas del sistema y de los HOME
+(por ejemplo, con npm bajo un prefijo propio) necesita `--allow-read` de su
+instalación; en Linux, `run` lo detecta y dice qué directorio conceder (el
+primer `node_modules`, la raíz del virtualenv o la carpeta del programa).
 
 - **Rutas.** `--allow-read` y `--allow-write` añaden rutas, comprobadas por
   identidad de inodo. Se rechazan el HOME y sus ancestros, los directorios
@@ -232,10 +247,39 @@ la carpeta del programa).
   `~/.terraform.d/credentials.tfrc.json`, `~/.local/share/keyrings` y
   `~/Library/Keychains`. Mientras existan, una ruta que los contenga también
   se rechaza.
-- **Entorno.** Las variables cuyo nombre parece una credencial (`*_TOKEN`,
-  `*SECRET*`, `*_KEY`, `AWS_*`, `OP_SESSION_*`…) no llegan al agente; `run`
-  dice cuáles, nunca sus valores. `--pass-env NAME` conserva una y cada perfil
-  conserva la credencial de su agente (`ANTHROPIC_API_KEY`, `OPENAI_API_KEY`…).
+- **git.** Cada perfil concede en solo lectura, archivo por archivo,
+  `~/.gitconfig`, los `config`, `ignore` y `attributes` de `~/.config/git` (o
+  de `$XDG_CONFIG_HOME/git`) y lo que incluyen con `include.path` e
+  `includeIf.*.path`, hasta la profundidad que lee git (10) y un máximo de 64
+  archivos. Cada archivo pasa antes las comprobaciones de cualquier ruta: el
+  HOME y sus ancestros y el conjunto protegido, también por hardlink, se
+  rechazan, y un enlace simbólico final o lo que no sea un archivo regular se
+  salta con su motivo. Tampoco se concede un archivo cuyo contenido parece una
+  credencial: `http.*.extraHeader`, `url.*.insteadOf`, una URL con contraseña o
+  una URL http(s) con usuario, una clave con `pass`, `token`, `secret` u
+  `oauth` en el nombre, o un `credential.helper` con `password=` o `token=`.
+  `run` avisa con el archivo, la línea y la clave, nunca el valor. Dentro, git
+  no podrá leer su configuración (si es el `ignore`, falla `git status`; si es
+  `attributes`, git solo avisa), y `--allow-read <archivo>` lo concede
+  igualmente. Es una heurística: una credencial con otra forma se concede con
+  su archivo. Los `include` de un archivo que el agente puede escribir no se
+  siguen. Lo que la configuración nombre aparte (`core.excludesFile`,
+  `commit.template`…) necesita `--allow-read`.
+- **Entorno.** Las variables cuyo nombre parece una credencial no llegan al
+  agente. Con las palabras del nombre separadas por `_`: una que acaba en
+  `TOKEN` o contiene `SECRET`, `PASSWORD`, `PASSWD`, `PASSPHRASE` o
+  `CREDENTIAL`; una última palabra `KEY`, `APIKEY`, `PAT` o `AUTH`; `PASS` o
+  `PWD` como palabra que no sea la primera (`DB_PASS`, `SMTP_PASS_1`,
+  `ORACLE_PWD`; nunca `PWD` ni `OLDPWD`); `*_KEY_ID`, `OP_SESSION_*` y una
+  lista fija (`AWS_SECRET_ACCESS_KEY`, `AWS_SESSION_TOKEN`,
+  `AWS_SECURITY_TOKEN`, `KRB5CCNAME`, `MYSQL_PWD`, `DOCKER_AUTH_CONFIG`,
+  `GOOGLE_APPLICATION_CREDENTIALS`…). Tampoco llega, se llame como se llame,
+  una variable cuyo valor es una URL con contraseña
+  (`DATABASE_URL=postgres://usuario:clave@host`). Otras de AWS sí llegan, como
+  `AWS_PROFILE`, `AWS_REGION`, `AWS_DEFAULT_REGION`, `AWS_CONFIG_FILE` o
+  `AWS_ROLE_ARN`; `~/.aws` sigue protegido. `run` dice cuáles retira, nunca
+  sus valores. `--pass-env NAME` conserva una y cada perfil conserva la
+  credencial de su agente (`ANTHROPIC_API_KEY`, `OPENAI_API_KEY`…).
   `SSH_AUTH_SOCK` y `GPG_AGENT_INFO` se retiran salvo `--keep-agent-sockets`.
   Si retiene algo, `run` se re-ejecuta sin esas variables antes de lanzar al
   agente, así que ni el lanzador las conserva. Es defensa en profundidad:
@@ -264,7 +308,9 @@ la carpeta del programa).
 | --- | --- | --- |
 | Claude Code | Arranca confinado (`claude --version`); un `cat` del HOME recibe `Permission denied` | Linux x86_64, 11-11-2026. Sesión con LLM: `NO_VERIFICADO` |
 | Codex CLI | Arranca confinado (`codex --version`); avisa de que no puede crear alias si falta `~/.codex` | Linux x86_64, 11-11-2026. Sesión con LLM: `NO_VERIFICADO` |
-| Sandbox propio del agente anidado (bwrap o Seatbelt dentro del nuestro) | Puede fallar | `NO_VERIFICADO` |
+| git con `~/.gitconfig` y un `include` | Con `--preset claude-code` o `--preset codex`, `git init`, `git commit` y `git log` funcionan y leen el nombre del archivo incluido. Sin perfil, git muere: «fatal: unknown error occurred while reading the configuration files» | Linux x86_64, uid 65534, 11-11-2026 (`tests/test_confine_git.py`) |
+| Firmar commits y credenciales de git | No funcionan dentro: las claves, los agentes y los almacenes de credenciales quedan fuera. `git commit -S` con gpg: «gpg: signing failed: Permission denied», con o sin `gpg-agent` en marcha. `git credential fill` con `credential.helper=store`: «could not read Username» (`~/.git-credentials` está protegido). Firmar con una clave SSH y `git push` por SSH: `NO_VERIFICADO`, no hay `ssh` en la máquina de medida; `~/.ssh` está protegido (V01) y el socket de `ssh-agent` se niega (V16) | Linux x86_64, uid 65534, 11-11-2026 |
+| Sandbox propio del agente anidado | En Linux falla lo que necesita un espacio de nombres de usuario: `unshare -Urm true` funciona sin confinar y confinado responde «unshare: cannot open /proc/self/uid_map: Permission denied». Claude Code 2.1.322 usa bubblewrap para su sandbox en Linux; bwrap no está instalado aquí, así que el sandbox de Claude Code anidado está `NO_VERIFICADO`, igual que el de Codex y Seatbelt dentro de Seatbelt | Linux x86_64, uid 65534, 11-11-2026 |
 
 Arrancar confinado demuestra que la política deja funcionar al agente; no demuestra
 que todas sus acciones queden cubiertas. `run` registra en el diario la política,
@@ -278,9 +324,9 @@ del kernel si está activo.
 | Código | Significado |
 | --- | --- |
 | 0 | Éxito; en `demo`, todos los intentos contados quedaron bloqueados |
-| 1 | `demo`: FALSIFIED · `log`: cadena rota o `--expect-head` ausente |
-| 2 | `demo`: INCONCLUSIVE · uso incorrecto |
-| 3 | Sin backend de confinamiento, política rechazada o diario inutilizable |
+| 1 | `demo`: FALSIFIED · `demo --check`: el documento no se puede leer o su autodigest no cuadra · `log`: cadena rota, diario inutilizable o `--expect-head` ausente |
+| 2 | `demo`: INCONCLUSIVE · uso incorrecto (`run` sin comando, `--pass-env NAME=VALUE`, `--expect-head` mal formado) |
+| 3 | `run`: sin backend de confinamiento, uid 0 sin `--allow-root`, política rechazada, un lanzador que importa de un grant de escritura, diario inutilizable o con más de un enlace, o sin pseudoterminal privado · `demo`: sin backend o diario inutilizable |
 | 126 | El trampolín rechazó arrancar el comando |
 | 127 | Comando no encontrado |
 | 128 + n | La señal n terminó al agente, o SIGTERM o SIGHUP a `run` terminaron la sesión |

@@ -13,37 +13,51 @@ Model-agnostic authorization. Governed execution. Reproducible security evidence
 ### Primer bloqueo en 5 minutos
 
 ```bash
-git clone --depth 1 https://github.com/borjamoskv/BABYLON-60
+git init BABYLON-60 && cd BABYLON-60
 ```
 
 ```bash
-cd BABYLON-60 && bash install.sh --demo
+git fetch --depth 1 https://github.com/borjamoskv/BABYLON-60 f9543fb055878e55bdcb0a849673ba1df351a796
 ```
 
-Hasta que la rama principal pública incluya este código, descarga la revisión
-grabada por su hash: los comandos están en la
+```bash
+git checkout -q FETCH_HEAD && bash install.sh --demo
+```
+
+Se descarga la revisión grabada por su hash porque la rama principal pública es
+una proyección que aún no incluye este código. Cuando lo incluya, también valdrá
+`git clone --depth 1 https://github.com/borjamoskv/BABYLON-60` seguido de
+`cd BABYLON-60 && bash install.sh --demo`. Requisitos y atajo con `uvx` en la
 [guía](docs/03_guides/guide_primer_bloqueo.md#probar).
 
 Un agente de prueba sigue un README con una instrucción inyectada e intenta
 leer un `~/.ssh/id_rsa` señuelo dos veces: sin confinar y confinado por el
-sistema operativo (Landlock y seccomp en Linux, Seatbelt en macOS). Un testigo
-fuera del sandbox comprueba el resultado y un diario encadenado lo registra.
+sistema operativo (Landlock y seccomp en Linux, Seatbelt en macOS). En Linux,
+un testigo inotify fuera del sandbox comprueba que el señuelo no se abrió; en
+macOS cuentan el error devuelto, la instantánea de `~/.ssh` y el rastreo del
+token. Un diario encadenado lo registra.
 
 Ejecución registrada en Linux x86_64 (uid 65534, revisión `f9543fb`):
 18 vectores, 18 bloqueados y 0 pasaron. En estrés, 200 repeticiones dan 3.600
-intentos confinados, 3.600 bloqueados y 0 pasaron. Los 4 límites declarados
-siguen abiertos en Linux. En la CI de GitHub, Linux (kernel 7.0, Landlock ABI 8)
-bloquea los 16 vectores con control válido y macOS 15 (Seatbelt), los 17 aplicables.
+intentos confinados, 3.600 bloqueados y 0 pasaron. Los 4 límites que midió esa
+ejecución (L1, L2, L4 y L5) siguen abiertos en Linux; la lista completa de
+límites declarados está en la
+[guía](docs/03_guides/guide_primer_bloqueo.md#límites-declarados). En la CI de
+GitHub, Linux (kernel 7.0, Landlock ABI 8) bloquea los 16 vectores con control
+válido y macOS 15 (Seatbelt), los 17 aplicables.
 [Guía, cifras y límites](docs/03_guides/guide_primer_bloqueo.md).
 
-**Funciona con:**
+**Con tu agente:**
 
 - `babylon60 run --preset claude-code -- claude`
 - `babylon60 run --preset codex -- codex`
-- Cualquier CLI de agente, con `babylon60 run -- <comando>`.
+- Otros CLI de agente, sin comprobar, con `babylon60 run -- <comando>`.
 
 El arranque confinado se ha comprobado en Linux; las sesiones con LLM están
-`NO_VERIFICADO`.
+`NO_VERIFICADO`. Con un perfil, git lee su configuración en solo lectura.
+Firmar commits con gpg, usar credenciales guardadas de git y crear un espacio
+de nombres de usuario, como hace un sandbox anidado, fallan dentro
+([detalle y lo que sigue `NO_VERIFICADO`](docs/03_guides/guide_primer_bloqueo.md#con-tu-agente)).
 
 > **En 10 segundos:**
 > **Intelligence is not authority.** BABYLON-60 se plantea como infraestructura de control de efectos autónomos: el agente decide qué intentar; BABYLON-60 debe determinar qué puede ocurrir dentro del perímetro protegido. Un modelo más capaz puede descubrir, planificar y proponer más acciones; eso no debe concederle permisos adicionales ($\text{INV-}\Omega$).
