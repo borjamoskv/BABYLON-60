@@ -62,7 +62,7 @@ telemetry = [
     "psutil>=7.2.2",
 ]
 gemini = [
-    "google-genai>=2.34.0",
+    "google-genai>=2.34.0,<3",
     "fastmcp>=4.1.6",
     # Security floor for the JWT dependency pulled in by the MCP stack.
     "pyjwt>=2.15.1",
