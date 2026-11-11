@@ -23,5 +23,15 @@ jobs:
           checksum: f68d291c75783122dad58ab77def0e13f3233f358731db5d6d7e8715603b928f
       - name: Install locked dependencies
         run: uv sync --locked --all-extras
+      # The script's pytest stage includes tests/test_cortex_mcp_server.py::
+      # test_rust_babylon_skills_mcp_stdio_interop, which needs
+      # target/debug/babylon-skills-mcp (it only falls back to an --offline
+      # build, impossible with an empty cargo registry). Same pins as python-tests.yml.
+      - uses: dtolnay/rust-toolchain@b725eda525362e7cf34af9a7243cac1e3f01a7ec
+        with:
+          toolchain: stable
+      - uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0
+      - name: Build the Rust stdio MCP binary exercised by the suite
+        run: cargo build --locked -p babylon-skills-mcp
       - name: Run Conformance Script
         run: uv run --no-sync python scripts/c5_verifiers/conformance_test.py

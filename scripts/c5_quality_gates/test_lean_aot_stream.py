@@ -35,7 +35,10 @@ class NativeLeanStreamTests(unittest.TestCase):
             with self.subTest(records=count):
                 result = self.run_trace(event(0, 1, 2) * count)
                 self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
-                self.assertIn(f"{count} transacciones", result.stdout)
+                self.assertIn(
+                    f"Fin de entrada: {count} registros aceptados por el modelo de secuencias.",
+                    result.stdout,
+                )
 
     def test_every_truncated_tail_is_rejected(self) -> None:
         for count in (0, 1, 1023, 1024, 1025):

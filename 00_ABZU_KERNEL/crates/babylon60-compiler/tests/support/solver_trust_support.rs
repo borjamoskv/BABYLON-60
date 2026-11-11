@@ -58,7 +58,9 @@ pub fn z3_path() -> PathBuf {
 }
 
 pub fn real_pin() -> [u8; 32] {
-    // Test anchor matches the binary in the preceding audit, not a vendor signature.
+    // Default anchor: the macOS Homebrew Z3 4.15.4 binary of the preceding audit
+    // (docs/01_spec/evidence/solver-adapter-20261026.json), not a vendor signature
+    // and not portable. CI sets BABYLON_Z3_BIN/BABYLON_Z3_BLAKE3 to the uv.lock wheel.
     let text = std::env::var("BABYLON_Z3_BLAKE3").unwrap_or_else(|_| {
         "e4f6b1564a1ddbf849c676f33cc33a0b2d35159e1dc62d38d3bd6be587fcfec3".into()
     });

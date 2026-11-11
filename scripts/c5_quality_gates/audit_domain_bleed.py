@@ -28,8 +28,8 @@ CANONICAL_ROOT_DIRS = {
     "00_ABZU_KERNEL", "01_KISH_ENGINE", "02_EDIN_SWARMS",
     "L1_sink", "__pycache__", "apps", "artifact_bundle_v3", "assets",
     "attestation_bundle_v1", "attestation_bundle_v2", "babylonmail",
-    "compliance_reports", "contracts", "crates", "data", "deploy", "dist",
-    "docs", "examples", "experiments", "keys", "ledger", "logs", "ontology",
+    "compliance_reports", "config", "contracts", "crates", "data", "deploy", "dist",
+    "docs", "evidence", "examples", "experiments", "keys", "ledger", "logs", "ontology",
     "papers", "proof", "reports", "scratch", "scripts", "site", "src", "target",
     "tests", "tools", "ui", "Babylon60.app"
 }

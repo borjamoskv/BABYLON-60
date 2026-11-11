@@ -45,15 +45,33 @@ jobs:
         with:
           python-version: '3.12'
       - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78
-      - name: Locked regression suite
-        run: uv run --locked pytest --noconftest tests/test_skill_library_convergence.py tests/test_skill_intent_routing.py tests/test_skill_maintenance.py tests/test_semantic_contracts_gate.py tests/test_skills_manifest.py tests/test_skill_links.py tests/test_skills_installed_distribution.py -q
+      # tools/skill_library/ and its three tests (test_skill_library_convergence,
+      # test_skill_intent_routing, test_skill_maintenance) are vault-only: the public
+      # projection removes them (c5_distill_public_mirror.sh, VAULT_ONLY_PREFIXES).
+      # Library-dependent steps run only where the private source is present.
+      - name: Detect private skill library
+        id: library
+        run: |
+          if [ -f tools/skill_library/catalog.json ]; then
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "present=false" >> "$GITHUB_OUTPUT"
+            echo "::notice title=Skill library absent::tools/skill_library is vault-only; library convergence, routing, maintenance and distribution checks NOT_CHECKED in this tree."
+          fi
+      - name: Locked regression suite (public)
+        run: uv run --locked --extra dev pytest --noconftest tests/test_semantic_contracts_gate.py tests/test_skills_manifest.py tests/test_skill_links.py tests/test_skills_installed_distribution.py -q
+      - name: Locked regression suite (vault-only library)
+        if: steps.library.outputs.present == 'true'
+        run: uv run --locked --extra dev pytest --noconftest tests/test_skill_library_convergence.py tests/test_skill_intent_routing.py tests/test_skill_maintenance.py -q
       - name: Generate and check distributions
+        if: steps.library.outputs.present == 'true'
         run: |
           uv run --locked python scripts/c5_skills_ontology/build_skill_library.py --environment codex --output .artifacts/codex
           uv run --locked python scripts/c5_skills_ontology/build_skill_library.py --environment workspace --output .artifacts/workspace
           uv run --locked python scripts/c5_skills_ontology/build_skill_library.py --environment antigravity --output .artifacts/antigravity
           python3 scripts/c5_quality_gates/audit_semantic_contracts.py --workspace-only --skills-root .artifacts/codex --skills-root .artifacts/workspace --skills-root .artifacts/antigravity
       - name: Check local destinations and anchors
+        if: steps.library.outputs.present == 'true'
         run: python3 scripts/c5_quality_gates/audit_skill_links.py --root .artifacts/codex --root .artifacts/workspace --root .artifacts/antigravity --local-only --output .artifacts/local-links.json
   remote-links:
     runs-on: ubuntu-latest
@@ -64,11 +82,23 @@ jobs:
         with:
           python-version: '3.12'
       - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78
-      - run: uv run --locked python scripts/c5_skills_ontology/build_skill_library.py --environment codex --output .artifacts/codex
+      - name: Detect private skill library
+        id: library
+        run: |
+          if [ -f tools/skill_library/catalog.json ]; then
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "present=false" >> "$GITHUB_OUTPUT"
+            echo "::notice title=Skill library absent::tools/skill_library is vault-only; remote link audit of generated distributions NOT_CHECKED in this tree."
+          fi
+      - name: Generate codex distribution
+        if: steps.library.outputs.present == 'true'
+        run: uv run --locked python scripts/c5_skills_ontology/build_skill_library.py --environment codex --output .artifacts/codex
       - name: Strict remote link and anchor audit
+        if: steps.library.outputs.present == 'true'
         run: python3 scripts/c5_quality_gates/audit_skill_links.py --root .artifacts/codex --output .artifacts/remote-links.json
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
-        if: always()
+        if: always() && steps.library.outputs.present == 'true'
         with:
           name: skill-link-evidence
           path: .artifacts/*links.json
