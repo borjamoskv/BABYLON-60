@@ -13,7 +13,7 @@
 | [`babylon60_mcp.py`](babylon60_mcp.py) · [`codex_tunnel.py`](codex_tunnel.py) | Puntos de entrada auxiliares para puente MCP y túnel de integración con Codex. |
 | [`grounding_interceptor.py`](grounding_interceptor.py) · [`examples/`](./examples/) | Interceptor de anclaje empírico y ejemplos de scripts `.b60` (`hello_causal.b60`, `scheduler.b60`). |
 | [`tamkarum_attestation_engine.py`](tamkarum_attestation_engine.py) · [`tamkarum_batch_signer.py`](tamkarum_batch_signer.py) · [`tamkarum_license_provisioner.py`](tamkarum_license_provisioner.py) | Utilidades de firmado criptográfico por lotes, atestación y aprovisionamiento de licencias para TAMKARUM-60. |
-| [`skill_library/`](./skill_library/README.md) | Biblioteca versionada de skills (`global/`, `workspace/`, `codex_overrides/`) mantenida con `scripts/c5_skills_ontology/maintain_skill_library.py`. |
+| `skill_library/` (fuera de la proyección pública) | Biblioteca versionada de skills (`global/`, `workspace/`, `codex_overrides/`) mantenida con `scripts/c5_skills_ontology/maintain_skill_library.py`. |
 | [`Anergy_Audit.yml`](Anergy_Audit.yml) | Especificación declarativa de auditoría de higiene del repositorio. |
 
 ## 🛡️ Pautas de Uso

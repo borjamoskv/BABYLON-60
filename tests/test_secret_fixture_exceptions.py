@@ -14,6 +14,7 @@ from scripts.c5_quality_gates.secret_swarm_auditor import (
     PATTERNS,
     PUBLIC_FIXTURE_EXCEPTIONS,
     _is_public_fixture,
+    _load_evidence_fixture_exceptions,
     scan_file,
 )
 
@@ -90,3 +91,49 @@ def test_fixture_exceptions_are_closed_and_individually_justified() -> None:
         assert pattern in PATTERNS or pattern == "HIGH_ENTROPY_STRING"
         assert re.fullmatch("[0-9a-f]{64}", fingerprint)
         assert reason.strip()
+
+
+_VALID_EVIDENCE_RULE = {
+    "path": "docs/security/evidence/fixture.json",
+    "pattern": "GENERIC_SECRET",
+    "fingerprint": "a" * 64,
+    "reason": "Reviewed archived fixture.",
+}
+
+
+def _evidence_document(
+    tmp_path: Path, *entries: object, schema: str = "BABYLON60:PUBLIC_FIXTURE_EXCEPTIONS:v1"
+) -> Path:
+    path = tmp_path / "public_fixture_exceptions.json"
+    path.write_text(json.dumps({"schema": schema, "entries": list(entries)}))
+    return path
+
+
+def test_evidence_exceptions_are_optional_and_exact(tmp_path: Path) -> None:
+    assert _load_evidence_fixture_exceptions(tmp_path / "absent.json") == {}
+    loaded = _load_evidence_fixture_exceptions(_evidence_document(tmp_path, _VALID_EVIDENCE_RULE))
+    key = tuple(_VALID_EVIDENCE_RULE[field] for field in ("path", "pattern", "fingerprint"))
+    assert loaded == {key: _VALID_EVIDENCE_RULE["reason"]}
+
+
+@pytest.mark.parametrize(
+    "change",
+    [
+        {"path": "tests/test_outside_evidence.py"},
+        {"path": "docs/security/evidence/../../escape.py"},
+        {"fingerprint": "a" * 63},
+        {"reason": " "},
+        {"extra": "field"},
+        {"pattern": 1},
+    ],
+)
+def test_evidence_exceptions_outside_contract_fail_closed(tmp_path: Path, change: dict[str, object]) -> None:
+    with pytest.raises(ValueError):
+        _load_evidence_fixture_exceptions(_evidence_document(tmp_path, {**_VALID_EVIDENCE_RULE, **change}))
+
+
+def test_evidence_exceptions_reject_duplicates_and_unknown_schema(tmp_path: Path) -> None:
+    with pytest.raises(ValueError):
+        _load_evidence_fixture_exceptions(_evidence_document(tmp_path, _VALID_EVIDENCE_RULE, _VALID_EVIDENCE_RULE))
+    with pytest.raises(ValueError):
+        _load_evidence_fixture_exceptions(_evidence_document(tmp_path, _VALID_EVIDENCE_RULE, schema="v0"))

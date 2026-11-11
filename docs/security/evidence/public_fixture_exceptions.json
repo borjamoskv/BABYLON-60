@@ -1,0 +1,71 @@
+{
+  "schema": "BABYLON60:PUBLIC_FIXTURE_EXCEPTIONS:v1",
+  "entries": [
+    {
+      "path": "docs/security/evidence/local-core-20261030/hardware-final/hardware-receipt.json",
+      "pattern": "HIGH_ENTROPY_STRING",
+      "fingerprint": "d6349e0456f4819d694ff715a7059030f5e553b2ba38718a9c23a0f22e4b661e",
+      "reason": "Published uncompressed 65-byte public key in the hardware receipt, not a private key."
+    },
+    {
+      "path": "docs/security/evidence/local-core-20261030/hardware-final/observation-executed.json",
+      "pattern": "HIGH_ENTROPY_STRING",
+      "fingerprint": "d6349e0456f4819d694ff715a7059030f5e553b2ba38718a9c23a0f22e4b661e",
+      "reason": "Observation of the same public key from the executed hardware receipt."
+    },
+    {
+      "path": "docs/security/evidence/local-core-20261030/hardware-final/observation-approved.json",
+      "pattern": "HIGH_ENTROPY_STRING",
+      "fingerprint": "d6349e0456f4819d694ff715a7059030f5e553b2ba38718a9c23a0f22e4b661e",
+      "reason": "Observation of the same public key from the approved hardware receipt."
+    },
+    {
+      "path": "docs/security/evidence/local-core-20261030/hardware-final/observation-final.json",
+      "pattern": "HIGH_ENTROPY_STRING",
+      "fingerprint": "d6349e0456f4819d694ff715a7059030f5e553b2ba38718a9c23a0f22e4b661e",
+      "reason": "Final observation of the published hardware public key."
+    },
+    {
+      "path": "docs/security/evidence/local-core-20261030/hardware-final/observation-reopened.json",
+      "pattern": "HIGH_ENTROPY_STRING",
+      "fingerprint": "d6349e0456f4819d694ff715a7059030f5e553b2ba38718a9c23a0f22e4b661e",
+      "reason": "Reopening observation of the published hardware public key."
+    },
+    {
+      "path": "docs/security/evidence/swarm100-round2-20261028/root-replay/c/results.json",
+      "pattern": "HIGH_ENTROPY_STRING",
+      "fingerprint": "56703976932d712b2e4e8335c4d01df8f138d8e7b908ba1c4ab2bf270760d385",
+      "reason": "Recorded ciphertext output of the root replay experiment, not a credential."
+    },
+    {
+      "path": "docs/security/evidence/swarm100-round2-20261028/c/results.json",
+      "pattern": "HIGH_ENTROPY_STRING",
+      "fingerprint": "5dcc17a7bace53e10f639767d5aa961cdad46213de636b130ae47d69146b2419",
+      "reason": "Recorded ciphertext output of the original isolated experiment."
+    },
+    {
+      "path": "docs/security/evidence/swarm100-round3-20261028/03-isolated-fixtures.py",
+      "pattern": "GENERIC_SECRET",
+      "fingerprint": "ca2a0c56154f619f02fb111e523a2a6149cd38e91c0960c82be460f1b5567ef3",
+      "reason": "Explicit test fixture passed to an isolated transducer during the archived audit."
+    },
+    {
+      "path": "docs/security/evidence/swarm100-lot12-20261030/review_inputs/test_independent_inputs.py",
+      "pattern": "HIGH_ENTROPY_STRING",
+      "fingerprint": "015d4fd09b9cba4e48c8513f2f13fde79cf9761e763690e15e6127aea0c9f1c5",
+      "reason": "Deterministic repeated input vector used to test the real full default limit."
+    },
+    {
+      "path": "docs/security/evidence/swarm100-lot12-20261030/review_inputs/test_independent_inputs.py",
+      "pattern": "GENERIC_SECRET",
+      "fingerprint": "e3d9492aaee746695480484628be01e33ad27418feefa1b482496c5cf6bd3651",
+      "reason": "Noncredential OpenRouter client fixture in the independent dispatch audit."
+    },
+    {
+      "path": "docs/security/evidence/swarm100-lot12-20261030/review_queues/independent_worker.mjs",
+      "pattern": "GENERIC_SECRET",
+      "fingerprint": "43eeccf6afd8e94ea043043f7820e0c409e7bc8313f7b568f0ac066036bcae7f",
+      "reason": "Explicit synthetic secret sentinel in the archived independent queue worker."
+    }
+  ]
+}
