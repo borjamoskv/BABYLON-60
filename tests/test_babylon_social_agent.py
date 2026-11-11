@@ -119,8 +119,8 @@ def test_instagram_client_simulation():
     )
     assert res.success
     assert res.is_simulation
-    assert res.media_id.startswith("sim_media_")
-    assert res.container_id.startswith("sim_container_")
+    assert res.media_id is not None and res.media_id.startswith("sim_media_")
+    assert res.container_id is not None and res.container_id.startswith("sim_container_")
 
 
 def test_linkedin_formatting_and_simulation():
@@ -145,7 +145,7 @@ def test_linkedin_formatting_and_simulation():
     res = client.publish_text_post(post_text, dry_run=True)
     assert res.success
     assert res.is_simulation
-    assert res.post_urn.startswith("urn:li:share:sim_")
+    assert res.post_urn is not None and res.post_urn.startswith("urn:li:share:sim_")
 
 
 def test_biometric_gate_causal_hash():

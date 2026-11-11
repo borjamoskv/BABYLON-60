@@ -86,7 +86,7 @@ class Client:
         assert init["result"]["serverInfo"]["name"] == "cortex-memory"
         self.notify("notifications/initialized")
 
-    def raw(self, line: str) -> dict | None:
+    def raw(self, line: str) -> dict[str, Any] | None:
         """Send an arbitrary frame; return the parsed response (None if no frame expected)."""
         assert self.proc.stdin and self.proc.stdout
         self.proc.stdin.write(line + "\n")
@@ -95,7 +95,8 @@ class Client:
         if not out:
             raise EOFError("adapter closed stdout")
         self.stdout_lines.append(out)
-        return json.loads(out)
+        frame: dict[str, Any] = json.loads(out)
+        return frame
 
     def ping(self) -> bool:
         return self.rpc("ping", {}).get("result") == {}
@@ -105,7 +106,7 @@ class Client:
         self.proc.stdin.write(json.dumps({"jsonrpc": "2.0", "method": method}) + "\n")
         self.proc.stdin.flush()
 
-    def rpc(self, method: str, params: dict) -> dict:
+    def rpc(self, method: str, params: dict[str, Any]) -> dict[str, Any]:
         assert self.proc.stdin and self.proc.stdout
         self.mid += 1
         self.proc.stdin.write(json.dumps({"jsonrpc": "2.0", "id": self.mid, "method": method, "params": params}) + "\n")
@@ -114,11 +115,11 @@ class Client:
         if not line:
             raise EOFError("adapter closed stdout")
         self.stdout_lines.append(line)
-        msg = json.loads(line)
+        msg: dict[str, Any] = json.loads(line)
         assert msg["id"] == self.mid
         return msg
 
-    def call(self, name: str, **args: object) -> dict:
+    def call(self, name: str, **args: object) -> dict[str, Any]:
         res = self.rpc("tools/call", {"name": name, "arguments": args})["result"]
         return {"error": res["isError"], **res["structuredContent"]}
 
@@ -136,7 +137,8 @@ class Client:
         assert rest == ""
         for line in self.stdout_lines:
             assert json.loads(line)["jsonrpc"] == "2.0"
-        return self.proc.stderr.read()
+        stderr: str = self.proc.stderr.read()
+        return stderr
 
 
 @pytest.fixture(scope="module")
@@ -165,7 +167,7 @@ def ws(tmp_path_factory: pytest.TempPathFactory) -> Path:
     return d
 
 
-def ledger_rows(ws: Path, sql: str, params: tuple = ()) -> list[tuple]:
+def ledger_rows(ws: Path, sql: str, params: tuple[Any, ...] = ()) -> list[tuple[Any, ...]]:
     with sqlite3.connect(ws / "ledger.db") as conn:
         return conn.execute(sql, params).fetchall()
 
@@ -219,7 +221,7 @@ def test_fail_closed_launch(ws: Path, case: str) -> None:
         "exit": proc.returncode,
         "stdout_bytes": 0,
         "stderr": proc.stderr.strip()[-160:],
-    }  # type: ignore[index]
+    }
 
 
 # ---------------------------------------------------------------- A / B
@@ -628,7 +630,7 @@ def test_r2_state_digest_covers_items_beyond_first_page(ws: Path, tmp_path: Path
         (big / f).chmod(0o600)
     db = big / "ledger.db"
     _seed_active_items(ws, db, 1205)
-    base = core.replay(db)
+    base: dict[str, Any] = core.replay(db)
     legacy0 = _first_page_digest_legacy(db)
     with sqlite3.connect(db) as conn:
         ids = [i.memory_id for i in core.head_projection(conn, "proj-p").active()]
@@ -644,7 +646,7 @@ def test_r2_state_digest_covers_items_beyond_first_page(ws: Path, tmp_path: Path
     page = c.call("memory_read", text="bulk fact", limit=100)
     c.close()
     assert all(not r["error"] for r in steps.values())
-    after = core.replay(db)
+    after: dict[str, Any] = core.replay(db)
     legacy1 = _first_page_digest_legacy(db)
     assert legacy0 == legacy1  # the old limit:1000 digest is blind to these mutations (the defect)
     assert after["head_state_digests"]["proj-p"] != base["head_state_digests"]["proj-p"]
@@ -673,11 +675,11 @@ def test_r2_state_digest_covers_items_beyond_first_page(ws: Path, tmp_path: Path
 # ---------------------------------------------------------------- R3: two processes, one ledger
 
 
-def _race(ws: Path, args_a: dict, args_b: dict) -> tuple[dict, dict]:
+def _race(ws: Path, args_a: dict[str, Any], args_b: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
     ca, cb = Client(ws, ws / "writer.json"), Client(ws, ws / "writer.json")
     barrier, out = threading.Barrier(2), {}
 
-    def go(key: str, client: Client, args: dict) -> None:
+    def go(key: str, client: Client, args: dict[str, Any]) -> None:
         barrier.wait()
         out[key] = client.call("memory_append", **args)
 
@@ -784,7 +786,7 @@ def test_r3b_concurrent_supersede_same_target(ws: Path) -> None:
 # ---------------------------------------------------------------- R4: read-only auditor
 
 
-def _replay_cli(path: Path, *extra: str) -> subprocess.CompletedProcess:
+def _replay_cli(path: Path, *extra: str) -> subprocess.CompletedProcess[str]:
     return subprocess.run(
         [sys.executable, "-m", "babylon60.mcp.cortex_memory_core", str(path), *extra],
         capture_output=True,
@@ -964,13 +966,14 @@ def test_r5_audit_single_snapshot_with_concurrent_writer(
         return result
 
     monkeypatch.setattr(core, "verify_chain_readonly", verify_then_write)
-    r = core.replay(db)
+    r: dict[str, Any] = core.replay(db)
     monkeypatch.setattr(core, "verify_chain_readonly", real_verify)
     snap = r["audit_snapshot"]
     assert snap["mode"] == "read_txn" and snap["seq"] == r["events_verified"] == 50
     assert injected["head_after_write"] == 51  # the write really committed during the audit
     assert r["head_state_digests"]["proj-p"] == _digest_at(db, 50) != _digest_at(db, 51)
-    assert core.replay(db)["audit_snapshot"]["seq"] == 51  # a fresh audit sees it
+    fresh: dict[str, Any] = core.replay(db)
+    assert fresh["audit_snapshot"]["seq"] == 51  # a fresh audit sees it
 
     # Stress: separate writer process appends continuously while audits run.
     script = (
@@ -981,7 +984,7 @@ def test_r5_audit_single_snapshot_with_concurrent_writer(
     writer = subprocess.Popen([sys.executable, "-c", script], env=dsh_env(), cwd=ROOT)
     audits = []
     while writer.poll() is None:
-        a = core.replay(db)
+        a: dict[str, Any] = core.replay(db)
         s = a["audit_snapshot"]
         assert a["chain_ok"] and s["seq"] == a["events_verified"]
         assert a["head_state_digests"]["proj-p"] == _digest_at(db, s["seq"])

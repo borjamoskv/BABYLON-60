@@ -134,7 +134,7 @@ def test_c0294_input_source_size_and_ast_rejected():
     ]:
         res = sandbox.safe_exec(expr)
         assert not res.success
-        assert "Blocked attribute" in res.error
+        assert res.error is not None and "Blocked attribute" in res.error
 
 
 def test_c0294_parent_transport_pipe_cap_terminates_flooding_worker(tmp_path):
