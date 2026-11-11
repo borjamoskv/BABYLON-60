@@ -2,14 +2,14 @@
   "timestamp_iso": "2026-11-06T23:54:16Z",
   "source_commit": "e02cc29e7bfea6d987215a30a43fe10ecd397832",
   "source_tree_digest": "f446f24929afc508525c8322a7211dac0e67bc94346036b16273a6a1c0fd527d",
-  "claims_manifest_digest": "ed97bb4c8c57cbede73614d75f7ed35b96ce5111b394d2c29105ad3d98242d81",
+  "claims_manifest_digest": "def2d6eacba39c140aa440f41cdf9989a24b25f7ecd99d6b30e57c7f0de42521",
   "environment_digest": "aeca6fa7e3697e1c1b2553f47405e844d61eae784d6724b396ba9c7775b1bf7c",
   "total_claims": 28,
-  "verified_count": 8,
+  "verified_count": 9,
   "partial_count": 19,
-  "experimental_count": 1,
-  "failed_count": 1,
-  "merkle_evidence_root": "sha3-256:118bc24af0cf75108766831f821c2f82342cac712deb48f50189cd3d39e144cd",
+  "experimental_count": 0,
+  "failed_count": 0,
+  "merkle_evidence_root": "sha3-256:411e0639ecb6239f73bee9483865abae653b4931dcfa49b984f5340f38eeea20",
   "evidence_entries": [
     {
       "id": "inv_01_manifest_layout",
@@ -125,11 +125,11 @@
       "id": "mcp_authority_gate",
       "component": "01_KISH_ENGINE",
       "statement": "MCP server enforces AX-0: stochastic AI clients cannot self-authorize protected actions",
-      "status": "experimental",
-      "verified": false,
-      "suite_passed": false,
-      "duration_s": 0.601,
-      "leaf_hash": "fe1109cfac1faca73d1efbb71d4b8ba3306fe832e03394042eb02642ed6e8f60"
+      "status": "verified",
+      "verified": true,
+      "suite_passed": true,
+      "duration_s": 0.869,
+      "leaf_hash": "59a3291051bd9186536f4d67369fe80010cbc97a875a8fee4f0d7b11bea74c65"
     },
     {
       "id": "AUTH_001",
@@ -313,6 +313,27 @@
       "previous_claims_manifest_digest": "d4ca80d4e82978ce6e0ff5572a425f4126179e9e891fae2b3fe1b97c850e070d",
       "unchanged": "Header provenance and the other 27 entries still describe the original compile; claims_manifest_digest now names the CLAIMS.toml of the re-run revision, whose other 27 claim declarations and [metadata] are identical to the previous manifest.",
       "previous_merkle_evidence_root": "sha3-256:411e0639ecb6239f73bee9483865abae653b4931dcfa49b984f5340f38eeea20"
+    },
+    {
+      "patch": "AX-173",
+      "patched_at_iso": "2026-11-11T09:24:24Z",
+      "claim_ids": [
+        "mcp_authority_gate"
+      ],
+      "reason": "Single-claim re-run after the skills lock fix; the declared suite passes at a clean revision. Supersedes the AX-170 failure record for this claim.",
+      "evidence_run": {
+        "source_commit": "b1d73d4164116f32be5af8fd58d9da00c48408a9",
+        "source_tree_digest": "1e92e0fe76361f60c8f101c397ed0bd38af9ecc5603e36439caeb1893cd0337d",
+        "claims_manifest_digest": "def2d6eacba39c140aa440f41cdf9989a24b25f7ecd99d6b30e57c7f0de42521",
+        "environment_digest": "4be5a8f161f407a62f7eae5df8498ab2e643a760674e0415dfc92063e740bcbe",
+        "timestamp_iso": "2026-11-11T09:23:14Z",
+        "command": "pytest tests/test_ax0_mcp_isolation.py",
+        "suite_passed": true,
+        "pytest_summary": "3 passed in 0.57s"
+      },
+      "previous_claims_manifest_digest": "ed97bb4c8c57cbede73614d75f7ed35b96ce5111b394d2c29105ad3d98242d81",
+      "previous_merkle_evidence_root": "sha3-256:118bc24af0cf75108766831f821c2f82342cac712deb48f50189cd3d39e144cd",
+      "unchanged": "Header provenance and the other 27 entries still describe the original compile; claims_manifest_digest names the CLAIMS.toml of the re-run revision, whose other 27 claim declarations and [metadata] are identical to the previous manifests."
     }
   ]
 }
