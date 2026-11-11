@@ -18,6 +18,7 @@ import os
 from pathlib import Path
 import shutil
 import signal
+import stat
 import sys
 import sysconfig
 import tempfile
@@ -25,7 +26,7 @@ from typing import TYPE_CHECKING, Any, TypeVar
 
 from babylon60.confine import persistence
 from babylon60.confine.persistence import printable
-from babylon60.confine.policy import PRESETS, Identity, Policy, ancestry
+from babylon60.confine.policy import PRESETS, SHARED_DIR_BITS, Identity, Policy, ancestry
 
 if TYPE_CHECKING:
     from babylon60.confine.journal import ConfineJournal
@@ -155,6 +156,60 @@ def interpreter_hint(executable: str, homes: tuple[str, ...], policy: Policy) ->
     )
     # A #! line or a planted symlink can carry terminal control sequences: never print them raw.
     return "".join(char if char.isprintable() else repr(char)[1:-1] for char in hint)
+
+
+def outside_grants_hint(executable: str, homes: tuple[str, ...], policy: Policy) -> str | None:
+    """One line for stderr when Landlock will refuse to start the command (Linux only).
+
+    The file the command resolves to, or its ``#!`` interpreter, lies outside every
+    granted path and outside the home directories (those have their own grants and
+    hint). Without this line the trampoline only reports ``Permission denied``. It
+    suggests ``--allow-read`` for the smallest directory that holds the install: the
+    first ``node_modules`` of an npm package, the root of a virtual environment, or
+    the file's own directory.
+    """
+    home_ids = _home_ids(homes)
+    granted = {(grant.dev, grant.ino) for grant in policy.grants if grant.access in ("ro", "rw")}
+    candidates = [os.path.realpath(executable)]
+    named = _script_interpreter(executable)
+    if named is not None:
+        candidates.append(os.path.realpath(named))
+    allow: list[str] = []
+    for path in dict.fromkeys(candidates):
+        chain = _chain(path)
+        if not chain or granted.intersection(chain) or home_ids.intersection(chain[1:]):
+            continue
+        allow.append(_install_root(path))
+    if not allow:
+        return None
+    shared = [path for path in allow if _shared_directory(path)]
+    if shared:
+        advice = (
+            f"it is in a shared directory ({', '.join(shared)}) that cannot be granted; "
+            "copy it to a directory of your own and pass --allow-read for that directory"
+        )
+    else:
+        advice = "to allow it, pass " + " ".join(f"--allow-read {path}" for path in dict.fromkeys(allow))
+    hint = f"{os.path.basename(executable)} resolves to {candidates[0]}, outside every granted path; {advice}"
+    return "".join(char if char.isprintable() else repr(char)[1:-1] for char in hint)
+
+
+def _install_root(path: str) -> str:
+    """The directory to grant for an installed program: npm's first node_modules, a venv root, or its folder."""
+    marker = os.sep + "node_modules" + os.sep
+    if marker in path:
+        return path[: path.index(marker) + len(marker) - 1]
+    folder = os.path.dirname(path)
+    venv = os.path.dirname(folder)
+    return venv if os.path.isfile(os.path.join(venv, "pyvenv.cfg")) else folder
+
+
+def _shared_directory(path: str) -> bool:
+    try:
+        mode = os.stat(path).st_mode
+    except OSError:
+        return False
+    return stat.S_ISDIR(mode) and mode & SHARED_DIR_BITS == SHARED_DIR_BITS
 
 
 def _home_ids(homes: tuple[str, ...]) -> set[Identity]:
@@ -527,6 +582,9 @@ def run_command(args: argparse.Namespace) -> int:
         hint = interpreter_hint(executable, homes, policy)
         if hint:
             print(f"babylon60 run: {hint}", file=sys.stderr)
+        outside = outside_grants_hint(executable, homes, policy) if launcher.backend() == "landlock" else None
+        if outside:
+            print(f"babylon60 run: {outside}", file=sys.stderr)
         if launcher.backend() == "landlock" and launcher.landlock_abi() < LANDLOCK_SCOPE_ABI:
             print(
                 f"babylon60 run: warning: Landlock ABI {launcher.landlock_abi()} does not scope signals "

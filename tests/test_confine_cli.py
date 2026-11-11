@@ -10,9 +10,9 @@ import sys
 
 import pytest
 
-from babylon60.confine.cli import _strip_separator, executable_grants
+from babylon60.confine.cli import _strip_separator, executable_grants, outside_grants_hint
 from babylon60.confine.launcher import landlock_abi
-from babylon60.confine.policy import MIN_LANDLOCK_ABI
+from babylon60.confine.policy import MIN_LANDLOCK_ABI, build_policy
 
 ROOT = Path(__file__).absolute().parents[1]
 BACKEND = (sys.platform.startswith("linux") and landlock_abi() >= MIN_LANDLOCK_ABI) or sys.platform == "darwin"
@@ -205,3 +205,62 @@ def test_signals_outside_the_sandbox_follow_the_landlock_abi_and_are_journaled(s
     assert ("does not scope signals" in result.stderr) == (not scoped)  # an older kernel is a declared limit
     log = json.loads(_cli(sandbox, "log", "--journal", str(sandbox["journal"]), "--json").stdout)
     assert log["entries"][-1]["body"]["landlock_scoped"] == (3 if scoped else 0)
+
+
+@needs_backend
+@pytest.mark.skipif(not sys.platform.startswith("linux"), reason="Seatbelt allows paths outside the homes")
+def test_a_command_outside_every_grant_gets_a_hint_and_runs_once_granted(
+    sandbox: dict[str, Path], tmp_path: Path
+) -> None:
+    tools = tmp_path / "tools" / "bin"
+    tools.mkdir(parents=True)
+    tool = tools / "tool"
+    tool.write_text("#!/bin/sh\necho tool ran\n")
+    tool.chmod(0o755)
+    refused = _run(sandbox, str(tool))
+    assert refused.returncode == 126, refused.stderr  # Landlock refuses execve; before, only "Permission denied"
+    assert f"outside every granted path; to allow it, pass --allow-read {tools}" in refused.stderr
+    granted = _run(sandbox, str(tool), options=("--allow-read", str(tools)))
+    assert granted.returncode == 0 and granted.stdout == "tool ran\n", granted.stderr
+    assert "outside every granted path" not in granted.stderr
+
+
+def _policy(tmp_path: Path) -> tuple[tuple[str, ...], object]:
+    ws = tmp_path / "ws"
+    ws.mkdir(exist_ok=True)
+    homes = (str(tmp_path / "home"),)
+    return homes, build_policy(ws, homes=list(homes))
+
+
+def _executable(path: Path) -> Path:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("#!/bin/sh\necho hi\n")
+    path.chmod(0o755)
+    return path
+
+
+def test_the_hint_names_the_whole_npm_install_or_venv(tmp_path: Path) -> None:
+    homes, policy = _policy(tmp_path)
+    modules = tmp_path / "npm" / "node_modules"
+    entry = _executable(modules / "@scope" / "agent" / "bin" / "cli.js")
+    (modules / ".bin").mkdir()
+    (modules / ".bin" / "agent").symlink_to(entry)
+    hint = outside_grants_hint(str(modules / ".bin" / "agent"), homes, policy)  # type: ignore[arg-type]
+    assert hint is not None and hint.endswith(f"--allow-read {modules}"), hint
+    venv = tmp_path / "venv"
+    tool = _executable(venv / "bin" / "tool")
+    (venv / "pyvenv.cfg").write_text("home = /usr/bin\n")
+    hint = outside_grants_hint(str(tool), homes, policy)  # type: ignore[arg-type]
+    assert hint is not None and hint.endswith(f"--allow-read {venv}"), hint
+    inside = _executable(tmp_path / "ws" / "bin" / "tool")
+    assert outside_grants_hint(str(inside), homes, policy) is None  # type: ignore[arg-type]
+
+
+def test_the_hint_never_suggests_granting_a_shared_directory(tmp_path: Path) -> None:
+    homes, policy = _policy(tmp_path)
+    shared = tmp_path / "shared"
+    shared.mkdir()
+    shared.chmod(0o1777)
+    hint = outside_grants_hint(str(_executable(shared / "tool")), homes, policy)  # type: ignore[arg-type]
+    assert hint is not None and "--allow-read" in hint and f"--allow-read {shared}" not in hint, hint
+    assert "copy it to a directory of your own" in hint
