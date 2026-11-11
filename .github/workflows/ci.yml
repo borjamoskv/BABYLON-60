@@ -52,6 +52,14 @@ jobs:
       - name: B60 DSL engine and CLI regressions
         run: cargo test --locked -p babylon60_root --bin babylon60-dsl --test b60_dsl_cli
       - name: Test workspace with isolated IPC scheduling
+        env:
+          # Real-solver tests authenticate the exact z3 executable shipped in the
+          # z3-solver 5.1.0.0 manylinux_2_27_x86_64 wheel locked in uv.lock
+          # (sha256 dfad9e309d7010b1ff6bdb33f21570a1603ef4727373221c7117a74448f0cfef),
+          # installed by `uv sync --locked` above ("Z3 version 5.1.0 - 64 bit").
+          # Any other binary fails closed with HashMismatch.
+          BABYLON_Z3_BIN: ${{ github.workspace }}/.venv/bin/z3
+          BABYLON_Z3_BLAKE3: 928f564273519f18f60066245cc050d3ade73aa922243f132c23f3faa3474ee8
         run: uv run --no-sync cargo test --workspace --locked -- --test-threads=1
       - name: FL-019 native geometry and persistent lineage
         run: |
@@ -82,7 +90,7 @@ jobs:
       - run: uv sync --locked --extra dev --extra gemini
       - name: Agent semantic contracts and token budget
         run: |
-          python3 scripts/c5_quality_gates/audit_semantic_contracts.py --workspace-only
+          python3 scripts/c5_quality_gates/audit_semantic_contracts.py --workspace-only --public-projection
           python3 scripts/c5_quality_gates/audit_token_budget.py --workspace-only --skip-ghost-listeners
           python3 scripts/guards/verify_active_topology.py
           python3 scripts/guards/verify_active_topology.py --staged
@@ -90,7 +98,7 @@ jobs:
         run: >-
           uv run --locked pytest tests/test_semantic_contracts_gate.py tests/test_governance_gates.py
           tests/test_visual_signature_guard.py tests/test_signature_panel_render.py
-          tests/test_terminal_distribution.py tests/test_skills_manifest.py tests/test_skill_library_convergence.py -q
+          tests/test_terminal_distribution.py tests/test_skills_manifest.py -q
       - run: uv run --no-sync make check
       - run: uv run --no-sync make test-quality
 

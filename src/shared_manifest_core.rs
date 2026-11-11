@@ -269,12 +269,9 @@ impl AtomicPayloadSlot {
         self.words[0].store(payload.logical_tick, Ordering::Relaxed);
         for (word, bytes) in self.words[1..5]
             .iter()
-            .zip(payload.state_hash.chunks_exact(8))
+            .zip(payload.state_hash.as_chunks::<8>().0)
         {
-            word.store(
-                u64::from_ne_bytes(bytes.try_into().unwrap()),
-                Ordering::Relaxed,
-            );
+            word.store(u64::from_ne_bytes(*bytes), Ordering::Relaxed);
         }
         for (word, value) in self.words[5..15].iter().zip(payload.metrics) {
             word.store(value, Ordering::Relaxed);
@@ -287,10 +284,12 @@ impl AtomicPayloadSlot {
         payload.logical_tick = self.words[0].load(Ordering::Relaxed);
         for (bytes, word) in payload
             .state_hash
-            .chunks_exact_mut(8)
+            .as_chunks_mut::<8>()
+            .0
+            .iter_mut()
             .zip(&self.words[1..5])
         {
-            bytes.copy_from_slice(&word.load(Ordering::Relaxed).to_ne_bytes());
+            *bytes = word.load(Ordering::Relaxed).to_ne_bytes();
         }
         for (value, word) in payload.metrics.iter_mut().zip(&self.words[5..15]) {
             *value = word.load(Ordering::Relaxed);
@@ -391,7 +390,6 @@ impl SharedManifestRing0 {
             .control_word
             .compare_exchange(ctl, next_ctrl, Ordering::Release, Ordering::Relaxed)
             .map(|_| ())
-            .map_err(|actual| actual)
     }
 
     /// Lectura consistente con validación post-copia del control_word.

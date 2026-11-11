@@ -88,18 +88,19 @@ def test_replay_corruption() -> None:
     if os.path.exists(db_path):
         os.remove(db_path)
 
-    ledger = BFT_Ledger(db_path)
-    # Generar data
-    mutation = StateMutation(agent_id="test_agent", payload={"test": "data"}, timestamp=1000, signature="mock")
-    # Valid signatures are checked in invoke_subagent, but we just insert manually or use mock
-    from babylon60.core.crypto_utils import canonicalize_cbor, hash_sha3_256
+    from babylon60.core.crypto_utils import Ed25519Signer
 
-    m_hash: str = hash_sha3_256(canonicalize_cbor(mutation.payload))
-    ledger.conn.execute(
-        "INSERT INTO state_log (mutation_hash, agent_id, payload, ts, causal_taint) VALUES (?, ?, ?, ?, ?)",
-        (m_hash, mutation.agent_id, canonicalize_cbor(mutation.payload), mutation.timestamp, mutation.causal_taint),
-    )
-    ledger.conn.commit()
+    # Real Ed25519 quorum (N = 3f + 1); keys are ephemeral and test-only.
+    f = 1
+    signers = {f"node{i}": Ed25519Signer() for i in range(3 * f + 1)}
+    ledger = BFT_Ledger(db_path, {node: signer.public_key_hex for node, signer in signers.items()})
+    # timestamp is a caller-supplied logical tick, never a host clock.
+    mutation = StateMutation(agent_id="test_agent", payload={"test": "data"}, timestamp=1000, signature="")
+    digest: str = mutation.signing_hash(f)
+    votes = {node: signer.sign(digest) for node, signer in signers.items()}
+    if not ledger.invoke_subagent(mutation, f, votes):
+        print("Authenticated commit failed!")
+        sys.exit(1)
 
     # Ensure integrity is 100%
     if not ledger.audit_integrity():

@@ -103,7 +103,9 @@ class Projection:
         return sorted(out, key=lambda i: i.recorded_seq)
 
 
-def load_rows(conn: sqlite3.Connection, project: str, snapshot_seq: int | None) -> tuple[list[tuple], int, str]:
+def load_rows(
+    conn: sqlite3.Connection, project: str, snapshot_seq: int | None
+) -> tuple[list[tuple[Any, ...]], int, str]:
     """Rows of one project up to the snapshot, read inside the caller's transaction."""
     head = conn.execute("SELECT COALESCE(MAX(seq),0) FROM cortex_ledger").fetchone()[0]
     snap = head if snapshot_seq is None else min(snapshot_seq, head)
@@ -116,7 +118,7 @@ def load_rows(conn: sqlite3.Connection, project: str, snapshot_seq: int | None) 
     return rows, snap, head_hash_row[0] if head_hash_row else ""
 
 
-def project(rows: list[tuple], snap: int, head_hash: str) -> Projection:
+def project(rows: list[tuple[Any, ...]], snap: int, head_hash: str) -> Projection:
     p = Projection(head_seq=snap, head_hash=head_hash)
     for seq, event_id, event_type, payload_json, actor, binding_id, entry_hash in rows:
         body = json.loads(payload_json)
