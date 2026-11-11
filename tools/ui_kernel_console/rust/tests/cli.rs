@@ -75,3 +75,54 @@ fn batch_answers_one_line_per_request() {
     assert_eq!(lines[1]["receipt"], g.receipt);
     assert!(lines[2]["error"].is_string());
 }
+
+#[cfg(unix)]
+#[test]
+fn non_utf8_policy_argument_is_a_usage_error() {
+    use std::os::unix::ffi::OsStrExt;
+    let output = Command::new(env!("CARGO_BIN_EXE_b60-exec-receipt"))
+        .arg("verify")
+        .arg("--policy")
+        .arg(std::ffi::OsStr::from_bytes(b"\xff"))
+        .stdin(Stdio::null())
+        .output()
+        .expect("CLI");
+    assert_eq!(output.status.code(), Some(2));
+    assert!(output.stdout.is_empty());
+}
+
+#[cfg(unix)]
+#[test]
+fn closed_stdout_is_an_io_error_not_a_panic() {
+    let mut child = Command::new(env!("CARGO_BIN_EXE_b60-exec-receipt"))
+        .args(["verify", "--policy", "{}"])
+        .stdin(Stdio::piped())
+        .stdout(Stdio::piped())
+        .stderr(Stdio::piped())
+        .spawn()
+        .expect("CLI");
+    drop(child.stdout.take());
+    child
+        .stdin
+        .take()
+        .expect("stdin")
+        .write_all(b"{}")
+        .expect("escritura");
+    let output = child.wait_with_output().expect("salida");
+    assert_eq!(
+        output.status.code(),
+        Some(2),
+        "{}",
+        String::from_utf8_lossy(&output.stderr)
+    );
+}
+
+#[test]
+fn oversize_input_is_rejected_with_an_honest_detail() {
+    let big = vec![b'x'; 16 * 1024 * 1024 + 1];
+    let (code, out) = run(&["verify", "--policy", "{}"], &big);
+    assert_eq!(code, 1);
+    let verdict: Value = serde_json::from_str(&out).expect("JSON");
+    let detail = verdict["failures"][0]["detail"].as_str().expect("detalle");
+    assert!(detail.contains("supera 16777216 bytes"), "{detail}");
+}
