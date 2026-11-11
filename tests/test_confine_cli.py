@@ -338,14 +338,14 @@ def test_password_conventions_and_urls_with_passwords_are_withheld() -> None:
 
 @needs_backend
 def test_withheld_values_never_reach_the_agent_the_terminal_or_the_journal(sandbox: dict[str, Path]) -> None:
-    password = "B60-CANARY-" + secrets.token_hex(8)
+    canary = "B60-CANARY-" + secrets.token_hex(8)
     clean = {k: v for k, v in os.environ.items() if not credential_like(k) and not password_in_value(v)}
     env = {
         **clean,
         "HOME": str(sandbox["home"]),
         "PYTHONPATH": str(ROOT / "01_KISH_ENGINE"),
-        "DATABASE_URL": f"postgres://app:{password}@db.internal/app",
-        "SMTP_PASS": password,
+        "DATABASE_URL": f"postgres://app:{canary}@db.internal/app",
+        "SMTP_PASS": canary,
     }
     argv = [sys.executable, "-m", "babylon60.cli.main_dispatcher", "run", "--allow-root"]
     argv += ["--journal", str(sandbox["journal"]), "--", "/bin/sh", "-c", 'echo "[$DATABASE_URL][$SMTP_PASS]"']
@@ -354,7 +354,7 @@ def test_withheld_values_never_reach_the_agent_the_terminal_or_the_journal(sandb
     assert result.stdout.strip() == "[][]", result.stdout
     assert "names that look like credentials: SMTP_PASS" in result.stderr
     assert "values that are URLs with a password: DATABASE_URL" in result.stderr
-    assert password not in result.stderr and password not in result.stdout
-    assert password.encode() not in sandbox["journal"].read_bytes()
+    assert canary not in result.stderr and canary not in result.stdout
+    assert canary.encode() not in sandbox["journal"].read_bytes()
     log = json.loads(_cli(sandbox, "log", "--journal", str(sandbox["journal"]), "--json").stdout)
     assert {"DATABASE_URL", "SMTP_PASS"} <= set(log["entries"][0]["body"]["env_removed"])
