@@ -352,7 +352,12 @@ def run_command(args: argparse.Namespace) -> int:
                 journal.append("run_refused", {"error": status.get("error", "unknown")})
                 print(f"babylon60 run: confinement refused: {status.get('error')}", file=sys.stderr)
                 return EXIT_REFUSED
-            returncode = process.wait()
+            if launch.new_session:
+                # The agent left the terminal session: relay Ctrl-C, hangups, resizes and job control to it.
+                with launcher.forward_signals(process):
+                    returncode = process.wait()
+            else:
+                returncode = process.wait()  # same session: the terminal signals the agent directly
         finally:
             signal.signal(signal.SIGINT, previous)
         after = hook_digests(args.preset, workspace, homes[0])

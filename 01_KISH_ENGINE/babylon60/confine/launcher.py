@@ -2,11 +2,14 @@
 
 from __future__ import annotations
 
+from collections.abc import Callable, Iterator
+from contextlib import contextmanager
 from dataclasses import dataclass, field
 import ctypes
 import json
 import os
 from pathlib import Path
+import signal
 import subprocess
 import sys
 from typing import IO, Any
@@ -73,6 +76,116 @@ def session_launch(argv: list[str], policy: Policy, *, unix_sockets: bool = Fals
     )
 
 
+FORWARDED_SIGNALS = ("SIGINT", "SIGTERM", "SIGHUP", "SIGQUIT", "SIGWINCH")
+
+
+@contextmanager
+def forward_signals(process: subprocess.Popen[Any]) -> Iterator[None]:
+    """Relay terminal signals to a target started with ``new_session``.
+
+    Such a target leads its own session and process group, so the terminal no
+    longer signals it: Ctrl-C, Ctrl-\\, hangups and window resizes reach only this
+    launcher. While the context is active, SIGINT, SIGTERM, SIGHUP, SIGQUIT and
+    SIGWINCH go to the target's whole process group. SIGTSTP stops that group
+    with SIGSTOP (the kernel discards SIGTSTP in an orphaned process group, which
+    the target's group is) and then stops this launcher, so the shell gets the
+    terminal back; SIGCONT continues the group. Previous handlers come back on exit.
+    """
+
+    def send(signum: int) -> None:
+        if process.returncode is not None:
+            return  # reaped: its process group id may already belong to someone else
+        try:
+            os.killpg(process.pid, signum)
+        except (ProcessLookupError, PermissionError):
+            pass  # raising here would abort process.wait() and orphan the agent
+
+    def relay(signum: int, _frame: object) -> None:
+        send(signum)
+
+    def suspend(_signum: int, _frame: object) -> None:
+        send(signal.SIGSTOP)
+        signal.signal(signal.SIGTSTP, signal.SIG_DFL)
+        try:
+            os.kill(os.getpid(), signal.SIGTSTP)  # stops here until SIGCONT, unless our own group is orphaned
+        finally:
+            signal.signal(signal.SIGTSTP, suspend)
+        send(signal.SIGCONT)
+
+    def resume(_signum: int, _frame: object) -> None:
+        send(signal.SIGCONT)
+
+    handlers: dict[int, Callable[[int, Any], None]] = {
+        getattr(signal, name): relay for name in FORWARDED_SIGNALS if hasattr(signal, name)
+    }
+    handlers[signal.SIGTSTP] = suspend
+    handlers[signal.SIGCONT] = resume
+    previous: dict[int, Any] = {}
+    try:
+        for signum, handler in handlers.items():
+            previous[signum] = signal.signal(signum, handler)
+        yield
+    finally:
+        for signum, old in previous.items():
+            signal.signal(signum, signal.SIG_DFL if old is None else old)
+
+
+# Test hook ``acquire_ctty``: the target inherits the user's terminal. Like the user's shell, this
+# holder leads a new session that owns the terminal on fd 0 and runs the trampoline as an ordinary
+# member, so the target can neither lead the session nor take the terminal back after leaving it.
+# It closes its copy of the status pipe, ends the target on SIGTERM/SIGINT/SIGHUP and exits as it does.
+CTTY_HOLDER = r"""
+import fcntl, json, os, signal, sys, termios
+status_fd, command, holder = int(sys.argv[1]), sys.argv[2:], os.getpid()
+def refuse(message):
+    os.write(status_fd, (json.dumps({"ok": False, "error": "acquire_ctty: " + message}) + "\n").encode())
+    os._exit(126)
+try:
+    fcntl.ioctl(0, termios.TIOCSCTTY, 0)
+except OSError as exc:
+    refuse("fd 0 cannot become the controlling terminal: " + str(exc.strerror))
+child = os.fork()
+if child == 0:
+    try:
+        if sys.platform.startswith("linux"):
+            import ctypes
+            ctypes.CDLL(None).prctl(1, 9)  # PR_SET_PDEATHSIG, SIGKILL: never outlive the holder
+            if os.getppid() != holder:
+                os._exit(126)
+        os.execv(command[0], command)
+    except OSError as exc:
+        refuse(str(exc))
+os.close(status_fd)
+def end_target(_signum, _frame):
+    for kill in (os.killpg, os.kill):  # its own group after new_session, otherwise the child alone
+        try:
+            kill(child, signal.SIGKILL)
+        except OSError:
+            pass
+for signum in (signal.SIGTERM, signal.SIGINT, signal.SIGHUP):
+    signal.signal(signum, end_target)
+code = os.waitstatus_to_exitcode(os.waitpid(child, 0)[1])
+if code < 0:
+    try:
+        signal.signal(-code, signal.SIG_DFL)
+    except (OSError, ValueError):
+        pass
+    os.kill(holder, -code)
+os._exit(code if code >= 0 else 128 - code)
+"""
+
+
+def _end(process: subprocess.Popen[bytes], launch: Launch) -> None:
+    """Kill a target that ran out of time; with ``acquire_ctty`` its session holder ends it first."""
+    if launch.acquire_ctty:
+        try:
+            os.killpg(process.pid, signal.SIGTERM)  # the holder, and the target unless it left the group
+            process.wait(timeout=5)
+        except (ProcessLookupError, subprocess.TimeoutExpired):
+            pass
+    process.kill()
+
+
 @dataclass
 class Result:
     returncode: int
@@ -127,6 +240,8 @@ def spawn(
     read_fd, write_fd = os.pipe()
     try:
         command = _command(launch, write_fd)
+        if launch.acquire_ctty:  # test hook: the session holder owns the terminal; the trampoline is its child
+            command = [interpreter(), "-I", "-S", "-B", "-c", CTTY_HOLDER, str(write_fd), *command]
         process = subprocess.Popen(
             command,
             env=env,
@@ -168,7 +283,7 @@ def run(
     try:
         stdout, stderr = process.communicate(stdin_data, timeout=timeout)
     except subprocess.TimeoutExpired:
-        process.kill()
+        _end(process, launch)
         stdout, stderr = process.communicate()
         status = {**status, "timeout": True}
     return Result(process.returncode, stdout, stderr, status)

@@ -3,28 +3,42 @@
 Runs as ``python -I -S -B -c <this source> <config-json>``. It uses the standard
 library only and never imports ``babylon60``. Order of operations:
 
-1. Close every inherited descriptor except stdio and the status pipe.
-2. If any capability is held (for example as root), lock the securebits, empty
+1. Test hook ``acquire_ctty``: the launcher's session holder made fd 0 the
+   controlling terminal, as when the target inherits the user's terminal;
+   refuse unless ``/dev/tty`` opens.
+2. Close every inherited descriptor except stdio and the status pipe.
+3. ``new_session``: leave the terminal session (``setsid``, or ``TIOCNOTTY`` when
+   this process already leads a process group) and refuse unless ``/dev/tty``
+   then fails with ENXIO. Without a controlling terminal ``TIOCSTI`` fails; this
+   is the defence on macOS, where Seatbelt does not filter ioctls.
+4. If any capability is held (for example as root), lock the securebits, empty
    the bounding and ambient sets and clear every capability.
-3. Set ``NO_NEW_PRIVS``.
-4. Linux: build a Landlock ruleset from the granted paths, refusing any path
+5. Set ``NO_NEW_PRIVS``.
+6. Linux: build a Landlock ruleset from the granted paths, refusing any path
    whose ``(st_dev, st_ino)`` changed since the launcher checked it, and
    restrict this (single-threaded) process.
-5. Optionally install a seccomp filter that rejects ``TIOCSTI``/``TIOCLINUX``
-   terminal injection and syscalls from a foreign or x32 ABI.
-6. Report the applied state as one JSON line on the status pipe, then ``execv``.
+7. Optionally install a seccomp filter that returns EPERM for syscalls from a
+   foreign or x32 ABI, ``TIOCSTI``/``TIOCLINUX`` terminal injection,
+   ``socket(AF_UNIX)`` unless Unix sockets are allowed (Landlock ABI <= 7 does
+   not restrict connecting to a socket path: ssh-agent, gpg-agent, tmux, D-Bus,
+   Docker) and io_uring, which creates and connects sockets without ``socket()``.
+8. Restore the signals Python ignores at startup, report the applied state as
+   one JSON line on the status pipe, then ``execv``.
 
 Any failure is reported on the pipe and ends the process with status 126,
 before the target runs.
 """
 
 import ctypes
+import errno
 import fcntl
 import json
 import os
 import platform
 import resource
+import signal
 import sys
+import termios
 
 EXIT_REFUSED = 126
 LANDLOCK_CREATE_RULESET, LANDLOCK_ADD_RULE, LANDLOCK_RESTRICT_SELF = 444, 445, 446
@@ -36,8 +50,16 @@ PR_SET_NO_NEW_PRIVS, PR_GET_NO_NEW_PRIVS, PR_CAP_AMBIENT = 38, 39, 47
 PR_CAP_AMBIENT_CLEAR_ALL, SECCOMP_MODE_FILTER = 4, 2
 SECUREBITS_LOCKED_NOROOT = 0xEF  # NOROOT, NO_SETUID_FIXUP, KEEP_CAPS_LOCKED, NO_CAP_AMBIENT_RAISE (+ locks)
 LINUX_CAPABILITY_VERSION_3 = 0x20080522
-SECCOMP_ARCH = {"x86_64": (0xC000003E, 16, True), "aarch64": (0xC00000B7, 29, False)}
+# machine: (AUDIT_ARCH_*, __NR_ioctl, __NR_socket, x32 shares the audit arch)
+SECCOMP_ARCH = {"x86_64": (0xC000003E, 16, 41, True), "aarch64": (0xC00000B7, 29, 198, False)}
+IO_URING_SYSCALLS = (425, 426, 427)  # io_uring_setup, io_uring_enter, io_uring_register on every architecture
+X32_SYSCALL_BIT = 0x40000000
 TIOCSTI, TIOCLINUX = 0x5412, 0x541C
+AF_UNIX = 1
+BPF_LD_W_ABS, BPF_JEQ_K, BPF_JGE_K, BPF_RET_K = 0x20, 0x15, 0x35, 0x06
+SECCOMP_RET_ALLOW, SECCOMP_RET_EPERM = 0x7FFF0000, 0x00050000 | errno.EPERM
+# struct seccomp_data: nr, arch, then args[]; the low 32 bits of an argument come first (little endian).
+DATA_NR, DATA_ARCH, DATA_ARG0_LOW, DATA_ARG1_LOW = 0, 4, 16, 24
 
 
 class Refused(Exception):
@@ -176,30 +198,108 @@ def _restrict_landlock(libc, cfg):
     return abi, errata
 
 
-def _seccomp_filter(libc):
-    machine = platform.machine()
+def _assemble(lines):
+    """Classic BPF from instructions whose jump targets may name a label (a plain string line)."""
+    labels, program = {}, []
+    for line in lines:
+        if isinstance(line, str):
+            labels[line] = len(program)
+        else:
+            program.append(line)
+
+    def offset(target, index):
+        if not isinstance(target, str):
+            return target
+        distance = labels[target] - index - 1
+        if not 0 <= distance <= 255:
+            raise Refused(f"seccomp jump to {target} out of range")
+        return distance
+
+    return [(code, offset(jt, i), offset(jf, i), k) for i, (code, jt, jf, k) in enumerate(program)]
+
+
+def _seccomp_program(machine, unix_sockets):
+    """Return (rule names, program): EPERM for each rule, every other syscall allowed."""
     if machine not in SECCOMP_ARCH:
-        raise Refused(f"terminal-injection filter unsupported on {machine}")
-    arch, nr_ioctl, has_x32 = SECCOMP_ARCH[machine]
-    ld, jeq, jge, ret = 0x20, 0x15, 0x35, 0x06
-    allow, eperm = 0x7FFF0000, 0x00050000 | 1
-    program = [(ld, 0, 0, 4)]
+        raise Refused(f"seccomp filter unsupported on {machine}")
+    arch, nr_ioctl, nr_socket, has_x32 = SECCOMP_ARCH[machine]
+    rules = ["foreign_arch", "tiocsti", "tioclinux"]
+    lines = [(BPF_LD_W_ABS, 0, 0, DATA_ARCH), (BPF_JEQ_K, 0, "deny", arch), (BPF_LD_W_ABS, 0, 0, DATA_NR)]
     if has_x32:
-        program += [(jeq, 0, 7, arch), (ld, 0, 0, 0), (jge, 5, 0, 0x40000000)]
-    else:
-        program += [(jeq, 0, 6, arch), (ld, 0, 0, 0)]
-    program += [
-        (jeq, 0, 3, nr_ioctl),
-        (ld, 0, 0, 24),
-        (jeq, 2, 0, TIOCSTI),
-        (jeq, 1, 0, TIOCLINUX),
-        (ret, 0, 0, allow),
-        (ret, 0, 0, eperm),
+        lines.append((BPF_JGE_K, "deny", 0, X32_SYSCALL_BIT))
+    lines.append((BPF_JEQ_K, "ioctl", 0, nr_ioctl))
+    if not unix_sockets:
+        rules.append("af_unix")
+        lines.append((BPF_JEQ_K, "socket", 0, nr_socket))
+    rules.append("io_uring")
+    lines += [(BPF_JEQ_K, "deny", 0, nr) for nr in IO_URING_SYSCALLS]
+    lines += [
+        (BPF_RET_K, 0, 0, SECCOMP_RET_ALLOW),
+        "ioctl",
+        (BPF_LD_W_ABS, 0, 0, DATA_ARG1_LOW),  # the kernel truncates the request to 32 bits
+        (BPF_JEQ_K, "deny", 0, TIOCSTI),
+        (BPF_JEQ_K, "deny", 0, TIOCLINUX),
+        (BPF_RET_K, 0, 0, SECCOMP_RET_ALLOW),
     ]
+    if not unix_sockets:
+        # socketpair() stays allowed: its sockets are connected to each other, not to a path.
+        lines += [
+            "socket",
+            (BPF_LD_W_ABS, 0, 0, DATA_ARG0_LOW),  # the domain is an int: high bits cannot hide AF_UNIX
+            (BPF_JEQ_K, "deny", 0, AF_UNIX),
+            (BPF_RET_K, 0, 0, SECCOMP_RET_ALLOW),
+        ]
+    lines += ["deny", (BPF_RET_K, 0, 0, SECCOMP_RET_EPERM)]
+    return rules, _assemble(lines)
+
+
+def _seccomp_filter(libc, unix_sockets):
+    rules, program = _seccomp_program(platform.machine(), unix_sockets)
     filters = (SockFilter * len(program))(*[SockFilter(*item) for item in program])
     prog = SockFprog(len(program), filters)
     _check(libc.prctl(PR_SET_SECCOMP, SECCOMP_MODE_FILTER, ctypes.byref(prog), 0, 0), "install seccomp filter")
-    return "tiocsti"
+    return rules
+
+
+def _open_ctty():
+    """The controlling terminal, or None when there is none (ENXIO)."""
+    try:
+        return os.open("/dev/tty", os.O_RDWR | os.O_NOCTTY | os.O_CLOEXEC)
+    except OSError as exc:
+        if exc.errno == errno.ENXIO:
+            return None
+        raise Refused(f"cannot check the controlling terminal: /dev/tty: {exc.strerror}") from None
+
+
+def _leave_terminal_session():
+    """The target must start without a controlling terminal, so TIOCSTI and /dev/tty cannot reach it."""
+    try:
+        os.setsid()
+    except PermissionError:  # already leads a process group (or its session): release the terminal instead
+        fd = _open_ctty()
+        if fd is not None:
+            # A session leader releasing its terminal makes the kernel send SIGHUP to the foreground group,
+            # which can be this process; the disposition is restored before exec.
+            previous = signal.signal(signal.SIGHUP, signal.SIG_IGN)
+            try:
+                fcntl.ioctl(fd, termios.TIOCNOTTY)
+            except OSError as exc:
+                raise Refused(f"cannot release the controlling terminal: {exc.strerror}") from None
+            finally:
+                signal.signal(signal.SIGHUP, previous)
+                os.close(fd)
+    fd = _open_ctty()
+    if fd is not None:
+        os.close(fd)
+        raise Refused("the target would keep a controlling terminal")
+    return True
+
+
+def _restore_default_signals():
+    """Python ignores these at startup and exec keeps ignored signals; the target gets the defaults."""
+    for name in ("SIGPIPE", "SIGXFSZ"):
+        if hasattr(signal, name):
+            signal.signal(getattr(signal, name), signal.SIG_DFL)
 
 
 def main():
@@ -208,7 +308,15 @@ def main():
     fcntl.fcntl(status_fd, fcntl.F_SETFD, fcntl.FD_CLOEXEC)
     report = {"ok": False, "uid": os.getuid(), "platform": sys.platform}
     try:
+        if cfg.get("acquire_ctty"):  # test hook: the launcher's session holder handed over its terminal
+            fd = _open_ctty()
+            if fd is None:
+                raise Refused("acquire_ctty: the target would start without a controlling terminal")
+            os.close(fd)
+            report["acquire_ctty"] = True
         _close_inherited({status_fd})
+        if cfg.get("new_session"):
+            report["new_session"] = _leave_terminal_session()
         if sys.platform.startswith("linux"):
             libc = _libc()
             report["caps_dropped"] = _drop_capabilities(libc) if cfg.get("drop_caps", True) else False
@@ -218,11 +326,12 @@ def main():
                 report["landlock_abi"], report["landlock_errata"] = _restrict_landlock(libc, cfg)
                 report["rules"] = len(cfg["rules"])
             if cfg.get("seccomp"):
-                report["seccomp"] = _seccomp_filter(libc)
+                report["seccomp"] = _seccomp_filter(libc, bool(cfg.get("unix_sockets")))
             status = _proc_status()
             report["caps"] = {key: status.get(key) for key in ("CapEff", "CapPrm", "CapBnd", "CapAmb")}
         elif cfg.get("landlock") or cfg.get("seccomp"):
             raise Refused("Landlock and seccomp are only available on Linux")
+        _restore_default_signals()
         report["ok"] = True
         os.write(status_fd, (json.dumps(report) + "\n").encode())
         os.execv(cfg["argv"][0], cfg["argv"])
