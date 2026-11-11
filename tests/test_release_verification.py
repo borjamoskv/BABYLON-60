@@ -435,6 +435,7 @@ def test_verify_release_rejects_governance_artifact_tampering(tmp_path: Path) ->
 
     assert is_excluded_from_public_tree("docs/security/evidence/swarm100/manifest.json")
     assert is_excluded_from_public_tree("tools/skill_library/catalog.json")
+    assert is_excluded_from_public_tree("tests/test_skill_maintenance.py")
     assert not is_excluded_from_public_tree("01_KISH_ENGINE/babylon60/cli/main.py")
 
     root, bundle_path, _ = _create_release_fixture(tmp_path, signed=False)

@@ -98,7 +98,7 @@ jobs:
         run: >-
           uv run --locked pytest tests/test_semantic_contracts_gate.py tests/test_governance_gates.py
           tests/test_visual_signature_guard.py tests/test_signature_panel_render.py
-          tests/test_terminal_distribution.py tests/test_skills_manifest.py tests/test_skill_library_convergence.py -q
+          tests/test_terminal_distribution.py tests/test_skills_manifest.py -q
       - run: uv run --no-sync make check
       - run: uv run --no-sync make test-quality
 

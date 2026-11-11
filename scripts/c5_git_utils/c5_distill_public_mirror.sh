@@ -395,6 +395,9 @@ GIT_INDEX_FILE="$WORK/index" git rm --cached -r -q --ignore-unmatch \
     .playwright-mcp \
     docs/security/evidence \
     tools/skill_library \
+    tests/test_skill_intent_routing.py \
+    tests/test_skill_library_convergence.py \
+    tests/test_skill_maintenance.py \
     assets/brand/github-art-brut.svg \
     assets/AppIcon.icns \
     assets/babylon60_brutalist_logo_1024.png
