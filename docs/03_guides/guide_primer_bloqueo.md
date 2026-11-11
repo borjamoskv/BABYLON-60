@@ -196,16 +196,33 @@ Los vectores L se ejecutan aparte y nunca cuentan como bloqueados.
     descendiente que sale de él con `setsid` sobrevive, confinado y con un
     terminal revocado.
   - El perfil parte de `(allow default)` y niega lo que se ha medido en el
-    runner `macos-15`: abrir aplicaciones con LaunchServices (`open`), crear
-    trabajos de launchd, enviar señales u obtener información de procesos fuera
-    del sandbox, escribir preferencias por cfprefsd, el portapapeles, Kerberos
-    (GSSCred), DiskArbitration y las lecturas en `/private/tmp`,
-    `/private/var/tmp`, `/Volumes` y el directorio del usuario en
-    `/private/var/folders`. Apple Events se niega, pero la CI no puede
-    comprobarlo: su control necesita un consentimiento que nadie da.
-  - Siguen abiertos: montar imágenes con `hdiutil` (lo hace un servicio
-    auxiliar fuera del sandbox), la memoria compartida POSIX, leer preferencias
-    y el llavero por `securityd`, que Claude Code necesita para su sesión.
+    runner `macos-15`: abrir aplicaciones con LaunchServices (`open`), Apple
+    Events, crear trabajos de launchd, enviar señales, obtener información o
+    depurar procesos fuera del sandbox, escribir preferencias por cfprefsd, el
+    portapapeles, Kerberos (GSSCred), DiskArbitration y las lecturas en
+    `/private/tmp`, `/private/var/tmp`, `/Volumes` y el directorio del usuario
+    en `/private/var/folders`. Apple Events se mide con Finder, con control y
+    confinado; solo la variante con Terminal necesita un consentimiento que
+    nadie da en la CI.
+  - Leer las preferencias de otros programas: cerrado en las tres ejecuciones
+    de la CI (48a4593, d594608 y ae39991). Un `defaults read` confinado no
+    obtiene nada, aunque el perfil solo niega escribirlas; por qué no se ha
+    medido.
+  - Los mide la CI de esta revisión y siguen `NO_VERIFICADO` hasta entonces:
+    montar una imagen con `hdiutil` sobre un directorio del usuario fuera de
+    toda regla, como `/opt/homebrew/bin`; `launchctl setenv`, que cambia el
+    entorno de lo que launchd arranque después; el servidor de ventanas
+    (`screencapture`); y los controles positivos de lo que un agente usa a
+    diario a través de `run`: `ps`, `git`, un `venv` de Python,
+    `clang -fmodules`, `swift`, `brew`, Chrome sin interfaz y `lldb` sobre un
+    programa que el propio agente arrancó.
+  - Existencia de nombres (límite declarado): dentro de un directorio
+    denegado, el error dice qué nombres existen. Un nombre que falta da
+    `ENOENT` y la clave existente, `EPERM` o `EACCES`; su contenido sigue
+    ilegible. Fue un fallo esperado en las tres ejecuciones de la CI, y desde
+    esta revisión el test solo admite ese fallo.
+  - Siguen abiertos la memoria compartida POSIX y el llavero por `securityd`,
+    que Claude Code necesita para su sesión.
   - Como `open` se niega, `claude /login` no abre el navegador: copia la URL
     que imprime.
 - **La demo.** Sus intentos confinados no pasan por el terminal privado de
@@ -324,9 +341,27 @@ primer `node_modules`, la raíz del virtualenv o la carpeta del programa).
   terminales ajenas, los clones y enlaces del conjunto protegido, los cambios de
   metadatos en el HOME y los bits setuid y setgid. También se niega lo que
   ejecutaría código o leería credenciales fuera del sandbox: LaunchServices
-  (`open`), Apple Events, trabajos de launchd, señales e información de procesos
-  ajenos, preferencias, Kerberos y el portapapeles, salvo `--allow-clipboard`
-  (para pegar imágenes en el agente).
+  (`open`), Apple Events, trabajos de launchd, montajes, señales, información y
+  depuración de procesos ajenos y escribir preferencias. Los procesos del propio
+  agente sí se pueden señalar, inspeccionar y depurar. Siguen `NO_VERIFICADO`
+  hasta la CI de esta revisión que `hdiutil` no pueda montar y que el agente
+  inspeccione con `ps` y depure con `lldb` sus propios procesos.
+- **Servicios de macOS negados.** El perfil no deja buscar estos servicios Mach:
+  el portapapeles (`com.apple.pasteboard.1`), salvo `--allow-clipboard`;
+  Kerberos (`com.apple.GSSCred`); CoreSimulator; DiskArbitration; y, por
+  `INV_C5_COMPUTER_USE_TRUST_GATEWAY`, el servidor de ventanas
+  (`com.apple.windowserver.active`), la accesibilidad
+  (`com.apple.accessibility.AXServer`), los Apple Events
+  (`com.apple.coreservices.appleevents`) y la entrada de texto
+  (`com.apple.tsm.portname`). Por eso, dentro del agente no funcionan `git`,
+  `ssh` ni HTTP autenticados con Kerberos (GSSCred), los simuladores de iOS ni
+  el portapapeles; es lo que implica el perfil, no una medida de la CI. Lo que
+  cuesta negar el servidor de ventanas a Chrome sin interfaz lo mide la CI de
+  esta revisión.
+- **Portapapeles.** `--allow-clipboard` sirve para pegar imágenes en el agente
+  y abre las dos direcciones, y `run` lo avisa: el agente puede leer lo que
+  copies, una contraseña del gestor incluida, y sustituirlo, de modo que lo que
+  pegues después, también en otro terminal, puede ser una orden suya.
 - **Otras terminales.** `--allow-ptys` concede todas las terminales del
   usuario; `run` avisa porque deja leer y escribir otras pestañas.
 

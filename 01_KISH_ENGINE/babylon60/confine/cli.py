@@ -619,6 +619,16 @@ class SessionChecks:
             )
 
 
+def launch_warnings(backend: str, *, clipboard: bool) -> list[str]:
+    """What a launch flag opens beyond the policy, which ``Policy.warnings`` already names.
+
+    ``--allow-clipboard`` only changes the Seatbelt profile; elsewhere it opens nothing to warn about.
+    """
+    from babylon60.confine.seatbelt import CLIPBOARD_WARNING
+
+    return [CLIPBOARD_WARNING] if clipboard and backend == "seatbelt" else []
+
+
 def journal_run_end(journal: ConfineJournal, end: dict[str, Any]) -> None:
     """Append ``run_end``; if the journal refuses that body, append its exit code and the reason instead."""
     try:
@@ -713,7 +723,8 @@ def run_command(args: argparse.Namespace) -> int:
         for skipped in policy.skipped:
             if ": " in skipped:  # a guard refused it, as opposed to a missing path or a symlink
                 print(f"babylon60 run: not granted: {printable(skipped)}", file=sys.stderr)
-        for warning in policy.warnings:
+        clipboard = bool(getattr(args, "allow_clipboard", False))
+        for warning in [*policy.warnings, *launch_warnings(launcher.backend(), clipboard=clipboard)]:
             print(f"babylon60 run: warning: {printable(warning)}", file=sys.stderr)
         hint = interpreter_hint(executable, homes, policy)
         if hint:
@@ -779,7 +790,7 @@ def run_command(args: argparse.Namespace) -> int:
             policy,
             unix_sockets=args.allow_unix_sockets,
             private_tty=terminal.private_tty if terminal else None,
-            clipboard=bool(getattr(args, "allow_clipboard", False)),
+            clipboard=clipboard,
         )
         # Inherited as ignored (nohup, a background job): the agent keeps them and nothing relays them.
         ignored = launcher.ignored_signals()

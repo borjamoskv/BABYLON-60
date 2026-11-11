@@ -27,10 +27,13 @@ networking, and narrows the rest:
   ``/private/var/tmp``, ``/Volumes`` and the user's ``/private/var/folders``
   directory), where the grants (the private TMPDIR) are re-allowed;
 * what would run code outside the sandbox is denied: LaunchServices opens
-  (``lsopen``), Apple Events and launchd job creation; so are signals and process
-  information (``KERN_PROCARGS2`` included) for any process outside the sandbox,
-  preference writes through cfprefsd, and the pasteboard (unless ``clipboard``), Kerberos
-  (GSSCred), CoreSimulator and DiskArbitration services.
+  (``lsopen``), Apple Events and launchd job creation; so are signals, process
+  information (``KERN_PROCARGS2`` included) and task ports (debugging) for any process
+  outside the sandbox, preference writes through cfprefsd, and the pasteboard (unless
+  ``clipboard``), Kerberos (GSSCred), CoreSimulator, DiskArbitration, window server,
+  Apple Event, accessibility and text input services. Signals, process information
+  and task ports are allowed back for the sandbox's own processes (the agent and its
+  children).
 
 Precedence: among rules that carry a filter the last match wins; an unfiltered
 rule is only the operation's fallback, and a rule naming an operation outright
@@ -97,10 +100,11 @@ OUTSIDE_OPERATIONS = ("lsopen", "appleevent-send", "job-creation")
 GUI_INJECTION_OPERATIONS = ("hid-control",)
 # XNU lets a user mount over any directory they own (/opt/homebrew/bin, ~/.ssh): not a file-write* operation.
 MOUNT_OPERATIONS = ("file-mount", "file-unmount")
-# Other processes of the user: signals and process information, which includes the argv and
-# environment area KERN_PROCARGS2 (`ps -E`) returns. Both are denied for every target and allowed
-# back for the sandbox itself: with "(target others)" alone, a confined probe still read the
-# environment of a process in its own process group (macos-15, CI of d594608).
+# Other processes of the user: signals, process information (which includes the argv and
+# environment area KERN_PROCARGS2, `ps -E`, returns) and task ports (task_for_pid: lldb, which then
+# runs code inside the target). Each is denied for every target and allowed back for the sandbox
+# itself, so that the agent can still debug its own builds. Never "(target others)" alone: with it, a
+# confined probe still read the environment of a process in its own process group (macos-15, CI of d594608).
 PROCESS_RULES = (
     "(deny signal)",
     "(allow signal (target self) (target same-sandbox))",
@@ -108,6 +112,7 @@ PROCESS_RULES = (
     "(allow process-info* (target self) (target same-sandbox))",
     '(deny sysctl-read (sysctl-name-prefix "kern.procargs"))',
     "(when (defined? 'mach-priv-task-port) (deny mach-priv-task-port))",
+    "(when (defined? 'mach-priv-task-port) (allow mach-priv-task-port (target same-sandbox)))",
 )
 # cfprefsd writes ~/Library/Preferences for the caller: a write outside the grants (Terminal's Shell key).
 PREFERENCE_RULES = ("(deny user-preference-write)",)
@@ -115,12 +120,20 @@ PREFERENCE_RULES = ("(deny user-preference-write)",)
 # grants, so it also wins over their file-write* allow under either precedence reading.
 SETID_RULE = '(when (defined? \'file-write-setugid) (deny file-write-setugid (subpath "/")))'
 CLIPBOARD_SERVICE = "com.apple.pasteboard.1"
+# `run --allow-clipboard` opens both directions of the pasteboard.
+CLIPBOARD_WARNING = (
+    "allow_clipboard: the agent can read whatever you copy, a password from your password manager included, "
+    "and replace it, so what you paste next, into another terminal too, can be a command it wrote"
+)
 DENIED_SERVICES = (
     "com.apple.GSSCred",  # Kerberos credential caches (API: and KCM:), the macOS twin of kernel keyrings
     "com.apple.CoreSimulator.CoreSimulatorService",  # simctl spawn starts processes outside this sandbox
     "com.apple.DiskArbitration.diskarbitrationd",  # mounts images over directories the user owns
-    "com.apple.accessibility.AXServer",  # drives other apps' UI (INV_C5_COMPUTER_USE_TRUST_GATEWAY)
-    "com.apple.tsm.portname",  # text input into other apps (same contract)
+    # INV_C5_COMPUTER_USE_TRUST_GATEWAY (docs/03_guides/agent_contracts.md): no view of or input into other apps.
+    "com.apple.windowserver.active",  # the window server: screen capture, windows, synthetic events
+    "com.apple.accessibility.AXServer",  # drives other apps' UI
+    "com.apple.coreservices.appleevents",  # Apple Event delivery, besides (deny appleevent-send)
+    "com.apple.tsm.portname",  # text input into other apps
 )
 # Read-denied outside the homes: shared temporary directories, the user's per-user directory under
 # /private/var/folders (other apps' T, C and 0, other sessions' private TMPDIRs), mounted volumes

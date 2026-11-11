@@ -1074,7 +1074,7 @@ def main() -> None:
     p_run.add_argument(
         "--allow-clipboard",
         action="store_true",
-        help="macOS: let the agent use the pasteboard (pbcopy/pbpaste, pasting images); denied by default",
+        help="macOS: let the agent read and replace the pasteboard (pbcopy/pbpaste, pasting images); denied by default",
     )
     p_run.add_argument(
         "--pass-env",

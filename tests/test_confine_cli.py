@@ -16,11 +16,13 @@ from babylon60.confine.cli import (
     agent_environment,
     credential_like,
     executable_grants,
+    launch_warnings,
     outside_grants_hint,
     password_in_value,
 )
 from babylon60.confine.launcher import landlock_abi
 from babylon60.confine.policy import MIN_LANDLOCK_ABI, build_policy
+from babylon60.confine.seatbelt import CLIPBOARD_WARNING
 
 ROOT = Path(__file__).absolute().parents[1]
 BACKEND = (sys.platform.startswith("linux") and landlock_abi() >= MIN_LANDLOCK_ABI) or sys.platform == "darwin"
@@ -191,6 +193,23 @@ def test_policy_warnings_reach_stderr(sandbox: dict[str, Path], tmp_path: Path) 
     result = _run(sandbox, "true")
     assert result.returncode == 0, result.stderr
     assert "babylon60 run: warning:" in result.stderr and "links" in result.stderr
+
+
+def test_the_clipboard_warning_names_both_directions() -> None:
+    """MACOS-8: the agent reads what the user copies and replaces what they paste next, elsewhere too."""
+    assert launch_warnings("seatbelt", clipboard=True) == [CLIPBOARD_WARNING]
+    assert "read whatever you copy" in CLIPBOARD_WARNING and "password manager" in CLIPBOARD_WARNING
+    assert "replace it" in CLIPBOARD_WARNING and "another terminal" in CLIPBOARD_WARNING
+    assert launch_warnings("seatbelt", clipboard=False) == []
+    assert launch_warnings("landlock", clipboard=True) == []  # the flag changes only the Seatbelt profile
+
+
+@needs_backend
+def test_allow_clipboard_warns_where_it_opens_the_pasteboard(sandbox: dict[str, Path]) -> None:
+    result = _run(sandbox, "true", options=("--allow-clipboard",))
+    assert result.returncode == 0, result.stderr
+    warned = f"babylon60 run: warning: {CLIPBOARD_WARNING}" in result.stderr
+    assert warned == (sys.platform == "darwin"), result.stderr
 
 
 @needs_backend

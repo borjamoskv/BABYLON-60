@@ -63,7 +63,9 @@ jobs:
 
   seatbelt:
     runs-on: macos-15
-    timeout-minutes: 15
+    # The tests took 7 minutes at ae39991; the positive controls (clang modules, a venv, Chrome,
+    # lldb, hdiutil) add real tool runs with their own timeouts, and a cancelled job measures nothing.
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
