@@ -21,6 +21,9 @@ export {
   verifyExecutionPayload,
   verifyExecutionPayloadJson,
   verifyExecutionPayloadUtf8,
+  verifyExecutionPayloadWithAnchorText,
+  parseAnchorText,
+  MAX_ANCHOR_TEXT_LENGTH,
 } from "./crypto/sealVerifier.ts";
 export { MAX_JSON_DEPTH } from "./crypto/jsonText.ts";
 export type { ReceiptVerifier, VerifierEnvironment } from "./crypto/sealVerifier.ts";

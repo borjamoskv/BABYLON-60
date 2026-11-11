@@ -15,7 +15,7 @@ use crate::canonical::{
     dag_merkle_root, from_hex_strict, manifest_hash, node_leaf_hash, receipt_envelope,
     receipt_hash, signature_input, to_hex, EnvelopeFields, NodeFields,
 };
-use crate::json_text::{first_non_integer_number, MAX_JSON_TEXT_UTF16};
+use crate::json_text::{first_non_integer_number, first_repeated_key, MAX_JSON_TEXT_UTF16};
 use crate::point::{classify_point, is_strict_signature_encoding, PointVerdict};
 use crate::schema::{
     escape_preview, parse_execution_payload, utf16_len, ExecutionPayload, Failure,
@@ -24,6 +24,8 @@ use crate::schema::{
 
 /// Máximo de autoridades admitidas en un ancla de confianza.
 pub const MAX_ADMITTED_AUTHORITIES: usize = 64;
+/// Tamaño máximo del texto de un ancla, en unidades UTF-16 (como `String.length`).
+pub const MAX_ANCHOR_UTF16: usize = 1024 * 1024;
 
 /// Ancla de confianza ya validada.
 #[derive(Debug, Clone)]
@@ -171,7 +173,7 @@ fn normalize_policy(policy: &Value, c: &mut FailureCollector) -> Option<TrustPol
     }
     let Some(required) = obj
         .get("larsa_required_weight")
-        .and_then(Value::as_u64)
+        .and_then(anchor_integer)
         .and_then(|w| u32::try_from(w).ok())
         .filter(|w| *w >= 1)
     else {
@@ -188,11 +190,7 @@ fn normalize_policy(policy: &Value, c: &mut FailureCollector) -> Option<TrustPol
         let Some(hash) = prev.get("receipt_hash").and_then(is_hex32_text) else {
             return bad("previous_receipt.receipt_hash debe ser 0x + 64 dígitos hex en minúsculas");
         };
-        let Some(seq) = prev
-            .get("seq_id")
-            .and_then(Value::as_u64)
-            .filter(|s| *s <= MAX_SAFE_INTEGER)
-        else {
+        let Some(seq) = prev.get("seq_id").and_then(anchor_integer) else {
             return bad("previous_receipt.seq_id debe ser un entero ≥ 0");
         };
         previous = Some((hash, seq));
@@ -202,6 +200,44 @@ fn normalize_policy(policy: &Value, c: &mut FailureCollector) -> Option<TrustPol
         larsa_required_weight: required,
         previous,
     })
+}
+
+/// Entero de un ancla, en cualquier escritura JSON que denote un entero seguro (`4`, `4.0`,
+/// `4e0`). Así coincide con `Number.isSafeInteger` tras `JSON.parse` en TypeScript.
+fn anchor_integer(v: &Value) -> Option<u64> {
+    let n = v.as_number()?;
+    if let Some(u) = n.as_u64() {
+        return (u <= MAX_SAFE_INTEGER).then_some(u);
+    }
+    let f = n.as_f64()?;
+    let max = MAX_SAFE_INTEGER as f64;
+    (f.fract() == 0.0 && (0.0..=max).contains(&f)).then_some(f as u64)
+}
+
+/// Interpreta el ancla dada como texto: longitud, claves no repetidas y forma. Devuelve el
+/// valor JSON o el motivo del rechazo.
+pub fn parse_anchor_text(text: &str) -> Result<Value, String> {
+    let units = utf16_len(text);
+    if units > MAX_ANCHOR_UTF16 {
+        return Err(format!(
+            "ancla de {units} caracteres supera el máximo {MAX_ANCHOR_UTF16}"
+        ));
+    }
+    let value: Value = serde_json::from_str(text)
+        .map_err(|e| format!("el ancla no es JSON válido en la forma admitida: {e}"))?;
+    match first_repeated_key(text) {
+        Some(key) => Err(format!("clave duplicada en el ancla: {key}")),
+        None => Ok(value),
+    }
+}
+
+/// Verifica un recibo (bytes UTF-8) con un ancla dada como texto. Un ancla que no se puede
+/// interpretar produce un veredicto `TRUST_POLICY_INVALID`: toda entrada produce un veredicto.
+pub fn verify_with_anchor_text(receipt: &[u8], anchor_text: &str) -> Verdict {
+    match parse_anchor_text(anchor_text) {
+        Ok(policy) => verify_execution_payload_utf8(receipt, &policy),
+        Err(detail) => rejection("TRUST_POLICY_INVALID", &detail),
+    }
 }
 
 struct Topology {
@@ -542,6 +578,9 @@ pub fn verify_execution_payload_json(text: &str, policy: &Value) -> Verdict {
             "SCHEMA_INVALID",
             &format!("número no entero o no canónico en el texto: {token}"),
         );
+    }
+    if let Some(key) = first_repeated_key(text) {
+        return rejection("SCHEMA_INVALID", &format!("clave duplicada: {key}"));
     }
     verify_execution_payload(&value, policy)
 }

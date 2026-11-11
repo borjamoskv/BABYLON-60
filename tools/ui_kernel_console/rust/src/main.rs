@@ -8,16 +8,19 @@
 //! Formato de `batch`, una petición por línea:
 //! `{"op":"verify","receipt_hex":"<bytes UTF-8 en hex minúsculas>","policy":{...}}` o
 //! `{"op":"seal","unsealed":{...},"test_seed_hex":"<64 hex>"}` (semilla de prueba, no secreta).
-//! Una línea que no es UTF-8, que no es JSON o que supera `MAX_BATCH_LINE_BYTES` recibe una
-//! respuesta `{"error": ...}`, y el lote continúa con la línea siguiente.
+//! `policy` puede ser un objeto JSON o un texto con el ancla. Un ancla que no se puede
+//! interpretar produce un veredicto `TRUST_POLICY_INVALID`, igual que en la CLI y en wasm.
+//! Una línea que no es UTF-8, que no es JSON, que repite una clave o que supera
+//! `MAX_BATCH_LINE_BYTES` recibe una respuesta `{"error": ...}`; el lote sigue.
 
 use std::io::{self, BufRead, Read, Write};
 use std::process::ExitCode;
 
 use babylon60_exec_receipt::canonical::from_hex_strict;
+use babylon60_exec_receipt::json_text::first_repeated_key;
 use babylon60_exec_receipt::seal::{parse_unsealed, seal_with_test_seed};
 use babylon60_exec_receipt::verify::{
-    rejection, verdict_json, verify_execution_payload_utf8, Verdict,
+    rejection, verdict_json, verify_execution_payload_utf8, verify_with_anchor_text, Verdict,
 };
 use serde_json::{json, Value};
 
@@ -58,10 +61,6 @@ fn verify_cmd(args: &[String]) -> ExitCode {
         eprintln!("{USAGE}");
         return ExitCode::from(2);
     }
-    let Ok(policy) = serde_json::from_str::<Value>(policy_text) else {
-        eprintln!("el ancla de confianza no es JSON válido");
-        return ExitCode::from(2);
-    };
     // Se leen MAX_STDIN_BYTES + 1 bytes para distinguir «exactamente en el límite» de «por encima».
     let mut input = Vec::new();
     if io::stdin()
@@ -79,7 +78,7 @@ fn verify_cmd(args: &[String]) -> ExitCode {
             &format!("la entrada supera {MAX_STDIN_BYTES} bytes y no se interpreta"),
         )
     } else {
-        verify_execution_payload_utf8(&input, &policy)
+        verify_with_anchor_text(&input, policy_text)
     };
     let stdout = io::stdout();
     let mut out = stdout.lock();
@@ -98,6 +97,9 @@ fn verify_cmd(args: &[String]) -> ExitCode {
 }
 
 fn batch_line(line: &str) -> Value {
+    if let Some(key) = first_repeated_key(line) {
+        return json!({ "error": format!("clave duplicada: {key}") });
+    }
     let Ok(request) = serde_json::from_str::<Value>(line) else {
         return json!({ "error": "línea que no es JSON" });
     };
@@ -110,8 +112,13 @@ fn batch_line(line: &str) -> Value {
             else {
                 return json!({ "op": "verify", "error": "receipt_hex ausente o inválido" });
             };
-            let policy = request.get("policy").cloned().unwrap_or(Value::Null);
-            let verdict = verify_execution_payload_utf8(&bytes, &policy);
+            let verdict = match request.get("policy") {
+                Some(Value::String(anchor)) => verify_with_anchor_text(&bytes, anchor),
+                other => {
+                    let policy = other.cloned().unwrap_or(Value::Null);
+                    verify_execution_payload_utf8(&bytes, &policy)
+                }
+            };
             let mut out = verdict_json(&verdict);
             out["op"] = json!("verify");
             out["codes"] = json!(verdict.codes());

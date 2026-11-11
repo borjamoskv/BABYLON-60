@@ -67,7 +67,10 @@ if (!existsSync(WASM)) fail(2, `falta el binding wasm en ${WASM}. Ver «Rust y W
 }
 const load = (rel) => import(pathToFileURL(resolve(PKG, "scratch/test-build/src", rel)).href);
 const { ed25519SignerFromSeed, sealReceipt } = await load("crypto/receiptSealer.js");
-const { verifyExecutionPayloadJson, verifyExecutionPayloadUtf8 } = await load("crypto/sealVerifier.js");
+const { parseAnchorText, verifyExecutionPayloadJson, verifyExecutionPayloadWithAnchorText } = await load(
+  "crypto/sealVerifier.js"
+);
+const verifyWithAnchorText = verifyExecutionPayloadWithAnchorText;
 const wasm = createRequire(import.meta.url)(WASM);
 
 // ---------------------------------------------------------------------------------------------
@@ -92,6 +95,9 @@ const decodeStrict = (bytes) => {
     return null;
   }
 };
+
+const depthOf = (v) => (v !== null && typeof v === "object" ? 1 + Math.max(0, ...Object.values(v).map(depthOf)) : 0);
+const eqBytes = (a, b) => a.length === b.length && a.every((v, i) => v === b[i]);
 
 function prng(seed) {
   let a = seed >>> 0;
@@ -298,6 +304,10 @@ async function makeBase(k) {
 // Alteraciones. Cada una devuelve null si no es aplicable, o { text | bytes, policy? }.
 // ---------------------------------------------------------------------------------------------
 
+// Ancla de la base con otro valor de peso (texto, para probar escrituras numéricas distintas).
+const withWeight = (b, token) =>
+  JSON.stringify(b.policy).replace(/"larsa_required_weight":\d+/, `"larsa_required_weight":${token}`);
+
 const HEX_FIELDS = [
   ["cryptographic_seal", "phase_one_manifest_hash"],
   ["cryptographic_seal", "phase_two_merkle_root"],
@@ -490,6 +500,38 @@ const MUTATIONS = {
     return { bytes: concatBytes(bytes.slice(0, at), Uint8Array.of(0xff), bytes.slice(at)) };
   },
   bytes_overlong: (_rng, b) => ({ bytes: concatBytes(Uint8Array.of(0xc0, 0x80), utf8(b.text)) }),
+  // Ancla como texto: escrituras numéricas, claves, sustitutos, BOM, profundidad y truncamientos.
+  anchor_weight_forms: (rng, b) => {
+    const w = b.policy.larsa_required_weight;
+    return { anchor: withWeight(b, pick(rng, [`${w}.0`, `${w}e0`, `${w}E+0`, `${w}.000`])) };
+  },
+  anchor_weight_bad: (rng, b) => {
+    const w = b.policy.larsa_required_weight;
+    return { anchor: withWeight(b, pick(rng, [`${w}.5`, "0", "0.0", `-${w}`, "4294967296", "9007199254740993", "1e400", `${w}e400`])) };
+  },
+  anchor_seq_forms: (rng, b) => {
+    const seq = pick(rng, ["0.0", "0e0", "-0.0", "0.5", "-1", "1e400", "1"]);
+    const text = JSON.stringify({
+      admitted_authorities: b.policy.admitted_authorities,
+      larsa_required_weight: b.policy.larsa_required_weight,
+      previous_receipt: { receipt_hash: `0x${"ab".repeat(32)}`, seq_id: 0 },
+    });
+    return { anchor: text.replace('"seq_id":0', `"seq_id":${seq}`) };
+  },
+  anchor_dup_key: (_rng, b) => ({ anchor: JSON.stringify(b.policy).replace(/}$/, ',"larsa_required_weight":1}') }),
+  anchor_lone_surrogate: (_rng, b) => ({
+    anchor: JSON.stringify(b.policy).replace('"admitted_authorities":["', '"admitted_authorities":["\\ud800'),
+  }),
+  anchor_bom: (_rng, b) => ({ anchor: `\uFEFF${JSON.stringify(b.policy)}` }),
+  anchor_truncate: (rng, b) => {
+    const text = JSON.stringify(b.policy);
+    return { anchor: text.slice(0, rint(rng, 1, text.length - 1)) };
+  },
+  anchor_deep: (_rng, b) => ({
+    anchor: JSON.stringify(b.policy).replace(/}$/, `,"x":${"[".repeat(126)}${"]".repeat(126)}}`),
+  }),
+  anchor_pretty: (_rng, b) => ({ anchor: JSON.stringify(b.policy, null, 2) }),
+  anchor_escape_key: (_rng, b) => ({ anchor: JSON.stringify(b.policy).replace('"larsa_required_weight"', '"\\u006carsa_required_weight"') }),
 };
 
 function numericEdit(rng, b, replace) {
@@ -511,12 +553,19 @@ function mutate(rng, b) {
 }
 
 function casesOf(b) {
-  const out = [{ cls: "base", bytes: utf8(b.text), policy: b.policy }];
+  const baseAnchor = JSON.stringify(b.policy);
+  const baseBytes = utf8(b.text);
+  const out = [{ cls: "base", bytes: baseBytes, anchorText: baseAnchor }];
   for (let m = 0; m < opts.mutants; m += 1) {
     const r = mutate(b.rng, b);
-    if (r) out.push({ cls: r.cls, bytes: r.bytes ?? utf8(r.text), policy: r.policy ?? b.policy });
+    if (!r) continue;
+    const bytes = r.bytes ?? utf8(r.text ?? b.text);
+    const anchorText = r.anchor ?? (r.policy !== undefined ? JSON.stringify(r.policy) : baseAnchor);
+    // Una alteración que no cambia nada no cuenta como alteración aceptada: se descarta.
+    if (eqBytes(bytes, baseBytes) && anchorText === baseAnchor) continue;
+    out.push({ cls: r.cls, bytes, anchorText });
   }
-  return out.map((c, base) => ({ ...c, base: b.k, index: base }));
+  return out.map((c, index) => ({ ...c, base: b.k, index }));
 }
 
 // ---------------------------------------------------------------------------------------------
@@ -543,14 +592,30 @@ cases.forEach((c, id) => {
   c.id = id;
 });
 
+cases.push({
+  id: cases.length,
+  base: -1,
+  index: 0,
+  cls: "oversize_bytes",
+  bytes: new Uint8Array(13 * 1024 * 1024).fill(0x20),
+  anchorText: JSON.stringify(seals[0].policy),
+});
 for (const c of cases) {
-  c.ts = fromTs(await verifyExecutionPayloadUtf8(c.bytes, c.policy));
+  c.ts = fromTs(await verifyWithAnchorText(c.bytes, c.anchorText));
+  const anchor = parseAnchorText(c.anchorText);
   const text = decodeStrict(c.bytes);
-  c.tsJson = text === null ? null : fromTs(await verifyExecutionPayloadJson(text, c.policy));
+  c.tsObj = anchor.ok && text !== null ? fromTs(await verifyExecutionPayloadJson(text, anchor.policy)) : null;
 }
 
 const verifyReplies = runBatch(
-  cases.map((c) => JSON.stringify({ op: "verify", receipt_hex: Buffer.from(c.bytes).toString("hex"), policy: c.policy }))
+  cases.map((c, i) => {
+    const anchor = parseAnchorText(c.anchorText);
+    // Un tercio de las peticiones lleva el ancla como objeto; el resto, como texto.
+    // El sobre de batch añade un nivel de anidamiento: un ancla de 127 niveles solo va como texto.
+    const fits = anchor.ok && depthOf(anchor.policy) <= 126;
+    const policy = i % 3 === 0 && fits ? anchor.policy : c.anchorText;
+    return JSON.stringify({ op: "verify", receipt_hex: Buffer.from(c.bytes).toString("hex"), policy });
+  })
 );
 if (verifyReplies.length !== cases.length) {
   fail(2, `la CLI devolvió ${verifyReplies.length} respuestas para ${cases.length} peticiones`);
@@ -560,12 +625,13 @@ cases.forEach((c, i) => {
 });
 
 for (const c of cases) {
-  c.wasm = fromRust(JSON.parse(wasm.verifyReceiptBytes(c.bytes, JSON.stringify(c.policy))));
+  c.wasm = fromRust(JSON.parse(wasm.verifyReceiptBytes(c.bytes, c.anchorText)));
 }
 
-for (let i = 0; i < cases.length; i += STDIN_EVERY) {
+for (let i = 0; i < cases.length; i += 1) {
   const c = cases[i];
-  const r = spawnSync(CLI, ["verify", "--policy", JSON.stringify(c.policy)], {
+  if (i % STDIN_EVERY !== 0 && c.cls !== "oversize_bytes") continue;
+  const r = spawnSync(CLI, ["verify", "--policy", c.anchorText], {
     input: c.bytes,
     maxBuffer: 1 << 26,
   });
@@ -590,7 +656,7 @@ seals.forEach((b, i) => {
 const same = (a, b) => canon(a) === canon(b);
 function diffsOf(c) {
   const d = [];
-  if (c.tsJson !== null && !same(c.tsJson, c.ts)) d.push("ts-json≠ts-utf8");
+  if (c.tsObj !== null && !same(c.tsObj, c.ts)) d.push("ts-objeto≠ts-texto-del-ancla");
   if (!same(c.rust, c.ts)) d.push("rust-batch≠ts");
   if (!same(c.wasm, c.ts)) d.push("wasm≠ts");
   if (c.cli !== undefined && !same(c.cli, c.ts)) d.push("rust-cli-stdin≠ts");

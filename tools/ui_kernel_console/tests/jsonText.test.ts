@@ -58,3 +58,24 @@ test("verifyExecutionPayloadUtf8: UTF-8 inválido, BOM y escapes sueltos se rech
   }
   assert.notEqual(new TextDecoder().decode(cases[2]), goldenText);
 });
+
+test("jsonTextIssue: claves repetidas en un mismo objeto, decodificadas", () => {
+  assert.equal(jsonTextIssue('{"a":1,"a":2}'), "clave duplicada: a");
+  assert.equal(jsonTextIssue('{"x":[{"k":1,"k":2}]}'), "clave duplicada: k");
+  assert.equal(jsonTextIssue('{"\\u0061":1,"a":2}'), "clave duplicada: a");
+  assert.equal(jsonTextIssue('{"\\ud83d\\ude00":1,"\u{1F600}":2}'), "clave duplicada: \u{1F600}");
+});
+
+test("jsonTextIssue: el mismo nombre en objetos distintos o como valor no cuenta", () => {
+  assert.equal(jsonTextIssue('[{"k":1},{"k":2}]'), null);
+  assert.equal(jsonTextIssue('{"a":{"a":1}}'), null);
+  assert.equal(jsonTextIssue('{"a":"a","b":"b"}'), null);
+  assert.equal(jsonTextIssue('{"a":"x:\\"a\\":1"}'), null);
+});
+
+test("jsonTextIssue: en modo ancla, los números valen por su valor", () => {
+  assert.equal(jsonTextIssue('{"w":4.0,"x":1e0,"y":-0}', "anchor"), null);
+  assert.match(jsonTextIssue('{"w":4.0}', "receipt") ?? "", /no entero o no canónico/);
+  assert.equal(jsonTextIssue('{"w":1,"w":1}', "anchor"), "clave duplicada: w");
+});
+

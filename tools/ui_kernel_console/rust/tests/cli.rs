@@ -51,7 +51,8 @@ fn verify_exit_codes() {
         false
     );
     assert_eq!(run(&["verify"], b"").0, 2);
-    assert_eq!(run(&["verify", "--policy", "no-json"], b"").0, 2);
+    // Un ancla que no es JSON no es un uso incorrecto: produce un veredicto rechazado.
+    assert_eq!(run(&["verify", "--policy", "no-json"], b"{}").0, 1);
     assert_eq!(run(&["desconocida"], b"").0, 2);
 }
 
@@ -125,4 +126,48 @@ fn oversize_input_is_rejected_with_an_honest_detail() {
     let verdict: Value = serde_json::from_str(&out).expect("JSON");
     let detail = verdict["failures"][0]["detail"].as_str().expect("detalle");
     assert!(detail.contains("supera 16777216 bytes"), "{detail}");
+}
+
+#[test]
+fn an_unreadable_anchor_is_a_rejected_verdict_not_a_usage_error() {
+    let text = golden().receipt.to_string();
+    let (code, out) = run(
+        &["verify", "--policy", "{\"larsa_required_weight\":1e400}"],
+        text.as_bytes(),
+    );
+    assert_eq!(code, 1);
+    let verdict: Value = serde_json::from_str(&out).expect("JSON");
+    assert_eq!(verdict["failures"][0]["code"], "TRUST_POLICY_INVALID");
+}
+
+#[test]
+fn batch_takes_the_anchor_as_text_and_reports_invalid_anchors_as_verdicts() {
+    let g = golden();
+    let receipt_hex = hex(g.receipt.to_string().as_bytes());
+    let requests = [
+        json!({ "op": "verify", "receipt_hex": receipt_hex, "policy": g.policy.to_string() }),
+        json!({ "op": "verify", "receipt_hex": receipt_hex, "policy": "{\"larsa_required_weight\":1e400}" }),
+        json!({ "op": "verify", "receipt_hex": receipt_hex, "policy": g.policy }),
+    ];
+    let input: String = requests.iter().map(|r| format!("{r}\n")).collect();
+    let (code, out) = run(&["batch"], input.as_bytes());
+    assert_eq!(code, 0);
+    let lines: Vec<Value> = out
+        .lines()
+        .map(|l| serde_json::from_str(l).expect("JSON"))
+        .collect();
+    assert_eq!(lines.len(), 3);
+    assert_eq!(lines[0]["ok"], true);
+    assert_eq!(lines[1]["codes"], json!(["TRUST_POLICY_INVALID"]));
+    assert_eq!(lines[2]["ok"], true);
+}
+
+#[test]
+fn batch_answers_a_line_with_a_repeated_key_with_an_error() {
+    let (code, out) = run(
+        &["batch"],
+        b"{\"op\":\"verify\",\"op\":\"verify\",\"receipt_hex\":\"\",\"policy\":{}}\n",
+    );
+    assert_eq!(code, 0);
+    assert_eq!(out.trim(), r#"{"error":"clave duplicada: op"}"#);
 }

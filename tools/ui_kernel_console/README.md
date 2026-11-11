@@ -70,7 +70,9 @@ Campos del objeto JSON y qué respalda cada uno cuando el recibo se acepta:
 | `larsa_commit`, `lean4_proof`, `audit_metrics` | Declaraciones del emisor cubiertas por la firma. El cliente no las comprueba. |
 
 Un objeto con una clave de más o de menos se rechaza: no hay campos sin firma ni
-recomputación. Los enteros deben caber en [0, 2^53 − 1]; los hashes son `0x` y
+recomputación. Tampoco se admite una clave repetida en ningún objeto: `serde_json` y `JSON.parse`
+conservan la última y descartan la primera, así que una copia que ninguna firma cubre podría leerse.
+Los enteros deben caber en [0, 2^53 − 1]; los hashes son `0x` y
 64 dígitos hex en minúsculas; la raíz es `b3:` y 64 dígitos hex.
 
 ### Codificaciones canónicas
@@ -120,6 +122,11 @@ La aporta el anfitrión, nunca el recibo:
 - `previous_receipt` (opcional): hash y secuencia del recibo anterior. Sin él,
   el encadenamiento se muestra como `NO_VERIFICADO`.
 
+Los números del ancla valen por su valor: `4`, `4.0` y `4e0` son el mismo entero, y `4.5`, `0` o
+`1e400` no lo son. En el recibo, en cambio, los números deben ser enteros canónicos (sin fracción, sin
+exponente y sin `-0`). Un ancla que no se puede interpretar (no es JSON, repite una clave, supera 1 MiB
+o tiene un sustituto suelto) produce un veredicto `TRUST_POLICY_INVALID`.
+
 Las claves y las firmas pasan un filtro estricto antes de llegar a WebCrypto:
 se rechazan codificaciones no canónicas, puntos de orden pequeño y escalares
 sin reducir. El motivo está reproducido en
@@ -130,7 +137,7 @@ una firma trivial para cualquier mensaje si la clave es de orden pequeño.
 
 | Código | Se emite cuando |
 | --- | --- |
-| `TRUST_POLICY_INVALID` | El ancla falta, tiene forma inválida o contiene una clave inaceptable. |
+| `TRUST_POLICY_INVALID` | El ancla falta, no se puede interpretar, tiene forma inválida o contiene una clave inaceptable. |
 | `SCHEMA_INVALID`, `SCHEMA_MALFORMED_HEX`, `LIMIT_EXCEEDED`, `DAG_EMPTY` | La entrada no tiene la forma exacta o supera una cota. |
 | `DAG_DUPLICATE_NODE_ID`, `DAG_DUPLICATE_PARENT_REF`, `DAG_DANGLING_PARENT_REF`, `DAG_CYCLE_DETECTED` | El grafo no es un DAG bien formado. |
 | `COMMITTED_WITHOUT_SMT` | Un nodo `COMMITTED` declara `smt_verified` falso. |
@@ -139,10 +146,13 @@ una firma trivial para cualquier mensaje si la clave es de orden pequeño.
 | `QUORUM_INSUFFICIENT` | El peso LARSA declarado es menor que el exigido por el ancla. |
 | `LEAN4_PROOF_INVALID` | La constancia declarada no es `VERIFIED_NO_SORRY` con cero `sorry`. |
 | `CHAIN_LINK_MISMATCH` | El recibo no encadena con el punto de control aportado. |
-| `VERIFIER_INTERNAL_ERROR`, `UNVERIFIED_INPUT` | Excepción interna, o un objeto que no procede del verificador. |
+| `VERIFIER_INTERNAL_ERROR` | Excepción interna del verificador. `UNVERIFIED_INPUT` lo usa la interfaz para la cuarentena; el verificador no lo emite. |
 
 El orden topológico usa Kahn con montículo mínimo: O(V log V + E). El término
 logarítmico es el coste del desempate determinista por identificador.
+
+En TypeScript, `verifyExecutionPayloadWithAnchorText(bytes, anchorText)` es la entrada que comparten la
+CLI y el binding wasm: recibe el ancla como texto y aplica las mismas reglas.
 
 ## Correspondencia con el kernel
 
@@ -171,7 +181,7 @@ implementaciones byte a byte; no sustituye a ninguna de ellas.
 | Pieza | Qué hace | Ruta |
 | --- | --- | --- |
 | Biblioteca | Verifica (`verify_execution_payload_utf8`) y sella con una semilla de prueba (`seal_with_test_seed`). | [src](rust/src) |
-| CLI `b60-exec-receipt` | `verify --policy <json>` lee el recibo por entrada estándar y sale con 0 si acepta, 1 si rechaza y 2 ante un uso incorrecto o un error de E/S. Una entrada por encima de 16 MiB se rechaza sin interpretarla. `batch` procesa un objeto JSON por línea: una línea que no es UTF-8, no es JSON o supera 64 MiB recibe una respuesta `{"error": …}` y el lote continúa. | [main.rs](rust/src/main.rs) |
+| CLI `b60-exec-receipt` | `verify --policy <json>` lee el recibo por entrada estándar y sale con 0 si acepta, 1 si rechaza y 2 ante un uso incorrecto o un error de E/S. El ancla va como texto: si no se puede interpretar, el veredicto es `TRUST_POLICY_INVALID` (salida 1). Una entrada por encima de 16 MiB se rechaza sin interpretarla. `batch` procesa un objeto JSON por línea; `policy` puede ser el objeto o el texto del ancla, y una línea con claves repetidas recibe un error. Una línea que no es UTF-8, no es JSON o supera 64 MiB recibe una respuesta `{"error": …}` y el lote continúa. | [main.rs](rust/src/main.rs) |
 | Binding wasm | `verifyReceiptBytes(bytes, policy_json)`, solo verificación: la página nunca maneja claves privadas. | [wasm.rs](rust/src/wasm.rs) |
 
 Comandos, desde `tools/ui_kernel_console`:
@@ -196,8 +206,7 @@ node scripts/differential.mjs --cases 300 --mutants 8
 TypeScript con `seal` del crate y, para cada recibo y cada alteración, el
 veredicto de TypeScript (por la ruta de bytes UTF-8 y por la de texto JSON) con
 el de la CLI `batch`, el del binding wasm y, en una muestra, el de `verify` por
-entrada estándar, incluido el código de salida. Las alteraciones cubren campos,
-tipos, cotas, claves, firmas, la política y el texto: números no canónicos,
+entrada estándar, incluido el código de salida. Las alteraciones cubren campos, tipos, cotas, claves, firmas, la política y el texto, incluido el ancla como texto (escrituras numéricas, claves repetidas, sustitutos, BOM, profundidad y truncamientos): números no canónicos,
 BOM, sustitutos, anidación hasta el límite de 127 contenedores, claves
 duplicadas, escapes, truncamientos y UTF-8 inválido. Sale con 1 ante cualquier
 discrepancia. Es una prueba de consistencia: muestra que las dos

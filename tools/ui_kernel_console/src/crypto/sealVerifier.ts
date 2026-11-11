@@ -366,7 +366,12 @@ export function createReceiptVerifier(env?: VerifierEnvironment): ReceiptVerifie
 }
 
 /** Códigos con los que un anfitrión puede expresar que no llegó a haber recibo que verificar. */
-export type HostRejectionCode = "SCHEMA_INVALID" | "ED25519_UNSUPPORTED_RUNTIME" | "VERIFIER_INTERNAL_ERROR" | "UNVERIFIED_INPUT";
+export type HostRejectionCode =
+  | "SCHEMA_INVALID"
+  | "TRUST_POLICY_INVALID"
+  | "ED25519_UNSUPPORTED_RUNTIME"
+  | "VERIFIER_INTERNAL_ERROR"
+  | "UNVERIFIED_INPUT";
 
 /**
  * Veredicto negativo para fallos previos a la verificación (transporte caído, JSON ilegible,
@@ -429,6 +434,46 @@ export async function verifyExecutionPayloadUtf8(
     return rejectionVerdict("SCHEMA_INVALID", "el recibo no es UTF-8 válido");
   }
   return verifyExecutionPayloadJson(text, policy, verify);
+}
+
+/** Tamaño máximo del texto de un ancla, en unidades UTF-16 (como `String.length`). */
+export const MAX_ANCHOR_TEXT_LENGTH = 1024 * 1024;
+
+/**
+ * Interpreta el ancla dada como texto: longitud, claves no repetidas y forma JSON. Un entero vale
+ * en cualquier escritura que denote un entero seguro (`4`, `4.0`, `4e0`), como en el crate de
+ * referencia. Devuelve el valor sin validar la forma del ancla; eso lo hace `normalizePolicy`.
+ */
+export function parseAnchorText(
+  text: unknown
+): { readonly ok: true; readonly policy: unknown } | { readonly ok: false; readonly detail: string } {
+  if (typeof text !== "string") return { ok: false, detail: "el ancla debe llegar como texto" };
+  if (text.length > MAX_ANCHOR_TEXT_LENGTH) {
+    return { ok: false, detail: `ancla de ${text.length} caracteres supera el máximo ${MAX_ANCHOR_TEXT_LENGTH}` };
+  }
+  let value: unknown;
+  try {
+    value = JSON.parse(text) as unknown;
+  } catch {
+    return { ok: false, detail: "el ancla no es JSON válido en la forma admitida" };
+  }
+  const issue = jsonTextIssue(text, "anchor");
+  if (issue !== null) return { ok: false, detail: issue };
+  return { ok: true, policy: value };
+}
+
+/**
+ * Verifica un recibo (bytes UTF-8) con un ancla dada como texto. Un ancla que no se interpreta
+ * produce un veredicto `TRUST_POLICY_INVALID`: toda entrada produce un veredicto.
+ */
+export async function verifyExecutionPayloadWithAnchorText(
+  bytes: Uint8Array,
+  anchorText: string,
+  verify: ReceiptVerifier = verifyExecutionPayload
+): Promise<VerificationVerdict> {
+  const anchor = parseAnchorText(anchorText);
+  if (!anchor.ok) return rejectionVerdict("TRUST_POLICY_INVALID", anchor.detail);
+  return verifyExecutionPayloadUtf8(bytes, anchor.policy as TrustPolicy, verify);
 }
 
 /** Tope de fallos que lista un veredicto negativo. */

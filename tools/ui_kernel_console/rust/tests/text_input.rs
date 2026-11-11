@@ -74,3 +74,22 @@ fn nesting_limit_is_127_containers() {
     let detail = |v: &babylon60_exec_receipt::verify::Verdict| format!("{:?}", v);
     assert_ne!(detail(&inside), detail(&outside));
 }
+
+#[test]
+fn a_repeated_key_in_the_receipt_is_rejected_even_when_the_last_copy_is_valid() {
+    let (text, policy) = golden_text();
+    let id = golden().receipt["execution_id"]
+        .as_str()
+        .expect("id")
+        .to_owned();
+    let forged = text.replacen(
+        &format!("\"execution_id\":\"{id}\""),
+        &format!("\"execution_id\":\"FORGED-first\",\"execution_id\":\"{id}\""),
+        1,
+    );
+    assert_ne!(forged, text);
+    assert_eq!(
+        verify_execution_payload_json(&forged, &policy).codes(),
+        ["SCHEMA_INVALID"]
+    );
+}
