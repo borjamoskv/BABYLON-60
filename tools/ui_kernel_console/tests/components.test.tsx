@@ -56,6 +56,12 @@ test("visor: un recibo verificado se dibuja con todos sus nodos y aristas, acces
   assert.ok(markup.includes("INV_C5_FLASH_DEFENSE: Side-Effect Without Pre-Seal"));
   assert.ok(markup.includes("NEMESIS_TRAP") && markup.includes("COMMITTED"));
   assert.ok(!markup.includes("FAIL-CLOSED"));
+  // Dentro del SVG cada nodo muestra el hash abreviado, nunca entero (se solaparía con la etiqueta).
+  const svg = markup.slice(markup.indexOf("<svg"), markup.indexOf("</svg>"));
+  for (const entry of verdict.receipt.nodes) {
+    assert.ok(svg.includes(`>${entry.node.state_hash.slice(0, 10)}…</text>`), entry.node.node_id);
+    assert.ok(!svg.includes(entry.node.state_hash), `hash completo dentro del nodo ${entry.node.node_id}`);
+  }
 });
 
 test("visor: con cualquier veredicto negativo no se emite ni un nodo del recibo", async () => {
@@ -228,6 +234,8 @@ test("visibleText y shortHash", () => {
   assert.equal(visibleText("abcdef", 3), "abc… (+3)");
   assert.equal(shortHash("0x" + "ab".repeat(32), 10, 6), "0xabababab…ababab");
   assert.equal(shortHash("0x1234"), "0x1234");
+  assert.equal(shortHash("0x" + "ab".repeat(32), 10, 0), "0xabababab…", "sin sufijo cuando tail es 0");
+  assert.equal(shortHash("b3:" + "cd".repeat(32), 7, 4), "b3:cdcd…cdcd");
 });
 
 /** Clases definidas en la hoja de estilos del paquete. */

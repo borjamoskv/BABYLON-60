@@ -43,7 +43,9 @@ export function visibleText(text: string, maxCodePoints = 512): string {
   return out;
 }
 
-/** Abrevia un hash `0x…`/`b3:…` conservando prefijo y sufijo. */
+/** Abrevia un hash `0x…`/`b3:…` conservando `head` caracteres iniciales y `tail` finales (0 = ninguno). */
 export function shortHash(hash: string, head = 10, tail = 6): string {
-  return hash.length <= head + tail + 1 ? hash : `${hash.slice(0, head)}…${hash.slice(-tail)}`;
+  if (hash.length <= head + tail + 1) return hash;
+  // slice(-0) devolvería la cadena completa: el sufijo solo existe si tail > 0.
+  return `${hash.slice(0, head)}…${tail > 0 ? hash.slice(-tail) : ""}`;
 }
