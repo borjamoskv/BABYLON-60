@@ -54,6 +54,24 @@ omisiones, tanto en Python 3.11 como 3.12. Su paquete declara la revisión
 La comparación con la revisión local encontró 87 archivos distintos, incluidos
 instalador, CLI y MCP. Este antecedente no certifica los cambios actuales.
 
+## Actualización del 11 de noviembre de 2026: v5.1.0
+
+Estado para v5.1.0: **NO_VERIFICADO**. El tag `v5.1.0` del repositorio público
+apunta a `66ec0e30a8d19b8562e134e3c1eacda404944add`; `RELEASE_MANIFEST.json`
+registra el commit de release `e02cc29e7bfea6d987215a30a43fe10ecd397832`. El
+árbol no contiene un recibo nativo de Windows para ninguna de las dos revisiones.
+
+En el repositorio público, el workflow `Windows CLI and MCP` registra 37
+ejecuciones, todas por `pull_request`, y ninguna terminó con éxito. La más
+reciente, el [run 42986022633](https://github.com/borjamoskv/BABYLON-60/actions/runs/42986022633)
+sobre `79e79c1` ([PR #62](https://github.com/borjamoskv/BABYLON-60/pull/62)),
+falla en el paso «Install archive and verify CLI and MCP» con Python 3.11 y 3.12.
+Consulta hecha mediante la API de GitHub Actions el 11 de noviembre de 2026; no
+se relanzó ningún workflow ni se diagnosticó la causa del fallo.
+
+El README deja de afirmar que v5.1.0 se validó en Windows. La pasada nativa del
+run 39649886073 sigue limitada a la revisión `d619d05`.
+
 ## Reanudación
 
 Primero obtener el error de inicio concreto en la página autenticada del run.

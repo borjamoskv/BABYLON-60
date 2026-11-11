@@ -266,15 +266,18 @@ component = "01_KISH_ENGINE"
 
 [invariants.ax0_hardware_closure]
 claim_id = "CLAIM-AX0-HW-005"
-status = "ATTESTED_IN_SILICON"
-summary = "Cierre local nativo con atestación física de Secure Enclave / Touch ID (P-256 SEC1 / COSE_Sign1) y observación independiente."
+status = "NO_VERIFICADO"
+summary = "Objetivo: cierre local nativo de AUTH_002/AUTH_004 con firma Secure Enclave / Touch ID (P-256 SEC1 / COSE_Sign1) y observación independiente. Este árbol no contiene un recibo de ese cierre."
 enforced_by = ["AUTH_002", "AUTH_004"]
 verification_theorems = ["proof/lean/"]
-adversarial_suite = "tests/nemesis_wave_auth_ipc.py"
+adversarial_suite = "AUSENTE: tests/nemesis_wave_auth_ipc.py no existe en este árbol"
+hardware_entry_point = "tests/manual/hardware_mcp_cycle.py (manual, un intento); sin recibo registrado"
 post_restart_decoupled = true
 required_for_release = true
 evidence_level = "L3_ISOLATION"
 component = "00_ABZU_KERNEL"
+reviewed = "2026-11-11"
+notes = "El estado anterior, ATTESTED_IN_SILICON, no tenía recibo. docs/security/fl-mcp01-authority-drift.md:5 (validación biométrica hardware) y docs/security/harness-audit-2026-10-24.md:118-119 (presencia humana Secure Enclave en el paquete) la declaran NO_VERIFICADO. docs/security/EU_AI_ACT_NATIVE_2026-10-30.md registra una única firma Secure Enclave del gate regulatorio local (2026-10-30T02:50:48Z), observada por el operador: no ejercita AUTH_002/AUTH_004, no acredita ante terceros el origen de la clave ni la presencia humana (measurement_status UNAVAILABLE) y su challenge.json no forma parte de esta proyección pública. Los teoremas de proof/lean/ son L1 y no cubren hardware. Las suites secure_enclave_p256 y signed_dispatch_intent usan claves P-256 software."
 
 [invariants.mcp_lifecycle_confinement]
 claim_id = "CLAIM-MCP-006"
