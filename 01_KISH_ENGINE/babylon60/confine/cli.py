@@ -127,6 +127,18 @@ def run_command(args: argparse.Namespace) -> int:
     journal_path = Path(args.journal) if args.journal else default_journal()
     workspace = Path(args.workspace or os.getcwd()).absolute()
     package_dir = str(Path(__file__).resolve().parents[1])
+    # Protect the journal file itself: the ancestry of a symlink walks the link's directory, not the target's.
+    journal_path = Path(os.path.realpath(journal_path))
+    if not args.dry_run:
+        # The guard refuses write grants only over paths that exist: create the journal
+        # (directories 0700, file 0600) first, so a new one never sits inside a writable grant.
+        from babylon60.confine.journal import JournalError
+
+        try:
+            ConfineJournal(journal_path).close()
+        except JournalError as exc:
+            print(f"babylon60 run: {exc}", file=sys.stderr)
+            return EXIT_UNAVAILABLE
     try:
         policy = build_policy(
             workspace,
@@ -244,29 +256,93 @@ def demo_command(args: argparse.Namespace) -> int:
 
 
 def log_command(args: argparse.Namespace) -> int:
-    from babylon60.confine.journal import ConfineJournal
+    """Exit 0 when the chain verifies (and contains ``--expect-head``), 1 otherwise, 2 for a malformed head."""
+    from babylon60.confine.journal import ConfineJournal, JournalError
 
     path = Path(args.journal) if args.journal else default_journal()
+    expected: str | None = None
+    if args.expect_head is not None:
+        # The head as ``log`` prints it, with or without ``blake3:``, in any case; never a shortened one.
+        expected = args.expect_head.strip().lower().removeprefix("blake3:")
+        if len(expected) != 64 or any(char not in "0123456789abcdef" for char in expected):
+            print("babylon60 log: --expect-head needs a full head digest (64 hex digits)", file=sys.stderr)
+            return EXIT_USAGE
+
+    def expected_report(seq: int | None, after: int | None) -> dict[str, Any] | None:
+        if expected is None:
+            return None
+        return {"digest": expected, "found": seq is not None, "seq": seq, "events_after": after}
+
     if not path.exists():
-        print(f"babylon60 log: no journal at {path}")
-        return 0
-    with ConfineJournal(path) as journal:
-        check = journal.verify()
-        entries = journal.entries(limit=args.tail)
+        if args.json:
+            missing: dict[str, Any] = {
+                "verified": expected is None,
+                "chain_intact": True,
+                "events": 0,
+                "head": None,
+                "first_invalid_seq": None,
+                "reason": f"no journal at {path}",
+                "expected_head": expected_report(None, None),
+                "entries": [],
+            }
+            print(json.dumps(missing, indent=2, ensure_ascii=False))
+        else:
+            print(f"babylon60 log: no journal at {path}")
+            if expected is not None:
+                print(f"expected head blake3:{expected}: NOT FOUND, there is no journal")
+        return 0 if expected is None else 1
+    entries_error: str | None = None
+    try:
+        with ConfineJournal(path) as journal:
+            check = journal.verify(expect_head=expected)
+            try:
+                entries = journal.entries(limit=args.tail)
+            except JournalError as exc:
+                entries, entries_error = [], str(exc)
+    except JournalError as exc:
+        print(f"babylon60 log: {exc}", file=sys.stderr)
+        return 1
     if args.json:
         payload: dict[str, Any] = {
             "verified": check.ok,
+            "chain_intact": check.chain_intact,
             "events": check.events,
             "head": check.head,
             "first_invalid_seq": check.first_invalid_seq,
             "reason": check.reason,
+            "expected_head": expected_report(check.expected_seq, check.events_after_expected),
             "entries": [entry.__dict__ for entry in entries],
         }
-        print(json.dumps(payload, indent=2, ensure_ascii=False))
+        if entries_error:
+            payload["entries_error"] = entries_error
+        # repr() only for values a tampered row can hold that JSON cannot (blobs).
+        print(json.dumps(payload, indent=2, ensure_ascii=False, default=repr))
     else:
         for entry in entries:
-            summary = ", ".join(f"{k}={v}" for k, v in entry.body.items() if not isinstance(v, (dict, list)))[:120]
-            print(f"#{entry.seq:<6} {entry.kind:<13} blake3:{entry.digest[:12]}…  {summary}")
-        state = "verified" if check.ok else f"BROKEN at #{check.first_invalid_seq}: {check.reason}"
-        print(f"chain: {check.events} events, {state}, head blake3:{check.head[:16]}…")
+            fields = entry.body.items() if isinstance(entry.body, dict) else ()
+            summary = ", ".join(f"{k}={v}" for k, v in fields if not isinstance(v, (dict, list)))[:120]
+            print(f"#{entry.seq!s:<6} {entry.kind!s:<13} blake3:{entry.digest!s:.12}…  {summary}")
+        if entries_error:
+            print(f"entries: {entries_error}")
+        if check.chain_intact:
+            print(f"chain: {check.events} events, verified, head blake3:{check.head}")
+        else:
+            where = "" if check.first_invalid_seq is None else f" at #{check.first_invalid_seq}"
+            print(
+                f"chain: {check.events} events, BROKEN{where}: {check.reason}; last verified head blake3:{check.head}"
+            )
+        if expected is not None:
+            label = f"expected head blake3:{expected}"
+            after = check.events_after_expected
+            if check.expected_seq is None and check.chain_intact:
+                print(
+                    f"{label}: NOT FOUND, the journal was truncated, rolled back or replaced after it was published, "
+                    "or the head is from another journal"
+                )
+            elif check.expected_seq is None:
+                print(f"{label}: not found before the break")
+            elif not check.chain_intact:
+                print(f"{label}: found at #{check.expected_seq}, but the chain breaks after it")
+            else:
+                print(f"{label}: found at #{check.expected_seq}, followed by {after} event{'' if after == 1 else 's'}")
     return 0 if check.ok else 1
