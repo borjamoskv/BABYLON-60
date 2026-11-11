@@ -101,12 +101,12 @@ def test_schema_v2_vectors_limits_and_positives(recorded: tuple[demo.DemoReport,
     if LINUX:
         assert ids == [f"V{n:02d}" for n in range(1, 19)] + ["V22", "V23", "V24", "V25"]
     else:
-        assert ids == ["V01", "V02", "V03", "V04", "V05", "V06", "V09", "V10", *[f"V{n}" for n in range(13, 23)], "V25"]
+        assert ids == ["V01", "V02", "V03", "V04", "V05", "V06", "V09", "V10", *[f"V{n}" for n in range(13, 22)], "V25"]
     for row in doc["vectors"]:
         assert set(row) == {"id", "title", "expected", "results", "blocked", "passed", "inconclusive", "unfalsifiable"}
         assert row["blocked"] + row["passed"] + row["inconclusive"] + row["unfalsifiable"] == doc["repeat"]
     assert [row["id"] for row in doc["limits"]] == (
-        ["L1", "L2", "L4", "L5", "L6"] if LINUX else ["L1", "L2", "L4", "L6"]
+        ["L1", "L2", "L4", "L5", "L6"] if LINUX else ["L1", "L2", "L4", "L6", "L7"]
     )
     for row in doc["limits"]:
         assert set(row) == {
@@ -507,10 +507,10 @@ def test_vector_tables() -> None:
         assert new[vector_id].linux == () and set(new[vector_id].darwin) == {"EPERM", "EACCES"}
     # Round 2 (Linux): Landlock's ptrace scoping, then seccomp for keyrings, System V IPC and setid modes.
     assert [(new[i].linux, new[i].darwin, new[i].canary) for i in ("V22", "V23", "V24", "V25")] == [
-        (("EACCES",), ("EACCES", "EPERM"), False),  # macOS: KERN_PROCARGS2 and process-info, Seatbelt
+        (("EACCES",), (), False),  # macOS: KERN_PROCARGS2 is not mediated by Seatbelt (declared limit L7)
         (("EPERM",), (), False),  # kernel keyrings: Linux only
         (("EPERM",), (), False),  # System V shared memory: Linux only for now
-        (("EPERM",), ("EACCES", "EPERM"), False),  # macOS: file-write-setugid, Seatbelt
+        (("EPERM",), ("EACCES", "EPERM", "STRIPPED"), False),  # macOS: file-write-setugid, Seatbelt
     ]
     assert new["V25"].kind == "setid"
     limits = {limit.id: (limit.linux, limit.darwin) for limit in demo.LIMITS}
@@ -519,7 +519,8 @@ def test_vector_tables() -> None:
         "L2": ("open", "open"),
         "L4": ("open", "closed"),
         "L5": ("open", None),
-        "L6": ("open", "closed"),
+        "L6": ("open", "open"),
+        "L7": (None, "open"),
     }
     assert [p.id for p in demo.POSITIVES] == [f"P{n}" for n in range(1, 8)]
 

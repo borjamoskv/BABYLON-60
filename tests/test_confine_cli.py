@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import os
 from pathlib import Path
+import secrets
 import subprocess
 import sys
 
@@ -264,3 +265,37 @@ def test_the_hint_never_suggests_granting_a_shared_directory(tmp_path: Path) -> 
     hint = outside_grants_hint(str(_executable(shared / "tool")), homes, policy)  # type: ignore[arg-type]
     assert hint is not None and "--allow-read" in hint and f"--allow-read {shared}" not in hint, hint
     assert "copy it to a directory of your own" in hint
+
+
+@needs_backend
+@pytest.mark.skipif(
+    not sys.platform.startswith("linux"), reason="reads the launcher's /proc/<pid>/environ from outside"
+)
+def test_run_reexecutes_itself_without_the_withheld_variables(sandbox: dict[str, Path]) -> None:
+    """macOS lets the agent read its launcher's exec-time environment (KERN_PROCARGS2): nothing withheld stays there."""
+    token = "B60-CANARY-" + secrets.token_hex(8)
+    script = (
+        "import os, sys; print(os.getppid(), 'BABYLON60_RUN_WITHHELD' in os.environ, flush=True); sys.stdin.readline()"
+    )
+    env = {**os.environ, "HOME": str(sandbox["home"]), "PYTHONPATH": str(ROOT / "01_KISH_ENGINE"), "GH_TOKEN": token}
+    argv = [sys.executable, "-m", "babylon60.cli.main_dispatcher", "run", "--allow-root"]
+    argv += ["--journal", str(sandbox["journal"]), "--", sys.executable, "-I", "-S", "-c", script]
+    process = subprocess.Popen(
+        argv, env=env, cwd=str(sandbox["ws"]), stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE
+    )
+    try:
+        assert process.stdout is not None and process.stdin is not None
+        launcher_pid, leaked_marker = process.stdout.readline().split()
+        environ = Path(f"/proc/{int(launcher_pid)}/environ").read_bytes()  # read from outside the sandbox
+        process.stdin.write(b"\n")
+        process.stdin.close()
+        _out, err = process.communicate(timeout=120)
+    finally:
+        if process.poll() is None:
+            process.kill()
+            process.wait()
+    assert process.returncode == 0, err
+    assert token.encode() not in environ and b"GH_TOKEN=" not in environ, "the launcher still holds the withheld value"
+    assert b"GH_TOKEN" in err and leaked_marker == b"False"  # still reported; the internal list never reaches the agent
+    log = json.loads(_cli(sandbox, "log", "--journal", str(sandbox["journal"]), "--json").stdout)
+    assert "GH_TOKEN" in log["entries"][0]["body"]["env_removed"]

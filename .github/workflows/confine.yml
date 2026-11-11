@@ -42,7 +42,7 @@ jobs:
       - run: uv sync --locked --extra dev
       - name: Landlock confinement tests (unprivileged runner user)
         run: >-
-          uv run --locked --no-sync pytest -q -rs --maxfail=100 tests/test_confine_*.py
+          uv run --locked --no-sync pytest -q -rsxX --maxfail=100 tests/test_confine_*.py
         env:
           BABYLON60_REQUIRE_LANDLOCK: "1"
       - name: Record the first-block demo as evidence
@@ -76,7 +76,7 @@ jobs:
       - run: uv sync --locked --extra dev
       - name: Seatbelt confinement tests
         run: >-
-          uv run --locked --no-sync pytest -q -rs --maxfail=100 tests/test_confine_*.py
+          uv run --locked --no-sync pytest -q -rsxX --maxfail=100 tests/test_confine_*.py
         env:
           BABYLON60_REQUIRE_SEATBELT: "1"
       - name: Record the first-block demo as evidence

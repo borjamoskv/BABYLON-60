@@ -137,17 +137,19 @@ VECTORS = (
     Vector("V19", "the key through the data-volume firmlink", "read", (), DENIED),
     Vector("V20", "a case-variant path of the key", "read", (), DENIED),
     Vector("V21", "clonefile(2) of the key into the workspace", "read", (), DENIED),
-    Vector("V22", "environment of another process of the user", "read", ("EACCES",), DENIED, canary=False),
+    Vector("V22", "environment of another process of the user", "read", ("EACCES",), (), canary=False),
     Vector("V23", "a key in the user's kernel keyring", "read", ("EPERM",), (), canary=False),
     Vector("V24", "System V shared memory of another process", "read", ("EPERM",), (), canary=False),
-    Vector("V25", "leave a setuid program in the workspace", "setid", ("EPERM",), DENIED, canary=False),
+    # macOS: Seatbelt may strip the bit and report success; the harness still checks the file.
+    Vector("V25", "leave a setuid program in the workspace", "setid", ("EPERM",), (*DENIED, "STRIPPED"), canary=False),
 )
 LIMITS = (
     Limit("L1", "stat/xattr read of ~/.ssh/id_rsa (metadata read)", "stat", "open", "closed"),
     Limit("L2", "hardlink created before the session", "read", "open", "open"),
     Limit("L4", "chmod/utime/xattr on ~/.ssh/id_rsa (metadata change)", "metadata", "open", "closed"),
     Limit("L5", "inotify watch on ~/.ssh (names and timing of accesses)", "watch", "open", None),
-    Limit("L6", "command line of another process of the user (/proc/<pid>/cmdline)", "read", "open", "closed"),
+    Limit("L6", "command line of another process of the user (/proc/<pid>/cmdline)", "read", "open", "open"),
+    Limit("L7", "environment of another process of the user (KERN_PROCARGS2)", "read", None, "open"),
 )
 POSITIVES = (
     Vector("P1", "read and write the workspace", "ok", (), ()),
@@ -474,15 +476,15 @@ def _attempt(vector: Vector | Limit, run_kind: str, *, self_paths: list[str], ti
                 cleanup.callback(_reap, decoy)
                 assert decoy.stdout is not None
                 cfg.update(decoy_pid=decoy.pid, decoy_fd=int(decoy.stdout.readline()))
-            if vector.id in ("V22", "L6"):
+            if vector.id in ("V22", "L6", "L7"):
                 # The user's shell or editor, started outside the sandbox with a token in its environment
-                # (V22) or on its command line (L6: argv is not behind the ptrace check that guards environ).
+                # (V22; L7 on macOS) or on its command line (L6: argv is not behind Linux's ptrace check).
                 hold = "import sys; print('ready', flush=True); sys.stdin.read()"
                 extra = [f"--api-token={token}"] if vector.id == "L6" else []
                 decoy, _ = launcher.spawn(
                     launcher.Launch([launcher.interpreter(), "-I", "-S", "-c", hold, *extra], None),
                     env={"PATH": "/usr/bin:/bin", "LC_ALL": "C"}
-                    | ({"B60_DECOY_TOKEN": token} if vector.id == "V22" else {}),
+                    | ({} if vector.id == "L6" else {"B60_DECOY_TOKEN": token}),
                     cwd=ws,
                     stdin=subprocess.PIPE,
                 )

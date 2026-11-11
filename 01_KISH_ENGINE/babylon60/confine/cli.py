@@ -55,6 +55,8 @@ AGENT_CREDENTIALS = {
     "claude-code": ("ANTHROPIC_API_KEY", "CLAUDE_CODE_OAUTH_TOKEN", "ANTHROPIC_AUTH_TOKEN"),
     "codex": ("OPENAI_API_KEY", "CODEX_*"),
 }
+# Names (never values) the first launcher withheld before it re-executed itself without them.
+WITHHELD_VAR = "BABYLON60_RUN_WITHHELD"
 JOURNAL_NAMES = 100  # labels journaled per list; the rest are counted
 SHOWN_NAMES = 20  # labels printed per list
 LABEL_CHARS = 512
@@ -395,6 +397,29 @@ def agent_environment(
     return env, sorted(removed)
 
 
+def reexec_without_withheld(args: argparse.Namespace, passed: Sequence[str]) -> None:
+    """Replace this process with itself, minus the variables the agent will not receive.
+
+    A process's exec-time environment stays readable to the user's other processes on
+    macOS (sysctl KERN_PROCARGS2, ``ps -E``), and Seatbelt does not mediate it (measured
+    on macos-15): the agent could read from its own launcher what ``run`` withholds.
+    Linux already refuses it (Landlock's ptrace scope); the re-exec costs one interpreter
+    start and runs on every platform. Returns only when there is nothing to withhold or
+    this process is not the ``run`` command line.
+    """
+    if WITHHELD_VAR in os.environ or args.dry_run or "run" not in sys.argv[1:]:
+        return
+    env, removed = agent_environment(
+        os.environ, preset=args.preset, keep_agent_sockets=args.keep_agent_sockets, passed=passed
+    )
+    if not removed:
+        return
+    env[WITHHELD_VAR] = ",".join(removed)
+    sys.stdout.flush()
+    sys.stderr.flush()
+    os.execve(sys.executable, [sys.executable, "-m", "babylon60.cli.main_dispatcher", *sys.argv[1:]], env)
+
+
 def _bounded(labels: Sequence[str], limit: int) -> list[str]:
     shown = [label if len(label) <= LABEL_CHARS else label[: LABEL_CHARS - 1] + "…" for label in labels[:limit]]
     return shown + ([f"... and {len(labels) - limit} more"] if len(labels) > limit else [])
@@ -516,6 +541,7 @@ def run_command(args: argparse.Namespace) -> int:
     if any(not name or "=" in name for name in pass_env):
         print("babylon60 run: --pass-env takes a variable name, never NAME=VALUE", file=sys.stderr)
         return EXIT_USAGE
+    reexec_without_withheld(args, pass_env)
     if os.geteuid() == 0 and not args.allow_root:
         print(
             "babylon60 run: refusing to run as root. uid 0 keeps owner access to root-owned files inside "
@@ -601,6 +627,8 @@ def run_command(args: argparse.Namespace) -> int:
         env, removed = agent_environment(
             os.environ, preset=args.preset, keep_agent_sockets=args.keep_agent_sockets, passed=pass_env
         )
+        withheld = env.pop(WITHHELD_VAR, "")  # removed before the re-exec: names only
+        removed = sorted({*removed, *(name for name in withheld.split(",") if name)})
         env_removed = [printable(name) for name in removed]
         if env_removed:
             sockets = " (--keep-agent-sockets keeps the agent sockets)" if set(removed) & set(AGENT_SOCKET_VARS) else ""

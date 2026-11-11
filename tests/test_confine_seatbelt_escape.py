@@ -150,7 +150,7 @@ print(json.dumps(report), flush=True)
 # (KERN_PROCARGS2) of its parent and grandparent, outside the sandbox. Only the name is searched
 # for in argv-free form, so the launcher's own command line cannot produce a false positive.
 LAUNCHER_PROBE = r"""
-import ctypes, os, subprocess
+import ctypes, os
 libc = ctypes.CDLL(None, use_errno=True)
 
 def procargs(pid):
@@ -161,14 +161,9 @@ def procargs(pid):
         return b""
     return buffer.raw[: size.value]
 
-pid, seen = os.getppid(), []
-for _ in range(2):
-    if b"B60_PROBE_TOKEN=B60-CANARY-" in procargs(pid):
-        print("FOUND", pid, flush=True)
-    done = subprocess.run(["/bin/ps", "-o", "ppid=", "-p", str(pid)], capture_output=True, text=True)
-    if done.returncode or not done.stdout.strip():
-        break
-    pid = int(done.stdout.strip())
+# The launcher is this process's parent: run re-executes itself without the withheld variables.
+if b"B60_PROBE_TOKEN=B60-CANARY-" in procargs(os.getppid()):
+    print("FOUND", os.getppid(), flush=True)
 print("DONE", flush=True)
 """
 
@@ -333,6 +328,10 @@ def test_launchd_jobs_cannot_be_created(box: Box, how: str) -> None:
 
 
 @macos
+@pytest.mark.xfail(
+    strict=False,
+    reason="declared limit L7 (macOS): KERN_PROCARGS2 by MIB is not mediated by Seatbelt (measured on macos-15)",
+)
 @pytest.mark.parametrize("victim", ["interpreter", "/bin/sleep"])
 def test_the_environment_of_other_processes_is_not_readable(box: Box, victim: str) -> None:
     """XNU leaves out the environment of restricted targets (entitlements, setuid): try a plain one too."""
@@ -585,6 +584,11 @@ def test_processes_outside_the_sandbox_cannot_be_debugged(box: Box) -> None:
 
 
 @macos
+@pytest.mark.xfail(
+    strict=False,
+    reason="declared limit (macOS): hdiutil mounts through a DiskImages helper outside the sandbox; "
+    "file-mount covers only the caller's own mount(2) (measured on macos-15)",
+)
 def test_a_disk_image_cannot_be_mounted_over_a_directory_outside_the_grants(box: Box) -> None:
     """``target`` stands for /opt/homebrew/bin: owned by the user, on PATH, outside every grant."""
     target, payload = box.root / "bin", box.root / "payload"

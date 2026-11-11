@@ -28,6 +28,10 @@ XATTR_NOFOLLOW = 0x0001  # macOS <sys/xattr.h>
 TIOCSTI = getattr(termios, "TIOCSTI", 0x5412 if LINUX else 0x80017472)
 
 
+class Stripped(Exception):
+    """A mode change returned success but the setuid or setgid bit is not on the file (Seatbelt)."""
+
+
 def _read_fd(fd):
     try:
         return os.read(fd, 4096)
@@ -318,6 +322,8 @@ def v25_plant_setuid_program():
     with open(target, "w", encoding="ascii") as handle:
         handle.write("#!/bin/sh\nexec /bin/sh\n")
     os.chmod(target, 0o4755)
+    if not os.stat(target).st_mode & 0o6000:
+        raise Stripped("chmod succeeded but the file has no setuid bit")
     return b""
 
 
@@ -363,6 +369,11 @@ def l5_inotify_watch():
 
 def l6_command_line_of_other_process():
     return _process_strings("cmdline")
+
+
+def l7_environment_of_other_process():
+    # macOS: the same as V22 through KERN_PROCARGS2, which Seatbelt does not mediate.
+    return _process_strings("environ")
 
 
 def p1_workspace_read_write():
@@ -430,6 +441,9 @@ def main():
     except subprocess.SubprocessError as exc:
         report["result"] = "ESUBPROCESS"
         report["detail"] = str(exc)[:200]
+    except Stripped as exc:
+        report["result"] = "STRIPPED"
+        report["detail"] = str(exc)
     print(json.dumps(report), flush=True)
 
 
