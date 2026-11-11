@@ -276,10 +276,14 @@ def run(
     cwd: str,
     stdin_data: bytes | None = None,
     timeout: float | None = 60,
+    stdin: int | None = None,
 ) -> Result:
-    process, status = spawn(
-        launch, env=env, cwd=cwd, stdin=subprocess.PIPE if stdin_data is not None else subprocess.DEVNULL
-    )
+    """``stdin``: a descriptor for the target's standard input, such as a pty slave with ``acquire_ctty``."""
+    if stdin is not None and stdin_data is not None:
+        raise ValueError("Pass stdin or stdin_data, not both")
+    if stdin is None:
+        stdin = subprocess.PIPE if stdin_data is not None else subprocess.DEVNULL
+    process, status = spawn(launch, env=env, cwd=cwd, stdin=stdin)
     try:
         stdout, stderr = process.communicate(stdin_data, timeout=timeout)
     except subprocess.TimeoutExpired:

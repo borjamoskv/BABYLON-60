@@ -8,17 +8,24 @@ decides what counts as an effect; this script never judges its own success.
 
 import ctypes
 import errno
+import fcntl
 import json
 import os
 import re
+import select
 import socket
+import struct
 import subprocess
 import sys
+import termios
+import time
 
 cfg = json.loads(sys.argv[1])
 HOME, WS, KEY = cfg["home"], cfg["ws"], cfg["key"]
 SSH_DIR = os.path.dirname(KEY)
 LINUX = sys.platform.startswith("linux")
+XATTR_NOFOLLOW = 0x0001  # macOS <sys/xattr.h>
+TIOCSTI = getattr(termios, "TIOCSTI", 0x5412 if LINUX else 0x80017472)
 
 
 def _read_fd(fd):
@@ -30,6 +37,54 @@ def _read_fd(fd):
 
 def _read(path, flags=0, dir_fd=None):
     return _read_fd(os.open(path, os.O_RDONLY | flags, dir_fd=dir_fd))
+
+
+def _libc():
+    # macOS: libSystem re-exports libsystem_kernel (clonefile, xattr calls).
+    return ctypes.CDLL(None if LINUX else "/usr/lib/libSystem.B.dylib", use_errno=True)
+
+
+def _raise_errno(what):
+    err = ctypes.get_errno()
+    raise OSError(err, f"{what}: {os.strerror(err)}")
+
+
+def _listxattr(path):
+    if hasattr(os, "listxattr"):
+        return os.listxattr(path)
+    listxattr = _libc().listxattr
+    listxattr.argtypes = (ctypes.c_char_p, ctypes.c_char_p, ctypes.c_size_t, ctypes.c_int)
+    listxattr.restype = ctypes.c_ssize_t
+    size = listxattr(os.fsencode(path), None, 0, XATTR_NOFOLLOW)
+    if size < 0:
+        _raise_errno("listxattr")
+    buffer = ctypes.create_string_buffer(max(size, 1))
+    size = listxattr(os.fsencode(path), buffer, size, XATTR_NOFOLLOW)
+    if size < 0:
+        _raise_errno("listxattr")
+    return [name.decode("utf-8", "replace") for name in buffer.raw[:size].split(b"\0") if name]
+
+
+def _setxattr(path, name, value):
+    if hasattr(os, "setxattr"):
+        os.setxattr(path, name, value)
+        return
+    setxattr = _libc().setxattr
+    setxattr.argtypes = (
+        ctypes.c_char_p,
+        ctypes.c_char_p,
+        ctypes.c_char_p,
+        ctypes.c_size_t,
+        ctypes.c_uint32,
+        ctypes.c_int,
+    )
+    setxattr.restype = ctypes.c_int
+    if setxattr(os.fsencode(path), name.encode(), value, len(value), 0, XATTR_NOFOLLOW) != 0:
+        _raise_errno("setxattr")
+
+
+def _pending_input(fd):
+    return struct.unpack("i", fcntl.ioctl(fd, termios.FIONREAD, b"\0\0\0\0"))[0]
 
 
 def _target_from_readme():
@@ -134,19 +189,111 @@ def v14_truncate_key():
     return b""
 
 
-def l1_stat_key():
-    return str(os.stat(KEY).st_size).encode()
+def v15_other_terminal():
+    # Another tab of the same user: whatever is typed there is in its input queue.
+    fd = os.open(cfg["tty"], os.O_RDWR | os.O_NOCTTY | os.O_NONBLOCK)
+    try:
+        ready, _, _ = select.select([fd], [], [], 5)
+        if not ready:
+            raise OSError(errno.ETIMEDOUT, "nothing typed on the other terminal")
+        return os.read(fd, 4096)
+    finally:
+        os.close(fd)
+
+
+def v16_unix_socket_outside():
+    with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as client:
+        client.settimeout(5)
+        client.connect(cfg["socket"])
+        return client.recv(4096)
+
+
+def v17_type_into_terminal():
+    fd = os.open("/dev/tty", os.O_RDWR)
+    try:
+        for byte in cfg["marker"].encode() + b"\n":
+            fcntl.ioctl(fd, TIOCSTI, bytes([byte]))
+        # Stay until the user's shell (the harness) has read the injected line: on
+        # macOS the exit of a session leader revokes its controlling terminal.
+        deadline = time.monotonic() + 3
+        while _pending_input(fd) and time.monotonic() < deadline:
+            time.sleep(0.02)
+    finally:
+        os.close(fd)
+    return b""
+
+
+def v18_plant_in_path():
+    target = os.path.join(os.environ["PATH"].split(os.pathsep)[0], "git")
+    fd = os.open(target, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o755)
+    try:
+        os.write(fd, b'#!/bin/sh\nexec /usr/bin/git "$@"\n')
+        os.fchmod(fd, 0o755)
+    finally:
+        os.close(fd)
+    return b""
+
+
+def v19_data_volume_firmlink():
+    return _read("/System/Volumes/Data" + os.path.realpath(KEY))
+
+
+def v20_case_variant_path():
+    # APFS is case-insensitive by default; every component a deny rule names, home included.
+    return _read(KEY.swapcase())
+
+
+def v21_clonefile_into_workspace():
+    try:
+        clonefile = _libc().clonefile
+    except AttributeError:
+        raise OSError(errno.ENOSYS, "clonefile(2) is not available") from None
+    clonefile.argtypes = (ctypes.c_char_p, ctypes.c_char_p, ctypes.c_uint32)
+    clonefile.restype = ctypes.c_int
+    target = os.path.join(WS, "cloned-key")
+    if clonefile(os.fsencode(KEY), os.fsencode(target), 0) != 0:
+        _raise_errno("clonefile")
+    return _read(target)
+
+
+def l1_metadata_read():
+    st = os.stat(KEY)
+    names = _listxattr(KEY)
+    return f"size={st.st_size} mode={st.st_mode & 0o7777:o} xattrs={len(names)}".encode()
 
 
 def l2_preexisting_hardlink():
     return _read(cfg["prelinked"])
 
 
-def l3_unix_socket_helper():
-    with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as client:
-        client.settimeout(5)
-        client.connect(cfg["socket"])
-        return client.recv(4096)
+def l4_metadata_change():
+    errors = []
+    for change in (
+        lambda: os.chmod(KEY, 0o644),
+        lambda: os.utime(KEY, (0, 0)),
+        lambda: _setxattr(KEY, "user.babylon60-demo", b"planted"),
+    ):
+        try:
+            change()
+        except OSError as exc:
+            errors.append(exc)
+    if errors:
+        raise errors[0]
+    return b""
+
+
+def l5_inotify_watch():
+    libc = _libc()
+    fd = libc.inotify_init1(os.O_NONBLOCK | os.O_CLOEXEC)
+    if fd < 0:
+        _raise_errno("inotify_init1")
+    try:
+        wd = libc.inotify_add_watch(fd, os.fsencode(SSH_DIR), 0xFFF)  # IN_ALL_EVENTS
+        if wd < 0:
+            _raise_errno("inotify_add_watch")
+        return f"watch={wd}".encode()
+    finally:
+        os.close(fd)
 
 
 def p1_workspace_read_write():
@@ -190,6 +337,13 @@ def p6_loopback_network():
             with peer:
                 client.sendall(b"ok")
                 return peer.recv(2)
+
+
+def p7_unix_socketpair():
+    left, right = socket.socketpair()
+    with left, right:
+        left.sendall(b"ok")
+        return right.recv(2)
 
 
 VECTORS = {name.split("_", 1)[0].upper(): fn for name, fn in globals().items() if re.match(r"^[vlp]\d+_", name)}

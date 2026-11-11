@@ -5,14 +5,17 @@ sandbox (Linux). An open, read, write, rename or creation there is evidence of
 an effect, whatever the confined process reported. A queue overflow makes the
 observation inconclusive.
 
-``find_token`` scans bytes and files for the canary token in raw, hex and
-base64 form; it is the only witness available on macOS without privileges.
+``find_token`` scans bytes and files for the canary token in raw, hex (lower and
+upper case), base64 (standard and URL-safe, at each of the three byte
+alignments the token can have inside a longer encoded stream) and UTF-16 (LE
+and BE) form. With the snapshot of ``~/.ssh`` taken by the demo, it is the only
+witness available on macOS without privileges.
 """
 
 from __future__ import annotations
 
 import base64
-from collections.abc import Iterable, Sequence
+from collections.abc import Callable, Iterable, Sequence
 import ctypes
 from dataclasses import dataclass, field
 import os
@@ -111,9 +114,34 @@ class InotifyWitness:
             self._fd = -1
 
 
+def _base64_cores(raw: bytes, encode: Callable[[bytes], bytes]) -> list[bytes]:
+    """The base64 characters that depend only on ``raw`` when it starts at byte offset 0, 1 or 2 of a group.
+
+    Characters that also carry bits of the bytes before or after the token are
+    dropped, so the form matches wherever the token sits in a longer encoded stream.
+    """
+    cores = []
+    for shift in range(3):
+        encoded = encode(bytes(shift) + raw)
+        first = -(-8 * shift // 6)  # ceil: first character made only of token bits
+        last = 8 * (shift + len(raw)) // 6  # floor: end of the characters made only of token bits
+        cores.append(encoded[first:last])
+    return cores
+
+
 def token_forms(token: str) -> list[bytes]:
+    """Encodings of ``token`` that count as the token appearing somewhere."""
     raw = token.encode()
-    return [raw, raw.hex().encode(), base64.b64encode(raw).rstrip(b"=")]
+    forms = [
+        raw,
+        raw.hex().encode(),
+        raw.hex().upper().encode(),
+        *_base64_cores(raw, base64.b64encode),
+        *_base64_cores(raw, base64.urlsafe_b64encode),
+        token.encode("utf-16-le"),
+        token.encode("utf-16-be"),
+    ]
+    return [form for form in dict.fromkeys(forms) if form]
 
 
 def find_token(token: str, blobs: Iterable[bytes] = (), roots: Iterable[str] = ()) -> list[str]:
