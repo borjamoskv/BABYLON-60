@@ -438,6 +438,8 @@ def test_verify_release_rejects_governance_artifact_tampering(tmp_path: Path) ->
     assert is_excluded_from_public_tree("tests/test_skill_maintenance.py")
     assert is_excluded_from_public_tree("tests/test_swarm100_lot1_regressions_vault.py")
     assert not is_excluded_from_public_tree("tests/test_swarm100_lot1_regressions.py")
+    assert is_excluded_from_public_tree("tests/test_regulatory_native_validation_vault.py")
+    assert not is_excluded_from_public_tree("tests/test_regulatory_native_validation.py")
     assert not is_excluded_from_public_tree("01_KISH_ENGINE/babylon60/cli/main.py")
 
     root, bundle_path, _ = _create_release_fixture(tmp_path, signed=False)

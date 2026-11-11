@@ -88,6 +88,7 @@ VAULT_ONLY_PREFIXES = (
     "tests/test_swarm100_lot2_regressions_vault.py",
     "tests/test_swarm100_lot12_s5_regressions_vault.py",
     "tests/test_swarm100_round2_regressions_vault.py",
+    "tests/test_regulatory_native_validation_vault.py",
     "assets/brand/github-art-brut.svg",
     "assets/AppIcon.icns",
     "assets/babylon60_brutalist_logo_1024.png",
