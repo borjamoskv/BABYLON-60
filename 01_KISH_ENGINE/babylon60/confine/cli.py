@@ -1,8 +1,9 @@
 """Handlers for ``babylon60 run``, ``babylon60 demo`` and ``babylon60 log``.
 
-Exit codes: 0 success (demo: every counted attempt blocked); 1 demo FALSIFIED or
-journal chain broken; 2 demo INCONCLUSIVE or usage error; 3 no confinement
-backend or a refused policy; 126 the trampoline refused to start the target;
+Exit codes: 0 success (demo: every counted attempt blocked); 1 demo FALSIFIED,
+journal chain broken or ``log --expect-head`` digest absent; 2 demo INCONCLUSIVE,
+usage error or a malformed ``--expect-head``; 3 no confinement backend, a refused
+policy or an unusable journal; 126 the trampoline refused to start the target;
 127 command not found; otherwise the confined command's own exit code.
 """
 
@@ -16,6 +17,7 @@ from pathlib import Path
 import shutil
 import signal
 import sys
+import tempfile
 from typing import Any
 
 from blake3 import blake3
@@ -253,9 +255,10 @@ def hook_digests(preset: str | None, workspace: Path, home: str) -> dict[str, st
 
 
 def run_command(args: argparse.Namespace) -> int:
-    from babylon60.confine import launcher
-    from babylon60.confine.journal import ConfineJournal
+    from babylon60.confine import launcher, metadata
+    from babylon60.confine.journal import ConfineJournal, JournalError
     from babylon60.confine.policy import PolicyError, build_policy, default_homes
+    from babylon60.confine.terminals import session_ttys
 
     command = _strip_separator(list(args.command))
     if not command:
@@ -285,98 +288,131 @@ def run_command(args: argparse.Namespace) -> int:
     if not args.dry_run:
         # The guard refuses write grants only over paths that exist: create the journal
         # (directories 0700, file 0600) first, so a new one never sits inside a writable grant.
-        from babylon60.confine.journal import JournalError
-
         try:
             ConfineJournal(journal_path).close()
         except JournalError as exc:
             print(f"babylon60 run: {exc}", file=sys.stderr)
             return EXIT_UNAVAILABLE
-    try:
-        policy = build_policy(
-            workspace,
-            homes=homes,
-            read=args.allow_read,
-            write=args.allow_write,
-            runtime=[*trampoline_grants(), *executable_grants(executable, homes)],
-            preset=args.preset,
-            self_paths=[str(journal_path), sys.prefix, package_dir],
-            allow_ptys=args.allow_ptys,
-        )
-    except PolicyError as exc:
-        print(f"babylon60 run: {exc}", file=sys.stderr)
-        return EXIT_UNAVAILABLE
-    for skipped in policy.skipped:
-        if ": " in skipped:  # a guard refused it, as opposed to a missing path or a symlink
-            print(f"babylon60 run: not granted: {skipped}", file=sys.stderr)
-    hint = interpreter_hint(executable, homes, policy)
-    if hint:
-        print(f"babylon60 run: {hint}", file=sys.stderr)
-    if args.dry_run:
-        print(
-            json.dumps({"backend": launcher.backend(), "policy_digest": policy.digest(), **policy.as_dict()}, indent=2)
-        )
-        return 0
-    env = dict(os.environ)
-    if not args.keep_agent_sockets:
-        for name in AGENT_SOCKET_VARS:
-            env.pop(name, None)
-    launch = launcher.session_launch([executable, *command[1:]], policy, unix_sockets=args.allow_unix_sockets)
-    before = hook_digests(args.preset, workspace, homes[0])
-    with ConfineJournal(journal_path) as journal:
-        journal.append(
-            "run_start",
-            {
-                "backend": launcher.backend(),
-                "policy_digest": policy.digest(),
-                "preset": args.preset,
-                "command": os.path.basename(executable),
-                "argc": len(command),
-                "seccomp": launch.seccomp,
-                "unix_sockets": launch.unix_sockets,
-                "new_session": launch.new_session,
-            },
-        )
-        previous = signal.signal(signal.SIGINT, signal.SIG_IGN)
-        try:
-            process, status = launcher.spawn(
-                launch,
-                env=env,
-                cwd=str(workspace),
-                stdin=None,
-                stdout=None,
-                stderr=None,
+        links = os.stat(journal_path).st_nlink
+        if links > 1:
+            print(
+                f"babylon60 run: the journal has {links} hard links, so another path to it could be writable "
+                f"inside the sandbox: {journal_path}. Use a fresh --journal path.",
+                file=sys.stderr,
             )
-            if not status.get("ok"):
-                process.wait()
-                journal.append("run_refused", {"error": status.get("error", "unknown")})
-                print(f"babylon60 run: confinement refused: {status.get('error')}", file=sys.stderr)
-                return EXIT_REFUSED
-            if launch.new_session:
-                # The agent left the terminal session: relay Ctrl-C, hangups, resizes and job control to it.
-                with launcher.forward_signals(process):
-                    returncode = process.wait()
-            else:
-                returncode = process.wait()  # same session: the terminal signals the agent directly
-        finally:
-            signal.signal(signal.SIGINT, previous)
-        after = hook_digests(args.preset, workspace, homes[0])
-        changed = sorted(name for name in before if before[name] != after[name])
-        journal.append(
-            "run_end",
-            {
-                "exit_code": returncode,
-                "hooks_changed": changed,
-                "landlock_abi": status.get("landlock_abi"),
-                "caps_dropped": status.get("caps_dropped"),
-            },
-        )
-    if changed:
-        print(
-            "babylon60 run: the agent changed files that run outside the sandbox later: " + ", ".join(changed),
-            file=sys.stderr,
-        )
-    return returncode
+            return EXIT_UNAVAILABLE
+    # Each session gets its own temporary directory instead of the shared /tmp.
+    private_tmp = None if args.dry_run else tempfile.mkdtemp(prefix="babylon60-run-")
+    try:
+        try:
+            policy = build_policy(
+                workspace,
+                homes=homes,
+                read=args.allow_read,
+                write=args.allow_write,
+                runtime=[*trampoline_grants(), *executable_grants(executable, homes)],
+                preset=args.preset,
+                private_tmp=private_tmp,
+                self_paths=[str(journal_path), sys.prefix, package_dir],
+                ttys=session_ttys(),
+                allow_ptys=args.allow_ptys,
+            )
+        except PolicyError as exc:
+            print(f"babylon60 run: {exc}", file=sys.stderr)
+            return EXIT_UNAVAILABLE
+        for skipped in policy.skipped:
+            if ": " in skipped:  # a guard refused it, as opposed to a missing path or a symlink
+                print(f"babylon60 run: not granted: {skipped}", file=sys.stderr)
+        for warning in policy.warnings:
+            print(f"babylon60 run: warning: {warning}", file=sys.stderr)
+        hint = interpreter_hint(executable, homes, policy)
+        if hint:
+            print(f"babylon60 run: {hint}", file=sys.stderr)
+        if args.dry_run:
+            document = {"backend": launcher.backend(), "policy_digest": policy.digest(), **policy.as_dict()}
+            document["tmpdir"] = "a private directory, created for each run and removed afterwards"
+            print(json.dumps(document, indent=2))
+            return 0
+        assert private_tmp is not None
+        env = dict(os.environ)
+        if not args.keep_agent_sockets:
+            for name in AGENT_SOCKET_VARS:
+                env.pop(name, None)
+        env["TMPDIR"] = private_tmp
+        launch = launcher.session_launch([executable, *command[1:]], policy, unix_sockets=args.allow_unix_sockets)
+        before = hook_digests(args.preset, workspace, homes[0])
+        meta_before = metadata.snapshot(policy.homes, policy.protected)
+        with ConfineJournal(journal_path) as journal:
+            journal.append(
+                "run_start",
+                {
+                    "backend": launcher.backend(),
+                    "policy_digest": policy.digest(),
+                    "preset": args.preset,
+                    "command": os.path.basename(executable),
+                    "argc": len(command),
+                    "seccomp": launch.seccomp,
+                    "unix_sockets": launch.unix_sockets,
+                    "new_session": launch.new_session,
+                    "allow_ptys": policy.allow_ptys,
+                    "policy_warnings": len(policy.warnings),
+                },
+            )
+            previous = signal.signal(signal.SIGINT, signal.SIG_IGN)
+            try:
+                process, status = launcher.spawn(
+                    launch,
+                    env=env,
+                    cwd=str(workspace),
+                    stdin=None,
+                    stdout=None,
+                    stderr=None,
+                )
+                if not status.get("ok"):
+                    process.wait()
+                    journal.append("run_refused", {"error": status.get("error", "unknown")})
+                    print(f"babylon60 run: confinement refused: {status.get('error')}", file=sys.stderr)
+                    return EXIT_REFUSED
+                if launch.new_session:
+                    # The agent left the terminal session: relay Ctrl-C, hangups, resizes and job control to it.
+                    with launcher.forward_signals(process):
+                        returncode = process.wait()
+                else:
+                    returncode = process.wait()  # same session: the terminal signals the agent directly
+            finally:
+                signal.signal(signal.SIGINT, previous)
+            after = hook_digests(args.preset, workspace, homes[0])
+            changed = sorted(name for name in before if before[name] != after[name])
+            meta_after = metadata.snapshot(policy.homes, policy.protected)
+            meta_changed = metadata.changes(meta_before, meta_after)
+            journal.append(
+                "run_end",
+                {
+                    "exit_code": returncode,
+                    "hooks_changed": changed,
+                    "metadata_changed": meta_changed,
+                    "metadata_truncated": [meta_after.display(path) for path in meta_after.truncated],
+                    "landlock_abi": status.get("landlock_abi"),
+                    "caps_dropped": status.get("caps_dropped"),
+                },
+            )
+        if changed:
+            print(
+                "babylon60 run: the agent changed files that run outside the sandbox later: " + ", ".join(changed),
+                file=sys.stderr,
+            )
+        if meta_changed:
+            print(
+                "babylon60 run: permissions or ownership changed on the home or protected paths during the session "
+                "(Landlock does not mediate metadata):",
+                file=sys.stderr,
+            )
+            for line in meta_changed:
+                print(f"  {line}", file=sys.stderr)
+        return returncode
+    finally:
+        if private_tmp is not None:
+            shutil.rmtree(private_tmp, ignore_errors=True)
 
 
 def demo_command(args: argparse.Namespace) -> int:

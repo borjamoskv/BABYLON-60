@@ -114,7 +114,7 @@ def test_demo_writes_evidence_and_log_verifies(sandbox: dict[str, Path], tmp_pat
     assert result.returncode == 0, result.stdout + result.stderr
     assert "verdict: BLOCKED" in result.stdout
     document = json.loads(evidence.read_text())
-    assert document["schema"] == "babylon60.confine.demo/v1" and document["verdict"] == "BLOCKED"
+    assert document["schema"] == "babylon60.confine.demo/v2" and document["verdict"] == "BLOCKED"
     log = _cli(sandbox, "log", "--journal", str(sandbox["journal"]))
     assert log.returncode == 0 and "verified" in log.stdout
 
@@ -136,3 +136,49 @@ def test_demo_check_verifies_and_rejects_evidence(sandbox: dict[str, Path], tmp_
     evidence.write_text(json.dumps(document))
     bad = _cli(sandbox, "demo", "--check", str(evidence))
     assert bad.returncode == 1 and "MISMATCH" in bad.stdout
+
+
+@needs_backend
+def test_each_run_gets_a_private_tmpdir_that_is_removed(sandbox: dict[str, Path]) -> None:
+    script = (
+        'import os, sys, tempfile; d = os.environ["TMPDIR"]; print(d); '
+        'open(os.path.join(d, "scratch"), "w").write("ok"); '
+        'p = "/tmp/b60-shared-" + str(os.getpid())\n'
+        "try:\n    open(p, 'w').close(); print('tmp writable')\n"
+        "except OSError as e:\n    print('tmp denied', e.errno)"
+    )
+    result = _run(sandbox, sys.executable, "-I", "-S", "-c", script)
+    assert result.returncode == 0, result.stderr
+    private, outcome = result.stdout.splitlines()
+    assert os.path.basename(private).startswith("babylon60-run-") and not os.path.exists(private)
+    assert outcome.startswith("tmp denied") if sys.platform.startswith("linux") else outcome
+
+
+@needs_backend
+def test_permission_changes_on_protected_paths_are_reported_and_journaled(sandbox: dict[str, Path]) -> None:
+    key = sandbox["home"] / ".ssh" / "id_rsa"
+    key.chmod(0o600)
+    result = _run(sandbox, "chmod", "644", str(key))
+    if sys.platform == "darwin":  # Seatbelt denies metadata writes in the home
+        assert result.returncode != 0 and "permissions or ownership changed" not in result.stderr
+        return
+    assert result.returncode == 0, result.stderr  # Landlock (ABI <= 7) does not mediate chmod: a declared limit
+    assert "permissions or ownership changed" in result.stderr and "id_rsa" in result.stderr
+    log = json.loads(_cli(sandbox, "log", "--journal", str(sandbox["journal"]), "--json").stdout)
+    assert any("id_rsa" in line for line in log["entries"][-1]["body"]["metadata_changed"])
+
+
+def test_a_journal_with_another_hard_link_is_refused(sandbox: dict[str, Path], tmp_path: Path) -> None:
+    sandbox["journal"].parent.mkdir(parents=True)
+    sandbox["journal"].write_bytes(b"")
+    os.link(sandbox["journal"], sandbox["ws"] / "journal-alias.db")
+    result = _run(sandbox, "true")
+    assert result.returncode == 3 and "hard links" in result.stderr
+
+
+@needs_backend
+def test_policy_warnings_reach_stderr(sandbox: dict[str, Path], tmp_path: Path) -> None:
+    os.link(sandbox["home"] / ".ssh" / "id_rsa", tmp_path / "outside-alias")
+    result = _run(sandbox, "true")
+    assert result.returncode == 0, result.stderr
+    assert "babylon60 run: warning:" in result.stderr and "links" in result.stderr

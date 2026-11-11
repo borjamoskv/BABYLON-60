@@ -1,7 +1,9 @@
 """OS read confinement for terminal agents, with a chained local journal.
 
 Linux uses Landlock (unprivileged LSM); macOS uses Seatbelt via ``sandbox-exec``.
-The confinement covers filesystem paths only. Network access, Unix sockets with a
-path, already-open descriptors and links created before the session are declared
-limits, reported by ``babylon60 demo`` instead of counted as blocked.
+Filesystem paths are confined by Landlock or Seatbelt; on Linux a seccomp filter
+also blocks terminal injection, Unix domain sockets and io_uring. Network access,
+metadata operations (Linux), already-open descriptors and links created before the
+session are declared limits, reported by ``babylon60 demo`` instead of counted as
+blocked.
 """
