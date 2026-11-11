@@ -15,6 +15,7 @@ Valida:
 
 from __future__ import annotations
 
+import asyncio
 import httpx
 import secrets
 import pytest
@@ -210,3 +211,65 @@ async def test_live_network_ingestion_resilience() -> None:
     telemetry = dispatcher.telemetry
     assert telemetry.total_corrupted_dropped == 0
     assert telemetry.total_dispatched == len(frames)
+
+
+@pytest.mark.asyncio
+async def test_live_poll_delivers_frames_in_logical_tick_order(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Regresión: el feed que responde antes no debe acabar descartado como replay.
+
+    Cada sondeo asigna ticks Lamport cuando llega su respuesta. Aquí Code4rena
+    termina antes que GitHub Advisories, el orden que hizo fallar la CI; el
+    despachador, que rechaza ticks no crecientes, debe aceptar todas las tramas.
+    El transporte httpx es local: sin red, el test fija el orden de llegada.
+    """
+    transducer = BountyFeedTransducer()
+    dispatcher = BountyRingDispatcher()
+    code4rena_packed = asyncio.Event()
+    poll_code4rena = transducer.poll_code4rena_repos
+
+    async def code4rena_first(
+        client: httpx.AsyncClient, per_page: int = 10, recipient: str = "bounty_ring_dispatcher"
+    ) -> list[bytes]:
+        frames = await poll_code4rena(client, per_page=per_page, recipient=recipient)
+        code4rena_packed.set()
+        return frames
+
+    monkeypatch.setattr(transducer, "poll_code4rena_repos", code4rena_first)
+
+    advisories = [
+        {
+            "ghsa_id": f"GHSA-TICK-{n}",
+            "summary": f"Logical tick ordering advisory {n}",
+            "description": "Heap use after free in allocator",
+            "severity": "high",
+            "html_url": f"https://github.com/advisories/GHSA-TICK-{n}",
+            "vulnerabilities": [{"package": {"ecosystem": "pip"}}],
+        }
+        for n in range(3)
+    ]
+    repositories = [
+        {
+            "name": f"2026-11-tick-order-{n}",
+            "html_url": f"https://github.com/code-423n4/2026-11-tick-order-{n}",
+            "description": "Audit contest repository",
+        }
+        for n in range(3)
+    ]
+
+    async def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/advisories":
+            await code4rena_packed.wait()
+            return httpx.Response(200, json=advisories)
+        if request.url.path == "/orgs/code-423n4/repos":
+            return httpx.Response(200, json=repositories)
+        return httpx.Response(404)
+
+    async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
+        frames = await transducer.poll_live_network(client, per_page=3)
+
+    assert len(frames) == 6
+    for frame in frames:
+        dispatcher.dispatch_frame(frame)
+    telemetry = dispatcher.telemetry
+    assert telemetry.total_corrupted_dropped == 0
+    assert telemetry.total_dispatched == 6
