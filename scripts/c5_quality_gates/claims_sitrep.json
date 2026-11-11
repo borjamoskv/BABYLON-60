@@ -10,7 +10,7 @@
     "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
     "machine": "arm64"
   },
-  "claims_manifest_digest": "d4ca80d4e82978ce6e0ff5572a425f4126179e9e891fae2b3fe1b97c850e070d",
+  "claims_manifest_digest": "ed97bb4c8c57cbede73614d75f7ed35b96ce5111b394d2c29105ad3d98242d81",
   "total_claims": 28,
   "verified": 8,
   "partial": 19,
@@ -136,9 +136,86 @@
       "evidence_level": "L2_IMPLEMENTATION",
       "verified": false,
       "suite_passed": false,
-      "duration_s": 2.338,
+      "duration_s": 0.601,
       "component": "01_KISH_ENGINE",
-      "error": "============================= test session starts ==============================\nplatform darwin -- Python 3.14.7, pytest-9.0.3, pluggy-1.6.0\nrootdir: /Users/borjafernandezangulo/10_PROJECTS/BABYLON-6"
+      "error": "1 failed in 0.29s; FAILED tests/test_ax0_mcp_isolation.py::test_ax0_mcp_tools_list_omits_sign_off: ValueError: SKILLS_LOCK_MISMATCH: catalog, artifact or policy differs from the pinned lock",
+      "evidence_run": {
+        "source_commit": "2526ae35b2c89957f22d8c1ba63021626f513ab4",
+        "source_tree_digest": "048521d389971a8f6101598e5eb9dbe44eb3b7e0eb47e435ba9658e2bdef2fd1",
+        "claims_manifest_digest": "ed97bb4c8c57cbede73614d75f7ed35b96ce5111b394d2c29105ad3d98242d81",
+        "environment_digest": "4be5a8f161f407a62f7eae5df8498ab2e643a760674e0415dfc92063e740bcbe",
+        "environment": {
+          "rustc": "rustc 1.97.0 (2d8144b78 2026-07-07)",
+          "cargo": "cargo 1.97.0 (c980f4866 2026-06-30)",
+          "python": "3.13.18",
+          "platform": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
+          "machine": "x86_64"
+        },
+        "timestamp": 1794387738.4656613,
+        "timestamp_iso": "2026-11-11T09:02:18Z",
+        "command": "pytest tests/test_ax0_mcp_isolation.py",
+        "runner": "uv run --locked python -B rerun_claim.py -> scripts/c5_quality_gates/verify_claims.py:run_command (shell=False)",
+        "suite_passed": false,
+        "pytest_summary": "1 failed in 0.29s",
+        "failed_tests": [
+          "tests/test_ax0_mcp_isolation.py::test_ax0_mcp_tools_list_omits_sign_off"
+        ],
+        "exceptions": [
+          "ValueError: SKILLS_LOCK_MISMATCH: catalog, artifact or policy differs from the pinned lock"
+        ],
+        "diagnostic_runs": [
+          {
+            "revision": "daa0a848e5dce9d79446fe47dc4c3083061346a5",
+            "python": "3.13.18",
+            "command": "uv run --locked pytest tests/test_ax0_mcp_isolation.py -q",
+            "environment_note": "AGENTS.md closing command; pyproject addopts -x stops at the first failure",
+            "result": "1 failed in 0.63s",
+            "failed_tests": [
+              "tests/test_ax0_mcp_isolation.py::test_ax0_mcp_tools_list_omits_sign_off"
+            ],
+            "skills_lock_mismatch": true
+          },
+          {
+            "revision": "daa0a848e5dce9d79446fe47dc4c3083061346a5",
+            "python": "3.13.18",
+            "command": "uv run --locked pytest tests/test_ax0_mcp_isolation.py -q -rA --maxfail=1000 --tb=long",
+            "result": "3 failed in 0.60s",
+            "failed_tests": [
+              "tests/test_ax0_mcp_isolation.py::test_ax0_mcp_tools_list_omits_sign_off",
+              "tests/test_ax0_mcp_isolation.py::test_ax0_mcp_rejects_self_sign_off_call",
+              "tests/test_ax0_mcp_isolation.py::test_ax0_mcp_subprocess_stdio_quarantine"
+            ],
+            "skills_lock_mismatch": true
+          },
+          {
+            "revision": "daa0a848e5dce9d79446fe47dc4c3083061346a5",
+            "python": "3.12.3",
+            "command": "uv run --locked --python 3.12 pytest tests/test_ax0_mcp_isolation.py -q -rA --maxfail=1000 --tb=line",
+            "environment_note": "separate uv project environment (UV_PROJECT_ENVIRONMENT), same uv.lock",
+            "result": "3 failed in 1.19s",
+            "failed_tests": [
+              "tests/test_ax0_mcp_isolation.py::test_ax0_mcp_tools_list_omits_sign_off",
+              "tests/test_ax0_mcp_isolation.py::test_ax0_mcp_rejects_self_sign_off_call",
+              "tests/test_ax0_mcp_isolation.py::test_ax0_mcp_subprocess_stdio_quarantine"
+            ],
+            "skills_lock_mismatch": true
+          },
+          {
+            "revision": "daa0a848e5dce9d79446fe47dc4c3083061346a5",
+            "python": "3.14.6",
+            "command": "uv run --locked --python 3.14 pytest tests/test_ax0_mcp_isolation.py -q -rA --maxfail=1000 --tb=line",
+            "environment_note": "separate uv project environment (UV_PROJECT_ENVIRONMENT), same uv.lock",
+            "result": "3 failed in 1.13s",
+            "failed_tests": [
+              "tests/test_ax0_mcp_isolation.py::test_ax0_mcp_tools_list_omits_sign_off",
+              "tests/test_ax0_mcp_isolation.py::test_ax0_mcp_rejects_self_sign_off_call",
+              "tests/test_ax0_mcp_isolation.py::test_ax0_mcp_subprocess_stdio_quarantine"
+            ],
+            "skills_lock_mismatch": true
+          }
+        ],
+        "diagnosis": "CortexMCPServer.__init__ -> ImmutableSkillsSnapshot.load raises SKILLS_LOCK_MISMATCH: of 131 skills only cortex-kernel differs from docs/skills-lock.json (artifact_sha256, summary, tool_identity_hash); catalog_sha256 and total_skills match. The server refuses to start (fail-closed), so no AX-0 assertion is reached; this is not an observed self-authorization."
+      }
     },
     {
       "id": "AUTH_001",
@@ -300,5 +377,23 @@
       "duration_s": 5.075,
       "component": "01_KISH_ENGINE"
     }
-  ]
+  ],
+  "partial_rerun": {
+    "patch": "AX-170",
+    "patched_at_iso": "2026-11-11T09:04:27Z",
+    "claim_ids": [
+      "mcp_authority_gate"
+    ],
+    "reason": "Single-claim re-run of the declared evidence suite; verify_claims.py has no single-claim mode and a full run on this Linux host would re-execute 27 unrelated, partly macOS-only, claims.",
+    "carried_over": {
+      "source_commit": "e649125257edc4e925a6cd0350ec7c8646fbdb74",
+      "source_tree_digest": "690139397148991ab4557eb6d828077f134241c617f13a5ee71210763ee44f01",
+      "environment_digest": "aeca6fa7e3697e1c1b2553f47405e844d61eae784d6724b396ba9c7775b1bf7c",
+      "timestamp": 1794068727.051372,
+      "claims_manifest_digest": "d4ca80d4e82978ce6e0ff5572a425f4126179e9e891fae2b3fe1b97c850e070d",
+      "claims": 27,
+      "declarations_unchanged": true
+    },
+    "note": "Top-level source_commit, source_tree_digest, environment and timestamp still describe the run of the other 27 claims; the mcp_authority_gate entry carries its own evidence_run. claims_manifest_digest names the re-run CLAIMS.toml; the 27 carried-over declarations are identical in both manifests."
+  }
 }
