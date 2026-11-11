@@ -4,25 +4,32 @@ set -euo pipefail
 
 DRY_RUN=0
 START_MCP=0
+RUN_DEMO=0
 CLIENT=''
 while [ "$#" -gt 0 ]; do
     case "$1" in
         --dry-run) DRY_RUN=1; shift ;;
         --mcp) START_MCP=1; shift ;;
+        --demo) RUN_DEMO=1; shift ;;
         --client)
             if [ "$#" -lt 2 ] || [ "$2" != codex ]; then
                 echo 'Expected --client codex.' >&2; exit 2
             fi
             CLIENT="$2"; shift 2 ;;
         --help|-h)
-            echo 'Usage: bash install.sh [--dry-run] [--client codex | --mcp]'
-            echo 'Installs the terminal CLI; --client codex activates Codex; --mcp starts the stdio memory server.'
+            echo 'Usage: bash install.sh [--dry-run] [--client codex] [--demo | --mcp]'
+            echo 'Installs the terminal CLI; --client codex activates Codex; --demo runs the first-block demo'
+            echo '(Linux Landlock or macOS Seatbelt); --mcp starts the stdio memory server.'
             exit 0 ;;
         *) echo "Unknown option: $1" >&2; exit 2 ;;
     esac
 done
 if [ -n "$CLIENT" ] && [ "$START_MCP" = 1 ]; then
     echo '--client cannot be combined with --mcp; activate Codex separately before starting the stdio server.' >&2
+    exit 2
+fi
+if [ "$RUN_DEMO" = 1 ] && [ "$START_MCP" = 1 ]; then
+    echo '--demo cannot be combined with --mcp; run the demo before starting the stdio server.' >&2
     exit 2
 fi
 
@@ -57,6 +64,9 @@ if [ "$DRY_RUN" = 1 ]; then
         echo 'Codex integration: not activated.'
         printf 'Activate after installation: %q setup --client codex\n' "$CLI"
     fi
+    if [ "$RUN_DEMO" = 1 ]; then
+        printf 'Demo after installation (not executed): %q demo\n' "$CLI"
+    fi
     exit 0
 fi
 if ! command -v uv >/dev/null 2>&1; then
@@ -85,15 +95,23 @@ if [ "$START_MCP" = 1 ]; then
 fi
 if [ -n "$CLIENT" ]; then
     "$CLI" setup --client "$CLIENT"
-else
+elif [ "$RUN_DEMO" = 0 ]; then
     "$CLI" --help
+fi
+DEMO_STATUS=0
+if [ "$RUN_DEMO" = 1 ]; then
+    if "$CLI" demo; then DEMO_STATUS=0; else DEMO_STATUS=$?; fi
 fi
 echo "CLI installed: $CLI"
 echo "MCP stdio: $SERVER"
 printf 'Agents: read the presentation contract with %q presentation\n' "$CLI"
+if [ "$RUN_DEMO" = 0 ]; then
+    printf 'First block: %q demo\n' "$CLI"
+fi
 if [ -z "$CLIENT" ]; then
     echo 'Codex integration: not activated.'
     printf 'Next step: %q setup --client codex\n' "$CLI"
 else
     echo 'Next step: open a new Codex conversation to load Babylon; application of the preferences is not yet evaluated.'
 fi
+exit "$DEMO_STATUS"
