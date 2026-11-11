@@ -279,7 +279,7 @@ def run_command(args: argparse.Namespace) -> int:
     from babylon60.confine import launcher, metadata
     from babylon60.confine.journal import ConfineJournal, JournalError
     from babylon60.confine.policy import PolicyError, build_policy, default_homes
-    from babylon60.confine.terminals import session_ttys
+    from babylon60.confine.terminal_proxy import PrivateTerminal
 
     command = _strip_separator(list(args.command))
     if not command:
@@ -324,7 +324,14 @@ def run_command(args: argparse.Namespace) -> int:
             return EXIT_UNAVAILABLE
     # Each session gets its own temporary directory instead of the shared /tmp.
     private_tmp = None if args.dry_run else tempfile.mkdtemp(prefix="babylon60-run-")
+    terminal: PrivateTerminal | None = None
     try:
+        if not args.dry_run:
+            try:  # a terminal on 0-2 reaches the agent only through a private pseudo-terminal (terminal_proxy)
+                terminal = PrivateTerminal.open()
+            except OSError as exc:
+                print(f"babylon60 run: cannot allocate a private terminal for the agent: {exc}", file=sys.stderr)
+                return EXIT_UNAVAILABLE
         try:
             policy = build_policy(
                 workspace,
@@ -335,7 +342,7 @@ def run_command(args: argparse.Namespace) -> int:
                 preset=args.preset,
                 private_tmp=private_tmp,
                 self_paths=[str(journal_path), sys.prefix, package_dir],
-                ttys=session_ttys(),
+                ttys=terminal.ttys if terminal else [],
                 allow_ptys=args.allow_ptys,
                 links=executable_links(executable, homes),
             )
@@ -353,6 +360,10 @@ def run_command(args: argparse.Namespace) -> int:
         if args.dry_run:
             document = {"backend": launcher.backend(), "policy_digest": policy.digest(), **policy.as_dict()}
             document["tmpdir"] = "a private directory, created for each run and removed afterwards"
+            document["terminal"] = (
+                "a private pseudo-terminal, allocated for each run when stdin, stdout or stderr is a terminal "
+                "and relayed to it; the agent never holds the user's terminal"
+            )
             print(json.dumps(document, indent=2))
             return 0
         assert private_tmp is not None
@@ -361,7 +372,16 @@ def run_command(args: argparse.Namespace) -> int:
             for name in AGENT_SOCKET_VARS:
                 env.pop(name, None)
         env["TMPDIR"] = private_tmp
-        launch = launcher.session_launch([executable, *command[1:]], policy, unix_sockets=args.allow_unix_sockets)
+        launch = launcher.run_launch(
+            [executable, *command[1:]],
+            policy,
+            unix_sockets=args.allow_unix_sockets,
+            private_tty=terminal.private_tty if terminal else None,
+        )
+        # Inherited as ignored (nohup, a background job): the agent keeps them and nothing relays them.
+        ignored = launcher.ignored_signals()
+        # SIGINT is ignored below only for this process while it starts the agent.
+        launch.default_signals = () if signal.SIGINT in ignored else ("SIGINT",)
         before = hook_digests(args.preset, workspace, homes[0])
         meta_before = metadata.snapshot(policy.homes, policy.protected)
         with ConfineJournal(journal_path) as journal:
@@ -376,33 +396,35 @@ def run_command(args: argparse.Namespace) -> int:
                     "seccomp": launch.seccomp,
                     "unix_sockets": launch.unix_sockets,
                     "new_session": launch.new_session,
+                    "terminal": "private" if terminal else "none",
                     "allow_ptys": policy.allow_ptys,
                     "policy_warnings": len(policy.warnings),
                 },
             )
             previous = signal.signal(signal.SIGINT, signal.SIG_IGN)
             try:
+                launcher.become_subreaper()
+                stdin, stdout, stderr = terminal.agent_stdio() if terminal else (None, None, None)
                 process, status = launcher.spawn(
                     launch,
                     env=env,
                     cwd=str(workspace),
-                    stdin=None,
-                    stdout=None,
-                    stderr=None,
+                    stdin=stdin,
+                    stdout=stdout,
+                    stderr=stderr,
                 )
                 if not status.get("ok"):
                     process.wait()
                     journal.append("run_refused", {"error": status.get("error", "unknown")})
                     print(f"babylon60 run: confinement refused: {status.get('error')}", file=sys.stderr)
                     return EXIT_REFUSED
-                if launch.new_session:
-                    # The agent left the terminal session: relay Ctrl-C, hangups, resizes and job control to it.
-                    with launcher.forward_signals(process):
-                        returncode = process.wait()
-                else:
-                    returncode = process.wait()  # same session: the terminal signals the agent directly
+                # Relay the terminal (or signals) until the agent exits, then end whatever it left running:
+                # nothing it started can change files after the checks below.
+                session = launcher.supervise(process, status, terminal, ignored=ignored)
+                returncode = session.returncode
             finally:
                 signal.signal(signal.SIGINT, previous)
+                launcher.become_subreaper(False)
             after = hook_digests(args.preset, workspace, homes[0])
             changed = sorted(name for name in before if before[name] != after[name])
             meta_after = metadata.snapshot(policy.homes, policy.protected)
@@ -416,6 +438,8 @@ def run_command(args: argparse.Namespace) -> int:
                     "metadata_truncated": [meta_after.display(path) for path in meta_after.truncated],
                     "landlock_abi": status.get("landlock_abi"),
                     "caps_dropped": status.get("caps_dropped"),
+                    "ended_by": signal.Signals(session.ended_by).name if session.ended_by else None,
+                    "leftovers": session.leftovers,
                 },
             )
         if changed:
@@ -431,8 +455,10 @@ def run_command(args: argparse.Namespace) -> int:
             )
             for line in meta_changed:
                 print(f"  {line}", file=sys.stderr)
-        return returncode
+        return session.exit_code  # 128 + n when signal n killed the agent or (SIGTERM, SIGHUP) ended the session
     finally:
+        if terminal is not None:
+            terminal.close()
         if private_tmp is not None:
             shutil.rmtree(private_tmp, ignore_errors=True)
 

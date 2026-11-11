@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from collections.abc import Callable, Iterator
+from collections.abc import Callable, Iterable, Iterator
 from contextlib import contextmanager
 from dataclasses import dataclass, field
 import ctypes
@@ -12,12 +12,20 @@ from pathlib import Path
 import signal
 import subprocess
 import sys
-from typing import IO, Any
+import time
+from typing import IO, TYPE_CHECKING, Any
 
 from babylon60.confine.policy import MIN_LANDLOCK_ABI, Policy
 
+if TYPE_CHECKING:
+    from babylon60.confine.terminal_proxy import PrivateTerminal
+
 EXIT_REFUSED = 126
 TRAMPOLINE = Path(__file__).with_name("_landlock_exec.py")
+LINUX = sys.platform.startswith("linux")
+PR_SET_CHILD_SUBREAPER = 36
+LEFTOVER_GRACE = 1.0  # seconds between SIGTERM and SIGKILL for what the agent leaves behind
+LEFTOVER_PATIENCE = 5.0  # then at most this long for SIGKILL to take effect
 
 
 class ConfinementUnavailable(RuntimeError):
@@ -61,12 +69,21 @@ class Launch:
     drop_caps: bool = True
     min_abi: int = MIN_LANDLOCK_ABI
     unix_sockets: bool = False  # with seccomp (Linux) or Seatbelt (macOS), allow Unix domain sockets
-    new_session: bool = False  # trampoline drops the controlling terminal (setsid) before exec
+    new_session: bool = False  # trampoline starts a new session: no controlling terminal, or ``private_tty``
     acquire_ctty: bool = False  # test hook: stdin becomes the controlling terminal before confinement
+    # With new_session: (target descriptor among 0-2, st_rdev) of the private pseudo-terminal slave the launcher
+    # passed there; it becomes the controlling terminal and the target runs under a monitor (_landlock_exec.py).
+    private_tty: tuple[int, int] | None = None
+    default_signals: tuple[str, ...] = ()  # signals the launcher ignores only for itself: SIG_DFL for the target
 
 
 def session_launch(argv: list[str], policy: Policy, *, unix_sockets: bool = False) -> Launch:
-    """How ``babylon60 run`` and the demo start a confined target, on every platform."""
+    """The confinement layers of ``babylon60 run``, as the demo and the tests apply them.
+
+    seccomp on Linux; on macOS, where Seatbelt does not filter ioctls, a new
+    session without a controlling terminal. ``run_launch`` adds what ``run``
+    itself does with the terminal on every platform.
+    """
     return Launch(
         argv,
         policy,
@@ -76,12 +93,34 @@ def session_launch(argv: list[str], policy: Policy, *, unix_sockets: bool = Fals
     )
 
 
+def run_launch(
+    argv: list[str], policy: Policy, *, unix_sockets: bool = False, private_tty: tuple[int, int] | None = None
+) -> Launch:
+    """How ``babylon60 run`` starts the agent: ``session_launch`` in a new session, on every platform.
+
+    The agent's controlling terminal is the private pseudo-terminal the launcher
+    allocated (``private_tty``, see ``terminal_proxy``), or it has none: it never
+    holds the user's terminal.
+    """
+    launch = session_launch(argv, policy, unix_sockets=unix_sockets)
+    launch.new_session, launch.private_tty = True, private_tty
+    return launch
+
+
 FORWARDED_SIGNALS = ("SIGINT", "SIGTERM", "SIGHUP", "SIGQUIT", "SIGWINCH")
 
 
+def ignored_signals() -> frozenset[int]:
+    """Signals inherited as ignored (``nohup``, a background job): left alone; the target keeps them ignored."""
+    names = (*FORWARDED_SIGNALS, "SIGTSTP")
+    return frozenset(
+        getattr(signal, name) for name in names if signal.getsignal(getattr(signal, name)) == signal.SIG_IGN
+    )
+
+
 @contextmanager
-def forward_signals(process: subprocess.Popen[Any]) -> Iterator[None]:
-    """Relay terminal signals to a target started with ``new_session``.
+def forward_signals(process: subprocess.Popen[Any], *, ignored: Iterable[int] = ()) -> Iterator[None]:
+    """Relay terminal signals to a target started with ``new_session`` and no terminal (``run`` without a tty).
 
     Such a target leads its own session and process group, so the terminal no
     longer signals it: Ctrl-C, Ctrl-\\, hangups and window resizes reach only this
@@ -89,7 +128,9 @@ def forward_signals(process: subprocess.Popen[Any]) -> Iterator[None]:
     SIGWINCH go to the target's whole process group. SIGTSTP stops that group
     with SIGSTOP (the kernel discards SIGTSTP in an orphaned process group, which
     the target's group is) and then stops this launcher, so the shell gets the
-    terminal back; SIGCONT continues the group. Previous handlers come back on exit.
+    terminal back; SIGCONT continues the group. Signals in ``ignored`` (see
+    ``ignored_signals``) keep their disposition. Previous handlers come back on exit.
+    With a terminal, ``terminal_proxy.relay`` does this job.
     """
 
     def send(signum: int) -> None:
@@ -120,6 +161,8 @@ def forward_signals(process: subprocess.Popen[Any]) -> Iterator[None]:
     }
     handlers[signal.SIGTSTP] = suspend
     handlers[signal.SIGCONT] = resume
+    for signum in ignored:
+        handlers.pop(signum, None)
     previous: dict[int, Any] = {}
     try:
         for signum, handler in handlers.items():
@@ -197,6 +240,8 @@ class Result:
 def _command(launch: Launch, status_fd: int) -> list[str]:
     if not launch.argv or not os.path.isabs(launch.argv[0]):
         raise ValueError("The target command must be an absolute path")
+    if launch.private_tty is not None and (not launch.new_session or launch.acquire_ctty):
+        raise ValueError("private_tty needs new_session and excludes acquire_ctty")
     cfg: dict[str, Any] = {
         "status_fd": status_fd,
         "argv": launch.argv,
@@ -206,7 +251,11 @@ def _command(launch: Launch, status_fd: int) -> list[str]:
         "unix_sockets": launch.unix_sockets,
         "new_session": launch.new_session,
         "acquire_ctty": launch.acquire_ctty,
+        "default_signals": list(launch.default_signals),
     }
+    if launch.private_tty is not None:
+        fd, rdev = launch.private_tty
+        cfg["private_tty"] = {"fd": fd, "rdev": rdev}
     prefix: list[str] = []
     if launch.policy is not None:
         if sys.platform.startswith("linux"):
@@ -291,3 +340,223 @@ def run(
         stdout, stderr = process.communicate()
         status = {**status, "timeout": True}
     return Result(process.returncode, stdout, stderr, status)
+
+
+# --- what a session leaves behind ------------------------------------------------------------------
+
+
+def become_subreaper(enable: bool = True) -> bool:
+    """Linux: orphaned descendants are reparented to this process, not to init (``PR_SET_CHILD_SUBREAPER``).
+
+    ``end_descendants`` then reaches everything the session started, double-forked
+    and ``setsid`` daemons included. Returns whether the attribute is now set.
+    """
+    if not LINUX:
+        return False
+    libc = ctypes.CDLL(None, use_errno=True)
+    return libc.prctl(PR_SET_CHILD_SUBREAPER, int(enable), 0, 0, 0) == 0 and enable
+
+
+def wait_reaping(process: subprocess.Popen[Any]) -> int:
+    """Wait for ``process``; meanwhile reap the orphans a subreaper inherits, so none piles up as a zombie."""
+    while process.returncode is None:
+        try:
+            pid, status = os.waitpid(-1, 0)
+        except ChildProcessError:
+            return process.wait()
+        if pid == process.pid:
+            process.returncode = os.waitstatus_to_exitcode(status)
+    return process.returncode
+
+
+def reap(process: subprocess.Popen[Any] | None = None) -> None:
+    """Reap every child that has exited, recording the status of ``process`` if it is one of them."""
+    while True:
+        try:
+            pid, status = os.waitpid(-1, os.WNOHANG)
+        except ChildProcessError:
+            return
+        if pid == 0:
+            return
+        if process is not None and pid == process.pid and process.returncode is None:
+            process.returncode = os.waitstatus_to_exitcode(status)
+
+
+def _proc_stat(pid: int) -> tuple[int, int, str] | None:
+    """(parent pid, start time, state) from ``/proc/<pid>/stat``; None once the process is gone."""
+    try:
+        with open(f"/proc/{pid}/stat", "rb") as handle:
+            fields = handle.read().rsplit(b")", 1)[1].split()
+        return int(fields[1]), int(fields[19]), fields[0].decode("ascii", "replace")
+    except (OSError, IndexError, ValueError):
+        return None
+
+
+def descendants() -> dict[int, int]:
+    """Linux: the living descendants of this process, ``{pid: start time}``."""
+    table: dict[int, tuple[int, int, str]] = {}
+    for name in os.listdir("/proc"):
+        entry = _proc_stat(int(name)) if name.isdigit() else None
+        if entry is not None:
+            table[int(name)] = entry
+    children: dict[int, list[int]] = {}
+    for pid, (ppid, _start, _state) in table.items():
+        children.setdefault(ppid, []).append(pid)
+    found: dict[int, int] = {}
+    pending = list(children.get(os.getpid(), ()))
+    while pending:
+        pid = pending.pop()
+        _ppid, start, state = table[pid]
+        if state != "Z":
+            found[pid] = start
+        pending.extend(children.get(pid, ()))
+    return found
+
+
+def _signal(pid: int, start: int, signum: int) -> None:
+    """Signal ``pid`` only while it is the process that started at ``start``: through a pidfd, never a reused pid."""
+    try:
+        handle: int | None = os.pidfd_open(pid)
+    except OSError:
+        handle = None  # gone, or a kernel without pidfd: the start time still guards most of the window
+    try:
+        entry = _proc_stat(pid)
+        if entry is None or entry[1] != start:
+            return
+        if handle is not None:
+            signal.pidfd_send_signal(handle, signum)
+        else:
+            os.kill(pid, signum)
+    except OSError:
+        pass
+    finally:
+        if handle is not None:
+            os.close(handle)
+
+
+def end_descendants(
+    process: subprocess.Popen[Any] | None = None, *, grace: float = LEFTOVER_GRACE, patience: float = LEFTOVER_PATIENCE
+) -> int:
+    """Linux, as a subreaper: end every remaining descendant and reap it; return how many were running.
+
+    SIGTERM (and SIGCONT, for stopped ones) first, then SIGKILL for whatever is
+    left after ``grace`` seconds, until none remains or ``patience`` runs out.
+    """
+    if not LINUX:
+        return 0
+    reap(process)
+    found = descendants()
+    seen = dict(found)
+    for pid, start in found.items():
+        _signal(pid, start, signal.SIGTERM)
+        _signal(pid, start, signal.SIGCONT)
+    deadline = time.monotonic() + grace
+    while found and time.monotonic() < deadline:
+        time.sleep(0.02)
+        reap(process)
+        found = descendants()
+        seen.update(found)
+    deadline = time.monotonic() + patience
+    while found and time.monotonic() < deadline:
+        for pid, start in found.items():
+            _signal(pid, start, signal.SIGKILL)
+        time.sleep(0.01)
+        reap(process)
+        found = descendants()
+        seen.update(found)
+    reap(process)
+    return len(seen)
+
+
+def end_process_group(pgid: int, *, grace: float = LEFTOVER_GRACE) -> None:
+    """Without a subreaper (macOS): SIGTERM the group ``pgid``, SIGKILL it if anything is left after ``grace``."""
+    try:
+        os.killpg(pgid, signal.SIGTERM)
+        os.killpg(pgid, signal.SIGCONT)
+    except OSError:
+        return
+    deadline = time.monotonic() + grace
+    while time.monotonic() < deadline:
+        try:
+            os.killpg(pgid, 0)
+        except OSError:
+            return
+        time.sleep(0.02)
+    try:
+        os.killpg(pgid, signal.SIGKILL)
+    except OSError:
+        pass
+
+
+def end_session(process: subprocess.Popen[Any], agent_pgid: int | None) -> int | None:
+    """End what the agent left running once its session is over; return how many (Linux) or None.
+
+    Linux: every descendant, found through the subreaper. macOS has no
+    subreaper: the agent's process group (and the monitor, if it still runs)
+    is ended, and a descendant that left that group (``setsid``, ``setpgid``)
+    survives the session, still confined (declared limit).
+    """
+    if LINUX:
+        count: int | None = end_descendants(process)
+    else:
+        count = None
+        groups = [agent_pgid] if agent_pgid else []
+        if process.poll() is None:
+            groups.append(process.pid)  # not reaped yet, so its process group id cannot have been reused
+        for group in groups:
+            end_process_group(group)
+    if process.returncode is None:
+        try:
+            process.wait(timeout=LEFTOVER_PATIENCE)
+        except subprocess.TimeoutExpired:
+            process.kill()
+            process.wait()
+    return count
+
+
+@dataclass
+class Session:
+    returncode: int  # the agent's, as Popen reports it (-n: killed by signal n)
+    ended_by: int | None  # SIGTERM or SIGHUP sent to the launcher ended the session early
+    leftovers: int | None  # descendants still running when it ended (Linux), all ended; None elsewhere
+
+    @property
+    def exit_code(self) -> int:
+        """What ``run`` exits with: the agent's code, or 128 + n for signal n, as a shell reports it."""
+        if self.ended_by:
+            return 128 + self.ended_by
+        return self.returncode if self.returncode >= 0 else 128 - self.returncode
+
+
+def supervise(
+    process: subprocess.Popen[Any],
+    status: dict[str, Any],
+    terminal: PrivateTerminal | None,
+    *,
+    ignored: Iterable[int] = (),
+) -> Session:
+    """Wait for the agent's session started by ``spawn``, then end everything it left behind.
+
+    With a terminal, relay it through the private one (``terminal_proxy.relay``)
+    and hang that up when the session ends; without one, relay signals to the
+    agent's group (``forward_signals``). Either way ``end_session`` has ended the
+    agent's leftovers before this returns, so nothing the agent started can
+    change files after the caller's after-session checks.
+    """
+    from babylon60.confine import terminal_proxy
+
+    ended_by: int | None = None
+    agent_pgid = status.get("pid")
+    try:
+        if terminal is not None:
+            ended_by = terminal_proxy.relay(process, terminal, agent_pgid=agent_pgid, ignored=ignored)
+        else:
+            with forward_signals(process, ignored=ignored):
+                wait_reaping(process)
+    finally:
+        if terminal is not None:
+            terminal.close()  # the slave hangs up: a process left behind holds a dead terminal
+        leftovers = end_session(process, agent_pgid)
+    returncode = process.returncode
+    assert returncode is not None
+    return Session(returncode, ended_by, leftovers)

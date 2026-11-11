@@ -7,10 +7,18 @@ library only and never imports ``babylon60``. Order of operations:
    controlling terminal, as when the target inherits the user's terminal;
    refuse unless ``/dev/tty`` opens.
 2. Close every inherited descriptor except stdio and the status pipe.
-3. ``new_session``: leave the terminal session (``setsid``, or ``TIOCNOTTY`` when
-   this process already leads a process group) and refuse unless ``/dev/tty``
-   then fails with ENXIO. Without a controlling terminal ``TIOCSTI`` fails; this
-   is the defence on macOS, where Seatbelt does not filter ioctls.
+3. ``new_session``, in one of two forms, each verified:
+
+   * without ``private_tty``: leave the terminal session (``setsid``, or
+     ``TIOCNOTTY`` when this process already leads a process group) and refuse
+     unless ``/dev/tty`` then fails with ENXIO. Without a controlling terminal
+     ``TIOCSTI`` fails and the launcher's terminal is out of reach;
+   * with ``private_tty`` (``{"fd", "rdev"}``): the launcher allocated a
+     pseudo-terminal and passed its slave on some of descriptors 0-2. Refuse
+     unless every terminal among 0-2 is that device, then start a new session,
+     make the slave its controlling terminal (``TIOCSCTTY``) and refuse unless
+     ``tcgetpgrp`` and ``/dev/tty`` both name it (on Linux ``TIOCGDEV`` too).
+     The target never holds the user's terminal.
 4. If any capability is held (for example as root), lock the securebits, empty
    the bounding and ambient sets and clear every capability.
 5. Set ``NO_NEW_PRIVS``.
@@ -22,8 +30,17 @@ library only and never imports ``babylon60``. Order of operations:
    ``socket(AF_UNIX)`` unless Unix sockets are allowed (Landlock ABI <= 7 does
    not restrict connecting to a socket path: ssh-agent, gpg-agent, tmux, D-Bus,
    Docker) and io_uring, which creates and connects sockets without ``socket()``.
-8. Restore the signals Python ignores at startup, report the applied state as
-   one JSON line on the status pipe, then ``execv``.
+8. With ``private_tty``, fork: this process stays the session leader as a
+   monitor, already confined, and the target runs as its child in a process
+   group of its own, in the foreground of the private terminal. With a parent in
+   its session that group is not orphaned, so Ctrl-Z stops it (the kernel
+   discards SIGTSTP sent to an orphaned group). The monitor mirrors a stop with
+   SIGSTOP on itself (the launcher waits with WUNTRACED), continues the target's
+   group when the launcher continues it, and exits as the target did: the same
+   status, or the same signal.
+9. Restore the signals Python ignores at startup and those the launcher names in
+   ``default_signals`` (it ignores SIGINT while it starts the target), report the
+   applied state as one JSON line on the status pipe, then ``execv``.
 
 Any failure is reported on the pipe and ends the process with status 126,
 before the target runs.
@@ -37,6 +54,8 @@ import os
 import platform
 import resource
 import signal
+import stat
+import struct
 import sys
 import termios
 
@@ -76,6 +95,8 @@ SOCK_STREAM, SOCK_SEQPACKET, SOCK_TYPE_MASK = 1, 5, 0xF
 SETID_BITS = 0o6000  # S_ISUID | S_ISGID
 X32_SYSCALL_BIT = 0x40000000
 TIOCSTI, TIOCLINUX = 0x5412, 0x541C
+TIOCGDEV = 0x80045432  # Linux _IOR('T', 0x32, unsigned int): the device behind a terminal descriptor
+LINUX = sys.platform.startswith("linux")
 AF_UNIX = 1
 BPF_LD_W_ABS, BPF_JEQ_K, BPF_JGE_K, BPF_JSET_K, BPF_RET_K, BPF_ALU_AND_K = 0x20, 0x15, 0x35, 0x45, 0x06, 0x54
 SECCOMP_RET_ALLOW, SECCOMP_RET_EPERM = 0x7FFF0000, 0x00050000 | errno.EPERM
@@ -354,9 +375,126 @@ def _leave_terminal_session():
     return True
 
 
-def _restore_default_signals():
-    """Python ignores these at startup and exec keeps ignored signals; the target gets the defaults."""
-    for name in ("SIGPIPE", "SIGXFSZ"):
+def _terminal_device(fd):
+    """Linux: (major, minor) of the terminal behind a descriptor, also through ``/dev/tty``; None if unknown."""
+    if not LINUX:
+        return None
+    try:
+        raw = struct.unpack("I", fcntl.ioctl(fd, TIOCGDEV, b"\0" * 4))[0]
+    except OSError:
+        return None
+    return os.major(raw), os.minor(raw)
+
+
+def _enter_private_terminal(fd, rdev):
+    """New session whose controlling terminal is the launcher's private pseudo-terminal on ``fd``."""
+    if fd not in (0, 1, 2):
+        raise Refused(f"private terminal: descriptor {fd} is not standard input, output or error")
+    try:
+        held = os.fstat(fd)
+    except OSError as exc:
+        raise Refused(f"private terminal: descriptor {fd}: {exc.strerror}") from None
+    if not (stat.S_ISCHR(held.st_mode) and held.st_rdev == rdev and os.isatty(fd)):
+        raise Refused(f"private terminal: descriptor {fd} is not the launcher's pseudo-terminal")
+    for other in (0, 1, 2):
+        try:
+            foreign = os.isatty(other) and os.fstat(other).st_rdev != rdev
+        except OSError:
+            continue  # closed
+        if foreign:
+            raise Refused(f"descriptor {other} is a terminal other than the private one")
+    if os.getsid(0) != os.getpid():
+        try:
+            os.setsid()
+        except OSError as exc:
+            raise Refused(f"cannot start a new session for the private terminal: {exc.strerror}") from None
+    try:
+        fcntl.ioctl(fd, termios.TIOCSCTTY, 0)
+        owner = os.tcgetpgrp(fd)  # succeeds only on the caller's controlling terminal
+    except OSError as exc:
+        raise Refused(f"the private terminal cannot become the controlling terminal: {exc.strerror}") from None
+    if owner != os.getpgrp() or os.getsid(0) != os.getpid():
+        raise Refused("the private terminal is not the controlling terminal of the new session")
+    ctty = _open_ctty()
+    if ctty is None:
+        raise Refused("the new session has no controlling terminal")
+    try:
+        device = _terminal_device(ctty)
+        if os.tcgetpgrp(ctty) != owner or device not in (None, (os.major(rdev), os.minor(rdev))):
+            raise Refused("/dev/tty is not the private terminal")
+    except OSError as exc:
+        raise Refused(f"cannot check /dev/tty: {exc.strerror}") from None
+    finally:
+        os.close(ctty)
+    return True
+
+
+def _exit_like(status):
+    """Exit as a child with wait status ``status`` did: the same code, or the same signal (without a core)."""
+    code = os.waitstatus_to_exitcode(status)
+    if code >= 0:
+        os._exit(code)
+    signum = -code
+    try:
+        resource.setrlimit(resource.RLIMIT_CORE, (0, resource.getrlimit(resource.RLIMIT_CORE)[1]))
+        signal.signal(signum, signal.SIG_DFL)
+    except (OSError, ValueError):
+        pass
+    signal.pthread_sigmask(signal.SIG_UNBLOCK, {signum})
+    os.kill(os.getpid(), signum)
+    os._exit(128 + signum)  # still alive: a signal whose default action does not end a process
+
+
+def _monitor(child):
+    """Session leader of the private terminal while the target runs; never returns."""
+    try:
+        null = os.open("/dev/null", os.O_RDWR)
+        for fd in (0, 1, 2):
+            os.dup2(null, fd)  # the monitor holds no terminal descriptor
+        if null > 2:
+            os.close(null)
+    except OSError:
+        for fd in (0, 1, 2):
+            try:
+                os.close(fd)
+            except OSError:
+                pass
+    for name in ("SIGINT", "SIGQUIT", "SIGTSTP", "SIGTTIN", "SIGTTOU"):
+        signal.signal(getattr(signal, name), signal.SIG_IGN)  # meant for the target's group, never this one
+    while True:
+        try:
+            _pid, status = os.waitpid(child, os.WUNTRACED)
+        except ChildProcessError:
+            os._exit(EXIT_REFUSED)
+        if not os.WIFSTOPPED(status):
+            _exit_like(status)
+        os.kill(os.getpid(), signal.SIGSTOP)  # the launcher sees the stop and continues this process
+        try:
+            os.killpg(os.getpgid(child), signal.SIGCONT)
+        except OSError:
+            try:
+                os.kill(child, signal.SIGCONT)
+            except OSError:
+                pass
+
+
+def _fork_target(fd, status_fd):
+    """The parent becomes the monitor; the child returns in its own process group, in the foreground."""
+    child = os.fork()
+    if child:
+        os.close(status_fd)  # the launcher's read of the status pipe ends when the target execs
+        _monitor(child)
+    os.setpgid(0, 0)
+    previous = signal.signal(signal.SIGTTOU, signal.SIG_IGN)  # tcsetpgrp from a background group
+    try:
+        os.tcsetpgrp(fd, os.getpgrp())
+    finally:
+        signal.signal(signal.SIGTTOU, previous)
+
+
+def _restore_default_signals(names=()):
+    """Python ignores SIGPIPE and SIGXFSZ at startup, the launcher SIGINT; exec keeps ignored signals."""
+    for name in ("SIGPIPE", "SIGXFSZ", *names):
         if hasattr(signal, name):
             signal.signal(getattr(signal, name), signal.SIG_DFL)
 
@@ -374,8 +512,15 @@ def main():
             os.close(fd)
             report["acquire_ctty"] = True
         _close_inherited({status_fd})
+        private = cfg.get("private_tty")
+        if private and (not cfg.get("new_session") or cfg.get("acquire_ctty")):
+            raise Refused("private_tty needs new_session and excludes acquire_ctty")
         if cfg.get("new_session"):
-            report["new_session"] = _leave_terminal_session()
+            if private:
+                report["new_session"] = _enter_private_terminal(private["fd"], private["rdev"])
+            else:
+                report["new_session"] = _leave_terminal_session()
+            report["terminal"] = "private" if private else "none"
         if sys.platform.startswith("linux"):
             libc = _libc()
             report["caps_dropped"] = _drop_capabilities(libc) if cfg.get("drop_caps", True) else False
@@ -390,7 +535,10 @@ def main():
             report["caps"] = {key: status.get(key) for key in ("CapEff", "CapPrm", "CapBnd", "CapAmb")}
         elif cfg.get("landlock") or cfg.get("seccomp"):
             raise Refused("Landlock and seccomp are only available on Linux")
-        _restore_default_signals()
+        if private:
+            _fork_target(private["fd"], status_fd)
+        _restore_default_signals(cfg.get("default_signals", ()))
+        report["pid"] = os.getpid()
         report["ok"] = True
         os.write(status_fd, (json.dumps(report) + "\n").encode())
         os.execv(cfg["argv"][0], cfg["argv"])

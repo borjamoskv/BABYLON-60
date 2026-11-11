@@ -765,29 +765,18 @@ def test_forward_signals_suspends_and_resumes_the_agent_group(box: dict[str, Any
     assert json.loads(stdout) == {"exit": -signal.SIGTERM, "restored": True}
 
 
-# `babylon60 run` as on macOS (new_session), exercised on any platform by setting the flag.
-CLI_NEW_SESSION = r"""
-import sys
-from babylon60.confine import launcher
-plain = launcher.session_launch
-def session_launch(argv, policy, *, unix_sockets=False):
-    launch = plain(argv, policy, unix_sockets=unix_sockets)
-    launch.new_session = True
-    return launch
-launcher.session_launch = session_launch
-from babylon60.cli.main_dispatcher import main
-sys.argv = ["babylon60", *sys.argv[1:]]
-main()
-"""
-
-
 @needs_backend
 def test_run_cli_relays_signals_to_a_new_session_agent(box: dict[str, Any]) -> None:
-    command = [*_cli_run(box)[3:], *_python(SIGNAL_AGENT, str(box["ws"]))]
+    """``babylon60 run`` without a terminal: a new session on every platform, signals relayed to its group.
+
+    stdin is /dev/null so the run has no terminal even under an interactive pytest (with one, the
+    terminal is relayed through a private pseudo-terminal instead: tests/test_confine_pty.py).
+    """
     driver = subprocess.Popen(
-        [sys.executable, "-c", CLI_NEW_SESSION, *command],
+        [*_cli_run(box), *_python(SIGNAL_AGENT, str(box["ws"]))],
         env={**_cli_env(), "HOME": str(box["home"])},
         cwd=str(box["ws"]),
+        stdin=subprocess.DEVNULL,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         text=True,
@@ -809,4 +798,5 @@ def test_run_cli_relays_signals_to_a_new_session_agent(box: dict[str, Any]) -> N
     )
     entries = json.loads(log.stdout)["entries"]
     assert [e["kind"] for e in entries] == ["run_start", "run_end"]
-    assert entries[0]["body"]["new_session"] is True and entries[1]["body"]["exit_code"] == 0
+    assert entries[0]["body"]["new_session"] is True and entries[0]["body"]["terminal"] == "none"
+    assert entries[1]["body"]["exit_code"] == 0
