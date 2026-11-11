@@ -10,6 +10,36 @@ Model-agnostic authorization. Governed execution. Reproducible security evidence
 
 [Web](https://babylon60.com/) · [Guía de usuario](docs/03_guides/USER_GUIDE.md) · [Mapa del monorepo](#-mapa-del-monorepo-y-cámaras-arquitectónicas) · [Evidencia y límites](CLAIMS.toml) · [Seguridad](SECURITY.md)
 
+### Primer bloqueo en 5 minutos
+
+```bash
+git clone --depth 1 https://github.com/borjamoskv/BABYLON-60
+```
+
+```bash
+cd BABYLON-60 && bash install.sh --demo
+```
+
+Un agente de prueba sigue un README con una instrucción inyectada e intenta
+leer un `~/.ssh/id_rsa` señuelo dos veces: sin confinar y confinado por el
+sistema operativo (Landlock en Linux, Seatbelt en macOS). Un testigo fuera del
+sandbox comprueba el resultado y un diario encadenado lo registra.
+
+Ejecución registrada en Linux x86_64 (uid 65534, revisión `7b0e291`):
+14 vectores, 14 bloqueados y 0 pasaron. En estrés, 200 repeticiones dan 2.800
+intentos confinados, 2.800 bloqueados y 0 pasaron. Los 3 límites declarados
+siguen abiertos y macOS está `NO_VERIFICADO`.
+[Guía, cifras y límites](docs/03_guides/guide_primer_bloqueo.md).
+
+**Funciona con:**
+
+- `babylon60 run --preset claude-code -- claude`
+- `babylon60 run --preset codex -- codex`
+- Cualquier CLI de agente, con `babylon60 run -- <comando>`.
+
+El arranque confinado se ha comprobado en Linux; las sesiones con LLM están
+`NO_VERIFICADO`.
+
 > **En 10 segundos:**
 > **Intelligence is not authority.** BABYLON-60 se plantea como infraestructura de control de efectos autónomos: el agente decide qué intentar; BABYLON-60 debe determinar qué puede ocurrir dentro del perímetro protegido. Un modelo más capaz puede descubrir, planificar y proponer más acciones; eso no debe concederle permisos adicionales ($\text{INV-}\Omega$).
 > **Estado: alpha de seguridad.** La protección efectiva requiere tanto la verificación criptográfica del broker (`L2`) como el confinamiento de procesos del agente en el sistema operativo (`L3`). Una instalación de reglas/skills por sí sola NO impide que un agente no confinado escriba o ejecute comandos directamente.
