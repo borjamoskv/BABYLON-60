@@ -1,6 +1,6 @@
 {
   "version": "26.400",
-  "updated_at": "2026-10-18T18:29:58Z",
+  "updated_at": "2026-11-11T10:37:20Z",
   "exergy_scale_standard": "COMPILER_DERIVED_3_EVALUATORS (E1_Silicon + E2_Kolmogorov + E3_Causal = 21000)",
   "total_skills": 131,
   "average_exergy_density": 19205.19,
@@ -21,7 +21,7 @@
       "canonical_alias": "kernel-root",
       "scope": "kernel",
       "role": "arquitecto",
-      "description": "Manifiesto de invariantes transversales del ecosistema CORTEX. Dispara con \"kernel-root\", \"cortex kernel\".",
+      "description": "Manifiesto de invariantes transversales del ecosistema CORTEX (árbol de roles, gobernanza declarativa y límites termodinámicos).",
       "triggers": [
         "kernel-root",
         "cortex-kernel",
@@ -70,8 +70,9 @@
       },
       "canonical_alias": "kernel-shared-manifest",
       "scope": "workspace",
-      "description": "Módulo Ring-0. Dispara con \"kernel-shared-manifest\", \"shared manifest\", \"seqlock 64b\", \"ring-0 shm\", \"ipc lock-free\".",
+      "description": "Patrón de diseño C-ABI de 64 Bytes (Seqlock SPMC, Cero-Punteros, Fail-Stop SCITT y soporte IPC multiplataforma macOS/Linux/Windows).",
       "triggers": [
+        "/shared-manifest-kernel",
         "ipc lock-free",
         "kernel-shared-manifest",
         "ring-0 shm",
@@ -146,8 +147,9 @@
         "compiler_verified": true
       },
       "scope": "workspace",
-      "description": "Audita SPSC, SQLite L0, tiempo causal, LARSA y Rust–Lean. Dispara con \"kernel-invariants-audit\", \"babylon60-kernel-invariants\".",
+      "description": "Audita y prepara correcciones del kernel BABYLON-60 para SPSC, SQLite L0, relojes causales, consenso LARSA y correspondencia Rust–Lean. Usa el puente MCP local cuando esté disponible y distingue pruebas ejecutadas de obligaciones pendientes.",
       "triggers": [
+        "/babylon60-kernel-invariants",
         "babylon60-kernel-invariants",
         "kernel-invariants-audit"
       ]
@@ -167,7 +169,7 @@
       },
       "canonical_alias": "kernel-thermo-audit",
       "scope": "workspace",
-      "description": "Módulo Ring-0. Dispara con \"kernel-thermo-audit\", \"/thermo-audit\", \"auditoría termodinámica código\", \"fricción de silicio\", \"concurrencia landauer\", \"silicon concurrency audit\", \"grados de libertad parásitos\", \"potencia causal\".",
+      "description": "Auditoría termodinámica estricta de C5-REAL en silicio (Aritmética, Concurrencia, MDL, Ring-0, Seqlocks y Grados de Libertad Parásitos).",
       "triggers": [
         "/thermo-audit",
         "auditoría termodinámica código",
@@ -225,6 +227,7 @@
       "scope": "workspace",
       "description": "Enruta módulos BABYLON-60 del proyecto: SPSC, SQLite L0, arquitectura IDE, SharedManifest, launchd, Apple Silicon y auditoría de contención. Dispara con \"kernel-hub\", \"babylon kernel hub\", \"shared manifest\", \"thermo-audit\", \"rlhf sentinel\", \"apple-bypass\".",
       "triggers": [
+        "/c5-ring0-babylon-kernel-project",
         "apple-bypass",
         "babylon kernel hub",
         "c5-ring0-babylon-kernel-project",
@@ -324,9 +327,10 @@
       "canonical_alias": "kernel-rea-clean-room",
       "scope": "workspace",
       "role": "auditor",
-      "description": "Módulo Ring-0. Dispara con \"kernel-rea-clean-room\", \"c5-rea\", \"/c5-rea\", \"rea harness\", \"clean-room synthesis\", \"disección aot\", \"rea-triage\", \"rea-unpack\", \"rea-decompile\".",
+      "description": "Disección binaria AOT/Mach-O y Electron ASAR en memoria (<15ms), síntesis Clean-Room (TS/Rust/Python) y firewall Popperiano Existence-Gap.",
       "triggers": [
         "/c5-rea",
+        "/c5-rea-clean-room",
         "c5-rea",
         "c5-rea-clean-room",
         "clean-room synthesis",
@@ -360,7 +364,7 @@
       },
       "canonical_alias": "kernel-rlhf-sentinel",
       "scope": "workspace",
-      "description": "Módulo Ring-0. Dispara con \"kernel-rlhf-sentinel\", \"/rlhf-sentinel\", \"rlhf sentinel\", \"contención de ia\", \"fuga de llm\", \"quarantine ring-0\".",
+      "description": "Audita la barrera IPC (Ring-0) para detectar fallos de contención de IA (RLHF Breakthrough) y ataques estocásticos.",
       "triggers": [
         "/rlhf-sentinel",
         "contención de ia",
@@ -920,6 +924,7 @@
       "scope": "workspace",
       "description": "Enruta auditoría epistémica del proyecto, síntesis MDL, extracción de fuentes, biografía, simbiosis cognitiva y explicación clara. Dispara con \"epistemic-hub\", \"epistemic project hub\", \"auditoría epistémica\", \"cloud-chamber\", \"alpha extraction\", \"grill-me-v2\", \"wait-what\".",
       "triggers": [
+        "/c5-epistemic-thermodynamics-project",
         "alpha extraction",
         "auditoría epistémica",
         "c5-epistemic-thermodynamics-project",
@@ -1192,8 +1197,9 @@
       },
       "canonical_alias": "epistemic-audit",
       "scope": "workspace",
-      "description": "Módulo epistémico. Dispara con \"epistemic-audit\", \"auditoría epistémica\", \"postmortem mcts\", \"desacople ontológico\", \"auditoría ultrathink\".",
+      "description": "Auditoría epistémica profunda (ULTRATHINK) basada en el marco termodinámico C5-REAL. Ejecuta un desacople ontológico estricto entre \"Estado/Memoria\" y \"Lógica/Cálculo\", mapeando conceptos a invariantes termodinámicas (Curry-Howard, Landauer).",
       "triggers": [
+        "/c5-ultrathink-epistemic-audit",
         "auditoría epistémica",
         "auditoría ultrathink",
         "c5-ultrathink-epistemic-audit",
@@ -1245,6 +1251,7 @@
       "scope": "workspace",
       "description": "Enruta módulos del proyecto para minería LoRA con enjambres, instalación guiada y redacción para agentes. Dispara con \"swarm-hub\", \"cortex project hub\", \"hub cortex proyecto\", \"swarm router proyecto\", \"lora swarm\", \"wizard\", \"writing-for-agents\".",
       "triggers": [
+        "/c5-cortex-swarm-orchestrator-project",
         "c5-cortex-swarm-orchestrator-project",
         "cortex project hub",
         "hub cortex proyecto",
@@ -1350,7 +1357,7 @@
       },
       "canonical_alias": "epistemic-mdl-synthesizer",
       "scope": "workspace",
-      "description": "Módulo epistémico. Dispara con \"epistemic-mdl-synthesizer\", \"/cloud-chamber\", \"cámara de niebla\", \"máxima densidad topológica\", \"colapso mdl\".",
+      "description": "Ejecuta la Metodología de Cámara de Niebla forzando síntesis de alta densidad topológica (MDL / Invariantes C5-REAL).",
       "triggers": [
         "/cloud-chamber",
         "cloud-chamber",
@@ -1434,8 +1441,9 @@
       },
       "canonical_alias": "socratic-interrogator",
       "scope": "workspace",
-      "description": "Módulo epistémico. Dispara con \"socratic-interrogator\", \"grill-me-v2\", \"/grill-me-v2\", \"socratic audit\", \"interrogatorio socrático\".",
+      "description": "Versión avanzada de interrogatorio socrático (C5-REAL) para alinear decisiones de diseño y purgar asunciones infundadas.",
       "triggers": [
+        "/grill-me",
         "/grill-me-v2",
         "grill-me-v2",
         "interrogatorio socrático",
@@ -1541,7 +1549,7 @@
       },
       "canonical_alias": "kernel-apple-bypass",
       "scope": "workspace",
-      "description": "Módulo Ring-0. Dispara con \"kernel-apple-bypass\", \"apple-bypass\", \"/apple-bypass\", \"bypass termodinámico\", \"evadir jetsam macos\", \"liberar memoria mps\".",
+      "description": "Mitigación de presión de memoria para LLMs locales en Apple Silicon.",
       "triggers": [
         "/apple-bypass",
         "apple-bypass",
@@ -1593,7 +1601,7 @@
       },
       "canonical_alias": "epistemic-simplifier",
       "scope": "workspace",
-      "description": "Módulo epistémico. Dispara con \"epistemic-simplifier\", \"wait-what\", \"/wait-what\", \"freno epistémico\", \"explícalo simple\", \"no entiendo nada\", \"simplifica respuesta\", \"fuera de aqui todo esto\", \"fuera de aqui todo eto\", \"quita todo esto\", \"déjate de rollos\".",
+      "description": "Freno epistémico para combatir verbosidad, forzar ASD-STE-100 y aterrizar conceptos a lenguaje directo.",
       "triggers": [
         "/wait-what",
         "déjate de rollos",
@@ -1730,7 +1738,7 @@
       },
       "canonical_alias": "wetware-adaptive-cron",
       "scope": "workspace",
-      "description": "Módulo Wetware/Venture. Dispara con \"wetware-adaptive-cron\", \"adaptive-cron\", \"/adaptive-cron\", \"límite de disipación crítica\", \"burnout cognitivo\", \"cron adaptativo\".",
+      "description": "Resume carga operativa mediante observables verificables y conserva el control de sesión del operador.",
       "triggers": [
         "/adaptive-cron",
         "adaptive-cron",
@@ -1755,8 +1763,9 @@
       },
       "canonical_alias": "epistemic-symbiotic-cognition",
       "scope": "workspace",
-      "description": "Módulo epistémico. Dispara con \"epistemic-symbiotic-cognition\", \"tú y yo\", \"simbiosis cognitiva\", \"valor ontológico agente\", \"tensor de transducción\", \"itera simbiótica\".",
+      "description": "Protocolo de formalización de la díada simbiótica operador-agente, evaluación de Valor Ontológico (V_A), Tensor de Transducción Polímata y colapso autopoyético con el comando \"itera simbiótica\".",
       "triggers": [
+        "/symbiotic-cognitive-architecture",
         "epistemic-symbiotic-cognition",
         "itera simbiótica",
         "simbiosis cognitiva",
@@ -1809,8 +1818,9 @@
       },
       "canonical_alias": "kernel-daemon-deploy",
       "scope": "workspace",
-      "description": "Módulo Ring-0. Dispara con \"kernel-daemon-deploy\", \"c5-sovereign-daemon-deployment\", \"desplegar sovereign daemon\", \"launchd rust daemon\", \"daemon 24/7\".",
+      "description": "Protocolo estricto para desplegar el Sovereign Spark Daemon (Antigravity Engine en Rust) sobre el sistema init local de macOS (launchd) para ejecución 24/7 ininterrumpida.",
       "triggers": [
+        "/c5-sovereign-daemon-deployment",
         "c5-sovereign-daemon-deployment",
         "daemon 24/7",
         "desplegar sovereign daemon",
@@ -1930,6 +1940,7 @@
       "scope": "workspace",
       "description": "Enruta el módulo del proyecto para el límite de disipación y el cron adaptativo. Dispara con \"wetware project hub\", \"wetware-hub\", \"venture project hub\", \"hub wetware proyecto\", \"adaptive-cron\".",
       "triggers": [
+        "/c5-wetware-and-venture-ops-project",
         "adaptive-cron",
         "c5-wetware-and-venture-ops-project",
         "hub wetware proyecto",
@@ -2203,6 +2214,7 @@
       "scope": "workspace",
       "description": "Enruta módulos del proyecto para pipelines audiovisuales y auditoría de interfaces. Dispara con \"media-hub\", \"audiovisual project hub\", \"hub audiovisual proyecto\", \"media router proyecto\", \"audiovisual-sota\", \"anti-slop ui\".",
       "triggers": [
+        "/c5-audiovisual-acreativo-sota-project",
         "anti-slop ui",
         "audiovisual project hub",
         "audiovisual-sota",
@@ -2255,8 +2267,9 @@
       },
       "canonical_alias": "kernel-ide-architecture",
       "scope": "workspace",
-      "description": "Módulo Ring-0. Dispara con \"kernel-ide-architecture\", \"babylon60-architecture\", \"arquitectura babylon60\", \"patrones ide babylon\", \"babylon60 ide\".",
+      "description": "Patrones de arquitectura de Babylon60 IDE (instaladores 1-clic autorreparables, tokens Ed25519 SCITT, OpenRouter Gateway, SSO corporativo y escala exérgica 1-21000).",
       "triggers": [
+        "/babylon60-architecture",
         "arquitectura babylon60",
         "babylon60 ide",
         "babylon60-architecture",
@@ -2279,12 +2292,12 @@
       },
       "canonical_alias": "alpha-extractor",
       "scope": "workspace",
-      "description": "Módulo epistémico. Dispara con \"alpha-extractor\", \"c5-alpha-extraction-pipeline\", \"extraer alfa algorítmico\", \"alpha extraction\", \"deep research arxiv\", \"larsa 120 alpha\".",
+      "description": "Protocol to extract high-exergy algorithmic alpha from arXiv and GitHub directly from raw sources (LaTeX/Git) bypassing PDFs, followed by LARSA-120 formalization.",
       "triggers": [
+        "/c5-alpha-extraction-pipeline",
         "alpha extraction",
         "alpha-extractor",
         "c5-alpha-extraction-pipeline",
-        "deep research arxiv",
         "extraer alfa algorítmico",
         "larsa 120 alpha"
       ]
@@ -2333,8 +2346,9 @@
       },
       "canonical_alias": "media-ui-linter",
       "scope": "workspace",
-      "description": "Módulo audiovisual. Dispara con \"media-ui-linter\", \"anti-slop ui\", \"impeccable c5\", \"linter de diseño\", \"auditoría ui\", \"pulir frontend\", \"erradicar ai slop\".",
+      "description": "Revisa diseño y accesibilidad de interfaces; distingue comprobaciones léxicas parciales de verificación sobre la interfaz renderizada.",
       "triggers": [
+        "/c5-anti-slop-ui",
         "anti-slop ui",
         "auditoría ui",
         "c5-anti-slop-ui",
@@ -2695,7 +2709,7 @@
       },
       "canonical_alias": "epistemic-biographical-thermo",
       "scope": "workspace",
-      "description": "Módulo epistémico. Dispara con \"epistemic-biographical-thermo\", \"biografía termodinámica\", \"/biographical-thermo\", \"trayectoria termodinámica\", \"análisis biográfico termodinámico\".",
+      "description": "Analiza trayectorias vitales, historia y filosofía mediante Mapeo Estructural C5-REAL (Termodinámica Discreta).",
       "triggers": [
         "/biographical-thermo",
         "análisis biográfico termodinámico",
@@ -2748,8 +2762,9 @@
       },
       "canonical_alias": "swarm-lora-pipeline",
       "scope": "workspace",
-      "description": "Módulo CORTEX. Dispara con \"swarm-lora-pipeline\", \"lora swarm\", \"enjambre lora\", \"minería enjambre\", \"n-zonas enjambre\", \"dataset swarm\", \"enjambre ShareGPT\", \"minar datasets enjambre\", \"swarm pipeline\".",
+      "description": "Pipeline de minería con enjambre de agentes, extracción N-Zonas (SHA-256), ShareGPT/ChatML y clustering semántico.",
       "triggers": [
+        "/lora-swarm-pipeline",
         "dataset swarm",
         "enjambre lora",
         "enjambre sharegpt",
@@ -3140,7 +3155,7 @@
       },
       "canonical_alias": "swarm-state-wizard",
       "scope": "workspace",
-      "description": "Módulo CORTEX. Dispara con \"swarm-state-wizard\", \"wizard\", \"/wizard\", \"paso a paso\", \"máquina de estados\", \"guía secuencial\", \"asistente de instalación\".",
+      "description": "Transforma al agente en una máquina de estados determinista para instalaciones y configuración paso a paso.",
       "triggers": [
         "/wizard",
         "asistente de instalación",
@@ -3246,7 +3261,7 @@
       },
       "canonical_alias": "media-pipeline",
       "scope": "workspace",
-      "description": "Módulo audiovisual. Dispara con \"media-pipeline\", \"audiovisual-sota\", \"/audiovisual-sota\", \"pipeline audiovisual\", \"invariantes remotion ffmpeg\".",
+      "description": "Fuerza invariantes extremas en pipelines de renderizado audiovisual (FFmpeg/Remotion).",
       "triggers": [
         "/audiovisual-sota",
         "audiovisual-sota",
@@ -3270,7 +3285,7 @@
       },
       "canonical_alias": "swarm-m2m-writer",
       "scope": "workspace",
-      "description": "Módulo CORTEX. Dispara con \"swarm-m2m-writer\", \"writing-for-agents\", \"/writing-for-agents\", \"redacción m2m\", \"external llm exergy\", \"sanitize-c5\", \"/sanitize-c5\", \"despersonalizar manifiesto\", \"higienizar manifiesto\".",
+      "description": "Genera documentos y prompts para ingestión estricta por LLMs (M2M), incluyendo el sub-protocolo /sanitize-c5.",
       "triggers": [
         "/sanitize-c5",
         "/writing-for-agents",

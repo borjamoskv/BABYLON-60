@@ -11,10 +11,16 @@ Silicio + Kolmogorov + Causal = 21.000) y sincronización atómica con:
   1. ~/10_PROJECTS/BABYLON-60/docs/skills.json
   2. ~/.gemini/config/skills/skills.json
   3. ~/.gemini/config/SKILLS.md
+
+Los triggers de cada skill proceden de los alias que la distribución declara en
+`skill_catalog.generated.json` junto a su raíz; la frase «Dispara con» de la
+descripción solo actúa como respaldo. Sin la raíz global (proyección pública, CI)
+las entradas globales no se purgan ni se recalculan: se conservan tal cual.
 """
 
 from __future__ import annotations
 
+import copy
 import json
 import re
 import sys
@@ -31,6 +37,16 @@ CONFIG_SKILLS_MD = Path.home() / ".gemini" / "config" / "SKILLS.md"
 WS_SKILLS_DIR = REPO_ROOT / ".agents" / "skills"
 DOCS_SKILLS_JSON = REPO_ROOT / "docs" / "skills.json"
 GLOBAL_SKILLS_JSON = SKILLS_DIR / "skills.json"
+GENERATED_CATALOG_NAME = "skill_catalog.generated.json"
+
+# The kernel root is one catalog node whether it is virtual (no SKILL.md) or physical
+# (.agents/skills/cortex-kernel/SKILL.md): its scope and routing triggers stay pinned.
+KERNEL_ROOT = "cortex-kernel"
+KERNEL_TRIGGERS = ["kernel-root", "cortex-kernel", "cortex kernel", "kernel axiomas"]
+KERNEL_FALLBACK_DESCRIPTION = (
+    'Manifiesto de invariantes transversales del ecosistema CORTEX. Dispara con "kernel-root", "cortex kernel".'
+)
+TRIGGER_PHRASE = re.compile(r"(?:dispara con|triggers?|disparadores)[\s:]*([^\n]+)", re.IGNORECASE)
 
 # Canonical Skill Definitions (100% Purge of Ghost/Stub Skills, 100% Coverage of Physical Fleet)
 SKILL_TIER_MAPPING: Dict[str, Dict[str, Any]] = {
@@ -214,14 +230,54 @@ def resolve_skill_file(name: str) -> Path | None:
     return None
 
 
-def compute_3evaluator_exergy(name: str, base_tier: int, deg: int) -> Dict[str, Any]:
+def load_generated_aliases(root: Path) -> Dict[str, List[str]]:
+    """Routing aliases that the skill-library distribution declares for the skills under ``root``.
+
+    ``build_skill_library.py`` writes them to ``skill_catalog.generated.json`` and rewrites each
+    SKILL.md description without its trigger phrase, so the description alone no longer carries
+    a skill's triggers. Aliases listed as generic by the distribution policy are dropped, as in
+    the distribution's own registry.
+    """
+    path = root / GENERATED_CATALOG_NAME
+    if not path.is_file():
+        return {}
+    data = json.loads(path.read_text(encoding="utf-8"))
+    policy = data.get("policy") if isinstance(data.get("policy"), dict) else {}
+    generic = {str(g).lower() for g in policy.get("generic", [])}
+    capabilities = data.get("capabilities") if isinstance(data.get("capabilities"), dict) else {}
+    aliases: Dict[str, List[str]] = {}
+    for name, capability in capabilities.items():
+        declared = capability.get("aliases") if isinstance(capability, dict) else None
+        if isinstance(declared, list):
+            aliases[name] = [str(a).strip() for a in declared if str(a).strip().lower() not in generic]
+    return aliases
+
+
+def derive_triggers(name: str, canonical_alias: str, description: str, declared: List[str] | None) -> List[str]:
+    """Name, canonical alias and declared aliases; the description phrase only when nothing is declared."""
+    trigs: Set[str] = {name.lower()}
+    if canonical_alias:
+        trigs.add(canonical_alias.lower())
+    if declared is not None:
+        candidates = declared
+    else:
+        phrase = TRIGGER_PHRASE.search(description)
+        candidates = re.findall(r"[\"']([^\"']+)[\"']", phrase.group(1)) if phrase else []
+    for candidate in candidates:
+        if len(candidate.strip()) > 2:
+            trigs.add(candidate.strip().lower())
+    return sorted(trigs)
+
+
+def compute_3evaluator_exergy(name: str, base_tier: int, deg: int, declared_triggers: bool = False) -> Dict[str, Any]:
     """
     Computes the COMPILER_DERIVED 3-Evaluator Exergy Breakdown (Scale 1 - 21.000 + Ring-0 Bonus):
     - E1 (Silicon & Execution): [0..7000]
-    - E2 (Kolmogorov & Prompt Budget): [0..7000]
+    - E2 (Kolmogorov & Prompt Budget): [0..7000]; trigger determinism is satisfied by a
+      «Dispara con» phrase or by aliases declared in the distribution catalog
     - E3 (Causal Triad & Graph Connectivity): [0..7000]
     """
-    if name == "cortex-kernel":
+    if name == KERNEL_ROOT:
         return {
             "e1_silicon": 7000,
             "e2_kolmogorov": 7000,
@@ -244,7 +300,7 @@ def compute_3evaluator_exergy(name: str, base_tier: int, deg: int) -> Dict[str, 
     e2 = 7000
     if len(desc) > 350:
         e2 -= min(3000, (len(desc) - 350) * 15)
-    if "Dispara con" not in desc and "dispara con" not in desc:
+    if not declared_triggers and "Dispara con" not in desc and "dispara con" not in desc:
         e2 -= 2500
     if len(lines) < 20:
         e2 -= 4000
@@ -298,7 +354,7 @@ def sync_skills_markdown(sorted_entries: List[Dict[str, Any]], now_iso: str) -> 
         tier = item["tier"]
         cat = item["category"]
         disp = item.get("display_name", name)
-        if name == "cortex-kernel":
+        if name == KERNEL_ROOT:
             cohorts["arquitecto"].append((name, tier, cat, "spec-only", "arquitecto", disp))
             continue
 
@@ -372,13 +428,22 @@ def sync_skills_json(verify_only: bool = False, json_output: bool = False, works
 
     with open(base_path, "r", encoding="utf-8") as f:
         data = json.load(f)
+    original = copy.deepcopy(data)
+    global_root_present = SKILLS_DIR.is_dir()
+    generated = {root: load_generated_aliases(root) for root in (SKILLS_DIR, WS_SKILLS_DIR)}
 
     entries: List[Dict[str, Any]] = data.get("entries", [])
     adjacency: List[Dict[str, str]] = data.get("adjacency", [])
     entry_map = {e["name"]: e for e in entries}
 
-    # 0. Purge ghost or obsolete entries not present physically on disk (keep cortex-kernel as virtual root)
-    purged_skills = set(entry_map.keys()) - (physical_skills | {"cortex-kernel"})
+    # 0. Purge entries whose skill is gone; the kernel root stays even while virtual. Without the
+    # global skills root (public projection, CI) global entries cannot be judged, so only
+    # workspace entries are eligible.
+    if global_root_present:
+        judged = set(entry_map)
+    else:
+        judged = {n for n, e in entry_map.items() if e.get("scope") == "workspace"}
+    purged_skills = judged - (physical_skills | {KERNEL_ROOT})
     if purged_skills:
         if not json_output:
             print(f"Purging {len(purged_skills)} obsolete/ghost skills from registry: {sorted(purged_skills)}")
@@ -416,25 +481,18 @@ def sync_skills_json(verify_only: bool = False, json_output: bool = False, works
 
     # 3. Update tiers, categories, display_names, canonical_alias, scope, role, triggers, and 3-Evaluator Exergy
     for name, item in entry_map.items():
-        if name in SKILL_TIER_MAPPING:
-            item["tier"] = SKILL_TIER_MAPPING[name]["tier"]
-            item["category"] = SKILL_TIER_MAPPING[name]["category"]
-            if "display_name" in SKILL_TIER_MAPPING[name]:
-                item["display_name"] = SKILL_TIER_MAPPING[name]["display_name"]
-            if "canonical_alias" in SKILL_TIER_MAPPING[name]:
-                item["canonical_alias"] = SKILL_TIER_MAPPING[name]["canonical_alias"]
-
-        if name == "cortex-kernel":
-            item.setdefault("canonical_alias", "kernel-root")
-            item["scope"] = "kernel"
-            item["role"] = "arquitecto"
-            item.setdefault(
-                "description",
-                "Manifiesto de invariantes transversales del ecosistema CORTEX. Dispara con \"kernel-root\", \"cortex kernel\".",
-            )
-            item["triggers"] = ["kernel-root", "cortex-kernel", "cortex kernel", "kernel axiomas"]
-
         skill_file = resolve_skill_file(name)
+        mapping = SKILL_TIER_MAPPING.get(name)
+        if mapping:
+            item["tier"] = mapping["tier"]
+            item["category"] = mapping["category"]
+            # The SKILL.md frontmatter overrides these names below; an entry without a file within
+            # reach (global skill outside this checkout) keeps the names recorded from its file.
+            for field in ("display_name", "canonical_alias"):
+                if field in mapping and (skill_file is not None or name == KERNEL_ROOT or field not in item):
+                    item[field] = mapping[field]
+
+        declared: List[str] | None = None
         if skill_file:
             item["scope"] = "workspace" if WS_SKILLS_DIR in skill_file.parents else "global"
             content = skill_file.read_text(encoding="utf-8", errors="ignore")
@@ -447,35 +505,38 @@ def sync_skills_json(verify_only: bool = False, json_output: bool = False, works
                     item["canonical_alias"] = str(fm["canonical_alias"]).strip()
                 if fm.get("role"):
                     item["role"] = str(fm["role"]).strip()
-                if fm.get("description"):
-                    desc_str = str(fm["description"]).strip()
+                declared = generated.get(skill_file.parent.parent, {}).get(name)
+                desc_str = str(fm.get("description") or "").strip()
+                if desc_str:
                     item["description"] = desc_str
-                    trigs: Set[str] = {name.lower()}
+                if desc_str or declared is not None:
                     calias = str(item.get("canonical_alias", "")).strip()
-                    if calias:
-                        trigs.add(calias.lower())
-                    disp_m = re.search(r"(?:dispara con|triggers?|disparadores)[\s:]*([^\n]+)", desc_str, re.IGNORECASE)
-                    if disp_m:
-                        for q in re.findall(r"[\"']([^\"']+)[\"']", disp_m.group(1)):
-                            if len(q.strip()) > 2:
-                                trigs.add(q.strip().lower())
-                    item["triggers"] = sorted(trigs)
+                    item["triggers"] = derive_triggers(name, calias, desc_str, declared)
+
+        if name == KERNEL_ROOT:
+            # Physical or virtual, the root keeps the catalog scope and routing triggers.
+            item.setdefault("canonical_alias", "kernel-root")
+            item["scope"] = "kernel"
+            item["role"] = "arquitecto"
+            item.setdefault("description", KERNEL_FALLBACK_DESCRIPTION)
+            item["triggers"] = list(KERNEL_TRIGGERS)
 
         item.setdefault("canonical_alias", name)
         item.setdefault("scope", "global")
         item.setdefault("role", "ejecutor")
 
-        audit_vec = compute_3evaluator_exergy(name, item.get("tier", 18000), deg_map.get(name, 0))
-        item["exergy_audit"] = audit_vec
+        if skill_file is None and name != KERNEL_ROOT and isinstance(item.get("exergy_audit"), dict):
+            continue  # No SKILL.md within reach (global skill outside this checkout): keep its recorded audit.
+        item["exergy_audit"] = compute_3evaluator_exergy(
+            name, item.get("tier", 18000), deg_map.get(name, 0), declared_triggers=bool(declared)
+        )
 
     # Sort entries by Tier descending, then name
     sorted_entries = sorted(entry_map.values(), key=lambda x: (x.get("tier", 0), x.get("name", "")), reverse=True)
     avg_exergy = round(sum(e.get("tier", 0) for e in sorted_entries) / len(sorted_entries), 2)
-    now_iso = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
-    updated_data = {
+    catalog: Dict[str, Any] = {
         "version": "26.400",
-        "updated_at": now_iso,
         "exergy_scale_standard": "COMPILER_DERIVED_3_EVALUATORS (E1_Silicon + E2_Kolmogorov + E3_Causal = 21000)",
         "total_skills": len(sorted_entries),
         "average_exergy_density": avg_exergy,
@@ -483,6 +544,14 @@ def sync_skills_json(verify_only: bool = False, json_output: bool = False, works
         "entries": sorted_entries,
         "adjacency": adjacency,
     }
+    # Regenerating identical content keeps the previous stamp, so a second run produces no diff.
+    unchanged = {k: v for k, v in original.items() if k != "updated_at"} == catalog
+    if unchanged and original.get("updated_at"):
+        now_iso = str(original["updated_at"])
+    else:
+        now_iso = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    updated_data: Dict[str, Any] = {"version": catalog["version"], "updated_at": now_iso}
+    updated_data.update({k: v for k, v in catalog.items() if k != "version"})
 
     if json_output:
         print(json.dumps(updated_data, indent=2, ensure_ascii=False))
