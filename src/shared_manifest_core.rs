@@ -391,7 +391,6 @@ impl SharedManifestRing0 {
             .control_word
             .compare_exchange(ctl, next_ctrl, Ordering::Release, Ordering::Relaxed)
             .map(|_| ())
-            .map_err(|actual| actual)
     }
 
     /// Lectura consistente con validación post-copia del control_word.
