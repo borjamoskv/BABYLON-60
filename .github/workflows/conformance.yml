@@ -23,5 +23,13 @@ jobs:
           checksum: f68d291c75783122dad58ab77def0e13f3233f358731db5d6d7e8715603b928f
       - name: Install locked dependencies
         run: uv sync --locked --all-extras
+      # The suite drives the compiled babylon-skills-mcp over stdio and only builds it
+      # with --offline when missing, which fails on a runner with an empty crate cache.
+      - uses: dtolnay/rust-toolchain@b725eda525362e7cf34af9a7243cac1e3f01a7ec
+        with:
+          toolchain: stable
+      - uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0
+      - name: Build the Rust MCP binary used by the stdio interop test
+        run: cargo build --locked -p babylon-skills-mcp
       - name: Run Conformance Script
         run: uv run --no-sync python scripts/c5_verifiers/conformance_test.py

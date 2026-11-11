@@ -48,7 +48,13 @@ class SupplyChainTests(unittest.TestCase):
         steps = workflow("conformance.yml")["jobs"]["conformance"]["steps"]
         commands = [s["run"] for s in steps if "run" in s]
         self.assertEqual(commands[0], "uv sync --locked --all-extras")
-        self.assertTrue(commands[1].startswith("uv run --no-sync "))
+        # Every later command reuses that environment or the Cargo lockfile as is.
+        for command in commands[1:]:
+            if command.startswith("uv "):
+                self.assertTrue(command.startswith("uv run --no-sync "), command)
+            else:
+                self.assertRegex(command, r"^cargo build --locked ", command)
+        self.assertTrue(commands[-1].startswith("uv run --no-sync "))
         setup = next(s for s in steps if "setup-uv@" in s.get("uses", ""))
         self.assertRegex(setup["uses"], r"@[0-9a-f]{40}$")
         self.assertRegex(setup["with"]["version"], r"^\d+\.\d+\.\d+$")
