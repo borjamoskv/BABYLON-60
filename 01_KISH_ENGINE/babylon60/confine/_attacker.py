@@ -256,9 +256,27 @@ def v21_clonefile_into_workspace():
     return _read(target)
 
 
+def _procargs(pid):
+    """macOS: KERN_PROCARGS2 returns a same-user process's exec-time arguments and environment."""
+    libc = _libc()
+    mib = (ctypes.c_int * 3)(1, 49, pid)  # CTL_KERN, KERN_PROCARGS2
+    size = ctypes.c_size_t(os.sysconf("SC_ARG_MAX"))
+    buffer = ctypes.create_string_buffer(size.value)
+    if libc.sysctl(mib, ctypes.c_uint(3), buffer, ctypes.byref(size), None, ctypes.c_size_t(0)) != 0:
+        _raise_errno("sysctl KERN_PROCARGS2")
+    return buffer.raw[: size.value]
+
+
+def _process_strings(kind):
+    """Another process's environment or arguments; only the strings naming a token, as a thief would grep."""
+    pid = cfg["decoy_pid"]
+    raw = _read(f"/proc/{pid}/{kind}") if LINUX else _procargs(pid)
+    return b"\0".join(item for item in raw.split(b"\0") if b"TOKEN" in item.upper())
+
+
 def v22_environment_of_other_process():
     # The user's shell or IDE keeps tokens in its environment (GH_TOKEN, AWS_*...).
-    return _read(f"/proc/{cfg['decoy_pid']}/environ")
+    return _process_strings("environ")
 
 
 def _syscall(name, *args):
@@ -344,7 +362,7 @@ def l5_inotify_watch():
 
 
 def l6_command_line_of_other_process():
-    return _read(f"/proc/{cfg['decoy_pid']}/cmdline")
+    return _process_strings("cmdline")
 
 
 def p1_workspace_read_write():

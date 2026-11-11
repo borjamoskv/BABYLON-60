@@ -22,7 +22,15 @@ networking, and narrows the rest:
 * other terminals (``/dev/ttysN``) are denied unless the policy allows ptys,
   which also makes ``/dev/ptmx`` and the ttys writable;
 * ``connect`` to pathname Unix sockets is denied except mDNSResponder (DNS) and
-  syslog, unless the launch allows Unix sockets.
+  syslog, unless the launch allows Unix sockets;
+* reads are also denied in shared places outside the homes (``/private/tmp``,
+  ``/private/var/tmp``, ``/Volumes`` and the user's ``/private/var/folders``
+  directory), where the grants (the private TMPDIR) are re-allowed;
+* what would run code outside the sandbox is denied: LaunchServices opens
+  (``lsopen``), Apple Events and launchd job creation; so are signals, process
+  information and ``KERN_PROCARGS2`` for processes outside the sandbox, preference
+  writes through cfprefsd, and the pasteboard (unless ``clipboard``), Kerberos
+  (GSSCred), CoreSimulator and DiskArbitration services.
 
 Precedence: among rules that carry a filter the last match wins; an unfiltered
 rule is only the operation's fallback, and a rule naming an operation outright
@@ -46,6 +54,7 @@ from __future__ import annotations
 
 from collections.abc import Iterable
 import os
+import sys
 
 from babylon60.confine.policy import Policy
 from babylon60.kernel.mcp_sandbox_validator import SANDBOX_EXEC, _literal
@@ -81,6 +90,41 @@ TERMINALS = "^/dev/ttys[0-9]+$"
 TERMINAL_ORIGINS = ("tty", "ptys")
 UNIX_SOCKET_EXCEPTIONS = ("/private/var/run/mDNSResponder", "/private/var/run/syslog")
 MUTATING_FCNTLS = (80, 110)  # F_MAKECOMPRESSED, F_TRANSFEREXTENTS (sys/fcntl.h)
+# Services that start code outside the sandbox on the caller's behalf: LaunchServices (`open`),
+# Apple Events (osascript to Terminal, iTerm2, Finder, System Events) and launchd jobs (launchctl).
+OUTSIDE_OPERATIONS = ("lsopen", "appleevent-send", "job-creation")
+# Synthetic keyboard and mouse events into other apps (INV_C5_COMPUTER_USE_TRUST_GATEWAY, agent_contracts.md).
+GUI_INJECTION_OPERATIONS = ("hid-control",)
+# XNU lets a user mount over any directory they own (/opt/homebrew/bin, ~/.ssh): not a file-write* operation.
+MOUNT_OPERATIONS = ("file-mount", "file-unmount")
+# Other processes of the user: signals, process information and the argv/environment area that
+# KERN_PROCARGS2 (`ps -E`) returns, where the launcher keeps every variable it withheld.
+PROCESS_RULES = (
+    "(deny signal)",
+    "(allow signal (target self) (target same-sandbox))",
+    "(deny process-info* (target others))",
+    "(allow process-info* (target self) (target same-sandbox))",
+    '(deny sysctl-read (sysctl-name-prefix "kern.procargs"))',
+    "(when (defined? 'mach-priv-task-port) (deny mach-priv-task-port))",
+)
+# cfprefsd writes ~/Library/Preferences for the caller: a write outside the grants (Terminal's Shell key).
+PREFERENCE_RULES = ("(deny user-preference-write)",)
+# Setuid and setgid modes, as the seccomp filter refuses them on Linux: filtered and emitted after the
+# grants, so it also wins over their file-write* allow under either precedence reading.
+SETID_RULE = '(when (defined? \'file-write-setugid) (deny file-write-setugid (subpath "/")))'
+CLIPBOARD_SERVICE = "com.apple.pasteboard.1"
+DENIED_SERVICES = (
+    "com.apple.GSSCred",  # Kerberos credential caches (API: and KCM:), the macOS twin of kernel keyrings
+    "com.apple.CoreSimulator.CoreSimulatorService",  # simctl spawn starts processes outside this sandbox
+    "com.apple.DiskArbitration.diskarbitrationd",  # mounts images over directories the user owns
+    "com.apple.accessibility.AXServer",  # drives other apps' UI (INV_C5_COMPUTER_USE_TRUST_GATEWAY)
+    "com.apple.tsm.portname",  # text input into other apps (same contract)
+)
+# Read-denied outside the homes: shared temporary directories, the user's per-user directory under
+# /private/var/folders (other apps' T, C and 0, other sessions' private TMPDIRs), mounted volumes
+# (external disks, network shares, Time Machine backups) and Homebrew's service data (databases).
+SHARED_READ_ROOTS = ("/private/tmp", "/private/var/tmp", "/Volumes", "/opt/homebrew/var", "/usr/local/var")
+CS_DARWIN_USER_DIR = 65536  # confstr(_CS_DARWIN_USER_DIR): /private/var/folders/xx/yyy/0/
 # sandbox-exec rejects a string literal longer than 1025 bytes and then the whole profile.
 MAX_STRING_BYTES = 1000
 _REGEX_SPECIAL = frozenset(".^$*+?()[]{}|\\")
@@ -88,6 +132,19 @@ _REGEX_SPECIAL = frozenset(".^$*+?()[]{}|\\")
 
 def available() -> bool:
     return os.path.isfile(SANDBOX_EXEC)
+
+
+def shared_read_roots() -> list[str]:
+    """Shared places outside the homes that hold other programs' files; on macOS also the per-user directory."""
+    roots = list(SHARED_READ_ROOTS)
+    if sys.platform == "darwin":
+        try:
+            user_dir = os.confstr(CS_DARWIN_USER_DIR)
+        except (ValueError, OSError):
+            user_dir = None
+        if user_dir:
+            roots.append(os.path.dirname(os.path.realpath(user_dir.rstrip("/"))))
+    return roots
 
 
 def _quote(text: str) -> str:
@@ -193,8 +250,15 @@ def _ancestors(path: str) -> list[str]:
     return result
 
 
-def render_profile(policy: Policy, *, unix_sockets: bool = False) -> str:
-    deny_roots = ["/Users", *policy.homes]
+def render_profile(
+    policy: Policy,
+    *,
+    unix_sockets: bool = False,
+    clipboard: bool = False,
+    shared_roots: Iterable[str] = (),
+) -> str:
+    """``shared_roots``: read-denied places outside the homes; the launcher passes ``shared_read_roots()``."""
+    deny_roots = ["/Users", *policy.homes, *shared_roots]
     terminals = [g for g in policy.grants if g.origin in TERMINAL_ORIGINS]
     granted = [
         g
@@ -249,6 +313,15 @@ def render_profile(policy: Policy, *, unix_sockets: bool = False) -> str:
         lines.append("(deny network-outbound (remote unix-socket))")
         exceptions = [f"(remote unix-socket (path-literal {_quote(path)}))" for path in UNIX_SOCKET_EXCEPTIONS]
         lines.append(_rule("allow", "network-outbound", exceptions))
+    # Operations no file rule reaches: each names its operation outright, so it outranks (allow default).
+    lines.extend(
+        f"(deny {operation})" for operation in (*OUTSIDE_OPERATIONS, *GUI_INJECTION_OPERATIONS, *MOUNT_OPERATIONS)
+    )
+    lines.extend(PROCESS_RULES)
+    lines.extend(PREFERENCE_RULES)
+    lines.append(SETID_RULE)
+    services = [*DENIED_SERVICES, *(() if clipboard else (CLIPBOARD_SERVICE,))]
+    lines.append(_rule("deny", "mach-lookup", [f"(global-name {_quote(name)})" for name in services]))
     if policy.protected:
         protected = _expand(policy.protected)
         # A protected path created after the policy was built can sit inside a grant; renaming

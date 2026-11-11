@@ -626,6 +626,7 @@ def run_command(args: argparse.Namespace) -> int:
             policy,
             unix_sockets=args.allow_unix_sockets,
             private_tty=terminal.private_tty if terminal else None,
+            clipboard=bool(getattr(args, "allow_clipboard", False)),
         )
         # Inherited as ignored (nohup, a background job): the agent keeps them and nothing relays them.
         ignored = launcher.ignored_signals()

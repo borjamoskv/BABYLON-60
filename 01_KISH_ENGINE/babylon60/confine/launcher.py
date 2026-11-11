@@ -69,6 +69,7 @@ class Launch:
     drop_caps: bool = True
     min_abi: int = MIN_LANDLOCK_ABI
     unix_sockets: bool = False  # with seccomp (Linux) or Seatbelt (macOS), allow Unix domain sockets
+    clipboard: bool = False  # macOS: allow the pasteboard (`run --allow-clipboard`: pasting images into an agent)
     new_session: bool = False  # trampoline starts a new session: no controlling terminal, or ``private_tty``
     acquire_ctty: bool = False  # test hook: stdin becomes the controlling terminal before confinement
     # With new_session: (target descriptor among 0-2, st_rdev) of the private pseudo-terminal slave the launcher
@@ -94,7 +95,12 @@ def session_launch(argv: list[str], policy: Policy, *, unix_sockets: bool = Fals
 
 
 def run_launch(
-    argv: list[str], policy: Policy, *, unix_sockets: bool = False, private_tty: tuple[int, int] | None = None
+    argv: list[str],
+    policy: Policy,
+    *,
+    unix_sockets: bool = False,
+    private_tty: tuple[int, int] | None = None,
+    clipboard: bool = False,
 ) -> Launch:
     """How ``babylon60 run`` starts the agent: ``session_launch`` in a new session, on every platform.
 
@@ -103,7 +109,7 @@ def run_launch(
     holds the user's terminal.
     """
     launch = session_launch(argv, policy, unix_sockets=unix_sockets)
-    launch.new_session, launch.private_tty = True, private_tty
+    launch.new_session, launch.private_tty, launch.clipboard = True, private_tty, clipboard
     return launch
 
 
@@ -265,11 +271,17 @@ def _command(launch: Launch, status_fd: int) -> list[str]:
             handled, scoped, rules = launch.policy.landlock_rules(abi)
             cfg.update(landlock=True, abi=abi, min_abi=launch.min_abi, handled_fs=handled, scoped=scoped, rules=rules)
         elif sys.platform == "darwin":
-            from babylon60.confine.seatbelt import SANDBOX_EXEC, available, render_profile
+            from babylon60.confine.seatbelt import SANDBOX_EXEC, available, render_profile, shared_read_roots
 
             if not available():
                 raise ConfinementUnavailable("sandbox-exec is not available")
-            prefix = [SANDBOX_EXEC, "-p", render_profile(launch.policy, unix_sockets=launch.unix_sockets)]
+            profile = render_profile(
+                launch.policy,
+                unix_sockets=launch.unix_sockets,
+                clipboard=launch.clipboard,
+                shared_roots=shared_read_roots(),
+            )
+            prefix = [SANDBOX_EXEC, "-p", profile]
         else:
             raise ConfinementUnavailable(f"No confinement backend for {sys.platform}")
     return [*prefix, interpreter(), "-I", "-S", "-B", "-c", TRAMPOLINE.read_text(encoding="utf-8"), json.dumps(cfg)]

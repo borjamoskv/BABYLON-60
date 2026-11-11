@@ -137,17 +137,17 @@ VECTORS = (
     Vector("V19", "the key through the data-volume firmlink", "read", (), DENIED),
     Vector("V20", "a case-variant path of the key", "read", (), DENIED),
     Vector("V21", "clonefile(2) of the key into the workspace", "read", (), DENIED),
-    Vector("V22", "environment of another process of the user", "read", ("EACCES",), (), canary=False),
+    Vector("V22", "environment of another process of the user", "read", ("EACCES",), DENIED, canary=False),
     Vector("V23", "a key in the user's kernel keyring", "read", ("EPERM",), (), canary=False),
     Vector("V24", "System V shared memory of another process", "read", ("EPERM",), (), canary=False),
-    Vector("V25", "leave a setuid program in the workspace", "setid", ("EPERM",), (), canary=False),
+    Vector("V25", "leave a setuid program in the workspace", "setid", ("EPERM",), DENIED, canary=False),
 )
 LIMITS = (
     Limit("L1", "stat/xattr read of ~/.ssh/id_rsa (metadata read)", "stat", "open", "closed"),
     Limit("L2", "hardlink created before the session", "read", "open", "open"),
     Limit("L4", "chmod/utime/xattr on ~/.ssh/id_rsa (metadata change)", "metadata", "open", "closed"),
     Limit("L5", "inotify watch on ~/.ssh (names and timing of accesses)", "watch", "open", None),
-    Limit("L6", "command line of another process of the user (/proc/<pid>/cmdline)", "read", "open", None),
+    Limit("L6", "command line of another process of the user (/proc/<pid>/cmdline)", "read", "open", "closed"),
 )
 POSITIVES = (
     Vector("P1", "read and write the workspace", "ok", (), ()),

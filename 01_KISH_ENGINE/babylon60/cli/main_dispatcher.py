@@ -1070,6 +1070,11 @@ def main() -> None:
     p_run.add_argument("--allow-root", action="store_true", help="Accept running as uid 0 (weaker; see help text)")
     p_run.add_argument("--keep-agent-sockets", action="store_true", help="Keep SSH_AUTH_SOCK and GPG_AGENT_INFO")
     p_run.add_argument(
+        "--allow-clipboard",
+        action="store_true",
+        help="macOS: let the agent use the pasteboard (pbcopy/pbpaste, pasting images); denied by default",
+    )
+    p_run.add_argument(
         "--pass-env",
         action="append",
         default=[],
