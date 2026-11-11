@@ -162,6 +162,47 @@ resultado de un paso ([ontología](../../ontology/v1/schema.json)) y no define
 reglas que propaguen el resultado de un nodo a sus sucesores, así que el
 verificador tampoco impone ninguna.
 
+## Réplica en Rust y WebAssembly
+
+[rust/](rust/) es un crate de referencia con el mismo emisor de prueba y el mismo
+verificador que el cliente TypeScript. Existe para contrastar las dos
+implementaciones byte a byte; no sustituye a ninguna de ellas.
+
+| Pieza | Qué hace | Ruta |
+| --- | --- | --- |
+| Biblioteca | Verifica (`verify_execution_payload_utf8`) y sella con una semilla de prueba (`seal_with_test_seed`). | [src](rust/src) |
+| CLI `b60-exec-receipt` | `verify --policy <json>` lee el recibo por entrada estándar y sale con 0 si acepta, 1 si rechaza y 2 ante un uso incorrecto. `batch` procesa un objeto JSON por línea. | [main.rs](rust/src/main.rs) |
+| Binding wasm | `verifyReceiptBytes(bytes, policy_json)`, solo verificación: la página nunca maneja claves privadas. | [wasm.rs](rust/src/wasm.rs) |
+
+Comandos, desde `tools/ui_kernel_console`:
+
+```bash
+(cd rust && cargo test --locked)
+(cd rust && cargo clippy --locked --all-targets -- -D warnings)
+(cd rust && cargo build --locked --release)                      # CLI
+
+# Binding wasm. wasm-bindgen-cli debe ser la versión 0.2.126, la de la biblioteca:
+#   cargo install wasm-bindgen-cli --version 0.2.126 --locked
+(cd rust && cargo build --locked --release --target wasm32-unknown-unknown --lib --features wasm)
+wasm-bindgen --target nodejs --out-dir scratch/wasm-pkg \
+  scratch/rust-target/wasm32-unknown-unknown/release/babylon60_exec_receipt.wasm
+printf '{"type":"commonjs"}\n' > scratch/wasm-pkg/package.json
+
+node scripts/differential.mjs --cases 300 --mutants 8
+```
+
+[differential.mjs](scripts/differential.mjs) compila TypeScript en
+`scratch/test-build/` y genera recibos con semillas fijas. Compara el sellado de
+TypeScript con `seal` del crate y, para cada recibo y cada alteración, el
+veredicto de TypeScript (por la ruta de bytes UTF-8 y por la de texto JSON) con
+el de la CLI `batch`, el del binding wasm y, en una muestra, el de `verify` por
+entrada estándar, incluido el código de salida. Las alteraciones cubren campos,
+tipos, cotas, claves, firmas, la política y el texto: números no canónicos,
+BOM, sustitutos, anidación hasta el límite de 127 contenedores, claves
+duplicadas, escapes, truncamientos y UTF-8 inválido. Sale con 1 ante cualquier
+discrepancia. Es una prueba de consistencia: muestra que las dos
+implementaciones coinciden en los casos generados, no que sean equivalentes.
+
 ## Límites
 
 - Aceptar un recibo significa que las comprobaciones locales coinciden. Una
@@ -182,6 +223,15 @@ verificador tampoco impone ninguna.
   la supervisión humana (artículos 9, 10 y 14).
 - La consola no ofrece controles de aprobación. Sus botones solo eligen el
   escenario de demostración.
+- La semilla de prueba del emisor en Rust y en el arnés (`0x11` repetido) es
+  pública. Sirve para vectores reproducibles; un emisor real custodia su clave.
+- El emisor valida la forma de la entrada, no su semántica: puede sellar un DAG
+  cíclico o un nodo `COMMITTED` sin SMT, porque las pruebas necesitan modelar un
+  emisor defectuoso. Quien rechaza es el verificador.
+- `merkle_b3.rs` se compila desde el kernel mediante `#[path]`. Un cambio en el
+  kernel cambia este crate, y las pruebas con vectores dorados lo detectan.
+- Los binarios del crate son de referencia. No están pensados para desplegarse
+  ni para servir recibos en producción.
 
 ## Verificación
 
@@ -191,6 +241,11 @@ verificador tampoco impone ninguna.
   frente a los vectores dorados del kernel; aritmética de puntos Ed25519;
   mutación exhaustiva de campos; robustez ante entradas arbitrarias; cotas;
   componentes renderizados a marcado estático y consola con interacción.
+- `cargo test --locked` y `cargo clippy --locked --all-targets -- -D warnings`
+  en `rust/`: vectores ACS del kernel, recibo dorado de TypeScript (preimágenes,
+  sobre, hash y sellado con la semilla de prueba) y rechazos.
+- `node scripts/differential.mjs`: paridad entre TypeScript, la CLI y el binding
+  wasm sobre recibos generados y alterados.
 
 Estas pruebas se ejecutan en local: ningún workflow de CI instala Node. No
 certifican propiedades del kernel.
