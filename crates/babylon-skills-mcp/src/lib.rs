@@ -2341,7 +2341,7 @@ mod tests {
         .expect("real catalog snapshot load");
 
         assert_eq!(snapshot.total_skills(), 131);
-        assert_eq!(snapshot.workspace_skill_names.len(), 26);
+        assert_eq!(snapshot.workspace_skill_names.len(), 27);
 
         let root_lock: SkillsLockfile = serde_json::from_slice(
             &std::fs::read(repo_root.join("skills-lock.json")).expect("read skills-lock.json"),
