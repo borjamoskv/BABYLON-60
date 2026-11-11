@@ -330,16 +330,22 @@ def _env_words(text: str) -> list[str]:
 
 
 def launcher_paths(journal: str, package_dir: str) -> list[str]:
-    """The launcher's own state and code: write grants over them, or over a directory above them, are refused.
+    """The launcher's own state and code: write grants over them, above them or inside them are refused.
 
-    Besides the journal, the virtual environment and this package: the base
-    interpreter that runs the trampoline, its prefix, and the standard library and
-    extension modules it imports with ``-I -S`` before it confines itself.
+    Besides the journal and this package: the virtual environment the launcher
+    runs from (all of it), the base interpreter that runs the trampoline, the
+    standard library and extension modules it imports with ``-I -S`` before it
+    confines itself, and the site-packages the launcher imports its dependencies
+    from. The interpreter's prefix is not listed: the binary's own path already
+    covers the directories above it, and a grant elsewhere under it (for example
+    ``/usr/local/src``) touches nothing the launcher runs.
     """
     from babylon60.confine import launcher
 
-    paths = [journal, sys.prefix, package_dir, launcher.interpreter_prefix(), launcher.interpreter()]
-    paths.append(sysconfig.get_path("stdlib"))
+    paths = [journal, package_dir, launcher.interpreter()]
+    if sys.prefix != sys.base_prefix:  # a virtual environment
+        paths.append(sys.prefix)
+    paths.extend(sysconfig.get_path(name) for name in ("stdlib", "platstdlib", "purelib", "platlib"))
     dynload = sysconfig.get_config_var("DESTSHARED")
     if isinstance(dynload, str) and dynload:
         paths.append(dynload)

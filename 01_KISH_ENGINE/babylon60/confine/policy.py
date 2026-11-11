@@ -342,6 +342,17 @@ class _Guard:
         # A self path that does not exist yet (the journal before its first use) is protected
         # through the directory it will be created in.
         self.self_chains: list[tuple[str, list[Identity]]] = [(path, _future_ancestry(path)) for path in self_paths]
+        # Directories of the launcher's own code (its virtual environment, this package, the standard
+        # library the trampoline imports before it confines itself): a write grant inside one could
+        # change what the next session runs unconfined.
+        self.self_dirs: list[tuple[str, Identity]] = []
+        for path in self_paths:
+            try:
+                st = os.stat(path)
+            except OSError:
+                continue
+            if stat.S_ISDIR(st.st_mode):
+                self.self_dirs.append((path, (st.st_dev, st.st_ino)))
 
     def _scan_protected(self) -> None:
         visited: set[Identity] = set()
@@ -416,6 +427,9 @@ class _Guard:
             own_state = self._own_state(own)
             if own_state:
                 raise PolicyError(f"Refusing write access over {own_state}: {path}")
+            inside = next((target for target, ident in self.self_dirs if ident in chain[1:]), None)
+            if inside is not None:
+                raise PolicyError(f"Refusing write access inside the launcher's own state ({inside}): {path}")
 
     def _exposed(self, ident: Identity) -> str | None:
         """What a mount whose root has identity ``ident`` exposes, if ``check`` refuses it for every access."""

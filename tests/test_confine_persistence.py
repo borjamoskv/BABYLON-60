@@ -579,3 +579,17 @@ def test_write_grants_over_the_trampoline_interpreter_are_refused(box: dict[str,
         box, "run", "--allow-root", "--dry-run", "--journal", str(box["journal"]), "--allow-read", prefix, "--", "true"
     )
     assert readable.returncode == 0, readable.stderr
+
+
+def test_write_grants_inside_the_launcher_code_are_refused(box: dict[str, Path]) -> None:
+    """The next session's trampoline imports json from the stdlib before it confines itself."""
+    inside = (
+        os.path.join(sysconfig.get_path("stdlib"), "json"),
+        str(ROOT / "01_KISH_ENGINE" / "babylon60" / "confine"),
+    )
+    for path in inside:
+        common = ("run", "--allow-root", "--dry-run", "--journal", str(box["journal"]))
+        refused = _cli(box, *common, "--allow-write", path, "--", "true")
+        assert refused.returncode == 3 and "inside the launcher's own state" in refused.stderr, (path, refused.stderr)
+        readable = _cli(box, *common, "--allow-read", path, "--", "true")
+        assert readable.returncode == 0, (path, readable.stderr)

@@ -320,6 +320,19 @@ def test_credential_files_are_protected_and_refuse_the_grants_around_them(layout
         assert _build(layout, read=[str(secret.parent)]).grants
 
 
+def test_write_grants_inside_a_self_directory_are_refused_and_siblings_are_not(layout: dict[str, Path]) -> None:
+    code = layout["root"] / "launcher"
+    (code / "lib").mkdir(parents=True)
+    with pytest.raises(PolicyError, match="inside the launcher's own state"):
+        _build(layout, write=[str(code / "lib")], self_paths=[str(code)])
+    assert _build(layout, read=[str(code / "lib")], self_paths=[str(code)]).grants
+    assert _build(layout, write=[str(layout["other"])], self_paths=[str(code)]).grants
+    # A self path that is a file (the journal, the interpreter) has nothing inside it.
+    journal = layout["root"] / "journal.db"
+    journal.write_bytes(b"")
+    assert _build(layout, write=[str(layout["other"])], self_paths=[str(journal)]).grants
+
+
 # Bind mounts, made for real in a private mount namespace ---------------------------------------
 
 NAMESPACE = r"""
