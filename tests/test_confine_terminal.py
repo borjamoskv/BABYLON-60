@@ -115,17 +115,38 @@ def _terminal() -> Iterator[int]:
         os.close(master)
 
 
-def _pending(fd: int) -> bytes:
-    """Bytes waiting in a terminal's input queue: what the user's shell would read and run next."""
-    chunks = []
-    os.set_blocking(fd, False)
+REVOKED = (errno.ENOTTY, errno.EBADF, errno.ENXIO, errno.EIO)
+
+
+def _pending(fd: int) -> bytes | None:
+    """Bytes waiting in a terminal's input queue: what the user's shell would read and run next.
+
+    None when the queue can no longer be observed: macOS revokes a terminal for every
+    holder once the session leader that owned it exits, so the test's own descriptor
+    goes dead (ENOTTY). Linux does not hang up pseudo-terminals on that exit.
+    """
+    chunks: list[bytes] = []
+    try:
+        os.set_blocking(fd, False)
+    except OSError as exc:
+        if exc.errno in REVOKED:
+            return None
+        raise
     try:
         while chunk := os.read(fd, 4096):
             chunks.append(chunk)
     except BlockingIOError:
         pass
+    except OSError as exc:
+        if exc.errno not in REVOKED:
+            raise
+        if not chunks:
+            return None
     finally:
-        os.set_blocking(fd, True)
+        try:
+            os.set_blocking(fd, True)
+        except OSError:
+            pass
     return b"".join(chunks)
 
 
@@ -454,7 +475,9 @@ print(json.dumps(out))
 NO_TERMINAL = ("EPERM", "EACCES", "EIO")  # Linux: not the controlling terminal; macOS: EACCES; EIO: legacy off
 
 
-def _on_terminal(box: dict[str, Any], argv: list[str], **kwargs: Any) -> tuple[dict[str, Any], dict[str, Any], bytes]:
+def _on_terminal(
+    box: dict[str, Any], argv: list[str], **kwargs: Any
+) -> tuple[dict[str, Any], dict[str, Any], bytes | None]:
     """Run ``argv`` with the ``acquire_ctty`` hook: a session holder owns the terminal, as the user's shell does."""
     with _terminal() as user_tty:
         launch = Launch(argv, box["policy"], acquire_ctty=True, **kwargs)
@@ -470,13 +493,17 @@ def test_new_session_target_cannot_reach_the_inherited_terminal(box: dict[str, A
     status, control, pending = _on_terminal(box, _python(CTTY_PROBE))
     assert status.get("ok") and status.get("acquire_ctty") is True, status
     assert control["dev_tty"] == "ok" and not control["session_leader"], control
-    if pending != b"X":
+    # Where the queue is no longer observable (macOS revoked the terminal when the holder
+    # exited), the probe's own successful TIOCSTI is the evidence that the control injected.
+    injected = pending == b"X" if pending is not None else control["tiocsti"] == "ok"
+    if not injected:
         pytest.skip(f"TIOCSTI does not inject here without new_session: {control}")
     status, report, pending = _on_terminal(box, _python(CTTY_PROBE), new_session=True)
     assert status.get("ok") and status.get("new_session") is True, status
     assert report["session_leader"] and report["dev_tty"] == "ENXIO", report
     # The terminal still belongs to the holder's session: it cannot be taken back.
-    assert report["tiocsctty"] == "EPERM" and report["tiocsti"] in NO_TERMINAL and pending == b"", report
+    assert report["tiocsctty"] == "EPERM" and report["tiocsti"] in NO_TERMINAL, report
+    assert pending in (b"", None), (report, pending)
 
 
 @needs_backend
