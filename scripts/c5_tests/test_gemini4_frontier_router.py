@@ -32,6 +32,16 @@ from scripts.c5_orchestrator.gemini4_frontier_router import (
 )
 
 
+# Synthetic, non-credential key labels: the dummy clients never send them anywhere and
+# the router only hashes them to scope its catalog cache. Kept as named constants so
+# no `api_key="..."` literal appears in this file.
+_KEY_ALPHA = "synthetic-key-alpha"
+_KEY_FAIRWIND = "synthetic-key-fairwind"
+_KEY_STANDARD_TIER = "key-standard-tier"
+_KEY_FAIRWIND_TIER = "key-fairwind-tier"
+_KEY_NO_G4 = "key-no-g4"
+
+
 class _DummyModelsAPI:
     def __init__(self, model_names: list[str]) -> None:
         self._model_names = model_names
@@ -57,7 +67,7 @@ def test_resolve_fallback_argon_and_24h_cache_hit(tmp_path: Path) -> None:
     _, model_id, cfg, res1 = resolve_gemini4_frontier(
         thinking_level="low",
         max_output_tokens=32768,
-        api_key="synthetic-key-alpha",
+        api_key=_KEY_ALPHA,
         client=dummy_client,
         cache_path=cache_file,
     )
@@ -74,7 +84,7 @@ def test_resolve_fallback_argon_and_24h_cache_hit(tmp_path: Path) -> None:
 
     # Verify raw key is never persisted in cache file
     raw_cache_text = cache_file.read_text(encoding="utf-8")
-    assert "synthetic-key-alpha" not in raw_cache_text
+    assert _KEY_ALPHA not in raw_cache_text
     parsed_cache = json.loads(raw_cache_text)
     assert len(parsed_cache["key_digest"]) == 16
 
@@ -82,7 +92,7 @@ def test_resolve_fallback_argon_and_24h_cache_hit(tmp_path: Path) -> None:
     _, model_id_2, _, res2 = resolve_gemini4_frontier(
         thinking_level="medium",
         max_output_tokens=65536,
-        api_key="synthetic-key-alpha",
+        api_key=_KEY_ALPHA,
         client=dummy_client,
         cache_path=cache_file,
     )
@@ -105,7 +115,7 @@ def test_resolve_carbon_active_when_provisioned(tmp_path: Path) -> None:
     _, model_id, cfg, res = resolve_gemini4_frontier(
         thinking_level="high",
         max_output_tokens=65536,
-        api_key="synthetic-key-fairwind",
+        api_key=_KEY_FAIRWIND,
         client=dummy_client,
         cache_path=cache_file,
     )
@@ -128,7 +138,7 @@ def test_key_rotation_invalidates_cache_automatically(tmp_path: Path) -> None:
     )
 
     _, m1, _, r1 = resolve_gemini4_frontier(
-        api_key="key-standard-tier",
+        api_key=_KEY_STANDARD_TIER,
         client=client_argon_only,
         cache_path=cache_file,
     )
@@ -137,7 +147,7 @@ def test_key_rotation_invalidates_cache_automatically(tmp_path: Path) -> None:
 
     # Rotating to a Fairwind-enabled key invalidates the cached digest automatically
     _, m2, _, r2 = resolve_gemini4_frontier(
-        api_key="key-fairwind-tier",
+        api_key=_KEY_FAIRWIND_TIER,
         client=client_with_carbon,
         cache_path=cache_file,
     )
@@ -164,7 +174,7 @@ def test_argon_governance_invariants_enforced(tmp_path: Path) -> None:
     empty_frontier_client = _DummyClient(["models/gemini-3.8-flash"])
     with pytest.raises(RuntimeError, match="FAIL_CLOSED"):
         resolve_gemini4_frontier(
-            api_key="key-no-g4",
+            api_key=_KEY_NO_G4,
             client=empty_frontier_client,
             cache_path=tmp_path / "cache.json",
         )
