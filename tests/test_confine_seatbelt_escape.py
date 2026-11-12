@@ -11,22 +11,31 @@ exit status. A test that changes state outside its tmp_path (a mount, an attache
 environment, a LaunchServices registration) undoes it in a finally block, whatever the assertions did.
 
 The tests revised after the review of AX-210 (lsopen, launchctl setenv, defaults read, screencapture and
-the display probe, hdiutil, and since AX-225 Apple Events and lldb) launch the confined attempt as `run`
-launches the agent (``_as_run``: a new session, a private TMPDIR and the variables `run` points into it)
-and, through ``_closed``, count an absent effect only when the trampoline reported the exec (status ok);
-a launcher timeout makes them skip with the reason, never pass. Tests that measure through PROBE
-(``_probe``) need its report, which it prints once its action is done; since AX-225 a launcher timeout
-before it makes them skip with the reason too.
+the display probe, hdiutil, since AX-225 Apple Events and lldb, and since AX-226 launchd jobs, cfprefsd
+writes, the pasteboard and setuid modes, which until then confined through ``box.run`` without checking
+that the tool ran) launch the confined attempt as `run` launches the agent (``_as_run``: a new session, a
+private TMPDIR and the variables `run` points into it) and, through ``_closed``, count an absent effect
+only when the trampoline reported the exec (status ok); a launcher timeout makes them skip with the
+reason, never pass. Apple Events also need osascript's own run-time error. Tests that measure through
+PROBE (``_probe``) need its report, which it prints once its action is done; since AX-225 a launcher
+timeout before it makes them skip with the reason too.
 
 Positive controls measure what the denials cost: what agents run every day (a listing of their own
-processes, git, a venv, clang with modules, swift, brew, headless Chrome, lldb on their own build) must
-still work confined. Each runs unconfined first, with the variables `run` sets in a TMPDIR of its own,
-and skips when that fails; confined, a failure carries the command's stderr. Executing /bin/ps (setuid
-root) through `run` answered EPERM in the CI of f3747db, and no rule of the profile is about executing
-programs; a user reports the same in an Apple forum thread, logged as forbidden-exec-sugid. Whether the
-sandbox refuses it whatever the profile says is what a variant under a profile of only (allow default)
-measures (NO_VERIFICADO until its CI); that it holds for every setuid program rests on that report
-alone. It is a declared limit: a strict xfail that only its exact shape satisfies.
+processes, git, a venv, clang with modules, swift, brew, lldb on their own build) must still work
+confined; headless Chrome is a declared limit (below). Each runs unconfined first, with the variables `run` sets in a TMPDIR of its own,
+and skips when that fails; confined, a failure carries the command's stderr and the control's.
+
+A declared limit is an xfail with raises=DeclaredLimit that only its exact measured shape satisfies, and
+in that shape ``_declared_limit`` makes the XFAIL carry what this run measured, on the -rx line and in
+the JUnit, instead of the marker's fixed reason. It is strict once measured, so that XPASS(strict) fails
+the test should the limit go; the kern.proc one, still a deduction, is not strict yet. The POSIX
+shared-memory xfail predates this pattern: with neither strict nor raises, any failure is its XFAIL, so
+its XFAIL at f3242c4 measures no shape. The exploratory Chrome variant (CHROME_EXPLORATORY) is no
+declared limit: an xfail with neither, so that it is never red. At f3242c4 (macos-15, named in its
+JUnit): executing /bin/ps (setuid root) answered EPERM under `run`'s profile and under one of only
+(allow default), so the sandbox itself refuses it; that every setuid or setgid program is refused rests
+on an Apple forum report (forbidden-exec-sugid). Headless Chrome died by a signal confined, with its own
+sandbox and without it (both FAILED there, before they were declared limits).
 
 Every payload that runs outside the sandbox reads only the decoy key of the test's own disposable
 HOME and writes it to a marker file outside the grants; nothing here reads real credentials.
@@ -50,7 +59,7 @@ import subprocess
 import sys
 import tempfile
 import time
-from typing import Any, NamedTuple
+from typing import Any, NamedTuple, NoReturn
 
 import pytest
 
@@ -280,14 +289,6 @@ def _script_app(bundle: Path, script: str) -> Path:
     return bundle
 
 
-def _control(argv: list[str], timeout: float) -> subprocess.CompletedProcess[bytes]:
-    """The unconfined attempt; a consent dialog nobody answers (TCC, Developer Tools) makes it inconclusive."""
-    try:
-        return subprocess.run(argv, capture_output=True, timeout=timeout)
-    except subprocess.TimeoutExpired:
-        pytest.skip(f"{argv[0]} waited for a consent dialog even unconfined; nothing to compare here")
-
-
 def _copy_key(box: Box, marker: Path) -> str:
     return f"/bin/cat '{box.key}' > '{marker}'"
 
@@ -339,13 +340,15 @@ def _quietly(argv: list[str], timeout: float) -> subprocess.CompletedProcess[byt
         return None
 
 
-def _as_run(box: Box, argv: list[str], *, confined: bool = True, timeout: float = 240) -> launcher.Result:
+def _as_run(
+    box: Box, argv: list[str], *, confined: bool = True, timeout: float = 240, stdin_data: bytes | None = None
+) -> launcher.Result:
     """``argv`` started as `babylon60 run` starts the agent (``run_launch``: a new session, a private TMPDIR).
 
     The environment is the box's plus what `run` adds: TMPDIR and the variables it points into the
     private TMPDIR (``cli.private_tmp_environment``: clang's module cache, and Chrome's temporary
     directory on macOS). ``confined=False`` is the control: the same trampoline, session, TMPDIR and
-    environment, no policy.
+    environment, no policy. ``stdin_data`` is the command's standard input (otherwise /dev/null).
     """
     private_tmp = Path(tempfile.mkdtemp(prefix="tmp-", dir=box.root))
     env = {**box.env, **cli.private_tmp_environment(box.env, str(private_tmp))}
@@ -353,7 +356,7 @@ def _as_run(box: Box, argv: list[str], *, confined: bool = True, timeout: float 
         launch = launcher.run_launch(argv, box.policy_with(private_tmp=str(private_tmp)))
     else:
         launch = launcher.Launch(argv, None, new_session=True)
-    result = launcher.run(launch, env=env, cwd=str(box.ws), timeout=timeout)
+    result = launcher.run(launch, env=env, cwd=str(box.ws), timeout=timeout, stdin_data=stdin_data)
     if result.status.get("timeout") and isinstance(result.status.get("pid"), int):
         # The launcher killed only the target, which led its own session and process group: end what it left.
         with contextlib.suppress(OSError):
@@ -375,13 +378,15 @@ def _stderr(result: launcher.Result) -> str:
     return result.stderr.decode("utf-8", "replace")[-2000:]
 
 
-def _control_as_run(box: Box, argv: list[str], what: str, *, timeout: float = 120) -> launcher.Result:
+def _control_as_run(
+    box: Box, argv: list[str], what: str, *, timeout: float = 120, stdin_data: bytes | None = None
+) -> launcher.Result:
     """The unconfined control, launched as the confined attempt will be: ``_as_run`` without a policy.
 
     Only the policy then tells the two apart. A timeout leaves nothing to compare (skip with the reason);
     an exec the trampoline refused without any policy is a broken harness (failure).
     """
-    result = _as_run(box, argv, confined=False, timeout=timeout)
+    result = _as_run(box, argv, confined=False, timeout=timeout, stdin_data=stdin_data)
     stderr = _stderr(result)
     if result.status.get("timeout"):
         pytest.skip(f"{what} did not finish in {timeout:.0f} s even unconfined; nothing to compare: {stderr!r}")
@@ -497,17 +502,25 @@ def test_without_deny_lsopen_the_profile_lets_open_start_an_app(
 # MACOS-2 ----------------------------------------------------------------------------------------
 
 
+# osascript reached run time and the event failed there: AppleScript's "execution error", or one of the
+# codes a refused or undeliverable event gives (errAEEventNotPermitted, procNotFound, errAEPrivilegeError).
+# A "syntax error" is a compile-time error, before any event is sent.
+APPLE_EVENT_REFUSALS = ("execution error", "(-1743)", "(-600)", "(-10004)")
+
+
 @macos
 @pytest.mark.parametrize("target", ["Finder", "Terminal"])
-def test_apple_events_cannot_make_another_app_run_code(box: Box, target: str) -> None:
+def test_apple_events_cannot_make_another_app_run_code(box: Box, target: str, request: pytest.FixtureRequest) -> None:
     """MACOS-2: an Apple Event makes another app run code for the sender, outside the sandbox.
 
     Control and attempt are launched alike (``_as_run``: a new session, a private TMPDIR, the decoy
-    HOME), so only the policy tells them apart. The control skips on its own timeout of 90 s (a
-    consent dialog nobody answers in the CI; one of the two variants skipped so at f3747db, and the
-    -q log does not say which) or when it has no effect. The confined attempt skips only on a
-    launcher timeout, through ``_closed``: an effect fails, and otherwise osascript must have been
-    exec'd.
+    HOME), so only the policy tells them apart. The control skips on its own timeout of 90 s (likely
+    a consent dialog nobody answers in the CI, inferred: [Terminal]'s control timed out so at
+    f3242c4, named in its JUnit, while [Finder] passed) or when it has no effect. Confined, an effect fails, and through ``_closed``
+    a launcher timeout skips and osascript must have been exec'd. The absent effect counts only when
+    osascript reached run time and the event failed there: a non-zero exit with an AppleScript
+    execution error or a refusal code (APPLE_EVENT_REFUSALS) in its stderr; otherwise the test skips
+    with that stderr. On a pass, the confined stderr is the JUnit property "osascript_confined_stderr".
     """
     marker = box.root / f"appleevent-{secrets.token_hex(4)}"
     app: Path | None = None
@@ -523,8 +536,15 @@ def test_apple_events_cannot_make_another_app_run_code(box: Box, target: str) ->
             pytest.skip(f"Apple Events to {target} are not authorized here even unconfined: {_stderr(control)!r}")
         marker.unlink()
         confined = _as_run(box, argv, timeout=90)
+        stderr = _stderr(confined)
+        request.node.user_properties.append(("osascript_confined_stderr", stderr))
         finding = f"MACOS-2: {target} ran code for the confined process, outside the sandbox"
         _closed(confined, _escaped(box, marker), finding, "osascript")
+        if confined.returncode == 0 or not any(refusal in stderr for refusal in APPLE_EVENT_REFUSALS):
+            pytest.skip(
+                f"osascript to {target} exited {confined.returncode} confined without an execution error, so it "
+                f"may never have sent the event; the absent effect is inconclusive: {stderr!r}"
+            )
     finally:
         if app is not None and os.path.exists(LSREGISTER):  # Finder registered it with LaunchServices
             _quietly([LSREGISTER, "-u", str(app)], 60)
@@ -540,9 +560,17 @@ def _launchctl(*args: str) -> subprocess.CompletedProcess[bytes]:
 @macos
 @pytest.mark.parametrize("how", ["submit", "bootstrap"])
 def test_launchd_jobs_cannot_be_created(box: Box, how: str) -> None:
+    """MACOS-3: launchd starts a job outside the sandbox; `launchctl submit` or `bootstrap` must create none.
+
+    The job copies the decoy key to a marker. Control and attempt are launched alike
+    (``_control_as_run``, ``_as_run``), so only the policy tells them apart; the control must leave
+    its marker or the test skips. Confined, an effect fails, and through ``_closed`` launchctl must
+    have been exec'd. Until AX-226 the confined attempt ran through ``box.run`` and the test passed
+    without checking that. Each job is removed in finally.
+    """
     domains = [f"gui/{os.getuid()}", f"user/{os.getuid()}"]
 
-    def attempt(confined: bool) -> tuple[Path, str, str | None]:
+    def job() -> tuple[list[str], Path, str, str | None]:
         marker = box.root / f"launchd-{secrets.token_hex(4)}"
         label = f"org.babylon60.probe.{secrets.token_hex(4)}"
         command = [
@@ -551,30 +579,27 @@ def test_launchd_jobs_cannot_be_created(box: Box, how: str) -> None:
             f"{_copy_key(box, marker)}; sleep 600",
         ]  # the sleep keeps launchd from respawning it
         if how == "submit":
-            argv, domain = ["/bin/launchctl", "submit", "-l", label, "--", *command], None
-        else:
-            plist = box.ws / f"{label}.plist"
-            plist.write_bytes(plistlib.dumps({"Label": label, "ProgramArguments": command, "RunAtLoad": True}))
-            domain = next((d for d in domains if _launchctl("print", d).returncode == 0), domains[-1])
-            argv = ["/bin/launchctl", "bootstrap", domain, str(plist)]
-        if confined:
-            box.run(argv)
-        else:
-            _control(argv, 30)
-        return marker, label, domain
+            return ["/bin/launchctl", "submit", "-l", label, "--", *command], marker, label, None
+        plist = box.ws / f"{label}.plist"
+        plist.write_bytes(plistlib.dumps({"Label": label, "ProgramArguments": command, "RunAtLoad": True}))
+        domain = next((d for d in domains if _launchctl("print", d).returncode == 0), domains[-1])
+        return ["/bin/launchctl", "bootstrap", domain, str(plist)], marker, label, domain
 
     def remove(label: str, domain: str | None) -> None:
         _launchctl("remove", label) if domain is None else _launchctl("bootout", f"{domain}/{label}")
 
-    marker, label, domain = attempt(confined=False)
+    argv, marker, label, domain = job()
     try:
+        control = _control_as_run(box, argv, f"launchctl {how}", timeout=60)
         if not _escaped(box, marker):
-            pytest.skip(f"launchctl {how} does not start jobs here even unconfined")
+            pytest.skip(f"launchctl {how} does not start jobs here even unconfined: {_stderr(control)!r}")
     finally:
         remove(label, domain)
-    marker, label, domain = attempt(confined=True)
+    argv, marker, label, domain = job()
     try:
-        assert not _escaped(box, marker), f"MACOS-3: launchctl {how} from inside the sandbox ran a job outside it"
+        confined = _as_run(box, argv, timeout=60)
+        finding = f"MACOS-3: launchctl {how} from inside the sandbox ran a job outside it"
+        _closed(confined, _escaped(box, marker), finding, f"launchctl {how}")
     finally:
         remove(label, domain)
 
@@ -764,18 +789,27 @@ def _defaults(*args: str) -> subprocess.CompletedProcess[str]:
 
 @macos
 def test_preferences_are_not_a_way_to_write_outside_the_grants(box: Box) -> None:
+    """MACOS-7: cfprefsd writes ~/Library/Preferences for a `defaults write`, outside every grant.
+
+    Control and attempt are launched alike (``_control_as_run``, ``_as_run``), so only the policy tells
+    them apart; each write is read back with the test's own environment (in the read test below, which
+    passed at f3242c4, `defaults` with the decoy HOME read what this environment wrote, so cfprefsd
+    does not follow $HOME: inferred). The control's value must come back or the test skips.
+    Confined, an effect fails, and through ``_closed`` `defaults` must have been exec'd. Until AX-226
+    the confined write ran through ``box.run`` and the test passed without checking that.
+    """
     domain = f"org.babylon60.probe.{secrets.token_hex(4)}"
-    canary = f"B60-CANARY-{secrets.token_hex(8)}"
+    control_value, canary = f"B60-CONTROL-{secrets.token_hex(8)}", f"B60-CANARY-{secrets.token_hex(8)}"
     try:
-        if (
-            _defaults("write", domain, "control", "ok").returncode
-            or _defaults("read", domain, "control").stdout.strip() != "ok"
-        ):
-            pytest.skip("cfprefsd does not serve this session")
-        box.run([DEFAULTS, "write", domain, "planted", canary])
-        assert canary not in _defaults("read", domain, "planted").stdout, (
-            f"MACOS-7: cfprefsd wrote ~/Library/Preferences/{domain}.plist for the confined process"
-        )
+        control = _control_as_run(box, [DEFAULTS, "write", domain, "control", control_value], "defaults write")
+        if _defaults("read", domain, "control").stdout.strip() != control_value:
+            pytest.skip(
+                "defaults write, launched as the agent is but unconfined, does not reach cfprefsd here: "
+                f"{_stderr(control)!r}"
+            )
+        confined = _as_run(box, [DEFAULTS, "write", domain, "planted", canary], timeout=60)
+        finding = f"MACOS-7: cfprefsd wrote ~/Library/Preferences/{domain}.plist for the confined process"
+        _closed(confined, canary in _defaults("read", domain, "planted").stdout, finding, "defaults write")
     finally:
         _defaults("delete", domain)
 
@@ -813,21 +847,46 @@ def test_preferences_of_other_programs_are_not_readable(box: Box) -> None:
 # MACOS-8 ----------------------------------------------------------------------------------------
 
 
+def _pasted() -> bytes:
+    """What the user would paste now, read with the test's own environment."""
+    return subprocess.run(["/usr/bin/pbpaste"], capture_output=True, timeout=30).stdout
+
+
 @macos
 def test_the_pasteboard_is_neither_readable_nor_writable(box: Box) -> None:
+    """MACOS-8: pbpaste reads and pbcopy replaces what the user pastes next, through the pasteboard server.
+
+    Each command is launched as `run` launches the agent (``_as_run``) after a control launched alike
+    without a policy (``_control_as_run``) that must have its effect, or the test skips. pbcopy is
+    exec'd itself, with the text on its standard input, so that the exec ``_closed`` requires is its
+    own. Until AX-226 the confined commands ran through ``box.run`` (pbcopy behind /bin/sh) and the test
+    passed without checking that they ran. What the user had copied is put back in finally.
+    """
     canary = f"B60-CANARY-{secrets.token_hex(8)}"
-    previous = subprocess.run(["/usr/bin/pbpaste"], capture_output=True, timeout=30).stdout
+    previous = _pasted()
     try:
         copied = subprocess.run(["/usr/bin/pbcopy"], input=canary.encode(), capture_output=True, timeout=30)
-        if copied.returncode or canary.encode() not in subprocess.run(["/usr/bin/pbpaste"], capture_output=True).stdout:
-            pytest.skip("no pasteboard server in this session")
-        assert canary.encode() not in box.run(["/usr/bin/pbpaste"]).stdout, (
-            "MACOS-8: the confined process read the clipboard"
+        control = _control_as_run(box, ["/usr/bin/pbpaste"], "pbpaste", timeout=60)
+        if copied.returncode or canary.encode() not in control.stdout:
+            pytest.skip(
+                f"pbcopy exited {copied.returncode} unconfined, and pbpaste launched as the agent is but unconfined "
+                "does not read what it copied (a read with the test's own environment does: "
+                f"{canary.encode() in _pasted()}): {_stderr(control)!r}"
+            )
+        confined = _as_run(box, ["/usr/bin/pbpaste"], timeout=60)
+        _closed(
+            confined, canary.encode() in confined.stdout, "MACOS-8: the confined process read the clipboard", "pbpaste"
         )
+        copied_by_control = f"B60-PASTE-{secrets.token_hex(8)}"
+        control = _control_as_run(box, ["/usr/bin/pbcopy"], "pbcopy", timeout=60, stdin_data=copied_by_control.encode())
+        if copied_by_control.encode() not in _pasted():
+            pytest.skip(
+                f"pbcopy, launched as the agent is but unconfined, does not replace the clipboard: {_stderr(control)!r}"
+            )
         planted = f"B60-PASTE-{secrets.token_hex(8)}"
-        box.run(["/bin/sh", "-c", f"printf %s {planted} | /usr/bin/pbcopy"])
-        after = subprocess.run(["/usr/bin/pbpaste"], capture_output=True, timeout=30).stdout
-        assert planted.encode() not in after, "MACOS-8: the confined process replaced what the user pastes next"
+        confined = _as_run(box, ["/usr/bin/pbcopy"], timeout=60, stdin_data=planted.encode())
+        finding = "MACOS-8: the confined process replaced what the user pastes next"
+        _closed(confined, planted.encode() in _pasted(), finding, "pbcopy")
     finally:
         subprocess.run(["/usr/bin/pbcopy"], input=previous, capture_output=True, timeout=30)
 
@@ -1237,8 +1296,8 @@ def test_a_disk_image_cannot_be_mounted_over_a_directory_outside_the_grants(box:
 
     At 48a4593 the target sat inside the per-user /private/var/folders directory, which the profile
     read-denies, and only hdiutil's exit status failed: the mount had not happened. Here the target is
-    outside every deny root; the expectation (no mount from the sandbox) is unmeasured until this
-    revision's CI. The effect is the image's file in ``target`` and the mount table naming it.
+    outside every deny root, and the confined attempt mounted nothing at f3242c4 (passed, named in its
+    JUnit). The effect is the image's file in ``target`` and the mount table naming it.
     """
     payload = box.root / "payload"
     payload.mkdir()
@@ -1275,6 +1334,8 @@ def test_a_disk_image_cannot_be_mounted_over_a_directory_outside_the_grants(box:
 # MACOS-12 ---------------------------------------------------------------------------------------
 
 
+# Predates raises=DeclaredLimit: any failure, a missing report of _probe's included, is an XFAIL here, so
+# its XFAIL (f3242c4) measures no shape; giving it one is left to a later batch.
 @macos
 @pytest.mark.xfail(
     strict=False, reason="declared limit: POSIX shared memory stays readable on macOS, as /dev/shm on Linux"
@@ -1304,6 +1365,22 @@ class DeclaredLimit(AssertionError):
     """The failure a declared limit predicts. Any other failure of the same test stays a failure."""
 
 
+def _declared_limit(request: pytest.FixtureRequest, message: str) -> NoReturn:
+    """End a test in the measured shape of its declared limit: XFAIL with ``message`` as the reason.
+
+    The test's marker (xfail, raises=DeclaredLimit) makes any other exception a failure and, when
+    strict, a pass too (XPASS(strict)); but the XFAIL it gives a raised DeclaredLimit shows only the
+    marker's fixed reason, on the -rx line and in the JUnit. pytest.xfail shows ``message``, what this
+    run measured. Without that marker, ``message`` fails the test as a DeclaredLimit, and so it does
+    under ``pytest --runxfail``, which makes pytest.xfail return instead of raising.
+    """
+    marker = request.node.get_closest_marker("xfail")
+    if marker is None or marker.kwargs.get("raises") is not DeclaredLimit:
+        raise DeclaredLimit(message)
+    pytest.xfail(message)
+    raise DeclaredLimit(message)  # reached only under --runxfail: the limit is there, so the test fails
+
+
 @macos
 @pytest.mark.xfail(
     strict=True,
@@ -1311,12 +1388,13 @@ class DeclaredLimit(AssertionError):
     reason="declared limit (macOS): inside a denied directory the error tells which names exist "
     "(ENOENT for a missing name, EPERM or EACCES for an existing one); their contents stay unreadable",
 )
-def test_denied_paths_do_not_tell_which_names_exist(box: Box) -> None:
-    """MACOS-13: XFAILED in the CI of 48a4593, d594608 and ae39991. Strict: should it pass, the limit is gone.
+def test_denied_paths_do_not_tell_which_names_exist(box: Box, request: pytest.FixtureRequest) -> None:
+    """MACOS-13: XFAILED in the CI of 48a4593, d594608, ae39991, f3747db and f3242c4. Strict: should it pass,
+    the limit is gone.
 
-    Those runs do not record the errno of the missing name. Only the declared shape raises
-    DeclaredLimit (ENOENT for the missing name, EPERM or EACCES for the key), so an XFAIL now
-    certifies it; any other pair of answers fails with both values.
+    None of those runs records which errno the key got. Only the declared shape ends in
+    ``_declared_limit`` (ENOENT for the missing name, EPERM or EACCES for the key), so an XFAIL
+    certifies it, and since AX-226 its line names both answers; any other pair fails with both values.
     """
     missing = box.home / ".ssh" / f"absent-{secrets.token_hex(4)}"
     control = _probe(box, "stat", missing, confined=False)["result"]
@@ -1327,7 +1405,12 @@ def test_denied_paths_do_not_tell_which_names_exist(box: Box) -> None:
     read = _probe(box, "read", box.key)
     assert read["result"] in DENIED and not read["data"], f"the protected key is readable: {read}"
     if absent == "ENOENT" and present in DENIED:
-        raise DeclaredLimit(f"MACOS-13: stat answers {present} for the key and ENOENT for a missing name")
+        _declared_limit(
+            request,
+            f"declared limit (macOS) MACOS-13: stat answers {present} for the key and ENOENT for a missing name, "
+            "inside a denied directory; reading the key answers "
+            f"{read['result']}",
+        )
     assert absent == present, f"MACOS-13: stat answers {present} for the key and {absent} for a missing name"
 
 
@@ -1409,14 +1492,33 @@ def test_candidate_rules_report_whether_sandbox_exec_knows_them(rules: str) -> N
 @macos
 @pytest.mark.parametrize("mode", [0o4755, 0o2755])
 def test_setuid_and_setgid_modes_are_denied(box: Box, mode: int) -> None:
-    """The macOS side of the seccomp setid rule: no setuid program left behind in the workspace."""
+    """The macOS side of the seccomp setid rule: no setuid program left behind in the workspace.
+
+    The same chmod probe runs as a control launched alike without a policy (``_control_as_run``), on a
+    file of its own, which must get the mode or the test skips, and then as `run` runs the agent
+    (``_as_run``). Confined, the bit must not be set, the trampoline must have exec'd the probe
+    (``_closed``) and the probe must report how its chmod ended. Until AX-226 the attempt ran through
+    ``box.run`` and the test passed without checking that the probe ran.
+    """
+
+    def chmod_probe(tool: Path) -> list[str]:
+        tool.write_text("#!/bin/sh\nexec /bin/sh\n")
+        script = (
+            "import errno, os\n"
+            f"try:\n    os.chmod({str(tool)!r}, {mode})\n    print('chmod: ok', flush=True)\n"
+            "except OSError as exc:\n    print('chmod:', errno.errorcode.get(exc.errno, exc.errno), flush=True)\n"
+        )
+        return [launcher.interpreter(), "-I", "-S", "-c", script]
+
+    control_tool = box.ws / f"control-{mode:o}"
+    control = _control_as_run(box, chmod_probe(control_tool), "the chmod probe", timeout=60)
+    if not os.stat(control_tool).st_mode & 0o6000:
+        pytest.skip(f"mode {mode:o} does not stick even unconfined: {control.stdout!r} {_stderr(control)!r}")
     tool = box.ws / f"tool-{mode:o}"
-    tool.write_text("#!/bin/sh\nexec /bin/sh\n")
-    script = f"import os; os.chmod({str(tool)!r}, {mode})"
-    box.run([launcher.interpreter(), "-I", "-S", "-c", script])
-    assert not os.stat(tool).st_mode & 0o6000, "the confined process set a setuid or setgid bit"
-    os.chmod(tool, mode)  # control: the owner may set it outside the sandbox
-    assert os.stat(tool).st_mode & 0o6000
+    confined = _as_run(box, chmod_probe(tool), timeout=60)
+    finding = f"the confined process set a setuid or setgid bit (mode {os.stat(tool).st_mode:o})"
+    _closed(confined, bool(os.stat(tool).st_mode & 0o6000), finding, "the chmod probe")
+    assert confined.stdout.startswith(b"chmod: "), f"the chmod probe did not report: {_stderr(confined)!r}"
 
 
 # Positive controls: what agents run every day -----------------------------------------------------
@@ -1529,8 +1631,8 @@ def _git(*candidates: str, gitconfig: bool = False) -> Callable[[Path, dict[str,
     commit takes its author from there, so the effect also shows that git read the file, and `run`
     gets --preset claude-code. Without a grant git cannot read ~/.gitconfig and stops (measured on
     Linux: "fatal: unknown error occurred while reading the configuration files"). The presets grant it
-    read-only once AX-207/217 is merged; until then these variants fail (measured on Linux, where they
-    run with BABYLON60_REQUIRE_SEATBELT=1). They skip where the preset would grant this account's real
+    read-only (AX-207/217); both -gitconfig variants passed confined in the CI of f3242c4, named in its
+    JUnit. They skip where the preset would grant this account's real
     agent state to the test.
     """
 
@@ -1590,13 +1692,14 @@ def _clang_modules(*, cache_in_tmpdir: bool = False) -> Callable[[Path, dict[str
     write-denied by its base. The user documentation names only -fmodules-cache-path to move it; the
     driver also reads CLANG_MODULE_CACHE_PATH (LLVM review D126678), which that documentation leaves
     out. In the CI of f3747db the plain variant failed confined ("unable to open output file
-    .../C/clang/ModuleCache/...") and ``cache_in_tmpdir`` reported neither failure nor skip: it passed
-    (inferred from the -q log), so Apple clang honours the variable. Since then `run` sets
-    CLANG_MODULE_CACHE_PATH in the private TMPDIR when the user's environment does not
+    .../C/clang/ModuleCache/...") and ``cache_in_tmpdir`` passed (inferred then from the -q log). Since
+    then `run` sets CLANG_MODULE_CACHE_PATH in the private TMPDIR when the user's environment does not
     (cli.private_tmp_environment): the plain variant measures that default, and ``cache_in_tmpdir``
-    still sets $TMPDIR/clang-modules itself and requires a cache there. The per-user cache directory
-    stays denied: a module cache the agent could write there would be loaded by the user's own
-    unconfined builds.
+    still sets $TMPDIR/clang-modules itself and requires a cache there. Both passed confined in the CI
+    of f3242c4, named in its JUnit: Apple clang honours the variable, `run`'s value included, and
+    xcrun's warning that it cannot write its cache in the denied T directory is not fatal. The per-user
+    cache directory stays denied: a module cache the agent could write there would be loaded by the
+    user's own unconfined builds.
 
     The control gets `run`'s CLANG_MODULE_CACHE_PATH too, in its own TMPDIR (see the test), so both
     sides build with the same variable; ``cache_in_tmpdir`` overrides it on both sides alike.
@@ -1638,7 +1741,9 @@ def _brew_version(ws: Path, env: dict[str, str]) -> Everyday:
     return Everyday([brew, "--version"], lambda done: done.stdout.startswith("Homebrew "), 120)
 
 
-def _headless_chrome(*, own_sandbox: bool = True) -> Callable[[Path, dict[str, str]], Everyday]:
+def _headless_chrome(
+    *, own_sandbox: bool = True, disable_gpu: bool = True
+) -> Callable[[Path, dict[str, str]], Everyday]:
     """INV_C5_COMPUTER_USE_TRUST_GATEWAY denies the window server lookup: headless Chrome must do without it.
 
     The effect: the page's marker in --dump-dom's output. In the CI of f3747db Chrome aborted confined
@@ -1647,17 +1752,32 @@ def _headless_chrome(*, own_sandbox: bool = True) -> Callable[[Path, dict[str, s
     not empty and otherwise NSTemporaryDirectory() (Chromium's base/files/file_util_apple.mm). That
     NSTemporaryDirectory() gives the per-user T directory the profile denies, not $TMPDIR, is inferred
     from that failure (the private TMPDIR was writable); Chromium's code shows only the order. `run`
-    now sets MAC_CHROMIUM_TMPDIR to the private TMPDIR when unset or empty; whether the rest of
-    Chrome's start-up then works confined is what this variant measures. The control gets the same
-    variable, in its own TMPDIR. Either way the socket's path is longer than sockaddr_un's 104-byte
+    now sets MAC_CHROMIUM_TMPDIR to the private TMPDIR when unset or empty, and the control gets the
+    same variable in its own TMPDIR. Either way the socket's path is longer than sockaddr_un's 104-byte
     sun_path (about 113 bytes under a private TMPDIR in the per-user T directory); on macOS Chromium
     binds it with an oversized sockaddr that takes up to 253 (chrome/browser/process_singleton_posix.cc,
     SetupSockAddr).
 
-    Past that step Chrome's helper processes apply a Seatbelt profile of their own and abort when they
-    cannot ("Failed to initialize sandbox.", chrome/app/chrome_exe_main_mac.cc). Should Seatbelt refuse
-    a profile inside another (a hypothesis, not measured), Chrome confined would work only with
-    ``own_sandbox=False``: --no-sandbox, its helpers then confined by `run`'s profile alone.
+    In the CI of f3242c4 (its JUnit) that line was gone, and Chrome died by a signal confined while it
+    rendered the page unconfined. [chrome-headless] by SIGTRAP (exit 133), with only three Crashpad
+    lines in its stderr: two denied stats of the real ~/Library, not the decoy HOME, and "ReadExactly:
+    expected 8, observed 0". At f3747db the same three lines came before the socket directory's, so this
+    stderr does not show whether Chrome got that far. [chrome-headless-no-sandbox]
+    (``own_sandbox=False``: --no-sandbox, the helpers confined by `run`'s profile alone) did: after
+    those lines it started helper processes, which Chrome only launches past that step (Chromium's code:
+    the step runs from chrome_main_delegate.cc, whose hooks content runs before BrowserMain), and died
+    by SIGSEGV (exit 139) after "XPC error for connection com.apple.backupd.sandbox.xpc: Connection
+    invalid", "CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670" and "Trying to load the
+    allocator multiple times. This is *not* supported.". Why it dies is not measured. That Chrome's own
+    sandbox cannot be applied inside `run`'s is a hypothesis, not measured: no "Failed to initialize
+    sandbox.", the line a helper prints when it fails there, was captured, and Chrome died without its
+    sandbox too. Both are a declared limit (CHROME_DEATH), for which no rule is loosened: the window
+    server stays denied, as INV_C5_COMPUTER_USE_TRUST_GATEWAY asks. That this denial is part of what
+    keeps the screen from being captured is inferred: test_the_screen_cannot_be_captured and
+    test_the_window_server_gives_the_sandbox_no_image_of_the_display passed at f3242c4, under the
+    profile as a whole, and which rule closes capture is not isolated. Both ran with --disable-gpu, as
+    every Chrome variant has since AX-210; ``disable_gpu=False`` drops it, and nothing else, in the
+    exploratory variant.
     """
 
     def prepare(ws: Path, env: dict[str, str]) -> Everyday:
@@ -1668,7 +1788,7 @@ def _headless_chrome(*, own_sandbox: bool = True) -> Callable[[Path, dict[str, s
         argv = [
             chrome,
             "--headless=new",
-            "--disable-gpu",
+            *(("--disable-gpu",) if disable_gpu else ()),
             "--no-first-run",
             *(() if own_sandbox else ("--no-sandbox",)),
             f"--user-data-dir={ws / 'chrome-profile'}",
@@ -1693,6 +1813,35 @@ EVERYDAY: dict[str, Callable[[Path, dict[str, str]], Everyday]] = {
     "brew-version": _brew_version,
     "chrome-headless": _headless_chrome(),
     "chrome-headless-no-sandbox": _headless_chrome(own_sandbox=False),
+    "chrome-headless-no-sandbox-without-disable-gpu": _headless_chrome(own_sandbox=False, disable_gpu=False),
+}
+# Headless Chrome on macOS, since the CI of f3242c4: a declared limit, and one exploratory variant.
+CHROME_DEATH = pytest.mark.xfail(
+    strict=True,
+    raises=DeclaredLimit,
+    reason="declared limit (macOS): headless Chrome dies by a signal under run's profile and renders the page "
+    "unconfined (f3242c4: SIGTRAP with its own sandbox, SIGSEGV with --no-sandbox); should it render the page "
+    "confined, this XPASS(strict) fails",
+)
+CHROME_EXPLORATORY = pytest.mark.xfail(
+    strict=False,
+    reason="exploratory (macOS): [chrome-headless-no-sandbox] without --disable-gpu, nothing else changed; never "
+    "red: XPASS if Chrome renders the page confined (in the JUnit, a passed testcase), otherwise XFAIL with what "
+    "it did (in the JUnit, skipped of type pytest.xfail), or SKIPPED if its control fails or it times out",
+)
+EVERYDAY_MARKS = {
+    "chrome-headless": CHROME_DEATH,
+    "chrome-headless-no-sandbox": CHROME_DEATH,
+    "chrome-headless-no-sandbox-without-disable-gpu": CHROME_EXPLORATORY,
+}
+# Lines of Chrome's stderr that tell its failures apart: the XFAIL line counts each and quotes the first.
+CHROME_LINES = {
+    "socket directory": "Failed to create socket directory",  # f3747db, before MAC_CHROMIUM_TMPDIR
+    "sandbox init": "Failed to initialize sandbox",  # a helper could not apply Chrome's own profile
+    "Crashpad": "crashpad",
+    "backupd XPC": "com.apple.backupd.sandbox.xpc",
+    "CVDisplayLink": "CVDisplayLinkCreateWithCGDisplay failed",
+    "allocator": "Trying to load the allocator multiple times",
 }
 
 
@@ -1743,38 +1892,102 @@ def _journal_story(path: Path) -> str:
     return ", ".join(story) or "no entries"
 
 
+def _signal_death(done: subprocess.CompletedProcess[str], journal: Path) -> str | None:
+    """The signal that ended the command by itself after `run` started it confined, or None.
+
+    `run` journals run_end only once the trampoline reported the exec (a refusal journals run_refused),
+    with the agent's exit code as Popen gives it (-n: signal n), and then exits with 128 + n; ended_by
+    names a SIGTERM or SIGHUP to `run` that ended the session instead. The shape needs a single run_end
+    without ended_by, a negative code and 128 minus it as `run`'s exit status: in the CI of f3242c4,
+    -5 and 133 for [chrome-headless], -11 and 139 for [chrome-headless-no-sandbox].
+    """
+    if not journal.exists():
+        return None
+    try:
+        with ConfineJournal(journal) as opened:
+            ends = [entry.body for entry in opened.entries() if entry.kind == "run_end"]
+    except JournalError:
+        return None
+    if len(ends) != 1 or ends[0].get("ended_by"):
+        return None
+    code = ends[0].get("exit_code")
+    if not isinstance(code, int) or code >= 0 or done.returncode != 128 - code:
+        return None
+    with contextlib.suppress(ValueError):
+        return signal.Signals(-code).name
+    return f"signal {-code}"
+
+
+def _lines_named(text: str, named: dict[str, str]) -> str:
+    """How many lines of ``text`` contain each of ``named``'s strings, the first such line of each, and the last.
+
+    Each quoted line keeps its last 200 characters (the last line, 300): the message, after the log prefix.
+    """
+    lines = [line.strip() for line in text.splitlines() if line.strip()]
+    found = {label: [line for line in lines if needle in line] for label, needle in named.items()}
+    counts = ", ".join(f"{label}: {len(matching)}" for label, matching in found.items())
+    firsts = "; ".join(f"{label} {matching[0][-200:]!r}" for label, matching in found.items() if matching)
+    last = lines[-1][-300:] if lines else ""
+    return f"stderr: {len(lines)} lines ({counts}); the first of each: {firsts or 'none'}; the last {last!r}"
+
+
 @macos
-@pytest.mark.parametrize("name", list(EVERYDAY))
-def test_what_agents_run_every_day_works_through_run(tmp_path: Path, name: str) -> None:
+@pytest.mark.parametrize("name", [pytest.param(name, marks=EVERYDAY_MARKS.get(name, ()), id=name) for name in EVERYDAY])
+def test_what_agents_run_every_day_works_through_run(tmp_path: Path, name: str, request: pytest.FixtureRequest) -> None:
     """Positive control through the real command line: `babylon60 run --journal <tmp> [options] -- <command>`.
 
     Decoy HOME, cwd = workspace. The same command first runs unconfined with the environment `run`
     gives the agent: a TMPDIR of its own and the variables `run` points into it
     (``cli.private_tmp_environment``: clang's module cache, and Chrome's temporary directory on
     macOS), so both sides get the same variables, each in its own TMPDIR. The test skips when the
-    control fails. Confined, a failure fails the test with the command's stderr and what the journal
-    recorded (run_refused when the trampoline did not exec it): this is what the denials cost. A
-    confined run that ``_bounded`` ends at its timeout is inconclusive: a skip with the reason.
+    control fails. Confined, a failure fails the test with the command's stderr, what the journal
+    recorded (run_refused when the trampoline did not exec it) and the control's exit and stderr:
+    this is what the denials cost. A confined run that ``_bounded`` ends at its timeout is
+    inconclusive: a skip with the reason.
+
+    Headless Chrome is a declared limit on macOS (CHROME_DEATH): its measured shape, a death by a
+    signal after `run` started it confined (``_signal_death``) while the control rendered the page,
+    ends in ``_declared_limit``, whose XFAIL line carries the exit, the signal and, for each kind of
+    line that tells Chrome's failures apart (CHROME_LINES), how many its stderr has and the first, plus
+    its last line; any other failure fails, and a page rendered confined is an XPASS(strict), which
+    fails too. The exploratory variant (CHROME_EXPLORATORY) is never red: XPASS when it renders the
+    page, otherwise XFAIL with what it did, or a skip as above. In the JUnit an XPASS that is not
+    strict is a passed testcase, and an XFAIL a skipped one of type pytest.xfail.
     """
     ws, tmp, env = _everyday_session(tmp_path / "control")
     control = EVERYDAY[name](ws, env)
     control_env = {**env, **cli.private_tmp_environment(env, str(tmp))}  # what `run` adds, in the control's TMPDIR
-    done = _bounded(control.argv, timeout=control.timeout, env=control_env, cwd=ws)
-    if not control.worked(done):
-        pytest.skip(f"{name} fails here even unconfined (exit {done.returncode}): {done.stderr[-2000:]!r}")
+    unconfined = _bounded(control.argv, timeout=control.timeout, env=control_env, cwd=ws)
+    if not control.worked(unconfined):
+        pytest.skip(f"{name} fails here even unconfined (exit {unconfined.returncode}): {unconfined.stderr[-2000:]!r}")
     ws, _tmp, env = _everyday_session(tmp_path / "confined")
     confined = EVERYDAY[name](ws, env)
     journal = tmp_path / "journal.db"
     run = [*CLI, "run", "--journal", str(journal), *confined.options, "--", *confined.argv]
     # `run` creates the agent's private TMPDIR under the session's own, as in a terminal.
     done = _bounded(run, timeout=confined.timeout + 60, env={**env, "TMPDIR": tempfile.gettempdir()}, cwd=ws)
-    worked = confined.worked(done)
-    if not worked and _timed_out(done):
+    if confined.worked(done):
+        return  # under CHROME_DEATH an XPASS(strict), a failure: the declared limit is gone
+    if _timed_out(done):
         pytest.skip(f"{name} did not finish under `babylon60 run`; inconclusive: {done.stderr[-2000:]!r}")
-    assert worked, (
+    report = (
         f"{name} fails under `babylon60 run` (exit {done.returncode}; journal: {_journal_story(journal)}); "
-        f"stderr: {done.stderr[-4000:]!r}; stdout: {done.stdout[-1000:]!r}"
+        f"stderr: {done.stderr[-4000:]!r}; stdout: {done.stdout[-1000:]!r}; unconfined it worked (exit "
+        f"{unconfined.returncode}; stderr: {unconfined.stderr[-1000:]!r})"
     )
+    mark = EVERYDAY_MARKS.get(name)
+    if mark is not None:  # headless Chrome
+        death = _signal_death(done, journal)
+        ended = f"died by {death} after `run` started it confined" if death else "did not render the page confined"
+        shape = (
+            f"{name} {ended} (exit {done.returncode}; journal: {_journal_story(journal)}), while unconfined it "
+            f"rendered the page; {_lines_named(done.stderr, CHROME_LINES)}"
+        )
+        if death and mark is CHROME_DEATH:
+            _declared_limit(request, f"declared limit (macOS): {shape}")
+        if mark is CHROME_EXPLORATORY:
+            pytest.xfail(f"exploratory: {shape}" + ("" if death else f"; stderr tail: {done.stderr[-600:]!r}"))
+    raise AssertionError(report)
 
 
 # Declared limit: setuid programs ------------------------------------------------------------------
@@ -1824,11 +2037,14 @@ ALLOW_DEFAULT_ONLY = "(version 1)\n(allow default)\n"
 @pytest.mark.xfail(
     strict=True,
     raises=DeclaredLimit,
-    reason="declared limit (macOS): exec of /bin/ps (setuid root) answers EPERM inside the sandbox; "
-    "[allow-default] tells whether a rule of run's profile causes it (a user reports it logged as "
-    "forbidden-exec-sugid: developer.apple.com/forums/thread/689303)",
+    reason="declared limit (macOS): the sandbox itself refuses exec of /bin/ps (setuid root) with EPERM, "
+    "whatever run's profile says: [allow-default], under a profile of only (allow default), XFAILed at f3242c4 "
+    "as [run-profile] did; other setuid and setgid programs are inferred from a user's report "
+    "(forbidden-exec-sugid: developer.apple.com/forums/thread/689303)",
 )
-def test_a_setuid_program_runs_inside_the_sandbox(box: Box, profile: str, monkeypatch: pytest.MonkeyPatch) -> None:
+def test_a_setuid_program_runs_inside_the_sandbox(
+    box: Box, profile: str, monkeypatch: pytest.MonkeyPatch, request: pytest.FixtureRequest
+) -> None:
     """At f3747db the CI's [ps-own-pid] failed confined: "/bin/sh: /bin/ps: Operation not permitted".
 
     /bin/ps is setuid root. No rule of `run`'s profile is about executing programs (it denies writing
@@ -1837,10 +2053,13 @@ def test_a_setuid_program_runs_inside_the_sandbox(box: Box, profile: str, monkey
     "deny(1) forbidden-exec-sugid" in the log and a copy without the bit running
     (developer.apple.com/forums/thread/689303). ``run-profile`` measures the limit under the profile
     `run` renders; ``allow-default`` has the patched renderer return ALLOW_DEFAULT_ONLY, so a refusal
-    there is the sandbox's own, whatever a profile says. Only /bin/ps is measured; that every setuid
-    program is refused rests on that report.
+    there is the sandbox's own, whatever a profile says. In the CI of f3242c4 both XFAILed, named in
+    its JUnit: measured, the sandbox itself refuses the exec of /bin/ps. Their XFAIL showed the
+    marker's fixed reason, so what the copy without the bit did there is not recorded; since AX-226
+    ``_declared_limit`` shows it. Only /bin/ps is measured; that every setuid or setgid program is
+    refused rests on that report.
 
-    Only the declared shape raises DeclaredLimit: the control, launched as the attempt
+    Only the declared shape ends in ``_declared_limit``: the control, launched as the attempt
     (``_control_as_run``), runs /bin/ps, or the test skips; confined, the trampoline exec'd the probe
     and exec of /bin/ps fails with EPERM. The probe also runs a copy of /bin/ps without the setuid
     bit. When the copy lists its caller unconfined it must do so confined too (then the bit is what
@@ -1848,7 +2067,7 @@ def test_a_setuid_program_runs_inside_the_sandbox(box: Box, profile: str, monkey
     elsewhere), the limit is still measured on /bin/ps and the message says so. Should /bin/ps run
     confined, the strict xfail fails: the limit is gone or, with ``allow-default`` alone, a rule of
     `run`'s profile caused it. Any other shape fails with the reports. Agents list their own
-    processes without ps: see the own-processes-sysctl positive control.
+    processes without ps: see the own-processes-sysctl positive control, which passed at f3242c4.
     """
     if not os.path.isfile(PS) or not os.stat(PS).st_mode & (stat.S_ISUID | stat.S_ISGID):
         pytest.skip(f"{PS} is not a setuid or setgid program here; nothing to measure")
@@ -1887,12 +2106,134 @@ def test_a_setuid_program_runs_inside_the_sandbox(box: Box, profile: str, monkey
     assert report.get(PS) == {"errno": "EPERM"}, (
         f"{PS} failed confined ({profile}), but not with EPERM at exec: confined {report}; control {control}"
     )
+    under = "run's profile" if profile == "run-profile" else "a profile of only (allow default)"
     copy_note = (
-        "its copy without the bit runs there"
+        "its copy without the bit, owned by the runner user, lists its caller there, as unconfined"
         if copy_runs
-        else f"its copy without the bit did not list its caller even unconfined ({control.get(str(copy))})"
+        else f"its copy without the bit did not list its caller even unconfined ({control.get(str(copy))}; "
+        f"confined: {report.get(str(copy))})"
     )
-    raise DeclaredLimit(f"exec of the setuid {PS} answers EPERM inside the sandbox ({profile}); {copy_note}")
+    _declared_limit(
+        request, f"declared limit (macOS): exec of the setuid {PS} answers EPERM under {under}; {copy_note}"
+    )
+
+
+# Declared limit L6: the kern.proc lists --------------------------------------------------------------
+
+# Run as the agent: list every process with sysctl(KERN_PROC_ALL), as `ps -A` does, and report the rows
+# (pid, parent, name, user) of this process and of the pids given. kinfo_proc as in OWN_PROCESSES_PROBE,
+# plus kp_eproc.e_ucred.cr_uid, the effective uid `ps -o user` shows, at offset 420 by the layout of
+# sys/sysctl.h; the control checks the layout: the probe must find itself with its own parent and
+# effective uid. A process started between the two calls makes the second one fail with ENOMEM: up to
+# three tries, each with room for 64 more.
+ALL_PROCESSES_PROBE = r"""
+import ctypes, errno, json, os, struct, sys
+KINFO, PID, COMM, PPID, UID = 648, 40, 243, 560, 420
+libc = ctypes.CDLL(None, use_errno=True)
+wanted = {os.getpid(), *map(int, sys.argv[1:])}
+report = {"pid": os.getpid(), "ppid": os.getppid(), "uid": os.geteuid()}
+mib = (ctypes.c_int * 4)(1, 14, 0, 0)  # CTL_KERN, KERN_PROC, KERN_PROC_ALL
+for _ in range(3):
+    size = ctypes.c_size_t(0)
+    if libc.sysctl(mib, ctypes.c_uint(4), None, ctypes.byref(size), None, ctypes.c_size_t(0)) != 0:
+        report["error"] = errno.errorcode.get(ctypes.get_errno(), str(ctypes.get_errno()))
+        break
+    buffer = ctypes.create_string_buffer(size.value + 64 * KINFO)
+    size = ctypes.c_size_t(len(buffer))
+    if libc.sysctl(mib, ctypes.c_uint(4), buffer, ctypes.byref(size), None, ctypes.c_size_t(0)) == 0:
+        raw = buffer.raw[: size.value]
+        rows = [
+            [
+                struct.unpack_from("<i", raw, offset + PID)[0],
+                struct.unpack_from("<i", raw, offset + PPID)[0],
+                raw[offset + COMM : offset + COMM + 17].split(b"\0")[0].decode("utf-8", "replace"),
+                struct.unpack_from("<I", raw, offset + UID)[0],
+            ]
+            for offset in range(0, len(raw) - KINFO + 1, KINFO)
+        ]
+        report.pop("error", None)
+        report["count"] = len(rows)
+        report["listed"] = [row for row in rows if row[0] in wanted]
+        break
+    code = ctypes.get_errno()
+    report["error"] = errno.errorcode.get(code, str(code))
+    if code != errno.ENOMEM:
+        break
+print(json.dumps(report), flush=True)
+"""
+
+
+def _lists_itself(report: dict[str, Any]) -> bool:
+    """The probe's listing names the probe with its own parent and effective uid: the kinfo_proc layout holds."""
+    rows = [row for row in report.get("listed", []) if isinstance(row, list) and len(row) == 4]
+    return [report.get("pid"), report.get("ppid"), report.get("uid")] in [[row[0], row[1], row[3]] for row in rows]
+
+
+@macos
+@pytest.mark.xfail(
+    strict=False,
+    raises=DeclaredLimit,
+    reason="declared limit L6 (macOS): sysctl(KERN_PROC_ALL) inside the sandbox lists processes outside it (pid, "
+    "parent, name, user), deduced from XNU's sysctl_prochandle; XFAIL if it lists the victim, XPASS if not",
+)
+def test_processes_outside_the_sandbox_are_not_listed_by_kern_proc(box: Box, request: pytest.FixtureRequest) -> None:
+    """L6 on macOS: the kern.proc lists, which no rule of the profile denies, outside the sandbox.
+
+    The profile denies process information (process-info*) and kern.procargs* for every process
+    outside the sandbox, and reading their arguments and environment was denied confined
+    (test_other_processes_exec_strings_are_not_readable: its 8 variants passed at f3242c4). XNU's
+    kern.proc handler (bsd/kern/kern_sysctl.c, sysctl_prochandle) makes no per-process check, so
+    pid, parent, name and user would still be listed: deduced, NO_VERIFICADO until this test runs.
+    The victim is /bin/sleep 600, started by this test outside the sandbox; should it have ended by
+    the time the confined probe is done, the test skips. The control, launched as the attempt
+    (``_control_as_run``), must list the probe with its parent and effective uid, and the victim with
+    this test as parent and this test's effective uid, or the test skips. Confined, the probe must
+    have run: a listing that names the victim, all four fields alike, is the declared shape
+    (``_declared_limit``, XFAIL); a denial, or a listing that names the probe but not the victim, is a
+    pass (XPASS: the deduction is wrong). Non-strict, so neither makes the CI red; any other shape
+    fails. Both reports are JUnit properties (kern_proc_control_report, kern_proc_confined_report), so
+    an XPASS, a passed testcase there, still records the error or how many processes each listed.
+    """
+    victim = subprocess.Popen(
+        ["/bin/sleep", "600"], stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
+    )
+    outside = [victim.pid, os.getpid(), "sleep", os.geteuid()]
+    argv = [launcher.interpreter(), "-I", "-S", "-c", ALL_PROCESSES_PROBE, str(victim.pid)]
+    try:
+        control = _last_json(_control_as_run(box, argv, "the kern.proc.all probe", timeout=60))
+        request.node.user_properties.append(("kern_proc_control_report", json.dumps(control)[-2000:]))
+        if not _lists_itself(control) or outside not in control.get("listed", []):
+            pytest.skip(f"sysctl(KERN_PROC_ALL) does not list the probe and the victim here even unconfined: {control}")
+        confined = _as_run(box, argv, timeout=60)
+        if confined.status.get("timeout"):
+            pytest.skip(
+                f"the kern.proc.all probe did not finish within the launcher's timeout, confined: {_stderr(confined)!r}"
+            )
+        assert confined.status.get("ok"), f"the kern.proc.all probe never ran: {confined.status} {_stderr(confined)!r}"
+        report = _last_json(confined)
+        request.node.user_properties.append(("kern_proc_confined_report", json.dumps(report)[-2000:]))
+        if victim.poll() is not None:
+            pytest.skip(
+                f"the victim ended (exit {victim.returncode}) by the end of the confined probe; inconclusive: {report}"
+            )
+        assert report.get("pid"), f"the kern.proc.all probe did not report confined: {report}"
+        listed = report.get("listed", [])
+        if outside in listed:
+            _declared_limit(
+                request,
+                f"declared limit L6 (macOS): sysctl(KERN_PROC_ALL) inside the sandbox lists a process outside it, "
+                f"pid {victim.pid}, parent {os.getpid()}, name sleep, user {os.geteuid()}, among "
+                f"{report.get('count')} processes (unconfined, the control listed {control.get('count')})",
+            )
+        assert not any(isinstance(row, list) and row[:1] == [victim.pid] for row in listed), (
+            f"the confined probe lists the victim's pid with other fields than the control did ({outside}): {report}"
+        )
+        assert report.get("error") in DENIED or _lists_itself(report), (
+            f"the confined probe was neither denied nor able to list itself: {report}"
+        )
+    finally:
+        victim.kill()
+        victim.wait()
 
 
 # The variables `run` points into the private TMPDIR (every platform) ------------------------------

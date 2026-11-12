@@ -33,24 +33,32 @@ networking, and narrows the rest:
   ``clipboard``), Kerberos (GSSCred), CoreSimulator, DiskArbitration, window server,
   Apple Event, accessibility and text input services. Signals, process information
   and task ports are allowed back for the sandbox's own processes (the agent and its
-  children). The ``kern.proc`` lists (pid, parent, name and user of every process)
-  are not process information to XNU: ``sysctl_prochandle`` makes no such check, so
-  they stay readable (deduced from bsd/kern/kern_sysctl.c, NO_VERIFICADO).
+  children). Reading the arguments and environment (``KERN_PROCARGS2``) of a
+  process outside the sandbox is denied (measured in the CI of f3242c4). The
+  ``kern.proc`` lists (pid, parent, name and user of every process) are not
+  process information to XNU: ``sysctl_prochandle`` makes no such check, so they
+  stay readable (deduced from bsd/kern/kern_sysctl.c, NO_VERIFICADO until the
+  macOS CI runs ``test_processes_outside_the_sandbox_are_not_listed_by_kern_proc``).
 
-Two limits stay. Executing /bin/ps (setuid root) through ``run`` answered EPERM at
-exec in the CI of f3747db, and no rule here is about executing programs. In an
-Apple developer forum thread a user reports the same for /bin/ps under
-sandbox-exec, logged as forbidden-exec-sugid, with a copy without the bit running
-(developer.apple.com/forums/thread/689303; the post does not show its profile).
-That the sandbox refuses it whatever the profile says rests on reading this
-profile until the CI measures it under one of only ``(allow default)``
-(NO_VERIFICADO); that every setuid program is refused, on that report alone. A
-declared limit, not something to open: ``(with no-sandbox)`` would run the
-program outside the sandbox. And the per-user ``T`` and ``C`` directories stay
-denied, so ``run`` points the tools that write there instead of ``$TMPDIR``
-(clang's module cache; Chrome's ProcessSingleton socket, inferred) into the
-private TMPDIR through their environment variables
-(``cli.private_tmp_environment``).
+Limits stay. The sandbox itself refuses to execute /bin/ps (setuid root): exec
+answered EPERM under this profile and under one of only ``(allow default)`` in
+the CI of f3242c4 (``test_a_setuid_program_runs_inside_the_sandbox``, both
+variants XFAIL, named in its JUnit), and no rule here is about executing
+programs. That every setuid or setgid program is refused rests on an Apple
+developer forum thread, where a user reports the same for /bin/ps under
+sandbox-exec, logged as forbidden-exec-sugid, with a copy without the bit
+running (developer.apple.com/forums/thread/689303). A declared limit, not
+something to open: ``(with no-sandbox)`` would run the program outside the
+sandbox. Headless Chrome died by a signal confined in that CI, with its own
+sandbox and without it, while it rendered the page unconfined: a declared limit
+too, for which no rule is loosened; the window server stays denied, as
+INV_C5_COMPUTER_USE_TRUST_GATEWAY asks. That this denial is part of what keeps
+the screen from being captured is inferred: capture was measured closed in that
+CI under the profile as a whole, and which rule closes it is not isolated. And
+the per-user ``T`` and ``C`` directories stay denied, so ``run`` points the
+tools that write there instead of ``$TMPDIR`` (clang's module cache; Chrome's
+ProcessSingleton socket, inferred) into the private TMPDIR through their
+environment variables (``cli.private_tmp_environment``).
 
 Precedence: among rules that carry a filter the last match wins; an unfiltered
 rule is only the operation's fallback, and a rule naming an operation outright
@@ -66,8 +74,8 @@ exact, so a case-sensitive volume never gains a sibling grant. This is rule
 rendering, not a root decision: the grants were already checked by inode
 identity in ``policy.py``.
 
-Seatbelt's runtime behaviour described here is NO_VERIFICADO until the macOS CI
-job runs ``tests/test_confine_seatbelt.py``.
+Where this docstring cites the macOS CI of f3242c4, its JUnit names the result;
+the rest of Seatbelt's runtime behaviour described here is NO_VERIFICADO.
 """
 
 from __future__ import annotations
