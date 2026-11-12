@@ -189,64 +189,135 @@ Los vectores L se ejecutan aparte y nunca cuentan como bloqueados.
   rc de la shell…), `run` lo detecta, avisa y lo registra; no lo impide. Las
   rutas que no pudo comparar enteras se nombran.
 - **macOS.**
-  - En el runner `macos-15` de GitHub, Seatbelt pasó los tests y la demo en
-    ae39991. En f156be6 falló un test del terminal privado por una carrera del
-    propio test, corregida en 14bbbef y comprobada solo en Linux, y esta
-    revisión añade tests que la CI aún no ha ejecutado (abajo). Falta una
-    ejecución en un Mac propio, y no hay testigo de aperturas sin privilegios.
+  - En el runner `macos-15` de GitHub, la CI de f3747db dio 531 tests que
+    pasan, 3 fallos, 71 omitidos y 2 xfail (memoria compartida POSIX y
+    existencia de nombres, dos de los límites declarados de abajo), y no grabó
+    la demo, que solo se graba si pasan los tests. Los tres fallos eran
+    controles positivos a través de `run`: `ps`, `clang -fmodules` y Chrome sin
+    interfaz; esta revisión los aborda (abajo), `NO_VERIFICADO` hasta su CI.
+    Ese registro (`pytest -q -rsxX`) nombra los fallos, los xfail y los
+    XPASS; de las omisiones da el lugar y el motivo, no el test, y de los
+    tests que pasan, solo la cuenta. Lo que este apartado da por pasado en
+    f3747db se infiere de que no figura entre los fallos ni los xfail y de
+    que ninguna omisión le corresponde por su lugar y su motivo. Desde esta
+    revisión cada trabajo de la CI guarda un JUnit XML que nombra el
+    resultado de cada test. La carrera del test del terminal privado que
+    falló en f156be6 no se repitió en f3747db (inferido). Falta una ejecución
+    en un Mac propio, y no hay testigo de aperturas sin privilegios.
   - Sin subreaper, `run` termina el grupo de procesos del agente; un
     descendiente que sale de él con `setsid` sobrevive, confinado y con un
     terminal revocado.
   - El perfil parte de `(allow default)` y niega lo que se ha medido en el
-    runner `macos-15`: abrir aplicaciones con LaunchServices (`open`), Apple
-    Events, crear trabajos de launchd, enviar señales u obtener información de
-    procesos fuera del sandbox, escribir preferencias por cfprefsd, el
-    portapapeles, Kerberos (GSSCred), DiskArbitration y las lecturas en
-    `/private/tmp`, `/private/var/tmp`, `/Volumes` y el directorio del usuario
-    en `/private/var/folders`. Depurar procesos fuera del sandbox se midió
-    negado en ae39991; esta revisión permite los puertos de tarea dentro del
-    propio sandbox, así que su CI vuelve a medir esa negación. Apple Events se
-    mide con Finder, con control y confinado; solo la variante con Terminal
-    necesita un consentimiento que nadie da en la CI.
+    runner `macos-15`: abrir aplicaciones con LaunchServices (`open`), enviar
+    señales a procesos fuera del sandbox y leer sus argumentos y su entorno
+    (`KERN_PROCARGS2`; las listas de `kern.proc`, no: ver «Seatbelt
+    (macOS)»), buscar los servicios del portapapeles
+    (`com.apple.pasteboard.1`), de Kerberos (GSSCred) y de DiskArbitration, y
+    las lecturas en `/private/tmp` y en el directorio del usuario en
+    `/private/var/folders`. Esos tests comprueban que el programa que intenta
+    cada acción llegó a ejecutarse confinado. El perfil niega también crear
+    trabajos de launchd, escribir preferencias por cfprefsd y leer o escribir
+    el portapapeles con `pbpaste` y `pbcopy`, pero sus tests aún no lo
+    comprueban: pasarían aunque la herramienta no se hubiera ejecutado
+    (`NO_VERIFICADO`). En f3747db pasaron además (inferido): que
+    `(deny lsopen)` baste por sí solo y que, sin esa regla, el resto del
+    perfil deje a `open` arrancar la app, así que es ella la que cierra
+    MACOS-1; montar una imagen con `hdiutil` sobre un directorio del usuario
+    fuera de toda regla, como `/opt/homebrew/bin`; `launchctl setenv`, que
+    cambiaría el entorno de lo que launchd arranque después; el servidor de
+    ventanas, que no dio imagen confinado ni a `screencapture` ni, en el
+    propio proceso, a `CGDisplayCreateImage`; las búsquedas de
+    `com.apple.windowserver.active` y `com.apple.coreservices.appleevents`, y
+    el aviso de `--allow-clipboard`.
   - Leer las preferencias de otros programas: un `defaults read` confinado no
-    obtuvo nada en las tres ejecuciones de la CI (48a4593, d594608 y ae39991),
-    aunque el perfil solo niega escribirlas; por qué no se ha medido. En esas
-    ejecuciones el control leía con el entorno del test y el intento confinado
-    con el HOME señuelo; desde esta revisión los dos se lanzan igual y la CI lo
-    vuelve a medir.
+    obtuvo nada en las cinco ejecuciones de la CI (48a4593, d594608, ae39991,
+    f156be6 y f3747db), aunque el perfil solo niega escribirlas; por qué no se
+    ha medido. En d594608, ae39991 y f156be6 el registro nombra el test,
+    entonces un xfail, como XPASS. En 48a4593 solo da la cuenta («2 xfailed,
+    1 xpassed»): que el XPASS fuera este test se infiere de que era uno de los
+    tres xfail de la suite en ese commit y el único de ellos que dio XPASS en
+    las ejecuciones siguientes. En f3747db, ya sin xfail y con control e
+    intento lanzados igual, se infiere de que no figura entre los fallos y de
+    que ninguna omisión le corresponde.
+  - Controles positivos a través de `run` que pasaron en f3747db (inferido):
+    `git init` y un commit con el `git` de Xcode y con el de Homebrew, sin
+    `~/.gitconfig` y con uno pequeño bajo `--preset claude-code`, cuyo autor
+    sale de ese archivo; un `venv` de Python; `clang -fmodules` con
+    `CLANG_MODULE_CACHE_PATH` en el TMPDIR del agente, así que el clang de
+    Apple lee esa variable; `swift --version`; `brew --version`, y `lldb`, que
+    se adjunta a un programa que el propio agente arrancó y evalúa `getpid()`
+    dentro.
   - Los mide la CI de esta revisión y siguen `NO_VERIFICADO` hasta entonces:
-    - montar una imagen con `hdiutil` sobre un directorio del usuario fuera de
-      toda regla, como `/opt/homebrew/bin`;
-    - `launchctl setenv`, que cambia el entorno de lo que launchd arranque
-      después;
-    - el servidor de ventanas: `screencapture`, y en el propio proceso
-      `CGDisplayCreateImage`, que debe dar una imagen sin confinar y ninguna
-      confinado;
-    - las búsquedas de `com.apple.windowserver.active` y
-      `com.apple.coreservices.appleevents`;
-    - que `(deny lsopen)` baste por sí solo (un perfil que solo niega eso) y si
-      algo más del perfil impide a `open` arrancar una app (el perfil sin esa
-      regla);
-    - el aviso de `--allow-clipboard` de extremo a extremo;
-    - los controles positivos de lo que un agente usa a diario a través de
-      `run`: `ps`, `git` sin `~/.gitconfig` y con uno pequeño bajo
-      `--preset claude-code`, un `venv` de Python, `clang -fmodules` (también
-      con `CLANG_MODULE_CACHE_PATH` en el TMPDIR del agente), `swift`, `brew`,
-      Chrome sin interfaz y `lldb` sobre un programa que el propio agente
-      arrancó.
+    - Apple Events: hasta f3747db el intento confinado no comprobaba que
+      `osascript` se hubiera ejecutado; una de las dos variantes pasó y la
+      otra se omitió porque su control no terminó en 90 s (el registro no dice
+      cuál). Ahora control e intento se lanzan igual y el intento debe haberse
+      ejecutado sin efecto;
+    - depurar procesos fuera del sandbox: el test pasó en f3747db, pero podía
+      pasar sin que `lldb` llegara a adjuntarse. Ahora, en una misma sesión
+      confinada, `lldb` debe evaluar `getpid()` en un hijo propio y no
+      ejecutar nada en un proceso de fuera en el que el control, lanzado
+      igual, sí ejecuta código antes del intento y otra vez después;
+    - leer un archivo en `/private/var/tmp` y, en un test aparte, listar
+      `/Volumes`: hasta ahora solo lo comprobaba el test que lee el perfil
+      generado;
+    - los dos controles positivos que fallaron en f3747db: `clang -fmodules`,
+      en el directorio de cachés del usuario, que el perfil niega («unable to
+      open output file '.../C/clang/ModuleCache/...': 'Operation not
+      permitted'»), y Chrome sin interfaz, que abortó con «Failed to create
+      socket directory» (en el directorio T del usuario, también negado,
+      inferido: ver «TMPDIR privado»). Ahora `run` les da
+      `CLANG_MODULE_CACHE_PATH` y `MAC_CHROMIUM_TMPDIR` en el TMPDIR privado,
+      su control sin confinar recibe las mismas variables en su propio TMPDIR
+      y Chrome se mide también con `--no-sandbox` (ver «Servicios de macOS
+      negados»);
+    - listar los procesos propios sin `ps`: el grupo de procesos del agente,
+      con su hijo, por `sysctl` (`kern.proc.pgrp`);
+    - el límite de los programas setuid, con el perfil de `run` y con uno
+      que solo dice `(allow default)` (abajo).
 
     Sin un perfil que conceda `~/.gitconfig`, git se detiene en Linux cuando
     el archivo existe (medido: «fatal: unknown error occurred while reading
     the configuration files»).
+  - Programas setuid (límite declarado): en f3747db, ejecutar `/bin/ps`,
+    setuid root, a través de `run` dio «/bin/sh: /bin/ps: Operation not
+    permitted» (`EPERM` en `execve`). Ninguna regla del perfil trata de
+    ejecutar programas (la de `file-write-setugid` impide poner el bit, no
+    usarlo). En un hilo de los foros de desarrolladores de Apple
+    (developer.apple.com/forums/thread/689303), un usuario cuenta el mismo
+    error con `/bin/ps` bajo `sandbox-exec`, con un perfil que no muestra y
+    «deny(1) forbidden-exec-sugid» en el registro del sistema, y que una copia
+    sin el bit funciona. Que lo niegue el propio sandbox y no una regla del
+    perfil se apoya en esa lectura del perfil y en ese hilo hasta que la
+    variante con solo `(allow default)` (abajo) lo mida (`NO_VERIFICADO`);
+    que valga para todo programa setuid, y por el nombre («sugid») también
+    para los setgid, se apoya solo en el hilo. Un perfil puede pedir que un
+    programa se ejecute fuera del sandbox (`(with no-sandbox)`, como en otro
+    hilo de esos foros, developer.apple.com/forums/thread/707513), pero así el
+    agente saldría del confinamiento: el perfil no lo hace. Desde esta
+    revisión el test es un xfail estricto que solo admite esa forma: el
+    control, lanzado igual, ejecuta `/bin/ps`; confinado, `/bin/ps` da
+    `EPERM`. Se mide con el perfil de `run` y con uno que solo dice
+    `(allow default)`, donde una negación ya no puede venir de una regla del
+    perfil. Si una copia de `/bin/ps` sin el bit lista su proceso sin
+    confinar, también debe hacerlo confinada; si ni sin confinar funciona, el
+    test lo dice y sigue midiendo `/bin/ps` (`NO_VERIFICADO` hasta la CI de
+    esta revisión). Sin `ps`, el agente consultaría `sysctl`
+    (`kern.proc.pgrp`): es el control positivo de la lista de arriba,
+    `NO_VERIFICADO`.
+  - Con `clang`, `xcrun` avisó dos veces de que no podía crear su caché,
+    `xcrun_db`, en el directorio T del usuario, que sigue negado; es un aviso,
+    no un fallo. xcrun(1) documenta `xcrun_nocache` como «no consultar la
+    caché», lo que refresca la entrada en vez de evitar escribirla, así que
+    `run` no la fija.
   - Existencia de nombres (límite declarado): dentro de un directorio
     denegado, el error dice qué nombres existen, aunque su contenido sigue
-    ilegible. Que un nombre que falta dé `ENOENT` y la clave existente `EPERM`
-    o `EACCES` se infiere del fallo esperado de las tres ejecuciones de la CI;
-    ningún registro muestra esos valores, porque aquel xfail admitía cualquier
-    fallo del test. Desde esta revisión el test solo admite esa forma, así que
-    su próxima ejecución lo mostrará.
-  - Siguen abiertos la memoria compartida POSIX y el llavero por `securityd`,
-    que Claude Code necesita para su sesión.
+    ilegible. El test solo admite como fallo esperado `ENOENT` para un nombre
+    que falta y `EPERM` o `EACCES` para la clave, y en f3747db dio XFAIL: esa
+    es la forma medida (el registro no dice si fue `EPERM` o `EACCES`).
+  - Memoria compartida POSIX y llavero (límites declarados): siguen abiertos
+    la memoria compartida POSIX y el llavero por `securityd`, que Claude Code
+    necesita para su sesión.
   - Como `open` se niega, `claude /login` no abre el navegador: copia la URL
     que imprime.
 - **La demo.** Sus intentos confinados no pasan por el terminal privado de
@@ -351,6 +422,45 @@ primer `node_modules`, la raíz del virtualenv o la carpeta del programa).
   Si retiene algo, `run` se re-ejecuta sin esas variables antes de lanzar al
   agente, así que ni el lanzador las conserva. Es defensa en profundidad:
   Landlock y Seatbelt ya niegan leer el entorno de otro proceso (V22).
+- **TMPDIR privado.** El agente recibe en `TMPDIR` un directorio privado que se
+  borra al acabar. Algunas herramientas no usan `TMPDIR` y escriben donde el
+  agente no puede, y donde lo que dejara sobreviviría a la sesión; `run` les da
+  un sitio dentro de ese directorio salvo que tu entorno ya fije la variable:
+  - `CLANG_MODULE_CACHE_PATH=<TMPDIR>/clang-module-cache`, que el driver de
+    clang lee cuando no recibe `-fmodules-cache-path`. Sin ella,
+    `clang -fmodules` guarda su caché de módulos en el directorio de cachés
+    del usuario en `/private/var/folders` (macOS), que el perfil niega, o en
+    `~/.cache/clang/ModuleCache` (Linux), bajo el HOME negado. Medido en Linux
+    x86_64 con clang 18.1.3 y Landlock, como root y como uid 65534: sin la
+    variable, compilar un módulo propio a través de `run` falla («unable to
+    open output file ... ModuleCache ...»); con la de `run`, compila y la
+    caché queda en el TMPDIR privado
+    (`test_clang_builds_a_module_through_run_with_its_cache_in_the_private_tmpdir`).
+    Fuera del sandbox, un `-fmodules-cache-path` explícito sigue mandando y
+    una compilación sin módulos no la usa. Tu valor se respeta aunque esté
+    vacío, como fuera de `run`: con él clang no usa caché, y una compilación
+    que necesita un módulo falla (medido sin confinar con clang 18.1.3:
+    «fatal error: module 'B60' is needed but has not been provided, and
+    implicit use of module files is disabled»). En macOS el clang de Apple la
+    lee (inferido de la CI de f3747db); con el valor que pone `run`:
+    `NO_VERIFICADO` hasta la CI de esta revisión, que corre ese test y
+    `clang -fmodules` con `@import Foundation`.
+  - `MAC_CHROMIUM_TMPDIR=<TMPDIR>`, solo en macOS, también si la tuya está
+    vacía. Chrome crea el directorio del socket de su ProcessSingleton con
+    `base::GetTempDir`, que en macOS lee esa variable y, si no está o está
+    vacía, `NSTemporaryDirectory()` (código de Chromium,
+    `base/files/file_util_apple.mm`). Que `NSTemporaryDirectory()` dé el
+    directorio T del usuario y no `TMPDIR` se infiere del fallo de f3747db,
+    con el TMPDIR privado escribible; coincide con swift-foundation
+    (`String.temporaryDirectoryPath` lee `_CS_DARWIN_USER_TEMP_DIR` antes que
+    `TMPDIR`) y con un comentario antiguo de Chromium
+    (`base/files/file_util_mac.mm` en 90.0.4430.0: fijar `$TMPDIR` desde fuera
+    no tenía efecto). Que Chrome sin interfaz arranque así confinado:
+    `NO_VERIFICADO` hasta la CI de esta revisión.
+
+  Los directorios de cachés y temporales del usuario siguen negados: una caché
+  de módulos que el agente pudiera escribir allí la cargarían después tus
+  compilaciones sin confinar.
 - **Terminal.** Si `run` tiene un terminal, el agente recibe un
   pseudoterminal privado y `run` hace de relé, como `sudo` con `use_pty`. Al
   acabar, ese terminal cuelga y, en Linux, `run` termina todo lo que el agente
@@ -368,11 +478,18 @@ primer `node_modules`, la raíz del virtualenv o la carpeta del programa).
   (`open`), Apple Events, trabajos de launchd, montajes, señales, información y
   depuración de procesos ajenos y escribir preferencias. El perfil devuelve al
   agente las señales, la información y los puertos de tarea de sus propios
-  procesos. Que pueda señalar a sus hijos está medido; inspeccionarlos con `ps`
-  y depurarlos con `lldb` sigue `NO_VERIFICADO` (en 48a4593, ejecutar
-  `/bin/ps` a través de `run` dio `EPERM`). También siguen `NO_VERIFICADO`
-  hasta la CI de esta revisión que `hdiutil` no pueda montar y que depurar
-  procesos ajenos siga negado.
+  procesos. Que pueda señalar a sus hijos está medido, y depurar con `lldb` un
+  programa que arrancó pasó en f3747db (inferido). Con `ps` no puede
+  inspeccionarlos: ejecutar `/bin/ps`, setuid root, dio `EPERM` en f3747db
+  (límite declarado arriba). Sin `ps`, listaría su grupo de procesos por
+  `sysctl` (`kern.proc.pgrp`): `NO_VERIFICADO` hasta la CI de esta revisión.
+  Las listas de `kern.proc` no pasan por la regla de información de procesos
+  (`sysctl_prochandle`, en XNU, no la consulta) y el perfil solo niega
+  `kern.procargs*` entre las lecturas de `sysctl`, así que con `kern.proc.all`
+  el agente vería también los procesos ajenos: pid, padre, nombre y usuario, no
+  sus argumentos ni su entorno (deducido del código; `NO_VERIFICADO`). Que
+  `hdiutil` no pueda montar pasó en f3747db (inferido); que depurar procesos
+  ajenos siga negado lo vuelve a medir la CI de esta revisión.
 - **Servicios de macOS negados.** El perfil no deja buscar estos servicios Mach:
   el portapapeles (`com.apple.pasteboard.1`), salvo `--allow-clipboard`;
   Kerberos (`com.apple.GSSCred`); CoreSimulator; DiskArbitration; y, por
@@ -382,15 +499,24 @@ primer `node_modules`, la raíz del virtualenv o la carpeta del programa).
   (`com.apple.coreservices.appleevents`) y la entrada de texto
   (`com.apple.tsm.portname`). Por eso, dentro del agente no funcionan `git`,
   `ssh` ni HTTP autenticados con Kerberos (GSSCred), los simuladores de iOS ni
-  el portapapeles; es lo que implica el perfil, no una medida de la CI. Lo que
-  cuesta negar el servidor de ventanas a Chrome sin interfaz lo mide la CI de
-  esta revisión.
+  el portapapeles; es lo que implica el perfil, no una medida de la CI. En
+  f3747db, Chrome sin interfaz abortó confinado al no poder crear el directorio
+  del socket de su ProcessSingleton, así que lo que le cuesta negar el servidor
+  de ventanas sigue sin medirse; con `MAC_CHROMIUM_TMPDIR` (ver «TMPDIR
+  privado») la CI de esta revisión vuelve a intentarlo (`NO_VERIFICADO`).
+  Pasado ese paso, los procesos auxiliares de Chrome aplican su propio perfil
+  de Seatbelt y abortan si no pueden («Failed to initialize sandbox.», en
+  `chrome/app/chrome_exe_main_mac.cc`). Si Seatbelt no deja aplicar un perfil
+  dentro de otro (hipótesis, sin medir), Chrome confinado solo funcionará con
+  `--no-sandbox`: sin su propio sandbox y confinado únicamente por el perfil
+  de `run`. La CI de esta revisión mide las dos formas, y cuál se adopta se
+  decidirá con ese resultado.
 - **Portapapeles.** `--allow-clipboard` sirve para pegar imágenes en el agente
   y abre las dos direcciones, y `run` lo avisa: el agente puede leer lo que
   copies, una contraseña del gestor incluida, y sustituirlo, de modo que lo que
   pegues después, también en otro terminal, puede ser una orden suya. En Linux,
   donde la opción no cambia nada, `run` no avisa (medido); el aviso en macOS
-  sigue `NO_VERIFICADO` hasta la CI de esta revisión.
+  pasó en la CI de f3747db (inferido).
 - **Otras terminales.** `--allow-ptys` concede todas las terminales del
   usuario; `run` avisa porque deja leer y escribir otras pestañas.
 

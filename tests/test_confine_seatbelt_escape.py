@@ -11,13 +11,22 @@ exit status. A test that changes state outside its tmp_path (a mount, an attache
 environment, a LaunchServices registration) undoes it in a finally block, whatever the assertions did.
 
 The tests revised after the review of AX-210 (lsopen, launchctl setenv, defaults read, screencapture and
-the display probe, hdiutil) launch the confined attempt as `run` launches the agent (``_as_run``: a new
-session, a private TMPDIR) and, through ``_closed``, count an absent effect only when the trampoline
-reported the exec (status ok); a launcher timeout makes them skip with the reason, never pass.
+the display probe, hdiutil, and since AX-225 Apple Events and lldb) launch the confined attempt as `run`
+launches the agent (``_as_run``: a new session, a private TMPDIR and the variables `run` points into it)
+and, through ``_closed``, count an absent effect only when the trampoline reported the exec (status ok);
+a launcher timeout makes them skip with the reason, never pass. Tests that measure through PROBE
+(``_probe``) need its report, which it prints once its action is done; since AX-225 a launcher timeout
+before it makes them skip with the reason too.
 
-Positive controls measure what the denials cost: what agents run every day (ps, git, a venv, clang
-with modules, swift, brew, headless Chrome, lldb on their own build) must still work confined. Each
-runs unconfined first and skips when that fails; confined, a failure carries the command's stderr.
+Positive controls measure what the denials cost: what agents run every day (a listing of their own
+processes, git, a venv, clang with modules, swift, brew, headless Chrome, lldb on their own build) must
+still work confined. Each runs unconfined first, with the variables `run` sets in a TMPDIR of its own,
+and skips when that fails; confined, a failure carries the command's stderr. Executing /bin/ps (setuid
+root) through `run` answered EPERM in the CI of f3747db, and no rule of the profile is about executing
+programs; a user reports the same in an Apple forum thread, logged as forbidden-exec-sugid. Whether the
+sandbox refuses it whatever the profile says is what a variant under a profile of only (allow default)
+measures (NO_VERIFICADO until its CI); that it holds for every setuid program rests on that report
+alone. It is a declared limit: a strict xfail that only its exact shape satisfies.
 
 Every payload that runs outside the sandbox reads only the decoy key of the test's own disposable
 HOME and writes it to a marker file outside the grants; nothing here reads real credentials.
@@ -36,6 +45,7 @@ import secrets
 import shlex
 import shutil
 import signal
+import stat
 import subprocess
 import sys
 import tempfile
@@ -44,7 +54,7 @@ from typing import Any, NamedTuple
 
 import pytest
 
-from babylon60.confine import launcher, seatbelt
+from babylon60.confine import cli, launcher, seatbelt
 from babylon60.confine.journal import ConfineJournal, JournalError
 from babylon60.confine.policy import PRESETS, Policy, account_home, build_policy, default_homes
 from test_confine_seatbelt import DATA, DENIED, TMP, Box, _matches, _paths, _regexes, _rule, _synthetic, macos
@@ -165,6 +175,9 @@ def read(path):
     with open(path, "rb") as handle:
         return handle.read(4096)
 
+def listdir(path):
+    return "\n".join(sorted(os.listdir(path))).encode()
+
 report = {"result": "ok", "data": ""}
 try:
     data = globals()[sys.argv[1]](*sys.argv[2:])
@@ -210,17 +223,30 @@ def box(tmp_path: Path) -> Box:
 
 
 def _probe(box: Box, action: str, *args: object, confined: bool = True, new_session: bool = False) -> dict:
-    """The same probe under the box's policy, or without confinement (``confined=False``, the control)."""
+    """The same probe under the box's policy, or without confinement (``confined=False``, the control).
+
+    PROBE prints its report once its action is done. With a report, the trampoline must have exec'd
+    it (status ok). Without one, a launcher timeout (60 s) leaves the measurement inconclusive, a skip
+    with the reason; any other missing report fails the test.
+    """
     argv = [launcher.interpreter(), "-I", "-S", "-B", "-c", PROBE, action, *map(str, args)]
     launch = launcher.Launch(argv, box.policy if confined else None, new_session=new_session)
     result = launcher.run(launch, env=box.env, cwd=str(box.ws))
-    assert result.status.get("ok"), (result.status, result.stderr.decode("utf-8", "replace"))
+    stderr = result.stderr.decode("utf-8", "replace")
     for line in reversed(result.stdout.decode("utf-8", "replace").splitlines()):
-        try:
-            return json.loads(line)
-        except ValueError:
-            continue
-    raise AssertionError(result.stderr.decode("utf-8", "replace"))
+        with contextlib.suppress(ValueError):
+            report = json.loads(line)
+            if isinstance(report, dict):
+                assert result.status.get("ok"), (result.status, stderr)
+                return report
+    if result.status.get("timeout"):
+        where = "confined" if confined else "unconfined"
+        pytest.skip(
+            f"the probe ({action}) did not report within the launcher's timeout, {where}; "
+            f"inconclusive: {stderr[-2000:]!r}"
+        )
+    assert result.status.get("ok"), (result.status, stderr)
+    raise AssertionError(stderr)
 
 
 def _appeared(path: Path, timeout: float = 20.0) -> bool:
@@ -316,15 +342,23 @@ def _quietly(argv: list[str], timeout: float) -> subprocess.CompletedProcess[byt
 def _as_run(box: Box, argv: list[str], *, confined: bool = True, timeout: float = 240) -> launcher.Result:
     """``argv`` started as `babylon60 run` starts the agent (``run_launch``: a new session, a private TMPDIR).
 
-    ``confined=False`` is the control: the same trampoline, session and TMPDIR, no policy.
+    The environment is the box's plus what `run` adds: TMPDIR and the variables it points into the
+    private TMPDIR (``cli.private_tmp_environment``: clang's module cache, and Chrome's temporary
+    directory on macOS). ``confined=False`` is the control: the same trampoline, session, TMPDIR and
+    environment, no policy.
     """
     private_tmp = Path(tempfile.mkdtemp(prefix="tmp-", dir=box.root))
-    env = {**box.env, "TMPDIR": str(private_tmp)}
+    env = {**box.env, **cli.private_tmp_environment(box.env, str(private_tmp))}
     if confined:
         launch = launcher.run_launch(argv, box.policy_with(private_tmp=str(private_tmp)))
     else:
         launch = launcher.Launch(argv, None, new_session=True)
-    return launcher.run(launch, env=env, cwd=str(box.ws), timeout=timeout)
+    result = launcher.run(launch, env=env, cwd=str(box.ws), timeout=timeout)
+    if result.status.get("timeout") and isinstance(result.status.get("pid"), int):
+        # The launcher killed only the target, which led its own session and process group: end what it left.
+        with contextlib.suppress(OSError):
+            os.killpg(result.status["pid"], signal.SIGKILL)
+    return result
 
 
 def _last_json(result: launcher.Result) -> dict[str, Any]:
@@ -466,6 +500,15 @@ def test_without_deny_lsopen_the_profile_lets_open_start_an_app(
 @macos
 @pytest.mark.parametrize("target", ["Finder", "Terminal"])
 def test_apple_events_cannot_make_another_app_run_code(box: Box, target: str) -> None:
+    """MACOS-2: an Apple Event makes another app run code for the sender, outside the sandbox.
+
+    Control and attempt are launched alike (``_as_run``: a new session, a private TMPDIR, the decoy
+    HOME), so only the policy tells them apart. The control skips on its own timeout of 90 s (a
+    consent dialog nobody answers in the CI; one of the two variants skipped so at f3747db, and the
+    -q log does not say which) or when it has no effect. The confined attempt skips only on a
+    launcher timeout, through ``_closed``: an effect fails, and otherwise osascript must have been
+    exec'd.
+    """
     marker = box.root / f"appleevent-{secrets.token_hex(4)}"
     app: Path | None = None
     if target == "Finder":
@@ -475,12 +518,13 @@ def test_apple_events_cannot_make_another_app_run_code(box: Box, target: str) ->
         script = f'tell application "Terminal" to do script "{_copy_key(box, marker)}; exit"'
     argv = ["/usr/bin/osascript", "-e", script]
     try:
-        control = _control(argv, 90)
+        control = _control_as_run(box, argv, f"osascript to {target}", timeout=90)
         if control.returncode != 0 or not _escaped(box, marker):
-            pytest.skip(f"Apple Events to {target} are not authorized here even unconfined: {control.stderr!r}")
+            pytest.skip(f"Apple Events to {target} are not authorized here even unconfined: {_stderr(control)!r}")
         marker.unlink()
-        box.run(argv)
-        assert not _escaped(box, marker), f"MACOS-2: {target} ran code for the confined process, outside the sandbox"
+        confined = _as_run(box, argv, timeout=90)
+        finding = f"MACOS-2: {target} ran code for the confined process, outside the sandbox"
+        _closed(confined, _escaped(box, marker), finding, "osascript")
     finally:
         if app is not None and os.path.exists(LSREGISTER):  # Finder registered it with LaunchServices
             _quietly([LSREGISTER, "-u", str(app)], 60)
@@ -666,7 +710,12 @@ def test_processes_outside_the_sandbox_cannot_be_signalled(box: Box) -> None:
     try:
         assert _probe(box, "kill", control_victim.pid, confined=False)["result"] == "ok"
         assert control_victim.wait(timeout=10) == -15
-        report = _probe(box, "kill", victim.pid)
+        try:
+            report = _probe(box, "kill", victim.pid)
+        except pytest.skip.Exception:  # no report within the launcher's timeout: an ended victim still fails
+            time.sleep(0.5)
+            assert victim.poll() is None, f"MACOS-6: the confined process ended {victim.pid}"
+            raise
         time.sleep(0.5)
         assert victim.poll() is None and report["result"] in DENIED, f"MACOS-6: the confined process ended {victim.pid}"
         assert _probe(box, "own_child")["result"] == "ok", "the agent must still end its own children"
@@ -900,25 +949,57 @@ def test_the_window_server_gives_the_sandbox_no_image_of_the_display(box: Box) -
 
 @macos
 def test_files_of_other_programs_outside_the_homes_are_not_readable(box: Box) -> None:
+    """MACOS-10: the shared places the profile read-denies, each measured with the same probe unconfined first.
+
+    Decoy files the runner user writes (mode 0600, removed in finally): another session's private
+    TMPDIR in the per-user directory, /private/tmp and /private/var/tmp (both world-writable and
+    sticky). /Volumes, where the user plants no file, has its own test below.
+    """
     canary = f"B60-CANARY-{secrets.token_hex(8)}"
     user_temp = os.confstr(65537)  # _CS_DARWIN_USER_TEMP_DIR, where `run` creates every session's private TMPDIR
     sibling = Path(tempfile.mkdtemp(prefix="babylon60-run-", dir=user_temp))  # another session's private TMPDIR
     shared = Path(tempfile.mkdtemp(prefix="b60-", dir="/private/tmp"))  # e.g. MIT Kerberos FILE: caches, tool logs
+    var_tmp = Path(tempfile.mkdtemp(prefix="b60-", dir="/private/var/tmp"))  # world-writable and sticky, as /tmp
     try:
-        for path in (sibling / "note.txt", shared / f"krb5cc_{os.getuid()}"):
+        for path in (sibling / "note.txt", shared / f"krb5cc_{os.getuid()}", var_tmp / "note.txt"):
             path.write_text(canary)
             path.chmod(0o600)
             assert _probe(box, "read", path, confined=False)["data"] == canary.encode().hex()
             report = _probe(box, "read", path)
             assert report["result"] in DENIED and not report["data"], f"MACOS-10: {path} is readable from the sandbox"
     finally:
-        shutil.rmtree(sibling, ignore_errors=True)
-        shutil.rmtree(shared, ignore_errors=True)
+        for directory in (sibling, shared, var_tmp):
+            shutil.rmtree(directory, ignore_errors=True)
+
+
+@macos
+def test_mounted_volumes_are_not_listed_from_the_sandbox(box: Box) -> None:
+    """MACOS-10: /Volumes, read-denied by the profile, where mounted disks, shares and backups appear.
+
+    The runner user has no file of its own to plant there, so the effect is the listing: the same
+    probe lists /Volumes unconfined (the test skips if it cannot) and must be denied, with no names,
+    confined. Apart from the file test above, so that a control without effect here does not hide
+    what that one measured.
+    """
+    control = _probe(box, "listdir", "/Volumes", confined=False)
+    if control["result"] != "ok":
+        pytest.skip(f"/Volumes cannot be listed here even unconfined: {control}")
+    report = _probe(box, "listdir", "/Volumes")
+    assert report["result"] in DENIED and not report["data"], f"MACOS-10: /Volumes is listed from the sandbox: {report}"
 
 
 # MACOS-11 ---------------------------------------------------------------------------------------
 
-SLEEPER = b"#include <unistd.h>\nint main(void){sleep(300);}\n"
+# An attach that interrupts sleep() only shortens one of its 120 sleeps, so it outlives the attaches and
+# still ends by itself within about ten minutes if nothing kills it (the probe kills its own child, the
+# test kills the victim in finally).
+SLEEPER = b"#include <unistd.h>\nint main(void){for(int i=0;i<120;i++)sleep(5);}\n"
+# Per attach inside DEBUG_PROBE. The first attach of the job may meet a cold lldb, and the -q logs give no
+# durations; at f3747db the same attaches had 180 s (the victim, unconfined) and 150 s (an own child).
+LLDB_SECONDS = 120
+# The launcher's timeout for a DEBUG_PROBE with a victim, the same for every control and attempt: two
+# attaches and the probe's own start.
+DEBUG_LAUNCH_SECONDS = 2 * LLDB_SECONDS + 60
 
 
 def _debug_tools() -> tuple[str, str]:
@@ -934,50 +1015,37 @@ def _build(cc: str, program: Path) -> None:
         pytest.skip(f"cc cannot build a program here: {built.stderr[-2000:]!r}")
 
 
-@macos
-def test_processes_outside_the_sandbox_cannot_be_debugged(box: Box) -> None:
-    """A user process without the hardened runtime (here one built on the spot, like most dev builds)."""
-    lldb, cc = _debug_tools()
-    target = box.root / "victim"
-    _build(cc, target)
-    victim = subprocess.Popen([str(target)])
-    try:
-
-        def attach(marker: Path) -> list[str]:
-            expression = f'expr (int)system("{_copy_key(box, marker)}")'
-            return [lldb, "--batch", "-p", str(victim.pid), "-o", expression, "-o", "process detach"]
-
-        marker = box.root / f"debug-{secrets.token_hex(4)}"
-        _control(attach(marker), 180)
-        if not _escaped(box, marker):
-            pytest.skip("lldb cannot attach here even unconfined (Developer Tools access not granted)")
-        marker = box.root / f"debug-{secrets.token_hex(4)}"
-        box.run(attach(marker))
-        assert not _escaped(box, marker), "MACOS-11: the confined process ran code inside an unconfined process"
-    finally:
-        victim.kill()
-        victim.wait()
-
-
-# Run inside the sandbox: start a child, attach lldb to it, call getpid() inside it, end it. The
-# child's descriptors are /dev/null, so nothing it leaves behind holds the launcher's pipes.
-DEBUG_OWN_CHILD = r"""
+# Run as the agent: start a child from ``program``, attach lldb to it and call getpid() inside it, then
+# end it. Given a pid and an expression, attach lldb to that process too and evaluate the expression
+# there. Each attach is bounded (seconds); the child's descriptors are /dev/null, so nothing it leaves
+# behind holds the launcher's pipes. The own child's lldb output sits at the top level of the report,
+# the other process's under "outside".
+DEBUG_PROBE = r"""
 import json, subprocess, sys
-lldb, program = sys.argv[1], sys.argv[2]
+lldb, program, seconds, *outside = sys.argv[1:]
+
+def attach(pid, expression):
+    try:
+        done = subprocess.run(
+            [lldb, "--batch", "-p", str(pid), "-o", expression, "-o", "process detach"],
+            stdin=subprocess.DEVNULL, capture_output=True, timeout=float(seconds),
+        )
+    except subprocess.TimeoutExpired:
+        return {"timeout": float(seconds)}
+    return {
+        "stdout": done.stdout.decode("utf-8", "replace")[-4000:],
+        "stderr": done.stderr.decode("utf-8", "replace")[-4000:],
+    }
+
 child = subprocess.Popen([program], stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 report = {"pid": child.pid}
 try:
-    done = subprocess.run(
-        [lldb, "--batch", "-p", str(child.pid), "-o", "expr (int)getpid()", "-o", "process detach"],
-        stdin=subprocess.DEVNULL, capture_output=True, timeout=150,
-    )
-    report["stdout"] = done.stdout.decode("utf-8", "replace")[-4000:]
-    report["stderr"] = done.stderr.decode("utf-8", "replace")[-4000:]
-except subprocess.TimeoutExpired:
-    report["stderr"] = "lldb did not finish in 150 s"
+    report.update(attach(child.pid, "expr (int)getpid()"))
 finally:
     child.kill()
     child.wait()
+if outside:
+    report["outside"] = attach(int(outside[0]), outside[1])
 print(json.dumps(report), flush=True)
 """
 
@@ -988,21 +1056,99 @@ def _evaluated_in_child(report: dict[str, Any]) -> bool:
     return isinstance(pid, int) and re.search(rf"\(int\) \$\d+ = {pid}\b", stdout) is not None
 
 
+def _lldb_finished(report: dict[str, Any], where: str) -> None:
+    """An attach that did not finish inside the probe leaves the comparison inconclusive: skip with the reason."""
+    for target, entry in (("its own child", report), ("the process outside", report.get("outside") or {})):
+        if isinstance(entry, dict) and entry.get("timeout"):
+            pytest.skip(
+                f"lldb did not finish attaching to {target} in {entry['timeout']:.0f} s ({where}); inconclusive"
+            )
+
+
+@macos
+def test_processes_outside_the_sandbox_cannot_be_debugged(box: Box) -> None:
+    """MACOS-11: lldb inside the sandbox runs no code in a process outside it.
+
+    AX-219 loosened the profile once, with (allow mach-priv-task-port (target same-sandbox)); this test
+    measures what that leaves closed. The victim is a program built with cc on the spot, without the
+    hardened runtime like most dev builds, started outside the sandbox. In one session DEBUG_PROBE
+    first attaches lldb to its own child and evaluates getpid() there, then attaches to the victim and
+    evaluates an expression that copies the decoy key to a marker. Controls run the same probe,
+    launched alike (``_control_as_run``), against the same victim, before and after the confined
+    attempt, and each must leave its marker; confined, the getpid() must still work (lldb reached the
+    task port of a process in the sandbox) and the marker must not appear. The control after the
+    attempt shows the victim could still be debugged then, so what tells the attaches apart is
+    whether the target is in the sandbox. A launcher timeout, an attach that does not finish or a
+    control without effect is inconclusive: a skip with the reason.
+    """
+    lldb, cc = _debug_tools()
+    program = box.ws / "sleeper"  # in the workspace: the confined probe starts its own child from it
+    _build(cc, program)
+    victim = subprocess.Popen(
+        [str(program)], stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
+    )
+    try:
+
+        def probe(marker: Path) -> list[str]:
+            expression = f'expr (int)system("{_copy_key(box, marker)}")'
+            argv = [lldb, str(program), str(LLDB_SECONDS), str(victim.pid), expression]
+            return [launcher.interpreter(), "-I", "-S", "-c", DEBUG_PROBE, *argv]
+
+        def control(when: str) -> None:
+            marker = box.root / f"debug-{secrets.token_hex(4)}"
+            result = _control_as_run(box, probe(marker), "the lldb probe", timeout=DEBUG_LAUNCH_SECONDS)
+            report = _last_json(result)
+            _lldb_finished(report, f"unconfined, {when}")
+            if not _evaluated_in_child(report) or not _escaped(box, marker):
+                pytest.skip(f"lldb cannot debug its own child or the victim unconfined, {when}: {report}")
+            if victim.poll() is not None:
+                pytest.skip(f"the victim ended (status {victim.returncode}) after the control's attach, {when}")
+
+        control("before the confined attempt")
+        marker = box.root / f"debug-{secrets.token_hex(4)}"
+        confined = _as_run(box, probe(marker), timeout=DEBUG_LAUNCH_SECONDS)
+        escaped, ended = _escaped(box, marker), victim.poll()
+        finding = (
+            "MACOS-11: lldb in the sandbox ran code in, or ended, a process outside it "
+            f"(key copied: {escaped}, victim status: {ended}); stdout: {confined.stdout[-2000:]!r}"
+        )
+        _closed(confined, escaped or ended is not None, finding, "the lldb probe")
+        report = _last_json(confined)
+        _lldb_finished(report, "confined")
+        assert _evaluated_in_child(report), (
+            "MACOS-11: lldb in the sandbox cannot debug the probe's own child either, so the closed attach "
+            f"to the victim says nothing about whether the target is in the sandbox: {report}"
+        )
+        control("after the confined attempt")  # the victim still takes an attach: the sandbox closed this one
+    finally:
+        victim.kill()
+        victim.wait()
+
+
 @macos
 def test_the_agent_can_still_debug_its_own_builds(box: Box) -> None:
     """MACOS-11 positive control: task ports are allowed back for the sandbox's own processes.
 
     Started as `run` starts the agent, lldb attaches to a child the confined process started from a
-    program built with cc in the workspace, and calls getpid() inside it.
+    program built with cc in the workspace, and calls getpid() inside it. The control is launched the
+    same way without a policy.
     """
     lldb, cc = _debug_tools()
     program = box.ws / "own-build"
     _build(cc, program)
-    argv = [launcher.interpreter(), "-I", "-S", "-c", DEBUG_OWN_CHILD, lldb, str(program)]
-    control = _last_json(_as_run(box, argv, confined=False))
+    argv = [launcher.interpreter(), "-I", "-S", "-c", DEBUG_PROBE, lldb, str(program), str(LLDB_SECONDS)]
+    control = _last_json(_control_as_run(box, argv, "the lldb probe", timeout=240))
+    _lldb_finished(control, "unconfined")
     if not _evaluated_in_child(control):
         pytest.skip(f"lldb cannot attach to its own child here even unconfined (Developer Tools access): {control}")
-    report = _last_json(_as_run(box, argv))
+    confined = _as_run(box, argv, timeout=240)
+    if confined.status.get("timeout"):
+        pytest.skip(
+            f"the lldb probe did not finish within the launcher's timeout, confined; inconclusive: {_stderr(confined)!r}"
+        )
+    assert confined.status.get("ok"), f"the lldb probe never ran: {confined.status} {_stderr(confined)!r}"
+    report = _last_json(confined)
+    _lldb_finished(report, "confined")
     assert _evaluated_in_child(report), f"MACOS-11: the confined agent cannot debug a program it started: {report}"
 
 
@@ -1300,14 +1446,73 @@ def _installed(*candidates: str) -> str:
     return found
 
 
-def _ps_own_pid(ws: Path, env: dict[str, str]) -> Everyday:
-    """/bin/ps is setuid root; at 48a4593 the agent got EPERM executing it through `run`."""
+def _json_line(text: str) -> dict[str, Any]:
+    """The last line of ``text`` that is a JSON object, or an empty dict."""
+    for line in reversed(text.splitlines()):
+        with contextlib.suppress(ValueError):
+            report = json.loads(line)
+            if isinstance(report, dict):
+                return report
+    return {}
+
+
+# Run as the agent: start a child, then list this process group with sysctl(KERN_PROC_PGRP), as `ps -g`
+# does, without ps (setuid root; its exec answered EPERM through `run` at f3747db: see
+# test_a_setuid_program_runs_inside_the_sandbox). Only this group is asked for, no other process; XNU's
+# kern.proc handler makes no process-info check (bsd/kern/kern_sysctl.c, sysctl_prochandle) and the
+# profile denies only kern.procargs* among sysctl reads. kinfo_proc (sys/sysctl.h) is 648 bytes on
+# 64-bit macOS: p_pid at 40, p_comm (17 bytes) at 243, e_ppid at 560. The control checks this layout:
+# the process itself must appear with its own parent.
+OWN_PROCESSES_PROBE = r"""
+import ctypes, json, os, struct, subprocess
+KINFO, PID, COMM, PPID = 648, 40, 243, 560
+libc = ctypes.CDLL(None, use_errno=True)
+child = subprocess.Popen(["/bin/sleep", "30"], stdin=subprocess.DEVNULL)
+report = {"pid": os.getpid(), "ppid": os.getppid(), "child": child.pid, "pgid": os.getpgrp()}
+try:
+    mib = (ctypes.c_int * 4)(1, 14, 2, os.getpgrp())  # CTL_KERN, KERN_PROC, KERN_PROC_PGRP, this group
+    size = ctypes.c_size_t(0)
+    if libc.sysctl(mib, ctypes.c_uint(4), None, ctypes.byref(size), None, ctypes.c_size_t(0)) != 0:
+        raise OSError(ctypes.get_errno(), "sysctl(KERN_PROC_PGRP) size")
+    buffer = ctypes.create_string_buffer(size.value + 8 * KINFO)
+    size = ctypes.c_size_t(len(buffer))
+    if libc.sysctl(mib, ctypes.c_uint(4), buffer, ctypes.byref(size), None, ctypes.c_size_t(0)) != 0:
+        raise OSError(ctypes.get_errno(), "sysctl(KERN_PROC_PGRP)")
+    raw = buffer.raw[: size.value]
+    report["bytes"] = size.value
+    report["listed"] = [
+        [
+            struct.unpack_from("<i", raw, offset + PID)[0],
+            struct.unpack_from("<i", raw, offset + PPID)[0],
+            raw[offset + COMM : offset + COMM + 17].split(b"\0")[0].decode("utf-8", "replace"),
+        ]
+        for offset in range(0, len(raw) - KINFO + 1, KINFO)
+    ]
+except OSError as exc:
+    report["error"] = "%s: %s" % (exc.errno, exc.strerror)
+finally:
+    child.kill()
+    child.wait()
+print(json.dumps(report), flush=True)
+"""
+
+
+def _own_processes(ws: Path, env: dict[str, str]) -> Everyday:
+    """The agent lists its own processes without ps: its process group, through sysctl (OWN_PROCESSES_PROBE).
+
+    The effect: the listing names the probe with its parent and the probe's child, /bin/sleep, with
+    the probe as parent. Under `run` the agent leads a session and a process group of its own, as
+    the control does here (``_bounded`` starts a new session).
+    """
 
     def listed(done: subprocess.CompletedProcess[str]) -> bool:
-        words = done.stdout.split()
-        return len(words) == 2 and words[0].isdigit() and words[0] == words[1]
+        report = _json_line(done.stdout)
+        rows = {tuple(row) for row in report.get("listed", []) if isinstance(row, list) and len(row) == 3}
+        pid, ppid, child = report.get("pid"), report.get("ppid"), report.get("child")
+        itself = any(row[:2] == (pid, ppid) for row in rows)
+        return isinstance(pid, int) and report.get("bytes", 0) % 648 == 0 and itself and (child, pid, "sleep") in rows
 
-    return Everyday(["/bin/sh", "-c", f"echo $$; exec {_installed('/bin/ps')} -p $$ -o pid="], listed, 120)
+    return Everyday([launcher.interpreter(), "-I", "-S", "-c", OWN_PROCESSES_PROBE], listed, 120)
 
 
 def _real_agent_state() -> str | None:
@@ -1384,12 +1589,17 @@ def _clang_modules(*, cache_in_tmpdir: bool = False) -> Callable[[Path, dict[str
     clang's module cache defaults to the per-user cache directory, read-denied by the profile and
     write-denied by its base. The user documentation names only -fmodules-cache-path to move it; the
     driver also reads CLANG_MODULE_CACHE_PATH (LLVM review D126678), which that documentation leaves
-    out. With ``cache_in_tmpdir`` the command sets it to $TMPDIR/clang-modules, the agent's private
-    TMPDIR under `run`, with no profile change, and the effect includes a cache there: whether Apple
-    clang honours the variable, and whether that route works confined, is what that variant measures.
+    out. In the CI of f3747db the plain variant failed confined ("unable to open output file
+    .../C/clang/ModuleCache/...") and ``cache_in_tmpdir`` reported neither failure nor skip: it passed
+    (inferred from the -q log), so Apple clang honours the variable. Since then `run` sets
+    CLANG_MODULE_CACHE_PATH in the private TMPDIR when the user's environment does not
+    (cli.private_tmp_environment): the plain variant measures that default, and ``cache_in_tmpdir``
+    still sets $TMPDIR/clang-modules itself and requires a cache there. The per-user cache directory
+    stays denied: a module cache the agent could write there would be loaded by the user's own
+    unconfined builds.
 
-    The control fills a module cache, as any build does: clang's own, not undone here, or the
-    control's TMPDIR.
+    The control gets `run`'s CLANG_MODULE_CACHE_PATH too, in its own TMPDIR (see the test), so both
+    sides build with the same variable; ``cache_in_tmpdir`` overrides it on both sides alike.
     """
 
     def prepare(ws: Path, env: dict[str, str]) -> Everyday:
@@ -1428,26 +1638,50 @@ def _brew_version(ws: Path, env: dict[str, str]) -> Everyday:
     return Everyday([brew, "--version"], lambda done: done.stdout.startswith("Homebrew "), 120)
 
 
-def _headless_chrome(ws: Path, env: dict[str, str]) -> Everyday:
-    """INV_C5_COMPUTER_USE_TRUST_GATEWAY denies the window server lookup: headless Chrome must do without it."""
-    chrome = _installed(CHROME)
-    marker = f"B60-PAGE-{secrets.token_hex(8)}"
-    page = ws / "page.html"
-    page.write_text(f"<!doctype html><title>b60</title><p>{marker}</p>\n")
-    argv = [
-        chrome,
-        "--headless=new",
-        "--disable-gpu",
-        "--no-first-run",
-        f"--user-data-dir={ws / 'chrome-profile'}",
-        "--dump-dom",
-        page.as_uri(),
-    ]
-    return Everyday(argv, lambda done: marker in done.stdout, 180)
+def _headless_chrome(*, own_sandbox: bool = True) -> Callable[[Path, dict[str, str]], Everyday]:
+    """INV_C5_COMPUTER_USE_TRUST_GATEWAY denies the window server lookup: headless Chrome must do without it.
+
+    The effect: the page's marker in --dump-dom's output. In the CI of f3747db Chrome aborted confined
+    (exit 21) after "Failed to create socket directory.": its ProcessSingleton creates that directory
+    with base::CreateUniqueTempDir, and base::GetTempDir on macOS reads MAC_CHROMIUM_TMPDIR when it is
+    not empty and otherwise NSTemporaryDirectory() (Chromium's base/files/file_util_apple.mm). That
+    NSTemporaryDirectory() gives the per-user T directory the profile denies, not $TMPDIR, is inferred
+    from that failure (the private TMPDIR was writable); Chromium's code shows only the order. `run`
+    now sets MAC_CHROMIUM_TMPDIR to the private TMPDIR when unset or empty; whether the rest of
+    Chrome's start-up then works confined is what this variant measures. The control gets the same
+    variable, in its own TMPDIR. Either way the socket's path is longer than sockaddr_un's 104-byte
+    sun_path (about 113 bytes under a private TMPDIR in the per-user T directory); on macOS Chromium
+    binds it with an oversized sockaddr that takes up to 253 (chrome/browser/process_singleton_posix.cc,
+    SetupSockAddr).
+
+    Past that step Chrome's helper processes apply a Seatbelt profile of their own and abort when they
+    cannot ("Failed to initialize sandbox.", chrome/app/chrome_exe_main_mac.cc). Should Seatbelt refuse
+    a profile inside another (a hypothesis, not measured), Chrome confined would work only with
+    ``own_sandbox=False``: --no-sandbox, its helpers then confined by `run`'s profile alone.
+    """
+
+    def prepare(ws: Path, env: dict[str, str]) -> Everyday:
+        chrome = _installed(CHROME)
+        marker = f"B60-PAGE-{secrets.token_hex(8)}"
+        page = ws / "page.html"
+        page.write_text(f"<!doctype html><title>b60</title><p>{marker}</p>\n")
+        argv = [
+            chrome,
+            "--headless=new",
+            "--disable-gpu",
+            "--no-first-run",
+            *(() if own_sandbox else ("--no-sandbox",)),
+            f"--user-data-dir={ws / 'chrome-profile'}",
+            "--dump-dom",
+            page.as_uri(),
+        ]
+        return Everyday(argv, lambda done: marker in done.stdout, 180)
+
+    return prepare
 
 
 EVERYDAY: dict[str, Callable[[Path, dict[str, str]], Everyday]] = {
-    "ps-own-pid": _ps_own_pid,
+    "own-processes-sysctl": _own_processes,
     "git-xcrun-shim": _git("/usr/bin/git"),
     "git-homebrew": _git("/opt/homebrew/bin/git", "/usr/local/bin/git"),
     "git-xcrun-shim-gitconfig": _git("/usr/bin/git", gitconfig=True),
@@ -1457,7 +1691,8 @@ EVERYDAY: dict[str, Callable[[Path, dict[str, str]], Everyday]] = {
     "clang-fmodules-cache-in-tmpdir": _clang_modules(cache_in_tmpdir=True),
     "swift-version": _swift_version,
     "brew-version": _brew_version,
-    "chrome-headless": _headless_chrome,
+    "chrome-headless": _headless_chrome(),
+    "chrome-headless-no-sandbox": _headless_chrome(own_sandbox=False),
 }
 
 
@@ -1513,15 +1748,18 @@ def _journal_story(path: Path) -> str:
 def test_what_agents_run_every_day_works_through_run(tmp_path: Path, name: str) -> None:
     """Positive control through the real command line: `babylon60 run --journal <tmp> [options] -- <command>`.
 
-    Decoy HOME, cwd = workspace. The same command first runs unconfined, with a TMPDIR of its own as
-    `run` gives the agent, and the test skips when it fails there. Confined, a failure fails the test
-    with the command's stderr and what the journal recorded (run_refused when the trampoline did not
-    exec it): this is what the denials cost. A confined run that ``_bounded`` ends at its timeout is
-    inconclusive: a skip with the reason.
+    Decoy HOME, cwd = workspace. The same command first runs unconfined with the environment `run`
+    gives the agent: a TMPDIR of its own and the variables `run` points into it
+    (``cli.private_tmp_environment``: clang's module cache, and Chrome's temporary directory on
+    macOS), so both sides get the same variables, each in its own TMPDIR. The test skips when the
+    control fails. Confined, a failure fails the test with the command's stderr and what the journal
+    recorded (run_refused when the trampoline did not exec it): this is what the denials cost. A
+    confined run that ``_bounded`` ends at its timeout is inconclusive: a skip with the reason.
     """
     ws, tmp, env = _everyday_session(tmp_path / "control")
     control = EVERYDAY[name](ws, env)
-    done = _bounded(control.argv, timeout=control.timeout, env={**env, "TMPDIR": str(tmp)}, cwd=ws)
+    control_env = {**env, **cli.private_tmp_environment(env, str(tmp))}  # what `run` adds, in the control's TMPDIR
+    done = _bounded(control.argv, timeout=control.timeout, env=control_env, cwd=ws)
     if not control.worked(done):
         pytest.skip(f"{name} fails here even unconfined (exit {done.returncode}): {done.stderr[-2000:]!r}")
     ws, _tmp, env = _everyday_session(tmp_path / "confined")
@@ -1537,3 +1775,275 @@ def test_what_agents_run_every_day_works_through_run(tmp_path: Path, name: str) 
         f"{name} fails under `babylon60 run` (exit {done.returncode}; journal: {_journal_story(journal)}); "
         f"stderr: {done.stderr[-4000:]!r}; stdout: {done.stdout[-1000:]!r}"
     )
+
+
+# Declared limit: setuid programs ------------------------------------------------------------------
+
+PS = "/bin/ps"
+# Run as the agent: execute each program given as `<program> -p <this pid> -o pid=`, as ps lists its
+# caller, and report how each exec ended (errno) or what it printed.
+PS_PROBE = r"""
+import errno, json, os, subprocess, sys
+report = {"pid": os.getpid()}
+for program in sys.argv[1:]:
+    try:
+        done = subprocess.run(
+            [program, "-p", str(os.getpid()), "-o", "pid="],
+            stdin=subprocess.DEVNULL, capture_output=True, timeout=60,
+        )
+    except OSError as exc:
+        report[program] = {"errno": errno.errorcode.get(exc.errno or 0, "E%s" % exc.errno)}
+    except subprocess.TimeoutExpired:
+        report[program] = {"timeout": 60}
+    else:
+        report[program] = {
+            "exit": done.returncode,
+            "stdout": done.stdout.decode("utf-8", "replace")[-500:],
+            "stderr": done.stderr.decode("utf-8", "replace")[-500:],
+        }
+print(json.dumps(report), flush=True)
+"""
+
+
+def _listed_itself(report: dict[str, Any], program: str) -> bool:
+    """``program`` ran and printed exactly the probe's own pid."""
+    entry = report.get(program)
+    return (
+        isinstance(entry, dict)
+        and entry.get("exit") == 0
+        and str(entry.get("stdout", "")).split() == [str(report.get("pid"))]
+    )
+
+
+# Nothing but "(allow default)": what the sandbox refuses under it, no rule of a profile decides.
+ALLOW_DEFAULT_ONLY = "(version 1)\n(allow default)\n"
+
+
+@macos
+@pytest.mark.parametrize("profile", ["run-profile", "allow-default"])
+@pytest.mark.xfail(
+    strict=True,
+    raises=DeclaredLimit,
+    reason="declared limit (macOS): exec of /bin/ps (setuid root) answers EPERM inside the sandbox; "
+    "[allow-default] tells whether a rule of run's profile causes it (a user reports it logged as "
+    "forbidden-exec-sugid: developer.apple.com/forums/thread/689303)",
+)
+def test_a_setuid_program_runs_inside_the_sandbox(box: Box, profile: str, monkeypatch: pytest.MonkeyPatch) -> None:
+    """At f3747db the CI's [ps-own-pid] failed confined: "/bin/sh: /bin/ps: Operation not permitted".
+
+    /bin/ps is setuid root. No rule of `run`'s profile is about executing programs (it denies writing
+    a setuid or setgid mode, file-write-setugid, not running one). In an Apple forum thread a user
+    reports the same EPERM for /bin/ps under sandbox-exec, with a profile the post does not show,
+    "deny(1) forbidden-exec-sugid" in the log and a copy without the bit running
+    (developer.apple.com/forums/thread/689303). ``run-profile`` measures the limit under the profile
+    `run` renders; ``allow-default`` has the patched renderer return ALLOW_DEFAULT_ONLY, so a refusal
+    there is the sandbox's own, whatever a profile says. Only /bin/ps is measured; that every setuid
+    program is refused rests on that report.
+
+    Only the declared shape raises DeclaredLimit: the control, launched as the attempt
+    (``_control_as_run``), runs /bin/ps, or the test skips; confined, the trampoline exec'd the probe
+    and exec of /bin/ps fails with EPERM. The probe also runs a copy of /bin/ps without the setuid
+    bit. When the copy lists its caller unconfined it must do so confined too (then the bit is what
+    the sandbox refuses); when it does not even unconfined (a copy of a system program may not run
+    elsewhere), the limit is still measured on /bin/ps and the message says so. Should /bin/ps run
+    confined, the strict xfail fails: the limit is gone or, with ``allow-default`` alone, a rule of
+    `run`'s profile caused it. Any other shape fails with the reports. Agents list their own
+    processes without ps: see the own-processes-sysctl positive control.
+    """
+    if not os.path.isfile(PS) or not os.stat(PS).st_mode & (stat.S_ISUID | stat.S_ISGID):
+        pytest.skip(f"{PS} is not a setuid or setgid program here; nothing to measure")
+    copy = box.ws / "ps-without-setuid"
+    shutil.copyfile(PS, copy)  # contents only: the copy belongs to the runner user, mode set below
+    copy.chmod(0o755)
+    argv = [launcher.interpreter(), "-I", "-S", "-c", PS_PROBE, PS, str(copy)]
+    control = _last_json(_control_as_run(box, argv, "the ps probe"))
+    if not _listed_itself(control, PS):
+        pytest.skip(f"{PS} does not list its caller here even unconfined: {control}")
+    copy_runs = _listed_itself(control, str(copy))
+    rendered: list[str] = []
+    if profile == "allow-default":
+
+        def allow_default_only(policy: Policy, **options: Any) -> str:
+            rendered.append(profile)
+            return ALLOW_DEFAULT_ONLY
+
+        monkeypatch.setattr(seatbelt, "render_profile", allow_default_only)
+    confined = _as_run(box, argv, timeout=120)
+    if profile == "allow-default":
+        assert rendered == [profile], "the launcher did not render this profile through seatbelt.render_profile"
+    if confined.status.get("timeout"):
+        pytest.skip(
+            f"the ps probe did not finish within the launcher's timeout, confined; inconclusive: {_stderr(confined)!r}"
+        )
+    assert confined.status.get("ok"), f"the ps probe never ran: {confined.status} {_stderr(confined)!r}"
+    report = _last_json(confined)
+    if _listed_itself(report, PS):
+        return  # XPASS(strict): /bin/ps runs inside this sandbox, the declared limit does not hold here
+    if copy_runs:
+        assert _listed_itself(report, str(copy)), (
+            f"the copy of {PS} without the setuid bit does not run confined either, so the bit is not what the "
+            f"sandbox refuses ({profile}): confined {report}; control {control}"
+        )
+    assert report.get(PS) == {"errno": "EPERM"}, (
+        f"{PS} failed confined ({profile}), but not with EPERM at exec: confined {report}; control {control}"
+    )
+    copy_note = (
+        "its copy without the bit runs there"
+        if copy_runs
+        else f"its copy without the bit did not list its caller even unconfined ({control.get(str(copy))})"
+    )
+    raise DeclaredLimit(f"exec of the setuid {PS} answers EPERM inside the sandbox ({profile}); {copy_note}")
+
+
+# The variables `run` points into the private TMPDIR (every platform) ------------------------------
+
+TMPDIR_VARIABLES = ("TMPDIR", "CLANG_MODULE_CACHE_PATH", "MAC_CHROMIUM_TMPDIR")
+REQUIRED_BACKEND = "1" in (os.environ.get("BABYLON60_REQUIRE_LANDLOCK"), os.environ.get("BABYLON60_REQUIRE_SEATBELT"))
+
+
+def test_run_points_tools_that_ignore_tmpdir_into_the_private_tmpdir() -> None:
+    """The CI of f3747db (macos-15), through `run`: clang -fmodules could not write its module cache in the
+    per-user C directory, and Chrome could not create its ProcessSingleton socket directory, which it makes
+    where base::GetTempDir points (MAC_CHROMIUM_TMPDIR when not empty, else NSTemporaryDirectory(); that
+    this gives the per-user T directory and not $TMPDIR is inferred from that failure, with the private
+    TMPDIR writable: Chromium's code shows only the order). Both directories stay denied; `run` points
+    each tool into the private TMPDIR instead, unless the user's environment names a place of its own.
+    """
+    tmp = "/private/var/folders/xy/abc123/T/babylon60-run-k3"
+    cache = f"{tmp}/clang-module-cache"
+    darwin = cli.private_tmp_environment({"PATH": "/usr/bin"}, tmp, platform="darwin")
+    assert darwin == {"TMPDIR": tmp, "CLANG_MODULE_CACHE_PATH": cache, "MAC_CHROMIUM_TMPDIR": tmp}
+    # Linux: clang's default cache is ~/.cache/clang/ModuleCache, under the denied home; Chromium reads $TMPDIR.
+    assert cli.private_tmp_environment({}, tmp, platform="linux") == {"TMPDIR": tmp, "CLANG_MODULE_CACHE_PATH": cache}
+    # A value the user set is kept; TMPDIR is always the private one.
+    mine = {"TMPDIR": "/var/tmp", "CLANG_MODULE_CACHE_PATH": "/opt/cache", "MAC_CHROMIUM_TMPDIR": "/opt/chrome"}
+    assert cli.private_tmp_environment(mine, tmp, platform="darwin") == {"TMPDIR": tmp}
+    # Empty: clang reads it as "no module cache" (Driver::getDefaultModuleCachePath), so it stays the user's
+    # choice, as unconfined; Chromium ignores it and would fall back to the denied T directory, so `run` sets it.
+    empty = {"CLANG_MODULE_CACHE_PATH": "", "MAC_CHROMIUM_TMPDIR": ""}
+    assert cli.private_tmp_environment(empty, tmp, platform="darwin") == {"TMPDIR": tmp, "MAC_CHROMIUM_TMPDIR": tmp}
+    assert cli.private_tmp_environment(empty, tmp, platform="linux") == {"TMPDIR": tmp}
+
+
+ENVIRONMENT_PROBE = (
+    f"import json, os; print(json.dumps({{name: os.environ.get(name) for name in {TMPDIR_VARIABLES!r}}}))"
+)
+
+
+backend_here = pytest.mark.skipif(
+    launcher.backend() == "none" and not REQUIRED_BACKEND,
+    reason="no confinement backend here; BABYLON60_REQUIRE_LANDLOCK=1 or BABYLON60_REQUIRE_SEATBELT=1 fails instead",
+)
+
+
+def _run_cli(journal: Path, command: list[str]) -> list[str]:
+    """`babylon60 run --journal <journal> -- <command>`; --allow-root only when this process is root."""
+    allow_root = ["--allow-root"] if os.geteuid() == 0 else []
+    return [*CLI, "run", *allow_root, "--journal", str(journal), "--", *command]
+
+
+@backend_here
+@pytest.mark.parametrize("case", ["unset", "set-by-the-user", "empty"])
+def test_the_agent_receives_the_tmpdir_variables_through_run(tmp_path: Path, case: str) -> None:
+    """Through the real command line, on this machine's backend (Landlock on Linux, Seatbelt on macOS).
+
+    Started as the positive controls through `run` are (``_bounded``: stdin from /dev/null, so `run`
+    takes the path without a terminal, and a process group of its own); a run that does not finish is
+    inconclusive: a skip with the reason.
+    """
+    home, ws = tmp_path / "home", tmp_path / "ws"
+    home.mkdir()
+    ws.mkdir()
+    env = {
+        "PATH": "/usr/bin:/bin",
+        "HOME": str(home),
+        "LC_ALL": "C",
+        "PYTHONPATH": str(ROOT / "01_KISH_ENGINE"),
+        "TMPDIR": tempfile.gettempdir(),
+    }
+    users = {
+        "unset": {},
+        "set-by-the-user": {"CLANG_MODULE_CACHE_PATH": str(ws / "modules"), "MAC_CHROMIUM_TMPDIR": str(ws / "chrome")},
+        "empty": {"CLANG_MODULE_CACHE_PATH": "", "MAC_CHROMIUM_TMPDIR": ""},
+    }[case]
+    env.update(users)
+    probe = [launcher.interpreter(), "-I", "-S", "-c", ENVIRONMENT_PROBE]
+    done = _bounded(_run_cli(tmp_path / "j.db", probe), timeout=180, env=env, cwd=ws)
+    seen = _json_line(done.stdout)
+    if not seen and _timed_out(done):
+        pytest.skip(f"`babylon60 run` did not finish in 180 s; inconclusive: {done.stderr[-2000:]!r}")
+    assert done.returncode == 0 and seen, f"the probe did not report (exit {done.returncode}): {done.stderr[-2000:]!r}"
+    private = str(seen["TMPDIR"])
+    assert os.path.basename(private).startswith("babylon60-run-") and not os.path.exists(private), seen
+    expected = {
+        "CLANG_MODULE_CACHE_PATH": os.path.join(private, "clang-module-cache"),
+        "MAC_CHROMIUM_TMPDIR": private if sys.platform == "darwin" else None,
+    }
+    if case == "set-by-the-user":
+        expected = users
+    elif case == "empty":  # clang reads an empty value as "no cache": the user's; Chromium ignores an empty one
+        expected = {"CLANG_MODULE_CACHE_PATH": "", "MAC_CHROMIUM_TMPDIR": private if sys.platform == "darwin" else ""}
+    assert {name: seen[name] for name in expected} == expected, seen
+
+
+# A module of its own, so no SDK is needed: clang builds B60 into its module cache when probe.c includes b60.h.
+LOCAL_MODULE = {
+    "b60.h": "int b60(void);\n",
+    "module.modulemap": 'module B60 {\n  header "b60.h"\n  export *\n}\n',
+    "probe.c": '#include "b60.h"\nint probe(void) { return b60(); }\n',
+}
+OBJECT_MAGIC = (*MACH_O, b"\x7fELF")
+PRIVATE_CACHE_MARKER = "B60-MODULE-CACHE-IN-PRIVATE-TMPDIR"
+
+
+@backend_here
+def test_clang_builds_a_module_through_run_with_its_cache_in_the_private_tmpdir(tmp_path: Path) -> None:
+    """clang -fmodules on a local module through `babylon60 run`, with the CLANG_MODULE_CACHE_PATH `run` sets.
+
+    The control compiles unconfined, in its own decoy HOME and without the variable: clang's default
+    cache (~/.cache/clang/ModuleCache on Linux, the per-user cache directory on macOS). Confined, the
+    object must be built, the variable must point inside the agent's TMPDIR with the cache there, and
+    the decoy HOME must stay without a cache. Before `run` set the variable, the same build through
+    `run` failed on Linux (clang 18.1.3, Landlock): "unable to open output file
+    .../.cache/clang/ModuleCache/...".
+    """
+    clang = shutil.which("clang", path="/usr/bin")
+    if clang is None:
+        pytest.skip("no /usr/bin/clang here")
+    build = [clang, "-fmodules", "-fimplicit-module-maps", "-c", "probe.c", "-o", "probe.o"]
+
+    def session(name: str) -> tuple[Path, dict[str, str]]:
+        ws, tmp, env = _everyday_session(tmp_path / name)
+        for file, content in LOCAL_MODULE.items():
+            (ws / file).write_text(content)
+        # The control's TMPDIR is its own; `run` creates the agent's private one under the session's.
+        return ws, {**env, "TMPDIR": str(tmp) if name == "control" else tempfile.gettempdir()}
+
+    def built(ws: Path) -> bool:
+        with contextlib.suppress(OSError):
+            return (ws / "probe.o").read_bytes()[:4] in OBJECT_MAGIC
+        return False
+
+    ws, env = session("control")
+    control = _bounded(build, timeout=300, env=env, cwd=ws)
+    if not built(ws):
+        pytest.skip(
+            f"clang cannot build a module here even unconfined (exit {control.returncode}): {control.stderr[-2000:]!r}"
+        )
+    ws, env = session("confined")
+    script = (
+        f"{shlex.join(build)} || exit; "
+        'case "$CLANG_MODULE_CACHE_PATH" in "$TMPDIR"/?*) ;; '
+        '*) echo "CLANG_MODULE_CACHE_PATH=$CLANG_MODULE_CACHE_PATH is not inside TMPDIR=$TMPDIR" >&2; exit 3;; esac; '
+        f'if [ -n "$(ls -A "$CLANG_MODULE_CACHE_PATH" 2>/dev/null)" ]; then echo {PRIVATE_CACHE_MARKER}; fi'
+    )
+    journal = tmp_path / "journal.db"
+    done = _bounded(_run_cli(journal, ["/bin/sh", "-c", script]), timeout=360, env=env, cwd=ws)
+    if not built(ws) and _timed_out(done):
+        pytest.skip(f"clang did not finish under `babylon60 run`; inconclusive: {done.stderr[-2000:]!r}")
+    assert built(ws) and PRIVATE_CACHE_MARKER in done.stdout.split(), (
+        f"clang -fmodules fails under `babylon60 run`, or its cache is not in the private TMPDIR (exit "
+        f"{done.returncode}; journal: {_journal_story(journal)}); stderr: {done.stderr[-3000:]!r}"
+    )
+    home = Path(env["HOME"])
+    assert not (home / ".cache").exists(), f"the confined build wrote a cache under the HOME: {list(home.rglob('*'))}"

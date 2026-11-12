@@ -33,7 +33,24 @@ networking, and narrows the rest:
   ``clipboard``), Kerberos (GSSCred), CoreSimulator, DiskArbitration, window server,
   Apple Event, accessibility and text input services. Signals, process information
   and task ports are allowed back for the sandbox's own processes (the agent and its
-  children).
+  children). The ``kern.proc`` lists (pid, parent, name and user of every process)
+  are not process information to XNU: ``sysctl_prochandle`` makes no such check, so
+  they stay readable (deduced from bsd/kern/kern_sysctl.c, NO_VERIFICADO).
+
+Two limits stay. Executing /bin/ps (setuid root) through ``run`` answered EPERM at
+exec in the CI of f3747db, and no rule here is about executing programs. In an
+Apple developer forum thread a user reports the same for /bin/ps under
+sandbox-exec, logged as forbidden-exec-sugid, with a copy without the bit running
+(developer.apple.com/forums/thread/689303; the post does not show its profile).
+That the sandbox refuses it whatever the profile says rests on reading this
+profile until the CI measures it under one of only ``(allow default)``
+(NO_VERIFICADO); that every setuid program is refused, on that report alone. A
+declared limit, not something to open: ``(with no-sandbox)`` would run the
+program outside the sandbox. And the per-user ``T`` and ``C`` directories stay
+denied, so ``run`` points the tools that write there instead of ``$TMPDIR``
+(clang's module cache; Chrome's ProcessSingleton socket, inferred) into the
+private TMPDIR through their environment variables
+(``cli.private_tmp_environment``).
 
 Precedence: among rules that carry a filter the last match wins; an unfiltered
 rule is only the operation's fallback, and a rule naming an operation outright

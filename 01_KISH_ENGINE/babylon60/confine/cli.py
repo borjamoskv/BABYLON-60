@@ -429,6 +429,41 @@ def agent_environment(
     return env, sorted(removed)
 
 
+def private_tmp_environment(
+    environ: Mapping[str, str], private_tmp: str, *, platform: str = sys.platform
+) -> dict[str, str]:
+    """``TMPDIR`` and the variables ``run`` points into the agent's private TMPDIR when ``environ`` lacks them.
+
+    Some tools ignore ``TMPDIR`` and write where the agent may not, so they fail confined; and what
+    the agent could write there would outlive the session, for the user's own unconfined builds to
+    load. Each value lives in the private TMPDIR, removed when the session ends:
+
+    * ``CLANG_MODULE_CACHE_PATH``, read by clang's driver (LLVM D126678) when no
+      ``-fmodules-cache-path`` is given: clang ``-fmodules`` otherwise caches modules in the per-user
+      cache directory on macOS (``/private/var/folders/.../C``, which the Seatbelt profile denies)
+      and in ``~/.cache/clang/ModuleCache`` on Linux (under the denied home). A value the user set is
+      kept, even empty, as outside ``run``: with an empty one the driver passes no cache path, and a
+      compile that needs a module fails (measured unconfined with clang 18.1.3: "fatal error: module
+      'B60' is needed but has not been provided, and implicit use of module files is disabled").
+    * ``MAC_CHROMIUM_TMPDIR`` (macOS), also when empty: Chromium's ``base::GetTempDir``
+      (base/files/file_util_apple.mm) reads it when it is not empty and otherwise
+      ``NSTemporaryDirectory()``. Chrome creates its ProcessSingleton socket directory there and
+      aborts without one. That ``NSTemporaryDirectory()`` gives the per-user ``T`` directory the
+      profile denies, not ``$TMPDIR``, is inferred from the CI of f3747db (Chrome aborted with the
+      private TMPDIR writable) and matches swift-foundation, whose temporary directory reads
+      ``_CS_DARWIN_USER_TEMP_DIR`` before ``TMPDIR``.
+    """
+    values = {"CLANG_MODULE_CACHE_PATH": os.path.join(private_tmp, "clang-module-cache")}
+    if platform == "darwin":
+        values["MAC_CHROMIUM_TMPDIR"] = private_tmp
+
+    def users(name: str) -> bool:
+        # Chromium ignores an empty MAC_CHROMIUM_TMPDIR, so only a non-empty one is the user's choice.
+        return bool(environ.get(name)) if name == "MAC_CHROMIUM_TMPDIR" else name in environ
+
+    return {"TMPDIR": private_tmp, **{name: value for name, value in values.items() if not users(name)}}
+
+
 def reexec_without_withheld(args: argparse.Namespace, passed: Sequence[str]) -> None:
     """Replace this process with itself, minus the variables the agent will not receive.
 
@@ -784,7 +819,7 @@ def run_command(args: argparse.Namespace) -> int:
             print(json.dumps(document, indent=2))
             return 0
         assert private_tmp is not None
-        env["TMPDIR"] = private_tmp
+        env.update(private_tmp_environment(env, private_tmp))
         launch = launcher.run_launch(
             [executable, *command[1:]],
             policy,

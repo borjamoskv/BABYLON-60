@@ -41,8 +41,11 @@ jobs:
       - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78
       - run: uv sync --locked --extra dev
       - name: Landlock confinement tests (unprivileged runner user)
+        # The -q -rsxX log names failures, xfails and xpasses, gives a skip's place and reason but not its
+        # test, and only counts passes; the JUnit XML records every test's outcome by name.
         run: >-
-          uv run --locked --no-sync pytest -q -rsxX --maxfail=100 tests/test_confine_*.py
+          uv run --locked --no-sync pytest -q -rsxX --maxfail=100
+          --junitxml="$RUNNER_TEMP/junit-linux.xml" tests/test_confine_*.py
         env:
           BABYLON60_REQUIRE_LANDLOCK: "1"
       - name: Record the first-block demo as evidence
@@ -59,6 +62,13 @@ jobs:
         with:
           name: first-block-demo-linux
           path: ${{ runner.temp }}/demo-linux.json
+          if-no-files-found: error
+      # Last, so the demo still depends only on the tests passing; recorded whatever happened above.
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always()
+        with:
+          name: confine-junit-linux
+          path: ${{ runner.temp }}/junit-linux.xml
           if-no-files-found: error
 
   seatbelt:
@@ -77,8 +87,11 @@ jobs:
       - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78
       - run: uv sync --locked --extra dev
       - name: Seatbelt confinement tests
+        # The -q -rsxX log names failures, xfails and xpasses, gives a skip's place and reason but not its
+        # test, and only counts passes; the JUnit XML records every test's outcome by name.
         run: >-
-          uv run --locked --no-sync pytest -q -rsxX --maxfail=100 tests/test_confine_*.py
+          uv run --locked --no-sync pytest -q -rsxX --maxfail=100
+          --junitxml="$RUNNER_TEMP/junit-macos.xml" tests/test_confine_*.py
         env:
           BABYLON60_REQUIRE_SEATBELT: "1"
       - name: Record the first-block demo as evidence
@@ -95,4 +108,11 @@ jobs:
         with:
           name: first-block-demo-macos
           path: ${{ runner.temp }}/demo-macos.json
+          if-no-files-found: error
+      # Last, so the demo still depends only on the tests passing; recorded whatever happened above.
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always()
+        with:
+          name: confine-junit-macos
+          path: ${{ runner.temp }}/junit-macos.xml
           if-no-files-found: error
