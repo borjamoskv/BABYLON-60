@@ -83,3 +83,9 @@ description = "Identificadores con puntos usados como subject_key en tests de me
 condition = "AND"
 paths = ['''tests/test_memory_governance_falsification\.py$''']
 regexes = ['''^[a-z][a-z0-9_]*(\.[a-z0-9_]+)+$''']
+
+[[rules.allowlists]]
+description = "Señuelos B60-CANARY de los tests de confinamiento: valores generados para la prueba, nunca credenciales"
+condition = "AND"
+paths = ['''^tests/test_confine_[a-z_]+\.py$''']
+regexes = ['''^B60-CANARY-[A-Za-z0-9_-]*$''']

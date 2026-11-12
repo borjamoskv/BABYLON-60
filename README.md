@@ -10,6 +10,65 @@ Model-agnostic authorization. Governed execution. Reproducible security evidence
 
 [Web](https://babylon60.com/) · [Guía de usuario](docs/03_guides/USER_GUIDE.md) · [Mapa del monorepo](#-mapa-del-monorepo-y-cámaras-arquitectónicas) · [Evidencia y límites](CLAIMS.toml) · [Seguridad](SECURITY.md)
 
+### Primer bloqueo en 5 minutos
+
+```bash
+git init BABYLON-60 && cd BABYLON-60
+```
+
+```bash
+git fetch --depth 1 https://github.com/borjamoskv/BABYLON-60 f9543fb055878e55bdcb0a849673ba1df351a796
+```
+
+```bash
+git checkout -q FETCH_HEAD && bash install.sh --demo
+```
+
+Se descarga la revisión grabada por su hash porque la rama principal pública es
+una proyección que aún no incluye este código. Cuando lo incluya, también valdrá
+`git clone --depth 1 https://github.com/borjamoskv/BABYLON-60` seguido de
+`cd BABYLON-60 && bash install.sh --demo`. Los requisitos están en la
+[guía](docs/03_guides/guide_primer_bloqueo.md#requisitos), y el atajo con `uvx`,
+en [Probar](docs/03_guides/guide_primer_bloqueo.md#probar).
+
+Un agente de prueba sigue un README con una instrucción inyectada e intenta
+leer un `~/.ssh/id_rsa` señuelo dos veces: sin confinar y confinado por el
+sistema operativo (Landlock y seccomp en Linux, Seatbelt en macOS). En Linux,
+un testigo inotify fuera del sandbox comprueba que el señuelo no se abrió; en
+macOS cuentan el error devuelto, la instantánea de `~/.ssh` y el rastreo del
+token. Un diario encadenado lo registra.
+
+Ejecución registrada en Linux x86_64 (uid 65534, revisión `f9543fb`):
+18 vectores, 18 bloqueados y 0 pasaron. En estrés, 200 repeticiones dan 3.600
+intentos confinados, 3.600 bloqueados y 0 pasaron. Los 4 límites que midió esa
+ejecución (L1, L2, L4 y L5) siguen abiertos en Linux; la lista completa de
+límites declarados está en la
+[guía](docs/03_guides/guide_primer_bloqueo.md#límites-declarados). En la CI de
+GitHub, Linux (kernel 7.0, Landlock ABI 8) bloquea los 16 vectores con control
+válido y macOS 15 (Seatbelt), los 17 aplicables.
+[Guía, cifras y límites](docs/03_guides/guide_primer_bloqueo.md).
+
+**Con tu agente:**
+
+- `babylon60 run --preset claude-code -- claude`
+- `babylon60 run --preset codex -- codex`
+- Otros CLI de agente, sin comprobar, con `babylon60 run -- <comando>`.
+
+El arranque confinado se ha comprobado en Linux; las sesiones con LLM están
+`NO_VERIFICADO`. Con un perfil, git lee en solo lectura su configuración
+global, lo que incluye, los archivos que nombra (`core.excludesFile`,
+`core.attributesFile`, `commit.template`) y su directorio de hooks, también a
+través de enlaces simbólicos como los de stow. Necesitan `--allow-read` un
+archivo que parece llevar una credencial, el destino de un enlace que el agente
+podría cambiar y las demás rutas que nombre la configuración. En Linux,
+firmar commits con gpg y usar credenciales guardadas de git (helpers `store` y
+`cache`) fallan dentro, y se puede crear un espacio de nombres de usuario, pero
+no escribir su `uid_map` ni cambiar montajes, que es lo que necesita un sandbox
+anidado como bubblewrap. En macOS el llavero sigue al alcance por `securityd`
+(límite declarado): las credenciales de `osxkeychain` están `NO_VERIFICADO` y
+probablemente se pueden usar dentro
+([detalle y lo que sigue `NO_VERIFICADO`](docs/03_guides/guide_primer_bloqueo.md#con-tu-agente)).
+
 > **En 10 segundos:**
 > **Intelligence is not authority.** BABYLON-60 se plantea como infraestructura de control de efectos autónomos: el agente decide qué intentar; BABYLON-60 debe determinar qué puede ocurrir dentro del perímetro protegido. Un modelo más capaz puede descubrir, planificar y proponer más acciones; eso no debe concederle permisos adicionales ($\text{INV-}\Omega$).
 > **Estado: alpha de seguridad.** La protección efectiva requiere tanto la verificación criptográfica del broker (`L2`) como el confinamiento de procesos del agente en el sistema operativo (`L3`). Una instalación de reglas/skills por sí sola NO impide que un agente no confinado escriba o ejecute comandos directamente.

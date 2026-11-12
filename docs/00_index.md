@@ -58,6 +58,7 @@
 | [`guide_experimental.md`](03_guides/guide_experimental.md) | `03_guides/guide_experimental.md` | EXPERIMENTAL — Extensiones cortex-persist |
 | [`guide_explanation.md`](03_guides/guide_explanation.md) | `03_guides/guide_explanation.md` | EXECUTIVE BRIEFING — MOSKV-1 / BABYLON-60 |
 | [`guide_legaltech_eu_ai_act.md`](03_guides/guide_legaltech_eu_ai_act.md) | `03_guides/guide_legaltech_eu_ai_act.md` | Guía de Auditoría LegalTech & Cumplimiento Regulador EU AI Act |
+| [`guide_primer_bloqueo.md`](03_guides/guide_primer_bloqueo.md) | `03_guides/guide_primer_bloqueo.md` | Primer bloqueo en 5 minutos |
 | [`guide_repository_source_of_truth.md`](03_guides/guide_repository_source_of_truth.md) | `03_guides/guide_repository_source_of_truth.md` | Fuente de Verdad Canónica del Repositorio |
 | [`guide_skill_arsenal_taxonomy.md`](03_guides/guide_skill_arsenal_taxonomy.md) | `03_guides/guide_skill_arsenal_taxonomy.md` | MOSKV-1 — TAXONOMÍA ARSENAL DE SKILLS POR EXERGÍA (v26.200) |
 | [`guide_swarm_pxs_orchestration.md`](03_guides/guide_swarm_pxs_orchestration.md) | `03_guides/guide_swarm_pxs_orchestration.md` | Guía de Orquestación de Enjambres Multi-Agente Kimi K3 ($P \times S$) |

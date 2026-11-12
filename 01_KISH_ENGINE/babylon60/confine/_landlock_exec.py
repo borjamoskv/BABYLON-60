@@ -1,0 +1,556 @@
+"""Confinement trampoline: restrict this process, then exec the target.
+
+Runs as ``python -I -S -B -c <this source> <config-json>``. It uses the standard
+library only and never imports ``babylon60``. Order of operations:
+
+1. Test hook ``acquire_ctty``: the launcher's session holder made fd 0 the
+   controlling terminal, as when the target inherits the user's terminal;
+   refuse unless ``/dev/tty`` opens.
+2. Close every inherited descriptor except stdio and the status pipe.
+3. ``new_session``, in one of two forms, each verified:
+
+   * without ``private_tty``: leave the terminal session (``setsid``, or
+     ``TIOCNOTTY`` when this process already leads a process group) and refuse
+     unless ``/dev/tty`` then fails with ENXIO. Without a controlling terminal
+     ``TIOCSTI`` fails and the launcher's terminal is out of reach;
+   * with ``private_tty`` (``{"fd", "rdev"}``): the launcher allocated a
+     pseudo-terminal and passed its slave on some of descriptors 0-2. Refuse
+     unless every terminal among 0-2 is that device, then start a new session,
+     make the slave its controlling terminal (``TIOCSCTTY``) and refuse unless
+     ``tcgetpgrp`` and ``/dev/tty`` both name it (on Linux ``TIOCGDEV`` too).
+     The target never holds the user's terminal.
+4. If any capability is held (for example as root), lock the securebits, empty
+   the bounding and ambient sets and clear every capability.
+5. Set ``NO_NEW_PRIVS``.
+6. Linux: build a Landlock ruleset from the granted paths, refusing any path
+   whose ``(st_dev, st_ino)`` changed since the launcher checked it, and
+   restrict this (single-threaded) process.
+7. Optionally install a seccomp filter that returns EPERM for syscalls from a
+   foreign or x32 ABI, ``TIOCSTI``/``TIOCLINUX`` terminal injection,
+   ``socket(AF_UNIX)`` unless Unix sockets are allowed (Landlock ABI <= 7 does
+   not restrict connecting to a socket path: ssh-agent, gpg-agent, tmux, D-Bus,
+   Docker) and io_uring, which creates and connects sockets without ``socket()``.
+8. With ``private_tty``, fork: this process stays the session leader as a
+   monitor, already confined, and the target runs as its child in a process
+   group of its own, in the foreground of the private terminal. With a parent in
+   its session that group is not orphaned, so Ctrl-Z stops it (the kernel
+   discards SIGTSTP sent to an orphaned group). The monitor mirrors a stop with
+   SIGSTOP on itself (the launcher waits with WUNTRACED), continues the target's
+   group when the launcher continues it, and exits as the target did: the same
+   status, or the same signal.
+9. Restore the signals Python ignores at startup and those the launcher names in
+   ``default_signals`` (it ignores SIGINT while it starts the target), report the
+   applied state as one JSON line on the status pipe, then ``execv``.
+
+Any failure is reported on the pipe and ends the process with status 126,
+before the target runs.
+"""
+
+import ctypes
+import errno
+import fcntl
+import json
+import os
+import platform
+import resource
+import signal
+import stat
+import struct
+import sys
+import termios
+
+EXIT_REFUSED = 126
+LANDLOCK_CREATE_RULESET, LANDLOCK_ADD_RULE, LANDLOCK_RESTRICT_SELF = 444, 445, 446
+LANDLOCK_CREATE_RULESET_VERSION, LANDLOCK_CREATE_RULESET_ERRATA = 1, 2
+LANDLOCK_RULE_PATH_BENEATH = 1
+LANDLOCK_RESTRICT_SELF_LOG_NEW_EXEC_ON = 2
+PR_SET_SECCOMP, PR_CAPBSET_DROP, PR_SET_SECUREBITS = 22, 24, 28
+PR_SET_NO_NEW_PRIVS, PR_GET_NO_NEW_PRIVS, PR_CAP_AMBIENT = 38, 39, 47
+PR_CAP_AMBIENT_CLEAR_ALL, SECCOMP_MODE_FILTER = 4, 2
+SECUREBITS_LOCKED_NOROOT = 0xEF  # NOROOT, NO_SETUID_FIXUP, KEEP_CAPS_LOCKED, NO_CAP_AMBIENT_RAISE (+ locks)
+LINUX_CAPABILITY_VERSION_3 = 0x20080522
+# machine: (AUDIT_ARCH_*, __NR_ioctl, __NR_socket, x32 shares the audit arch)
+SECCOMP_ARCH = {"x86_64": (0xC000003E, 16, 41, True), "aarch64": (0xC00000B7, 29, 198, False)}
+IO_URING_SYSCALLS = (425, 426, 427)  # io_uring_setup, io_uring_enter, io_uring_register on every architecture
+# Further syscall numbers per machine (x86_64: asm/unistd_64.h; aarch64: asm-generic/unistd.h).
+SECCOMP_SYSCALLS = {
+    "x86_64": {
+        "keyrings": (248, 249, 250),  # add_key, request_key, keyctl
+        # shmget shmat shmctl shmdt, semget semop semctl semtimedop, msgget msgsnd msgrcv msgctl
+        "sysv_ipc": (29, 30, 31, 67, 64, 65, 66, 220, 68, 69, 70, 71),
+        "socketpair": 53,
+        "openat2": 437,
+        # syscall: index of its mode argument (chmod fchmod fchmodat fchmodat2 open creat openat mknod mknodat)
+        "mode_arg": {90: 1, 91: 1, 268: 2, 452: 2, 2: 2, 85: 1, 257: 3, 133: 1, 259: 2},
+    },
+    "aarch64": {
+        "keyrings": (217, 218, 219),
+        "sysv_ipc": (194, 196, 195, 197, 190, 193, 191, 192, 186, 189, 188, 187),
+        "socketpair": 199,
+        "openat2": 437,
+        "mode_arg": {52: 1, 53: 2, 452: 2, 56: 3, 33: 2},  # fchmod fchmodat fchmodat2 openat mknodat
+    },
+}
+SOCK_STREAM, SOCK_SEQPACKET, SOCK_TYPE_MASK = 1, 5, 0xF
+SETID_BITS = 0o6000  # S_ISUID | S_ISGID
+X32_SYSCALL_BIT = 0x40000000
+TIOCSTI, TIOCLINUX = 0x5412, 0x541C
+TIOCGDEV = 0x80045432  # Linux _IOR('T', 0x32, unsigned int): the device behind a terminal descriptor
+LINUX = sys.platform.startswith("linux")
+AF_UNIX = 1
+BPF_LD_W_ABS, BPF_JEQ_K, BPF_JGE_K, BPF_JSET_K, BPF_RET_K, BPF_ALU_AND_K = 0x20, 0x15, 0x35, 0x45, 0x06, 0x54
+SECCOMP_RET_ALLOW, SECCOMP_RET_EPERM = 0x7FFF0000, 0x00050000 | errno.EPERM
+SECCOMP_RET_ENOSYS = 0x00050000 | errno.ENOSYS
+# struct seccomp_data: nr, arch, then args[]; the low 32 bits of an argument come first (little endian).
+DATA_NR, DATA_ARCH, DATA_ARG0_LOW, DATA_ARG1_LOW = 0, 4, 16, 24
+DATA_ARG_LOW = {1: 24, 2: 32, 3: 40}
+
+
+class Refused(Exception):
+    pass
+
+
+class RulesetAttr(ctypes.Structure):
+    _fields_ = [
+        ("handled_access_fs", ctypes.c_uint64),
+        ("handled_access_net", ctypes.c_uint64),
+        ("scoped", ctypes.c_uint64),
+    ]
+
+
+class PathBeneath(ctypes.Structure):
+    _pack_ = 1
+    _fields_ = [("allowed_access", ctypes.c_uint64), ("parent_fd", ctypes.c_int32)]
+
+
+class CapHeader(ctypes.Structure):
+    _fields_ = [("version", ctypes.c_uint32), ("pid", ctypes.c_int)]
+
+
+class CapData(ctypes.Structure):
+    _fields_ = [("effective", ctypes.c_uint32), ("permitted", ctypes.c_uint32), ("inheritable", ctypes.c_uint32)]
+
+
+class SockFilter(ctypes.Structure):
+    _fields_ = [("code", ctypes.c_uint16), ("jt", ctypes.c_uint8), ("jf", ctypes.c_uint8), ("k", ctypes.c_uint32)]
+
+
+class SockFprog(ctypes.Structure):
+    _fields_ = [("len", ctypes.c_ushort), ("filter", ctypes.POINTER(SockFilter))]
+
+
+def _libc():
+    libc = ctypes.CDLL(None, use_errno=True)
+    libc.syscall.restype = ctypes.c_long
+    libc.prctl.restype = ctypes.c_int
+    return libc
+
+
+def _check(result, what):
+    if result < 0:
+        err = ctypes.get_errno()
+        raise Refused(f"{what} failed: {os.strerror(err)} (errno {err})")
+    return result
+
+
+def _proc_status():
+    fields = {}
+    try:
+        with open("/proc/self/status", encoding="ascii") as handle:
+            for line in handle:
+                key, _, value = line.partition(":")
+                fields[key] = value.strip()
+    except OSError:
+        pass
+    return fields
+
+
+def _close_inherited(keep):
+    soft, _hard = resource.getrlimit(resource.RLIMIT_NOFILE)
+    top = 1 << 20 if soft == resource.RLIM_INFINITY else min(soft, 1 << 20)
+    start = 3
+    for fd in sorted(k for k in keep if k >= 3):
+        if fd > start:
+            os.closerange(start, fd)
+        start = fd + 1
+    os.closerange(start, top)
+
+
+def _drop_capabilities(libc):
+    status = _proc_status()
+    held = any(int(status.get(key, "0"), 16) for key in ("CapEff", "CapPrm", "CapInh", "CapAmb"))
+    if not held:
+        return False
+    _check(libc.prctl(PR_SET_SECUREBITS, SECUREBITS_LOCKED_NOROOT, 0, 0, 0), "lock securebits")
+    with open("/proc/sys/kernel/cap_last_cap", encoding="ascii") as handle:
+        last_cap = int(handle.read())
+    for cap in range(last_cap + 1):
+        _check(libc.prctl(PR_CAPBSET_DROP, cap, 0, 0, 0), f"drop bounding capability {cap}")
+    _check(libc.prctl(PR_CAP_AMBIENT, PR_CAP_AMBIENT_CLEAR_ALL, 0, 0, 0), "clear ambient capabilities")
+    header = CapHeader(LINUX_CAPABILITY_VERSION_3, 0)
+    data = (CapData * 2)()
+    _check(libc.capset(ctypes.byref(header), data), "capset")
+    after = _proc_status()
+    if any(int(after.get(key, "0"), 16) for key in ("CapEff", "CapPrm", "CapInh", "CapAmb", "CapBnd")):
+        raise Refused("capabilities remain after dropping them")
+    return True
+
+
+def _restrict_landlock(libc, cfg):
+    abi = _check(
+        libc.syscall(
+            LANDLOCK_CREATE_RULESET, None, ctypes.c_size_t(0), ctypes.c_uint32(LANDLOCK_CREATE_RULESET_VERSION)
+        ),
+        "landlock ABI query",
+    )
+    if abi < cfg["min_abi"]:
+        raise Refused(f"Landlock ABI {abi} is below the required {cfg['min_abi']}")
+    if abi != cfg["abi"]:
+        raise Refused(f"Landlock ABI changed between launcher ({cfg['abi']}) and trampoline ({abi})")
+    errata = 0
+    if abi >= 7:
+        errata = _check(
+            libc.syscall(
+                LANDLOCK_CREATE_RULESET, None, ctypes.c_size_t(0), ctypes.c_uint32(LANDLOCK_CREATE_RULESET_ERRATA)
+            ),
+            "landlock errata query",
+        )
+    attr = RulesetAttr(cfg["handled_fs"], 0, cfg["scoped"] if abi >= 6 else 0)
+    size = 24 if abi >= 6 else (16 if abi >= 4 else 8)
+    ruleset = _check(
+        libc.syscall(LANDLOCK_CREATE_RULESET, ctypes.byref(attr), ctypes.c_size_t(size), ctypes.c_uint32(0)),
+        "create ruleset",
+    )
+    try:
+        for rule in cfg["rules"]:
+            fd = os.open(rule["path"], os.O_PATH | os.O_CLOEXEC | os.O_NOFOLLOW)
+            try:
+                st = os.fstat(fd)
+                if (st.st_dev, st.st_ino) != (rule["dev"], rule["ino"]):
+                    raise Refused(f"granted path changed after it was checked: {rule['path']}")
+                beneath = PathBeneath(rule["access"], fd)
+                _check(
+                    libc.syscall(LANDLOCK_ADD_RULE, ruleset, LANDLOCK_RULE_PATH_BENEATH, ctypes.byref(beneath), 0),
+                    f"add rule {rule['path']}",
+                )
+            finally:
+                os.close(fd)
+        flags = LANDLOCK_RESTRICT_SELF_LOG_NEW_EXEC_ON if abi >= 7 else 0
+        _check(libc.syscall(LANDLOCK_RESTRICT_SELF, ruleset, ctypes.c_uint32(flags)), "restrict self")
+    finally:
+        os.close(ruleset)
+    return abi, errata
+
+
+def _assemble(lines):
+    """Classic BPF from instructions whose jump targets may name a label (a plain string line)."""
+    labels, program = {}, []
+    for line in lines:
+        if isinstance(line, str):
+            labels[line] = len(program)
+        else:
+            program.append(line)
+
+    def offset(target, index):
+        if not isinstance(target, str):
+            return target
+        distance = labels[target] - index - 1
+        if not 0 <= distance <= 255:
+            raise Refused(f"seccomp jump to {target} out of range")
+        return distance
+
+    return [(code, offset(jt, i), offset(jf, i), k) for i, (code, jt, jf, k) in enumerate(program)]
+
+
+def _seccomp_program(machine, unix_sockets):
+    """Return (rule names, program): EPERM for each rule, every other syscall allowed.
+
+    Beyond terminal injection and Unix sockets, the filter closes what Landlock does not
+    mediate: kernel keyrings (Kerberos ``KEYRING:persistent`` caches, keyctl secret stores),
+    System V IPC of unconfined processes, and setuid/setgid modes on files the agent can
+    write (a planted setuid program runs with its owner's rights for any local user).
+    ``openat2`` gets ENOSYS because its mode sits in a struct the filter cannot read;
+    libraries fall back to ``openat``.
+    """
+    if machine not in SECCOMP_ARCH:
+        raise Refused(f"seccomp filter unsupported on {machine}")
+    arch, nr_ioctl, nr_socket, has_x32 = SECCOMP_ARCH[machine]
+    numbers = SECCOMP_SYSCALLS[machine]
+    rules = ["foreign_arch", "tiocsti", "tioclinux"]
+    lines = [(BPF_LD_W_ABS, 0, 0, DATA_ARCH), (BPF_JEQ_K, 0, "deny", arch), (BPF_LD_W_ABS, 0, 0, DATA_NR)]
+    if has_x32:
+        lines.append((BPF_JGE_K, "deny", 0, X32_SYSCALL_BIT))
+    lines.append((BPF_JEQ_K, "ioctl", 0, nr_ioctl))
+    if not unix_sockets:
+        rules += ["af_unix", "socketpair_dgram"]
+        lines.append((BPF_JEQ_K, "socket", 0, nr_socket))
+        lines.append((BPF_JEQ_K, "socketpair", 0, numbers["socketpair"]))
+    rules += ["io_uring", "keyrings", "sysv_ipc", "openat2", "setid_modes"]
+    for nr in (*IO_URING_SYSCALLS, *numbers["keyrings"], *numbers["sysv_ipc"]):
+        lines.append((BPF_JEQ_K, "deny", 0, nr))
+    lines.append((BPF_JEQ_K, "enosys", 0, numbers["openat2"]))
+    for nr, index in numbers["mode_arg"].items():
+        lines.append((BPF_JEQ_K, f"mode{index}", 0, nr))
+    lines += [
+        (BPF_RET_K, 0, 0, SECCOMP_RET_ALLOW),
+        "ioctl",
+        (BPF_LD_W_ABS, 0, 0, DATA_ARG1_LOW),  # the kernel truncates the request to 32 bits
+        (BPF_JEQ_K, "deny", 0, TIOCSTI),
+        (BPF_JEQ_K, "deny", 0, TIOCLINUX),
+        (BPF_RET_K, 0, 0, SECCOMP_RET_ALLOW),
+    ]
+    if not unix_sockets:
+        lines += [
+            "socket",
+            (BPF_LD_W_ABS, 0, 0, DATA_ARG0_LOW),  # the domain is an int: high bits cannot hide AF_UNIX
+            (BPF_JEQ_K, "deny", 0, AF_UNIX),
+            (BPF_RET_K, 0, 0, SECCOMP_RET_ALLOW),
+            # A socketpair is connected to its twin, but a datagram end can still sendto() any
+            # datagram socket by path (journald, /dev/log, control sockets): keep only stream
+            # and seqpacket pairs. SOCK_RAW on AF_UNIX behaves as a datagram socket.
+            "socketpair",
+            (BPF_LD_W_ABS, 0, 0, DATA_ARG0_LOW),
+            (BPF_JEQ_K, 0, "allow", AF_UNIX),
+            (BPF_LD_W_ABS, 0, 0, DATA_ARG1_LOW),
+            (BPF_ALU_AND_K, 0, 0, SOCK_TYPE_MASK),  # drops SOCK_NONBLOCK and SOCK_CLOEXEC
+            (BPF_JEQ_K, "allow", 0, SOCK_STREAM),
+            (BPF_JEQ_K, "allow", "deny", SOCK_SEQPACKET),
+        ]
+    for index in sorted(set(numbers["mode_arg"].values())):
+        lines += [
+            f"mode{index}",
+            (BPF_LD_W_ABS, 0, 0, DATA_ARG_LOW[index]),  # mode_t is 32 bits
+            (BPF_JSET_K, "deny", "allow", SETID_BITS),
+        ]
+    lines += [
+        "allow",
+        (BPF_RET_K, 0, 0, SECCOMP_RET_ALLOW),
+        "enosys",
+        (BPF_RET_K, 0, 0, SECCOMP_RET_ENOSYS),
+        "deny",
+        (BPF_RET_K, 0, 0, SECCOMP_RET_EPERM),
+    ]
+    return rules, _assemble(lines)
+
+
+def _seccomp_filter(libc, unix_sockets):
+    rules, program = _seccomp_program(platform.machine(), unix_sockets)
+    filters = (SockFilter * len(program))(*[SockFilter(*item) for item in program])
+    prog = SockFprog(len(program), filters)
+    _check(libc.prctl(PR_SET_SECCOMP, SECCOMP_MODE_FILTER, ctypes.byref(prog), 0, 0), "install seccomp filter")
+    return rules
+
+
+def _open_ctty():
+    """The controlling terminal, or None when there is none (ENXIO)."""
+    try:
+        return os.open("/dev/tty", os.O_RDWR | os.O_NOCTTY | os.O_CLOEXEC)
+    except OSError as exc:
+        if exc.errno == errno.ENXIO:
+            return None
+        raise Refused(f"cannot check the controlling terminal: /dev/tty: {exc.strerror}") from None
+
+
+def _leave_terminal_session():
+    """The target must start without a controlling terminal, so TIOCSTI and /dev/tty cannot reach it."""
+    try:
+        os.setsid()
+    except PermissionError:  # already leads a process group (or its session): release the terminal instead
+        fd = _open_ctty()
+        if fd is not None:
+            # A session leader releasing its terminal makes the kernel send SIGHUP to the foreground group,
+            # which can be this process; the disposition is restored before exec.
+            previous = signal.signal(signal.SIGHUP, signal.SIG_IGN)
+            try:
+                fcntl.ioctl(fd, termios.TIOCNOTTY)
+            except OSError as exc:
+                raise Refused(f"cannot release the controlling terminal: {exc.strerror}") from None
+            finally:
+                signal.signal(signal.SIGHUP, previous)
+                os.close(fd)
+    fd = _open_ctty()
+    if fd is not None:
+        os.close(fd)
+        raise Refused("the target would keep a controlling terminal")
+    return True
+
+
+def _terminal_device(fd):
+    """Linux: (major, minor) of the terminal behind a descriptor, also through ``/dev/tty``; None if unknown."""
+    if not LINUX:
+        return None
+    try:
+        raw = struct.unpack("I", fcntl.ioctl(fd, TIOCGDEV, b"\0" * 4))[0]
+    except OSError:
+        return None
+    return os.major(raw), os.minor(raw)
+
+
+def _enter_private_terminal(fd, rdev):
+    """New session whose controlling terminal is the launcher's private pseudo-terminal on ``fd``."""
+    if fd not in (0, 1, 2):
+        raise Refused(f"private terminal: descriptor {fd} is not standard input, output or error")
+    try:
+        held = os.fstat(fd)
+    except OSError as exc:
+        raise Refused(f"private terminal: descriptor {fd}: {exc.strerror}") from None
+    if not (stat.S_ISCHR(held.st_mode) and held.st_rdev == rdev and os.isatty(fd)):
+        raise Refused(f"private terminal: descriptor {fd} is not the launcher's pseudo-terminal")
+    for other in (0, 1, 2):
+        try:
+            foreign = os.isatty(other) and os.fstat(other).st_rdev != rdev
+        except OSError:
+            continue  # closed
+        if foreign:
+            raise Refused(f"descriptor {other} is a terminal other than the private one")
+    if os.getsid(0) != os.getpid():
+        try:
+            os.setsid()
+        except OSError as exc:
+            raise Refused(f"cannot start a new session for the private terminal: {exc.strerror}") from None
+    try:
+        fcntl.ioctl(fd, termios.TIOCSCTTY, 0)
+        owner = os.tcgetpgrp(fd)  # succeeds only on the caller's controlling terminal
+    except OSError as exc:
+        raise Refused(f"the private terminal cannot become the controlling terminal: {exc.strerror}") from None
+    if owner != os.getpgrp() or os.getsid(0) != os.getpid():
+        raise Refused("the private terminal is not the controlling terminal of the new session")
+    ctty = _open_ctty()
+    if ctty is None:
+        raise Refused("the new session has no controlling terminal")
+    try:
+        device = _terminal_device(ctty)
+        if os.tcgetpgrp(ctty) != owner or device not in (None, (os.major(rdev), os.minor(rdev))):
+            raise Refused("/dev/tty is not the private terminal")
+    except OSError as exc:
+        raise Refused(f"cannot check /dev/tty: {exc.strerror}") from None
+    finally:
+        os.close(ctty)
+    return True
+
+
+def _exit_like(status):
+    """Exit as a child with wait status ``status`` did: the same code, or the same signal (without a core)."""
+    code = os.waitstatus_to_exitcode(status)
+    if code >= 0:
+        os._exit(code)
+    signum = -code
+    try:
+        resource.setrlimit(resource.RLIMIT_CORE, (0, resource.getrlimit(resource.RLIMIT_CORE)[1]))
+        signal.signal(signum, signal.SIG_DFL)
+    except (OSError, ValueError):
+        pass
+    signal.pthread_sigmask(signal.SIG_UNBLOCK, {signum})
+    os.kill(os.getpid(), signum)
+    os._exit(128 + signum)  # still alive: a signal whose default action does not end a process
+
+
+def _monitor(child):
+    """Session leader of the private terminal while the target runs; never returns."""
+    try:
+        null = os.open("/dev/null", os.O_RDWR)
+        for fd in (0, 1, 2):
+            os.dup2(null, fd)  # the monitor holds no terminal descriptor
+        if null > 2:
+            os.close(null)
+    except OSError:
+        for fd in (0, 1, 2):
+            try:
+                os.close(fd)
+            except OSError:
+                pass
+    for name in ("SIGINT", "SIGQUIT", "SIGTSTP", "SIGTTIN", "SIGTTOU"):
+        signal.signal(getattr(signal, name), signal.SIG_IGN)  # meant for the target's group, never this one
+    while True:
+        try:
+            _pid, status = os.waitpid(child, os.WUNTRACED)
+        except ChildProcessError:
+            os._exit(EXIT_REFUSED)
+        if not os.WIFSTOPPED(status):
+            _exit_like(status)
+        os.kill(os.getpid(), signal.SIGSTOP)  # the launcher sees the stop and continues this process
+        try:
+            os.killpg(os.getpgid(child), signal.SIGCONT)
+        except OSError:
+            try:
+                os.kill(child, signal.SIGCONT)
+            except OSError:
+                pass
+
+
+def _fork_target(fd, status_fd):
+    """The parent becomes the monitor; the child returns in its own process group, in the foreground."""
+    child = os.fork()
+    if child:
+        os.close(status_fd)  # the launcher's read of the status pipe ends when the target execs
+        _monitor(child)
+    os.setpgid(0, 0)
+    previous = signal.signal(signal.SIGTTOU, signal.SIG_IGN)  # tcsetpgrp from a background group
+    try:
+        os.tcsetpgrp(fd, os.getpgrp())
+    finally:
+        signal.signal(signal.SIGTTOU, previous)
+
+
+def _restore_default_signals(names=()):
+    """Python ignores SIGPIPE and SIGXFSZ at startup, the launcher SIGINT; exec keeps ignored signals."""
+    for name in ("SIGPIPE", "SIGXFSZ", *names):
+        if hasattr(signal, name):
+            signal.signal(getattr(signal, name), signal.SIG_DFL)
+
+
+def main():
+    cfg = json.loads(sys.argv[1])
+    status_fd = cfg["status_fd"]
+    fcntl.fcntl(status_fd, fcntl.F_SETFD, fcntl.FD_CLOEXEC)
+    report = {"ok": False, "uid": os.getuid(), "platform": sys.platform}
+    try:
+        if cfg.get("acquire_ctty"):  # test hook: the launcher's session holder handed over its terminal
+            fd = _open_ctty()
+            if fd is None:
+                raise Refused("acquire_ctty: the target would start without a controlling terminal")
+            os.close(fd)
+            report["acquire_ctty"] = True
+        _close_inherited({status_fd})
+        private = cfg.get("private_tty")
+        if private and (not cfg.get("new_session") or cfg.get("acquire_ctty")):
+            raise Refused("private_tty needs new_session and excludes acquire_ctty")
+        if cfg.get("new_session"):
+            if private:
+                report["new_session"] = _enter_private_terminal(private["fd"], private["rdev"])
+            else:
+                report["new_session"] = _leave_terminal_session()
+            report["terminal"] = "private" if private else "none"
+        if sys.platform.startswith("linux"):
+            libc = _libc()
+            report["caps_dropped"] = _drop_capabilities(libc) if cfg.get("drop_caps", True) else False
+            _check(libc.prctl(PR_SET_NO_NEW_PRIVS, 1, 0, 0, 0), "set no_new_privs")
+            report["no_new_privs"] = _check(libc.prctl(PR_GET_NO_NEW_PRIVS, 0, 0, 0, 0), "get no_new_privs")
+            if cfg.get("landlock"):
+                report["landlock_abi"], report["landlock_errata"] = _restrict_landlock(libc, cfg)
+                # Signals and abstract Unix sockets are scoped from ABI 6 on; 0 means not scoped.
+                report["landlock_scoped"] = cfg["scoped"] if report["landlock_abi"] >= 6 else 0
+                report["rules"] = len(cfg["rules"])
+            if cfg.get("seccomp"):
+                report["seccomp"] = _seccomp_filter(libc, bool(cfg.get("unix_sockets")))
+            status = _proc_status()
+            report["caps"] = {key: status.get(key) for key in ("CapEff", "CapPrm", "CapBnd", "CapAmb")}
+        elif cfg.get("landlock") or cfg.get("seccomp"):
+            raise Refused("Landlock and seccomp are only available on Linux")
+        if private:
+            _fork_target(private["fd"], status_fd)
+        _restore_default_signals(cfg.get("default_signals", ()))
+        report["pid"] = os.getpid()
+        report["ok"] = True
+        os.write(status_fd, (json.dumps(report) + "\n").encode())
+        os.execv(cfg["argv"][0], cfg["argv"])
+    except (Refused, OSError, KeyError, ValueError) as exc:
+        report["ok"] = False
+        report["error"] = f"{type(exc).__name__}: {exc}"
+        try:
+            os.write(status_fd, (json.dumps(report) + "\n").encode())
+        finally:
+            os._exit(EXIT_REFUSED)
+
+
+main()

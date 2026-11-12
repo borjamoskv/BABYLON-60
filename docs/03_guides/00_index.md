@@ -51,6 +51,7 @@ graph TD
 | **10** | [guide_repository_source_of_truth.md](./guide_repository_source_of_truth.md) | Fuente de Verdad | Jerarquía de Artefactos y Consistencia | `[OBSOLETO: MASTER_LEDGER]` |
 | **11** | [guide_commercial_license.md](./guide_commercial_license.md) | Licencia Soberana | Doble Licencia Abierta/Comercial | `[OBSOLETO: INV_C5_17]` |
 | **12** | [tutorial_hello_causal.md](./tutorial_hello_causal.md) | Tutorial Causal | Primeros Pasos Transformación Causal | `[OBSOLETO: HELLO_CAUSAL_TUTORIAL]` |
+| **13** | [guide_primer_bloqueo.md](./guide_primer_bloqueo.md) | Primer bloqueo | `babylon60 demo`, `run`, `log`; Landlock y Seatbelt | `Linux y macOS en CI (confine.yml)` |
 
 ---
 

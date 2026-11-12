@@ -55,6 +55,9 @@ elif sys.argv[1:] == ['setup', '--client', 'codex']:
         raise SystemExit(status)
     Path(os.environ['STUB_SETUP_STATE']).write_text('activated', encoding='utf-8')
     print('Codex configured; application not evaluated.')
+elif sys.argv[1:] == ['demo']:
+    print('verdict: BLOCKED')
+    raise SystemExit(int(os.environ.get('STUB_DEMO_EXIT', '0')))
 else:
     raise SystemExit(2)
 """
@@ -171,6 +174,7 @@ def test_default_install_reports_activation_command_and_preserves_globals(instal
     assert "CLI installed:" in result.stdout
     assert "Codex integration: not activated." in result.stdout
     assert "Next step:" in result.stdout and "setup --client codex" in result.stdout
+    assert "First block:" in result.stdout and " demo" in result.stdout
     assert not Path(env["CODEX_HOME"]).exists()
     assert not Path(env["STUB_SETUP_STATE"]).exists()
 
@@ -265,4 +269,47 @@ def test_powershell_argument_and_dry_run_paths_without_installation(installer, a
     assert message in result.stdout + result.stderr
     assert not (root / ".venv").exists()
     assert not Path(env["CODEX_HOME"]).exists()
+    assert calls(env) == []
+
+
+@pytest.mark.skipif(sys.platform == "win32", reason="requires Bash")
+def test_demo_runs_after_install_and_propagates_its_status(installer):
+    _, _, env = installer
+    result = run_installer(installer, "--demo")
+    assert result.returncode == 0, result.stderr
+    assert calls(env) == [["uv", "sync", "--locked", "--no-dev", "--no-editable"], ["cli", "demo"]]
+    assert "verdict: BLOCKED" in result.stdout and "CLI installed:" in result.stdout
+    assert "First block:" not in result.stdout
+    env["STUB_DEMO_EXIT"] = "1"
+    failed = run_installer(installer, "--demo")
+    assert failed.returncode == 1
+    assert "CLI installed:" in failed.stdout
+
+
+@pytest.mark.skipif(sys.platform == "win32", reason="requires Bash")
+def test_demo_with_client_activates_then_runs_demo(installer):
+    _, _, env = installer
+    result = run_installer(installer, "--client", "codex", "--demo")
+    assert result.returncode == 0, result.stderr
+    assert calls(env) == [
+        ["uv", "sync", "--locked", "--no-dev", "--no-editable"],
+        ["cli", "setup", "--client", "codex"],
+        ["cli", "demo"],
+    ]
+
+
+@pytest.mark.skipif(sys.platform == "win32", reason="requires Bash")
+def test_demo_and_stdio_mode_are_rejected_before_install(installer):
+    result = run_installer(installer, "--mcp", "--demo")
+    assert result.returncode == 2
+    assert "cannot be combined" in result.stderr
+    assert calls(installer[2]) == []
+
+
+@pytest.mark.skipif(sys.platform == "win32", reason="requires Bash")
+def test_dry_run_describes_the_demo_without_running_it(installer):
+    _, _, env = installer
+    result = run_installer(installer, "--demo", "--dry-run")
+    assert result.returncode == 0, result.stderr
+    assert "Demo after installation (not executed)" in result.stdout
     assert calls(env) == []
