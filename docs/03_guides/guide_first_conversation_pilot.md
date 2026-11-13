@@ -8,7 +8,7 @@ y el [contrato de presentación](../../01_KISH_ENGINE/babylon60/presentation.md#
 El [runner](../../scripts/c5_quality_gates/experience_pilot.py) prepara entradas, importa
 evidencia, crea parejas sin etiquetas de condición y calcula el criterio de aceptación.
 No invoca modelos, no autentica sesiones y no sustituye a los revisores humanos.
-Requiere Python >=3.10 y `blake3`, ya incluido en las dependencias bloqueadas del proyecto.
+Requiere Python >=3.11 y `blake3`, ya incluido en las dependencias bloqueadas del proyecto.
 
 ## Preparación y condiciones
 

@@ -5,7 +5,7 @@
 
 use clap::{Parser, Subcommand};
 use std::fs;
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 use std::time::Instant;
 
 use b60_lang::compiler::B60Compiler;
@@ -32,10 +32,13 @@ enum Commands {
         #[arg(short, long, default_value_t = 1_000_000)]
         iterations: u64,
     },
-    /// Genera la prueba formal en Lean 4 y la compila para verificación matemática absoluta
+    /// Verifica en Lean el bytecode HALT/NOOP de la fuente; rechaza operaciones no modeladas
     Prove {
         /// Ruta al archivo fuente .b60
         file: PathBuf,
+        /// Tiempo máximo del comprobador Lean en milisegundos
+        #[arg(long, default_value_t = 30_000, value_parser = clap::value_parser!(u64).range(1..=120_000))]
+        checker_timeout_ms: u64,
     },
     /// Transduce y evalúa una acción agéntica bajo la compuerta epistémica C5-REAL
     Transduce {
@@ -60,6 +63,31 @@ enum Commands {
     },
     /// Muestra la información de arquitectura, invariantes y estado exergético
     Info,
+}
+
+fn proof_destination(source: &Path) -> Result<PathBuf, String> {
+    let destination = source.with_extension("lean");
+    // Resolve these existing file objects only to detect aliases, not to choose
+    // a workspace root. This also covers case-insensitive filename aliases.
+    let input = fs::canonicalize(source).map_err(|e| format!("read source: {e}"))?;
+    match fs::canonicalize(&destination) {
+        Ok(output) => {
+            if input == output {
+                return Err("source and proof output refer to the same file".into());
+            }
+            #[cfg(unix)] {
+                use std::os::unix::fs::MetadataExt;
+                let left = fs::metadata(&input).map_err(|e| e.to_string())?;
+                let right = fs::metadata(&output).map_err(|e| e.to_string())?;
+                if left.dev() == right.dev() && left.ino() == right.ino() {
+                    return Err("source and proof output refer to the same file".into());
+                }
+            }
+        }
+        Err(error) if error.kind() == std::io::ErrorKind::NotFound => {}
+        Err(error) => return Err(format!("inspect proof output: {error}")),
+    }
+    Ok(destination)
 }
 
 fn main() {
@@ -166,50 +194,26 @@ fn main() {
             println!("  -> Tiempo de cálculo F60:         {:.2} ms", el_f60.as_secs_f64() * 1000.0);
             println!("==================================================================");
         }
-        Commands::Prove { file } => {
-            println!("==================================================================");
-            println!("         B60 FORMAL PROOF EMITTER (LEAN 4 BACKEND)                ");
-            println!("==================================================================");
-            println!("  [+] Analizando script para verificación formal: {:?}", file);
-            let _source = match fs::read_to_string(&file) {
-                Ok(s) => s,
-                Err(e) => {
-                    eprintln!("  [!] Error leyendo archivo: {}", e);
-                    std::process::exit(1);
-                }
-            };
-
-            println!("  [+] Verificando contratibilidad de geodésica en Z60...");
-            let sample_phases = vec![15, 20, 25]; // Fases canónicas de convergencia
-            match b60_lang::homotopy::HomotopyVerifier::verify_path(&sample_phases) {
-                b60_lang::homotopy::HomotopyResult::ContractibleGeodesic { topological_winding, .. } => {
-                    println!("  [✓] Contratibilidad HoTT demostrada: Winding = {}, Residuo = 0", topological_winding);
-                }
-                _ => {
-                    eprintln!("  [!] Falla en verificación homotópica");
-                    std::process::exit(1);
-                }
-            }
-
-            println!("  [+] Emitiendo teorema formal en Lean 4...");
-            let lean_theorem = format!(
-                "-- Auto-generated formal proof by B60 Compiler for {:?}\n\
-                import Babylon\n\n\
-                namespace Babylon.GeneratedTrace\n\
-                theorem trace_exactness : (Babylon.add_tick60 (Babylon.Tick60.mk 0 4320000 (by decide)) (Babylon.Tick60.mk 0 8640000 (by decide))).sexa_fraction = 0 := by\n\
-                  decide\n\
-                end Babylon.GeneratedTrace\n",
-                file
-            );
-
-            let out_lean = file.with_extension("lean");
-            if let Err(e) = fs::write(&out_lean, &lean_theorem) {
-                eprintln!("  [!] Error escribiendo prueba Lean: {}", e);
+        Commands::Prove { file, checker_timeout_ms } => {
+            let result = (|| -> Result<(), String> {
+                let proof_path = proof_destination(&file)?;
+                let source = fs::read_to_string(&file).map_err(|e| format!("read source: {e}"))?;
+                let bytecode = B60Compiler::compile_source(&source)?;
+                let verified = b60_lang::Lean4Emitter::verify_bytecode_trace_proof(
+                    &bytecode, &proof_path, std::time::Duration::from_millis(checker_timeout_ms))?;
+                println!("VERIFIED: compiled HALT/NOOP bytecode reaches HALT.");
+                println!("source_blake3={} bytecode_blake3={}",
+                    blake3::hash(source.as_bytes()), blake3::hash(&bytecode));
+                println!("proof={} proof_blake3={} checker={}", verified.path.display(),
+                    verified.proof_blake3, verified.checker);
+                println!("The proof path is a replaceable alias; proof_blake3 identifies these checked bytes.");
+                println!("Scope: compiled HALT/NOOP control flow; compiler correctness and the full ISA are not certified.");
+                Ok(())
+            })();
+            if let Err(error) = result {
+                eprintln!("NOT VERIFIED: {error}");
                 std::process::exit(1);
             }
-            println!("  [+] Archivo Lean generado: {:?}", out_lean);
-            println!("  [✓] TEOREMA FORMAL CONSTRUIDO Y COMPILADO EXITOSAMENTE");
-            println!("==================================================================");
         }
         Commands::Transduce { agent_id, tool, reasoning_len, payload_len, budget } => {
             println!("==================================================================");

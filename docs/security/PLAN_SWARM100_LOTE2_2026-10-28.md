@@ -1,9 +1,11 @@
 # Lote 2 propuesto: conservación de datos y alcance de purgas — 28/10/2026
 
+> Alcance de la distribución pública: las referencias marcadas como material no distribuido identifican evidencia o herramientas excluidas deliberadamente de este checkout. Se conservan sus rutas y los resultados históricos; esos soportes no pueden verificarse desde esta distribución.
+
 Estado: ejecutado bajo autorización, con cuatro P1 corregidos y C0460
 MITIGATED. [Resultado y verificación](REMEDIATION_SWARM100_LOTE2_2026-10-28.md).
 Los hashes iniciales constan en la
-[selección](evidence/swarm100-lot1-20261028/lot2-selection.json).
+selección (material no distribuido: `evidence/swarm100-lot1-20261028/lot2-selection.json`).
 Después del Lote 1 no quedan P1 OPEN con dictamen REPRODUCED; este bloque
 selecciona cinco P1 CONFIRMED_STATIC y una copia duplicada. Primero deben
 reproducirse en fixtures; este plan no acredita su ejecución ni su corrección.

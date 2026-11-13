@@ -83,12 +83,30 @@ Permite a los asistentes inspeccionar y aplicar cambios con garantías atómicas
 La CLI principal (`babylon60`) unifica el acceso a todos los motores del sistema:
 
 ### 1. Auditoría y Cumplimiento EU AI Act (`babylon60 compliance`)
-Genera informes oficiales de auditoría criptográfica alineados con el Reglamento (UE) 2024/1689:
+Genera informes de evidencia técnica para la revisión del sistema. El informe no
+determina conformidad jurídica ni autoriza aprobación o publicación reguladas.
+Usa un paquete de evidencia y un ledger reales de tu instalación. Configura antes
+`BABYLON60_SIGNING_SEED` en el entorno mediante el mecanismo seguro de secretos de
+tu instalación: requiere una semilla Ed25519 de 32 bytes, expresada como 64
+caracteres hexadecimales. No escribas su valor en argumentos ni en comandos que
+queden en el historial. Esta firma por software no constituye atestación hardware
+o biométrica ni autoriza publicación. El ejemplo exige la variable ya exportada
+y no habilita firmas con claves efímeras:
 ```bash
-# Generar reporte de cumplimiento para los Arts. 9, 12, 14 y 15:
-babylon60 compliance --output reporte_cumplimiento.html
+# Sustituye las rutas por el paquete y el ledger que vas a verificar:
+: "${BABYLON60_SIGNING_SEED:?Configura BABYLON60_SIGNING_SEED con 64 caracteres hexadecimales mediante el mecanismo seguro de secretos de tu instalación}" && \
+babylon60 compliance --bundle /ruta/paquete_evidencia --ledger /ruta/ledger.db \
+  --format html --output reporte_evidencia.html
 ```
-- **Resultado:** Informe técnico listo para auditoría legal con sellos de trazabilidad, cadena de custodia WORM y verificación de control humano.
+El resultado identifica `legal_conformity=NOT_DETERMINED` y
+`publication_authorized=false`. La integridad de la evidencia no verifica por sí
+sola gestión de riesgos, supervisión humana ni los demás controles pendientes de
+auditoría. Un informe generado con evidencia no verificada devuelve salida 2
+salvo que se use `--allow-unverified`: en ese caso devuelve salida 0, conserva
+su carácter diagnóstico y no concede autorización. Una ruta de `--bundle` inexistente falla
+antes de generar el informe y devuelve salida 1. Consulta
+la [guía de evaluación y autorización regulatoria](../05_compliance_eu_ai_act.md)
+para el procedimiento separado de evaluación, revisión y aprobación.
 
 ### 2. Catálogo y Enrutador de Skills (`babylon60 skills`)
 Permite listar y enrutar intenciones a la habilidad idónea dentro de la flota CORTEX:
@@ -101,14 +119,22 @@ babylon60 skills route --query "auditar concurrencia en canal de memoria compart
 ```
 
 ### 3. Servidores Efímeros Autodestructibles (`babylon60 mcp-bomb`)
-Permite sintetizar en caliente un servidor MCP puntual en Python, ejecutarlo en un subproceso aislado, registrar el recibo inmutable y autodestruirlo físicamente tras su uso:
+Permite sintetizar un servidor MCP puntual en Python y ejecutarlo mediante el
+backend de aislamiento disponible. Después elimina la ruta activa del script y
+su entrada del registro efímero. El resultado identifica el backend y la evidencia
+de aislamiento, el hash del código y el estado de esa limpieza lógica:
 ```bash
 babylon60 mcp-bomb \
   --domain "CalculoPrimos" \
   --code "def run(n): return [x for x in range(2, n) if all(x % d != 0 for d in range(2, int(x**0.5)+1))]" \
   --args '{"n": 50}'
 ```
-- **Ventaja práctica:** Cero residuos de scripts temporales en disco y certificación criptográfica de la ejecución en el ledger.
+El campo JSON heredado `self_destruct_verified` indica únicamente la comprobación
+de limpieza lógica de la ruta y del registro, que también muestra la salida de
+texto. La ausencia de la ruta activa no acredita borrado físico del medio ni ausencia
+de copias, backups o cachés. El resultado devuelto y su hash de código tampoco
+constituyen por sí solos un recibo firmado y persistido en un ledger. La entrada
+efímera se purga; conserva por separado la evidencia que necesite tu auditoría.
 
 ### 4. Motor Epistémico AUTODIDACT-Ω (`babylon60 autodidact`)
 Permite orquestar investigaciones profundas, destilar papers científicos y estructurar conocimiento formal:

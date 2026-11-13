@@ -4,12 +4,25 @@
 # ============================================================================
 import ast
 import asyncio
+import errno
 import sys
 import json
 import os
 import signal
-import hashlib
+from pathlib import Path
+import sysconfig
 from typing import TypedDict, Literal
+
+from blake3 import blake3
+
+from babylon60.kernel.mcp_sandbox_validator import _resident_bytes
+
+
+_MAX_STREAM_BYTES = 2 * 1024 * 1024
+_MAX_RESULT_TEXT_BYTES = 1024 * 1024
+_READ_CHUNK_BYTES = 8192
+_MAX_RESIDENT_BYTES = 256 * 1024 * 1024
+_MEMORY_POLL_SECONDS = 0.05
 
 
 class SecurityError(Exception):
@@ -17,6 +30,7 @@ class SecurityError(Exception):
 
 
 class ScittResult(TypedDict):
+    """Untrusted worker observations; status is neither authority nor attestation."""
     status: Literal["Success", "Falsified", "Timeout_Entropy_Death", "SecurityError", "RuntimeError", "ByzantineFault"]
     stdout: str
     error: str
@@ -56,9 +70,11 @@ def _check_ast_node(node: ast.AST, reflection_funcs: set[str], allowed_imports: 
 
 def validate_ast_markov_blanket(source_code: str) -> tuple[bool, str]:
     """
-    Evaluates AST for forbidden introspection and memory escapes.
-    Implements RULE_AST_REFLECT_01: Validates string constants used in reflections.
+    Screen known AST patterns; acceptance is not permission or OS isolation.
+    Implements RULE_AST_REFLECT_01 for string constants used in reflections.
     """
+    if len(source_code.encode("utf-8")) > 1024 * 1024:
+        raise SecurityError("Source exceeds the 1 MiB static-screening limit")
     reflection_funcs = {
         "getattr",
         "setattr",
@@ -78,7 +94,7 @@ def validate_ast_markov_blanket(source_code: str) -> tuple[bool, str]:
         for node in ast.walk(tree):
             _check_ast_node(node, reflection_funcs, allowed_imports)
 
-        ast_hash = hashlib.sha256(ast.dump(tree).encode("utf-8")).hexdigest()
+        ast_hash = blake3(ast.dump(tree).encode("utf-8")).hexdigest()
         return True, ast_hash
     except SecurityError:
         raise
@@ -98,8 +114,8 @@ import contextlib
 import resource
 import logging
 
-# Thermodynamic Valve: Memory Constraint (50 MB)
-# macOS restricts RLIMIT_AS differently from Linux, handle gracefully per platform
+# Best-effort in-worker limit; Darwin does not reliably enforce RLIMIT_DATA.
+# The parent independently samples RSS and rejects unavailable supervision.
 MAX_MEM = 50 * 1024 * 1024
 try:
     if sys.platform != "darwin":
@@ -126,7 +142,7 @@ class BoundedStringIO(StringIO):
 
 code = sys.stdin.read()
 
-# Stripped down builtins for strict isolation
+# Additional syntax restrictions; the OS profile is the isolation boundary.
 # Removed: getattr, hasattr, issubclass, exec, eval, open, etc. Added safe __import__.
 def _safe_import(name, globals=None, locals=None, fromlist=(), level=0):
     allowed_imports = {"numpy", "networkx", "typing"}
@@ -150,7 +166,7 @@ safe_builtins = {
     'slice': slice, 'sorted': sorted, 'str': str, 'sum': sum, 'tuple': tuple,
     'type': type, 'zip': zip
 }
-# Execute within a restricted global scope (La Monada Estricta)
+# Execute only after the parent has required operating-system confinement.
 env = {"__builtins__": safe_builtins, "__name__": "__main__"}
 
 stdout_capture = BoundedStringIO()
@@ -173,7 +189,6 @@ except MemoryError as e:
 except Exception as e:
     result = {"status": "RuntimeError", "stdout": stdout_capture.getvalue(), "error": str(e)}
 
-print("---JSON_OUTPUT_MARKER---")
 print(json.dumps(result))
 """
 
@@ -192,53 +207,208 @@ def _purge_zombies(process: asyncio.subprocess.Process) -> None:
         process.kill()
 
 
-async def run_chaos_monad(
-    source_code: str, frontier_tick: str = "GENESIS_TICK", timeout_ms: int = 1000, use_seatbelt: bool = False
-) -> ScittResult:
+class _OutputLimitExceeded(Exception):
+    pass
+
+
+async def _read_bounded(stream: asyncio.StreamReader) -> bytes:
+    """Enforce the raw byte budget outside the arbitrary-code worker."""
+    output = bytearray()
+    while True:
+        chunk = await stream.read(min(_READ_CHUNK_BYTES, _MAX_STREAM_BYTES - len(output) + 1))
+        if not chunk:
+            return bytes(output)
+        if len(output) + len(chunk) > _MAX_STREAM_BYTES:
+            raise _OutputLimitExceeded
+        output.extend(chunk)
+
+
+async def _feed_source(stream: asyncio.StreamWriter, source: bytes) -> None:
+    try:
+        stream.write(source)
+        await stream.drain()
+    except (BrokenPipeError, ConnectionResetError):
+        pass
+    finally:
+        stream.close()
+
+
+def _check_resident_memory(pid: int) -> None:
+    if _resident_bytes(pid) > _MAX_RESIDENT_BYTES:
+        raise SecurityError("MemoryError: Execution resident memory exceeds 256 MiB cutoff")
+
+
+async def _monitor_memory(process: asyncio.subprocess.Process) -> None:
+    """Sample RSS in the trusted parent; this is not an OS hard memory quota."""
+    while process.returncode is None:
+        try:
+            _check_resident_memory(process.pid)
+        except (OSError, AttributeError) as exc:
+            # Only ESRCH can be an ordinary exit race. Permission/API failures
+            # reject immediately, even if the worker could finish moments later.
+            if not isinstance(exc, OSError) or exc.errno != errno.ESRCH:
+                raise SecurityError("MemoryError: OS memory supervision unavailable") from exc
+            try:
+                await asyncio.wait_for(asyncio.shield(process.wait()), _MEMORY_POLL_SECONDS)
+            except asyncio.TimeoutError:
+                raise SecurityError("MemoryError: OS memory supervision unavailable") from exc
+            return
+        await asyncio.sleep(_MEMORY_POLL_SECONDS)
+
+
+async def _collect_bounded(process: asyncio.subprocess.Process, source: bytes) -> bytes:
+    if process.stdin is None or process.stdout is None or process.stderr is None:
+        raise RuntimeError("Execution streams are unavailable")
+    # Establish working supervision before feeding any generated code to the worker.
+    try:
+        _check_resident_memory(process.pid)
+    except (OSError, AttributeError) as exc:
+        raise SecurityError("MemoryError: OS memory supervision unavailable") from exc
+    stdout_task = asyncio.create_task(_read_bounded(process.stdout))
+    tasks = [
+        asyncio.create_task(_feed_source(process.stdin, source)),
+        stdout_task,
+        asyncio.create_task(_read_bounded(process.stderr)),
+        asyncio.create_task(process.wait()),
+        asyncio.create_task(_monitor_memory(process)),
+    ]
+    try:
+        await asyncio.gather(*tasks)
+        return stdout_task.result()
+    finally:
+        for task in tasks:
+            if not task.done():
+                task.cancel()
+        await asyncio.gather(*tasks, return_exceptions=True)
+
+
+async def _discard_stream(stream: asyncio.StreamReader | None) -> None:
+    if stream is not None:
+        while await stream.read(_READ_CHUNK_BYTES):
+            pass
+
+
+async def _stop_and_reap(process: asyncio.subprocess.Process) -> None:
+    if process.returncode is None:
+        _purge_zombies(process)
+    # Drain without retaining bytes: a paused pipe can otherwise prevent wait()
+    # from completing after SIGKILL. All bounded readers have been cancelled.
+    await asyncio.gather(
+        _discard_stream(process.stdout), _discard_stream(process.stderr), process.wait(),
+        return_exceptions=True,
+    )
+
+
+async def _finish_reaping(process: asyncio.subprocess.Process) -> None:
+    cleanup = asyncio.create_task(_stop_and_reap(process))
+    cancelled = False
+    while not cleanup.done():
+        try:
+            await asyncio.shield(cleanup)
+        except asyncio.CancelledError:
+            cancelled = True
+    cleanup.result()
+    if cancelled:
+        raise asyncio.CancelledError
+
+
+def _sandbox_command() -> list[str]:
+    """Build the supported read-only Darwin runtime, with no fallback.
+
+    File metadata is visible, but file contents are restricted to the Python
+    runtime and installed packages. The profile grants no writes, network,
+    process forks, desktop access or arbitrary program execution.
     """
-    Executes dynamic code in a strict subprocess sandbox.
-    Returns a strict Monad Result to protect the core from entropy.
+    sandbox = Path("/usr/bin/sandbox-exec")
+    if sys.platform != "darwin" or not sandbox.is_file() or not os.access(sandbox, os.X_OK):
+        raise SecurityError("No verified OS confinement backend is available on this platform")
+    runtime = os.path.realpath(sys.base_prefix)
+    framework_python = Path(runtime) / "Resources/Python.app/Contents/MacOS/Python"
+    if not framework_python.is_file():
+        raise SecurityError("No verified OS confinement backend is available for this Python runtime")
+    executable = str(framework_python)
+    packages = sorted({os.path.realpath(sysconfig.get_path(key)) for key in ("purelib", "platlib")})
+    runtime_paths = sorted({
+        runtime, *packages,
+        "/System/Library", "/System/Volumes/Preboot/Cryptexes/OS/System/Library/dyld",
+        "/usr/lib", "/usr/share",
+    })
+    # Never turn an unusual Python installation into broad host access.
+    forbidden_roots = {
+        "/", "/Users", "/System", "/System/Volumes", "/System/Volumes/Data", "/usr", "/usr/local",
+        "/opt", "/opt/homebrew", "/opt/homebrew/Cellar", "/Library", "/Library/Frameworks", str(Path.home()),
+    }
+    home = os.path.realpath(str(Path.home()))
+    home_aliases = {home, "/System/Volumes/Data" + home}
+    if any(
+        path in forbidden_roots or not os.path.isabs(path)
+        or any(os.path.commonpath((path, user_home)) == path for user_home in home_aliases)
+        for path in runtime_paths
+    ):
+        raise SecurityError("Python runtime paths cannot provide bounded OS confinement")
+    profile = (
+        "(version 1)(deny default)"
+        f"(allow process-exec (literal {json.dumps(executable)}))"
+        "(allow sysctl-read)(allow file-read-metadata)"
+        "(allow file-read* "
+        + "".join(f"(subpath {json.dumps(path)})" for path in runtime_paths)
+        + '(literal "/")(literal "/dev/random")(literal "/dev/urandom"))'
+    )
+    # -S prevents site hooks before confinement; these package directories are
+    # the exact read-only directories admitted by the OS profile above.
+    wrapper = f"import sys\nsys.path.extend({packages!r})\n" + _SUBPROCESS_WRAPPER
+    return [str(sandbox), "-p", profile, executable, "-I", "-S", "-B", "-c", wrapper]
+
+
+async def run_chaos_monad(
+    source_code: str, frontier_tick: str = "GENESIS_TICK", timeout_ms: int = 1000, use_seatbelt: bool = True
+) -> ScittResult:
+    """Execute only in the supported OS sandbox; deny every unsafe fallback.
+
+    Darwin supports a read-only Python runtime. Other platforms and unavailable
+    providers fail closed. ``frontier_tick`` is retained for compatibility; this
+    function issues no cryptographic signature or SCITT attestation. Worker
+    status and text remain untrusted data, even after schema validation.
+    Each raw stream is capped at 2 MiB; decoded stdout/error at 1 MiB each.
+    The parent samples RSS every 50 ms and stops workers observed above 256 MiB.
+    Sampling is not a hard memory quota and may overshoot between observations.
     """
     try:
-        is_valid, ast_hash = validate_ast_markov_blanket(source_code)
+        validate_ast_markov_blanket(source_code)
+        if use_seatbelt is not True:
+            raise SecurityError("OS confinement is mandatory; unconfined execution is disabled")
+        if not isinstance(timeout_ms, int) or not 1 <= timeout_ms <= 60_000:
+            raise SecurityError("Execution timeout must be between 1 and 60000 milliseconds")
+        cmd = _sandbox_command()
     except SecurityError as e:
         return {"status": "SecurityError", "stdout": "", "error": str(e), "scitt_receipt": {}}
 
-    # Spawn subprocess
-    cmd = [sys.executable, "-I", "-c", _SUBPROCESS_WRAPPER]
-    if use_seatbelt and sys.platform == "darwin":
-        cmd = [
-            "sandbox-exec",
-            "-p",
-            '(version 1)(deny default)(allow file-read* (subpath "/System"))(allow file-read* (subpath "/Library"))(allow file-read* (subpath "/usr/lib"))',
-        ] + cmd
-
-    if sys.platform != "win32":
+    try:
         process = await asyncio.create_subprocess_exec(
             *cmd,
             stdin=asyncio.subprocess.PIPE,
             stdout=asyncio.subprocess.PIPE,
             stderr=asyncio.subprocess.PIPE,
-            env={},
+            env={}, cwd="/",
             start_new_session=True,
+            limit=64 * 1024,
         )
-    else:
-        process = await asyncio.create_subprocess_exec(
-            *cmd,
-            stdin=asyncio.subprocess.PIPE,
-            stdout=asyncio.subprocess.PIPE,
-            stderr=asyncio.subprocess.PIPE,
-            env={},
-        )
+    except OSError:
+        return {"status": "SecurityError", "stdout": "", "error": "OS confinement failed to start", "scitt_receipt": {}}
 
     try:
         try:
-            stdout_bytes, stderr_bytes = await asyncio.wait_for(
-                process.communicate(input=source_code.encode("utf-8")), timeout=timeout_ms / 1000.0
+            stdout_bytes = await asyncio.wait_for(
+                _collect_bounded(process, source_code.encode("utf-8")), timeout=timeout_ms / 1000.0
             )
+        except _OutputLimitExceeded:
+            return {
+                "status": "RuntimeError", "stdout": "",
+                "error": "Execution output exceeded parent byte budget", "scitt_receipt": {},
+            }
+        except SecurityError as exc:
+            return {"status": "SecurityError", "stdout": "", "error": str(exc), "scitt_receipt": {}}
         except asyncio.TimeoutError:
-            # Turing Markov Blanket Chaos Isolation
-            _purge_zombies(process)
             return {
                 "status": "Timeout_Entropy_Death",
                 "stdout": "",
@@ -246,37 +416,25 @@ async def run_chaos_monad(
                 "scitt_receipt": {},
             }
     finally:
-        # Guarantee no zombie processes or runaway processes remain
-        if process.returncode is None:
-            _purge_zombies(process)
-            try:
-                await process.wait()
-            except (ProcessLookupError, OSError, asyncio.CancelledError):
-                pass
+        await _finish_reaping(process)
 
-    stdout_str = stdout_bytes.decode("utf-8")
-    stderr_str = stderr_bytes.decode("utf-8")
-
-    def generate_receipt(final_status: str, out_text: str) -> dict[str, str]:
-        # Emula la firma COSE Sign1 (SCITT) anclando el AST y la frontera
-        payload = f"{frontier_tick}|{ast_hash}|{final_status}|{len(out_text)}"
-        signature = hashlib.sha256(payload.encode("utf-8")).hexdigest()
-        return {"frontier_tick": frontier_tick, "ast_hash": ast_hash, "signature": signature}
-
-    if "---JSON_OUTPUT_MARKER---" in stdout_str:
-        parts = stdout_str.split("---JSON_OUTPUT_MARKER---")
-        try:
-            parsed = json.loads(parts[1].strip())
-            status = parsed.get("status", "RuntimeError")
-            error_str = parsed.get("error", "")
-
-            # Defensa Bizantina: Interceptamos AssertionError del código ejecutado
-            if "AssertionError" in error_str or "AssertionError" in stderr_str:
-                status = "Falsified"
-
-            receipt = generate_receipt(status, parsed.get("stdout", ""))
-            return {"status": status, "stdout": parsed.get("stdout", ""), "error": error_str, "scitt_receipt": receipt}
-        except json.JSONDecodeError:
-            return {"status": "RuntimeError", "stdout": parts[0], "error": "Failed to decode JSON", "scitt_receipt": {}}
-
-    return {"status": "RuntimeError", "stdout": stdout_str, "error": stderr_str, "scitt_receipt": {}}
+    if process.returncode != 0:
+        return {"status": "SecurityError", "stdout": "", "error": "OS-confined runtime did not complete", "scitt_receipt": {}}
+    try:
+        parsed = json.loads(stdout_bytes.decode("utf-8"))
+        if not isinstance(parsed, dict) or set(parsed) != {"status", "stdout", "error"}:
+            raise ValueError("Invalid execution response")
+        if parsed["status"] not in {"Success", "RuntimeError", "SecurityError"}:
+            raise ValueError("Invalid execution response")
+        if not isinstance(parsed.get("stdout"), str) or not isinstance(parsed.get("error"), str):
+            raise ValueError("Invalid execution response")
+        if any(len(parsed[key].encode("utf-8")) > _MAX_RESULT_TEXT_BYTES for key in ("stdout", "error")):
+            return {
+                "status": "RuntimeError", "stdout": "",
+                "error": "Execution output exceeded parent byte budget", "scitt_receipt": {},
+            }
+        if parsed["status"] == "Success" and parsed["error"]:
+            raise ValueError("Invalid execution response")
+        return {"status": parsed["status"], "stdout": parsed["stdout"], "error": parsed["error"], "scitt_receipt": {}}
+    except (ValueError, TypeError, RecursionError):
+        return {"status": "RuntimeError", "stdout": "", "error": "Invalid OS-confined execution response", "scitt_receipt": {}}

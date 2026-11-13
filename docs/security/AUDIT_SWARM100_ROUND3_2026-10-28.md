@@ -1,5 +1,7 @@
 # Tercera ronda: V07 y adjudicación del registro — 28/10/2026
 
+> Alcance de la distribución pública: las referencias marcadas como material no distribuido identifican evidencia o herramientas excluidas deliberadamente de este checkout. Se conservan sus rutas y los resultados históricos; esos soportes no pueden verificarse desde esta distribución.
+
 ## Contrato previo a las ediciones
 
 Resultado esperado: corregir la promoción de conclusiones no demostradas de V07
@@ -48,11 +50,11 @@ impone el rechazo en código y sustituye sus estados anteriores.
 y tienen dictamen resuelto.** La revisión
 no corrige por sí misma los defectos confirmados.
 
-El [registro reconciliado](evidence/swarm100-round3-20261028/registry.json)
+El registro reconciliado (material no distribuido: `evidence/swarm100-round3-20261028/registry.json`)
 conserva los 598 IDs originales, sus observaciones históricas y el dictamen
 vigente. Las dos rondas anteriores permanecen intactas. El
-[resumen verificable](evidence/swarm100-round3-20261028/registry-summary.json)
-y la [cola de corrección](evidence/swarm100-round3-20261028/remediation-queue.json)
+resumen verificable (material no distribuido: `evidence/swarm100-round3-20261028/registry-summary.json`)
+y la cola de corrección (material no distribuido: `evidence/swarm100-round3-20261028/remediation-queue.json`)
 permiten distinguir clasificación de remediación.
 
 | Dictamen sobre los 582 pendientes iniciales | IDs |
@@ -139,15 +141,15 @@ sin crear una dependencia consigo misma. El motor solo reutiliza una entrada
 del registro si coinciden contenido comprometido, evidencia, estado y
 dependencias; el rechazo no modifica registro ni DAG.
 
-La [primera reproducción](evidence/swarm100-round3-20261028/v07-before.log)
+La primera reproducción (material no distribuido: `evidence/swarm100-round3-20261028/v07-before.log`)
 falló en diez casos. Una
-[revisión independiente](evidence/swarm100-round3-20261028/independent-review-v07.json)
+revisión independiente (material no distribuido: `evidence/swarm100-round3-20261028/independent-review-v07.json`)
 detectó dos problemas adicionales en la primera corrección: sustitución por una
 entrada del registro y pérdida de ascendencia. Sus
-[cinco regresiones](evidence/swarm100-round3-20261028/v07-independent-before.log)
+cinco regresiones (material no distribuido: `evidence/swarm100-round3-20261028/v07-independent-before.log`)
 fallaron antes del ajuste. Tras corregirlos pasan las 15 regresiones V07, las
 suites relacionadas y las
-[17 comprobaciones independientes](evidence/swarm100-round3-20261028/independent-review-v07-followup.json).
+17 comprobaciones independientes (material no distribuido: `evidence/swarm100-round3-20261028/independent-review-v07-followup.json`).
 
 **Límite:** esto no implementa un demostrador de lógica en lenguaje natural ni
 valida la autenticidad de etiquetas `FormalProof` aportadas externamente.
@@ -160,7 +162,7 @@ La revisión encontró el mismo defecto de traversal de C0539 en una segunda
 copia del script. Se propagó a ella la corrección ya probada: ID Chromium
 estricto, directorios abiertos mediante descriptores, rechazo de symlinks y
 copias de preferencias. La
-[evidencia de propagación](evidence/swarm100-round3-20261028/purge-copy-remediation.json)
+evidencia de propagación (material no distribuido: `evidence/swarm100-round3-20261028/purge-copy-remediation.json`)
 conserva ambos hashes; las ocho regresiones de purga se ejecutan ahora sobre
 ambas rutas, siempre con perfiles temporales.
 
@@ -179,26 +181,26 @@ ambas rutas, siempre con perfiles temporales.
 - C0162 se confirma mediante una incoherencia observable entre distribuciones
   de distintos tiempos en el consumidor por lotes, bajo su contrato de un
   único proceso conjunto. El
-  [contraejemplo y alcance](evidence/swarm100-round3-20261028/root-followup-C0162.json)
+  contraejemplo y alcance (material no distribuido: `evidence/swarm100-round3-20261028/root-followup-C0162.json`)
   no suponen que todas las llamadas individuales sean incorrectas.
 - C0185 permanece parcialmente mitigado: alta y revocación con memoria/ledger
   compartidos son atómicas, pero archivos separados y `retract_attribution`
   mantienen ventanas entre transacciones. No se declara cierre completo.
 - C0279 quedó inicialmente `NEEDS_VALIDATION` tras
-  [dos revisiones](evidence/swarm100-round3-20261028/root-followup-C0279.json).
+  dos revisiones (material no distribuido: `evidence/swarm100-round3-20261028/root-followup-C0279.json`).
   El operador no conocía el contrato esperado. Se adoptó como decisión local
   reversible el uso observado: una difusión global por instancia, retenida para
   agentes tardíos; otra ronda usa una instancia nueva. Se documentó ese alcance
-  en la API y se [resolvió el dictamen](evidence/swarm100-round3-20261028/root-resolution-C0279.json)
+  en la API y se resolvió el dictamen (material no distribuido: `evidence/swarm100-round3-20261028/root-resolution-C0279.json`)
   inicialmente como `REJECTED` bajo el contrato vigente. No se implementó entrega sucesiva.
-  El [AST ejecutable idéntico y siete comprobaciones aisladas](evidence/swarm100-round3-20261028/C0279-contract-validation.json)
+  El AST ejecutable idéntico y siete comprobaciones aisladas (material no distribuido: `evidence/swarm100-round3-20261028/C0279-contract-validation.json`)
   acreditan únicamente la aclaración histórica. Ese cierre era insuficiente:
   la [intervención posterior](REMEDIATION_AGENT_PAGER_2026-10-28.md) impone una
   segunda difusión como error y repara el despertar unicast de C0278. Ambos
   pasan ahora 14 regresiones y quedan FIXED, con los dictámenes previos preservados.
 
 La revisión también identificó
-[SW100-R3-0001](evidence/swarm100-round3-20261028/additional-findings.json):
+SW100-R3-0001 (material no distribuido: `evidence/swarm100-round3-20261028/additional-findings.json`):
 publicación mediante una referencia Git mutable después de autorizar otro árbol.
 Está confirmado estáticamente, P1 y OPEN, **fuera de los 598 IDs originales**.
 Requiere invocaciones concurrentes y las demás condiciones de publicación;
@@ -207,22 +209,22 @@ adicional sin utilizarlo para validar la alegación distinta de C0414.
 
 ## Comprobaciones y trazabilidad
 
-- [Batería inicial del cierre V07](evidence/swarm100-round3-20261028/root-tests-final.log):
+- Batería inicial del cierre V07 (material no distribuido: `evidence/swarm100-round3-20261028/root-tests-final.log`):
   **166 passed, 1 skipped**, once archivos de pruebas. La omisión requiere
   `strike_rs`, extensión Rust no construida en este entorno.
-- [Ruff](evidence/swarm100-round3-20261028/root-ruff.log): fuentes y pruebas
+- Ruff (material no distribuido: `evidence/swarm100-round3-20261028/root-ruff.log`): fuentes y pruebas
   modificadas más los scripts de evidencia de esta ronda.
-- [MyPy](evidence/swarm100-round3-20261028/root-mypy.log): cuatro fuentes, con
+- MyPy (material no distribuido: `evidence/swarm100-round3-20261028/root-mypy.log`): cuatro fuentes, con
   `--follow-imports=silent`; no certifica dependencias transitivas.
-- [Validador del registro](evidence/swarm100-round3-20261028/reconcile_registry.py):
+- Validador del registro (material no distribuido: `evidence/swarm100-round3-20261028/reconcile_registry.py`):
   cobertura exacta 582/582, unicidad de 598 IDs, hashes vigentes, rangos y
   archivos de evidencia, estados permitidos y ausencia de ciclos de duplicados.
-- [Validación inicial](evidence/swarm100-round3-20261028/validation.json): comandos,
+- Validación inicial (material no distribuido: `evidence/swarm100-round3-20261028/validation.json`): comandos,
   salidas y hashes del cierre anterior. La
-  [validación posterior del pager](evidence/swarm100-pager-20261028/validation.json)
+  validación posterior del pager (material no distribuido: `evidence/swarm100-pager-20261028/validation.json`)
   recoge ese cambio ejecutable. La
-  [validación del Lote 1](evidence/swarm100-lot1-20261028/validation.json)
-  registra ese cierre. La [validación del Lote 2](evidence/swarm100-lot2-20261028/validation.json)
+  validación del Lote 1 (material no distribuido: `evidence/swarm100-lot1-20261028/validation.json`)
+  registra ese cierre. La validación del Lote 2 (material no distribuido: `evidence/swarm100-lot2-20261028/validation.json`)
   recoge las fuentes y controles actuales.
 
 Veinte revisores trabajaron sobre particiones disjuntas tras autorización

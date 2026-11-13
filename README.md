@@ -105,7 +105,8 @@ cargo test --locked --features cortex-persist --test omega_mediation_campaign
 ### B. Instalación de la CLI y del servidor MCP
 
 La distribución soportada incluye la CLI de terminal y el servidor de memoria
-MCP por stdio. Requiere Python 3.11 o posterior y `uv`.
+MCP por stdio. Requiere Python 3.11 o posterior y `uv`. Python 3.10 deja de
+estar soportado por el conjunto de dependencias de seguridad actualizado.
 Para activar Babylon en las conversaciones nuevas, instala antes Codex con su
 CLI disponible y sigue este recorrido:
 

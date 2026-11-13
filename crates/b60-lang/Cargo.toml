@@ -41,6 +41,7 @@ path = "src/lib.rs"
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
+blake3 = "1.8.5"
 clap = { version = "4.5", features = ["derive"] }
 sha2 = "0.10"
 hex = "0.4"

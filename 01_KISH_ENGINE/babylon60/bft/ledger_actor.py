@@ -15,6 +15,7 @@ from pathlib import Path
 from typing import Any, Dict, Mapping, Optional, TypedDict
 from cryptography.fernet import Fernet, InvalidToken
 import aiosqlite
+from blake3 import blake3
 from babylon60.bft.integrity import LedgerCheckpoint
 
 
@@ -32,6 +33,7 @@ from babylon60.bft.cortex_crypto_kernel import (  # noqa: E402
 
 NAMESPACE_UUID = uuid.UUID("9897d6fd-d6a7-4fe9-86bc-f0c312886d5d")
 ZERO_HASH = "0" * 64
+ACTOR_HASH_VERSION = 2
 
 
 class LedgerEntryResult(TypedDict):
@@ -65,6 +67,7 @@ def _compute_entry_hash(
     prev_hash: str,
     created_at: str,
 ) -> str:
+    """Exact historical SHA3-256 format, including stored bytes and UTC metadata."""
     envelope = {
         "event_id": event_id,
         "stream": stream,
@@ -80,6 +83,28 @@ def _compute_entry_hash(
         "created_at": created_at,
     }
     return compute_envelope_hash(envelope)
+
+
+def _compute_payload_hash(payload_json: str) -> str:
+    return blake3(b"B60-BFT-PAYLOAD-v2\x00" + payload_json.encode("utf-8")).hexdigest()
+
+
+def _compute_entry_hash_v2(
+    event_id: str, stream: str, entity_id: str, event_type: str, payload_hash: str,
+    source_db: str, source_table: str, source_pk: str, cortex_taint: str,
+    logical_tick: int, prev_hash: str,
+) -> str:
+    """BLAKE3 commitment to semantic content and logical order; UTC is metadata."""
+    if type(logical_tick) is not int or logical_tick <= 0:
+        raise ValueError("BFT logical_tick must be a positive integer")
+    envelope = {
+        "hash_version": ACTOR_HASH_VERSION, "hash_algorithm": "blake3",
+        "event_id": event_id, "stream": stream, "entity_id": entity_id,
+        "event_type": event_type, "payload_hash": payload_hash,
+        "source_db": source_db, "source_table": source_table, "source_pk": source_pk,
+        "cortex_taint": cortex_taint, "logical_tick": logical_tick, "prev_hash": prev_hash,
+    }
+    return blake3(b"B60-BFT-ENTRY-v2\x00" + _canonical_json(envelope).encode("utf-8")).hexdigest()
 
 
 @dataclass(frozen=True)
@@ -219,12 +244,24 @@ class BFTLedgerActor:
     async def _verified_checkpoint(self) -> LedgerCheckpoint:
         async with aiosqlite.connect(self._db_path) as db:
             await db.execute("BEGIN")
-            await db.create_function("c5_compute_hash", 12, _compute_entry_hash_wrapper, deterministic=True)
-            cursor = await db.execute("SELECT * FROM ledger_entries ORDER BY seq ASC")
-            rows = await cursor.fetchall()
+            policy = await self._hash_policy(db)
+            if policy is None:
+                cursor = await db.execute("SELECT * FROM ledger_entries ORDER BY seq ASC")
+            else:
+                cursor = await db.execute(
+                    "SELECT e.*, h.hash_version, h.hash_algorithm, h.payload_hash FROM ledger_entries e "
+                    "LEFT JOIN ledger_entry_hashes h USING(event_id) ORDER BY e.seq ASC"
+                )
+            rows = list(await cursor.fetchall())
+            if policy is not None:
+                cursor = await db.execute("SELECT COUNT(*) FROM ledger_entry_hashes")
+                metadata_count = await cursor.fetchone()
+                if metadata_count is None or metadata_count[0] != len(rows):
+                    raise BFTCausalInvariantError("INV_BFT_LEAN_05: Hash metadata truncation or orphan detected")
             prev_hash = ZERO_HASH
             expected_seq = 1
             last_lamport = 0
+            legacy_tip = ZERO_HASH
             for row in rows:
                 seq = row[0]
                 event_id = row[1]
@@ -252,29 +289,42 @@ class BFTLedgerActor:
                     raise BFTCausalInvariantError(
                         f"INV_BFT_LEAN_02 (causal_antisymm): Hash chain cycle or break detected at seq {seq}"
                     )
-                # INV_C5_05 (verificador vivo): el hash-chain se computa sobre los BYTES
-                # ALMACENADOS (cifrados o no) — exactamente lo que el INSERT firmó vía
-                # c5_compute_hash(stored_payload). La verificación no requiere la clave
-                # del vault y valida bajo toda condición, cifrado incluido.
-                computed_hash = _compute_entry_hash(
-                    event_id=event_id,
-                    stream=stream,
-                    entity_id=entity_id,
-                    event_type=event_type,
-                    payload_json=payload_json,
-                    source_db=source_db,
-                    source_table=source_table,
-                    source_pk=source_pk,
-                    cortex_taint=cortex_taint,
-                    lamport_t=lamport_t,
-                    prev_hash=row_prev_hash,
-                    created_at=created_at,
-                )
+                version, algorithm, payload_hash = (1, "sha3-256", None) if policy is None else row[15:18]
+                if version == 1 and algorithm == "sha3-256" and payload_hash is None:
+                    if policy is not None and seq > policy[0]:
+                        raise BFTCausalInvariantError(f"INV_BFT_LEAN_04: Legacy hash downgrade at seq {seq}")
+                    # Legacy binds stored ciphertext bytes, so it remains verifiable without a vault key.
+                    computed_hash = _compute_entry_hash(
+                        event_id, stream, entity_id, event_type, payload_json, source_db, source_table,
+                        source_pk, cortex_taint, lamport_t, row_prev_hash, created_at,
+                    )
+                    legacy_tip = entry_hash
+                elif version == ACTOR_HASH_VERSION and algorithm == "blake3":
+                    if policy is None or seq <= policy[0]:
+                        raise BFTCausalInvariantError(f"INV_BFT_LEAN_04: Altered legacy hash version at seq {seq}")
+                    # V2 excludes randomized ciphertext. Authenticate its link to the semantic commitment
+                    # by decrypting; unlike legacy, encrypted V2 verification requires the original key.
+                    try:
+                        vault_key = os.environ.get("CORTEX_VAULT_KEY")
+                        vault = Fernet(vault_key.encode("utf-8")) if vault_key else None
+                        canonical_payload = self._plaintext(payload_json, vault)
+                    except ValueError as exc:
+                        raise BFTCausalInvariantError(f"INV_BFT_LEAN_04: Payload authentication at seq {seq}: {exc}") from exc
+                    if payload_hash != _compute_payload_hash(canonical_payload):
+                        raise BFTCausalInvariantError(f"INV_BFT_LEAN_04: Payload commitment mismatch at seq {seq}")
+                    computed_hash = _compute_entry_hash_v2(
+                        event_id, stream, entity_id, event_type, payload_hash, source_db, source_table,
+                        source_pk, cortex_taint, lamport_t, row_prev_hash,
+                    )
+                else:
+                    raise BFTCausalInvariantError(f"INV_BFT_LEAN_04: Unsupported or missing hash version at seq {seq}")
                 if entry_hash != computed_hash:
                     raise BFTCausalInvariantError(f"INV_BFT_LEAN_04 (merkle_proof): Hash mismatch at seq {seq}")
                 prev_hash = entry_hash
                 last_lamport = lamport_t
                 expected_seq += 1
+            if policy is not None and (policy[0] > len(rows) or legacy_tip != policy[1]):
+                raise BFTCausalInvariantError("INV_BFT_LEAN_04: Legacy migration checkpoint mismatch")
             cursor = await db.execute("SELECT seq FROM sqlite_sequence WHERE name='ledger_entries'")
             high_water = await cursor.fetchone()
             if (high_water[0] if high_water else 0) != expected_seq - 1:
@@ -282,7 +332,7 @@ class BFTLedgerActor:
             return LedgerCheckpoint(expected_seq - 1, prev_hash)
 
     async def verify_chain(self, *, expected_checkpoint: LedgerCheckpoint | None = None) -> bool:
-        """Verify one read snapshot; a separately retained checkpoint also detects rollback."""
+        """Verify a snapshot; encrypted V2 requires its vault key. A trusted checkpoint detects rollback."""
         checkpoint = await self._verified_checkpoint()
         if expected_checkpoint is not None and checkpoint != expected_checkpoint:
             raise BFTCausalInvariantError("INV_BFT_LEAN_05: Trusted checkpoint mismatch")
@@ -481,7 +531,78 @@ class BFTLedgerActor:
             self._state = "stopping"
             self._fail_pending(queue)
 
+    @staticmethod
+    async def _hash_policy(db: aiosqlite.Connection) -> tuple[int, str] | None:
+        cursor = await db.execute(
+            "SELECT name FROM sqlite_master WHERE type='table' "
+            "AND name IN ('ledger_entry_hashes', 'ledger_hash_policy')"
+        )
+        tables = {row[0] for row in await cursor.fetchall()}
+        if not tables:
+            return None  # An unmarked database is interpreted only with the exact legacy hash.
+        if len(tables) != 2:
+            raise BFTCausalInvariantError("INV_BFT_LEAN_04: Incomplete ledger hash migration")
+        cursor = await db.execute(
+            "SELECT singleton, schema_version, legacy_max_seq, legacy_tip_hash FROM ledger_hash_policy"
+        )
+        policies = list(await cursor.fetchall())
+        if len(policies) != 1:
+            raise BFTCausalInvariantError("INV_BFT_LEAN_04: Missing ledger hash policy")
+        singleton, schema_version, legacy_max_seq, legacy_tip_hash = policies[0]
+        if (singleton != 1 or schema_version != ACTOR_HASH_VERSION or type(legacy_max_seq) is not int
+                or legacy_max_seq < 0 or not isinstance(legacy_tip_hash, str)
+                or len(legacy_tip_hash) != 64 or any(c not in "0123456789abcdef" for c in legacy_tip_hash)
+                or (legacy_max_seq == 0 and legacy_tip_hash != ZERO_HASH)):
+            raise BFTCausalInvariantError("INV_BFT_LEAN_04: Unsupported or invalid ledger hash policy")
+        return legacy_max_seq, legacy_tip_hash
+
     async def _init_db(self, db: aiosqlite.Connection) -> None:
+        # Detection, additive migration and admission guards share the writer lock. Never rewrite
+        # historical rows, their hashes, or sqlite_sequence; older clients cannot append legacy rows.
+        try:
+            await db.execute("BEGIN IMMEDIATE")
+            await self._create_legacy_schema(db)
+            if await self._hash_policy(db) is None:
+                await db.execute(
+                    "CREATE TABLE ledger_entry_hashes (event_id TEXT PRIMARY KEY NOT NULL "
+                    "REFERENCES ledger_entries(event_id) DEFERRABLE INITIALLY DEFERRED, "
+                    "hash_version INTEGER NOT NULL, hash_algorithm TEXT NOT NULL, payload_hash TEXT)"
+                )
+                await db.execute(
+                    "CREATE TABLE ledger_hash_policy (singleton INTEGER PRIMARY KEY CHECK(singleton = 1), "
+                    "schema_version INTEGER NOT NULL, legacy_max_seq INTEGER NOT NULL, legacy_tip_hash TEXT NOT NULL)"
+                )
+                await db.execute(
+                    "INSERT INTO ledger_entry_hashes SELECT event_id, 1, 'sha3-256', NULL FROM ledger_entries"
+                )
+                await db.execute(
+                    "INSERT INTO ledger_hash_policy VALUES (1, ?, "
+                    "(SELECT COALESCE(MAX(seq), 0) FROM ledger_entries), "
+                    "COALESCE((SELECT entry_hash FROM ledger_entries ORDER BY seq DESC LIMIT 1), ?))",
+                    (ACTOR_HASH_VERSION, ZERO_HASH),
+                )
+            for table in ("ledger_entry_hashes", "ledger_hash_policy"):
+                for action in ("UPDATE", "DELETE"):
+                    await db.execute(
+                        f"CREATE TRIGGER IF NOT EXISTS trg_{table}_immutable_{action.lower()} "
+                        f"BEFORE {action} ON {table} BEGIN "
+                        "SELECT RAISE(ABORT, 'C5 BFT: immutable hash metadata'); END"
+                    )
+            await db.execute(
+                "CREATE TRIGGER IF NOT EXISTS trg_ledger_hash_v2_insert BEFORE INSERT ON ledger_entries "
+                "WHEN NOT EXISTS (SELECT 1 FROM ledger_entry_hashes WHERE event_id=NEW.event_id "
+                "AND hash_version=2 AND hash_algorithm='blake3' AND length(payload_hash)=64) "
+                "BEGIN SELECT RAISE(ABORT, 'C5 BFT: new entries require hash version 2'); END"
+            )
+            await db.commit()
+        except BaseException:
+            if db.in_transaction:
+                await db.rollback()
+            if db.in_transaction:
+                raise RuntimeError("FAIL-FAST: hash migration rollback could not be confirmed")
+            raise
+
+    async def _create_legacy_schema(self, db: aiosqlite.Connection) -> None:
         await db.execute(
             "\n            CREATE TABLE IF NOT EXISTS ledger_entries (\n                seq INTEGER PRIMARY KEY AUTOINCREMENT,\n                event_id TEXT NOT NULL UNIQUE,\n                stream TEXT NOT NULL CHECK (length(stream) > 0),\n                entity_id TEXT NOT NULL CHECK (length(entity_id) > 0),\n                event_type TEXT NOT NULL CHECK (length(event_type) > 0),\n                payload_json TEXT NOT NULL CHECK (length(payload_json) >= 2),\n                source_db TEXT NOT NULL CHECK (length(source_db) > 0),\n                source_table TEXT NOT NULL CHECK (length(source_table) > 0),\n                source_pk TEXT NOT NULL CHECK (length(source_pk) > 0),\n                cortex_taint TEXT NOT NULL CHECK (length(cortex_taint) > 0),\n                lamport_t INTEGER NOT NULL CHECK (lamport_t > 0),\n                prev_hash TEXT NOT NULL CHECK (length(prev_hash) = 64 AND prev_hash GLOB '[0-9a-f]*'),\n                entry_hash TEXT NOT NULL UNIQUE CHECK (length(entry_hash) = 64 AND entry_hash GLOB '[0-9a-f]*'),\n                created_at TEXT NOT NULL,\n                agent_id TEXT NOT NULL DEFAULT '',\n                UNIQUE(lamport_t, agent_id)\n            );\n        "
         )
@@ -543,6 +664,22 @@ class BFTLedgerActor:
             raise ValueError(f"Fail-fast: INV_BFT_04 Collision on event_id {event_id}: payload or metadata mismatch")
         return int(row[0]), str(row[1])
 
+    async def _check_vault_continuity(self, db: aiosqlite.Connection, vault: Fernet | None) -> None:
+        if vault is None:
+            return  # Plaintext appends do not introduce another encryption key.
+        cursor = await db.execute(
+            "SELECT e.payload_json, h.payload_hash FROM ledger_entries e "
+            "JOIN ledger_entry_hashes h USING(event_id) "
+            "WHERE h.hash_version=2 AND substr(e.payload_json, 1, 6)='C5ENC:' ORDER BY e.seq DESC LIMIT 1"
+        )
+        previous = await cursor.fetchone()
+        if previous is not None:
+            # V2 has a single current vault key, not a keyring. Reject a changed key before accepting
+            # a new encrypted row whose content could not be verified with the preceding V2 rows.
+            plaintext = self._plaintext(previous[0], vault)
+            if _compute_payload_hash(plaintext) != previous[1]:
+                raise ValueError("C5ENC previous V2 payload does not match its semantic commitment")
+
     async def _execute_insert_tx(
         self,
         db: aiosqlite.Connection,
@@ -563,8 +700,31 @@ class BFTLedgerActor:
             if existing is not None:
                 await db.commit()
                 return existing
+            await self._check_vault_continuity(db, vault)
             cursor = await db.execute(
-                "INSERT INTO ledger_entries (\n                event_id, stream, entity_id, event_type, payload_json,\n                source_db, source_table, source_pk, cortex_taint,\n                lamport_t, prev_hash, entry_hash, created_at\n            ) VALUES (\n                ?, ?, ?, ?, ?, ?, ?, ?, ?,\n                COALESCE((SELECT MAX(lamport_t) FROM ledger_entries), 0) + 1,\n                COALESCE((SELECT entry_hash FROM ledger_entries ORDER BY seq DESC LIMIT 1), '0000000000000000000000000000000000000000000000000000000000000000'),\n                c5_compute_hash(?, ?, ?, ?, ?, ?, ?, ?, ?, COALESCE((SELECT MAX(lamport_t) FROM ledger_entries), 0) + 1, COALESCE((SELECT entry_hash FROM ledger_entries ORDER BY seq DESC LIMIT 1), '0000000000000000000000000000000000000000000000000000000000000000'), ?),\n                ?\n            )\n            ON CONFLICT(event_id) DO NOTHING\n            RETURNING seq, entry_hash",
+                "SELECT COALESCE(MAX(lamport_t), 0) + 1, "
+                "COALESCE((SELECT entry_hash FROM ledger_entries ORDER BY seq DESC LIMIT 1), ?) FROM ledger_entries",
+                (ZERO_HASH,),
+            )
+            head = await cursor.fetchone()
+            if head is None:
+                raise RuntimeError("BFT ledger head unavailable")
+            logical_tick, prev_hash = head
+            payload_hash = _compute_payload_hash(canonical_payload)
+            entry_hash = _compute_entry_hash_v2(
+                event_id, event.stream, event.entity_id, event.event_type, payload_hash,
+                event.source_db, event.source_table, event.source_pk, event.cortex_taint, logical_tick, prev_hash,
+            )
+            # Deferred FK permits the metadata first; the ledger insert guard requires this V2 marker.
+            await db.execute(
+                "INSERT INTO ledger_entry_hashes (event_id, hash_version, hash_algorithm, payload_hash) "
+                "VALUES (?, ?, 'blake3', ?)", (event_id, ACTOR_HASH_VERSION, payload_hash),
+            )
+            cursor = await db.execute(
+                "INSERT INTO ledger_entries (event_id, stream, entity_id, event_type, payload_json, "
+                "source_db, source_table, source_pk, cortex_taint, lamport_t, prev_hash, entry_hash, created_at) "
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) "
+                "ON CONFLICT(event_id) DO NOTHING RETURNING seq, entry_hash",
                 (
                     event_id,
                     event.stream,
@@ -575,16 +735,9 @@ class BFTLedgerActor:
                     event.source_table,
                     event.source_pk,
                     event.cortex_taint,
-                    event_id,
-                    event.stream,
-                    event.entity_id,
-                    event.event_type,
-                    stored_payload,
-                    event.source_db,
-                    event.source_table,
-                    event.source_pk,
-                    event.cortex_taint,
-                    created_at,
+                    logical_tick,
+                    prev_hash,
+                    entry_hash,
                     created_at,
                 ),
             )

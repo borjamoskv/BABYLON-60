@@ -4,10 +4,10 @@ BABYLON-60 · Deterministic Lean 4 Formal Census & Axiom Traceability Exporter
 =============================================================================
 Extracts the complete inventory of:
   - 26 proprietary .lean modules in proof/lean/ (22 with theorems + 4 auxiliary)
-  - 144 theorem declarations (#001-#144) with fully qualified names, untruncated
+  - 145 theorem declarations (#001-#145) with fully qualified names, untruncated
     types, formal result classes, transitive axiom dependencies, and strict scope notes
-  - 228 core constructions (205 def + 23 inductive => 144 + 228 = 372) plus
-    34 structure and 13 abbrev declarations (275 total non-theorem declarations => 419 total)
+  - 228 core constructions (205 def + 23 inductive => 145 + 228 = 373) plus
+    34 structure and 13 abbrev declarations (275 total non-theorem declarations => 420 total)
 
 Outputs:
   - docs/06_theory/evidence/lean-census-372-v511.json
@@ -22,7 +22,6 @@ import json
 import pathlib
 import re
 import subprocess
-import sys
 from typing import Any
 
 REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
@@ -41,7 +40,8 @@ POST_2025_AXIOMS: dict[str, list[str] | str] = {
         "Classical.choice",
         "Quot.sound",
     ],
-    "Babylon60.L0Ledger.merkle_root_uniqueness": [],
+    "Babylon60.L0Ledger.valid_insertions_share_predecessor": [],
+    "Babylon60.L0Ledger.append_entry_injective": [],
     "Babylon60.L0Ledger.l0_trigger_inhabited": [],
     "B60.Ledger.fl018_missing_critical_check_rejected": ["propext", "Quot.sound"],
     "B60.Ledger.fl018_artifact_hash_mismatch_rejected": ["propext", "Quot.sound"],
@@ -110,70 +110,71 @@ THEOREM_SCOPE_OVERRIDES: dict[int, tuple[str, str]] = {
     61: ("U-ALG", "El estado inicial con entries = [] satisface vacuamente L0StateInvariant por ausencia de elementos en la lista."),
     62: ("U-IND", "Preservación de L0StateInvariant al prepender una entrada que cumple TriggerAllowsInsert sobre una lista que ya cumplía el invariante."),
     63: ("U-ALG", "Incremento estricto de headTick (db.headTick < (appendEntry db newEntry).headTick) bajo la precondición newEntry.logicalTick = db.headTick + 1 de TriggerAllowsInsert."),
-    64: ("U-ALG", "Inyectividad de inserción y alineación de paso bajo TriggerAllowsInsert: deduce e1.logicalTick = e2.logicalTick, e1.prevMerkleRoot = e2.prevMerkleRoot y e1 = e2 cuando (appendEntry db e1).entries = (appendEntry db e2).entries; no modela funciones hash criptográficas ni resistencia a colisiones."),
-    65: ("W-EX", "Testigo constructivo de habitabilidad (AP-10) para TriggerAllowsInsert sobre witnessDbL0 y witnessEntryL0."),
-    66: ("NEG-FIXTURE", "Fixture negativo de rechazo semántico esperado (AUDIT_LEAN_SCOPE_2026 §8): lista de 1.501 eventos con lectura impar final donde decide rechaza la igualdad = true."),
-    67: ("I-DEC", "Comprobación cerrada por decide sobre una traza literal válida de 6.000 eventos en BabylonStressTrace.lean."),
-    68: ("I-DEC", "Comprobación cerrada por decide sobre la traza literal trace_perfect de 5 eventos en BabylonTrace.lean."),
-    69: ("U-ALG", "Lema de un paso: si step s ev = some next y ev.action = Action.read, la secuencia declarada en el evento es par (ev.seq % 2 = 0)."),
-    70: ("U-IND", "Lema inductivo sobre listas de eventos: si runAeon (some s) trace = some finalState, todo evento de lectura en trace declara secuencia par (TraceReadsEven trace)."),
-    71: ("U-IND", "Propiedad inductiva universal sobre el modelo de eventos: validateTrace trace = true → TraceReadsEven trace. Certifica paridad de las secuencias declaradas en eventos read; no modela el payload leído ni orden de memoria físico en Rust."),
-    72: ("U-ALG", "Rechazo de transición en BabylonEvent cuando el campo booleano formalVeto = true."),
-    73: ("U-ALG", "Rechazo de transición en BabylonEvent cuando el campo booleano formalWitnessOk = false."),
-    74: ("U-ALG", "Rechazo de transición en BabylonEvent cuando leaseEpoch < kernelEpoch."),
-    75: ("U-ALG", "Extrae las conjunciones e.seqStart % 2 = 0 y e.seqStart = e.seqEnd de ValidBabylonTransition e."),
-    76: ("U-ALG", "Rechazo de transición en BabylonEvent cuando seqStart ≠ seqEnd (corolario directo de #075)."),
-    77: ("I-DEC", "Comprobación cerrada por decide de ValidBabylonTransition sobre el registro concreto trace_step_ok."),
-    78: ("U-ALG", "Rechazo en CompositeGateState (BitVec 64) cuando (verifiedCriticalMask &&& requiredCriticalMask) ≠ requiredCriticalMask."),
-    79: ("U-ALG", "Rechazo en CompositeGateState cuando acceptedArtifactHash ≠ verifiedArtifactHash."),
-    80: ("U-ALG", "Rechazo en CompositeGateState cuando ¬(minPolicyEpoch ≤ evidenceEpoch)."),
-    81: ("U-ALG", "Rechazo en CompositeGateState cuando quorumThreshold = 0#64."),
-    82: ("I-DEC", "Comprobación cerrada por decide de ValidCompositeAcceptance sobre el estado concreto composite_gate_ok."),
-    83: ("W-EX", "Testigo de habitabilidad (AP-10) para ValidCompositeAcceptance usando composite_gate_ok."),
-    84: ("I-DEC", "Comprobación cerrada por decide que rechaza el estado concreto composite_gate_ple_91pct_fail (máscara 0x3FF vs 0x7FF)."),
-    85: ("U-ALG", "Evaluación de consume sobre el constructor AffineResource.consumed devolviendo none; tipo inductivo puro y duplicable en Lean, no sistema de tipos lineales ni verificador de heap/aliasing."),
-    86: ("U-ALG", "Identidad algebraica en el anillo Int: x * (-y) + y * x = 0."),
-    87: ("I-DEC", "Comprobación cerrada por decide de un único paso discreto stepPHLD desde s0 = (1000, 1000) con r_percent = 20; no demuestra monotonía global de Lyapunov (existe contraejemplo en (0, 1) documentado en AUDIT_LEAN_SCOPE_2026 §5)."),
-    88: ("I-DEC", "Comprobación cerrada por decide de que 0, 64 y 128 tienen resto 0 módulo 64; no verifica alineamiento físico del asignador en Rust."),
-    100: ("U-ALG", "Paridad impar ((2 * k + 1) % 2 = 1) de la función aritmética seqlock_write_begin sobre Nat."),
-    101: ("U-ALG", "Paridad par ((2 * k + 2) % 2 = 0) de la función aritmética seqlock_write_commit sobre Nat."),
-    102: ("U-ALG", "Si el campo booleano poisoned = true en SystemState, evalFastPath devuelve FastPathVerdict.Miss."),
-    103: ("I-DEC", "Comprobación cerrada de evalFastPath devolviendo Hit cuando astPrefix y filesCount coinciden con las constantes esperadas en estado no envenenado."),
-    104: ("I-DEC", "Comprobación cerrada de evalFastPath devolviendo Miss cuando astPrefix difiere en +1 de la constante esperada."),
-    105: ("U-ALG", "Preservación en un paso del predicado invariant (s.poisoned = true ∨ s.seq % 2 = 0) por la función transition."),
-    106: ("U-IND", "Preservación inductiva del predicado invariant a lo largo de cualquier lista finita de acciones en runTrace."),
-    107: ("W-EX", "Testigo constructivo de existencia de una traza no vacía validCycle aceptada por isValidTrace en aritmética BitVec 64/32."),
-    108: ("U-ALG", "Identidad aritmética en Nat: (2*f + 1) + (2*f + 1) - (3*f + 1) = f + 1; ingrediente aritmético de intersección de quórum, no prueba por sí sola cardinalidad de conjuntos finitos de votantes ni protocolo BFT completo."),
-    109: ("U-ALG", "Identidad aritmética en Nat para f ≥ 1: 2*f + 2*f - 3*f = f."),
-    110: ("W-EX", "Testigo de existencia de ConsensusInstance con n = 4 y q = 3 (para f = 1)."),
-    111: ("U-ALG", "Cota aritmética universal sin overflow en 64 bits: para todo f < 2^62, 3 * f + 1 < 2^64."),
-    112: ("U-ALG", "Cota aritmética universal sin overflow en 64 bits: para todo f < 2^62, 2 * f + 1 < 2^64."),
-    113: ("I-DEC", "Comprobación cerrada por decide de las cotas < 2^64 para f = 1."),
-    114: ("W-EX", "Empaqueta la identidad aritmética #108 y el testigo #110 en la estructura VerifiedQuorumInvariant."),
-    115: ("U-ALG", "En la función de puntuación truncada en Nat (net_exergy_payoff), si is_moloch_extraction a = true entonces la resta truncada produce 0."),
-    116: ("U-ALG", "Para una acción con action_class = .Constructive, externalized_entropy = 0 y claimed_benefit > internal_dissipation, la fórmula net_exergy_payoff devuelve un valor > 0."),
-    117: ("U-ALG", "Combina #115 y #116 para dos registros AgentAction que satisfacen esas hipótesis; compara la función de puntuación sobre ambos registros, sin demostrar equilibrio de Nash ni dominancia estratégica en un juego multi-agente."),
-    118: ("U-ALG", "Por definición de landauer_penalty en Nat, su valor es ≥ a.externalized_entropy."),
-    119: ("U-IND", "Inducción sobre listas finitas de AgentAction: la suma de landauer_penalty es ≥ la suma de externalized_entropy."),
-    120: ("I-DEC", "Comprobación cerrada por decide de auditTrace sobre la lista concreta trace_depleted de 3 pasos."),
-    121: ("I-DEC", "Comprobación cerrada por decide de auditTrace sobre la lista concreta trace_singular_candidate de 3 pasos."),
-    122: ("U-ALG", "Extrae la hipótesis de campo h_curl_grad : d1_eval (d0_eval phi) = 0 suministrada dentro del registro DiscreteChainComplex."),
-    123: ("U-ALG", "Extrae la hipótesis de campo h_div_curl : d2_eval (d1_eval u) = 0 suministrada dentro del registro DiscreteChainComplex."),
-    124: ("I-DEC", "Comprobación cerrada por decide de isStrictlySolenoidal 0 = true (comprueba 0 == 0)."),
-    125: ("I-DEC", "Comprobación aritmética cerrada por decide: 120 > 0 * 60 + 90 en isSobolevContinuousEmbedding; no construye espacios funcionales H^2 ni C^0."),
-    126: ("I-DEC", "Comprobación aritmética cerrada por decide: 180 > 1 * 60 + 90 en isSobolevContinuousEmbedding; no construye espacios funcionales H^3 ni C^1."),
-    127: ("I-DEC", "Comprobación aritmética cerrada por decide: 180 > 150 en isKatoLocalWellPosed; no demuestra existencia local de soluciones PDE."),
-    128: ("I-DEC", "Comprobación aritmética cerrada por decide: 980 + 2 * 1 * 10 * 1 ≤ 1000 en verifyDissipationCurryHoward."),
-    129: ("I-DEC", "Comprobación cerrada por decide de inclusión entre dos intervalos concretos [20, 80] ⊆ [10, 100]."),
-    130: ("I-DEC", "Comprobación cerrada por decide: 150 ≤ 200 evaluando gronwallBound 100 [1, 0, 0]."),
-    131: ("I-DEC", "Comprobación cerrada por decide de que la lista concreta [1, 2, 3, 4, 5, 10, 20, 50, 60] es estrictamente creciente en verifyCausalTrace."),
-    132: ("I-DEC", "Aceptación de tres indicadores booleanos fijados en true (isMillenniumRegular { bkmIntegralBounded := true, constantinFeffermanSmooth := true, sobolevH3Controlled := true } = true); no define campos de velocidad/presión ni demuestra regularidad analítica de las ecuaciones de Navier-Stokes."),
-    133: ("I-DEC", "Comprobación cerrada por decide de validateEcpTrace sobre la traza concreta validWave4Trace de 3 eventos."),
-    134: ("I-DEC", "Comprobación cerrada por decide que rechaza la traza concreta corruptFencingRaceTrace en validateEcpTrace."),
-    135: ("I-DEC", "Comprobación cerrada por decide que rechaza la traza concreta corruptBlindRetryTrace en validateEcpTrace."),
-    136: ("I-DEC", "Comprobación cerrada por decide que rechaza la traza concreta corruptBudgetCompositionTrace en validateEcpTrace."),
-    137: ("I-DEC", "Comprobación cerrada por decide de evaluateSealStrength false true false true = some .degradedSameUidOrInProcess."),
-    138: ("I-DEC", "Comprobación cerrada por decide de validateDeploymentPermit 0xAAA1 0xBBB2 5 5 100 500 = false."),
+    64: ("U-ALG", "Dos inserciones admitidas por TriggerAllowsInsert desde el mismo estado comparten el tick siguiente y la raíz previa; no afirma igualdad de entradas ni resistencia a colisiones criptográficas."),
+    65: ("U-ALG", "Inyectividad de inserción y alineación de paso bajo TriggerAllowsInsert: deduce e1.logicalTick = e2.logicalTick, e1.prevMerkleRoot = e2.prevMerkleRoot y e1 = e2 cuando (appendEntry db e1).entries = (appendEntry db e2).entries; no modela funciones hash criptográficas ni resistencia a colisiones."),
+    66: ("W-EX", "Testigo constructivo de habitabilidad (AP-10) para TriggerAllowsInsert sobre witnessDbL0 y witnessEntryL0."),
+    67: ("NEG-FIXTURE", "Fixture negativo de rechazo semántico esperado (AUDIT_LEAN_SCOPE_2026 §8): lista de 1.501 eventos con lectura impar final donde decide rechaza la igualdad = true."),
+    68: ("I-DEC", "Comprobación cerrada por decide sobre una traza literal válida de 6.000 eventos en BabylonStressTrace.lean."),
+    69: ("I-DEC", "Comprobación cerrada por decide sobre la traza literal trace_perfect de 5 eventos en BabylonTrace.lean."),
+    70: ("U-ALG", "Lema de un paso: si step s ev = some next y ev.action = Action.read, la secuencia declarada en el evento es par (ev.seq % 2 = 0)."),
+    71: ("U-IND", "Lema inductivo sobre listas de eventos: si runAeon (some s) trace = some finalState, todo evento de lectura en trace declara secuencia par (TraceReadsEven trace)."),
+    72: ("U-IND", "Propiedad inductiva universal sobre el modelo de eventos: validateTrace trace = true → TraceReadsEven trace. Certifica paridad de las secuencias declaradas en eventos read; no modela el payload leído ni orden de memoria físico en Rust."),
+    73: ("U-ALG", "Rechazo de transición en BabylonEvent cuando el campo booleano formalVeto = true."),
+    74: ("U-ALG", "Rechazo de transición en BabylonEvent cuando el campo booleano formalWitnessOk = false."),
+    75: ("U-ALG", "Rechazo de transición en BabylonEvent cuando leaseEpoch < kernelEpoch."),
+    76: ("U-ALG", "Extrae las conjunciones e.seqStart % 2 = 0 y e.seqStart = e.seqEnd de ValidBabylonTransition e."),
+    77: ("U-ALG", "Rechazo de transición en BabylonEvent cuando seqStart ≠ seqEnd (corolario directo de #076)."),
+    78: ("I-DEC", "Comprobación cerrada por decide de ValidBabylonTransition sobre el registro concreto trace_step_ok."),
+    79: ("U-ALG", "Rechazo en CompositeGateState (BitVec 64) cuando (verifiedCriticalMask &&& requiredCriticalMask) ≠ requiredCriticalMask."),
+    80: ("U-ALG", "Rechazo en CompositeGateState cuando acceptedArtifactHash ≠ verifiedArtifactHash."),
+    81: ("U-ALG", "Rechazo en CompositeGateState cuando ¬(minPolicyEpoch ≤ evidenceEpoch)."),
+    82: ("U-ALG", "Rechazo en CompositeGateState cuando quorumThreshold = 0#64."),
+    83: ("I-DEC", "Comprobación cerrada por decide de ValidCompositeAcceptance sobre el estado concreto composite_gate_ok."),
+    84: ("W-EX", "Testigo de habitabilidad (AP-10) para ValidCompositeAcceptance usando composite_gate_ok."),
+    85: ("I-DEC", "Comprobación cerrada por decide que rechaza el estado concreto composite_gate_ple_91pct_fail (máscara 0x3FF vs 0x7FF)."),
+    86: ("U-ALG", "Evaluación de consume sobre el constructor AffineResource.consumed devolviendo none; tipo inductivo puro y duplicable en Lean, no sistema de tipos lineales ni verificador de heap/aliasing."),
+    87: ("U-ALG", "Identidad algebraica en el anillo Int: x * (-y) + y * x = 0."),
+    88: ("I-DEC", "Comprobación cerrada por decide de un único paso discreto stepPHLD desde s0 = (1000, 1000) con r_percent = 20; no demuestra monotonía global de Lyapunov (existe contraejemplo en (0, 1) documentado en AUDIT_LEAN_SCOPE_2026 §5)."),
+    89: ("I-DEC", "Comprobación cerrada por decide de que 0, 64 y 128 tienen resto 0 módulo 64; no verifica alineamiento físico del asignador en Rust."),
+    101: ("U-ALG", "Paridad impar ((2 * k + 1) % 2 = 1) de la función aritmética seqlock_write_begin sobre Nat."),
+    102: ("U-ALG", "Paridad par ((2 * k + 2) % 2 = 0) de la función aritmética seqlock_write_commit sobre Nat."),
+    103: ("U-ALG", "Si el campo booleano poisoned = true en SystemState, evalFastPath devuelve FastPathVerdict.Miss."),
+    104: ("I-DEC", "Comprobación cerrada de evalFastPath devolviendo Hit cuando astPrefix y filesCount coinciden con las constantes esperadas en estado no envenenado."),
+    105: ("I-DEC", "Comprobación cerrada de evalFastPath devolviendo Miss cuando astPrefix difiere en +1 de la constante esperada."),
+    106: ("U-ALG", "Preservación en un paso del predicado invariant (s.poisoned = true ∨ s.seq % 2 = 0) por la función transition."),
+    107: ("U-IND", "Preservación inductiva del predicado invariant a lo largo de cualquier lista finita de acciones en runTrace."),
+    108: ("W-EX", "Testigo constructivo de existencia de una traza no vacía validCycle aceptada por isValidTrace en aritmética BitVec 64/32."),
+    109: ("U-ALG", "Identidad aritmética en Nat: (2*f + 1) + (2*f + 1) - (3*f + 1) = f + 1; ingrediente aritmético de intersección de quórum, no prueba por sí sola cardinalidad de conjuntos finitos de votantes ni protocolo BFT completo."),
+    110: ("U-ALG", "Identidad aritmética en Nat para f ≥ 1: 2*f + 2*f - 3*f = f."),
+    111: ("W-EX", "Testigo de existencia de ConsensusInstance con n = 4 y q = 3 (para f = 1)."),
+    112: ("U-ALG", "Cota aritmética universal sin overflow en 64 bits: para todo f < 2^62, 3 * f + 1 < 2^64."),
+    113: ("U-ALG", "Cota aritmética universal sin overflow en 64 bits: para todo f < 2^62, 2 * f + 1 < 2^64."),
+    114: ("I-DEC", "Comprobación cerrada por decide de las cotas < 2^64 para f = 1."),
+    115: ("W-EX", "Empaqueta la identidad aritmética #109 y el testigo #111 en la estructura VerifiedQuorumInvariant."),
+    116: ("U-ALG", "En la función de puntuación truncada en Nat (net_exergy_payoff), si is_moloch_extraction a = true entonces la resta truncada produce 0."),
+    117: ("U-ALG", "Para una acción con action_class = .Constructive, externalized_entropy = 0 y claimed_benefit > internal_dissipation, la fórmula net_exergy_payoff devuelve un valor > 0."),
+    118: ("U-ALG", "Combina #116 y #117 para dos registros AgentAction que satisfacen esas hipótesis; compara la función de puntuación sobre ambos registros, sin demostrar equilibrio de Nash ni dominancia estratégica en un juego multi-agente."),
+    119: ("U-ALG", "Por definición de landauer_penalty en Nat, su valor es ≥ a.externalized_entropy."),
+    120: ("U-IND", "Inducción sobre listas finitas de AgentAction: la suma de landauer_penalty es ≥ la suma de externalized_entropy."),
+    121: ("I-DEC", "Comprobación cerrada por decide de auditTrace sobre la lista concreta trace_depleted de 3 pasos."),
+    122: ("I-DEC", "Comprobación cerrada por decide de auditTrace sobre la lista concreta trace_singular_candidate de 3 pasos."),
+    123: ("U-ALG", "Extrae la hipótesis de campo h_curl_grad : d1_eval (d0_eval phi) = 0 suministrada dentro del registro DiscreteChainComplex."),
+    124: ("U-ALG", "Extrae la hipótesis de campo h_div_curl : d2_eval (d1_eval u) = 0 suministrada dentro del registro DiscreteChainComplex."),
+    125: ("I-DEC", "Comprobación cerrada por decide de isStrictlySolenoidal 0 = true (comprueba 0 == 0)."),
+    126: ("I-DEC", "Comprobación aritmética cerrada por decide: 120 > 0 * 60 + 90 en isSobolevContinuousEmbedding; no construye espacios funcionales H^2 ni C^0."),
+    127: ("I-DEC", "Comprobación aritmética cerrada por decide: 180 > 1 * 60 + 90 en isSobolevContinuousEmbedding; no construye espacios funcionales H^3 ni C^1."),
+    128: ("I-DEC", "Comprobación aritmética cerrada por decide: 180 > 150 en isKatoLocalWellPosed; no demuestra existencia local de soluciones PDE."),
+    129: ("I-DEC", "Comprobación aritmética cerrada por decide: 980 + 2 * 1 * 10 * 1 ≤ 1000 en verifyDissipationCurryHoward."),
+    130: ("I-DEC", "Comprobación cerrada por decide de inclusión entre dos intervalos concretos [20, 80] ⊆ [10, 100]."),
+    131: ("I-DEC", "Comprobación cerrada por decide: 150 ≤ 200 evaluando gronwallBound 100 [1, 0, 0]."),
+    132: ("I-DEC", "Comprobación cerrada por decide de que la lista concreta [1, 2, 3, 4, 5, 10, 20, 50, 60] es estrictamente creciente en verifyCausalTrace."),
+    133: ("I-DEC", "Aceptación de tres indicadores booleanos fijados en true (isMillenniumRegular { bkmIntegralBounded := true, constantinFeffermanSmooth := true, sobolevH3Controlled := true } = true); no define campos de velocidad/presión ni demuestra regularidad analítica de las ecuaciones de Navier-Stokes."),
+    134: ("I-DEC", "Comprobación cerrada por decide de validateEcpTrace sobre la traza concreta validWave4Trace de 3 eventos."),
+    135: ("I-DEC", "Comprobación cerrada por decide que rechaza la traza concreta corruptFencingRaceTrace en validateEcpTrace."),
+    136: ("I-DEC", "Comprobación cerrada por decide que rechaza la traza concreta corruptBlindRetryTrace en validateEcpTrace."),
+    137: ("I-DEC", "Comprobación cerrada por decide que rechaza la traza concreta corruptBudgetCompositionTrace en validateEcpTrace."),
+    138: ("I-DEC", "Comprobación cerrada por decide de evaluateSealStrength false true false true = some .degradedSameUidOrInProcess."),
+    139: ("I-DEC", "Comprobación cerrada por decide de validateDeploymentPermit 0xAAA1 0xBBB2 5 5 100 500 = false."),
 }
 
 
@@ -478,7 +479,7 @@ def render_markdown(data: dict[str, Any]) -> str:
     commit = data["generated_from_commit"][:12]
     lines: list[str] = []
 
-    lines.append("# Inventario de 144 Declaraciones de Teoremas y 228 Construcciones de BABYLON-60 en Lean 4")
+    lines.append("# Inventario de 145 Declaraciones de Teoremas y 228 Construcciones de BABYLON-60 en Lean 4")
     lines.append("")
     lines.append("**Autoría en Sala Limpia:** `Borja Fernández Angulo` (*Investigador en Sistemas Complejos*)  ")
     lines.append(f"**Revisión de Silicio:** Commit `{commit}` · Toolchain `{data['toolchain']}`  ")
@@ -486,34 +487,34 @@ def render_markdown(data: dict[str, Any]) -> str:
     lines.append("")
     lines.append("> [!IMPORTANT]")
     lines.append("> **Alcance Epistémico y Metodológico (Encabezado Canónico Corregido):**")
-    lines.append(f"> El catálogo distribuye **144 declaraciones de teoremas** (`#001–#144`) entre **22 módulos con teoremas** y enumera **4 módulos auxiliares sin teoremas** (**26 módulos `.lean` propietarios** en [`proof/lean/`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/proof/lean/)). Incluye lemas generales de codificación/inyectividad, preservación inductiva de invariantes sobre trazas, identidades algebraicas/aritméticas, testigos constructivos de existencia y comprobaciones de instancias concretas.")
+    lines.append("> El catálogo distribuye **145 declaraciones de teoremas** (`#001–#145`) entre **22 módulos con teoremas** y enumera **4 módulos auxiliares sin teoremas** (**26 módulos `.lean` propietarios** en [`proof/lean/`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/proof/lean/)). Incluye lemas generales de codificación/inyectividad, preservación inductiva de invariantes sobre trazas, identidades algebraicas/aritméticas, testigos constructivos de existencia y comprobaciones de instancias concretas.")
     lines.append("> Las propiedades se refieren estrictamente a los **modelos discretos formalizados**. Su validación reproducible identifica la revisión Git, el hash `SHA-256` de cada módulo, el nombre completamente cualificado y las dependencias axiomáticas (`#print axioms`). Las garantías operacionales sobre el runtime Rust exigen además los contratos y tests de correspondencia de [`CLAIMS.toml`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/CLAIMS.toml).")
     lines.append("")
     lines.append("---")
     lines.append("")
     lines.append("## 1. Conciliación Aritmética y Taxonomía de Resultados")
     lines.append("")
-    lines.append("### 1.1 Recuento Mecánico Verificado (`22 + 4 = 26` Módulos · `144 + 228 = 372` Construcciones)")
+    lines.append("### 1.1 Recuento Mecánico Verificado (`22 + 4 = 26` Módulos · `145 + 228 = 373` Construcciones)")
     lines.append("")
     lines.append("| Métrica del Árbol Propietario (`proof/lean/*.lean`) | Recuento Exacto | Desglose y Verificación |")
     lines.append("|:---|:---:|:---|")
     lines.append(f"| **Módulos propietarios totales** | **{t['proprietary_modules_total']}** | **{t['modules_with_theorems']}** módulos con declaraciones `theorem` + **{t['auxiliary_modules_without_theorems']}** módulos auxiliares (`BabylonAOTOracle.lean`, `BabylonOracle.lean`, `HolographicPoC.lean`, `NavierStokesOracle.lean`) |")
-    lines.append(f"| **Declaraciones de teoremas (`theorem`)** | **{t['theorems_total']}** | Identificadores consecutivos `#001–#144` sin huecos ni duplicados (142 en módulos positivos + 2 en fixtures negativos de rechazo esperado) |")
+    lines.append(f"| **Declaraciones de teoremas (`theorem`)** | **{t['theorems_total']}** | Identificadores consecutivos `#001–#145` sin huecos ni duplicados (143 en módulos positivos + 2 en fixtures negativos de rechazo esperado) |")
     lines.append(f"| **Definiciones y tipos inductivos (`def` + `inductive`)** | **{t['core_228_constructions_total']}** | **{t['defs_total']}** `def` + **{t['inductives_total']}** `inductive` (enumerados 1:1 como `#C001–#C228` en la Sección 4) |")
-    lines.append(f"| **Suma canónica (`144 teoremas + 228 def/inductive`)** | **{t['theorems_plus_core_228']}** | Conciliación exacta de las **372 construcciones formales** declaradas en `IP_PROVENANCE.md` |")
-    lines.append(f"| **Estructuras y abreviaturas adicionales (`structure` + `abbrev`)** | **{t['structures_total'] + t['abbrevs_total']}** | **{t['structures_total']}** `structure` (suma `406` con `144 + 228`) + **{t['abbrevs_total']}** `abbrev` (**{t['all_top_level_declarations_total']}** declaraciones totales de nivel superior, todas listadas en la Sección 4) |")
+    lines.append(f"| **Suma de teoremas y definiciones/inductivos (`145 + 228`)** | **{t['theorems_plus_core_228']}** | Declaraciones observadas en esta revisión del árbol fuente |")
+    lines.append(f"| **Estructuras y abreviaturas adicionales (`structure` + `abbrev`)** | **{t['structures_total'] + t['abbrevs_total']}** | **{t['structures_total']}** `structure` (suma `407` con `145 + 228`) + **{t['abbrevs_total']}** `abbrev` (**{t['all_top_level_declarations_total']}** declaraciones totales de nivel superior, todas listadas en la Sección 4) |")
     lines.append("")
-    lines.append("### 1.2 Clasificación de las 144 Declaraciones por Clase de Resultado y Alcance")
+    lines.append("### 1.2 Clasificación de las 145 Declaraciones por Clase de Resultado y Alcance")
     lines.append("")
-    lines.append("| Código | Clase de Resultado | Cantidad | % sobre 144 | Alcance Formal Exacto |")
+    lines.append("| Código | Clase de Resultado | Cantidad | % sobre 145 | Alcance Formal Exacto |")
     lines.append("|:---:|:---|:---:|:---:|:---|")
-    lines.append(f"| `U-CODEC` | **Leyes Universales de Codificación e Inyectividad** | **{cd.get('U-CODEC', 0)}** | {cd.get('U-CODEC', 0)*100/144:.1f} % | Roundtrip (`decode_encode`, `encode_decode`), inyectividad, preservación de sufijos y validez sobre dominios explícitos (`AcsEnvelope`, `CanonicalEnvelope`, `CanonicalHead`, `TicketEnvelope`). |")
-    lines.append(f"| `U-IND` | **Preservación Inductiva Universal y Confluencia** | **{cd.get('U-IND', 0)}** | {cd.get('U-IND', 0)*100/144:.1f} % | Inducción estructural sobre listas/trazas de longitud arbitraria (`AX0` cota `≤ 1` despacho, `BabylonL0Ledger` preservación L0, `BabylonTrace` paridad de lecturas, `Destiladora` invariante de traza, `MolochLandauer` solvencia en traza, `SmallStep` confluencia). |")
-    lines.append(f"| `U-ALG` | **Lemas Universales de Un Paso, Aritmética y Proyección** | **{cd.get('U-ALG', 0)}** | {cd.get('U-ALG', 0)*100/144:.1f} % | Propiedades cuantificadas universalmente sobre registros de un paso (`ValidBabylonTransition`, `CompositeGateState`), cotas `u64` (`f < 2^62`), identidades algebraicas (`Nat`/`Int`/`XOR`), y proyecciones de hipótesis/campos de estructuras. |")
-    lines.append(f"| `W-EX` | **Testigos Constructivos de No-Vacuidad (`AP-10`)** | **{cd.get('W-EX', 0)}** | {cd.get('W-EX', 0)*100/144:.1f} % | Pruebas existenciales (`∃ x, P x`) y empaquetados `VerifiedInvariant` que acreditan que las precondiciones de disparo no son vacuas. |")
-    lines.append(f"| `I-DEC` | **Comprobaciones de Instancias Cerradas Positivas** | **{cd.get('I-DEC', 0)}** | {cd.get('I-DEC', 0)*100/144:.1f} % | Evaluaciones decidibles (`by decide` / `rfl`) sobre trazas concretas, constantes en punto fijo o configuraciones finitas de banderas. |")
-    lines.append(f"| `NEG-FIXTURE` | **Fixtures Negativos de Rechazo Esperado** | **{cd.get('NEG-FIXTURE', 0)}** | {cd.get('NEG-FIXTURE', 0)*100/144:.1f} % | `#060` (`BabylonAutoTrace.lean`) y `#066` (`BabylonStressCorrupt.lean`): fuentes negativas diseñadas para que `decide` refute la igualdad `= true` ante una traza corrupta. |")
-    lines.append(f"| **TOTAL** | **39 Instancias Cerradas (`I-DEC` + `NEG-FIXTURE` = 27,1 %) + 105 Universales/Testigos (72,9 %)** | **144** | **100,0 %** | — |")
+    lines.append(f"| `U-CODEC` | **Leyes Universales de Codificación e Inyectividad** | **{cd.get('U-CODEC', 0)}** | {cd.get('U-CODEC', 0)*100/145:.1f} % | Roundtrip (`decode_encode`, `encode_decode`), inyectividad, preservación de sufijos y validez sobre dominios explícitos (`AcsEnvelope`, `CanonicalEnvelope`, `CanonicalHead`, `TicketEnvelope`). |")
+    lines.append(f"| `U-IND` | **Preservación Inductiva Universal y Confluencia** | **{cd.get('U-IND', 0)}** | {cd.get('U-IND', 0)*100/145:.1f} % | Inducción estructural sobre listas/trazas de longitud arbitraria (`AX0` cota `≤ 1` despacho, `BabylonL0Ledger` preservación L0, `BabylonTrace` paridad de lecturas, `Destiladora` invariante de traza, `MolochLandauer` solvencia en traza, `SmallStep` confluencia). |")
+    lines.append(f"| `U-ALG` | **Lemas Universales de Un Paso, Aritmética y Proyección** | **{cd.get('U-ALG', 0)}** | {cd.get('U-ALG', 0)*100/145:.1f} % | Propiedades cuantificadas universalmente sobre registros de un paso (`ValidBabylonTransition`, `CompositeGateState`), cotas `u64` (`f < 2^62`), identidades algebraicas (`Nat`/`Int`/`XOR`), y proyecciones de hipótesis/campos de estructuras. |")
+    lines.append(f"| `W-EX` | **Testigos Constructivos de No-Vacuidad (`AP-10`)** | **{cd.get('W-EX', 0)}** | {cd.get('W-EX', 0)*100/145:.1f} % | Pruebas existenciales (`∃ x, P x`) y empaquetados `VerifiedInvariant` que acreditan que las precondiciones de disparo no son vacuas. |")
+    lines.append(f"| `I-DEC` | **Comprobaciones de Instancias Cerradas Positivas** | **{cd.get('I-DEC', 0)}** | {cd.get('I-DEC', 0)*100/145:.1f} % | Evaluaciones decidibles (`by decide` / `rfl`) sobre trazas concretas, constantes en punto fijo o configuraciones finitas de banderas. |")
+    lines.append(f"| `NEG-FIXTURE` | **Fixtures Negativos de Rechazo Esperado** | **{cd.get('NEG-FIXTURE', 0)}** | {cd.get('NEG-FIXTURE', 0)*100/145:.1f} % | `#060` (`BabylonAutoTrace.lean`) y `#067` (`BabylonStressCorrupt.lean`): fuentes negativas diseñadas para que `decide` refute la igualdad `= true` ante una traza corrupta. |")
+    lines.append("| **TOTAL** | **39 Instancias Cerradas (`I-DEC` + `NEG-FIXTURE` = 26,9 %) + 106 Universales/Testigos (73,1 %)** | **145** | **100,0 %** | — |")
     lines.append("")
     lines.append("---")
     lines.append("")
@@ -560,7 +561,7 @@ def render_markdown(data: dict[str, Any]) -> str:
     lines.append("")
     lines.append("---")
     lines.append("")
-    lines.append("## 3. Catálogo Trazable 1:1 de las 144 Declaraciones de Teoremas (`#001` – `#144`)")
+    lines.append("## 3. Catálogo Trazable 1:1 de las 145 Declaraciones de Teoremas (`#001` – `#145`)")
     lines.append("")
     current_file = None
     for thm in data["theorems"]:
@@ -583,7 +584,7 @@ def render_markdown(data: dict[str, Any]) -> str:
     lines.append("")
     lines.append("## 4. Anexo Contrastable: Las 228 Definiciones e Inductivos (`#C001–#C228`) y las 47 Estructuras/Abreviaturas (`275` Construcciones No-Teorema)")
     lines.append("")
-    lines.append("Esta tabla enumera 1:1 todas las declaraciones de tipos y funciones en `proof/lean/*.lean` que sustentan los 144 teoremas, permitiendo verificar mecánicamente tanto el subtotal **`205 def + 23 inductive = 228`** (`144 + 228 = 372`) como el total incluyendo **`34 structure + 13 abbrev`** (`275` construcciones no-teorema; `144 + 275 = 419` declaraciones totales).")
+    lines.append("Esta tabla enumera 1:1 todas las declaraciones de tipos y funciones en `proof/lean/*.lean` que sustentan los 145 teoremas, permitiendo verificar mecánicamente tanto el subtotal **`205 def + 23 inductive = 228`** (`145 + 228 = 373`) como el total incluyendo **`34 structure + 13 abbrev`** (`275` construcciones no-teorema; `145 + 275 = 420` declaraciones totales).")
     lines.append("")
     lines.append("| # Global | ID Core-228 | Módulo:Línea | Especie | Nombre Cualificado |")
     lines.append("|:---:|:---:|:---|:---:|:---|")
@@ -614,13 +615,13 @@ def main() -> None:
         assert totals["proprietary_modules_total"] == 26, f"Expected 26 modules, got {totals['proprietary_modules_total']}"
         assert totals["modules_with_theorems"] == 22, f"Expected 22 modules with theorems, got {totals['modules_with_theorems']}"
         assert totals["auxiliary_modules_without_theorems"] == 4, f"Expected 4 aux modules, got {totals['auxiliary_modules_without_theorems']}"
-        assert totals["theorems_total"] == 144, f"Expected 144 theorems, got {totals['theorems_total']}"
+        assert totals["theorems_total"] == 145, f"Expected 145 theorems, got {totals['theorems_total']}"
         assert totals["core_228_constructions_total"] == 228, f"Expected 228 core constructions, got {totals['core_228_constructions_total']}"
-        assert totals["theorems_plus_core_228"] == 372, f"Expected 372 total (144+228), got {totals['theorems_plus_core_228']}"
+        assert totals["theorems_plus_core_228"] == 373, f"Expected 373 total (145+228), got {totals['theorems_plus_core_228']}"
         unresolved = [t["qualified_name"] for t in census["theorems"] if t["axioms"] == "UNRESOLVED"]
         assert not unresolved, f"Unresolved axioms for: {unresolved}"
         print(
-            "[LEAN-CENSUS PASS] 26 modules (22+4) | 144 theorems | 228 def+inductive (372) | "
+            "[LEAN-CENSUS PASS] 26 modules (22+4) | 145 theorems | 228 def+inductive (373) | "
             f"+34 struct +13 abbrev = {totals['all_top_level_declarations_total']} total declarations | 0 unresolved axioms"
         )
 

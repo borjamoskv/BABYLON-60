@@ -33,6 +33,21 @@ la tarea concreta. `is_allowed` comprueba permisos; no consume una autorización
 ni ejecuta una operación. El control de un único uso del executor Rust sigue
 siendo independiente.
 
+CLI y MCP deben consultar el mismo archivo de autorizaciones. La selección usa,
+por orden, `--db` en la CLI o `--causal-gate` en el servidor de memoria MCP;
+después `BABYLON_CAUSAL_GATE_DB`; y finalmente `causal_gate.db` bajo
+`BABYLON_HOME`, si está configurado, o `~/.babylon60`. Esa ruta compartida es
+independiente del directorio de trabajo y de la ubicación del paquete instalado.
+
+Si una instalación anterior conserva `.cortex/causal_gate.db` o sus sidecars
+WAL/SHM bajo el checkout o la instalación, la selección implícita se rechaza y
+pide elegir un archivo. Para continuar con ese ledger, fija su ruta absoluta en
+`BABYLON_CAUSAL_GATE_DB` tanto para la terminal como para el proceso MCP y vuelve
+a ejecutar `babylon60 setup --client codex` para actualizar la integración. Una
+selección explícita no copia ni migra los datos. Antes de una migración, detén
+ambos procesos y prepara una copia SQLite coherente; mover únicamente el archivo
+principal mientras exista un WAL activo puede perder autorizaciones.
+
 El helper firma los bytes recibidos mediante `--sign-hex`; `--causal-hash` contiene
 su prehash SHA-256 para P-256. CLI, gateway y adaptador Rust verifican la firma,
 la clave provisionada y la correspondencia del hash. Una salida vacía, una salida

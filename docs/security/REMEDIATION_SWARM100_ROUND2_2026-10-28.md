@@ -1,5 +1,7 @@
 # Corrección de los P1 de la segunda ronda — 28/10/2026
 
+> Alcance de la distribución pública: las referencias marcadas como material no distribuido identifican evidencia o herramientas excluidas deliberadamente de este checkout. Se conservan sus rutas y los resultados históricos; esos soportes no pueden verificarse desde esta distribución.
+
 ## Contrato de tarea
 
 Resultado esperado: rechazar las entradas inseguras de V01–V06 y V08–V11,
@@ -67,18 +69,18 @@ UNTESTED cuando sólo hay etiquetas del registro y no observaciones aportadas.
 
 ## Evidencia ejecutada
 
-- [Batería final](evidence/swarm100-remediation-20261028/related-tests.log): **143 passed, 1 skipped** en diez archivos de pruebas. La omisión es una prueba existente que requiere la extensión Rust `strike_rs`, no construida en este entorno.
-- [Ruff](evidence/swarm100-remediation-20261028/ruff.log): sin errores en los nueve módulos y las dos suites modificadas.
-- [MyPy](evidence/swarm100-remediation-20261028/mypy.log): sin errores en nueve fuentes, con `--follow-imports=silent`; no certifica tipos de dependencias transitivas.
-- [Diff](evidence/swarm100-remediation-20261028/diff-check.log): sin errores de whitespace.
-- [Comandos, entorno y hashes](evidence/swarm100-remediation-20261028/validation.json): comandos exactos, versiones Python/SQLite, códigos de salida y SHA-256 de fuentes y logs.
-- [Controles documentales](evidence/swarm100-remediation-20261028/document-checks.json): auditoría semántica, presupuesto, topología y enlaces del presente documento.
+- Batería final (material no distribuido: `evidence/swarm100-remediation-20261028/related-tests.log`): **143 passed, 1 skipped** en diez archivos de pruebas. La omisión es una prueba existente que requiere la extensión Rust `strike_rs`, no construida en este entorno.
+- Ruff (material no distribuido: `evidence/swarm100-remediation-20261028/ruff.log`): sin errores en los nueve módulos y las dos suites modificadas.
+- MyPy (material no distribuido: `evidence/swarm100-remediation-20261028/mypy.log`): sin errores en nueve fuentes, con `--follow-imports=silent`; no certifica tipos de dependencias transitivas.
+- Diff (material no distribuido: `evidence/swarm100-remediation-20261028/diff-check.log`): sin errores de whitespace.
+- Comandos, entorno y hashes (material no distribuido: `evidence/swarm100-remediation-20261028/validation.json`): comandos exactos, versiones Python/SQLite, códigos de salida y SHA-256 de fuentes y logs.
+- Controles documentales (material no distribuido: `evidence/swarm100-remediation-20261028/document-checks.json`): auditoría semántica, presupuesto, topología y enlaces del presente documento.
 
-La [primera ejecución](evidence/swarm100-remediation-20261028/baseline-tests.log)
+La primera ejecución (material no distribuido: `evidence/swarm100-remediation-20261028/baseline-tests.log`)
 dio 34 fallos y dos controles aprobados. Dos fallos iniciales de V08 correspondían
 al montaje de la fixture: se añadió el encrypter sintético al singleton antes de
 editar la API, y la repetición de esos dos casos detectó el éxito incorrecto del
-shredding. El [primer ensayo de compatibilidad](evidence/swarm100-remediation-20261028/related-tests-initial.log)
+shredding. El primer ensayo de compatibilidad (material no distribuido: `evidence/swarm100-remediation-20261028/related-tests-initial.log`)
 detectó 14 errores por ledgers separados y una expectativa M0 obsoleta; quedaron
 resueltos en la batería final. Se conservan los logs fallidos para trazabilidad.
 

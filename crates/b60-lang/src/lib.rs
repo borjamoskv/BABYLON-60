@@ -16,6 +16,7 @@ pub mod ffi;
 pub mod repl;
 pub mod dag;
 pub mod lean_emitter;
+mod bytecode_proof;
 
 pub use arithmetic::{Tick60, FRACTION_BASE};
 pub use isa::SexaOpCode;

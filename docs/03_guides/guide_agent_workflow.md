@@ -69,6 +69,16 @@ mejora, aplicar la comparación de tareas de la sección siguiente.
 | GOB-05 · Respuesta sencilla | Responder con resultado y evidencia pertinente; firma y panel opcionales. | Ninguno por ausencia de firma o metrología opcional. | Documento válido sin firma; compatibilidad de firma validada aparte cuando se incluya. |
 
 El auditor semántico inspecciona rutas y anclas locales sin consultas externas.
+Sin una declaración de proyección utiliza el perfil `full`, que exige
+`.agents/rules`. La proyección pública incluye
+`.babylon60-public-projection.json`: declara explícitamente la omisión de ese
+único árbol privado y selecciona el perfil `public`. El auditor informa la
+omisión y conserva obligatorios los documentos centrales, las skills y los
+gates; si hay reglas presentes, también las inspecciona. Una declaración
+inválida se rechaza. `--profile full` fuerza el contrato completo aun en el
+checkout público; `--profile public` exige la declaración, sin omitir otras
+fuentes ausentes. El generador de proyección incorpora ese manifest al árbol
+que va a escanear y publicar.
 Los patrones léxicos no prueban consistencia completa. La topología en `--staged`
 lee el índice Git, aunque el árbol de trabajo difiera; `--response` se reserva
 para borradores con firma. CI y pre-commit usan `--workspace-only`; la telemetría

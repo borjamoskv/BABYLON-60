@@ -1,11 +1,13 @@
 # Lote 11 ejecutado: persistencia JSON y escritores cooperantes — 29/10/2026
 
+> Alcance de la distribución pública: las referencias marcadas como material no distribuido identifican evidencia o herramientas excluidas deliberadamente de este checkout. Se conservan sus rutas y los resultados históricos; esos soportes no pueden verificarse desde esta distribución.
+
 C0167 (P1), C0168 y C0169 (P2) pasan a FIXED en su alcance reproducido. La
 única fuente productiva editada es
 `01_KISH_ENGINE/babylon60/core/cortex_persist.py`, distinta de la implementación
 BFT cortex_persist_ledger. El
-[registro reconciliado](evidence/swarm100-round3-20261028/registry.json)
-y la [validación final](evidence/swarm100-lot11-20261029/validation.json)
+registro reconciliado (material no distribuido: `evidence/swarm100-round3-20261028/registry.json`)
+y la validación final (material no distribuido: `evidence/swarm100-lot11-20261029/validation.json`)
 conservan estados, comandos, hashes y límites.
 
 **La atomicidad es por archivo. Project, ghosts y system siguen siendo tres
@@ -14,8 +16,8 @@ se informa sin anunciar éxito ni deshacer trabajo ajeno.
 
 ## Reproducción y aceptación
 
-Las [ocho reproducciones previas](evidence/swarm100-lot11-20261029/before-tests.log)
-fallaron contra el [hash del plan](evidence/swarm100-lot11-20261029/before-source-manifest.json):
+Las ocho reproducciones previas (material no distribuido: `evidence/swarm100-lot11-20261029/before-tests.log`)
+fallaron contra el hash del plan (material no distribuido: `evidence/swarm100-lot11-20261029/before-source-manifest.json`):
 escritura parcial que truncaba el JSON anterior, falta de sincronización,
 pérdida de actualizaciones en project/ghosts/system, instantes UTC mal etiquetados
 en verano/invierno y JSON no finito admitido. HOME fue temporal y se sembró antes
@@ -27,7 +29,7 @@ con el módulo bloqueado antes de recoger los tests. Pasan MyPy con
 check-untyped-defs, Ruff y los controles documentales. Fuente y tests conservan
 sus hashes durante la ejecución final.
 
-La [revisión independiente](evidence/swarm100-lot11-20261029/independent-review.json)
+La revisión independiente (material no distribuido: `evidence/swarm100-lot11-20261029/independent-review.json`)
 aprueba **12 controles en 18 fixtures**, repite las 55 regresiones y Ruff y no
 deja hallazgos accionables abiertos. Incluye warmup y ocho consolidaciones con
 cuatro hilos, dos proyectos e instancias distintas: tras reabrir conserva las
@@ -72,7 +74,7 @@ ConsolidationError informa completed_files y el archivo/estado actual cuando
 está disponible, conservando la causa. No imprime éxito tras fallo ordinario.
 Los errores ordinarios dejan de enviar SIGKILL al proceso del operador.
 
-El [control AST y de alcance](evidence/swarm100-lot11-20261029/scope-check.json)
+El control AST y de alcance (material no distribuido: `evidence/swarm100-lot11-20261029/scope-check.json`)
 confirma SessionDelta, transformaciones de datos y retenciones heredadas intactas.
 Los límites de diez cambios recientes y treinta sesiones siguen siendo recortes
 intencionales; no son pérdidas por carrera. Los lotes anteriores, dependencias

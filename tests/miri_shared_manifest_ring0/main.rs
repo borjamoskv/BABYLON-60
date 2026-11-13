@@ -3,8 +3,7 @@
 #[path = "../../src/shared_manifest_core.rs"]
 mod manifest;
 
-use manifest::{PayloadSlot, SharedManifestRing0, POISON_BIT};
-use std::sync::atomic::Ordering;
+use manifest::{PayloadSlot, SharedManifestRing0, POISON_BIT, POISON_SENTINEL};
 use std::sync::{Arc, Barrier};
 
 fn payload(tick: u64) -> PayloadSlot {
@@ -32,7 +31,8 @@ fn main() {
     });
     start.wait();
     for _ in 0..64 {
-        shared.ffi_pin(shared.writer_ctl.control_word.load(Ordering::Acquire) >> 1);
+        // The producer's logical clock stays within the lease's 64-tick budget.
+        shared.ffi_pin(0);
         let mut result = PayloadSlot::zeroed();
         if shared.read_snapshot(&mut result).is_ok() {
             assert_eq!(result.state_hash, [result.logical_tick as u8; 32]);
@@ -43,11 +43,12 @@ fn main() {
         std::thread::yield_now();
     }
     worker.join().unwrap();
-    // A poison observation must remain terminal for both APIs.
-    shared
-        .writer_ctl
-        .control_word
-        .fetch_or(POISON_BIT, Ordering::AcqRel);
+    // Trigger terminal poison through the public watchdog, then require both
+    // data APIs to preserve rejection without direct control-word mutation.
+    shared.ffi_pin(0);
+    let poison = shared.check_or_trigger_apoptosis(65).unwrap_err();
+    assert_eq!(poison, POISON_SENTINEL);
+    assert_ne!(poison & POISON_BIT, 0);
     assert!(shared.publish_and_audit(&payload(65), 65).is_err());
     assert!(shared.read_snapshot(&mut PayloadSlot::zeroed()).is_err());
 }

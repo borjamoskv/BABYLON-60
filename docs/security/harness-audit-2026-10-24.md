@@ -1,5 +1,7 @@
 # BABYLON-60: clasificación del harness y verificación pública
 
+> Alcance de la distribución pública: las referencias marcadas como material no distribuido identifican evidencia o herramientas excluidas deliberadamente de este checkout. Se conservan sus rutas y los resultados históricos; esos soportes no pueden verificarse desde esta distribución.
+
 Fecha de revisión: 24 de octubre de 2026, Europe/Madrid.
 
 **Conclusión:** BABYLON-60 combina memoria, autorización de efectos, evidencia y
@@ -20,7 +22,7 @@ Git con aislamiento. Se revisaron fuentes primarias, código y artefactos; se
 ejecutaron el verificador, Lean y dos controles negativos en un clon temporal.
 La aceptación exige resultados leídos, fuentes identificadas y límites explícitos.
 
-La revisión inicial creó este informe y su [evidencia](evidence/harness-audit-2026-10-24/source-provenance.json).
+La revisión inicial creó este informe y su evidencia (material no distribuido: `evidence/harness-audit-2026-10-24/source-provenance.json`).
 El árbol local tenía 13 rutas modificadas o nuevas antes de empezar; se preservan.
 Durante la revisión inicial no se ejecutó la suite de runtime, ni inferencia remota,
 ni despliegue, commit o push.
@@ -65,7 +67,7 @@ El espejo declara origen `a25ff274308fbe74c10be6b0fc7513da93b78887`, 143 rutas
 sucias y una ejecución de claims con sufijo `+dirty:cc512bce910ae7bd`.
 Su `tracked_source_matches` es `false`: los resultados registrados no atestan
 todos los bytes del árbol utilizado para generar la publicación.
-Véanse el [manifiesto conservado](evidence/harness-audit-2026-10-24/mirror-manifest.json)
+Véanse el manifiesto conservado (material no distribuido: `evidence/harness-audit-2026-10-24/mirror-manifest.json`)
 y la [documentación pública](https://babylon60.com/documentacion/).
 
 La web etiqueta el repositorio central como privado bajo solicitud/NDA, pero
@@ -84,8 +86,8 @@ que el repositorio público contenga la revisión exacta del snapshot posterior.
 | Pin SHA-256 deliberadamente incorrecto | Salida 1 | Se rechaza el manifiesto que no coincide con el pin |
 | Un comentario añadido a una copia de `CLAIMS.toml` | Salida 1 | Se detecta la alteración de ese artefacto |
 
-Las salidas completas están en [verificación](evidence/harness-audit-2026-10-24/verification-results.json)
-y [controles negativos](evidence/harness-audit-2026-10-24/negative-controls.json).
+Las salidas completas están en verificación (material no distribuido: `evidence/harness-audit-2026-10-24/verification-results.json`)
+y controles negativos (material no distribuido: `evidence/harness-audit-2026-10-24/negative-controls.json`).
 No se instalaron dependencias: Lean 4.34.0-rc2 ya estaba disponible; Lake generó
 su manifiesto y productos de compilación únicamente en el clon temporal.
 
@@ -112,7 +114,7 @@ pero no debe describirse todo el resultado universal como simple reflexión `rfl
 | La prueba formal es solo una promesa | Excesivo: AX0 compila. La correspondencia con el runtime queda fuera de esta prueba |
 | Seis invariantes están STALE | Es la clasificación publicada del conjunto histórico; no equivale a seis contraejemplos reproducidos aquí |
 
-Los hallazgos de los archivos se conservan en [datos derivados](evidence/harness-audit-2026-10-24/artifact-findings.json).
+Los hallazgos de los archivos se conservan en datos derivados (material no distribuido: `evidence/harness-audit-2026-10-24/artifact-findings.json`).
 Los informes históricos registran 19 × 100 intentos y 250 iteraciones simuladas;
 se trata de resultados publicados, no reejecutados. Las declaraciones posteriores
 de SIGKILL real tampoco se reejecutaron aquí. La presencia humana Secure Enclave
@@ -124,7 +126,7 @@ GitHub informa creación del repositorio público el 18 de octubre: no fecha el
 inicio del desarrollo. `NOASSERTION` es el identificador devuelto por GitHub;
 existe un archivo LICENSE con condiciones propias. No se emite una conclusión
 jurídica. El importe de 15.000 no se confirmó: las peticiones directas para leer
-datos estructurados devolvieron HTTP 403. [Registro de consultas](evidence/harness-audit-2026-10-24/web-facts.json).
+datos estructurados devolvieron HTTP 403. Registro de consultas (material no distribuido: `evidence/harness-audit-2026-10-24/web-facts.json`).
 
 ## Comparación funcional
 
@@ -200,13 +202,13 @@ versiones anteriores ni editar las reglas del operador.
 | Ruff sobre validadores y regresiones | PASS |
 | Autoprueba del validador de firmas | 6.400 comprobaciones pasan |
 
-Las [salidas actuales](evidence/harness-audit-2026-10-24/followup-controls.json)
+Las salidas actuales (material no distribuido: `evidence/harness-audit-2026-10-24/followup-controls.json`)
 sustituyen el estado pendiente, sin borrar las
-[salidas históricas de topología](evidence/harness-audit-2026-10-24/quality-gates.json)
-ni el [error histórico de CLI](evidence/harness-audit-2026-10-24/concurrent-document-gates.json).
+salidas históricas de topología (material no distribuido: `evidence/harness-audit-2026-10-24/quality-gates.json`)
+ni el error histórico de CLI (material no distribuido: `evidence/harness-audit-2026-10-24/concurrent-document-gates.json`).
 Los controles documentales no certifican runtime ni repiten las pruebas del espejo.
 Los enlaces locales, estructura y JSON de esta entrega se registran en
-[documento](evidence/harness-audit-2026-10-24/document-checks.json).
+documento (material no distribuido: `evidence/harness-audit-2026-10-24/document-checks.json`).
 
 ## Selección para el commit local
 
@@ -229,5 +231,5 @@ El presupuesto de esa selección conserva el recuento previo de AGENTS.md:
 4.108 bytes. Los 9.890 bytes y las 15 verificaciones documentales de la tabla
 anterior corresponden al árbol compartido ampliado; no se atribuyen al commit
 mínimo. Se conservan ambos resultados con sus ámbitos en la
-[evidencia de selección](evidence/harness-audit-2026-10-24/commit-selection.json).
+evidencia de selección (material no distribuido: `evidence/harness-audit-2026-10-24/commit-selection.json`).
 La autorización comprende un commit local, sin push.

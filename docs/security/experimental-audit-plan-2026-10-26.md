@@ -1,5 +1,7 @@
 # Auditoría y plan de los cinco experimentos de agentes
 
+> Alcance de la distribución pública: las referencias marcadas como material no distribuido identifican evidencia o herramientas excluidas deliberadamente de este checkout. Se conservan sus rutas y los resultados históricos; esos soportes no pueden verificarse desde esta distribución.
+
 26 de octubre de 2026. Alcance: FL-DBR-01, FL-MCP-01, FL-PERIM-01,
 FL-REC-01 y FL-PATH-01 propuestos en el radar aportado por el operador.
 
@@ -23,7 +25,7 @@ la comparación de conocimiento de FL-DBR-01 requieren bancos nuevos.
 
 Resultado: diagnóstico de los cinco experimentos, evidencia reproducible y
 secuencia de implementación. Rutas añadidas: este informe y su
-[sonda aislada de recuperación](evidence/recovery-audit-2026-10-26.rs).
+sonda aislada de recuperación (material no distribuido: `evidence/recovery-audit-2026-10-26.rs`).
 El código productivo, dependencias y lockfiles quedan fuera de esta edición.
 Aceptación: fuentes locales identificadas, resultados leídos, distinción entre
 pruebas existentes y campañas pendientes, enlaces y controles documentales.
