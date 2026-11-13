@@ -204,7 +204,7 @@ cargo run --bin babylon60_kernel -- unbox
 
 ### Demo Asesino en 60 Segundos: Causal Gating & Apoptosis Fail-Stop
 
-Demuestra seguridad por capacidades, autorización biométrica humana Touch ID, ledger SQLite WAL de un solo escritor con cadena SHA3-256 (Ed25519 está en los votos de `state_log` y en los recibos COSE, no en cada fila), transmutación de raíz Merkle y apoptosis fail-stop inmediata (`POISONED = 0xDEAD_6060`) ante manipulación de datos por un adversario. Sin un checkpoint externo (conteo + hash de cabeza; [PR #79](https://github.com/borjamoskv/BABYLON-60/pull/79)) una cadena recalculada no se detecta:
+Demuestra seguridad por capacidades, autorización biométrica humana Touch ID, ledger SQLite WAL de un solo escritor con cadena SHA3-256 (Ed25519 está en los votos de `state_log` y en los recibos COSE, no en cada fila), transmutación de raíz Merkle y apoptosis fail-stop inmediata (`POISONED = 0xDEAD_6060`) ante manipulación de datos por un adversario. Sin un checkpoint externo (conteo + hash de cabeza; en v3 ese hash también pliega los sellos de observación; [PR #79](https://github.com/borjamoskv/BABYLON-60/pull/79)) una cadena recalculada no se detecta:
 
 ```bash
 python3 scripts/c5_demos/c5_killer_demo_60s.py

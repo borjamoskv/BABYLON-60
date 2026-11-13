@@ -202,7 +202,7 @@ class CortexEvent:
 
 The row digest is SHA3-256 (`compute_cortex_hash` / `_compute_entry_hash`). SQLite admits one writer at a time (`BEGIN IMMEDIATE`, `PRAGMA synchronous=FULL`). Ed25519 is used on `state_log` quorum votes (`consensus_validator.py`) and on Rust broker `COSE_Sign1` receipts (`src/receipt.rs`). It is not a column of `cortex_ledger` or `ledger_entries`.
 
-`verify_integrity()` / `verify_chain()` recompute the chain they are shown. A caller who keeps a checkpoint outside SQLite — entry count plus head hash — can reject a replaced history. Without that pin, a full rewrite that recalculates every link is undetectable. That checkpoint is the contract added in [PR #79](https://github.com/borjamoskv/BABYLON-60/pull/79). Triggers that abort `UPDATE`/`DELETE` stop a naive edit; they do not stop someone who can drop them and rewrite the file.
+`verify_integrity()` / `verify_chain()` recompute the chain they are shown. A caller who keeps a checkpoint outside SQLite — entry count plus head hash — can reject a replaced history. For a v3 chain that head also folds each observation seal, so rewriting a timestamp and resealing it does not preserve the pin. Without the pin, a full rewrite that recalculates every link and seal is undetectable. That checkpoint is the contract added in [PR #79](https://github.com/borjamoskv/BABYLON-60/pull/79). Triggers that abort `UPDATE`/`DELETE` stop a naive edit; they do not stop someone who can drop them and rewrite the file.
 
 ### 4.2 Integrity Properties
 
