@@ -1,9 +1,11 @@
 # Lote 5 ejecutado: ciclo de vida y transacciones del ledger — 28/10/2026
 
+> Alcance de la distribución pública: las referencias marcadas como material no distribuido identifican evidencia o herramientas excluidas deliberadamente de este checkout. Se conservan sus rutas y los resultados históricos; esos soportes no pueden verificarse desde esta distribución.
+
 Estado: ejecutado por autorización posterior del operador; véase el
 [informe de corrección](REMEDIATION_SWARM100_LOTE5_2026-10-28.md). Se agruparon
 tres P1 inicialmente CONFIRMED_STATIC/OPEN de `01_KISH_ENGINE/babylon60/bft/ledger_actor.py`.
-La [selección con hash y evidencia](evidence/swarm100-lot4-20261028/lot5-selection.json)
+La selección con hash y evidencia (material no distribuido: `evidence/swarm100-lot4-20261028/lot5-selection.json`)
 fijó la única fuente productiva editada. Se prioriza la afinidad del módulo;
 no quedan P1 abiertos con reproducción previa en la cola actual.
 

@@ -1,16 +1,18 @@
 # Lote 1 propuesto: P1 abiertos con reproducción — 28/10/2026
 
+> Alcance de la distribución pública: las referencias marcadas como material no distribuido identifican evidencia o herramientas excluidas deliberadamente de este checkout. Se conservan sus rutas y los resultados históricos; esos soportes no pueden verificarse desde esta distribución.
+
 Estado: ejecutado tras autorización; [resultado y evidencia](REMEDIATION_SWARM100_LOTE1_2026-10-28.md).
 La corrección independiente de AgentPager se documenta
 [aquí](REMEDIATION_AGENT_PAGER_2026-10-28.md).
 
 ## Selección reproducible
 
-Filtrar la [cola vigente](evidence/swarm100-round3-20261028/remediation-queue.json)
+Filtrar la cola vigente (material no distribuido: `evidence/swarm100-round3-20261028/remediation-queue.json`)
 por `severity == P1`, `remediation_state == OPEN` y `decision == REPRODUCED`
 seleccionó inicialmente **tres P1**, agrupados en tres módulos. Se conservan sus
 IDs, hashes y arnés previo en
-[lot1-selection.json](evidence/swarm100-pager-20261028/lot1-selection.json).
+lot1-selection.json (material no distribuido: `evidence/swarm100-pager-20261028/lot1-selection.json`).
 La reproducción previa es aislada; no acredita ejecución nativa ni despliegue.
 Tras el cierre no quedan P1 OPEN con dictamen REPRODUCED. El siguiente bloque
 estático está preparado en el [Lote 2](PLAN_SWARM100_LOTE2_2026-10-28.md).
@@ -24,7 +26,7 @@ estático está preparado en el [Lote 2](PLAN_SWARM100_LOTE2_2026-10-28.md).
 ## 1. C0373 — credenciales en errores de correo
 
 Reutilizar el fallo `CalledProcessError` con token sintético del
-[arnés existente](evidence/swarm100-round3-20261028/03-isolated-fixtures.py).
+arnés existente (material no distribuido: `evidence/swarm100-round3-20261028/03-isolated-fixtures.py`).
 Convertirlo en regresión antes de corregir. Sustituir la serialización de
 excepciones/comandos por errores estructurados con datos permitidos y aplicar
 redacción de la credencial en cualquier detalle devuelto.

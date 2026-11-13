@@ -1,16 +1,14 @@
 // ============================================================================
-// BABYLON-60 :: SHAREDMANIFEST RING-0 (512B) RUNTIME STRESS TEST (C5-REAL)
-// Comprueba en el host de ejecución:
-// 1. Geometría L1/L2: 512 Bytes (4 × 128B), align(128), cero false sharing.
-// 2. Latencia baseline no contendida (sin umbral de rendimiento impuesto).
-// 3. Contención SPMC (1 Productor, 8 Consumidores) con reintentos acotados.
-// 4. Cero lecturas rasgadas (torn reads), monotonicidad estricta y 0 corrupción.
-// 5. Apoptosis Asimétrica Externa en silicio con bandera POISON_BIT (bit 63).
+// BABYLON-60 :: SHAREDMANIFEST RING-0 (512B) PRUEBA LOCAL ACOTADA
+// Comprueba layout, snapshots aceptados y rechazo terminal por la API pública.
+// Informa tiempos y rechazos con 1 productor y 8 lectores en este proceso.
+// Las muestras no prueban ausencia general de carreras, progreso wait-free,
+// tráfico RFO, false sharing ni comportamiento de una integración C-FFI real.
 // ============================================================================
 
 use std::hint::black_box;
 use std::mem::{align_of, size_of};
-use std::sync::atomic::{AtomicBool, AtomicU64, Ordering};
+use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::Arc;
 use std::thread;
 use std::time::Instant;
@@ -45,13 +43,18 @@ struct ReaderMetrics {
 
 fn main() {
     println!("╔═══════════════════════════════════════════════════════════════════════════╗");
-    println!("║   BABYLON-60 :: SHAREDMANIFEST RING-0 512B HARDWARE BENCHMARK (ARM64)     ║");
+    println!("║     BABYLON-60 :: SHAREDMANIFEST RING-0 512B PRUEBA LOCAL ACOTADA         ║");
     println!("╚═══════════════════════════════════════════════════════════════════════════╝\n");
+    println!(
+        "  > Plataforma: {} / {}",
+        std::env::consts::OS,
+        std::env::consts::ARCH
+    );
 
     // ────────────────────────────────────────────────────────────────────────
-    // 0. Verificación de Geometría de Silicio (Líneas de 128 Bytes en Apple M-Series)
+    // 0. Layout y alineación del objeto en este proceso
     // ────────────────────────────────────────────────────────────────────────
-    println!("[0/4] Verificando geometría de líneas de caché en Apple Silicon (128 B)...");
+    println!("[0/4] Verificando layout y alineación del objeto...");
     let manifest: &'static SharedManifestRing0 = Box::leak(Box::new(SharedManifestRing0::new()));
     let ptr = manifest as *const SharedManifestRing0 as usize;
 
@@ -65,7 +68,7 @@ fn main() {
     );
     println!("  > Dirección de memoria:       0x{:016X}", ptr);
     println!(
-        "  > Offset dentro de caché:     {} B (Debe ser 0)",
+        "  > Resto de alineación:        {} B (Debe ser 0)",
         ptr % 128
     );
     println!(
@@ -98,9 +101,7 @@ fn main() {
     assert_eq!(size_of::<WriterControlLine>(), 128);
     assert_eq!(size_of::<ReaderPinLine>(), 128);
     assert_eq!(size_of::<PayloadSlot>(), 128);
-    println!(
-        "  [✓] INV_C5_APPLE_128B_PING_PONG Certificado: 4 líneas dedicadas, 0 False Sharing.\n"
-    );
+    println!("  [✓] Layout observado: 512 B, alineación de 128 B.\n");
 
     // ────────────────────────────────────────────────────────────────────────
     // 1. Línea Base No Contendida (1,000,000 operaciones)
@@ -115,7 +116,9 @@ fn main() {
         slot.logical_tick = tick;
         slot.state_hash = make_state_hash(tick);
         slot.metrics[0] = tick.wrapping_mul(10);
-        let _ = manifest.publish_and_audit(&slot, tick);
+        manifest
+            .publish_and_audit(&slot, tick)
+            .expect("Publicación baseline rechazada");
     }
     let write_elapsed = t0.elapsed();
     let write_ns_op = write_elapsed.as_nanos() as f64 / iters as f64;
@@ -129,17 +132,19 @@ fn main() {
     let mut read_buf = PayloadSlot::zeroed();
     let t1 = Instant::now();
     for _ in 1..=iters {
-        let _ = manifest.read_snapshot(&mut read_buf);
+        manifest
+            .read_snapshot(&mut read_buf)
+            .expect("Lectura baseline rechazada");
         black_box(&read_buf);
     }
     let read_elapsed = t1.elapsed();
     let read_ns_op = read_elapsed.as_nanos() as f64 / iters as f64;
     let read_mops = (iters as f64 / read_elapsed.as_secs_f64()) / 1_000_000.0;
     println!(
-        "  > Consumidor FFI:     {:?} ({:.2} ns/op, {:.2} Mops/sec)",
+        "  > Lector Rust:        {:?} ({:.2} ns/op, {:.2} Mops/sec)",
         read_elapsed, read_ns_op, read_mops
     );
-    println!("  [✓] Rendimiento en silicio verificado en régimen nanosegundo.\n");
+    println!("  [✓] Tiempos observados en esta ejecución; sin umbral de latencia.\n");
 
     // ────────────────────────────────────────────────────────────────────────
     // 2. Contención Concurrente SPMC (1 Productor + 8 Consumidores)
@@ -151,7 +156,6 @@ fn main() {
     );
     let run_manifest = Arc::new(SharedManifestRing0::new());
     let stop_signal = Arc::new(AtomicBool::new(false));
-    let writes_done = Arc::new(AtomicU64::new(0));
 
     let mut reader_handles = Vec::new();
     for reader_id in 0..num_readers {
@@ -196,7 +200,6 @@ fn main() {
     }
 
     let prod_manifest = Arc::clone(&run_manifest);
-    let prod_writes = Arc::clone(&writes_done);
     let prod_iters = 500_000u64;
     let prod_handle = thread::Builder::new()
         .name("producer-ring0".to_string())
@@ -207,10 +210,11 @@ fn main() {
                 s.logical_tick = tick;
                 s.state_hash = make_state_hash(tick);
                 s.metrics[0] = tick.wrapping_mul(7);
-                let _ = prod_manifest.publish_and_audit(&s, tick);
+                prod_manifest
+                    .publish_and_audit(&s, tick)
+                    .expect("Publicación concurrente rechazada");
             }
             let el = t_start.elapsed();
-            prod_writes.store(prod_iters, Ordering::Release);
             el
         })
         .expect("Failed to spawn producer thread");
@@ -237,11 +241,15 @@ fn main() {
         "  > Tiempo total productor:   {:?} ({:.2} Mops/sec)",
         prod_duration, prod_mops
     );
-    println!("  > Lecturas totales (8 cores): {}", total_reads);
+    println!("  > Snapshots aceptados:       {}", total_reads);
     println!("  > Lecturas rechazadas:       {}", rejected_reads);
     println!("  > Violaciones monotonicidad: {}", total_violations);
     println!("  > Corrupciones de payload:   {}", total_corruptions);
 
+    assert!(
+        total_reads > 0,
+        "FAIL: No se observaron snapshots publicados"
+    );
     assert_eq!(
         total_violations, 0,
         "FAIL: Violación de monotonicidad detectada"
@@ -250,20 +258,19 @@ fn main() {
         total_corruptions, 0,
         "FAIL: Lectura rasgada o corrupción de payload"
     );
-    println!("  [✓] Sin snapshots incoherentes observados; las lecturas pueden reintentarse o rechazarse.\n");
+    println!(
+        "  [✓] Snapshots aceptados sin retrocesos de tick ni hashes incorrectos en esta muestra.\n"
+    );
 
     // ────────────────────────────────────────────────────────────────────────
-    // 3. Prueba de Fuego: Apoptosis Asimétrica Externa en Hardware
+    // 3. Watchdog con pin lógico retenido en este proceso
     // ────────────────────────────────────────────────────────────────────────
-    println!("[3/4] Evaluando apoptosis asimétrica externa bajo congelación forzada de FFI...");
+    println!("[3/4] Evaluando watchdog con un pin lógico retenido...");
     let poison_manifest = SharedManifestRing0::new();
     let mut p_slot = PayloadSlot::zeroed();
 
     // 1. Consumidor FFI fija su pin en tick 100
-    poison_manifest
-        .reader_pin
-        .ffi_reader_pin_tick
-        .store(100, Ordering::Release);
+    poison_manifest.ffi_pin(100);
 
     // 2. Productor avanza dentro de tolerancia (delta = 50 <= 64)
     p_slot.logical_tick = 150;
@@ -279,14 +286,13 @@ fn main() {
         "FAIL: Productor no disparó apoptosis asimétrica"
     );
     let ctl = poison_manifest
-        .writer_ctl
-        .control_word
-        .load(Ordering::Acquire);
+        .check_or_trigger_apoptosis(170)
+        .expect_err("FAIL: El watchdog no conserva el rechazo terminal");
     assert_eq!(ctl, POISON_SENTINEL);
     assert_ne!(ctl & POISON_BIT, 0, "FAIL: POISON_BIT no está activo");
     println!("  > Productor tick 170 (delta = 70 > 64): Apoptosis disparada (POISON_SENTINEL = 0x{:016X})", POISON_SENTINEL);
 
-    // 4. Intentos posteriores fallan en fail-stop O(1)
+    // 4. Lectura y publicación posteriores deben rechazar el estado terminal
     let mut check_buf = PayloadSlot::zeroed();
     assert_eq!(
         poison_manifest.read_snapshot(&mut check_buf),
@@ -296,9 +302,9 @@ fn main() {
         poison_manifest.publish_and_audit(&p_slot, 180),
         Err(POISON_SENTINEL)
     );
-    println!("  [✓] Fail-Stop irreversible verificado: el canal queda sellado ante congelación de FFI.\n");
+    println!("  [✓] Watchdog, lectura y publicación devolvieron el mismo rechazo terminal.\n");
 
     println!("╔═══════════════════════════════════════════════════════════════════════════╗");
-    println!("║       TODAS LAS COMPROBACIONES EN SILICIO COMPLETADAS EXITOSAMENTE        ║");
+    println!("║           COMPROBACIONES LOCALES COMPLETADAS EN ESTA EJECUCIÓN            ║");
     println!("╚═══════════════════════════════════════════════════════════════════════════╝");
 }

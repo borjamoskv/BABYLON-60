@@ -3,32 +3,8 @@ name: macOS Native Isolation
 on:
   push:
     branches: [main]
-    paths:
-      - 'src/**'
-      - 'crates/**'
-      - '00_ABZU_KERNEL/**'
-      - '01_KISH_ENGINE/cortex/**'
-      - 'Cargo.toml'
-      - 'Cargo.lock'
-      - 'build.rs'
-      - 'rust-toolchain*'
-      - '.cargo/**'
-      - 'tests/omega_mediation_campaign.rs'
-      - '.github/workflows/macos-native.yml'
   pull_request:
     branches: [main]
-    paths:
-      - 'src/**'
-      - 'crates/**'
-      - '00_ABZU_KERNEL/**'
-      - '01_KISH_ENGINE/cortex/**'
-      - 'Cargo.toml'
-      - 'Cargo.lock'
-      - 'build.rs'
-      - 'rust-toolchain*'
-      - '.cargo/**'
-      - 'tests/omega_mediation_campaign.rs'
-      - '.github/workflows/macos-native.yml'
   workflow_dispatch:
 
 permissions:
@@ -44,7 +20,23 @@ env:
   CARGO_PROFILE_TEST_DEBUG: '0'
 
 jobs:
+  native-inputs:
+    runs-on: ubuntu-latest
+    outputs:
+      required: ${{ steps.scope.outputs.required }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+      - id: scope
+        run: python3 scripts/guards/native_ci_scope.py >> "$GITHUB_OUTPUT"
+
   seatbelt:
+    # Keep the context required by main. Filter the job, never the workflow:
+    # a skipped job reports a result; a path-skipped workflow stays pending.
+    name: rust (macos-latest)
+    needs: native-inputs
+    if: ${{ !cancelled() && (needs.native-inputs.result != 'success' || needs.native-inputs.outputs.required != 'false') }}
     # BYPASS-001 requires Darwin sandbox-exec; Linux explicitly skips this test.
     runs-on: macos-15
     timeout-minutes: 20

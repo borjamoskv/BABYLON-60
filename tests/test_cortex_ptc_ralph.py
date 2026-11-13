@@ -432,7 +432,7 @@ def test_scopes_overlap_and_blackboard_prevent_abs_handoff_and_toctou_bypasses(t
     abs_target = str(REPO_ROOT / "01_KISH_ENGINE" / "babylon60" / "mcp" / "cortex_mcp_server.py")
     assert scopes_overlap("01_KISH_ENGINE/babylon60/mcp", abs_target)
     assert scopes_overlap(".", abs_target)
-    assert scopes_overlap("../BABYLON-60/01_KISH_ENGINE/babylon60/mcp", abs_target)
+    assert scopes_overlap(f"../{REPO_ROOT.name}/01_KISH_ENGINE/babylon60/mcp", abs_target)
 
     server = CortexMCPServer(ledger_path=tmp_path / "ledger.db", causal_gate_path=tmp_path / "gate.db")
     raw_bb = inspect.unwrap(CortexMCPServer._tool_blackboard_dispatch)

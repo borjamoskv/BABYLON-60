@@ -125,26 +125,18 @@ from babylon60.mcp.signature_ui import (  # noqa: E402
 )
 from babylon60.mcp.skills_snapshot import ImmutableSkillsSnapshot  # noqa: E402
 from babylon60.verification.verification_gate import VerificationGate  # noqa: E402
+from babylon60.state_paths import causal_gate_path as resolve_causal_gate_path, state_home  # noqa: E402
 
 logger = logging.getLogger("babylon60.mcp.server")
 
 # ---------------------------------------------------------------------------
 # Default ledger path
 # ---------------------------------------------------------------------------
-BABYLON_BASE_PATH = Path(os.getenv("BABYLON_HOME", str(Path.home() / ".babylon60")))
+# Import-safe fallbacks; startup resolves the environment after explicit options.
+BABYLON_BASE_PATH = Path.home() / ".babylon60"
 DEFAULT_LEDGER_PATH = BABYLON_BASE_PATH / "mcp_ledger.db"
 DEFAULT_MAIL_LEDGER_PATH = BABYLON_BASE_PATH / "data" / "mail_ledger.db"
-_DEFAULT_CAUSAL_GATE_FALLBACK = (
-    str(BABYLON_BASE_PATH / "causal_gate.db")
-    if "BABYLON_HOME" in os.environ
-    else str(Path(__file__).resolve().parents[3] / ".cortex" / "causal_gate.db")
-)
-DEFAULT_CAUSAL_GATE_PATH = Path(
-    os.getenv(
-        "BABYLON_CAUSAL_GATE_DB",
-        _DEFAULT_CAUSAL_GATE_FALLBACK,
-    )
-)
+DEFAULT_CAUSAL_GATE_PATH = BABYLON_BASE_PATH / "causal_gate.db"
 
 # ---------------------------------------------------------------------------
 # MCP Protocol Constants (JSON-RPC 2.0)
@@ -575,12 +567,15 @@ class CortexMCPServer(MediatedHandlers):
 
     def __init__(
         self,
-        ledger_path: Path | str = DEFAULT_LEDGER_PATH,
+        ledger_path: Path | str | None = None,
         mail_ledger_path: Path | str | None = None,
-        causal_gate_path: Path | str = DEFAULT_CAUSAL_GATE_PATH,
+        causal_gate_path: Path | str | None = None,
         use_canonical_names: bool | None = None,
         capability_library: Path | None = None,
     ) -> None:
+        causal_gate_path = resolve_causal_gate_path(causal_gate_path)
+        if ledger_path is None:
+            ledger_path = state_home() / "mcp_ledger.db"
         self.ledger = CortexPersistLedger(ledger_path)
         Path(causal_gate_path).parent.mkdir(parents=True, exist_ok=True)
         self.verification_gate = VerificationGate(db_path=str(causal_gate_path))
@@ -1684,8 +1679,8 @@ def main() -> None:
     import argparse
 
     parser = argparse.ArgumentParser(description="CORTEX MCP Server — Sovereign BFT Memory")
-    parser.add_argument("--ledger", type=str, default=str(DEFAULT_LEDGER_PATH), help="Path to BFT ledger DB")
-    parser.add_argument("--causal-gate", type=Path, default=DEFAULT_CAUSAL_GATE_PATH, help="Signed approval ledger")
+    parser.add_argument("--ledger", type=str, default=None, help="Path to BFT ledger DB (default: state home)")
+    parser.add_argument("--causal-gate", type=Path, default=None, help="Signed approval ledger")
     parser.add_argument("--capability-library", type=Path, help="Trusted kernel cdylib built with --features python")
     parser.add_argument(
         "--mail-ledger",
@@ -1717,11 +1712,15 @@ def main() -> None:
         sys.stdout.write(render_mcp_tools_sdk_py(raw_tools))
         return
 
+    try:
+        causal_gate = resolve_causal_gate_path(args.causal_gate)
+    except ValueError as exc:
+        parser.error(str(exc))
     server = CortexMCPServer(
-        ledger_path=Path(args.ledger),
+        ledger_path=Path(args.ledger) if args.ledger is not None else None,
         mail_ledger_path=Path(args.mail_ledger) if args.mail_ledger is not None else None,
         use_canonical_names=True if args.use_canonical_names else None,
-        causal_gate_path=args.causal_gate,
+        causal_gate_path=causal_gate,
         capability_library=args.capability_library,
     )
     server.run_stdio()

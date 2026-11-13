@@ -1,96 +1,21 @@
 #!/usr/bin/env python3
-# ============================================================================
-# BABYLON-60 v4.0 Sovereign Hardened
-# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
-# ============================================================================
-"""Exergy Dashboard Server (Causal-Determinist).
+"""Compatibility entrypoint for the maintained loopback-only dashboard.
 
-A sovereign, zero-dependency HTTP server that serves the Exergy Dashboard UI
-and exposes a read-only telemetry API from the BFT Ledger.
-Complies with INV_C5_17 (100% free, zero external dependencies).
+Running this source checkout directly and using ``babylon60-dashboard`` share
+the same handler, telemetry fields and error policy.
 """
 
-import json
-import os
-import sqlite3
 import sys
-from http.server import HTTPServer, SimpleHTTPRequestHandler
 from pathlib import Path
-from urllib.parse import urlparse
-
-# Add project root to sys.path to resolve local packages
-PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
-sys.path.insert(0, str(PROJECT_ROOT))
 
 
-babylon_home = os.environ.get("BABYLON_HOME")
-if not babylon_home:
-    babylon_home = str(Path.home() / ".babylon60")
-home_path = Path(babylon_home)
-if home_path.name == ".babylon60":
-    DB_PATH = home_path / "exergy_agent_ledger.db"
-else:
-    DB_PATH = home_path / ".babylon60" / "exergy_agent_ledger.db"
+_SOURCE_ROOT = Path(__file__).absolute().parents[2] / "01_KISH_ENGINE"
+if (_SOURCE_ROOT / "babylon60" / "dashboard" / "server.py").is_file():
+    sys.path.insert(0, str(_SOURCE_ROOT))
 
+from babylon60.dashboard.server import ExergyDashboardHandler, main  # noqa: E402
 
-class ExergyDashboardHandler(SimpleHTTPRequestHandler):
-    def __init__(self, *args, **kwargs) -> None:
-        # Serve static files from apps/ExergyDashboard/public
-        public_dir = PROJECT_ROOT / "apps" / "ExergyDashboard" / "public"
-        super().__init__(*args, directory=str(public_dir), **kwargs)
-
-    def do_GET(self) -> None:
-        parsed = urlparse(self.path)
-        if parsed.path == "/api/metrics":
-            self.serve_metrics()
-        else:
-            super().do_GET()
-
-    def serve_metrics(self) -> None:
-        try:
-            # We connect strictly read-only to avoid any lock contention (INV_BFT_02 compliance)
-            # uri=True allows us to specify mode=ro
-            conn = sqlite3.connect(f"file:{DB_PATH}?mode=ro", uri=True)
-            conn.row_factory = sqlite3.Row
-            cursor = conn.cursor()
-
-            # Fetch last 50 events
-            cursor.execute("SELECT * FROM ledger ORDER BY timestamp DESC LIMIT 50")
-            rows = cursor.fetchall()
-
-            data = [dict(row) for row in rows]
-
-            self.send_response(200)
-            self.send_header("Content-Type", "application/json")
-            self.end_headers()
-            self.wfile.write(json.dumps(data).encode("utf-8"))
-
-        except sqlite3.OperationalError as e:
-            self.send_response(500)
-            self.send_header("Content-Type", "application/json")
-            self.end_headers()
-            self.wfile.write(json.dumps({"error": str(e), "db": str(DB_PATH)}).encode("utf-8"))
-        finally:
-            if "conn" in locals():
-                conn.close()
-
-
-def main() -> None:
-    port = 8080
-    server_address = ("", port)
-
-    # Ensure public directory exists
-    public_dir = PROJECT_ROOT / "apps" / "ExergyDashboard" / "public"
-    public_dir.mkdir(parents=True, exist_ok=True)
-
-    httpd = HTTPServer(server_address, ExergyDashboardHandler)
-    print(f"🔋 Exergy Dashboard Server (Causal-Determinist) ignited on http://localhost:{port}")
-    try:
-        httpd.serve_forever()
-    except KeyboardInterrupt:
-        print("\nServer shutting down.")
-    finally:
-        httpd.server_close()
+__all__ = ["ExergyDashboardHandler", "main"]
 
 
 if __name__ == "__main__":

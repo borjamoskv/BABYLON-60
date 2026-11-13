@@ -1,15 +1,17 @@
 # Lote 5 ejecutado: ciclo de vida y transacciones del ledger — 28/10/2026
 
+> Alcance de la distribución pública: las referencias marcadas como material no distribuido identifican evidencia o herramientas excluidas deliberadamente de este checkout. Se conservan sus rutas y los resultados históricos; esos soportes no pueden verificarse desde esta distribución.
+
 C0428, C0429 y C0430 pasan a FIXED. La única fuente productiva modificada es
 `01_KISH_ENGINE/babylon60/bft/ledger_actor.py`; C0431 permanece OPEN.
-El [registro reconciliado](evidence/swarm100-round3-20261028/registry.json)
-y la [validación final](evidence/swarm100-lot5-20261028/validation.json)
+El registro reconciliado (material no distribuido: `evidence/swarm100-round3-20261028/registry.json`)
+y la validación final (material no distribuido: `evidence/swarm100-lot5-20261028/validation.json`)
 conservan estados, comandos, hashes y alcance.
 
 ## Reproducción y verificación
 
-Las [tres reproducciones previas](evidence/swarm100-lot5-20261028/before-tests.log)
-fallaron contra el [hash inicial](evidence/swarm100-lot5-20261028/before-source-manifest.json):
+Las tres reproducciones previas (material no distribuido: `evidence/swarm100-lot5-20261028/before-tests.log`)
+fallaron contra el hash inicial (material no distribuido: `evidence/swarm100-lot5-20261028/before-source-manifest.json`):
 stop dejó pendiente la cola, un retry Fernet rechazó el mismo evento y el
 rollback repetido impidió procesar una solicitud válida posterior. Se utilizaron
 SQLite real y claves Fernet sintéticas en directorios temporales.
@@ -22,7 +24,7 @@ strike_rs se bloqueó antes de la colección; el caso dependiente de ella quedó
 omitido. No se infiere una verificación de IPC nativo.
 
 Pasan Ruff y MyPy con check-untyped-defs. La
-[revisión independiente](evidence/swarm100-lot5-20261028/independent-review.json)
+revisión independiente (material no distribuido: `evidence/swarm100-lot5-20261028/independent-review.json`)
 repite las 29 regresiones y añade diez controles, incluidos 4096 futuros
 aceptados con cola llena y cancelaciones repetidas durante una transacción.
 Los intercalados se controlan con barreras y plazos de fixture, sin ocultar
@@ -57,7 +59,7 @@ cleanup o estado incierto sí lo termina; no se informa éxito de una operación
 sin resultado confirmado. Los pendientes que nunca se procesaron fallan
 explícitamente y queue.join puede terminar.
 
-El [control de alcance por AST](evidence/swarm100-lot5-20261028/scope-check.json)
+El control de alcance por AST (material no distribuido: `evidence/swarm100-lot5-20261028/scope-check.json`)
 confirma esquema/triggers, UUID, expresión de fecha, hashes y cuerpos de
 verificación/atestación preservados. WAL y synchronous=FULL se comprobaron en
 la conexión real del worker. Los consumidores, committer, kernel de hash,

@@ -123,13 +123,27 @@ theorem append_strictly_increases_tick
   simp only [appendEntry, h_tick]
   omega
 
-/-- **Teorema 4 — Inyectividad de inserción y unicidad de paso en el modelo L0:**
+/-- **Teorema 4 — Predecesor compartido:** Dos entradas admitidas por el trigger
+    sobre el mismo estado tienen el mismo tick siguiente y la misma raíz previa.
+    Esto no afirma igualdad de entradas, inyectividad ni resistencia a colisiones:
+    el modelo recibe `currMerkleRoot` como un dato y no calcula su hash. -/
+theorem valid_insertions_share_predecessor
+    (db  : L0Database)
+    (e1 e2 : LedgerEntry)
+    (h1 : TriggerAllowsInsert db e1)
+    (h2 : TriggerAllowsInsert db e2) :
+    e1.logicalTick = e2.logicalTick ∧ e1.prevMerkleRoot = e2.prevMerkleRoot := by
+  obtain ⟨h_tick1, h_prev1, _, _⟩ := h1
+  obtain ⟨h_tick2, h_prev2, _, _⟩ := h2
+  exact ⟨h_tick1.trans h_tick2.symm, h_prev1.trans h_prev2.symm⟩
+
+/-- **Inyectividad de inserción y unicidad de paso en el modelo L0:**
     Si dos inserciones válidas bajo `TriggerAllowsInsert` parten del mismo estado `db`
     y producen la misma lista `(appendEntry db e1).entries = (appendEntry db e2).entries`,
     entonces coinciden en `logicalTick`, en `prevMerkleRoot` y son la misma entrada (`e1 = e2`).
     Alcance: demuestra inyectividad de `List.cons` en `appendEntry` y alineación del paso por el
     trigger del modelo; no demuestra resistencia a colisiones de una función hash criptográfica. -/
-theorem merkle_root_uniqueness
+theorem append_entry_injective
     (db    : L0Database)
     (e1 e2 : LedgerEntry)
     (h1    : TriggerAllowsInsert db e1)
@@ -192,9 +206,13 @@ theorem l0_trigger_inhabited :
 #guard_msgs in
 #print axioms append_strictly_increases_tick
 
-/-- info: 'Babylon60.L0Ledger.merkle_root_uniqueness' does not depend on any axioms -/
+/-- info: 'Babylon60.L0Ledger.valid_insertions_share_predecessor' does not depend on any axioms -/
 #guard_msgs in
-#print axioms merkle_root_uniqueness
+#print axioms valid_insertions_share_predecessor
+
+/-- info: 'Babylon60.L0Ledger.append_entry_injective' does not depend on any axioms -/
+#guard_msgs in
+#print axioms append_entry_injective
 
 /-- info: 'Babylon60.L0Ledger.l0_trigger_inhabited' does not depend on any axioms -/
 #guard_msgs in

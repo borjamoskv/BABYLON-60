@@ -1,5 +1,7 @@
 # AgentPager: rechazo de reutilización y despertar unicast — 28/10/2026
 
+> Alcance de la distribución pública: las referencias marcadas como material no distribuido identifican evidencia o herramientas excluidas deliberadamente de este checkout. Se conservan sus rutas y los resultados históricos; esos soportes no pueden verificarse desde esta distribución.
+
 ## Contrato previo a las ediciones
 
 Resultado: imponer en código la difusión global única de C0279, rechazando
@@ -40,24 +42,24 @@ documental anterior como historia superada; no acredita la corrección actual.
 - La difusión cuesta O(N + W), con N destinatarios registrados y W esperas
   actuales. No se crean sub-tareas auxiliares para combinar eventos.
 
-La [reproducción previa](evidence/swarm100-pager-20261028/before.log) dio
+La reproducción previa (material no distribuido: `evidence/swarm100-pager-20261028/before.log`) dio
 **11 failed, 3 passed**. Con el parche, las
-[14 regresiones](evidence/swarm100-pager-20261028/after.log) pasan. Cubren
+14 regresiones (material no distribuido: `evidence/swarm100-pager-20261028/after.log`) pasan. Cubren
 rechazo de segunda difusión, unicast ya suspendido y previo, aislamiento entre
 destinatarios, agentes tardíos, cancelación, baja/re-registro, dos receptores
 del mismo ID y tres rondas de calentamiento más veinte rondas mixtas de
 32 receptores.
 
-La [revisión independiente](evidence/swarm100-pager-20261028/independent-review.json)
+La revisión independiente (material no distribuido: `evidence/swarm100-pager-20261028/independent-review.json`)
 no encontró fallos accionables dentro del contrato. Ejecutó las 14 regresiones
 y once comprobaciones adicionales, incluyendo fanout de 512 destinatarios en
 tres rondas de calentamiento y veinte rondas verificadas, carreras programadas
 alrededor de la suspensión y ausencia de tareas pendientes. Son pruebas
 concurrentes en memoria, no mediciones de rendimiento o aislamiento físico.
 
-[Validación y hashes](evidence/swarm100-pager-20261028/validation.json):
+Validación y hashes (material no distribuido: `evidence/swarm100-pager-20261028/validation.json`):
 pytest dirigido, Ruff, MyPy, enlaces, controles documentales y registro
-reconciliado. Los [cambios de estado por ID](evidence/swarm100-pager-20261028/candidate-status-updates.json)
+reconciliado. Los cambios de estado por ID (material no distribuido: `evidence/swarm100-pager-20261028/candidate-status-updates.json`)
 remiten al hash vigente y a las regresiones.
 
 ## Límites y cola siguiente

@@ -655,6 +655,21 @@ mod tests {
     }
 
     #[test]
+    fn test_receipt_p256_sign_verify_and_reject_tampering() {
+        let signer = P256Signer::new();
+        let manifest = SharedManifest::new();
+        let mut receipt = emit_halt_receipt_with_timestamp(
+            &manifest, HaltReason::HashMismatch, &signer, 1774300000,
+        ).expect("P-256 receipt must sign");
+        verify_and_parse_halt_receipt(&receipt, &signer).expect("P-256 receipt must verify");
+
+        let last = receipt.len() - 1;
+        receipt[last] ^= 0xFF;
+        assert_eq!(verify_and_parse_halt_receipt(&receipt, &signer), Err(ReceiptError::InvalidSignature));
+        assert!(!signer.verify(b"message", b"malformed-signature"));
+    }
+
+    #[test]
     fn test_receipt_tamper_rejection() {
         let signer = Ed25519Signer::new();
         let manifest = SharedManifest::new();

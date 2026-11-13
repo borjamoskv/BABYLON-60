@@ -1,9 +1,11 @@
 # Lote 4 ejecutado: integridad de bundles y resultados — 28/10/2026
 
+> Alcance de la distribución pública: las referencias marcadas como material no distribuido identifican evidencia o herramientas excluidas deliberadamente de este checkout. Se conservan sus rutas y los resultados históricos; esos soportes no pueden verificarse desde esta distribución.
+
 Estado: ejecutado bajo autorización posterior del operador; véase el
 [informe de corrección](REMEDIATION_SWARM100_LOTE4_2026-10-28.md). La selección
 inicial agrupó P1 CONFIRMED_STATIC/OPEN por afinidad. No quedan P1 OPEN con reproducción previa.
-Los [hashes y observaciones de selección](evidence/swarm100-lot3-20261028/lot4-selection.json)
+Los hashes y observaciones de selección (material no distribuido: `evidence/swarm100-lot3-20261028/lot4-selection.json`)
 fijaron las tres fuentes antes de editar; la ejecución conservó ese límite.
 
 | ID | Fuente prevista | Resultado exigido |

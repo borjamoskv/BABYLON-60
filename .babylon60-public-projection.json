@@ -1,0 +1,5 @@
+{
+  "schema": "babylon60.public-projection.v1",
+  "profile": "public",
+  "omitted_scopes": [".agents/rules"]
+}

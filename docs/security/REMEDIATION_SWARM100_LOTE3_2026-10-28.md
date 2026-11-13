@@ -1,16 +1,18 @@
 # Lote 3: autorización y despacho Git — 28/10/2026
 
+> Alcance de la distribución pública: las referencias marcadas como material no distribuido identifican evidencia o herramientas excluidas deliberadamente de este checkout. Se conservan sus rutas y los resultados históricos; esos soportes no pueden verificarse desde esta distribución.
+
 Resultado: C0413 y C0418 corregidos en sus dos scripts; SW100-R3-0001 corregido
 como hallazgo adicional fuera del inventario original. C0414 conserva su
 rechazo: el preview permite preparación local. La
-[validación reproducible](evidence/swarm100-lot3-20261028/validation.json)
-y la [revisión independiente](evidence/swarm100-lot3-20261028/independent-review.json)
+validación reproducible (material no distribuido: `evidence/swarm100-lot3-20261028/validation.json`)
+y la revisión independiente (material no distribuido: `evidence/swarm100-lot3-20261028/independent-review.json`)
 delimitan la evidencia; ninguna afirma una publicación real o atestación hardware.
 
 ## Reproducción y corrección
 
-Los [tres casos previos](evidence/swarm100-lot3-20261028/before-tests.log)
-fallaron contra los [hashes originales](evidence/swarm100-lot3-20261028/before-source-manifest.json).
+Los tres casos previos (material no distribuido: `evidence/swarm100-lot3-20261028/before-tests.log`)
+fallaron contra los hashes originales (material no distribuido: `evidence/swarm100-lot3-20261028/before-source-manifest.json`).
 En repositorios de fixture, el original alcanzó el publicador sin Gitleaks,
 alcanzó el publicador sin gate y seleccionó C2 al cambiar la rama durante la
 espera de A. Git, escáner y gate eran ejecutables de prueba sin red ni efectos

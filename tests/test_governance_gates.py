@@ -1,6 +1,7 @@
 """Governance regressions use isolated files and Git indexes; no host hooks or effects."""
 
 from pathlib import Path
+import json
 import subprocess
 import sys
 
@@ -126,6 +127,60 @@ def test_semantic_cli_checks_core_and_rule_links(governance: Path) -> None:
     assert result.returncode == 1
     assert "missing local target" in result.stderr
     assert "missing local anchor" in result.stderr
+
+
+def declare_public_projection(root: Path) -> None:
+    write(root, audit_semantic_contracts.PUBLIC_PROFILE_MARKER,
+          json.dumps(audit_semantic_contracts.PUBLIC_PROFILE))
+    (root / ".agents/rules").rmdir()
+
+
+def test_declared_public_projection_passes_without_private_rules(governance: Path) -> None:
+    declare_public_projection(governance)
+    result = semantic_cli(governance)
+    assert result.returncode == 0, result.stderr
+    assert "Profile: public" in result.stdout
+    assert "NOT_CHECKED: .agents/rules omitted" in result.stdout
+    full = subprocess.run(
+        [sys.executable, str(ROOT / "scripts/c5_quality_gates/audit_semantic_contracts.py"),
+         "--repo-root", str(governance), "--workspace-only", "--profile", "full"],
+        capture_output=True, text=True, check=False,
+    )
+    assert full.returncode == 2
+    assert "missing scope" in full.stderr and ".agents/rules" in full.stderr
+
+
+def test_undeclared_missing_rules_remain_an_error(governance: Path) -> None:
+    (governance / ".agents/rules").rmdir()
+    result = semantic_cli(governance)
+    assert result.returncode == 2 and "missing scope" in result.stderr
+    with pytest.raises(ValueError, match="requires projection declaration"):
+        audit_semantic_contracts.select_profile(governance, "public")
+
+
+@pytest.mark.parametrize("name", [".agents/skills", "scripts/c5_quality_gates", *GOVERNANCE_DOCUMENTS])
+def test_public_projection_keeps_other_scopes_required(governance: Path, name: str) -> None:
+    declare_public_projection(governance)
+    path = governance / name
+    path.rmdir() if path.is_dir() else path.unlink()
+    result = semantic_cli(governance)
+    assert result.returncode in (1, 2)
+    assert name in result.stderr
+    assert "PASS" not in result.stdout
+
+
+@pytest.mark.parametrize("content", ["{", "{}", '{"profile":"public","omitted_scopes":[".agents/skills"]}'])
+def test_invalid_public_projection_declaration_fails(governance: Path, content: str) -> None:
+    write(governance, audit_semantic_contracts.PUBLIC_PROFILE_MARKER, content)
+    result = semantic_cli(governance)
+    assert result.returncode == 2 and "NO_VERIFICADO" in result.stderr
+
+
+def test_present_public_rules_are_still_inspected(governance: Path) -> None:
+    declare_public_projection(governance)
+    write(governance, ".agents/rules/new.md", "Toda mutación causal exige atestación biométrica.\n")
+    result = semantic_cli(governance)
+    assert result.returncode == 1 and "SEM-001" in result.stderr
 
 
 def test_budget_counts_canonical_file_once_despite_seven_aliases(governance: Path) -> None:

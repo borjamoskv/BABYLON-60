@@ -1,15 +1,17 @@
 # Lote 6 ejecutado: selección y transporte — 29/10/2026
 
+> Alcance de la distribución pública: las referencias marcadas como material no distribuido identifican evidencia o herramientas excluidas deliberadamente de este checkout. Se conservan sus rutas y los resultados históricos; esos soportes no pueden verificarse desde esta distribución.
+
 C0132 y C0133 pasan a FIXED. La única fuente productiva editada es
 `01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py`. El
-[registro reconciliado](evidence/swarm100-round3-20261028/registry.json)
-y la [validación final](evidence/swarm100-lot6-20261029/validation.json)
+registro reconciliado (material no distribuido: `evidence/swarm100-round3-20261028/registry.json`)
+y la validación final (material no distribuido: `evidence/swarm100-lot6-20261029/validation.json`)
 conservan estados, comandos, hashes y límites.
 
 ## Reproducción y evidencia
 
-Las [seis reproducciones previas](evidence/swarm100-lot6-20261029/before-tests.log)
-fallaron contra el [hash seleccionado](evidence/swarm100-lot6-20261029/before-source-manifest.json):
+Las seis reproducciones previas (material no distribuido: `evidence/swarm100-lot6-20261029/before-tests.log`)
+fallaron contra el hash seleccionado (material no distribuido: `evidence/swarm100-lot6-20261029/before-source-manifest.json`):
 selector desconocido, HTTP de proveedor por entorno o configuración explícita
 y carga automática de dotenv. El original alcanzó el registrador HTTP en rutas
 que debían rechazarse. El entorno era sintético y dotenv estaba bloqueado
@@ -21,7 +23,7 @@ existentes de rate-limit y los lotes anteriores. El caso dependiente de
 strike_rs se omitió con ese módulo bloqueado antes de recoger los tests.
 También pasan Ruff, MyPy con check-untyped-defs y los controles documentales.
 
-La [revisión independiente](evidence/swarm100-lot6-20261029/independent-review.json)
+La revisión independiente (material no distribuido: `evidence/swarm100-lot6-20261029/independent-review.json`)
 repite 114 casos del módulo/rate-limit y añade nueve controles propios: URLs
 adversariales, rutas válidas, cinco códigos de redirect, mutación durante retry,
 despacho directo, errores y cancelación. Cero intentos de socket. Los positivos
@@ -54,7 +56,7 @@ a otras IP privadas/LAN ni se resuelven nombres para demostrar aislamiento OS.
 Cada llamada captura backend, URL, clave, modelo y timeout en una tupla inmutable;
 sus reintentos reutilizan ese destino. La siguiente llamada revalida el config
 nuevo. Se conservan número de intentos, backoff, Retry-After, circuit breaker y
-propagación de cancelación. El [control por AST](evidence/swarm100-lot6-20261029/scope-check.json)
+propagación de cancelación. El control por AST (material no distribuido: `evidence/swarm100-lot6-20261029/scope-check.json`)
 confirma helpers de rate-limit, pager, telemetría y fases no afectadas preservados.
 
 El helper HTTP exige el backend y valida de nuevo antes de construir AsyncClient.

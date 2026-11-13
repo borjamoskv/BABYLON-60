@@ -23,7 +23,7 @@ Validación de campos / clave de idempotencia
 BEGIN IMMEDIATE + INSERT / consulta de fila existente
     │                   │
     ▼                   ▼
-SQLite WAL + FULL       Hash de sobre Python SHA3-256
+SQLite WAL + FULL       V1 SHA3-256 / nuevas entradas V2 BLAKE3
     │
     ▼
 Resultado de inserción: seq, event_id, entry_hash
@@ -61,7 +61,7 @@ En el actor inspeccionado, la entrada es `LedgerEvent(stream, entity_id, event_t
 - El verificador comprueba enlaces, secuencia y hashes de una instantánea. Para rollback de una historia coherentemente reescrita necesita una referencia confiable separada.
 - Los campos de identidad no sustituyen autenticación, autorización ni atestación del efecto.
 
-El [perfil criptográfico](spec_cryptographic_profile.md) distingue BLAKE3 canónico y SHA3-256 heredado. El sobre actual de este actor incorpora `created_at`; por tanto, esta ruta heredada no acredita que todos los hashes del repositorio dependan exclusivamente de un tick lógico. El requisito canónico de determinismo lógico permanece vigente y debe evaluarse en su superficie aplicable.
+El [perfil criptográfico](spec_cryptographic_profile.md) distingue BLAKE3 canónico y SHA3-256 heredado. Las entradas V1 del actor conservan el sobre anterior con `created_at` para verificar los ledgers existentes. Las nuevas entradas V2 comprometen campos semánticos y tick lógico con BLAKE3, sin fecha física ni aleatoriedad del cifrado. Una migración aditiva conserva las filas, hashes y raíces históricas. La verificación de una entrada V2 cifrada requiere su clave; una escritura cifrada con una clave incompatible se rechaza. Véase el [contrato de versiones y claves](../03_guides/guide_ledger_hash_versions.md). Esto no acredita un único formato canónico para todos los ledgers del repositorio.
 
 ## 4. Niveles del diseño y consenso
 

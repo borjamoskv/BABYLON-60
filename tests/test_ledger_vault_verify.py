@@ -7,7 +7,12 @@
 from __future__ import annotations
 
 import asyncio
+import hashlib
+import json
 from pathlib import Path
+import sqlite3
+import sys
+import uuid
 
 import aiosqlite
 import pytest
@@ -43,15 +48,49 @@ async def test_verify_chain_valida_ledger_cifrado(tmp_path: Path, monkeypatch: p
 
 @pytest.mark.asyncio
 async def test_verificador_vivo_sin_clave(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    """INV_C5_05: la integridad es verificable SIN la clave del vault — hash sobre bytes almacenados."""
-    monkeypatch.setenv("CORTEX_VAULT_KEY", Fernet.generate_key().decode())
+    """Historical V1 ciphertext remains verifiable without its key, before and after migration."""
+    vault = Fernet(Fernet.generate_key())
     db = tmp_path / "vault.db"
+    # Independent pre-versioning schema/hash oracle: no new actor write or legacy production flag.
+    with sqlite3.connect(db) as conn:
+        conn.execute("""CREATE TABLE ledger_entries (
+            seq INTEGER PRIMARY KEY AUTOINCREMENT, event_id TEXT NOT NULL UNIQUE,
+            stream TEXT NOT NULL CHECK(length(stream)>0), entity_id TEXT NOT NULL CHECK(length(entity_id)>0),
+            event_type TEXT NOT NULL CHECK(length(event_type)>0), payload_json TEXT NOT NULL CHECK(length(payload_json)>=2),
+            source_db TEXT NOT NULL CHECK(length(source_db)>0), source_table TEXT NOT NULL CHECK(length(source_table)>0),
+            source_pk TEXT NOT NULL CHECK(length(source_pk)>0), cortex_taint TEXT NOT NULL CHECK(length(cortex_taint)>0),
+            lamport_t INTEGER NOT NULL CHECK(lamport_t>0), prev_hash TEXT NOT NULL CHECK(length(prev_hash)=64),
+            entry_hash TEXT NOT NULL UNIQUE CHECK(length(entry_hash)=64), created_at TEXT NOT NULL,
+            agent_id TEXT NOT NULL DEFAULT '', UNIQUE(lamport_t,agent_id))""")
+        previous = "0" * 64
+        for i in range(2):
+            ev = _event(i)
+            payload = json.dumps(ev.payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False)
+            identity = f"test\x1ft\x1f{i}\x1f{payload}\x1f{ev.cortex_taint}"
+            event_id = str(uuid.uuid5(uuid.UUID("9897d6fd-d6a7-4fe9-86bc-f0c312886d5d"), identity))
+            stored = "C5ENC:" + vault.encrypt(payload.encode()).decode()
+            body = dict(event_id=event_id, stream=ev.stream, entity_id=ev.entity_id, event_type=ev.event_type,
+                        payload_json=stored, source_db=ev.source_db, source_table=ev.source_table,
+                        source_pk=ev.source_pk, cortex_taint=ev.cortex_taint, lamport_t=i + 1,
+                        prev_hash=previous, created_at="2020-01-01T00:00:00Z")
+            encoded = json.dumps(body, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False)
+            digest = hashlib.sha3_256(encoded.encode()).hexdigest()
+            conn.execute("INSERT INTO ledger_entries VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                         (i + 1, event_id, ev.stream, ev.entity_id, ev.event_type, stored, ev.source_db,
+                          ev.source_table, ev.source_pk, ev.cortex_taint, i + 1, previous, digest, body["created_at"], ""))
+            previous = digest
+    monkeypatch.delenv("CORTEX_VAULT_KEY", raising=False)
+    monkeypatch.setitem(sys.modules, "strike_rs", None)
     actor = BFTLedgerActor(db)
+    assert await actor.verify_chain() is True
     await actor.start()
-    for i in range(2):
-        await actor.append(_event(i))
-    await actor.stop()
-    monkeypatch.delenv("CORTEX_VAULT_KEY")
+    try:
+        # Drain initialization without appending a V2 entry requiring a vault key.
+        assert actor._task is not None
+        stopping = asyncio.create_task(actor.stop())
+        await asyncio.wait_for(stopping, timeout=5)
+    finally:
+        await actor.stop()
     assert await BFTLedgerActor(db).verify_chain() is True
 
 

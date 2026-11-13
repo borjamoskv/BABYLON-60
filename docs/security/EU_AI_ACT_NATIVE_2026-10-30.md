@@ -1,5 +1,7 @@
 # Validación nativa local de Secure Enclave
 
+> Alcance de la distribución pública: las referencias marcadas como material no distribuido identifican evidencia o herramientas excluidas deliberadamente de este checkout. Se conservan sus rutas y los resultados históricos; esos soportes no pueden verificarse desde esta distribución.
+
 La validación real del backend local ha terminado con **VERIFIED**. Se conserva la clave existente, se fija su clave pública antes de firmar y se verifica un desafío único mediante un verificador independiente del código Rust. El usuario ha elegido conectar el expediente más adelante: no se provisionan revisores ni se crea un expediente.
 
 ## Instalación preparada
@@ -32,7 +34,7 @@ Comprobación completada a las `2026-10-30T02:50:48Z`.
 - Configuración del backend: `ab7e4bcbc006857e9e2b2935c906dc1490659afc4bc1ecfaffdd9354d4112d52`.
 - Evidencia independiente completa: `3eda8102d2e59190285de8d76c461665b023ca2cd94406ea2478fe986d3d6bd2`.
 
-El informe completo está en `~/.babylon60/regulatory/current/validation/verification.json`. El registro de proceso y la inspección pública se conservan al lado. La [respuesta firmada pública](evidence/regulatory-native-20261030/challenge.json) permite reproducir la comprobación criptográfica sin otra solicitud de autenticación. Es evidencia histórica; no sustituye la validación de otra instalación o binario.
+El informe completo está en `~/.babylon60/regulatory/current/validation/verification.json`. El registro de proceso y la inspección pública se conservan al lado. La respuesta firmada pública (material no distribuido: `evidence/regulatory-native-20261030/challenge.json`) permite reproducir la comprobación criptográfica sin otra solicitud de autenticación. Es evidencia histórica; no sustituye la validación de otra instalación o binario.
 
 Las comprobaciones posteriores rechazaron cambios de nonce, binario, backend, finalidad, firma, clave y declaración de autorización. No se creó un ledger durante el desafío; la inicialización posterior del ledger vacío fue una operación separada. El registro de clave permaneció idéntico.
 

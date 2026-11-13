@@ -152,16 +152,27 @@ Valores iniciales: V = {H1, H2, H3, B4}, n=4, f=1. Quórum Q = 3.
 
 ### [CONDICIONES DE BLINDAJE FORMAL]
 
-1. **Layout 512B con 4 Líneas de Caché Dedicadas (`INV_C5_APPLE_128B_PING_PONG`):**  
-   `SharedManifestRing0` usa un layout de $4 \times 128\text{ B} = 512\text{ B}$ con cuatro líneas de caché ortogonales:
-   - **Línea 0** (`WriterControlLine`, 128B): exclusiva del productor Ring-0 — `control_word` (`bit 0 = active_idx | bits 1..62 = gen | bit 63 = POISON_BIT`).
-   - **Línea 1** (`ReaderPinLine`, 128B): exclusiva del consumidor FFI — `ffi_reader_pin_tick`.
-   - **Línea 2 / 3** (`PayloadSlot A/B`, 2×128B): slots Ping-Pong de datos.
+1. **Layout de 512 B y publicación concurrente (`INV_C5_APPLE_128B_PING_PONG`):**
+   `SharedManifestRing0` conserva cuatro bloques alineados a 128 B:
+   - **Bloque 0** (`WriterControlLine`): `control_word`, con bit 0 de índice, bits 1..61 de generación, bit 62 de escritor ocupado y bit 63 de veneno.
+   - **Bloque 1** (`ReaderPinLine`): tick del pin y un indicador de actividad independiente, dentro del padding existente.
+   - **Bloques 2 y 3**: dos slots privados de palabras `AtomicU64`; la copia pública de valor conserva `PayloadSlot`.
 
-   El escritor de Ring-0 muta el slot inactivo y hace flip del `active_idx` atómicamente. Los lectores leen el slot activo en $\mathcal{O}(1)$ *wait-free* estricto, sin compartir ninguna línea de caché con el escritor.
+   Un CAS admite un escritor y rechaza contención. El escritor escribe el slot
+   inactivo mediante stores atómicos y publica por CAS; ese commit no puede
+   sobrescribir un estado de veneno concurrente. El lector realiza cargas
+   atómicas y una barrera de orden antes de validar de nuevo control/generación.
+   Reintenta hasta el límite del código y devuelve error si no obtiene una
+   instantánea estable. El agotamiento de generación se rechaza sin wrap ABA.
+   La alineación no acredita independencia física de caché ni rendimiento: no se
+   declara lectura *wait-free*, ausencia de RFO ni latencia constante. Comprobar
+   el código canónico y sus pruebas de carreras, contención, veneno y layout.
 
 2. **Centinela de Veneno Ortogonal `POISON_BIT` (`INV_C5_ASYMMETRIC_APOPTOSIS`):**  
-   Con `control_word` de 64 bits donde `bit 0 = active_idx` y `bits 1..62 = generación`, el centinela `0xDEAD_6060` colisiona con la generación legítima $g = \texttt{0x6F56\_B030} \approx 1.87 \times 10^9$ ticks. La corrección reserva el **bit 63** como bandera ortogonal de veneno:
+   La comparación del valor completo con `0xDEAD_6060` colisionaba con una
+   generación legítima. El **bit 63** es la bandera ortogonal de veneno; el bit 62
+   se reserva para exclusión del escritor. Los bits 1..61 de generación nunca
+   envuelven durante una publicación admitida:
 
    ```rust
    pub const POISON_BIT: u64 = 1 << 63;
@@ -169,7 +180,14 @@ Valores iniciales: V = {H1, H2, H3, B4}, n=4, f=1. Quórum Q = 3.
    pub const MAX_FFI_HOLD_TICKS: u64 = 64;
    ```
 
-   Si `ffi_reader_pin_tick` permanece anclado más de `MAX_FFI_HOLD_TICKS` ticks sin `unpin`, el productor Ring-0 escribe `POISON_SENTINEL` en `control_word` y congela la rotación de `active_idx` hasta reinicio del consumidor (circuit-breaker de frontera FFI).
+   Si el indicador de pin está activo y `ffi_reader_pin_tick` lleva más de
+   `MAX_FFI_HOLD_TICKS` ticks sin `unpin`, el productor activa veneno y se
+   rechazan publicaciones posteriores. El tick cero es válido; la actividad no
+   se deduce del valor del tick. Este registro monitoriza un único lector lógico
+   y no es un mecanismo de protección de memoria ni un censo de lectores FFI.
+   El tiempo transcurrido usa resta modular de ticks `u64`; un reloj que
+   retrocede aparenta un lapso grande y se rechaza de forma cerrada. Un escritor
+   ya admitido puede terminar stores internos, pero su commit no retira veneno.
 
 3. **Equivocación como Disparador de ViewChange, Evicción por Consenso (`INV_C5_LARSA_VIEWCHANGE_EVICTION`):**  
    La prueba de equivocación $\mathcal{O}(1)$ permite a cualquier nodo abortar la vista actual e iniciar un `ViewChange(v+1)` adjuntando las dos firmas conflictivas como evidencia irrefutable (neutralizando el liveness lock). Sin embargo, la mutación del conjunto de validadores (evicción / *slashing*) debe comprometerse estrictamente como una transición de estado determinista dentro del bloque de la vista $v+1$, preservando la intersección de quórums.
@@ -216,7 +234,7 @@ La auditoría regulatoria sanciona al sistema por incumplimiento de los Arts. 9,
 
 ### [CONDICIONES DE BLINDAJE FORMAL]
 
-1. **Delimitación Epistémica en el Expediente Técnico (`INV_C5_EVIDENTIARY_DELIMITATION`):** Circunscribir formalmente el alcance de SCITT L5 y LARSA-120 al cumplimiento del Artículo 12 (Trazabilidad y Registro Forense) y del Artículo 15 (Ciberseguridad y Resiliencia). Prohibir en la documentación y contratos cualquier reclamo de que la verificación de tipos o el árbol de Merkle automatizan los Artículos 9, 10 o 14 ([`c5_enterprise_compliance_offer_invariant.md`](../../.agents/rules/c5_enterprise_compliance_offer_invariant.md)).
+1. **Delimitación Epistémica en el Expediente Técnico (`INV_C5_EVIDENTIARY_DELIMITATION`):** Circunscribir formalmente el alcance de SCITT L5 y LARSA-120 al cumplimiento del Artículo 12 (Trazabilidad y Registro Forense) y del Artículo 15 (Ciberseguridad y Resiliencia). Prohibir en la documentación y contratos cualquier reclamo de que la verificación de tipos o el árbol de Merkle automatizan los Artículos 9, 10 o 14 (regla privada no distribuida: `.agents/rules/c5_enterprise_compliance_offer_invariant.md`).
 2. **Protocolo de Fricción Cognitiva en la Interfaz (`INV_C5_COGNITIVE_FRICTION`):** Para acciones de alto riesgo que requieran firma humana en el ledger L5, el kernel debe rechazar confirmaciones booleanas simples (ACK) o firmas emitidas con latencia inferior al umbral fisiológico de lectura cognitiva ($\Delta t_{\text{human}} < \tau_{\min} = 1.0\text{ s}$), exigiendo que el operador firme un compromiso contrafactual junto con una línea de parada de hardware (*kill-switch* en Ring-0 independiente del quórum BFT).
 
 ---
@@ -258,100 +276,35 @@ $$B^* \ge \left\lceil \frac{1 - \epsilon}{\epsilon} \cdot \frac{\tau_{\text{SE-S
 
 ## 6. Implementación Blindada de Referencia (SharedManifest 128B Ping-Pong)
 
-```rust
-#![no_std]
-use core::sync::atomic::{AtomicU64, Ordering, fence};
+La implementación canónica está en
+[`src/shared_manifest_core.rs`](../../src/shared_manifest_core.rs). Su API
+implementada para `SharedManifestRing0` es Rust; no se afirma una exportación C
+de este layout de 512 B. [`src/ffi.rs`](../../src/ffi.rs) conserva la interfaz
+anterior de 64 B y no demuestra integración C del tipo nuevo. Este documento no
+mantiene una segunda implementación de slots ordinarios ni una copia de lectura
+mediante punteros sobre memoria que un escritor puede reutilizar.
 
-pub const BABYLON_POISONED: u64 = 0xDEAD_6060;
-/// Umbral máximo de ticks lógicos que un lector FFI puede retener un slot antes de apoptosis
-pub const MAX_FFI_HOLD_TICKS: u64 = 64;
+El contrato comprobable es:
 
-/// Alineado a 128 bytes: tamaño real de línea de coherencia L1/L2 en Apple Silicon (M1/M2/M3/M4).
-/// Evita False Sharing físico entre planos de control y datos.
-#[repr(C, align(128))]
-pub struct PayloadSlot {
-    pub logical_tick: u64,
-    pub state_hash: [u8; 32],
-    pub metrics: [u64; 10], // Total: 8 + 32 + 80 = 120 bytes (cabe exacto en 1 línea de 128B)
-}
+1. Mantener tamaño de 512 B, alineación de 128 B y offsets del layout C existente.
+2. Usar palabras atómicas privadas para todas las cargas y stores concurrentes
+   del payload. La doble comprobación de generación no convierte en segura una
+   copia ordinaria que tenga una carrera de datos.
+3. Admitir al escritor por CAS y rechazar otro escritor concurrente; publicar por
+   CAS conservando el estado terminal de veneno y rechazar el agotamiento del
+   contador antes de envolverlo.
+4. Validar la instantánea con cargas y barreras del código canónico y un número
+   máximo de intentos; un lector puede devolver error bajo contención.
+5. Monitorizar el pin mediante actividad separada del tick, incluido tick cero,
+   sin atribuir al pin la protección de memoria de los slots.
 
-#[repr(C, align(128))]
-pub struct SharedManifestRing0 {
-    /// Bit 0: índice activo (0 o 1). Bits 1..63: generación monótona o BABYLON_POISONED.
-    pub control_word: AtomicU64,
-    /// Registro de latido del consumidor FFI (0 = inactivo, >0 = tick en el que adquirió lectura).
-    pub ffi_reader_pin_tick: AtomicU64,
-    /// Dos slots en líneas de caché de 128B independientes: el escritor muta !active, el lector lee active.
-    pub slots: [PayloadSlot; 2],
-}
+Conservar tamaño y offsets no conserva el protocolo de acceso. Un consumidor
+externo que copie slots como memoria ordinaria debe adaptarse a los accesos
+atómicos del nuevo protocolo; no debe compartir la región con una versión
+anterior ni asumir compatibilidad binaria completa por el layout.
 
-impl SharedManifestRing0 {
-    /// Ejecutado en Ring-0 (Rust Producer): Wait-free O(1) real, sin invalidar el slot que lee FFI,
-    /// y con auditoría activa de inanición sobre el lector externo.
-    #[inline(always)]
-    pub fn publish_and_audit(&mut self, next_data: &PayloadSlot, current_tick: u64) -> Result<(), u64> {
-        let ctrl = self.control_word.load(Ordering::Acquire);
-        if ctrl == BABYLON_POISONED {
-            return Err(BABYLON_POISONED);
-        }
-
-        // 1. Auditoría de Apoptosis Asimétrica Externa: el productor verifica si el runtime FFI
-        // se ha quedado congelado en el GIL o GC reteniendo un pin de lectura.
-        let pinned_at = self.ffi_reader_pin_tick.load(Ordering::Acquire);
-        if pinned_at != 0 && current_tick.saturating_sub(pinned_at) > MAX_FFI_HOLD_TICKS {
-            self.control_word.store(BABYLON_POISONED, Ordering::SeqCst);
-            return Err(BABYLON_POISONED);
-        }
-
-        // 2. Escritura en el slot inactivo (cero colisión de línea de caché con lectores actuales)
-        let active_idx = (ctrl & 1) as usize;
-        let write_idx = active_idx ^ 1;
-        
-        self.slots[write_idx] = PayloadSlot {
-            logical_tick: current_tick,
-            state_hash: next_data.state_hash,
-            metrics: next_data.metrics,
-        };
-
-        // 3. Flip atómico de generación e índice con barrera Release (STLR en ARM64)
-        let next_ctrl = ((ctrl >> 1).wrapping_add(1) << 1) | (write_idx as u64);
-        self.control_word.store(next_ctrl, Ordering::Release);
-        Ok(())
-    }
-}
-
-/// Frontera C-FFI: Cero exposición de punteros internos ni `Guard` de EBR.
-/// Copia por valor en ventana acotada con barrera SeqCst (DMB ISH) contra reordenamiento Store-Load.
-#[no_mangle]
-pub unsafe extern "C" fn b60_ffi_read_snapshot(
-    manifest: *const SharedManifestRing0,
-    out_buf: *mut PayloadSlot,
-) -> u64 {
-    if manifest.is_null() || out_buf.is_null() {
-        return BABYLON_POISONED;
-    }
-    let m = &*manifest;
-
-    let ctrl_before = m.control_word.load(Ordering::Acquire);
-    if ctrl_before == BABYLON_POISONED {
-        return BABYLON_POISONED;
-    }
-
-    let current_gen_tick = ctrl_before >> 1;
-    // Anclar el tick de entrada y forzar barrera completa en ARM64 antes de leer el slot
-    m.ffi_reader_pin_tick.store(current_gen_tick, Ordering::Release);
-    fence(Ordering::SeqCst);
-
-    let active_idx = (ctrl_before & 1) as usize;
-    core::ptr::copy_nonoverlapping(&m.slots[active_idx], out_buf, 1);
-
-    // Liberar el pin inmediatamente antes de cruzar de vuelta al runtime con GC/GIL
-    m.ffi_reader_pin_tick.store(0, Ordering::Release);
-
-    let ctrl_after = m.control_word.load(Ordering::Acquire);
-    if ctrl_after == BABYLON_POISONED {
-        return BABYLON_POISONED;
-    }
-    0 // OK
-}
-```
+Las pruebas dirigidas deben incluir reutilización concurrente de slots, dos
+escritores, poison durante publicación, agotamiento de generación, tick cero,
+límites de retención y layout. Miri y el estrés aislado con warmup aportan
+evidencia de sus configuraciones; no prueban universalmente ausencia de carreras,
+rendimiento del hardware ni progreso independiente de la planificación.

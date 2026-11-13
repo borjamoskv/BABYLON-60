@@ -1,8 +1,10 @@
 # Lote 3 ejecutado: autorización y publicación — 28/10/2026
 
+> Alcance de la distribución pública: las referencias marcadas como material no distribuido identifican evidencia o herramientas excluidas deliberadamente de este checkout. Se conservan sus rutas y los resultados históricos; esos soportes no pueden verificarse desde esta distribución.
+
 Estado: ejecutado localmente. Véase el
 [informe de corrección](REMEDIATION_SWARM100_LOTE3_2026-10-28.md). Los
-[hashes de selección](evidence/swarm100-lot2-20261028/lot3-selection.json)
+hashes de selección (material no distribuido: `evidence/swarm100-lot2-20261028/lot3-selection.json`)
 fijaron el estado previo. Se agruparon dos P1 originales y el P1 adicional de
 referencia mutable, inicialmente CONFIRMED_STATIC/OPEN. Los tres tienen
 reproducción confinada y corrección ejecutable.

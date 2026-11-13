@@ -1,17 +1,19 @@
 # Lote 8 ejecutado: commits limitados a sus resultados — 29/10/2026
 
+> Alcance de la distribución pública: las referencias marcadas como material no distribuido identifican evidencia o herramientas excluidas deliberadamente de este checkout. Se conservan sus rutas y los resultados históricos; esos soportes no pueden verificarse desde esta distribución.
+
 C0499 y C0500 pasan a FIXED para el reintento que omitía hooks y la inclusión
 de trabajo ajeno mediante staging/commit global. La única fuente productiva
 editada es `scripts/c5_cortex/cortex_objectives_transducer.py`, incluidos sus
 cuatro consumidores internos. El
-[registro reconciliado](evidence/swarm100-round3-20261028/registry.json)
-y la [validación final](evidence/swarm100-lot8-20261029/validation.json)
+registro reconciliado (material no distribuido: `evidence/swarm100-round3-20261028/registry.json`)
+y la validación final (material no distribuido: `evidence/swarm100-lot8-20261029/validation.json`)
 conservan estados, comandos, hashes y límites.
 
 ## Reproducción y aceptación
 
-Las [siete reproducciones previas](evidence/swarm100-lot8-20261029/before-tests.log)
-fallaron contra el [hash del plan](evidence/swarm100-lot8-20261029/before-source-manifest.json):
+Las siete reproducciones previas (material no distribuido: `evidence/swarm100-lot8-20261029/before-tests.log`)
+fallaron contra el hash del plan (material no distribuido: `evidence/swarm100-lot8-20261029/before-source-manifest.json`):
 rechazos de pre-commit/commit-msg que se eludían, archivos ajenos tracked y
 untracked capturados, PROJECT.md ajeno en un comando de YAML y preparación
 previa ajena/parcial consumida. Se usaron repositorios temporales, identidad
@@ -23,7 +25,7 @@ ese módulo bloqueado antes de recoger los tests. Pasan MyPy con
 check-untyped-defs, Ruff y los controles documentales. Fuente y tests conservan
 los mismos hashes antes y después de la suite.
 
-La [revisión independiente](evidence/swarm100-lot8-20261029/independent-review.json)
+La revisión independiente (material no distribuido: `evidence/swarm100-lot8-20261029/independent-review.json`)
 aprueba **10 controles en 21 repositorios temporales**, repite las 61 regresiones
 y Ruff y no deja hallazgos accionables abiertos dentro del alcance acordado.
 También reproduce los dos límites descritos abajo; no los presenta como
@@ -40,7 +42,7 @@ Se sustituye la preparación manual propuesta por `git commit --only`, sin
 `git add`: Git prepara el índice temporal y lo descarta si un hook ordinario
 rechaza el commit. No se modifica hooksPath, no se fuerza configuración de
 firma y no se ejecuta reset, clean o stash. Es un refinamiento documentado
-[antes del parche](evidence/swarm100-lot8-20261029/task-contract.md), que evita
+antes del parche (material no distribuido: `evidence/swarm100-lot8-20261029/task-contract.md`), que evita
 restaurar ciegamente contenido preparado por otros actores.
 
 El helper acepta solo los resultados declarados dentro de la raíz Git exacta.
@@ -67,7 +69,7 @@ Se probaron nombres con espacios y Unicode, contenido binario, worktree
 vinculado y una repetición de warmup más ocho commits secuenciales. Es una
 comprobación de comportamiento y alcance, no un benchmark ni una certificación
 de paralelismo. El
-[control AST y de alcance](evidence/swarm100-lot8-20261029/scope-check.json)
+control AST y de alcance (material no distribuido: `evidence/swarm100-lot8-20261029/scope-check.json`)
 confirma intactas las funciones ajenas al helper y que los consumidores solo
 añaden la selección de resultados. El gate del Lote 7, dependencias y lockfiles
 conservan sus hashes.

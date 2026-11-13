@@ -9,7 +9,7 @@ import aiosqlite
 from cryptography.fernet import Fernet
 import pytest
 
-from babylon60.bft.ledger_actor import BFTLedgerActor, LedgerEvent
+from babylon60.bft.ledger_actor import BFTCausalInvariantError, BFTLedgerActor, LedgerEvent
 
 
 @pytest.fixture(autouse=True)
@@ -293,7 +293,8 @@ async def test_retry_uses_canonical_plaintext_and_original_timestamp(tmp_path, m
 @pytest.mark.asyncio
 @pytest.mark.parametrize("mode", ["missing", "wrong"])
 async def test_unavailable_original_key_rejects_retry_but_not_next_event(tmp_path, monkeypatch, mode):
-    monkeypatch.setenv("CORTEX_VAULT_KEY", Fernet.generate_key().decode())
+    original_key = Fernet.generate_key().decode()
+    monkeypatch.setenv("CORTEX_VAULT_KEY", original_key)
     actor = BFTLedgerActor(tmp_path / "key-unavailable.db")
     pending = []
     try:
@@ -309,6 +310,10 @@ async def test_unavailable_original_key_rejects_retry_but_not_next_event(tmp_pat
         pending.append(actor.append(event()))
         with pytest.raises(ValueError, match="C5ENC"):
             await bounded(pending[-1])
+        with pytest.raises(BFTCausalInvariantError, match="INV_BFT_LEAN_04.*C5ENC"):
+            await actor.verify_chain()
+        # V2 authenticates semantic content by decrypting; resume with the original key.
+        monkeypatch.setenv("CORTEX_VAULT_KEY", original_key)
         pending.append(actor.append(event(2)))
         assert (await bounded(pending[-1]))["seq"] == 2
         async with aiosqlite.connect(actor._db_path) as db:

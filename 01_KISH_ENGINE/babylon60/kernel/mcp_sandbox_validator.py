@@ -5,8 +5,11 @@ with a trusted probe before dispatch. Unsupported platforms fail closed.
 """
 
 import asyncio
+from collections.abc import Iterator
 import concurrent.futures
+from contextlib import contextmanager
 import ctypes
+import errno
 import json
 import math
 import os
@@ -25,6 +28,37 @@ from .mcp_deductive_engine import McpCandidateContract
 SANDBOX_EXEC = "/usr/bin/sandbox-exec"
 MAX_BYTES = 1024 * 1024
 MAX_TIMEOUT = 30.0
+
+
+@contextmanager
+def _unix_listener(prefix: str = "babylon60_ipc_") -> Iterator[tuple[socket.socket, str]]:
+    """Own a private listener whose canonical pathname fits AF_UNIX, including NUL."""
+    if (
+        not prefix
+        or prefix in {".", ".."}
+        or any(char in prefix for char in "/\\\0")
+        or any(ord(char) < 32 for char in prefix)
+    ):
+        raise ValueError("Unix socket directory prefix must be a simple basename")
+    limits = {"darwin": 103, "linux": 107}
+    if sys.platform not in limits:
+        raise RuntimeError("Unsupported Unix socket pathname limit")
+    limit = limits[sys.platform]
+    # Only the reachable network witness may move to a shorter temporary base.
+    # The canary and confined work/code directories retain their own lifecycle.
+    for directory in (None, "/tmp"):
+        with tempfile.TemporaryDirectory(prefix=prefix, dir=directory) as raw_root:
+            root = Path(os.path.realpath(raw_root))
+            path = str(root / "sock")
+            if len(os.fsencode(path)) > limit:
+                continue
+            with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as listener:
+                listener.bind(path)
+                listener.listen(1)
+                yield listener, path
+            return
+    raise OSError(errno.ENAMETOOLONG, "No private temporary Unix socket path fits the OS limit")
+
 
 # This trusted bootstrap sets hard resource limits before loading generated code.
 _BOOTSTRAP = """import resource, sys
@@ -251,11 +285,19 @@ async def _run_confined(
                 os.killpg(process.pid, signal.SIGKILL)
             except ProcessLookupError:
                 pass
-            await process.wait()
             for task in tasks:
                 if not task.done():
                     task.cancel()
             await asyncio.gather(*tasks, return_exceptions=True)
+
+            async def discard_remaining(stream: asyncio.StreamReader | None) -> None:
+                if stream is not None:
+                    while await stream.read(65536):
+                        pass
+
+            # Paused pipe transports may retain output after SIGKILL. Stop the
+            # original readers, then drain before waiting for process teardown.
+            await asyncio.gather(discard_remaining(process.stdout), discard_remaining(process.stderr), process.wait())
 
         reaping = asyncio.create_task(cleanup())
         cancelled = False
@@ -360,13 +402,10 @@ class McpSandboxValidator:
                 # ECONNREFUSED is not accepted as proof of a network denial.
                 with (
                     socket.socket(socket.AF_INET, socket.SOCK_STREAM) as tcp,
-                    socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as unix,
+                    _unix_listener() as (unix, unix_path),
                 ):
                     tcp.bind(("127.0.0.1", 0))
                     tcp.listen(1)
-                    unix_path = str(outside / "sock")
-                    unix.bind(unix_path)
-                    unix.listen(1)
                     probe.write_text(_probe_source(canary, escaped, work, executable, tcp.getsockname()[1], unix_path))
                     probe.chmod(0o400)
                     profile = _profile(executable, base, str(code), str(work))

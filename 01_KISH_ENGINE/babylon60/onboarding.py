@@ -28,6 +28,7 @@ from babylon60.experience import (
     load_presentation_guide,
     load_session_profile,
 )
+from babylon60.state_paths import causal_gate_path, state_home
 
 _NAME = "babylon60"
 _MODULE = "babylon60.mcp.cortex_mcp_server"
@@ -55,7 +56,7 @@ def _absolute(path: str | Path) -> Path:
 
 def _locations() -> tuple[Path, Path, Path]:
     codex_home = _absolute(os.environ.get("CODEX_HOME", str(Path.home() / ".codex")))
-    data_home = _absolute(os.environ.get("BABYLON_HOME", str(Path.home() / ".babylon60")))
+    data_home = state_home()
     return codex_home, data_home, data_home / "integrations" / "codex.json"
 
 
@@ -269,7 +270,7 @@ def _transport(data_home: Path) -> dict[str, object]:
         "args": ["-m", _MODULE, "--ledger", str(data_home / "mcp_ledger.db")],
         "env": {
             "BABYLON_HOME": str(data_home),
-            "BABYLON_CAUSAL_GATE_DB": str(data_home / "causal_gate.db"),
+            "BABYLON_CAUSAL_GATE_DB": str(causal_gate_path()),
         },
     }
 
@@ -343,8 +344,9 @@ def setup_codex(*, dry_run: bool = False, remove: bool = False) -> dict[str, obj
         executable = _codex()
         config_before = _read(home / "config.toml")
         previous = _get(executable, home)
-        expected = _transport(data_home)
         owned_transport = record.get("transport") if record else None
+        # Removal compares the recorded transport; it never selects an authority DB.
+        expected = cast(dict[str, object], owned_transport) if remove else _transport(data_home)
         owned = bool(record and record["managed_mcp"])
         if previous is not None and previous != expected and (not owned or previous != owned_transport):
             raise _IntegrationError(
@@ -400,8 +402,8 @@ def setup_codex(*, dry_run: bool = False, remove: bool = False) -> dict[str, obj
                 steps.extend(
                     [
                         f"Entorno MCP: BABYLON_HOME={data_home}",
-                        f"Entorno MCP: BABYLON_CAUSAL_GATE_DB={data_home / 'causal_gate.db'}",
-                        f"Registrar codex mcp add babylon60 --env BABYLON_HOME={data_home} --env BABYLON_CAUSAL_GATE_DB={data_home / 'causal_gate.db'} -- {expected['command']} -m {_MODULE} --ledger {data_home / 'mcp_ledger.db'}",
+                        f"Entorno MCP: BABYLON_CAUSAL_GATE_DB={causal_gate_path()}",
+                        f"Registrar codex mcp add babylon60 --env BABYLON_HOME={data_home} --env BABYLON_CAUSAL_GATE_DB={causal_gate_path()} -- {expected['command']} -m {_MODULE} --ledger {data_home / 'mcp_ledger.db'}",
                     ]
                 )
         steps.append(f"Guardar propiedad de la integración en {state_path}; conservar el ledger")
