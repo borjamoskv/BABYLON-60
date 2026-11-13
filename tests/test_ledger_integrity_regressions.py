@@ -3,16 +3,23 @@
 from __future__ import annotations
 
 import sqlite3
+import uuid
 from pathlib import Path
 from unittest.mock import MagicMock
 
 import pytest
 
-from babylon60.bft.cortex_crypto_kernel import ZERO_HASH_256, compute_cortex_hash
+from babylon60.bft.cortex_crypto_kernel import (
+    ZERO_HASH_256,
+    compute_cortex_hash,
+    legacy_unit_separator_key,
+    observation_commitment,
+)
 from babylon60.bft.cortex_persist_ledger import CortexEvent, CortexPersistLedger
 from babylon60.bft.integrity import LedgerCheckpoint
 from babylon60.bft.ledger_actor import (
     LEDGER_ENTRY_HASH_VERSION,
+    NAMESPACE_UUID,
     ZERO_HASH,
     BFTCausalInvariantError,
     BFTLedgerActor,
@@ -76,8 +83,8 @@ def test_checkpoint_rejects_a_recomputed_chain_and_unpinned_verify_accepts_it(tm
                 hash_version=version,
             )
             conn.execute(
-                "UPDATE cortex_ledger SET payload_json=?, prev_hash=?, entry_hash=? WHERE seq=?",
-                (payload_json, prev, digest, seq),
+                "UPDATE cortex_ledger SET payload_json=?, prev_hash=?, entry_hash=?, observation_hash=? WHERE seq=?",
+                (payload_json, prev, digest, observation_commitment(digest, timestamp, agent), seq),
             )
             prev = digest
     assert ledger.verify_integrity() is True
@@ -105,8 +112,11 @@ def test_v3_binds_timestamp_and_v2_rows_still_verify(tmp_path: Path) -> None:
 
     ledger.append_event(_event("fresh"))
     with sqlite3.connect(path) as conn:
-        version = conn.execute("SELECT hash_version FROM cortex_ledger WHERE seq=2").fetchone()[0]
+        version, entry_hash, agent_id, sealed = conn.execute(
+            "SELECT hash_version, entry_hash, agent_id, observation_hash FROM cortex_ledger WHERE seq=2"
+        ).fetchone()
         assert version == 3
+        assert sealed == observation_commitment(entry_hash, conn.execute("SELECT timestamp FROM cortex_ledger WHERE seq=2").fetchone()[0], agent_id)
         conn.execute("UPDATE cortex_ledger SET timestamp='1970-01-01T00:00:00+00:00' WHERE seq=2")
     assert ledger.verify_integrity() is False
 
@@ -123,6 +133,18 @@ def test_unit_separator_no_longer_collapses_distinct_events(tmp_path: Path) -> N
     replay = ledger.append_event(_event("same", cortex_taint="a\x1fb", agent_id="c"))
     assert replay["status"] == "DUPLICATE_IGNORED"
     assert replay["event_id"] == first["event_id"]
+
+
+def test_batch_uuid_collision_compares_identity(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    ledger = CortexPersistLedger(tmp_path / "batch-collision.db")
+    monkeypatch.setattr(
+        "babylon60.bft.cortex_persist_ledger.uuid.uuid5",
+        lambda *_args, **_kwargs: "same-batch-id",
+    )
+    with pytest.raises(ValueError, match="INV_BFT_04"):
+        ledger.append_batch([_event("one"), _event("two")])
+    with sqlite3.connect(tmp_path / "batch-collision.db") as conn:
+        assert conn.execute("SELECT COUNT(*) FROM cortex_ledger").fetchone()[0] == 0
 
 
 def test_duplicate_event_id_with_different_content_is_rejected(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
@@ -278,4 +300,49 @@ async def test_actor_timestamp_rewrite_fails_and_legacy_v1_row_still_verifies(tm
         conn.execute("DROP TRIGGER trg_ledger_immutable_update")
         conn.execute("UPDATE ledger_entries SET created_at='1999-01-01T00:00:00Z' WHERE hash_version=2")
     with pytest.raises(BFTCausalInvariantError, match="INV_BFT_LEAN_04"):
+        await BFTLedgerActor(path).verify_chain()
+
+
+@pytest.mark.asyncio
+async def test_historical_retry_returns_the_persisted_event_id(tmp_path: Path) -> None:
+    path = tmp_path / "legacy-id.db"
+    actor = BFTLedgerActor(path)
+    await actor.start()
+    await actor.stop()
+    payload = '{"n":1}'
+    legacy_id = str(uuid.uuid5(NAMESPACE_UUID, legacy_unit_separator_key("db", "table", "pk", payload, "taint")))
+    created = "2020-01-01T00:00:00Z"
+    digest = _compute_entry_hash(
+        legacy_id, "s", "entity", "T", payload, "db", "table", "pk", "taint", 1, ZERO_HASH, created, hash_version=1
+    )
+    with sqlite3.connect(path) as conn:
+        conn.execute(
+            "INSERT INTO ledger_entries (event_id, stream, entity_id, event_type, payload_json, source_db, "
+            "source_table, source_pk, cortex_taint, lamport_t, prev_hash, entry_hash, created_at, agent_id, "
+            "hash_version) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            (legacy_id, "s", "entity", "T", payload, "db", "table", "pk", "taint", 1, ZERO_HASH, digest, created, "", 1),
+        )
+    retry = BFTLedgerActor(path)
+    await retry.start()
+    receipt = await retry.append(
+        LedgerEvent("s", "entity", "T", {"n": 1}, "taint", "db", "table", "pk", agent_id="later")
+    )
+    await retry.stop()
+    assert receipt["event_id"] == legacy_id
+    assert receipt["entry_hash"] == digest
+    with sqlite3.connect(path) as conn:
+        assert conn.execute("SELECT COUNT(*) FROM ledger_entries").fetchone()[0] == 1
+
+
+@pytest.mark.asyncio
+async def test_fractional_hash_version_is_rejected(tmp_path: Path) -> None:
+    path = tmp_path / "fraction.db"
+    actor = BFTLedgerActor(path)
+    await actor.start()
+    await actor.append(LedgerEvent("s", "e", "T", {"n": 1}, "taint", "db", "table", "pk", agent_id="a"))
+    await actor.stop()
+    with sqlite3.connect(path) as conn:
+        conn.execute("DROP TRIGGER trg_ledger_immutable_update")
+        conn.execute("UPDATE ledger_entries SET hash_version=2.5")
+    with pytest.raises(ValueError, match="Unsupported ledger entry hash version"):
         await BFTLedgerActor(path).verify_chain()

@@ -39,7 +39,7 @@ def test_replay_matches_across_batch_boundaries_at_the_same_clock(tmp_path: Path
     monkeypatch.setattr(persistence, "datetime", LaterClock)
     later = CortexPersistLedger(tmp_path / "later.db")
     later.append_batch(_events())
-    assert later.get_merkle_root() != first.get_merkle_root()
+    assert later.get_merkle_root() == first.get_merkle_root()
     assert first.verify_integrity() and second.verify_integrity() and later.verify_integrity()
 
 
@@ -132,7 +132,7 @@ def test_v2_hash_binds_logical_tick_not_observation_time() -> None:
     assert digest(1, "earlier", 2) == digest(1, "later", 2)
     assert digest(1, "earlier", 2) != digest(2, "earlier", 2)
     assert digest(1, "earlier", 1) != digest(1, "later", 1)
-    assert digest(1, "earlier", 3) != digest(1, "later", 3)
+    assert digest(1, "earlier", 3) == digest(1, "later", 3)
     assert digest(1, "earlier", 3) != digest(1, "earlier", 2)
     with pytest.raises(ValueError, match="Unsupported"):
         digest(1, "earlier", 999)

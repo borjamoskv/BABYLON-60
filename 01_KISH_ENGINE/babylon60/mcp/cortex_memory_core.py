@@ -322,10 +322,15 @@ def verify_chain_readonly(
     head hash, kept outside SQLite) fails the check on mismatch. Without that
     pin, a full rewrite is undetectable.
     """
+    if not conn.in_transaction:
+        conn.execute("BEGIN")
     prev_hash, last_lamport, expected_seq = ZERO_HASH_256, 0, 1
+    columns = {row[1] for row in conn.execute("PRAGMA table_info(cortex_ledger)")}
+    observation_sql = "observation_hash" if "observation_hash" in columns else "NULL AS observation_hash"
     cur = conn.execute(
         "SELECT seq, event_id, event_type, payload_json, cortex_taint, agent_id, domain, lamport_t, "
-        "prev_hash, entry_hash, timestamp, hash_version FROM cortex_ledger ORDER BY seq ASC"
+        "prev_hash, entry_hash, timestamp, hash_version, "
+        f"{observation_sql} FROM cortex_ledger ORDER BY seq ASC"
     )
     while rows := cur.fetchmany(1000):
         for (
@@ -341,6 +346,7 @@ def verify_chain_readonly(
             entry_hash,
             timestamp,
             hash_version,
+            observation_hash,
         ) in rows:
             ok, _err = verify_row_invariants(
                 seq=seq,
@@ -358,6 +364,7 @@ def verify_chain_readonly(
                 last_lamport=last_lamport,
                 expected_prev_hash=prev_hash,
                 hash_version=hash_version,
+                observation_hash=observation_hash,
             )
             if not ok:
                 return False, expected_seq - 1

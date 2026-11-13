@@ -99,11 +99,11 @@ def compute_cortex_hash(
     domain: str = "babylon60.com",
     hash_version: int = 1,
 ) -> str:
-    """Row digest. v1 is historical. v2 binds logical_tick and omits the wall clock.
+    """Row digest. v1 is historical. v2 and v3 bind logical_tick and omit the wall clock.
 
-    v3 keeps the logical tick as the causal order and also binds the stored
-    timestamp and agent_id, so rewriting those columns breaks the chain.
-    Existing v2 rows still verify under version 2.
+    agent_id is inside the digest. The stored timestamp is not: v3 authenticates
+    it with observation_commitment so a replay at another wall time keeps the
+    same chain and Merkle root. Existing v1 and v2 rows still verify as written.
     """
     if type(hash_version) is not int or hash_version not in (1, 2, 3):
         raise ValueError(f"Unsupported Cortex hash version: {hash_version}")
@@ -122,12 +122,25 @@ def compute_cortex_hash(
     if hash_version in (2, 3):
         if type(lamport_t) is not int or lamport_t <= 0:
             raise ValueError("Cortex logical_tick must be a positive integer")
+        del body["timestamp"]
         del body["lamport_t"]
         body["logical_tick"] = lamport_t
         body["hash_version"] = hash_version
-        if hash_version == 2:
-            del body["timestamp"]
     return compute_envelope_hash(body)
+
+
+def observation_commitment(entry_hash: str, timestamp: str, agent_id: str) -> str:
+    """Bind the stored wall time to a chain digest without putting that clock in the chain."""
+    if type(entry_hash) is not str or type(timestamp) is not str or type(agent_id) is not str:
+        raise TypeError("observation commitment fields must be strings")
+    return compute_envelope_hash(
+        {
+            "schema": "babylon60:cortex-observation:v3",
+            "entry_hash": entry_hash,
+            "timestamp": timestamp,
+            "agent_id": agent_id,
+        }
+    )
 
 
 def build_merkle_tree(entry_hashes: list[str]) -> str:
@@ -294,6 +307,7 @@ def verify_row_invariants(
     last_lamport: int,
     expected_prev_hash: str,
     hash_version: int = 1,
+    observation_hash: str | None = None,
 ) -> Tuple[bool, str]:
     """
     Verifica todos los invariantes criptográficos de una fila.
@@ -327,6 +341,16 @@ def verify_row_invariants(
     )
     if computed != entry_hash:
         return False, f"Entry hash mismatch: computed {computed}, stored {entry_hash}"
+
+    if hash_version == 3:
+        if type(observation_hash) is not str:
+            return False, "Observation commitment missing"
+        try:
+            expected_observation = observation_commitment(computed, timestamp, agent_id)
+        except TypeError as exc:
+            return False, str(exc)
+        if observation_hash != expected_observation:
+            return False, f"Observation commitment mismatch: computed {expected_observation}, stored {observation_hash}"
 
     return True, ""
 

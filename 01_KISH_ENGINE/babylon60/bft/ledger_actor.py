@@ -157,7 +157,7 @@ def _compute_entry_hash_wrapper(
         prev_hash,
         created_at,
         agent_id,
-        int(hash_version),
+        hash_version,
     )
 
 
@@ -268,7 +268,7 @@ class BFTLedgerActor:
                 entry_hash = row[12]
                 created_at = row[13]
                 agent_id = row[14]
-                row_hash_version = int(row[15])
+                row_hash_version = row[15]
                 if seq != expected_seq:
                     raise BFTCausalInvariantError(
                         f"INV_BFT_LEAN_03 (seq_monotone): Sequence gap at expected seq {expected_seq}"
@@ -547,7 +547,7 @@ class BFTLedgerActor:
         event: LedgerEvent,
         payload_json: str,
         vault: Fernet | None,
-    ) -> tuple[int, str] | None:
+    ) -> tuple[int, str, str] | None:
         cursor = await db.execute(
             "SELECT seq, entry_hash, payload_json, stream, entity_id, event_type, "
             "source_db, source_table, source_pk, cortex_taint, created_at, agent_id, "
@@ -568,7 +568,9 @@ class BFTLedgerActor:
             event.cortex_taint,
         )
         stored_agent = str(row[11])
-        stored_version = int(row[12])
+        stored_version = row[12]
+        if type(stored_version) is not int or stored_version not in (1, 2):
+            raise ValueError(f"Unsupported ledger entry hash version: {stored_version}")
         agent_mismatch = stored_agent != event.agent_id and (stored_version >= 2 or stored_agent != "")
         if (
             self._plaintext(str(row[2]), vault) != payload_json
@@ -577,7 +579,7 @@ class BFTLedgerActor:
             or agent_mismatch
         ):
             raise ValueError(f"Fail-fast: INV_BFT_04 Collision on event_id {event_id}: payload or metadata mismatch")
-        return int(row[0]), str(row[1])
+        return int(row[0]), str(row[1]), event_id
 
     async def _execute_insert_tx(
         self,
@@ -590,7 +592,7 @@ class BFTLedgerActor:
         payload_json: str | None = None,
         vault: Fernet | None = None,
         legacy_event_id: str | None = None,
-    ) -> tuple[int, str]:
+    ) -> tuple[int, str, str]:
         if db.in_transaction:
             raise RuntimeError("FAIL-FAST: writer entered with an active transaction")
         canonical_payload = payload_json if payload_json is not None else self._plaintext(stored_payload, vault)
@@ -655,7 +657,7 @@ class BFTLedgerActor:
                 await db.commit()
                 return existing
             await db.commit()
-            return int(db_row[0]), str(db_row[1])
+            return int(db_row[0]), str(db_row[1]), event_id
         except BaseException:
             try:
                 if db.in_transaction:
@@ -702,7 +704,7 @@ class BFTLedgerActor:
             stored_payload = f"C5ENC:{stored_payload}"
         else:
             stored_payload = payload_json
-        seq, entry_hash = await self._execute_insert_tx(
+        seq, entry_hash, persisted_id = await self._execute_insert_tx(
             db,
             event_id,
             event,
@@ -726,4 +728,4 @@ class BFTLedgerActor:
             logging.warning(f"Failed to publish IPC binary packet via iceoryx2: {e}")
 
         if not future.done():
-            future.set_result({"seq": seq, "event_id": event_id, "entry_hash": entry_hash})
+            future.set_result({"seq": seq, "event_id": persisted_id, "entry_hash": entry_hash})

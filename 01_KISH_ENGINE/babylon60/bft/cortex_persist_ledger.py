@@ -36,6 +36,7 @@ from babylon60.bft.cortex_crypto_kernel import (
     _canonical_json,
     canonical_idempotency_key,
     compute_cortex_hash as compute_cortex_hash,
+    observation_commitment,
     build_merkle_tree,
     generate_merkle_proof,
     legacy_unit_separator_key,
@@ -60,7 +61,7 @@ def _event_ids(event: CortexEvent, payload_json: str) -> tuple[str, str]:
     legacy = str(uuid.uuid5(NAMESPACE_CORTEX, legacy_unit_separator_key(*fields)))
     return current, legacy
 
-CortexLedgerRow = Tuple[str, str, str, str, str, str, int, str, str, str, int]
+CortexLedgerRow = Tuple[str, str, str, str, str, str, int, str, str, str, int, str]
 CORTEX_HASH_VERSION = 3
 
 
@@ -166,16 +167,19 @@ class CortexPersistLedger:
                     prev_hash TEXT NOT NULL,
                     entry_hash TEXT NOT NULL UNIQUE,
                     timestamp TEXT NOT NULL,
-                    hash_version INTEGER NOT NULL DEFAULT 1
+                    hash_version INTEGER NOT NULL DEFAULT 1,
+                    observation_hash TEXT
                 );
                 """
             )
             # Preserve historical bytes/hashes. Existing rows remain v1; all
-            # new inserts explicitly select v2 (logical clock only).
+            # new inserts explicitly select v3 (logical chain plus observation seal).
             columns = {row[1] for row in conn.execute("PRAGMA table_info(cortex_ledger)")}
             if "hash_version" not in columns:
                 conn.execute("ALTER TABLE cortex_ledger ADD COLUMN hash_version INTEGER NOT NULL DEFAULT 1")
                 logger.info("Cortex hash schema upgraded: existing rows retain version 1")
+            if "observation_hash" not in columns:
+                conn.execute("ALTER TABLE cortex_ledger ADD COLUMN observation_hash TEXT")
             conn.execute("CREATE INDEX IF NOT EXISTS idx_cortex_event_type_seq ON cortex_ledger (event_type, seq DESC)")
             # Triggers de inmutabilidad BFT
             conn.execute(
@@ -375,13 +379,15 @@ class CortexPersistLedger:
             domain=event.domain,
             hash_version=CORTEX_HASH_VERSION,
         )
+        sealed = observation_commitment(entry_hash, timestamp, event.agent_id)
 
         cursor.execute(
             """
             INSERT INTO cortex_ledger (
                 event_id, event_type, payload_json, cortex_taint,
-                agent_id, domain, lamport_t, prev_hash, entry_hash, timestamp, hash_version
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                agent_id, domain, lamport_t, prev_hash, entry_hash, timestamp, hash_version,
+                observation_hash
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
                 event_id,
@@ -395,6 +401,7 @@ class CortexPersistLedger:
                 entry_hash,
                 timestamp,
                 CORTEX_HASH_VERSION,
+                sealed,
             ),
         )
         return {
@@ -413,7 +420,7 @@ class CortexPersistLedger:
         prev_hash: str,
         current_seq: int,
         timestamp: str,
-        batch_index: Dict[str, Tuple[int, str, int]] | None = None,
+        batch_index: Dict[str, Tuple[int, str, int, Tuple[str, str, str, str, str]]] | None = None,
     ) -> BatchProcessResult:
         if not ev.cortex_taint:
             raise ValueError("INV_BFT_03: cortex_taint es obligatorio")
@@ -425,8 +432,13 @@ class CortexPersistLedger:
         # visibles en la DB (las filas se insertan diferidas al final). Sin este
         # índice, el segundo ejemplar llegaba al executemany y abortaba todo el
         # lote con IntegrityError (UNIQUE event_id) en vez de DUPLICATE_IGNORED.
+        identity = (ev.event_type, payload_json, ev.cortex_taint, ev.agent_id, ev.domain)
         if batch_index is not None and event_id in batch_index:
-            orig_seq, orig_hash, orig_lamport = batch_index[event_id]
+            orig_seq, orig_hash, orig_lamport, prior_identity = batch_index[event_id]
+            if prior_identity != identity:
+                raise ValueError(
+                    f"Fail-fast: INV_BFT_04 Collision on event_id {event_id}: payload or metadata mismatch"
+                )
             return {
                 "seq": orig_seq,
                 "event_id": event_id,
@@ -463,6 +475,7 @@ class CortexPersistLedger:
             domain=ev.domain,
             hash_version=CORTEX_HASH_VERSION,
         )
+        sealed = observation_commitment(entry_hash, timestamp, ev.agent_id)
 
         row: CortexLedgerRow = (
             event_id,
@@ -476,9 +489,10 @@ class CortexPersistLedger:
             entry_hash,
             timestamp,
             CORTEX_HASH_VERSION,
+            sealed,
         )
         if batch_index is not None:
-            batch_index[event_id] = (current_seq, entry_hash, last_lamport)
+            batch_index[event_id] = (current_seq, entry_hash, last_lamport, identity)
         return {
             "seq": current_seq,
             "event_id": event_id,
@@ -499,7 +513,7 @@ class CortexPersistLedger:
     ) -> Tuple[List[EventResult], List[CortexLedgerRow]]:
         results: List[EventResult] = []
         rows_to_insert: List[CortexLedgerRow] = []
-        batch_index: Dict[str, Tuple[int, str, int]] = {}
+        batch_index: Dict[str, Tuple[int, str, int, Tuple[str, str, str, str, str]]] = {}
         for ev in events:
             res = self._process_batch_event(ev, cursor, last_lamport, prev_hash, current_seq, timestamp, batch_index)
             row = res["row"]
@@ -555,8 +569,9 @@ class CortexPersistLedger:
                     """
                     INSERT INTO cortex_ledger (
                         event_id, event_type, payload_json, cortex_taint,
-                        agent_id, domain, lamport_t, prev_hash, entry_hash, timestamp, hash_version
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                        agent_id, domain, lamport_t, prev_hash, entry_hash, timestamp, hash_version,
+                        observation_hash
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                     """,
                     rows_to_insert,
                 )
@@ -590,8 +605,10 @@ class CortexPersistLedger:
             raise TypeError("expected_checkpoint must be a LedgerCheckpoint")
         with closing(self._get_connection()) as conn, conn:
             cursor = conn.cursor()
+            if not conn.in_transaction:
+                conn.execute("BEGIN")
             cursor.execute(
-                "SELECT seq, event_id, event_type, payload_json, cortex_taint, agent_id, domain, lamport_t, prev_hash, entry_hash, timestamp, hash_version FROM cortex_ledger ORDER BY seq ASC"
+                "SELECT seq, event_id, event_type, payload_json, cortex_taint, agent_id, domain, lamport_t, prev_hash, entry_hash, timestamp, hash_version, observation_hash FROM cortex_ledger ORDER BY seq ASC"
             )
 
             prev_hash = ZERO_HASH_256
@@ -613,6 +630,7 @@ class CortexPersistLedger:
                         entry_hash,
                         timestamp,
                         hash_version,
+                        observation_hash,
                     ) = row
 
                     is_valid, error = verify_row_invariants(
@@ -631,6 +649,7 @@ class CortexPersistLedger:
                         last_lamport=last_lamport,
                         expected_prev_hash=prev_hash,
                         hash_version=hash_version,
+                        observation_hash=observation_hash,
                     )
 
                     if not is_valid:
@@ -783,7 +802,7 @@ class CortexPersistLedger:
             mmr_root = mmr.get_root()
 
             cursor.execute(
-                "SELECT seq, event_id, event_type, payload_json, cortex_taint, agent_id, domain, lamport_t, prev_hash, entry_hash, timestamp, hash_version FROM cortex_ledger ORDER BY seq ASC"
+                "SELECT seq, event_id, event_type, payload_json, cortex_taint, agent_id, domain, lamport_t, prev_hash, entry_hash, timestamp, hash_version, observation_hash FROM cortex_ledger ORDER BY seq ASC"
             )
 
             prev_hash = ZERO_HASH_256
@@ -806,6 +825,7 @@ class CortexPersistLedger:
                         entry_hash,
                         timestamp,
                         hash_version,
+                        observation_hash,
                     ) = r_row
 
                     row_is_valid, _ = verify_row_invariants(
@@ -824,6 +844,7 @@ class CortexPersistLedger:
                         expected_prev_hash=prev_hash,
                         last_lamport=last_lamport,
                         hash_version=hash_version,
+                        observation_hash=observation_hash,
                     )
 
                     if not row_is_valid:
