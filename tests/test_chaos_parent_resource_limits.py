@@ -1,10 +1,12 @@
 """Bound worker-controlled bytes in the parent, outside the native-code worker.
 
-These are real Darwin-provider regressions. A returned status remains a worker
-observation and never serves as authorization or cryptographic attestation.
+Workers use the real Darwin provider. Injected RSS readings exercise parent
+rejection and cleanup; they do not measure a physical memory limit. A returned
+status never serves as authorization or cryptographic attestation.
 """
 
 import asyncio
+import errno
 import os
 import sys
 
@@ -178,3 +180,101 @@ async def test_cancellation_reaps_the_actual_worker(real_processes: list[asyncio
             task.cancel()
             await asyncio.gather(task, return_exceptions=True)
     assert_reaped(real_processes)
+
+
+@pytest.mark.asyncio
+async def test_parent_stops_reported_high_rss_and_reaps(
+    real_processes: list[asyncio.subprocess.Process], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    samples = 0
+
+    def reported_rss(_pid: int) -> int:
+        nonlocal samples
+        samples += 1
+        return 0 if samples == 1 else chaos._MAX_RESIDENT_BYTES + 1
+
+    monkeypatch.setattr(chaos, "_resident_bytes", reported_rss)
+    result = await chaos.run_chaos_monad("while True: pass", timeout_ms=1000)
+    assert samples >= 2
+    assert result["status"] == "SecurityError"
+    assert result["error"] == "MemoryError: Execution resident memory exceeds 256 MiB cutoff"
+    assert result["stdout"] == "" and result["scitt_receipt"] == {}
+    assert_reaped(real_processes)
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("phase", ["before-dispatch", "during-execution"])
+async def test_parent_memory_monitor_failure_rejects_and_reaps(
+    real_processes: list[asyncio.subprocess.Process], monkeypatch: pytest.MonkeyPatch, phase: str
+) -> None:
+    samples = 0
+    deliveries: list[bytes] = []
+    feed_source = chaos._feed_source
+
+    async def observed_delivery(stream: asyncio.StreamWriter, source: bytes) -> None:
+        deliveries.append(source)
+        await feed_source(stream, source)
+
+    def failed_observation(_pid: int) -> int:
+        nonlocal samples
+        samples += 1
+        if phase == "during-execution" and samples == 1:
+            return 0
+        if phase == "during-execution":
+            raise AttributeError("injected missing libproc API")
+        raise OSError(errno.EPERM, "injected libproc permission failure")
+
+    monkeypatch.setattr(chaos, "_resident_bytes", failed_observation)
+    monkeypatch.setattr(chaos, "_feed_source", observed_delivery)
+    result = await chaos.run_chaos_monad("while True: pass", timeout_ms=1000)
+    assert result["status"] == "SecurityError"
+    assert result["error"] == "MemoryError: OS memory supervision unavailable"
+    assert result["stdout"] == "" and result["scitt_receipt"] == {}
+    if phase == "before-dispatch":
+        assert deliveries == [], "Generated code was delivered before memory supervision was available"
+    else:
+        assert deliveries == [b"while True: pass"]
+    assert_reaped(real_processes)
+
+
+@pytest.mark.asyncio
+async def test_exact_resident_memory_budget_is_admitted(
+    real_processes: list[asyncio.subprocess.Process], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(chaos, "_resident_bytes", lambda _pid: chaos._MAX_RESIDENT_BYTES)
+    result = await chaos.run_chaos_monad("print('bounded')", timeout_ms=1000)
+    assert result == {"status": "Success", "stdout": "bounded\n", "error": "", "scitt_receipt": {}}
+    assert_reaped(real_processes)
+
+
+@pytest.mark.asyncio
+async def test_repeated_cancellation_stops_memory_supervision_and_reaps(
+    real_processes: list[asyncio.subprocess.Process], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    observed = asyncio.Event()
+    samples: list[int] = []
+
+    def reported_rss(pid: int) -> int:
+        samples.append(pid)
+        if len(samples) >= 2:
+            observed.set()
+        return 0
+
+    monkeypatch.setattr(chaos, "_resident_bytes", reported_rss)
+    task = asyncio.create_task(chaos.run_chaos_monad("while True: pass", timeout_ms=1000))
+    try:
+        await asyncio.wait_for(observed.wait(), timeout=5)
+        assert len(samples) >= 2
+        task.cancel()
+        await asyncio.sleep(0)
+        task.cancel()
+        with pytest.raises(asyncio.CancelledError):
+            await asyncio.wait_for(task, timeout=5)
+    finally:
+        if not task.done():
+            task.cancel()
+            await asyncio.gather(task, return_exceptions=True)
+    assert_reaped(real_processes)
+    last_sample = len(samples)
+    await asyncio.sleep(2 * chaos._MEMORY_POLL_SECONDS)
+    assert len(samples) == last_sample

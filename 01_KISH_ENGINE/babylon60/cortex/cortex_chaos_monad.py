@@ -4,6 +4,7 @@
 # ============================================================================
 import ast
 import asyncio
+import errno
 import sys
 import json
 import os
@@ -14,10 +15,14 @@ from typing import TypedDict, Literal
 
 from blake3 import blake3
 
+from babylon60.kernel.mcp_sandbox_validator import _resident_bytes
+
 
 _MAX_STREAM_BYTES = 2 * 1024 * 1024
 _MAX_RESULT_TEXT_BYTES = 1024 * 1024
 _READ_CHUNK_BYTES = 8192
+_MAX_RESIDENT_BYTES = 256 * 1024 * 1024
+_MEMORY_POLL_SECONDS = 0.05
 
 
 class SecurityError(Exception):
@@ -109,8 +114,8 @@ import contextlib
 import resource
 import logging
 
-# Thermodynamic Valve: Memory Constraint (50 MB)
-# macOS restricts RLIMIT_AS differently from Linux, handle gracefully per platform
+# Best-effort in-worker limit; Darwin does not reliably enforce RLIMIT_DATA.
+# The parent independently samples RSS and rejects unavailable supervision.
 MAX_MEM = 50 * 1024 * 1024
 try:
     if sys.platform != "darwin":
@@ -228,15 +233,44 @@ async def _feed_source(stream: asyncio.StreamWriter, source: bytes) -> None:
         stream.close()
 
 
+def _check_resident_memory(pid: int) -> None:
+    if _resident_bytes(pid) > _MAX_RESIDENT_BYTES:
+        raise SecurityError("MemoryError: Execution resident memory exceeds 256 MiB cutoff")
+
+
+async def _monitor_memory(process: asyncio.subprocess.Process) -> None:
+    """Sample RSS in the trusted parent; this is not an OS hard memory quota."""
+    while process.returncode is None:
+        try:
+            _check_resident_memory(process.pid)
+        except (OSError, AttributeError) as exc:
+            # Only ESRCH can be an ordinary exit race. Permission/API failures
+            # reject immediately, even if the worker could finish moments later.
+            if not isinstance(exc, OSError) or exc.errno != errno.ESRCH:
+                raise SecurityError("MemoryError: OS memory supervision unavailable") from exc
+            try:
+                await asyncio.wait_for(asyncio.shield(process.wait()), _MEMORY_POLL_SECONDS)
+            except asyncio.TimeoutError:
+                raise SecurityError("MemoryError: OS memory supervision unavailable") from exc
+            return
+        await asyncio.sleep(_MEMORY_POLL_SECONDS)
+
+
 async def _collect_bounded(process: asyncio.subprocess.Process, source: bytes) -> bytes:
     if process.stdin is None or process.stdout is None or process.stderr is None:
         raise RuntimeError("Execution streams are unavailable")
+    # Establish working supervision before feeding any generated code to the worker.
+    try:
+        _check_resident_memory(process.pid)
+    except (OSError, AttributeError) as exc:
+        raise SecurityError("MemoryError: OS memory supervision unavailable") from exc
     stdout_task = asyncio.create_task(_read_bounded(process.stdout))
     tasks = [
         asyncio.create_task(_feed_source(process.stdin, source)),
         stdout_task,
         asyncio.create_task(_read_bounded(process.stderr)),
         asyncio.create_task(process.wait()),
+        asyncio.create_task(_monitor_memory(process)),
     ]
     try:
         await asyncio.gather(*tasks)
@@ -336,6 +370,8 @@ async def run_chaos_monad(
     function issues no cryptographic signature or SCITT attestation. Worker
     status and text remain untrusted data, even after schema validation.
     Each raw stream is capped at 2 MiB; decoded stdout/error at 1 MiB each.
+    The parent samples RSS every 50 ms and stops workers observed above 256 MiB.
+    Sampling is not a hard memory quota and may overshoot between observations.
     """
     try:
         validate_ast_markov_blanket(source_code)
@@ -370,6 +406,8 @@ async def run_chaos_monad(
                 "status": "RuntimeError", "stdout": "",
                 "error": "Execution output exceeded parent byte budget", "scitt_receipt": {},
             }
+        except SecurityError as exc:
+            return {"status": "SecurityError", "stdout": "", "error": str(exc), "scitt_receipt": {}}
         except asyncio.TimeoutError:
             return {
                 "status": "Timeout_Entropy_Death",
