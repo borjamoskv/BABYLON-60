@@ -29,7 +29,7 @@ jobs:
         run: |
           test "$GITHUB_REF" = refs/heads/main
           test "$(gh api "repos/$GITHUB_REPOSITORY/commits/main" --jq .sha)" = "$GITHUB_SHA"
-          for workflow in ci.yml python-tests.yml gitleaks.yml dependency-audit.yml verify_ledger.yml; do
+          for workflow in ci.yml python-tests.yml gitleaks.yml dependency-audit.yml verify_ledger.yml verify_claims.yml; do
             gh run list --repo "$GITHUB_REPOSITORY" --workflow "$workflow" \
               --commit "$GITHUB_SHA" --branch main --event push --limit 1 \
               --json headSha,status,conclusion,event,headBranch \

@@ -1,6 +1,7 @@
 """Keep general CI on Linux and preserve deliberate native macOS coverage."""
 
 from fnmatch import fnmatchcase
+from itertools import product
 from pathlib import Path
 from typing import TypedDict, cast
 
@@ -68,13 +69,13 @@ def test_full_macos_certification_requires_a_release_or_explicit_opt_in() -> Non
     assert ci["on"]["push"]["tags"] == ["v*"]
     opt_in = ci["on"]["workflow_dispatch"]["inputs"]["full_release_evidence"]
     assert opt_in["type"] == "boolean" and opt_in["default"] == "false"
-    claims = ci["jobs"]["claims"]
+    claims = ci["jobs"]["release-evidence"]
     assert claims["if"] == (
         "startsWith(github.ref, 'refs/tags/v') || "
         "(github.event_name == 'workflow_dispatch' && inputs.full_release_evidence)"
     )
     assert claims["runs-on"] == "macos-15"
-    assert claims["timeout-minutes"] == "45"
+    assert claims["timeout-minutes"] == "90"
     commands = "\n".join(step.get("run", "") for step in claims["steps"])
     for command in (
         "verify_claims.py",
@@ -124,3 +125,53 @@ def test_native_job_checks_the_real_darwin_boundary_with_a_time_limit() -> None:
     test_name = "test_omega_bypass_001_os_blocks_direct_agent_access_and_broker_executes_authorized"
     assert test_name in command
     assert f"fn {test_name}()" in (ROOT / "tests/omega_mediation_campaign.rs").read_text()
+
+
+def test_required_checks_have_one_unconditional_producer() -> None:
+    required = {
+        "quality",
+        "rust (ubuntu-latest)",
+        "rust (macos-latest)",
+        "claims",
+        "conformance",
+        "test (3.11)",
+        "test (3.12)",
+        "SAST (bloqueado por la etapa de existencia)",
+    }
+    producers: dict[str, list[str]] = {name: [] for name in required}
+    for path in sorted((ROOT / ".github/workflows").glob("*.yml")):
+        data = yaml.load(path.read_text(), Loader=yaml.BaseLoader)
+        for job_id, job in data.get("jobs", {}).items():
+            matrix = job.get("strategy", {}).get("matrix", {})
+            axes = [values for key, values in matrix.items() if key not in {"include", "exclude"}]
+            names = [job.get("name", job_id)]
+            if axes and "name" not in job:
+                names = [f"{job_id} ({', '.join(values)})" for values in product(*axes)]
+            for name in required.intersection(names):
+                assert "if" not in job, f"required check {name} can skip its validation"
+                producers[name].append(path.name)
+    assert all(len(files) == 1 for files in producers.values()), producers
+
+
+def test_mandatory_claims_executes_evidence_and_preserves_failures() -> None:
+    verifier = workflow("verify_claims.yml")
+    assert verifier["on"]["pull_request"]["branches"] == ["main"]
+    assert verifier["on"]["push"]["branches"] == ["main"]
+    job = verifier["jobs"]["claims"]
+    steps = job["steps"]
+    evidence = next(step for step in steps if "verify_claims.py" in step.get("run", ""))
+    assert "--list" not in evidence["run"]
+    assert "||" not in evidence["run"] and "--locked" in evidence["run"]
+    assert "continue-on-error" not in evidence
+    upload = next(step for step in steps if "actions/upload-artifact@" in step.get("uses", ""))
+    assert upload["if"] == "always()"
+
+
+def test_macos_required_check_exercises_the_real_native_boundary() -> None:
+    job = workflow("ci.yml")["jobs"]["rust-macos"]
+    assert job["runs-on"] == "macos-15"
+    commands = "\n".join(step.get("run", "") for step in job["steps"])
+    assert "cargo check --workspace --locked" in commands
+    assert "cargo test --locked --test omega_mediation_campaign" in commands
+    assert "test_omega_bypass_001_os_blocks_direct_agent_access_and_broker_executes_authorized" in commands
+    assert "--exact" in commands

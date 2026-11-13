@@ -62,7 +62,7 @@ class SupplyChainTests(unittest.TestCase):
         self.assertRegex(setup["with"]["checksum"], r"^[0-9a-f]{64}$")
 
     def test_tampered_elan_download_fails_before_extract_or_execute(self):
-        for name, job in [("ci.yml", "claims"), ("verify_lean.yml", "verify-lean")]:
+        for name, job in [("ci.yml", "release-evidence"), ("verify_lean.yml", "verify-lean")]:
             with self.subTest(workflow=name), tempfile.TemporaryDirectory() as tmp:
                 steps = workflow(name)["jobs"][job]["steps"]
                 script = next(s["run"] for s in steps if "elan.tar.gz" in s.get("run", ""))

@@ -144,7 +144,14 @@ def test_all_ghcr_entries_use_protected_canonical_job() -> None:
     assert push["run"].index("verify_regulated_release.py") < push["run"].index("skopeo copy")
     assert "--preserve-digests" in push["run"]
     assert not any("docker/build-push-action@" in step.get("uses", "") for step in job["steps"])
-    for workflow in ("ci.yml", "python-tests.yml", "gitleaks.yml", "dependency-audit.yml", "verify_ledger.yml"):
+    for workflow in (
+        "ci.yml",
+        "python-tests.yml",
+        "gitleaks.yml",
+        "dependency-audit.yml",
+        "verify_ledger.yml",
+        "verify_claims.yml",
+    ):
         assert workflow in gate["run"] and workflow in recheck["run"]
 
 

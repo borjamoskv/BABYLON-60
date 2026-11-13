@@ -80,55 +80,43 @@ def create_crypto_vectors() -> None:
 
 def test_replay_corruption() -> None:
     print("\n--- Testing Replay / Corruption ---")
-    from babylon60.bft.consensus_ledger import BFT_Ledger, StateMutation
-
     import tempfile
-    db_fd, db_path = tempfile.mkstemp(suffix=".db")
-    os.close(db_fd)
-    if os.path.exists(db_path):
-        os.remove(db_path)
 
+    from babylon60.bft.consensus_ledger import BFT_Ledger, StateMutation
     from babylon60.core.crypto_utils import Ed25519Signer
 
-    # Real Ed25519 quorum (N = 3f + 1); keys are ephemeral and test-only.
+    # Authenticate a real quorum before testing tamper detection. Unsigned rows
+    # would be invalid before corruption and cannot be a positive control.
     f = 1
     signers = {f"node{i}": Ed25519Signer() for i in range(3 * f + 1)}
-    ledger = BFT_Ledger(db_path, {node: signer.public_key_hex for node, signer in signers.items()})
-    # timestamp is a caller-supplied logical tick, never a host clock.
-    mutation = StateMutation(agent_id="test_agent", payload={"test": "data"}, timestamp=1000, signature="")
-    digest: str = mutation.signing_hash(f)
-    votes = {node: signer.sign(digest) for node, signer in signers.items()}
-    if not ledger.invoke_subagent(mutation, f, votes):
-        print("Authenticated commit failed!")
-        sys.exit(1)
-
-    # Ensure integrity is 100%
-    if not ledger.audit_integrity():
-        print("Initial integrity check failed!")
-        sys.exit(1)
-
-    # Corrupt
-    ledger.conn.execute("UPDATE state_log SET payload = ? WHERE agent_id = 'test_agent'", (b"corrupted_cbor_data",))
-    ledger.conn.commit()
-
-    # Audit should fail
-    if ledger.audit_integrity():
-        print("ERROR: Corruption was NOT detected!")
-        sys.exit(1)
-
-    print("Replay verification PASSED. Corruption correctly triggers false on audit_integrity().")
+    with tempfile.TemporaryDirectory(prefix="babylon-conformance-") as directory:
+        ledger = BFT_Ledger(
+            os.path.join(directory, "ledger.db"),
+            {node: signer.public_key_hex for node, signer in signers.items()},
+        )
+        try:
+            mutation = StateMutation(agent_id="test_agent", payload={"test": "data"}, timestamp=1000, signature="")
+            votes = {node: signer.sign(mutation.signing_hash(f)) for node, signer in signers.items()}
+            if not ledger.invoke_subagent(mutation, f, votes):
+                raise RuntimeError("Authenticated commit failed")
+            if not ledger.audit_integrity():
+                raise RuntimeError("Initial authenticated integrity check failed")
+            ledger.conn.execute(
+                "UPDATE state_log SET payload = ? WHERE agent_id = 'test_agent'", (b"corrupted_cbor_data",)
+            )
+            ledger.conn.commit()
+            if ledger.audit_integrity():
+                raise RuntimeError("Corruption was not detected")
+        finally:
+            ledger.close()
+    print("Replay verification PASSED. Authenticated history passed and corruption was rejected.")
 
 
 def run_ci_checks() -> None:
     print("\n--- Running CI Scope Verification ---")
-    uv_bin = shutil.which("uv")
-    if uv_bin:
-        res = subprocess.run([uv_bin, "run", "--all-extras", "pytest", "tests/"])
-        if res.returncode != 0:
-            print("[INFO] Falling back to system python pytest...")
-            run_cmd([sys.executable, "-m", "pytest", "tests/"])
-    else:
-        run_cmd([sys.executable, "-m", "pytest", "tests/"])
+    # The workflow creates the locked environment. Preserve its interpreter and
+    # the first failure; retrying under another environment can hide that failure.
+    run_cmd([sys.executable, "-m", "pytest", "tests/", "--maxfail=0"])
 
 
 def main() -> None:
