@@ -79,14 +79,31 @@ async def test_successful_leader_exit_still_terminates_descendant_group(tmp_path
                 os.kill(descendant, signal.SIGKILL)
 
 
+def _expire_output_budget_test(_signum, _frame):
+    raise TimeoutError("output-budget supervision exceeded 5s")
+
+
 @pytest.mark.asyncio
 @pytest.mark.parametrize("stream", [1, 2])
 async def test_parent_enforces_output_budget_and_reaps_process(tmp_path, monkeypatch, stream):
+    """Fail in 5s if supervision blocks. SIGALRM interrupts a stuck read; wait_for cannot."""
     processes = fixture_launcher(monkeypatch, f"import os,time; os.write({stream},b'x'*2000000); time.sleep(20)")
-    with pytest.raises(ValueError, match="output"):
-        await backend._run_confined(tmp_path / "unused", sys.executable, "unused", tmp_path, 3, max_output_bytes=4096)
-    assert processes[0].returncode is not None
-    assert not running(processes[0].pid)
+    previous = signal.signal(signal.SIGALRM, _expire_output_budget_test)
+    signal.alarm(5)
+    try:
+        with pytest.raises(ValueError, match="output"):
+            await backend._run_confined(
+                tmp_path / "unused", sys.executable, "unused", tmp_path, 3, max_output_bytes=4096
+            )
+        assert processes[0].returncode is not None
+        assert not running(processes[0].pid)
+    finally:
+        signal.alarm(0)
+        signal.signal(signal.SIGALRM, previous)
+        for process in processes:
+            if process.returncode is None:
+                with contextlib.suppress(ProcessLookupError, OSError):
+                    os.killpg(process.pid, signal.SIGKILL)
 
 
 @pytest.mark.asyncio

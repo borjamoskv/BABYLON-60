@@ -303,7 +303,7 @@ La estructura `ObjectIdentity` separa el localizador físico inmutable en el VFS
 - **Matriz Normativa de Hashes (`BLAKE3` · `SHA-256` · `SHA3-256`):**
   - **`BLAKE3` (Canónico / On-Wire / WAL Binario — `INV_C5_ONWIRE_CANON`):** Digest canónico para tramas IPC inter-agente, código/herramientas MCP, árboles Merkle conformes v1 (`b3:` / kernel Rust) y registros atómicos de 154 bytes en `.effect_wal.bin`.
   - **`SHA-256` (Hardware FIPS 186-4 y Testigos Físicos C-ABI):** Pre-hash obligatorio para firmas hardware NIST P-256 del Apple Secure Enclave, digestos de precondición e inodos en `00_ABZU_KERNEL` (`secure_fs.rs`, `executor.rs`, `omega_mediation.rs`), y sellado de artefactos de distribución (`CLAIMS.toml`, SBOMs).
-  - **`SHA3-256` (Legado / Compatibilidad en Persistencia L0 Python):** Retenido en el encadenamiento de filas del ledger SQLite Python (`01_KISH_ENGINE`) y en las hojas Merkle de `evidence.json` (`sha3-256:`) para verificación dual retrocompatible en `standalone_verify.py`.
+  - **`SHA3-256` (Legado / Compatibilidad en Persistencia L0 Python):** Retenido en el encadenamiento de filas del ledger SQLite Python (`01_KISH_ENGINE`) y en las hojas Merkle de `evidence.json` (`sha3-256:`) para verificación dual retrocompatible en `standalone_verify.py`. Ese ledger es de un solo escritor (`BEGIN IMMEDIATE`, `synchronous=FULL`). Ed25519 firma los votos de `state_log` y los recibos `COSE_Sign1` del broker Rust, no cada fila. Sin un checkpoint externo (conteo + hash de cabeza; [PR #79](https://github.com/borjamoskv/BABYLON-60/pull/79)), una reescritura que recalcula la cadena no se distingue de un historial auténtico. `CLAIMS.toml` (`claim.cortex_persist_sqlite`) es el alcance que esta portada no amplía.
 
 ---
 

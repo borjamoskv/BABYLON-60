@@ -6,9 +6,14 @@ import subprocess
 import sys
 
 import pytest
-from scripts.c5_skills_ontology.build_skill_library import build
-from scripts.c5_quality_gates.audit_skill_links import inspect
-from tools.skill_library.router import RouteRecord, select
+
+pytest.importorskip(
+    "tools.skill_library",
+    reason="tools.skill_library is absent from the public tree",
+)
+from scripts.c5_skills_ontology.build_skill_library import build  # noqa: E402
+from scripts.c5_quality_gates.audit_skill_links import inspect  # noqa: E402
+from tools.skill_library.router import RouteRecord, select  # noqa: E402
 
 
 def test_contextual_routing() -> None:

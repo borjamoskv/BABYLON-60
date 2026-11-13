@@ -28,7 +28,7 @@ version: 4.3.0
 > | Ring-0 SharedManifest 64B Seqlock SPMC | ✅ **Implemented** | `src/manifest.rs`, `src/seqlock.rs` — 84 tests passing |
 > | Fail-Stop Apoptosis (`0xDEAD_6060`) | ✅ **Implemented** | `src/halt.rs` |
 > | Lean 4 Bisimulation (`BabylonTrace.lean`) | ✅ **Verified** | 0 errors, 0 warnings |
-> | Hash-chained SQLite/WAL Ledger | ✅ **Implemented** | `[OBSOLETO: CortexPersistLedger]` — Ed25519 + Merkle |
+> | Hash-chained SQLite/WAL Ledger | ✅ **Implemented** | Single-writer SQLite WAL (`synchronous=FULL`), SHA3-256 row chain. Ed25519 is not on each row. |
 > | C5-REAL Invariant Suite (21 invariants) | ✅ **Implemented** | `tests/test_c5_invariants.py` — 19 pass, 1 xfail |
 > | Ed25519 EU AI Act Compliance Exporter | ✅ **Implemented** | `babylon60/compliance_exporter/` |
 > | F60 Sexagesimal Exact Arithmetic | 🔬 **Design stage** | Specification in §3 |
@@ -40,7 +40,7 @@ version: 4.3.0
 
 ## Abstract
 
-We present BABYLON-60, a systems-level infrastructure for verifiable autonomous AI agents. Current agent architectures rely on probabilistic inference over floating-point arithmetic, producing decision trails that are neither reproducible nor auditable. BABYLON-60 introduces four mechanisms that jointly address this: (1) a **Ring-0 SharedManifest** — a 64-byte lock-free IPC slot with hardware-verified Seqlock SPMC protocol and formally proven bisimulation in Lean 4; (2) **F60**, a sexagesimal exact-arithmetic type system that eliminates temporal drift in agent scheduling; (3) a **Tamper-Evident Hash-Chained Ledger** providing cryptographically sealed execution traces signed with Ed25519; and (4) a **Self-Falsification Engine** that transitions to an irreversible `POISONED` state upon detecting invariant violations, preferring deterministic failure over uncalibrated operation. We describe the architecture, formal semantics, and present empirical results from the implemented substrate.
+We present BABYLON-60, a systems-level infrastructure for verifiable autonomous AI agents. Current agent architectures rely on probabilistic inference over floating-point arithmetic, producing decision trails that are neither reproducible nor auditable. BABYLON-60 introduces four mechanisms that jointly address this: (1) a **Ring-0 SharedManifest** — a 64-byte lock-free IPC slot with hardware-verified Seqlock SPMC protocol and formally proven bisimulation in Lean 4; (2) **F60**, a sexagesimal exact-arithmetic type system that eliminates temporal drift in agent scheduling; (3) a **Tamper-Evident Hash-Chained Ledger** — a single-writer SHA3-256 chain over SQLite WAL, not an Ed25519 signature on each row; and (4) a **Self-Falsification Engine** that transitions to an irreversible `POISONED` state upon detecting invariant violations, preferring deterministic failure over uncalibrated operation. We describe the architecture, formal semantics, and present empirical results from the implemented substrate.
 
 ---
 
@@ -94,7 +94,7 @@ BABYLON-60 attacks these problems at the infrastructure layer, below the LLM, by
 
 1. **Ring-0 SharedManifest 64B** — A formally verified lock-free IPC slot with Aristotelian Seqlock SPMC semantics (§2). ✅ *Implemented.*
 2. **F60 Exact Arithmetic** — A rational type system eliminating floating-point drift in temporal computations (§3). 🔬 *Design stage.*
-3. **Tamper-Evident DAG Ledger** — A hash-chained ledger with Ed25519 cryptographic sealing and Merkle root attestation (§4). ✅ *Implemented (single-writer form).*
+3. **Tamper-Evident DAG Ledger** — A single-writer SHA3-256 hash chain over SQLite WAL, with Merkle roots over those row digests (§4). ✅ *Implemented (single-writer form).* Ed25519 seals `state_log` votes and Rust `COSE_Sign1` receipts, not each ledger row.
 4. **Self-Falsification Engine** — A dead-man's-switch that transitions to `POISONED = 0xDEAD_6060` upon detecting invariant violations (§5). ✅ *Implemented.*
 5. **Proof IR and Lean 4 Backend** — A formal verification pipeline from execution traces to Lean 4 proof obligations (§6). 🗺️ *Roadmap; bisimulation core verified.*
 6. **Thermodynamic Routing Matrix** — Exergy-based constraints applied to the agent's reasoning AST (§7). 🔬 *Design stage.*
@@ -197,17 +197,22 @@ class CortexEvent:
     cortex_taint: str          # session / agent identifier
 
 # Each append returns:
-# {"seq": N, "event_id": "...", "entry_hash": "sha256(...)", "status": "C5_PERMANENT"}
+# {"seq": N, "event_id": "...", "entry_hash": "<sha3-256 hex>", "status": "C5_PERMANENT"}
 ```
+
+The row digest is SHA3-256 (`compute_cortex_hash` / `_compute_entry_hash`). SQLite admits one writer at a time (`BEGIN IMMEDIATE`, `PRAGMA synchronous=FULL`). Ed25519 is used on `state_log` quorum votes (`consensus_validator.py`) and on Rust broker `COSE_Sign1` receipts (`src/receipt.rs`). It is not a column of `cortex_ledger` or `ledger_entries`.
+
+`verify_integrity()` / `verify_chain()` recompute the chain they are shown. A caller who keeps a checkpoint outside SQLite — entry count plus head hash — can reject a replaced history. Without that pin, a full rewrite that recalculates every link is undetectable. That checkpoint is the contract added in [PR #79](https://github.com/borjamoskv/BABYLON-60/pull/79). Triggers that abort `UPDATE`/`DELETE` stop a naive edit; they do not stop someone who can drop them and rewrite the file.
 
 ### 4.2 Integrity Properties
 
 | Property | Mechanism | Guarantee |
 | :--- | :--- | :--- |
-| **Tamper evidence** | SHA-256 hash chain over sequential entries | Detectable modification |
-| **Cryptographic attestation** | Ed25519 signature over Merkle root | Non-repudiation |
-| **Deterministic replay** | `verify_integrity()` re-hashes full chain | 1:1 execution correspondence |
-| **EU AI Act Art. 12** | WORM semantics — no deletes, no updates | Forensic traceability |
+| **Tamper evidence** | SHA3-256 hash chain over sequential entries | A partial edit that does not recompute later links fails verification |
+| **External checkpoint** | Count + head hash kept outside the database ([#79](https://github.com/borjamoskv/BABYLON-60/pull/79)) | A fully recomputed chain fails only when this pin is supplied |
+| **Ed25519** | `state_log` votes and Rust `COSE_Sign1` receipts | Not a per-row seal of the Python ledger |
+| **Deterministic replay** | `verify_integrity()` re-hashes the stored chain | Same stored bytes, same digest. It does not prove the file is the original history |
+| **Append-only triggers** | SQLite triggers abort `UPDATE` and `DELETE` | Not a boundary against a writer who can drop the triggers |
 
 ### 4.3 Temporal Domain Separation
 
@@ -340,7 +345,7 @@ The ledger and exporter contribute technical evidence to these requirements. The
 | Article | BABYLON-60 Mechanism | Implementation Status |
 | :--- | :--- | :--- |
 | Art. 11 (Technical Documentation) | Proof IR → Lean 4 obligations | 🗺️ Roadmap |
-| Art. 12 (Record-Keeping) | Hash-chained SQLite/WAL + Ed25519 | ✅ Implemented |
+| Art. 12 (Record-Keeping) | Single-writer SHA3-256 SQLite/WAL chain. Ed25519 signs votes and COSE receipts, not each row | Technical evidence only; not legal conformity |
 | Art. 14 (Human Oversight) | Biometric TouchID Gate + HITL Governance | ✅ Implemented |
 | Art. 15 (Accuracy & Robustness) | Self-Falsification Engine (21 invariants) | ✅ Implemented |
 
@@ -370,9 +375,9 @@ All high-energy state mutations require physical human friction via the macOS Se
 
 ## 10. Conclusion
 
-BABYLON-60 represents a departure from the prevailing approach of wrapping probabilistic models in ad-hoc orchestration frameworks. By imposing formal constraints at the infrastructure layer — a 64-byte lock-free IPC substrate formally verified in Lean 4, cryptographic ledgers with Ed25519 attestation, self-falsification invariants enforced at both compile-time and runtime, and a biometric causal gate — we provide a substrate upon which verifiable autonomous AI agents can be built with the rigor demanded by regulated industries.
+BABYLON-60 represents a departure from the prevailing approach of wrapping probabilistic models in ad-hoc orchestration frameworks. By imposing formal constraints at the infrastructure layer — a 64-byte lock-free IPC substrate formally verified in Lean 4, a single-writer SHA3-256 SQLite ledger, Ed25519 on `state_log` votes and COSE receipts, self-falsification invariants enforced at both compile-time and runtime, and a biometric causal gate — we provide a substrate upon which verifiable autonomous AI agents can be built with the rigor demanded by regulated industries.
 
-The system's safety is not a claim but an empirical obligation: if the kernel terminates without `CORTEX-TAINT`, if `verify_integrity()` passes, and if the Lean 4 proof compiles clean, then the exported artifact is mathematically guaranteed to correspond to the observed execution. This is the minimum standard that the next generation of autonomous AI systems must meet.
+`verify_integrity()` checks the chain in the file it is given. It does not, by itself, prove that file is the original history: that requires the external checkpoint (count and head hash) described in §4. A clean Lean build checks the model it is given. Neither result is a universal guarantee about every execution.
 
 ---
 
