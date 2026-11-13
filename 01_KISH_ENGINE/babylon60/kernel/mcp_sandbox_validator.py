@@ -251,11 +251,23 @@ async def _run_confined(
                 os.killpg(process.pid, signal.SIGKILL)
             except ProcessLookupError:
                 pass
-            await process.wait()
+            # Cancel the in-flight wait/reads before opening a second wait().
+            # asyncio only wakes Process.wait() from connection_lost, and that
+            # callback does not run until every pipe transport is closed. A
+            # cancelled reader leaves stdout/stderr open, so the reaper hangs
+            # even after SIGKILL.
             for task in tasks:
                 if not task.done():
                     task.cancel()
             await asyncio.gather(*tasks, return_exceptions=True)
+            transport = getattr(process, "_transport", None)
+            if transport is not None:
+                for fd in (0, 1, 2):
+                    pipe = transport.get_pipe_transport(fd)
+                    if pipe is not None and not pipe.is_closing():
+                        pipe.close()
+            if process.returncode is None:
+                await process.wait()
 
         reaping = asyncio.create_task(cleanup())
         cancelled = False
