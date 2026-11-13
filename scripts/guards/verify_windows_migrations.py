@@ -130,6 +130,8 @@ def validate_case(data: JsonObject, case: str, revision: str, run_id: str, pytho
     if len({command["phase"] for command in commands}) != len(commands):
         raise ValueError(f"{case}: duplicate command phases")
     by_phase = {command["phase"]: command for command in commands}
+    if set(by_phase) != set(phases):
+        raise ValueError(f"{case}: command phases must match the complete migration protocol")
     for phase, returncode in phases.items():
         command = by_phase[phase]
         if command["status"] != "finished" or command["returncode"] != returncode:

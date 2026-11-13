@@ -155,6 +155,7 @@ MCP_SERVER_VERSION = "5.1.0"
 
 # MCP Protocol version
 MCP_PROTOCOL_VERSION = "2024-11-05"
+MAX_LEDGER_QUERY_LIMIT = 1000
 
 # ---------------------------------------------------------------------------
 # Tool & Resource Definitions (B1: NAME != IDENTITY — Canonical + Functional Aliases)
@@ -627,19 +628,15 @@ class CortexMCPServer(MediatedHandlers):
     # JSON-RPC I/O (stdio transport)
     # -----------------------------------------------------------------------
 
-    def _read_message(self, input_stream: TextIO | None = None) -> dict[str, object] | None:
-        """Read a single JSON-RPC message from stdin."""
+    def _read_message(self, input_stream: TextIO | None = None) -> str | None:
+        """Read one non-blank JSON-RPC line from stdin. Returns None only on EOF."""
         stream = input_stream or sys.stdin
-        line = stream.readline()
-        if not line:
-            return None
-        line = line.strip()
-        if not line:
-            return None
-        parsed = json.loads(line)
-        if isinstance(parsed, dict):
-            return cast(dict[str, object], parsed)
-        return None
+        while True:
+            line = stream.readline()
+            if not line:
+                return None
+            if line.strip():
+                return line
 
     def _write_message(self, message: Mapping[str, object], output_stream: TextIO | None = None) -> None:
         """Write a single JSON-RPC message to stdout."""
@@ -1073,8 +1070,10 @@ class CortexMCPServer(MediatedHandlers):
     def _tool_query_ledger(self, args: dict[str, object]) -> dict[str, object]:
         event_type = args.get("event_type")
         event_type_str = str(event_type) if event_type is not None else None
-        raw_limit = args.get("limit", 10)
-        limit = int(raw_limit) if isinstance(raw_limit, (int, str)) else 10
+        limit = args.get("limit", 10)
+        if not isinstance(limit, int) or isinstance(limit, bool) or not 1 <= limit <= MAX_LEDGER_QUERY_LIMIT:
+            text = f"limit must be an integer between 1 and {MAX_LEDGER_QUERY_LIMIT}"
+            return {"content": [{"type": "text", "text": text}], "isError": True}
 
         with self.ledger._get_connection() as conn:
             cursor = conn.cursor()
@@ -1211,6 +1210,13 @@ class CortexMCPServer(MediatedHandlers):
         target_str: str,
         patch_topic: str,
     ) -> Any:
+        def _overlaps(existing_path: str) -> bool:
+            # Fail-closed: un ámbito almacenado que no se puede normalizar cuenta como colisión.
+            try:
+                return scopes_overlap(existing_path, target_str)
+            except ValueError:
+                return True
+
         return next(
             (
                 existing
@@ -1218,7 +1224,7 @@ class CortexMCPServer(MediatedHandlers):
                 if existing.topic == patch_topic
                 and existing.author_agent_id != author_str
                 and existing.target_path.strip()
-                and scopes_overlap(existing.target_path, target_str)
+                and _overlaps(existing.target_path)
             ),
             None,
         )
@@ -1288,8 +1294,12 @@ class CortexMCPServer(MediatedHandlers):
 
         op = str(args.get("operation", "")).strip().lower()
         task_id = str(args.get("task_id", "default_task")).strip()
-        tick_raw = args.get("logical_tick", 1)
-        logical_tick = int(tick_raw) if isinstance(tick_raw, (int, str)) else 1
+        logical_tick = args.get("logical_tick", 1)
+        if not isinstance(logical_tick, int) or isinstance(logical_tick, bool) or logical_tick < 0:
+            return {
+                "content": [{"type": "text", "text": "logical_tick must be a non-negative integer"}],
+                "isError": True,
+            }
         db_raw = args.get("db_path")
         db_path = Path(str(db_raw)) if db_raw else (REPO_ROOT.parent / ".babylon60" / "blackboard_wal.db")
         db_path.parent.mkdir(parents=True, exist_ok=True)
@@ -1646,6 +1656,16 @@ class CortexMCPServer(MediatedHandlers):
 
         return self._make_response(request_id, result)
 
+    def handle_frame(self, line: str) -> JsonRpcResponse | None:
+        """Parse one stdio line and dispatch it. A malformed frame is answered, never dispatched."""
+        try:
+            parsed = json.loads(line)
+        except (json.JSONDecodeError, RecursionError):
+            return self._make_error(None, -32700, "parse error")
+        if not isinstance(parsed, dict):
+            return self._make_error(None, -32600, "invalid request: frame must be a JSON object (batches unsupported)")
+        return self.process_request(cast(dict[str, object], parsed))
+
     # -----------------------------------------------------------------------
     # Main stdio event loop
     # -----------------------------------------------------------------------
@@ -1660,7 +1680,7 @@ class CortexMCPServer(MediatedHandlers):
             if msg is None:
                 break  # EOF
 
-            response = self.process_request(msg)
+            response = self.handle_frame(msg)
             if response is not None:
                 self._write_message(response)
 

@@ -22,7 +22,7 @@ Model-agnostic authorization. Governed execution. Reproducible security evidence
 [![Rust](https://img.shields.io/badge/rust-≥1.89-2E4A9E?style=flat-square&labelColor=171717)](./Cargo.toml)
 [![Lean 4](https://img.shields.io/badge/Lean_4-BabylonTrace-2E4A9E?style=flat-square&labelColor=171717)](./proof/lean/BabylonTrace.lean)
 
-> **Release scope:** v5.1.0 prepares the stable terminal CLI and memory MCP distribution. Native Windows validation of v5.1.0 is `NO_VERIFICADO`: this tree holds no Windows run receipt for its source commit, and the last native pass (2026-10-21, Python 3.11 and 3.12) ran on an earlier revision, `d619d05`, so it does not certify later changes ([Windows validation](docs/security/windows-validation-2026-10-23.md)). The security kernel remains an alpha in user space (EL0); see the explicit evidence levels and limitations in `CLAIMS.toml`. Release evidence applies only to its recorded source commit and bundle digest.
+> **Release scope:** v5.1.0 covers the terminal CLI and memory MCP distribution. Native Windows validation of v5.1.0 is `NO_VERIFICADO`: this tree holds no Windows run receipt for its source commit, and the last native pass (2026-10-21, Python 3.11 and 3.12) ran on an earlier revision, `d619d05`, so it does not certify later changes ([Windows validation](docs/security/windows-validation-2026-10-23.md)). The security kernel remains an alpha in user space (EL0); see the explicit evidence levels and limitations in `CLAIMS.toml`. Release evidence applies only to its recorded source commit and bundle digest.
 
 Video demos live in [examples/remotion](examples/remotion/README.md). Oncology
 simulations live in the independent [experiments/oncology](experiments/oncology/README.md)

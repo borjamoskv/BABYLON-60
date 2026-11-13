@@ -143,7 +143,17 @@ def source_tree_digest(cwd: Path) -> str:
         if is_excluded_from_public_tree(relative):
             continue
         path = cwd / relative
-        payload = str(path.readlink()).encode("utf-8") if path.is_symlink() else path.read_bytes()
+        flags = os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0)
+        try:
+            fd = os.open(path, flags)
+        except OSError:
+            if path.is_symlink():
+                payload = str(path.readlink()).encode("utf-8")
+            else:
+                raise
+        else:
+            with os.fdopen(fd, "rb") as stream:
+                payload = stream.read()
         digest.update(raw_path + b"\0")
         digest.update(len(payload).to_bytes(8, "big"))
         digest.update(payload)

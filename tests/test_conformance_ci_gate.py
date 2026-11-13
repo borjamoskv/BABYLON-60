@@ -19,7 +19,7 @@ def test_failed_suite_is_not_retried_in_a_different_environment(monkeypatch: pyt
         calls.append(command)
         return subprocess.CompletedProcess(command, 7, "", "first suite failed")
 
-    monkeypatch.setattr(conformance_test.subprocess, "run", fail_suite)
+    monkeypatch.setattr(subprocess, "run", fail_suite)
     with pytest.raises(SystemExit) as exc:
         conformance_test.run_ci_checks()
     assert exc.value.code == 7

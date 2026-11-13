@@ -12,7 +12,7 @@ Zero web scraping / zero headless browser automation.
 from dataclasses import dataclass
 import json
 import os
-from typing import Any, Dict, List, Optional
+from typing import cast, Any, Dict, List, Optional
 import urllib.parse
 import urllib.request
 import urllib.error
@@ -75,7 +75,7 @@ class InstagramGraphClient:
         req = urllib.request.Request(url, data=req_data, headers=headers, method=method)
         try:
             with urllib.request.urlopen(req, timeout=30) as resp:
-                return json.loads(resp.read().decode("utf-8"))
+                return cast(Dict[str, Any], json.loads(resp.read().decode("utf-8")))
         except urllib.error.HTTPError as e:
             err_body = e.read().decode("utf-8")
             try:
@@ -107,7 +107,7 @@ class InstagramGraphClient:
             method="POST",
             data={"image_url": image_url, "caption": caption},
         )
-        return resp["id"]
+        return cast(str, resp["id"])
 
     def create_carousel_item_container(self, image_url: str) -> str:
         """Creates an individual child container for a multi-slide carousel."""
@@ -116,7 +116,7 @@ class InstagramGraphClient:
             method="POST",
             data={"image_url": image_url, "is_carousel_item": "true"},
         )
-        return resp["id"]
+        return cast(str, resp["id"])
 
     def create_carousel_container(self, children_ids: List[str], caption: str) -> str:
         """Creates the parent carousel container linking all child slides."""
@@ -129,7 +129,7 @@ class InstagramGraphClient:
                 "caption": caption,
             },
         )
-        return resp["id"]
+        return cast(str, resp["id"])
 
     def publish_container(self, container_id: str) -> str:
         """Publishes an already created IG media container."""
@@ -138,7 +138,7 @@ class InstagramGraphClient:
             method="POST",
             data={"creation_id": container_id},
         )
-        return resp["id"]
+        return cast(str, resp["id"])
 
     def simulate_carousel_publication(
         self,

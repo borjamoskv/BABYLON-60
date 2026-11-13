@@ -777,8 +777,23 @@ impl McpCapabilityBroker {
     // GUARD v3.1: Lockfile Binding, Compositional Flow & Postcondition State Machine
     // -----------------------------------------------------------------------
 
-    /// Register a verified `skills-lock.json` binding inside the broker.
+    /// Register a `skills-lock.json` binding and revoke pending grants if it changed.
     pub fn register_skill_lock_binding(&mut self, binding: GuardSkillLockBinding) {
+        if self
+            .locked_skills
+            .get(&binding.skill_id)
+            .is_some_and(|current| current != &binding)
+        {
+            for grant in self.guard_capabilities.values_mut().filter(|grant| {
+                grant.skill_id == binding.skill_id && grant.state == EffectState::Authorized
+            }) {
+                // Keep the revocation even if the previous binding is restored.
+                self.revoked_tokens.insert(grant.capability_id, true);
+                grant.state = EffectState::Rejected(RejectReason::StaleCapability);
+                self.effect_states
+                    .insert(grant.capability_id, grant.state.clone());
+            }
+        }
         self.locked_skills.insert(binding.skill_id.clone(), binding);
     }
 

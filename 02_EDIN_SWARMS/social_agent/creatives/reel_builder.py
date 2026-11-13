@@ -33,7 +33,7 @@ class ReelSpecification:
 class ReelBuilder:
     """Builds 1080x1920 vertical MP4 clips for Instagram Reels and Stories."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.ffmpeg_bin = shutil.which("ffmpeg")
 
     def is_available(self) -> bool:
@@ -51,7 +51,7 @@ class ReelBuilder:
         Converts a static 1080x1920 or 1080x1350 image into a valid 9:16 Instagram Reel MP4.
         Pads or centers to 1080x1920 if the input is 1080x1350.
         """
-        if not self.is_available():
+        if self.ffmpeg_bin is None:
             raise RuntimeError("ffmpeg no está disponible en el PATH del sistema.")
 
         output_mp4_path.parent.mkdir(parents=True, exist_ok=True)

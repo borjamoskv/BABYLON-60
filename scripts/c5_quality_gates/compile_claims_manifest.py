@@ -15,12 +15,14 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import io
 import json
 import os
 import subprocess
 import sys
 import time
-from pathlib import Path
+import zipfile
+from pathlib import Path, PurePosixPath
 from typing import Any, Dict, List, Tuple
 
 REPO_ROOT = Path(__file__).absolute().parents[2]
@@ -29,7 +31,7 @@ sys.path.insert(0, str(REPO_ROOT / "01_KISH_ENGINE"))
 from babylon60.bft.cortex_crypto_kernel import build_merkle_tree  # noqa: E402
 
 sys.path.insert(0, str(REPO_ROOT))
-from scripts.c5_quality_gates.verify_claims import source_tree_digest  # noqa: E402
+from scripts.c5_quality_gates.verify_claims import is_excluded_from_public_tree, source_tree_digest  # noqa: E402
 
 try:
     import tomllib
@@ -229,6 +231,48 @@ def _load_signing_key() -> ed25519.Ed25519PrivateKey | None:
     return ed25519.Ed25519PrivateKey.from_private_bytes(raw_seed)
 
 
+def inspect_source_bundle(bundle_path: Path, *, version: str, commit: str) -> Dict[str, Any]:
+    """Bind external evidence to this archive and the source bytes it contains."""
+    bundle_bytes = bundle_path.read_bytes()
+    with zipfile.ZipFile(io.BytesIO(bundle_bytes)) as archive:
+        names = archive.namelist()
+        if len(names) != len(set(names)):
+            raise ValueError("Duplicate release bundle paths")
+        for name in names:
+            path = PurePosixPath(name)
+            if not name or path.is_absolute() or ".." in path.parts or "\\" in name or path.as_posix() != name:
+                raise ValueError(f"Invalid release bundle path: {name!r}")
+            if is_excluded_from_public_tree(name):
+                raise ValueError(f"Release bundle contains generated evidence or private input: {name}")
+        inventory = json.loads(archive.read("SOURCE_MANIFEST.json"))
+        if inventory.get("format") != "babylon60.source-bundle.v1" or inventory.get("version") != version:
+            raise ValueError("Release bundle version or source inventory format mismatch")
+        if inventory.get("source_commit") not in (None, commit):
+            raise ValueError("Release bundle source commit does not match execution evidence")
+        expected_hashes = inventory.get("files_sha256")
+        if not isinstance(expected_hashes, dict) or set(expected_hashes) != set(names) - {"SOURCE_MANIFEST.json"}:
+            raise ValueError("Release bundle inventory does not cover its source files")
+        digest = hashlib.sha256()
+        for name in sorted(names):
+            payload = archive.read(name)
+            if name != "SOURCE_MANIFEST.json":
+                if hashlib.sha256(payload).hexdigest() != expected_hashes[name]:
+                    raise ValueError(f"Release bundle inventory checksum mismatch: {name}")
+                source = REPO_ROOT / name
+                if source.is_symlink() or not source.is_file() or source.read_bytes() != payload:
+                    raise ValueError(f"Release bundle differs from verified source: {name}")
+            digest.update(name.encode("utf-8") + b"\0")
+            digest.update(len(payload).to_bytes(8, "big"))
+            digest.update(payload)
+    return {
+        "name": bundle_path.name,
+        "sha256": hashlib.sha256(bundle_bytes).hexdigest(),
+        "size_bytes": len(bundle_bytes),
+        "source_files": sorted(names),
+        "tree_digest": digest.hexdigest(),
+    }
+
+
 def emit_claims_artifacts(
     evidence: Dict[str, Any],
     bundle_path: Path | None = None,
@@ -240,19 +284,18 @@ def emit_claims_artifacts(
     state = release_spec.get("state", "candidate")
     axiom = release_spec.get("axiom", "AX-0")
     commit = evidence["source_commit"]
+    if commit != get_git_commit() or evidence["source_tree_digest"] != source_tree_digest(REPO_ROOT):
+        raise ValueError("Verified source changed before release artifact generation")
+    if evidence["claims_manifest_digest"] != hashlib.sha256((REPO_ROOT / "CLAIMS.toml").read_bytes()).hexdigest():
+        raise ValueError("CLAIMS.toml changed before release artifact generation")
     version_sync = collect_version_sync(version)
     prior_release = load_prior_release()
     signing_key = _load_signing_key()
-    sbom_summary = generate_sboms(repo_root=REPO_ROOT)
 
     bundle_info: Dict[str, Any] | None = None
-    if bundle_path is not None and bundle_path.exists():
-        bundle_bytes = bundle_path.read_bytes()
-        bundle_info = {
-            "name": bundle_path.name,
-            "sha256": hashlib.sha256(bundle_bytes).hexdigest(),
-            "size_bytes": len(bundle_bytes),
-        }
+    if bundle_path is not None:
+        bundle_info = inspect_source_bundle(bundle_path, version=version, commit=commit)
+    sbom_summary = generate_sboms(repo_root=REPO_ROOT)
 
     # 1. evidence.json
     evidence_json_path = REPO_ROOT / "evidence.json"

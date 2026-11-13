@@ -30,6 +30,7 @@ import stat
 import sys
 import time
 from contextlib import closing
+from datetime import datetime
 from importlib.machinery import ExtensionFileLoader
 from pathlib import Path
 from typing import Any
@@ -54,10 +55,21 @@ TOOL_CAP = {
     "memory_forget": "forget",
 }
 RESERVED_ARGS = re.compile(r"actor|project|token|capabilit|binding|agent|domain|policy|authority|role", re.I)
-ISO_UTC = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$")
-REQUEST_ID = re.compile(r"^[A-Za-z0-9._:-]{1,128}$")
+ISO_UTC = re.compile(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z\Z", re.ASCII)
+REQUEST_ID = re.compile(r"^[A-Za-z0-9._:-]{1,128}\Z")
 MAX_VALUE = 4096
 CRASH_ENV = "CORTEX_MEMORY_TEST_CRASH"  # test-only fault injection: before_commit | after_commit_before_ack
+
+
+def _is_iso_utc(value: object) -> bool:
+    """True only for a real calendar instant written exactly as YYYY-MM-DDTHH:MM:SSZ."""
+    if not isinstance(value, str) or not ISO_UTC.match(value):
+        return False
+    try:
+        datetime.strptime(value, "%Y-%m-%dT%H:%M:%SZ")
+    except ValueError:
+        return False
+    return True
 
 
 # --------------------------------------------------------------------------- tool schemas (single source)
@@ -317,7 +329,7 @@ class Adapter:
             raise ValueError("entity and attribute must be given together")
         for k in ("valid_from", "valid_to"):
             if args.get(k) is not None:
-                if not isinstance(args[k], str) or not ISO_UTC.match(args[k]):
+                if not _is_iso_utc(args[k]):
                     raise ValueError(f"{k} must be ISO-8601 UTC YYYY-MM-DDTHH:MM:SSZ")
                 op[k] = args[k]
         if op.get("valid_from") and op.get("valid_to") and op["valid_from"] >= op["valid_to"]:

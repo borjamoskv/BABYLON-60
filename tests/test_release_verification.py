@@ -656,51 +656,81 @@ def test_verify_release_five_controlled_regression_cases(tmp_path: Path) -> None
     assert "Public source_tree_digest mismatch" in res6_tampered.stderr
 
 
-def test_packaged_release_zip_standalone_verification_without_git(tmp_path: Path) -> None:
-    """Execute package_release.sh, extract the ZIP without .git, and verify intact vs tampered source."""
+def test_packaged_release_zip_standalone_verification_without_git(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A real ZIP needs fresh external evidence; stale, absent or altered evidence fails."""
     import zipfile
+    from scripts.c5_quality_gates import compile_claims_manifest as compiler
+    from scripts.c5_quality_gates.verify_claims import source_tree_digest
 
-    dist_dir = tmp_path / "dist"
     pkg_res = subprocess.run(
-        ["bash", str(REPO_ROOT / "scripts" / "package_release.sh"), str(dist_dir)],
+        ["bash", str(REPO_ROOT / "scripts/package_release.sh"), str(tmp_path / "dist")],
         cwd=REPO_ROOT,
         capture_output=True,
         text=True,
         timeout=30,
     )
     assert pkg_res.returncode == 0, pkg_res.stderr
-    zip_path = dist_dir / "Babylon60-v5.1.0-terminal-mcp.zip"
-    assert zip_path.is_file()
-
+    zip_path = Path(pkg_res.stdout.strip())
     extract_dir = tmp_path / "extracted_no_git"
-    with zipfile.ZipFile(zip_path) as zf:
-        zf.extractall(extract_dir)
+    with zipfile.ZipFile(zip_path) as archive:
+        archive.extractall(extract_dir)
+        inventory = json.loads(archive.read("SOURCE_MANIFEST.json"))
     assert not (extract_dir / ".git").exists()
+    assert not (extract_dir / "RELEASE_MANIFEST.json").exists()
 
-    # Intact standalone extraction passes verify.sh
-    res_ok = subprocess.run(
-        ["bash", "verify.sh"],
-        cwd=extract_dir,
-        capture_output=True,
-        text=True,
-        timeout=15,
-    )
-    assert res_ok.returncode == 0, res_ok.stderr
-    assert "[CHECK] governance_artifacts: PASS [required] (files=10)" in res_ok.stdout
-    assert "[CHECK] source_tree_digest: PASS [required]" in res_ok.stdout
-    assert "[VERIFIED]" in res_ok.stdout
+    def verify():
+        return subprocess.run(
+            ["bash", "verify.sh", "--bundle", str(zip_path), "--require-signature", "--pubkey", pubkey_hex],
+            cwd=extract_dir,
+            capture_output=True,
+            text=True,
+            timeout=15,
+        )
 
-    # Modifying a non-governance source file in the git-less directory fails closed
+    # Test-only signing key and evidence; this checks the verifier, not a runtime campaign.
+    key = ed25519.Ed25519PrivateKey.generate()
+    pubkey_hex = key.public_key().public_bytes_raw().hex()
+    missing = verify()
+    assert missing.returncode == 1
+    assert "[VERIFIED]" not in missing.stdout
+    fixture_root, _, _ = _create_release_fixture(tmp_path / "synthetic_evidence", signed=False)
+    evidence = json.loads((fixture_root / "evidence.json").read_text())
+    evidence["source_commit"] = inventory["source_commit"] or "a" * 40
+    evidence["source_tree_digest"] = source_tree_digest(REPO_ROOT)
+    monkeypatch.setattr(compiler, "REPO_ROOT", extract_dir)
+    monkeypatch.setattr(compiler, "get_git_commit", lambda: evidence["source_commit"])
+    monkeypatch.setattr(compiler, "source_tree_digest", lambda root: evidence["source_tree_digest"])
+    monkeypatch.setattr(compiler, "_load_signing_key", lambda: key)
+    compiler.emit_claims_artifacts(evidence, bundle_path=zip_path)
+
+    intact = verify()
+    assert intact.returncode == 0, intact.stderr
+    assert "[CHECK] governance_artifacts: PASS [required] (files=10)" in intact.stdout
+    assert "[CHECK] source_tree_digest: PASS [required]" in intact.stdout
+    assert "[CHECK] release_bundle: PASS [required]" in intact.stdout
+    assert "[VERIFIED]" in intact.stdout
+
+    evidence_path = extract_dir / "evidence.json"
+    original_evidence = evidence_path.read_bytes()
+    stale = dict(evidence, source_commit="b" * 40)
+    evidence_path.write_text(json.dumps(stale))
+    stale_result = verify()
+    assert stale_result.returncode == 1
+    assert "[VERIFIED]" not in stale_result.stdout
+    evidence_path.write_bytes(original_evidence)
+
+    original_bundle = zip_path.read_bytes()
+    zip_path.write_bytes(original_bundle + b"tampered")
+    altered_archive = verify()
+    assert altered_archive.returncode == 1
+    assert "[VERIFIED]" not in altered_archive.stdout
+    zip_path.write_bytes(original_bundle)
+
     install_sh = extract_dir / "install.sh"
-    install_sh.write_text(install_sh.read_text(encoding="utf-8") + "\n# tampered\n", encoding="utf-8")
-    res_tampered = subprocess.run(
-        ["bash", "verify.sh"],
-        cwd=extract_dir,
-        capture_output=True,
-        text=True,
-        timeout=15,
-    )
-    assert res_tampered.returncode == 1
-    assert "[VERIFIED]" not in res_tampered.stdout
-    assert "[CHECK] source_tree_digest: FAIL [required]" in res_tampered.stderr
-    assert "Public source_tree_digest mismatch" in res_tampered.stderr
+    install_sh.write_text(install_sh.read_text() + "\n# tampered\n")
+    tampered_source = verify()
+    assert tampered_source.returncode == 1
+    assert "[CHECK] source_tree_digest: FAIL [required]" in tampered_source.stderr
+    assert "[VERIFIED]" not in tampered_source.stdout

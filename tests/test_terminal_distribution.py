@@ -1,6 +1,8 @@
 """Distribution tests use isolated fixtures; no install or desktop mutation."""
 
 import os
+import hashlib
+import json
 import re
 import shutil
 import subprocess
@@ -164,6 +166,41 @@ def test_terminal_bundle_contains_importable_cli_and_mcp(tmp_path):
     )
     assert run.returncode == 0, run.stderr
     assert (pilot / "manifest.json").is_file()
+
+
+def test_bundle_is_reproducible_and_never_embeds_historical_evidence(tmp_path):
+    root = fixture_tree(tmp_path)
+    generated = (
+        "RELEASE_MANIFEST.json",
+        "RELEASE_MANIFEST.json.sig",
+        "evidence.json",
+        "claims.lock",
+        "sbom.cargo.cdx.json",
+        "sbom.python.cdx.json",
+    )
+    for name in generated:
+        (root / name).write_text('{"historical": true}')
+    results = []
+    for run in ("first", "second"):
+        result = subprocess.run(
+            ["bash", str(root / "scripts/package_release.sh"), str(tmp_path / run)],
+            cwd=root,
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+        assert result.returncode == 0, result.stderr
+        results.append(Path(result.stdout.strip()))
+    assert results[0].read_bytes() == results[1].read_bytes()
+    with zipfile.ZipFile(results[0]) as bundle:
+        assert set(generated).isdisjoint(bundle.namelist())
+        inventory = json.loads(bundle.read("SOURCE_MANIFEST.json"))
+        assert inventory["authority"] == "unsigned_content_inventory"
+        assert inventory["source_commit"] is None
+        assert inventory["source_state"] == "unversioned"
+        assert set(inventory["files_sha256"]) == set(bundle.namelist()) - {"SOURCE_MANIFEST.json"}
+        for name, digest in inventory["files_sha256"].items():
+            assert hashlib.sha256(bundle.read(name)).hexdigest() == digest
 
 
 @pytest.mark.skipif(

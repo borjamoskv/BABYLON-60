@@ -8,7 +8,6 @@ Cryptographic Security.
 
 Crypto Agility Layer:
   - hash_registry: Centralized hashing (SHA-256 default, PQC-ready)
-  - provider: Hash/Signature/KDF/Random providers
   - aes: AES-256-GCM encryption
   - keys: Ed25519 key management
   - vault: Encrypted storage

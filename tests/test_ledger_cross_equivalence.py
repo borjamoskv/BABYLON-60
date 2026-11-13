@@ -11,12 +11,21 @@
 from __future__ import annotations
 
 import asyncio
+import base64
+import hashlib
+import json
 import sqlite3
+from collections.abc import AsyncIterator
+from contextlib import closing
+from datetime import datetime, timezone
 from pathlib import Path
+from typing import Any
 from unittest.mock import MagicMock
 
 import pytest
+from nacl.signing import SigningKey, VerifyKey
 
+from babylon60.bft import cortex_persist_ledger, ledger_actor
 from babylon60.bft.cortex_persist_ledger import CortexEvent, CortexPersistFacade, CortexPersistLedger
 from babylon60.bft.ledger_actor import BFTLedgerActor, cortex_event_to_ledger_event
 from babylon60.compliance_exporter.eu_ai_act import EUAIActComplianceExporter
@@ -166,42 +175,172 @@ def test_cortex_persist_facade_sync_execution(tmp_path: Path) -> None:
     assert attestation["integrity_verified"] is True
 
 
-@pytest.mark.asyncio
-async def test_rekor_anchoring_mock_flow(tmp_path: Path) -> None:
-    """Verifica el flujo de anclaje Rekor-style para ledger-heads."""
-    db_path = tmp_path / "rekor_test.db"
-    actor = BFTLedgerActor(db_path)
-    await actor.start()
+_REKOR_TEST_SEED = "19" * 32
 
-    ev = CortexEvent(
+
+@pytest.fixture(params=["cortex", "actor"])
+async def rekor_ledger(
+    tmp_path: Path, request: pytest.FixtureRequest
+) -> AsyncIterator[tuple[CortexPersistLedger | BFTLedgerActor, Path, str, str]]:
+    db_path = tmp_path / "rekor_test.db"
+    event = CortexEvent(
         event_type="REKOR_EVENT",
         payload={"data": "transparency"},
         cortex_taint="TAINT_REKOR",
     )
-    await actor.append_cortex_event(ev)
+    if request.param == "cortex":
+        ledger = CortexPersistLedger(db_path)
+        ledger.append_event(event)
+        yield ledger, db_path, "cortex_ledger", "trg_cortex_no_update"
+    else:
+        actor = BFTLedgerActor(db_path)
+        await actor.start()
+        try:
+            await actor.append_cortex_event(event)
+            yield actor, db_path, "ledger_entries", "trg_ledger_immutable_update"
+        finally:
+            await actor.stop()
 
+
+async def _anchor(
+    ledger: CortexPersistLedger | BFTLedgerActor, client: MagicMock, seed_hex: str | None = None
+) -> dict[str, Any] | None:
+    if isinstance(ledger, BFTLedgerActor):
+        return await ledger.anchor_to_rekor(rekor_client=client, seed_hex=seed_hex)
+    return ledger.anchor_to_rekor(rekor_client=client, seed_hex=seed_hex)
+
+
+@pytest.fixture
+def rekor_client() -> MagicMock:
     mock_rekor = MagicMock(spec=RekorClient)
     mock_rekor.anchor_payload.return_value = {
         "uuid": "392095f9a72387a2139823489123849123849123849123849123849123849123",
         "logIndex": 42000,
         "integratedTime": 1726000000,
     }
+    return mock_rekor
 
-    result = await actor.anchor_to_rekor(rekor_client=mock_rekor)
-    assert result is not None
-    assert str(result["uuid"]).startswith("392095f9")
-    assert result["logIndex"] == 42000
-    assert mock_rekor.anchor_payload.called
 
-    await actor.stop()
+@pytest.mark.asyncio
+@pytest.mark.parametrize("explicit_seed", [False, True], ids=["environment", "explicit"])
+async def test_rekor_anchoring_mock_flow(
+    rekor_ledger: tuple[CortexPersistLedger | BFTLedgerActor, Path, str, str],
+    rekor_client: MagicMock,
+    monkeypatch: pytest.MonkeyPatch,
+    explicit_seed: bool,
+) -> None:
+    ledger, _, _, _ = rekor_ledger
+    fixed_time = datetime(2026, 11, 13, tzinfo=timezone.utc)
 
-    # Probar también en CortexPersistLedger
-    sync_db = tmp_path / "sync_rekor.db"
-    sync_ledger = CortexPersistLedger(sync_db)
-    sync_ledger.append_event(ev)
-    sync_result = sync_ledger.anchor_to_rekor(rekor_client=mock_rekor)
-    assert sync_result is not None
-    assert sync_result["logIndex"] == 42000
+    class FixedDatetime(datetime):
+        @classmethod
+        def now(cls, tz=None):
+            return fixed_time
+
+    monkeypatch.setattr(cortex_persist_ledger, "datetime", FixedDatetime)
+    monkeypatch.setattr(ledger_actor, "datetime", FixedDatetime)
+    monkeypatch.setenv("BABYLON60_SIGNING_SEED", "36" * 32 if explicit_seed else _REKOR_TEST_SEED)
+    seed = _REKOR_TEST_SEED if explicit_seed else None
+
+    attestation = (
+        await ledger.get_state_attestation() if isinstance(ledger, BFTLedgerActor) else ledger.get_state_attestation()
+    )
+    assert attestation["integrity_verified"] is True
+    head = {
+        "merkle_root": attestation["merkle_root"],
+        "max_lamport": 1,
+        "total_entries": 1,
+        "attested_at": fixed_time.isoformat(),
+    }
+    payload = json.dumps(head, sort_keys=True, separators=(",", ":")).encode()
+
+    for _ in range(2):
+        result = await _anchor(ledger, rekor_client, seed)
+        assert result == rekor_client.anchor_payload.return_value
+    assert rekor_client.anchor_payload.call_count == 2
+    expected_key = SigningKey(bytes.fromhex(_REKOR_TEST_SEED)).verify_key.encode()
+    for call in rekor_client.anchor_payload.call_args_list:
+        payload_hash, signature, public_key = call.args
+        assert payload_hash == hashlib.sha256(payload).hexdigest()
+        assert base64.b64decode(public_key) == expected_key
+        assert VerifyKey(expected_key).verify(payload, base64.b64decode(signature)) == payload
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
+    ("seed_hex", "env_seed"),
+    [
+        (None, None),
+        (None, "not-hex"),
+        ("19", None),
+        ("", _REKOR_TEST_SEED),
+        ("not-hex", _REKOR_TEST_SEED),
+    ],
+    ids=["missing", "malformed-environment", "wrong-length", "explicit-empty", "explicit-malformed"],
+)
+async def test_rekor_rejects_unconfigured_or_invalid_seed(
+    rekor_ledger: tuple[CortexPersistLedger | BFTLedgerActor, Path, str, str],
+    rekor_client: MagicMock,
+    monkeypatch: pytest.MonkeyPatch,
+    seed_hex: str | None,
+    env_seed: str | None,
+) -> None:
+    ledger, _, _, _ = rekor_ledger
+    if env_seed is None:
+        monkeypatch.delenv("BABYLON60_SIGNING_SEED", raising=False)
+    else:
+        monkeypatch.setenv("BABYLON60_SIGNING_SEED", env_seed)
+    result = await _anchor(ledger, rekor_client, seed_hex)
+    rekor_client.anchor_payload.assert_not_called()
+    assert result is None
+
+
+@pytest.mark.asyncio
+async def test_rekor_rejects_tampered_ledger(
+    rekor_ledger: tuple[CortexPersistLedger | BFTLedgerActor, Path, str, str], rekor_client: MagicMock
+) -> None:
+    ledger, db_path, table, trigger = rekor_ledger
+    with closing(sqlite3.connect(db_path)) as conn, conn:
+        conn.execute(f"DROP TRIGGER {trigger}")
+        conn.execute(f'UPDATE {table} SET payload_json = \'{{"data":"altered"}}\' WHERE seq = 1')
+
+    attestation = (
+        await ledger.get_state_attestation() if isinstance(ledger, BFTLedgerActor) else ledger.get_state_attestation()
+    )
+    assert attestation["integrity_verified"] is False
+    result = await _anchor(ledger, rekor_client, _REKOR_TEST_SEED)
+    rekor_client.anchor_payload.assert_not_called()
+    assert result is None
+
+
+@pytest.mark.asyncio
+async def test_rekor_actor_verifies_the_snapshot_it_would_sign(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, rekor_client: MagicMock
+) -> None:
+    db_path = tmp_path / "actor_rekor_snapshot.db"
+    actor = BFTLedgerActor(db_path)
+    await actor.start()
+    try:
+        await actor.append_cortex_event(CortexEvent("REKOR_EVENT", {"data": "transparency"}, "TAINT_REKOR"))
+    finally:
+        await actor.stop()
+
+    with closing(sqlite3.connect(db_path)) as conn, conn:
+        entry_hash = conn.execute("SELECT entry_hash FROM ledger_entries WHERE seq = 1").fetchone()[0]
+        conn.execute("DROP TRIGGER trg_ledger_immutable_update")
+        conn.execute("UPDATE ledger_entries SET entry_hash = ? WHERE seq = 1", ("ab" * 32,))
+    from babylon60.bft.cortex_crypto_kernel import build_merkle_tree
+
+    def restore_after_read(leaves):
+        with closing(sqlite3.connect(db_path)) as conn, conn:
+            conn.execute("UPDATE ledger_entries SET entry_hash = ? WHERE seq = 1", (entry_hash,))
+        return build_merkle_tree(leaves)
+
+    monkeypatch.setattr(ledger_actor, "build_merkle_tree", restore_after_read)
+    result = await actor.anchor_to_rekor(rekor_client=rekor_client, seed_hex=_REKOR_TEST_SEED)
+    assert await actor.verify_chain() is True
+    rekor_client.anchor_payload.assert_not_called()
+    assert result is None
 
 
 def test_eu_ai_act_compliance_dual_schema_verification(tmp_path: Path) -> None:

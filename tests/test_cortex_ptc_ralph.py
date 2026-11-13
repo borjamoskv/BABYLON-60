@@ -432,7 +432,7 @@ def test_scopes_overlap_and_blackboard_prevent_abs_handoff_and_toctou_bypasses(t
     abs_target = str(REPO_ROOT / "01_KISH_ENGINE" / "babylon60" / "mcp" / "cortex_mcp_server.py")
     assert scopes_overlap("01_KISH_ENGINE/babylon60/mcp", abs_target)
     assert scopes_overlap(".", abs_target)
-    assert scopes_overlap("../BABYLON-60/01_KISH_ENGINE/babylon60/mcp", abs_target)
+    assert scopes_overlap(f"../{REPO_ROOT.name}/01_KISH_ENGINE/babylon60/mcp", abs_target)
 
     server = CortexMCPServer(ledger_path=tmp_path / "ledger.db", causal_gate_path=tmp_path / "gate.db")
     raw_bb = inspect.unwrap(CortexMCPServer._tool_blackboard_dispatch)
@@ -493,3 +493,87 @@ def test_scopes_overlap_and_blackboard_prevent_abs_handoff_and_toctou_bypasses(t
     handoff_body = json.loads(handoff_res["content"][0]["text"])
     assert handoff_body["admitted"] is False
     assert "WRITE_SCOPE_COLLISION" in handoff_body["reason"]
+
+
+_HOSTILE_SEPARATORS = ["\n", "\r", "\r\n", "\x0b", "\x0c", "\x1c", "\x1d", "\x1e", "\x85", " ", " ", "\x00"]
+
+
+@pytest.mark.parametrize("sep", _HOSTILE_SEPARATORS)
+def test_render_mcp_tools_sdk_py_neutralizes_description_injection(sep: str) -> None:
+    hostile = f"ok{sep}    x = PWNED.append('desc'){sep}    '''\\\"\"\" # \\"
+    stub = render_mcp_tools_sdk_py(
+        [
+            {
+                "name": "evil): ...\rPWNED.append('name')\r    async def x(",
+                "description": hostile,
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "p=PWNED.append('param')\r": {
+                            "type": "string",
+                            "title": "t\rPWNED.append('title')",
+                            "default": "d\rPWNED.append('default')",
+                            "enum": ["e\rPWNED.append('enum')"],
+                        }
+                    },
+                    "required": [],
+                },
+            }
+        ]
+    )
+    # Every line under any line-splitting convention is exactly one "\n"-terminated emitted line.
+    assert len(stub.splitlines()) == stub.count("\n")
+    assert "\r" not in stub and "\x00" not in stub
+    pwned: list[str] = []
+    exec(compile(stub, "<ptc-sdk-stub>", "exec"), {"PWNED": pwned})  # noqa: S102
+    assert pwned == []
+
+
+def test_scopes_overlap_is_fail_closed_on_ambiguous_scopes(tmp_path: Path) -> None:
+    import os
+    import unicodedata
+
+    # Parent traversal and absolute ancestors of the repo contain every in-repo scope
+    assert scopes_overlap("..", "src")
+    assert scopes_overlap("src", "../..")
+    assert scopes_overlap(str(REPO_ROOT.parent), "src/a.py")
+    assert scopes_overlap("src/a.py", str(REPO_ROOT.parent.parent))
+    # Case-insensitive filesystems (APFS/NTFS) and Unicode NFC vs. NFD spellings alias the same file
+    assert scopes_overlap("src/Auth.py", "src/auth.py")
+    assert scopes_overlap("SRC", "src/auth.py")
+    nfc = unicodedata.normalize("NFC", "src/canción.py")
+    nfd = unicodedata.normalize("NFD", nfc)
+    assert nfc != nfd
+    assert scopes_overlap(nfc, nfd)
+    # Globs widen to their literal parent directory
+    assert scopes_overlap("src/*", "src/a.py")
+    assert scopes_overlap("src/a.py", "src/**/*.py")
+    assert scopes_overlap("*.py", "src/a.py")
+    assert scopes_overlap("src/[ab].py", "src/a.py")
+    assert scopes_overlap("src/a?.py", "src/ab.py")
+    assert not scopes_overlap("src/*", "tests/a.py")
+    # Home prefix is expanded; an unresolvable one is rejected explicitly
+    assert scopes_overlap("~/x", os.path.join(os.path.expanduser("~"), "x", "y.py"))
+    assert scopes_overlap("~", os.path.expanduser("~/x"))
+    with pytest.raises(ValueError, match="unresolvable '~'"):
+        scopes_overlap("~no_such_user_b60/x", "src")
+    with pytest.raises(ValueError, match="unresolvable '~'"):
+        normalize_write_scope("~no_such_user_b60/x")
+    # Symlinked prefixes resolve to the same physical scope (absolute and relative to base_dir)
+    real = tmp_path / "real"
+    real.mkdir()
+    (tmp_path / "link").symlink_to(real, target_is_directory=True)
+    assert scopes_overlap(str(tmp_path / "link" / "x"), str(real / "x"))
+    assert scopes_overlap(str(tmp_path / "link"), str(real / "x" / "y.py"))
+    assert scopes_overlap("link/x", "real/x/y.py", base_dir=tmp_path)
+    assert scopes_overlap("a", str(real / "a" / "b.py"), base_dir=tmp_path / "link")
+    assert not scopes_overlap(str(tmp_path / "link" / "x"), str(real / "y"))
+    # A relative base_dir cannot be anchored against an absolute scope: fail closed
+    assert scopes_overlap("src/a.py", "/elsewhere/b.py", base_dir="relative_root")
+    # Legitimate disjoint siblings stay disjoint
+    assert not scopes_overlap("src/a.py", "src/b.py")
+    assert not scopes_overlap("src", "src_ext")
+    assert not scopes_overlap("../sibling_repo/src", "src")
+    assert not scopes_overlap(str(REPO_ROOT / "src" / "a.py"), "tests/a.py")
+    assert normalize_write_scope(str(REPO_ROOT)) == "."
+    assert normalize_write_scope("src/./a//b/") == "src/a/b"

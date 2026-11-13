@@ -15,6 +15,7 @@ from __future__ import annotations
 import json
 import logging
 import os
+import shutil
 import sqlite3
 import subprocess
 import time
@@ -58,7 +59,25 @@ def _parse_codex_events(lines: list[str]) -> tuple[Optional[str], list[str], dic
     return thread_id, agent_messages, usage, raw_events
 
 
-CODEX_CLI_PATH = Path("/Applications/ChatGPT.app/Contents/Resources/codex")
+_CODEX_CLI_CANDIDATES = (
+    Path("/Applications/ChatGPT.app/Contents/Resources/codex-cli/bin/codex"),
+    Path("/Applications/ChatGPT.app/Contents/Resources/codex"),  # legacy layout
+)
+
+
+def _resolve_codex_cli() -> Path:
+    """Locate the Codex CLI: $CODEX_CLI, bundled app binary, then PATH."""
+    env = os.environ.get("CODEX_CLI")
+    if env:
+        return Path(env).expanduser()
+    for cand in _CODEX_CLI_CANDIDATES:
+        if cand.is_file() and os.access(cand, os.X_OK):
+            return cand
+    found = shutil.which("codex")
+    return Path(found) if found else _CODEX_CLI_CANDIDATES[0]
+
+
+CODEX_CLI_PATH = _resolve_codex_cli()
 CODEX_HOME = Path.home() / ".codex"
 THREAD_HISTORY_DB = CODEX_HOME / "thread_history_1.sqlite"
 SESSION_INDEX = CODEX_HOME / "session_index.jsonl"
@@ -69,7 +88,7 @@ class CodexDriver:
     """Interface to local OpenAI Codex CLI and Desktop application."""
 
     def __init__(self, cli_path: Optional[Path] = None, codex_home: Optional[Path] = None):
-        self.cli_path = cli_path or CODEX_CLI_PATH
+        self.cli_path = cli_path or _resolve_codex_cli()
         self.codex_home = codex_home or CODEX_HOME
         self.history_db = self.codex_home / "thread_history_1.sqlite"
         self.session_index = self.codex_home / "session_index.jsonl"
@@ -157,11 +176,16 @@ class CodexDriver:
         thread_id, agent_messages, usage, raw_events = _parse_codex_events(lines)
         full_text = "\n".join(agent_messages)
 
-        if proc.returncode != 0 and not full_text:
+        if proc.returncode != 0:
+            event_errors = [
+                ev.get("message")
+                for ev in raw_events
+                if isinstance(ev, dict) and ev.get("type") == "error" and ev.get("message")
+            ]
             return {
                 "success": False,
                 "returncode": proc.returncode,
-                "error": proc.stderr or proc.stdout,
+                "error": event_errors[-1] if event_errors else (proc.stderr or proc.stdout),
                 "duration_sec": duration_sec,
             }
 
