@@ -79,9 +79,10 @@ def get_active_algorithm() -> HashAlgorithm:
 def cortex_hash(data: bytes | str) -> str:
     """Compute the Base-60 digest of data using the active CORTEX hash algorithm.
 
-    This is the ONLY function that should be used for cryptographic hashing
-    across the CORTEX codebase. Direct hashlib calls are prohibited outside
-    this module.
+    This is the registry entry point for caller-selected CORTEX digests.
+    It returns Base-60, not hexadecimal. The SQLite agent-event ledger does
+    not go through here: ``cortex_crypto_kernel`` hashes rows with SHA3-256
+    hex, so ``configure()`` cannot rewrite an existing chain.
 
     Args:
         data: The data to hash. Strings are UTF-8 encoded automatically.

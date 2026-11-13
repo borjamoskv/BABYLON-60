@@ -92,7 +92,11 @@ def compute_tx_hash(
             creating or verifying legacy v2 transactions.
 
     Returns:
-        SHA-256 hex digest of the canonical input.
+        Base-60 digest from ``babylon60.crypto.hash_registry.cortex_hash``.
+        The default algorithm is SHA-256, but this is not a hex SHA-256 string.
+        ``configure()`` can switch the algorithm for later calls. The SQLite
+        agent-event ledger does not use this function; its row hashes are
+        SHA3-256 hex in ``cortex_crypto_kernel``.
     """
     if tenant_id is None:
         h_input = f"{prev_hash}\x00{project}\x00{action}\x00{detail_json}\x00{timestamp}"
@@ -118,7 +122,11 @@ def compute_tx_hash_v1(
 
 
 def compute_fact_hash(content: str) -> str:
-    """Compute deterministic SHA-256 hash for fact content."""
+    """Compute a SHA-256 hex digest of fact content.
+
+    Unlike ``compute_tx_hash``, this stays on hashlib SHA-256 and does not
+    follow the hot-swappable registry.
+    """
     import hashlib
 
     content_bytes = content.encode("utf-8") if isinstance(content, str) else content

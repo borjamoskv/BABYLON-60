@@ -1,10 +1,11 @@
 # [Causal-Determinist] Exergy-Maximized
 """
-CORTEX PERSIST LEDGER — ULTRATHINK Cryptographic BFT Ledger
-============================================================
-Modulo de persistencia criptográfica inmutable para BABYLON-60.
-Combina firma digital Ed25519, encadenamiento SHA3-256, SQLite WAL
-con busy_timeout=5000ms, idempotencia UUID v5 y ordenamiento Lamport.
+CORTEX PERSIST LEDGER — canonical agent-event writer
+=====================================================
+SHA3-256 hash chain on ``cortex_ledger`` (SQLite WAL, single writer).
+Ed25519 is not stored on each row. How this table relates to
+``ledger_entries`` and ``state_log`` is documented in
+``docs/01_spec/spec_ledger_writers.md``.
 
 Invariantes:
   - INV_BFT_02: WAL mode + busy_timeout=5000ms.
@@ -18,8 +19,6 @@ Authorship: Borja Moskv (borjamoskv)
 
 from __future__ import annotations
 
-import base64
-import hashlib
 import json
 import logging
 import os
@@ -35,6 +34,7 @@ from typing import Any, Dict, List, Optional, Tuple, TypedDict
 from babylon60.bft.cortex_crypto_kernel import (
     _canonical_json,
     compute_cortex_hash as compute_cortex_hash,
+    publish_rekor_anchor,
     build_merkle_tree,
     generate_merkle_proof,
     verify_merkle_proof,
@@ -815,33 +815,7 @@ class CortexPersistLedger:
             "attested_at": attestation["attested_at"],
         }
         head_json = _canonical_json(head_data).encode("utf-8")
-        payload_hash = hashlib.sha256(head_json).hexdigest()
-
-        from nacl.signing import SigningKey
-
-        seed = seed_hex or os.environ.get("BABYLON60_SIGNING_SEED", "").strip()
-        if seed:
-            try:
-                sk = SigningKey(bytes.fromhex(seed))
-            except Exception:
-                sk = SigningKey.generate()
-        else:
-            sk = SigningKey.generate()
-
-        signed = sk.sign(head_json)
-        sig_b64 = base64.b64encode(signed.signature).decode("utf-8")
-        pk_b64 = base64.b64encode(sk.verify_key.encode()).decode("utf-8")
-
-        if rekor_client is None:
-            try:
-                from babylon60.crypto.rekor_client import RekorClient
-
-                rekor_client = RekorClient()
-            except ImportError:
-                return None
-
-        anchor_res = rekor_client.anchor_payload(payload_hash, sig_b64, pk_b64)
-        return dict(anchor_res) if anchor_res else None
+        return publish_rekor_anchor(head_json, rekor_client, seed_hex)
 
 
 class CortexPersistFacade:

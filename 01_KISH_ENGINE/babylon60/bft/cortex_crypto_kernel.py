@@ -1,5 +1,6 @@
 import hashlib
 import json
+import os
 import uuid
 from typing import Dict, List, Mapping, Tuple, TypedDict
 
@@ -38,6 +39,57 @@ class MMRProofPacket(TypedDict):
 def _canonical_json(data: object) -> str:
     """Serialización canónica determinista."""
     return json.dumps(data, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False)
+
+
+def require_ed25519_seed(seed_hex: str | None = None) -> bytes:
+    """Return the 32-byte Ed25519 seed. A missing or invalid seed is an error.
+
+    Anchoring must not invent a signing key. Without this seed the signature
+    does not identify the operator.
+    """
+    raw_text = seed_hex if seed_hex is not None else os.environ.get("BABYLON60_SIGNING_SEED", "")
+    seed = raw_text.strip()
+    if not seed:
+        raise ValueError(
+            "BABYLON60_SIGNING_SEED is required to anchor the ledger; refusing to generate an ephemeral signing key"
+        )
+    try:
+        material = bytes.fromhex(seed)
+    except ValueError as exc:
+        raise ValueError("BABYLON60_SIGNING_SEED must be a hex-encoded Ed25519 seed") from exc
+    if len(material) != 32:
+        raise ValueError("BABYLON60_SIGNING_SEED must be 32 bytes")
+    return material
+
+
+def publish_rekor_anchor(
+    head_json: bytes,
+    rekor_client: object | None = None,
+    seed_hex: str | None = None,
+) -> dict[str, object] | None:
+    """Sign one ledger head and submit it. Shared by both Python ledger classes.
+
+    The seed requirement is strict: a missing or invalid ``BABYLON60_SIGNING_SEED``
+    raises ``ValueError`` instead of generating an ephemeral key.
+    """
+    import base64
+
+    from nacl.signing import SigningKey
+
+    signing_key = SigningKey(require_ed25519_seed(seed_hex))
+    signed = signing_key.sign(head_json)
+    payload_hash = hashlib.sha256(head_json).hexdigest()
+    signature_b64 = base64.b64encode(signed.signature).decode("utf-8")
+    public_key_b64 = base64.b64encode(signing_key.verify_key.encode()).decode("utf-8")
+    if rekor_client is None:
+        try:
+            from babylon60.crypto.rekor_client import RekorClient
+
+            rekor_client = RekorClient()
+        except ImportError:
+            return None
+    anchor = rekor_client.anchor_payload(payload_hash, signature_b64, public_key_b64)  # type: ignore[attr-defined]
+    return dict(anchor) if anchor else None
 
 
 def compute_envelope_hash(envelope: Mapping[str, object] | Dict[str, object]) -> str:

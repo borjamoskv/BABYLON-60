@@ -7,8 +7,6 @@ import os
 import asyncio
 import uuid
 from dataclasses import dataclass
-import base64
-import hashlib
 import json
 from datetime import datetime, timezone
 from pathlib import Path
@@ -26,6 +24,7 @@ from babylon60.bft.cortex_crypto_kernel import (  # noqa: E402
     _canonical_json,
     compute_envelope_hash,
     build_merkle_tree,
+    publish_rekor_anchor,
     MerkleMountainRange,
     ZERO_HASH_256,
 )
@@ -369,33 +368,7 @@ class BFTLedgerActor:
             "attested_at": attestation["attested_at"],
         }
         head_json = _canonical_json(head_data).encode("utf-8")
-        payload_hash = hashlib.sha256(head_json).hexdigest()
-
-        from nacl.signing import SigningKey
-
-        seed = seed_hex or os.environ.get("BABYLON60_SIGNING_SEED", "").strip()
-        if seed:
-            try:
-                sk = SigningKey(bytes.fromhex(seed))
-            except Exception:
-                sk = SigningKey.generate()
-        else:
-            sk = SigningKey.generate()
-
-        signed = sk.sign(head_json)
-        sig_b64 = base64.b64encode(signed.signature).decode("utf-8")
-        pk_b64 = base64.b64encode(sk.verify_key.encode()).decode("utf-8")
-
-        if rekor_client is None:
-            try:
-                from babylon60.crypto.rekor_client import RekorClient
-
-                rekor_client = RekorClient()
-            except ImportError:
-                return None
-
-        anchor_res = rekor_client.anchor_payload(payload_hash, sig_b64, pk_b64)
-        return dict(anchor_res) if anchor_res else None
+        return publish_rekor_anchor(head_json, rekor_client, seed_hex)
 
     def append_cortex_event(self, event: Any) -> asyncio.Future[LedgerEntryResult]:
         """
