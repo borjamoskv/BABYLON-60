@@ -16,7 +16,6 @@ from babylon60.bft.cortex_crypto_kernel import (
     observation_commitment,
 )
 from babylon60.bft.cortex_persist_ledger import CortexEvent, CortexPersistLedger
-from babylon60.bft.integrity import LedgerCheckpoint
 from babylon60.bft.ledger_actor import (
     LEDGER_ENTRY_HASH_VERSION,
     NAMESPACE_UUID,
@@ -41,22 +40,12 @@ def _event(name: str, **overrides: object) -> CortexEvent:
     return CortexEvent(**fields)  # type: ignore[arg-type]
 
 
-def _head(path: Path) -> tuple[int, str]:
-    with sqlite3.connect(path) as conn:
-        total = conn.execute("SELECT COUNT(*) FROM cortex_ledger").fetchone()[0]
-        row = conn.execute("SELECT entry_hash FROM cortex_ledger ORDER BY seq DESC LIMIT 1").fetchone()
-        if row is None:
-            return 0, ZERO_HASH_256
-        return int(total), str(row[0])
-
-
 def test_checkpoint_rejects_a_recomputed_chain_and_unpinned_verify_accepts_it(tmp_path: Path) -> None:
     path = tmp_path / "rewrite.db"
     ledger = CortexPersistLedger(path)
     ledger.append_event(_event("one"))
     ledger.append_event(_event("two"))
-    count, head = _head(path)
-    pin = LedgerCheckpoint(count, head)
+    pin = ledger.get_checkpoint()
     assert ledger.verify_integrity(expected_checkpoint=pin) is True
 
     with sqlite3.connect(path) as conn:
@@ -121,6 +110,23 @@ def test_v3_binds_timestamp_and_v2_rows_still_verify(tmp_path: Path) -> None:
     assert ledger.verify_integrity() is False
 
 
+def test_resealed_timestamp_does_not_keep_the_checkpoint(tmp_path: Path) -> None:
+    path = tmp_path / "reseal.db"
+    ledger = CortexPersistLedger(path)
+    ledger.append_event(_event("one"))
+    pin = ledger.get_checkpoint()
+    with sqlite3.connect(path) as conn:
+        conn.execute("DROP TRIGGER trg_cortex_no_update")
+        entry_hash, agent_id = conn.execute("SELECT entry_hash, agent_id FROM cortex_ledger").fetchone()
+        new_stamp = "1999-01-01T00:00:00+00:00"
+        conn.execute(
+            "UPDATE cortex_ledger SET timestamp=?, observation_hash=?",
+            (new_stamp, observation_commitment(entry_hash, new_stamp, agent_id)),
+        )
+    assert ledger.verify_integrity() is True
+    assert ledger.verify_integrity(expected_checkpoint=pin) is False
+
+
 def test_unit_separator_no_longer_collapses_distinct_events(tmp_path: Path) -> None:
     ledger = CortexPersistLedger(tmp_path / "alias.db")
     first = ledger.append_event(_event("same", cortex_taint="a\x1fb", agent_id="c"))
@@ -156,6 +162,36 @@ def test_duplicate_event_id_with_different_content_is_rejected(tmp_path: Path, m
     )
     with pytest.raises(ValueError, match="INV_BFT_04"):
         ledger.append_event(_event("two"))
+
+
+def test_append_after_tail_delete_keeps_seq_inside_the_digest(tmp_path: Path) -> None:
+    path = tmp_path / "gap.db"
+    ledger = CortexPersistLedger(path)
+    ledger.append_event(_event("one"))
+    ledger.append_event(_event("two"))
+    with sqlite3.connect(path) as conn:
+        conn.execute("DROP TRIGGER trg_cortex_no_delete")
+        conn.execute("DELETE FROM cortex_ledger WHERE seq=2")
+    fresh = ledger.append_event(_event("three"))
+    with sqlite3.connect(path) as conn:
+        stored_seq, stored_hash, version, payload, event_id, event_type, taint, agent, domain, lamport, prev, timestamp = conn.execute(
+            "SELECT seq, entry_hash, hash_version, payload_json, event_id, event_type, cortex_taint, agent_id, domain, lamport_t, prev_hash, timestamp FROM cortex_ledger ORDER BY seq DESC LIMIT 1"
+        ).fetchone()
+    assert stored_seq == fresh["seq"] == 3
+    assert stored_hash == compute_cortex_hash(
+        seq=stored_seq,
+        event_id=event_id,
+        event_type=event_type,
+        payload_json=payload,
+        cortex_taint=taint,
+        lamport_t=lamport,
+        prev_hash=prev,
+        timestamp=timestamp,
+        agent_id=agent,
+        domain=domain,
+        hash_version=version,
+    )
+    assert ledger.verify_integrity() is False
 
 
 def test_tail_truncation_is_detected_via_sqlite_sequence(tmp_path: Path) -> None:

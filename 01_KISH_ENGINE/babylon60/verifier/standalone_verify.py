@@ -308,7 +308,15 @@ def _verify_sqlite_ledger(
             """
         )
         rows = cursor.fetchall()
+        schema_row = cursor.execute(
+            "SELECT sql FROM sqlite_master WHERE type='table' AND name='cortex_ledger'"
+        ).fetchone()
+        sequence_row = cursor.execute(
+            "SELECT seq FROM sqlite_sequence WHERE name='cortex_ledger'"
+        ).fetchone()
         conn.close()
+        uses_autoincrement = bool(schema_row and schema_row[0] and "AUTOINCREMENT" in schema_row[0].upper())
+        sequence_high_water = int(sequence_row[0]) if sequence_row and sequence_row[0] is not None else 0
 
         total_entries = len(rows)
         prev_hash = ZERO_HASH_256
@@ -407,6 +415,15 @@ def _verify_sqlite_ledger(
             prev_hash = entry_hash
             last_lamport = lamport_t
             expected_seq += 1
+
+        if uses_autoincrement and sequence_high_water != total_entries:
+            return {
+                "verified": False,
+                "integrity_verified": False,
+                "merkle_root": "",
+                "total_entries": total_entries,
+                "detail": "TAIL_TRUNCATION: sqlite_sequence does not match the verified tail",
+            }
 
         computed_merkle_root = build_cortex_merkle_tree(entry_hashes)
 

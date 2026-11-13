@@ -129,6 +129,32 @@ def compute_cortex_hash(
     return compute_envelope_hash(body)
 
 
+def fold_observation(previous: str, observation_hash: str) -> str:
+    """Chain every v3 observation seal so a checkpoint can see an earlier timestamp edit."""
+    if type(previous) is not str or type(observation_hash) is not str:
+        raise TypeError("observation fold fields must be strings")
+    return compute_envelope_hash(
+        {
+            "schema": "babylon60:cortex-observation-fold:v3",
+            "prev": previous,
+            "observation_hash": observation_hash,
+        }
+    )
+
+
+def checkpoint_head(chain_head: str, observation_fold: str) -> str:
+    """Pin the chain head. v3 folds in observation seals; v1/v2 stay the chain head itself."""
+    if observation_fold == ZERO_HASH_256:
+        return chain_head
+    return compute_envelope_hash(
+        {
+            "schema": "babylon60:cortex-checkpoint:v3",
+            "chain_head": chain_head,
+            "observation_fold": observation_fold,
+        }
+    )
+
+
 def observation_commitment(entry_hash: str, timestamp: str, agent_id: str) -> str:
     """Bind the stored wall time to a chain digest without putting that clock in the chain."""
     if type(entry_hash) is not str or type(timestamp) is not str or type(agent_id) is not str:
