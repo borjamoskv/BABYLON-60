@@ -252,11 +252,19 @@ def main() -> int:
         help="Additional skills roots; repeat to scan multiple libraries (must exist)",
     )
     parser.add_argument("--workspace-only", action="store_true", help="Explicitly omit the default Antigravity library")
+    parser.add_argument(
+        "--public-projection",
+        action="store_true",
+        help="Public tree: .agents/rules is vault-only (scripts/verify_release.sh); report it NOT_CHECKED if absent",
+    )
     args = parser.parse_args()
     root = args.repo_root
     rules, skills = root / ".agents/rules", root / ".agents/skills"
     gates = root / "scripts/c5_quality_gates"
-    for directory in (rules, skills, gates):
+    required = (skills, gates) if args.public_projection and not rules.is_dir() else (rules, skills, gates)
+    if rules not in required:
+        print(f"NOT_CHECKED: vault-only workspace rules absent from public projection: {rules}")
+    for directory in required:
         if not directory.is_dir():
             print(f"NO_VERIFICADO: missing scope: {directory}", file=sys.stderr)
             return 2

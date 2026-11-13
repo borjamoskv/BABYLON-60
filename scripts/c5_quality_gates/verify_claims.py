@@ -15,9 +15,10 @@ import platform
 import re
 import subprocess
 import sys
+import textwrap
 import time
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Sequence, Tuple
 
 try:
     import tomllib
@@ -99,6 +100,15 @@ VAULT_ONLY_PREFIXES = (
     ".playwright-mcp/",
     "docs/security/evidence/",
     "tools/skill_library/",
+    "tests/test_skill_intent_routing.py",
+    "tests/test_skill_library_convergence.py",
+    "tests/test_skill_maintenance.py",
+    "tests/test_project_skills_regressions.py",
+    "tests/test_swarm100_lot1_regressions_vault.py",
+    "tests/test_swarm100_lot2_regressions_vault.py",
+    "tests/test_swarm100_lot12_s5_regressions_vault.py",
+    "tests/test_swarm100_round2_regressions_vault.py",
+    "tests/test_regulatory_native_validation_vault.py",
     "assets/brand/github-art-brut.svg",
     "assets/AppIcon.icns",
     "assets/babylon60_brutalist_logo_1024.png",
@@ -133,7 +143,17 @@ def source_tree_digest(cwd: Path) -> str:
         if is_excluded_from_public_tree(relative):
             continue
         path = cwd / relative
-        payload = str(path.readlink()).encode("utf-8") if path.is_symlink() else path.read_bytes()
+        flags = os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0)
+        try:
+            fd = os.open(path, flags)
+        except OSError:
+            if path.is_symlink():
+                payload = str(path.readlink()).encode("utf-8")
+            else:
+                raise
+        else:
+            with os.fdopen(fd, "rb") as stream:
+                payload = stream.read()
         digest.update(raw_path + b"\0")
         digest.update(len(payload).to_bytes(8, "big"))
         digest.update(payload)
@@ -172,6 +192,155 @@ def count_executed_tests(output: str) -> Optional[int]:
     if re.search(r"collected 0 items|no tests ran", output):
         return 0
     return total if recognised else None
+
+
+ERROR_SUMMARY_LIMIT = 1000
+_SUMMARY_LINE_LIMIT = 240
+_PANIC_MESSAGE_LINES = 3
+_OMITTED_LINES = "[... +{count} líneas omitidas]"
+
+_ANSI_ESCAPE_RE = re.compile(r"\x1b\[[0-9;?]*[ -/]*[@-~]")
+# Artefactos locales o aleatorios sin valor causal: usuario, temporales de pytest y de claims, id de hilo.
+_LOCAL_ARTIFACT_RULES = (
+    (re.compile(r"(?<![\w.-])/(Users|home)/[^/\s'\"`]+"), r"/\1/<user>"),
+    (re.compile(r"pytest-of-[^/\s'\"`]+"), "pytest-of-<user>"),
+    (re.compile(r"(?<=/)pytest-\d+(?=/)"), "pytest-<n>"),
+    (re.compile(r"b60_claim_\w+"), "b60_claim_<rand>"),
+    (re.compile(r"^(thread '[^'\n]*') \(\d+\)(?= panicked at )", re.MULTILINE), r"\1 (<tid>)"),
+)
+_SEPARATOR_RE = re.compile(r"^([=!_-])\1* (.+?) \1+$")
+_PYTEST_HEADER_RE = re.compile(r"^(?:platform |collect|hypothesis |Using |(?!error:|warning:)[a-z][\w-]*: )")
+_CARGO_PROGRESS_RE = re.compile(
+    r"^\s+(?:Compiling|Checking|Finished|Running|Doc-tests|Fresh|Blocking|Downloading|Downloaded|Updating"
+    r"|Locking|Adding|Building|Documenting|Waiting)\b"
+)
+_RUST_NOISE_BLOCK_RE = re.compile(r"^(?:warning(?:\[\w+\])?: |stack backtrace:)")
+_DIAGNOSTIC_CONTINUATION_RE = re.compile(r"^(?:\s|\d+\s*\||\.\.\.)")
+_PRIMARY_CAUSE_RE = re.compile(
+    r"^(?:FAILED|ERROR) \S"  # pytest: FAILED/ERROR <nodeid> [- mensaje]
+    r"|^ERROR: "  # pytest: error de uso o de colección
+    r"|^E {2,}\S"  # pytest: excepción y explicación de la aserción
+    r"|^Interrupted: "  # pytest: sesión interrumpida (p. ej. errores de colección)
+    r"|^(?:no tests ran|\d+ \w+(?:, \d+ \w+)*) in \d+\.\d\ds(?: \(\d+:\d\d:\d\d\))?$"  # pytest: recuento final
+    r"|^test result: FAILED"  # libtest
+    r"|^error: (?:(?:doc)?test failed|could not compile|process didn't exit successfully|\d+ targets? failed)"
+)
+_SECONDARY_CAUSE_RE = re.compile(r"^error(?:\[E\d+\])?: |^Error: |^\S+:\d+:\d+: error\b")
+_PANIC_RE = re.compile(r"^thread '[^']*'(?: \(\S+\))? panicked at ")
+_PANIC_STOP_RE = re.compile(r"^(?:note: |stack backtrace:|thread '|failures:|test result: )")
+
+
+def local_path_redactions(repo_root: Path) -> List[Tuple[str, str]]:
+    """Prefijos absolutos de esta máquina con su marcador neutro: raíz del repo, temporal y HOME."""
+    import tempfile
+
+    pairs = [(str(repo_root), "<repo>"), (tempfile.gettempdir(), "<tmp>"), (os.path.expanduser("~"), "~")]
+    pairs = [(prefix, label) for prefix, label in pairs if os.path.isabs(prefix)]
+    pairs += [(os.path.realpath(prefix), label) for prefix, label in pairs]
+    return [(prefix, label) for prefix, label in dict.fromkeys(pairs) if prefix.rstrip("/")]
+
+
+def _normalize_local_artifacts(text: str, redactions: Sequence[Tuple[str, str]]) -> str:
+    """Quita escapes ANSI y sustituye prefijos locales y artefactos aleatorios por marcadores neutros."""
+    text = _ANSI_ESCAPE_RE.sub("", text)
+    for prefix, label in sorted(redactions, key=lambda item: len(item[0]), reverse=True):
+        prefix = prefix.rstrip("/")
+        if prefix:
+            boundary = re.compile(r"(?<![\w.-])" + re.escape(prefix) + r"(?![\w.-])")
+            text = boundary.sub(lambda _match: label, text)
+    for rule, replacement in _LOCAL_ARTIFACT_RULES:
+        text = rule.sub(replacement, text)
+    return text
+
+
+def _drop_noise(text: str) -> List[str]:
+    """Quita encabezado de sesión pytest, progreso de cargo, avisos de rustc y backtraces; compacta separadores."""
+    kept: List[str] = []
+    skip = ""
+    for raw in text.splitlines():
+        line = raw.rstrip()
+        separator = _SEPARATOR_RE.match(line)
+        if separator:
+            line = f"{separator.group(1)} {separator.group(2)} {separator.group(1)}"
+        if skip == "header" and _PYTEST_HEADER_RE.match(line):
+            continue
+        if skip == "block" and line and _DIAGNOSTIC_CONTINUATION_RE.match(line):
+            continue
+        skip = ""
+        if separator and separator.group(2) == "test session starts":
+            skip = "header"
+        elif _RUST_NOISE_BLOCK_RE.match(line):
+            skip = "block"
+        elif not _CARGO_PROGRESS_RE.match(line) and (line or (kept and kept[-1])):
+            kept.append(line)
+    while kept and not kept[-1]:
+        kept.pop()
+    return kept
+
+
+def _key_units(lines: List[str]) -> List[Tuple[int, List[int]]]:
+    """Bloques de causa como (prioridad, índices); un pánico de Rust se toma con su mensaje."""
+    units: List[Tuple[int, List[int]]] = []
+    index = 0
+    while index < len(lines):
+        if _PANIC_RE.match(lines[index]):
+            block = [index]
+            while (
+                len(block) <= _PANIC_MESSAGE_LINES
+                and index + len(block) < len(lines)
+                and lines[index + len(block)]
+                and not _PANIC_STOP_RE.match(lines[index + len(block)])
+            ):
+                block.append(index + len(block))
+            units.append((0, block))
+            index += len(block)
+            continue
+        separator = _SEPARATOR_RE.match(lines[index])
+        content = separator.group(2) if separator else lines[index]
+        if _PRIMARY_CAUSE_RE.match(content):
+            units.append((0, [index]))
+        elif _SECONDARY_CAUSE_RE.match(content):
+            units.append((1, [index]))
+        index += 1
+    return units
+
+
+def _condense(lines: List[str]) -> str:
+    """Bloques de causa seguidos de la cola de la salida, sin superar ERROR_SUMMARY_LIMIT."""
+    lines = [line if len(line) <= _SUMMARY_LINE_LIMIT else line[: _SUMMARY_LINE_LIMIT - 3] + "..." for line in lines]
+    budget = ERROR_SUMMARY_LIMIT - len(_OMITTED_LINES.format(count=len(lines))) - 1
+    tail_start, tail_cost = len(lines), 0
+    while tail_start > 0 and tail_cost + len(lines[tail_start - 1]) + 1 <= budget // 2:
+        tail_start -= 1
+        tail_cost += len(lines[tail_start]) + 1
+    head: List[int] = []
+    head_cost = 0
+    for _, block in sorted(unit for unit in _key_units(lines) if unit[1][-1] < tail_start):
+        block_cost = sum(len(lines[i]) + 1 for i in block)
+        if head_cost + block_cost + tail_cost <= budget:
+            head.extend(block)
+            head_cost += block_cost
+    floor = max(head, default=-1) + 1
+    while tail_start > floor and head_cost + tail_cost + len(lines[tail_start - 1]) + 1 <= budget:
+        tail_start -= 1
+        tail_cost += len(lines[tail_start]) + 1
+    omitted = tail_start - len(head)
+    marker = [_OMITTED_LINES.format(count=omitted)] if omitted else []
+    return "\n".join([lines[i] for i in sorted(head)] + marker + lines[tail_start:])
+
+
+def extract_failure_summary(output: str, *, redactions: Sequence[Tuple[str, str]] = ()) -> str:
+    """Causa de un fallo de evidencia, determinista y acotada a ERROR_SUMMARY_LIMIT caracteres.
+
+    Normaliza rutas locales (`redactions`, HOME de usuarios, temporales de pytest y de claims) y quita
+    el encabezado de sesión de pytest, el progreso de cargo, los avisos de rustc y los backtraces. Si el
+    resultado cabe se devuelve completo; si no, se conservan los bloques de causa (FAILED/ERROR, E,
+    recuento final, pánicos, test result, error:) seguidos de la cola de la salida.
+    """
+    text = _normalize_local_artifacts(output, redactions)
+    lines = _drop_noise(text) or text.strip().splitlines()
+    summary = "\n".join(lines)
+    return summary if len(summary) <= ERROR_SUMMARY_LIMIT else _condense(lines)
 
 
 DISALLOWED_SHELL_PATTERNS = [
@@ -314,6 +483,7 @@ def main() -> int:
     env_digest, env_info = environment_digest(repo_root)
     manifest_digest = sha256(claims_file.read_bytes())
     tree_digest = source_tree_digest(repo_root)
+    redactions = local_path_redactions(repo_root)
 
     valid_evidence_levels = {"L1_FORMAL", "L2_IMPLEMENTATION", "L3_ISOLATION", "L4_EXPERIMENTAL"}
 
@@ -345,8 +515,9 @@ def main() -> int:
         if expected_status in ["partial_trace", "verified_in_memory", "verified_local"]:
             executed_ok, out, dur = run_command(evidence_cmd, repo_root, timeout=timeout)
             if not executed_ok:
+                error_summary = extract_failure_summary(out, redactions=redactions)
                 print(f"  Dictamen    : [FALLO DE EVIDENCIA -> EXPERIMENTAL] ({dur:.2f}s)")
-                print(f"  Error Detalle: {out[:120]}...")
+                print("  Error Detalle:\n" + textwrap.indent(error_summary, "    "))
                 experimental_count += 1
                 if required or expected_status != "experimental":
                     failed_claims.append(claim_id)
@@ -360,7 +531,7 @@ def main() -> int:
                         "suite_passed": False,
                         "duration_s": round(dur, 3),
                         "component": component,
-                        "error": out[:200],
+                        "error": error_summary,
                     }
                 )
                 continue
@@ -402,8 +573,9 @@ def main() -> int:
                 }
             )
         else:
+            error_summary = extract_failure_summary(out, redactions=redactions)
             print(f"  Dictamen    : [FALLO DE EVIDENCIA -> EXPERIMENTAL] ({dur:.2f}s)")
-            print(f"  Error Detalle: {out[:120]}...")
+            print("  Error Detalle:\n" + textwrap.indent(error_summary, "    "))
             experimental_count += 1
             if required or expected_status != "experimental":
                 failed_claims.append(claim_id)
@@ -417,7 +589,7 @@ def main() -> int:
                     "suite_passed": False,
                     "duration_s": round(dur, 3),
                     "component": component,
-                    "error": out[:200],
+                    "error": error_summary,
                 }
             )
 

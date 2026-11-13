@@ -7,6 +7,7 @@ import hashlib
 import json
 from pathlib import Path
 import re
+from typing import Any
 
 import pytest
 
@@ -16,13 +17,31 @@ from scripts.c5_quality_gates.secret_swarm_auditor import (
     _is_public_fixture,
     scan_file,
 )
+from scripts.c5_quality_gates.verify_claims import is_excluded_from_public_tree
 
 
 ROOT = Path(__file__).absolute().parents[1]
 RULES = tuple(PUBLIC_FIXTURE_EXCEPTIONS)
 
 
-@pytest.mark.parametrize("relative,pattern,fingerprint", RULES)
+def _rule_params() -> list[Any]:
+    """One case per rule. A fixture under VAULT_ONLY_PREFIXES that is absent here (the
+    public projection drops it) is reported NOT_CHECKED; it runs in the private repo.
+    A missing fixture outside those prefixes still fails."""
+    params = []
+    for relative, pattern, fingerprint in RULES:
+        if not (ROOT / relative).exists() and is_excluded_from_public_tree(relative):
+            reason = f"NOT_CHECKED: vault-only fixture absent from the public projection ({relative})"
+            params.append(pytest.param(relative, pattern, fingerprint, marks=pytest.mark.skip(reason=reason)))
+        else:
+            params.append(pytest.param(relative, pattern, fingerprint))
+    return params
+
+
+RULE_PARAMS = _rule_params()
+
+
+@pytest.mark.parametrize("relative,pattern,fingerprint", RULE_PARAMS)
 def test_exact_reviewed_fixture_requires_all_three_fields(
     relative: str,
     pattern: str,
@@ -35,7 +54,7 @@ def test_exact_reviewed_fixture_requires_all_three_fields(
     assert not any(item["type"] == pattern and item["fingerprint"] == fingerprint for item in qualified), fingerprint
 
 
-@pytest.mark.parametrize("relative,pattern,fingerprint", RULES)
+@pytest.mark.parametrize("relative,pattern,fingerprint", RULE_PARAMS)
 def test_another_secret_on_the_same_line_and_file_is_still_detected(
     tmp_path: Path,
     relative: str,
@@ -59,7 +78,7 @@ def test_another_secret_on_the_same_line_and_file_is_still_detected(
     assert not any(item["type"] == pattern and item["fingerprint"] == fingerprint for item in observed)
 
 
-@pytest.mark.parametrize("relative,pattern,fingerprint", RULES)
+@pytest.mark.parametrize("relative,pattern,fingerprint", RULE_PARAMS)
 def test_a_different_path_does_not_inherit_a_public_fixture_exception(
     tmp_path: Path,
     relative: str,

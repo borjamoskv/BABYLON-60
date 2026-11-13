@@ -151,7 +151,7 @@ def test_multi_root_scan_and_missing_scope_fail_closed(tmp_path: Path) -> None:
     for root in roots:
         root.mkdir()
         (root / "SKILL.md").write_text("Scope: inspect configuration.")
-    command = [sys.executable, str(script), "--workspace-only"]
+    command = [sys.executable, str(script), "--workspace-only", "--public-projection"]
     for root in roots:
         command.extend(["--skills-root", str(root)])
     clean = subprocess.run(command, capture_output=True, text=True, check=False)
@@ -221,7 +221,7 @@ def test_broken_skill_link_fails_cli(tmp_path: Path) -> None:
     root.mkdir()
     (root / "broken").symlink_to(tmp_path / "missing", target_is_directory=True)
     result = subprocess.run(
-        [sys.executable, str(script), "--workspace-only", "--skills-root", str(root)],
+        [sys.executable, str(script), "--workspace-only", "--public-projection", "--skills-root", str(root)],
         capture_output=True,
         text=True,
         check=False,

@@ -44,7 +44,7 @@ class CarouselBuilder:
         self.height = CANONICAL_HEIGHT
         self.fonts = self._load_fonts(font_name)
 
-    def _load_fonts(self, font_name: Optional[str] = None) -> dict:
+    def _load_fonts(self, font_name: Optional[str] = None) -> dict[str, ImageFont.FreeTypeFont | ImageFont.ImageFont]:
         """Loads available system fonts or falls back safely to PIL default."""
         font_candidates = [
             "/System/Library/Fonts/SFNSMono.ttf",
@@ -88,7 +88,7 @@ class CarouselBuilder:
         slide_idx: int,
         total_slides: int,
         category: str = "BABYLON-60 · SOVEREIGN SYSTEMS",
-    ):
+    ) -> None:
         """Draws top status bar, category badge, slide index, and bottom footer."""
         # Top Header line
         draw.line([(60, 80), (self.width - 60, 80)], fill=COLOR_BORDER, width=2)

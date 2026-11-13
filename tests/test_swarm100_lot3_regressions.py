@@ -95,7 +95,11 @@ import hashlib, json, os, pathlib, subprocess, sys, time
 root=pathlib.Path(os.environ['FIXTURE_ROOT'])
 with (root/'calls.jsonl').open('a') as f:
     effects = []
-    for path in (root/'tmp').rglob('effect.json'):
+    # Sibling runs delete their work directories concurrently, and Python 3.11's
+    # rglob raises on a vanished directory: walk and skip what disappears.
+    for dirpath, _dirs, names in os.walk(root/'tmp', onerror=lambda error: None):
+        if 'effect.json' not in names: continue
+        path=pathlib.Path(dirpath)/'effect.json'
         try:
             value=json.loads(path.read_text())
         except (FileNotFoundError, json.JSONDecodeError):

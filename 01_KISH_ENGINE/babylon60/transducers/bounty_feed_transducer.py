@@ -22,7 +22,7 @@ import shutil
 import subprocess
 from typing import TYPE_CHECKING, Dict, List, Mapping, Optional, Sequence, cast
 
-from babylon60.bft.exergy_binary_ipc import pack_agent_message, require_ipc_mac_key
+from babylon60.bft.exergy_binary_ipc import pack_agent_message, require_ipc_mac_key, unpack_agent_message
 
 if TYPE_CHECKING:
     import httpx
@@ -336,4 +336,12 @@ class BountyFeedTransducer:
                 merged.extend(res)
             elif isinstance(res, Exception):
                 logger.error("Excepción en ingestión paralela: %s", res)
+        # Cada sondeo sella ticks Lamport al llegar su respuesta: el orden de las tareas
+        # no es el orden lógico. El despachador rechaza ticks no crecientes como replay,
+        # así que se entregan por tick para no descartar el feed que respondió antes.
+        merged.sort(key=self._frame_logical_tick)
         return merged
+
+    def _frame_logical_tick(self, frame: bytes) -> int:
+        """Tick Lamport de una trama autenticada emitida por este transductor."""
+        return unpack_agent_message(frame, mac_key=self._mac_key)[3]

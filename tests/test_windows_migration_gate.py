@@ -174,6 +174,8 @@ def test_gate_rejects_real_pytest_skips_and_partial_selection(reports, selection
         "missing-before",
         "wrong-case",
         "incomplete-command",
+        "extra-failed-command",
+        "duplicate-command",
     ],
 )
 def test_gate_rejects_omissions_and_incomplete_evidence(reports, defect):
@@ -221,6 +223,19 @@ def test_gate_rejects_omissions_and_incomplete_evidence(reports, defect):
             del data["commands"][0]["stdout"]
         elif defect == "incomplete-command":
             data["commands"][0]["status"] = "running"
+        elif defect == "extra-failed-command":
+            data["commands"].append(
+                {
+                    "phase": "unexpected-install-attempt",
+                    "command": ["synthetic-fixture"],
+                    "status": "finished",
+                    "returncode": 1,
+                    "stdout": "",
+                    "stderr": "migration failed",
+                }
+            )
+        elif defect == "duplicate-command":
+            data["commands"].append(data["commands"][0].copy())
         elif defect == "missing-before":
             del data["observations"]["before"]
         else:

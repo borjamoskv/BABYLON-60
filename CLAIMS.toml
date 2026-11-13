@@ -112,6 +112,7 @@ statement = "MCP server enforces AX-0: stochastic AI clients cannot self-authori
 evidence = "pytest tests/test_ax0_mcp_isolation.py"
 status = "verified"
 evidence_level = "L2_IMPLEMENTATION"
+notes = "The evidence suite failed at e649125 (macOS arm64, CPython 3.14.7, 2026-11-07; recorded cause truncated) and 3/3 at daa0a84 (Linux x86_64; CPython 3.12.3, 3.13.18 and 3.14.6; 2026-11-11): CortexMCPServer refused to start with SKILLS_LOCK_MISMATCH because the cortex-kernel workspace skill was not pinned in docs/skills-lock.json, so no AX-0 assertion was reached. After 6ecc2b4 regenerated the skills lockfiles, the suite passed 3/3 at 6ecc2b4 on the same three interpreters, and the claim command passed at the revision that restores this status. Scope of the pass: Linux x86_64 only; macOS was not re-run and remains NO_VERIFICADO on that platform. Run record: scripts/c5_quality_gates/claims_sitrep.json (evidence_run)."
 component = "01_KISH_ENGINE"
 
 [claim.AUTH_001]
@@ -266,37 +267,45 @@ component = "01_KISH_ENGINE"
 
 [invariants.ax0_hardware_closure]
 claim_id = "CLAIM-AX0-HW-005"
-status = "ATTESTED_IN_SILICON"
-summary = "Cierre local nativo con atestación física de Secure Enclave / Touch ID (P-256 SEC1 / COSE_Sign1) y observación independiente."
+status = "NO_VERIFICADO"
+summary = "Objetivo: cierre local nativo de AUTH_002/AUTH_004 con firma Secure Enclave / Touch ID (P-256 SEC1 / COSE_Sign1) y observación independiente. Este árbol no contiene un recibo de ese cierre."
 enforced_by = ["AUTH_002", "AUTH_004"]
 verification_theorems = ["proof/lean/"]
-adversarial_suite = "tests/nemesis_wave_auth_ipc.py"
+adversarial_suite = "AUSENTE: tests/nemesis_wave_auth_ipc.py no existe en este árbol"
+hardware_entry_point = "tests/manual/hardware_mcp_cycle.py (manual, un intento); sin recibo registrado"
 post_restart_decoupled = true
 required_for_release = true
 evidence_level = "L3_ISOLATION"
 component = "00_ABZU_KERNEL"
+reviewed = "2026-11-11"
+notes = "El estado anterior, ATTESTED_IN_SILICON, no tenía recibo. docs/security/fl-mcp01-authority-drift.md:5 (validación biométrica hardware) y docs/security/harness-audit-2026-10-24.md:118-119 (presencia humana Secure Enclave en el paquete) la declaran NO_VERIFICADO. docs/security/EU_AI_ACT_NATIVE_2026-10-30.md registra una única firma Secure Enclave del gate regulatorio local (2026-10-30T02:50:48Z), observada por el operador: no ejercita AUTH_002/AUTH_004, no acredita ante terceros el origen de la clave ni la presencia humana (measurement_status UNAVAILABLE) y su challenge.json no forma parte de esta proyección pública. Los teoremas de proof/lean/ son L1 y no cubren hardware. Las suites secure_enclave_p256 y signed_dispatch_intent usan claves P-256 software."
 
 [invariants.mcp_lifecycle_confinement]
 claim_id = "CLAIM-MCP-006"
-status = "ATTESTED_IN_SILICON"
-summary = "Autoridad del broker MCP confinada al ciclo de vida exacto de cada invocación; cuarentena EffectTx y desacople entre aceptación biométrica y verificación post-reinicio."
+status = "NO_VERIFICADO"
+summary = "Objetivo: autoridad del broker MCP confinada al ciclo de vida exacto de cada invocación; cuarentena EffectTx y desacople entre aceptación biométrica y verificación post-reinicio. Este árbol no contiene un recibo de ese conjunto."
 enforced_by = ["AUTH_004", "EffectTx"]
 discovery_execution_split = "STRICT"
 token_replay_window = 0
 required_for_release = true
 evidence_level = "L3_ISOLATION"
 component = "00_ABZU_KERNEL"
+hardware_run = "Informado sin recibo en esta proyección: docs/security/LOCAL_CORE_INTEGRATION_2026-10-30.md:3-24 (candidato b9640a52, un intento con tests/manual/hardware_mcp_cycle.py); recibos en docs/security/evidence/local-core-20261030/"
+reviewed = "2026-11-11"
+notes = "El estado anterior, ATTESTED_IN_SILICON, no tenía recibo en este árbol, y ningún verificador lee [invariants.*] (scripts/c5_quality_gates/verify_claims.py:451). Aceptación biométrica y reinicio: docs/security/LOCAL_CORE_INTEGRATION_2026-10-30.md:10-24 informa de un único recorrido hardware local CLI/MCP (una aprobación Touch ID, un evento, un consumo, y persistencia y replay rechazado tras reiniciar). Sus recibos están en docs/security/evidence/, que la proyección pública excluye (scripts/verify_release.sh:81), y el candidato b9640a52 no está en la historia, así que aquí no se puede reproducir. Las pruebas automáticas usan claves software, y docs/security/fl-mcp01-authority-drift.md:5 deja la validación biométrica hardware en NO_VERIFICADO. L3_ISOLATION: ninguna fuente lo establece. 01_KISH_ENGINE/babylon60/mcp/effect_dispatch.py:3 declara que no hay confinamiento de proceso ni de SO, tests/manual/hardware_mcp_cycle.py:472 lo deja fuera del recorrido hardware y el único backend de confinamiento MCP es Seatbelt de macOS (01_KISH_ENGINE/babylon60/kernel/mcp_sandbox_validator.py:58-59). EffectTx: la cuarentena de src/secure_fs.rs ([claim.AUTH_004], [claim.AUTH_007_secure_fs_quarantine]) no está enlazada con MCP, cuyos efectos son LedgerAppend, NetTransmit y ProcSpawn (effect_dispatch.py:59-66). token_replay_window = 0: commit_execution (src/capability.rs:668-678) no registra consumo, así que el token del broker no es de un solo uso. El uso único lo impone el consumo durable del execution_id (01_KISH_ENGINE/babylon60/verification/verification_gate.py:210-239), cubierto por pruebas con claves software (tests/test_fl_mcp01_dispatch.py), y una aprobación firmada vale hasta 300 s antes de consumirse (verification_gate.py:198). discovery_execution_split: tests/fl_mcp01_authority_drift.rs:16-42 comprueba en software que registrar una herramienta no concede autoridad."
 
 [invariants.kernel_ledger_and_sqlite_hygiene]
 claim_id = "CLAIM-L0-007"
-status = "ATTESTED_IN_SILICON"
-summary = "Escrituras atómicas por archivo, procedencia durable en recuperación, commits atómicos en consenso LARSA, idempotencia del ledger y cierre determinista de conexiones SQLite en CORTEX tras consultas o fallos."
+status = "NO_VERIFICADO"
+summary = "Objetivo: escrituras atómicas por archivo, procedencia durable en recuperación, commits atómicos en consenso LARSA, idempotencia del ledger y cierre determinista de conexiones SQLite en CORTEX tras consultas o fallos. Este árbol no contiene un recibo del conjunto; algunas partes tienen pruebas software acotadas."
 enforced_by = ["INV_BFT_04", "BftCollisionError", "L0_WAL_ATOMIC"]
 ffi_panic_surface = 0
 sqlite_descriptor_leaks = 0
 required_for_release = true
 evidence_level = "L2_IMPLEMENTATION"
 component = "01_KISH_ENGINE"
+reviewed = "2026-11-11"
+notes = "El estado anterior, ATTESTED_IN_SILICON, no tenía recibo en este árbol, y ningún verificador lee [invariants.*]. enforced_by: docs/01_spec/spec_invariants.md:17-23 marca INV_BFT_04 como obsoleto y deja su cobertura en NO_VERIFICADO; BftCollisionError es un tipo Rust de 00_ABZU_KERNEL/crates/strike-rs/src/ledger.rs:32-50, mientras que 01_KISH_ENGINE señala las colisiones con ValueError; L0_WAL_ATOMIC no está definido en ninguna parte. ffi_panic_surface = 0 y sqlite_descriptor_leaks = 0 son valores declarados: ningún perfil, lint, script, prueba ni informe del árbol cuenta sitios de pánico en FFI ni descriptores abiertos. Las pruebas comprueban que los objetos de conexión quedan cerrados (tests/test_local_core_cortex_connections.py, tests/test_database_config_cleanup.py), no el número de descriptores. Partes con pruebas software acotadas: escritura atómica por archivo, sin transacción conjunta (01_KISH_ENGINE/babylon60/core/cortex_persist.py:248-305, tests/test_swarm100_lot11_regressions.py); idempotencia (tests/test_ledger_resilience.py, tests/test_cortex_persist_batch_regressions.py); rechazo de colisiones (tests/test_swarm100_lot5_regressions.py:323-368); procedencia en la recuperación de SecureFS, en Rust (tests/fl_rec01_recovery_provenance.rs), con la campaña completa pendiente (docs/security/fl-rec01-recovery-provenance.md:7). Commits atómicos en consenso LARSA: src/larsa_bft.rs:41-46 es un quórum de verificación en el mismo host, sin commit ni SQLite; el commit atómico de BFT_Committer (01_KISH_ENGINE/babylon60/bft/consensus_committer.py:145-190, tests/test_consensus_atomic_commit.py) no usa LARSA. docs/security/LOCAL_CORE_INTEGRATION_2026-10-30.md:55-57 y :73 informan de 17 regresiones de cierre de conexiones y 210 pruebas de persistencia; sus recibos están fuera de esta proyección."
 
 [invariants.lean4_observable_harness]
 claim_id = "CLAIM-FORMAL-008"
@@ -312,10 +321,13 @@ component = "proof/lean"
 
 [invariants.semantic_entropy_and_solver]
 claim_id = "CLAIM-RING1-009"
-status = "ATTESTED_IN_SILICON"
-summary = "Estabilidad numérica determinista y convergencia acotada en motores semantic_entropy y semantic_solver bajo arnés adversarial NEMESIS."
+status = "NO_VERIFICADO"
+summary = "Objetivo: estabilidad numérica determinista y convergencia acotada en motores semantic_entropy y semantic_solver bajo arnés adversarial NEMESIS. Ningún registro del árbol establece esas propiedades."
 enforced_by = [".babylon60rules", "KudurruBudgetGate"]
-adversarial_suite = "tests/nemesis_wave*"
+adversarial_suite = "NO_APLICA: tests/nemesis_wave*.rs compilan contra babylon60_root, que no depende de babylon60-kernel ni de babylon60-compiler"
+engine_suites = "No adversariales: cargo test --locked -p babylon60-kernel --test semantic_entropy_regressions --test semantic_solver_outcomes --test stress_semantic_entropy_100k; cargo test --locked -p babylon60-compiler --test semantic_solver_adapter --test solver_trust (requieren Z3 fijado)"
 required_for_release = true
 evidence_level = "L4_EXPERIMENTAL"
 component = "00_ABZU_KERNEL"
+reviewed = "2026-11-11"
+notes = "El estado anterior, ATTESTED_IN_SILICON, no tenía recibo en este árbol, y ningún verificador lee [invariants.*]. adversarial_suite: los cinco tests/nemesis_wave*.rs son objetivos de prueba de babylon60_root, cuyas dependencias (Cargo.toml:33-47) no incluyen babylon60-kernel ni babylon60-compiler, así que no alcanzan semantic_entropy ni semantic_solver; las waves 3 y 4 ya respaldan [claim.FL_016_owasp_acs_vop1_and_drift_guard] y [claim.FL_014_wave4_receipt_loss_and_closure_drift]. enforced_by: .babylon60rules es un manifiesto en prosa para agentes y KudurruBudgetGate (src/tamkarum.rs:14) es una compuerta de presupuesto de pujas sin enlace con estos motores. semantic_entropy usa aritmética entera Q16 en un crate no_std que prohíbe operaciones en coma flotante (00_ABZU_KERNEL/crates/babylon60-kernel/src/lib.rs:1-2, 7), con n acotado a 1..=8 (semantic_entropy.rs:116) y sin iteración que converja. semantic_solver lanza Z3 como subproceso con un plazo de pared cuya cota dura descartan docs/01_spec/AUDIT_SCIENTIFIC_GUARANTEES_2026.md:197 y docs/security/MAIN_SAFETY_FIXES_2026-10-30.md:86-91. Los registros docs/01_spec/evidence/*-20261026.json identifican las fuentes por SHA-256, que ya no coinciden con los archivos actuales; el estrés de 100k solo se compiló (algorithm-repairs-20261026.json:293), y ningún registro mide estabilidad numérica ni convergencia acotada."

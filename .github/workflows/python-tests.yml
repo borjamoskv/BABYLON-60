@@ -17,7 +17,9 @@ jobs:
   test:
     # General tests are portable; native Seatbelt coverage lives in macos-native.yml.
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    # The full suite (~4.3k tests) runs end to end now that collection succeeds;
+    # on ubuntu-latest it reached 50% at ~14.5 min, so 30 min left no headroom.
+    timeout-minutes: 45
     strategy:
       fail-fast: false
       matrix:

@@ -18,8 +18,6 @@ Authorship: Borja Moskv (borjamoskv)
 
 from __future__ import annotations
 
-import base64
-import hashlib
 import json
 import logging
 import os
@@ -45,6 +43,7 @@ from babylon60.bft.cortex_crypto_kernel import (
     MerkleProof,
     MMRProofStep,
 )
+from babylon60.bft.rekor_anchor import anchor_verified_state
 
 logger = logging.getLogger("babylon60.bft.cortex_persist")
 
@@ -803,45 +802,8 @@ class CortexPersistLedger:
         rekor_client: Optional[Any] = None,
         seed_hex: Optional[str] = None,
     ) -> Optional[Dict[str, object]]:
-        """
-        Publica el ledger-head (merkle_root + max_lamport + timestamp) en Sigstore Rekor.
-        Satisface el requisito del Art. 12 EU AI Act de sellado temporal por terceros (P1).
-        """
-        attestation = self.get_state_attestation()
-        head_data = {
-            "merkle_root": attestation["merkle_root"],
-            "max_lamport": attestation["max_lamport"],
-            "total_entries": attestation["total_entries"],
-            "attested_at": attestation["attested_at"],
-        }
-        head_json = _canonical_json(head_data).encode("utf-8")
-        payload_hash = hashlib.sha256(head_json).hexdigest()
-
-        from nacl.signing import SigningKey
-
-        seed = seed_hex or os.environ.get("BABYLON60_SIGNING_SEED", "").strip()
-        if seed:
-            try:
-                sk = SigningKey(bytes.fromhex(seed))
-            except Exception:
-                sk = SigningKey.generate()
-        else:
-            sk = SigningKey.generate()
-
-        signed = sk.sign(head_json)
-        sig_b64 = base64.b64encode(signed.signature).decode("utf-8")
-        pk_b64 = base64.b64encode(sk.verify_key.encode()).decode("utf-8")
-
-        if rekor_client is None:
-            try:
-                from babylon60.crypto.rekor_client import RekorClient
-
-                rekor_client = RekorClient()
-            except ImportError:
-                return None
-
-        anchor_res = rekor_client.anchor_payload(payload_hash, sig_b64, pk_b64)
-        return dict(anchor_res) if anchor_res else None
+        """Publica un estado íntegro firmado con la semilla explícita o la del entorno."""
+        return anchor_verified_state(self.get_state_attestation(), rekor_client, seed_hex)
 
 
 class CortexPersistFacade:

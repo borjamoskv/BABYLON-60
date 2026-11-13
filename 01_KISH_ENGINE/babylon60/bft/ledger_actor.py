@@ -7,8 +7,6 @@ import os
 import asyncio
 import uuid
 from dataclasses import dataclass
-import base64
-import hashlib
 import json
 from datetime import datetime, timezone
 from pathlib import Path
@@ -16,6 +14,7 @@ from typing import Any, Dict, Mapping, Optional, TypedDict
 from cryptography.fernet import Fernet, InvalidToken
 import aiosqlite
 from babylon60.bft.integrity import LedgerCheckpoint
+from babylon60.bft.rekor_anchor import anchor_verified_state
 
 
 class BFTCausalInvariantError(RuntimeError):
@@ -219,67 +218,70 @@ class BFTLedgerActor:
     async def _verified_checkpoint(self) -> LedgerCheckpoint:
         async with aiosqlite.connect(self._db_path) as db:
             await db.execute("BEGIN")
-            await db.create_function("c5_compute_hash", 12, _compute_entry_hash_wrapper, deterministic=True)
-            cursor = await db.execute("SELECT * FROM ledger_entries ORDER BY seq ASC")
-            rows = await cursor.fetchall()
-            prev_hash = ZERO_HASH
-            expected_seq = 1
-            last_lamport = 0
-            for row in rows:
-                seq = row[0]
-                event_id = row[1]
-                stream = row[2]
-                entity_id = row[3]
-                event_type = row[4]
-                payload_json = row[5]
-                source_db = row[6]
-                source_table = row[7]
-                source_pk = row[8]
-                cortex_taint = row[9]
-                lamport_t = row[10]
-                row_prev_hash = row[11]
-                entry_hash = row[12]
-                created_at = row[13]
-                if seq != expected_seq:
-                    raise BFTCausalInvariantError(
-                        f"INV_BFT_LEAN_03 (seq_monotone): Sequence gap at expected seq {expected_seq}"
-                    )
-                if lamport_t <= last_lamport:
-                    raise BFTCausalInvariantError(
-                        f"INV_BFT_LEAN_01 (causal_strict): lamport_t {lamport_t} is not strictly greater than {last_lamport}"
-                    )
-                if row_prev_hash != prev_hash:
-                    raise BFTCausalInvariantError(
-                        f"INV_BFT_LEAN_02 (causal_antisymm): Hash chain cycle or break detected at seq {seq}"
-                    )
-                # INV_C5_05 (verificador vivo): el hash-chain se computa sobre los BYTES
-                # ALMACENADOS (cifrados o no) — exactamente lo que el INSERT firmó vía
-                # c5_compute_hash(stored_payload). La verificación no requiere la clave
-                # del vault y valida bajo toda condición, cifrado incluido.
-                computed_hash = _compute_entry_hash(
-                    event_id=event_id,
-                    stream=stream,
-                    entity_id=entity_id,
-                    event_type=event_type,
-                    payload_json=payload_json,
-                    source_db=source_db,
-                    source_table=source_table,
-                    source_pk=source_pk,
-                    cortex_taint=cortex_taint,
-                    lamport_t=lamport_t,
-                    prev_hash=row_prev_hash,
-                    created_at=created_at,
+            return await self._verify_snapshot(db)
+
+    async def _verify_snapshot(self, db: aiosqlite.Connection) -> LedgerCheckpoint:
+        """Verify the ledger rows in an existing read transaction."""
+        cursor = await db.execute("SELECT * FROM ledger_entries ORDER BY seq ASC")
+        rows = await cursor.fetchall()
+        prev_hash = ZERO_HASH
+        expected_seq = 1
+        last_lamport = 0
+        for row in rows:
+            seq = row[0]
+            event_id = row[1]
+            stream = row[2]
+            entity_id = row[3]
+            event_type = row[4]
+            payload_json = row[5]
+            source_db = row[6]
+            source_table = row[7]
+            source_pk = row[8]
+            cortex_taint = row[9]
+            lamport_t = row[10]
+            row_prev_hash = row[11]
+            entry_hash = row[12]
+            created_at = row[13]
+            if seq != expected_seq:
+                raise BFTCausalInvariantError(
+                    f"INV_BFT_LEAN_03 (seq_monotone): Sequence gap at expected seq {expected_seq}"
                 )
-                if entry_hash != computed_hash:
-                    raise BFTCausalInvariantError(f"INV_BFT_LEAN_04 (merkle_proof): Hash mismatch at seq {seq}")
-                prev_hash = entry_hash
-                last_lamport = lamport_t
-                expected_seq += 1
-            cursor = await db.execute("SELECT seq FROM sqlite_sequence WHERE name='ledger_entries'")
-            high_water = await cursor.fetchone()
-            if (high_water[0] if high_water else 0) != expected_seq - 1:
-                raise BFTCausalInvariantError("INV_BFT_LEAN_05: Ledger truncation detected")
-            return LedgerCheckpoint(expected_seq - 1, prev_hash)
+            if lamport_t <= last_lamport:
+                raise BFTCausalInvariantError(
+                    f"INV_BFT_LEAN_01 (causal_strict): lamport_t {lamport_t} is not strictly greater than {last_lamport}"
+                )
+            if row_prev_hash != prev_hash:
+                raise BFTCausalInvariantError(
+                    f"INV_BFT_LEAN_02 (causal_antisymm): Hash chain cycle or break detected at seq {seq}"
+                )
+            # INV_C5_05 (verificador vivo): el hash-chain se computa sobre los BYTES
+            # ALMACENADOS (cifrados o no) — exactamente lo que el INSERT firmó vía
+            # c5_compute_hash(stored_payload). La verificación no requiere la clave
+            # del vault y valida bajo toda condición, cifrado incluido.
+            computed_hash = _compute_entry_hash(
+                event_id=event_id,
+                stream=stream,
+                entity_id=entity_id,
+                event_type=event_type,
+                payload_json=payload_json,
+                source_db=source_db,
+                source_table=source_table,
+                source_pk=source_pk,
+                cortex_taint=cortex_taint,
+                lamport_t=lamport_t,
+                prev_hash=row_prev_hash,
+                created_at=created_at,
+            )
+            if entry_hash != computed_hash:
+                raise BFTCausalInvariantError(f"INV_BFT_LEAN_04 (merkle_proof): Hash mismatch at seq {seq}")
+            prev_hash = entry_hash
+            last_lamport = lamport_t
+            expected_seq += 1
+        cursor = await db.execute("SELECT seq FROM sqlite_sequence WHERE name='ledger_entries'")
+        high_water = await cursor.fetchone()
+        if (high_water[0] if high_water else 0) != expected_seq - 1:
+            raise BFTCausalInvariantError("INV_BFT_LEAN_05: Ledger truncation detected")
+        return LedgerCheckpoint(expected_seq - 1, prev_hash)
 
     async def verify_chain(self, *, expected_checkpoint: LedgerCheckpoint | None = None) -> bool:
         """Verify one read snapshot; a separately retained checkpoint also detects rollback."""
@@ -317,6 +319,7 @@ class BFTLedgerActor:
         Unifica la semántica de atestación con CortexPersistLedger para verificación de evidencia.
         """
         async with aiosqlite.connect(self._db_path) as db:
+            await db.execute("BEGIN")
             cursor = await db.execute(
                 "SELECT COUNT(*), COALESCE(MAX(lamport_t), 0), COALESCE(MAX(seq), 0) FROM ledger_entries"
             )
@@ -335,11 +338,11 @@ class BFTLedgerActor:
                 mmr.append(r[0])
             mmr_root = mmr.get_root()
 
-        integrity_verified = False
-        try:
-            integrity_verified = await self.verify_chain()
-        except Exception:
-            integrity_verified = False
+            try:
+                await self._verify_snapshot(db)
+                integrity_verified = True
+            except Exception:
+                integrity_verified = False
 
         return {
             "total_entries": total_entries,
@@ -357,45 +360,8 @@ class BFTLedgerActor:
         rekor_client: Optional[Any] = None,
         seed_hex: Optional[str] = None,
     ) -> Optional[Dict[str, object]]:
-        """
-        Ancla el ledger-head (merkle_root + max_lamport + timestamp) en Sigstore Rekor.
-        Satisface el requisito del Art. 12 EU AI Act de sellado temporal por terceros (P1).
-        """
-        attestation = await self.get_state_attestation()
-        head_data = {
-            "merkle_root": attestation["merkle_root"],
-            "max_lamport": attestation["max_lamport"],
-            "total_entries": attestation["total_entries"],
-            "attested_at": attestation["attested_at"],
-        }
-        head_json = _canonical_json(head_data).encode("utf-8")
-        payload_hash = hashlib.sha256(head_json).hexdigest()
-
-        from nacl.signing import SigningKey
-
-        seed = seed_hex or os.environ.get("BABYLON60_SIGNING_SEED", "").strip()
-        if seed:
-            try:
-                sk = SigningKey(bytes.fromhex(seed))
-            except Exception:
-                sk = SigningKey.generate()
-        else:
-            sk = SigningKey.generate()
-
-        signed = sk.sign(head_json)
-        sig_b64 = base64.b64encode(signed.signature).decode("utf-8")
-        pk_b64 = base64.b64encode(sk.verify_key.encode()).decode("utf-8")
-
-        if rekor_client is None:
-            try:
-                from babylon60.crypto.rekor_client import RekorClient
-
-                rekor_client = RekorClient()
-            except ImportError:
-                return None
-
-        anchor_res = rekor_client.anchor_payload(payload_hash, sig_b64, pk_b64)
-        return dict(anchor_res) if anchor_res else None
+        """Publica un estado íntegro firmado con la semilla explícita o la del entorno."""
+        return anchor_verified_state(await self.get_state_attestation(), rekor_client, seed_hex)
 
     def append_cortex_event(self, event: Any) -> asyncio.Future[LedgerEntryResult]:
         """

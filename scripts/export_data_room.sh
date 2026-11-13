@@ -180,7 +180,7 @@ Because the 30x–39x compression factor resides in **executable repository rule
 
 ---
 
-**Certified and Attested in Silicon:**  
+**Prepared by:**  
 **Borja Fernández Angulo**  
 *Principal Investigator & Sovereign Root Operator*  
 BABYLON-60 Project — Generated: $(date -u +"%Y-%m-%dT%H:%M:%SZ")

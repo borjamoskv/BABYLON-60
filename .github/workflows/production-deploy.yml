@@ -32,7 +32,7 @@ jobs:
         run: |
           test "$GITHUB_REF" = refs/heads/main
           test "$(gh api "repos/$GITHUB_REPOSITORY/commits/main" --jq .sha)" = "$GITHUB_SHA"
-          for workflow in ci.yml python-tests.yml gitleaks.yml dependency-audit.yml verify_ledger.yml; do
+          for workflow in ci.yml python-tests.yml gitleaks.yml dependency-audit.yml verify_ledger.yml verify_claims.yml; do
             gh run list --repo "$GITHUB_REPOSITORY" --workflow "$workflow" \
               --commit "$GITHUB_SHA" --branch main --event push --limit 1 \
               --json headSha,status,conclusion,event,headBranch \
@@ -49,7 +49,7 @@ jobs:
         with:
           ref: ${{ github.sha }}
           persist-credentials: false
-      - uses: docker/setup-qemu-action@c7c53464625b32c7a7e944ae62b3e17d2b600130
+      - uses: docker/setup-qemu-action@99012661954931238ded8c8b007157a8430204e1
       - uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f
       - name: Build once without registry credentials
         uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc
@@ -143,7 +143,7 @@ jobs:
         run: |
           test "$GITHUB_REF" = refs/heads/main
           test "$(gh api "repos/$GITHUB_REPOSITORY/commits/main" --jq .sha)" = "$GITHUB_SHA"
-          for workflow in ci.yml python-tests.yml gitleaks.yml dependency-audit.yml verify_ledger.yml; do
+          for workflow in ci.yml python-tests.yml gitleaks.yml dependency-audit.yml verify_ledger.yml verify_claims.yml; do
             gh run list --repo "$GITHUB_REPOSITORY" --workflow "$workflow" --commit "$GITHUB_SHA" --branch main --event push --limit 1 --json headSha,status,conclusion,event,headBranch | python3 scripts/guards/verify_publish_run.py
           done
       - name: Install archive transport

@@ -3,7 +3,9 @@
 import hashlib
 import json
 from pathlib import Path
+from typing import Any
 import shutil
+import zipfile
 
 import pytest
 
@@ -138,3 +140,83 @@ def test_v5_manifest_rejects_version_drift_before_writes(evidence_root: Path) ->
     with pytest.raises(ValueError, match="Version drift"):
         compiler.emit_claims_artifacts(compiler.compile_claims_evidence())
     assert not (evidence_root / "evidence.json").exists()
+
+
+def test_source_changes_between_compilation_and_emission_are_rejected(
+    evidence_root: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    evidence = compiler.compile_claims_evidence()
+    monkeypatch.setattr(compiler, "source_tree_digest", lambda root: "e" * 64)
+    with pytest.raises(ValueError, match="source changed"):
+        compiler.emit_claims_artifacts(evidence)
+    assert not (evidence_root / "evidence.json").exists()
+
+
+@pytest.mark.parametrize("mismatch", ["source", "commit", "inventory", "missing"])
+def test_bundle_must_match_verified_source_before_artifact_writes(evidence_root: Path, mismatch: str) -> None:
+    evidence = compiler.compile_claims_evidence()
+    bundle_path = evidence_root / "candidate.zip"
+    payload = (evidence_root / "CLAIMS.toml").read_bytes()
+    inventory: dict[str, Any] = {
+        "format": "babylon60.source-bundle.v1",
+        "version": "5.0.0",
+        "source_commit": "c" * 40 if mismatch == "commit" else evidence["source_commit"],
+        "files_sha256": {"CLAIMS.toml": "0" * 64 if mismatch == "inventory" else hashlib.sha256(payload).hexdigest()},
+    }
+    if mismatch != "missing":
+        with zipfile.ZipFile(bundle_path, "w") as bundle:
+            if mismatch == "source":
+                payload += b"\n# changed in archive\n"
+                inventory["files_sha256"]["CLAIMS.toml"] = hashlib.sha256(payload).hexdigest()
+            bundle.writestr("CLAIMS.toml", payload)
+            bundle.writestr("SOURCE_MANIFEST.json", json.dumps(inventory))
+    with pytest.raises((ValueError, FileNotFoundError)):
+        compiler.emit_claims_artifacts(evidence, bundle_path=bundle_path)
+    assert not (evidence_root / "evidence.json").exists()
+    assert not (evidence_root / "sbom.cargo.cdx.json").exists()
+
+
+def test_source_bundle_rejects_path_swap_during_open(evidence_root: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    """A matching payload behind a substituted symlink is not verified source."""
+    import os
+
+    source = evidence_root / "CLAIMS.toml"
+    payload = source.read_bytes()
+    outside = evidence_root / "outside.txt"
+    outside.write_bytes(payload)
+    bundle_path = evidence_root / "candidate.zip"
+    inventory = {
+        "format": "babylon60.source-bundle.v1",
+        "version": "5.0.0",
+        "source_commit": "a" * 40,
+        "files_sha256": {"CLAIMS.toml": hashlib.sha256(payload).hexdigest()},
+    }
+    with zipfile.ZipFile(bundle_path, "w") as bundle:
+        bundle.writestr("CLAIMS.toml", payload)
+        bundle.writestr("SOURCE_MANIFEST.json", json.dumps(inventory))
+    real_open, real_is_file = os.open, Path.is_file
+    swapped = False
+
+    def replace_source():
+        nonlocal swapped
+        if not swapped:
+            source.unlink()
+            source.symlink_to(outside)
+            swapped = True
+
+    def open_after_swap(path, *args, **kwargs):
+        if Path(path) == source:
+            replace_source()
+        return real_open(path, *args, **kwargs)
+
+    def checked_then_swapped(path):
+        result = real_is_file(path)
+        if path == source:
+            replace_source()
+        return result
+
+    monkeypatch.setattr(os, "open", open_after_swap)
+    monkeypatch.setattr(Path, "is_file", checked_then_swapped)
+    with pytest.raises(ValueError, match="release source|verified source"):
+        compiler.inspect_source_bundle(bundle_path, version="5.0.0", commit="a" * 40)
+    assert swapped

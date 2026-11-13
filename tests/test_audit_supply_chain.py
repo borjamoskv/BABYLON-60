@@ -48,14 +48,21 @@ class SupplyChainTests(unittest.TestCase):
         steps = workflow("conformance.yml")["jobs"]["conformance"]["steps"]
         commands = [s["run"] for s in steps if "run" in s]
         self.assertEqual(commands[0], "uv sync --locked --all-extras")
-        self.assertTrue(commands[1].startswith("uv run --no-sync "))
+        # The only other command builds, from Cargo.lock, the Rust binary the suite
+        # exercises offline (test_rust_babylon_skills_mcp_stdio_interop); the
+        # conformance script itself runs last without re-resolving.
+        self.assertEqual(commands[1:-1], ["cargo build --locked -p babylon-skills-mcp"])
+        self.assertTrue(commands[-1].startswith("uv run --no-sync "))
+        for step in steps:
+            if "uses" in step:
+                self.assertRegex(step["uses"], r"@[0-9a-f]{40}$")
         setup = next(s for s in steps if "setup-uv@" in s.get("uses", ""))
         self.assertRegex(setup["uses"], r"@[0-9a-f]{40}$")
         self.assertRegex(setup["with"]["version"], r"^\d+\.\d+\.\d+$")
         self.assertRegex(setup["with"]["checksum"], r"^[0-9a-f]{64}$")
 
     def test_tampered_elan_download_fails_before_extract_or_execute(self):
-        for name, job in [("ci.yml", "claims"), ("verify_lean.yml", "verify-lean")]:
+        for name, job in [("ci.yml", "release-evidence"), ("verify_lean.yml", "verify-lean")]:
             with self.subTest(workflow=name), tempfile.TemporaryDirectory() as tmp:
                 steps = workflow(name)["jobs"][job]["steps"]
                 script = next(s["run"] for s in steps if "elan.tar.gz" in s.get("run", ""))

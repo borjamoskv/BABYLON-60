@@ -72,7 +72,9 @@ class DirectorAgent:
         config = types.GenerateContentConfig(
             response_mime_type="application/json",
             response_schema=Storyboard,
-            temperature=0.0 
+            temperature=0.0,
+            # Same lock as the frontier router: one billed request per call.
+            automatic_continuation=False,
         )
         
         try:

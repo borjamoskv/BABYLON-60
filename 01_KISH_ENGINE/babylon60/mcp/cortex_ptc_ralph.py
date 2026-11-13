@@ -23,9 +23,11 @@ from __future__ import annotations
 
 import json
 import keyword
+import os
 from pathlib import Path
 import posixpath
 import re
+import unicodedata
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from typing import Any, Literal
@@ -58,6 +60,7 @@ _SCALAR_ENVELOPE_KEYS = ("admitted", "status", "ok", "reason", "isError", "tuple
 RalphStatus = Literal["continue", "complete", "blocked"]
 _ALLOWED_REPORT_KEYS = frozenset({"status", "summary", "evidence", "nextSteps", "blocker"})
 _VALID_IDENT = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
+_GLOB_CHARS = re.compile(r"[*?\[{]")
 
 
 def _proportional_head_tail(threshold_chars: int) -> tuple[int, int]:
@@ -184,10 +187,22 @@ def prune_mcp_text_payload(
 
 def _resolve_root_posix(base_dir: str | Path | None) -> str:
     if base_dir is None:
-        return _DEFAULT_REPO_ROOT_POSIX
-    raw_base = base_dir.as_posix() if isinstance(base_dir, Path) else str(base_dir).replace("\\", "/")
-    norm_base = posixpath.normpath(raw_base)
-    return norm_base.rstrip("/") or "/"
+        raw_base = _DEFAULT_REPO_ROOT_POSIX
+    else:
+        raw_base = base_dir.as_posix() if isinstance(base_dir, Path) else str(base_dir).replace("\\", "/")
+    return _canonical_posix(raw_base).rstrip("/") or "/"
+
+
+def _canonical_posix(path: str) -> str:
+    """Resolve symlinks of existing prefixes for absolute paths; lexical normpath otherwise."""
+    normed = os.path.realpath(path) if path.startswith("/") else posixpath.normpath(path)
+    return "/" + normed.lstrip("/") if normed.startswith("//") else normed
+
+
+def _scope_key(normed: str, root_posix: str) -> str:
+    """Anchored, case- and Unicode-insensitive comparison key (fail-closed over-approximation)."""
+    anchored = normed if normed.startswith("/") else posixpath.normpath(posixpath.join(root_posix, normed))
+    return unicodedata.normalize("NFD", unicodedata.normalize("NFD", anchored).casefold())
 
 
 def normalize_write_scope(scope: str, *, base_dir: str | Path | None = None) -> str:
@@ -197,14 +212,18 @@ def normalize_write_scope(scope: str, *, base_dir: str | Path | None = None) -> 
     cleaned = scope.strip().replace("\\", "/")
     if not cleaned or "\x00" in cleaned:
         raise ValueError("write_scope must be a non-empty path without NUL bytes")
-    normed = posixpath.normpath(cleaned)
-    if normed.startswith("//"):
-        normed = "/" + normed.lstrip("/")
+    if cleaned.startswith("~"):
+        cleaned = posixpath.expanduser(cleaned)
+        if cleaned.startswith("~"):
+            raise ValueError("write_scope has an unresolvable '~' home prefix")
+    parts = cleaned.split("/")
+    for idx, part in enumerate(parts):
+        if _GLOB_CHARS.search(part):
+            # Fail-closed: a wildcard scope is widened to its literal parent directory.
+            cleaned = "/".join(parts[:idx]) or ("/" if cleaned.startswith("/") else ".")
+            break
     root_posix = _resolve_root_posix(base_dir)
-    if normed.startswith("../") or normed == "..":
-        anchored = posixpath.normpath(posixpath.join(root_posix, normed))
-        if anchored == root_posix or anchored.startswith(f"{root_posix}/"):
-            normed = anchored
+    normed = _canonical_posix(cleaned if cleaned.startswith("/") else posixpath.join(root_posix, cleaned))
     if normed == root_posix:
         return "."
     if root_posix != "/" and normed.startswith(f"{root_posix}/"):
@@ -219,14 +238,14 @@ def scopes_overlap(left: str, right: str, *, base_dir: str | Path | None = None)
     """Return True iff two normalized file or directory write scopes overlap."""
     nl = normalize_write_scope(left, base_dir=base_dir)
     nr = normalize_write_scope(right, base_dir=base_dir)
-    if nl == nr or nl == "/" or nr == "/":
-        return True
     root_posix = _resolve_root_posix(base_dir)
-    if nl == ".":
-        return not nr.startswith("/") or root_posix.startswith(f"{nr}/")
-    if nr == ".":
-        return not nl.startswith("/") or root_posix.startswith(f"{nl}/")
-    return nl.startswith(f"{nr}/") or nr.startswith(f"{nl}/")
+    kl = _scope_key(nl, root_posix)
+    kr = _scope_key(nr, root_posix)
+    if kl == kr or kl == "/" or kr == "/":
+        return True
+    if kl.startswith("/") != kr.startswith("/"):
+        return True  # Fail-closed: an absolute and an unanchored relative scope are not comparable.
+    return kl.startswith(f"{kr}/") or kr.startswith(f"{kl}/")
 
 
 def _is_normalized_text(value: object) -> bool:
@@ -344,6 +363,12 @@ def _safe_ident(name: str) -> str:
     return cleaned
 
 
+def _safe_comment(text: str) -> str:
+    """Collapse all whitespace/line separators and escape non-printable chars for a one-line comment."""
+    flat = " ".join(text.split())
+    return "".join(ch if ch.isprintable() else ch.encode("unicode_escape").decode("ascii") for ch in flat)
+
+
 def render_mcp_tools_sdk_py(tools: Sequence[Mapping[str, Any]]) -> str:
     """Project MCP tool descriptors into a compact Python Protocol SDK stub (PTC mode)."""
     lines = [
@@ -359,7 +384,7 @@ def render_mcp_tools_sdk_py(tools: Sequence[Mapping[str, Any]]) -> str:
 
     for idx, tool in enumerate(tools):
         name = _safe_ident(str(tool.get("name", f"tool_{idx}")))
-        desc = str(tool.get("description", "")).strip().replace("\n", " ")
+        desc = _safe_comment(str(tool.get("description", "")))
         schema = tool.get("inputSchema")
         props: Mapping[str, Any] = schema.get("properties", {}) if isinstance(schema, Mapping) else {}
         req_raw = schema.get("required", []) if isinstance(schema, Mapping) else []

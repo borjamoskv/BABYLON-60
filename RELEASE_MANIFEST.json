@@ -6,7 +6,7 @@
   "commit": "e02cc29e7bfea6d987215a30a43fe10ecd397832",
   "source_tree_digest": "f446f24929afc508525c8322a7211dac0e67bc94346036b16273a6a1c0fd527d",
   "axiom_root": "AX-0: No stochastic component may authorize its own irreversible effects (LLM != authority)",
-  "claims_manifest_digest": "d4ca80d4e82978ce6e0ff5572a425f4126179e9e891fae2b3fe1b97c850e070d",
+  "claims_manifest_digest": "def2d6eacba39c140aa440f41cdf9989a24b25f7ecd99d6b30e57c7f0de42521",
   "compiled_at_iso": "2026-11-06T23:54:16Z",
   "prior_release": {
     "version": "5.1.0",
@@ -63,7 +63,7 @@
   "gate_attestations_basis": "Declared in babylon.toml [release.gate_attestations]; executable evidence is bound only by evidence_root.",
   "artifacts_sha256": {
     ".babylon60rules": "bcfb2b61ffadc56ee46efda5ddd30a28d133ab4fcc728fa4347a6d7b329421ea",
-    "CLAIMS.toml": "d4ca80d4e82978ce6e0ff5572a425f4126179e9e891fae2b3fe1b97c850e070d",
+    "CLAIMS.toml": "def2d6eacba39c140aa440f41cdf9989a24b25f7ecd99d6b30e57c7f0de42521",
     "babylon.toml": "d70d8161bc53a574bece514bdfb68032b1f3ee07f46ea73bc06e7842f18d6bac",
     "Cargo.toml": "16a8932ff60d70ad4a6e535c2093c32f5647f122875d7ca150029aa754317b0f",
     "Cargo.lock": "f8a08143601478fdbfd7f482163a652e04db41264725ab61605ba3d77057f6b4",
@@ -85,7 +85,7 @@
       "L3_ISOLATION": 2,
       "L4_EXPERIMENTAL": 7
     },
-    "notes": "mcp_authority_gate: test_ax0_mcp_isolation.py FAIL in --fresh run \u2192 downgraded to experimental. AUTH_006 (1000-iter SIGKILL harness) still running at manifest patch time. Canonical count 28 confirmed by verify_claims.py --list."
+    "notes": "AX-173 (2026-11-11T09:24:24Z): mcp_authority_gate is verified again. tests/test_ax0_mcp_isolation.py failed at e649125 (macOS arm64, 2026-11-07) and 3/3 at daa0a84 (Linux x86_64, 2026-11-11) because CortexMCPServer refused to start with SKILLS_LOCK_MISMATCH (cortex-kernel workspace skill not pinned; recorded by AX-170); after 6ecc2b4 regenerated the skills lockfiles it passed 3/3 at 6ecc2b4 and at b1d73d4 (Linux x86_64, CPython 3.12/3.13/3.14); macOS not re-run (NO_VERIFICADO). Counts, evidence_root and claims_manifest_digest patched accordingly; commit, source_tree_digest and compiled_at_iso still describe the e02cc29 compile. Prior patch AX-42 (2026-11-07T20:10:00Z): AUTH_006 (1000-iter SIGKILL harness) still running at manifest patch time. Canonical count 28 confirmed by verify_claims.py --list."
   },
   "evidence_root": "sha3-256:411e0639ecb6239f73bee9483865abae653b4931dcfa49b984f5340f38eeea20",
   "sbom": {
@@ -540,6 +540,6 @@
   },
   "signature": null,
   "source_commit": "e02cc29e7bfea6d987215a30a43fe10ecd397832",
-  "manifest_patch_ax": "AX-42",
-  "manifest_patch_iso": "2026-11-07T20:10:00Z"
+  "manifest_patch_ax": "AX-173",
+  "manifest_patch_iso": "2026-11-11T09:24:24Z"
 }

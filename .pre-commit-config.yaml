@@ -29,7 +29,7 @@ repos:
     hooks:
       - id: semantic-contracts
         name: known semantic contracts and SQLite fail-open patterns
-        entry: python3 scripts/c5_quality_gates/audit_semantic_contracts.py --workspace-only
+        entry: python3 scripts/c5_quality_gates/audit_semantic_contracts.py --workspace-only --public-projection
         language: system
         pass_filenames: false
 

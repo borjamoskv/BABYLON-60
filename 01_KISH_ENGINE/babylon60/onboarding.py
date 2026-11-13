@@ -563,8 +563,10 @@ def _probe(transport: dict[str, object]) -> dict[str, object]:
                     value = json.loads(raw)
                     if not isinstance(value, dict) or value.get("jsonrpc") != "2.0":
                         raise _IntegrationError("La respuesta del MCP no respeta JSON-RPC 2.0.")
-                    if value.get("id") != identifier:
+                    if "id" not in value:
                         continue
+                    if type(value["id"]) is not int or value["id"] != identifier:
+                        raise _IntegrationError("La respuesta del MCP contiene un identificador de solicitud inválido.")
                     if "error" in value or not isinstance(value.get("result"), dict):
                         raise _IntegrationError(f"El MCP rechazó {method}; revisa la instalación del paquete.")
                     return cast(dict[str, object], value["result"])
@@ -580,12 +582,21 @@ def _probe(transport: dict[str, object]) -> dict[str, object]:
                         "clientInfo": {"name": "babylon60-doctor", "version": "1"},
                     },
                 )
+                if initialized.get("protocolVersion") != "2024-11-05":
+                    raise _IntegrationError("La versión MCP anunciada no es compatible con el diagnóstico.")
                 if initialized.get("instructions") != load_mcp_instructions():
                     raise _IntegrationError("Las instrucciones MCP no coinciden con el contrato del paquete instalado.")
                 send({"jsonrpc": "2.0", "method": "notifications/initialized", "params": {}})
                 tools = request(2, "tools/list", {})
                 advertised_tools = tools.get("tools")
-                if not isinstance(advertised_tools, list) or not advertised_tools:
+                if (
+                    not isinstance(advertised_tools, list)
+                    or not advertised_tools
+                    or any(
+                        not isinstance(tool, dict) or not isinstance(tool.get("name"), str) or not tool["name"].strip()
+                        for tool in advertised_tools
+                    )
+                ):
                     raise _IntegrationError("El MCP no anuncia sus herramientas.")
                 guide = request(3, "resources/read", {"uri": "babylon://presentation/guide"})
                 contents = guide.get("contents")

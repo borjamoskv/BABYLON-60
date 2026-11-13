@@ -637,10 +637,13 @@ def test_rust_babylon_skills_mcp_stdio_interop(tmp_path: Path) -> None:
     import subprocess
 
     repo_root = Path(__file__).resolve().parent.parent
-    binary = repo_root / "target" / "debug" / "babylon-skills-mcp"
+    target_dir = Path(os.environ.get("CARGO_TARGET_DIR", str(repo_root / "target")))
+    if not target_dir.is_absolute():
+        target_dir = repo_root / target_dir
+    binary = target_dir / "debug" / "babylon-skills-mcp"
     if not binary.is_file():
         subprocess.run(
-            ["cargo", "build", "--offline", "-p", "babylon-skills-mcp"],
+            ["cargo", "build", "--locked", "--offline", "-p", "babylon-skills-mcp"],
             cwd=repo_root,
             check=True,
             capture_output=True,

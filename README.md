@@ -22,7 +22,7 @@ Model-agnostic authorization. Governed execution. Reproducible security evidence
 [![Rust](https://img.shields.io/badge/rust-≥1.89-2E4A9E?style=flat-square&labelColor=171717)](./Cargo.toml)
 [![Lean 4](https://img.shields.io/badge/Lean_4-BabylonTrace-2E4A9E?style=flat-square&labelColor=171717)](./proof/lean/BabylonTrace.lean)
 
-> **Release scope:** v5.1.0 prepares the stable terminal CLI and memory MCP distribution, validated on Windows Python 3.11 and 3.12. The security kernel remains an alpha in user space (EL0); see the explicit evidence levels and limitations in `CLAIMS.toml`. Release evidence applies only to its recorded source commit and bundle digest.
+> **Release scope:** v5.1.0 covers the terminal CLI and memory MCP distribution. Native Windows CLI/MCP and all four installation migrations passed on Python 3.11 and 3.12 for candidate `a1a53e2` on 2026-11-13 ([recorded scope and evidence](docs/security/windows-validation-2026-11-13.md)); later revisions require their own checks. The security kernel remains an alpha in user space (EL0); see the explicit evidence levels and limitations in `CLAIMS.toml`. Release evidence applies only to its recorded source commit and bundle digest.
 
 Video demos live in [examples/remotion](examples/remotion/README.md). Oncology
 simulations live in the independent [experiments/oncology](experiments/oncology/README.md)
@@ -134,8 +134,10 @@ ofrece `babylon60 --help`; el servidor independiente se inicia con
 También puedes usar `powershell` si no tienes `pwsh`. La opción `-ExecutionPolicy`
 solo afecta a ese proceso; no cambia la política del sistema. El instalador puede
 arrancar el servidor con `-Mcp -Ledger <ruta>`. Las pruebas de Windows cubren la
-CLI y el servidor de memoria MCP en Python 3.11 y 3.12; el broker nativo Rust y
-las garantías de aislamiento y biometría requieren una adaptación independiente.
+CLI y el servidor de memoria MCP en Python 3.11 y 3.12, con resultado aprobado
+para el candidato `a1a53e2` ([evidencia y límites](docs/security/windows-validation-2026-11-13.md)).
+El broker nativo Rust y las garantías de aislamiento y biometría requieren una
+adaptación independiente.
 Windows usa `--no-editable` para instalar una copia del paquete, evitando depender
 de archivos `.pth` con rutas Unicode y codificaciones locales de Python 3.11.
 
