@@ -3,7 +3,12 @@
 import json
 from pathlib import Path
 import pytest
-from tools.skill_library.router import select
+
+pytest.importorskip(
+    "tools.skill_library",
+    reason="tools.skill_library is absent from the public tree",
+)
+from tools.skill_library.router import select  # noqa: E402
 
 CATALOG = Path(__file__).absolute().parents[1] / "tools/skill_library/catalog.json"
 

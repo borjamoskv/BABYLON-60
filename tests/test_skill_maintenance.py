@@ -5,7 +5,12 @@ import os
 import shutil
 from pathlib import Path
 import pytest
-from tools.skill_library.maintenance import maintain, restore, signature
+
+pytest.importorskip(
+    "tools.skill_library",
+    reason="tools.skill_library is absent from the public tree",
+)
+from tools.skill_library.maintenance import maintain, restore, signature  # noqa: E402
 
 
 def target(tmp_path, name):

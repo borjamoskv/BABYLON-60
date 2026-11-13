@@ -118,7 +118,7 @@ exclude = [
 
 [tool.pytest.ini_options]
 testpaths = ["tests", "02_EDIN_SWARMS/tests"]
-addopts = "-x --tb=short"
+addopts = "--tb=short"
 asyncio_mode = "auto"
 pythonpath = [".", "01_KISH_ENGINE", "02_EDIN_SWARMS"]
 
