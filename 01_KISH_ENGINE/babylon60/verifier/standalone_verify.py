@@ -52,7 +52,7 @@ def compute_cortex_hash(
     Computes the SHA3-256 hash of a Cortex BFT ledger row.
     Pure mathematical function with zero external dependencies.
     """
-    if type(hash_version) is not int or hash_version not in (1, 2):
+    if type(hash_version) is not int or hash_version not in (1, 2, 3):
         raise ValueError(f"Unsupported Cortex hash version: {hash_version}")
     body = {
         "seq": seq,
@@ -66,13 +66,14 @@ def compute_cortex_hash(
         "prev_hash": prev_hash,
         "timestamp": timestamp,
     }
-    if hash_version == 2:
+    if hash_version in (2, 3):
         if type(lamport_t) is not int or lamport_t <= 0:
             raise ValueError("Cortex logical_tick must be a positive integer")
-        del body["timestamp"]
         del body["lamport_t"]
         body["logical_tick"] = lamport_t
         body["hash_version"] = hash_version
+        if hash_version == 2:
+            del body["timestamp"]
     return hashlib.sha3_256(canonical_json(body).encode("utf-8")).hexdigest()
 
 
@@ -317,7 +318,7 @@ def _verify_sqlite_ledger(
                 hash_version,
             ) = row
 
-            if type(hash_version) is not int or hash_version not in (1, 2):
+            if type(hash_version) is not int or hash_version not in (1, 2, 3):
                 return {
                     "verified": False,
                     "integrity_verified": False,

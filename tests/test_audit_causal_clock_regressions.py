@@ -28,16 +28,19 @@ def _events() -> list[CortexEvent]:
     return [CortexEvent("TEST", {"index": i}, "audit") for i in range(5)]
 
 
-def test_replay_ignores_wall_clock_and_batch_boundaries(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+def test_replay_matches_across_batch_boundaries_at_the_same_clock(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(persistence, "datetime", EarlierClock)
     first = CortexPersistLedger(tmp_path / "single.db")
     first_results = [first.append_event(event) for event in _events()]
-    monkeypatch.setattr(persistence, "datetime", LaterClock)
     second = CortexPersistLedger(tmp_path / "batch.db")
     second_results = second.append_batch(_events())
     assert first_results == second_results
     assert first.get_merkle_root() == second.get_merkle_root()
-    assert first.verify_integrity() and second.verify_integrity()
+    monkeypatch.setattr(persistence, "datetime", LaterClock)
+    later = CortexPersistLedger(tmp_path / "later.db")
+    later.append_batch(_events())
+    assert later.get_merkle_root() != first.get_merkle_root()
+    assert first.verify_integrity() and second.verify_integrity() and later.verify_integrity()
 
 
 def test_reopen_continues_the_same_causal_chain(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
@@ -46,7 +49,6 @@ def test_reopen_continues_the_same_causal_chain(tmp_path: Path, monkeypatch: pyt
     ledger = CortexPersistLedger(path)
     ledger.append_batch(_events()[:2])
     reopened = CortexPersistLedger(path)
-    monkeypatch.setattr(persistence, "datetime", LaterClock)
     reopened.append_batch(_events()[2:])
     replay = CortexPersistLedger(tmp_path / "replay.db")
     replay.append_batch(_events())
@@ -96,7 +98,7 @@ def test_legacy_hash_is_preserved_and_new_rows_are_versioned(tmp_path: Path) -> 
     with sqlite3.connect(path) as conn:
         rows = conn.execute("SELECT entry_hash, hash_version FROM cortex_ledger ORDER BY seq").fetchall()
     assert rows[0] == (original, 1)
-    assert [version for _, version in rows[1:]] == [2] * 5
+    assert [version for _, version in rows[1:]] == [3] * 5
     assert CortexPersistLedger(path).verify_integrity()
     assert ledger.get_state_attestation()["integrity_verified"]
     assert verify_offline_evidence(path, ledger.get_merkle_root())["verified"]
@@ -130,6 +132,8 @@ def test_v2_hash_binds_logical_tick_not_observation_time() -> None:
     assert digest(1, "earlier", 2) == digest(1, "later", 2)
     assert digest(1, "earlier", 2) != digest(2, "earlier", 2)
     assert digest(1, "earlier", 1) != digest(1, "later", 1)
+    assert digest(1, "earlier", 3) != digest(1, "later", 3)
+    assert digest(1, "earlier", 3) != digest(1, "earlier", 2)
     with pytest.raises(ValueError, match="Unsupported"):
         digest(1, "earlier", 999)
 
@@ -152,7 +156,6 @@ def test_bounded_replay_stress_after_warmup(tmp_path: Path, monkeypatch: pytest.
     expected = CortexPersistLedger(tmp_path / "reference.db")
     monkeypatch.setattr(persistence, "datetime", EarlierClock)
     expected.append_batch(events)
-    monkeypatch.setattr(persistence, "datetime", LaterClock)
     for start in range(0, len(events), 17):
         restarted = CortexPersistLedger(path)
         restarted.append_batch(events[start : start + 17])

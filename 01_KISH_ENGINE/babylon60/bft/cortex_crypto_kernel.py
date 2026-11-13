@@ -1,5 +1,6 @@
 import hashlib
 import json
+import os
 import uuid
 from typing import Dict, List, Mapping, Tuple, TypedDict
 
@@ -45,6 +46,46 @@ def compute_envelope_hash(envelope: Mapping[str, object] | Dict[str, object]) ->
     return hashlib.sha3_256(_canonical_json(envelope).encode("utf-8")).hexdigest()
 
 
+def canonical_idempotency_key(*fields: str) -> str:
+    """Length-prefixed UTF-8 fields. The result does not depend on delimiter bytes inside a field."""
+    if any(type(field) is not str for field in fields):
+        raise TypeError("idempotency fields must be strings")
+    blob = bytearray()
+    for field in fields:
+        raw = field.encode("utf-8")
+        blob += len(raw).to_bytes(4, "big")
+        blob += raw
+    return blob.hex()
+
+
+def legacy_unit_separator_key(*fields: str) -> str:
+    """Historical ``\\x1f`` concatenation. Lookup only: it is ambiguous when a field contains U+001F."""
+    if any(type(field) is not str for field in fields):
+        raise TypeError("idempotency fields must be strings")
+    return "\x1f".join(fields)
+
+
+def require_ed25519_seed(seed_hex: str | None = None) -> bytes:
+    """Return the 32-byte Ed25519 seed. A missing or invalid seed is an error.
+
+    Anchoring must not invent a signing key. Without this seed the signature
+    would not identify the operator.
+    """
+    raw_text = seed_hex if seed_hex is not None else os.environ.get("BABYLON60_SIGNING_SEED", "")
+    seed = raw_text.strip()
+    if not seed:
+        raise ValueError(
+            "BABYLON60_SIGNING_SEED is required to anchor the ledger; refusing to generate an ephemeral signing key"
+        )
+    try:
+        material = bytes.fromhex(seed)
+    except ValueError as exc:
+        raise ValueError("BABYLON60_SIGNING_SEED must be a hex-encoded Ed25519 seed") from exc
+    if len(material) != 32:
+        raise ValueError("BABYLON60_SIGNING_SEED must be 32 bytes")
+    return material
+
+
 def compute_cortex_hash(
     seq: int,
     event_id: str,
@@ -58,8 +99,13 @@ def compute_cortex_hash(
     domain: str = "babylon60.com",
     hash_version: int = 1,
 ) -> str:
-    """Hash v1 histórico; v2 liga el reloj lógico y excluye metadatos físicos."""
-    if type(hash_version) is not int or hash_version not in (1, 2):
+    """Row digest. v1 is historical. v2 binds logical_tick and omits the wall clock.
+
+    v3 keeps the logical tick as the causal order and also binds the stored
+    timestamp and agent_id, so rewriting those columns breaks the chain.
+    Existing v2 rows still verify under version 2.
+    """
+    if type(hash_version) is not int or hash_version not in (1, 2, 3):
         raise ValueError(f"Unsupported Cortex hash version: {hash_version}")
     body = {
         "seq": seq,
@@ -73,13 +119,14 @@ def compute_cortex_hash(
         "prev_hash": prev_hash,
         "timestamp": timestamp,
     }
-    if hash_version == 2:
+    if hash_version in (2, 3):
         if type(lamport_t) is not int or lamport_t <= 0:
             raise ValueError("Cortex logical_tick must be a positive integer")
-        del body["timestamp"]
         del body["lamport_t"]
         body["logical_tick"] = lamport_t
         body["hash_version"] = hash_version
+        if hash_version == 2:
+            del body["timestamp"]
     return compute_envelope_hash(body)
 
 
@@ -253,7 +300,7 @@ def verify_row_invariants(
     Retorna: (is_valid, error_message)
     Incluye FIX C5-04 (seq contiguo).
     """
-    if type(hash_version) is not int or hash_version not in (1, 2):
+    if type(hash_version) is not int or hash_version not in (1, 2, 3):
         return False, f"Unsupported Cortex hash version: {hash_version}"
 
     if seq != expected_seq:
