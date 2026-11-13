@@ -1,5 +1,6 @@
 import hashlib
 import json
+import os
 import uuid
 from typing import Dict, List, Mapping, Tuple, TypedDict
 
@@ -45,6 +46,46 @@ def compute_envelope_hash(envelope: Mapping[str, object] | Dict[str, object]) ->
     return hashlib.sha3_256(_canonical_json(envelope).encode("utf-8")).hexdigest()
 
 
+def canonical_idempotency_key(*fields: str) -> str:
+    """Length-prefixed UTF-8 fields. The result does not depend on delimiter bytes inside a field."""
+    if any(type(field) is not str for field in fields):
+        raise TypeError("idempotency fields must be strings")
+    blob = bytearray()
+    for field in fields:
+        raw = field.encode("utf-8")
+        blob += len(raw).to_bytes(4, "big")
+        blob += raw
+    return blob.hex()
+
+
+def legacy_unit_separator_key(*fields: str) -> str:
+    """Historical ``\\x1f`` concatenation. Lookup only: it is ambiguous when a field contains U+001F."""
+    if any(type(field) is not str for field in fields):
+        raise TypeError("idempotency fields must be strings")
+    return "\x1f".join(fields)
+
+
+def require_ed25519_seed(seed_hex: str | None = None) -> bytes:
+    """Return the 32-byte Ed25519 seed. A missing or invalid seed is an error.
+
+    Anchoring must not invent a signing key. Without this seed the signature
+    would not identify the operator.
+    """
+    raw_text = seed_hex if seed_hex is not None else os.environ.get("BABYLON60_SIGNING_SEED", "")
+    seed = raw_text.strip()
+    if not seed:
+        raise ValueError(
+            "BABYLON60_SIGNING_SEED is required to anchor the ledger; refusing to generate an ephemeral signing key"
+        )
+    try:
+        material = bytes.fromhex(seed)
+    except ValueError as exc:
+        raise ValueError("BABYLON60_SIGNING_SEED must be a hex-encoded Ed25519 seed") from exc
+    if len(material) != 32:
+        raise ValueError("BABYLON60_SIGNING_SEED must be 32 bytes")
+    return material
+
+
 def compute_cortex_hash(
     seq: int,
     event_id: str,
@@ -58,8 +99,13 @@ def compute_cortex_hash(
     domain: str = "babylon60.com",
     hash_version: int = 1,
 ) -> str:
-    """Hash v1 histórico; v2 liga el reloj lógico y excluye metadatos físicos."""
-    if type(hash_version) is not int or hash_version not in (1, 2):
+    """Row digest. v1 is historical. v2 and v3 bind logical_tick and omit the wall clock.
+
+    agent_id is inside the digest. The stored timestamp is not: v3 authenticates
+    it with observation_commitment so a replay at another wall time keeps the
+    same chain and Merkle root. Existing v1 and v2 rows still verify as written.
+    """
+    if type(hash_version) is not int or hash_version not in (1, 2, 3):
         raise ValueError(f"Unsupported Cortex hash version: {hash_version}")
     body = {
         "seq": seq,
@@ -73,7 +119,7 @@ def compute_cortex_hash(
         "prev_hash": prev_hash,
         "timestamp": timestamp,
     }
-    if hash_version == 2:
+    if hash_version in (2, 3):
         if type(lamport_t) is not int or lamport_t <= 0:
             raise ValueError("Cortex logical_tick must be a positive integer")
         del body["timestamp"]
@@ -81,6 +127,46 @@ def compute_cortex_hash(
         body["logical_tick"] = lamport_t
         body["hash_version"] = hash_version
     return compute_envelope_hash(body)
+
+
+def fold_observation(previous: str, observation_hash: str) -> str:
+    """Chain every v3 observation seal so a checkpoint can see an earlier timestamp edit."""
+    if type(previous) is not str or type(observation_hash) is not str:
+        raise TypeError("observation fold fields must be strings")
+    return compute_envelope_hash(
+        {
+            "schema": "babylon60:cortex-observation-fold:v3",
+            "prev": previous,
+            "observation_hash": observation_hash,
+        }
+    )
+
+
+def checkpoint_head(chain_head: str, observation_fold: str) -> str:
+    """Pin the chain head. v3 folds in observation seals; v1/v2 stay the chain head itself."""
+    if observation_fold == ZERO_HASH_256:
+        return chain_head
+    return compute_envelope_hash(
+        {
+            "schema": "babylon60:cortex-checkpoint:v3",
+            "chain_head": chain_head,
+            "observation_fold": observation_fold,
+        }
+    )
+
+
+def observation_commitment(entry_hash: str, timestamp: str, agent_id: str) -> str:
+    """Bind the stored wall time to a chain digest without putting that clock in the chain."""
+    if type(entry_hash) is not str or type(timestamp) is not str or type(agent_id) is not str:
+        raise TypeError("observation commitment fields must be strings")
+    return compute_envelope_hash(
+        {
+            "schema": "babylon60:cortex-observation:v3",
+            "entry_hash": entry_hash,
+            "timestamp": timestamp,
+            "agent_id": agent_id,
+        }
+    )
 
 
 def build_merkle_tree(entry_hashes: list[str]) -> str:
@@ -247,13 +333,14 @@ def verify_row_invariants(
     last_lamport: int,
     expected_prev_hash: str,
     hash_version: int = 1,
+    observation_hash: str | None = None,
 ) -> Tuple[bool, str]:
     """
     Verifica todos los invariantes criptográficos de una fila.
     Retorna: (is_valid, error_message)
     Incluye FIX C5-04 (seq contiguo).
     """
-    if type(hash_version) is not int or hash_version not in (1, 2):
+    if type(hash_version) is not int or hash_version not in (1, 2, 3):
         return False, f"Unsupported Cortex hash version: {hash_version}"
 
     if seq != expected_seq:
@@ -280,6 +367,16 @@ def verify_row_invariants(
     )
     if computed != entry_hash:
         return False, f"Entry hash mismatch: computed {computed}, stored {entry_hash}"
+
+    if hash_version == 3:
+        if type(observation_hash) is not str:
+            return False, "Observation commitment missing"
+        try:
+            expected_observation = observation_commitment(computed, timestamp, agent_id)
+        except TypeError as exc:
+            return False, str(exc)
+        if observation_hash != expected_observation:
+            return False, f"Observation commitment mismatch: computed {expected_observation}, stored {observation_hash}"
 
     return True, ""
 

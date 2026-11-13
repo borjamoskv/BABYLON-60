@@ -24,14 +24,18 @@ class BFTCausalInvariantError(RuntimeError):
 
 from babylon60.bft.cortex_crypto_kernel import (  # noqa: E402
     _canonical_json,
+    canonical_idempotency_key,
     compute_envelope_hash,
     build_merkle_tree,
+    legacy_unit_separator_key,
+    require_ed25519_seed,
     MerkleMountainRange,
     ZERO_HASH_256,
 )
 
 NAMESPACE_UUID = uuid.UUID("9897d6fd-d6a7-4fe9-86bc-f0c312886d5d")
 ZERO_HASH = "0" * 64
+LEDGER_ENTRY_HASH_VERSION = 2
 
 
 class LedgerEntryResult(TypedDict):
@@ -64,7 +68,16 @@ def _compute_entry_hash(
     lamport_t: int,
     prev_hash: str,
     created_at: str,
+    agent_id: str = "",
+    hash_version: int = 1,
 ) -> str:
+    """Version 1 is the historical envelope. Version 2 also binds agent_id.
+
+    created_at is already inside both versions, so a timestamp rewrite fails
+    verification. Old rows stay on version 1 and keep verifying.
+    """
+    if type(hash_version) is not int or hash_version not in (1, 2):
+        raise ValueError(f"Unsupported ledger entry hash version: {hash_version}")
     envelope = {
         "event_id": event_id,
         "stream": stream,
@@ -79,6 +92,9 @@ def _compute_entry_hash(
         "prev_hash": prev_hash,
         "created_at": created_at,
     }
+    if hash_version == 2:
+        envelope["agent_id"] = agent_id
+        envelope["hash_version"] = hash_version
     return compute_envelope_hash(envelope)
 
 
@@ -124,6 +140,8 @@ def _compute_entry_hash_wrapper(
     lamport_t: int,
     prev_hash: str,
     created_at: str,
+    agent_id: str,
+    hash_version: int,
 ) -> str:
     return _compute_entry_hash(
         event_id,
@@ -138,6 +156,8 @@ def _compute_entry_hash_wrapper(
         lamport_t,
         prev_hash,
         created_at,
+        agent_id,
+        hash_version,
     )
 
 
@@ -219,8 +239,15 @@ class BFTLedgerActor:
     async def _verified_checkpoint(self) -> LedgerCheckpoint:
         async with aiosqlite.connect(self._db_path) as db:
             await db.execute("BEGIN")
-            await db.create_function("c5_compute_hash", 12, _compute_entry_hash_wrapper, deterministic=True)
-            cursor = await db.execute("SELECT * FROM ledger_entries ORDER BY seq ASC")
+            await db.create_function("c5_compute_hash", 14, _compute_entry_hash_wrapper, deterministic=True)
+            info = await (await db.execute("PRAGMA table_info(ledger_entries)")).fetchall()
+            columns = {row[1] for row in info}
+            version_sql = "hash_version" if "hash_version" in columns else "1 AS hash_version"
+            cursor = await db.execute(
+                "SELECT seq, event_id, stream, entity_id, event_type, payload_json, source_db, "
+                "source_table, source_pk, cortex_taint, lamport_t, prev_hash, entry_hash, created_at, "
+                f"agent_id, {version_sql} FROM ledger_entries ORDER BY seq ASC"
+            )
             rows = await cursor.fetchall()
             prev_hash = ZERO_HASH
             expected_seq = 1
@@ -240,6 +267,8 @@ class BFTLedgerActor:
                 row_prev_hash = row[11]
                 entry_hash = row[12]
                 created_at = row[13]
+                agent_id = row[14]
+                row_hash_version = row[15]
                 if seq != expected_seq:
                     raise BFTCausalInvariantError(
                         f"INV_BFT_LEAN_03 (seq_monotone): Sequence gap at expected seq {expected_seq}"
@@ -269,6 +298,8 @@ class BFTLedgerActor:
                     lamport_t=lamport_t,
                     prev_hash=row_prev_hash,
                     created_at=created_at,
+                    agent_id=str(agent_id),
+                    hash_version=row_hash_version,
                 )
                 if entry_hash != computed_hash:
                     raise BFTCausalInvariantError(f"INV_BFT_LEAN_04 (merkle_proof): Hash mismatch at seq {seq}")
@@ -282,7 +313,12 @@ class BFTLedgerActor:
             return LedgerCheckpoint(expected_seq - 1, prev_hash)
 
     async def verify_chain(self, *, expected_checkpoint: LedgerCheckpoint | None = None) -> bool:
-        """Verify one read snapshot; a separately retained checkpoint also detects rollback."""
+        """Verify one read snapshot.
+
+        ``expected_checkpoint`` (count + head hash) must live outside SQLite.
+        A mismatch raises. Without that pin, a full rewrite that recalculates
+        the chain is undetectable; sqlite_sequence only catches ordinary truncation.
+        """
         checkpoint = await self._verified_checkpoint()
         if expected_checkpoint is not None and checkpoint != expected_checkpoint:
             raise BFTCausalInvariantError("INV_BFT_LEAN_05: Trusted checkpoint mismatch")
@@ -373,15 +409,7 @@ class BFTLedgerActor:
 
         from nacl.signing import SigningKey
 
-        seed = seed_hex or os.environ.get("BABYLON60_SIGNING_SEED", "").strip()
-        if seed:
-            try:
-                sk = SigningKey(bytes.fromhex(seed))
-            except Exception:
-                sk = SigningKey.generate()
-        else:
-            sk = SigningKey.generate()
-
+        sk = SigningKey(require_ed25519_seed(seed_hex))
         signed = sk.sign(head_json)
         sig_b64 = base64.b64encode(signed.signature).decode("utf-8")
         pk_b64 = base64.b64encode(sk.verify_key.encode()).decode("utf-8")
@@ -453,7 +481,7 @@ class BFTLedgerActor:
         try:
             async with aiosqlite.connect(self._db_path, isolation_level=None, timeout=5.0) as db:
                 try:
-                    await db.create_function("c5_compute_hash", 12, _compute_entry_hash_wrapper, deterministic=True)
+                    await db.create_function("c5_compute_hash", 14, _compute_entry_hash_wrapper, deterministic=True)
                     await db.execute("PRAGMA journal_mode=WAL")
                     await db.execute("PRAGMA synchronous = FULL")
                     await db.execute("PRAGMA foreign_keys=ON")
@@ -483,7 +511,7 @@ class BFTLedgerActor:
 
     async def _init_db(self, db: aiosqlite.Connection) -> None:
         await db.execute(
-            "\n            CREATE TABLE IF NOT EXISTS ledger_entries (\n                seq INTEGER PRIMARY KEY AUTOINCREMENT,\n                event_id TEXT NOT NULL UNIQUE,\n                stream TEXT NOT NULL CHECK (length(stream) > 0),\n                entity_id TEXT NOT NULL CHECK (length(entity_id) > 0),\n                event_type TEXT NOT NULL CHECK (length(event_type) > 0),\n                payload_json TEXT NOT NULL CHECK (length(payload_json) >= 2),\n                source_db TEXT NOT NULL CHECK (length(source_db) > 0),\n                source_table TEXT NOT NULL CHECK (length(source_table) > 0),\n                source_pk TEXT NOT NULL CHECK (length(source_pk) > 0),\n                cortex_taint TEXT NOT NULL CHECK (length(cortex_taint) > 0),\n                lamport_t INTEGER NOT NULL CHECK (lamport_t > 0),\n                prev_hash TEXT NOT NULL CHECK (length(prev_hash) = 64 AND prev_hash GLOB '[0-9a-f]*'),\n                entry_hash TEXT NOT NULL UNIQUE CHECK (length(entry_hash) = 64 AND entry_hash GLOB '[0-9a-f]*'),\n                created_at TEXT NOT NULL,\n                agent_id TEXT NOT NULL DEFAULT '',\n                UNIQUE(lamport_t, agent_id)\n            );\n        "
+            "\n            CREATE TABLE IF NOT EXISTS ledger_entries (\n                seq INTEGER PRIMARY KEY AUTOINCREMENT,\n                event_id TEXT NOT NULL UNIQUE,\n                stream TEXT NOT NULL CHECK (length(stream) > 0),\n                entity_id TEXT NOT NULL CHECK (length(entity_id) > 0),\n                event_type TEXT NOT NULL CHECK (length(event_type) > 0),\n                payload_json TEXT NOT NULL CHECK (length(payload_json) >= 2),\n                source_db TEXT NOT NULL CHECK (length(source_db) > 0),\n                source_table TEXT NOT NULL CHECK (length(source_table) > 0),\n                source_pk TEXT NOT NULL CHECK (length(source_pk) > 0),\n                cortex_taint TEXT NOT NULL CHECK (length(cortex_taint) > 0),\n                lamport_t INTEGER NOT NULL CHECK (lamport_t > 0),\n                prev_hash TEXT NOT NULL CHECK (length(prev_hash) = 64 AND prev_hash GLOB '[0-9a-f]*'),\n                entry_hash TEXT NOT NULL UNIQUE CHECK (length(entry_hash) = 64 AND entry_hash GLOB '[0-9a-f]*'),\n                created_at TEXT NOT NULL,\n                agent_id TEXT NOT NULL DEFAULT '',\n                hash_version INTEGER NOT NULL DEFAULT 1,\n                UNIQUE(lamport_t, agent_id)\n            );\n        "
         )
         await db.execute(
             "\n            CREATE TRIGGER IF NOT EXISTS trg_ledger_immutable_update BEFORE UPDATE ON ledger_entries\n            BEGIN SELECT RAISE(ABORT, 'C5 BFT: immutable master ledger'); END;\n        "
@@ -491,6 +519,9 @@ class BFTLedgerActor:
         await db.execute(
             "\n            CREATE TRIGGER IF NOT EXISTS trg_ledger_immutable_delete BEFORE DELETE ON ledger_entries\n            BEGIN SELECT RAISE(ABORT, 'C5 BFT: immutable master ledger'); END;\n        "
         )
+        columns = {row[1] for row in await (await db.execute("PRAGMA table_info(ledger_entries)")).fetchall()}
+        if "hash_version" not in columns:
+            await db.execute("ALTER TABLE ledger_entries ADD COLUMN hash_version INTEGER NOT NULL DEFAULT 1")
 
     @staticmethod
     def _plaintext(stored_payload: str, vault: Fernet | None) -> str:
@@ -516,10 +547,11 @@ class BFTLedgerActor:
         event: LedgerEvent,
         payload_json: str,
         vault: Fernet | None,
-    ) -> tuple[int, str] | None:
+    ) -> tuple[int, str, str] | None:
         cursor = await db.execute(
             "SELECT seq, entry_hash, payload_json, stream, entity_id, event_type, "
-            "source_db, source_table, source_pk, cortex_taint, created_at "
+            "source_db, source_table, source_pk, cortex_taint, created_at, agent_id, "
+            "COALESCE(hash_version, 1) "
             "FROM ledger_entries WHERE event_id = ?",
             (event_id,),
         )
@@ -535,13 +567,19 @@ class BFTLedgerActor:
             event.source_pk,
             event.cortex_taint,
         )
+        stored_agent = str(row[11])
+        stored_version = row[12]
+        if type(stored_version) is not int or stored_version not in (1, 2):
+            raise ValueError(f"Unsupported ledger entry hash version: {stored_version}")
+        agent_mismatch = stored_agent != event.agent_id and (stored_version >= 2 or stored_agent != "")
         if (
             self._plaintext(str(row[2]), vault) != payload_json
             or tuple(row[3:10]) != semantics
             or (event.created_at and row[10] != event.created_at)
+            or agent_mismatch
         ):
             raise ValueError(f"Fail-fast: INV_BFT_04 Collision on event_id {event_id}: payload or metadata mismatch")
-        return int(row[0]), str(row[1])
+        return int(row[0]), str(row[1]), event_id
 
     async def _execute_insert_tx(
         self,
@@ -553,18 +591,39 @@ class BFTLedgerActor:
         *,
         payload_json: str | None = None,
         vault: Fernet | None = None,
-    ) -> tuple[int, str]:
+        legacy_event_id: str | None = None,
+    ) -> tuple[int, str, str]:
         if db.in_transaction:
             raise RuntimeError("FAIL-FAST: writer entered with an active transaction")
         canonical_payload = payload_json if payload_json is not None else self._plaintext(stored_payload, vault)
         try:
             await db.execute("BEGIN IMMEDIATE")
             existing = await self._existing_result(db, event_id, event, canonical_payload, vault)
+            if existing is None and legacy_event_id and legacy_event_id != event_id:
+                existing = await self._existing_result(db, legacy_event_id, event, canonical_payload, vault)
             if existing is not None:
                 await db.commit()
                 return existing
+            head_lamport = "COALESCE((SELECT lamport_t FROM ledger_entries ORDER BY seq DESC LIMIT 1), 0) + 1"
+            head_hash = (
+                "COALESCE((SELECT entry_hash FROM ledger_entries ORDER BY seq DESC LIMIT 1), "
+                "'0000000000000000000000000000000000000000000000000000000000000000')"
+            )
             cursor = await db.execute(
-                "INSERT INTO ledger_entries (\n                event_id, stream, entity_id, event_type, payload_json,\n                source_db, source_table, source_pk, cortex_taint,\n                lamport_t, prev_hash, entry_hash, created_at\n            ) VALUES (\n                ?, ?, ?, ?, ?, ?, ?, ?, ?,\n                COALESCE((SELECT MAX(lamport_t) FROM ledger_entries), 0) + 1,\n                COALESCE((SELECT entry_hash FROM ledger_entries ORDER BY seq DESC LIMIT 1), '0000000000000000000000000000000000000000000000000000000000000000'),\n                c5_compute_hash(?, ?, ?, ?, ?, ?, ?, ?, ?, COALESCE((SELECT MAX(lamport_t) FROM ledger_entries), 0) + 1, COALESCE((SELECT entry_hash FROM ledger_entries ORDER BY seq DESC LIMIT 1), '0000000000000000000000000000000000000000000000000000000000000000'), ?),\n                ?\n            )\n            ON CONFLICT(event_id) DO NOTHING\n            RETURNING seq, entry_hash",
+                "INSERT INTO ledger_entries (\n"
+                "                event_id, stream, entity_id, event_type, payload_json,\n"
+                "                source_db, source_table, source_pk, cortex_taint,\n"
+                "                lamport_t, prev_hash, entry_hash, created_at, agent_id, hash_version\n"
+                "            ) VALUES (\n"
+                "                ?, ?, ?, ?, ?, ?, ?, ?, ?,\n"
+                f"                {head_lamport},\n"
+                f"                {head_hash},\n"
+                "                c5_compute_hash(?, ?, ?, ?, ?, ?, ?, ?, ?, "
+                f"{head_lamport}, {head_hash}, ?, ?, {LEDGER_ENTRY_HASH_VERSION}),\n"
+                f"                ?, ?, {LEDGER_ENTRY_HASH_VERSION}\n"
+                "            )\n"
+                "            ON CONFLICT(event_id) DO NOTHING\n"
+                "            RETURNING seq, entry_hash",
                 (
                     event_id,
                     event.stream,
@@ -585,7 +644,9 @@ class BFTLedgerActor:
                     event.source_pk,
                     event.cortex_taint,
                     created_at,
+                    event.agent_id,
                     created_at,
+                    event.agent_id,
                 ),
             )
             db_row = await cursor.fetchone()
@@ -596,7 +657,7 @@ class BFTLedgerActor:
                 await db.commit()
                 return existing
             await db.commit()
-            return int(db_row[0]), str(db_row[1])
+            return int(db_row[0]), str(db_row[1]), event_id
         except BaseException:
             try:
                 if db.in_transaction:
@@ -616,10 +677,26 @@ class BFTLedgerActor:
         created_at = event.created_at or datetime.now(timezone.utc).isoformat(timespec="microseconds").replace(
             "+00:00", "Z"
         )
-        idempotent_key = (
-            f"{event.source_db}\x1f{event.source_table}\x1f{event.source_pk}\x1f{payload_json}\x1f{event.cortex_taint}"
+        identity = (
+            event.stream,
+            event.entity_id,
+            event.event_type,
+            event.source_db,
+            event.source_table,
+            event.source_pk,
+            payload_json,
+            event.cortex_taint,
+            event.agent_id,
         )
-        event_id = str(uuid.uuid5(NAMESPACE_UUID, idempotent_key))
+        legacy_identity = (
+            event.source_db,
+            event.source_table,
+            event.source_pk,
+            payload_json,
+            event.cortex_taint,
+        )
+        event_id = str(uuid.uuid5(NAMESPACE_UUID, canonical_idempotency_key(*identity)))
+        legacy_event_id = str(uuid.uuid5(NAMESPACE_UUID, legacy_unit_separator_key(*legacy_identity)))
         vault_key = os.environ.get("CORTEX_VAULT_KEY")
         vault = Fernet(vault_key.encode("utf-8")) if vault_key else None
         if vault is not None:
@@ -627,7 +704,7 @@ class BFTLedgerActor:
             stored_payload = f"C5ENC:{stored_payload}"
         else:
             stored_payload = payload_json
-        seq, entry_hash = await self._execute_insert_tx(
+        seq, entry_hash, persisted_id = await self._execute_insert_tx(
             db,
             event_id,
             event,
@@ -635,6 +712,7 @@ class BFTLedgerActor:
             created_at,
             payload_json=payload_json,
             vault=vault,
+            legacy_event_id=legacy_event_id,
         )
 
         # Broadcast to Rust via Iceoryx2 PyO3 FFI
@@ -650,4 +728,4 @@ class BFTLedgerActor:
             logging.warning(f"Failed to publish IPC binary packet via iceoryx2: {e}")
 
         if not future.done():
-            future.set_result({"seq": seq, "event_id": event_id, "entry_hash": entry_hash})
+            future.set_result({"seq": seq, "event_id": persisted_id, "entry_hash": entry_hash})

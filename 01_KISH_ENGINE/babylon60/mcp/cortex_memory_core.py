@@ -27,6 +27,7 @@ from typing import Any
 import blake3
 from babylon60.bft.cortex_crypto_kernel import ZERO_HASH_256, _canonical_json, verify_row_invariants
 from babylon60.bft.cortex_persist_ledger import CortexEvent, CortexPersistLedger
+from babylon60.bft.integrity import LedgerCheckpoint
 
 PROJECTOR_V1 = "cortex-memory-projector/1"
 PROJECTOR_V2 = "cortex-memory-projector/2"
@@ -308,14 +309,28 @@ def open_ledger_readonly(
     return conn, guard
 
 
-def verify_chain_readonly(conn: sqlite3.Connection) -> tuple[bool, int]:
+def verify_chain_readonly(
+    conn: sqlite3.Connection,
+    *,
+    expected_checkpoint: LedgerCheckpoint | None = None,
+) -> tuple[bool, int]:
     """Re-verify the SHA3-256 chain with the canonical kernel check (verify_row_invariants),
     on an existing read-only connection. Same rule as CortexPersistLedger.verify_integrity,
-    without that constructor's directory creation, table initialisation or migration."""
+    without that constructor's directory creation, table initialisation or migration.
+
+    sqlite_sequence must match the verified tail. expected_checkpoint (count and
+    head hash, kept outside SQLite) fails the check on mismatch. Without that
+    pin, a full rewrite is undetectable.
+    """
+    if not conn.in_transaction:
+        conn.execute("BEGIN")
     prev_hash, last_lamport, expected_seq = ZERO_HASH_256, 0, 1
+    columns = {row[1] for row in conn.execute("PRAGMA table_info(cortex_ledger)")}
+    observation_sql = "observation_hash" if "observation_hash" in columns else "NULL AS observation_hash"
     cur = conn.execute(
         "SELECT seq, event_id, event_type, payload_json, cortex_taint, agent_id, domain, lamport_t, "
-        "prev_hash, entry_hash, timestamp, hash_version FROM cortex_ledger ORDER BY seq ASC"
+        "prev_hash, entry_hash, timestamp, hash_version, "
+        f"{observation_sql} FROM cortex_ledger ORDER BY seq ASC"
     )
     while rows := cur.fetchmany(1000):
         for (
@@ -331,6 +346,7 @@ def verify_chain_readonly(conn: sqlite3.Connection) -> tuple[bool, int]:
             entry_hash,
             timestamp,
             hash_version,
+            observation_hash,
         ) in rows:
             ok, _err = verify_row_invariants(
                 seq=seq,
@@ -348,11 +364,23 @@ def verify_chain_readonly(conn: sqlite3.Connection) -> tuple[bool, int]:
                 last_lamport=last_lamport,
                 expected_prev_hash=prev_hash,
                 hash_version=hash_version,
+                observation_hash=observation_hash,
             )
             if not ok:
                 return False, expected_seq - 1
             prev_hash, last_lamport, expected_seq = entry_hash, lamport_t, expected_seq + 1
-    return True, expected_seq - 1
+    count = expected_seq - 1
+    high_water = conn.execute("SELECT seq FROM sqlite_sequence WHERE name='cortex_ledger'").fetchone()
+    if (int(high_water[0]) if high_water and high_water[0] is not None else 0) != count:
+        return False, count
+    if expected_checkpoint is not None and (
+        not isinstance(expected_checkpoint, LedgerCheckpoint)
+        or type(expected_checkpoint.entries) is not int
+        or expected_checkpoint.entries != count
+        or expected_checkpoint.head_hash != prev_hash
+    ):
+        return False, count
+    return True, count
 
 
 def replay(ledger_path: Path, *, static_copy: bool = False) -> dict[str, object]:

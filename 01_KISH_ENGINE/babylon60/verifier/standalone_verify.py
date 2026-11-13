@@ -52,7 +52,7 @@ def compute_cortex_hash(
     Computes the SHA3-256 hash of a Cortex BFT ledger row.
     Pure mathematical function with zero external dependencies.
     """
-    if type(hash_version) is not int or hash_version not in (1, 2):
+    if type(hash_version) is not int or hash_version not in (1, 2, 3):
         raise ValueError(f"Unsupported Cortex hash version: {hash_version}")
     body = {
         "seq": seq,
@@ -66,7 +66,7 @@ def compute_cortex_hash(
         "prev_hash": prev_hash,
         "timestamp": timestamp,
     }
-    if hash_version == 2:
+    if hash_version in (2, 3):
         if type(lamport_t) is not int or lamport_t <= 0:
             raise ValueError("Cortex logical_tick must be a positive integer")
         del body["timestamp"]
@@ -74,6 +74,20 @@ def compute_cortex_hash(
         body["logical_tick"] = lamport_t
         body["hash_version"] = hash_version
     return hashlib.sha3_256(canonical_json(body).encode("utf-8")).hexdigest()
+
+
+def observation_commitment(entry_hash: str, timestamp: str, agent_id: str) -> str:
+    """Same bytes as babylon60.bft.cortex_crypto_kernel.observation_commitment."""
+    return hashlib.sha3_256(
+        canonical_json(
+            {
+                "schema": "babylon60:cortex-observation:v3",
+                "entry_hash": entry_hash,
+                "timestamp": timestamp,
+                "agent_id": agent_id,
+            }
+        ).encode("utf-8")
+    ).hexdigest()
 
 
 def build_cortex_merkle_tree(entry_hashes: List[str]) -> str:
@@ -283,17 +297,26 @@ def _verify_sqlite_ledger(
         # Old archives have no version column and must retain their v1 digest.
         columns = {row[1] for row in cursor.execute("PRAGMA table_info(cortex_ledger)")}
         version_column = "hash_version" if "hash_version" in columns else "1 AS hash_version"
+        observation_column = "observation_hash" if "observation_hash" in columns else "NULL AS observation_hash"
         cursor.execute(
             f"""
             SELECT seq, event_id, event_type, payload_json, cortex_taint,
                    agent_id, domain, lamport_t, prev_hash, entry_hash, timestamp,
-                   {version_column}
+                   {version_column}, {observation_column}
             FROM cortex_ledger
             ORDER BY seq ASC
             """
         )
         rows = cursor.fetchall()
+        schema_row = cursor.execute(
+            "SELECT sql FROM sqlite_master WHERE type='table' AND name='cortex_ledger'"
+        ).fetchone()
+        sequence_row = cursor.execute(
+            "SELECT seq FROM sqlite_sequence WHERE name='cortex_ledger'"
+        ).fetchone()
         conn.close()
+        uses_autoincrement = bool(schema_row and schema_row[0] and "AUTOINCREMENT" in schema_row[0].upper())
+        sequence_high_water = int(sequence_row[0]) if sequence_row and sequence_row[0] is not None else 0
 
         total_entries = len(rows)
         prev_hash = ZERO_HASH_256
@@ -315,9 +338,10 @@ def _verify_sqlite_ledger(
                 entry_hash,
                 timestamp,
                 hash_version,
+                observation_hash,
             ) = row
 
-            if type(hash_version) is not int or hash_version not in (1, 2):
+            if type(hash_version) is not int or hash_version not in (1, 2, 3):
                 return {
                     "verified": False,
                     "integrity_verified": False,
@@ -375,11 +399,31 @@ def _verify_sqlite_ledger(
                     "total_entries": total_entries,
                     "detail": f"ENTRY_HASH_MISMATCH: row {seq} computed {recomputed_entry_hash} != {entry_hash}",
                 }
+            if hash_version == 3 and (
+                type(observation_hash) is not str
+                or observation_commitment(recomputed_entry_hash, timestamp, agent_id) != observation_hash
+            ):
+                return {
+                    "verified": False,
+                    "integrity_verified": False,
+                    "merkle_root": "",
+                    "total_entries": total_entries,
+                    "detail": f"OBSERVATION_COMMITMENT_MISMATCH: row {seq}",
+                }
 
             entry_hashes.append(entry_hash)
             prev_hash = entry_hash
             last_lamport = lamport_t
             expected_seq += 1
+
+        if uses_autoincrement and sequence_high_water != total_entries:
+            return {
+                "verified": False,
+                "integrity_verified": False,
+                "merkle_root": "",
+                "total_entries": total_entries,
+                "detail": "TAIL_TRUNCATION: sqlite_sequence does not match the verified tail",
+            }
 
         computed_merkle_root = build_cortex_merkle_tree(entry_hashes)
 
