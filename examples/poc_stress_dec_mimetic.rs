@@ -51,11 +51,11 @@ fn main() {
     let mut u = Form1 { values: vec![0i64; mesh.num_edges] };
 
     // Inicialización pseudoaleatoria determinista
-    for i in 0..mesh.num_vertices {
-        phi.values[i] = ((i as i64 * 43) % 60) - 30;
+    for (i, value) in phi.values[..mesh.num_vertices].iter_mut().enumerate() {
+        *value = ((i as i64 * 43) % 60) - 30;
     }
-    for i in 0..mesh.num_edges {
-        u.values[i] = ((i as i64 * 71) % 60) - 30;
+    for (i, value) in u.values[..mesh.num_edges].iter_mut().enumerate() {
+        *value = ((i as i64 * 71) % 60) - 30;
     }
 
     let t0_dec = Instant::now();
@@ -173,8 +173,8 @@ fn main() {
     println!("[5/6] Ejecutando Stress Test Helmholtz-Hodge (Descomposición Ortogonal)...");
     let hodge_mesh = CubicMesh3D::new(4);
     let mut arbitrary_flow = Form1 { values: vec![0i64; hodge_mesh.num_edges] };
-    for i in 0..hodge_mesh.num_edges {
-        arbitrary_flow.values[i] = ((i as i64 * 31) % 60) - 30;
+    for (i, value) in arbitrary_flow.values[..hodge_mesh.num_edges].iter_mut().enumerate() {
+        *value = ((i as i64 * 31) % 60) - 30;
     }
 
     let t0_hodge = Instant::now();

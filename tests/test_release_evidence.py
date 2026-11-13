@@ -174,3 +174,49 @@ def test_bundle_must_match_verified_source_before_artifact_writes(evidence_root:
         compiler.emit_claims_artifacts(evidence, bundle_path=bundle_path)
     assert not (evidence_root / "evidence.json").exists()
     assert not (evidence_root / "sbom.cargo.cdx.json").exists()
+
+
+def test_source_bundle_rejects_path_swap_during_open(evidence_root: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    """A matching payload behind a substituted symlink is not verified source."""
+    import os
+
+    source = evidence_root / "CLAIMS.toml"
+    payload = source.read_bytes()
+    outside = evidence_root / "outside.txt"
+    outside.write_bytes(payload)
+    bundle_path = evidence_root / "candidate.zip"
+    inventory = {
+        "format": "babylon60.source-bundle.v1",
+        "version": "5.0.0",
+        "source_commit": "a" * 40,
+        "files_sha256": {"CLAIMS.toml": hashlib.sha256(payload).hexdigest()},
+    }
+    with zipfile.ZipFile(bundle_path, "w") as bundle:
+        bundle.writestr("CLAIMS.toml", payload)
+        bundle.writestr("SOURCE_MANIFEST.json", json.dumps(inventory))
+    real_open, real_is_file = os.open, Path.is_file
+    swapped = False
+
+    def replace_source():
+        nonlocal swapped
+        if not swapped:
+            source.unlink()
+            source.symlink_to(outside)
+            swapped = True
+
+    def open_after_swap(path, *args, **kwargs):
+        if Path(path) == source:
+            replace_source()
+        return real_open(path, *args, **kwargs)
+
+    def checked_then_swapped(path):
+        result = real_is_file(path)
+        if path == source:
+            replace_source()
+        return result
+
+    monkeypatch.setattr(os, "open", open_after_swap)
+    monkeypatch.setattr(Path, "is_file", checked_then_swapped)
+    with pytest.raises(ValueError, match="release source|verified source"):
+        compiler.inspect_source_bundle(bundle_path, version="5.0.0", commit="a" * 40)
+    assert swapped

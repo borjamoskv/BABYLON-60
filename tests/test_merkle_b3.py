@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import subprocess
+import os
 from pathlib import Path
 
 import pytest
@@ -17,7 +18,10 @@ from babylon60.attestation.merkle_b3 import (
 )
 
 REPO = Path(__file__).resolve().parents[1]
-RUST_BIN = REPO / "target" / "debug" / "babylon-attest"
+TARGET_DIR = Path(os.environ.get("CARGO_TARGET_DIR", str(REPO / "target")))
+if not TARGET_DIR.is_absolute():
+    TARGET_DIR = REPO / TARGET_DIR
+RUST_BIN = TARGET_DIR / "debug" / "babylon-attest"
 
 
 def _leaves(n: int) -> list[bytes]:
@@ -84,7 +88,7 @@ def test_proof_index_out_of_range() -> None:
 
 def _rust_root(leaves: list[bytes]) -> subprocess.CompletedProcess[str]:
     if not RUST_BIN.exists():
-        subprocess.run(["cargo", "build", "-q", "-p", "babylon-attest"], check=True, cwd=REPO, timeout=600)
+        subprocess.run(["cargo", "build", "--locked", "-q", "-p", "babylon-attest"], check=True, cwd=REPO, timeout=600)
     payload = "\n".join(x.decode() for x in leaves)
     return subprocess.run(
         [str(RUST_BIN), "merkle-b3-root"], input=payload, capture_output=True, text=True, cwd=REPO, timeout=60

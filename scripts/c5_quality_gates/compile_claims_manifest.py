@@ -18,6 +18,7 @@ import hashlib
 import io
 import json
 import os
+import stat
 import subprocess
 import sys
 import time
@@ -259,7 +260,17 @@ def inspect_source_bundle(bundle_path: Path, *, version: str, commit: str) -> Di
                 if hashlib.sha256(payload).hexdigest() != expected_hashes[name]:
                     raise ValueError(f"Release bundle inventory checksum mismatch: {name}")
                 source = REPO_ROOT / name
-                if source.is_symlink() or not source.is_file() or source.read_bytes() != payload:
+                flags = os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0) | getattr(os, "O_NONBLOCK", 0)
+                try:
+                    with os.fdopen(os.open(source, flags), "rb") as stream:
+                        opened = os.fstat(stream.fileno())
+                        named = os.stat(source, follow_symlinks=False)
+                        matches = (
+                            stat.S_ISREG(named.st_mode) and os.path.samestat(named, opened) and stream.read() == payload
+                        )
+                except OSError as error:
+                    raise ValueError(f"Cannot read verified release source: {name}") from error
+                if not matches:
                     raise ValueError(f"Release bundle differs from verified source: {name}")
             digest.update(name.encode("utf-8") + b"\0")
             digest.update(len(payload).to_bytes(8, "big"))

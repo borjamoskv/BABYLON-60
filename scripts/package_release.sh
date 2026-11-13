@@ -60,6 +60,7 @@ for guide in [
     "scripts/verify_release.sh",
     "CLAIMS.toml",
     "docs/security/governance-comparison-2026-10-24.md",
+    "docs/security/windows-validation-2026-11-13.md",
     "docs/03_guides/guide_signed_authorization.md",
     "docs/03_guides/guide_codex_first_use.md",
     "docs/03_guides/guide_first_conversation_pilot.md",
