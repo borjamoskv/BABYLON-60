@@ -13,10 +13,24 @@ import sys
 import os
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).absolute().parents[2]
 
 
-def is_valid_sibling_symlink(target: str) -> bool:
+def _is_confined_to_repo(path: Path, root: Path = REPO_ROOT) -> bool:
+    try:
+        return path.resolve().is_relative_to(root.resolve())
+    except OSError:
+        return False
+
+
+def is_valid_sibling_symlink(target: str, link_path: Path | None = None, root: Path = REPO_ROOT) -> bool:
+    if link_path is not None:
+        try:
+            resolved = (link_path.parent / target).resolve()
+            if resolved.is_relative_to(root.resolve()):
+                return True
+        except OSError:
+            return False
     if not target.startswith(".."):
         return True
     parts = Path(target).parts
@@ -29,8 +43,11 @@ def audit_symlinks(root: Path = REPO_ROOT) -> list[tuple[Path, str]]:
     for path in root.rglob("*"):
         if any(part in EXCLUDE_DIRS for part in path.parts) or not path.is_symlink():
             continue
+        if not _is_confined_to_repo(path.parent, root):
+            violations.append((path, "<unconfined-parent>"))
+            continue
         target = os.readlink(path)
-        if not is_valid_sibling_symlink(target):
+        if not is_valid_sibling_symlink(target, path, root):
             violations.append((path, target))
     return violations
 

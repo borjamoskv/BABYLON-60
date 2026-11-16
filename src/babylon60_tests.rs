@@ -301,3 +301,40 @@ fn input_events_and_instructions_keep_distinct_ids_at_the_same_tick() {
     assert_eq!(first_tick.len(), 2);
     assert_ne!(first_tick[0].id, first_tick[1].id);
 }
+
+fn c0381_base(tag: &str) -> std::path::PathBuf {
+    let base = std::env::temp_dir().join(format!("c0381-{}-{}", tag, std::process::id()));
+    let _ = fs::remove_dir_all(&base);
+    base
+}
+
+#[test]
+fn c0381_repeated_export_with_same_hash_keeps_previous_evidence() {
+    let base = c0381_base("seq");
+    let first = exclusive_export_dir(&base, "samehash").unwrap();
+    write_new(&first.join("manifest.json"), b"first").unwrap();
+    let second = exclusive_export_dir(&base, "samehash").unwrap();
+    write_new(&second.join("manifest.json"), b"second").unwrap();
+
+    assert_ne!(first, second);
+    assert_eq!(fs::read(first.join("manifest.json")).unwrap(), b"first");
+    assert!(write_new(&first.join("manifest.json"), b"overwrite").is_err());
+    assert_eq!(fs::read(first.join("manifest.json")).unwrap(), b"first");
+    let _ = fs::remove_dir_all(&base);
+}
+
+#[test]
+fn c0381_concurrent_exports_get_distinct_directories() {
+    let base = c0381_base("par");
+    let handles: Vec<_> = (0..8)
+        .map(|_| {
+            let base = base.clone();
+            std::thread::spawn(move || exclusive_export_dir(&base, "samehash").unwrap())
+        })
+        .collect();
+    let mut dirs: Vec<_> = handles.into_iter().map(|h| h.join().unwrap()).collect();
+    dirs.sort();
+    dirs.dedup();
+    assert_eq!(dirs.len(), 8, "exportaciones concurrentes compartieron directorio");
+    let _ = fs::remove_dir_all(&base);
+}

@@ -534,11 +534,18 @@ fn acs_crash_child() {
     let call = s.call(&guard);
     let (socket, _peer) = UnixStream::pair().unwrap();
     assert!(guard.evaluate(&socket, &call, 100, 7).is_ok());
-    // Kill after authorization, before Rust destructors or any simulated effect.
-    unsafe {
-        libc::kill(libc::getpid(), libc::SIGKILL);
+    // Send SIGKILL after authorization, before simulating any effect.
+    if unsafe { libc::kill(libc::getpid(), libc::SIGKILL) } != 0 {
+        panic!(
+            "failed to send SIGKILL to the crash test child: {}",
+            std::io::Error::last_os_error()
+        );
     }
-    panic!("SIGKILL unexpectedly returned");
+
+    // kill can return before the process terminates. Wait without dropping locals.
+    loop {
+        std::thread::park();
+    }
 }
 #[test]
 fn nonce_survives_sigkill_after_authorization() {

@@ -230,9 +230,12 @@ fn parse_metadata_value(mmap: &[u8], mut cursor: usize, val_type: u32) -> Result
             let count = LittleEndian::read_u64(&mmap[cursor..cursor + 8]) as usize;
             cursor += 8;
             let mut items = Vec::new();
-            for _ in 0..count.min(10) { // Limitamos para display
+            // C0481: se recorren todos los elementos para avanzar el cursor; solo se muestran 10.
+            for index in 0..count {
                 let (val, next) = parse_metadata_value(mmap, cursor, elem_type)?;
-                items.push(val);
+                if index < 10 {
+                    items.push(val);
+                }
                 cursor = next;
             }
             if count > 10 {
@@ -253,5 +256,29 @@ fn calculate_tensor_byte_size(dims: &[u64], tensor_type: u32) -> usize {
         8 => (num_elements.div_ceil(32) * 34) as usize, // Q8_0 (block_size=32, 34 bytes)
         12 => (num_elements.div_ceil(256) * 144) as usize, // Q4_K
         _ => (num_elements * 2) as usize, // Default fallback aproximado
+    }
+}
+
+#[cfg(test)]
+mod c0481_tests {
+    use super::*;
+
+    #[test]
+    fn long_array_display_truncation_does_not_move_cursor_short() {
+        // Array UINT32 de 12 elementos seguido de un campo UINT8 marcador.
+        let mut buf = Vec::new();
+        buf.extend_from_slice(&4u32.to_le_bytes());
+        buf.extend_from_slice(&12u64.to_le_bytes());
+        for v in 1u32..=12 {
+            buf.extend_from_slice(&v.to_le_bytes());
+        }
+        buf.push(0xAB);
+
+        let (shown, next) = parse_metadata_value(&buf, 0, 9).unwrap();
+        assert!(shown.contains("+2 elementos"), "la presentación sigue truncada: {shown}");
+        assert_eq!(next, 4 + 8 + 12 * 4, "C0481: el cursor no saltó el array completo");
+        let (marker, end) = parse_metadata_value(&buf, next, 0).unwrap();
+        assert_eq!(marker, "171");
+        assert_eq!(end, buf.len());
     }
 }

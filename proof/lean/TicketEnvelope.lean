@@ -146,10 +146,21 @@ def hex (bs : Bytes) : String := String.ofList (bs.flatMap fun b =>
   [Char.ofNat (if b.toNat / 16 < 10 then 48 + b.toNat / 16 else 87 + b.toNat / 16),
    Char.ofNat (if b.toNat % 16 < 10 then 48 + b.toNat % 16 else 87 + b.toNat % 16)])
 
-/-- Public P-256 generator point. No private key and no hardware claim. -/
-def generatorKey : Bytes := (parseHex
-  ("046b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c296" ++
-   "4fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5")).getD []
+/-- Public P-256 generator point. No private key and no hardware claim.
+    Literal de bytes: sin `getD []` (fallaba abierto a clave vacía) y sin `String`,
+    cuyas operaciones de core arrastran `Classical.choice` a las pruebas del fixture. -/
+def generatorKey : Bytes :=
+  [0x04, 0x6b, 0x17, 0xd1, 0xf2, 0xe1, 0x2c, 0x42, 0x47, 0xf8, 0xbc, 0xe6, 0xe5,
+   0x63, 0xa4, 0x40, 0xf2, 0x77, 0x03, 0x7d, 0x81, 0x2d, 0xeb, 0x33, 0xa0, 0xf4,
+   0xa1, 0x39, 0x45, 0xd8, 0x98, 0xc2, 0x96, 0x4f, 0xe3, 0x42, 0xe2, 0xfe, 0x1a,
+   0x7f, 0x9b, 0x8e, 0xe7, 0xeb, 0x4a, 0x7c, 0x0f, 0x9e, 0x16, 0x2b, 0xce, 0x33,
+   0x57, 0x6b, 0x31, 0x5e, 0xce, 0xcb, 0xb6, 0x40, 0x68, 0x37, 0xbf, 0x51, 0xf5]
+
+/-- El literal coincide con la codificación hex canónica del punto generador. -/
+example : parseHex
+    ("046b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c296" ++
+     "4fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5") = some generatorKey := by
+  decide +kernel
 
 def fixturePayload (ax edge : Bool) : Payload :=
   (text "BABYLON-DESKTOP-DISPATCH-v1", text (if edge then "á😀" else "a"), text "b",

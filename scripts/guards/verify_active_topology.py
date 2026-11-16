@@ -348,9 +348,14 @@ def validate_instruction_text(text: str) -> list[str]:
 
 def validate_instruction_file(path: Path) -> list[str]:
     try:
-        if path.is_symlink() or not path.is_file():
-            return [f"{path}: expected a regular instruction file"]
-        return [f"{path}: {error}" for error in validate_instruction_text(path.read_text(encoding="utf-8"))]
+        flags = os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0)
+        fd = os.open(path, flags)
+        with os.fdopen(fd, "r", encoding="utf-8") as f:
+            info = os.fstat(f.fileno())
+            if not stat.S_ISREG(info.st_mode):
+                return [f"{path}: expected a regular instruction file"]
+            content = f.read()
+        return [f"{path}: {error}" for error in validate_instruction_text(content)]
     except (OSError, UnicodeError) as error:
         return [f"{path}: unreadable ({error})"]
 
@@ -443,12 +448,18 @@ def validate_mcp_manifests(root: Path, *, staged: bool = False) -> list[str]:
     for rel_path in MCP_MANIFESTS + OPTIONAL_MCP_MANIFESTS:
         path = root / rel_path
         if not staged and not path.is_file():
-            if rel_path in OPTIONAL_MCP_MANIFESTS and not path.exists() and not path.is_symlink():
+            if rel_path in OPTIONAL_MCP_MANIFESTS and not path.exists():
                 continue
             errors.append(f"{rel_path}: missing MCP manifest file")
             continue
         try:
-            content = index_file(root, rel_path) if staged else path.read_text(encoding="utf-8")
+            if staged:
+                content = index_file(root, rel_path)
+            else:
+                flags = os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0)
+                fd = os.open(path, flags)
+                with os.fdopen(fd, "r", encoding="utf-8") as f:
+                    content = f.read()
         except (OSError, UnicodeError, ValueError) as error:
             if (
                 staged and rel_path in OPTIONAL_MCP_MANIFESTS

@@ -29,7 +29,7 @@ void void_batch_hamming_dist_neon(
         uint64_t total_dist = 0;
         size_t j = 0;
         
-        for (; j <= len - 16; j += 16) {
+        for (; j + 16 <= len; j += 16) {
             uint8x16_t vq = vld1q_u8(query + j);
             uint8x16_t vt = vld1q_u8(target + j);
             uint8x16_t vxor = veorq_u8(vq, vt);
@@ -60,7 +60,7 @@ void void_batch_hamming_dist_avx512(
         size_t j = 0;
 
         // 512-bit (64-byte) blocks
-        for (; j <= len - 64; j += 64) {
+        for (; j + 64 <= len; j += 64) {
             __m512i vq = _mm512_loadu_si512((const __m512i*)(query + j));
             __m512i vt = _mm512_loadu_si512((const __m512i*)(target + j));
             __m512i vxor = _mm512_xor_si512(vq, vt);

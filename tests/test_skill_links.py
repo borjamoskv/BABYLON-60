@@ -1,8 +1,11 @@
+import json
 from pathlib import Path
+from urllib.error import HTTPError
 
 import pytest
 
-from scripts.c5_quality_gates.audit_skill_links import anchors, inspect
+from scripts.c5_quality_gates import audit_skill_links
+from scripts.c5_quality_gates.audit_skill_links import anchors, inspect, main
 
 
 def test_heading_ids_and_duplicates() -> None:
@@ -41,3 +44,68 @@ def test_file_uris_are_checked_including_fragments(tmp_path: Path) -> None:
     )
     result = inspect([tmp_path], remote=False)
     assert {f["reason"] for f in result["findings"]} == {"missing local anchor", "missing file", "remote file host"}
+
+
+def test_allow_unverified_403_host_preserves_evidence_without_weakening_other_failures(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    root = tmp_path / "skills"
+    root.mkdir()
+    doc = root / "SKILL.md"
+    doc.write_text("[Dash](https://dash.cloudflare.com/tokens)\n")
+    out = tmp_path / "links.json"
+
+    def fake_urlopen(req: object, timeout: int = 18) -> object:
+        url = getattr(req, "full_url", str(req))
+        code = 404 if "missing" in url else 403
+        raise HTTPError(url, code, "denied", {}, None)  # type: ignore[arg-type]
+
+    monkeypatch.setattr(audit_skill_links, "urlopen", fake_urlopen)
+
+    assert main(["--root", str(root), "--output", str(out)]) == 1
+    assert (
+        main(
+            [
+                "--root",
+                str(root),
+                "--allow-unverified-403-host",
+                "dash.cloudflare.com",
+                "--output",
+                str(out),
+            ]
+        )
+        == 0
+    )
+    evidence = json.loads(out.read_text(encoding="utf-8"))
+    assert evidence["findings"][0]["status"] == "unverified"
+    assert evidence["findings"][0]["reason"] == "403"
+
+    doc.write_text("[Dash](https://dash.cloudflare.com/tokens#sec)\n")
+    assert (
+        main(
+            [
+                "--root",
+                str(root),
+                "--allow-unverified-403-host",
+                "dash.cloudflare.com",
+                "--output",
+                str(out),
+            ]
+        )
+        == 1
+    )
+
+    doc.write_text("[Missing](https://dash.cloudflare.com/missing)\n")
+    assert (
+        main(
+            [
+                "--root",
+                str(root),
+                "--allow-unverified-403-host",
+                "dash.cloudflare.com",
+                "--output",
+                str(out),
+            ]
+        )
+        == 1
+    )

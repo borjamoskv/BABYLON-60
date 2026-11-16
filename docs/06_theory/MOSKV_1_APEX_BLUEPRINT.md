@@ -10,7 +10,7 @@ Revisión científica: 2026-10-24. Estatus: **Blueprint-no-certificado**. El sel
 
 ## 1. Naturaleza y alcance
 
-El documento conserva propuestas de IDE local, memoria de trabajo, edición asistida y visualización. No es un inventario de capacidades instaladas, una autorización de despliegue ni una prueba de beneficios cognitivos o fisiológicos. Se retiran el sello «Verified» y el axioma `document_epistemic_validity`.
+El documento conserva propuestas de IDE local, memoria de trabajo, edición asistida y visualización. No es un inventario de capacidades instaladas, una autorización de despliegue ni una prueba de beneficios cognitivos o fisiológicos. Se retiran el sello «Verified» y el axioma `[OBSOLETO: document_epistemic_validity]`.
 
 | Área propuesta | Estatus y evidencia pendiente |
 | --- | --- |

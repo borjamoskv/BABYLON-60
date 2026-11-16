@@ -8,7 +8,7 @@ al contenido de los commits, no a ejecutar el árbol sucio completo.
 
 ## Evidencia y reproducción
 
-[Resumen, hashes, comandos y commits](evidence/concurrent-main-audit-20261030/summary.json).
+[Resumen, hashes, comandos y commits](RETENTION.md).
 Cada unidad se aplicó incrementalmente en un checkout aislado y pasó sus pruebas,
 Ruff y MyPy cuando correspondían. El conjunto pasó **354 pruebas, sin fallos ni
 omisiones**, más cuatro fixtures del Worker JavaScript. MyPy pasó sobre 30 fuentes.

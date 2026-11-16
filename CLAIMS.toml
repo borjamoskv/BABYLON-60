@@ -250,6 +250,30 @@ evidence_suite = "cargo test --locked --lib omega_mediation::trusted_dispatch_te
 status = "verified_local"
 component = "00_ABZU_KERNEL"
 
+[claim.ring0_linux_tpm2_wire]
+claim_id = "CLAIM-RING0-010"
+statement = "The Ring-0 TPM 2.0 wire encoder builds a bit-exact 73-byte TPM2_Quote command matching TCG TPM 2.0 Part 3 section 16.4, and parse_quote_response parses TPMS_ATTEST with fail-closed bounds (extraData == causal digest, PCR match, ECDSA signature non-zero)"
+required_for_release = false
+evidence_level = "L2_IMPLEMENTATION"
+scope = "Command encoding (src/ring0/wire.rs, platform-neutral) and response parsing (src/ring0.rs, linux). Does not cover open of /dev/tpmrm0, the Quote round trip on a real device, or AK certificate chain validation; those require physical hardware or swtpm (TD-RING0-001)."
+evidence_suite = "cargo test --locked --lib ring0::wire::golden"
+status = "experimental"
+component = "00_ABZU_KERNEL"
+debt_opened = "2026-11-08"
+debt_severity = "MEDIO"
+
+[claim.ring0_aws_nitro_wire]
+claim_id = "CLAIM-RING0-011"
+statement = "The Ring-0 NSM encoder produces the deterministic canonical CBOR Attestation request {Attestation: {user_data: bstr(32 causal digest), nonce: bstr(8 big-endian logical_tick)}} as 73 bytes with shortest-form heads (RFC 8949 section 4.2.1), matching a frozen golden vector"
+required_for_release = false
+evidence_level = "L2_IMPLEMENTATION"
+scope = "Request encoding only (src/ring0/wire.rs, platform-neutral, no device access). Does not cover open of /dev/nsm, the NSM_IOCTL_REQUEST round trip, response parsing, PCR0 binding or attestation-document verification; those need a Nitro Enclave or mock-nsm and no CI environment exists yet (TD-RING0-001, TD-RING0-003)."
+evidence_suite = "cargo test --locked --lib ring0::wire::golden"
+status = "experimental"
+component = "00_ABZU_KERNEL"
+debt_opened = "2026-11-08"
+debt_severity = "MEDIO"
+
 [claim.mcp_seatbelt_confinement]
 statement = "The macOS MCP backend checks the real stdio protocol and Seatbelt confinement before admitting a candidate, with bounded execution and fail-closed rejection"
 required_for_release = true
@@ -258,6 +282,16 @@ scope = "macOS sandbox-exec, private temporary files and tested MCP candidates. 
 evidence_suite = "uv run --locked pytest tests/test_mcp_deduction.py tests/test_mcp_seatbelt.py tests/test_audit_mcp_confinement.py -q"
 status = "verified_local"
 component = "01_KISH_ENGINE"
+
+[claim.FL_AIACT_02_regulatory_evidence_graph]
+statement = "Regulatory Evidence Graph (babylon.assurance.claim.v1) and BABYLON Assurance Gateway enforce AcceptEvidence(c,a) => Bound(c,a) & Applicable(c,a) & Verified(c) and TechnicalPASS != LegalConformity across 1,000 controlled mutations and 40 holdout cases with 0 false acceptances, 0 false rejections, and selective preservation of orthogonal claims"
+required_for_release = true
+evidence_level = "L2_IMPLEMENTATION"
+scope = "Python regulatory evidence graph evaluator (01_KISH_ENGINE/babylon60/compliance_exporter/regulatory.py), Art. 43 vs Art. 43.4 change classification, external model uncertainty declarations, and Art. 18 (10y) / Art. 26.6 (6m) / GDPR salted-commitment retention rules. Does not constitute or emit automatic EU AI Act legal conformity certification."
+evidence_suite = "uv run --locked pytest tests/test_fl_aiact_02_evidence_graph.py -q"
+status = "verified"
+component = "01_KISH_ENGINE"
+eu_ai_act_mapping = "Art. 9, 10, 11, 12, 13, 14, 15, 17, 18, 25, 26, 43, 72"
 
 
 # ============================================================================
@@ -278,25 +312,33 @@ component = "00_ABZU_KERNEL"
 
 [invariants.mcp_lifecycle_confinement]
 claim_id = "CLAIM-MCP-006"
-status = "ATTESTED_IN_SILICON"
-summary = "Autoridad del broker MCP confinada al ciclo de vida exacto de cada invocación; cuarentena EffectTx y desacople entre aceptación biométrica y verificación post-reinicio."
-enforced_by = ["AUTH_004", "EffectTx"]
+status = "VERIFIED_LOCAL"
+summary = "Autoridad del broker MCP confinada al ciclo de vida de cada invocación efímera: consumo atómico single-use (commit_once) en McpCapabilityBroker, cuarentena atómica EffectTx en detonación, persistencia SQLite WAL synchronous=FULL de execution_id ante SIGKILL y aislamiento stdio/Seatbelt en macOS; recibo Touch ID hardware fuera de la proyección pública."
+enforced_by = ["AUTH_004", "EffectTx", "McpCapabilityBroker::commit_once", "VerificationGate"]
 discovery_execution_split = "STRICT"
 token_replay_window = 0
+approval_validity_window_seconds = 300
+evidence_suite = "cargo build --locked -p babylon60_root --lib --features python && uv run --locked pytest tests/test_claim_mcp_006_lifecycle.py -q"
 required_for_release = true
 evidence_level = "L3_ISOLATION"
 component = "00_ABZU_KERNEL"
+hardware_run = "Informado sin recibo en esta proyección: docs/security/LOCAL_CORE_INTEGRATION_2026-10-30.md:3-24 (candidato b9640a52, un intento con tests/manual/hardware_mcp_cycle.py); recibos en docs/security/evidence/local-core-20261030/"
+reviewed = "2026-11-16"
+notes = "Cerrado en software local y Seatbelt macOS (commit 0ab036d0): (1) McpCapabilityBroker::commit_once consume el nonce del token en memoria de un solo uso y rechaza replay inmediato (token_replay_window = 0 tras commit_once, mientras la ventana previa de validez de una aprobación firmada no consumida es de 300 s en VerificationGate); (2) McpLifecycleManager::detonate_mcp canaliza el borrado del script efímero a través de cuarentena atómica EffectTx (RENAME_EXCL/RENAME_NOREPLACE + sync_all) cuando la librería nativa está activa y reutiliza SAVEPOINT sobre causal_gate.db bajo EffectDispatcher; (3) tests/test_claim_mcp_006_lifecycle.py verifica persistencia post-SIGKILL de consumed_mcp_effects (SQLite WAL synchronous=FULL), rechazo O12 y confinamiento Seatbelt macOS. Permanece en VERIFIED_LOCAL (y babylon.toml en state='candidate') porque las pruebas automatizadas usan claves P-256 efímeras software, Seatbelt es específico de macOS y los recibos hardware Touch ID en docs/security/evidence/ quedan excluidos de la proyección pública."
 
 [invariants.kernel_ledger_and_sqlite_hygiene]
 claim_id = "CLAIM-L0-007"
-status = "ATTESTED_IN_SILICON"
-summary = "Escrituras atómicas por archivo, procedencia durable en recuperación, commits atómicos en consenso LARSA, idempotencia del ledger y cierre determinista de conexiones SQLite en CORTEX tras consultas o fallos."
-enforced_by = ["INV_BFT_04", "BftCollisionError", "L0_WAL_ATOMIC"]
+status = "VERIFIED"
+summary = "Superficie de pánico nula en fronteras Rust C-ABI/PyO3 (ffi_panic_surface == 0 sobre 66 puntos de entrada y helpers transitivos), cero fugas de descriptores OS SQLite bajo gc.disable() en /dev/fd (/proc/self/fd), escrituras atómicas por archivo en CortexOntologyLedger, idempotencia y rollback de lote en CortexPersistLedger y commit atómico en BFT_Committer."
+enforced_by = ["CortexPersistLedger", "VerificationGate", "audit_ffi_and_sqlite_hygiene"]
 ffi_panic_surface = 0
 sqlite_descriptor_leaks = 0
+evidence_suite = "python3 scripts/c5_quality_gates/audit_ffi_and_sqlite_hygiene.py && uv run --locked pytest tests/test_claim_l0_007_hygiene.py tests/test_local_core_cortex_connections.py tests/test_database_config_cleanup.py -q"
 required_for_release = true
 evidence_level = "L2_IMPLEMENTATION"
 component = "01_KISH_ENGINE"
+reviewed = "2026-11-16"
+notes = "Verificado mediante compuerta determinista (commit 2ae66432): scripts/c5_quality_gates/audit_ffi_and_sqlite_hygiene.py audita estáticamente las 66 funciones extern 'C'/'system', #[pyfunction], #[pymethods] y sus callees transitivos en los 199 archivos Rust de producción (ffi_panic_surface = 0) y mide directamente la tabla de descriptores del SO (/dev/fd o /proc/self/fd) con gc.disable() en 5 escenarios de consulta, escritura, colisión y fallo PRAGMA/authorizer (sqlite_descriptor_leaks = 0). Alcance delimitado: escrituras atómicas por archivo en CortexOntologyLedger (sin transacción multi-archivo), rechazo de colisiones de lote con ValueError en CortexPersistLedger (mientras BftCollisionError es el tipo equivalente en strike-rs), y commit SQLite atómico en BFT_Committer (distinto del quórum en memoria src/larsa_bft.rs)."
 
 [invariants.lean4_observable_harness]
 claim_id = "CLAIM-FORMAL-008"
@@ -312,10 +354,14 @@ component = "proof/lean"
 
 [invariants.semantic_entropy_and_solver]
 claim_id = "CLAIM-RING1-009"
-status = "ATTESTED_IN_SILICON"
-summary = "Estabilidad numérica determinista y convergencia acotada en motores semantic_entropy y semantic_solver bajo arnés adversarial NEMESIS."
-enforced_by = [".babylon60rules", "KudurruBudgetGate"]
-adversarial_suite = "tests/nemesis_wave*"
+status = "VERIFIED"
+summary = "Estabilidad numérica determinista en punto fijo Q16 (error máximo <= 1.90 ULP, cero inversiones de umbral o monotonía en las 5.295 particiones de Bell) y terminación/mediación fail-closed de Z3Adapter y ReplayJournal bajo campaña adversarial NEMESIS de 6 vectores y modelo Lean 4 sin axiomas."
+enforced_by = ["BitmaskSemanticKernel", "Z3Adapter", "ReplayJournal"]
+adversarial_suite = "cargo test --locked -p babylon60-compiler --release --test nemesis_ring1_entropy_solver"
+engine_suites = "cargo test --locked -p babylon60-kernel --release --test semantic_entropy_regressions --test semantic_solver_outcomes --test stress_semantic_entropy_100k && cargo test --locked -p babylon60-compiler --release --test semantic_solver_adapter --test solver_trust --test nemesis_ring1_entropy_solver"
+evidence_suite = "uv run --locked python3 scripts/c5_quality_gates/audit_ring1_entropy_solver.py && uv run --locked pytest tests/test_claim_ring1_009_entropy_solver.py -q"
 required_for_release = true
 evidence_level = "L4_EXPERIMENTAL"
 component = "00_ABZU_KERNEL"
+reviewed = "2026-11-16"
+notes = "Verificado mediante compuerta determinista (commit 05febb6f): (1) BitmaskSemanticKernel usa aritmética entera Q16 en no_std (1 <= n <= 8) con error máximo de cuantización de 1.897553 ULP (2.895e-5 bits), margen mínimo de 0.01312 bits sobre TAU_SEM_Q16 = 55706 (0.85 bits), 0 discrepancias de clasificación y monotonía estricta en los 34.193 pares de refinamiento de las 5.295 particiones de Bell, además de 100.000 evaluaciones multihilo en --release; (2) tests/nemesis_ring1_entropy_solver.rs verifica con testigos físicos rechazo exhaustivo 4x4 (65.521 relaciones inválidas), bloqueo pre-spawn de inyección SMT-LIB2, snapshot inmutable ante sustitución TOCTOU, muerte de subproceso colgado sin residuos temporales y consumo único concurrente en ReplayJournal; (3) Lean 4 verifica sin axiomas la correspondencia de umbrales/códigos, y cuando está presente el binario Z3 4.15.4 fijado por BLAKE3 se ejecutan los 11 casos reales (rlimit=1 -> SolverUnknown, 0xDEAD_6060, 0xDEAD_6061). No se reclama cota de tiempo real duro de planificación del SO ni verdad factual externa de las fórmulas."

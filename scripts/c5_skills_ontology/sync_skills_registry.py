@@ -145,7 +145,6 @@ SKILL_TIER_MAPPING: Dict[str, Dict[str, Any]] = {
     "writing-for-agents": {"tier": 16500, "category": "Utilities", "canonical_alias": "swarm-m2m-writer"},
     "youtube-analysis-pipeline": {"tier": 16400, "category": "Operations", "canonical_alias": "secops-youtube-auditor"},
     "djstudio-mcp": {"tier": 16200, "category": "Operations", "canonical_alias": "media-djstudio-mixer", "display_name": "Controlador DSP & Playlist Mixer DJ.Studio MCP"},
-    "kimi-mcp-orchestrator": {"tier": 16000, "category": "Operations", "canonical_alias": "swarm-kimi-orchestrator"},
     "cloudflare-mcp-usage": {"tier": 15800, "category": "Operations", "canonical_alias": "secops-cloudflare-edge"},
     "opentimestamps-l5-diagnostics": {"tier": 15000, "category": "Diagnostics", "canonical_alias": "kernel-ots-timestamp"},
     "electron-mac-bundle-collision-diagnostics": {"tier": 14800, "category": "Diagnostics", "canonical_alias": "secops-electron-crash-diag"},

@@ -12,7 +12,7 @@ import subprocess
 from pathlib import Path
 from typing import Any
 
-ROOT_DIR = Path(__file__).resolve().parent.parent.parent
+ROOT_DIR = Path(__file__).absolute().parent.parent.parent
 
 def check_python_distribution() -> dict[str, Any]:
     result: dict[str, Any] = {"status": "PASS", "details": [], "artifacts": []}

@@ -42,7 +42,7 @@ La falta de evidencia deja una propiedad como `NO_VERIFICADO`; no autoriza a omi
 - **Invariante Mimético DEC & Consenso LARSA-120 (INV_C5_DEC_MIMETIC):** Para implementaciones DEC/LARSA, verificar nilpotencia exacta a nivel de bit ($d_1 \circ d_0 \equiv 0$) y campos solenoidalmente exactos con representación y dominio explícitos.
 - **Invariantes C6-ABSOLUTE (Metrología y Dark Swarms):** Referencias de diseño: binarios empaquetados (*Proof of Exergy*), CTRE y memoria FBIP (*Functional But In-Place*). Antes de alegar estas propiedades, definir protocolo, significado de UNSAT y casos de aceptación; los nombres no son métricas ni obligaciones para tareas ajenas.
 - **Aniquilación Afín en Canales de Memoria Compartida (INV_C5_MMAP_AFFINE_ANNIHILATION):** Todo puente C-ABI sobre `mmap` (`SeqlockSwarmChannel`, `SharedManifest`) DEBE liberar vistas `ctypes` (`close()`, `__exit__`) antes de cerrar `mmap` (evitando `BufferError` en Python 3.14+).
-- **Gate Canónico de 3 Estratos de Entropía en CI (INV_C5_ENTROPY_3STRATA_GATE):** En cambios de fuentes de entropía, datasets o calidad KISH, ejecutar `scripts/c5_quality_gates/audit_entropy_3strata.py` y contrastar sus resultados con los objetivos declarados: (1) pureza TRNG $\ge 99.95\%$; (2) cero clones Jaccard $J \ge 0.75$; (3) cero slop en KISH ($\Omega_{17}$). Registrar muestra, método y definición de cada métrica; el resultado del script no certifica por sí solo pureza física de una fuente TRNG.
+- **Gate Canónico de 3 Estratos de Entropía en CI (INV_C5_ENTROPY_3STRATA_GATE):** En cambios de fuentes de entropía, datasets o calidad KISH, ejecutar `scripts/c5_quality_gates/audit_entropy_3strata.py` y contrastar sus resultados con los objetivos declarados: (1) pureza TRNG $\ge 99.95\%$; (2) cero clones Jaccard $J \ge 0.85$ fuera de `scratch/`, `experiments/`, `docs/04_audit/data_rooms/`, `docs/security/evidence/` y `tools/skills/`; (3) cero slop en KISH ($\Omega_{17}$). Registrar muestra, método y definición de cada métrica; el resultado del script no certifica por sí solo pureza física de una fuente TRNG.
 - **Invariante de Táctica Presburger en Lean 4 Core (INV_C5_LEAN4_OMEGA_UNFOLD):** En Lean 4 Core (`omega`), emitir `unfold <def>` antes de `omega` para funciones de paso/paridad (`seqlock_write_begin`, `de_bruijn_step`).
 - **Confinamiento de Rutas en Entornos con Symlinks (INV_C5_PATH_SYMLINK_CONFINEMENT):** Prohibido `Path.resolve()` para determinar la raíz dinámica sobre árboles con symlinks; usar `Path.absolute()` preservando la jerarquía lógica.
 - **Invariante de Persistencia WAL Anti-Amnesia BFT (INV_C5_WAL_SYNCHRONOUS_FULL):** Todo ledger transaccional o persistencia de consenso (SQLite WAL, WORM) DEBE fijar `PRAGMA synchronous = FULL` o `fsync`/`sync_all` (prohibido `NORMAL` u `OFF`).
@@ -120,11 +120,24 @@ La falta de evidencia deja una propiedad como `NO_VERIFICADO`; no autoriza a omi
 - **Invariante de Transducción Vocal (INV_VOICE_STT):** Rollback atómico en correcciones de dictado sin disculpas.
 - **Invariante de Termodinámica Artística y Literaria:** La perspectiva termodinámica es una opción creativa solicitada. Evaluar textos por el encargo y sus fuentes; las metáforas no son leyes físicas ni requieren una formalización matemática.
 - **Invariantes de Manipulación Topológica y Shell Hazards:** Prohibido leer/escribir el mismo archivo en un *one-liner* y prohibidos imports con prefijo numérico (`from 01_ORCHESTRATOR...`).
+- **Invariante de Desacoplamiento Prompt-Runtime (INV_C5_PROMPT_RUNTIME_SPLIT):** La capa de prompt del hipervisor (`MOSKV1_UNIVERSAL_PROMPT.md`) se confina estrictamente a invariantes cognitivas, asimetría postcondicional y ergonomía de canal ($\le 40$ líneas). Queda prohibido inyectar en prompts tareas de validación criptográfica, parsing de lockfiles o mediación de seguridad; todo control de acceso, verificación de digest y prevención TOCTOU es responsabilidad exclusiva del runtime de Anillo-0 (`scripts/guards/c5_complete_mediation_gate.py`).
 - **Delimitación Regulatoria y Fricción Cognitiva (INV_C5_EVIDENTIARY_DELIMITATION & INV_C5_COGNITIVE_FRICTION):** En expedientes técnicos (Anexo IV EU AI Act), los recibos Merkle/SCITT L5 y BFT se confinan al cumplimiento de los Artículos 12 (trazabilidad y registro) y 15 (ciberseguridad y resiliencia); prohibido alegar automatización de los Artículos 9, 10 y 14. En interfaces para decisiones de alto riesgo, el kernel impone retardo cognitivo fisiológico ($\Delta t \ge \tau_{\min}$) y firma de compromiso contrafactual contra el sesgo de automatización (*automation bias*). Detalle en [Matriz de Falsación](../01_spec/INVARIANTS_RED_TEAM_FALSIFICATION.md#4-cumplimiento-regulatorio-eu-ai-act-arts-9-14-vs-scitt--merkle-l5).
 
 ## Topología del runtime
 
 Los componentes siguientes definen responsabilidades, no un inventario certificado. Comprobar su ejecución antes de comunicar estado operativo.
+
+> **Nota sobre terminología de anillos (TD-RING0-002):** Este documento usa el
+> término "Ring-N" en dos contextos distintos que no son intercambiables:
+>
+> 1. **Taxonomía de confinamiento / ejecución** (secciones Ring-0 a Ring-3 anteriores):
+>    Ring-0 = Rust hot-path C-ABI lock-free; Ring-1 = Lean 4 / Z3 formal;
+>    Ring-2 = CI / batch / amortización; Ring-3 = UI / docs / salida.
+> 2. **Taxonomía organizacional de módulos** (subsecciones siguientes):
+>    Ring-0 = `00_ABZU_KERNEL / abzu.kernel`; Ring-1 = `01_KISH_ENGINE / kish.engine`;
+>    Ring-2 = `02_EDIN_SWARMS / edin.swarms`.
+>
+> Ambas taxonomías son coherentes en su dominio. No son intercambiables entre secciones.
 
 ### Ring-0 — 00_ABZU_KERNEL / abzu.kernel
 

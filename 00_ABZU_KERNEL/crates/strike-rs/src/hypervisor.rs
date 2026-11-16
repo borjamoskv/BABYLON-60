@@ -299,6 +299,12 @@ impl WriterIdleBackoff {
     }
 }
 
+/// Extrae el paquete de un sobre IPC. `len` procede de memoria compartida: no se confía
+/// en él y se valida contra la capacidad del búfer antes de cortar (C0091).
+fn unpack_envelope(env: &IpcEnvelope) -> Option<ExergyPacket> {
+    env.data.get(..env.len).and_then(|raw| ExergyPacket::unpack(raw).ok())
+}
+
 /// Spawn an owned writer with interruptible adaptive polling.
 pub fn spawn_writer_daemon(hypervisor: Arc<SwarmHypervisor>, service_name_str: &str, stop_signal: Arc<AtomicBool>, max_events: Option<usize>) -> WriterDaemonHandle {
     let service_name_str = service_name_str.to_string();
@@ -338,7 +344,7 @@ pub fn spawn_writer_daemon(hypervisor: Arc<SwarmHypervisor>, service_name_str: &
                 Ok(Some(sample)) => {
                     backoff.reset();
                     let env = &*sample;
-                    if let Ok(unpacked) = ExergyPacket::unpack(&env.data[..env.len]) {
+                    if let Some(unpacked) = unpack_envelope(env) {
                         let tenant_id = &unpacked.sender;
                         let seq = unpacked.lamport_t;
                         
@@ -391,6 +397,20 @@ mod tests {
         });
         ready_rx.recv_timeout(Duration::from_secs(2)).unwrap();
         (WriterDaemonHandle { stop_signal, worker: Some(worker) }, exit_rx)
+    }
+
+    #[test]
+    fn unpack_envelope_rejects_len_beyond_capacity_without_panic() {
+        let env = IpcEnvelope { len: 9000, data: [0u8; 8192] };
+        assert!(unpack_envelope(&env).is_none());
+        let env = IpcEnvelope { len: usize::MAX, data: [0u8; 8192] };
+        assert!(unpack_envelope(&env).is_none());
+    }
+
+    #[test]
+    fn unpack_envelope_rejects_invalid_payload() {
+        let env = IpcEnvelope { len: 4, data: [0u8; 8192] };
+        assert!(unpack_envelope(&env).is_none());
     }
 
     #[test]

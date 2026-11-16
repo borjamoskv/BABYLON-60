@@ -5,17 +5,28 @@ set -euo pipefail
 DRY_RUN=0
 START_MCP=0
 CLIENT=''
+PROFILE='terminal-mcp'
 while [ "$#" -gt 0 ]; do
     case "$1" in
         --dry-run) DRY_RUN=1; shift ;;
         --mcp) START_MCP=1; shift ;;
+        --profile)
+            if [ "$#" -lt 2 ] || [ "$2" != terminal-mcp ]; then
+                echo 'Expected --profile terminal-mcp.' >&2; exit 2
+            fi
+            PROFILE="$2"; shift 2 ;;
+        --profile=*)
+            if [ "${1#--profile=}" != terminal-mcp ]; then
+                echo 'Expected --profile terminal-mcp.' >&2; exit 2
+            fi
+            PROFILE="${1#--profile=}"; shift ;;
         --client)
             if [ "$#" -lt 2 ] || [ "$2" != codex ]; then
                 echo 'Expected --client codex.' >&2; exit 2
             fi
             CLIENT="$2"; shift 2 ;;
         --help|-h)
-            echo 'Usage: bash install.sh [--dry-run] [--client codex | --mcp]'
+            echo 'Usage: bash install.sh [--dry-run] [--profile terminal-mcp] [--client codex | --mcp]'
             echo 'Installs the terminal CLI; --client codex activates Codex; --mcp starts the stdio memory server.'
             exit 0 ;;
         *) echo "Unknown option: $1" >&2; exit 2 ;;

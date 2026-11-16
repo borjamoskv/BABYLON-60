@@ -1,0 +1,437 @@
+- generic [active] [ref=e1]:
+  - link "Saltar al contenido" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=e3]:
+    - checkbox "Abrir o cerrar menú de navegación" [ref=e4]
+    - generic [ref=e5]:
+      - link "BABYLON Home" [ref=e6] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e7]: BABYLON
+      - navigation "Navegación principal" [ref=e8]:
+        - link "AI ACT" [ref=e9] [cursor=pointer]:
+          - /url: /eu-ai-act/
+        - link "CORTEX" [ref=e10] [cursor=pointer]:
+          - /url: /cortex/
+        - link "GUARD" [ref=e11] [cursor=pointer]:
+          - /url: /babylon/
+        - link "ENTERPRISE" [ref=e12] [cursor=pointer]:
+          - /url: /enterprise/
+        - link "PRUEBAS Y LÍMITES" [ref=e13] [cursor=pointer]:
+          - /url: /pruebas-y-limites/
+        - link "RESEARCH" [ref=e14] [cursor=pointer]:
+          - /url: /research/
+        - link "BLOG" [ref=e15] [cursor=pointer]:
+          - /url: /blog/
+        - link "DOCS" [ref=e16] [cursor=pointer]:
+          - /url: /documentacion/
+      - generic [ref=e17]:
+        - link "SOLICITAR ACCESO" [ref=e18] [cursor=pointer]:
+          - /url: /cortex/
+        - link "Cambiar a EN" [ref=e19] [cursor=pointer]:
+          - /url: /en/
+          - generic [ref=e20]: EN
+  - main [ref=e21]:
+    - generic [ref=e23]:
+      - generic [ref=e24]:
+        - generic [ref=e25]: BABYLON
+        - heading "Recupera tu contexto. Controla a tus agentes." [level=1] [ref=e26]
+        - paragraph [ref=e27]: Memoria para recuperar contexto y controles de autorización para las acciones de tus agentes. Consulta qué está probado y con qué límites.
+        - generic [ref=e28]:
+          - link "SOLICITAR ACCESO ANTICIPADO" [ref=e29] [cursor=pointer]:
+            - /url: /cortex/
+          - link "EXPLORAR BABYLON GUARD" [ref=e30] [cursor=pointer]:
+            - /url: /babylon/
+      - figure [aria-hidden] [ref=e31]:
+        - generic [ref=e32]: BABYLON—60 / MEMORIA · CONTROL
+      - generic [ref=e33]:
+        - generic [ref=e34]:
+          - generic [ref=e35]: 01 · ¿QUÉ CONECTAS?
+          - paragraph [ref=e36]: Tus herramientas y agentes existentes (Claude Code, Cursor, MCP servers, scripts de desarrollo o pipelines locales). Cero cambios en tus modelos.
+        - generic [ref=e37]:
+          - generic [ref=e38]: 02 · ¿QUÉ OBTIENES?
+          - paragraph [ref=e39]: Memoria CORTEX (las IAs recuerdan tu contexto) + Controles BABYLON Guard + Registros de ejecución y verificación NEMESIS, sujetos al alcance de las pruebas.
+        - generic [ref=e40]:
+          - generic [ref=e41]: 03 · ¿CUÁNTO ESFUERZO?
+          - paragraph [ref=e42]: Un único binario en Rust. Todo corre en tu máquina (Local-First). Sin enviar tu código a la nube, sin bases de datos externas de terceros y sin suscripciones forzosas.
+      - generic [ref=e43]:
+        - generic [ref=e44]:
+          - generic [ref=e46]: "SOURCE SNAPSHOT:"
+          - generic [ref=e47]: 8add5b8384+dirty
+        - generic [ref=e48]:
+          - generic [ref=e49]: "CLAIMS AUDITED:"
+          - generic [ref=e50]: 9/28
+        - generic [ref=e51]:
+          - generic [ref=e52]: "INVARIANTS:"
+          - generic [ref=e53]: 6 FORMAL
+        - generic [ref=e54]:
+          - generic [ref=e55]: "CLIENT JS:"
+          - generic [ref=e56]: 0 KB
+    - region [ref=e57]:
+      - generic [ref=e58]:
+        - generic [ref=e59]:
+          - text: EU AI ACT · GOBERNANZA CON EVIDENCIA
+          - heading "Tu IA actúa. Tu empresa responde." [level=2] [ref=e60]
+          - paragraph [ref=e61]: El Reglamento Europeo de IA pone el foco en el uso, el riesgo y la responsabilidad. Conoce las obligaciones que pueden aplicarte y los controles que BABYLON documenta para apoyar tu trabajo.
+          - generic [ref=e62]:
+            - link "Explorar el AI Act →" [ref=e63] [cursor=pointer]:
+              - /url: /eu-ai-act/
+            - link "Ver pruebas y límites" [ref=e64] [cursor=pointer]:
+              - /url: /pruebas-y-limites/
+          - paragraph [ref=e65]: Los controles técnicos apoyan la evaluación. No certifican por sí solos el cumplimiento.
+        - list [ref=e66]:
+          - listitem [ref=e67]:
+            - strong [ref=e68]: Supervisión humana
+            - text: Quién autoriza, quién puede intervenir y qué efecto se observa.
+          - listitem [ref=e69]:
+            - strong [ref=e70]: Trazabilidad
+            - text: Conectar decisiones, autorizaciones y resultados con evidencia.
+          - listitem [ref=e71]:
+            - strong [ref=e72]: Gestión del riesgo
+            - text: Evaluar el uso concreto, sus límites y sus responsables.
+    - generic [ref=e75]:
+      - generic [ref=e76]:
+        - generic [ref=e77]: REMEMBER · CORTEX
+        - heading "Encuentra lo que olvidaste." [level=2] [ref=e78]
+        - paragraph [ref=e79]: Recupera ideas valiosas sepultadas a lo largo de años de conversaciones, notas y proyectos.
+        - link "Ver arquitectura y solicitar acceso →" [ref=e81] [cursor=pointer]:
+          - /url: /cortex/
+      - generic [ref=e83]:
+        - generic [ref=e84]: CASO ILUSTRATIVO · TRAZA EN MONOREPO LOCAL
+        - generic [ref=e86]:
+          - generic [ref=e87]: ✦
+          - generic [ref=e88]: CASO ILUSTRATIVO · CORTEX HA ENCONTRADO ESTO
+        - blockquote [ref=e90]: «Los agentes de IA deberían requerir autorización explícita antes de modificar o eliminar archivos.»
+        - generic [ref=e91]:
+          - generic [ref=e92]:
+            - generic [ref=e93]: VISTO POR PRIMERA VEZ
+            - text: 12 Oct 2025
+          - generic [ref=e94]:
+            - generic [ref=e95]: LATENTE DURANTE
+            - text: 311 días
+          - generic [ref=e96]:
+            - generic [ref=e97]: CONECTADO AHORA A
+            - text: BABYLON Effect Broker
+        - generic [ref=e98]:
+          - generic [ref=e99]:
+            - generic [ref=e100]: FUENTE PRIMARIA VERIFICADA ✓
+            - generic [ref=e101]: sha256:4a8b9f...2d1e
+          - generic [ref=e102]:
+            - button "ABRIR ORIGINAL (ejemplo)" [disabled] [ref=e103]
+            - button "REABRIR IDEA (ejemplo)" [disabled] [ref=e104]
+        - paragraph [ref=e105]: Demostración estática. En el sistema real, enlaza con el SourceRecord inmutable sellado por SHA3-256.
+    - generic [ref=e108]:
+      - generic [ref=e110]:
+        - generic [ref=e111]: CASO ILUSTRATIVO · CAPTURA EN APFS LOCAL
+        - generic [ref=e113]:
+          - generic [ref=e114]: 🛡
+          - generic [ref=e115]: CASO ILUSTRATIVO · INTERCEPCIÓN EN APFS LOCAL
+        - generic [ref=e117]:
+          - generic [ref=e118]: AI
+          - generic [ref=e119]:
+            - generic [ref=e120]: AGENTE
+            - text: "Claude 3.7 Sonnet (Task #4829)"
+        - generic [ref=e121]:
+          - generic [ref=e122]:
+            - generic [ref=e123]: "ACCIÓN SOLICITADA:"
+            - generic [ref=e124]: ELIMINAR 234 ARCHIVOS
+          - generic [ref=e125]: DIRECTORIO:~/Projects/
+        - generic [ref=e126]:
+          - generic [ref=e127]:
+            - generic [ref=e128]: "MOTIVO DECLARADO POR EL MODELO:"
+            - generic [ref=e129]: «Limpieza de archivos temporales de compilación»
+          - generic [ref=e130]:
+            - generic [ref=e131]: "NIVEL DE RIESGO:"
+            - generic [ref=e132]: CRÍTICO · Mutación irreversible en sistema de archivos
+          - generic [ref=e133]:
+            - generic [ref=e134]: "REGLA DISPARADA:"
+            - generic [ref=e135]: Policy.RequireApprovalOnWildcardDelete
+        - generic [ref=e136]:
+          - button "✕ BLOQUEAR (ejemplo)" [disabled] [ref=e137]
+          - button "✓ PERMITIR (ejemplo)" [disabled] [ref=e138]
+        - paragraph [ref=e139]: Demostración estática de intercepción de mutación destructiva antes de tocar el sistema de archivos.
+      - generic [ref=e140]:
+        - generic [ref=e141]: CONTROL · BABYLON GUARD
+        - heading "Deja trabajar a la IA. Pero mantén tú el volante." [level=2] [ref=e142]
+        - paragraph [ref=e143]: BABYLON documenta controles para autorizar acciones sobre recursos protegidos. Su cobertura depende de la integración y de la configuración; consulta la evidencia y las rutas aún no verificadas.
+        - link "Explorar arquitectura de BABYLON Guard →" [ref=e145] [cursor=pointer]:
+          - /url: /babylon/
+    - generic [ref=e147]:
+      - generic [ref=e148]:
+        - generic [ref=e149]: VERIFY · NEMESIS
+        - heading "No pidas promesas. Exige pruebas matemáticas." [level=2] [ref=e150]
+        - paragraph [ref=e151]: Consulta los resultados de pruebas adversariales, su alcance y las divergencias documentadas. Cada conclusión se limita a la evidencia y al entorno evaluados.
+      - generic [ref=e152]:
+        - generic [ref=e153]:
+          - generic [ref=e154]: "01"
+          - heading "Pruebas Formales" [level=3] [ref=e155]
+          - paragraph [ref=e156]: Lean comprueba propiedades del modelo de autorización. Su alcance no certifica por sí solo el ejecutor.
+        - generic [ref=e157]:
+          - generic [ref=e158]: "02"
+          - heading "Pruebas Concurrentes" [level=3] [ref=e159]
+          - paragraph [ref=e160]: El arnés busca carreras y escapes dentro del sistema de archivos y el modelo de amenazas evaluados.
+        - generic [ref=e161]:
+          - generic [ref=e162]: "03"
+          - heading "Recuperación Evaluada" [level=3] [ref=e163]
+          - paragraph [ref=e164]: Las pruebas distinguen la muerte de proceso mediante SIGKILL de un corte de alimentación.
+        - generic [ref=e165]:
+          - generic [ref=e166]: "04"
+          - heading "Autorización Vinculada" [level=3] [ref=e167]
+          - paragraph [ref=e168]: Las firmas vinculan la solicitud completa; el verificador rechaza alteraciones y reutilización de nonces.
+        - generic [ref=e169]:
+          - generic [ref=e170]: "05"
+          - heading "Verificación Independiente" [level=3] [ref=e171]
+          - paragraph [ref=e172]: Descarga AX0, los manifiestos y los informes desde Documentación. Reproducir el runtime requiere la revisión y el entorno correspondientes.
+      - link "Ver pruebas, invariantes y divergencias documentadas →" [ref=e174] [cursor=pointer]:
+        - /url: /pruebas-y-limites/
+    - generic [ref=e176]:
+      - generic [ref=e177]:
+        - generic [ref=e178]: ARQUETIPO CLI TUI · CAPTURA EN SILICIO
+        - heading "Observabilidad en Terminal con babylon top" [level=2] [ref=e179]
+        - paragraph [ref=e180]: "Proyección de muestra basada en una captura estática de la interfaz TUI ejecutada en un harness local (Darwin arm64 sobre APFS):"
+      - generic [ref=e181]:
+        - generic [ref=e182]:
+          - generic [ref=e187]: babylon top — silicon-specimen (Darwin arm64 · APFS local harness) — 120x34
+          - generic [ref=e188]:
+            - generic [ref=e189]: ● CAPTURA ESTÁTICA
+            - generic [ref=e190]: HARNESS APFS LOCAL
+        - generic [ref=e191]:
+          - generic [ref=e192]:
+            - generic [ref=e193]:
+              - generic [ref=e194]: "[01 · CORTEX · REMEMBER]"
+              - generic [ref=e195]: LATENT IDEA THREADS & SOURCE PROVENANCE
+            - generic [ref=e196]:
+              - generic [ref=e197]:
+                - generic [ref=e198]: THREAD ID
+                - generic [ref=e199]: STATE
+                - generic [ref=e200]: DORMANT
+                - generic [ref=e201]: SOURCE RECORD (SHA-256)
+                - generic [ref=e202]: EXERGY
+              - generic [ref=e203]:
+                - generic [ref=e204]: th-0482-auth
+                - generic [ref=e205]: RESURRECTED
+                - generic [ref=e206]: 311d
+                - generic [ref=e207]: sha256:7f9a12c4...e810
+                - generic [ref=e208]: "0.942"
+              - generic [ref=e209]:
+                - generic [ref=e210]: th-0391-cache
+                - generic [ref=e211]: DORMANT
+                - generic [ref=e212]: 184d
+                - generic [ref=e213]: sha256:4b281f9a...02cd
+                - generic [ref=e214]: "0.812"
+              - generic [ref=e215]:
+                - generic [ref=e216]: th-0219-seqlock
+                - generic [ref=e217]: DORMANT
+                - generic [ref=e218]: 92d
+                - generic [ref=e219]: sha256:88e011ac...55df
+                - generic [ref=e220]: "0.785"
+            - generic [ref=e221]: "TRUST BOUNDARY: Inference ⇎ Authority (Axiom O1/O2 enforced) · ProposalContext only"
+          - generic [ref=e222]:
+            - generic [ref=e223]:
+              - generic [ref=e224]: "[02 · BABYLON · CONTROL]"
+              - generic [ref=e225]: 7-TUPLE BROKER & CAUSAL RECEIPT PHASES
+            - generic [ref=e226]:
+              - generic [ref=e227]:
+                - generic [ref=e228]: EFFECT REQ
+                - generic [ref=e229]: AGENT / PRINCIPAL
+                - generic [ref=e230]: OPERATION & TARGET
+                - generic [ref=e231]: DECISION
+                - generic [ref=e232]: CAUSAL PHASE
+              - generic [ref=e233]:
+                - generic [ref=e234]: "#1042-mut"
+                - generic [ref=e235]: Claude-3.7 (p#4829)
+                - generic [ref=e236]: DELETE ~/Projects/*
+                - generic [ref=e237]: DENY (FAIL-CLOSED)
+                - generic [ref=e238]: ABORTED (Phase 01)
+              - generic [ref=e239]:
+                - generic [ref=e240]: "#1041-wrt"
+                - generic [ref=e241]: Agent-014 (p#4828)
+                - generic [ref=e242]: WRITE dist/assets/site.css
+                - generic [ref=e243]: ALLOW
+                - generic [ref=e244]: COMMITTED (COSE_Sign1)
+              - generic [ref=e245]:
+                - generic [ref=e246]: "#1040-ren"
+                - generic [ref=e247]: Agent-008 (p#4827)
+                - generic [ref=e248]: ATOMIC RENAME tmp/ledger.wal
+                - generic [ref=e249]: ALLOW
+                - generic [ref=e250]: COMMITTED (COSE_Sign1)
+            - generic [ref=e251]: "7-TUPLE: ⟨Authority, Capability, Policy, Resource, Effect, Context, Epoch⟩ · Quarantine: 0700 ATOMIC"
+          - generic [ref=e252]:
+            - generic [ref=e253]:
+              - generic [ref=e254]: "[03 · NEMESIS · VERIFY]"
+              - generic [ref=e255]: POPPERIAN FALSIFICATION & ADVERSARIAL CHALLENGES
+            - generic [ref=e256]:
+              - generic [ref=e257]:
+                - generic [ref=e258]: INVARIANT
+                - generic [ref=e259]: SAFETY SPECIFICATION
+                - generic [ref=e260]: FAULT MODEL PERTURBATION
+                - generic [ref=e261]: EVIDENCE
+                - generic [ref=e262]: STATUS
+              - generic [ref=e263]:
+                - generic [ref=e264]: NEM-I1
+                - generic [ref=e265]: Capability Gating
+                - generic [ref=e266]: Unauthorized wildcard dispatch
+                - generic [ref=e267]: 0/10,000 leaks
+                - generic [ref=e268]: SUPPORTED
+              - generic [ref=e269]:
+                - generic [ref=e270]: NEM-I2
+                - generic [ref=e271]: Atomic Quarantine
+                - generic [ref=e272]: Concurrent TOCTOU race injections
+                - generic [ref=e273]: Zero escape
+                - generic [ref=e274]: SUPPORTED
+              - generic [ref=e275]:
+                - generic [ref=e276]: NEM-I4
+                - generic [ref=e277]: Crash Atomicity
+                - generic [ref=e278]: SIGKILL_SIMULATED (harness APFS)
+                - generic [ref=e279]: WAL determinista
+                - generic [ref=e280]: SUPPORTED (SIMULADO)
+            - generic [ref=e281]: "ATTESTATION: Evidence binds [Assertion + Artifact + Environment + Time] · Hash verified in local harness"
+        - generic [ref=e282]:
+          - generic [ref=e283]: ▲ AVISO DE DEMARCACIÓN EMPÍRICA
+          - paragraph [ref=e284]: "Aviso de demarcación empírica: Esta vista es una captura estática del arquetipo TUI babylon top sobre un arnés de pruebas local (macOS Darwin arm64 APFS). No constituye un stream en vivo remoto. En la versión actual, las 6 invariantes figuran en estado STALE al requerir atestación criptográfica continua en pipeline. Consulta la matriz de límites en Pruebas y Límites."
+    - generic [ref=e286]:
+      - generic [ref=e287]:
+        - generic [ref=e288]: ARQUITECTURA TEMPORAL CAUSAL
+        - heading "Pasado, Presente y Futuro" [level=2] [ref=e289]
+        - paragraph [ref=e290]: "Cómo se coordinan los tres dominios alrededor del ciclo de vida del agente:"
+      - generic [ref=e292]:
+        - generic [ref=e293]:
+          - generic [ref=e294]:
+            - generic [ref=e295]:
+              - generic [ref=e296]: PASADO
+              - generic [ref=e297]: O1 · LP(x) SHA3-256
+            - heading "CORTEX" [level=3] [ref=e298]
+            - paragraph [ref=e299]: CORTEX · Recuperar contexto y decisiones
+            - generic [ref=e300]: ProposalContext ──►
+          - generic [ref=e301]: TRUST BOUNDARY
+          - generic [ref=e303]:
+            - generic [ref=e304]:
+              - generic [ref=e305]: FUTURO
+              - generic [ref=e306]: AX-0 · 7-TUPLE
+            - heading "BABYLON" [level=3] [ref=e307]
+            - paragraph [ref=e308]: BABYLON · Delimitar y gobernar efectos
+            - generic [ref=e309]: ◄── EffectBroker
+        - generic [ref=e310]:
+          - generic [ref=e312]:
+            - generic [ref=e314]: AGENTE DE IA
+            - generic [ref=e315]: Claude · Codex · Gemini · Autonomous Swarms
+          - generic [ref=e316]: EVIDENCIA EMPÍRICA EN SILICIO
+        - generic [ref=e321]:
+          - generic [ref=e322]:
+            - generic [ref=e323]: EVIDENCE & ASSURANCE
+            - generic [ref=e324]: O8/O9 · COSE_Sign1
+          - heading "NEMESIS" [level=3] [ref=e325]
+          - paragraph [ref=e326]: NEMESIS · Aseguramiento Popperiano
+          - generic [ref=e327]:
+            - generic [ref=e328]: "[NEM-I1] Capability Gating"
+            - generic [ref=e329]: "[NEM-I2] Atomic Quarantine"
+            - generic [ref=e330]: "[NEM-I3] Path Oblivion"
+            - generic [ref=e331]: "[NEM-I4] Crash Atomicity"
+    - generic [ref=e333]:
+      - generic [ref=e334]:
+        - generic [ref=e335]: UNDER THE HOOD · EL SUSTRATO DE ALTA EXERGÍA
+        - heading "La Maquinaria en Silicio Debajo del Producto" [level=2] [ref=e336]
+        - paragraph [ref=e337]: "No hay magia estocástica: cada interacción está acoplada a primitivas deterministas de hardware, criptografía y teoría de sistemas:"
+      - generic [ref=e338]:
+        - generic [ref=e339]:
+          - generic [ref=e340]:
+            - generic [ref=e341]: "01"
+            - generic [ref=e342]: SUBSTRATE
+          - heading "C5-REAL Substrate" [level=3] [ref=e343]
+          - paragraph [ref=e344]: Frontera de Landauer y métrica de Chentsov como marco teórico. Diseño Zero-Copy / APFS CoW para evitar copias de memoria innecesarias; el coste energético no está medido.
+        - generic [ref=e345]:
+          - generic [ref=e346]:
+            - generic [ref=e347]: "02"
+            - generic [ref=e348]: SUBSTRATE
+          - heading "WORM Ledger" [level=3] [ref=e349]
+          - paragraph [ref=e350]: Libro inmutable de un solo escritor (Single-Writer SQLite WAL) con Merkle Mountain Ranges para verificación O(log N).
+        - generic [ref=e351]:
+          - generic [ref=e352]:
+            - generic [ref=e353]: "03"
+            - generic [ref=e354]: SUBSTRATE
+          - heading "Effect Broker & 7-Tupla" [level=3] [ref=e355]
+          - paragraph [ref=e356]: Toda mutación evalúa deterministamente ⟨Authority, Capability, Policy, Resource, Effect, Context, Epoch⟩.
+        - generic [ref=e357]:
+          - generic [ref=e358]:
+            - generic [ref=e359]: "04"
+            - generic [ref=e360]: SUBSTRATE
+          - heading "Hardware Touch ID Gate" [level=3] [ref=e361]
+          - paragraph [ref=e362]: Verificación NIST P-256 de intención CBOR y nonce en SQLite WAL/FULL, probada con claves software efímeras. Touch ID / Secure Enclave, con reutilización cero, requiere aprovisionamiento nativo y verificación de presencia humana.
+        - generic [ref=e363]:
+          - generic [ref=e364]:
+            - generic [ref=e365]: "05"
+            - generic [ref=e366]: SUBSTRATE
+          - heading "Falsación Popperiana NEMESIS" [level=3] [ref=e367]
+          - paragraph [ref=e368]: Aserciones sometidas a modelos de fallo adversariales continuos. La atestación vincula evidencia, no infalibilidad.
+        - generic [ref=e369]:
+          - generic [ref=e370]:
+            - generic [ref=e371]: "06"
+            - generic [ref=e372]: SUBSTRATE
+          - heading "Memoria Causal Desacoplada" [level=3] [ref=e373]
+          - paragraph [ref=e374]: "Axioma O1: Fuente ≠ Inferencia. Los registros primarios permanecen inmutables bajo sello criptográfico SHA3-256."
+  - contentinfo [ref=e375]:
+    - generic [ref=e376]:
+      - generic [ref=e377]:
+        - generic [ref=e378]:
+          - heading "AUDITORÍA DE FUENTES Y PROCEDENCIA CRIPTOGRÁFICA" [level=4] [ref=e379]
+          - generic [ref=e380]:
+            - generic [ref=e381]:
+              - text: "Sustrato origen:"
+              - link "borjamoskv/BABYLON-60" [ref=e382] [cursor=pointer]:
+                - /url: https://github.com/borjamoskv/BABYLON-60
+              - text: (Código publicado · consultar licencia y revisión)
+            - generic [ref=e383]:
+              - text: "Commit:"
+              - code [ref=e384]: 8add5b83845e161236af039997be9943b1c0221d+dirty
+            - generic [ref=e385]:
+              - text: "Rama:"
+              - code [ref=e386]: codex/integration-review-20261023
+            - generic [ref=e387]: "Fecha de snapshot: 2026-10-24T01:29:50.822Z"
+        - generic [ref=e388]:
+          - heading "Contacto e Investigación:" [level=4] [ref=e389]
+          - generic [ref=e390]:
+            - generic [ref=e391]: Borja Fernández Angulo
+            - generic [ref=e392]: Investigador en Sistemas Complejos
+            - link "borja@babylon60.com" [ref=e394] [cursor=pointer]:
+              - /url: mailto:borja@babylon60.com
+      - generic [ref=e395]:
+        - generic [ref=e396]: "Fuentes primarias auditadas (SHA-256):"
+        - generic [ref=e397]:
+          - generic [ref=e398]:
+            - generic [ref=e399]: CLAIMS.toml
+            - code [ref=e400]: 79f3269add7ccc0d...d162aa53
+          - generic [ref=e401]:
+            - generic [ref=e402]: scripts/c5_quality_gates/claims_sitrep.json
+            - code [ref=e403]: 988ff4ea1a8de822...c1c7a746
+          - generic [ref=e404]:
+            - generic [ref=e405]: RELEASE_MANIFEST.json
+            - code [ref=e406]: e0d5f43ea76bba9c...e7786fd9
+          - generic [ref=e407]:
+            - generic [ref=e408]: scripts/c5_quality_gates/compile_claims_manifest.py
+            - code [ref=e409]: 9fd62031792cde40...834dd65a
+          - generic [ref=e410]:
+            - generic [ref=e411]: docs/01_spec/spec_nemesis.md
+            - code [ref=e412]: 13d1e8401688f60a...ca083380
+          - generic [ref=e413]:
+            - generic [ref=e414]: reports/nemesis_verified_report.json
+            - code [ref=e415]: 9aa033bf12de94c1...fc94b7a6
+          - generic [ref=e416]:
+            - generic [ref=e417]: reports/nemesis_evidence_report.json
+            - code [ref=e418]: fe8fb8c6003167cc...cf2f3beb
+          - generic [ref=e419]:
+            - generic [ref=e420]: reports/nemesis-kernel-report.json
+            - code [ref=e421]: 443dfc30371b82b3...88695288
+          - generic [ref=e422]:
+            - generic [ref=e423]: reports/nemesis-crash-report.json
+            - code [ref=e424]: eb1e55af821ccc65...ca2f23f9
+          - generic [ref=e425]:
+            - generic [ref=e426]: reports/nemesis-model-report.json
+            - code [ref=e427]: cc0f1e7fac03efbe...10135ade
+          - generic [ref=e428]:
+            - generic [ref=e429]: reports/ax0-adversarial-report.json
+            - code [ref=e430]: 77945423639ba1da...94a9adae
+          - generic [ref=e431]:
+            - generic [ref=e432]: proof/lean/AX0.lean
+            - code [ref=e433]: b0c763ec1fe82695...67994cd1
+      - generic [ref=e434]:
+        - generic [ref=e435]: BABYLON-60 es una arquitectura experimental de gobernanza en silicio y evidencia local-first.
+        - generic [ref=e436]: © 2026 Borja Fernández Angulo

@@ -189,9 +189,8 @@ El arsenal de skills opera bajo una demarcación ontológica estricta de dos can
 | 15 | `audiovisual-sota` | Operations | `16800` | C5-REAL Standard |
 | 16 | `writing-for-agents` | Utilities | `16500` | C5-REAL Standard |
 | 17 | `youtube-analysis-pipeline` | Operations | `16400` | C5-REAL Standard |
-| 18 | `kimi-mcp-orchestrator` | Operations | `16000` | C5-REAL Standard |
-| 19 | `cloudflare-mcp-usage` | Operations | `15800` | C5-REAL Standard |
-| 20 | `opentimestamps-l5-diagnostics` | Diagnostics | `15000` | C5-REAL Standard |
+| 18 | `cloudflare-mcp-usage` | Operations | `15800` | C5-REAL Standard |
+| 19 | `opentimestamps-l5-diagnostics` | Diagnostics | `15000` | C5-REAL Standard |
 
 ---
 

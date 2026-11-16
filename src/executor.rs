@@ -172,6 +172,104 @@ impl AuthorizationPayload {
         v.extend_from_slice(&self.to_canonical_bytes());
         v
     }
+
+    /// (`C5-03` WYSIWYS) Renderiza determinísticamente la vista humana comprensible
+    /// desde el objeto canónico decodificado, exigiendo correspondencia exacta con `intent_digest`.
+    ///
+    /// Garantiza:
+    /// $$\operatorname{HumanView}(e) = \operatorname{RenderCanonical}(\operatorname{DecodeCanonical}(\operatorname{SignedPayload}(e)))$$
+    pub fn render_canonical_human_view(
+        &self,
+        intent: &ProposedIntent,
+    ) -> Result<CanonicalHumanView, ExecutionError> {
+        if self.protocol_version != PROTOCOL_VERSION {
+            return Err(ExecutionError::UnsupportedProtocolVersion(
+                self.protocol_version,
+            ));
+        }
+        let computed_intent_digest = intent.compute_digest();
+        if self.intent_digest != computed_intent_digest {
+            return Err(ExecutionError::IntentDigestMismatch);
+        }
+
+        let hex_prefix4 = |b: &[u8; 32]| -> String {
+            format!("{:02x}{:02x}{:02x}{:02x}", b[0], b[1], b[2], b[3])
+        };
+
+        let summary_line = format!(
+            "v{} | action={} | target={} | epoch={} | expires={} | max_uses={} | intent={} | pre={}",
+            self.protocol_version,
+            intent.action_name,
+            intent.target_resource,
+            self.authority_epoch,
+            self.expires_at,
+            self.max_uses,
+            hex_prefix4(&self.intent_digest),
+            hex_prefix4(&self.resource_precondition_digest),
+        );
+
+        Ok(CanonicalHumanView {
+            protocol_version: self.protocol_version,
+            action_name: intent.action_name.clone(),
+            target_resource: intent.target_resource.clone(),
+            parameters_len: intent.parameters.len(),
+            intent_digest: self.intent_digest,
+            policy_digest: self.policy_digest,
+            resource_precondition_digest: self.resource_precondition_digest,
+            authority_epoch: self.authority_epoch,
+            expires_at: self.expires_at,
+            max_uses: self.max_uses,
+            summary_line,
+        })
+    }
+}
+
+/// Representación humana determinista generada desde el objeto canónico firmado (`C5-03` WYSIWYS).
+#[derive(Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(feature = "cortex-persist", derive(serde::Serialize, serde::Deserialize))]
+pub struct CanonicalHumanView {
+    /// Versión del protocolo canónico.
+    pub protocol_version: u16,
+    /// Acción autorizada vinculada por `intent_digest`.
+    pub action_name: String,
+    /// Recurso objetivo normalizado vinculado por `intent_digest`.
+    pub target_resource: String,
+    /// Tamaño exacto en bytes de los parámetros de la operación.
+    pub parameters_len: usize,
+    /// Digest SHA-256 canónico de la intención.
+    pub intent_digest: [u8; 32],
+    /// Digest SHA-256 canónico de la política.
+    pub policy_digest: [u8; 32],
+    /// Digest SHA-256 de la precondición del recurso.
+    pub resource_precondition_digest: [u8; 32],
+    /// Época de autoridad.
+    pub authority_epoch: u64,
+    /// Expiración Unix en segundos.
+    pub expires_at: u64,
+    /// Límite de usos.
+    pub max_uses: u32,
+    /// Línea canónica legible para el modal del operador.
+    pub summary_line: String,
+}
+
+/// Decodifica el objeto canónico firmado y verifica que tanto la operación ejecutada
+/// como la vista humana derivan sin reinterpretación del mismo `SignedAuthorization` (`C5-03`).
+///
+/// $$\operatorname{ExecutedOperation}(e) = \operatorname{DecodeCanonical}(\operatorname{SignedPayload}(e))$$
+pub fn verify_wysiwys_canonical_binding(
+    signed: &SignedAuthorization,
+    executed_intent: &ProposedIntent,
+) -> Result<(AuthorizationPayload, CanonicalHumanView), ExecutionError> {
+    let (decoded_payload, _alg, _kid) = signed.parse()?;
+    let roundtrip_bytes = decoded_payload.to_canonical_bytes();
+    let redecoded = AuthorizationPayload::from_canonical_bytes(&roundtrip_bytes)?;
+    if decoded_payload != redecoded {
+        return Err(ExecutionError::MalformedAuthorization(
+            "canonical decode/encode non-bijective".into(),
+        ));
+    }
+    let human_view = decoded_payload.render_canonical_human_view(executed_intent)?;
+    Ok((decoded_payload, human_view))
 }
 
 /// Algoritmo de la autoridad.

@@ -366,7 +366,7 @@ def main() -> None:
         help="maximum runner duration including compilation (default: 600 seconds)",
     )
     args = parser.parse_args()
-    repo_root = Path(__file__).resolve().parent.parent.parent
+    repo_root = Path(__file__).absolute().parent.parent.parent
     report_file = repo_root / "reports" / "nemesis_evidence_report_v2.json"
     print("Running one adversarial_nemesis test-suite invocation.", file=sys.stderr)
     suite_result = run_adversarial_suite(repo_root, timeout_seconds=args.timeout_seconds)

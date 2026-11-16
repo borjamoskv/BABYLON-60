@@ -810,3 +810,30 @@ fn verifiable_idempotent_adapter_allows_unknown_retry() {
     // El mutante sigue con 150
     assert_eq!(r.state_counter, 150);
 }
+
+#[test]
+fn c5_03_wysiwys_canonical_decode_and_human_view_derive_from_signed_payload() {
+    let f = fixture();
+    let p = payload(&f, 99);
+    let signed = sign(&f, p.clone());
+
+    // 1. ExecutedOperation(e) = DecodeCanonical(SignedPayload(e))
+    //    y HumanView(e) = RenderCanonical(DecodeCanonical(SignedPayload(e)))
+    let (decoded_op, human_view) =
+        verify_wysiwys_canonical_binding(&signed, &f.intent).expect("valid WYSIWYS binding");
+    assert_eq!(decoded_op, p);
+    assert_eq!(decoded_op.to_canonical_bytes().len(), AUTHORIZATION_PAYLOAD_CANONICAL_SIZE);
+    assert_eq!(human_view.action_name, f.intent.action_name);
+    assert_eq!(human_view.target_resource, f.intent.target_resource);
+    assert_eq!(human_view.intent_digest, p.intent_digest);
+    assert!(human_view.summary_line.contains("action=ADD"));
+
+    // 2. Cualquier reinterpretación entre la vista/operación y el SignedPayload (ej. cambiar
+    //    el recurso o 1 byte de parámetros manteniendo el sobre firmado) es rechazada en cerrado.
+    let mut reinterpreted_intent = f.intent.clone();
+    reinterpreted_intent.target_resource = "vault/other_secret.txt".into();
+    assert_eq!(
+        verify_wysiwys_canonical_binding(&signed, &reinterpreted_intent),
+        Err(ExecutionError::IntentDigestMismatch)
+    );
+}

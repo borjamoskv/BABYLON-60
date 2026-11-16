@@ -162,7 +162,15 @@ def build_regulatory_contribution_matrix(
     evidence contribution and explicit organizational/legal boundaries.
     Never emits `COMPLIANT` automatically from `TEST_PASSED`.
     """
-    from .regulatory import CATALOGUE, CATALOGUE_DIGEST
+    from .regulatory import (
+        BINDING_DIMENSIONS,
+        CATALOGUE,
+        CATALOGUE_DIGEST,
+        CLAIM_SCHEMA,
+        GATEWAY_BUNDLE_SCHEMA,
+        GRAPH_EVAL_SCHEMA,
+        RETENTION_RULES,
+    )
 
     frameworks = [
         {
@@ -201,7 +209,12 @@ def build_regulatory_contribution_matrix(
             "requirement_summary": "Technical documentation required prior to placing a high-risk AI system on the market or putting it into service.",
             "babylon60_evidence_contribution": "Reproducible technical evidence, architecture scope descriptors, formal proof artifacts, and verifiable execution traces for Annex IV dossiers.",
             "organizational_and_legal_limit": "Does not replace the complete Annex IV technical documentation file or the EU declaration of conformity under Article 47.",
-            "mapped_claims": ["inv_01_manifest_layout", "inv_02_seqlock_concurrency", "lean4_formal_trace"],
+            "mapped_claims": [
+                "inv_01_manifest_layout",
+                "inv_02_seqlock_concurrency",
+                "lean4_formal_trace",
+                "FL_AIACT_02_regulatory_evidence_graph",
+            ],
         },
         {
             "framework_id": "DORA_ARTS_9_10",
@@ -306,6 +319,24 @@ def build_regulatory_contribution_matrix(
             "eu_ai_act_consolidation_date": "2026-07-27",
             "annex_iii_high_risk_applicability": "2027-12-02",
             "annex_i_regulated_products_applicability": "2028-08-02",
+        },
+        "assurance_gateway_graph_contract": {
+            "experiment_id": "FL-AIACT-02",
+            "claim_schema": CLAIM_SCHEMA,
+            "graph_evaluation_schema": GRAPH_EVAL_SCHEMA,
+            "gateway_bundle_schema": GATEWAY_BUNDLE_SCHEMA,
+            "binding_dimensions": list(BINDING_DIMENSIONS),
+            "deliverables": [
+                "execution_evidence",
+                "assurance_dossier",
+                "continuous_evidence_monitoring",
+            ],
+            "value_chain_role": "ART_25_4_TECHNICAL_EVIDENCE_AND_ASSURANCE_INTERFACE",
+            "selective_invalidation_invariant": "AcceptEvidence(c,a) => Bound(c,a) & Applicable(c,a) & Verified(c)",
+            "conformity_boundary_invariant": "TechnicalPASS != LegalConformity",
+            "retention_bounds": RETENTION_RULES,
+            "automated_legal_conformity": False,
+            "eu_ai_act_certified": False,
         },
         "mappings": entries,
     }

@@ -14,7 +14,7 @@
 ┌─────────────────────────────────────────────────────────────┐
 │                    02_EDIN_SWARMS                           │
 │               (edin.swarms — Anillo-2)                      │
-│  • Swarm Orchestrators (Kimi K3 / OpenRouter / vLLM / MLX)  │
+│  • Swarm Orchestrators (vLLM / MLX / OpenRouter)            │
 │  • Dynamic Subagent Lifecycle & Deadlock Mitigation         │
 │  • Topologies (SHARUR-3600 Matrix, Swarm Router, PxS)       │
 │  • Protocols (PSAFE v3.0, AOF v2.0, SCITT Attestation)      │
@@ -49,7 +49,6 @@ Los módulos siguientes residen bajo el paquete Python `02_EDIN_SWARMS/agents_ar
 | `topologies/edin.py` | Topología de verificación paralela SHARUR-3600 (Legión activa de 100 workers). | `INV_C5_EDIN_BARRIER` |
 | `protocols/aof.py` | Marco Operativo Agéntico (PSAFE v3.0 / AOF v2.0 / Guillotina de Hume). | `INV_C5_HUME_GUILLOTINE` |
 | `protocols/attestation.py` | Sobres criptográficos SCITT / COSE_Sign1 para mensajería inter-agente. | `INV_C5_SCITT_RFC9942` |
-| `clients/kimi.py` | Cliente nativo Moonshot / Kimi K3 resiliente. | `INV_C5_KIMI_AIRGAP` |
 | `clients/openrouter.py` | Pasarela unificada hacia OpenRouter para modelos de frontera. | `INV_C5_OPENROUTER_ROUTING` |
 
 ---

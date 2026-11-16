@@ -3,7 +3,7 @@
 Estado: ejecutado por autorización posterior del operador; véase el
 [informe de corrección](REMEDIATION_SWARM100_LOTE5_2026-10-28.md). Se agruparon
 tres P1 inicialmente CONFIRMED_STATIC/OPEN de `01_KISH_ENGINE/babylon60/bft/ledger_actor.py`.
-La [selección con hash y evidencia](evidence/swarm100-lot4-20261028/lot5-selection.json)
+La [selección con hash y evidencia](RETENTION.md)
 fijó la única fuente productiva editada. Se prioriza la afinidad del módulo;
 no quedan P1 abiertos con reproducción previa en la cola actual.
 

@@ -16,7 +16,7 @@ Se conserva una propuesta de representar entidades y relaciones biológicas medi
 
 | Postulado heredado | Hallazgo | Estatus corregido |
 | --- | --- | --- |
-| AX-ONCO-1: toda metástasis deriva de `DDR_Fail` en un DAG | No se aporta prueba de necesidad universal ni grafo causal identificado; un grafo de señalización puede contener ciclos. | Hipótesis de un modelo concreto, NO_VERIFICADA como ley biológica. |
+| AX-ONCO-1: toda metástasis deriva de `[OBSOLETO: DDR_Fail]` en un DAG | No se aporta prueba de necesidad universal ni grafo causal identificado; un grafo de señalización puede contener ciclos. | Hipótesis de un modelo concreto, NO_VERIFICADA como ley biológica. |
 | AX-ONCO-2: fricción monótonamente creciente sin Ω | No se define la fricción ni se mide su derivada. «Estrictamente creciente» tampoco equivale a derivada ≥ 0. | Hipótesis no contrastable hasta operacionalizar la variable; no ley termodinámica. |
 | AX-ONCO-3: terapia isomorfa a un circuit breaker | No se definen objetos, morfismos ni inversa que demuestren un isomorfismo. | Analogía de diseño, sin equivalencia terapéutica demostrada. |
 
@@ -32,7 +32,7 @@ La equivalencia $\lim F_T=0\iff\int\Omega\ge\sum\mathrm{Carga}$ tampoco se deriv
 
 ## 4. Estado formal
 
-La estructura Lean histórica `OncologyProtocol` contenía como campos `strict_hallmark_causality`, `growing_anergy_principle` y `therapeutic_circuit_breaker`. Son obligaciones asumidas por cualquier instancia, no pruebas de que la biología las satisfaga. No había instancia construida, teorema de estabilidad ni vinculación de datos.
+La estructura Lean histórica `[OBSOLETO: OncologyProtocol]` contenía como campos `[OBSOLETO: strict_hallmark_causality]`, `[OBSOLETO: growing_anergy_principle]` y `[OBSOLETO: therapeutic_circuit_breaker]`. Son obligaciones asumidas por cualquier instancia, no pruebas de que la biología las satisfaga. No había instancia construida, teorema de estabilidad ni vinculación de datos.
 
 La extracción original falla con Lean 4.35.0 por tipos/clases numéricas sin resolver; no se configuró una dependencia que definiera los reales utilizados. Se retira el bloque como certificación. Reparar imports o tipos solo produciría una especificación condicional, no validación de las hipótesis.
 

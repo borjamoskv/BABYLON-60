@@ -17,11 +17,12 @@ jobs:
   test:
     # General tests are portable; native Seatbelt coverage lives in macos-native.yml.
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     strategy:
       fail-fast: false
       matrix:
         python-version: ['3.11', '3.12']
+        shard: [1, 2]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
@@ -42,14 +43,29 @@ jobs:
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - run: cargo build --locked -p babylon-attest -p babylon60_root --lib --bins
+      - name: Build native broker for Python tests
+        # Own target dir: target/debug/libbabylon60.so stays the default-feature build behind BABYLON60_DYLIB_PATH.
+        run: cargo build --locked -p babylon60_root --lib --features python --target-dir target/py
       - name: Test independent oncology experiment
+        if: matrix.shard == 1
         run: uv run --locked --no-sync pytest -c experiments/oncology/pyproject.toml experiments/oncology/tests -q
-      - run: uv run --locked --no-sync pytest tests/ 02_EDIN_SWARMS/tests/ --maxfail=0 --show-capture=all --junitxml=pytest-results.xml
+      - name: Run sharded Python test suite (shard ${{ matrix.shard }}/2)
+        run: |
+          set -euo pipefail
+          mapfile -t test_files < <(find tests 02_EDIN_SWARMS/tests -type f -name 'test_*.py' | sort)
+          shard_ignores=()
+          for i in "${!test_files[@]}"; do
+            if (( (i % 2) + 1 != ${{ matrix.shard }} )); then
+              shard_ignores+=("--ignore=${test_files[$i]}")
+            fi
+          done
+          uv run --locked --no-sync pytest tests/ 02_EDIN_SWARMS/tests/ "${shard_ignores[@]}" --maxfail=0 --show-capture=all --junitxml=pytest-results.xml
         env:
           BABYLON60_REQUIRE_NATIVE: "1"
           BABYLON60_DYLIB_PATH: ${{ github.workspace }}/target/debug/libbabylon60.so
+          BABYLON60_TEST_CAPABILITY_LIBRARY: ${{ github.workspace }}/target/py/debug/libbabylon60.so
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         if: always()
         with:
-          name: pytest-${{ matrix.python-version }}
+          name: pytest-${{ matrix.python-version }}-shard-${{ matrix.shard }}
           path: pytest-results.xml

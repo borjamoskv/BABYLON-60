@@ -15,9 +15,10 @@ import platform
 import re
 import subprocess
 import sys
+import textwrap
 import time
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Mapping, Optional, Sequence, Tuple
 
 try:
     import tomllib
@@ -28,35 +29,51 @@ except ImportError:
         tomllib = None  # type: ignore[assignment]
 
 
+def _parse_scalar_or_list(val: str) -> Any:
+    raw = val.strip()
+    if raw.lower() in ("true", "false"):
+        return raw.lower() == "true"
+    if re.fullmatch(r"-?\d+", raw):
+        return int(raw)
+    if raw.startswith("[") and raw.endswith("]"):
+        inner = raw[1:-1].strip()
+        if not inner:
+            return []
+        return [part.strip().strip('"').strip("'") for part in inner.split(",")]
+    return raw.strip('"').strip("'")
+
+
 def parse_simple_toml(content: str) -> Dict[str, Any]:
-    data: Dict[str, Any] = {"claim": {}, "metadata": {}}
+    data: Dict[str, Any] = {"claim": {}, "invariants": {}, "metadata": {}}
     current_section: Optional[str] = None
-    current_claim: Optional[str] = None
+    current_key: Optional[str] = None
 
     for line in content.splitlines():
         line = line.strip()
         if not line or line.startswith("#"):
             continue
-        if line.startswith("[metadata]"):
+        if line == "[metadata]":
             current_section = "metadata"
+            current_key = None
             continue
-        if line.startswith("[claim."):
+        if line.startswith("[claim.") and line.endswith("]"):
             current_section = "claim"
-            claim_id = line[len("[claim.") : -1]
-            current_claim = claim_id
-            data["claim"][claim_id] = {}
+            current_key = line[len("[claim.") : -1]
+            data["claim"][current_key] = {}
+            continue
+        if line.startswith("[invariants.") and line.endswith("]"):
+            current_section = "invariants"
+            current_key = line[len("[invariants.") : -1]
+            data["invariants"][current_key] = {}
             continue
         if "=" in line:
             key, val = line.split("=", 1)
             key = key.strip()
-            val = val.strip().strip('"').strip("'")
+            parsed_val = _parse_scalar_or_list(val)
             if current_section == "metadata":
-                data["metadata"][key] = val
-            elif current_section == "claim" and current_claim:
-                if val.lower() in ("true", "false"):
-                    data["claim"][current_claim][key] = val.lower() == "true"
-                else:
-                    data["claim"][current_claim][key] = val
+                data["metadata"][key] = parsed_val
+            elif current_section in ("claim", "invariants") and current_key:
+                data[current_section][current_key][key] = parsed_val
 
     return data
 
@@ -133,7 +150,17 @@ def source_tree_digest(cwd: Path) -> str:
         if is_excluded_from_public_tree(relative):
             continue
         path = cwd / relative
-        payload = str(path.readlink()).encode("utf-8") if path.is_symlink() else path.read_bytes()
+        flags = os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0)
+        try:
+            fd = os.open(path, flags)
+        except OSError:
+            if path.is_symlink():
+                payload = str(path.readlink()).encode("utf-8")
+            else:
+                raise
+        else:
+            with os.fdopen(fd, "rb") as stream:
+                payload = stream.read()
         digest.update(raw_path + b"\0")
         digest.update(len(payload).to_bytes(8, "big"))
         digest.update(payload)
@@ -172,6 +199,155 @@ def count_executed_tests(output: str) -> Optional[int]:
     if re.search(r"collected 0 items|no tests ran", output):
         return 0
     return total if recognised else None
+
+
+ERROR_SUMMARY_LIMIT = 1000
+_SUMMARY_LINE_LIMIT = 240
+_PANIC_MESSAGE_LINES = 3
+_OMITTED_LINES = "[... +{count} líneas omitidas]"
+
+_ANSI_ESCAPE_RE = re.compile(r"\x1b\[[0-9;?]*[ -/]*[@-~]")
+# Artefactos locales o aleatorios sin valor causal: usuario, temporales de pytest y de claims, id de hilo.
+_LOCAL_ARTIFACT_RULES = (
+    (re.compile(r"(?<![\w.-])/(Users|home)/[^/\s'\"`]+"), r"/\1/<user>"),
+    (re.compile(r"pytest-of-[^/\s'\"`]+"), "pytest-of-<user>"),
+    (re.compile(r"(?<=/)pytest-\d+(?=/)"), "pytest-<n>"),
+    (re.compile(r"b60_claim_\w+"), "b60_claim_<rand>"),
+    (re.compile(r"^(thread '[^'\n]*') \(\d+\)(?= panicked at )", re.MULTILINE), r"\1 (<tid>)"),
+)
+_SEPARATOR_RE = re.compile(r"^([=!_-])\1* (.+?) \1+$")
+_PYTEST_HEADER_RE = re.compile(r"^(?:platform |collect|hypothesis |Using |(?!error:|warning:)[a-z][\w-]*: )")
+_CARGO_PROGRESS_RE = re.compile(
+    r"^\s+(?:Compiling|Checking|Finished|Running|Doc-tests|Fresh|Blocking|Downloading|Downloaded|Updating"
+    r"|Locking|Adding|Building|Documenting|Waiting)\b"
+)
+_RUST_NOISE_BLOCK_RE = re.compile(r"^(?:warning(?:\[\w+\])?: |stack backtrace:)")
+_DIAGNOSTIC_CONTINUATION_RE = re.compile(r"^(?:\s|\d+\s*\||\.\.\.)")
+_PRIMARY_CAUSE_RE = re.compile(
+    r"^(?:FAILED|ERROR) \S"  # pytest: FAILED/ERROR <nodeid> [- mensaje]
+    r"|^ERROR: "  # pytest: error de uso o de colección
+    r"|^E {2,}\S"  # pytest: excepción y explicación de la aserción
+    r"|^Interrupted: "  # pytest: sesión interrumpida (p. ej. errores de colección)
+    r"|^(?:no tests ran|\d+ \w+(?:, \d+ \w+)*) in \d+\.\d\ds(?: \(\d+:\d\d:\d\d\))?$"  # pytest: recuento final
+    r"|^test result: FAILED"  # libtest
+    r"|^error: (?:(?:doc)?test failed|could not compile|process didn't exit successfully|\d+ targets? failed)"
+)
+_SECONDARY_CAUSE_RE = re.compile(r"^error(?:\[E\d+\])?: |^Error: |^\S+:\d+:\d+: error\b")
+_PANIC_RE = re.compile(r"^thread '[^']*'(?: \(\S+\))? panicked at ")
+_PANIC_STOP_RE = re.compile(r"^(?:note: |stack backtrace:|thread '|failures:|test result: )")
+
+
+def local_path_redactions(repo_root: Path) -> List[Tuple[str, str]]:
+    """Prefijos absolutos de esta máquina con su marcador neutro: raíz del repo, temporal y HOME."""
+    import tempfile
+
+    pairs = [(str(repo_root), "<repo>"), (tempfile.gettempdir(), "<tmp>"), (os.path.expanduser("~"), "~")]
+    pairs = [(prefix, label) for prefix, label in pairs if os.path.isabs(prefix)]
+    pairs += [(os.path.realpath(prefix), label) for prefix, label in pairs]
+    return [(prefix, label) for prefix, label in dict.fromkeys(pairs) if prefix.rstrip("/")]
+
+
+def _normalize_local_artifacts(text: str, redactions: Sequence[Tuple[str, str]]) -> str:
+    """Quita escapes ANSI y sustituye prefijos locales y artefactos aleatorios por marcadores neutros."""
+    text = _ANSI_ESCAPE_RE.sub("", text)
+    for prefix, label in sorted(redactions, key=lambda item: len(item[0]), reverse=True):
+        prefix = prefix.rstrip("/")
+        if prefix:
+            boundary = re.compile(r"(?<![\w.-])" + re.escape(prefix) + r"(?![\w.-])")
+            text = boundary.sub(lambda _match: label, text)
+    for rule, replacement in _LOCAL_ARTIFACT_RULES:
+        text = rule.sub(replacement, text)
+    return text
+
+
+def _drop_noise(text: str) -> List[str]:
+    """Quita encabezado de sesión pytest, progreso de cargo, avisos de rustc y backtraces; compacta separadores."""
+    kept: List[str] = []
+    skip = ""
+    for raw in text.splitlines():
+        line = raw.rstrip()
+        separator = _SEPARATOR_RE.match(line)
+        if separator:
+            line = f"{separator.group(1)} {separator.group(2)} {separator.group(1)}"
+        if skip == "header" and _PYTEST_HEADER_RE.match(line):
+            continue
+        if skip == "block" and line and _DIAGNOSTIC_CONTINUATION_RE.match(line):
+            continue
+        skip = ""
+        if separator and separator.group(2) == "test session starts":
+            skip = "header"
+        elif _RUST_NOISE_BLOCK_RE.match(line):
+            skip = "block"
+        elif not _CARGO_PROGRESS_RE.match(line) and (line or (kept and kept[-1])):
+            kept.append(line)
+    while kept and not kept[-1]:
+        kept.pop()
+    return kept
+
+
+def _key_units(lines: List[str]) -> List[Tuple[int, List[int]]]:
+    """Bloques de causa como (prioridad, índices); un pánico de Rust se toma con su mensaje."""
+    units: List[Tuple[int, List[int]]] = []
+    index = 0
+    while index < len(lines):
+        if _PANIC_RE.match(lines[index]):
+            block = [index]
+            while (
+                len(block) <= _PANIC_MESSAGE_LINES
+                and index + len(block) < len(lines)
+                and lines[index + len(block)]
+                and not _PANIC_STOP_RE.match(lines[index + len(block)])
+            ):
+                block.append(index + len(block))
+            units.append((0, block))
+            index += len(block)
+            continue
+        separator = _SEPARATOR_RE.match(lines[index])
+        content = separator.group(2) if separator else lines[index]
+        if _PRIMARY_CAUSE_RE.match(content):
+            units.append((0, [index]))
+        elif _SECONDARY_CAUSE_RE.match(content):
+            units.append((1, [index]))
+        index += 1
+    return units
+
+
+def _condense(lines: List[str]) -> str:
+    """Bloques de causa seguidos de la cola de la salida, sin superar ERROR_SUMMARY_LIMIT."""
+    lines = [line if len(line) <= _SUMMARY_LINE_LIMIT else line[: _SUMMARY_LINE_LIMIT - 3] + "..." for line in lines]
+    budget = ERROR_SUMMARY_LIMIT - len(_OMITTED_LINES.format(count=len(lines))) - 1
+    tail_start, tail_cost = len(lines), 0
+    while tail_start > 0 and tail_cost + len(lines[tail_start - 1]) + 1 <= budget // 2:
+        tail_start -= 1
+        tail_cost += len(lines[tail_start]) + 1
+    head: List[int] = []
+    head_cost = 0
+    for _, block in sorted(unit for unit in _key_units(lines) if unit[1][-1] < tail_start):
+        block_cost = sum(len(lines[i]) + 1 for i in block)
+        if head_cost + block_cost + tail_cost <= budget:
+            head.extend(block)
+            head_cost += block_cost
+    floor = max(head, default=-1) + 1
+    while tail_start > floor and head_cost + tail_cost + len(lines[tail_start - 1]) + 1 <= budget:
+        tail_start -= 1
+        tail_cost += len(lines[tail_start]) + 1
+    omitted = tail_start - len(head)
+    marker = [_OMITTED_LINES.format(count=omitted)] if omitted else []
+    return "\n".join([lines[i] for i in sorted(head)] + marker + lines[tail_start:])
+
+
+def extract_failure_summary(output: str, *, redactions: Sequence[Tuple[str, str]] = ()) -> str:
+    """Causa de un fallo de evidencia, determinista y acotada a ERROR_SUMMARY_LIMIT caracteres.
+
+    Normaliza rutas locales (`redactions`, HOME de usuarios, temporales de pytest y de claims) y quita
+    el encabezado de sesión de pytest, el progreso de cargo, los avisos de rustc y los backtraces. Si el
+    resultado cabe se devuelve completo; si no, se conservan los bloques de causa (FAILED/ERROR, E,
+    recuento final, pánicos, test result, error:) seguidos de la cola de la salida.
+    """
+    text = _normalize_local_artifacts(output, redactions)
+    lines = _drop_noise(text) or text.strip().splitlines()
+    summary = "\n".join(lines)
+    return summary if len(summary) <= ERROR_SUMMARY_LIMIT else _condense(lines)
 
 
 DISALLOWED_SHELL_PATTERNS = [
@@ -275,6 +451,229 @@ def run_command(cmd: str, cwd: Path, timeout: int = 300) -> Tuple[bool, str, flo
         return (False, str(e), duration)
 
 
+VALID_EVIDENCE_LEVELS = {"L1_FORMAL", "L2_IMPLEMENTATION", "L3_ISOLATION", "L4_EXPERIMENTAL"}
+VALID_INVARIANT_STATUSES = {
+    "ATTESTED_IN_SILICON",
+    "VERIFIED_ZERO_SORRY",
+    "VERIFIED",
+    "VERIFIED_LOCAL",
+    "NO_VERIFICADO",
+}
+VERIFIED_RELEASE_INVARIANT_STATUSES = {
+    "ATTESTED_IN_SILICON",
+    "VERIFIED_ZERO_SORRY",
+    "VERIFIED",
+}
+INVARIANT_GATE_MAP = {
+    "ax0_hardware_closure": "hardware_enclave_witness",
+    "lean4_observable_harness": "lean4_harness",
+    "mcp_lifecycle_confinement": "mcp_confinement",
+    "kernel_ledger_and_sqlite_hygiene": "storage_and_consensus",
+    "semantic_entropy_and_solver": "semantic_entropy_solver",
+}
+_FORBIDDEN_WHEN_UNVERIFIED = {
+    "PASSED",
+    "VERIFIED",
+    "VERIFIED_ZERO_SORRY",
+    "ATTESTED_IN_SILICON",
+    "ACTIVE",
+    "DETERMINISTIC_ON_QUERY_AND_FAILURE",
+    "BftCollisionError",
+    "PER_INVOCATION_LIFECYCLE",
+}
+
+
+def load_babylon_release(repo_root: Path) -> Optional[Dict[str, Any]]:
+    babylon_toml = repo_root / "babylon.toml"
+    if not babylon_toml.is_file() or tomllib is None:
+        return None
+    doc = tomllib.loads(babylon_toml.read_text(encoding="utf-8"))
+    rel = doc.get("release")
+    return dict(rel) if isinstance(rel, Mapping) else None
+
+
+def audit_invariants_alignment(
+    manifest: Mapping[str, Any],
+    babylon_release: Optional[Mapping[str, Any]] = None,
+) -> Tuple[List[Dict[str, Any]], List[str]]:
+    """Audita [invariants.*] en CLAIMS.toml y su paridad fail-closed contra babylon.toml."""
+    raw_invariants = manifest.get("invariants", {})
+    if not isinstance(raw_invariants, Mapping) or not raw_invariants:
+        return ([], [])
+
+    claims = manifest.get("claim", {})
+    seen_ids = set(claims.keys()) if isinstance(claims, Mapping) else set()
+
+    records: List[Dict[str, Any]] = []
+    errors: List[str] = []
+
+    if babylon_release is None:
+        errors.append("babylon.toml [release] ausente o ilegible al auditar [invariants.*]")
+        release_state = ""
+        gate_attestations: Any = None
+        has_gates = False
+    else:
+        release_state = str(babylon_release.get("state", "")).strip()
+        if not release_state:
+            errors.append("babylon.toml [release].state vacío al auditar [invariants.*]")
+        gate_attestations = babylon_release.get("gate_attestations")
+        has_gates = isinstance(gate_attestations, Mapping) and bool(gate_attestations)
+        if not has_gates:
+            errors.append("babylon.toml [release.gate_attestations] ausente o vacío al auditar [invariants.*]")
+
+    for inv_key, inv in sorted(raw_invariants.items()):
+        if not isinstance(inv, Mapping):
+            errors.append(f"invariants.{inv_key}: bloque inválido (no es tabla)")
+            continue
+
+        claim_id = str(inv.get("claim_id", "")).strip()
+        status = str(inv.get("status", "")).strip()
+        level = str(inv.get("evidence_level", "")).strip()
+        summary = str(inv.get("summary", "")).strip()
+        component = str(inv.get("component", "UNKNOWN")).strip()
+        required = bool(inv.get("required_for_release", False))
+        evidence_suite = str(inv.get("evidence_suite", "")).strip()
+
+        if not claim_id:
+            errors.append(f"invariants.{inv_key}: falta claim_id")
+        elif claim_id in seen_ids:
+            errors.append(f"invariants.{inv_key}: claim_id duplicado '{claim_id}'")
+        else:
+            seen_ids.add(claim_id)
+
+        if status not in VALID_INVARIANT_STATUSES:
+            errors.append(f"invariants.{inv_key} ({claim_id}): status inválido '{status}'")
+        if level not in VALID_EVIDENCE_LEVELS:
+            errors.append(f"invariants.{inv_key} ({claim_id}): evidence_level inválido '{level}'")
+        if not summary:
+            errors.append(f"invariants.{inv_key} ({claim_id}): summary vacío")
+
+        if status == "VERIFIED_ZERO_SORRY":
+            if inv.get("sorry_count") != 0 or inv.get("admitted_axioms") != 0:
+                errors.append(
+                    f"invariants.{inv_key} ({claim_id}): VERIFIED_ZERO_SORRY exige sorry_count=0 y admitted_axioms=0"
+                )
+        if status in {"VERIFIED", "VERIFIED_LOCAL"} and not evidence_suite:
+            errors.append(
+                f"invariants.{inv_key} ({claim_id}): status='{status}' exige evidence_suite ejecutable no vacío"
+            )
+
+        gate_key = INVARIANT_GATE_MAP.get(inv_key)
+        gate_aligned = (
+            babylon_release is not None
+            and bool(release_state)
+            and has_gates
+            and not (status in {"VERIFIED", "VERIFIED_LOCAL"} and not evidence_suite)
+        )
+
+        if (
+            babylon_release is not None
+            and release_state
+            and release_state != "candidate"
+            and required
+            and status not in VERIFIED_RELEASE_INVARIANT_STATUSES
+        ):
+            gate_aligned = False
+            errors.append(
+                f"babylon.toml release.state='{release_state}' incompatible con invariants.{inv_key} ({claim_id}): "
+                f"required_for_release=true tiene status='{status}' (debe ser 'candidate')"
+            )
+
+        if has_gates and isinstance(gate_attestations, Mapping):
+            if not gate_key or gate_key not in gate_attestations:
+                gate_aligned = False
+                errors.append(
+                    f"invariants.{inv_key} ({claim_id}): sin entrada correspondiente en "
+                    f"babylon.toml [release.gate_attestations] (esperado '{gate_key or inv_key}')"
+                )
+            else:
+                gate_val = gate_attestations[gate_key]
+                if isinstance(gate_val, Mapping):
+                    gate_cid = str(gate_val.get("claim_id", "")).strip()
+                    gate_status = str(gate_val.get("status", "")).strip()
+                    if gate_cid != claim_id:
+                        gate_aligned = False
+                        errors.append(
+                            f"babylon.toml gate_attestations.{gate_key}.claim_id='{gate_cid}' != '{claim_id}'"
+                        )
+                    if gate_status != status:
+                        gate_aligned = False
+                        errors.append(
+                            f"babylon.toml gate_attestations.{gate_key}.status='{gate_status}' != "
+                            f"CLAIMS.toml invariants.{inv_key}.status='{status}'"
+                        )
+                    if status == "NO_VERIFICADO":
+                        if "token_replay_window" in gate_val and gate_val["token_replay_window"] == 0:
+                            gate_aligned = False
+                            errors.append(
+                                f"babylon.toml gate_attestations.{gate_key}.token_replay_window=0 contradice "
+                                f"status=NO_VERIFICADO en {claim_id}"
+                            )
+                        for sub_k, sub_v in gate_val.items():
+                            if sub_k in ("claim_id", "status"):
+                                continue
+                            if isinstance(sub_v, str) and sub_v in _FORBIDDEN_WHEN_UNVERIFIED:
+                                gate_aligned = False
+                                errors.append(
+                                    f"babylon.toml gate_attestations.{gate_key}.{sub_k}='{sub_v}' sobre-reivindica "
+                                    f"propiedad en {claim_id} (status=NO_VERIFICADO)"
+                                )
+                elif isinstance(gate_val, str):
+                    if gate_val != status:
+                        gate_aligned = False
+                        errors.append(
+                            f"babylon.toml gate_attestations.{gate_key}='{gate_val}' != "
+                            f"CLAIMS.toml invariants.{inv_key}.status='{status}'"
+                        )
+                else:
+                    gate_aligned = False
+                    errors.append(f"babylon.toml gate_attestations.{gate_key}: tipo no soportado")
+
+        records.append(
+            {
+                "key": inv_key,
+                "claim_id": claim_id,
+                "status": status,
+                "evidence_level": level,
+                "component": component,
+                "required_for_release": required,
+                "summary": summary,
+                "evidence_suite": evidence_suite,
+                "gate_aligned": gate_aligned,
+            }
+        )
+
+    return (records, errors)
+
+
+def execute_invariant_suites(
+    inv_records: List[Dict[str, Any]],
+    inv_errors: List[str],
+    repo_root: Path,
+    redactions: List[Tuple[str, str]],
+) -> None:
+    """Ejecuta en silicio las evidence_suite declaradas en bloques [invariants.*]."""
+    for rec in inv_records:
+        suite_cmd = str(rec.get("evidence_suite", "")).strip()
+        if not suite_cmd or rec.get("status") == "NO_VERIFICADO":
+            continue
+        ok, out, dur = run_command(suite_cmd, repo_root, timeout=300)
+        rec["suite_passed"] = ok
+        rec["duration_s"] = round(dur, 3)
+        if ok:
+            print(
+                f"[VERIFIED-INVARIANT] invariants.{rec['key']} ({rec['claim_id']}) "
+                f"-> PASS ({dur:.2f}s)"
+            )
+        else:
+            rec["gate_aligned"] = False
+            summary_err = extract_failure_summary(out, redactions=redactions)
+            rec["error"] = summary_err
+            inv_errors.append(
+                f"invariants.{rec['key']} ({rec['claim_id']}): fallo de evidence_suite ({dur:.2f}s): {summary_err}"
+            )
+
+
 def main() -> int:
     repo_root = Path(__file__).absolute().parent.parent.parent
     claims_file = repo_root / "CLAIMS.toml"
@@ -290,8 +689,12 @@ def main() -> int:
         manifest = parse_simple_toml(content)
 
     claims = manifest.get("claim", {})
+    invariants = manifest.get("invariants", {})
     metadata = manifest.get("metadata", {})
+    babylon_release = load_babylon_release(repo_root)
     list_only = "--list" in sys.argv
+    check_invariants_only = "--check-invariants" in sys.argv
+    run_invariants = "--run-invariants" in sys.argv
 
     if list_only:
         for cid, c in sorted(claims.items()):
@@ -301,21 +704,56 @@ def main() -> int:
             print(f"[DECLARED] {cid}{req}  (declared: {c.get('status', 'unknown')} | level: {lvl})")
             print(f"    statement : {c.get('statement', '')}")
             print(f"    evidence  : {cmd or '<none>'}")
+        if isinstance(invariants, Mapping):
+            for inv_key, inv in sorted(invariants.items()):
+                if not isinstance(inv, Mapping):
+                    continue
+                cid = inv.get("claim_id", inv_key)
+                req = " [REQUIRED]" if inv.get("required_for_release", False) else ""
+                lvl = inv.get("evidence_level", "UNSPECIFIED")
+                st = inv.get("status", "unknown")
+                inv_ev = inv.get("evidence_suite", inv.get("adversarial_suite", inv.get("proof_root", "")))
+                print(f"[INVARIANT] {inv_key} ({cid}){req}  (declared: {st} | level: {lvl})")
+                print(f"    summary   : {inv.get('summary', '')}")
+                print(f"    evidence  : {inv_ev or '<none>'}")
         print("Declared claims listed. No outcome asserted.")
+        return 0
+
+    inv_records, inv_errors = audit_invariants_alignment(manifest, babylon_release)
+    if check_invariants_only:
+        if run_invariants and not inv_errors:
+            execute_invariant_suites(
+                inv_records,
+                inv_errors,
+                repo_root,
+                local_path_redactions(repo_root),
+            )
+        for rec in inv_records:
+            state_tag = "ALIGNED" if rec["gate_aligned"] else "DRIFT"
+            print(
+                f"[{state_tag}] invariants.{rec['key']} ({rec['claim_id']}) -> "
+                f"status={rec['status']} [{rec['evidence_level']}]"
+            )
+        if inv_errors:
+            for err in inv_errors:
+                print(f"[FAIL-CLOSED] {err}", file=sys.stderr)
+            return 1
+        print(f"PASS: {len(inv_records)} [invariants.*] blocks aligned with babylon.toml")
         return 0
 
     print("=" * 80)
     print("BABYLON-60 · AUDITORÍA DE CLAIMS EN SILICIO (SWARM-21 / v5.0 · ITERACIÓN Ω)")
     print(f"Raíz Axiomática: {metadata.get('root_axiom', 'N/A')}")
-    print(f"Total Claims Registrados: {len(claims)}")
+    print(f"Total Claims Registrados: {len(claims)} | Bloques [invariants.*]: {len(inv_records)}")
     print("=" * 80)
 
     commit = source_commit(repo_root)
     env_digest, env_info = environment_digest(repo_root)
     manifest_digest = sha256(claims_file.read_bytes())
     tree_digest = source_tree_digest(repo_root)
+    redactions = local_path_redactions(repo_root)
 
-    valid_evidence_levels = {"L1_FORMAL", "L2_IMPLEMENTATION", "L3_ISOLATION", "L4_EXPERIMENTAL"}
+    valid_evidence_levels = VALID_EVIDENCE_LEVELS
 
     results: List[Dict[str, Any]] = []
     verified_count = 0
@@ -345,8 +783,9 @@ def main() -> int:
         if expected_status in ["partial_trace", "verified_in_memory", "verified_local"]:
             executed_ok, out, dur = run_command(evidence_cmd, repo_root, timeout=timeout)
             if not executed_ok:
+                error_summary = extract_failure_summary(out, redactions=redactions)
                 print(f"  Dictamen    : [FALLO DE EVIDENCIA -> EXPERIMENTAL] ({dur:.2f}s)")
-                print(f"  Error Detalle: {out[:120]}...")
+                print("  Error Detalle:\n" + textwrap.indent(error_summary, "    "))
                 experimental_count += 1
                 if required or expected_status != "experimental":
                     failed_claims.append(claim_id)
@@ -360,7 +799,7 @@ def main() -> int:
                         "suite_passed": False,
                         "duration_s": round(dur, 3),
                         "component": component,
-                        "error": out[:200],
+                        "error": error_summary,
                     }
                 )
                 continue
@@ -402,8 +841,9 @@ def main() -> int:
                 }
             )
         else:
+            error_summary = extract_failure_summary(out, redactions=redactions)
             print(f"  Dictamen    : [FALLO DE EVIDENCIA -> EXPERIMENTAL] ({dur:.2f}s)")
-            print(f"  Error Detalle: {out[:120]}...")
+            print("  Error Detalle:\n" + textwrap.indent(error_summary, "    "))
             experimental_count += 1
             if required or expected_status != "experimental":
                 failed_claims.append(claim_id)
@@ -417,16 +857,18 @@ def main() -> int:
                     "suite_passed": False,
                     "duration_s": round(dur, 3),
                     "component": component,
-                    "error": out[:200],
+                    "error": error_summary,
                 }
             )
 
     print("\n" + "=" * 80)
+    execute_invariant_suites(inv_records, inv_errors, repo_root, redactions)
     print("RESUMEN EPISÓDICO DE VERIFICACIÓN (CLAIMS.toml)")
     print(f"  Verificados Rigurosos : {verified_count}")
     print(f"  Acotados / Parciales  : {partial_count}")
     print(f"  Degradados a Experim. : {experimental_count}")
     print(f"  Total Auditados       : {len(claims)}")
+    print(f"  Bloques [invariants.*]: {len(inv_records)} (errores de alineación: {len(inv_errors)})")
     print("=" * 80)
 
     sitrep_path = repo_root / "scripts" / "c5_quality_gates" / "claims_sitrep.json"
@@ -445,6 +887,9 @@ def main() -> int:
                 "experimental": experimental_count,
                 "failed_claims": failed_claims,
                 "claims": results,
+                "total_invariants": len(inv_records),
+                "invariant_alignment_errors": inv_errors,
+                "invariants": inv_records,
             },
             indent=2,
         ),
@@ -452,11 +897,15 @@ def main() -> int:
     )
     print(f"[✓] Sitrep criptográfico exportado a: {sitrep_path.relative_to(repo_root)}")
 
+    if inv_errors:
+        for err in inv_errors:
+            print(f"[FAIL-CLOSED] {err}", file=sys.stderr)
     if failed_claims:
         print(
             f"[FAIL-CLOSED] {len(failed_claims)} claim(s) fallaron su evidencia en silicio: {', '.join(failed_claims)}",
             file=sys.stderr,
         )
+    if failed_claims or inv_errors:
         return 1
     return 0
 

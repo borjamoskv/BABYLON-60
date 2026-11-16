@@ -1,8 +1,8 @@
 """
-Kimi K3 Swarm Sovereign Orchestrator — C5-REAL (v2.0)
+Swarm Sovereign Orchestrator — C5-REAL (v2.0)
 
-Ingeniería inversa del patrón "K3 Swarm máx." con:
-  - Dual-backend: Moonshot API remota ↔ vLLM/MLX local (air-gapped)
+Orquestador de enjambre PxS con:
+  - Backend local por defecto (vLLM/MLX, air-gapped); OpenRouter remoto solo si se selecciona
   - Telemetría de kernel macOS (ru_nivcsw, ru_nvcsw) en cada colapso
   - Resiliencia: reintentos con backoff exponencial + circuit breaker
   - Streaming de progreso vía callbacks
@@ -40,7 +40,6 @@ log = logging.getLogger("swarm")
 class InferenceBackend(Enum):
     """Selector de backend de inferencia."""
 
-    MOONSHOT_REMOTE = "moonshot"  # API remota (api.moonshot.cn)
     OPENROUTER_REMOTE = "openrouter"  # API remota (openrouter.ai/api/v1)
     LOCAL_VLLM = "local_vllm"  # vLLM local (OpenAI-compatible)
     LOCAL_MLX = "local_mlx"  # MLX server local (Apple Silicon)
@@ -48,7 +47,6 @@ class InferenceBackend(Enum):
 
 LOOPBACK_HOSTS = frozenset({"127.0.0.1", "localhost", "::1"})
 PROVIDER_HOSTS = {
-    InferenceBackend.MOONSHOT_REMOTE: "api.moonshot.cn",
     InferenceBackend.OPENROUTER_REMOTE: "openrouter.ai",
 }
 
@@ -105,15 +103,6 @@ def _validate_endpoint(url: str, backend: InferenceBackend) -> str:
     return str(parsed)
 
 
-def _get_default_moonshot_url() -> str:
-    url = os.getenv("MOONSHOT_API_URL") or "https://api.moonshot.cn/v1/chat/completions"
-    return _validate_endpoint(url, InferenceBackend.MOONSHOT_REMOTE)
-
-
-def _get_default_moonshot_key() -> str:
-    return os.getenv("KIMI_API_KEY") or os.getenv("MOONSHOT_API_KEY") or ""
-
-
 def _get_default_openrouter_url() -> str:
     url = os.getenv("OPENROUTER_API_URL") or "https://openrouter.ai/api/v1/chat/completions"
     return _validate_endpoint(url, InferenceBackend.OPENROUTER_REMOTE)
@@ -140,20 +129,18 @@ class SwarmConfig:
     p_cores: int = 4
     s_threads: int = 1
 
-    # Backend de inferencia
-    backend: InferenceBackend = InferenceBackend.MOONSHOT_REMOTE
+    # Backend de inferencia. El defecto es local: un enjambre sin configurar
+    # no resuelve credenciales remotas ni envía nada fuera de loopback.
+    backend: InferenceBackend = InferenceBackend.LOCAL_VLLM
 
     # Endpoints
-    moonshot_url: str | None = field(default=None, repr=False)
-    moonshot_key: str | None = field(default=None, repr=False)
-    moonshot_model: str | None = None
-
     openrouter_url: str | None = field(default=None, repr=False)
     openrouter_key: str | None = field(default=None, repr=False)
     openrouter_model: str | None = None
 
     local_url: str = field(default="http://localhost:8000/v1/chat/completions", repr=False)
-    local_model: str = "kimi-k3-1bit"  # Nombre del modelo en vLLM/MLX
+    # Nombre del modelo en vLLM/MLX (misma convención que 02_EDIN_SWARMS).
+    local_model: str = os.getenv("BABYLON_LOCAL_LLM_MODEL", "deepseek-r1-distill-qwen-32b")
 
     # Termodinámica
     temperature: float = 0.3
@@ -169,26 +156,20 @@ class SwarmConfig:
     def __post_init__(self) -> None:
         self.backend = _parse_backend(self.backend)
         url = self._url_for(self.backend)
-        if self.backend == InferenceBackend.MOONSHOT_REMOTE:
-            self.moonshot_url = url
-        elif self.backend == InferenceBackend.OPENROUTER_REMOTE:
+        if self.backend == InferenceBackend.OPENROUTER_REMOTE:
             self.openrouter_url = url
         else:
             self.local_url = url
 
     def _url_for(self, backend: InferenceBackend) -> str:
-        if backend == InferenceBackend.MOONSHOT_REMOTE:
-            url = self.moonshot_url if self.moonshot_url is not None else _get_default_moonshot_url()
-        elif backend == InferenceBackend.OPENROUTER_REMOTE:
+        if backend == InferenceBackend.OPENROUTER_REMOTE:
             url = self.openrouter_url if self.openrouter_url is not None else _get_default_openrouter_url()
         else:
             url = self.local_url
         return _validate_endpoint(url, backend)
 
     def _key_for(self, backend: InferenceBackend) -> str:
-        if backend == InferenceBackend.MOONSHOT_REMOTE:
-            key = self.moonshot_key if self.moonshot_key is not None else _get_default_moonshot_key()
-        elif backend == InferenceBackend.OPENROUTER_REMOTE:
+        if backend == InferenceBackend.OPENROUTER_REMOTE:
             key = self.openrouter_key if self.openrouter_key is not None else _get_default_openrouter_key()
         else:
             return ""
@@ -197,13 +178,7 @@ class SwarmConfig:
         return key
 
     def _model_for(self, backend: InferenceBackend) -> str:
-        if backend == InferenceBackend.MOONSHOT_REMOTE:
-            model = (
-                self.moonshot_model
-                if self.moonshot_model is not None
-                else os.getenv("MOONSHOT_MODEL", "moonshot-v1-auto")
-            )
-        elif backend == InferenceBackend.OPENROUTER_REMOTE:
+        if backend == InferenceBackend.OPENROUTER_REMOTE:
             model = (
                 self.openrouter_model
                 if self.openrouter_model is not None
@@ -634,17 +609,17 @@ async def run_swarm_orchestrator(
     prompt: str,
     p_cores: int = 4,
     s_threads: int = 1,
-    backend: str = "moonshot",
+    backend: str = "local_vllm",
     on_progress: Optional[Callable[[int, str, float], None]] = None,
 ) -> str:
     """
-    Punto de entrada principal del Kimi Swarm Soberano.
+    Punto de entrada principal del Swarm Soberano.
 
     Args:
         prompt: Tarea compleja a descomponer y resolver en paralelo.
         p_cores: Procesos paralelos (cores lógicos asignados).
         s_threads: Hilos de I/O por core (concurrencia de red).
-        backend: "moonshot" | "openrouter" | "local_vllm" | "local_mlx"
+        backend: "local_vllm" (defecto) | "local_mlx" | "openrouter"
         on_progress: Callback opcional para streaming de progreso.
 
     Returns:

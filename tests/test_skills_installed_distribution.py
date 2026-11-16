@@ -45,19 +45,21 @@ def test_skills_catalog_from_installed_wheel(tmp_path: Path) -> None:
     # -I ignores PYTHONPATH and the checkout; existing dependencies remain available.
     script = """
 import argparse
+import json
 import sys
 from pathlib import Path
 sys.path.insert(0, sys.argv[1])
 from babylon60.cli.main_dispatcher import cmd_skills
 from babylon60.mcp.cortex_mcp_server import CortexMCPServer
+expected_total = len(json.loads(Path(sys.argv[2]).read_text(encoding="utf-8"))["entries"])
 server = CortexMCPServer(ledger_path=Path('ledger.db'), causal_gate_path=Path('gate.db'))
-assert server._skills_snapshot.total_skills == 131
+assert server._skills_snapshot.total_skills == expected_total
 assert cmd_skills(argparse.Namespace(skills_action="list", scope="workspace", role="all", query=None, json=True)) == 0
 assert cmd_skills(argparse.Namespace(skills_action="route", scope="workspace", role="all", query="epistemic-simplifier", json=True)) == 0
 assert cmd_skills(argparse.Namespace(skills_action="status", scope="all", role="all", query=None, json=True)) == 0
 """
     result = subprocess.run(
-        [sys.executable, "-I", "-c", script, str(installed)],
+        [sys.executable, "-I", "-c", script, str(installed), str(root / "docs/skills.json")],
         cwd=tmp_path,
         check=True,
         capture_output=True,

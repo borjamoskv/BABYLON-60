@@ -1,6 +1,6 @@
 name = "babylon"
 version = "0.1.0"
-defaultTargets = ["Babylon", "BabylonOracle", "BabylonTrace", "AX0", "NavierStokesBKM", "NavierStokesSobolevKato", "C5PortHamiltonian", "C5Affine", "NemesisWave4", "MolochLandauer", "LarsaEquivocationSafety", "BabylonL0Ledger"]
+defaultTargets = ["Babylon", "BabylonOracle", "BabylonTrace", "AX0", "NavierStokesBKM", "NavierStokesSobolevKato", "C5PortHamiltonian", "C5Affine", "NemesisWave4", "MolochLandauer", "LarsaEquivocationSafety", "BabylonL0Ledger", "CanonicalHead", "CanonicalEnvelope", "AcsEnvelope", "TicketEnvelope", "Destiladora_838c463da193b48f", "ExampleSeqlockTrace", "BabylonAeonChain", "BabylonAeonStress", "BabylonStressTrace"]
 
 [[lean_lib]]
 name = "BabylonL0Ledger"
@@ -37,6 +37,34 @@ name = "NemesisWave4"
 
 [[lean_lib]]
 name = "MolochLandauer"
+
+# Fuentes antes huérfanas: compiladas en temporal, nunca por `lake build`.
+[[lean_lib]]
+name = "CanonicalHead"
+
+[[lean_lib]]
+name = "CanonicalEnvelope"
+
+[[lean_lib]]
+name = "AcsEnvelope"
+
+[[lean_lib]]
+name = "TicketEnvelope"
+
+[[lean_lib]]
+name = "Destiladora_838c463da193b48f"
+
+[[lean_lib]]
+name = "ExampleSeqlockTrace"
+
+[[lean_lib]]
+name = "BabylonAeonChain"
+
+[[lean_lib]]
+name = "BabylonAeonStress"
+
+[[lean_lib]]
+name = "BabylonStressTrace"
 
 # 1. Base C5-REAL (Estructuras de Datos y Concurrencia)
 [[require]]

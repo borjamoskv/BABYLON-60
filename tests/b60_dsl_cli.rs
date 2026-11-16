@@ -53,7 +53,13 @@ fn run_cli(source: &str) -> Run {
     let output = child.wait_with_output().unwrap();
     let root = workspace.0.join("artifact_bundle_v3");
     let bundle = if root.join("quarantine").exists() {
-        root.join("quarantine")
+        // C0381: cada exportación forense vive en su propio subdirectorio exclusivo.
+        let mut exports: Vec<_> = fs::read_dir(root.join("quarantine"))
+            .unwrap()
+            .map(|entry| entry.unwrap().path())
+            .collect();
+        assert_eq!(exports.len(), 1, "se esperaba una única exportación forense");
+        exports.remove(0)
     } else {
         root
     };

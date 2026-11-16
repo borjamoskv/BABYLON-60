@@ -242,7 +242,9 @@ fn decode_context(value: &str) -> Result<[u8; 32], GeometryError> {
         ));
     }
     let mut result = [0u8; 32];
-    for (slot, pair) in result.iter_mut().zip(value.as_bytes().chunks_exact(2)) {
+    let (pairs, rem) = value.as_bytes().as_chunks::<2>();
+    debug_assert!(rem.is_empty());
+    for (slot, pair) in result.iter_mut().zip(pairs) {
         let digit = |b: u8| {
             if b <= b'9' {
                 b - b'0'

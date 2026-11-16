@@ -23,6 +23,8 @@
 
 use blake3::Hasher;
 
+pub mod wire;
+
 // ── Constantes públicas ──────────────────────────────────────────────────────
 
 /// Código de parada de emergencia (Fail-Stop 0xDEAD_6060).
@@ -251,8 +253,6 @@ pub mod linux_tpm2 {
     use std::fs::{File, OpenOptions};
     use std::io::{Read, Write};
 
-    const TPM_ST_SESSIONS: u16 = 0x8002;
-    const TPM_CC_QUOTE: u32 = 0x0000_0158;
     const TPM_RC_SUCCESS: u32 = 0x0000_0000;
 
     /// Compuerta hardware para Linux TPM 2.0 via Kernel Resource Manager.
@@ -290,36 +290,125 @@ pub mod linux_tpm2 {
 
         /// Construye el paquete binario `TPM2_Quote` con `qualifyingData` = digest causal
         /// y selección de PCR 0, 7 y 14 en el banco SHA-256 (alg ID = 0x000B).
+        ///
+        /// Delegado en [`super::wire::build_quote_command`] (neutral de plataforma).
         fn build_quote_command(&self, qualifying_digest: &[u8; 32]) -> [u8; 73] {
-            let mut cmd = [0u8; 73];
-            cmd[0..2].copy_from_slice(&TPM_ST_SESSIONS.to_be_bytes());
-            cmd[2..6].copy_from_slice(&(73u32).to_be_bytes());
-            cmd[6..10].copy_from_slice(&TPM_CC_QUOTE.to_be_bytes());
-            cmd[10..14].copy_from_slice(&self.ak_handle.to_be_bytes());
-
-            // AuthSession nula (TPM_RS_PW = 0x40000009), 9 bytes
-            cmd[14..18].copy_from_slice(&(9u32).to_be_bytes());
-            cmd[18..22].copy_from_slice(&0x4000_0009u32.to_be_bytes());
-            cmd[22..24].copy_from_slice(&0u16.to_be_bytes()); // nonce vacío
-            cmd[24] = 0x01; // continueSession
-            cmd[25..27].copy_from_slice(&0u16.to_be_bytes()); // hmac vacío
-
-            // qualifyingData: los 32 bytes del digest causal
-            cmd[27..29].copy_from_slice(&(32u16).to_be_bytes());
-            cmd[29..61].copy_from_slice(qualifying_digest);
-
-            // inScheme: TPM_ALG_NULL (0x0010) → usa esquema por defecto del AK
-            cmd[61..63].copy_from_slice(&0x0010u16.to_be_bytes());
-
-            // TPML_PCR_SELECTION: 1 banco SHA-256, máscara PCR 0, 7 y 14
-            cmd[63..67].copy_from_slice(&(1u32).to_be_bytes());
-            cmd[67..69].copy_from_slice(&0x000Bu16.to_be_bytes());
-            cmd[69] = 3; // sizeofSelect
-            cmd[70] = 0b1000_0001; // PCR 0 y PCR 7
-            cmd[71] = 0b0100_0000; // PCR 14
-            cmd[72] = 0x00;
-            cmd
+            super::wire::build_quote_command(self.ak_handle, qualifying_digest)
         }
+    }
+
+    const TPM_ST_SESSIONS_RESP: u16 = 0x8002;
+    const TPM_GENERATED_VALUE: u32 = 0xFF54_4347;
+    const TPM_ST_ATTEST_QUOTE: u16 = 0x8018;
+    const TPM_ALG_ECDSA: u16 = 0x0018;
+    const TPM_ALG_SHA256: u16 = 0x000B;
+
+    /// Cursor de lectura big-endian con límites; cualquier desbordamiento es `None`.
+    struct Rd<'a>(&'a [u8]);
+
+    impl<'a> Rd<'a> {
+        fn take(&mut self, n: usize) -> Option<&'a [u8]> {
+            if self.0.len() < n {
+                return None;
+            }
+            let (h, t) = self.0.split_at(n);
+            self.0 = t;
+            Some(h)
+        }
+        fn u16(&mut self) -> Option<u16> {
+            self.take(2).map(|b| u16::from_be_bytes([b[0], b[1]]))
+        }
+        fn u32(&mut self) -> Option<u32> {
+            self.take(4)
+                .map(|b| u32::from_be_bytes([b[0], b[1], b[2], b[3]]))
+        }
+        fn tpm2b(&mut self) -> Option<&'a [u8]> {
+            let n = self.u16()? as usize;
+            self.take(n)
+        }
+    }
+
+    /// Parsea una respuesta `TPM2_Quote` (TPM_ST_SESSIONS) y falla cerrado ante cualquier
+    /// desviación estructural. Devuelve `(r || s, pcrDigest atestado)`.
+    ///
+    /// Comprueba: tamaño declarado == longitud leída; `TPM_RC_SUCCESS`; `TPM_GENERATED`;
+    /// tipo `TPM_ST_ATTEST_QUOTE`; `extraData` == `expected_digest` (enlace causal);
+    /// `pcrDigest` == `expected_pcr`; firma ECDSA-SHA256 con `r` y `s` de 32 B no nulos.
+    ///
+    /// **Límite:** no verifica criptográficamente la firma; el gate no conoce la clave pública
+    /// del AK (solo un identificador). La verificación ECDSA corresponde al verificador externo.
+    pub(crate) fn parse_quote_response(
+        resp: &[u8],
+        expected_digest: &[u8; 32],
+        expected_pcr: &[u8; 32],
+    ) -> Result<([u8; 64], [u8; 32]), &'static str> {
+        let mut r = Rd(resp);
+        let tag = r.u16().ok_or("LinuxTPM2_ShortRead")?;
+        let size = r.u32().ok_or("LinuxTPM2_ShortRead")? as usize;
+        let rc = r.u32().ok_or("LinuxTPM2_ShortRead")?;
+        if size != resp.len() {
+            return Err("LinuxTPM2_SizeMismatch");
+        }
+        if rc != TPM_RC_SUCCESS {
+            return Err("LinuxTPM2_ResponseCode");
+        }
+        if tag != TPM_ST_SESSIONS_RESP {
+            return Err("LinuxTPM2_BadTag");
+        }
+        let param_size = r.u32().ok_or("LinuxTPM2_Malformed")? as usize;
+        let params = r.take(param_size).ok_or("LinuxTPM2_Malformed")?;
+        let mut p = Rd(params);
+
+        let attest_raw = p.tpm2b().ok_or("LinuxTPM2_Malformed")?;
+        let mut a = Rd(attest_raw);
+        if a.u32().ok_or("LinuxTPM2_Malformed")? != TPM_GENERATED_VALUE {
+            return Err("LinuxTPM2_NotTpmGenerated");
+        }
+        if a.u16().ok_or("LinuxTPM2_Malformed")? != TPM_ST_ATTEST_QUOTE {
+            return Err("LinuxTPM2_NotQuote");
+        }
+        a.tpm2b().ok_or("LinuxTPM2_Malformed")?; // qualifiedSigner
+        if a.tpm2b().ok_or("LinuxTPM2_Malformed")? != expected_digest {
+            return Err("LinuxTPM2_ExtraDataMismatch");
+        }
+        a.take(17 + 8).ok_or("LinuxTPM2_Malformed")?; // clockInfo + firmwareVersion
+        let banks = a.u32().ok_or("LinuxTPM2_Malformed")?;
+        if banks == 0 || banks > 16 {
+            return Err("LinuxTPM2_Malformed");
+        }
+        for _ in 0..banks {
+            a.u16().ok_or("LinuxTPM2_Malformed")?;
+            let sz = a.take(1).ok_or("LinuxTPM2_Malformed")?[0] as usize;
+            a.take(sz).ok_or("LinuxTPM2_Malformed")?;
+        }
+        let pcr_digest = a.tpm2b().ok_or("LinuxTPM2_Malformed")?;
+        if pcr_digest != expected_pcr {
+            return Err("LinuxTPM2_PcrMismatch");
+        }
+        if !a.0.is_empty() {
+            return Err("LinuxTPM2_Malformed");
+        }
+
+        if p.u16().ok_or("LinuxTPM2_Malformed")? != TPM_ALG_ECDSA {
+            return Err("LinuxTPM2_UnsupportedSigAlg");
+        }
+        if p.u16().ok_or("LinuxTPM2_Malformed")? != TPM_ALG_SHA256 {
+            return Err("LinuxTPM2_UnsupportedSigHash");
+        }
+        let sig_r = p.tpm2b().ok_or("LinuxTPM2_Malformed")?;
+        let sig_s = p.tpm2b().ok_or("LinuxTPM2_Malformed")?;
+        if sig_r.len() != 32 || sig_s.len() != 32 {
+            return Err("LinuxTPM2_BadSigLen");
+        }
+        if sig_r.iter().all(|&b| b == 0) || sig_s.iter().all(|&b| b == 0) {
+            return Err("LinuxTPM2_ZeroSignature");
+        }
+        let mut signature = [0u8; 64];
+        signature[..32].copy_from_slice(sig_r);
+        signature[32..].copy_from_slice(sig_s);
+        let mut pcr = [0u8; 32];
+        pcr.copy_from_slice(pcr_digest);
+        Ok((signature, pcr))
     }
 
     impl HardwareSecurityGate for LinuxTpm2Gate {
@@ -365,15 +454,19 @@ pub mod linux_tpm2 {
                 });
             }
 
-            let mut signature = [0u8; 64];
-            if n >= 64 {
-                signature.copy_from_slice(&resp[n - 64..n]);
-            }
+            let (signature, attested_pcr) =
+                parse_quote_response(&resp[..n], &digest, &self.expected_pcr_composite).map_err(
+                    |backend| GateTrap::SiliconAttestationFailure {
+                        backend,
+                        errno: n as i32,
+                        code: FAIL_STOP_CODE,
+                    },
+                )?;
 
             Ok(HardwareReceipt {
                 signature,
                 public_key_id: self.ak_pubkey_id,
-                pcr_or_enclave_measurement: self.expected_pcr_composite,
+                pcr_or_enclave_measurement: attested_pcr,
             })
         }
     }
@@ -436,23 +529,10 @@ pub mod aws_nitro {
 
         /// Codifica en CBOR estático (sin heap) una petición `Attestation` con
         /// `user_data` (32 B del digest causal) y `nonce` (8 B del `logical_tick`).
+        ///
+        /// Delegado en [`super::wire::encode_cbor_attestation_req`] (neutral de plataforma).
         fn encode_cbor_attestation_req(digest: &[u8; 32], tick: u64) -> [u8; 73] {
-            let mut req = [0u8; 73];
-            // map(1): {"Attestation": {"user_data": bstr(32), "nonce": bstr(8)}}
-            req[0] = 0xA1; // map(1)
-            req[1] = 0x6B; // text(11)
-            req[2..13].copy_from_slice(b"Attestation");
-            req[13] = 0xA2; // map(2)
-            req[14] = 0x69; // text(9)
-            req[15..24].copy_from_slice(b"user_data");
-            req[24] = 0x58; // bytes(one-byte length)
-            req[25] = 0x20; // 32
-            req[26..58].copy_from_slice(digest);
-            req[58] = 0x65; // text(5)
-            req[59..64].copy_from_slice(b"nonce");
-            req[64] = 0x48; // bytes(8)
-            req[65..73].copy_from_slice(&tick.to_be_bytes());
-            req
+            super::wire::encode_cbor_attestation_req(digest, tick)
         }
     }
 

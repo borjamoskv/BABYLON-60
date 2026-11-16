@@ -83,16 +83,68 @@ def test_distribution_is_portable_and_router_runs(tmp_path: Path, environment: s
         build(output, environment)
 
 
-def test_codex_override_preserved(tmp_path: Path) -> None:
+def test_codex_override_preserved(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    import shutil
+    import scripts.c5_skills_ontology.build_skill_library as builder_mod
+
+    source = tmp_path / "skill_library"
+    source.mkdir()
+    shutil.copy2(builder_mod.SOURCE / "router.py", source / "router.py")
+    shutil.copytree(builder_mod.SOURCE / "checks", source / "checks")
+    (source / "workspace").mkdir()
+    (source / "global/sample-skill").mkdir(parents=True)
+    (source / "global/sample-skill/SKILL.md").write_text(
+        "---\nname: sample-skill\ndescription: Global sample\n---\n\nGlobal body\n"
+    )
+    (source / "codex_overrides/sample-skill").mkdir(parents=True)
+    (source / "codex_overrides/sample-skill/SKILL.md").write_text(
+        "---\nname: sample-skill\ndescription: Codex sample\n---\n\nCodex override body\n"
+    )
+    (source / "codex_overrides/codex-only").mkdir(parents=True)
+    (source / "codex_overrides/codex-only/SKILL.md").write_text(
+        "---\nname: codex-only\ndescription: Codex only\n---\n\nCodex only body\n"
+    )
+    (source / "global/skills.json").write_text(
+        json.dumps({"version": "1", "total_skills": 1, "entries": [{"name": "sample-skill"}], "adjacency": []})
+    )
+    (source / "catalog.json").write_text(
+        json.dumps(
+            {
+                "version": 2,
+                "policy": {
+                    "generic": [],
+                    "continuations": [],
+                    "default_actions": ["run"],
+                    "automatic_execution": False,
+                },
+                "scopes": {
+                    "global": {"sample-skill": {"name": "sample-skill", "description": "Global sample"}},
+                    "workspace": {},
+                    "codex_overrides": {
+                        "sample-skill": {"name": "sample-skill", "description": "Codex sample"},
+                        "codex-only": {"name": "codex-only", "description": "Codex only"},
+                    },
+                },
+                "capabilities": {
+                    "global": {"sample-skill": {"aliases": ["sample"], "intent": {"topics": ["sample"]}}},
+                    "workspace": {},
+                    "codex_overrides": {
+                        "sample-skill": {"aliases": ["sample"], "intent": {"topics": ["sample"]}},
+                        "codex-only": {"aliases": ["codex-only"], "intent": {"topics": ["codex-only"]}},
+                    },
+                },
+            }
+        )
+    )
+    monkeypatch.setattr(builder_mod, "SOURCE", source)
+
     codex = tmp_path / "codex"
     global_ = tmp_path / "global"
-    build(codex, "codex")
-    build(global_, "antigravity")
-    assert (codex / "youtube-remotion-sota/SKILL.md").read_text() != (
-        global_ / "youtube-remotion-sota/SKILL.md"
-    ).read_text()
-    assert (codex / "wrangler/SKILL.md").is_file()
-    assert not (global_ / "wrangler").exists()
+    builder_mod.build(codex, "codex")
+    builder_mod.build(global_, "antigravity")
+    assert (codex / "sample-skill/SKILL.md").read_text() != (global_ / "sample-skill/SKILL.md").read_text()
+    assert (codex / "codex-only/SKILL.md").is_file()
+    assert not (global_ / "codex-only").exists()
 
 
 def test_legacy_registry_contract_preserved(tmp_path: Path) -> None:

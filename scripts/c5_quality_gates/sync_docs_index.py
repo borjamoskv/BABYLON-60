@@ -15,9 +15,16 @@ import logging
 from pathlib import Path
 from typing import Dict, List
 
-REPO_ROOT = Path(__file__).resolve().parent.parent.parent
+REPO_ROOT = Path(__file__).absolute().parent.parent.parent
 DOCS_DIR = REPO_ROOT / "docs"
 INDEX_FILE = DOCS_DIR / "00_index.md"
+
+
+def _is_confined_to_repo(path: Path, root: Path = REPO_ROOT) -> bool:
+    try:
+        return path.resolve().is_relative_to(root.resolve())
+    except OSError:
+        return False
 
 SECTION_NAMES = {
     "root": "⚡ Sovereign Core & Executive Specifications",
@@ -58,7 +65,13 @@ def main() -> None:
     parser.add_argument("--json", action="store_true", help="Emit the document graph as pure JSON for inter-agentic consumption")
     args = parser.parse_args()
 
-    md_files = sorted([p for p in DOCS_DIR.rglob("*.md") if p.name != "00_index.md" and ".lake" not in p.parts])
+    md_files = sorted(
+        [
+            p
+            for p in DOCS_DIR.rglob("*.md")
+            if p.name != "00_index.md" and ".lake" not in p.parts and _is_confined_to_repo(p, REPO_ROOT)
+        ]
+    )
     by_section: Dict[str, List[Dict[str, str]]] = {}
     
     for p in md_files:
@@ -118,6 +131,8 @@ def main() -> None:
     lines.append("")
     
     content = "\n".join(lines)
+    if not _is_confined_to_repo(INDEX_FILE, REPO_ROOT):
+        raise ValueError(f"Unconfined index target outside REPO_ROOT: {INDEX_FILE}")
     INDEX_FILE.write_text(content, encoding="utf-8")
     print(f"[+] Successfully synchronized master index at {INDEX_FILE} with all {len(md_files)} docs!")
 

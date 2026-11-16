@@ -1,0 +1,229 @@
+[swarm]
+name = "BABYLON-60-SWARM-100"
+version = "5.1.0"
+topology = "MOSKV-1"
+total_agents = 100
+total_tandas = 10
+barrier_policy = "FAIL_CLOSED"
+authority_invariant = "ModelSelection_NOT_IMPLIES_AuthorityEscalation"
+apoptosis_code = "0xDEAD_6060"
+
+[tanda.01]
+name = "Ring-0 Silicio & Concurrencia ARM64"
+goal = "Garantizar ausencia total de Data Races, UB y desalineación en silicio ARMv9"
+plan = [
+  "Compilar bajo Miri strict-provenance",
+  "Verificar barreras Acquire/Release y dmb ishld",
+  "Certificar repr(align(64))",
+  "Validar fail-stop 0xDEAD_6060",
+]
+agents = [
+  { id = "B60-AG001", model = "gemini-4-carbon", name = "SPSC-Strict-Provenance-Auditor", target = "crates/kernel/src/spsc.rs", goal = "Verificar procedencia de punteros en ring buffer SPSC" },
+  { id = "B60-AG002", model = "gemini-4-carbon", name = "SPSC-Tree-Borrows-Sanitizer", target = "crates/kernel/src/spsc.rs", goal = "Anular intermediarios &mut T que violen aliasing" },
+  { id = "B60-AG003", model = "gemini-4-hydrogen", name = "ARM64-Acq-Rel-Barrier-Linter", target = "crates/kernel/src/atomic.rs", goal = "Imponer Release en publicación y Acquire en consumo" },
+  { id = "B60-AG004", model = "gemini-4-hydrogen", name = "Cacheline-64B-Alignment-Guard", target = "crates/kernel/src/manifest.rs", goal = "Evitar false-sharing alineando a línea L1 física" },
+  { id = "B60-AG005", model = "gemini-4-carbon", name = "Seqlock-SPMC-Reader-RFO-Zero", target = "crates/kernel/src/seqlock.rs", goal = "Garantizar lecturas sin escrituras de invalidación (RFO=0)" },
+  { id = "B60-AG006", model = "gemini-4-hydrogen", name = "Atomic-Poison-Apoptosis-Gate", target = "crates/kernel/src/lifecycle.rs", goal = "Transición irreversible a POISONED=0xDEAD_6060 ante pánico" },
+  { id = "B60-AG007", model = "gemini-4-hydrogen", name = "Thread-Affinity-Core-Pinning", target = "crates/kernel/src/affinity.rs", goal = "Fijar hilos críticos a P-Cores en Apple Silicon" },
+  { id = "B60-AG008", model = "gemini-4-hydrogen", name = "SIMD-NEON-F64-Epsilon-Checker", target = "crates/kernel/src/simd.rs", goal = "Validar SIMD mediante error relativo normalizado < 1e-11" },
+  { id = "B60-AG009", model = "gemini-4-hydrogen", name = "RingBuffer-Power2-Mask-Auditor", target = "crates/kernel/src/ring.rs", goal = "Garantizar capacidad 2^k con enmascaramiento bitwise" },
+  { id = "B60-AG010", model = "gemini-4-hydrogen", name = "SharedMem-PageFault-Prewarmer", target = "crates/kernel/src/shm.rs", goal = "Precalentar memoria vía madvise(MADV_WILLNEED)" },
+]
+
+[tanda.02]
+name = "Sub-Kernel Filesystem & Descriptores"
+goal = "Aislar FS local frente a symlinks, carreras TOCTOU y aperturas no confinadas"
+plan = [
+  "Anclar raíz con O_DIRECTORY | O_NOFOLLOW",
+  "Resolver componente a componente con openat",
+  "Mutar sobre mismo FD (fstat->hash->fstat)",
+  "Cuarentena previa con renameatx",
+]
+agents = [
+  { id = "B60-AG011", model = "gemini-4-carbon", name = "O-Directory-Root-Anchor", target = "src/secure_fs.rs", goal = "Exigir apertura raíz con O_DIRECTORY y O_NOFOLLOW" },
+  { id = "B60-AG012", model = "gemini-4-carbon", name = "Component-Step-Openat-Walker", target = "src/secure_fs.rs", goal = "Resolver rutas relativas sin desreferenciar symlinks" },
+  { id = "B60-AG013", model = "gemini-4-hydrogen", name = "Inode-Device-Identity-Linter", target = "src/capability.rs", goal = "Vincular handles a la tupla inmutable (st_dev, st_ino)" },
+  { id = "B60-AG014", model = "gemini-4-hydrogen", name = "Fl008-Read-Fstat-Hash-Guard", target = "tests/admission_cap.rs", goal = "Verificar secuencia fstat->hash->fstat en lecturas" },
+  { id = "B60-AG015", model = "gemini-4-hydrogen", name = "Quarantine-Renameatx-Mover", target = "src/secure_fs.rs", goal = "Mover a .babylon/quarantine/ vía renameatx previo a borrado" },
+  { id = "B60-AG016", model = "gemini-4-hydrogen", name = "Quarantine-Dev-Boundary-Guard", target = "src/secure_fs.rs", goal = "Rechazar cuarentena si destino reside en otro montaje (EXDEV)" },
+  { id = "B60-AG017", model = "gemini-4-hydrogen", name = "Atomic-Mutate-File-Descriptor", target = "src/secure_fs.rs", goal = "Ejecutar MUTATE_FILE sobre el mismo FD con pwrite + fsync" },
+  { id = "B60-AG018", model = "gemini-4-hydrogen", name = "Pre-Unlink-Identity-Reverifier", target = "src/secure_fs.rs", goal = "Reverificar hash e inodo antes de invocar unlinkat" },
+  { id = "B60-AG019", model = "gemini-4-hydrogen", name = "Path-Absolute-Symlink-Checker", target = "scripts/c5_quality_gates/audit_domain_bleed.py", goal = "Prohibir Path.resolve() en symlinks; exigir Path.absolute()" },
+  { id = "B60-AG020", model = "gemini-4-carbon", name = "Fs-Descriptor-NoFollow-Auditor", target = "src/secure_fs.rs", goal = "Abrir con O_NOFOLLOW en vez de comprobar is_symlink()" },
+]
+
+[tanda.03]
+name = "Ring-1 Lógica Constructiva Lean 4"
+goal = "Certificar formalmente que ninguna transición contenga omisiones ni axiomas espurios"
+plan = [
+  "Escanear formal/ exigiendo 0 sorry y 0 admit",
+  "Validar biyección de recibos Rust L0 con tipos Lean 4",
+  "Compilar oráculo AOT nativo",
+  "Purgar axioma Classical.choice",
+]
+agents = [
+  { id = "B60-AG021", model = "gemini-4-carbon", name = "Lean4-Zero-Sorry-Admit-Gate", target = "proof/lean/SwarmTrace100.lean", goal = "Certificar 0 ocurrencias de sorry y admit en código formal" },
+  { id = "B60-AG022", model = "gemini-4-carbon", name = "Lean4-Rust-Receipt-Bijection", target = "src/ontology.rs", goal = "Validar biyección de campos entre ReceiptStage y Lean 4" },
+  { id = "B60-AG023", model = "gemini-4-carbon", name = "Lean4-Constructive-Axiom-Purge", target = "proof/lean/Kernel.lean", goal = "Purgar Classical.choice en lemas computables del núcleo" },
+  { id = "B60-AG024", model = "gemini-4-carbon", name = "Lean4-Omega-Presburger-Unfold", target = "proof/lean/Seqlock.lean", goal = "Emitir unfold antes de omega en aritmética de paridad" },
+  { id = "B60-AG025", model = "gemini-4-hydrogen", name = "Lean4-AOT-Native-Oracle-Build", target = "proof/lean/lakefile.toml", goal = "Compilar oráculo formal nativo con cero warnings" },
+  { id = "B60-AG026", model = "gemini-4-carbon", name = "Lean4-DEC-Mimetic-Bitvector", target = "proof/lean/Dec.lean", goal = "Demostrar nilpotencia exacta a nivel de bit: d1 o d0 = 0" },
+  { id = "B60-AG027", model = "gemini-4-carbon", name = "Lean4-Emitter-Template-Linter", target = "crates/b60-lang/src/lean_emitter.rs", goal = "Auditar plantillas de código emitido por Lean4Emitter" },
+  { id = "B60-AG028", model = "gemini-4-carbon", name = "Lean4-Monotonic-Tick-Theorem", target = "proof/lean/Clock.lean", goal = "Demostrar teorema de incremento monótono de ticks lógicos" },
+  { id = "B60-AG029", model = "gemini-4-carbon", name = "Lean4-Quorum-Intersection", target = "proof/lean/Larsa.lean", goal = "Demostrar intersección de quórums 2f+1 sobre 3f+1" },
+  { id = "B60-AG030", model = "gemini-4-hydrogen", name = "Lean4-FailClosed-Match-Exhaust", target = "proof/lean/State.lean", goal = "Exigir exhaustividad sin comodines en pattern matching" },
+]
+
+[tanda.04]
+name = "Ring-1 Firewall Neurosimbólico Z3 SMT"
+goal = "Resolver restricciones de admisión en sub-5ms y purgar punteros C-FFI"
+plan = [
+  "Timeout estricto en solver (<=50ms)",
+  "Validar 7-tupla formal de autoridad",
+  "Búsqueda activa de contraejemplos",
+  "Purga de memoria C-FFI (del solver)",
+]
+agents = [
+  { id = "B60-AG031", model = "gemini-4-carbon", name = "Z3-Pre-Lean-Admission-Gate", target = "crates/kernel/src/z3_gate.rs", goal = "Poda neurosimbólica sub-5ms antes de invocar oráculo Lean 4" },
+  { id = "B60-AG032", model = "gemini-4-hydrogen", name = "Z3-Context-Landauer-Annihilator", target = "src/z3_firewall.py", goal = "Destruir explícitamente instancias Z3 liberando C-FFI" },
+  { id = "B60-AG033", model = "gemini-4-hydrogen", name = "Z3-Bounded-Timeout-Sentinel", target = "src/z3_firewall.rs", goal = "Fijar hard timeout de 50ms con retorno DENY ante expiración" },
+  { id = "B60-AG034", model = "gemini-4-carbon", name = "Z3-Policy-Subsumption-Auditor", target = "src/capability.rs", goal = "Demostrar que políticas delegadas son subconjuntos válidos" },
+  { id = "B60-AG035", model = "gemini-4-carbon", name = "Z3-Authority-7Tuple-Validator", target = "src/authorization.rs", goal = "Validar completitud de la 7-tupla de autoridad sin nulos" },
+  { id = "B60-AG036", model = "gemini-4-hydrogen", name = "Z3-Vacuous-Disjunction-Pruner", target = "src/z3_firewall.rs", goal = "Detectar y podar ramas disyuntivas tautológicas" },
+  { id = "B60-AG037", model = "gemini-4-hydrogen", name = "Z3-Counterexample-Searcher", target = "tests/z3_adversarial.rs", goal = "Buscar modelos SAT que contradigan invariantes de aislamiento" },
+  { id = "B60-AG038", model = "gemini-4-hydrogen", name = "Z3-Epoch-Monotonicity-Checker", target = "src/epoch.rs", goal = "Verificar que ningún agente admita épocas decrecientes" },
+  { id = "B60-AG039", model = "gemini-4-hydrogen", name = "Z3-Nonce-Window-Bitset-Linter", target = "src/nonce.rs", goal = "Auditar ventana de nonces descartando desbordamientos" },
+  { id = "B60-AG040", model = "gemini-4-hydrogen", name = "Z3-Solver-Panic-FailClosed", target = "crates/kernel/src/z3_gate.rs", goal = "Asegurar que fallos en Z3 transicionen a FAIL_CLOSED" },
+]
+
+[tanda.05]
+name = "Ring-2 Ledger L0 SQLite WAL & WORM"
+goal = "Persistencia síncrona atómica libre de TOCTOU con triggers de inmutabilidad"
+plan = [
+  "Forzar BEGIN IMMEDIATE en escrituras",
+  "PRAGMA synchronous = FULL y mode = WAL",
+  "Triggers BEFORE UPDATE/DELETE abortando",
+  "Encadenamiento BLAKE3 al anterior",
+]
+agents = [
+  { id = "B60-AG041", model = "gemini-4-carbon", name = "SQLite-Begin-Immediate-Gate", target = "crates/l0/src/db.rs", goal = "Imponer BEGIN IMMEDIATE para adquirir bloqueo al inicio" },
+  { id = "B60-AG042", model = "gemini-4-hydrogen", name = "SQLite-Wal-Synchronous-Full", target = "crates/l0/src/db.rs", goal = "Configurar synchronous = FULL contra cortes de alimentación" },
+  { id = "B60-AG043", model = "gemini-4-carbon", name = "SQLite-Ledger-Trigger-Abort", target = "crates/l0/src/schema.sql", goal = "Instalar triggers BEFORE UPDATE/DELETE que lancen ABORT" },
+  { id = "B60-AG044", model = "gemini-4-hydrogen", name = "SQLite-Receipt-Hashchain-Link", target = "crates/l0/src/ledger.rs", goal = "Encadenar cada fila al digest BLAKE3 del recibo precedente" },
+  { id = "B60-AG045", model = "gemini-4-hydrogen", name = "SQLite-Single-Writer-Pool-Linter", target = "crates/l0/src/pool.rs", goal = "Limitar el pool de conexiones a exactamente 1 escritor" },
+  { id = "B60-AG046", model = "gemini-4-hydrogen", name = "SQLite-Shm-Wal-RAM-Cleaner", target = "tests/common/db.rs", goal = "Limpiar triplete .db, .db-wal y .db-shm en tests" },
+  { id = "B60-AG047", model = "gemini-4-hydrogen", name = "SQLite-Magic-Header-Sentinel", target = "crates/l0/src/fs.rs", goal = "Comprobar cabecera mágica 'SQLite format 3' al arranque" },
+  { id = "B60-AG048", model = "gemini-4-hydrogen", name = "SQLite-Busy-Backoff-Scheduler", target = "crates/l0/src/retry.rs", goal = "Implementar retroceso exponencial acotado ante SQLITE_BUSY" },
+  { id = "B60-AG049", model = "gemini-4-hydrogen", name = "SQLite-Monotonic-Migration-Gate", target = "crates/l0/src/migrate.rs", goal = "Garantizar migraciones monótonas sin soporte de downgrade" },
+  { id = "B60-AG050", model = "gemini-4-carbon", name = "SQLite-Cold-MMR-Attestation-Sync", target = "crates/l0/src/mmr.rs", goal = "Sincronizar raíces MMR hacia almacenamiento WORM inmutable" },
+]
+
+[tanda.06]
+name = "Ring-2 Consenso LARSA-120 & Mimética DEC"
+goal = "Consenso tolerante a fallos bizantinos con nilpotencia exacta y reloj lógico puro"
+plan = [
+  "Verificar Quorum Certificates (2f+1)",
+  "Detectar equivocación y emitir slashing",
+  "Nilpotencia exacta en cálculo exterior",
+  "Inyectar tick lógico causal",
+]
+agents = [
+  { id = "B60-AG051", model = "gemini-4-carbon", name = "LARSA-Quorum-Certificate-Gate", target = "crates/larsa/src/quorum.rs", goal = "Exigir 2f+1 firmas válidas antes de comprometer bloques" },
+  { id = "B60-AG052", model = "gemini-4-carbon", name = "LARSA-Equivocation-Detector", target = "crates/larsa/src/equivocation.rs", goal = "Detectar doble firma del mismo par en la misma época" },
+  { id = "B60-AG053", model = "gemini-4-carbon", name = "LARSA-View-Change-Monotonicity", target = "crates/larsa/src/view.rs", goal = "Garantizar avance monótono estricto de vista de consenso" },
+  { id = "B60-AG054", model = "gemini-4-carbon", name = "LARSA-Two-Phase-Commit-Lock", target = "crates/larsa/src/commit.rs", goal = "Bloquear estados entre Prepare y Commit contra bifurcaciones" },
+  { id = "B60-AG055", model = "gemini-4-carbon", name = "LARSA-DEC-Exact-Nilpotency", target = "crates/larsa/src/dec.rs", goal = "Validar nilpotencia exacta a nivel de bit: d1 o d0 = 0" },
+  { id = "B60-AG056", model = "gemini-4-hydrogen", name = "LARSA-Solenoidal-Vector-Field", target = "crates/larsa/src/solenoidal.rs", goal = "Comprobar divergencia cero (nabla · J = 0) en balances" },
+  { id = "B60-AG057", model = "gemini-4-hydrogen", name = "LARSA-Logical-Tick-Enforcer", target = "crates/larsa/src/clock.rs", goal = "Inyectar logical_tick; prohibir SystemTime::now()" },
+  { id = "B60-AG058", model = "gemini-4-hydrogen", name = "LARSA-Peer-Slashing-Trigger", target = "crates/larsa/src/slashing.rs", goal = "Revocar autoridad deterministamente ante firmas corruptas" },
+  { id = "B60-AG059", model = "gemini-4-hydrogen", name = "LARSA-Deduplication-Sliding-Win", target = "crates/larsa/src/dedup.rs", goal = "Descartar nonces duplicados con ventana deslizante en RAM" },
+  { id = "B60-AG060", model = "gemini-4-hydrogen", name = "LARSA-Sync-Chunk-Blake3-Verifier", target = "crates/larsa/src/sync.rs", goal = "Validar chunks de sincronización con árboles BLAKE3" },
+]
+
+[tanda.07]
+name = "Arnés Adversarial NEMESIS v2 & Falsación"
+goal = "Falsar empíricamente la robustez del sistema ante inyecciones y cortes SIGKILL"
+plan = [
+  "Principio DENY != Proof con testigo observable",
+  "Rechazo de replay post-SIGKILL en nonces",
+  "Revocación de FDs retenidos forzando EBADF",
+  "Congelar ante ambigüedad",
+]
+agents = [
+  { id = "B60-AG061", model = "gemini-4-carbon", name = "NEMESIS-Deny-Not-Proof-Witness", target = "tests/nemesis_v2/witness.rs", goal = "Verificar que todo DENY cuente con testigo físico de inodo" },
+  { id = "B60-AG062", model = "gemini-4-carbon", name = "NEMESIS-Sigkill-AntiReplay-Test", target = "tests/nemesis_v2/crash.rs", goal = "Rechazar replay post-SIGKILL mediante sync_all() en nonces" },
+  { id = "B60-AG063", model = "gemini-4-carbon", name = "NEMESIS-Preopened-FD-Revoker", target = "tests/nemesis_v2/fd.rs", goal = "Forzar cierre de descriptores preabiertos forzando EBADF" },
+  { id = "B60-AG064", model = "gemini-4-hydrogen", name = "NEMESIS-Utility-Scheduler", target = "tests/nemesis_v2/sched.rs", goal = "Priorizar tests adversariales por utilidad U(q)" },
+  { id = "B60-AG065", model = "gemini-4-hydrogen", name = "NEMESIS-Unfalsifiable-Claim-Purge", target = "CLAIMS.toml", goal = "Marcar UNFALSIFIABLE claims sin contraejemplo ejecutable" },
+  { id = "B60-AG066", model = "gemini-4-carbon", name = "NEMESIS-Ambiguous-Outcome-Freeze", target = "src/recovery.rs", goal = "Congelar en AmbiguousOutcome ante resultado no atestiguado" },
+  { id = "B60-AG067", model = "gemini-4-hydrogen", name = "NEMESIS-Message-Reordering-Chaos", target = "tests/nemesis_v2/net.rs", goal = "Inyectar desorden masivo validando absorción en quórum" },
+  { id = "B60-AG068", model = "gemini-4-hydrogen", name = "NEMESIS-Fault-Injection-Chaos-IO", target = "tests/nemesis_v2/io.rs", goal = "Inyectar ENOSPC y EIO comprobando rollback transaccional" },
+  { id = "B60-AG069", model = "gemini-4-hydrogen", name = "NEMESIS-Cargo-Mutants-Zero-Miss", target = "crates/", goal = "Exigir MISSED == 0 en análisis de mutantes de código" },
+  { id = "B60-AG070", model = "gemini-4-hydrogen", name = "NEMESIS-Invariant-Violation-Halt", target = "src/lib.rs", goal = "Verificar parada en 0xDEAD_6060 ante aserción violada" },
+]
+
+[tanda.08]
+name = "Ring-3 Sandboxing macOS & Computer Use"
+goal = "Confinamiento Seatbelt EL0, biometría TouchID y lazo cerrado de interfaz"
+plan = [
+  "Seatbelt con (deny hid-control)",
+  "Tickets firmados por Secure Enclave",
+  "Lazo OODA con verificación de delta visual",
+  "Freno físico con doble Escape <= 400ms",
+]
+agents = [
+  { id = "B60-AG071", model = "gemini-4-carbon", name = "Seatbelt-Deny-HID-Control-Guard", target = "deploy/seatbelt/profile.sb", goal = "Denegar hid-control en perfil de confinamiento de SO" },
+  { id = "B60-AG072", model = "gemini-4-hydrogen", name = "Seatbelt-Deny-AppleEvents-Linter", target = "deploy/seatbelt/profile.sb", goal = "Denegar appleevent-send y aislar llamadas a WindowServer" },
+  { id = "B60-AG073", model = "gemini-4-carbon", name = "SecureEnclave-TouchID-Gate", target = "src/biometrics.rs", goal = "Exigir atestación TouchID (reuseDuration=0) en mutaciones" },
+  { id = "B60-AG074", model = "gemini-4-hydrogen", name = "SecureEnclave-SEC1-Normalizer", target = "src/biometrics.rs", goal = "Normalizar claves a coordenadas afines SEC1 NIST P-256" },
+  { id = "B60-AG075", model = "gemini-4-hydrogen", name = "ComputerUse-Dispatch-Ticket-Gate", target = "src/desktop.rs", goal = "Mediar Desktop.execute mediante AuthorizedDispatchTicket" },
+  { id = "B60-AG076", model = "gemini-4-carbon", name = "ComputerUse-OODA-Delta-Verifier", target = "src/delta_verifier.rs", goal = "Comprobar ExpectedDelta visual a 100, 250 y 500ms" },
+  { id = "B60-AG077", model = "gemini-4-hydrogen", name = "ComputerUse-Double-Escape-Brake", target = "src/brake.rs", goal = "Abortar en 0xDEAD_6060 ante doble pulsación de Escape en <= 400ms" },
+  { id = "B60-AG078", model = "gemini-4-hydrogen", name = "ComputerUse-Semantic-Tuple-Bind", target = "src/desktop.rs", goal = "Vincular tupla semántica (id, role, title) antes del despacho" },
+  { id = "B60-AG079", model = "gemini-4-hydrogen", name = "Seatbelt-Mach-Lookup-Filter", target = "deploy/seatbelt/profile.sb", goal = "Denegar mach-lookup a com.apple.accessibility.AXServer" },
+  { id = "B60-AG080", model = "gemini-4-hydrogen", name = "ComputerUse-DeltaMismatch-WORM", target = "src/desktop.rs", goal = "Sellar estado en .failed en ledger ante mismatch de delta" },
+]
+
+[tanda.09]
+name = "Transducción MCP, Bomba & Formato On-Wire"
+goal = "Herramientas dinámicas de un solo uso y contratos binarios COSE canónicos"
+plan = [
+  "Validar AST Python de herramientas efímeras",
+  "Registrar code_hash BLAKE3 antes de ejecutar",
+  "MAX_INVOCATIONS=1 y autodestrucción",
+  "CDDL + COSE_Sign1 en red",
+]
+agents = [
+  { id = "B60-AG081", model = "gemini-4-carbon", name = "MCP-Bomb-AST-Sandbox-Validator", target = "src/mcp_bomb.py", goal = "Validar AST de scripts dinámicos bloqueando syscalls" },
+  { id = "B60-AG082", model = "gemini-4-hydrogen", name = "MCP-Bomb-Blake3-CodeHash-Gate", target = "src/mcp_bomb.py", goal = "Registrar digest BLAKE3 del código en SQLite WAL antes de uso" },
+  { id = "B60-AG083", model = "gemini-4-hydrogen", name = "MCP-Bomb-Single-Invocation-Guard", target = "src/mcp_bomb.py", goal = "Forzar MAX_INVOCATIONS=1; denegar segundas llamadas" },
+  { id = "B60-AG084", model = "gemini-4-hydrogen", name = "MCP-Bomb-Self-Destruct-Verifier", target = "src/mcp_bomb.py", goal = "Eliminar script físicamente con os.unlink tras ejecución" },
+  { id = "B60-AG085", model = "gemini-4-carbon", name = "Wire-Protocol-COSE-Sign1-Linter", target = "ontology/v1/", goal = "Validar transporte binario CBOR + COSE_Sign1 bajo CDDL" },
+  { id = "B60-AG086", model = "gemini-4-hydrogen", name = "Wire-Protocol-Kudurru64-LE-Guard", target = "src/kudurru.rs", goal = "Imponer codificación Little-Endian (<) en KUDURRU-64" },
+  { id = "B60-AG087", model = "gemini-4-carbon", name = "Wire-Crypto-Matrix-Segregator", target = "src/crypto.rs", goal = "Segregar dominios: BLAKE3 (Merkle), SHA-256 (FD/WAL)" },
+  { id = "B60-AG088", model = "gemini-4-hydrogen", name = "Python-Struct-Pack-Bd-F64-Guard", target = "tools/", goal = "Imponer '>Bd' en struct.pack para f64 (prohibido 'D')" },
+  { id = "B60-AG089", model = "gemini-4-hydrogen", name = "AF-UNIX-Peer-Cred-Getpeereid", target = "src/ipc.rs", goal = "Validar credenciales del proceso mediante getpeereid" },
+  { id = "B60-AG090", model = "gemini-4-hydrogen", name = "Git-Diff-Binary-Safe-Checker", target = "scripts/", goal = "Invocar git diff con text=False contra errores en binarios" },
+]
+
+[tanda.10]
+name = "Metrología C6, Entropía & Supply Chain"
+goal = "Integridad de dependencias bloqueadas, licencias y pureza termodinámica"
+plan = [
+  "Lockfiles verificados con --locked",
+  "Provisión obligatoria de protoc en CI",
+  "Certificar TRNG >= 99.95% y Jaccard J < 0.75",
+  "Validar firma activa MOSKV-1",
+]
+agents = [
+  { id = "B60-AG091", model = "gemini-4-hydrogen", name = "Dependency-Cargo-Uv-Locked-Gate", target = "Cargo.lock", goal = "Verificar paridad estricta de lockfiles con --locked" },
+  { id = "B60-AG092", model = "gemini-4-hydrogen", name = "Dependency-MultiCrate-Atomic-Sync", target = ".github/dependabot.yml", goal = "Agrupar atómicamente dependencias acopladas en PRs" },
+  { id = "B60-AG093", model = "gemini-4-hydrogen", name = "CI-Protoc-Provisioning-Checker", target = ".github/workflows/", goal = "Verificar instalación mandatoria de protoc en runners de CI" },
+  { id = "B60-AG094", model = "gemini-4-hydrogen", name = "Clean-Worktree-Commit-Sentinel", target = ".git/", goal = "Prohibir mutaciones de dependencias sobre worktrees sucios" },
+  { id = "B60-AG095", model = "gemini-4-hydrogen", name = "License-Parity-OpenCore-Guard", target = "LICENSE", goal = "Certificar paridad de licencias en todos los sub-crates" },
+  { id = "B60-AG096", model = "gemini-4-hydrogen", name = "Ghost-Node-Scan-Confinement", target = "scripts/c5_quality_gates/detect_ghost_nodes.py", goal = "Excluir target/, dist/ y .lake/ en escáneres documentales" },
+  { id = "B60-AG097", model = "gemini-4-carbon", name = "Three-Strata-Entropy-Certifier", target = "scripts/c5_quality_gates/audit_entropy_3strata.py", goal = "Certificar TRNG >= 99.95% y ausencia de patrones vacíos" },
+  { id = "B60-AG098", model = "gemini-4-hydrogen", name = "Token-Budget-Argon-Sentinel", target = "scripts/c5_quality_gates/audit_token_budget.py", goal = "Imponer Zero-Tree-Walk en archivos mayores a 200 líneas" },
+  { id = "B60-AG099", model = "gemini-4-carbon", name = "Autonomous-Forensic-6Strata", target = "scripts/guards/verify_forensics.py", goal = "Agotar 6 capas forenses antes de reportar pérdida de código" },
+  { id = "B60-AG100", model = "gemini-4-hydrogen", name = "Active-Topology-MOSKV1-Validator", target = "scripts/guards/verify_active_topology.py", goal = "Validar estructuralmente la firma de topología MOSKV-1" },
+]

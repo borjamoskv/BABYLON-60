@@ -16,7 +16,8 @@ La arquitectura se divide en tres fronteras estrictas (anillos ontológicos), ca
 ┌─────────────────────────────────────────────────────────────┐
 │                 02_EDIN_SWARMS (Anillo-2)                   │
 │                     (edin.swarms)                           │
-│  • Músculo estocástico: Modelos de frontera (OpenRouter/Kimi)│
+│  • Músculo estocástico: enjambres locales (vLLM o MLX),     │
+│    orquestables desde Antigravity; OpenRouter opcional      │
 │  • Concurrencia acotada P × S (SHARUR-3600 Matrix)          │
 │  • Deontología estricta: Guillotina de Hume (AOF v2.0)      │
 │  • Física C5-REAL: Fluida, probabilística, propensa a ruido  │

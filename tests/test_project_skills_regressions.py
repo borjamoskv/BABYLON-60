@@ -145,7 +145,6 @@ def test_python_snapshot_rejects_incomplete_or_trailing_data(library, tmp_path, 
     "relative",
     [
         "c5-anti-slop-ui/scripts/audit_ui_slop.py",
-        "c5-audiovisual-acreativo-sota-project/references/modules/c5-anti-slop-ui/scripts/audit_ui_slop.py",
     ],
 )
 @pytest.mark.parametrize(

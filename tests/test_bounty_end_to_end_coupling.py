@@ -15,11 +15,14 @@ Valida:
 
 from __future__ import annotations
 
+import asyncio
 import httpx
 import secrets
+from typing import cast
 import pytest
 
 from babylon60.bft.bounty_ring_dispatcher import BountyRingDispatcher
+from babylon60.bft.exergy_binary_ipc import unpack_agent_message
 from babylon60.bft.defi_bytecode_scraper import (
     BEFORE_SWAP_FLAG,
     BEFORE_SWAP_RETURNS_DELTA_FLAG,
@@ -210,3 +213,60 @@ async def test_live_network_ingestion_resilience() -> None:
     telemetry = dispatcher.telemetry
     assert telemetry.total_corrupted_dropped == 0
     assert telemetry.total_dispatched == len(frames)
+
+
+@pytest.mark.asyncio
+async def test_poll_live_network_preserves_monotonic_lamport_when_code4rena_finishes_first() -> None:
+    """Si Code4rena responde antes que GitHub Advisories, los ticks emitidos siguen siendo estrictamente crecientes."""
+
+    class _MockResponse:
+        def __init__(self, status_code: int, payload: list[dict[str, object]]) -> None:
+            self.status_code = status_code
+            self._payload = payload
+
+        def json(self) -> list[dict[str, object]]:
+            return self._payload
+
+    class _MockAsyncClient:
+        async def get(self, url: str, headers: dict[str, str] | None = None, timeout: float = 10.0) -> _MockResponse:
+            _ = (headers, timeout)
+            if "advisories" in url:
+                await asyncio.sleep(0.05)
+                return _MockResponse(
+                    200,
+                    [
+                        {
+                            "ghsa_id": f"GHSA-MOCK-{i}",
+                            "summary": f"Mock advisory {i}",
+                            "description": "transient storage reentrancy",
+                            "severity": "high",
+                            "html_url": f"https://github.com/advisories/GHSA-MOCK-{i}",
+                            "vulnerabilities": [{"package": {"ecosystem": "solidity"}}],
+                        }
+                        for i in range(3)
+                    ],
+                )
+            return _MockResponse(
+                200,
+                [
+                    {
+                        "name": f"2026-11-mock-contest-{i}",
+                        "html_url": f"https://github.com/code-423n4/2026-11-mock-contest-{i}",
+                        "description": "audit contest",
+                    }
+                    for i in range(3)
+                ],
+            )
+
+    transducer = BountyFeedTransducer()
+    dispatcher = BountyRingDispatcher()
+    frames = await transducer.poll_live_network(cast(httpx.AsyncClient, _MockAsyncClient()), per_page=3)
+    assert len(frames) == 6
+    ticks = [unpack_agent_message(frame, mac_key=dispatcher._mac_key)[3] for frame in frames]
+    assert ticks == [1, 2, 3, 4, 5, 6]
+
+    for frame in frames:
+        dispatcher.dispatch_frame(frame)
+
+    assert dispatcher.telemetry.total_corrupted_dropped == 0
+    assert dispatcher.telemetry.total_dispatched == 6

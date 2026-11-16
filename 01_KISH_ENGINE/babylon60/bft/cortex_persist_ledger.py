@@ -30,7 +30,7 @@ from contextlib import closing
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple, TypedDict
+from typing import Any, Dict, List, NamedTuple, Optional, Tuple, TypedDict
 
 from babylon60.bft.cortex_crypto_kernel import (
     _canonical_json,
@@ -58,6 +58,16 @@ class EventResult(TypedDict):
     entry_hash: str
     lamport_t: int
     status: str
+
+
+class IntegrityVerdict(NamedTuple):
+    """Unpacks as ``(valid, detail)``; its truth value is ``valid``, unlike a plain tuple."""
+
+    valid: bool
+    detail: str
+
+    def __bool__(self) -> bool:
+        return self.valid
 
 
 class BatchProcessResult(TypedDict):
@@ -132,6 +142,9 @@ class CortexPersistLedger:
             conn.execute("PRAGMA journal_mode=WAL;")
             conn.execute("PRAGMA busy_timeout=5000;")
             conn.execute("PRAGMA synchronous = FULL;")
+            # Darwin: without these, FULL stops at fsync and the drive cache stays volatile.
+            conn.execute("PRAGMA fullfsync = ON;")
+            conn.execute("PRAGMA checkpoint_fullfsync = ON;")
         except BaseException:
             conn.close()
             raise
@@ -347,14 +360,17 @@ class CortexPersistLedger:
             hash_version=CORTEX_HASH_VERSION,
         )
 
+        # seq is bound, not left to AUTOINCREMENT: the hash covers it, and the
+        # table's counter can sit ahead of MAX(seq).
         cursor.execute(
             """
             INSERT INTO cortex_ledger (
-                event_id, event_type, payload_json, cortex_taint,
+                seq, event_id, event_type, payload_json, cortex_taint,
                 agent_id, domain, lamport_t, prev_hash, entry_hash, timestamp, hash_version
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
+                next_seq,
                 event_id,
                 event.event_type,
                 payload_json,
@@ -524,14 +540,17 @@ class CortexPersistLedger:
             )
 
             if rows_to_insert:
+                # Bind each hashed seq (see _insert_new_event); results and rows
+                # share order once duplicates, which carry no row, are skipped.
+                hashed_seqs = [result["seq"] for result in results if result["status"] == "C5_PERMANENT"]
                 cursor.executemany(
                     """
                     INSERT INTO cortex_ledger (
-                        event_id, event_type, payload_json, cortex_taint,
+                        seq, event_id, event_type, payload_json, cortex_taint,
                         agent_id, domain, lamport_t, prev_hash, entry_hash, timestamp, hash_version
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                     """,
-                    rows_to_insert,
+                    [(seq, *row) for seq, row in zip(hashed_seqs, rows_to_insert, strict=True)],
                 )
 
             conn.commit()
@@ -848,6 +867,10 @@ class CortexPersistFacade:
     """
     Fachada síncrona de compatibilidad sobre BFTLedgerActor (R-8).
     Permite ejecutar operaciones sobre el actor asíncrono desde entornos síncronos (CLI, scripts).
+
+    Persiste en la tabla ``ledger_entries`` del actor, no en ``cortex_ledger``:
+    sobre una misma base, ``CortexPersistLedger`` no ve estos eventos ni los
+    incluye en su cadena, raíz Merkle o atestación.
     """
 
     def __init__(self, db_path: Path | str) -> None:
@@ -876,15 +899,15 @@ class CortexPersistFacade:
 
         return asyncio.run(_run())
 
-    def verify_integrity(self) -> Tuple[bool, str]:
+    def verify_integrity(self) -> IntegrityVerdict:
         import asyncio
 
-        async def _run() -> Tuple[bool, str]:
+        async def _run() -> IntegrityVerdict:
             try:
-                valid = await self._actor.verify_chain()
-                return valid, "CADENA_INTEGRA" if valid else "CADENA_CORRUPTA"
+                valid = bool(await self._actor.verify_chain())
+                return IntegrityVerdict(valid, "CADENA_INTEGRA" if valid else "CADENA_CORRUPTA")
             except Exception as e:
-                return False, f"VERIFICATION_ERROR: {e}"
+                return IntegrityVerdict(False, f"VERIFICATION_ERROR: {e}")
 
         return asyncio.run(_run())
 

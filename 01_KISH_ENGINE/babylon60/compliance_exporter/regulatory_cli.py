@@ -9,7 +9,7 @@ import sys
 from pathlib import Path
 
 from .i18n import get_translation
-from .regulatory import JSONDocument, assess, load_json
+from .regulatory import JSONDocument, assess, export_assurance_gateway_bundle, load_json
 from .regulatory_gate import authorization, invoke_native, verify_receipt
 
 
@@ -48,11 +48,39 @@ def render(result: JSONDocument, output_format: str, locale: str) -> str:
 
 def run(args: Namespace) -> int:
     try:
+        policy = load_json(args.trust_store) if args.trust_store else {}
+        if args.mode == "gateway-bundle":
+            if args.format != "json":
+                raise ValueError("Gateway bundle mode emits verifiable JSON only")
+            graph_path = getattr(args, "claims_graph", None) or args.assessment
+            if not graph_path:
+                raise ValueError("--claims-graph (or --assessment) is required for gateway-bundle mode")
+            graph_doc = load_json(graph_path)
+            target_deployment = load_json(args.profile) if args.profile else graph_doc.get("target_deployment", {})
+            claims = graph_doc.get("claims", [])
+            if not isinstance(claims, list) or not claims:
+                raise ValueError("Gateway bundle requires a non-empty 'claims' list")
+            result = export_assurance_gateway_bundle(
+                claims,
+                target_deployment,
+                Path(args.bundle),
+                baseline_system=graph_doc.get("baseline_system"),
+                policy=policy,
+                predetermined_envelopes=graph_doc.get("predetermined_envelopes"),
+                post_market_incidents=graph_doc.get("post_market_incidents"),
+            )
+            content = render(result, "json", args.locale)
+            if args.output:
+                Path(args.output).parent.mkdir(parents=True, exist_ok=True)
+                Path(args.output).write_text(content, encoding="utf-8")
+            else:
+                print(content, end="")
+            return 0 if result["assurance_dossier"]["technical_status"] == "TECHNICAL_EVIDENCE_VALID" else 2
+
         if not args.profile or not args.assessment:
             raise ValueError("--profile and --assessment are required")
         profile = load_json(args.profile)
         assessment = load_json(args.assessment)
-        policy = load_json(args.trust_store) if args.trust_store else {}
         result = assess(profile, assessment, Path(args.bundle), policy)
         if args.mode in {"approve", "authorize-release"}:
             if args.format != "json":

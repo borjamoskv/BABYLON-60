@@ -21,6 +21,7 @@ from babylon60.transducers.fisher_bayesian_gate import (
 )
 from scripts.c5_quality_gates.audit_entropy_3strata import (
     audit_stratum_1,
+    audit_stratum_2,
     audit_stratum_3,
 )
 
@@ -97,3 +98,61 @@ def test_i4_lean4_standalone_oracle() -> None:
     if Path(lean_bin).is_file():
         res = subprocess.run([lean_bin, str(lean_file)], capture_output=True, text=True, check=False)
         assert res.returncode == 0, f"Lean 4 verification failed: {res.stdout}\n{res.stderr}"
+
+
+def test_i5_stratum_2_excludes_scratch_clones(tmp_path: Path) -> None:
+    """[I5] Verifies audit_stratum_2 excludes scratch/ worktrees while still catching real clones."""
+    body = " ".join(f"token_{idx:03d}" for idx in range(40))
+    docs_dir = tmp_path / "docs"
+    docs_dir.mkdir()
+    (docs_dir / "canon.md").write_text(body, encoding="utf-8")
+
+    scratch_dir = tmp_path / "scratch" / "worktree" / "docs"
+    scratch_dir.mkdir(parents=True)
+    (scratch_dir / "canon.md").write_text(body, encoding="utf-8")
+
+    res = audit_stratum_2(tmp_path)
+    assert res["total_files"] == 1
+    assert res["epistemic_clones_count"] == 0
+    assert res["passed"] is True
+
+    (docs_dir / "real_clone.md").write_text(body, encoding="utf-8")
+    res_with_clone = audit_stratum_2(tmp_path)
+    assert res_with_clone["total_files"] == 2
+    assert res_with_clone["epistemic_clones_count"] == 1
+    assert res_with_clone["passed"] is False
+
+
+def test_i6_stratum_2_excludes_mirrors_and_uses_085_threshold(tmp_path: Path) -> None:
+    """[I6] Verifies excluded archive/experiment mirrors and calibrated 0.85 Jaccard threshold."""
+    base_tokens = [f"token_{idx:03d}" for idx in range(50)]
+    docs_dir = tmp_path / "docs"
+    docs_dir.mkdir()
+    (docs_dir / "alpha.md").write_text(" ".join(base_tokens), encoding="utf-8")
+
+    # J = 45 / 55 = 0.818 (< 0.85): distinct domain document must not trigger false clone.
+    near_tokens = base_tokens[:45] + [f"beta_{idx:03d}" for idx in range(5)]
+    (docs_dir / "beta.md").write_text(" ".join(near_tokens), encoding="utf-8")
+
+    for rel in (
+        "experiments/oncology/ontology-source.md",
+        "docs/04_audit/data_rooms/v1/alpha.md",
+        "docs/security/evidence/run1/alpha.md",
+        "tools/skills/legacy/alpha.md",
+    ):
+        target = tmp_path / rel
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(" ".join(base_tokens), encoding="utf-8")
+
+    res = audit_stratum_2(tmp_path)
+    assert res["total_files"] == 2
+    assert res["epistemic_clones_count"] == 0
+    assert res["passed"] is True
+
+    # J = 47 / 52 = 0.904 (>= 0.85): real clone must fail Stratum 2.
+    clone_tokens = base_tokens[:47] + [f"gamma_{idx:03d}" for idx in range(2)]
+    (docs_dir / "gamma.md").write_text(" ".join(clone_tokens), encoding="utf-8")
+    res_clone = audit_stratum_2(tmp_path)
+    assert res_clone["total_files"] == 3
+    assert res_clone["epistemic_clones_count"] == 1
+    assert res_clone["passed"] is False

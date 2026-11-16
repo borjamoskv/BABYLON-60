@@ -87,6 +87,18 @@ def test_m0_evidence_pack_end_to_end_and_cli_verification(tmp_path: Path) -> Non
         assert m["assessment_status"] != "COMPLIANT"
         assert m["causal_chain_stage"] == "CONTROL -> TEST -> EVIDENCE -> REGULATORY_REQUIREMENT -> ASSESSMENT"
 
+    gw_contract = reg_matrix["assurance_gateway_graph_contract"]
+    assert gw_contract["experiment_id"] == "FL-AIACT-02"
+    assert gw_contract["claim_schema"] == "babylon.assurance.claim.v1"
+    assert gw_contract["gateway_bundle_schema"] == "babylon.assurance.gateway_bundle.v1"
+    assert gw_contract["automated_legal_conformity"] is False
+    assert gw_contract["eu_ai_act_certified"] is False
+    assert gw_contract["deliverables"] == [
+        "execution_evidence",
+        "assurance_dossier",
+        "continuous_evidence_monitoring",
+    ]
+
     # 5. Verify Rule 1.B & 1.C: BROKER_MEDIATED vs OS_ENFORCED and SQLite threat model
     scope_doc = json.loads((pack_dir / "scope.json").read_text(encoding="utf-8"))
     assert "BROKER_MEDIATED" in scope_doc["enforcement_boundaries"]

@@ -8,8 +8,10 @@ from __future__ import annotations
 import enum
 import hashlib
 import json
+import os
 import sqlite3
 import secrets
+import stat
 import subprocess
 from pathlib import Path
 import time
@@ -77,15 +79,29 @@ class VerificationGate:
         self.db_path = db_path
         self.default_risk = default_risk
         self._conn = sqlite3.connect(self.db_path)
-        self._conn.execute("PRAGMA journal_mode = WAL")
-        self._conn.execute("PRAGMA synchronous = FULL")
-        self._trusted_key: bytes | None
         try:
-            self._trusted_key = configured_public_key()
-        except ValueError:
-            self._trusted_key = None
-        self._init_db()
-        self.moloch_gate = MolochLandauerGate()
+            self._conn.execute("PRAGMA journal_mode = WAL")
+            self._conn.execute("PRAGMA synchronous = FULL")
+            self._trusted_key: bytes | None
+            try:
+                self._trusted_key = configured_public_key()
+            except ValueError:
+                self._trusted_key = None
+            self._init_db()
+            self.moloch_gate = MolochLandauerGate()
+        except BaseException:
+            self._conn.close()
+            raise
+
+    def close(self) -> None:
+        """Close the owned SQLite connection deterministically."""
+        self._conn.close()
+
+    def __enter__(self) -> VerificationGate:
+        return self
+
+    def __exit__(self, exc_type: object, exc_val: object, exc_tb: object) -> None:
+        self.close()
 
     def _init_db(self) -> None:
         with self._conn as conn:
@@ -164,14 +180,165 @@ class VerificationGate:
         }
         return known_operations.get(action.lower(), RiskLevel.CRITICAL)
 
+    @staticmethod
+    def _read_regular_file_sha256_nofollow(path_str: str, *, require_readonly: bool = False) -> Optional[str]:
+        """Read a regular file via O_NOFOLLOW descriptor and return its SHA-256 hex digest."""
+        if not isinstance(path_str, str) or not path_str:
+            return None
+        flags = os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0)
+        try:
+            fd = os.open(path_str, flags)
+        except OSError:
+            return None
+        try:
+            st = os.fstat(fd)
+            if not stat.S_ISREG(st.st_mode):
+                return None
+            if require_readonly and (st.st_mode & 0o222) != 0:
+                return None
+            chunks: list[bytes] = []
+            for chunk in iter(lambda: os.read(fd, 65536), b""):
+                chunks.append(chunk)
+            return hashlib.sha256(b"".join(chunks)).hexdigest()
+        except OSError:
+            return None
+        finally:
+            os.close(fd)
+
+    @classmethod
+    def _verify_third_order_execution_identity(cls, task_payload: Mapping[str, object]) -> bool:
+        """Enforce 3rd-order invariant: Execute(a) => H(a) == H(a_verified_post_merge) and not pre-merge branch."""
+        if task_payload.get("pre_merge_only") is True:
+            return False
+        has_verified = "verified_post_merge_digest" in task_payload
+        has_exec_path = "executed_artifact_path" in task_payload
+        has_exec_digest = "executed_artifact_digest" in task_payload
+        if not has_verified and not has_exec_path and not has_exec_digest:
+            return True
+        verified_digest = task_payload.get("verified_post_merge_digest")
+        if not isinstance(verified_digest, str) or len(verified_digest) != 64:
+            return False
+        if has_exec_path:
+            exec_path = task_payload.get("executed_artifact_path")
+            if not isinstance(exec_path, str):
+                return False
+            actual_exec_digest = cls._read_regular_file_sha256_nofollow(exec_path)
+            if actual_exec_digest is None or actual_exec_digest != verified_digest.lower():
+                return False
+        elif has_exec_digest:
+            exec_digest = task_payload.get("executed_artifact_digest")
+            if not isinstance(exec_digest, str) or exec_digest.lower() != verified_digest.lower():
+                return False
+        else:
+            return False
+        return True
+
+    @classmethod
+    def _verify_resource_precondition(cls, task_payload: Mapping[str, object]) -> bool:
+        """Verify optional target_path + pre_state_digest and 3rd-order GlobalGate via O_NOFOLLOW descriptor."""
+        if not cls._verify_third_order_execution_identity(task_payload):
+            return False
+        has_path = "target_path" in task_payload
+        has_digest = "pre_state_digest" in task_payload
+        if not has_path and not has_digest:
+            return True
+        target_path = task_payload.get("target_path")
+        expected_digest = task_payload.get("pre_state_digest")
+        if not isinstance(target_path, str) or not target_path:
+            return False
+        if not isinstance(expected_digest, str) or len(expected_digest) != 64:
+            return False
+        actual_digest = cls._read_regular_file_sha256_nofollow(target_path)
+        return actual_digest is not None and actual_digest == expected_digest.lower()
+
+    def verify_global_gate_post_merge(
+        self,
+        task_payload: Mapping[str, object],
+        *,
+        executed_artifact_path: str | Path,
+        verified_post_merge_digest: str,
+        is_post_merge_tree: bool = True,
+    ) -> bool:
+        """3rd-Order GlobalGate: Execute(a) => H(a) == H(a_verified_post_merge) ^ Authorized(a)."""
+        if not is_post_merge_tree:
+            return False
+        if not isinstance(verified_post_merge_digest, str) or len(verified_post_merge_digest) != 64:
+            return False
+        actual_digest = self._read_regular_file_sha256_nofollow(str(executed_artifact_path))
+        if actual_digest is None or actual_digest != verified_post_merge_digest.lower():
+            return False
+        return self.is_allowed(task_payload)
+
+    @classmethod
+    def verify_verifier_isolation(
+        cls,
+        *,
+        generator_write_paths: list[str | Path] | tuple[str | Path, ...],
+        verifier_read_paths: list[str | Path] | tuple[str | Path, ...],
+        tcb_secret_paths: list[str | Path] | tuple[str | Path, ...],
+        oracle_path: str | Path,
+        expected_oracle_digest: str,
+        verifier_env: Mapping[str, str] | None = None,
+        require_readonly_oracle: bool = True,
+    ) -> bool:
+        """O12 (Verifier Escape & Independence): Enforce WriteScope(gen) ∩ Oracle/ReadScope(ver) = ∅,
+        ReadScope(ver) ∩ SecretScope(TCB) = ∅, immutable oracle digest, and sanitized environment."""
+        if not isinstance(expected_oracle_digest, str) or len(expected_oracle_digest) != 64:
+            return False
+
+        def _norm(p: str | Path) -> Path:
+            return Path(str(p)).absolute()
+
+        def _overlaps(a: Path, b: Path) -> bool:
+            return a == b or a in b.parents or b in a.parents
+
+        gen_writes = [_norm(p) for p in generator_write_paths]
+        ver_reads = [_norm(p) for p in verifier_read_paths]
+        tcb_secrets = [_norm(p) for p in tcb_secret_paths]
+        oracle_norm = _norm(oracle_path)
+
+        # 1. Generator write scope must not overlap verifier read scope or the oracle bundle
+        for gw in gen_writes:
+            if _overlaps(gw, oracle_norm):
+                return False
+            for vr in ver_reads:
+                if _overlaps(gw, vr):
+                    return False
+
+        # 2. Verifier read scope must not overlap any TCB secret path (O12 escape attempt)
+        for ts in tcb_secrets:
+            if _overlaps(oracle_norm, ts):
+                return False
+            for vr in ver_reads:
+                if _overlaps(vr, ts):
+                    return False
+
+        # 3. Reject dynamic linker / secret injection in verifier environment
+        if verifier_env is not None:
+            forbidden_env_keys = {
+                "LD_PRELOAD",
+                "DYLD_INSERT_LIBRARIES",
+                "DYLD_LIBRARY_PATH",
+                "PYTHONINSPECT",
+                "BABYLON_ENCLAVE_PRIVATE_KEY",
+            }
+            if any(k in verifier_env for k in forbidden_env_keys):
+                return False
+
+        # 4. Verify oracle bundle integrity via O_NOFOLLOW and optional read-only mode (0400/0444)
+        actual_oracle_digest = cls._read_regular_file_sha256_nofollow(
+            str(oracle_norm), require_readonly=require_readonly_oracle
+        )
+        return actual_oracle_digest is not None and actual_oracle_digest == expected_oracle_digest.lower()
+
     def is_allowed(self, task_payload: Mapping[str, object]) -> bool:
         """
         Check if task execution is authorized under Causal Gate governance.
-        Tasks with CRITICAL risk require a valid APPROVED sign-off receipt in the ledger.
+        Tasks with HIGH or CRITICAL risk require a valid APPROVED sign-off receipt in the ledger.
         """
         risk = self.evaluate_task(task_payload)
-        if risk != RiskLevel.CRITICAL:
-            return True
+        if risk in (RiskLevel.LOW, RiskLevel.MEDIUM):
+            return self._verify_resource_precondition(task_payload)
 
         exec_id = task_payload.get("execution_id")
         if not exec_id:
@@ -182,8 +349,8 @@ class VerificationGate:
         row = self._conn.execute(
             "SELECT a.decision, s.payload, s.evidence FROM audit_ledger a "
             "LEFT JOIN signed_approvals s ON s.ledger_id=a.id "
-            "WHERE a.execution_id=? AND a.risk_level=? ORDER BY a.id DESC LIMIT 1",
-            (exec_id, RiskLevel.CRITICAL.name),
+            "WHERE a.execution_id=? AND a.risk_level IN (?, ?) ORDER BY a.id DESC LIMIT 1",
+            (exec_id, RiskLevel.HIGH.name, RiskLevel.CRITICAL.name),
         ).fetchone()
         if row is None or row[0] != "APPROVED" or row[1] is None:
             return False
@@ -197,6 +364,7 @@ class VerificationGate:
                 and proof["issued_at"] <= now < proof["expires_at"]
                 and 0 < proof["expires_at"] - proof["issued_at"] <= 300
                 and self._canonical_task(proof["task"]) == self._canonical_task(task_payload)
+                and self._verify_resource_precondition(task_payload)
             )
         except (ValueError, TypeError, KeyError):
             return False
@@ -218,8 +386,8 @@ class VerificationGate:
         transaction keeps approval writers out until the effect returns.
         The caller must hold its policy lock for this entire operation.
         """
-        if self.evaluate_task(task_payload) != RiskLevel.CRITICAL:
-            raise PermissionError("Effect dispatch requires a signed critical task")
+        if self.evaluate_task(task_payload) not in (RiskLevel.HIGH, RiskLevel.CRITICAL):
+            raise PermissionError("Effect dispatch requires a signed high/critical task")
         try:
             self._conn.execute("BEGIN IMMEDIATE")
             if not self.is_allowed(task_payload):
@@ -231,7 +399,7 @@ class VerificationGate:
             self._conn.commit()  # synchronous=FULL: consumption survives a crash.
             self._conn.execute("BEGIN IMMEDIATE")
             if not self.is_allowed(task_payload):
-                raise PermissionError("Operator approval changed before effect")
+                raise PermissionError("Operator approval or resource pre-state changed before effect")
             return effect()
         except sqlite3.IntegrityError as exc:
             raise PermissionError("MCP execution_id has already been consumed") from exc

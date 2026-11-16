@@ -17,9 +17,11 @@ import argparse
 import hashlib
 import json
 import os
+import stat
 import subprocess
 import sys
 import time
+import zipfile
 from pathlib import Path
 from typing import Any, Dict, List, Tuple
 
@@ -29,7 +31,11 @@ sys.path.insert(0, str(REPO_ROOT / "01_KISH_ENGINE"))
 from babylon60.bft.cortex_crypto_kernel import build_merkle_tree  # noqa: E402
 
 sys.path.insert(0, str(REPO_ROOT))
-from scripts.c5_quality_gates.verify_claims import source_tree_digest  # noqa: E402
+from scripts.c5_quality_gates.verify_claims import (  # noqa: E402
+    audit_invariants_alignment,
+    is_excluded_from_public_tree,
+    source_tree_digest,
+)
 
 try:
     import tomllib
@@ -142,7 +148,9 @@ def compile_claims_evidence(run_fresh: bool = False) -> Dict[str, Any]:
     sitrep = json.loads(claims_sitrep_path.read_text(encoding="utf-8"))
     claims_list: List[Dict[str, Any]] = sitrep.get("claims", [])
     manifest_path = REPO_ROOT / "CLAIMS.toml"
-    declared = tomllib.loads(manifest_path.read_text(encoding="utf-8"))["claim"]
+    full_manifest = tomllib.loads(manifest_path.read_text(encoding="utf-8"))
+    declared = full_manifest["claim"]
+    declared_invariants = full_manifest.get("invariants", {})
     manifest_digest = hashlib.sha256(manifest_path.read_bytes()).hexdigest()
     ids = [claim["id"] for claim in claims_list]
     if sitrep.get("source_commit") != get_git_commit():
@@ -157,6 +165,32 @@ def compile_claims_evidence(run_fresh: bool = False) -> Dict[str, Any]:
         not bool(c.get("suite_passed", c.get("verified", False))) for c in claims_list
     ):
         raise ValueError("Cannot publish release evidence with failed claims")
+    inv_alignment_errors = sitrep.get("invariant_alignment_errors")
+    if inv_alignment_errors:
+        raise ValueError(
+            "Cannot publish release evidence with invariant alignment errors: "
+            + "; ".join(str(err) for err in inv_alignment_errors)
+        )
+    if isinstance(declared_invariants, dict) and declared_invariants:
+        sitrep_invariants = sitrep.get("invariants")
+        if not isinstance(sitrep_invariants, list):
+            raise ValueError("Invariant evidence is missing from claims_sitrep.json")
+        inv_keys = [inv.get("key") for inv in sitrep_invariants if isinstance(inv, dict)]
+        if (
+            len(inv_keys) != len(sitrep_invariants)
+            or len(inv_keys) != len(set(inv_keys))
+            or set(inv_keys) != set(declared_invariants)
+        ):
+            raise ValueError("Invariant evidence is incomplete or contains duplicate invariants")
+        if any(not bool(inv.get("gate_aligned", False)) for inv in sitrep_invariants):
+            raise ValueError("Cannot publish release evidence with unaligned [invariants.*]")
+        release_spec = load_babylon_release_spec()
+        _, inv_errors = audit_invariants_alignment(full_manifest, release_spec)
+        if inv_errors:
+            raise ValueError(
+                "Invariant alignment failure between CLAIMS.toml [invariants.*] and babylon.toml: "
+                + "; ".join(inv_errors)
+            )
 
     evidence_entries = []
     merkle_leaves = []
@@ -229,6 +263,90 @@ def _load_signing_key() -> ed25519.Ed25519PrivateKey | None:
     return ed25519.Ed25519PrivateKey.from_private_bytes(raw_seed)
 
 
+def _bundle_tree_digest(entries: List[Tuple[str, bytes]]) -> str:
+    """Compute the same deterministic SHA-256 tree digest expected by verify_release.sh."""
+    digest = hashlib.sha256()
+    seen: set[str] = set()
+    for relative, payload in sorted(entries, key=lambda item: item[0]):
+        if relative in seen:
+            continue
+        seen.add(relative)
+        if is_excluded_from_public_tree(relative):
+            continue
+        digest.update(relative.encode("utf-8") + b"\0")
+        digest.update(len(payload).to_bytes(8, "big"))
+        digest.update(payload)
+    return digest.hexdigest()
+
+
+def _read_repo_payload(path: Path) -> bytes:
+    flags = os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0)
+    try:
+        fd = os.open(path, flags)
+    except OSError:
+        if path.is_symlink():
+            return str(path.readlink()).encode("utf-8")
+        raise
+    with os.fdopen(fd, "rb") as stream:
+        return stream.read()
+
+
+def _validate_bundle_relpath(rel_path: str) -> str:
+    candidate = Path(rel_path)
+    if not rel_path or rel_path.startswith("/") or "\\" in rel_path or ".." in candidate.parts:
+        raise ValueError(f"Invalid path in release bundle inventory: {rel_path!r}")
+    return rel_path
+
+
+def _collect_release_bundle_info(version: str, bundle_path: Path | None) -> Dict[str, Any] | None:
+    if bundle_path is not None:
+        if not bundle_path.exists():
+            return None
+        bundle_bytes = bundle_path.read_bytes()
+        bundle_info: Dict[str, Any] = {
+            "name": bundle_path.name,
+            "sha256": hashlib.sha256(bundle_bytes).hexdigest(),
+            "size_bytes": len(bundle_bytes),
+        }
+        if zipfile.is_zipfile(bundle_path):
+            entries: List[Tuple[str, bytes]] = []
+            with zipfile.ZipFile(bundle_path, "r") as zf:
+                for info in zf.infolist():
+                    if info.is_dir():
+                        continue
+                    mode = (info.external_attr >> 16) & 0o170000
+                    if stat.S_ISLNK(mode):
+                        raise ValueError(f"Symlink entry forbidden in release bundle: {info.filename!r}")
+                    rel_path = _validate_bundle_relpath(info.filename)
+                    entries.append((rel_path, zf.read(info)))
+            bundle_info["tree_digest"] = _bundle_tree_digest(entries)
+            bundle_info["source_files"] = sorted({rel for rel, _ in entries})
+        return bundle_info
+
+    packager = REPO_ROOT / "scripts" / "package_release.sh"
+    if not packager.is_file():
+        return None
+    listed = subprocess.run(
+        ["bash", str(packager), "--list-files"],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    entries = []
+    source_files: set[str] = set()
+    for raw_line in listed.stdout.splitlines():
+        rel_path = _validate_bundle_relpath(raw_line.strip())
+        source_files.add(rel_path)
+        if not is_excluded_from_public_tree(rel_path):
+            entries.append((rel_path, _read_repo_payload(REPO_ROOT / rel_path)))
+    return {
+        "name": f"Babylon60-v{version}-terminal-mcp.zip",
+        "tree_digest": _bundle_tree_digest(entries),
+        "source_files": sorted(source_files),
+    }
+
+
 def emit_claims_artifacts(
     evidence: Dict[str, Any],
     bundle_path: Path | None = None,
@@ -236,6 +354,15 @@ def emit_claims_artifacts(
     from scripts.generate_sbom import generate_sboms
 
     release_spec = load_babylon_release_spec()
+    claims_toml_path = REPO_ROOT / "CLAIMS.toml"
+    if claims_toml_path.is_file():
+        claims_doc = tomllib.loads(claims_toml_path.read_text(encoding="utf-8"))
+        _, inv_errors = audit_invariants_alignment(claims_doc, release_spec)
+        if inv_errors:
+            raise ValueError(
+                "Invariant alignment failure between CLAIMS.toml [invariants.*] and babylon.toml: "
+                + "; ".join(inv_errors)
+            )
     version = release_spec.get("version", "5.0.1")
     state = release_spec.get("state", "candidate")
     axiom = release_spec.get("axiom", "AX-0")
@@ -245,14 +372,7 @@ def emit_claims_artifacts(
     signing_key = _load_signing_key()
     sbom_summary = generate_sboms(repo_root=REPO_ROOT)
 
-    bundle_info: Dict[str, Any] | None = None
-    if bundle_path is not None and bundle_path.exists():
-        bundle_bytes = bundle_path.read_bytes()
-        bundle_info = {
-            "name": bundle_path.name,
-            "sha256": hashlib.sha256(bundle_bytes).hexdigest(),
-            "size_bytes": len(bundle_bytes),
-        }
+    bundle_info = _collect_release_bundle_info(version, bundle_path)
 
     # 1. evidence.json
     evidence_json_path = REPO_ROOT / "evidence.json"

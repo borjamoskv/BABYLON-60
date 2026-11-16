@@ -324,12 +324,6 @@ Los generadores, simuladores y pruebas de oncology están en el proyecto indepen
 | [`guards/verify_active_topology.py`](guards/verify_active_topology.py) | `Python` | 365b92ee225d | Check instruction templates and the final footer of a response draft. |
 | [`guards/c5_ide_symlink_guard.sh`](guards/c5_ide_symlink_guard.sh) | `Shell` | 776336e10a1a | Invariante C5-REAL: Verificación de Punteros IDE |
 
-### 📁 Kimi Nexus
-
-| Script | Tipo | SHA3-256 | Descripción / Propósito |
-| :--- | :--- | :--- | :--- |
-| [`kimi_nexus/kimi_nexus.py`](kimi_nexus/kimi_nexus.py) | `Python` | 84ff98f33f76 | Attempt to import FastMCP. If missing, we'll inform the user via logs. |
-
 ### 📁 Repatriated
 
 | Script | Tipo | SHA3-256 | Descripción / Propósito |

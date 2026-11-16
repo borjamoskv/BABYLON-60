@@ -4,14 +4,15 @@
 # ============================================================================
 
 # Stage 1: Build binary
-FROM rust:1.80-alpine AS builder
+# C0565: la imagen debe satisfacer el rust-version de Cargo.toml (1.89).
+FROM rust:1.89-alpine AS builder
 
 RUN apk add --no-cache musl-dev
 
 WORKDIR /app
 COPY . .
 
-RUN cargo build --release -p babylon-attest
+RUN cargo build --locked --release -p babylon-attest
 
 # Stage 2: Minimal runtime image
 FROM alpine:3.20

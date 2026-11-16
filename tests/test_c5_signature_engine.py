@@ -7,8 +7,10 @@ from scripts.guards.c5_signature_engine import (
     classify_capability_tier,
     detect_active_model_and_mode,
     evaluate_selector_fitness,
+    extract_latest_user_request,
     format_pre_invocation_audit_line,
     generate_signature,
+    parse_selector_string,
 )
 from scripts.guards.verify_active_topology import validate_text
 
@@ -62,6 +64,35 @@ def test_agnostic_capability_tier_classification():
     # Estrato 0 — No expuesto
     assert classify_capability_tier("No expuesto", "No expuesto")["tier"] == 0
 
+    # Tabla Periódica Gemini 4 (Carbon, Argon, Hydrogen), sufijos (XHigh) y Orquestadores
+    h_xhigh_model, h_xhigh_mode = parse_selector_string("Gemini 4 Hydrogen (XHigh)")
+    assert h_xhigh_model == "Gemini 4 Hydrogen (XHigh)" and h_xhigh_mode == "XHigh"
+    assert classify_capability_tier(h_xhigh_model, h_xhigh_mode)["tier"] == 1
+    assert classify_capability_tier("Gemini 4 Hydrogen (Medium)", "Medium")["tier"] == 1
+    assert classify_capability_tier("Gemini 4 Hydrogen (Low)", "Low")["tier"] == 1
+    assert classify_capability_tier("gemini-4-hydrogen", "Fast")["tier"] == 1
+
+    argon_xhigh_model, argon_xhigh_mode = parse_selector_string("Gemini 4 Argon (XHigh)")
+    assert argon_xhigh_model == "Gemini 4 Argon (XHigh)" and argon_xhigh_mode == "XHigh"
+    t3_argon_xhigh = classify_capability_tier(argon_xhigh_model, argon_xhigh_mode)
+    assert t3_argon_xhigh["tier"] == 3 and t3_argon_xhigh["effort"] == "high"
+
+    t2_carbon_med = classify_capability_tier("Gemini 4 Carbon (Medium)", "Medium")
+    assert t2_carbon_med["tier"] == 2 and t2_carbon_med["effort"] == "medium"
+
+    t3_carbon_bare = classify_capability_tier("gemini-4-carbon", "")
+    assert t3_carbon_bare["tier"] == 3 and t3_carbon_bare["effort"] == "high"
+
+    orch_argon_m, orch_argon_mode = parse_selector_string("Orchestrator (Argon)")
+    assert orch_argon_m == "Orchestrator (Argon)" and orch_argon_mode == "Orchestrator"
+    orch_argon_tier = classify_capability_tier(orch_argon_m, orch_argon_mode)
+    assert orch_argon_tier["tier"] == 2 and orch_argon_tier.get("is_orchestrator") is True
+
+    orch_carbon_m, orch_carbon_mode = parse_selector_string("Orchestrator (Carbon)")
+    assert orch_carbon_m == "Orchestrator (Carbon)" and orch_carbon_mode == "Orchestrator"
+    orch_carbon_tier = classify_capability_tier(orch_carbon_m, orch_carbon_mode)
+    assert orch_carbon_tier["tier"] == 3 and orch_carbon_tier.get("is_orchestrator") is True
+
 
 def test_selector_fitness_optimal_and_mismatched():
     # 1. Consulta corta con modelo pesado en High -> DESAJUSTADO (Óptimo: Estrato 1 Fast)
@@ -94,6 +125,36 @@ def test_selector_fitness_optimal_and_mismatched():
     )
     assert res_ring0_ok["status"] == "ÓPTIMO"
     assert "Estrato 3" in str(res_ring0_ok["llm_field"])
+
+    # 4. Orchestrator (Argon) cubre adaptativamente Estratos 1 y 2 sin falso positivo
+    res_orch_argon_t1 = evaluate_selector_fitness(
+        "Orchestrator (Argon)",
+        "Orchestrator",
+        "¿Qué estado tiene el selector?",
+    )
+    assert res_orch_argon_t1["status"] == "ÓPTIMO"
+
+    res_orch_argon_t2 = evaluate_selector_fitness(
+        "Orchestrator (Argon)",
+        "Orchestrator",
+        "Implementa el parche en los archivos del router.",
+    )
+    assert res_orch_argon_t2["status"] == "ÓPTIMO"
+
+    # 5. Orchestrator (Carbon) cubre adaptativamente Estratos 2 y 3, pero avisa en consultas triviales (Estrato 1)
+    res_orch_carbon_t3 = evaluate_selector_fitness(
+        "Orchestrator (Carbon)",
+        "Orchestrator",
+        "Verificar formalmente en Lean 4 la invariante de concurrencia del Seqlock.",
+    )
+    assert res_orch_carbon_t3["status"] == "ÓPTIMO"
+
+    res_orch_carbon_t1 = evaluate_selector_fitness(
+        "Orchestrator (Carbon)",
+        "Orchestrator",
+        "¿Qué hora es?",
+    )
+    assert res_orch_carbon_t1["status"] == "DESAJUSTADO"
 
 
 def test_transcript_and_env_detection(tmp_path: Path) -> None:
@@ -184,3 +245,35 @@ def test_continuation_and_dialectical_pulse_inheritance(tmp_path: Path) -> None:
     )
     errs = validate_text(raw_no_verdict, response=True, require_selector_verdict=True)
     assert len(errs) == 2
+
+
+def test_code_block_expansion_from_additional_metadata(tmp_path: Path) -> None:
+    transcript = tmp_path / "code_block_transcript.jsonl"
+    step = {
+        "step_index": 0,
+        "type": "USER_INPUT",
+        "content": (
+            "<USER_REQUEST>\n@[code_block]  \n</USER_REQUEST>\n"
+            "<ADDITIONAL_METADATA>\n"
+            "The current local time is: 2026-11-16T19:55:00+01:00.\n\n"
+            "The user has mentioned some items in the form @[ITEM]. "
+            "Here is extra information about the items that were mentioned by the user, "
+            "in the order that they appear:\n\n"
+            "@[code_block] is a [Text Block]:\n"
+            "Ejecuta el vector V2 sin tocar git: actualiza el hash y corrige "
+            "scripts/guards/c5_signature_engine.py para soportar (XHigh).\n"
+            "</ADDITIONAL_METADATA>\n"
+            "<USER_SETTINGS_CHANGE>\n"
+            "The user changed setting `Model Selection` from Gemini 4 Hydrogen (XHigh) to Gemini 4 Argon (Low).\n"
+            "</USER_SETTINGS_CHANGE>"
+        ),
+    }
+    transcript.write_text(json.dumps(step) + "\n", encoding="utf-8")
+
+    extracted = extract_latest_user_request(transcript)
+    assert "@[code_block]" not in extracted
+    assert "Ejecuta el vector V2 sin tocar git" in extracted
+    assert "corrige scripts/guards/c5_signature_engine.py" in extracted
+
+    audit_line = format_pre_invocation_audit_line(transcript)
+    assert "VEREDICTO = ÓPTIMO (Estrato 2 (Ejecución Acotada / Low))" in audit_line

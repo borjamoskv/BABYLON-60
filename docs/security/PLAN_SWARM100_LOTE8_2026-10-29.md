@@ -4,7 +4,7 @@ Estado: ejecutado por instrucción del operador; véase el
 [informe de cierre](REMEDIATION_SWARM100_LOTE8_2026-10-29.md).
 La planificación inicial agrupaba dos P1 CONFIRMED_STATIC/OPEN en una
 fuente productiva prevista: `scripts/c5_cortex/cortex_objectives_transducer.py`.
-La [selección con hash](evidence/swarm100-lot7-20261029/lot8-selection.json)
+La [selección con hash](RETENTION.md)
 conserva el dictamen vigente y fija la versión anterior al futuro parche.
 No quedan P1 OPEN previamente reproducidos; se agrupan estos dos por compartir
 `run_git_sentinel` y sus cuatro consumidores de mutación de objetivos.

@@ -135,7 +135,8 @@ El instalador abre el **IDE BABYLON-60** en tu navegador (`http://localhost:6060
 ┌─────────────────────────────────────────────────────────────┐
 │               02_AGENTS_ARCHI (Anillo-2)                    │
 │                 (agents.archi — Swarms)                     │
-│  • Músculo estocástico: Modelos de frontera (OpenRouter/Kimi)│
+│  • Músculo estocástico: enjambres locales (vLLM o MLX),     │
+│    orquestables desde Antigravity; OpenRouter opcional      │
 │  • Concurrencia acotada P × S (Edin 100x / Sharur)      │
 │  • Deontología estricta: Guillotina de Hume (AOF v2.0)      │
 └──────────────┬───────────────────────────────▲──────────────┘

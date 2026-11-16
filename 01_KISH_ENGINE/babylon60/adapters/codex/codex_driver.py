@@ -157,22 +157,44 @@ class CodexDriver:
         thread_id, agent_messages, usage, raw_events = _parse_codex_events(lines)
         full_text = "\n".join(agent_messages)
 
-        if proc.returncode != 0 and not full_text:
-            return {
-                "success": False,
-                "returncode": proc.returncode,
-                "error": proc.stderr or proc.stdout,
-                "duration_sec": duration_sec,
-            }
+        event_errors: list[str] = []
+        for event in raw_events:
+            if event.get("type") == "turn.failed":
+                detail = event.get("error")
+                message = detail.get("message") if isinstance(detail, dict) else None
+                event_errors.append(message if isinstance(message, str) and message.strip() else "Codex turn failed")
+            elif event.get("type") == "error":
+                message = event.get("message")
+                event_errors.append(message if isinstance(message, str) and message.strip() else "Codex stream failed")
 
-        return {
-            "success": True,
+        # Partial assistant text is diagnostic output, not proof of completion.
+        # A later turn.started also invalidates an earlier turn.completed marker.
+        last_turn_event = next(
+            (
+                event.get("type")
+                for event in reversed(raw_events)
+                if event.get("type") in {"turn.started", "turn.completed", "turn.failed"}
+            ),
+            None,
+        )
+        success = proc.returncode == 0 and last_turn_event == "turn.completed" and not event_errors
+        result = {
+            "success": success,
+            "returncode": proc.returncode,
             "text": full_text,
             "thread_id": thread_id,
             "usage": usage,
             "duration_sec": round(duration_sec, 2),
             "events_count": len(raw_events),
         }
+        if not success:
+            if event_errors:
+                result["error"] = event_errors[-1]
+            elif proc.returncode != 0:
+                result["error"] = proc.stderr or proc.stdout or f"Codex process exited with code {proc.returncode}"
+            else:
+                result["error"] = "Codex stream ended without a final turn.completed event"
+        return result
 
     def queue_prompt(self, thread_id: str, message: str) -> dict[str, Any]:
         """Inject a prompt into an active Codex GUI thread via app-server."""

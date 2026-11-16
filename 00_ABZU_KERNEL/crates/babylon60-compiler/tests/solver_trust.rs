@@ -36,6 +36,7 @@ fn fake(root: &TempDir, journal: ReplayJournal, body: &str) -> (Z3Adapter, std::
 const SAT: &str = "print('sat')\nprint('(:reason-unknown \"\")')";
 
 #[test]
+#[ignore = "requiere el Z3 auditado: BABYLON_Z3_BIN (make test-z3)"]
 fn approved_real_binary_runs_and_query_is_reserved_and_consumed_once() {
     let root = TempDir::new();
     let journal = root.journal();
@@ -71,6 +72,7 @@ fn approved_real_binary_runs_and_query_is_reserved_and_consumed_once() {
 }
 
 #[test]
+#[ignore = "requiere el Z3 auditado: BABYLON_Z3_BIN (make test-z3)"]
 fn wrong_query_does_not_consume_the_correct_receipt() {
     let root = TempDir::new();
     let a = native(&root, root.journal());
@@ -216,6 +218,7 @@ fn source_symlink_fifo_directory_and_oversize_never_execute() {
 }
 
 #[test]
+#[ignore = "requiere el Z3 auditado: BABYLON_Z3_BIN (make test-z3)"]
 fn unknown_unsat_and_process_error_receipts_are_consumed_too() {
     for (id, body, limits) in [
         (20, "(assert false)", SolverLimits::default()),
@@ -523,11 +526,13 @@ fn sigkill_after_synced_reservation_keeps_id_spent_on_restart() {
     let journal = root.journal();
     let ack = root.0.join("ack");
     let mut child = worker(journal.path(), "hold", Some(&ack)).spawn().unwrap();
+    // The worker creates the ack file before writing it: wait for the content, not the path.
+    let acked = || std::fs::read(&ack).is_ok_and(|bytes| bytes == b"reserved-and-synced");
     let deadline = Instant::now() + Duration::from_secs(5);
-    while !ack.exists() && Instant::now() < deadline {
+    while !acked() && Instant::now() < deadline {
         std::thread::sleep(Duration::from_millis(5));
     }
-    let observed = ack.exists();
+    let observed = acked();
     child.kill().unwrap();
     let status = child.wait().unwrap();
     assert!(observed, "child never acknowledged durable reservation");

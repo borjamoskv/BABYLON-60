@@ -38,7 +38,7 @@ Se inspeccionaron textos, bloques Lean, referencias de implementación y fuentes
 
 **Afirmación histórica:** las firmas habían sido sustituidas por modelos verificados y el corpus era consistente.
 **Criterio:** revisar qué se demuestra y qué se exige como hipótesis; reproducir compilación.
-**Observación:** `morphism_primacy` y `exergy_homeostasis_abort` eran axiomas. Las estructuras bayesiana, oncológica y Tonnetz almacenaban pruebas como campos, sin construir instancias. El informe añadía `ax_canonical_invariant : ∀ (x : X), True` y `formal_axiomatization ... : True`, que solo pretendía reutilizar ese supuesto.
+**Observación:** `[OBSOLETO: morphism_primacy]` y `[OBSOLETO: exergy_homeostasis_abort]` eran axiomas. Las estructuras bayesiana, oncológica y Tonnetz almacenaban pruebas como campos, sin construir instancias. El informe añadía `ax_canonical_invariant : ∀ (x : X), True` y `formal_axiomatization ... : True`, que solo pretendía reutilizar ese supuesto.
 **Veredicto:** la descripción de estos bloques como pruebas científicas queda REFUTADA. Esto no afirma inconsistencia lógica de toda la teoría. El propio bloque final del informe fallaba además por un comentario de documentación delante de `variable`. Se retira y no se reemplaza por otra tautología.
 
 ### H2. Bayes como garantía de ausencia de alucinaciones
@@ -75,11 +75,11 @@ Extracción por bloque Markdown `lean`, sin corregir imports, tipos ni comentari
 | Origen | Bloque | Salida de Lean 4.35.0 | Alcance |
 | --- | --- | --- | --- |
 | Informe original | Ejemplo de axioma vacío | 0, con aviso por variable no usada | Aceptar un axioma tautológico no certifica nada del sistema. |
-| Informe original | `AuditAxioms2026` | 1, comentario de documentación antes de `variable` | No reproducible tal como estaba escrito. |
-| Base axiomática | `AxiomatizationC5Real` | 1, comentario/tipos/clases numéricas | No hay prueba de A1–A4. |
+| Informe original | `[OBSOLETO: AuditAxioms2026]` | 1, comentario de documentación antes de `variable` | No reproducible tal como estaba escrito. |
+| Base axiomática | `[OBSOLETO: AxiomatizationC5Real]` | 1, comentario/tipos/clases numéricas | No hay prueba de A1–A4. |
 | Bayes | `BayesianDisintegration` | 1, `unknown module prefix Mathlib` | Dependencias locales insuficientes; no se afirma compilación con un entorno hipotético. |
-| Oncología | `OncologyProtocol` | 1, resolución de tipos/clases | No acredita estabilidad, biología ni eficacia. |
-| Tonnetz | `TonnetzOversight` | 1, clases de orden/numerales de Real | No acredita percepción ni conformidad. |
+| Oncología | `[OBSOLETO: OncologyProtocol]` | 1, resolución de tipos/clases | No acredita estabilidad, biología ni eficacia. |
+| Tonnetz | `[OBSOLETO: TonnetzOversight]` | 1, clases de orden/numerales de Real | No acredita percepción ni conformidad. |
 | Compendio corregido | Cuatro teoremas discretos | 0, sin mensajes | Cotas, conservación, antitonicidad y separación entre déficit y etiqueta de verdad; alcance explicitado allí. |
 
 Las extracciones, copias previas, salidas completas y contrato de tarea se conservan localmente en `.audit/axioms-status-20261024/` (ignorado por Git). Este informe guarda los hallazgos duraderos; no depende de que ese directorio local se distribuya. Para repetir la compilación vigente del compendio basta extraer su único bloque Lean y ejecutar `lean <archivo.lean>`; sus `#guard_msgs` controlan las dependencias axiomáticas. Para repetir la inspección histórica se necesitan las versiones originales, no los documentos ya corregidos.
