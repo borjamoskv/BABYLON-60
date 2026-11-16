@@ -1,0 +1,1107 @@
+{
+  "reviewer": "04",
+  "review_mode": "STATIC_SOURCE_ONLY",
+  "scope": "All 29 assigned candidates; no product edits, native or network runtime, deployments, or operator data accessed.",
+  "candidates": [
+    {
+      "candidate_id": "SW100-C0381",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "path": "src/babylon60.rs",
+      "current_source_sha256": "202a32f58401f3c7f44dc72a0fb701205c8b5b118ef342e8a1779cd469919125",
+      "rationale": "Confirmed for the registered babylon60-dsl exporter. Both quarantine files have constant names and fs::write replaces existing contents; neither existence rejection nor a per-run directory preserves prior bundles. A second quarantine in the same writable working directory overwrites the first. This is source-level evidence of retention failure, not an executed loss of operator data.",
+      "source_checks": [
+        {
+          "path": "src/babylon60.rs",
+          "start_line": 503,
+          "end_line": 542,
+          "observation": "Quarantine path calls exporter, claims WORM, and writes both fixed names."
+        },
+        {
+          "path": "src/babylon60.rs",
+          "start_line": 242,
+          "end_line": 250,
+          "observation": "Static compilation rejection also reaches the same exporter."
+        },
+        {
+          "path": "Cargo.toml",
+          "start_line": 104,
+          "end_line": 106,
+          "observation": "The source is registered as the babylon60-dsl binary."
+        }
+      ],
+      "guards": [
+        "create_dir_all and expect handle directory/write errors but do not implement write-once semantics.",
+        "Requires two exports into the same writable working directory; no filesystem/runtime execution performed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/04-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0382",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "src/babylon60.rs",
+      "current_source_sha256": "202a32f58401f3c7f44dc72a0fb701205c8b5b118ef342e8a1779cd469919125",
+      "rationale": "The nonzero-remainder BA.EXACT path multiplies by 60 only once and divides with integer truncation. For value 1 and divisor 7 it stores 8 at scale 1, representing 8/60 rather than 1/7, and appends BA.EXACT without testing the new remainder. Current source still contains the candidate defect.",
+      "source_checks": [
+        {
+          "path": "src/babylon60.rs",
+          "start_line": 379,
+          "end_line": 398,
+          "observation": "One fractional digit is computed by integer division and then accepted."
+        },
+        {
+          "path": "src/babylon60.rs",
+          "start_line": 228,
+          "end_line": 239,
+          "observation": "Bracket operands are parsed and returned directly."
+        },
+        {
+          "path": "src/babylon60.rs",
+          "start_line": 266,
+          "end_line": 271,
+          "observation": "Initial register scale is zero, so the example is below the scale guard."
+        }
+      ],
+      "guards": [
+        "Divisor zero and scale >= 4 enter quarantine; neither applies to 1/7 at initial scale.",
+        "No Rust arithmetic or DSL runtime executed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/04-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0383",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "src/babylon60.rs",
+      "current_source_sha256": "202a32f58401f3c7f44dc72a0fb701205c8b5b118ef342e8a1779cd469919125",
+      "rationale": "A program containing ALLOC passes static_proof because only present branch-label operands are validated; run_program then indexes tokens[1] and tokens[2] without an arity check. A short ALLOC therefore reaches a Rust bounds panic instead of the quarantine error path. This conclusion is confined to malformed DSL input.",
+      "source_checks": [
+        {
+          "path": "src/babylon60.rs",
+          "start_line": 131,
+          "end_line": 161,
+          "observation": "Static proof validates labels, with missing operands yielding None and eventual Ok."
+        },
+        {
+          "path": "src/babylon60.rs",
+          "start_line": 242,
+          "end_line": 264,
+          "observation": "Successful compilation flows into instruction execution without a syntax parser."
+        },
+        {
+          "path": "src/babylon60.rs",
+          "start_line": 317,
+          "end_line": 332,
+          "observation": "Only empty tokens are skipped before unguarded ALLOC operand indexing."
+        }
+      ],
+      "guards": [
+        "Empty lines and undefined existing label operands are handled.",
+        "Unknown opcodes quarantine at lines 488–494, but a recognized malformed ALLOC does not enter that arm."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/04-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0384",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "src/babylon60.rs",
+      "current_source_sha256": "202a32f58401f3c7f44dc72a0fb701205c8b5b118ef342e8a1779cd469919125",
+      "rationale": "The exported global hash commits only id, sorted parent IDs, logical timestamp, payload, and the literal SIG_OK field. DAGEvent.compute_hash includes opcode, but that event hash is also omitted from export. Changing opcode can change proof.ir semantics while leaving graph.canonical and global_hash unchanged; proof.ir is independently written and has no included digest. No assertion is made about a downstream verifier accepting an altered artifact.",
+      "source_checks": [
+        {
+          "path": "src/babylon60.rs",
+          "start_line": 41,
+          "end_line": 63,
+          "observation": "DAGEvent holds opcode and an opcode-bearing internal hash."
+        },
+        {
+          "path": "src/babylon60.rs",
+          "start_line": 82,
+          "end_line": 91,
+          "observation": "signature is the constant SIG_OK; the internal hash is computed separately."
+        },
+        {
+          "path": "src/babylon60.rs",
+          "start_line": 515,
+          "end_line": 541,
+          "observation": "Quarantine canonicalization omits opcode and internal event hash."
+        },
+        {
+          "path": "src/babylon60.rs",
+          "start_line": 545,
+          "end_line": 594,
+          "observation": "Normal graph hash omits opcode while proof IR dispatches on opcode and is written separately."
+        }
+      ],
+      "guards": [
+        "Canonical sorting stabilizes serialization order but does not bind omitted semantic fields.",
+        "No artifact mutation or verifier runtime tested."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/04-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0276",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/attestation/merkle_anchor.py",
+      "current_source_sha256": "cf90589a3faf04117731c693bb62a0f0486ea9ca9091af17ce915964dc170ce9",
+      "rationale": "generate_hardware_pcr_quote computes two ordinary SHA-256 digests and emits tpm_quote_signature plus TPM_2_0_HARDWARE_SEALED. Its default seed is the hardware UUID returned in the same object. Reading a UUID, or using an environment seed, does not invoke TPM/Secure Enclave signing. The misleading object is attached to certificate/decision evidence and AL3 session data. No hardware identity or real secret was read during this review.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/attestation/merkle_anchor.py",
+          "start_line": 105,
+          "end_line": 128,
+          "observation": "Software hash construction and hardware-sealed output labels."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py",
+          "start_line": 305,
+          "end_line": 320,
+          "observation": "Certificate contains the returned hardware_anchor object."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py",
+          "start_line": 473,
+          "end_line": 497,
+          "observation": "Decision evidence validates ledger integrity then attaches software quote."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+          "start_line": 179,
+          "end_line": 188,
+          "observation": "AL3 sessions attach quote before writing bundle manifest."
+        }
+      ],
+      "guards": [
+        "Hardware lookup may report UNKNOWN_HARDWARE_UUID; quote emission remains unconditional.",
+        "Ledger integrity and separate certificate signatures do not turn this hash into a hardware quote."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/04-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0277",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/attestation/merkle_anchor.py",
+      "current_source_sha256": "cf90589a3faf04117731c693bb62a0f0486ea9ca9091af17ce915964dc170ce9",
+      "rationale": "The normal generate_notary_checkpoint branch constructs a hash-derived ID and returns CHECKPOINT_SEALED / 3f+1_QUORUM_VERIFIED without contacting validators, checking signatures, collecting votes, or storing a checkpoint. The explicit simulated-failure branch does not establish success in the default branch. Confirmed as a misleading public API result; no internal caller was found by targeted search of 01_KISH_ENGINE/babylon60, so severity is scoped below demonstrated live consensus compromise.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/attestation/merkle_anchor.py",
+          "start_line": 130,
+          "end_line": 161,
+          "observation": "Entire checkpoint method only hashes, reads time and returns dictionaries."
+        }
+      ],
+      "guards": [
+        "simulate_network_failure=True labels LOCAL_ONLY_UNATTESTED_MODE; default False claims sealing without evidence.",
+        "No notary network or runtime call executed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/04-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0127",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/kernel/sovereign_binary_analyzer.py",
+      "current_source_sha256": "4d72badbfdbf68ed8645535a301c261378e48b037628926ccdfe665e67d0d960",
+      "rationale": "Linux ELF metadata has an empty section list, which prevents the Capstone section reader from yielding instructions. The fallback selects objdump -d, then rejects every nonempty colon-bearing line unless it begins 0x. Ordinary ADDRESS: instruction records consequently disappear before address parsing. This supports empty Linux disassembly for ordinary objdump output; no native disassembler was launched.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/sovereign_binary_analyzer.py",
+          "start_line": 166,
+          "end_line": 195,
+          "observation": "ELF sections are empty and empty Capstone output triggers CLI fallback."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/sovereign_binary_analyzer.py",
+          "start_line": 203,
+          "end_line": 213,
+          "observation": "No matching section returns an empty instruction list."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/sovereign_binary_analyzer.py",
+          "start_line": 269,
+          "end_line": 289,
+          "observation": "The objdump branch and colon filter discard normal address records."
+        }
+      ],
+      "guards": [
+        "CLI errors also return an empty list, which does not distinguish parse failure from no instructions.",
+        "Mach-O/otool formatting is outside this finding."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/04-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0128",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/kernel/sovereign_binary_analyzer.py",
+      "current_source_sha256": "4d72badbfdbf68ed8645535a301c261378e48b037628926ccdfe665e67d0d960",
+      "rationale": "Both instruction classifiers use finite mnemonic lists that omit x86 jle/jge/ja/jae/jb/jbe and ARM b.ge/b.le/b.hi/b.ls. Capstone output with one of these mnemonics gets is_branch=False and no branch target, so build_cfg does not make the required leaders or taken edge. The defect is independent of the Linux objdump parsing failure and remains reachable for Capstone disassembly with available sections.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/sovereign_binary_analyzer.py",
+          "start_line": 226,
+          "end_line": 252,
+          "observation": "Capstone branch list and target extraction omit the listed conditional mnemonics."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/sovereign_binary_analyzer.py",
+          "start_line": 292,
+          "end_line": 305,
+          "observation": "CLI branch list has the same omissions."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/sovereign_binary_analyzer.py",
+          "start_line": 339,
+          "end_line": 347,
+          "observation": "Leaders depend on branch/call/return flags."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/sovereign_binary_analyzer.py",
+          "start_line": 371,
+          "end_line": 394,
+          "observation": "Taken and fallthrough branch edges depend on is_branch."
+        }
+      ],
+      "guards": [
+        "Listed mnemonics receive branch handling; call and return flags cover only their separate classes.",
+        "No decoder or CFG runtime was invoked."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/04-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0526",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "path": "crates/eridu-infer/src/server.rs",
+      "current_source_sha256": "bbbc97cf3cb7e2cef458411dce71791d47560615310fb3107f0ab18e8ba5e903",
+      "rationale": "chat_completions_handler derives generated_response from fixed format strings selected by requested model. gguf_model contributes only tensor_count; there is no inference call in the handler. The result is labeled chat.completion with model=req.model and token counts derived from string byte lengths. The causal gate can reject a poisoned manifest but does not execute model inference. Confirmed as fabricated inference semantics in this endpoint, not as a claim that all inference code in the repository is a stub.",
+      "source_checks": [
+        {
+          "path": "crates/eridu-infer/src/server.rs",
+          "start_line": 117,
+          "end_line": 146,
+          "observation": "Handler stages prompt, calls causal gate and reads GGUF tensor count."
+        },
+        {
+          "path": "crates/eridu-infer/src/server.rs",
+          "start_line": 146,
+          "end_line": 201,
+          "observation": "Response is built from fixed model-specific strings; usage is string-length approximation."
+        },
+        {
+          "path": "crates/eridu-infer/src/server.rs",
+          "start_line": 212,
+          "end_line": 232,
+          "observation": "Response reports the requested model and generated completion."
+        },
+        {
+          "path": "crates/eridu-infer/src/gate.rs",
+          "start_line": 57,
+          "end_line": 105,
+          "observation": "Gate hashes/publishes the prompt and creates a receipt without inference."
+        }
+      ],
+      "guards": [
+        "A poisoned SharedManifest rejects in the gate, but normal gate acceptance does not establish inference.",
+        "No daemon, model or native code executed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/04-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0527",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "crates/eridu-infer/src/server.rs",
+      "current_source_sha256": "bbbc97cf3cb7e2cef458411dce71791d47560615310fb3107f0ab18e8ba5e903",
+      "rationale": "The router adds the completion and WebSocket handlers without auth middleware. Completion extracts only state/JSON; WebSocket drops state and acknowledges channel/RPC messages without credentials. DualPasskeyAuth is instantiated but targeted source search finds no validate call. Main binds both HTTP listeners to loopback, so the confirmed exposure is to clients able to reach local ports; remote network access or actual privileged effects via RPC are not established.",
+      "source_checks": [
+        {
+          "path": "crates/eridu-infer/src/server.rs",
+          "start_line": 35,
+          "end_line": 62,
+          "observation": "Auth object is instantiated but router has no middleware."
+        },
+        {
+          "path": "crates/eridu-infer/src/server.rs",
+          "start_line": 118,
+          "end_line": 141,
+          "observation": "Completion handler does not authenticate the request."
+        },
+        {
+          "path": "crates/eridu-infer/src/server.rs",
+          "start_line": 235,
+          "end_line": 270,
+          "observation": "WebSocket accepts upgrade and acknowledges messages without auth."
+        },
+        {
+          "path": "crates/eridu-infer/src/auth.rs",
+          "start_line": 40,
+          "end_line": 57,
+          "observation": "Validator exists and includes a permissive local no-key branch, but is unused."
+        },
+        {
+          "path": "crates/eridu-infer/src/main.rs",
+          "start_line": 44,
+          "end_line": 81,
+          "observation": "App is served on 127.0.0.1:41343 and 127.0.0.1:1234."
+        }
+      ],
+      "guards": [
+        "Loopback binding narrows reachability; it does not authenticate local clients.",
+        "Causal gate handles prompt state, not client identity.",
+        "WebSocket shown here returns canned acknowledgments; arbitrary RPC execution is not claimed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/04-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0556",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_verifiers/fast_smt_gate.py",
+      "current_source_sha256": "ef4c442f821689838b76a7aaa5cf29c625de2dac3df0a5bd1e2856cfdb526748",
+      "rationale": "DAG, KDA, BFT, thermodynamic and epistemic invariant results are literal True values, apart from root and skills path existence checks. The resulting booleans are aggregated into SYSTEM_SOUND_AND_COMPLIANT without inspecting the claimed implementations or calling a solver. daily_sovereign_maintenance consumes this script exit status as fast_smt_gate_pass. This confirms unsupported quality-gate evidence; no conclusion is drawn about whether the underlying invariants actually hold.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_verifiers/fast_smt_gate.py",
+          "start_line": 23,
+          "end_line": 42,
+          "observation": "DAG results are constants except root existence."
+        },
+        {
+          "path": "scripts/c5_verifiers/fast_smt_gate.py",
+          "start_line": 45,
+          "end_line": 123,
+          "observation": "KDA/BFT/exergy/epistemic checks append literal True values."
+        },
+        {
+          "path": "scripts/c5_verifiers/fast_smt_gate.py",
+          "start_line": 126,
+          "end_line": 131,
+          "observation": "Agent check only tests directory existence."
+        },
+        {
+          "path": "scripts/c5_verifiers/fast_smt_gate.py",
+          "start_line": 157,
+          "end_line": 202,
+          "observation": "Constant results become JSON pass/compliance verdict."
+        },
+        {
+          "path": "scripts/c5_quality_gates/daily_sovereign_maintenance.py",
+          "start_line": 152,
+          "end_line": 181,
+          "observation": "Maintenance consumes gate subprocess status as a quality gate result."
+        }
+      ],
+      "guards": [
+        "Root and skill directory absence can fail the aggregate; their presence does not validate other claims.",
+        "No production invariant, SMT solver or maintenance script executed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/04-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0557",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_verifiers/fast_smt_gate.py",
+      "current_source_sha256": "ef4c442f821689838b76a7aaa5cf29c625de2dac3df0a5bd1e2856cfdb526748",
+      "rationale": "The SCITT receipt digest hashes only invariant IDs, omitting each outcome, description and detail. Flipping outcomes for the same IDs changes claims but leaves the digest and fabricated sig_ed25519_ prefix unchanged. No signing key or Ed25519 operation is used, and Article 15 compliance is literal True. This is separate from the checks returning constants: even caller-supplied failing outcomes produce an unbound, unsigned receipt.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_verifiers/fast_smt_gate.py",
+          "start_line": 135,
+          "end_line": 154,
+          "observation": "Receipt hashes IDs only, emits literal compliance and formats a pseudo-signature."
+        },
+        {
+          "path": "scripts/c5_verifiers/fast_smt_gate.py",
+          "start_line": 173,
+          "end_line": 199,
+          "observation": "Both SCITT and JSON modes expose the pseudo-receipt."
+        }
+      ],
+      "guards": [
+        "Process exit status may signal failed invariants, but the receipt compliance field and pseudo-signature remain unaffected.",
+        "No claim that an independent cryptographic verifier accepts the string."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/04-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0564",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": ".github/actions/archi-guard/action.yml",
+      "current_source_sha256": "590bb0f38dd90a13a969f7b979e2f85323e7d4cc31cab6b6e12657b548d688ad",
+      "rationale": "Composite action inputs are expanded directly into the Bash run source, including a format suffix outside quotes. Quote/command-substitution characters in an input therefore become shell syntax before cortex-guard starts; surrounding double quotes do not neutralize inserted command substitutions. Confirmed at the reusable action boundary. Targeted .github search found no current internal use passing attacker-controlled data, so exploitation in an active workflow remains unestablished and severity is P2.",
+      "source_checks": [
+        {
+          "path": ".github/actions/archi-guard/action.yml",
+          "start_line": 5,
+          "end_line": 21,
+          "observation": "Inputs are free-form strings with defaults and no value validation."
+        },
+        {
+          "path": ".github/actions/archi-guard/action.yml",
+          "start_line": 34,
+          "end_line": 42,
+          "observation": "All four inputs are interpolated in shell source; report suffix is unquoted."
+        }
+      ],
+      "guards": [
+        "Default values are benign; the defect requires caller-controlled input containing shell syntax.",
+        "No workflow or shell injection payload was executed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/04-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0577",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bft_iceoryx2.rs",
+      "current_source_sha256": "c722b818b8de1017c843c1e7d24356ad4f008bafedd388ccba0bbe7d2a11f1c0",
+      "rationale": "IpcEnvelope publicly exposes independent len and fixed data[8192]. subscribe_exergy_packet slices data[..env.len] before unpack can reject malformed data, so len >8192 causes a bounds panic. The helper publisher bounds its own packets, but that does not constrain other publishers of the same service type. Current hypervisor writer also repeats the unchecked slice, extending the static scope beyond the unused convenience subscriber. No IPC publisher/subscriber runtime was executed.",
+      "source_checks": [
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/bft_iceoryx2.rs",
+          "start_line": 76,
+          "end_line": 81,
+          "observation": "Public envelope has no length invariant encoded in its type."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/bft_iceoryx2.rs",
+          "start_line": 83,
+          "end_line": 105,
+          "observation": "Helper publisher checks only its own packed payload."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/bft_iceoryx2.rs",
+          "start_line": 110,
+          "end_line": 125,
+          "observation": "Receive path slices untrusted len without a prior bound check."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/hypervisor.rs",
+          "start_line": 302,
+          "end_line": 341,
+          "observation": "Writer daemon uses IpcEnvelope and repeats unchecked slicing before unpack."
+        }
+      ],
+      "guards": [
+        "Service connection/type compatibility and access to the IPC service are prerequisites.",
+        "ExergyPacket::unpack validation runs after slicing and cannot catch the bounds panic.",
+        "Worker stop flag and max_events bound looping, not envelope length."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/04-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0073",
+      "decision": "ALREADY_FIXED",
+      "severity": "P2",
+      "remediation_state": "FIXED",
+      "path": "01_KISH_ENGINE/babylon60/compliance_exporter/m0_evidence_pack.py",
+      "current_source_sha256": "82dc6e8cf8c106a5c7a8c2f68b9ee188457a6d3e618968d38e83acdefc1ddd2c",
+      "rationale": "The assigned source hash is stale. Current compile_pack verifies the copied ledger, immediately tests ev_check[\"verified\"], and raises ValueError before constructing ledger_info when false. The current verifier returns verified=False for unsupported versions, sequence discontinuity, Lamport regressions and broken hashes. The specific ignored-verdict assertion is therefore already corrected in current code. This classification records static remediation only; no pack/signing/database runtime validation was performed.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/compliance_exporter/m0_evidence_pack.py",
+          "start_line": 623,
+          "end_line": 637,
+          "observation": "Existing ledger is backed up and rejected if verified is false before ledger_info is used."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+          "start_line": 320,
+          "end_line": 354,
+          "observation": "Invalid version, ordering and chain states return verified=False."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+          "start_line": 370,
+          "end_line": 377,
+          "observation": "Entry hash mismatch returns verified=False."
+        }
+      ],
+      "guards": [
+        "Current fail-closed guard is lines 632–633.",
+        "Partial output directories may remain after failure; that is distinct from the assigned success-shaped deliverable assertion."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/04-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0543",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/guards/saga_contract.py",
+      "current_source_sha256": "d127155094d4f989da562fcbe3008d87566a4499fdeaabce0a54c8ff6f9689bd",
+      "rationale": "The frozen dataclass stores the supplied Mapping object without copying or recursively freezing it. get_payload_hash serializes its current contents each call, and transition_to reuses exactly that object. A caller retaining a mutable dict (or nested dict) can change a COMMITTED proposal payload/hash without another state transition. Confirmed as an immutability/evidence contract defect, not an execution-authorization bypass.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/guards/saga_contract.py",
+          "start_line": 26,
+          "end_line": 45,
+          "observation": "Frozen fields retain mutable Mapping and current-content hash; validity checks omit deep immutability."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/guards/saga_contract.py",
+          "start_line": 47,
+          "end_line": 59,
+          "observation": "Allowed transition creates a new proposal with the original payload reference."
+        }
+      ],
+      "guards": [
+        "Frozen dataclass blocks field reassignment, not mutation of referenced objects.",
+        "Only PENDING proposals may transition, which does not stop external dict mutation."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/04-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0419",
+      "decision": "REJECTED",
+      "severity": "P2",
+      "remediation_state": "NOT_APPLICABLE",
+      "path": "01_KISH_ENGINE/babylon60/transducers/hygiene.py",
+      "current_source_sha256": "f81a1a493ba298b04440b9d667fb19af9398f62752b17866f152acfe13210445",
+      "rationale": "Rejected: the candidate miscounts zero-based Path.parents. For the current regular file, parents[0]=transducers, [1]=babylon60, [2]=01_KISH_ENGINE, and [3]=BABYLON-60. Metadata inspection confirms the resolved parents[3] is the repository root and the declared optimizer script exists beneath it. The subprocess cwd is therefore correct for this checkout; any unrelated import, scoring or optimizer failure is outside this assertion.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/transducers/hygiene.py",
+          "start_line": 23,
+          "end_line": 40,
+          "observation": "parents[3] is used as cwd with the repository-relative optimizer path."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/transducers/hygiene.py",
+          "start_line": 92,
+          "end_line": 100,
+          "observation": "Errors do return False, but the alleged wrong cwd is not present."
+        },
+        {
+          "path": "scripts/c5_quality_gates/pre_push_ledger_guard.py",
+          "start_line": 25,
+          "end_line": 35,
+          "observation": "Pre-push caller consumes helper result; it does not alter cwd calculation."
+        }
+      ],
+      "guards": [
+        "04-source-evidence.json records the actual parent chain, symlink status and optimizer existence.",
+        "No optimizer or pre-push command was run."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/04-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0538",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "02_EDIN_SWARMS/agents_archi/orchestrator/swarm.py",
+      "current_source_sha256": "dd58f1b736cdb9f4dfad5f0b67dd4ec9e757b4806d2f289b6aea617232a54c12",
+      "rationale": "With an unconfigured remote backend and accepted request payload, call returns a normal string containing AIR-GAP MOCK; execute_dag labels every non-LLMCallError result OK. There is no test-mode requirement around this fallback. The default backend is remote. The result text explicitly reveals the mock, so the strongest claim that consumers cannot distinguish it is narrowed: the machine status falsely reports normal success unless consumers parse that text.",
+      "source_checks": [
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/orchestrator/swarm.py",
+          "start_line": 56,
+          "end_line": 67,
+          "observation": "Default configuration selects MOONSHOT_REMOTE."
+        },
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/orchestrator/swarm.py",
+          "start_line": 285,
+          "end_line": 305,
+          "observation": "Circuit/model guards precede missing-key fallback, which returns an ordinary mock string."
+        },
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/orchestrator/swarm.py",
+          "start_line": 389,
+          "end_line": 399,
+          "observation": "Only LLMCallError yields ERROR; mock string receives OK."
+        }
+      ],
+      "guards": [
+        "Circuit-breaker/model-floor rejection can precede fallback; confirmation covers requests accepted by those guards.",
+        "AIR-GAP MOCK text is an explicit warning, but no structured mock/simulation status is returned.",
+        "No credentials read, providers called or swarm runtime executed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/04-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0038",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "docs/RESULTADOS.md",
+      "current_source_sha256": "316b23a2ea46c271da6eaf51f6f6461c2c6eded33b8349c3d2086b0a683c3882",
+      "rationale": "The documented demonstration still instructs make verify_lean. The current Makefile defines test-lean at lines 35–36 and contains no verify_lean rule, include directive, catch-all or default rule that supplies it. In the documented normal checkout command this step cannot reach the promised Lean validation. No make or Lean build was run.",
+      "source_checks": [
+        {
+          "path": "docs/RESULTADOS.md",
+          "start_line": 53,
+          "end_line": 57,
+          "observation": "Formal validation recipe names make verify_lean."
+        },
+        {
+          "path": "Makefile",
+          "start_line": 29,
+          "end_line": 36,
+          "observation": "Actual Lean target is test-lean."
+        },
+        {
+          "path": "Makefile",
+          "start_line": 50,
+          "end_line": 53,
+          "observation": "Aggregate test target depends on test-lean."
+        }
+      ],
+      "guards": [
+        "A separately user-supplied makefile/MAKEFILES environment could add a target, but none is part of this documented recipe."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/04-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0402",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_calibrations/topological_calibration.py",
+      "current_source_sha256": "54263f9c0944ef7764da3a4dd1bb1044dd7b7acd6b0c71501804e3251da69ab6",
+      "rationale": "calibrate_sheaf_operator independently bins both arrays with bins=50 and no common range or edges, then compares those histograms indexwise as P and Q. Translated equal-shape samples can have identical per-array counts despite occupying disjoint intervals, yielding a near-zero KL for different events. Clipping and normalization do not repair incompatible bin supports. Confirmed in the demonstration/calibration function, without claiming measured physical energy.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_calibrations/topological_calibration.py",
+          "start_line": 39,
+          "end_line": 47,
+          "observation": "KL compares normalized array positions without knowledge of bin edges."
+        },
+        {
+          "path": "scripts/c5_calibrations/topological_calibration.py",
+          "start_line": 74,
+          "end_line": 86,
+          "observation": "Two independently derived histogram grids feed reported KL and energy-bound values."
+        }
+      ],
+      "guards": [
+        "SVD-based topology estimation is separate from this histogram-support error.",
+        "No NumPy/calibration runtime or external dataset used."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/04-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0160",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_demos/poc_agents_archi_enterprise.py",
+      "current_source_sha256": "73715c88b1f4984c19118a4a904eee0fd026fe38495192828734041143beae37",
+      "rationale": "run_cmd returns subprocess return codes, but both initial and tampered-chain verify results are merely printed. If the chain file exists and verification accepts tampering or fails for unrelated reasons, control reaches unconditional success/compliance statements. The demo does not assert baseline success, that replacement changed bytes, or expected tamper failure. This is a demonstration-evidence defect, not proof that the real verifier is broken.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_demos/poc_agents_archi_enterprise.py",
+          "start_line": 51,
+          "end_line": 56,
+          "observation": "Helper exposes returncode."
+        },
+        {
+          "path": "scripts/c5_demos/poc_agents_archi_enterprise.py",
+          "start_line": 150,
+          "end_line": 168,
+          "observation": "Both verify calls ignore code; mutation is not checked for change."
+        },
+        {
+          "path": "scripts/c5_demos/poc_agents_archi_enterprise.py",
+          "start_line": 170,
+          "end_line": 179,
+          "observation": "Success is unconditional once earlier filesystem operations complete; cleanup follows."
+        }
+      ],
+      "guards": [
+        "Missing binary exits early and missing chain file raises, so the demo does not always complete under all failures.",
+        "No binary, attestation or real ledger operation executed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/04-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0397",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_edin/edin_swarm_runner.py",
+      "current_source_sha256": "cff71c0cb84846cda92d55fd5c61d43e78e0a1a68185fb241b253d0a2c83b537",
+      "rationale": "execute_vector_agent reads only shard metadata, constructs a VECTOR_AUDIT_COMPLETED event with status C5_VERIFIED, and passes it to the ledger actor without opening or auditing the target. The function docstring says simulation, but no simulation field is included in the persisted payload. Main targets a persistent data/cib_async_ledger.db. The ledger actor serializes the supplied payload and inserts it; it checks causal trace/collision consistency rather than audit truth.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_edin/edin_swarm_runner.py",
+          "start_line": 23,
+          "end_line": 55,
+          "observation": "Persistent default path and unconditional verification event construction/append."
+        },
+        {
+          "path": "scripts/c5_edin/edin_swarm_runner.py",
+          "start_line": 66,
+          "end_line": 90,
+          "observation": "Main validates shard-file existence and dispatches metadata vectors to the actor."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+          "start_line": 438,
+          "end_line": 475,
+          "observation": "Transaction persists supplied event payload."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+          "start_line": 480,
+          "end_line": 501,
+          "observation": "Actor requires a nonempty trace, serializes payload and submits insert."
+        }
+      ],
+      "guards": [
+        "Missing shards aborts; actor startup/import must succeed and duplicate-event collision rules can reject writes.",
+        "These guards do not inspect target correctness. No ledger or runner executed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/04-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0124",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P3",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_quality_gates/extensions_apoptosis_auditor.py",
+      "current_source_sha256": "9a9ebbf34bc2f981aceae1619c37c5fd072ae921b0cf507d8253fb8546c16f29",
+      "rationale": "The auditor derives EXT_DIR as repository/babylon60/extensions, which metadata inspection confirms absent. Its missing-directory branch prints a diagnostic and returns normally; the main entrypoint does not turn that into failure. Thus this checkout skips the intended reachability analysis with successful Python completion. The current relocated package has no extensions directory either, and no active internal gate caller was found, so this is scoped as a stale optional auditor (P3), not a demonstrated CI bypass.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_quality_gates/extensions_apoptosis_auditor.py",
+          "start_line": 19,
+          "end_line": 20,
+          "observation": "Extension root uses top-level babylon60 path."
+        },
+        {
+          "path": "scripts/c5_quality_gates/extensions_apoptosis_auditor.py",
+          "start_line": 41,
+          "end_line": 48,
+          "observation": "Absent target produces a message and normal return."
+        },
+        {
+          "path": "scripts/c5_quality_gates/extensions_apoptosis_auditor.py",
+          "start_line": 56,
+          "end_line": 72,
+          "observation": "Caller paths also include obsolete top-level babylon60 roots."
+        },
+        {
+          "path": "scripts/c5_quality_gates/extensions_apoptosis_auditor.py",
+          "start_line": 117,
+          "end_line": 118,
+          "observation": "Entrypoint calls function with no result-to-exit-status conversion."
+        }
+      ],
+      "guards": [
+        "The skip is printed to stdout and does not claim an actual reachability count.",
+        "No --purge operation, Python auditor or deletion executed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/04-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0354",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_sharur/sharur_100_swarm_execution.py",
+      "current_source_sha256": "84b155a4f3ff7c106ba7e9eb9e3068bc123d5976757e353da78223b966e324d1",
+      "rationale": "Each supposed audit agent only selects a descriptive target and sleeps, then returns PASS, deterministic synthetic exergy and silicon-verified evidence. Aggregate counts and critical_fixes_attested are literals; the JSON report has no simulation flag. This contradicts the script purpose of auditing/certifying fixes and produces unsupported machine-readable evidence. No report generation or target auditing was executed in this review.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_sharur/sharur_100_swarm_execution.py",
+          "start_line": 1,
+          "end_line": 5,
+          "observation": "Header presents the harness as auditing/certifying resolution of findings."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_swarm_execution.py",
+          "start_line": 149,
+          "end_line": 175,
+          "observation": "Worker sleeps and returns constant verification-shaped result."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_swarm_execution.py",
+          "start_line": 178,
+          "end_line": 202,
+          "observation": "Sitrep hardcodes passes/fix attestation and writes JSON."
+        }
+      ],
+      "guards": [
+        "The source comment labels simulated latency, but emitted status/evidence does not disclose simulation.",
+        "Concurrent execution demonstrates only task scheduling, not the listed audit properties."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/04-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0207",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P3",
+      "remediation_state": "OPEN",
+      "path": "scripts/repatriated/apex_merkle_l5_anchor.py",
+      "current_source_sha256": "368260a5194b4a978ce26721b8defbd42155ccd4a13232d41b67fb59338f225c",
+      "rationale": "run_apex_suite constructs a Merkle root from four literal simulated receipt strings and formats an OP_RETURN payload; no transaction, timestamp/inclusion proof or hardware signature is produced or verified. It nevertheless prints irreversible PoW/consummated silicon closure statements. The header does describe formatting and a demonstration, so severity remains P3 and the confirmed issue is overstated output, not an unauthorized Bitcoin transaction.",
+      "source_checks": [
+        {
+          "path": "scripts/repatriated/apex_merkle_l5_anchor.py",
+          "start_line": 1,
+          "end_line": 8,
+          "observation": "Header describes a demonstration and payload formatting."
+        },
+        {
+          "path": "scripts/repatriated/apex_merkle_l5_anchor.py",
+          "start_line": 33,
+          "end_line": 43,
+          "observation": "Helper constructs and length-checks only payload bytes."
+        },
+        {
+          "path": "scripts/repatriated/apex_merkle_l5_anchor.py",
+          "start_line": 45,
+          "end_line": 64,
+          "observation": "Literal simulation inputs lead directly to completed anchoring/closure wording."
+        }
+      ],
+      "guards": [
+        "42-byte payload assertion checks format only.",
+        "No network, hardware, signing or anchor runtime performed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/04-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0057",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tests/test_axioms_hypothesis.py",
+      "current_source_sha256": "caec85e208d37833c4d1b0f6b87758bdce7ea1a370b7793a07f8eff214e897aa",
+      "rationale": "The concurrency property computes min(c, limit) in the test itself and asserts each clamped value is <=limit. It never observes a production scheduler/semaphore and will remain true when production concurrency enforcement changes. Imports and the adjacent local simulated DAG algorithm confirm model-only scope. Confirmed as a vacuous regression test for the stated concurrency property, not evidence of an actual production race or a claim that all repository tests are ineffective.",
+      "source_checks": [
+        {
+          "path": "tests/test_axioms_hypothesis.py",
+          "start_line": 6,
+          "end_line": 20,
+          "observation": "Suite claims axiom verification but imports only standard library and Hypothesis."
+        },
+        {
+          "path": "tests/test_axioms_hypothesis.py",
+          "start_line": 229,
+          "end_line": 256,
+          "observation": "Adjacent BFT test operates on an explicitly simulated local DAG."
+        },
+        {
+          "path": "tests/test_axioms_hypothesis.py",
+          "start_line": 258,
+          "end_line": 267,
+          "observation": "Concurrency assertion checks its own clamp rather than engine behavior."
+        }
+      ],
+      "guards": [
+        "Hypothesis varies counts/limits but does not connect the property to implementation.",
+        "No test suite or production BFT engine run."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/04-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0154",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/flagship/api.md",
+      "current_source_sha256": "c7b8eb86ed852a3f37709f000988aeb89860c24aedee58527379e475f0996894",
+      "rationale": "The documented prerequisites command expands the full CLOUDFLARE_API_TOKEN value inside echo when set, even though it only needs presence verification. Following it would disclose the token to terminal/tool output and potentially retained transcripts. Shell history ordinarily stores the command text rather than expanded secret, so direct token-in-history is not asserted. No real environment value or credential was read.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/codex_overrides/cloudflare/references/flagship/api.md",
+          "start_line": 141,
+          "end_line": 159,
+          "observation": "Prerequisite check explicitly echoes expanded API token."
+        }
+      ],
+      "guards": [
+        "Unset variables render a harmless marker; set credentials are printed in full.",
+        "Only documentation was read; snippet was not executed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/04-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0338",
+      "decision": "DUPLICATE",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-tri-provider-swarm/scripts/tri_swarm_dispatcher.py",
+      "current_source_sha256": "68e34604fb1c3158ea6b09a8e85a1c7f7f529a4642fd104b30793e92425a05ed",
+      "rationale": "Duplicate of SW100-C0049: current nested module copy and standalone skill dispatcher are distinct regular files with identical bytes/SHA-256 and identical sleep-plus-SUCCESS provider methods. Both occurrences remain open and need coordinated remediation; this duplicate classification avoids counting the same shipped implementation defect twice without erasing the second affected path.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-tri-provider-swarm/scripts/tri_swarm_dispatcher.py",
+          "start_line": 52,
+          "end_line": 107,
+          "observation": "Nested module dispatch/provider bodies match the canonical dispatcher byte-for-byte."
+        },
+        {
+          "path": "tools/skill_library/global/c5-tri-provider-swarm/scripts/tri_swarm_dispatcher.py",
+          "start_line": 52,
+          "end_line": 107,
+          "observation": "Canonical copy contains the same root cause."
+        }
+      ],
+      "guards": [
+        "Byte identity and separate regular-file paths are recorded in evidence metadata.",
+        "No provider operation performed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/04-source-evidence.json"
+      ],
+      "canonical_id": "SW100-C0049"
+    },
+    {
+      "candidate_id": "SW100-C0049",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/global/c5-tri-provider-swarm/scripts/tri_swarm_dispatcher.py",
+      "current_source_sha256": "68e34604fb1c3158ea6b09a8e85a1c7f7f529a4642fd104b30793e92425a05ed",
+      "rationale": "The production-labeled dispatcher stores keys/URL but each provider method only sleeps and returns SUCCESS plus fixed text, including a claim of executed code mutation. Prompts and max_tokens are not used in inference. dispatch_task/run_swarm_campaign expose these results as successful provider work. The module copy at the C0338 path is byte-identical and requires the same remediation; no claim is made about a separate installed/deployed skill.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/global/c5-tri-provider-swarm/scripts/tri_swarm_dispatcher.py",
+          "start_line": 1,
+          "end_line": 8,
+          "observation": "Header calls the harness Production Script."
+        },
+        {
+          "path": "tools/skill_library/global/c5-tri-provider-swarm/scripts/tri_swarm_dispatcher.py",
+          "start_line": 35,
+          "end_line": 61,
+          "observation": "Constructor stores configuration and dispatches by task type."
+        },
+        {
+          "path": "tools/skill_library/global/c5-tri-provider-swarm/scripts/tri_swarm_dispatcher.py",
+          "start_line": 63,
+          "end_line": 107,
+          "observation": "All provider methods are sleep-plus-success stubs."
+        },
+        {
+          "path": "tools/skill_library/global/c5-tri-provider-swarm/scripts/tri_swarm_dispatcher.py",
+          "start_line": 109,
+          "end_line": 131,
+          "observation": "Campaign reports provider results and main executes demo tasks."
+        },
+        {
+          "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-tri-provider-swarm/MODULE.md",
+          "start_line": 91,
+          "end_line": 98,
+          "observation": "Adjacent module documents dispatcher as executable harness."
+        }
+      ],
+      "guards": [
+        "Concurrency semaphores and Kimi fallback do not implement provider calls.",
+        "Both file hashes were compared, but neither file was imported/executed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/04-source-evidence.json"
+      ]
+    }
+  ]
+}

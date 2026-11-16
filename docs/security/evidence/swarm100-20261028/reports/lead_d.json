@@ -1,0 +1,291 @@
+{
+  "lead": "d",
+  "children_spawned": 24,
+  "auditors_including_lead": 25,
+  "children": [
+    {
+      "shard": 76,
+      "agent": "/root/swarm100_d/s076",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/076.json",
+      "findings": 6,
+      "coverage_entries": 25,
+      "missing_assigned_paths": [],
+      "tests_run": []
+    },
+    {
+      "shard": 77,
+      "agent": "/root/swarm100_d/s077",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/077.json",
+      "findings": 8,
+      "coverage_entries": 25,
+      "missing_assigned_paths": [],
+      "tests_run": []
+    },
+    {
+      "shard": 78,
+      "agent": "/root/swarm100_d/s078",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/078.json",
+      "findings": 12,
+      "coverage_entries": 25,
+      "missing_assigned_paths": [],
+      "tests_run": []
+    },
+    {
+      "shard": 79,
+      "agent": "/root/swarm100_d/s079",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/079.json",
+      "findings": 6,
+      "coverage_entries": 25,
+      "missing_assigned_paths": [],
+      "tests_run": []
+    },
+    {
+      "shard": 80,
+      "agent": "/root/swarm100_d/s080",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/080.json",
+      "findings": 8,
+      "coverage_entries": 25,
+      "missing_assigned_paths": [],
+      "tests_run": []
+    },
+    {
+      "shard": 81,
+      "agent": "/root/swarm100_d/s081",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/081.json",
+      "findings": 6,
+      "coverage_entries": 25,
+      "missing_assigned_paths": [],
+      "tests_run": []
+    },
+    {
+      "shard": 82,
+      "agent": "/root/swarm100_d/s082",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/082.json",
+      "findings": 7,
+      "coverage_entries": 25,
+      "missing_assigned_paths": [],
+      "tests_run": []
+    },
+    {
+      "shard": 83,
+      "agent": "/root/swarm100_d/s083",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/083.json",
+      "findings": 9,
+      "coverage_entries": 24,
+      "missing_assigned_paths": [],
+      "tests_run": []
+    },
+    {
+      "shard": 84,
+      "agent": "/root/swarm100_d/s084",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/084.json",
+      "findings": 9,
+      "coverage_entries": 24,
+      "missing_assigned_paths": [],
+      "tests_run": []
+    },
+    {
+      "shard": 85,
+      "agent": "/root/swarm100_d/s085",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/085.json",
+      "findings": 8,
+      "coverage_entries": 24,
+      "missing_assigned_paths": [],
+      "tests_run": []
+    },
+    {
+      "shard": 86,
+      "agent": "/root/swarm100_d/s086",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/086.json",
+      "findings": 8,
+      "coverage_entries": 24,
+      "missing_assigned_paths": [],
+      "tests_run": []
+    },
+    {
+      "shard": 87,
+      "agent": "/root/swarm100_d/s087",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/087.json",
+      "findings": 9,
+      "coverage_entries": 24,
+      "missing_assigned_paths": [],
+      "tests_run": []
+    },
+    {
+      "shard": 88,
+      "agent": "/root/swarm100_d/s088",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/088.json",
+      "findings": 9,
+      "coverage_entries": 24,
+      "missing_assigned_paths": [],
+      "tests_run": []
+    },
+    {
+      "shard": 89,
+      "agent": "/root/swarm100_d/s089",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/089.json",
+      "findings": 5,
+      "coverage_entries": 24,
+      "missing_assigned_paths": [],
+      "tests_run": []
+    },
+    {
+      "shard": 90,
+      "agent": "/root/swarm100_d/s090",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/090.json",
+      "findings": 9,
+      "coverage_entries": 24,
+      "missing_assigned_paths": [],
+      "tests_run": []
+    },
+    {
+      "shard": 91,
+      "agent": "/root/swarm100_d/s091",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/091.json",
+      "findings": 4,
+      "coverage_entries": 24,
+      "missing_assigned_paths": [],
+      "tests_run": []
+    },
+    {
+      "shard": 92,
+      "agent": "/root/swarm100_d/s092",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/092.json",
+      "findings": 5,
+      "coverage_entries": 24,
+      "missing_assigned_paths": [],
+      "tests_run": []
+    },
+    {
+      "shard": 93,
+      "agent": "/root/swarm100_d/s093",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/093.json",
+      "findings": 6,
+      "coverage_entries": 24,
+      "missing_assigned_paths": [],
+      "tests_run": []
+    },
+    {
+      "shard": 94,
+      "agent": "/root/swarm100_d/s094",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/094.json",
+      "findings": 10,
+      "coverage_entries": 24,
+      "missing_assigned_paths": [],
+      "tests_run": []
+    },
+    {
+      "shard": 95,
+      "agent": "/root/swarm100_d/s095",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/095.json",
+      "findings": 5,
+      "coverage_entries": 24,
+      "missing_assigned_paths": [],
+      "tests_run": []
+    },
+    {
+      "shard": 96,
+      "agent": "/root/swarm100_d/s096",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/096.json",
+      "findings": 5,
+      "coverage_entries": 24,
+      "missing_assigned_paths": [],
+      "tests_run": []
+    },
+    {
+      "shard": 97,
+      "agent": "/root/swarm100_d/s097",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/097.json",
+      "findings": 9,
+      "coverage_entries": 24,
+      "missing_assigned_paths": [],
+      "tests_run": []
+    },
+    {
+      "shard": 98,
+      "agent": "/root/swarm100_d/s098",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/098.json",
+      "findings": 4,
+      "coverage_entries": 24,
+      "missing_assigned_paths": [],
+      "tests_run": []
+    },
+    {
+      "shard": 99,
+      "agent": "/root/swarm100_d/s099",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/099.json",
+      "findings": 4,
+      "coverage_entries": 24,
+      "missing_assigned_paths": [],
+      "tests_run": []
+    }
+  ],
+  "own_report": {
+    "shard": 75,
+    "agent": "lead_d",
+    "status": "report_complete",
+    "report": "/tmp/babylon60-audit-20261028/reports/075.json",
+    "findings": 6,
+    "coverage_entries": 25,
+    "missing_assigned_paths": [],
+    "tests_run": []
+  },
+  "coverage_total": 608,
+  "coverage_status_counts": {
+    "reviewed_full": 601,
+    "metadata_only": 6,
+    "reviewed_partial": 1
+  },
+  "coverage_gaps": [
+    {
+      "shard": 81,
+      "coverage": {
+        "path": "uv.lock",
+        "status": "reviewed_partial",
+        "ranges": [
+          [
+            1,
+            80
+          ],
+          [
+            257,
+            350
+          ]
+        ],
+        "inventory_sha256": "d78739746ac5d442a074ad73cbc7fc06d6e803558126f65fbc3d6d251d4c1fb4",
+        "observed_sha256": "d78739746ac5d442a074ad73cbc7fc06d6e803558126f65fbc3d6d251d4c1fb4",
+        "inventory_match": true,
+        "notes": "Manual review covers only lines 1-80 and 257-350. Remaining ranges 81-256 and 351-5679 remain unreviewed. File is 1,055,323 bytes with large repetitive wheel URL/hash lines; full substantive review was not practical within this shard. All bytes were hashed; hashing is not substantive review. Targeted source-field search was truncated and is not counted as full coverage."
+      }
+    }
+  ],
+  "adjudication_report": "/tmp/babylon60-audit-20261028/reports/findings_adjudicated_d.json",
+  "limitations": [
+    "uv.lock partial coverage remains explicit; symlinks metadata-only by audit contract.",
+    "No tests/runtime execution by this lead or children."
+  ]
+}

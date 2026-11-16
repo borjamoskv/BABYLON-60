@@ -1,0 +1,4 @@
+SOURCE_HASHES_BEFORE {"01_KISH_ENGINE/babylon60/core/cortex_persist.py": "837faee40ae13b74cbb7b4d1e61fc6209285bb3362c23d2d2abd94c480b4b064", "tests/test_swarm100_lot11_regressions.py": "9d4362da20dd1036a1eab183db8ccb6d00f1ff4f9caef0407958b412a1b9a06d"}
+.......................................................                  [100%]
+55 passed in 2.15s
+SOURCE_HASHES_AFTER {"01_KISH_ENGINE/babylon60/core/cortex_persist.py": "837faee40ae13b74cbb7b4d1e61fc6209285bb3362c23d2d2abd94c480b4b064", "tests/test_swarm100_lot11_regressions.py": "9d4362da20dd1036a1eab183db8ccb6d00f1ff4f9caef0407958b412a1b9a06d"}

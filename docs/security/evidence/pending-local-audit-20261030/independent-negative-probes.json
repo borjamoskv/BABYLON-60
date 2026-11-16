@@ -1,0 +1,6 @@
+{
+  "finding_contract_accepts_nonhex_digest": true,
+  "provenance_accepts_malformed_export_digest": "ATTESTED",
+  "provenance_reason": "All provenance, integrity, and scope constraints verified",
+  "effects_executed": false
+}

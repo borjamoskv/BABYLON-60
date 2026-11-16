@@ -47,8 +47,15 @@ class SupplyChainTests(unittest.TestCase):
     def test_conformance_rejects_manifest_lock_drift(self):
         steps = workflow("conformance.yml")["jobs"]["conformance"]["steps"]
         commands = [s["run"] for s in steps if "run" in s]
-        self.assertEqual(commands[0], "uv sync --locked --all-extras")
-        self.assertTrue(commands[1].startswith("uv run --no-sync "))
+        self.assertIn("uv sync --locked --all-extras", commands)
+        self.assertIn("cargo fetch --locked", commands)
+        sync_idx = commands.index("uv sync --locked --all-extras")
+        run_idx = next(i for i, cmd in enumerate(commands) if cmd.startswith("uv run --no-sync "))
+        self.assertLess(sync_idx, run_idx)
+        for step in steps:
+            uses = step.get("uses", "")
+            if uses:
+                self.assertRegex(uses, r"@[0-9a-f]{40}$")
         setup = next(s for s in steps if "setup-uv@" in s.get("uses", ""))
         self.assertRegex(setup["uses"], r"@[0-9a-f]{40}$")
         self.assertRegex(setup["with"]["version"], r"^\d+\.\d+\.\d+$")

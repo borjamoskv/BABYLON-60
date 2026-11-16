@@ -1,6 +1,7 @@
 """Governance regressions use isolated files and Git indexes; no host hooks or effects."""
 
 from pathlib import Path
+import os
 import subprocess
 import sys
 
@@ -175,14 +176,21 @@ def test_missing_budget_source_is_unverified(governance: Path, name: str) -> Non
 def test_unreadable_budget_source_is_unverified(
     governance: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
-    original = Path.read_bytes
+    original_open = os.open
+    original_bytes = Path.read_bytes
 
-    def denied(path: Path) -> bytes:
+    def denied_open(path, flags, *args, **kwargs):
+        if Path(path) == governance / ".babylon60rules":
+            raise PermissionError("test read denied")
+        return original_open(path, flags, *args, **kwargs)
+
+    def denied_bytes(path: Path) -> bytes:
         if path == governance / ".babylon60rules":
             raise PermissionError("test read denied")
-        return original(path)
+        return original_bytes(path)
 
-    monkeypatch.setattr(Path, "read_bytes", denied)
+    monkeypatch.setattr(os, "open", denied_open)
+    monkeypatch.setattr(Path, "read_bytes", denied_bytes)
     monkeypatch.setattr(
         sys, "argv", ["audit", "--workspace", str(governance), "--workspace-only", "--skip-ghost-listeners"]
     )

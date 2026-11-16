@@ -26,12 +26,12 @@ def records():
         ("Comprueba los paquetes inexistentes en este proyecto", "existence-gap-audit"),
         ("Combina estas skills en un pipeline", "cortex-skill-composer"),
         ("Arregla las cuotas Gemini API", "c5-gemini-api-2026-standards"),
-        ("Diagnostica las redirecciones de Yahoo en Chrome", "c5-browser-forensics-and-extension-triage"),
+        ("Audita el consenso bft de larsa-120", "c5-larsa-120"),
         ("Formaliza este teorema en Lean 4", "c5-lean4-axiomatic-orchestrator"),
         ("Revisa este manuscrito científico", "c5-academic-peer-reviewer"),
         ("Corrige el autoescape del exportador HTML", "c5-html-report-injection-audit"),
-        ("Abre Safari y busca el informe", "safari-browser-agent"),
-        ("Renderiza el vídeo con Remotion", "youtube-remotion-sota"),
+        ("Verifica el firewall epistémico mushushu-0", "c5-mushushu-0"),
+        ("Sintetiza una nueva habilidad con skill genesis", "cortex-skill-genesis"),
     ],
 )
 def test_requested_action_and_domain_select_capability(query, expected):

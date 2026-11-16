@@ -1,0 +1,22 @@
+[
+  {
+    "argv": [
+      "python3",
+      "scripts/guards/verify_active_topology.py"
+    ],
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.babylon60rules: Expected exactly one signature field: LLM\n/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.babylon60rules: Expected exactly one signature field: MODO COGNITIVO\n/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.babylon60rules: Expected exactly one signature field: TOPOLOGÍA ACTIVA\n/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.babylon60rules: Expected exactly one signature field: RÉGIMEN TÉRMICO\n/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.babylon60rules: Expected exactly one signature field: EXERGÍA INFORMATIVA\n/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.babylon60rules: Expected exactly one signature field: MUTACIÓN CAUSAL\n/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.babylon60rules: Expected exactly one literal topology line: [ TOPOLOGÍA ACTIVA ]: MOSKV-1\n/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/AGENTS.md: Expected exactly one signature field: LLM\n/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/AGENTS.md: Expected exactly one signature field: MODO COGNITIVO\n/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/AGENTS.md: Expected exactly one signature field: TOPOLOGÍA ACTIVA\n/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/AGENTS.md: Expected exactly one signature field: RÉGIMEN TÉRMICO\n/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/AGENTS.md: Expected exactly one signature field: EXERGÍA INFORMATIVA\n/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/AGENTS.md: Expected exactly one signature field: MUTACIÓN CAUSAL\n/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/AGENTS.md: Expected exactly one literal topology line: [ TOPOLOGÍA ACTIVA ]: MOSKV-1\n"
+  },
+  {
+    "argv": [
+      "python3",
+      "scripts/c5_quality_gates/audit_token_budget.py",
+      "--workspace-only",
+      "--skip-ghost-listeners"
+    ],
+    "returncode": 2,
+    "stdout": "",
+    "stderr": "usage: audit_token_budget.py [-h] [--workspace WORKSPACE]\n                             [--global-config GLOBAL_CONFIG]\n                             [--max-always-on-bytes MAX_ALWAYS_ON_BYTES]\n                             [--fix-ghosts] [--skip-ghost-listeners]\n                             [--telemetry-db TELEMETRY_DB]\naudit_token_budget.py: error: unrecognized arguments: --workspace-only\n"
+  }
+]

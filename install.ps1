@@ -4,6 +4,8 @@ param(
     [switch]$DryRun,
     [switch]$Mcp,
     [string]$Ledger,
+    [ValidateSet("terminal-mcp")]
+    [string]$Profile = "terminal-mcp",
     [ValidateSet("codex")]
     [string]$Client
 )

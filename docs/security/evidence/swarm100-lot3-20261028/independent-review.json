@@ -1,0 +1,365 @@
+{
+  "reviewer": "adjudicate_03",
+  "reviewed_at": "2026-10-28T20:35:08.502842+00:00",
+  "decision": "APPROVED_WITH_EXPLICIT_SCOPE",
+  "open_actionable_findings": [],
+  "scope": {
+    "production_paths": [
+      "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "scripts/c5_git_utils/c5_ship.sh"
+    ],
+    "candidate_ids": [
+      "SW100-C0413",
+      "SW100-C0418",
+      "SW100-R3-0001"
+    ],
+    "production_or_shared_tests_edited_by_reviewer": false,
+    "real_git_commands_remote_operations_scanner_swift_gate_biometrics_executed": false,
+    "attested_objects_created": false,
+    "graph_discovery": "No native graph tools were exposed. Scoped reads of source, consumers, contract and official dependency documentation were used.",
+    "fixture_confinement": "Only script copies in temporary workspaces were executed. Fixture PATH contains owned Python substitutes for Git/Gitleaks/gate/uv and a narrow shell-utility whitelist. HOME/TMPDIR are temporary; no protected runtime or operator stores are used. Binding tests substitute pwd/getuid with synthetic values.",
+    "positive_test_scope": "Positive tests exercise pure effect/signature math and the actual extracted dispatch helper against fake Git. They do not satisfy the production ATTESTED status gate and do not prove hardware authorization."
+  },
+  "source_sha256": {
+    "scripts/c5_git_utils/c5_distill_public_mirror.sh": "92236e509279cd93355ca574c76070008b7adfabc8cd93ceb87acf3b18f02c0f",
+    "scripts/c5_git_utils/c5_ship.sh": "fb71a99a81f7254d4ec50bcacfae80bddf6c909e459c0d2c389d77c3d342dff8",
+    "tests/test_swarm100_lot3_regressions.py": "25060b92b5d9f0aab1075f52060613292e0845607a8ccf2303dd9588cf1e5549"
+  },
+  "dependency_source_sha256": {
+    "01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift": "18d96a6ef76b88b80735d646f208a062ed817311d12e48cfaccb9dc394c93efa"
+  },
+  "previous_test_sha256": "f3042b67d6d6e9a136995183ecc6c26c0caaa962ca83399b5b4feee5732f870c",
+  "helper_copies_byte_identical": true,
+  "findings": [
+    {
+      "candidate_id": "SW100-C0413",
+      "assessment": "FIXED_IN_REVIEWED_SOURCE",
+      "remediation_state": "FIXED",
+      "basis": "The scanner is mandatory before preparation. The immutable clean tree is materialized from raw objects with replacement refs disabled; export-ignore/worktree contents cannot omit or substitute the input. Regular tracked policy and ignores are read inside that snapshot; missing scanner, nonzero scan or uninspectable tree prevents gate/dispatch. This establishes the scan path and rejection behavior, not universal secret-detection efficacy."
+    },
+    {
+      "candidate_id": "SW100-C0418",
+      "assessment": "FIXED_IN_REVIEWED_SOURCE",
+      "remediation_state": "FIXED",
+      "basis": "Gate/runtime absence rejects before ship mutations. A selected gate is invoked once, with bounded time/output and process-group termination; failed/cancelled/empty/malformed/non-attested outcomes reject without push or fallback. The current effect hash, metadata, session operator and P-256 signature are checked before the production dispatcher call. Ship retains the verified receipt and descriptor before dispatch, without reusing the saved record for authorization."
+    },
+    {
+      "candidate_id": "SW100-R3-0001",
+      "assessment": "FIXED_IN_REVIEWED_SOURCE",
+      "remediation_state": "FIXED",
+      "basis": "The dispatch refspec uses the immutable commit captured in a readonly envelope. Commit/tree/destination/ref/force/action/scope/agent/config digest/new nonce are bound into domain-separated SHA256. Git publication uses a private bare repository with frozen transport configuration and explicit URL, excluding mutable remote aliases and URL rewrite configuration. Scheduled second invocation, overlapping attempts, and benign fake-Git dispatch controls preserve the first commit selection."
+    }
+  ],
+  "resolved_review_findings": [
+    {
+      "id": "LOT3-REVIEW-01",
+      "topic": "Archive filtering versus full published tree",
+      "initial_basis": "Design used git archive, whose export-ignore handling can omit published blobs.",
+      "resolution": "Raw ls-tree/cat-file snapshot, including raw symlink blobs; scanner operates inside snapshot with contained policy/ignore inputs.",
+      "validation": "Raw export-ignored fixture content reaches scanner; independent symlink fixture remains a regular raw blob."
+    },
+    {
+      "id": "LOT3-REVIEW-02",
+      "topic": "Mutable push URL/configuration",
+      "initial_basis": "An explicit URL alone can still be rewritten by Git configuration; default remote get-url uses fetch URL.",
+      "resolution": "Resolve exactly one expanded --push --all URL, freeze permitted transport configuration, bind its digest, and dispatch from an isolated bare repo without ambient Git config.",
+      "validation": "Fake-Git dispatcher ignores changed branch and inherited URL-rewrite environment while selecting exact commit/ref/URL."
+    },
+    {
+      "id": "LOT3-REVIEW-03",
+      "topic": "Replacement refs alter scanned objects",
+      "initial_basis": "Git object readers normally honor refs/replace while pack transfer does not.",
+      "resolution": "Export GIT_NO_REPLACE_OBJECTS and force it in helper reads; streaming object inspection explicitly uses --no-replace-objects.",
+      "validation": "Regression inspects object-read environment; source checks cover all content/commit reads."
+    },
+    {
+      "id": "LOT3-REVIEW-04",
+      "topic": "Skipping hooks and LFS payload upload",
+      "initial_basis": "An isolated bare push would skip source pre-push hooks, including the installed Git LFS hook.",
+      "resolution": "Reject active executable pre-push hooks and LFS pointer content before gate. Reject gitlinks. Recognize all three supported LFS version headers including whitespace/CRLF.",
+      "validation": "Both scripts reject hook/LFS fixtures before gate/dispatch; version/header variants are tested. This is rejection, not support for these repositories."
+    },
+    {
+      "id": "LOT3-REVIEW-05",
+      "topic": "Transport path quoting",
+      "initial_basis": "GIT_SSH is a program path, whereas core.sshCommand is shell text; JSON ASCII escaping also misrepresented Unicode alternate paths.",
+      "resolution": "Quote GIT_SSH with shlex.quote; write UTF-8 alternate paths with ensure_ascii=False.",
+      "validation": "Source review against Git program-path and C-style path contracts; no real SSH or Git execution."
+    },
+    {
+      "id": "LOT3-REVIEW-06",
+      "topic": "Gate child survives leader exit",
+      "initial_basis": "Conditional killpg only while leader was alive could leave a descendant holding stdout after deadline.",
+      "resolution": "On failure/deadline attempt process-group kill regardless of leader liveness; tolerate absent groups.",
+      "validation": "Independent fixture wrapper exits first; descendant fails to write its scheduled marker after the timeout."
+    },
+    {
+      "id": "LOT3-REVIEW-07",
+      "topic": "Archive size estimated with fixed overhead",
+      "initial_basis": "Raw size plus fixed per-file overhead was not a universal tar size bound.",
+      "resolution": "Serialize the actual normalized PAX snapshot through a counting sink and reject at 20 MiB.",
+      "validation": "A raw payload below threshold whose tar padding crosses threshold is rejected before scanner."
+    },
+    {
+      "id": "LOT3-REVIEW-08",
+      "severity": "P2",
+      "topic": "Retention cleanup deleted a temporary it did not create",
+      "initial_basis": "Independent storage-only reproduction on d11e1d66dd63df2ca782df4b79ed9b6c4b48aa199d2f82d917f93259ed1cfb73 raised FileExistsError yet removed the preexisting temporary. The previous last receipt survived.",
+      "resolution": "Track created=False until successful exclusive creation; set false after replace; unlink only the owned temporary. Nested finally always closes the directory descriptor.",
+      "validation": "Collision and unsafe-directory rejection now preserve both preexisting temporary and previous receipt. Malformed JSON and injected replace failure clean only the new temporary and preserve the previous receipt.",
+      "before_evidence": "docs/security/evidence/swarm100-lot3-20261028/independent-retention-before.json",
+      "after_evidence": "docs/security/evidence/swarm100-lot3-20261028/independent-retention-after.json"
+    }
+  ],
+  "checks": [
+    {
+      "command": ".venv/bin/python -m pytest tests/test_swarm100_lot3_regressions.py -q --tb=short",
+      "result": "66 passed in 60.00s",
+      "exit_code": 0,
+      "test_source_sha256": "f3042b67d6d6e9a136995183ecc6c26c0caaa962ca83399b5b4feee5732f870c",
+      "production_source_sha256": {
+        "scripts/c5_git_utils/c5_distill_public_mirror.sh": "ab0d5a098297ece430d5cc9784f110831e7dc1feb177b94b01e0a379c56fdaf1",
+        "scripts/c5_git_utils/c5_ship.sh": "a36a41a6c65d5719db43d17124abd7e3302597e5c95e482efd1d623cd3496ed4"
+      },
+      "evidence_path": "docs/security/evidence/swarm100-lot3-20261028/independent-pytest.log",
+      "review_stage": "pre-retention source; preserved historical result"
+    },
+    {
+      "command": ".venv/bin/python -m pytest tests/test_swarm100_lot3_regressions.py -q --tb=short -k test_serialized_tar_padding_is_counted_against_budget",
+      "result": "1 passed, 66 deselected in 2.39s",
+      "exit_code": 0,
+      "test_source_sha256": "8bd06c120c8e5ea98a41115e54c09a9eeafc906daff87abae6d28bf2e0b9999e",
+      "evidence_path": "docs/security/evidence/swarm100-lot3-20261028/independent-tar-padding.log",
+      "review_stage": "pre-retention source; preserved historical result"
+    },
+    {
+      "method": "Exact test-version reconciliation",
+      "result": "Removing only the added tar-padding payload branch, new test and trailing blank lines reconstructs SHA256 f3042b67d6d6e9a136995183ecc6c26c0caaa962ca83399b5b4feee5732f870c. Existing 66 cases are unchanged.",
+      "review_stage": "pre-retention source; preserved historical result"
+    },
+    {
+      "command": ".venv/bin/python docs/security/evidence/swarm100-lot3-20261028/independent-adversarial.py",
+      "result": "10 independent checks passed",
+      "exit_code": 0,
+      "evidence_path": "docs/security/evidence/swarm100-lot3-20261028/independent-adversarial.json",
+      "review_stage": "pre-retention source; preserved historical result"
+    },
+    {
+      "command": "/bin/bash -n scripts/c5_git_utils/c5_distill_public_mirror.sh; /bin/bash -n scripts/c5_git_utils/c5_ship.sh",
+      "result": "Both scripts parse",
+      "exit_code": 0,
+      "review_stage": "pre-retention source; preserved historical result"
+    },
+    {
+      "command": "shellcheck scripts/c5_git_utils/c5_distill_public_mirror.sh scripts/c5_git_utils/c5_ship.sh",
+      "result": "No findings",
+      "exit_code": 0,
+      "review_stage": "pre-retention source; preserved historical result"
+    },
+    {
+      "command": ".venv/bin/ruff check tests/test_swarm100_lot3_regressions.py docs/security/evidence/swarm100-lot3-20261028/independent-adversarial.py",
+      "result": "All checks passed!",
+      "exit_code": 0,
+      "review_stage": "pre-retention source; preserved historical result"
+    },
+    {
+      "command": ".venv/bin/python -m pytest tests/test_swarm100_lot3_regressions.py -q --tb=short -k \"receipt_storage or receipt_retention\"",
+      "exit_code": 0,
+      "result": "4 passed, 67 deselected in 1.40s",
+      "source_sha256": {
+        "scripts/c5_git_utils/c5_distill_public_mirror.sh": "92236e509279cd93355ca574c76070008b7adfabc8cd93ceb87acf3b18f02c0f",
+        "scripts/c5_git_utils/c5_ship.sh": "fb71a99a81f7254d4ec50bcacfae80bddf6c909e459c0d2c389d77c3d342dff8",
+        "tests/test_swarm100_lot3_regressions.py": "25060b92b5d9f0aab1075f52060613292e0845607a8ccf2303dd9588cf1e5549"
+      },
+      "evidence_path": "docs/security/evidence/swarm100-lot3-20261028/independent-retention-tests.log",
+      "review_stage": "final retention update"
+    },
+    {
+      "command": ".venv/bin/python docs/security/evidence/swarm100-lot3-20261028/independent-retention.py",
+      "exit_code": 0,
+      "result": "4 independent storage-failure controls passed",
+      "evidence_path": "docs/security/evidence/swarm100-lot3-20261028/independent-retention-after.json",
+      "review_stage": "final retention update"
+    },
+    {
+      "command": "/bin/bash -n each production script; shellcheck both production scripts; Ruff on current tests and both independent harnesses",
+      "exit_code": 0,
+      "result": "Both shell parsers, ShellCheck and Ruff pass",
+      "review_stage": "final retention update"
+    }
+  ],
+  "intermediate_results": [
+    {
+      "result": "28 passed, 1 failed during an intermediate source/fixture update",
+      "scope": "The newly added --no-replace-objects inspection was not yet recognized by the fake-Git stub. Reported immediately; superseded by the final passing run. No production Git was executed."
+    }
+  ],
+  "source_checks": [
+    {
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "start_line": 4,
+      "end_line": 34,
+      "observation": "Replacement refs disabled at shell entry and each helper Git read."
+    },
+    {
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "start_line": 58,
+      "end_line": 94,
+      "observation": "Exact effect metadata, normalized agent allowlist, current-session user, finite fresh timestamp and P-256 signature over ASCII SHA256 digest. LFS legacy/CRLF headers rejected."
+    },
+    {
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "start_line": 131,
+      "end_line": 192,
+      "observation": "Raw blob materialization validates paths/types/policy, preserves full scan input, never follows symlinks, and counts actual serialized PAX size."
+    },
+    {
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "start_line": 193,
+      "end_line": 254,
+      "observation": "Reject active pre-push hooks/LFS/gitlinks, select one push URL, freeze transport inputs, bind commit/tree/ref/force/config and per-attempt nonce."
+    },
+    {
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "start_line": 258,
+      "end_line": 305,
+      "observation": "Single selected gate invocation; selector caps 64 KiB and deadline; group killed on failure; strict JSON status/binding/signature precede receipt creation."
+    },
+    {
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "start_line": 310,
+      "end_line": 336,
+      "observation": "Private Git repo, frozen config, exact immutable refspec and destination, remote observation after push; mismatch fails without retry."
+    },
+    {
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "start_line": 378,
+      "end_line": 417,
+      "observation": "Mandatory scanner, private temporary index/snapshot, snapshot-only scan, readonly tree/commit/envelope, gate then dispatcher. Preview explicitly leaves authorization/push NOT_CHECKED."
+    },
+    {
+      "path": "scripts/c5_git_utils/c5_ship.sh",
+      "start_line": 408,
+      "end_line": 418,
+      "observation": "Mandatory gate/runtime preflight precedes alias and later commit/merge/fetch operations; status path returns earlier without mutation."
+    },
+    {
+      "path": "scripts/c5_git_utils/c5_ship.sh",
+      "start_line": 546,
+      "end_line": 559,
+      "observation": "Capture immutable HEAD/tree, prepare frozen envelope, require gate completion, retain validated receipt/descriptor, then dispatch. Retention is never an authorization input."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift",
+      "start_line": 103,
+      "end_line": 109,
+      "observation": "Dependency contract requires 32-byte causal hash and signs ASCII hash bytes when sign-hex is absent."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift",
+      "start_line": 220,
+      "end_line": 234,
+      "observation": "Gate prefixes agent with detected caller environment; reviewed validator matches known normalized variants."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift",
+      "start_line": 377,
+      "end_line": 405,
+      "observation": "Gate produces DER P-256 signature and X9.63 public point with session fields; read only, never invoked."
+    },
+    {
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "start_line": 97,
+      "end_line": 128,
+      "observation": "Storage helper checks directory ownership/write bits; uses nofollow/exclusive descriptors, 0600 output, file and directory fsync and atomic replace. Ownership flag protects foreign temporaries on all rejected paths."
+    },
+    {
+      "path": "scripts/c5_git_utils/c5_ship.sh",
+      "start_line": 554,
+      "end_line": 558,
+      "observation": "Persistent receipt follows fresh successful gate and precedes publication; storage failure stops publication. Success message truthfully names the persistent receipt."
+    }
+  ],
+  "limitations": [
+    "No real Git commands, secret scanner, remote publication, Swift execution, biometric authentication or Secure Enclave operation were run. No ATTESTED fixture/object was fabricated. Successful protected end-to-end authorization remains unverified.",
+    "The selected local gate is a trusted dependency. Verifying a signature against the public key supplied in its own receipt proves self-consistency, not independent hardware-key provenance or independent identity of the root operator.",
+    "Active pre-push hooks, LFS pointers and gitlinks are unsupported and explicitly rejected before authorization. This repository has an installed Git LFS pre-push hook, so this dispatcher refuses that configuration; removing or bypassing it is not authorized or recommended by this review.",
+    "Ship now preserves the latest validated receipt plus effect_descriptor in .babylon60/last_ship_receipt.json; mirror receipts remain temporary. This is a latest-record audit artifact, not append-only/WORM history and not proof of publication success. The saved record is never reused as authorization. Safe storage rejection aborts the current push.",
+    "Git URL/transport configuration is frozen for dispatch. Executables, credential helpers, external SSH/TLS/proxy configuration and local filesystem integrity remain trusted dependencies; the code is not an OS sandbox against a malicious same-user process.",
+    "The scanner applies the tracked policy and ignores in the snapshot. Its policy exclusions and detection coverage are not equivalent to a guarantee that every possible secret is detected.",
+    "The existing ship staging/commit/merge/fetch/status workflow is outside the corrected publication findings and was not executed against a real repository. C0414 is not reopened; SW100-R3-0001 remains separate from the original 598 IDs.",
+    "A failed post-push ref observation may occur after the remote effect; the script reports failure without retry. These fixtures do not establish rollback, network availability or remote-server behavior."
+  ],
+  "official_sources": [
+    {
+      "url": "https://github.com/git/git/blob/master/Documentation/git-replace.adoc",
+      "basis": "Object replacement behavior and --no-replace-objects."
+    },
+    {
+      "url": "https://github.com/git/git/blob/master/Documentation/git-remote.adoc",
+      "basis": "Push URL resolution and rewrite expansion."
+    },
+    {
+      "url": "https://github.com/git/git/blob/master/Documentation/git-archive.adoc",
+      "basis": "Archive attributes can omit tree content."
+    },
+    {
+      "url": "https://github.com/git/git/blob/master/path.c",
+      "basis": "Hook path resolution honors configured hooks path."
+    },
+    {
+      "url": "https://github.com/gitleaks/gitleaks/blob/master/cmd/root.go",
+      "basis": "Config and ignore input selection."
+    },
+    {
+      "url": "https://github.com/git-lfs/git-lfs/blob/main/lfs/pointer.go",
+      "basis": "Recognized LFS headers and whitespace decoding."
+    }
+  ],
+  "evidence_paths": [
+    "docs/security/evidence/swarm100-lot3-20261028/independent-adversarial.py",
+    "docs/security/evidence/swarm100-lot3-20261028/independent-adversarial.json",
+    "docs/security/evidence/swarm100-lot3-20261028/independent-pytest.log",
+    "docs/security/evidence/swarm100-lot3-20261028/independent-tar-padding.log",
+    "docs/security/evidence/swarm100-lot3-20261028/before-source-manifest.json",
+    "docs/security/evidence/swarm100-lot3-20261028/before-tests.log",
+    "docs/security/evidence/swarm100-lot3-20261028/independent-retention.py",
+    "docs/security/evidence/swarm100-lot3-20261028/independent-retention-before.json",
+    "docs/security/evidence/swarm100-lot3-20261028/independent-retention-after.json",
+    "docs/security/evidence/swarm100-lot3-20261028/independent-retention-tests.log",
+    "docs/security/evidence/swarm100-lot3-20261028/independent-review-pre-retention.json"
+  ],
+  "evidence_sha256": {
+    "docs/security/evidence/swarm100-lot3-20261028/independent-adversarial.py": "bb52144e174d89781644c22689d787500b6a414c485193b326024bc229fbd6c4",
+    "docs/security/evidence/swarm100-lot3-20261028/independent-adversarial.json": "fa24457ab29bd1ec0b892b8a0baa5e05bc3b62a5940cbf9b614c03d13f1a0f5a",
+    "docs/security/evidence/swarm100-lot3-20261028/independent-pytest.log": "9bb6aedc8f7931571873bd204b33e80ead9bd7e77e03e4581b044e273a28924c",
+    "docs/security/evidence/swarm100-lot3-20261028/independent-tar-padding.log": "776138a6aad3f5024bcdaff098b6ecb65dd9ec6d90250978b1f9c805d7a6c9c6",
+    "docs/security/evidence/swarm100-lot3-20261028/before-source-manifest.json": "42a285c2626a611510fefab7d2525a8606be59ef23536b1ad5152846c483972c",
+    "docs/security/evidence/swarm100-lot3-20261028/before-tests.log": "603669d322f3a17efe8f1870993485d5e187855dcc04be2c44bc13b4d648f460",
+    "docs/security/evidence/swarm100-lot3-20261028/independent-retention.py": "79946530c59d254ae82215e0c8e764a849d276624f54b00e1394010e8b0d2b0b",
+    "docs/security/evidence/swarm100-lot3-20261028/independent-retention-before.json": "54704388b7ee58a8a8947897f5e0a3d2490ff1dbfb507e952848a80a8fb985fb",
+    "docs/security/evidence/swarm100-lot3-20261028/independent-retention-after.json": "89299d00296d4a7ce38f90d88b705548b0305858b1a0bf39014a3548afc23ee0",
+    "docs/security/evidence/swarm100-lot3-20261028/independent-retention-tests.log": "210eb35350648dd7a27c84859439f3cc0b8f5872e1fa1339230140053016df9a",
+    "docs/security/evidence/swarm100-lot3-20261028/independent-review-pre-retention.json": "3386ee8bf0d3a86dceaa72273cddfc7e4db2bac3ff983f61516cbec0aad2d95a"
+  },
+  "source_history": [
+    {
+      "stage": "Approved pre-retention source",
+      "source_sha256": {
+        "scripts/c5_git_utils/c5_distill_public_mirror.sh": "ab0d5a098297ece430d5cc9784f110831e7dc1feb177b94b01e0a379c56fdaf1",
+        "scripts/c5_git_utils/c5_ship.sh": "a36a41a6c65d5719db43d17124abd7e3302597e5c95e482efd1d623cd3496ed4",
+        "tests/test_swarm100_lot3_regressions.py": "8bd06c120c8e5ea98a41115e54c09a9eeafc906daff87abae6d28bf2e0b9999e"
+      },
+      "full_review": "docs/security/evidence/swarm100-lot3-20261028/independent-review-pre-retention.json"
+    }
+  ],
+  "retention_update": {
+    "scope": "Add retain_receipt to the duplicated helper, internal retain mode and ship call after gate/before publish. Mirror does not call retention. No authorization, snapshot or dispatcher logic changed.",
+    "exact_prior_sources_reconstructed": true,
+    "reconstruction_method": "Remove only retain_receipt, retain mode, the ship retention call and its updated success message; the complete source SHA256 values equal the previously approved versions.",
+    "exact_prior_tests_reconstructed": true,
+    "test_method": "Removing only the appended storage/ordering/collision/permission tests and trailing blank lines reconstructs test SHA256 8bd06c120c8e5ea98a41115e54c09a9eeafc906daff87abae6d28bf2e0b9999e.",
+    "current_effect": "Ship atomically stores a validated receipt plus its effect descriptor in .babylon60/last_ship_receipt.json before dispatch, using an owned directory, no group/other write bits, nofollow descriptors, exclusive 0600 temporary, file fsync, directory-relative replace and directory fsync.",
+    "authorization_limit": "The retained record is audit data. It is never read to authorize or retry a push; every invocation still uses a fresh nonce and gate. A stored approval does not prove the later push succeeded."
+  }
+}

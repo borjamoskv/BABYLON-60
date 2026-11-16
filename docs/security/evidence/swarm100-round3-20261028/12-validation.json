@@ -1,0 +1,17 @@
+{
+  "reviewer": "12",
+  "validation": "PASS",
+  "candidates": 29,
+  "coverage": "29/29, ordered, unique",
+  "source_hashes": "all current hashes match captured values",
+  "excerpt_ranges_verified": 79,
+  "decisions": {
+    "CONFIRMED_STATIC": 29
+  },
+  "severities": {
+    "P2": 27,
+    "P1": 2
+  },
+  "runtime_executed": false,
+  "broader_workspace_quality_gates": "Not run by this shard; parent owns consolidated gates for shared round3 evidence."
+}

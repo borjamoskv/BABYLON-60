@@ -1,0 +1,424 @@
+{
+  "shard": "007",
+  "findings": [
+    {
+      "title": "Unsigned short vector lengths underflow the SIMD loop bound",
+      "severity": "P1",
+      "path": "01_KISH_ENGINE/babylon60/utils/void_accel.c",
+      "line": 32,
+      "evidence": "size_t len is used in j <= len - 16; AVX512 repeats j <= len - 64 at line 63. No preceding lower-bound guard. Caller traced: 01_KISH_ENGINE/babylon60/transducers/void_vec.py:77-90 passes len(query) directly with no minimum or batch element length checks; pack_void_bit at 94-116 permits arbitrary dimensions padded only to 8 bits.",
+      "trigger": "Call exported NEON function with count > 0 and len < 16, or AVX512 function with len < 64.",
+      "impact": "With an accelerator shared library present, public Python void_batch_hamming_dist/void_hamming_dist accepts short packed vectors and reaches the underflowing C loop, causing out-of-bounds reads and potential process crash. No caller minimum-length constraint was found.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Delete quarantine occurs before recoverable durable intent",
+      "severity": "P1",
+      "path": "src/secure_fs.rs",
+      "line": 2126,
+      "evidence": "B::quarantine runs at 2126; first AttemptReserved WAL append is 2144. recover_quarantined at 2327 requires an existing WAL record.",
+      "trigger": "Crash or budget/WAL persistence failure after quarantine rename and before successful append_wal_record.",
+      "impact": "Original file has already moved, but recovery rejects the nonce for missing durable deletion intent; the documented recovery path cannot resolve that transaction.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Delete uses two unconstrained nonce identities",
+      "severity": "P2",
+      "path": "src/secure_fs.rs",
+      "line": 2123,
+      "evidence": "Quarantine basename uses tx_nonce; WAL entries use auth.nonce (2138); recovery constructs del_<nonce> from its WAL lookup nonce at 2347. No equality check in secure_delete_scoped.",
+      "trigger": "Caller supplies distinct nonzero auth.nonce and tx_nonce and deletion requires recovery after AttemptReserved.",
+      "impact": "Recovery looks up the authorized nonce successfully but probes a different quarantine filename and fails to recover the actual quarantined object.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Zero-copy PoC reports success after dropped-message timeout",
+      "severity": "P2",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/poc_zerocopy_hypervisor.rs",
+      "line": 109,
+      "evidence": "The receive-count timeout breaks at 94-96; line 109 unconditionally prints FALSACION EMPIRICA SUPERADA. No final equality assertion or failing exit.",
+      "trigger": "Subscriber receives fewer than msg_count before timeout, or its receive loop exits on error.",
+      "impact": "PoC exits successfully and advertises empirical success despite incomplete delivery; allocation-free claims are also not measured here.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Production dispatcher returns fabricated provider successes",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-tri-provider-swarm/scripts/tri_swarm_dispatcher.py",
+      "line": 66,
+      "evidence": "All three dispatch methods only asyncio.sleep then return SUCCESS and fixed result text; no provider call uses stored keys, URL, prompt or max_tokens. Header identifies Production Script.",
+      "trigger": "Use dispatcher for any plan/code/deep_context task.",
+      "impact": "Consumers receive successful provider/result records although no inference or code mutation occurred; misleading evidence if treated as production completion.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Skill auditor passes when no skill directories exist",
+      "severity": "P2",
+      "path": "scripts/c5_quality_gates/audit_skills_ecosystem.py",
+      "line": 151,
+      "evidence": "Search roots are hardcoded ~/BABYLON-60/.agents/skills and ~/.gemini/config/skills (20-23); absent roots are skipped; empty files generates no errors and returns PASS.",
+      "trigger": "Run on a checkout elsewhere with neither legacy directory populated.",
+      "impact": "Quality gate reports 100% compliance for zero inspected skills, leaving the actual workspace skill library unchecked.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Webhook example consumes request body twice",
+      "severity": "P2",
+      "path": "tools/skill_library/codex_overrides/agents-sdk/references/webhooks-push.md",
+      "line": 32,
+      "evidence": "Line 29 awaits request.text() for signature verification; line 32 awaits request.text() again for JSON. Request body is single-use; MDN Request.text documents TypeError for disturbed/locked body: https://developer.mozilla.org/en-US/docs/Web/API/Request/text",
+      "trigger": "Valid signed webhook with a body using the provided handler.",
+      "impact": "Second body read rejects before queueing; valid events fail rather than returning 202. Cache the first text and parse it.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Cross-instance effect budget uses stale usage history",
+      "severity": "P1",
+      "path": "src/secure_fs.rs",
+      "line": 1433,
+      "evidence": "new loads .budget_usage.bin into usage_history once (1352-1364). acquire_hybrid_resource_gate invokes refresh_nonce_state_locked (1433), which reloads only consumed nonces and effect WAL (1438-1481), never usage_history. verify_budget_allowed reads the cached usage map (1640-1662); commit_budget_usage updates only its local map and appends usage records.",
+      "trigger": "Create two orchestrators on the same root before either consumes a max_effects=1 policy for the same principal/epoch; provision that policy in both and execute separate authorized effects with distinct nonces.",
+      "impact": "The global flock serializes effects but each instance sees its own zero usage, so both can pass a one-effect budget. Durable history records the overrun only after effects are performed.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Mutation receipt recovery does not restore charged budget",
+      "severity": "P1",
+      "path": "src/secure_fs.rs",
+      "line": 2295,
+      "evidence": "secure_mutate_scoped performs backend mutation at 2273 before commit_budget_usage at 2295. reconcile_wal_entry recognizes post_hash and persists OutcomeKnown at 1922-1938 without updating usage_history or .budget_usage.bin; WalRecord lacks principal identity.",
+      "trigger": "Crash after successful mutation before commit_budget_usage, then restart and reconcile the AttemptReserved mutation whose on-disk bytes match post_hash.",
+      "impact": "Recovery confirms the effect while leaving the principal budget uncharged, allowing subsequent distinct-nonce effects to exceed the configured total.",
+      "confidence": "high",
+      "kind": "runtime"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".agents/rules/c5_enterprise_compliance_offer_invariant.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "sha256": "1f0748e6644871b2e96c34c1dfb3a6665cefc3e49b809105e91f6e6d62ca92cd",
+      "hash_matches_manifest": true
+    },
+    {
+      "path": ".github/workflows/existence_gap_gate.yml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          95
+        ]
+      ],
+      "sha256": "f08caac341d2d4ed629df94164758ca5604cf761e27668f706374e641e624897",
+      "hash_matches_manifest": true
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/poc_zerocopy_hypervisor.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          115
+        ]
+      ],
+      "sha256": "7d04c4d442e628ad6c855b4f10a7414ec4e70a7f5211efbc233a2943ccfe98b7",
+      "hash_matches_manifest": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/compiler/lean_backend.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          11
+        ]
+      ],
+      "sha256": "638c40231ecae9e52819e43948277c427855a2f62479297727d88d0212ee7d93",
+      "hash_matches_manifest": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/c6_absolute/metabolic_dead_man_switch.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          146
+        ]
+      ],
+      "sha256": "b4d2499b8b9009a88f7180dc5919ce4421fee2b6086a514241d6143a405321fb",
+      "hash_matches_manifest": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/utils/void_accel.c",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          80
+        ]
+      ],
+      "sha256": "30a83dc46a550cf95f77ea168a8a416456cfbed12a77186a9d18e421b3b61a64",
+      "hash_matches_manifest": true
+    },
+    {
+      "path": "AGENTS.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          42
+        ]
+      ],
+      "sha256": "1c40bfdd2083849bc1f3c266a67871a1594068bc843207c4a1244fe0884f138b",
+      "hash_matches_manifest": true
+    },
+    {
+      "path": "docs/01_spec/spec_causal_hitl_governance.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          113
+        ]
+      ],
+      "sha256": "42074be42b962faf35f8ac852c1fce2e2380c6bea4577d26c4f4338edce610fd",
+      "hash_matches_manifest": true
+    },
+    {
+      "path": "docs/SPECIFICATION.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          189
+        ]
+      ],
+      "sha256": "04de614337c0bca428c31f3979db7274f03537c934e162ab9c73684d970eefc9",
+      "hash_matches_manifest": true
+    },
+    {
+      "path": "proof/bundles/attestation_bundle_v1/test-results.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          12
+        ]
+      ],
+      "sha256": "d949ed8c3efc5e429616e3ceeaf570261103678816df3511988bb294a694e791",
+      "hash_matches_manifest": true
+    },
+    {
+      "path": "scripts/c5_demos/c5_tui_dashboard.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          116
+        ]
+      ],
+      "sha256": "d23fc858b09a2be2a4cdbb5955a4ac03e2c12525a45ef21e1195c2506d822af4",
+      "hash_matches_manifest": true
+    },
+    {
+      "path": "scripts/c5_quality_gates/audit_skills_ecosystem.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          155
+        ]
+      ],
+      "sha256": "cfada8c383e49269a10291530bc0afc26bfcf29035ddfe9f218d6a70a967a11c",
+      "hash_matches_manifest": true
+    },
+    {
+      "path": "scripts/c5_verifiers/workproof_lab.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          193
+        ]
+      ],
+      "sha256": "f960de28d5a3ff03da525aedbe2dfc5fa065e793d08c1d342f0b6c548e0d3444",
+      "hash_matches_manifest": true
+    },
+    {
+      "path": "src/secure_fs.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          2574
+        ]
+      ],
+      "sha256": "9d34f7d50683b237b0eb7705721738a6595ea6661d4ed85d6fce5ee9cdb564bf",
+      "hash_matches_manifest": true
+    },
+    {
+      "path": "tests/test_ax0_mcp_isolation.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          151
+        ]
+      ],
+      "sha256": "92cee90dcc29ac3200f81903c3b2c4e6302ad0c7cc7f99ee21c20d0abaf6b98f",
+      "hash_matches_manifest": true
+    },
+    {
+      "path": "tests/test_ns_z3_firewall.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          164
+        ]
+      ],
+      "sha256": "5e470c6422989e626efbec3b236af2a503fb9af03e7d0b2511e683f26462b720",
+      "hash_matches_manifest": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/agents-sdk/references/webhooks-push.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          86
+        ]
+      ],
+      "sha256": "c92e9f4566a71271eb4ffdcc219ed89fefc5294ecda47b43fc8863fb2b3e03f4",
+      "hash_matches_manifest": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/do-storage/testing.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          183
+        ]
+      ],
+      "sha256": "2782b28063efea6bda878ba591c5b771f7cf69ca670d9535ebbec4831583afa7",
+      "hash_matches_manifest": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/realtime-sfu/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          174
+        ]
+      ],
+      "sha256": "f43a3aae433b55fdcf09eba89540daca591de023038ac691c8ab85d2b62e5528",
+      "hash_matches_manifest": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workers-playground/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          163
+        ]
+      ],
+      "sha256": "ce0183c32a0df67ae263f8fbbe459b0dfb6247adff5e869c0b1b4d06ae1f6300",
+      "hash_matches_manifest": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/examples/Markov_Chain_Melody.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          73
+        ]
+      ],
+      "sha256": "95c44479bc5ad801cd315f27a4999a53bdccfa0af3f4cf8eeba9d8a561c91d8f",
+      "hash_matches_manifest": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_11_purchases.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          61
+        ]
+      ],
+      "sha256": "cd81f224b8b41c8a19556b85c0f0e0edca84ad444c367f5db361dc4f0b1c6250",
+      "hash_matches_manifest": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-lean4-axiomatic-orchestrator/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "sha256": "8d45635f778fc21ad7a88696024e7bc5fb48290213510f4d65ae1b0bd32a423b",
+      "hash_matches_manifest": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-tri-provider-swarm/scripts/tri_swarm_dispatcher.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          131
+        ]
+      ],
+      "sha256": "68e34604fb1c3158ea6b09a8e85a1c7f7f529a4642fd104b30793e92425a05ed",
+      "hash_matches_manifest": true
+    },
+    {
+      "path": "tools/skill_library/global/suno-bracket-tagging/references/subgenre_genesis_protocol.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          32
+        ]
+      ],
+      "sha256": "b23b84e986d3c5e557d99dad98b7868a7c977ab6dbaa1e3b0609d331fd20d6dd",
+      "hash_matches_manifest": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/transducers/void_vec.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          149
+        ]
+      ],
+      "sha256": "e505217fea124947cf141d5463b1861fb3c0b049e135411cd92b6831f51bede0"
+    }
+  ],
+  "tool_limitations": [
+    "No native codebase-memory graph tools exposed (ALL_TOOLS inspection); targeted text fallback used.",
+    "Static audit only; no tests, builds, repository code execution or runtime effects.",
+    "External API example checked against MDN Request.text; other external API versions and legal claims not independently certified."
+  ],
+  "tests_run": []
+}

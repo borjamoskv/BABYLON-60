@@ -1,0 +1,96 @@
+{
+  "review": "V07 independent review",
+  "date": "2026-10-28",
+  "scope": "Current diff in three autodidact modules plus three test files. Python-only AST extraction executes exact pure functions/methods with ephemeral in-memory structures; no target module imports, native calls, DB access, network, or source modifications.",
+  "findings": [
+    {
+      "priority": "P1",
+      "path": "01_KISH_ENGINE/babylon60/autodidact/engine.py",
+      "start_line": 192,
+      "end_line": 193,
+      "title": "Validate registry hits instead of replacing the checked identity result",
+      "rationale": "The registry-hit return is unvalidated and substitutes cached justification, confidence and status for the selected premise. Since returned dataclasses are mutable, a cached statement can also have a stale hash and different content, yet be returned for the requested goal. Reject stale/incompatible entries or return a result that preserves the validated input evidence; only reuse a validated equivalent record.",
+      "evidence_tests": [
+        "registry collision replaces supplied evidence",
+        "stale registry bypasses identity result"
+      ]
+    },
+    {
+      "priority": "P2",
+      "path": "01_KISH_ENGINE/babylon60/autodidact/engine.py",
+      "start_line": 195,
+      "end_line": 197,
+      "title": "Preserve prior dependencies when importing an identity premise",
+      "rationale": "Standalone derive can create a weaker-obligation statement carrying the ancestor hash. Passing that result to engine.derive_theorem with exact identity makes derive emit only its own hash; removing this self edge discards its existing ancestor provenance. The engine registers it with no DAG edge, so later ancestor falsification leaves it STABILIZED and absent from nogoods. Preserve or register the incoming premise ancestry when materializing identity under the same hash.",
+      "evidence_tests": [
+        "external identity premise loses inherited provenance and falsification cascade"
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "test": "unrelated conclusion rejected",
+      "result": "PASS",
+      "exception": "UnprovenDerivationError"
+    },
+    {
+      "test": "base identity preserves evidence/confidence/status",
+      "result": "PASS"
+    },
+    {
+      "test": "additional obligations rejected",
+      "result": "PASS",
+      "exception": "UnprovenDerivationError"
+    },
+    {
+      "test": "stale premise rejected",
+      "result": "PASS",
+      "exception": "UnverifiedPremiseError"
+    },
+    {
+      "test": "falsified premise rejected",
+      "result": "PASS",
+      "exception": "UnverifiedPremiseError"
+    },
+    {
+      "test": "engine unrelated rejection",
+      "result": "PASS",
+      "exception": "UnprovenDerivationError"
+    },
+    {
+      "test": "rejected engine call preserves registry and DAG",
+      "result": "PASS"
+    },
+    {
+      "test": "registry collision replaces supplied evidence",
+      "result": "REPRODUCED",
+      "input_kind": "Observation",
+      "input_confidence": 0.8,
+      "input_status": "stabilized",
+      "returned_kind": "FormalProof",
+      "returned_confidence": 1.0,
+      "returned_status": "canonical"
+    },
+    {
+      "test": "stale registry bypasses identity result",
+      "result": "REPRODUCED",
+      "requested_goal": "fixture",
+      "returned_goal": "unrelated stale registry value"
+    },
+    {
+      "test": "external identity premise loses inherited provenance and falsification cascade",
+      "result": "REPRODUCED",
+      "incoming_dependencies": [
+        "STMT:a905718bf190a1faa4e16373c22a3c7ae7002640991700cc5fd472a421975881"
+      ],
+      "registered_dependencies": [],
+      "status_after_ancestor_falsification": "stabilized",
+      "descendant_in_nogoods": false
+    }
+  ],
+  "source_sha256": {
+    "01_KISH_ENGINE/babylon60/autodidact/types.py": "5aa59b3488ccf03d7a0bf0f8d4e2573a4f074843c5fde8a852af667e77d9049a",
+    "01_KISH_ENGINE/babylon60/autodidact/epistemology.py": "2384037959edb8e58bcd9023e1373eea954ab4a8fa02a14e5694dbfb3057f1a5",
+    "01_KISH_ENGINE/babylon60/autodidact/engine.py": "5219b43011f4c2f98ca85197d75c6087ca0177370c1922b2eaafb0288bc4d503"
+  }
+}

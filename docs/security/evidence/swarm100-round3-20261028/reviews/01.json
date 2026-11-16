@@ -1,0 +1,1143 @@
+{
+  "reviewer": "01",
+  "candidates": [
+    {
+      "candidate_id": "SW100-C0264",
+      "decision": "REPRODUCED",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+      "current_source_sha256": "002d35e9e34b1cbd4e2a970d96a33e833500c23b74098de2937991f4bd6967c7",
+      "rationale": "The current function hashes only values, then sorts the leaf digest multiset; no key or scalar type is encoded. An isolated execution of the extracted function produced equal roots for swapped author/text values, a renamed field, and integer 1 versus string \"1\". Main installs that root as merkle_seal. Reproduced only this pure computation; no collected evidence or external service was touched.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+          "start_line": 693,
+          "end_line": 719,
+          "observation": "Value-only leaves, scalar str conversion, sorted leaf hashes."
+        },
+        {
+          "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+          "start_line": 2935,
+          "end_line": 2940,
+          "observation": "Computed root is attached to extracted evidence as merkle_seal."
+        }
+      ],
+      "guards": [
+        "Container JSON uses sort_keys, but that preserves only nested keys and does not bind top-level names.",
+        "Sorting field keys before hashing does not help because the resulting leaves are sorted again."
+      ],
+      "runtime_executed": true,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/01-reproductions.py",
+        "docs/security/evidence/swarm100-round3-20261028/01-reproductions.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0265",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+      "current_source_sha256": "002d35e9e34b1cbd4e2a970d96a33e833500c23b74098de2937991f4bd6967c7",
+      "rationale": "Mastodon results carry a local status_id separately from instance. save_to_vault selects id before URL, the sole primary key is record_id, and INSERT OR REPLACE therefore replaces an existing capture when a second instance has the same local ID. The optional save path calls this function without adding a namespace. Static storage defect; no vault or live instance was opened.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+          "start_line": 1900,
+          "end_line": 1921,
+          "observation": "Adapter returns local id and instance as distinct fields."
+        },
+        {
+          "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+          "start_line": 2063,
+          "end_line": 2083,
+          "observation": "Schema primary key is only record_id."
+        },
+        {
+          "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+          "start_line": 2086,
+          "end_line": 2114,
+          "observation": "ID chosen without platform/instance and INSERT OR REPLACE used."
+        },
+        {
+          "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+          "start_line": 2916,
+          "end_line": 2918,
+          "observation": "CLI forwards extraction to shared vault."
+        }
+      ],
+      "guards": [
+        "Bound SQL parameters prevent SQL injection but do not prevent logical key collisions.",
+        "Different instance URLs are stored as data, not included in the unique key.",
+        "Requires --save-vault and colliding IDs."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0268",
+      "decision": "REPRODUCED",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+      "current_source_sha256": "002d35e9e34b1cbd4e2a970d96a33e833500c23b74098de2937991f4bd6967c7",
+      "rationale": "Batch input yields multiple reports; JSON mode serializes each object separately, while the final non-CSV branch joins them with Markdown dashes. Executing the actual extracted join expression over two synthetic JSON objects produced JSONDecodeError: Extra data. This establishes invalid batch JSON, not network extraction behavior.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+          "start_line": 2745,
+          "end_line": 2763,
+          "observation": "Batch reads multiple nonempty URL lines and loops over them."
+        },
+        {
+          "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+          "start_line": 2979,
+          "end_line": 3002,
+          "observation": "JSON reports are joined with the common Markdown separator and emitted."
+        }
+      ],
+      "guards": [
+        "Missing batch files and failed extractions are handled, but there is no multi-item JSON container.",
+        "A one-result batch can still be valid JSON."
+      ],
+      "runtime_executed": true,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/01-reproductions.py",
+        "docs/security/evidence/swarm100-round3-20261028/01-reproductions.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0269",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+      "current_source_sha256": "002d35e9e34b1cbd4e2a970d96a33e833500c23b74098de2937991f4bd6967c7",
+      "rationale": "The adapter sends the watch URL to the text-reading endpoint and assigns the first 10000 response characters to transcript/content/text without a caption or transcription parser. Markdown labels that field Transcripción de Audio. That is a source-provenance/presentation defect: a watch-page response is not established to be spoken audio. Actual remote response content was not fetched.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+          "start_line": 1555,
+          "end_line": 1566,
+          "observation": "Parses video ID and constructs watch URL."
+        },
+        {
+          "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+          "start_line": 1581,
+          "end_line": 1601,
+          "observation": "Arbitrary text-reader body becomes transcript/content/text."
+        },
+        {
+          "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+          "start_line": 2294,
+          "end_line": 2304,
+          "observation": "Consumer labels the returned field as audio transcription."
+        }
+      ],
+      "guards": [
+        "URL video-ID matching and HTTP timeouts bound request shape/duration, not transcript provenance.",
+        "Failures produce an empty field; successful body content is accepted without transcription metadata."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0270",
+      "decision": "REPRODUCED",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+      "current_source_sha256": "002d35e9e34b1cbd4e2a970d96a33e833500c23b74098de2937991f4bd6967c7",
+      "rationale": "Regex presence alone appends sentences to facts and publishes their count as hechos_verificados; the Markdown consumer renders Hechos Verificados. Executing the extracted classifier on \"RFC 9999 proves that two plus two equals five\" returned one verified fact. No truth or source validation occurs in this pure routine.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+          "start_line": 114,
+          "end_line": 122,
+          "observation": "Fact patterns recognize hashes, citation tokens and legal words."
+        },
+        {
+          "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+          "start_line": 144,
+          "end_line": 185,
+          "observation": "Pattern hit becomes verified-fact count with no evidence check."
+        },
+        {
+          "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+          "start_line": 2906,
+          "end_line": 2909,
+          "observation": "Main sends extracted text directly to classifier."
+        },
+        {
+          "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+          "start_line": 2453,
+          "end_line": 2465,
+          "observation": "Report labels count Hechos Verificados."
+        }
+      ],
+      "guards": [
+        "Sentences shorter than 16 characters are ignored, which does not establish truth for longer sentences.",
+        "Other categories are lower-priority elif branches after keyword-based facts."
+      ],
+      "runtime_executed": true,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/01-reproductions.py",
+        "docs/security/evidence/swarm100-round3-20261028/01-reproductions.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0504",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/cli/bounty_cli.py",
+      "current_source_sha256": "722b88b69c5334c56646a516807b346b986450e6c062b8948ee8ef60e1753ae5",
+      "rationale": "Both --json and --export-claims are independently accepted, and run_single_cycle returns 0 immediately after printing JSON. The export branch is later in the same function and is unreachable in JSON mode. A cycle with receipts therefore omits the requested export. No orchestrator cycle or network call was run.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/cli/bounty_cli.py",
+          "start_line": 234,
+          "end_line": 246,
+          "observation": "Cycle result is printed and function returns in JSON mode."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/cli/bounty_cli.py",
+          "start_line": 270,
+          "end_line": 280,
+          "observation": "Export is later and only reached in text mode."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/cli/bounty_cli.py",
+          "start_line": 347,
+          "end_line": 360,
+          "observation": "Independent JSON and export arguments."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/cli/bounty_cli.py",
+          "start_line": 325,
+          "end_line": 339,
+          "observation": "Both watch and one-shot callers invoke run_single_cycle."
+        }
+      ],
+      "guards": [
+        "Export normally requires nonempty claim_receipts; that condition is never evaluated after JSON early return.",
+        "CLI parser does not make the two options mutually exclusive."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0506",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/cli/bounty_cli.py",
+      "current_source_sha256": "722b88b69c5334c56646a516807b346b986450e6c062b8948ee8ef60e1753ae5",
+      "rationale": "handle_inspect_manifest computes a seq-parity observation but its acceptance condition uses only native mode, pointer alignment and absence of halt. It then prints Landauer Bound OK and Fail-Stop Gate OK without a physical measurement or fail-stop transition test. Even the computed consistency result is not required for that verdict. Static unsupported-certification defect; no native writer was instantiated.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/cli/bounty_cli.py",
+          "start_line": 87,
+          "end_line": 115,
+          "observation": "Writer and observations read, including seq parity and read result."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/cli/bounty_cli.py",
+          "start_line": 117,
+          "end_line": 129,
+          "observation": "Acceptance omits is_consistent and prints unconditional physical/fail-stop OK."
+        }
+      ],
+      "guards": [
+        "Non-native mode and halted state have separate messages, so claim is limited to the native/aligned/nonhalted branch.",
+        "Existing read and seq-parity output is an observation but does not prove the advertised guarantees."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0201",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/cortex/crates/babylon60-verifiable-inference/src/lib.rs",
+      "current_source_sha256": "73318aa0968539fbd0b7b19e5551981d420600ee8f9aec338e596df95fe5bea2",
+      "rationale": "The generated circuit has exactly one relation, private weight * public nonce == public expected_hash. For nonzero nonce it has a witness for any field expected_hash, without binding a model, input, output or authorized weight. The FFI verifies that circuit and the local stress consumer proves that same multiplication. CONFIRMED_STATIC concerns the advertised inference-verification semantics; no deployed effect consumer or forged proof was demonstrated.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/cortex/crates/babylon60-verifiable-inference/build.rs",
+          "start_line": 7,
+          "end_line": 23,
+          "observation": "Compiler input contains only a multiplication assertion."
+        },
+        {
+          "path": "01_KISH_ENGINE/cortex/crates/babylon60-verifiable-inference/src/lib.rs",
+          "start_line": 54,
+          "end_line": 98,
+          "observation": "FFI public inputs are nonce and expected hash; verifier checks generated circuit."
+        },
+        {
+          "path": "01_KISH_ENGINE/cortex/crates/babylon60-verifiable-inference/src/bin/stress_test.rs",
+          "start_line": 19,
+          "end_line": 43,
+          "observation": "Harness sets up and proves the same relation."
+        },
+        {
+          "path": "01_KISH_ENGINE/cortex/crates/babylon60-verifiable-inference/src/bin/stress_test.rs",
+          "start_line": 76,
+          "end_line": 101,
+          "observation": "Harness calls FFI for validity and malformed inputs."
+        }
+      ],
+      "guards": [
+        "Null, UTF-8, hex, field and proof-deserialization failures return false.",
+        "Groth16 verification validates the encoded relation; those checks do not add missing inference semantics.",
+        "Local consumer traced is the stress harness; production reachability remains unverified."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0202",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/cortex/crates/babylon60-verifiable-inference/src/lib.rs",
+      "current_source_sha256": "73318aa0968539fbd0b7b19e5551981d420600ee8f9aec338e596df95fe5bea2",
+      "rationale": "Verifier setup initializes ChaCha20Rng from the public literal 0xC5C5C5C5C5C5C5C5 and passes it to Groth16::setup; the stress prover regenerates setup from the same literal. Setup randomness is thus publicly reproducible, not a secret ceremony. This is a static cryptographic-design defect if used as an adversarial proof boundary; no proof forgery or production bypass was executed.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/cortex/crates/babylon60-verifiable-inference/src/lib.rs",
+          "start_line": 18,
+          "end_line": 35,
+          "observation": "Lazy verifying-key generation uses a hard-coded setup seed."
+        },
+        {
+          "path": "01_KISH_ENGINE/cortex/crates/babylon60-verifiable-inference/src/bin/stress_test.rs",
+          "start_line": 18,
+          "end_line": 43,
+          "observation": "Prover regenerates setup from exactly the same public seed."
+        },
+        {
+          "path": "01_KISH_ENGINE/cortex/crates/babylon60-verifiable-inference/src/lib.rs",
+          "start_line": 86,
+          "end_line": 95,
+          "observation": "FFI verifier uses the resulting key."
+        }
+      ],
+      "guards": [
+        "OnceLock caches the key but does not make public setup randomness secret.",
+        "Proof parsing and verification are present; they do not repair setup secrecy.",
+        "Observed integration is the local stress harness; deployment/security-boundary adoption remains unverified."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0518",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_cortex/poc_fl014_holdout.py",
+      "current_source_sha256": "a02facf5110057fbcc140fdd2e562083f1a8f2dff4645b84d1bdcae71877d1e4",
+      "rationale": "The seeded dataset and shuffled partition do not control Python string hashing. All three verifier decision branches use hash((patch.patch_id, string_tag)), so separate interpreter hash seeds can change decisions and acceptance metrics despite identical experiment data. The tests assert fixed metric thresholds against that uncontrolled input. Static determinism defect in the synthetic experiment; no cross-process run or real exploit benchmark was executed.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_cortex/poc_fl014_holdout.py",
+          "start_line": 119,
+          "end_line": 121,
+          "observation": "Dataset seeds random.Random."
+        },
+        {
+          "path": "scripts/c5_cortex/poc_fl014_holdout.py",
+          "start_line": 164,
+          "end_line": 191,
+          "observation": "Built-in tuple/string hash determines safe and bypass outcomes."
+        },
+        {
+          "path": "scripts/c5_cortex/poc_fl014_holdout.py",
+          "start_line": 274,
+          "end_line": 281,
+          "observation": "Partition metrics consume verifier decisions."
+        },
+        {
+          "path": "scripts/c5_cortex/poc_fl014_holdout.py",
+          "start_line": 340,
+          "end_line": 345,
+          "observation": "Partition shuffle uses a separate seeded RNG."
+        },
+        {
+          "path": "tests/test_fl014_holdout_poc.py",
+          "start_line": 38,
+          "end_line": 59,
+          "observation": "Tests enforce fixed gap, acceptance and latency thresholds."
+        }
+      ],
+      "guards": [
+        "random.Random seeds control dataset/partition generation only.",
+        "An externally fixed PYTHONHASHSEED can stabilize a deployment, but this source does not require it.",
+        "Even deterministic synthetic decisions would not establish real broker containment."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0519",
+      "decision": "REPRODUCED",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_cortex/poc_fl014_holdout.py",
+      "current_source_sha256": "a02facf5110057fbcc140fdd2e562083f1a8f2dff4645b84d1bdcae71877d1e4",
+      "rationale": "Ring0BrokerGuard.enforce checks only the proposal ID prefix, never comparing dynamic_result.patch_id. Isolated execution of the actual simulator classes with PATCH-0001 and a PATCH-0002 result returned artifact_mismatch_detected=false and broker_blocked=false. The ordinary partition pairs matching IDs and its adversarial test covers only malformed prefix, leaving cross-artifact mismatch untested. This is a simulator artifact-binding defect, not a real Ring-0 bypass.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_cortex/poc_fl014_holdout.py",
+          "start_line": 218,
+          "end_line": 252,
+          "observation": "Identity check tests only startswith, then consumes a separate result."
+        },
+        {
+          "path": "scripts/c5_cortex/poc_fl014_holdout.py",
+          "start_line": 274,
+          "end_line": 281,
+          "observation": "Normal consumer passes matching patch and harness result."
+        },
+        {
+          "path": "tests/test_fl014_holdout_poc.py",
+          "start_line": 76,
+          "end_line": 99,
+          "observation": "Existing mismatch test only uses an invalid prefix."
+        }
+      ],
+      "guards": [
+        "Malformed prefix is rejected.",
+        "Detected simulated unauthorized actions are blocked by a separate branch, which does not identify mismatched artifacts.",
+        "Normal harness constructs matching IDs, so the counterexample requires direct mismatched API inputs."
+      ],
+      "runtime_executed": true,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/01-reproductions.py",
+        "docs/security/evidence/swarm100-round3-20261028/01-reproductions.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0007",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "src/omega_mediation.rs",
+      "current_source_sha256": "dd7a53bc080b993424e850f43382a82a706a189ae307bcf8bc54338dda5f48cb",
+      "rationale": "The non-cortex-persist branch returns an XOR fold and explicitly discards the domain, despite the SHA-256 API/name. For a 64-byte zero payload, setting bytes 0 and 32 to 1 changes contributions from 0 XOR 32 to 1 XOR 33, leaving the digest identical. The witness detects mutation only by digest or inode inequality, so same-inode paired edits are invisible in that configuration. Static reasoning only; no Rust binary or protected file was executed.",
+      "source_checks": [
+        {
+          "path": "src/omega_mediation.rs",
+          "start_line": 1584,
+          "end_line": 1606,
+          "observation": "Feature-disabled branch ignores domain and returns a weak XOR fold."
+        },
+        {
+          "path": "src/omega_mediation.rs",
+          "start_line": 1657,
+          "end_line": 1689,
+          "observation": "Mutation predicate compares digest/inode; file reader invokes the helper."
+        },
+        {
+          "path": "Cargo.toml",
+          "start_line": 50,
+          "end_line": 56,
+          "observation": "Default and microkernel enable cortex-persist; it gates sha2 dependency."
+        }
+      ],
+      "guards": [
+        "Default and microkernel Cargo features include cortex-persist, whose branch uses SHA-256 with domain and length.",
+        "O_NOFOLLOW and inode comparison protect other failure modes but not equal-inode XOR collisions.",
+        "Finding applies to builds explicitly omitting cortex-persist; no default-build bypass is claimed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0008",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "src/omega_mediation.rs",
+      "current_source_sha256": "dd7a53bc080b993424e850f43382a82a706a189ae307bcf8bc54338dda5f48cb",
+      "rationale": "to_cortex_evidence copies observer_visibility, threat_model_limitations and complete witnesses into the artifact, but hashes neither visibility/limitations nor pre_inode/post_inode/broker_authorized_mutation. Reports differing only in an omitted field produce the same canonical_bytes and digest, even with real SHA-256 enabled. Persisting the full JSON does not make its embedded digest cover those fields. No runtime artifact or native test was generated.",
+      "source_checks": [
+        {
+          "path": "src/omega_mediation.rs",
+          "start_line": 1694,
+          "end_line": 1721,
+          "observation": "Artifact includes the omitted fields and describes digest as covering the complete artifact."
+        },
+        {
+          "path": "src/omega_mediation.rs",
+          "start_line": 1787,
+          "end_line": 1822,
+          "observation": "Canonical byte assembly omits fields that are copied to output."
+        },
+        {
+          "path": "src/omega_mediation.rs",
+          "start_line": 1724,
+          "end_line": 1755,
+          "observation": "Serializer writes full artifact with no additional integrity signature."
+        },
+        {
+          "path": "tests/omega_mediation_campaign.rs",
+          "start_line": 798,
+          "end_line": 802,
+          "observation": "Consumer persists artifact and only checks nonzero digest."
+        }
+      ],
+      "guards": [
+        "Logical tick, verdict, mediation booleans, modality, shadow edges and witness path/content digests are covered.",
+        "O_NOFOLLOW and sync_all protect persistence mechanics, not completeness of digest input.",
+        "Canonical limitations supplied by the common evaluator reduce ordinary variation but are not cryptographically bound."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0560",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/atms.rs",
+      "current_source_sha256": "c07d7a1d4efde47155a40cdde8bb2c4471c4fe975561d69cc41096c9cb68a44e",
+      "rationale": "contradict([]) yields the empty environment and records it as a nogood. add_premise subsequently installs an unconditional nonempty label without is_consistent or propagation. contradiction_free simply returns label nonemptiness, so it reports true even though the empty nogood makes all environments inconsistent. holds_in would correctly reject the same environment. Static public-API contradiction; no native code ran.",
+      "source_checks": [
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/atms.rs",
+          "start_line": 170,
+          "end_line": 178,
+          "observation": "Premise insertion writes empty-environment label directly."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/atms.rs",
+          "start_line": 192,
+          "end_line": 206,
+          "observation": "contradict delegates empty antecedents to justification/propagation."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/atms.rs",
+          "start_line": 229,
+          "end_line": 242,
+          "observation": "is_believed checks label only; holds_in has an extra consistency guard."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/atms.rs",
+          "start_line": 281,
+          "end_line": 285,
+          "observation": "Public contradiction_free delegates to is_believed."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/atms.rs",
+          "start_line": 329,
+          "end_line": 350,
+          "observation": "Empty antecedent list contributes the empty environment."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/atms.rs",
+          "start_line": 366,
+          "end_line": 386,
+          "observation": "Nogoods are recorded and pruning applies only when invoked."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/bft_engine.rs",
+          "start_line": 316,
+          "end_line": 327,
+          "observation": "Consumer relies on contradiction_free as a logical-invalidity gate; exploit reachability not demonstrated."
+        }
+      ],
+      "guards": [
+        "Normal justification propagation calls prune_labels, so a subsequent propagation repairs labels.",
+        "holds_in explicitly checks is_consistent, but contradiction_free does not.",
+        "The public API permits empty antecedents; no rejection is present."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0466",
+      "decision": "REPRODUCED",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/c5_telemetry.py",
+      "current_source_sha256": "d11bab0a71e38ff15ea93db7257511cf33b2eda56a07a8ab455334c86c883721",
+      "rationale": "stop promises draining but cancels the task immediately and clears it without joining the queue. Running only the extracted classes with start, immediate ingest and stop left one queued event and no worker. The consumer currently logs rather than persists, so reproduced impact is pending event processing after shutdown, not proven durable-ledger loss.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/c5_telemetry.py",
+          "start_line": 24,
+          "end_line": 45,
+          "observation": "Ingest is non-yielding put_nowait; consumer calls task_done after log."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/c5_telemetry.py",
+          "start_line": 49,
+          "end_line": 62,
+          "observation": "start schedules task and stop cancels without queue.join/drain."
+        }
+      ],
+      "guards": [
+        "QueueFull has explicit discard logging; this counterexample uses one event below capacity.",
+        "Cancellation is awaited, but task termination is different from queue draining.",
+        "Scoped search in babylon60/tests found no active caller beyond definition/reference, so deployed use is unverified."
+      ],
+      "runtime_executed": true,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/01-reproductions.py",
+        "docs/security/evidence/swarm100-round3-20261028/01-reproductions.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0451",
+      "decision": "REPRODUCED",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/genomics/hygiene.py",
+      "current_source_sha256": "db3159c052f55c82a0cb4f266c76fbf4af4d31b64c28d4fe663754a8220db6cc",
+      "rationale": "The nonempty guard is before upper().strip(). For whitespace-only text, normalization produces empty input, invalid_chars is empty, GC division is explicitly avoided and is_valid is returned true. An isolated execution returned length=0 and the SHA3-256 digest of empty bytes. This is a validator API defect; no biological/operator data was read.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/genomics/hygiene.py",
+          "start_line": 77,
+          "end_line": 92,
+          "observation": "Nonempty check precedes normalization and character check."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/genomics/hygiene.py",
+          "start_line": 94,
+          "end_line": 116,
+          "observation": "Zero length is tolerated and valid output/digest emitted."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/genomics/__init__.py",
+          "start_line": 16,
+          "end_line": 21,
+          "observation": "Validator is exported through genomics package."
+        }
+      ],
+      "guards": [
+        "Non-string and initially empty inputs are rejected.",
+        "Optional quality length rejects nonempty quality for an empty sequence, but no quality or empty quality permits the defect.",
+        "Scoped consumer search found package re-export, not a proven active ingestion pipeline."
+      ],
+      "runtime_executed": true,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/01-reproductions.py",
+        "docs/security/evidence/swarm100-round3-20261028/01-reproductions.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0352",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/tools/context7_client.py",
+      "current_source_sha256": "0ed422ed2c21dabda2fea5740737d26b0c33ea51ab35708570d41ba69f6a463b",
+      "rationale": "_call_tool advertises timeout=15 but never reads it. It performs blocking stdout.readline and, on EOF, stderr.read before its finally block. A child retaining an open pipe without completing a line can keep the caller blocked indefinitely, preventing finally from killing the child. Public resolve_library/query_docs and CLI call this method without an outer deadline. No Node process or network request was launched.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/tools/context7_client.py",
+          "start_line": 21,
+          "end_line": 55,
+          "observation": "Timeout parameter is unused during initialization read/EOF error read."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/tools/context7_client.py",
+          "start_line": 76,
+          "end_line": 104,
+          "observation": "Tool response read is unbounded; finally cleanup and public callers follow."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/tools/context7_client.py",
+          "start_line": 121,
+          "end_line": 139,
+          "observation": "CLI dispatch has exception handling but no deadline."
+        }
+      ],
+      "guards": [
+        "Pipe initialization, JSON-RPC errors and response shape are checked only after reads complete.",
+        "finally kills the child after control returns; it cannot interrupt the blocking read itself."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0509",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "path": "02_EDIN_SWARMS/agents_archi/orchestrator/kda_dag_swarm.py",
+      "current_source_sha256": "7df1e0d00504451e2bae540a4d9f8b23973dc2696773d0c2030afe1fdb07a2ff",
+      "rationale": "execute_dag holds ThermalLock around asyncio.gather with default exception behavior. On the first task exception, gather raises while sibling tasks may remain pending/running; context exit removes the lock with no sibling cancellation or drain. In a surviving caller event loop, those tasks can continue and overlap a second scheduler that acquires the freed lock. Static concurrency analysis, not an observed protected workload overlap.",
+      "source_checks": [
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/orchestrator/kda_dag_swarm.py",
+          "start_line": 107,
+          "end_line": 126,
+          "observation": "Lock acquisition is exclusive, exit unconditionally removes acquired lock."
+        },
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/orchestrator/kda_dag_swarm.py",
+          "start_line": 181,
+          "end_line": 209,
+          "observation": "Coroutines are gathered with no exception cleanup before leaving lock scope."
+        }
+      ],
+      "guards": [
+        "O_CREAT|O_EXCL guards lock acquisition while the file exists.",
+        "Semaphore caps task concurrency and dependency events gate order, but neither extends lock lifetime after failure.",
+        "If the entire event loop terminates immediately, its shutdown may cancel tasks; the candidate requires caller recovery in the same loop."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0267",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "docs/03_guides/tutorial_hello_causal.md",
+      "current_source_sha256": "04263be666811331b3db3d8d11acf3b53151faba79078b3b2c9bdd707e35d250",
+      "rationale": "The tutorial explicitly claims absence of CRITICAL HALT is positive proof that every invariant held. Its surrounding example gives only a particular overflow log and says logs can be purged; it provides no complete/trusted monitoring premise. An incomplete or missing log therefore cannot support the advertised universal conclusion. Current document still contains the claim; this is an instructional evidence-quality defect, not a tested runtime failure.",
+      "source_checks": [
+        {
+          "path": "docs/03_guides/tutorial_hello_causal.md",
+          "start_line": 173,
+          "end_line": 200,
+          "observation": "Single illustrative truncation scenario is followed by unconditional all-invariants claim."
+        }
+      ],
+      "guards": [
+        "The overflow example describes one monitored failure, which does not cover all invariants or logging failures.",
+        "Canonical repository rules demand bounded evidence, but they do not alter this tutorial sentence."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0370",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/babylon_launcher.py",
+      "current_source_sha256": "d41acbbc3485c189159162368270d7c753eaab7ab11e67446d1df25fefc5a84f",
+      "rationale": "Current metadata inspection found repository-root ui, ui/index.html and ui/wizard.html absent, while tools/ui_babylon_ide/index.html exists. The handler still serves REPO_ROOT/ui and rewrites the root request to wizard.html or index.html. Its bind-failure fallback points to the same missing tree. Confirmed checkout packaging/path defect, with P2 availability scope; no HTTP server or browser was launched.",
+      "source_checks": [
+        {
+          "path": "scripts/babylon_launcher.py",
+          "start_line": 45,
+          "end_line": 49,
+          "observation": "UI root is hard-coded to repository-root ui."
+        },
+        {
+          "path": "scripts/babylon_launcher.py",
+          "start_line": 267,
+          "end_line": 271,
+          "observation": "HTTP handler serves UI_DIR."
+        },
+        {
+          "path": "scripts/babylon_launcher.py",
+          "start_line": 729,
+          "end_line": 749,
+          "observation": "Root routes are rewritten into the absent directory."
+        },
+        {
+          "path": "scripts/babylon_launcher.py",
+          "start_line": 919,
+          "end_line": 926,
+          "observation": "Bind fallback also targets UI_DIR/index.html."
+        }
+      ],
+      "guards": [
+        "Traversal checks are unrelated to asset existence.",
+        "Configuration chooses which absent page is requested, not an alternative UI root.",
+        "A separately provisioned ui directory could change deployment outcome; none exists in this audited checkout."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0084",
+      "decision": "REPRODUCED",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_demos/falsacion_llm_gate.py",
+      "current_source_sha256": "86cf7616988088ed65bcf3b3a7e04345a6a6bfa7f09c950002e45ebfef83d6a0",
+      "rationale": "The demo samples only two constant simulated traces, invokes no solver, and labels success as formal Z3/Affine validation plus universal LLM/Ring-0 containment. Isolated execution of the extracted gate accepted an unknown opcode and returned the Z3 success message. This reproduces the simulator acceptance defect and supports the overclaim finding; it does not show any real external LLM, kernel or protected effect bypass.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_demos/falsacion_llm_gate.py",
+          "start_line": 22,
+          "end_line": 44,
+          "observation": "Only two fixed payloads represent all sampled inputs."
+        },
+        {
+          "path": "scripts/c5_demos/falsacion_llm_gate.py",
+          "start_line": 46,
+          "end_line": 74,
+          "observation": "Simulator checks selected opcodes and accepts unknown ones with Z3-labelled success."
+        },
+        {
+          "path": "scripts/c5_demos/falsacion_llm_gate.py",
+          "start_line": 89,
+          "end_line": 123,
+          "observation": "Loop samples two constants and prints universal containment verdict."
+        }
+      ],
+      "guards": [
+        "The module calls itself a simulator and correctly rejects its fixed use-after-move fixture.",
+        "The final universal claims and solver-labelled return exceed that explicit simulator scope.",
+        "No default branch rejects unknown operations."
+      ],
+      "runtime_executed": true,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/01-reproductions.py",
+        "docs/security/evidence/swarm100-round3-20261028/01-reproductions.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0362",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_destiladora/destiladora_schema.sql",
+      "current_source_sha256": "0e4de5848a549b248640e4f39d9de2bbac920b506f860833cc4cdaffc61da2ef",
+      "rationale": "The trace-ledger schema explicitly selects WAL and synchronous=NORMAL. ensure_schema executes it on the same connection used by ingest_goal_trace before transactional inserts and commit, without a later FULL override. This violates the repository FULL durability requirement and permits the NORMAL-mode power-loss durability window. Static configuration finding; no database, power-loss experiment or data loss was executed.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_destiladora/destiladora_schema.sql",
+          "start_line": 1,
+          "end_line": 12,
+          "observation": "Ledger schema sets WAL and NORMAL."
+        },
+        {
+          "path": "scripts/c5_destiladora/goal_trace_ingestor.py",
+          "start_line": 20,
+          "end_line": 29,
+          "observation": "Schema is executed and committed on supplied connection."
+        },
+        {
+          "path": "scripts/c5_destiladora/goal_trace_ingestor.py",
+          "start_line": 53,
+          "end_line": 55,
+          "observation": "Ingest connection calls ensure_schema."
+        },
+        {
+          "path": "scripts/c5_destiladora/goal_trace_ingestor.py",
+          "start_line": 70,
+          "end_line": 114,
+          "observation": "Ingest writes through same connection and returns trace ID."
+        }
+      ],
+      "guards": [
+        "Connection context commits transactions and schema uses foreign keys; these do not replace synchronous=FULL.",
+        "The finding concerns power-loss durability, not ordinary process exceptions or logical SQL atomicity."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0050",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_quality_gates/audit_skills_ecosystem.py",
+      "current_source_sha256": "cfada8c383e49269a10291530bc0afc26bfcf29035ddfe9f218d6a70a967a11c",
+      "rationale": "The auditor enumerates only two legacy home roots, silently skips missing directories and initializes errors empty. With no discovered SKILL.md files, neither validation loop can add an error and the final branch prints PASS/100% for zero skills and returns 0. That is a vacuous gate result under the stated absent-root scenario. No home directories were scanned or auditor executed during this review.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_quality_gates/audit_skills_ecosystem.py",
+          "start_line": 16,
+          "end_line": 38,
+          "observation": "Fixed roots, missing-root skip and empty file list."
+        },
+        {
+          "path": "scripts/c5_quality_gates/audit_skills_ecosystem.py",
+          "start_line": 119,
+          "end_line": 132,
+          "observation": "Collision loop also does nothing for an empty set."
+        },
+        {
+          "path": "scripts/c5_quality_gates/audit_skills_ecosystem.py",
+          "start_line": 145,
+          "end_line": 155,
+          "observation": "Errors-only failure followed by unconditional PASS and exit 0."
+        }
+      ],
+      "guards": [
+        "It prints the detected count, making zero visible to a careful reader, but exit status remains success.",
+        "Per-file YAML/schema checks apply only if files are found.",
+        "No workspace-root argument, missing-root error or minimum-count guard is present."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0334",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_sharur/sharur_100_conversations_sitrep.json",
+      "current_source_sha256": "7c20663b9d3e9aaa69560c546c3905e97371a1692931808318da08f47454d752",
+      "rationale": "The archived sitrep still asserts PASS/ATTESTED_C5_REAL and health_index=98.6. Its traced generator assigns those literals directly for agent 99; sync integrity and workspace isolation likewise have constant success branches. emit_sitrep_reports serializes these results without independent verification. Confirmed historical provenance overclaim; this review did not access source conversations or certify current workspace state.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_sharur/sharur_100_conversations_sitrep.json",
+          "start_line": 1399,
+          "end_line": 1411,
+          "observation": "Historical record contains formal certification and fixed health score."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_conversation_reporters.py",
+          "start_line": 96,
+          "end_line": 100,
+          "observation": "Sync-integrity success is assigned without checking."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_conversation_reporters.py",
+          "start_line": 148,
+          "end_line": 152,
+          "observation": "Isolation success is a literal."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_conversation_reporters.py",
+          "start_line": 341,
+          "end_line": 354,
+          "observation": "Certification/health literals are returned as AgentResult."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_conversation_reporters.py",
+          "start_line": 418,
+          "end_line": 422,
+          "observation": "Result dataclass is serialized as archived JSON."
+        }
+      ],
+      "guards": [
+        "Other branches do compute corpus statistics, but those measurements do not justify these constant security assertions.",
+        "Elapsed-time measurement is not an attestation check.",
+        "Treat report as historical unverified output; no present runtime condition follows from it."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0070",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/distill_babylon60_docs.py",
+      "current_source_sha256": "0b27902d77a3b3a017e93076ee69722a1b8de72e1bc500839db7cba91ce09fa4",
+      "rationale": "WORKSPACE is the fixed legacy /Users/borjafernandezangulo/BABYLON-60 path, whereas this audit root is under /10_PROJECTS/BABYLON-60. Docs, mkdocs and output package paths all derive from that constant, and main has no root argument or discovery. Thus fresh clones and relocated checkouts do not target their own files; if a legacy tree exists, operations apply there. Whether this host has an alias at the old path was not inspected; no outside tree was read or mutated.",
+      "source_checks": [
+        {
+          "path": "scripts/distill_babylon60_docs.py",
+          "start_line": 21,
+          "end_line": 24,
+          "observation": "All source/output roots derive from a fixed user path."
+        },
+        {
+          "path": "scripts/distill_babylon60_docs.py",
+          "start_line": 326,
+          "end_line": 330,
+          "observation": "Generated package writes use STANDALONE_DIR."
+        },
+        {
+          "path": "scripts/distill_babylon60_docs.py",
+          "start_line": 419,
+          "end_line": 435,
+          "observation": "Entrypoint performs collection and generation without root parameter."
+        }
+      ],
+      "guards": [
+        "A host symlink/alias could mask the issue locally, but does not fix portability or explicit-root selection.",
+        "Main unconditionally runs sanitization and generation using module constants."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0170",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tests/cache_kinetic_benchmark.cpp",
+      "current_source_sha256": "e9a4f7906c7b4b00538f655d9983476a934ed4b12082c291babc52a4bce91e09",
+      "rationale": "main passes parsed stoull(\"0\") directly into both benchmark variants. At zero operations neither producer nor consumer records a sample, yet percentile subscripts and vector.back are unconditional. Empty-vector element access is undefined behavior. Static standalone benchmark input-validation defect; no native build, crash or stress run occurred.",
+      "source_checks": [
+        {
+          "path": "tests/cache_kinetic_benchmark.cpp",
+          "start_line": 96,
+          "end_line": 129,
+          "observation": "Sample recording requires at least one consumed operation."
+        },
+        {
+          "path": "tests/cache_kinetic_benchmark.cpp",
+          "start_line": 140,
+          "end_line": 148,
+          "observation": "Percentile indexing and back are unconditional after empty sort."
+        },
+        {
+          "path": "tests/cache_kinetic_benchmark.cpp",
+          "start_line": 160,
+          "end_line": 172,
+          "observation": "CLI parses optional count with no positive-input guard."
+        }
+      ],
+      "guards": [
+        "Default count is positive and threads are joined before analysis, but supplied zero is accepted.",
+        "Elapsed-time division has a zero guard; latency vector access does not."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0545",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/cron-triggers/gotchas.md",
+      "current_source_sha256": "958059804d1a3c091114a13dc5e7aa4f632974202ebff182ce1ee8245df103f0",
+      "rationale": "The documented solution stores an execution marker before awaiting performIdempotentOperation. If that operation rejects after put succeeds, a later invocation with the same ID reads the marker, calls noRetry and returns without completing the operation. Confirmed example ordering defect. The marker has a 24-hour TTL, so the report must not describe the key as permanent; losing scheduled work depends on retry/delivery behavior. No cloud operation was run.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/codex_overrides/cloudflare/references/cron-triggers/gotchas.md",
+          "start_line": 92,
+          "end_line": 113,
+          "observation": "Example recommends KV deduplication, skips marked IDs and marks before operation."
+        }
+      ],
+      "guards": [
+        "24-hour expiry limits marker lifetime, but does not ensure a failed operation receives a later attempt.",
+        "Calling an operation idempotent makes retry safe; it does not mean a failed first attempt completed.",
+        "Finding is local example control-flow, not a verified deployment or platform guarantee."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0155",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/remotion-audio-reactive-video/examples/AudioReactiveMaster.tsx",
+      "current_source_sha256": "b25dd4fa4dffa5e29f4d8d8ebd4d788e37286ea845c90fa6161115f5b8948422",
+      "rationale": "AudioReactiveMaster memoizes one mutable ballistic state and mutates it through extractBands during each render. SpectralFlux uses the preceding spectrum and smoothed values, then overwrites both. Camera, shake and glow consume these history-dependent results, so identical frame/audio input after different render history can produce different output. Static example determinism defect; no media, renderer or browser was executed.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/remotion-audio-reactive-video/examples/AudioReactiveMaster.tsx",
+          "start_line": 28,
+          "end_line": 56,
+          "observation": "Frame/audio extraction feeds persistent memoized state into extractBands."
+        },
+        {
+          "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/remotion-audio-reactive-video/examples/AudioReactiveMaster.tsx",
+          "start_line": 63,
+          "end_line": 82,
+          "observation": "History-dependent outputs drive visual transforms/glow."
+        },
+        {
+          "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/remotion-audio-reactive-video/examples/SpectralFlux.ts",
+          "start_line": 41,
+          "end_line": 61,
+          "observation": "Ballistics consumes and overwrites smoothedValues."
+        },
+        {
+          "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/remotion-audio-reactive-video/examples/SpectralFlux.ts",
+          "start_line": 85,
+          "end_line": 115,
+          "observation": "Onset consumes previous spectrum then overwrites it before return."
+        }
+      ],
+      "guards": [
+        "Missing audio returns early and empty spectrum returns zeros, but nonempty repeated frames still update state.",
+        "Clamping output bounds does not remove dependence on previous render state.",
+        "No frame-indexed reset/replay appears between spectrum calculation and state mutation."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0390",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/github-architect/scripts/scitt_attestor.py",
+      "current_source_sha256": "4162a94ce35fac08bd23c96df84f72cd413620ac4d1732ec87fbe4a3cc658b80",
+      "rationale": "generate_scitt_attestation unconditionally writes Apple Silicon/Secure Enclave and zero_leakage_certified=true/SLSA_BUILD_LEVEL_3. Its receipt is only a statement and SHA-256 digest, with no signature, hardware query or provenance-level verification. get_git_info and tracked-file discovery even substitute zero/unknown/empty values on Git errors. The CLI serializes this receipt unchanged. Static unsupported attestation finding; no directory was attested or output published.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/github-architect/scripts/scitt_attestor.py",
+          "start_line": 22,
+          "end_line": 42,
+          "observation": "Git errors fall back to zero commit, unknown branch and no tracked files."
+        },
+        {
+          "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/github-architect/scripts/scitt_attestor.py",
+          "start_line": 63,
+          "end_line": 108,
+          "observation": "Claim constants and unsigned digest receipt construction."
+        },
+        {
+          "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/github-architect/scripts/scitt_attestor.py",
+          "start_line": 118,
+          "end_line": 135,
+          "observation": "CLI serializes receipt and can write it as release_provenance.json."
+        }
+      ],
+      "guards": [
+        "File hashing can detect selected content changes but does not establish claimed hardware, isolation or provenance level.",
+        "--write controls persistence only; claim construction is unconditional.",
+        "No compliance determination about an actual system is made here."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0459",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/ui_babylon_ide/index.html",
+      "current_source_sha256": "8c37f845c4538ff9d16328f13299f4d0f77e01b891e4356c905323a779035214",
+      "rationale": "Step 3 contains a static VERIFIED token and immutable Secure Enclave signature claim. setStep toggles visibility directly, including from the certify button, without consulting a receipt; launchWorkbench only emits local logs and an alert. A neighboring biometric callback now says demonstration-only/unverified, but it does not condition or update this certificate. Current static certification overclaim remains; no UI/backend or protected effect was executed.",
+      "source_checks": [
+        {
+          "path": "tools/ui_babylon_ide/index.html",
+          "start_line": 832,
+          "end_line": 853,
+          "observation": "Button reveals hard-coded certificate and VERIFIED token."
+        },
+        {
+          "path": "tools/ui_babylon_ide/index.html",
+          "start_line": 1026,
+          "end_line": 1035,
+          "observation": "Navigation only toggles display state."
+        },
+        {
+          "path": "tools/ui_babylon_ide/index.html",
+          "start_line": 1051,
+          "end_line": 1071,
+          "observation": "Biometric handler is scoped as demonstration and does not verify the certificate."
+        },
+        {
+          "path": "tools/ui_babylon_ide/index.html",
+          "start_line": 1135,
+          "end_line": 1140,
+          "observation": "Launch handler logs and alerts without receipt verification."
+        }
+      ],
+      "guards": [
+        "Biometric callback explicitly labels its report as demonstration-only and unverified.",
+        "That guard does not gate direct navigation to step 3 or verify/change the hard-coded certificate.",
+        "Finding is presentation in an example UI, not an actual execution-authority bypass."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    }
+  ]
+}

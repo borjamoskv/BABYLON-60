@@ -369,6 +369,30 @@ impl MasterLedger {
                 std::process::abort(); // Fail-fast purge on manipulation
             }
 
+            // C0107: la cadena no basta; los hashes deben recalcularse desde las filas almacenadas.
+            // El alcance del hash de statement es content + modality (obligations no entra en él).
+            let (content, modality): (String, String) = self.conn.query_row(
+                "SELECT content, modality FROM statements WHERE statement_hash = ?1",
+                params![s_hash],
+                |r| Ok((r.get(0)?, r.get(1)?)),
+            )?;
+            let mut statement_hasher = blake3::Hasher::new();
+            statement_hasher.update(content.as_bytes());
+            statement_hasher.update(modality.as_bytes());
+            let expected_s_hash = format!("STMT:{}", statement_hasher.finalize().to_hex());
+            let payload: String = self.conn.query_row(
+                "SELECT payload_json FROM justifications WHERE justification_hash = ?1",
+                params![j_hash],
+                |r| r.get(0),
+            )?;
+            let expected_j_hash = format!("JUST:{}", blake3::hash(payload.as_bytes()).to_hex());
+            if expected_s_hash != s_hash || expected_j_hash != j_hash {
+                return Err(rusqlite::Error::SqliteFailure(
+                    rusqlite::ffi::Error::new(rusqlite::ffi::SQLITE_CORRUPT),
+                    Some("Statement or justification content does not match its hash".to_string()),
+                ));
+            }
+
             assertion_anchors.insert(t, taint.clone());
             expected_prev_hash = taint;
         }
@@ -605,6 +629,32 @@ mod tests {
         assert!(state.environments.get("master").expect("C5-REAL: Termodinámica forzada. Unwrap purgado.").contains(&s1_hash));
         assert!(state.environments.get("master").expect("C5-REAL: Termodinámica forzada. Unwrap purgado.").contains(&MasterLedger::hash_statement(&js2.statement)));
         assert!(state.nogoods.contains(&s1_hash));
+    }
+
+    #[test]
+    fn c0107_mutated_statement_or_justification_invalidates_verification() {
+        for (table, column) in [("statements", "content"), ("justifications", "payload_json")] {
+            let mut ledger = MasterLedger::new(":memory:").expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
+            let js = JustifiedStatement {
+                statement: Statement {
+                    content: "Water is H2O".into(),
+                    modality: Modality::Epistemic,
+                    obligations: vec![],
+                },
+                justification: Justification::Conjecture,
+            };
+            ledger.assert_knowledge(&js, "master").expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
+            assert!(ledger.verify_chain("master").expect("C5-REAL: Termodinámica forzada. Unwrap purgado."));
+
+            ledger
+                .conn
+                .execute(&format!("UPDATE {table} SET {column} = 'tampered'"), [])
+                .expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
+            assert!(
+                ledger.verify_chain("master").is_err(),
+                "C0107: mutación en {table}.{column} no invalida la verificación"
+            );
+        }
     }
 
     #[test]

@@ -1,0 +1,22 @@
+{
+  "cases": [
+    [
+      "divergent_same_name_ledger_deletion",
+      "corroborated"
+    ],
+    [
+      "committed_wal_omitted_then_deleted",
+      "corroborated"
+    ],
+    [
+      "extension_purge_relative_traversal",
+      "corroborated"
+    ],
+    [
+      "extension_purge_absolute_path",
+      "corroborated"
+    ]
+  ],
+  "source_unchanged": true,
+  "results": "/private/tmp/babylon60-audit-round2-20261028/final-replay/d/results.json"
+}

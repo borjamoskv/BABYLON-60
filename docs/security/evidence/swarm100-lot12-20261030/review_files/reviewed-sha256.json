@@ -1,0 +1,9 @@
+{
+  "scripts/c5_cli/moskv_native_host.py": "ea28bbfee08801da5c9fb44fe82bd2350c90b5f85fb92e778df3f60f8a297432",
+  "01_KISH_ENGINE/babylon60/cortex/cortex_purge_anergy.py": "408f432bcf364ea1f857cb856e51e4a29a5f6173570c207fd414d702fec1aaca",
+  "scripts/c5_git_utils/rewrite_commits.py": "64f47ebb82ad50e35af48a9d6177f9c9b05acb7227e6c272dc89a14db15c2aa8",
+  "scripts/c5_icloud_deploy.py": "226f59b9d8988ae41fb779a3aaffa3ee5ead720428ecb6454eb995bbcfcc1c49",
+  "tools/install_shield.sh": "cd9166eae829e327e4f9422bc7203b3e164e7d6f6e8522e2fc69bc55403c9e48",
+  "tests/test_swarm100_lot12_s4_regressions.py": "8b53806f639702bd26d34299a78f0ef50560bde5a3b094b49b1c704279f2e5b3",
+  "tests/test_moskv_native_host.py": "c59a51e487e00890fa2bb4c7e4b1a1193693038e9c493dd4a9c58ae16be7cdbc"
+}

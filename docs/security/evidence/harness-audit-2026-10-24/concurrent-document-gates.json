@@ -1,0 +1,14 @@
+[
+  {
+    "command": "python3 scripts/c5_quality_gates/audit_semantic_contracts.py --workspace-only",
+    "exit_code": 0,
+    "stdout": "PASS: known semantic patterns (54 documents, 40 Python files); not a proof of semantic consistency or runtime.\n",
+    "stderr": ""
+  },
+  {
+    "command": "python3 scripts/c5_quality_gates/audit_token_budget.py --workspace-only --skip-ghost-listeners",
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "usage: audit_token_budget.py [-h] [--workspace WORKSPACE]\n                             [--global-config GLOBAL_CONFIG]\n                             [--max-always-on-bytes MAX_ALWAYS_ON_BYTES]\n                             [--fix-ghosts] [--skip-ghost-listeners]\n                             [--telemetry-db TELEMETRY_DB]\naudit_token_budget.py: error: unrecognized arguments: --workspace-only\n"
+  }
+]

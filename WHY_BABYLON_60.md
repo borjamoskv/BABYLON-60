@@ -69,7 +69,7 @@ flowchart TD
 
 ### I. Axioma O1: La Fuente Jamás es Modificada por la Inferencia (`Fuente ≠ Inferencia`)
 En los sistemas comunes, el LLM resume un documento, guarda su resumen en una base de datos vectorial y, en la siguiente consulta, lee su propio resumen. El error se retroalimenta como un teléfono escacharrado hasta el colapso.  
-En BABYLON-60, las tramas IPC, los árboles Merkle conformes y los registros atómicos de 154 bytes en `.effect_wal.bin` se sellan con **`BLAKE3`**, los testigos de inodos y pre-hashes del Secure Enclave con **`SHA-256`**, y los `SourceRecords` de compatibilidad L0 con **`SHA3-256`**. Toda deducción del modelo se etiqueta de forma fail-closed como `INFERENCE`. La inferencia jamás tiene permiso para sobreescribir la realidad territorial.
+En BABYLON-60, las tramas IPC y los árboles Merkle conformes v1 se sellan con **`BLAKE3`**, los testigos de inodos, pre-hashes del Secure Enclave y registros legados de 154 bytes en `.effect_wal.bin` (`SHA-256` sobre los primeros 122 bytes) con **`SHA-256`**, y los `SourceRecords` de compatibilidad L0 con **`SHA3-256`**. Toda deducción del modelo se etiqueta de forma fail-closed como `INFERENCE`. La inferencia jamás tiene permiso para sobreescribir la realidad territorial.
 
 ### II. Evaluación determinista de la 7-tupla de autorización
 El modelo no puede tocar un archivo ni llamar a una API por sí mismo. Solo puede emitir un `ProposedIntent`.  
@@ -102,6 +102,18 @@ Para que esta propiedad del modelo se sostenga frente a procesos de agentes real
 | **Verificación de Seguridad** | Benchmarks sintéticos sin modelo formal | **Modelo de estados verificado en Lean 4 + suites adversariales NEMESIS** |
 | **Cumplimiento Legal** | Sin rastro forense estructurado | **Exportador de trazabilidad técnica para EU AI Act (Arts. 12, 14, 15)** |
 | **Huella en el Cliente** | Dependencia de nubes de terceros para el control | **Local-First:** Mediación y persistencia ejecutadas localmente |
+
+### 4.1. Posicionamiento Competitivo: Por Qué Ninguna de las 4 Categorías del Mercado Sustituye a BABYLON-60
+
+Ante la evaluación de un CISO corporativo o un comité de inversión tecnológica, las soluciones existentes en el mercado se agrupan en cuatro categorías arquitectónicas que fallan estructuralmente frente a las **5 Pruebas de Aceptación Adversarial de BABYLON-60 (`AX-0` + `O1` + `L3_ISOLATION`)**:
+
+| Categoría de Mercado | Ejemplos de Referencia | Cómo Operan Internamente | Por Qué Fallan donde BABYLON-60 Triunfa (`AX-0` + `O1`) |
+| :--- | :--- | :--- | :--- |
+| **1. Guardarraíles de Prompts / Filtros de Texto** | Lakera Guard, Guardrails AI, NVIDIA NeMo Guardrails | Inspeccionan el texto de entrada/salida con otro clasificador probabilístico o expresiones regulares antes de ejecutar. | **Violación de `AX-0`:** Usan un sistema probabilístico para vigilar a otro sistema probabilístico. Son vulnerables a *jailbreaks* codificados, carecen de prevención TOCTOU en el sistema de archivos y no tienen pruebas formales en Lean 4. |
+| **2. Frameworks de Orquestación de Agentes** | LangGraph, CrewAI, AutoGen, LlamaIndex | Envoltorios (*wrappers*) en Python dentro del mismo espacio de memoria del agente. | **Cero Aislamiento (`L3`) y Cero Memoria Epistémica (`O1`):** Usan mutexes lentos de Python, mezclan datos fuente con inferencias en el contexto del prompt y ocultan fallos con bloques `try/except` en lugar de aplicar apoptosis `0xDEAD_6060`. |
+| **3. Sandboxes Efímeros en Nube** | E2B, Modal, Firecracker microVMs | Aíslan la ejecución dentro de un contenedor o máquina virtual remota en la nube de un tercero. | **Sin Gobernanza Intra-Perímetro ni Soberanía Local:** Si el agente tiene credenciales dentro del sandbox para llamar a una API de pagos o modificar una base de datos, el sandbox lo permite porque no evalúa la 7-tupla $\mathcal{T}_{\text{auth}}$ por operación ni exige firma biométrica/HSM ni mantiene un ledger WORM local (*local-first*). |
+| **4. Motores de Políticas Cloud Tradicionales** | Open Policy Agent (OPA / Rego), AWS Cedar | Evalúan permisos JSON sobre peticiones HTTP/REST en microservicios tradicionales. | **Sin Custodia de Silicio ni Confinamiento de Descriptores:** OPA decide si un JSON cumple una regla, pero no ejecuta la operación atómica sobre el sistema de archivos (`renameatx_np` / `renameat2` + comprobación de `st_dev`, `st_ino` y `SHA-256` en cuarentena `0700`) ni distingue criptográficamente `SOURCE` de `INFERENCE` con registros WAL de 154 bytes. |
+| **5. Kernel de Confianza Determinista *(Categoría BABYLON-60)*** | **`BABYLON-60` + `cortex-persist`** | Bróker en Rust (`Layer-0 EL0`) + Seqlock 64B (`align(64)`) + Ledger SQLite WAL + árbol formal en Lean 4 (`144` teoremas propios / `~183k` LOC totales). | **Certeza Matemática (`L1_FORMAL`) + Confinamiento OS (`L3_ISOLATION`):** Garantiza por inducción formal sobre el modelo de trazas (`countDispatches trace ≤ 1`) y confinamiento de descriptores que ningún componente estocástico ejecute efectos irreversibles sin autorización verificada. |
 
 ---
 

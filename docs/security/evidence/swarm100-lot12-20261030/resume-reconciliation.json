@@ -1,0 +1,18 @@
+[
+  {
+    "command": [
+      "python3",
+      "docs/security/evidence/swarm100-lot12-20261030/reconcile_lot12.py"
+    ],
+    "exit_code": 0,
+    "log": "docs/security/evidence/swarm100-lot12-20261030/resume-reconciliation-0.log"
+  },
+  {
+    "command": [
+      "python3",
+      "docs/security/evidence/swarm100-round3-20261028/reconcile_registry.py"
+    ],
+    "exit_code": 1,
+    "log": "docs/security/evidence/swarm100-lot12-20261030/resume-reconciliation-1.log"
+  }
+]

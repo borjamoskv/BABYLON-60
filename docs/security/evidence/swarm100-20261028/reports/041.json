@@ -1,0 +1,401 @@
+{
+  "shard": "041",
+  "findings": [
+    {
+      "title": "Local claim provenance omits untracked source consumed by verification",
+      "severity": "P2",
+      "path": "scripts/c5_quality_gates/verify_claims.py",
+      "line": 107,
+      "evidence": "source_commit excludes untracked paths at line 97; source_tree_digest enumerates only git ls-files. Current working tree has untracked semantic_solver.rs and solver_replay.rs referenced by compiler lib.rs lines 15\u201316. The sitrep persists these source identifiers at lines 415\u2013416.",
+      "trigger": "Run local verification while imported source files remain untracked; modify only those files between runs.",
+      "impact": "Evidence can retain the same source identifiers despite different executed source bytes, weakening reproducibility and provenance for local dirty-tree runs. No runtime exploitation or release bypass is established.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Rust stdio interoperability test can exercise a stale binary",
+      "severity": "P2",
+      "path": "tests/test_cortex_mcp_server.py",
+      "line": 640,
+      "evidence": "test_rust_babylon_skills_mcp_stdio_interop invokes cargo build only when target/debug/babylon-skills-mcp does not exist; an existing executable is launched directly without rebuilding or checking its source revision.",
+      "trigger": "Run this test in a workspace with an existing binary after changing Rust server sources.",
+      "impact": "The interoperability check may pass against prior compiled behavior and fail to test the current checkout. This is a verification gap; it does not establish production vulnerability.",
+      "confidence": "high",
+      "kind": "example"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "scripts/c5_quality_gates/verify_claims.py",
+      "line": 248,
+      "observation": "Unknown test-count output (None) is accepted. Lean and cargo-run evidence legitimately have no test counter, so generic rejection would break intended proof/PoC support.",
+      "hypothesis": "A selected test runner that exits successfully without a recognized counter may receive verified status without establishing execution; runner-specific evidence contracts would make this precise.",
+      "required_validation": "Identify a concrete supported runner/output mode that suppresses its execution summary while returning success."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/core/shadow_router.py",
+      "line": 149,
+      "observation": "decision_receipt_hash is outside the signed execution payload. Repository-targeted search found class/demo/tests but no production receipt verifier.",
+      "hypothesis": "A future consumer that verifies only payload_hash and signature could accept a reassigned decision linkage.",
+      "required_validation": "Trace an actual consuming verifier before treating this as an exploitable receipt-integrity bypass."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".agents/skills/c5-epistemic-thermodynamics-project/references/modules/grill-me-v2/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          33
+        ]
+      ],
+      "expected_sha256": "31324f004d8437f77a0fae365b5f7911f12990599013df81063b47603aa975c7",
+      "observed_sha256": "31324f004d8437f77a0fae365b5f7911f12990599013df81063b47603aa975c7",
+      "changed_since_manifest": false,
+      "notes": "Read-only static review."
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/lib.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          16
+        ]
+      ],
+      "expected_sha256": "3fea108275672570af2d64b029e4cfd057bf8cc165cc9fdaa34ec9222890f9a2",
+      "observed_sha256": "3fea108275672570af2d64b029e4cfd057bf8cc165cc9fdaa34ec9222890f9a2",
+      "changed_since_manifest": false,
+      "notes": "Read-only static review."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/agents/sovereign_mcp/sovereign_spark.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          112
+        ]
+      ],
+      "expected_sha256": "fa2c109d8d33d272691957e138446b29f324171b2a536d185d6cfb7e953e1848",
+      "observed_sha256": "fa2c109d8d33d272691957e138446b29f324171b2a536d185d6cfb7e953e1848",
+      "changed_since_manifest": false,
+      "notes": "Read-only static review."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/core/shadow_router.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          173
+        ]
+      ],
+      "expected_sha256": "05f81b3ec6e94ce8c897e5295588cd1235dc2b5efbfd670ac0a347f20ae3ce27",
+      "observed_sha256": "05f81b3ec6e94ce8c897e5295588cd1235dc2b5efbfd670ac0a347f20ae3ce27",
+      "changed_since_manifest": false,
+      "notes": "Read-only static review."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/presentation.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          222
+        ]
+      ],
+      "expected_sha256": "07cda1571bcacbc397752344ec358adc3ad2a8ad018a24adab2080834c5b2235",
+      "observed_sha256": "07cda1571bcacbc397752344ec358adc3ad2a8ad018a24adab2080834c5b2235",
+      "changed_since_manifest": false,
+      "notes": "Read-only static review completed with bounded follow-up reads; external factual assertions remain unverified."
+    },
+    {
+      "path": "01_KISH_ENGINE/cortex/crates/cortex-core/src/ledger_integrity.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          139
+        ]
+      ],
+      "expected_sha256": "4fffd6d5816201b518e8199dc8f1193232c45c09184139bd4a11ffe2668552c8",
+      "observed_sha256": "4fffd6d5816201b518e8199dc8f1193232c45c09184139bd4a11ffe2668552c8",
+      "changed_since_manifest": false,
+      "notes": "Read-only static review."
+    },
+    {
+      "path": "crates/b60-lang/src/bin/fsm_poc.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          173
+        ]
+      ],
+      "expected_sha256": "ec8e7250c972599dffe89b0ab174fe19663612c71a58ce95fa25ff44b34743c9",
+      "observed_sha256": "ec8e7250c972599dffe89b0ab174fe19663612c71a58ce95fa25ff44b34743c9",
+      "changed_since_manifest": false,
+      "notes": "Read-only static review."
+    },
+    {
+      "path": "docs/03_guides/guide_portable_signature.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          102
+        ]
+      ],
+      "expected_sha256": "5bab28e095871545af52f1821c611fcf3c3cf9f7e082146843914c82e6d47fc3",
+      "observed_sha256": "5bab28e095871545af52f1821c611fcf3c3cf9f7e082146843914c82e6d47fc3",
+      "changed_since_manifest": false,
+      "notes": "Read-only static review."
+    },
+    {
+      "path": "docs/security/evidence/harness-audit-2026-10-24/source-provenance.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          34
+        ]
+      ],
+      "expected_sha256": "0b4267167a124c2d2f9b7949427b2d4b0eaf01591f02abf8a91c43c3a41d6318",
+      "observed_sha256": "0b4267167a124c2d2f9b7949427b2d4b0eaf01591f02abf8a91c43c3a41d6318",
+      "changed_since_manifest": false,
+      "notes": "Read-only static review."
+    },
+    {
+      "path": "proof/lean/NavierStokesOracle.lean",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          64
+        ]
+      ],
+      "expected_sha256": "753edd7466ee342ed0d20999855c3ffe26ab7014482d1c38f5a855b0d8d3ffbc",
+      "observed_sha256": "753edd7466ee342ed0d20999855c3ffe26ab7014482d1c38f5a855b0d8d3ffbc",
+      "changed_since_manifest": false,
+      "notes": "Read-only static review."
+    },
+    {
+      "path": "scripts/c5_demos/poc_oci_pipeline.yml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          36
+        ]
+      ],
+      "expected_sha256": "f98750798dd4a2a803bd94863f55fcd2fe00beeec9c4446bade4d305bba83909",
+      "observed_sha256": "f98750798dd4a2a803bd94863f55fcd2fe00beeec9c4446bade4d305bba83909",
+      "changed_since_manifest": false,
+      "notes": "Read-only static review."
+    },
+    {
+      "path": "scripts/c5_quality_gates/verify_claims.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          443
+        ]
+      ],
+      "expected_sha256": "2b100a46f048e5c6f3b98900900ffb8fa6ad1c13130ba3b023a2f9e5a81f38c5",
+      "observed_sha256": "2b100a46f048e5c6f3b98900900ffb8fa6ad1c13130ba3b023a2f9e5a81f38c5",
+      "changed_since_manifest": false,
+      "notes": "Read-only static review."
+    },
+    {
+      "path": "scripts/repatriated/legion_100_results.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          1349
+        ]
+      ],
+      "expected_sha256": "a51f5fcabcbb267136744b4259b6edbce55e08e091a9f92c480ff1c0e8fda46b",
+      "observed_sha256": "a51f5fcabcbb267136744b4259b6edbce55e08e091a9f92c480ff1c0e8fda46b",
+      "changed_since_manifest": false,
+      "notes": "Read-only static review completed with bounded follow-up reads; external factual assertions remain unverified."
+    },
+    {
+      "path": "tests/fixtures/startup_sigkill_interpose.c",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          95
+        ]
+      ],
+      "expected_sha256": "3254eb031d306a5c596a63d0b78badda458ccc8a780402dedd37b6b325552a29",
+      "observed_sha256": "3254eb031d306a5c596a63d0b78badda458ccc8a780402dedd37b6b325552a29",
+      "changed_since_manifest": false,
+      "notes": "Read-only static review."
+    },
+    {
+      "path": "tests/test_cortex_mcp_server.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          1115
+        ]
+      ],
+      "expected_sha256": "2e6e54e8fd190b35fba170293832e9b59649a21abfdedfcdd8352e4ba57eacc8",
+      "observed_sha256": "2e6e54e8fd190b35fba170293832e9b59649a21abfdedfcdd8352e4ba57eacc8",
+      "changed_since_manifest": false,
+      "notes": "Read-only static review completed with bounded follow-up reads; external factual assertions remain unverified."
+    },
+    {
+      "path": "tests/test_skill_links.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          43
+        ]
+      ],
+      "expected_sha256": "d525d45d73ecd4ba79039d3e6e1deea2dffcea6a89e60bdcbbdac55949cd76b8",
+      "observed_sha256": "d525d45d73ecd4ba79039d3e6e1deea2dffcea6a89e60bdcbbdac55949cd76b8",
+      "changed_since_manifest": false,
+      "notes": "Read-only static review."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/api-shield/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          192
+        ]
+      ],
+      "expected_sha256": "79acd0a84bdeca4f45ef92d3772e9f403d15266210205700a7fccc313a084418",
+      "observed_sha256": "79acd0a84bdeca4f45ef92d3772e9f403d15266210205700a7fccc313a084418",
+      "changed_since_manifest": false,
+      "notes": "Read-only static review."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/images/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          99
+        ]
+      ],
+      "expected_sha256": "447ec285923c9ab4b29e56ec7ec0318f30a559c05c257d37b02f60e62971b9d2",
+      "observed_sha256": "447ec285923c9ab4b29e56ec7ec0318f30a559c05c257d37b02f60e62971b9d2",
+      "changed_since_manifest": false,
+      "notes": "Read-only static review."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/static-assets/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          162
+        ]
+      ],
+      "expected_sha256": "d89ebc10dfed9e17781f4615e409cfde111c9963d3ca118876a277a9cb5914fd",
+      "observed_sha256": "d89ebc10dfed9e17781f4615e409cfde111c9963d3ca118876a277a9cb5914fd",
+      "changed_since_manifest": false,
+      "notes": "Read-only static review."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/sandbox-sdk/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          177
+        ]
+      ],
+      "expected_sha256": "0f3501e6510921401be3f54bcb24d2a432a1b5c63af8f719eded3a087ad88ea9",
+      "observed_sha256": "0f3501e6510921401be3f54bcb24d2a432a1b5c63af8f719eded3a087ad88ea9",
+      "changed_since_manifest": false,
+      "notes": "Read-only static review."
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents/agent_09_source_control.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          61
+        ]
+      ],
+      "expected_sha256": "a6ab92bdf05472838de00e04e0d6e2753e1946d173f776e3708e76c11d0867a3",
+      "observed_sha256": "a6ab92bdf05472838de00e04e0d6e2753e1946d173f776e3708e76c11d0867a3",
+      "changed_since_manifest": false,
+      "notes": "Read-only static review."
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_45_site_playbooks_united.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "expected_sha256": "e43b83c1002059c88c9416941defad65b59b1d0b6df9c8c767789e85a7b0d7ef",
+      "observed_sha256": "e43b83c1002059c88c9416941defad65b59b1d0b6df9c8c767789e85a7b0d7ef",
+      "changed_since_manifest": false,
+      "notes": "Read-only static review."
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          41
+        ]
+      ],
+      "expected_sha256": "829c75fc4a643bc9d7f197c843e2379a1fad6ea89d68bb201393178cb1b46c26",
+      "observed_sha256": "829c75fc4a643bc9d7f197c843e2379a1fad6ea89d68bb201393178cb1b46c26",
+      "changed_since_manifest": false,
+      "notes": "Read-only static review."
+    },
+    {
+      "path": "tools/skill_library/global/existence-gap-audit/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "expected_sha256": "5a307714e618703b0dc182caa25b30f93372d39f95f6553e58f4fea43c80a229",
+      "observed_sha256": "5a307714e618703b0dc182caa25b30f93372d39f95f6553e58f4fea43c80a229",
+      "changed_since_manifest": false,
+      "notes": "Read-only static review."
+    },
+    {
+      "path": "tools/skill_library/workspace/c5-epistemic-thermodynamics-project/references/modules/c5-ultrathink-epistemic-audit/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          53
+        ]
+      ],
+      "expected_sha256": "14c52b6c27bf5b71ea59494bd7e189e280618cd52ffe0f1d5be04aa9f6c492e7",
+      "observed_sha256": "14c52b6c27bf5b71ea59494bd7e189e280618cd52ffe0f1d5be04aa9f6c492e7",
+      "changed_since_manifest": false,
+      "notes": "Read-only static review."
+    }
+  ],
+  "tool_limitations": [
+    "Native codebase graph tools were not exposed; ALL_TOOLS search returned no search_graph/query_graph tools. Targeted text reads used.",
+    "No runtime, tests, builds, external documentation verification, or release actions performed. External product examples reviewed statically; current API behavior not certified.",
+    "Repository was already dirty on main; no repository files were changed."
+  ],
+  "tests_run": []
+}

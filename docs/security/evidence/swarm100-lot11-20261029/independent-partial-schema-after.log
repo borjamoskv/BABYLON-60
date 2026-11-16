@@ -1,0 +1,27 @@
+{
+  "source_sha256": "837faee40ae13b74cbb7b4d1e61fc6209285bb3362c23d2d2abd94c480b4b064",
+  "observations": [
+    {
+      "case": "ghosts-non-object",
+      "error_type": "ConsolidationError",
+      "structured_partial": true,
+      "completed_files": [
+        "alpha.json"
+      ],
+      "project_committed": true,
+      "cause_type": "AttributeError"
+    },
+    {
+      "case": "session-non-object",
+      "error_type": "ConsolidationError",
+      "structured_partial": true,
+      "completed_files": [
+        "alpha.json",
+        "ghosts.json"
+      ],
+      "project_committed": true,
+      "cause_type": "AttributeError"
+    }
+  ],
+  "scope": "Owned temporary memory only, kill/network/process creation blocked before import"
+}

@@ -1,0 +1,51 @@
+{
+  "mirror": {
+    "status": "published",
+    "commit": "de1f87ca85c9363009c63e5f8cad8953478b5b7b",
+    "manifest_sha256": "302b25aba7c7ced7abf7cd406c0808b8e2aba9f8c09ced52ea0e9d9c66a722e9",
+    "verified_by": "git ls-remote origin refs/heads/main",
+    "tests": {
+      "regressions_passed": 9,
+      "artifact_count": 19,
+      "lean_build_jobs": 3
+    }
+  },
+  "web": {
+    "status": "prepared_but_blocked",
+    "prepared_mirror": {
+      "repository_url": "https://github.com/borjamoskv/babylon60-verification",
+      "source_commit": "de1f87ca85c9363009c63e5f8cad8953478b5b7b",
+      "manifest_sha256": "302b25aba7c7ced7abf7cd406c0808b8e2aba9f8c09ced52ea0e9d9c66a722e9",
+      "archive_sha256": "cd69d61b9c5669c77049759357a3610112886dbecaa18c30dbfe93b165ecc2a5",
+      "file_count": 19
+    },
+    "npm_ci_exit_code": 0,
+    "archive_pytest_passed": 2,
+    "deployment_causal_hash": "e434a4b3ba9c396f350fde5ed2c2592396718bd3adcdd816e9109713b4d45cfb",
+    "failure": "legacyKeyRequiresMigration",
+    "published_projects_in_failed_run": [],
+    "retry_performed": false,
+    "alternative_gate_used": false,
+    "local_result": "/Users/borjafernandezangulo/10_PROJECTS/babylon60.com/.wrangler/deployment/last-result.json"
+  },
+  "live": {
+    "checked_at": "2026-10-24T01:50:29.547Z",
+    "method": "native Playwright same-origin fetch, cache no-store",
+    "url": "https://babylon60.com/",
+    "status": 200,
+    "manifest_sha256": "2840cf6c8bc1dc722480d67a69faa0bb779382c9fdf1be76b785dde77eb8229c",
+    "script_src": "'self' 'unsafe-inline'",
+    "research_peer_verified_badge_present": false,
+    "enterprise_unsupported_certification_or_onboarding_present": false
+  },
+  "legal": {
+    "status": "pending",
+    "draft_in_dist": false,
+    "published": false
+  },
+  "limitations": [
+    "Publication attestation does not authenticate historical release evidence.",
+    "Full runtime campaign and a newly signed release were not executed.",
+    "Global configuration and Ghost Listener telemetry were excluded from documentation gates."
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "reviewer": "independent_verifier",
+  "reviewed_at_utc": "2026-10-29T23:34:57.706581+00:00",
+  "decision": "READY_FOR_SINGLE_AUTHORIZED_HARDWARE_ATTEMPT",
+  "candidate": "b9640a52ca031d1978232255d31e69efb011f9b9",
+  "open_actionable_findings": [],
+  "independent_tests": {
+    "passed": 135,
+    "failed": 0,
+    "skipped": 0,
+    "deselected": 1,
+    "required_native_functions": 17,
+    "required_native_cases": 27,
+    "all_required_native_executed_and_passed": true
+  },
+  "source_and_artifact_hashes_unchanged": true,
+  "worktree_clean": true,
+  "python_origins_in_candidate": true,
+  "evidence": [
+    "combined-code-review.json",
+    "final-native-run/report.json",
+    "final-native-run/results.xml",
+    "final-native-run/required-native-nodes.json"
+  ],
+  "conditions": [
+    "Run only the reviewed candidate/gate/library hashes.",
+    "Preflight must match the operator-confirmed pinned public key without requesting authentication.",
+    "Exactly one biometric attempt, no fallback or automatic retry.",
+    "After attempt, independently verify signed proof, committed effect, recovery and consumed authorization before claiming completion."
+  ],
+  "hardware_validation_status": "PENDING",
+  "hardware_attempts_by_reviewer": 0,
+  "explicit_scope_exclusion": "The Rust babylon-skills-mcp stdio interoperability test was collected and explicitly deselected; it would build/test a separate server."
+}

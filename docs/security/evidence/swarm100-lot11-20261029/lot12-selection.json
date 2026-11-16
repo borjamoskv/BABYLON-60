@@ -1,0 +1,72 @@
+[
+  {
+    "candidate_id": "SW100-C0528",
+    "path": "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "For this checked-in script location, Path(__file__).parent.parents[2] denotes the parent of BABYLON-60. Both DB_PATH and SNAPSHOT_DIR therefore refer outside the repository. If that source DB is absent, create_snapshot explicitly writes an empty destination DB and emits a manifest; main then starts the ledger actor against the same mislocated DB_PATH. Existing tests replace both globals, so they do not check the default path. Actual database existence/content and ledger mutation were deliberately not inspected or exercised.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+        "start_line": 24,
+        "end_line": 26,
+        "observation": "Root expression is one directory above the repository; both storage locations derive from it."
+      },
+      {
+        "path": "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+        "start_line": 43,
+        "end_line": 74,
+        "observation": "Missing source creates an empty destination that is hashed and returned as a manifest."
+      },
+      {
+        "path": "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+        "start_line": 77,
+        "end_line": 105,
+        "observation": "Main records the snapshot using a ledger actor built from DB_PATH."
+      },
+      {
+        "path": "tests/test_ledger_snapshot_engine.py",
+        "start_line": 25,
+        "end_line": 43,
+        "observation": "Test patches DB_PATH and SNAPSHOT_DIR, avoiding the default root computation."
+      }
+    ],
+    "source_sha256": "126474f8d45284fee75951c5a9ddd7abc350352be7df3adb6df8653aeb8e3ca2"
+  },
+  {
+    "candidate_id": "SW100-C0529",
+    "path": "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+    "severity": "P2",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "Snapshot and manifest names contain only a UTC timestamp to the second. Two calls in that second select the same destination, with no exclusive name allocation, lock, or retry. For an existing nonempty source snapshot, VACUUM INTO cannot safely create another independent backup at that same nonempty destination; any exception propagates past create_snapshot/main. The later manifest write is also nonexclusive. The name collision and unhandled collision path are statically confirmed; concurrent SQLite execution was not performed.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+        "start_line": 43,
+        "end_line": 57,
+        "observation": "Destination derives solely from second-resolution timestamp, and VACUUM INTO has no collision recovery."
+      },
+      {
+        "path": "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+        "start_line": 62,
+        "end_line": 74,
+        "observation": "Manifest repeats the same timestamp and is opened in write mode."
+      },
+      {
+        "path": "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+        "start_line": 99,
+        "end_line": 106,
+        "observation": "Main does not handle create_snapshot failures."
+      },
+      {
+        "path": "tests/test_ledger_snapshot_engine.py",
+        "start_line": 25,
+        "end_line": 43,
+        "observation": "Existing test calls create_snapshot once and does not exercise duplicate timestamps."
+      }
+    ],
+    "source_sha256": "126474f8d45284fee75951c5a9ddd7abc350352be7df3adb6df8653aeb8e3ca2"
+  }
+]

@@ -1,0 +1,1082 @@
+{
+  "reviewer": "07",
+  "candidates": [
+    {
+      "candidate_id": "SW100-C0119",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/omega0.rs",
+      "current_source_sha256": "3fe6d13236fed9f12d96ef09608039b56db5a829d918829a1a474adaea650fb2",
+      "rationale": "derive rejects empty/unverified premises and enforces a modality restriction, then clones the arbitrary goal and labels formatted premise text FormalProof. verify treats this variant as reproducible and fully confident without parsing the proof term or checking entailment. This confirms an unsound exported proof API; no protected runtime effect was executed or shown bypassed.",
+      "source_checks": [
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/omega0.rs",
+          "start_line": 214,
+          "end_line": 254,
+          "observation": "Only emptiness, modality and premise checks precede construction of FormalProof for the supplied goal."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/omega0.rs",
+          "start_line": 147,
+          "end_line": 157,
+          "observation": "Obligations dispatch to variant-based predicates."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/omega0.rs",
+          "start_line": 175,
+          "end_line": 195,
+          "observation": "FormalProof satisfies provenance, reproducibility and confidence by variant alone."
+        }
+      ],
+      "guards": [
+        "Empty-premise rejection and Deontic-premise requirement remain active, but do not establish entailment.",
+        "No Rust execution or downstream authority escalation claim."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/07-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0120",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/omega0.rs",
+      "current_source_sha256": "3fe6d13236fed9f12d96ef09608039b56db5a829d918829a1a474adaea650fb2",
+      "rationale": "optimize deduplicates solely by content even though Statement includes modality. If verified Epistemic X precedes verified Deontic X, the latter disappears; derive then rejects a Deontic goal that the original pair admits. This violates the local conservativity claim independently of whether derive is logically sound.",
+      "source_checks": [
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/omega0.rs",
+          "start_line": 42,
+          "end_line": 49,
+          "observation": "Statement stores distinct content, modality and obligations."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/omega0.rs",
+          "start_line": 223,
+          "end_line": 230,
+          "observation": "A Deontic goal requires a Deontic premise."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/omega0.rs",
+          "start_line": 262,
+          "end_line": 283,
+          "observation": "Conservativity is claimed, while seen_content keeps only the first statement with matching text."
+        }
+      ],
+      "guards": [
+        "Unverified statements are deliberately removed; the counterexample uses two verified statements.",
+        "No Rust execution; idempotence alone would not cover modality conservation."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/07-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0121",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/omega0.rs",
+      "current_source_sha256": "3fe6d13236fed9f12d96ef09608039b56db5a829d918829a1a474adaea650fb2",
+      "rationale": "Freshness returns true for every justification except Conjecture and never examines Observation.timestamp. inject_observation accepts a supplied timestamp and persists after this verification; the Python binding independently constructs timestamp zero. Stale observations therefore satisfy this obligation, with the exact age policy itself unspecified.",
+      "source_checks": [
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/omega0.rs",
+          "start_line": 156,
+          "end_line": 157,
+          "observation": "Freshness obligation calls has_freshness."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/omega0.rs",
+          "start_line": 199,
+          "end_line": 204,
+          "observation": "Predicate has no timestamp/age comparison."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/orchestrator.rs",
+          "start_line": 65,
+          "end_line": 87,
+          "observation": "Caller timestamp enters Observation, then verify and ledger/ATMS installation."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/bindings.rs",
+          "start_line": 173,
+          "end_line": 182,
+          "observation": "Binding uses timestamp zero and returns verify result."
+        }
+      ],
+      "guards": [
+        "Conjecture rejection remains; no configured age threshold or time-domain input exists in this predicate.",
+        "Static acceptance path only; ledger was not invoked."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/07-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0086",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "path": "scripts/generate_attestation_bundle_v2.py",
+      "current_source_sha256": "83f1835ffb64bd6cc0139279f1f1c6b2c9a8b0bddae3f0a8fbfbd465b8e6069f",
+      "rationale": "The generator computes a current checkout artifact digest and current timestamp, but constructs all claimed suite outcomes from source literals. Those bytes feed the joint digest and ECDSA signing path, so generation can bind invented current test evidence to an untested artifact. The script was not imported or executed, and no key was read.",
+      "source_checks": [
+        {
+          "path": "scripts/generate_attestation_bundle_v2.py",
+          "start_line": 30,
+          "end_line": 53,
+          "observation": "Artifact digest is assembled from current files."
+        },
+        {
+          "path": "scripts/generate_attestation_bundle_v2.py",
+          "start_line": 105,
+          "end_line": 180,
+          "observation": "Trial counts, zero violations and pass counts are literals serialized with a fresh timestamp."
+        },
+        {
+          "path": "scripts/generate_attestation_bundle_v2.py",
+          "start_line": 204,
+          "end_line": 243,
+          "observation": "Literal-result digest is included in the signed joint digest."
+        }
+      ],
+      "guards": [
+        "Cryptographic hashing/signing detects subsequent byte alteration; it does not measure the tests.",
+        "The only subprocess found is git rev-parse; no test runner/result ingestion establishes these values."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/07-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0087",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "path": "scripts/generate_attestation_bundle_v2.py",
+      "current_source_sha256": "83f1835ffb64bd6cc0139279f1f1c6b2c9a8b0bddae3f0a8fbfbd465b8e6069f",
+      "rationale": "The generated verifier authenticates the stored artifact digest as part of its joint signature but never recomputes it from any supplied source or binary. Unchanged bundle files can retain ARTIFACT HASH VERIFIED after the implementation changes. This is a missing artifact-to-attestation binding, not evidence that an existing signature can be forged.",
+      "source_checks": [
+        {
+          "path": "scripts/generate_attestation_bundle_v2.py",
+          "start_line": 301,
+          "end_line": 322,
+          "observation": "Claims, tests and environment bytes are hashed; artifact is checked only as two matching stored strings."
+        },
+        {
+          "path": "scripts/generate_attestation_bundle_v2.py",
+          "start_line": 324,
+          "end_line": 350,
+          "observation": "Joint digest/signature verification consumes that stored artifact hash."
+        },
+        {
+          "path": "scripts/generate_attestation_bundle_v2.py",
+          "start_line": 382,
+          "end_line": 409,
+          "observation": "ARTIFACT HASH VERIFIED and successful exit depend on that string comparison."
+        }
+      ],
+      "guards": [
+        "Component hashes and the joint signature are checked.",
+        "Generator hashes selected source files once; verifier has no artifact input or rehash path."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/07-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0088",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/generate_attestation_bundle_v2.py",
+      "current_source_sha256": "83f1835ffb64bd6cc0139279f1f1c6b2c9a8b0bddae3f0a8fbfbd465b8e6069f",
+      "rationale": "Only arch, OS and release come from os.uname; chip, filesystem, runtime, compiler, entropy source and verified-silicon provenance are unconditional literals. They become signed environment evidence even on a different host/toolchain. This is provenance fabrication in generation; no actual host characterization or signing was performed.",
+      "source_checks": [
+        {
+          "path": "scripts/generate_attestation_bundle_v2.py",
+          "start_line": 182,
+          "end_line": 202,
+          "observation": "Observed uname fields coexist with hard-coded host/compiler/provenance values and are serialized/hashed."
+        },
+        {
+          "path": "scripts/generate_attestation_bundle_v2.py",
+          "start_line": 204,
+          "end_line": 210,
+          "observation": "Environment hash participates in joint digest."
+        }
+      ],
+      "guards": [
+        "Observed arch/OS/release are real observations when run; they do not validate the other environment fields."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/07-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0294",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/primitives/sandbox.py",
+      "current_source_sha256": "22f22c9765c6605bd02ba1a7dce990d31764867fbe469ad2244e54b5c52a0fa4",
+      "rationale": "The 13-node expression x = [0] * 10**10 passes the exact validator in the bounded fixture. safe_exec runs the allowed expression in the host process and captures output in an unbounded StringIO, so AST size/depth and an alarm do not cap allocation/output growth. The dangerous allocation was deliberately never executed; no OOM/crash is claimed as reproduced.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/primitives/sandbox.py",
+          "start_line": 68,
+          "end_line": 100,
+          "observation": "Whitelist admits constants, lists, multiplication and exponentiation."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/primitives/sandbox.py",
+          "start_line": 284,
+          "end_line": 312,
+          "observation": "Validation limits AST shape and blocked names/attributes, not allocated size."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/primitives/sandbox.py",
+          "start_line": 389,
+          "end_line": 408,
+          "observation": "In-process exec, signal timeout and unbounded StringIO capture."
+        }
+      ],
+      "guards": [
+        "Maximum AST nodes/depth, restricted builtins and timeout are active but do not impose a memory/output budget.",
+        "Targeted search found no external safe_exec caller in babylon60/tests; exposure claim is the exported API."
+      ],
+      "runtime_executed": true,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/07-source-evidence.json",
+        "docs/security/evidence/swarm100-round3-20261028/07-fixtures.py",
+        "docs/security/evidence/swarm100-round3-20261028/07-fixture-results.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0295",
+      "decision": "REPRODUCED",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/primitives/sandbox.py",
+      "current_source_sha256": "22f22c9765c6605bd02ba1a7dce990d31764867fbe469ad2244e54b5c52a0fa4",
+      "rationale": "Exact ASTSandbox.safe_exec raised ZeroDivisionError for 1 / 0 and NameError for a missing synthetic identifier instead of returning failed ExecResult. Both expressions pass the whitelist; these exceptions are outside its catch tuple. Fixture executed only those tiny expressions.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/primitives/sandbox.py",
+          "start_line": 325,
+          "end_line": 338,
+          "observation": "safe_exec promises ExecResult and handles validation rejection."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/primitives/sandbox.py",
+          "start_line": 408,
+          "end_line": 429,
+          "observation": "Runtime catches TimeoutError and four selected error classes; stdout is restored in finally."
+        }
+      ],
+      "guards": [
+        "TimeoutError, ValueError, TypeError, OSError and KeyError are handled.",
+        "The reproduced exceptions are ordinary generated-code errors, not a sandbox escape."
+      ],
+      "runtime_executed": true,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/07-source-evidence.json",
+        "docs/security/evidence/swarm100-round3-20261028/07-fixtures.py",
+        "docs/security/evidence/swarm100-round3-20261028/07-fixture-results.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0060",
+      "decision": "REPRODUCED",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "proof/bundles/attestation_bundle_v1/verify",
+      "current_source_sha256": "da44e559a79a11fa860e19cdafd5402490332964c6893719eb742bb7ed7bc99e",
+      "rationale": "The exact verifier main function, fed a reviewer-owned synthetic bundle with mismatched hash and invalid empty crypto values, printed HASH CHAIN FAILED and SIGNATURE FAILED then returned normally without SystemExit. Its entrypoint merely calls main, establishing successful process termination for this caught verification failure. No existing bundle or private key was accessed.",
+      "source_checks": [
+        {
+          "path": "proof/bundles/attestation_bundle_v1/verify",
+          "start_line": 18,
+          "end_line": 22,
+          "observation": "Missing component path exits nonzero."
+        },
+        {
+          "path": "proof/bundles/attestation_bundle_v1/verify",
+          "start_line": 28,
+          "end_line": 51,
+          "observation": "Mismatch/signature failures become boolean flags."
+        },
+        {
+          "path": "proof/bundles/attestation_bundle_v1/verify",
+          "start_line": 65,
+          "end_line": 76,
+          "observation": "Flags only affect printed rows; main returns normally and the entrypoint does not convert them to exit status."
+        }
+      ],
+      "guards": [
+        "Missing files and uncaught parsing exceptions can still fail the process; a complete parseable bad bundle reaches normal return.",
+        "Fixture exercised exact main in Python; no shell/CI deployment was invoked."
+      ],
+      "runtime_executed": true,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/07-source-evidence.json",
+        "docs/security/evidence/swarm100-round3-20261028/07-fixtures.py",
+        "docs/security/evidence/swarm100-round3-20261028/07-fixture-results.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0061",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "path": "proof/bundles/attestation_bundle_v1/verify",
+      "current_source_sha256": "da44e559a79a11fa860e19cdafd5402490332964c6893719eb742bb7ed7bc99e",
+      "rationale": "The verifier compares copied digest strings and verifies a signature over causal_hash alone. It neither computes a digest of claims/environment/tests/commit/timestamp nor compares any artifact bytes; nonempty manifest alone produces ARTIFACT VERIFIED. Thus metadata can change without changing either checked digest string or the signed value. The finding concerns bundle-integrity assertions, not a hardware/root trust bypass.",
+      "source_checks": [
+        {
+          "path": "proof/bundles/attestation_bundle_v1/verify",
+          "start_line": 12,
+          "end_line": 16,
+          "observation": "Metadata filenames are only required to exist."
+        },
+        {
+          "path": "proof/bundles/attestation_bundle_v1/verify",
+          "start_line": 24,
+          "end_line": 48,
+          "observation": "Hash comparison and signature consume stored strings, not metadata/artifact bytes."
+        },
+        {
+          "path": "proof/bundles/attestation_bundle_v1/verify",
+          "start_line": 53,
+          "end_line": 73,
+          "observation": "Unbound JSON changes displayed provenance/counts; ARTIFACT uses manifest truthiness."
+        }
+      ],
+      "guards": [
+        "P-256 verifies the causal_hash string against the supplied public key.",
+        "HW provenance is explicitly UNVERIFIED and certification NONE, which limits but does not cure the other VERIFIED claims."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/07-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0115",
+      "decision": "REPRODUCED",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/guards/c5_signature_engine.py",
+      "current_source_sha256": "1e61de4e2964b8e53f81ec5347b2732ca7251f4826e81c76842be8c3f2763170",
+      "rationale": "evaluate_selector_fitness returned ÓPTIMO for synthetic fixture-model/Fast with tier fast and no comparative measurements. The exact branch uses only equality between a classified active tier/effort and the inferred or supplied tier. Default signature generation exposes this result, contrary to the canonical evidence requirement; no selector mutation was found or performed.",
+      "source_checks": [
+        {
+          "path": "scripts/guards/c5_signature_engine.py",
+          "start_line": 297,
+          "end_line": 314,
+          "observation": "Explicit tier values can set the alleged optimum without measurements."
+        },
+        {
+          "path": "scripts/guards/c5_signature_engine.py",
+          "start_line": 399,
+          "end_line": 438,
+          "observation": "Tier/effort equality produces ÓPTIMO and provenance-labelled fields."
+        },
+        {
+          "path": "scripts/guards/c5_signature_engine.py",
+          "start_line": 526,
+          "end_line": 546,
+          "observation": "Signature generation enables selector audit by default."
+        },
+        {
+          "path": ".babylon60rules",
+          "start_line": 27,
+          "end_line": 29,
+          "observation": "Model recommendations require evidence and forbid declaring optimum without comparison."
+        }
+      ],
+      "guards": [
+        "Unknown capability tier returns NO_EXPUESTO.",
+        "Fixture calls the evaluator only; thermal collection and signature subprocesses were not run."
+      ],
+      "runtime_executed": true,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/07-source-evidence.json",
+        "docs/security/evidence/swarm100-round3-20261028/07-fixtures.py",
+        "docs/security/evidence/swarm100-round3-20261028/07-fixture-results.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0116",
+      "decision": "REPRODUCED",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/guards/c5_signature_engine.py",
+      "current_source_sha256": "1e61de4e2964b8e53f81ec5347b2732ca7251f4826e81c76842be8c3f2763170",
+      "rationale": "With synthetic env containing only OPENAI_MODEL=fixture-model, exact detection returned mode Standard and source env OpenAI. The source infers Fast/High from model words and otherwise Standard even when effort metadata is absent. This confirms provenance inflation of effort, independent of real session model settings.",
+      "source_checks": [
+        {
+          "path": "scripts/guards/c5_signature_engine.py",
+          "start_line": 74,
+          "end_line": 111,
+          "observation": "Absent explicit mode falls through name heuristics to Standard."
+        },
+        {
+          "path": "scripts/guards/c5_signature_engine.py",
+          "start_line": 145,
+          "end_line": 155,
+          "observation": "Provider detection passes empty effort string yet reports provider environment as source."
+        }
+      ],
+      "guards": [
+        "Explicit effort is preserved, and wholly missing model metadata returns No expuesto.",
+        "Only a supplied synthetic environment mapping was used; operator environment/transcripts were not read."
+      ],
+      "runtime_executed": true,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/07-source-evidence.json",
+        "docs/security/evidence/swarm100-round3-20261028/07-fixtures.py",
+        "docs/security/evidence/swarm100-round3-20261028/07-fixture-results.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0245",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/parser.rs",
+      "current_source_sha256": "6e44cb745fc5df46bf89192404ec2186bdfe89c1686cdbb41e078115409c91da",
+      "rationale": "The public lexer collects arbitrary decimal digits and parses into Token::Int(i64) using expect. A decimal above i64 range therefore reaches a panic rather than a recoverable lexical error; tokenize propagates that path. No service exposure or request/process crash was executed or established.",
+      "source_checks": [
+        {
+          "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/parser.rs",
+          "start_line": 8,
+          "end_line": 21,
+          "observation": "Token::Int has i64 payload and Lexer/new are public."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/parser.rs",
+          "start_line": 49,
+          "end_line": 57,
+          "observation": "Unbounded decimal string goes to num.parse().expect."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/parser.rs",
+          "start_line": 69,
+          "end_line": 84,
+          "observation": "tokenize is public and has no Result; ParseError only covers parser token errors."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/lib.rs",
+          "start_line": 1,
+          "end_line": 8,
+          "observation": "parser module remains publicly exported."
+        }
+      ],
+      "guards": [
+        "ASCII digit gating prevents non-digit numeric text but does not bound magnitude.",
+        "No native build/test was run; upstream callers could isolate panics but this public API itself does not."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/07-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0021",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/poc_t3_engine_stress.rs",
+      "current_source_sha256": "b2b00ba6ce9f53a5392bfb71e8117c007621206ffb8ccddc01c2660f4947d92d",
+      "rationale": "The harness observes health flags but only prints them. Its final success message is unconditional once hash assertions pass, so a regression in degradation/death/reset can be reported as success. Existing content/hash assertions do not assert the promised health transitions; no stress/native execution occurred.",
+      "source_checks": [
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/poc_t3_engine_stress.rs",
+          "start_line": 139,
+          "end_line": 163,
+          "observation": "saw_degraded, saw_dead and recovered are assigned and printed without assertions."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/poc_t3_engine_stress.rs",
+          "start_line": 168,
+          "end_line": 175,
+          "observation": "Hash determinism has real assertions."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/poc_t3_engine_stress.rs",
+          "start_line": 200,
+          "end_line": 214,
+          "observation": "Health values are printed followed by unconditional empirical-success verdict."
+        }
+      ],
+      "guards": [
+        "Earlier spawned-task panic handling and hash assertions can fail the harness.",
+        "Finding is limited to missing health-transition acceptance checks."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/07-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0182",
+      "decision": "REPRODUCED",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/core/discrete_curvature.py",
+      "current_source_sha256": "667a50147e34ceca8cc6db196ecd565d625c7bc01f9f25b5794386c020b9e9f1",
+      "rationale": "The exact exported function returned 0.0 for a graph of two isolated vertices. It applies N*trace(pinv(L)) without a connectedness guard; this is not the total pairwise effective resistance of a disconnected graph. Official NetworkX documentation identifies that quantity as infinite. No control-policy consumer was found in the targeted babylon60/tests search.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/discrete_curvature.py",
+          "start_line": 11,
+          "end_line": 25,
+          "observation": "Only node count is checked before pseudoinverse formula."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/discrete_curvature.py",
+          "start_line": 72,
+          "end_line": 88,
+          "observation": "Structural-debt wrapper propagates the returned resistance."
+        }
+      ],
+      "guards": [
+        "Graphs with fewer than two nodes return zero intentionally; the fixture uses exactly two.",
+        "Function-level numerical reproduction only; no operational policy inference."
+      ],
+      "runtime_executed": true,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/07-source-evidence.json",
+        "docs/security/evidence/swarm100-round3-20261028/07-fixtures.py",
+        "docs/security/evidence/swarm100-round3-20261028/07-fixture-results.json",
+        "docs/security/evidence/swarm100-round3-20261028/07-documentation.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0596",
+      "decision": "REPRODUCED",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/kernel/bft_sqlite.py",
+      "current_source_sha256": "4203bfdfe29fa23c379114f0fc6aab8b101055c175d600cbcb9a5228fed84d17",
+      "rationale": "Exact BFTSQLite on :memory: returned a cursor for SELECT 42; fetchone then raised Cannot operate on a closed database. Return from the with block triggers the connection finally-close first. Batch APIs have the same lifetime defect. Located cold-ledger/falsification consumers write and do not fetch the cursor, so no existing consumer failure is claimed.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/bft_sqlite.py",
+          "start_line": 44,
+          "end_line": 68,
+          "observation": "Context manager closes connection in finally while execute returns its cursor."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/bft_sqlite.py",
+          "start_line": 90,
+          "end_line": 105,
+          "observation": "Both empty and nonempty batch paths return cursors inside the connection context."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/bounty_cold_ledger.py",
+          "start_line": 130,
+          "end_line": 142,
+          "observation": "Located consumer invokes batch write without consuming cursor results."
+        }
+      ],
+      "guards": [
+        "WAL/FULL and retry logic govern writes, not returned object lifetime.",
+        "Fixture omitted the optional project-native-kernel import; only standard SQLite memory database was used."
+      ],
+      "runtime_executed": true,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/07-source-evidence.json",
+        "docs/security/evidence/swarm100-round3-20261028/07-fixtures.py",
+        "docs/security/evidence/swarm100-round3-20261028/07-fixture-results.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0045",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/utils/void_accel.c",
+      "current_source_sha256": "30a83dc46a550cf95f77ea168a8a416456cfbed12a77186a9d18e421b3b61a64",
+      "rationale": "Both SIMD loops subtract the vector width from unsigned size_t len before checking the bound. For a nonempty batch and len below 16/64, subtraction wraps and the first load already exceeds the query length. Python forwards len(query) without a minimum/equal-length guard. The loader-path void_accel.so is absent in this checkout, so current activation is unproven and the native defect was not executed.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/utils/void_accel.c",
+          "start_line": 20,
+          "end_line": 43,
+          "observation": "NEON loop bound len-16 is unsigned and loads 16 bytes without a preceding minimum check."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/utils/void_accel.c",
+          "start_line": 50,
+          "end_line": 76,
+          "observation": "AVX512 repeats the defect with len-64 and 64-byte loads."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/transducers/void_vec.py",
+          "start_line": 48,
+          "end_line": 88,
+          "observation": "Loading is conditional on shared-library existence; public batch function forwards query length directly."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/transducers/void_vec.py",
+          "start_line": 95,
+          "end_line": 125,
+          "observation": "Packing pads only to 8 bits; scalar pair API routes to accelerator when loaded."
+        }
+      ],
+      "guards": [
+        "Native load requires a shared library at transducers/void_accel.so; that path was absent during this review.",
+        "count>0 gates entry but does not protect short vectors. No compilation, native loading or crash attempt."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/07-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0059",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P3",
+      "remediation_state": "OPEN",
+      "path": "ARCHITECTURE_MANIFEST.md",
+      "current_source_sha256": "1f974647cad9da4dc51cb9c1b3e2110caecee6a57a2b24fd58ef7534ac6b1fc8",
+      "rationale": "The manifest link resolves to docs/proof/lean/BabylonTrace.lean, which is absent, while proof/lean/BabylonTrace.lean exists. This is a broken reader-facing source link, independent of the proof correctness or runtime claims.",
+      "source_checks": [
+        {
+          "path": "ARCHITECTURE_MANIFEST.md",
+          "start_line": 3,
+          "end_line": 5,
+          "observation": "Formal foundation links to docs/proof/lean/BabylonTrace.lean."
+        }
+      ],
+      "guards": [
+        "Filesystem existence checked for both exact relative paths; no proof execution or proof-validity claim."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/07-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0129",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "docs/papers/interoceptive-control/manuscript/paper_draft.md",
+      "current_source_sha256": "bd3acc65df36d2dc69c0a8b47a9a8e87affaaf5644378fadbd6e1d145c5999ad",
+      "rationale": "The manuscript claims empirical LLM configurations and observed budget acknowledgements, but its cited benchmark uses deterministic token increments, a programmed 1.35x soft-budget stop, and formula/constant violations. The gate exercised by the benchmark is Python while the manuscript describes native enforcement. These sources establish simulation behavior, not the claimed LLM observations or native confinement.",
+      "source_checks": [
+        {
+          "path": "docs/papers/interoceptive-control/manuscript/paper_draft.md",
+          "start_line": 104,
+          "end_line": 132,
+          "observation": "Native gate and empirical LLM behavior are asserted."
+        },
+        {
+          "path": "docs/papers/interoceptive-control/benchmarks/run_ablation_matrix.py",
+          "start_line": 29,
+          "end_line": 78,
+          "observation": "Token output and soft overshoot are programmed constants/formulas."
+        },
+        {
+          "path": "docs/papers/interoceptive-control/benchmarks/run_ablation_matrix.py",
+          "start_line": 81,
+          "end_line": 113,
+          "observation": "Hard condition invokes Python gate and assigns zero violations."
+        },
+        {
+          "path": "docs/papers/interoceptive-control/src/spinal_gate.py",
+          "start_line": 82,
+          "end_line": 98,
+          "observation": "Cited gate is implemented as a Python check and exception."
+        }
+      ],
+      "guards": [
+        "Benchmark function name/comment acknowledges simulation, but the manuscript table/analysis does not.",
+        "No LLM experiment or native timing/overhead was run; other uncited evidence is not established."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/07-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0427",
+      "decision": "REPRODUCED",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_cli/markov_bridge.py",
+      "current_source_sha256": "91d27a7a9b4adbbdc599076978d2941a90012df856c50a30bee7aacb2f1d72dc",
+      "rationale": "An empty in-memory graph followed the exact disconnected find_bridge fallback and to_dict returned nonfinite surprisal; default json.dumps emitted Infinity and strict encoding raised ValueError. The fixture supplies a NOUN classifier to isolate the graph/serialization path; no local corpus or whole CLI was read/executed. Production CLI uses the same unsanitized to_dict/default encoder.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_cli/markov_bridge.py",
+          "start_line": 1251,
+          "end_line": 1274,
+          "observation": "BridgeResult.to_dict preserves surprisal_bits unchanged."
+        },
+        {
+          "path": "scripts/c5_cli/markov_bridge.py",
+          "start_line": 1543,
+          "end_line": 1559,
+          "observation": "Disconnected fallback assigns float(inf)."
+        },
+        {
+          "path": "scripts/c5_cli/markov_bridge.py",
+          "start_line": 1888,
+          "end_line": 1904,
+          "observation": "Multiword JSON path uses default json.dumps without sanitization."
+        },
+        {
+          "path": "scripts/c5_cli/markov_bridge.py",
+          "start_line": 1920,
+          "end_line": 1921,
+          "observation": "Single-word JSON path also uses default json.dumps."
+        }
+      ],
+      "guards": [
+        "CLI ValueError handlers do not help because default JSON encoder permits nonfinite numbers.",
+        "Reproduction is isolated graph/serialization with synthetic POS, not end-to-end CLI execution."
+      ],
+      "runtime_executed": true,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/07-source-evidence.json",
+        "docs/security/evidence/swarm100-round3-20261028/07-fixtures.py",
+        "docs/security/evidence/swarm100-round3-20261028/07-fixture-results.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0188",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_demos/poc_bounty_dispatcher_ffi.py",
+      "current_source_sha256": "26e1c6daea0fe38f94d01dbc5464176198f1714982c79cd6aee096ac8ad7e7c9",
+      "rationale": "The example allocates a local ctypes Structure and repeatedly mutates it from one sequential Python writer. It loads no Rust library and has no concurrent reader or real barrier; assertions check only final counter parity/count. Thus its public Rust-FFI/SPMC/lock-free claims exceed the demonstrated test. Local comments call parts simulation, but the header and success labels still overstate the scope.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_demos/poc_bounty_dispatcher_ffi.py",
+          "start_line": 7,
+          "end_line": 12,
+          "observation": "Header claims Python/Rust lock-free SPMC coupling."
+        },
+        {
+          "path": "scripts/c5_demos/poc_bounty_dispatcher_ffi.py",
+          "start_line": 24,
+          "end_line": 58,
+          "observation": "Packed ctypes structure is allocated locally; barrier is explicitly simulated."
+        },
+        {
+          "path": "scripts/c5_demos/poc_bounty_dispatcher_ffi.py",
+          "start_line": 74,
+          "end_line": 100,
+          "observation": "Sequential publisher loop asserts only final sequence values and reports success."
+        }
+      ],
+      "guards": [
+        "Poison flag can reject a publication, and final counter assertions are real but much narrower than claimed.",
+        "Targeted demo/test searches found no production consumer. _pack_=1 specifies packing, not 64-byte alignment."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/07-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0418",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_git_utils/c5_ship.sh",
+      "current_source_sha256": "12ccca5842ec398096cf79b3280d3d44c602244c8e866078b86b28dd57f74ce4",
+      "rationale": "If neither gate executable nor Swift source is available, the if/elif ends without rejection and control reaches git push origin main. set -euo pipefail rejects actual failing commands but does not reject this no-branch condition. The Swift source currently exists, so this is a fail-open missing-dependency path, not proof of a bypass in the current checkout; no Git mutation or gate was executed.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_git_utils/c5_ship.sh",
+          "start_line": 6,
+          "end_line": 9,
+          "observation": "Script enables errexit/nounset/pipefail."
+        },
+        {
+          "path": "scripts/c5_git_utils/c5_ship.sh",
+          "start_line": 179,
+          "end_line": 197,
+          "observation": "Ahead commits enter gate selection; missing both branches reaches push with no receipt validation or else abort."
+        }
+      ],
+      "guards": [
+        "Existing gate branch failures are constrained by pipefail.",
+        "Current Swift source path exists. Existing Git hooks/server policy were not executed or certified as compensating enforcement."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/07-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0194",
+      "decision": "REPRODUCED",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_quality_gates/sharur_3600_audit_swarm.py",
+      "current_source_sha256": "a1f47fd1a7b98c75960abd33bfc761b4a13b9b68cc0d1f8a90d97feeb591e206",
+      "rationale": "Exact target collection and audit_file accepted a .md file symlink under the selected synthetic root and rewrote its target in a sibling fixture path. That target was outside the audit root but wholly inside reviewer-owned evidence storage, then cleaned up. The implementation has extension/size/dry-run checks but no symlink rejection or resolved-root containment.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_quality_gates/sharur_3600_audit_swarm.py",
+          "start_line": 54,
+          "end_line": 62,
+          "observation": "is_file accepts a symlink to a regular file."
+        },
+        {
+          "path": "scripts/c5_quality_gates/sharur_3600_audit_swarm.py",
+          "start_line": 75,
+          "end_line": 101,
+          "observation": "stat/read_text/write_text follow the link; default dry_run is false."
+        },
+        {
+          "path": "scripts/c5_quality_gates/sharur_3600_audit_swarm.py",
+          "start_line": 171,
+          "end_line": 187,
+          "observation": "Resolved root feeds target enumeration and collected paths go straight to audit_file."
+        }
+      ],
+      "guards": [
+        "Skip directories, allowed extensions and 2MiB cap remain active but do not enforce target containment.",
+        "--dry-run prevents writes when explicitly selected; default permits mutation."
+      ],
+      "runtime_executed": true,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/07-source-evidence.json",
+        "docs/security/evidence/swarm100-round3-20261028/07-fixtures.py",
+        "docs/security/evidence/swarm100-round3-20261028/07-fixture-results.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0371",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_sharur/sharur_master_swarm_runner.py",
+      "current_source_sha256": "e67298baae9d70a11f0768512201101a5091597591af1cd0ebecc2b5abc9f4d9",
+      "rationale": "Release-check pass counts and zero-CVE claims are unconditional print statements followed by ok4=True. The final ALL 4 FRONTS OPERATIONAL message is unconditional, and __main__ discards the returned aggregate boolean. Handled failures in previous fronts therefore do not prevent a success label or normal process termination. The runner was not executed because other fronts access session state.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_sharur/sharur_master_swarm_runner.py",
+          "start_line": 25,
+          "end_line": 45,
+          "observation": "Front failures are caught and converted to booleans."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_master_swarm_runner.py",
+          "start_line": 59,
+          "end_line": 73,
+          "observation": "Release claims are literals; final success is unconditional and return value is ignored."
+        }
+      ],
+      "guards": [
+        "Uncaught exceptions could still fail the process, but handled false results are not mapped to failure exit.",
+        "No release, remote check or operator/session data was accessed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/07-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0241",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/repatriated/legion_100_swarm_audit.py",
+      "current_source_sha256": "498bccec19e43c8d8ea7960ad1bd3c7df56188e2b0bff7418e453736cd02fefc",
+      "rationale": "execute_agent selects a prewritten corpus entry and perturbs its supplied scores with sin/cos; it performs no source retrieval or metric measurement. The exported findings/summary contain metric names and total_agents without a synthetic/simulation provenance field. A sleep comment acknowledges simulation locally, but the exported audit evidence and console claims remain misleading. No output file or agent network was invoked.",
+      "source_checks": [
+        {
+          "path": "scripts/repatriated/legion_100_swarm_audit.py",
+          "start_line": 16,
+          "end_line": 28,
+          "observation": "Finding schema has scores/provenance pointer but no synthetic qualifier."
+        },
+        {
+          "path": "scripts/repatriated/legion_100_swarm_audit.py",
+          "start_line": 86,
+          "end_line": 115,
+          "observation": "Verdict comes from fixed corpus; metric variations are deterministic arithmetic."
+        },
+        {
+          "path": "scripts/repatriated/legion_100_swarm_audit.py",
+          "start_line": 118,
+          "end_line": 167,
+          "observation": "Outputs call tasks agents and export those values without a simulation label."
+        }
+      ],
+      "guards": [
+        "There are real asyncio tasks, but no evidence they are independent analytical agents.",
+        "Finding is confined to example/exported evidence semantics; no downstream consumer was established."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/07-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0511",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tests/test_ledger_cross_equivalence.py",
+      "current_source_sha256": "4af93fcf471f7be0bfa1a6b6855c11390e1b8158852ea048fe2af24501bd538a",
+      "rationale": "The test reads PRAGMA synchronous through newly opened connections after exercising each writer, so it tests those new connections instead of the writer configuration. A synthetic SQLite fixture reproduced writer OFF=0 alongside fresh reader FULL=2. Current writer sources do set FULL; the confirmed defect is regression-test coverage, not observed ledger nondurability.",
+      "source_checks": [
+        {
+          "path": "tests/test_ledger_cross_equivalence.py",
+          "start_line": 27,
+          "end_line": 62,
+          "observation": "Both durability assertions inspect freshly created sqlite3 connections."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py",
+          "start_line": 129,
+          "end_line": 134,
+          "observation": "Current synchronous writer sets FULL on its own connection."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+          "start_line": 363,
+          "end_line": 369,
+          "observation": "Current actor sets FULL on the worker connection."
+        }
+      ],
+      "guards": [
+        "Current writers explicitly configure FULL; externally supplied Cortex transactions also validate synchronous at lines 264-272.",
+        "Property fixture only; no mutation of production writers and no full pytest/ledger execution."
+      ],
+      "runtime_executed": true,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/07-source-evidence.json",
+        "docs/security/evidence/swarm100-round3-20261028/07-fixtures.py",
+        "docs/security/evidence/swarm100-round3-20261028/07-fixture-results.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0521",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/queues/patterns.md",
+      "current_source_sha256": "1481924df521e162967cba5c20deeb8f42f17d8194ec2e275399a7659c71316d",
+      "rationale": "Both HTTP examples acknowledge after fetch resolves without examining Response.ok/status. A fulfilled 429/500 response reaches ackAll/ack, marking messages delivered despite the upstream failure. Context7 official Queues documentation confirms acknowledgement suppresses redelivery, and Fetch documentation confirms HTTP error status alone does not reject the promise. Scope is reusable examples, not a deployed consumer.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/codex_overrides/cloudflare/references/queues/patterns.md",
+          "start_line": 38,
+          "end_line": 43,
+          "observation": "External API fetch response is discarded before batch.ackAll."
+        },
+        {
+          "path": "tools/skill_library/codex_overrides/cloudflare/references/queues/patterns.md",
+          "start_line": 205,
+          "end_line": 217,
+          "observation": "Durable Object fetch response is discarded; only thrown errors retry."
+        }
+      ],
+      "guards": [
+        "Network/transport rejection can still trigger failure or catch/retry; ordinary HTTP failure responses do not.",
+        "No Cloudflare account, worker, queue or network request was operated."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/07-source-evidence.json",
+        "docs/security/evidence/swarm100-round3-20261028/07-documentation.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0581",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/cct-cognitive-theory-advisor/MODULE.md",
+      "current_source_sha256": "f838f0dc67f2f818e046e19a6a1e759a3b196765fe4936d972e93ee09a168577",
+      "rationale": "The module explicitly directs scanning the vault/neighbouring repositories and autonomously injecting any found credential without limiting this to authorized credential stores/services. Canonical rules forbid retrieved instructions from expanding permissions, and the parent hub only invokes modules for the requested task; those higher controls mitigate execution but do not remove the unsafe document directive. Severity is reduced to P2 because this review establishes instruction-content risk, not secret access or an active enforcement bypass.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/cct-cognitive-theory-advisor/MODULE.md",
+          "start_line": 68,
+          "end_line": 68,
+          "observation": "Directive names vault, neighbouring repositories and autonomous credential injection."
+        },
+        {
+          "path": "tools/skill_library/global/c5-epistemic-thermodynamics/SKILL.md",
+          "start_line": 25,
+          "end_line": 32,
+          "observation": "Hub scopes module loading/procedure use to the user request."
+        },
+        {
+          "path": ".babylon60rules",
+          "start_line": 7,
+          "end_line": 9,
+          "observation": "Canonical policy limits authority and treats recovered instructions as task content."
+        }
+      ],
+      "guards": [
+        "Canonical authorization outranks the module; this text was treated as untrusted audit material.",
+        "No credential directory, secret, neighbouring repository or injection was accessed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/07-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0162",
+      "decision": "NEEDS_VALIDATION",
+      "severity": "P2",
+      "remediation_state": "UNKNOWN",
+      "path": "tools/skill_library/global/categorical-hallucination-audit/scripts/audit_kl_d.py",
+      "current_source_sha256": "34f7e6532eed0d70c2cd0d5795c5b269b02cdc44b2e0e8a69fdf89eb9728a0dc",
+      "rationale": "For time-zero prior [1,0], target 1 and observed B at time 2, the exact function returns [1,0], while independent path enumeration gives approximately [0.470588,0.529412]. This reproduces the mathematical mismatch under the candidate interpretation. However, the function documents pi0 only as a prior distribution, with no explicit time origin; confirm that contract before treating initial-prior propagation as an unconditional API defect. audit_system reuses one pi0 across targets, supporting but not conclusively defining the time-zero interpretation.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/global/categorical-hallucination-audit/scripts/audit_kl_d.py",
+          "start_line": 18,
+          "end_line": 27,
+          "observation": "Public docstring names a prior vector but leaves its time origin unstated."
+        },
+        {
+          "path": "tools/skill_library/global/categorical-hallucination-audit/scripts/audit_kl_d.py",
+          "start_line": 45,
+          "end_line": 51,
+          "observation": "Backward case uses pi0 directly with likelihood from target to observation."
+        },
+        {
+          "path": "tools/skill_library/global/categorical-hallucination-audit/scripts/audit_kl_d.py",
+          "start_line": 78,
+          "end_line": 86,
+          "observation": "audit_system reuses the same pi0 for each target and derives downstream rates."
+        }
+      ],
+      "guards": [
+        "Row/prior normalization does not settle temporal semantics.",
+        "Fixture is exact function plus independent enumeration, with time-zero assumption explicitly recorded. No theoretical Lan/Kan guarantees were certified."
+      ],
+      "runtime_executed": true,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/07-source-evidence.json",
+        "docs/security/evidence/swarm100-round3-20261028/07-fixtures.py",
+        "docs/security/evidence/swarm100-round3-20261028/07-fixture-results.json"
+      ]
+    }
+  ]
+}

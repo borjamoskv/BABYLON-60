@@ -1,0 +1,425 @@
+{
+  "shard": "073",
+  "findings": [
+    {
+      "title": "Public projection continues when mandatory secret scanner is unavailable",
+      "severity": "P1",
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "line": 91,
+      "evidence": "Lines 84-93 warn and continue when command -v gitleaks fails. The same script reaches git push at line 145 after the separate biometric gate; the header claims a mandatory zero-finding secret scan.",
+      "trigger": "Run a non-dry public projection on a machine without gitleaks; other file/size and authorization checks pass.",
+      "impact": "The publication consumer can push an unscanned tree. Biometrics approves publication but does not inspect secrets; no actual secret or leak was observed.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Dry-run force-moves the existing release branch",
+      "severity": "P2",
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "line": 104,
+      "evidence": "git commit-tree and git branch -f release/v5.0-clean execute at lines 103-104 before the DRY_RUN exit at lines 127-132.",
+      "trigger": "Invoke --dry-run while release/v5.0-clean points to a previous prepared release and earlier checks pass.",
+      "impact": "A validation run replaces an existing release ref and creates a commit, potentially discarding the intended release tip from that branch. No script was run.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Second-order belief returns the target belief regardless of observer knowledge",
+      "severity": "P2",
+      "path": "scripts/c5_cli/doxastic_kripke_engine.py",
+      "line": 243,
+      "evidence": "observer_agent is only checked for membership; method returns query_belief(target_agent,...). run_demo consumes it at line 316 and tests/test_doxastic_kripke_engine.py:86 covers only an observer who witnessed the relevant scenario.",
+      "trigger": "A target privately sees an object move while a different observer is absent; query the absent observer's belief about the target.",
+      "impact": "Returns the target's updated private belief even though the observer could not know it. The demonstration cannot establish second-order false-belief reasoning. No deployed security consumer was established.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Registry verification succeeds despite stale entries and metadata drift",
+      "severity": "P2",
+      "path": "scripts/c5_skills_ontology/sync_skills_registry.py",
+      "line": 493,
+      "evidence": "sync_skills_json removes purged_skills from entry_map and recomputes metadata, aliases, adjacency and audit vectors, but verify_only returns only len(missing)==0 without comparing the recomputed data with the loaded registry. CLI propagates this boolean to the exit status at line 523.",
+      "trigger": "Remove an obsolete physical skill or change an existing skill's role/alias while every remaining physical skill already has an entry, then use --verify.",
+      "impact": "Verification can exit zero while docs/skills.json still contains ghost entries or stale routing metadata. Static control-flow finding; no verifier was executed.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Benchmark prints a fixed end-to-end latency attribution it never measures",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-debloat-agent-kernel/scripts/langchain_autopsy.py",
+      "line": 107,
+      "evidence": "print_forensic_report always states that 70% of perceived slowness is due to the framework after successful imports. Measurements only time imports and 10,000 local formatting/template calls; there is no LLM/network or perceived-latency measurement.",
+      "trigger": "Execute the benchmark in an environment where LangChain is installed, regardless of the measured ratios.",
+      "impact": "The report presents an unsupported quantitative attribution as a measured conclusion; downstream comparisons may repeat it. This finding concerns generated report evidence, not actual framework performance.",
+      "confidence": "high",
+      "kind": "docs"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".agents/skills/wait-what/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          22
+        ]
+      ],
+      "manifest_sha256": "99e68cd479a348a2a4dc3e5d84ac296c5b210834bddc946ddf8651704d99bb7b",
+      "observed_sha256": "99e68cd479a348a2a4dc3e5d84ac296c5b210834bddc946ddf8651704d99bb7b",
+      "changed_since_manifest": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-kernel/tests/stress_f60_thermodynamic_swarm.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          119
+        ]
+      ],
+      "manifest_sha256": "81db4c6a97e8bb98597b7eb1a2637fe8b0d68fa4740dfd2b7a56a8c923b78239",
+      "observed_sha256": "81db4c6a97e8bb98597b7eb1a2637fe8b0d68fa4740dfd2b7a56a8c923b78239",
+      "changed_since_manifest": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/bft/egress_whitelist.yaml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          23
+        ]
+      ],
+      "manifest_sha256": "fc9503b7143c6a0795416e02867ef8aa143a46d570ba958fc3f0512f66e347e7",
+      "observed_sha256": "fc9503b7143c6a0795416e02867ef8aa143a46d570ba958fc3f0512f66e347e7",
+      "changed_since_manifest": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/engine/cognitive/__init__.py",
+      "status": "reviewed_full",
+      "ranges": [],
+      "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "observed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "changed_since_manifest": false,
+      "notes": "Empty file reviewed."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/transducers/http.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          269
+        ]
+      ],
+      "manifest_sha256": "507763313124d675b094c8364ec0055f5321fc6a0cee410205e9adeb8dc2fad4",
+      "observed_sha256": "507763313124d675b094c8364ec0055f5321fc6a0cee410205e9adeb8dc2fad4",
+      "changed_since_manifest": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/services/email_inbound/package-lock.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          22
+        ]
+      ],
+      "manifest_sha256": "8d56cd7b92f5fe31fe7967e8f9cd19b66c484824d4291531cb20fe9e34d08bbf",
+      "observed_sha256": "8d56cd7b92f5fe31fe7967e8f9cd19b66c484824d4291531cb20fe9e34d08bbf",
+      "changed_since_manifest": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "crates/babylon-skills-mcp/tests/stress_campaign.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          231
+        ]
+      ],
+      "manifest_sha256": "2f75f9602e604f5f9ca24109347ca20a7c967a624e7541628cdce32c88a22fb3",
+      "observed_sha256": "2f75f9602e604f5f9ca24109347ca20a7c967a624e7541628cdce32c88a22fb3",
+      "changed_since_manifest": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "docs/06_theory/AUDIT_TAUTOLOGIA_VACIA_2026.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          30
+        ]
+      ],
+      "manifest_sha256": "93bbbf7498c12dbe9ecedb25192303f7af866da25d2be41a9d22e23da3b950f3",
+      "observed_sha256": "93bbbf7498c12dbe9ecedb25192303f7af866da25d2be41a9d22e23da3b950f3",
+      "changed_since_manifest": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "examples/fl008_confused_deputy.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          48
+        ]
+      ],
+      "manifest_sha256": "6e6cb8129732ef03be686d0d7ed1471cce7b5587a3f450bd2b2ed3b333777338",
+      "observed_sha256": "6e6cb8129732ef03be686d0d7ed1471cce7b5587a3f450bd2b2ed3b333777338",
+      "changed_since_manifest": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "scripts/c5_cli/doxastic_kripke_engine.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          350
+        ]
+      ],
+      "manifest_sha256": "564186b81b2b53ace810cb6ad9c4674fefc46ca11299c67e5cc26a12595bb806",
+      "observed_sha256": "564186b81b2b53ace810cb6ad9c4674fefc46ca11299c67e5cc26a12595bb806",
+      "changed_since_manifest": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          149
+        ]
+      ],
+      "manifest_sha256": "704da66f24d45ae3634083273a9c0dfecc8e07530b5a6520ff3f1f336fc58830",
+      "observed_sha256": "704da66f24d45ae3634083273a9c0dfecc8e07530b5a6520ff3f1f336fc58830",
+      "changed_since_manifest": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "scripts/c5_skills_ontology/sync_skills_registry.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          523
+        ]
+      ],
+      "manifest_sha256": "d8e8b78660f81d52b7a0f26de41a58a30d456a173cd33f96283d369f8dfa6eb4",
+      "observed_sha256": "d8e8b78660f81d52b7a0f26de41a58a30d456a173cd33f96283d369f8dfa6eb4",
+      "changed_since_manifest": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "src/bin/tour.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          203
+        ]
+      ],
+      "manifest_sha256": "8e9c7b9f2c957a88d37b8752c0ce8367807139145f61e0df8266f2996dde2a18",
+      "observed_sha256": "8e9c7b9f2c957a88d37b8752c0ce8367807139145f61e0df8266f2996dde2a18",
+      "changed_since_manifest": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tests/test_agents_archi.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          809
+        ]
+      ],
+      "manifest_sha256": "9f6242f5827f79cfb1630993904415a7caa6acded7f46847a332ced3aac53b04",
+      "observed_sha256": "9f6242f5827f79cfb1630993904415a7caa6acded7f46847a332ced3aac53b04",
+      "changed_since_manifest": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tests/test_instruction_gate_regressions.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          123
+        ]
+      ],
+      "manifest_sha256": "9ee00a43fc9d682698e39f1b1dadcb1aea66c9ee79f1a1fa539d9e2dc8688a2a",
+      "observed_sha256": "9ee00a43fc9d682698e39f1b1dadcb1aea66c9ee79f1a1fa539d9e2dc8688a2a",
+      "changed_since_manifest": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/examples/causal_test.b60",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          58
+        ]
+      ],
+      "manifest_sha256": "f92897bd31f59fecf93e0e9b05150cf28c5a84f708b60d730c7536d7b8b3ccf3",
+      "observed_sha256": "f92897bd31f59fecf93e0e9b05150cf28c5a84f708b60d730c7536d7b8b3ccf3",
+      "changed_since_manifest": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/c3/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          71
+        ]
+      ],
+      "manifest_sha256": "1c5429d72d1f5d5dab6d21914f7eb8aded761a828b4190655a2d4a0be6b12592",
+      "observed_sha256": "1c5429d72d1f5d5dab6d21914f7eb8aded761a828b4190655a2d4a0be6b12592",
+      "changed_since_manifest": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/pipelines/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          90
+        ]
+      ],
+      "manifest_sha256": "4f27dac23439852855e23dd270efe6791f360f11d80fb9eda6633c1b2b216e83",
+      "observed_sha256": "4f27dac23439852855e23dd270efe6791f360f11d80fb9eda6633c1b2b216e83",
+      "changed_since_manifest": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/turnstile/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          218
+        ]
+      ],
+      "manifest_sha256": "ec480b0a32f0815b8d15e8ac96085922317f58e64937c1e198fd5355bad2bb1e",
+      "observed_sha256": "ec480b0a32f0815b8d15e8ac96085922317f58e64937c1e198fd5355bad2bb1e",
+      "changed_since_manifest": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/babylon-shield/shield/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          5
+        ]
+      ],
+      "manifest_sha256": "8195bbd5bb2c4a60af5be35536725a10c8d1b785f0ae847b318af0dcb35bbf92",
+      "observed_sha256": "8195bbd5bb2c4a60af5be35536725a10c8d1b785f0ae847b318af0dcb35bbf92",
+      "changed_since_manifest": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents/agent_41_site_playbooks_realtor.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "manifest_sha256": "ec0938c0d7167fa9ca31ebe078fb903046b7edd314862feedb0183801e028f26",
+      "observed_sha256": "ec0938c0d7167fa9ca31ebe078fb903046b7edd314862feedb0183801e028f26",
+      "changed_since_manifest": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-debloat-agent-kernel/scripts/langchain_autopsy.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          113
+        ]
+      ],
+      "manifest_sha256": "56c6be2e9cea0de41b5dc4f45a9411f1c87effe5ae6d98f306aa2a8b8ad773a3",
+      "observed_sha256": "56c6be2e9cea0de41b5dc4f45a9411f1c87effe5ae6d98f306aa2a8b8ad773a3",
+      "changed_since_manifest": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/safari-browser-agent/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          142
+        ]
+      ],
+      "manifest_sha256": "4f95ddd959f0b207d4855761b094c324f3e73b684e05dbb5ff9ccdd89576b2f7",
+      "observed_sha256": "4f95ddd959f0b207d4855761b094c324f3e73b684e05dbb5ff9ccdd89576b2f7",
+      "changed_since_manifest": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/flstudio-mcp-production/scripts/scala_generator.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          287
+        ]
+      ],
+      "manifest_sha256": "0209af99eebe5eb1c5526d17cd44aec30edca1b179f2f9863743e135b0e75699",
+      "observed_sha256": "0209af99eebe5eb1c5526d17cd44aec30edca1b179f2f9863743e135b0e75699",
+      "changed_since_manifest": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/social_calendar_generator.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          400
+        ]
+      ],
+      "manifest_sha256": "7fbb0f1ae4c0244c9491a5b8b9b22ceb2534b4a603076ee0560735a9944de6b2",
+      "observed_sha256": "7fbb0f1ae4c0244c9491a5b8b9b22ceb2534b4a603076ee0560735a9944de6b2",
+      "changed_since_manifest": false,
+      "notes": "Static text review; no execution."
+    }
+  ],
+  "tool_limitations": [
+    "No codebase-memory graph tools were exposed in ALL_TOOLS; used targeted source reads and rg.",
+    "Static audit only: no test, build, runtime, biometric, commit or push commands executed.",
+    "One batched read was truncated; affected assigned content was read again in bounded segments before claiming full coverage.",
+    "External API reference documents were reviewed as source material; their current vendor behavior was not independently certified."
+  ],
+  "tests_run": [],
+  "repository_state": {
+    "branch": "main",
+    "dirty": true,
+    "preserved": true
+  },
+  "additional_reads": [
+    "AGENTS.md",
+    ".babylon60rules",
+    "tests/test_doxastic_kripke_engine.py:1-120"
+  ]
+}

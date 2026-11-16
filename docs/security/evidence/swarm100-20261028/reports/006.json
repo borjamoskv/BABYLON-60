@@ -1,0 +1,379 @@
+{
+  "shard": "006",
+  "findings": [
+    {
+      "title": "Render directory resolves beneath scripts and omits cortex",
+      "severity": "P2",
+      "path": "scripts/c5_demos/c5_transduction_engine.py",
+      "line": 19,
+      "evidence": "REMOTION_DIR uses parent.parent of scripts/c5_demos source plus 01_KISH_ENGINE/transducers/video_remotion; this yields scripts/01_KISH_ENGINE/transducers/video_remotion, which does not exist. Actual entry and composition are under 01_KISH_ENGINE/cortex/transducers/video_remotion/src. Line 194 passes this path as subprocess cwd.",
+      "trigger": "Invoke compilation on a cache miss after audio generation succeeds.",
+      "impact": "Render subprocess fails before launching because its working directory is missing.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Concurrent compilations overwrite shared render inputs",
+      "severity": "P2",
+      "path": "scripts/c5_demos/c5_transduction_engine.py",
+      "line": 103,
+      "evidence": "All compilations use /tmp/c5_render; raw_audio_<scene.id>, master_audio_<scene.id>, concat_audio.txt, remotion_props.json and raw_remotion_video.mp4 have shared fixed names (114,127,153,168,184).",
+      "trigger": "Run two compilations concurrently with distinct storyboards and matching scene IDs.",
+      "impact": "One job can overwrite another job's audio, props or intermediate video, producing mixed output or failures.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Scene timing adds silence that the audio pipeline never emits",
+      "severity": "P2",
+      "path": "scripts/c5_demos/c5_transduction_engine.py",
+      "line": 122,
+      "evidence": "Scene video frames derive from ffprobe duration + 0.6 (122-124), but DSP uses amix duration=first with the unpadded voice input (137-140); concatenation joins those shorter audio files (153-160), and final mux uses -shortest (205).",
+      "trigger": "Compile a multi-scene storyboard.",
+      "impact": "Narration for later scenes advances before the corresponding visual boundary; final mux can truncate the last video scene.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Alarm batch discards its pending work before insertion succeeds",
+      "severity": "P2",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/do-storage/patterns.md",
+      "line": 87,
+      "evidence": "alarm() copies this.pending, sets it to [] and only then executes the INSERT (86-88). There is no restoration or durable queue.",
+      "trigger": "The SQL INSERT throws, for example because processed_items is absent or a constraint rejects an item.",
+      "impact": "Retry cannot recover the lost in-memory batch; the next callback sees an empty array and constructs INSERT ... VALUES with no rows. This is a defect in the published example, not a demonstrated production deployment.",
+      "confidence": "high",
+      "kind": "example"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".agents/rules/c5_deep_acople_invariant.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          24
+        ]
+      ],
+      "sha256_expected": "1c3ad99614f5586a51bb6a9ac44d1178367635517e365ff3a0e285f1ccdf40f2",
+      "sha256_observed": "1c3ad99614f5586a51bb6a9ac44d1178367635517e365ff3a0e285f1ccdf40f2",
+      "hash_match": true
+    },
+    {
+      "path": ".github/workflows/docker-ghcr.yml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          19
+        ]
+      ],
+      "sha256_expected": "d53f11908910140423fe4b9ebdd704fcc8061d053ee068e844ae39d0b1a57613",
+      "sha256_observed": "d53f11908910140423fe4b9ebdd704fcc8061d053ee068e844ae39d0b1a57613",
+      "hash_match": true
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/poc_wal_stress_test.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          64
+        ]
+      ],
+      "sha256_expected": "c4972cab5ca8656d9645a7daf81600ca4a01c7a44cf0156e2f6ef894a0fa4e08",
+      "sha256_observed": "c4972cab5ca8656d9645a7daf81600ca4a01c7a44cf0156e2f6ef894a0fa4e08",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/compiler/__init__.py",
+      "status": "reviewed_full",
+      "ranges": [],
+      "sha256_expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sha256_observed": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/c6_absolute/exergy_linter.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          178
+        ]
+      ],
+      "sha256_expected": "76404880042af5a047802b3323f7aa9ff24654dd5981833df228070fe097ef98",
+      "sha256_observed": "76404880042af5a047802b3323f7aa9ff24654dd5981833df228070fe097ef98",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/utils/turboquant.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          12
+        ]
+      ],
+      "sha256_expected": "1e6a45855d1468d2c9dd159b608abfcf546e5913bb1fe8b528d63547dce2ffcc",
+      "sha256_observed": "1e6a45855d1468d2c9dd159b608abfcf546e5913bb1fe8b528d63547dce2ffcc",
+      "hash_match": true
+    },
+    {
+      "path": "02_EDIN_SWARMS/tests/test_lifecycle_resilience.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          56
+        ]
+      ],
+      "sha256_expected": "ce1d534cad83e5a756084b4d5005bf9d7c419b167b646c35ea10cb4edffc4521",
+      "sha256_observed": "ce1d534cad83e5a756084b4d5005bf9d7c419b167b646c35ea10cb4edffc4521",
+      "hash_match": true
+    },
+    {
+      "path": "docs/01_spec/spec_babylon60.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          104
+        ]
+      ],
+      "sha256_expected": "06db29002ef1c85b72501922cae7cfc3f2de8ac6d8c21782857da40baeafb57b",
+      "sha256_observed": "06db29002ef1c85b72501922cae7cfc3f2de8ac6d8c21782857da40baeafb57b",
+      "hash_match": true
+    },
+    {
+      "path": "docs/RFC_OPEN_CORE_VERIFIER_SPEC.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          261
+        ]
+      ],
+      "sha256_expected": "f4e066dadadbd30046a588f6fe74083c778a9a40a64f0b95944a401cfb175bbf",
+      "sha256_observed": "f4e066dadadbd30046a588f6fe74083c778a9a40a64f0b95944a401cfb175bbf",
+      "hash_match": true
+    },
+    {
+      "path": "proof/bundles/attestation_bundle_v1/manifest.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          10
+        ]
+      ],
+      "sha256_expected": "8a67311136d786a2f859d701d84f9bcdda66e6ab50c843b6cff5c505127939b4",
+      "sha256_observed": "8a67311136d786a2f859d701d84f9bcdda66e6ab50c843b6cff5c505127939b4",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_demos/c5_transduction_engine.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          267
+        ]
+      ],
+      "sha256_expected": "3cc4f282f264c6d15445aa97610b6ebf7659bdbd5e8d50d817d7af6651a1f303",
+      "sha256_observed": "3cc4f282f264c6d15445aa97610b6ebf7659bdbd5e8d50d817d7af6651a1f303",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_quality_gates/audit_skill_links.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          159
+        ]
+      ],
+      "sha256_expected": "a887cdb733086cbc5d5b771f155444a7f0c78ed6130ce9949f2360655b444c7f",
+      "sha256_observed": "a887cdb733086cbc5d5b771f155444a7f0c78ed6130ce9949f2360655b444c7f",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_verifiers/verify_tonnetz_falsification.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          65
+        ]
+      ],
+      "sha256_expected": "eaa0ca3e7359c6330a37bc150b5b64954e151e17ca38e6e146ac3d43a74fc0fe",
+      "sha256_observed": "eaa0ca3e7359c6330a37bc150b5b64954e151e17ca38e6e146ac3d43a74fc0fe",
+      "hash_match": true
+    },
+    {
+      "path": "src/receipt.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          656
+        ]
+      ],
+      "sha256_expected": "d48656d5cfb3848eb7c81fb1a38cf2ad04938125cf37b81ac46563d3aff129c4",
+      "sha256_observed": "d48656d5cfb3848eb7c81fb1a38cf2ad04938125cf37b81ac46563d3aff129c4",
+      "hash_match": true
+    },
+    {
+      "path": "tests/test_autodidact_omega_v2.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          276
+        ]
+      ],
+      "sha256_expected": "10968b2ac80237dd491ee8ab495c0ab4a4b957489e4f1442bfe1175027ba0b63",
+      "sha256_observed": "10968b2ac80237dd491ee8ab495c0ab4a4b957489e4f1442bfe1175027ba0b63",
+      "hash_match": true
+    },
+    {
+      "path": "tests/test_nemesis_workproof.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          171
+        ]
+      ],
+      "sha256_expected": "1fa4adb4dbd566530b2a76f7475e148fbab809e05e8be9df2c0cdfab00f9ef01",
+      "sha256_observed": "1fa4adb4dbd566530b2a76f7475e148fbab809e05e8be9df2c0cdfab00f9ef01",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/agents-sdk/references/voice.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          68
+        ]
+      ],
+      "sha256_expected": "b6254f2afa76a9530c43741bc9ea4dfcc9bcef2c7819dfba026825811943b06a",
+      "sha256_observed": "b6254f2afa76a9530c43741bc9ea4dfcc9bcef2c7819dfba026825811943b06a",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/do-storage/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          194
+        ]
+      ],
+      "sha256_expected": "8361f7f57e3bb29fd783c51a1932b370f08d1cff1d3a3b646de4f4405708896d",
+      "sha256_observed": "8361f7f57e3bb29fd783c51a1932b370f08d1cff1d3a3b646de4f4405708896d",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/realtime-sfu/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          133
+        ]
+      ],
+      "sha256_expected": "452719661f7cc207a2f5311340b008b13498059a8fbc23911857ebcbb0cb2f11",
+      "sha256_observed": "452719661f7cc207a2f5311340b008b13498059a8fbc23911857ebcbb0cb2f11",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workers-playground/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          101
+        ]
+      ],
+      "sha256_expected": "10ca3f561c09227408451ead3809331429e5deb29d3eb2af48ce984dae8959fd",
+      "sha256_observed": "10ca3f561c09227408451ead3809331429e5deb29d3eb2af48ce984dae8959fd",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/examples/Maceo_Plex_Kick.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          85
+        ]
+      ],
+      "sha256_expected": "d885433cfe00d404891a88dc3c230a3f025279870ca396f7f8accc8c093b6864",
+      "sha256_observed": "d885433cfe00d404891a88dc3c230a3f025279870ca396f7f8accc8c093b6864",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_10_add_connector.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          61
+        ]
+      ],
+      "sha256_expected": "a1b57c38562a91ce77f45c34d5650936b9e5f1530533e1e3276860244eeb3e2c",
+      "sha256_observed": "a1b57c38562a91ce77f45c34d5650936b9e5f1530533e1e3276860244eeb3e2c",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-larsa-120/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "sha256_expected": "4e4003953eae7885d34486909308f01bb68ef88e027a017d696ccf25515864a2",
+      "sha256_observed": "4e4003953eae7885d34486909308f01bb68ef88e027a017d696ccf25515864a2",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-tri-provider-swarm/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "sha256_expected": "0dd6856324068b9a5d716d6dfdb3766a96ffe80a52b61bacfba00139e1ebe471",
+      "sha256_observed": "0dd6856324068b9a5d716d6dfdb3766a96ffe80a52b61bacfba00139e1ebe471",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/suno-bracket-tagging/references/neural_audio_engineering_handbook.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          85
+        ]
+      ],
+      "sha256_expected": "9e9fa0d0510fe86db54f63bbdbe71ff221cd76edb825ac731366ec2c88e23e85",
+      "sha256_observed": "9e9fa0d0510fe86db54f63bbdbe71ff221cd76edb825ac731366ec2c88e23e85",
+      "hash_match": true
+    }
+  ],
+  "tool_limitations": [
+    "No native codebase graph tools exposed in this session; used targeted source and text reads.",
+    "Static audit only; no repository tests, runtime commands, builds, external service calls, or deployments executed.",
+    "Initial manifest output was truncated; assigned shard was separately read and every assigned file hash checked.",
+    "Third-party API/version and physical/scientific claims were not independently verified; no findings infer runtime guarantees from those claims."
+  ],
+  "tests_run": []
+}

@@ -1,0 +1,406 @@
+{
+  "shard": "068",
+  "findings": [
+    {
+      "title": "Quarantine exports overwrite prior forensic evidence",
+      "severity": "P1",
+      "path": "src/babylon60.rs",
+      "line": 540,
+      "evidence": "export_quarantine_bundle uses fs::write on fixed manifest.json and graph.canonical paths (539-541), despite announcing WORM and zero historical evidence purged (502-503). Cargo.toml:105-106 registers this as babylon60-dsl.",
+      "trigger": "Run two DSL programs entering quarantine from the same working directory.",
+      "impact": "The second run truncates and replaces the first forensic bundle; no earlier quarantine evidence is retained.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "BA.EXACT silently truncates non-sexagesimal fractions",
+      "severity": "P2",
+      "path": "src/babylon60.rs",
+      "line": 392,
+      "evidence": "When val % divisor != 0, BA.EXACT performs integer (val * 60) / divisor once and increments scale, without checking the resulting remainder.",
+      "trigger": "For example NIG R0 [Y] followed by BA.EXACT R0 [YYYYYYY] computes 60/7 = 8 at scale 1.",
+      "impact": "An operation advertised as exact accepts an inexact value instead of rejecting or representing the remainder; downstream arithmetic and exported evidence use the truncated value.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Malformed instruction operands panic past static validation",
+      "severity": "P2",
+      "path": "src/babylon60.rs",
+      "line": 330,
+      "evidence": "static_proof checks only label targets (132-162); ALLOC then indexes tokens[1] and tokens[2] directly (329-331), as do several other opcodes.",
+      "trigger": "Invoke the registered babylon60-dsl binary on a file containing only ALLOC.",
+      "impact": "An index-out-of-bounds panic bypasses controlled rejection and quarantine export.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Artifact global hash omits opcode and proof IR",
+      "severity": "P2",
+      "path": "src/babylon60.rs",
+      "line": 554,
+      "evidence": "Both canonical exporters serialize id, parents, logical timestamp, payload and signature but omit opcode (520 and 554). Normal global_hash covers only this serialization; proof.ir is written independently (593-599).",
+      "trigger": "Compare a one-instruction NIG R0 [-] program with SAR R0: initial R0 is zero, both export the same event id/timestamp and R0=0 payload, but different opcode/proof IR.",
+      "impact": "Different instruction semantics and proof IR can share the same manifest global_hash; that hash cannot authenticate the full declared artifact bundle.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "E2E script contaminates and resets the persistent CORTEX database",
+      "severity": "P1",
+      "path": "scripts/c5_destiladora/test_destiladora_e2e.py",
+      "line": 81,
+      "evidence": "DB_PATH points to repository data/cortex_memory.db (30); three simulated successful traces are inserted there (63-78), then UPDATE cortex_invariant_clusters SET status=ACCUMULATING, lean4_proof_status=UNTESTED has no WHERE (81-84). goal_trace_ingestor.py:20-21 uses the same default database and persists/increments these clusters (75-124).",
+      "trigger": "Run this script in a checkout with existing CORTEX traces or proved clusters.",
+      "impact": "Synthetic success records enter the persistent corpus and every existing cluster loses its verification status; subsequent extraction/code generation operates on the altered database.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Benchmark reports a measured fast-path latency without timing it",
+      "severity": "P2",
+      "path": "scripts/c5_destiladora/test_destiladora_e2e.py",
+      "line": 151,
+      "evidence": "The final report prints constant 0.18 ms and 27,444x acceleration. The only elapsed duration captured is cargo check t_check (115-123); the fast-path subprocess is never timed.",
+      "trigger": "Complete the script successfully, regardless of actual fast-path execution latency.",
+      "impact": "The output presents fabricated timing and acceleration as local measurement, making benchmark evidence misleading.",
+      "confidence": "high",
+      "kind": "example"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".agents/skills/shared-manifest-kernel/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          22
+        ]
+      ],
+      "manifest_sha256": "533b9187e0be1ffbe5a5ba31b95bd88d27db23012d5184e4973184cad1586edf",
+      "observed_sha256": "533b9187e0be1ffbe5a5ba31b95bd88d27db23012d5184e4973184cad1586edf",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-kernel/src/shared_manifest.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          65
+        ]
+      ],
+      "manifest_sha256": "b1dda44486b0b9a76cc040b7a293e68cd756c6e892a9a6034c952c0109460015",
+      "observed_sha256": "b1dda44486b0b9a76cc040b7a293e68cd756c6e892a9a6034c952c0109460015",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/bft/consensus_ledger.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          105
+        ]
+      ],
+      "manifest_sha256": "445ed059d9c5e018132cc5afa89ea5f5e07bb795386844fc255e5ad7567953bf",
+      "observed_sha256": "445ed059d9c5e018132cc5afa89ea5f5e07bb795386844fc255e5ad7567953bf",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/dashboard/server.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          157
+        ]
+      ],
+      "manifest_sha256": "ba1b34d2e3e854efc11322c25fc48178597ff6a3c73b80a4344f11914d03603e",
+      "observed_sha256": "ba1b34d2e3e854efc11322c25fc48178597ff6a3c73b80a4344f11914d03603e",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/transducers/catvton_spatial_concat.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          107
+        ]
+      ],
+      "manifest_sha256": "97d6d9b383f621b27b6f80a69dc85bff5b22fb9532f70ee56c82d47bd53719ff",
+      "observed_sha256": "97d6d9b383f621b27b6f80a69dc85bff5b22fb9532f70ee56c82d47bd53719ff",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/cortex/transducers/video_remotion/src/index.ts",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          4
+        ]
+      ],
+      "manifest_sha256": "957e481dd33a29b4a55ae0e95dbf763b7e48c37c427ca4bd1275faf34bc07a74",
+      "observed_sha256": "957e481dd33a29b4a55ae0e95dbf763b7e48c37c427ca4bd1275faf34bc07a74",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "crates/babylon-skills-mcp/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          11
+        ]
+      ],
+      "manifest_sha256": "371a015ed2fdc406a0b2b85f25b82fae30a8ac7f5e4b4848abdc2b43be558267",
+      "observed_sha256": "371a015ed2fdc406a0b2b85f25b82fae30a8ac7f5e4b4848abdc2b43be558267",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "docs/06_theory/09_formal_ontology_lean.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          33
+        ]
+      ],
+      "manifest_sha256": "f4dcc58fcd8cd084b5e37913cc7e0564c20f189e40d0d937e0b1e6080025fb3d",
+      "observed_sha256": "f4dcc58fcd8cd084b5e37913cc7e0564c20f189e40d0d937e0b1e6080025fb3d",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "examples/archived_peripherals/sharded_ledger_ring.py.disabled",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          53
+        ]
+      ],
+      "manifest_sha256": "9b0764d5ee03c8b0372fa5a97f2bd076818ea538862f93f2ecedc95c866f692e",
+      "observed_sha256": "9b0764d5ee03c8b0372fa5a97f2bd076818ea538862f93f2ecedc95c866f692e",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/c5_assets/thermo_wallpaper.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          64
+        ]
+      ],
+      "manifest_sha256": "b649a2e9e6411c4d7c5ed779a5ee09bd35a0ed3521816bfa183fec6d3dc86d0e",
+      "observed_sha256": "b649a2e9e6411c4d7c5ed779a5ee09bd35a0ed3521816bfa183fec6d3dc86d0e",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/c5_destiladora/test_destiladora_e2e.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          162
+        ]
+      ],
+      "manifest_sha256": "4faf9b3fddcdb37f6ba083bdf5fe813c46ae3bd230ad35617c9a5088492a70de",
+      "observed_sha256": "4faf9b3fddcdb37f6ba083bdf5fe813c46ae3bd230ad35617c9a5088492a70de",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/c5_skills_ontology/audit_skills_execution.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          101
+        ]
+      ],
+      "manifest_sha256": "a3a7f1a1063cb1b54e451cd016c5472364e50c396904b03136e28d2024756fec",
+      "observed_sha256": "a3a7f1a1063cb1b54e451cd016c5472364e50c396904b03136e28d2024756fec",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "src/babylon60.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          626
+        ]
+      ],
+      "manifest_sha256": "202a32f58401f3c7f44dc72a0fb701205c8b5b118ef342e8a1779cd469919125",
+      "observed_sha256": "202a32f58401f3c7f44dc72a0fb701205c8b5b118ef342e8a1779cd469919125",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/spsc_ownership_regressions.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          118
+        ]
+      ],
+      "manifest_sha256": "588c28fd00175e80882491b5162ef05f633d63da999310dd688d5cb53bb31664",
+      "observed_sha256": "588c28fd00175e80882491b5162ef05f633d63da999310dd688d5cb53bb31664",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/test_grok_sampling_evidence.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          82
+        ]
+      ],
+      "manifest_sha256": "270c66bb7a1cf443390e3794cc99ae5b6131b257d4c0659244d4ec14ac0c38b0",
+      "observed_sha256": "270c66bb7a1cf443390e3794cc99ae5b6131b257d4c0659244d4ec14ac0c38b0",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/unit_tests.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          487
+        ]
+      ],
+      "manifest_sha256": "71b7fa694ac8d3dc42ec587cbbc1f6ceb17fb041167848248d0ac6c238f56711",
+      "observed_sha256": "71b7fa694ac8d3dc42ec587cbbc1f6ceb17fb041167848248d0ac6c238f56711",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/browser-rendering/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          108
+        ]
+      ],
+      "manifest_sha256": "818f02cc19291ead8fb0c0520ee80eafc8a6d2c0c3ce70f325c90439b19f905e",
+      "observed_sha256": "818f02cc19291ead8fb0c0520ee80eafc8a6d2c0c3ce70f325c90439b19f905e",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/pages/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          88
+        ]
+      ],
+      "manifest_sha256": "0b79f0e3bd7dd929d03de09ac7c35e006547c99763399f01b64436749085afe8",
+      "observed_sha256": "0b79f0e3bd7dd929d03de09ac7c35e006547c99763399f01b64436749085afe8",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/turn/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          231
+        ]
+      ],
+      "manifest_sha256": "772fd736426038068526c2c4cf9eae8d6478c52662aebde4c7a68eabafb6c750",
+      "observed_sha256": "772fd736426038068526c2c4cf9eae8d6478c52662aebde4c7a68eabafb6c750",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/anergy-purge-protocol/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "manifest_sha256": "ad3214204bc942084982005d808efd60862f2b4a79d366de60f00321833d5d81",
+      "observed_sha256": "ad3214204bc942084982005d808efd60862f2b4a79d366de60f00321833d5d81",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents/agent_36_site_playbooks_google_flights.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "manifest_sha256": "5f59327e479422f21dab5fdd3da495cf49144b621f211a55b6b65af81edbdb98",
+      "observed_sha256": "5f59327e479422f21dab5fdd3da495cf49144b621f211a55b6b65af81edbdb98",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/kimi-mcp-orchestrator/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          80
+        ]
+      ],
+      "manifest_sha256": "84a62f13898f64c0278c135eff07ac3cc93d5856daaf5d14627a1f32da89c7e2",
+      "observed_sha256": "84a62f13898f64c0278c135eff07ac3cc93d5856daaf5d14627a1f32da89c7e2",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/github-architect/scripts/repo_transductor.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          254
+        ]
+      ],
+      "manifest_sha256": "7a4ba77528ed9c131b842eebb28c0896b2358cc576df36dea1749017a443d1ba",
+      "observed_sha256": "7a4ba77528ed9c131b842eebb28c0896b2358cc576df36dea1749017a443d1ba",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/flstudio-mcp-production/examples/Xenharmonic_24TET_Bayati.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          114
+        ]
+      ],
+      "manifest_sha256": "6a3f76d563aaca34707ff38e2143b3cc0295a220749264156fd7b7e02073a622",
+      "observed_sha256": "6a3f76d563aaca34707ff38e2143b3cc0295a220749264156fd7b7e02073a622",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/workspace/wait-what/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          41
+        ]
+      ],
+      "manifest_sha256": "825f4942b85b6e3237490efc5e4c396d2ab8f6c1989c03fbf7b74cc064336dd7",
+      "observed_sha256": "825f4942b85b6e3237490efc5e4c396d2ab8f6c1989c03fbf7b74cc064336dd7",
+      "changed_since_manifest": false
+    }
+  ],
+  "tool_limitations": [
+    "No codebase-memory graph tools exposed in native session; targeted rg and file reads used.",
+    "Initial aggregate read was truncated; affected files were subsequently read in bounded sections.",
+    "No external API claims were promoted to findings; reference documentation was reviewed as source data without live API verification.",
+    "Audit is static only; no tests, project runtime, compilation, commits or pushes were executed."
+  ],
+  "tests_run": []
+}

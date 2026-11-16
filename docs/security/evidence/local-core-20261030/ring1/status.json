@@ -1,0 +1,34 @@
+{
+  "versions": {
+    "lean": "Lean (version 4.34.0-rc2, arm64-apple-darwin24.6.0, commit 6a10ac8c22beadecabdbb0919c2b50214762f91d, Release)",
+    "lake": "Lake version 5.0.0-src+6a10ac8 (Lean version 4.34.0-rc2)"
+  },
+  "lean_prefix": "/Users/borjafernandezangulo/.elan/toolchains/leanprover--lean4---v4.34.0-rc2",
+  "lean_binary_sha256": "1b370cfcbf44e80d1b004ab1b1ab9a4c73951f9f7c242140bcff9bc577576554",
+  "source_hashes_unchanged": true,
+  "git_status": "",
+  "checks": {
+    "lake_build": "passed",
+    "cargo_harness": "passed_13_ordinary_tests",
+    "real_lean": "passed_1_explicit_test",
+    "cli_poc": "passed_nominal_and_negative",
+    "cli_stress_quick": "passed_30_and_31_event_traces",
+    "diff_check": "passed",
+    "hardware": "not_run_ring1_not_owner"
+  },
+  "head_after": "eb28fa97bb0440d59878b955222aa0617a1c236b",
+  "required_omissions": 0,
+  "artifact_sha256": {
+    "/Users/borjafernandezangulo/.codex/worktrees/local-core-ring1/BABYLON-60/proof/lean/.lake/build/lib/lean/BabylonTrace.olean": "60a7ac8ff8ced4dddeee2f285b24c2275fd5d76ef51c886f3da0801d2025c405",
+    "/Users/borjafernandezangulo/.codex/worktrees/local-core-ring1/BABYLON-60/proof/lean/.lake/build/lib/lean/AX0.olean": "bbf09691f14c87ff51cd68e03ed519dd6ae10ea744eb1e251952e1f1eb34c312",
+    "/Users/borjafernandezangulo/.codex/worktrees/local-core-ring1/BABYLON-60/proof/lean/.lake/build/lib/lean/NemesisWave4.olean": "4f20c6888b84f53d1157866ae313d4c1c281227f01a574eaa709c2366a585979",
+    "/Users/borjafernandezangulo/.codex/local-core-evidence/capture-20261029T230935Z/rust-target/debug/fsm_poc": "9b3471865e7e31aa6deb2c5960381ef135e6e0c50cbf4465c575ba8f68e52b63",
+    "/Users/borjafernandezangulo/.codex/local-core-evidence/capture-20261029T230935Z/rust-target/debug/fsm_stress": "4db4676602e6b31bc5e58b56e46094cb9fd39307eb52988ede104d1e610e2e08"
+  },
+  "limits": [
+    "Closed sequential synthetic traces, not a Rust concurrency proof",
+    "No hardware or protected production effects executed",
+    "No SMT placeholder promoted to verified",
+    "No source, lockfile or dependency change"
+  ]
+}

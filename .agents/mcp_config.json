@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "context7": {
+      "command": "node",
+      "args": [
+        "/opt/homebrew/lib/node_modules/@upstash/context7-mcp/dist/index.js"
+      ]
+    },
+    "babylon60-kernel": {
+      "command": "python3",
+      "args": [
+        "scripts/c5_cli/launch_kernel_mcp.py"
+      ]
+    }
+  }
+}

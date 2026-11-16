@@ -1,0 +1,204 @@
+{
+  "group": "S4",
+  "date": "2026-10-30",
+  "scope": [
+    "scripts/c5_cli/moskv_native_host.py",
+    "01_KISH_ENGINE/babylon60/cortex/cortex_purge_anergy.py",
+    "scripts/c5_git_utils/rewrite_commits.py",
+    "scripts/c5_icloud_deploy.py",
+    "tools/install_shield.sh"
+  ],
+  "before": "5 failed before source edits; replay on immutable pre-edit snapshots also 5 failed",
+  "regressions": {
+    "count": 55,
+    "log": "docs/security/evidence/swarm100-lot12-20261030/s4/after-tests.log"
+  },
+  "related": {
+    "passed": 71,
+    "failed": 0,
+    "log": "docs/security/evidence/swarm100-lot12-20261030/s4/related-tests.log",
+    "initial_fixture_failure": "Initial harness HOME used /var symlink ancestor; canonical temporary HOME corrected. Initial 62 passed / 2 failed retained."
+  },
+  "checks": [
+    {
+      "check": "after-tests",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "pytest",
+        "tests/test_swarm100_lot12_s4_regressions.py",
+        "-q",
+        "-o",
+        "addopts=--tb=short"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/s4/after-tests.log",
+      "log_sha256": "01f6d8b4005e6497b611fe7726f8ec5895a3998a0263d4f1f9c02a75dc0390c1"
+    },
+    {
+      "check": "ruff",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "ruff",
+        "check",
+        "scripts/c5_cli/moskv_native_host.py",
+        "01_KISH_ENGINE/babylon60/cortex/cortex_purge_anergy.py",
+        "scripts/c5_git_utils/rewrite_commits.py",
+        "scripts/c5_icloud_deploy.py",
+        "tests/test_swarm100_lot12_s4_regressions.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/s4/ruff.log",
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "check": "mypy",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "mypy",
+        "--follow-imports=silent",
+        "--check-untyped-defs",
+        "scripts/c5_cli/moskv_native_host.py",
+        "01_KISH_ENGINE/babylon60/cortex/cortex_purge_anergy.py",
+        "scripts/c5_git_utils/rewrite_commits.py",
+        "scripts/c5_icloud_deploy.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/s4/mypy.log",
+      "log_sha256": "71144743c83babea384888a735db0c4daba3d4d7b7942b6839984bd5c21b52bb"
+    },
+    {
+      "check": "shell-syntax",
+      "command": [
+        "bash",
+        "-n",
+        "tools/install_shield.sh"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/s4/shell-syntax.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "findings": [
+    {
+      "change": "Private user queue directory; component descriptors with NOFOLLOW; private regular-file/owner/hardlink checks; stable advisory lock with separate exclusive creation and bounded ENOENT recovery; serialized atomic fsync publication for enqueue/pop/list/clear.",
+      "tests": [
+        "test_c0435_queue_rejects_symlink_without_changing_target",
+        "test_queue_cold_start_barrier_keeps_every_accepted_prompt",
+        "test_queue_serializes_independent_processes"
+      ],
+      "limits": [
+        "POSIX/macOS local filesystem and cooperative callers; advisory locking is not a boundary against another process running as the same user.",
+        "If directory fsync fails after atomic replacement, caller receives an error but new bytes may already be visible; no rollback/power-loss claim.",
+        "Legacy shared /tmp queue is not read or migrated."
+      ],
+      "candidate_id": "SW100-C0435",
+      "path": "scripts/c5_cli/moskv_native_host.py",
+      "before_sha256": "37e151085da1c01ecd002c9e7839ff366510527c55442a983f6e4a062c08d92a",
+      "after_sha256": "ea28bbfee08801da5c9fb44fe82bd2350c90b5f85fb92e778df3f60f8a297432",
+      "proposed_remediation_state": "FIXED",
+      "independent_review": "pending reviewer final hash confirmation"
+    },
+    {
+      "change": "Resolve default workspace at correct logical source location; never archive Python sources, bytecode or native modules; skip nonregular objects and reject existing archive destinations.",
+      "tests": [
+        "test_c0298_purge_preserves_importable_python",
+        "test_purge_root_and_native_sources_preserved",
+        "test_purge_existing_archive_is_not_overwritten"
+      ],
+      "limits": [
+        "Fixtures confirm module paths and actual imports survive; no purge of the live repository was run.",
+        "This finding concerns importable module preservation; remaining data/DB archival semantics and safe_purge_anergy guarantees are not closed by inference."
+      ],
+      "candidate_id": "SW100-C0298",
+      "path": "01_KISH_ENGINE/babylon60/cortex/cortex_purge_anergy.py",
+      "before_sha256": "7bcfb0040094964013cd1e539cb0a8051e71fd0f7fbfbe18e5a2de17c7fa6d1c",
+      "after_sha256": "408f432bcf364ea1f857cb856e51e4a29a5f6173570c207fd414d702fec1aaca",
+      "proposed_remediation_state": "FIXED",
+      "independent_review": "pending reviewer final hash confirmation"
+    },
+    {
+      "change": "Reject dirty/staged/untracked work and non-main branches; never checkout/reset to origin; create private exclusive history recovery bundle, fsync and verify it contains original HEAD before rewrite; repeat state/backup checks before filter dispatch; callback creation is exclusive.",
+      "tests": [
+        "test_c0437_dirty_work_and_local_commits_survive_preflight",
+        "test_rewrite_clean_preflight_bundle_contains_local_history",
+        "test_rewrite_rechecks_state_before_filter_dispatch",
+        "test_rewrite_failed_backup_stops_before_mutating_main"
+      ],
+      "limits": [
+        "Git fixtures only; recovery bundle was cloned and matched local commit/content. No real rewrite, ledger event, force-push or publication was performed.",
+        "Legacy filter-repo message callback and downstream rewriting/publishing behavior are not certified; discovered callback API mismatch is recorded separately.",
+        "Rechecks detect cooperative changes at boundaries, not arbitrary concurrent writers after the final check."
+      ],
+      "candidate_id": "SW100-C0437",
+      "path": "scripts/c5_git_utils/rewrite_commits.py",
+      "before_sha256": "30401c75520a9b251d52d7601f6fae6ea4c25723e904dbe8120dd03008ee4a6f",
+      "after_sha256": "64f47ebb82ad50e35af48a9d6177f9c9b05acb7227e6c272dc89a14db15c2aa8",
+      "proposed_remediation_state": "FIXED",
+      "independent_review": "pending reviewer final hash confirmation"
+    },
+    {
+      "change": "Deletion requires exact normalized apex DNS name as well as MX or SPF policy; independent subdomains, similar names and unrelated TXT records remain untouched. Content-Length header type corrected mechanically.",
+      "tests": [
+        "test_c0448_icloud_preserves_neighbor_records",
+        "test_icloud_does_not_delete_similar_or_missing_names",
+        "test_icloud_exact_apex_policy_and_unrelated_content"
+      ],
+      "limits": [
+        "Synthetic DNS records and request recorder; no credentials/provider/network or real DNS mutation.",
+        "DNS migration as a whole is not made atomic or certified by this scoped record-selection fix."
+      ],
+      "candidate_id": "SW100-C0448",
+      "path": "scripts/c5_icloud_deploy.py",
+      "before_sha256": "fb8414b9e3583108e1caaae3dec41a5bada01efb17c7c1d415029592cbee328e",
+      "after_sha256": "226f59b9d8988ae41fb779a3aaffa3ee5ead720428ecb6454eb995bbcfcc1c49",
+      "proposed_remediation_state": "FIXED",
+      "independent_review": "pending reviewer final hash confirmation"
+    },
+    {
+      "change": "Refuse symlink/non-directory .github before migration; preserve replaced regular instructions and noncanonical symlink metadata in private exclusive recovery directory before creating canonical links; canonical regular file preserved, no force-overwrite links.",
+      "tests": [
+        "test_c0490_installer_preserves_previous_instructions",
+        "test_installer_backup_is_private_and_links_are_idempotent",
+        "test_installer_rejects_unsafe_copilot_parent_before_mutating_instructions"
+      ],
+      "limits": [
+        "Only copied installer in temporary workspace/HOME; its shared /tmp lock is relocated in the fixture. No real installer, global instructions, kernel unbox or deployment.",
+        "Recovery keeps bytes/basic modes and symlink text; relative symlink target text retains original workspace context, not necessarily a working link inside the backup directory.",
+        "Installer lock protocol, uninstall behavior, global IDE integrations and races with malicious same-user concurrent filesystem replacement are outside this finding."
+      ],
+      "candidate_id": "SW100-C0490",
+      "path": "tools/install_shield.sh",
+      "before_sha256": "bbedf380b5945b2c432af96352a0f640ccf09e1e9858ad1498ad61a33919583d",
+      "after_sha256": "cd9166eae829e327e4f9422bc7203b3e164e7d6f6e8522e2fc69bc55403c9e48",
+      "proposed_remediation_state": "FIXED",
+      "independent_review": "pending reviewer final hash confirmation"
+    }
+  ],
+  "source_sha256": {
+    "scripts/c5_cli/moskv_native_host.py": "ea28bbfee08801da5c9fb44fe82bd2350c90b5f85fb92e778df3f60f8a297432",
+    "01_KISH_ENGINE/babylon60/cortex/cortex_purge_anergy.py": "408f432bcf364ea1f857cb856e51e4a29a5f6173570c207fd414d702fec1aaca",
+    "scripts/c5_git_utils/rewrite_commits.py": "64f47ebb82ad50e35af48a9d6177f9c9b05acb7227e6c272dc89a14db15c2aa8",
+    "scripts/c5_icloud_deploy.py": "226f59b9d8988ae41fb779a3aaffa3ee5ead720428ecb6454eb995bbcfcc1c49",
+    "tools/install_shield.sh": "cd9166eae829e327e4f9422bc7203b3e164e7d6f6e8522e2fc69bc55403c9e48"
+  },
+  "test_sha256": {
+    "tests/test_swarm100_lot12_s4_regressions.py": "8b53806f639702bd26d34299a78f0ef50560bde5a3b094b49b1c704279f2e5b3"
+  },
+  "independent_discoveries": [
+    "C0490 .github symlink escape reproduced by reviewer, now rejected before instruction mutation.",
+    "C0435 simultaneous cold-start lock creation returned ENOENT; separate exclusive creation/open plus bounded missing-name retries; barrier and multiprocess regressions added."
+  ],
+  "omitted": [
+    "No operator data/identities/Git mutation/remote services/hardware calls",
+    "No dependencies, lockfiles, registry/common reports or commits modified"
+  ]
+}

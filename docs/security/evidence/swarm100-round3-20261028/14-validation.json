@@ -1,0 +1,15 @@
+{
+  "reviewer": "14",
+  "assigned": 29,
+  "reviewed": 29,
+  "decisions": {
+    "CONFIRMED_STATIC": 26,
+    "REPRODUCED": 3
+  },
+  "severity": {
+    "P1": 6,
+    "P2": 23
+  },
+  "application_runtime_executed": false,
+  "schema_ids_paths_and_evidence_validated": true
+}

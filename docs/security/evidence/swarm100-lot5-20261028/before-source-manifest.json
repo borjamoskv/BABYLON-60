@@ -1,0 +1,12 @@
+{
+  "source_sha256": {
+    "01_KISH_ENGINE/babylon60/bft/ledger_actor.py": "c0dddf3e209bb945fa1f49a3d372b66b18968ebfcc2ea864ce35b26ebb16b237",
+    "01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py": "15292238c8f9b7e87f70ce0b4e8256569bb1cc612497102afa5b373092e85db6",
+    "01_KISH_ENGINE/babylon60/bft/consensus_committer.py": "0dc69808ab64404e0bed3a893fa71e46380ee54ed00981e7522a17dbe43be0d5",
+    "01_KISH_ENGINE/babylon60/bft/cortex_crypto_kernel.py": "446647419015408a58623f7ec3ef4302f4bf8edd715bef45d8dfb745a377ba94",
+    "pyproject.toml": "50d4594dd2125fcbe7df0578394b5d2c2e6ac7c7dddb4b5fc9be68229eb8d0cd",
+    "uv.lock": "d78739746ac5d442a074ad73cbc7fc06d6e803558126f65fbc3d6d251d4c1fb4",
+    "Cargo.lock": "7c772f6e6ffd29594c5b9bdadb004be09c57af67b60b7be1b56c034a174491b4"
+  },
+  "git_head": "28257bd74fce31446b0350d094e9dab148a1aea7"
+}

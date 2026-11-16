@@ -1,0 +1,232 @@
+{
+  "group": "S5",
+  "status": "Implementation complete; independent review pending",
+  "results": [
+    {
+      "candidate_id": "SW100-C0103",
+      "path": "tools/skill_library/global/youtube-analysis-pipeline/scripts/yt_audit.py",
+      "proposed_remediation_state": "FIXED",
+      "change": "Literal argv, shell=False and option terminator before the caller URL; output path remains one -o argument.",
+      "source_sha256_before": "ecda4dca2ee77aa986d1898aad7fbd998bc07723bf7126c1e697fbd155638d62",
+      "source_sha256_after": "61d95dcae8a1a3c86c1ffcad16f748b02ddd104362fdf5f41812a7f75955e684",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/global/youtube-analysis-pipeline/scripts/yt_audit.py",
+          "start_line": 17,
+          "end_line": 51,
+          "observation": "Literal argv, shell=False and option terminator before the caller URL; output path remains one -o argument."
+        }
+      ],
+      "regression_tests": [
+        "test_c0103_url_and_directory_are_literal_arguments",
+        "test_c0103_real_process_does_not_interpret_shell",
+        "test_c0103_rejects_string_commands"
+      ],
+      "limits": "No yt-dlp download or network acquisition was performed. The packaged secondary copy is outside this ID/scope and is not closed by inference.",
+      "before_evidence": "docs/security/evidence/swarm100-lot12-20261030/s5/before-tests.log",
+      "verification": "docs/security/evidence/swarm100-lot12-20261030/s5/checks.json"
+    },
+    {
+      "candidate_id": "SW100-C0221",
+      "path": "01_KISH_ENGINE/babylon60/core/popperian_filter.py",
+      "proposed_remediation_state": "FIXED",
+      "change": "Rejects excess UTF-8 bytes before filtering; CLI reads one extra character to detect hidden tails; invalid UTF-8 rejected.",
+      "source_sha256_before": "371150377d929d086bd465398a67ee6811f1e310a834d989aec3ad37183a8b3b",
+      "source_sha256_after": "aa6d9790230ae6056fa811f5b783542758f17dd4f21289df0f04a343a12e5f88",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/popperian_filter.py",
+          "start_line": 103,
+          "end_line": 167,
+          "observation": "Rejects excess UTF-8 bytes before filtering; CLI reads one extra character to detect hidden tails; invalid UTF-8 rejected."
+        }
+      ],
+      "regression_tests": [
+        "test_c0221_rejects_unexamined_suffix",
+        "test_c0221_utf8_byte_limit",
+        "test_c0221_exact_limit_and_invalid_unicode",
+        "test_c0221_cli_does_not_hide_oversized_tail"
+      ],
+      "limits": "The existing heuristic entropy/hype/anchor policy is unchanged; this is not a general semantic containment guarantee.",
+      "before_evidence": "docs/security/evidence/swarm100-lot12-20261030/s5/before-tests.log",
+      "verification": "docs/security/evidence/swarm100-lot12-20261030/s5/checks.json"
+    },
+    {
+      "candidate_id": "SW100-C0294",
+      "path": "01_KISH_ENGINE/babylon60/primitives/sandbox.py",
+      "proposed_remediation_state": "MITIGATED",
+      "change": "Validated code moves to a disposable child. Linux RLIMIT_AS is required and confirmed before exec, with bounded UTF-8 stdout, JSON namespace and process timeout. Unsupported OS or failed limit setup rejects before execution.",
+      "source_sha256_before": "22f22c9765c6605bd02ba1a7dce990d31764867fbe469ad2244e54b5c52a0fa4",
+      "source_sha256_after": "750fd030aef40012bb73af11254b90a7b308d57f803ba78b88e2e21d5eb3fa22",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/primitives/sandbox.py",
+          "start_line": 345,
+          "end_line": 383,
+          "observation": "Validated code moves to a disposable child. Linux RLIMIT_AS is required and confirmed before exec, with bounded UTF-8 stdout, JSON namespace and process timeout. Unsupported OS or failed limit setup rejects before execution."
+        }
+      ],
+      "regression_tests": [
+        "test_c0294_output_growth_is_rejected",
+        "test_c0294_bounded_worker_print_effect_with_fixture_resource",
+        "test_c0294_memory_setup_failure_rejects_before_code",
+        "test_c0294_concurrent_calls_do_not_change_host_stdout",
+        "test_c0294_real_linux_memory_output_and_timeout_bounds"
+      ],
+      "limits": "On observed Darwin, resource setters reject the cap; execution is explicitly unavailable. The Linux positive test is skipped here. Fixture resource tests prove real output handling/namespace limits but not a kernel memory bound. No OS file/network containment or memory-enforced runtime is certified on this host.",
+      "before_evidence": "docs/security/evidence/swarm100-lot12-20261030/s5/before-tests.log",
+      "verification": "docs/security/evidence/swarm100-lot12-20261030/s5/checks.json"
+    },
+    {
+      "candidate_id": "SW100-C0486",
+      "path": "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+      "proposed_remediation_state": "FIXED",
+      "change": "The preflight free-model veto checks the explicit target and all transmitted fallback candidates before quota or dispatch.",
+      "source_sha256_before": "eccd5ae01bb29f6e4faeaf3ce275d341a46112e030923d7139222d632d22834a",
+      "source_sha256_after": "57773548924aef80661afcc6d6878e46ef7267777bb447404b91c89a02ebb6c0",
+      "source_checks": [
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+          "start_line": 706,
+          "end_line": 868,
+          "observation": "The preflight free-model veto checks the explicit target and all transmitted fallback candidates before quota or dispatch."
+        }
+      ],
+      "regression_tests": [
+        "test_c0486_explicit_free_target_is_checked_before_dispatch",
+        "test_c0486_every_transmitted_model_is_checked",
+        "test_c0486_sensitive_paid_target_and_candidates_preserved",
+        "test_c0486_blocked_target_uses_strict_local_failover"
+      ],
+      "limits": "Tests record HTTP calls and local fallback only, with synthetic keys; no provider or gateway behavior was exercised.",
+      "before_evidence": "docs/security/evidence/swarm100-lot12-20261030/s5/before-tests.log",
+      "verification": "docs/security/evidence/swarm100-lot12-20261030/s5/checks.json"
+    },
+    {
+      "candidate_id": "SW100-C0113",
+      "path": "01_KISH_ENGINE/babylon60/kernel/ns_z3_firewall.py",
+      "proposed_remediation_state": "FIXED",
+      "change": "Checks all seven principal minors of the symmetric residual matrix using exact Z3 rationals of decimal input strings; rejects nonfinite values and magnitude >1e100.",
+      "source_sha256_before": "8c770d13506eea3376bb072d905d7ce65994395989bc0686ba18a779c6d5a65d",
+      "source_sha256_after": "701af0343b17e1270f5457985a0554427dfa161698e787a0ca340061e97ed35c",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/ns_z3_firewall.py",
+          "start_line": 80,
+          "end_line": 144,
+          "observation": "Checks all seven principal minors of the symmetric residual matrix using exact Z3 rationals of decimal input strings; rejects nonfinite values and magnitude >1e100."
+        }
+      ],
+      "regression_tests": [
+        "test_c0113_rejects_zero_leading_minor_indefinite_matrix",
+        "test_c0113_negative_nonleading_minor_is_rejected",
+        "test_c0113_singular_psd_is_accepted",
+        "test_c0113_exact_small_negative_and_range_rejected",
+        "test_c0113_permuted_counterexamples_after_warmup"
+      ],
+      "limits": "Validates only the supplied decimal-rational matrix. No continuous-fluid theorem, external checker certificate, hardware result or floating-point error model is claimed.",
+      "before_evidence": "docs/security/evidence/swarm100-lot12-20261030/s5/before-tests.log",
+      "verification": "docs/security/evidence/swarm100-lot12-20261030/s5/checks.json"
+    }
+  ],
+  "baseline": {
+    "command": [
+      "uv",
+      "run",
+      "--locked",
+      "--no-sync",
+      "pytest",
+      "tests/test_swarm100_lot12_s5_regressions.py",
+      "-q",
+      "-o",
+      "addopts=--tb=short"
+    ],
+    "result": "10 failed before production edits",
+    "log": "docs/security/evidence/swarm100-lot12-20261030/s5/before-tests.log",
+    "log_sha256": "6bbb344f33b81d8c296615b24f07a3b9a20dc92253877c900647f4dc884564d0",
+    "sources": "docs/security/evidence/swarm100-lot12-20261030/before-source-manifest.json",
+    "note": "The regression file was subsequently expanded; no initial test-file hash was recorded."
+  },
+  "checks": {
+    "checks": [
+      {
+        "check": "related-tests",
+        "command": [
+          "uv",
+          "run",
+          "--locked",
+          "--no-sync",
+          "pytest",
+          "tests/test_swarm100_lot12_s5_regressions.py",
+          "tests/test_ns_z3_firewall.py",
+          "tests/test_ns_z3_resource_exhaustion.py",
+          "tests/test_agents_archi.py",
+          "tests/test_gemini_labs_nexus.py",
+          "-q",
+          "-o",
+          "addopts=--tb=short"
+        ],
+        "exit_code": 0,
+        "log": "docs/security/evidence/swarm100-lot12-20261030/s5/related-tests.log",
+        "sha256": "70db6af586a7ab80aef6964ef26681e29ba0c5de4b53ac0fabff84636e615f20",
+        "environment": "HOME temporary; vault/provider keys removed"
+      },
+      {
+        "check": "ruff",
+        "command": [
+          "uv",
+          "run",
+          "--locked",
+          "--no-sync",
+          "ruff",
+          "check",
+          "tools/skill_library/global/youtube-analysis-pipeline/scripts/yt_audit.py",
+          "01_KISH_ENGINE/babylon60/core/popperian_filter.py",
+          "01_KISH_ENGINE/babylon60/primitives/sandbox.py",
+          "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+          "01_KISH_ENGINE/babylon60/kernel/ns_z3_firewall.py",
+          "tests/test_swarm100_lot12_s5_regressions.py"
+        ],
+        "exit_code": 0,
+        "log": "docs/security/evidence/swarm100-lot12-20261030/s5/ruff.log",
+        "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "environment": "HOME temporary; vault/provider keys removed"
+      },
+      {
+        "check": "mypy",
+        "command": [
+          "uv",
+          "run",
+          "--locked",
+          "--no-sync",
+          "mypy",
+          "--follow-imports=silent",
+          "--check-untyped-defs",
+          "tools/skill_library/global/youtube-analysis-pipeline/scripts/yt_audit.py",
+          "01_KISH_ENGINE/babylon60/core/popperian_filter.py",
+          "01_KISH_ENGINE/babylon60/primitives/sandbox.py",
+          "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+          "01_KISH_ENGINE/babylon60/kernel/ns_z3_firewall.py"
+        ],
+        "exit_code": 0,
+        "log": "docs/security/evidence/swarm100-lot12-20261030/s5/mypy.log",
+        "sha256": "e317872697c2cbfdefa321527a6efe73290dff3a390b0fa8723b87092eccba6a",
+        "environment": "HOME temporary; vault/provider keys removed"
+      }
+    ],
+    "source_sha256": {
+      "tools/skill_library/global/youtube-analysis-pipeline/scripts/yt_audit.py": "61d95dcae8a1a3c86c1ffcad16f748b02ddd104362fdf5f41812a7f75955e684",
+      "01_KISH_ENGINE/babylon60/core/popperian_filter.py": "aa6d9790230ae6056fa811f5b783542758f17dd4f21289df0f04a343a12e5f88",
+      "01_KISH_ENGINE/babylon60/primitives/sandbox.py": "750fd030aef40012bb73af11254b90a7b308d57f803ba78b88e2e21d5eb3fa22",
+      "02_EDIN_SWARMS/agents_archi/clients/openrouter.py": "57773548924aef80661afcc6d6878e46ef7267777bb447404b91c89a02ebb6c0",
+      "01_KISH_ENGINE/babylon60/kernel/ns_z3_firewall.py": "701af0343b17e1270f5457985a0554427dfa161698e787a0ca340061e97ed35c"
+    }
+  },
+  "test_sha256": "b4de26f735828e02635e94232fa2872398e22f0501f34ba47886dac17e9c0b91",
+  "platform_probe": "docs/security/evidence/swarm100-lot12-20261030/s5/memory-platform-probe.json",
+  "discovery": "Native graph search and trace_path in project babylon-60; bounded literal/source fallback. Context7 CPython primary docs consulted for subprocess/resource limits.",
+  "documentation_sources": [
+    "https://github.com/python/cpython/blob/main/Doc/library/resource.rst",
+    "https://github.com/python/cpython/blob/main/Doc/library/subprocess.rst"
+  ]
+}

@@ -1,0 +1,99 @@
+FFFFFFFF                                                                 [100%]
+=================================== FAILURES ===================================
+__________________ test_c0438_git_error_is_not_empty_success ___________________
+tests/test_swarm100_lot9_regressions.py:78: in test_c0438_git_error_is_not_empty_success
+    with pytest.raises(subprocess.CalledProcessError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE CalledProcessError
+______________ test_c0438_signing_configuration_is_not_overridden ______________
+tests/test_swarm100_lot9_regressions.py:91: in test_c0438_signing_configuration_is_not_overridden
+    with pytest.raises(subprocess.CalledProcessError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE CalledProcessError
+_______________ test_c0438_prepared_unrelated_index_is_rejected ________________
+tests/test_swarm100_lot9_regressions.py:102: in test_c0438_prepared_unrelated_index_is_rejected
+    with pytest.raises(ERRORS):repo.module.git_sentinel_commit('a'*64)
+         ^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE any of (RuntimeError, SubprocessError, SystemExit)
+__________ test_c0438_obsolete_source_path_cannot_hide_failed_commit ___________
+tests/test_swarm100_lot9_regressions.py:110: in test_c0438_obsolete_source_path_cannot_hide_failed_commit
+    assert repo.head()!=before
+E   AssertionError: assert b'7027a2cb2fb3a1cb4473343c0fe507ee80721052' != b'7027a2cb2fb3a1cb4473343c0fe507ee80721052'
+E    +  where b'7027a2cb2fb3a1cb4473343c0fe507ee80721052' = <function repo.<locals>.head at 0x10b91f3d0>()
+E    +    where <function repo.<locals>.head at 0x10b91f3d0> = namespace(root=PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pyte...obsolete_source_pat0/monitor repository with spaces/STATUS.md'), legacy=<function repo.<locals>.legacy at 0x10b935b10>).head
+___________________ test_c0438_hook_failure_is_not_bypassed ____________________
+tests/test_swarm100_lot9_regressions.py:120: in test_c0438_hook_failure_is_not_bypassed
+    with pytest.raises(ERRORS):repo.module.git_sentinel_commit('a'*64)
+         ^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE any of (RuntimeError, SubprocessError, SystemExit)
+_____________ test_c0438_consumer_rejection_never_prints_complete ______________
+tests/test_swarm100_lot9_regressions.py:129: in test_c0438_consumer_rejection_never_prints_complete
+    with pytest.raises(ERRORS):repo.module.c5_real_colapso()
+         ^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE any of (RuntimeError, SubprocessError, SystemExit)
+----------------------------- Captured stdout call -----------------------------
+============================================================
+ MOSKV-1 APEX — Causal-Determinist STATE MONITOR (EXERGY_OPTIMIZER)
+============================================================
+
+[GIT] HEAD: fixture | Branch: main
+[GIT] Commits: 1 | Tag: NONE
+[GIT] Entropy: 1 mutated files
+
+[BFT] Database Census:
+  TOTAL                          →        0 nodes
+
+[RUFF] Errors: 0 | Fixable: 0
+[TEST] Test Files: 0 | State: FIXTURE_ONLY | Passed: 0
+
+[HASH] STATUS.md SHA3-256: 99976f0befebbd65a8995fd8...
+[GIT SENTINEL] Enforcing state collapse...
+[GIT SENTINEL] Collapse: dbd4978
+============================================================
+ EXERGY_OPTIMIZER COMPLETE | 0 BFT nodes | dbd4978
+============================================================
+____ test_c0438_consumer_makes_one_commit_and_preserves_historical_pending _____
+tests/test_swarm100_lot9_regressions.py:139: in test_c0438_consumer_makes_one_commit_and_preserves_historical_pending
+    assert 'Historical `[PENDING]` entry' in repo.status.read_text()
+E   AssertionError: assert 'Historical `[PENDING]` entry' in '# Fixture Status\n\nHistorical `c3b2c7e` entry\n| 2026-10-29 | Causal-Determinist EXERGY_OPTIMIZER: Transductor de Estado (SHA3: `99976f0befeb`) | Git Sentinel `c3b2c7e` |\n'
+E    +  where '# Fixture Status\n\nHistorical `c3b2c7e` entry\n| 2026-10-29 | Causal-Determinist EXERGY_OPTIMIZER: Transductor de Estado (SHA3: `99976f0befeb`) | Git Sentinel `c3b2c7e` |\n' = read_text()
+E    +    where read_text = PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-800/test_c0438_consumer_makes_one_0/monitor repository with spaces/STATUS.md').read_text
+E    +      where PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-800/test_c0438_consumer_makes_one_0/monitor repository with spaces/STATUS.md') = namespace(root=PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pyte...consumer_makes_one_0/monitor repository with spaces/STATUS.md'), legacy=<function repo.<locals>.legacy at 0x10b935900>).status
+----------------------------- Captured stdout call -----------------------------
+============================================================
+ MOSKV-1 APEX — Causal-Determinist STATE MONITOR (EXERGY_OPTIMIZER)
+============================================================
+
+[GIT] HEAD: fixture | Branch: main
+[GIT] Commits: 1 | Tag: NONE
+[GIT] Entropy: 1 mutated files
+
+[BFT] Database Census:
+  TOTAL                          →        0 nodes
+
+[RUFF] Errors: 0 | Fixable: 0
+[TEST] Test Files: 0 | State: FIXTURE_ONLY | Passed: 0
+
+[HASH] STATUS.md SHA3-256: 99976f0befebbd65a8995fd8...
+[GIT SENTINEL] Enforcing state collapse...
+[GIT SENTINEL] Collapse: dbd4978
+============================================================
+ EXERGY_OPTIMIZER COMPLETE | 0 BFT nodes | dbd4978
+============================================================
+________________ test_c0438_noop_is_not_returned_as_new_commit _________________
+tests/test_swarm100_lot9_regressions.py:145: in test_c0438_noop_is_not_returned_as_new_commit
+    assert repo.module.git_sentinel_commit('a'*64) is None
+E   AssertionError: assert '8f9e888' is None
+E    +  where '8f9e888' = <function git_sentinel_commit at 0x10b9378a0>(('a' * 64))
+E    +    where <function git_sentinel_commit at 0x10b9378a0> = <module 'lot9_monitor_fixture' from '/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-800/test_c0438_noop_is_not_returne0/fixture_monitor.py'>.git_sentinel_commit
+E    +      where <module 'lot9_monitor_fixture' from '/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-800/test_c0438_noop_is_not_returne0/fixture_monitor.py'> = namespace(root=PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pyte...noop_is_not_returne0/monitor repository with spaces/STATUS.md'), legacy=<function repo.<locals>.legacy at 0x10b937480>).module
+=========================== short test summary info ============================
+FAILED tests/test_swarm100_lot9_regressions.py::test_c0438_git_error_is_not_empty_success
+FAILED tests/test_swarm100_lot9_regressions.py::test_c0438_signing_configuration_is_not_overridden
+FAILED tests/test_swarm100_lot9_regressions.py::test_c0438_prepared_unrelated_index_is_rejected
+FAILED tests/test_swarm100_lot9_regressions.py::test_c0438_obsolete_source_path_cannot_hide_failed_commit
+FAILED tests/test_swarm100_lot9_regressions.py::test_c0438_hook_failure_is_not_bypassed
+FAILED tests/test_swarm100_lot9_regressions.py::test_c0438_consumer_rejection_never_prints_complete
+FAILED tests/test_swarm100_lot9_regressions.py::test_c0438_consumer_makes_one_commit_and_preserves_historical_pending
+FAILED tests/test_swarm100_lot9_regressions.py::test_c0438_noop_is_not_returned_as_new_commit
+8 failed in 2.21s

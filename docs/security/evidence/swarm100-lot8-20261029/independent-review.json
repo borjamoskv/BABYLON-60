@@ -1,0 +1,345 @@
+{
+  "reviewer": "03",
+  "date": "2026-10-29",
+  "lot": 8,
+  "decision": "APPROVED_WITH_EXPLICIT_SCOPE",
+  "open_actionable_findings": [],
+  "source_sha256": {
+    "scripts/c5_cortex/cortex_objectives_transducer.py": "18805a13c7a3c2853b8824c9424dbff05c2d27ebad9c89e2f3b2c98aaf7692ca"
+  },
+  "test_source_sha256": {
+    "tests/test_swarm100_lot8_regressions.py": "6df5efd0e57b915ea3c014225841950056ee9b3a0d76b5174d1f471ce6e8b7ec"
+  },
+  "harness_sha256": {
+    "docs/security/evidence/swarm100-lot8-20261029/independent-adversarial.py": "172e1121c9e7dabb6d4040d50ef16ff70568623abf8259f5fdd0538b1d508d26"
+  },
+  "unchanged_boundary_sha256": {
+    "scripts/c5_verifiers/fast_smt_gate.py": "853cd9746178aede419bee382b6e6416482fdbfb8a5eb753269732e3d5e384c1",
+    "pyproject.toml": "50d4594dd2125fcbe7df0578394b5d2c2e6ac7c7dddb4b5fc9be68229eb8d0cd",
+    "uv.lock": "d78739746ac5d442a074ad73cbc7fc06d6e803558126f65fbc3d6d251d4c1fb4",
+    "Cargo.lock": "7c772f6e6ffd29594c5b9bdadb004be09c57af67b60b7be1b56c034a174491b4"
+  },
+  "candidates": [
+    {
+      "decision": "REPRODUCED",
+      "severity": "P1",
+      "remediation_state": "FIXED",
+      "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+      "current_source_sha256": "18805a13c7a3c2853b8824c9424dbff05c2d27ebad9c89e2f3b2c98aaf7692ca",
+      "runtime_executed": true,
+      "runtime_scope": "Git and benign hooks only in owned temporary repositories with synthetic author, isolated HOME/system/global config and signing disabled; no protected runtime or real-checkout commit.",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot8-20261029/independent-adversarial.py",
+        "docs/security/evidence/swarm100-lot8-20261029/independent-adversarial-initial.log",
+        "docs/security/evidence/swarm100-lot8-20261029/independent-regressions.log",
+        "docs/security/evidence/swarm100-lot8-20261029/independent-ruff.log",
+        "docs/security/evidence/swarm100-lot8-20261029/before-source-manifest.json",
+        "docs/security/evidence/swarm100-lot8-20261029/before-tests.log"
+      ],
+      "candidate_id": "SW100-C0499",
+      "rationale": "The automatic hook bypass is removed: one normal commit attempt executes configured hooks; any nonzero result is propagated without a --no-verify retry, alternate commit, fabricated hash, or consumer success proof. Independent pre-commit/prepare-commit-msg/commit-msg rejections ran exactly once and preserved fixture HEAD/index.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+          "start_line": 64,
+          "end_line": 154,
+          "observation": "Validates fixed allowlist/subset, message, repository root, existing symbolic HEAD, unsupported operations/index modes, ambient repository/index selectors, tracked output type and clean prepared index. Optional locks disabled for preflight. Uses a single normal git commit --only with literal pathspecs, never git add/reset or --no-verify. Checks index/HEAD before and committed parent/path set after; errors propagate and no-op returns observed existing commit."
+        },
+        {
+          "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+          "start_line": 235,
+          "end_line": 260,
+          "observation": "Only the YAML producer output is passed; success proof prints after successful helper return."
+        },
+        {
+          "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+          "start_line": 263,
+          "end_line": 297,
+          "observation": "Only the YAML producer output is passed; helper failure prevents success proof."
+        },
+        {
+          "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+          "start_line": 300,
+          "end_line": 326,
+          "observation": "Only the YAML producer output is passed; helper failure prevents success proof."
+        },
+        {
+          "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+          "start_line": 359,
+          "end_line": 372,
+          "observation": "Only producer outputs whose mutation flags are true are passed; unselected dirty YAML/PROJECT is excluded."
+        }
+      ],
+      "guards": [
+        "Single commit attempt with ordinary Git hooks",
+        "No --no-verify or alternative commit path",
+        "No diagnostic-string inference of success",
+        "Postvalidation must succeed before returning commit hash"
+      ]
+    },
+    {
+      "decision": "REPRODUCED",
+      "severity": "P1",
+      "remediation_state": "FIXED",
+      "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+      "current_source_sha256": "18805a13c7a3c2853b8824c9424dbff05c2d27ebad9c89e2f3b2c98aaf7692ca",
+      "runtime_executed": true,
+      "runtime_scope": "Git and benign hooks only in owned temporary repositories with synthetic author, isolated HOME/system/global config and signing disabled; no protected runtime or real-checkout commit.",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot8-20261029/independent-adversarial.py",
+        "docs/security/evidence/swarm100-lot8-20261029/independent-adversarial-initial.log",
+        "docs/security/evidence/swarm100-lot8-20261029/independent-regressions.log",
+        "docs/security/evidence/swarm100-lot8-20261029/independent-ruff.log",
+        "docs/security/evidence/swarm100-lot8-20261029/before-source-manifest.json",
+        "docs/security/evidence/swarm100-lot8-20261029/before-tests.log"
+      ],
+      "candidate_id": "SW100-C0500",
+      "rationale": "The broad workspace staging/whole-index capture defect is fixed for the declared contract: no git add is performed; an initially prepared/special index is rejected byte-identically; git commit --only includes selected tracked producer outputs and excludes unrelated worktree or concurrently prepared different paths. Consumers pass only their actually generated YAML/PROJECT subset. Selected files remain whole-file commit units; same-output concurrent writers and mutating trusted hooks are explicit limitations, not resolved isolation properties.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+          "start_line": 38,
+          "end_line": 43,
+          "observation": "Index snapshots use O_NOFOLLOW and reject nonregular types; bytes are compared without any automatic restoration."
+        },
+        {
+          "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+          "start_line": 46,
+          "end_line": 61,
+          "observation": "Selected output components are opened descriptor-relatively without following symlinks; final selected output must be regular."
+        },
+        {
+          "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+          "start_line": 64,
+          "end_line": 154,
+          "observation": "Validates fixed allowlist/subset, message, repository root, existing symbolic HEAD, unsupported operations/index modes, ambient repository/index selectors, tracked output type and clean prepared index. Optional locks disabled for preflight. Uses a single normal git commit --only with literal pathspecs, never git add/reset or --no-verify. Checks index/HEAD before and committed parent/path set after; errors propagate and no-op returns observed existing commit."
+        },
+        {
+          "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+          "start_line": 235,
+          "end_line": 260,
+          "observation": "Only the YAML producer output is passed; success proof prints after successful helper return."
+        },
+        {
+          "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+          "start_line": 263,
+          "end_line": 297,
+          "observation": "Only the YAML producer output is passed; helper failure prevents success proof."
+        },
+        {
+          "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+          "start_line": 300,
+          "end_line": 326,
+          "observation": "Only the YAML producer output is passed; helper failure prevents success proof."
+        },
+        {
+          "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+          "start_line": 359,
+          "end_line": 372,
+          "observation": "Only producer outputs whose mutation flags are true are passed; unselected dirty YAML/PROJECT is excluded."
+        }
+      ],
+      "guards": [
+        "Fixed allowlist with per-consumer output subset",
+        "Read-only preflight and byte snapshots",
+        "Literal pathspecs and --only",
+        "Regular tracked outputs and clean initial prepared index",
+        "No reset/clean/stash/manual rollback of foreign state"
+      ]
+    }
+  ],
+  "source_checks": [
+    {
+      "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+      "start_line": 38,
+      "end_line": 43,
+      "observation": "Index snapshots use O_NOFOLLOW and reject nonregular types; bytes are compared without any automatic restoration."
+    },
+    {
+      "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+      "start_line": 46,
+      "end_line": 61,
+      "observation": "Selected output components are opened descriptor-relatively without following symlinks; final selected output must be regular."
+    },
+    {
+      "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+      "start_line": 64,
+      "end_line": 154,
+      "observation": "Validates fixed allowlist/subset, message, repository root, existing symbolic HEAD, unsupported operations/index modes, ambient repository/index selectors, tracked output type and clean prepared index. Optional locks disabled for preflight. Uses a single normal git commit --only with literal pathspecs, never git add/reset or --no-verify. Checks index/HEAD before and committed parent/path set after; errors propagate and no-op returns observed existing commit."
+    },
+    {
+      "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+      "start_line": 235,
+      "end_line": 260,
+      "observation": "Only the YAML producer output is passed; success proof prints after successful helper return."
+    },
+    {
+      "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+      "start_line": 263,
+      "end_line": 297,
+      "observation": "Only the YAML producer output is passed; helper failure prevents success proof."
+    },
+    {
+      "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+      "start_line": 300,
+      "end_line": 326,
+      "observation": "Only the YAML producer output is passed; helper failure prevents success proof."
+    },
+    {
+      "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+      "start_line": 359,
+      "end_line": 372,
+      "observation": "Only producer outputs whose mutation flags are true are passed; unselected dirty YAML/PROJECT is excluded."
+    },
+    {
+      "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+      "start_line": 165,
+      "end_line": 179,
+      "observation": "Writes YAML before Git commit. Git rejection does not roll back generated file content; this persistence behavior is outside C0499/C0500."
+    },
+    {
+      "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+      "start_line": 27,
+      "end_line": 35,
+      "observation": "Existing fallback used on producer no-mutation paths is unchanged; its process-kill behavior is not claimed fixed. Fixture explicitly blocks process kill."
+    }
+  ],
+  "independent_controls": [
+    {
+      "name": "only_yaml_excludes_other_worktree_files",
+      "passed": true
+    },
+    {
+      "name": "three_rejecting_hooks_once_preserve_head_and_index",
+      "passed": true,
+      "cases": 3
+    },
+    {
+      "name": "declared_two_file_commit_runs_all_normal_hooks",
+      "passed": true
+    },
+    {
+      "name": "no_op_returns_observed_existing_head_without_commit",
+      "passed": true
+    },
+    {
+      "name": "prepared_or_special_index_rejected_byte_identically",
+      "passed": true,
+      "cases": 5
+    },
+    {
+      "name": "unsupported_output_types_or_untracked_paths_rejected",
+      "passed": true,
+      "cases": 4
+    },
+    {
+      "name": "ambient_index_selector_and_nonallowlisted_paths_rejected_before_git",
+      "passed": true
+    },
+    {
+      "name": "nonhook_git_error_no_retry_no_staging",
+      "passed": true
+    },
+    {
+      "name": "concurrent_foreign_staging_excluded_and_preserved",
+      "passed": true
+    },
+    {
+      "name": "consumer_propagates_failure_without_success_claim",
+      "passed": true,
+      "limitation": "Generated YAML stays modified; persistence rollback is outside this lot."
+    }
+  ],
+  "observed_limitations": [
+    {
+      "name": "concurrent_same_output_staging_window",
+      "observed": true,
+      "detail": "Another writer staging a selected path after final preflight loses that staged version when --only commits current worktree. No global transaction or same-output concurrency guarantee.",
+      "returned_hash_matches_head": true
+    },
+    {
+      "name": "trusted_hook_can_widen_commit_before_postvalidation",
+      "observed": true,
+      "detail": "Hook using git add stages an extra route in Git temporary index. Helper rejects postvalidation without undoing the already created commit; hooks are not sandboxed."
+    }
+  ],
+  "validation": {
+    "independent_control_count": 10,
+    "independent_controls_log": "docs/security/evidence/swarm100-lot8-20261029/independent-adversarial-initial.log",
+    "temporary_repositories": 21,
+    "git_command_count": 540,
+    "regressions": {
+      "executed_by_reviewer": true,
+      "passed": 61,
+      "failed": 0,
+      "duration_seconds": 30.3,
+      "log": "docs/security/evidence/swarm100-lot8-20261029/independent-regressions.log",
+      "source_and_test_hashes_stable": true
+    },
+    "ruff": {
+      "executed_by_reviewer": true,
+      "result": "PASS",
+      "log": "docs/security/evidence/swarm100-lot8-20261029/independent-ruff.log",
+      "paths": [
+        "scripts/c5_cortex/cortex_objectives_transducer.py",
+        "tests/test_swarm100_lot8_regressions.py",
+        "docs/security/evidence/swarm100-lot8-20261029/independent-adversarial.py"
+      ]
+    },
+    "history": "Independent harness source was stable before/after; shared tests were still expanding and their two hashes are preserved in its log. Final 61-case run used stable final source and final test hashes."
+  },
+  "baseline": {
+    "source_sha256": "061f5a4f7ec065db523efc14441885f0c27d5ff6bc4506ff5bb850f9d4d45251",
+    "log": "docs/security/evidence/swarm100-lot8-20261029/before-tests.log",
+    "result": "7 failed in 1.97s",
+    "execution": "Parent reproduction log inspected; not independently rerun against old production."
+  },
+  "design_changes_reviewed": [
+    "Automatic --no-verify retry removed.",
+    "No broad git add and no manual reset rollback; normal git commit --only controls the temporary preparation.",
+    "Callers pass only outputs their producers reported changed, preventing an unrelated dirty PROJECT file from inclusion by YAML-only commands.",
+    "New/untracked selected outputs, detached/unborn HEAD, sparse/split indexes, in-progress operations, special index flags and repository/index selectors are explicitly unsupported and rejected."
+  ],
+  "limitations": [
+    "Git executable, configuration, clean filters and hooks are trusted executable dependencies. This helper does not sandbox them. A hook can stage another path and create a widened commit before postvalidation rejects it; no automatic destructive undo is attempted. This was reproduced.",
+    "There is no atomic global transaction against another writer staging/changing the same selected output between final preflight and Git acquiring its own lock. Such staged content can be replaced by --only. This was reproduced; staging of a different path was independently shown preserved and excluded.",
+    "Commit ownership is at selected-file granularity. Pre-existing edits within a file rewritten by a producer are not separated by hunk.",
+    "The two generated working-tree files may remain changed when commit fails. No persistence transaction/rollback, downstream ledger guarantee or unrelated defect is closed by this review.",
+    "Configured hooks may reject or hang; this change does not guarantee bounded execution of arbitrary hook code. No operational hook, real checkout commit, push/publication, network, real signing key, hardware or ATTESTED artifact was used.",
+    "No-op returns an observed existing valid HEAD, not a newly created commit. Postvalidation observes parent/routing scope; it does not certify signature, authorship or immutable future branch state."
+  ],
+  "discovery": {
+    "project": "babylon-60",
+    "root": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+    "method": "Native index_status/get_code_snippet/trace_path/check_index_coverage first; stale index refreshed asynchronously then completed; exact source read for changed ranges.",
+    "final_generation": "2026-10-29T21:11:07Z",
+    "final_path_freshness": "metadata_match",
+    "callers": "Four production consumers plus the independent evidence harness are visible in final inbound graph.",
+    "caveat": "Graph freshness is best effort; source and hashes were also inspected."
+  },
+  "documentation": [
+    {
+      "library": "/git/htmldocs",
+      "url": "https://github.com/git/htmldocs/blob/gh-pages/git-commit.adoc",
+      "supports": "Pathspec/--only selected-file commit semantics and normal hooks."
+    },
+    {
+      "library": "/git/htmldocs",
+      "url": "https://github.com/git/htmldocs/blob/gh-pages/githooks.adoc",
+      "supports": "Rejecting pre-commit/prepare-commit-msg/commit-msg abort; post-commit runs after commit."
+    },
+    {
+      "library": "/git/htmldocs",
+      "url": "https://github.com/git/htmldocs/blob/gh-pages/git.adoc",
+      "supports": "GIT_OPTIONAL_LOCKS and index/repository environment selectors."
+    }
+  ],
+  "evidence_paths": [
+    "docs/security/evidence/swarm100-lot8-20261029/independent-adversarial.py",
+    "docs/security/evidence/swarm100-lot8-20261029/independent-adversarial-initial.log",
+    "docs/security/evidence/swarm100-lot8-20261029/independent-regressions.log",
+    "docs/security/evidence/swarm100-lot8-20261029/independent-ruff.log",
+    "docs/security/evidence/swarm100-lot8-20261029/before-source-manifest.json",
+    "docs/security/evidence/swarm100-lot8-20261029/before-tests.log"
+  ]
+}

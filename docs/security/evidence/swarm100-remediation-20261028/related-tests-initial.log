@@ -1,0 +1,139 @@
+Uninstalled 1 package in 2ms
+Installed 1 package in 2ms
+...................................................EEE..EE....EEEE...EEE [ 54%]
+..EE....................F........s...........................            [100%]
+==================================== ERRORS ====================================
+_ ERROR at setup of test_disbelief_rejects_forged_ledger_metadata[separate-ledger_event_id-forged-event] _
+tests/test_memory_governance_falsification.py:97: in disbelief_case
+    fact = engine.add_record(
+01_KISH_ENGINE/babylon60/memory/governance.py:471: in add_record
+    ledger_res = self.ledger.append_event(
+01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py:267: in append_event
+    raise ValueError("Ledger append requires a transaction on the same database")
+E   ValueError: Ledger append requires a transaction on the same database
+_ ERROR at setup of test_disbelief_rejects_forged_ledger_metadata[separate-lamport_t-999999] _
+tests/test_memory_governance_falsification.py:97: in disbelief_case
+    fact = engine.add_record(
+01_KISH_ENGINE/babylon60/memory/governance.py:471: in add_record
+    ledger_res = self.ledger.append_event(
+01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py:267: in append_event
+    raise ValueError("Ledger append requires a transaction on the same database")
+E   ValueError: Ledger append requires a transaction on the same database
+_ ERROR at setup of test_disbelief_rejects_forged_ledger_metadata[separate-affected_dependents_json-[]] _
+tests/test_memory_governance_falsification.py:97: in disbelief_case
+    fact = engine.add_record(
+01_KISH_ENGINE/babylon60/memory/governance.py:471: in add_record
+    ledger_res = self.ledger.append_event(
+01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py:267: in append_event
+    raise ValueError("Ledger append requires a transaction on the same database")
+E   ValueError: Ledger append requires a transaction on the same database
+_ ERROR at setup of test_disbelief_requires_matching_intact_ledger_event[separate-missing] _
+tests/test_memory_governance_falsification.py:97: in disbelief_case
+    fact = engine.add_record(
+01_KISH_ENGINE/babylon60/memory/governance.py:471: in add_record
+    ledger_res = self.ledger.append_event(
+01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py:267: in append_event
+    raise ValueError("Ledger append requires a transaction on the same database")
+E   ValueError: Ledger append requires a transaction on the same database
+_ ERROR at setup of test_disbelief_requires_matching_intact_ledger_event[separate-other-event] _
+tests/test_memory_governance_falsification.py:97: in disbelief_case
+    fact = engine.add_record(
+01_KISH_ENGINE/babylon60/memory/governance.py:471: in add_record
+    ledger_res = self.ledger.append_event(
+01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py:267: in append_event
+    raise ValueError("Ledger append requires a transaction on the same database")
+E   ValueError: Ledger append requires a transaction on the same database
+_ ERROR at setup of test_disbelief_requires_intact_evidence_blobs[separate-delete-fact] _
+tests/test_memory_governance_falsification.py:97: in disbelief_case
+    fact = engine.add_record(
+01_KISH_ENGINE/babylon60/memory/governance.py:471: in add_record
+    ledger_res = self.ledger.append_event(
+01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py:267: in append_event
+    raise ValueError("Ledger append requires a transaction on the same database")
+E   ValueError: Ledger append requires a transaction on the same database
+_ ERROR at setup of test_disbelief_requires_intact_evidence_blobs[separate-delete-counter] _
+tests/test_memory_governance_falsification.py:97: in disbelief_case
+    fact = engine.add_record(
+01_KISH_ENGINE/babylon60/memory/governance.py:471: in add_record
+    ledger_res = self.ledger.append_event(
+01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py:267: in append_event
+    raise ValueError("Ledger append requires a transaction on the same database")
+E   ValueError: Ledger append requires a transaction on the same database
+_ ERROR at setup of test_disbelief_requires_intact_evidence_blobs[separate-tamper-fact] _
+tests/test_memory_governance_falsification.py:97: in disbelief_case
+    fact = engine.add_record(
+01_KISH_ENGINE/babylon60/memory/governance.py:471: in add_record
+    ledger_res = self.ledger.append_event(
+01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py:267: in append_event
+    raise ValueError("Ledger append requires a transaction on the same database")
+E   ValueError: Ledger append requires a transaction on the same database
+_ ERROR at setup of test_disbelief_requires_intact_evidence_blobs[separate-tamper-counter] _
+tests/test_memory_governance_falsification.py:97: in disbelief_case
+    fact = engine.add_record(
+01_KISH_ENGINE/babylon60/memory/governance.py:471: in add_record
+    ledger_res = self.ledger.append_event(
+01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py:267: in append_event
+    raise ValueError("Ledger append requires a transaction on the same database")
+E   ValueError: Ledger append requires a transaction on the same database
+_ ERROR at setup of test_disbelief_rejects_inactive_counter_evidence[separate-DISBELIEVED] _
+tests/test_memory_governance_falsification.py:97: in disbelief_case
+    fact = engine.add_record(
+01_KISH_ENGINE/babylon60/memory/governance.py:471: in add_record
+    ledger_res = self.ledger.append_event(
+01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py:267: in append_event
+    raise ValueError("Ledger append requires a transaction on the same database")
+E   ValueError: Ledger append requires a transaction on the same database
+_ ERROR at setup of test_disbelief_rejects_inactive_counter_evidence[separate-DISBELIEVED_DEPENDENCY] _
+tests/test_memory_governance_falsification.py:97: in disbelief_case
+    fact = engine.add_record(
+01_KISH_ENGINE/babylon60/memory/governance.py:471: in add_record
+    ledger_res = self.ledger.append_event(
+01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py:267: in append_event
+    raise ValueError("Ledger append requires a transaction on the same database")
+E   ValueError: Ledger append requires a transaction on the same database
+_ ERROR at setup of test_disbelief_rejects_inactive_counter_evidence[separate-STALE] _
+tests/test_memory_governance_falsification.py:97: in disbelief_case
+    fact = engine.add_record(
+01_KISH_ENGINE/babylon60/memory/governance.py:471: in add_record
+    ledger_res = self.ledger.append_event(
+01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py:267: in append_event
+    raise ValueError("Ledger append requires a transaction on the same database")
+E   ValueError: Ledger append requires a transaction on the same database
+_ ERROR at setup of test_disbelief_blocks_exact_reinference_after_reopen[separate-None] _
+tests/test_memory_governance_falsification.py:97: in disbelief_case
+    fact = engine.add_record(
+01_KISH_ENGINE/babylon60/memory/governance.py:471: in add_record
+    ledger_res = self.ledger.append_event(
+01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py:267: in append_event
+    raise ValueError("Ledger append requires a transaction on the same database")
+E   ValueError: Ledger append requires a transaction on the same database
+_ ERROR at setup of test_disbelief_blocks_exact_reinference_after_reopen[separate-abababababababababababababababab] _
+tests/test_memory_governance_falsification.py:97: in disbelief_case
+    fact = engine.add_record(
+01_KISH_ENGINE/babylon60/memory/governance.py:471: in add_record
+    ledger_res = self.ledger.append_event(
+01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py:267: in append_event
+    raise ValueError("Ledger append requires a transaction on the same database")
+E   ValueError: Ledger append requires a transaction on the same database
+=================================== FAILURES ===================================
+_____ test_m0_compiler_dynamic_claims_cardinality_without_hardcoded_count ______
+tests/test_m0_evidence_pack_acceptance.py:148: in test_m0_compiler_dynamic_claims_cardinality_without_hardcoded_count
+    assert manifest["metrics"]["supported_within_scope"] == 2
+E   assert 0 == 2
+=========================== short test summary info ============================
+FAILED tests/test_m0_evidence_pack_acceptance.py::test_m0_compiler_dynamic_claims_cardinality_without_hardcoded_count
+ERROR tests/test_memory_governance_falsification.py::test_disbelief_rejects_forged_ledger_metadata[separate-ledger_event_id-forged-event]
+ERROR tests/test_memory_governance_falsification.py::test_disbelief_rejects_forged_ledger_metadata[separate-lamport_t-999999]
+ERROR tests/test_memory_governance_falsification.py::test_disbelief_rejects_forged_ledger_metadata[separate-affected_dependents_json-[]]
+ERROR tests/test_memory_governance_falsification.py::test_disbelief_requires_matching_intact_ledger_event[separate-missing]
+ERROR tests/test_memory_governance_falsification.py::test_disbelief_requires_matching_intact_ledger_event[separate-other-event]
+ERROR tests/test_memory_governance_falsification.py::test_disbelief_requires_intact_evidence_blobs[separate-delete-fact]
+ERROR tests/test_memory_governance_falsification.py::test_disbelief_requires_intact_evidence_blobs[separate-delete-counter]
+ERROR tests/test_memory_governance_falsification.py::test_disbelief_requires_intact_evidence_blobs[separate-tamper-fact]
+ERROR tests/test_memory_governance_falsification.py::test_disbelief_requires_intact_evidence_blobs[separate-tamper-counter]
+ERROR tests/test_memory_governance_falsification.py::test_disbelief_rejects_inactive_counter_evidence[separate-DISBELIEVED]
+ERROR tests/test_memory_governance_falsification.py::test_disbelief_rejects_inactive_counter_evidence[separate-DISBELIEVED_DEPENDENCY]
+ERROR tests/test_memory_governance_falsification.py::test_disbelief_rejects_inactive_counter_evidence[separate-STALE]
+ERROR tests/test_memory_governance_falsification.py::test_disbelief_blocks_exact_reinference_after_reopen[separate-None]
+ERROR tests/test_memory_governance_falsification.py::test_disbelief_blocks_exact_reinference_after_reopen[separate-abababababababababababababababab]
+1 failed, 117 passed, 1 skipped, 14 errors in 7.26s

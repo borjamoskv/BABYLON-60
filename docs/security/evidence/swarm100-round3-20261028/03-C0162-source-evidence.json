@@ -1,0 +1,73 @@
+{
+  "reviewer": "03",
+  "candidate_id": "SW100-C0162",
+  "discovery": "Native graph tools were not exposed; scoped source, consumer and canonical module searches were used.",
+  "source_checks": [
+    {
+      "path": "tools/skill_library/global/categorical-hallucination-audit/scripts/audit_kl_d.py",
+      "start_line": 18,
+      "end_line": 35,
+      "observation": "The primitive names a prior vector without a time origin. It normalizes T and pi0 but does not require stationarity or accept a target-indexed prior.",
+      "sha256": "34f7e6532eed0d70c2cd0d5795c5b269b02cdc44b2e0e8a69fdf89eb9728a0dc",
+      "excerpt": "18: def compute_kan_extension_kl_d(S, T, pi0, history, window, target_t):\n19:     \"\"\"\n20:     Computes Lan_i(i*X)(target_t) in Kl(D).\n21: \\x20\\x20\\x20\\x20\n22:     S: list of state names\n23:     T: stochastic transition matrix (n x n)\n24:     pi0: prior distribution vector (n)\n25:     history: dict {t: state_name}\n26:     window: list of timesteps observed P\n27:     target_t: timestep to evaluate\n28:     \"\"\"\n29:     n = len(S)\n30:     T = np.array(T, dtype=float)\n31:     pi0 = np.array(pi0, dtype=float)\n32: \n33:     # Normalize\n34:     T = T / T.sum(axis=1, keepdims=True)\n35:     pi0 = pi0 / pi0.sum()"
+    },
+    {
+      "path": "tools/skill_library/global/categorical-hallucination-audit/scripts/audit_kl_d.py",
+      "start_line": 45,
+      "end_line": 51,
+      "observation": "Every backward target multiplies the same pi0 directly by target-to-observation likelihood, treating it as that target's marginal.",
+      "sha256": "34f7e6532eed0d70c2cd0d5795c5b269b02cdc44b2e0e8a69fdf89eb9728a0dc",
+      "excerpt": "45:     if target_t < min(P):\n46:         p1 = P[0]\n47:         s_p1_idx = S.index(history[p1])\n48:         steps = p1 - target_t\n49:         T_steps = np.linalg.matrix_power(T, steps)\n50:         joint = pi0 * T_steps[:, s_p1_idx]\n51:         return joint / joint.sum() if joint.sum() > 0 else np.ones(n) / n"
+    },
+    {
+      "path": "tools/skill_library/global/categorical-hallucination-audit/scripts/audit_kl_d.py",
+      "start_line": 78,
+      "end_line": 101,
+      "observation": "audit_system calls the primitive for multiple target timesteps with the unchanged pi0 and converts each distribution into reported audit metrics.",
+      "sha256": "34f7e6532eed0d70c2cd0d5795c5b269b02cdc44b2e0e8a69fdf89eb9728a0dc",
+      "excerpt": "78: def audit_system(S, T, pi0, history, window, target_timesteps):\n79:     results = []\n80:     for t in target_timesteps:\n81:         dist = compute_kan_extension_kl_d(S, T, pi0, history, window, t)\n82:         true_state = history[t]\n83:         true_idx = S.index(true_state)\n84:         p_true = float(dist[true_idx])\n85:         hallucination_rate = 1.0 - p_true\n86:         surprisal = float(-np.log2(p_true)) if p_true > 1e-12 else 100.0\n87: \n88:         # Dirac delta on truth\n89:         dirac = np.zeros(len(S))\n90:         dirac[true_idx] = 1.0\n91:         w1 = float(compute_wasserstein_1d(dist, dirac))\n92: \n93:         results.append({\n94:             \"target_t\": int(t),\n95:             \"true_state\": true_state,\n96:             \"p_true\": round(p_true, 4),\n97:             \"hallucination_rate\": round(hallucination_rate, 4),\n98:             \"surprisal_bits\": round(surprisal, 4),\n99:             \"wasserstein_dist\": round(w1, 4),\n100:             \"distribution\": {S[i]: round(float(dist[i]), 4) for i in range(len(S))}\n101:         })"
+    },
+    {
+      "path": "tools/skill_library/global/categorical-hallucination-audit/scripts/audit_kl_d.py",
+      "start_line": 105,
+      "end_line": 112,
+      "observation": "The public JSON CLI exposes one pi0 and a list of targets, with no per-target prior or stationary-input restriction.",
+      "sha256": "34f7e6532eed0d70c2cd0d5795c5b269b02cdc44b2e0e8a69fdf89eb9728a0dc",
+      "excerpt": "105: def main():\n106:     if len(sys.argv) > 1 and sys.argv[1] == \"--json\":\n107:         # Example JSON invocation\n108:         data = json.load(sys.stdin)\n109:         res = audit_system(data[\"states\"], data[\"T\"], data[\"pi0\"],\n110:                            {int(k): v for k, v in data[\"history\"].items()},\n111:                            data[\"window\"], data[\"targets\"])\n112:         print(json.dumps(res, indent=2))"
+    },
+    {
+      "path": "tools/skill_library/global/categorical-hallucination-audit/SKILL.md",
+      "start_line": 18,
+      "end_line": 31,
+      "observation": "The local alias preserves and links the canonical module contract; resources remain beside the alias and in the hub.",
+      "sha256": "1038d9563c5e2dda9813139b8fbce1ced4577e3dc9b1947dd910facdce15b5c7",
+      "excerpt": "18: # categorical-hallucination-audit\n19: \n20: > **Directiva Declarativa:** Alias compatible del hub epistémico; conserva el contrato del módulo original.\n21: \n22: ## Cargar el módulo\n23: \n24: Lee [las instrucciones originales](../c5-epistemic-thermodynamics/references/modules/categorical-hallucination-audit/MODULE.md) antes de aplicar esta habilidad.\n25: Conserva sus triggers, rol, restricciones, procedimiento y alcance.\n26: Carga únicamente los recursos pertinentes a la petición.\n27: \n28: ## Recursos y rutas\n29: \n30: Los recursos originales permanecen junto a este alias y se conservan completos dentro del hub.\n31: Resuelve las referencias relativas desde el archivo del módulo que hayas leído."
+    },
+    {
+      "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/categorical-hallucination-audit/MODULE.md",
+      "start_line": 42,
+      "end_line": 48,
+      "observation": "The canonical contract defines one joint process rho on the history and prediction/retrodiction as its Bayesian conditional marginals. This requires coherence across targets rather than unrelated target-specific processes.",
+      "sha256": "d7e3bff4781f1a14721b49450a9f77dff6e09eb30c9b3fb8344cc98c565c72c0",
+      "excerpt": "42: ### 3. Desintegración Bayesiana en Categorías de Markov\n43: - Dada una ventana de contexto $P \\subseteq H$ con inclusión $i: P \\hookrightarrow H$:\n44:   - En $\\mathbf{Set}$ (Retrieval Puro): El colímite de extensión clásica $Lan_i$ da $\\emptyset$ para el pasado no visto (silencio/rechazo) o repetición del borde para el futuro.\n45:   - En $\\mathrm{Kl}(\\mathcal{D})$ (Generador Estocástico): Evítese el uso abusivo de colímites pesados. Trátese $\\mathrm{Kl}(\\mathcal{D})$ como una **Categoría de Markov** con comonoides de copia-descarte ($\\Delta, !$). El proceso $\\mathcal{P}$ es un estado conjunto $\\rho: \\mathbf{1} \\to S^H$. La predicción/retrodicción en $t \\notin P$ condicionado a la evidencia $S_P$ es exactamente la **desintegración bayesiana** del estado marginal conjunto $\\rho_{P \\cup \\{t\\}}$ respecto a $\\rho_P$, la cual es única casi seguramente.\n46: \n47: ### 4. Co-descomposición del Defecto y Firma Falsable\n48: - Sea $p = \\mathbb{P}_{\\mathrm{true}}(S_t \\mid S_P)$ la distribución real de la naturaleza y $q = \\mathbb{P}_{\\mathrm{model}}(S_t \\mid S_P)$ la hipótesis generativa del modelo."
+    },
+    {
+      "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/categorical-hallucination-audit/scripts/audit_kl_d.py",
+      "start_line": 78,
+      "end_line": 86,
+      "observation": "The canonical hub copy has the same SHA-256 as the assigned alias source and the same shared-pi0 batch consumer.",
+      "sha256": "34f7e6532eed0d70c2cd0d5795c5b269b02cdc44b2e0e8a69fdf89eb9728a0dc",
+      "excerpt": "78: def audit_system(S, T, pi0, history, window, target_timesteps):\n79:     results = []\n80:     for t in target_timesteps:\n81:         dist = compute_kan_extension_kl_d(S, T, pi0, history, window, t)\n82:         true_state = history[t]\n83:         true_idx = S.index(true_state)\n84:         p_true = float(dist[true_idx])\n85:         hallucination_rate = 1.0 - p_true\n86:         surprisal = float(-np.log2(p_true)) if p_true > 1e-12 else 100.0"
+    }
+  ],
+  "search_scope": [
+    "tools/skill_library/global/categorical-hallucination-audit",
+    "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/categorical-hallucination-audit",
+    "docs",
+    "tests",
+    "01_KISH_ENGINE",
+    "02_EDIN_SWARMS",
+    "scripts"
+  ],
+  "limits": "No local consumer with an explicit time origin was found. Cross-target coherence is the independent basis of the decision."
+}

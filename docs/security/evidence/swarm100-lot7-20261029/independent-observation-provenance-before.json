@@ -1,0 +1,8 @@
+{
+  "source_sha256": "bcc453d2a28aa117e0df6949c0a4561d866064bad3a577cb3a3cd060eed36d0b",
+  "path_observation_state": "COLLECTED_READ_ONLY",
+  "provenance": "REPORTED_STATUSES_NOT_PROOF",
+  "actual_path_observation_executed": false,
+  "signature_status": "UNSIGNED",
+  "scope": "Pure export of caller-supplied fixture observations; no maintenance, solver, hardware or runtime evidence generated."
+}

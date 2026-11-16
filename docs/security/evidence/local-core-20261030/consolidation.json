@@ -1,0 +1,79 @@
+[
+  {
+    "unit": "01-database",
+    "commit": "ea43d142ac98423586416eddc594c26fb3a8e01d",
+    "paths": [
+      "01_KISH_ENGINE/babylon60/database/core.py",
+      "tests/test_database_config_cleanup.py"
+    ]
+  },
+  {
+    "unit": "02-consensus",
+    "commit": "84163fba337956fed15f769de5cb235f9f92f56d",
+    "paths": [
+      "01_KISH_ENGINE/babylon60/bft/consensus_committer.py",
+      "01_KISH_ENGINE/babylon60/bft/consensus_ledger.py",
+      "tests/test_consensus_atomic_commit.py",
+      "tests/test_consensus_fault_recovery.py",
+      "tests/test_consensus_recovery_regressions.py"
+    ]
+  },
+  {
+    "unit": "03-ledger",
+    "commit": "df0517cf8e4550b373921906bf329336aae3f749",
+    "paths": [
+      "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+      "01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py",
+      "tests/test_swarm100_lot5_regressions.py"
+    ]
+  },
+  {
+    "unit": "04-json-memory",
+    "commit": "a7739a5b83c4308cf23f97e17b6375457bcb5801",
+    "paths": [
+      "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+      "tests/test_swarm100_lot11_regressions.py"
+    ]
+  },
+  {
+    "unit": "05-native-recovery",
+    "commit": "e3f9e1691e9cc32c359654dbd59f115110d65ecd",
+    "paths": [
+      "src/secure_fs.rs",
+      "tests/adversarial_nemesis.rs",
+      "tests/nemesis_wave3.rs",
+      "tests/fl_rec01_recovery_provenance.rs"
+    ]
+  },
+  {
+    "unit": "06-formal-harness",
+    "commit": "03cd1603d4d4eb6152ec468619eb1ca2e89bd275",
+    "paths": [
+      "crates/b60-lang/src/bin/fsm_poc.rs",
+      "crates/b60-lang/src/bin/fsm_stress.rs",
+      "crates/b60-lang/src/bin/support/lean_harness.rs",
+      "crates/b60-lang/tests/lean_harness.rs",
+      "proof/lean/BabylonTrace.lean",
+      "proof/lean/AX0.lean",
+      "proof/lean/NemesisWave4.lean"
+    ]
+  },
+  {
+    "unit": "07-native-signing",
+    "commit": "383eb3b6269b210dbc5ec94176a53cb7a8dfbe6a",
+    "paths": [
+      "scripts/c5_demos/c5_biometric_gate.swift",
+      "tests/test_biometric_signing_contract.py"
+    ]
+  },
+  {
+    "unit": "08-mcp-dispatch",
+    "commit": "eb28fa97bb0440d59878b955222aa0617a1c236b",
+    "paths": [
+      "01_KISH_ENGINE/babylon60/mcp/cortex_mcp_server.py",
+      "01_KISH_ENGINE/babylon60/mcp/effect_dispatch.py",
+      "01_KISH_ENGINE/babylon60/mcp/mail_integration.py",
+      "tests/test_fl_mcp01_dispatch.py"
+    ]
+  }
+]

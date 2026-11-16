@@ -1,0 +1,20 @@
+{
+  "command": [
+    "uv",
+    "run",
+    "--locked",
+    "--no-sync",
+    "python",
+    "docs/security/evidence/swarm100-lot12-20261030/run_confined_tests.py",
+    "docs/security/evidence/swarm100-lot12-20261030/review_reports_formal/independent_checks.py",
+    "-q",
+    "-o",
+    "addopts=--tb=short"
+  ],
+  "env": {
+    "B60_REVIEW_LEAN_BINARY": "/Users/borjafernandezangulo/.elan/toolchains/leanprover--lean4---v4.35.0/bin/lean"
+  },
+  "exit_code": 0,
+  "log": "docs/security/evidence/swarm100-lot12-20261030/review_reports_formal/independent-controls-final.log",
+  "sha256": "02a7449b1a162de5b3ea1c1b9883d784e0cf2a076181632eab26f0484f653669"
+}

@@ -1,0 +1,57 @@
+{
+  "scope": "Isolated pure source definitions and synthetic temporary inputs; no package integration, native execution, or network calls.",
+  "checks": [
+    {
+      "candidate_id": "SW100-C0292",
+      "result": "PASS",
+      "accepted": false,
+      "detail": "JSON requerido: una raíz escrita en Markdown no demuestra integridad"
+    },
+    {
+      "candidate_id": "SW100-C0293",
+      "result": "PASS",
+      "evidence_digest": null,
+      "accepted": true,
+      "detail": "INTEGRITY_VERIFIED: Merkle Root matches a9681395b475e1f28b103524e56763741dbfcc0a9cfabd04a06463d0ea51e1c1"
+    },
+    {
+      "candidate_id": "SW100-C0293",
+      "result": "PASS",
+      "evidence_digest": "",
+      "accepted": true,
+      "detail": "INTEGRITY_VERIFIED: Merkle Root matches a9681395b475e1f28b103524e56763741dbfcc0a9cfabd04a06463d0ea51e1c1"
+    },
+    {
+      "candidate_id": "SW100-C0547",
+      "result": "REPRODUCED",
+      "consumed_units": -500.0,
+      "remaining_units": 600.0,
+      "tripped": false
+    },
+    {
+      "candidate_id": "SW100-C0197",
+      "result": "REJECTED_LINK_IS_CORRECT",
+      "link": "../../../proof/lean/BabylonTrace.lean",
+      "resolved_repository_relative": "proof/lean/BabylonTrace.lean"
+    },
+    {
+      "candidate_id": "SW100-C0197",
+      "result": "REJECTED_LINK_IS_CORRECT",
+      "link": "../../../proof/lean/AX0.lean",
+      "resolved_repository_relative": "proof/lean/AX0.lean"
+    },
+    {
+      "candidate_id": "SW100-C0197",
+      "result": "REJECTED_LINK_IS_CORRECT",
+      "link": "../../../CLAIMS.toml",
+      "resolved_repository_relative": "CLAIMS.toml"
+    }
+  ],
+  "source_sha256": {
+    "01_KISH_ENGINE/babylon60/autodidact/types.py": "5aa59b3488ccf03d7a0bf0f8d4e2573a4f074843c5fde8a852af667e77d9049a",
+    "01_KISH_ENGINE/babylon60/autodidact/epistemology.py": "2384037959edb8e58bcd9023e1373eea954ab4a8fa02a14e5694dbfb3057f1a5",
+    "01_KISH_ENGINE/babylon60/autodidact/crystal_compiler.py": "bd2a08e1e421690740a95743af291b37706129ed5634a9d554a0f18c8723abbe",
+    "01_KISH_ENGINE/babylon60/guards/token_lease_guard.py": "808cd8dacd5a3e3130e6dcf9b8c96a4fc3d58ee3a20571e2e44a632aedfa8df4",
+    "00_ABZU_KERNEL/crates/babylon60-compiler/README.md": "54c8a1a081f0d789ab0bbebd125197039bdb7dbb1fe8c39a09caade337a7d340"
+  }
+}

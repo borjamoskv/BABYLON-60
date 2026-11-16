@@ -1,0 +1,55 @@
+{
+  "source_sha256": "668ef1b2511a52fff1acf5f1ac4bfd325e3fd4b6789116f47bf01c733fa21b19",
+  "final_source_sha256": "668ef1b2511a52fff1acf5f1ac4bfd325e3fd4b6789116f47bf01c733fa21b19",
+  "source_stable": true,
+  "checks": [
+    {
+      "name": "unsigned_baseline",
+      "status": "PASS",
+      "detail": "Default refuses authentication; explicit integrity stays limited."
+    },
+    {
+      "name": "signed_body_binding",
+      "status": "PASS",
+      "detail": "Temporary P-256 math validates unchanged body and rejects rehashed commit mutation."
+    },
+    {
+      "name": "claims_budget",
+      "status": "PASS",
+      "detail": "Oversize claims rejected before output creation."
+    },
+    {
+      "name": "strict_json",
+      "status": "PASS",
+      "detail": "Overflow, nonfinite literals, duplicate keys and invalid surrogate rejected."
+    },
+    {
+      "name": "output_collisions",
+      "status": "PASS",
+      "detail": "Existing file, directory and symlink preserved."
+    },
+    {
+      "name": "write_rollback",
+      "status": "PASS",
+      "detail": "Failure during first fsync removes only the newly created output."
+    },
+    {
+      "name": "observed_read_mutation",
+      "status": "PASS",
+      "detail": "Observed size/identity change while reading is rejected."
+    },
+    {
+      "name": "unexpected_bundle_entry",
+      "status": "PASS",
+      "detail": "Extra bundle entries rejected rather than silently left unbound."
+    },
+    {
+      "name": "exact_read_budget",
+      "status": "PASS",
+      "detail": "Read budget accepts exact bound and rejects one byte over."
+    }
+  ],
+  "passed": 9,
+  "failed": 0,
+  "scope": "Temporary roots/HOME, observed-platform and Git stubs, temporary software keys; no ATTESTED, hardware, real Git, network or operator data."
+}

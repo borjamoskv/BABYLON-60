@@ -1,0 +1,66 @@
+[
+  {
+    "candidate_id": "SW100-C0556",
+    "path": "scripts/c5_verifiers/fast_smt_gate.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "DAG, KDA, BFT, thermodynamic and epistemic invariant results are literal True values, apart from root and skills path existence checks. The resulting booleans are aggregated into SYSTEM_SOUND_AND_COMPLIANT without inspecting the claimed implementations or calling a solver. daily_sovereign_maintenance consumes this script exit status as fast_smt_gate_pass. This confirms unsupported quality-gate evidence; no conclusion is drawn about whether the underlying invariants actually hold.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_verifiers/fast_smt_gate.py",
+        "start_line": 23,
+        "end_line": 42,
+        "observation": "DAG results are constants except root existence."
+      },
+      {
+        "path": "scripts/c5_verifiers/fast_smt_gate.py",
+        "start_line": 45,
+        "end_line": 123,
+        "observation": "KDA/BFT/exergy/epistemic checks append literal True values."
+      },
+      {
+        "path": "scripts/c5_verifiers/fast_smt_gate.py",
+        "start_line": 126,
+        "end_line": 131,
+        "observation": "Agent check only tests directory existence."
+      },
+      {
+        "path": "scripts/c5_verifiers/fast_smt_gate.py",
+        "start_line": 157,
+        "end_line": 202,
+        "observation": "Constant results become JSON pass/compliance verdict."
+      },
+      {
+        "path": "scripts/c5_quality_gates/daily_sovereign_maintenance.py",
+        "start_line": 152,
+        "end_line": 181,
+        "observation": "Maintenance consumes gate subprocess status as a quality gate result."
+      }
+    ],
+    "source_sha256": "ef4c442f821689838b76a7aaa5cf29c625de2dac3df0a5bd1e2856cfdb526748"
+  },
+  {
+    "candidate_id": "SW100-C0557",
+    "path": "scripts/c5_verifiers/fast_smt_gate.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "The SCITT receipt digest hashes only invariant IDs, omitting each outcome, description and detail. Flipping outcomes for the same IDs changes claims but leaves the digest and fabricated sig_ed25519_ prefix unchanged. No signing key or Ed25519 operation is used, and Article 15 compliance is literal True. This is separate from the checks returning constants: even caller-supplied failing outcomes produce an unbound, unsigned receipt.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_verifiers/fast_smt_gate.py",
+        "start_line": 135,
+        "end_line": 154,
+        "observation": "Receipt hashes IDs only, emits literal compliance and formats a pseudo-signature."
+      },
+      {
+        "path": "scripts/c5_verifiers/fast_smt_gate.py",
+        "start_line": 173,
+        "end_line": 199,
+        "observation": "Both SCITT and JSON modes expose the pseudo-receipt."
+      }
+    ],
+    "source_sha256": "ef4c442f821689838b76a7aaa5cf29c625de2dac3df0a5bd1e2856cfdb526748"
+  }
+]

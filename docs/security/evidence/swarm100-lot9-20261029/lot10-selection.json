@@ -1,0 +1,54 @@
+[
+  {
+    "candidate_id": "SW100-C0574",
+    "path": "scripts/c5_verifiers/purge_residuals.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "The maintenance script traverses .git and unlinks each *.lock there without checking owner, age, active process, or obtaining Git's lock. Thus an index.lock or packed-refs.lock held by another operation can be removed, defeating its mutual exclusion. Repository corruption is a possible consequence, not a reproduced outcome; the purge script was not executed.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_verifiers/purge_residuals.py",
+        "start_line": 19,
+        "end_line": 21,
+        "observation": "Script targets the repository root."
+      },
+      {
+        "path": "scripts/c5_verifiers/purge_residuals.py",
+        "start_line": 34,
+        "end_line": 64,
+        "observation": "Walk includes .git and deletes operational lockfiles based only on suffix/path."
+      },
+      {
+        "path": "scripts/c5_verifiers/purge_residuals.py",
+        "start_line": 94,
+        "end_line": 95,
+        "observation": "Main directly invokes the purge."
+      }
+    ],
+    "source_sha256": "a6bcbf4d8a6e09c0cfa8362b8745d788ca3999d82a80de2fb9145419bf63f55f"
+  },
+  {
+    "candidate_id": "SW100-C0575",
+    "path": "scripts/c5_verifiers/purge_residuals.py",
+    "severity": "P2",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "Every immediate scratch/*.db* match is unlinked without ownership/temporary marker, age, backup, open-use check, or checkpoint. If a scratch database or its WAL is still required, this can remove active data. The path restricts the blast radius to scratch but does not prove every match disposable. No real database or purge operation was opened/executed.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_verifiers/purge_residuals.py",
+        "start_line": 66,
+        "end_line": 74,
+        "observation": "All scratch *.db* paths are unlinked unconditionally."
+      },
+      {
+        "path": "scripts/c5_verifiers/purge_residuals.py",
+        "start_line": 76,
+        "end_line": 95,
+        "observation": "The script reports completion and exposes this path through main."
+      }
+    ],
+    "source_sha256": "a6bcbf4d8a6e09c0cfa8362b8745d788ca3999d82a80de2fb9145419bf63f55f"
+  }
+]

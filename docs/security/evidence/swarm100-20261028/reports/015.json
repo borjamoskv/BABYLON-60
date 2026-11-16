@@ -1,0 +1,475 @@
+{
+  "shard": "015",
+  "findings": [
+    {
+      "title": "Validate envelope length before slicing the shared-memory payload",
+      "severity": "P1",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/hypervisor.rs",
+      "line": 341,
+      "evidence": "env.data[..env.len] precedes unpack validation. IpcEnvelope has public len: usize and data: [u8; 8192] (bft_iceoryx2.rs:78-81); bindings.rs:211-214 exposes this writer through start_writer_daemon.",
+      "trigger": "An IPC publisher submits an IpcEnvelope with len > 8192.",
+      "impact": "The writer thread panics before rejecting malformed input, stopping ingestion until restarted. No claim of memory unsafety is made.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Reject invalid payload hash text instead of signing a zero digest",
+      "severity": "P2",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/hypervisor.rs",
+      "line": 105,
+      "evidence": "payload_hash starts as [0;32]; decoding only runs for length 64 and successful hex decode, but BftMessage::sign is unconditional at line 111. bindings.rs:203-205 forwards arbitrary Python hash strings.",
+      "trigger": "publish_node is called with a malformed or wrong-length hexadecimal digest.",
+      "impact": "The call returns success and publishes a valid signature over a different all-zero digest, silently losing payload identity.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Propagate failed and missing maintenance phases to the global verdict",
+      "severity": "P2",
+      "path": "scripts/c5_quality_gates/daily_sovereign_maintenance.py",
+      "line": 210,
+      "evidence": "Only phase_4 FAIL and phase_1 isolation FAIL set has_critical_failure. phase_2/3/5 failures become WARN; missing gates initialize True at 157-175. Lines 248-251 remove an existing alert when those two critical checks pass; line 318 returns zero.",
+      "trigger": "Log preservation or vault consolidation fails, synchronization fails, or required gate scripts are absent.",
+      "impact": "The scheduled command can report HEALTHY_OPTIMAL, clear an outstanding alert and exit successfully despite failed or unexecuted maintenance obligations.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Correct the attojoule scaling of the Landauer constants",
+      "severity": "P2",
+      "path": "src/thermodynamics.rs",
+      "line": 36,
+      "evidence": "The file states 2.87e-21 J/bit at lines 10-14 and names the unit aJ*1000, but assigns 2870 and total 1102080 at 36/44. Since 1 aJ=1e-18 J, 2.87e-21 J is 0.00287 aJ, or 2.87 aJ*1000, not 2870. aphairesis_entropy_loss_aj_x1000 multiplies this constant at 121.",
+      "trigger": "A caller uses the exported aJ*1000 constants or aphairesis_entropy_loss_aj_x1000 according to their documented units.",
+      "impact": "Computed energy floors are overstated by approximately 1000x; compile-time assertions merely enforce the same erroneous scale. This is a numerical/unit finding, not an empirical energy measurement.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Use a wider mask for the advertised eight-sample boundary",
+      "severity": "P2",
+      "path": "scripts/c5_demos/falsacion_semantic_entropy_baremetal.rs",
+      "line": 63,
+      "evidence": "The API advertises n<=8 at 41 and debug_asserts n<=8 at 45, but builds the mask with (1u8 << n)-1 at 63.",
+      "trigger": "cluster_and_compute_entropy is called with n=8, which its public contract admits.",
+      "impact": "Shifting an eight-bit integer by eight overflows; checked builds panic and unchecked execution cannot form the required 0xff domain mask, invalidating the advertised boundary.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Make Channel Rack CC ranges disjoint",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/hardware/device_Antigravity_MCP.py",
+      "line": 116,
+      "evidence": "Selection checks cc_num < chan_count before mute range 16 <= cc_num <16+chan_count and solo range 32 <= cc_num <32+chan_count.",
+      "trigger": "A project has 17 or more channels and receives channel-7 CC16 to mute channel0; with 33 channels CC32 is likewise consumed by selection.",
+      "impact": "Mute/solo commands select a different channel or mute an unintended channel instead of performing the requested operation.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Give each render a private source-embedding file",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+      "line": 735,
+      "evidence": "TEMP_EMBEDDINGS_PATH is the constant /tmp/c5_source_embeddings.npz at 103; every prepare call overwrites it at 735. Worker mode reloads that global path at 1177-1193 rather than a path tied to its parent render.",
+      "trigger": "Two face-swap processes overlap while one prepares identities and the other starts its workers.",
+      "impact": "Workers can load the other render's source and target identities, producing the wrong face replacements and mixing biometric data between jobs.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Preserve audio offset when rendering a frame subrange",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+      "line": 1067,
+      "evidence": "The rendered video starts at range_start (969-983), while audio extraction at 950 reads the entire input and final mux at 1067-1075 uses that untrimmed audio without a seek or offset.",
+      "trigger": "A caller supplies --start-frame > 0 to render a subrange of a video with audio.",
+      "impact": "The output shows the chosen later frames paired with audio from the beginning, producing systematic audio/video desynchronization.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Paste enhanced image patches when the ellipse mask is selected",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+      "line": 864,
+      "evidence": "In process_image_pipeline the enhancer branch computes ready_512 at 840-861, but updates res only inside if bisenet_sess is not None at 864-882. The fallback paste is the else for enhancer at 883, not the mask condition.",
+      "trigger": "An image render uses --mask ellipse with an enabled enhancer (including defaults), or BiSeNet is unavailable.",
+      "impact": "The enhanced face is never pasted into res; the command saves the unchanged image and prints DONE. Video mode has an ellipse fallback at 512-519, but image mode lacks it.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Scope the semantic-entropy correctness claim to supplied constraints",
+      "severity": "P2",
+      "path": "docs/adr/ADR-007-semantic-entropy-zero-float-firewall.md",
+      "line": 35,
+      "evidence": "ADR claims zero false negatives and 100% neutralization of systematic false beliefs. Its referenced module explicitly says supplied SAT does not establish external factual truth (semantic_entropy.rs:25-41) and evaluate accepts caller-supplied SolverOutcome (170-180). The assigned demo passes literal true/false at 194/201/208/215 instead of invoking a solver.",
+      "trigger": "A reader relies on the ADR as evidence that the implementation detects arbitrary factual falsehoods or that its benchmark measured SMT-backed detection.",
+      "impact": "Documentation overstates the implemented guarantee and can cause integrations to treat a constraint classification or synthetic fixture as factual verification. No effect-dispatch bypass is alleged.",
+      "confidence": "high",
+      "kind": "docs"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".agents/skills/audiovisual-sota/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          21
+        ]
+      ],
+      "hash_expected": "8986e5c758063e8401a56405db5fe88569a010da84aefd2d67cae9d13c80b814",
+      "hash_observed": "8986e5c758063e8401a56405db5fe88569a010da84aefd2d67cae9d13c80b814",
+      "hash_match": true,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": ".github/workflows/pypi-publish.yml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          91
+        ]
+      ],
+      "hash_expected": "db74a3e3ce7de4032bb9b29b833e483283ab0e6f14c555bd606650de33a490b9",
+      "hash_observed": "db74a3e3ce7de4032bb9b29b833e483283ab0e6f14c555bd606650de33a490b9",
+      "hash_match": true,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/hypervisor.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          527
+        ]
+      ],
+      "hash_expected": "79af81bc27f34508c5798234efff054d3ca7e2a357066e77119cafe17f6589dc",
+      "hash_observed": "79af81bc27f34508c5798234efff054d3ca7e2a357066e77119cafe17f6589dc",
+      "hash_match": true,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/compliance_exporter/templates/evidence_verification.html.j2",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          19
+        ]
+      ],
+      "hash_expected": "703f5fd5b664863dab345235609008121a54d36510f9168316205051d7abeea9",
+      "hash_observed": "703f5fd5b664863dab345235609008121a54d36510f9168316205051d7abeea9",
+      "hash_match": true,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/mcp_sandbox_validator.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          468
+        ]
+      ],
+      "hash_expected": "6696488a56d185d2b03380e7a93213cefe0a8cb3233dbe1fd8323b87867c395c",
+      "hash_observed": "6696488a56d185d2b03380e7a93213cefe0a8cb3233dbe1fd8323b87867c395c",
+      "hash_match": true,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/utils/watchdog_poc_v5_fix.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          25
+        ]
+      ],
+      "hash_expected": "3469646335d971a59e54f4929ae474ffaa3f1214c1bf8281f37d6d1d5ab7ea31",
+      "hash_observed": "3469646335d971a59e54f4929ae474ffaa3f1214c1bf8281f37d6d1d5ab7ea31",
+      "hash_match": true,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "Cargo.toml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          116
+        ]
+      ],
+      "hash_expected": "ac947bfc2a5374df2bfe33f5dd2425981883a09068742590e8e39757d9361673",
+      "hash_observed": "ac947bfc2a5374df2bfe33f5dd2425981883a09068742590e8e39757d9361673",
+      "hash_match": true,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "docs/01_spec/spec_security_model.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          89
+        ]
+      ],
+      "hash_expected": "8610e95a9e9b5cab6c87232bbfb9563925535bfe141c5ef06a146f381f77d93b",
+      "hash_observed": "8610e95a9e9b5cab6c87232bbfb9563925535bfe141c5ef06a146f381f77d93b",
+      "hash_match": true,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "docs/adr/ADR-007-semantic-entropy-zero-float-firewall.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "hash_expected": "1fe9512c8897d0326cde28e174cfb7896f8396c74e043d1a130bd9bfcb016959",
+      "hash_observed": "1fe9512c8897d0326cde28e174cfb7896f8396c74e043d1a130bd9bfcb016959",
+      "hash_match": true,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "proof/bundles/attestation_bundle_v2/environment.sha256",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          1
+        ]
+      ],
+      "hash_expected": "0e8132e14881719ed4d26b4a346fe425c8e7029647222af79249ee031d81c58d",
+      "hash_observed": "0e8132e14881719ed4d26b4a346fe425c8e7029647222af79249ee031d81c58d",
+      "hash_match": true,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "scripts/c5_demos/falsacion_semantic_entropy_baremetal.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          244
+        ]
+      ],
+      "hash_expected": "9f95e06f542336b82fa1dc3752e3a5297034b10d8098e8a768fb1294d77755a2",
+      "hash_observed": "9f95e06f542336b82fa1dc3752e3a5297034b10d8098e8a768fb1294d77755a2",
+      "hash_match": true,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "scripts/c5_quality_gates/daily_sovereign_maintenance.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          329
+        ]
+      ],
+      "hash_expected": "bf5d3827f8b3c3c85a1904c1a0082c8d67a25b0b9834c482040426d915373b95",
+      "hash_observed": "bf5d3827f8b3c3c85a1904c1a0082c8d67a25b0b9834c482040426d915373b95",
+      "hash_match": true,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "scripts/generate_sbom.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          184
+        ]
+      ],
+      "hash_expected": "e2cb875bb11ef8f06528401ed9fa578f49801c14ff74a7403c00f48e7ea5b0a3",
+      "hash_observed": "e2cb875bb11ef8f06528401ed9fa578f49801c14ff74a7403c00f48e7ea5b0a3",
+      "hash_match": true,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "src/thermodynamics.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          417
+        ]
+      ],
+      "hash_expected": "c4a3ebddbea6c00f5e76b62abe8f22ed1176b117309cc101ecc4ca72a78dfa18",
+      "hash_observed": "c4a3ebddbea6c00f5e76b62abe8f22ed1176b117309cc101ecc4ca72a78dfa18",
+      "hash_match": true,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "tests/test_bounty_cold_ledger.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          64
+        ]
+      ],
+      "hash_expected": "50b19a910a5294f0b12ac995fe46fffe3da2aff21505d77017cfcbf7f27f19c3",
+      "hash_observed": "50b19a910a5294f0b12ac995fe46fffe3da2aff21505d77017cfcbf7f27f19c3",
+      "hash_match": true,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "tests/test_phase3_enterprise.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          31
+        ]
+      ],
+      "hash_expected": "0799d8f68fec19665823da248a7889ce76dafa567b33ce32ca630ac713f0a066",
+      "hash_observed": "0799d8f68fec19665823da248a7889ce76dafa567b33ce32ca630ac713f0a066",
+      "hash_match": true,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare-one-migrations/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          110
+        ]
+      ],
+      "hash_expected": "50ed246b92a3f82c7afac864201093269fad8de24e4ce7ea18929103a26adad8",
+      "hash_observed": "50ed246b92a3f82c7afac864201093269fad8de24e4ce7ea18929103a26adad8",
+      "hash_match": true,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/email-routing/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          186
+        ]
+      ],
+      "hash_expected": "a9a45e84286ffce8b67cd6a50e72a3a0f169f4414280fd94e5f33f9e9ac4ecd1",
+      "hash_observed": "a9a45e84286ffce8b67cd6a50e72a3a0f169f4414280fd94e5f33f9e9ac4ecd1",
+      "hash_match": true,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/sandbox/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          143
+        ]
+      ],
+      "hash_expected": "95f1152c0040c2a43a22def525608659c9ad57bd17d651f26d4775f26ae8ada8",
+      "hash_observed": "95f1152c0040c2a43a22def525608659c9ad57bd17d651f26d4775f26ae8ada8",
+      "hash_match": true,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workers/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          108
+        ]
+      ],
+      "hash_expected": "1cf526db306dce0fd9c8e568a9d9ddbffd160d2abb371f3c35450aec0b5f8831",
+      "hash_observed": "1cf526db306dce0fd9c8e568a9d9ddbffd160d2abb371f3c35450aec0b5f8831",
+      "hash_match": true,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/hardware/device_Antigravity_MCP.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          197
+        ]
+      ],
+      "hash_expected": "784140f39e7b577de989186e75aeb2d2e3cb6342639cbea5ba6702b415d7d3e9",
+      "hash_observed": "784140f39e7b577de989186e75aeb2d2e3cb6342639cbea5ba6702b415d7d3e9",
+      "hash_match": true,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_19_flight_booking.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "hash_expected": "4396c45d8f54f7e36afe4309dcbbfed8db2367ef9e20fe4de49125e7ac95c718",
+      "hash_observed": "4396c45d8f54f7e36afe4309dcbbfed8db2367ef9e20fe4de49125e7ac95c718",
+      "hash_match": true,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          1298
+        ]
+      ],
+      "hash_expected": "d5360124b49372becd300d853bf0ab8f396afa42432a04f6f6cc810f6e531bf4",
+      "hash_observed": "d5360124b49372becd300d853bf0ab8f396afa42432a04f6f6cc810f6e531bf4",
+      "hash_match": true,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-wetware-and-venture-ops/references/modules/c5-real-legaltech-analysis/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          395
+        ]
+      ],
+      "hash_expected": "4920015043dc1373982cf2d4fe8fd34166ab0d86bda53c8bcdbb0655eb4c684a",
+      "hash_observed": "4920015043dc1373982cf2d4fe8fd34166ab0d86bda53c8bcdbb0655eb4c684a",
+      "hash_match": true,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/youtube-analysis-pipeline/scripts/parse_vtt.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          74
+        ]
+      ],
+      "hash_expected": "61844c39c3ca9ccd3a3fd0f7e497f5deddac42381e83cabc30e6825b2051315d",
+      "hash_observed": "61844c39c3ca9ccd3a3fd0f7e497f5deddac42381e83cabc30e6825b2051315d",
+      "hash_match": true,
+      "notes": "Static source review; no execution."
+    }
+  ],
+  "tool_limitations": [
+    "Native codebase-memory graph tools were not exposed (tool catalog discovery returned none); used targeted text/source reads.",
+    "Audit-only: no repository tests, builds, runtime probes, deployment or commits executed.",
+    "Cloudflare and legal reference documents were reviewed as task data; external API/legal accuracy was not certified.",
+    "Frozen manifest read: head 28257bd74fce31446b0350d094e9dab148a1aea7, base 42a65ef508432f254f6c01a661b14aed89a11fc0. Assigned-file hashes all matched shard manifest. Cross-file evidence reflects inspected working-tree source."
+  ],
+  "tests_run": []
+}

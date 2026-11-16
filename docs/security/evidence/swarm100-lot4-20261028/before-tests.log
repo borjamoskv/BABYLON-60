@@ -1,0 +1,302 @@
+FFFFFFFFFFFFF                                                            [100%]
+=================================== FAILURES ===================================
+________________ test_generators_never_emit_unexecuted_pass[1] _________________
+
+fixture = <test_swarm100_lot4_regressions.Fixture object at 0x1090e9a90>
+version = 1
+
+    @pytest.mark.parametrize('version',[1,2])
+    def test_generators_never_emit_unexecuted_pass(fixture, version):
+        result,out = fixture.generate(version)
+        assert result.returncode==0,result.stderr
+        p=out/('test_results.json' if (out/'test_results.json').exists() else 'test-results.json')
+        value=json.loads(p.read_text())
+>       assert value.get('status')=='NOT_EXECUTED',value
+E       AssertionError: {'gates': {'copy_lint': 'PASS', 'link_checker': 'PASS', 'evidence_validator': 'PASS', 'claims_total': 21, ...}, 'timestamp': 1793221090, 'scope': 'Local snapshot evaluation'}
+E       assert None == 'NOT_EXECUTED'
+E        +  where None = <built-in method get of dict object at 0x1091bca00>('status')
+E        +    where <built-in method get of dict object at 0x1091bca00> = {'gates': {'copy_lint': 'PASS', 'link_checker': 'PASS', 'evidence_validator': 'PASS', 'claims_total': 21, ...}, 'timestamp': 1793221090, 'scope': 'Local snapshot evaluation'}.get
+
+tests/test_swarm100_lot4_regressions.py:93: AssertionError
+________________ test_generators_never_emit_unexecuted_pass[2] _________________
+
+fixture = <test_swarm100_lot4_regressions.Fixture object at 0x109130b90>
+version = 2
+
+    @pytest.mark.parametrize('version',[1,2])
+    def test_generators_never_emit_unexecuted_pass(fixture, version):
+        result,out = fixture.generate(version)
+        assert result.returncode==0,result.stderr
+        p=out/('test_results.json' if (out/'test_results.json').exists() else 'test-results.json')
+        value=json.loads(p.read_text())
+>       assert value.get('status')=='NOT_EXECUTED',value
+E       AssertionError: {'schema': 'babylon60.test_results.v2', 'epistemic_taxonomy': {'SUPPORTED_WITHIN_DOMAIN': ['FL-001 (SharedManifest seq...thesis': 'Execute(e) ⟹ ValidCapability(e, t_commit)', 'adversarial_attempts': 10000, 'scenarios_tested': 4, ...}}, ...}
+E       assert None == 'NOT_EXECUTED'
+E        +  where None = <built-in method get of dict object at 0x1091f87c0>('status')
+E        +    where <built-in method get of dict object at 0x1091f87c0> = {'schema': 'babylon60.test_results.v2', 'epistemic_taxonomy': {'SUPPORTED_WITHIN_DOMAIN': ['FL-001 (SharedManifest seq...thesis': 'Execute(e) ⟹ ValidCapability(e, t_commit)', 'adversarial_attempts': 10000, 'scenarios_tested': 4, ...}}, ...}.get
+
+tests/test_swarm100_lot4_regressions.py:93: AssertionError
+_______ test_c0061_legacy_unbound_metadata_is_rejected[claims.snapshot] ________
+
+fixture = <test_swarm100_lot4_regressions.Fixture object at 0x109304e10>
+component = 'claims.snapshot'
+
+    @pytest.mark.parametrize('component',['claims.snapshot','environment.json','test-results.json','commit.txt','timestamp','manifest.json'])
+    def test_c0061_legacy_unbound_metadata_is_rejected(fixture, component):
+        bundle=fixture.legacy()
+        p=bundle/component
+        if component.endswith('.json'):
+            value=json.loads(p.read_text());value['forged']='fixture';p.write_text(json.dumps(value))
+        else:p.write_text('fixture changed metadata')
+        result=fixture.verify(bundle)
+>       assert result.returncode!=0,result.stdout
+E       AssertionError: b'ARTIFACT        VERIFIED
+E         HASH CHAIN      VERIFIED
+E         SIGNATURE       VERIFIED
+E         CLAIMS          8/21 SUPPORTED
+E         INVARIANTS      6 STALE
+E         ENVIRONMENT     DARWIN/ARM64
+E         HW PROVENANCE   UNVERIFIED
+E         CERTIFICATION   NONE
+E         '
+E       assert 0 != 0
+E        +  where 0 = CompletedProcess(args=['/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.venv/bin/python3', '/private/var/folders/r...INVARIANTS      6 STALE\nENVIRONMENT     DARWIN/ARM64\nHW PROVENANCE   UNVERIFIED\nCERTIFICATION   NONE\n', stderr=b'').returncode
+
+tests/test_swarm100_lot4_regressions.py:105: AssertionError
+_______ test_c0061_legacy_unbound_metadata_is_rejected[environment.json] _______
+
+fixture = <test_swarm100_lot4_regressions.Fixture object at 0x109320640>
+component = 'environment.json'
+
+    @pytest.mark.parametrize('component',['claims.snapshot','environment.json','test-results.json','commit.txt','timestamp','manifest.json'])
+    def test_c0061_legacy_unbound_metadata_is_rejected(fixture, component):
+        bundle=fixture.legacy()
+        p=bundle/component
+        if component.endswith('.json'):
+            value=json.loads(p.read_text());value['forged']='fixture';p.write_text(json.dumps(value))
+        else:p.write_text('fixture changed metadata')
+        result=fixture.verify(bundle)
+>       assert result.returncode!=0,result.stdout
+E       AssertionError: b'ARTIFACT        VERIFIED
+E         HASH CHAIN      VERIFIED
+E         SIGNATURE       VERIFIED
+E         CLAIMS          8/21 SUPPORTED
+E         INVARIANTS      6 STALE
+E         ENVIRONMENT     DARWIN/ARM64
+E         HW PROVENANCE   UNVERIFIED
+E         CERTIFICATION   NONE
+E         '
+E       assert 0 != 0
+E        +  where 0 = CompletedProcess(args=['/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.venv/bin/python3', '/private/var/folders/r...INVARIANTS      6 STALE\nENVIRONMENT     DARWIN/ARM64\nHW PROVENANCE   UNVERIFIED\nCERTIFICATION   NONE\n', stderr=b'').returncode
+
+tests/test_swarm100_lot4_regressions.py:105: AssertionError
+______ test_c0061_legacy_unbound_metadata_is_rejected[test-results.json] _______
+
+fixture = <test_swarm100_lot4_regressions.Fixture object at 0x109321e00>
+component = 'test-results.json'
+
+    @pytest.mark.parametrize('component',['claims.snapshot','environment.json','test-results.json','commit.txt','timestamp','manifest.json'])
+    def test_c0061_legacy_unbound_metadata_is_rejected(fixture, component):
+        bundle=fixture.legacy()
+        p=bundle/component
+        if component.endswith('.json'):
+            value=json.loads(p.read_text());value['forged']='fixture';p.write_text(json.dumps(value))
+        else:p.write_text('fixture changed metadata')
+        result=fixture.verify(bundle)
+>       assert result.returncode!=0,result.stdout
+E       AssertionError: b'ARTIFACT        VERIFIED
+E         HASH CHAIN      VERIFIED
+E         SIGNATURE       VERIFIED
+E         CLAIMS          8/21 SUPPORTED
+E         INVARIANTS      6 STALE
+E         ENVIRONMENT     DARWIN/ARM64
+E         HW PROVENANCE   UNVERIFIED
+E         CERTIFICATION   NONE
+E         '
+E       assert 0 != 0
+E        +  where 0 = CompletedProcess(args=['/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.venv/bin/python3', '/private/var/folders/r...INVARIANTS      6 STALE\nENVIRONMENT     DARWIN/ARM64\nHW PROVENANCE   UNVERIFIED\nCERTIFICATION   NONE\n', stderr=b'').returncode
+
+tests/test_swarm100_lot4_regressions.py:105: AssertionError
+__________ test_c0061_legacy_unbound_metadata_is_rejected[commit.txt] __________
+
+fixture = <test_swarm100_lot4_regressions.Fixture object at 0x1091db650>
+component = 'commit.txt'
+
+    @pytest.mark.parametrize('component',['claims.snapshot','environment.json','test-results.json','commit.txt','timestamp','manifest.json'])
+    def test_c0061_legacy_unbound_metadata_is_rejected(fixture, component):
+        bundle=fixture.legacy()
+        p=bundle/component
+        if component.endswith('.json'):
+            value=json.loads(p.read_text());value['forged']='fixture';p.write_text(json.dumps(value))
+        else:p.write_text('fixture changed metadata')
+        result=fixture.verify(bundle)
+>       assert result.returncode!=0,result.stdout
+E       AssertionError: b'ARTIFACT        VERIFIED
+E         HASH CHAIN      VERIFIED
+E         SIGNATURE       VERIFIED
+E         CLAIMS          8/21 SUPPORTED
+E         INVARIANTS      6 STALE
+E         ENVIRONMENT     DARWIN/ARM64
+E         HW PROVENANCE   UNVERIFIED
+E         CERTIFICATION   NONE
+E         '
+E       assert 0 != 0
+E        +  where 0 = CompletedProcess(args=['/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.venv/bin/python3', '/private/var/folders/r...INVARIANTS      6 STALE\nENVIRONMENT     DARWIN/ARM64\nHW PROVENANCE   UNVERIFIED\nCERTIFICATION   NONE\n', stderr=b'').returncode
+
+tests/test_swarm100_lot4_regressions.py:105: AssertionError
+__________ test_c0061_legacy_unbound_metadata_is_rejected[timestamp] ___________
+
+fixture = <test_swarm100_lot4_regressions.Fixture object at 0x109300380>
+component = 'timestamp'
+
+    @pytest.mark.parametrize('component',['claims.snapshot','environment.json','test-results.json','commit.txt','timestamp','manifest.json'])
+    def test_c0061_legacy_unbound_metadata_is_rejected(fixture, component):
+        bundle=fixture.legacy()
+        p=bundle/component
+        if component.endswith('.json'):
+            value=json.loads(p.read_text());value['forged']='fixture';p.write_text(json.dumps(value))
+        else:p.write_text('fixture changed metadata')
+        result=fixture.verify(bundle)
+>       assert result.returncode!=0,result.stdout
+E       AssertionError: b'ARTIFACT        VERIFIED
+E         HASH CHAIN      VERIFIED
+E         SIGNATURE       VERIFIED
+E         CLAIMS          8/21 SUPPORTED
+E         INVARIANTS      6 STALE
+E         ENVIRONMENT     DARWIN/ARM64
+E         HW PROVENANCE   UNVERIFIED
+E         CERTIFICATION   NONE
+E         '
+E       assert 0 != 0
+E        +  where 0 = CompletedProcess(args=['/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.venv/bin/python3', '/private/var/folders/r...INVARIANTS      6 STALE\nENVIRONMENT     DARWIN/ARM64\nHW PROVENANCE   UNVERIFIED\nCERTIFICATION   NONE\n', stderr=b'').returncode
+
+tests/test_swarm100_lot4_regressions.py:105: AssertionError
+________ test_c0061_legacy_unbound_metadata_is_rejected[manifest.json] _________
+
+fixture = <test_swarm100_lot4_regressions.Fixture object at 0x1093018c0>
+component = 'manifest.json'
+
+    @pytest.mark.parametrize('component',['claims.snapshot','environment.json','test-results.json','commit.txt','timestamp','manifest.json'])
+    def test_c0061_legacy_unbound_metadata_is_rejected(fixture, component):
+        bundle=fixture.legacy()
+        p=bundle/component
+        if component.endswith('.json'):
+            value=json.loads(p.read_text());value['forged']='fixture';p.write_text(json.dumps(value))
+        else:p.write_text('fixture changed metadata')
+        result=fixture.verify(bundle)
+>       assert result.returncode!=0,result.stdout
+E       AssertionError: b'ARTIFACT        VERIFIED
+E         HASH CHAIN      VERIFIED
+E         SIGNATURE       VERIFIED
+E         CLAIMS          8/21 SUPPORTED
+E         INVARIANTS      6 STALE
+E         ENVIRONMENT     DARWIN/ARM64
+E         HW PROVENANCE   UNVERIFIED
+E         CERTIFICATION   NONE
+E         '
+E       assert 0 != 0
+E        +  where 0 = CompletedProcess(args=['/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.venv/bin/python3', '/private/var/folders/r...INVARIANTS      6 STALE\nENVIRONMENT     DARWIN/ARM64\nHW PROVENANCE   UNVERIFIED\nCERTIFICATION   NONE\n', stderr=b'').returncode
+
+tests/test_swarm100_lot4_regressions.py:105: AssertionError
+________________ test_c0060_bad_signature_does_not_exit_success ________________
+
+fixture = <test_swarm100_lot4_regressions.Fixture object at 0x1092cbd50>
+
+    def test_c0060_bad_signature_does_not_exit_success(fixture):
+        bundle=fixture.legacy()
+        (bundle/'signature.der').write_bytes(b'invalid DER fixture')
+>       assert fixture.verify(bundle).returncode!=0
+E       AssertionError: assert 0 != 0
+E        +  where 0 = CompletedProcess(args=['/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.venv/bin/python3', '/private/var/folders/r...INVARIANTS      6 STALE\nENVIRONMENT     DARWIN/ARM64\nHW PROVENANCE   UNVERIFIED\nCERTIFICATION   NONE\n', stderr=b'').returncode
+E        +    where CompletedProcess(args=['/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.venv/bin/python3', '/private/var/folders/r...INVARIANTS      6 STALE\nENVIRONMENT     DARWIN/ARM64\nHW PROVENANCE   UNVERIFIED\nCERTIFICATION   NONE\n', stderr=b'') = verify(PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-749/test_c0060_bad_signature_does_0/legacy'))
+E        +      where verify = <test_swarm100_lot4_regressions.Fixture object at 0x1092cbd50>.verify
+
+tests/test_swarm100_lot4_regressions.py:111: AssertionError
+_______________ test_c0087_verifier_recomputes_external_artifact _______________
+
+fixture = <test_swarm100_lot4_regressions.Fixture object at 0x1093a8350>
+
+    def test_c0087_verifier_recomputes_external_artifact(fixture):
+        result,bundle=fixture.generate(2)
+        assert result.returncode==0,result.stderr
+        initial=fixture.verify(bundle,'--integrity-only',version=2)
+        assert initial.returncode==0,initial.stderr
+        (fixture.root/'src/lib.rs').write_text('fixture tampered after bundle')
+        result=fixture.verify(bundle,'--integrity-only',version=2)
+>       assert result.returncode!=0,result.stdout
+E       AssertionError: b'\xe2\x95\x94\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95...\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90
+E         '
+E       assert 0 != 0
+E        +  where 0 = CompletedProcess(args=['/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.venv/bin/python3', '/private/var/folders/r...x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\n', stderr=b'').returncode
+
+tests/test_swarm100_lot4_regressions.py:121: AssertionError
+__________ test_c0088_environment_never_claims_hardware_certification __________
+
+fixture = <test_swarm100_lot4_regressions.Fixture object at 0x108acf980>
+
+    def test_c0088_environment_never_claims_hardware_certification(fixture):
+        result,bundle=fixture.generate(2)
+        assert result.returncode==0,result.stderr
+        environment=json.loads((bundle/'environment.json').read_text())
+>       assert environment.get('hw_provenance')=='UNVERIFIED',environment
+E       AssertionError: {'arch': 'fixture-arch', 'os': 'FixtureOS', 'release': '0', 'platform': 'Apple Silicon (ARM64)', ...}
+E       assert None == 'UNVERIFIED'
+E        +  where None = <built-in method get of dict object at 0x10923bbc0>('hw_provenance')
+E        +    where <built-in method get of dict object at 0x10923bbc0> = {'arch': 'fixture-arch', 'os': 'FixtureOS', 'release': '0', 'platform': 'Apple Silicon (ARM64)', ...}.get
+
+tests/test_swarm100_lot4_regressions.py:128: AssertionError
+__________________ test_importing_generator_has_no_effects[1] __________________
+
+fixture = <test_swarm100_lot4_regressions.Fixture object at 0x10930e210>
+version = 1
+
+    @pytest.mark.parametrize('version',[1,2])
+    def test_importing_generator_has_no_effects(fixture, version):
+        name='generate_attestation_bundle'+('_v2' if version==2 else '')+'.py'
+        code='import runpy,sys;runpy.run_path(sys.argv[1])'
+        result=subprocess.run([sys.executable,'-c',code,str(fixture.root/'scripts'/name)],
+                              env=fixture.env,cwd=fixture.root,capture_output=True,timeout=20)
+        assert result.returncode==0,result.stderr
+>       assert not fixture.output(version).exists()
+E       AssertionError: assert not True
+E        +  where True = exists()
+E        +    where exists = PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-749/test_importing_generator_has_n0/attestation_bundle_v1').exists
+E        +      where PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-749/test_importing_generator_has_n0/attestation_bundle_v1') = output(1)
+E        +        where output = <test_swarm100_lot4_regressions.Fixture object at 0x10930e210>.output
+
+tests/test_swarm100_lot4_regressions.py:140: AssertionError
+__________________ test_importing_generator_has_no_effects[2] __________________
+
+fixture = <test_swarm100_lot4_regressions.Fixture object at 0x1091a8830>
+version = 2
+
+    @pytest.mark.parametrize('version',[1,2])
+    def test_importing_generator_has_no_effects(fixture, version):
+        name='generate_attestation_bundle'+('_v2' if version==2 else '')+'.py'
+        code='import runpy,sys;runpy.run_path(sys.argv[1])'
+        result=subprocess.run([sys.executable,'-c',code,str(fixture.root/'scripts'/name)],
+                              env=fixture.env,cwd=fixture.root,capture_output=True,timeout=20)
+        assert result.returncode==0,result.stderr
+>       assert not fixture.output(version).exists()
+E       AssertionError: assert not True
+E        +  where True = exists()
+E        +    where exists = PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-749/test_importing_generator_has_n1/proof/bundles/attestation_bundle_v2').exists
+E        +      where PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-749/test_importing_generator_has_n1/proof/bundles/attestation_bundle_v2') = output(2)
+E        +        where output = <test_swarm100_lot4_regressions.Fixture object at 0x1091a8830>.output
+
+tests/test_swarm100_lot4_regressions.py:140: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_swarm100_lot4_regressions.py::test_generators_never_emit_unexecuted_pass[1]
+FAILED tests/test_swarm100_lot4_regressions.py::test_generators_never_emit_unexecuted_pass[2]
+FAILED tests/test_swarm100_lot4_regressions.py::test_c0061_legacy_unbound_metadata_is_rejected[claims.snapshot]
+FAILED tests/test_swarm100_lot4_regressions.py::test_c0061_legacy_unbound_metadata_is_rejected[environment.json]
+FAILED tests/test_swarm100_lot4_regressions.py::test_c0061_legacy_unbound_metadata_is_rejected[test-results.json]
+FAILED tests/test_swarm100_lot4_regressions.py::test_c0061_legacy_unbound_metadata_is_rejected[commit.txt]
+FAILED tests/test_swarm100_lot4_regressions.py::test_c0061_legacy_unbound_metadata_is_rejected[timestamp]
+FAILED tests/test_swarm100_lot4_regressions.py::test_c0061_legacy_unbound_metadata_is_rejected[manifest.json]
+FAILED tests/test_swarm100_lot4_regressions.py::test_c0060_bad_signature_does_not_exit_success
+FAILED tests/test_swarm100_lot4_regressions.py::test_c0087_verifier_recomputes_external_artifact
+FAILED tests/test_swarm100_lot4_regressions.py::test_c0088_environment_never_claims_hardware_certification
+FAILED tests/test_swarm100_lot4_regressions.py::test_importing_generator_has_no_effects[1]
+FAILED tests/test_swarm100_lot4_regressions.py::test_importing_generator_has_no_effects[2]
+13 failed in 2.65s

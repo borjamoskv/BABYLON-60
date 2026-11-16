@@ -66,6 +66,68 @@ def test_success_text_is_not_a_status_protocol(install_transport):
     assert result["results"][0]["status"] == "OK"
 
 
+@pytest.mark.parametrize("key", [None, "", "   "])
+def test_unconfigured_remote_is_error_without_network(key, monkeypatch):
+    monkeypatch.delenv("OPENROUTER_API_KEY", raising=False)
+
+    def unexpected_client(**kwargs):
+        pytest.fail("missing credentials must not construct an HTTP client")
+
+    monkeypatch.setattr(httpx, "AsyncClient", unexpected_client)
+    orchestrator = swarm.SwarmOrchestrator(
+        swarm.SwarmConfig(
+            backend=swarm.InferenceBackend.OPENROUTER_REMOTE,
+            openrouter_key=key,
+            mcts_delay_s=0,
+        )
+    )
+    events = []
+    result = asyncio.run(orchestrator.execute_dag(["task"], lambda *event: events.append(event)))
+    outcome = result["results"][0]
+    assert outcome["status"] == "ERROR"
+    assert isinstance(outcome["result"], swarm.LLMCallError)
+    assert "credentials" in outcome["result"]
+    assert "MOCK" not in outcome["result"]
+    assert events[0][1] == "ERROR"
+
+
+def test_explicit_empty_remote_key_does_not_use_environment(monkeypatch):
+    monkeypatch.setenv("OPENROUTER_API_KEY", "fixture-environment-key")
+
+    def unexpected_client(**kwargs):
+        pytest.fail("an explicit empty key must not use environment credentials")
+
+    monkeypatch.setattr(httpx, "AsyncClient", unexpected_client)
+    client = swarm.RobustLLMClient(
+        swarm.SwarmConfig(backend=swarm.InferenceBackend.OPENROUTER_REMOTE, openrouter_key="")
+    )
+    result = asyncio.run(client.call([{"role": "user", "content": "task"}]))
+    assert isinstance(result, swarm.LLMCallError)
+    assert "fixture-environment-key" not in result
+
+
+def test_configured_remote_success_uses_provider_response(install_transport):
+    requests = []
+
+    async def handler(request):
+        requests.append(request)
+        return httpx.Response(200, json={"choices": [{"message": {"content": "provider result"}}]})
+
+    install_transport(handler)
+    orchestrator = swarm.SwarmOrchestrator(
+        swarm.SwarmConfig(
+            backend=swarm.InferenceBackend.OPENROUTER_REMOTE,
+            openrouter_key="fixture-key",
+            mcts_delay_s=0,
+        )
+    )
+    result = asyncio.run(orchestrator.execute_dag(["task"]))
+    assert len(requests) == 1
+    assert requests[0].headers["Authorization"] == "Bearer fixture-key"
+    assert result["results"][0]["status"] == "OK"
+    assert result["results"][0]["result"] == "provider result"
+
+
 def test_requests_overlap_and_cancellation_cleans_up(install_transport):
     async def scenario():
         started = 0

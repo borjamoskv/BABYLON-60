@@ -1,0 +1,5 @@
+scripts/repatriated/c5_sharur_100_anergy_purge.py:295: error: Incompatible types in assignment (expression has type "Path", variable has type "str")  [assignment]
+scripts/repatriated/c5_sharur_100_anergy_purge.py:297: error: "str" has no attribute "is_file"  [attr-defined]
+scripts/repatriated/c5_sharur_100_anergy_purge.py:298: error: "str" has no attribute "stat"  [attr-defined]
+scripts/repatriated/c5_sharur_100_anergy_purge.py:299: error: "str" has no attribute "unlink"  [attr-defined]
+Found 4 errors in 1 file (checked 1 source file)

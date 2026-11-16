@@ -31,9 +31,18 @@ from google import genai
 from google.genai import types
 
 ThinkingTier = Literal["low", "medium", "high"]
+ElementTier = Literal["carbon", "argon", "hydrogen"]
+ResolutionStatus = Literal[
+    "CARBON_ACTIVE",
+    "FALLBACK_ARGON",
+    "ARGON_ACTIVE",
+    "HYDROGEN_ACTIVE",
+    "FALLBACK_HYDROGEN",
+]
 
 PRIMARY_MODEL = "gemini-4-carbon"
 FALLBACK_MODEL = "gemini-4-argon"
+HYDROGEN_MODEL = "gemini-4-hydrogen"
 FLASH_FALLBACK_MODEL = "gemini-3.8-flash"
 DEFAULT_CACHE_TTL_SECONDS = 86_400  # 24 hours
 MIN_SAFE_OUTPUT_TOKENS = 32_768
@@ -54,7 +63,7 @@ DEFAULT_CACHE_PATH = (
 class ModelResolution:
     resolved_model: str
     requested_model: str
-    status: Literal["CARBON_ACTIVE", "FALLBACK_ARGON"]
+    status: ResolutionStatus
     cache_hit: bool
     cache_age_seconds: float
     catalog_count: int
@@ -186,23 +195,28 @@ def build_gemini4_config(
 
     kwargs: dict[str, Any] = {
         "max_output_tokens": max_output_tokens,
-        "automatic_continuation": False,
         "thinking_config": types.ThinkingConfig(
             thinking_level=_LEVEL_MAP[norm_level],
             include_thoughts=include_thoughts,
         ),
     }
+    if "automatic_continuation" in getattr(types.GenerateContentConfig, "model_fields", {}):
+        kwargs["automatic_continuation"] = False
     if system_instruction is not None:
         kwargs["system_instruction"] = system_instruction
     if response_schema is not None:
         kwargs["response_mime_type"] = "application/json"
         kwargs["response_schema"] = response_schema
 
-    return types.GenerateContentConfig(**kwargs)
+    cfg = types.GenerateContentConfig(**kwargs)
+    if not hasattr(cfg, "automatic_continuation"):
+        object.__setattr__(cfg, "automatic_continuation", False)
+    return cfg
 
 
 def resolve_gemini4_frontier(
     *,
+    preferred_element: ElementTier = "carbon",
     thinking_level: ThinkingTier = "low",
     max_output_tokens: int = MIN_SAFE_OUTPUT_TOKENS,
     include_thoughts: bool = False,
@@ -215,10 +229,21 @@ def resolve_gemini4_frontier(
     force_refresh: bool = False,
 ) -> tuple[Any, str, types.GenerateContentConfig, ModelResolution]:
     """
-    Resolves `gemini-4-carbon` if enabled in the active catalog, falling back
-    deterministically to `gemini-4-argon`, and returns:
+    Resolves the requested Gemini 4 element (`carbon`, `argon`, or `hydrogen`)
+    against the active catalog with deterministic fallback:
+      - `preferred_element="carbon"` (default): `gemini-4-carbon` -> `gemini-4-argon`
+      - `preferred_element="argon"`: `gemini-4-argon` -> `gemini-4-carbon`
+      - `preferred_element="hydrogen"`: `gemini-4-hydrogen` -> `gemini-4-argon`
+    Returns:
         (client, model_id, generate_content_config, resolution_telemetry)
     """
+    norm_element = preferred_element.strip().lower()
+    if norm_element not in {"carbon", "argon", "hydrogen"}:
+        raise ValueError(
+            f"Invalid preferred_element={preferred_element!r}. "
+            "Allowed elements: 'carbon', 'argon', 'hydrogen'."
+        )
+
     resolved_key = _resolve_api_key(api_key)
     active_client = client if client is not None else genai.Client(api_key=resolved_key)
     config = build_gemini4_config(
@@ -238,21 +263,52 @@ def resolve_gemini4_frontier(
     )
     catalog_set = set(catalog)
 
-    if PRIMARY_MODEL in catalog_set:
-        chosen = PRIMARY_MODEL
-        status: Literal["CARBON_ACTIVE", "FALLBACK_ARGON"] = "CARBON_ACTIVE"
-    elif FALLBACK_MODEL in catalog_set:
-        chosen = FALLBACK_MODEL
-        status = "FALLBACK_ARGON"
+    if norm_element == "hydrogen":
+        requested = HYDROGEN_MODEL
+        if HYDROGEN_MODEL in catalog_set:
+            chosen = HYDROGEN_MODEL
+            status: ResolutionStatus = "HYDROGEN_ACTIVE"
+        elif FALLBACK_MODEL in catalog_set:
+            chosen = FALLBACK_MODEL
+            status = "FALLBACK_ARGON"
+        else:
+            raise RuntimeError(
+                f"FAIL_CLOSED: Neither {HYDROGEN_MODEL!r} nor {FALLBACK_MODEL!r} "
+                "is available in the authenticated catalog."
+            )
+    elif norm_element == "argon":
+        requested = FALLBACK_MODEL
+        if FALLBACK_MODEL in catalog_set:
+            chosen = FALLBACK_MODEL
+            status = "ARGON_ACTIVE"
+        elif PRIMARY_MODEL in catalog_set:
+            chosen = PRIMARY_MODEL
+            status = "CARBON_ACTIVE"
+        elif HYDROGEN_MODEL in catalog_set:
+            chosen = HYDROGEN_MODEL
+            status = "FALLBACK_HYDROGEN"
+        else:
+            raise RuntimeError(
+                f"FAIL_CLOSED: None of {FALLBACK_MODEL!r}, {PRIMARY_MODEL!r}, or {HYDROGEN_MODEL!r} "
+                "is available in the authenticated catalog."
+            )
     else:
-        raise RuntimeError(
-            f"FAIL_CLOSED: Neither {PRIMARY_MODEL!r} nor {FALLBACK_MODEL!r} "
-            "is available in the authenticated catalog."
-        )
+        requested = PRIMARY_MODEL
+        if PRIMARY_MODEL in catalog_set:
+            chosen = PRIMARY_MODEL
+            status = "CARBON_ACTIVE"
+        elif FALLBACK_MODEL in catalog_set:
+            chosen = FALLBACK_MODEL
+            status = "FALLBACK_ARGON"
+        else:
+            raise RuntimeError(
+                f"FAIL_CLOSED: Neither {PRIMARY_MODEL!r} nor {FALLBACK_MODEL!r} "
+                "is available in the authenticated catalog."
+            )
 
     resolution = ModelResolution(
         resolved_model=chosen,
-        requested_model=PRIMARY_MODEL,
+        requested_model=requested,
         status=status,
         cache_hit=cache_hit,
         cache_age_seconds=round(age, 3),
@@ -301,13 +357,17 @@ def generate_content_frontier(
         return response, model_id, False
     except Exception as exc:
         if allow_flash_fallback and is_quota_zero_error(exc):
-            flash_config = types.GenerateContentConfig(
-                max_output_tokens=min(config.max_output_tokens or 65536, 65536),
-                automatic_continuation=False,
-                response_mime_type=config.response_mime_type,
-                response_schema=config.response_schema,
-                system_instruction=config.system_instruction,
-            )
+            flash_kwargs: dict[str, Any] = {
+                "max_output_tokens": min(config.max_output_tokens or 65536, 65536),
+                "response_mime_type": config.response_mime_type,
+                "response_schema": config.response_schema,
+                "system_instruction": config.system_instruction,
+            }
+            if "automatic_continuation" in getattr(types.GenerateContentConfig, "model_fields", {}):
+                flash_kwargs["automatic_continuation"] = False
+            flash_config = types.GenerateContentConfig(**flash_kwargs)
+            if not hasattr(flash_config, "automatic_continuation"):
+                object.__setattr__(flash_config, "automatic_continuation", False)
             response = client.models.generate_content(
                 model=FLASH_FALLBACK_MODEL,
                 contents=contents,
@@ -320,6 +380,12 @@ def generate_content_frontier(
 def _main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description="C5-REAL Gemini 4 Frontier Router (Carbon -> Argon deterministic fallback)"
+    )
+    parser.add_argument(
+        "--element",
+        default="carbon",
+        choices=["carbon", "argon", "hydrogen"],
+        help="Preferred Gemini 4 periodic element tier (default: carbon)",
     )
     parser.add_argument(
         "--level",
@@ -352,6 +418,7 @@ def _main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     client, chosen, cfg, res = resolve_gemini4_frontier(
+        preferred_element=args.element,
         thinking_level=args.level,
         max_output_tokens=args.max_output_tokens,
         force_refresh=args.force_refresh,

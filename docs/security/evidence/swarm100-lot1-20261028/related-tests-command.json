@@ -1,0 +1,29 @@
+{
+  "command": [
+    "uv",
+    "run",
+    "--locked",
+    "--no-sync",
+    "pytest",
+    "tests/test_swarm100_lot1_regressions.py",
+    "tests/test_agent_beeper_regressions.py",
+    "tests/test_autodidact_derivation_regressions.py",
+    "tests/test_swarm100_round2_regressions.py",
+    "tests/test_standalone_verifier.py",
+    "tests/test_memory_governance_falsification.py",
+    "tests/test_compliance_exporter.py",
+    "tests/test_m0_evidence_pack_acceptance.py",
+    "tests/test_autodidact_omega_v2.py",
+    "tests/test_autodidact_omega_pipeline.py",
+    "tests/test_cortex_persist_batch_regressions.py",
+    "tests/test_ledger_cross_equivalence.py",
+    "tests/test_fl027_provenance_authority.py",
+    "-q",
+    "-rs",
+    "-o",
+    "addopts=--tb=short"
+  ],
+  "exit_code": 0,
+  "log": "docs/security/evidence/swarm100-lot1-20261028/related-tests.log",
+  "log_sha256": "aa369df17e95794c38fd7833d20e6bf9d1bac17d81d63da2c0d64fc0ecba062c"
+}

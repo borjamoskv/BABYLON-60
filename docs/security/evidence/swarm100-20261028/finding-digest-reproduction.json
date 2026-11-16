@@ -1,0 +1,8 @@
+{
+  "source": "01_KISH_ENGINE/babylon60/verification/finding_contract.py",
+  "sha256": "8ded45ed596a822eeaddd371d8c48887ad31e6d8bb12a2ec78cde8c679336512",
+  "input_digest": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+  "constructed": true,
+  "verified": true,
+  "scope": "pure model; no runtime effect attempted"
+}

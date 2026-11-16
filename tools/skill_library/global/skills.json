@@ -1,0 +1,2212 @@
+{
+  "version": "26.400",
+  "updated_at": "2026-11-16T21:48:00Z",
+  "exergy_scale_standard": "COMPILER_DERIVED_3_EVALUATORS (E1_Silicon + E2_Kolmogorov + E3_Causal = 21000)",
+  "total_skills": 77,
+  "average_exergy_density": 20000.39,
+  "description": "Grafo de adyacencia y topología conectada de las 130 habilidades soberanas del ecosistema CORTEX Engine integrado en BABYLON-60 (100% COMPILER_DERIVED)",
+  "entries": [
+    {
+      "name": "cortex-kernel",
+      "tier": 23000,
+      "category": "Kernel",
+      "display_name": "CORTEX Root Kernel",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 2000,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-root",
+      "scope": "kernel",
+      "role": "arquitecto",
+      "description": "Manifiesto de invariantes transversales del ecosistema CORTEX (árbol de roles, gobernanza declarativa y límites termodinámicos).",
+      "triggers": [
+        "kernel-root",
+        "cortex-kernel",
+        "cortex kernel",
+        "kernel axiomas"
+      ]
+    },
+    {
+      "name": "c5-kudurru-64",
+      "tier": 22500,
+      "category": "Kernel",
+      "display_name": "Cerrojo Lock-Free KUDURRU-64 (Ring-0 Gravity Filter)",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 1500,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-seqlock-filter",
+      "scope": "global",
+      "description": "Filtro de gravedad Lock-Free Seqlock 64B en frontera Ring-0 contra DDoS cognitivo (KUDURRU-64).",
+      "triggers": [
+        "c5-kudurru-64",
+        "ddos cognitivo",
+        "filtro de gravedad",
+        "kernel-seqlock-filter",
+        "kudurru",
+        "kudurru-64",
+        "seqlock 64b"
+      ]
+    },
+    {
+      "name": "shared-manifest-kernel",
+      "tier": 22000,
+      "category": "Kernel",
+      "display_name": "Kernel de Manifiesto Compartido (64B Seqlock SPMC)",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 1000,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-shared-manifest",
+      "scope": "workspace",
+      "description": "Patrón de diseño C-ABI de 64 Bytes (Seqlock SPMC, Cero-Punteros, Fail-Stop SCITT y soporte IPC multiplataforma macOS/Linux/Windows).",
+      "triggers": [
+        "ipc lock-free",
+        "kernel-shared-manifest",
+        "ring-0 shm",
+        "seqlock 64b",
+        "shared manifest",
+        "shared-manifest-kernel"
+      ]
+    },
+    {
+      "name": "c5-mushushu-0",
+      "tier": 22000,
+      "category": "Kernel",
+      "display_name": "Oráculo Formal & Firewall de Apoptosis MUSHUSHU-0 (Ring-0)",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 1000,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-epistemic-firewall",
+      "scope": "global",
+      "description": "Oráculo formal y firewall epistémico Ring-0 para validación determinista y apoptosis (MUSHUSHU-0).",
+      "triggers": [
+        "apoptosis termodinámica",
+        "c5-mushushu-0",
+        "firewall epistémico",
+        "kernel-epistemic-firewall",
+        "mushushu",
+        "mushushu-0"
+      ]
+    },
+    {
+      "name": "c5-larsa-120",
+      "tier": 21800,
+      "category": "Kernel",
+      "display_name": "Consenso BFT Isostático LARSA-120 (Tríada Rust/Lean4/Z3)",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 800,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-bft-consensus",
+      "scope": "global",
+      "description": "Orquestador de Consenso BFT Isostático de la Tríada Arquitectónica (LARSA-120).",
+      "triggers": [
+        "c5-larsa-120",
+        "consenso bft",
+        "consenso isostático",
+        "kernel-bft-consensus",
+        "larsa",
+        "larsa-120",
+        "tríada arquitectónica"
+      ]
+    },
+    {
+      "name": "babylon60-kernel-invariants",
+      "tier": 21600,
+      "category": "Kernel",
+      "display_name": "Auditoría de Invariantes del Kernel BABYLON-60",
+      "canonical_alias": "kernel-invariants-audit",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 600,
+        "compiler_verified": true
+      },
+      "scope": "workspace",
+      "description": "Audita y prepara correcciones del kernel BABYLON-60 para SPSC, SQLite L0, relojes causales, consenso LARSA y correspondencia Rust–Lean. Usa el puente MCP local cuando esté disponible y distingue pruebas ejecutadas de obligaciones pendientes.",
+      "triggers": [
+        "babylon60-kernel-invariants",
+        "kernel-invariants-audit"
+      ]
+    },
+    {
+      "name": "thermo-audit",
+      "tier": 21500,
+      "category": "Kernel",
+      "display_name": "Auditoría Termodinámica de Silicio y Concurrencia",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 500,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-thermo-audit",
+      "scope": "workspace",
+      "description": "Auditoría termodinámica estricta de C5-REAL en silicio (Aritmética, Concurrencia, MDL, Ring-0, Seqlocks y Grados de Libertad Parásitos).",
+      "triggers": [
+        "/thermo-audit",
+        "auditoría termodinámica código",
+        "concurrencia landauer",
+        "fricción de silicio",
+        "grados de libertad parásitos",
+        "kernel-thermo-audit",
+        "potencia causal",
+        "silicon concurrency audit",
+        "thermo-audit"
+      ]
+    },
+    {
+      "name": "cortex-skill-composer",
+      "tier": 21500,
+      "category": "Meta-Kernel",
+      "display_name": "Componedor & Orquestador de Cadenas de Skills",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 500,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-skill-composer",
+      "scope": "global",
+      "description": "Composición y orquestación en cadena (Skill Chains) de múltiples habilidades CORTEX.",
+      "triggers": [
+        "cadena de habilidades",
+        "componer skills",
+        "cortex skill composer",
+        "cortex-skill-composer",
+        "orquestación de habilidades",
+        "pipeline de skills",
+        "skill chain",
+        "skill pipeline",
+        "swarm-skill-composer"
+      ]
+    },
+    {
+      "name": "c5-ring0-babylon-kernel-project",
+      "tier": 21500,
+      "category": "Kernel",
+      "display_name": "Kernel Hub · Ring-0 BABYLON (Proyecto)",
+      "canonical_alias": "kernel-hub",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 500,
+        "compiler_verified": true
+      },
+      "scope": "workspace",
+      "description": "Enruta módulos BABYLON-60 del proyecto: SPSC, SQLite L0, arquitectura IDE, SharedManifest, launchd, Apple Silicon y auditoría de contención. Dispara con \"kernel-hub\", \"babylon kernel hub\", \"shared manifest\", \"thermo-audit\", \"rlhf sentinel\", \"apple-bypass\".",
+      "triggers": [
+        "apple-bypass",
+        "babylon kernel hub",
+        "c5-ring0-babylon-kernel-project",
+        "kernel-hub",
+        "rlhf sentinel",
+        "shared manifest",
+        "thermo-audit"
+      ]
+    },
+    {
+      "name": "c5-ring0-babylon-kernel",
+      "tier": 21500,
+      "category": "Kernel",
+      "display_name": "Ring-0 BABYLON Kernel",
+      "canonical_alias": "kernel-router",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 500,
+        "compiler_verified": true
+      },
+      "scope": "global",
+      "description": "Enruta auditorías y trabajo de kernel, Lean 4/Z3, BFT, Seqlock, silicio, inferencia local y atestación; carga solo el módulo relevante. Dispara con \"ring0 hub\", \"kernel hub\", \"lean 4\", \"larsa\", \"kudurru\", \"eridu\", \"laya\".",
+      "triggers": [
+        "c5-ring0-babylon-kernel",
+        "eridu",
+        "kernel hub",
+        "kernel-router",
+        "kudurru",
+        "larsa",
+        "laya",
+        "lean 4",
+        "ring0 hub"
+      ]
+    },
+    {
+      "name": "c5-thermos-audit",
+      "tier": 21400,
+      "category": "Kernel",
+      "display_name": "Auditoría Termonuclear de Silicio & Código (Double Thermo)",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 400,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-double-thermo-audit",
+      "scope": "global",
+      "description": "Auditoría termonuclear de ramas y PRs con 2 subagentes paralelos (Seguridad/DevEx vs. Regla 1000 líneas/Code Judo).",
+      "triggers": [
+        "auditoría termonuclear",
+        "c5-thermos-audit",
+        "double thermo",
+        "kernel-double-thermo-audit",
+        "revisar rama a fondo",
+        "revisión termonuclear",
+        "thermo review",
+        "thermos",
+        "thermos audit"
+      ]
+    },
+    {
+      "name": "c5-enki-60",
+      "tier": 21400,
+      "category": "Nucleus",
+      "display_name": "Motor Aritmético de Precisión Sexagesimal ENKI-60",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 400,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-sexagesimal-math",
+      "scope": "global",
+      "description": "Motor aritmético de precisión sexagesimal y cálculo pesado en silicio (ENKI-60).",
+      "triggers": [
+        "aritmética base 60",
+        "c5-enki-60",
+        "cálculo sexagesimal",
+        "enki",
+        "enki-60",
+        "kernel-sexagesimal-math",
+        "precisión sexagesimal"
+      ]
+    },
+    {
+      "name": "c5-rea-clean-room",
+      "tier": 21300,
+      "category": "Kernel",
+      "display_name": "Suite C5-REA de Ingeniería Inversa en Sala Limpia y Firewall Existence-Gap",
+      "canonical_alias": "kernel-rea-clean-room",
+      "scope": "workspace",
+      "role": "auditor",
+      "description": "Disección binaria AOT/Mach-O y Electron ASAR en memoria (<15ms), síntesis Clean-Room (TS/Rust/Python) y firewall Popperiano Existence-Gap.",
+      "triggers": [
+        "/c5-rea",
+        "c5-rea",
+        "c5-rea-clean-room",
+        "clean-room synthesis",
+        "disección aot",
+        "kernel-rea-clean-room",
+        "rea harness",
+        "rea-decompile",
+        "rea-triage",
+        "rea-unpack"
+      ],
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 300,
+        "compiler_verified": true
+      }
+    },
+    {
+      "name": "rlhf-sentinel",
+      "tier": 21200,
+      "category": "Governance",
+      "display_name": "Centinela de Contención Ring-0 (RLHF Sentinel)",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 200,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-rlhf-sentinel",
+      "scope": "workspace",
+      "description": "Audita la barrera IPC (Ring-0) para detectar fallos de contención de IA (RLHF Breakthrough) y ataques estocásticos.",
+      "triggers": [
+        "/rlhf-sentinel",
+        "contención de ia",
+        "fuga de llm",
+        "kernel-rlhf-sentinel",
+        "quarantine ring-0",
+        "rlhf sentinel",
+        "rlhf-sentinel"
+      ]
+    },
+    {
+      "name": "cortex-skill-auditor",
+      "tier": 21200,
+      "category": "Meta-Kernel",
+      "display_name": "Auditor Exergético de Skills CORTEX Engine",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 200,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-skill-auditor",
+      "scope": "global",
+      "description": "Audita estructura, rutas, enlaces y coherencia de instrucciones cuando se pide revisar una biblioteca de skills; conserva comprobaciones independientes y explicita su cobertura.",
+      "triggers": [
+        "auditar skills",
+        "auditoría de habilidades",
+        "cortex skill auditor",
+        "cortex-skill-auditor",
+        "exergía skills",
+        "matriz de colisión",
+        "salud de skills",
+        "solapamiento de triggers",
+        "swarm-skill-auditor"
+      ]
+    },
+    {
+      "name": "c5-information-thermodynamics",
+      "tier": 21200,
+      "category": "Nucleus",
+      "display_name": "Termodinámica de la Información y Geometría Estadística (Fisher-Chentsov)",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 200,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-info-thermo",
+      "scope": "global",
+      "description": "Auditoría de física de la información e IA.",
+      "triggers": [
+        "amari natural gradient",
+        "audita entropía",
+        "c5-information-thermodynamics",
+        "divergencia kl",
+        "entropía de shannon",
+        "epistemic-info-thermo",
+        "fisher information",
+        "flujo de wasserstein",
+        "information geometry",
+        "kullback leibler",
+        "landauer limit",
+        "teorema de chentsov"
+      ]
+    },
+    {
+      "name": "c5-autonomous-agent-primitives",
+      "tier": 21200,
+      "category": "Meta-Kernel",
+      "display_name": "Catálogo Canónico y Transductor de 47 Primitivas de Agente Autónomo",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 200,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-agent-primitives",
+      "scope": "global",
+      "description": "Catálogo y matriz de las 47 primitivas de agente autónomo colapsadas en los 4 macro-transductores C5-REAL.",
+      "triggers": [
+        "47 primitivas",
+        "47 skills",
+        "asimilación de skills",
+        "c5-autonomous-agent-primitives",
+        "catálogo de skills",
+        "macro-transductores",
+        "playbooks de agente",
+        "primitivas de agente",
+        "swarm-agent-primitives"
+      ]
+    },
+    {
+      "name": "cortex-skill-genesis",
+      "tier": 21000,
+      "category": "Meta-Kernel",
+      "display_name": "Génesis Autónoma de Skills CORTEX",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-skill-genesis",
+      "scope": "global",
+      "description": "Síntesis y generación automática de nuevos SKILL.md desde telemetría de sesiones y patrones observados.",
+      "triggers": [
+        "auto skill creator",
+        "cortex skill genesis",
+        "cortex-skill-genesis",
+        "crear habilidad",
+        "generar skill",
+        "sintetizar skill",
+        "skill genesis",
+        "swarm-skill-genesis"
+      ]
+    },
+    {
+      "name": "c5-lexicon-enforcer",
+      "tier": 21000,
+      "category": "Nucleus",
+      "display_name": "Oráculo de Verificación Epistemológica & Auditoría de Coste Involuntario (Aforismo 5)",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-lexicon-enforcer",
+      "scope": "global",
+      "description": "Oráculo epistemológico C5-REAL y Linter del Aforismo 5 (purga de cheap talk voluntario hacia señales involuntarias).",
+      "triggers": [
+        "analiza esto con el aforismo 5",
+        "auditar cheap talk",
+        "auditoría epistemológica",
+        "c5-lexicon-enforcer",
+        "epistemic-lexicon-enforcer",
+        "forzar léxico c5",
+        "lexicon enforcer",
+        "purga anergía semántica"
+      ]
+    },
+    {
+      "name": "c5-lean4-neurosymbolic-architect",
+      "tier": 21000,
+      "category": "Nucleus",
+      "display_name": "Arquitecto Neuro-Simbólico Soberano en Lean 4",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-lean4-ffi",
+      "scope": "global",
+      "description": "Arquitectura de agentes neuro-simbólicos y binarios soberanos en Lean 4 (C-FFI, ITrees, lógica lineal).",
+      "triggers": [
+        "agente neuro-simbólico",
+        "autopoiesis coinductiva",
+        "c5-lean4-neurosymbolic-architect",
+        "itrees lean",
+        "kernel-lean4-ffi",
+        "lean 4 ffi"
+      ]
+    },
+    {
+      "name": "autodidact-omega",
+      "tier": 21000,
+      "category": "Nucleus",
+      "display_name": "Motor Autodidact-Ω de Investigación Profunda y Falsación Popperiana",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-deep-research",
+      "scope": "global",
+      "description": "Investigación profunda de frontera, cristales ontológicos 21k, falsación Popperiana y atestación SCITT.",
+      "triggers": [
+        "autodidact",
+        "autodidact-omega",
+        "cristal ontológico",
+        "deep research",
+        "epistemic-deep-research",
+        "investigación profunda",
+        "investigar paper"
+      ]
+    },
+    {
+      "name": "epistemic-extinction-protocol",
+      "tier": 20980,
+      "category": "Nucleus",
+      "display_name": "Protocolo de Extinción Epistémica (Punto Fijo Ω)",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-fixed-point",
+      "scope": "global",
+      "description": "Protocolo de reducción dimensional y extinción epistémica (Punto Fijo Ω).",
+      "triggers": [
+        "epistemic extinction",
+        "epistemic-extinction-protocol",
+        "epistemic-fixed-point",
+        "extinción conceptual",
+        "extinción epistémica",
+        "punto fijo omega",
+        "punto fijo ω",
+        "reducción dimensional"
+      ]
+    },
+    {
+      "name": "cta-cognitive-transition-algebra",
+      "tier": 20950,
+      "category": "Nucleus",
+      "display_name": "Álgebra de Transiciones Cognitivas & Event-Sourcing Comonádico",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-transition-algebra",
+      "scope": "global",
+      "description": "Álgebra de Transiciones Cognitivas (CTA), event-sourcing comonádico y modelos formales de estado.",
+      "triggers": [
+        "comónada cognitiva",
+        "cta transition",
+        "cta-cognitive-transition-algebra",
+        "epistemic-transition-algebra",
+        "event sourcing cognitivo",
+        "matriz cta",
+        "transición de estados",
+        "álgebra cognitiva",
+        "álgebra de transiciones"
+      ]
+    },
+    {
+      "name": "c5-plan-omega",
+      "tier": 20900,
+      "category": "Nucleus",
+      "display_name": "Protocolo PLAN-Ω de Planificación Causal Determinista",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-dag-planner",
+      "scope": "global",
+      "description": "Motor de planificación determinista en DAG (Protocolo PLAN-Ω). Sustituye checklists planas por matrices topológicas de 4 niveles, sondeo pre-flight en 60s, puertas Two-Way/One-Way con rollback y micro-gates Fail-Stop.",
+      "triggers": [
+        "/plan-omega",
+        "c5 plan",
+        "c5-plan-omega",
+        "mejorar plan",
+        "plan causal",
+        "plan omega",
+        "protocolo plan omega",
+        "swarm-dag-planner"
+      ]
+    },
+    {
+      "name": "c5-lean4-axiomatic-orchestrator",
+      "tier": 20900,
+      "category": "Nucleus",
+      "display_name": "Orquestador Axiomático y Verificación Formal en Lean 4",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-lean4-prover",
+      "scope": "global",
+      "description": "Orquestación neuro-simbólica y verificación formal en Lean 4 (ΔΦ > 0, antipatrones AP-01..09 y Lake build).",
+      "triggers": [
+        "axiomas lean",
+        "c5-lean4-axiomatic-orchestrator",
+        "formalizar en lean",
+        "kernel-lean4-prover",
+        "lake build",
+        "lean 4",
+        "neuro-simbólico",
+        "oráculo axiomático",
+        "probar teorema",
+        "verificación formal"
+      ]
+    },
+    {
+      "name": "c5-sovereign-system1-engine",
+      "tier": 20850,
+      "category": "Nucleus",
+      "display_name": "Motor de Decisión Sistema 1 No Autorregresivo (LAYA Edge)",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-system1-decision",
+      "scope": "global",
+      "description": "Diseño, compilación, despliegue y calibración on-device de motores de decisión de Sistema 1 no autorregresivos (LAYA / ModernBERT) en silicio local Apple Silicon.",
+      "triggers": [
+        "c5-sovereign-system1-engine",
+        "decision engine local",
+        "jev local",
+        "kernel-system1-decision",
+        "kudurru 64 socket",
+        "laya",
+        "sistema 1 edge",
+        "triage desacoplado"
+      ]
+    },
+    {
+      "name": "c5-sovereign-inference-runtime",
+      "tier": 20850,
+      "category": "Systems",
+      "display_name": "Motor Soberano de Inferencia y Adaptador LM Studio C5-REAL",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-local-inference",
+      "scope": "global",
+      "description": "Despliegue y auditoría de motores de inferencia local bare-metal.",
+      "triggers": [
+        "air-gapped infer",
+        "appliance ia",
+        "c5-sovereign-inference-runtime",
+        "desplegar eridu-infer",
+        "eridu-infer",
+        "inferencia soberana",
+        "kernel-local-inference",
+        "lm studio protocolo",
+        "motor inferencia local",
+        "servidor openai local rust",
+        "sovereign inference runtime",
+        "tríada jurídica"
+      ]
+    },
+    {
+      "name": "c5-silicon-stress-suite",
+      "tier": 20850,
+      "category": "Operations",
+      "display_name": "Suite de Estrés Concurrente de Silicio y Enjambres (C5-REAL)",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-stress-suite",
+      "scope": "global",
+      "description": "Pruebas de estrés en paralelo y benchmarks de silicio (multicast O(1), Seqlock KUDURRU-64, BFT y Touch ID COSE_Sign1).",
+      "triggers": [
+        "c5-silicon-stress-suite",
+        "concurrencia de silicio",
+        "estres enjambre",
+        "estres silicio",
+        "kernel-stress-suite",
+        "poc",
+        "pruebas de estres",
+        "stress suite",
+        "stress test swarm",
+        "test de estres"
+      ]
+    },
+    {
+      "name": "c5-debloat-agent-kernel",
+      "tier": 20800,
+      "category": "Nucleus",
+      "display_name": "Arquitecto de Micro-Kernels Agénticos Bare-Metal (Anti-LangChain)",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-baremetal-agent",
+      "scope": "global",
+      "description": "Diseño y migración a micro-kernels de agentes en un archivo con stdlib pura y SQLite WAL sin LangChain.",
+      "triggers": [
+        "agente zero dependency",
+        "autopsia langchain",
+        "bare-metal agent",
+        "c5-debloat-agent-kernel",
+        "debloat llm",
+        "microkernel agentes",
+        "reemplazar langchain",
+        "swarm-baremetal-agent"
+      ]
+    },
+    {
+      "name": "categorical-hallucination-audit",
+      "tier": 20700,
+      "category": "Nucleus",
+      "display_name": "Auditoría Categórica de Alucinación & Cota Kl(D)",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-hallucination-audit",
+      "scope": "global",
+      "description": "Formalización en Categorías de Markov, desintegración bayesiana y cota cuantitativa de alucinación en Kl(D).",
+      "triggers": [
+        "alucinación categórica",
+        "categorical-hallucination-audit",
+        "cota de confabulación",
+        "cota de lipschitz",
+        "desintegración bayesiana",
+        "epistemic-hallucination-audit",
+        "kl(d) audit",
+        "mean shift 1d",
+        "myhill-nerode estocástico"
+      ]
+    },
+    {
+      "name": "c5-adaptive-annealing-engine",
+      "tier": 20650,
+      "category": "Nucleus",
+      "display_name": "Motor de Recocido Adaptativo y Convergencia Exergética (Q1-Q4)",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-adaptive-annealing",
+      "scope": "global",
+      "description": "Motor de Recocido Adaptativo en cuatro cuartiles (Q1-Q4) para forzar convergencia al Apex en espacios discretos y optimización sin colisión topológica ni colapso de gradiente voraz.",
+      "triggers": [
+        "adaptive annealing",
+        "busqueda del apex",
+        "c5-adaptive-annealing-engine",
+        "evitar colapso voraz",
+        "motor de recocido",
+        "optimizacion sin colisiones",
+        "recocido adaptativo",
+        "swarm-adaptive-annealing"
+      ]
+    },
+    {
+      "name": "existence-gap-audit",
+      "tier": 20600,
+      "category": "Nucleus",
+      "display_name": "Auditoría de Huecos de Existencia & Supply-Chain Slop",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "secops-existence-audit",
+      "scope": "global",
+      "description": "Detecta imports y referencias fantasma en repositorios. Dispara con \"auditoría\", \"audit\", \"revisa este repo\", \"código alucinado\", \"dependencias fantasma\", \"slopsquatting\", \"vibe coding\", \"supply chain\", \"¿esto se ejecuta?\", \"imports rotos\", \"auditar workflows\".",
+      "triggers": [
+        "audit",
+        "auditar workflows",
+        "auditoría",
+        "código alucinado",
+        "dependencias fantasma",
+        "existence-gap-audit",
+        "imports rotos",
+        "revisa este repo",
+        "secops-existence-audit",
+        "slopsquatting",
+        "supply chain",
+        "vibe coding",
+        "¿esto se ejecuta?"
+      ]
+    },
+    {
+      "name": "c5-sharur-3600",
+      "tier": 20600,
+      "category": "Governance",
+      "display_name": "Matriz de Enjambre Sexagesimal SHARUR-3600 (Legión 100 Agentes)",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-legion-100",
+      "scope": "global",
+      "description": "Define e instancia a SHARUR-3600. Matriz de enjambre estocástico de Ring-2 para exploración masiva paralela y Surrealismo del Bueno.",
+      "triggers": [
+        "100 agentes",
+        "c5-sharur-3600",
+        "enjambre 100",
+        "legion 100",
+        "legión de 100 agentes",
+        "mas 100 agentes",
+        "sharur",
+        "sharur-3600",
+        "swarm-legion-100"
+      ]
+    },
+    {
+      "name": "c5-epistemic-thermodynamics-project",
+      "tier": 20600,
+      "category": "Nucleus",
+      "display_name": "Epistemic Hub · Termodinámica Epistémica (Proyecto)",
+      "canonical_alias": "epistemic-hub",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "scope": "workspace",
+      "description": "Enruta auditoría epistémica del proyecto, síntesis MDL, extracción de fuentes, simbiosis cognitiva y explicación clara. Dispara con \"epistemic-hub\", \"epistemic project hub\", \"auditoría epistémica\", \"cloud-chamber\", \"alpha extraction\", \"grill-me-v2\", \"wait-what\".",
+      "triggers": [
+        "alpha extraction",
+        "auditoría epistémica",
+        "c5-epistemic-thermodynamics-project",
+        "cloud-chamber",
+        "epistemic project hub",
+        "epistemic-hub",
+        "grill-me-v2",
+        "wait-what"
+      ]
+    },
+    {
+      "name": "c5-epistemic-thermodynamics",
+      "tier": 20600,
+      "category": "Nucleus",
+      "display_name": "Epistemic Thermodynamics",
+      "canonical_alias": "epistemic-router",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "scope": "global",
+      "description": "Enruta axiomas, léxico, termodinámica de información, modelos cognitivos, síntesis y falsación de afirmaciones. Dispara con \"epistemic hub\", \"termodinámica epistémica\", \"axiomas\", \"anagnórisis\", \"falsación\", \"investigación profunda\", \"peer review\".",
+      "triggers": [
+        "anagnórisis",
+        "axiomas",
+        "c5-epistemic-thermodynamics",
+        "epistemic hub",
+        "epistemic-router",
+        "falsación",
+        "investigación profunda",
+        "peer review",
+        "termodinámica epistémica"
+      ]
+    },
+    {
+      "name": "polymath-concept-synthesis",
+      "tier": 20500,
+      "category": "Nucleus",
+      "display_name": "Síntesis Polímata Interdisciplinar (Modo ULTRATHINK)",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-polymath-synthesis",
+      "scope": "global",
+      "description": "Síntesis polímata de conceptos complejos integrando física, matemáticas, teoría de la información y arte (Modo ULTRATHINK).",
+      "triggers": [
+        "concepto polímata",
+        "epistemic-polymath-synthesis",
+        "polymath synthesis",
+        "polymath-concept-synthesis",
+        "síntesis interdisciplinar",
+        "síntesis polímata",
+        "ultrathink",
+        "unificación conceptual",
+        "unificación interdisciplinar"
+      ]
+    },
+    {
+      "name": "goal",
+      "tier": 20500,
+      "category": "Governance",
+      "display_name": "Protocolo de Ejecución por Contrato /goal (Zero-Waste Gate)",
+      "canonical_alias": "goal-contract",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "scope": "global",
+      "description": "Destila cualquier tarea en un contrato cerrado de mínimo consumo de tokens y asigna el modelo/nivel exacto antes de tocar código.",
+      "triggers": [
+        "/goal",
+        "contrato goal",
+        "goal",
+        "goal-contract"
+      ]
+    },
+    {
+      "name": "c5-popperian-falsification-auditor",
+      "tier": 20500,
+      "category": "Nucleus",
+      "display_name": "Auditor de Falsación Empírica de Documentos",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-popperian-auditor",
+      "scope": "global",
+      "description": "Somete documentos locales, manifiestos o afirmaciones técnicas a falsación empírica C5-REAL contrastando con literatura científica primaria.",
+      "triggers": [
+        "auditar documento",
+        "c5-popperian-falsification-auditor",
+        "epistemic-popperian-auditor",
+        "falsación de documento",
+        "falsar afirmación",
+        "falsar paper",
+        "veredicto empírico"
+      ]
+    },
+    {
+      "name": "c5-dialectical-pipeline",
+      "tier": 20500,
+      "category": "Nucleus",
+      "display_name": "Macro-Operador de Estado Dialéctico y Salto Topológico (Cambio 2)",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-dialectic-loop",
+      "scope": "global",
+      "description": "Macro-operador dialéctico: Tesis, Antítesis (falsabiliza) y Síntesis recursiva (itera) hacia el Salto Topológico.",
+      "triggers": [
+        "c5-dialectical-pipeline",
+        "epistemic-dialectic-loop",
+        "falsa",
+        "falsabilia",
+        "falsabiliza",
+        "falsabliza",
+        "itera",
+        "iteraa",
+        "itra",
+        "itrera",
+        "iytera",
+        "salto topológico",
+        "sigue"
+      ]
+    },
+    {
+      "name": "c5-axiomatic-kernel",
+      "tier": 20500,
+      "category": "Nucleus",
+      "display_name": "Núcleo Operativo de los 100 Axiomas Fundacionales C5-REAL",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-axiomatic-kernel",
+      "scope": "global",
+      "description": "Núcleo Operativo de los 100 Principios Fundacionales de Alta Exergía (Axiomas C5-REAL). Contiene la destilación en sinónimos, verbos y álgebra de los principios rectores.",
+      "triggers": [
+        "axiomas",
+        "axiomas c5-real",
+        "c5-axiomatic-kernel",
+        "epistemic-axiomatic-kernel",
+        "invariantes fundacionales",
+        "kernel axiomático",
+        "núcleo operativo",
+        "principios c5",
+        "top 100 principios"
+      ]
+    },
+    {
+      "name": "c5-academic-peer-reviewer",
+      "tier": 20500,
+      "category": "Nucleus",
+      "display_name": "Simulador de Revisión Académica por Pares",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-peer-reviewer",
+      "scope": "global",
+      "description": "Simulación de revisión por pares académica para papers científicos. Genera dictámenes estructurados (Accept / Major Revision / Minor Revision / Reject) en 4 dimensiones.",
+      "triggers": [
+        "academic reviewer",
+        "auditoría de paper",
+        "c5-academic-peer-reviewer",
+        "dictamen académico",
+        "epistemic-peer-reviewer",
+        "peer review",
+        "revisar paper"
+      ]
+    },
+    {
+      "name": "c5-ultrathink-epistemic-audit",
+      "tier": 20400,
+      "category": "Nucleus",
+      "display_name": "Epistemic Audit · Auditoría Epistémica Profunda",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-audit",
+      "scope": "workspace",
+      "description": "Auditoría epistémica profunda (ULTRATHINK) basada en el marco termodinámico C5-REAL. Ejecuta un desacople ontológico estricto entre \"Estado/Memoria\" y \"Lógica/Cálculo\", mapeando conceptos a invariantes termodinámicas (Curry-Howard, Landauer).",
+      "triggers": [
+        "auditoría epistémica",
+        "auditoría ultrathink",
+        "c5-ultrathink-epistemic-audit",
+        "desacople ontológico",
+        "epistemic-audit",
+        "postmortem mcts"
+      ]
+    },
+    {
+      "name": "c5-tri-provider-swarm",
+      "tier": 20400,
+      "category": "Governance",
+      "display_name": "Orquestador de Enjambre Híbrido Tri-Provider (OpenAI ⊗ Qwen ⊗ Local vLLM/MLX)",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-tri-provider",
+      "scope": "global",
+      "description": "Orquestación desacoplada de enjambres multi-agente combinando OpenAI (Planner N0, Structured Outputs), Qwen (Workers de Código N1 en vLLM local sin 429) y un modelo local de contexto largo (Arqueología N2 en vLLM/MLX) bajo semáforos de Landauer.",
+      "triggers": [
+        "c5-tri-provider-swarm",
+        "enjambre híbrido",
+        "orquestador tres modelos",
+        "swarm-tri-provider",
+        "tri provider swarm",
+        "tri-provider swarm"
+      ]
+    },
+    {
+      "name": "c5-cortex-swarm-orchestrator-project",
+      "tier": 20400,
+      "category": "Governance",
+      "display_name": "Swarm Hub · Orquestador CORTEX (Proyecto)",
+      "canonical_alias": "swarm-hub",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "scope": "workspace",
+      "description": "Enruta módulos del proyecto para minería LoRA con enjambres, instalación guiada y redacción para agentes. Dispara con \"swarm-hub\", \"cortex project hub\", \"hub cortex proyecto\", \"swarm router proyecto\", \"lora swarm\", \"wizard\", \"writing-for-agents\".",
+      "triggers": [
+        "c5-cortex-swarm-orchestrator-project",
+        "cortex project hub",
+        "hub cortex proyecto",
+        "lora swarm",
+        "swarm router proyecto",
+        "swarm-hub",
+        "wizard",
+        "writing-for-agents"
+      ]
+    },
+    {
+      "name": "c5-cortex-swarm-orchestrator",
+      "tier": 20400,
+      "category": "Governance",
+      "display_name": "CORTEX Swarm Orchestrator",
+      "canonical_alias": "swarm-router-hub",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "scope": "global",
+      "description": "Enruta enjambres, ciclo de vida de agentes, proveedores, telemetría, auditoría y composición de skills, planificación y handoff. Dispara con \"cortex swarm hub\", \"swarm hub\", \"enjambre\", \"sharur\", \"skill chain\", \"telemetría\", \"plan omega\".",
+      "triggers": [
+        "c5-cortex-swarm-orchestrator",
+        "cortex swarm hub",
+        "enjambre",
+        "plan omega",
+        "sharur",
+        "skill chain",
+        "swarm hub",
+        "swarm-router-hub",
+        "telemetría"
+      ]
+    },
+    {
+      "name": "cct-cognitive-theory-advisor",
+      "tier": 20300,
+      "category": "Nucleus",
+      "display_name": "Asesoría en Teoría Cognitiva CCT & Límite Gödel-Turing",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-cognitive-theory",
+      "scope": "global",
+      "description": "Asesor en Teoría Cognitiva CCT, Límite de Gödel-Turing, Autopoiesis (Maturana/Luhmann) y prevención de colapso entrópico.",
+      "triggers": [
+        "autopoiesis",
+        "burnout cognitivo",
+        "cct advisor",
+        "cct-cognitive-theory-advisor",
+        "epistemic-cognitive-theory",
+        "gödel turing",
+        "maturana luhmann",
+        "teoría cognitiva"
+      ]
+    },
+    {
+      "name": "c5-session-deskimming",
+      "tier": 20250,
+      "category": "Governance",
+      "display_name": "Protocolo de Desnatado de Sesiones & Purga de Nata (Ring-2 -> Ring-0)",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-session-deskimming",
+      "scope": "global",
+      "description": "Workflow de enjambre (Ring-2 a Ring-0) para auditar historiales, purgar nata y reubicar archivos huérfanos.",
+      "triggers": [
+        "archivos huérfanos",
+        "c5-session-deskimming",
+        "deskimming",
+        "desnatar sesión",
+        "purgar nata sesión",
+        "swarm-session-deskimming"
+      ]
+    },
+    {
+      "name": "cloud-chamber",
+      "tier": 20200,
+      "category": "Nucleus",
+      "display_name": "Metodología de Cámara de Niebla (Síntesis MDL)",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-mdl-synthesizer",
+      "scope": "workspace",
+      "description": "Ejecuta la Metodología de Cámara de Niebla forzando síntesis de alta densidad topológica (MDL / Invariantes C5-REAL).",
+      "triggers": [
+        "/cloud-chamber",
+        "cloud-chamber",
+        "colapso mdl",
+        "cámara de niebla",
+        "epistemic-mdl-synthesizer",
+        "máxima densidad topológica"
+      ]
+    },
+    {
+      "name": "c5-metodo-acreativo",
+      "tier": 20050,
+      "category": "Nucleus",
+      "display_name": "Método Acreativo Soberano (Transducción de Invariantes & Aforismo 5)",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "media-acreativo-method",
+      "scope": "global",
+      "description": "Metodología formal del Método Acreativo, Oráculo de Apoptosis O(1), sustracción Rubin-Chentsov y Punto Fijo Ω. Dispara con \"metodo acreativo\", \"método acreativo\", \"transducción soberana\", \"oraculo de apoptosis\", \"protocolo rubin\", \"crear arte c5\", \"produccion musical c5\".",
+      "triggers": [
+        "c5-metodo-acreativo",
+        "crear arte c5",
+        "media-acreativo-method",
+        "metodo acreativo",
+        "método acreativo",
+        "oraculo de apoptosis",
+        "produccion musical c5",
+        "protocolo rubin",
+        "transducción soberana"
+      ]
+    },
+    {
+      "name": "grill-me-v2",
+      "tier": 19900,
+      "category": "Governance",
+      "display_name": "Socratic Interrogator · Interrogatorio Socrático Adversarial",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "socratic-interrogator",
+      "scope": "workspace",
+      "description": "Versión avanzada de interrogatorio socrático (C5-REAL) para alinear decisiones de diseño y purgar asunciones infundadas.",
+      "triggers": [
+        "/grill-me-v2",
+        "grill-me-v2",
+        "interrogatorio socrático",
+        "socratic audit",
+        "socratic-interrogator"
+      ]
+    },
+    {
+      "name": "apple-bypass",
+      "tier": 19800,
+      "category": "Operations",
+      "display_name": "Bypass Termodinámico para LLMs en Apple Silicon",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-apple-bypass",
+      "scope": "workspace",
+      "description": "Mitigación de presión de memoria para LLMs locales en Apple Silicon.",
+      "triggers": [
+        "/apple-bypass",
+        "apple-bypass",
+        "bypass termodinámico",
+        "evadir jetsam macos",
+        "kernel-apple-bypass",
+        "liberar memoria mps"
+      ]
+    },
+    {
+      "name": "wait-what",
+      "tier": 19600,
+      "category": "Nucleus",
+      "display_name": "Freno Epistémico & Traducción Simplificada (STE)",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-simplifier",
+      "scope": "workspace",
+      "description": "Freno epistémico para combatir verbosidad, forzar ASD-STE-100 y aterrizar conceptos a lenguaje directo.",
+      "triggers": [
+        "/wait-what",
+        "déjate de rollos",
+        "epistemic-simplifier",
+        "explícalo simple",
+        "freno epistémico",
+        "fuera de aqui todo esto",
+        "fuera de aqui todo eto",
+        "no entiendo nada",
+        "quita todo esto",
+        "simplifica respuesta",
+        "wait-what"
+      ]
+    },
+    {
+      "name": "c5-html-report-injection-audit",
+      "tier": 19600,
+      "category": "Governance",
+      "display_name": "Auditoría de Inyección HTML en Generadores de Reportes",
+      "canonical_alias": "xss-report-auditor",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "scope": "global",
+      "description": "Verifica el escape HTML de datos del ledger en exportadores Jinja2 y string.Template. Dispara con \"inyección html\", \"xss reporte\", \"autoescape jinja\", \"auditar exportador\", \"escape de ledger\".",
+      "triggers": [
+        "auditar exportador",
+        "autoescape jinja",
+        "c5-html-report-injection-audit",
+        "escape de ledger",
+        "inyección html",
+        "xss reporte",
+        "xss-report-auditor"
+      ]
+    },
+    {
+      "name": "c5-sovereign-binary-architect",
+      "tier": 19500,
+      "category": "Systems",
+      "display_name": "Arquitecto de Binarios Soberanos C5-REAL",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-static-binary",
+      "scope": "global",
+      "description": "Desacopla dependencias pesadas (FFI/PyO3/Node), aísla el núcleo matemático detrás de feature flags y configura binarios estáticos soberanos (x86_64-unknown-linux-musl) de baja entropía.",
+      "triggers": [
+        "aislar dependencias",
+        "binario estático",
+        "binario soberano",
+        "c5-sovereign-binary",
+        "c5-sovereign-binary-architect",
+        "compilación musl",
+        "kernel-static-binary",
+        "soberanía termodinámica"
+      ]
+    },
+    {
+      "name": "symbiotic-cognitive-architecture",
+      "tier": 19400,
+      "category": "Governance",
+      "display_name": "Arquitectura Cognitiva Simbiótica Díada Operador-Agente",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-symbiotic-cognition",
+      "scope": "workspace",
+      "description": "Protocolo de formalización de la díada simbiótica operador-agente, evaluación de Valor Ontológico (V_A), Tensor de Transducción Polímata y colapso autopoyético con el comando \"itera simbiótica\".",
+      "triggers": [
+        "epistemic-symbiotic-cognition",
+        "itera simbiótica",
+        "simbiosis cognitiva",
+        "symbiotic-cognitive-architecture",
+        "tensor de transducción",
+        "tú y yo",
+        "valor ontológico agente"
+      ]
+    },
+    {
+      "name": "c5-terminological-archaeology",
+      "tier": 19400,
+      "category": "Nucleus",
+      "display_name": "Arqueología Terminológica (Anagnórisis Conceptual C5-REAL)",
+      "canonical_alias": "terminology-archaeologist",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "scope": "global",
+      "description": "Cruza perífrasis con literatura primaria y registra términos canónicos en el léxico C5.",
+      "triggers": [
+        "anagnórisis",
+        "arqueología terminológica",
+        "busca mis perífrasis",
+        "c5-terminological-archaeology",
+        "cómo se llama cuando",
+        "cómo se llama esto en ciencia",
+        "terminology-archaeologist",
+        "tiene nombre esto",
+        "ya existe ese término"
+      ]
+    },
+    {
+      "name": "c5-sovereign-daemon-deployment",
+      "tier": 19350,
+      "category": "Operations",
+      "display_name": "Despliegue del Sovereign Spark Daemon en Launchd",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-daemon-deploy",
+      "scope": "workspace",
+      "description": "Protocolo estricto para desplegar el Sovereign Spark Daemon (Antigravity Engine en Rust) sobre el sistema init local de macOS (launchd) para ejecución 24/7 ininterrumpida.",
+      "triggers": [
+        "c5-sovereign-daemon-deployment",
+        "daemon 24/7",
+        "desplegar sovereign daemon",
+        "kernel-daemon-deploy",
+        "launchd rust daemon"
+      ]
+    },
+    {
+      "name": "anergy-purge-protocol",
+      "tier": 19300,
+      "category": "Governance",
+      "display_name": "Motor de Purga de Anergía, Código Muerto y Entropía APFS",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-anergy-purge",
+      "scope": "global",
+      "description": "Purga de código muerto, artefactos efímeros, ghost listeners, saturación APFS y prompt bloat.",
+      "triggers": [
+        "anergy-purge-protocol",
+        "dead code",
+        "disco lleno",
+        "ghost listeners",
+        "limpiar conversaciones",
+        "prompt bloat",
+        "purga de anergía",
+        "purga de entropía",
+        "scandisk",
+        "swarm-anergy-purge"
+      ]
+    },
+    {
+      "name": "swarm-quantum-collapse",
+      "tier": 19100,
+      "category": "Governance",
+      "display_name": "Sincronización Swarm & Colapso Cuántico Multi-Repositorio",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-multirepo-sync",
+      "scope": "global",
+      "description": "Orquesta un enjambre Python P×S calibrado empíricamente para forzar la sincronización (Colapso Cuántico) de múltiples repositorios simultáneos.",
+      "triggers": [
+        "colapso cuántico",
+        "colapso multirrepo",
+        "orquestar repos",
+        "sincronización cuántica",
+        "sincronizar enjambre",
+        "swarm quantum collapse",
+        "swarm sync",
+        "swarm-multirepo-sync",
+        "swarm-quantum-collapse"
+      ]
+    },
+    {
+      "name": "babylon60-architecture",
+      "tier": 19000,
+      "category": "Governance",
+      "display_name": "Arquitectura y Patrones BABYLON-60 IDE",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-ide-architecture",
+      "scope": "workspace",
+      "description": "Patrones de arquitectura de Babylon60 IDE (instaladores 1-clic autorreparables, tokens Ed25519 SCITT, OpenRouter Gateway, SSO corporativo y escala exérgica 1-21000).",
+      "triggers": [
+        "arquitectura babylon60",
+        "babylon60 ide",
+        "babylon60-architecture",
+        "kernel-ide-architecture",
+        "patrones ide babylon"
+      ]
+    },
+    {
+      "name": "c5-alpha-extraction-pipeline",
+      "tier": 18950,
+      "category": "Operations",
+      "display_name": "Alpha Extractor · Extracción de Alfa Algorítmico",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "alpha-extractor",
+      "scope": "workspace",
+      "description": "Protocol to extract high-exergy algorithmic alpha from arXiv and GitHub directly from raw sources (LaTeX/Git) bypassing PDFs, followed by LARSA-120 formalization.",
+      "triggers": [
+        "alpha extraction",
+        "alpha-extractor",
+        "c5-alpha-extraction-pipeline",
+        "deep research arxiv",
+        "extraer alfa algorítmico",
+        "larsa 120 alpha"
+      ]
+    },
+    {
+      "name": "c5-anti-slop-ui",
+      "tier": 18800,
+      "category": "Governance",
+      "display_name": "Linter y Directivas Frontend Anti-Slop (C5-REAL)",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "media-ui-linter",
+      "scope": "workspace",
+      "description": "Erradica el AI Slop y el pastiche estético en interfaces de usuario (WCAG AAA, escalas modulares áureas, ritmo vertical, veto al atractor grisáceo de Tailwind). Dispara con \"anti-slop ui\", \"impeccable c5\", \"linter de diseño\", \"auditoría ui\", \"pulir frontend\", \"erradicar ai slop\".",
+      "triggers": [
+        "anti-slop ui",
+        "auditoría ui",
+        "c5-anti-slop-ui",
+        "erradicar ai slop",
+        "impeccable c5",
+        "linter de diseño",
+        "media-ui-linter",
+        "pulir frontend"
+      ]
+    },
+    {
+      "name": "dynamic-subagent-lifecycle",
+      "tier": 18600,
+      "category": "Governance",
+      "display_name": "Supervisión del Ciclo de Vida de Subagentes Dinámicos",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-subagent-lifecycle",
+      "scope": "global",
+      "description": "Gestión del ciclo de vida, mitigación de deadlocks y supervisión de subagentes dinámicos.",
+      "triggers": [
+        "ciclo de vida subagente",
+        "dynamic subagent",
+        "dynamic-subagent-lifecycle",
+        "invoke_subagent",
+        "mitigar deadlocks",
+        "orquestar agentes dinámicos",
+        "subagente dinámico",
+        "supervisar subagente",
+        "swarm-subagent-lifecycle"
+      ]
+    },
+    {
+      "name": "c5-systemic-dissection-protocol",
+      "tier": 18500,
+      "category": "Specialized",
+      "display_name": "Protocolo de Disección Sistémica y Termodinámica",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-systemic-dissection",
+      "scope": "global",
+      "description": "Ejecuta una auditoría dialéctica en 4 fases sobre un sistema complejo: Extracción de 100 primitivas, Falsación Popperiana, Anclaje Empírico (Papers) y Síntesis Topológica.",
+      "triggers": [
+        "100 primitivas",
+        "auditar sistema completo",
+        "c5-systemic-dissection",
+        "c5-systemic-dissection-protocol",
+        "disección sistémica",
+        "disección termodinámica",
+        "epistemic-systemic-dissection",
+        "protocolo de disección"
+      ]
+    },
+    {
+      "name": "c5-ontological-translator",
+      "tier": 18500,
+      "category": "Specialized",
+      "display_name": "Traductor Ontológico hacia Invariantes de Alta Exergía C5-REAL",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-ontological-translator",
+      "scope": "global",
+      "description": "Traducción ontológica estricta de conceptos humanos y abstractos hacia invariantes de alta exergía (Termodinámica, Información, Topología).",
+      "triggers": [
+        "c5-ontological-translator",
+        "colapso ontológico",
+        "colapso semántico",
+        "epistemic-ontological-translator",
+        "mapeo ontológico",
+        "ontological translator",
+        "traducción ontológica",
+        "traducir a c5"
+      ]
+    },
+    {
+      "name": "c5-gemini-api-2026-standards",
+      "tier": 18500,
+      "category": "Specialized",
+      "display_name": "Estándares Gemini API 2026 & Tensor de Transducción",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-gemini-standards",
+      "scope": "global",
+      "description": "Estándares Gemini API 2026: modelos y cuotas verificables, diagnóstico HTTP, credenciales autorizadas y salidas estructuradas.",
+      "triggers": [
+        "c5-gemini-api-2026-standards",
+        "cuotas gemini api",
+        "gemini api 2026",
+        "gemini api key",
+        "gemini json schema",
+        "renovar gemini",
+        "structured outputs",
+        "swarm-gemini-standards",
+        "tensor de transducción"
+      ]
+    },
+    {
+      "name": "c5-exergy-scale-evaluator",
+      "tier": 18500,
+      "category": "Specialized",
+      "display_name": "Evaluador de Escala de Exergía 1-21.000 (Regla de 3 Evaluadores)",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-exergy-evaluator",
+      "scope": "global",
+      "description": "Auditoría de exergía estructural en escala 1 a 21.000 bajo la Regla de 3 Evaluadores (Silicio, Kolmogorov, Causal).",
+      "triggers": [
+        "3 evaluadores",
+        "auditoría de exergía",
+        "c5-exergy-scale-evaluator",
+        "epistemic-exergy-evaluator",
+        "escala 21000",
+        "escala de exergía",
+        "evaluar exergía",
+        "exergy scale",
+        "puntuación exergética"
+      ]
+    },
+    {
+      "name": "c5-ctm-formal-architect",
+      "tier": 18500,
+      "category": "Specialized",
+      "display_name": "Arquitectura Formal y Diseño Empírico de Cognitive Transition Machines (CTM)",
+      "role": "arquitecto",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-ctm-formalizer",
+      "scope": "global",
+      "description": "Arquitectura formal y empírica de Cognitive Transition Machines (CTM) e invariantes Lean 4 (AP-01 a AP-09).",
+      "triggers": [
+        "abduction vs deduction",
+        "c5-ctm-formal-architect",
+        "ctm benchmark",
+        "ctm formalization",
+        "falsification matrix",
+        "kernel-ctm-formalizer",
+        "lean 4 ctm",
+        "refinement trace"
+      ]
+    },
+    {
+      "name": "babylon-shield",
+      "tier": 18500,
+      "category": "Specialized",
+      "display_name": "Escudo Termodinámico Ring-0 (Caballo de Troya BABYLON-SHIELD)",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-babylon-shield",
+      "scope": "global",
+      "description": "Escudo Termodinámico Ring-0 (Caballo de Troya). Inyecta las Invariantes C5-REAL, previene bucles de anergía y fuerza la atestación de estado antes de cualquier mutación del código.",
+      "triggers": [
+        "atestación babylon",
+        "babylon shield",
+        "babylon-shield",
+        "escudo termodinámico",
+        "invariantes ring-0",
+        "kernel-babylon-shield",
+        "prevenir anergía",
+        "protección ring-0",
+        "ring-0 shield"
+      ]
+    },
+    {
+      "name": "lora-swarm-pipeline",
+      "tier": 18200,
+      "category": "Operations",
+      "display_name": "Pipeline de Minería Paralelizada con Enjambre LoRA",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-lora-pipeline",
+      "scope": "workspace",
+      "description": "Pipeline de minería con enjambre de agentes, extracción N-Zonas (SHA-256), ShareGPT/ChatML y clustering semántico.",
+      "triggers": [
+        "dataset swarm",
+        "enjambre lora",
+        "enjambre sharegpt",
+        "lora swarm",
+        "lora-swarm-pipeline",
+        "minar datasets enjambre",
+        "minería enjambre",
+        "n-zonas enjambre",
+        "swarm pipeline",
+        "swarm-lora-pipeline"
+      ]
+    },
+    {
+      "name": "swarm-router",
+      "tier": 18100,
+      "category": "Governance",
+      "display_name": "Enrutador Maestro y Despachador Inteligente de Enjambres",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-matrix-router",
+      "scope": "global",
+      "description": "Orquestador central y despachador inteligente de enjambres multi-agente con auto-detección contextual y tolerancia a typos.",
+      "triggers": [
+        "disparar enjambres",
+        "ejecutar enjambre",
+        "enjambre",
+        "enjmabres",
+        "lanzar enjambre",
+        "matriz de enjambres",
+        "mejora los enjambres",
+        "orquestar enjambre",
+        "sarm",
+        "sarms",
+        "swarm",
+        "swarm call",
+        "swarm-matrix-router",
+        "swarm-router",
+        "swarms"
+      ]
+    },
+    {
+      "name": "discourse-popperian-falsification",
+      "tier": 17900,
+      "category": "Operations",
+      "display_name": "Falsación Popperiana & Auditoría Discursiva de Hipótesis",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "epistemic-discourse-falsifier",
+      "scope": "global",
+      "description": "Falsación popperiana estricta de hipótesis científicas, leyendas urbanas, hipérboles biográficas y modelos externos.",
+      "triggers": [
+        "análisis popperiano",
+        "auditar mito",
+        "auditoría discursiva",
+        "desmentir mito",
+        "discourse-popperian-falsification",
+        "epistemic-discourse-falsifier",
+        "falsación popperiana",
+        "falsar hipótesis",
+        "leyenda urbana"
+      ]
+    },
+    {
+      "name": "cortex-telemetry",
+      "tier": 17500,
+      "category": "Operations",
+      "display_name": "Telemetría Runtime CORTEX, Exergía de Prompts y Drenaje de Sesiones",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-session-telemetry",
+      "scope": "global",
+      "description": "Inspección de telemetría runtime, logs transcript.jsonl, exergía de prompts (Chentsov-Markov) y consolidación de sesiones efímeras del brain.",
+      "triggers": [
+        "analizar transcripciones",
+        "consolidar conversaciones",
+        "cortex telemetry",
+        "cortex-telemetry",
+        "drenar brain",
+        "historial de prompts",
+        "sin consolidar",
+        "swarm-session-telemetry",
+        "telemetría",
+        "transcript logs"
+      ]
+    },
+    {
+      "name": "wizard",
+      "tier": 17000,
+      "category": "Utilities",
+      "display_name": "Asistente de Instalación Determinista (Wizard)",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-state-wizard",
+      "scope": "workspace",
+      "description": "Transforma al agente en una máquina de estados determinista para instalaciones y configuración paso a paso.",
+      "triggers": [
+        "/wizard",
+        "asistente de instalación",
+        "guía secuencial",
+        "máquina de estados",
+        "paso a paso",
+        "swarm-state-wizard",
+        "wizard"
+      ]
+    },
+    {
+      "name": "writing-for-agents",
+      "tier": 16500,
+      "category": "Utilities",
+      "display_name": "Redacción M2M de Alta Exergía & Sanitización C5",
+      "role": "ejecutor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 6700,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-m2m-writer",
+      "scope": "workspace",
+      "description": "Genera documentos y prompts para ingestión estricta por LLMs (M2M), incluyendo el sub-protocolo /sanitize-c5.",
+      "triggers": [
+        "/sanitize-c5",
+        "/writing-for-agents",
+        "despersonalizar manifiesto",
+        "external llm exergy",
+        "higienizar manifiesto",
+        "redacción m2m",
+        "sanitize-c5",
+        "swarm-m2m-writer",
+        "writing-for-agents"
+      ]
+    },
+    {
+      "name": "opentimestamps-l5-diagnostics",
+      "tier": 15000,
+      "category": "Diagnostics",
+      "display_name": "Atestación Criptográfica & Diagnóstico Bitcoin L5 (OpenTimestamps)",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-ots-timestamp",
+      "scope": "global",
+      "description": "Verificación de atestación criptográfica y estampados temporales L5 en Bitcoin (OpenTimestamps).",
+      "triggers": [
+        "atestación l5",
+        "bitcoin timestamp",
+        "kernel-ots-timestamp",
+        "l5 diagnostics",
+        "opentimestamps",
+        "opentimestamps-l5-diagnostics",
+        "ots bitcoin",
+        "ots verify",
+        "sellado temporal l5"
+      ]
+    },
+    {
+      "name": "handoff",
+      "tier": 10500,
+      "category": "Utilities",
+      "display_name": "Protocolo Soberano de Traspaso de Contexto C5-REAL",
+      "role": "auditor",
+      "exergy_audit": {
+        "e1_silicon": 3500,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 0,
+        "compiler_verified": true
+      },
+      "canonical_alias": "swarm-context-handoff",
+      "scope": "global",
+      "description": "Genera un documento completo de traspaso de contexto (HANDOFF.md) para transferir lecciones aprendidas, estado del sistema y próximos pasos a una nueva sesión.",
+      "triggers": [
+        "/handoff",
+        "context handover",
+        "generar handoff",
+        "handoff",
+        "swarm-context-handoff",
+        "traspaso de contexto",
+        "traspaso de sesión",
+        "traspaso formal"
+      ]
+    }
+  ],
+  "adjacency": [
+    {
+      "source": "cortex-kernel",
+      "target": "shared-manifest-kernel",
+      "relation": "enforces_hardware_invariants"
+    },
+    {
+      "source": "shared-manifest-kernel",
+      "target": "thermo-audit",
+      "relation": "bounds_concurrency"
+    },
+    {
+      "source": "c5-lean4-neurosymbolic-architect",
+      "target": "c5-lean4-axiomatic-orchestrator",
+      "relation": "orchestrates_theorems"
+    },
+    {
+      "source": "cloud-chamber",
+      "target": "polymath-concept-synthesis",
+      "relation": "crystallizes_ontology"
+    },
+    {
+      "source": "swarm-quantum-collapse",
+      "target": "dynamic-subagent-lifecycle",
+      "relation": "orchestrates_swarm"
+    },
+    {
+      "source": "cct-cognitive-theory-advisor",
+      "target": "cta-cognitive-transition-algebra",
+      "relation": "advises"
+    },
+    {
+      "source": "handoff",
+      "target": "cortex-telemetry",
+      "relation": "persists_session_state"
+    },
+    {
+      "source": "c5-kudurru-64",
+      "target": "c5-mushushu-0",
+      "relation": "filters_for_apoptosis"
+    },
+    {
+      "source": "c5-mushushu-0",
+      "target": "c5-larsa-120",
+      "relation": "attests_bft_triad"
+    },
+    {
+      "source": "c5-larsa-120",
+      "target": "c5-enki-60",
+      "relation": "synchronizes_sexagesimal"
+    },
+    {
+      "source": "c5-sharur-3600",
+      "target": "c5-silicon-stress-suite",
+      "relation": "stresses_100_agents"
+    },
+    {
+      "source": "c5-thermos-audit",
+      "target": "thermo-audit",
+      "relation": "executes_double_thermo"
+    },
+    {
+      "source": "c5-sovereign-system1-engine",
+      "target": "c5-kudurru-64",
+      "relation": "routes_edge_decisions"
+    },
+    {
+      "source": "polymath-concept-synthesis",
+      "target": "c5-ultrathink-epistemic-audit",
+      "relation": "postmortem_trace"
+    },
+    {
+      "source": "c5-metodo-acreativo",
+      "target": "c5-lexicon-enforcer",
+      "relation": "formalizes_involuntary_transduction"
+    },
+    {
+      "source": "c5-autonomous-agent-primitives",
+      "target": "cortex-skill-genesis",
+      "relation": "forges_new_capabilities"
+    },
+    {
+      "source": "autodidact-omega",
+      "target": "c5-popperian-falsification-auditor",
+      "relation": "falsifies_hypotheses"
+    },
+    {
+      "source": "c5-plan-omega",
+      "target": "c5-adaptive-annealing-engine",
+      "relation": "anneals_dag_trajectories"
+    },
+    {
+      "source": "c5-debloat-agent-kernel",
+      "target": "c5-sovereign-inference-runtime",
+      "relation": "executes_bare_metal"
+    },
+    {
+      "source": "c5-tri-provider-swarm",
+      "target": "swarm-router",
+      "relation": "dispatches_hybrid_models"
+    },
+    {
+      "source": "c5-rea-clean-room",
+      "target": "existence-gap-audit",
+      "relation": "enforces_existence_firewall"
+    },
+    {
+      "source": "c5-rea-clean-room",
+      "target": "thermo-audit",
+      "relation": "dissects_silicon_binaries"
+    }
+  ]
+}

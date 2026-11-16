@@ -1,0 +1,6 @@
+{
+  "historical_ranges_preserved": true,
+  "invalid_current_range_rejected": true,
+  "valid_current_range_accepted": true,
+  "method": "Exact AST-selected current validator on a temporary one-line source; no audit data modified"
+}

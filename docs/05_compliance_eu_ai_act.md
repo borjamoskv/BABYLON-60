@@ -99,12 +99,25 @@ La política versionada predeterminada declara `infrastructure`. Para publicar b
 
 Los cambios de política durante la ejecución causan rechazo. Una repetición de Actions cambia el intento y requiere nuevo recibo. Configuración ausente en el perfil de alto riesgo mantiene el bloqueo. Esta implementación no configura servicios externos, revisores de `Production`, protecciones de rama ni claves reales: deben administrarse fuera del expediente. El control presupone integridad del binario, política, workflow y cuenta de publicación; no impide a un administrador autorizado sustituirlos o publicar por otra vía.
 
+## Grafo de Evidencia Regulatoria (`FL-AIACT-02` y `BABYLON Assurance Gateway`)
+
+Además de la evaluación de expediente completo, [`regulatory.py`](../01_KISH_ENGINE/babylon60/compliance_exporter/regulatory.py) implementa el **Regulatory Evidence Graph** (`babylon.assurance.claim.v1`) y el compilador `export_assurance_gateway_bundle()` (`babylon.assurance.gateway_bundle.v1`) alineados con el Reglamento (UE) 2024/1689 modificado por el Reglamento (UE) 2026/1744:
+
+- **Separación estricta ($\operatorname{TechnicalPASS} \not\Rightarrow \operatorname{LegalConformity}$):** Cada nodo separa `technical_status` (`TECHNICAL_EVIDENCE_VALID` / `EVIDENCE_INCOMPLETE`) de `legal_status` (`NOT_ASSESSED` / `LEGAL_REVIEW_REQUIRED` / `CONFORMITY_DOCUMENTED`). Cualquier intento de inyectar `COMPLIANT` o `EU_AI_ACT_CERTIFIED` sin firma humana verificada se rechaza de forma determinista.
+- **Ligadura selectiva y Art. 43 vs. Art. 43.4:** Cada afirmación declara sus dimensiones de anclaje (`intended_purpose_id`, `model_identity`, `artifact_sha256`, `runtime_profile_sha256`, `policy_sha256`). Un cambio técnico puntual invalida únicamente las afirmaciones acopladas a esa dimensión (`SELECTIVE_TECHNICAL_REVALIDATION`), conservando las evidencias ortogonales válidas. Los cambios dentro de sobres predeterminados documentados (`WITHIN_PREDETERMINED_ENVELOPE`, Art. 43.4) no disparan automáticamente una modificación sustancial (`SUBSTANTIAL_MODIFICATION_REVIEW_REQUIRED`, Art. 43 / Art. 3.23).
+- **Incertidumbre en modelos externos (`model_identity`):** Distingue entre pesos con digest SHA-256 verificable (`sha256:<64-hex>`) y modelos externos (`provider:model:version`), exigiendo en estos últimos declaración explícita de incertidumbre (`model_uncertainty_declared: true`) y política de contención.
+- **Condicionalidad del Art. 27 (FRIA), deriva normativa y TTL:** `requires_fria_article_27()` añade dinámicamente el artículo 27 cuando el operador es `deployer` sujeto a evaluación de derechos fundamentales (`public_body`, `private_public_service_operator` o Anexo III.5.b/c); `evaluate_claim_node()` bloquea desajustes de `catalogue_digest` / `evaluation_profile_digest` y evidencias vencidas (`expires_at <= now`); y `evaluate_evidence_graph()` expone los contadores de falsación `fl_aiact_01_v2_gate`.
+- **Estructura del Anexo IV y ciclo continuo del Art. 9:** `validate_annex_iv_structure()` verifica las 8 secciones preceptivas de documentación técnica del Anexo IV (Art. 11), y `validate_article_9_risk_management()` audita las 6 fases del ciclo de gestión de riesgos con cadencia de revisión periódica; ambos validan afirmaciones embebidas o ficheros de evidencia en disco. Se provee `generate_deployer_fria_sample_bundle()` para evaluar despliegues de alto riesgo bajo el Anexo III.5.b con FRIA activa.
+- **Retención legal diferenciada (Art. 18, Art. 26.6 y RGPD):** Valida mínimos de **120 meses** (10 años, Art. 18) para documentación técnica del proveedor, **$\ge 6$ meses** (Arts. 19 y 26.6) para registros operativos, y prohíbe almacenar datos personales en crudo o hashes de PII sin sal en ledgers inmutables (`BLAKE3_DERIVE_KEY_SALTED` + almacén borrable fuera del ledger).
+- **Tres salidas para cadena de valor (Art. 25.4):** `export_assurance_gateway_bundle()` empaqueta `execution_evidence`, `assurance_dossier` y `continuous_evidence_monitoring`.
+
 ## Comprobaciones reproducibles
 
 ```bash
 cargo build --locked --bin babylon60_regulatory_gate
 cargo test --locked --lib ring0 --features cortex-persist,test_mock_hardware -q
-uv run --locked pytest tests/test_regulatory_assessment.py tests/test_audit_release_gates.py tests/test_compliance_exporter.py tests/test_compliance_html_injection.py tests/test_release_evidence.py -q
+cargo test --locked -p babylon-attest
+uv run --locked pytest tests/test_fl_aiact_02_evidence_graph.py tests/test_regulatory_assessment.py tests/test_audit_release_gates.py tests/test_compliance_exporter.py tests/test_compliance_html_injection.py tests/test_release_evidence.py -q
 ```
 
 Las pruebas con claves sintéticas verifican lógica y criptografía; no demuestran hardware real ni conformidad jurídica. La verificación hardware y un despliegue GHCR real se reportan por separado.

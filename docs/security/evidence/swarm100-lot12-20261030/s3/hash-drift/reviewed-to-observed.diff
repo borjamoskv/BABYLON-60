@@ -1,0 +1,64 @@
+--- reviewed-ebec6651.py
++++ observed-bf0787e8.py
+@@ -7,6 +7,9 @@
+ import sys
+ from pathlib import Path
+ from types import SimpleNamespace
++from typing import Any
++
++import aiosqlite
+ 
+ import pytest
+ 
+@@ -48,7 +51,7 @@
+ 
+ 
+ def pipeline(domain: object, accepted: bool = False) -> tuple[bounty.BountyPipelineOrchestrator, list[object]]:
+-    obj = object.__new__(bounty.BountyPipelineOrchestrator)
++    obj: Any = object.__new__(bounty.BountyPipelineOrchestrator)
+     result = SimpleNamespace(risk_score=0.99, contract_address="fixture-contract", advisory_id="fixture-advisory",
+                              findings=["synthetic"], vulnerability_class=SimpleNamespace(value="synthetic"),
+                              affected_subsystems=["fixture"], taint_level="TEST", to_dict=lambda: {"synthetic": True})
+@@ -151,7 +154,7 @@
+ 
+ 
+ @pytest.mark.asyncio
+-async def test_queue_full_and_cancelled_shutdown_caller(tmp_path: Path) -> None:
++async def test_queue_full_and_cancelled_shutdown_caller(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+     path = tmp_path / "backlog.sqlite"
+     with sqlite3.connect(path) as conn:
+         conn.execute("CREATE TABLE entries (id INTEGER PRIMARY KEY)")
+@@ -166,7 +169,7 @@
+             started.set()
+             await release.wait()
+         return await original(sql, *args, **kwargs)
+-    queue.db.execute = blocked_execute
++    monkeypatch.setattr(queue.db, "execute", blocked_execute)
+     await queue.submit_transaction("INSERT INTO entries VALUES (?)", (0,))
+     await started.wait()
+     for i in range(1, 4):
+@@ -227,11 +230,11 @@
+ 
+ 
+ @pytest.mark.asyncio
+-async def test_pipeline_worker_exception_propagates() -> None:
++async def test_pipeline_worker_exception_propagates(monkeypatch: pytest.MonkeyPatch) -> None:
+     obj, _ = pipeline(bounty.BountyDomain.DOMAIN_EVM)
+     def failed(_receipt: object) -> bool:
+         raise OSError("synthetic persistence failure")
+-    obj.cold_ledger.enqueue_receipt = failed
++    monkeypatch.setattr(obj.cold_ledger, "enqueue_receipt", failed)
+     with pytest.raises(OSError, match="synthetic persistence failure"):
+         await obj.execute_cycle()
+ 
+@@ -360,8 +363,8 @@
+     from babylon60.bft import master_ledger_queue as module
+     original = module.database_core.connect
+     connected, release = asyncio.Event(), asyncio.Event()
+-    connections: list[object] = []
+-    async def paused_connect(*args: object, **kwargs: object) -> object:
++    connections: list[aiosqlite.Connection] = []
++    async def paused_connect(*args: Any, **kwargs: Any) -> aiosqlite.Connection:
+         connection = await original(*args, **kwargs)
+         connections.append(connection)
+         connected.set()

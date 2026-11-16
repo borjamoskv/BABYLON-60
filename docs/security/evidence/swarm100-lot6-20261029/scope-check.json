@@ -1,0 +1,14 @@
+{
+  "result": "PASS",
+  "unchanged_ast": {
+    "AgentPager": true,
+    "KernelTelemetry": true,
+    "SwarmResult": true,
+    "capture_kernel_snapshot": true,
+    "compute_telemetry": true,
+    "_rate_limit_delay": true,
+    "anergy_reducer": true,
+    "_get_default_moonshot_key": true,
+    "_get_default_openrouter_key": true
+  }
+}

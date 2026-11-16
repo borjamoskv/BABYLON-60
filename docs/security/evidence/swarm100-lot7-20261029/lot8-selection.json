@@ -1,0 +1,78 @@
+[
+  {
+    "candidate_id": "SW100-C0499",
+    "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "run_git_sentinel retries every nonzero git commit with --no-verify, without classifying why it failed or obtaining a policy override. Thus a pre-commit/commit-msg rejection can be bypassed by the automatic retry. Objective/milestone/status/iteration mutations call this helper. This confirms the reachable bypass path, not execution of an actual commit.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+        "start_line": 37,
+        "end_line": 58,
+        "observation": "Any nonzero first commit triggers hook-disabled retry."
+      },
+      {
+        "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+        "start_line": 150,
+        "end_line": 163,
+        "observation": "Objective mutation invokes sentinel after saving state."
+      },
+      {
+        "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+        "start_line": 190,
+        "end_line": 199,
+        "observation": "Milestone mutation invokes sentinel."
+      },
+      {
+        "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+        "start_line": 220,
+        "end_line": 227,
+        "observation": "Status mutation invokes sentinel."
+      },
+      {
+        "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+        "start_line": 265,
+        "end_line": 273,
+        "observation": "Iteration mutation invokes sentinel."
+      }
+    ],
+    "source_sha256": "061f5a4f7ec065db523efc14441885f0c27d5ff6bc4506ff5bb850f9d4d45251"
+  },
+  {
+    "candidate_id": "SW100-C0500",
+    "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "The helper runs git add . at repository root and commits the resulting full index. Callers only intend objective YAML/project synchronization, so unrelated nonignored new files, tracked changes and pre-staged changes can be included. There is no scoped pathspec or index isolation. This is separate from the hook retry defect.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+        "start_line": 17,
+        "end_line": 19,
+        "observation": "Workspace root and two intended output paths."
+      },
+      {
+        "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+        "start_line": 37,
+        "end_line": 51,
+        "observation": "Repository-wide staging then commit."
+      },
+      {
+        "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+        "start_line": 150,
+        "end_line": 163,
+        "observation": "Objective update triggers helper after narrow state mutation."
+      },
+      {
+        "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+        "start_line": 265,
+        "end_line": 273,
+        "observation": "Iteration also triggers helper."
+      }
+    ],
+    "source_sha256": "061f5a4f7ec065db523efc14441885f0c27d5ff6bc4506ff5bb850f9d4d45251"
+  }
+]

@@ -1,0 +1,82 @@
+[
+  {
+    "candidate_id": "SW100-C0071",
+    "finding_id": "V01",
+    "status": "FIX_VERIFIED_IN_TEMPORARY_FIXTURES",
+    "production_deployed": false,
+    "evidence": "validation.json",
+    "source_sha256": "82dc6e8cf8c106a5c7a8c2f68b9ee188457a6d3e618968d38e83acdefc1ddd2c"
+  },
+  {
+    "candidate_id": "SW100-C0072",
+    "finding_id": "V02",
+    "status": "FIX_VERIFIED_IN_TEMPORARY_FIXTURES",
+    "production_deployed": false,
+    "evidence": "validation.json",
+    "source_sha256": "82dc6e8cf8c106a5c7a8c2f68b9ee188457a6d3e618968d38e83acdefc1ddd2c"
+  },
+  {
+    "candidate_id": "SW100-C0172",
+    "finding_id": "V03",
+    "status": "FIX_VERIFIED_IN_TEMPORARY_FIXTURES",
+    "production_deployed": false,
+    "evidence": "validation.json",
+    "source_sha256": "ac06ddc82d3c8920af4f10fc328076d817421b10b38b5a238a0e560d4f6a9599"
+  },
+  {
+    "candidate_id": "SW100-C0177",
+    "finding_id": "V04",
+    "status": "FIX_VERIFIED_IN_TEMPORARY_FIXTURES",
+    "production_deployed": false,
+    "evidence": "validation.json",
+    "source_sha256": "624eb292a797ac7094c4b84357606180465b09f3b7381f5292dba44ac4484634"
+  },
+  {
+    "candidate_id": "SW100-C0184",
+    "finding_id": "V05",
+    "status": "FIX_VERIFIED_IN_TEMPORARY_FIXTURES",
+    "production_deployed": false,
+    "evidence": "validation.json",
+    "source_sha256": "af068410fd1bc165027cbf18f72f0dd8c08a033f32dbb6ab1d2003a02e8b75fc"
+  },
+  {
+    "candidate_id": "SW100-C0291",
+    "finding_id": "V06",
+    "status": "FIX_VERIFIED_IN_TEMPORARY_FIXTURES",
+    "production_deployed": false,
+    "evidence": "validation.json",
+    "source_sha256": "bd2a08e1e421690740a95743af291b37706129ed5634a9d554a0f18c8723abbe"
+  },
+  {
+    "candidate_id": "SW100-C0364",
+    "finding_id": "V08",
+    "status": "MITIGATED_FAIL_CLOSED_ERASURE_UNAVAILABLE",
+    "production_deployed": false,
+    "evidence": "validation.json",
+    "source_sha256": "d37ef6f1f53ac5195566087516d927a1604a19a5dc7a2c75492052e77d6c9988"
+  },
+  {
+    "candidate_id": "SW100-C0483",
+    "finding_id": "V09",
+    "status": "FIX_VERIFIED_IN_TEMPORARY_FIXTURES",
+    "production_deployed": false,
+    "evidence": "validation.json",
+    "source_sha256": "b1b91c5232c7713048427179f9638b5aef7561ea7a60ecd6d8af8709e8fb547a"
+  },
+  {
+    "candidate_id": "SW100-C0484",
+    "finding_id": "V10",
+    "status": "FIX_VERIFIED_IN_TEMPORARY_FIXTURES",
+    "production_deployed": false,
+    "evidence": "validation.json",
+    "source_sha256": "b1b91c5232c7713048427179f9638b5aef7561ea7a60ecd6d8af8709e8fb547a"
+  },
+  {
+    "candidate_id": "SW100-C0539",
+    "finding_id": "V11",
+    "status": "FIX_VERIFIED_IN_TEMPORARY_FIXTURES",
+    "production_deployed": false,
+    "evidence": "validation.json",
+    "source_sha256": "739394836cb01e679667570eb96e94ed625e73390f9d66ebab32c1101b9f5324"
+  }
+]

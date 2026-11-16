@@ -1,0 +1,60 @@
+{
+  "candidate_id": "FOLLOWUP-C0414-MUTABLE-PUBLISH-REF",
+  "title": "Publish the prepared immutable commit rather than a mutable release-branch name",
+  "adjudication_status": "ADDITIONAL_CANDIDATE_NOT_GLOBALLY_ADJUDICATED",
+  "separate_from_candidate_id": "SW100-C0414",
+  "decision": "CONFIRMED_STATIC",
+  "severity": "P1",
+  "remediation_state": "OPEN",
+  "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+  "current_source_sha256": "704da66f24d45ae3634083273a9c0dfecc8e07530b5a6520ff3f1f336fc58830",
+  "rationale": "A publishing invocation A computes tree T1 and commit C1, moves release/v5.0-clean to C1, and asks the biometric gate to attest TREE_DIGEST=T1. While A is waiting, another invocation B (including --dry-run) can derive a different clean tree T2 from a later/different HEAD and move the same release branch to C2. After A receives its valid attestation for T1, its push resolves the mutable branch name instead of using its saved CLEAN_COMMIT. It can therefore publish C2/T2 under an authorization request for T1. The script contains no shared lock or equality check between the source ref and CLEAN_COMMIT before push. This is an independent effect-to-attestation binding defect, not a complaint that dry-run creates local objects. It requires overlapping invocations, different source trees, successful earlier checks, an available remote and valid approval for A; none of these effects or deployment conditions were executed or asserted as observed.",
+  "source_checks": [
+    {
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "start_line": 47,
+      "end_line": 55,
+      "observation": "Each invocation derives and saves CLEAN_TREE from the HEAD it reads."
+    },
+    {
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "start_line": 95,
+      "end_line": 105,
+      "observation": "TREE_DIGEST is bound to that invocation's tree and CLEAN_COMMIT is saved, but a shared release branch is overwritten."
+    },
+    {
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "start_line": 107,
+      "end_line": 123,
+      "observation": "Biometric authorization receives TREE_DIGEST, creating a window before publication."
+    },
+    {
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "start_line": 126,
+      "end_line": 132,
+      "observation": "A dry-run invocation still updates the shared branch before exiting."
+    },
+    {
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "start_line": 135,
+      "end_line": 145,
+      "observation": "After the gate, push uses release/v5.0-clean:main instead of the saved CLEAN_COMMIT, with no intervening ref-equality verification."
+    },
+    {
+      "path": ".babylon60rules",
+      "start_line": 9,
+      "end_line": 9,
+      "observation": "The canonical contract requires protected effects to be bound to their actual hash."
+    }
+  ],
+  "guards": [
+    "Both invocations must pass their earlier content and archive checks; dry-run does not directly push.",
+    "The biometric failure path stops A, but successful approval remains tied to T1 rather than the later ref value.",
+    "An immutable per-invocation commit is already available as CLEAN_COMMIT but is not used as the push source.",
+    "No remote state, concurrent run or native/biometric/Git effect was exercised.",
+    "Additional candidate requires global deduplication; it is not included in the original 29-record review."
+  ],
+  "runtime_executed": false,
+  "evidence_paths": [],
+  "suggested_remediation": "Use the saved CLEAN_COMMIT as the push source and retain the corresponding TREE_DIGEST through approval; independently decide whether the shared local convenience branch should be replaced, uniquely named or locked."
+}

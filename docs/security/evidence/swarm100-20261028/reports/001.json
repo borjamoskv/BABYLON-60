@@ -1,0 +1,449 @@
+{
+  "shard": "001",
+  "findings": [
+    {
+      "title": "Frame event ID and payload separately in Merkle commitments",
+      "severity": "P2",
+      "path": "src/omega_synthesis.rs",
+      "line": 53,
+      "evidence": "new() hashes event_id.as_bytes(), then payload, then parent_hash without lengths or separators; constructor accepts arbitrary String IDs.",
+      "trigger": "Construct nodes with the same parent and (event_id=\"a\",payload=b\"bc\") versus (event_id=\"ab\",payload=b\"c\").",
+      "impact": "Both distinct nodes receive the same state_hash without breaking SHA-256. The exported constructor does not bind field boundaries; current in-file tests use fixed-form IDs only.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Escape user-controlled values before producing YAML",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/commands/grill_you.py",
+      "line": 50,
+      "evidence": "Topic and decision strings are interpolated directly into double-quoted YAML scalars (lines 41-44,50).",
+      "trigger": "run_grill_you(topic=...) receives a topic containing a quote, backslash or newline.",
+      "impact": "to_yaml() can return invalid YAML or injected YAML fields rather than faithfully serializing the supplied topic. No downstream privileged YAML consumer was established.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Retain incomplete transcript records until the next append",
+      "severity": "P2",
+      "path": "scripts/c5_demos/c5_model_voice_announcer.py",
+      "line": 155,
+      "evidence": "readlines() consumes an unterminated trailing record, last_pos=f.tell() advances past it, and extract_model_change silently drops JSON decode failures.",
+      "trigger": "A writer appends a JSON record in two writes straddling a watcher polling interval.",
+      "impact": "The first fragment is discarded and the remaining fragment cannot reconstruct the record, permanently losing the model-change announcement.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Reset tail position when transcript is truncated or replaced",
+      "severity": "P2",
+      "path": "scripts/c5_demos/c5_model_voice_announcer.py",
+      "line": 152,
+      "evidence": "Only curr_size > last_pos is handled; last_pos is never reset and no file identity is tracked.",
+      "trigger": "The watched transcript is truncated/rotated and the replacement starts shorter than the prior offset.",
+      "impact": "Announcements stop until the new file exceeds the old size and then resume from an arbitrary offset, losing earlier replacement-file events.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Pass notification text as data rather than AppleScript source",
+      "severity": "P2",
+      "path": "scripts/c5_demos/c5_model_voice_announcer.py",
+      "line": 68,
+      "evidence": "The cached-audio branch interpolates text directly into osascript -e source inside a quoted string; subprocess receives this source unchanged.",
+      "trigger": "speak_cloned receives quote-bearing text and the corresponding cached/direct WAV exists (lines 51-58).",
+      "impact": "Text can terminate the AppleScript string, corrupt the notification or introduce AppleScript expressions under the announcer account. The cache-hit precondition limits reachability; no remote trust boundary is asserted.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Limit terminology rewrites to comments and documentation",
+      "severity": "P2",
+      "path": "scripts/c5_quality_gates/audit_fixer.py",
+      "line": 50,
+      "evidence": "For any MythologicalTerm issue the fixer applies every replacement regex to the entire file, including executable identifiers, protocol strings and literals.",
+      "trigger": "A flagged source file contains an identifier or protocol value named oracle or magic referenced elsewhere.",
+      "impact": "Running the fixer changes code behavior or breaks cross-file references without updating consumers; terminology cleanup is not semantics preserving.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Remove comments from multipart JSON metadata example",
+      "severity": "P2",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workers-for-platforms/api.md",
+      "line": 68,
+      "evidence": "The curl metadata form contains \"compatibility_date\": \"2026-01-01\" followed by a // comment inside the JSON field.",
+      "trigger": "Copy the Deploy with Bindings metadata example into an actual request after replacing the abbreviated URL.",
+      "impact": "The metadata payload is invalid JSON, so the example cannot deploy the requested bindings. This is a static example defect, not an observed service failure.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Avoid redeclaring the imported DispatchNamespace name",
+      "severity": "P2",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workers-for-platforms/api.md",
+      "line": 38,
+      "evidence": "One TypeScript block imports type DispatchNamespace and then declares interface DispatchNamespace in the same module (lines 36-40).",
+      "trigger": "Use the TypeScript Types block as written in a TypeScript module.",
+      "impact": "The imported type name conflicts with the local declaration, making the reference example fail type checking.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Do not claim strict real-time determinism from one benchmark maximum",
+      "severity": "P2",
+      "path": "docs/KINETIC_CACHE_AUDIT.md",
+      "line": 48,
+      "evidence": "The only displayed evidence is one pair of aggregate benchmark results, yet lines 46-50 claim mathematical proof, strict real-time determinism, and patentability.",
+      "trigger": "A reader relies on this audit as evidence of a worst-case timing guarantee or established patentability.",
+      "impact": "A finite observed maximum does not establish a worst-case bound, nor do these results establish patentability. The document overstates the evidence and should qualify these conclusions.",
+      "confidence": "high",
+      "kind": "docs"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/c6_absolute/SovereignKernel.lean",
+      "line": 104,
+      "hypothesis": "stepAgent can emit CommitAction from Idle without stepSession or a Z3 witness; the session no-bypass theorem concerns only stepSession. This is a mismatch between the modeled APIs, not evidence of an executable authorization bypass. A runtime consumer/refinement path was not traced."
+    },
+    {
+      "path": "src/omega_synthesis.rs",
+      "line": 71,
+      "hypothesis": "ScittL5Receipt is described as COSE Sign1 but seal() computes only an unkeyed hash. No signing or verifier consumer was established in the scoped source reads; investigate whether callers treat this exported structure as authenticated attestation."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".agents/rules/MOSKV1_UNIVERSAL_PROMPT.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          35
+        ]
+      ],
+      "inventory_sha256": "30636689ca889863cea2c30154cfbd4d8290373c0f9e194ae9d985d51b1e3ef8",
+      "observed_sha256": "30636689ca889863cea2c30154cfbd4d8290373c0f9e194ae9d985d51b1e3ef8",
+      "inventory_match": true
+    },
+    {
+      "path": ".github/workflows/conformance.yml",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          27
+        ]
+      ],
+      "inventory_sha256": "7a5a88e5063406ce0ac8e1a8b2df76abcec68c4309f0af60130b3844aa8fb819",
+      "observed_sha256": "7a5a88e5063406ce0ac8e1a8b2df76abcec68c4309f0af60130b3844aa8fb819",
+      "inventory_match": true
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/poc_oracle_nexus.rs",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          79
+        ]
+      ],
+      "inventory_sha256": "9504feb0fc756893ad1ab29d42f70559d5b7f6f7a7c3950a62a3dc56dc5dccbb",
+      "observed_sha256": "9504feb0fc756893ad1ab29d42f70559d5b7f6f7a7c3950a62a3dc56dc5dccbb",
+      "inventory_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/commands/grill_you.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          134
+        ]
+      ],
+      "inventory_sha256": "4f2313bad24b372e7510379c0125e698ab3481921d8b57a70ed5677532fcfad2",
+      "observed_sha256": "4f2313bad24b372e7510379c0125e698ab3481921d8b57a70ed5677532fcfad2",
+      "inventory_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/c6_absolute/SovereignKernel.lean",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          354
+        ]
+      ],
+      "inventory_sha256": "1e84189512ede8d84fe58d2b949e9ef8a66d9a406b5f37f3b15920fd0667b8ed",
+      "observed_sha256": "1e84189512ede8d84fe58d2b949e9ef8a66d9a406b5f37f3b15920fd0667b8ed",
+      "inventory_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/utils/pulmones_worker.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          12
+        ]
+      ],
+      "inventory_sha256": "afe78dee5a8b6bb39b5724f1b9d159b2e0ae4a161a07224614b71c6be973ece5",
+      "observed_sha256": "afe78dee5a8b6bb39b5724f1b9d159b2e0ae4a161a07224614b71c6be973ece5",
+      "inventory_match": true
+    },
+    {
+      "path": "02_EDIN_SWARMS/agents_archi/topologies/router.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          170
+        ]
+      ],
+      "inventory_sha256": "184997c843cb6ce6f5f9ca9381b17f8c57dc0db323bb57cd4e2d710a19df72d0",
+      "observed_sha256": "184997c843cb6ce6f5f9ca9381b17f8c57dc0db323bb57cd4e2d710a19df72d0",
+      "inventory_match": true
+    },
+    {
+      "path": "docs/01_spec/evidence/algorithm-repairs-20261026.json",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          794
+        ]
+      ],
+      "inventory_sha256": "ab5acb7b8744d26bc065ff24fb2a60c06b7c93fb5a215be29f3257ae243bfa2e",
+      "observed_sha256": "ab5acb7b8744d26bc065ff24fb2a60c06b7c93fb5a215be29f3257ae243bfa2e",
+      "inventory_match": true
+    },
+    {
+      "path": "docs/KINETIC_CACHE_AUDIT.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          50
+        ]
+      ],
+      "inventory_sha256": "92e013f826d376869f9ae1ee5b191224ecaeec159b2a4d60bb73f34bc8c6f802",
+      "observed_sha256": "92e013f826d376869f9ae1ee5b191224ecaeec159b2a4d60bb73f34bc8c6f802",
+      "inventory_match": true
+    },
+    {
+      "path": "proof/bundles/attestation_bundle_v1/binary.sha3",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          1
+        ]
+      ],
+      "inventory_sha256": "e6c7b9ffd4fe6cef11ed15e270f6e2daf05fdd1413d3f3f6698bf151fa667509",
+      "observed_sha256": "e6c7b9ffd4fe6cef11ed15e270f6e2daf05fdd1413d3f3f6698bf151fa667509",
+      "inventory_match": true
+    },
+    {
+      "path": "scripts/c5_demos/c5_model_voice_announcer.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          197
+        ]
+      ],
+      "inventory_sha256": "d1787a45babe9064bfff95287214047048c922c2ec1e06a72c1a7dc4a32af66d",
+      "observed_sha256": "d1787a45babe9064bfff95287214047048c922c2ec1e06a72c1a7dc4a32af66d",
+      "inventory_match": true
+    },
+    {
+      "path": "scripts/c5_quality_gates/audit_fixer.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          94
+        ]
+      ],
+      "inventory_sha256": "0ec8954f076ca6cf80af3283d100a202aa813135e4f27f57176899610ecb1132",
+      "observed_sha256": "0ec8954f076ca6cf80af3283d100a202aa813135e4f27f57176899610ecb1132",
+      "inventory_match": true
+    },
+    {
+      "path": "scripts/c5_verifiers/verify_full_stack_health.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          106
+        ]
+      ],
+      "inventory_sha256": "f4198645527bda8d183f8c6e3d361aabc75e8310b7a114ba89ef525565ba046d",
+      "observed_sha256": "f4198645527bda8d183f8c6e3d361aabc75e8310b7a114ba89ef525565ba046d",
+      "inventory_match": true
+    },
+    {
+      "path": "src/omega_synthesis.rs",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          361
+        ]
+      ],
+      "inventory_sha256": "899a1b3d518c4cf7c377be2861bf6d79d500a3181ca835a687a0460d84fa70eb",
+      "observed_sha256": "899a1b3d518c4cf7c377be2861bf6d79d500a3181ca835a687a0460d84fa70eb",
+      "inventory_match": true
+    },
+    {
+      "path": "tests/test_audit_swarm_rate_limit.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          84
+        ]
+      ],
+      "inventory_sha256": "5d95a5ea01c1bd5151ad6b234d841c030d4683b28dc1f3871257aa03f0a9d618",
+      "observed_sha256": "5d95a5ea01c1bd5151ad6b234d841c030d4683b28dc1f3871257aa03f0a9d618",
+      "inventory_match": true
+    },
+    {
+      "path": "tests/test_mmr_position_regressions.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          103
+        ]
+      ],
+      "inventory_sha256": "c968d07d4ab34865fce5984bd075d2f0f3df48ea3db7a803c2ddb4ae1ed7d137",
+      "observed_sha256": "c968d07d4ab34865fce5984bd075d2f0f3df48ea3db7a803c2ddb4ae1ed7d137",
+      "inventory_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/agents-sdk/references/routing.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          75
+        ]
+      ],
+      "inventory_sha256": "55c9c94b02f827cbd90bc00ca798197b4cdee0e87e0b2fe15b8f77d7725d66a6",
+      "observed_sha256": "55c9c94b02f827cbd90bc00ca798197b4cdee0e87e0b2fe15b8f77d7725d66a6",
+      "inventory_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/ddos/patterns.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          174
+        ]
+      ],
+      "inventory_sha256": "546d722c64d8b1c14bc0a924b38eec24bcd3e639c25bbf424bb8cf73933ac306",
+      "observed_sha256": "546d722c64d8b1c14bc0a924b38eec24bcd3e639c25bbf424bb8cf73933ac306",
+      "inventory_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/r2/gotchas.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          190
+        ]
+      ],
+      "inventory_sha256": "7509bde999c42292ebb7a20c7777f9e465bfe663d1514666719db628d5cd4167",
+      "observed_sha256": "7509bde999c42292ebb7a20c7777f9e465bfe663d1514666719db628d5cd4167",
+      "inventory_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workers-for-platforms/api.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          196
+        ]
+      ],
+      "inventory_sha256": "e8c61ee7e1e6113e374fbc9df94962e072b53e011f93c9c82fd8b83e63867055",
+      "observed_sha256": "e8c61ee7e1e6113e374fbc9df94962e072b53e011f93c9c82fd8b83e63867055",
+      "inventory_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/examples/Dilla_Behind_The_Beat_Physics.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          84
+        ]
+      ],
+      "inventory_sha256": "96c0a2d4b28023b31fdd51687cde7175ee7c1f771ed0b11a4fa45c824a24af56",
+      "observed_sha256": "96c0a2d4b28023b31fdd51687cde7175ee7c1f771ed0b11a4fa45c824a24af56",
+      "inventory_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_05_channels.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          61
+        ]
+      ],
+      "inventory_sha256": "be72883704e7e9a0c1eed5a915060af4a4a19ed8d42a6e09e9c98ebcb2864a3d",
+      "observed_sha256": "be72883704e7e9a0c1eed5a915060af4a4a19ed8d42a6e09e9c98ebcb2864a3d",
+      "inventory_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-exergy-scale-evaluator/SKILL.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          40
+        ]
+      ],
+      "inventory_sha256": "b817ded92f75e87c50fc5c7bc44b1c9b4cf514faa89d03d48c1442555eab6879",
+      "observed_sha256": "b817ded92f75e87c50fc5c7bc44b1c9b4cf514faa89d03d48c1442555eab6879",
+      "inventory_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-terminological-archaeology/scripts/c5_canonical_term_mapper.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          393
+        ]
+      ],
+      "inventory_sha256": "d245c51c547e8fdd4ab8a4dfb798ead2b7c7546b706f17c368bb7c859ccd22cb",
+      "observed_sha256": "d245c51c547e8fdd4ab8a4dfb798ead2b7c7546b706f17c368bb7c859ccd22cb",
+      "inventory_match": true
+    },
+    {
+      "path": "tools/skill_library/global/safari-browser-agent/SKILL.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          42
+        ]
+      ],
+      "inventory_sha256": "b5ecd7da1ad447cf675ee764c18cff569c10eaf523fe8d6748653187f4fcc6e9",
+      "observed_sha256": "b5ecd7da1ad447cf675ee764c18cff569c10eaf523fe8d6748653187f4fcc6e9",
+      "inventory_match": true
+    }
+  ],
+  "tool_limitations": [
+    "No native codebase-memory graph tools were exposed: discovery of ALL_TOOLS for search_graph/get_architecture returned none; targeted text search used.",
+    "Audit-only: no repository tests, builds, runtime, service/API calls or formal compilation executed. Historical evidence JSON was reviewed as source material, not revalidated runtime evidence.",
+    "External SDK/API claims were not validated against current official documentation; findings in reference files are limited to language/serialization defects."
+  ],
+  "tests_run": []
+}

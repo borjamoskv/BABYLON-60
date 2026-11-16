@@ -1,0 +1,22 @@
+{
+  "scope": "Captured original sources, temporary DB/HOME and explicit installed Lean binary",
+  "lean_binary": "/Users/borjafernandezangulo/.elan/toolchains/leanprover--lean4---v4.35.0/bin/lean",
+  "original_emitter_precondition": "False",
+  "original_emitter_report": {
+    "total_evaluated": 1,
+    "results": [
+      {
+        "cluster_id": "abcdef1234567890",
+        "status": "PROVED",
+        "path": "/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/b60-original-formal-233jeakw/lean/Destiladora_abcdef1234567890.lean"
+      }
+    ]
+  },
+  "normalized_axiom_false_proof_exit": 0,
+  "normalizations": [
+    "Escape reserved meta constructor",
+    "Increase maxRecDepth",
+    "Close namespace"
+  ],
+  "no_operator_database_or_identity_access": true
+}

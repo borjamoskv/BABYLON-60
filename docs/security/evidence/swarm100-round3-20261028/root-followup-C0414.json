@@ -1,0 +1,49 @@
+{
+  "candidate_id": "SW100-C0414",
+  "decision": "REJECTED",
+  "severity": "P2",
+  "remediation_state": "NOT_APPLICABLE",
+  "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+  "current_source_sha256": "704da66f24d45ae3634083273a9c0dfecc8e07530b5a6520ff3f1f336fc58830",
+  "rationale": "The command-order observation is correct, but the original allegation treats --dry-run as a nonmutating preview. The explicit local contract says it omits git push, and the successful dry-run output advertises the newly prepared local release branch. Local orphan-commit creation and replacement of this fixed preparation branch therefore do not violate the inspected mode contract. Targeted search across scripts, tests, engine, tools, project skills and guidance found no caller or documented guarantee that this generated branch retains its prior tip. The original candidate does not identify concurrent publication or a mismatch between the attested tree and pushed commit. A separately recorded mutable-ref publication race must not be used to validate this different allegation. Rejection is limited to C0414 as submitted; it does not certify the whole projection script.",
+  "source_checks": [
+    {
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "start_line": 19,
+      "end_line": 24,
+      "observation": "Dry-run explicitly means checking without executing git push."
+    },
+    {
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "start_line": 101,
+      "end_line": 105,
+      "observation": "Both modes intentionally create an orphan commit and force-update the fixed local preparation branch."
+    },
+    {
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "start_line": 126,
+      "end_line": 132,
+      "observation": "Successful dry-run reports that the local release branch is ready, then exits before remote operations."
+    },
+    {
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "start_line": 144,
+      "end_line": 145,
+      "observation": "The same fixed branch is the script's own publication source; no distinct local retention consumer was found."
+    },
+    {
+      "path": "scripts/README.md",
+      "start_line": 159,
+      "end_line": 159,
+      "observation": "The scripts index lists this utility without specifying a read-only or prior-tip preservation contract."
+    }
+  ],
+  "guards": [
+    "Dry-run skips biometric dispatch and exits before the remote lookup and push.",
+    "Tree-content, archive-size and optional Gitleaks checks can stop before branch creation.",
+    "No guarantee to preserve a previous generated release tip was found; absence of such a guarantee is not itself a confirmed defect.",
+    "The mutable-reference publication issue is recorded separately and is not the basis of this verdict."
+  ],
+  "runtime_executed": false,
+  "evidence_paths": []
+}

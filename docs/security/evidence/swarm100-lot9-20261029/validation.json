@@ -1,0 +1,154 @@
+{
+  "date": "2026-10-29",
+  "timezone": "Europe/Madrid",
+  "scope": "Only c5_exergy_optimizer_monitor.py production edited. Actual Git commits/hooks only in owned temporary repositories; synthetic HOME/identity and isolated config. Inert failing signer recorder, no signing key. Monitor producers/database/audits/tests replaced in fixtures; real TCP/DNS/SQLite prohibited there. No actual monitor run, commit/amend on real checkout, protected runtime, network, hardware, dependencies/lockfiles/publication or ATTESTED. Git/config/hooks trusted; no global transaction against concurrent STATUS writers. Global telemetry omitted.",
+  "checks": {
+    "related-tests": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "python",
+        "-c",
+        "import os,sys,socket,tempfile\nhome=tempfile.TemporaryDirectory(prefix='b60-lot9-tests-')\nos.environ['HOME']=home.name\nfor key in ['CORTEX_VAULT_KEY','KIMI_API_KEY','MOONSHOT_API_KEY','OPENROUTER_API_KEY','MOONSHOT_API_URL','OPENROUTER_API_URL','MOONSHOT_MODEL','OPENROUTER_MODEL']:\n    os.environ.pop(key,None)\nos.environ['BABYLON60_SIGNING_SEED']='00'*32\nimport dotenv\ndotenv.load_dotenv=lambda *a,**k:False\ndotenv.dotenv_values=lambda *a,**k:{}\nsys.modules['strike_rs']=None\ndef blocked(*a,**k):\n    raise AssertionError('DNS/network forbidden in confined regression suite')\noriginal=socket.socket.connect\noriginal_ex=socket.socket.connect_ex\ndef connect(self,*a,**k):\n    if self.family in (socket.AF_INET,socket.AF_INET6):return blocked()\n    return original(self,*a,**k)\ndef connect_ex(self,*a,**k):\n    if self.family in (socket.AF_INET,socket.AF_INET6):return blocked()\n    return original_ex(self,*a,**k)\nsocket.socket.connect=connect\nsocket.socket.connect_ex=connect_ex\nsocket.getaddrinfo=blocked\nimport pytest\nraise SystemExit(pytest.main(sys.argv[1:]))\n",
+        "tests/test_swarm100_lot9_regressions.py",
+        "tests/test_swarm100_lot8_regressions.py",
+        "tests/test_swarm100_lot7_regressions.py",
+        "tests/test_swarm100_lot6_regressions.py",
+        "tests/test_audit_swarm_rate_limit.py",
+        "tests/test_swarm100_lot5_regressions.py",
+        "tests/test_ledger_resilience.py",
+        "tests/test_ledger_vault_verify.py",
+        "tests/test_wheel_runtime_regressions.py::test_actor_detects_removed_tail",
+        "tests/test_wheel_runtime_regressions.py::test_actor_concurrent_reads_use_consistent_snapshots",
+        "tests/test_finding_evidence_contract.py",
+        "tests/test_swarm100_lot4_regressions.py",
+        "tests/test_swarm100_lot3_regressions.py",
+        "tests/test_swarm100_lot2_regressions.py",
+        "tests/test_swarm100_lot1_regressions.py",
+        "tests/test_agent_beeper_regressions.py",
+        "tests/test_autodidact_derivation_regressions.py",
+        "tests/test_swarm100_round2_regressions.py",
+        "tests/test_standalone_verifier.py",
+        "tests/test_memory_governance_falsification.py",
+        "tests/test_compliance_exporter.py",
+        "tests/test_m0_evidence_pack_acceptance.py",
+        "tests/test_autodidact_omega_v2.py",
+        "tests/test_autodidact_omega_pipeline.py",
+        "tests/test_cortex_persist_batch_regressions.py",
+        "tests/test_ledger_cross_equivalence.py",
+        "tests/test_fl027_provenance_authority.py",
+        "-q",
+        "-rs",
+        "-o",
+        "addopts=--tb=short"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot9-20261029/related-tests.log",
+      "log_sha256": "0f75c8892c55894430db8d870b6f93f4cd134f0c532e5d19015f47368243b46e",
+      "source_sha256_before_and_after": {
+        "scripts/c5_thermo/c5_exergy_optimizer_monitor.py": "1d82392ac3cddd6fd9b226b64c5a28562eea25de29fd5ac4afbbd9ea4cf50d2d",
+        "tests/test_swarm100_lot9_regressions.py": "be2f18081837e889c5ccbb1ec8b9f552f0850c06d8651b4fdbea7b53fa81c710"
+      }
+    },
+    "mypy": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "mypy",
+        "--follow-imports=silent",
+        "--check-untyped-defs",
+        "scripts/c5_thermo/c5_exergy_optimizer_monitor.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot9-20261029/mypy.log",
+      "log_sha256": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e",
+      "source_sha256_before_and_after": {
+        "scripts/c5_thermo/c5_exergy_optimizer_monitor.py": "1d82392ac3cddd6fd9b226b64c5a28562eea25de29fd5ac4afbbd9ea4cf50d2d",
+        "tests/test_swarm100_lot9_regressions.py": "be2f18081837e889c5ccbb1ec8b9f552f0850c06d8651b4fdbea7b53fa81c710"
+      }
+    },
+    "semantic-gate": {
+      "command": [
+        "python3",
+        "scripts/c5_quality_gates/audit_semantic_contracts.py",
+        "--workspace-only"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot9-20261029/semantic-gate.log",
+      "log_sha256": "5949e674dcddaf1b07015b03a1dd0b374e0b66a39f2d95157c200ce6dd13f1ee",
+      "source_sha256_before_and_after": {
+        "scripts/c5_thermo/c5_exergy_optimizer_monitor.py": "1d82392ac3cddd6fd9b226b64c5a28562eea25de29fd5ac4afbbd9ea4cf50d2d",
+        "tests/test_swarm100_lot9_regressions.py": "be2f18081837e889c5ccbb1ec8b9f552f0850c06d8651b4fdbea7b53fa81c710"
+      }
+    },
+    "budget-gate": {
+      "command": [
+        "python3",
+        "scripts/c5_quality_gates/audit_token_budget.py",
+        "--workspace-only",
+        "--skip-ghost-listeners"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot9-20261029/budget-gate.log",
+      "log_sha256": "d0b6780eb1edd315af3e6cf33cb6b44387f78ee81a63c8e23aabd3121e82a37a",
+      "source_sha256_before_and_after": {
+        "scripts/c5_thermo/c5_exergy_optimizer_monitor.py": "1d82392ac3cddd6fd9b226b64c5a28562eea25de29fd5ac4afbbd9ea4cf50d2d",
+        "tests/test_swarm100_lot9_regressions.py": "be2f18081837e889c5ccbb1ec8b9f552f0850c06d8651b4fdbea7b53fa81c710"
+      }
+    },
+    "topology-gate": {
+      "command": [
+        "python3",
+        "scripts/guards/verify_active_topology.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot9-20261029/topology-gate.log",
+      "log_sha256": "3045a29b461272aed5ff2d6a5c031c4955237179787acbd8421abad260e899a6",
+      "source_sha256_before_and_after": {
+        "scripts/c5_thermo/c5_exergy_optimizer_monitor.py": "1d82392ac3cddd6fd9b226b64c5a28562eea25de29fd5ac4afbbd9ea4cf50d2d",
+        "tests/test_swarm100_lot9_regressions.py": "be2f18081837e889c5ccbb1ec8b9f552f0850c06d8651b4fdbea7b53fa81c710"
+      }
+    },
+    "diff-check": {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot9-20261029/diff-check.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source_sha256_before_and_after": {
+        "scripts/c5_thermo/c5_exergy_optimizer_monitor.py": "1d82392ac3cddd6fd9b226b64c5a28562eea25de29fd5ac4afbbd9ea4cf50d2d",
+        "tests/test_swarm100_lot9_regressions.py": "be2f18081837e889c5ccbb1ec8b9f552f0850c06d8651b4fdbea7b53fa81c710"
+      }
+    },
+    "ruff": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "ruff",
+        "check",
+        "scripts/c5_thermo/c5_exergy_optimizer_monitor.py",
+        "tests/test_swarm100_lot9_regressions.py",
+        "docs/security/evidence/swarm100-lot9-20261029/independent-adversarial.py",
+        "docs/security/evidence/swarm100-lot9-20261029/reconcile_lot9.py",
+        "docs/security/evidence/swarm100-lot9-20261029/validate_lot9.py",
+        "docs/security/evidence/swarm100-lot9-20261029/verify_final_state.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot9-20261029/ruff.log",
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "source_sha256_before_and_after": {
+        "scripts/c5_thermo/c5_exergy_optimizer_monitor.py": "1d82392ac3cddd6fd9b226b64c5a28562eea25de29fd5ac4afbbd9ea4cf50d2d",
+        "tests/test_swarm100_lot9_regressions.py": "be2f18081837e889c5ccbb1ec8b9f552f0850c06d8651b4fdbea7b53fa81c710"
+      }
+    }
+  }
+}

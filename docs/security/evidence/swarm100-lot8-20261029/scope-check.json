@@ -1,0 +1,35 @@
+{
+  "result": "PASS",
+  "only_production_source": "scripts/c5_cortex/cortex_objectives_transducer.py",
+  "unchanged_function_ast": {
+    "calculate_sha256": true,
+    "get_git_commit_hash": true,
+    "load_state": true,
+    "save_state": true,
+    "generate_milestones_table": true,
+    "update_project_md": true,
+    "cmd_list": true,
+    "_update_milestone_commit": true,
+    "_update_objective_exergy": true,
+    "main": true
+  },
+  "consumers_only_add_output_selection": {
+    "cmd_add_objective": true,
+    "cmd_add_milestone": true,
+    "cmd_iter": true,
+    "cmd_update_status": true
+  },
+  "unchanged_dependencies_and_previous_gate": {
+    "scripts/c5_verifiers/fast_smt_gate.py": true,
+    "pyproject.toml": true,
+    "uv.lock": true,
+    "Cargo.lock": true
+  },
+  "impacted_registry_ids": [
+    "SW100-C0499",
+    "SW100-C0500"
+  ],
+  "lot9_sources_unchanged": {
+    "scripts/c5_thermo/c5_exergy_optimizer_monitor.py": "2f2b8cfcede8d34ad2f57ecfe765060debf85a946d2645ea38dd228e0196c861"
+  }
+}

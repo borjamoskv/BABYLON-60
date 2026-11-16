@@ -1,0 +1,380 @@
+{
+  "shard": "021",
+  "findings": [
+    {
+      "title": "Reject unknown backends instead of silently selecting the remote provider",
+      "severity": "P1",
+      "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+      "line": 538,
+      "evidence": "The backend lookup defaults to MOONSHOT_REMOTE; task_decomposer sends the original prompt via client.call at lines 367-368.",
+      "trigger": "A caller intending local inference supplies an unrecognized backend string and a configured Moonshot key.",
+      "impact": "The prompt is transmitted to a remote provider despite the intended local selection.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Require HTTPS for remote endpoint overrides",
+      "severity": "P1",
+      "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+      "line": 58,
+      "evidence": "Endpoint factories validate only urlparse(url).hostname; _http_post_single_attempt posts the Authorization header and messages to the accepted URL (lines 244-249). The OpenRouter factory repeats the same check.",
+      "trigger": "MOONSHOT_API_URL=http://api.moonshot.cn/v1/chat/completions or equivalent OpenRouter override.",
+      "impact": "API credentials and prompt contents are sent without transport encryption.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Convert milliseconds and forward latency to the correct sensor argument",
+      "severity": "P2",
+      "path": "docs/papers/interoceptive-control/src/spinal_gate.py",
+      "line": 91,
+      "evidence": "sample signature is (current_tokens, step_duration_s=1.0, ipc_latency_ms=0.5) at line 38; verify_action passes estimated_latency_ms as positional second argument.",
+      "trigger": "verify_action evaluates an action using estimated_latency_ms.",
+      "impact": "The burn rate uses milliseconds as seconds (underestimating it by 1000 for positive durations), while IPC latency remains 0.5 ms and cannot trigger the intended latency barrier.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Hash the artifact bytes before reporting the artifact verified",
+      "severity": "P1",
+      "path": "proof/bundles/attestation_bundle_v2/verify",
+      "line": 50,
+      "evidence": "artifact_hash_ok compares artifact.sha256 text only with manifest.artifact_hash; no artifact bytes are opened.",
+      "trigger": "An artifact is modified while the bundle hash strings remain unchanged, then this verifier is used to assess it.",
+      "impact": "ARTIFACT HASH is reported VERIFIED without checking the artifact that the audit purports to bind.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Make the attestation verdict depend on verification results",
+      "severity": "P2",
+      "path": "proof/bundles/attestation_bundle_v2/verify",
+      "line": 134,
+      "evidence": "VERDICT is printed as EMPIRICALLY_CONSTRAINED_PASS and HW PROVENANCE as SECURE_ENCLAVE_TRNG_NOMINAL unconditionally; all_ok is calculated afterward at line 137.",
+      "trigger": "Any component or signature check fails, or a software-generated signing key is supplied.",
+      "impact": "Human-readable output still declares PASS and hardware provenance, contradicting the checks; exit status does fail for failed checks.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Remove await from the synchronous onStart example or declare it async",
+      "severity": "P2",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/agents-sdk/gotchas.md",
+      "line": 102,
+      "evidence": "The fenced example declares onStart() { and then uses await this.mcp.registerServer(...).",
+      "trigger": "A reader copies the MCP reconnection example into a TypeScript class.",
+      "impact": "The example fails to parse because await occurs in a non-async method.",
+      "confidence": "high",
+      "kind": "example"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".agents/skills/c5-anti-slop-ui/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          23
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": ".github/workflows/verify_ledger.yml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          27
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/publisher.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          141
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/compliance_exporter/templates/themes/dark_hud.css",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          145
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          618
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/verification/ast_grader.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          24
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          344
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static text review completed in bounded chunks; no execution."
+    },
+    {
+      "path": "docs/02_ontology/babylon_ontology_v1.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          195
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "docs/papers/interoceptive-control/src/spinal_gate.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          98
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "proof/bundles/attestation_bundle_v2/verify",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          141
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "scripts/c5_demos/nul-zk-falsification/build.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          30
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "scripts/c5_quality_gates/freeze_skills_manifest.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          132
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "scripts/guards/signature_panel.html",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          89
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tests/acs_cbor_golden.txt",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          9
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tests/test_c5_signature_engine.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          186
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tests/test_rea_evidence_boundaries.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          79
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/agents-sdk/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          158
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/email-workers/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          125
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/secrets-store/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          97
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workflows/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          77
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/gflow-browser-cinema-sovereign/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          264
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_25_job_search.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-real-legaltech-analysis/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-wetware-and-venture-ops/references/modules/c5-weighted-decision-matrix/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          47
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/workspace/apple-bypass/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static text review; no execution."
+    }
+  ],
+  "tool_limitations": [
+    "Native codebase graph discovery returned no exposed graph tools; targeted text reads used.",
+    "External product API semantics and live deployment state were not verified; findings rely on directly visible code and syntax.",
+    "No tests, project runtime, builds, commits or pushes were run."
+  ],
+  "tests_run": []
+}

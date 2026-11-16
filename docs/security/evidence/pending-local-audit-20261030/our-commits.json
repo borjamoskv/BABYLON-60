@@ -1,0 +1,17 @@
+[
+  {
+    "group": "kripke-cleanup",
+    "commit": "5efff02a132f08b5f2a2efa0a09be3684c7e9c03",
+    "paths": [
+      "scripts/c5_cli/doxastic_kripke_engine.py",
+      "tests/test_doxastic_kripke_engine.py"
+    ]
+  },
+  {
+    "group": "solver-fixture",
+    "commit": "14c6931cae219c81328fb9605ad09368c84cbc0c",
+    "paths": [
+      "00_ABZU_KERNEL/crates/babylon60-compiler/tests/semantic_solver_adapter.rs"
+    ]
+  }
+]

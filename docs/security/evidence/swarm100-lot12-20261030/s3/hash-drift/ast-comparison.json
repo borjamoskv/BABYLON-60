@@ -1,0 +1,29 @@
+{
+  "reviewed_sha256": "ebec6651f9dc5cfbc9e0cfb431077b469dcd2c7ead8b0d7ad9e3086e6a48f8c3",
+  "observed_sha256": "bf0787e8b2290673336c2f2d6e6bd593b19d30c4ec5d95f1991c2b40e2a59ec6",
+  "normalized_ast_identical": true,
+  "normalization_scope": "Remove added annotation-only typing/aiosqlite imports and annotations; normalize only the two known new monkeypatch.setattr assignments/fixture args to their previous assignment representation. No assertion, value or control-flow normalization.",
+  "assertions_identical": true,
+  "assertion_count": 36,
+  "test_function_names_identical": true,
+  "test_function_names": [
+    "test_c0434_shutdown_drains_already_accepted",
+    "test_c0358_rejected_enqueue_propagates",
+    "test_c0208_queued_claims_use_committed_predecessor",
+    "test_c0509_failed_dag_awaits_sibling_before_unlock",
+    "test_queue_failure_rolls_back_and_shutdown_reports_it",
+    "test_queue_full_and_cancelled_shutdown_caller",
+    "test_queue_lifecycle_rejects_unstarted_closed_and_duplicate_init",
+    "test_queue_repeated_bursts_preserve_every_accepted_row",
+    "test_pipeline_success_reports_admission_only",
+    "test_pipeline_worker_exception_propagates",
+    "test_kernel_concurrent_instances_and_restart_keep_chain",
+    "test_kernel_replay_missing_id_conflict_and_payload_snapshot",
+    "test_kernel_stop_drains_and_rejects_new_or_invalid_claims",
+    "test_dag_repeated_cancellation_does_not_release_during_cleanup",
+    "test_dag_warmup_failures_leave_no_siblings",
+    "test_queue_close_or_cancel_during_initialization_cannot_reopen",
+    "test_kernel_cancelled_claim_processing_propagates_cancellation"
+  ],
+  "writer_attribution": "Unknown. S3 implementing agent did not make these changes after final freeze. Concurrent commits are observable; writer identity is not inferred."
+}

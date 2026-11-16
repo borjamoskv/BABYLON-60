@@ -1,0 +1,19 @@
+{
+  "reviewer": "17",
+  "validation": "PASS",
+  "candidate_count": 29,
+  "source_files_hash_and_ranges_verified": 41,
+  "pure_reproductions_verified": 4,
+  "ruff": {
+    "command": "uv run --locked --no-sync ruff check docs/security/evidence/swarm100-round3-20261028/17-pure-checks.py docs/security/evidence/swarm100-round3-20261028/17-build-review.py",
+    "exit_code": 0,
+    "output": "All checks passed!"
+  },
+  "decisions": {
+    "ALREADY_FIXED": 2,
+    "CONFIRMED_STATIC": 23,
+    "REPRODUCED": 4
+  },
+  "global_gates": "Delegated to root for central execution",
+  "runtime_limit": "No native product/protected execution, operator data, deployments or remote mutations"
+}

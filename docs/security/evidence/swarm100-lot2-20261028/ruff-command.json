@@ -1,0 +1,19 @@
+{
+  "command": [
+    "uv",
+    "run",
+    "--locked",
+    "--no-sync",
+    "ruff",
+    "check",
+    "01_KISH_ENGINE/babylon60/commands/itera.py",
+    "scripts/repatriated/c5_sharur_100_anergy_purge.py",
+    "scripts/c5_cortex/autoconsolidate.py",
+    "tools/skill_library/global/anergy-purge-protocol/scripts/anergy_purge.py",
+    "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/anergy-purge-protocol/scripts/anergy_purge.py",
+    "tests/test_swarm100_lot2_regressions.py"
+  ],
+  "exit_code": 0,
+  "log": "docs/security/evidence/swarm100-lot2-20261028/ruff.log",
+  "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+}

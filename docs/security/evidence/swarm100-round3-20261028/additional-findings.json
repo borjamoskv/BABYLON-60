@@ -1,0 +1,57 @@
+[
+  {
+    "candidate_id": "SW100-R3-0001",
+    "title": "Publish the prepared immutable commit rather than a mutable release-branch name",
+    "adjudication_status": "FIXED_WITH_CONFINED_REGRESSIONS",
+    "separate_from_candidate_id": "SW100-C0414",
+    "decision": "ALREADY_FIXED",
+    "severity": "P1",
+    "remediation_state": "FIXED",
+    "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+    "current_source_sha256": "92236e509279cd93355ca574c76070008b7adfabc8cd93ceb87acf3b18f02c0f",
+    "rationale": "Baseline fixture A selected the C2 convenience ref after B changed it while A waited. The patched flow signs SHA256 of a per-attempt nonce, immutable commit/tree, destination digest, full target ref, force policy, action/scope/agent and frozen transport-config digest. The isolated dispatcher uses the saved commit and literal destination in a private bare repository without mutable remote rewrites; ls-remote independently checks the target. Patched invalid fixture receipts never dispatch, while direct no-op dispatch tests retain C1 despite branch/config changes. This closes mutable-reference selection, not an end-to-end hardware or transport identity certification.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+        "start_line": 247,
+        "end_line": 247,
+        "observation": "Authorization effect includes immutable commit/tree and target/policy metadata."
+      },
+      {
+        "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+        "start_line": 330,
+        "end_line": 330,
+        "observation": "Dispatcher source is the saved commit and full target ref."
+      },
+      {
+        "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+        "start_line": 318,
+        "end_line": 318,
+        "observation": "Private bare dispatch omits mutable source/global rewrites."
+      },
+      {
+        "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+        "start_line": 412,
+        "end_line": 412,
+        "observation": "Entrypoint passes the prepared immutable commit, not convenience ref."
+      }
+    ],
+    "guards": [
+      "All Git/scanner/gate executable effects observed only through owned temporary doubles; no ATTESTED fixture.",
+      "Software field/signature checks do not attest hardware provenance independently of the trusted selected local gate.",
+      "Active pre-push hooks, LFS pointers and submodules are explicitly unsupported and rejected; no hook bypass.",
+      "Host transport binaries/configuration, hardware integration and real remote publication are outside this verification.",
+      "Ship atomically retains the verified receipt plus its effect descriptor at last_ship_receipt.json with mode 0600; no prior receipt is reused. Public projection receipt remains attempt-local."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot3-20261028/before-tests.log",
+      "docs/security/evidence/swarm100-lot3-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot3-20261028/independent-review.json",
+      "docs/security/evidence/swarm100-lot3-20261028/validation.json"
+    ],
+    "suggested_remediation": "Use the saved CLEAN_COMMIT as the push source and retain the corresponding TREE_DIGEST through approval; independently decide whether the shared local convenience branch should be replaced, uniquely named or locked.",
+    "previous_local_id": "FOLLOWUP-C0414-MUTABLE-PUBLISH-REF",
+    "runtime_scope": "Two scheduled copied invocations, warmup plus four overlapping attempts and no-op dispatcher selection; no actual authorization/push."
+  }
+]

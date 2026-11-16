@@ -1,0 +1,26 @@
+{
+  "status": "PREPARED_NOT_APPLIED",
+  "records": [
+    {
+      "candidate_id": "SW100-C0425",
+      "path": "examples/navier_stokes_larsa_oracle.rs",
+      "source_sha256": "4098a7b3b2c30bd5e09c614a31048e8acaaec9760b341cef87e9e3274ec2c385",
+      "historical_source_revision": "HEAD"
+    },
+    {
+      "candidate_id": "SW100-C0458",
+      "path": "examples/poc_bifurcation_5_lifetimes.rs",
+      "source_sha256": "99b6c3846236dedecbae049fddd2dd7320af40659bc44ae135bba4d0d7e40264",
+      "historical_source_revision": "HEAD"
+    },
+    {
+      "candidate_id": "SW100-C0513",
+      "path": "examples/poc_lean4_emitter.rs",
+      "source_sha256": "5a4fa9bc39c3d4cc8a17aa6d97f3f10a1dd5fc21e6769b6816fc1d8878b1fcb8",
+      "historical_source_revision": "HEAD"
+    }
+  ],
+  "runtime_executed": false,
+  "canonical_registry_written": false,
+  "next_step": "After explicit source-stability coordination, run approved apply/reconcile/prepare sequence; no validation bypass."
+}

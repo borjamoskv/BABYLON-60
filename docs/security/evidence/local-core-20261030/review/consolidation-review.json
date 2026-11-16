@@ -1,0 +1,16 @@
+{
+  "reviewer": "independent_verifier",
+  "reviewed_at_utc": "2026-10-29T23:17:41.068190+00:00",
+  "decision": "CONSOLIDATION_ACCEPTED",
+  "base_head": "28257bd74fce31446b0350d094e9dab148a1aea7",
+  "candidate": "eb28fa97bb0440d59878b955222aa0617a1c236b",
+  "partition_sha256": "7414636901f4ba6dcd9e7d9d0937e70050457cfb86e7162b42410686f6a13e06",
+  "imported_sha256": "8ad1b735c27581e6dcd5a35481a2f9afff3122b935513b384e8c8fefa91dcf94",
+  "commits_checked": 8,
+  "files_checked": 29,
+  "worktree_clean": true,
+  "errors": [],
+  "limitations": [
+    "Consolidation integrity only; does not establish test outcomes or hardware acceptance."
+  ]
+}

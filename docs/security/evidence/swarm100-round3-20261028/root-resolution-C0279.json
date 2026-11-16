@@ -1,0 +1,49 @@
+{
+  "candidate_id": "SW100-C0279",
+  "decision": "REJECTED",
+  "severity": "P2",
+  "remediation_state": "NOT_APPLICABLE",
+  "path": "scripts/c5_sharur/agent_beeper.py",
+  "current_source_sha256": "92aa547bdf314d6dd303e31c55daa1c86a40e8c883e16d4fcd408a2b9f27a9fa",
+  "rationale": "The retained broadcast behavior was correctly observed, but no successive-message requirement or affected reusable consumer was established. After the operator answered that the intended contract was unknown, the root agent made a reversible local contract decision based on the existing one-shot barrier consumer: one global broadcast per instance, retained for late waiters; a new round uses a fresh AgentPager. This scope is now explicit in class/wait/broadcast docstrings. Executable AST is unchanged. An isolated fixture validates waiting, multicast wake-up, late/repeated retained reads, and independent fresh instances. C0279 is rejected under this documented current contract, not because repeated-message delivery was implemented or because the original behavior observation was false. If reusable successive delivery becomes a requirement, it needs a distinct design with per-generation consumption and this scenario applies again. The independent unicast wake-up defect C0278 remains OPEN and was re-reproduced.",
+  "source_checks": [
+    {
+      "path": "scripts/c5_sharur/agent_beeper.py",
+      "start_line": 21,
+      "end_line": 96,
+      "observation": "Documents one global broadcast per instance, retention for late waiters and a fresh instance per round."
+    },
+    {
+      "path": "scripts/c5_sharur/agent_beeper.py",
+      "start_line": 52,
+      "end_line": 81,
+      "observation": "Returns the retained global broadcast; another wait does not begin a new round."
+    },
+    {
+      "path": "scripts/c5_sharur/agent_beeper.py",
+      "start_line": 89,
+      "end_line": 96,
+      "observation": "Documents the single-broadcast caller contract; executable body unchanged."
+    },
+    {
+      "path": "scripts/c5_sharur/sharur_swarm_core.py",
+      "start_line": 80,
+      "end_line": 101,
+      "observation": "Existing consumer constructs a fresh pager, waits once per tenant and broadcasts once."
+    }
+  ],
+  "guards": [
+    "Contract resolution is a reversible root-agent design choice grounded in the observed consumer, not a claimed operator preference.",
+    "No successive-message queue or reset API is introduced.",
+    "Prior NEEDS_VALIDATION reviews remain preserved.",
+    "Public unicast support and its C0278 defect are unchanged."
+  ],
+  "runtime_executed": true,
+  "evidence_paths": [
+    "docs/security/evidence/swarm100-round3-20261028/root-followup-C0279.json",
+    "docs/security/evidence/swarm100-round3-20261028/C0279-contract-before.json",
+    "docs/security/evidence/swarm100-round3-20261028/C0279-contract-validation.json"
+  ],
+  "resolution_type": "CONTRACT_CLARIFIED_NO_EXECUTABLE_CHANGE",
+  "operator_response": "no lo se"
+}

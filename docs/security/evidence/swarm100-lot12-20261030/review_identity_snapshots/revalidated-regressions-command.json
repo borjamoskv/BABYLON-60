@@ -1,0 +1,43 @@
+{
+  "command": [
+    "uv",
+    "run",
+    "--locked",
+    "--no-sync",
+    "python",
+    "docs/security/evidence/swarm100-lot12-20261030/run_confined_tests.py",
+    "tests/test_swarm100_lot12_s1_regressions.py",
+    "tests/test_ledger_snapshot_engine.py",
+    "tests/test_swarm100_lot12_s2_identity_regressions.py",
+    "tests/test_crypto_canonical.py",
+    "tests/test_bounty_aeon_sealer.py::test_conformal_merkle_tree_inclusion_and_falsification",
+    "docs/security/evidence/swarm100-lot12-20261030/review_identity_snapshots/test_independent_identity.py",
+    "docs/security/evidence/swarm100-lot12-20261030/review_identity_snapshots/test_independent_snapshots.py",
+    "-q",
+    "-o",
+    "addopts=--tb=short"
+  ],
+  "exit_code": 0,
+  "source_sha256_before": {
+    "scripts/c5_l1_ledger/ledger_snapshot_engine.py": "60eb867625b819350f09654e51234ba9ed41313213aa93d9092564da6362d405",
+    "01_KISH_ENGINE/babylon60/crypto/identity.py": "43f60f696fc05f0b6fd63d5c17045e105e249bc08cee3cc68e8e6ee419edade8",
+    "01_KISH_ENGINE/babylon60/crypto/keys.py": "d5b8e5336c00eac48e87b1288325c03054c6d15e821074256388ffd9e2782136",
+    "scripts/c5_l1_ledger/seal_bounty_aeon.py": "a3686548681ee16f73a088d06bd67443d73272afe868fc5e9c381e69d40cc6b0"
+  },
+  "source_sha256_after": {
+    "scripts/c5_l1_ledger/ledger_snapshot_engine.py": "60eb867625b819350f09654e51234ba9ed41313213aa93d9092564da6362d405",
+    "01_KISH_ENGINE/babylon60/crypto/identity.py": "43f60f696fc05f0b6fd63d5c17045e105e249bc08cee3cc68e8e6ee419edade8",
+    "01_KISH_ENGINE/babylon60/crypto/keys.py": "d5b8e5336c00eac48e87b1288325c03054c6d15e821074256388ffd9e2782136",
+    "scripts/c5_l1_ledger/seal_bounty_aeon.py": "a3686548681ee16f73a088d06bd67443d73272afe868fc5e9c381e69d40cc6b0"
+  },
+  "test_source_sha256": {
+    "tests/test_swarm100_lot12_s1_regressions.py": "160420dff65c0bf043328c7165cfddb64f467c7eb884b8c0920aa0d4ba311d36",
+    "tests/test_ledger_snapshot_engine.py": "b947465315f0d4e74c8248c22e930bf48476a999869b9221aeda2b0d7db62ace",
+    "tests/test_swarm100_lot12_s2_identity_regressions.py": "74a7223a73709bfd1fa64e4f627a05ca051e9a0cfd75676c4320ec887a4c1f63",
+    "tests/test_crypto_canonical.py": "7b147f6a3dcc18265cd3123eb44799cc2dfbb684a29784ae4f8a1ef2790eb032",
+    "tests/test_bounty_aeon_sealer.py": "8a5d7c0b9289cf78c1830721f3aebe7ce0aa5d4c47aa15ca1df2220aedc5cd65",
+    "docs/security/evidence/swarm100-lot12-20261030/review_identity_snapshots/test_independent_identity.py": "70489da5279d3763d2b2805ceda1862d93cf01df7490534b8cb83a4cecbda6c1",
+    "docs/security/evidence/swarm100-lot12-20261030/review_identity_snapshots/test_independent_snapshots.py": "e6ed29125b9e53a6f58c4659be65a3789252a4e15c9048013976c42fdcee3566"
+  },
+  "scope": "Same confined temporary HOME/CORTEX stores and software fixtures as original independent run."
+}

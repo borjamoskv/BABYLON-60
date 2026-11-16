@@ -1,0 +1,136 @@
+{
+  "group": "S1",
+  "status": "READY_FOR_INDEPENDENT_REVIEW",
+  "candidate_ids": [
+    "SW100-C0528",
+    "SW100-C0529"
+  ],
+  "production_scope": [
+    "scripts/c5_l1_ledger/ledger_snapshot_engine.py"
+  ],
+  "source_sha256": "c2dae5feafe94cbfb70f9b1dccdc1170072b240f8da631d21f5b12bac6b70aef",
+  "test_sha256": "69d6b712ec997fa4fdf44eb4c13ef0b0821b180cbff789545f07928496d8b46e",
+  "original_before": {
+    "source_sha256": "126474f8d45284fee75951c5a9ddd7abc350352be7df3adb6df8653aeb8e3ca2",
+    "pytest_exit_code": 1,
+    "observed": "6 failed before S1 source edits",
+    "log": "before-tests.log"
+  },
+  "coordination": {
+    "external_edits_observed": true,
+    "preserved": true,
+    "reserved_source_sha256": "708c04b74a59273979096fef368c642e670d141bb0ceef878d62415357dfd481",
+    "patch": "post-reservation.patch",
+    "observation": "User reserved the source after external changes. Existing root/missing-source/UUID/validation/staging fixes were retained or strengthened. No source reset."
+  },
+  "remaining_before": {
+    "observed": "2 failed,13 passed after correcting the publication observer hook; 3 failures replayed against the frozen reserved source including zero-byte DB collision",
+    "log": "reserved-before-tests.log",
+    "replay": "red-replay.json",
+    "replay_command": [
+      "uv",
+      "run",
+      "--locked",
+      "--no-sync",
+      "python",
+      "docs/security/evidence/swarm100-lot12-20261030/s1/replay_before.py"
+    ]
+  },
+  "after": {
+    "observed": "24 passed (20 new regressions and 4 existing tests)",
+    "checks": {
+      "regressions": {
+        "command": [
+          "uv",
+          "run",
+          "--locked",
+          "--no-sync",
+          "pytest",
+          "tests/test_swarm100_lot12_s1_regressions.py",
+          "tests/test_ledger_snapshot_engine.py",
+          "-q",
+          "-o",
+          "addopts=--tb=short"
+        ],
+        "exit_code": 0,
+        "log": "regressions.log",
+        "log_sha256": "70dc51ac83f5a25b6bc140e45f0335c01f4eb7c1099e157a75fe402db45202a4"
+      },
+      "ruff": {
+        "command": [
+          "uv",
+          "run",
+          "--locked",
+          "--no-sync",
+          "ruff",
+          "check",
+          "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+          "tests/test_swarm100_lot12_s1_regressions.py"
+        ],
+        "exit_code": 0,
+        "log": "ruff.log",
+        "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+      },
+      "mypy": {
+        "command": [
+          "uv",
+          "run",
+          "--locked",
+          "--no-sync",
+          "mypy",
+          "--follow-imports=silent",
+          "--check-untyped-defs",
+          "scripts/c5_l1_ledger/ledger_snapshot_engine.py"
+        ],
+        "exit_code": 0,
+        "log": "mypy.log",
+        "log_sha256": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e"
+      }
+    }
+  },
+  "per_id": [
+    {
+      "candidate_id": "SW100-C0528",
+      "recommendation": "FIXED",
+      "acceptance": "Logical repository root via absolute().parents[2]; missing/corrupt source rejected before outputs; URI mode=ro prevents recreation after source removal before SQLite open; main cannot start actor on snapshot failure. Defaults tested from a copied repo layout without replacing DB_PATH/SNAPSHOT_DIR."
+    },
+    {
+      "candidate_id": "SW100-C0529",
+      "recommendation": "FIXED",
+      "acceptance": "Timestamp plus UUID; DB and staging manifest opened O_EXCL/O_NOFOLLOW, including rejection of existing empty DB. DB and completed JSON fsynced, manifest atomically published by exclusive hard link, directory fsynced. Concurrent fixed-clock 52 snapshots after warmup reopen with matching hashes/content. Concurrent final-manifest collision and preexisting staging files are preserved."
+    }
+  ],
+  "limits": [
+    "Local POSIX filesystem with hard-link and directory-fsync support; unsupported publication errors propagate, without fallback.",
+    "Snapshot directory and ancestors are controlled by the cooperating owner; this does not isolate against same-user directory replacement attacks.",
+    "A process crash can leave unpublished DB/staging files; no automatic orphan purge or physical power-cut recovery test is claimed.",
+    "SHA-256 describes file integrity; author metadata is not authenticated authorship.",
+    "No real BFT actor, provider, operator database, identity or hardware executed; fixtures used copied source and temporary SQLite/WAL."
+  ],
+  "evidence_sha256": {
+    "intermediate-source-change.diff": "3ed2cc13386b7027fca975081fd65c7531cf55dcc0af2bb7132cde436202cc33",
+    "replay_before.py": "a067e9596f1cd957b8de298495de5ed1781183495eef2f3b15f60e842e59ca8b",
+    "concurrent-before-tests.log": "dbac90ab918b8258da8ab4a57d1960c446e3e1262fedaf1ca0dcf8325222b846",
+    "reserved-before-tests.log": "19a338c7a40f5ab24eb64b0906cd2def2b37ba5e6e1c88fbae2e2ad7bde82a1d",
+    "concurrent-before-check.json": "ce704c902472a58dbd41b5d94c97fb0f3ccca2ad4ebce661e2b30c75d436f657",
+    "red-replay.json": "892e4fffaec823355c29b3fe7a908e74e028cd753f26c63b5678c11ed86f0cb3",
+    "before-tests.log": "11a86919a3b91ed6df7380c5fe5d55fbf0cc30c5de295d47345cf7f4e83fa1a8",
+    "adversarial-before-tests.log": "3999d02d97b36d97e1f291727cafe8f856171bf6a4ac77eb183afa0d0515a27a",
+    "reserved-baseline-source.json": "90ef02b7cdd4ce06c8d4f4714f7b8f57e0fdf1a7017493794d82357b5b0a9766",
+    "intermediate-before-tests.log": "131f1cb63ca073a478b1cdf0c17abc91019cede6e3de0bab4deb08e365cc0b61",
+    "checks.json": "70eeef67f1f09652835c404b44a3d8ee3ab4d96528682a844249245a05f8875d",
+    "before-check.json": "a1e6239baf7c6e305a2392f959b7be63c2d3773a888e58f07168dd462f015a00",
+    "after-check.json": "4cdd0e20236c4ee07ecb4642e70891239d307dd55daef4693a75ded7b238a328",
+    "post-reservation.patch": "c22aa978b7de239c5dae139358c55915753613a2836d62f88bb3b5249cbd100c",
+    "mypy.log": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e",
+    "ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "regressions.log": "70dc51ac83f5a25b6bc140e45f0335c01f4eb7c1099e157a75fe402db45202a4",
+    "reserved-before-check.json": "a3e4f7fc696d51723a6ec0ef2355e2d82ef953a53afa9b168ae0a1420d7a827d",
+    "intermediate-before-check.json": "ce704c902472a58dbd41b5d94c97fb0f3ccca2ad4ebce661e2b30c75d436f657",
+    "red-replay.log": "ac2454c61f274204a6affca9a7f1a689393bc4ee5073fff305c5643e93038a44",
+    "concurrent-change-2.json": "9b9f24f573e028abda5da15ac2ccabdb9cb0de794ae9b25b6b01d2e87cef63c1",
+    "intermediate-source-change.json": "25f8e09777bc70610671088c14be8d4fa6b8b7b36c14ea6517daf885d81a2835",
+    "adversarial-before-check.json": "a3e4f7fc696d51723a6ec0ef2355e2d82ef953a53afa9b168ae0a1420d7a827d",
+    "after-tests.log": "ae407aef79a7a21c486b404dc011df986371edaec6d23f4e81463364d52e3a9e"
+  }
+}

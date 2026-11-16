@@ -1,0 +1,20 @@
+{
+  "source_sha256": "24bd06ab165e103831cd150f107ffd300279cf2367b80924ac90f575a279ba6c",
+  "observations": [
+    {
+      "case": "ghosts-non-object",
+      "error_type": "AttributeError",
+      "structured_partial": false,
+      "completed_files": [],
+      "project_committed": true
+    },
+    {
+      "case": "session-non-object",
+      "error_type": "AttributeError",
+      "structured_partial": false,
+      "completed_files": [],
+      "project_committed": true
+    }
+  ],
+  "scope": "Owned temporary memory only, kill/network/process creation blocked before import"
+}

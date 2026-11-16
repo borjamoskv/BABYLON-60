@@ -1,0 +1,21 @@
+{
+  "batch_size": 30,
+  "count_unit": "unique OPEN findings, not tests or duplicate raw IDs",
+  "priority": "P1 first; retain paired C0529 P2 in the same snapshot source",
+  "groups": {
+    "S1 — Snapshots": 2,
+    "S2 — Identidad y confianza": 6,
+    "S3 — Colas y entrega": 5,
+    "S4 — Operaciones de archivos y Git": 5,
+    "S5 — Entrada y aislamiento": 5,
+    "S6 — Verificación y auditoría": 7
+  },
+  "selected_count": 30,
+  "severity": {
+    "P1": 29,
+    "P2": 1
+  },
+  "production_file_count": 29,
+  "status": "PLAN_ONLY_NOT_APPLIED",
+  "registry_states_unchanged": true
+}

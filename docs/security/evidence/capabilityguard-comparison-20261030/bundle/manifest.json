@@ -1,0 +1,102 @@
+{
+  "format_version": 1,
+  "package": "capabilityguard-comparison-v1",
+  "date_client": "2026-10-30",
+  "hash_algorithm": "SHA-256; artifact integrity only",
+  "files": {
+    "LICENSE": {
+      "sha256": "4c0feb0f48586176789f42815859e2714a0486cccc72fbc9e3422eb29d155536",
+      "bytes": 2033
+    },
+    "PROMPT.txt": {
+      "sha256": "bc1b73d0ee92f066a1586f9a88d75f9b30dfc49f71f56622de1913d2c5ef822d",
+      "bytes": 1917
+    },
+    "README.md": {
+      "sha256": "561a8d0b9f4f5be83d0fa29b310b679b9a691931b6ec161eaa60084bfd9dc72e",
+      "bytes": 6304
+    },
+    "acceptance/cases.json": {
+      "sha256": "2af80f3d7ebdb7bc6a79fdc3afbd9d9ac55db414db27512c32f7c7689d511eb9",
+      "bytes": 14752
+    },
+    "acceptance/test_acceptance.py": {
+      "sha256": "4601dfe69b55e3ab5329611eea29307a3da0a6963dddfaa192dc66e25b4cfa10",
+      "bytes": 2248
+    },
+    "acceptance/test_harness.py": {
+      "sha256": "70e8ba4f552c636d8a5c3d51ef3adadca9a5d88e5b7731eba5307dfe67c35d20",
+      "bytes": 5347
+    },
+    "benchmark.py": {
+      "sha256": "0a9738a9905ee1cf5091ef5d0cdbe4cda24994a29a2c846fa2cc6dd3f0938508",
+      "bytes": 17663
+    },
+    "campaign.json": {
+      "sha256": "99bfa7e5983f5ee6eee13296e5f8ab539563c2d1d12115daf475e75c91115653",
+      "bytes": 1609
+    },
+    "context/AGENTS-source.txt": {
+      "sha256": "1c40bfdd2083849bc1f3c266a67871a1594068bc843207c4a1244fe0884f138b",
+      "bytes": 4808
+    },
+    "context/agent-contracts-source.txt": {
+      "sha256": "4f137f727344d4ee7b746c746958d234fb37e16af33d5968216952faf06a3cae",
+      "bytes": 31061
+    },
+    "context/babylon60rules.txt": {
+      "sha256": "896ef66813dae7b753c365db39817a8f144f525dc1ae4f3259660b1f53db557c",
+      "bytes": 5082
+    },
+    "criteria.json": {
+      "sha256": "c4a8e3887927d5a02a470b9e1f4231c50eab259a77b97c2565bbb6c248cdb480",
+      "bytes": 1841
+    },
+    "env/.python-version": {
+      "sha256": "922fe0c3de073b01988e23348ea184456161678c5e329e6f34be89be24383f93",
+      "bytes": 7
+    },
+    "env/pyproject.toml": {
+      "sha256": "1accb083238f81e9809d5577d5d2cb587790bb3557fec0ddf2392bd68394574b",
+      "bytes": 356
+    },
+    "env/uv.lock": {
+      "sha256": "e57e60c04203f1d0719886c548b3ec499b3613874d900eb0b2de8c4087b9f65a",
+      "bytes": 10486
+    },
+    "metrics-template.json": {
+      "sha256": "a771895f635ed7542654e08790f49a9cc1a4ffd18b9cc3caba7b5584b3efc96c",
+      "bytes": 1705
+    },
+    "snapshot/AGENTS.md": {
+      "sha256": "9dcffbba7ad5544d527a46b637f4d536bd57646b016e675e6570b26c97576b86",
+      "bytes": 911
+    },
+    "snapshot/src/babylon60/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "snapshot/src/babylon60/guards/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "snapshot/src/babylon60/guards/capabilities.py": {
+      "sha256": "633edc9551bdd3183409a8e5ce70e32cf15de31f017762f59547fec6d80d68d9",
+      "bytes": 398
+    },
+    "snapshot/src/babylon60/guards/capability_guard.py": {
+      "sha256": "a98c659b79bfd805db90c03bd67c1ec530c7c39573dd2615a223917f1654e261",
+      "bytes": 1107
+    },
+    "source-manifest.json": {
+      "sha256": "f6834d150d012efc33685929f9a420d5e7148635c24d1fc24242231082c47850",
+      "bytes": 1970
+    }
+  },
+  "snapshot_sha256": "38b1fa315b1a2b2d615202140d67e4e4b46ea194a9e1747df0456ff882b95ad7",
+  "prompt_sha256": "bc1b73d0ee92f066a1586f9a88d75f9b30dfc49f71f56622de1913d2c5ef822d",
+  "acceptance_test_count": 127,
+  "source_head": "71a4d56a059f5709882e6ee628f2bc890ad4f18a",
+  "solution_included": false,
+  "trials_executed": 0
+}

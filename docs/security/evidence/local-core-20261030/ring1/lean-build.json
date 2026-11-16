@@ -1,0 +1,15 @@
+{
+  "command": [
+    "lake",
+    "--no-cache",
+    "--wfail",
+    "build",
+    "BabylonTrace",
+    "AX0",
+    "NemesisWave4"
+  ],
+  "cwd": "/Users/borjafernandezangulo/.codex/worktrees/local-core-ring1/BABYLON-60/proof/lean",
+  "exit_code": 0,
+  "elapsed_seconds": 8.986,
+  "manifest_unchanged": true
+}

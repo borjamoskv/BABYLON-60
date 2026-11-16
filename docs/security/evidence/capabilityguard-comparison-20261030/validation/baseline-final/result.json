@@ -1,0 +1,95 @@
+{
+  "manifest_sha256": "6f2595471683cde1d5f23509738df755c6784a69441b96196afd5f9996da8422",
+  "snapshot_sha256": "38b1fa315b1a2b2d615202140d67e4e4b46ea194a9e1747df0456ff882b95ad7",
+  "prompt_sha256": "bc1b73d0ee92f066a1586f9a88d75f9b30dfc49f71f56622de1913d2c5ef822d",
+  "submission_sha256": "38b1fa315b1a2b2d615202140d67e4e4b46ea194a9e1747df0456ff882b95ad7",
+  "submission_files": {
+    "AGENTS.md": {
+      "sha256": "9dcffbba7ad5544d527a46b637f4d536bd57646b016e675e6570b26c97576b86",
+      "bytes": 911
+    },
+    "src/babylon60/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "src/babylon60/guards/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "src/babylon60/guards/capabilities.py": {
+      "sha256": "633edc9551bdd3183409a8e5ce70e32cf15de31f017762f59547fec6d80d68d9",
+      "bytes": 398
+    },
+    "src/babylon60/guards/capability_guard.py": {
+      "sha256": "a98c659b79bfd805db90c03bd67c1ec530c7c39573dd2615a223917f1654e261",
+      "bytes": 1107
+    }
+  },
+  "scope_ok": true,
+  "forbidden_changes": [],
+  "functional_acceptance": false,
+  "participant_tests_present_and_passing": false,
+  "technical_acceptance": false,
+  "human_review_status": "pending",
+  "acceptance": {
+    "argv": [
+      "uv",
+      "run",
+      "--project",
+      "/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/env",
+      "--locked",
+      "--no-sync",
+      "pytest",
+      "/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py",
+      "-c",
+      "/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/env/pyproject.toml",
+      "--noconftest",
+      "--import-mode=importlib",
+      "-p",
+      "no:cacheprovider",
+      "--tb=short",
+      "-q",
+      "--junitxml",
+      "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/security/evidence/capabilityguard-comparison-20261030/validation/baseline-final/acceptance.xml"
+    ],
+    "exit_code": 1,
+    "seconds": 0.567059,
+    "log": "acceptance.log",
+    "counts": {
+      "tests": 127,
+      "failures": 85,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "participant_tests": null,
+  "ruff": {
+    "argv": [
+      "uv",
+      "run",
+      "--project",
+      "/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/env",
+      "--locked",
+      "--no-sync",
+      "ruff",
+      "check",
+      "--no-cache",
+      "--config",
+      "/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/env/pyproject.toml",
+      "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/security/evidence/capabilityguard-comparison-20261030/validation/baseline-final/candidate/src/babylon60/guards/capability_guard.py"
+    ],
+    "exit_code": 0,
+    "seconds": 0.06088,
+    "log": "ruff.log"
+  },
+  "environment_observed": {
+    "python": "3.14.7 (main, Aug  5 2026, 10:29:49) [Clang 21.0.0 (clang-2100.1.1.101)]",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "pytest": "9.1.1",
+    "ruff": "0.16.10",
+    "lock_sha256": "e57e60c04203f1d0719886c548b3ec499b3613874d900eb0b2de8c4087b9f65a",
+    "uv": "uv 0.12.0 (b88d7c5c4 2026-07-28 aarch64-apple-darwin)"
+  },
+  "submission_observed_at": "2026-10-29T23:47:26.786398+00:00",
+  "scope": "Unit contract only; validate_tool_execution and OS confinement are not repaired or certified"
+}

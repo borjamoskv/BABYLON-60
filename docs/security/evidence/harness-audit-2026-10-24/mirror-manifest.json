@@ -1,0 +1,106 @@
+{
+  "schema": "babylon60.verification-mirror/v1",
+  "generated_at": "2026-10-23T13:04:08.945Z",
+  "source": {
+    "name": "BABYLON-60",
+    "remote": "https://github.com/borjamoskv/BABYLON-60",
+    "commit": "a25ff274308fbe74c10be6b0fc7513da93b78887",
+    "branch": "main",
+    "dirty_paths": 143
+  },
+  "claim_run": {
+    "timestamp": 1792760475.112392,
+    "source_commit": "a25ff274308fbe74c10be6b0fc7513da93b78887+dirty:cc512bce910ae7bd",
+    "source_tree_digest": "7f2944f1378ff981c18a47e4e2ff86e15ce08e802f96542f6a344f3f0e0db409",
+    "current_source_tree_digest": "a8f9b10ef89ee649fe05adf0c31c42c713f9706c582595578edf9017024620d4",
+    "claims_manifest_digest": "79f3269add7ccc0dc4b9c0d08c8022eed4203a249b9b58de2121de34d162aa53",
+    "manifest_matches": true,
+    "tracked_source_matches": false,
+    "failed_claims": [],
+    "total": 28,
+    "hardware_presence": "NO_VERIFICADO"
+  },
+  "assurance_scope": "unsigned_artifact_integrity; historical reports retain their limitations",
+  "files": [
+    {
+      "path": "CLAIMS.toml",
+      "bytes": 16566,
+      "sha256": "79f3269add7ccc0dc4b9c0d08c8022eed4203a249b9b58de2121de34d162aa53"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 1949,
+      "sha256": "5a07778eccff3b513f4c770eaa77c72d00d8419afea3b6c29a8f8b4eae20ebd2"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2602,
+      "sha256": "5db6a0317274f45fa704a225d61fdf3f41a9dfc3b26f53cb0c622ba647188101"
+    },
+    {
+      "path": "RELEASE_MANIFEST.json",
+      "bytes": 810,
+      "sha256": "e5ecd85f695f1d39c963c4bde87ceaccc50713ea0cf64525e387a131bb1ac089"
+    },
+    {
+      "path": "claims_sitrep.json",
+      "bytes": 11969,
+      "sha256": "d08966d5e0e6d2c9e7d8d5885d888ddb5da58dab97362b5345206a6f3ccd8ac6"
+    },
+    {
+      "path": "lakefile.toml",
+      "bytes": 124,
+      "sha256": "e7d114c1dff5089cb5fca0bdbb9601e468b0986d92222aac35f518aa527ba0bf"
+    },
+    {
+      "path": "lean-toolchain",
+      "bytes": 28,
+      "sha256": "108ca2895820de2c74101f81de81756b41ca0165dfdc8ced16a82c3f810152d0"
+    },
+    {
+      "path": "proof/lean/AX0.lean",
+      "bytes": 5930,
+      "sha256": "b0c763ec1fe82695813e8043ddb294c035275b3b072baa9576d31da067994cd1"
+    },
+    {
+      "path": "reports/ax0-adversarial-report.json",
+      "bytes": 407,
+      "sha256": "77945423639ba1da76b6e9e47f23ccb9a5194733c34aa3f9f22ad25394a9adae"
+    },
+    {
+      "path": "reports/nemesis-crash-report.json",
+      "bytes": 299,
+      "sha256": "eb1e55af821ccc65160c5232eaa0953ab306c67b4271239edb8c2b82ca2f23f9"
+    },
+    {
+      "path": "reports/nemesis-kernel-report.json",
+      "bytes": 244,
+      "sha256": "443dfc30371b82b32a2a071dd45666d14c452e2dc1c4bfe4b3aea35c88695288"
+    },
+    {
+      "path": "reports/nemesis-model-report.json",
+      "bytes": 470,
+      "sha256": "cc0f1e7fac03efbe3f14cd548aa3ee14cfa930e37b835c21a71cb03910135ade"
+    },
+    {
+      "path": "reports/nemesis_evidence_report.json",
+      "bytes": 3482,
+      "sha256": "3cd05a615ac4b52623f9afa6e960848d9a79abb669fbc82d230918549cc4fcfd"
+    },
+    {
+      "path": "reports/nemesis_verified_report.json",
+      "bytes": 1455,
+      "sha256": "8627ceac95ad14c7d0623d1ae5e3a4c3544e16a4b11dc6b792beeaef080daf2c"
+    },
+    {
+      "path": "spec_nemesis.md",
+      "bytes": 14575,
+      "sha256": "2801600f7a805f9639de34dc7c70e2f607d170297b6f710b124cc1e3b2c36f20"
+    },
+    {
+      "path": "verify.py",
+      "bytes": 4235,
+      "sha256": "4199f2dc2469bed8745d4a2dd119a85641c342eb589e4bf4de898557b18d4a6f"
+    }
+  ]
+}

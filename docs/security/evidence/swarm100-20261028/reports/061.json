@@ -1,0 +1,409 @@
+{
+  "shard": "061",
+  "findings": [
+    {
+      "title": "Metadata writes can overwrite another manager\u2019s keys or revocations",
+      "severity": "P1",
+      "path": "01_KISH_ENGINE/babylon60/crypto/keys.py",
+      "line": 85,
+      "evidence": "Each KeyManager snapshots the complete JSON at initialization (77-83), then _save_metadata truncates and rewrites that snapshot (85-88), without locking or reloading. generate_and_store_key and revoke_key both invoke it.",
+      "trigger": "Two manager instances load the same file; one revokes actor A, and the other subsequently generates actor B from its older snapshot.",
+      "impact": "The second write restores stale revocation metadata and drops intervening updates; process termination during truncation can also leave unreadable metadata.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Zero-weight agents still veto pooled hypotheses",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/bft/bayesian_swarm.py",
+      "line": 80,
+      "evidence": "Weights default missing entries to zero (78), but p <= 0 vetoes the hypothesis before checking the weight (80-82).",
+      "trigger": "Pool opinions with a zero-weight or omitted-weight agent assigning zero to a hypothesis supported by positive-weight agents.",
+      "impact": "An excluded agent changes or zeros the result, violating weighted geometric pooling semantics.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Garbage collection totals count each target repeatedly",
+      "severity": "P2",
+      "path": "scripts/c5_sharur/sharur_100_garbage_collector.py",
+      "line": 106,
+      "evidence": "Twenty workers per cohort choose rules using sub_idx % len(rules); cohort rule counts are below twenty. Lines 155-159 sum every repeated scan into cohort and global totals without deduplication.",
+      "trigger": "Any matching file in one of the configured targets.",
+      "impact": "Reported file and byte totals are inflated by repeated workers, making cleanup capacity reports inaccurate.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Additional LSP headers are consumed as JSON payload bytes",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/cortex/crates/cortex-lsp/src/main.rs",
+      "line": 47,
+      "evidence": "After Content-Length, the parser reads exactly one line as an assumed empty delimiter (47-49), then consumes content_length bytes immediately (52-53).",
+      "trigger": "An incoming message places a Content-Type header after Content-Length, followed by the actual empty line and JSON body.",
+      "impact": "The extra header consumes the delimiter read and the remaining delimiter is included in the body; JSON parsing fails and stream framing is desynchronized.",
+      "confidence": "high",
+      "kind": "runtime"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".agents/skills/c5-wetware-and-venture-ops-project/references/aliases.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          102
+        ]
+      ],
+      "manifest_sha256": "a11e8a66c917530cf131fbb8f22b19a84424a8abe5bbd298faeb8eeef40c9547",
+      "observed_sha256": "a11e8a66c917530cf131fbb8f22b19a84424a8abe5bbd298faeb8eeef40c9547",
+      "hash_changed": false,
+      "symlink_target": null
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-kernel/src/isa.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          59
+        ]
+      ],
+      "manifest_sha256": "b58f88fddd52ec834d6b8ce5a7771d3b91aae0d39e0598716648019fd879095f",
+      "observed_sha256": "b58f88fddd52ec834d6b8ce5a7771d3b91aae0d39e0598716648019fd879095f",
+      "hash_changed": false,
+      "symlink_target": null
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/bft/bayesian_swarm.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          107
+        ]
+      ],
+      "manifest_sha256": "53b700f012d78228be18a05fe32abf00c9eaa8b9101c9bc058e311c5069cef4d",
+      "observed_sha256": "53b700f012d78228be18a05fe32abf00c9eaa8b9101c9bc058e311c5069cef4d",
+      "hash_changed": false,
+      "symlink_target": null
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/crypto/keys.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          401
+        ]
+      ],
+      "manifest_sha256": "cbf5b3ded4cf854df1d11d37a4d61d0f0122604881c7a02fb0f00497822ee305",
+      "observed_sha256": "cbf5b3ded4cf854df1d11d37a4d61d0f0122604881c7a02fb0f00497822ee305",
+      "hash_changed": false,
+      "symlink_target": null
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/signature_panel.html",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          80
+        ]
+      ],
+      "manifest_sha256": "b63c144f1db2d5e5ca13e437f7aa9a0a3064da206aa67a82259e58db529e086b",
+      "observed_sha256": "b63c144f1db2d5e5ca13e437f7aa9a0a3064da206aa67a82259e58db529e086b",
+      "hash_changed": false,
+      "symlink_target": null
+    },
+    {
+      "path": "01_KISH_ENGINE/cortex/crates/cortex-lsp/src/main.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          247
+        ]
+      ],
+      "manifest_sha256": "148d6513d6992a0a6353ac0ab904323121586270187acb72b6b5d10fd062641c",
+      "observed_sha256": "148d6513d6992a0a6353ac0ab904323121586270187acb72b6b5d10fd062641c",
+      "hash_changed": false,
+      "symlink_target": null
+    },
+    {
+      "path": "crates/babylon-attest/src/env.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          43
+        ]
+      ],
+      "manifest_sha256": "d402ca30101b335afba5562160fa339547d1a3a212e3bc18f2cc2cb6d4029dbb",
+      "observed_sha256": "d402ca30101b335afba5562160fa339547d1a3a212e3bc18f2cc2cb6d4029dbb",
+      "hash_changed": false,
+      "symlink_target": null
+    },
+    {
+      "path": "docs/06_theory/02_goedel_incompleteness.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          35
+        ]
+      ],
+      "manifest_sha256": "de876449dd514a335db3be3e3f0dfd950b0cece4c8399b1826d26453570386a8",
+      "observed_sha256": "de876449dd514a335db3be3e3f0dfd950b0cece4c8399b1826d26453570386a8",
+      "hash_changed": false,
+      "symlink_target": null
+    },
+    {
+      "path": "evidence.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          295
+        ]
+      ],
+      "manifest_sha256": "63a2cf586fefd69e6a0343529e827a130b02772ea9b2a1d096dabdc107c31e43",
+      "observed_sha256": "63a2cf586fefd69e6a0343529e827a130b02772ea9b2a1d096dabdc107c31e43",
+      "hash_changed": false,
+      "symlink_target": null
+    },
+    {
+      "path": "sbom.python.cdx.json",
+      "status": "partial",
+      "ranges": [
+        [
+          1,
+          120
+        ]
+      ],
+      "manifest_sha256": "24190590d402cd0ec5947b5030fd39887c1afd36a18212900a036650311cf07e",
+      "observed_sha256": "24190590d402cd0ec5947b5030fd39887c1afd36a18212900a036650311cf07e",
+      "hash_changed": false,
+      "symlink_target": null
+    },
+    {
+      "path": "scripts/c5_deploy/publish_crates.sh",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          63
+        ]
+      ],
+      "manifest_sha256": "7b3f22b336b3ba757b9edfe54d2c958e9a854a264b672d10bd7473823255716c",
+      "observed_sha256": "7b3f22b336b3ba757b9edfe54d2c958e9a854a264b672d10bd7473823255716c",
+      "hash_changed": false,
+      "symlink_target": null
+    },
+    {
+      "path": "scripts/c5_sharur/sharur_100_garbage_collector.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          188
+        ]
+      ],
+      "manifest_sha256": "c0ec52947dd8a7cef1838c5d9c5ef7e5d2cb90ce1cfcf173efc586bb71cbaeba",
+      "observed_sha256": "c0ec52947dd8a7cef1838c5d9c5ef7e5d2cb90ce1cfcf173efc586bb71cbaeba",
+      "hash_changed": false,
+      "symlink_target": null
+    },
+    {
+      "path": "scripts/zero_touch_onboarding_daemon.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          273
+        ]
+      ],
+      "manifest_sha256": "3d1047248f98147bfed4184103b40229f9ee796fe4af737b7238c701ce3f62b9",
+      "observed_sha256": "3d1047248f98147bfed4184103b40229f9ee796fe4af737b7238c701ce3f62b9",
+      "hash_changed": false,
+      "symlink_target": null
+    },
+    {
+      "path": "tests/q16_drift_test.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          85
+        ]
+      ],
+      "manifest_sha256": "e2f08c9df5cdc9ca54cfe62caff82a6d83e4e8681e0ae4796542dcd93ce94ea1",
+      "observed_sha256": "e2f08c9df5cdc9ca54cfe62caff82a6d83e4e8681e0ae4796542dcd93ce94ea1",
+      "hash_changed": false,
+      "symlink_target": null
+    },
+    {
+      "path": "tests/test_fl_pkg_01.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          114
+        ]
+      ],
+      "manifest_sha256": "6091144583ff1c1cac9818eeef7cb1de9753eb801626824a7f3162d428ee627f",
+      "observed_sha256": "6091144583ff1c1cac9818eeef7cb1de9753eb801626824a7f3162d428ee627f",
+      "hash_changed": false,
+      "symlink_target": null
+    },
+    {
+      "path": "tests/test_vsa_oncology.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          54
+        ]
+      ],
+      "manifest_sha256": "b26657cacde2adf842ed5d51275388e64e2e949ff5cdefed0194cd4763b47a40",
+      "observed_sha256": "b26657cacde2adf842ed5d51275388e64e2e949ff5cdefed0194cd4763b47a40",
+      "hash_changed": false,
+      "symlink_target": null
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/bindings/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          200
+        ]
+      ],
+      "manifest_sha256": "f2bf2328aef6d5e58fb20677a1e55933d099354a3fa76e1a04e822f411b8f19c",
+      "observed_sha256": "f2bf2328aef6d5e58fb20677a1e55933d099354a3fa76e1a04e822f411b8f19c",
+      "hash_changed": false,
+      "symlink_target": null
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/observability/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          115
+        ]
+      ],
+      "manifest_sha256": "1f7dadd3d639fca56b0fe2ff1b8aebf6c97cda0875467f0b932095392cb658d2",
+      "observed_sha256": "1f7dadd3d639fca56b0fe2ff1b8aebf6c97cda0875467f0b932095392cb658d2",
+      "hash_changed": false,
+      "symlink_target": null
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/tunnel/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          157
+        ]
+      ],
+      "manifest_sha256": "c656471269c97e7a02760cf195abb01b4db202e7d8e14e1540c2b5550fc46ca7",
+      "observed_sha256": "c656471269c97e7a02760cf195abb01b4db202e7d8e14e1540c2b5550fc46ca7",
+      "hash_changed": false,
+      "symlink_target": null
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/wrangler/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          917
+        ]
+      ],
+      "manifest_sha256": "7328edb3a922af1c0c83047e7f5cb78c719507ce18a789ce62547bab78c5a362",
+      "observed_sha256": "7328edb3a922af1c0c83047e7f5cb78c719507ce18a789ce62547bab78c5a362",
+      "hash_changed": false,
+      "symlink_target": null
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents/agent_29_site_playbooks_craigslist.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "manifest_sha256": "bee102bbe500ede072b037e2ddffbf9783c5e5e77028e5420e8dd419bc044f05",
+      "observed_sha256": "bee102bbe500ede072b037e2ddffbf9783c5e5e77028e5420e8dd419bc044f05",
+      "hash_changed": false,
+      "symlink_target": null
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/cortex-skill-auditor/scripts/audit_declarative_skills.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          11
+        ]
+      ],
+      "manifest_sha256": "675b2e950bdc72a1f4d980ce3c02a43e7e2e43f84754cc9e2930d0943cdb04e4",
+      "observed_sha256": "675b2e950bdc72a1f4d980ce3c02a43e7e2e43f84754cc9e2930d0943cdb04e4",
+      "hash_changed": false,
+      "symlink_target": null
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/github-architect/references/canonical_blueprints.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          170
+        ]
+      ],
+      "manifest_sha256": "deffe083a758c15502f5a2542dcf44e557673a5f10c53146812aad1f8153e265",
+      "observed_sha256": "deffe083a758c15502f5a2542dcf44e557673a5f10c53146812aad1f8153e265",
+      "hash_changed": false,
+      "symlink_target": null
+    },
+    {
+      "path": "tools/skill_library/global/flstudio-mcp-production/examples/Markov_Chain_Melody.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          73
+        ]
+      ],
+      "manifest_sha256": "95c44479bc5ad801cd315f27a4999a53bdccfa0af3f4cf8eeba9d8a561c91d8f",
+      "observed_sha256": "95c44479bc5ad801cd315f27a4999a53bdccfa0af3f4cf8eeba9d8a561c91d8f",
+      "hash_changed": false,
+      "symlink_target": null
+    },
+    {
+      "path": "tools/skill_library/workspace/cloud-chamber/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "manifest_sha256": "30eb4040cd89c07f00777d913af499ea223cbf7a68a1f0f99f6d3d60a8a93317",
+      "observed_sha256": "30eb4040cd89c07f00777d913af499ea223cbf7a68a1f0f99f6d3d60a8a93317",
+      "hash_changed": false,
+      "symlink_target": null
+    }
+  ],
+  "tool_limitations": [
+    "No native codebase-memory graph tools were exposed; targeted source reads and rg used.",
+    "SBOM JSON remains partially reviewed (lines 1-120 of 2957); no dependency vulnerability conclusions drawn.",
+    "External Cloudflare API/CLI claims were read as reference data and were not independently validated against current official documentation.",
+    "No tests or repository runtime executed as instructed."
+  ],
+  "tests_run": []
+}

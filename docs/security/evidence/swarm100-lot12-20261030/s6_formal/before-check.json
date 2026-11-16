@@ -1,0 +1,20 @@
+{
+  "command": [
+    "uv",
+    "run",
+    "--locked",
+    "--no-sync",
+    "pytest",
+    "tests/test_swarm100_lot12_s6_formal_regressions.py",
+    "-q",
+    "-o",
+    "addopts=--tb=short"
+  ],
+  "exit_code": 1,
+  "source_sha256": {
+    "scripts/c5_destiladora/proof_emitter_lean4.py": "e0f85cdf754c6d4ea3e1367176dd7eb3caa296a82d07eb86f7f976b5b70cf85c",
+    "scripts/babylon60/gen_oncology_primitives.py": "df8f6fdde757fb4321a270e0b6b2e9b91d8dd67884e13b238e3c6387b2dea5e3",
+    "scripts/c5_destiladora/test_destiladora_e2e.py": "4faf9b3fddcdb37f6ba083bdf5fe813c46ae3bd230ad35617c9a5088492a70de"
+  },
+  "tests_sha256": "9cb182d8a51dafda6c4f629bbee9dd089c3cff3f068c9a2dc83254fa227b211d"
+}

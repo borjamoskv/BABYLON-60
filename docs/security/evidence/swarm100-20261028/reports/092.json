@@ -1,0 +1,340 @@
+{
+  "shard": "092",
+  "findings": [
+    {
+      "title": "Dry-run still overwrites the session artifact log",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/c5-terminological-archaeology/scripts/c5_lexicon_notary.py",
+      "line": 197,
+      "evidence": "main always calls _generate_anagnorisis_log(registered, artifact_dir=artifact_dir); that function writes ANAGNORISIS_LOG.md without a dry_run guard (195-197).",
+      "trigger": "Invoke --term X --dry-run --artifact-dir with an existing directory.",
+      "impact": "A preview invocation creates or replaces the artifact log despite the CLI promise No escribir.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Phase replacement removes every section after Fase 2f",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/c5-terminological-archaeology/scripts/c5_lexicon_notary.py",
+      "line": 158,
+      "evidence": "re.sub(r\"\\n\\n### Fase 2f:.*\", \"\", content, flags=re.DOTALL) consumes the entire remaining document.",
+      "trigger": "Update a skill containing a generated Fase 2f followed by other sections.",
+      "impact": "The update silently deletes all later skill instructions instead of replacing only the generated block.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Concurrent synthesis invocations share one intermediate WAV",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/f5tts-voice-cloning-sota/scripts/synthesize_vocal_clone.py",
+      "line": 108,
+      "evidence": "raw_tmp is the fixed /tmp/f5_raw_synthesis.wav; sf.write precedes a separate ffmpeg invocation reading that path.",
+      "trigger": "Two synthesis processes overlap between writing the WAV and FFmpeg opening it.",
+      "impact": "One requested output can contain another speaker or text; intermediate audio is also left behind.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Timeout is reported as a successful zero-copy falsification",
+      "severity": "P2",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/scripts/poc_python_zerocopy_worker.py",
+      "line": 57,
+      "evidence": "Timeout at lines 52-54 breaks the loop, then lines 56-60 unconditionally print FALSACI\u00d3N PYTHON ZERO-COPY SUPERADA; main returns normally.",
+      "trigger": "No orchestrator tasks arrive within 60 seconds, or fewer than ten arrive.",
+      "impact": "The PoC exits successfully and prints a passing result without reaching its own ten-task completion condition.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Password audit requires plaintext password in process arguments",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-sovereign-identity-hardening/scripts/check_pwned_pass.sh",
+      "line": 15,
+      "evidence": "Usage passes the password as $1 and PASSWORD=\"$1\"; there is no stdin or hidden prompt input path.",
+      "trigger": "Use the documented invocation with a real password.",
+      "impact": "The password is exposed in command arguments and commonly persisted in shell history, undermining the privacy purpose of the helper.",
+      "confidence": "high",
+      "kind": "example"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "01_KISH_ENGINE/babylon60/guards/url_guard.py",
+      "line": 28,
+      "observation": "Only two exact metadata hostnames are denied; private, loopback, alternate IP spellings and DNS resolutions are not restricted.",
+      "limitation": "Targeted references in 01_KISH_ENGINE and tests found only export wiring; no outbound consumer established. Therefore no production SSRF exploit is asserted."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".github/ISSUE_TEMPLATE/rfc_architecture.yml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          30
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/scripts/poc_python_zerocopy_worker.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          63
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/cognitive_pilot/__main__.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          164
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/guards/url_guard.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          38
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/utils/errors.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          12
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "02_EDIN_SWARMS/agents_archi/protocols/aof.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          66
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "crates/mxc_broker_poc/Cargo.toml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          10
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "docs/06_theory/evidence/lean-reporting-20261026.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          156
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "examples/poc_v5_crash_harness.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          395
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "scripts/c5_demos/alpha_sitrep_v2.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          56
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "scripts/c5_log_custody/c5_preserve_agent_local_logs.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          19
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "scripts/c5_verifiers/devsecops_attest.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          91
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "src/generated_aphairesis_constants.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          15
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "tests/test_audit_merkle_regressions.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          115
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "tests/test_markov_bridge.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          144
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/agents-sdk/references/client-sdk.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          110
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/d1/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          133
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/r2-data-catalog/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          122
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workerd/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          183
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/f5tts-voice-cloning-sota/scripts/synthesize_vocal_clone.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          140
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          46
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/c5-terminological-archaeology/scripts/c5_lexicon_notary.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          345
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "tools/skill_library/global/c5-sovereign-identity-hardening/scripts/check_pwned_pass.sh",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          52
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "tools/skill_library/global/kimi-mcp-orchestrator/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "inventory_hash": "match"
+    }
+  ],
+  "tool_limitations": [
+    "Native codebase graph tools were not exposed (tool metadata search returned none); targeted source reads and rg used.",
+    "Static audit only; no tests, application runtime, provider calls or build commands executed.",
+    "No external API claims adjudicated; Cloudflare documentation snippets reviewed as text only."
+  ],
+  "tests_run": []
+}

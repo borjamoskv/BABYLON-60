@@ -1,0 +1,1014 @@
+{
+  "reviewer": "04",
+  "captured_at": "2026-10-28T15:45:14.597363+00:00",
+  "mode": "STATIC_SOURCE_AND_FILESYSTEM_METADATA_ONLY",
+  "runtime_executed": false,
+  "network_executed": false,
+  "native_execution": false,
+  "graph_tool_availability": "No native codebase-memory tools in session ALL_TOOLS inventory; used targeted source reads and rg fallback.",
+  "source_files": {
+    ".github/actions/archi-guard/action.yml": {
+      "sha256": "590bb0f38dd90a13a969f7b979e2f85323e7d4cc31cab6b6e12657b548d688ad",
+      "line_count": 49
+    },
+    "00_ABZU_KERNEL/crates/strike-rs/src/bft_iceoryx2.rs": {
+      "sha256": "c722b818b8de1017c843c1e7d24356ad4f008bafedd388ccba0bbe7d2a11f1c0",
+      "line_count": 125
+    },
+    "00_ABZU_KERNEL/crates/strike-rs/src/hypervisor.rs": {
+      "sha256": "79af81bc27f34508c5798234efff054d3ca7e2a357066e77119cafe17f6589dc",
+      "line_count": 527
+    },
+    "01_KISH_ENGINE/babylon60/api/tracer.py": {
+      "sha256": "940edb14fa37c65a3419fa9394fa3465f1acb6208d303db33203a07d4c915b84",
+      "line_count": 686
+    },
+    "01_KISH_ENGINE/babylon60/attestation/merkle_anchor.py": {
+      "sha256": "cf90589a3faf04117731c693bb62a0f0486ea9ca9091af17ce915964dc170ce9",
+      "line_count": 161
+    },
+    "01_KISH_ENGINE/babylon60/bft/ledger_actor.py": {
+      "sha256": "c0dddf3e209bb945fa1f49a3d372b66b18968ebfcc2ea864ce35b26ebb16b237",
+      "line_count": 530
+    },
+    "01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py": {
+      "sha256": "d7747b65250fa8292a301082981ccd89830c53f815dd410dd87bc120becb57e1",
+      "line_count": 675
+    },
+    "01_KISH_ENGINE/babylon60/compliance_exporter/m0_evidence_pack.py": {
+      "sha256": "82dc6e8cf8c106a5c7a8c2f68b9ee188457a6d3e618968d38e83acdefc1ddd2c",
+      "line_count": 959
+    },
+    "01_KISH_ENGINE/babylon60/guards/saga_contract.py": {
+      "sha256": "d127155094d4f989da562fcbe3008d87566a4499fdeaabce0a54c8ff6f9689bd",
+      "line_count": 59
+    },
+    "01_KISH_ENGINE/babylon60/kernel/sovereign_binary_analyzer.py": {
+      "sha256": "4d72badbfdbf68ed8645535a301c261378e48b037628926ccdfe665e67d0d960",
+      "line_count": 485
+    },
+    "01_KISH_ENGINE/babylon60/transducers/hygiene.py": {
+      "sha256": "f81a1a493ba298b04440b9d667fb19af9398f62752b17866f152acfe13210445",
+      "line_count": 100
+    },
+    "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py": {
+      "sha256": "624eb292a797ac7094c4b84357606180465b09f3b7381f5292dba44ac4484634",
+      "line_count": 1086
+    },
+    "02_EDIN_SWARMS/agents_archi/orchestrator/swarm.py": {
+      "sha256": "dd58f1b736cdb9f4dfad5f0b67dd4ec9e757b4806d2f289b6aea617232a54c12",
+      "line_count": 414
+    },
+    "Cargo.toml": {
+      "sha256": "ac947bfc2a5374df2bfe33f5dd2425981883a09068742590e8e39757d9361673",
+      "line_count": 116
+    },
+    "Makefile": {
+      "sha256": "51e26e0ddcefc26f0b0bae19568e2a6d0b5a778d17546393eff319755f49a8b4",
+      "line_count": 99
+    },
+    "crates/eridu-infer/src/auth.rs": {
+      "sha256": "dd1e728f793d8edda847bd64c493a9f2e2f967de6d730494314fc93816f75931",
+      "line_count": 58
+    },
+    "crates/eridu-infer/src/gate.rs": {
+      "sha256": "acf0950ea7cc73b9f06b5f823a13070dd924c3b5be5df80c38c3d89c155bd6b4",
+      "line_count": 111
+    },
+    "crates/eridu-infer/src/main.rs": {
+      "sha256": "6d536eed3821e707ac3d46994ba6750ab9224a3293e5e9343ec5c5c64359162e",
+      "line_count": 397
+    },
+    "crates/eridu-infer/src/server.rs": {
+      "sha256": "bbbc97cf3cb7e2cef458411dce71791d47560615310fb3107f0ab18e8ba5e903",
+      "line_count": 284
+    },
+    "docs/RESULTADOS.md": {
+      "sha256": "316b23a2ea46c271da6eaf51f6f6461c2c6eded33b8349c3d2086b0a683c3882",
+      "line_count": 83
+    },
+    "scripts/c5_calibrations/topological_calibration.py": {
+      "sha256": "54263f9c0944ef7764da3a4dd1bb1044dd7b7acd6b0c71501804e3251da69ab6",
+      "line_count": 101
+    },
+    "scripts/c5_demos/poc_agents_archi_enterprise.py": {
+      "sha256": "73715c88b1f4984c19118a4a904eee0fd026fe38495192828734041143beae37",
+      "line_count": 182
+    },
+    "scripts/c5_edin/edin_swarm_runner.py": {
+      "sha256": "cff71c0cb84846cda92d55fd5c61d43e78e0a1a68185fb241b253d0a2c83b537",
+      "line_count": 103
+    },
+    "scripts/c5_quality_gates/daily_sovereign_maintenance.py": {
+      "sha256": "bf5d3827f8b3c3c85a1904c1a0082c8d67a25b0b9834c482040426d915373b95",
+      "line_count": 329
+    },
+    "scripts/c5_quality_gates/extensions_apoptosis_auditor.py": {
+      "sha256": "9a9ebbf34bc2f981aceae1619c37c5fd072ae921b0cf507d8253fb8546c16f29",
+      "line_count": 118
+    },
+    "scripts/c5_quality_gates/pre_push_ledger_guard.py": {
+      "sha256": "531cc2afea8dfcca240af2a7d69ac42620034a53999a45065c0220477f1086fb",
+      "line_count": 102
+    },
+    "scripts/c5_sharur/sharur_100_swarm_execution.py": {
+      "sha256": "84b155a4f3ff7c106ba7e9eb9e3068bc123d5976757e353da78223b966e324d1",
+      "line_count": 219
+    },
+    "scripts/c5_verifiers/fast_smt_gate.py": {
+      "sha256": "ef4c442f821689838b76a7aaa5cf29c625de2dac3df0a5bd1e2856cfdb526748",
+      "line_count": 231
+    },
+    "scripts/repatriated/apex_merkle_l5_anchor.py": {
+      "sha256": "368260a5194b4a978ce26721b8defbd42155ccd4a13232d41b67fb59338f225c",
+      "line_count": 67
+    },
+    "src/babylon60.rs": {
+      "sha256": "202a32f58401f3c7f44dc72a0fb701205c8b5b118ef342e8a1779cd469919125",
+      "line_count": 626
+    },
+    "tests/test_axioms_hypothesis.py": {
+      "sha256": "caec85e208d37833c4d1b0f6b87758bdce7ea1a370b7793a07f8eff214e897aa",
+      "line_count": 529
+    },
+    "tools/skill_library/codex_overrides/cloudflare/references/flagship/api.md": {
+      "sha256": "c7b8eb86ed852a3f37709f000988aeb89860c24aedee58527379e475f0996894",
+      "line_count": 390
+    },
+    "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-tri-provider-swarm/MODULE.md": {
+      "sha256": "b2186cff3c5918d3773668d75920308a33e30bd8aea6a9ff7437fee4976c2491",
+      "line_count": 99
+    },
+    "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-tri-provider-swarm/scripts/tri_swarm_dispatcher.py": {
+      "sha256": "68e34604fb1c3158ea6b09a8e85a1c7f7f529a4642fd104b30793e92425a05ed",
+      "line_count": 131
+    },
+    "tools/skill_library/global/c5-tri-provider-swarm/scripts/tri_swarm_dispatcher.py": {
+      "sha256": "68e34604fb1c3158ea6b09a8e85a1c7f7f529a4642fd104b30793e92425a05ed",
+      "line_count": 131
+    }
+  },
+  "metadata_checks": {
+    "hygiene_file_is_symlink": false,
+    "hygiene_parents_0_through_3": [
+      "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/01_KISH_ENGINE/babylon60/transducers",
+      "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/01_KISH_ENGINE/babylon60",
+      "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/01_KISH_ENGINE",
+      "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60"
+    ],
+    "hygiene_resolved_parents_3": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+    "optimizer_exists_at_computed_root": true,
+    "top_level_babylon60_exists": false,
+    "top_level_extensions_exists": false,
+    "relocated_extensions_exists": false,
+    "tri_dispatcher_copies_byte_identical": true,
+    "nested_copy_is_symlink": false,
+    "standalone_copy_is_symlink": false,
+    "GNUmakefile_exists": false,
+    "lowercase_makefile_exists": true,
+    "lowercase_makefile_same_as_Makefile": true
+  },
+  "targeted_searches": [
+    {
+      "command": "rg -n 'generate_hardware_pcr_quote|generate_notary_checkpoint' 01_KISH_ENGINE/babylon60 --glob '*.py'",
+      "observation": "Hardware quote callers in api/tracer.py:185 and compliance_exporter/eu_ai_act.py:320,479; notary checkpoint definition only."
+    },
+    {
+      "command": "rg -n 'validate\\(' crates/eridu-infer/src --glob '*.rs'",
+      "observation": "Only auth.rs:41 validator definition found; no call."
+    },
+    {
+      "command": "rg -n 'subscribe_exergy_packet|IpcEnvelope' 00_ABZU_KERNEL/crates/strike-rs --glob '*.rs'",
+      "observation": "Public subscriber definition and envelope publisher; hypervisor.rs:317 consumes same envelope and repeats unchecked slice at 341."
+    },
+    {
+      "command": "rg -n 'extensions_apoptosis_auditor|archi-guard|fast_smt_gate' .github Makefile scripts/c5_quality_gates --glob '*.yml' --glob '*.yaml' --glob '*.py'",
+      "observation": "No internal action/auditor caller found in searched paths; fast_smt_gate is consumed by daily_sovereign_maintenance.py:155,167."
+    },
+    {
+      "command": "rg -n '^include|^-include|^sinclude|^verify_lean|^\\.DEFAULT|^%:|^test-lean:' Makefile",
+      "observation": "No verify_lean, include or catch-all/default rule; test-lean at 35."
+    }
+  ],
+  "source_snapshots": [
+    {
+      "candidate_id": "SW100-C0381",
+      "path": "src/babylon60.rs",
+      "start_line": 503,
+      "end_line": 542,
+      "observation": "Quarantine path calls exporter, claims WORM, and writes both fixed names.",
+      "sha256": "202a32f58401f3c7f44dc72a0fb701205c8b5b118ef342e8a1779cd469919125",
+      "source": "503:     if is_quarantined {\n504:         println!(\"[MOSKV APEX] CRITICAL HALT INTERCEPTED — QUARANTINE & FREEZE ACTIVATED.\");\n505:         println!(\"[Forensics] Log preserved under WORM audit policy. Zero historical evidence purged.\");\n506:         export_quarantine_bundle(&ledger);\n507:     } else {\n508:         println!(\"[MOSKV APEX] Causal-Determinist Execution Completed.\");\n509:         println!(\"[Proof] Proof obligations generated.\");\n510:         export_artifact_bundle(&ledger);\n511:     }\n512: }\n513: \n514: // Immutable Artifact Export (WORM Quarantine Seal Engine)\n515: fn export_quarantine_bundle(ledger: &DAGLedger) {\n516:     use sha2::{Sha256, Digest};\n517:     let mut canonical_lines = Vec::new();\n518:     for ev in ledger.events.values() {\n519:         let mut parents = ev.parents.clone();\n520:         parents.sort();\n521:         let parents_str = parents.join(\",\");\n522:         canonical_lines.push(format!(\"{}|{}|{}|{}|{}\", ev.id, parents_str, ev.logical_timestamp.0, ev.payload, ev.signature));\n523:     }\n524:     canonical_lines.sort();\n525:     let canonical_graph = canonical_lines.join(\"\\n\") + \"\\n\";\n526:     \n527:     let mut hasher = Sha256::new();\n528:     hasher.update(canonical_graph.as_bytes());\n529:     let graph_hash = format!(\"{:064x}\", hasher.finalize());\n530: \n531:     let quarantine_manifest = format!(r#\"{{\n532:   \"status\": \"QUARANTINED_AND_FROZEN\",\n533:   \"policy\": \"WORM_WRITE_ONCE_READ_MANY\",\n534:   \"audit_reason\": \"CRITICAL_HALT_FALSATION_INTERCEPTED\",\n535:   \"global_hash\": \"QUARANTINE_SEAL_{}\",\n536:   \"forensic_integrity\": \"IMMUTABLE\"\n537: }}\"#, graph_hash);\n538: \n539:     fs::create_dir_all(\"artifact_bundle_v3/quarantine\").expect(\"C5-REAL: Termodinámica forzada. Unwrap purgado.\");\n540:     fs::write(\"artifact_bundle_v3/quarantine/manifest.json\", quarantine_manifest).expect(\"C5-REAL: Termodinámica forzada. Unwrap purgado.\");\n541:     fs::write(\"artifact_bundle_v3/quarantine/graph.canonical\", &canonical_graph).expect(\"C5-REAL: Termodinámica forzada. Unwrap purgado.\");\n542:     println!(\"-> [Quarantine] WORM Forensic Seal Applied. Seal Hash: {}\", graph_hash);"
+    },
+    {
+      "candidate_id": "SW100-C0381",
+      "path": "src/babylon60.rs",
+      "start_line": 242,
+      "end_line": 250,
+      "observation": "Static compilation rejection also reaches the same exporter.",
+      "sha256": "202a32f58401f3c7f44dc72a0fb701205c8b5b118ef342e8a1779cd469919125",
+      "source": "242: pub fn run_program(source: &str, verification_ring: &mut babylon60::spsc_ring::Consumer<'_, String, 1024>) {\n243:     let lines = match B60Compiler::compile(source) {\n244:         Ok(l) => l,\n245:         Err(e) => {\n246:             eprintln!(\"[MOSKV APEX] STATIC PROOF REJECTED: {}\", e);\n247:             let mut ledger = DAGLedger::new();\n248:             ledger.append(\"EV_0\".to_string(), \"STATIC_REJECT\".to_string(), e, LogicalClock(0));\n249:             export_quarantine_bundle(&ledger);\n250:             return;"
+    },
+    {
+      "candidate_id": "SW100-C0381",
+      "path": "Cargo.toml",
+      "start_line": 104,
+      "end_line": 106,
+      "observation": "The source is registered as the babylon60-dsl binary.",
+      "sha256": "ac947bfc2a5374df2bfe33f5dd2425981883a09068742590e8e39757d9361673",
+      "source": "104: [[bin]]\n105: name = \"babylon60-dsl\"\n106: path = \"src/babylon60.rs\""
+    },
+    {
+      "candidate_id": "SW100-C0382",
+      "path": "src/babylon60.rs",
+      "start_line": 379,
+      "end_line": 398,
+      "observation": "One fractional digit is computed by integer division and then accepted.",
+      "sha256": "202a32f58401f3c7f44dc72a0fb701205c8b5b118ef342e8a1779cd469919125",
+      "source": "379:             \"BA.EXACT\" => {\n380:                 let dest = get_reg_index(tokens[1], &mut sym_table);\n381:                 let rest = line[line.find(tokens[1]).unwrap() + tokens[1].len()..].trim();\n382:                 let src_token = tokens.get(2).unwrap_or(&\"1\");\n383:                 let divisor = parse_operand(src_token, rest, &co.regs, &mut sym_table);\n384:                 if divisor == 0 || co.regs[dest].scale >= 4 {\n385:                     println!(\"[MOSKV APEX] FALSATION_ERROR: TRUNCATION (Base60_Scale overflow)\");\n386:                     ledger.append(format!(\"EV_{}\", clock.0), \"FALSATION_TRAP\".to_string(), \"TRUNCATION\".to_string(), clock);\n387:                     is_halting = true;\n388:                     is_quarantined = true;\n389:                     co.state = CoroutineState::Quarantined;\n390:                 } else {\n391:                     if co.regs[dest].val % divisor != 0 {\n392:                         co.regs[dest].val = (co.regs[dest].val * 60) / divisor;\n393:                         co.regs[dest].scale += 1;\n394:                     } else {\n395:                         co.regs[dest].val /= divisor;\n396:                     }\n397:                     ledger.append(format!(\"EV_{}\", clock.0), \"BA.EXACT\".to_string(), format!(\"R{}/={}(scale={})\", dest, divisor, co.regs[dest].scale), clock);\n398:                 }"
+    },
+    {
+      "candidate_id": "SW100-C0382",
+      "path": "src/babylon60.rs",
+      "start_line": 228,
+      "end_line": 239,
+      "observation": "Bracket operands are parsed and returned directly.",
+      "sha256": "202a32f58401f3c7f44dc72a0fb701205c8b5b118ef342e8a1779cd469919125",
+      "source": "228: fn parse_operand(token: &str, rest: &str, regs: &[Register], sym_table: &mut HashMap<String, usize>) -> i128 {\n229:     let trimmed = rest.trim();\n230:     if trimmed.starts_with('[') {\n231:         if let Some(end_idx) = trimmed.find(']') {\n232:             let b60_slice = &trimmed[..=end_idx];\n233:             let after_bracket = trimmed[end_idx + 1..].trim();\n234:             let unit_token = after_bracket.split_whitespace().next().unwrap_or(\"\");\n235:             return parse_b60_number(b60_slice) * parse_unit(unit_token);\n236:         }\n237:     }\n238:     let idx = get_reg_index(token, sym_table);\n239:     regs[idx].val"
+    },
+    {
+      "candidate_id": "SW100-C0382",
+      "path": "src/babylon60.rs",
+      "start_line": 266,
+      "end_line": 271,
+      "observation": "Initial register scale is zero, so the example is below the scale guard.",
+      "sha256": "202a32f58401f3c7f44dc72a0fb701205c8b5b118ef342e8a1779cd469919125",
+      "source": "266:     let mut queue = VecDeque::new();\n267:     queue.push_back(Coroutine {\n268:         id: 0,\n269:         pc: 0,\n270:         regs: vec![Register { val: 0, typ: B60Type::Unallocated, scale: 0 }; 32],\n271:         state: CoroutineState::Ready,"
+    },
+    {
+      "candidate_id": "SW100-C0383",
+      "path": "src/babylon60.rs",
+      "start_line": 131,
+      "end_line": 161,
+      "observation": "Static proof validates labels, with missing operands yielding None and eventual Ok.",
+      "sha256": "202a32f58401f3c7f44dc72a0fb701205c8b5b118ef342e8a1779cd469919125",
+      "source": "131:     fn static_proof(lines: &[String]) -> Result<(), String> {\n132:         let mut defined_labels = std::collections::HashSet::new();\n133:         for line in lines {\n134:             if line == \"DUB\" {\n135:                 defined_labels.insert(\"DUB\".to_string());\n136:             } else if let Some(rest) = line.strip_prefix(\"MUB \") {\n137:                 defined_labels.insert(rest.trim().to_string());\n138:             }\n139:         }\n140:         for (idx, line) in lines.iter().enumerate() {\n141:             let tokens: Vec<&str> = line.split_whitespace().collect();\n142:             if tokens.is_empty() {\n143:                 continue;\n144:             }\n145:             let target_opt = match tokens[0] {\n146:                 \"FORK\" | \"GIN\" => tokens.get(1).copied(),\n147:                 \"NU\" | \"TUKU\" | \"AFTER\" | \"AWAIT\" => tokens.get(2).copied(),\n148:                 _ => None,\n149:             };\n150:             if let Some(target) = target_opt {\n151:                 if !defined_labels.contains(target) {\n152:                     return Err(format!(\n153:                         \"FALSATION_ERROR (Static Proof Línea {}): Etiqueta causal '{}' no definida\",\n154:                         idx + 1,\n155:                         target\n156:                     ));\n157:                 }\n158:             }\n159:         }\n160:         Ok(())\n161:     }"
+    },
+    {
+      "candidate_id": "SW100-C0383",
+      "path": "src/babylon60.rs",
+      "start_line": 242,
+      "end_line": 264,
+      "observation": "Successful compilation flows into instruction execution without a syntax parser.",
+      "sha256": "202a32f58401f3c7f44dc72a0fb701205c8b5b118ef342e8a1779cd469919125",
+      "source": "242: pub fn run_program(source: &str, verification_ring: &mut babylon60::spsc_ring::Consumer<'_, String, 1024>) {\n243:     let lines = match B60Compiler::compile(source) {\n244:         Ok(l) => l,\n245:         Err(e) => {\n246:             eprintln!(\"[MOSKV APEX] STATIC PROOF REJECTED: {}\", e);\n247:             let mut ledger = DAGLedger::new();\n248:             ledger.append(\"EV_0\".to_string(), \"STATIC_REJECT\".to_string(), e, LogicalClock(0));\n249:             export_quarantine_bundle(&ledger);\n250:             return;\n251:         }\n252:     };\n253:     let mut labels = HashMap::new();\n254:     let mut clean_code = Vec::new();\n255:     let mut sym_table: HashMap<String, usize> = HashMap::new();\n256: \n257:     for line in lines {\n258:         if line.starts_with(\"MUB \") || line == \"DUB\" {\n259:             let name = if line == \"DUB\" { \"DUB\" } else { line[4..].trim() };\n260:             labels.insert(name.to_string(), clean_code.len());\n261:         } else {\n262:             clean_code.push(line);\n263:         }\n264:     }"
+    },
+    {
+      "candidate_id": "SW100-C0383",
+      "path": "src/babylon60.rs",
+      "start_line": 317,
+      "end_line": 332,
+      "observation": "Only empty tokens are skipped before unguarded ALLOC operand indexing.",
+      "sha256": "202a32f58401f3c7f44dc72a0fb701205c8b5b118ef342e8a1779cd469919125",
+      "source": "317:         let tokens: Vec<&str> = line.split_whitespace().collect();\n318:         if tokens.is_empty() {\n319:             queue.push_back(co);\n320:             continue;\n321:         }\n322: \n323:         match tokens[0] {\n324:             \"ALLOC\" => {\n325:                 let typ_str = tokens[1];\n326:                 let idx = get_reg_index(tokens[2], &mut sym_table);\n327:                 co.regs[idx].typ = match typ_str {\n328:                     \"TIME\" => B60Type::Time,\n329:                     \"F60\" => B60Type::F60,\n330:                     _ => B60Type::I64,\n331:                 };\n332:             }"
+    },
+    {
+      "candidate_id": "SW100-C0384",
+      "path": "src/babylon60.rs",
+      "start_line": 41,
+      "end_line": 63,
+      "observation": "DAGEvent holds opcode and an opcode-bearing internal hash.",
+      "sha256": "202a32f58401f3c7f44dc72a0fb701205c8b5b118ef342e8a1779cd469919125",
+      "source": "41: struct DAGEvent {\n42:     id: String,\n43:     parents: Vec<String>,\n44:     logical_timestamp: LogicalClock,\n45:     opcode: String,\n46:     payload: String,\n47:     hash: String,\n48:     signature: String,\n49: }\n50: \n51: impl DAGEvent {\n52:     fn compute_hash(&self) -> String {\n53:         use sha2::{Sha256, Digest};\n54:         let mut hasher = Sha256::new();\n55:         hasher.update(self.id.as_bytes());\n56:         for p in &self.parents {\n57:             hasher.update(p.as_bytes());\n58:         }\n59:         hasher.update(self.logical_timestamp.0.to_be_bytes());\n60:         hasher.update(self.opcode.as_bytes());\n61:         hasher.update(self.payload.as_bytes());\n62:         format!(\"{:x}\", hasher.finalize())\n63:     }"
+    },
+    {
+      "candidate_id": "SW100-C0384",
+      "path": "src/babylon60.rs",
+      "start_line": 82,
+      "end_line": 91,
+      "observation": "signature is the constant SIG_OK; the internal hash is computed separately.",
+      "sha256": "202a32f58401f3c7f44dc72a0fb701205c8b5b118ef342e8a1779cd469919125",
+      "source": "82:         let mut ev = DAGEvent {\n83:             id: id.clone(),\n84:             parents,\n85:             logical_timestamp: logical_time,\n86:             opcode,\n87:             payload,\n88:             hash: String::new(),\n89:             signature: \"SIG_OK\".to_string(),\n90:         };\n91:         ev.hash = ev.compute_hash();"
+    },
+    {
+      "candidate_id": "SW100-C0384",
+      "path": "src/babylon60.rs",
+      "start_line": 515,
+      "end_line": 541,
+      "observation": "Quarantine canonicalization omits opcode and internal event hash.",
+      "sha256": "202a32f58401f3c7f44dc72a0fb701205c8b5b118ef342e8a1779cd469919125",
+      "source": "515: fn export_quarantine_bundle(ledger: &DAGLedger) {\n516:     use sha2::{Sha256, Digest};\n517:     let mut canonical_lines = Vec::new();\n518:     for ev in ledger.events.values() {\n519:         let mut parents = ev.parents.clone();\n520:         parents.sort();\n521:         let parents_str = parents.join(\",\");\n522:         canonical_lines.push(format!(\"{}|{}|{}|{}|{}\", ev.id, parents_str, ev.logical_timestamp.0, ev.payload, ev.signature));\n523:     }\n524:     canonical_lines.sort();\n525:     let canonical_graph = canonical_lines.join(\"\\n\") + \"\\n\";\n526:     \n527:     let mut hasher = Sha256::new();\n528:     hasher.update(canonical_graph.as_bytes());\n529:     let graph_hash = format!(\"{:064x}\", hasher.finalize());\n530: \n531:     let quarantine_manifest = format!(r#\"{{\n532:   \"status\": \"QUARANTINED_AND_FROZEN\",\n533:   \"policy\": \"WORM_WRITE_ONCE_READ_MANY\",\n534:   \"audit_reason\": \"CRITICAL_HALT_FALSATION_INTERCEPTED\",\n535:   \"global_hash\": \"QUARANTINE_SEAL_{}\",\n536:   \"forensic_integrity\": \"IMMUTABLE\"\n537: }}\"#, graph_hash);\n538: \n539:     fs::create_dir_all(\"artifact_bundle_v3/quarantine\").expect(\"C5-REAL: Termodinámica forzada. Unwrap purgado.\");\n540:     fs::write(\"artifact_bundle_v3/quarantine/manifest.json\", quarantine_manifest).expect(\"C5-REAL: Termodinámica forzada. Unwrap purgado.\");\n541:     fs::write(\"artifact_bundle_v3/quarantine/graph.canonical\", &canonical_graph).expect(\"C5-REAL: Termodinámica forzada. Unwrap purgado.\");"
+    },
+    {
+      "candidate_id": "SW100-C0384",
+      "path": "src/babylon60.rs",
+      "start_line": 545,
+      "end_line": 594,
+      "observation": "Normal graph hash omits opcode while proof IR dispatches on opcode and is written separately.",
+      "sha256": "202a32f58401f3c7f44dc72a0fb701205c8b5b118ef342e8a1779cd469919125",
+      "source": "545: fn export_artifact_bundle(ledger: &DAGLedger) {\n546:     use sha2::{Sha256, Digest};\n547: \n548:     let mut canonical_lines = Vec::new();\n549:     for ev in ledger.events.values() {\n550:         let mut parents = ev.parents.clone();\n551:         parents.sort();\n552:         let parents_str = parents.join(\",\");\n553:         canonical_lines.push(format!(\"{}|{}|{}|{}|{}\", ev.id, parents_str, ev.logical_timestamp.0, ev.payload, ev.signature));\n554:     }\n555:     \n556:     canonical_lines.sort();\n557:     let canonical_graph = canonical_lines.join(\"\\n\") + \"\\n\";\n558:     \n559:     let mut hasher = Sha256::new();\n560:     hasher.update(canonical_graph.as_bytes());\n561:     let graph_hash = format!(\"{:064x}\", hasher.finalize());\n562: \n563:     let manifest = format!(r#\"{{\n564:   \"version\": \"1.0\",\n565:   \"components\": [\"trace.bin\", \"graph.canonical\", \"proof.ir\", \"metadata.json\", \"hashes/\", \"signature/\"],\n566:   \"global_hash\": \"{}\"\n567: }}\"#, graph_hash);\n568: \n569:     let mut ir_lines = Vec::new();\n570:     let mut sorted_events: Vec<_> = ledger.events.values().collect();\n571:     sorted_events.sort_by_key(|ev| &ev.id);\n572:     \n573:     for ev in sorted_events {\n574:         ir_lines.push(format!(\"(Event {} {})\", ev.id, ev.logical_timestamp.0));\n575:         for parent in &ev.parents {\n576:             ir_lines.push(format!(\"(HappensBefore {} {})\", parent, ev.id));\n577:         }\n578:         match ev.opcode.as_str() {\n579:             \"NIG\" => ir_lines.push(format!(\"(Assign {} {})\", ev.payload.replace(\"=\", \" \"), ev.id)),\n580:             \"DAH\" => ir_lines.push(format!(\"(Add {} {})\", ev.payload.replace(\"+=\", \" \"), ev.id)),\n581:             \"LAL\" => ir_lines.push(format!(\"(Sub {} {})\", ev.payload.replace(\"-=\", \" \"), ev.id)),\n582:             \"FORK\" => ir_lines.push(format!(\"(Spawn {} {})\", ev.payload, ev.id)),\n583:             \"AWAIT\" => ir_lines.push(format!(\"(Block {} {})\", ev.payload, ev.id)),\n584:             \"AFTER\" => ir_lines.push(format!(\"(Wait {} {})\", ev.payload, ev.id)),\n585:             \"EXECUTE\" => ir_lines.push(format!(\"(Emit {} {})\", ev.payload, ev.id)),\n586:             _ => ir_lines.push(format!(\"(Unknown {} {})\", ev.payload, ev.id)),\n587:         }\n588:     }\n589:     let proof_ir = ir_lines.join(\"\\n\") + \"\\n\";\n590: \n591:     fs::create_dir_all(\"artifact_bundle_v3\").expect(\"C5-REAL: Termodinámica forzada. Unwrap purgado.\");\n592:     fs::write(\"artifact_bundle_v3/manifest.json\", manifest).expect(\"C5-REAL: Termodinámica forzada. Unwrap purgado.\");\n593:     fs::write(\"artifact_bundle_v3/graph.canonical\", &canonical_graph).expect(\"C5-REAL: Termodinámica forzada. Unwrap purgado.\");\n594:     fs::write(\"artifact_bundle_v3/proof.ir\", proof_ir).expect(\"C5-REAL: Termodinámica forzada. Unwrap purgado.\");"
+    },
+    {
+      "candidate_id": "SW100-C0276",
+      "path": "01_KISH_ENGINE/babylon60/attestation/merkle_anchor.py",
+      "start_line": 105,
+      "end_line": 128,
+      "observation": "Software hash construction and hardware-sealed output labels.",
+      "sha256": "cf90589a3faf04117731c693bb62a0f0486ea9ca9091af17ce915964dc170ce9",
+      "source": "105:     def generate_hardware_pcr_quote(self, global_merkle_root: str) -> Dict[str, str]:\n106:         \"\"\"\n107:         Generates a hardware-bound PCR Quote seal.\n108:         Binds the global Merkle root cryptographically to the physical machine hardware UUID.\n109:         Preserves backward-compatible TPM_2_0_HARDWARE_SEALED prefix for downstream checkers.\n110:         \"\"\"\n111:         hw = self.get_hardware_identity()\n112:         nonce = f\"NONCE_{int(time.time())}\"\n113: \n114:         measurement_str = f\"PCR{self.pcr_index}:{global_merkle_root}:{hw['uuid']}:{hw['machine']}:{nonce}\"\n115:         pcr_value = hashlib.sha256(measurement_str.encode()).hexdigest()\n116: \n117:         seed = os.environ.get(\"BABYLON60_SIGNING_SEED\", hw[\"uuid\"])\n118:         quote_signature = hashlib.sha256(f\"TPM_SIG:{pcr_value}:{seed}\".encode()).hexdigest()\n119: \n120:         return {\n121:             \"pcr_index\": str(self.pcr_index),\n122:             \"pcr_value\": pcr_value,\n123:             \"nonce\": nonce,\n124:             \"tpm_quote_signature\": quote_signature,\n125:             \"hardware_enclave\": f\"TPM_2_0_HARDWARE_SEALED [{hw['enclave_type']}:{hw['uuid'][:8]}...]\",\n126:             \"hardware_uuid\": hw[\"uuid\"],\n127:             \"platform\": f\"{hw['os']}_{hw['machine']}\",\n128:         }"
+    },
+    {
+      "candidate_id": "SW100-C0276",
+      "path": "01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py",
+      "start_line": 305,
+      "end_line": 320,
+      "observation": "Certificate contains the returned hardware_anchor object.",
+      "sha256": "d7747b65250fa8292a301082981ccd89830c53f815dd410dd87bc120becb57e1",
+      "source": "305:             \"certificate_id\": f\"EU-AIA-CERT-{cert_fingerprint[:16].upper()}\",\n306:             \"system_identifier\": system_id,\n307:             \"operator\": operator_name,\n308:             \"issued_at\": timestamp_iso,\n309:             \"valid_until\": valid_until_iso,\n310:             \"validity_days\": validity_days,\n311:             \"global_merkle_root\": global_hash,\n312:             \"quarantine_status\": status_str,\n313:             \"legal_disclaimer\": t[\"legal_disclaimer\"],\n314:             \"evidence_verification\": verification,\n315:             \"revocation\": {\n316:                 \"status\": \"ACTIVE\",\n317:                 \"check_hash\": hashlib.sha256(f\"{cert_fingerprint}:ACTIVE\".encode()).hexdigest(),\n318:                 \"revocation_authority\": f\"urn:babylon60:revocation:{operator_name}\",\n319:             },\n320:             \"hardware_anchor\": MerkleCausalAnchor().generate_hardware_pcr_quote(global_hash),"
+    },
+    {
+      "candidate_id": "SW100-C0276",
+      "path": "01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py",
+      "start_line": 473,
+      "end_line": 497,
+      "observation": "Decision evidence validates ledger integrity then attaches software quote.",
+      "sha256": "d7747b65250fa8292a301082981ccd89830c53f815dd410dd87bc120becb57e1",
+      "source": "473:         attestation = ledger.get_state_attestation()\n474:         if not attestation.get(\"integrity_verified\"):\n475:             raise RuntimeError(\"Ledger integrity verification failed; cannot create DEP\")\n476: \n477:         merkle_root = ledger.get_merkle_root()\n478:         proof_packet = ledger.get_event_proof(seq)\n479:         hw_quote = MerkleCausalAnchor().generate_hardware_pcr_quote(merkle_root)\n480: \n481:         timestamp_iso = time.strftime(\"%Y-%m-%dT%H:%M:%SZ\", time.gmtime())\n482:         leaf_h = proof_packet.get(\"leaf_hash\", \"\")\n483:         dep_id = f\"DEP-{hashlib.sha256(f'{seq}:{leaf_h}:{timestamp_iso}'.encode()).hexdigest()[:16].upper()}\"\n484: \n485:         packet: Dict[str, Any] = {\n486:             \"dep_id\": dep_id,\n487:             \"seq\": seq,\n488:             \"decision_data\": self.redact_sensitive_data(decision_data),\n489:             \"merkle_inclusion_proof\": proof_packet,\n490:             \"global_merkle_root\": merkle_root,\n491:             \"hardware_anchor\": hw_quote,\n492:             \"issued_at\": timestamp_iso,\n493:             \"operator\": operator_name,\n494:             \"compliance_binding\": \"EU_AI_ACT_ART12_CAUSAL_TRACEABILITY\",\n495:         }\n496: \n497:         packet[\"signature\"] = self.sign_certificate(packet)"
+    },
+    {
+      "candidate_id": "SW100-C0276",
+      "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+      "start_line": 179,
+      "end_line": 188,
+      "observation": "AL3 sessions attach quote before writing bundle manifest.",
+      "sha256": "940edb14fa37c65a3419fa9394fa3465f1acb6208d303db33203a07d4c915b84",
+      "source": "179:             # Cryptographic sealing based on assurance level\n180:             if self.assurance_level in (AssuranceLevel.AL2_COMPLIANCE, AssuranceLevel.AL3_SOVEREIGN):\n181:                 self._sign_session_digest()\n182: \n183:             if self.assurance_level == AssuranceLevel.AL3_SOVEREIGN:\n184:                 anchor = MerkleCausalAnchor()\n185:                 self.hardware_anchor = anchor.generate_hardware_pcr_quote(self.global_merkle_root)\n186: \n187:             # Persist bundle manifest\n188:             self._write_bundle_manifest()"
+    },
+    {
+      "candidate_id": "SW100-C0277",
+      "path": "01_KISH_ENGINE/babylon60/attestation/merkle_anchor.py",
+      "start_line": 130,
+      "end_line": 161,
+      "observation": "Entire checkpoint method only hashes, reads time and returns dictionaries.",
+      "sha256": "cf90589a3faf04117731c693bb62a0f0486ea9ca9091af17ce915964dc170ce9",
+      "source": "130:     def generate_notary_checkpoint(\n131:         self,\n132:         global_merkle_root: str,\n133:         network: str = \"ethereum_l2_sepolia\",\n134:         simulate_network_failure: bool = False,\n135:     ) -> Dict[str, str]:\n136:         \"\"\"\n137:         Generates an asynchronous P2P notary checkpoint payload for external\n138:         blockchain or distributed ledger anchoring.\n139:         If network fails, seamlessly falls back to LOCAL_ONLY_UNATTESTED_MODE with warning flags.\n140:         \"\"\"\n141:         checkpoint_id = f\"CHK_{hashlib.sha256(global_merkle_root.encode()).hexdigest()[:16]}\"\n142:         now = int(time.time())\n143: \n144:         if simulate_network_failure:\n145:             return {\n146:                 \"checkpoint_id\": checkpoint_id,\n147:                 \"merkle_root\": global_merkle_root,\n148:                 \"target_network\": network,\n149:                 \"attestation_status\": \"LOCAL_ONLY_UNATTESTED_MODE\",\n150:                 \"warning_flag\": \"NETWORK_UNREACHABLE_FALLBACK_ACTIVE\",\n151:                 \"grace_period_expires_at\": str(now + self.grace_period),\n152:                 \"retry_queued\": \"TRUE\",\n153:             }\n154: \n155:         return {\n156:             \"checkpoint_id\": checkpoint_id,\n157:             \"merkle_root\": global_merkle_root,\n158:             \"target_network\": network,\n159:             \"attestation_status\": \"CHECKPOINT_SEALED\",\n160:             \"p2p_mesh_validators\": \"3f+1_QUORUM_VERIFIED\",\n161:         }"
+    },
+    {
+      "candidate_id": "SW100-C0127",
+      "path": "01_KISH_ENGINE/babylon60/kernel/sovereign_binary_analyzer.py",
+      "start_line": 166,
+      "end_line": 195,
+      "observation": "ELF sections are empty and empty Capstone output triggers CLI fallback.",
+      "sha256": "4d72badbfdbf68ed8645535a301c261378e48b037628926ccdfe665e67d0d960",
+      "source": "166:     def _parse_elf_64(self, header_bytes: bytes) -> BinaryMetadata:\n167:         \"\"\"Parse ELF 64-bit header.\"\"\"\n168:         _ei_class = header_bytes[4]\n169:         ei_data = header_bytes[5]\n170:         endian = \"<\" if ei_data == 1 else \">\"\n171: \n172:         e_type, e_machine, e_version, e_entry = struct.unpack(f\"{endian}HHIQ\", header_bytes[16:32])\n173: \n174:         arch = \"x86_64\" if e_machine == 62 else (\"arm64\" if e_machine == 183 else f\"arch_{e_machine}\")\n175: \n176:         return BinaryMetadata(\n177:             filename=os.path.basename(self.filepath),\n178:             format=\"ELF 64\",\n179:             architecture=arch,\n180:             entry_point=e_entry,\n181:             sections=[],\n182:         )\n183: \n184:     def disassemble_section(self, section_name: str = \"__text\", max_instructions: int = 500) -> List[Instruction]:\n185:         \"\"\"Extract and disassemble a code section using Capstone or system tools.\"\"\"\n186:         instructions: List[Instruction] = []\n187: \n188:         # Try Capstone first if available\n189:         if HAS_CAPSTONE:\n190:             instructions = self._disassemble_capstone(section_name, max_instructions)\n191: \n192:         # Fallback to system otool / objdump if Capstone is not present or failed\n193:         if not instructions:\n194:             instructions = self._disassemble_system_cli(max_instructions)\n195: "
+    },
+    {
+      "candidate_id": "SW100-C0127",
+      "path": "01_KISH_ENGINE/babylon60/kernel/sovereign_binary_analyzer.py",
+      "start_line": 203,
+      "end_line": 213,
+      "observation": "No matching section returns an empty instruction list.",
+      "sha256": "4d72badbfdbf68ed8645535a301c261378e48b037628926ccdfe665e67d0d960",
+      "source": "203:         # Find target section\n204:         for sec in self.metadata.sections:\n205:             if section_name in sec.name or sec.name.endswith(section_name):\n206:                 with open(self.filepath, \"rb\") as f:\n207:                     f.seek(sec.offset)\n208:                     code_bytes = f.read(sec.size)\n209:                 start_addr = sec.address\n210:                 break\n211: \n212:         if not code_bytes:\n213:             return []"
+    },
+    {
+      "candidate_id": "SW100-C0127",
+      "path": "01_KISH_ENGINE/babylon60/kernel/sovereign_binary_analyzer.py",
+      "start_line": 269,
+      "end_line": 289,
+      "observation": "The objdump branch and colon filter discard normal address records.",
+      "sha256": "4d72badbfdbf68ed8645535a301c261378e48b037628926ccdfe665e67d0d960",
+      "source": "269:     def _disassemble_system_cli(self, max_instructions: int) -> List[Instruction]:\n270:         \"\"\"Fallback disassembly via system otool or objdump CLI.\"\"\"\n271:         cmd = [\"otool\", \"-tv\", self.filepath] if sys.platform == \"darwin\" else [\"objdump\", \"-d\", self.filepath]\n272:         try:\n273:             res = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=True)\n274:             output = res.stdout\n275:         except Exception:\n276:             return []\n277: \n278:         instructions: List[Instruction] = []\n279:         for line in output.splitlines():\n280:             line = line.strip()\n281:             if not line or \":\" in line and not line.startswith(\"0x\"):\n282:                 continue\n283: \n284:             parts = line.split(maxsplit=2)\n285:             if len(parts) >= 2:\n286:                 try:\n287:                     addr_str = parts[0].rstrip(\":\")\n288:                     addr = int(addr_str, 16)\n289:                     mnemonic = parts[1].lower()"
+    },
+    {
+      "candidate_id": "SW100-C0128",
+      "path": "01_KISH_ENGINE/babylon60/kernel/sovereign_binary_analyzer.py",
+      "start_line": 226,
+      "end_line": 252,
+      "observation": "Capstone branch list and target extraction omit the listed conditional mnemonics.",
+      "sha256": "4d72badbfdbf68ed8645535a301c261378e48b037628926ccdfe665e67d0d960",
+      "source": "226:             mnemonic = insn.mnemonic.lower()\n227:             op_str = insn.op_str.lower()\n228: \n229:             is_branch = mnemonic in (\n230:                 \"b\",\n231:                 \"b.eq\",\n232:                 \"b.ne\",\n233:                 \"b.gt\",\n234:                 \"b.lt\",\n235:                 \"cbz\",\n236:                 \"cbnz\",\n237:                 \"tbz\",\n238:                 \"tbnz\",\n239:                 \"jmp\",\n240:                 \"je\",\n241:                 \"jne\",\n242:                 \"jg\",\n243:                 \"jl\",\n244:             )\n245:             is_call = mnemonic in (\"bl\", \"blr\", \"call\")\n246:             is_ret = mnemonic in (\"ret\", \"rets\")\n247: \n248:             target_addr = None\n249:             if is_branch or is_call:\n250:                 match = re.search(r\"0x[0-9a-fA-F]+\", op_str)\n251:                 if match:\n252:                     target_addr = int(match.group(0), 16)"
+    },
+    {
+      "candidate_id": "SW100-C0128",
+      "path": "01_KISH_ENGINE/babylon60/kernel/sovereign_binary_analyzer.py",
+      "start_line": 292,
+      "end_line": 305,
+      "observation": "CLI branch list has the same omissions.",
+      "sha256": "4d72badbfdbf68ed8645535a301c261378e48b037628926ccdfe665e67d0d960",
+      "source": "292:                     is_branch = mnemonic in (\n293:                         \"b\",\n294:                         \"b.eq\",\n295:                         \"b.ne\",\n296:                         \"b.gt\",\n297:                         \"b.lt\",\n298:                         \"cbz\",\n299:                         \"cbnz\",\n300:                         \"jmp\",\n301:                         \"je\",\n302:                         \"jne\",\n303:                         \"jg\",\n304:                         \"jl\",\n305:                     )"
+    },
+    {
+      "candidate_id": "SW100-C0128",
+      "path": "01_KISH_ENGINE/babylon60/kernel/sovereign_binary_analyzer.py",
+      "start_line": 339,
+      "end_line": 347,
+      "observation": "Leaders depend on branch/call/return flags.",
+      "sha256": "4d72badbfdbf68ed8645535a301c261378e48b037628926ccdfe665e67d0d960",
+      "source": "339:         leaders: Set[int] = {instructions[0].address}\n340:         addr_map = {insn.address: i for i, insn in enumerate(instructions)}\n341: \n342:         for i, insn in enumerate(instructions):\n343:             if insn.is_branch or insn.is_call or insn.is_ret:\n344:                 if i + 1 < len(instructions):\n345:                     leaders.add(instructions[i + 1].address)\n346:                 if insn.target_address and insn.target_address in addr_map:\n347:                     leaders.add(insn.target_address)"
+    },
+    {
+      "candidate_id": "SW100-C0128",
+      "path": "01_KISH_ENGINE/babylon60/kernel/sovereign_binary_analyzer.py",
+      "start_line": 371,
+      "end_line": 394,
+      "observation": "Taken and fallthrough branch edges depend on is_branch.",
+      "sha256": "4d72badbfdbf68ed8645535a301c261378e48b037628926ccdfe665e67d0d960",
+      "source": "371:             last_insn = block.instructions[-1]\n372: \n373:             if last_insn.is_branch:\n374:                 if last_insn.target_address:\n375:                     target_id = f\"block_{hex(last_insn.target_address)}\"\n376:                     if target_id in blocks:\n377:                         block.successors.append(target_id)\n378:                         blocks[target_id].predecessors.append(block_id)\n379: \n380:                 if last_insn.mnemonic not in (\"b\", \"jmp\"):\n381:                     next_addr_idx = addr_map.get(last_insn.address, 0) + 1\n382:                     if next_addr_idx < len(instructions):\n383:                         fall_id = f\"block_{hex(instructions[next_addr_idx].address)}\"\n384:                         if fall_id in blocks and fall_id not in block.successors:\n385:                             block.successors.append(fall_id)\n386:                             blocks[fall_id].predecessors.append(block_id)\n387: \n388:             elif not last_insn.is_ret:\n389:                 next_addr_idx = addr_map.get(last_insn.address, 0) + 1\n390:                 if next_addr_idx < len(instructions):\n391:                     fall_id = f\"block_{hex(instructions[next_addr_idx].address)}\"\n392:                     if fall_id in blocks:\n393:                         block.successors.append(fall_id)\n394:                         blocks[fall_id].predecessors.append(block_id)"
+    },
+    {
+      "candidate_id": "SW100-C0526",
+      "path": "crates/eridu-infer/src/server.rs",
+      "start_line": 117,
+      "end_line": 146,
+      "observation": "Handler stages prompt, calls causal gate and reads GGUF tensor count.",
+      "sha256": "bbbc97cf3cb7e2cef458411dce71791d47560615310fb3107f0ab18e8ba5e903",
+      "source": "117: /// Handler de inferencia compatible con OpenAI (`/v1/chat/completions`) sellado por BABYLON-60.\n118: async fn chat_completions_handler(\n119:     State(state): State<Arc<AppState>>,\n120:     Json(req): Json<ChatCompletionRequest>,\n121: ) -> impl IntoResponse {\n122:     let last_prompt = req.messages.last().map(|m| m.content.as_str()).unwrap_or(\"\");\n123: \n124:     // 1. Adquisición de página alineada de 16 KB en UMA (RFO = 0) y estadiaje de entrada\n125:     let uma_ptr_addr = {\n126:         let mut pool = state.uma_pool.lock().await;\n127:         let mut buf = pool.acquire().expect(\"Fallo adquiriendo página UMA de 16 KB\");\n128:         let bytes = last_prompt.as_bytes();\n129:         let copy_len = bytes.len().min(buf.len());\n130:         buf.as_mut_slice()[..copy_len].copy_from_slice(&bytes[..copy_len]);\n131:         let addr = buf.as_ptr() as usize;\n132:         pool.release(buf);\n133:         addr\n134:     };\n135: \n136:     // 2. Evaluación en Anillo-0 del Causal Gate y publicación en SharedManifest (64B)\n137:     let receipt = {\n138:         let mut gate = state.gate.lock().await;\n139:         gate.evaluate_and_seal(&req.model, last_prompt).unwrap_or_else(|e| {\n140:             panic!(\"Fallo en la evaluación del Causal Gate: {}\", e);\n141:         })\n142:     };\n143: \n144:     let gguf_tensors = state.gguf_model.as_ref().map(|m| m.tensor_count).unwrap_or(0);\n145:     let summary_prompt: String = last_prompt.chars().take(120).collect();\n146:     let generated_response = match req.model.as_str() {"
+    },
+    {
+      "candidate_id": "SW100-C0526",
+      "path": "crates/eridu-infer/src/server.rs",
+      "start_line": 146,
+      "end_line": 201,
+      "observation": "Response is built from fixed model-specific strings; usage is string-length approximation.",
+      "sha256": "bbbc97cf3cb7e2cef458411dce71791d47560615310fb3107f0ab18e8ba5e903",
+      "source": "146:     let generated_response = match req.model.as_str() {\n147:         \"deepseek-r1-distill-qwen-32b\" => {\n148:             format!(\n149:                 \"<think>\\n\\\n150:                 [ANÁLISIS DEDUCTIVO EN ANILLO-0 · SUSTRATO APPLE SILICON METAL · UMA 0x{:X}]\\n\\\n151:                 1. Delimitación de hechos y pretensión: Se audita la consulta bajo el ordenamiento jurídico español y europeo.\\n\\\n152:                 2. Marco normativo aplicable: TRLC (reforma Ley 16/2022), Código Civil (Arts. 1101, 1255), RGPD y EU AI Act (Arts. 9-15).\\n\\\n153:                 3. Ponderación de riesgos y contradicciones: Confinamiento estricto en circuito cerrado local (127.0.0.1, GGUF tensors={}).\\n\\\n154:                 4. Dictamen resolutivo emitido con certeza probatoria en logical_tick={}.\\n\\\n155:                 </think>\\n\\n\\\n156:                 ## DICTAMEN JURÍDICO ATESTIGUADO (ERIDU-INFER / BABYLON-60)\\n\\n\\\n157:                 **Dictamen emitido para:** Despacho Jurídico Soberano\\n\\\n158:                 **Sello de Conformidad Criptográfica:** `{}`\\n\\\n159:                 **Registro Inmutable WORM:** `{}`\\n\\n\\\n160:                 ### 1. Fundamentos de Derecho\\n\\\n161:                 En relación con la consulta formulada («{}...»):\\n\\n\\\n162:                 - **Responsabilidad Concursal y Órganos de Gobierno:** Conforme al Texto Refundido de la Ley Concursal (reforma Ley 16/2022), la responsabilidad de los administradores societarios se rige por el canon objetivo del Art. 226 y ss. TRLC, exigiéndose acreditar el perjuicio patrimonial efectivo para la masa.\\n\\\n163:                 - **Periodo Sospechoso y Rescisión:** Las acciones rescisorias concursales permiten reintegrar a la masa activa los actos perjudiciales realizados en los dos años anteriores a la declaración, sin requerir dolo ni intención fraudulenta.\\n\\\n164:                 - **Gobernanza y Confinamiento de Datos:** El procesamiento se ha ejecutado íntegramente en memoria unificada local (Zero Data Leakage), garantizando el secreto profesional y el estricto cumplimiento del deber de confidencialidad.\\n\\n\\\n165:                 ### 2. Dictamen Operativo y Recomendaciones\\n\\\n166:                 Se aconseja consolidar la evidencia documental mediante atestación criptográfica previa y protocolizar los acuerdos sociales en sede notarial para mitigar contingencias frente a la administración concursal.\\n\\n\\\n167:                 ---\\n\\\n168:                 *Dictamen procesado en local bajo supervisión humana (Art. 14 EU AI Act).* \",\n169:                 uma_ptr_addr, gguf_tensors, receipt.logical_tick, receipt.attestation_seal, receipt.prompt_hash, summary_prompt\n170:             )\n171:         }\n172:         \"llama-3.3-70b-instruct\" => {\n173:             format!(\n174:                 \"## ALEGATO / REDACCIÓN JURÍDICA FORMAL (LLAMA 3.3 70B INSTRUCT)\\n\\n\\\n175:                 **Referencia de Atestación:** `{}`\\n\\\n176:                 **Hash de Entrada WORM:** `{}`\\n\\n\\\n177:                 **A LA SALA / AL JUZGADO DE LO MERCANTIL:**\\n\\n\\\n178:                 Que por medio del presente escrito, y en contestación a los requerimientos notificados («{}...»):\\n\\n\\\n179:                 **PRIMERO.-** De la observancia de la legalidad ordinaria y los principios rectores del derecho mercantil y procesal.\\n\\\n180:                 **SEGUNDO.-** De la inexistencia de daño o quebranto patrimonial imputable a la actuación de nuestro representado.\\n\\\n181:                 **TERCERO.-** Conclusión: Procede acordar el archivo y sobreseimiento de las actuaciones incoadas.\\n\\n\\\n182:                 ---\\n\\\n183:                 *Atestación emitida por ERIDU-INFER · Conforme con Arts. 12-14 EU AI Act.*\",\n184:                 receipt.attestation_seal, receipt.prompt_hash, summary_prompt\n185:             )\n186:         }\n187:         _ => {\n188:             format!(\n189:                 \"[BABYLON-60 / ERIDU-INFER · ATTESTED IN SILICON · SEAL: {}]\\n\\n\\\n190:                 Procesamiento local completado sobre el sustrato Apple Silicon Metal.\\n\\\n191:                 Modelo Activo: {}\\n\\\n192:                 Hash Causal WORM: {}\\n\\n\\\n193:                 Consulta: «{}...»\\n\\n\\\n194:                 Resultado: Análisis ejecutado con éxito bajo el Causal Gate sin fuga externa de datos.\",\n195:                 receipt.attestation_seal, receipt.model_id, receipt.prompt_hash, summary_prompt\n196:             )\n197:         }\n198:     };\n199: \n200:     let prompt_tokens = (last_prompt.len() / 4) as u32;\n201:     let completion_tokens = (generated_response.len() / 4) as u32;"
+    },
+    {
+      "candidate_id": "SW100-C0526",
+      "path": "crates/eridu-infer/src/server.rs",
+      "start_line": 212,
+      "end_line": 232,
+      "observation": "Response reports the requested model and generated completion.",
+      "sha256": "bbbc97cf3cb7e2cef458411dce71791d47560615310fb3107f0ab18e8ba5e903",
+      "source": "212:     Json(ChatCompletionResponse {\n213:         id: format!(\"chatcmpl-{}\", receipt.attestation_seal),\n214:         object: \"chat.completion\".to_string(),\n215:         created: Utc::now().timestamp(),\n216:         model: req.model,\n217:         choices: vec![ChatChoice {\n218:             index: 0,\n219:             message: ChatMessage {\n220:                 role: \"assistant\".to_string(),\n221:                 content: generated_response,\n222:                 name: None,\n223:             },\n224:             finish_reason: \"stop\".to_string(),\n225:         }],\n226:         usage: UsageInfo {\n227:             prompt_tokens,\n228:             completion_tokens,\n229:             total_tokens: prompt_tokens + completion_tokens,\n230:         },\n231:         babylon_attestation_hash: receipt.prompt_hash,\n232:     })"
+    },
+    {
+      "candidate_id": "SW100-C0526",
+      "path": "crates/eridu-infer/src/gate.rs",
+      "start_line": 57,
+      "end_line": 105,
+      "observation": "Gate hashes/publishes the prompt and creates a receipt without inference.",
+      "sha256": "acf0950ea7cc73b9f06b5f823a13070dd924c3b5be5df80c38c3d89c155bd6b4",
+      "source": "57:     pub fn evaluate_and_seal(\n58:         &mut self,\n59:         model: &str,\n60:         prompt_content: &str,\n61:     ) -> Result<InferenceReceipt, String> {\n62:         let tick = self.logical_tick;\n63: \n64:         // 1. Hash determinista dependiente exclusivamente del reloj lógico monótono (INV_C5_CANONICAL_LOGICAL_TICK)\n65:         let mut hasher = Sha256::new();\n66:         hasher.update(tick.to_le_bytes());\n67:         hasher.update(model.as_bytes());\n68:         hasher.update(prompt_content.as_bytes());\n69:         let raw_digest = hasher.finalize();\n70:         let prompt_hash = hex::encode(raw_digest);\n71: \n72:         // 2. Generación del sello de atestación de Ring-0 (EU AI Act Arts. 12-14)\n73:         let mut seal_hasher = Sha256::new();\n74:         seal_hasher.update(format!(\"BABYLON-60-ATTEST:TICK-{}:HASH-{}\", tick, prompt_hash).as_bytes());\n75:         let seal_bytes = seal_hasher.finalize();\n76:         let attestation_seal = format!(\"B60-{}\", hex::encode(seal_bytes)[..16].to_uppercase());\n77: \n78:         // 3. Publicación atómica en SharedManifest de 64B (Seqlock SPMC canónico, RFO = 0)\n79:         let digest_words = [\n80:             LittleEndian::read_u64(&seal_bytes[0..8]),\n81:             LittleEndian::read_u64(&seal_bytes[8..16]),\n82:             LittleEndian::read_u64(&seal_bytes[16..24]),\n83:             LittleEndian::read_u64(&seal_bytes[24..32]),\n84:         ];\n85:         if !publish(&self.manifest, tick, &digest_words) {\n86:             return Err(\"POISONED (0xDEAD_6060): SharedManifest cerrado a nuevas admisiones\".to_string());\n87:         }\n88: \n89:         self.logical_tick = self.logical_tick.saturating_add(1);\n90: \n91:         let receipt = InferenceReceipt {\n92:             logical_tick: tick,\n93:             prompt_hash,\n94:             model_id: model.to_string(),\n95:             timestamp_utc: format!(\"LOGICAL_TICK_{}\", tick),\n96:             attestation_seal,\n97:             compliance_status: \"EU_AI_ACT_COMPLIANT_ARTICLE_12_14_VERIFIED\".to_string(),\n98:         };\n99: \n100:         self.recent_receipts.insert(0, receipt.clone());\n101:         if self.recent_receipts.len() > 100 {\n102:             self.recent_receipts.truncate(100);\n103:         }\n104: \n105:         Ok(receipt)"
+    },
+    {
+      "candidate_id": "SW100-C0527",
+      "path": "crates/eridu-infer/src/server.rs",
+      "start_line": 35,
+      "end_line": 62,
+      "observation": "Auth object is instantiated but router has no middleware.",
+      "sha256": "bbbc97cf3cb7e2cef458411dce71791d47560615310fb3107f0ab18e8ba5e903",
+      "source": "35: impl AppState {\n36:     pub fn new() -> Result<Self, String> {\n37:         let gate = BabylonCausalGate::new();\n38:         let uma_pool = UmaBufferPool::new(4, DARWIN_PAGE_SIZE)?;\n39:         let telemetry = Arc::new(TelemetrySnapshot::new(InferenceTelemetryBlock::default()));\n40:         let gguf_model = std::env::var(\"ERIDU_GGUF_PATH\")\n41:             .ok()\n42:             .and_then(|p| GgufModel::load_mmap(p).ok());\n43:         Ok(Self {\n44:             gate: Mutex::new(gate),\n45:             auth: DualPasskeyAuth::new(),\n46:             uma_pool: Mutex::new(uma_pool),\n47:             telemetry,\n48:             gguf_model,\n49:         })\n50:     }\n51: }\n52: \n53: pub fn create_router(state: Arc<AppState>) -> Router {\n54:     Router::new()\n55:         .route(\"/\", get(hud_handler))\n56:         .route(\"/hud\", get(hud_handler))\n57:         .route(\"/lms-status\", get(status_handler))\n58:         .route(\"/v1/models\", get(models_handler))\n59:         .route(\"/v1/audit/receipts\", get(receipts_handler))\n60:         .route(\"/v1/chat/completions\", post(chat_completions_handler))\n61:         .route(\"/ws\", get(ws_handler))\n62:         .with_state(state)"
+    },
+    {
+      "candidate_id": "SW100-C0527",
+      "path": "crates/eridu-infer/src/server.rs",
+      "start_line": 118,
+      "end_line": 141,
+      "observation": "Completion handler does not authenticate the request.",
+      "sha256": "bbbc97cf3cb7e2cef458411dce71791d47560615310fb3107f0ab18e8ba5e903",
+      "source": "118: async fn chat_completions_handler(\n119:     State(state): State<Arc<AppState>>,\n120:     Json(req): Json<ChatCompletionRequest>,\n121: ) -> impl IntoResponse {\n122:     let last_prompt = req.messages.last().map(|m| m.content.as_str()).unwrap_or(\"\");\n123: \n124:     // 1. Adquisición de página alineada de 16 KB en UMA (RFO = 0) y estadiaje de entrada\n125:     let uma_ptr_addr = {\n126:         let mut pool = state.uma_pool.lock().await;\n127:         let mut buf = pool.acquire().expect(\"Fallo adquiriendo página UMA de 16 KB\");\n128:         let bytes = last_prompt.as_bytes();\n129:         let copy_len = bytes.len().min(buf.len());\n130:         buf.as_mut_slice()[..copy_len].copy_from_slice(&bytes[..copy_len]);\n131:         let addr = buf.as_ptr() as usize;\n132:         pool.release(buf);\n133:         addr\n134:     };\n135: \n136:     // 2. Evaluación en Anillo-0 del Causal Gate y publicación en SharedManifest (64B)\n137:     let receipt = {\n138:         let mut gate = state.gate.lock().await;\n139:         gate.evaluate_and_seal(&req.model, last_prompt).unwrap_or_else(|e| {\n140:             panic!(\"Fallo en la evaluación del Causal Gate: {}\", e);\n141:         })"
+    },
+    {
+      "candidate_id": "SW100-C0527",
+      "path": "crates/eridu-infer/src/server.rs",
+      "start_line": 235,
+      "end_line": 270,
+      "observation": "WebSocket accepts upgrade and acknowledges messages without auth.",
+      "sha256": "bbbc97cf3cb7e2cef458411dce71791d47560615310fb3107f0ab18e8ba5e903",
+      "source": "235: /// WebSocket handler para compatibilidad wire-format con `lms` CLI.\n236: async fn ws_handler(\n237:     ws: WebSocketUpgrade,\n238:     State(_state): State<Arc<AppState>>,\n239: ) -> impl IntoResponse {\n240:     ws.on_upgrade(handle_socket)\n241: }\n242: \n243: async fn handle_socket(mut socket: WebSocket) {\n244:     while let Some(Ok(msg)) = socket.recv().await {\n245:         if let Message::Text(text) = msg {\n246:             // Manejador del protocolo lms_communication\n247:             if let Ok(wire_msg) = serde_json::from_str::<LmsWireMessage>(&text) {\n248:                 match wire_msg {\n249:                     LmsWireMessage::ChannelCreate { channel_id, endpoint, .. } => {\n250:                         let ack = serde_json::json!({\n251:                             \"type\": \"channelAck\",\n252:                             \"channelId\": channel_id,\n253:                             \"endpoint\": endpoint\n254:                         });\n255:                         let _ = socket.send(Message::Text(ack.to_string())).await;\n256:                     }\n257:                     LmsWireMessage::RpcCall { call_id, endpoint, .. } => {\n258:                         let res = serde_json::json!({\n259:                             \"type\": \"rpcResult\",\n260:                             \"callId\": call_id,\n261:                             \"endpoint\": endpoint,\n262:                             \"result\": { \"status\": \"ok\", \"engine\": \"eridu-infer\" }\n263:                         });\n264:                         let _ = socket.send(Message::Text(res.to_string())).await;\n265:                     }\n266:                     _ => {}\n267:                 }\n268:             }\n269:         }\n270:     }"
+    },
+    {
+      "candidate_id": "SW100-C0527",
+      "path": "crates/eridu-infer/src/auth.rs",
+      "start_line": 40,
+      "end_line": 57,
+      "observation": "Validator exists and includes a permissive local no-key branch, but is unused.",
+      "sha256": "dd1e728f793d8edda847bd64c493a9f2e2f967de6d730494314fc93816f75931",
+      "source": "40:     /// Valida si el cliente que solicita conexión por WebSocket es un CLI local privilegiado.\n41:     pub fn validate(&self, identifier: &str, passkey: Option<&str>) -> bool {\n42:         // Clientes remotos desprivilegiados\n43:         if identifier.starts_with(\"lms-cli-remote-\") {\n44:             return false;\n45:         }\n46: \n47:         // Cliente oficial lms local\n48:         if identifier == \"lms-cli\" {\n49:             if let (Some(expected), Some(given)) = (&self.expected_passkey, passkey) {\n50:                 return expected == given;\n51:             }\n52:             // Si no existe lms-key-2 en disco, aceptamos en modo local permisivo\n53:             return self.expected_passkey.is_none();\n54:         }\n55: \n56:         false\n57:     }"
+    },
+    {
+      "candidate_id": "SW100-C0527",
+      "path": "crates/eridu-infer/src/main.rs",
+      "start_line": 44,
+      "end_line": 81,
+      "observation": "App is served on 127.0.0.1:41343 and 127.0.0.1:1234.",
+      "sha256": "6d536eed3821e707ac3d46994ba6750ab9224a3293e5e9343ec5c5c64359162e",
+      "source": "44:     let state = Arc::new(AppState::new()?);\n45:     let manifest = state.gate.lock().await.manifest();\n46:     let telemetry = Arc::clone(&state.telemetry);\n47: \n48:     let app = create_router(state);\n49: \n50:     // Iniciar canal Zero-HTTP UDS para comunicación inter-agente\n51:     let uds = start_uds_listener(DEFAULT_SOCKET_PATH, manifest, telemetry)\n52:         .await\n53:         .map_err(std::io::Error::other)?;\n54:     println!(\n55:         \"[+] Canal IPC Zero-HTTP UDS activo en: {}\",\n56:         DEFAULT_SOCKET_PATH\n57:     );\n58: \n59:     // Intentar enlace dual: 41343 (LM Studio CLI) y 1234 (OpenAI REST / Web HUD)\n60:     let listener_41343 = TcpListener::bind(\"127.0.0.1:41343\").await.ok();\n61:     let listener_1234 = TcpListener::bind(\"127.0.0.1:1234\").await.ok();\n62: \n63:     match (listener_41343, listener_1234) {\n64:         (Some(l_lms), Some(l_oa)) => {\n65:             println!(\"[+] Enlazado en puerto 41343 (LM Studio CLI Discovery)\");\n66:             println!(\"[+] Enlazado en puerto 1234  (OpenAI REST API + Web HUD)\");\n67:             println!(\n68:                 \"[*] Web HUD Operativo          : http://127.0.0.1:1234/ y http://127.0.0.1:41343/\"\n69:             );\n70:             println!(\"[*] API Completions            : http://127.0.0.1:1234/v1/chat/completions\");\n71:             println!(\"[*] Causal Gate BABYLON-60     : ACTIVO (EU AI Act Arts. 12-14)\");\n72: \n73:             let app_clone = app.clone();\n74:             serve_both(\n75:                 async move {\n76:                     axum::serve(l_lms, app_clone)\n77:                         .with_graceful_shutdown(shutdown_signal())\n78:                         .await\n79:                 },\n80:                 async move {\n81:                     axum::serve(l_oa, app)"
+    },
+    {
+      "candidate_id": "SW100-C0556",
+      "path": "scripts/c5_verifiers/fast_smt_gate.py",
+      "start_line": 23,
+      "end_line": 42,
+      "observation": "DAG results are constants except root existence.",
+      "sha256": "ef4c442f821689838b76a7aaa5cf29c625de2dac3df0a5bd1e2856cfdb526748",
+      "source": "23: def verify_dag_invariants() -> List[Tuple[str, str, bool, str]]:\n24:     \"\"\"Evaluates DAG Causal Graph Invariants (AX-DAG-1..5).\"\"\"\n25:     res = []\n26:     # AX-DAG-1: Identity Uniqueness\n27:     res.append((\"AX-DAG-1\", \"Identity Uniqueness in Causal Graph\", True, \"All DAG nodes have unique SHA3-256 digests\"))\n28:     \n29:     # AX-DAG-2: Strict Acyclicity Enforcement\n30:     res.append((\"AX-DAG-2\", \"Strict Acyclicity Enforcement\", True, \"DAG topology verified topological acyclic order\"))\n31:     \n32:     # AX-DAG-3: Root Node Preservation\n33:     root_exists = (REPO_ROOT / \"README.md\").exists() or (REPO_ROOT / \"docs\").exists()\n34:     res.append((\"AX-DAG-3\", \"Root Node Preservation\", root_exists, f\"Root workspace anchored at {REPO_ROOT.name}\"))\n35:     \n36:     # AX-DAG-4: Dependency Closure Verification\n37:     res.append((\"AX-DAG-4\", \"Dependency Closure Verification\", True, \"Zero orphan modules detected in dependency closure\"))\n38:     \n39:     # AX-DAG-5: Deterministic Topological Sorting\n40:     res.append((\"AX-DAG-5\", \"Deterministic Topological Sorting\", True, \"Lexicographical tie-breaking invariant satisfied\"))\n41:     \n42:     return res"
+    },
+    {
+      "candidate_id": "SW100-C0556",
+      "path": "scripts/c5_verifiers/fast_smt_gate.py",
+      "start_line": 45,
+      "end_line": 123,
+      "observation": "KDA/BFT/exergy/epistemic checks append literal True values.",
+      "sha256": "ef4c442f821689838b76a7aaa5cf29c625de2dac3df0a5bd1e2856cfdb526748",
+      "source": "45: def verify_kda_invariants() -> List[Tuple[str, str, bool, str]]:\n46:     \"\"\"Evaluates Krylov Data Architecture Invariants (AX-KDA-1..5).\"\"\"\n47:     res = []\n48:     # AX-KDA-1: Strict Capacity Bounds (K=512)\n49:     res.append((\"AX-KDA-1\", \"Strict Capacity Bounds (K=512)\", True, \"KDA ring buffer bounded at K=512 entries\"))\n50:     \n51:     # AX-KDA-2: Monotonic Version Trajectory\n52:     res.append((\"AX-KDA-2\", \"Monotonic Version Trajectory\", True, \"Version evolution sequence monotonically non-decreasing\"))\n53:     \n54:     # AX-KDA-3: LFU Deterministic Eviction\n55:     res.append((\"AX-KDA-3\", \"LFU Deterministic Eviction\", True, \"Eviction order deterministic under LFU frequency ties\"))\n56:     \n57:     # AX-KDA-4: Zero-Copy Memory Map Safety\n58:     res.append((\"AX-KDA-4\", \"Zero-Copy Memory Map Safety\", True, \"Shared memory layout aligned to 64-byte boundaries\"))\n59:     \n60:     # AX-KDA-5: Snapshot-Restore 1:1 Isomorphism\n61:     res.append((\"AX-KDA-5\", \"Snapshot-Restore 1:1 Isomorphism\", True, \"State restoration produces bit-perfect 1:1 match\"))\n62:     \n63:     return res\n64: \n65: \n66: def verify_bft_invariants() -> List[Tuple[str, str, bool, str]]:\n67:     \"\"\"Evaluates Byzantine Fault Tolerance Invariants (AX-BFT-1..5).\"\"\"\n68:     res = []\n69:     # AX-BFT-1: Topological Order Consensus\n70:     res.append((\"AX-BFT-1\", \"Topological Order Consensus\", True, \"Multi-node epoch ordering converged under BFT consensus\"))\n71:     \n72:     # AX-BFT-2: Fault-Tolerant Quorum Bound (3f + 1)\n73:     res.append((\"AX-BFT-2\", \"Fault-Tolerant Quorum Bound (3f+1)\", True, \"Quorum threshold N=3f+1 enforced for consensus voting\"))\n74:     \n75:     # AX-BFT-3: Non-Repudiable Epoch Commit Signatures\n76:     res.append((\"AX-BFT-3\", \"Non-Repudiable Epoch Commit Signatures\", True, \"Ed25519 signatures verified on commit blocks\"))\n77:     \n78:     # AX-BFT-4: Bounded Concurrency (N<=12)\n79:     res.append((\"AX-BFT-4\", \"Bounded Concurrency (N<=12)\", True, \"Active worker thread pool constrained to N<=12\"))\n80:     \n81:     # AX-BFT-5: Atomic Lock-Free Compare-And-Swap (CAS)\n82:     res.append((\"AX-BFT-5\", \"Atomic Lock-Free Compare-And-Swap (CAS)\", True, \"CAS transition guarantees lock-free state progression\"))\n83:     \n84:     return res\n85: \n86: \n87: def verify_exergy_invariants() -> List[Tuple[str, str, bool, str]]:\n88:     \"\"\"Evaluates Thermodynamic Exergy Invariants (AX-EX-1..5).\"\"\"\n89:     res = []\n90:     # AX-EX-1: Canonical Exergy Formula\n91:     res.append((\"AX-EX-1\", \"Canonical Exergy Formula\", True, \"Formula Xi = G * L * (A * B) / (P + 1) verified\"))\n92:     \n93:     # AX-EX-2: Entropy Lower Bound (E <= 0.03)\n94:     res.append((\"AX-EX-2\", \"Entropy Lower Bound (E<=0.03)\", True, \"Dispersed conversational entropy strictly E <= 0.03\"))\n95:     \n96:     # AX-EX-3: Landauer Dissipation Bound\n97:     res.append((\"AX-EX-3\", \"Landauer Dissipation Bound\", True, \"Heat dissipation bounded by Landauer limit E_min = kT ln(2)\"))\n98:     \n99:     # AX-EX-4: No-Anergia Token Waste Threshold\n100:     res.append((\"AX-EX-4\", \"No-Anergia Token Waste Threshold\", True, \"Prosaic token waste purger active in commit gate\"))\n101:     \n102:     # AX-EX-5: Viability Threshold (Score >= 700)\n103:     res.append((\"AX-EX-5\", \"Viability Threshold (Score>=700)\", True, \"System exergy viability score = 942/1000\"))\n104:     \n105:     return res\n106: \n107: \n108: def verify_epistemic_invariants() -> List[Tuple[str, str, bool, str]]:\n109:     \"\"\"Evaluates Epistemological & Formal Safety Invariants (AX-EPI-1..3 & THM-4).\"\"\"\n110:     res = []\n111:     # AX-EPI-1: Verbatim Evidence Non-Hallucination\n112:     res.append((\"AX-EPI-1\", \"Verbatim Evidence Non-Hallucination\", True, \"All claims anchored in verified source evidence\"))\n113:     \n114:     # AX-EPI-2: Attestation Degradation Alignment\n115:     res.append((\"AX-EPI-2\", \"Attestation Degradation Alignment\", True, \"Confidence degrades monotonically with missing context\"))\n116:     \n117:     # AX-EPI-3: Epistemic Halt Fail-Stop Circuit\n118:     res.append((\"AX-EPI-3\", \"Epistemic Halt Fail-Stop Circuit\", True, \"EpistemicHalt circuit armed for uncomputable states\"))\n119:     \n120:     # THM-4: Green Theater Impossibility Proof\n121:     res.append((\"THM-4\", \"Green Theater Impossibility Proof\", True, \"Superficial pass reporting mathematically impossible under degradation\"))\n122:     \n123:     return res"
+    },
+    {
+      "candidate_id": "SW100-C0556",
+      "path": "scripts/c5_verifiers/fast_smt_gate.py",
+      "start_line": 126,
+      "end_line": 131,
+      "observation": "Agent check only tests directory existence.",
+      "sha256": "ef4c442f821689838b76a7aaa5cf29c625de2dac3df0a5bd1e2856cfdb526748",
+      "source": "126: def verify_agentic_invariants() -> List[Tuple[str, str, bool, str]]:\n127:     \"\"\"Evaluates Agent Plugins 1.0 & Interoperability Invariants (AX-AGT-1).\"\"\"\n128:     res = []\n129:     # AX-AGT-1: Agent Plugins 1.0 Isomorphic Manifest Verification\n130:     has_skills = (REPO_ROOT / \".agents\").exists() or (REPO_ROOT.parent / \".agents\").exists() or (REPO_ROOT / \".agent\").exists()\n131:     res.append((\"AX-AGT-1\", \"Agent Plugins 1.0 Isomorphic Manifest\", has_skills, \"Agent Plugins skills verified in workspace\"))"
+    },
+    {
+      "candidate_id": "SW100-C0556",
+      "path": "scripts/c5_verifiers/fast_smt_gate.py",
+      "start_line": 157,
+      "end_line": 202,
+      "observation": "Constant results become JSON pass/compliance verdict.",
+      "sha256": "ef4c442f821689838b76a7aaa5cf29c625de2dac3df0a5bd1e2856cfdb526748",
+      "source": "157: def run_fast_smt_verification(json_output: bool = False, scitt_output: bool = False, strict: bool = False) -> int:\n158:     start_time = time.perf_counter()\n159: \n160:     all_invariants = []\n161:     all_invariants.extend(verify_dag_invariants())\n162:     all_invariants.extend(verify_kda_invariants())\n163:     all_invariants.extend(verify_bft_invariants())\n164:     all_invariants.extend(verify_exergy_invariants())\n165:     all_invariants.extend(verify_epistemic_invariants())\n166:     all_invariants.extend(verify_agentic_invariants())\n167: \n168:     passed_count = sum(1 for _, _, ok, _ in all_invariants if ok)\n169:     total_count = len(all_invariants)\n170:     elapsed_ms = (time.perf_counter() - start_time) * 1000\n171:     all_passed = (passed_count == total_count)\n172: \n173:     if scitt_output:\n174:         receipt = generate_scitt_receipt(all_invariants, elapsed_ms)\n175:         print(json.dumps(receipt, indent=2))\n176:         return 0 if all_passed else 1\n177: \n178:     if json_output:\n179:         payload = {\n180:             \"schema_version\": \"2.0\",\n181:             \"type\": \"C5_FAST_SMT_AUDIT\",\n182:             \"metrics\": {\n183:                 \"total_invariants\": total_count,\n184:                 \"passed_invariants\": passed_count,\n185:                 \"failed_invariants\": total_count - passed_count,\n186:                 \"verification_latency_ms\": round(elapsed_ms, 3)\n187:             },\n188:             \"invariants\": [\n189:                 {\n190:                     \"id\": ax_id,\n191:                     \"description\": desc,\n192:                     \"status\": \"PASS\" if ok else \"FAIL\",\n193:                     \"detail\": detail\n194:                 }\n195:                 for ax_id, desc, ok, detail in all_invariants\n196:             ],\n197:             \"verdict\": \"SYSTEM_SOUND_AND_COMPLIANT\" if all_passed else \"INVARIANT_VIOLATION_DETECTED\",\n198:             \"passed\": all_passed,\n199:             \"scitt_attestation\": generate_scitt_receipt(all_invariants, elapsed_ms)\n200:         }\n201:         print(json.dumps(payload, indent=2))\n202:         return 0 if all_passed else 1"
+    },
+    {
+      "candidate_id": "SW100-C0556",
+      "path": "scripts/c5_quality_gates/daily_sovereign_maintenance.py",
+      "start_line": 152,
+      "end_line": 181,
+      "observation": "Maintenance consumes gate subprocess status as a quality gate result.",
+      "sha256": "bf5d3827f8b3c3c85a1904c1a0082c8d67a25b0b9834c482040426d915373b95",
+      "source": "152: def phase_4_quality_gates() -> dict[str, Any]:\n153:     \"\"\"Fase IV: Auditoría Estática de Superficie y Puertas de Calidad (AST, Fast-SMT, Secretos).\"\"\"\n154:     audit_script = SCRIPTS_DIR / \"c5_quality_gates\" / \"audit_scripts_quality.py\"\n155:     smt_script = SCRIPTS_DIR / \"c5_verifiers\" / \"fast_smt_gate.py\"\n156: \n157:     ast_ok = True\n158:     smt_ok = True\n159: \n160:     # AST auto-fixer (atomic remediation of line 1 shebangs)\n161:     if audit_script.exists():\n162:         r = subprocess.run([sys.executable, str(audit_script), \"--fix\", \"--json\"], capture_output=True, text=True)\n163:         ast_ok = (r.returncode == 0)\n164: \n165:     # Fast SMT gate\n166:     if smt_script.exists():\n167:         r = subprocess.run([sys.executable, str(smt_script), \"--json\"], capture_output=True, text=True)\n168:         smt_ok = (r.returncode == 0)\n169: \n170:     # Canary check\n171:     canary_script = SCRIPTS_DIR / \"c5_quality_gates\" / \"canary_check.py\"\n172:     canary_ok = True\n173:     if canary_script.exists():\n174:         r = subprocess.run([sys.executable, str(canary_script)], capture_output=True, text=True)\n175:         canary_ok = (r.returncode == 0)\n176: \n177:     all_ok = ast_ok and smt_ok and canary_ok\n178:     return {\n179:         \"status\": \"PASS\" if all_ok else \"FAIL\",\n180:         \"ast_audit_pass\": ast_ok,\n181:         \"fast_smt_gate_pass\": smt_ok,"
+    },
+    {
+      "candidate_id": "SW100-C0557",
+      "path": "scripts/c5_verifiers/fast_smt_gate.py",
+      "start_line": 135,
+      "end_line": 154,
+      "observation": "Receipt hashes IDs only, emits literal compliance and formats a pseudo-signature.",
+      "sha256": "ef4c442f821689838b76a7aaa5cf29c625de2dac3df0a5bd1e2856cfdb526748",
+      "source": "135: def generate_scitt_receipt(invariants: List[Tuple[str, str, bool, str]], latency_ms: float) -> Dict[str, Any]:\n136:     \"\"\"Generates an IETF RFC 9943 SCITT Compliant Attestation Receipt.\"\"\"\n137:     payload_raw = json.dumps([inv[0] for inv in invariants]).encode(\"utf-8\")\n138:     merkle_root = hashlib.sha3_256(payload_raw).hexdigest()\n139:     \n140:     return {\n141:         \"@context\": \"https://ietf.org/scitt/v1\",\n142:         \"type\": \"C5_REAL_SCITT_ATTESTATION_RECEIPT\",\n143:         \"issuer\": \"did:c5real:babylon60:smt_gate\",\n144:         \"timestamp\": int(time.time()),\n145:         \"merkle_root_sha3_256\": merkle_root,\n146:         \"claims\": {\n147:             \"total_invariants\": len(invariants),\n148:             \"passed_invariants\": sum(1 for inv in invariants if inv[2]),\n149:             \"verification_latency_ms\": round(latency_ms, 3),\n150:             \"eu_ai_act_article_15_compliant\": True,\n151:             \"fail_stop_circuit_status\": \"ARMED_AND_READY\"\n152:         },\n153:         \"signature_ed25519\": f\"sig_ed25519_{merkle_root[:32]}\"\n154:     }"
+    },
+    {
+      "candidate_id": "SW100-C0557",
+      "path": "scripts/c5_verifiers/fast_smt_gate.py",
+      "start_line": 173,
+      "end_line": 199,
+      "observation": "Both SCITT and JSON modes expose the pseudo-receipt.",
+      "sha256": "ef4c442f821689838b76a7aaa5cf29c625de2dac3df0a5bd1e2856cfdb526748",
+      "source": "173:     if scitt_output:\n174:         receipt = generate_scitt_receipt(all_invariants, elapsed_ms)\n175:         print(json.dumps(receipt, indent=2))\n176:         return 0 if all_passed else 1\n177: \n178:     if json_output:\n179:         payload = {\n180:             \"schema_version\": \"2.0\",\n181:             \"type\": \"C5_FAST_SMT_AUDIT\",\n182:             \"metrics\": {\n183:                 \"total_invariants\": total_count,\n184:                 \"passed_invariants\": passed_count,\n185:                 \"failed_invariants\": total_count - passed_count,\n186:                 \"verification_latency_ms\": round(elapsed_ms, 3)\n187:             },\n188:             \"invariants\": [\n189:                 {\n190:                     \"id\": ax_id,\n191:                     \"description\": desc,\n192:                     \"status\": \"PASS\" if ok else \"FAIL\",\n193:                     \"detail\": detail\n194:                 }\n195:                 for ax_id, desc, ok, detail in all_invariants\n196:             ],\n197:             \"verdict\": \"SYSTEM_SOUND_AND_COMPLIANT\" if all_passed else \"INVARIANT_VIOLATION_DETECTED\",\n198:             \"passed\": all_passed,\n199:             \"scitt_attestation\": generate_scitt_receipt(all_invariants, elapsed_ms)"
+    },
+    {
+      "candidate_id": "SW100-C0564",
+      "path": ".github/actions/archi-guard/action.yml",
+      "start_line": 5,
+      "end_line": 21,
+      "observation": "Inputs are free-form strings with defaults and no value validation.",
+      "sha256": "590bb0f38dd90a13a969f7b979e2f85323e7d4cc31cab6b6e12657b548d688ad",
+      "source": "5: inputs:\n6:   ifc-path:\n7:     description: 'Path to the IFC BIM file to audit'\n8:     required: true\n9:     default: './edificio.ifc'\n10:   pgou-path:\n11:     description: 'Path to the PGOU / CTE Constraint DSL rulebook'\n12:     required: true\n13:     default: './pgou/madrid_v2023.dsl'\n14:   format:\n15:     description: 'Output format (human, json, sarif)'\n16:     required: false\n17:     default: 'sarif'\n18:   strict:\n19:     description: 'Fail workflow (exit code 1) on any UNSAT violation'\n20:     required: false\n21:     default: 'true'"
+    },
+    {
+      "candidate_id": "SW100-C0564",
+      "path": ".github/actions/archi-guard/action.yml",
+      "start_line": 34,
+      "end_line": 42,
+      "observation": "All four inputs are interpolated in shell source; report suffix is unquoted.",
+      "sha256": "590bb0f38dd90a13a969f7b979e2f85323e7d4cc31cab6b6e12657b548d688ad",
+      "source": "34:     - name: Run cortex-guard Audit\n35:       shell: bash\n36:       run: |\n37:         ./target/release/cortex-guard verify \\\n38:           --ifc \"${{ inputs.ifc-path }}\" \\\n39:           --pgou \"${{ inputs.pgou-path }}\" \\\n40:           --format \"${{ inputs.format }}\" \\\n41:           --strict=\"${{ inputs.strict }}\" \\\n42:           --annotate-gh > cortex_audit_report.${{ inputs.format }}"
+    },
+    {
+      "candidate_id": "SW100-C0577",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bft_iceoryx2.rs",
+      "start_line": 76,
+      "end_line": 81,
+      "observation": "Public envelope has no length invariant encoded in its type.",
+      "sha256": "c722b818b8de1017c843c1e7d24356ad4f008bafedd388ccba0bbe7d2a11f1c0",
+      "source": "76: #[derive(Debug, ZeroCopySend)]\n77: #[repr(C)]\n78: pub struct IpcEnvelope {\n79:     pub len: usize,\n80:     pub data: [u8; 8192],\n81: }"
+    },
+    {
+      "candidate_id": "SW100-C0577",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bft_iceoryx2.rs",
+      "start_line": 83,
+      "end_line": 105,
+      "observation": "Helper publisher checks only its own packed payload.",
+      "sha256": "c722b818b8de1017c843c1e7d24356ad4f008bafedd388ccba0bbe7d2a11f1c0",
+      "source": "83: pub fn publish_exergy_packet(service_name_str: &str, packet: &ExergyPacket) -> Result<(), Box<dyn std::error::Error>> {\n84:     let service_name = ServiceName::new(service_name_str)?;\n85:         let node = NodeBuilder::new().create::<ipc::Service>()?;\n86:     let service = node.service_builder(&service_name)\n87:         .publish_subscribe::<IpcEnvelope>()\n88:         .open_or_create()?;\n89: \n90:     let publisher = service.publisher_builder().create()?;\n91:     let packed = packet.pack()?;\n92:     if packed.len() > 8192 {\n93:         return Err(\"Payload exceeds 8192 bytes fixed envelope\".into());\n94:     }\n95:     \n96:     let mut env = IpcEnvelope {\n97:         len: packed.len(),\n98:         data: [0; 8192],\n99:     };\n100:     env.data[..packed.len()].copy_from_slice(&packed);\n101:     \n102:     let sample = publisher.loan_uninit()?;\n103:     let sample = sample.write_payload(env);\n104:     \n105:     sample.send()?;"
+    },
+    {
+      "candidate_id": "SW100-C0577",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bft_iceoryx2.rs",
+      "start_line": 110,
+      "end_line": 125,
+      "observation": "Receive path slices untrusted len without a prior bound check.",
+      "sha256": "c722b818b8de1017c843c1e7d24356ad4f008bafedd388ccba0bbe7d2a11f1c0",
+      "source": "110: pub fn subscribe_exergy_packet(service_name_str: &str) -> Result<Option<ExergyPacket>, Box<dyn std::error::Error>> {\n111:     let service_name = ServiceName::new(service_name_str)?;\n112:         let node = NodeBuilder::new().create::<ipc::Service>()?;\n113:     let service = node.service_builder(&service_name)\n114:         .publish_subscribe::<IpcEnvelope>()\n115:         .open_or_create()?;\n116: \n117:     let subscriber = service.subscriber_builder().create()?;\n118:     \n119:     if let Some(sample) = subscriber.receive()? {\n120:         let env = &*sample;\n121:         let unpacked = ExergyPacket::unpack(&env.data[..env.len])?;\n122:         return Ok(Some(unpacked));\n123:     }\n124:     Ok(None)\n125: }"
+    },
+    {
+      "candidate_id": "SW100-C0577",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/hypervisor.rs",
+      "start_line": 302,
+      "end_line": 341,
+      "observation": "Writer daemon uses IpcEnvelope and repeats unchecked slicing before unpack.",
+      "sha256": "79af81bc27f34508c5798234efff054d3ca7e2a357066e77119cafe17f6589dc",
+      "source": "302: /// Spawn an owned writer with interruptible adaptive polling.\n303: pub fn spawn_writer_daemon(hypervisor: Arc<SwarmHypervisor>, service_name_str: &str, stop_signal: Arc<AtomicBool>, max_events: Option<usize>) -> WriterDaemonHandle {\n304:     let service_name_str = service_name_str.to_string();\n305:     let worker_stop = Arc::clone(&stop_signal);\n306:     let worker = thread::spawn(move || {\n307:         let service_name = match ServiceName::new(&service_name_str) {\n308:             Ok(name) => name,\n309:             Err(_) => return,\n310:         };\n311: \n312:         let node = match NodeBuilder::new().create::<ipc::Service>() {\n313:             Ok(node) => node,\n314:             Err(_) => return,\n315:         };\n316:         let service = match node.service_builder(&service_name)\n317:         .publish_subscribe::<IpcEnvelope>()\n318:             .open_or_create() {\n319:                 Ok(s) => s,\n320:                 Err(_) => return,\n321:             };\n322: \n323:         let subscriber = match service.subscriber_builder().create() {\n324:             Ok(sub) => sub,\n325:             Err(_) => return,\n326:         };\n327: \n328:         let mut processed = 0usize;\n329:         let mut backoff = WriterIdleBackoff(WriterIdleBackoff::MIN);\n330:         // Boundable loop: halted via stop_signal or max_events limit (INV_C5_TURING_CASTRATION)\n331:         while !worker_stop.load(Ordering::Acquire) {\n332:             if let Some(limit) = max_events\n333:                 && processed >= limit {\n334:                     break;\n335:                 }\n336: \n337:             match subscriber.receive() {\n338:                 Ok(Some(sample)) => {\n339:                     backoff.reset();\n340:                     let env = &*sample;\n341:                     if let Ok(unpacked) = ExergyPacket::unpack(&env.data[..env.len]) {"
+    },
+    {
+      "candidate_id": "SW100-C0073",
+      "path": "01_KISH_ENGINE/babylon60/compliance_exporter/m0_evidence_pack.py",
+      "start_line": 623,
+      "end_line": 637,
+      "observation": "Existing ledger is backed up and rejected if verified is false before ledger_info is used.",
+      "sha256": "82dc6e8cf8c106a5c7a8c2f68b9ee188457a6d3e618968d38e83acdefc1ddd2c",
+      "source": "623:         if existing_ledger_path is not None:\n624:             with closing(sqlite3.connect(Path(existing_ledger_path).absolute().as_uri() + \"?mode=ro\", uri=True)) as source:\n625:                 with closing(sqlite3.connect(ledger_target)) as target:\n626:                     target.execute(\"PRAGMA synchronous=FULL\")\n627:                     source.backup(target)\n628:                     target.execute(\"PRAGMA journal_mode=DELETE\")\n629:             from babylon60.verifier.standalone_verify import verify_offline_evidence\n630: \n631:             ev_check = verify_offline_evidence(ledger_target)\n632:             if not ev_check[\"verified\"]:\n633:                 raise ValueError(f\"Invalid supplied ledger: {ev_check['detail']}\")\n634:             ledger_info = {\n635:                 \"total_entries\": ev_check[\"total_entries\"],\n636:                 \"merkle_root\": ev_check[\"merkle_root\"],\n637:             }"
+    },
+    {
+      "candidate_id": "SW100-C0073",
+      "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+      "start_line": 320,
+      "end_line": 354,
+      "observation": "Invalid version, ordering and chain states return verified=False.",
+      "sha256": "624eb292a797ac7094c4b84357606180465b09f3b7381f5292dba44ac4484634",
+      "source": "320:             if type(hash_version) is not int or hash_version not in (1, 2):\n321:                 return {\n322:                     \"verified\": False,\n323:                     \"integrity_verified\": False,\n324:                     \"merkle_root\": \"\",\n325:                     \"total_entries\": total_entries,\n326:                     \"detail\": f\"HASH_VERSION_UNSUPPORTED: row {seq} version {hash_version}\",\n327:                 }\n328: \n329:             if seq != expected_seq:\n330:                 return {\n331:                     \"verified\": False,\n332:                     \"integrity_verified\": False,\n333:                     \"merkle_root\": \"\",\n334:                     \"total_entries\": total_entries,\n335:                     \"detail\": f\"SEQ_DISCONTINUITY: expected {expected_seq}, got {seq}\",\n336:                 }\n337: \n338:             if lamport_t <= last_lamport:\n339:                 return {\n340:                     \"verified\": False,\n341:                     \"integrity_verified\": False,\n342:                     \"merkle_root\": \"\",\n343:                     \"total_entries\": total_entries,\n344:                     \"detail\": f\"LAMPORT_VIOLATION: row {seq} lamport {lamport_t} <= {last_lamport}\",\n345:                 }\n346: \n347:             if row_prev_hash != prev_hash:\n348:                 return {\n349:                     \"verified\": False,\n350:                     \"integrity_verified\": False,\n351:                     \"merkle_root\": \"\",\n352:                     \"total_entries\": total_entries,\n353:                     \"detail\": f\"HASH_CHAIN_BROKEN: row {seq} prev_hash mismatch\",\n354:                 }"
+    },
+    {
+      "candidate_id": "SW100-C0073",
+      "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+      "start_line": 370,
+      "end_line": 377,
+      "observation": "Entry hash mismatch returns verified=False.",
+      "sha256": "624eb292a797ac7094c4b84357606180465b09f3b7381f5292dba44ac4484634",
+      "source": "370:             if recomputed_entry_hash != entry_hash:\n371:                 return {\n372:                     \"verified\": False,\n373:                     \"integrity_verified\": False,\n374:                     \"merkle_root\": \"\",\n375:                     \"total_entries\": total_entries,\n376:                     \"detail\": f\"ENTRY_HASH_MISMATCH: row {seq} computed {recomputed_entry_hash} != {entry_hash}\",\n377:                 }"
+    },
+    {
+      "candidate_id": "SW100-C0543",
+      "path": "01_KISH_ENGINE/babylon60/guards/saga_contract.py",
+      "start_line": 26,
+      "end_line": 45,
+      "observation": "Frozen fields retain mutable Mapping and current-content hash; validity checks omit deep immutability.",
+      "sha256": "d127155094d4f989da562fcbe3008d87566a4499fdeaabce0a54c8ff6f9689bd",
+      "source": "26: @dataclass(frozen=True)\n27: class SagaWriteProposal:\n28:     proposal_id: str\n29:     target: str\n30:     payload: Mapping[str, Any] = field(default_factory=dict)\n31:     status: SagaStatus = SagaStatus.PENDING\n32: \n33:     def get_payload_hash(self) -> str:\n34:         \"\"\"P1: Delta de Evidencia (Hash Criptográfico SHA-256)\"\"\"\n35:         # Se requiere que el payload sea serializable a JSON de forma determinista\n36:         serialized = json.dumps(dict(self.payload), sort_keys=True)\n37:         return hashlib.sha256(serialized.encode(\"utf-8\")).hexdigest()\n38: \n39:     def is_valid(self) -> bool:\n40:         \"\"\"P3: Invariante Contractual - Prevención de campos corruptos\"\"\"\n41:         if not self.proposal_id or not self.target:\n42:             return False\n43:         if not isinstance(self.status, SagaStatus):\n44:             return False\n45:         return True"
+    },
+    {
+      "candidate_id": "SW100-C0543",
+      "path": "01_KISH_ENGINE/babylon60/guards/saga_contract.py",
+      "start_line": 47,
+      "end_line": 59,
+      "observation": "Allowed transition creates a new proposal with the original payload reference.",
+      "sha256": "d127155094d4f989da562fcbe3008d87566a4499fdeaabce0a54c8ff6f9689bd",
+      "source": "47:     def transition_to(self, new_status: SagaStatus) -> SagaWriteProposal:\n48:         \"\"\"\n49:         P3: Control rígido de transiciones (Máquina de Estados Inmutable).\n50:         Previene mutaciones arbitrarias en memoria.\n51:         \"\"\"\n52:         # Solo se permite transicionar desde PENDING\n53:         if self.status != SagaStatus.PENDING:\n54:             raise ValueError(f\"[FATAL] Illegal state transition from {self.status.name} to {new_status.name}\")\n55: \n56:         # Enforce inmutabilidad creando una nueva instancia determinista\n57:         return SagaWriteProposal(\n58:             proposal_id=self.proposal_id, target=self.target, payload=self.payload, status=new_status\n59:         )"
+    },
+    {
+      "candidate_id": "SW100-C0419",
+      "path": "01_KISH_ENGINE/babylon60/transducers/hygiene.py",
+      "start_line": 23,
+      "end_line": 40,
+      "observation": "parents[3] is used as cwd with the repository-relative optimizer path.",
+      "sha256": "f81a1a493ba298b04440b9d667fb19af9398f62752b17866f152acfe13210445",
+      "source": "23: OPTIMIZER_SCRIPT = \"scripts/c5_thermo/exergy_optimizer_agent.py\"\n24: \n25: \n26: def _run_agent() -> float:\n27:     repo_root = Path(__file__).resolve().parents[3]\n28:     import os\n29: \n30:     env = dict(os.environ)\n31:     packages_dir = str(repo_root / \"packages\")\n32:     env[\"PYTHONPATH\"] = f\"{packages_dir}:{env.get('PYTHONPATH', '')}\".rstrip(\":\")\n33:     if \"BABYLON_HOME\" not in env:\n34:         env[\"BABYLON_HOME\"] = str(Path.home() / \".babylon60\")\n35:     if \"GEMINI_HOME\" not in env:\n36:         env[\"GEMINI_HOME\"] = str(Path.home() / \".gemini\")\n37: \n38:     proc = subprocess.run(\n39:         [sys.executable, OPTIMIZER_SCRIPT],\n40:         cwd=repo_root,"
+    },
+    {
+      "candidate_id": "SW100-C0419",
+      "path": "01_KISH_ENGINE/babylon60/transducers/hygiene.py",
+      "start_line": 92,
+      "end_line": 100,
+      "observation": "Errors do return False, but the alleged wrong cwd is not present.",
+      "sha256": "f81a1a493ba298b04440b9d667fb19af9398f62752b17866f152acfe13210445",
+      "source": "92: def run_exergy_optimizer() -> bool:\n93:     \"\"\"Public API – returns True if the exergy score meets the threshold.\"\"\"\n94:     try:\n95:         score = _run_agent()\n96:     except (RuntimeError, ValueError, OSError) as e:\n97:         print(f\"⚠️  Exergy check failed: {e}\", file=sys.stderr)\n98:         return False\n99:     _record_event(score)\n100:     return score >= EXERGY_THRESHOLD"
+    },
+    {
+      "candidate_id": "SW100-C0419",
+      "path": "scripts/c5_quality_gates/pre_push_ledger_guard.py",
+      "start_line": 25,
+      "end_line": 35,
+      "observation": "Pre-push caller consumes helper result; it does not alter cwd calculation.",
+      "sha256": "531cc2afea8dfcca240af2a7d69ac42620034a53999a45065c0220477f1086fb",
+      "source": "25: from babylon60.transducers.hygiene import run_exergy_optimizer\n26: \n27: \n28: def verify_exergy() -> bool:\n29:     print(\"🔋 Verifying Exergy Score (>= 950.0)...\")\n30:     ok = run_exergy_optimizer()\n31:     if ok:\n32:         print(\"  🟢 Exergy Score verified.\")\n33:     else:\n34:         print(\"  🔴 Exergy Score below threshold! Aborting push.\", file=sys.stderr)\n35:     return True if ok else False"
+    },
+    {
+      "candidate_id": "SW100-C0538",
+      "path": "02_EDIN_SWARMS/agents_archi/orchestrator/swarm.py",
+      "start_line": 56,
+      "end_line": 67,
+      "observation": "Default configuration selects MOONSHOT_REMOTE.",
+      "sha256": "dd58f1b736cdb9f4dfad5f0b67dd4ec9e757b4806d2f289b6aea617232a54c12",
+      "source": "56: @dataclass\n57: class SwarmConfig:\n58:     \"\"\"Deterministic configuration for Swarm execution.\"\"\"\n59: \n60:     p_cores: int = 4\n61:     s_threads: int = 1\n62:     backend: InferenceBackend = InferenceBackend.MOONSHOT_REMOTE\n63: \n64:     # Endpoints\n65:     moonshot_url: str = field(default_factory=_get_default_moonshot_url)\n66:     moonshot_key: str = field(default_factory=_get_default_moonshot_key)\n67:     moonshot_model: str = os.getenv(\"MOONSHOT_MODEL\", \"moonshot-v1-auto\")"
+    },
+    {
+      "candidate_id": "SW100-C0538",
+      "path": "02_EDIN_SWARMS/agents_archi/orchestrator/swarm.py",
+      "start_line": 285,
+      "end_line": 305,
+      "observation": "Circuit/model guards precede missing-key fallback, which returns an ordinary mock string.",
+      "sha256": "dd58f1b736cdb9f4dfad5f0b67dd4ec9e757b4806d2f289b6aea617232a54c12",
+      "source": "285:     async def call(self, messages: List[Dict[str, str]]) -> str:\n286:         if self.is_circuit_breaker_tripped:\n287:             return LLMCallError(\n288:                 f\"Circuit breaker open: {self._consecutive_failures} failures. Backend: {self.config.backend.value}\"\n289:             )\n290: \n291:         from ..clients.openrouter import ModelFloorGuard, SubThresholdModelVetoError\n292: \n293:         enforce_floor = self._is_strict_floor_required(messages)\n294:         try:\n295:             payload = self.build_request_payload(messages)\n296:         except SubThresholdModelVetoError as veto_err:\n297:             self._consecutive_failures += 1\n298:             return LLMCallError(str(veto_err))\n299: \n300:         # If air-gapped / unconfigured, return deterministic mock output in tests\n301:         if not self.config.api_key and self.config.backend in (\n302:             InferenceBackend.MOONSHOT_REMOTE,\n303:             InferenceBackend.OPENROUTER_REMOTE,\n304:         ):\n305:             return \"[AIR-GAP MOCK] Deterministic response for swarm execution\""
+    },
+    {
+      "candidate_id": "SW100-C0538",
+      "path": "02_EDIN_SWARMS/agents_archi/orchestrator/swarm.py",
+      "start_line": 389,
+      "end_line": 399,
+      "observation": "Only LLMCallError yields ERROR; mock string receives OK.",
+      "sha256": "dd58f1b736cdb9f4dfad5f0b67dd4ec9e757b4806d2f289b6aea617232a54c12",
+      "source": "389:                 output = await self.client.call(messages)\n390:                 elapsed = time.perf_counter() - sub_t0\n391:                 status = \"ERROR\" if isinstance(output, LLMCallError) else \"OK\"\n392:                 if on_progress:\n393:                     on_progress(task_id, status, elapsed)\n394:                 return {\n395:                     \"task_id\": task_id,\n396:                     \"desc\": desc,\n397:                     \"status\": status,\n398:                     \"result\": output,\n399:                     \"elapsed_s\": round(elapsed, 3),"
+    },
+    {
+      "candidate_id": "SW100-C0038",
+      "path": "docs/RESULTADOS.md",
+      "start_line": 53,
+      "end_line": 57,
+      "observation": "Formal validation recipe names make verify_lean.",
+      "sha256": "316b23a2ea46c271da6eaf51f6f6461c2c6eded33b8349c3d2086b0a683c3882",
+      "source": "53: 3. **Validación Formal (Bridge Lean 4):**\n54:    ```bash\n55:    make verify_lean\n56:    ```\n57:    *Salida esperada:* Lean 4 leerá el esquema de exportación y reportará que las trazas lógicas son sintácticamente válidas."
+    },
+    {
+      "candidate_id": "SW100-C0038",
+      "path": "Makefile",
+      "start_line": 29,
+      "end_line": 36,
+      "observation": "Actual Lean target is test-lean.",
+      "sha256": "51e26e0ddcefc26f0b0bae19568e2a6d0b5a778d17546393eff319755f49a8b4",
+      "source": "29: test-swarm:\n30: \tpython3 scripts/c5_quality_gates/swarm_100_stress_campaign.py\n31: \n32: test-loom:\n33: \tcargo test --test seqlock_loom --release\n34: \n35: test-lean:\n36: \tcd proof/lean && lake build"
+    },
+    {
+      "candidate_id": "SW100-C0038",
+      "path": "Makefile",
+      "start_line": 50,
+      "end_line": 53,
+      "observation": "Aggregate test target depends on test-lean.",
+      "sha256": "51e26e0ddcefc26f0b0bae19568e2a6d0b5a778d17546393eff319755f49a8b4",
+      "source": "50: test-sovereign:\n51: \tpython3 scripts/c5_demos/c5_sovereign_compliance_orchestrator.py\n52: \n53: test: test-rust test-python test-claims test-swarm test-lean"
+    },
+    {
+      "candidate_id": "SW100-C0402",
+      "path": "scripts/c5_calibrations/topological_calibration.py",
+      "start_line": 39,
+      "end_line": 47,
+      "observation": "KL compares normalized array positions without knowledge of bin edges.",
+      "sha256": "54263f9c0944ef7764da3a4dd1bb1044dd7b7acd6b0c71501804e3251da69ab6",
+      "source": "39: def compute_kl_divergence(p_sample: np.ndarray, q_reconstructed: np.ndarray, eps: float = 1e-12) -> float:\n40:     \"\"\"\n41:     Calcula la Divergencia Kullback-Leibler D_KL(P || Q) en nats.\n42:     \"\"\"\n43:     p = np.clip(p_sample, eps, None)\n44:     q = np.clip(q_reconstructed, eps, None)\n45:     p = p / np.sum(p)\n46:     q = q / np.sum(q)\n47:     return float(np.sum(p * np.log(p / q)))"
+    },
+    {
+      "candidate_id": "SW100-C0402",
+      "path": "scripts/c5_calibrations/topological_calibration.py",
+      "start_line": 74,
+      "end_line": 86,
+      "observation": "Two independently derived histogram grids feed reported KL and energy-bound values.",
+      "sha256": "54263f9c0944ef7764da3a4dd1bb1044dd7b7acd6b0c71501804e3251da69ab6",
+      "source": "74:     # 2. Histograma empírico P vs Q\n75:     hist_p, _ = np.histogram(point_cloud, bins=50, density=True)\n76:     hist_q, _ = np.histogram(reconstructed_cloud, bins=50, density=True)\n77:     kl_nats = compute_kl_divergence(hist_p, hist_q)\n78:     \n79:     # 3. Cota termodinámica\n80:     e_min = calculate_landauer_aphairesis_bound(bits_erased, kl_nats, temp_k)\n81:     \n82:     return {\n83:         \"EFFECTIVE_BITS_ERASED\": bits_erased,\n84:         \"KL_DIVERGENCE\": kl_nats,\n85:         \"DESIGN_TEMP_K\": temp_k,\n86:         \"MIN_ENERGY_JOULES\": e_min,"
+    },
+    {
+      "candidate_id": "SW100-C0160",
+      "path": "scripts/c5_demos/poc_agents_archi_enterprise.py",
+      "start_line": 51,
+      "end_line": 56,
+      "observation": "Helper exposes returncode.",
+      "sha256": "73715c88b1f4984c19118a4a904eee0fd026fe38495192828734041143beae37",
+      "source": "51: def run_cmd(args: list[str], env_vars: dict[str, str] | None = None) -> tuple[int, str, str]:\n52:     env = os.environ.copy()\n53:     if env_vars:\n54:         env.update(env_vars)\n55:     res = subprocess.run(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, env=env)\n56:     return res.returncode, res.stdout, res.stderr"
+    },
+    {
+      "candidate_id": "SW100-C0160",
+      "path": "scripts/c5_demos/poc_agents_archi_enterprise.py",
+      "start_line": 150,
+      "end_line": 168,
+      "observation": "Both verify calls ignore code; mutation is not checked for change.",
+      "sha256": "73715c88b1f4984c19118a4a904eee0fd026fe38495192828734041143beae37",
+      "source": "150:         # STEP 4: AUDIT THE WORM LEDGER (SAT)\n151:         log_step(4, \"Auditoría Matemática de Integridad de la Cadena (SAT)\")\n152:         code, out, _ = run_cmd([str(BINARY_PATH), \"verify\"], env_vars)\n153:         print(out.strip())\n154: \n155:         # STEP 5: TAMPERING FALSIFICATION (UNSAT)\n156:         log_step(5, \"Prueba de Falsación: Detección Inmediata de Manipulación Maliciosa\")\n157:         chain_file = Path(temp_home) / \"ledger\" / \"chain.jsonl\"\n158:         print(f\"Un atacante accede al archivo {chain_file} y altera los datos de la auditoría...\")\n159:         \n160:         content = chain_file.read_text()\n161:         tampered_content = content.replace(\"European_Sovereign_Bonds\", \"Illicit_Offshore_Account\")\n162:         chain_file.write_text(tampered_content)\n163:         print(f\"{YELLOW}Modificación realizada: 'European_Sovereign_Bonds' -> 'Illicit_Offshore_Account'{RESET}\")\n164: \n165:         print(\"\\nEjecutando verificación criptográfica tras la manipulación:\")\n166:         code, out, err = run_cmd([str(BINARY_PATH), \"verify\"], env_vars)\n167:         output = out.strip() if out.strip() else err.strip()\n168:         print(f\"{RED}{output}{RESET}\")"
+    },
+    {
+      "candidate_id": "SW100-C0160",
+      "path": "scripts/c5_demos/poc_agents_archi_enterprise.py",
+      "start_line": 170,
+      "end_line": 179,
+      "observation": "Success is unconditional once earlier filesystem operations complete; cleanup follows.",
+      "sha256": "73715c88b1f4984c19118a4a904eee0fd026fe38495192828734041143beae37",
+      "source": "170:         print(f\"\\n{GREEN}{BOLD}======================================================================{RESET}\")\n171:         print(f\"{GREEN}{BOLD}✓ PRUEBA DE CONCEPTO COMPLETADA CON ÉXITO:{RESET}\")\n172:         print(\"  1. Atestación criptográfica inmutable en milisegundos.\")\n173:         print(\"  2. Cumplimiento demostrable de Artículos 9 y 12 del EU AI Act.\")\n174:         print(\"  3. Falsación inmediata e infalsificable ante cualquier ataque de manipulación.\")\n175:         print(\"  4. Cero coste de GPU o servidores en la nube (100% BYOC).\")\n176:         print(f\"{GREEN}{BOLD}======================================================================{RESET}\\n\")\n177: \n178:     finally:\n179:         shutil.rmtree(temp_home, ignore_errors=True)"
+    },
+    {
+      "candidate_id": "SW100-C0397",
+      "path": "scripts/c5_edin/edin_swarm_runner.py",
+      "start_line": 23,
+      "end_line": 55,
+      "observation": "Persistent default path and unconditional verification event construction/append.",
+      "sha256": "cff71c0cb84846cda92d55fd5c61d43e78e0a1a68185fb241b253d0a2c83b537",
+      "source": "23: SHARDS_FILE = REPO_ROOT / \"data\" / \"shards.json\"\n24: DB_PATH = REPO_ROOT / \"data\" / \"cib_async_ledger.db\"\n25: \n26: \n27: async def execute_vector_agent(agent_id: int, vector: dict[str, str], actor: BFTLedgerActor) -> dict[str, str]:\n28:     \"\"\"Simula la ejecución de un vector audit por un agente ULTRATHINK in-memory.\"\"\"\n29:     agent_name = f\"ULTRATHINK-{agent_id:03d}\"\n30:     target = vector.get(\"target\", \"unknown\")\n31:     v_type = vector.get(\"type\", \"generic\")\n32:     directive = vector.get(\"directive\", \"audit\")\n33: \n34:     # Generar UUID v5 idempotente basado en agent_id y target\n35:     idempotency_key = str(uuid.uuid5(uuid.NAMESPACE_DNS, f\"{agent_name}:{target}\"))\n36: \n37:     event = LedgerEvent(\n38:         stream=\"centuria_swarm\",\n39:         entity_id=idempotency_key,\n40:         event_type=\"VECTOR_AUDIT_COMPLETED\",\n41:         payload={\n42:             \"agent\": agent_name,\n43:             \"vector_type\": v_type,\n44:             \"target\": target,\n45:             \"directive\": directive,\n46:             \"status\": \"C5_VERIFIED\",\n47:             \"timestamp\": datetime.now(timezone.utc).isoformat(),\n48:         },\n49:         cortex_taint=f\"{agent_name}:centuria_swarm_runner\",\n50:         source_db=\"cib_async_ledger.db\",\n51:         source_table=\"L1_primitive_nodes\",\n52:         source_pk=idempotency_key[:16],\n53:     )\n54: \n55:     ack = await actor.append(event)"
+    },
+    {
+      "candidate_id": "SW100-C0397",
+      "path": "scripts/c5_edin/edin_swarm_runner.py",
+      "start_line": 66,
+      "end_line": 90,
+      "observation": "Main validates shard-file existence and dispatches metadata vectors to the actor.",
+      "sha256": "cff71c0cb84846cda92d55fd5c61d43e78e0a1a68185fb241b253d0a2c83b537",
+      "source": "66: async def main() -> None:\n67:     logger.info(\"⚡ [CENTURIA SWARM RUNNER] Initiating Orquestación de 100 Agentes ULTRATHINK...\")\n68: \n69:     if not SHARDS_FILE.exists():\n70:         logger.error(f\"🔴 File not found: {SHARDS_FILE}\")\n71:         sys.exit(1)\n72: \n73:     with open(SHARDS_FILE, \"r\", encoding=\"utf-8\") as f:\n74:         shards = json.load(f)\n75: \n76:     all_vectors = []\n77:     for shard_name, vecs in shards.items():\n78:         all_vectors.extend(vecs)\n79: \n80:     # Garantizar exactamente 100 vectores\n81:     vectors_100 = all_vectors[:100]\n82:     logger.info(f\"📊 {len(vectors_100)} vectores cargados de Shards.\")\n83: \n84:     actor = BFTLedgerActor(db_path=DB_PATH)\n85:     await actor.start()\n86: \n87:     try:\n88:         tasks = [execute_vector_agent(i + 1, vector, actor) for i, vector in enumerate(vectors_100)]\n89: \n90:         results = await asyncio.gather(*tasks)"
+    },
+    {
+      "candidate_id": "SW100-C0397",
+      "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+      "start_line": 438,
+      "end_line": 475,
+      "observation": "Transaction persists supplied event payload.",
+      "sha256": "c0dddf3e209bb945fa1f49a3d372b66b18968ebfcc2ea864ce35b26ebb16b237",
+      "source": "438:             cursor = await db.execute(\n439:                 \"INSERT INTO ledger_entries (\\n                event_id, stream, entity_id, event_type, payload_json,\\n                source_db, source_table, source_pk, cortex_taint,\\n                lamport_t, prev_hash, entry_hash, created_at\\n            ) VALUES (\\n                ?, ?, ?, ?, ?, ?, ?, ?, ?,\\n                COALESCE((SELECT MAX(lamport_t) FROM ledger_entries), 0) + 1,\\n                COALESCE((SELECT entry_hash FROM ledger_entries ORDER BY seq DESC LIMIT 1), '0000000000000000000000000000000000000000000000000000000000000000'),\\n                c5_compute_hash(?, ?, ?, ?, ?, ?, ?, ?, ?, COALESCE((SELECT MAX(lamport_t) FROM ledger_entries), 0) + 1, COALESCE((SELECT entry_hash FROM ledger_entries ORDER BY seq DESC LIMIT 1), '0000000000000000000000000000000000000000000000000000000000000000'), ?),\\n                ?\\n            )\\n            ON CONFLICT(event_id) DO NOTHING\\n            RETURNING seq, entry_hash\",\n440:                 (\n441:                     event_id,\n442:                     event.stream,\n443:                     event.entity_id,\n444:                     event.event_type,\n445:                     stored_payload,\n446:                     event.source_db,\n447:                     event.source_table,\n448:                     event.source_pk,\n449:                     event.cortex_taint,\n450:                     event_id,\n451:                     event.stream,\n452:                     event.entity_id,\n453:                     event.event_type,\n454:                     stored_payload,\n455:                     event.source_db,\n456:                     event.source_table,\n457:                     event.source_pk,\n458:                     event.cortex_taint,\n459:                     created_at,\n460:                     created_at,\n461:                 ),\n462:             )\n463:             db_row = await cursor.fetchone()\n464:             if db_row is None:\n465:                 cursor = await db.execute(\n466:                     \"SELECT seq, entry_hash, payload_json FROM ledger_entries WHERE event_id = ?\", (event_id,)\n467:                 )\n468:                 db_row = await cursor.fetchone()\n469:                 if db_row is None:\n470:                     raise RuntimeError(\"Insertion failed: event_id not persisted and not found\")\n471:                 if str(db_row[2]) != stored_payload:\n472:                     await db.execute(\"ROLLBACK\")\n473:                     raise ValueError(f\"Fail-fast: INV_BFT_04 Collision on event_id {event_id}: payload mismatch\")\n474:             await db.execute(\"COMMIT\")\n475:             return int(db_row[0]), str(db_row[1])"
+    },
+    {
+      "candidate_id": "SW100-C0397",
+      "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+      "start_line": 480,
+      "end_line": 501,
+      "observation": "Actor requires a nonempty trace, serializes payload and submits insert.",
+      "sha256": "c0dddf3e209bb945fa1f49a3d372b66b18968ebfcc2ea864ce35b26ebb16b237",
+      "source": "480:     async def _process(\n481:         self, db: aiosqlite.Connection, event: LedgerEvent, future: asyncio.Future[LedgerEntryResult]\n482:     ) -> None:\n483:         if not event.cortex_taint or not isinstance(event.cortex_taint, str):\n484:             raise ValueError(\"INV_BFT_03: cortex_taint must be a non-empty string representing the causal trace\")\n485:         payload_json = _canonical_json(event.payload)\n486:         created_at = event.created_at or datetime.now(timezone.utc).isoformat(timespec=\"microseconds\").replace(\n487:             \"+00:00\", \"Z\"\n488:         )\n489:         idempotent_key = (\n490:             f\"{event.source_db}\\x1f{event.source_table}\\x1f{event.source_pk}\\x1f{payload_json}\\x1f{event.cortex_taint}\"\n491:         )\n492:         event_id = str(uuid.uuid5(NAMESPACE_UUID, idempotent_key))\n493:         vault_key = os.environ.get(\"CORTEX_VAULT_KEY\")\n494:         if vault_key:\n495:             fernet = Fernet(vault_key.encode(\"utf-8\"))\n496:             stored_payload = fernet.encrypt(payload_json.encode(\"utf-8\")).decode(\"utf-8\")\n497:             stored_payload = f\"C5ENC:{stored_payload}\"\n498:         else:\n499:             stored_payload = payload_json\n500:         tx_res = await asyncio.gather(\n501:             self._execute_insert_tx(db, event_id, event, stored_payload, created_at), return_exceptions=True"
+    },
+    {
+      "candidate_id": "SW100-C0124",
+      "path": "scripts/c5_quality_gates/extensions_apoptosis_auditor.py",
+      "start_line": 19,
+      "end_line": 20,
+      "observation": "Extension root uses top-level babylon60 path.",
+      "sha256": "9a9ebbf34bc2f981aceae1619c37c5fd072ae921b0cf507d8253fb8546c16f29",
+      "source": "19: REPO_ROOT = Path(__file__).resolve().parent.parent.parent\n20: EXT_DIR = REPO_ROOT / \"babylon60\" / \"extensions\""
+    },
+    {
+      "candidate_id": "SW100-C0124",
+      "path": "scripts/c5_quality_gates/extensions_apoptosis_auditor.py",
+      "start_line": 41,
+      "end_line": 48,
+      "observation": "Absent target produces a message and normal return.",
+      "sha256": "9a9ebbf34bc2f981aceae1619c37c5fd072ae921b0cf507d8253fb8546c16f29",
+      "source": "41: def audit_extensions_reachability() -> None:\n42:     print(\"======================================================================\")\n43:     print(\" ✂️  BABYLON-60 APOPTOSIS ENGINE — ISSUE #5 EXTENSIONS REACHABILITY SCAN\")\n44:     print(\"======================================================================\")\n45:     \n46:     if not EXT_DIR.exists():\n47:         print(\"[-] Extensions directory not found.\")\n48:         return"
+    },
+    {
+      "candidate_id": "SW100-C0124",
+      "path": "scripts/c5_quality_gates/extensions_apoptosis_auditor.py",
+      "start_line": 56,
+      "end_line": 72,
+      "observation": "Caller paths also include obsolete top-level babylon60 roots.",
+      "sha256": "9a9ebbf34bc2f981aceae1619c37c5fd072ae921b0cf507d8253fb8546c16f29",
+      "source": "56:     # Scan external callers (core, scripts, services, tests)\n57:     caller_dirs = [\n58:         REPO_ROOT / \"babylon60\" / \"core\",\n59:         REPO_ROOT / \"babylon60\" / \"engine\",\n60:         REPO_ROOT / \"babylon60\" / \"memory\",\n61:         REPO_ROOT / \"babylon60\" / \"services\",\n62:         REPO_ROOT / \"scripts\",\n63:         REPO_ROOT / \"services\",\n64:         REPO_ROOT / \"tests\",\n65:         REPO_ROOT / \"kimi_nexus\",\n66:     ]\n67: \n68:     all_caller_imports = set()\n69:     for c_dir in caller_dirs:\n70:         if c_dir.exists():\n71:             for p in find_all_python_files(c_dir):\n72:                 all_caller_imports.update(collect_imports_from_file(p))"
+    },
+    {
+      "candidate_id": "SW100-C0124",
+      "path": "scripts/c5_quality_gates/extensions_apoptosis_auditor.py",
+      "start_line": 117,
+      "end_line": 118,
+      "observation": "Entrypoint calls function with no result-to-exit-status conversion.",
+      "sha256": "9a9ebbf34bc2f981aceae1619c37c5fd072ae921b0cf507d8253fb8546c16f29",
+      "source": "117: if __name__ == \"__main__\":\n118:     audit_extensions_reachability()"
+    },
+    {
+      "candidate_id": "SW100-C0354",
+      "path": "scripts/c5_sharur/sharur_100_swarm_execution.py",
+      "start_line": 1,
+      "end_line": 5,
+      "observation": "Header presents the harness as auditing/certifying resolution of findings.",
+      "sha256": "84b155a4f3ff7c106ba7e9eb9e3068bc123d5976757e353da78223b966e324d1",
+      "source": "1: #!/usr/bin/env python3\n2: \"\"\"\n3: SHARUR-3600 (Legión 100 Agentes) — Arnés de Ejecución Concurrente In-Memory (RFO = 0)\n4: Despliega 100 agentes concurrentes particionados en 5 cohortes funcionales (5 x 20)\n5: para auditar y certificar la resolución completa de los hallazgos de Iteración 2."
+    },
+    {
+      "candidate_id": "SW100-C0354",
+      "path": "scripts/c5_sharur/sharur_100_swarm_execution.py",
+      "start_line": 149,
+      "end_line": 175,
+      "observation": "Worker sleeps and returns constant verification-shaped result.",
+      "sha256": "84b155a4f3ff7c106ba7e9eb9e3068bc123d5976757e353da78223b966e324d1",
+      "source": "149: async def execute_sharur_100():\n150:     t0 = time.perf_counter()\n151:     results = []\n152: \n153:     async def run_agent(agent_idx: int):\n154:         cohort_id = (agent_idx // 20) + 1\n155:         cohort_info = COHORTS[cohort_id]\n156:         target_idx = agent_idx % 20\n157:         target_name = cohort_info[\"targets\"][target_idx]\n158: \n159:         # Simular latencia de verificación en silicio in-memory (0.05ms - 0.2ms)\n160:         await asyncio.sleep(0.0001)\n161: \n162:         return {\n163:             \"agent_id\": agent_idx + 1,\n164:             \"agent_tag\": f\"SHARUR_{agent_idx + 1:03d}\",\n165:             \"cohort_id\": cohort_id,\n166:             \"cohort_name\": cohort_info[\"name\"],\n167:             \"target\": target_name,\n168:             \"verdict\": \"CAMBIO_2_EXERGIA\",\n169:             \"status\": \"PASS\",\n170:             \"exergy_score\": 20500.0 + ((agent_idx * 13) % 450),\n171:             \"evidence\": \"Silicio verificado (RFO = 0)\",\n172:         }\n173: \n174:     tasks = [asyncio.create_task(run_agent(i)) for i in range(100)]\n175:     results = await asyncio.gather(*tasks)"
+    },
+    {
+      "candidate_id": "SW100-C0354",
+      "path": "scripts/c5_sharur/sharur_100_swarm_execution.py",
+      "start_line": 178,
+      "end_line": 202,
+      "observation": "Sitrep hardcodes passes/fix attestation and writes JSON.",
+      "sha256": "84b155a4f3ff7c106ba7e9eb9e3068bc123d5976757e353da78223b966e324d1",
+      "source": "178:     sitrep = {\n179:         \"timestamp\": time.strftime(\"%Y-%m-%dT%H:%M:%S%z\"),\n180:         \"total_agents\": 100,\n181:         \"cohorts_executed\": 5,\n182:         \"passed_agents\": 100,\n183:         \"warned_agents\": 0,\n184:         \"failed_agents\": 0,\n185:         \"wall_clock_ms\": round(elapsed_ms, 3),\n186:         \"root_axiom\": \"AX-0: No stochastic component may authorize its own irreversible side effects (LLM != authority)\",\n187:         \"claims_manifest\": \"CLAIMS.toml (11/12 verified, 1/12 bounded partial_trace)\",\n188:         \"critical_fixes_attested\": [\n189:             \"P0: epistemic_halt firmando con Ed25519 legítimo y persistiendo recibo COSE_Sign1 en disco (eliminado NullSigner y descarte en _)\",\n190:             \"P1: KERNEL_HASH calculado dinámicamente con std::env::current_exe() en unbox y banner\",\n191:             \"P2: Purgado claim 'Zero Anergy' -> Zero reader-side RMW contention\",\n192:             \"P3: Purgado claim de cores -> Available hardware threads (available_parallelism)\",\n193:             \"P4: Calibrado WormLedger con alias HashChainedLedger en RAM y notas de durabilidad física\",\n194:             \"P5: Calibrado LarsaTriadConsensus con alias HeterogeneousVerificationQuorum (N-versión local)\",\n195:             \"P6: Creación del manifiesto CLAIMS.toml y script de auditoría verify_claims.py\",\n196:         ],\n197:         \"results\": results,\n198:     }\n199: \n200:     out_path = REPO_ROOT / \"scripts\" / \"c5_legion\" / \"legion_100_audit_sitrep.json\"\n201:     out_path.parent.mkdir(parents=True, exist_ok=True)\n202:     out_path.write_text(json.dumps(sitrep, indent=2, ensure_ascii=False), encoding=\"utf-8\")"
+    },
+    {
+      "candidate_id": "SW100-C0207",
+      "path": "scripts/repatriated/apex_merkle_l5_anchor.py",
+      "start_line": 1,
+      "end_line": 8,
+      "observation": "Header describes a demonstration and payload formatting.",
+      "sha256": "368260a5194b4a978ce26721b8defbd42155ccd4a13232d41b67fb59338f225c",
+      "source": "1: #!/usr/bin/env python3\n2: \"\"\"\n3: APEX MERKLE L5 ANCHOR HARNESS (PUNTO FIJO Ω)\n4: Demostración de Silicio de la Fase IV (Apex):\n5: Colapso del árbol Merkle de recibos causales SCITT COSE_Sign1,\n6: atestación criptográfica somática (NIST P-256) y formateo de la\n7: transducción irreversible a OP_RETURN en Bitcoin L1 (Sumidero Entrópico Ω).\n8: \"\"\""
+    },
+    {
+      "candidate_id": "SW100-C0207",
+      "path": "scripts/repatriated/apex_merkle_l5_anchor.py",
+      "start_line": 33,
+      "end_line": 43,
+      "observation": "Helper constructs and length-checks only payload bytes.",
+      "sha256": "368260a5194b4a978ce26721b8defbd42155ccd4a13232d41b67fb59338f225c",
+      "source": "33: def build_bitcoin_l5_op_return(merkle_root: bytes, epoch_timestamp: int) -> bytes:\n34:     \"\"\"\n35:     Construye el payload OP_RETURN de Bitcoin L1:\n36:     [Prefix: 0x6060 (BABYLON-60)] + [Epoch: 8 bytes u64] + [Merkle Root: 32 bytes SHA3]\n37:     Total = 2 + 8 + 32 = 42 bytes <= 80 bytes (Límite estándar Bitcoin Core)\n38:     \"\"\"\n39:     prefix = b\"\\x60\\x60\"\n40:     epoch_bytes = struct.pack(\"<Q\", epoch_timestamp)\n41:     payload = prefix + epoch_bytes + merkle_root\n42:     assert len(payload) == 42, f\"Payload L5 inválido: {len(payload)} bytes\"\n43:     return payload"
+    },
+    {
+      "candidate_id": "SW100-C0207",
+      "path": "scripts/repatriated/apex_merkle_l5_anchor.py",
+      "start_line": 45,
+      "end_line": 64,
+      "observation": "Literal simulation inputs lead directly to completed anchoring/closure wording.",
+      "sha256": "368260a5194b4a978ce26721b8defbd42155ccd4a13232d41b67fb59338f225c",
+      "source": "45: def run_apex_suite():\n46:     print(\"=== [APEX] INICIANDO HARNESS DE CLAUSURA EPISTÉMICA (PUNTO FIJO Ω) ===\")\n47:     \n48:     # Simulación de un lote de 4 recibos causales comprometidos en Ring-0\n49:     receipts = [\n50:         b\"RECEIPT_01_KUDURRU_GRAVITY_FILTER_PASS\",\n51:         b\"RECEIPT_02_LARSA120_TRIAD_UNANIMOUS_CONSENSUS\",\n52:         b\"RECEIPT_03_SECURE_ENCLAVE_TOUCH_ID_P256_ATTESTED\",\n53:         b\"RECEIPT_04_OBSERVED_STATE_APFS_INODE_COMMITTED\"\n54:     ]\n55: \n56:     merkle_root = build_merkle_root(receipts)\n57:     epoch_now = int(time.time())\n58:     op_return_payload = build_bitcoin_l5_op_return(merkle_root, epoch_now)\n59: \n60:     print(f\"✓ MERKLE ROOT CALCULADO (SHA3-256): {merkle_root.hex()}\")\n61:     print(f\"✓ ÉPOCA CAUSAL: {epoch_now} (Unix ts)\")\n62:     print(f\"✓ SINK L5 BITCOIN (OP_RETURN): {op_return_payload.hex()} ({len(op_return_payload)} bytes)\")\n63:     print(\"✓ PRINCIPIO DE LANDAUER: Entropía estocástica colapsada a sumidero irreversible PoW.\")\n64:     print(\"\\n=== CLAUSURA EPISTÉMICA CONSUMADA EN SILICIO (PUNTO FIJO Ω ALCANZADO) ===\")"
+    },
+    {
+      "candidate_id": "SW100-C0057",
+      "path": "tests/test_axioms_hypothesis.py",
+      "start_line": 6,
+      "end_line": 20,
+      "observation": "Suite claims axiom verification but imports only standard library and Hypothesis.",
+      "sha256": "caec85e208d37833c4d1b0f6b87758bdce7ea1a370b7793a07f8eff214e897aa",
+      "source": "6: \"\"\"\n7: MOSKV-1 APEX — Property-Based Axiom Test Suite (pytest + hypothesis)\n8: Generates random DAGs, memory states, exergy parameters and concurrency\n9: scenarios to verify that the formal axioms hold under arbitrary inputs.\n10: \n11: Run: python3 -m pytest tests/test_axioms_hypothesis.py -v\n12: \"\"\"\n13: \n14: import json\n15: import time\n16: from hashlib import sha256\n17: from typing import Dict, FrozenSet, List, Set, Tuple\n18: \n19: from hypothesis import given, settings, assume, HealthCheck\n20: from hypothesis import strategies as st"
+    },
+    {
+      "candidate_id": "SW100-C0057",
+      "path": "tests/test_axioms_hypothesis.py",
+      "start_line": 229,
+      "end_line": 256,
+      "observation": "Adjacent BFT test operates on an explicitly simulated local DAG.",
+      "sha256": "caec85e208d37833c4d1b0f6b87758bdce7ea1a370b7793a07f8eff214e897aa",
+      "source": "229: class TestBFTAxioms:\n230:     \"\"\"Property-based tests for AX-BFT-1 through AX-BFT-5.\"\"\"\n231: \n232:     @given(dag=dag_strategy())\n233:     @settings(max_examples=200, suppress_health_check=[HealthCheck.too_slow])\n234:     def test_ax_bft_1_topological_execution(self, dag: List[Tuple[str, FrozenSet[str], float]]) -> None:\n235:         \"\"\"AX-BFT-1: Simulated BFT engine respects topological dependency order.\"\"\"\n236:         deps_map = {nid: deps for nid, deps, _ in dag}\n237:         completed: Set[str] = set()\n238:         pending = {nid for nid, _, _ in dag}\n239: \n240:         iterations = 0\n241:         max_iterations = len(dag) + 1\n242: \n243:         while pending and iterations < max_iterations:\n244:             ready = {nid for nid in pending if deps_map[nid].issubset(completed)}\n245:             assert len(ready) > 0, \"BFT deadlock: no ready nodes but pending remains\"\n246: \n247:             for nid in ready:\n248:                 # Verify all deps are completed before execution\n249:                 for dep in deps_map[nid]:\n250:                     assert dep in completed, f\"{nid} executed before dependency {dep}\"\n251:                 completed.add(nid)\n252:                 pending.discard(nid)\n253: \n254:             iterations += 1\n255: \n256:         assert len(pending) == 0, f\"Not all nodes executed: {pending}\""
+    },
+    {
+      "candidate_id": "SW100-C0057",
+      "path": "tests/test_axioms_hypothesis.py",
+      "start_line": 258,
+      "end_line": 267,
+      "observation": "Concurrency assertion checks its own clamp rather than engine behavior.",
+      "sha256": "caec85e208d37833c4d1b0f6b87758bdce7ea1a370b7793a07f8eff214e897aa",
+      "source": "258:     @given(\n259:         concurrent_counts=st.lists(st.integers(min_value=0, max_value=100), min_size=1, max_size=50),\n260:         limit=st.integers(min_value=1, max_value=100),\n261:     )\n262:     @settings(max_examples=200, suppress_health_check=[HealthCheck.too_slow])\n263:     def test_ax_bft_4_concurrency_bound(self, concurrent_counts: List[int], limit: int) -> None:\n264:         \"\"\"AX-BFT-4: Active tasks never exceed declared concurrency limit.\"\"\"\n265:         # Filter to valid counts (semaphore enforcement)\n266:         clamped = [min(c, limit) for c in concurrent_counts]\n267:         assert all(c <= limit for c in clamped), \"Concurrency limit violated\""
+    },
+    {
+      "candidate_id": "SW100-C0154",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/flagship/api.md",
+      "start_line": 141,
+      "end_line": 159,
+      "observation": "Prerequisite check explicitly echoes expanded API token.",
+      "sha256": "c7b8eb86ed852a3f37709f000988aeb89860c24aedee58527379e475f0996894",
+      "source": "141: ### FIRST: Check Prerequisites\n142: \n143: Before making any REST API calls (create, read, update, delete, toggle flags), verify these environment variables are set:\n144: \n145: | Variable | Purpose | How to get |\n146: |----------|---------|------------|\n147: | `CLOUDFLARE_ACCOUNT_ID` | Account identifier | Dashboard URL or `wrangler whoami` |\n148: | `CLOUDFLARE_API_TOKEN` | Bearer token for API auth | [Create API token](https://dash.cloudflare.com/profile/api-tokens) with Flagship permissions |\n149: | `FLAGSHIP_APP_ID` | Target app UUID | Dashboard under **Compute > Flagship**, or `GET /apps` endpoint |\n150: \n151: Check with:\n152: \n153: ```bash\n154: echo \"CLOUDFLARE_ACCOUNT_ID=${CLOUDFLARE_ACCOUNT_ID:-(not set)}\"\n155: echo \"CLOUDFLARE_API_TOKEN=${CLOUDFLARE_API_TOKEN:-(not set)}\"\n156: echo \"FLAGSHIP_APP_ID=${FLAGSHIP_APP_ID:-(not set)}\"\n157: ```\n158: \n159: **If any are missing, ask the user to provide them before proceeding.**"
+    },
+    {
+      "candidate_id": "SW100-C0338",
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-tri-provider-swarm/scripts/tri_swarm_dispatcher.py",
+      "start_line": 52,
+      "end_line": 107,
+      "observation": "Nested module dispatch/provider bodies match the canonical dispatcher byte-for-byte.",
+      "sha256": "68e34604fb1c3158ea6b09a8e85a1c7f7f529a4642fd104b30793e92425a05ed",
+      "source": "52:     async def dispatch_task(self, task: SwarmTask) -> Dict[str, Any]:\n53:         \"\"\"Enruta la tarea hacia el backend óptimo según su firma termodinámica.\"\"\"\n54:         t0 = time.perf_counter()\n55: \n56:         if task.task_type == \"plan\":\n57:             return await self._dispatch_openai(task, t0)\n58:         elif task.task_type == \"deep_context\":\n59:             return await self._dispatch_kimi(task, t0)\n60:         else:\n61:             return await self._dispatch_qwen_local(task, t0)\n62: \n63:     async def _dispatch_openai(self, task: SwarmTask, t0: float) -> Dict[str, Any]:\n64:         async with self.cloud_sem:\n65:             logger.info(f\"[{task.task_id}] Despachando a OpenAI GPT-4o (Strict Mode)...\")\n66:             await asyncio.sleep(0.18)  # TTFT medio\n67:             return {\n68:                 \"task_id\": task.task_id,\n69:                 \"provider\": \"OpenAI\",\n70:                 \"model\": \"gpt-4o\",\n71:                 \"cached_tokens\": len(task.system_prefix.split()) * 2,\n72:                 \"latency_ms\": round((time.perf_counter() - t0) * 1000, 2),\n73:                 \"status\": \"SUCCESS\",\n74:                 \"result\": f\"Plan estructurado validado bajo AST Zod para {task.task_id}\"\n75:             }\n76: \n77:     async def _dispatch_kimi(self, task: SwarmTask, t0: float) -> Dict[str, Any]:\n78:         async with self.cloud_sem:\n79:             logger.info(f\"[{task.task_id}] Despachando a Kimi K3 (Long-Context Engine)...\")\n80:             try:\n81:                 await asyncio.sleep(0.45)  # TTFT medio transpacífico\n82:                 return {\n83:                     \"task_id\": task.task_id,\n84:                     \"provider\": \"Moonshot\",\n85:                     \"model\": \"kimi-k3\",\n86:                     \"cached_tokens\": 120_000,\n87:                     \"latency_ms\": round((time.perf_counter() - t0) * 1000, 2),\n88:                     \"status\": \"SUCCESS\",\n89:                     \"result\": \"Arqueología de contexto completada sin pérdida de token\"\n90:                 }\n91:             except Exception as e:\n92:                 logger.warning(f\"Fallback desde Kimi hacia Qwen por saturación: {e}\")\n93:                 return await self._dispatch_qwen_local(task, t0)\n94: \n95:     async def _dispatch_qwen_local(self, task: SwarmTask, t0: float) -> Dict[str, Any]:\n96:         async with self.local_sem:\n97:             await asyncio.sleep(0.04)  # TTFT local ultra-rápido en VRAM\n98:             return {\n99:                 \"task_id\": task.task_id,\n100:                 \"provider\": \"Qwen-Local-vLLM\",\n101:                 \"model\": \"Qwen/Qwen2.5-Coder-32B-Instruct\",\n102:                 \"cached_tokens\": len(task.system_prefix.split()) * 2,\n103:                 \"latency_ms\": round((time.perf_counter() - t0) * 1000, 2),\n104:                 \"cost_usd\": 0.0000,\n105:                 \"status\": \"SUCCESS\",\n106:                 \"result\": \"Mutación de código bare-metal ejecutada con éxito\"\n107:             }"
+    },
+    {
+      "candidate_id": "SW100-C0338",
+      "path": "tools/skill_library/global/c5-tri-provider-swarm/scripts/tri_swarm_dispatcher.py",
+      "start_line": 52,
+      "end_line": 107,
+      "observation": "Canonical copy contains the same root cause.",
+      "sha256": "68e34604fb1c3158ea6b09a8e85a1c7f7f529a4642fd104b30793e92425a05ed",
+      "source": "52:     async def dispatch_task(self, task: SwarmTask) -> Dict[str, Any]:\n53:         \"\"\"Enruta la tarea hacia el backend óptimo según su firma termodinámica.\"\"\"\n54:         t0 = time.perf_counter()\n55: \n56:         if task.task_type == \"plan\":\n57:             return await self._dispatch_openai(task, t0)\n58:         elif task.task_type == \"deep_context\":\n59:             return await self._dispatch_kimi(task, t0)\n60:         else:\n61:             return await self._dispatch_qwen_local(task, t0)\n62: \n63:     async def _dispatch_openai(self, task: SwarmTask, t0: float) -> Dict[str, Any]:\n64:         async with self.cloud_sem:\n65:             logger.info(f\"[{task.task_id}] Despachando a OpenAI GPT-4o (Strict Mode)...\")\n66:             await asyncio.sleep(0.18)  # TTFT medio\n67:             return {\n68:                 \"task_id\": task.task_id,\n69:                 \"provider\": \"OpenAI\",\n70:                 \"model\": \"gpt-4o\",\n71:                 \"cached_tokens\": len(task.system_prefix.split()) * 2,\n72:                 \"latency_ms\": round((time.perf_counter() - t0) * 1000, 2),\n73:                 \"status\": \"SUCCESS\",\n74:                 \"result\": f\"Plan estructurado validado bajo AST Zod para {task.task_id}\"\n75:             }\n76: \n77:     async def _dispatch_kimi(self, task: SwarmTask, t0: float) -> Dict[str, Any]:\n78:         async with self.cloud_sem:\n79:             logger.info(f\"[{task.task_id}] Despachando a Kimi K3 (Long-Context Engine)...\")\n80:             try:\n81:                 await asyncio.sleep(0.45)  # TTFT medio transpacífico\n82:                 return {\n83:                     \"task_id\": task.task_id,\n84:                     \"provider\": \"Moonshot\",\n85:                     \"model\": \"kimi-k3\",\n86:                     \"cached_tokens\": 120_000,\n87:                     \"latency_ms\": round((time.perf_counter() - t0) * 1000, 2),\n88:                     \"status\": \"SUCCESS\",\n89:                     \"result\": \"Arqueología de contexto completada sin pérdida de token\"\n90:                 }\n91:             except Exception as e:\n92:                 logger.warning(f\"Fallback desde Kimi hacia Qwen por saturación: {e}\")\n93:                 return await self._dispatch_qwen_local(task, t0)\n94: \n95:     async def _dispatch_qwen_local(self, task: SwarmTask, t0: float) -> Dict[str, Any]:\n96:         async with self.local_sem:\n97:             await asyncio.sleep(0.04)  # TTFT local ultra-rápido en VRAM\n98:             return {\n99:                 \"task_id\": task.task_id,\n100:                 \"provider\": \"Qwen-Local-vLLM\",\n101:                 \"model\": \"Qwen/Qwen2.5-Coder-32B-Instruct\",\n102:                 \"cached_tokens\": len(task.system_prefix.split()) * 2,\n103:                 \"latency_ms\": round((time.perf_counter() - t0) * 1000, 2),\n104:                 \"cost_usd\": 0.0000,\n105:                 \"status\": \"SUCCESS\",\n106:                 \"result\": \"Mutación de código bare-metal ejecutada con éxito\"\n107:             }"
+    },
+    {
+      "candidate_id": "SW100-C0049",
+      "path": "tools/skill_library/global/c5-tri-provider-swarm/scripts/tri_swarm_dispatcher.py",
+      "start_line": 1,
+      "end_line": 8,
+      "observation": "Header calls the harness Production Script.",
+      "sha256": "68e34604fb1c3158ea6b09a8e85a1c7f7f529a4642fd104b30793e92425a05ed",
+      "source": "1: #!/usr/bin/env python3\n2: \"\"\"\n3: C5-REAL Tri-Provider Hybrid Swarm Dispatcher (Production Script)\n4: Author: Borja Fernández Angulo\n5: Standard: C5-REAL Sovereign Trust Substrate\n6: \n7: Orchestrates OpenAI (Planner), Qwen (Code Workers), and Kimi (Long-Context).\n8: Enforces Landauer concurrency semaphores and automatic failover."
+    },
+    {
+      "candidate_id": "SW100-C0049",
+      "path": "tools/skill_library/global/c5-tri-provider-swarm/scripts/tri_swarm_dispatcher.py",
+      "start_line": 35,
+      "end_line": 61,
+      "observation": "Constructor stores configuration and dispatches by task type.",
+      "sha256": "68e34604fb1c3158ea6b09a8e85a1c7f7f529a4642fd104b30793e92425a05ed",
+      "source": "35: class TriProviderSwarmDispatcher:\n36:     def __init__(\n37:         self,\n38:         openai_key: Optional[str] = None,\n39:         moonshot_key: Optional[str] = None,\n40:         qwen_local_url: str = \"http://localhost:8000/v1\",\n41:         max_concurrent_cloud: int = 15,\n42:         max_concurrent_local: int = 64\n43:     ):\n44:         self.openai_key = openai_key or os.getenv(\"OPENAI_API_KEY\")\n45:         self.moonshot_key = moonshot_key or os.getenv(\"MOONSHOT_API_KEY\")\n46:         self.qwen_local_url = qwen_local_url\n47: \n48:         # Semáforos de Landauer para evitar HTTP 429 y saturación de VRAM\n49:         self.cloud_sem = asyncio.Semaphore(max_concurrent_cloud)\n50:         self.local_sem = asyncio.Semaphore(max_concurrent_local)\n51: \n52:     async def dispatch_task(self, task: SwarmTask) -> Dict[str, Any]:\n53:         \"\"\"Enruta la tarea hacia el backend óptimo según su firma termodinámica.\"\"\"\n54:         t0 = time.perf_counter()\n55: \n56:         if task.task_type == \"plan\":\n57:             return await self._dispatch_openai(task, t0)\n58:         elif task.task_type == \"deep_context\":\n59:             return await self._dispatch_kimi(task, t0)\n60:         else:\n61:             return await self._dispatch_qwen_local(task, t0)"
+    },
+    {
+      "candidate_id": "SW100-C0049",
+      "path": "tools/skill_library/global/c5-tri-provider-swarm/scripts/tri_swarm_dispatcher.py",
+      "start_line": 63,
+      "end_line": 107,
+      "observation": "All provider methods are sleep-plus-success stubs.",
+      "sha256": "68e34604fb1c3158ea6b09a8e85a1c7f7f529a4642fd104b30793e92425a05ed",
+      "source": "63:     async def _dispatch_openai(self, task: SwarmTask, t0: float) -> Dict[str, Any]:\n64:         async with self.cloud_sem:\n65:             logger.info(f\"[{task.task_id}] Despachando a OpenAI GPT-4o (Strict Mode)...\")\n66:             await asyncio.sleep(0.18)  # TTFT medio\n67:             return {\n68:                 \"task_id\": task.task_id,\n69:                 \"provider\": \"OpenAI\",\n70:                 \"model\": \"gpt-4o\",\n71:                 \"cached_tokens\": len(task.system_prefix.split()) * 2,\n72:                 \"latency_ms\": round((time.perf_counter() - t0) * 1000, 2),\n73:                 \"status\": \"SUCCESS\",\n74:                 \"result\": f\"Plan estructurado validado bajo AST Zod para {task.task_id}\"\n75:             }\n76: \n77:     async def _dispatch_kimi(self, task: SwarmTask, t0: float) -> Dict[str, Any]:\n78:         async with self.cloud_sem:\n79:             logger.info(f\"[{task.task_id}] Despachando a Kimi K3 (Long-Context Engine)...\")\n80:             try:\n81:                 await asyncio.sleep(0.45)  # TTFT medio transpacífico\n82:                 return {\n83:                     \"task_id\": task.task_id,\n84:                     \"provider\": \"Moonshot\",\n85:                     \"model\": \"kimi-k3\",\n86:                     \"cached_tokens\": 120_000,\n87:                     \"latency_ms\": round((time.perf_counter() - t0) * 1000, 2),\n88:                     \"status\": \"SUCCESS\",\n89:                     \"result\": \"Arqueología de contexto completada sin pérdida de token\"\n90:                 }\n91:             except Exception as e:\n92:                 logger.warning(f\"Fallback desde Kimi hacia Qwen por saturación: {e}\")\n93:                 return await self._dispatch_qwen_local(task, t0)\n94: \n95:     async def _dispatch_qwen_local(self, task: SwarmTask, t0: float) -> Dict[str, Any]:\n96:         async with self.local_sem:\n97:             await asyncio.sleep(0.04)  # TTFT local ultra-rápido en VRAM\n98:             return {\n99:                 \"task_id\": task.task_id,\n100:                 \"provider\": \"Qwen-Local-vLLM\",\n101:                 \"model\": \"Qwen/Qwen2.5-Coder-32B-Instruct\",\n102:                 \"cached_tokens\": len(task.system_prefix.split()) * 2,\n103:                 \"latency_ms\": round((time.perf_counter() - t0) * 1000, 2),\n104:                 \"cost_usd\": 0.0000,\n105:                 \"status\": \"SUCCESS\",\n106:                 \"result\": \"Mutación de código bare-metal ejecutada con éxito\"\n107:             }"
+    },
+    {
+      "candidate_id": "SW100-C0049",
+      "path": "tools/skill_library/global/c5-tri-provider-swarm/scripts/tri_swarm_dispatcher.py",
+      "start_line": 109,
+      "end_line": 131,
+      "observation": "Campaign reports provider results and main executes demo tasks.",
+      "sha256": "68e34604fb1c3158ea6b09a8e85a1c7f7f529a4642fd104b30793e92425a05ed",
+      "source": "109:     async def run_swarm_campaign(self, tasks: List[SwarmTask]) -> Dict[str, Any]:\n110:         \"\"\"Ejecuta una campaña de enjambre paralelo sin contención.\"\"\"\n111:         start_wall = time.perf_counter()\n112:         results = await asyncio.gather(*[self.dispatch_task(t) for t in tasks])\n113:         total_time_ms = (time.perf_counter() - start_wall) * 1000\n114: \n115:         return {\n116:             \"total_tasks\": len(tasks),\n117:             \"total_wall_clock_ms\": round(total_time_ms, 2),\n118:             \"throughput_tasks_per_sec\": round(len(tasks) / (total_time_ms / 1000), 2),\n119:             \"providers_used\": list(set(r[\"provider\"] for r in results)),\n120:             \"results\": results\n121:         }\n122: \n123: if __name__ == \"__main__\":\n124:     demo_tasks = [\n125:         SwarmTask(task_id=\"T01-PLAN\", task_type=\"plan\", prompt=\"Planificar refactor de persistencia\", system_prefix=\"BABYLON-60 C5-REAL KERNEL\"),\n126:         SwarmTask(task_id=\"T02-CODE\", task_type=\"code_mutation\", prompt=\"Implementar Seqlock SPMC en Rust\", system_prefix=\"BABYLON-60 RUST HARDENED\"),\n127:         SwarmTask(task_id=\"T03-ARCH\", task_type=\"deep_context\", prompt=\"Auditar monorrepo de 800k tokens\", system_prefix=\"BABYLON-60 FULL AUDIT\"),\n128:     ]\n129:     dispatcher = TriProviderSwarmDispatcher()\n130:     campaign = asyncio.run(dispatcher.run_swarm_campaign(demo_tasks))\n131:     print(json.dumps(campaign, indent=2))"
+    },
+    {
+      "candidate_id": "SW100-C0049",
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-tri-provider-swarm/MODULE.md",
+      "start_line": 91,
+      "end_line": 98,
+      "observation": "Adjacent module documents dispatcher as executable harness.",
+      "sha256": "b2186cff3c5918d3773668d75920308a33e30bd8aea6a9ff7437fee4976c2491",
+      "source": "91: ## 3. Código del Arnés de Ejecución\n92: \n93: El despachador ejecutable reside en:\n94: `../../../../c5-tri-provider-swarm/scripts/tri_swarm_dispatcher.py`\n95: \n96: Puede invocarse directamente desde Python o mediante scripts CLI:\n97: ```bash\n98: python3 ../../../../c5-tri-provider-swarm/scripts/tri_swarm_dispatcher.py --tasks tasks.json"
+    }
+  ]
+}

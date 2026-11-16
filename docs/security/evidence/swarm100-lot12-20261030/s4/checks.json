@@ -1,0 +1,68 @@
+[
+  {
+    "check": "after-tests",
+    "command": [
+      "uv",
+      "run",
+      "--locked",
+      "--no-sync",
+      "pytest",
+      "tests/test_swarm100_lot12_s4_regressions.py",
+      "-q",
+      "-o",
+      "addopts=--tb=short"
+    ],
+    "exit_code": 0,
+    "log": "docs/security/evidence/swarm100-lot12-20261030/s4/after-tests.log",
+    "log_sha256": "01f6d8b4005e6497b611fe7726f8ec5895a3998a0263d4f1f9c02a75dc0390c1"
+  },
+  {
+    "check": "ruff",
+    "command": [
+      "uv",
+      "run",
+      "--locked",
+      "--no-sync",
+      "ruff",
+      "check",
+      "scripts/c5_cli/moskv_native_host.py",
+      "01_KISH_ENGINE/babylon60/cortex/cortex_purge_anergy.py",
+      "scripts/c5_git_utils/rewrite_commits.py",
+      "scripts/c5_icloud_deploy.py",
+      "tests/test_swarm100_lot12_s4_regressions.py"
+    ],
+    "exit_code": 0,
+    "log": "docs/security/evidence/swarm100-lot12-20261030/s4/ruff.log",
+    "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+  },
+  {
+    "check": "mypy",
+    "command": [
+      "uv",
+      "run",
+      "--locked",
+      "--no-sync",
+      "mypy",
+      "--follow-imports=silent",
+      "--check-untyped-defs",
+      "scripts/c5_cli/moskv_native_host.py",
+      "01_KISH_ENGINE/babylon60/cortex/cortex_purge_anergy.py",
+      "scripts/c5_git_utils/rewrite_commits.py",
+      "scripts/c5_icloud_deploy.py"
+    ],
+    "exit_code": 0,
+    "log": "docs/security/evidence/swarm100-lot12-20261030/s4/mypy.log",
+    "log_sha256": "71144743c83babea384888a735db0c4daba3d4d7b7942b6839984bd5c21b52bb"
+  },
+  {
+    "check": "shell-syntax",
+    "command": [
+      "bash",
+      "-n",
+      "tools/install_shield.sh"
+    ],
+    "exit_code": 0,
+    "log": "docs/security/evidence/swarm100-lot12-20261030/s4/shell-syntax.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

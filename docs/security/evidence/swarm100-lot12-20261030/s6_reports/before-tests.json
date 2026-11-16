@@ -1,0 +1,21 @@
+{
+  "command": [
+    "uv",
+    "run",
+    "--locked",
+    "--no-sync",
+    "pytest",
+    "tests/test_swarm100_lot12_s6_reports_regressions.py",
+    "-q",
+    "-k",
+    "reproduction",
+    "-o",
+    "addopts=--tb=short"
+  ],
+  "exit_code": 1,
+  "source_sha256": {
+    "scripts/c5_sharur/sharur_100_conversation_reporters.py": "f9b264129a7c50751534dfbc378420de3a94c83068a4ba957fad3f0ca9d99c13",
+    "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py": "32cef58031bab84d9fb78b0cbb3ab132008d6f7431f4fe4f6c29da34a8b8876a",
+    "scripts/c5_sharur/sharur_100_swarm_execution.py": "84b155a4f3ff7c106ba7e9eb9e3068bc123d5976757e353da78223b966e324d1"
+  }
+}

@@ -271,39 +271,47 @@ class BountyFeedTransducer:
                 frames.append(frame)
         return frames
 
-    async def poll_github_advisories(self, client: httpx.AsyncClient, per_page: int = 10) -> List[bytes]:
-        """Sondeo asíncrono no bloqueante de la API pública de GitHub Advisories."""
+    async def _fetch_github_advisories(self, client: httpx.AsyncClient, per_page: int = 10) -> List[BountyAdvisory]:
+        """Descarga y normaliza avisos de GitHub Security Advisories sin sellar reloj Lamport."""
         url = f"https://api.github.com/advisories?per_page={per_page}"
         headers = _get_api_headers()
         try:
             response = await client.get(url, headers=headers, timeout=10.0)
-            if response.status_code == 200:
-                data = response.json()
-                if isinstance(data, list):
-                    raw_list = cast(List[Mapping[str, object]], data)
-                    return self.ingest_raw_advisories(raw_list)
-            else:
+            if response.status_code != 200:
                 logger.warning("Fallo en sondeo GitHub Advisories: HTTP %s", response.status_code)
+                return []
+            data = response.json()
         except Exception as exc:  # noqa: BLE001
             logger.error("Error termodinámico en sondeo de advisories: %s", exc)
-        return []
+            return []
+        if not isinstance(data, list):
+            return []
+        advisories: List[BountyAdvisory] = []
+        for item in cast(List[Mapping[str, object]], data):
+            advisory = self.normalize_github_advisory(item)
+            if advisory is not None:
+                advisories.append(advisory)
+        return advisories
 
-    async def poll_code4rena_repos(
-        self, client: httpx.AsyncClient, per_page: int = 10, recipient: str = "bounty_ring_dispatcher"
-    ) -> List[bytes]:
-        """Sondeo asíncrono de repositorios de auditoría competitiva de Code4rena."""
+    async def poll_github_advisories(self, client: httpx.AsyncClient, per_page: int = 10) -> List[bytes]:
+        """Sondeo asíncrono no bloqueante de la API pública de GitHub Advisories."""
+        advisories = await self._fetch_github_advisories(client, per_page=per_page)
+        return [self.pack_advisory_to_b60ipc(advisory) for advisory in advisories]
+
+    async def _fetch_code4rena_advisories(self, client: httpx.AsyncClient, per_page: int = 10) -> List[BountyAdvisory]:
+        """Descarga y normaliza repositorios de Code4rena sin sellar reloj Lamport."""
         url = f"https://api.github.com/orgs/code-423n4/repos?sort=created&per_page={per_page}"
         headers = _get_api_headers()
-        frames: List[bytes] = []
+        advisories: List[BountyAdvisory] = []
         try:
             response = await client.get(url, headers=headers, timeout=10.0)
             if response.status_code != 200:
                 logger.warning("Fallo en sondeo Code4rena: HTTP %s", response.status_code)
-                return frames
+                return advisories
 
             data = response.json()
             if not isinstance(data, list):
-                return frames
+                return advisories
 
             for item in data:
                 if not isinstance(item, dict):
@@ -315,10 +323,17 @@ class BountyFeedTransducer:
                     repo_name=repo_name, repo_url=repo_url, description=desc, source="code4rena"
                 )
                 if advisory is not None:
-                    frames.append(self.pack_advisory_to_b60ipc(advisory, recipient=recipient))
+                    advisories.append(advisory)
         except Exception as exc:  # noqa: BLE001
             logger.error("Error termodinámico en sondeo de Code4rena: %s", exc)
-        return frames
+        return advisories
+
+    async def poll_code4rena_repos(
+        self, client: httpx.AsyncClient, per_page: int = 10, recipient: str = "bounty_ring_dispatcher"
+    ) -> List[bytes]:
+        """Sondeo asíncrono de repositorios de auditoría competitiva de Code4rena."""
+        advisories = await self._fetch_code4rena_advisories(client, per_page=per_page)
+        return [self.pack_advisory_to_b60ipc(advisory, recipient=recipient) for advisory in advisories]
 
     async def poll_live_network(
         self, client: httpx.AsyncClient, per_page: int = 10, recipient: str = "bounty_ring_dispatcher"
@@ -326,14 +341,15 @@ class BountyFeedTransducer:
         """Agrega de forma simultánea el sondeo de múltiples feeds públicos sin bloqueo."""
         import asyncio
 
-        gh_task = self.poll_github_advisories(client, per_page=per_page)
-        c4_task = self.poll_code4rena_repos(client, per_page=per_page, recipient=recipient)
+        gh_task = self._fetch_github_advisories(client, per_page=per_page)
+        c4_task = self._fetch_code4rena_advisories(client, per_page=per_page)
         results = await asyncio.gather(gh_task, c4_task, return_exceptions=True)
 
         merged: List[bytes] = []
         for res in results:
             if isinstance(res, list):
-                merged.extend(res)
+                for advisory in res:
+                    merged.append(self.pack_advisory_to_b60ipc(advisory, recipient=recipient))
             elif isinstance(res, Exception):
                 logger.error("Excepción en ingestión paralela: %s", res)
         return merged

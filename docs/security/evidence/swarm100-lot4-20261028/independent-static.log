@@ -1,0 +1,2 @@
+Command: .venv/bin/ruff check proof/bundles/attestation_bundle_v1/verify scripts/generate_attestation_bundle.py scripts/generate_attestation_bundle_v2.py tests/test_swarm100_lot4_regressions.py docs/security/evidence/swarm100-lot4-20261028/independent-adversarial.py
+Result before platform follow-up: All checks passed!

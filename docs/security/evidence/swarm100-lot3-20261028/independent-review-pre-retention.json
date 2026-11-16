@@ -1,0 +1,281 @@
+{
+  "reviewer": "adjudicate_03",
+  "reviewed_at": "2026-10-28T20:27:16.169870+00:00",
+  "decision": "APPROVED_WITH_EXPLICIT_SCOPE",
+  "open_actionable_findings": [],
+  "scope": {
+    "production_paths": [
+      "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "scripts/c5_git_utils/c5_ship.sh"
+    ],
+    "candidate_ids": [
+      "SW100-C0413",
+      "SW100-C0418",
+      "SW100-R3-0001"
+    ],
+    "production_or_shared_tests_edited_by_reviewer": false,
+    "real_git_commands_remote_operations_scanner_swift_gate_biometrics_executed": false,
+    "attested_objects_created": false,
+    "graph_discovery": "No native graph tools were exposed. Scoped reads of source, consumers, contract and official dependency documentation were used.",
+    "fixture_confinement": "Only script copies in temporary workspaces were executed. Fixture PATH contains owned Python substitutes for Git/Gitleaks/gate/uv and a narrow shell-utility whitelist. HOME/TMPDIR are temporary; no protected runtime or operator stores are used. Binding tests substitute pwd/getuid with synthetic values.",
+    "positive_test_scope": "Positive tests exercise pure effect/signature math and the actual extracted dispatch helper against fake Git. They do not satisfy the production ATTESTED status gate and do not prove hardware authorization."
+  },
+  "source_sha256": {
+    "scripts/c5_git_utils/c5_distill_public_mirror.sh": "ab0d5a098297ece430d5cc9784f110831e7dc1feb177b94b01e0a379c56fdaf1",
+    "scripts/c5_git_utils/c5_ship.sh": "a36a41a6c65d5719db43d17124abd7e3302597e5c95e482efd1d623cd3496ed4",
+    "tests/test_swarm100_lot3_regressions.py": "8bd06c120c8e5ea98a41115e54c09a9eeafc906daff87abae6d28bf2e0b9999e"
+  },
+  "dependency_source_sha256": {
+    "01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift": "18d96a6ef76b88b80735d646f208a062ed817311d12e48cfaccb9dc394c93efa"
+  },
+  "previous_test_sha256": "f3042b67d6d6e9a136995183ecc6c26c0caaa962ca83399b5b4feee5732f870c",
+  "helper_copies_byte_identical": true,
+  "findings": [
+    {
+      "candidate_id": "SW100-C0413",
+      "assessment": "FIXED_IN_REVIEWED_SOURCE",
+      "remediation_state": "FIXED",
+      "basis": "The scanner is mandatory before preparation. The immutable clean tree is materialized from raw objects with replacement refs disabled; export-ignore/worktree contents cannot omit or substitute the input. Regular tracked policy and ignores are read inside that snapshot; missing scanner, nonzero scan or uninspectable tree prevents gate/dispatch. This establishes the scan path and rejection behavior, not universal secret-detection efficacy."
+    },
+    {
+      "candidate_id": "SW100-C0418",
+      "assessment": "FIXED_IN_REVIEWED_SOURCE",
+      "remediation_state": "FIXED",
+      "basis": "Gate/runtime absence rejects before ship mutations. A selected gate is invoked once, with bounded time/output and process-group termination; failed/cancelled/empty/malformed/non-attested outcomes reject without push or fallback. The current effect hash, metadata, session operator and P-256 signature are checked before the production dispatcher call."
+    },
+    {
+      "candidate_id": "SW100-R3-0001",
+      "assessment": "FIXED_IN_REVIEWED_SOURCE",
+      "remediation_state": "FIXED",
+      "basis": "The dispatch refspec uses the immutable commit captured in a readonly envelope. Commit/tree/destination/ref/force/action/scope/agent/config digest/new nonce are bound into domain-separated SHA256. Git publication uses a private bare repository with frozen transport configuration and explicit URL, excluding mutable remote aliases and URL rewrite configuration. Scheduled second invocation, overlapping attempts, and benign fake-Git dispatch controls preserve the first commit selection."
+    }
+  ],
+  "resolved_review_findings": [
+    {
+      "id": "LOT3-REVIEW-01",
+      "topic": "Archive filtering versus full published tree",
+      "initial_basis": "Design used git archive, whose export-ignore handling can omit published blobs.",
+      "resolution": "Raw ls-tree/cat-file snapshot, including raw symlink blobs; scanner operates inside snapshot with contained policy/ignore inputs.",
+      "validation": "Raw export-ignored fixture content reaches scanner; independent symlink fixture remains a regular raw blob."
+    },
+    {
+      "id": "LOT3-REVIEW-02",
+      "topic": "Mutable push URL/configuration",
+      "initial_basis": "An explicit URL alone can still be rewritten by Git configuration; default remote get-url uses fetch URL.",
+      "resolution": "Resolve exactly one expanded --push --all URL, freeze permitted transport configuration, bind its digest, and dispatch from an isolated bare repo without ambient Git config.",
+      "validation": "Fake-Git dispatcher ignores changed branch and inherited URL-rewrite environment while selecting exact commit/ref/URL."
+    },
+    {
+      "id": "LOT3-REVIEW-03",
+      "topic": "Replacement refs alter scanned objects",
+      "initial_basis": "Git object readers normally honor refs/replace while pack transfer does not.",
+      "resolution": "Export GIT_NO_REPLACE_OBJECTS and force it in helper reads; streaming object inspection explicitly uses --no-replace-objects.",
+      "validation": "Regression inspects object-read environment; source checks cover all content/commit reads."
+    },
+    {
+      "id": "LOT3-REVIEW-04",
+      "topic": "Skipping hooks and LFS payload upload",
+      "initial_basis": "An isolated bare push would skip source pre-push hooks, including the installed Git LFS hook.",
+      "resolution": "Reject active executable pre-push hooks and LFS pointer content before gate. Reject gitlinks. Recognize all three supported LFS version headers including whitespace/CRLF.",
+      "validation": "Both scripts reject hook/LFS fixtures before gate/dispatch; version/header variants are tested. This is rejection, not support for these repositories."
+    },
+    {
+      "id": "LOT3-REVIEW-05",
+      "topic": "Transport path quoting",
+      "initial_basis": "GIT_SSH is a program path, whereas core.sshCommand is shell text; JSON ASCII escaping also misrepresented Unicode alternate paths.",
+      "resolution": "Quote GIT_SSH with shlex.quote; write UTF-8 alternate paths with ensure_ascii=False.",
+      "validation": "Source review against Git program-path and C-style path contracts; no real SSH or Git execution."
+    },
+    {
+      "id": "LOT3-REVIEW-06",
+      "topic": "Gate child survives leader exit",
+      "initial_basis": "Conditional killpg only while leader was alive could leave a descendant holding stdout after deadline.",
+      "resolution": "On failure/deadline attempt process-group kill regardless of leader liveness; tolerate absent groups.",
+      "validation": "Independent fixture wrapper exits first; descendant fails to write its scheduled marker after the timeout."
+    },
+    {
+      "id": "LOT3-REVIEW-07",
+      "topic": "Archive size estimated with fixed overhead",
+      "initial_basis": "Raw size plus fixed per-file overhead was not a universal tar size bound.",
+      "resolution": "Serialize the actual normalized PAX snapshot through a counting sink and reject at 20 MiB.",
+      "validation": "A raw payload below threshold whose tar padding crosses threshold is rejected before scanner."
+    }
+  ],
+  "checks": [
+    {
+      "command": ".venv/bin/python -m pytest tests/test_swarm100_lot3_regressions.py -q --tb=short",
+      "result": "66 passed in 60.00s",
+      "exit_code": 0,
+      "test_source_sha256": "f3042b67d6d6e9a136995183ecc6c26c0caaa962ca83399b5b4feee5732f870c",
+      "production_source_sha256": {
+        "scripts/c5_git_utils/c5_distill_public_mirror.sh": "ab0d5a098297ece430d5cc9784f110831e7dc1feb177b94b01e0a379c56fdaf1",
+        "scripts/c5_git_utils/c5_ship.sh": "a36a41a6c65d5719db43d17124abd7e3302597e5c95e482efd1d623cd3496ed4"
+      },
+      "evidence_path": "docs/security/evidence/swarm100-lot3-20261028/independent-pytest.log"
+    },
+    {
+      "command": ".venv/bin/python -m pytest tests/test_swarm100_lot3_regressions.py -q --tb=short -k test_serialized_tar_padding_is_counted_against_budget",
+      "result": "1 passed, 66 deselected in 2.39s",
+      "exit_code": 0,
+      "test_source_sha256": "8bd06c120c8e5ea98a41115e54c09a9eeafc906daff87abae6d28bf2e0b9999e",
+      "evidence_path": "docs/security/evidence/swarm100-lot3-20261028/independent-tar-padding.log"
+    },
+    {
+      "method": "Exact test-version reconciliation",
+      "result": "Removing only the added tar-padding payload branch, new test and trailing blank lines reconstructs SHA256 f3042b67d6d6e9a136995183ecc6c26c0caaa962ca83399b5b4feee5732f870c. Existing 66 cases are unchanged."
+    },
+    {
+      "command": ".venv/bin/python docs/security/evidence/swarm100-lot3-20261028/independent-adversarial.py",
+      "result": "10 independent checks passed",
+      "exit_code": 0,
+      "evidence_path": "docs/security/evidence/swarm100-lot3-20261028/independent-adversarial.json"
+    },
+    {
+      "command": "/bin/bash -n scripts/c5_git_utils/c5_distill_public_mirror.sh; /bin/bash -n scripts/c5_git_utils/c5_ship.sh",
+      "result": "Both scripts parse",
+      "exit_code": 0
+    },
+    {
+      "command": "shellcheck scripts/c5_git_utils/c5_distill_public_mirror.sh scripts/c5_git_utils/c5_ship.sh",
+      "result": "No findings",
+      "exit_code": 0
+    },
+    {
+      "command": ".venv/bin/ruff check tests/test_swarm100_lot3_regressions.py docs/security/evidence/swarm100-lot3-20261028/independent-adversarial.py",
+      "result": "All checks passed!",
+      "exit_code": 0
+    }
+  ],
+  "intermediate_results": [
+    {
+      "result": "28 passed, 1 failed during an intermediate source/fixture update",
+      "scope": "The newly added --no-replace-objects inspection was not yet recognized by the fake-Git stub. Reported immediately; superseded by the final passing run. No production Git was executed."
+    }
+  ],
+  "source_checks": [
+    {
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "start_line": 4,
+      "end_line": 34,
+      "observation": "Replacement refs disabled at shell entry and each helper Git read."
+    },
+    {
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "start_line": 58,
+      "end_line": 94,
+      "observation": "Exact effect metadata, normalized agent allowlist, current-session user, finite fresh timestamp and P-256 signature over ASCII SHA256 digest. LFS legacy/CRLF headers rejected."
+    },
+    {
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "start_line": 97,
+      "end_line": 158,
+      "observation": "Raw blob materialization validates paths/types/policy, preserves full scan input, never follows symlinks, and counts actual serialized PAX size."
+    },
+    {
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "start_line": 159,
+      "end_line": 220,
+      "observation": "Reject active pre-push hooks/LFS/gitlinks, select one push URL, freeze transport inputs, bind commit/tree/ref/force/config and per-attempt nonce."
+    },
+    {
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "start_line": 224,
+      "end_line": 271,
+      "observation": "Single selected gate invocation; selector caps 64 KiB and deadline; group killed on failure; strict JSON status/binding/signature precede receipt creation."
+    },
+    {
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "start_line": 272,
+      "end_line": 298,
+      "observation": "Private Git repo, frozen config, exact immutable refspec and destination, remote observation after push; mismatch fails without retry."
+    },
+    {
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "start_line": 340,
+      "end_line": 379,
+      "observation": "Mandatory scanner, private temporary index/snapshot, snapshot-only scan, readonly tree/commit/envelope, gate then dispatcher. Preview explicitly leaves authorization/push NOT_CHECKED."
+    },
+    {
+      "path": "scripts/c5_git_utils/c5_ship.sh",
+      "start_line": 370,
+      "end_line": 380,
+      "observation": "Mandatory gate/runtime preflight precedes alias and later commit/merge/fetch operations; status path returns earlier without mutation."
+    },
+    {
+      "path": "scripts/c5_git_utils/c5_ship.sh",
+      "start_line": 508,
+      "end_line": 520,
+      "observation": "Capture immutable HEAD/tree, prepare frozen envelope, require gate completion, then dispatch. No persistent last_ship_receipt path remains."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift",
+      "start_line": 103,
+      "end_line": 109,
+      "observation": "Dependency contract requires 32-byte causal hash and signs ASCII hash bytes when sign-hex is absent."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift",
+      "start_line": 220,
+      "end_line": 234,
+      "observation": "Gate prefixes agent with detected caller environment; reviewed validator matches known normalized variants."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift",
+      "start_line": 377,
+      "end_line": 405,
+      "observation": "Gate produces DER P-256 signature and X9.63 public point with session fields; read only, never invoked."
+    }
+  ],
+  "limitations": [
+    "No real Git commands, secret scanner, remote publication, Swift execution, biometric authentication or Secure Enclave operation were run. No ATTESTED fixture/object was fabricated. Successful protected end-to-end authorization remains unverified.",
+    "The selected local gate is a trusted dependency. Verifying a signature against the public key supplied in its own receipt proves self-consistency, not independent hardware-key provenance or independent identity of the root operator.",
+    "Active pre-push hooks, LFS pointers and gitlinks are unsupported and explicitly rejected before authorization. This repository has an installed Git LFS pre-push hook, so this dispatcher refuses that configuration; removing or bypassing it is not authorized or recommended by this review.",
+    "Receipt retention changed: receipt.json exists only in the private per-invocation temporary directory and is deleted by the EXIT cleanup. .babylon60/last_ship_receipt.json is no longer written. No reader was found in the scoped callers; this review does not certify persistent audit retention.",
+    "Git URL/transport configuration is frozen for dispatch. Executables, credential helpers, external SSH/TLS/proxy configuration and local filesystem integrity remain trusted dependencies; the code is not an OS sandbox against a malicious same-user process.",
+    "The scanner applies the tracked policy and ignores in the snapshot. Its policy exclusions and detection coverage are not equivalent to a guarantee that every possible secret is detected.",
+    "The existing ship staging/commit/merge/fetch/status workflow is outside the corrected publication findings and was not executed against a real repository. C0414 is not reopened; SW100-R3-0001 remains separate from the original 598 IDs.",
+    "A failed post-push ref observation may occur after the remote effect; the script reports failure without retry. These fixtures do not establish rollback, network availability or remote-server behavior."
+  ],
+  "official_sources": [
+    {
+      "url": "https://github.com/git/git/blob/master/Documentation/git-replace.adoc",
+      "basis": "Object replacement behavior and --no-replace-objects."
+    },
+    {
+      "url": "https://github.com/git/git/blob/master/Documentation/git-remote.adoc",
+      "basis": "Push URL resolution and rewrite expansion."
+    },
+    {
+      "url": "https://github.com/git/git/blob/master/Documentation/git-archive.adoc",
+      "basis": "Archive attributes can omit tree content."
+    },
+    {
+      "url": "https://github.com/git/git/blob/master/path.c",
+      "basis": "Hook path resolution honors configured hooks path."
+    },
+    {
+      "url": "https://github.com/gitleaks/gitleaks/blob/master/cmd/root.go",
+      "basis": "Config and ignore input selection."
+    },
+    {
+      "url": "https://github.com/git-lfs/git-lfs/blob/main/lfs/pointer.go",
+      "basis": "Recognized LFS headers and whitespace decoding."
+    }
+  ],
+  "evidence_paths": [
+    "docs/security/evidence/swarm100-lot3-20261028/independent-adversarial.py",
+    "docs/security/evidence/swarm100-lot3-20261028/independent-adversarial.json",
+    "docs/security/evidence/swarm100-lot3-20261028/independent-pytest.log",
+    "docs/security/evidence/swarm100-lot3-20261028/independent-tar-padding.log",
+    "docs/security/evidence/swarm100-lot3-20261028/before-source-manifest.json",
+    "docs/security/evidence/swarm100-lot3-20261028/before-tests.log"
+  ],
+  "evidence_sha256": {
+    "docs/security/evidence/swarm100-lot3-20261028/independent-adversarial.py": "bb52144e174d89781644c22689d787500b6a414c485193b326024bc229fbd6c4",
+    "docs/security/evidence/swarm100-lot3-20261028/independent-adversarial.json": "fa24457ab29bd1ec0b892b8a0baa5e05bc3b62a5940cbf9b614c03d13f1a0f5a",
+    "docs/security/evidence/swarm100-lot3-20261028/independent-pytest.log": "9bb6aedc8f7931571873bd204b33e80ead9bd7e77e03e4581b044e273a28924c",
+    "docs/security/evidence/swarm100-lot3-20261028/independent-tar-padding.log": "776138a6aad3f5024bcdaff098b6ecb65dd9ec6d90250978b1f9c805d7a6c9c6",
+    "docs/security/evidence/swarm100-lot3-20261028/before-source-manifest.json": "42a285c2626a611510fefab7d2525a8606be59ef23536b1ad5152846c483972c",
+    "docs/security/evidence/swarm100-lot3-20261028/before-tests.log": "603669d322f3a17efe8f1870993485d5e187855dcc04be2c44bc13b4d648f460"
+  }
+}

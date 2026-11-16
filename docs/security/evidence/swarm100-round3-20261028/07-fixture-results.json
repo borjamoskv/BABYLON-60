@@ -1,0 +1,88 @@
+{
+  "reviewer": "07",
+  "scope": "isolated synthetic fixtures only",
+  "results": {
+    "SW100-C0294": {
+      "validation_accepted": true,
+      "node_count": 13,
+      "allocation_executed": false
+    },
+    "SW100-C0295": {
+      "1 / 0": "ZeroDivisionError",
+      "missing_fixture_identifier": "NameError"
+    },
+    "SW100-C0116": {
+      "synthetic_environment": {
+        "OPENAI_MODEL": "fixture-model"
+      },
+      "output": [
+        "fixture-model",
+        "Standard",
+        "env OpenAI"
+      ]
+    },
+    "SW100-C0115": {
+      "output": {
+        "status": "ÓPTIMO",
+        "active": {
+          "tier": 1,
+          "effort": "fast",
+          "label": "Estrato 1 (Triaje / Fast)"
+        },
+        "optimal": {
+          "tier": 1,
+          "effort": "fast",
+          "label": "Estrato 1 (Triaje / Fast)"
+        },
+        "llm_field": "fixture-model (selector UI — ÓPTIMO: Estrato 1 (Triaje / Fast))",
+        "mode_field": "Fast (selector UI — ÓPTIMO)",
+        "warning": null
+      },
+      "comparative_measurements_supplied": false
+    },
+    "SW100-C0596": {
+      "error": "Cannot operate on a closed database.",
+      "fixture_database": ":memory:",
+      "project_native_kernel_loaded": false
+    },
+    "SW100-C0427": {
+      "serialized": "{\"origin\": \"fixturealpha\", \"origin_pos\": \"NOUN\", \"bridge\": \"sistema\", \"bridge_pos\": \"NOUN\", \"target\": \"fixturebeta\", \"target_pos\": \"NOUN\", \"p_origin_to_bridge\": 0.0, \"p_bridge_to_target\": 0.0, \"joint_score\": 0.0, \"surprisal_bits\": Infinity, \"bottleneck_ratio\": 0.0, \"full_path\": [\"fixturealpha\", \"sistema\", \"fixturebeta\"], \"alternatives\": []}",
+      "strict_encoder_error": "Out of range float values are not JSON compliant: inf",
+      "fixture_limit": "POS classifier supplied as NOUN; exact graph/fallback/to_dict methods"
+    },
+    "SW100-C0182": {
+      "graph": "two isolated vertices",
+      "actual": 0.0,
+      "numpy_version": "2.4.6",
+      "networkx_version": "3.6.1"
+    },
+    "SW100-C0162": {
+      "actual": [
+        1.0,
+        0.0
+      ],
+      "initial_prior_reference": [
+        0.47058823529411764,
+        0.5294117647058822
+      ],
+      "assumption": "pi0 is the distribution at time zero; target=1, observation=2"
+    },
+    "SW100-C0511": {
+      "writer_synchronous": 0,
+      "fresh_connection_synchronous": 2,
+      "limit": "connection-local property fixture, not a mutated production ledger test"
+    },
+    "SW100-C0194": {
+      "target_selected": true,
+      "status": "MODIFIED",
+      "outside_selected_root_contents": "Ineficiencia\n",
+      "limit": "outside audit root but within reviewer-owned synthetic fixture directory"
+    },
+    "SW100-C0060": {
+      "main_return": null,
+      "system_exit_raised": false,
+      "stdout": "ARTIFACT        VERIFIED\nHASH CHAIN      FAILED\nSIGNATURE       FAILED\nCLAIMS          8/21 SUPPORTED\nINVARIANTS      6 STALE\nENVIRONMENT     DARWIN/ARM64\nHW PROVENANCE   UNVERIFIED\nCERTIFICATION   NONE\n",
+      "limit": "exact main function on synthetic incomplete cryptographic values; no real keys"
+    }
+  }
+}

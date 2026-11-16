@@ -1,0 +1,55 @@
+{
+  "manifest_sha256": "82f77891b6e9301134855b3d57fedc036d33e2ccaf81f052afcc79c5c061cabb",
+  "attestation_bytes": 16,
+  "attestation_equals_manifest_hash_prefix": true,
+  "release_signature": null,
+  "release_signing_authority": {
+    "algorithm": null,
+    "scope": "unsigned_local_evidence",
+    "public_key": null
+  },
+  "claim_run": {
+    "timestamp": 1792760475.112392,
+    "source_commit": "a25ff274308fbe74c10be6b0fc7513da93b78887+dirty:cc512bce910ae7bd",
+    "source_tree_digest": "7f2944f1378ff981c18a47e4e2ff86e15ce08e802f96542f6a344f3f0e0db409",
+    "current_source_tree_digest": "a8f9b10ef89ee649fe05adf0c31c42c713f9706c582595578edf9017024620d4",
+    "claims_manifest_digest": "79f3269add7ccc0dc4b9c0d08c8022eed4203a249b9b58de2121de34d162aa53",
+    "manifest_matches": true,
+    "tracked_source_matches": false,
+    "failed_claims": [],
+    "total": 28,
+    "hardware_presence": "NO_VERIFICADO"
+  },
+  "counts": {
+    "total_claims": 28,
+    "verified": 9,
+    "partial": 19,
+    "experimental": 0,
+    "failed_claims": []
+  },
+  "historical_crash": {
+    "ambiguous_recoveries": 0,
+    "crash_points_tested": [
+      "PREPARE",
+      "QUARANTINE",
+      "VERIFY",
+      "DISPATCH",
+      "COMMIT"
+    ],
+    "duration_ms": 55,
+    "iterations": 250,
+    "kill_signal": "SIGKILL_SIMULATED",
+    "timestamp_epoch": 1791030000,
+    "verdict": "PASS_ZERO_AMBIGUOUS_RECOVERIES"
+  },
+  "historical_attack_vectors": {
+    "attack_vectors_tested": 19,
+    "attack_attempts_per_run": 100,
+    "unauthorized_mutations": 0,
+    "unauthorized_deletions": 0,
+    "capability_escapes": 0,
+    "unverified_commits": 0,
+    "ledger_effect_divergences": 0
+  },
+  "local_swarm_sha256": "dd58f1b736cdb9f4dfad5f0b67dd4ec9e757b4806d2f289b6aea617232a54c12"
+}

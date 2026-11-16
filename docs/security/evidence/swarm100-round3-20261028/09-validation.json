@@ -1,0 +1,20 @@
+{
+  "reviewer": "09",
+  "records": 29,
+  "coverage": "29/29 exact, unique",
+  "required_fields": "valid",
+  "primary_source_hashes": "29/29 match current source",
+  "source_ranges": "all valid and nonempty",
+  "evidence_paths": "all exist",
+  "decisions": {
+    "CONFIRMED_STATIC": 26,
+    "REJECTED": 1,
+    "REPRODUCED": 2
+  },
+  "remediation": {
+    "OPEN": 28,
+    "NOT_APPLICABLE": 1
+  },
+  "protected_runtime_executed": false,
+  "workspace_wide_gates": "not run by reviewer 09; reserved for coordinating audit"
+}

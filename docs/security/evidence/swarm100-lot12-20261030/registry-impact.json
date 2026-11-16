@@ -1,0 +1,2184 @@
+{
+  "scope": "Read-only impact analysis against Lote12 before-source-snapshots; no adjudication or remediation state changed.",
+  "baseline_manifest": "docs/security/evidence/swarm100-lot12-20261030/before-source-manifest.json",
+  "affected_count": 53,
+  "selected_count": 30,
+  "collateral_count": 23,
+  "collateral_states": {
+    "OPEN": 20,
+    "FIXED": 2,
+    "NOT_APPLICABLE": 1
+  },
+  "affected_records": [
+    {
+      "candidate_id": "SW100-C0032",
+      "selected": false,
+      "primary_path": "tests/test_moskv_native_host.py",
+      "affected_paths": [
+        "scripts/c5_cli/moskv_native_host.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "c59a51e487e00890fa2bb4c7e4b1a1193693038e9c493dd4a9c58ae16be7cdbc",
+      "rationale": "The FIFO test imports the production fixed /tmp queue path and unlinks it at both ends without requesting a temporary fixture or monkeypatch. The active autouse fixture only runs garbage collection and does not replace the path. Running this test can delete the native host queue or race host operations. No test touching that queue was executed.",
+      "source_checks": [
+        {
+          "path": "tests/test_moskv_native_host.py",
+          "start_line": 100,
+          "end_line": 120,
+          "observation": "The FIFO test directly deletes, enqueues into and reads the production QUEUE_FILE."
+        },
+        {
+          "path": "scripts/c5_cli/moskv_native_host.py",
+          "start_line": 180,
+          "end_line": 210,
+          "observation": "QUEUE_FILE is an absolute fixed path and both enqueue/dequeue use it.",
+          "baseline_excerpt_sha256": "0511da6c563e197f0abc83b8a57dc9a44c3b1ecbe574e5aaa995bddd1eefff06",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "tests/conftest.py",
+          "start_line": 38,
+          "end_line": 43,
+          "observation": "The autouse fixture only invokes garbage collection."
+        },
+        {
+          "path": "tests/conftest.py",
+          "start_line": 46,
+          "end_line": 55,
+          "observation": "Optional isolation changes CWD/TMPDIR, but is not requested and cannot rewrite this absolute constant."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0073",
+      "selected": false,
+      "primary_path": "01_KISH_ENGINE/babylon60/compliance_exporter/m0_evidence_pack.py",
+      "affected_paths": [
+        "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py"
+      ],
+      "decision": "ALREADY_FIXED",
+      "remediation_state": "FIXED",
+      "existing_root_override": false,
+      "current_source_sha256": "82dc6e8cf8c106a5c7a8c2f68b9ee188457a6d3e618968d38e83acdefc1ddd2c",
+      "rationale": "The assigned source hash is stale. Current compile_pack verifies the copied ledger, immediately tests ev_check[\"verified\"], and raises ValueError before constructing ledger_info when false. The current verifier returns verified=False for unsupported versions, sequence discontinuity, Lamport regressions and broken hashes. The specific ignored-verdict assertion is therefore already corrected in current code. This classification records static remediation only; no pack/signing/database runtime validation was performed.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/compliance_exporter/m0_evidence_pack.py",
+          "start_line": 623,
+          "end_line": 637,
+          "observation": "Existing ledger is backed up and rejected if verified is false before ledger_info is used."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+          "start_line": 320,
+          "end_line": 354,
+          "observation": "Invalid version, ordering and chain states return verified=False.",
+          "baseline_excerpt_sha256": "ed450cee251e89ff9da72f5ed15e448601225746abd532be87449466b6f87b80",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+          "start_line": 370,
+          "end_line": 377,
+          "observation": "Entry hash mismatch returns verified=False.",
+          "baseline_excerpt_sha256": "2d33bfb961785c9ef6ae79dcdfde1a795791d42601bfc77b1ce5ff1a8fb8456e",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0103",
+      "selected": true,
+      "primary_path": "tools/skill_library/global/youtube-analysis-pipeline/scripts/yt_audit.py",
+      "affected_paths": [
+        "tools/skill_library/global/youtube-analysis-pipeline/scripts/yt_audit.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "ecda4dca2ee77aa986d1898aad7fbd998bc07723bf7126c1e697fbd155638d62",
+      "rationale": "fetch_youtube_audit interpolates user URL and output_dir into command strings that run_cmd executes with shell=True. The CLI passes sys.argv values directly. Double quotes do not suppress command substitution; crafted input containing substitution or a closing quote can cause shell execution before yt-dlp handles the URL. os.makedirs merely creates the directory and provides no shell validation. This is a local command-injection sink; exploitation requires an operator or caller to supply attacker-influenced input, and no malicious command or acquisition script was executed.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/global/youtube-analysis-pipeline/scripts/yt_audit.py",
+          "start_line": 7,
+          "end_line": 17,
+          "observation": "Command runner uses shell=True and metadata command directly interpolates URL.",
+          "baseline_excerpt_sha256": "f9ffdb1676962cfc7836a7b584b518e9293838ac4ae57e0ea44dfda509a7f24c",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "tools/skill_library/global/youtube-analysis-pipeline/scripts/yt_audit.py",
+          "start_line": 35,
+          "end_line": 42,
+          "observation": "Subtitle and list commands repeat interpolation, including output directory.",
+          "baseline_excerpt_sha256": "5c4e003074e1aff17da8b5591dee5fc86c2ec4b692420bfe33e56c675ec43777",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "tools/skill_library/global/youtube-analysis-pipeline/scripts/yt_audit.py",
+          "start_line": 48,
+          "end_line": 55,
+          "observation": "CLI directly forwards positional input without escaping or allowlisting.",
+          "baseline_excerpt_sha256": "810493aae4cb51f53980f43c489c81755d41df69ca8544e7170f69e84177a8ae",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0113",
+      "selected": true,
+      "primary_path": "01_KISH_ENGINE/babylon60/kernel/ns_z3_firewall.py",
+      "affected_paths": [
+        "01_KISH_ENGINE/babylon60/kernel/ns_z3_firewall.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "8c770d13506eea3376bb072d905d7ce65994395989bc0686ba18a779c6d5a65d",
+      "rationale": "Only the three leading minors are checked. For lambda_max=0 and S=diag(0,1,1), residual M=diag(0,-1,-1) gives all three checked minors zero while e_y^T M e_y=-1. Even imposing trace-free S would not fix this: S=diag(0,1,-1) is another counterexample. The SAT branch labels these constraints VALID_PROOF. Static algebraic refutation; Z3 was not run.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/ns_z3_firewall.py",
+          "start_line": 79,
+          "end_line": 115,
+          "observation": "Declared all-vector PSD bound is implemented using only leading 1x1, 2x2 and 3x3 determinants.",
+          "baseline_excerpt_sha256": "2a8a04c445d24ac0f73773c64d07875017872567892e65053d3e697b030f5c37",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/ns_z3_firewall.py",
+          "start_line": 117,
+          "end_line": 126,
+          "observation": "Satisfiable nonnegative leading-minor constraints produce VALID_PROOF.",
+          "baseline_excerpt_sha256": "f78a7dd87064a2bab02ceb1ea4722dffc2287dd7d89e12dae88c49c4bfda308f",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/ns_z3_firewall.py",
+          "start_line": 64,
+          "end_line": 74,
+          "observation": "Unknown-result rejection does not add missing principal-minor constraints.",
+          "baseline_excerpt_sha256": "5f0b8f56f6f0fd2883e0f308213180b9884550715103b44a57ada29ac0c3cdfd",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "tests/test_ns_z3_firewall.py",
+          "start_line": 19,
+          "end_line": 45,
+          "observation": "Existing examples avoid the zero-leading-minor indefinite case."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0175",
+      "selected": true,
+      "primary_path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+      "affected_paths": [
+        "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "624eb292a797ac7094c4b84357606180465b09f3b7381f5292dba44ac4484634",
+      "rationale": "Current changed source still validates required file existence but never requires signed digest coverage for evidence content. It checks only entries supplied in file_digests (default empty), so omitted claims/scope/regulatory files can be changed without a content-hash comparison. Later logic consumes those files and may return valid=true. This requires a signed pack whose envelope omitted content digests; normal complete packs retain their digest protection. Signature/checksum metadata self-reference is not the proposed coverage requirement.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+          "start_line": 810,
+          "end_line": 845,
+          "observation": "Required files are tested for existence and JSON documents loaded.",
+          "baseline_excerpt_sha256": "031c3fb3d7f2903f302870100203036083a1a92db476bec47707c3875fc760e2",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+          "start_line": 856,
+          "end_line": 944,
+          "observation": "Signature and checksum-file hash verified, but content loop only visits supplied file_digests.",
+          "baseline_excerpt_sha256": "0b3136c2b4f7334fde8e35e8c5ad1d0e4a18404dff04dc0b53b582443325d330",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+          "start_line": 996,
+          "end_line": 1048,
+          "observation": "Unsigned-by-omission scope, mappings and claims influence verdict.",
+          "baseline_excerpt_sha256": "83ecf0c9670067e81e36367637b6f5f562961b428b86ab7152492ed59f7507bf",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+          "start_line": 1075,
+          "end_line": 1085,
+          "observation": "Success reports all checks valid.",
+          "baseline_excerpt_sha256": "de206449e259ebb7fead4476aa8a334bb117c40dc25ee5df6f323b8df43a3cd0",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/verifier/cli.py",
+          "start_line": 96,
+          "end_line": 103,
+          "observation": "Pack valid controls PASS and exit 0."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0176",
+      "selected": false,
+      "primary_path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+      "affected_paths": [
+        "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "624eb292a797ac7094c4b84357606180465b09f3b7381f5292dba44ac4484634",
+      "rationale": "The current changed verifier still wraps both trace-count and trace-hash comparisons in if trace_lines. A valid signed nonempty ledger accompanied by an empty or whitespace-only trace skips both checks and can reach success when other conditions pass. A matching signed digest proves the empty file is unmodified, not that it matches the ledger.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+          "start_line": 946,
+          "end_line": 994,
+          "observation": "Ledger verification precedes trace read; all trace consistency checks are conditional on nonempty lines.",
+          "baseline_excerpt_sha256": "bd7fb2826b9f7e519928d33488f8377980fb612948c3be43c13c1b7fb46e3e85",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+          "start_line": 1075,
+          "end_line": 1085,
+          "observation": "Final valid=true has no independent empty-trace rejection.",
+          "baseline_excerpt_sha256": "de206449e259ebb7fead4476aa8a334bb117c40dc25ee5df6f323b8df43a3cd0",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/verifier/cli.py",
+          "start_line": 96,
+          "end_line": 103,
+          "observation": "valid=true is treated as success."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0177",
+      "selected": false,
+      "primary_path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+      "affected_paths": [
+        "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py"
+      ],
+      "decision": "ALREADY_FIXED",
+      "remediation_state": "FIXED",
+      "existing_root_override": false,
+      "current_source_sha256": null,
+      "rationale": null,
+      "source_checks": []
+    },
+    {
+      "candidate_id": "SW100-C0208",
+      "selected": true,
+      "primary_path": "01_KISH_ENGINE/babylon60/core/moskv_kernel.py",
+      "affected_paths": [
+        "01_KISH_ENGINE/babylon60/core/moskv_kernel.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "2f420cb48c43b1aac7b921d4cd690ba4b27044129aeee8e8f29796db9a07cf27",
+      "rationale": "Two distinct claims ingested before the first insert snapshot the same _last_hash. The first autocommitted row consumes the UNIQUE prev_hash value; the second raises IntegrityError. The collision handler looks up only the second claim_id, accepts a missing row, and prints legitimate replay while that accepted tracking ID was never stored. Single-writer processing does not repair predecessors captured during ingestion.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/moskv_kernel.py",
+          "start_line": 59,
+          "end_line": 67,
+          "observation": "Both prev_hash and current_hash are UNIQUE and claim_id is the primary key.",
+          "baseline_excerpt_sha256": "26a385b61ca5d87f417670fb1d260486c396f1326b8eeccbd967152e16ffcfda",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/moskv_kernel.py",
+          "start_line": 82,
+          "end_line": 98,
+          "observation": "Ingestion snapshots _last_hash into the queued claim before persistence.",
+          "baseline_excerpt_sha256": "e2caef46805c4b111d200141f77a6b80e8db801e90c1163712ab2907c8101284",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/moskv_kernel.py",
+          "start_line": 106,
+          "end_line": 118,
+          "observation": "An absent collision lookup row is accepted without an error.",
+          "baseline_excerpt_sha256": "7d49bc0154862837f686f1162c6f3f49db28e0a6961a249e32139f9e13ffd2a3",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/moskv_kernel.py",
+          "start_line": 121,
+          "end_line": 169,
+          "observation": "Every IntegrityError is handled as replay and processing marks the queue task done.",
+          "baseline_excerpt_sha256": "0f03986464c32bfaa98982cfbe3c1a1e7f006a12863e8ef580b37de6e9f92f04",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/database/core.py",
+          "start_line": 47,
+          "end_line": 60,
+          "observation": "The current database connector uses isolation_level=None; successful insert is autocommitted."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0221",
+      "selected": true,
+      "primary_path": "01_KISH_ENGINE/babylon60/core/popperian_filter.py",
+      "affected_paths": [
+        "01_KISH_ENGINE/babylon60/core/popperian_filter.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "371150377d929d086bd465398a67ee6811f1e310a834d989aec3ad37183a8b3b",
+      "rationale": "evaluate_payload truncates its local text and can still return passed=True with truncated=True. BrowserAgent checks only passed, then caches, attests and returns the original raw_payload. An acceptable anchored prefix followed by a rejected hype suffix beyond the cutoff is thus never examined yet is labeled VERIFIED_AND_ATTESTED. Scope is the filter-consumer mismatch, not proof of security containment bypass.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/popperian_filter.py",
+          "start_line": 103,
+          "end_line": 118,
+          "observation": "Oversize input is locally sliced rather than rejected or returned as filtered content.",
+          "baseline_excerpt_sha256": "faf32a2b601f20f4a9ecba1f94c92dc3ac097cb28c7af7a56fa7a8029e5672d6",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/popperian_filter.py",
+          "start_line": 137,
+          "end_line": 164,
+          "observation": "Checks run on the truncated normalized text; successful result can retain truncated=True.",
+          "baseline_excerpt_sha256": "b5c55772707bdf93e13fb6f0590a6ec7aeb9f7ed0f429b9d53c2530fbf8acec2",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/browser_agent.py",
+          "start_line": 108,
+          "end_line": 134,
+          "observation": "Consumer does not check truncated and uses raw_payload for cache, attestation and returned content."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0271",
+      "selected": true,
+      "primary_path": "01_KISH_ENGINE/babylon60/attestation/conformal_tree.py",
+      "affected_paths": [
+        "01_KISH_ENGINE/babylon60/attestation/conformal_tree.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "251c9da8553af921d2597ce899e5f5baabfa61412c90818a629db90cbb9694fe",
+      "rationale": "verify_manifest authenticates the root against the public key embedded in that same manifest. It has no expected-key or trusted-identity parameter. With no db_path, tree_valid remains None and does not prevent overall_valid; the hardware UUID comparison is informational and excluded from the verdict. A self-signed root with the required status therefore satisfies this verifier without proving the advertised L0/sovereign identity. The CLI reports success from overall_valid. No protected runtime authorization bypass or native attestation execution is established.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/attestation/conformal_tree.py",
+          "start_line": 142,
+          "end_line": 159,
+          "observation": "Verifier signature accepts any supplied Ed25519 key; manifest API has no trust-anchor input.",
+          "baseline_excerpt_sha256": "6b0b5f062c60e40a18ea6e5a14b8b612bfcfcb28e8d1e316958482ab408587e2",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/attestation/conformal_tree.py",
+          "start_line": 165,
+          "end_line": 207,
+          "observation": "Key/signature come from JSON, database is optional, and overall_valid omits pinned identity and host match.",
+          "baseline_excerpt_sha256": "97066ba7f78b6fca3b97ac2d8d185f7418837e10259c6987669bfff4fdca5736",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/cli/bounty_cli.py",
+          "start_line": 132,
+          "end_line": 167,
+          "observation": "CLI prints verified and returns zero solely from report overall_valid."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0272",
+      "selected": false,
+      "primary_path": "01_KISH_ENGINE/babylon60/attestation/conformal_tree.py",
+      "affected_paths": [
+        "01_KISH_ENGINE/babylon60/attestation/conformal_tree.py"
+      ],
+      "decision": "REPRODUCED",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "251c9da8553af921d2597ce899e5f5baabfa61412c90818a629db90cbb9694fe",
+      "rationale": "The exported claim leaf helper concatenates five unrestricted strings with colons. AST-selected evaluation of its actual preimage expression gives the identical string for (claim_id='a:b', advisory_id='c') and (claim_id='a', advisory_id='b:c') with the other fields fixed. Identical hash input entails identical BLAKE3 output without any cryptographic collision. Verifier recomputation uses this helper, and the inspected ledger schema has no delimiter restriction. Reachability through every upstream claim producer was not established; confirmation is limited to this public encoding and verifier boundary.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/attestation/conformal_tree.py",
+          "start_line": 39,
+          "end_line": 48,
+          "observation": "Leaf fields are joined with unescaped colons.",
+          "baseline_excerpt_sha256": "e03454e66f8559559aac51aaeaaf810861b21e4ed6a0f272b12d04625ecfbba1",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/attestation/conformal_tree.py",
+          "start_line": 187,
+          "end_line": 203,
+          "observation": "Manifest recomputation passes persisted claim strings into that helper.",
+          "baseline_excerpt_sha256": "ed258c508daa64210aadcf66aed0ca964dc22c9b4112c680a6e474dab0cb2140",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/bounty_cold_ledger.py",
+          "start_line": 41,
+          "end_line": 54,
+          "observation": "Claim/advisory strings are TEXT without colon restrictions."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/attestation/__init__.py",
+          "start_line": 1,
+          "end_line": 19,
+          "observation": "Helper is exported by the attestation package."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0276",
+      "selected": true,
+      "primary_path": "01_KISH_ENGINE/babylon60/attestation/merkle_anchor.py",
+      "affected_paths": [
+        "01_KISH_ENGINE/babylon60/attestation/merkle_anchor.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "cf90589a3faf04117731c693bb62a0f0486ea9ca9091af17ce915964dc170ce9",
+      "rationale": "generate_hardware_pcr_quote computes two ordinary SHA-256 digests and emits tpm_quote_signature plus TPM_2_0_HARDWARE_SEALED. Its default seed is the hardware UUID returned in the same object. Reading a UUID, or using an environment seed, does not invoke TPM/Secure Enclave signing. The misleading object is attached to certificate/decision evidence and AL3 session data. No hardware identity or real secret was read during this review.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/attestation/merkle_anchor.py",
+          "start_line": 105,
+          "end_line": 128,
+          "observation": "Software hash construction and hardware-sealed output labels.",
+          "baseline_excerpt_sha256": "563968bc03b696d1d9055cf8f0464b27bb2301136916fb4534e53ca1a0099dc4",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py",
+          "start_line": 305,
+          "end_line": 320,
+          "observation": "Certificate contains the returned hardware_anchor object."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py",
+          "start_line": 473,
+          "end_line": 497,
+          "observation": "Decision evidence validates ledger integrity then attaches software quote."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+          "start_line": 179,
+          "end_line": 188,
+          "observation": "AL3 sessions attach quote before writing bundle manifest."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0277",
+      "selected": false,
+      "primary_path": "01_KISH_ENGINE/babylon60/attestation/merkle_anchor.py",
+      "affected_paths": [
+        "01_KISH_ENGINE/babylon60/attestation/merkle_anchor.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "cf90589a3faf04117731c693bb62a0f0486ea9ca9091af17ce915964dc170ce9",
+      "rationale": "The normal generate_notary_checkpoint branch constructs a hash-derived ID and returns CHECKPOINT_SEALED / 3f+1_QUORUM_VERIFIED without contacting validators, checking signatures, collecting votes, or storing a checkpoint. The explicit simulated-failure branch does not establish success in the default branch. Confirmed as a misleading public API result; no internal caller was found by targeted search of 01_KISH_ENGINE/babylon60, so severity is scoped below demonstrated live consensus compromise.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/attestation/merkle_anchor.py",
+          "start_line": 130,
+          "end_line": 161,
+          "observation": "Entire checkpoint method only hashes, reads time and returns dictionaries.",
+          "baseline_excerpt_sha256": "5a6e7071f3f60df9d7d4a8d9051fef35ceea305bb8e9db50cd872eaa95519f33",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0294",
+      "selected": true,
+      "primary_path": "01_KISH_ENGINE/babylon60/primitives/sandbox.py",
+      "affected_paths": [
+        "01_KISH_ENGINE/babylon60/primitives/sandbox.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "22f22c9765c6605bd02ba1a7dce990d31764867fbe469ad2244e54b5c52a0fa4",
+      "rationale": "The 13-node expression x = [0] * 10**10 passes the exact validator in the bounded fixture. safe_exec runs the allowed expression in the host process and captures output in an unbounded StringIO, so AST size/depth and an alarm do not cap allocation/output growth. The dangerous allocation was deliberately never executed; no OOM/crash is claimed as reproduced.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/primitives/sandbox.py",
+          "start_line": 68,
+          "end_line": 100,
+          "observation": "Whitelist admits constants, lists, multiplication and exponentiation.",
+          "baseline_excerpt_sha256": "9b46eafa8ea111ec17b87394b8bb77885c0b9346fb9756e582a798b85cc557f1",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/primitives/sandbox.py",
+          "start_line": 284,
+          "end_line": 312,
+          "observation": "Validation limits AST shape and blocked names/attributes, not allocated size.",
+          "baseline_excerpt_sha256": "f88036349202b8bed6150fda6896b40a85ce9c032631c4eb3788ded7b13a55c8",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/primitives/sandbox.py",
+          "start_line": 389,
+          "end_line": 408,
+          "observation": "In-process exec, signal timeout and unbounded StringIO capture.",
+          "baseline_excerpt_sha256": "a3a11fffc30e3b1c20ec1074a29effb5408f0b3cad49c64adcac69a17de42b9f",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0295",
+      "selected": false,
+      "primary_path": "01_KISH_ENGINE/babylon60/primitives/sandbox.py",
+      "affected_paths": [
+        "01_KISH_ENGINE/babylon60/primitives/sandbox.py"
+      ],
+      "decision": "REPRODUCED",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "22f22c9765c6605bd02ba1a7dce990d31764867fbe469ad2244e54b5c52a0fa4",
+      "rationale": "Exact ASTSandbox.safe_exec raised ZeroDivisionError for 1 / 0 and NameError for a missing synthetic identifier instead of returning failed ExecResult. Both expressions pass the whitelist; these exceptions are outside its catch tuple. Fixture executed only those tiny expressions.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/primitives/sandbox.py",
+          "start_line": 325,
+          "end_line": 338,
+          "observation": "safe_exec promises ExecResult and handles validation rejection.",
+          "baseline_excerpt_sha256": "e6f918ea5b09b3b505cbcafed6041ae57a7f17aa827a83f8ca7029489125aa13",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/primitives/sandbox.py",
+          "start_line": 408,
+          "end_line": 429,
+          "observation": "Runtime catches TimeoutError and four selected error classes; stdout is restored in finally.",
+          "baseline_excerpt_sha256": "dc99106183feb6c182470811553c7c9f735bc9f813bb8f2dc4f15fda44bd30a3",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0298",
+      "selected": true,
+      "primary_path": "01_KISH_ENGINE/babylon60/cortex/cortex_purge_anergy.py",
+      "affected_paths": [
+        "01_KISH_ENGINE/babylon60/cortex/cortex_purge_anergy.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "7bcfb0040094964013cd1e539cb0a8051e71fd0f7fbfbe18e5a2de17c7fa6d1c",
+      "rationale": "PROJECT_ROOT is the cortex package directory, not the repository root. The __main__ path calls categorize_and_move, which moves each unprotected .py to a nested archive. __init__.py and the present gemini_labs_nexus.py are unprotected; moving such implementation modules breaks their original import paths. Correction to candidate evidence: cortex_chaos_monad.py IS protected at line 68 and is not an affected example. No purge ran.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/cortex/cortex_purge_anergy.py",
+          "start_line": 23,
+          "end_line": 28,
+          "observation": "Root and archive are derived from the package's own __file__ directory.",
+          "baseline_excerpt_sha256": "843e09a8382408c81cd77db9e25500d308aa65fc186bc2ffab49c030cac97cc1",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/cortex/cortex_purge_anergy.py",
+          "start_line": 30,
+          "end_line": 69,
+          "observation": "Protected set includes cortex_chaos_monad.py but not __init__.py or gemini_labs_nexus.py.",
+          "baseline_excerpt_sha256": "26d25d56da88bf121b47688088c89f4bf605b05aa02701ff4f01a981efb75b69",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/cortex/cortex_purge_anergy.py",
+          "start_line": 77,
+          "end_line": 114,
+          "observation": "All other .py files are moved by main.",
+          "baseline_excerpt_sha256": "b7163f2ad04ed699702d86489df82a42ef770d5b8998124a654e0725daec79f7",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/cortex/cortex_purge_anergy.py",
+          "start_line": 178,
+          "end_line": 179,
+          "observation": "Direct execution calls main, not safe_purge_anergy.",
+          "baseline_excerpt_sha256": "9a6a7ffeed1af83ced837054949e0b2fdf0e568fe3d4c2e20c229ec0a9707cc3",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0323",
+      "selected": false,
+      "primary_path": "scripts/c5_sharur/sharur_100_conversation_auditor.py",
+      "affected_paths": [
+        "scripts/c5_sharur/sharur_100_conversation_reporters.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "42ce019054e4d77b0165c005bfc73676af664f14bba823c5c859ee7dea85f1c4",
+      "rationale": "Several cohort branches emit PASS and compliance claims without consulting corpus evidence; the empty entropy branch substitutes 4.5 and PASS. compile_swarm_sitrep counts these passes and derives its score from that count, then renders them as forensic results. This is a report-evidence defect; neither actual transcript quality nor physical energy/isolation was evaluated.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_sharur/sharur_100_conversation_auditor.py",
+          "start_line": 444,
+          "end_line": 484,
+          "observation": "Agents 21,22,24-27 return unconditional PASS with fixed claims."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_conversation_auditor.py",
+          "start_line": 585,
+          "end_line": 608,
+          "observation": "No samples becomes nominal 4.5/PASS; further checks also hardcode success."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_conversation_reporters.py",
+          "start_line": 360,
+          "end_line": 398,
+          "observation": "PASS count feeds score and report rows.",
+          "baseline_excerpt_sha256": "2f9a61284e7b4d7dded925d23e8013bb50c7b141802e23a183287528f256283a",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_conversation_auditor.py",
+          "start_line": 764,
+          "end_line": 775,
+          "observation": "Report is compiled and emitted."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0328",
+      "selected": true,
+      "primary_path": "scripts/c5_sharur/sharur_100_conversation_reporters.py",
+      "affected_paths": [
+        "scripts/c5_sharur/sharur_100_conversation_reporters.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "f9b264129a7c50751534dfbc378420de3a94c83068a4ba957fad3f0ca9d99c13",
+      "rationale": "Reporter agents 64/65/67-70 and 83-86 emit static PASS/control claims; agent 99 unconditionally emits ATTESTED_C5_REAL with health_index 98.6. Neither branch checks the asserted controls or other agent results. The auditor schedules these functions and persists the aggregate; constant PASS entries inflate its score. Other agents may still report actual FAIL/WARN, so the defect is unsupported certification alongside them, not universal masking of all failures.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_sharur/sharur_100_conversation_reporters.py",
+          "start_line": 96,
+          "end_line": 138,
+          "observation": "Several topology/integrity verdicts are literal PASS constants.",
+          "baseline_excerpt_sha256": "e051991d2a6c1d692106eac58349a25b2e73e84da1d952b05369f015ba954f47",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_conversation_reporters.py",
+          "start_line": 243,
+          "end_line": 265,
+          "observation": "Security/privacy verdicts are constants without corpus checks.",
+          "baseline_excerpt_sha256": "83457b07151fad8bcf03318d7ff7fc652abe2e11a3b77a788aba8302db2dc01c",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_conversation_reporters.py",
+          "start_line": 341,
+          "end_line": 380,
+          "observation": "Certification is unconditional; score derives from PASS count.",
+          "baseline_excerpt_sha256": "1c6d55513766a90b37b0a295844b132dd0933c5235db95bad8967e6c8cf144b3",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_conversation_auditor.py",
+          "start_line": 749,
+          "end_line": 775,
+          "observation": "All reporters are scheduled and report emitted."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0334",
+      "selected": false,
+      "primary_path": "scripts/c5_sharur/sharur_100_conversations_sitrep.json",
+      "affected_paths": [
+        "scripts/c5_sharur/sharur_100_conversation_reporters.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "7c20663b9d3e9aaa69560c546c3905e97371a1692931808318da08f47454d752",
+      "rationale": "The archived sitrep still asserts PASS/ATTESTED_C5_REAL and health_index=98.6. Its traced generator assigns those literals directly for agent 99; sync integrity and workspace isolation likewise have constant success branches. emit_sitrep_reports serializes these results without independent verification. Confirmed historical provenance overclaim; this review did not access source conversations or certify current workspace state.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_sharur/sharur_100_conversations_sitrep.json",
+          "start_line": 1399,
+          "end_line": 1411,
+          "observation": "Historical record contains formal certification and fixed health score."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_conversation_reporters.py",
+          "start_line": 96,
+          "end_line": 100,
+          "observation": "Sync-integrity success is assigned without checking.",
+          "baseline_excerpt_sha256": "9747f0c8b648f92f07304fda4c7e2630133aae966924c058deae633c7863ad57",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_conversation_reporters.py",
+          "start_line": 148,
+          "end_line": 152,
+          "observation": "Isolation success is a literal.",
+          "baseline_excerpt_sha256": "bed72c2454d424a1cdba4ba27d49c008979820f78a8464aa14025f7621ada125",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_conversation_reporters.py",
+          "start_line": 341,
+          "end_line": 354,
+          "observation": "Certification/health literals are returned as AgentResult.",
+          "baseline_excerpt_sha256": "0e27e5275f3b699ea3a8d95e33f837a9a0ed944d9a17252e37c939a5191285ff",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_conversation_reporters.py",
+          "start_line": 418,
+          "end_line": 422,
+          "observation": "Result dataclass is serialized as archived JSON.",
+          "baseline_excerpt_sha256": "a8f500dc54483d4dc3d084006471939fee47ddebac50b3eac7047269b9aa9886",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0337",
+      "selected": true,
+      "primary_path": "01_KISH_ENGINE/babylon60/crypto/identity.py",
+      "affected_paths": [
+        "01_KISH_ENGINE/babylon60/crypto/identity.py",
+        "scripts/c5_l1_ledger/seal_bounty_aeon.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "4c98615751f6c55215f4bc60122346085c00bcb5cb540af18eba49883211d1b8",
+      "rationale": "forge_identity generates fresh seed material and uses touch(exist_ok=True) followed by open(...,w) on the existing master seed path. It neither rejects an existing identity nor writes via an atomic replacement with durability checks. The seal_bounty_aeon consumer calls it after any load exception, including decryption failures, so a wrong passphrase can lead to replacing the previous private identity instead of preserving it. An interrupted write can leave unreadable content. Loss of future signing capability with the original key is supported; historical signatures remain verifiable if their public key was separately retained. No actual seed or operator identity was accessed.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/crypto/identity.py",
+          "start_line": 75,
+          "end_line": 109,
+          "observation": "New random seed unconditionally replaces master_seed.enc through a truncating write.",
+          "baseline_excerpt_sha256": "8ae22aa0cfe0aa2eb766e17b3f4714d33e999e4f5f2115087b892ec6c2783235",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/crypto/identity.py",
+          "start_line": 111,
+          "end_line": 131,
+          "observation": "Load raises for missing/corrupt content or decryption failure.",
+          "baseline_excerpt_sha256": "ebf5e2029b510e7467cd568466e315657d3d6ed4cd43bafbf558d71f2d8e7661",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "scripts/c5_l1_ledger/seal_bounty_aeon.py",
+          "start_line": 126,
+          "end_line": 134,
+          "observation": "Broad exception from load triggers forge, then uses the resulting private key.",
+          "baseline_excerpt_sha256": "7d0c04a70ca72ffd10a3a15e5d0a6c65d482d9ef7250296fa5d1804aeedbfaab",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0343",
+      "selected": true,
+      "primary_path": "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py",
+      "affected_paths": [
+        "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "32cef58031bab84d9fb78b0cbb3ab132008d6f7431f4fe4f6c29da34a8b8876a",
+      "rationale": "The auditor returns PASS plus certification strings for atomic ordering, seqlock behavior, biometrics and formal properties without inspecting or executing those checks. Linguistic entropy is assigned as 4.967 although an entropy function exists. run_100_agents_audit aggregates and persists these results. Some file-existence/listing checks are real, but do not substantiate the unrelated security/formal/physical conclusions. This confirms an audit-evidence fabrication mechanism in code; the script was not run.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py",
+          "start_line": 64,
+          "end_line": 114,
+          "observation": "Ring-0 claims are mostly unconditional strings under a default PASS.",
+          "baseline_excerpt_sha256": "089013a8ddb2d01cdeba0cd37263fa6eccbcb588ba07efb1400d65ba3fd70bdb",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py",
+          "start_line": 120,
+          "end_line": 154,
+          "observation": "Formal cohort assigns certification strings without compiling/checking proofs.",
+          "baseline_excerpt_sha256": "987ee92780c8a2bfb26a5d467dd2fa43184267bfb068e81ccfadc45291ac5606",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py",
+          "start_line": 160,
+          "end_line": 174,
+          "observation": "Entropy measurement is a constant, not the function at 51-58.",
+          "baseline_excerpt_sha256": "adaa161aea3835b8f18107a68ce4343b54eaac7501ec9e224ee827751807bede",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py",
+          "start_line": 324,
+          "end_line": 362,
+          "observation": "Results are counted and emitted as a structured SITREP.",
+          "baseline_excerpt_sha256": "550d8ae29801cff10c4dc0f0f908614fb261d17281a475f754d7eb2d8fda7da9",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py",
+          "start_line": 367,
+          "end_line": 381,
+          "observation": "CLI persists and presents the aggregate as an audit report.",
+          "baseline_excerpt_sha256": "4b821ca4bdb8c7910e25251a3d221281a5bb1dd9ff9258a8fd204b61eb576bd4",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0345",
+      "selected": true,
+      "primary_path": "01_KISH_ENGINE/babylon60/crypto/keys.py",
+      "affected_paths": [
+        "01_KISH_ENGINE/babylon60/crypto/keys.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "cbf5b3ded4cf854df1d11d37a4d61d0f0122604881c7a02fb0f00497822ee305",
+      "rationale": "Manager loads a full metadata snapshot once and rewrites it using mode w without lock, reload or atomic replacement. A stale manager can overwrite another manager revocation or key addition; later is_revoked reads restored stale metadata. Revocation separately deletes private key material, limiting direct key resurrection, but does not preserve metadata or concurrent additions.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/crypto/keys.py",
+          "start_line": 70,
+          "end_line": 87,
+          "observation": "Snapshot plus full truncate-and-rewrite.",
+          "baseline_excerpt_sha256": "5306e5d960fe301370d177b1c7b753b3a8797d366db12017eebb9b4a7801dfcf",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/crypto/keys.py",
+          "start_line": 119,
+          "end_line": 125,
+          "observation": "Generation saves complete cached metadata.",
+          "baseline_excerpt_sha256": "d2f504cad95e4e9e1d837b95adf1623210efb487830e572687c7c8f6b42a3bac",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/crypto/keys.py",
+          "start_line": 164,
+          "end_line": 185,
+          "observation": "Revocation saves metadata then attempts key deletion.",
+          "baseline_excerpt_sha256": "3ee0a331f9e93f1873ad939bee5f1ae402ae773d5b75c29d2b752e1ff79a071c",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/crypto/keys.py",
+          "start_line": 187,
+          "end_line": 206,
+          "observation": "Consumers use cached revocation/expiration/key records.",
+          "baseline_excerpt_sha256": "262c4c80cb406a0b4ee88ddbdae612e920846f25d39fbf1457c790cbe9d80c99",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0353",
+      "selected": false,
+      "primary_path": "01_KISH_ENGINE/babylon60/bft/bounty_claim_attester.py",
+      "affected_paths": [
+        "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "d15a2d2e01379343df172270a392506538ae8cbffba5eac77f18510098852ba0",
+      "rationale": "Receipt generation and verification both root only payload_hash plus a hardware-anchor hash. Replacing advisory_id, claim_id, domain, finding_summary, risk_score or timestamp leaves those two inputs and the root unchanged, hence verify_receipt returns the same result. compute_claim_hash includes those metadata fields but verification never compares its output. The pipeline directly generates and enqueues these receipts. This establishes incomplete receipt coherence checking, without claiming a downstream authorization bypass or that all raw_payload copies omit finding metadata.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/bounty_claim_attester.py",
+          "start_line": 28,
+          "end_line": 61,
+          "observation": "Frozen dataclass has metadata and a broader compute_claim_hash, but immutability does not prevent constructing a modified copy."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/bounty_claim_attester.py",
+          "start_line": 77,
+          "end_line": 118,
+          "observation": "Generation and verification use only two root inputs."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py",
+          "start_line": 125,
+          "end_line": 140,
+          "observation": "Pipeline creates a receipt and enqueues it.",
+          "baseline_excerpt_sha256": "4550855a8e5d0844dd38efb3455308068e87cf232e0b34983e794e3a5c119216",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0354",
+      "selected": true,
+      "primary_path": "scripts/c5_sharur/sharur_100_swarm_execution.py",
+      "affected_paths": [
+        "scripts/c5_sharur/sharur_100_swarm_execution.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "84b155a4f3ff7c106ba7e9eb9e3068bc123d5976757e353da78223b966e324d1",
+      "rationale": "Each supposed audit agent only selects a descriptive target and sleeps, then returns PASS, deterministic synthetic exergy and silicon-verified evidence. Aggregate counts and critical_fixes_attested are literals; the JSON report has no simulation flag. This contradicts the script purpose of auditing/certifying fixes and produces unsupported machine-readable evidence. No report generation or target auditing was executed in this review.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_sharur/sharur_100_swarm_execution.py",
+          "start_line": 1,
+          "end_line": 5,
+          "observation": "Header presents the harness as auditing/certifying resolution of findings.",
+          "baseline_excerpt_sha256": "57fcf06686c51ade3523352ba3cfc5a377919faf93bfd5ccd6568815b32c317f",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_swarm_execution.py",
+          "start_line": 149,
+          "end_line": 175,
+          "observation": "Worker sleeps and returns constant verification-shaped result.",
+          "baseline_excerpt_sha256": "bd64c4ab8cafc2c6e0f59ab4e8baa50ef2e5fb73978bf6818277d21ec28529f0",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_swarm_execution.py",
+          "start_line": 178,
+          "end_line": 202,
+          "observation": "Sitrep hardcodes passes/fix attestation and writes JSON.",
+          "baseline_excerpt_sha256": "5219f1f26e050cfbc6dd1a971f4edc64d64839bcf151b1228a8918ed1e579256",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0356",
+      "selected": false,
+      "primary_path": "scripts/c5_destiladora/codegen_rust_b60.py",
+      "affected_paths": [
+        "scripts/c5_destiladora/test_destiladora_e2e.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "8ee34a5eb6ff6926058da864ba632c9701689383f8deb67b2cd166ef3bfc13bf",
+      "rationale": "generate_rust_fastpath writes source then commits metadata claiming status COMPILED and fixed execution_time_ns=180000 without invoking a compiler or measurement. On newly inserted rows active_in_ring0 defaults to 1. The E2E caller compiles later and merely returns False on failure, after metadata was already committed. This confirms misleading persistent state, not actual activation in running Ring-0.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_destiladora/codegen_rust_b60.py",
+          "start_line": 28,
+          "end_line": 44,
+          "observation": "Generator selects proved/compiled rows with Lean proof status."
+        },
+        {
+          "path": "scripts/c5_destiladora/codegen_rust_b60.py",
+          "start_line": 182,
+          "end_line": 208,
+          "observation": "Source write followed by committed fixed timing and COMPILED update."
+        },
+        {
+          "path": "scripts/c5_destiladora/destiladora_schema.sql",
+          "start_line": 49,
+          "end_line": 58,
+          "observation": "Latency is documented measured and active_in_ring0 defaults to 1."
+        },
+        {
+          "path": "scripts/c5_destiladora/test_destiladora_e2e.py",
+          "start_line": 113,
+          "end_line": 142,
+          "observation": "Compilation/test run later and return failure without reverting metadata.",
+          "baseline_excerpt_sha256": "3a3a10dc34aef8939ab4eb13b49d9bb7596bce83e169527477e7b19088daabf1",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0358",
+      "selected": true,
+      "primary_path": "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py",
+      "affected_paths": [
+        "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "24df531cfbb817964c4da27b4220351c4080eb4ab9b54c789b11a16d7b07909b",
+      "rationale": "All three risk loops append receipts before enqueue and ignore its boolean result. Ledger returns False on full queue or shutdown, while report and CLI still include the receipt as a normal sealed claim. Worker failure exceptions now propagate but do not cover false returns. This is unreported persistence rejection; even true enqueue alone is not a durability acknowledgement.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py",
+          "start_line": 125,
+          "end_line": 166,
+          "observation": "Three domains ignore enqueue acceptance.",
+          "baseline_excerpt_sha256": "b8cfedd087ba98c38580096b8e86ea2f18df34d3d991a5318babac97eabb386c",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/bounty_cold_ledger.py",
+          "start_line": 103,
+          "end_line": 121,
+          "observation": "Failed worker raises; closed/full queue returns False."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py",
+          "start_line": 184,
+          "end_line": 195,
+          "observation": "Report includes all generated receipts.",
+          "baseline_excerpt_sha256": "1ec71df1b3fb5fef22a33924608b377475d4c990ebcf653ce0cbc910088dac68",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/cli/bounty_cli.py",
+          "start_line": 270,
+          "end_line": 279,
+          "observation": "CLI displays/exports receipts without persistence status."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0360",
+      "selected": true,
+      "primary_path": "scripts/babylon60/gen_oncology_primitives.py",
+      "affected_paths": [
+        "scripts/babylon60/gen_oncology_primitives.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "df8f6fdde757fb4321a270e0b6b2e9b91d8dd67884e13b238e3c6387b2dea5e3",
+      "rationale": "The generated axiom applies to every List OncologyPrimitive, while the structure is constructible using empty strings and PrimitiveLayer.meta. Applying it to List.replicate 301 p yields False from a provable length inequality. This confirms a logical inconsistency in the emitted axiom, independent of runtime containment; no Lean compiler or proof was executed.",
+      "source_checks": [
+        {
+          "path": "scripts/babylon60/gen_oncology_primitives.py",
+          "start_line": 85,
+          "end_line": 103,
+          "observation": "The namespace contains an inhabited PrimitiveLayer and a freely constructible OncologyPrimitive structure.",
+          "baseline_excerpt_sha256": "45a9083dbd8d3655642929fa7550ee90190045915559c7170bb131c64d6ec7b1",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "scripts/babylon60/gen_oncology_primitives.py",
+          "start_line": 142,
+          "end_line": 152,
+          "observation": "The generator unconditionally emits the universal list-length axiom and writes it.",
+          "baseline_excerpt_sha256": "22635f6435bc7b4eb26032bc04bf17be977b424c78cc26648baacb2d0ea2e39e",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "scripts/babylon60/gen_oncology_primitives.py",
+          "start_line": 155,
+          "end_line": 167,
+          "observation": "The CLI always requests Lean export after parsing.",
+          "baseline_excerpt_sha256": "c0416d966b64680ec21f525318fa32c70fc55bb8cb90b8a182bf227328d20053",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0361",
+      "selected": false,
+      "primary_path": "scripts/babylon60/gen_oncology_primitives.py",
+      "affected_paths": [
+        "scripts/babylon60/gen_oncology_primitives.py"
+      ],
+      "decision": "REJECTED",
+      "remediation_state": "NOT_APPLICABLE",
+      "existing_root_override": false,
+      "current_source_sha256": "df8f6fdde757fb4321a270e0b6b2e9b91d8dd67884e13b238e3c6387b2dea5e3",
+      "rationale": "Rejected: absence of an explicit end at EOF is permitted by Lean. The official Namespaces and Sections reference states that namespace scope ends at a matching end or EOF and that the end command is optional at file end. The source has this omission but it is not the claimed compilation defect. This does not validate other generated declarations.",
+      "source_checks": [
+        {
+          "path": "scripts/babylon60/gen_oncology_primitives.py",
+          "start_line": 79,
+          "end_line": 85,
+          "observation": "The generated module opens Babylon60.Oncology.",
+          "baseline_excerpt_sha256": "5c1f6b66dc167c9b07fb30033492c13f9a6bd715cd7cfd434ed57286bd918a6f",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "scripts/babylon60/gen_oncology_primitives.py",
+          "start_line": 142,
+          "end_line": 152,
+          "observation": "The writer ends after declarations without appending end; this is valid EOF scope termination.",
+          "baseline_excerpt_sha256": "22635f6435bc7b4eb26032bc04bf17be977b424c78cc26648baacb2d0ea2e39e",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0375",
+      "selected": false,
+      "primary_path": "01_KISH_ENGINE/babylon60/bft/bounty_ring_dispatcher.py",
+      "affected_paths": [
+        "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "0bb4feab793ed3ca3281e6e57730e920bf66d7c1ad60317f9af31c1543a07ece",
+      "rationale": "Every domain queue is deque(maxlen=capacity), and routing appends without a full-queue check while total_dispatched increases. Python bounded deques evict the oldest item on append. The pipeline dispatches the complete frame batch before draining domains, so more than capacity accepted frames for one domain silently remove earlier work.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/bounty_ring_dispatcher.py",
+          "start_line": 29,
+          "end_line": 58,
+          "observation": "Telemetry lacks overflow count; all queues have maxlen."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/bounty_ring_dispatcher.py",
+          "start_line": 70,
+          "end_line": 110,
+          "observation": "Validation and FFI checks precede unchecked queue append and success count."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py",
+          "start_line": 102,
+          "end_line": 123,
+          "observation": "Whole batch is dispatched before any domain drainage.",
+          "baseline_excerpt_sha256": "d3ed46f55aaf7532677f6777e7bd1773324d50b31e1f390355d7b8c0012c18a8",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0376",
+      "selected": false,
+      "primary_path": "scripts/c5_destiladora/invariant_extractor_z3.py",
+      "affected_paths": [
+        "scripts/c5_destiladora/proof_emitter_lean4.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "09c6fbf9668323bca1c56bdfa441277ff641a57bc3fcc59189477a416a0f5959",
+      "rationale": "The extractor checks satisfiability of its asserted first-trace count and marks the cluster EXTRACTED without testing the remaining traces. The ingestor does include filenames in the digest, but uses delimiter-free concatenation: [\"ab\", \"c\"] and [\"abc\"] produce the same preimage with the same contract and gate command while containing different counts. Thus this guard does not make the trigger impossible. Downstream proof/codegen independently select LIMIT 1, so they do not repair the missing cluster validation. This supports false cluster-invariant promotion, not an authorization bypass.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_destiladora/invariant_extractor_z3.py",
+          "start_line": 52,
+          "end_line": 86,
+          "observation": "Only traces[0] supplies FILES_COUNT, and SAT checks the asserted assumptions."
+        },
+        {
+          "path": "scripts/c5_destiladora/invariant_extractor_z3.py",
+          "start_line": 90,
+          "end_line": 117,
+          "observation": "SAT results persist the cluster as EXTRACTED."
+        },
+        {
+          "path": "scripts/c5_destiladora/goal_trace_ingestor.py",
+          "start_line": 60,
+          "end_line": 62,
+          "observation": "Input digest hashes concatenated filenames plus contract, without boundaries or a count."
+        },
+        {
+          "path": "scripts/c5_destiladora/goal_trace_ingestor.py",
+          "start_line": 101,
+          "end_line": 110,
+          "observation": "Same digest and gate command produce the same cluster ID."
+        },
+        {
+          "path": "scripts/c5_destiladora/proof_emitter_lean4.py",
+          "start_line": 164,
+          "end_line": 196,
+          "observation": "Proof generation consumes EXTRACTED and independently selects one successful trace.",
+          "baseline_excerpt_sha256": "e6ad6f6d585483e71d1ad6531edf120ed02e6b8dfd990f568831f5de377306d7",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "scripts/c5_destiladora/codegen_rust_b60.py",
+          "start_line": 37,
+          "end_line": 65,
+          "observation": "Codegen requires proof status but derives cardinality from another LIMIT 1 query."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0378",
+      "selected": true,
+      "primary_path": "scripts/c5_destiladora/proof_emitter_lean4.py",
+      "affected_paths": [
+        "scripts/c5_destiladora/proof_emitter_lean4.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "e0f85cdf754c6d4ea3e1367176dd7eb3caa296a82d07eb86f7f976b5b70cf85c",
+      "rationale": "The emitter selects z3_precondition but never uses it to instantiate the Lean proof. Every cluster receives the fixed state-machine template parameterized by signature prefix/file count, and successful Lean exit marks the cluster PROVED. Its claimed Rust-isomorphic gate checks poisoned, sequence and writer state, while downstream codegen consumes PROVED rows and emits only full signature/file-count checks. Thus neither the extracted precondition nor the implementation correspondence is established by the generated proof. No Lean compiler, generated binary or database mutation was executed.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_destiladora/proof_emitter_lean4.py",
+          "start_line": 54,
+          "end_line": 92,
+          "observation": "Fixed Lean model includes poison/sequence/writer conditions and a signature prefix.",
+          "baseline_excerpt_sha256": "5a42ced7a80d7182b63362fc2ef62fec5c82f9242808a0ee24126e66642de05a",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "scripts/c5_destiladora/proof_emitter_lean4.py",
+          "start_line": 164,
+          "end_line": 198,
+          "observation": "z3_precondition is queried but omitted from the template parameters.",
+          "baseline_excerpt_sha256": "d59bf7b2115b3708c69f306b4726ddb032f25cc066d17f908eeb9110d9a8d73f",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "scripts/c5_destiladora/proof_emitter_lean4.py",
+          "start_line": 203,
+          "end_line": 220,
+          "observation": "Lean compilation success updates proof and cluster status to PROVED.",
+          "baseline_excerpt_sha256": "e620c458833d9aa2aa47b074523a214623cf526f1b898b077d65c6399a60984f",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "scripts/c5_destiladora/codegen_rust_b60.py",
+          "start_line": 28,
+          "end_line": 65,
+          "observation": "Generator selects PROVED rows and builds signature/file-count specs."
+        },
+        {
+          "path": "scripts/c5_destiladora/codegen_rust_b60.py",
+          "start_line": 124,
+          "end_line": 134,
+          "observation": "Generated function checks only signature and file count."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0385",
+      "selected": true,
+      "primary_path": "scripts/c5_destiladora/test_destiladora_e2e.py",
+      "affected_paths": [
+        "scripts/c5_destiladora/test_destiladora_e2e.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "4faf9b3fddcdb37f6ba083bdf5fe813c46ae3bd230ad35617c9a5088492a70de",
+      "rationale": "The E2E script explicitly passes repository data/cortex_memory.db to ingestion and inserts three synthetic successful traces. It then updates every cortex_invariant_clusters row to ACCUMULATING/UNTESTED without WHERE and feeds that database to extraction/proof/code generation. The ingestor commits these records and increments existing sample counts. Running this demonstration can contaminate persistent evidence and reset existing cluster status; the script was not run and operator databases were not read.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_destiladora/test_destiladora_e2e.py",
+          "start_line": 29,
+          "end_line": 38,
+          "observation": "DB_PATH points to repository data/cortex_memory.db.",
+          "baseline_excerpt_sha256": "4db6b341ae8aedd435beb0e594e08576ca7585d47a46cee34acdcaf9b42edf12",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "scripts/c5_destiladora/test_destiladora_e2e.py",
+          "start_line": 61,
+          "end_line": 98,
+          "observation": "Synthetic traces enter that DB; unqualified UPDATE resets all clusters; downstream extractor consumes it.",
+          "baseline_excerpt_sha256": "e929bd67642401c8bf6905535ed5d45774632abb3083b7738440904fd4e60eea",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "scripts/c5_destiladora/goal_trace_ingestor.py",
+          "start_line": 20,
+          "end_line": 21,
+          "observation": "Default operational DB is the same path."
+        },
+        {
+          "path": "scripts/c5_destiladora/goal_trace_ingestor.py",
+          "start_line": 70,
+          "end_line": 114,
+          "observation": "Writes are committed and cluster sample_count is incremented."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0386",
+      "selected": false,
+      "primary_path": "scripts/c5_destiladora/test_destiladora_e2e.py",
+      "affected_paths": [
+        "scripts/c5_destiladora/test_destiladora_e2e.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "4faf9b3fddcdb37f6ba083bdf5fe813c46ae3bd230ad35617c9a5088492a70de",
+      "rationale": "The final report labels a literal 0.18 ms as measured and prints literal 27,444x acceleration. The only captured elapsed interval is cargo check, and the subsequent test subprocess is not timed. Earlier return-code checks determine whether the report is printed, not whether its latency claims were measured. Confirmed as misleading demonstration evidence; no benchmark was performed.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_destiladora/test_destiladora_e2e.py",
+          "start_line": 114,
+          "end_line": 126,
+          "observation": "Only cargo check duration is measured with perf_counter.",
+          "baseline_excerpt_sha256": "d9133baf72ade230868559a0dad533725ad52151f19e5c311a2df0abf20cc35a",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "scripts/c5_destiladora/test_destiladora_e2e.py",
+          "start_line": 129,
+          "end_line": 162,
+          "observation": "Fast-path test is untimed; final latency and speedup are literal strings.",
+          "baseline_excerpt_sha256": "9adb300d7f189579deb9390795998adbbaafb013e4010a5f6ce2d99f0098943f",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0405",
+      "selected": false,
+      "primary_path": "01_KISH_ENGINE/babylon60/bft/defi_bytecode_scraper.py",
+      "affected_paths": [
+        "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "a53545028651256202910f1e531ebb096c64b46a21f91859ec629dbb17d698d0",
+      "rationale": "The current TLOAD constant evaluates to 0x5e and analyze_bytecode counts that byte. EIP-1153 specifies TLOAD=0x5c and TSTORE=0x5d (official source https://eips.ethereum.org/EIPS/eip-1153, read 2026-10-28). Actual 0x5c reads are omitted and 0x5e is mislabeled. Counts feed transient-storage risk findings and the orchestrator receipt threshold.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/defi_bytecode_scraper.py",
+          "start_line": 41,
+          "end_line": 49,
+          "observation": "TLOAD is defined as 0x5C+2."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/defi_bytecode_scraper.py",
+          "start_line": 132,
+          "end_line": 149,
+          "observation": "Disassembler skips PUSH operands but preserves standalone opcodes."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/defi_bytecode_scraper.py",
+          "start_line": 222,
+          "end_line": 242,
+          "observation": "Incorrect count drives imbalance findings."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py",
+          "start_line": 115,
+          "end_line": 140,
+          "observation": "Analysis results are used for risk-threshold receipt generation.",
+          "baseline_excerpt_sha256": "b9536d132e47107158fc2891ad22ddc23bea85ad9edf1935cc131c37f0d1b1cf",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0406",
+      "selected": false,
+      "primary_path": "01_KISH_ENGINE/babylon60/bft/defi_bytecode_scraper.py",
+      "affected_paths": [
+        "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "a53545028651256202910f1e531ebb096c64b46a21f91859ec629dbb17d698d0",
+      "rationale": "from_address shifts away the low 146 bits before masking. Official Uniswap v4 Hooks.sol inspects low address bits and sets BEFORE_SWAP_FLAG=1<<7 (https://raw.githubusercontent.com/Uniswap/v4-core/main/src/libraries/Hooks.sol, read 2026-10-28). Address 0x0000000000000000000000000000000000000080 is decoded as zero here despite that flag. Resulting risk findings/receipt selection can be wrong.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/defi_bytecode_scraper.py",
+          "start_line": 25,
+          "end_line": 39,
+          "observation": "Flag values are consistent with 14 low-bit mask but comment incorrectly says high bits."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/defi_bytecode_scraper.py",
+          "start_line": 72,
+          "end_line": 101,
+          "observation": "Length validation followed by high-bit extraction."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/defi_bytecode_scraper.py",
+          "start_line": 284,
+          "end_line": 298,
+          "observation": "Hook permissions directly modify findings and risk."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py",
+          "start_line": 125,
+          "end_line": 140,
+          "observation": "Risk threshold governs receipt generation.",
+          "baseline_excerpt_sha256": "4550855a8e5d0844dd38efb3455308068e87cf232e0b34983e794e3a5c119216",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0422",
+      "selected": true,
+      "primary_path": "01_KISH_ENGINE/services/email_inbound/worker.js",
+      "affected_paths": [
+        "01_KISH_ENGINE/services/email_inbound/worker.js"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "0e7c5066a1765789be6bdf28d4e16e7e1cfda63d3c47e276723e5eb276ce8719",
+      "rationale": "After three failed webhook attempts, the email handler only console.errors and resolves normally. No setReject, thrown error, forwarding or durable enqueue follows exhaustion. The payload is not retained by this handler and failure is not propagated. Official Cloudflare handler documentation describes explicit forward/reject actions; this static finding does not assert a measured SMTP response or unseen deployment rule.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/services/email_inbound/worker.js",
+          "start_line": 44,
+          "end_line": 50,
+          "observation": "Worker email entry point requires secret.",
+          "baseline_excerpt_sha256": "49516e90b3e80d39c3da8abe2d5672146ba3156431b6bae9a103d5593b0b320c",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/services/email_inbound/worker.js",
+          "start_line": 98,
+          "end_line": 138,
+          "observation": "Retry loop and final log-only failure path.",
+          "baseline_excerpt_sha256": "5ca7b61c18dda2ea00096a529c40e71fa55c3871ed080797a10cb6f923feef12",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0426",
+      "selected": false,
+      "primary_path": "scripts/c5_git_utils/commit_polisher.py",
+      "affected_paths": [
+        "scripts/c5_git_utils/rewrite_commits.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "d50ad9a564ea458fb5f70ad99fc881bbdd847bf222596bc7761ab8074636e6d6",
+      "rationale": "The rewrite subprocess uses scripts/rewrite_commits.py under the repository root. That exact path is absent in the current filesystem, while scripts/c5_git_utils/rewrite_commits.py exists. If strict review and optimization pass, the call raises CalledProcessError and takes the retry/failure-recording branch. Source/path checks only; no Git rewriting or daemon execution occurred.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_git_utils/commit_polisher.py",
+          "start_line": 24,
+          "end_line": 26,
+          "observation": "Working directory is repository root."
+        },
+        {
+          "path": "scripts/c5_git_utils/commit_polisher.py",
+          "start_line": 59,
+          "end_line": 65,
+          "observation": "Rewrite path is hard-coded to the absent location."
+        },
+        {
+          "path": "scripts/c5_git_utils/commit_polisher.py",
+          "start_line": 96,
+          "end_line": 112,
+          "observation": "Caller reaches rewrite only after reviewer/optimizer and handles failure by continuing."
+        },
+        {
+          "path": "scripts/c5_git_utils/rewrite_commits.py",
+          "start_line": 1,
+          "end_line": 10,
+          "observation": "Matching rewrite implementation exists in the reorganized subdirectory.",
+          "baseline_excerpt_sha256": "1e03ffb87a6b61be1ab180574ea25ef0c9f62466c9a17cfc4cb3574a8b399eae",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0432",
+      "selected": true,
+      "primary_path": "tools/tamkarum_license_provisioner.py",
+      "affected_paths": [
+        "tools/tamkarum_license_provisioner.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "312b37a43a708ef232ccedf7fbd6bc57c33c181e00fee72eba13b9d6fb2a9096",
+      "rationale": "Absent or wrong-length seed configuration derives the signing seed from a fixed source literal, making the default authority key reproducible by anyone with source. The function signs arbitrary supplied client entitlements and marks the seal VALID_AUTHENTICATED_LICENSE; CLI writes it as an issued certificate. The finding concerns default certificate authenticity; no runtime verifier consumer or deployed use was established and no certificate was generated.",
+      "source_checks": [
+        {
+          "path": "tools/tamkarum_license_provisioner.py",
+          "start_line": 94,
+          "end_line": 115,
+          "observation": "Deterministic public fallback plus authenticated status.",
+          "baseline_excerpt_sha256": "c4ffa4b307f37cad0b801485a64ee19f6ba957cceebcc4f83f8bd951276bb715",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "tools/tamkarum_license_provisioner.py",
+          "start_line": 191,
+          "end_line": 219,
+          "observation": "CLI directly issues and persists generated certificate without additional key guard.",
+          "baseline_excerpt_sha256": "e93b07c5abfc31c4b32fd702325524cfe0e6d82c6e7db8b3da0ff7579d8fb821",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0434",
+      "selected": true,
+      "primary_path": "01_KISH_ENGINE/babylon60/bft/master_ledger_queue.py",
+      "affected_paths": [
+        "01_KISH_ENGINE/babylon60/bft/master_ledger_queue.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "94b6186add7e38c0234d971014908ccb0082de5003ba2adfa2e89fb8e1fd62ab",
+      "rationale": "shutdown sets the stop event before awaiting the writer. If queued transactions were accepted before the writer gets scheduled, its while condition is immediately false, so it closes the DB with those queue items unprocessed and reports clean shutdown. The sentinel cannot override the outer loop condition. Current module explicitly scopes this queue to auxiliary databases, so loss is not asserted for the canonical ledger actor.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/master_ledger_queue.py",
+          "start_line": 5,
+          "end_line": 10,
+          "observation": "Queue contract excludes canonical Master Ledger.",
+          "baseline_excerpt_sha256": "5921fbcdbb21f3bf10a67a3f469d9f8d8091226b3eb6541848f7324d354b928a",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/master_ledger_queue.py",
+          "start_line": 35,
+          "end_line": 39,
+          "observation": "Writer is scheduled asynchronously.",
+          "baseline_excerpt_sha256": "29778a02550463f97dfe2c90da8f3fca7a02323158708ad3354b90dc7028d0fd",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/master_ledger_queue.py",
+          "start_line": 51,
+          "end_line": 91,
+          "observation": "Loop checks stop before dequeuing; batches commit transactionally.",
+          "baseline_excerpt_sha256": "64d14f55cbf26cf543e53354b3d590b3dac997665e45d468c88e0aa99ecb8984",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/master_ledger_queue.py",
+          "start_line": 93,
+          "end_line": 120,
+          "observation": "Submit enqueues, shutdown sets stop then sentinel and waits.",
+          "baseline_excerpt_sha256": "1da3a4107e9b70ef8429ba5bf376d00a4025a6359a5b992e6a6ed056e216af93",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0435",
+      "selected": true,
+      "primary_path": "scripts/c5_cli/moskv_native_host.py",
+      "affected_paths": [
+        "scripts/c5_cli/moskv_native_host.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "37e151085da1c01ecd002c9e7839ff366510527c55442a983f6e4a062c08d92a",
+      "rationale": "The fixed shared /tmp pathname is accessed through Path.exists/read_text/write_text. The --enqueue path can follow a precreated symlink and overwrite a file writable by the host user; malformed old content is replaced by a new JSON queue. Scope is a local precreation attack under filesystem conditions that permit following the symlink; no exploit or real queue access was performed.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_cli/moskv_native_host.py",
+          "start_line": 180,
+          "end_line": 196,
+          "observation": "No exclusive create, ownership test or no-follow descriptor protects the queue.",
+          "baseline_excerpt_sha256": "5f59deed2915a599768dcff79392d8734d738c28498d777c3c8d301d1fdae4b0",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "scripts/c5_cli/moskv_native_host.py",
+          "start_line": 199,
+          "end_line": 210,
+          "observation": "Queue consumption uses the same following reads/writes.",
+          "baseline_excerpt_sha256": "cd5e4f7977effc074ebcfa2a5695404ceff5fa984d811aacd2f7aeb655c217a6",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "scripts/c5_cli/moskv_native_host.py",
+          "start_line": 293,
+          "end_line": 312,
+          "observation": "--enqueue calls enqueue_prompt directly before the native messaging loop.",
+          "baseline_excerpt_sha256": "0c244268327c8a203d2376ae908bddc0d5227ecaa7fb83379d448af2b51dd607",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0436",
+      "selected": false,
+      "primary_path": "scripts/c5_cli/moskv_native_host.py",
+      "affected_paths": [
+        "scripts/c5_cli/moskv_native_host.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "37e151085da1c01ecd002c9e7839ff366510527c55442a983f6e4a062c08d92a",
+      "rationale": "Queue producers and consumer each read, modify, and overwrite the entire JSON file without a shared lock or atomic update. Two producers can both read Q then leave only Q+A or Q+B; a consumer can race an enqueue and lose or restore a prompt. A partial write can also be treated as an empty queue. No concurrent processes were executed.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_cli/moskv_native_host.py",
+          "start_line": 184,
+          "end_line": 210,
+          "observation": "Both operations perform independent whole-file read-modify-write and swallow parse failures.",
+          "baseline_excerpt_sha256": "ce56ac845abc86e6d5827486e2e74c66a6cb57495a76fe084d6884942fd8ffea",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "scripts/c5_cli/moskv_native_host.py",
+          "start_line": 229,
+          "end_line": 237,
+          "observation": "READY consumes from this queue.",
+          "baseline_excerpt_sha256": "4ad81b2aabc4f7f1fee2f3da562a78438965e8f737d0f8e15358f879d4268c71",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "scripts/c5_cli/moskv_native_host.py",
+          "start_line": 305,
+          "end_line": 312,
+          "observation": "Separate --enqueue invocations produce into the same queue.",
+          "baseline_excerpt_sha256": "9c159c7f0dc4b8ebd8f3a7fdf8c3f560cb1e4b0ca0ffdd1ccbaccc181ae99742",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0437",
+      "selected": true,
+      "primary_path": "scripts/c5_git_utils/rewrite_commits.py",
+      "affected_paths": [
+        "scripts/c5_git_utils/rewrite_commits.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "30401c75520a9b251d52d7601f6fae6ea4c25723e904dbe8120dd03008ee4a6f",
+      "rationale": "When main is already checked out with uncommitted tracked changes or local commits, _ensure_main executes reset --hard origin/main before rewrite validation or any backup/clean-state check. The header assumes a backup was already created but neither verifies it nor protects uncommitted work. This is a destructive CLI path, reviewed without executing any Git mutation.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_git_utils/rewrite_commits.py",
+          "start_line": 6,
+          "end_line": 17,
+          "observation": "The header claims prior backup preservation but the script implements no backup step.",
+          "baseline_excerpt_sha256": "9e7664e3050a4fa8b2c98b223273cedb0e8666c9647f835e98310a679d1d7b7f",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "scripts/c5_git_utils/rewrite_commits.py",
+          "start_line": 28,
+          "end_line": 30,
+          "observation": "checkout main is immediately followed by reset --hard origin/main.",
+          "baseline_excerpt_sha256": "6e3274974de8e4671558c33480557612f8e33f942fec8fb63b585d464c442134",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "scripts/c5_git_utils/rewrite_commits.py",
+          "start_line": 89,
+          "end_line": 102,
+          "observation": "main invokes the reset helper before rewrite and validation.",
+          "baseline_excerpt_sha256": "dbe9d1849617ce15adabc56bdf5068a069c9a85e05fcb5bcc0a09bc9da0befb8",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0448",
+      "selected": true,
+      "primary_path": "scripts/c5_icloud_deploy.py",
+      "affected_paths": [
+        "scripts/c5_icloud_deploy.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "fb8414b9e3583108e1caaae3dec41a5bada01efb17c7c1d415029592cbee328e",
+      "rationale": "For each returned zone record, deletion tests only type=MX or TXT content containing v=spf1, never record name. A returned subdomain MX/SPF therefore reaches DELETE, while replacement list restores only apex mail records and the apex DKIM name. Static conditional dataflow finding; actual DNS records, credentials and remote mutation were not accessed.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_icloud_deploy.py",
+          "start_line": 28,
+          "end_line": 48,
+          "observation": "Script selects a zone then requests dns_records without a name filter.",
+          "baseline_excerpt_sha256": "3e955fa2ae8a519405ed0bb104baef21ccab245308e8bf22c80f05297a14ab35",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "scripts/c5_icloud_deploy.py",
+          "start_line": 50,
+          "end_line": 58,
+          "observation": "Deletion predicates never compare r.name against domain.",
+          "baseline_excerpt_sha256": "e0051c5e41176cf3383f3556f903c0fe9b93c61e5a55c05f5bdaa4e38b378117",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "scripts/c5_icloud_deploy.py",
+          "start_line": 62,
+          "end_line": 73,
+          "observation": "Replacement records target the fixed apex domain and its DKIM label.",
+          "baseline_excerpt_sha256": "2e5646a7e44afd78563470ab735838d63ed96c50b9c5ca4cdf0a0f119ab51acf",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0485",
+      "selected": false,
+      "primary_path": "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+      "affected_paths": [
+        "02_EDIN_SWARMS/agents_archi/clients/openrouter.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "eccd5ae01bb29f6e4faeaf3ce275d341a46112e030923d7139222d632d22834a",
+      "rationale": "A deficit caller stores a future refill time; the next caller at the same clock value resets it to now, leaving zero tokens and reserving the same wait. For a depleted 15-RPM bucket, multiple callers each receive 4 seconds instead of successive slots. query sleeps after the lock is released. The thread lock prevents data races but not duplicate future reservations.",
+      "source_checks": [
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+          "start_line": 273,
+          "end_line": 309,
+          "observation": "_refill resets future _last_refill and deficit calculation does not accumulate pending debt.",
+          "baseline_excerpt_sha256": "fc042459887cd961df798b307ec1e107c9d8145b0e470b10bde4256977a357f9",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+          "start_line": 806,
+          "end_line": 825,
+          "observation": "Rate-limiter result is slept independently before network dispatch.",
+          "baseline_excerpt_sha256": "7a92855a0ed444f2f7dbeab85094dd9f18b95200a52fdb70bbfafa1eba533bf7",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "tests/test_agents_archi.py",
+          "start_line": 291,
+          "end_line": 297,
+          "observation": "Existing deterministic test covers only the first deficit caller."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0486",
+      "selected": true,
+      "primary_path": "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+      "affected_paths": [
+        "02_EDIN_SWARMS/agents_archi/clients/openrouter.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "eccd5ae01bb29f6e4faeaf3ce275d341a46112e030923d7139222d632d22834a",
+      "rationale": "A sensitive non-LegalTech context with no strict floor/sovereign role can retain an explicit :free model alongside a paid models array. Preflight checks only payload.models when present; the full payload is then passed to urlopen. The postflight floor check occurs after transmission. This statically confirms bypass of the local model-selection guard, not proof that a specific free provider received content or that the gateway honored model over models.",
+      "source_checks": [
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+          "start_line": 623,
+          "end_line": 643,
+          "observation": "Strict/sovereign modes validate explicit model and candidates.",
+          "baseline_excerpt_sha256": "a30c270e40a98dd58f6b693d198ca82af16ff7bea7b9539287540ec893c1b029",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+          "start_line": 653,
+          "end_line": 688,
+          "observation": "Explicit target and independent candidate models both enter payload.",
+          "baseline_excerpt_sha256": "3ba48ac45e882cad0bf938fa3e57c795b2e5af2a5994836e6cee7bd2b85de987",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+          "start_line": 720,
+          "end_line": 732,
+          "observation": "General sensitivity does not itself enable enforce_floor.",
+          "baseline_excerpt_sha256": "e71971d626c91461c6d6d6cf5e9bc61a9dd380371fadfc5110fa2b5b9e05281d",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+          "start_line": 769,
+          "end_line": 788,
+          "observation": "Free-model veto iterates only candidate_list.",
+          "baseline_excerpt_sha256": "a9ea42a85904677d70b78b2312f6a824cec36a2c7884925d4c8851d51d90c423",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+          "start_line": 820,
+          "end_line": 838,
+          "observation": "Request transmission precedes postflight model check.",
+          "baseline_excerpt_sha256": "8fbaa6d04d93a8b7f0ec0b1940e716c5d64ec2eeb9871ad8437c4e1ca5cfc85d",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0490",
+      "selected": true,
+      "primary_path": "tools/install_shield.sh",
+      "affected_paths": [
+        "tools/install_shield.sh"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "bbedf380b5945b2c432af96352a0f640ccf09e1e9858ad1498ad61a33919583d",
+      "rationale": "Installation removes an existing regular instruction file and immediately replaces it with a canonical symlink. Its previous text is not read or backed up anywhere on this path. This affects existing workspace rule files and Copilot instructions whenever the installer is invoked there; no installer was executed.",
+      "source_checks": [
+        {
+          "path": "tools/install_shield.sh",
+          "start_line": 151,
+          "end_line": 165,
+          "observation": "Canonical rules creation preserves an existing .babylon60rules but does not preserve other rule-file contents.",
+          "baseline_excerpt_sha256": "057b33dbd85f5d8a9ea19b5db97da8e0f34b6778223b2b4a759e56306bc0cb93",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "tools/install_shield.sh",
+          "start_line": 168,
+          "end_line": 181,
+          "observation": "Nonmatching links and all regular rule files are removed before symlink creation.",
+          "baseline_excerpt_sha256": "544f6e37e75597e76c050b304c5f069138262827f57a25b6b863f5200e3108b2",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": ".babylon60rules",
+          "start_line": 19,
+          "end_line": 19,
+          "observation": "The canonical manifest requires preserving differences before replacing regular instruction files."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0491",
+      "selected": false,
+      "primary_path": "tools/install_shield.sh",
+      "affected_paths": [
+        "tools/install_shield.sh"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "bbedf380b5945b2c432af96352a0f640ccf09e1e9858ad1498ad61a33919583d",
+      "rationale": "A competing installer deletes the shared lock directory after more than 200 failed mkdir attempts separated by 5ms sleeps, regardless of owner liveness. A still-running owner can therefore overlap a new owner; either release may remove the replacement lock. The nominal wait is about one second plus command overhead, not a stale-owner proof.",
+      "source_checks": [
+        {
+          "path": "tools/install_shield.sh",
+          "start_line": 37,
+          "end_line": 50,
+          "observation": "Acquisition forcibly removes an existing lock after a retry count and release unconditionally removes the path.",
+          "baseline_excerpt_sha256": "ba5283a564f7005c2628326e443f1b9d4811054cd7815de1acc7ef5e36a8d682",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "tools/install_shield.sh",
+          "start_line": 52,
+          "end_line": 53,
+          "observation": "The lock and EXIT trap cover the installation body.",
+          "baseline_excerpt_sha256": "a85f6631305865db471c6e15a5c6140d1d2e427806fa43cdff7638a1dd9d0143",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "tools/install_shield.sh",
+          "start_line": 207,
+          "end_line": 208,
+          "observation": "Normal completion also removes the lock without ownership validation.",
+          "baseline_excerpt_sha256": "2f533c2694764cbafaa6c53e7455733cbe527b657f6b04ccdbb4ed4e3a5e5628",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0492",
+      "selected": false,
+      "primary_path": "tools/install_shield.sh",
+      "affected_paths": [
+        "tools/install_shield.sh"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "bbedf380b5945b2c432af96352a0f640ccf09e1e9858ad1498ad61a33919583d",
+      "rationale": "Uninstall removes every symlink at the listed workspace instruction paths without checking whether its target belongs to Shield. An unrelated pre-existing link therefore satisfies the deletion branch. This is a direct uninstall behavior; no uninstall was run.",
+      "source_checks": [
+        {
+          "path": "tools/install_shield.sh",
+          "start_line": 58,
+          "end_line": 74,
+          "observation": "Uninstall removes any -L entry in the seven instruction paths.",
+          "baseline_excerpt_sha256": "fcc027d78e6677746eed5da474dee62b9ccf6e3a4d96e2052816d063f91632f5",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "tools/install_shield.sh",
+          "start_line": 168,
+          "end_line": 181,
+          "observation": "Installation compares expected link targets, demonstrating that the matching guard exists only on install.",
+          "baseline_excerpt_sha256": "544f6e37e75597e76c050b304c5f069138262827f57a25b6b863f5200e3108b2",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0509",
+      "selected": true,
+      "primary_path": "02_EDIN_SWARMS/agents_archi/orchestrator/kda_dag_swarm.py",
+      "affected_paths": [
+        "02_EDIN_SWARMS/agents_archi/orchestrator/kda_dag_swarm.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "7df1e0d00504451e2bae540a4d9f8b23973dc2696773d0c2030afe1fdb07a2ff",
+      "rationale": "execute_dag holds ThermalLock around asyncio.gather with default exception behavior. On the first task exception, gather raises while sibling tasks may remain pending/running; context exit removes the lock with no sibling cancellation or drain. In a surviving caller event loop, those tasks can continue and overlap a second scheduler that acquires the freed lock. Static concurrency analysis, not an observed protected workload overlap.",
+      "source_checks": [
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/orchestrator/kda_dag_swarm.py",
+          "start_line": 107,
+          "end_line": 126,
+          "observation": "Lock acquisition is exclusive, exit unconditionally removes acquired lock.",
+          "baseline_excerpt_sha256": "ce231fc3942894b27bbe332d9c7a7f8169ff77d31eca2c4528f254e9f07b648b",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/orchestrator/kda_dag_swarm.py",
+          "start_line": 181,
+          "end_line": 209,
+          "observation": "Coroutines are gathered with no exception cleanup before leaving lock scope.",
+          "baseline_excerpt_sha256": "d9d324dc9730182b660d4e5f9b86ac6ec0041528949dbbb6dc064745a6a7990e",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0528",
+      "selected": true,
+      "primary_path": "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+      "affected_paths": [
+        "scripts/c5_l1_ledger/ledger_snapshot_engine.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "126474f8d45284fee75951c5a9ddd7abc350352be7df3adb6df8653aeb8e3ca2",
+      "rationale": "For this checked-in script location, Path(__file__).parent.parents[2] denotes the parent of BABYLON-60. Both DB_PATH and SNAPSHOT_DIR therefore refer outside the repository. If that source DB is absent, create_snapshot explicitly writes an empty destination DB and emits a manifest; main then starts the ledger actor against the same mislocated DB_PATH. Existing tests replace both globals, so they do not check the default path. Actual database existence/content and ledger mutation were deliberately not inspected or exercised.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+          "start_line": 24,
+          "end_line": 26,
+          "observation": "Root expression is one directory above the repository; both storage locations derive from it.",
+          "baseline_excerpt_sha256": "4df3f21c6cadb18f4450643a2299093141520046a072bf7808095115441165ff",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+          "start_line": 43,
+          "end_line": 74,
+          "observation": "Missing source creates an empty destination that is hashed and returned as a manifest.",
+          "baseline_excerpt_sha256": "22018b43f0de8240e6a9758686e195a550781420ede36fe15435a9a173d1c774",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+          "start_line": 77,
+          "end_line": 105,
+          "observation": "Main records the snapshot using a ledger actor built from DB_PATH.",
+          "baseline_excerpt_sha256": "19966e1f251a5261c580c95ae470548e136898d4427c9a07180fde69fb01ee8a",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "tests/test_ledger_snapshot_engine.py",
+          "start_line": 25,
+          "end_line": 43,
+          "observation": "Test patches DB_PATH and SNAPSHOT_DIR, avoiding the default root computation."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0529",
+      "selected": true,
+      "primary_path": "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+      "affected_paths": [
+        "scripts/c5_l1_ledger/ledger_snapshot_engine.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "126474f8d45284fee75951c5a9ddd7abc350352be7df3adb6df8653aeb8e3ca2",
+      "rationale": "Snapshot and manifest names contain only a UTC timestamp to the second. Two calls in that second select the same destination, with no exclusive name allocation, lock, or retry. For an existing nonempty source snapshot, VACUUM INTO cannot safely create another independent backup at that same nonempty destination; any exception propagates past create_snapshot/main. The later manifest write is also nonexclusive. The name collision and unhandled collision path are statically confirmed; concurrent SQLite execution was not performed.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+          "start_line": 43,
+          "end_line": 57,
+          "observation": "Destination derives solely from second-resolution timestamp, and VACUUM INTO has no collision recovery.",
+          "baseline_excerpt_sha256": "08063d0790c5a2ac511b8d792b588a023e67db96650ea5f0ace65d654980b879",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+          "start_line": 62,
+          "end_line": 74,
+          "observation": "Manifest repeats the same timestamp and is opened in write mode.",
+          "baseline_excerpt_sha256": "169029c5fab552a8630f6e6e7882ad263e6b5b9a4ce638a9be67c509a04cf4f4",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+          "start_line": 99,
+          "end_line": 106,
+          "observation": "Main does not handle create_snapshot failures.",
+          "baseline_excerpt_sha256": "3eb7212877c4e83dce40af1c3838b5eb58e9f23c94157cdb9ec6ea313d1948be",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "tests/test_ledger_snapshot_engine.py",
+          "start_line": 25,
+          "end_line": 43,
+          "observation": "Existing test calls create_snapshot once and does not exercise duplicate timestamps."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0533",
+      "selected": true,
+      "primary_path": "scripts/c5_l1_ledger/seal_bounty_aeon.py",
+      "affected_paths": [
+        "01_KISH_ENGINE/babylon60/crypto/identity.py",
+        "scripts/c5_l1_ledger/seal_bounty_aeon.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "154e38e4308b098e7687b266f337ec684b5ebd9488afcf186ab52c85139f8916",
+      "rationale": "Sealer catches every identity-load exception and calls forge_identity at the same storage path. Corrupt JSON or failed AEAD decryption can therefore cause a fresh random seed to truncate master_seed.enc, if forging subsequently succeeds. New key signs the root and enters the artifact. No operator identity data was accessed and no identity operation was executed.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_l1_ledger/seal_bounty_aeon.py",
+          "start_line": 123,
+          "end_line": 135,
+          "observation": "Broad load-error handler forges new identity.",
+          "baseline_excerpt_sha256": "29c45101440cdd55ffd3f2166094fdd69f431f44ac6f98c27179dee95b2598ba",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/crypto/identity.py",
+          "start_line": 53,
+          "end_line": 62,
+          "observation": "Both paths target master_seed.enc.",
+          "baseline_excerpt_sha256": "8a9c832e84cfd5a8b51350d63f4f965f1f6936bd40263ffdf42131e894ee55ef",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/crypto/identity.py",
+          "start_line": 75,
+          "end_line": 109,
+          "observation": "Fresh random seed written with mode w to same path.",
+          "baseline_excerpt_sha256": "8ae22aa0cfe0aa2eb766e17b3f4714d33e999e4f5f2115087b892ec6c2783235",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/crypto/identity.py",
+          "start_line": 111,
+          "end_line": 131,
+          "observation": "Corruption or wrong passphrase raises.",
+          "baseline_excerpt_sha256": "ebf5e2029b510e7467cd568466e315657d3d6ed4cd43bafbf558d71f2d8e7661",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "scripts/c5_l1_ledger/seal_bounty_aeon.py",
+          "start_line": 162,
+          "end_line": 165,
+          "observation": "Artifact consumes new public key/signature.",
+          "baseline_excerpt_sha256": "7df22fde8ecf8c3cd3e184eb20026cd16bf5d6d0a030ed238d1e79658736cb90",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        }
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0534",
+      "selected": false,
+      "primary_path": "scripts/c5_l1_ledger/seal_bounty_aeon.py",
+      "affected_paths": [
+        "scripts/c5_l1_ledger/seal_bounty_aeon.py"
+      ],
+      "decision": "CONFIRMED_STATIC",
+      "remediation_state": "OPEN",
+      "existing_root_override": false,
+      "current_source_sha256": "154e38e4308b098e7687b266f337ec684b5ebd9488afcf186ab52c85139f8916",
+      "rationale": "TSA authentication label depends solely on presence of tsr_b64. Client returns that field for any HTTP 200 body, without parsing timestamp status, signature, certificate trust or message imprint; sealer persists the label and token. Malformed or rejection bodies can be labeled authenticated. No TSA network request or remote mutation was performed.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_l1_ledger/seal_bounty_aeon.py",
+          "start_line": 115,
+          "end_line": 121,
+          "observation": "Field presence determines authenticated label.",
+          "baseline_excerpt_sha256": "2de7e98d0a116e2dbfe72b8ac49304cb9d0c6ba56ae8ab15b3dfe5c2f1fc7080",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/crypto/rfc3161.py",
+          "start_line": 85,
+          "end_line": 119,
+          "observation": "HTTP 200 body is directly base64-encoded."
+        },
+        {
+          "path": "scripts/c5_l1_ledger/seal_bounty_aeon.py",
+          "start_line": 146,
+          "end_line": 165,
+          "observation": "Artifact stores response and authentication label.",
+          "baseline_excerpt_sha256": "16edef6fb61ae58c6f6c6a468f61b4ffb8327129734be627b2da1047fe9151c3",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        },
+        {
+          "path": "scripts/c5_l1_ledger/seal_bounty_aeon.py",
+          "start_line": 179,
+          "end_line": 180,
+          "observation": "Artifact persisted without token validation.",
+          "baseline_excerpt_sha256": "8786b61575e1141081722723c3d1da310c04c10bc44dc13df5546e42d0d38277",
+          "automatic_mapping_policy": "Only byte-identical contiguous excerpt is eligible for a mechanical line move. Changed/removed excerpts require explicit current semantic review; no source hash refresh by itself."
+        }
+      ]
+    }
+  ],
+  "historical_assertions": [
+    {
+      "path": "docs/security/evidence/swarm100-round3-20261028/reconcile_registry.py",
+      "line": 102,
+      "assertion": "sha(repo / originals[cid][\"path\"]) == item[\"source_sha256\"]",
+      "affected_id": "SW100-C0177",
+      "source": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+      "historical_sha256": "624eb292a797ac7094c4b84357606180465b09f3b7381f5292dba44ac4484634",
+      "observation": "Unconditional assertion binds a historical round2 remediation to current source, even when a later root override exists. Current abbreviated record has no path/source_checks, so impact discovery must fall back to original.path.",
+      "minimal_change": "Apply historical current-source hash assertion only when cid not in overrides, matching the existing shard-review rule. All overrides already pass validate(current=True). Keep old item and hash in history; require a fully populated, freshly evidenced C0177 override preserving FIXED after current V04 event-content integrity regressions."
+    }
+  ],
+  "reconciliation_plan": [
+    "Keep original candidate inventory, original reviews and prior remediation evidence immutable. Save root-adjudications before Lote12 once.",
+    "For each selected ID, require red/green results and independent review, then emit an override with current source hash and fresh checked ranges. FIXED and MITIGATED remain distinct.",
+    "For 23 collateral IDs preserve existing remediation states; do not infer additional closures. Classify each checked excerpt as unchanged/moved, changed, or removed using baseline snapshots.",
+    "Byte-identical excerpt mapping permits range maintenance but is not fresh behavioral validation. Changed/removed excerpt requires the file owner/reviewer to confirm the issue remains or record that it awaits re-adjudication; never relabel a changed observation as confirmed merely by swapping hashes.",
+    "For principal-path collateral records, refresh current_source_sha256 only after that explicit current review; secondary-only changes need source_checks maintenance, not an unrelated principal source hash.",
+    "C0177 requires fresh V04 event-content integrity regressions with the current verifier, and a full root override preserving prior FIXED. C0073 must retain FIXED while its secondary chain-validation checks remain valid. C0361 retains NOT_APPLICABLE; namespace EOF is still legal.",
+    "Run canonical reconcile only after all overrides/source checks are ready; verify 598 original IDs, exact 30 selected outcomes, unchanged collateral states, no UNKNOWN, and new queue consistency."
+  ],
+  "followup_status": "Waiting for final production patches to map and semantically review changed collateral excerpts."
+}

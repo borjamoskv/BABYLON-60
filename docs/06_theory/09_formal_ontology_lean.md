@@ -30,4 +30,4 @@ Una prueba de un modelo abstracto requiere un teorema de refinamiento o correspo
 
 ## 4. Estatus formal
 
-Se retira `document_epistemic_validity`: no probaba ontología ni ejecución. Los resultados efectivamente compilados y sus hipótesis se enumeran en el [informe](AUDIT_SCIENTIFIC_STATUS_2026.md); el modelo no se presenta como certificación de toda la plataforma. El [módulo Curry–Howard](06_curry_howard.md) delimita la diferencia entre términos, axiomas y validación del mundo.
+Se retira `[OBSOLETO: document_epistemic_validity]`: no probaba ontología ni ejecución. Los resultados efectivamente compilados y sus hipótesis se enumeran en el [informe](AUDIT_SCIENTIFIC_STATUS_2026.md); el modelo no se presenta como certificación de toda la plataforma. El [módulo Curry–Howard](06_curry_howard.md) delimita la diferencia entre términos, axiomas y validación del mundo.

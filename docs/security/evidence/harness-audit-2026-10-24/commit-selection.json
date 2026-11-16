@@ -1,0 +1,87 @@
+{
+  "date": "2026-10-24",
+  "timezone": "Europe/Madrid",
+  "base_commit": "a620e383d695e82d14b57066967194b8c8a3022b",
+  "scope": "Minimal task-specific candidate, excluding concurrent governance and runtime changes",
+  "controls": [
+    {
+      "argv": [
+        "python3",
+        "/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/babylon-harness-commit-32v6d5_p/tree/scripts/guards/verify_active_topology.py",
+        "--staged",
+        "--repo-root",
+        "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60"
+      ],
+      "exit_code": 0,
+      "stdout": "PASS: Git index instructions and IDE symlinks\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "python3",
+        "/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/babylon-harness-commit-32v6d5_p/tree/scripts/guards/verify_active_topology.py",
+        "--repo-root",
+        "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60"
+      ],
+      "exit_code": 0,
+      "stdout": "PASS: instruction files, IDE symlinks and MCP manifests\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "python3",
+        "/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/babylon-harness-commit-32v6d5_p/tree/scripts/c5_quality_gates/audit_token_budget.py",
+        "--workspace-only",
+        "--skip-ghost-listeners"
+      ],
+      "exit_code": 0,
+      "stdout": "=== [C5-REAL] AUDITORÍA DE PRESUPUESTO DE TOKENS ===\n■ AGENTS.md (workspace): 4,108 B (~1,027 tok)\n■ Global rules: NOT_CHECKED (workspace-only)\n■ Reglas always_on (Global: 0, Workspace: 0): 0 B (~0 tok)\n■ TOTAL PREFILL ALWAYS_ON: 4,108 B / 40,000 B (~1,027 tok)\n■ Reglas condicionales (model_decision): 0 global + 7 workspace (0 tokens de prefill fijo; solo descripción)\n■ Ghost Listeners (conversation_summaries.db): NOT_CHECKED (explicitly skipped)\nPASS: Workspace token budget within inline ceiling; global rules and cross-scope duplicates not checked.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "python3",
+        "/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/babylon-harness-commit-32v6d5_p/tree/scripts/c5_quality_gates/audit_semantic_contracts.py",
+        "--workspace-only"
+      ],
+      "exit_code": 0,
+      "stdout": "PASS: known semantic patterns (54 documents, 40 Python files); not a proof of semantic consistency or runtime.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "python3",
+        "/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/babylon-harness-commit-32v6d5_p/tree/scripts/guards/verify_active_topology.py",
+        "--self-test"
+      ],
+      "exit_code": 0,
+      "stdout": "PASS: 6400 signature acceptance/rejection checks\n",
+      "stderr": ""
+    }
+  ],
+  "tests": {
+    "command": "VIRTUAL_ENV=<existing-project-venv> uv run --locked --no-sync --active pytest tests/test_instruction_gate_regressions.py tests/test_semantic_contracts_gate.py tests/test_visual_signature_guard.py tests/test_c5_signature_engine.py tests/test_signature_panel_render.py -q",
+    "working_directory": "isolated candidate checkout",
+    "exit_code": 0,
+    "summary": "168 passed, 103 subtests passed in 5.10s"
+  },
+  "ruff": {
+    "command": "uv run --locked --no-sync --active ruff check scripts/guards/verify_active_topology.py scripts/c5_quality_gates/audit_token_budget.py tests/test_instruction_gate_regressions.py",
+    "exit_code": 0,
+    "summary": "All checks passed!"
+  },
+  "selected_code_sha256": {
+    "scripts/c5_quality_gates/audit_token_budget.py": "a57be6bc86057c4c6980779b8c67c7054d693a3ed996602eff00dddf83da3689",
+    "scripts/guards/verify_active_topology.py": "3ef9ff2fabddf4e5de707b1dc0fee222ba53124c551ada126d8e079662baac9e",
+    "tests/test_instruction_gate_regressions.py": "9ee00a43fc9d682698e39f1b1dadcb1aea66c9ee79f1a1fa539d9e2dc8688a2a"
+  },
+  "excluded_changes": [
+    "instruction files and rules",
+    "CI and hooks",
+    "governance_documents.py and audit_semantic_contracts.py changes",
+    "expanded root-instruction byte accounting",
+    "additional staged MCP validation",
+    "runtime modifications"
+  ],
+  "no_push": true
+}

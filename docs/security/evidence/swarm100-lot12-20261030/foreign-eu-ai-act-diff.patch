@@ -1,0 +1,91 @@
+diff --git a/01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py b/01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py
+index f9f68b9b..a6181803 100644
+--- a/01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py
++++ b/01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py
+@@ -48,7 +48,8 @@ def _esc(value: Any) -> str:
+ class EUAIActComplianceExporter:
+     """
+     Transforms BABYLON-60 Merkle-Causal DAG Ledgers and WORM Forensic Quarantine Bundles
+-    into legal compliance certificates for EU AI Act auditing, with localized legal templates.
++    into technical evidence reports, with localized templates. Historical certificate
++    identifiers remain compatible; they never authorize approval or publication.
+     """
+ 
+     def __init__(self, artifact_bundle_path: str = "artifact_bundle_v3", ledger_path: Optional[str] = None) -> None:
+@@ -246,7 +247,7 @@ class EUAIActComplianceExporter:
+         ledger_path: Optional[str] = None,
+         validity_days: int = 90,
+     ) -> Dict[str, Any]:
+-        """Generates a structured compliance certificate localized for target locale/country."""
++        """Legacy API for a technical report; no legal conformity verdict or release permission."""
+         t = get_translation(locale)
+         manifest = self.load_manifest()
+         global_hash = manifest.get("global_hash", "UNKNOWN_HASH")
+@@ -297,6 +298,11 @@ class EUAIActComplianceExporter:
+             art50_status = unverified
+ 
+         cert: Dict[str, Any] = {
++            "schema": "babylon60.euai.technical_report.v2",
++            "report_type": "TECHNICAL_EVIDENCE",
++            "legal_conformity": "NOT_DETERMINED",
++            "publication_authorized": False,
++            "regulatory_assessment": "PENDING_REVIEW",
+             "title": t["title"],
+             "locale": locale,
+             "compliance_standard": t["compliance_standard"],
+@@ -368,6 +374,12 @@ class EUAIActComplianceExporter:
+                 "fingerprint": cert_fingerprint,
+             },
+         }
++        cert["articles_compliance"]["Article_13_Transparency"] = {
++            "title": t["article_titles"]["Article_13"],
++            "status": status_pending_audit if verified else verification["detail"],
++            "mechanism": t["mechanisms"]["Article_13"],
++            "evidence_hash": hashlib.sha256(f"ART13:{global_hash}".encode()).hexdigest(),
++        }
+         cert["signature"] = self.sign_certificate(cert)
+         return cert
+ 
+@@ -607,7 +619,17 @@ class EUAIActComplianceExporter:
+ def main_cli() -> int:
+     import argparse
+ 
+-    parser = argparse.ArgumentParser(description="BABYLON-60 EU AI Act Compliance Certificate Exporter")
++    parser = argparse.ArgumentParser(description="BABYLON-60 EU AI Act evidence, assessment and regulated authorization")
++    parser.add_argument("--mode", choices=["report", "assess", "approve", "authorize-release"], default="report")
++    parser.add_argument("--profile")
++    parser.add_argument("--assessment")
++    parser.add_argument("--trust-store", default=os.environ.get("BABYLON60_REGULATORY_POLICY"))
++    parser.add_argument("--native-gate", default=os.environ.get("BABYLON60_REGULATORY_GATE"))
++    parser.add_argument("--commit")
++    parser.add_argument("--artifact-sha256")
++    parser.add_argument("--destination")
++    parser.add_argument("--run-id")
++    parser.add_argument("--run-attempt")
+     parser.add_argument("--bundle", default="artifact_bundle_v3", help="Ruta al paquete de artefactos/evidencia")
+     parser.add_argument("--ledger", help="Ruta al ledger SQLite (CortexPersistLedger) para verificación fail-closed")
+     parser.add_argument("--system-id", default="BABYLON60-PROD-01", help="Identificador del sistema de IA auditado")
+@@ -627,6 +649,12 @@ def main_cli() -> int:
+ 
+     args = parser.parse_args()
+ 
++    if args.allow_unverified and args.mode != "report":
++        parser.error("--allow-unverified is restricted to diagnostic reports")
++    if args.mode != "report" or args.profile or args.assessment:
++        from .regulatory_cli import run
++        return run(args)
++
+     t = get_translation(args.locale)
+ 
+     exporter = EUAIActComplianceExporter(artifact_bundle_path=args.bundle, ledger_path=args.ledger)
+@@ -650,8 +678,9 @@ def main_cli() -> int:
+     detail = verification.get("detail", STATUS_UNVERIFIED)
+     verified = bool(verification.get("verified", False))
+ 
+-    cert_success = t.get("cli_success", "[+] Certificate written to:")
++    cert_success = t.get("cli_success", "[+] Technical report written to:")
+     print(f"{cert_success} {out_path}")
++    print("Report generation does not authorize regulated approval or publication.")
+ 
+     if verified:
+         print(t.get("cli_verified", "[✓] Evidence cryptographically verified."))

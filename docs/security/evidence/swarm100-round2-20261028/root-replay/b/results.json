@@ -1,0 +1,128 @@
+{
+  "cases": [
+    {
+      "case": "malformed_crl",
+      "status": "confirmed",
+      "sources": {
+        "01_KISH_ENGINE/babylon60/verifier/cli.py": "074621da76e6c6b5f3ba2138f74d0106e58a33d74fa4e835039ba774a1d42eab",
+        "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py": "bc5045430f0910c80906d669f3d9d622066c490f2a29560e512d7ddbedb78dcd"
+      },
+      "trigger": "Same signed unexpired temporary certificate; valid CRL replaced with invalid JSON at same path.",
+      "observed": {
+        "valid_crl_parsed": [
+          "isolated-revoked-cert"
+        ],
+        "valid_crl_result": {
+          "valid": false,
+          "signature_valid": true,
+          "merkle_valid": false,
+          "detail": "CERTIFICATE_REVOKED: isolated-revoked-cert found in Certificate Revocation List (CRL)"
+        },
+        "malformed_crl_parsed": [
+          "/private/tmp/babylon60-audit-round2-20261028/final-replay/b/crl.json"
+        ],
+        "malformed_crl_result": {
+          "valid": true,
+          "signature_valid": true,
+          "merkle_valid": true,
+          "detail": "CERTIFICATE_VALID_AND_VERIFIED (STANDALONE_NO_LEDGER_SUPPLIED)"
+        }
+      },
+      "scope": "Actual verifier functions on temporary data, real Ed25519 signature; no issuer identity or production runtime claim.",
+      "guards": "Signature validates in both; membership rejects original ID, but malformed-file fallback supplies path string so ID membership guard misses."
+    },
+    {
+      "case": "json_ledger_payload",
+      "status": "confirmed",
+      "sources": {
+        "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py": "bc5045430f0910c80906d669f3d9d622066c490f2a29560e512d7ddbedb78dcd"
+      },
+      "trigger": "Change event payload amount10 to999999 while retaining entry_hash and signed expected root.",
+      "observed": {
+        "original": {
+          "verified": true,
+          "integrity_verified": true,
+          "merkle_root": "293071bc6171452387bd63e544798774c678891abead130044cde8a771506198",
+          "total_entries": 1,
+          "detail": "JSON_LEDGER_MERKLE_VERIFIED"
+        },
+        "mutated_payload": {
+          "verified": true,
+          "integrity_verified": true,
+          "merkle_root": "293071bc6171452387bd63e544798774c678891abead130044cde8a771506198",
+          "total_entries": 1,
+          "detail": "JSON_LEDGER_MERKLE_VERIFIED"
+        },
+        "certificate_original": {
+          "valid": true,
+          "signature_valid": true,
+          "merkle_valid": true,
+          "detail": "CERTIFICATE_VALID_AND_VERIFIED (LEDGER_VERIFIED: JSON_LEDGER_MERKLE_VERIFIED)"
+        },
+        "certificate_mutated_payload": {
+          "valid": true,
+          "signature_valid": true,
+          "merkle_valid": true,
+          "detail": "CERTIFICATE_VALID_AND_VERIFIED (LEDGER_VERIFIED: JSON_LEDGER_MERKLE_VERIFIED)"
+        },
+        "negative_changed_hash": {
+          "verified": false,
+          "integrity_verified": true,
+          "merkle_root": "343d06a28ac9cd36d5f2365ff3b6502d2e76615c1b1af778f41e255e89814abf",
+          "total_entries": 1,
+          "detail": "MERKLE_ROOT_MISMATCH: computed 343d06a28ac9cd36d5f2365ff3b6502d2e76615c1b1af778f41e255e89814abf != expected 293071bc6171452387bd63e544798774c678891abead130044cde8a771506198"
+        }
+      },
+      "scope": "Actual offline verifier and certificate consumer, temporary JSON fixture, real Ed25519 signature. Entry hash is a supplied fixture commitment, not proof of original event schema correctness.",
+      "guards": "Root comparison rejects changed entry_hash but never recalculates event hash from payload; therefore event content mutation is invisible."
+    },
+    {
+      "case": "governance_parent_revocation_interleaving",
+      "status": "confirmed",
+      "sources": {
+        "01_KISH_ENGINE/babylon60/memory/governance.py": "aa507c6b36557817bc8d80207cf82f2d48722f37995ddd57eee841af792eb622",
+        "01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py": "bbc6a521364c858f2888b31d94798772e7f3432687af7998c7d89802e455d772"
+      },
+      "trigger": "A validates parent; deterministic interception at A ledger append runs B full revoke on shared fresh SQLite database; A resumes actual ledger append and insertion.",
+      "observed": {
+        "interceptions": [
+          {
+            "point": "A ledger append entry after ACTIVE parent validation transaction committed",
+            "B_revocation": {
+              "revoked_root": "c7481b78-292a-484b-9cc7-519762982f79",
+              "revoked_dependents": [],
+              "total_invalidated": 1,
+              "revocation_receipt_id": "4ce6e8e7-caba-5a1f-ba2a-3bb9d174d9fc",
+              "lamport_t": 2
+            }
+          }
+        ],
+        "record_statuses": [
+          [
+            "c19e22d5-040c-4629-976e-c84f07af2e9e",
+            "ACTIVE"
+          ],
+          [
+            "c7481b78-292a-484b-9cc7-519762982f79",
+            "REVOKED"
+          ]
+        ],
+        "remaining_blob_ids": [
+          [
+            "c19e22d5-040c-4629-976e-c84f07af2e9e"
+          ]
+        ],
+        "child_return_status": "ACTIVE",
+        "negative_add_after_revoke": {
+          "accepted": false,
+          "type": "GovernanceViolationError",
+          "message": "Cannot derive from or depend on non-active record c7481b78-292a-484b-9cc7-519762982f79 (status=REVOKED)"
+        }
+      },
+      "scope": "Actual governance and real ledger code on new temporary SQLite; synchronous deterministic scheduling interception, not a probabilistic multithread stress test. Hook only schedules B and delegates A unchanged; no validation or persistence code replaced.",
+      "guards": "Both engines use registered same-tenant principal; FK checks row existence, not ACTIVE status. BEGIN IMMEDIATE ends before ledger append; resumed insert does not repeat status validation. Negative control rejects validation after revocation."
+    }
+  ],
+  "source_script_sha256": "4f5e440af45673fdac8ef254ded83aa126b2b6cc64ee370c39c7d489d392d4c0",
+  "tests_scope": "Three bounded isolated reproductions, no source edits, hardware or external network."
+}

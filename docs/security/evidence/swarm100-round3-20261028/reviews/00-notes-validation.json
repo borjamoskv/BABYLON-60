@@ -1,0 +1,25 @@
+{
+  "validation": "PASS",
+  "reviewer": "00",
+  "candidate_count": 30,
+  "unique_candidate_ids": 30,
+  "exact_assignment_order": true,
+  "decisions": {
+    "CONFIRMED_STATIC": 30
+  },
+  "severities": {
+    "P1": 7,
+    "P2": 22,
+    "P3": 1
+  },
+  "current_source_hashes_match": true,
+  "snapshot_excerpts_match": 82,
+  "runtime_executed": false,
+  "taxonomy_cardinality_check": {
+    "SUPPORTED_WITHIN_DOMAIN": 12,
+    "FALSIFIED": 2,
+    "UNTESTED": 7,
+    "UNFALSIFIABLE": 2
+  },
+  "global_documentation_gates": "Parent-coordinated; not rerun by this reviewer."
+}

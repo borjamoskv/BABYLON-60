@@ -1,0 +1,55 @@
+[
+  {
+    "name": "semantic-gate",
+    "command": [
+      "python3",
+      "scripts/c5_quality_gates/audit_semantic_contracts.py",
+      "--workspace-only"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "budget-gate",
+    "command": [
+      "python3",
+      "scripts/c5_quality_gates/audit_token_budget.py",
+      "--workspace-only",
+      "--skip-ghost-listeners"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "topology-gate",
+    "command": [
+      "python3",
+      "scripts/guards/verify_active_topology.py"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "diff-check",
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "ruff-final",
+    "command": [
+      "uv",
+      "run",
+      "--locked",
+      "--no-sync",
+      "ruff",
+      "check",
+      "tests/test_swarm100_lot3_regressions.py",
+      "docs/security/evidence/swarm100-lot3-20261028/reconcile_lot3.py",
+      "docs/security/evidence/swarm100-lot3-20261028/independent-adversarial.py",
+      "docs/security/evidence/swarm100-lot3-20261028/inline-c5_distill_public_mirror.sh.py",
+      "docs/security/evidence/swarm100-lot3-20261028/inline-c5_ship.sh.py"
+    ],
+    "exit_code": 0
+  }
+]

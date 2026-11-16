@@ -1,0 +1,105 @@
+"""Isolated audit reproduction. No operator inputs, network, subprocess or hardware."""
+import hashlib, importlib.util, json, os, pathlib, sqlite3, sys, types
+sys.dont_write_bytecode = True
+BASE = pathlib.Path(__file__).resolve().parent
+WORK = BASE / 'fixture'
+WORK.mkdir(exist_ok=True)
+os.chdir(WORK)
+REPO = pathlib.Path('/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60')
+SRC = REPO / '01_KISH_ENGINE/babylon60'
+blocked = []
+write_opens = []
+
+def audit(event, args):
+    if event in ('subprocess.Popen', 'os.system', 'os.posix_spawn') or event.startswith('socket.'):
+        blocked.append(event)
+        raise RuntimeError('Forbidden external boundary: ' + event)
+    if event == 'open':
+        path, mode, flags = args
+        if isinstance(path, (str, bytes, os.PathLike)) and (flags & (os.O_WRONLY | os.O_RDWR | os.O_CREAT | os.O_TRUNC | os.O_APPEND)):
+            p = pathlib.Path(os.fsdecode(path)).absolute()
+            if not p.is_relative_to(BASE):
+                raise RuntimeError('Write outside audit fixture refused')
+            write_opens.append(str(p.relative_to(BASE)))
+    if event in ('os.mkdir', 'os.rename', 'os.rmdir', 'os.remove'):
+        p = args[0]
+        # CPython shutil uses dir_fd for children of the reviewed absolute fixture root.
+        if isinstance(p, (str, bytes, os.PathLike)) and os.path.isabs(p):
+            if not pathlib.Path(os.fsdecode(p)).absolute().is_relative_to(BASE):
+                raise RuntimeError('Filesystem mutation outside fixture refused')
+sys.addaudithook(audit)
+
+# Narrow import adapter avoids broad package __init__ imports. Target modules,
+# functions, signing and SQLite are the actual unmodified repository code.
+for name, path in [('babylon60', SRC), ('babylon60.verifier', SRC/'verifier'), ('babylon60.compliance_exporter', SRC/'compliance_exporter')]:
+    package = types.ModuleType(name)
+    package.__path__ = [str(path)]
+    sys.modules[name] = package
+
+def load(name, path):
+    spec = importlib.util.spec_from_file_location(name, path)
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[name] = module
+    spec.loader.exec_module(module)
+    return module
+verifier = load('babylon60.verifier.standalone_verify', SRC/'verifier/standalone_verify.py')
+compiler_module = load('babylon60.compliance_exporter.m0_evidence_pack', SRC/'compliance_exporter/m0_evidence_pack.py')
+# platform.platform() invokes uname subprocess on this Python; replace only that
+# environment-description boundary, unrelated to compiler evidence or file behavior.
+compiler_module.platform.platform = lambda: 'AUDIT-FIXTURE-PLATFORM-BOUNDARY-INTERCEPTED'
+claims = WORK / 'fixture-claims.toml'
+claims.write_text('''[metadata]\nversion = "audit-fixture"\n[claim.INV_OMEGA_complete_mediation]\nstatement = "Audit fixture only"\nstatus = "verified_local"\nevidence_level = "L3_ISOLATION"\n''')
+seed = hashlib.sha256(b'AUDIT-ROUND2-DISPOSABLE-SOFTWARE-KEY-NOT-OPERATOR').hexdigest()
+compiler = compiler_module.M0EvidencePackCompiler(repo_root=WORK, claims_toml_path=claims, signing_seed_hex=seed)
+functions = set()
+def profile(frame, event, arg):
+    if event == 'call' and frame.f_code.co_filename.startswith(str(SRC)):
+        functions.add((str(pathlib.Path(frame.f_code.co_filename).relative_to(SRC)), frame.f_code.co_name))
+sys.setprofile(profile)
+pack = WORK / 'default-pack'
+manifest_return = compiler.compile_pack(pack, issued_at_override='2026-10-28T00:00:00Z')
+sys.setprofile(None)
+
+# Independent on-disk witnesses; no inference from compiler return values.
+nemesis_raw = (pack/'evidence/nemesis-results.json').read_bytes()
+nemesis = json.loads(nemesis_raw)
+manifest = json.loads((pack/'manifest.json').read_text())
+metadata = json.loads((pack/'verification/verifier-metadata.json').read_text())
+from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
+Ed25519PublicKey.from_public_bytes(bytes.fromhex(metadata['public_key'])).verify(bytes.fromhex((pack/'verification/signature.sig').read_text().strip()), json.dumps(metadata['signing_envelope'], sort_keys=True, separators=(',', ':'), ensure_ascii=False, allow_nan=False).encode())
+checksums_verified = all(hashlib.sha256((pack/k).read_bytes()).hexdigest() == v for k,v in metadata['signing_envelope']['file_digests'].items())
+with sqlite3.connect('file:' + str(pack/'evidence/ledger_l0.sqlite') + '?mode=ro', uri=True) as connection:
+    ledger_rows = connection.execute('SELECT event_type,payload_json FROM cortex_ledger ORDER BY seq').fetchall()
+
+def deletion_case(label, claims_path, existing_ledger=None):
+    out = WORK / label
+    out.mkdir()
+    sentinel = out/'valuable-user-file.txt'
+    sentinel.write_text('Disposable fixture sentinel: must survive invalid compilation')
+    before = hashlib.sha256(sentinel.read_bytes()).hexdigest()
+    c = compiler_module.M0EvidencePackCompiler(repo_root=WORK, claims_toml_path=claims_path, signing_seed_hex=seed)
+    try:
+        c.compile_pack(out, existing_ledger_path=existing_ledger)
+        error = None
+    except Exception as exc:
+        error = {'type':type(exc).__name__, 'message':str(exc)}
+    return {'output_dir':str(out), 'sentinel_before_sha256':before, 'exception':error, 'sentinel_exists_after':sentinel.exists(), 'directory_entries_after':sorted(str(x.relative_to(out)) for x in out.rglob('*'))}
+missing_claims = deletion_case('invalid-claims-output', WORK/'MISSING-CLAIMS.toml')
+missing_ledger = deletion_case('invalid-ledger-output', claims, WORK/'MISSING-LEDGER.sqlite')
+assert missing_claims['exception']['type'] == 'FileNotFoundError' and not missing_claims['sentinel_exists_after']
+assert missing_ledger['exception']['type'] == 'FileNotFoundError' and not missing_ledger['sentinel_exists_after']
+assert checksums_verified
+assert len(nemesis['campaigns']) == 4
+assert not blocked
+result = {
+ 'scope':'Actual compiler with disposable fixture claims and explicit disposable software signing seed; repo read-only',
+ 'source_sha256':{str(p.relative_to(REPO)):hashlib.sha256(p.read_bytes()).hexdigest() for p in [SRC/'compliance_exporter/m0_evidence_pack.py', SRC/'verifier/standalone_verify.py']},
+ 'initial_guarded_attempt':{'result':'Stopped before process execution when platform.platform attempted opening /dev/null for uname subprocess','correction':'Intercept platform.platform environment-description boundary with explicit fixture label'},
+ 'interceptions':['platform.platform() replaced with explicit fixture label to avoid uname process; no evidence generation logic replaced','Package namespace adapter avoids unrelated __init__ imports; no compiler/verifier function substituted','Python audit hook rejects process and socket boundaries and write-open paths outside audit directory; no rejected boundary reached','No adversarial campaign, hardware/biometrics, deployment or network executed'],
+ 'default_compile':{'on_disk_manifest_status':manifest['epistemic_status'], 'nemesis_sha256':hashlib.sha256(nemesis_raw).hexdigest(), 'campaign_observations':{k:v['independent_inode_observation'] for k,v in nemesis['campaigns'].items()}, 'campaign_outcomes':{k:v['outcome'] for k,v in nemesis['campaigns'].items()}, 'simulation_marker_present': any(x in nemesis_raw.decode().lower() for x in ['simulat','fixture','synthetic']), 'signature_independently_verified':True,'signed_file_checksums_independently_verified':checksums_verified,'ledger_rows':ledger_rows, 'repository_functions_called':sorted(functions)},
+ 'invalid_claims_deletion':missing_claims,'invalid_ledger_deletion':missing_ledger,
+ 'blocked_external_attempts':blocked,
+ 'counterexample_classification':'Both findings reproduced. Evidence generation is not a runtime authorization bypass; destructive path requires caller-supplied existing output directory.',
+ 'limitations':['Namespace adapter intentionally skips broad package initialization','Python audit hook is a test guard, not an OS sandbox or universal isolation proof','No real campaign or operator key involved; signed output proves byte integrity only']}
+(BASE/'result.json').write_text(json.dumps(result, indent=2)+'\n')
+print(json.dumps({'default_campaigns_emitted':len(nemesis['campaigns']),'signature_valid':True,'checksums_valid':checksums_verified,'invalid_claims_sentinel_deleted':not missing_claims['sentinel_exists_after'],'invalid_ledger_sentinel_deleted':not missing_ledger['sentinel_exists_after'],'external_attempts':blocked}))

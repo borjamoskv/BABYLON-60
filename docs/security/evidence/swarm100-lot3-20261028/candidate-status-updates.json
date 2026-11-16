@@ -1,0 +1,128 @@
+[
+  {
+    "candidate_id": "SW100-C0413",
+    "decision": "ALREADY_FIXED",
+    "severity": "P1",
+    "remediation_state": "FIXED",
+    "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+    "current_source_sha256": "92236e509279cd93355ca574c76070008b7adfabc8cd93ceb87acf3b18f02c0f",
+    "rationale": "Mandatory Gitleaks availability/failure now aborts. The scanner receives raw blobs from the selected immutable tree, including export-ignored paths and raw symlink data, with tracked policy/ignores and no Git replacement objects. A real serialized snapshot tar enforces the strict 20 MiB budget. Baseline fake publisher ran without Gitleaks; patched temporary regressions reject it. Zero scanner findings is not proof of absence of secrets.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+        "start_line": 380,
+        "end_line": 380,
+        "observation": "Missing mandatory scanner exits before local preparation or authorization."
+      },
+      {
+        "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+        "start_line": 139,
+        "end_line": 139,
+        "observation": "Snapshot is built from raw Git blobs, never worktree/archive filtering."
+      },
+      {
+        "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+        "start_line": 400,
+        "end_line": 400,
+        "observation": "Gitleaks runs on snapshot with frozen policy/ignore scope; any nonzero status aborts."
+      }
+    ],
+    "guards": [
+      "All Git/scanner/gate executable effects observed only through owned temporary doubles; no ATTESTED fixture.",
+      "Software field/signature checks do not attest hardware provenance independently of the trusted selected local gate.",
+      "Active pre-push hooks, LFS pointers and submodules are explicitly unsupported and rejected; no hook bypass.",
+      "Host transport binaries/configuration, hardware integration and real remote publication are outside this verification.",
+      "Ship atomically retains the verified receipt plus its effect descriptor at last_ship_receipt.json with mode 0600; no prior receipt is reused. Public projection receipt remains attempt-local."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot3-20261028/before-tests.log",
+      "docs/security/evidence/swarm100-lot3-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot3-20261028/independent-review.json",
+      "docs/security/evidence/swarm100-lot3-20261028/validation.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/15.json",
+    "runtime_scope": "Copied shell entrypoints with fake effect executables; pure binding/crypto functions and temporary snapshots.",
+    "resolution_type": "CODE_AND_CONFINED_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0418",
+    "decision": "ALREADY_FIXED",
+    "severity": "P1",
+    "remediation_state": "FIXED",
+    "path": "scripts/c5_git_utils/c5_ship.sh",
+    "current_source_sha256": "fb71a99a81f7254d4ec50bcacfae80bddf6c909e459c0d2c389d77c3d342dff8",
+    "rationale": "Missing both native and usable Swift gate aborts before aliases or local Git mutations. One selected gate attempt must return a bounded, fresh, effect-bound ATTESTED receipt with exact hash/action/scope, normalized agent, session operator and DER P256 signature; failure/cancellation/timeout/invalid output never dispatches or falls back. The baseline fixture dispatched without any gate. Rejection and pure software contract checks pass; no real hardware approval/publication was performed.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_git_utils/c5_ship.sh",
+        "start_line": 360,
+        "end_line": 360,
+        "observation": "Gate selection has an explicit abort when no provider exists."
+      },
+      {
+        "path": "scripts/c5_git_utils/c5_ship.sh",
+        "start_line": 410,
+        "end_line": 410,
+        "observation": "Gate preflight runs before aliases and mutation workflow."
+      },
+      {
+        "path": "scripts/c5_git_utils/c5_ship.sh",
+        "start_line": 554,
+        "end_line": 554,
+        "observation": "Gate must finish successfully before the immutable dispatcher is called."
+      }
+    ],
+    "guards": [
+      "All Git/scanner/gate executable effects observed only through owned temporary doubles; no ATTESTED fixture.",
+      "Software field/signature checks do not attest hardware provenance independently of the trusted selected local gate.",
+      "Active pre-push hooks, LFS pointers and submodules are explicitly unsupported and rejected; no hook bypass.",
+      "Host transport binaries/configuration, hardware integration and real remote publication are outside this verification.",
+      "Ship atomically retains the verified receipt plus its effect descriptor at last_ship_receipt.json with mode 0600; no prior receipt is reused. Public projection receipt remains attempt-local."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot3-20261028/before-tests.log",
+      "docs/security/evidence/swarm100-lot3-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot3-20261028/independent-review.json",
+      "docs/security/evidence/swarm100-lot3-20261028/validation.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/07.json",
+    "runtime_scope": "Copied shell entrypoints with fake effect executables; pure binding/crypto functions and temporary snapshots.",
+    "resolution_type": "CODE_AND_CONFINED_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0414",
+    "decision": "REJECTED",
+    "severity": "P2",
+    "remediation_state": "NOT_APPLICABLE",
+    "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+    "current_source_sha256": "92236e509279cd93355ca574c76070008b7adfabc8cd93ceb87acf3b18f02c0f",
+    "rationale": "Re-reviewed after Lot3: dry-run still explicitly permits local orphan commit/convenience branch preparation and exits before authorization or remote dispatch. Its prior-tip preservation was not part of the existing contract. This rejection is unchanged; the separate mutable-dispatch finding SW100-R3-0001 is fixed independently using the saved immutable commit.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+        "start_line": 407,
+        "end_line": 407,
+        "observation": "Local convenience branch preparation remains permitted."
+      },
+      {
+        "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+        "start_line": 409,
+        "end_line": 409,
+        "observation": "Preview exits before gate or publisher and states verification limits."
+      }
+    ],
+    "guards": [
+      "Preview local preparation remains allowed; authorization/push are explicitly NOT_CHECKED.",
+      "Convenience ref is no longer a dispatch source; the separate additional finding is handled independently."
+    ],
+    "runtime_executed": false,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot3-20261028/before-tests.log",
+      "docs/security/evidence/swarm100-lot3-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot3-20261028/independent-review.json",
+      "docs/security/evidence/swarm100-lot3-20261028/validation.json"
+    ]
+  }
+]

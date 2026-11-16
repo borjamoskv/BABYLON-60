@@ -1,0 +1,1088 @@
+[
+  {
+    "candidate_id": "SW100-C0045",
+    "severity": "P1",
+    "title": "Unsigned short vector lengths underflow the SIMD loop bound",
+    "path": "01_KISH_ENGINE/babylon60/utils/void_accel.c",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json",
+    "rationale": "Both SIMD loops subtract the vector width from unsigned size_t len before checking the bound. For a nonempty batch and len below 16/64, subtraction wraps and the first load already exceeds the query length. Python forwards len(query) without a minimum/equal-length guard. The loader-path void_accel.so is absent in this checkout, so current activation is unproven and the native defect was not executed.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/utils/void_accel.c",
+        "start_line": 20,
+        "end_line": 43,
+        "observation": "NEON loop bound len-16 is unsigned and loads 16 bytes without a preceding minimum check."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/utils/void_accel.c",
+        "start_line": 50,
+        "end_line": 76,
+        "observation": "AVX512 repeats the defect with len-64 and 64-byte loads."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/transducers/void_vec.py",
+        "start_line": 48,
+        "end_line": 88,
+        "observation": "Loading is conditional on shared-library existence; public batch function forwards query length directly."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/transducers/void_vec.py",
+        "start_line": 95,
+        "end_line": 125,
+        "observation": "Packing pads only to 8 bits; scalar pair API routes to accelerator when loaded."
+      }
+    ],
+    "registry_review_sha256": "30a83dc46a550cf95f77ea168a8a416456cfbed12a77186a9d18e421b3b61a64",
+    "source_sha256": "30a83dc46a550cf95f77ea168a8a416456cfbed12a77186a9d18e421b3b61a64",
+    "acceptance": "Longitudes 0–3 y fronteras SIMD sin underflow ni lectura fuera del buffer; comparar con referencia escalar."
+  },
+  {
+    "candidate_id": "SW100-C0046",
+    "severity": "P1",
+    "title": "Delete quarantine occurs before recoverable durable intent",
+    "path": "src/secure_fs.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json",
+    "rationale": "The current delete path renames the live target into quarantine before either budget persistence or the first deletion WAL intent. A process crash or a propagated persistence failure in that interval leaves an object whose recovery is rejected for absent intent. This is a recovery/availability gap; the object is retained rather than proven destroyed. No crash or native filesystem operation was executed.",
+    "source_checks": [
+      {
+        "path": "src/secure_fs.rs",
+        "start_line": 996,
+        "end_line": 1028,
+        "observation": "Backend quarantine is an actual confined rename, not only a prepared name."
+      },
+      {
+        "path": "src/secure_fs.rs",
+        "start_line": 2120,
+        "end_line": 2145,
+        "observation": "Rename and verification occur before budget append and AttemptReserved WAL append."
+      },
+      {
+        "path": "src/secure_fs.rs",
+        "start_line": 2322,
+        "end_line": 2341,
+        "observation": "Recovery fails immediately if the nonce lacks a WAL record."
+      }
+    ],
+    "registry_review_sha256": "9d34f7d50683b237b0eb7705721738a6595ea6661d4ed85d6fce5ee9cdb564bf",
+    "source_sha256": "9d34f7d50683b237b0eb7705721738a6595ea6661d4ed85d6fce5ee9cdb564bf",
+    "acceptance": "Intención durable recuperable antes de cuarentena; fallos por etapa conservan o recuperan el archivo."
+  },
+  {
+    "candidate_id": "SW100-C0052",
+    "severity": "P1",
+    "title": "Cross-instance effect budget uses stale usage history",
+    "path": "src/secure_fs.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json",
+    "rationale": "Budget usage is loaded at construction and then only changed in each instance's local map. The hybrid flock serializes effects and refreshes nonce/WAL state, but never reloads .budget_usage.bin. Two already-created instances with a one-effect policy and distinct authorized nonces can therefore each authorize against their own zero count. This is static cross-instance accounting analysis; no concurrent or native effects were run.",
+    "source_checks": [
+      {
+        "path": "src/secure_fs.rs",
+        "start_line": 1352,
+        "end_line": 1382,
+        "observation": "Constructor loads usage map before the normal hybrid-gate refresh."
+      },
+      {
+        "path": "src/secure_fs.rs",
+        "start_line": 1392,
+        "end_line": 1429,
+        "observation": "Shared flock surrounds refresh and execution."
+      },
+      {
+        "path": "src/secure_fs.rs",
+        "start_line": 1434,
+        "end_line": 1480,
+        "observation": "Refresh reloads consumed nonces and effect WAL only."
+      },
+      {
+        "path": "src/secure_fs.rs",
+        "start_line": 1618,
+        "end_line": 1696,
+        "observation": "Authorization consults cached usage, and commit updates that map then appends durable usage."
+      }
+    ],
+    "registry_review_sha256": "9d34f7d50683b237b0eb7705721738a6595ea6661d4ed85d6fce5ee9cdb564bf",
+    "source_sha256": "9d34f7d50683b237b0eb7705721738a6595ea6661d4ed85d6fce5ee9cdb564bf",
+    "acceptance": "Dos instancias comparten presupuesto vigente y rechazan excedente bajo intercalado controlado."
+  },
+  {
+    "candidate_id": "SW100-C0053",
+    "severity": "P1",
+    "title": "Mutation receipt recovery does not restore charged budget",
+    "path": "src/secure_fs.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json",
+    "rationale": "Mutation reserves its effect WAL, performs the backend effect, and only then records budget usage. If the process stops before that accounting append, restart reconstructs usage without the successful effect. Reconciliation can recognize matching inode/post-hash and append OutcomeKnown without restoring the missing charge. The WAL cannot attribute that charge because it stores neither authority_id nor effect byte count. No crash injection or runtime execution was performed.",
+    "source_checks": [
+      {
+        "path": "src/secure_fs.rs",
+        "start_line": 459,
+        "end_line": 478,
+        "observation": "WAL fields omit authority identity and charged byte count."
+      },
+      {
+        "path": "src/secure_fs.rs",
+        "start_line": 2254,
+        "end_line": 2295,
+        "observation": "Mutation execution precedes commit_budget_usage."
+      },
+      {
+        "path": "src/secure_fs.rs",
+        "start_line": 1914,
+        "end_line": 1931,
+        "observation": "Matching post-state leads directly to OutcomeKnown without budget repair."
+      },
+      {
+        "path": "src/secure_fs.rs",
+        "start_line": 1352,
+        "end_line": 1367,
+        "observation": "Restart reconstructs budget only from .budget_usage.bin."
+      }
+    ],
+    "registry_review_sha256": "9d34f7d50683b237b0eb7705721738a6595ea6661d4ed85d6fce5ee9cdb564bf",
+    "source_sha256": "9d34f7d50683b237b0eb7705721738a6595ea6661d4ed85d6fce5ee9cdb564bf",
+    "acceptance": "Recuperación de recibos restaura el cargo exactamente una vez tras reinicio, sin presupuesto gratuito."
+  },
+  {
+    "candidate_id": "SW100-C0054",
+    "severity": "P1",
+    "title": "Verifier certifies attacker-controlled text without verifying any signature",
+    "path": "scripts/c5_demos/c5_verifier_cli.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json",
+    "rationale": "The demo CLI reads arbitrary UTF-8 bytes and checks only substring membership before asserting valid hardware signature, zero-knowledge proof and absolute compliance. A label-complete plaintext file can satisfy every predicate without JSON parsing or signature verification. The orchestrator invokes this CLI and republishes its verdict. No native CLI was compiled or executed and no production authorization bypass is inferred.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_demos/c5_verifier_cli.rs",
+        "start_line": 38,
+        "end_line": 56,
+        "observation": "Input guards only check existence and UTF-8 readability."
+      },
+      {
+        "path": "scripts/c5_demos/c5_verifier_cli.rs",
+        "start_line": 61,
+        "end_line": 103,
+        "observation": "Acceptance predicates are content.contains checks."
+      },
+      {
+        "path": "scripts/c5_demos/c5_verifier_cli.rs",
+        "start_line": 108,
+        "end_line": 117,
+        "observation": "Success prints cryptographic/legal certification."
+      },
+      {
+        "path": "scripts/c5_demos/c5_sovereign_compliance_orchestrator.py",
+        "start_line": 94,
+        "end_line": 108,
+        "observation": "Orchestrator compiles/invokes CLI and surfaces certification lines."
+      }
+    ],
+    "registry_review_sha256": "d3aff0f8d68d635452f7675a0cd63fa992b1a2375e935d1d7e48c27c3bb03c30",
+    "source_sha256": "d3aff0f8d68d635452f7675a0cd63fa992b1a2375e935d1d7e48c27c3bb03c30",
+    "acceptance": "Ningún texto o prefijo obtiene verificación sin firma y ancla válida; ausencia de checker rechaza."
+  },
+  {
+    "candidate_id": "SW100-C0091",
+    "severity": "P1",
+    "title": "Validate envelope length before slicing the shared-memory payload",
+    "path": "00_ABZU_KERNEL/crates/strike-rs/src/hypervisor.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json",
+    "rationale": "spawn_writer_daemon slices an 8192-byte envelope with its public len field before ExergyPacket validation. A service participant supplying len > 8192 causes a Rust bounds panic in the writer thread. The normal publish_exergy_packet helper prevents oversized packets, so malformed direct/alternate IPC publishing is a necessary precondition; IPC access and deployed exposure were not exercised.",
+    "source_checks": [
+      {
+        "path": "00_ABZU_KERNEL/crates/strike-rs/src/hypervisor.rs",
+        "start_line": 302,
+        "end_line": 341,
+        "observation": "Received envelope length is used directly in a slice."
+      },
+      {
+        "path": "00_ABZU_KERNEL/crates/strike-rs/src/bft_iceoryx2.rs",
+        "start_line": 76,
+        "end_line": 105,
+        "observation": "Public envelope fields permit representing invalid lengths; normal helper bounds its own messages."
+      },
+      {
+        "path": "00_ABZU_KERNEL/crates/strike-rs/src/bindings.rs",
+        "start_line": 209,
+        "end_line": 214,
+        "observation": "Python-facing start_writer_daemon invokes the affected writer."
+      }
+    ],
+    "registry_review_sha256": "79af81bc27f34508c5798234efff054d3ca7e2a357066e77119cafe17f6589dc",
+    "source_sha256": "79af81bc27f34508c5798234efff054d3ca7e2a357066e77119cafe17f6589dc",
+    "acceptance": "Longitud del sobre validada antes del slice; entradas truncadas y límites devuelven rechazo sin panic."
+  },
+  {
+    "candidate_id": "SW100-C0107",
+    "severity": "P1",
+    "title": "Chain verification does not authenticate statement or justification payloads",
+    "path": "00_ABZU_KERNEL/crates/strike-rs/src/ledger.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json",
+    "rationale": "verify_chain authenticates stored statement/justification hash strings, not their current database payloads. A valid-JSON payload change with unchanged hash keys therefore leaves the chain calculation unchanged. Publisher reads and emits these payloads after verification, and the Python binding reinstalls them after replay. Confirmed as an integrity gap when database payloads are altered; no live database or adversarial runtime was exercised.",
+    "source_checks": [
+      {
+        "path": "00_ABZU_KERNEL/crates/strike-rs/src/ledger.rs",
+        "start_line": 343,
+        "end_line": 400,
+        "observation": "Chain verification hashes stored s_hash/j_hash and verifies nogood anchors without reading payload tables."
+      },
+      {
+        "path": "00_ABZU_KERNEL/crates/strike-rs/src/ledger.rs",
+        "start_line": 497,
+        "end_line": 527,
+        "observation": "Getters deserialize stored fields and return them without hash comparison."
+      },
+      {
+        "path": "00_ABZU_KERNEL/crates/strike-rs/src/publisher.rs",
+        "start_line": 28,
+        "end_line": 50,
+        "observation": "Verified export calls the unauthenticated getters."
+      },
+      {
+        "path": "00_ABZU_KERNEL/crates/strike-rs/src/bindings.rs",
+        "start_line": 34,
+        "end_line": 45,
+        "observation": "Startup replay is followed by getter-based ATMS rehydration."
+      }
+    ],
+    "registry_review_sha256": "800aa62d709a86659527b83b732f426a109446ebf83732e45c1f0cf609f0e794",
+    "source_sha256": "800aa62d709a86659527b83b732f426a109446ebf83732e45c1f0cf609f0e794",
+    "acceptance": "Mutar statement o justification invalida verificación; compatibilidad y alcance del hash explícitos."
+  },
+  {
+    "candidate_id": "SW100-C0201",
+    "severity": "P1",
+    "title": "Inference verifier proves only a freely chosen multiplication witness",
+    "path": "01_KISH_ENGINE/cortex/crates/babylon60-verifiable-inference/src/lib.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json",
+    "rationale": "The generated circuit has exactly one relation, private weight * public nonce == public expected_hash. For nonzero nonce it has a witness for any field expected_hash, without binding a model, input, output or authorized weight. The FFI verifies that circuit and the local stress consumer proves that same multiplication. CONFIRMED_STATIC concerns the advertised inference-verification semantics; no deployed effect consumer or forged proof was demonstrated.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/cortex/crates/babylon60-verifiable-inference/build.rs",
+        "start_line": 7,
+        "end_line": 23,
+        "observation": "Compiler input contains only a multiplication assertion."
+      },
+      {
+        "path": "01_KISH_ENGINE/cortex/crates/babylon60-verifiable-inference/src/lib.rs",
+        "start_line": 54,
+        "end_line": 98,
+        "observation": "FFI public inputs are nonce and expected hash; verifier checks generated circuit."
+      },
+      {
+        "path": "01_KISH_ENGINE/cortex/crates/babylon60-verifiable-inference/src/bin/stress_test.rs",
+        "start_line": 19,
+        "end_line": 43,
+        "observation": "Harness sets up and proves the same relation."
+      },
+      {
+        "path": "01_KISH_ENGINE/cortex/crates/babylon60-verifiable-inference/src/bin/stress_test.rs",
+        "start_line": 76,
+        "end_line": 101,
+        "observation": "Harness calls FFI for validity and malformed inputs."
+      }
+    ],
+    "registry_review_sha256": "73318aa0968539fbd0b7b19e5551981d420600ee8f9aec338e596df95fe5bea2",
+    "source_sha256": "73318aa0968539fbd0b7b19e5551981d420600ee8f9aec338e596df95fe5bea2",
+    "acceptance": "Prueba ligada a modelo/entrada/salida e inferencia realmente evaluada; sin puente comprobado no certificar."
+  },
+  {
+    "candidate_id": "SW100-C0202",
+    "severity": "P1",
+    "title": "Groth16 setup randomness is publicly reproducible",
+    "path": "01_KISH_ENGINE/cortex/crates/babylon60-verifiable-inference/src/lib.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json",
+    "rationale": "Verifier setup initializes ChaCha20Rng from the public literal 0xC5C5C5C5C5C5C5C5 and passes it to Groth16::setup; the stress prover regenerates setup from the same literal. Setup randomness is thus publicly reproducible, not a secret ceremony. This is a static cryptographic-design defect if used as an adversarial proof boundary; no proof forgery or production bypass was executed.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/cortex/crates/babylon60-verifiable-inference/src/lib.rs",
+        "start_line": 18,
+        "end_line": 35,
+        "observation": "Lazy verifying-key generation uses a hard-coded setup seed."
+      },
+      {
+        "path": "01_KISH_ENGINE/cortex/crates/babylon60-verifiable-inference/src/bin/stress_test.rs",
+        "start_line": 18,
+        "end_line": 43,
+        "observation": "Prover regenerates setup from exactly the same public seed."
+      },
+      {
+        "path": "01_KISH_ENGINE/cortex/crates/babylon60-verifiable-inference/src/lib.rs",
+        "start_line": 86,
+        "end_line": 95,
+        "observation": "FFI verifier uses the resulting key."
+      }
+    ],
+    "registry_review_sha256": "73318aa0968539fbd0b7b19e5551981d420600ee8f9aec338e596df95fe5bea2",
+    "source_sha256": "73318aa0968539fbd0b7b19e5551981d420600ee8f9aec338e596df95fe5bea2",
+    "acceptance": "Setup reproducible públicamente no habilita producción; exigir parámetros confiables o bloquear capacidad."
+  },
+  {
+    "candidate_id": "SW100-C0214",
+    "severity": "P1",
+    "title": "Stack slots grow beyond the reserved 256-byte frame",
+    "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/backend_x86.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json",
+    "rationale": "Stack slots begin at 16 and grow by 8 without a frame-sizing pass or bound, while the prologue reserves a fixed 256 bytes then aligns rsp. The original exact 32nd-slot return-address claim is inaccurate: with the emitted aligned stack_top, push rbp and and rsp,-16, rsp is rbp-264 and a call writes rbp-272, the 33rd slot. At least 33 live slots followed by Alloc/Free can overwrite a stored value. No native assembly was compiled or run; this is a public backend emission defect.",
+    "source_checks": [
+      {
+        "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/backend_x86.rs",
+        "start_line": 17,
+        "end_line": 33,
+        "observation": "Monotonic slot allocation is unbounded."
+      },
+      {
+        "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/backend_x86.rs",
+        "start_line": 54,
+        "end_line": 89,
+        "observation": "Aligned stack_top plus push/sub/and yields effective 264-byte frame."
+      },
+      {
+        "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/backend_x86.rs",
+        "start_line": 95,
+        "end_line": 109,
+        "observation": "ConstInt creates a slot; Alloc emits a call."
+      },
+      {
+        "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/backend_x86.rs",
+        "start_line": 141,
+        "end_line": 145,
+        "observation": "Free also emits a call."
+      },
+      {
+        "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/lib.rs",
+        "start_line": 5,
+        "end_line": 16,
+        "observation": "Backend is publicly exported; no caller-side slot restriction here."
+      }
+    ],
+    "registry_review_sha256": "b669e313a012749ab1966a2c7e4095d035c18a0a56470c8ee68742a556d73a68",
+    "source_sha256": "b669e313a012749ab1966a2c7e4095d035c18a0a56470c8ee68742a556d73a68",
+    "acceptance": "Slots de pila nunca exceden marco reservado; entradas en frontera y exceso rechazan o dimensionan de forma segura."
+  },
+  {
+    "candidate_id": "SW100-C0326",
+    "severity": "P1",
+    "title": "Arithmetic overflow escapes VM fail-closed handling",
+    "path": "crates/b60-lang/src/vm.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json",
+    "rationale": "SexaRegister.add uses unchecked u64 addition, while mul_scalar uses unchecked u128 multiplication then truncates the quotient with as u64. For example seconds=2^63 and factor=2 already produce a quotient of 2^64 that truncates to zero without needing u128 overflow. execute calls these helpers directly rather than returning an arithmetic error through poison_and_abort. Larger unchecked additions/products can wrap with overflow checks disabled or panic with them enabled; b60_run_bytecode has an extern C boundary and no panic catcher. Native panic/abort behavior was not executed, and no deployment build profile was assumed.",
+    "source_checks": [
+      {
+        "path": "crates/b60-lang/src/vm.rs",
+        "start_line": 23,
+        "end_line": 56,
+        "observation": "Unchecked additions/products and narrowing cast permit incorrect arithmetic or panic."
+      },
+      {
+        "path": "crates/b60-lang/src/vm.rs",
+        "start_line": 140,
+        "end_line": 150,
+        "observation": "Normal fail-closed handling requires returning through poison_and_abort."
+      },
+      {
+        "path": "crates/b60-lang/src/vm.rs",
+        "start_line": 230,
+        "end_line": 251,
+        "observation": "Add and multiply bypass Result-based arithmetic handling used by subtract/divide."
+      },
+      {
+        "path": "crates/b60-lang/src/ffi.rs",
+        "start_line": 137,
+        "end_line": 163,
+        "observation": "C ABI directly calls execute and handles Result only."
+      }
+    ],
+    "registry_review_sha256": "633d03c82686e0c10adc1b659a4a4063160053f78153584fd9f6147fec02a889",
+    "source_sha256": "633d03c82686e0c10adc1b659a4a4063160053f78153584fd9f6147fec02a889",
+    "acceptance": "Overflow de operaciones VM produce parada tipada y no panic, tanto debug como release."
+  },
+  {
+    "candidate_id": "SW100-C0335",
+    "severity": "P1",
+    "title": "Signed integer division can panic instead of returning Critical halt",
+    "path": "00_ABZU_KERNEL/crates/babylon60-kernel/src/eval.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json",
+    "rationale": "Public step accepts LoadImm of any i64 and Div with immediate -1. Its divisor-zero and operand-type guards permit i64::MIN / -1, which overflows signed division instead of returning HaltReason::Critical. The no-panic API claim is therefore false for this accepted input. No Rust/native binary was compiled or executed.",
+    "source_checks": [
+      {
+        "path": "00_ABZU_KERNEL/crates/babylon60-kernel/src/eval.rs",
+        "start_line": 14,
+        "end_line": 28,
+        "observation": "The public transition claims no panics and accepts every LoadImm i64."
+      },
+      {
+        "path": "00_ABZU_KERNEL/crates/babylon60-kernel/src/eval.rs",
+        "start_line": 82,
+        "end_line": 99,
+        "observation": "Only zero/type guards precede unchecked signed division."
+      },
+      {
+        "path": "00_ABZU_KERNEL/crates/babylon60-kernel/src/isa.rs",
+        "start_line": 34,
+        "end_line": 41,
+        "observation": "The ISA represents LoadImm i64 and Div without a constrained operand subtype."
+      }
+    ],
+    "registry_review_sha256": "5172ee1d8ff1eb3b33d3cf0c2bbe7c1dced0c870799ba2d5b043fda8b4c27fc3",
+    "source_sha256": "5172ee1d8ff1eb3b33d3cf0c2bbe7c1dced0c870799ba2d5b043fda8b4c27fc3",
+    "acceptance": "División por cero y MIN/-1 producen halt crítico definido, sin panic."
+  },
+  {
+    "candidate_id": "SW100-C0336",
+    "severity": "P1",
+    "title": "Ledger audit reports HEALTHY without inspecting any ledger",
+    "path": "01_KISH_ENGINE/cortex/crates/cortex-lsp/src/actions.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json",
+    "rationale": "The advertised c5.auditLedger CodeAction reaches an execute_command branch returning literal HEALTHY/compliance Verified JSON. No path, ledger read, chain validation or external verifier is used in that branch. main.rs exposes this result through workspace/executeCommand as a successful JSON-RPC response. Missing/corrupt ledgers cannot influence this result; no LSP/runtime was launched and no broader regulatory conclusion is drawn.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/cortex/crates/cortex-lsp/src/actions.rs",
+        "start_line": 28,
+        "end_line": 36,
+        "observation": "Ledger integrity audit is exposed as a CodeAction."
+      },
+      {
+        "path": "01_KISH_ENGINE/cortex/crates/cortex-lsp/src/actions.rs",
+        "start_line": 103,
+        "end_line": 110,
+        "observation": "Audit branch constructs constant healthy/compliant result."
+      },
+      {
+        "path": "01_KISH_ENGINE/cortex/crates/cortex-lsp/src/main.rs",
+        "start_line": 142,
+        "end_line": 166,
+        "observation": "ExecuteCommand forwards ActionEngine success directly to JSON-RPC result."
+      }
+    ],
+    "registry_review_sha256": "62d448193e772b1568ffdec9f110662daee65c99cf19f093a9444c586b8cee86",
+    "source_sha256": "62d448193e772b1568ffdec9f110662daee65c99cf19f093a9444c586b8cee86",
+    "acceptance": "HEALTHY solo tras inspeccionar el ledger solicitado; ausente/corrupto/no ejecutado no aprueba."
+  },
+  {
+    "candidate_id": "SW100-C0341",
+    "severity": "P1",
+    "title": "Aeon verifier trusts the public key supplied by the untrusted manifest",
+    "path": "crates/babylon-attest/src/conformal_tree.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json",
+    "rationale": "Verifier gets its only public key from the same untrusted manifest containing the signature. There is no externally trusted key comparison, and CLI accepts only a manifest path. Signature validity plus caller-supplied FROZEN_C5_REAL status drives kernel attestation success and zero exit. This establishes embedded-key self-consistency, not authorized operator identity.",
+    "source_checks": [
+      {
+        "path": "crates/babylon-attest/src/conformal_tree.rs",
+        "start_line": 194,
+        "end_line": 219,
+        "observation": "Status/key parsing guards, but key trust source is manifest itself."
+      },
+      {
+        "path": "crates/babylon-attest/src/conformal_tree.rs",
+        "start_line": 224,
+        "end_line": 245,
+        "observation": "overall_valid is root signature plus status."
+      },
+      {
+        "path": "crates/babylon-attest/src/main.rs",
+        "start_line": 83,
+        "end_line": 88,
+        "observation": "CLI has no separate trusted-key argument."
+      },
+      {
+        "path": "crates/babylon-attest/src/main.rs",
+        "start_line": 519,
+        "end_line": 540,
+        "observation": "Consumer presents successful kernel verification and exits zero."
+      }
+    ],
+    "registry_review_sha256": "6f6d83eeda8e035f9ecb67d48c81dd78e6dd3c520827cf10018792650705db95",
+    "source_sha256": "6f6d83eeda8e035f9ecb67d48c81dd78e6dd3c520827cf10018792650705db95",
+    "acceptance": "Ancla externa obligatoria; auto-firma del manifiesto, clave ajena y campos alterados rechazan."
+  },
+  {
+    "candidate_id": "SW100-C0349",
+    "severity": "P1",
+    "title": "Serialize ledger read-modify-append across writers",
+    "path": "crates/babylon-attest/src/ledger.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json",
+    "rationale": "append_event derives index and previous hash from an unlocked read and later opens a separate append handle. Two processes can both observe head N and acknowledge index N+1; verify_chain then rejects the duplicate index. CLI and authorized HTTP branches reach this function directly. This is a source-supported concurrency defect; no writer race was executed.",
+    "source_checks": [
+      {
+        "path": "crates/babylon-attest/src/ledger.rs",
+        "start_line": 120,
+        "end_line": 168,
+        "observation": "No lock or transaction spans get_chain_blocks, head derivation and writeln."
+      },
+      {
+        "path": "crates/babylon-attest/src/ledger.rs",
+        "start_line": 185,
+        "end_line": 196,
+        "observation": "verify_chain rejects index discontinuity and predecessor mismatch."
+      },
+      {
+        "path": "crates/babylon-attest/src/main.rs",
+        "start_line": 227,
+        "end_line": 247,
+        "observation": "CLI appends and acknowledges success."
+      },
+      {
+        "path": "crates/babylon-attest/src/main.rs",
+        "start_line": 465,
+        "end_line": 477,
+        "observation": "Authorized HTTP input reaches the same appender."
+      }
+    ],
+    "registry_review_sha256": "d9d0ce0c0cae2e92ae723199f6abdeb91fbde09c272a2811395e7298adb1bb27",
+    "source_sha256": "d9d0ce0c0cae2e92ae723199f6abdeb91fbde09c272a2811395e7298adb1bb27",
+    "acceptance": "Exclusión cubre leer/modificar/append entre escritores e instancias, sin pérdida ni bifurcación."
+  },
+  {
+    "candidate_id": "SW100-C0350",
+    "severity": "P1",
+    "title": "Sync committed ledger records before acknowledging success",
+    "path": "crates/babylon-attest/src/ledger.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json",
+    "rationale": "append_event returns Ok immediately after writeln without sync_data/sync_all. The CLI reports ATTESTATION COMMITTED on that result. Crash durability of the acknowledged line is therefore not established; a host/storage failure can lose buffered data or leave a partial JSON line, which get_chain_blocks rejects. No crash or storage fault was induced.",
+    "source_checks": [
+      {
+        "path": "crates/babylon-attest/src/ledger.rs",
+        "start_line": 158,
+        "end_line": 168,
+        "observation": "Successful write is the last operation before Ok; no durability barrier."
+      },
+      {
+        "path": "crates/babylon-attest/src/ledger.rs",
+        "start_line": 103,
+        "end_line": 114,
+        "observation": "Line parse error aborts reading the ledger."
+      },
+      {
+        "path": "crates/babylon-attest/src/main.rs",
+        "start_line": 227,
+        "end_line": 235,
+        "observation": "COMMITTED output relies on append_event success."
+      }
+    ],
+    "registry_review_sha256": "d9d0ce0c0cae2e92ae723199f6abdeb91fbde09c272a2811395e7298adb1bb27",
+    "source_sha256": "d9d0ce0c0cae2e92ae723199f6abdeb91fbde09c272a2811395e7298adb1bb27",
+    "acceptance": "Confirmación solo después de sincronizar; errores de escritura/sync observables sin falso éxito."
+  },
+  {
+    "candidate_id": "SW100-C0381",
+    "severity": "P1",
+    "title": "Quarantine exports overwrite prior forensic evidence",
+    "path": "src/babylon60.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json",
+    "rationale": "Confirmed for the registered babylon60-dsl exporter. Both quarantine files have constant names and fs::write replaces existing contents; neither existence rejection nor a per-run directory preserves prior bundles. A second quarantine in the same writable working directory overwrites the first. This is source-level evidence of retention failure, not an executed loss of operator data.",
+    "source_checks": [
+      {
+        "path": "src/babylon60.rs",
+        "start_line": 503,
+        "end_line": 542,
+        "observation": "Quarantine path calls exporter, claims WORM, and writes both fixed names."
+      },
+      {
+        "path": "src/babylon60.rs",
+        "start_line": 242,
+        "end_line": 250,
+        "observation": "Static compilation rejection also reaches the same exporter."
+      },
+      {
+        "path": "Cargo.toml",
+        "start_line": 104,
+        "end_line": 106,
+        "observation": "The source is registered as the babylon60-dsl binary."
+      }
+    ],
+    "registry_review_sha256": "202a32f58401f3c7f44dc72a0fb701205c8b5b118ef342e8a1779cd469919125",
+    "source_sha256": "202a32f58401f3c7f44dc72a0fb701205c8b5b118ef342e8a1779cd469919125",
+    "acceptance": "Exportaciones forenses exclusivas no sustituyen evidencia anterior, incluso con reloj fijo y concurrencia."
+  },
+  {
+    "candidate_id": "SW100-C0393",
+    "severity": "P1",
+    "title": "Proposal handler fabricates verified postconditions without independent execution",
+    "path": "crates/babylon-skills-mcp/src/lib.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json",
+    "rationale": "An admissible public proposal returns status VERIFIED, independent-verifier attribution and postconditions_checked even when simulated_execution_result is absent and the same response says Authorized/effects_executed=0. If simulation data is present, both comparison values come from that request and actual_file_sha256 defaults to reported_post_hash. Existing broker guards restrict admissibility but cannot establish independent observation for these values. Source modifications elsewhere do not remove this current defect.",
+    "source_checks": [
+      {
+        "path": "crates/babylon-skills-mcp/src/lib.rs",
+        "start_line": 1494,
+        "end_line": 1568,
+        "observation": "Credential shape and expiry guards precede proposal."
+      },
+      {
+        "path": "crates/babylon-skills-mcp/src/lib.rs",
+        "start_line": 1571,
+        "end_line": 1626,
+        "observation": "Lockfile, classification, version and visibility checks."
+      },
+      {
+        "path": "crates/babylon-skills-mcp/src/lib.rs",
+        "start_line": 1724,
+        "end_line": 1752,
+        "observation": "Proposal delegated to capability broker with approval/precondition inputs."
+      },
+      {
+        "path": "crates/babylon-skills-mcp/src/lib.rs",
+        "start_line": 1829,
+        "end_line": 1899,
+        "observation": "Request-derived verifier values and unconditional VERIFIED response."
+      },
+      {
+        "path": "crates/babylon-skills-mcp/src/lib.rs",
+        "start_line": 1903,
+        "end_line": 1946,
+        "observation": "Separate execution method has independent verifier argument."
+      },
+      {
+        "path": "crates/babylon-skills-mcp/src/lib.rs",
+        "start_line": 1978,
+        "end_line": 1998,
+        "observation": "Both tools/call and direct method expose the proposal handler."
+      }
+    ],
+    "registry_review_sha256": "789611513b90d1dfee802d49ef3914379369b0f9503ac468e5688c04d1f64b98",
+    "source_sha256": "789611513b90d1dfee802d49ef3914379369b0f9503ac468e5688c04d1f64b98",
+    "acceptance": "Postcondiciones verificadas requieren observación independiente del efecto; simulación no equivale a verificación."
+  },
+  {
+    "candidate_id": "SW100-C0442",
+    "severity": "P1",
+    "title": "F60 reduction changes the represented value for partial base factors",
+    "path": "00_ABZU_KERNEL/crates/babylon60-runtime/src/main.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json",
+    "rationale": "F60 represents num/60^scale. reduce removes the full gcd from num but only removes whole powers of 60 from scale: (2,1) becomes (1,1), changing 1/30 to 1/60. BA.EXACT can construct this value from 2/60. This is an arithmetic correctness defect in the CLI interpreter, independently of any security claim.",
+    "source_checks": [
+      {
+        "path": "00_ABZU_KERNEL/crates/babylon60-runtime/src/main.rs",
+        "start_line": 31,
+        "end_line": 59,
+        "observation": "Constructor always reduces; denominator representation is 60^scale."
+      },
+      {
+        "path": "00_ABZU_KERNEL/crates/babylon60-runtime/src/main.rs",
+        "start_line": 318,
+        "end_line": 337,
+        "observation": "Division scales numerator then constructs F60 from quotient and scale."
+      }
+    ],
+    "registry_review_sha256": "af8be5002dbf1ea7fd3bbfac41e235624303c0e28ac3dec58648e731ce7402f8",
+    "source_sha256": "af8be5002dbf1ea7fd3bbfac41e235624303c0e28ac3dec58648e731ce7402f8",
+    "acceptance": "Reducción F60 preserva el valor para factores parciales de base, contra referencia racional."
+  },
+  {
+    "candidate_id": "SW100-C0443",
+    "severity": "P1",
+    "title": "Division ignores the denominator scale",
+    "path": "00_ABZU_KERNEL/crates/babylon60-runtime/src/main.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json",
+    "rationale": "BA.EXACT divides using val2.num only and retains the dividend scale; it never multiplies by 60^val2.scale. A divisor obtained by 1/60 has (num=1,scale=1); dividing integer 1 by it returns (1,0) instead of (60,0). This is independent of the partial-gcd reduction issue because gcd(1,60)=1.",
+    "source_checks": [
+      {
+        "path": "00_ABZU_KERNEL/crates/babylon60-runtime/src/main.rs",
+        "start_line": 161,
+        "end_line": 173,
+        "observation": "Register expression returns both numerator and scale."
+      },
+      {
+        "path": "00_ABZU_KERNEL/crates/babylon60-runtime/src/main.rs",
+        "start_line": 318,
+        "end_line": 337,
+        "observation": "Divisor scale is unused throughout BA.EXACT."
+      }
+    ],
+    "registry_review_sha256": "af8be5002dbf1ea7fd3bbfac41e235624303c0e28ac3dec58648e731ce7402f8",
+    "source_sha256": "af8be5002dbf1ea7fd3bbfac41e235624303c0e28ac3dec58648e731ce7402f8",
+    "acceptance": "División conserva ambas escalas del denominador/numerador; cero, signo y extremos definidos."
+  },
+  {
+    "candidate_id": "SW100-C0481",
+    "severity": "P1",
+    "title": "Array display truncation corrupts the GGUF parse cursor",
+    "path": "crates/eridu-infer/src/gguf.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json",
+    "rationale": "The ARRAY branch advances through at most ten elements and returns that intermediate cursor; adding an ellipsis only changes display text. load_mmap trusts the returned cursor for the next metadata key/tensor descriptor. Thus a valid array with eleven or more elements is parsed from inside its own remaining payload, breaking ordinary model loading. No model file or native parser was executed.",
+    "source_checks": [
+      {
+        "path": "crates/eridu-infer/src/gguf.rs",
+        "start_line": 60,
+        "end_line": 85,
+        "observation": "Metadata parsing adopts new_cursor unconditionally."
+      },
+      {
+        "path": "crates/eridu-infer/src/gguf.rs",
+        "start_line": 227,
+        "end_line": 241,
+        "observation": "count.min(10) controls consumption, and no skip traverses the rest."
+      },
+      {
+        "path": "crates/eridu-infer/src/gguf.rs",
+        "start_line": 92,
+        "end_line": 99,
+        "observation": "The same cursor becomes the start of tensor descriptors."
+      },
+      {
+        "path": "crates/eridu-infer/src/server.rs",
+        "start_line": 35,
+        "end_line": 48,
+        "observation": "ERIDU_GGUF_PATH is loaded during AppState creation; load errors become None."
+      }
+    ],
+    "registry_review_sha256": "4db2253f39ce1211f2c8d7f09b149861739db8be3f4e95e0c5da3f5aa37f1972",
+    "source_sha256": "4db2253f39ce1211f2c8d7f09b149861739db8be3f4e95e0c5da3f5aa37f1972",
+    "acceptance": "Truncar presentación no modifica cursor GGUF; arrays largos seguidos por campos se parsean íntegros."
+  },
+  {
+    "candidate_id": "SW100-C0493",
+    "severity": "P1",
+    "title": "Ledger model field reaches innerHTML without escaping",
+    "path": "crates/eridu-infer/src/hud.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json",
+    "rationale": "A successful chat request's model string flows from req.model to receipt.model_id and then to the receipts JSON. HUD fetchReceipts interpolates it into tbody.innerHTML without escaping. A caller able to reach the chat endpoint can therefore supply active HTML markup for later rendering in the HUD origin. The inspected router adds no authentication or CSP middleware, and the gate's success guard does not constrain model text. This is a static stored-markup injection trace; no server, browser or exploit was run, and network exposure beyond an accessible local endpoint is not asserted.",
+    "source_checks": [
+      {
+        "path": "crates/eridu-infer/src/hud.rs",
+        "start_line": 506,
+        "end_line": 524,
+        "observation": "Receipt model_id is interpolated into innerHTML."
+      },
+      {
+        "path": "crates/eridu-infer/src/server.rs",
+        "start_line": 53,
+        "end_line": 74,
+        "observation": "Router exposes chat and receipt endpoints; receipt handler returns the stored receipt list."
+      },
+      {
+        "path": "crates/eridu-infer/src/server.rs",
+        "start_line": 118,
+        "end_line": 141,
+        "observation": "Chat handler forwards req.model directly to evaluate_and_seal."
+      },
+      {
+        "path": "crates/eridu-infer/src/gate.rs",
+        "start_line": 85,
+        "end_line": 105,
+        "observation": "Successful gate stores model.to_string() in recent_receipts without HTML encoding."
+      }
+    ],
+    "registry_review_sha256": "6c537744b07f015222c70591c963b2b3df24fec1e4312c6c027749b2b65a047b",
+    "source_sha256": "6c537744b07f015222c70591c963b2b3df24fec1e4312c6c027749b2b65a047b",
+    "acceptance": "Campos del ledger se insertan como texto escapado; payload HTML no crea nodos ni ejecuta código."
+  },
+  {
+    "candidate_id": "SW100-C0502",
+    "severity": "P1",
+    "title": "Native Hamming batch accepts buffers shorter than its stride",
+    "path": "01_KISH_ENGINE/babylon60/transducers/void_vec.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json",
+    "rationale": "The Python accelerator branch concatenates arbitrary byte strings and tells native code each member has query length. Both C implementations derive target pointers from i*len and read len bytes without receiving the actual allocation size. For a 64-byte query and one 1-byte target, the native read extends beyond the supplied target buffer. This is conditional on a compatible accelerator loading; no shared library was loaded or native access executed.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/transducers/void_vec.py",
+        "start_line": 48,
+        "end_line": 92,
+        "observation": "Conditional native loading and unvalidated concatenation/stride."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/transducers/void_vec.py",
+        "start_line": 119,
+        "end_line": 131,
+        "observation": "Single-distance API also delegates to the batch wrapper when accelerator exists."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/utils/void_accel.c",
+        "start_line": 20,
+        "end_line": 43,
+        "observation": "NEON consumes target at i*len and reads blocks/tail."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/utils/void_accel.c",
+        "start_line": 50,
+        "end_line": 77,
+        "observation": "AVX512 uses the same unchecked stride contract."
+      }
+    ],
+    "registry_review_sha256": "e505217fea124947cf141d5463b1861fb3c0b049e135411cd92b6831f51bede0",
+    "source_sha256": "e505217fea124947cf141d5463b1861fb3c0b049e135411cd92b6831f51bede0",
+    "acceptance": "Rechazar buffers menores que stride antes de FFI; extremos y formato sin lecturas fuera de límites."
+  },
+  {
+    "candidate_id": "SW100-C0526",
+    "severity": "P1",
+    "title": "Completion endpoint returns canned legal output as model inference",
+    "path": "crates/eridu-infer/src/server.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json",
+    "rationale": "chat_completions_handler derives generated_response from fixed format strings selected by requested model. gguf_model contributes only tensor_count; there is no inference call in the handler. The result is labeled chat.completion with model=req.model and token counts derived from string byte lengths. The causal gate can reject a poisoned manifest but does not execute model inference. Confirmed as fabricated inference semantics in this endpoint, not as a claim that all inference code in the repository is a stub.",
+    "source_checks": [
+      {
+        "path": "crates/eridu-infer/src/server.rs",
+        "start_line": 117,
+        "end_line": 146,
+        "observation": "Handler stages prompt, calls causal gate and reads GGUF tensor count."
+      },
+      {
+        "path": "crates/eridu-infer/src/server.rs",
+        "start_line": 146,
+        "end_line": 201,
+        "observation": "Response is built from fixed model-specific strings; usage is string-length approximation."
+      },
+      {
+        "path": "crates/eridu-infer/src/server.rs",
+        "start_line": 212,
+        "end_line": 232,
+        "observation": "Response reports the requested model and generated completion."
+      },
+      {
+        "path": "crates/eridu-infer/src/gate.rs",
+        "start_line": 57,
+        "end_line": 105,
+        "observation": "Gate hashes/publishes the prompt and creates a receipt without inference."
+      }
+    ],
+    "registry_review_sha256": "bbbc97cf3cb7e2cef458411dce71791d47560615310fb3107f0ab18e8ba5e903",
+    "source_sha256": "bbbc97cf3cb7e2cef458411dce71791d47560615310fb3107f0ab18e8ba5e903",
+    "acceptance": "Completion devuelve inferencia observada o error no disponible; nunca texto prefabricado presentado como modelo."
+  },
+  {
+    "candidate_id": "SW100-C0565",
+    "severity": "P1",
+    "title": "Container build pins compiler older than workspace manifests",
+    "path": "deploy/Dockerfile",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json",
+    "rationale": "Docker pins rust:1.80-alpine and builds the copied workspace. Workspace members declare edition 2024; official Rust release notes place stabilization at 1.85. Root also declares rust-version 1.89. Current manifests therefore exceed the builder toolchain. No Docker build, install or deployment was performed.",
+    "source_checks": [
+      {
+        "path": "deploy/Dockerfile",
+        "start_line": 6,
+        "end_line": 14,
+        "observation": "Pinned builder copies workspace and runs Cargo."
+      },
+      {
+        "path": "Cargo.toml",
+        "start_line": 1,
+        "end_line": 20,
+        "observation": "Workspace includes member globs; root rust-version is 1.89."
+      },
+      {
+        "path": "00_ABZU_KERNEL/crates/strike-rs/Cargo.toml",
+        "start_line": 1,
+        "end_line": 6,
+        "observation": "Member edition 2024."
+      },
+      {
+        "path": "crates/cadt_mediator/Cargo.toml",
+        "start_line": 1,
+        "end_line": 6,
+        "observation": "Member edition 2024."
+      }
+    ],
+    "registry_review_sha256": "1cc2c6c057ce3d5d5971619402ca85976190903af0e3b2e3b316d688d52538e6",
+    "source_sha256": "1cc2c6c057ce3d5d5971619402ca85976190903af0e3b2e3b316d688d52538e6",
+    "acceptance": "Compilador del contenedor satisface rust-version de manifests; comprobación locked y build aislado cuando sea viable."
+  },
+  {
+    "candidate_id": "SW100-C0001",
+    "severity": "P2",
+    "title": "CDP request futures retained after timeout",
+    "path": "01_KISH_ENGINE/babylon60/kernel/browser_cdp_engine.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json",
+    "rationale": "send retains a new Future in _pending_requests before both ws.send and wait_for. A send error or timeout without a subsequent matching response has no removal path, so repeated failures retain entries for the lifetime of the CDPPage. This is source-level resource retention; no browser or network was launched.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/kernel/browser_cdp_engine.py",
+        "start_line": 138,
+        "end_line": 149,
+        "observation": "Map insertion precedes both awaits and there is no finally cleanup."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/kernel/browser_cdp_engine.py",
+        "start_line": 86,
+        "end_line": 118,
+        "observation": "Only receiving a matching id removes its entry; listener termination does not clear pending requests."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/kernel/browser_cdp_engine.py",
+        "start_line": 324,
+        "end_line": 336,
+        "observation": "close cancels receive task and closes WebSocket without clearing the map."
+      }
+    ],
+    "registry_review_sha256": "e3473ca0c7087ead3e66ee93238986a1a5b0a9968282b188df021e96af58b1a8",
+    "source_sha256": "e3473ca0c7087ead3e66ee93238986a1a5b0a9968282b188df021e96af58b1a8",
+    "acceptance": "Timeout/error/envío cancelado retiran futuros pendientes; respuesta tardía y cierre no filtran recursos."
+  },
+  {
+    "candidate_id": "SW100-C0002",
+    "severity": "P2",
+    "title": "Navigation retains a listener on every call",
+    "path": "01_KISH_ENGINE/babylon60/kernel/browser_cdp_engine.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json",
+    "rationale": "Every navigate(wait_until_load=True) appends a closure retaining its load Future; all completion, readyState and timeout exits leave that callback registered. Repeated calls on one page therefore retain callbacks and increase event dispatch work. No browser execution or RSS measurement was performed.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/kernel/browser_cdp_engine.py",
+        "start_line": 151,
+        "end_line": 179,
+        "observation": "All navigation completion paths omit listener removal."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/kernel/browser_cdp_engine.py",
+        "start_line": 318,
+        "end_line": 336,
+        "observation": "on only appends; close also does not clear event listeners."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/kernel/browser_cdp_engine.py",
+        "start_line": 110,
+        "end_line": 114,
+        "observation": "Each event traverses all callbacks for its method."
+      }
+    ],
+    "registry_review_sha256": "e3473ca0c7087ead3e66ee93238986a1a5b0a9968282b188df021e96af58b1a8",
+    "source_sha256": "e3473ca0c7087ead3e66ee93238986a1a5b0a9968282b188df021e96af58b1a8",
+    "acceptance": "Navegaciones sucesivas retiran listeners propios; errores/cancelación no acumulan callbacks."
+  },
+  {
+    "candidate_id": "SW100-C0003",
+    "severity": "P2",
+    "title": "Browser launch timeout leaves browser process alive",
+    "path": "01_KISH_ENGINE/babylon60/kernel/browser_cdp_engine.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json",
+    "rationale": "After Popen succeeds, endpoint timeout or a later exception returns False without terminating the process. __aenter__ then raises; its __aexit__ cleanup is not entered. A failed context-manager launch can therefore retain its browser child until separate close or process termination. TemporaryDirectory finalization may eventually clean the profile; indefinite profile retention is not asserted.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/kernel/browser_cdp_engine.py",
+        "start_line": 395,
+        "end_line": 422,
+        "observation": "Temporary profile and Popen are created before readiness checks."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/kernel/browser_cdp_engine.py",
+        "start_line": 424,
+        "end_line": 461,
+        "observation": "Readiness failures return False without close."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/kernel/browser_cdp_engine.py",
+        "start_line": 503,
+        "end_line": 532,
+        "observation": "Cleanup exists only in close/__aexit__; failed __aenter__ raises before context entry."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/kernel/browser_cdp_engine.py",
+        "start_line": 558,
+        "end_line": 563,
+        "observation": "The standalone caller uses async with BrowserEngine."
+      }
+    ],
+    "registry_review_sha256": "e3473ca0c7087ead3e66ee93238986a1a5b0a9968282b188df021e96af58b1a8",
+    "source_sha256": "e3473ca0c7087ead3e66ee93238986a1a5b0a9968282b188df021e96af58b1a8",
+    "acceptance": "Timeout de lanzamiento termina y espera exclusivamente al proceso hijo de fixture creado por esa llamada."
+  },
+  {
+    "candidate_id": "SW100-C0004",
+    "severity": "P2",
+    "title": "PoC prints success after DAG timeout",
+    "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/poc_bft_zerocopy_dag.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json",
+    "rationale": "The incomplete-DAG timeout branch only breaks the loop. Cleanup is followed by an unconditional success banner and normal main return without checking completed.len()==num_nodes. With a normally terminating worker the timeout is consequently reported as success with exit zero. The output also exposes the partial node count, but this does not correct its verdict.",
+    "source_checks": [
+      {
+        "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/poc_bft_zerocopy_dag.rs",
+        "start_line": 111,
+        "end_line": 154,
+        "observation": "Completion loop and break-only timeout."
+      },
+      {
+        "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/poc_bft_zerocopy_dag.rs",
+        "start_line": 157,
+        "end_line": 168,
+        "observation": "Cleanup followed by unconditional success and normal return."
+      }
+    ],
+    "registry_review_sha256": "0e059323c9270d9169ab2901f2534fea9296689ac77085104ef0302aeb9049b7",
+    "source_sha256": "0e059323c9270d9169ab2901f2534fea9296689ac77085104ef0302aeb9049b7",
+    "acceptance": "PoC no anuncia éxito al vencer plazo; cuenta/resultado del DAG observados determinan salida."
+  },
+  {
+    "candidate_id": "SW100-C0005",
+    "severity": "P2",
+    "title": "Execution verifier ignores untracked files",
+    "path": "scripts/c5_verifiers/verify_execution.sh",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json",
+    "rationale": "Verifier checks only tracked worktree/index diffs. With untracked files alone both succeed and it prints repository clean and execution audited. Later log and last-commit hashing also omit untracked additions. Scope is inaccurate verifier output; no Git mutation was performed.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_verifiers/verify_execution.sh",
+        "start_line": 5,
+        "end_line": 20,
+        "observation": "No untracked status check before clean claim."
+      },
+      {
+        "path": "scripts/c5_verifiers/verify_execution.sh",
+        "start_line": 22,
+        "end_line": 34,
+        "observation": "Only prior-commit paths hashed before final audit claim."
+      }
+    ],
+    "registry_review_sha256": "847847dffe82976bd653c7787baaf9714e107770c047d31e797c68701d844046",
+    "source_sha256": "847847dffe82976bd653c7787baaf9714e107770c047d31e797c68701d844046",
+    "acceptance": "Verificador de ejecución detecta archivos no versionados dentro de su contrato, sin ignorar silenciosamente cambios."
+  }
+]

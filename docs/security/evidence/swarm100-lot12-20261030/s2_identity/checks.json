@@ -1,0 +1,67 @@
+{
+  "related-tests": {
+    "command": [
+      "uv",
+      "run",
+      "--locked",
+      "--no-sync",
+      "python",
+      "-c",
+      "\nimport os, socket, sys, tempfile\ntemporary = tempfile.TemporaryDirectory(prefix=\"lot12-s2-identity-\")\nos.environ[\"HOME\"] = temporary.name\nos.environ[\"CORTEX_DB_PATH\"] = temporary.name + \"/state\"\nos.environ[\"CORTEX_TESTING\"] = \"1\"\nos.environ[\"BABYLON60_SIGNING_SEED\"] = \"00\" * 32\nfor key in [\"CORTEX_VAULT_KEY\", \"BABYLON_AEON_TRUSTED_PUBLIC_KEY_B64\", \"KIMI_API_KEY\", \"MOONSHOT_API_KEY\", \"OPENROUTER_API_KEY\"]:\n    os.environ.pop(key, None)\nimport dotenv\ndotenv.load_dotenv = lambda *a, **k: False\ndotenv.dotenv_values = lambda *a, **k: {}\nconnect_original = socket.socket.connect\nconnect_ex_original = socket.socket.connect_ex\ndef blocked(*a, **k):\n    raise AssertionError(\"network forbidden in identity fixtures\")\ndef connect(self, *a, **k):\n    if self.family in (socket.AF_INET, socket.AF_INET6): return blocked()\n    return connect_original(self, *a, **k)\ndef connect_ex(self, *a, **k):\n    if self.family in (socket.AF_INET, socket.AF_INET6): return blocked()\n    return connect_ex_original(self, *a, **k)\nsocket.socket.connect = connect\nsocket.socket.connect_ex = connect_ex\nsocket.getaddrinfo = blocked\nimport pytest\nraise SystemExit(pytest.main(sys.argv[1:]))\n",
+      "tests/test_swarm100_lot12_s2_identity_regressions.py",
+      "tests/test_crypto_canonical.py",
+      "tests/test_bounty_aeon_sealer.py::test_conformal_merkle_tree_inclusion_and_falsification",
+      "-q",
+      "-o",
+      "addopts=--tb=short"
+    ],
+    "exit_code": 0,
+    "log_sha256": "de5d689cc9dce3c32ee9a6dabfac1a542bd986ac05a74700e542b467d56e8015"
+  },
+  "ruff": {
+    "command": [
+      "uv",
+      "run",
+      "--locked",
+      "--no-sync",
+      "ruff",
+      "check",
+      "01_KISH_ENGINE/babylon60/crypto/identity.py",
+      "01_KISH_ENGINE/babylon60/crypto/keys.py",
+      "scripts/c5_l1_ledger/seal_bounty_aeon.py",
+      "tests/test_swarm100_lot12_s2_identity_regressions.py"
+    ],
+    "exit_code": 0,
+    "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+  },
+  "mypy": {
+    "command": [
+      "uv",
+      "run",
+      "--locked",
+      "--no-sync",
+      "mypy",
+      "--follow-imports=silent",
+      "--check-untyped-defs",
+      "01_KISH_ENGINE/babylon60/crypto/identity.py",
+      "01_KISH_ENGINE/babylon60/crypto/keys.py",
+      "scripts/c5_l1_ledger/seal_bounty_aeon.py"
+    ],
+    "exit_code": 0,
+    "log_sha256": "8228fcc5ce46d42d01caf3cd941f4e9c5f2bcc372bb5b147a2f0572d2dd675a8"
+  },
+  "diff-check": {
+    "command": [
+      "git",
+      "diff",
+      "--check",
+      "--",
+      "01_KISH_ENGINE/babylon60/crypto/identity.py",
+      "01_KISH_ENGINE/babylon60/crypto/keys.py",
+      "scripts/c5_l1_ledger/seal_bounty_aeon.py",
+      "tests/test_swarm100_lot12_s2_identity_regressions.py"
+    ],
+    "exit_code": 0,
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

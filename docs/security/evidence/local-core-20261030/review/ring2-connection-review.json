@@ -1,0 +1,23 @@
+{
+  "reviewer": "independent_verifier",
+  "reviewed_at_utc": "2026-10-29T23:21:32.342444+00:00",
+  "decision": "STATIC_REVIEW_ACCEPTED_PENDING_INDEPENDENT_TESTS",
+  "base_head": "eb28fa97bb0440d59878b955222aa0617a1c236b",
+  "source_root": "/Users/borjafernandezangulo/.codex/worktrees/local-core-ring2/BABYLON-60",
+  "sha256": {
+    "01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py": "f2a05503bc085cba2734ee29290de1ebf62f776b1ed2f6f080314720c8d8ba9a",
+    "tests/test_local_core_cortex_connections.py": "46514e53301b0179d00303af5a009a68c89cd176359c2bbe8dd22499d5c23528"
+  },
+  "findings": [],
+  "checks": [
+    "closing(conn) encloses transaction context, so commit/rollback precedes guaranteed close.",
+    "Owned read/write methods converted without closing caller-owned append_event(connection=...) handles.",
+    "Configuration failure closes handle before re-raising; journal_mode/WAL, busy timeout and FULL retained.",
+    "Tests retain real SQLite connections, defeating garbage-collection-based false positives.",
+    "Tests cover normal returns, PRAGMA failure, SELECT failure, batch rollback and external caller ownership."
+  ],
+  "pending": [
+    "Repeat 17 targeted cases independently after integration into final candidate.",
+    "Compare production/test hashes against this reviewed version before acceptance."
+  ]
+}

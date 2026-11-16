@@ -1,4 +1,4 @@
-.PHONY: all check test test-python test-rust test-quality test-sovereign lint typecheck format sovereign quality test-deps swarm-test swarm-audit swarm-batch-sign swarm-social swarm-top swarm-attestation
+.PHONY: all check test test-python test-rust test-z3 test-quality test-sovereign lint typecheck format sovereign quality test-deps swarm-test swarm-audit swarm-batch-sign swarm-social swarm-top swarm-attestation
 
 all: format lint typecheck test-rust test-python test-quality test-sovereign
 
@@ -23,6 +23,26 @@ test-python:
 test-rust:
 	cargo test --workspace --quiet
 
+# Regressions that only pass with the audited Z3 binary (BLAKE3 pin in the
+# babylon60-compiler test support); plain `cargo test` ignores them.
+# Never --include-ignored: it would run replay_worker, which needs its own fixture.
+# Keep this list in sync with the #[ignore] attributes: --exact runs nothing for a stale name.
+BABYLON_Z3_BIN ?= /opt/homebrew/bin/z3
+
+test-z3:
+	BABYLON_Z3_BIN="$(BABYLON_Z3_BIN)" cargo test --locked -p babylon60-compiler \
+		--test solver_trust --test semantic_solver_adapter --no-fail-fast -- --ignored --exact \
+		approved_real_binary_runs_and_query_is_reserved_and_consumed_once \
+		wrong_query_does_not_consume_the_correct_receipt \
+		unknown_unsat_and_process_error_receipts_are_consumed_too \
+		real_sat_and_unsat_reach_all_four_entropy_variants \
+		real_unknown_retains_resource_reason_and_cannot_be_admitted \
+		receipt_rejects_other_request_body_partition_and_policy \
+		separate_processes_do_not_retain_previous_assertions \
+		real_parser_handles_comments_quoted_symbols_and_strings \
+		real_solver_parse_error_never_accepts_later_sat_output \
+		negative_processes::temporary_io_failure_preserves_transport_error
+
 test-claims:
 	python3 scripts/c5_quality_gates/verify_claims.py
 
@@ -46,6 +66,7 @@ test-quality: test-deps
 	python3 scripts/c5_quality_gates/secret_swarm_auditor.py
 	python3 scripts/c5_quality_gates/audit_ring2_sqlite_isolation.py
 	python3 scripts/c5_quality_gates/audit_domain_bleed.py
+	python3 scripts/c5_quality_gates/detect_ghost_nodes.py --scope product
 
 test-sovereign:
 	python3 scripts/c5_demos/c5_sovereign_compliance_orchestrator.py

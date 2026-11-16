@@ -1,0 +1,64 @@
+{
+  "reviewer": "03",
+  "scope": "Temporary fixtures and pure/extracted Python only; no maintenance, solver, network or protected runtime.",
+  "checks": [
+    {
+      "name": "complete_catalogue_unexecuted_despite_markers",
+      "passed": true,
+      "count": 25
+    },
+    {
+      "name": "all_modes_fail_closed",
+      "passed": true,
+      "combinations": 24
+    },
+    {
+      "name": "schema_inventory_and_legacy_rejection",
+      "passed": true,
+      "cases": 13
+    },
+    {
+      "name": "complete_body_domain_digest_and_order",
+      "passed": true,
+      "body_fields": 22,
+      "same_id_mutations": 3
+    },
+    {
+      "name": "pure_export_provenance_and_unsigned_claims",
+      "passed": true
+    },
+    {
+      "name": "input_copying_and_invalid_configuration_latency",
+      "passed": true,
+      "invalid_cases": 10
+    },
+    {
+      "name": "entries_no_symlink_or_fifo_following_no_parent_claim",
+      "passed": true,
+      "cases": 5
+    },
+    {
+      "name": "observation_opens_only_root_then_descriptor_stat",
+      "passed": true,
+      "open_calls": 1
+    },
+    {
+      "name": "consumer_ast_with_three_doubles_propagates_nonzero",
+      "passed": true,
+      "limitation": "Missing gate defaults to PASS in unchanged consumer, outside Lot 7 scope."
+    }
+  ],
+  "check_count": 9,
+  "status": "PASS",
+  "forbidden_calls": [],
+  "source_sha256_before": {
+    "scripts/c5_verifiers/fast_smt_gate.py": "853cd9746178aede419bee382b6e6416482fdbfb8a5eb753269732e3d5e384c1",
+    "tests/test_swarm100_lot7_regressions.py": "25f251af35f404cfc70cceac168c25401e286ae21b734c0c7eab30a72d8418a1",
+    "scripts/c5_quality_gates/daily_sovereign_maintenance.py": "bf5d3827f8b3c3c85a1904c1a0082c8d67a25b0b9834c482040426d915373b95"
+  },
+  "source_sha256_after": {
+    "scripts/c5_verifiers/fast_smt_gate.py": "853cd9746178aede419bee382b6e6416482fdbfb8a5eb753269732e3d5e384c1",
+    "tests/test_swarm100_lot7_regressions.py": "25f251af35f404cfc70cceac168c25401e286ae21b734c0c7eab30a72d8418a1",
+    "scripts/c5_quality_gates/daily_sovereign_maintenance.py": "bf5d3827f8b3c3c85a1904c1a0082c8d67a25b0b9834c482040426d915373b95"
+  }
+}

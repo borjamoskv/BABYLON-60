@@ -1,0 +1,376 @@
+{
+  "shard": "098",
+  "findings": [
+    {
+      "title": "Anomaly filter skips the configured event limit",
+      "severity": "P2",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/c5_cli.rs",
+      "line": 88,
+      "evidence": "total increments for every block; OK blocks continue at lines 88\u201389 before max_events is checked at lines 107\u2013108.",
+      "trigger": "Run --anomaly-only --max N against an all-OK or long healthy stream.",
+      "impact": "Process keeps consuming beyond N events and can wait indefinitely for an anomaly despite the configured bound.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Sexagesimal conversion scales integer units by sixty",
+      "severity": "P2",
+      "path": "scripts/c5_demos/c5_darknode_core.py",
+      "line": 44,
+      "evidence": "from_rational uses (num * 60) // den for integer gin decomposition, while to_scalar interprets gin as units. For num=1, den=1 the fields produce u=1 and scalar=60.",
+      "trigger": "Convert any ordinary rational, including from_rational(1,1), then call to_scalar.",
+      "impact": "Demo receipt encodes an incorrect confidence scalar; the sample 59/60 becomes 59 rather than approximately 0.9833.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Mutable ballistic history makes a frame depend on render order",
+      "severity": "P2",
+      "path": "tools/skill_library/global/remotion-audio-reactive-video/examples/AudioReactiveMaster.tsx",
+      "line": 36,
+      "evidence": "useMemo retains one ballisticState; render calls extractBands at lines 53\u201355. SpectralFlux.ts updates prevSpectrum and smoothedValues in extractBands/applyBallistics.",
+      "trigger": "Render the same frame after different previous frames, seek backwards, or render frames on independent workers.",
+      "impact": "Onset and smoothing outputs differ for the same frame; visual output is not reproducible across seeking and render chunk boundaries.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Forensic protocol treats a wish to remember as mathematical proof of lying",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/discourse-popperian-falsification/MODULE.md",
+      "line": 56,
+      "evidence": "Stage 3 takes statements such as Ojal\u00e1 me acordase and requires proving latent information and a lie by analogy to an unmapped pointer; no formal memory model or proof is supplied.",
+      "trigger": "Apply Stage 3 to a person who remembers an event occurred but cannot recall its detail, and wishes to remember.",
+      "impact": "Protocol mandates a false deception conclusion: reference to an unknown detail does not establish possession of that detail. This affects documentary audit guidance, not a demonstrated runtime detector.",
+      "confidence": "high",
+      "kind": "docs"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "02_EDIN_SWARMS/agents_archi/topologies/distribution_design.py",
+      "line": 241,
+      "description": "Copy audit marks non-blacklisted unsupported claims PASS without consulting CLAIMS.toml; only in-file simulated handoff and tests were traced. No external publication consumer or execution bypass established."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".github/workflows/babylon60_sanity_ci.yml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          30
+        ]
+      ],
+      "inventory_sha256": "79322808667a6f8baee70605b68f6bde31ab6dce2ada5c8a4ebd8c3fe77edf7d",
+      "observed_sha256": "79322808667a6f8baee70605b68f6bde31ab6dce2ada5c8a4ebd8c3fe77edf7d",
+      "hash_match": true
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/c5_cli.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          128
+        ]
+      ],
+      "inventory_sha256": "05c9e4a7b4c472085e5d6f7614cf7132131e9d74e0a273c31fb579a254e7351e",
+      "observed_sha256": "05c9e4a7b4c472085e5d6f7614cf7132131e9d74e0a273c31fb579a254e7351e",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/cognitive_pilot/scoring.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          197
+        ]
+      ],
+      "inventory_sha256": "a2de91c9d4afa7ea6074fb19cb557809d76484d2da43f7b3d6b9648928836873",
+      "observed_sha256": "a2de91c9d4afa7ea6074fb19cb557809d76484d2da43f7b3d6b9648928836873",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/bft_falsification.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "inventory_sha256": "4a8efc0cc9c17ebd0191b97dc0768c1d7ba964148d6e37e26b65c5aa93348903",
+      "observed_sha256": "4a8efc0cc9c17ebd0191b97dc0768c1d7ba964148d6e37e26b65c5aa93348903",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/utils/launch_tui.scpt",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          9
+        ]
+      ],
+      "inventory_sha256": "8f335b4f36413610b9927110fec78ff6082df7605a0c8dee80e44739c366533c",
+      "observed_sha256": "8f335b4f36413610b9927110fec78ff6082df7605a0c8dee80e44739c366533c",
+      "hash_match": true
+    },
+    {
+      "path": "02_EDIN_SWARMS/agents_archi/topologies/distribution_design.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          336
+        ]
+      ],
+      "inventory_sha256": "709f2e05458743a95bfd72ae0f74667b0e571498dd05d4c99a28a4e6d32f3cff",
+      "observed_sha256": "709f2e05458743a95bfd72ae0f74667b0e571498dd05d4c99a28a4e6d32f3cff",
+      "hash_match": true
+    },
+    {
+      "path": "docs/00_index.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          159
+        ]
+      ],
+      "inventory_sha256": "e171526cad4eb08fd5150020b1b75f30026b59bc7993807f6f69037911361b50",
+      "observed_sha256": "e171526cad4eb08fd5150020b1b75f30026b59bc7993807f6f69037911361b50",
+      "hash_match": true
+    },
+    {
+      "path": "docs/DOCS_GRAMMAR.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          142
+        ]
+      ],
+      "inventory_sha256": "694425ba11f47b5a0358634ef934bf5b186cafaff98bf496ef1c936d904e7238",
+      "observed_sha256": "694425ba11f47b5a0358634ef934bf5b186cafaff98bf496ef1c936d904e7238",
+      "hash_match": true
+    },
+    {
+      "path": "keys/node.pub",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          1
+        ]
+      ],
+      "inventory_sha256": "d2582597f6b7dae67f72e78e7de8822dbf895baa40336c61a136cb3a10529c57",
+      "observed_sha256": "d2582597f6b7dae67f72e78e7de8822dbf895baa40336c61a136cb3a10529c57",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_demos/c5_darknode_core.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          268
+        ]
+      ],
+      "inventory_sha256": "9587eb69acd9ab7c04e7739393fa9108ee5a6ace56cf0778010480f87a7fc205",
+      "observed_sha256": "9587eb69acd9ab7c04e7739393fa9108ee5a6ace56cf0778010480f87a7fc205",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_quality_gates/anti_slopsquatting_guard.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          169
+        ]
+      ],
+      "inventory_sha256": "b87d05bb05d58238fa8499527ffeecf037deb1f898333910df7486bec509124c",
+      "observed_sha256": "b87d05bb05d58238fa8499527ffeecf037deb1f898333910df7486bec509124c",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_verifiers/verify_captures.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          41
+        ]
+      ],
+      "inventory_sha256": "010470c889a5f24e65c7c8d503dcce2bf24a8d517bf15f9abad0ec672f664c24",
+      "observed_sha256": "010470c889a5f24e65c7c8d503dcce2bf24a8d517bf15f9abad0ec672f664c24",
+      "hash_match": true
+    },
+    {
+      "path": "src/manifest.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          80
+        ]
+      ],
+      "inventory_sha256": "05b05b57fa86e867e91e93fb95949a6694585457d9961b3edbe1fd7d44006cb1",
+      "observed_sha256": "05b05b57fa86e867e91e93fb95949a6694585457d9961b3edbe1fd7d44006cb1",
+      "hash_match": true
+    },
+    {
+      "path": "tests/test_audit_secret_scanners.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          116
+        ]
+      ],
+      "inventory_sha256": "69aa4359b5f1ab971722078247ee055cd7e0763e77e23fd2db841baa914bb5d9",
+      "observed_sha256": "69aa4359b5f1ab971722078247ee055cd7e0763e77e23fd2db841baa914bb5d9",
+      "hash_match": true
+    },
+    {
+      "path": "tests/test_merkle_b3.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          105
+        ]
+      ],
+      "inventory_sha256": "9dfc49c488b147031b9535abb324910348231f8818b35ec1e529c488800768c2",
+      "observed_sha256": "9dfc49c488b147031b9535abb324910348231f8818b35ec1e529c488800768c2",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/agents-sdk/references/mcp.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          188
+        ]
+      ],
+      "inventory_sha256": "0d09348d60d1b57bae10de18565a6fad5304e1991060287aa3872c3e6d0bb47b",
+      "observed_sha256": "0d09348d60d1b57bae10de18565a6fad5304e1991060287aa3872c3e6d0bb47b",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/ddos/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          164
+        ]
+      ],
+      "inventory_sha256": "47ac34cf947ff3ddc651ff37c6e26f22349709503a6beb058b8ddfb52cf9f41d",
+      "observed_sha256": "47ac34cf947ff3ddc651ff37c6e26f22349709503a6beb058b8ddfb52cf9f41d",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/r2/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          95
+        ]
+      ],
+      "inventory_sha256": "93398a011899b9f101593dc14845d4b5a58e5e217d00c4b9da5c62f2f69354c3",
+      "observed_sha256": "93398a011899b9f101593dc14845d4b5a58e5e217d00c4b9da5c62f2f69354c3",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workers-ai/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          114
+        ]
+      ],
+      "inventory_sha256": "10fe3b26750c2fc92ff6ccdefc1200352cdae88c573071cd7735d0a84ff925da",
+      "observed_sha256": "10fe3b26750c2fc92ff6ccdefc1200352cdae88c573071cd7735d0a84ff925da",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/examples/Brownian_Motion_Walk.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          70
+        ]
+      ],
+      "inventory_sha256": "ac7ab70e2b0e6c1e67aceb240e0908ba5f920945efa34e335474955b8bac0812",
+      "observed_sha256": "ac7ab70e2b0e6c1e67aceb240e0908ba5f920945efa34e335474955b8bac0812",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_02_scheduling.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          62
+        ]
+      ],
+      "inventory_sha256": "bddfa9ab8aa2fa9e0a6f3d8f56f933a401e7552bb097012e8a10cca304376b90",
+      "observed_sha256": "bddfa9ab8aa2fa9e0a6f3d8f56f933a401e7552bb097012e8a10cca304376b90",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/discourse-popperian-falsification/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          175
+        ]
+      ],
+      "inventory_sha256": "586dfa70de4a92cbeb8a37db712b543f1e6ea1d1493c5d66a97ba7dfab486739",
+      "observed_sha256": "586dfa70de4a92cbeb8a37db712b543f1e6ea1d1493c5d66a97ba7dfab486739",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-systemic-dissection-protocol/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "inventory_sha256": "d2334d5ddb3b814efc777b6ce3a2b0e54a83076da8c295a7c4b975a380b26db7",
+      "observed_sha256": "d2334d5ddb3b814efc777b6ce3a2b0e54a83076da8c295a7c4b975a380b26db7",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/remotion-audio-reactive-video/examples/AudioReactiveMaster.tsx",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          193
+        ]
+      ],
+      "inventory_sha256": "b25dd4fa4dffa5e29f4d8d8ebd4d788e37286ea845c90fa6161115f5b8948422",
+      "observed_sha256": "b25dd4fa4dffa5e29f4d8d8ebd4d788e37286ea845c90fa6161115f5b8948422",
+      "hash_match": true
+    }
+  ],
+  "tool_limitations": [
+    "No native codebase-memory graph tools exposed in ALL_TOOLS; targeted text reads and rg used.",
+    "Static audit only; no tests, repository runtime, builds, external API checks, or physical guarantees verified.",
+    "Cross-file adjudication limited to SpectralFlux.ts, pre-commit hook reference, and targeted distribution references. All assigned hashes matched at inspection."
+  ],
+  "tests_run": []
+}

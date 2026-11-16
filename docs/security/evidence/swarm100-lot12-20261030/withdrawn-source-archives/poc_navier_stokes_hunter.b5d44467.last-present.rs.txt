@@ -1,0 +1,737 @@
+// ============================================================================
+// BABYLON-60 :: POC SIMBÓLICA B60 — NAVIER-STOKES HUNTER
+// ============================================================================
+//! Intérprete de un subconjunto B60 con corrutinas cooperativas en un solo hilo.
+//! Comprueba el umbral del contador R10 y compara el hash de los eventos
+//! registrados en 100 repeticiones de la misma entrada y el mismo planificador.
+//! Los espacios separan posiciones sexagesimales; los registros usan i128.
+//! F60 es una etiqueta de tipo: aquí no se implementan fracciones racionales.
+//! No resuelve las ecuaciones de Navier–Stokes ni demuestra una singularidad,
+//! aislamiento del SO, persistencia WORM o una prueba formal.
+
+use std::collections::{HashMap, VecDeque};
+use std::time::Instant;
+
+#[derive(Clone, Debug, PartialEq)]
+enum B60Type {
+    I64,
+    Time,
+    F60,
+    Unallocated,
+}
+
+#[derive(Clone, Debug)]
+struct Register {
+    val: i128,
+    typ: B60Type,
+}
+
+#[derive(Clone, Debug, PartialEq)]
+enum CoroutineState {
+    Ready,
+    Waiting(String),
+    WaitingTimer(u64),
+    Halted,
+    Stopped,
+    Completed,
+}
+
+#[derive(Clone, Debug)]
+struct Coroutine {
+    id: usize,
+    pc: usize,
+    regs: Vec<Register>,
+    state: CoroutineState,
+}
+
+#[derive(Clone, Debug)]
+struct DAGEvent {
+    id: String,
+    parents: Vec<String>,
+    logical_timestamp: u64,
+    opcode: String,
+    payload: String,
+}
+
+impl DAGEvent {
+    fn update_hash(&self, hasher: &mut blake3::Hasher) {
+        hash_string(hasher, &self.id);
+        let mut parents = self.parents.iter().collect::<Vec<_>>();
+        parents.sort();
+        hasher.update(&(parents.len() as u64).to_be_bytes());
+        for parent in parents {
+            hash_string(hasher, parent);
+        }
+        hasher.update(&self.logical_timestamp.to_be_bytes());
+        hash_string(hasher, &self.opcode);
+        hash_string(hasher, &self.payload);
+    }
+}
+
+fn hash_string(hasher: &mut blake3::Hasher, value: &str) {
+    // La longitud evita ambigüedades si el contenido incluye separadores.
+    hasher.update(&(value.len() as u64).to_be_bytes());
+    hasher.update(value.as_bytes());
+}
+
+struct DAGLedger {
+    events: HashMap<String, DAGEvent>,
+    latest: Vec<String>,
+}
+
+impl DAGLedger {
+    fn new() -> Self {
+        Self {
+            events: HashMap::new(),
+            latest: Vec::new(),
+        }
+    }
+
+    fn append(&mut self, id: String, opcode: String, payload: String, logical_time: u64) {
+        let parents = self.latest.clone();
+        let ev = DAGEvent {
+            id: id.clone(),
+            parents,
+            logical_timestamp: logical_time,
+            opcode,
+            payload,
+        };
+        self.events.insert(id.clone(), ev);
+        self.latest = vec![id];
+    }
+
+    fn canonical_hash(&self) -> String {
+        let mut events = self.events.values().collect::<Vec<_>>();
+        events.sort_by(|a, b| a.id.cmp(&b.id));
+        let mut hasher = blake3::Hasher::new();
+        hasher.update(b"B60-symbolic-ledger-v2\0");
+        hasher.update(&(events.len() as u64).to_be_bytes());
+        for event in events {
+            event.update_hash(&mut hasher);
+        }
+        hasher.finalize().to_hex().to_string()
+    }
+}
+
+fn parse_b60_digit(token: &str) -> i128 {
+    if token == "-" {
+        return 0;
+    }
+    let tens = token.chars().filter(|&c| c == '<').count() as i128;
+    let ones = token
+        .chars()
+        .filter(|&c| c == 'Y' || c == 'v' || c == 'T')
+        .count() as i128;
+    tens * 10 + ones
+}
+
+fn parse_b60_number(b60_str: &str) -> i128 {
+    let inner = b60_str.trim_matches(|c| c == '[' || c == ']' || c == ' ');
+    if inner.is_empty() {
+        return 0;
+    }
+    let places: Vec<&str> = inner.split_whitespace().collect();
+    let mut total = 0;
+    let mut power = (places.len() - 1) as u32;
+    for p in places {
+        total += parse_b60_digit(p) * 60_i128.pow(power);
+        power = power.saturating_sub(1);
+    }
+    total
+}
+
+fn get_reg_index(reg_str: &str) -> usize {
+    if let Some(stripped) = reg_str.strip_prefix('R') {
+        stripped.parse().unwrap_or(0)
+    } else {
+        0
+    }
+}
+
+fn parse_value(token: &str, rest: &str, regs: &[Register]) -> i128 {
+    let trimmed = rest.trim();
+    if trimmed.starts_with('[') {
+        if let Some(end_idx) = trimmed.find(']') {
+            let b60_slice = &trimmed[..=end_idx];
+            return parse_b60_number(b60_slice);
+        }
+    }
+    if token.starts_with('R') {
+        let idx = get_reg_index(token);
+        return regs[idx].val;
+    }
+    0
+}
+
+#[derive(Debug, PartialEq, Eq)]
+struct ExecutionResult {
+    critical_halt_observed: bool,
+    canonical_hash: String,
+    total_events: usize,
+    r10_peak: Option<i128>,
+}
+
+#[derive(Debug, PartialEq, Eq)]
+enum ExecutionError {
+    StepLimitExceeded { max_steps: u64 },
+    InvalidTimer,
+}
+
+const MAX_STEPS: u64 = 50_000;
+
+fn run_navier_stokes_engine(source: &str) -> Result<ExecutionResult, ExecutionError> {
+    run_with_step_limit(source, MAX_STEPS)
+}
+
+fn run_with_step_limit(source: &str, max_steps: u64) -> Result<ExecutionResult, ExecutionError> {
+    let raw_lines: Vec<String> = source
+        .lines()
+        .map(|l| l.split('#').next().unwrap_or("").trim().to_string())
+        .filter(|l| !l.is_empty())
+        .collect();
+
+    let mut labels = HashMap::new();
+    let mut clean_code = Vec::new();
+
+    for line in raw_lines {
+        if line.starts_with("MUB ") || line == "DUB" {
+            let name = if line == "DUB" {
+                "DUB"
+            } else {
+                line[4..].trim()
+            };
+            labels.insert(name.to_string(), clean_code.len());
+        } else {
+            clean_code.push(line);
+        }
+    }
+
+    let mut queue = VecDeque::new();
+    queue.push_back(Coroutine {
+        id: 0,
+        pc: 0,
+        regs: vec![
+            Register {
+                val: 0,
+                typ: B60Type::Unallocated
+            };
+            32
+        ],
+        state: CoroutineState::Ready,
+    });
+
+    let mut ledger = DAGLedger::new();
+    let mut clock: u64 = 0;
+    let mut is_halting = false;
+    let mut r10_peak = None;
+    let mut next_coroutine_id = 1;
+
+    while let Some(mut co) = queue.pop_front() {
+        if is_halting {
+            break;
+        }
+        // Cada despacho consume presupuesto, incluso AWAIT, AFTER y HALT.
+        // Como hay como máximo un evento por despacho, los ticks son únicos.
+        if clock >= max_steps {
+            return Err(ExecutionError::StepLimitExceeded { max_steps });
+        }
+        clock += 1;
+
+        match co.state {
+            CoroutineState::Halted | CoroutineState::Stopped | CoroutineState::Completed => {
+                continue;
+            }
+            CoroutineState::WaitingTimer(target_tick) => {
+                if clock < target_tick {
+                    queue.push_back(co);
+                    continue;
+                } else {
+                    co.state = CoroutineState::Ready;
+                }
+            }
+            CoroutineState::Waiting(_) => {
+                queue.push_back(co);
+                continue;
+            }
+            CoroutineState::Ready => {}
+        }
+
+        if co.pc >= clean_code.len() {
+            co.state = CoroutineState::Completed;
+            continue;
+        }
+
+        let line = clean_code[co.pc].clone();
+        co.pc += 1;
+
+        let tokens: Vec<&str> = line.split_whitespace().collect();
+        if tokens.is_empty() {
+            queue.push_back(co);
+            continue;
+        }
+
+        match tokens[0] {
+            "ALLOC" => {
+                let typ_str = tokens[1];
+                let idx = get_reg_index(tokens[2]);
+                co.regs[idx].typ = match typ_str {
+                    "TIME" => B60Type::Time,
+                    "F60" => B60Type::F60,
+                    _ => B60Type::I64,
+                };
+            }
+            "NIG" => {
+                let dest = get_reg_index(tokens[1]);
+                let rest = line[line.find(tokens[1]).unwrap() + tokens[1].len()..].trim();
+                let val = if rest.starts_with('[') {
+                    parse_value("", rest, &co.regs)
+                } else {
+                    let src = tokens.get(2).unwrap_or(&"0");
+                    parse_value(src, rest, &co.regs)
+                };
+                co.regs[dest].val = val;
+                ledger.append(
+                    format!("EV_{}_0", clock),
+                    "NIG".to_string(),
+                    format!("R{}={}", dest, val),
+                    clock,
+                );
+            }
+            "DAH" => {
+                let dest = get_reg_index(tokens[1]);
+                let rest = line[line.find(tokens[1]).unwrap() + tokens[1].len()..].trim();
+                let val = parse_value("", rest, &co.regs);
+                co.regs[dest].val += val;
+                ledger.append(
+                    format!("EV_{}_0", clock),
+                    "DAH".to_string(),
+                    format!("R{}+={}", dest, val),
+                    clock,
+                );
+            }
+            "LAL" => {
+                let dest = get_reg_index(tokens[1]);
+                let src_token = tokens.get(2).unwrap_or(&"0");
+                let val = parse_value(src_token, "", &co.regs);
+                co.regs[dest].val -= val;
+                ledger.append(
+                    format!("EV_{}_0", clock),
+                    "LAL".to_string(),
+                    format!("R{}-={}", dest, val),
+                    clock,
+                );
+            }
+            "NU" => {
+                let reg_idx = get_reg_index(tokens[1]);
+                let target_label = tokens[2];
+                if co.regs[reg_idx].val == 0 {
+                    co.pc = *labels.get(target_label).unwrap_or(&0);
+                    ledger.append(
+                        format!("EV_{}_0", clock),
+                        "NU_BRANCH".to_string(),
+                        format!("R{}==0->{}", reg_idx, target_label),
+                        clock,
+                    );
+                }
+            }
+            "FORK" => {
+                let target = tokens[1];
+                let new_pc = *labels.get(target).unwrap_or(&0);
+                let new_id = next_coroutine_id;
+                next_coroutine_id += 1;
+                queue.push_back(Coroutine {
+                    id: new_id,
+                    pc: new_pc,
+                    regs: co.regs.clone(),
+                    state: CoroutineState::Ready,
+                });
+                ledger.append(
+                    format!("EV_{}_0", clock),
+                    "FORK".to_string(),
+                    target.to_string(),
+                    clock,
+                );
+            }
+            "AWAIT" => {
+                let symbol = tokens[1].trim_matches('"');
+                let target = tokens[2];
+                co.state = CoroutineState::Waiting(symbol.to_string());
+                co.pc = *labels.get(target).unwrap_or(&0);
+                ledger.append(
+                    format!("EV_{}_0", clock),
+                    "AWAIT".to_string(),
+                    symbol.to_string(),
+                    clock,
+                );
+            }
+            "EXECUTE" => {
+                let action = tokens[1].trim_matches('"');
+                ledger.append(
+                    format!("EV_{}_0", clock),
+                    "EXECUTE".to_string(),
+                    action.to_string(),
+                    clock,
+                );
+
+                // Reanudar corrutinas que esperan este símbolo sincrónico
+                for other in queue.iter_mut() {
+                    if let CoroutineState::Waiting(ref s) = other.state {
+                        if s == action {
+                            other.state = CoroutineState::Ready;
+                        }
+                    }
+                }
+
+                if action.starts_with("CRITICAL_HALT") {
+                    is_halting = true;
+                    co.state = CoroutineState::Stopped;
+                }
+            }
+            "AFTER" => {
+                let idx = get_reg_index(tokens[1]);
+                let target = tokens[2];
+                let ticks = u64::try_from(co.regs[idx].val)
+                    .map_err(|_| ExecutionError::InvalidTimer)?
+                    .max(1);
+                let target_tick = clock
+                    .checked_add(ticks)
+                    .ok_or(ExecutionError::InvalidTimer)?;
+                co.state = CoroutineState::WaitingTimer(target_tick);
+                co.pc = *labels.get(target).unwrap_or(&0);
+                ledger.append(
+                    format!("EV_{}_0", clock),
+                    "AFTER".to_string(),
+                    format!("{}", ticks),
+                    clock,
+                );
+            }
+            "HALT" => {
+                co.state = CoroutineState::Halted;
+                ledger.append(
+                    format!("EV_{}_0", clock),
+                    "HALT".to_string(),
+                    format!("CO_{}", co.id),
+                    clock,
+                );
+                continue;
+            }
+            _ => {}
+        }
+
+        // Máximo observado de R10 entre las corrutinas que lo han reservado.
+        // Es un contador simbólico, sin unidades físicas de vorticidad.
+        if co.regs[10].typ != B60Type::Unallocated {
+            let value = co.regs[10].val;
+            r10_peak = Some(r10_peak.map_or(value, |peak: i128| peak.max(value)));
+        }
+
+        if co.state != CoroutineState::Halted && co.state != CoroutineState::Stopped {
+            queue.push_back(co);
+        }
+    }
+
+    Ok(ExecutionResult {
+        critical_halt_observed: is_halting,
+        canonical_hash: ledger.canonical_hash(),
+        total_events: ledger.events.len(),
+        r10_peak,
+    })
+}
+
+fn main() -> Result<(), ExecutionError> {
+    println!("BABYLON-60 :: PoC simbólica B60 — Navier-Stokes Hunter\n");
+    println!("Corrutinas cooperativas en un hilo; contadores i128 y reloj lógico.");
+    println!("F60 es una etiqueta; esta PoC no implementa aritmética racional.");
+    println!("No es un solver de fluidos ni una prueba de singularidad.\n");
+
+    let source = std::fs::read_to_string("tools/examples/navier_stokes_hunter.b60")
+        .expect("Error al leer tools/examples/navier_stokes_hunter.b60");
+
+    println!("[1/3] Comprobando el umbral simbólico del programa B60...");
+    let t0 = Instant::now();
+    let initial_run = run_navier_stokes_engine(&source)?;
+    let initial_elapsed = t0.elapsed();
+
+    println!(
+        "  > Señal CRITICAL_HALT observada: {}",
+        initial_run.critical_halt_observed
+    );
+    println!(
+        "  > Máximo observado de R10:      {:?}",
+        initial_run.r10_peak
+    );
+    println!(
+        "  > Eventos registrados:         {}",
+        initial_run.total_events
+    );
+    println!(
+        "  > Hash de eventos (BLAKE3 v2):  {}",
+        initial_run.canonical_hash
+    );
+    println!("  > Tiempo de esta ejecución:    {:?}\n", initial_elapsed);
+
+    assert!(
+        initial_run.critical_halt_observed,
+        "No se observó la señal de parada simbólica."
+    );
+    assert_eq!(
+        initial_run.r10_peak,
+        Some(59),
+        "El máximo observado de R10 no coincide con el umbral esperado."
+    );
+
+    let repetitions = 100;
+    println!(
+        "[2/3] Comparando {} repeticiones con la ejecución inicial...",
+        repetitions
+    );
+    let t_repeated = Instant::now();
+
+    for i in 0..repetitions {
+        let run = run_navier_stokes_engine(&source)?;
+        assert_eq!(run, initial_run, "Resultado distinto en repetición {}", i);
+    }
+    let total_elapsed = t_repeated.elapsed();
+    let avg_per_run = total_elapsed / repetitions as u32;
+
+    println!(
+        "  > Repeticiones coincidentes: {}/{}",
+        repetitions, repetitions
+    );
+    println!("  > Tiempo total observado:   {:?}", total_elapsed);
+    println!("  > Media por repetición:     {:?}\n", avg_per_run);
+
+    println!("[3/3] Comprobaciones de esta entrada completadas.");
+    println!("  R10 alcanzó 59 y se observó la señal de parada del intérprete.");
+    println!("  Coincidieron el hash de eventos, el pico y la parada en cada repetición.");
+    println!(
+        "  Límite por ejecución: {} despachos, incluidas las esperas.",
+        MAX_STEPS
+    );
+    println!("  El resultado se limita a esta entrada y este planificador.");
+    println!("  No se verifican aislamiento del SO, persistencia WORM ni pruebas formales.");
+    Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    const SOURCE: &str = include_str!("../tools/examples/navier_stokes_hunter.b60");
+
+    #[test]
+    fn sexagesimal_whitespace_separates_positions() {
+        assert_eq!(parse_b60_number("[ <<<<<YYYYYYYYY ]"), 59);
+        assert_eq!(parse_b60_number("[ Y - ]"), 60);
+        assert_eq!(parse_b60_number("[ <<<<< YYYYYYYYY ]"), 3009);
+    }
+
+    #[test]
+    fn fixture_encodes_threshold_59() {
+        let assignment = SOURCE
+            .lines()
+            .find(|line| line.starts_with("NIG R0 "))
+            .unwrap();
+        let literal = assignment
+            .split_once('[')
+            .unwrap()
+            .1
+            .split_once(']')
+            .unwrap()
+            .0;
+        assert_eq!(parse_b60_number(literal), 59);
+    }
+
+    #[test]
+    fn peak_tracks_executed_register_values() {
+        let result = run_navier_stokes_engine(
+            "ALLOC F60 R10\nNIG R10 [ YY ]\nDAH R10 [ YYY ]\nNIG R10 [ Y ]\nHALT",
+        )
+        .unwrap();
+        assert_eq!(result.r10_peak, Some(5));
+    }
+
+    #[test]
+    fn canonical_hash_changes_when_only_opcode_changes() {
+        let mut ledger = DAGLedger::new();
+        ledger.append("EV_0".into(), "NIG".into(), "same payload".into(), 0);
+        let before = ledger.canonical_hash();
+        ledger.events.get_mut("EV_0").unwrap().opcode = "DAH".into();
+        assert_ne!(before, ledger.canonical_hash());
+    }
+
+    #[test]
+    fn unfulfilled_wait_terminates() {
+        let (sender, receiver) = std::sync::mpsc::channel();
+        std::thread::spawn(move || {
+            let result = run_navier_stokes_engine("AWAIT \"NEVER\" DONE\nMUB DONE\nHALT");
+            sender.send(result).unwrap();
+        });
+        let result = receiver
+            .recv_timeout(std::time::Duration::from_secs(3))
+            .expect("El intérprete debe terminar aunque ninguna corrutina emita la señal");
+        assert_eq!(
+            result,
+            Err(ExecutionError::StepLimitExceeded {
+                max_steps: MAX_STEPS
+            })
+        );
+    }
+
+    #[test]
+    fn fixture_reaches_threshold_and_repeats_the_same_result() {
+        let first = run_navier_stokes_engine(SOURCE).unwrap();
+        assert!(first.critical_halt_observed);
+        assert_eq!(first.r10_peak, Some(59));
+        for _ in 0..100 {
+            assert_eq!(run_navier_stokes_engine(SOURCE).unwrap(), first);
+        }
+    }
+
+    #[test]
+    fn changing_threshold_changes_the_observed_peak() {
+        let modified = SOURCE.replace("[ <<<<<YYYYYYYYY ]", "[ YYYY ]");
+        assert_ne!(modified, SOURCE);
+        let result = run_navier_stokes_engine(&modified).unwrap();
+        assert!(result.critical_halt_observed);
+        assert_eq!(result.r10_peak, Some(4));
+        assert_ne!(
+            result.canonical_hash,
+            run_navier_stokes_engine(SOURCE).unwrap().canonical_hash
+        );
+    }
+
+    #[test]
+    fn absent_counter_is_not_reported_as_a_peak() {
+        let result = run_navier_stokes_engine("HALT").unwrap();
+        assert_eq!(result.r10_peak, None);
+        assert!(!result.critical_halt_observed);
+    }
+
+    #[test]
+    fn peak_includes_child_coroutines() {
+        let result = run_navier_stokes_engine(
+            "FORK CHILD\nALLOC F60 R10\nNIG R10 [ YY ]\nHALT\n\
+             MUB CHILD\nALLOC F60 R10\nNIG R10 [ YYYYYYY ]\nHALT",
+        )
+        .unwrap();
+        assert_eq!(result.r10_peak, Some(7));
+    }
+
+    #[test]
+    fn all_scheduler_paths_respect_the_step_budget() {
+        let programs = [
+            // Todas las corrutinas esperando una señal ausente.
+            "FORK CHILD\nAWAIT \"NEVER\" DONE\nMUB CHILD\nAWAIT \"NEVER\" DONE\nMUB DONE\nHALT",
+            // El temporizador vence después del presupuesto.
+            "ALLOC TIME R1\nNIG R1 [ Y - ]\nAFTER R1 DONE\nMUB DONE\nHALT",
+            // Bucle de instrucciones sin espera.
+            "MUB LOOP\nNU R0 LOOP",
+        ];
+        for source in programs {
+            let (sender, receiver) = std::sync::mpsc::channel();
+            std::thread::spawn(move || {
+                sender.send(run_with_step_limit(source, 8)).unwrap();
+            });
+            let result = receiver
+                .recv_timeout(std::time::Duration::from_secs(3))
+                .expect("El límite debe cubrir cada ruta del planificador");
+            assert_eq!(
+                result,
+                Err(ExecutionError::StepLimitExceeded { max_steps: 8 })
+            );
+        }
+    }
+
+    #[test]
+    fn step_budget_allows_exactly_the_requested_number_of_dispatches() {
+        assert!(run_with_step_limit("HALT", 1).is_ok());
+        assert_eq!(
+            run_with_step_limit("HALT", 0),
+            Err(ExecutionError::StepLimitExceeded { max_steps: 0 })
+        );
+        assert_eq!(
+            run_with_step_limit("NIG R0 [ Y ]\nHALT", 1),
+            Err(ExecutionError::StepLimitExceeded { max_steps: 1 })
+        );
+    }
+
+    #[test]
+    fn short_timer_and_matching_signal_resume_execution() {
+        let timer = "ALLOC TIME R1\nNIG R1 [ YY ]\nAFTER R1 DONE\n\
+                     MUB DONE\nALLOC F60 R10\nNIG R10 [ YYY ]\nHALT";
+        assert_eq!(run_with_step_limit(timer, 8).unwrap().r10_peak, Some(3));
+
+        let signal = "FORK CHILD\nEXECUTE \"READY\"\nHALT\n\
+                      MUB CHILD\nAWAIT \"READY\" DONE\nMUB DONE\n\
+                      ALLOC F60 R10\nNIG R10 [ YYYY ]\nHALT";
+        assert_eq!(run_with_step_limit(signal, 8).unwrap().r10_peak, Some(4));
+    }
+
+    #[test]
+    fn invalid_timer_is_rejected() {
+        let negative = "NIG R2 [ Y ]\nLAL R1 R2\nAFTER R1 DONE\nMUB DONE\nHALT";
+        assert_eq!(
+            run_navier_stokes_engine(negative),
+            Err(ExecutionError::InvalidTimer)
+        );
+    }
+
+    #[test]
+    fn halts_in_different_coroutines_preserve_each_event() {
+        let result = run_navier_stokes_engine("FORK CHILD\nHALT\nMUB CHILD\nHALT").unwrap();
+        assert_eq!(result.total_events, 3);
+    }
+
+    #[test]
+    fn canonical_hash_covers_every_event_field() {
+        let mut ledger = DAGLedger::new();
+        ledger.append("EV_0".into(), "NIG".into(), "R0=1".into(), 0);
+        let original = ledger.events["EV_0"].clone();
+        let hash = ledger.canonical_hash();
+        for field in 0..5 {
+            let mut event = original.clone();
+            match field {
+                0 => event.id = "EV_other".into(),
+                1 => event.parents.push("EV_parent".into()),
+                2 => event.logical_timestamp += 1,
+                3 => event.opcode = "DAH".into(),
+                4 => event.payload = "R0=2".into(),
+                _ => unreachable!(),
+            }
+            ledger.events.insert("EV_0".into(), event);
+            assert_ne!(hash, ledger.canonical_hash(), "Campo omitido: {}", field);
+        }
+    }
+
+    #[test]
+    fn canonical_hash_ignores_map_and_parent_order() {
+        let mut first = DAGLedger::new();
+        first.append("EV_0".into(), "FORK".into(), "CHILD".into(), 0);
+        first.append("EV_1".into(), "HALT".into(), "CO_1".into(), 1);
+        first.events.get_mut("EV_1").unwrap().parents = vec!["P1".into(), "P2".into()];
+        let mut second = DAGLedger::new();
+        for id in ["EV_1", "EV_0"] {
+            let mut event = first.events[id].clone();
+            event.parents.reverse();
+            second.events.insert(id.into(), event);
+        }
+        assert_eq!(first.canonical_hash(), second.canonical_hash());
+    }
+
+    #[test]
+    fn canonical_hash_preserves_field_and_parent_boundaries() {
+        let mut ledger = DAGLedger::new();
+        ledger.append("EV_0".into(), "A|B".into(), "C\nD".into(), 0);
+        let hash = ledger.canonical_hash();
+        let event = ledger.events.get_mut("EV_0").unwrap();
+        event.opcode = "A".into();
+        event.payload = "B|C\nD".into();
+        assert_ne!(hash, ledger.canonical_hash());
+
+        ledger.events.get_mut("EV_0").unwrap().parents = vec!["A,B".into()];
+        let hash = ledger.canonical_hash();
+        ledger.events.get_mut("EV_0").unwrap().parents = vec!["A".into(), "B".into()];
+        assert_ne!(hash, ledger.canonical_hash());
+    }
+}

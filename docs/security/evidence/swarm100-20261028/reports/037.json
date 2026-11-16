@@ -1,0 +1,430 @@
+{
+  "shard": "037",
+  "findings": [
+    {
+      "title": "Parser allocates the RHS name instead of the declared binding",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/cortex/crates/c5_compiler/src/lib.rs",
+      "line": 184,
+      "evidence": "parse_let_declaration captures the LHS identifier, but the Identifier(val) branch sets AffineAllocation.identifier to id cloned from val.",
+      "trigger": "Parse let x = resource.",
+      "impact": "The returned AST declares resource instead of x, so subsequent resource tracking cannot represent the source binding correctly.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Stack slots grow beyond the reserved 256-byte frame",
+      "severity": "P1",
+      "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/backend_x86.rs",
+      "line": 88,
+      "evidence": "The prologue reserves 256 bytes. get_offset starts at 16 and increments by 8 without a bound or frame sizing pass; Alloc and Free emit calls.",
+      "trigger": "Compile a block containing at least 32 distinct registers followed by Alloc or Free.",
+      "impact": "The 32nd slot is rbp-264, exactly where call pushes its return address when rsp=rbp-256; slots collide with call data and program values are corrupted. More registers write below the frame.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Backend compile retains output and registers from previous compilation",
+      "severity": "P2",
+      "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/backend_x86.rs",
+      "line": 36,
+      "evidence": "compile appends to self.asm and retains stack_offsets/next_offset; it never resets any of the three fields.",
+      "trigger": "Call compile twice on the same public X86Backend instance.",
+      "impact": "The second returned assembly contains two complete headers and duplicate _start/heap labels, so it is not an independent assembly unit.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Symlink depth validator accepts three or more parent traversals",
+      "severity": "P2",
+      "path": "scripts/c5_quality_gates/symlink_depth_auditor.py",
+      "line": 23,
+      "evidence": "The stated contract requires exactly two levels; the predicate checks only that the first two path components are .. and never rejects a third. audit_symlinks directly consumes this predicate.",
+      "trigger": "A repository symlink has target ../../../other-project/file.",
+      "impact": "The auditor returns no violation for a target outside the documented sibling depth and can print a false conformance result.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Preaggregation example loses almost all events",
+      "severity": "P2",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/analytics-engine/gotchas.md",
+      "line": 12,
+      "evidence": "buffer is initialized to zero in the snippet, then written only if Date.now() % 1000 === 0; there is no timer, retained batch, or unconditional flush.",
+      "trigger": "Use the shown solution during requests that do not land on the exact millisecond divisible by 1000.",
+      "impact": "Most requests emit no data point; the example does not implement its claimed once-per-second aggregation.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Audit result labels hardcoded assertions as verified claims",
+      "severity": "P2",
+      "path": "scripts/repatriated/audit_titan_jwt.py",
+      "line": 60,
+      "evidence": "The script sets verified_claims=5, false_claims=0 and final_credibility_score from literals; it has no source loading or claim verification stage.",
+      "trigger": "Run calculate_metrics and consume its epistemic_audit output as evidence.",
+      "impact": "A generated JSON report presents unsupported verification and a subjective score as audit results, contrary to the project evidence contract.",
+      "confidence": "high",
+      "kind": "docs"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".agents/skills/c5-epistemic-thermodynamics-project/references/modules/biographical-thermo/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          33
+        ]
+      ],
+      "sha256_expected": "dcdedc62771fcf684851e550f4f8f94b9f22460190ebde3a1cf82b9482a088ad",
+      "sha256_observed": "dcdedc62771fcf684851e550f4f8f94b9f22460190ebde3a1cf82b9482a088ad",
+      "changed": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/backend_x86.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          173
+        ]
+      ],
+      "sha256_expected": "b669e313a012749ab1966a2c7e4095d035c18a0a56470c8ee68742a556d73a68",
+      "sha256_observed": "b669e313a012749ab1966a2c7e4095d035c18a0a56470c8ee68742a556d73a68",
+      "changed": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/agents/sovereign_mcp/Makefile",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          11
+        ]
+      ],
+      "sha256_expected": "b98a90f39c24e7d06e6bf10834c1c0e497c0dd66d030edadf2b9f642e6efabcb",
+      "sha256_observed": "b98a90f39c24e7d06e6bf10834c1c0e497c0dd66d030edadf2b9f642e6efabcb",
+      "changed": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/core/paths.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          44
+        ]
+      ],
+      "sha256_expected": "5817933c9ba2bed748adc72836694005166491d6855ffba38ab83068a642b904",
+      "sha256_observed": "5817933c9ba2bed748adc72836694005166491d6855ffba38ab83068a642b904",
+      "changed": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/memory/temporal.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          25
+        ]
+      ],
+      "sha256_expected": "153222a5b40a9480262ced047273cddba4fdd607d9e63466cd16572c1b2c2430",
+      "sha256_observed": "153222a5b40a9480262ced047273cddba4fdd607d9e63466cd16572c1b2c2430",
+      "changed": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/cortex/crates/c5_compiler/src/lib.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          274
+        ]
+      ],
+      "sha256_expected": "81de54819ec7e07d06dfb44ccf32499c84f9ff2db0f1d25057a01b4821642326",
+      "sha256_observed": "81de54819ec7e07d06dfb44ccf32499c84f9ff2db0f1d25057a01b4821642326",
+      "changed": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "crates/b60-lang/examples/malicious_cheap_talk.b60",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          12
+        ]
+      ],
+      "sha256_expected": "9cff5cef7222265a2bbf42c20c8bf1dfe5c194b8e451f95e0edee38c8d62b7ac",
+      "sha256_observed": "9cff5cef7222265a2bbf42c20c8bf1dfe5c194b8e451f95e0edee38c8d62b7ac",
+      "changed": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "docs/03_guides/guide_first_conversation_pilot.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          161
+        ]
+      ],
+      "sha256_expected": "f66a258fe01c03cc52e46bfae50574b930b64d1c4b4d6b06e6f8124871bf1762",
+      "sha256_observed": "f66a258fe01c03cc52e46bfae50574b930b64d1c4b4d6b06e6f8124871bf1762",
+      "changed": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "docs/security/evidence/harness-audit-2026-10-24/followup-controls.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          52
+        ]
+      ],
+      "sha256_expected": "2a8e0a37225d2d15c2e8d86238e28fa4736c53be436afe6e2914a484dbaa19d8",
+      "sha256_observed": "2a8e0a37225d2d15c2e8d86238e28fa4736c53be436afe6e2914a484dbaa19d8",
+      "changed": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "proof/lean/Destiladora_838c463da193b48f.lean",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          128
+        ]
+      ],
+      "sha256_expected": "5a32a31bd6f8932b27a5b2481d2d3800990f41ae5653575f624c785d44bb0b03",
+      "sha256_observed": "5a32a31bd6f8932b27a5b2481d2d3800990f41ae5653575f624c785d44bb0b03",
+      "changed": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "scripts/c5_demos/poc_graph_isomorphism_wl.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          179
+        ]
+      ],
+      "sha256_expected": "ac10dfda74ebe68926f6ad7b82e6f3611ed736f2bef819c09fb638de5d7cc095",
+      "sha256_observed": "ac10dfda74ebe68926f6ad7b82e6f3611ed736f2bef819c09fb638de5d7cc095",
+      "changed": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "scripts/c5_quality_gates/symlink_depth_auditor.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          51
+        ]
+      ],
+      "sha256_expected": "59c4391fef4e113a028ea31fadbff8c3b4db59b441392110e7cbb34b30238df6",
+      "sha256_observed": "59c4391fef4e113a028ea31fadbff8c3b4db59b441392110e7cbb34b30238df6",
+      "changed": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "scripts/repatriated/audit_titan_jwt.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          73
+        ]
+      ],
+      "sha256_expected": "d2371a34e8cd1c7f6284f17b828a723951802208c7519c00507fa2f037d490ea",
+      "sha256_observed": "d2371a34e8cd1c7f6284f17b828a723951802208c7519c00507fa2f037d490ea",
+      "changed": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tests/fixtures/fake_aws_credentials",
+      "status": "reviewed_partial",
+      "ranges": [
+        [
+          1,
+          6
+        ]
+      ],
+      "sha256_expected": "5238a0a1a73b831dfce76f4fdbae93e8c6030ca9c75603fdb1d5425c586b09a7",
+      "sha256_observed": "5238a0a1a73b831dfce76f4fdbae93e8c6030ca9c75603fdb1d5425c586b09a7",
+      "changed": false,
+      "notes": "Credential-shaped values redacted before display; only structure/comments reviewed."
+    },
+    {
+      "path": "tests/test_cortex_100_iterations_adversarial.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          180
+        ]
+      ],
+      "sha256_expected": "6875ab530d731b97cd2c5f6c2f2cb1d9509d94c8b512851371e0ea3861545c45",
+      "sha256_observed": "6875ab530d731b97cd2c5f6c2f2cb1d9509d94c8b512851371e0ea3861545c45",
+      "changed": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tests/test_silicon_thermal_telemetry.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          30
+        ]
+      ],
+      "sha256_expected": "c54e1ce7f68c69907ec4d2b9a6a39c78278eea294d78bc907d6da8d505260293",
+      "sha256_observed": "c54e1ce7f68c69907ec4d2b9a6a39c78278eea294d78bc907d6da8d505260293",
+      "changed": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/analytics-engine/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          85
+        ]
+      ],
+      "sha256_expected": "0905a030df7ee450044aa4da629d6c493d8e75d97bfb35919346915fc9e7a151",
+      "sha256_observed": "0905a030df7ee450044aa4da629d6c493d8e75d97bfb35919346915fc9e7a151",
+      "changed": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/hyperdrive/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          190
+        ]
+      ],
+      "sha256_expected": "0ba6b647a9e5fbd2cd72534a82bb99dfff15cc8d69c79b0acd386028a1c5bd4c",
+      "sha256_observed": "0ba6b647a9e5fbd2cd72534a82bb99dfff15cc8d69c79b0acd386028a1c5bd4c",
+      "changed": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/spectrum/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          196
+        ]
+      ],
+      "sha256_expected": "087e7d9a1a1a308eb13614332df217137296501cf57082077f05bb3a1f2bf7b0",
+      "sha256_observed": "087e7d9a1a1a308eb13614332df217137296501cf57082077f05bb3a1f2bf7b0",
+      "changed": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/durable-objects/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          186
+        ]
+      ],
+      "sha256_expected": "cd6797cb18f3ae8f721dfd2e5cb27b73a0aa8636683f1a38163dab2fd51a8dfb",
+      "sha256_observed": "cd6797cb18f3ae8f721dfd2e5cb27b73a0aa8636683f1a38163dab2fd51a8dfb",
+      "changed": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents/agent_05_channels.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          61
+        ]
+      ],
+      "sha256_expected": "be72883704e7e9a0c1eed5a915060af4a4a19ed8d42a6e09e9c98ebcb2864a3d",
+      "sha256_observed": "be72883704e7e9a0c1eed5a915060af4a4a19ed8d42a6e09e9c98ebcb2864a3d",
+      "changed": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_41_site_playbooks_realtor.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "sha256_expected": "ec0938c0d7167fa9ca31ebe078fb903046b7edd314862feedb0183801e028f26",
+      "sha256_observed": "ec0938c0d7167fa9ca31ebe078fb903046b7edd314862feedb0183801e028f26",
+      "changed": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-ring0-babylon-kernel/references/modules/c5-thermos-audit/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          95
+        ]
+      ],
+      "sha256_expected": "e51440d889a7bb56f1361b18fda92c2f4564fe0a859e4be3c061e774b5c7a331",
+      "sha256_observed": "e51440d889a7bb56f1361b18fda92c2f4564fe0a859e4be3c061e774b5c7a331",
+      "changed": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/dynamic-subagent-lifecycle/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          41
+        ]
+      ],
+      "sha256_expected": "5bb0e3c0b0de8cd3bde5d9aa4d2b3affbf994834ab1b7b4fa5ff972a9b295910",
+      "sha256_observed": "5bb0e3c0b0de8cd3bde5d9aa4d2b3affbf994834ab1b7b4fa5ff972a9b295910",
+      "changed": false,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/workspace/c5-cortex-swarm-orchestrator-project/references/modules/writing-for-agents/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          44
+        ]
+      ],
+      "sha256_expected": "a5cf38e0887299dd168a14ad4877370fdcebdbc257ba9d5535919bc70828fe04",
+      "sha256_observed": "a5cf38e0887299dd168a14ad4877370fdcebdbc257ba9d5535919bc70828fe04",
+      "changed": false,
+      "notes": "Static text review; no execution."
+    }
+  ],
+  "tool_limitations": [
+    "No native codebase-memory graph/index tools exposed; targeted text search used.",
+    "No runtime execution, tests, builds, network checks or external API verification performed by instruction.",
+    "Static review of vendored cloud examples does not verify current external service behavior."
+  ],
+  "tests_run": []
+}

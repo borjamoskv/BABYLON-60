@@ -1,0 +1,27 @@
+{
+  "workspace_version": "5.1.0",
+  "changed_internal_packages": [
+    "b60-lang",
+    "babylon-attest",
+    "babylon-skills-mcp",
+    "babylon60-compiler",
+    "babylon60-fuzz",
+    "babylon60-kernel",
+    "babylon60-proof-ir",
+    "babylon60-runtime",
+    "babylon60_root",
+    "c5_compiler",
+    "cadt_mediator",
+    "cortex-core",
+    "cortex-guard",
+    "cortex-lsp",
+    "eridu-infer",
+    "mxc_broker_poc",
+    "nul-zk",
+    "strike_rs",
+    "verifiable_inference_engine"
+  ],
+  "external_dependencies_changed": false,
+  "metadata_exit": 0,
+  "sha256": "5fb00af45f542e23eafdd82cbd6bd7a08c40675f5310f7a24f7b782b578ad6c6"
+}

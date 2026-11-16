@@ -1,0 +1,98 @@
+[
+  {
+    "path": "proof/bundles/attestation_bundle_v1/binary.sha3",
+    "sha256": "e6c7b9ffd4fe6cef11ed15e270f6e2daf05fdd1413d3f3f6698bf151fa667509"
+  },
+  {
+    "path": "proof/bundles/attestation_bundle_v1/causal_hash",
+    "sha256": "065fcf8be685418ad7b6b74644eda4aeb6c7b13b0461852dc0fc90a405179536"
+  },
+  {
+    "path": "proof/bundles/attestation_bundle_v1/claims.snapshot",
+    "sha256": "ab2291cfb515447ade3ea9d8ff59d085acfc3b5b33bf47bd693a0ab38bd292bb"
+  },
+  {
+    "path": "proof/bundles/attestation_bundle_v1/commit.txt",
+    "sha256": "45c83b670a8f96b45146784510288ec8cbe72f79419e9c9288f794810b142179"
+  },
+  {
+    "path": "proof/bundles/attestation_bundle_v1/environment.json",
+    "sha256": "06410429694a97e046d94d7aa76258c7d9263899efaa5d333f4d9cf7c14d96e1"
+  },
+  {
+    "path": "proof/bundles/attestation_bundle_v1/manifest.json",
+    "sha256": "8a67311136d786a2f859d701d84f9bcdda66e6ab50c843b6cff5c505127939b4"
+  },
+  {
+    "path": "proof/bundles/attestation_bundle_v1/public_key.der",
+    "sha256": "7a54b679a45191037e62af3225d00154791a2e8d93f123c367968958258edd13"
+  },
+  {
+    "path": "proof/bundles/attestation_bundle_v1/signature.der",
+    "sha256": "25acc43986eb70c7c0f24234a0a650dd95eac76ec9b2fe927b5d1f4c0b727f0e"
+  },
+  {
+    "path": "proof/bundles/attestation_bundle_v1/test-results.json",
+    "sha256": "d949ed8c3efc5e429616e3ceeaf570261103678816df3511988bb294a694e791"
+  },
+  {
+    "path": "proof/bundles/attestation_bundle_v1/timestamp",
+    "sha256": "93b0355249abd95c5ca7e5c7c9b48eeb4137f012583ea5a7c9487460fbe128cf"
+  },
+  {
+    "path": "proof/bundles/attestation_bundle_v2/artifact.sha256",
+    "sha256": "569c84775582d4badf6b8e0a9f3835d4ba542c441d5ba28e5bc3f43aeb02fb8a"
+  },
+  {
+    "path": "proof/bundles/attestation_bundle_v2/claims.snapshot",
+    "sha256": "1e9cd83f39a4da76d8f24bb0561b8a3b52955a07e8e6af4c880dc5cf3ffb7d14"
+  },
+  {
+    "path": "proof/bundles/attestation_bundle_v2/claims_manifest.sha256",
+    "sha256": "30c67fed36a138d251b00771cab2c67f83e4869787ed94e1aa606f92a7f623fd"
+  },
+  {
+    "path": "proof/bundles/attestation_bundle_v2/commit.txt",
+    "sha256": "c2795f6409371c6c24e99841f540ffcfd656125228bda93a1779f6592ee936d8"
+  },
+  {
+    "path": "proof/bundles/attestation_bundle_v2/environment.json",
+    "sha256": "c7969f25b61e0ab49a66e1b59e7ad1ba850ad616025a97f8cbfd3e6bb3f69fca"
+  },
+  {
+    "path": "proof/bundles/attestation_bundle_v2/environment.sha256",
+    "sha256": "0e8132e14881719ed4d26b4a346fe425c8e7029647222af79249ee031d81c58d"
+  },
+  {
+    "path": "proof/bundles/attestation_bundle_v2/joint_digest",
+    "sha256": "96e7eb0c2cf529e6abd766fe2aacb066391fbca22a26fb74c0a43b98c8f8f9d3"
+  },
+  {
+    "path": "proof/bundles/attestation_bundle_v2/manifest.json",
+    "sha256": "28eb6f9d302c8c8124889882b62e44efbf56579ec48d069afc493002d70d3bcb"
+  },
+  {
+    "path": "proof/bundles/attestation_bundle_v2/public_key.der",
+    "sha256": "7becc1a2c5eb430110b3b0cb167664551a44161e21e91b63f6cb87d1d69d348f"
+  },
+  {
+    "path": "proof/bundles/attestation_bundle_v2/signature.der",
+    "sha256": "8ace5845b3c7f57ab6a60560f40d0284b6bf5b964a3e3fa765eefe1e902e4c44"
+  },
+  {
+    "path": "proof/bundles/attestation_bundle_v2/test_results.json",
+    "sha256": "78ada3db317672996dfb4220a220b3edaca4d6c70782644768f03b8ea3181670"
+  },
+  {
+    "path": "proof/bundles/attestation_bundle_v2/test_results.sha256",
+    "sha256": "f4bec9e7ccb5cf6d12bd991af43ab2c05b3d2163b5dfa1d5ab8dcea4be33f88b"
+  },
+  {
+    "path": "proof/bundles/attestation_bundle_v2/timestamp",
+    "sha256": "c6348042eba574608cfc92e755d520cf75dec938c59f4f596827e6c84096289b"
+  },
+  {
+    "path": "proof/bundles/attestation_bundle_v2/verify",
+    "sha256": "bc1bff6c68dee804263e0f6e3a1c48bb879ad9c21ceed7881dbc83ffe6a1d8f2"
+  }
+]

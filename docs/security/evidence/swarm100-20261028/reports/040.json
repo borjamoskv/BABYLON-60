@@ -1,0 +1,419 @@
+{
+  "shard": "040",
+  "findings": [
+    {
+      "title": "ZCA whitening crashes for a valid single-feature matrix",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/core/representation_geometry.py",
+      "line": 116,
+      "evidence": "The guard allows shape (n,1) for n>=2; np.cov(..., rowvar=False) produces a scalar covariance and the code passes it directly to np.linalg.eigh. The PC1 helper in the same file explicitly handles scalar covariance.",
+      "trigger": "Call compute_zca_whitening with shape (2,1), or compute_whitened_cka with either input having one feature.",
+      "impact": "Raises a dimensionality error rather than returning whitened representations.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Truncated idempotency keys collide in the audit-event primary key",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/persistence/cortex_wal_store.py",
+      "line": 131,
+      "evidence": "event_id uses only logical_tick, step_index and idempotency_key[:8]; audit_events.event_id is a global PRIMARY KEY, although the full idempotency key is a distinct UNIQUE field. task_id is omitted.",
+      "trigger": "Record two distinct keys sharing their first eight characters with the same tick and step, including across tasks.",
+      "impact": "The second valid event fails its primary-key insert, preventing its checkpoint update.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Checkpoint read-modify-write occurs outside the write transaction",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/persistence/cortex_wal_store.py",
+      "line": 133,
+      "evidence": "get_checkpoint reads compacted_error_summary before INSERT begins the SQLite transaction; the later ON CONFLICT clause overwrites the complete summary with that stale local list.",
+      "trigger": "Two CortexWalStore instances read the same task checkpoint, then serialize two successful writes each adding a different error.",
+      "impact": "The second checkpoint overwrites the first error summary; compaction reads this summary and can omit durable error evidence. The audit_events rows can still retain the original errors.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Synthetic broker labels Python predicates as hardware-attested consensus",
+      "severity": "P2",
+      "path": "scripts/repatriated/larsa120_isostatic_synthesis.py",
+      "line": 69,
+      "evidence": "alpha/beta/gamma are Python length and prefix predicates (56-58); simulate_biometric=True creates ATTESTED_NIST_P256. OBSERVED hashes proposed input (74-76), COMMITTED computes a plain hash (78-81). There is no Rust/Lean/Z3 invocation, hardware observation or COSE signature in this file. Targeted references located only its local suite.",
+      "trigger": "Run the example suite using simulate_biometric=True.",
+      "impact": "Output claims certification and attestation that the example does not establish; this is an example-evidence defect, not a demonstrated production authorization bypass.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Failover demo reports success when every tier is unavailable",
+      "severity": "P2",
+      "path": "scripts/c5_demos/poc_mass_stage3_resolution.py",
+      "line": 75,
+      "evidence": "When t1_alive, t2_alive and t3_alive are all false, delegated mode enters the failure branch but falls through to RESOLVED/Tier1:Antigravity.",
+      "trigger": "execute_request(MockGatewayState(t1_alive=False,t2_alive=False,t3_alive=False),...) with delegate_to_kernel=True.",
+      "impact": "The demonstration counts a failed request as resolved and cannot support its failover reliability claim for total outage.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Acoustic true-peak output measures only the mono sample peak",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-rubin-acoustic-linter/scripts/audit_acoustic_exergy.py",
+      "line": 88,
+      "evidence": "mono is 0.5*(left+right), then TruePeak_dBFS is computed from max(abs(mono)); no reconstruction or channel peak is evaluated.",
+      "trigger": "Stereo channels are opposite in phase, or reconstructed intersample peaks exceed sample maxima.",
+      "impact": "The reported TruePeak_dBFS can substantially underreport channel peak level and does not measure true peak.",
+      "confidence": "high",
+      "kind": "runtime"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".agents/skills/c5-epistemic-thermodynamics-project/references/modules/cloud-chamber/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "sha256_expected": "3e05f20fadd475daa5ab07387c14cd430c340d66c8e934f59a89790f836b13f8",
+      "sha256_observed": "3e05f20fadd475daa5ab07387c14cd430c340d66c8e934f59a89790f836b13f8",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/layout.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          71
+        ]
+      ],
+      "sha256_expected": "9f19c67b7a4878a11d21e9f334b6f9566a557cf035e58ae272b8fc72b43af947",
+      "sha256_observed": "9f19c67b7a4878a11d21e9f334b6f9566a557cf035e58ae272b8fc72b43af947",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/agents/sovereign_mcp/mcp_config.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          12
+        ]
+      ],
+      "sha256_expected": "8ed7bf91830e94de41c822ffe4030836b09cdc9a26d868f6a57cf39269e910b5",
+      "sha256_observed": "8ed7bf91830e94de41c822ffe4030836b09cdc9a26d868f6a57cf39269e910b5",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/core/representation_geometry.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          189
+        ]
+      ],
+      "sha256_expected": "2c09d65cafdc68d2e064540cc8f14327e35ea8cf6584550f7bfebba184665cba",
+      "sha256_observed": "2c09d65cafdc68d2e064540cc8f14327e35ea8cf6584550f7bfebba184665cba",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/persistence/cortex_wal_store.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          245
+        ]
+      ],
+      "sha256_expected": "2bf5d779a4f491284f6a889f5b473a46510b4db640aa1d051fec293e7eec31ad",
+      "sha256_observed": "2bf5d779a4f491284f6a889f5b473a46510b4db640aa1d051fec293e7eec31ad",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/cortex/crates/cortex-core/src/db.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          376
+        ]
+      ],
+      "sha256_expected": "6ca041d9ed07782061b22d54b1071b0369a8ce6800b9da1cc353c7cf23bdfc9b",
+      "sha256_observed": "6ca041d9ed07782061b22d54b1071b0369a8ce6800b9da1cc353c7cf23bdfc9b",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "crates/b60-lang/src/bin/aeon_stress.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          200
+        ]
+      ],
+      "sha256_expected": "a247524c68176b27717db59cf49628eafd278f6f795b6249125ed5ac267203e3",
+      "sha256_observed": "a247524c68176b27717db59cf49628eafd278f6f795b6249125ed5ac267203e3",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "docs/03_guides/guide_legaltech_eu_ai_act.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          53
+        ]
+      ],
+      "sha256_expected": "3466b259a77c6e2da71ba01af455ea29b569a6f1b1eb26cfbdf4e157acb5173b",
+      "sha256_observed": "3466b259a77c6e2da71ba01af455ea29b569a6f1b1eb26cfbdf4e157acb5173b",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "docs/security/evidence/harness-audit-2026-10-24/quality-gates.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          14
+        ]
+      ],
+      "sha256_expected": "fd862c144868665f5b62b539e8e63c0f4270cb10a9fa63dda892af300d793cc2",
+      "sha256_observed": "fd862c144868665f5b62b539e8e63c0f4270cb10a9fa63dda892af300d793cc2",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "proof/lean/NavierStokesBKM.lean",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          150
+        ]
+      ],
+      "sha256_expected": "353d51830eacf849875964e376ee27f6e222b3b2626a998cf972f88ae1db910b",
+      "sha256_observed": "353d51830eacf849875964e376ee27f6e222b3b2626a998cf972f88ae1db910b",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/c5_demos/poc_mass_stage3_resolution.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          230
+        ]
+      ],
+      "sha256_expected": "1b6386d8b691e4f22003cbbe4e971e332aa927d300f6cb0f4df2c07478731f6b",
+      "sha256_observed": "1b6386d8b691e4f22003cbbe4e971e332aa927d300f6cb0f4df2c07478731f6b",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/c5_quality_gates/test_lean_aot_stream.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          65
+        ]
+      ],
+      "sha256_expected": "4d7ad31a574fde9a63235994dc58388aa71cc9ee5b702d2d3d57a3f296e5ab79",
+      "sha256_observed": "4d7ad31a574fde9a63235994dc58388aa71cc9ee5b702d2d3d57a3f296e5ab79",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/repatriated/larsa120_isostatic_synthesis.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          124
+        ]
+      ],
+      "sha256_expected": "50d881fbb0a543c2f91d9821961ec890f84863b42d8daa449ce4d42c74e27ae9",
+      "sha256_observed": "50d881fbb0a543c2f91d9821961ec890f84863b42d8daa449ce4d42c74e27ae9",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/fixtures/partial_nonce_sigkill_interpose.c",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          67
+        ]
+      ],
+      "sha256_expected": "a4aea1345b6c224a831673beb707c9a3ca12d3b17de030a855e2db26443f4a49",
+      "sha256_observed": "a4aea1345b6c224a831673beb707c9a3ca12d3b17de030a855e2db26443f4a49",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/test_cortex_exterior_cognitivo_harness.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          231
+        ]
+      ],
+      "sha256_expected": "e867e883e80893afc05510bb2c8671fbeb8508634486339f20de6ccbbd13b054",
+      "sha256_observed": "e867e883e80893afc05510bb2c8671fbeb8508634486339f20de6ccbbd13b054",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/test_skill_library_convergence.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          183
+        ]
+      ],
+      "sha256_expected": "73aefecb7887d54e50ef57a2f9cccefdf1c8d40b3f3ccda30a011dbbefcbd36a",
+      "sha256_observed": "73aefecb7887d54e50ef57a2f9cccefdf1c8d40b3f3ccda30a011dbbefcbd36a",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/api-shield/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          141
+        ]
+      ],
+      "sha256_expected": "2ac3f5be499c1047575dddae5fe10fd9ab93e153eec3bd3fae3e2add82275aaa",
+      "sha256_observed": "2ac3f5be499c1047575dddae5fe10fd9ab93e153eec3bd3fae3e2add82275aaa",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/images/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          211
+        ]
+      ],
+      "sha256_expected": "f38fd695cbf8d628158b04eb679b8b2508db2099694f9c95da984a3ca3a61c38",
+      "sha256_observed": "f38fd695cbf8d628158b04eb679b8b2508db2099694f9c95da984a3ca3a61c38",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/static-assets/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          186
+        ]
+      ],
+      "sha256_expected": "c35204c02177893d0b8c5b9bf2341d7814ed9d1e8e2ca3fc7c87d05603e9ec50",
+      "sha256_observed": "c35204c02177893d0b8c5b9bf2341d7814ed9d1e8e2ca3fc7c87d05603e9ec50",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/durable-objects/references/workers.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          346
+        ]
+      ],
+      "sha256_expected": "042f8821109d3dec26560d0e21affb7d5c24db11466cd199f4f97de1743b8d4b",
+      "sha256_observed": "042f8821109d3dec26560d0e21affb7d5c24db11466cd199f4f97de1743b8d4b",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents/agent_08_code_changes.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          61
+        ]
+      ],
+      "sha256_expected": "0c2b9e29f67700acf8f76ea110744f5d3419f87d83c0d84db0a064cf6721e320",
+      "sha256_observed": "0c2b9e29f67700acf8f76ea110744f5d3419f87d83c0d84db0a064cf6721e320",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_44_site_playbooks_target.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "sha256_expected": "bfc65d85117f85450bf1442d444b33be3a0f05bb482a914ab29625b74258d005",
+      "sha256_observed": "bfc65d85117f85450bf1442d444b33be3a0f05bb482a914ab29625b74258d005",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-rubin-acoustic-linter/scripts/audit_acoustic_exergy.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          178
+        ]
+      ],
+      "sha256_expected": "09e896c0248a2e38125a0af54bcd92a6306ee66fbb7b2e6558e45ae11da8ca7f",
+      "sha256_observed": "09e896c0248a2e38125a0af54bcd92a6306ee66fbb7b2e6558e45ae11da8ca7f",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/epistemic-extinction-protocol/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "sha256_expected": "c20bf4af35ec2beb0d8404e244d42c5d366d739de835759501e9626d48e62773",
+      "sha256_observed": "c20bf4af35ec2beb0d8404e244d42c5d366d739de835759501e9626d48e62773",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/workspace/c5-epistemic-thermodynamics-project/references/modules/c5-alpha-extraction-pipeline/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          49
+        ]
+      ],
+      "sha256_expected": "7551f806aa480382f9a2ac2fdb554b1f6bef3f812eaefec18cb95c4acc70ced2",
+      "sha256_observed": "7551f806aa480382f9a2ac2fdb554b1f6bef3f812eaefec18cb95c4acc70ced2",
+      "changed_since_manifest": false
+    }
+  ],
+  "tool_limitations": [
+    "Native codebase-memory graph tools are not exposed in this session; targeted text search used.",
+    "Static review only: no tests, project runtime execution, compiler, Lean, hardware, network or deployment checks performed.",
+    "Initial combined source output was truncated; affected central files were subsequently read in bounded sections.",
+    "External cloud API examples were read for local consistency only; current provider behavior was not verified."
+  ],
+  "tests_run": [],
+  "context": {
+    "branch": "main",
+    "working_tree": "Existing modifications observed and preserved.",
+    "instructions_read": [
+      "AGENTS.md",
+      ".babylon60rules"
+    ],
+    "cross_file_reference_search": [
+      "02_EDIN_SWARMS/agents_archi/orchestrator/royal_rumble.py",
+      "tests/test_representation_geometry.py"
+    ],
+    "hash_check": "SHA-256 observed after review against manifest; no project sources written."
+  }
+}

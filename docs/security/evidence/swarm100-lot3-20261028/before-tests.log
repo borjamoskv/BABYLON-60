@@ -1,0 +1,54 @@
+FFF                                                                      [100%]
+=================================== FAILURES ===================================
+_________________ test_c0413_missing_scanner_never_dispatches __________________
+
+fixture = <test_swarm100_lot3_regressions.Fixture object at 0x10927da90>
+
+    def test_c0413_missing_scanner_never_dispatches(fixture):
+        (fixture.bin/'gitleaks').unlink()
+        result = fixture.run(SCRIPTS[0])
+>       assert result.returncode != 0, result.stdout
+E       AssertionError: b"\xe2\x94\x81\xe2\x94\x81\xe2\x94\x81\xe2\x94\x81\xe2\x94\x81\xe2\x94\x81\xe2\x94\x81\xe2\x94\x81\xe2\x94\x81\xe2\x94...\x94\x81\xe2\x94\x81\xe2\x94\x81\xe2\x94\x81\xe2\x94\x81\xe2\x94\x81\xe2\x94\x81\xe2\x94\x81\xe2\x94\x81\xe2\x94\x81
+E         "
+E       assert 0 != 0
+E        +  where 0 = CompletedProcess(args=['/bin/bash', '/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandez...x94\x81\xe2\x94\x81\xe2\x94\x81\xe2\x94\x81\xe2\x94\x81\xe2\x94\x81\xe2\x94\x81\xe2\x94\x81\xe2\x94\x81\n", stderr=b'').returncode
+
+tests/test_swarm100_lot3_regressions.py:149: AssertionError
+___________________ test_c0418_missing_gate_never_dispatches ___________________
+
+fixture = <test_swarm100_lot3_regressions.Fixture object at 0x1092c87d0>
+
+    def test_c0418_missing_gate_never_dispatches(fixture):
+        (fixture.bin/'c5_biometric_gate').unlink()
+        result = fixture.run(SCRIPTS[1])
+>       assert result.returncode != 0, result.stdout
+E       AssertionError: b"[C5-SHIP] 1/5 Inspeccionando estado local (rama: main)...
+E         [C5-SHIP] -> \xc3\x81rbol local limpio (cero cambios pend...n/main (git push origin main)...
+E         [C5-SHIP] \xe2\x9c\x93 \xc3\x89XITO: Mac y GitHub est\xc3\xa1n 100% sincronizados.
+E         "
+E       assert 0 != 0
+E        +  where 0 = CompletedProcess(args=['/bin/bash', '/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandez...ush origin main)...\n[C5-SHIP] \xe2\x9c\x93 \xc3\x89XITO: Mac y GitHub est\xc3\xa1n 100% sincronizados.\n", stderr=b'').returncode
+
+tests/test_swarm100_lot3_regressions.py:156: AssertionError
+_______________ test_mutable_branch_never_selects_second_commit ________________
+
+fixture = <test_swarm100_lot3_regressions.Fixture object at 0x1092c9090>
+
+    def test_mutable_branch_never_selects_second_commit(fixture):
+        result = fixture.run(SCRIPTS[0])
+        assert fixture.calls('gate'), result.stderr
+>       assert not (fixture.root/'pushed').exists() or (fixture.root/'pushed').read_text() == COMMIT
+E       AssertionError: assert (not True or '222222222222...2222222222222' == '111111111111...1111111111111'
+E        +  where True = exists()
+E        +    where exists = (PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-722/test_mutable_branch_never_sele0') / 'pushed').exists
+E        +      where PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-722/test_mutable_branch_never_sele0') = <test_swarm100_lot3_regressions.Fixture object at 0x1092c9090>.root
+E         
+E         - 1111111111111111111111111111111111111111
+E         + 2222222222222222222222222222222222222222)
+
+tests/test_swarm100_lot3_regressions.py:163: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_swarm100_lot3_regressions.py::test_c0413_missing_scanner_never_dispatches
+FAILED tests/test_swarm100_lot3_regressions.py::test_c0418_missing_gate_never_dispatches
+FAILED tests/test_swarm100_lot3_regressions.py::test_mutable_branch_never_selects_second_commit
+3 failed in 3.10s

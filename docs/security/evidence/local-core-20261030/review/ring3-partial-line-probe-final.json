@@ -1,0 +1,14 @@
+{
+  "source_sha256": "0674a0056e4b032cb64d4c60b7be957bdc32f24917b8ef2218a99fe3fcc16d2d",
+  "configured_timeout_seconds": 20,
+  "observed_elapsed_before_forced_cleanup": 20.0017673750408,
+  "still_waiting_after_timeout": false,
+  "cleanup_completed": true,
+  "errors_after_cleanup": [
+    {
+      "type": "ValueError",
+      "message": "MCP response timeout; no retry"
+    }
+  ],
+  "scope": "Synthetic child process only; no MCP server, gate, or authentication"
+}

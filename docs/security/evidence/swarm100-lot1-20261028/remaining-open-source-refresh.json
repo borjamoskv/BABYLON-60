@@ -1,0 +1,133 @@
+[
+  {
+    "candidate_id": "SW100-C0265",
+    "decision": "CONFIRMED_STATIC",
+    "severity": "P2",
+    "remediation_state": "OPEN",
+    "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "current_source_sha256": "b898d7fabe6b598f204eca17116b2cba25cf8c05e49612451568f4c5273ca44a",
+    "rationale": "Mastodon results carry a local status_id separately from instance. save_to_vault selects id before URL, the sole primary key is record_id, and INSERT OR REPLACE therefore replaces an existing capture when a second instance has the same local ID. The optional save path calls this function without adding a namespace. Static storage defect; no vault or live instance was opened. Re-reviewed after Lot1: this separate behavior is unchanged and remains OPEN; sharing a modified source file does not close it.",
+    "source_checks": [
+      {
+        "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+        "start_line": 2134,
+        "end_line": 2138,
+        "observation": "Local ID remains the vault key."
+      },
+      {
+        "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+        "start_line": 2152,
+        "end_line": 2156,
+        "observation": "ID collisions still replace captures."
+      }
+    ],
+    "guards": [
+      "Bound SQL parameters prevent SQL injection but do not prevent logical key collisions.",
+      "Different instance URLs are stored as data, not included in the unique key.",
+      "Requires --save-vault and colliding IDs."
+    ],
+    "runtime_executed": false,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot1-20261028/remaining-socint-source-checks.json",
+      "docs/security/evidence/swarm100-lot1-20261028/independent-review.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/01.json"
+  },
+  {
+    "candidate_id": "SW100-C0268",
+    "decision": "REPRODUCED",
+    "severity": "P2",
+    "remediation_state": "OPEN",
+    "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "current_source_sha256": "b898d7fabe6b598f204eca17116b2cba25cf8c05e49612451568f4c5273ca44a",
+    "rationale": "Batch input yields multiple reports; JSON mode serializes each object separately, while the final non-CSV branch joins them with Markdown dashes. Executing the actual extracted join expression over two synthetic JSON objects produced JSONDecodeError: Extra data. This establishes invalid batch JSON, not network extraction behavior. Re-reviewed after Lot1: this separate behavior is unchanged and remains OPEN; sharing a modified source file does not close it.",
+    "source_checks": [
+      {
+        "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+        "start_line": 3036,
+        "end_line": 3040,
+        "observation": "Batch JSON retains the unrelated Markdown-separator defect."
+      }
+    ],
+    "guards": [
+      "Missing batch files and failed extractions are handled, but there is no multi-item JSON container.",
+      "A one-result batch can still be valid JSON."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-round3-20261028/01-reproductions.py",
+      "docs/security/evidence/swarm100-round3-20261028/01-reproductions.json",
+      "docs/security/evidence/swarm100-lot1-20261028/remaining-socint-source-checks.json",
+      "docs/security/evidence/swarm100-lot1-20261028/independent-review.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/01.json"
+  },
+  {
+    "candidate_id": "SW100-C0269",
+    "decision": "CONFIRMED_STATIC",
+    "severity": "P2",
+    "remediation_state": "OPEN",
+    "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "current_source_sha256": "b898d7fabe6b598f204eca17116b2cba25cf8c05e49612451568f4c5273ca44a",
+    "rationale": "The adapter sends the watch URL to the text-reading endpoint and assigns the first 10000 response characters to transcript/content/text without a caption or transcription parser. Markdown labels that field Transcripción de Audio. That is a source-provenance/presentation defect: a watch-page response is not established to be spoken audio. Actual remote response content was not fetched. Re-reviewed after Lot1: this separate behavior is unchanged and remains OPEN; sharing a modified source file does not close it.",
+    "source_checks": [
+      {
+        "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+        "start_line": 1630,
+        "end_line": 1634,
+        "observation": "Watch-page body remains transcript data."
+      },
+      {
+        "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+        "start_line": 2345,
+        "end_line": 2349,
+        "observation": "The unrelated audio-transcript label remains."
+      }
+    ],
+    "guards": [
+      "URL video-ID matching and HTTP timeouts bound request shape/duration, not transcript provenance.",
+      "Failures produce an empty field; successful body content is accepted without transcription metadata."
+    ],
+    "runtime_executed": false,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot1-20261028/remaining-socint-source-checks.json",
+      "docs/security/evidence/swarm100-lot1-20261028/independent-review.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/01.json"
+  },
+  {
+    "candidate_id": "SW100-C0270",
+    "decision": "REPRODUCED",
+    "severity": "P2",
+    "remediation_state": "OPEN",
+    "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "current_source_sha256": "b898d7fabe6b598f204eca17116b2cba25cf8c05e49612451568f4c5273ca44a",
+    "rationale": "Regex presence alone appends sentences to facts and publishes their count as hechos_verificados; the Markdown consumer renders Hechos Verificados. Executing the extracted classifier on \"RFC 9999 proves that two plus two equals five\" returned one verified fact. No truth or source validation occurs in this pure routine. Re-reviewed after Lot1: this separate behavior is unchanged and remains OPEN; sharing a modified source file does not close it.",
+    "source_checks": [
+      {
+        "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+        "start_line": 174,
+        "end_line": 178,
+        "observation": "Regex hits remain a verified-fact count."
+      },
+      {
+        "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+        "start_line": 2506,
+        "end_line": 2510,
+        "observation": "Consumer keeps the unrelated verified-fact label."
+      }
+    ],
+    "guards": [
+      "Sentences shorter than 16 characters are ignored, which does not establish truth for longer sentences.",
+      "Other categories are lower-priority elif branches after keyword-based facts."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-round3-20261028/01-reproductions.py",
+      "docs/security/evidence/swarm100-round3-20261028/01-reproductions.json",
+      "docs/security/evidence/swarm100-lot1-20261028/remaining-socint-source-checks.json",
+      "docs/security/evidence/swarm100-lot1-20261028/independent-review.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/01.json"
+  }
+]

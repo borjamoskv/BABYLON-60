@@ -1,0 +1,17 @@
+{
+  "command": [
+    "uv",
+    "run",
+    "--locked",
+    "--no-sync",
+    "python",
+    "docs/security/evidence/swarm100-lot12-20261030/run_confined_tests.py",
+    "docs/security/evidence/swarm100-lot12-20261030/review_reports_formal/independent_checks.py",
+    "-q",
+    "-o",
+    "addopts=--tb=short"
+  ],
+  "exit_code": 1,
+  "log": "docs/security/evidence/swarm100-lot12-20261030/review_reports_formal/independent-controls.log",
+  "sha256": "1333aaca95867e984caecb7e9b4f58fbca8a1ba97dc9f49b9171270cff10ed8f"
+}

@@ -1,0 +1,12 @@
+diff --git a/Cargo.lock b/Cargo.lock
+index fcde639f..fa412bd0 100644
+--- a/Cargo.lock
++++ b/Cargo.lock
+@@ -533,6 +533,7 @@ name = "babylon60_root"
+ version = "5.1.0"
+ dependencies = [
+  "base64ct",
++ "blake3",
+  "ciborium",
+  "coset",
+  "ed25519-dalek",

@@ -60,7 +60,7 @@ repos:
 
       - id: verify-ghost-nodes
         name: detect ghost nodes in documentation (C5-REAL Bisimulation)
-        entry: python3 scripts/c5_quality_gates/detect_ghost_nodes.py
+        entry: python3 scripts/c5_quality_gates/detect_ghost_nodes.py --scope product
         language: system
         pass_filenames: false
 

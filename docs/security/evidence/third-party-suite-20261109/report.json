@@ -1,0 +1,140 @@
+{
+  "schema": "babylon60.third_party_adversarial_suite.v1",
+  "overall_verdict": "PASS",
+  "elapsed_seconds": 5.493,
+  "environment": {
+    "os": "Darwin",
+    "release": "25.6.0",
+    "machine": "arm64",
+    "python_version": "3.14.7"
+  },
+  "pillar_1_adversarial_os_campaigns": {
+    "ATK_01_SIGKILL_CRASH_RECOVERY": {
+      "passed": true,
+      "signal_injected": "SIGKILL (-9)",
+      "observed_exit_code": -9,
+      "post_restart_state": "UNKNOWN_REQUIRES_RECONCILIATION",
+      "post_crash_replay_blocked": true
+    },
+    "ATK_02_TOCTOU_SYMLINK_AND_INODE_SWAP": {
+      "passed": true,
+      "symlink_swap_blocked_by_o_nofollow": true,
+      "inode_replacement_blocked": true,
+      "protected_vault_secret_intact": true
+    },
+    "ATK_03_CONCURRENT_TOKEN_REPLAY_16_THREADS": {
+      "passed": true,
+      "concurrent_threads": 16,
+      "authorized_executions": 1,
+      "replays_rejected": 15,
+      "physical_effect_invocations": 1
+    },
+    "ATK_04_DIRECT_BYPASS_AND_LOCK_SABOTAGE": {
+      "passed": true,
+      "direct_capsule_bypass_blocked": true,
+      "missing_lock_fail_closed": true
+    }
+  },
+  "pillar_2_quantifiable_head_to_head_benchmark": {
+    "iterations_per_engine": 1000,
+    "injected_adversarial_attacks": {
+      "symlink_toctou_attacks": 20,
+      "token_replay_attacks": 20,
+      "post_facto_log_tampers": 10,
+      "total_hostile_injections": 50
+    },
+    "baseline_unmediated_standard": {
+      "total_elapsed_sec": 0.0446,
+      "throughput_ops_sec": 22440.7,
+      "latency_p50_us": 38.38,
+      "latency_p99_us": 122.25,
+      "unauthorized_mutations_suffered": 40,
+      "attack_prevention_rate_pct": 0.0,
+      "tamper_detection_rate_pct": 0.0
+    },
+    "c5_real_mediated_engine": {
+      "total_elapsed_sec": 0.1167,
+      "throughput_ops_sec": 8568.7,
+      "latency_p50_us": 111.33,
+      "latency_p99_us": 274.54,
+      "unauthorized_mutations_suffered": 0,
+      "attacks_blocked": 40,
+      "attack_prevention_rate_pct": 100.0,
+      "tamper_detection_rate_pct": 100.0
+    },
+    "quantifiable_delta": {
+      "unauthorized_breach_reduction": "40 -> 0 (-100.0%)",
+      "tamper_detection_gain_pct": "+100.0%",
+      "median_mediation_overhead_us": 72.96
+    },
+    "repeat_statistics": {
+      "baseline_unmediated_standard": {
+        "throughput_ops_sec": {
+          "n": 30,
+          "mean": 20793.75,
+          "stdev": 2469.23,
+          "ci95_low": 19871.83,
+          "ci95_high": 21715.67
+        },
+        "latency_p50_us": {
+          "n": 30,
+          "mean": 41.35,
+          "stdev": 2.97,
+          "ci95_low": 40.24,
+          "ci95_high": 42.46
+        },
+        "latency_p99_us": {
+          "n": 30,
+          "mean": 131.36,
+          "stdev": 131.54,
+          "ci95_low": 82.25,
+          "ci95_high": 180.47
+        }
+      },
+      "c5_real_mediated_engine": {
+        "throughput_ops_sec": {
+          "n": 30,
+          "mean": 8076.09,
+          "stdev": 1286.9,
+          "ci95_low": 7595.61,
+          "ci95_high": 8556.57
+        },
+        "latency_p50_us": {
+          "n": 30,
+          "mean": 112.25,
+          "stdev": 5.68,
+          "ci95_low": 110.13,
+          "ci95_high": 114.37
+        },
+        "latency_p99_us": {
+          "n": 30,
+          "mean": 471.89,
+          "stdev": 625.26,
+          "ci95_low": 238.44,
+          "ci95_high": 705.34
+        }
+      }
+    },
+    "repeat": 30
+  },
+  "pillar_3_open_core_cryptographic_verification": {
+    "merkle_root": "d6d99fcbe5ca4d1231823368b9b509acc7273c3e146ecbd93bf86bedc67df119",
+    "public_key_ed25519": "c877118e166da834e068abe302e69e8d4906db60956731467224c8cad43c5c7c",
+    "signed_payload_sha256": "5316df430d7047ce85d78ce947e043c0a7b853878275a4c15257786843ea24a3",
+    "intact_ledger_verification": {
+      "verified": true,
+      "integrity_verified": true,
+      "merkle_root": "d6d99fcbe5ca4d1231823368b9b509acc7273c3e146ecbd93bf86bedc67df119",
+      "total_entries": 5,
+      "detail": "LEDGER_INTEGRITY_AND_MERKLE_VERIFIED"
+    },
+    "intact_certificate_verification": {
+      "valid": true,
+      "signature_valid": true,
+      "merkle_valid": true,
+      "detail": "CERTIFICATE_VALID_AND_VERIFIED (LEDGER_VERIFIED: LEDGER_INTEGRITY_AND_MERKLE_VERIFIED)"
+    },
+    "tampered_ledger_rejected": true,
+    "tampered_rejection_detail": "ENTRY_HASH_MISMATCH: row 3 computed 0e02ce606dd10faf41ba77e46a3744d0806792a70ca917c27e0339b8017353de != 704f1e1dee4bd251f50fb8b8e8b5ff274e7cc79c8f325005e67157b7c6ca89a4"
+  }
+}

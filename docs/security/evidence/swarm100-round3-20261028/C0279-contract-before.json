@@ -1,0 +1,6 @@
+{
+  "source_path": "scripts/c5_sharur/agent_beeper.py",
+  "before_sha256": "2601874532f18a3286ab7b0cf306672b20ae4eab61b40e57c1ccdaf6283f39cb",
+  "executable_ast_sha256": "e8777a1528a5df66bc5dd3e91ab12ffb207614ddc2d88f1183010200e174e7c0",
+  "change_scope": "docstrings only; preserve retained one-broadcast global barrier and existing unicast behavior"
+}

@@ -1,0 +1,17 @@
+{
+  "source_sha256": "708c04b74a59273979096fef368c642e670d141bb0ceef878d62415357dfd481",
+  "command": [
+    "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.venv/bin/python3",
+    "-m",
+    "pytest",
+    "/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/b60-lot12-s1-red-0peejlb9/tests/test_swarm100_lot12_s1_regressions.py",
+    "-q",
+    "-o",
+    "addopts=--tb=short",
+    "-k",
+    "source_removed_before_connect or manifest_created_during_publication or existing_zero_byte_database"
+  ],
+  "pytest_exit_code": 1,
+  "expected_failures": 3,
+  "scope": "Copied source/tests in a temporary directory; production source unchanged"
+}

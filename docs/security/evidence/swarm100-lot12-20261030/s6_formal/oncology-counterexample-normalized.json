@@ -1,0 +1,10 @@
+{
+  "returncode": 0,
+  "normalizations": [
+    "Escape reserved constructor meta as \u00abmeta\u00bb and its references",
+    "Increase maxRecDepth to 10000 for 300-entry catalog reduction",
+    "Close preexisting namespace at EOF"
+  ],
+  "axiom_unchanged": true,
+  "observation": "Compiler proof of False in normalized emitted model, not an execution of operator files"
+}

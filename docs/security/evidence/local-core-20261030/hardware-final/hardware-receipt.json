@@ -1,0 +1,14 @@
+{
+    "status": "ATTESTED",
+    "operator_user": "borjafernandezangulo",
+    "operator_name": "Borja Moskv",
+    "causal_hash": "14a9dcf83236795386c679ead54f1b3e4fda32f66650c877bd267908e557274e",
+    "short_hash": "14a9dcf8…57274e",
+    "action": "mcp:bft_append_event",
+    "prompt": null,
+    "scope": "Approve exact task",
+    "agent": "Codex · BABYLON-60",
+    "secure_enclave_signature": "MEYCIQCh59K/asg2MXoBHx7sucX5nmcP80S9vSRTrd8EyxSClwIhAK9Xx70aYlgv911iXv9QC9YC1OTCcp0d2t/x6CkRONyS",
+    "public_key": "BElo9/TvPpCiVplr8zeP4VRT6CvIfvQ1cLvPNzKcxH4zREp0xT1BV9Zc1EHz0JK3gBCdfHqMxJTKkW+jNc5Uzyg=",
+    "timestamp": 1793316941.023701
+}

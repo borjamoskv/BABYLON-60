@@ -1,0 +1,36 @@
+{
+  "command": [
+    "uv",
+    "run",
+    "--locked",
+    "--no-sync",
+    "python",
+    "docs/security/evidence/swarm100-lot12-20261030/run_confined_tests.py",
+    "tests/test_swarm100_lot12_m0_regressions.py",
+    "tests/test_swarm100_lot12_s1_regressions.py",
+    "tests/test_swarm100_lot12_s2_identity_regressions.py",
+    "tests/test_swarm100_lot12_s2_trust_regressions.py",
+    "tests/test_swarm100_lot12_s3_regressions.py",
+    "tests/test_swarm100_lot12_s4_regressions.py",
+    "tests/test_swarm100_lot12_s5_regressions.py",
+    "tests/test_swarm100_lot12_s6_formal_regressions.py",
+    "tests/test_swarm100_lot12_s6_reports_regressions.py",
+    "-q",
+    "-rs",
+    "-o",
+    "addopts=--tb=short"
+  ],
+  "exit_code": 1,
+  "lean_bin": "/Users/borjafernandezangulo/.elan/toolchains/leanprover--lean4---v4.35.0/bin/lean",
+  "test_source_sha256": {
+    "tests/test_swarm100_lot12_m0_regressions.py": "06bf1ca5e14982cc89bad53d9c731a2950942a41789e59c3affd0c47456f97b0",
+    "tests/test_swarm100_lot12_s1_regressions.py": "69d6b712ec997fa4fdf44eb4c13ef0b0821b180cbff789545f07928496d8b46e",
+    "tests/test_swarm100_lot12_s2_identity_regressions.py": "74a7223a73709bfd1fa64e4f627a05ca051e9a0cfd75676c4320ec887a4c1f63",
+    "tests/test_swarm100_lot12_s2_trust_regressions.py": "6af67ddb23f305882179f87ecc0c3ef99bf287c2858e6a806bced9a144e60c3f",
+    "tests/test_swarm100_lot12_s3_regressions.py": "330937555b0d472fd9003e01a8c88ba2535737685be491083b77d9636756cb89",
+    "tests/test_swarm100_lot12_s4_regressions.py": "88e2b0470744e3c16ce81cad610fe5be0e9f9a0250d5c92102b91a8a74d8f8a4",
+    "tests/test_swarm100_lot12_s5_regressions.py": "b4de26f735828e02635e94232fa2872398e22f0501f34ba47886dac17e9c0b91",
+    "tests/test_swarm100_lot12_s6_formal_regressions.py": "5e43a2ab6ecc5be4eaaddfff72cd272bad9bc1cf952e6643d0fe6cb9a709b41c",
+    "tests/test_swarm100_lot12_s6_reports_regressions.py": "d21e91fe1a308555c0be8ca59da4a9ec8ba7b2e334ddd8bbbd7a160165efffd1"
+  }
+}

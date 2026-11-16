@@ -1,0 +1,16 @@
+{
+  "command": [
+    "uv",
+    "run",
+    "--locked",
+    "--no-sync",
+    "pytest",
+    "tests/test_swarm100_lot12_s1_regressions.py",
+    "-q",
+    "-o",
+    "addopts=--tb=short"
+  ],
+  "exit_code": 1,
+  "source_sha256": "126474f8d45284fee75951c5a9ddd7abc350352be7df3adb6df8653aeb8e3ca2",
+  "log_sha256": "11a86919a3b91ed6df7380c5fe5d55fbf0cc30c5de295d47345cf7f4e83fa1a8"
+}

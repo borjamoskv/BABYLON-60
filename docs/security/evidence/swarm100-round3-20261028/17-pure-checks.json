@@ -1,0 +1,50 @@
+{
+  "reviewer": "17",
+  "checks": [
+    {
+      "candidate_id": "SW100-C0259",
+      "path": "01_KISH_ENGINE/babylon60/primitives/cbor.py",
+      "source_sha256": "befd58e5ae2587434cf7f31f841ba80d6da64e5666b20917650910dfa1b3e377",
+      "observations": {
+        "4378_declares_three_bytes_returns_hex": "78",
+        "6378_declares_three_text_bytes_returns": "x",
+        "0001_has_trailing_item_returns": 0
+      },
+      "scope": "Isolated pure Python source execution; no product integration executed"
+    },
+    {
+      "candidate_id": "SW100-C0174",
+      "path": "tools/skill_library/workspace/c5-anti-slop-ui/scripts/audit_ui_slop.py",
+      "source_sha256": "f5686da74c66d1879ffbfb522fb7b6111d53ff952f6cbbd228127154dbe3518f",
+      "observations": {
+        "direct_file_violation_count": 1,
+        "directory_violation_count": 0,
+        "synthetic_parent_component": "build-review"
+      },
+      "scope": "Isolated pure Python source execution; no product integration executed"
+    },
+    {
+      "candidate_id": "SW100-C0302",
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/electron-asar-forensic-audit/MODULE.md",
+      "source_sha256": "71ff85027d6b42db7b06bd8290ca74b7be899437e57ea6e67aee7e20927f55b4",
+      "observations": {
+        "returned_stream_closed": true,
+        "documented_consumer_seek_error": "seek of closed file",
+        "synthetic_file_entries": 1
+      },
+      "scope": "Isolated pure Python source execution; no product integration executed"
+    },
+    {
+      "candidate_id": "SW100-C0022",
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/examples/Euclidean_Polyrhythm_Generator.py",
+      "source_sha256": "6d5ae3cc1e5c7713fca3cdea108973f42f02eea8686f89a8f74073a9f02c059a",
+      "observations": {
+        "mode_0_note_count": 48,
+        "mode_1_note_count": 48,
+        "all_note_attributes_equal": true,
+        "limitation": "Score and Note are synthetic in-memory fixtures; FL Studio was not loaded"
+      },
+      "scope": "Isolated pure Python source execution; no product integration executed"
+    }
+  ]
+}

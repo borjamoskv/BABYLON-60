@@ -1,0 +1,12 @@
+{
+  "command": [
+    "/opt/homebrew/opt/python@3.14/bin/python3.14",
+    "-I",
+    "-c",
+    "import resource,json,sys\nresult={'platform':sys.platform,'limits':{}}\nlimit=64*1024*1024\nfor name in ('RLIMIT_AS','RLIMIT_DATA'):\n try:\n  resource.setrlimit(getattr(resource,name),(limit,limit))\n  result['limits'][name]='applied'\n except Exception as e:result['limits'][name]=type(e).__name__+': '+str(e)\ntry:\n data=bytearray(96*1024*1024)\n result['allocation_96MiB']='succeeded'\nexcept MemoryError:result['allocation_96MiB']='MemoryError'\nprint(json.dumps(result))\n"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"platform\": \"darwin\", \"limits\": {\"RLIMIT_AS\": \"ValueError: current limit exceeds maximum limit\", \"RLIMIT_DATA\": \"ValueError: current limit exceeds maximum limit\"}, \"allocation_96MiB\": \"succeeded\"}\n",
+  "stderr": "",
+  "scope": "Disposable child, <=96 MiB controlled allocation; no operator data or runtime. NOT an enforced-memory positive."
+}

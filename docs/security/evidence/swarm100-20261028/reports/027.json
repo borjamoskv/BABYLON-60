@@ -1,0 +1,396 @@
+{
+  "shard": "027",
+  "findings": [
+    {
+      "title": "Concurrent audit appends can fork the hash chain",
+      "severity": "P2",
+      "path": "scripts/c5_quality_gates/pipe_audit.py",
+      "line": 63,
+      "evidence": "Lines 63–71 read the previous tail and compute the next digest before the independent append at lines 73–74; no lock serializes those operations.",
+      "trigger": "Two pipe_audit processes read the same ledger tail before either appends.",
+      "impact": "Both new entries name the same predecessor, so the sequential ledger chain breaks under ordinary concurrent auditing; valid activity becomes indistinguishable from a damaged chain. This concerns the audit trail, not a demonstrated execution bypass.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Malformed action fields raise instead of returning rejection",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/verification/verifier.py",
+      "line": 55,
+      "evidence": "Lines 47–51 call int on untrusted payload values, but the handler at line 55 catches only ValueError and KeyError. int(None) and int([]) raise TypeError.",
+      "trigger": "Call verify_payload with both action_class and agent_id present and agent_id=None (or a numeric field containing a list), using an otherwise recognized action class.",
+      "impact": "The boolean verification API propagates an exception rather than returning False; consumers expecting deterministic rejection can fail a request/task. No protected-effect consumer or authorization bypass was established.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Annex VI theorem claims legal guarantees absent from its model",
+      "severity": "P2",
+      "path": "scripts/c5_demos/poc_annex_vi_compliance.lean",
+      "line": 7,
+      "evidence": "Lines 7–11 claim impossibility of fraud/noncompliance. Lines 16–31 model only four caller-supplied Bool values; theorem lines 37–49 merely decomposes their conjunction. Lines 55–60 hard-code all four values true without checking any document, signature or log.",
+      "trigger": "Use this demo/theorem as evidence for the stated legal or cryptographic compliance claim.",
+      "impact": "A tautology over asserted flags is presented as a guarantee about external evidence; forged evidence with all flags asserted is outside the theorem and cannot be ruled out by it. Finding concerns proof scope and documentation, not a legal determination.",
+      "confidence": "high",
+      "kind": "docs"
+    },
+    {
+      "title": "Gateway fallback example calls an undeclared Anthropic provider",
+      "severity": "P3",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/ai-gateway/sdk-integration.md",
+      "line": 27,
+      "evidence": "The fenced example imports createAiGateway, createOpenAI and generateText and defines only openai, then invokes anthropic(...) in its fallback array. No Anthropic import or initialization exists in the file.",
+      "trigger": "Adapt the advertised automatic fallback block using the preceding imports and provider setup.",
+      "impact": "TypeScript reports an unresolved identifier (or JavaScript throws ReferenceError); the documented fallback example cannot run as shown.",
+      "confidence": "high",
+      "kind": "example"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "scripts/c5_quality_gates/pipe_audit.py",
+      "line": 109,
+      "hypothesis": "Import aliases such as import os as o; o.system(...) evade the literal-name detector. This scanner limitation is visible textually; a productive caller enforcing its verdict was not located in the targeted search, so no execution bypass is asserted."
+    },
+    {
+      "path": "scripts/c5_quality_gates/pipe_audit.py",
+      "line": 75,
+      "hypothesis": "Ledger append OSError is swallowed, permitting an unlogged verdict; operational reachability depends on filesystem permissions/failures and was not exercised."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".agents/skills/c5-audiovisual-acreativo-sota-project/references/modules/c5-anti-slop-ui/scripts/audit_ui_slop.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          172
+        ]
+      ],
+      "inventory_sha256": "f5686da74c66d1879ffbfb522fb7b6111d53ff952f6cbbd228127154dbe3518f",
+      "observed_sha256": "f5686da74c66d1879ffbfb522fb7b6111d53ff952f6cbbd228127154dbe3518f",
+      "hash_match": true
+    },
+    {
+      "path": ".mcp.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          10
+        ]
+      ],
+      "inventory_sha256": "f33bb2154671b5d6459a4f0cc6677b7d1be153e9af5ee1942f3abb17bc89e429",
+      "observed_sha256": "f33bb2154671b5d6459a4f0cc6677b7d1be153e9af5ee1942f3abb17bc89e429",
+      "hash_match": true
+    },
+    {
+      "path": "00_ABZU_KERNEL/kernel_poc.asm",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          77
+        ]
+      ],
+      "inventory_sha256": "0ab4eb75d839594ac76cc378ef9a98bd557e7948b6acae7430dfb7cc9676ce88",
+      "observed_sha256": "0ab4eb75d839594ac76cc378ef9a98bd557e7948b6acae7430dfb7cc9676ce88",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/core/cortex_inference.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          76
+        ]
+      ],
+      "inventory_sha256": "f35272d1ecf62716e2d3675feb715b809053991ccb3e7333e3b63a181fc90906",
+      "observed_sha256": "f35272d1ecf62716e2d3675feb715b809053991ccb3e7333e3b63a181fc90906",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/mcp/signature_app.html",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          199
+        ]
+      ],
+      "inventory_sha256": "697c673a3d91d817cac0407b9d9f1c92dc292db8fd7a854c2bd051ae1e4550e5",
+      "observed_sha256": "697c673a3d91d817cac0407b9d9f1c92dc292db8fd7a854c2bd051ae1e4550e5",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/verification/verifier.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          63
+        ]
+      ],
+      "inventory_sha256": "0a9fd29fc7a3f1ac0780535aa45e3de762ddd4ea9a50ddac7970a0d1c21d27a2",
+      "observed_sha256": "0a9fd29fc7a3f1ac0780535aa45e3de762ddd4ea9a50ddac7970a0d1c21d27a2",
+      "hash_match": true
+    },
+    {
+      "path": "babylon.toml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          22
+        ]
+      ],
+      "inventory_sha256": "888f128a48ab0308cbb32f4f5bab05f1e0913833f393a1d270a91e156ff89f15",
+      "observed_sha256": "888f128a48ab0308cbb32f4f5bab05f1e0913833f393a1d270a91e156ff89f15",
+      "hash_match": true
+    },
+    {
+      "path": "docs/03_guides/agent_contracts.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          144
+        ]
+      ],
+      "inventory_sha256": "2dca2d3441059c4072f869a9672441d6c2700423be2d9be90863780ca08f802e",
+      "observed_sha256": "2dca2d3441059c4072f869a9672441d6c2700423be2d9be90863780ca08f802e",
+      "hash_match": true
+    },
+    {
+      "path": "docs/security/evidence/external-audit-remediation-2026-10-24/key-migration-documentation-gates.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          32
+        ]
+      ],
+      "inventory_sha256": "71aa1d09e2429968602115c327cd867496abb882dc94e64397afea9c9dd4c3f4",
+      "observed_sha256": "71aa1d09e2429968602115c327cd867496abb882dc94e64397afea9c9dd4c3f4",
+      "hash_match": true
+    },
+    {
+      "path": "proof/lean/BabylonAeonStress.lean",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          1521
+        ]
+      ],
+      "inventory_sha256": "3ccd72bb384f92cc8af895bc8c4503c5ad86dbf3544861340e866d98c0b8eef0",
+      "observed_sha256": "3ccd72bb384f92cc8af895bc8c4503c5ad86dbf3544861340e866d98c0b8eef0",
+      "hash_match": true,
+      "notes": "Completed direct raw reads in <=180-line slices, retrying individually the middle slices obscured by combined-output truncation. All literal rows and theorem/comments reviewed textually. No Lean compilation or runtime inference."
+    },
+    {
+      "path": "scripts/c5_demos/poc_annex_vi_compliance.lean",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          77
+        ]
+      ],
+      "inventory_sha256": "99b11fc699931938f6cdcf9762643f3d6927788ff472b8c8cfd61d865d4f098d",
+      "observed_sha256": "99b11fc699931938f6cdcf9762643f3d6927788ff472b8c8cfd61d865d4f098d",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_quality_gates/pipe_audit.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          163
+        ]
+      ],
+      "inventory_sha256": "0a68f39fde144feb36b00bbfa7b6a1056accc4c309c5284467cb1caf7d7a6eb3",
+      "observed_sha256": "0a68f39fde144feb36b00bbfa7b6a1056accc4c309c5284467cb1caf7d7a6eb3",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/kimi_nexus/kimi_audit.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          18
+        ]
+      ],
+      "inventory_sha256": "2e29759f1311bed425901aeff4ad594c058dc5155cb6b809b7fff5479e443f14",
+      "observed_sha256": "2e29759f1311bed425901aeff4ad594c058dc5155cb6b809b7fff5479e443f14",
+      "hash_match": true
+    },
+    {
+      "path": "tests/bft_aot_test.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          120
+        ]
+      ],
+      "inventory_sha256": "c4879dfd219cf24a690025a73c5020667e484e1b58c01682ecc13f9c8eab54ff",
+      "observed_sha256": "c4879dfd219cf24a690025a73c5020667e484e1b58c01682ecc13f9c8eab54ff",
+      "hash_match": true
+    },
+    {
+      "path": "tests/test_cognitive_pilot_integration.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          487
+        ]
+      ],
+      "inventory_sha256": "29e60a1215a470f54b11d026090e151f8aed969e7c023551f3b6620ee73ab3c7",
+      "observed_sha256": "29e60a1215a470f54b11d026090e151f8aed969e7c023551f3b6620ee73ab3c7",
+      "hash_match": true
+    },
+    {
+      "path": "tests/test_ring2_sqlite_isolation.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          73
+        ]
+      ],
+      "inventory_sha256": "3105b27d613e5ed3f79107db25e921bd8edbd626e7996a483c50dc78ef47e355",
+      "observed_sha256": "3105b27d613e5ed3f79107db25e921bd8edbd626e7996a483c50dc78ef47e355",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/ai-gateway/sdk-integration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          114
+        ]
+      ],
+      "inventory_sha256": "cbff034669a30dbb4f3be053db71b8954f34c94ae5af4d9dbe1dac6af1f7a69b",
+      "observed_sha256": "cbff034669a30dbb4f3be053db71b8954f34c94ae5af4d9dbe1dac6af1f7a69b",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/flagship/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          469
+        ]
+      ],
+      "inventory_sha256": "e89e1f39fadfb9aad0c01fd6ac84b8c8f36716e88f26df1fd79c53aaf2eee8e7",
+      "observed_sha256": "e89e1f39fadfb9aad0c01fd6ac84b8c8f36716e88f26df1fd79c53aaf2eee8e7",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/smart-placement/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          183
+        ]
+      ],
+      "inventory_sha256": "367d10f1429c3a3aba9fcaa4a8cfe1f5a4e754c92e8ab451f4e24c742e25777a",
+      "observed_sha256": "367d10f1429c3a3aba9fcaa4a8cfe1f5a4e754c92e8ab451f4e24c742e25777a",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/wrangler/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          188
+        ]
+      ],
+      "inventory_sha256": "9285a26c93753a01f0232ec5a35c61e23d02c023cfd8b6d1327dbfb58ae063b6",
+      "observed_sha256": "9285a26c93753a01f0232ec5a35c61e23d02c023cfd8b6d1327dbfb58ae063b6",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/soulseek-p2p-audio-acquisition/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          93
+        ]
+      ],
+      "inventory_sha256": "f275cba8d164c73e02d04d91ef8225fb2d70d5f18b115464a3118058efc75c84",
+      "observed_sha256": "f275cba8d164c73e02d04d91ef8225fb2d70d5f18b115464a3118058efc75c84",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_31_site_playbooks_ebay.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "inventory_sha256": "d2a1b174208133d53a107fe5ca8a2cb221a77a04c3c5bd9ef41fb70ef4f65210",
+      "observed_sha256": "d2a1b174208133d53a107fe5ca8a2cb221a77a04c3c5bd9ef41fb70ef4f65210",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-ring0-babylon-kernel/references/modules/c5-enki-60/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          45
+        ]
+      ],
+      "inventory_sha256": "d9a5a40604fed9631d8a5f1c53ffaad2a20f7e6d3eda412051b9f8814126c3f0",
+      "observed_sha256": "d9a5a40604fed9631d8a5f1c53ffaad2a20f7e6d3eda412051b9f8814126c3f0",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/cct-cognitive-theory-advisor/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "inventory_sha256": "87290e9a1838bce9fb2e1edc67984a9595ffd607770067dbc8a4144852868df6",
+      "observed_sha256": "87290e9a1838bce9fb2e1edc67984a9595ffd607770067dbc8a4144852868df6",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/workspace/c5-alpha-extraction-pipeline/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "inventory_sha256": "088b0573db1e9f7890baf2eb668cb5c753b816cb1d6aece1ba88c06f00031244",
+      "observed_sha256": "088b0573db1e9f7890baf2eb668cb5c753b816cb1d6aece1ba88c06f00031244",
+      "hash_match": true
+    }
+  ],
+  "tool_limitations": [
+    "Native graph discovery returned no exposed search_graph/index_repository/get_architecture tool; targeted text searches were used.",
+    "Audit only: no repository code, tests, builds, protected runtime effects, or external service examples executed. Hashing and report generation were standalone text/metadata processing.",
+    "One targeted search included an absent historical extensions path; no absence claim is inferred from it.",
+    "Cloudflare API/version assertions were not independently verified; findings avoid API-dependent claims."
+  ],
+  "tests_run": []
+}

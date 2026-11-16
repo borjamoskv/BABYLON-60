@@ -1,0 +1,116 @@
+[
+  {
+    "candidate_id": "SW100-C0574",
+    "decision": "ALREADY_FIXED",
+    "severity": "P1",
+    "remediation_state": "FIXED",
+    "rationale": "Removed suffix-based operational lock deletion and all recursive directory removal. Git entries/recognized bare and worktree metadata structures are excluded without following outside pointers; lock-like names are preserved even inside candidate caches. Nine initial red reproductions included index.lock/packed-refs.lock pathname removal with descriptors still open and a competing Git update succeeding after unlink. The patched fixtures preserve lock inode/content and Git exclusion while its descriptor stays open, irrespective of old timestamp. No corruption of an operator repository is claimed.",
+    "guards": [
+      "Only current Python .pyc headers in __pycache__ are deletion candidates; directories, opaque .DS_Store/cache data and unknown artifacts are preserved. Legacy broad cleanup compatibility is intentionally narrowed.",
+      "Database/lock-name filtering is conservative; scratch and metadata/dependency/cache subtrees are excluded, not recursively certified. No database cleanup/checkpoint/ownership override is implemented.",
+      "MAGIC/header/flags recognition is not provenance or bytecode validity. A caller-controlled file with a recognized header can still meet the scoped policy.",
+      "Descriptor-relative O_NOFOLLOW/O_NONBLOCK and stat/fstat revalidation detect tested substitutions, preserve hardlinks/foreign owners and avoid following links. Python stat-to-unlink is not atomic against hostile concurrent pathname replacement.",
+      "No OS sandbox, bind-mount containment, hostile ancestor/directory-rename isolation, complete filesystem inventory or physical-space/erasure claim is certified.",
+      "The report records deletion only after successful unlink; failures/budgets are errors and CLI nonzero. SCOPED_OK means completion within this narrow scope, not all caches removed or repository safety.",
+      "verify_va is no longer invoked automatically. Cleanup emits no 0-percent entropy, signature, hardware attestation or certification.",
+      "Actual cleanup/SQLite/Git effects only in owned temporary fixtures, synthetic HOME/config; original verifier stubbed and patched runtime has no verifier import. No real project purge/operator database, signing, protected runtime, network, publication or ATTESTED.",
+      "Data preservation was observed by inode/content, live SQLite/WAL/SHM and Git exclusion with a lock fd open. This is not evidence of actual Git corruption, power-loss resilience or physical deletion. Global telemetry omitted."
+    ],
+    "source_checks": [
+      {
+        "path": "scripts/c5_verifiers/purge_residuals.py",
+        "start_line": 68,
+        "end_line": 71,
+        "observation": "Conservative database/lock filtering precedes candidate selection."
+      },
+      {
+        "path": "scripts/c5_verifiers/purge_residuals.py",
+        "start_line": 57,
+        "end_line": 65,
+        "observation": "Recognizes Git/bare/worktree metadata shapes without following destinations."
+      },
+      {
+        "path": "scripts/c5_verifiers/purge_residuals.py",
+        "start_line": 100,
+        "end_line": 143,
+        "observation": "Excludes protected subtrees, never rmtree/rmdir and only dispatches regular scoped bytecode candidates."
+      },
+      {
+        "path": "scripts/c5_verifiers/purge_residuals.py",
+        "start_line": 146,
+        "end_line": 165,
+        "observation": "Descriptor-rooted cleanup and factual structured outcome, no other verifier."
+      }
+    ],
+    "runtime_executed": true,
+    "path": "scripts/c5_verifiers/purge_residuals.py",
+    "current_source_sha256": "cd2e547cfac8adf1b0ce6358da3fe20cebc3c45a4bfa0fc339828dcd2a819f7c",
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot10-20261029/before-tests.log",
+      "docs/security/evidence/swarm100-lot10-20261029/related-tests.log",
+      "docs/security/evidence/swarm100-lot10-20261029/independent-review.json",
+      "docs/security/evidence/swarm100-lot10-20261029/scope-check.json",
+      "docs/security/evidence/swarm100-lot10-20261029/validation.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/05.json",
+    "runtime_scope": "Owned temporary cleanup roots, compiled fixture bytecode, live temporary SQLite/WAL and real fixture Git locking; no operator data/purge/protected runtime.",
+    "resolution_type": "CODE_AND_CONFINED_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0575",
+    "decision": "ALREADY_FIXED",
+    "severity": "P2",
+    "remediation_state": "FIXED",
+    "rationale": "Removed unconditional scratch/*.db* deletion and broad cache-directory removal. Scratch, database/auxiliary/lock names and unknown cache data are outside deletion scope; a SQLite file disguised as .pyc is preserved when its header is unrecognized. Only owned single-link regular current-Python header candidates inside __pycache__ can be unlinked after identity revalidation. Live temporary database/WAL/SHM, lookalikes, cached database and hardlink/symlink cases remain intact. This fixes unauthorized data selection by removing that cleanup path; it does not implement authorized database disposal or prove bytecode provenance.",
+    "guards": [
+      "Only current Python .pyc headers in __pycache__ are deletion candidates; directories, opaque .DS_Store/cache data and unknown artifacts are preserved. Legacy broad cleanup compatibility is intentionally narrowed.",
+      "Database/lock-name filtering is conservative; scratch and metadata/dependency/cache subtrees are excluded, not recursively certified. No database cleanup/checkpoint/ownership override is implemented.",
+      "MAGIC/header/flags recognition is not provenance or bytecode validity. A caller-controlled file with a recognized header can still meet the scoped policy.",
+      "Descriptor-relative O_NOFOLLOW/O_NONBLOCK and stat/fstat revalidation detect tested substitutions, preserve hardlinks/foreign owners and avoid following links. Python stat-to-unlink is not atomic against hostile concurrent pathname replacement.",
+      "No OS sandbox, bind-mount containment, hostile ancestor/directory-rename isolation, complete filesystem inventory or physical-space/erasure claim is certified.",
+      "The report records deletion only after successful unlink; failures/budgets are errors and CLI nonzero. SCOPED_OK means completion within this narrow scope, not all caches removed or repository safety.",
+      "verify_va is no longer invoked automatically. Cleanup emits no 0-percent entropy, signature, hardware attestation or certification.",
+      "Actual cleanup/SQLite/Git effects only in owned temporary fixtures, synthetic HOME/config; original verifier stubbed and patched runtime has no verifier import. No real project purge/operator database, signing, protected runtime, network, publication or ATTESTED.",
+      "Data preservation was observed by inode/content, live SQLite/WAL/SHM and Git exclusion with a lock fd open. This is not evidence of actual Git corruption, power-loss resilience or physical deletion. Global telemetry omitted."
+    ],
+    "source_checks": [
+      {
+        "path": "scripts/c5_verifiers/purge_residuals.py",
+        "start_line": 68,
+        "end_line": 71,
+        "observation": "Database/SQLite/journal/WAL/SHM names cannot select a deletion."
+      },
+      {
+        "path": "scripts/c5_verifiers/purge_residuals.py",
+        "start_line": 74,
+        "end_line": 97,
+        "observation": "Own single-link header recognition with descriptor access and identity rechecks before unlink."
+      },
+      {
+        "path": "scripts/c5_verifiers/purge_residuals.py",
+        "start_line": 100,
+        "end_line": 143,
+        "observation": "Scratch/opaque caches are excluded and special/unknown files preserved."
+      },
+      {
+        "path": "scripts/c5_verifiers/purge_residuals.py",
+        "start_line": 168,
+        "end_line": 180,
+        "observation": "JSON/text report and nonzero error result replace unsupported blanket success."
+      }
+    ],
+    "runtime_executed": true,
+    "path": "scripts/c5_verifiers/purge_residuals.py",
+    "current_source_sha256": "cd2e547cfac8adf1b0ce6358da3fe20cebc3c45a4bfa0fc339828dcd2a819f7c",
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot10-20261029/before-tests.log",
+      "docs/security/evidence/swarm100-lot10-20261029/related-tests.log",
+      "docs/security/evidence/swarm100-lot10-20261029/independent-review.json",
+      "docs/security/evidence/swarm100-lot10-20261029/scope-check.json",
+      "docs/security/evidence/swarm100-lot10-20261029/validation.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/05.json",
+    "runtime_scope": "Owned temporary cleanup roots, compiled fixture bytecode, live temporary SQLite/WAL and real fixture Git locking; no operator data/purge/protected runtime.",
+    "resolution_type": "CODE_AND_CONFINED_REGRESSIONS_VERIFIED"
+  }
+]

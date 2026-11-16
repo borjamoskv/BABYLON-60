@@ -1,0 +1,4 @@
+scripts/repatriated/c5_sharur_100_anergy_purge.py:15:8: F401 [*] `sys` imported but unused
+scripts/repatriated/c5_sharur_100_anergy_purge.py:85:5: F841 Local variable `t0` is assigned to but never used
+Found 2 errors.
+[*] 1 fixable with the `--fix` option (1 hidden fix can be enabled with the `--unsafe-fixes` option).

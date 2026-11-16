@@ -1,0 +1,26 @@
+{
+  "reviewer": "13",
+  "assigned": 29,
+  "reviewed": 29,
+  "exact_id_coverage": true,
+  "unique_ids": 29,
+  "hashes_current": true,
+  "source_ranges_valid": true,
+  "evidence_paths_exist": true,
+  "isolated_pure_checks": 4,
+  "decisions": {
+    "CONFIRMED_STATIC": 25,
+    "REPRODUCED": 4
+  },
+  "remediation_states": {
+    "OPEN": 29
+  },
+  "native_runtime_executed": false,
+  "product_edits": false,
+  "workspace_gates": {
+    "semantic_contracts": {"exit_code": 0, "result": "PASS", "evidence": "docs/security/evidence/swarm100-round3-20261028/13-semantic-gate.log"},
+    "token_budget": {"exit_code": 0, "result": "PASS", "evidence": "docs/security/evidence/swarm100-round3-20261028/13-token-gate.log"},
+    "active_topology": {"exit_code": 0, "result": "PASS", "evidence": "docs/security/evidence/swarm100-round3-20261028/13-topology-gate.log"}
+  },
+  "omitted_scope": "Global configuration, ghost-listener telemetry, package integration, native/runtime effects, real operator data and deployments were not evaluated. Workspace gates do not certify runtime behavior."
+}

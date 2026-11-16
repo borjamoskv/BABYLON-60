@@ -1,0 +1,22 @@
+{
+  "name": "cargo-real-lean",
+  "command": [
+    "cargo",
+    "test",
+    "--locked",
+    "-p",
+    "b60-lang",
+    "--features",
+    "stress-bins",
+    "--test",
+    "lean_harness",
+    "real_lean",
+    "--",
+    "--ignored"
+  ],
+  "cwd": "/Users/borjafernandezangulo/.codex/worktrees/local-core-ring1/BABYLON-60",
+  "target_dir": "/Users/borjafernandezangulo/.codex/local-core-evidence/capture-20261029T230935Z/rust-target",
+  "exit_code": 0,
+  "elapsed_seconds": 8.683,
+  "log": "/Users/borjafernandezangulo/.codex/local-core-evidence/capture-20261029T230935Z/ring1/cargo-real-lean.log"
+}

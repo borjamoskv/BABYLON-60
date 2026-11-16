@@ -1,0 +1,77 @@
+"""Replay unchanged API counterexamples with fresh disposable fixtures.
+Run from repository root with its locked Python environment.
+Scripts use test guards/redirected fixture paths, not an OS isolation boundary.
+"""
+
+import argparse
+import hashlib
+import json
+from pathlib import Path
+import subprocess
+import sys
+import tempfile
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--repo", type=Path, default=Path.cwd())
+parser.add_argument("--output", type=Path)
+args = parser.parse_args()
+repo = args.repo.resolve()
+source_dir = Path(__file__).resolve().parent
+output = args.output.resolve() if args.output else Path(tempfile.mkdtemp(prefix="babylon60-round2-replay-"))
+output.mkdir(parents=True, exist_ok=True)
+results = []
+for lane, filename in [("a", "reproduce.py"), ("b", "reproduce.py"), ("c", "reproduce.py"), ("d", "validate.py")]:
+    source = source_dir / lane / filename
+    original = source.read_text()
+    rendered = original.replace("/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60", str(repo))
+    if lane == "b":
+        rendered = rendered.replace(
+            "BASE=Path('/tmp/babylon60-audit-round2-20261028/b'); cases=[]",
+            "BASE=Path(__file__).resolve().parent; cases=[]",
+        )
+    lane_dir = output / lane
+    lane_dir.mkdir()
+    script = lane_dir / filename
+    script.write_text(rendered)
+    try:
+        run = subprocess.run([sys.executable, str(script)], cwd=repo, capture_output=True, text=True, timeout=30)
+        (lane_dir / "stdout.log").write_text(run.stdout)
+        (lane_dir / "stderr.log").write_text(run.stderr)
+        result_file = lane_dir / ("result.json" if lane == "a" else "results.json")
+        result = json.loads(result_file.read_text()) if result_file.exists() else None
+        if lane == "a" and result:
+            statuses = {
+                "default_unobserved_campaigns": result["default_compile"]["simulation_marker_present"] is False,
+                "invalid_claims_output_deleted": result["invalid_claims_deletion"]["sentinel_exists_after"] is False,
+                "invalid_ledger_output_deleted": result["invalid_ledger_deletion"]["sentinel_exists_after"] is False,
+            }
+        elif lane in ["b", "c"] and result:
+            statuses = {x.get("case", x.get("id")): x.get("status") == "confirmed" for x in result["cases"]}
+        elif lane == "d" and result:
+            statuses = {x["name"]: x.get("verdict") == "corroborated" for x in result["cases"]}
+        else:
+            statuses = {}
+        results.append(
+            {
+                "lane": lane,
+                "exit_code": run.returncode,
+                "source_script_sha256": hashlib.sha256(original.encode()).hexdigest(),
+                "rendered_script_sha256": hashlib.sha256(rendered.encode()).hexdigest(),
+                "path_adjustments_only": True,
+                "case_confirmations": statuses,
+                "result_file": str(result_file),
+                "replay_passed": run.returncode == 0 and bool(statuses) and all(statuses.values()),
+            }
+        )
+    except Exception as error:
+        results.append({"lane": lane, "replay_passed": False, "error": repr(error)})
+summary = {
+    "scope": "Root replay of actual API counterexamples, fresh fixtures; no production state",
+    "repo": str(repo),
+    "output": str(output),
+    "results": results,
+    "passed": all(x["replay_passed"] for x in results),
+}
+(output / "replay-summary.json").write_text(json.dumps(summary, indent=2))
+print(json.dumps(summary, indent=2))
+raise SystemExit(0 if summary["passed"] else 1)

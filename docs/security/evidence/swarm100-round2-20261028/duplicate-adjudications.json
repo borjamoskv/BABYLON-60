@@ -1,0 +1,87 @@
+[
+  {
+    "ids": [
+      "SW100-C0096",
+      "SW100-C0391"
+    ],
+    "paths": [
+      "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/hardware/device_Antigravity_MCP.py",
+      "tools/skill_library/global/flstudio-mcp-production/hardware/device_Antigravity_MCP.py"
+    ],
+    "same_source_sha256": "784140f39e7b577de989186e75aeb2d2e3cb6342639cbea5ba6702b415d7d3e9",
+    "line": 116,
+    "title_similarity": 0.757,
+    "status": "DUPLICATE_CONFIRMED_BY_IDENTICAL_SOURCE_AND_SAME_TRIGGER_IMPACT",
+    "canonical_id": "SW100-C0096",
+    "duplicate_id": "SW100-C0391",
+    "review_note": "Same complete source bytes, same line and equivalent trigger/impact reviewed by root; both affected paths retained."
+  },
+  {
+    "ids": [
+      "SW100-C0103",
+      "SW100-C0461"
+    ],
+    "paths": [
+      "tools/skill_library/global/youtube-analysis-pipeline/scripts/yt_audit.py",
+      "tools/skill_library/global/c5-secops-infra-devtools/references/modules/youtube-analysis-pipeline/scripts/yt_audit.py"
+    ],
+    "same_source_sha256": "ecda4dca2ee77aa986d1898aad7fbd998bc07723bf7126c1e697fbd155638d62",
+    "line": 17,
+    "title_similarity": 0.916,
+    "status": "DUPLICATE_CONFIRMED_BY_IDENTICAL_SOURCE_AND_SAME_TRIGGER_IMPACT",
+    "canonical_id": "SW100-C0103",
+    "duplicate_id": "SW100-C0461",
+    "review_note": "Same complete source bytes, same line and equivalent trigger/impact reviewed by root; both affected paths retained."
+  },
+  {
+    "ids": [
+      "SW100-C0288",
+      "SW100-C0555"
+    ],
+    "paths": [
+      "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-sovereign-identity-hardening/scripts/check_pwned_pass.sh",
+      "tools/skill_library/global/c5-sovereign-identity-hardening/scripts/check_pwned_pass.sh"
+    ],
+    "same_source_sha256": "3589f071058fa0500ac0769217b67eb068f119fe970aa16ebd9a61b4ce00899e",
+    "line": 15,
+    "title_similarity": 0.806,
+    "status": "DUPLICATE_CONFIRMED_BY_IDENTICAL_SOURCE_AND_SAME_TRIGGER_IMPACT",
+    "canonical_id": "SW100-C0288",
+    "duplicate_id": "SW100-C0555",
+    "review_note": "Same complete source bytes, same line and equivalent trigger/impact reviewed by root; both affected paths retained."
+  },
+  {
+    "ids": [
+      "SW100-C0372",
+      "SW100-C0489"
+    ],
+    "paths": [
+      "tools/skill_library/global/c5-secops-infra-devtools/references/modules/github-architect/scripts/git_history_sanitizer.py",
+      "tools/skill_library/global/github-architect/scripts/git_history_sanitizer.py"
+    ],
+    "same_source_sha256": "b34703417445df5f5d5c954f4959a8f4bc95b9c5df32ca37b54652aa66fa3a61",
+    "line": 78,
+    "title_similarity": 0.708,
+    "status": "DUPLICATE_CONFIRMED_BY_IDENTICAL_SOURCE_AND_SAME_TRIGGER_IMPACT",
+    "canonical_id": "SW100-C0372",
+    "duplicate_id": "SW100-C0489",
+    "review_note": "Same complete source bytes, same line and equivalent trigger/impact reviewed by root; both affected paths retained."
+  },
+  {
+    "ids": [
+      "SW100-C0379",
+      "SW100-C0505"
+    ],
+    "paths": [
+      "tools/skill_library/global/c5-secops-infra-devtools/references/modules/github-architect/scripts/repo_health.py",
+      "tools/skill_library/global/github-architect/scripts/repo_health.py"
+    ],
+    "same_source_sha256": "75e90aad9eb0693af9ca9b3ff2aebaedf5e25efc6ee2ea5d8a21a4bf7e3c3236",
+    "line": 179,
+    "title_similarity": 0.667,
+    "status": "DUPLICATE_CONFIRMED_BY_IDENTICAL_SOURCE_AND_SAME_TRIGGER_IMPACT",
+    "canonical_id": "SW100-C0379",
+    "duplicate_id": "SW100-C0505",
+    "review_note": "Same complete source bytes, same line and equivalent trigger/impact reviewed by root; both affected paths retained."
+  }
+]

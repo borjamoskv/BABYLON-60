@@ -1,0 +1,89 @@
+[
+  {
+    "candidate_id": "SW100-C0167",
+    "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "The current writer serializes before opening, but open(..., \"w\") truncates the live destination and writes in place. A crash or short/failed write can leave corrupt JSON; project, ghosts and system are also separate commits. This is a durability defect in the directly callable consolidation API, not proof that corruption occurred on this host.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+        "start_line": 70,
+        "end_line": 79,
+        "observation": "Payload JSON validation occurs before an in-place truncating write; no temporary file, atomic replacement or fsync."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+        "start_line": 81,
+        "end_line": 113,
+        "observation": "Project read/modify/write is the first independent update."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+        "start_line": 115,
+        "end_line": 155,
+        "observation": "Ghosts and system are read and written independently after project persistence."
+      }
+    ],
+    "source_sha256": "c84b230f9424e7ff676750c535f450b03739f057583ac28e1468f342818b9ca0"
+  },
+  {
+    "candidate_id": "SW100-C0168",
+    "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+    "severity": "P2",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "Two consolidators can read the same project/system snapshot and overwrite each other after their separate modifications. The globals ghosts.json and system.json are shared even across different project instances. No lock, version check or serialized writer surrounds the read-modify-write operations. Concurrent use remains a trigger; no live race was run.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+        "start_line": 35,
+        "end_line": 45,
+        "observation": "Every instance uses shared memory files under the same base directory."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+        "start_line": 85,
+        "end_line": 113,
+        "observation": "Project changes and decisions derive from a prior read and replace the file."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+        "start_line": 115,
+        "end_line": 155,
+        "observation": "Shared ghosts and session list repeat the unlocked read-modify-write pattern."
+      }
+    ],
+    "source_sha256": "c84b230f9424e7ff676750c535f450b03739f057583ac28e1468f342818b9ca0"
+  },
+  {
+    "candidate_id": "SW100-C0169",
+    "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+    "severity": "P2",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "datetime.now(timezone.utc) supplies UTC clock fields, then the format labels them +02:00 without conversion. ISO consumers therefore interpret an instant two hours earlier than the captured UTC time. The same value is persisted in project, ghosts and system timestamps; daylight-saving comments do not perform conversion.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+        "start_line": 56,
+        "end_line": 60,
+        "observation": "UTC datetime is formatted with literal +02:00."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+        "start_line": 81,
+        "end_line": 98,
+        "observation": "The result becomes last_touched and ghost timestamp."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+        "start_line": 138,
+        "end_line": 155,
+        "observation": "The result becomes session date and system last_updated."
+      }
+    ],
+    "source_sha256": "c84b230f9424e7ff676750c535f450b03739f057583ac28e1468f342818b9ca0"
+  }
+]

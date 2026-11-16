@@ -1,0 +1,12 @@
+{
+  "links_and_json_errors": [],
+  "original_source_hash_changes": [],
+  "original_round_checksum_mismatches": [],
+  "reproduction_lanes_passed": 4,
+  "reproduced_scenarios": 13,
+  "all_replays_passed": true,
+  "existing_tests_passed": 59,
+  "ruff_reproduction_scripts": "PASS",
+  "semantic_budget_topology": "PASS",
+  "production_source_changes": false
+}

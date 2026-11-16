@@ -1,0 +1,17 @@
+[
+  {
+    "case": "malformed_crl",
+    "status": "confirmed",
+    "exception": null
+  },
+  {
+    "case": "json_ledger_payload",
+    "status": "confirmed",
+    "exception": null
+  },
+  {
+    "case": "governance_parent_revocation_interleaving",
+    "status": "confirmed",
+    "exception": null
+  }
+]

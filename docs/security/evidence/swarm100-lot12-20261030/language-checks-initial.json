@@ -1,0 +1,28 @@
+[
+  {
+    "command": [
+      "bash",
+      "-n",
+      "tools/install_shield.sh"
+    ],
+    "exit_code": 0,
+    "log": "docs/security/evidence/swarm100-lot12-20261030/language-check-0.log"
+  },
+  {
+    "command": [
+      "node",
+      "--check",
+      "01_KISH_ENGINE/services/email_inbound/worker.js"
+    ],
+    "exit_code": 1,
+    "log": "docs/security/evidence/swarm100-lot12-20261030/language-check-1.log"
+  },
+  {
+    "command": [
+      "node",
+      "tests/test_swarm100_lot12_s3_worker.mjs"
+    ],
+    "exit_code": 1,
+    "log": "docs/security/evidence/swarm100-lot12-20261030/language-check-2.log"
+  }
+]

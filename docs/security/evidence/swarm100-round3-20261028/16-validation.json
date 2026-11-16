@@ -1,0 +1,33 @@
+{
+  "reviewer": "16",
+  "checked_at_utc": "2026-10-28T15:49:16.421437+00:00",
+  "status": "PASS",
+  "candidate_count": 29,
+  "ids_match_assignment_exactly": true,
+  "required_fields_valid": true,
+  "primary_source_hashes_match_current_and_assignment": true,
+  "source_excerpt_count": 100,
+  "source_excerpt_hashes_and_ranges_match_current": true,
+  "evidence_paths_exist": true,
+  "decision_counts": {
+    "CONFIRMED_STATIC": 29
+  },
+  "severity_counts": {
+    "P2": 24,
+    "P1": 4,
+    "P3": 1
+  },
+  "remediation_state_counts": {
+    "OPEN": 29
+  },
+  "runtime_executed": false,
+  "scope_limits": [
+    "No product or dependency edits.",
+    "No native/runtime or pure-model reproductions performed.",
+    "No operator data, identities, databases or media accessed.",
+    "No CI/remote mutation, deployment or authentication attempt.",
+    "Graph tools unavailable in this native session; targeted source reads used.",
+    "Shared documentary/token/topology gates delegated to root reviewer; not run by reviewer16.",
+    "No global duplicate adjudication performed; independently reviewed assigned IDs."
+  ]
+}

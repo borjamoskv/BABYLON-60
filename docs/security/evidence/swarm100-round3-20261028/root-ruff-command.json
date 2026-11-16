@@ -1,0 +1,22 @@
+{
+  "command": [
+    "uv",
+    "run",
+    "--locked",
+    "--no-sync",
+    "ruff",
+    "check",
+    "01_KISH_ENGINE/babylon60/autodidact/epistemology.py",
+    "01_KISH_ENGINE/babylon60/autodidact/engine.py",
+    "01_KISH_ENGINE/babylon60/autodidact/__init__.py",
+    "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-browser-forensics-and-extension-triage/scripts/browser_forensics.py",
+    "tests/test_autodidact_derivation_regressions.py",
+    "tests/test_autodidact_omega_pipeline.py",
+    "tests/test_autodidact_omega_v2.py",
+    "tests/test_swarm100_round2_regressions.py",
+    "docs/security/evidence/swarm100-round3-20261028/"
+  ],
+  "exit_code": 0,
+  "log": "docs/security/evidence/swarm100-round3-20261028/root-ruff.log",
+  "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+}

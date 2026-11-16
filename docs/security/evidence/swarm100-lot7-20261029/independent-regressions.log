@@ -1,0 +1,23 @@
+{
+  "source_sha256_before": {
+    "scripts/c5_verifiers/fast_smt_gate.py": "853cd9746178aede419bee382b6e6416482fdbfb8a5eb753269732e3d5e384c1",
+    "tests/test_swarm100_lot7_regressions.py": "25f251af35f404cfc70cceac168c25401e286ae21b734c0c7eab30a72d8418a1"
+  }
+}
+.......................................................................  [100%]
+=============================== warnings summary ===============================
+../../../../../../../Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1464
+  /Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.venv/lib/python3.14/site-packages/_pytest/config/__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+71 passed, 1 warning in 1.27s
+
+{
+  "source_sha256_after": {
+    "scripts/c5_verifiers/fast_smt_gate.py": "853cd9746178aede419bee382b6e6416482fdbfb8a5eb753269732e3d5e384c1",
+    "tests/test_swarm100_lot7_regressions.py": "25f251af35f404cfc70cceac168c25401e286ae21b734c0c7eab30a72d8418a1"
+  },
+  "exit_code": 0
+}

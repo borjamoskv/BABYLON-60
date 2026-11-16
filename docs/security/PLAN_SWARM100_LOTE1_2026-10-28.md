@@ -6,11 +6,11 @@ La corrección independiente de AgentPager se documenta
 
 ## Selección reproducible
 
-Filtrar la [cola vigente](evidence/swarm100-round3-20261028/remediation-queue.json)
+Filtrar la [cola vigente](RETENTION.md)
 por `severity == P1`, `remediation_state == OPEN` y `decision == REPRODUCED`
 seleccionó inicialmente **tres P1**, agrupados en tres módulos. Se conservan sus
 IDs, hashes y arnés previo en
-[lot1-selection.json](evidence/swarm100-pager-20261028/lot1-selection.json).
+[lot1-selection.json](RETENTION.md).
 La reproducción previa es aislada; no acredita ejecución nativa ni despliegue.
 Tras el cierre no quedan P1 OPEN con dictamen REPRODUCED. El siguiente bloque
 estático está preparado en el [Lote 2](PLAN_SWARM100_LOTE2_2026-10-28.md).
@@ -24,7 +24,7 @@ estático está preparado en el [Lote 2](PLAN_SWARM100_LOTE2_2026-10-28.md).
 ## 1. C0373 — credenciales en errores de correo
 
 Reutilizar el fallo `CalledProcessError` con token sintético del
-[arnés existente](evidence/swarm100-round3-20261028/03-isolated-fixtures.py).
+[arnés existente](RETENTION.md).
 Convertirlo en regresión antes de corregir. Sustituir la serialización de
 excepciones/comandos por errores estructurados con datos permitidos y aplicar
 redacción de la credencial en cualquier detalle devuelto.

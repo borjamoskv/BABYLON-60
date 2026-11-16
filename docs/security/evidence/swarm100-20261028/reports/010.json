@@ -1,0 +1,380 @@
+{
+  "shard": "010",
+  "findings": [
+    {
+      "title": "Real Ollama examples return the Tier 1 canned response",
+      "severity": "P2",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/gateway/circuit_breaker.rs",
+      "line": 181,
+      "evidence": "call_tier1 ignores req and returns a fixed success after 100ms; with_tier3 uses a 2000ms T1 timeout. poc_t3_ollama_real.rs:40,59 and poc_oracle_nexus.rs:41,45 use that constructor.",
+      "trigger": "Run either linked real-inference example with default gateway configuration.",
+      "impact": "The request never reaches Ollama and a placeholder is presented as resolved inference; the attestor wraps it as ExogenousInjection.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Configurable policy can enable Tier 3 for Ring 0",
+      "severity": "P2",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/gateway/circuit_breaker.rs",
+      "line": 243,
+      "evidence": "RingPolicy.t3_allowed only tests vector membership (127-128); with_config accepts any vector; dispatch does not separately exclude target_ring==0 despite INV_CB_01.",
+      "trigger": "Construct with_config with t3_allowed_rings=[0], a Tier 3 engine, and a T1 timeout shorter than its mock latency.",
+      "impact": "A Ring 0 request enters the Tier 2/Tier 3 race contrary to the documented unconditional fail-stop invariant. This is a gateway routing invariant violation, not evidence of protected-effect execution.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Attestation lock acquisition is not atomic",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/kernel/devsecops_attest.py",
+      "line": 39,
+      "evidence": "_acquire_lock checks exists then opens with w; _release_lock removes the shared path.",
+      "trigger": "Two attestor processes both pass exists before either creates the file.",
+      "impact": "Both enter the supposedly exclusive section, and either can delete the lock while the other is still running.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Cached attestation tree hash survives HEAD changes",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/kernel/devsecops_attest.py",
+      "line": 19,
+      "evidence": "lru_cache key contains only path; git ls-tree HEAD is evaluated only on cache miss. generate_attestation_payload calls it with the same target_dir at line 50.",
+      "trigger": "A long-lived Python process generates a payload, changes Git HEAD, then generates another for the same path.",
+      "impact": "The new timestamp is paired with the previous tree digest, misidentifying the version being attested.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Staged canary deletion is accepted when the file remains locally",
+      "severity": "P2",
+      "path": "scripts/c5_quality_gates/canary_check.py",
+      "line": 67,
+      "evidence": "Failure requires path absent from git ls-files AND Path(path).exists()==False; pre-commit-config.yaml:42-46 installs this as a commit guard.",
+      "trigger": "Remove a declared planted canary from the Git index while retaining its working-tree file.",
+      "impact": "The commit guard passes although the committed tree no longer contains the declared canary, contradicting its index-integrity purpose.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Documentation distiller targets a fixed obsolete checkout",
+      "severity": "P2",
+      "path": "scripts/distill_babylon60_docs.py",
+      "line": 21,
+      "evidence": "WORKSPACE is /Users/borjafernandezangulo/BABYLON-60; all input/output paths derive from it, while frozen manifest root is /Users/borjafernandezangulo/10_PROJECTS/BABYLON-60.",
+      "trigger": "Invoke this script from the assigned checkout or a fresh clone elsewhere.",
+      "impact": "It reads/writes a different checkout if that path exists, or fails to find docs and cannot generate the intended package; no root argument or discovery is offered.",
+      "confidence": "high",
+      "kind": "runtime"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".agents/rules/c5_sovereign_operator_stance.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "hash_status": "match",
+      "sha256": "570b68e0390385db981763b64a9c0f7f0aaf0876eb8c1707fdd16e634d720d65"
+    },
+    {
+      "path": ".github/workflows/labeler.yml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          23
+        ]
+      ],
+      "hash_status": "match",
+      "sha256": "87f833d362c935a106446b8b03f2345074fb1f9a93865eccc6bf7ee3af042ea5"
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/gateway/circuit_breaker.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          420
+        ]
+      ],
+      "hash_status": "match",
+      "sha256": "514c522864cc6a1d360698c34b28f876d61798fbd0202752a44d4feba5515305"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/compliance_exporter/i18n.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          272
+        ]
+      ],
+      "hash_status": "match",
+      "sha256": "c2face8f5c48453a984114f30f6ed587d70716296b060a211a79d667c0c13fa5"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/devsecops_attest.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          84
+        ]
+      ],
+      "hash_status": "match",
+      "sha256": "24a4f47bc5a0a1aebf14060c6fd1166e24ca5488028cb8d4752a902c4a58571e"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/utils/watchdog_poc.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          32
+        ]
+      ],
+      "hash_status": "match",
+      "sha256": "159925a7daf746cbaee7c996c816276bad94e46a1c8bfd08399e6e99a085eb28"
+    },
+    {
+      "path": "CLAIMS.toml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          261
+        ]
+      ],
+      "hash_status": "match",
+      "sha256": "4c554ba882f74fe42698ffcf83d3e6043f2e6be3383e1548bf04c12017e144dd"
+    },
+    {
+      "path": "docs/01_spec/spec_finding_evidence_contract.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          96
+        ]
+      ],
+      "hash_status": "match",
+      "sha256": "11684f7b416b7ed2949d44a10da74771b51559948034c0a03a96d72d0583fde6"
+    },
+    {
+      "path": "docs/adr/ADR-002-pyo3-maturin-ffi-bridge.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          53
+        ]
+      ],
+      "hash_status": "match",
+      "sha256": "8bc39ea0f3e022181727c5980990e20cab911e05b701ef27686a490acf02d763"
+    },
+    {
+      "path": "proof/bundles/attestation_bundle_v2/artifact.sha256",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          1
+        ]
+      ],
+      "hash_status": "match",
+      "sha256": "569c84775582d4badf6b8e0a9f3835d4ba542c441d5ba28e5bc3f43aeb02fb8a"
+    },
+    {
+      "path": "scripts/c5_demos/falsacion_baremetal.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          64
+        ]
+      ],
+      "hash_status": "match",
+      "sha256": "18b55dfaedef83bac5846368a1035fc7d093fe81ac23f09968dde1301c3e3db2"
+    },
+    {
+      "path": "scripts/c5_quality_gates/canary_check.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          81
+        ]
+      ],
+      "hash_status": "match",
+      "sha256": "843c22a34b3a354091be1e1af1c4c2a14a631bc3c18b29de0915d595fcf0b849"
+    },
+    {
+      "path": "scripts/distill_babylon60_docs.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          435
+        ]
+      ],
+      "hash_status": "match",
+      "sha256": "0b27902d77a3b3a017e93076ee69722a1b8de72e1bc500839db7cba91ce09fa4"
+    },
+    {
+      "path": "src/shared_manifest_core.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          215
+        ]
+      ],
+      "hash_status": "match",
+      "sha256": "3e2bc4a0aa798d4e8459ca5f4e49270182e9da842940c801aeaa9c5063252c73"
+    },
+    {
+      "path": "tests/test_base60.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          36
+        ]
+      ],
+      "hash_status": "match",
+      "sha256": "69e69029ea3987512892ca9f4aa475f7e98752ce33a557d04e00313926e9b7e1"
+    },
+    {
+      "path": "tests/test_one_click_installer.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          152
+        ]
+      ],
+      "hash_status": "match",
+      "sha256": "0bbf86f7481e6a52f93211402eb9cc5552026be30e3273a1defdd50c9d2bbded"
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare-email-service/references/cli-and-mcp.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          125
+        ]
+      ],
+      "hash_status": "match",
+      "sha256": "906aa333331e080a275a4ba3d4c342281b655afcef25a2081d197a396a3da913"
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/durable-objects/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          160
+        ]
+      ],
+      "hash_status": "match",
+      "sha256": "65e72f58459566e8e7caf0a2e1025fbab8438d7fc0ffd6ecf05dc27e016fbd24"
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/realtimekit/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          203
+        ]
+      ],
+      "hash_status": "match",
+      "sha256": "4d4ccf99fa72d8923df1eb3910eade99021cb77c5d9b4aa95310a01aeade0aaf"
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workers-vpc/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          127
+        ]
+      ],
+      "hash_status": "match",
+      "sha256": "68257f983d838b31940d1dd543a0fa777c0cc07ef1d4de3227a911aae792e6c0"
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/examples/Stephan_Bodzin_Moog_Arp.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          85
+        ]
+      ],
+      "hash_status": "match",
+      "sha256": "ce1c8c439c6f8bbbcee55fbef53edff66b0cd72350930de03e3dcb960437ddfe"
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_14_in_chat_forms.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "hash_status": "match",
+      "sha256": "5a3ab8737a5338d2a1f05380358a658eb73c81dc2b101b6900e5edcf3826ff65"
+    },
+    {
+      "path": "tools/skill_library/global/c5-lexicon-enforcer/scripts/aphorism5_cost_linter.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          76
+        ]
+      ],
+      "hash_status": "match",
+      "sha256": "c7848a182c91a312303f64bb4044704e363d04bdf15da30f5a61ad264ba82a6c"
+    },
+    {
+      "path": "tools/skill_library/global/c5-weighted-decision-matrix/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "hash_status": "match",
+      "sha256": "62fca33a5732b5893f0f3afaafe7872be60ae726d22e72c15887b83c09d1008b"
+    },
+    {
+      "path": "tools/skill_library/global/vscode-git-packed-refs-diagnostics/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "hash_status": "match",
+      "sha256": "ba803d0984e865505ceb0e2c508407f7d5c9fd3147afa47824faea3804abceb7"
+    }
+  ],
+  "tool_limitations": [
+    "No codebase graph tools exposed in ALL_TOOLS; targeted text fallback used.",
+    "Static audit only; no tests, builds, examples, or runtime behavior executed.",
+    "External product reference examples reviewed statically; current vendor API compatibility not certified."
+  ],
+  "tests_run": []
+}

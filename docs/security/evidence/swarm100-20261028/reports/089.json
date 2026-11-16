@@ -1,0 +1,339 @@
+{
+  "shard": "089",
+  "findings": [
+    {
+      "title": "Identity decryption failure silently overwrites the master identity",
+      "severity": "P1",
+      "path": "scripts/c5_l1_ledger/seal_bounty_aeon.py",
+      "line": 128,
+      "evidence": "Any exception from load_identity is caught and calls forge_identity. crypto/identity.py:75-106 writes a new random seed to the same master_seed.enc with open(..., w).",
+      "trigger": "Run the sealer with an existing seed encrypted with a different passphrase or a corrupted seed file.",
+      "impact": "Destroys the previous private identity and silently rotates signing identity instead of rejecting the sealing operation.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Timestamp response existence is mislabeled as authenticated RFC3161 evidence",
+      "severity": "P2",
+      "path": "scripts/c5_l1_ledger/seal_bounty_aeon.py",
+      "line": 119,
+      "evidence": "AUTHENTICATED_RFC3161_TSA is selected solely by tsr_b64 presence. crypto/rfc3161.py:105-117 base64-encodes any HTTP 200 response without parsing status, signature, certificate trust or message imprint.",
+      "trigger": "TSA returns HTTP 200 with a rejection response, malformed token, or a token for a different imprint.",
+      "impact": "Saved artifact claims authenticated timestamp evidence without authenticating its timestamp or binding to the root.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Binary payload hash is truncated at the first NUL on read",
+      "severity": "P2",
+      "path": "02_EDIN_SWARMS/agents_archi/orchestrator/seqlock_swarm_ring0.py",
+      "line": 101,
+      "evidence": "payload_hash is ctypes.c_char * 16 (line 34); read accesses the structure field as a C string before bytes(...), although write stores arbitrary 16-byte digest data (80-81).",
+      "trigger": "Write a digest whose first 16 bytes contain 0x00, then call read().",
+      "impact": "The returned hash is shorter than the stored digest and loses its suffix, breaking digest round trips and comparisons.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Two-node quorum failure branch is unreachable",
+      "severity": "P2",
+      "path": "examples/poc_stress_dec_mimetic.rs",
+      "line": 150,
+      "evidence": "iter % 50 == 0 is in an else-if following iter % 10 == 0; every multiple of 50 already takes the first branch.",
+      "trigger": "Run the 1000-cycle consensus example.",
+      "impact": "No two-node failure is tested, quorum_poisoned_events stays zero, and the concluding BFT certification lacks the advertised rejection-path coverage.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Verifier records unconditional PASS for properties it does not inspect",
+      "severity": "P2",
+      "path": "scripts/c5_verifiers/axiom_verifier_z3.py",
+      "line": 361,
+      "evidence": "verify_four_renunciations records four literal True values without runtime inputs; verify_bayes_axiom4_disintegration records Split Epi as True solely from is_split_epi. print_report uses these rows in ALL AXIOMS SATISFIED — SYSTEM SOUND.",
+      "trigger": "Invoke the verifier against its built-in fixture or invoke these methods after an implementation violates the described constraints.",
+      "impact": "Report presents unchecked assertions as verification successes; the script cannot establish the advertised runtime constraints or a deterministic section identity.",
+      "confidence": "high",
+      "kind": "example"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "02_EDIN_SWARMS/agents_archi/orchestrator/seqlock_swarm_ring0.py",
+      "line": 72,
+      "description": "Cross-process mmap seqlock uses plain ctypes accesses without explicit atomic acquire/release operations. No claim of actual torn reads is made; memory-order correctness and intended consumers require a focused native-memory audit."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".github/CODEOWNERS",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          30
+        ]
+      ],
+      "inventory_sha256_match": true
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/build.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          16
+        ]
+      ],
+      "inventory_sha256_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/cli/main_dispatcher.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          1233
+        ]
+      ],
+      "inventory_sha256_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/guards/path_guard.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          31
+        ]
+      ],
+      "inventory_sha256_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/utils/cache.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          12
+        ]
+      ],
+      "inventory_sha256_match": true
+    },
+    {
+      "path": "02_EDIN_SWARMS/agents_archi/orchestrator/seqlock_swarm_ring0.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          125
+        ]
+      ],
+      "inventory_sha256_match": true
+    },
+    {
+      "path": "crates/eridu-infer/src/types.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          146
+        ]
+      ],
+      "inventory_sha256_match": true
+    },
+    {
+      "path": "docs/06_theory/c5_thermodynamic_invariants_compendium.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          177
+        ]
+      ],
+      "inventory_sha256_match": true
+    },
+    {
+      "path": "examples/poc_stress_dec_mimetic.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          231
+        ]
+      ],
+      "inventory_sha256_match": true
+    },
+    {
+      "path": "scripts/c5_demos/SemanticEntropyApoptosis.lean",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          151
+        ]
+      ],
+      "inventory_sha256_match": true
+    },
+    {
+      "path": "scripts/c5_l1_ledger/seal_bounty_aeon.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          227
+        ]
+      ],
+      "inventory_sha256_match": true
+    },
+    {
+      "path": "scripts/c5_verifiers/axiom_verifier_z3.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          561
+        ]
+      ],
+      "inventory_sha256_match": true
+    },
+    {
+      "path": "src/ffi_python.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          45
+        ]
+      ],
+      "inventory_sha256_match": true
+    },
+    {
+      "path": "tests/test_audit_mcp_confinement.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          83
+        ]
+      ],
+      "inventory_sha256_match": true
+    },
+    {
+      "path": "tests/test_ledger_vault_verify.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          92
+        ]
+      ],
+      "inventory_sha256_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/agents-sdk/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          221
+        ]
+      ],
+      "inventory_sha256_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/cron-triggers/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          180
+        ]
+      ],
+      "inventory_sha256_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/r2-data-catalog/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          122
+        ]
+      ],
+      "inventory_sha256_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/web-analytics/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          91
+        ]
+      ],
+      "inventory_sha256_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-video-quality-audit/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "inventory_sha256_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-browser-forensics-and-extension-triage/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "inventory_sha256_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/c5-terminological-archaeology/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          177
+        ]
+      ],
+      "inventory_sha256_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-somatic-panic-deescalation/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "inventory_sha256_match": true
+    },
+    {
+      "path": "tools/skill_library/global/handoff/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          41
+        ]
+      ],
+      "inventory_sha256_match": true
+    }
+  ],
+  "tool_limitations": [
+    "Native graph tools are not exposed in this session (tool-name discovery returned no search_graph/query_graph/get_architecture); targeted source reads used.",
+    "Audit is static only. No tests, builds, imports of project code, or runtime effects were executed.",
+    "Initial aggregate read was truncated; affected files were reread in bounded chunks. External library reference documents were inspected as task data; current provider API behavior was not independently verified."
+  ],
+  "tests_run": []
+}

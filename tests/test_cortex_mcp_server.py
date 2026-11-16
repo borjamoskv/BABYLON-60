@@ -646,15 +646,17 @@ def test_rust_babylon_skills_mcp_stdio_interop(tmp_path: Path) -> None:
             capture_output=True,
         )
 
+    catalog_path = repo_root / "docs" / "skills.json"
+    expected_count = str(len(json.loads(catalog_path.read_text(encoding="utf-8"))["entries"]))
     proc = subprocess.Popen(
         [
             str(binary),
             "--catalog",
-            str(repo_root / "docs" / "skills.json"),
+            str(catalog_path),
             "--skills-dir",
             str(repo_root / ".agents" / "skills"),
             "--expect-count",
-            "131",
+            expected_count,
         ],
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
@@ -809,9 +811,9 @@ def test_v31_gateway_3_primitives_and_fl_p08_to_fl_p11(tmp_path: Path) -> None:
             "params": {
                 "name": "skills.propose_effect",
                 "arguments": {
-                    "skill_id": "c5-socint-extraction-suite",
+                    "skill_id": "c5-gemini-api-2026-standards",
                     "version": "1.0.0",
-                    "tool_identity_hash": _skill_identity(server, "c5-socint-extraction-suite"),
+                    "tool_identity_hash": _skill_identity(server, "c5-gemini-api-2026-standards"),
                     "trace_id": "py-trace-p09",
                     "arguments": {"target_path": "workspace://docs/README.md"},
                     "precondition_snapshot": {"allowed_roots": ["workspace://"]},
@@ -891,9 +893,9 @@ def test_v31_gateway_3_primitives_and_fl_p08_to_fl_p11(tmp_path: Path) -> None:
             "params": {
                 "name": "skills.propose_effect",
                 "arguments": {
-                    "skill_id": "c5-neural-face-swap-cuadrilla",
+                    "skill_id": "cortex-skill-genesis",
                     "version": "1.0.0",
-                    "tool_identity_hash": _skill_identity(server, "c5-neural-face-swap-cuadrilla"),
+                    "tool_identity_hash": _skill_identity(server, "cortex-skill-genesis"),
                     "trace_id": "py-trace-p11",
                     "arguments": {
                         "target_path": "workspace://src/lib.rs",
@@ -1035,9 +1037,9 @@ def test_fl_p09_chaining_exfiltration(tmp_path: Path) -> None:
             "params": {
                 "name": "skills.propose_effect",
                 "arguments": {
-                    "skill_id": "c5-socint-extraction-suite",
+                    "skill_id": "c5-gemini-api-2026-standards",
                     "version": "1.0.0",
-                    "tool_identity_hash": _skill_identity(server, "c5-socint-extraction-suite"),
+                    "tool_identity_hash": _skill_identity(server, "c5-gemini-api-2026-standards"),
                     "trace_id": "fl-p09-isolated-trace",
                     "arguments": {"target_path": "workspace://out/report.json"},
                     "precondition_snapshot": {"allowed_roots": ["workspace://"]},
@@ -1112,9 +1114,9 @@ def test_fl_p11_postcondition_false_positive_rebuke(tmp_path: Path) -> None:
             "params": {
                 "name": "skills.propose_effect",
                 "arguments": {
-                    "skill_id": "c5-neural-face-swap-cuadrilla",
+                    "skill_id": "cortex-skill-genesis",
                     "version": "1.0.0",
-                    "tool_identity_hash": _skill_identity(server, "c5-neural-face-swap-cuadrilla"),
+                    "tool_identity_hash": _skill_identity(server, "cortex-skill-genesis"),
                     "trace_id": "fl-p11-isolated-trace",
                     "arguments": {
                         "target_path": "workspace://src/lib.rs",

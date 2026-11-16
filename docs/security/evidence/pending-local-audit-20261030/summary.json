@@ -1,0 +1,33 @@
+{
+  "captured_paths": 143,
+  "initial_head": "c47293e03f0b957794ec1ca917e1cf835027bd1b",
+  "concurrent_consolidation_commit": "77eb00ecdc",
+  "validation_base": "15eeb1788ceb3f62d51fdb1a6c702cfd4996ac3d",
+  "checked_main": "14c6931cae219c81328fb9605ad09368c84cbc0c",
+  "verified_python_tests": 304,
+  "solver_parser_passed": 15,
+  "solver_trust_passed": 15,
+  "solver_trust_ignored_worker": "Worker invoked explicitly by process tests, not a standalone case",
+  "confinement_tests": 18,
+  "kernel_semantic_tests": 20,
+  "kernel_release_repetitions": 16,
+  "open_findings": [
+    {
+      "id": "PA-01",
+      "severity": "P2",
+      "observation": "Finding and ReproductionRun accept a 64-character non-hex digest and is_verified returns True"
+    },
+    {
+      "id": "PA-02",
+      "severity": "P1",
+      "observation": "Malformed native_export_digest_b3 passes integrity checks and reaches ATTESTED"
+    }
+  ],
+  "not_verified": [
+    "Legacy persisted Rust digest-prefix migration",
+    "Scientific/physical/regulatory guarantees from new normative documents",
+    "Real human-trial efficacy",
+    "Comparative model quality in the capabilityguard bundle"
+  ],
+  "scope": "Local software audit only. No push, hardware attempt, external model call, or user-data migration."
+}

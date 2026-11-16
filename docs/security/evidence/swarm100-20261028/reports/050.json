@@ -1,0 +1,368 @@
+{
+  "shard": 50,
+  "findings": [
+    {
+      "title": "Swarm reports successful completion after dropping failed claims",
+      "severity": "P2",
+      "path": "scripts/c5_sharur/c5_bounty_sharur_exfiltration.py",
+      "line": 177,
+      "evidence": "future.result exceptions are logged and omitted from results; line220 still announces successful closure, and exported JSON contains only successful tasks without failed claim records.",
+      "trigger": "One or all legion_subagent_task futures raises, for example on a remote client constructor/query exception.",
+      "impact": "Export and terminal success omit unprocessed claims and cannot distinguish complete from partial remediation.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Bounded-memory test asserts storage growing linearly with agents",
+      "severity": "P2",
+      "path": "tests/test_swarm_reverse_engineering_bench.py",
+      "line": 197,
+      "evidence": "C5SwarmSimulation appends one16-character digest per agent into wal_log; test validates total_payload_bytes==200*16 while naming this strict O(1) bounded memory.",
+      "trigger": "Use this benchmark/test as evidence for constant total memory while increasing num_agents.",
+      "impact": "Passing test measures fixed per-record size while total retained state is O(N), supporting an incorrect benchmark conclusion.",
+      "confidence": "high",
+      "kind": "example"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "crates/b60-lang/src/lean_emitter.rs",
+      "line": 213,
+      "title": "Concurrent verification output replacement may verify another request",
+      "evidence": "emit commits shared target by rename; canonicalize and Lean invocation later reopen target. Two callers with same output name can overwrite between emission and verification. No production callers found in targeted b60-lang source search.",
+      "required_check": "Trace deployment consumers and reproduce in an isolated reviewed test before classifying authorization/runtime bypass."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".agents/skills/c5-ring0-babylon-kernel-project/references/modules/babylon60-kernel-invariants/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          66
+        ]
+      ],
+      "manifest_sha256": "96a74320d87fd068f829f3481280e900948189491588f3926505e84d1f93d234",
+      "observed_sha256": "96a74320d87fd068f829f3481280e900948189491588f3926505e84d1f93d234",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-compiler/tests/support/solver_trust_support.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          134
+        ]
+      ],
+      "manifest_sha256": "96c0244e0f3a43bfe1698c6b74dc27266301790b5f97069014af1cae25fcc35e",
+      "observed_sha256": "96c0244e0f3a43bfe1698c6b74dc27266301790b5f97069014af1cae25fcc35e",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/autodidact/__init__.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          70
+        ]
+      ],
+      "manifest_sha256": "39f742e10c541e298740a3350ad16c0088427707c8691f1af8af16f0e46b8171",
+      "observed_sha256": "39f742e10c541e298740a3350ad16c0088427707c8691f1af8af16f0e46b8171",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/cortex/cortex_mamba_inference.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          81
+        ]
+      ],
+      "manifest_sha256": "e1a229d0c9b41c60719e8fb896d671bfd6a9492528f54c01a4ce3c1f088e8a6e",
+      "observed_sha256": "e1a229d0c9b41c60719e8fb896d671bfd6a9492528f54c01a4ce3c1f088e8a6e",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/primitives/result.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          150
+        ]
+      ],
+      "manifest_sha256": "e6aed527f5047a3ebc3dfceb09ee3bfbe89fd1222831499c7c9c419a5f9a1f5f",
+      "observed_sha256": "e6aed527f5047a3ebc3dfceb09ee3bfbe89fd1222831499c7c9c419a5f9a1f5f",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/cortex/crates/cortex-guard/fixtures/pgou_madrid_cte.yaml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          22
+        ]
+      ],
+      "manifest_sha256": "bf3d93e5aca388f1c0771a2b2d8f2d24c4020205149e11830fdaf356eb515f68",
+      "observed_sha256": "bf3d93e5aca388f1c0771a2b2d8f2d24c4020205149e11830fdaf356eb515f68",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "crates/b60-lang/src/lean_emitter.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          557
+        ]
+      ],
+      "manifest_sha256": "525eda08cad3548f99b552810f21b6f8dc83a76590deb35766e568adf11cbd6e",
+      "observed_sha256": "525eda08cad3548f99b552810f21b6f8dc83a76590deb35766e568adf11cbd6e",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "docs/04_research/edin_swarm_architecture.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          61
+        ]
+      ],
+      "manifest_sha256": "b84f46442533c28662c44b262c8795241e71758b4cd297c8e9240b27df4292ff",
+      "observed_sha256": "b84f46442533c28662c44b262c8795241e71758b4cd297c8e9240b27df4292ff",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "docs/security/governance-comparison-2026-10-24.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          184
+        ]
+      ],
+      "manifest_sha256": "0c9407549d18b26e98b4815dd964edce77357ee2a4791002b0b4ed856f718d40",
+      "observed_sha256": "0c9407549d18b26e98b4815dd964edce77357ee2a4791002b0b4ed856f718d40",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "proof/lean/lean-toolchain",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          1
+        ]
+      ],
+      "manifest_sha256": "108ca2895820de2c74101f81de81756b41ca0165dfdc8ced16a82c3f810152d0",
+      "observed_sha256": "108ca2895820de2c74101f81de81756b41ca0165dfdc8ced16a82c3f810152d0",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/c5_demos/poc_zk_guardrail.lean",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          58
+        ]
+      ],
+      "manifest_sha256": "8b5d88523b76aa3bc4f6f7f662fbb698239467dfb6ab796c1ce87601558ada4f",
+      "observed_sha256": "8b5d88523b76aa3bc4f6f7f662fbb698239467dfb6ab796c1ce87601558ada4f",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/c5_sharur/c5_bounty_sharur_exfiltration.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          273
+        ]
+      ],
+      "manifest_sha256": "0caf0417da02a3c034de541cb9e52df621e40a159980e1a35a7a359299363159",
+      "observed_sha256": "0caf0417da02a3c034de541cb9e52df621e40a159980e1a35a7a359299363159",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/repatriated/sovereign_dialectic_seal.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          15
+        ]
+      ],
+      "manifest_sha256": "ffd358322f935af2acd363fb991c1d7117247b28de16be951677c4fa14df679a",
+      "observed_sha256": "ffd358322f935af2acd363fb991c1d7117247b28de16be951677c4fa14df679a",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/nemesis_wave3.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          1161
+        ]
+      ],
+      "manifest_sha256": "4194bf28be72e6e82609711e831fbc8aa956c66cd99ec7dd7f2323b6def96ab8",
+      "observed_sha256": "4194bf28be72e6e82609711e831fbc8aa956c66cd99ec7dd7f2323b6def96ab8",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/test_exergy_binary_ipc.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          215
+        ]
+      ],
+      "manifest_sha256": "4f9e5d0386cbdaef33e6d47fb525343f596bee5c950a7eacd155173dcd2c1e01",
+      "observed_sha256": "4f9e5d0386cbdaef33e6d47fb525343f596bee5c950a7eacd155173dcd2c1e01",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/test_swarm_reverse_engineering_bench.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          221
+        ]
+      ],
+      "manifest_sha256": "22f4f93a33eca9ec05fdfe671c503093206a8a20ef79225c4deb82cfe698ff5e",
+      "observed_sha256": "22f4f93a33eca9ec05fdfe671c503093206a8a20ef79225c4deb82cfe698ff5e",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/argo-smart-routing/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          240
+        ]
+      ],
+      "manifest_sha256": "145b1af361591668a71ed88fad7fd522a360bc4ee916725d76db6c01175e3627",
+      "observed_sha256": "145b1af361591668a71ed88fad7fd522a360bc4ee916725d76db6c01175e3627",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/miniflare/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          173
+        ]
+      ],
+      "manifest_sha256": "795d95a8250db63d38ffc161452337f2b149bfed232e6217559f3f79af18f2ad",
+      "observed_sha256": "795d95a8250db63d38ffc161452337f2b149bfed232e6217559f3f79af18f2ad",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/tail-workers/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          200
+        ]
+      ],
+      "manifest_sha256": "038077a73cc61376e0f2a299ee313b0db79b504e712d784a5e39a060aebacc28",
+      "observed_sha256": "038077a73cc61376e0f2a299ee313b0db79b504e712d784a5e39a060aebacc28",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/turnstile-spin/references/sveltekit.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          191
+        ]
+      ],
+      "manifest_sha256": "da8dbe10014a0a94d25c51e80010ffd4fb5f0719caa7226c42b9dacb3ae8933a",
+      "observed_sha256": "da8dbe10014a0a94d25c51e80010ffd4fb5f0719caa7226c42b9dacb3ae8933a",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents/agent_18_group_chat_turns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          61
+        ]
+      ],
+      "manifest_sha256": "e034657e82b6e42ac92092ed767e7a26927b0d1c46551c414c08faab26ddfd61",
+      "observed_sha256": "e034657e82b6e42ac92092ed767e7a26927b0d1c46551c414c08faab26ddfd61",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/scripts/primitives_transducer.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          522
+        ]
+      ],
+      "manifest_sha256": "b30e5e77a8cac5517ebf9d8fa934552bf59c6ab23e8398ffb353204cd866fdf9",
+      "observed_sha256": "b30e5e77a8cac5517ebf9d8fa934552bf59c6ab23e8398ffb353204cd866fdf9",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-sre-postmortem-architect/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          55
+        ]
+      ],
+      "manifest_sha256": "a08ca73182bf4556e7705c0119abce72abe300306a76c24a9c9759bdc401a857",
+      "observed_sha256": "a08ca73182bf4556e7705c0119abce72abe300306a76c24a9c9759bdc401a857",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/flstudio-mcp-production/examples/Bernard_Purdie_Shuffle.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          101
+        ]
+      ],
+      "manifest_sha256": "c2cf3282cd04f7ed15ae453386a3c35e36840fb3cad53823b32a9d83f162a9cc",
+      "observed_sha256": "c2cf3282cd04f7ed15ae453386a3c35e36840fb3cad53823b32a9d83f162a9cc",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/workspace/c5-ring0-babylon-kernel-project/references/modules/babylon60-kernel-invariants/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          66
+        ]
+      ],
+      "manifest_sha256": "96a74320d87fd068f829f3481280e900948189491588f3926505e84d1f93d234",
+      "observed_sha256": "96a74320d87fd068f829f3481280e900948189491588f3926505e84d1f93d234",
+      "changed_since_manifest": false
+    }
+  ],
+  "tool_limitations": [
+    "Native codebase graph tools not exposed; used targeted source reads.",
+    "Static audit only; no tests/runtime execution; external API documentation claims read but not independently validated."
+  ],
+  "tests_run": []
+}

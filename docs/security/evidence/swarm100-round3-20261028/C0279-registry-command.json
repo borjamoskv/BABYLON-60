@@ -1,0 +1,9 @@
+{
+  "command": [
+    "python3",
+    "docs/security/evidence/swarm100-round3-20261028/reconcile_registry.py"
+  ],
+  "exit_code": 0,
+  "log": "docs/security/evidence/swarm100-round3-20261028/C0279-registry.log",
+  "log_sha256": "62c1c1e1ab921a73acf0dbf7e77a01bf4af9d5985d8ac332e72d5a742d96989f"
+}

@@ -1,0 +1,129 @@
+{
+  "group": "S2_trust",
+  "date": "2026-10-30",
+  "status": "READY_FOR_INDEPENDENT_REVIEW",
+  "candidate_ids": [
+    "SW100-C0271",
+    "SW100-C0276",
+    "SW100-C0432"
+  ],
+  "production_scope": [
+    "01_KISH_ENGINE/babylon60/attestation/conformal_tree.py",
+    "01_KISH_ENGINE/babylon60/attestation/merkle_anchor.py",
+    "tools/tamkarum_license_provisioner.py"
+  ],
+  "test_path": "tests/test_swarm100_lot12_s2_trust_regressions.py",
+  "before_source_sha256": {
+    "01_KISH_ENGINE/babylon60/attestation/conformal_tree.py": "251c9da8553af921d2597ce899e5f5baabfa61412c90818a629db90cbb9694fe",
+    "01_KISH_ENGINE/babylon60/attestation/merkle_anchor.py": "cf90589a3faf04117731c693bb62a0f0486ea9ca9091af17ce915964dc170ce9",
+    "tools/tamkarum_license_provisioner.py": "312b37a43a708ef232ccedf7fbd6bc57c33c181e00fee72eba13b9d6fb2a9096"
+  },
+  "after_source_sha256": {
+    "01_KISH_ENGINE/babylon60/attestation/conformal_tree.py": "519f8c6c4eb3a3021b27893de5e4028e96a13415bec48a03fc97dd3104df99d1",
+    "01_KISH_ENGINE/babylon60/attestation/merkle_anchor.py": "9e7a22f9e7f32be1a0de0f056f9932a5c483728302722dc7648fec162e831390",
+    "tools/tamkarum_license_provisioner.py": "82122b5395b03935802e1fed43129b161a1c459cb8ec15fe40f5e36d53829662"
+  },
+  "test_sha256": "bb604757c83898a449b4d90ba652b8ec350570a27a980c35961b1befc183e3f2",
+  "checks": [
+    {
+      "name": "before-tests",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "pytest",
+        "tests/test_swarm100_lot12_s2_trust_regressions.py",
+        "-q",
+        "-o",
+        "addopts=--tb=short"
+      ],
+      "exit_code": 1,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/s2_trust/before-tests.log",
+      "result": "7 failed; 6 behavioural failures and 1 exception-message mismatch (nonhex seed already rejected by bytes.fromhex)",
+      "log_sha256": "4cd46cf80ca691b85f5aa864ab91e9897de9a4fac90c09e669b7d5236d0bf01b"
+    },
+    {
+      "name": "after-tests",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "pytest",
+        "tests/test_swarm100_lot12_s2_trust_regressions.py",
+        "-q",
+        "-o",
+        "addopts=--tb=short"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/s2_trust/after-tests.log",
+      "result": "36 passed in 1.03s",
+      "log_sha256": "cd38f0a1b9d87bab80d9efd8b769416636ef023c034e6f7c4b1e41a4df8bc536"
+    },
+    {
+      "name": "ruff",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "ruff",
+        "check",
+        "01_KISH_ENGINE/babylon60/attestation/conformal_tree.py",
+        "01_KISH_ENGINE/babylon60/attestation/merkle_anchor.py",
+        "tools/tamkarum_license_provisioner.py",
+        "tests/test_swarm100_lot12_s2_trust_regressions.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/s2_trust/ruff.log",
+      "result": "All checks passed!",
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "name": "mypy",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "mypy",
+        "--follow-imports=silent",
+        "--check-untyped-defs",
+        "01_KISH_ENGINE/babylon60/attestation/conformal_tree.py",
+        "01_KISH_ENGINE/babylon60/attestation/merkle_anchor.py",
+        "tools/tamkarum_license_provisioner.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/s2_trust/mypy.log",
+      "result": "Success: no issues found in 3 source files",
+      "log_sha256": "8228fcc5ce46d42d01caf3cd941f4e9c5f2bcc372bb5b147a2f0572d2dd675a8"
+    }
+  ],
+  "findings": {
+    "SW100-C0271": {
+      "proposed_state": "FIXED",
+      "change": "Externally pinned raw Ed25519 public key; new v2 full manifest canonical signature; old root-only manifests and duplicate JSON keys rejected; optional database integrity crosscheck with explicit scope.",
+      "evidence": "Self-signed original accepted before patch; external fixture authority succeeds, foreign/absent/invalid key and field alteration fail; software identity cannot authorize required hardware."
+    },
+    "SW100-C0276": {
+      "proposed_state": "FIXED",
+      "change": "Software hash explicitly SOFTWARE_ONLY_UNATTESTED; no simulated TPM signature or signing-seed access; explicit hardware requirement raises before metadata access.",
+      "evidence": "Original returned TPM_2_0_HARDWARE_SEALED; fixed object retains API field names with empty hardware signature and explicit negative verification."
+    },
+    "SW100-C0432": {
+      "proposed_state": "FIXED",
+      "change": "Explicit nonzero 32-byte Ed25519 seed required; no publicly derivable fallback. CLI validates authority before creating output directory. Signed license describes configured software authority, not independent authentication.",
+      "evidence": "Absent/wrong-length seed signed before; fixed rejects with no output and fixture key produces independently verifiable software signature."
+    }
+  },
+  "limits": [
+    "No hardware signing/verifier implemented or certified. Metadata UUID comparison remains informational only.",
+    "Without a supplied database a successfully pinned manifest proves only the complete signed document; it does not verify current ledger contents.",
+    "Caller controls configuration of trusted public key/authority seed; key custody, rotation/revocation and deployment policies are outside these IDs.",
+    "Membership-only helper and simulated notary checkpoint method are unchanged; no closure of other candidates by inference.",
+    "All keys are ephemeral software fixtures; HOME and outputs temporary; no network, operator identity, actual hardware signer, real license, deploy or Git mutations.",
+    "Initial malformed-hex authority case failed only because the old ValueError lacked the new authority-specific message; the missing/empty/wrong-length cases demonstrate the original fallback defect."
+  ],
+  "warmup": "3 warmup and 20 checked valid/tampered manifest pairs in test_c0271_warmup_and_repeated_valid_tampered_rounds; not a hardware/performance benchmark."
+}

@@ -1,0 +1,428 @@
+{
+  "shard": "056",
+  "findings": [
+    {
+      "title": "Missing corpus crashes the auditor before it can report absence",
+      "severity": "P2",
+      "path": "scripts/c5_sharur/sharur_100_conversation_auditor.py",
+      "line": 108,
+      "evidence": "BrainCorpusIndex.__init__ never sets index_duration; index() returns immediately when BRAIN_DIR does not exist (107-109), while run_sharur_100_swarm reads corpus.index_duration unconditionally at 739.",
+      "trigger": "Run the script in an environment without ~/.gemini/antigravity/brain.",
+      "impact": "AttributeError prevents the audit from producing a report or explicit missing-input result.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "OpenAI secret detector uses a literal malformed repetition",
+      "severity": "P2",
+      "path": "scripts/c5_sharur/sharur_100_conversation_auditor.py",
+      "line": 116,
+      "evidence": "The OpenAI pattern ends in [a-zA-Z0-9]{20,T}; the nonnumeric upper repetition bound is not a valid numeric quantifier. The scanning loop at 154-159 relies on this pattern to increment secret_matches.",
+      "trigger": "A transcript contains an ordinary sk- prefixed credential.",
+      "impact": "The scanner misses credentials and reports a misleading zero count. No actual credentials were read or reproduced.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Audit emits unconditional compliance verdicts without examining evidence",
+      "severity": "P2",
+      "path": "scripts/c5_sharur/sharur_100_conversation_auditor.py",
+      "line": 444,
+      "evidence": "Agents 21,22,24-27 and many others assign PASS plus fixed compliance metrics without inspecting corpus data; 592-596 invent nominal entropy when no samples exist. Results feed compile_swarm_sitrep (reporters.py:360-381), which counts PASS and computes exergy_score from that count, then emits the reports at auditor.py:774.",
+      "trigger": "Run the auditor on a corpus with missing entropy samples or violations of the claimed compliance properties.",
+      "impact": "Generated forensic reports present untested properties as passing and can mask defects in the audited history. This is an evidence-quality defect, not a claim about physical energy or runtime isolation.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Polymeter selection is ignored by the generator",
+      "severity": "P3",
+      "path": "tools/skill_library/global/flstudio-mcp-production/examples/Euclidean_Polyrhythm_Generator.py",
+      "line": 62,
+      "evidence": "createDialog exposes a fixed-bar versus continuous polymeter mode; apply forwards it, but generate_euclidean never reads mode and always uses BAR // n for both layers.",
+      "trigger": "Choose Polimetro Continuo in the dialog.",
+      "impact": "The example produces the same fixed-bar timing as the other selection.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Comment stripping corrupts quoted URLs in tsconfig",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/existence-gap-audit/scripts/existence_gap.py",
+      "line": 273,
+      "evidence": "JSONC_COMMENT_RE matches // through the end of a line without tracking strings. _load_jsonc applies it before json.loads and suppresses parsing failures as {}. ts_aliases then loses compilerOptions.paths; extract_js classifies unresolved alias imports as external registry candidates.",
+      "trigger": "A valid tsconfig contains a quoted URL such as a $schema URL and path aliases.",
+      "impact": "The scanner silently discards valid configuration and may flag working alias imports as phantom external packages.",
+      "confidence": "high",
+      "kind": "runtime"
+    }
+  ],
+  "hypotheses": [
+    {
+      "title": "SARIF field names appear incompatible with the advertised schema",
+      "path": "01_KISH_ENGINE/cortex/crates/cortex-guard/src/sarif.rs",
+      "line": 37,
+      "evidence": "Serialize structs contain short_description, rule_id, physical_location, artifact_location and start_line without serde renaming. main.rs:177-179 serializes them directly.",
+      "uncertainty": "Official schema retrieval returned 404 twice; schema validation was not executed. Confirm camelCase requirements against the pinned schema before promoting this to a finding."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".agents/skills/c5-ring0-babylon-kernel-project/references/modules/thermo-audit/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          46
+        ]
+      ],
+      "manifest_sha256": "b85b078d20853d63e8b928d16b32095922c216a3f15102bc95591b0b03a5949a",
+      "observed_sha256": "b85b078d20853d63e8b928d16b32095922c216a3f15102bc95591b0b03a5949a",
+      "changed_since_manifest": false,
+      "note": "Static text review only."
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-kernel/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          51
+        ]
+      ],
+      "manifest_sha256": "7fc6779a340b8d255c7ed977049faa75d89057978b8294cc706b416e3e4e0e04",
+      "observed_sha256": "7fc6779a340b8d255c7ed977049faa75d89057978b8294cc706b416e3e4e0e04",
+      "changed_since_manifest": false,
+      "note": "Static text review only."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/autodidact/royal_rumble.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          314
+        ]
+      ],
+      "manifest_sha256": "758f2889552d98f07ca9f6817bf09df6f3c18c2bf8dcaa6503e7a34f93b1d08c",
+      "observed_sha256": "758f2889552d98f07ca9f6817bf09df6f3c18c2bf8dcaa6503e7a34f93b1d08c",
+      "changed_since_manifest": false,
+      "note": "Static text review only."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/crypto/aes.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          176
+        ]
+      ],
+      "manifest_sha256": "aa6f6fffdd0eb5ee038b6b97655f8631cafeb951cb14730053968c9353a97bd5",
+      "observed_sha256": "aa6f6fffdd0eb5ee038b6b97655f8631cafeb951cb14730053968c9353a97bd5",
+      "changed_since_manifest": false,
+      "note": "Static text review only."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/services/__init__.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          1
+        ]
+      ],
+      "manifest_sha256": "d4f8dd3e0823b7e58d946a70c1b13101360c4c4787f2861aa4bcb3c2cb40bcd6",
+      "observed_sha256": "d4f8dd3e0823b7e58d946a70c1b13101360c4c4787f2861aa4bcb3c2cb40bcd6",
+      "changed_since_manifest": false,
+      "note": "Static text review only."
+    },
+    {
+      "path": "01_KISH_ENGINE/cortex/crates/cortex-guard/src/sarif.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          128
+        ]
+      ],
+      "manifest_sha256": "bb4bdd7fd9fdf55113fea6e474d09571bc73b9869b2f0e070f861e2cbb31af52",
+      "observed_sha256": "bb4bdd7fd9fdf55113fea6e474d09571bc73b9869b2f0e070f861e2cbb31af52",
+      "changed_since_manifest": false,
+      "note": "Static text review only."
+    },
+    {
+      "path": "crates/b60-lang/src/transducer.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          193
+        ]
+      ],
+      "manifest_sha256": "60fd536aac098332047630dedf1ddaf3dbd5a85e768069d1e084ac16c538d9a9",
+      "observed_sha256": "60fd536aac098332047630dedf1ddaf3dbd5a85e768069d1e084ac16c538d9a9",
+      "changed_since_manifest": false,
+      "note": "Static text review only."
+    },
+    {
+      "path": "docs/04_research/sota/sota_ssm_lnn_202600.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          34
+        ]
+      ],
+      "manifest_sha256": "006cfe485cc43a9db8ca02e5d0b22385e45e36c0cb121bf6b9e776b9810ce947",
+      "observed_sha256": "006cfe485cc43a9db8ca02e5d0b22385e45e36c0cb121bf6b9e776b9810ce947",
+      "changed_since_manifest": false,
+      "note": "Static text review only."
+    },
+    {
+      "path": "docs/security/onco-integration-review-2026-10-24.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          290
+        ]
+      ],
+      "manifest_sha256": "7f0026906866f8aa3be20ec5d3c01f69ed2ba3c27ce6278c96aea23328cf1539",
+      "observed_sha256": "7f0026906866f8aa3be20ec5d3c01f69ed2ba3c27ce6278c96aea23328cf1539",
+      "changed_since_manifest": false,
+      "note": "Static text review only."
+    },
+    {
+      "path": "reports/nemesis-model-report.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          15
+        ]
+      ],
+      "manifest_sha256": "e880955304f0dfbcbe05d347c3bee4c562115351e5f547abb07a8a8acb0adf45",
+      "observed_sha256": "e880955304f0dfbcbe05d347c3bee4c562115351e5f547abb07a8a8acb0adf45",
+      "changed_since_manifest": false,
+      "note": "Static text review only."
+    },
+    {
+      "path": "scripts/c5_demos/test_touchid_gate.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          48
+        ]
+      ],
+      "manifest_sha256": "851e2e02a2b959ab8cdc3cf5c56846c6a26917d23607bc1b892ef728dab59368",
+      "observed_sha256": "851e2e02a2b959ab8cdc3cf5c56846c6a26917d23607bc1b892ef728dab59368",
+      "changed_since_manifest": false,
+      "note": "Static text review only."
+    },
+    {
+      "path": "scripts/c5_sharur/sharur_100_conversation_auditor.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          779
+        ]
+      ],
+      "manifest_sha256": "42ce019054e4d77b0165c005bfc73676af664f14bba823c5c859ee7dea85f1c4",
+      "observed_sha256": "42ce019054e4d77b0165c005bfc73676af664f14bba823c5c859ee7dea85f1c4",
+      "changed_since_manifest": false,
+      "note": "Static text review only."
+    },
+    {
+      "path": "scripts/sharur/run_sharur_3600.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          65
+        ]
+      ],
+      "manifest_sha256": "c475a7d380a9b9a40ba7b127eb7870592c968a0854eeb47b107d18cede7d4acb",
+      "observed_sha256": "c475a7d380a9b9a40ba7b127eb7870592c968a0854eeb47b107d18cede7d4acb",
+      "changed_since_manifest": false,
+      "note": "Static text review only."
+    },
+    {
+      "path": "tests/omega_mediation_campaign.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          1215
+        ]
+      ],
+      "manifest_sha256": "9fa9101221a645ea72189b4cc6e97d880f60eac8761dc8e8096f6402488347e2",
+      "observed_sha256": "9fa9101221a645ea72189b4cc6e97d880f60eac8761dc8e8096f6402488347e2",
+      "changed_since_manifest": false,
+      "note": "Static text review completed in chunks of at most 200 lines; no runtime verification."
+    },
+    {
+      "path": "tests/test_first_use_installers.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          268
+        ]
+      ],
+      "manifest_sha256": "6847b273345594a91f1266bc673a7998653438f75c3e179f64cbc99726251cbe",
+      "observed_sha256": "6847b273345594a91f1266bc673a7998653438f75c3e179f64cbc99726251cbe",
+      "changed_since_manifest": false,
+      "note": "Static text review only."
+    },
+    {
+      "path": "tests/test_test_harness_isolation.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          42
+        ]
+      ],
+      "manifest_sha256": "cb8524fb996af5d30340068ea4aa172bb3c140e1549bd471d44113e85167d45d",
+      "observed_sha256": "cb8524fb996af5d30340068ea4aa172bb3c140e1549bd471d44113e85167d45d",
+      "changed_since_manifest": false,
+      "note": "Static text review only."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/artifacts/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          92
+        ]
+      ],
+      "manifest_sha256": "04648f76ad4d32a2265bbc6696c37229db2f67ed1ced99be6783ee61000c2d14",
+      "observed_sha256": "04648f76ad4d32a2265bbc6696c37229db2f67ed1ced99be6783ee61000c2d14",
+      "changed_since_manifest": false,
+      "note": "Static text review only."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/network-interconnect/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          165
+        ]
+      ],
+      "manifest_sha256": "cabf0c37c29db7f03b14f6332663ab26468846e12f8da9e5f2b30e4d774db4dd",
+      "observed_sha256": "cabf0c37c29db7f03b14f6332663ab26468846e12f8da9e5f2b30e4d774db4dd",
+      "changed_since_manifest": false,
+      "note": "Static text review only."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/terraform/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          197
+        ]
+      ],
+      "manifest_sha256": "4d12cad256eaf2b021c1c19e7be29ef79e2d76183e387eefce2d4eb50b8d483e",
+      "observed_sha256": "4d12cad256eaf2b021c1c19e7be29ef79e2d76183e387eefce2d4eb50b8d483e",
+      "changed_since_manifest": false,
+      "note": "Static text review only."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/turnstile-spin/tests/validation.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          62
+        ]
+      ],
+      "manifest_sha256": "e92fedb23a709b104877733365162bddb2d2be7c8a25c1dec9483bbedddae46f",
+      "observed_sha256": "e92fedb23a709b104877733365162bddb2d2be7c8a25c1dec9483bbedddae46f",
+      "changed_since_manifest": false,
+      "note": "Static text review only."
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents/agent_24_food_ordering.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "manifest_sha256": "3fd7524fc9291c268cc10d69f3ce4c5db3701a8e20bee535b1bc1f5dbde9e77c",
+      "observed_sha256": "3fd7524fc9291c268cc10d69f3ce4c5db3701a8e20bee535b1bc1f5dbde9e77c",
+      "changed_since_manifest": false,
+      "note": "Static text review only."
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-session-deskimming/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          43
+        ]
+      ],
+      "manifest_sha256": "2ee280b9c605a7afbbc7310462113c4b76e56e1c7500f270d657017c69b8e700",
+      "observed_sha256": "2ee280b9c605a7afbbc7310462113c4b76e56e1c7500f270d657017c69b8e700",
+      "changed_since_manifest": false,
+      "note": "Static text review only."
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/existence-gap-audit/scripts/existence_gap.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          1264
+        ]
+      ],
+      "manifest_sha256": "1346b99208b08670abf3e657c1746050ac46e496fcb1d3067ba7af673a7b9f0f",
+      "observed_sha256": "1346b99208b08670abf3e657c1746050ac46e496fcb1d3067ba7af673a7b9f0f",
+      "changed_since_manifest": false,
+      "note": "Static text review completed in chunks of at most 200 lines; no runtime verification."
+    },
+    {
+      "path": "tools/skill_library/global/flstudio-mcp-production/examples/Euclidean_Polyrhythm_Generator.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          112
+        ]
+      ],
+      "manifest_sha256": "6d5ae3cc1e5c7713fca3cdea108973f42f02eea8686f89a8f74073a9f02c059a",
+      "observed_sha256": "6d5ae3cc1e5c7713fca3cdea108973f42f02eea8686f89a8f74073a9f02c059a",
+      "changed_since_manifest": false,
+      "note": "Static text review only."
+    },
+    {
+      "path": "tools/skill_library/workspace/c5-ring0-babylon-kernel-project/references/modules/thermo-audit/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          46
+        ]
+      ],
+      "manifest_sha256": "b85b078d20853d63e8b928d16b32095922c216a3f15102bc95591b0b03a5949a",
+      "observed_sha256": "b85b078d20853d63e8b928d16b32095922c216a3f15102bc95591b0b03a5949a",
+      "changed_since_manifest": false,
+      "note": "Static text review only."
+    }
+  ],
+  "tool_limitations": [
+    "No native codebase-memory graph tools were exposed; inspected ALL_TOOLS and used targeted source reads.",
+    "Two official SARIF raw schema URLs returned HTTP 404; no schema validation claim.",
+    "Static review only; no tests, builds, application runtime, biometrics, or external-service mutations were executed.",
+    "Initial batch output was truncated; bounded follow-up reads completed the two previously partial large files."
+  ],
+  "tests_run": []
+}

@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-28",
+  "scope": "Three declared source files; generation/verification only in owned temporary fixtures, software-only signatures and explicit external fixture trust anchors. No ATTESTED object, actual operator key, original-root bundle generation, native/hardware auth, network, commit or publication. Global configuration and telemetry omitted.",
+  "checks": {
+    "related-tests": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "pytest",
+        "tests/test_finding_evidence_contract.py",
+        "tests/test_swarm100_lot4_regressions.py",
+        "tests/test_swarm100_lot3_regressions.py",
+        "tests/test_swarm100_lot2_regressions.py",
+        "tests/test_swarm100_lot1_regressions.py",
+        "tests/test_agent_beeper_regressions.py",
+        "tests/test_autodidact_derivation_regressions.py",
+        "tests/test_swarm100_round2_regressions.py",
+        "tests/test_standalone_verifier.py",
+        "tests/test_memory_governance_falsification.py",
+        "tests/test_compliance_exporter.py",
+        "tests/test_m0_evidence_pack_acceptance.py",
+        "tests/test_autodidact_omega_v2.py",
+        "tests/test_autodidact_omega_pipeline.py",
+        "tests/test_cortex_persist_batch_regressions.py",
+        "tests/test_ledger_cross_equivalence.py",
+        "tests/test_fl027_provenance_authority.py",
+        "-q",
+        "-rs",
+        "-o",
+        "addopts=--tb=short"
+      ],
+      "exit_code": 1,
+      "log": "docs/security/evidence/swarm100-lot4-20261028/related-tests.log",
+      "log_sha256": "1b53762da6f660702d3beb735e3cf3e96398263e22e788d45c1d8135105f91b9",
+      "source_sha256_before_and_after": {
+        "proof/bundles/attestation_bundle_v1/verify": "52f572b4516ca299237b844a5627ab277d63f2dfcd8406ee436039ec758deff9",
+        "scripts/generate_attestation_bundle.py": "e043c9463b2ed0c0d5c0a9d353ab3a5a1e11747129473c778db3eb06fa897553",
+        "scripts/generate_attestation_bundle_v2.py": "4ce522faf18df94eb9710fedf017a162104cb79f747562436f8eb80f0a9cc884",
+        "tests/test_swarm100_lot4_regressions.py": "19d6e74811d14e7df392c1072338da1cee53f2e86ec3159a144996f4c53fca9d"
+      }
+    }
+  },
+  "source_sha256": {
+    "proof/bundles/attestation_bundle_v1/verify": "52f572b4516ca299237b844a5627ab277d63f2dfcd8406ee436039ec758deff9",
+    "scripts/generate_attestation_bundle.py": "e043c9463b2ed0c0d5c0a9d353ab3a5a1e11747129473c778db3eb06fa897553",
+    "scripts/generate_attestation_bundle_v2.py": "4ce522faf18df94eb9710fedf017a162104cb79f747562436f8eb80f0a9cc884",
+    "tests/test_swarm100_lot4_regressions.py": "19d6e74811d14e7df392c1072338da1cee53f2e86ec3159a144996f4c53fca9d"
+  }
+}

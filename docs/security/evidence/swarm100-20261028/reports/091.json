@@ -1,0 +1,371 @@
+{
+  "shard": "091",
+  "findings": [
+    {
+      "title": "Reject negative token usage before cost accounting",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/guards/token_lease_guard.py",
+      "line": 38,
+      "evidence": "effective_cost_units adds cached_tokens*0.05 and output_tokens*5 without validation; record_step accepts these directly at lines 79-86. Targeted consumer search found the isolated frontier assimilation tests, no production enforcement integration.",
+      "trigger": "record_step(0, -100, verified_outcome=True) records -500 effective units.",
+      "impact": "The public lease API can decrease consumed_units and increase remaining_units; its advertised fail-closed accounting does not hold for invalid usage values. No production budget bypass is established.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Retain failed batch items instead of removing the entire batch",
+      "severity": "P2",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/cron-triggers/patterns.md",
+      "line": 74,
+      "evidence": "Promise.allSettled records rejected fetches at line 72, then line 74 always stores queueData.slice(100); fulfilled HTTP error responses are also counted as processed.",
+      "trigger": "Any of the first 100 requests rejects or returns an unsuccessful HTTP status.",
+      "impact": "Copying this documented batch processing pattern permanently discards failed work with no retry.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Do not issue a complete forensic attestation when captures are absent",
+      "severity": "P2",
+      "path": "scripts/c5_log_custody/c5_organize_captures.py",
+      "line": 157,
+      "evidence": "Missing primary captures are silently skipped (115); missing session captures only warn (143-144). The generated Claim/Base/Confidence/Catalog_Attestation at 157-162 always declares all 11 verified.",
+      "trigger": "Evidence directory exists but one or more mapped captures are missing.",
+      "impact": "The generated catalog asserts a complete verified evidence set while containing fewer entries; hashes identify read bytes but the script does not validate the asserted chronology or provenance.",
+      "confidence": "high",
+      "kind": "docs"
+    },
+    {
+      "title": "Avoid integer overflow before converting mesh volume to floating point",
+      "severity": "P2",
+      "path": "src/fluid_thermo.rs",
+      "line": 42,
+      "evidence": "mesh_n * mesh_n * mesh_n is evaluated as usize before conversion to f64. Module is publicly exported by src/lib.rs:99.",
+      "trigger": "On 64-bit targets, mesh_n=4194304 makes mesh_n cubed equal 2^66, beyond usize.",
+      "impact": "The public calculation panics with overflow checks or wraps (to zero for this input) without them, returning an incorrect floor.",
+      "confidence": "high",
+      "kind": "runtime"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".github/ISSUE_TEMPLATE/config.yml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          8
+        ]
+      ],
+      "inventory_sha256": "bb29389497756ce1089d7bf70d783a1aa6ae33f7a44a521a231db8bed8bed5e7",
+      "observed_sha256": "bb29389497756ce1089d7bf70d783a1aa6ae33f7a44a521a231db8bed8bed5e7",
+      "hash_match": true
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/scripts/c5_swarm_worker.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          95
+        ]
+      ],
+      "inventory_sha256": "69569327248ee5143538f8003f846bdf5bc865e9568163893f32e7750f9ece75",
+      "observed_sha256": "69569327248ee5143538f8003f846bdf5bc865e9568163893f32e7750f9ece75",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/cognitive_pilot/__init__.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          1
+        ]
+      ],
+      "inventory_sha256": "ab2957271e01f2dd5bc79d76fb69fa1d6c4819e3e4d12c435591422bf5066a46",
+      "observed_sha256": "ab2957271e01f2dd5bc79d76fb69fa1d6c4819e3e4d12c435591422bf5066a46",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/guards/token_lease_guard.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          135
+        ]
+      ],
+      "inventory_sha256": "808cd8dacd5a3e3130e6dcf9b8c96a4fc3d58ee3a20571e2e44a632aedfa8df4",
+      "observed_sha256": "808cd8dacd5a3e3130e6dcf9b8c96a4fc3d58ee3a20571e2e44a632aedfa8df4",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/utils/compression.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          12
+        ]
+      ],
+      "inventory_sha256": "98719ebc847c66ec3030f0a73ed891f7f5592b0dd16262cd362bbe46711cf6ea",
+      "observed_sha256": "98719ebc847c66ec3030f0a73ed891f7f5592b0dd16262cd362bbe46711cf6ea",
+      "hash_match": true
+    },
+    {
+      "path": "02_EDIN_SWARMS/agents_archi/protocols/__init__.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          16
+        ]
+      ],
+      "inventory_sha256": "0c25ecc01324d008da5459be4e0300feecf042d587538fbdd31b697309d345dc",
+      "observed_sha256": "0c25ecc01324d008da5459be4e0300feecf042d587538fbdd31b697309d345dc",
+      "hash_match": true
+    },
+    {
+      "path": "crates/eridu-infer/tests/memory_safety.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          52
+        ]
+      ],
+      "inventory_sha256": "f268ccf60c2977b00e84ce697bbd64350b1a66ffb983948adfa91ff1ac009462",
+      "observed_sha256": "f268ccf60c2977b00e84ce697bbd64350b1a66ffb983948adfa91ff1ac009462",
+      "hash_match": true
+    },
+    {
+      "path": "docs/06_theory/evidence/lean-naming-20261026.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          363
+        ]
+      ],
+      "inventory_sha256": "e38296a0764fda98468853141d9b4600665372d8e2b4b2d4baad0220eef74a26",
+      "observed_sha256": "e38296a0764fda98468853141d9b4600665372d8e2b4b2d4baad0220eef74a26",
+      "hash_match": true
+    },
+    {
+      "path": "examples/poc_stress_spsc_ring.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          88
+        ]
+      ],
+      "inventory_sha256": "950ca25a7c40db7e8b5aab0f3c632055ef6a4364f18fc06734ccb277e6b821d8",
+      "observed_sha256": "950ca25a7c40db7e8b5aab0f3c632055ef6a4364f18fc06734ccb277e6b821d8",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_demos/alpha_sitrep.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "inventory_sha256": "8454b89e635d17871f3d01d254f3857fbc565972bcd820450ba2d4847305d242",
+      "observed_sha256": "8454b89e635d17871f3d01d254f3857fbc565972bcd820450ba2d4847305d242",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_log_custody/c5_organize_captures.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          200
+        ]
+      ],
+      "inventory_sha256": "9d7b4f95cc26a8724d62a5830f0c87c040784da8b79704f172fbbd480d32e814",
+      "observed_sha256": "9d7b4f95cc26a8724d62a5830f0c87c040784da8b79704f172fbbd480d32e814",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_verifiers/deterministic_audit.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          127
+        ]
+      ],
+      "inventory_sha256": "bcb4356d46ce639169ed382c2764cd290173e9bbcb261a5f90df31ea526b4f2b",
+      "observed_sha256": "bcb4356d46ce639169ed382c2764cd290173e9bbcb261a5f90df31ea526b4f2b",
+      "hash_match": true
+    },
+    {
+      "path": "src/fluid_thermo.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          328
+        ]
+      ],
+      "inventory_sha256": "69beaf68335f4780f52b453e629d0490fce067f946099387396398bbc140dfa5",
+      "observed_sha256": "69beaf68335f4780f52b453e629d0490fce067f946099387396398bbc140dfa5",
+      "hash_match": true
+    },
+    {
+      "path": "tests/test_audit_measurements.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          68
+        ]
+      ],
+      "inventory_sha256": "0b3b3865eafaac63e982a89ec40037e8d954680c4d166161584f4ca4918d5aea",
+      "observed_sha256": "0b3b3865eafaac63e982a89ec40037e8d954680c4d166161584f4ca4918d5aea",
+      "hash_match": true
+    },
+    {
+      "path": "tests/test_m0_evidence_pack_acceptance.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          262
+        ]
+      ],
+      "inventory_sha256": "b2bc1f24ab4f9a47ad72d5fad26f69c72c73ff01eb8196e1af36bed81094c00d",
+      "observed_sha256": "b2bc1f24ab4f9a47ad72d5fad26f69c72c73ff01eb8196e1af36bed81094c00d",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/agents-sdk/references/callable.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          92
+        ]
+      ],
+      "inventory_sha256": "4c116204cd68ff53908c49100a110d5fb773f9a3bc486a2be57afb09a4ead248",
+      "observed_sha256": "4c116204cd68ff53908c49100a110d5fb773f9a3bc486a2be57afb09a4ead248",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/cron-triggers/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          190
+        ]
+      ],
+      "inventory_sha256": "3607db3353208a0839c2e0cb9a32f563fa1b6eb03aa01be3bfc71b8ea1ddc4c5",
+      "observed_sha256": "3607db3353208a0839c2e0cb9a32f563fa1b6eb03aa01be3bfc71b8ea1ddc4c5",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/r2-data-catalog/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          55
+        ]
+      ],
+      "inventory_sha256": "ddfe37a9189eb4caa0ed54f8b07bb0309598c141b77ba719c53b53c121905775",
+      "observed_sha256": "ddfe37a9189eb4caa0ed54f8b07bb0309598c141b77ba719c53b53c121905775",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workerd/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          185
+        ]
+      ],
+      "inventory_sha256": "97522502d284040248da050f7c6fce4b67ff77f08ebf13313ecb9da0fbdca4b3",
+      "observed_sha256": "97522502d284040248da050f7c6fce4b67ff77f08ebf13313ecb9da0fbdca4b3",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/f5tts-voice-cloning-sota/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          192
+        ]
+      ],
+      "inventory_sha256": "260f60efb36e1fca5b8cb99662243dee9027c1705e12d774bfbf611cb7e7574c",
+      "observed_sha256": "260f60efb36e1fca5b8cb99662243dee9027c1705e12d774bfbf611cb7e7574c",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-codebase-valuation-audit/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "inventory_sha256": "9cf26ad82380f81c9fb03b34868ddfb7e62de93e8b1f32bb50f465cf9ef6584f",
+      "observed_sha256": "9cf26ad82380f81c9fb03b34868ddfb7e62de93e8b1f32bb50f465cf9ef6584f",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/c5-terminological-archaeology/scripts/c5_delta_boundary_linter.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          300
+        ]
+      ],
+      "inventory_sha256": "ce5ce5d0587a4a3deebd39434ab00d680df2836a1e091aa0873ea1cbbff5c7a2",
+      "observed_sha256": "ce5ce5d0587a4a3deebd39434ab00d680df2836a1e091aa0873ea1cbbff5c7a2",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-sovereign-identity-hardening/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "inventory_sha256": "7255a9550916d7b3eb82dcd58613a3edae17857bfb0682a4e623deae3b3895d6",
+      "observed_sha256": "7255a9550916d7b3eb82dcd58613a3edae17857bfb0682a4e623deae3b3895d6",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/jujutsu-vcs-management/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "inventory_sha256": "d66ab70733c08a719f738012477d6bfbda7059b0e8e774e50cd94c9318243d90",
+      "observed_sha256": "d66ab70733c08a719f738012477d6bfbda7059b0e8e774e50cd94c9318243d90",
+      "hash_match": true
+    }
+  ],
+  "tool_limitations": [
+    "No native codebase-memory graph tools exposed in this session; targeted text reads and rg used.",
+    "Static source audit only; no tests, runtime, hardware, external API or historical evidence commands executed.",
+    "Workspace is dirty on main; no repository files changed.",
+    "External reference API accuracy not certified; findings rely on self-contained source logic."
+  ],
+  "tests_run": []
+}

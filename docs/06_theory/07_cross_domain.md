@@ -31,4 +31,4 @@ Fuente primaria para el argumento filosófico: [J. R. Lucas, *Minds, Machines an
 
 El argumento modeloteórico de Putnam es una tesis filosófica sobre referencia e interpretación. No demuestra que todo significado sea de segundo orden ni que un software tenga comprensión o carezca de ella. No se infiere una ontología universal para BABYLON-60.
 
-Se retiran el diagrama con aristas «Isomorphic» y el axioma `document_epistemic_validity`. El documento no contiene una prueba formal de equivalencia entre lógica y cognición. Referencias históricas: Chomsky (1959), *A Review of B. F. Skinner’s Verbal Behavior*; Putnam (1980), *Models and Reality*.
+Se retiran el diagrama con aristas «Isomorphic» y el axioma `[OBSOLETO: document_epistemic_validity]`. El documento no contiene una prueba formal de equivalencia entre lógica y cognición. Referencias históricas: Chomsky (1959), *A Review of B. F. Skinner’s Verbal Behavior*; Putnam (1980), *Models and Reality*.

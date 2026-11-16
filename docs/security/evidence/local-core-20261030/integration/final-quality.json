@@ -1,0 +1,49 @@
+[
+  {
+    "name": "ruff-final",
+    "command": [
+      "/Users/borjafernandezangulo/.codex/worktrees/local-core-integration/BABYLON-60/.venv/bin/ruff",
+      "check",
+      "01_KISH_ENGINE/babylon60/bft/consensus_committer.py",
+      "01_KISH_ENGINE/babylon60/bft/consensus_ledger.py",
+      "01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py",
+      "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+      "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+      "01_KISH_ENGINE/babylon60/database/core.py",
+      "01_KISH_ENGINE/babylon60/mcp/cortex_mcp_server.py",
+      "01_KISH_ENGINE/babylon60/mcp/effect_dispatch.py",
+      "01_KISH_ENGINE/babylon60/mcp/mail_integration.py",
+      "tests/manual/hardware_mcp_cycle.py",
+      "tests/test_biometric_signing_contract.py",
+      "tests/test_consensus_atomic_commit.py",
+      "tests/test_consensus_fault_recovery.py",
+      "tests/test_consensus_recovery_regressions.py",
+      "tests/test_database_config_cleanup.py",
+      "tests/test_fl_mcp01_dispatch.py",
+      "tests/test_local_core_cortex_connections.py",
+      "tests/test_manual_hardware_cycle.py",
+      "tests/test_swarm100_lot11_regressions.py",
+      "tests/test_swarm100_lot5_regressions.py"
+    ],
+    "returncode": 0
+  },
+  {
+    "name": "mypy-final",
+    "command": [
+      "/Users/borjafernandezangulo/.codex/worktrees/local-core-integration/BABYLON-60/.venv/bin/mypy",
+      "--follow-imports=silent",
+      "--check-untyped-defs",
+      "01_KISH_ENGINE/babylon60/bft/consensus_committer.py",
+      "01_KISH_ENGINE/babylon60/bft/consensus_ledger.py",
+      "01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py",
+      "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+      "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+      "01_KISH_ENGINE/babylon60/database/core.py",
+      "01_KISH_ENGINE/babylon60/mcp/cortex_mcp_server.py",
+      "01_KISH_ENGINE/babylon60/mcp/effect_dispatch.py",
+      "01_KISH_ENGINE/babylon60/mcp/mail_integration.py",
+      "tests/manual/hardware_mcp_cycle.py"
+    ],
+    "returncode": 0
+  }
+]

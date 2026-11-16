@@ -1,0 +1,104 @@
+[
+  {
+    "file": "tests/test_fl_mcp01_dispatch.py",
+    "name": "test_async_handler_finishes_before_dispatch_returns",
+    "case_count": 1,
+    "all_executed_and_passed": true
+  },
+  {
+    "file": "tests/test_fl_mcp01_dispatch.py",
+    "name": "test_async_failure_after_effect_stays_unknown_and_consumed",
+    "case_count": 2,
+    "all_executed_and_passed": true
+  },
+  {
+    "file": "tests/test_fl_mcp01_dispatch.py",
+    "name": "test_child_tasks_finish_before_policy_and_approval_locks_release",
+    "case_count": 1,
+    "all_executed_and_passed": true
+  },
+  {
+    "file": "tests/test_fl_mcp01_dispatch.py",
+    "name": "test_invocation_authority_does_not_transfer",
+    "case_count": 4,
+    "all_executed_and_passed": true
+  },
+  {
+    "file": "tests/test_fl_mcp01_dispatch.py",
+    "name": "test_copied_context_expires_after_completion",
+    "case_count": 1,
+    "all_executed_and_passed": true
+  },
+  {
+    "file": "tests/test_fl_mcp01_dispatch.py",
+    "name": "test_existing_application_loop_is_not_reentered_or_consumed",
+    "case_count": 1,
+    "all_executed_and_passed": true
+  },
+  {
+    "file": "tests/test_fl_mcp01_dispatch.py",
+    "name": "test_failed_async_parent_cancels_its_pending_effects",
+    "case_count": 1,
+    "all_executed_and_passed": true
+  },
+  {
+    "file": "tests/test_fl_mcp01_dispatch.py",
+    "name": "test_signed_mail_handler_still_records_once",
+    "case_count": 1,
+    "all_executed_and_passed": true
+  },
+  {
+    "file": "tests/test_fl_mcp01_dispatch.py",
+    "name": "test_native_signed_effect_and_alias_have_independent_witness",
+    "case_count": 1,
+    "all_executed_and_passed": true
+  },
+  {
+    "file": "tests/test_fl_mcp01_dispatch.py",
+    "name": "test_denials_preserve_physical_fixture",
+    "case_count": 7,
+    "all_executed_and_passed": true
+  },
+  {
+    "file": "tests/test_fl_mcp01_dispatch.py",
+    "name": "test_external_policy_matrix_with_signed_calls",
+    "case_count": 1,
+    "all_executed_and_passed": true
+  },
+  {
+    "file": "tests/test_fl_mcp01_dispatch.py",
+    "name": "test_crash_after_consumption_never_replays",
+    "case_count": 1,
+    "all_executed_and_passed": true
+  },
+  {
+    "file": "tests/test_fl_mcp01_dispatch.py",
+    "name": "test_policy_update_waits_for_actual_handler",
+    "case_count": 1,
+    "all_executed_and_passed": true
+  },
+  {
+    "file": "tests/test_fl_mcp01_dispatch.py",
+    "name": "test_stdio_roundtrip_independent_observer",
+    "case_count": 1,
+    "all_executed_and_passed": true
+  },
+  {
+    "file": "tests/test_fl_mcp01_dispatch.py",
+    "name": "test_handler_failure_is_unknown_not_a_false_denial",
+    "case_count": 1,
+    "all_executed_and_passed": true
+  },
+  {
+    "file": "tests/test_fl_mcp01_dispatch.py",
+    "name": "test_native_availability_cannot_replace_pinned_authority",
+    "case_count": 1,
+    "all_executed_and_passed": true
+  },
+  {
+    "file": "tests/test_manual_hardware_cycle.py",
+    "name": "test_manual_stdio_client_executes_once_and_restarts_with_software_authority",
+    "case_count": 1,
+    "all_executed_and_passed": true
+  }
+]

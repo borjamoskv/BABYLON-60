@@ -16,14 +16,28 @@ from importlib.machinery import ExtensionFileLoader
 import inspect
 import json
 import marshal
+import os
 from pathlib import Path
 import secrets
+import stat
+import sys
 from threading import Lock, get_ident
 from typing import Any, ClassVar, Protocol, TypeVar, cast
 
 from blake3 import blake3
 
 from babylon60.verification.verification_gate import VerificationGate
+
+QuarantineDestroyFn = Callable[[str, str, bytes, bytes | None], tuple[int, int, bytes]]
+_FORBIDDEN_PROCSPAWN_ENV = frozenset(
+    {
+        "LD_PRELOAD",
+        "DYLD_INSERT_LIBRARIES",
+        "DYLD_LIBRARY_PATH",
+        "PYTHONINSPECT",
+        "BABYLON_ENCLAVE_PRIVATE_KEY",
+    }
+)
 
 
 class NativeBroker(Protocol):
@@ -34,8 +48,27 @@ class NativeBroker(Protocol):
     def discover(self, name: str, digest: bytes, effect: str) -> None: ...
     def authorize(self, name: str, digest: bytes, effect: str) -> None: ...
     def revoke(self, name: str) -> None: ...
-    def issue(self, name: str, digest: bytes, effect: str, arguments: bytes) -> object: ...
+    def issue(
+        self,
+        name: str,
+        digest: bytes,
+        effect: str,
+        arguments: bytes,
+        scope: str | None = None,
+        resource: str | None = None,
+        nonce: bytes | None = None,
+    ) -> object: ...
     def validate(self, token: object, name: str, digest: bytes, effect: str, arguments: bytes) -> None: ...
+    def commit_once(
+        self,
+        token: object,
+        name: str,
+        digest: bytes,
+        effect: str,
+        arguments: bytes,
+        scope: str | None = None,
+        resource: str | None = None,
+    ) -> bytes: ...
 
 
 HandlerResult = dict[str, object] | Awaitable[dict[str, object]]
@@ -50,6 +83,7 @@ READ_ONLY_TOOLS = frozenset(
         "causal_evaluate_task_risk",
         "causal_verify_ledger",
         "bft_route_skill",
+        "babylon_autoroute_evaluate",
         "causal_register_sign_off",
         "skills.discover",
         "skills.inspect",
@@ -80,11 +114,63 @@ class _Invocation:
     name: str
     arguments: bytes
     thread: int
+    execution_id: str = ""
+    quarantine_destroyer: QuarantineDestroyFn | None = None
+    gate_conn: object | None = None
+    gate_db_path: str = ""
     task: asyncio.Task[object] | None = None
     active: bool = True
 
 
 _invocation: ContextVar[_Invocation | None] = ContextVar("mcp_effect_invocation", default=None)
+
+
+def active_effect_tx_context() -> tuple[QuarantineDestroyFn, str] | None:
+    """Return the active invocation's native EffectTx quarantine primitive and execution_id, if mediated."""
+    scope = _invocation.get()
+    if (
+        scope is not None
+        and scope.active
+        and scope.thread == get_ident()
+        and scope.task is _current_task()
+        and scope.quarantine_destroyer is not None
+    ):
+        return (scope.quarantine_destroyer, scope.execution_id)
+    return None
+
+
+def active_gate_sqlite_connection() -> tuple[Any, str] | None:
+    """Return the active VerificationGate SQLite connection and db_path to avoid nested lock deadlocks."""
+    scope = _invocation.get()
+    if (
+        scope is not None
+        and scope.active
+        and scope.thread == get_ident()
+        and scope.task is _current_task()
+        and scope.gate_conn is not None
+        and scope.gate_db_path
+    ):
+        return (scope.gate_conn, scope.gate_db_path)
+    return None
+
+
+def _verify_procspawn_confinement_readiness() -> None:
+    """Enforce O12 environment hygiene and macOS Seatbelt binary integrity before ProcSpawn dispatch."""
+    tainted = sorted(k for k in _FORBIDDEN_PROCSPAWN_ENV if k in os.environ)
+    if tainted:
+        raise PermissionError(f"FL-MCP-01 O12 environment contamination rejected: {', '.join(tainted)}")
+    if sys.platform == "darwin":
+        flags = os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0)
+        try:
+            fd = os.open("/usr/bin/sandbox-exec", flags)
+        except OSError as exc:
+            raise PermissionError(f"FL-MCP-01 Seatbelt binary unavailable: {exc}") from exc
+        try:
+            st = os.fstat(fd)
+            if not stat.S_ISREG(st.st_mode):
+                raise PermissionError("FL-MCP-01 Seatbelt path is not a regular file")
+        finally:
+            os.close(fd)
 
 
 def _current_task() -> asyncio.Task[object] | None:
@@ -145,6 +231,7 @@ class EffectDispatcher:
         self._lock = Lock()
         self._session = secrets.token_hex(32)
         self._native: NativeBroker | None = None
+        self._quarantine_destroy: QuarantineDestroyFn | None = None
         self._library_digest = ""
         if native_library is not None:
             # Explicit trusted deployment path; never load a library from MCP input.
@@ -157,6 +244,9 @@ class EffectDispatcher:
             spec.loader.exec_module(module)
             factory = cast(Callable[[], NativeBroker], getattr(module, "McpBroker"))
             self._native = factory()
+            destroy_fn = getattr(module, "quarantine_and_destroy", None)
+            if callable(destroy_fn):
+                self._quarantine_destroy = cast(QuarantineDestroyFn, destroy_fn)
 
     def update_external_policy(self, feature: str, global_policy: str) -> None:
         """Trusted host sync only; cannot create a grant."""
@@ -262,8 +352,19 @@ class EffectDispatcher:
         data: bytes,
         handler: Handler,
         arguments: dict[str, object],
+        execution_id: str = "",
     ) -> dict[str, object]:
-        scope = _Invocation(self, name, data, get_ident(), _current_task())
+        scope = _Invocation(
+            self,
+            name,
+            data,
+            get_ident(),
+            execution_id=execution_id,
+            quarantine_destroyer=self._quarantine_destroy,
+            gate_conn=getattr(self._gate, "_conn", None),
+            gate_db_path=str(getattr(self._gate, "db_path", "")),
+            task=_current_task(),
+        )
         token = _invocation.set(scope)
         try:
             value: object = handler(arguments)
@@ -337,19 +438,26 @@ class EffectDispatcher:
                     pass
                 else:
                     raise PermissionError("Execute MCP effects through the synchronous ingress, outside a running loop")
+                if effect == "ProcSpawn":
+                    _verify_procspawn_confinement_readiness()
                 # Neither availability nor an MCP-provided boolean can pass this gate.
                 if not self._gate.is_allowed(task):
                     raise PermissionError("Missing, expired, revoked or mismatched operator attestation")
                 broker.authorize(name, digest, effect)
-                token = broker.issue(name, digest, effect, data)
+                invocation_nonce = blake3(
+                    canonical({"session": self._session, "execution_id": execution_id})
+                ).digest()
+                token = broker.issue(name, digest, effect, data, nonce=invocation_nonce)
 
                 def effect_once() -> dict[str, object]:
                     nonlocal effect_started
-                    broker.validate(token, name, digest, effect, data)
+                    evidence_id = broker.commit_once(token, name, digest, effect, data)
                     if self._identity(name, handler) != digest:
                         raise PermissionError("Handler changed after approval")
                     effect_started = True
-                    return self._invoke(name, data, handler, snapshot)
+                    out = self._invoke(name, data, handler, snapshot, execution_id=execution_id)
+                    out["broker_evidence_id"] = bytes(evidence_id).hex()
+                    return out
 
                 # The gate consumes durably, then locks approval writers through the effect.
                 return self._gate.execute_once(task, effect_once)

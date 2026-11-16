@@ -1,0 +1,16 @@
+{
+  "source_sha256_before": {
+    "scripts/c5_thermo/c5_exergy_optimizer_monitor.py": "1d82392ac3cddd6fd9b226b64c5a28562eea25de29fd5ac4afbbd9ea4cf50d2d",
+    "tests/test_swarm100_lot9_regressions.py": "be2f18081837e889c5ccbb1ec8b9f552f0850c06d8651b4fdbea7b53fa81c710"
+  }
+}
+...............................................                          [100%]
+47 passed in 28.02s
+
+{
+  "source_sha256_after": {
+    "scripts/c5_thermo/c5_exergy_optimizer_monitor.py": "1d82392ac3cddd6fd9b226b64c5a28562eea25de29fd5ac4afbbd9ea4cf50d2d",
+    "tests/test_swarm100_lot9_regressions.py": "be2f18081837e889c5ccbb1ec8b9f552f0850c06d8651b4fdbea7b53fa81c710"
+  },
+  "exit_code": 0
+}

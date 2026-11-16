@@ -1,0 +1,291 @@
+[
+  {
+    "candidate_id": "SW100-C0303",
+    "decision": "ALREADY_FIXED",
+    "remediation_state": "FIXED",
+    "severity": "P1",
+    "path": "01_KISH_ENGINE/babylon60/autodidact/epistemology.py",
+    "current_source_sha256": "09b6d8b9431e31ae3b1ac99c6a08e67be900d69f5046fb9d2dcd9f97d505de72",
+    "rationale": "V07 now rejects unrelated conclusions and additional obligations instead of manufacturing FormalProof or CANONICAL. Identity preserves evidence, confidence, status and ancestry; stale or falsified premises and incompatible registry entries are rejected. Fifteen regression cases and independent checks validate these paths. This closes the arbitrary-derivation defect, not the trustworthiness of externally supplied justification labels or a general proof verifier.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/autodidact/epistemology.py",
+        "start_line": 151,
+        "end_line": 187,
+        "observation": "All premises are checked; only modality/content identity with no added obligations is admitted and ancestry is retained."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/autodidact/engine.py",
+        "start_line": 186,
+        "end_line": 220,
+        "observation": "Cache reuse requires matching content hash, evidence, status and ancestry; the dependency DAG is registered without self edges."
+      }
+    ],
+    "guards": [],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-round3-20261028/v07-before.log",
+      "docs/security/evidence/swarm100-round3-20261028/v07-independent-before.log",
+      "docs/security/evidence/swarm100-round3-20261028/v07-independent-after.log",
+      "docs/security/evidence/swarm100-round3-20261028/independent-review-v07-followup.json"
+    ]
+  },
+  {
+    "candidate_id": "SW100-C0242",
+    "decision": "DUPLICATE",
+    "remediation_state": "FIXED",
+    "severity": "P1",
+    "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-browser-forensics-and-extension-triage/scripts/browser_forensics.py",
+    "current_source_sha256": "739394836cb01e679667570eb96e94ed625e73390f9d66ebab32c1101b9f5324",
+    "rationale": "Same traversal flaw as C0539 in a separate bundled copy. Reviewer14 preserved the vulnerable pre-remediation hash. Root propagated the hardened primary implementation to this copy and parametrized all eight purge regression cases across both paths; tests use temporary profiles. Both current files are byte-identical, so the duplicate inherits the verified fix without erasing this affected path.",
+    "source_checks": [
+      {
+        "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-browser-forensics-and-extension-triage/scripts/browser_forensics.py",
+        "start_line": 212,
+        "end_line": 258,
+        "observation": "Strict Chromium ID, fd-relative directories, O_NOFOLLOW, regular preferences and symlink-resistant deletion."
+      },
+      {
+        "path": "tools/skill_library/global/c5-browser-forensics-and-extension-triage/scripts/browser_forensics.py",
+        "start_line": 212,
+        "end_line": 258,
+        "observation": "Matching hardened primary copy; both implementations are exercised by the shared parametrized fixture."
+      }
+    ],
+    "guards": [],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-round3-20261028/purge-copy-remediation.json",
+      "docs/security/evidence/swarm100-round3-20261028/root-tests.log"
+    ],
+    "canonical_id": "SW100-C0539"
+  },
+  {
+    "candidate_id": "SW100-C0562",
+    "decision": "DUPLICATE",
+    "remediation_state": "OPEN",
+    "severity": "P1",
+    "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/anergy-purge-protocol/scripts/anergy_purge.py",
+    "current_source_sha256": "82b6881e3cc765b82d70814a477beaa7e46c3b074c7485a843b6baf303e16253",
+    "rationale": "Same live-WAL unlink defect as C0387 in a separate byte-identical bundled copy. Both occurrences remain unsafe and require coordinated remediation; static duplicate adjudication does not run the purge or close the defect.",
+    "source_checks": [
+      {
+        "path": "tools/skill_library/global/anergy-purge-protocol/scripts/anergy_purge.py",
+        "start_line": 178,
+        "end_line": 190,
+        "observation": "Deletes each db-wal/db-shm file without establishing orphan status."
+      },
+      {
+        "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/anergy-purge-protocol/scripts/anergy_purge.py",
+        "start_line": 178,
+        "end_line": 190,
+        "observation": "Byte-identical deletion loop in second bundled copy."
+      }
+    ],
+    "guards": [],
+    "runtime_executed": false,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-round3-20261028/root-duplicate-evidence.json"
+    ],
+    "canonical_id": "SW100-C0387"
+  },
+  {
+    "candidate_id": "SW100-C0162",
+    "decision": "REPRODUCED",
+    "severity": "P2",
+    "remediation_state": "OPEN",
+    "path": "tools/skill_library/global/categorical-hallucination-audit/scripts/audit_kl_d.py",
+    "current_source_sha256": "34f7e6532eed0d70c2cd0d5795c5b269b02cdc44b2e0e8a69fdf89eb9728a0dc",
+    "rationale": "The primitive docstring still does not explicitly define whether pi0 is at time zero or at target_t, so the stronger statement that every positive-target single call is wrong is not established. However, the canonical local MODULE.md:42-45 defines all retrodictions as conditionals of one joint process rho on the shared history, and audit_system/CLI accept multiple targets while passing the same unrestricted prior vector to every target. An independent exact-source fixture with T=[[0.8,0.2],[0.1,0.9]], pi0=[1,0], observation S2=B and targets [0,1] returns q0=q1=[1,0]. For any one Markov joint process with this T and observation, the function's own q0 fixes q1 through the Bayesian bridge identity: q1(j)=sum_i q0(i)*T(i,j)*T(j,B)/(T^2)(i,B). Exact rational evaluation requires q1=[8/17,9/17], contradicting the returned [1,0]. This confirms a multi-target temporal-prior coherence defect without assuming pi0's time origin. A stationary-prior control [1/3,2/3] satisfies the identity, showing the scope rather than claiming universal failure. Single-target callers supplying the target marginal can be correct; the public batch must either define a common initial time and propagate its prior, accept target-indexed marginals, or explicitly restrict/check stationary priors. No product or protected runtime was executed, and no remediation was performed.",
+    "source_checks": [
+      {
+        "path": "tools/skill_library/global/categorical-hallucination-audit/scripts/audit_kl_d.py",
+        "start_line": 18,
+        "end_line": 35,
+        "observation": "The primitive names a prior vector without a time origin. It normalizes T and pi0 but does not require stationarity or accept a target-indexed prior."
+      },
+      {
+        "path": "tools/skill_library/global/categorical-hallucination-audit/scripts/audit_kl_d.py",
+        "start_line": 45,
+        "end_line": 51,
+        "observation": "Every backward target multiplies the same pi0 directly by target-to-observation likelihood, treating it as that target's marginal."
+      },
+      {
+        "path": "tools/skill_library/global/categorical-hallucination-audit/scripts/audit_kl_d.py",
+        "start_line": 78,
+        "end_line": 101,
+        "observation": "audit_system calls the primitive for multiple target timesteps with the unchanged pi0 and converts each distribution into reported audit metrics."
+      },
+      {
+        "path": "tools/skill_library/global/categorical-hallucination-audit/scripts/audit_kl_d.py",
+        "start_line": 105,
+        "end_line": 112,
+        "observation": "The public JSON CLI exposes one pi0 and a list of targets, with no per-target prior or stationary-input restriction."
+      },
+      {
+        "path": "tools/skill_library/global/categorical-hallucination-audit/SKILL.md",
+        "start_line": 18,
+        "end_line": 31,
+        "observation": "The local alias preserves and links the canonical module contract; resources remain beside the alias and in the hub."
+      },
+      {
+        "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/categorical-hallucination-audit/MODULE.md",
+        "start_line": 42,
+        "end_line": 48,
+        "observation": "The canonical contract defines one joint process rho on the history and prediction/retrodiction as its Bayesian conditional marginals. This requires coherence across targets rather than unrelated target-specific processes."
+      },
+      {
+        "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/categorical-hallucination-audit/scripts/audit_kl_d.py",
+        "start_line": 78,
+        "end_line": 86,
+        "observation": "The canonical hub copy has the same SHA-256 as the assigned alias source and the same shared-pi0 batch consumer."
+      }
+    ],
+    "guards": [
+      "Row and prior normalization enforce probability totals but do not establish temporal marginal consistency.",
+      "All transition likelihoods in the fixture are positive, so the uniform fallback for zero-probability conditioning is not involved.",
+      "Observed-target, forward and internal-gap branches are not implicated by this counterexample.",
+      "A single call can be correct when pi0 is already the target marginal; a shared stationary prior also passes the independent bridge control.",
+      "The exact intended origin of pi0 remains undocumented. The confirmed finding is bounded to the observable incoherence of the multi-target consumer under the documented one-process contract, not a blanket single-call failure or a certification of Kan-extension theory."
+    ],
+    "runtime_executed": true,
+    "runtime_scope": "Only AST-selected mathematical source functions on synthetic inputs in the existing Python environment; no product/native service, protected gate, network, database or operator data.",
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-round3-20261028/03-C0162-fixture.py",
+      "docs/security/evidence/swarm100-round3-20261028/03-C0162-fixture-results.json",
+      "docs/security/evidence/swarm100-round3-20261028/03-C0162-source-evidence.json"
+    ]
+  },
+  {
+    "candidate_id": "SW100-C0414",
+    "decision": "REJECTED",
+    "severity": "P2",
+    "remediation_state": "NOT_APPLICABLE",
+    "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+    "current_source_sha256": "704da66f24d45ae3634083273a9c0dfecc8e07530b5a6520ff3f1f336fc58830",
+    "rationale": "The command-order observation is correct, but the original allegation treats --dry-run as a nonmutating preview. The explicit local contract says it omits git push, and the successful dry-run output advertises the newly prepared local release branch. Local orphan-commit creation and replacement of this fixed preparation branch therefore do not violate the inspected mode contract. Targeted search across scripts, tests, engine, tools, project skills and guidance found no caller or documented guarantee that this generated branch retains its prior tip. The original candidate does not identify concurrent publication or a mismatch between the attested tree and pushed commit. A separately recorded mutable-ref publication race must not be used to validate this different allegation. Rejection is limited to C0414 as submitted; it does not certify the whole projection script.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+        "start_line": 19,
+        "end_line": 24,
+        "observation": "Dry-run explicitly means checking without executing git push."
+      },
+      {
+        "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+        "start_line": 101,
+        "end_line": 105,
+        "observation": "Both modes intentionally create an orphan commit and force-update the fixed local preparation branch."
+      },
+      {
+        "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+        "start_line": 126,
+        "end_line": 132,
+        "observation": "Successful dry-run reports that the local release branch is ready, then exits before remote operations."
+      },
+      {
+        "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+        "start_line": 144,
+        "end_line": 145,
+        "observation": "The same fixed branch is the script's own publication source; no distinct local retention consumer was found."
+      },
+      {
+        "path": "scripts/README.md",
+        "start_line": 159,
+        "end_line": 159,
+        "observation": "The scripts index lists this utility without specifying a read-only or prior-tip preservation contract."
+      }
+    ],
+    "guards": [
+      "Dry-run skips biometric dispatch and exits before the remote lookup and push.",
+      "Tree-content, archive-size and optional Gitleaks checks can stop before branch creation.",
+      "No guarantee to preserve a previous generated release tip was found; absence of such a guarantee is not itself a confirmed defect.",
+      "The mutable-reference publication issue is recorded separately and is not the basis of this verdict."
+    ],
+    "runtime_executed": false,
+    "evidence_paths": []
+  },
+  {
+    "candidate_id": "SW100-C0279",
+    "decision": "REJECTED",
+    "severity": "P2",
+    "remediation_state": "NOT_APPLICABLE",
+    "path": "scripts/c5_sharur/agent_beeper.py",
+    "current_source_sha256": "92aa547bdf314d6dd303e31c55daa1c86a40e8c883e16d4fcd408a2b9f27a9fa",
+    "rationale": "The retained broadcast behavior was correctly observed, but no successive-message requirement or affected reusable consumer was established. After the operator answered that the intended contract was unknown, the root agent made a reversible local contract decision based on the existing one-shot barrier consumer: one global broadcast per instance, retained for late waiters; a new round uses a fresh AgentPager. This scope is now explicit in class/wait/broadcast docstrings. Executable AST is unchanged. An isolated fixture validates waiting, multicast wake-up, late/repeated retained reads, and independent fresh instances. C0279 is rejected under this documented current contract, not because repeated-message delivery was implemented or because the original behavior observation was false. If reusable successive delivery becomes a requirement, it needs a distinct design with per-generation consumption and this scenario applies again. The independent unicast wake-up defect C0278 remains OPEN and was re-reproduced.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_sharur/agent_beeper.py",
+        "start_line": 21,
+        "end_line": 96,
+        "observation": "Documents one global broadcast per instance, retention for late waiters and a fresh instance per round."
+      },
+      {
+        "path": "scripts/c5_sharur/agent_beeper.py",
+        "start_line": 52,
+        "end_line": 81,
+        "observation": "Returns the retained global broadcast; another wait does not begin a new round."
+      },
+      {
+        "path": "scripts/c5_sharur/agent_beeper.py",
+        "start_line": 89,
+        "end_line": 96,
+        "observation": "Documents the single-broadcast caller contract; executable body unchanged."
+      },
+      {
+        "path": "scripts/c5_sharur/sharur_swarm_core.py",
+        "start_line": 80,
+        "end_line": 101,
+        "observation": "Existing consumer constructs a fresh pager, waits once per tenant and broadcasts once."
+      }
+    ],
+    "guards": [
+      "Contract resolution is a reversible root-agent design choice grounded in the observed consumer, not a claimed operator preference.",
+      "No successive-message queue or reset API is introduced.",
+      "Prior NEEDS_VALIDATION reviews remain preserved.",
+      "Public unicast support and its C0278 defect are unchanged."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-round3-20261028/root-followup-C0279.json",
+      "docs/security/evidence/swarm100-round3-20261028/C0279-contract-before.json",
+      "docs/security/evidence/swarm100-round3-20261028/C0279-contract-validation.json"
+    ],
+    "resolution_type": "CONTRACT_CLARIFIED_NO_EXECUTABLE_CHANGE",
+    "operator_response": "no lo se"
+  },
+  {
+    "candidate_id": "SW100-C0278",
+    "decision": "REPRODUCED",
+    "severity": "P2",
+    "remediation_state": "OPEN",
+    "path": "scripts/c5_sharur/agent_beeper.py",
+    "current_source_sha256": "92aa547bdf314d6dd303e31c55daa1c86a40e8c883e16d4fcd408a2b9f27a9fa",
+    "rationale": "An in-memory fixture of the current AgentPager confirms that a waiting registered agent remains pending after beep_agent, and only returns the unicast payload after beep_swarm wakes the global event. The public unicast method signals a different Event from the one awaited. Rechecked after the C0279 documentation-only contract clarification: executable AST is identical and the unicast pending-wait defect still reproduces in the current source.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_sharur/agent_beeper.py",
+        "start_line": 52,
+        "end_line": 81,
+        "observation": "Suspended path waits on global event."
+      },
+      {
+        "path": "scripts/c5_sharur/agent_beeper.py",
+        "start_line": 83,
+        "end_line": 87,
+        "observation": "Signals private unicast event; current-source fixture confirms suspended waiter remains pending until a broadcast."
+      }
+    ],
+    "guards": [
+      "Queued unicast before wait works through fast path.",
+      "Observed swarm caller broadcasts once and therefore does not exercise unicast; defect is in public unicast API."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-round3-20261028/19-review-method.json",
+      "docs/security/evidence/swarm100-round3-20261028/19-pure-fixtures.py",
+      "docs/security/evidence/swarm100-round3-20261028/19-pure-fixtures-results.json",
+      "docs/security/evidence/swarm100-round3-20261028/C0279-contract-validation.json"
+    ]
+  }
+]

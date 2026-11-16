@@ -1,0 +1,460 @@
+{
+  "shard": "048",
+  "findings": [
+    {
+      "title": "Software hashes are exported as hardware-sealed TPM quotes",
+      "severity": "P1",
+      "path": "01_KISH_ENGINE/babylon60/attestation/merkle_anchor.py",
+      "line": 117,
+      "evidence": "Lines 114-125 compute SHA256 from strings, default the signing seed to the returned hardware UUID, and label the result TPM_2_0_HARDWARE_SEALED. No TPM/SEP signing operation occurs. Consumer eu_ai_act.py:320 and :479 inserts this object into certificate/evidence packets; tracer.py:184-185 persists it for AL3 sessions.",
+      "trigger": "Generate a quote with the signing seed unset, or generate any AL3/compliance evidence.",
+      "impact": "The exported evidence falsely represents a reproducible software digest as hardware attestation; this does not establish a bypass of an authorization gate.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Notary checkpoint declares a verified quorum without contacting validators",
+      "severity": "P1",
+      "path": "01_KISH_ENGINE/babylon60/attestation/merkle_anchor.py",
+      "line": 155,
+      "evidence": "Lines 141-161 only hash the root and construct dictionaries; the default branch reports CHECKPOINT_SEALED and 3f+1_QUORUM_VERIFIED without networking, acknowledgements, signatures, or persisted checkpoint.",
+      "trigger": "Call generate_notary_checkpoint with default simulate_network_failure=False, even on a disconnected host.",
+      "impact": "Callers receive a positive external-notarization claim for a root never submitted to any notary. No production admission consumer was located; the direct test in tests/test_compliance_and_attestation.py:73 exercises this public output.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Unicast beeps cannot wake an already waiting agent",
+      "severity": "P2",
+      "path": "scripts/c5_sharur/agent_beeper.py",
+      "line": 68,
+      "evidence": "wait_for_beep awaits only _global_event, while beep_agent at lines 76-80 sets only _unicast_events[tenant_id]. The public methods use different events.",
+      "trigger": "An agent starts awaiting wait_for_beep before beep_agent is called for its registered ID.",
+      "impact": "The waiter remains suspended until an unrelated swarm broadcast, so addressed messages can stall indefinitely.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "A swarm broadcast remains permanently pending for subsequent waits",
+      "severity": "P2",
+      "path": "scripts/c5_sharur/agent_beeper.py",
+      "line": 62,
+      "evidence": "beep_swarm sets _global_event at line 86; no method clears it. The fast path at lines 62-65 returns the same _global_payload without per-agent consumption.",
+      "trigger": "Use the pager for two successive messages or wait again after consuming the first swarm broadcast.",
+      "impact": "Subsequent waits return stale data immediately and never wait for a new broadcast; loops around this API can spin on the same payload.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Tokenizer cannot encode ordinary Unicode outside Latin-1",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/cortex/cortex_bpe_tokenizer.py",
+      "line": 21,
+      "evidence": "The initial vocabulary contains chr(0)..chr(255), but encode splits Unicode text into characters and directly indexes self.vocab at line 85. Training adds merged strings only, never missing singleton characters.",
+      "trigger": "Encode an unseen character such as U+20AC or a CJK character; a single-character training input also adds nothing.",
+      "impact": "The text-to-token API raises KeyError for valid multilingual input instead of representing UTF-8 bytes or unknown tokens.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Password breach checker reports success when its API request fails",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-sovereign-identity-hardening/MODULE.md",
+      "line": 44,
+      "evidence": "The example uses curl -s without checking its status or HTTP response, then treats any absent grep match as OK at lines 45-51.",
+      "trigger": "DNS/TLS/network failure or an HTTP error body instead of the expected range response.",
+      "impact": "A failed verification is presented as a password with no recorded breach matches. This finding concerns the documented executable example only.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "SRP falsification compares predetermined conflict models and unequal workloads",
+      "severity": "P2",
+      "path": "scripts/c5_demos/poc_srp_soc_falsification.py",
+      "line": 224,
+      "evidence": "A counts actor switches on consecutive changes; B/C retain each file owner forever at lines 224-237 rather than the claimed two-change window. C has disjoint assigned file lists so zero cross-actor conflicts follows from input construction. In the timing loop A appends every digest to audit_log (line 61), whereas B and C do not persist records. Lines 323-332 print unconditional architecture conclusions.",
+      "trigger": "Run the purported empirical falsification report to compare architecture conflicts or dispatch latency.",
+      "impact": "Its conflict totals have different denominators/history and its timings include unequal persistence work, so the report cannot support the stated comparative conclusions.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Formal model proofs are presented as absolute physical runtime guarantees",
+      "severity": "P2",
+      "path": "docs/04_research/LOS_10_MAYORES_DESCUBRIMIENTOS_Y_AVANCES.md",
+      "line": 205,
+      "evidence": "The Lean section states that model verification makes torn reads physically impossible and certifies the absolute mathematical validity of the code. Its cited sources define and prove properties of Lean traces (BabylonTrace.lean:156 and AX0.lean:144); the section provides no implementation refinement proof or platform memory-model assumptions.",
+      "trigger": "Use the research document to assess the guarantee provided by compiling the cited Lean files.",
+      "impact": "Readers are led to treat a model-level theorem as certification of the deployed implementation; scope must distinguish the modeled transition system from Rust/OS/hardware execution.",
+      "confidence": "high",
+      "kind": "docs"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".agents/skills/c5-ring0-babylon-kernel-project/references/modules/apple-bypass/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          31
+        ]
+      ],
+      "sha256_expected": "8f09e1fedc9b7ec60bbb4de34bd4509229b12d70121ff7e953fbb2304aaee5db",
+      "sha256_observed": "8f09e1fedc9b7ec60bbb4de34bd4509229b12d70121ff7e953fbb2304aaee5db",
+      "changed": false
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-compiler/tests/semantic_solver_adapter.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          200
+        ],
+        [
+          201,
+          400
+        ],
+        [
+          401,
+          431
+        ]
+      ],
+      "sha256_expected": "7c42d174d9b8d568fbf44b42240d56bd9bd1fb839ec271af2457e62ec5b355f0",
+      "sha256_observed": "7c42d174d9b8d568fbf44b42240d56bd9bd1fb839ec271af2457e62ec5b355f0",
+      "changed": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/attestation/merkle_anchor.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          161
+        ]
+      ],
+      "sha256_expected": "cf90589a3faf04117731c693bb62a0f0486ea9ca9091af17ce915964dc170ce9",
+      "sha256_observed": "cf90589a3faf04117731c693bb62a0f0486ea9ca9091af17ce915964dc170ce9",
+      "changed": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/cortex/cortex_bpe_tokenizer.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          89
+        ]
+      ],
+      "sha256_expected": "f3c58fd2b30604fc96445d2b2f1f375f1f5b4495a06f591eb5939706bdf4892e",
+      "sha256_observed": "f3c58fd2b30604fc96445d2b2f1f375f1f5b4495a06f591eb5939706bdf4892e",
+      "changed": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/primitives/errors.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          126
+        ]
+      ],
+      "sha256_expected": "922c2146ec768d25a8f641b2322a145501ce5bfa2510b90741537a0338c913d5",
+      "sha256_observed": "922c2146ec768d25a8f641b2322a145501ce5bfa2510b90741537a0338c913d5",
+      "changed": false
+    },
+    {
+      "path": "01_KISH_ENGINE/cortex/crates/cortex-guard/fixtures/edificio_conforme.ifc",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          28
+        ]
+      ],
+      "sha256_expected": "67b047178ec9af5a1c7e91d464962d1afa0d61496a95ebf1ee8657e7784708eb",
+      "sha256_observed": "67b047178ec9af5a1c7e91d464962d1afa0d61496a95ebf1ee8657e7784708eb",
+      "changed": false
+    },
+    {
+      "path": "crates/b60-lang/src/homotopy.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          31
+        ]
+      ],
+      "sha256_expected": "d8375cd6c540c896806afbcce5af1971443182e08e40ea93b79a91cb5f87c123",
+      "sha256_observed": "d8375cd6c540c896806afbcce5af1971443182e08e40ea93b79a91cb5f87c123",
+      "changed": false
+    },
+    {
+      "path": "docs/04_research/LOS_10_MAYORES_DESCUBRIMIENTOS_Y_AVANCES.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          200
+        ],
+        [
+          201,
+          342
+        ]
+      ],
+      "sha256_expected": "a0838daae711adb988f57aed2e99c30996b7b674b4187708dd5a2f3ce7c3b1e5",
+      "sha256_observed": "a0838daae711adb988f57aed2e99c30996b7b674b4187708dd5a2f3ce7c3b1e5",
+      "changed": false
+    },
+    {
+      "path": "docs/security/fl-path01-capability-root-escape.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          128
+        ]
+      ],
+      "sha256_expected": "f0357a1c282e89ac4c69027685923b6f3caed67b8166b5907e606fff2f7f567a",
+      "sha256_observed": "f0357a1c282e89ac4c69027685923b6f3caed67b8166b5907e606fff2f7f567a",
+      "changed": false
+    },
+    {
+      "path": "proof/lean/lake-manifest.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          46
+        ]
+      ],
+      "sha256_expected": "9325276f014362af0d80077ed4126abdec7dc79d64bf576708cc542b155220fa",
+      "sha256_observed": "9325276f014362af0d80077ed4126abdec7dc79d64bf576708cc542b155220fa",
+      "changed": false
+    },
+    {
+      "path": "scripts/c5_demos/poc_srp_soc_falsification.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          200
+        ],
+        [
+          201,
+          340
+        ]
+      ],
+      "sha256_expected": "f0a58feadf5615726d571780a4daec26569fa2bc07c895d7c45a4b8371f998bb",
+      "sha256_observed": "f0a58feadf5615726d571780a4daec26569fa2bc07c895d7c45a4b8371f998bb",
+      "changed": false
+    },
+    {
+      "path": "scripts/c5_sharur/agent_beeper.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          86
+        ]
+      ],
+      "sha256_expected": "2601874532f18a3286ab7b0cf306672b20ae4eab61b40e57c1ccdaf6283f39cb",
+      "sha256_observed": "2601874532f18a3286ab7b0cf306672b20ae4eab61b40e57c1ccdaf6283f39cb",
+      "changed": false
+    },
+    {
+      "path": "scripts/repatriated/sharur3600_host_triage_results.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          177
+        ]
+      ],
+      "sha256_expected": "f140d0c12680252781d6d301fe3cbb805e0beffff318829323350034c9e9c0f3",
+      "sha256_observed": "f140d0c12680252781d6d301fe3cbb805e0beffff318829323350034c9e9c0f3",
+      "changed": false
+    },
+    {
+      "path": "tests/licensing/test_license_cli.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          41
+        ]
+      ],
+      "sha256_expected": "9da1c1fc3a8e2bb9e9a76dd2993ceb86e733e111712bc8f66a643e5e3872f6b4",
+      "sha256_observed": "9da1c1fc3a8e2bb9e9a76dd2993ceb86e733e111712bc8f66a643e5e3872f6b4",
+      "changed": false
+    },
+    {
+      "path": "tests/test_doxastic_kripke_engine.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          200
+        ],
+        [
+          201,
+          271
+        ]
+      ],
+      "sha256_expected": "d0a7bc09f8ec6252a369dfa0a058a3edb86f2d01f1699264bb1cef894569e42b",
+      "sha256_observed": "d0a7bc09f8ec6252a369dfa0a058a3edb86f2d01f1699264bb1cef894569e42b",
+      "changed": false
+    },
+    {
+      "path": "tests/test_swarm_bayesian_omega0.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          119
+        ]
+      ],
+      "sha256_expected": "a8290ad65449439c70dff597358d10ae4f0be600157044e3222b4285f51bc756",
+      "sha256_observed": "a8290ad65449439c70dff597358d10ae4f0be600157044e3222b4285f51bc756",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/api/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          200
+        ],
+        [
+          201,
+          204
+        ]
+      ],
+      "sha256_expected": "7ea6b294371bc04ffbf0a1fdc71a2e138f3303bfcdd85b91b1e29d0d53f80bc2",
+      "sha256_observed": "7ea6b294371bc04ffbf0a1fdc71a2e138f3303bfcdd85b91b1e29d0d53f80bc2",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/miniflare/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          105
+        ]
+      ],
+      "sha256_expected": "484f0edc585d46559ee0be2bc443da8c7e96d6cde31e2c18ea52a2ae6c73bb95",
+      "sha256_observed": "484f0edc585d46559ee0be2bc443da8c7e96d6cde31e2c18ea52a2ae6c73bb95",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/stream/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          184
+        ]
+      ],
+      "sha256_expected": "6148708948bcce4162ccb839983b37e88d7246a235289d79558913a9ca27beae",
+      "sha256_observed": "6148708948bcce4162ccb839983b37e88d7246a235289d79558913a9ca27beae",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/turnstile-spin/references/nextjs-app.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          200
+        ],
+        [
+          201,
+          261
+        ]
+      ],
+      "sha256_expected": "a8e10a569937efd076c3f32f37b48a8083c8c52918c9aa309b770d35d5a03273",
+      "sha256_observed": "a8e10a569937efd076c3f32f37b48a8083c8c52918c9aa309b770d35d5a03273",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents/agent_16_no_connector_fallback.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "sha256_expected": "376de1a172717e8543e7ee17546ad9e978d4826946879862781d660f1a5c74f1",
+      "sha256_observed": "376de1a172717e8543e7ee17546ad9e978d4826946879862781d660f1a5c74f1",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/references/triggers_47_primitivas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          200
+        ],
+        [
+          201,
+          286
+        ]
+      ],
+      "sha256_expected": "d5a219d7cbbf9da29339adc6ee22dfc63a5dc32f4d38bc9afaff3980dbc6157c",
+      "sha256_observed": "d5a219d7cbbf9da29339adc6ee22dfc63a5dc32f4d38bc9afaff3980dbc6157c",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-sovereign-identity-hardening/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "sha256_expected": "67dff44786dc19dc360e80d0a0eb19f5d930e43b7427124dafbd31cde5251b05",
+      "sha256_observed": "67dff44786dc19dc360e80d0a0eb19f5d930e43b7427124dafbd31cde5251b05",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/global/flstudio-mcp-production/dsp/formulas_and_mixer_architectures.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          77
+        ]
+      ],
+      "sha256_expected": "8d32ff278d6430f0d05ba5654cc41a3c7848950ff566897d1c4a7e431c142ea5",
+      "sha256_observed": "8d32ff278d6430f0d05ba5654cc41a3c7848950ff566897d1c4a7e431c142ea5",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/workspace/c5-ring0-babylon-kernel-project/references/modules/apple-bypass/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          31
+        ]
+      ],
+      "sha256_expected": "8f09e1fedc9b7ec60bbb4de34bd4509229b12d70121ff7e953fbb2304aaee5db",
+      "sha256_observed": "8f09e1fedc9b7ec60bbb4de34bd4509229b12d70121ff7e953fbb2304aaee5db",
+      "changed": false
+    }
+  ],
+  "tool_limitations": [
+    "Native codebase graph tools are not exposed in this session; targeted source reads and rg used.",
+    "Static audit only: no repository code, tests, benchmark, network notary or hardware operations executed.",
+    "External API documentation was not verified; no version-dependent Cloudflare API defect asserted.",
+    "Reads were chunked to at most 200 source lines per file read. All manifest hashes matched at initial and final checks."
+  ],
+  "tests_run": []
+}

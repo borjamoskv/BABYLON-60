@@ -1,0 +1,21 @@
+{
+  "existing_tests": {
+    "command": "uv run --locked pytest tests/test_standalone_verifier.py tests/test_memory_governance_falsification.py tests/test_compliance_exporter.py -q -o addopts=--tb=short",
+    "exit_code": 0,
+    "result": "59 passed",
+    "evidence": "existing-tests.log"
+  },
+  "reproductions": {
+    "command": "uv run --locked python docs/security/evidence/swarm100-round2-20261028/replay_all.py --output <new_fixture_directory>",
+    "exit_code": 0,
+    "result": "13 expected failure scenarios corroborated in fresh fixtures",
+    "evidence": "root-replay/replay-summary.json"
+  },
+  "ruff": {
+    "command": "uv run --locked ruff check <five delivered reproduction scripts>",
+    "exit_code": 0,
+    "result": "All checks passed",
+    "evidence": "repro-ruff-final.log"
+  },
+  "scope": "No production source edits. Original raw script bytes retained; formatted delivered scripts were replayed."
+}

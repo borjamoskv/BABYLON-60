@@ -1,0 +1,182 @@
+--- a/scripts/c5_l1_ledger/ledger_snapshot_engine.py
++++ b/scripts/c5_l1_ledger/ledger_snapshot_engine.py
+@@ -3,26 +3,26 @@
+ # BABYLON-60 v4.0 Sovereign Hardened
+ # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+ # ============================================================================
+-"""Incremental Ledger Snapshot Engine.
++"""Create consistent SQLite snapshots and SHA-256 manifests.
+ 
+-Creates deterministic snapshots of cortex.db, computes SHA-256 manifests,
+-records snapshot events in the BFT ledger, and verifies authorship:
+-Telmo Dinámico de Moskv (borjamoskv).
++The CLI records snapshot events in the ledger. The author field is descriptive
++metadata; a file digest does not authenticate authorship.
+ """
+ 
++import hashlib
+ import json
+-import hashlib
+ import os
+ import sqlite3
++import subprocess
+ import sys
+-import subprocess
+ import uuid
++from contextlib import closing
+ from datetime import datetime, timezone
+ from pathlib import Path
+ 
+ from babylon60.bft.ledger_actor import BFTLedgerActor, LedgerEvent
+ 
+-REPO_ROOT = Path(__file__).parents[2]
++REPO_ROOT = Path(__file__).absolute().parents[2]
+ SNAPSHOT_DIR = REPO_ROOT / "audit" / "snapshots"
+ DB_PATH = REPO_ROOT / "cortex.db"
+ AUTHOR = "Telmo Dinámico de Moskv (borjamoskv)"
+@@ -42,59 +42,101 @@
+ 
+ 
+ def create_snapshot() -> Path:
++    """Publish a complete DB/manifest pair from an existing SQLite source.
++
++    Output names are allocated exclusively. A process crash may leave an
++    unpublished DB or staging file, which is not a completed manifest.
++    """
+     if not DB_PATH.is_file():
+         raise FileNotFoundError(f"Source database not found: {DB_PATH}")
+ 
+-    # Validate that source is a valid SQLite database before creating output directories
+-    conn = sqlite3.connect(DB_PATH)
++    # The read-only open is essential: is_file() alone races with removal and
++    # SQLite's normal connect would then recreate an absent source database.
++    source_uri = DB_PATH.absolute().as_uri() + "?mode=ro"
++    with closing(sqlite3.connect(source_uri, uri=True)) as conn:
++        conn.execute("PRAGMA schema_version").fetchone()
++        SNAPSHOT_DIR.mkdir(mode=0o700, parents=True, exist_ok=True)
++        created_at = datetime.now(timezone.utc)
++        token = f"{created_at.strftime('%Y%m%d_%H%M%S')}_{uuid.uuid4().hex}"
++        dest_db = SNAPSHOT_DIR / f"cortex_snapshot_{token}.db"
++        manifest_path = SNAPSHOT_DIR / f"manifest_{token}.json"
++        temp_path = SNAPSHOT_DIR / f".tmp_{token}.json"
++        flags = os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, "O_NOFOLLOW", 0)
++        # SQLite permits VACUUM INTO an existing empty file. Reserving it with
++        # O_EXCL protects a preexisting DB, including a zero-byte file.
++        dest_fd = os.open(dest_db, flags, 0o600)
++        dest_identity = os.fstat(dest_fd)
++        temp_identity = None
++        published = False
++        try:
++            conn.execute("VACUUM INTO ?", (str(dest_db),))
++            os.fsync(dest_fd)
++            manifest = {
++                "snapshot_file": dest_db.name,
++                "sha256": compute_sha256(dest_db),
++                "commit_sha": get_latest_commit(),
++                "author": AUTHOR,
++                "created_at": created_at.isoformat(),
++            }
++            manifest_bytes = (json.dumps(manifest, indent=2) + "\n").encode("utf-8")
++            temp_identity = _write_exclusive(temp_path, manifest_bytes)
++            # Atomic exclusive publication; an exists() check plus replace()
++            # would overwrite a manifest created concurrently after the check.
++            os.link(temp_path, manifest_path, follow_symlinks=False)
++            published = True
++            _unlink_owned(temp_path, temp_identity)
++            _sync_directory(SNAPSHOT_DIR)
++            return manifest_path
++        except BaseException as error:
++            owned = [(dest_db, dest_identity)]
++            if temp_identity is not None:
++                owned.append((temp_path, temp_identity))
++                if published:
++                    owned.append((manifest_path, temp_identity))
++            for path, identity in owned:
++                try:
++                    _unlink_owned(path, identity)
++                except OSError:
++                    error.add_note("Snapshot output cleanup failed; inspect unpublished files")
++            raise
++        finally:
++            os.close(dest_fd)
++
++
++def _write_exclusive(path: Path, data: bytes) -> os.stat_result:
++    fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, "O_NOFOLLOW", 0), 0o600)
++    identity = os.fstat(fd)
+     try:
+-        conn.execute("PRAGMA schema_version").fetchone()
++        offset = 0
++        while offset < len(data):
++            written = os.write(fd, data[offset:])
++            if written <= 0:
++                raise OSError("Snapshot manifest write made no progress")
++            offset += written
++        os.fsync(fd)
++        return identity
++    except BaseException:
++        _unlink_owned(path, identity)
++        raise
+     finally:
+-        conn.close()
++        os.close(fd)
+ 
+-    SNAPSHOT_DIR.mkdir(parents=True, exist_ok=True)
+-    timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
+-    token = f"{timestamp}_{uuid.uuid4().hex}"
+-    dest_db = SNAPSHOT_DIR / f"cortex_snapshot_{token}.db"
+ 
+-    conn = sqlite3.connect(DB_PATH)
++def _unlink_owned(path: Path, identity: os.stat_result) -> None:
+     try:
+-        conn.execute("VACUUM INTO ?", (str(dest_db),))
++        current = path.stat(follow_symlinks=False)
++    except FileNotFoundError:
++        return
++    if os.path.samestat(identity, current):
++        path.unlink()
++
++
++def _sync_directory(path: Path) -> None:
++    fd = os.open(path, os.O_RDONLY | getattr(os, "O_DIRECTORY", 0) | getattr(os, "O_NOFOLLOW", 0))
++    try:
++        os.fsync(fd)
+     finally:
+-        conn.close()
+-
+-    db_hash = compute_sha256(dest_db)
+-    commit_sha = get_latest_commit()
+-
+-    manifest = {
+-        "snapshot_file": dest_db.name,
+-        "sha256": db_hash,
+-        "commit_sha": commit_sha,
+-        "author": AUTHOR,
+-        "created_at": datetime.now(timezone.utc).isoformat(),
+-    }
+-
+-    manifest_path = SNAPSHOT_DIR / f"manifest_{token}.json"
+-    if manifest_path.exists():
+-        raise FileExistsError(f"Manifest already exists: {manifest_path}")
+-
+-    temp_path = SNAPSHOT_DIR / f".tmp_{token}.json"
+-    manifest_bytes = json.dumps(manifest, indent=2).encode("utf-8")
+-    fd = os.open(temp_path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+-    try:
+-        with os.fdopen(fd, "wb") as f:
+-            f.write(manifest_bytes)
+-            f.flush()
+-            os.fsync(f.fileno())
+-        os.replace(temp_path, manifest_path)
+-    except Exception:
+-        try:
+-            temp_path.unlink(missing_ok=True)
+-        except OSError:
+-            pass
+-        raise
+-
+-    return manifest_path
++        os.close(fd)
+ 
+ 
+ async def record_snapshot_event(manifest_path: Path) -> None:

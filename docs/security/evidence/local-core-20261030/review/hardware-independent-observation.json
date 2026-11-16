@@ -1,0 +1,20 @@
+{
+  "decision": "OBSERVED_EVIDENCE_VALID",
+  "observed_at": 1793316978.326114,
+  "ledger_identity": {
+    "device": 16777233,
+    "inode": 556948492
+  },
+  "gate_identity": {
+    "device": 16777233,
+    "inode": 556948496
+  },
+  "event_count": 1,
+  "signed_approval_count": 1,
+  "consumed_count": 1,
+  "proof_sha256": "14a9dcf83236795386c679ead54f1b3e4fda32f66650c877bd267908e557274e",
+  "event_id": "5465538e-1573-5b9d-a4cd-df4cc8bd3b83",
+  "entry_hash": "65b9ec3f25c79ea9d0132d1c6b5d789c4e6f9101a2ac0f4232fb629f94c926a0",
+  "proof_currently_valid": true,
+  "hardware_provenance": "REQUIRES_SEPARATE_NATIVE_PREFLIGHT"
+}

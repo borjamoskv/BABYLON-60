@@ -1,0 +1,386 @@
+{
+  "shard": 75,
+  "findings": [
+    {
+      "title": "Inbound email acknowledges exhausted webhook delivery failures",
+      "severity": "P1",
+      "path": "01_KISH_ENGINE/services/email_inbound/worker.js",
+      "line": 135,
+      "evidence": "After three failed fetch attempts, the handler only logs and resolves; no rejection, throw, forwarding or durable queue exists in this handler.",
+      "trigger": "Webhook rejects or remains unavailable for all three attempts.",
+      "impact": "Email handler reports completion while email payload has not been delivered or durably retained.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Thermal budget addition can overflow before admission comparison",
+      "severity": "P2",
+      "path": "crates/cadt_mediator/src/lib.rs",
+      "line": 57,
+      "evidence": "current + cost is used in both comparison and CAS without checked addition.",
+      "trigger": "After one admitted unit, public try_admit(usize::MAX) overflows.",
+      "impact": "Debug builds panic; ordinary release overflow can wrap to a small value and admit a cost exceeding max_heat. No external caller for this cost found in src/crates.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Draft filenames accept path components from campaign JSON",
+      "severity": "P2",
+      "path": "tools/tamkarum_batch_signer.py",
+      "line": 144,
+      "evidence": "lead_id is interpolated directly into output_drafts_dir / filename and write_text; no basename or containment validation.",
+      "trigger": "An audited/passable campaign lead has an absolute lead_id or ../ segments and --save-drafts is used.",
+      "impact": "Draft can overwrite a writable text path outside the requested drafts directory; parent directory must exist.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Missing Lean oracle is replaced by a numeric heuristic certification",
+      "severity": "P2",
+      "path": "examples/navier_stokes_larsa_oracle.rs",
+      "line": 132,
+      "evidence": "Missing oracle or launch failure restores Beta when bkm_acc.lower_bound() >= 3600 and gamma agrees (also lines123-125); final output claims native Lean reflection.",
+      "trigger": "Run example with missing/unlaunchable oracle and threshold-satisfying scenario.",
+      "impact": "Example can report SingularityCandidateIsolated and native verification without running the formal oracle. This is example evidence, not demonstrated production authorization bypass.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Commit polisher invokes nonexistent rewrite script path",
+      "severity": "P2",
+      "path": "scripts/c5_git_utils/commit_polisher.py",
+      "line": 65,
+      "evidence": "_rewrite_commits invokes scripts/rewrite_commits.py; targeted filesystem read reports absent. Actual matching implementation is scripts/c5_git_utils/rewrite_commits.py.",
+      "trigger": "Polisher reaches rewrite after reviewer and optimizer succeed.",
+      "impact": "Rewrite subprocess fails and polisher loops failure recording; configured rewrite functionality does not run.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Disconnected Markov output is not strict JSON",
+      "severity": "P2",
+      "path": "scripts/c5_cli/markov_bridge.py",
+      "line": 1555,
+      "evidence": "Fallback returns surprisal_bits=float(\"inf\"); CLI json.dumps uses default allow_nan and emits Infinity (lines1920 onward).",
+      "trigger": "--json requested for disconnected origin/target.",
+      "impact": "Output advertised as structured JSON cannot be parsed by strict JSON consumers.",
+      "confidence": "high",
+      "kind": "runtime"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "crates/cadt_mediator/src/lib.rs",
+      "line": 123,
+      "observation": "Authority conversion checks only thermal budget; apply_effect ignores effect value. Targeted src/crates references found only module/test consumers.",
+      "limitation": "No protected external-effect consumer traced; no production biometric bypass asserted."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".agents/skills/writing-for-agents/SKILL.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          22
+        ]
+      ],
+      "inventory_sha256": "ee72abb1df3926516f1b070abefaac0aabc451fe4ded2fbd96b377ff3a503a8e",
+      "hash_status": "match"
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-proof-ir/Cargo.toml",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          11
+        ]
+      ],
+      "inventory_sha256": "b9bdc7b6775f5d84bacc8f7cbd93763e01d558707ee0d91e3dbc03f7f4ca2bcb",
+      "hash_status": "match"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/bft/integrity.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          13
+        ]
+      ],
+      "inventory_sha256": "3a3e587292ba142487f0fc7513d33d17d2789fae68e6582a248b2d205589a89f",
+      "hash_status": "match"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/experience.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          26
+        ]
+      ],
+      "inventory_sha256": "9186795a5c33fcb8f01e14a32c00b6aad84f99f17b21b0997bcf40694fa7b69e",
+      "hash_status": "match"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/transducers/i18n.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          271
+        ]
+      ],
+      "inventory_sha256": "72f3e5d264f9cfeaa94c872d0af37a5b3eb3159da9811eb3ca0b639a653586b2",
+      "hash_status": "match"
+    },
+    {
+      "path": "01_KISH_ENGINE/services/email_inbound/worker.js",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          139
+        ]
+      ],
+      "inventory_sha256": "0e7c5066a1765789be6bdf28d4e16e7e1cfda63d3c47e276723e5eb276ce8719",
+      "hash_status": "match"
+    },
+    {
+      "path": "crates/cadt_mediator/src/lib.rs",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          234
+        ]
+      ],
+      "inventory_sha256": "cf0135ff49519dee0e8c4de7acfb67d2a48c6d033f5438a98104f5206e734b66",
+      "hash_status": "match"
+    },
+    {
+      "path": "docs/06_theory/AXIOMATIZATION_C5_REAL.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          47
+        ]
+      ],
+      "inventory_sha256": "52c3dce43e1987b279ef12732de6771d795af7e25a7c615e78906724a24bfcd2",
+      "hash_status": "match"
+    },
+    {
+      "path": "examples/navier_stokes_larsa_oracle.rs",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          256
+        ]
+      ],
+      "inventory_sha256": "087958c0a61b879fd6466be1dcb2a7e7bed7b5f5a424b296abd2ed70b555bf35",
+      "hash_status": "match"
+    },
+    {
+      "path": "scripts/c5_cli/markov_bridge.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          1988
+        ]
+      ],
+      "inventory_sha256": "91d27a7a9b4adbbdc599076978d2941a90012df856c50a30bee7aacb2f1d72dc",
+      "hash_status": "match"
+    },
+    {
+      "path": "scripts/c5_git_utils/commit_polisher.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          116
+        ]
+      ],
+      "inventory_sha256": "d50ad9a564ea458fb5f70ad99fc881bbdd847bf222596bc7761ab8074636e6d6",
+      "hash_status": "match"
+    },
+    {
+      "path": "scripts/c5_tests/test_discrete_curvature.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          37
+        ]
+      ],
+      "inventory_sha256": "3842ce6d6681fe51b5d13b65537d5f7e549f774df4ed05fcfcbefe50aed0a024",
+      "hash_status": "match"
+    },
+    {
+      "path": "src/cortex.rs",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          233
+        ]
+      ],
+      "inventory_sha256": "65ea468f87ed7349012398e0c282d7822497f4894c1a94731f7ab4b8a86eccad",
+      "hash_status": "match"
+    },
+    {
+      "path": "tests/test_appgen_ast_transducer.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          84
+        ]
+      ],
+      "inventory_sha256": "a4e69764bd97fdcba9f3e0f7333600ceec970635b4e64b98df26a3a464614789",
+      "hash_status": "match"
+    },
+    {
+      "path": "tests/test_iter2_deps_and_onwire_invariants.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          95
+        ]
+      ],
+      "inventory_sha256": "e7b09025d694dc1844e9bbcc03f87e9386c2eae523ca990077f9f522d4dc649a",
+      "hash_status": "match"
+    },
+    {
+      "path": "tools/examples/falsation_test.b60",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          41
+        ]
+      ],
+      "inventory_sha256": "146a5a49d857681464ae8b219ca1ccd4c9f5aab5cdf0070f6010d809af22d25c",
+      "hash_status": "match"
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/c3/gotchas.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          92
+        ]
+      ],
+      "inventory_sha256": "a54dec8e5a987a999b116e98d6bf42c8c5cb9ec5baacba3e6b63497732c33090",
+      "hash_status": "match"
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/pipelines/configuration.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          155
+        ]
+      ],
+      "inventory_sha256": "c10e1eb1066da113b54c33e4b06034c7e359912a344ede6ed7752ab29768bd52",
+      "hash_status": "match"
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/vectorize/README.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          133
+        ]
+      ],
+      "inventory_sha256": "5008ebcbef6873c1ed36158c24a82deda1f70b7e7de6b56647b44d115310929e",
+      "hash_status": "match"
+    },
+    {
+      "path": "tools/skill_library/global/c5-academic-peer-reviewer/SKILL.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          39
+        ]
+      ],
+      "inventory_sha256": "0fe229d5dd91c6fc514db795eb281a5389dc114e41f1697dd6cee3eae5f585c9",
+      "hash_status": "match"
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents/agent_43_site_playbooks_southwest.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          60
+        ]
+      ],
+      "inventory_sha256": "a2feeaa58bb78f6cbd5c2d98d9231d7b4a324d2670c55f3dfc01a29c00e56c2b",
+      "hash_status": "match"
+    },
+    {
+      "path": "tools/skill_library/global/c5-enki-60/SKILL.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          39
+        ]
+      ],
+      "inventory_sha256": "55a2b88e3019570f7c491debc415924c99ed4c3c25767f22e65b71d37484f3d2",
+      "hash_status": "match"
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/webkit-memory-audit/MODULE.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          56
+        ]
+      ],
+      "inventory_sha256": "d63e0ab2d3f82e28cbb02aa8f66b611fdd2ca6095bcde350bb10ebaa82afa33b",
+      "hash_status": "match"
+    },
+    {
+      "path": "tools/skill_library/global/gflow-browser-cinema-sovereign/SKILL.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          41
+        ]
+      ],
+      "inventory_sha256": "0e9dca08dec5fac8ac229c3caee872c5077240bae17d36291726192820e5927f",
+      "hash_status": "match"
+    },
+    {
+      "path": "tools/tamkarum_batch_signer.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          227
+        ]
+      ],
+      "inventory_sha256": "6a68f8fe3c819164aa0c1511fa48ef839087e8c0ac67b3c2bd5c52263c373444",
+      "hash_status": "match"
+    }
+  ],
+  "tool_limitations": [
+    "Native graph discovery tools not exposed; targeted rg used.",
+    "Static audit only; no tests/runtime execution."
+  ],
+  "tests_run": []
+}

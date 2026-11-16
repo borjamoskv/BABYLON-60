@@ -1,0 +1,421 @@
+{
+  "shard": "087",
+  "findings": [
+    {
+      "title": "WAL write failure is swallowed after state has changed",
+      "severity": "P2",
+      "path": "02_EDIN_SWARMS/agents_archi/orchestrator/lifecycle.py",
+      "line": 207,
+      "evidence": "transition_to changes current_state at 115 before callback 118–119; _log_causal_event catches IOError and only logs at 207–208. spawn similarly returns after the callback.",
+      "trigger": "Filesystem write/flush/fsync fails during a transition, including POISONED.",
+      "impact": "Caller receives success but restart restores the older state, potentially losing a terminal poison state.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Unresolved AWAIT spins forever outside the tick failsafe",
+      "severity": "P2",
+      "path": "examples/poc_navier_stokes_hunter.rs",
+      "line": 230,
+      "evidence": "Waiting requeues and continues at 230–232; max_ticks is checked only at 350–352.",
+      "trigger": "All remaining coroutines wait on symbols that no coroutine will execute.",
+      "impact": "Harness never exits or reports deadlock despite its finite failsafe claim.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Vorticity check asserts a hardcoded result",
+      "severity": "P2",
+      "path": "examples/poc_navier_stokes_hunter.rs",
+      "line": 364,
+      "evidence": "ExecutionResult always sets vorticity_peak: 59; main later asserts it equals 59.",
+      "trigger": "Execute any source reaching return, including one that changes the vorticity computation.",
+      "impact": "The assertion cannot detect incorrect vorticity and the success message overstates the arithmetic evidence.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Seeded FL014 experiment uses process-randomized hash for decisions",
+      "severity": "P2",
+      "path": "scripts/c5_cortex/poc_fl014_holdout.py",
+      "line": 173,
+      "evidence": "Acceptance uses hash((patch.patch_id, \"safe\")); known/unseen bypass branches use the same pattern at 181 and 188. Dataset RNG seeding does not seed Python string hashing.",
+      "trigger": "Run the experiment or tests in separate interpreters with different default hash seeds.",
+      "impact": "Decisions and gap change despite fixed dataset seeds; numerical assertions in tests/test_fl014_holdout_poc.py depend on uncontrolled randomness.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Artifact identity comparison checks only a prefix",
+      "severity": "P2",
+      "path": "scripts/c5_cortex/poc_fl014_holdout.py",
+      "line": 224,
+      "evidence": "has_identity_mismatch = not patch.patch_id.startswith(\"PATCH-\"); dynamic_result.patch_id and code_diff identity are never compared.",
+      "trigger": "Pass PATCH-0001 with a DynamicExecutionResult for PATCH-0002.",
+      "impact": "The simulated broker reports no identity mismatch, so the example does not check the artifact-binding invariant it advertises.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Python SharedManifest example uses an incompatible ABI",
+      "severity": "P2",
+      "path": "scripts/c5_utils/python_spsc_reader.py",
+      "line": 16,
+      "evidence": "Example fields begin with session_id[16], domain_mask and effect_class; src/manifest.rs tests require status_flag at 0, seq at 4, epoch_id at 8, payload_hash at 16. Only sizeof is checked at 30.",
+      "trigger": "Use this advertised FFI structure to interpret the repository SharedManifest.",
+      "impact": "Fields read unrelated bytes; a 64-byte size check falsely claims alignment and ABI equivalence. Local demo allocates its own buffer, so no actual shared-memory corruption is established.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Queue HTTP examples acknowledge failed HTTP responses",
+      "severity": "P2",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/queues/patterns.md",
+      "line": 40,
+      "evidence": "Buffering API Calls awaits fetch then batch.ackAll without response.ok; Durable Objects example similarly ack() after stub.fetch without checking status.",
+      "trigger": "Upstream responds 429 or 500 with a fulfilled fetch response.",
+      "impact": "Consumer acknowledges unprocessed work and prevents queue retry.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Daemon installer reports success exit after launchctl rejection",
+      "severity": "P2",
+      "path": "crates/eridu-infer/src/main.rs",
+      "line": 218,
+      "evidence": "Non-success output.status prints an error at 218–223 but function returns Ok at 225.",
+      "trigger": "launchctl load runs successfully as a process but returns a nonzero exit status.",
+      "impact": "Install command exits successfully although service activation failed; automation cannot reliably detect the failure.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Release attestor emits unsupported certification claims",
+      "severity": "P2",
+      "path": "tools/skill_library/global/github-architect/scripts/scitt_attestor.py",
+      "line": 84,
+      "evidence": "Builder hardware/entropy_source and zero_leakage_certified=true, slsa_level=SLSA_BUILD_LEVEL_3 are constants at 84–91; receipt at 102–106 contains only digest and statement, no signature or verification.",
+      "trigger": "Run the script on any checkout/host and publish the emitted receipt.",
+      "impact": "Artifact claims hardware and security provenance that the script never observes or verifies. No downstream acceptance/bypass was established.",
+      "confidence": "high",
+      "kind": "docs"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".git-blame-ignore-revs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          6
+        ]
+      ],
+      "inventory_sha256": "1c9d852703b688c434d45a355aba5c1d2e47cc3db6f2c54a4d07a4462c090cdf",
+      "observed_sha256": "1c9d852703b688c434d45a355aba5c1d2e47cc3db6f2c54a4d07a4462c090cdf",
+      "hash_match": true
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/Cargo.toml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          56
+        ]
+      ],
+      "inventory_sha256": "a5512538816c6520c73ef2b17d61956fb7b004021159bee6f6b9c2e4c997e7e3",
+      "observed_sha256": "a5512538816c6520c73ef2b17d61956fb7b004021159bee6f6b9c2e4c997e7e3",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/cli/license_cli.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          74
+        ]
+      ],
+      "inventory_sha256": "c5038a68c9388eb99b54b4d6223a984b83e047e12909c0bfd19c1e44177e329d",
+      "observed_sha256": "c5038a68c9388eb99b54b4d6223a984b83e047e12909c0bfd19c1e44177e329d",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/guards/license_sovereign_validator.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          157
+        ]
+      ],
+      "inventory_sha256": "78e7c687169e8a1a8ce29933c1434bf40f6ee8211749fa96bcb7ccb4ae16e336",
+      "observed_sha256": "78e7c687169e8a1a8ce29933c1434bf40f6ee8211749fa96bcb7ccb4ae16e336",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/utils/__init__.py",
+      "status": "reviewed_full",
+      "ranges": [],
+      "inventory_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "observed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_match": true
+    },
+    {
+      "path": "02_EDIN_SWARMS/agents_archi/orchestrator/lifecycle.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          285
+        ]
+      ],
+      "inventory_sha256": "7b796da789a8a0d5845447e267853681453c9a230e22491ff461fcad8c1111ad",
+      "observed_sha256": "7b796da789a8a0d5845447e267853681453c9a230e22491ff461fcad8c1111ad",
+      "hash_match": true
+    },
+    {
+      "path": "crates/eridu-infer/src/main.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          397
+        ]
+      ],
+      "inventory_sha256": "6d536eed3821e707ac3d46994ba6750ab9224a3293e5e9343ec5c5c64359162e",
+      "observed_sha256": "6d536eed3821e707ac3d46994ba6750ab9224a3293e5e9343ec5c5c64359162e",
+      "hash_match": true
+    },
+    {
+      "path": "docs/06_theory/axiom_sharur_swarm.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          33
+        ]
+      ],
+      "inventory_sha256": "745a6a8263c8c6d2a2fb3ca0718cda378de43a06cf4d98caa3593dbe922dce8c",
+      "observed_sha256": "745a6a8263c8c6d2a2fb3ca0718cda378de43a06cf4d98caa3593dbe922dce8c",
+      "hash_match": true
+    },
+    {
+      "path": "examples/poc_navier_stokes_hunter.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          414
+        ]
+      ],
+      "inventory_sha256": "af86782ac5088f92ee292626218e369d586edc159f31db3e70b20278706dd8ac",
+      "observed_sha256": "af86782ac5088f92ee292626218e369d586edc159f31db3e70b20278706dd8ac",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_cortex/poc_fl014_holdout.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          399
+        ]
+      ],
+      "inventory_sha256": "a02facf5110057fbcc140fdd2e562083f1a8f2dff4645b84d1bdcae71877d1e4",
+      "observed_sha256": "a02facf5110057fbcc140fdd2e562083f1a8f2dff4645b84d1bdcae71877d1e4",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_l1_ledger/l1_sink_bitcoin.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          101
+        ]
+      ],
+      "inventory_sha256": "5e4742e653b72c4c85ccbb56f96e6114221f9a8ac7ad340336f2f125cabcc350",
+      "observed_sha256": "5e4742e653b72c4c85ccbb56f96e6114221f9a8ac7ad340336f2f125cabcc350",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_utils/python_spsc_reader.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          53
+        ]
+      ],
+      "inventory_sha256": "0ba50441ce6d276752fc11398ec1119d478b906b3bec79da4c213de369571ad6",
+      "observed_sha256": "0ba50441ce6d276752fc11398ec1119d478b906b3bec79da4c213de369571ad6",
+      "hash_match": true
+    },
+    {
+      "path": "src/ffi.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          130
+        ]
+      ],
+      "inventory_sha256": "3be7ca33c2be473807fedc18e8fb23e9fb96253359689e70e128809a9e29ec19",
+      "observed_sha256": "3be7ca33c2be473807fedc18e8fb23e9fb96253359689e70e128809a9e29ec19",
+      "hash_match": true
+    },
+    {
+      "path": "tests/test_audit_ipc_auth.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          195
+        ]
+      ],
+      "inventory_sha256": "0aa1e6d6c58254e225d35be13e6d1322f9079696e234d79e7e3b2250bffc9959",
+      "observed_sha256": "0aa1e6d6c58254e225d35be13e6d1322f9079696e234d79e7e3b2250bffc9959",
+      "hash_match": true
+    },
+    {
+      "path": "tests/test_ledger_resilience.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          171
+        ]
+      ],
+      "inventory_sha256": "cfe79cafa6a8690eb5708c0cf09994118c6953678943db20069a868dea4ba4c0",
+      "observed_sha256": "cfe79cafa6a8690eb5708c0cf09994118c6953678943db20069a868dea4ba4c0",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/catalog.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          7886
+        ]
+      ],
+      "inventory_sha256": "2d9f866b615fa33d9b0a53208b0edc797669549ab24bff38679327b83294bcf3",
+      "observed_sha256": "2d9f866b615fa33d9b0a53208b0edc797669549ab24bff38679327b83294bcf3",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/cron-triggers/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          99
+        ]
+      ],
+      "inventory_sha256": "1d76304b50406c396539d5a08907d35dd09fb838308ed829e3dcf46b753e6b3a",
+      "observed_sha256": "1d76304b50406c396539d5a08907d35dd09fb838308ed829e3dcf46b753e6b3a",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/queues/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          220
+        ]
+      ],
+      "inventory_sha256": "1481924df521e162967cba5c20deeb8f42f17d8194ec2e275399a7659c71316d",
+      "observed_sha256": "1481924df521e162967cba5c20deeb8f42f17d8194ec2e275399a7659c71316d",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/web-analytics/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          82
+        ]
+      ],
+      "inventory_sha256": "192e73b1bfeb6da8352a2e27d83435b3390802f2eeea955f81d0b96c2f8796be",
+      "observed_sha256": "192e73b1bfeb6da8352a2e27d83435b3390802f2eeea955f81d0b96c2f8796be",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-solar-thermodynamic-architecture/scripts/solar_engine.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          123
+        ]
+      ],
+      "inventory_sha256": "97e10bdef8e2c749af882850eb57042492fe5eff36f204026615a8a956fafde1",
+      "observed_sha256": "97e10bdef8e2c749af882850eb57042492fe5eff36f204026615a8a956fafde1",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/scripts/spawn_agents.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          81
+        ]
+      ],
+      "inventory_sha256": "d1c40893bccf4458970d90ce59ea360bd25155ea468c6f3ce0f491704568c705",
+      "observed_sha256": "d1c40893bccf4458970d90ce59ea360bd25155ea468c6f3ce0f491704568c705",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/c5-popperian-falsification-auditor/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          49
+        ]
+      ],
+      "inventory_sha256": "be904a6de2ebec3cffd73713e5d3f31f59dce7b19057df27a50e4a7c55dfb811",
+      "observed_sha256": "be904a6de2ebec3cffd73713e5d3f31f59dce7b19057df27a50e4a7c55dfb811",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-solar-thermodynamic-architecture/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "inventory_sha256": "9883c7ab0623e199fde3b0e34d102d986e29d9fa24314207b19228113d06ca57",
+      "observed_sha256": "9883c7ab0623e199fde3b0e34d102d986e29d9fa24314207b19228113d06ca57",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/github-architect/scripts/scitt_attestor.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          142
+        ]
+      ],
+      "inventory_sha256": "4162a94ce35fac08bd23c96df84f72cd413620ac4d1732ec87fbe4a3cc658b80",
+      "observed_sha256": "4162a94ce35fac08bd23c96df84f72cd413620ac4d1732ec87fbe4a3cc658b80",
+      "hash_match": true
+    }
+  ],
+  "tool_limitations": [
+    "Native codebase-memory graph tools were absent from exposed session tools; used targeted file reads and rg.",
+    "Initial combined output was truncated; affected non-catalog files were read again in bounded chunks.",
+    "Audit is static only; no repository tests, runtime, daemon, transactions, or external service operations executed.",
+    "Catalog follow-up: all 7,886 lines were reviewed in <=200-line chunks; truncated intermediate batches were reread for omitted ranges. No new catalog finding supported without consumer tracing."
+  ],
+  "tests_run": []
+}

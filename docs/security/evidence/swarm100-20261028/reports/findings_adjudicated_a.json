@@ -1,0 +1,77 @@
+{
+  "scope": "Static independent source adjudication, no destructive PoCs or tests",
+  "findings": [
+    {
+      "finding": "auto purge deletes SQLite WAL",
+      "source_report": "002.json",
+      "status": "retained",
+      "severity": "P1",
+      "source_checks": [
+        "commands/itera.py:16-32",
+        "commands/strict_reviewer.py:148-160"
+      ],
+      "consumer": "strict_reviewer calls purge immediately before git add/commit",
+      "trigger": "Existing database with uncheckpointed committed WAL pages under current directory",
+      "guard_analysis": "No database-open check or SQLite checkpoint; direct find -delete",
+      "impact_scope": "Loss of persisted WAL transactions or live SQLite consistency; invoking reviewer required"
+    },
+    {
+      "finding": "SIMD unsigned length underflow",
+      "source_report": "007.json",
+      "status": "retained",
+      "severity": "P1",
+      "source_checks": [
+        "utils/void_accel.c:20-79",
+        "transducers/void_vec.py:48-90,119-125"
+      ],
+      "consumer": "ctypes wrapper forwards len(query) without minimum or equal batch-length validation",
+      "trigger": "Accelerator .so loaded; nonempty batch and query shorter than16 bytes ARM64 or64 bytes AVX512",
+      "guard_analysis": "count>0 only; unsigned len-block underflows",
+      "impact_scope": "Out-of-bounds native reads/crash; accelerator availability conditional"
+    },
+    {
+      "finding": "Delete quarantine before recoverable intent",
+      "source_report": "007.json",
+      "status": "retained",
+      "severity": "P1",
+      "source_checks": [
+        "src/secure_fs.rs:2068-2183",
+        "src/secure_fs.rs:2322-2387"
+      ],
+      "consumer": "Public secure_delete_scoped API; scoped test callers found",
+      "trigger": "Crash or failure in budget/WAL write after successful quarantine",
+      "guard_analysis": "Authorization gates precede rename but recovery explicitly rejects absent WAL record",
+      "impact_scope": "Original pathname removed, file stranded in quarantine; content not necessarily destroyed. No production entrypoint traced."
+    },
+    {
+      "finding": "Evidence compiler default invents successful observations",
+      "source_report": "011.json",
+      "status": "retained",
+      "severity": "P1",
+      "source_checks": [
+        "compliance_exporter/m0_evidence_pack.py:350-395,572-645,694-735"
+      ],
+      "consumer": "compile_pack writes default_nemesis to evidence/nemesis-results.json and references it in claim artifacts; supported status itself is inherited from canonical raw status",
+      "trigger": "Default compile_pack invocation without external observation payload",
+      "guard_analysis": "No simulation marker around hard-coded ZERO_UNAUTHORIZED_EFFECTS_OVER_10000_TRIALS etc",
+      "impact_scope": "Generated compliance artifact falsely presents unexecuted observations as support; not a runtime authorization bypass"
+    },
+    {
+      "finding": "Evidence compiler recursively deletes arbitrary output",
+      "source_report": "011.json",
+      "status": "retained",
+      "severity": "P1",
+      "source_checks": [
+        "compliance_exporter/m0_evidence_pack.py:572-597"
+      ],
+      "consumer": "Public compile_pack output_dir argument",
+      "trigger": "Caller supplies existing directory containing valuable data or existing_ledger_path inside output dir",
+      "guard_analysis": "Path.absolute then unconditional rmtree before claims/input validation; no ownership marker or exclusion",
+      "impact_scope": "Loss of directory contents; explicit API invocation required, no remote untrusted path source established"
+    }
+  ],
+  "tool_limitations": [
+    "Native graph unavailable; targeted rg fallback",
+    "One mistaken void_max.py read path returned ENOENT; corrected to observed void_vec.py"
+  ]
+}

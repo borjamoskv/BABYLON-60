@@ -1,0 +1,23 @@
+{
+  "reviewer": "05",
+  "status": "PASS",
+  "candidate_count": 29,
+  "exact_assignment_coverage": true,
+  "current_primary_hashes_checked": 29,
+  "source_excerpts_checked": 90,
+  "pure_checks_result_count": 7,
+  "decisions": {
+    "CONFIRMED_STATIC": 25,
+    "ALREADY_FIXED": 2,
+    "REJECTED": 1,
+    "REPRODUCED": 1
+  },
+  "remediation_states": {
+    "OPEN": 26,
+    "FIXED": 2,
+    "NOT_APPLICABLE": 1
+  },
+  "native_runtime_executed": false,
+  "network_access_performed": false,
+  "workspace_wide_gates": "Delegated to root aggregation once; this validation is limited to reviewer-owned evidence."
+}

@@ -1,0 +1,425 @@
+{
+  "shard": "003",
+  "findings": [
+    {
+      "title": "Explicit --files filter compares relative paths against absolute paths",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/commands/strict_reviewer.py",
+      "line": 56,
+      "evidence": "git diff output is converted to relative Path objects at line 53; allowed paths are resolved at line 55; f.is_relative_to(a) compares them without resolving f.",
+      "trigger": "Invoke main with --files for a changed file or directory.",
+      "impact": "Changed files are filtered out and main returns success with nothing reviewed.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Strict reviewer stages and commits unrelated working-tree changes",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/commands/strict_reviewer.py",
+      "line": 156,
+      "evidence": "After reviewing changed paths, git add . stages the complete working tree, and git commit consumes the entire index (lines 156-159).",
+      "trigger": "Run reviewer in a working tree containing unrelated modified or untracked files, with the preceding stages succeeding.",
+      "impact": "Unreviewed work and pre-existing staged content can be included in the automated commit.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Dry-run still overwrites the session log",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-terminological-archaeology/scripts/c5_lexicon_notary.py",
+      "line": 338,
+      "evidence": "--dry-run promises no writing (line 253); main unconditionally calls _generate_anagnorisis_log, whose lines 197-199 write ANAGNORISIS_LOG.md without a dry_run argument.",
+      "trigger": "Run --dry-run --term with --artifact-dir pointing at an existing directory.",
+      "impact": "Preview mode creates or overwrites a persistent session artifact.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Replacing phase 2f deletes all subsequent skill sections",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-terminological-archaeology/scripts/c5_lexicon_notary.py",
+      "line": 159,
+      "evidence": "The replacement pattern \\n\\n### Fase 2f:.* uses re.DOTALL and is not bounded by the next heading before write_text at line 172.",
+      "trigger": "Update a skill containing an existing phase 2f followed by another section.",
+      "impact": "All content following phase 2f is discarded, including unrelated instructions.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Oncology support check cannot detect an out-of-support target",
+      "severity": "P2",
+      "path": "scripts/c5_verifiers/verify_oncology_primitives_dag.py",
+      "line": 81,
+      "evidence": "implied_targets is built exclusively from targets; prior_supp contains all IDs in targets; implied_targets - prior_supp is therefore always empty (lines 74-84).",
+      "trigger": "A drug record mentions an unknown target not represented in the ontology.",
+      "impact": "A4 still reports PASS and contributes to ONTOLOGY SOUND without checking the missing target.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Compliance pipeline verifies a different artifact than the certificate it generated",
+      "severity": "P2",
+      "path": "scripts/c5_demos/c5_sovereign_compliance_orchestrator.py",
+      "line": 102,
+      "evidence": "Generated signed_cert is written to official_eu_compliance_certificate.json at lines 87-89, but verifier receives eu_ai_act_annex_vi_pack.json at lines 102-104; no linkage or status check precedes the unconditional 100% Conforme verdict at line 113. Exporter verify_evidence uses UNVERIFIED_NO_LEDGER when no ledger is supplied.",
+      "trigger": "Run the demo with a pre-existing pack that satisfies the verifier while the newly generated certificate has unverified evidence.",
+      "impact": "Successful verification of the separate pack is misreported as validation of the newly generated evidence chain.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Native host integration reads can block indefinitely",
+      "severity": "P2",
+      "path": "tests/test_moskv_e2e_integration.py",
+      "line": 51,
+      "evidence": "read_frame(timeout_sec=2.0) ignores timeout_sec and calls blocking proc.stdout.read(4) and read(length) at lines 53 and 57.",
+      "trigger": "Child remains alive but fails to produce a complete response frame.",
+      "impact": "Test hangs before reaching the bounded proc.wait or finally cleanup.",
+      "confidence": "high",
+      "kind": "example"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "src/ontology_ext.rs",
+      "line": 81,
+      "statement": "Lifecycle transition accepts decreasing timestamps and liveness uses saturating_sub; malformed chronological input could conceal an elapsed bound. Consumer clock guarantees were not traced, so no runtime finding is asserted."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".agents/rules/_archive/c5_epistemic_output_format.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          29
+        ]
+      ],
+      "sha256_expected": "00844dbba0fb3e0b1d4706c258814af8022fc17196da4834dfd485a176f594f4",
+      "hash_match": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": ".github/workflows/dependency-audit.yml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          32
+        ]
+      ],
+      "sha256_expected": "af7d3c51e59df7f9e6221fda9b806085bedb98c8bfee38d3bff5dbd8a38c702c",
+      "hash_match": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/poc_t3_ollama_real.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          75
+        ]
+      ],
+      "sha256_expected": "ac6f209febfb7c29db2254b8d93da0504652d53e09006ebc4b9bde19220cf3eb",
+      "hash_match": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/commands/strict_reviewer.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          165
+        ]
+      ],
+      "sha256_expected": "b7ba6bb738dd900f292ffe8d98a35099a6142dbcc8b2212478779da7af5284c4",
+      "hash_match": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/c6_absolute/anti_nlp_router.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          132
+        ]
+      ],
+      "sha256_expected": "dd4a12fe1eae06f0e08cb8317bd41859e6dcfb02bb346dad3ab9301d4f8da7e9",
+      "hash_match": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/utils/result.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          12
+        ]
+      ],
+      "sha256_expected": "eb6133e7ca3fd181366fcda1d6fbfa298824b7fae1ac41a97c34857d5a477d44",
+      "hash_match": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "02_EDIN_SWARMS/docs/INGENIERIA_INVERSA_SWARM_ARCHITECTURES.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          131
+        ]
+      ],
+      "sha256_expected": "0cf7d81f0692376b9c420ec904b28e33f55be0769a36d72f462115e574f0bd13",
+      "hash_match": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "docs/01_spec/evidence/solver-adapter-20261026.json",
+      "status": "reviewed_partial",
+      "ranges": [
+        [
+          1,
+          160
+        ]
+      ],
+      "sha256_expected": "0e3a0872109cb28020a3e5d24f3a53d8219d100ebf60d7ad8a86f46f83ae91e7",
+      "hash_match": true,
+      "notes": "Only beginning of large evidence log reviewed; remaining 1303 lines not reviewed."
+    },
+    {
+      "path": "docs/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          257
+        ]
+      ],
+      "sha256_expected": "809a2d7ff63da985e64bc139cedf6802b37c716bda8f8bceb65ac1bca1407045",
+      "hash_match": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "proof/bundles/attestation_bundle_v1/claims.snapshot",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          161
+        ]
+      ],
+      "sha256_expected": "ab2291cfb515447ade3ea9d8ff59d085acfc3b5b33bf47bd693a0ab38bd292bb",
+      "hash_match": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "scripts/c5_demos/c5_sovereign_compliance_orchestrator.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          118
+        ]
+      ],
+      "sha256_expected": "f4d3372c3f3cc3a637948d8862be6f745675fce1af0469c3085d958648917860",
+      "hash_match": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "scripts/c5_quality_gates/audit_ring2_sqlite_isolation.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          147
+        ]
+      ],
+      "sha256_expected": "57505d45cbec836bf62d41a6a64269267808b864e4a88e7db44cf67eb421f8e6",
+      "hash_match": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "scripts/c5_verifiers/verify_oncology_primitives_dag.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          100
+        ]
+      ],
+      "sha256_expected": "2443567a826bf2925fd45b05ece7ff7d5ab1939e9fc247d7317be9f39d217419",
+      "hash_match": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "src/ontology_ext.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          409
+        ]
+      ],
+      "sha256_expected": "432cab00713ce9e471e6af3645b88b932d3cac9ebc50cc75803c7f722ec78f09",
+      "hash_match": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tests/test_authority_startup.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          56
+        ]
+      ],
+      "sha256_expected": "191243e1c245861aeac7f53797974ad81039f234e4268905afd6ccab0e018bfc",
+      "hash_match": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tests/test_moskv_e2e_integration.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          91
+        ]
+      ],
+      "sha256_expected": "bfb77104d8a2569819ef194512f40ba9d16917e44b5689559f95e8569198e234",
+      "hash_match": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/agents-sdk/references/state-scheduling.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          171
+        ]
+      ],
+      "sha256_expected": "a1da07a5a7808a0e399213ab5d473fd3e6b021769796d06c9649f81373a37315",
+      "hash_match": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/do-storage/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          102
+        ]
+      ],
+      "sha256_expected": "d3a0957cca017ae837bcf891d34404a6faca40a9b4d9b4be26a3f6272c223622",
+      "hash_match": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/realtime-sfu/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          65
+        ]
+      ],
+      "sha256_expected": "f2eea72b7d9d98c3ca2625c999404ec806ce07f68bb1bdd9b709d3030b1c7a32",
+      "hash_match": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workers-for-platforms/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          134
+        ]
+      ],
+      "sha256_expected": "791b7e219807b90eff401244f922d4a3450963c00ae409cddf0a58e2cfdb129b",
+      "hash_match": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/examples/Four_Tet_Organic_Microcollage.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          82
+        ]
+      ],
+      "sha256_expected": "93ffc4370e0520ca863a10d787a033bd811d72a03db34b195247f7eb50cffc54",
+      "hash_match": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_07_voice.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          62
+        ]
+      ],
+      "sha256_expected": "a6376c873057cf8e06d6ea77586e350b404c80978f325c9546a54a20e77fe0a8",
+      "hash_match": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-html-report-injection-audit/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "sha256_expected": "226f36fe12c323c8f92f628af62c8ec00f5e767f3daf3a13045b3918ca183f53",
+      "hash_match": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-terminological-archaeology/scripts/c5_lexicon_notary.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          345
+        ]
+      ],
+      "sha256_expected": "d96987b85fee7bfd75bf877e6fa4c2ed2d72b71611466ae517d4393e61406c2f",
+      "hash_match": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/somatic-ble-transduction/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "sha256_expected": "dc071ba730fc7a69f4b1804f10dcb4e4225c8f3cab2667a85eb40fa16ee87178",
+      "hash_match": true,
+      "notes": "Static text review; no execution."
+    }
+  ],
+  "tool_limitations": [
+    "Native graph tools were not exposed: discovery returned no search_graph/get_architecture tools; targeted text fallback used.",
+    "No repository tests, binaries, demos or runtime effects executed by audit instruction.",
+    "External library documentation not revalidated; no finding relies on a current third-party API claim.",
+    "Some initial batched tool output was truncated; critical code and documentation were reread in bounded ranges. Large solver evidence log remains partial.",
+    "Frozen shard hashes matched for every assigned path at audit start; no symlinks in assigned shard.",
+    "Working tree was already dirty on main; audit preserved repository contents."
+  ],
+  "tests_run": []
+}

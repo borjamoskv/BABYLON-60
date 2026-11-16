@@ -1,0 +1,132 @@
+{
+  "group": "S2_identity",
+  "candidate_ids": [
+    "SW100-C0337",
+    "SW100-C0345",
+    "SW100-C0533"
+  ],
+  "production_scope": [
+    "01_KISH_ENGINE/babylon60/crypto/identity.py",
+    "01_KISH_ENGINE/babylon60/crypto/keys.py",
+    "scripts/c5_l1_ledger/seal_bounty_aeon.py"
+  ],
+  "before_source_sha256": {
+    "01_KISH_ENGINE/babylon60/crypto/identity.py": "4c98615751f6c55215f4bc60122346085c00bcb5cb540af18eba49883211d1b8",
+    "01_KISH_ENGINE/babylon60/crypto/keys.py": "cbf5b3ded4cf854df1d11d37a4d61d0f0122604881c7a02fb0f00497822ee305",
+    "scripts/c5_l1_ledger/seal_bounty_aeon.py": "154e38e4308b098e7687b266f337ec684b5ebd9488afcf186ab52c85139f8916"
+  },
+  "after_source_sha256": {
+    "01_KISH_ENGINE/babylon60/crypto/identity.py": "43f60f696fc05f0b6fd63d5c17045e105e249bc08cee3cc68e8e6ee419edade8",
+    "01_KISH_ENGINE/babylon60/crypto/keys.py": "d5b8e5336c00eac48e87b1288325c03054c6d15e821074256388ffd9e2782136",
+    "scripts/c5_l1_ledger/seal_bounty_aeon.py": "a3686548681ee16f73a088d06bd67443d73272afe868fc5e9c381e69d40cc6b0"
+  },
+  "tests": {
+    "path": "tests/test_swarm100_lot12_s2_identity_regressions.py",
+    "sha256": "74a7223a73709bfd1fa64e4f627a05ca051e9a0cfd75676c4320ec887a4c1f63",
+    "new_regressions": 16,
+    "related_total_passed": 22
+  },
+  "before": {
+    "result": "6 failed, 1 passed",
+    "log": "docs/security/evidence/swarm100-lot12-20261030/s2_identity/before-tests.log",
+    "command_record": "docs/security/evidence/swarm100-lot12-20261030/s2_identity/before-tests.json",
+    "observations": {
+      "SW100-C0337": "Existing seed was replaced; seed symlink target was overwritten.",
+      "SW100-C0345": "A stale manager removed another key; stale writer restored a revoked flag.",
+      "SW100-C0533": "Both decryption failure and corrupt JSON reached forge_identity and replaced a synthetic marker."
+    }
+  },
+  "proposed_states": {
+    "SW100-C0337": "FIXED",
+    "SW100-C0345": "FIXED",
+    "SW100-C0533": "FIXED"
+  },
+  "changes": {
+    "SW100-C0337": "Synced 0600 temporary inode; exclusive same-directory hard-link publication; descriptor-relative no-follow loading/publication; existing seed never replaced.",
+    "SW100-C0345": "Fresh descriptor/flock per operation, reload under lock, atomic synced replacement, current reads and serialized rotation; mismatched private/public key after partial cross-store failure is rejected.",
+    "SW100-C0533": "Only FileNotFoundError can initiate exclusive creation. Other load errors propagate before quote/TSA/artifact publication."
+  },
+  "integration": "Sealer emits babylon60.aeon-manifest.v2 and signs complete canonical body using peer-owned conformal_tree.canonical_aeon_manifest_bytes. Positive external-key verification and altered-field rejection executed; hardware labeled unverified software evidence.",
+  "checks": {
+    "related-tests": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "python",
+        "-c",
+        "\nimport os, socket, sys, tempfile\ntemporary = tempfile.TemporaryDirectory(prefix=\"lot12-s2-identity-\")\nos.environ[\"HOME\"] = temporary.name\nos.environ[\"CORTEX_DB_PATH\"] = temporary.name + \"/state\"\nos.environ[\"CORTEX_TESTING\"] = \"1\"\nos.environ[\"BABYLON60_SIGNING_SEED\"] = \"00\" * 32\nfor key in [\"CORTEX_VAULT_KEY\", \"BABYLON_AEON_TRUSTED_PUBLIC_KEY_B64\", \"KIMI_API_KEY\", \"MOONSHOT_API_KEY\", \"OPENROUTER_API_KEY\"]:\n    os.environ.pop(key, None)\nimport dotenv\ndotenv.load_dotenv = lambda *a, **k: False\ndotenv.dotenv_values = lambda *a, **k: {}\nconnect_original = socket.socket.connect\nconnect_ex_original = socket.socket.connect_ex\ndef blocked(*a, **k):\n    raise AssertionError(\"network forbidden in identity fixtures\")\ndef connect(self, *a, **k):\n    if self.family in (socket.AF_INET, socket.AF_INET6): return blocked()\n    return connect_original(self, *a, **k)\ndef connect_ex(self, *a, **k):\n    if self.family in (socket.AF_INET, socket.AF_INET6): return blocked()\n    return connect_ex_original(self, *a, **k)\nsocket.socket.connect = connect\nsocket.socket.connect_ex = connect_ex\nsocket.getaddrinfo = blocked\nimport pytest\nraise SystemExit(pytest.main(sys.argv[1:]))\n",
+        "tests/test_swarm100_lot12_s2_identity_regressions.py",
+        "tests/test_crypto_canonical.py",
+        "tests/test_bounty_aeon_sealer.py::test_conformal_merkle_tree_inclusion_and_falsification",
+        "-q",
+        "-o",
+        "addopts=--tb=short"
+      ],
+      "exit_code": 0,
+      "log_sha256": "de5d689cc9dce3c32ee9a6dabfac1a542bd986ac05a74700e542b467d56e8015"
+    },
+    "ruff": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "ruff",
+        "check",
+        "01_KISH_ENGINE/babylon60/crypto/identity.py",
+        "01_KISH_ENGINE/babylon60/crypto/keys.py",
+        "scripts/c5_l1_ledger/seal_bounty_aeon.py",
+        "tests/test_swarm100_lot12_s2_identity_regressions.py"
+      ],
+      "exit_code": 0,
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "mypy": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "mypy",
+        "--follow-imports=silent",
+        "--check-untyped-defs",
+        "01_KISH_ENGINE/babylon60/crypto/identity.py",
+        "01_KISH_ENGINE/babylon60/crypto/keys.py",
+        "scripts/c5_l1_ledger/seal_bounty_aeon.py"
+      ],
+      "exit_code": 0,
+      "log_sha256": "8228fcc5ce46d42d01caf3cd941f4e9c5f2bcc372bb5b147a2f0572d2dd675a8"
+    },
+    "diff-check": {
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "--",
+        "01_KISH_ENGINE/babylon60/crypto/identity.py",
+        "01_KISH_ENGINE/babylon60/crypto/keys.py",
+        "scripts/c5_l1_ledger/seal_bounty_aeon.py",
+        "tests/test_swarm100_lot12_s2_identity_regressions.py"
+      ],
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "stress": [
+    "Five six-thread identity-creation bursts (two warmup plus three further rounds); exactly one complete winner each round.",
+    "Three four-process metadata-write bursts (one warmup plus two further rounds). Barrier confirms all managers loaded before revocation; later stale writes retain that revocation and all four additions."
+  ],
+  "limits": [
+    "Local cooperating POSIX filesystem only. Operations explicitly reject unsupported platforms; import of signing helpers remains available.",
+    "No physical power-cut test. Fsync failure after publication propagates an error but may leave the complete new inode/metadata visible; this is not rollback.",
+    "Keyring and metadata are separate stores, not a crash-atomic transaction. Existing in-memory fallback is not durable private-key storage; a replacement key mismatched with old metadata is not returned.",
+    "No protection against a malicious same-UID process replacing private directories or advisory lock files; all legitimate store users must follow the locking protocol.",
+    "Revocation blocks this API; previously copied private material is not erased.",
+    "Existing hardcoded sealer passphrase remains outside these three findings; no confidentiality or hardware-attestation certification.",
+    "The whole old sealer E2E was not run against its formerly unsafe default boundaries. Parent assigned compatibility fixtures separately; this group runs only its pure Merkle case plus five existing crypto cases."
+  ],
+  "fixture_scope": "Temporary HOME/DB/identity and software keys only; network and dotenv loading blocked by run_checks.py. No operator identity, hardware, TSA, ledger actor, deployment, Git mutation or dependency change.",
+  "independent_review": "Pending parent-assigned independent reviewer; proposed states are not registry updates."
+}

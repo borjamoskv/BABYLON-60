@@ -1,0 +1,31 @@
+{
+  "reviewer": "independent_verifier",
+  "reviewed_at_utc": "2026-10-29T23:11:47.692598+00:00",
+  "decision": "CAPTURE_INTEGRITY_ACCEPTED_PARTITION_PENDING",
+  "manifest_sha256": "3645977684a10433de1856274c8173d7e5d0c773cef18c93fdc38c70c19af90d",
+  "base_head": "28257bd74fce31446b0350d094e9dab148a1aea7",
+  "current_source_head": "71a4d56a059f5709882e6ee628f2bc890ad4f18a",
+  "captured_files": 1048,
+  "tracked_differences": 917,
+  "untracked": 131,
+  "kinds": {
+    "file": 1047,
+    "symlink": 1
+  },
+  "snapshot_content_or_mode_errors": [],
+  "status_inventory_missing": [],
+  "status_inventory_extra": [],
+  "patch_target_blobs_checked": 917,
+  "patch_target_blob_errors": [],
+  "current_source_content_or_mode_changes": [],
+  "snapshot_mtime_differences": [
+    "scripts/c5_demos/c5_biometric_gate.swift"
+  ],
+  "limitations": [
+    "Capture covers reported changed/untracked paths; not ignored files or the entire repository.",
+    "Modes and symlinks verified; extended ACLs/resource forks are not certified.",
+    "Original checkout advanced externally after capture; do not describe its current HEAD or staging as unchanged.",
+    "No tests, hardware attestation, production edits, or approval of partition performed."
+  ],
+  "partition_review": "PENDING"
+}

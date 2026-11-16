@@ -12,25 +12,26 @@ Checks:
 """
 
 import os
+from pathlib import Path
 import sys
+import tempfile
 
-repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-packages_dir = os.path.join(repo_root, "packages")
-if packages_dir not in sys.path:
-    sys.path.insert(0, packages_dir)
-if repo_root not in sys.path:
-    sys.path.insert(0, repo_root)
+repo_root = Path(__file__).absolute().parent.parent.parent
+kish_engine_dir = repo_root / "01_KISH_ENGINE"
+if str(kish_engine_dir) not in sys.path:
+    sys.path.insert(0, str(kish_engine_dir))
+if str(repo_root) not in sys.path:
+    sys.path.insert(0, str(repo_root))
 
 
 def verify_causal_invariants() -> bool:
     print("=== ORÁCULO DE VERIFICACIÓN: INVARIANTES DE CAUSALIDAD ROBINSON-MOSKV & CORTEX PERSIST ===")
 
-    # Check 1: Audit packages/babylon60/bft/ for illegal clock reliance
-    bft_dir = os.path.join(packages_dir, "babylon60", "bft")
-    if not os.path.exists(bft_dir):
+    # Check 1: Audit 01_KISH_ENGINE/babylon60/bft/ for illegal clock reliance
+    bft_dir = kish_engine_dir / "babylon60" / "bft"
+    if not bft_dir.exists():
         print(f"  [FAIL] Directorio BFT no encontrado en {bft_dir}")
         return False
-
 
     banned_terms = ["CLOCK_REALTIME", "ntplib", "time.time()"]
     leaks = []
@@ -38,7 +39,7 @@ def verify_causal_invariants() -> bool:
         for file in files:
             if file.endswith(".py"):
                 file_path = os.path.join(root, file)
-                with open(file_path, "r", encoding="utf-8") as f:
+                with open(file_path, encoding="utf-8") as f:
                     for idx, line in enumerate(f, 1):
                         for term in banned_terms:
                             if term in line and "# noqa" not in line and "def " not in line:
@@ -51,38 +52,40 @@ def verify_causal_invariants() -> bool:
         return False
     print("  [OK] Pilar 1 (Teorema Robinson-Moskv): Ausencia de relojes POSIX/NTP en BFT confirmada.")
 
-    # Check 2: CortexPersistLedger Import and WAL Invariances
+    # Check 2: CortexPersistLedger Import and WAL + synchronous=FULL Invariances
     try:
         from babylon60.bft.cortex_persist_ledger import CortexPersistLedger
-        import tempfile
 
         with tempfile.TemporaryDirectory() as tmp_dir:
             db_path = os.path.join(tmp_dir, "test_cortex.db")
             ledger = CortexPersistLedger(db_path=db_path)
             conn = ledger._get_connection()
             journal_mode = conn.execute("PRAGMA journal_mode;").fetchone()[0]
+            synchronous = conn.execute("PRAGMA synchronous;").fetchone()[0]
             assert journal_mode.lower() == "wal", f"Journal mode is {journal_mode}, expected 'wal'"
+            assert int(synchronous) == 2, f"PRAGMA synchronous is {synchronous}, expected 2 (FULL)"
             conn.close()
 
-        print("  [OK] Pilar 2 (Cortex Persist Ledger): SQLite WAL mode e invariantes BFT verificados.")
+        print("  [OK] Pilar 2 (Cortex Persist Ledger): SQLite WAL mode + synchronous=FULL verificados.")
     except Exception as e:
         print(f"  [FAIL] Pilar 2: Fallo en prueba runtime de CortexPersistLedger: {e}")
         return False
 
     # Check 3: Monorepo Structural Integrity
     core_components = [
-        os.path.join(repo_root, "src"),
-        os.path.join(repo_root, "packages", "babylon60"),
-        os.path.join(repo_root, "apps"),
-        os.path.join(repo_root, "Cargo.toml"),
-        os.path.join(repo_root, "pyproject.toml")
+        repo_root / "src",
+        repo_root / "00_ABZU_KERNEL",
+        kish_engine_dir / "babylon60",
+        repo_root / "02_EDIN_SWARMS",
+        repo_root / "proof",
+        repo_root / "Cargo.toml",
+        repo_root / "pyproject.toml",
     ]
-    missing = [comp for comp in core_components if not os.path.exists(comp)]
+    missing = [str(comp) for comp in core_components if not comp.exists()]
     if missing:
         print(f"  [FAIL] Pilar 3: Faltan componentes estructurales en Monorepo BABYLON-60: {missing}")
         return False
-    print("  [OK] Pilar 3 (Monorepo Políglota): Componentes multimodular (Rust, Python, Web) verificados.")
-
+    print("  [OK] Pilar 3 (Monorepo Políglota): Componentes multimodular (Rust, Python, Lean 4) verificados.")
 
     print("\n✅ INVARIANTES DE CAUSALIDAD Y MONOREPO VERIFICADOS: Teorema Robinson-Moskv & Cortex Persist activos.")
     return True

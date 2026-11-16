@@ -251,11 +251,19 @@ async def _run_confined(
                 os.killpg(process.pid, signal.SIGKILL)
             except ProcessLookupError:
                 pass
-            await process.wait()
             for task in tasks:
                 if not task.done():
                     task.cancel()
             await asyncio.gather(*tasks, return_exceptions=True)
+
+            # asyncio (>= 3.12) only reports the exit once every pipe reached EOF. A reader
+            # stopped at its byte budget leaves its pipe paused, so discard what remains.
+            async def discard(stream: asyncio.StreamReader | None) -> None:
+                while stream is not None and await stream.read(65_536):
+                    pass
+
+            await asyncio.gather(discard(process.stdout), discard(process.stderr), return_exceptions=True)
+            await process.wait()
 
         reaping = asyncio.create_task(cleanup())
         cancelled = False

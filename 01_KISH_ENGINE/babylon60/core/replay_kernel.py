@@ -2,6 +2,7 @@
 # BABYLON-60 v4.0 Sovereign Hardened
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 # ============================================================================
+import asyncio
 import json
 import hashlib
 import time
@@ -53,6 +54,20 @@ class ReplayKernel:
     def __init__(self, db: Any, policy_version: str) -> None:
         self.db = db
         self.policy_version = policy_version
+        self._admission_lock = asyncio.Lock()
+
+    async def _verify_proposal_exists(self, proposal_hash: str) -> bool:
+        async with self.db.execute(
+            """
+            SELECT 1
+            FROM model_proposals
+            WHERE proposal_hash = ?
+            LIMIT 1
+            """,
+            (proposal_hash,),
+        ) as cursor:
+            row = await cursor.fetchone()
+        return row is not None
 
     async def current_head_hash(self) -> str:
         async with self.db.execute(
@@ -133,46 +148,50 @@ class ReplayKernel:
         Admite un evento al ledger si pasa invariantes.
         Esta es la única puerta legítima de mutación de estado.
         """
+        async with self._admission_lock:
+            if source_proposal_hash is not None:
+                if not await self._verify_proposal_exists(source_proposal_hash):
+                    raise EpistemicHalt("Propuesta origen inexistente en model_proposals")
 
-        parent_hash = await self.current_head_hash()
+            parent_hash = await self.current_head_hash()
 
-        event = {
-            "kind": kind,
-            "payload": payload,
-            "parent_hash": parent_hash,
-            "source_proposal_hash": source_proposal_hash,
-            "policy_version": self.policy_version,
-        }
+            event = {
+                "kind": kind,
+                "payload": payload,
+                "parent_hash": parent_hash,
+                "source_proposal_hash": source_proposal_hash,
+                "policy_version": self.policy_version,
+            }
 
-        event_hash = hash_payload(event)
+            event_hash = hash_payload(event)
 
-        self._validate_event(event)
+            self._validate_event(event)
 
-        await self.db.execute(
-            """
-            INSERT INTO ledger_events (
-                event_hash,
-                parent_hash,
-                kind,
-                payload_json,
-                source_proposal_hash,
-                policy_version,
-                created_at
+            await self.db.execute(
+                """
+                INSERT INTO ledger_events (
+                    event_hash,
+                    parent_hash,
+                    kind,
+                    payload_json,
+                    source_proposal_hash,
+                    policy_version,
+                    created_at
+                )
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    event_hash,
+                    parent_hash,
+                    kind,
+                    canonical_json(payload),
+                    source_proposal_hash,
+                    self.policy_version,
+                    int(time.time()),
+                ),
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?)
-            """,
-            (
-                event_hash,
-                parent_hash,
-                kind,
-                canonical_json(payload),
-                source_proposal_hash,
-                self.policy_version,
-                int(time.time()),
-            ),
-        )
 
-        return event_hash
+            return event_hash
 
     def _validate_event(self, event: Dict[str, Any]) -> None:
         """

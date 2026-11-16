@@ -1,0 +1,71 @@
+[
+  {
+    "id": "CAPTURE",
+    "description": "Every captured path has preserved bytes/type/mode and explicit disposition",
+    "status": "passed",
+    "evidence": [
+      "capture-integrity.json",
+      "partition-review.json",
+      "integration/source-preservation-final.json"
+    ]
+  },
+  {
+    "id": "OWNERSHIP",
+    "description": "Isolated worktrees share the consolidated baseline and have exclusive production ownership",
+    "status": "passed",
+    "evidence": [
+      "partition-review.json",
+      "consolidation.json",
+      "review/consolidation-review.json"
+    ]
+  },
+  {
+    "id": "NATIVE",
+    "description": "Required broker tests use a library built from candidate and have no native skips",
+    "status": "passed",
+    "evidence": [
+      "review/final-native-run/report.json",
+      "review/final-native-run/required-native-nodes.json"
+    ]
+  },
+  {
+    "id": "RECOVERY",
+    "description": "Independent observation covers persistence, restart, unknown outcomes and consumed approvals",
+    "status": "passed",
+    "evidence": [
+      "ring0/run-summary.json",
+      "ring2/manifest.json",
+      "review/hardware-final-review.json"
+    ]
+  },
+  {
+    "id": "FORMAL",
+    "description": "Real Lean accepts and rejects specified cases with operational scope documented",
+    "status": "passed",
+    "evidence": [
+      "ring1/status.json",
+      "ring1/cargo-checks.json",
+      "ring1/lean-build.json"
+    ]
+  },
+  {
+    "id": "HARDWARE",
+    "description": "One live Touch ID approval signs exact causal payload through candidate gate and Rust broker",
+    "status": "passed",
+    "evidence": [
+      "review/hardware-final-review.json",
+      "hardware-final/result.json",
+      "hardware-final/hardware-receipt.json"
+    ]
+  },
+  {
+    "id": "QUALITY",
+    "description": "Affected code quality, document links/budget and topology pass",
+    "status": "passed",
+    "evidence": [
+      "integration/final-quality.json",
+      "integration/onboarding-final.json",
+      "review/hardware-readiness.json"
+    ]
+  }
+]

@@ -1,0 +1,453 @@
+{
+  "shard": "078",
+  "findings": [
+    {
+      "title": "F60 reduction changes the represented value for partial base factors",
+      "severity": "P1",
+      "path": "00_ABZU_KERNEL/crates/babylon60-runtime/src/main.rs",
+      "line": 46,
+      "evidence": "reduce divides num by gcd(num,60^scale), but decrements scale only for whole factors of 60 (lines 43–51).",
+      "trigger": "BA.EXACT dividing numerator 2 by 60 produces F60::new(2,1); gcd=2 divides numerator to 1 without changing scale.",
+      "impact": "The result becomes 1/60 instead of 1/30; ordinary exact arithmetic is silently corrupted.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Division ignores the denominator scale",
+      "severity": "P1",
+      "path": "00_ABZU_KERNEL/crates/babylon60-runtime/src/main.rs",
+      "line": 337,
+      "evidence": "BA.EXACT reads numerator register scale but only val2.num; val2.scale is never applied (326–337).",
+      "trigger": "Divide integer 1 by register containing 1/60 (obtainable by dividing 1 by 60).",
+      "impact": "Returns 1 rather than 60, corrupting any subsequent arithmetic on fractional operands.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Replay digest authenticates only elapsed ticks",
+      "severity": "P2",
+      "path": "00_ABZU_KERNEL/crates/babylon60-runtime/src/main.rs",
+      "line": 190,
+      "evidence": "initial hash is constant BABYLON-60-INIT and replay_hash is SHA256(self.c.to_be_bytes()); trace/state bytes never enter either hash (184–192).",
+      "trigger": "Run different programs or change a traced opcode while preserving final tick count.",
+      "impact": "Exported proof artifacts have identical replay hashes despite different programs/states; the hash cannot establish replay integrity.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Unsupported instructions are silently accepted",
+      "severity": "P2",
+      "path": "00_ABZU_KERNEL/crates/babylon60-runtime/src/main.rs",
+      "line": 416,
+      "evidence": "Opcode match fallback is _ => {}; execution then records opcode and advances PC (416–430). Assigned tools/examples/navier_stokes_hunter.b60 uses DAH, LAL, NU at lines 34,43,46, none implemented in this match.",
+      "trigger": "Run the supplied Navier–Stokes script or mistype an opcode.",
+      "impact": "Program silently skips arithmetic and branch operations; the supplied example cannot detect its advertised threshold.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Script operands can panic the interpreter outside its halt path",
+      "severity": "P2",
+      "path": "00_ABZU_KERNEL/crates/babylon60-runtime/src/main.rs",
+      "line": 302,
+      "evidence": "ALLOC unconditionally indexes tokens[1], tokens[2] and coro.r[idx]; similar unchecked reads appear in other opcodes. Register file length is 64 (455).",
+      "trigger": "Script contains ALLOC alone or ALLOC F60 R64.",
+      "impact": "Out-of-bounds panic terminates the process without critical_halt/export_artifact diagnostics.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Unique query generator inevitably stops making progress",
+      "severity": "P1",
+      "path": "scripts/c5_thermo/cache_1000_memoization_bench.py",
+      "line": 73,
+      "evidence": "Both query length and word indices depend exclusively on len(unique_queries); length cycles mod 6 and vocabulary indices mod len(VOCAB).",
+      "trigger": "Execute the 1000-query benchmark.",
+      "impact": "The candidate repeats after at most lcm(6,len(VOCAB)) distinct lengths/offsets, fewer than 1000 here. On the first duplicate set size freezes and the while loop repeats forever before inference.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Mail migration deletes records belonging to unrelated subdomains",
+      "severity": "P1",
+      "path": "scripts/c5_icloud_deploy.py",
+      "line": 53,
+      "evidence": "The zone-wide records list is filtered only by MX type or TXT content v=spf1 (48–58); replacement records target only domain= babylon60.com (62–67).",
+      "trigger": "Zone includes MX or SPF records for a delegated mail subdomain in the returned records page.",
+      "impact": "Migration deletes those subdomain mail records and never restores them, disrupting unrelated mail routing and sender authorization.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Server binds all interfaces despite announcing loopback",
+      "severity": "P2",
+      "path": "02_EDIN_SWARMS/adapters/go_studio/cmd/server/main.go",
+      "line": 90,
+      "evidence": "port is :1234, log announces 127.0.0.1, then http.ListenAndServe(port,mux); handler has no authentication (46–83).",
+      "trigger": "Start the Go adapter on a host reachable from another machine.",
+      "impact": "The mock chat endpoint is exposed on all interfaces contrary to its displayed local address; remote clients can submit arbitrary request bodies.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Monitor presents constants as live security and treasury telemetry",
+      "severity": "P2",
+      "path": "tools/tamkarum_top.py",
+      "line": 51,
+      "evidence": "load_telemetry_data hardcodes allocation=46.66, gate LOCKED, ring0 NOMINAL, oracle ARMED (51–54); only DB/manifests/calendar are read (57–87). UI adds biometric status, <15ns latency and total legal compliance (126–129).",
+      "trigger": "Run --once with missing inputs or a failed/unavailable gate.",
+      "impact": "Operator receives successful-looking hardware/security/compliance status and treasury allocation without observations from those systems; failures cannot change these indicators.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Sequence validator accepts an empty normalized sequence",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/genomics/hygiene.py",
+      "line": 87,
+      "evidence": "Nonempty input is checked before upper().strip(); no emptiness check follows. Empty invalid_chars passes, seq_len=0 returns is_valid=True (87–116).",
+      "trigger": "Call validate_sequence with a nonempty whitespace-only sequence string.",
+      "impact": "Invalid empty biological input receives a valid result and the digest of empty bytes.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Byte-sized fields are emitted as eight-byte stores",
+      "severity": "P2",
+      "path": "examples/poc_bifurcation_4_structs.rs",
+      "line": 198,
+      "evidence": "Layout assigns Bool size/alignment (1,1) at 85, but Store/VolatileStore always emit mov qword [rax],rcx at 193–198; Load also uses qword.",
+      "trigger": "Use the public layout/backend path for a struct containing two Bool fields; its allocation is two bytes.",
+      "impact": "Generated assembly writes eight bytes for each Bool field, overwriting neighbors and allocated bounds. Existing Sensor example hides this by putting Bool in tail padding.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Comment fallback directs audit output without acquiring comments",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/youtube-analysis-pipeline/MODULE.md",
+      "line": 202,
+      "evidence": "On extraction failure, Phase 3b directs generation of SOCINT audit by projecting five vectors from predictable audience sociology (201–203).",
+      "trigger": "A comments audit cannot retrieve comments within 10 seconds or encounters anti-bot/error responses.",
+      "impact": "The prescribed fallback substitutes imagined audience reactions for unavailable observations; no explicit labeling requirement separates projections from an actual comments audit.",
+      "confidence": "high",
+      "kind": "docs"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "01_KISH_ENGINE/babylon60/bft/saga1_ml_sentinel.py",
+      "line": 76,
+      "observation": "MODEL_WEIGHT_TAMPERING is recognized by classifier but falls into BENIGN/default risk branch at 112–114.",
+      "uncertainty": "No consumer traced to establish whether this advisory label controls an actual quarantine or loading boundary; no authorization bypass claim made."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".cargo/config.toml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          9
+        ]
+      ],
+      "inventory_sha256": "4b7a5d6e07faf29ce1c407899e6bc0b49848fdcee3956e4c03fd33bbf0dc096a",
+      "hash_match": true
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-runtime/src/main.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          476
+        ]
+      ],
+      "inventory_sha256": "af8be5002dbf1ea7fd3bbfac41e235624303c0e28ac3dec58648e731ce7402f8",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/bft/saga1_ml_sentinel.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          137
+        ]
+      ],
+      "inventory_sha256": "53465eb2d229b5a0897d35ec9d8bba07cd79cdee1cbbf289235f42c037b4b06c",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/genomics/hygiene.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          116
+        ]
+      ],
+      "inventory_sha256": "db3159c052f55c82a0cb4f266c76fbf4af4d31b64c28d4fe663754a8220db6cc",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/transducers/polymath_engine.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          20
+        ]
+      ],
+      "inventory_sha256": "6346684ea23ed28e8101c64420c3ac719976486de437737cf6992fc99ad95030",
+      "hash_match": true
+    },
+    {
+      "path": "02_EDIN_SWARMS/adapters/go_studio/cmd/server/main.go",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          96
+        ]
+      ],
+      "inventory_sha256": "de9a591b8f2f14546d6803995e88129f2f6afd6ee633ce5af478b258abb88de3",
+      "hash_match": true
+    },
+    {
+      "path": "crates/eridu-infer/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          30
+        ]
+      ],
+      "inventory_sha256": "eebebf60a7b69eab99affeeb529c2a76565f8f644306653845c74750894d89c9",
+      "hash_match": true
+    },
+    {
+      "path": "docs/06_theory/MOSKV_1_APEX_BLUEPRINT.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          34
+        ]
+      ],
+      "inventory_sha256": "6202f17c9a18961f371e4c68bb166369dc3c288d7a528c6bb92c4c5d10fc845b",
+      "hash_match": true
+    },
+    {
+      "path": "examples/poc_bifurcation_4_structs.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          326
+        ]
+      ],
+      "inventory_sha256": "ae09e66a32595ad50476185e913311d26507293904b0a63cf100226aa2141166",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_cli/opsec_sentinel_c5.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          211
+        ]
+      ],
+      "inventory_sha256": "32b5e9103eb8200b95dc13460c78a91d80524eb46008d2ce21441a3b662ba0f6",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_icloud_deploy.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          81
+        ]
+      ],
+      "inventory_sha256": "fb8414b9e3583108e1caaae3dec41a5bada01efb17c7c1d415029592cbee328e",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_thermo/cache_1000_memoization_bench.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          102
+        ]
+      ],
+      "inventory_sha256": "592643d705676f6a3c95a7e708318e3fb44f281dc98af7f43a2e389d6caa6d05",
+      "hash_match": true
+    },
+    {
+      "path": "src/dec_ext.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          186
+        ]
+      ],
+      "inventory_sha256": "d4c20bce761d4f717f20d9304bc17d7884d5101cda573fa3794b6b6393d4e2ce",
+      "hash_match": true
+    },
+    {
+      "path": "tests/test_atms_hardening.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          54
+        ]
+      ],
+      "inventory_sha256": "792176f115e9101245fadf24c496b6cb3d47f65546e5c10c637de4d1e48d2187",
+      "hash_match": true
+    },
+    {
+      "path": "tests/test_jcs_regressions.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          87
+        ]
+      ],
+      "inventory_sha256": "7a45c23dda31f3592d8f3793edd2ad4c772a931dc039c9df321e774b4862fb7f",
+      "hash_match": true
+    },
+    {
+      "path": "tools/examples/navier_stokes_hunter.b60",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          74
+        ]
+      ],
+      "inventory_sha256": "2918c32a8bc48bb5339ac3358ab8f3309aa15e53daa9466e3bf46c53893124dc",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/cache-reserve/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          194
+        ]
+      ],
+      "inventory_sha256": "c46b8bd7eb609220a7a23c23d1ee56918c823fb5238bbb4f16078b1cb440fd74",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/pulumi/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          100
+        ]
+      ],
+      "inventory_sha256": "2803dd115110b5f4b8ac414fb78debbe06c3a653d57032aee2374f89eca4d2d5",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/vectorize/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          76
+        ]
+      ],
+      "inventory_sha256": "ed128e78cb088cd62d3a4a4ada65aa7729e09b0bc9ecde1066fb38d00906fdaf",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-media-platform-epistemology/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          65
+        ]
+      ],
+      "inventory_sha256": "c9b1acddb7d729dd138adfabc174b5dcefa78d8f873c8e6e928b4e4117254f33",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents/agent_46_site_playbooks_ups.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "inventory_sha256": "9e47faa54f66d0e82a23af44b742b82f9416a935b6a2a0d3c35739614b79d65b",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/autodidact-omega/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          196
+        ]
+      ],
+      "inventory_sha256": "4db4e75cfe033eccf16e00c808c01f03ea0453c3ec0f2bba23fcbc6e79cb2d10",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/youtube-analysis-pipeline/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          297
+        ]
+      ],
+      "inventory_sha256": "609c2c89d6555cc9ee1e9cc1d74e436ddd8c154f9c447167463160ca29bc80cb",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/github-architect/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "inventory_sha256": "cf4a9520cb0cea993c75baedcbfd9be21ae1e576c9a87ec1294a4d3769e2cb21",
+      "hash_match": true
+    },
+    {
+      "path": "tools/tamkarum_top.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          159
+        ]
+      ],
+      "inventory_sha256": "b9e628b171b13dcd7fa737e946166ed89d29a1dc5e484ab3cccd3a92dd43bb54",
+      "hash_match": true
+    }
+  ],
+  "tool_limitations": [
+    "Native codebase graph tools are not exposed in this session; used targeted file reads and rg.",
+    "Static audit only: no tests, builds, service calls, or runtime execution.",
+    "External API reference claims were read but not independently validated against current vendor documentation."
+  ],
+  "tests_run": []
+}

@@ -1,0 +1,427 @@
+{
+  "shard": "004",
+  "findings": [
+    {
+      "title": "Non-JSON quality gate returns success when leaked artifacts are its only failure",
+      "severity": "P2",
+      "path": "scripts/c5_quality_gates/audit_scripts_quality.py",
+      "line": 169,
+      "evidence": "success is false at line 131 for leaked_artifacts; JSON mode returns it at 150, but text mode checks only violations at 163-169 and unconditionally returns True at 173.",
+      "trigger": "Run audit_scripts_quality.py without --json with valid Python scripts and a disallowed non-hidden artifact in scripts/.",
+      "impact": "CLI exits zero and prints ALL SCRIPTS PASSED despite reporting an artifact leak; pre-commit/CI callers can accept a failed gate.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Git history verifier treats Git errors as a clean history",
+      "severity": "P2",
+      "path": "scripts/c5_verifiers/verify_p0_rotation.py",
+      "line": 31,
+      "evidence": "sh() runs git with check=False and returns only stdout (lines 31-35); exceptions also return an empty string. Lines 50-55 interpret empty output as no history.",
+      "trigger": "git log fails (corrupt repository, inaccessible object database, missing Git, or invocation outside a repository containing the expected config files).",
+      "impact": "Verifier can emit a green repository verdict without having successfully examined history, defeating the advertised secret-history check.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "FIFO lifecycle test deletes the native host shared queue",
+      "severity": "P2",
+      "path": "tests/test_moskv_native_host.py",
+      "line": 104,
+      "evidence": "Test imports production QUEUE_FILE then unlinks it at lines 104 and 120 without monkeypatching. scripts/c5_cli/moskv_native_host.py:181 sets QUEUE_FILE=/tmp/moskv_fx_queue.json.",
+      "trigger": "Run this unit test while the native messaging host has queued prompts.",
+      "impact": "Queued user work is deleted and the test mutates shared live state; parallel tests or host operations can interfere.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "CTRE commits non-finite drift observations",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/kernel/c6_absolute/ctre_engine.py",
+      "line": 49,
+      "evidence": "No finiteness validation before percentile/mean; NaN propagates as var_limit when tail_risks is empty (31-39), and NaN > threshold is false at line 52.",
+      "trigger": "Call enforce_thermodynamic_brake with a NaN-containing list, including [float(\"nan\")].",
+      "impact": "Returns ACTION_COMMIT and records a non-finite risk rather than rejecting invalid observations. Traced consumer eip7702_hunter.py:65-73 only updates counters/messages; no actual on-chain execution is established.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Risk rounding precedes CTRE threshold enforcement",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/kernel/c6_absolute/ctre_engine.py",
+      "line": 50,
+      "evidence": "cvar_risk is rounded to five decimals at line 50 before strict threshold comparison at line 52.",
+      "trigger": "Default threshold 0.015 and an observation such as 0.015004, whose CVaR exceeds the threshold but rounds to 0.015.",
+      "impact": "Reports ACTION_COMMIT despite exceeding the configured maximum risk. Observed consumer is a simulator/counter, not proven transaction execution.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Simulated tier stress test certifies IDE behavior it never exercises",
+      "severity": "P2",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/poc_t3_stress_test.rs",
+      "line": 117,
+      "evidence": "Mocks at lines 15-38 return constant strings after sleeps; loop 96-99 runs sequentially; line 117 unconditionally declares IDE never blocked and empirical falsification passed.",
+      "trigger": "Run the PoC successfully, including cases where its mock latencies differ from real inference or IDE behavior.",
+      "impact": "Output can be mistaken for verification of actual IDE availability although no IDE state or real inference path is checked.",
+      "confidence": "high",
+      "kind": "example"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".agents/rules/_archive/c5_frontier_and_cultural_epistemology.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          108
+        ]
+      ],
+      "sha256_expected": "a77a9a691c87e1d372c722502f008d9a034c1fde0deea12927824812f511b911",
+      "sha256_observed": "a77a9a691c87e1d372c722502f008d9a034c1fde0deea12927824812f511b911",
+      "hash_matches": true,
+      "notes": "Complete static text review, including follow-up reads through EOF; no execution or upstream API compatibility certification."
+    },
+    {
+      "path": ".github/workflows/deploy_docs.yml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          58
+        ]
+      ],
+      "sha256_expected": "809ecbf98e73804a8e837b1c7bb4b25c353b5dde2b03a817ecab853af9a2772e",
+      "sha256_observed": "809ecbf98e73804a8e837b1c7bb4b25c353b5dde2b03a817ecab853af9a2772e",
+      "hash_matches": true,
+      "notes": "Complete static text review, including follow-up reads through EOF; no execution or upstream API compatibility certification."
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/poc_t3_stress_test.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          118
+        ]
+      ],
+      "sha256_expected": "31a79c65afa1d17a3d065e01f7e6336234f9867754c685cf8b10fa1bd19269fb",
+      "sha256_observed": "31a79c65afa1d17a3d065e01f7e6336234f9867754c685cf8b10fa1bd19269fb",
+      "hash_matches": true,
+      "notes": "Complete static text review, including follow-up reads through EOF; no execution or upstream API compatibility certification."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/compat/__init__.py",
+      "status": "reviewed_full",
+      "ranges": [],
+      "sha256_expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sha256_observed": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_matches": true,
+      "notes": "Complete static text review, including follow-up reads through EOF; no execution or upstream API compatibility certification."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/c6_absolute/ctre_engine.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          106
+        ]
+      ],
+      "sha256_expected": "9639264bb77d25173d295a4c0009d6d97130c3aa4405ebbfdf974e0a8ea4f96d",
+      "sha256_observed": "9639264bb77d25173d295a4c0009d6d97130c3aa4405ebbfdf974e0a8ea4f96d",
+      "hash_matches": true,
+      "notes": "Complete static text review, including follow-up reads through EOF; no execution or upstream API compatibility certification."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/utils/sandbox.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          12
+        ]
+      ],
+      "sha256_expected": "59c6db06e6cafe0dcf2b4699c3d7ee81e4e1b15f5b99ff86ec1d3269c1615d1d",
+      "sha256_observed": "59c6db06e6cafe0dcf2b4699c3d7ee81e4e1b15f5b99ff86ec1d3269c1615d1d",
+      "hash_matches": true,
+      "notes": "Complete static text review, including follow-up reads through EOF; no execution or upstream API compatibility certification."
+    },
+    {
+      "path": "02_EDIN_SWARMS/docs/SWARM_CTA_FORMAL_SPECIFICATION.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          121
+        ]
+      ],
+      "sha256_expected": "dbaaabf7ec8f7a7d49c5bf1a16dae477bff26e738802edaba4e679660b95a291",
+      "sha256_observed": "dbaaabf7ec8f7a7d49c5bf1a16dae477bff26e738802edaba4e679660b95a291",
+      "hash_matches": true,
+      "notes": "Complete static text review, including follow-up reads through EOF; no execution or upstream API compatibility certification."
+    },
+    {
+      "path": "docs/01_spec/evidence/solver-outcomes-20261026.json",
+      "status": "partial",
+      "ranges": [
+        [
+          1,
+          160
+        ]
+      ],
+      "sha256_expected": "a83ac2570d17f6e79951add53e76973f41a4559cd2f48384bb9ee3665dcdf7f8",
+      "sha256_observed": "a83ac2570d17f6e79951add53e76973f41a4559cd2f48384bb9ee3665dcdf7f8",
+      "hash_matches": true,
+      "notes": "Historical evidence artifact only partially reviewed; recorded commands/results were not rerun or independently certified."
+    },
+    {
+      "path": "docs/README_ES.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          415
+        ]
+      ],
+      "sha256_expected": "212c7d62ab4295764447b244a306ea1877f398fb93d7b9c13d7ef2e7cca3bb0c",
+      "sha256_observed": "212c7d62ab4295764447b244a306ea1877f398fb93d7b9c13d7ef2e7cca3bb0c",
+      "hash_matches": true,
+      "notes": "Complete static text review, including follow-up reads through EOF; no execution or upstream API compatibility certification."
+    },
+    {
+      "path": "proof/bundles/attestation_bundle_v1/commit.txt",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          1
+        ]
+      ],
+      "sha256_expected": "45c83b670a8f96b45146784510288ec8cbe72f79419e9c9288f794810b142179",
+      "sha256_observed": "45c83b670a8f96b45146784510288ec8cbe72f79419e9c9288f794810b142179",
+      "hash_matches": true,
+      "notes": "Complete static text review, including follow-up reads through EOF; no execution or upstream API compatibility certification."
+    },
+    {
+      "path": "scripts/c5_demos/c5_swarm_1000_audiovisual_compiler.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          358
+        ]
+      ],
+      "sha256_expected": "2bfd8bc55cc1ff7b768468b07558903f83db947ff3a6149f39abcf1ea3b55687",
+      "sha256_observed": "2bfd8bc55cc1ff7b768468b07558903f83db947ff3a6149f39abcf1ea3b55687",
+      "hash_matches": true,
+      "notes": "Complete static text review, including follow-up reads through EOF; no execution or upstream API compatibility certification."
+    },
+    {
+      "path": "scripts/c5_quality_gates/audit_scripts_quality.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          187
+        ]
+      ],
+      "sha256_expected": "c828f04803b2932a1abc934d27e7b6c92baa472e5b650619949a236a2742df04",
+      "sha256_observed": "c828f04803b2932a1abc934d27e7b6c92baa472e5b650619949a236a2742df04",
+      "hash_matches": true,
+      "notes": "Complete static text review, including follow-up reads through EOF; no execution or upstream API compatibility certification."
+    },
+    {
+      "path": "scripts/c5_verifiers/verify_p0_rotation.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          93
+        ]
+      ],
+      "sha256_expected": "9763566a1a53de542023c14d82fdc3e129d376eab87ab0fd6821a5273cc53301",
+      "sha256_observed": "9763566a1a53de542023c14d82fdc3e129d376eab87ab0fd6821a5273cc53301",
+      "hash_matches": true,
+      "notes": "Complete static text review, including follow-up reads through EOF; no execution or upstream API compatibility certification."
+    },
+    {
+      "path": "src/ontology_tests.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          349
+        ]
+      ],
+      "sha256_expected": "e148611a7e82005b614b28dba87faeba4c859be66f2d63f51857af1cfdc1bb35",
+      "sha256_observed": "e148611a7e82005b614b28dba87faeba4c859be66f2d63f51857af1cfdc1bb35",
+      "hash_matches": true,
+      "notes": "Complete static text review, including follow-up reads through EOF; no execution or upstream API compatibility certification."
+    },
+    {
+      "path": "tests/test_authorization_regression.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          251
+        ]
+      ],
+      "sha256_expected": "76cb5f1e4e5b050e80f6703a5066f56cdf89db7d3cee61abe49dcc7b1fc713ea",
+      "sha256_observed": "76cb5f1e4e5b050e80f6703a5066f56cdf89db7d3cee61abe49dcc7b1fc713ea",
+      "hash_matches": true,
+      "notes": "Complete static text review, including follow-up reads through EOF; no execution or upstream API compatibility certification."
+    },
+    {
+      "path": "tests/test_moskv_native_host.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          127
+        ]
+      ],
+      "sha256_expected": "c59a51e487e00890fa2bb4c7e4b1a1193693038e9c493dd4a9c58ae16be7cdbc",
+      "sha256_observed": "c59a51e487e00890fa2bb4c7e4b1a1193693038e9c493dd4a9c58ae16be7cdbc",
+      "hash_matches": true,
+      "notes": "Complete static text review, including follow-up reads through EOF; no execution or upstream API compatibility certification."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/agents-sdk/references/streaming-chat.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          198
+        ]
+      ],
+      "sha256_expected": "519bd7acbe7d2e5a0d253e4d87de24f499deb457e6806f7a147204e719fabe7a",
+      "sha256_observed": "519bd7acbe7d2e5a0d253e4d87de24f499deb457e6806f7a147204e719fabe7a",
+      "hash_matches": true,
+      "notes": "Complete static text review, including follow-up reads through EOF; no execution or upstream API compatibility certification."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/do-storage/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          112
+        ]
+      ],
+      "sha256_expected": "b5c021af150ea3122d4e2ff9f2a6627849867f300f4e8f04d7d430391ea633fa",
+      "sha256_observed": "b5c021af150ea3122d4e2ff9f2a6627849867f300f4e8f04d7d430391ea633fa",
+      "hash_matches": true,
+      "notes": "Complete static text review, including follow-up reads through EOF; no execution or upstream API compatibility certification."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/realtime-sfu/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          158
+        ]
+      ],
+      "sha256_expected": "da9965e0a9169633f762b5e3932f4aba88ca612ff07dfe1d3bbf5c60b6e3d444",
+      "sha256_observed": "da9965e0a9169633f762b5e3932f4aba88ca612ff07dfe1d3bbf5c60b6e3d444",
+      "hash_matches": true,
+      "notes": "Complete static text review, including follow-up reads through EOF; no execution or upstream API compatibility certification."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workers-for-platforms/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          188
+        ]
+      ],
+      "sha256_expected": "d24005af33bc58a671ef3a8a1aa4ea0d2ef48da22dd07cabe7ddeb8e50db3168",
+      "sha256_observed": "d24005af33bc58a671ef3a8a1aa4ea0d2ef48da22dd07cabe7ddeb8e50db3168",
+      "hash_matches": true,
+      "notes": "Complete static text review, including follow-up reads through EOF; no execution or upstream API compatibility certification."
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/examples/Harmonic_Series_Spectral_Cloud.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          66
+        ]
+      ],
+      "sha256_expected": "24fe6bd07275e032aa74e385dbabb29d2d6d711f3ab2555367338f21ba8c4395",
+      "sha256_observed": "24fe6bd07275e032aa74e385dbabb29d2d6d711f3ab2555367338f21ba8c4395",
+      "hash_matches": true,
+      "notes": "Complete static text review, including follow-up reads through EOF; no execution or upstream API compatibility certification."
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_08_code_changes.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          61
+        ]
+      ],
+      "sha256_expected": "0c2b9e29f67700acf8f76ea110744f5d3419f87d83c0d84db0a064cf6721e320",
+      "sha256_observed": "0c2b9e29f67700acf8f76ea110744f5d3419f87d83c0d84db0a064cf6721e320",
+      "hash_matches": true,
+      "notes": "Complete static text review, including follow-up reads through EOF; no execution or upstream API compatibility certification."
+    },
+    {
+      "path": "tools/skill_library/global/c5-information-thermodynamics/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          41
+        ]
+      ],
+      "sha256_expected": "70781390409a572dc69e8f07c37f4587e084f1b9a1251e643a753cc488e2f5a0",
+      "sha256_observed": "70781390409a572dc69e8f07c37f4587e084f1b9a1251e643a753cc488e2f5a0",
+      "hash_matches": true,
+      "notes": "Complete static text review, including follow-up reads through EOF; no execution or upstream API compatibility certification."
+    },
+    {
+      "path": "tools/skill_library/global/c5-terminological-archaeology/scripts/c5_orphan_phrase_detector.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          256
+        ]
+      ],
+      "sha256_expected": "626dfebab6708f019f3a0d1d3b7859599ebcc665e20c8f0be12ee0d67e8d1024",
+      "sha256_observed": "626dfebab6708f019f3a0d1d3b7859599ebcc665e20c8f0be12ee0d67e8d1024",
+      "hash_matches": true,
+      "notes": "Complete static text review, including follow-up reads through EOF; no execution or upstream API compatibility certification."
+    },
+    {
+      "path": "tools/skill_library/global/soulseek-p2p-audio-acquisition/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          41
+        ]
+      ],
+      "sha256_expected": "bb80d4d321a1ef7a6565a09b77e99b5a6e2ae3a6e6cb4c6cc5821a7472c46ea1",
+      "sha256_observed": "bb80d4d321a1ef7a6565a09b77e99b5a6e2ae3a6e6cb4c6cc5821a7472c46ea1",
+      "hash_matches": true,
+      "notes": "Complete static text review, including follow-up reads through EOF; no execution or upstream API compatibility certification."
+    }
+  ],
+  "tool_limitations": [
+    "Codebase graph tools not exposed in this session; targeted source/text fallback used.",
+    "No repository scripts, tests, builds, runtime effects, commits, or push executed; tests_run is empty.",
+    "External library examples reviewed as text; API compatibility was not verified against official upstream documentation.",
+    "Frozen manifest read and all assigned hashes matched; no symlinks among assigned paths.",
+    "Follow-up targeted reads completed source/docs coverage; solver-outcomes historical evidence remains explicitly partial at lines 1-160 of 585."
+  ],
+  "tests_run": []
+}

@@ -1,0 +1,412 @@
+{
+  "shard": "018",
+  "findings": [
+    {
+      "title": "PSD check accepts indefinite residual matrices",
+      "severity": "P1",
+      "path": "01_KISH_ENGINE/babylon60/kernel/ns_z3_firewall.py",
+      "line": 106,
+      "evidence": "Only leading minors m_xx, det(M[:2,:2]), det(M) are constrained nonnegative (106–115); sat is labeled VALID_PROOF (120–126).",
+      "trigger": "Use lambda_max=0, diagonal strain=(0,1,1), off-diagonal strain=0. Residual diag(0,-1,-1) has all three checked minors zero.",
+      "impact": "Returns VALID_PROOF although w=(0,1,0) violates the stated quadratic bound. Positive semidefiniteness requires all principal minors, unlike the positive definite leading-minor criterion.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Taint serialization admits distinct node contents with identical hashes",
+      "severity": "P2",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/lib.rs",
+      "line": 98,
+      "evidence": "The hasher appends node.id bytes then payload bytes without lengths/separators; edges are not serialized (95–100).",
+      "trigger": "Compare one-node graphs (id=\"a\", payload=b\"bc\") and (id=\"ab\", payload=b\"c\").",
+      "impact": "Both feed identical bytes to BLAKE3 and return identical taint despite different graph contents; this is a serialization ambiguity, independent of cryptographic collision resistance.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Selector engine labels heuristics as measured optimality",
+      "severity": "P2",
+      "path": "scripts/guards/c5_signature_engine.py",
+      "line": 433,
+      "evidence": "evaluate_selector_fitness declares ÓPTIMO solely when active tier/effort equals infer_optimal_tier (427–438); generate_signature enables audit_selector by default (521,535–546).",
+      "trigger": "Generate a signature with known model/mode whose tier matches the keyword classification.",
+      "impact": "Output asserts optimality without comparative cost/time/error evidence, contrary to .babylon60rules model-and-presentation requirement. No selector mutation or execution bypass is alleged.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Missing effort metadata is replaced by a fabricated mode",
+      "severity": "P2",
+      "path": "scripts/guards/c5_signature_engine.py",
+      "line": 108,
+      "evidence": "parse_selector_string maps model-name words to Fast/High and otherwise returns Standard (108–114); detect_active_model_and_mode calls it even when effort variable is absent (151–163).",
+      "trigger": "Provide OPENAI_MODEL but omit OPENAI_REASONING_EFFORT, or supply a hook model with no effort.",
+      "impact": "Signatures present an inferred effort as sourced environment/hook metadata instead of preserving No expuesto, undermining model/effort provenance.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Claimed score lower-bound theorem omits necessary assumptions",
+      "severity": "P2",
+      "path": "docs/02_ontology/axiom_axiomatization.md",
+      "line": 322,
+      "evidence": "THM-3 assumes G,L,E_base,B,P,M_p and speedup, but proof substitutes A=1 and E=0.04; AX-EX-1 defines E=max(E_base,T_w/100) and includes independent positive A (181–186).",
+      "trigger": "Choose A sufficiently small, or T_w sufficiently large, while satisfying every stated THM-3 premise.",
+      "impact": "Score can fall below 700, so the advertised theorem is not entailed by its premises; add the missing A and actual denominator bounds or narrow the conclusion.",
+      "confidence": "high",
+      "kind": "docs"
+    },
+    {
+      "title": "Attestation summary counts disagree with taxonomy",
+      "severity": "P3",
+      "path": "proof/bundles/attestation_bundle_v2/test_results.json",
+      "line": 37,
+      "evidence": "UNTESTED array has seven entries (23–29), while matrix_counts.untested=5 and total_claims=21 (37–41). Arrays contain 12 supported + 2 falsified + 7 untested + 2 unfalsifiable = 23.",
+      "trigger": "Consume matrix_counts as the bundle coverage summary.",
+      "impact": "Consumers undercount untested claims and total scope. This finding concerns internal consistency only; stored test claims were not independently reproduced.",
+      "confidence": "high",
+      "kind": "docs"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "01_KISH_ENGINE/babylon60/verifiable_inference/__init__.py",
+      "line": 34,
+      "hypothesis": "Payload is passed as c_char_p without a length; embedded NUL bytes may cause native/fallback disagreement.",
+      "reason_unconfirmed": "Native implementation was not found by targeted search under 00_ABZU_KERNEL; no native behavior was executed or inferred as established."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".agents/skills/babylon60-kernel-invariants/agents/openai.yaml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          4
+        ]
+      ],
+      "sha256_expected": "f32f8d67665d0253ba85072453438e1d6346e3d164b3f7fdf1a6121ea401d057",
+      "sha256_actual": "f32f8d67665d0253ba85072453438e1d6346e3d164b3f7fdf1a6121ea401d057",
+      "hash_match": true
+    },
+    {
+      "path": ".github/workflows/skill-convergence-audit.yml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          74
+        ]
+      ],
+      "sha256_expected": "016753b1177baa2a8e4199ba6eb019fefcaffc96e31266cedc9f786de830123b",
+      "sha256_actual": "016753b1177baa2a8e4199ba6eb019fefcaffc96e31266cedc9f786de830123b",
+      "hash_match": true
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/lib.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          139
+        ]
+      ],
+      "sha256_expected": "9836406123b1328bdeeeddc0f3fe6204b450afc80fc7bd2b182fefb4faa82332",
+      "sha256_actual": "9836406123b1328bdeeeddc0f3fe6204b450afc80fc7bd2b182fefb4faa82332",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/compliance_exporter/templates/header.html.j2",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          4
+        ]
+      ],
+      "sha256_expected": "344a18399daa35426e14c6671090ca97ce766d05e9f0b7ecb38679133ac76f77",
+      "sha256_actual": "344a18399daa35426e14c6671090ca97ce766d05e9f0b7ecb38679133ac76f77",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/ns_z3_firewall.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          487
+        ]
+      ],
+      "sha256_expected": "8c770d13506eea3376bb072d905d7ce65994395989bc0686ba18a779c6d5a65d",
+      "sha256_actual": "8c770d13506eea3376bb072d905d7ce65994395989bc0686ba18a779c6d5a65d",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/verifiable_inference/__init__.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          68
+        ]
+      ],
+      "sha256_expected": "7c9b8102eba3e7cfa401b6e859ada46b657ff870cf559cc44ef62915184da4b7",
+      "sha256_actual": "7c9b8102eba3e7cfa401b6e859ada46b657ff870cf559cc44ef62915184da4b7",
+      "hash_match": true
+    },
+    {
+      "path": "LICENSE",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          22
+        ]
+      ],
+      "sha256_expected": "4c0feb0f48586176789f42815859e2714a0486cccc72fbc9e3422eb29d155536",
+      "sha256_actual": "4c0feb0f48586176789f42815859e2714a0486cccc72fbc9e3422eb29d155536",
+      "hash_match": true
+    },
+    {
+      "path": "docs/02_ontology/axiom_axiomatization.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          382
+        ]
+      ],
+      "sha256_expected": "df5abc66c8a24e7a55a7dd6673628df56e2d9232f6c12deb81471849ece364a0",
+      "sha256_actual": "df5abc66c8a24e7a55a7dd6673628df56e2d9232f6c12deb81471849ece364a0",
+      "hash_match": true
+    },
+    {
+      "path": "docs/papers/interoceptive-control/benchmarks/ablation_results.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          20
+        ]
+      ],
+      "sha256_expected": "0a1af783cf84e4ab94362bb38e6a8fa88a8a1158fc9284ec7250d487d3b5b348",
+      "sha256_actual": "0a1af783cf84e4ab94362bb38e6a8fa88a8a1158fc9284ec7250d487d3b5b348",
+      "hash_match": true
+    },
+    {
+      "path": "proof/bundles/attestation_bundle_v2/test_results.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          104
+        ]
+      ],
+      "sha256_expected": "78ada3db317672996dfb4220a220b3edaca4d6c70782644768f03b8ea3181670",
+      "sha256_actual": "78ada3db317672996dfb4220a220b3edaca4d6c70782644768f03b8ea3181670",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_demos/leandojo_z3_firewall_poc.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          63
+        ]
+      ],
+      "sha256_expected": "55628ed663554678161f292042fc32ddd6d97fbebbae33f5f2a2ac4b0ce03948",
+      "sha256_actual": "55628ed663554678161f292042fc32ddd6d97fbebbae33f5f2a2ac4b0ce03948",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_quality_gates/experience_pilot.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          939
+        ]
+      ],
+      "sha256_expected": "5694f03211cf4861177fc2d10a9cd93bad02e24c0446cb30ebb1a5f7c21b0a6e",
+      "sha256_actual": "5694f03211cf4861177fc2d10a9cd93bad02e24c0446cb30ebb1a5f7c21b0a6e",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/guards/c5_signature_engine.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          623
+        ]
+      ],
+      "sha256_expected": "1e61de4e2964b8e53f81ec5347b2732ca7251f4826e81c76842be8c3f2763170",
+      "sha256_actual": "1e61de4e2964b8e53f81ec5347b2732ca7251f4826e81c76842be8c3f2763170",
+      "hash_match": true
+    },
+    {
+      "path": "tests/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          65
+        ]
+      ],
+      "sha256_expected": "d0863f3e10716277a60b493b672d3297e35c0352cc47b54df1891d36cb512019",
+      "sha256_actual": "d0863f3e10716277a60b493b672d3297e35c0352cc47b54df1891d36cb512019",
+      "hash_match": true
+    },
+    {
+      "path": "tests/test_bounty_orchestrator_cli.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          240
+        ]
+      ],
+      "sha256_expected": "a675d0f7b526c180ae896aaeb04c2f8f04826b71df0097a7ef189df4b92bedd8",
+      "sha256_actual": "a675d0f7b526c180ae896aaeb04c2f8f04826b71df0097a7ef189df4b92bedd8",
+      "hash_match": true
+    },
+    {
+      "path": "tests/test_prompt_exergy_oracle.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          381
+        ]
+      ],
+      "sha256_expected": "f862a93a7b9b7f83ee8697682b43f5d59b59226726251c4208c9876acbc5d392",
+      "sha256_actual": "f862a93a7b9b7f83ee8697682b43f5d59b59226726251c4208c9876acbc5d392",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/agents-sdk/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          89
+        ]
+      ],
+      "sha256_expected": "29d687150ee9d9e02f9000fabce42919a7d2f2d5c522b8d85f7173aadbd85fd1",
+      "sha256_actual": "29d687150ee9d9e02f9000fabce42919a7d2f2d5c522b8d85f7173aadbd85fd1",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/email-workers/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          151
+        ]
+      ],
+      "sha256_expected": "5e68cc419796e43429adf376741c01672f32ea6cb16ebef86865b19f0e04b4f5",
+      "sha256_actual": "5e68cc419796e43429adf376741c01672f32ea6cb16ebef86865b19f0e04b4f5",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/secrets-store/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          74
+        ]
+      ],
+      "sha256_expected": "82c078e9d71d9bd28b2f23535f086e74bec7adad08e3cb6c289326a4a6e14550",
+      "sha256_actual": "82c078e9d71d9bd28b2f23535f086e74bec7adad08e3cb6c289326a4a6e14550",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workers/frameworks.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          197
+        ]
+      ],
+      "sha256_expected": "520538d460fa6a11360163e3ed0725d840946c776feb9e00bd0bafd9f1cff699",
+      "sha256_actual": "520538d460fa6a11360163e3ed0725d840946c776feb9e00bd0bafd9f1cff699",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/scripts/pianoroll_deployer.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          121
+        ]
+      ],
+      "sha256_expected": "746065b4b2ba59de0cda1736da7ebc7411a0ab3b2543f070330d71d2417f9486",
+      "sha256_actual": "746065b4b2ba59de0cda1736da7ebc7411a0ab3b2543f070330d71d2417f9486",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_22_restaurant_recommendations.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "sha256_expected": "adaa4a854173475616d369734638b5d429982f774e4ae69ba39e3f5893920a7c",
+      "sha256_actual": "adaa4a854173475616d369734638b5d429982f774e4ae69ba39e3f5893920a7c",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-plan-omega/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "sha256_expected": "6313599ad66b060a9395af9f102d533cdcaff9da7588336e410c5b2c60d8127a",
+      "sha256_actual": "6313599ad66b060a9395af9f102d533cdcaff9da7588336e410c5b2c60d8127a",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-wetware-and-venture-ops/references/modules/c5-spaced-repetition-architect/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          49
+        ]
+      ],
+      "sha256_expected": "29f5e7de13f2b937f1bd16e0ad8a5765d3ca6f41e0766018eb61f99cd6ce06a2",
+      "sha256_actual": "29f5e7de13f2b937f1bd16e0ad8a5765d3ca6f41e0766018eb61f99cd6ce06a2",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/maintenance.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          308
+        ]
+      ],
+      "sha256_expected": "3ae3689581df568cfc1ca73db398fd9af139c9c72366b47fe5f8bde72eafefd3",
+      "sha256_actual": "3ae3689581df568cfc1ca73db398fd9af139c9c72366b47fe5f8bde72eafefd3",
+      "hash_match": true
+    }
+  ],
+  "tool_limitations": [
+    "Native codebase-memory graph tools are not exposed in this session; targeted file reads and rg used instead.",
+    "Audit-only scope: no tests, runtime execution, CI queries, or external API-version validation.",
+    "All shard hashes match frozen entries. Static review does not validate historical benchmark or attestation results."
+  ],
+  "tests_run": []
+}

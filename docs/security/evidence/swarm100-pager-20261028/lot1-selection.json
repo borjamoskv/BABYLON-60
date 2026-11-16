@@ -1,0 +1,78 @@
+{
+  "filter": {
+    "severity": "P1",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN"
+  },
+  "source_queue": "docs/security/evidence/swarm100-round3-20261028/remediation-queue.json",
+  "queue_sha256_at_selection": "430146dc08ab3e9e26cba985db70a05e07bb50fce6e18dd9ee84750741999e2a",
+  "selected_count": 3,
+  "modules_in_proposed_order": [
+    {
+      "candidate_id": "SW100-C0373",
+      "module": "01_KISH_ENGINE/babylon60/transducers/c5_mail_transducer.py",
+      "affected_paths": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/transducers/c5_mail_transducer.py",
+          "sha256": "f0b8bb74745c4b68221c8b5558c1c5d3b35072774c6841bebc7867a1c09c660f"
+        }
+      ],
+      "decision": "REPRODUCED",
+      "state": "OPEN",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/03-source-evidence.json",
+        "docs/security/evidence/swarm100-round3-20261028/03-isolated-fixtures.py",
+        "docs/security/evidence/swarm100-round3-20261028/03-isolated-fixtures.json"
+      ],
+      "source_edited": false,
+      "related_P2_ids": []
+    },
+    {
+      "candidate_id": "SW100-C0501",
+      "module": "tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+      "affected_paths": [
+        {
+          "path": "tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+          "sha256": "002d35e9e34b1cbd4e2a970d96a33e833500c23b74098de2937991f4bd6967c7"
+        },
+        {
+          "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+          "sha256": "002d35e9e34b1cbd4e2a970d96a33e833500c23b74098de2937991f4bd6967c7"
+        }
+      ],
+      "decision": "REPRODUCED",
+      "state": "OPEN",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/03-source-evidence.json",
+        "docs/security/evidence/swarm100-round3-20261028/03-isolated-fixtures.py",
+        "docs/security/evidence/swarm100-round3-20261028/03-isolated-fixtures.json"
+      ],
+      "source_edited": false,
+      "related_P2_ids": [
+        "SW100-C0264"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0420",
+      "module": "tools/tamkarum_attestation_engine.py",
+      "affected_paths": [
+        {
+          "path": "tools/tamkarum_attestation_engine.py",
+          "sha256": "58a4b019757f70af13e1d9dee6d73212356216f713f60a7be9bb9e4050ff29b2"
+        }
+      ],
+      "decision": "REPRODUCED",
+      "state": "OPEN",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/03-source-evidence.json",
+        "docs/security/evidence/swarm100-round3-20261028/03-isolated-fixtures.py",
+        "docs/security/evidence/swarm100-round3-20261028/03-isolated-fixtures.json"
+      ],
+      "source_edited": false,
+      "related_P2_ids": [
+        "SW100-C0421"
+      ]
+    }
+  ],
+  "execution_state": "PLAN_ONLY_BEFORE_SOURCE_EDITS"
+}

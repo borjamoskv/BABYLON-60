@@ -1,0 +1,450 @@
+{
+  "shard": "032",
+  "findings": [
+    {
+      "title": "Dependency validation and revocation are separated from insertion by unlocked transactions",
+      "severity": "P1",
+      "path": "01_KISH_ENGINE/babylon60/memory/governance.py",
+      "line": 468,
+      "evidence": "add_record commits dependency checks at 468, appends ledger at 471, then inserts edges in a new transaction at 495-568. revoke_record snapshots closure and commits at 639 before its updates at 663-680. query_active_memories filters only record status, not upstream status (848-859).",
+      "trigger": "An add validates ACTIVE parent; concurrent revoke snapshots existing children and revokes parent; add then inserts its child and edges. Alternatively a child is added after the revocation closure snapshot.",
+      "impact": "The new child remains ACTIVE and retrievable despite its revoked dependency, outside the revocation closure. These are synchronous methods but independent engines/threads/processes use separate SQLite connections.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Ledger acknowledgement precedes durable memory-state mutation without recovery",
+      "severity": "P1",
+      "path": "01_KISH_ENGINE/babylon60/memory/governance.py",
+      "line": 644,
+      "evidence": "revoke_record commits MEMORY_RECORD_REVOKED through append_event before opening the mutation transaction at 663. Ledger append commits independently (cortex_persist_ledger.py:257-271); engine constructor only initializes schema, without projection replay. add_record and retract_attribution use the same pattern.",
+      "trigger": "Process stops or the second database transaction fails after ledger append succeeds and before memory updates commit.",
+      "impact": "A durable revocation receipt can coexist with an ACTIVE readable record after reopening; committed additions can lack their memory projection. No runtime execution was performed.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Revocation silently truncates dependency closure after 1024 levels",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/memory/governance.py",
+      "line": 632,
+      "evidence": "Recursive closure uses c.depth < 1024; add_record accepts arbitrarily deep acyclic dependency chains. The returned total_invalidated does not signal truncation. Retraction has the same bound at 1062-1075.",
+      "trigger": "Create an acyclic dependency chain deeper than 1024 and revoke its root.",
+      "impact": "Nodes beyond the bound remain ACTIVE and retain their blobs; advertised transitive revocation is incomplete.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Policy epoch rolls back on engine restart",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/memory/governance.py",
+      "line": 226,
+      "evidence": "__init__ unconditionally initializes _host_epoch to 1; advance_policy_epoch (333-340) updates only this instance field. add_record signs and records using that field, while get_record accepts stored epoch without comparing a persistent host minimum.",
+      "trigger": "Advance epoch above 1, reopen MemoryGovernanceEngine on the same database, register principal key, then create a record.",
+      "impact": "New records are issued under epoch 1 despite previously advancing the authoritative epoch, contradicting monotonic policy governance.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Python-only counter loop is described as Rust FFI and SPMC validation",
+      "severity": "P2",
+      "path": "scripts/c5_demos/poc_bounty_dispatcher_ffi.py",
+      "line": 11,
+      "evidence": "Header claims lock-free Python/Rust coupling; FFIWriter constructs a local ctypes structure (42), never loads a Rust library or starts a reader; run_stress_test only publishes sequentially and asserts counter parity (76-97). _pack_=1 is also not a cache-line alignment guarantee.",
+      "trigger": "Use this demo success as evidence for the declared cross-language seqlock/SPMC property.",
+      "impact": "The example cannot establish ABI coupling, concurrent reader coherence or lock-free ordering. No production caller was located by targeted search; finding is confined to example/evidence claims.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Example formal gate approves a truthy field without checking a proof",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-ring0-babylon-kernel/references/modules/c5-mushushu-0/MODULE.md",
+      "line": 67,
+      "evidence": "audit_ast_closure only checks truthiness of formal_proof and claim/premise overlap, then hashes repr and returns PENDING_ATTESTATION at 77-78. The surrounding text presents it as deterministic formal closure validation.",
+      "trigger": "Supply a nonempty arbitrary formal_proof string with empty claims/premises to the shown example.",
+      "impact": "The documented routine accepts an unverified proof and labels it ready for attestation. Targeted consumer search found only this documentation definition; this is not a demonstrated production authorization bypass.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Folder prefix example uses an unbounded lexical lower bound",
+      "severity": "P2",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/ai-search/gotchas.md",
+      "line": 9,
+      "evidence": "The documented starts-with filter contains only operator gte, value docs/api/, with no upper bound or separate prefix predicate.",
+      "trigger": "Apply the example to a collection also containing lexically later unrelated folders, such as docs/zzz/ or private/.",
+      "impact": "A greater-than-or-equal comparison does not enforce the claimed prefix and can include unrelated retrieval results. This is a docs/example filter defect, not a demonstrated tenant authorization boundary.",
+      "confidence": "high",
+      "kind": "example"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "01_KISH_ENGINE/babylon60/memory/governance.py",
+      "line": 677,
+      "statement": "The physical crypto-shredding claim is stronger than DELETE of plaintext rows. No blob encryption/key destruction or WAL/free-page erasure is visible here; assess database/WAL retention before treating this as physical erasure.",
+      "status": "NO_VERIFICADO",
+      "reason": "No forensic runtime or filesystem byte analysis authorized."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".agents/skills/c5-cortex-swarm-orchestrator-project/references/modules/wizard/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          35
+        ]
+      ],
+      "manifest_sha256": "750ffd2834274d737d4fd7d4d30d8d387875fe750cf4473c1166a8aaa2ed718b",
+      "observed_sha256": "750ffd2834274d737d4fd7d4d30d8d387875fe750cf4473c1166a8aaa2ed718b",
+      "changed_since_manifest": false,
+      "hash_note": "Manifest is baseline; final digest sampled after reads, not an atomic filesystem snapshot."
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-compiler/Cargo.toml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          16
+        ]
+      ],
+      "manifest_sha256": "485227466b76df02c2856d2eb42e887df41d3c89e46ffef66b2adf099da78eeb",
+      "observed_sha256": "485227466b76df02c2856d2eb42e887df41d3c89e46ffef66b2adf099da78eeb",
+      "changed_since_manifest": false,
+      "hash_note": "Manifest is baseline; final digest sampled after reads, not an atomic filesystem snapshot."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/adapters/codex/__init__.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          11
+        ]
+      ],
+      "manifest_sha256": "337434545eeff7f6defb0d3b2d7c001de197b2b0c43473f07b561f1410a51ed4",
+      "observed_sha256": "337434545eeff7f6defb0d3b2d7c001de197b2b0c43473f07b561f1410a51ed4",
+      "changed_since_manifest": false,
+      "hash_note": "Manifest is baseline; final digest sampled after reads, not an atomic filesystem snapshot."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/core/hypervisor.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          102
+        ]
+      ],
+      "manifest_sha256": "ec891d61846916c6f950c634efdd71a4a67e038e12fae9b6b3b3a206ff2465c7",
+      "observed_sha256": "ec891d61846916c6f950c634efdd71a4a67e038e12fae9b6b3b3a206ff2465c7",
+      "changed_since_manifest": false,
+      "hash_note": "Manifest is baseline; final digest sampled after reads, not an atomic filesystem snapshot."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/memory/governance.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          1320
+        ]
+      ],
+      "manifest_sha256": "aa507c6b36557817bc8d80207cf82f2d48722f37995ddd57eee841af792eb622",
+      "observed_sha256": "aa507c6b36557817bc8d80207cf82f2d48722f37995ddd57eee841af792eb622",
+      "changed_since_manifest": false,
+      "hash_note": "Manifest is baseline; final digest sampled after reads, not an atomic filesystem snapshot."
+    },
+    {
+      "path": "01_KISH_ENGINE/cortex/crates/babylon60-verifiable-inference/Cargo.toml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          23
+        ]
+      ],
+      "manifest_sha256": "f5e7fdbea9d0e998221693886039d243a4430d3594c70ddbe6cb186f472c3c7a",
+      "observed_sha256": "f5e7fdbea9d0e998221693886039d243a4430d3594c70ddbe6cb186f472c3c7a",
+      "changed_since_manifest": false,
+      "hash_note": "Manifest is baseline; final digest sampled after reads, not an atomic filesystem snapshot."
+    },
+    {
+      "path": "contracts/openapi_babylon60_kernel.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          244
+        ]
+      ],
+      "manifest_sha256": "4a94627d54ffa6469fecb17461800c2614bfa808f44bebba1aab098edfb3cf31",
+      "observed_sha256": "4a94627d54ffa6469fecb17461800c2614bfa808f44bebba1aab098edfb3cf31",
+      "changed_since_manifest": false,
+      "hash_note": "Manifest is baseline; final digest sampled after reads, not an atomic filesystem snapshot."
+    },
+    {
+      "path": "docs/03_guides/guide_ci_runner_costs.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          24
+        ]
+      ],
+      "manifest_sha256": "e6b4b649f8b09761895fddb8d22fa6eafadf3f869de15859e806b147766e6aef",
+      "observed_sha256": "e6b4b649f8b09761895fddb8d22fa6eafadf3f869de15859e806b147766e6aef",
+      "changed_since_manifest": false,
+      "hash_note": "Manifest is baseline; final digest sampled after reads, not an atomic filesystem snapshot."
+    },
+    {
+      "path": "docs/security/evidence/harness-audit-2026-10-24/artifact-findings.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          55
+        ]
+      ],
+      "manifest_sha256": "64c832c5babcdfc8588023c3907f133d554498384d4c545fc8ea512f884ce4f2",
+      "observed_sha256": "64c832c5babcdfc8588023c3907f133d554498384d4c545fc8ea512f884ce4f2",
+      "changed_since_manifest": false,
+      "hash_note": "Manifest is baseline; final digest sampled after reads, not an atomic filesystem snapshot."
+    },
+    {
+      "path": "proof/lean/BabylonTrace.lean",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          279
+        ]
+      ],
+      "manifest_sha256": "83b00a15497eaf2d2362fda7dfa6ce8090c59435dfede6ecb7fac54ad18c76ba",
+      "observed_sha256": "83b00a15497eaf2d2362fda7dfa6ce8090c59435dfede6ecb7fac54ad18c76ba",
+      "changed_since_manifest": false,
+      "hash_note": "Manifest is baseline; final digest sampled after reads, not an atomic filesystem snapshot."
+    },
+    {
+      "path": "scripts/c5_demos/poc_bounty_dispatcher_ffi.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          100
+        ]
+      ],
+      "manifest_sha256": "26e1c6daea0fe38f94d01dbc5464176198f1714982c79cd6aee096ac8ad7e7c9",
+      "observed_sha256": "26e1c6daea0fe38f94d01dbc5464176198f1714982c79cd6aee096ac8ad7e7c9",
+      "changed_since_manifest": false,
+      "hash_note": "Manifest is baseline; final digest sampled after reads, not an atomic filesystem snapshot."
+    },
+    {
+      "path": "scripts/c5_quality_gates/secret_swarm_auditor.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          456
+        ]
+      ],
+      "manifest_sha256": "4339cd67f88a8ca1d171d7b9ad9cd57f1bb40027a131ae9bf7079fb51a8a3197",
+      "observed_sha256": "4339cd67f88a8ca1d171d7b9ad9cd57f1bb40027a131ae9bf7079fb51a8a3197",
+      "changed_since_manifest": false,
+      "hash_note": "Manifest is baseline; final digest sampled after reads, not an atomic filesystem snapshot."
+    },
+    {
+      "path": "scripts/partition_campaigns.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          98
+        ]
+      ],
+      "manifest_sha256": "ae298c3c9ed8daa8e6e451a353ea20a9ac3f1155f4d969c2d2db5390b7df1b1c",
+      "observed_sha256": "ae298c3c9ed8daa8e6e451a353ea20a9ac3f1155f4d969c2d2db5390b7df1b1c",
+      "changed_since_manifest": false,
+      "hash_note": "Manifest is baseline; final digest sampled after reads, not an atomic filesystem snapshot."
+    },
+    {
+      "path": "tests/cortex_test.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          38
+        ]
+      ],
+      "manifest_sha256": "25dda05f34c5fc37d2329514e21be4eb0e2787db98ceacdee7dcf155088361f5",
+      "observed_sha256": "25dda05f34c5fc37d2329514e21be4eb0e2787db98ceacdee7dcf155088361f5",
+      "changed_since_manifest": false,
+      "hash_note": "Manifest is baseline; final digest sampled after reads, not an atomic filesystem snapshot."
+    },
+    {
+      "path": "tests/test_compliance_exporter.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          285
+        ]
+      ],
+      "manifest_sha256": "23a69c5cabb9a8049762e9fe9864c611c4c407eb92470998c5530ca30bfc330f",
+      "observed_sha256": "23a69c5cabb9a8049762e9fe9864c611c4c407eb92470998c5530ca30bfc330f",
+      "changed_since_manifest": false,
+      "hash_note": "Manifest is baseline; final digest sampled after reads, not an atomic filesystem snapshot."
+    },
+    {
+      "path": "tests/test_signature_cli.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          157
+        ]
+      ],
+      "manifest_sha256": "971e35ffba78d8bb78cb91192cd46eba19390569482bcc6709683da224efcafd",
+      "observed_sha256": "971e35ffba78d8bb78cb91192cd46eba19390569482bcc6709683da224efcafd",
+      "changed_since_manifest": false,
+      "hash_note": "Manifest is baseline; final digest sampled after reads, not an atomic filesystem snapshot."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/ai-search/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          81
+        ]
+      ],
+      "manifest_sha256": "e548c0f2cba170e81dd3e9e15b7cf430eabd7e73770ed29589b90dc20c3bf452",
+      "observed_sha256": "e548c0f2cba170e81dd3e9e15b7cf430eabd7e73770ed29589b90dc20c3bf452",
+      "changed_since_manifest": false,
+      "hash_note": "Manifest is baseline; final digest sampled after reads, not an atomic filesystem snapshot."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/graphql-api/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          225
+        ]
+      ],
+      "manifest_sha256": "902d188040a60c5d130790222442158ff12879232357ee34ab410e0d7b9b5e76",
+      "observed_sha256": "902d188040a60c5d130790222442158ff12879232357ee34ab410e0d7b9b5e76",
+      "changed_since_manifest": false,
+      "hash_note": "Manifest is baseline; final digest sampled after reads, not an atomic filesystem snapshot."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/snippets/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          135
+        ]
+      ],
+      "manifest_sha256": "d23080b676011160f7c72791381ea8bfa9c7a5b3b9cb4a41a87b762550139c7f",
+      "observed_sha256": "d23080b676011160f7c72791381ea8bfa9c7a5b3b9cb4a41a87b762550139c7f",
+      "changed_since_manifest": false,
+      "hash_note": "Manifest is baseline; final digest sampled after reads, not an atomic filesystem snapshot."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/zaraz/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          111
+        ]
+      ],
+      "manifest_sha256": "929bee8e3efffad15b1a2ee2e20ff87b5d89cc724b4f450f07f6ef15caf4b2f9",
+      "observed_sha256": "929bee8e3efffad15b1a2ee2e20ff87b5d89cc724b4f450f07f6ef15caf4b2f9",
+      "changed_since_manifest": false,
+      "hash_note": "Manifest is baseline; final digest sampled after reads, not an atomic filesystem snapshot."
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          41
+        ]
+      ],
+      "manifest_sha256": "c6e88e8c707199c86ad23c5bb3a3d8e489648dcb75bc5f40a7663be27e91cf76",
+      "observed_sha256": "c6e88e8c707199c86ad23c5bb3a3d8e489648dcb75bc5f40a7663be27e91cf76",
+      "changed_since_manifest": false,
+      "hash_note": "Manifest is baseline; final digest sampled after reads, not an atomic filesystem snapshot."
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_36_site_playbooks_google_flights.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "manifest_sha256": "5f59327e479422f21dab5fdd3da495cf49144b621f211a55b6b65af81edbdb98",
+      "observed_sha256": "5f59327e479422f21dab5fdd3da495cf49144b621f211a55b6b65af81edbdb98",
+      "changed_since_manifest": false,
+      "hash_note": "Manifest is baseline; final digest sampled after reads, not an atomic filesystem snapshot."
+    },
+    {
+      "path": "tools/skill_library/global/c5-ring0-babylon-kernel/references/modules/c5-mushushu-0/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          86
+        ]
+      ],
+      "manifest_sha256": "f61f794008862672dc40bfcce985c82b645d28d69b72672a354ef768c52492ce",
+      "observed_sha256": "f61f794008862672dc40bfcce985c82b645d28d69b72672a354ef768c52492ce",
+      "changed_since_manifest": false,
+      "hash_note": "Manifest is baseline; final digest sampled after reads, not an atomic filesystem snapshot."
+    },
+    {
+      "path": "tools/skill_library/global/cortex-skill-genesis/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "manifest_sha256": "c4fb5ce747aea5ca8ab5e372a3413815d8a20f53c3c5aa16db5d7a55d9300af8",
+      "observed_sha256": "c4fb5ce747aea5ca8ab5e372a3413815d8a20f53c3c5aa16db5d7a55d9300af8",
+      "changed_since_manifest": false,
+      "hash_note": "Manifest is baseline; final digest sampled after reads, not an atomic filesystem snapshot."
+    },
+    {
+      "path": "tools/skill_library/workspace/c5-audiovisual-acreativo-sota-project/references/modules/c5-anti-slop-ui/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          76
+        ]
+      ],
+      "manifest_sha256": "81d9185732149190c4c086daab656c9592e7c14df3b2d01dbeb504e358c534cd",
+      "observed_sha256": "81d9185732149190c4c086daab656c9592e7c14df3b2d01dbeb504e358c534cd",
+      "changed_since_manifest": false,
+      "hash_note": "Manifest is baseline; final digest sampled after reads, not an atomic filesystem snapshot."
+    }
+  ],
+  "tool_limitations": [
+    "Native graph search/query tools are absent from ALL_TOOLS; targeted source reads and rg used.",
+    "Audit only: no repository code, tests, builds, runtime effects, commits or pushes executed.",
+    "Working tree was already dirty; manifest/current hashes record visible drift. Reads and final hash sampling are not atomic.",
+    "External product claims were not independently verified; example filter finding follows the stated comparison semantics."
+  ],
+  "tests_run": []
+}

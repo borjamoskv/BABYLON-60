@@ -1,0 +1,442 @@
+{
+  "shard": "051",
+  "findings": [
+    {
+      "title": "JSON integrity verification trusts embedded statement hashes",
+      "severity": "P1",
+      "path": "01_KISH_ENGINE/babylon60/autodidact/crystal_compiler.py",
+      "line": 239,
+      "evidence": "Lines 239–242 append statement_hash verbatim; serialized content/modality/obligations are never rehashed. CLI main_dispatcher.py:668 accepts this result and exits 0.",
+      "trigger": "Modify a valid exported statement content while preserving statement_hash and merkle_root.",
+      "impact": "Tampered propositions retain INTEGRITY_VERIFIED and a successful verify-crystal CLI exit.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Markdown integrity check accepts any structurally present root",
+      "severity": "P1",
+      "path": "01_KISH_ENGINE/babylon60/autodidact/crystal_compiler.py",
+      "line": 210,
+      "evidence": "Lines 210–212 return True solely for a matching 64-hex root string; no content is hashed. CLI main_dispatcher.py:668–671 converts True into success.",
+      "trigger": "Supply arbitrary or modified Markdown with a Merkle Root (SHA-256) marker and any 64 lowercase hex characters in backticks.",
+      "impact": "The cryptographic-integrity CLI certifies text unrelated to the recorded evidence.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Optional evidence digests use inconsistent Merkle leaf encodings",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/autodidact/crystal_compiler.py",
+      "line": 250,
+      "evidence": "compute_merkle_root:51 substitutes sha256(claim) when evidence_digest is absent; verify_crystal_integrity:250–252 directly interpolates the serialized null/empty digest. types.py:120 defaults evidence_digest to None and :129 preserves it.",
+      "trigger": "Compile and export a crystal containing a FalsificationVerdict with default evidence_digest=None, then verify the JSON.",
+      "impact": "An unmodified compiler-produced crystal fails its own Merkle verification.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "In-process sandbox has no allocation or output bound",
+      "severity": "P1",
+      "path": "01_KISH_ENGINE/babylon60/primitives/sandbox.py",
+      "line": 408,
+      "evidence": "Whitelisted Mult/list/constant nodes permit x = [0] * 10**10; execution uses host-process exec and StringIO capture at 392–408 with no memory or output limit.",
+      "trigger": "Execute a small AST allocating a huge list/string or producing large captured output.",
+      "impact": "Untrusted generated code can exhaust host memory; an alarm does not bound allocation size or isolate process failure.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Ordinary generated-code errors escape ExecResult handling",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/primitives/sandbox.py",
+      "line": 421,
+      "evidence": "The exception handler catches only ValueError, TypeError, OSError and KeyError; permitted expressions include division and unresolved Name nodes.",
+      "trigger": "safe_exec receives 1 / 0 or an undefined identifier.",
+      "impact": "ZeroDivisionError/NameError propagate to the caller instead of the documented failed ExecResult.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Concurrent seqlock test never validates payload consistency",
+      "severity": "P2",
+      "path": "tests/test_swarm_seqlock_zero_copy.py",
+      "line": 60,
+      "evidence": "Reader extracts seq,cid,aid,phash,flags but only checks seq parity at 62; writer encodes w independently into cluster_id,agent_id and payload at 77–78.",
+      "trigger": "A channel returns an even sequence paired with mixed fields from two writes.",
+      "impact": "The torn-read regression reports zero failures despite an inconsistent snapshot; claimed absence of torn reads is not tested.",
+      "confidence": "high",
+      "kind": "test"
+    },
+    {
+      "title": "Report labels a byte-count formula as dissipated energy",
+      "severity": "P2",
+      "path": "scripts/c5_sharur/c5_bounty_sharur_omega_10k.py",
+      "line": 386,
+      "evidence": "Lines 246–247 calculate total_bits * LANDAUER_BOUND_300K; line 386 prints Landauer disipado. No energy measurement or count of erased bits enters the formula.",
+      "trigger": "Run the synthetic workload and consume the final energy report.",
+      "impact": "A theoretical constant multiplied by input size is presented as measured dissipation, making the energy evidence misleading.",
+      "confidence": "high",
+      "kind": "example"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".agents/skills/c5-ring0-babylon-kernel-project/references/modules/babylon60-kernel-invariants/agents/openai.yaml",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          4
+        ]
+      ],
+      "sha256_expected": "f32f8d67665d0253ba85072453438e1d6346e3d164b3f7fdf1a6121ea401d057",
+      "sha256_observed": "f32f8d67665d0253ba85072453438e1d6346e3d164b3f7fdf1a6121ea401d057",
+      "hash_match": true,
+      "notes": "Read as text in bounded chunks; no execution."
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-fuzz/Cargo.toml",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          14
+        ]
+      ],
+      "sha256_expected": "cc3d394316b768d5c584cfa0dffc7a6bcb9665ab08b07e8d2496a0f8f06fd3a4",
+      "sha256_observed": "cc3d394316b768d5c584cfa0dffc7a6bcb9665ab08b07e8d2496a0f8f06fd3a4",
+      "hash_match": true,
+      "notes": "Read as text in bounded chunks; no execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/autodidact/crystal_compiler.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          272
+        ]
+      ],
+      "sha256_expected": "df12946f0b9950e0f603538b8da9ea22d7d36d1b699871f24ed415c82112b39d",
+      "sha256_observed": "df12946f0b9950e0f603538b8da9ea22d7d36d1b699871f24ed415c82112b39d",
+      "hash_match": true,
+      "notes": "Read as text in bounded chunks; no execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/cortex/cortex_mamba_network.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          83
+        ]
+      ],
+      "sha256_expected": "642293cb2cb6f2ca5bbed8b5e6f4bbff696b539a71cd7e168cbcd5e5faca02bc",
+      "sha256_observed": "642293cb2cb6f2ca5bbed8b5e6f4bbff696b539a71cd7e168cbcd5e5faca02bc",
+      "hash_match": true,
+      "notes": "Read as text in bounded chunks; no execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/primitives/sandbox.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          451
+        ]
+      ],
+      "sha256_expected": "22f22c9765c6605bd02ba1a7dce990d31764867fbe469ad2244e54b5c52a0fa4",
+      "sha256_observed": "22f22c9765c6605bd02ba1a7dce990d31764867fbe469ad2244e54b5c52a0fa4",
+      "hash_match": true,
+      "notes": "Read as text in bounded chunks; no execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/cortex/crates/cortex-guard/src/dsl.rs",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          75
+        ]
+      ],
+      "sha256_expected": "fea60a32e1a5b5e00fb61094e88b533d88649c37fd3ab9d77151e25d367bf8a6",
+      "sha256_observed": "fea60a32e1a5b5e00fb61094e88b533d88649c37fd3ab9d77151e25d367bf8a6",
+      "hash_match": true,
+      "notes": "Read as text in bounded chunks; no execution."
+    },
+    {
+      "path": "crates/b60-lang/src/lib.rs",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          36
+        ]
+      ],
+      "sha256_expected": "05d12ffe67cbd85b47171af622caccd4ba3d95e7cc82556b82b864976b71c471",
+      "sha256_observed": "05d12ffe67cbd85b47171af622caccd4ba3d95e7cc82556b82b864976b71c471",
+      "hash_match": true,
+      "notes": "Read as text in bounded chunks; no execution."
+    },
+    {
+      "path": "docs/04_research/eu_ai_act_compliance_whitepaper.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          198
+        ]
+      ],
+      "sha256_expected": "b96149b0740a74943ba0f58dd500b03b1f47e6638a7f85bacddab33c1f534fd4",
+      "sha256_observed": "b96149b0740a74943ba0f58dd500b03b1f47e6638a7f85bacddab33c1f534fd4",
+      "hash_match": true,
+      "notes": "Read as text in bounded chunks; no execution."
+    },
+    {
+      "path": "docs/security/harness-audit-2026-10-24.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          233
+        ]
+      ],
+      "sha256_expected": "947d695f8e8e23d1c6f0586fa9ab1bb1825cca939662fa06edb0364eb0d65026",
+      "sha256_observed": "947d695f8e8e23d1c6f0586fa9ab1bb1825cca939662fa06edb0364eb0d65026",
+      "hash_match": true,
+      "notes": "Read as text in bounded chunks; no execution."
+    },
+    {
+      "path": "pyproject.toml",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          154
+        ]
+      ],
+      "sha256_expected": "50d4594dd2125fcbe7df0578394b5d2c2e6ac7c7dddb4b5fc9be68229eb8d0cd",
+      "sha256_observed": "50d4594dd2125fcbe7df0578394b5d2c2e6ac7c7dddb4b5fc9be68229eb8d0cd",
+      "hash_match": true,
+      "notes": "Read as text in bounded chunks; no execution."
+    },
+    {
+      "path": "scripts/c5_demos/poc_zk_guardrail.rs",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          135
+        ]
+      ],
+      "sha256_expected": "d563bf20aab7d2f8a21bbfb1ec2fe4075e29e45993ec5e3f1eaa60b308478be9",
+      "sha256_observed": "d563bf20aab7d2f8a21bbfb1ec2fe4075e29e45993ec5e3f1eaa60b308478be9",
+      "hash_match": true,
+      "notes": "Read as text in bounded chunks; no execution."
+    },
+    {
+      "path": "scripts/c5_sharur/c5_bounty_sharur_omega_10k.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          455
+        ]
+      ],
+      "sha256_expected": "0f6184a7d1aa6fbb09acdbf78fe692d5f3b786cacb6552387b49f3b3a2c3a1ce",
+      "sha256_observed": "0f6184a7d1aa6fbb09acdbf78fe692d5f3b786cacb6552387b49f3b3a2c3a1ce",
+      "hash_match": true,
+      "notes": "Read as text in bounded chunks; no execution."
+    },
+    {
+      "path": "scripts/repatriated/test_nemesis_kudurru_adversarial.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          158
+        ]
+      ],
+      "sha256_expected": "86d72b3626fc7f7372aa84cb281931c69b7161e1a0db1c476a7760fb153c97a8",
+      "sha256_observed": "86d72b3626fc7f7372aa84cb281931c69b7161e1a0db1c476a7760fb153c97a8",
+      "hash_match": true,
+      "notes": "Read as text in bounded chunks; no execution."
+    },
+    {
+      "path": "tests/nemesis_wave4.rs",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          626
+        ]
+      ],
+      "sha256_expected": "8edfaea0bf2079cf3645451520d7883b515d57d7e90fc59294880e46cc833f00",
+      "sha256_observed": "8edfaea0bf2079cf3645451520d7883b515d57d7e90fc59294880e46cc833f00",
+      "hash_match": true,
+      "notes": "Read as text in bounded chunks; no execution."
+    },
+    {
+      "path": "tests/test_exergy_optimizer_agent.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          72
+        ]
+      ],
+      "sha256_expected": "b3e27ed6e31a566b7b7f4db3425a8f41624a0fbab7ada68ed9f5a560fa6b1a60",
+      "sha256_observed": "b3e27ed6e31a566b7b7f4db3425a8f41624a0fbab7ada68ed9f5a560fa6b1a60",
+      "hash_match": true,
+      "notes": "Read as text in bounded chunks; no execution."
+    },
+    {
+      "path": "tests/test_swarm_seqlock_zero_copy.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          114
+        ]
+      ],
+      "sha256_expected": "49ce6667085795c78e9960b0278ca655e005d5105eab10e8eb2e318a878b7276",
+      "sha256_observed": "49ce6667085795c78e9960b0278ca655e005d5105eab10e8eb2e318a878b7276",
+      "hash_match": true,
+      "notes": "Read as text in bounded chunks; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/argo-smart-routing/configuration.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          197
+        ]
+      ],
+      "sha256_expected": "5c47db854cd5ec858514069721ff807fa7f54fb6fb6bb06eca372e1edb94a197",
+      "sha256_observed": "5c47db854cd5ec858514069721ff807fa7f54fb6fb6bb06eca372e1edb94a197",
+      "hash_match": true,
+      "notes": "Read as text in bounded chunks; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/miniflare/gotchas.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          160
+        ]
+      ],
+      "sha256_expected": "efeb3b76e985ef27436757a4a75a3f360a6f596883d574367198b34694d59b42",
+      "sha256_observed": "efeb3b76e985ef27436757a4a75a3f360a6f596883d574367198b34694d59b42",
+      "hash_match": true,
+      "notes": "Read as text in bounded chunks; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/tail-workers/configuration.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          176
+        ]
+      ],
+      "sha256_expected": "e30b9d4e0846c61563696e2db6d645491dedb2dc07172f98ae3ffe51b2e8d126",
+      "sha256_observed": "e30b9d4e0846c61563696e2db6d645491dedb2dc07172f98ae3ffe51b2e8d126",
+      "hash_match": true,
+      "notes": "Read as text in bounded chunks; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/turnstile-spin/references/vanilla-html.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          157
+        ]
+      ],
+      "sha256_expected": "bb01ca94b0e942c0e329c2fcaf50d0c5ff846f1ae166aa6d654d4c962d48fa9d",
+      "sha256_observed": "bb01ca94b0e942c0e329c2fcaf50d0c5ff846f1ae166aa6d654d4c962d48fa9d",
+      "hash_match": true,
+      "notes": "Read as text in bounded chunks; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents/agent_19_flight_booking.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          60
+        ]
+      ],
+      "sha256_expected": "4396c45d8f54f7e36afe4309dcbbfed8db2367ef9e20fe4de49125e7ac95c718",
+      "sha256_observed": "4396c45d8f54f7e36afe4309dcbbfed8db2367ef9e20fe4de49125e7ac95c718",
+      "hash_match": true,
+      "notes": "Read as text in bounded chunks; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/scripts/spawn_agents.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          81
+        ]
+      ],
+      "sha256_expected": "d1c40893bccf4458970d90ce59ea360bd25155ea468c6f3ce0f491704568c705",
+      "sha256_observed": "d1c40893bccf4458970d90ce59ea360bd25155ea468c6f3ce0f491704568c705",
+      "hash_match": true,
+      "notes": "Read as text in bounded chunks; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/cloudflare-mcp-usage/MODULE.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          150
+        ]
+      ],
+      "sha256_expected": "645daf43c4f4f1cca623f25261b79bddc163c954a256710d96bce02ce6abe4dc",
+      "sha256_observed": "645daf43c4f4f1cca623f25261b79bddc163c954a256710d96bce02ce6abe4dc",
+      "hash_match": true,
+      "notes": "Read as text in bounded chunks; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/flstudio-mcp-production/examples/Bill_Evans_Rootless_Voicings.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          74
+        ]
+      ],
+      "sha256_expected": "a9dbdc4f03108df2bd1383d031125e2389bb0803eb1419836c960998d1014784",
+      "sha256_observed": "a9dbdc4f03108df2bd1383d031125e2389bb0803eb1419836c960998d1014784",
+      "hash_match": true,
+      "notes": "Read as text in bounded chunks; no execution."
+    },
+    {
+      "path": "tools/skill_library/workspace/c5-ring0-babylon-kernel-project/references/modules/babylon60-kernel-invariants/agents/openai.yaml",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          4
+        ]
+      ],
+      "sha256_expected": "f32f8d67665d0253ba85072453438e1d6346e3d164b3f7fdf1a6121ea401d057",
+      "sha256_observed": "f32f8d67665d0253ba85072453438e1d6346e3d164b3f7fdf1a6121ea401d057",
+      "hash_match": true,
+      "notes": "Read as text in bounded chunks; no execution."
+    }
+  ],
+  "tool_limitations": [
+    "Native graph tools not exposed (ALL_TOOLS search returned no search_graph/query_graph); used targeted source reads and rg.",
+    "Audit is static only; no runtime, tests, builds, or external service checks executed.",
+    "A combined source output was truncated; omitted tests/nemesis_wave4.rs middle was subsequently read directly.",
+    "Targeted rg included nonexistent tests/test_ast_sandbox.py; source and actual assigned tests were still reviewed."
+  ],
+  "tests_run": []
+}

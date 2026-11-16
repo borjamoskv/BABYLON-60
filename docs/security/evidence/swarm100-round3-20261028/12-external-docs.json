@@ -1,0 +1,21 @@
+{
+  "reviewer": "12",
+  "retrieved_date": "2026-10-28",
+  "candidate_id": "SW100-C0497",
+  "native_context7_calls": {
+    "resolve_library_id": "Cloudflare",
+    "query_docs_library_id": "/cloudflare/cloudflare-docs",
+    "result": "Success; official attack-score and block-attack-score documentation returned."
+  },
+  "sources": [
+    {
+      "url": "https://developers.cloudflare.com/waf/detections/attack-score/",
+      "summary": "Numeric score is 1 for malicious and 99 for likely clean. Numeric scores span global/SQLi/XSS/RCE fields."
+    },
+    {
+      "url": "https://developers.cloudflare.com/waf/custom-rules/use-cases/block-attack-score/",
+      "summary": "Official example blocks requests with cf.waf.score lt 20."
+    }
+  ],
+  "network_mutations": false
+}

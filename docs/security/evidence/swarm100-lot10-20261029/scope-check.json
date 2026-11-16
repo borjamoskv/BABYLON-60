@@ -1,0 +1,22 @@
+{
+  "result": "PASS",
+  "only_production_source": "scripts/c5_verifiers/purge_residuals.py",
+  "unchanged_previous_sources_and_dependencies": {
+    "scripts/c5_thermo/c5_exergy_optimizer_monitor.py": true,
+    "scripts/c5_cortex/cortex_objectives_transducer.py": true,
+    "scripts/c5_verifiers/fast_smt_gate.py": true,
+    "pyproject.toml": true,
+    "uv.lock": true,
+    "Cargo.lock": true
+  },
+  "impacted_registry_ids": [
+    "SW100-C0574",
+    "SW100-C0575"
+  ],
+  "source_before": "a6bcbf4d8a6e09c0cfa8362b8745d788ca3999d82a80de2fb9145419bf63f55f",
+  "source_after": "cd2e547cfac8adf1b0ce6358da3fe20cebc3c45a4bfa0fc339828dcd2a819f7c",
+  "lot11_sources_unchanged": {
+    "01_KISH_ENGINE/babylon60/core/cortex_persist.py": "c84b230f9424e7ff676750c535f450b03739f057583ac28e1468f342818b9ca0"
+  },
+  "scope": "Complete rewrite of the authorized 96-line purge script only; API/report/CLI migration and narrower cache policy documented."
+}

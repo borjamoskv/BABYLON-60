@@ -1,0 +1,14 @@
+{
+  "scope": "round2 runtime corroboration of existing audit candidates",
+  "allowed_writes": [
+    "/tmp/babylon60-audit-round2-20261028",
+    "docs/security/AUDIT_SWARM100_ROUND2_2026-10-28.md",
+    "docs/security/evidence/swarm100-round2-20261028"
+  ],
+  "checks": [
+    "Isolated actual-API reproductions with source digests",
+    "Retain negative outcomes and explicit scope",
+    "Validate document links and preservation of source files"
+  ],
+  "source_hash_changes_from_first_round": []
+}

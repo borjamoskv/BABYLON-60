@@ -1,0 +1,51 @@
+{
+  "no_open_reproduced_P1_remain": true,
+  "selected_static_P1": [
+    {
+      "candidate_id": "SW100-C0460",
+      "title": "Consolidation deletes journal rows without saving their replacement",
+      "path": "scripts/c5_cortex/autoconsolidate.py",
+      "sha256": "cf266eda26d8c6e1f92177ad7d4effa81b7c0067d246b7c0fb9508f7d25eae93",
+      "state": "PLAN_ONLY_STATIC_NOT_RUNTIME_REPRODUCED"
+    },
+    {
+      "candidate_id": "SW100-C0018",
+      "title": "Auto purge unlinks SQLite WAL files without checkpoint or connection coordination",
+      "path": "01_KISH_ENGINE/babylon60/commands/itera.py",
+      "sha256": "0138cffddbb0c8b8beb8c1ca2c02125edeafe2297dbd42cd7247e5081324f982",
+      "state": "PLAN_ONLY_STATIC_NOT_RUNTIME_REPRODUCED"
+    },
+    {
+      "candidate_id": "SW100-C0219",
+      "title": "Do not unlink SQLite journals based solely on their suffix",
+      "path": "scripts/repatriated/c5_sharur_100_anergy_purge.py",
+      "sha256": "f0a21461244d7c362a9c5e4699f832a0f151fa7519eac020374056ae31de74ad",
+      "state": "PLAN_ONLY_STATIC_NOT_RUNTIME_REPRODUCED"
+    },
+    {
+      "candidate_id": "SW100-C0387",
+      "title": "Delete only proven orphan WAL files",
+      "path": "tools/skill_library/global/anergy-purge-protocol/scripts/anergy_purge.py",
+      "sha256": "82b6881e3cc765b82d70814a477beaa7e46c3b074c7485a843b6baf303e16253",
+      "state": "PLAN_ONLY_STATIC_NOT_RUNTIME_REPRODUCED"
+    },
+    {
+      "candidate_id": "SW100-C0563",
+      "title": "Workspace purge resets unrelated live global sessions",
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/anergy-purge-protocol/scripts/anergy_purge.py",
+      "sha256": "82b6881e3cc765b82d70814a477beaa7e46c3b074c7485a843b6baf303e16253",
+      "state": "PLAN_ONLY_STATIC_NOT_RUNTIME_REPRODUCED"
+    }
+  ],
+  "duplicate_id": "SW100-C0562",
+  "duplicate_path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/anergy-purge-protocol/scripts/anergy_purge.py",
+  "duplicate_source_sha256": "82b6881e3cc765b82d70814a477beaa7e46c3b074c7485a843b6baf303e16253",
+  "unique_production_paths": [
+    "01_KISH_ENGINE/babylon60/commands/itera.py",
+    "scripts/c5_cortex/autoconsolidate.py",
+    "scripts/repatriated/c5_sharur_100_anergy_purge.py",
+    "tools/skill_library/global/anergy-purge-protocol/scripts/anergy_purge.py",
+    "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/anergy-purge-protocol/scripts/anergy_purge.py"
+  ],
+  "execution_state": "PLAN_ONLY_NO_SOURCE_EDITS"
+}

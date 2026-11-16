@@ -1,0 +1,14 @@
+diff --git a/tests/test_itera2_invariants.py b/tests/test_itera2_invariants.py
+index 265daea3..847b7fb3 100644
+--- a/tests/test_itera2_invariants.py
++++ b/tests/test_itera2_invariants.py
+@@ -125,7 +125,8 @@ async def test_master_ledger_queue_zombie_prevention(tmp_path: Path) -> None:
+     await asyncio.sleep(0.2)  # el writer colapsa ruidosamente
+     with pytest.raises(RuntimeError, match="Zombie Writer Prevention"):
+         await queue.submit_transaction("SELECT 1;", ())
+-    await queue.shutdown()
++    with pytest.raises(RuntimeError, match="shutdown did not confirm persistence"):
++        await queue.shutdown()
+ 
+ 
+ @pytest.mark.asyncio

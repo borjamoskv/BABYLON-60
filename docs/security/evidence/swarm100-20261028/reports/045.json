@@ -1,0 +1,425 @@
+{
+  "shard": "045",
+  "findings": [
+    {
+      "title": "Session ID can escape evidence storage directory",
+      "severity": "P1",
+      "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+      "line": 83,
+      "evidence": "bundle_dir joins base_dir with caller-supplied session_id; audit() does not validate it. _write_bundle_manifest opens manifest.json and events.json with mode w.",
+      "trigger": "Call audit(session_id=\"/an/existing/writable/directory\") or use ../ components, then close().",
+      "impact": "Evidence files are written outside storage_dir and existing files with those names are overwritten. Scope is caller-controlled IDs; no remote caller established.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Closed audit sessions still accept unsealed events",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+      "line": 112,
+      "evidence": "log_step acquires the lock but never checks is_closed. close() returns the old summary immediately on subsequent calls.",
+      "trigger": "Call close(), then log_step(), or race a waiting logger with close().",
+      "impact": "In-memory total_events changes after root/signature and disk events were sealed; later close/export cannot persist or reseal the added events.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Failed evidence persistence permanently marks session closed",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+      "line": 169,
+      "evidence": "close() sets is_closed=True before signing, hardware quote, and _write_bundle_manifest; a subsequent close() immediately returns get_summary().",
+      "trigger": "Filesystem write fails during close(), then caller restores storage and retries close().",
+      "impact": "Retry reports a closed session without retrying missing/partial evidence writes or registering completion.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "AL0 and AL1 roots do not commit to their events",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+      "line": 172,
+      "evidence": "Only AL2/AL3 branches call accumulator.add_leaf. close() uses accumulator.finalize for any nonempty events; finalize returns the empty hash when no leaves exist.",
+      "trigger": "Close two AL0 or AL1 sessions with different nonempty events.",
+      "impact": "global_merkle_root/global_hash is the same empty-tree digest and does not bind event contents; AL1 prev_hash is not included in manifest or summary.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Windows setup resolves scripts as repository root",
+      "severity": "P2",
+      "path": "scripts/c5_setup/setup_nacho_cortex.ps1",
+      "line": 23,
+      "evidence": "The script lives in scripts/c5_setup; taking one parent of ScriptDir resolves scripts, so WorkspaceAgents is scripts/.agents. Missing source is silently skipped.",
+      "trigger": "Run the checked-in setup script from its normal location.",
+      "impact": "Workspace governance is not copied although final output declares successful environment preparation.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "SHM example requests writable ctypes buffer from read-only mmap",
+      "severity": "P2",
+      "path": "scripts/c5_demos/poc_shm_orchestrator.py",
+      "line": 32,
+      "evidence": "mmap uses ACCESS_READ immediately before Kudurru64.from_buffer(mm), which requires a writable buffer.",
+      "trigger": "Run this isolated PoC on the supplied 64-byte fixture.",
+      "impact": "The demo fails before reading or printing its fields; its zero-copy demonstration cannot work as written.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Batch audit hardcodes successful falsification verdicts",
+      "severity": "P2",
+      "path": "scripts/repatriated/run_swarm_batch_021_040.py",
+      "line": 64,
+      "evidence": "Keyword branches assign only SURVIVE; scores use line counts/type-token ratios and number of preassigned SURVIVE labels. Generated report states POPPERIAN_SURVIVED and invariants checked without a falsification operation.",
+      "trigger": "Run the script on any matching Markdown posts.",
+      "impact": "It generates purported forensic validation and physical/causal scores unsupported by its computations; this is report-generation behavior, not evidence of the underlying claims.",
+      "confidence": "high",
+      "kind": "docs"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "tests/fuzz/mod.rs",
+      "line": 23,
+      "observation": "insert_attempt is referenced without a declaration in this file.",
+      "uncertainty": "No module inclusion was found by targeted search; build impact is conditional on including this currently isolated module."
+    },
+    {
+      "path": "crates/b60-lang/src/dag.rs",
+      "line": 65,
+      "observation": "NaN belief coordinates pass the validation predicate because comparisons with NaN are false. Duplicate node IDs overwrite timestamps without rechecking existing edges.",
+      "uncertainty": "Caller reachability and downstream reliance on finite Fisher action or preserved Lamport edge validation were not established."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".agents/skills/c5-rea-clean-room/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          24
+        ]
+      ],
+      "sha256_expected": "59e3ac3710b534986659ac673b73db65daa97bd4f11e5c2eeb75ac7ea9aaef79",
+      "sha256_observed": "59e3ac3710b534986659ac673b73db65daa97bd4f11e5c2eeb75ac7ea9aaef79",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/solver_replay.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          305
+        ]
+      ],
+      "sha256_expected": "1ad2d4a4ceb2b0e417f003fe356db342a43422faa8315fcb2b65d471c7950a3b",
+      "sha256_observed": "1ad2d4a4ceb2b0e417f003fe356db342a43422faa8315fcb2b65d471c7950a3b",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          686
+        ]
+      ],
+      "sha256_expected": "940edb14fa37c65a3419fa9394fa3465f1acb6208d303db33203a07d4c915b84",
+      "sha256_observed": "940edb14fa37c65a3419fa9394fa3465f1acb6208d303db33203a07d4c915b84",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/cortex/__init__.py",
+      "status": "reviewed_full",
+      "ranges": [],
+      "sha256_expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sha256_observed": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/primitives/canonical.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          125
+        ]
+      ],
+      "sha256_expected": "e4cf2f5db02da4875c24acf3277325492a7b2a6534991982d6cf90c8b1235cf8",
+      "sha256_observed": "e4cf2f5db02da4875c24acf3277325492a7b2a6534991982d6cf90c8b1235cf8",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/cortex/crates/cortex-core/src/reopen.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          145
+        ]
+      ],
+      "sha256_expected": "3319c6c9ae845995af9df533f6dfa67e1b55b270081ef5754d15af2a3e8db13a",
+      "sha256_observed": "3319c6c9ae845995af9df533f6dfa67e1b55b270081ef5754d15af2a3e8db13a",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "crates/b60-lang/src/dag.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          274
+        ]
+      ],
+      "sha256_expected": "ed715a1a6e543ebb11c10760f4dfd0929db7603b6bdf88c3dd1b03eee6233a40",
+      "sha256_observed": "ed715a1a6e543ebb11c10760f4dfd0929db7603b6bdf88c3dd1b03eee6233a40",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "docs/03_guides/guide_swarm_pxs_orchestration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          71
+        ]
+      ],
+      "sha256_expected": "06c8ef3b46b525648578b8bb3e160c80a185321a64d184f6bcbe7301ef07a82a",
+      "sha256_observed": "06c8ef3b46b525648578b8bb3e160c80a185321a64d184f6bcbe7301ef07a82a",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "docs/security/experimental-audit-plan-2026-10-26.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          260
+        ]
+      ],
+      "sha256_expected": "b7a50234f47e45a4502969905c4015b72608ef33233fa203695266aa41c2fb62",
+      "sha256_observed": "b7a50234f47e45a4502969905c4015b72608ef33233fa203695266aa41c2fb62",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "proof/lean/TicketEnvelope.lean",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          213
+        ]
+      ],
+      "sha256_expected": "55f2630ed20779f226c22ffa1bf772f5901c7f1d65ff864b4c7609c0b6e6b096",
+      "sha256_observed": "55f2630ed20779f226c22ffa1bf772f5901c7f1d65ff864b4c7609c0b6e6b096",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/c5_demos/poc_shm_orchestrator.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          51
+        ]
+      ],
+      "sha256_expected": "78e9d097f05020ff5c25b50d2ed600f8d03c0430d32bfe962bc8d093a1489324",
+      "sha256_observed": "78e9d097f05020ff5c25b50d2ed600f8d03c0430d32bfe962bc8d093a1489324",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/c5_setup/setup_nacho_cortex.ps1",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "sha256_expected": "5e82bdaee41d20083ccfdf49b305e1a5cd65a18e030979d26104b1e10747ca07",
+      "sha256_observed": "5e82bdaee41d20083ccfdf49b305e1a5cd65a18e030979d26104b1e10747ca07",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/repatriated/run_swarm_batch_021_040.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          169
+        ]
+      ],
+      "sha256_expected": "374ead608060216a9dc2a8c28b1a34a382e0fef8f9b8f3bd1c024a4834fcbd9c",
+      "sha256_observed": "374ead608060216a9dc2a8c28b1a34a382e0fef8f9b8f3bd1c024a4834fcbd9c",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/fuzz/mod.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          48
+        ]
+      ],
+      "sha256_expected": "9cce3c4e680df14824f60789f5613f21a42dbd38ef9af49a6383274937f06243",
+      "sha256_observed": "9cce3c4e680df14824f60789f5613f21a42dbd38ef9af49a6383274937f06243",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/test_crypto_canonical.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          55
+        ]
+      ],
+      "sha256_expected": "7b147f6a3dcc18265cd3123eb44799cc2dfbb684a29784ae4f8a1ef2790eb032",
+      "sha256_observed": "7b147f6a3dcc18265cd3123eb44799cc2dfbb684a29784ae4f8a1ef2790eb032",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/test_sovereign_binary_analyzer.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          74
+        ]
+      ],
+      "sha256_expected": "230e33d2f588179fa123f1bc4f7c80845e7dcf38fd40208ff0627670c6363868",
+      "sha256_observed": "230e33d2f588179fa123f1bc4f7c80845e7dcf38fd40208ff0627670c6363868",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/api/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          204
+        ]
+      ],
+      "sha256_expected": "847c33ce18c1a4ff210ce5db75db0694113fe5367bdba983b0e6f0d7dd2742b1",
+      "sha256_observed": "847c33ce18c1a4ff210ce5db75db0694113fe5367bdba983b0e6f0d7dd2742b1",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/kv/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          144
+        ]
+      ],
+      "sha256_expected": "59138344e7c23b43b360e0df44a23ee56253d013a4a1a9633c5b459b3d4ebac3",
+      "sha256_observed": "59138344e7c23b43b360e0df44a23ee56253d013a4a1a9633c5b459b3d4ebac3",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/stream/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          199
+        ]
+      ],
+      "sha256_expected": "5440838fb2fb329fe815aecde94709a3d32be08c917491355709314ff7e3d8f1",
+      "sha256_observed": "5440838fb2fb329fe815aecde94709a3d32be08c917491355709314ff7e3d8f1",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/turnstile-spin/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          330
+        ]
+      ],
+      "sha256_expected": "0d8df415c594c96ca5a4d393b70681d95d92365465e0eb14af3ab2eaa76d800b",
+      "sha256_observed": "0d8df415c594c96ca5a4d393b70681d95d92365465e0eb14af3ab2eaa76d800b",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents/agent_13_sign_in.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          61
+        ]
+      ],
+      "sha256_expected": "5feca9f6c32e4c1b0a9f8e949bbd27fb1262bb75d950de6453f6d9b20991e99b",
+      "sha256_observed": "5feca9f6c32e4c1b0a9f8e949bbd27fb1262bb75d950de6453f6d9b20991e99b",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/references/asimilacion_soberana.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          218
+        ]
+      ],
+      "sha256_expected": "87d744adb8fc0bedef9963bca2a29e2034e4f681a4a6783d723c5d2a4c378e43",
+      "sha256_observed": "87d744adb8fc0bedef9963bca2a29e2034e4f681a4a6783d723c5d2a4c378e43",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          175
+        ]
+      ],
+      "sha256_expected": "3969f10a6226d3848ee8d55a169c584a18576aa46c367cf6adbeeed8ac5c67ac",
+      "sha256_observed": "3969f10a6226d3848ee8d55a169c584a18576aa46c367cf6adbeeed8ac5c67ac",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/f5tts-voice-cloning-sota/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "sha256_expected": "acfda3e7b6e3ec2f3ff2f88b9090321fba2ab86f8851e931db51663087bea72c",
+      "sha256_observed": "acfda3e7b6e3ec2f3ff2f88b9090321fba2ab86f8851e931db51663087bea72c",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/workspace/c5-epistemic-thermodynamics-project/references/modules/wait-what/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          36
+        ]
+      ],
+      "sha256_expected": "db2ad5a4e2f1beaca7a84fe4ce76aa3b58277a2ec9417acbb4b60343483fcaaf",
+      "sha256_observed": "db2ad5a4e2f1beaca7a84fe4ce76aa3b58277a2ec9417acbb4b60343483fcaaf",
+      "changed_since_manifest": false
+    }
+  ],
+  "tool_limitations": [
+    "No native codebase-memory graph tools exposed; used targeted file reads and rg.",
+    "Static audit only; no tests, compilation, runtime, external API calls or physical measurements.",
+    "Cloudflare reference API currency not independently verified.",
+    "Hashes checked at report creation; concurrent edits outside that snapshot are possible."
+  ],
+  "tests_run": []
+}

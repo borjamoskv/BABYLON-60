@@ -1,0 +1,49 @@
+{
+  "regressions": {
+    "command": [
+      "uv",
+      "run",
+      "--locked",
+      "--no-sync",
+      "pytest",
+      "tests/test_swarm100_lot12_s1_regressions.py",
+      "tests/test_ledger_snapshot_engine.py",
+      "-q",
+      "-o",
+      "addopts=--tb=short"
+    ],
+    "exit_code": 0,
+    "log": "regressions.log",
+    "log_sha256": "70dc51ac83f5a25b6bc140e45f0335c01f4eb7c1099e157a75fe402db45202a4"
+  },
+  "ruff": {
+    "command": [
+      "uv",
+      "run",
+      "--locked",
+      "--no-sync",
+      "ruff",
+      "check",
+      "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+      "tests/test_swarm100_lot12_s1_regressions.py"
+    ],
+    "exit_code": 0,
+    "log": "ruff.log",
+    "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+  },
+  "mypy": {
+    "command": [
+      "uv",
+      "run",
+      "--locked",
+      "--no-sync",
+      "mypy",
+      "--follow-imports=silent",
+      "--check-untyped-defs",
+      "scripts/c5_l1_ledger/ledger_snapshot_engine.py"
+    ],
+    "exit_code": 0,
+    "log": "mypy.log",
+    "log_sha256": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e"
+  }
+}

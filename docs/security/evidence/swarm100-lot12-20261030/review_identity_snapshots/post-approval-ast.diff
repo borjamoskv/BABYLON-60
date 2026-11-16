@@ -1,0 +1,35 @@
+--- 
++++ 
+@@ -590,14 +590,26 @@
+               ExceptHandler(
+                type=Name(id='OSError', ctx=Load()),
+                body=[
+-                Expr(
++                Assign(
++                 targets=[
++                  Name(id='add_note', ctx=Store())],
+                  value=Call(
+-                  func=Attribute(
+-                   value=Name(id='error', ctx=Load()),
+-                   attr='add_note',
+-                   ctx=Load()),
++                  func=Name(id='getattr', ctx=Load()),
+                   args=[
+-                   Constant(value='Snapshot output cleanup failed; inspect unpublished files')]))])])]),
++                   Name(id='error', ctx=Load()),
++                   Constant(value='add_note'),
++                   Constant(value=None)])),
++                If(
++                 test=Call(
++                  func=Name(id='callable', ctx=Load()),
++                  args=[
++                   Name(id='add_note', ctx=Load())]),
++                 body=[
++                  Expr(
++                   value=Call(
++                    func=Name(id='add_note', ctx=Load()),
++                    args=[
++                     Constant(value='Snapshot output cleanup failed; inspect unpublished files')]))])])])]),
+           Raise()])],
+        finalbody=[
+         Expr(

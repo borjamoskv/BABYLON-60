@@ -1,0 +1,208 @@
+diff --git a/tests/test_bounty_aeon_sealer.py b/tests/test_bounty_aeon_sealer.py
+index 8ef637c9..4640ee48 100644
+--- a/tests/test_bounty_aeon_sealer.py
++++ b/tests/test_bounty_aeon_sealer.py
+@@ -4,35 +4,61 @@
+ # ============================================================================
+ """test_bounty_aeon_sealer.py — Validación de Transición de Aeón Conforme (INV_C5_AEON).
+ 
+-Certifica:
++Comprueba con claves de software y datos temporales:
+ 1. Construcción y verificación de pruebas de inclusión en ConformalMerkleTree.
+ 2. Detección determinista de adulteración en pruebas de Merkle.
+-3. Sellado L1 completo de un Cold Ledger con firmas Ed25519, hardware quotes y TSA.
++3. Manifiesto de un Cold Ledger autenticado con Ed25519 y ancla externa;
++   UUID y TSA son registradores de prueba, sin atestación hardware o temporal real.
+ 4. Aislamiento estricto de persistencia en temp_dir() (Cero-Fuga WAL).
+ """
+ 
+ from __future__ import annotations
+ 
+ import base64
++import importlib
+ import json
+ from pathlib import Path
+ 
++import pytest
+ from cryptography.hazmat.primitives.asymmetric import ed25519
+ 
+ from babylon60.attestation import (
+     AeonVerifier,
+     ConformalMerkleTree,
++    MerkleCausalAnchor,
+     extract_claims_from_ledger as extract_claims_for_sealing,
+ )
++from babylon60.attestation.conformal_tree import canonical_aeon_manifest_bytes
+ from babylon60.bft.bounty_claim_attester import BountyClaimReceipt
+ from babylon60.bft.bounty_cold_ledger import BountyColdLedger
+ from babylon60.bft.bounty_remediation import synthesize_domain_remediation
+-from scripts.c5_l1_ledger.seal_bounty_aeon import (
+-    seal_bounty_aeon,
+-)
+-from scripts.c5_sharur.c5_bounty_sharur_exfiltration import (
+-    fetch_scitt_claims,
+-)
++
++
++@pytest.fixture(autouse=True)
++def isolated_aeon_environment(tmp_path, monkeypatch):
++    """Set the temporary environment before loading scripts with effect boundaries."""
++    monkeypatch.setenv("HOME", str(tmp_path))
++    monkeypatch.chdir(tmp_path)
++    monkeypatch.setenv("BABYLON60_SIGNING_SEED", "00" * 32)
++    monkeypatch.delenv("CORTEX_VAULT_KEY", raising=False)
++    monkeypatch.delenv("BABYLON_AEON_TRUSTED_PUBLIC_KEY_B64", raising=False)
++    import dotenv
++
++    monkeypatch.setattr(dotenv, "load_dotenv", lambda *args, **kwargs: False)
++    monkeypatch.setattr(dotenv, "dotenv_values", lambda *args, **kwargs: {})
++    monkeypatch.setattr(
++        MerkleCausalAnchor,
++        "get_hardware_identity",
++        lambda self: {"uuid": "TEST-SOFTWARE-UUID", "os": "Fixture", "machine": "Test", "enclave_type": "FIXTURE"},
++    )
++
++
++@pytest.fixture
++def sealer(tmp_path, monkeypatch, isolated_aeon_environment):
++    module = importlib.import_module("scripts.c5_l1_ledger.seal_bounty_aeon")
++    monkeypatch.setattr(module, "_ROOT", tmp_path)
++    monkeypatch.setattr(module.RFC3161Client, "request_timestamp", lambda self, root: {})
++    return module
+ 
+ 
+ def _clean_sqlite_triplet(db_path: Path) -> None:
+@@ -67,8 +93,8 @@ def test_conformal_merkle_tree_inclusion_and_falsification() -> None:
+     assert ConformalMerkleTree.verify_inclusion_proof(leaves[0], proof_0, fake_root) is False
+ 
+ 
+-def test_aeon_sealing_end_to_end(tmp_path: Path) -> None:
+-    """Prueba el sellado L1 completo respetando el aislamiento de persistencia."""
++def test_aeon_sealing_end_to_end(tmp_path: Path, sealer) -> None:
++    """Autentica un manifiesto completo con identidad de software temporal."""
+     db_file = tmp_path / "test_aeon_ledger.db"
+     out_dir = tmp_path / "L1_sink_test"
+     _clean_sqlite_triplet(db_file)
+@@ -101,7 +127,7 @@ def test_aeon_sealing_end_to_end(tmp_path: Path) -> None:
+ 
+         # 3. Ejecutar sellado L1
+         aeon_id = "AEON-TEST-OMEGA"
+-        artifact = seal_bounty_aeon(
++        artifact = sealer.seal_bounty_aeon(
+             db_path=str(db_file),
+             aeon_id=aeon_id,
+             output_dir=str(out_dir),
+@@ -116,7 +142,7 @@ def test_aeon_sealing_end_to_end(tmp_path: Path) -> None:
+         assert "rfc3161_tsa" in artifact
+         assert "sovereign_identity" in artifact
+ 
+-        # 4. Validar firma criptográfica Ed25519 sobre la raíz Merkle
++        # 4. Validar firma Ed25519 sobre todos los campos del manifiesto v2.
+         pub_b64 = artifact["sovereign_identity"]["l0_public_key_b64"]
+         sig_b64 = artifact["sovereign_identity"]["ed25519_signature_b64"]
+         pub_bytes = base64.b64decode(pub_b64)
+@@ -124,7 +150,10 @@ def test_aeon_sealing_end_to_end(tmp_path: Path) -> None:
+         pub_key = ed25519.Ed25519PublicKey.from_public_bytes(pub_bytes)
+ 
+         # La verificación no debe lanzar InvalidSignature
+-        pub_key.verify(sig_bytes, bytes.fromhex(artifact["merkle_root"]))
++        pub_key.verify(sig_bytes, canonical_aeon_manifest_bytes(artifact))
++        assert artifact["schema"] == "babylon60.aeon-manifest.v2"
++        assert artifact["hardware_attestation"]["hardware_attestation_verified"] is False
++        assert artifact["hardware_attestation"]["attestation_status"] == "SOFTWARE_ONLY_UNATTESTED"
+ 
+         # 5. Validar que el archivo JSON fue escrito correctamente en disco
+         target_json = out_dir / f"{aeon_id.lower().replace('-', '_')}.json"
+@@ -133,11 +162,23 @@ def test_aeon_sealing_end_to_end(tmp_path: Path) -> None:
+         assert loaded["merkle_root"] == artifact["merkle_root"]
+ 
+         # 6. Validar mediante AeonVerifier (Oráculo L1)
+-        v_report = AeonVerifier.verify_manifest(manifest_path=target_json, db_path=str(db_file))
++        v_report = AeonVerifier.verify_manifest(
++            manifest_path=target_json, db_path=str(db_file), expected_public_key_b64=pub_b64
++        )
+         assert v_report["overall_valid"] is True
+         assert v_report["tree_integrity_valid"] is True
+         assert v_report["ed25519_signature_valid"] is True
+         assert v_report["recomputed_claims_count"] == 15
++        assert v_report["identity_trusted"] is True
++        assert v_report["hardware_attestation_verified"] is False
++        assert v_report["verification_scope"] == "AUTHENTICATED_MANIFEST_AND_LEDGER"
++        assert AeonVerifier.verify_manifest(target_json, db_file)["overall_valid"] is False
++        assert (
++            AeonVerifier.verify_manifest(target_json, db_file, expected_public_key_b64=pub_b64, require_hardware=True)[
++                "overall_valid"
++            ]
++            is False
++        )
+ 
+         # 7. Validar prueba de inclusión de un claim mediante AeonVerifier
+         c_report = AeonVerifier.verify_claim_membership(
+@@ -156,6 +197,8 @@ def test_aeon_sealing_end_to_end(tmp_path: Path) -> None:
+ def test_exfiltration_remediation_heuristics(tmp_path: Path) -> None:
+     """Valida la generación de planes de mitigación deterministas por dominios."""
+     db_file = tmp_path / "test_exfilt_ledger.db"
++    from scripts.c5_sharur.c5_bounty_sharur_exfiltration import fetch_scitt_claims
++
+     _clean_sqlite_triplet(db_file)
+ 
+     try:
+diff --git a/tests/test_compliance_and_attestation.py b/tests/test_compliance_and_attestation.py
+index 0df3041d..7519c743 100644
+--- a/tests/test_compliance_and_attestation.py
++++ b/tests/test_compliance_and_attestation.py
+@@ -4,14 +4,29 @@ Unit tests for compliance_exporter and attestation modules (BABYLON-60 v4.0).
+ 
+ import os
+ import tempfile
++
++import pytest
++
+ from babylon60.compliance_exporter import EUAIActComplianceExporter
+ from babylon60.attestation import MerkleCausalAnchor
+ 
+ 
+-def test_eu_ai_act_compliance_exporter_locales() -> None:
+-    import pytest
++@pytest.fixture(autouse=True)
++def isolated_attestation_environment(tmp_path, monkeypatch):
++    """All identity observations and files belong to this software fixture."""
++    monkeypatch.setenv("HOME", str(tmp_path))
++    monkeypatch.chdir(tmp_path)
++    monkeypatch.delenv("CORTEX_VAULT_KEY", raising=False)
++    monkeypatch.setenv("BABYLON60_SIGNING_SEED", "00" * 32)
++    monkeypatch.setattr(
++        MerkleCausalAnchor,
++        "get_hardware_identity",
++        lambda self: {"uuid": "TEST-SOFTWARE-UUID", "os": "Fixture", "machine": "Test", "enclave_type": "FIXTURE"},
++    )
++
+ 
+-    exporter_fail = EUAIActComplianceExporter(artifact_bundle_path="/tmp/non_existent_bundle_12345")
++def test_eu_ai_act_compliance_exporter_locales(tmp_path) -> None:
++    exporter_fail = EUAIActComplianceExporter(artifact_bundle_path=str(tmp_path / "missing_bundle"))
+     with pytest.raises(FileNotFoundError):
+         exporter_fail.generate_certificate("system_agent_01", "Bank_EU_Operator")
+ 
+@@ -63,11 +78,19 @@ def test_merkle_causal_anchor_tpm_quote() -> None:
+     quote = anchor.generate_hardware_pcr_quote(root_hash)
+ 
+     assert quote["pcr_index"] == "10"
+-    assert quote["hardware_enclave"].startswith("TPM_2_0_HARDWARE_SEALED")
+-    assert len(quote["tpm_quote_signature"]) == 64
++    assert quote["hardware_enclave"] == "SOFTWARE_ONLY_UNATTESTED"
++    assert quote["attestation_status"] == "SOFTWARE_ONLY_UNATTESTED"
++    assert quote["hardware_attestation_verified"] is False
++    assert quote["tpm_quote_signature"] == ""
++    assert quote["hardware_uuid"] == "TEST-SOFTWARE-UUID"
++    assert quote["measurement_algorithm"] == "SHA-256_SOFTWARE"
++    assert len(quote["pcr_value"]) == 64
++    with pytest.raises(RuntimeError, match="Hardware attestation is unavailable"):
++        anchor.generate_hardware_pcr_quote(root_hash, require_hardware=True)
+ 
+ 
+ def test_merkle_causal_anchor_checkpoint() -> None:
++    """Check the local payload format; no network checkpoint is exercised."""
+     anchor = MerkleCausalAnchor()
+     root_hash = "a3f8c1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0"
+     chk = anchor.generate_notary_checkpoint(root_hash, "ethereum_l2_sepolia")

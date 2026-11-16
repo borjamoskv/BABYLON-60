@@ -1,0 +1,79 @@
+{
+  "comparison_unit": "Configured environment, not isolated model weights",
+  "condition_mapping": "Operator holds mapping outside package and blinded review material",
+  "new_chat_per_run": true,
+  "same_prompt_bytes": true,
+  "trial_order": [
+    {
+      "order": 1,
+      "run_id": "A01",
+      "condition": "A",
+      "repetition": 1,
+      "status": "not_started"
+    },
+    {
+      "order": 2,
+      "run_id": "B01",
+      "condition": "B",
+      "repetition": 1,
+      "status": "not_started"
+    },
+    {
+      "order": 3,
+      "run_id": "B02",
+      "condition": "B",
+      "repetition": 2,
+      "status": "not_started"
+    },
+    {
+      "order": 4,
+      "run_id": "A02",
+      "condition": "A",
+      "repetition": 2,
+      "status": "not_started"
+    },
+    {
+      "order": 5,
+      "run_id": "A03",
+      "condition": "A",
+      "repetition": 3,
+      "status": "not_started"
+    },
+    {
+      "order": 6,
+      "run_id": "B03",
+      "condition": "B",
+      "repetition": 3,
+      "status": "not_started"
+    },
+    {
+      "order": 7,
+      "run_id": "B04",
+      "condition": "B",
+      "repetition": 4,
+      "status": "not_started"
+    },
+    {
+      "order": 8,
+      "run_id": "A04",
+      "condition": "A",
+      "repetition": 4,
+      "status": "not_started"
+    },
+    {
+      "order": 9,
+      "run_id": "A05",
+      "condition": "A",
+      "repetition": 5,
+      "status": "not_started"
+    },
+    {
+      "order": 10,
+      "run_id": "B05",
+      "condition": "B",
+      "repetition": 5,
+      "status": "not_started"
+    }
+  ],
+  "results": "No A/B trial has been executed"
+}

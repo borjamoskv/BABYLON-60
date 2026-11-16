@@ -1,0 +1,29 @@
+{
+  "result": "PASS",
+  "only_production_source": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+  "session_delta_ast_unchanged": true,
+  "session_transformations_and_retention_ast_unchanged": true,
+  "unchanged_previous_sources_and_dependencies": {
+    "scripts/c5_verifiers/purge_residuals.py": true,
+    "scripts/c5_thermo/c5_exergy_optimizer_monitor.py": true,
+    "scripts/c5_cortex/cortex_objectives_transducer.py": true,
+    "scripts/c5_verifiers/fast_smt_gate.py": true,
+    "pyproject.toml": true,
+    "uv.lock": true,
+    "Cargo.lock": true
+  },
+  "impacted_registry_ids": [
+    "SW100-C0167",
+    "SW100-C0168",
+    "SW100-C0169"
+  ],
+  "source_before": "c84b230f9424e7ff676750c535f450b03739f057583ac28e1468f342818b9ca0",
+  "source_after": "837faee40ae13b74cbb7b4d1e61fc6209285bb3362c23d2d2abd94c480b4b064",
+  "lot12_sources_unchanged": {
+    "scripts/c5_l1_ledger/ledger_snapshot_engine.py": "126474f8d45284fee75951c5a9ddd7abc350352be7df3adb6df8653aeb8e3ca2"
+  },
+  "review_adjustments": [
+    "Memory-directory identity checked against active lock base descriptor",
+    "AttributeError retains completed-files context; original cause preserved"
+  ]
+}

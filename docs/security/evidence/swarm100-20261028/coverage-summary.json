@@ -1,0 +1,19 @@
+{
+  "reports": 100,
+  "missing_shards": [],
+  "coverage_errors": [],
+  "states": {
+    "reviewed_full": 2459,
+    "partial": 5,
+    "reviewed_partial": 10,
+    "metadata_only": 9
+  },
+  "cross_references": [
+    {
+      "shard": 7,
+      "cross_reference": "01_KISH_ENGINE/babylon60/transducers/void_vec.py"
+    }
+  ],
+  "changed_since_manifest": [],
+  "candidate_count": 598
+}

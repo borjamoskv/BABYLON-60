@@ -1,0 +1,191 @@
+[
+  {
+    "id": "V01",
+    "candidate_id": "SW100-C0071",
+    "suggested_initial_severity": "P1",
+    "adjudicated_severity": "P1",
+    "title": "Observaciones NEMESIS emitidas sin ejecutar campañas",
+    "status": "REPRODUCED_AND_REPLAYED_IN_ISOLATED_FIXTURES",
+    "path": "01_KISH_ENGINE/babylon60/compliance_exporter/m0_evidence_pack.py",
+    "line": 599,
+    "source_sha256": "73ce7d7678e5de4e05c1bd1248e78abd180eef5f430f44f7147279c001b56e41",
+    "evidence": "a/result.json",
+    "case_keys": [
+      "default_compile"
+    ],
+    "observed": "El compilador genera cuatro campañas SUPPORTED_WITHIN_SCOPE sin campañas ejecutadas; firma software y checksums válidos sobre los bytes emitidos.",
+    "limits": "Una firma correcta acredita bytes y clave; no acredita que las observaciones ocurrieran."
+  },
+  {
+    "id": "V02",
+    "candidate_id": "SW100-C0072",
+    "suggested_initial_severity": "P1",
+    "adjudicated_severity": "P1",
+    "title": "Salida existente eliminada antes de validar entradas",
+    "status": "REPRODUCED_AND_REPLAYED_IN_ISOLATED_FIXTURES",
+    "path": "01_KISH_ENGINE/babylon60/compliance_exporter/m0_evidence_pack.py",
+    "line": 585,
+    "source_sha256": "73ce7d7678e5de4e05c1bd1248e78abd180eef5f430f44f7147279c001b56e41",
+    "evidence": "a/result.json",
+    "case_keys": [
+      "invalid_claims_deletion",
+      "invalid_ledger_deletion"
+    ],
+    "observed": "Con CLAIMS inexistente y, por separado, ledger inexistente, compile_pack falla después de borrar el archivo testigo previo.",
+    "limits": "Dos variantes del mismo defecto. Solo directorios desechables bajo el argumento output_dir."
+  },
+  {
+    "id": "V03",
+    "candidate_id": "SW100-C0172",
+    "suggested_initial_severity": "P1",
+    "adjudicated_severity": "P1",
+    "title": "CRL malformada deja pasar certificado revocado",
+    "status": "REPRODUCED_AND_REPLAYED_IN_ISOLATED_FIXTURES",
+    "path": "01_KISH_ENGINE/babylon60/verifier/cli.py",
+    "line": 78,
+    "source_sha256": "074621da76e6c6b5f3ba2138f74d0106e58a33d74fa4e835039ba774a1d42eab",
+    "evidence": "b/results.json",
+    "case_keys": [
+      "malformed_crl"
+    ],
+    "observed": "La lista válida rechaza el certificado de fixture; con JSON malformado en la misma ruta, el parser lo convierte en un literal de ID y el certificado pasa.",
+    "limits": "Certificado de prueba firmado con Ed25519 software; sin alegación de falsificación ni autoridad de un emisor productivo."
+  },
+  {
+    "id": "V04",
+    "candidate_id": "SW100-C0177",
+    "suggested_initial_severity": "P1",
+    "adjudicated_severity": "P1",
+    "title": "Payload del ledger JSON alterado mantiene el resultado válido",
+    "status": "REPRODUCED_AND_REPLAYED_IN_ISOLATED_FIXTURES",
+    "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+    "line": 450,
+    "source_sha256": "bc5045430f0910c80906d669f3d9d622066c490f2a29560e512d7ddbedb78dcd",
+    "evidence": "b/results.json",
+    "case_keys": [
+      "json_ledger_payload"
+    ],
+    "observed": "Cambiar amount de10a999999 conservando entry_hash y raíz firmada mantiene valid=True; cambiar el hash sí se rechaza.",
+    "limits": "Se acredita integridad insuficiente de los campos del evento; una lista que solo declara hashes puede tener otro contrato. No se rompió la función hash ni la firma."
+  },
+  {
+    "id": "V05",
+    "candidate_id": "SW100-C0184",
+    "suggested_initial_severity": "P1",
+    "adjudicated_severity": "P1",
+    "title": "Revocación intercalada permite hijo activo de padre revocado",
+    "status": "REPRODUCED_AND_REPLAYED_IN_ISOLATED_FIXTURES",
+    "path": "01_KISH_ENGINE/babylon60/memory/governance.py",
+    "line": 468,
+    "source_sha256": "aa507c6b36557817bc8d80207cf82f2d48722f37995ddd57eee841af792eb622",
+    "evidence": "b/results.json",
+    "case_keys": [
+      "governance_parent_revocation_interleaving"
+    ],
+    "observed": "Dos instancias SQLite: A valida el padre; se ejecuta la revocación B en el punto de append; A reanuda y persiste hijo ACTIVE con padre REVOKED. Añadir tras una revocación ya terminada se rechaza.",
+    "limits": "Intercalado determinista mediante hook de planificación; lógica real de validación y persistencia. No es estrés multihilo ni bypass de autenticación."
+  },
+  {
+    "id": "V06",
+    "candidate_id": "SW100-C0291",
+    "suggested_initial_severity": "P1",
+    "adjudicated_severity": "P1",
+    "title": "Cristal con contenido alterado conserva INTEGRITY_VERIFIED",
+    "status": "REPRODUCED_AND_REPLAYED_IN_ISOLATED_FIXTURES",
+    "path": "01_KISH_ENGINE/babylon60/autodidact/crystal_compiler.py",
+    "line": 239,
+    "source_sha256": "df12946f0b9950e0f603538b8da9ea22d7d36d1b699871f24ed415c82112b39d",
+    "evidence": "c/results.json",
+    "case_keys": [
+      "crystal_json_content_integrity"
+    ],
+    "observed": "El cristal generado originalmente se modifica para afirmar cinco lados en un triángulo, conservando statement_hash; verify_crystal_integrity lo acepta. Cambiar el hash sí falla.",
+    "limits": "Se ejecutó la API; la CLI y consumidores externos se trazaron antes pero no se ejecutaron en esta reproducción."
+  },
+  {
+    "id": "V07",
+    "candidate_id": "SW100-C0303",
+    "suggested_initial_severity": "P1",
+    "adjudicated_severity": "P2",
+    "title": "Conclusión ajena recibe FormalProof y estado CANONICAL",
+    "status": "REPRODUCED_AND_REPLAYED_IN_ISOLATED_FIXTURES",
+    "path": "01_KISH_ENGINE/babylon60/autodidact/epistemology.py",
+    "line": 146,
+    "source_sha256": "b7385f413c53dacc2278e594c4d642db6b30b510581bb2a1995b807b550da7fb",
+    "evidence": "c/results.json",
+    "case_keys": [
+      "unrelated_derive_goal"
+    ],
+    "observed": "Una premisa sobre triángulos de tres lados permite un objetivo contradictorio de cinco lados: FormalProof, confianza1.0, CANONICAL y verify=True. El control de modalidad deóntica sí rechaza.",
+    "limits": "Se rebaja la prioridad sugerida P1aP2en esta ronda: defecto real de comprobación/etiquetado del modelo, sin efecto externo autorizado demostrado."
+  },
+  {
+    "id": "V08",
+    "candidate_id": "SW100-C0364",
+    "suggested_initial_severity": "P1",
+    "adjudicated_severity": "P1",
+    "title": "El marcado de shredding conserva la capacidad de descifrar",
+    "status": "REPRODUCED_AND_REPLAYED_IN_ISOLATED_FIXTURES",
+    "path": "01_KISH_ENGINE/babylon60/crypto/shredder.py",
+    "line": 353,
+    "source_sha256": "168ff4a5b7b0b7ed198726bdd418d1af15fc5a36d9d5264a36e6cd06214b0b9c",
+    "evidence": "c/results.json",
+    "case_keys": [
+      "crypto_shredding_decryptability"
+    ],
+    "observed": "shred_fact devuelve éxito y deja marcas persistente/en memoria; el mismo ciphertext se descifra con la instancia existente y otra instancia creada con la misma clave sintética.",
+    "limits": "Contradice la destrucción criptográfica anunciada en esta API; no evalúa borrado físico ni filtros de consulta de la aplicación."
+  },
+  {
+    "id": "V09",
+    "candidate_id": "SW100-C0483",
+    "suggested_initial_severity": "P1",
+    "adjudicated_severity": "P1",
+    "title": "Ledger divergente con igual nombre se elimina",
+    "status": "REPRODUCED_AND_REPLAYED_IN_ISOLATED_FIXTURES",
+    "path": "scripts/c5_cortex/consolidate_dbs.py",
+    "line": 70,
+    "source_sha256": "ceb44ff71f51d780eefc8eb82bc9e55c00df136b12e9073a04c77a1f6232c390",
+    "evidence": "d/results.json",
+    "case_keys": [
+      "divergent_same_name_ledger_deletion"
+    ],
+    "observed": "Origen y destino tienen filas distintas. Después de consolidate_dbs el origen desaparece y el destino conserva solo su fila anterior.",
+    "limits": "Invocación local explícita, globals REPO_ROOT/CENTRAL_DIR redirigidas a directorios temporales."
+  },
+  {
+    "id": "V10",
+    "candidate_id": "SW100-C0484",
+    "suggested_initial_severity": "P1",
+    "adjudicated_severity": "P1",
+    "title": "La copia de SQLite pierde filas confirmadas solo en WAL",
+    "status": "REPRODUCED_AND_REPLAYED_IN_ISOLATED_FIXTURES",
+    "path": "scripts/c5_cortex/consolidate_dbs.py",
+    "line": 32,
+    "source_sha256": "ceb44ff71f51d780eefc8eb82bc9e55c00df136b12e9073a04c77a1f6232c390",
+    "evidence": "d/results.json",
+    "case_keys": [
+      "committed_wal_omitted_then_deleted"
+    ],
+    "observed": "Una fila confirmada está en WAL. La copia central queda vacía y el WAL de origen se elimina.",
+    "limits": "Conexión de fixture abierta y autocheckpoint desactivado; testigo SQL real. No se tocó un ledger del operador."
+  },
+  {
+    "id": "V11",
+    "candidate_id": "SW100-C0539",
+    "suggested_initial_severity": "P1",
+    "adjudicated_severity": "P1",
+    "title": "El purge de extensión acepta rutas fuera de Extensions",
+    "status": "REPRODUCED_AND_REPLAYED_IN_ISOLATED_FIXTURES",
+    "path": "tools/skill_library/global/c5-browser-forensics-and-extension-triage/scripts/browser_forensics.py",
+    "line": 171,
+    "source_sha256": "57ce214bbe5979e64b06b05a1e5554fc26f9705986dd382c78f330baa1ae06f9",
+    "evidence": "d/results.json",
+    "case_keys": [
+      "extension_purge_relative_traversal",
+      "extension_purge_absolute_path"
+    ],
+    "observed": "Con ../victim y con una ruta absoluta se elimina un directorio testigo fuera de Extensions, manteniendo el perfil falso.",
+    "limits": "Dos variantes del mismo defecto; callbacks y funciones reales, base de Chrome redirigida y guardas de borrado limitadas a fixtures."
+  }
+]

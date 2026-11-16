@@ -1,0 +1,56 @@
+{
+  "scope": "isolated source/stdlib fixtures; not protected runtime validation",
+  "results": [
+    {
+      "candidate_id": "SW100-C0186",
+      "scope": "Current SQL query over an isolated 1026-edge fixture; no governance engine or ledger started",
+      "observed": {
+        "chain_nodes": 1027,
+        "selected_nodes": 1025,
+        "highest_selected_depth": 1024
+      }
+    },
+    {
+      "candidate_id": "SW100-C0541",
+      "scope": "Current assert AST only; no biological model, graph, data or CLI run",
+      "observed": {
+        "0": "AssertionError",
+        "1": "no rejection"
+      }
+    },
+    {
+      "candidate_id": "SW100-C0580",
+      "scope": "SQLite in-memory comparison with a fixed clock; no Cloudflare service used",
+      "observed": {
+        "text_predicate_accepts_expired": true,
+        "normalized_predicate_accepts_expired": false
+      }
+    },
+    {
+      "candidate_id": "SW100-C0149",
+      "scope": "Current two method ASTs without CortexMCPServer construction, stdio loop, authorization gate, or DB access",
+      "observed": [
+        "JSONDecodeError",
+        "ValueError"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0225",
+      "scope": "Current synchronizer functions against a temporary fixture containing only babylon.toml and LICENSE",
+      "observed": {
+        "result": true,
+        "missing_required_targets": 4,
+        "output": "[BABYLON-60 VERSION GATE] Canonical Version: v1.2.3 (from babylon.toml)\n  [!] Missing target file: Cargo.toml\n  [!] Missing target file: pyproject.toml\n  [!] Missing target file: 01_KISH_ENGINE/babylon60/cli/main_dispatcher.py\n  [!] Missing target file: 01_KISH_ENGINE/babylon60/mcp/cortex_mcp_server.py\n\n[✓] Todas las superficies alineadas con babylon.toml.\n"
+      }
+    },
+    {
+      "candidate_id": "SW100-C0447",
+      "scope": "Exact current loop body with a bounded harness; CortexInferenceEngine never imported or constructed",
+      "observed": {
+        "vocabulary_size": 47,
+        "unique_queries_at_first_stall": 282,
+        "first_stalled_iteration_zero_based": 282
+      }
+    }
+  ]
+}

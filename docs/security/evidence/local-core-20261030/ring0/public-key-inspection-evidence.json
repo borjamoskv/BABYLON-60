@@ -1,0 +1,30 @@
+{
+  "command": [
+    "/Users/borjafernandezangulo/.codex/local-core-evidence/capture-20261029T230935Z/ring0/c5_biometric_gate",
+    "--inspect-public-key"
+  ],
+  "exit_code": 0,
+  "key_before": {
+    "sha256": "2402c2dcfc1832bd614873665d0f31223c2bdf0b4484b799617dd5a3bf976e42",
+    "mode": "0o600",
+    "inode": 550595345,
+    "size": 838,
+    "mtime_ns": 1792808010993115189
+  },
+  "key_after": {
+    "sha256": "2402c2dcfc1832bd614873665d0f31223c2bdf0b4484b799617dd5a3bf976e42",
+    "mode": "0o600",
+    "inode": 550595345,
+    "size": 838,
+    "mtime_ns": 1792808010993115189
+  },
+  "unchanged": true,
+  "binary_sha256": "b303a0b155ed12abbf4c3574f476df6249095e0127f2e8efcc8b8e9b07cf63d7",
+  "source_sha256": "79b6ea08597c31f5b39a705464823dd0d23175f189c8005d0e84c9d385d7a92d",
+  "attempts": 1,
+  "authentication_requested": false,
+  "signature_requested": false,
+  "status": "PUBLIC_KEY_INSPECTED",
+  "public_key_sha256": "fd7e4f541f712d8ed5d717ae2fdc3df71807e97b130f1d375d3b964120845c4a",
+  "returned_record_hash_matches": true
+}

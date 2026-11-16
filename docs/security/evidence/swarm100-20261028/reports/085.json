@@ -1,0 +1,396 @@
+{
+  "shard": "085",
+  "findings": [
+    {
+      "title": "Failed commit is retried with hooks disabled",
+      "severity": "P1",
+      "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+      "line": 43,
+      "evidence": "run_git_sentinel retries every nonzero git commit using --no-verify. add-objective/add-milestone/update-status/iter call it at lines 159,196,225,270.",
+      "trigger": "A pre-commit or commit-msg policy hook rejects an objective change.",
+      "impact": "The automatic retry can commit the rejected tree without its validation hooks.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Objective commands stage unrelated work",
+      "severity": "P1",
+      "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+      "line": 39,
+      "evidence": "run_git_sentinel runs git add . from WORKSPACE_DIR before committing; callers mutate the objectives YAML and optionally PROJECT.md.",
+      "trigger": "Run an objective mutation while unrelated tracked edits or nonignored untracked files exist.",
+      "impact": "Unrelated work is staged and committed under the objective message, potentially capturing private or unfinished files.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Merkle evidence seal does not bind field names",
+      "severity": "P1",
+      "path": "tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+      "line": 703,
+      "evidence": "compute_merkle_root hashes only each value then sorts the leaf hashes at line 705; main stores this root as merkle_seal at 2935-2940.",
+      "trigger": "Swap values of author and text, or rename evidence fields while retaining the multiset of values.",
+      "impact": "Different evidence records have the same seal without a SHA-256 collision, undermining the advertised tamper evidence.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Native Hamming batch accepts buffers shorter than its stride",
+      "severity": "P1",
+      "path": "01_KISH_ENGINE/babylon60/transducers/void_vec.py",
+      "line": 88,
+      "evidence": "flat_batch joins arbitrary byte strings; q_len alone is passed as the native stride without validating each length. Cross-file utils/void_accel.c:28,34-35 and 58,64-65 read each target at i*len.",
+      "trigger": "A compatible native library is loaded and a batch member is shorter than query.",
+      "impact": "Native code reads outside the provided batch buffer; malformed input can crash the process or compute distances from unrelated memory. Native-library loading was not exercised.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Blackboard resolution is not an atomic OPEN transition",
+      "severity": "P2",
+      "path": "02_EDIN_SWARMS/agents_archi/orchestrator/blackboard.py",
+      "line": 316,
+      "evidence": "resolve reads and checks OPEN at 288-292, then UPDATE uses only WHERE tuple_id = ? and commits. Independent CortexWalStore connections use the same SQLite database.",
+      "trigger": "Two processes read the same OPEN tuple before either resolution commits.",
+      "impact": "Both can succeed and the later resolution overwrites the first status, verifier and evidence, violating the documented OPEN-only state transition.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "JSON output skips requested claim export",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/cli/bounty_cli.py",
+      "line": 246,
+      "evidence": "run_single_cycle returns immediately for json_output at 244-246; export_claims is processed only at 277-280.",
+      "trigger": "Invoke the CLI with --json --export-claims PATH and a cycle containing claim receipts.",
+      "impact": "The command exits successfully without creating the explicitly requested receipt file.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Generated Python CI hides failed tests",
+      "severity": "P2",
+      "path": "tools/skill_library/global/github-architect/scripts/repo_health.py",
+      "line": 179,
+      "evidence": "generate_ci_scaffold(\"python\") emits python -m pytest || true; --scaffold-ci prints that template at 313-315.",
+      "trigger": "Use the generated workflow in a Python repository with failing tests or missing pytest.",
+      "impact": "The test step succeeds despite test failure, allowing CI to advertise green validation.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Manifest inspector certifies properties it never checks",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/cli/bounty_cli.py",
+      "line": 121,
+      "evidence": "The branch condition at 118 checks native mode, address alignment, and halt state, then prints Landauer Bound OK and Fail-Stop Gate OK. It does not test either property or even include is_consistent in acceptance.",
+      "trigger": "Run --inspect-manifest with a native aligned nonhalted manifest.",
+      "impact": "CLI presents unsupported physical and fail-stop guarantees as checked invariants.",
+      "confidence": "high",
+      "kind": "runtime"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "01_KISH_ENGINE/babylon60/guards/capability_guard.py",
+      "line": 25,
+      "hypothesis": "Guard ignores allowed_capabilities and validate_tool_execution always returns True. No execution consumer was found in the targeted babylon60 search, so a live authorization bypass is not established."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/transducers/void_vec.py",
+      "line": 124,
+      "hypothesis": "A loadable library lacking both expected symbols leaves _accel truthy and _accel_func None; scalar and batch fallback call each other recursively. Requires that library configuration; not exercised."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".cursorrules",
+      "status": "metadata_only",
+      "ranges": [],
+      "inventory_hash": "not_applicable_symlink",
+      "notes": "Direct symlink target .babylon60rules verified without following it."
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/nul-zk/tests/arkworks_backend_test.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          6
+        ]
+      ],
+      "inventory_hash": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/cli/bounty_cli.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          406
+        ]
+      ],
+      "inventory_hash": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/guards/capability_guard.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          32
+        ]
+      ],
+      "inventory_hash": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/transducers/void_vec.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          149
+        ]
+      ],
+      "inventory_hash": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "02_EDIN_SWARMS/agents_archi/orchestrator/blackboard.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          437
+        ]
+      ],
+      "inventory_hash": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "crates/eridu-infer/src/ipc.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          421
+        ]
+      ],
+      "inventory_hash": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "docs/06_theory/axiom_moloch_landauer_balance.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          78
+        ]
+      ],
+      "inventory_hash": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "examples/poc_lean4_aot_emitter.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          78
+        ]
+      ],
+      "inventory_hash": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          311
+        ]
+      ],
+      "inventory_hash": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "scripts/c5_l1_ledger/anchor_l1_sink.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          85
+        ]
+      ],
+      "inventory_hash": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "scripts/c5_thermo/stress_sqlite_wal.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          105
+        ]
+      ],
+      "inventory_hash": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "src/executor_tests.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          812
+        ]
+      ],
+      "inventory_hash": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tests/test_audit_dashboard_security.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          69
+        ]
+      ],
+      "inventory_hash": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tests/test_lean_kernel_soundness.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          145
+        ]
+      ],
+      "inventory_hash": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/launch_babylon60_app.sh",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          31
+        ]
+      ],
+      "inventory_hash": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/containers/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          178
+        ]
+      ],
+      "inventory_hash": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/queues/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          144
+        ]
+      ],
+      "inventory_hash": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/web-analytics/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          141
+        ]
+      ],
+      "inventory_hash": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-rubin-acoustic-linter/scripts/audit_acoustic_exergy.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          178
+        ]
+      ],
+      "inventory_hash": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/scripts/generate_47_agents.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          457
+        ]
+      ],
+      "inventory_hash": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/c5-lexicon-enforcer/scripts/aphorism5_cost_linter.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          76
+        ]
+      ],
+      "inventory_hash": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          3006
+        ]
+      ],
+      "inventory_hash": "match",
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/github-architect/scripts/repo_health.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          333
+        ]
+      ],
+      "inventory_hash": "match",
+      "notes": "Static text review; no execution."
+    }
+  ],
+  "tool_limitations": [
+    "Native codebase-memory graph tools not exposed: ALL_TOOLS search for search_graph/index_repository returned no matches. Targeted text reads/searches used.",
+    "No tests, builds, runtime launches, or external API checks were run, as required.",
+    "Source inventory SHA-256 values matched all assigned regular text files."
+  ],
+  "tests_run": []
+}

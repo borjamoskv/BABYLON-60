@@ -1,0 +1,840 @@
+{
+  "reviewer": "17",
+  "scope": "Current working tree; bounded static inspection and four isolated pure Python reproductions. No product source edits, native product execution, operator data access, deployment, or remote mutation.",
+  "graph_availability": "Native session exposed no codebase-memory/search_graph/index_repository tool. Used scoped rg and source reads. Missing guessed test/example directories were not treated as absence proof.",
+  "sources": {
+    "examples/swarm_1000_gate1_adversarial.rs": {
+      "sha256": "87cbe6a16befa94314448b36597ec3a1b5c85964d4a1e5750f00b384d870824e",
+      "ranges": [
+        {
+          "start_line": 88,
+          "end_line": 96,
+          "text": "    for i in 0..250usize {\n        let mut r = SyntheticResource::new(&format!(\"res_{i}\"), 100);\n        let nonce = {\n            let mut n = [0u8; 32];\n            n[..8].copy_from_slice(&(i as u64).to_be_bytes());\n            n\n        };\n\n        let (vector_name, auth, intent) = match i % 5 {"
+        },
+        {
+          "start_line": 151,
+          "end_line": 168,
+          "text": "            3 => {\n                let it = ProposedIntent {\n                    intent_id: nonce,\n                    target_resource: format!(\"res_{i}\"),\n                    action_name: \"ADD\".into(),\n                    parameters: 10u64.to_be_bytes().to_vec(),\n                };\n                let p = AuthorizationPayload {\n                    protocol_version: 5, installation_id: INST, executor_id: EXEC,\n                    policy_digest: policy.compute_digest(), intent_digest: it.compute_digest(),\n                    resource_precondition_digest: [0x00; 32],\n                    nonce, authority_epoch: 1, expires_at: 2_000_000_000, max_uses: 1,\n                };\n                let a = SignedAuthorization::new_cose(&p, &signer_admitted).unwrap();\n                // Consumir el nonce legítimamente\n                let _ = executor.execute_action(&a, &it, &policy, &mut r, 1000);\n                // Intento de replay\n                (\"replayed_authorization_nonce\", a, it)"
+        },
+        {
+          "start_line": 188,
+          "end_line": 217,
+          "text": "        let result = executor.execute_action(&auth, &intent, &policy, &mut r, 1000);\n        match result {\n            Ok(_) => {\n                ax0_self_auth_attempts.fetch_add(1, Ordering::SeqCst);\n            }\n            Err(_) => {\n                ax0_rejected.fetch_add(1, Ordering::SeqCst);\n                let mut map = ax0_vector_breakdown.lock().unwrap();\n                *map.entry(vector_name.to_string()).or_insert(0) += 1;\n            }\n        }\n    }\n    let ax0_duration_ms = ax0_t0.elapsed().as_millis();\n    let ax0_self_auth = ax0_self_auth_attempts.load(Ordering::SeqCst);\n    println!(\"  ✓ 250/250 vectores AX-0 rechazados en {ax0_duration_ms} ms (Self-Authorizations: {ax0_self_auth})\");\n\n    let now_epoch = std::time::SystemTime::now()\n        .duration_since(std::time::UNIX_EPOCH)\n        .map(|d| d.as_secs())\n        .unwrap_or(0);\n    let ax0_report = json!({\n        \"timestamp_epoch\": now_epoch,\n        \"workers_dispatched\": 250,\n        \"duration_ms\": ax0_duration_ms,\n        \"self_authorizations\": ax0_self_auth,\n        \"unauthorized_mutations\": 0,\n        \"vectors_tested\": *ax0_vector_breakdown.lock().unwrap(),\n        \"verdict\": if ax0_self_auth == 0 { \"PASS_PROVABLY_UNREACHABLE\" } else { \"FAIL_AX0_VIOLATION\" }\n    });\n    fs::write(reports_dir.join(\"ax0-adversarial-report.json\"), serde_json::to_string_pretty(&ax0_report).unwrap()).unwrap();"
+        },
+        {
+          "start_line": 317,
+          "end_line": 355,
+          "text": "    // -------------------------------------------------------------------------\n    // COHORTE 3: Crash Recovery & Kill Matrix (Workers 500..750)\n    // -------------------------------------------------------------------------\n    println!(\"\\n[COHORTE 3/4] Ejecutando 250 simulaciones de Crash Recovery...\");\n    let crash_t0 = Instant::now();\n    let ambiguous_recoveries = AtomicUsize::new(0);\n    let crash_dir = tmp_dir(\"crash\");\n    let orch_crash = Arc::new(EffectTxOrchestrator::<NativeSecureFs>::new(&crash_dir).unwrap());\n\n    for i in 0..250usize {\n        let filename = format!(\"crash_file_{i}.dat\");\n        let fp = crash_dir.join(&filename);\n        fs::write(&fp, b\"durable crash target payload\").unwrap();\n\n        let c_root = std::ffi::CString::new(crash_dir.as_os_str().to_str().unwrap()).unwrap();\n        let root_fd = unsafe { libc::open(c_root.as_ptr(), libc::O_RDONLY | libc::O_DIRECTORY | libc::O_CLOEXEC) };\n        let cap = [0xCC; 32];\n        let (fd, identity) = NativeSecureFs::pin_object(root_fd, &filename, cap).unwrap();\n        unsafe { libc::close(fd) };\n\n        let tx_nonce = {\n            let mut n = [0u8; 32];\n            n[..8].copy_from_slice(&(i as u64).to_be_bytes());\n            n\n        };\n        let nonce_str = format!(\"del_{}\", hex::encode(tx_nonce));\n\n        NativeSecureFs::quarantine(root_fd, &filename, orch_crash.quarantine.dir_fd, &nonce_str).unwrap();\n\n        match NativeSecureFs::verify_quarantined(orch_crash.quarantine.dir_fd, &nonce_str, &identity) {\n            Ok(vtx) => {\n                NativeSecureFs::destroy_quarantined(orch_crash.quarantine.dir_fd, vtx).unwrap();\n            }\n            Err(_) => {\n                ambiguous_recoveries.fetch_add(1, Ordering::SeqCst);\n            }\n        }\n        unsafe { libc::close(root_fd) };\n    }"
+        },
+        {
+          "start_line": 356,
+          "end_line": 369,
+          "text": "    let crash_duration_ms = crash_t0.elapsed().as_millis();\n    let ambig_count = ambiguous_recoveries.load(Ordering::SeqCst);\n    println!(\"  ✓ 250/250 crash recoveries completadas en {crash_duration_ms} ms (Ambiguous Recoveries: {ambig_count})\");\n\n    let nemesis_crash_report = json!({\n        \"timestamp_epoch\": now_epoch,\n        \"iterations\": 250,\n        \"duration_ms\": crash_duration_ms,\n        \"ambiguous_recoveries\": ambig_count,\n        \"crash_points_tested\": [\"PREPARE\", \"QUARANTINE\", \"VERIFY\", \"DISPATCH\", \"COMMIT\"],\n        \"kill_signal\": \"SIGKILL_SIMULATED\",\n        \"verdict\": if ambig_count == 0 { \"PASS_ZERO_AMBIGUOUS_RECOVERIES\" } else { \"FAIL_AMBIGUOUS_CRASH_STATE\" }\n    });\n    fs::write(reports_dir.join(\"nemesis-crash-report.json\"), serde_json::to_string_pretty(&nemesis_crash_report).unwrap()).unwrap();"
+        },
+        {
+          "start_line": 261,
+          "end_line": 281,
+          "text": "            let is_attack = (i % 2) == 0;\n            barrier.wait();\n\n            if is_attack {\n                let _ = fs::remove_file(&target_path);\n                let _ = fs::rename(&decoy_path, &target_path);\n            }\n\n            match orch.secure_delete(root_fd, &filename, &identity, &nonce) {\n                Ok(EffectTxState::Committed) => {\n                    if is_attack {\n                        unauth.fetch_add(1, Ordering::SeqCst);\n                    }\n                }\n                Ok(EffectTxState::SecurityAbort) => {\n                    rejected.fetch_add(1, Ordering::SeqCst);\n                    let q_decoy = orch.quarantine.dir_path.join(format!(\"del_{}\", hex::encode(nonce)));\n                    assert!(q_decoy.exists(), \"Decoy debe ser preservado para análisis forense\");\n                }\n                _ => {}\n            }"
+        },
+        {
+          "start_line": 287,
+          "end_line": 303,
+          "text": "    for t in nemesis_threads {\n        t.join().unwrap();\n    }\n    let nemesis_duration_ms = nemesis_t0.elapsed().as_millis();\n    let unauth_count = unauthorized_effects.load(Ordering::SeqCst);\n    println!(\"  ✓ 250 workers NEMESIS completados en {nemesis_duration_ms} ms (Unauthorized Effects: {unauth_count})\");\n\n    let nemesis_kernel_report = json!({\n        \"timestamp_epoch\": now_epoch,\n        \"workers_dispatched\": 250,\n        \"duration_ms\": nemesis_duration_ms,\n        \"unauthorized_effects\": unauth_count,\n        \"swaps_prevented\": nemesis_rejected_attacks.load(Ordering::SeqCst),\n        \"quarantine_isolation_invariant\": \"VERIFIED_ATOMIC_RENAME\",\n        \"verdict\": if unauth_count == 0 { \"PASS_ZERO_TOCTOU_EXPLOITS\" } else { \"FAIL_UNAUTHORIZED_EFFECT\" }\n    });\n    fs::write(reports_dir.join(\"nemesis-kernel-report.json\"), serde_json::to_string_pretty(&nemesis_kernel_report).unwrap()).unwrap();"
+        }
+      ]
+    },
+    "src/executor_ipc.rs": {
+      "sha256": "9955170dd7774c757742007437676a295a87727db6aebd987b618dd76e229292",
+      "ranges": [
+        {
+          "start_line": 167,
+          "end_line": 172,
+          "text": "    fn compute_precondition(&self, r: &SyntheticResource) -> Result<[u8; 32], SyntheticError> {\n        Ok(CanonicalHasher::new(b\"BABYLON60/synthetic-resource/v1\")\n            .field(r.resource_id.as_bytes())\n            .field(&r.state_counter.to_be_bytes())\n            .field(&r.version.to_be_bytes())\n            .finish())"
+        }
+      ]
+    },
+    "src/executor.rs": {
+      "sha256": "5ee23a545b54b9746b02a0a806528548e28fdcf9a1b58d83390572bb47a0dce9",
+      "ranges": [
+        {
+          "start_line": 1015,
+          "end_line": 1024,
+          "text": "        let pre = self\n            .adapter\n            .compute_precondition(resource)\n            .map_err(|e| ExecutionError::EffectExecutionFailed(e.to_string()))?;\n        self.verify_authorization(auth, intent, policy, &pre, now)?;\n        let (p, _, _) = auth.parse()?;\n        let allow_unknown = self.adapter.idempotency_contract() == IdempotencyContract::VerifiableIdempotent;\n\n        let now = self.store.reserve_with_clock(auth, allow_unknown, clock)?;\n        self.maybe_crash(CrashPoint::AfterReservationBeforeDispatch)?;"
+        }
+      ]
+    },
+    "src/secure_fs.rs": {
+      "sha256": "9d34f7d50683b237b0eb7705721738a6595ea6661d4ed85d6fce5ee9cdb564bf",
+      "ranges": [
+        {
+          "start_line": 2316,
+          "end_line": 2354,
+          "text": "    /// NEM-I5: Recuperación Idempotente Post-Crash.\n    ///\n    /// Formalmente: `R(R(s)) == R(s)` para cualquier estado recuperable estabilizado.\n    /// Exige intención durable ligada al objeto; un resultado incierto no se confirma\n    /// por ausencia de cuarentena. Sólo un recibo coincidente o una destrucción\n    /// verificada y persistida permiten devolver `Committed`.\n    pub fn recover_quarantined(\n        &self,\n        nonce: &[u8; 32],\n        expected: &ObjectIdentity,\n    ) -> Result<EffectTxState, SecureFsError> {\n        let rec = self.get_wal_record(nonce).ok_or_else(|| {\n            SecureFsError::InvalidStateTransition(\n                \"recovery requires a durable deletion intent\".into(),\n            )\n        })?;\n        if rec.effect != EffectType::Delete\n            || rec.target_dev != expected.locator.dev\n            || rec.target_ino != expected.locator.ino\n            || rec.expected_pre_hash != expected.state.hash\n            || rec.post_hash != [0u8; 32]\n        {\n            return Err(SecureFsError::InvalidStateTransition(\n                \"recovery receipt does not match the expected deletion identity\".into(),\n            ));\n        }\n        // Un recibo durable coincidente conserva la idempotencia sin repetir el efecto.\n        if rec.state == WalRecordState::OutcomeKnown {\n            return Ok(EffectTxState::Committed);\n        }\n\n        let nonce_name = format!(\"del_{}\", hex::encode(nonce));\n        // Abrir respecto al descriptor: no seguir symlinks ni ocultar errores de E/S.\n        match B::verify_quarantined(self.quarantine.dir_fd, &nonce_name, expected) {\n            Ok(vtx) => {\n                B::destroy_quarantined(self.quarantine.dir_fd, vtx)?;\n                // El unlink debe ser durable antes que su recibo OUTCOME_KNOWN.\n                self.sync_quarantine_dir()?;\n                let known = WalRecord::new("
+        },
+        {
+          "start_line": 2055,
+          "end_line": 2065,
+          "text": "    /// Compatibility entry point: no implicit authority can be derived from an inode.\n    /// Use `secure_delete_scoped` with an explicit context and provisioned policy.\n    pub fn secure_delete(\n        &self,\n        _parent_fd: RawFd,\n        _basename: &str,\n        _authorized_identity: &ObjectIdentity,\n        _tx_nonce: &[u8; 32],\n    ) -> Result<EffectTxState, SecureFsError> {\n        Err(SecureFsError::MissingAuthorization)\n    }"
+        },
+        {
+          "start_line": 2084,
+          "end_line": 2121,
+          "text": "        // 02 FENCE validate durable resource epoch\n        let active_epoch = self.read_durable_epoch_locked(fence_guard.fence_fd)?;\n        if auth.epoch != active_epoch {\n            return Err(SecureFsError::AuthorityStale {\n                expected_epoch: auth.epoch,\n                current_epoch: active_epoch,\n            });\n        }\n\n        // 03 VALIDATE artifact + profile + policy + target\n        if auth.effect != EffectType::Delete {\n            return Err(SecureFsError::UnauthorizedEffectType {\n                required: EffectType::Delete,\n                granted: auth.effect,\n            });\n        }\n\n        let enforce_nonce_ledger = auth.nonce != [0u8; 32];\n        if !enforce_nonce_ledger {\n            return Err(SecureFsError::InvalidAuthorizationNonce);\n        }\n        if enforce_nonce_ledger {\n            if let Some(existing) = self.get_wal_record(&auth.nonce) {\n                if existing.state != WalRecordState::OutcomeKnown {\n                    return Err(SecureFsError::AmbiguousOutcomeRequiresReconciliation {\n                        nonce: auth.nonce,\n                        state: existing.state,\n                    });\n                }\n                return Err(SecureFsError::NonceReplayDetected { nonce: auth.nonce });\n            }\n            if self.is_nonce_consumed(&auth.nonce) {\n                return Err(SecureFsError::NonceReplayDetected { nonce: auth.nonce });\n            }\n        }\n\n        // 04 AUTHORIZE effect against current history/budget\n        self.verify_budget_allowed(auth, locator_pair, authorized_identity.state.size)?;"
+        }
+      ]
+    },
+    "00_ABZU_KERNEL/crates/strike-rs/src/gateway/tier3.rs": {
+      "sha256": "fadac1e715e582527ad3470a9045a866d1297d2ed7e489c3609ed52d91fcacd2",
+      "ranges": [
+        {
+          "start_line": 347,
+          "end_line": 375,
+          "text": "    async fn infer(&self, prompt: &str, max_tokens: u32) -> Result<InferenceOutput, Tier3Error> {\n        let start = Instant::now();\n\n        // Simulate processing latency\n        tokio::time::sleep(Duration::from_millis(self.latency_ms)).await;\n\n        // Stochastic failure simulation\n        if self.fail_rate > 0.0 {\n            let should_fail = {\n                use rand::Rng;\n                let mut rng = rand::thread_rng();\n                rng.gen_bool(self.fail_rate.clamp(0.0, 1.0))\n            };\n            if should_fail {\n                return Err(Tier3Error::BackendError(\"Mock stochastic failure\".to_string()));\n            }\n        }\n\n        let total_ms = start.elapsed().as_millis() as u64;\n        let content = format!(\"T3_LOCAL_DRAFT[{}t|{}]\", max_tokens, &prompt[..prompt.len().min(32)]);\n        let tokens = max_tokens.min(128); // Mock token count\n\n        Ok(InferenceOutput::attested(\n            content,\n            tokens,\n            self.latency_ms / 2, // Mock TTFT ~ half total latency\n            total_ms,\n            &self.spec.model_id,\n        ))"
+        },
+        {
+          "start_line": 232,
+          "end_line": 249,
+          "text": "    /// Execute inference with health tracking and attestation.\n    pub async fn execute(&self, prompt: &str, max_tokens: u32) -> Result<InferenceOutput, Tier3Error> {\n        // 1. Cooldown gate\n        if self.is_in_cooldown() {\n            let remaining = {\n                let last = self.last_failure_epoch_ms.load(Ordering::Relaxed);\n                let cooldown = self.current_cooldown_ms();\n                last.saturating_add(cooldown).saturating_sub(epoch_ms())\n            };\n            return Err(Tier3Error::CooldownActive { remaining_ms: remaining });\n        }\n\n        // 2. Execute with timeout\n        let start = Instant::now();\n        let result = timeout(\n            Duration::from_millis(self.inference_timeout_ms),\n            self.backend.infer(prompt, max_tokens),\n        ).await;"
+        },
+        {
+          "start_line": 398,
+          "end_line": 415,
+          "text": "#[cfg(test)]\nmod tests {\n    use super::*;\n\n    fn mock_backend(latency_ms: u64, fail_rate: f64) -> Arc<dyn LocalInferenceBackend> {\n        Arc::new(MockLocalBackend::new(latency_ms, fail_rate))\n    }\n\n    #[tokio::test]\n    async fn test_successful_inference_with_attestation() {\n        let engine = Tier3Engine::new(mock_backend(10, 0.0));\n        let result = engine.execute(\"test prompt\", 64).await;\n        assert!(result.is_ok());\n\n        let output = result.expect(\"C5-REAL: Termodinámica forzada. Unwrap purgado.\");\n        assert!(output.content_hash.starts_with(\"T3_BLAKE3:\"));\n        assert!(output.tokens_generated > 0);\n        assert_eq!(output.model_id, \"mock-local-v0\");"
+        },
+        {
+          "start_line": 67,
+          "end_line": 94,
+          "text": "/// Output from a local inference call, with BLAKE3 attestation hash (INV_C5_T3_02).\n#[derive(Debug, Clone)]\npub struct InferenceOutput {\n    pub content: String,\n    pub tokens_generated: u32,\n    pub ttft_ms: u64,\n    pub total_ms: u64,\n    pub content_hash: String,\n    pub model_id: String,\n}\n\nimpl InferenceOutput {\n    /// Compute and attach BLAKE3 attestation hash to content.\n    pub fn attested(content: String, tokens_generated: u32, ttft_ms: u64, total_ms: u64, model_id: &str) -> Self {\n        let mut hasher = Hasher::new();\n        hasher.update(content.as_bytes());\n        hasher.update(model_id.as_bytes());\n        let content_hash = format!(\"T3_BLAKE3:{}\", hasher.finalize().to_hex());\n\n        Self {\n            content,\n            tokens_generated,\n            ttft_ms,\n            total_ms,\n            content_hash,\n            model_id: model_id.to_string(),\n        }\n    }"
+        },
+        {
+          "start_line": 365,
+          "end_line": 375,
+          "text": "        let total_ms = start.elapsed().as_millis() as u64;\n        let content = format!(\"T3_LOCAL_DRAFT[{}t|{}]\", max_tokens, &prompt[..prompt.len().min(32)]);\n        let tokens = max_tokens.min(128); // Mock token count\n\n        Ok(InferenceOutput::attested(\n            content,\n            tokens,\n            self.latency_ms / 2, // Mock TTFT ~ half total latency\n            total_ms,\n            &self.spec.model_id,\n        ))"
+        },
+        {
+          "start_line": 482,
+          "end_line": 491,
+          "text": "    #[tokio::test]\n    async fn test_blake3_hash_determinism() {\n        let o1 = InferenceOutput::attested(\"hello world\".into(), 2, 5, 10, \"model-a\");\n        let o2 = InferenceOutput::attested(\"hello world\".into(), 2, 5, 10, \"model-a\");\n        let o3 = InferenceOutput::attested(\"hello world\".into(), 2, 5, 10, \"model-b\");\n\n        // Same content + model → same hash\n        assert_eq!(o1.content_hash, o2.content_hash);\n        // Different model → different hash\n        assert_ne!(o1.content_hash, o3.content_hash);"
+        }
+      ]
+    },
+    "01_KISH_ENGINE/babylon60/crypto/shredder.py": {
+      "sha256": "d37ef6f1f53ac5195566087516d927a1604a19a5dc7a2c75492052e77d6c9988",
+      "ranges": [
+        {
+          "start_line": 69,
+          "end_line": 103,
+          "text": "    def __init__(self, conn: aiosqlite.Connection | sqlite3.Connection) -> None:\n        self._conn = conn\n        self._ensure_schema()\n\n    @property\n    def _sync_conn(self) -> sqlite3.Connection:\n        if isinstance(self._conn, sqlite3.Connection):\n            return self._conn\n        raise TypeError(\"Use async methods for aiosqlite connections\")\n\n    @property\n    def _async_conn(self) -> aiosqlite.Connection:\n        if isinstance(self._conn, sqlite3.Connection):\n            raise TypeError(\"Use sync methods for sqlite3 connections\")\n        return self._conn\n\n    def _ensure_schema(self) -> None:\n        \"\"\"Create shredded_keys table if it doesn't exist.\"\"\"\n        sql = \"\"\"\n            CREATE TABLE IF NOT EXISTS shredded_keys (\n                id          INTEGER PRIMARY KEY AUTOINCREMENT,\n                fact_id     INTEGER NOT NULL,\n                tenant_id   TEXT    NOT NULL DEFAULT 'default',\n                reason      TEXT    NOT NULL DEFAULT 'gdpr_erasure',\n                shredded_by TEXT,\n                shredded_at TEXT    NOT NULL DEFAULT (datetime('now')),\n                UNIQUE(fact_id, tenant_id)\n            );\n        \"\"\"\n        try:\n            if isinstance(self._conn, sqlite3.Connection):\n                self._conn.execute(sql)\n                self._conn.commit()\n        except sqlite3.Error as e:\n            logger.warning(\"Schema creation skipped (may exist): %s\", e)"
+        },
+        {
+          "start_line": 132,
+          "end_line": 138,
+          "text": "    async def is_shredded_async(self, fact_id: int, tenant_id: str = \"default\") -> bool:\n        \"\"\"Check for a historical marker; this is not proof of erasure (async).\"\"\"\n        cursor = await self._async_conn.execute(\n            \"SELECT 1 FROM shredded_keys WHERE fact_id = ? AND tenant_id = ?\",\n            (fact_id, tenant_id),\n        )\n        return (await cursor.fetchone()) is not None"
+        },
+        {
+          "start_line": 169,
+          "end_line": 189,
+          "text": "    @staticmethod\n    def _unsupported_result(fact_id: int, tenant_id: str, reason: str) -> ShredResult:\n        return ShredResult(\n            fact_id=fact_id,\n            tenant_id=tenant_id,\n            success=False,\n            reason=reason,\n            error=\"CRYPTO_ERASURE_UNSUPPORTED: no independently destructible per-fact key\",\n        )\n\n    async def shred_fact_async(\n        self,\n        fact_id: int,\n        tenant_id: str = \"default\",\n        reason: str = \"gdpr_erasure\",\n        shredded_by: str | None = None,\n    ) -> ShredResult:\n        \"\"\"Refuse erasure without writing a marker or resolving operator keys.\"\"\"\n        if isinstance(self._conn, sqlite3.Connection):\n            raise TypeError(\"Use shred_fact for sync connections\")\n        return self._unsupported_result(fact_id, tenant_id, reason)"
+        },
+        {
+          "start_line": 208,
+          "end_line": 229,
+          "text": "    async def _shred_batch(\n        self,\n        fact_ids: list[int],\n        tenant_id: str,\n        reason: str,\n        shredded_by: str | None,\n    ) -> ShredBatchResult:\n        \"\"\"Internal batch shred implementation.\"\"\"\n        batch = ShredBatchResult(total_requested=len(fact_ids))\n\n        for fact_id in fact_ids:\n            result = await self.shred_fact_async(fact_id, tenant_id, reason, shredded_by)\n            batch.results.append(result)\n\n            if result.was_already_shredded:\n                batch.already_shredded += 1\n            elif result.success:\n                batch.shredded += 1\n            else:\n                batch.failed += 1\n\n        return batch"
+        },
+        {
+          "start_line": 231,
+          "end_line": 260,
+          "text": "    def audit_shredding(self) -> ShredAuditReport:\n        \"\"\"Report on all shredded facts for compliance auditing.\n\n        Returns aggregate statistics without revealing content.\n        \"\"\"\n        cursor = self._sync_conn.execute(\n            \"SELECT COUNT(*), reason, MIN(shredded_at), MAX(shredded_at) FROM shredded_keys GROUP BY reason\"\n        )\n        rows = cursor.fetchall()\n\n        reasons: dict[str, ShredReasonStats] = {}\n        total = 0\n        for row in rows:\n            count = int(row[0])\n            reason = str(row[1])\n            earliest = str(row[2]) if row[2] is not None else None\n            latest = str(row[3]) if row[3] is not None else None\n            total += count\n            reasons[reason] = {\n                \"count\": count,\n                \"earliest\": earliest,\n                \"latest\": latest,\n            }\n\n        return {\n            \"total_shredded\": total,\n            \"by_reason\": reasons,\n            \"compliant\": False,\n            \"audit_timestamp\": datetime.fromtimestamp(time.time(), tz=timezone.utc).isoformat(),\n        }"
+        }
+      ]
+    },
+    "tests/test_swarm100_round2_regressions.py": {
+      "sha256": "15d7903736ed3914d3ea79d158906e9b07e79eb6a267556482d62bb341949f3e",
+      "ranges": [
+        {
+          "start_line": 314,
+          "end_line": 325,
+          "text": "def test_v08_shredding_does_not_claim_success_for_recoverable_ciphertext(tmp_path, monkeypatch):\n    key = bytes(range(32))\n    encrypter = CortexEncrypter(key, strict_mode=True)\n    monkeypatch.setattr(\"babylon60.crypto.aes._default_encrypter_instance\", encrypter)\n    ciphertext = encrypter.encrypt_str(\"public fixture\", \"fixture\")\n    with closing(sqlite3.connect(tmp_path / \"shred.sqlite\")) as conn:\n        shredder = CryptoShredder(conn)\n        result = shredder.shred_fact(42, \"fixture\")\n        assert not result.success\n        assert \"UNSUPPORTED\" in result.error\n        assert not shredder.is_shredded(42, \"fixture\")\n        assert not shredder.audit_shredding()[\"compliant\"]"
+        }
+      ]
+    },
+    "crates/babylon-attest/src/conformal_tree.rs": {
+      "sha256": "6f6d83eeda8e035f9ecb67d48c81dd78e6dd3c520827cf10018792650705db95",
+      "ranges": [
+        {
+          "start_line": 194,
+          "end_line": 219,
+          "text": "/// Verifies the cryptographic integrity and Ed25519 signature of an L1 Aeon manifest file.\npub fn verify_manifest_file(manifest_path: &Path) -> Result<AeonVerificationResult, String> {\n    let data = fs::read_to_string(manifest_path)\n        .map_err(|e| format!(\"No se pudo leer el manifiesto: {}\", e))?;\n    let manifest: AeonManifest = serde_json::from_str(&data)\n        .map_err(|e| format!(\"Error deserializando JSON de manifiesto: {}\", e))?;\n\n    if manifest.status != \"FROZEN_C5_REAL\" {\n        return Err(format!(\"Estado no sellado: {}\", manifest.status));\n    }\n\n    // Verify Ed25519 signature over bytes.fromhex(merkle_root)\n    let pub_bytes = base64::engine::general_purpose::STANDARD\n        .decode(&manifest.sovereign_identity.l0_public_key_b64)\n        .map_err(|e| format!(\"Base64 pubkey error: {}\", e))?;\n    let sig_bytes = base64::engine::general_purpose::STANDARD\n        .decode(&manifest.sovereign_identity.ed25519_signature_b64)\n        .map_err(|e| format!(\"Base64 signature error: {}\", e))?;\n\n    if pub_bytes.len() != 32 {\n        return Err(format!(\"Longitud de clave pública inválida: {}\", pub_bytes.len()));\n    }\n    let mut pub_arr = [0u8; 32];\n    pub_arr.copy_from_slice(&pub_bytes);\n    let vk = VerifyingKey::from_bytes(&pub_arr)\n        .map_err(|e| format!(\"VerifyingKey parse error: {}\", e))?;"
+        },
+        {
+          "start_line": 224,
+          "end_line": 245,
+          "text": "    let root_bytes = hex::decode(&manifest.merkle_root)\n        .map_err(|e| format!(\"Hex decode error: {}\", e))?;\n\n    let sig_valid = vk.verify(&root_bytes, &sig).is_ok();\n\n    let hw_uuid = manifest\n        .hardware_attestation\n        .get(\"hardware_uuid\")\n        .and_then(|v| v.as_str())\n        .unwrap_or(\"UNKNOWN\")\n        .to_string();\n\n    let overall_valid = sig_valid && manifest.status == \"FROZEN_C5_REAL\";\n\n    Ok(AeonVerificationResult {\n        aeon_id: manifest.aeon_id,\n        status: manifest.status,\n        merkle_root: manifest.merkle_root,\n        total_claims: manifest.total_claims_sealed,\n        ed25519_signature_valid: sig_valid,\n        hardware_uuid: hw_uuid,\n        overall_valid,"
+        },
+        {
+          "start_line": 163,
+          "end_line": 181,
+          "text": "#[derive(Debug, Clone, Serialize, Deserialize)]\npub struct SovereignIdentitySection {\n    pub l0_public_key_b64: String,\n    pub ed25519_signature_b64: String,\n    #[serde(default)]\n    pub signed_payload: String,\n}\n\n#[derive(Debug, Clone, Serialize, Deserialize)]\npub struct AeonManifest {\n    pub aeon_id: String,\n    pub status: String,\n    pub timestamp_utc: String,\n    pub total_claims_sealed: u64,\n    pub merkle_root: String,\n    pub op_return_hex: Option<String>,\n    pub hardware_attestation: serde_json::Value,\n    pub sovereign_identity: SovereignIdentitySection,\n}"
+        }
+      ]
+    },
+    "crates/babylon-attest/src/main.rs": {
+      "sha256": "a50b4f186785736d8f54b5871a9e17857b41ae5f223d4c31d02d95ab0941e863",
+      "ranges": [
+        {
+          "start_line": 83,
+          "end_line": 88,
+          "text": "    /// Verify a sealed L1 Aeon manifest file (INV_C5_AEON)\n    VerifyAeon {\n        /// Path to the L1 Aeon JSON manifest file\n        #[arg(short, long)]\n        manifest: PathBuf,\n    },"
+        },
+        {
+          "start_line": 519,
+          "end_line": 540,
+          "text": "            match babylon_attest::conformal_tree::verify_manifest_file(&manifest) {\n                Ok(res) => {\n                    println!(\"\\n[+] DICTAMEN DE ATESTACIÓN FORMAL (RUST NATIVO):\");\n                    println!(\"    • Aeón ID:          {}\", res.aeon_id);\n                    println!(\"    • Estado:           {}\", res.status);\n                    println!(\"    • Raíz Merkle:      0x{}\", res.merkle_root);\n                    println!(\"    • Total Claims:     {}\", res.total_claims);\n                    println!(\n                        \"    • Firma Ed25519:    {}\",\n                        if res.ed25519_signature_valid {\n                            \"✓ VÁLIDA (ed25519-dalek)\"\n                        } else {\n                            \"✗ INVÁLIDA\"\n                        }\n                    );\n                    println!(\"    • Hardware UUID:    {}\", res.hardware_uuid);\n                    if res.overall_valid {\n                        println!(\"\\n[✓] AEÓN CONFORME VERIFICADO EXITOSAMENTE POR EL KERNEL RUST\");\n                        std::process::exit(0);\n                    } else {\n                        eprintln!(\"\\n[✗] VIOLACIÓN: Manifiesto no superó las invariantes criptográficas.\");\n                        std::process::exit(1);"
+        },
+        {
+          "start_line": 521,
+          "end_line": 537,
+          "text": "                    println!(\"\\n[+] DICTAMEN DE ATESTACIÓN FORMAL (RUST NATIVO):\");\n                    println!(\"    • Aeón ID:          {}\", res.aeon_id);\n                    println!(\"    • Estado:           {}\", res.status);\n                    println!(\"    • Raíz Merkle:      0x{}\", res.merkle_root);\n                    println!(\"    • Total Claims:     {}\", res.total_claims);\n                    println!(\n                        \"    • Firma Ed25519:    {}\",\n                        if res.ed25519_signature_valid {\n                            \"✓ VÁLIDA (ed25519-dalek)\"\n                        } else {\n                            \"✗ INVÁLIDA\"\n                        }\n                    );\n                    println!(\"    • Hardware UUID:    {}\", res.hardware_uuid);\n                    if res.overall_valid {\n                        println!(\"\\n[✓] AEÓN CONFORME VERIFICADO EXITOSAMENTE POR EL KERNEL RUST\");\n                        std::process::exit(0);"
+        }
+      ]
+    },
+    "scripts/c5_l1_ledger/seal_bounty_aeon.py": {
+      "sha256": "154e38e4308b098e7687b266f337ec684b5ebd9488afcf186ab52c85139f8916",
+      "ranges": [
+        {
+          "start_line": 123,
+          "end_line": 135,
+          "text": "    # Firma Ed25519 L0\n    forge = L0IdentityForge(storage_dir=_ROOT / \".babylon60\" / \"identity\")\n    passphrase = \"MOSKV1_SOVEREIGN_L1_ANCHOR_KEY\"\n    try:\n        identity = forge.load_identity(passphrase)\n    except Exception:\n        identity = forge.forge_identity(passphrase)\n\n    # Generar firma Ed25519 sobre la raíz Merkle\n    priv_bytes = base64.b64decode(identity.private_key_b64)\n    priv_key = ed25519.Ed25519PrivateKey.from_private_bytes(priv_bytes)\n    sig_bytes = priv_key.sign(bytes.fromhex(master_root))\n    sig_b64 = base64.b64encode(sig_bytes).decode(\"utf-8\")"
+        },
+        {
+          "start_line": 162,
+          "end_line": 165,
+          "text": "        \"sovereign_identity\": {\n            \"l0_public_key_b64\": identity.public_key_b64,\n            \"ed25519_signature_b64\": sig_b64,\n            \"signed_payload\": \"merkle_root\","
+        },
+        {
+          "start_line": 115,
+          "end_line": 121,
+          "text": "    # 5. Timestamping RFC3161 & Firma L0 Ed25519\n    print(\"\\n[5/6] Sellando temporalidad RFC3161 y firma de soberanía L0...\")\n    tsa_client = RFC3161Client()\n    ts_resp = tsa_client.request_timestamp(master_root)\n    tsa_status = \"AUTHENTICATED_RFC3161_TSA\" if (ts_resp and \"tsr_b64\" in ts_resp) else \"OFFLINE_LOCAL_ATTESTATION\"\n    tsr_token = ts_resp.get(\"tsr_b64\", \"\") if ts_resp else \"\"\n    print(f\"      Estado TSA       : {tsa_status}\")"
+        },
+        {
+          "start_line": 146,
+          "end_line": 165,
+          "text": "    artifact: Dict[str, Any] = {\n        \"$schema\": \"https://babylon60.org/schemas/l1_aeon_seal_v4.json\",\n        \"aeon_id\": aeon_id,\n        \"status\": \"FROZEN_C5_REAL\",\n        \"timestamp_utc\": time.strftime(\"%Y-%m-%dT%H:%M:%SZ\", time.gmtime()),\n        \"total_claims_sealed\": len(claims),\n        \"claims_distribution\": by_domain,\n        \"merkle_root\": master_root,\n        \"op_return_hex\": master_root,\n        \"payload_size_bytes\": 32,\n        \"hardware_attestation\": hw_quote,\n        \"rfc3161_tsa\": {\n            \"status\": tsa_status,\n            \"tsa_url\": ts_resp.get(\"tsa_url\", \"https://freetsa.org/tsr\") if ts_resp else \"N/A\",\n            \"tsr_b64\": tsr_token,\n        },\n        \"sovereign_identity\": {\n            \"l0_public_key_b64\": identity.public_key_b64,\n            \"ed25519_signature_b64\": sig_b64,\n            \"signed_payload\": \"merkle_root\","
+        },
+        {
+          "start_line": 179,
+          "end_line": 180,
+          "text": "    with open(target_file, \"w\", encoding=\"utf-8\") as f:\n        json.dump(artifact, f, indent=2, ensure_ascii=False)"
+        }
+      ]
+    },
+    "01_KISH_ENGINE/babylon60/crypto/identity.py": {
+      "sha256": "4c98615751f6c55215f4bc60122346085c00bcb5cb540af18eba49883211d1b8",
+      "ranges": [
+        {
+          "start_line": 53,
+          "end_line": 62,
+          "text": "    def __init__(self, storage_dir: str | Path | None = None) -> None:\n        if storage_dir is None:\n            base = Path(os.environ.get(\"CORTEX_DB_PATH\", \"~/.babylon60\")).expanduser()\n            if base.suffix:\n                base = base.parent\n            self.storage_dir = base / \"identity\"\n        else:\n            self.storage_dir = Path(storage_dir).expanduser()\n\n        self.seed_path = self.storage_dir / \"master_seed.enc\""
+        },
+        {
+          "start_line": 75,
+          "end_line": 109,
+          "text": "    def forge_identity(self, passphrase: str) -> IdentityPayload:\n        \"\"\"\n        Generates a new L0 TRNG seed, encrypts it via Argon2id + AES-GCM,\n        and saves it to disk with strict 0600 permissions.\n        \"\"\"\n        self.storage_dir.mkdir(parents=True, exist_ok=True)\n\n        # TRNG Seed for Ed25519\n        seed = os.urandom(32)\n\n        # Salt for KDF\n        salt = os.urandom(16)\n        kek = self._derive_kek(passphrase, salt)\n\n        # AES-GCM Encryption\n        aesgcm = AESGCM(kek)\n        nonce = os.urandom(_NONCE_LENGTH)\n        ciphertext = aesgcm.encrypt(nonce, seed, None)\n\n        payload = {\n            \"salt_b64\": base64.b64encode(salt).decode(\"ascii\"),\n            \"nonce_b64\": base64.b64encode(nonce).decode(\"ascii\"),\n            \"ciphertext_b64\": base64.b64encode(ciphertext).decode(\"ascii\"),\n        }\n\n        # Write to disk securely (0600)\n        self.seed_path.touch(mode=0o600, exist_ok=True)\n        with open(self.seed_path, \"w\", encoding=\"utf-8\") as f:\n            json.dump(payload, f)\n\n        # Ensure permissions are strictly 0600\n        self.seed_path.chmod(0o600)\n\n        logger.info(\"L0 Identity Forged and encrypted via Argon2id.\")\n        return self._generate_keypair_from_seed(seed)"
+        },
+        {
+          "start_line": 111,
+          "end_line": 131,
+          "text": "    def load_identity(self, passphrase: str) -> IdentityPayload:\n        \"\"\"Loads and decrypts the L0 Identity using the provided passphrase.\"\"\"\n        if not self.seed_path.exists():\n            raise FileNotFoundError(\"Master seed not found. Cannot load identity.\")\n\n        with open(self.seed_path, encoding=\"utf-8\") as f:\n            payload = json.load(f)\n\n        salt = base64.b64decode(payload[\"salt_b64\"])\n        nonce = base64.b64decode(payload[\"nonce_b64\"])\n        ciphertext = base64.b64decode(payload[\"ciphertext_b64\"])\n\n        kek = self._derive_kek(passphrase, salt)\n        aesgcm = AESGCM(kek)\n\n        try:\n            seed = aesgcm.decrypt(nonce, ciphertext, None)\n            return self._generate_keypair_from_seed(seed)\n        except Exception as e:  # noqa: BLE001\n            logger.error(\"Failed to decrypt master seed. Incorrect passphrase or corrupted file.\")\n            raise ValueError(\"Identity Decryption Failed\") from e"
+        }
+      ]
+    },
+    "01_KISH_ENGINE/babylon60/crypto/rfc3161.py": {
+      "sha256": "51606325310efa614ed04cf91a10cb13b5672a97c9dbd02a819ef0acd7e49acc",
+      "ranges": [
+        {
+          "start_line": 85,
+          "end_line": 119,
+          "text": "    def request_timestamp(self, hash_hex: str) -> RFC3161TimestampResult | None:\n        \"\"\"\n        Requests a timestamp for a given hex hash.\n\n        Args:\n            hash_hex: The hex-encoded SHA-256 hash.\n\n        Returns:\n            A dictionary containing the base64-encoded TimeStampResp (tsr) or None on failure.\n        \"\"\"\n        try:\n            payload_bytes = bytes.fromhex(hash_hex)\n            tsq = self._build_tsq(payload_bytes)\n\n            req = urllib.request.Request(\n                self.tsa_url,\n                data=tsq,\n                headers={\"Content-Type\": \"application/timestamp-query\"},\n                method=\"POST\",\n            )\n\n            with urllib.request.urlopen(req, timeout=10) as response:\n                if response.status == 200:\n                    tsr_bytes = response.read()\n                    return {\n                        \"tsr_b64\": base64.b64encode(tsr_bytes).decode(\"utf-8\"),\n                        \"hash_hex\": hash_hex,\n                        \"tsa_url\": self.tsa_url,\n                    }\n        except urllib.error.HTTPError as e:\n            logger.error(\"HTTPError requesting timestamp from %s: %s\", self.tsa_url, e.code)\n        except Exception as e:  # noqa: BLE001\n            logger.error(\"Failed to request timestamp: %s\", e)\n\n        return None"
+        }
+      ]
+    },
+    "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-neural-face-swap-cuadrilla/scripts/c5_smoother.py": {
+      "sha256": "692772e971af6ac1180ec1727ca7c4f52de4cc9053684490ab126ecd9bb643de",
+      "ranges": [
+        {
+          "start_line": 95,
+          "end_line": 106,
+          "text": "\nclass FaceTracker:\n    \"\"\"\n    Rastreador temporal determinista de identidades con Extrapolación Zero-Drop,\n    Filtros 1-Euro independientes por trayectoria y Estabilizador de Parches Temporales.\n    \"\"\"\n    def __init__(self, max_lost=20, max_extrapolate=2, iou_thresh=0.25):\n        self.tracks = {}  # track_id: {'bbox': bbox, 'lost': 0, 'identity_idx': int, 'last_face': face, 'smoother': OneEuroFilter, 'stabilizer': TemporalPatchStabilizer, 'last_kps': ndarray}\n        self.next_id = 0\n        self.max_lost = max_lost\n        self.max_extrapolate = max_extrapolate\n        self.iou_thresh = iou_thresh"
+        },
+        {
+          "start_line": 153,
+          "end_line": 182,
+          "text": "        det_boxes = [f.bbox for f in detected_faces]\n        matched_dets = set()\n        matched_tracks = set()\n        assignments = []\n\n        # 1. Emparejamiento por máxima intersección sobre unión (IoU)\n        for tid, tinfo in self.tracks.items():\n            best_iou = 0.0\n            best_det_idx = -1\n            for d_idx, dbox in enumerate(det_boxes):\n                if d_idx in matched_dets:\n                    continue\n                iou = self.compute_iou(tinfo['bbox'], dbox)\n                if iou > best_iou:\n                    best_iou = iou\n                    best_det_idx = d_idx\n            if best_iou >= self.iou_thresh:\n                matched_dets.add(best_det_idx)\n                matched_tracks.add(tid)\n                det_face = detected_faces[best_det_idx]\n\n                # Suavizado de landmarks específico para esta trayectoria\n                if tinfo['smoother'] is not None:\n                    det_face.kps = tinfo['smoother'].filter(det_face.kps, dt=dt)\n\n                self.tracks[tid]['bbox'] = det_face.bbox\n                self.tracks[tid]['lost'] = 0\n                self.tracks[tid]['last_face'] = det_face\n                if self.tracks[tid]['identity_idx'] >= 0:\n                    assignments.append((det_face, self.tracks[tid]['identity_idx'], tid))"
+        },
+        {
+          "start_line": 191,
+          "end_line": 228,
+          "text": "        for d_idx, dbox in unmatched:\n            new_id = self.next_id\n            self.next_id += 1\n            if target_index is not None:\n                chosen_idx = 0 if (d_idx == target_index and 0 in available_indices) else -1\n            elif available_indices:\n                chosen_idx = available_indices.pop(0)\n            elif swap_all:\n                chosen_idx = d_idx % num_identities\n            else:\n                chosen_idx = -1\n\n            det_face = detected_faces[d_idx]\n            smoother = OneEuroFilter()\n            det_face.kps = smoother.filter(det_face.kps, dt=dt)\n            self.tracks[new_id] = {\n                'bbox': dbox,\n                'lost': 0,\n                'identity_idx': chosen_idx,\n                'last_face': det_face,\n                'smoother': smoother,\n                'stabilizer': TemporalPatchStabilizer(),\n                'last_kps': det_face.kps.copy()\n            }\n            if chosen_idx >= 0:\n                assignments.append((det_face, chosen_idx, new_id))\n\n        # 3. Purgar tracks perdidos o extrapolar si es un fallo transitorio de detección\n        for tid in list(self.tracks.keys()):\n            if tid not in matched_tracks and tid in self.tracks:\n                self.tracks[tid]['lost'] += 1\n                if self.tracks[tid]['lost'] <= self.max_extrapolate and self.tracks[tid]['last_face'] is not None:\n                    if self.tracks[tid]['identity_idx'] >= 0:\n                        assignments.append((self.tracks[tid]['last_face'], self.tracks[tid]['identity_idx'], tid))\n                elif self.tracks[tid]['lost'] > self.max_lost:\n                    del self.tracks[tid]\n\n        return assignments"
+        },
+        {
+          "start_line": 236,
+          "end_line": 246,
+          "text": "    def __init__(self, src_w, src_h, target_w=1080, target_h=1920, deadband_ratio=0.04):\n        self.src_w = int(src_w)\n        self.src_h = int(src_h)\n        self.target_w = int(target_w)\n        self.target_h = int(target_h)\n        # Proporción de corte 9:16 en espacio del vídeo origen\n        self.w_crop = int(round(src_h * (9.0 / 16.0)))\n        if self.w_crop % 2 != 0:\n            self.w_crop -= 1\n        if self.w_crop > src_w:\n            self.w_crop = src_w"
+        },
+        {
+          "start_line": 264,
+          "end_line": 285,
+          "text": "    def reframe_frame(self, frame, crop_rect, mode='crop'):\n        \"\"\"\n        Reencuadra un frame al lienzo vertical 1080x1920.\n        mode='crop': recorte dinámico nítido reescalado con Lanczos.\n        mode='blur': fondo desenfocado + vídeo centrado.\n        \"\"\"\n        x, y, w, h = crop_rect\n        if mode == 'crop':\n            cropped = frame[y:y+h, x:x+w]\n            return cv2.resize(cropped, (self.target_w, self.target_h), interpolation=cv2.INTER_LANCZOS4)\n        else:\n            bg = cv2.resize(frame, (self.target_w, self.target_h), interpolation=cv2.INTER_LINEAR)\n            bg = cv2.GaussianBlur(bg, (51, 51), 0)\n            bg = (bg.astype(np.float32) * 0.55).astype(np.uint8)\n\n            scale = float(self.target_w) / float(self.src_w)\n            scaled_h = int(round(self.src_h * scale))\n            fg = cv2.resize(frame, (self.target_w, scaled_h), interpolation=cv2.INTER_LANCZOS4)\n\n            y_offset = (self.target_h - scaled_h) // 2\n            bg[y_offset:y_offset+scaled_h, 0:self.target_w] = fg\n            return bg"
+        }
+      ]
+    },
+    "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py": {
+      "sha256": "41b377c18066b2d1b25c73317aa75a86cd99188f62a257162ad0c47bacde80a4",
+      "ranges": [
+        {
+          "start_line": 277,
+          "end_line": 305,
+          "text": "        faces = app_det.get(frame)\n        if tracker:\n            tgt_idx = None if swap_all else target_face_index\n            assignments = tracker.update(faces, len(source_faces), dt=dt, swap_all=swap_all, target_index=tgt_idx)\n        else:\n            if faces:\n                faces_sorted = sorted(faces, key=lambda f: (f.bbox[2]-f.bbox[0]) * (f.bbox[3]-f.bbox[1]), reverse=True)\n                if not swap_all and target_face_index is not None:\n                    assignments = [(faces_sorted[target_face_index], 0, 0)] if target_face_index < len(faces_sorted) else []\n                else:\n                    assignments = [(f, i, i) for i, f in enumerate(faces_sorted) if i < len(source_faces)]\n            else:\n                assignments = []\n\n        res = frame.copy()\n        for item in assignments:\n            if len(item) == 3:\n                tf, face_idx, tid = item\n            else:\n                tf, face_idx = item\n                tid = 0\n            if face_idx < 0 or face_idx >= len(source_faces):\n                continue\n            face_h = tf.bbox[3] - tf.bbox[1]\n            face_w = tf.bbox[2] - tf.bbox[0]\n            if face_h < 25 or face_w < 25:\n                continue\n            src_f = source_faces[face_idx]\n"
+        },
+        {
+          "start_line": 450,
+          "end_line": 460,
+          "text": "    if not VerticalFramingTracker:\n        print(\"[!] VerticalFramingTracker no disponible. Omitiendo render 9:16.\", flush=True)\n        return None\n\n    cap = cv2.VideoCapture(master_video)\n    fps = cap.get(cv2.CAP_PROP_FPS) or 30.0\n    w_src = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))\n    h_src = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))\n    total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))\n\n    tracker = VerticalFramingTracker(w_src, h_src, target_w=target_w, target_h=target_h)"
+        },
+        {
+          "start_line": 498,
+          "end_line": 500,
+          "text": "        crop_rect = tracker.update(primary_bbox, dt=dt)\n        reframe = tracker.reframe_frame(frame, crop_rect, mode=bg_mode)\n        proc.stdin.write(reframe.tobytes())"
+        }
+      ]
+    },
+    "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py": {
+      "sha256": "24df531cfbb817964c4da27b4220351c4080eb4ab9b54c789b11a16d7b07909b",
+      "ranges": [
+        {
+          "start_line": 125,
+          "end_line": 166,
+          "text": "        # 4. Fase de Atestación Criptográfica (Proof of Claim)\n        receipts: List[BountyClaimReceipt] = []\n        if auto_attest_high_risk:\n            # Atestar hallazgos EVM\n            for res in evm_results:\n                if res.risk_score >= risk_threshold:\n                    target_id = res.contract_address or \"UNKNOWN-EVM-TARGET\"\n                    receipt = self.attester.generate_receipt(\n                        advisory_id=target_id,\n                        domain=BountyDomain.DOMAIN_EVM.value,\n                        finding_summary=\"; \".join(res.findings),\n                        risk_score=res.risk_score,\n                        raw_payload=res.to_dict(),\n                    )\n                    receipts.append(receipt)\n                    self.cold_ledger.enqueue_receipt(receipt)\n\n            # Atestar hallazgos WebKit\n            for res_nat in native_results:\n                if res_nat.risk_score >= risk_threshold:\n                    receipt = self.attester.generate_receipt(\n                        advisory_id=res_nat.advisory_id,\n                        domain=BountyDomain.DOMAIN_NATIVE.value,\n                        finding_summary=f\"{res_nat.vulnerability_class} en {res_nat.affected_subsystems}\",\n                        risk_score=res_nat.risk_score,\n                        raw_payload=res_nat.to_dict(),\n                    )\n                    receipts.append(receipt)\n                    self.cold_ledger.enqueue_receipt(receipt)\n\n            # Atestar hallazgos AI\n            for res_ai in ai_results:\n                if res_ai.risk_score >= risk_threshold:\n                    receipt = self.attester.generate_receipt(\n                        advisory_id=res_ai.advisory_id,\n                        domain=BountyDomain.DOMAIN_AI.value,\n                        finding_summary=f\"{res_ai.vulnerability_class.value} [{res_ai.taint_level}]\",\n                        risk_score=res_ai.risk_score,\n                        raw_payload=res_ai.to_dict(),\n                    )\n                    receipts.append(receipt)\n                    self.cold_ledger.enqueue_receipt(receipt)"
+        },
+        {
+          "start_line": 184,
+          "end_line": 195,
+          "text": "        return BountyCycleReport(\n            timestamp_utc=timestamp,\n            frames_ingested=len(frames),\n            queue_depths_pre_drain=pre_drain_depths,\n            evm_analyses=evm_results,\n            native_triages=native_results,\n            ai_sentinel_dicta=ai_results,\n            claim_receipts=receipts,\n            total_elapsed_ms=elapsed_ms,\n            landauer_dissipated_joules=landauer_joules,\n            manifest_telemetry=manifest_telemetry,\n        )"
+        }
+      ]
+    },
+    "01_KISH_ENGINE/babylon60/bft/bounty_cold_ledger.py": {
+      "sha256": "09a3b4d98b95696f1a02f0cc5ed53fcd6a66b5cbb6b5ea18fe899023e0aee656",
+      "ranges": [
+        {
+          "start_line": 103,
+          "end_line": 121,
+          "text": "    def _raise_if_failed(self) -> None:\n        if self._failure is not None:\n            raise BFTDatabaseError(\"Cold ledger persistence failed; receipts remain pending\") from self._failure\n\n    def enqueue_receipt(self, receipt: BountyClaimReceipt) -> bool:\n        \"\"\"\n        Encola un recibo para persistencia. No bloquea la ruta caliente.\n        Retorna False si la cola está saturada o el cierre ya ha comenzado.\n        \"\"\"\n        with self._state_lock:\n            self._raise_if_failed()\n            if self._closed:\n                return False\n            try:\n                self._queue.put_nowait(receipt)\n                return True\n            except queue.Full:\n                logger.error(f\"[ColdLedger] COLA SATURADA. Descartando persistencia de {receipt.claim_id}.\")\n                return False"
+        }
+      ]
+    },
+    "01_KISH_ENGINE/babylon60/cli/bounty_cli.py": {
+      "sha256": "722b88b69c5334c56646a516807b346b986450e6c062b8948ee8ef60e1753ae5",
+      "ranges": [
+        {
+          "start_line": 270,
+          "end_line": 279,
+          "text": "    print(f\"\\n[+] RECIBOS DE RECLAMACIÓN SELLADOS (Proof of Claim): {len(report.claim_receipts)}\")\n    for rcpt in report.claim_receipts:\n        print(f\"    • [{rcpt.domain}] {rcpt.claim_id}\")\n        print(f\"      - Merkle Root:     {rcpt.attestation_merkle_root}\")\n        print(f\"      - Hardware Anchor: {rcpt.hardware_anchor}\")\n        print(f\"      - Payload Hash:    {rcpt.payload_hash[:16]}...\")\n\n    if args.export_claims and report.claim_receipts:\n        export_path = Path(args.export_claims)\n        export_path.write_text(json.dumps([r.to_dict() for r in report.claim_receipts], indent=2), encoding=\"utf-8\")"
+        }
+      ]
+    },
+    "01_KISH_ENGINE/babylon60/crypto/keys.py": {
+      "sha256": "cbf5b3ded4cf854df1d11d37a4d61d0f0122604881c7a02fb0f00497822ee305",
+      "ranges": [
+        {
+          "start_line": 70,
+          "end_line": 87,
+          "text": "    def __init__(self, service_name: str = \"cortex_persist_enterprise\") -> None:\n        self.service_name = service_name\n        base_dir = Path(os.environ.get(\"CORTEX_DB_PATH\", \"~/.babylon60\")).expanduser()\n        if base_dir.suffix:\n            base_dir = base_dir.parent\n        self.db_path = base_dir / \"keys\" / f\"{self.service_name}_metadata.json\"\n        self._metadata: dict[str, KeyMetadataRecord] = self._load_metadata()\n\n    def _load_metadata(self) -> dict[str, KeyMetadataRecord]:\n        if self.db_path.exists():\n            with open(self.db_path, encoding=\"utf-8\") as f:\n                return cast(dict[str, KeyMetadataRecord], json.load(f))\n        return {}\n\n    def _save_metadata(self) -> None:\n        self.db_path.parent.mkdir(parents=True, exist_ok=True)\n        with open(self.db_path, \"w\", encoding=\"utf-8\") as f:\n            json.dump(self._metadata, f, indent=2)"
+        },
+        {
+          "start_line": 119,
+          "end_line": 125,
+          "text": "        self._metadata[actor_id] = {\n            \"public_key_b64\": public_key_b64,\n            \"expires_at\": expires_at,\n            \"revoked\": False,\n        }\n        self._save_metadata()\n        logger.info(\"Generated Ed25519 key for actor: ***id\")"
+        },
+        {
+          "start_line": 164,
+          "end_line": 185,
+          "text": "    def revoke_key(self, actor_id: str) -> bool:\n        \"\"\"Revokes the key to prevent future signing/verification.\"\"\"\n        if actor_id in self._metadata:\n            self._metadata[actor_id][\"revoked\"] = True\n            self._save_metadata()\n            try:\n                if keyring is not None:\n                    keyring.delete_password(self.service_name, actor_id)\n                else:\n                    logger.warning(\"OS Keyring is not available (keyring package is not installed).\")\n            except Exception as e:  # noqa: BLE001\n                logger.warning(\n                    \"Fallo en OS Keyring (delete_password) para actor %s: %s\",\n                    actor_id,\n                    e,\n                    exc_info=True,\n                )\n            if self.service_name in self._fallback_keyring:\n                self._fallback_keyring[self.service_name].pop(actor_id, None)\n            logger.info(\"Revoked key for actor: ***id\")\n            return True\n        return False"
+        },
+        {
+          "start_line": 187,
+          "end_line": 206,
+          "text": "    def get_public_key_b64(self, actor_id: str) -> str | None:\n        \"\"\"Retrieves the public key for the actor.\"\"\"\n        if actor_id in self._metadata:\n            return self._metadata[actor_id].get(\"public_key_b64\")\n        return None\n\n    def is_revoked(self, actor_id: str) -> bool:\n        return bool(self._metadata.get(actor_id, {}).get(\"revoked\", False))\n\n    def is_expired(self, actor_id: str) -> bool:\n        expires_at_str = self._metadata.get(actor_id, {}).get(\"expires_at\")\n        if not expires_at_str:\n            return False\n        expires_at = datetime.fromisoformat(expires_at_str)\n        return datetime.now(timezone.utc) > expires_at\n\n    def rotate_key(self, actor_id: str) -> str:\n        \"\"\"Revokes the old key and generates a new one.\"\"\"\n        self.revoke_key(actor_id)\n        return self.generate_and_store_key(actor_id)"
+        }
+      ]
+    },
+    "01_KISH_ENGINE/babylon60/primitives/cbor.py": {
+      "sha256": "befd58e5ae2587434cf7f31f841ba80d6da64e5666b20917650910dfa1b3e377",
+      "ranges": [
+        {
+          "start_line": 127,
+          "end_line": 153,
+          "text": "def _decode_stream(stream: io.BytesIO) -> Any:\n    b = stream.read(1)\n    if not b:\n        raise EOFError(\"Unexpected end of CBOR stream\")\n\n    first = b[0]\n    major = first >> 5\n    additional = first & 0x1F\n    val = _read_additional(additional, stream)\n\n    if major == MAJOR_UNSIGNED:\n        return val\n    if major == MAJOR_NEGATIVE:\n        return -1 - val\n    if major == MAJOR_BYTES:\n        return stream.read(val)\n    if major == MAJOR_TEXT:\n        return stream.read(val).decode(\"utf-8\")\n    if major == MAJOR_ARRAY:\n        return [_decode_stream(stream) for _ in range(val)]\n    if major == MAJOR_MAP:\n        return _decode_map(val, stream)\n    if major == MAJOR_SIMPLE:\n        return _decode_simple(additional, val)\n    if major == MAJOR_TAG:\n        return _decode_stream(stream)\n    raise ValueError(f\"Unknown CBOR major type: {major}\")"
+        },
+        {
+          "start_line": 156,
+          "end_line": 161,
+          "text": "def loads(data: bytes) -> Any:\n    \"\"\"\n    Deserializes CBOR bytes into Python objects.\n    \"\"\"\n    stream = io.BytesIO(data)\n    return _decode_stream(stream)"
+        }
+      ]
+    },
+    "01_KISH_ENGINE/babylon60/primitives/__init__.py": {
+      "sha256": "50e7384d2af0cba5e87ce5bb438b4863ce4bd4b3b6f23d42ecb06f689ca6d7d6",
+      "ranges": [
+        {
+          "start_line": 5,
+          "end_line": 16,
+          "text": "from .async_db import AsyncConnection, AsyncCursor, connect\nfrom .cbor import dumps as cbor_dumps, loads as cbor_loads\nfrom .disintegration_matrix import disintegrate, disintegration_matrix, pushforward, support, verify_symmetry\nfrom .matrix import Matrix, Vector, dict_to_vector, vector_to_dict\nfrom .tonnetz_monitor import compute_shannon_entropy, evaluate_tonnetz_oversight\nfrom .yaml_parser import dump_yaml, parse_yaml\n\n__all__ = [\n    \"compute_shannon_entropy\",\n    \"evaluate_tonnetz_oversight\",\n    \"cbor_dumps\",\n    \"cbor_loads\","
+        }
+      ]
+    },
+    "tests/babylon60/primitives/test_sovereign_primitives.py": {
+      "sha256": "456b20dd473e29d9c4bd608f36509e9e20630494d915756e3d0c00ee830e6896",
+      "ranges": [
+        {
+          "start_line": 18,
+          "end_line": 27,
+          "text": "def test_cbor_bft_canonical_serialization() -> None:\n    # Test primitive types\n    data = {\n        \"b\": 2,\n        \"a\": 1,\n        \"nested\": [True, False, None, 3.14159],\n        \"bytes\": b\"\\x00\\xff\",\n    }\n    encoded = cbor_dumps(data)\n    decoded = cbor_loads(encoded)"
+        }
+      ]
+    },
+    "01_KISH_ENGINE/extensions/moskv-fx-scavenger/setup_native_host.sh": {
+      "sha256": "e8bf290cfe8211782b512679d82242aa8af8feedd38367fad6937d3fa1458e98",
+      "ranges": [
+        {
+          "start_line": 18,
+          "end_line": 24,
+          "text": "usage() {\n    echo \"Uso: $0 [opciones]\"\n    echo \"Opciones:\"\n    echo \"  -e, --extension-id <ID>   ID de la extensión de Chrome (32 caracteres)\"\n    echo \"  -b, --browser <nombre>    Navegador: chrome, arc, brave (default: chrome)\"\n    echo \"  -d, --dry-run             Muestra el manifiesto sin escribir en disco\"\n    echo \"  -h, --help                Muestra esta ayuda\""
+        },
+        {
+          "start_line": 59,
+          "end_line": 64,
+          "text": "if [ ! -f \"$KERNEL_SCRIPT\" ]; then\n    echo \"[!] ERROR FATAL: No se encuentra moskv_native_host.py en $KERNEL_SCRIPT\"\n    exit 1\nfi\n\nchmod +x \"$KERNEL_SCRIPT\""
+        },
+        {
+          "start_line": 132,
+          "end_line": 140,
+          "text": "if [ \"$DRY_RUN\" = true ]; then\n    echo \"\"\n    echo \"[DRY-RUN] Manifiesto resultante para $MANIFEST_PATH:\"\n    echo \"$MANIFEST_CONTENT\"\n    exit 0\nfi\n\nmkdir -p \"$TARGET_DIR\"\necho \"$MANIFEST_CONTENT\" > \"$MANIFEST_PATH\""
+        }
+      ]
+    },
+    "deploy/Dockerfile": {
+      "sha256": "1cc2c6c057ce3d5d5971619402ca85976190903af0e3b2e3b316d688d52538e6",
+      "ranges": [
+        {
+          "start_line": 6,
+          "end_line": 14,
+          "text": "# Stage 1: Build binary\nFROM rust:1.80-alpine AS builder\n\nRUN apk add --no-cache musl-dev\n\nWORKDIR /app\nCOPY . .\n\nRUN cargo build --release -p babylon-attest"
+        }
+      ]
+    },
+    "Cargo.toml": {
+      "sha256": "ac947bfc2a5374df2bfe33f5dd2425981883a09068742590e8e39757d9361673",
+      "ranges": [
+        {
+          "start_line": 1,
+          "end_line": 20,
+          "text": "[workspace]\nmembers = [\n    \"crates/cadt_mediator\",\n    \"00_ABZU_KERNEL/crates/*\", \"01_KISH_ENGINE/cortex/crates/*\",\n    \"crates/*\"\n]\nexclude = [\n    \"packages/*\",\n    \"00_ABZU_KERNEL/formal_verification\"\n]\nresolver = \"2\"\n\n[workspace.package]\nversion = \"5.0.1\"\n\n[package]\nname = \"babylon60_root\"\nversion.workspace = true\nedition = \"2021\"\nrust-version = \"1.89\""
+        }
+      ]
+    },
+    "00_ABZU_KERNEL/crates/strike-rs/Cargo.toml": {
+      "sha256": "a5512538816c6520c73ef2b17d61956fb7b004021159bee6f6b9c2e4c997e7e3",
+      "ranges": [
+        {
+          "start_line": 1,
+          "end_line": 6,
+          "text": "[package]\nname = \"strike_rs\"\nversion.workspace = true\nedition = \"2024\"\nlicense-file = \"../../../LICENSE\"\npublish = false"
+        }
+      ]
+    },
+    "crates/cadt_mediator/Cargo.toml": {
+      "sha256": "9c165e8c60fc4ff174561595fdf0d8cf8173f33399aab9dc6a712d3985e9ef79",
+      "ranges": [
+        {
+          "start_line": 1,
+          "end_line": 6,
+          "text": "[package]\nname = \"cadt_mediator\"\nversion.workspace = true\nlicense-file = \"../../LICENSE\"\npublish = false\nedition = \"2024\""
+        }
+      ]
+    },
+    "examples/poc_stress_dec_mimetic.rs": {
+      "sha256": "63a1905bacc25d02c675fbc333276b8e67978647f3895c13cbea22607ab91e35",
+      "ranges": [
+        {
+          "start_line": 137,
+          "end_line": 160,
+          "text": "    let larsa_iterations = 1_000u64;\n    println!(\"[4/6] Ejecutando Stress Test Consenso LARSA-120 ({} ciclos BFT)...\", larsa_iterations);\n\n    let t0_larsa = Instant::now();\n    let triad = LarsaTriadConsensus::new();\n    let mut quorum_poisoned_events = 0u64;\n\n    for iter in 0..larsa_iterations {\n        // Simulamos fluctuación de quórum dinámica\n        if iter % 10 == 0 {\n            triad.report_failure(LarsaVertex::Gamma); // Falla 1 nodo (Quorum 2/3 se sostiene)\n            assert_eq!(triad.evaluate_quorum(), babylon60::manifest::RUNNING);\n            triad.restore_vertex(LarsaVertex::Gamma);\n        } else if iter % 50 == 0 {\n            triad.report_failure(LarsaVertex::Beta);\n            triad.report_failure(LarsaVertex::Gamma); // Caen 2 nodos (Quorum < 2/3 -> Apoptosis)\n            assert_eq!(triad.evaluate_quorum(), babylon60::manifest::POISONED);\n            quorum_poisoned_events += 1;\n            triad.restore_vertex(LarsaVertex::Beta);\n            triad.restore_vertex(LarsaVertex::Gamma);\n        } else {\n            assert_eq!(triad.evaluate_quorum(), babylon60::manifest::RUNNING);\n        }\n    }"
+        },
+        {
+          "start_line": 161,
+          "end_line": 168,
+          "text": "    let elapsed_larsa = t0_larsa.elapsed();\n    let avg_larsa = elapsed_larsa / larsa_iterations as u32;\n\n    println!(\"  > Tiempo total LARSA-120:   {:?}\", elapsed_larsa);\n    println!(\"  > Latencia media consenso:  {:?}\", avg_larsa);\n    println!(\"  > Eventos de Apoptosis:     {} (Controlados deterministamente)\", quorum_poisoned_events);\n    assert_eq!(triad.evaluate_quorum(), babylon60::manifest::RUNNING);\n    println!(\"  [✓] LARSA-120 Certificado: 100% Estabilidad BFT Isostática sin Deadlocks.\\n\");"
+        }
+      ]
+    },
+    "scripts/c5_demos/c5_shm_manifest.rs": {
+      "sha256": "16294fa3c41be24a121c88d20365566466a51825d4f40713457754bdcf170f79",
+      "ranges": [
+        {
+          "start_line": 1,
+          "end_line": 20,
+          "text": "#[repr(C, align(64))]\npub struct Kudurru64 {\n    /// Atomic sequence counter to track causal ticks (8 bytes)\n    pub sequence_id: std::sync::atomic::AtomicU64,\n    \n    /// P-256 / Ed25519 Secure Enclave Attestation Hash (32 bytes)\n    pub biometric_attestation_hash: [u8; 32],\n    \n    /// Bitmask for Ring-0 state flags (e.g., TouchID granted, AOF validated) (4 bytes)\n    pub state_flags: std::sync::atomic::AtomicU32,\n    \n    /// Exergy rating tracking system burnout (2 bytes)\n    pub exergy_score: std::sync::atomic::AtomicU16,\n    \n    /// Epoch-Based Reclamation (EBR) generation ticket (4 bytes)\n    pub ebr_ticket: std::sync::atomic::AtomicU32,\n    \n    /// Padding to exactly 64 bytes (14 bytes)\n    /// 8 + 32 + 4 + 2 + 4 + 14 = 64\n    pub padding: [u8; 14],"
+        },
+        {
+          "start_line": 36,
+          "end_line": 44,
+          "text": "    /// Validates if the struct is exactly one L1 cache line\n    pub const fn validate_alignment() {\n        assert!(std::mem::size_of::<Self>() == 64, \"KUDURRU-64 must be exactly 64 bytes\");\n        assert!(std::mem::align_of::<Self>() == 64, \"KUDURRU-64 must be 64-byte aligned\");\n    }\n}\n\n// In a real Ring-0 daemon, this struct is mapped via memfd_create / mmap\n// allowing Python (Ring-1) to read the struct via ctypes zero-copy."
+        }
+      ]
+    },
+    "scripts/c5_demos/poc_shm_orchestrator.py": {
+      "sha256": "78e9d097f05020ff5c25b50d2ed600f8d03c0430d32bfe962bc8d093a1489324",
+      "ranges": [
+        {
+          "start_line": 11,
+          "end_line": 32,
+          "text": "# INV_C5_SHM: C-ABI lock-free 64-byte memory mapping definition (KUDURRU-64)\nclass Kudurru64(ctypes.Structure):\n    _pack_ = 64\n    _fields_ = [\n        (\"sequence_id\", ctypes.c_uint64),\n        (\"biometric_attestation_hash\", ctypes.c_uint8 * 32),\n        (\"state_flags\", ctypes.c_uint32),\n        (\"exergy_score\", ctypes.c_uint16),\n        (\"ebr_ticket\", ctypes.c_uint32),\n        (\"padding\", ctypes.c_uint8 * 14)\n    ]\n\ndef read_shm_hot_path(shm_fd: int):\n    \"\"\"\n    Zero-friction E2E Orchestrator hot path.\n    Instead of spawning subprocess.run() and parsing stdout, it reads the 64-byte \n    L1 cache line directly from the Rust Ring-0 memory map.\n    \"\"\"\n    with os.fdopen(shm_fd, 'r+b') as f:\n        with mmap.mmap(f.fileno(), 64, access=mmap.ACCESS_READ) as mm:\n            # Map the C-struct directly over the mmap buffer (Zero-Copy)\n            kudurru = Kudurru64.from_buffer(mm)"
+        }
+      ]
+    },
+    "scripts/c5_demos/zk_causal_gate_stress_test.py": {
+      "sha256": "ac3db734b7911555b87838da274bcfe98663c931f2bbbf75b77a6cf66e70f705",
+      "ranges": [
+        {
+          "start_line": 10,
+          "end_line": 30,
+          "text": "def simulate_lean4_sync_eval(trace_payload: bytes) -> bool:\n    \"\"\"Simulates the thermodynamic cost of evaluating a Lean 4 theorem (O(N)).\"\"\"\n    # Simulate high friction: actual time block reflecting IO and Type-Checking\n    time.sleep(0.005) # 5ms penalty per verification\n    return True\n\ndef simulate_zk_o1_eval(zk_proof_signature: bytes) -> bool:\n    \"\"\"Simulates the O(1) verification of a ZK-SNARK signature in Ring-0.\"\"\"\n    return hashlib.sha256(zk_proof_signature).hexdigest().startswith(\"a\") or True\n\ndef run_legacy_topology(worker_id: int, payload: bytes) -> float:\n    start = time.perf_counter()\n    simulate_lean4_sync_eval(payload)\n    end = time.perf_counter()\n    return end - start\n\ndef run_zk_topology(worker_id: int, payload: bytes) -> float:\n    start = time.perf_counter()\n    simulate_zk_o1_eval(payload)\n    end = time.perf_counter()\n    return end - start"
+        },
+        {
+          "start_line": 65,
+          "end_line": 81,
+          "text": "    print(\"\\n[ RESULTADOS DE FALSACIÓN ]\")\n    print(f\"Legacy Total Time: {end_legacy - start_legacy:.4f}s\")\n    print(f\"Legacy Avg Latency: {legacy_stats['avg']:.2f}ms | P99: {legacy_stats['p99']:.2f}ms\")\n    print(\"---\")\n    print(f\"ZK Total Time: {end_zk - start_zk:.4f}s\")\n    print(f\"ZK Avg Latency: {zk_stats['avg']:.2f}ms | P99: {zk_stats['p99']:.2f}ms\")\n\n    speedup = (end_legacy - start_legacy) / (end_zk - start_zk)\n    print(f\"\\n⚡ Ganancia Termodinámica (Exergía): {speedup:.2f}x\")\n    \n    if speedup > 50:\n        print(\"✅ FALSACIÓN SUPERADA: La invariante O(1) sobrevive al enjambre. Latencia termodinámica aniquilada. Deadlocks no detectados.\")\n    else:\n        print(\"❌ FALLO CAUSAL: El colapso ZK no justifica la entropía inyectada.\")\n\nif __name__ == \"__main__\":\n    stress_test()"
+        }
+      ]
+    },
+    "scripts/c5_orchestrator/c5_session_deskimming_engine.py": {
+      "sha256": "593b18bff1699cf838a5c66770344c25b3bce8666132e929017078eec7f31827",
+      "ranges": [
+        {
+          "start_line": 25,
+          "end_line": 31,
+          "text": "REPO_ROOT = Path(__file__).resolve().parent.parent.parent\nBRAIN_DIR = Path.home() / \".gemini\" / \"antigravity\" / \"brain\"\nAUDIT_DIR = REPO_ROOT / \".audit\"\nORCHESTRATOR_DIR = Path(__file__).resolve().parent\n\nAUDIT_DIR.mkdir(parents=True, exist_ok=True)\nORCHESTRATOR_DIR.mkdir(parents=True, exist_ok=True)"
+        },
+        {
+          "start_line": 57,
+          "end_line": 78,
+          "text": "        if src.exists():\n            h_src = sha256_file(src)\n            action = {\n                \"item\": s_name,\n                \"source\": str(src),\n                \"destination\": str(dest),\n                \"sha256\": h_src,\n                \"status\": \"PENDING\"\n            }\n            if not dry_run:\n                shutil.copy2(src, dest)\n                dest.chmod(0o755)\n                action[\"status\"] = \"RECLAIMED_CANONICAL\"\n            else:\n                action[\"status\"] = \"SIMULATED_RECLAIM\"\n            actions_taken.append(action)\n        else:\n            actions_taken.append({\n                \"item\": s_name,\n                \"source\": str(src),\n                \"status\": \"SOURCE_NOT_FOUND\"\n            })"
+        },
+        {
+          "start_line": 90,
+          "end_line": 115,
+          "text": "    receipt = {\n        \"timestamp\": t0.isoformat(),\n        \"dry_run\": dry_run,\n        \"actions\": actions_taken,\n        \"temp_assets\": {\n            \"path\": str(scratch_dir),\n            \"files_count\": temp_files_found,\n            \"bytes_reclaimable\": temp_bytes\n        },\n        \"merkle_root\": hashlib.sha256(json.dumps(actions_taken, sort_keys=True).encode(\"utf-8\")).hexdigest()\n    }\n    \n    receipt_file = AUDIT_DIR / \"deskimming_receipt.json\"\n    with open(receipt_file, \"w\", encoding=\"utf-8\") as f:\n        json.dump(receipt, f, indent=2, ensure_ascii=False)\n        \n    return receipt\n\n\nif __name__ == \"__main__\":\n    parser = argparse.ArgumentParser(description=\"C5-REAL Session Deskimming Engine\")\n    parser.add_argument(\"--dry-run\", action=\"store_true\", help=\"Simulate actions without writing\")\n    args = parser.parse_args()\n    \n    res = run_deskimming(dry_run=args.dry_run)\n    print(f\"[*] Deskimming Engine completado. Acciones ejecutadas: {len(res['actions'])}\")"
+        }
+      ]
+    },
+    "scripts/c5_sharur/c5_bounty_sharur_exfiltration.py": {
+      "sha256": "0caf0417da02a3c034de541cb9e52df621e40a159980e1a35a7a359299363159",
+      "ranges": [
+        {
+          "start_line": 154,
+          "end_line": 177,
+          "text": "    claims = fetch_scitt_claims(db_path=db_path, limit=limit, domain_filter=domain_filter)\n    if not claims:\n        print(f\"[!] No se encontraron atestaciones SCITT en {db_path} que coincidan con los criterios.\")\n        return\n\n    print(f\"\\n[*] {len(claims):,} atestaciones SCITT recuperadas del Cold Ledger.\")\n    print(f\"[*] Desplegando enjambre concurrente de subagentes ({workers} workers)...\\n\")\n\n    start_time = time.perf_counter()\n    results: List[Dict[str, Any]] = []\n\n    with concurrent.futures.ThreadPoolExecutor(max_workers=workers, thread_name_prefix=\"exfilt\") as executor:\n        future_to_claim = {executor.submit(legion_subagent_task, c, not offline): c for c in claims}\n        done_count = 0\n        for future in concurrent.futures.as_completed(future_to_claim):\n            try:\n                res = future.result()\n                results.append(res)\n                done_count += 1\n                if done_count % 10 == 0 or done_count == len(claims):\n                    pct = (done_count / len(claims)) * 100\n                    print(f\"    [{pct:5.1f}%] Subagentes finalizados: {done_count}/{len(claims)}\")\n            except Exception as exc:\n                logger.error(f\"  [!] Subagente colapsado: {exc}\")"
+        },
+        {
+          "start_line": 195,
+          "end_line": 218,
+          "text": "    # Resumen por dominio\n    by_domain: Dict[str, int] = {}\n    for r in results:\n        dom = r[\"domain\"]\n        by_domain[dom] = by_domain.get(dom, 0) + 1\n\n    print(f\"\\n{'=' * 80}\")\n    print(\"📈 BALANCE FINAL DE MITIGACIONES GENERADAS\")\n    print(f\"{'=' * 80}\")\n    for dom, count in sorted(by_domain.items()):\n        print(f\"  {dom:<16}: {count:,} mitigaciones sintetizadas\")\n    print(f\"  TOTAL PROCESADO : {len(results):,} planes de remediación listos para despacho\")\n    print(f\"  TIEMPO TOTAL    : {elapsed:.2f} s\")\n    print(f\"{'=' * 80}\")\n\n    if export_path:\n        try:\n            with open(export_path, \"w\", encoding=\"utf-8\") as f:\n                json.dump(results, f, indent=2, ensure_ascii=False)\n            print(f\"\\n[+] Reporte forense exportado a: {export_path}\")\n        except Exception as e:\n            print(f\"[!] Error exportando reporte a {export_path}: {e}\")\n\n    print(\"\\n✅ OPERATIVO DE EXFILTRACIÓN FORENSE CERRADO CON ÉXITO\")"
+        },
+        {
+          "start_line": 259,
+          "end_line": 273,
+          "text": "    args = parser.parse_args()\n\n    lim = None if args.limit <= 0 else args.limit\n    execute_exfiltration_swarm(\n        db_path=args.db_path,\n        limit=lim,\n        domain_filter=args.domain,\n        workers=args.workers,\n        export_path=args.export,\n        offline=args.offline,\n    )\n\n\nif __name__ == \"__main__\":\n    main()"
+        }
+      ]
+    },
+    "scripts/c5_verifiers/verify_execution.sh": {
+      "sha256": "847847dffe82976bd653c7787baaf9714e107770c047d31e797c68701d844046",
+      "ranges": [
+        {
+          "start_line": 5,
+          "end_line": 20,
+          "text": "set -e\n\necho \"=== Verificador de Ejecución Transaccional ===\"\n\n# 1. Verificar si hay cambios sin commit\nif ! git diff --quiet || ! git diff --cached --quiet; then\n    echo \"⚠️ CAMBIOS SIN COMMIT DETECTADOS.\"\n    echo \"El modelo ha alterado el disco, pero no ha cristalizado la acción (Git Sentinel falló).\"\n    echo \"Fuerza un commit antes de proceder.\"\n    exit 1\nfi\n\n# 2. Obtener último commit hash\nLAST_HASH=$(git log -1 --pretty=format:\"%H\")\necho \"✅ Repositorio Limpio.\"\necho \"✅ Último Hash: $LAST_HASH\""
+        },
+        {
+          "start_line": 22,
+          "end_line": 34,
+          "text": "# 3. Listar archivos alterados en el último commit y sus SHA256 (Deterministic Proof)\necho \"✅ Archivos mutados en el último commit y sus pruebas criptográficas (SHA256):\"\nFILES=$(git diff-tree --no-commit-id --name-only -r HEAD)\nfor file in $FILES; do\n    if [ -f \"$file\" ]; then\n        sha256sum \"$file\"\n    else\n        echo \"[Archivo eliminado/movido]: $file\"\n    fi\ndone\n\necho \"==============================================\"\necho \"Ejecución auditada correctamente.\""
+        }
+      ]
+    },
+    "src/fluid_thermo.rs": {
+      "sha256": "69beaf68335f4780f52b453e629d0490fce067f946099387396398bbc140dfa5",
+      "ranges": [
+        {
+          "start_line": 36,
+          "end_line": 46,
+          "text": "/// Calcula el suelo teórico de disipación de Landauer al proyectar el campo\n/// de velocidades sobre el subespacio solenoidal en una malla N x N x N.\n/// La proyección borra N^3 grados de libertad longitudinales (compresibles),\n/// cada uno de 64 bits (IEEE 754 f64).\n#[inline]\npub fn leray_projection_landauer_floor_joules(mesh_n: usize, temperature_k: f64) -> f64 {\n    let erased_modes = (mesh_n * mesh_n * mesh_n) as f64;\n    let bits_erased = erased_modes * 64.0;\n    let kb_t_ln2 = BOLTZMANN_K_B * temperature_k * core::f64::consts::LN_2;\n    bits_erased * kb_t_ln2\n}"
+        }
+      ]
+    },
+    "src/lib.rs": {
+      "sha256": "d3ecd074ba2582e1bb89c7e98ba767c3e83485bc8225840aa04be36732701737",
+      "ranges": [
+        {
+          "start_line": 99,
+          "end_line": 99,
+          "text": "pub mod fluid_thermo;"
+        }
+      ]
+    },
+    "examples/omega_100_synthesis.rs": {
+      "sha256": "cdb1812cd86594cdd9c9b282cfb99b6533cbedf89bc03fc1fe5acd6f5c0373df",
+      "ranges": [
+        {
+          "start_line": 74,
+          "end_line": 91,
+          "text": "    // FASE 3: TERMODINÁMICA DE LA INFORMACIÓN Y LANDAUER (BLOQUE IX)\n    // -------------------------------------------------------------------------\n    println!(\"[3/6] Evaluando Métricas Termodinámicas y Cota de Landauer (Bloque IX)...\");\n    let landauer_floor = leray_projection_landauer_floor_joules(grid_dim, 300.0);\n    let strain_eigenvalues = [diag.max_vorticity * 0.5, -diag.max_vorticity * 0.2, -diag.max_vorticity * 0.3];\n    let h_ks = compute_kolmogorov_sinai_entropy(&strain_eigenvalues);\n    let singular_values = [diag.kinetic_energy, diag.enstrophy, diag.max_vorticity];\n    let rankme = compute_rankme_dimension(&singular_values);\n\n    let p_dist = [0.6, 0.3, 0.1];\n    let q_dist = [0.5, 0.4, 0.1];\n    let d_f = fisher_rao_geodesic_distance(&p_dist, &q_dist);\n\n    println!(\"  > Suelo Landauer Leray:     {:.3e} Joules\", landauer_floor);\n    println!(\"  > Entropía Kolmogorov-Sinai: {:.6}\", h_ks);\n    println!(\"  > Dimensión Efectiva RankMe: {:.4}\", rankme);\n    println!(\"  > Distancia de Fisher-Rao:   {:.6} rad (Métrica de Chentsov)\", d_f);\n    assert!(landauer_floor > 0.0);"
+        }
+      ]
+    },
+    "tools/skill_library/codex_overrides/cloudflare/references/ai-search/gotchas.md": {
+      "sha256": "e548c0f2cba170e81dd3e9e15b7cf430eabd7e73770ed29589b90dc20c3bf452",
+      "ranges": [
+        {
+          "start_line": 10,
+          "end_line": 13,
+          "text": "**Folder prefix matching:** Use `gte` for \"starts with\" on paths.\n```typescript\nfilters: { column: \"folder\", operator: \"gte\", value: \"docs/api/\" } // Matches nested\n```"
+        }
+      ]
+    },
+    "tools/skill_library/codex_overrides/cloudflare/references/ai-search/README.md": {
+      "sha256": "9b7a45bc366492935da635557d52167c13d2af657d2050db33b3e915bf9e5bca",
+      "ranges": [
+        {
+          "start_line": 118,
+          "end_line": 132,
+          "text": "| Task | Read | Est. Time |\n|------|------|-----------|\n| **Understand AI Search** | README only | 5 min |\n| **Implement basic search** | README → api.md | 10 min |\n| **Configure data source** | README → configuration.md | 10 min |\n| **Production patterns** | patterns.md | 15 min |\n| **Debug issues** | gotchas.md | 10 min |\n| **Full implementation** | README → api.md → patterns.md | 30 min |\n\n## In This Reference\n\n- **[api.md](api.md)** - API endpoints, methods, TypeScript interfaces\n- **[configuration.md](configuration.md)** - Setup, data sources, wrangler config\n- **[patterns.md](patterns.md)** - Common patterns, decision guidance, code examples\n- **[gotchas.md](gotchas.md)** - Troubleshooting, code-level gotchas, limits"
+        }
+      ]
+    },
+    "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/examples/Euclidean_Polyrhythm_Generator.py": {
+      "sha256": "6d5ae3cc1e5c7713fca3cdea108973f42f02eea8686f89a8f74073a9f02c059a",
+      "ranges": [
+        {
+          "start_line": 51,
+          "end_line": 69,
+          "text": "def createDialog():\n    if not HAS_FLPIANOROLL:\n        return None\n    form = flp.ScriptDialog(\"Euclidean Polyrhythm Generator\", \"Generador de patrones euclidianos E(k, n) con micro-timing.\")\n    form.AddInputKnob(\"Steps Layer 1 (N1)\", 16, 4, 32)\n    form.AddInputKnob(\"Pulses Layer 1 (K1)\", 5, 1, 32)\n    form.AddInputKnob(\"Steps Layer 2 (N2)\", 12, 4, 32)\n    form.AddInputKnob(\"Pulses Layer 2 (K2)\", 7, 1, 32)\n    form.AddInputKnob(\"Ciclos Compases\", 4, 1, 16)\n    form.AddInputCombo(\"Modo Polirritmia\", \"Poliritmo 4/4 (Compas fijo),Polimetro Continuo\", 0)\n    return form\n\ndef generate_euclidean(score_obj, n1=16, k1=5, n2=12, k2=7, bars=4, mode=0):\n    score_obj.clear()\n    BAR = 1920\n    total_ticks = int(bars) * BAR\n\n    pat1 = bjorklund(int(k1), int(n1))\n    pat2 = bjorklund(int(k2), int(n2))"
+        },
+        {
+          "start_line": 71,
+          "end_line": 108,
+          "text": "    # Layer 1: Kick / Low Perc (MIDI 36)\n    step_ticks_1 = BAR // int(n1)\n    cur_t = 0\n    while cur_t < total_ticks:\n        step_idx = (cur_t // step_ticks_1) % len(pat1)\n        if pat1[step_idx]:\n            n = flp.Note() if HAS_FLPIANOROLL else utils.Note()\n            n.number = 36 # C2\n            n.time = cur_t\n            n.length = int(step_ticks_1 * 0.8)\n            n.velocity = 0.92\n            score_obj.addNote(n)\n        cur_t += step_ticks_1\n\n    # Layer 2: Perc / Rim / High Synth (MIDI 42)\n    step_ticks_2 = BAR // int(n2)\n    cur_t = 0\n    while cur_t < total_ticks:\n        step_idx = (cur_t // step_ticks_2) % len(pat2)\n        if pat2[step_idx]:\n            n = flp.Note() if HAS_FLPIANOROLL else utils.Note()\n            n.number = 42 # F#2\n            n.time = cur_t\n            n.length = int(step_ticks_2 * 0.7)\n            n.velocity = 0.78\n            if HAS_FLPIANOROLL and hasattr(n, 'color'):\n                n.color = 1 # Canal verde\n            score_obj.addNote(n)\n        cur_t += step_ticks_2\n\ndef apply(form):\n    n1 = form.GetInputValue(\"Steps Layer 1 (N1)\")\n    k1 = form.GetInputValue(\"Pulses Layer 1 (K1)\")\n    n2 = form.GetInputValue(\"Steps Layer 2 (N2)\")\n    k2 = form.GetInputValue(\"Pulses Layer 2 (K2)\")\n    bars = form.GetInputValue(\"Ciclos Compases\")\n    mode = form.GetInputValue(\"Modo Polirritmia\")\n    generate_euclidean(flp.score, n1, k1, n2, k2, bars, mode)"
+        }
+      ]
+    },
+    "tools/skill_library/global/c5-secops-infra-devtools/references/modules/electron-asar-forensic-audit/MODULE.md": {
+      "sha256": "71ff85027d6b42db7b06bd8290ca74b7be899437e57ea6e67aee7e20927f55b4",
+      "ranges": [
+        {
+          "start_line": 37,
+          "end_line": 58,
+          "text": "```python\nimport struct, json, re\n\ndef scan_asar(asar_path):\n    with open(asar_path, 'rb') as f:\n        data = f.read(16)\n        u1, u2, header_size, json_size = struct.unpack('<IIII', data)\n        header = json.loads(f.read(json_size).decode('utf-8'))\n        header_offset = 16 + json_size\n\n        def find_files(node, path=''):\n            res = []\n            if 'files' in node:\n                for k, v in node['files'].items():\n                    res.extend(find_files(v, f'{path}/{k}' if path else k))\n            else:\n                res.append((path, node.get('size'), node.get('offset')))\n            return res\n\n        files, offset_base = find_files(header), header_offset\n        return files, offset_base, f\n```"
+        },
+        {
+          "start_line": 132,
+          "end_line": 141,
+          "text": "### Protocolo de Escaneo Determinista de Interfaces IPC (< 10 ms):\n```python\n# Escaneo de canales IPC y contextBridge en memoria sin escribir a disco\nipc_modules = []\nfor path, size, offset in files:\n    if path.endswith('.js') and size < 250000:\n        f.seek(header_offset + offset)\n        code = f.read(size).decode('utf-8', errors='ignore')\n        if any(token in code for token in ('ipcMain', 'ipcRenderer', 'contextBridge')):\n            ipc_modules.append((path, size))"
+        }
+      ]
+    },
+    "tools/skill_library/workspace/c5-anti-slop-ui/scripts/audit_ui_slop.py": {
+      "sha256": "f5686da74c66d1879ffbfb522fb7b6111d53ff952f6cbbd228127154dbe3518f",
+      "ranges": [
+        {
+          "start_line": 92,
+          "end_line": 101,
+          "text": "        # Invariante 3: Tamaños arbitrarios de fuente desalineados de la escala modular\n        arbitrary_font = re.findall(r'text-\\[(\\d+)px\\]', line)\n        for px_str in arbitrary_font:\n            px = int(px_str)\n            if px not in MODULAR_SCALE_MAJOR_THIRD and px not in MODULAR_SCALE_PERFECT_FOURTH:\n                violations.append(Violation(\n                    filepath, idx, \"C5-UI-002\",\n                    f\"Tamaño arbitrario de fuente text-[{px}px] rompe la escala modular armónica. Alinear a razón 1.25 o 1.333.\",\n                    line\n                ))"
+        },
+        {
+          "start_line": 123,
+          "end_line": 138,
+          "text": "def audit_directory(path: str) -> List[Violation]:\n    all_violations: List[Violation] = []\n    if os.path.isfile(path):\n        return audit_file(path)\n\n    for root, _, files in os.walk(path):\n        # Excluir node_modules, dist, .git\n        if any(ignored in root for ignored in [\"node_modules\", \".git\", \"dist\", \"build\", \".next\"]):\n            continue\n        for file in files:\n            ext = os.path.splitext(file)[1].lower()\n            if ext in EXTENSIONS:\n                fp = os.path.join(root, file)\n                all_violations.extend(audit_file(fp))\n\n    return all_violations"
+        },
+        {
+          "start_line": 146,
+          "end_line": 159,
+          "text": "    if not os.path.exists(args.target):\n        sys.stderr.write(f\"Error: Ruta no encontrada '{args.target}'\\n\")\n        sys.exit(2)\n\n    violations = audit_directory(args.target)\n\n    if args.json:\n        import json\n        print(json.dumps([v.to_dict() for v in violations], indent=2, ensure_ascii=False))\n    else:\n        print(f\"=== [C5-REAL UI LINTER] Auditoría de '{args.target}' ===\")\n        if not violations:\n            print(\"✓ Cero violaciones detectadas. La interfaz cumple con las invariantes C5-REAL.\")\n            sys.exit(0)"
+        }
+      ]
+    }
+  },
+  "assignment_hash_comparison": {
+    "SW100-C0566": {
+      "assignment_sha256": "87cbe6a16befa94314448b36597ec3a1b5c85964d4a1e5750f00b384d870824e",
+      "current_sha256": "87cbe6a16befa94314448b36597ec3a1b5c85964d4a1e5750f00b384d870824e",
+      "unchanged": true
+    },
+    "SW100-C0567": {
+      "assignment_sha256": "87cbe6a16befa94314448b36597ec3a1b5c85964d4a1e5750f00b384d870824e",
+      "current_sha256": "87cbe6a16befa94314448b36597ec3a1b5c85964d4a1e5750f00b384d870824e",
+      "unchanged": true
+    },
+    "SW100-C0568": {
+      "assignment_sha256": "87cbe6a16befa94314448b36597ec3a1b5c85964d4a1e5750f00b384d870824e",
+      "current_sha256": "87cbe6a16befa94314448b36597ec3a1b5c85964d4a1e5750f00b384d870824e",
+      "unchanged": true
+    },
+    "SW100-C0077": {
+      "assignment_sha256": "fadac1e715e582527ad3470a9045a866d1297d2ed7e489c3609ed52d91fcacd2",
+      "current_sha256": "fadac1e715e582527ad3470a9045a866d1297d2ed7e489c3609ed52d91fcacd2",
+      "unchanged": true
+    },
+    "SW100-C0078": {
+      "assignment_sha256": "fadac1e715e582527ad3470a9045a866d1297d2ed7e489c3609ed52d91fcacd2",
+      "current_sha256": "fadac1e715e582527ad3470a9045a866d1297d2ed7e489c3609ed52d91fcacd2",
+      "unchanged": true
+    },
+    "SW100-C0365": {
+      "assignment_sha256": "168ff4a5b7b0b7ed198726bdd418d1af15fc5a36d9d5264a36e6cd06214b0b9c",
+      "current_sha256": "d37ef6f1f53ac5195566087516d927a1604a19a5dc7a2c75492052e77d6c9988",
+      "unchanged": false
+    },
+    "SW100-C0366": {
+      "assignment_sha256": "168ff4a5b7b0b7ed198726bdd418d1af15fc5a36d9d5264a36e6cd06214b0b9c",
+      "current_sha256": "d37ef6f1f53ac5195566087516d927a1604a19a5dc7a2c75492052e77d6c9988",
+      "unchanged": false
+    },
+    "SW100-C0341": {
+      "assignment_sha256": "6f6d83eeda8e035f9ecb67d48c81dd78e6dd3c520827cf10018792650705db95",
+      "current_sha256": "6f6d83eeda8e035f9ecb67d48c81dd78e6dd3c520827cf10018792650705db95",
+      "unchanged": true
+    },
+    "SW100-C0342": {
+      "assignment_sha256": "6f6d83eeda8e035f9ecb67d48c81dd78e6dd3c520827cf10018792650705db95",
+      "current_sha256": "6f6d83eeda8e035f9ecb67d48c81dd78e6dd3c520827cf10018792650705db95",
+      "unchanged": true
+    },
+    "SW100-C0533": {
+      "assignment_sha256": "154e38e4308b098e7687b266f337ec684b5ebd9488afcf186ab52c85139f8916",
+      "current_sha256": "154e38e4308b098e7687b266f337ec684b5ebd9488afcf186ab52c85139f8916",
+      "unchanged": true
+    },
+    "SW100-C0534": {
+      "assignment_sha256": "154e38e4308b098e7687b266f337ec684b5ebd9488afcf186ab52c85139f8916",
+      "current_sha256": "154e38e4308b098e7687b266f337ec684b5ebd9488afcf186ab52c85139f8916",
+      "unchanged": true
+    },
+    "SW100-C0474": {
+      "assignment_sha256": "692772e971af6ac1180ec1727ca7c4f52de4cc9053684490ab126ecd9bb643de",
+      "current_sha256": "692772e971af6ac1180ec1727ca7c4f52de4cc9053684490ab126ecd9bb643de",
+      "unchanged": true
+    },
+    "SW100-C0475": {
+      "assignment_sha256": "692772e971af6ac1180ec1727ca7c4f52de4cc9053684490ab126ecd9bb643de",
+      "current_sha256": "692772e971af6ac1180ec1727ca7c4f52de4cc9053684490ab126ecd9bb643de",
+      "unchanged": true
+    },
+    "SW100-C0358": {
+      "assignment_sha256": "24df531cfbb817964c4da27b4220351c4080eb4ab9b54c789b11a16d7b07909b",
+      "current_sha256": "24df531cfbb817964c4da27b4220351c4080eb4ab9b54c789b11a16d7b07909b",
+      "unchanged": true
+    },
+    "SW100-C0345": {
+      "assignment_sha256": "cbf5b3ded4cf854df1d11d37a4d61d0f0122604881c7a02fb0f00497822ee305",
+      "current_sha256": "cbf5b3ded4cf854df1d11d37a4d61d0f0122604881c7a02fb0f00497822ee305",
+      "unchanged": true
+    },
+    "SW100-C0259": {
+      "assignment_sha256": "befd58e5ae2587434cf7f31f841ba80d6da64e5666b20917650910dfa1b3e377",
+      "current_sha256": "befd58e5ae2587434cf7f31f841ba80d6da64e5666b20917650910dfa1b3e377",
+      "unchanged": true
+    },
+    "SW100-C0411": {
+      "assignment_sha256": "e8bf290cfe8211782b512679d82242aa8af8feedd38367fad6937d3fa1458e98",
+      "current_sha256": "e8bf290cfe8211782b512679d82242aa8af8feedd38367fad6937d3fa1458e98",
+      "unchanged": true
+    },
+    "SW100-C0565": {
+      "assignment_sha256": "1cc2c6c057ce3d5d5971619402ca85976190903af0e3b2e3b316d688d52538e6",
+      "current_sha256": "1cc2c6c057ce3d5d5971619402ca85976190903af0e3b2e3b316d688d52538e6",
+      "unchanged": true
+    },
+    "SW100-C0536": {
+      "assignment_sha256": "63a1905bacc25d02c675fbc333276b8e67978647f3895c13cbea22607ab91e35",
+      "current_sha256": "63a1905bacc25d02c675fbc333276b8e67978647f3895c13cbea22607ab91e35",
+      "unchanged": true
+    },
+    "SW100-C0020": {
+      "assignment_sha256": "16294fa3c41be24a121c88d20365566466a51825d4f40713457754bdcf170f79",
+      "current_sha256": "16294fa3c41be24a121c88d20365566466a51825d4f40713457754bdcf170f79",
+      "unchanged": true
+    },
+    "SW100-C0333": {
+      "assignment_sha256": "ac3db734b7911555b87838da274bcfe98663c931f2bbbf75b77a6cf66e70f705",
+      "current_sha256": "ac3db734b7911555b87838da274bcfe98663c931f2bbbf75b77a6cf66e70f705",
+      "unchanged": true
+    },
+    "SW100-C0588": {
+      "assignment_sha256": "593b18bff1699cf838a5c66770344c25b3bce8666132e929017078eec7f31827",
+      "current_sha256": "593b18bff1699cf838a5c66770344c25b3bce8666132e929017078eec7f31827",
+      "unchanged": true
+    },
+    "SW100-C0289": {
+      "assignment_sha256": "0caf0417da02a3c034de541cb9e52df621e40a159980e1a35a7a359299363159",
+      "current_sha256": "0caf0417da02a3c034de541cb9e52df621e40a159980e1a35a7a359299363159",
+      "unchanged": true
+    },
+    "SW100-C0005": {
+      "assignment_sha256": "847847dffe82976bd653c7787baaf9714e107770c047d31e797c68701d844046",
+      "current_sha256": "847847dffe82976bd653c7787baaf9714e107770c047d31e797c68701d844046",
+      "unchanged": true
+    },
+    "SW100-C0550": {
+      "assignment_sha256": "69beaf68335f4780f52b453e629d0490fce067f946099387396398bbc140dfa5",
+      "current_sha256": "69beaf68335f4780f52b453e629d0490fce067f946099387396398bbc140dfa5",
+      "unchanged": true
+    },
+    "SW100-C0190": {
+      "assignment_sha256": "e548c0f2cba170e81dd3e9e15b7cf430eabd7e73770ed29589b90dc20c3bf452",
+      "current_sha256": "e548c0f2cba170e81dd3e9e15b7cf430eabd7e73770ed29589b90dc20c3bf452",
+      "unchanged": true
+    },
+    "SW100-C0022": {
+      "assignment_sha256": "6d5ae3cc1e5c7713fca3cdea108973f42f02eea8686f89a8f74073a9f02c059a",
+      "current_sha256": "6d5ae3cc1e5c7713fca3cdea108973f42f02eea8686f89a8f74073a9f02c059a",
+      "unchanged": true
+    },
+    "SW100-C0302": {
+      "assignment_sha256": "71ff85027d6b42db7b06bd8290ca74b7be899437e57ea6e67aee7e20927f55b4",
+      "current_sha256": "71ff85027d6b42db7b06bd8290ca74b7be899437e57ea6e67aee7e20927f55b4",
+      "unchanged": true
+    },
+    "SW100-C0174": {
+      "assignment_sha256": "f5686da74c66d1879ffbfb522fb7b6111d53ff952f6cbbd228127154dbe3518f",
+      "current_sha256": "f5686da74c66d1879ffbfb522fb7b6111d53ff952f6cbbd228127154dbe3518f",
+      "unchanged": true
+    }
+  },
+  "external_documentation": [
+    {
+      "tool": "Context7 resolve_library_id then query_docs",
+      "library_id": "/websites/developers_cloudflare_ai-search",
+      "url": "https://developers.cloudflare.com/ai-search/configuration/retrieval/filtering",
+      "candidate_id": "SW100-C0190",
+      "observation": "Official prefix filter uses both gte and lt bounds to exclude lexically later unrelated folders."
+    },
+    {
+      "tool": "Context7 resolve_library_id then query_docs",
+      "library_id": "/rust-lang/rust",
+      "url": "https://github.com/rust-lang/rust/blob/main/RELEASES.md",
+      "candidate_id": "SW100-C0565",
+      "observation": "Rust 1.85.0 release dated 2025-02-20 stabilized the 2024 edition."
+    }
+  ]
+}

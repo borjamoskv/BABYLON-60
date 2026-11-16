@@ -1,0 +1,19 @@
+{
+  "reviewer": "18",
+  "validation": "PASS",
+  "records": 29,
+  "source_snapshots": 77,
+  "decisions": {
+    "CONFIRMED_STATIC": 29
+  },
+  "remediation_states": {
+    "OPEN": 29
+  },
+  "severity_counts": {
+    "P2": 23,
+    "P1": 5,
+    "P3": 1
+  },
+  "product_runtime_executed": false,
+  "scope": "Assignment/schema/current hashes/line ranges/frozen excerpts; no product behavior certification. Workspace-wide gates are delegated to parent."
+}

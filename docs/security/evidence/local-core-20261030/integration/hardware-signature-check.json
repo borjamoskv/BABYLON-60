@@ -1,0 +1,45 @@
+{
+  "signature_verified": true,
+  "operator_user": "borjafernandezangulo",
+  "operator_name": "Borja Moskv",
+  "causal_sha256": "14a9dcf83236795386c679ead54f1b3e4fda32f66650c877bd267908e557274e",
+  "receipt_status": "ATTESTED",
+  "execution_id": "hardware-1c298c8e371ae6ac02c57e39045c55ec",
+  "attempts": 1,
+  "observation-before": {
+    "pid": 20903,
+    "total_events": 0,
+    "consumed": []
+  },
+  "observation-approved": {
+    "pid": 20934,
+    "total_events": 0,
+    "consumed": []
+  },
+  "observation-executed": {
+    "pid": 20935,
+    "total_events": 1,
+    "consumed": [
+      "hardware-1c298c8e371ae6ac02c57e39045c55ec"
+    ]
+  },
+  "observation-reopened": {
+    "pid": 20936,
+    "total_events": 1,
+    "consumed": [
+      "hardware-1c298c8e371ae6ac02c57e39045c55ec"
+    ]
+  },
+  "observation-final": {
+    "pid": 20940,
+    "total_events": 1,
+    "consumed": [
+      "hardware-1c298c8e371ae6ac02c57e39045c55ec"
+    ]
+  },
+  "consumption_probe": {
+    "execution_id": "hardware-1c298c8e371ae6ac02c57e39045c55ec",
+    "pid": 20939,
+    "status": "CONSUMED_REJECTED"
+  }
+}

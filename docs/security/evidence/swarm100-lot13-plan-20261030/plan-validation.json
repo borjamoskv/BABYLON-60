@@ -1,0 +1,41 @@
+{
+  "status": "PLAN_ONLY",
+  "selected_unique": 30,
+  "severity": {
+    "P1": 25,
+    "P2": 5
+  },
+  "source_files": 24,
+  "primary_source_files": 23,
+  "additional_duplicate_surfaces": 1,
+  "all_open": true,
+  "production_edits": false,
+  "source_sha256": {
+    "01_KISH_ENGINE/babylon60/utils/void_accel.c": "30a83dc46a550cf95f77ea168a8a416456cfbed12a77186a9d18e421b3b61a64",
+    "src/secure_fs.rs": "9d34f7d50683b237b0eb7705721738a6595ea6661d4ed85d6fce5ee9cdb564bf",
+    "scripts/c5_demos/c5_verifier_cli.rs": "d3aff0f8d68d635452f7675a0cd63fa992b1a2375e935d1d7e48c27c3bb03c30",
+    "00_ABZU_KERNEL/crates/strike-rs/src/hypervisor.rs": "79af81bc27f34508c5798234efff054d3ca7e2a357066e77119cafe17f6589dc",
+    "00_ABZU_KERNEL/crates/strike-rs/src/ledger.rs": "800aa62d709a86659527b83b732f426a109446ebf83732e45c1f0cf609f0e794",
+    "01_KISH_ENGINE/cortex/crates/babylon60-verifiable-inference/src/lib.rs": "73318aa0968539fbd0b7b19e5551981d420600ee8f9aec338e596df95fe5bea2",
+    "00_ABZU_KERNEL/crates/babylon60-compiler/src/backend_x86.rs": "b669e313a012749ab1966a2c7e4095d035c18a0a56470c8ee68742a556d73a68",
+    "crates/b60-lang/src/vm.rs": "633d03c82686e0c10adc1b659a4a4063160053f78153584fd9f6147fec02a889",
+    "00_ABZU_KERNEL/crates/babylon60-kernel/src/eval.rs": "5172ee1d8ff1eb3b33d3cf0c2bbe7c1dced0c870799ba2d5b043fda8b4c27fc3",
+    "01_KISH_ENGINE/cortex/crates/cortex-lsp/src/actions.rs": "62d448193e772b1568ffdec9f110662daee65c99cf19f093a9444c586b8cee86",
+    "crates/babylon-attest/src/conformal_tree.rs": "6f6d83eeda8e035f9ecb67d48c81dd78e6dd3c520827cf10018792650705db95",
+    "crates/babylon-attest/src/ledger.rs": "d9d0ce0c0cae2e92ae723199f6abdeb91fbde09c272a2811395e7298adb1bb27",
+    "src/babylon60.rs": "202a32f58401f3c7f44dc72a0fb701205c8b5b118ef342e8a1779cd469919125",
+    "crates/babylon-skills-mcp/src/lib.rs": "789611513b90d1dfee802d49ef3914379369b0f9503ac468e5688c04d1f64b98",
+    "00_ABZU_KERNEL/crates/babylon60-runtime/src/main.rs": "af8be5002dbf1ea7fd3bbfac41e235624303c0e28ac3dec58648e731ce7402f8",
+    "crates/eridu-infer/src/gguf.rs": "4db2253f39ce1211f2c8d7f09b149861739db8be3f4e95e0c5da3f5aa37f1972",
+    "crates/eridu-infer/src/hud.rs": "6c537744b07f015222c70591c963b2b3df24fec1e4312c6c027749b2b65a047b",
+    "01_KISH_ENGINE/babylon60/transducers/void_vec.py": "e505217fea124947cf141d5463b1861fb3c0b049e135411cd92b6831f51bede0",
+    "crates/eridu-infer/src/server.rs": "bbbc97cf3cb7e2cef458411dce71791d47560615310fb3107f0ab18e8ba5e903",
+    "deploy/Dockerfile": "1cc2c6c057ce3d5d5971619402ca85976190903af0e3b2e3b316d688d52538e6",
+    "01_KISH_ENGINE/babylon60/kernel/browser_cdp_engine.py": "e3473ca0c7087ead3e66ee93238986a1a5b0a9968282b188df021e96af58b1a8",
+    "00_ABZU_KERNEL/crates/strike-rs/src/bin/poc_bft_zerocopy_dag.rs": "0e059323c9270d9169ab2901f2534fea9296689ac77085104ef0302aeb9049b7",
+    "scripts/c5_verifiers/verify_execution.sh": "847847dffe82976bd653c7787baaf9714e107770c047d31e797c68701d844046",
+    "tools/skill_library/global/c5-secops-infra-devtools/references/modules/youtube-analysis-pipeline/scripts/yt_audit.py": "ecda4dca2ee77aa986d1898aad7fbd998bc07723bf7126c1e697fbd155638d62"
+  },
+  "registry_summary_sha256": "d5aa013f2b49f8d8b584526acceff40d3112d72f0c12f20296aaaf3c3328a866",
+  "limits": "Selection retains historical findings; reconfirm source, caller contracts and red reproductions before any next-lot edit."
+}

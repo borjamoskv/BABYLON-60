@@ -1,0 +1,4594 @@
+[
+  {
+    "candidate_id": "SW100-C0045",
+    "severity": "P1",
+    "title": "Unsigned short vector lengths underflow the SIMD loop bound",
+    "path": "01_KISH_ENGINE/babylon60/utils/void_accel.c",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0046",
+    "severity": "P1",
+    "title": "Delete quarantine occurs before recoverable durable intent",
+    "path": "src/secure_fs.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0052",
+    "severity": "P1",
+    "title": "Cross-instance effect budget uses stale usage history",
+    "path": "src/secure_fs.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0053",
+    "severity": "P1",
+    "title": "Mutation receipt recovery does not restore charged budget",
+    "path": "src/secure_fs.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0054",
+    "severity": "P1",
+    "title": "Verifier certifies attacker-controlled text without verifying any signature",
+    "path": "scripts/c5_demos/c5_verifier_cli.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0091",
+    "severity": "P1",
+    "title": "Validate envelope length before slicing the shared-memory payload",
+    "path": "00_ABZU_KERNEL/crates/strike-rs/src/hypervisor.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0107",
+    "severity": "P1",
+    "title": "Chain verification does not authenticate statement or justification payloads",
+    "path": "00_ABZU_KERNEL/crates/strike-rs/src/ledger.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0185",
+    "severity": "P1",
+    "title": "Ledger acknowledgement precedes durable memory-state mutation without recovery",
+    "path": "01_KISH_ENGINE/babylon60/memory/governance.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "MITIGATED",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0201",
+    "severity": "P1",
+    "title": "Inference verifier proves only a freely chosen multiplication witness",
+    "path": "01_KISH_ENGINE/cortex/crates/babylon60-verifiable-inference/src/lib.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0202",
+    "severity": "P1",
+    "title": "Groth16 setup randomness is publicly reproducible",
+    "path": "01_KISH_ENGINE/cortex/crates/babylon60-verifiable-inference/src/lib.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0214",
+    "severity": "P1",
+    "title": "Stack slots grow beyond the reserved 256-byte frame",
+    "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/backend_x86.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0294",
+    "severity": "P1",
+    "title": "In-process sandbox has no allocation or output bound",
+    "path": "01_KISH_ENGINE/babylon60/primitives/sandbox.py",
+    "decision": "ALREADY_FIXED",
+    "remediation_state": "MITIGATED",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0326",
+    "severity": "P1",
+    "title": "Arithmetic overflow escapes VM fail-closed handling",
+    "path": "crates/b60-lang/src/vm.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0335",
+    "severity": "P1",
+    "title": "Signed integer division can panic instead of returning Critical halt",
+    "path": "00_ABZU_KERNEL/crates/babylon60-kernel/src/eval.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0336",
+    "severity": "P1",
+    "title": "Ledger audit reports HEALTHY without inspecting any ledger",
+    "path": "01_KISH_ENGINE/cortex/crates/cortex-lsp/src/actions.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0341",
+    "severity": "P1",
+    "title": "Aeon verifier trusts the public key supplied by the untrusted manifest",
+    "path": "crates/babylon-attest/src/conformal_tree.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0349",
+    "severity": "P1",
+    "title": "Serialize ledger read-modify-append across writers",
+    "path": "crates/babylon-attest/src/ledger.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0350",
+    "severity": "P1",
+    "title": "Sync committed ledger records before acknowledging success",
+    "path": "crates/babylon-attest/src/ledger.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0364",
+    "severity": "P1",
+    "title": "Shredding never prevents AES decryption",
+    "path": "01_KISH_ENGINE/babylon60/crypto/shredder.py",
+    "decision": "ALREADY_FIXED",
+    "remediation_state": "MITIGATED",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0378",
+    "severity": "P1",
+    "title": "PROVED status certifies a fixed model unrelated to extracted preconditions",
+    "path": "scripts/c5_destiladora/proof_emitter_lean4.py",
+    "decision": "ALREADY_FIXED",
+    "remediation_state": "MITIGATED",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0381",
+    "severity": "P1",
+    "title": "Quarantine exports overwrite prior forensic evidence",
+    "path": "src/babylon60.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0393",
+    "severity": "P1",
+    "title": "Proposal handler fabricates verified postconditions without independent execution",
+    "path": "crates/babylon-skills-mcp/src/lib.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0442",
+    "severity": "P1",
+    "title": "F60 reduction changes the represented value for partial base factors",
+    "path": "00_ABZU_KERNEL/crates/babylon60-runtime/src/main.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0443",
+    "severity": "P1",
+    "title": "Division ignores the denominator scale",
+    "path": "00_ABZU_KERNEL/crates/babylon60-runtime/src/main.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0460",
+    "severity": "P1",
+    "title": "Consolidation deletes journal rows without saving their replacement",
+    "path": "scripts/c5_cortex/autoconsolidate.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "MITIGATED",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0461",
+    "severity": "P1",
+    "title": "YouTube URL and output directory are interpolated into shell commands",
+    "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/youtube-analysis-pipeline/scripts/yt_audit.py",
+    "decision": "DUPLICATE",
+    "remediation_state": "OPEN",
+    "registry": "registry.json",
+    "canonical_id": "SW100-C0103",
+    "counting_unit": "SEPARATE_DUPLICATE_SURFACE"
+  },
+  {
+    "candidate_id": "SW100-C0481",
+    "severity": "P1",
+    "title": "Array display truncation corrupts the GGUF parse cursor",
+    "path": "crates/eridu-infer/src/gguf.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0493",
+    "severity": "P1",
+    "title": "Ledger model field reaches innerHTML without escaping",
+    "path": "crates/eridu-infer/src/hud.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0502",
+    "severity": "P1",
+    "title": "Native Hamming batch accepts buffers shorter than its stride",
+    "path": "01_KISH_ENGINE/babylon60/transducers/void_vec.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0526",
+    "severity": "P1",
+    "title": "Completion endpoint returns canned legal output as model inference",
+    "path": "crates/eridu-infer/src/server.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0565",
+    "severity": "P1",
+    "title": "Container build pins compiler older than workspace manifests",
+    "path": "deploy/Dockerfile",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0001",
+    "severity": "P2",
+    "title": "CDP request futures retained after timeout",
+    "path": "01_KISH_ENGINE/babylon60/kernel/browser_cdp_engine.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0002",
+    "severity": "P2",
+    "title": "Navigation retains a listener on every call",
+    "path": "01_KISH_ENGINE/babylon60/kernel/browser_cdp_engine.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0003",
+    "severity": "P2",
+    "title": "Browser launch timeout leaves browser process alive",
+    "path": "01_KISH_ENGINE/babylon60/kernel/browser_cdp_engine.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0004",
+    "severity": "P2",
+    "title": "PoC prints success after DAG timeout",
+    "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/poc_bft_zerocopy_dag.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0005",
+    "severity": "P2",
+    "title": "Execution verifier ignores untracked files",
+    "path": "scripts/c5_verifiers/verify_execution.sh",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0006",
+    "severity": "P2",
+    "title": "Legal oracle turns network failures into healthy empty result",
+    "path": "scripts/c5_demos/c5_legal_oracle.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0007",
+    "severity": "P2",
+    "title": "Non-persist witness digest silently replaces SHA256 with XOR",
+    "path": "src/omega_mediation.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0008",
+    "severity": "P2",
+    "title": "Evidence digest omits observer visibility and witness identity fields",
+    "path": "src/omega_mediation.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0009",
+    "severity": "P2",
+    "title": "Frame event ID and payload separately in Merkle commitments",
+    "path": "src/omega_synthesis.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0010",
+    "severity": "P2",
+    "title": "Escape user-controlled values before producing YAML",
+    "path": "01_KISH_ENGINE/babylon60/commands/grill_you.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0011",
+    "severity": "P2",
+    "title": "Retain incomplete transcript records until the next append",
+    "path": "scripts/c5_demos/c5_model_voice_announcer.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0012",
+    "severity": "P2",
+    "title": "Reset tail position when transcript is truncated or replaced",
+    "path": "scripts/c5_demos/c5_model_voice_announcer.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0013",
+    "severity": "P2",
+    "title": "Pass notification text as data rather than AppleScript source",
+    "path": "scripts/c5_demos/c5_model_voice_announcer.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0014",
+    "severity": "P2",
+    "title": "Limit terminology rewrites to comments and documentation",
+    "path": "scripts/c5_quality_gates/audit_fixer.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0015",
+    "severity": "P2",
+    "title": "Remove comments from multipart JSON metadata example",
+    "path": "tools/skill_library/codex_overrides/cloudflare/references/workers-for-platforms/api.md",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0016",
+    "severity": "P2",
+    "title": "Avoid redeclaring the imported DispatchNamespace name",
+    "path": "tools/skill_library/codex_overrides/cloudflare/references/workers-for-platforms/api.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0017",
+    "severity": "P2",
+    "title": "Do not claim strict real-time determinism from one benchmark maximum",
+    "path": "docs/KINETIC_CACHE_AUDIT.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0019",
+    "severity": "P2",
+    "title": "License gate treats conjunctive restrictive licenses as permissive alternatives",
+    "path": "scripts/c5_quality_gates/audit_license_compliance.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0020",
+    "severity": "P2",
+    "title": "Example manifest occupies 128 bytes on the documented 64-bit targets",
+    "path": "scripts/c5_demos/c5_shm_manifest.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0021",
+    "severity": "P2",
+    "title": "Stress harness reports success even when health transitions fail",
+    "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/poc_t3_engine_stress.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0023",
+    "severity": "P2",
+    "title": "Explicit --files filter compares relative paths against absolute paths",
+    "path": "01_KISH_ENGINE/babylon60/commands/strict_reviewer.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0024",
+    "severity": "P2",
+    "title": "Strict reviewer stages and commits unrelated working-tree changes",
+    "path": "01_KISH_ENGINE/babylon60/commands/strict_reviewer.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0025",
+    "severity": "P2",
+    "title": "Dry-run still overwrites the session log",
+    "path": "tools/skill_library/global/c5-terminological-archaeology/scripts/c5_lexicon_notary.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0026",
+    "severity": "P2",
+    "title": "Replacing phase 2f deletes all subsequent skill sections",
+    "path": "tools/skill_library/global/c5-terminological-archaeology/scripts/c5_lexicon_notary.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0027",
+    "severity": "P2",
+    "title": "Oncology support check cannot detect an out-of-support target",
+    "path": "scripts/c5_verifiers/verify_oncology_primitives_dag.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0028",
+    "severity": "P2",
+    "title": "Compliance pipeline verifies a different artifact than the certificate it generated",
+    "path": "scripts/c5_demos/c5_sovereign_compliance_orchestrator.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0029",
+    "severity": "P2",
+    "title": "Native host integration reads can block indefinitely",
+    "path": "tests/test_moskv_e2e_integration.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0030",
+    "severity": "P2",
+    "title": "Non-JSON quality gate returns success when leaked artifacts are its only failure",
+    "path": "scripts/c5_quality_gates/audit_scripts_quality.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0031",
+    "severity": "P2",
+    "title": "Git history verifier treats Git errors as a clean history",
+    "path": "scripts/c5_verifiers/verify_p0_rotation.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0032",
+    "severity": "P2",
+    "title": "FIFO lifecycle test deletes the native host shared queue",
+    "path": "tests/test_moskv_native_host.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0033",
+    "severity": "P2",
+    "title": "CTRE commits non-finite drift observations",
+    "path": "01_KISH_ENGINE/babylon60/kernel/c6_absolute/ctre_engine.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0034",
+    "severity": "P2",
+    "title": "Risk rounding precedes CTRE threshold enforcement",
+    "path": "01_KISH_ENGINE/babylon60/kernel/c6_absolute/ctre_engine.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0035",
+    "severity": "P2",
+    "title": "Simulated tier stress test certifies IDE behavior it never exercises",
+    "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/poc_t3_stress_test.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0036",
+    "severity": "P2",
+    "title": "Hunter clears its risk window after every sample",
+    "path": "01_KISH_ENGINE/babylon60/kernel/c6_absolute/eip7702_hunter.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0037",
+    "severity": "P2",
+    "title": "Hunter reports on-chain commits without submitting transactions",
+    "path": "01_KISH_ENGINE/babylon60/kernel/c6_absolute/eip7702_hunter.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0038",
+    "severity": "P2",
+    "title": "Formal validation recipe calls a removed Make target",
+    "path": "docs/RESULTADOS.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0039",
+    "severity": "P2",
+    "title": "Entropy gate labels agreement as safe without checking correctness",
+    "path": "scripts/c5_verifiers/verify_semantic_entropy_gate.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0041",
+    "severity": "P2",
+    "title": "Render directory resolves beneath scripts and omits cortex",
+    "path": "scripts/c5_demos/c5_transduction_engine.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0042",
+    "severity": "P2",
+    "title": "Concurrent compilations overwrite shared render inputs",
+    "path": "scripts/c5_demos/c5_transduction_engine.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0043",
+    "severity": "P2",
+    "title": "Scene timing adds silence that the audio pipeline never emits",
+    "path": "scripts/c5_demos/c5_transduction_engine.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0044",
+    "severity": "P2",
+    "title": "Alarm batch discards its pending work before insertion succeeds",
+    "path": "tools/skill_library/codex_overrides/cloudflare/references/do-storage/patterns.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0047",
+    "severity": "P2",
+    "title": "Delete uses two unconstrained nonce identities",
+    "path": "src/secure_fs.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0048",
+    "severity": "P2",
+    "title": "Zero-copy PoC reports success after dropped-message timeout",
+    "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/poc_zerocopy_hypervisor.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0049",
+    "severity": "P2",
+    "title": "Production dispatcher returns fabricated provider successes",
+    "path": "tools/skill_library/global/c5-tri-provider-swarm/scripts/tri_swarm_dispatcher.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0050",
+    "severity": "P2",
+    "title": "Skill auditor passes when no skill directories exist",
+    "path": "scripts/c5_quality_gates/audit_skills_ecosystem.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0051",
+    "severity": "P2",
+    "title": "Webhook example consumes request body twice",
+    "path": "tools/skill_library/codex_overrides/agents-sdk/references/webhooks-push.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0055",
+    "severity": "P2",
+    "title": "Unknown obligations silently become successful empty verification",
+    "path": "00_ABZU_KERNEL/crates/strike-rs/src/bindings.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0056",
+    "severity": "P2",
+    "title": "Contradiction verification ignores kernel nogoods",
+    "path": "00_ABZU_KERNEL/crates/strike-rs/src/bindings.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0057",
+    "severity": "P2",
+    "title": "Property tests do not exercise the engine whose concurrency they claim to check",
+    "path": "tests/test_axioms_hypothesis.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0058",
+    "severity": "P2",
+    "title": "Relative transformation breaks the root-position invariant for subsequent transforms",
+    "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/examples/Neo_Riemannian_Tonnetz.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0062",
+    "severity": "P2",
+    "title": "Lifecycle validation never verifies the certificate signature",
+    "path": "01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0063",
+    "severity": "P2",
+    "title": "Decision evidence packet does not bind decision data to the proved ledger event",
+    "path": "01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0064",
+    "severity": "P2",
+    "title": "Packet packing silently truncates sender and recipient lengths",
+    "path": "00_ABZU_KERNEL/crates/strike-rs/src/exergy_binary_ipc.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0065",
+    "severity": "P2",
+    "title": "Real Ollama examples return the Tier 1 canned response",
+    "path": "00_ABZU_KERNEL/crates/strike-rs/src/gateway/circuit_breaker.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0066",
+    "severity": "P2",
+    "title": "Configurable policy can enable Tier 3 for Ring 0",
+    "path": "00_ABZU_KERNEL/crates/strike-rs/src/gateway/circuit_breaker.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0067",
+    "severity": "P2",
+    "title": "Attestation lock acquisition is not atomic",
+    "path": "01_KISH_ENGINE/babylon60/kernel/devsecops_attest.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0068",
+    "severity": "P2",
+    "title": "Cached attestation tree hash survives HEAD changes",
+    "path": "01_KISH_ENGINE/babylon60/kernel/devsecops_attest.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0069",
+    "severity": "P2",
+    "title": "Staged canary deletion is accepted when the file remains locally",
+    "path": "scripts/c5_quality_gates/canary_check.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0070",
+    "severity": "P2",
+    "title": "Documentation distiller targets a fixed obsolete checkout",
+    "path": "scripts/distill_babylon60_docs.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0074",
+    "severity": "P2",
+    "title": "Unverified evidence status is accepted as verified citation",
+    "path": "01_KISH_ENGINE/babylon60/kernel/grounding_interceptor.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0075",
+    "severity": "P2",
+    "title": "Failed SQLite registration leaves evidence trusted in memory",
+    "path": "01_KISH_ENGINE/babylon60/kernel/grounding_interceptor.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0076",
+    "severity": "P2",
+    "title": "Negative compliance statuses render as successful",
+    "path": "01_KISH_ENGINE/babylon60/compliance_exporter/template_engine.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0077",
+    "severity": "P2",
+    "title": "Mock inference panics on a UTF-8 byte boundary",
+    "path": "00_ABZU_KERNEL/crates/strike-rs/src/gateway/tier3.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0078",
+    "severity": "P2",
+    "title": "Attestation digest does not delimit content from model identity",
+    "path": "00_ABZU_KERNEL/crates/strike-rs/src/gateway/tier3.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0079",
+    "severity": "P2",
+    "title": "I/O demo deletes a preexisting database in the working directory",
+    "path": "scripts/c5_demos/falsacion_io_sync.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0080",
+    "severity": "P2",
+    "title": "Branch protection enforcement suppresses API failures",
+    "path": "scripts/enforce_c5_rules.sh",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0081",
+    "severity": "P2",
+    "title": "Kelly inputs do not constrain an approved bid",
+    "path": "src/tamkarum.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0082",
+    "severity": "P2",
+    "title": "List samples generate object-only MCP schemas",
+    "path": "01_KISH_ENGINE/babylon60/kernel/mcp_deductive_engine.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0084",
+    "severity": "P2",
+    "title": "Demo reports universal containment from two fixed simulated traces",
+    "path": "scripts/c5_demos/falsacion_llm_gate.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0085",
+    "severity": "P2",
+    "title": "Group creation wizard completes without creating a group",
+    "path": "tools/skill_library/global/whatsapp-nexus-protocol/scripts/group_wizard.js",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0089",
+    "severity": "P2",
+    "title": "F60 numerator can overflow before applying the advertised score cap",
+    "path": "00_ABZU_KERNEL/crates/strike-rs/src/gelabp_calc.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0090",
+    "severity": "P2",
+    "title": "Watchdog uses a predictable writable script path",
+    "path": "01_KISH_ENGINE/babylon60/utils/watchdog_poc_v5.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0092",
+    "severity": "P2",
+    "title": "Reject invalid payload hash text instead of signing a zero digest",
+    "path": "00_ABZU_KERNEL/crates/strike-rs/src/hypervisor.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0093",
+    "severity": "P2",
+    "title": "Propagate failed and missing maintenance phases to the global verdict",
+    "path": "scripts/c5_quality_gates/daily_sovereign_maintenance.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0094",
+    "severity": "P2",
+    "title": "Correct the attojoule scaling of the Landauer constants",
+    "path": "src/thermodynamics.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0095",
+    "severity": "P2",
+    "title": "Use a wider mask for the advertised eight-sample boundary",
+    "path": "scripts/c5_demos/falsacion_semantic_entropy_baremetal.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0096",
+    "severity": "P2",
+    "title": "Make Channel Rack CC ranges disjoint",
+    "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/hardware/device_Antigravity_MCP.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0097",
+    "severity": "P2",
+    "title": "Give each render a private source-embedding file",
+    "path": "tools/skill_library/global/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0098",
+    "severity": "P2",
+    "title": "Preserve audio offset when rendering a frame subrange",
+    "path": "tools/skill_library/global/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0099",
+    "severity": "P2",
+    "title": "Paste enhanced image patches when the ellipse mask is selected",
+    "path": "tools/skill_library/global/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0100",
+    "severity": "P2",
+    "title": "Scope the semantic-entropy correctness claim to supplied constraints",
+    "path": "docs/adr/ADR-007-semantic-entropy-zero-float-firewall.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0101",
+    "severity": "P2",
+    "title": "Restore accepts snapshots larger than the configured capacity",
+    "path": "00_ABZU_KERNEL/crates/strike-rs/src/kda_memory.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0102",
+    "severity": "P2",
+    "title": "Zero-capacity KDA buffer still admits an entry",
+    "path": "00_ABZU_KERNEL/crates/strike-rs/src/kda_memory.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0104",
+    "severity": "P2",
+    "title": "New face tracks are returned twice on their first frame",
+    "path": "tools/skill_library/global/c5-neural-face-swap-cuadrilla/scripts/c5_smoother.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0105",
+    "severity": "P2",
+    "title": "Synthetic entropy demo presents label lookup as an empirical NLI comparison",
+    "path": "scripts/c5_demos/falsacion_semantic_entropy_stress.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0106",
+    "severity": "P2",
+    "title": "Unescaped description can break generated Python source",
+    "path": "01_KISH_ENGINE/babylon60/kernel/mcp_scaffolder.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0108",
+    "severity": "P2",
+    "title": "Nogood primary key prevents revoking the same statement in multiple environments",
+    "path": "00_ABZU_KERNEL/crates/strike-rs/src/ledger.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0109",
+    "severity": "P2",
+    "title": "Derived assertion and explicit dependency edges commit separately",
+    "path": "00_ABZU_KERNEL/crates/strike-rs/src/ledger.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0110",
+    "severity": "P2",
+    "title": "Technical specification recommends weaker persistence than the canonical contract",
+    "path": "docs/01_spec/spec_technical.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0111",
+    "severity": "P2",
+    "title": "Multi-tenant example trusts a caller-selected identity",
+    "path": "tools/skill_library/codex_overrides/cloudflare/references/sandbox/patterns.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0112",
+    "severity": "P2",
+    "title": "CI example interpolates request JSON into a shell command",
+    "path": "tools/skill_library/codex_overrides/cloudflare/references/sandbox/patterns.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0114",
+    "severity": "P2",
+    "title": "Taint serialization admits distinct node contents with identical hashes",
+    "path": "00_ABZU_KERNEL/crates/strike-rs/src/lib.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0115",
+    "severity": "P2",
+    "title": "Selector engine labels heuristics as measured optimality",
+    "path": "scripts/guards/c5_signature_engine.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0116",
+    "severity": "P2",
+    "title": "Missing effort metadata is replaced by a fabricated mode",
+    "path": "scripts/guards/c5_signature_engine.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0117",
+    "severity": "P2",
+    "title": "Claimed score lower-bound theorem omits necessary assumptions",
+    "path": "docs/02_ontology/axiom_axiomatization.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0119",
+    "severity": "P2",
+    "title": "derive manufactures FormalProof without checking entailment",
+    "path": "00_ABZU_KERNEL/crates/strike-rs/src/omega0.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0120",
+    "severity": "P2",
+    "title": "Deduplicate statements by modality as well as content",
+    "path": "00_ABZU_KERNEL/crates/strike-rs/src/omega0.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0121",
+    "severity": "P2",
+    "title": "Freshness obligation never checks observation age",
+    "path": "00_ABZU_KERNEL/crates/strike-rs/src/omega0.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0122",
+    "severity": "P2",
+    "title": "Reject expert slices larger than the configured active budget",
+    "path": "01_KISH_ENGINE/babylon60/verifiable_inference/edge0_moe_streamer.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0123",
+    "severity": "P2",
+    "title": "Read path copies complete expert outside active-byte accounting",
+    "path": "01_KISH_ENGINE/babylon60/verifiable_inference/edge0_moe_streamer.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0125",
+    "severity": "P2",
+    "title": "Ablation violation metric is hardcoded for the gated condition",
+    "path": "docs/papers/interoceptive-control/benchmarks/run_ablation_matrix.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0126",
+    "severity": "P2",
+    "title": "Written confirmation is described as a substitute for hardware attestation",
+    "path": "tools/skill_library/global/c5-wetware-and-venture-ops/references/modules/c5-tamkarum-60/MODULE.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0127",
+    "severity": "P2",
+    "title": "Linux fallback discards ordinary objdump instruction lines",
+    "path": "01_KISH_ENGINE/babylon60/kernel/sovereign_binary_analyzer.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0128",
+    "severity": "P2",
+    "title": "Conditional branch classification omits common branch instructions",
+    "path": "01_KISH_ENGINE/babylon60/kernel/sovereign_binary_analyzer.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0129",
+    "severity": "P2",
+    "title": "Manuscript presents scripted simulation as empirical LLM comparison",
+    "path": "docs/papers/interoceptive-control/manuscript/paper_draft.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0130",
+    "severity": "P2",
+    "title": "Bearer-prefix example accepts arbitrary credentials",
+    "path": "tools/skill_library/codex_overrides/cloudflare/references/workers/patterns.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0131",
+    "severity": "P2",
+    "title": "GitHub Actions secret example embeds secret directly in shell program",
+    "path": "tools/skill_library/codex_overrides/cloudflare/references/secrets-store/configuration.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0134",
+    "severity": "P2",
+    "title": "Convert milliseconds and forward latency to the correct sensor argument",
+    "path": "docs/papers/interoceptive-control/src/spinal_gate.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0135",
+    "severity": "P2",
+    "title": "Hash the artifact bytes before reporting the artifact verified",
+    "path": "proof/bundles/attestation_bundle_v2/verify",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0136",
+    "severity": "P2",
+    "title": "Make the attestation verdict depend on verification results",
+    "path": "proof/bundles/attestation_bundle_v2/verify",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0137",
+    "severity": "P2",
+    "title": "Remove await from the synchronous onStart example or declare it async",
+    "path": "tools/skill_library/codex_overrides/cloudflare/references/agents-sdk/gotchas.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0138",
+    "severity": "P2",
+    "title": "Existing-entry updates preserve the old modality and bypass the rule gate",
+    "path": "00_ABZU_KERNEL/crates/strike-rs/src/session_governance.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0139",
+    "severity": "P2",
+    "title": "State commitment omits boundaries between key and content",
+    "path": "00_ABZU_KERNEL/crates/strike-rs/src/session_governance.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0141",
+    "severity": "P2",
+    "title": "Counterexample learning returns success without persisting feedback",
+    "path": "01_KISH_ENGINE/babylon60/verification/counterexample.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0142",
+    "severity": "P2",
+    "title": "Canonical event serialization is ambiguous for delimiter-bearing fields",
+    "path": "docs/reference/interpreter.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0143",
+    "severity": "P2",
+    "title": "Exported global hash does not bind artifact state",
+    "path": "docs/reference/interpreter.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0144",
+    "severity": "P2",
+    "title": "Reference CLI announces proof dispatch that never occurs",
+    "path": "docs/reference/interpreter.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0145",
+    "severity": "P2",
+    "title": "FD exhaustion test also passes when target operation succeeds",
+    "path": "tests/adversarial_nemesis.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0146",
+    "severity": "P2",
+    "title": "BLE discovery filters on characteristic UUID instead of advertised service",
+    "path": "tools/skill_library/global/c5-wetware-and-venture-ops/references/modules/somatic-ble-transduction/MODULE.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0147",
+    "severity": "P2",
+    "title": "Cross-device rejection test compares a device ID with itself",
+    "path": "tests/adversarial_nemesis.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0148",
+    "severity": "P2",
+    "title": "Concurrent revocation test asserts a locally manufactured abort",
+    "path": "tests/adversarial_nemesis.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0149",
+    "severity": "P2",
+    "title": "Malformed tool arguments terminate the stdio server",
+    "path": "01_KISH_ENGINE/babylon60/mcp/cortex_mcp_server.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0150",
+    "severity": "P2",
+    "title": "Lamport allocation races across browser agent connections",
+    "path": "01_KISH_ENGINE/babylon60/core/browser_agent.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0151",
+    "severity": "P2",
+    "title": "Cache commits before the attestation and hides interrupted writes",
+    "path": "01_KISH_ENGINE/babylon60/core/browser_agent.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0152",
+    "severity": "P2",
+    "title": "Conformity simulator authorizes CE marking even when checks fail",
+    "path": "scripts/c5_demos/poc_aesia_conformity_inspector.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0153",
+    "severity": "P2",
+    "title": "Conformity example labels a status string as verified hardware evidence",
+    "path": "scripts/c5_demos/poc_aesia_conformity_inspector.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0154",
+    "severity": "P2",
+    "title": "Flagship prerequisite check prints the API token",
+    "path": "tools/skill_library/codex_overrides/cloudflare/references/flagship/api.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0155",
+    "severity": "P2",
+    "title": "Audio example mutates persistent DSP state during rendering",
+    "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/remotion-audio-reactive-video/examples/AudioReactiveMaster.tsx",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0156",
+    "severity": "P2",
+    "title": "Audit workers approve source without reading or checking it",
+    "path": "scripts/c5_quality_gates/legion_100_agents_full_monorepo.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0157",
+    "severity": "P2",
+    "title": "Commit linter inspects working tree instead of staged bytes",
+    "path": "tools/skill_library/global/c5-ring0-babylon-kernel/references/modules/babylon-shield/babylon_exergy_linter.sh",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0158",
+    "severity": "P2",
+    "title": "Non-Darwin arm reports anti-debug protection despite skipping it",
+    "path": "01_KISH_ENGINE/babylon60/core/c5_memory_shield.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0159",
+    "severity": "P2",
+    "title": "Concurrent sign-offs can fork the audit hash chain",
+    "path": "01_KISH_ENGINE/babylon60/verification/verification_gate.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0160",
+    "severity": "P2",
+    "title": "Enterprise PoC reports success without asserting verifier outcomes",
+    "path": "scripts/c5_demos/poc_agents_archi_enterprise.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0161",
+    "severity": "P2",
+    "title": "TLA liveness comments claim a physical deadline absent from the model",
+    "path": "00_ABZU_KERNEL/formal_verification/BabylonBFT.tla",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0162",
+    "severity": "P2",
+    "title": "Backward conditioning uses the initial prior at the wrong timestep",
+    "path": "tools/skill_library/global/categorical-hallucination-audit/scripts/audit_kl_d.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0163",
+    "severity": "P2",
+    "title": "Concurrent audit appends can fork the hash chain",
+    "path": "scripts/c5_quality_gates/pipe_audit.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0164",
+    "severity": "P2",
+    "title": "Malformed action fields raise instead of returning rejection",
+    "path": "01_KISH_ENGINE/babylon60/verification/verifier.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0165",
+    "severity": "P2",
+    "title": "Annex VI theorem claims legal guarantees absent from its model",
+    "path": "scripts/c5_demos/poc_annex_vi_compliance.lean",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0170",
+    "severity": "P2",
+    "title": "Zero-operation benchmark indexes an empty latency vector",
+    "path": "tests/cache_kinetic_benchmark.cpp",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0171",
+    "severity": "P2",
+    "title": "Advertised decision latency excludes receipt signing",
+    "path": "scripts/c5_demos/poc_antigravity_model_router.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0173",
+    "severity": "P2",
+    "title": "Proposal endpoint reports postconditions VERIFIED without checking an effect",
+    "path": "01_KISH_ENGINE/babylon60/mcp/skills_snapshot.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0174",
+    "severity": "P2",
+    "title": "Directory linter skips arbitrary source paths containing build or dist",
+    "path": "tools/skill_library/workspace/c5-anti-slop-ui/scripts/audit_ui_slop.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0176",
+    "severity": "P2",
+    "title": "Reject an empty execution trace for a nonempty ledger",
+    "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0178",
+    "severity": "P2",
+    "title": "Remove the shared bearer credential from the launchd template",
+    "path": "contracts/com.c5real.moskv1.kernel.plist",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0179",
+    "severity": "P2",
+    "title": "Cache audit resolves benchmark below scripts instead of repository root",
+    "path": "scripts/c5_quality_gates/run_cache_audit.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0180",
+    "severity": "P2",
+    "title": "Single-chunk ledger example accepts an invalid chunk",
+    "path": "tools/skill_library/global/c5-ring0-babylon-kernel/references/modules/c5-lean4-neurosymbolic-architect/MODULE.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0181",
+    "severity": "P2",
+    "title": "Exported MemoryStore silently drops all writes",
+    "path": "01_KISH_ENGINE/babylon60/memory/__init__.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0182",
+    "severity": "P2",
+    "title": "Effective resistance silently treats disconnected graphs as finite",
+    "path": "01_KISH_ENGINE/babylon60/core/discrete_curvature.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0183",
+    "severity": "P2",
+    "title": "Cache report unconditionally claims mitigation and patentability",
+    "path": "scripts/c5_quality_gates/run_cache_audit.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0186",
+    "severity": "P2",
+    "title": "Revocation silently truncates dependency closure after 1024 levels",
+    "path": "01_KISH_ENGINE/babylon60/memory/governance.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0187",
+    "severity": "P2",
+    "title": "Policy epoch rolls back on engine restart",
+    "path": "01_KISH_ENGINE/babylon60/memory/governance.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0188",
+    "severity": "P2",
+    "title": "Python-only counter loop is described as Rust FFI and SPMC validation",
+    "path": "scripts/c5_demos/poc_bounty_dispatcher_ffi.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0189",
+    "severity": "P2",
+    "title": "Example formal gate approves a truthy field without checking a proof",
+    "path": "tools/skill_library/global/c5-ring0-babylon-kernel/references/modules/c5-mushushu-0/MODULE.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0190",
+    "severity": "P2",
+    "title": "Folder prefix example uses an unbounded lexical lower bound",
+    "path": "tools/skill_library/codex_overrides/cloudflare/references/ai-search/gotchas.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0191",
+    "severity": "P2",
+    "title": "Differential comparison reads both artifacts after the Rust run",
+    "path": "tests/differential/mod.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0192",
+    "severity": "P2",
+    "title": "Preflight suppresses compilation failure and still approves",
+    "path": "scripts/preflight.sh",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0193",
+    "severity": "P2",
+    "title": "Environment preflight also changes remote branch protection",
+    "path": "scripts/preflight.sh",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0194",
+    "severity": "P2",
+    "title": "Auditor follows file symlinks when rewriting targets",
+    "path": "scripts/c5_quality_gates/sharur_3600_audit_swarm.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0195",
+    "severity": "P2",
+    "title": "Codex query reports success after a failed execution with partial text",
+    "path": "01_KISH_ENGINE/babylon60/adapters/codex/codex_driver.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0196",
+    "severity": "P2",
+    "title": "Tenant example treats a lower bound as prefix isolation",
+    "path": "tools/skill_library/codex_overrides/cloudflare/references/ai-search/patterns.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0198",
+    "severity": "P2",
+    "title": "Idle eviction uses tenant age instead of inactivity",
+    "path": "01_KISH_ENGINE/babylon60/core/landauer.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0199",
+    "severity": "P2",
+    "title": "Tip-of-tongue branch is mathematically unreachable",
+    "path": "01_KISH_ENGINE/babylon60/memory/metamemory.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0200",
+    "severity": "P2",
+    "title": "Drizzle example shadows the table with the query result",
+    "path": "tools/skill_library/codex_overrides/cloudflare/references/hyperdrive/api.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0203",
+    "severity": "P2",
+    "title": "Claim pending messages atomically before delivering them",
+    "path": "01_KISH_ENGINE/babylon60/adapters/codex/tunnel_bus.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0204",
+    "severity": "P2",
+    "title": "Persistent tunnel connections lower required durability to NORMAL",
+    "path": "01_KISH_ENGINE/babylon60/adapters/codex/tunnel_bus.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0205",
+    "severity": "P2",
+    "title": "Adversarial campaign rejects labels instead of exercising independent gates",
+    "path": "scripts/c5_quality_gates/swarm_100_stress_campaign.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0206",
+    "severity": "P2",
+    "title": "Do not copy authentication credentials into analytics dimensions",
+    "path": "tools/skill_library/codex_overrides/cloudflare/references/analytics-engine/api.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0209",
+    "severity": "P2",
+    "title": "Provenance ATTESTED accepts caller-supplied receipt labels without verifying evidence",
+    "path": "01_KISH_ENGINE/babylon60/memory/provenance_arbiter.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0210",
+    "severity": "P2",
+    "title": "Stale lock eviction can delete a live replacement lock",
+    "path": "scripts/c5_quality_gates/swarm_lock_guard.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0211",
+    "severity": "P2",
+    "title": "Bootstrap reports operational success when daemon is absent",
+    "path": "scripts/c5_demos/poc_enterprise_clone_and_run.sh",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0212",
+    "severity": "P2",
+    "title": "Guide directs broad automatic commits and contradicts current commit contract",
+    "path": "docs/03_guides/guide_explanation.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0213",
+    "severity": "P2",
+    "title": "Parser allocates the RHS name instead of the declared binding",
+    "path": "01_KISH_ENGINE/cortex/crates/c5_compiler/src/lib.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0215",
+    "severity": "P2",
+    "title": "Backend compile retains output and registers from previous compilation",
+    "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/backend_x86.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0216",
+    "severity": "P2",
+    "title": "Symlink depth validator accepts three or more parent traversals",
+    "path": "scripts/c5_quality_gates/symlink_depth_auditor.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0217",
+    "severity": "P2",
+    "title": "Preaggregation example loses almost all events",
+    "path": "tools/skill_library/codex_overrides/cloudflare/references/analytics-engine/gotchas.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0218",
+    "severity": "P2",
+    "title": "Audit result labels hardcoded assertions as verified claims",
+    "path": "scripts/repatriated/audit_titan_jwt.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0220",
+    "severity": "P2",
+    "title": "Normalize rational ticks before returning them",
+    "path": "crates/b60-lang/src/arithmetic.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0222",
+    "severity": "P2",
+    "title": "Preserve poisoning when the example writer is called again",
+    "path": "scripts/c5_demos/poc_kish_shell_sovereign_transducer.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0223",
+    "severity": "P2",
+    "title": "Limit Lean cleanup to verified disposable build products",
+    "path": "scripts/repatriated/c5_sharur_100_anergy_purge.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0224",
+    "severity": "P2",
+    "title": "Label model arithmetic separately from physical thermodynamic evidence",
+    "path": "scripts/c5_demos/poc_kish_shell_sovereign_transducer.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0225",
+    "severity": "P2",
+    "title": "Version synchronization reports success for missing required targets",
+    "path": "scripts/c5_quality_gates/sync_version.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0226",
+    "severity": "P2",
+    "title": "Aeon verifier proves individual blocks without checking their connecting states",
+    "path": "crates/b60-lang/src/bin/aeon_chaining.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0227",
+    "severity": "P2",
+    "title": "Legion PoC passes without asserting any receipt was persisted",
+    "path": "scripts/c5_demos/poc_legion_1000.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0228",
+    "severity": "P2",
+    "title": "Legion PoC claims validation of 1000 agents from a sequential batch of 100 advisories",
+    "path": "scripts/c5_demos/poc_legion_1000.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0229",
+    "severity": "P2",
+    "title": "Genomic mechanics metadata is shifted onto the next primitive",
+    "path": "01_KISH_ENGINE/babylon60/oncology_primitives.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0230",
+    "severity": "P2",
+    "title": "ZCA whitening crashes for a valid single-feature matrix",
+    "path": "01_KISH_ENGINE/babylon60/core/representation_geometry.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0231",
+    "severity": "P2",
+    "title": "Truncated idempotency keys collide in the audit-event primary key",
+    "path": "01_KISH_ENGINE/babylon60/persistence/cortex_wal_store.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0232",
+    "severity": "P2",
+    "title": "Checkpoint read-modify-write occurs outside the write transaction",
+    "path": "01_KISH_ENGINE/babylon60/persistence/cortex_wal_store.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0233",
+    "severity": "P2",
+    "title": "Synthetic broker labels Python predicates as hardware-attested consensus",
+    "path": "scripts/repatriated/larsa120_isostatic_synthesis.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0234",
+    "severity": "P2",
+    "title": "Failover demo reports success when every tier is unavailable",
+    "path": "scripts/c5_demos/poc_mass_stage3_resolution.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0235",
+    "severity": "P2",
+    "title": "Acoustic true-peak output measures only the mono sample peak",
+    "path": "tools/skill_library/global/c5-rubin-acoustic-linter/scripts/audit_acoustic_exergy.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0236",
+    "severity": "P2",
+    "title": "Local claim provenance omits untracked source consumed by verification",
+    "path": "scripts/c5_quality_gates/verify_claims.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0237",
+    "severity": "P2",
+    "title": "Rust stdio interoperability test can exercise a stale binary",
+    "path": "tests/test_cortex_mcp_server.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0238",
+    "severity": "P2",
+    "title": "Resolve the actual field offset when lowering assignments",
+    "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/lowering.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0239",
+    "severity": "P2",
+    "title": "Use a monotonic clock for the cooldown interval",
+    "path": "01_KISH_ENGINE/babylon60/core/thermal_lock.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0240",
+    "severity": "P2",
+    "title": "Create a private temporary directory before writing and executing the demo",
+    "path": "scripts/c5_demos/poc_quasar_triple_vector.sh",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0241",
+    "severity": "P2",
+    "title": "Label generated swarm findings and metrics as synthetic in exported evidence",
+    "path": "scripts/repatriated/legion_100_swarm_audit.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0243",
+    "severity": "P2",
+    "title": "Preserve a statement when removing a sole docstring",
+    "path": "01_KISH_ENGINE/babylon60/core/thermo_ast_pruner.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0244",
+    "severity": "P2",
+    "title": "Recognize imported bindings before suppressing required imports",
+    "path": "01_KISH_ENGINE/babylon60/core/thermo_ast_pruner.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0245",
+    "severity": "P2",
+    "title": "Return a lexical error for out-of-range integer literals",
+    "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/parser.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0246",
+    "severity": "P2",
+    "title": "Fail the audit gate when Python source cannot be parsed",
+    "path": "tools/skill_library/global/existence-gap-audit/scripts/existence_gap.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0247",
+    "severity": "P2",
+    "title": "Malformed bracket order panics instead of returning compile error",
+    "path": "crates/b60-lang/src/compiler.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0248",
+    "severity": "P2",
+    "title": "Named registers silently alias after six variables",
+    "path": "crates/b60-lang/src/compiler.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0249",
+    "severity": "P2",
+    "title": "Installer commits unrelated staged changes and hides copy failures",
+    "path": "scripts/c5_setup/install_into_repo.sh",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0250",
+    "severity": "P2",
+    "title": "Claimed monotonicity accepts positive energy increments",
+    "path": "scripts/repatriated/poc_port_hamiltonian_deliberation.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0251",
+    "severity": "P2",
+    "title": "NIG silently truncates multi-place literals to 255",
+    "path": "crates/b60-lang/src/compiler.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0252",
+    "severity": "P2",
+    "title": "Session ID can escape evidence storage directory",
+    "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0253",
+    "severity": "P2",
+    "title": "Closed audit sessions still accept unsealed events",
+    "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0254",
+    "severity": "P2",
+    "title": "Failed evidence persistence permanently marks session closed",
+    "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0255",
+    "severity": "P2",
+    "title": "AL0 and AL1 roots do not commit to their events",
+    "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0256",
+    "severity": "P2",
+    "title": "Windows setup resolves scripts as repository root",
+    "path": "scripts/c5_setup/setup_nacho_cortex.ps1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0257",
+    "severity": "P2",
+    "title": "SHM example requests writable ctypes buffer from read-only mmap",
+    "path": "scripts/c5_demos/poc_shm_orchestrator.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0258",
+    "severity": "P2",
+    "title": "Batch audit hardcodes successful falsification verdicts",
+    "path": "scripts/repatriated/run_swarm_batch_021_040.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0259",
+    "severity": "P2",
+    "title": "Reject truncated CBOR byte/text strings",
+    "path": "01_KISH_ENGINE/babylon60/primitives/cbor.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0260",
+    "severity": "P2",
+    "title": "Check arithmetic overflow at the C ABI boundary",
+    "path": "crates/b60-lang/src/ffi.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0261",
+    "severity": "P2",
+    "title": "Compute the actual repository root in setup",
+    "path": "scripts/c5_setup/setup_nacho_cortex.sh",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0262",
+    "severity": "P2",
+    "title": "Label simulated receipts as simulated, without hardware identity",
+    "path": "scripts/c5_demos/poc_sovereign_spark_daemon.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0263",
+    "severity": "P2",
+    "title": "Do not certify empirical survival from keyword templates",
+    "path": "scripts/repatriated/run_swarm_batch_041_060.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0265",
+    "severity": "P2",
+    "title": "Namespace vault record IDs by platform and instance",
+    "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0266",
+    "severity": "P2",
+    "title": "Use a unique temporary audio file for each synthesis",
+    "path": "tools/skill_library/global/f5tts-voice-cloning-sota/scripts/synthesize_vocal_clone.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0267",
+    "severity": "P2",
+    "title": "Avoid treating missing failure logs as proof of all invariants",
+    "path": "docs/03_guides/tutorial_hello_causal.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0268",
+    "severity": "P2",
+    "title": "Emit a valid JSON container for batch output",
+    "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0269",
+    "severity": "P2",
+    "title": "Do not label watch-page text as an audio transcript",
+    "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0270",
+    "severity": "P2",
+    "title": "Label regex matches as candidate facts rather than verified facts",
+    "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0272",
+    "severity": "P2",
+    "title": "Claim leaf encoding admits delimiter collisions",
+    "path": "01_KISH_ENGINE/babylon60/attestation/conformal_tree.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0273",
+    "severity": "P2",
+    "title": "Symmetry verifier ignores additional reverse-kernel mass",
+    "path": "01_KISH_ENGINE/babylon60/primitives/disintegration_matrix.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0274",
+    "severity": "P2",
+    "title": "Host triage emits static corpus observations as current audit results",
+    "path": "scripts/repatriated/sharur3600_host_triage_py.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0275",
+    "severity": "P2",
+    "title": "Unboxing claims Touch ID readiness from file existence",
+    "path": "scripts/c5_setup/unboxing_moskv1.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0277",
+    "severity": "P2",
+    "title": "Notary checkpoint declares a verified quorum without contacting validators",
+    "path": "01_KISH_ENGINE/babylon60/attestation/merkle_anchor.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0280",
+    "severity": "P2",
+    "title": "Tokenizer cannot encode ordinary Unicode outside Latin-1",
+    "path": "01_KISH_ENGINE/babylon60/cortex/cortex_bpe_tokenizer.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0281",
+    "severity": "P2",
+    "title": "Password breach checker reports success when its API request fails",
+    "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-sovereign-identity-hardening/MODULE.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0282",
+    "severity": "P2",
+    "title": "SRP falsification compares predetermined conflict models and unequal workloads",
+    "path": "scripts/c5_demos/poc_srp_soc_falsification.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0283",
+    "severity": "P2",
+    "title": "Formal model proofs are presented as absolute physical runtime guarantees",
+    "path": "docs/04_research/LOS_10_MAYORES_DESCUBRIMIENTOS_Y_AVANCES.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0284",
+    "severity": "P2",
+    "title": "Path import inserted before __future__ imports makes rewritten modules invalid",
+    "path": "scripts/c5_sharur/auto_heal_hardcoded_paths.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0285",
+    "severity": "P2",
+    "title": "Existing pathlib import incorrectly treated as a bound Path name",
+    "path": "scripts/c5_sharur/auto_heal_hardcoded_paths.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0286",
+    "severity": "P2",
+    "title": "Bundling success claims are emitted without checking measured results",
+    "path": "scripts/c5_demos/poc_vsa_saturation_stress.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0287",
+    "severity": "P2",
+    "title": "Lean verification silently passes when compiler is absent",
+    "path": "tests/test_entropy_synthesis_omega.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0288",
+    "severity": "P2",
+    "title": "Password audit requires plaintext secret in command-line arguments",
+    "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-sovereign-identity-hardening/scripts/check_pwned_pass.sh",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0289",
+    "severity": "P2",
+    "title": "Swarm reports successful completion after dropping failed claims",
+    "path": "scripts/c5_sharur/c5_bounty_sharur_exfiltration.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0290",
+    "severity": "P2",
+    "title": "Bounded-memory test asserts storage growing linearly with agents",
+    "path": "tests/test_swarm_reverse_engineering_bench.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0295",
+    "severity": "P2",
+    "title": "Ordinary generated-code errors escape ExecResult handling",
+    "path": "01_KISH_ENGINE/babylon60/primitives/sandbox.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0296",
+    "severity": "P2",
+    "title": "Concurrent seqlock test never validates payload consistency",
+    "path": "tests/test_swarm_seqlock_zero_copy.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0297",
+    "severity": "P2",
+    "title": "Report labels a byte-count formula as dissipated energy",
+    "path": "scripts/c5_sharur/c5_bounty_sharur_omega_10k.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0299",
+    "severity": "P2",
+    "title": "Rule evaluation reports SAT when a required property is absent",
+    "path": "01_KISH_ENGINE/cortex/crates/cortex-guard/src/eval.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0300",
+    "severity": "P2",
+    "title": "Prove ignores source and declares compilation without invoking Lean",
+    "path": "crates/b60-lang/src/main.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0301",
+    "severity": "P2",
+    "title": "Stress concurrency limit is private to each agent",
+    "path": "tests/test_swarm_stress.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0302",
+    "severity": "P2",
+    "title": "ASAR scanner example returns an already closed stream",
+    "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/electron-asar-forensic-audit/MODULE.md",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0304",
+    "severity": "P2",
+    "title": "Proof verifier ignores the claimed leaf index",
+    "path": "crates/b60-lang/src/mmr.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0305",
+    "severity": "P2",
+    "title": "Malformed peak index panics instead of rejecting proof",
+    "path": "crates/b60-lang/src/mmr.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0306",
+    "severity": "P2",
+    "title": "IFC parser splits semicolons inside quoted values",
+    "path": "01_KISH_ENGINE/cortex/crates/cortex-guard/src/ifc.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0307",
+    "severity": "P2",
+    "title": "Skill persistence reports success after failed copy",
+    "path": "tools/skill_library/codex_overrides/turnstile-spin/scripts/persist-skill.sh",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0308",
+    "severity": "P2",
+    "title": "Setback distance fabricated from local placement axes",
+    "path": "01_KISH_ENGINE/cortex/crates/cortex-guard/src/ifc.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0309",
+    "severity": "P2",
+    "title": "Garbage collection totals count repeated scans as reclaimable bytes",
+    "path": "scripts/c5_sharur/garbage_collection_sitrep.json",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0310",
+    "severity": "P2",
+    "title": "REPL spins indefinitely after stdin reaches EOF",
+    "path": "crates/b60-lang/src/repl.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0311",
+    "severity": "P2",
+    "title": "Sexagesimal addition overflows for accepted u64 operands",
+    "path": "crates/b60-lang/src/repl.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0312",
+    "severity": "P2",
+    "title": "Paper downloader disables HTTPS certificate validation globally",
+    "path": "scripts/sharur/download_papers.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0313",
+    "severity": "P2",
+    "title": "YAML parser strips hash characters inside quoted strings",
+    "path": "01_KISH_ENGINE/babylon60/primitives/yaml_parser.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0314",
+    "severity": "P2",
+    "title": "Gemini generation tool returns a canned response without invoking Gemini",
+    "path": "01_KISH_ENGINE/babylon60/cortex/gemini_labs_nexus.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0315",
+    "severity": "P2",
+    "title": "Receipt producer labels a public hash prefix as an Ed25519 signature",
+    "path": "01_KISH_ENGINE/babylon60/cortex/gemini_labs_nexus.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0316",
+    "severity": "P2",
+    "title": "Syntax integrity gate omits the primary babylon60 package",
+    "path": "tests/test_syntax_integrity.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0317",
+    "severity": "P2",
+    "title": "Concurrent publish can overwrite the fail-stop state",
+    "path": ".agents/skills/c5-ring0-babylon-kernel-project/references/modules/shared-manifest-kernel/MODULE.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0318",
+    "severity": "P2",
+    "title": "Retry exhaustion does not perform the documented halt",
+    "path": ".agents/skills/c5-ring0-babylon-kernel-project/references/modules/shared-manifest-kernel/MODULE.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0319",
+    "severity": "P2",
+    "title": "Synthetic worker scores are presented without a simulation label",
+    "path": "scripts/sharur/run_sharur_1000.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0320",
+    "severity": "P2",
+    "title": "Concurrent installer mutations are never followed by an integrity audit",
+    "path": "scripts/c5_demos/stress_test_multi_ide_injection.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0321",
+    "severity": "P2",
+    "title": "Missing corpus crashes the auditor before it can report absence",
+    "path": "scripts/c5_sharur/sharur_100_conversation_auditor.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0322",
+    "severity": "P2",
+    "title": "OpenAI secret detector uses a literal malformed repetition",
+    "path": "scripts/c5_sharur/sharur_100_conversation_auditor.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0323",
+    "severity": "P2",
+    "title": "Audit emits unconditional compliance verdicts without examining evidence",
+    "path": "scripts/c5_sharur/sharur_100_conversation_auditor.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0325",
+    "severity": "P2",
+    "title": "Comment stripping corrupts quoted URLs in tsconfig",
+    "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/existence-gap-audit/scripts/existence_gap.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0327",
+    "severity": "P2",
+    "title": "Out-of-range jumps return successful execution",
+    "path": "crates/b60-lang/src/vm.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0329",
+    "severity": "P2",
+    "title": "Stress gate never asserts validation and rejection counts",
+    "path": "scripts/c5_demos/z3_firewall_stress_test.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0330",
+    "severity": "P2",
+    "title": "Bootstrap stores unencrypted private key in encrypted-key column",
+    "path": "01_KISH_ENGINE/babylon60/crypto/bootstrap.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0331",
+    "severity": "P2",
+    "title": "Failed email handlers are acknowledged and permanently deduplicated",
+    "path": "01_KISH_ENGINE/babylon60/services/inbound_email.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0332",
+    "severity": "P2",
+    "title": "Filesystem event arithmetic overflows before burnout can be observed",
+    "path": "00_ABZU_KERNEL/crates/babylon60-kernel/examples/poc_darwin_bridge.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0333",
+    "severity": "P2",
+    "title": "Simulation announces a verified ZK invariant from a synthetic timing comparison",
+    "path": "scripts/c5_demos/zk_causal_gate_stress_test.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0334",
+    "severity": "P2",
+    "title": "Archived sitrep presents constant success values as independent attestation",
+    "path": "scripts/c5_sharur/sharur_100_conversations_sitrep.json",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0339",
+    "severity": "P2",
+    "title": "Release verifier accepts a bundle with no manifest digest binding",
+    "path": "scripts/verify_release.sh",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0340",
+    "severity": "P2",
+    "title": "Benchmark extrapolates Python loops into isolation guarantees",
+    "path": "scripts/c5_demos/zk_shm_starvation_stress_test.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0342",
+    "severity": "P2",
+    "title": "Aeon identity, claim count and hardware metadata are outside the signature",
+    "path": "crates/babylon-attest/src/conformal_tree.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0344",
+    "severity": "P2",
+    "title": "Deployment script exits successfully after both publication commands fail",
+    "path": "scripts/c5_deploy/deploy.sh",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0346",
+    "severity": "P2",
+    "title": "Zero-weight agents still veto pooled hypotheses",
+    "path": "01_KISH_ENGINE/babylon60/bft/bayesian_swarm.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0347",
+    "severity": "P2",
+    "title": "Garbage collection totals count each target repeatedly",
+    "path": "scripts/c5_sharur/sharur_100_garbage_collector.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0348",
+    "severity": "P2",
+    "title": "Additional LSP headers are consumed as JSON payload bytes",
+    "path": "01_KISH_ENGINE/cortex/crates/cortex-lsp/src/main.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0351",
+    "severity": "P2",
+    "title": "Export the actual block hash algorithm",
+    "path": "crates/babylon-attest/src/ledger.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0352",
+    "severity": "P2",
+    "title": "Enforce the advertised subprocess timeout",
+    "path": "01_KISH_ENGINE/babylon60/tools/context7_client.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0353",
+    "severity": "P2",
+    "title": "Bind finding metadata into receipt verification",
+    "path": "01_KISH_ENGINE/babylon60/bft/bounty_claim_attester.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0355",
+    "severity": "P2",
+    "title": "JSON telemetry is preceded by an unconditional banner",
+    "path": "scripts/c5_sharur/sharur_21_agentes.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0356",
+    "severity": "P2",
+    "title": "Code generation records uncompiled rules as compiled and active",
+    "path": "scripts/c5_destiladora/codegen_rust_b60.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0357",
+    "severity": "P2",
+    "title": "Rekor public key contract disagrees with both ledger callers",
+    "path": "01_KISH_ENGINE/babylon60/crypto/rekor_client.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0359",
+    "severity": "P2",
+    "title": "Propagate pytest.main exit code from FUZZ workers",
+    "path": "scripts/c5_sharur/sharur_222_agentes.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0362",
+    "severity": "P2",
+    "title": "Use durable synchronous mode in trace-ledger schema",
+    "path": "scripts/c5_destiladora/destiladora_schema.sql",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0363",
+    "severity": "P2",
+    "title": "Do not approve JavaScript solely from balanced delimiters",
+    "path": "01_KISH_ENGINE/babylon60/transducers/appgen_ast_transducer.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0365",
+    "severity": "P2",
+    "title": "Async shredder does not initialize its table",
+    "path": "01_KISH_ENGINE/babylon60/crypto/shredder.py",
+    "decision": "ALREADY_FIXED",
+    "remediation_state": "MITIGATED",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0367",
+    "severity": "P2",
+    "title": "JSON attest output is prefixed by human license text",
+    "path": "crates/babylon-attest/src/main.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0368",
+    "severity": "P2",
+    "title": "Sidecar blocks all requests on a single idle client",
+    "path": "crates/babylon-attest/src/main.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0369",
+    "severity": "P2",
+    "title": "Sidecar skips license enforcement on event writes",
+    "path": "crates/babylon-attest/src/main.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0370",
+    "severity": "P2",
+    "title": "Launcher serves an absent UI directory",
+    "path": "scripts/babylon_launcher.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0371",
+    "severity": "P2",
+    "title": "Swarm release audit reports hard-coded successful checks",
+    "path": "scripts/c5_sharur/sharur_master_swarm_runner.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0372",
+    "severity": "P2",
+    "title": "Git publication auditor certifies history after scanning only 100 commits",
+    "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/github-architect/scripts/git_history_sanitizer.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0374",
+    "severity": "P2",
+    "title": "Swarm entry point imports a module absent after renaming",
+    "path": "scripts/c5_sharur/sharur_swarm.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0375",
+    "severity": "P2",
+    "title": "Bounded advisory queues silently discard accepted frames",
+    "path": "01_KISH_ENGINE/babylon60/bft/bounty_ring_dispatcher.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0376",
+    "severity": "P2",
+    "title": "Extractor promotes a satisfiable assumption set without checking the trace cluster",
+    "path": "scripts/c5_destiladora/invariant_extractor_z3.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0377",
+    "severity": "P2",
+    "title": "Concurrent publish calls can expose mixed attestation fields",
+    "path": "src/attestation_contract.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0379",
+    "severity": "P2",
+    "title": "Generated Python CI masks every pytest failure",
+    "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/github-architect/scripts/repo_health.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0380",
+    "severity": "P2",
+    "title": "TURN credential example accepts any nonempty Authorization header",
+    "path": "tools/skill_library/codex_overrides/cloudflare/references/turn/configuration.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0382",
+    "severity": "P2",
+    "title": "BA.EXACT silently truncates non-sexagesimal fractions",
+    "path": "src/babylon60.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0383",
+    "severity": "P2",
+    "title": "Malformed instruction operands panic past static validation",
+    "path": "src/babylon60.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0384",
+    "severity": "P2",
+    "title": "Artifact global hash omits opcode and proof IR",
+    "path": "src/babylon60.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0386",
+    "severity": "P2",
+    "title": "Benchmark reports a measured fast-path latency without timing it",
+    "path": "scripts/c5_destiladora/test_destiladora_e2e.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0389",
+    "severity": "P2",
+    "title": "Generate calibration constants in the module actually compiled",
+    "path": "scripts/c5_calibrations/calibrate_aphairesis.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0390",
+    "severity": "P2",
+    "title": "Do not certify hardware and SLSA properties without evidence",
+    "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/github-architect/scripts/scitt_attestor.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0392",
+    "severity": "P2",
+    "title": "Port-53 filtering also removes the documented TLS port 5349",
+    "path": "tools/skill_library/codex_overrides/cloudflare/references/turn/patterns.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0394",
+    "severity": "P2",
+    "title": "Legacy read methods bypass configured project visibility",
+    "path": "crates/babylon-skills-mcp/src/lib.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0395",
+    "severity": "P2",
+    "title": "Terminal generation failure is swallowed and retried until timeout",
+    "path": "01_KISH_ENGINE/extensions/moskv-fx-scavenger/content.js",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0396",
+    "severity": "P2",
+    "title": "Calibration resolves its technical corpus under scripts instead of the repository",
+    "path": "scripts/c5_calibrations/calibrate_popperian_entropy.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0397",
+    "severity": "P2",
+    "title": "Simulated audit runner persists unconditional verified completion events",
+    "path": "scripts/c5_edin/edin_swarm_runner.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0398",
+    "severity": "P2",
+    "title": "TOCTOU harness can certify a campaign that performs no attack",
+    "path": "examples/fl005_toctou_stress.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0399",
+    "severity": "P2",
+    "title": "Turnstile Worker example references an undeclared env binding",
+    "path": "tools/skill_library/codex_overrides/cloudflare/references/turnstile/README.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0400",
+    "severity": "P2",
+    "title": "Telemetry monitor displays fabricated security evidence as live state",
+    "path": "src/bin/babylon_top.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0401",
+    "severity": "P2",
+    "title": "Unimplemented specialists are counted as successful verification",
+    "path": "scripts/c5_edin/f13_233_specialist_audit_matrix.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0402",
+    "severity": "P2",
+    "title": "KL computation compares histograms with incompatible bin edges",
+    "path": "scripts/c5_calibrations/topological_calibration.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0403",
+    "severity": "P2",
+    "title": "Configured invalid signing seed silently switches identity",
+    "path": "01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0404",
+    "severity": "P2",
+    "title": "Crash harness cannot detect committed transactions with zero effects",
+    "path": "examples/fl006_crash_consistency.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0405",
+    "severity": "P2",
+    "title": "TLOAD is decoded as 0x5e instead of 0x5c",
+    "path": "01_KISH_ENGINE/babylon60/bft/defi_bytecode_scraper.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0406",
+    "severity": "P2",
+    "title": "Hook permissions use the most significant address bits",
+    "path": "01_KISH_ENGINE/babylon60/bft/defi_bytecode_scraper.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0407",
+    "severity": "P2",
+    "title": "Updating an existing engine key creates stale eviction entries",
+    "path": "01_KISH_ENGINE/babylon60/engine/__init__.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0408",
+    "severity": "P2",
+    "title": "Mail send announces delivery after only appending a local ledger event",
+    "path": "scripts/c5_cli/babylon_mail_cli.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0409",
+    "severity": "P2",
+    "title": "Auth middleware can be skipped through the query string",
+    "path": "tools/skill_library/codex_overrides/cloudflare/references/pages/patterns.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0410",
+    "severity": "P2",
+    "title": "HTML error response interpolates exception text without escaping",
+    "path": "tools/skill_library/codex_overrides/cloudflare/references/pages/patterns.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0412",
+    "severity": "P2",
+    "title": "Chunk allocation ignores the supplied swarm size",
+    "path": "scripts/c5_edin/remotion_swarm_orchestrator.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0415",
+    "severity": "P2",
+    "title": "Second-order belief returns the target belief regardless of observer knowledge",
+    "path": "scripts/c5_cli/doxastic_kripke_engine.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0416",
+    "severity": "P2",
+    "title": "Registry verification succeeds despite stale entries and metadata drift",
+    "path": "scripts/c5_skills_ontology/sync_skills_registry.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0417",
+    "severity": "P2",
+    "title": "Benchmark prints a fixed end-to-end latency attribution it never measures",
+    "path": "tools/skill_library/global/c5-debloat-agent-kernel/scripts/langchain_autopsy.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0423",
+    "severity": "P2",
+    "title": "Thermal budget addition can overflow before admission comparison",
+    "path": "crates/cadt_mediator/src/lib.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0424",
+    "severity": "P2",
+    "title": "Draft filenames accept path components from campaign JSON",
+    "path": "tools/tamkarum_batch_signer.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0425",
+    "severity": "P2",
+    "title": "Missing Lean oracle is replaced by a numeric heuristic certification",
+    "path": "examples/navier_stokes_larsa_oracle.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0426",
+    "severity": "P2",
+    "title": "Commit polisher invokes nonexistent rewrite script path",
+    "path": "scripts/c5_git_utils/commit_polisher.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0427",
+    "severity": "P2",
+    "title": "Disconnected Markov output is not strict JSON",
+    "path": "scripts/c5_cli/markov_bridge.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0431",
+    "severity": "P2",
+    "title": "Attestation combines separate database snapshots",
+    "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0433",
+    "severity": "P2",
+    "title": "Example reports global regularity from hard-coded predicates",
+    "path": "examples/omega_100_synthesis.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0436",
+    "severity": "P2",
+    "title": "Concurrent prompt producers and consumers lose FIFO updates",
+    "path": "scripts/c5_cli/moskv_native_host.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0439",
+    "severity": "P2",
+    "title": "TCW classifier omits required flanking nucleotide",
+    "path": "01_KISH_ENGINE/babylon60/genomics/engine.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0440",
+    "severity": "P2",
+    "title": "Energy and enstrophy truncate squared i64 values to u64",
+    "path": "src/dec.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0441",
+    "severity": "P2",
+    "title": "Physical grid spacing absent from numerical RHS",
+    "path": "src/dec.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0444",
+    "severity": "P2",
+    "title": "Replay digest authenticates only elapsed ticks",
+    "path": "00_ABZU_KERNEL/crates/babylon60-runtime/src/main.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0445",
+    "severity": "P2",
+    "title": "Unsupported instructions are silently accepted",
+    "path": "00_ABZU_KERNEL/crates/babylon60-runtime/src/main.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0446",
+    "severity": "P2",
+    "title": "Script operands can panic the interpreter outside its halt path",
+    "path": "00_ABZU_KERNEL/crates/babylon60-runtime/src/main.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0447",
+    "severity": "P2",
+    "title": "Unique query generator inevitably stops making progress",
+    "path": "scripts/c5_thermo/cache_1000_memoization_bench.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0449",
+    "severity": "P2",
+    "title": "Server binds all interfaces despite announcing loopback",
+    "path": "02_EDIN_SWARMS/adapters/go_studio/cmd/server/main.go",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0450",
+    "severity": "P2",
+    "title": "Monitor presents constants as live security and treasury telemetry",
+    "path": "tools/tamkarum_top.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0451",
+    "severity": "P2",
+    "title": "Sequence validator accepts an empty normalized sequence",
+    "path": "01_KISH_ENGINE/babylon60/genomics/hygiene.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0452",
+    "severity": "P2",
+    "title": "Byte-sized fields are emitted as eight-byte stores",
+    "path": "examples/poc_bifurcation_4_structs.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0453",
+    "severity": "P2",
+    "title": "Comment fallback directs audit output without acquiring comments",
+    "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/youtube-analysis-pipeline/MODULE.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0454",
+    "severity": "P2",
+    "title": "Queue failure handler references an unbound exception",
+    "path": "01_KISH_ENGINE/babylon60/transducers/pulmones.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0455",
+    "severity": "P2",
+    "title": "Half-open circuit admits every concurrent caller",
+    "path": "01_KISH_ENGINE/babylon60/transducers/pulmones.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0456",
+    "severity": "P2",
+    "title": "Assimilation target can escape the incoming directory",
+    "path": "scripts/c5_thermo/exergy_arbitrage_engine.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0457",
+    "severity": "P2",
+    "title": "Code fence extractor matches a literal backslash instead of a newline",
+    "path": "scripts/c5_thermo/exergy_arbitrage_engine.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0458",
+    "severity": "P2",
+    "title": "Reallocation clears live borrow state without invalidating references",
+    "path": "examples/poc_bifurcation_5_lifetimes.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0459",
+    "severity": "P2",
+    "title": "Certificate panel presents static text as verified hardware attestation",
+    "path": "tools/ui_babylon_ide/index.html",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0462",
+    "severity": "P2",
+    "title": "Persistent retry deadlines use a clock that resets at reboot",
+    "path": "01_KISH_ENGINE/babylon60/transducers/pulmones_worker.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0463",
+    "severity": "P2",
+    "title": "Fetching retry work does not claim rows atomically",
+    "path": "01_KISH_ENGINE/babylon60/transducers/pulmones_worker.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0464",
+    "severity": "P2",
+    "title": "Appliance installer copies from a crate-local target directory in a workspace",
+    "path": "crates/eridu-infer/scripts/setup_appliance.sh",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0465",
+    "severity": "P2",
+    "title": "Master ledger explicitly selects NORMAL durability despite FULL requirement",
+    "path": "scripts/c5_isomorphisms/c5_logos_ethos_ship_engine.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0466",
+    "severity": "P2",
+    "title": "Telemetry stop cancels the worker without draining pending events",
+    "path": "01_KISH_ENGINE/babylon60/c5_telemetry.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0467",
+    "severity": "P2",
+    "title": "Attestation test passes even for blocked or failed results",
+    "path": "tests/test_attestation.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0468",
+    "severity": "P2",
+    "title": "Generated temporary variables collide with circuit inputs",
+    "path": "00_ABZU_KERNEL/crates/nul-zk/src/compiler.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0469",
+    "severity": "P2",
+    "title": "Drug-target affinity cancels the target vector",
+    "path": "01_KISH_ENGINE/babylon60/genomics/vsa_oncology.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0470",
+    "severity": "P2",
+    "title": "Parallel face-swap jobs share one identity embedding file",
+    "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0471",
+    "severity": "P2",
+    "title": "Worker suppresses encoder failure and can deliver truncated video",
+    "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0472",
+    "severity": "P2",
+    "title": "Media gate ignores ffmpeg measurement failure",
+    "path": "01_KISH_ENGINE/babylon60/transducers/render_exergy_guard.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0473",
+    "severity": "P2",
+    "title": "Persistent actor resets its Lamport clock on restart",
+    "path": "scripts/c5_isomorphisms/c5_ultimate_causal_determinant.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0474",
+    "severity": "P2",
+    "title": "New face tracks are returned twice on their first frame",
+    "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-neural-face-swap-cuadrilla/scripts/c5_smoother.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0475",
+    "severity": "P2",
+    "title": "Blur framing fails for sources taller than the output aspect ratio",
+    "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-neural-face-swap-cuadrilla/scripts/c5_smoother.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0476",
+    "severity": "P2",
+    "title": "Gate receipts assert verified compliance without evaluating it",
+    "path": "crates/eridu-infer/src/gate.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0477",
+    "severity": "P2",
+    "title": "Receipt hash does not distinguish model/prompt boundaries",
+    "path": "crates/eridu-infer/src/gate.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0478",
+    "severity": "P2",
+    "title": "Vault consolidation records a fixed session catalogue instead of reading source sessions",
+    "path": "scripts/c5_cortex/consolidate_babylon_vault.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0479",
+    "severity": "P2",
+    "title": "Cancer pipeline emits attested numerical invariants without inputs or computation",
+    "path": "scripts/c5_isomorphisms/cancer_isomorphism_pipeline.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0480",
+    "severity": "P2",
+    "title": "Repository inventory falsely marks every repository as having a README",
+    "path": "tools/skill_library/global/github-architect/scripts/fetch_repos_graphql.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0482",
+    "severity": "P2",
+    "title": "Truncated GGUF metadata panics instead of returning an error",
+    "path": "crates/eridu-infer/src/gguf.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0485",
+    "severity": "P2",
+    "title": "Concurrent rate limiter callers reserve the same future slot",
+    "path": "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0487",
+    "severity": "P2",
+    "title": "Receipt interpolation fails to escape JSON control characters",
+    "path": "01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0488",
+    "severity": "P2",
+    "title": "Generator computes scripts directory as its output root",
+    "path": "scripts/c5_isomorphisms/gen_oncology_primitives.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0491",
+    "severity": "P2",
+    "title": "A contender removes an active installer lock after approximately one second",
+    "path": "tools/install_shield.sh",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0492",
+    "severity": "P2",
+    "title": "Uninstall deletes unrelated symlinked instruction files",
+    "path": "tools/install_shield.sh",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0494",
+    "severity": "P2",
+    "title": "HUD reports verified compliance from the existence of a response or receipt",
+    "path": "crates/eridu-infer/src/hud.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0495",
+    "severity": "P2",
+    "title": "Seqlock stress oracle accepts mixed finite snapshots and even zero successful reads",
+    "path": "examples/poc_kudurru_silicon_ns.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0496",
+    "severity": "P2",
+    "title": "Queue acknowledgement guidance reverses the first-call-wins contract",
+    "path": "tools/skill_library/codex_overrides/cloudflare/references/queues/api.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0497",
+    "severity": "P2",
+    "title": "WAF score examples block clean traffic and spare the most suspicious requests",
+    "path": "tools/skill_library/codex_overrides/cloudflare/references/waf/patterns.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0498",
+    "severity": "P2",
+    "title": "Advertised 90-second polling bound does not bound network reads",
+    "path": "scripts/c5_cortex/cortex_labs_poc.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0503",
+    "severity": "P2",
+    "title": "Blackboard resolution is not an atomic OPEN transition",
+    "path": "02_EDIN_SWARMS/agents_archi/orchestrator/blackboard.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0504",
+    "severity": "P2",
+    "title": "JSON output skips requested claim export",
+    "path": "01_KISH_ENGINE/babylon60/cli/bounty_cli.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0506",
+    "severity": "P2",
+    "title": "Manifest inspector certifies properties it never checks",
+    "path": "01_KISH_ENGINE/babylon60/cli/bounty_cli.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0507",
+    "severity": "P2",
+    "title": "Sexagesimal conversion silently truncates the high limb",
+    "path": "src/f60.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0508",
+    "severity": "P2",
+    "title": "Saturating radius loses the claimed interval enclosure",
+    "path": "src/f60.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0510",
+    "severity": "P2",
+    "title": "Repeated consensus hash replaces a prior epoch",
+    "path": "scripts/c5_l1_ledger/bittensor_yuma_consensus_c5.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0511",
+    "severity": "P2",
+    "title": "Durability regression inspects a fresh SQLite connection",
+    "path": "tests/test_ledger_cross_equivalence.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0512",
+    "severity": "P2",
+    "title": "Explicit output basename fails before exporting",
+    "path": "scripts/c5_utils/export_country_compliance.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0513",
+    "severity": "P2",
+    "title": "Lean example ignores sequence continuity when declaring causality preserved",
+    "path": "examples/poc_lean4_emitter.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0514",
+    "severity": "P2",
+    "title": "Repository remediation grants MIT rights without a license selection",
+    "path": "tools/skill_library/global/github-architect/scripts/repo_transductor.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0515",
+    "severity": "P2",
+    "title": "WAL write failure is swallowed after state has changed",
+    "path": "02_EDIN_SWARMS/agents_archi/orchestrator/lifecycle.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0516",
+    "severity": "P2",
+    "title": "Unresolved AWAIT spins forever outside the tick failsafe",
+    "path": "examples/poc_navier_stokes_hunter.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0517",
+    "severity": "P2",
+    "title": "Vorticity check asserts a hardcoded result",
+    "path": "examples/poc_navier_stokes_hunter.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0518",
+    "severity": "P2",
+    "title": "Seeded FL014 experiment uses process-randomized hash for decisions",
+    "path": "scripts/c5_cortex/poc_fl014_holdout.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0519",
+    "severity": "P2",
+    "title": "Artifact identity comparison checks only a prefix",
+    "path": "scripts/c5_cortex/poc_fl014_holdout.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0520",
+    "severity": "P2",
+    "title": "Python SharedManifest example uses an incompatible ABI",
+    "path": "scripts/c5_utils/python_spsc_reader.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0521",
+    "severity": "P2",
+    "title": "Queue HTTP examples acknowledge failed HTTP responses",
+    "path": "tools/skill_library/codex_overrides/cloudflare/references/queues/patterns.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0522",
+    "severity": "P2",
+    "title": "Daemon installer reports success exit after launchctl rejection",
+    "path": "crates/eridu-infer/src/main.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0523",
+    "severity": "P2",
+    "title": "Release attestor emits unsupported certification claims",
+    "path": "tools/skill_library/global/github-architect/scripts/scitt_attestor.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0524",
+    "severity": "P2",
+    "title": "Recovery proposals execute without Trust Gateway reevaluation",
+    "path": "02_EDIN_SWARMS/agents_archi/orchestrator/royal_rumble.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0525",
+    "severity": "P2",
+    "title": "Required structured review is only a quota counter",
+    "path": "02_EDIN_SWARMS/agents_archi/orchestrator/royal_rumble.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0527",
+    "severity": "P2",
+    "title": "WebSocket and completion routes never invoke the instantiated authentication validator",
+    "path": "crates/eridu-infer/src/server.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0530",
+    "severity": "P2",
+    "title": "Software-key example certifies hardware-bound attestation",
+    "path": "examples/poc_scitt_hardware_receipt_stress.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0531",
+    "severity": "P2",
+    "title": "Receipt example accepts missing or malformed required fields",
+    "path": "examples/poc_scitt_hardware_receipt_stress.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0532",
+    "severity": "P2",
+    "title": "Trace validator ignores sequence continuity and incomplete writes",
+    "path": "scripts/c5_demos/BabylonTracePoC.lean",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0534",
+    "severity": "P2",
+    "title": "Timestamp response existence is mislabeled as authenticated RFC3161 evidence",
+    "path": "scripts/c5_l1_ledger/seal_bounty_aeon.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0535",
+    "severity": "P2",
+    "title": "Binary payload hash is truncated at the first NUL on read",
+    "path": "02_EDIN_SWARMS/agents_archi/orchestrator/seqlock_swarm_ring0.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0536",
+    "severity": "P2",
+    "title": "Two-node quorum failure branch is unreachable",
+    "path": "examples/poc_stress_dec_mimetic.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0537",
+    "severity": "P2",
+    "title": "Verifier records unconditional PASS for properties it does not inspect",
+    "path": "scripts/c5_verifiers/axiom_verifier_z3.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0538",
+    "severity": "P2",
+    "title": "Missing remote credentials produce successful fabricated task output",
+    "path": "02_EDIN_SWARMS/agents_archi/orchestrator/swarm.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0540",
+    "severity": "P2",
+    "title": "Extension scan misses wildcard content-script injections",
+    "path": "tools/skill_library/global/c5-browser-forensics-and-extension-triage/scripts/browser_forensics.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0541",
+    "severity": "P2",
+    "title": "Falsifiability acceptance is disabled by optimized Python",
+    "path": "01_KISH_ENGINE/babylon60/cli/onco_transducer.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0542",
+    "severity": "P2",
+    "title": "Selecting therapy targets from a set makes pipeline nondeterministic",
+    "path": "01_KISH_ENGINE/babylon60/cli/onco_transducer.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0543",
+    "severity": "P2",
+    "title": "Frozen saga proposals retain externally mutable payloads",
+    "path": "01_KISH_ENGINE/babylon60/guards/saga_contract.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0544",
+    "severity": "P2",
+    "title": "Stress example certifies latency bounds without checking them",
+    "path": "examples/poc_stress_manifest_spmc.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0545",
+    "severity": "P2",
+    "title": "Scheduled-operation deduplication commits success before operation",
+    "path": "tools/skill_library/codex_overrides/cloudflare/references/cron-triggers/gotchas.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0546",
+    "severity": "P2",
+    "title": "Sample-peak scaling is presented as a true-peak guarantee",
+    "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/djstudio-mcp/MODULE.md",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0547",
+    "severity": "P2",
+    "title": "Reject negative token usage before cost accounting",
+    "path": "01_KISH_ENGINE/babylon60/guards/token_lease_guard.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0548",
+    "severity": "P2",
+    "title": "Retain failed batch items instead of removing the entire batch",
+    "path": "tools/skill_library/codex_overrides/cloudflare/references/cron-triggers/patterns.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0549",
+    "severity": "P2",
+    "title": "Do not issue a complete forensic attestation when captures are absent",
+    "path": "scripts/c5_log_custody/c5_organize_captures.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0550",
+    "severity": "P2",
+    "title": "Avoid integer overflow before converting mesh volume to floating point",
+    "path": "src/fluid_thermo.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0551",
+    "severity": "P2",
+    "title": "Dry-run still overwrites the session artifact log",
+    "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/c5-terminological-archaeology/scripts/c5_lexicon_notary.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0552",
+    "severity": "P2",
+    "title": "Phase replacement removes every section after Fase 2f",
+    "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/c5-terminological-archaeology/scripts/c5_lexicon_notary.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0553",
+    "severity": "P2",
+    "title": "Concurrent synthesis invocations share one intermediate WAV",
+    "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/f5tts-voice-cloning-sota/scripts/synthesize_vocal_clone.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0554",
+    "severity": "P2",
+    "title": "Timeout is reported as a successful zero-copy falsification",
+    "path": "00_ABZU_KERNEL/crates/strike-rs/scripts/poc_python_zerocopy_worker.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0558",
+    "severity": "P2",
+    "title": "Admitted result ignores publication failure after poison",
+    "path": "examples/poc_zero_touch_gate.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0559",
+    "severity": "P2",
+    "title": "Verified commit is independent of the causally bound descriptor",
+    "path": "crates/mxc_broker_poc/src/main.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0560",
+    "severity": "P2",
+    "title": "New ATMS premises bypass an already established unconditional contradiction",
+    "path": "00_ABZU_KERNEL/crates/strike-rs/src/atms.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0561",
+    "severity": "P2",
+    "title": "Voice generation reports full synchronization after synthesis errors",
+    "path": "scripts/c5_demos/batch_gen_borja_voices.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0564",
+    "severity": "P2",
+    "title": "Composite action inputs are interpolated into Bash source",
+    "path": ".github/actions/archi-guard/action.yml",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0566",
+    "severity": "P2",
+    "title": "Replay campaign never establishes a successfully consumed authorization",
+    "path": "examples/swarm_1000_gate1_adversarial.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0567",
+    "severity": "P2",
+    "title": "Crash report declares five tested points without interruption or recovery",
+    "path": "examples/swarm_1000_gate1_adversarial.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0568",
+    "severity": "P2",
+    "title": "NEMESIS report passes when all secure-delete operations fail",
+    "path": "examples/swarm_1000_gate1_adversarial.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0569",
+    "severity": "P2",
+    "title": "Stub exporter labels tautologies as verification of extracted claims",
+    "path": "scripts/c5_verifiers/inject_lean4_stubs.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0570",
+    "severity": "P2",
+    "title": "Benchmark conclusions attribute simulator assumptions to external products",
+    "path": "scripts/c5_demos/benchmark_governance_10k.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0571",
+    "severity": "P2",
+    "title": "Refusal is assigned zero KL without a probability distribution",
+    "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/categorical-hallucination-audit/MODULE.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0572",
+    "severity": "P2",
+    "title": "Closed completion channel causes an infinite busy loop after consensus timeout",
+    "path": "00_ABZU_KERNEL/crates/strike-rs/src/bft_engine.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0573",
+    "severity": "P2",
+    "title": "Database errors leave committed in-memory DAG changes despite rollback error",
+    "path": "00_ABZU_KERNEL/crates/strike-rs/src/bft_engine.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0576",
+    "severity": "P2",
+    "title": "Canonical annealing example replaces random acceptance with a fixed cutoff",
+    "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-adaptive-annealing-engine/MODULE.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0577",
+    "severity": "P2",
+    "title": "Bound IPC envelope length before slicing",
+    "path": "00_ABZU_KERNEL/crates/strike-rs/src/bft_iceoryx2.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0578",
+    "severity": "P2",
+    "title": "Reset research state between independent cycles",
+    "path": "02_EDIN_SWARMS/agents_archi/topologies/autodidact_topology.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0579",
+    "severity": "P2",
+    "title": "Authenticate tenant selection in the multi-tenant example",
+    "path": "tools/skill_library/codex_overrides/cloudflare/references/d1/patterns.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0580",
+    "severity": "P2",
+    "title": "Normalize session expiry before comparing SQLite timestamps",
+    "path": "tools/skill_library/codex_overrides/cloudflare/references/d1/patterns.md",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0581",
+    "severity": "P2",
+    "title": "Remove credential scavenging and autonomous secret injection directive",
+    "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/cct-cognitive-theory-advisor/MODULE.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0582",
+    "severity": "P2",
+    "title": "SIGTERM seals the ledger without terminating the intercepted child",
+    "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/bft_interceptor.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0583",
+    "severity": "P2",
+    "title": "Persistence failures are discarded while closure is reported successful",
+    "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/bft_interceptor.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0584",
+    "severity": "P2",
+    "title": "Specification-only consolidation emits verified and consolidated results",
+    "path": "02_EDIN_SWARMS/agents_archi/topologies/babylon21_consolidation.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0585",
+    "severity": "P2",
+    "title": "Timed-out consolidation gate subprocesses are left running",
+    "path": "02_EDIN_SWARMS/agents_archi/topologies/babylon21_consolidation.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0586",
+    "severity": "P2",
+    "title": "Canonical seal digest changes with optional dependency installation",
+    "path": "02_EDIN_SWARMS/agents_archi/topologies/babylon21_consolidation.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0587",
+    "severity": "P2",
+    "title": "BFT persistence explicitly weakens required durability",
+    "path": "01_KISH_ENGINE/babylon60/kernel/bft_db_async.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0588",
+    "severity": "P2",
+    "title": "Deskimming dry-run writes and replaces its audit receipt",
+    "path": "scripts/c5_orchestrator/c5_session_deskimming_engine.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0589",
+    "severity": "P2",
+    "title": "Autocognition audit asserts checks it never performs",
+    "path": "scripts/c5_verifiers/verify_anergy_token_purge.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0590",
+    "severity": "P2",
+    "title": "Explicit conversation selection is ignored in favor of another session",
+    "path": "scripts/c5_verifiers/verify_anergy_token_purge.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0591",
+    "severity": "P2",
+    "title": "Anomaly filter skips the configured event limit",
+    "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/c5_cli.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0592",
+    "severity": "P2",
+    "title": "Sexagesimal conversion scales integer units by sixty",
+    "path": "scripts/c5_demos/c5_darknode_core.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0593",
+    "severity": "P2",
+    "title": "Mutable ballistic history makes a frame depend on render order",
+    "path": "tools/skill_library/global/remotion-audio-reactive-video/examples/AudioReactiveMaster.tsx",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0594",
+    "severity": "P2",
+    "title": "Forensic protocol treats a wish to remember as mathematical proof of lying",
+    "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/discourse-popperian-falsification/MODULE.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0595",
+    "severity": "P2",
+    "title": "Synchronous verifiers bypass timeout and block the event loop",
+    "path": "02_EDIN_SWARMS/agents_archi/topologies/edin.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0596",
+    "severity": "P2",
+    "title": "Returned SQLite cursor is attached to an already closed connection",
+    "path": "01_KISH_ENGINE/babylon60/kernel/bft_sqlite.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0597",
+    "severity": "P2",
+    "title": "Causal verifier still targets removed packages directory",
+    "path": "scripts/c5_verifiers/verify_causal_invariants.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0598",
+    "severity": "P2",
+    "title": "Demo presents simulated authentication and print-only fail-stop as actual guarantees",
+    "path": "scripts/c5_demos/c5_killer_demo_60s.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0022",
+    "severity": "P3",
+    "title": "Polymeter selector has no effect on generated rhythm",
+    "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/examples/Euclidean_Polyrhythm_Generator.py",
+    "decision": "REPRODUCED",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0040",
+    "severity": "P3",
+    "title": "Swing formula does not implement its declared triplet ratio",
+    "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/examples/Kerri_Chandler_MPC60.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0059",
+    "severity": "P3",
+    "title": "Architecture manifest points its formal foundation to a missing proof path",
+    "path": "ARCHITECTURE_MANIFEST.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0118",
+    "severity": "P3",
+    "title": "Attestation summary counts disagree with taxonomy",
+    "path": "proof/bundles/attestation_bundle_v2/test_results.json",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0124",
+    "severity": "P3",
+    "title": "Extension audit targets a package path absent from this checkout",
+    "path": "scripts/c5_quality_gates/extensions_apoptosis_auditor.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0140",
+    "severity": "P3",
+    "title": "Zero-capacity governance buffer still accepts an entry",
+    "path": "00_ABZU_KERNEL/crates/strike-rs/src/session_governance.rs",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0166",
+    "severity": "P3",
+    "title": "Gateway fallback example calls an undeclared Anthropic provider",
+    "path": "tools/skill_library/codex_overrides/cloudflare/references/ai-gateway/sdk-integration.md",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0207",
+    "severity": "P3",
+    "title": "Anchor demo announces irreversible Bitcoin anchoring without submitting anything",
+    "path": "scripts/repatriated/apex_merkle_l5_anchor.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0324",
+    "severity": "P3",
+    "title": "Polymeter selection is ignored by the generator",
+    "path": "tools/skill_library/global/flstudio-mcp-production/examples/Euclidean_Polyrhythm_Generator.py",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  },
+  {
+    "candidate_id": "SW100-C0411",
+    "severity": "P3",
+    "title": "Native host dry-run changes executable permissions",
+    "path": "01_KISH_ENGINE/extensions/moskv-fx-scavenger/setup_native_host.sh",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "registry": "registry.json"
+  }
+]

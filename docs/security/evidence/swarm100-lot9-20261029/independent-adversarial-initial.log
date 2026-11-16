@@ -1,0 +1,61 @@
+{
+  "reviewer": "03",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "git_errors_propagate_and_raw_bytes_preserved",
+      "passed": true
+    },
+    {
+      "name": "status_only_without_obsolete_source_or_foreign_capture",
+      "passed": true
+    },
+    {
+      "name": "three_hook_rejections_preserve_index_and_head_once",
+      "passed": true,
+      "cases": 3
+    },
+    {
+      "name": "initial_preflight_rejects_before_all_audits_or_writes",
+      "passed": true,
+      "cases": 2
+    },
+    {
+      "name": "caller_respects_signing_config_without_real_key_or_false_success",
+      "passed": true
+    },
+    {
+      "name": "caller_single_commit_no_amend_no_historical_rewrite",
+      "passed": true
+    },
+    {
+      "name": "noop_none_and_caller_no_change_without_commit_proof",
+      "passed": true
+    },
+    {
+      "name": "audit_interval_external_staging_rejected_and_preserved",
+      "passed": true
+    },
+    {
+      "name": "last_moment_foreign_staging_preserved_and_excluded",
+      "passed": true
+    },
+    {
+      "name": "status_type_and_path_override_rejected",
+      "passed": true,
+      "cases": 3
+    }
+  ],
+  "check_count": 10,
+  "temporary_repositories": 15,
+  "git_command_count": 610,
+  "source_sha256_before": {
+    "scripts/c5_thermo/c5_exergy_optimizer_monitor.py": "1d82392ac3cddd6fd9b226b64c5a28562eea25de29fd5ac4afbbd9ea4cf50d2d",
+    "tests/test_swarm100_lot9_regressions.py": "be2f18081837e889c5ccbb1ec8b9f552f0850c06d8651b4fdbea7b53fa81c710"
+  },
+  "source_sha256_after": {
+    "scripts/c5_thermo/c5_exergy_optimizer_monitor.py": "1d82392ac3cddd6fd9b226b64c5a28562eea25de29fd5ac4afbbd9ea4cf50d2d",
+    "tests/test_swarm100_lot9_regressions.py": "be2f18081837e889c5ccbb1ec8b9f552f0850c06d8651b4fdbea7b53fa81c710"
+  },
+  "scope": "Real Git and benign hooks/signing recorder in owned temporary repos only; all census/linter/test audits replaced; SQLite/network/process kill blocked; no real keys or protected runtime."
+}

@@ -1,0 +1,405 @@
+{
+  "shard": "064",
+  "findings": [
+    {
+      "title": "Handle rejected cold-ledger enqueue results",
+      "severity": "P1",
+      "path": "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py",
+      "line": 138,
+      "evidence": "All three attestation loops append receipts and ignore enqueue_receipt return values. bounty_cold_ledger.py:109-125 returns False when saturated or closed.",
+      "trigger": "High-risk receipt while the bounded persistence queue is full or stopped.",
+      "impact": "Cycle returns a receipt as normal although it was never accepted for persistence.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Propagate pytest.main exit code from FUZZ workers",
+      "severity": "P2",
+      "path": "scripts/c5_sharur/sharur_222_agentes.py",
+      "line": 50,
+      "evidence": "python -c invokes pytest.main(...) without sys.exit; run_cmd uses only subprocess returncode.",
+      "trigger": "pytest returns a nonzero result without raising out of main.",
+      "impact": "Worker reports successful parser resilience for failing tests, including collection failures.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Remove globally inconsistent list-length axiom from generated Lean",
+      "severity": "P1",
+      "path": "scripts/babylon60/gen_oncology_primitives.py",
+      "line": 149,
+      "evidence": "Generated anergy_purge_limit quantifies over every List OncologyPrimitive and asserts length > 300 implies False; a list repeating any constructible OncologyPrimitive 301 times contradicts it.",
+      "trigger": "Import/use the generated axiom in formal reasoning.",
+      "impact": "False becomes derivable; downstream propositions using the axiom cannot establish the intended guarantee. This is a proof issue, not runtime containment evidence.",
+      "confidence": "high",
+      "kind": "docs"
+    },
+    {
+      "title": "Close the namespace in generated Lean output",
+      "severity": "P2",
+      "path": "scripts/babylon60/gen_oncology_primitives.py",
+      "line": 152,
+      "evidence": "The template opens namespace Babylon60.Oncology, then writes the generated file after the last axiom without an end declaration.",
+      "trigger": "Export Lean from this generator.",
+      "impact": "Generated source has an unclosed namespace and cannot complete clean Lean compilation. No compiler was run.",
+      "confidence": "high",
+      "kind": "docs"
+    },
+    {
+      "title": "Use durable synchronous mode in trace-ledger schema",
+      "severity": "P2",
+      "path": "scripts/c5_destiladora/destiladora_schema.sql",
+      "line": 8,
+      "evidence": "Schema explicitly sets WAL plus synchronous=NORMAL. goal_trace_ingestor.py:24-29 executes this schema on its connection before inserting traces.",
+      "trigger": "Persist a trace and subsequently suffer power loss before WAL synchronization.",
+      "impact": "Acknowledged traces can lose durability; this contradicts the canonical synchronous=FULL persistence requirement.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Do not approve JavaScript solely from balanced delimiters",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/transducers/appgen_ast_transducer.py",
+      "line": 81,
+      "evidence": "For JavaScript/TypeScript validate_syntax returns True after delimiter matching alone, e.g. const x = ; contains no unbalanced delimiter; zero_token_feedback_loop maps True to APPROVED. Targeted search found only tests consuming these APIs, no production executor.",
+      "trigger": "Call syntax feedback on invalid JavaScript with balanced delimiters.",
+      "impact": "The public validation API claims syntax approval for non-parsing source; no authorization bypass or actual execution is established.",
+      "confidence": "high",
+      "kind": "runtime"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".agents/skills/cloud-chamber/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          22
+        ]
+      ],
+      "manifest_sha256": "f240d4b4129b4de12a9124412b0dac881d69ac488386805a56f7c819641c94e3",
+      "observed_sha256": "f240d4b4129b4de12a9124412b0dac881d69ac488386805a56f7c819641c94e3",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-kernel/src/scheduler/mod.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          145
+        ]
+      ],
+      "manifest_sha256": "253d36ddabb0230a12dd55cf6502139272e4dfba7f4354607e52408a457e09ca",
+      "observed_sha256": "253d36ddabb0230a12dd55cf6502139272e4dfba7f4354607e52408a457e09ca",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          195
+        ]
+      ],
+      "manifest_sha256": "24df531cfbb817964c4da27b4220351c4080eb4ab9b54c789b11a16d7b07909b",
+      "observed_sha256": "24df531cfbb817964c4da27b4220351c4080eb4ab9b54c789b11a16d7b07909b",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/crypto/rfc3161.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          119
+        ]
+      ],
+      "manifest_sha256": "51606325310efa614ed04cf91a10cb13b5672a97c9dbd02a819ef0acd7e49acc",
+      "observed_sha256": "51606325310efa614ed04cf91a10cb13b5672a97c9dbd02a819ef0acd7e49acc",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/transducers/appgen_ast_transducer.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          143
+        ]
+      ],
+      "manifest_sha256": "e67ba98017e62d6c7cc3145255ad62f79b32115384f422649bc6309cbe550131",
+      "observed_sha256": "e67ba98017e62d6c7cc3145255ad62f79b32115384f422649bc6309cbe550131",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/cortex/transducers/video_remotion/package.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          22
+        ]
+      ],
+      "manifest_sha256": "12a8cf024ea81f5b08b72f5d38748c9d7bf3b804d3c93f865f452c47d008a804",
+      "observed_sha256": "12a8cf024ea81f5b08b72f5d38748c9d7bf3b804d3c93f865f452c47d008a804",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "crates/babylon-attest/src/license.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          403
+        ]
+      ],
+      "manifest_sha256": "3c777b5cab85da93f40872179aa61cb0673c939995a35fae5fffb8bcf7ad37ae",
+      "observed_sha256": "3c777b5cab85da93f40872179aa61cb0673c939995a35fae5fffb8bcf7ad37ae",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "docs/06_theory/05_model_theory.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          33
+        ]
+      ],
+      "manifest_sha256": "06771bb3475cc78150aacae5aaaefa9c352b8def63d57bf9e770971d52b753d6",
+      "observed_sha256": "06771bb3475cc78150aacae5aaaefa9c352b8def63d57bf9e770971d52b753d6",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "examples/archived_peripherals/luhmann_autopoiesis_simulation.py.disabled",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          185
+        ]
+      ],
+      "manifest_sha256": "feedea68d27d997b3c282d8e8d2082628cd4b0eb4c41615432397804b929200c",
+      "observed_sha256": "feedea68d27d997b3c282d8e8d2082628cd4b0eb4c41615432397804b929200c",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/babylon60/gen_oncology_primitives.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          170
+        ]
+      ],
+      "manifest_sha256": "df8f6fdde757fb4321a270e0b6b2e9b91d8dd67884e13b238e3c6387b2dea5e3",
+      "observed_sha256": "df8f6fdde757fb4321a270e0b6b2e9b91d8dd67884e13b238e3c6387b2dea5e3",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/c5_destiladora/destiladora_schema.sql",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          59
+        ]
+      ],
+      "manifest_sha256": "0e4de5848a549b248640e4f39d9de2bbac920b506f860833cc4cdaffc61da2ef",
+      "observed_sha256": "0e4de5848a549b248640e4f39d9de2bbac920b506f860833cc4cdaffc61da2ef",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/c5_sharur/sharur_222_agentes.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          105
+        ]
+      ],
+      "manifest_sha256": "5e89100dbe2c17d9a35650284b630127f4451b33622fd5014725baf08a7a2ded",
+      "observed_sha256": "5e89100dbe2c17d9a35650284b630127f4451b33622fd5014725baf08a7a2ded",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "src/acs_bridge.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          1199
+        ]
+      ],
+      "manifest_sha256": "cf593afe2780393763889f22c1ccf40668d07fac84191b8bfaf522408f4005ef",
+      "observed_sha256": "cf593afe2780393763889f22c1ccf40668d07fac84191b8bfaf522408f4005ef",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/sequencer_spsc_harness.cpp",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          263
+        ]
+      ],
+      "manifest_sha256": "32dc9825fb90ddc69823938a667caae743ca35d2462cf489767df3e50b9bece2",
+      "observed_sha256": "32dc9825fb90ddc69823938a667caae743ca35d2462cf489767df3e50b9bece2",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/test_governance_gates.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          295
+        ]
+      ],
+      "manifest_sha256": "d01ca490a03551536644b8bbe0dc17c816ba882ea4a66c30aac983630187393a",
+      "observed_sha256": "d01ca490a03551536644b8bbe0dc17c816ba882ea4a66c30aac983630187393a",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/test_windows_terminal.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          167
+        ]
+      ],
+      "manifest_sha256": "40097232b0b8cd52cda2cfe288aa7bfa1f3158ad46a2025f2957715b95430ca3",
+      "observed_sha256": "40097232b0b8cd52cda2cfe288aa7bfa1f3158ad46a2025f2957715b95430ca3",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/bot-management/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          163
+        ]
+      ],
+      "manifest_sha256": "a223764f6270c55bbba7f38c82a715cda9d7b4cc31ea200bc3a8a23e8378f98b",
+      "observed_sha256": "a223764f6270c55bbba7f38c82a715cda9d7b4cc31ea200bc3a8a23e8378f98b",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/pages-functions/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          143
+        ]
+      ],
+      "manifest_sha256": "554c3c9ee62930772525ec87e0c1a97fc48824bb3bec21e28ba36434078dda7c",
+      "observed_sha256": "554c3c9ee62930772525ec87e0c1a97fc48824bb3bec21e28ba36434078dda7c",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/tunnel/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          192
+        ]
+      ],
+      "manifest_sha256": "696d5fe99640934a94b6facb6e3198d93dc38bfac3c3324fd817e47f620bc40d",
+      "observed_sha256": "696d5fe99640934a94b6facb6e3198d93dc38bfac3c3324fd817e47f620bc40d",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/youtube-remotion-sota/references/delivery.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "manifest_sha256": "ad8dde61a3695caa0fb9f406df51142f4e10cc793482b6392d691ad04647e073",
+      "observed_sha256": "ad8dde61a3695caa0fb9f406df51142f4e10cc793482b6392d691ad04647e073",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents/agent_32_site_playbooks_etsy.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "manifest_sha256": "3d0d7c5446768f3f0456e1bc6c470decbca77f930453f8cbb6bbc37b46101d6c",
+      "observed_sha256": "3d0d7c5446768f3f0456e1bc6c470decbca77f930453f8cbb6bbc37b46101d6c",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/cortex-telemetry/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          84
+        ]
+      ],
+      "manifest_sha256": "3af99788157d2b2d8f39c7940f4b3cf9fcee3edc6ee40e07ffe5a0707f9deb41",
+      "observed_sha256": "3af99788157d2b2d8f39c7940f4b3cf9fcee3edc6ee40e07ffe5a0707f9deb41",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/github-architect/scripts/fetch_repos_graphql.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          116
+        ]
+      ],
+      "manifest_sha256": "b7faf64c372ad76a55c29c94e89397ae61eafc0b26172adc80a282d1feaea7da",
+      "observed_sha256": "b7faf64c372ad76a55c29c94e89397ae61eafc0b26172adc80a282d1feaea7da",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/flstudio-mcp-production/examples/Stephan_Bodzin_Moog_Arp.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          85
+        ]
+      ],
+      "manifest_sha256": "ce1c8c439c6f8bbbcee55fbef53edff66b0cd72350930de03e3dcb960437ddfe",
+      "observed_sha256": "ce1c8c439c6f8bbbcee55fbef53edff66b0cd72350930de03e3dcb960437ddfe",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/workspace/rlhf-sentinel/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "manifest_sha256": "abef99ee5bf98de9fffe7fa6dacda1da07765937fde6ca1e38cad9f4a8248066",
+      "observed_sha256": "abef99ee5bf98de9fffe7fa6dacda1da07765937fde6ca1e38cad9f4a8248066",
+      "changed_since_manifest": false
+    }
+  ],
+  "tool_limitations": [
+    "No native codebase-memory graph tools were exposed in ALL_TOOLS; used targeted file reads and rg.",
+    "Audit only: no tests, compilers, runtime effects, commits or pushes.",
+    "External API reference recipes were reviewed as text; current vendor behavior was not independently verified."
+  ],
+  "tests_run": []
+}

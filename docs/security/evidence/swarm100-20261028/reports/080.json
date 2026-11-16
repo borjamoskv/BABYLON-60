@@ -1,0 +1,388 @@
+{
+  "shard": "080",
+  "findings": [
+    {
+      "title": "Consolidation deletes journal rows without saving their replacement",
+      "severity": "P1",
+      "path": "scripts/c5_cortex/autoconsolidate.py",
+      "line": 48,
+      "evidence": "JournalEntry.load returns only the ID (26-27), merge discards payloads (30-32), save is pass (34-35), then DELETE executes at 51. database.core.connect uses isolation_level=None.",
+      "trigger": "Call autoconsolidate against a nonempty journal table.",
+      "impact": "Every selected original entry is deleted with no replacement persisted; autocommit makes deletion durable even before the final commit.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "YouTube URL and output directory are interpolated into shell commands",
+      "severity": "P1",
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/youtube-analysis-pipeline/scripts/yt_audit.py",
+      "line": 17,
+      "evidence": "run_cmd uses subprocess.run(shell=True) at 9; URL is interpolated into double quoted command strings at 17, 36 and 42; argv flows directly to fetch_youtube_audit at 53-55.",
+      "trigger": "Pass a URL or output directory containing shell command substitution or a quote followed by shell syntax.",
+      "impact": "The shell executes injected commands with the invoking account privileges. Double quotes do not suppress command substitution.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Persistent retry deadlines use a clock that resets at reboot",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/transducers/pulmones_worker.py",
+      "line": 43,
+      "evidence": "Worker compares next_retry_at to time.monotonic at 43-54 and stores it at 77; producer pulmones.py:87 stores time.monotonic()+delay in SQLite.",
+      "trigger": "Reboot after queueing a task when the previous uptime was long.",
+      "impact": "Persisted deadlines remain in the previous boot clock domain and can postpone retries for the old uptime duration.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Fetching retry work does not claim rows atomically",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/transducers/pulmones_worker.py",
+      "line": 46,
+      "evidence": "SELECT at 46-55 has no lease/status update; execution happens at 110 and deletion only at 113 via a separate connection.",
+      "trigger": "Run two PulmonesWorker processes on the same database and fetch the same ripe batch before either deletes it.",
+      "impact": "Both workers execute the same queued side effect; there is no ownership claim or deduplication in this worker.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Appliance installer copies from a crate-local target directory in a workspace",
+      "severity": "P2",
+      "path": "crates/eridu-infer/scripts/setup_appliance.sh",
+      "line": 69,
+      "evidence": "REPO_DIR resolves to crates/eridu-infer at 60-61; cargo build executes there at 68 but cp expects crates/eridu-infer/target/release/eridu-infer at 69. Cargo.toml defines the root workspace; .cargo/config.toml has no target-dir override.",
+      "trigger": "Run provisioning from a clean checkout with cargo available and no crate-local prebuilt binary or CARGO_TARGET_DIR override.",
+      "impact": "Cargo places the workspace artifact in root target; cp fails under set -e after system power/network settings have already been changed.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Master ledger explicitly selects NORMAL durability despite FULL requirement",
+      "severity": "P2",
+      "path": "scripts/c5_isomorphisms/c5_logos_ethos_ship_engine.py",
+      "line": 112,
+      "evidence": "BFTMasterLedgerWAL sets PRAGMA synchronous=NORMAL at 112, immediately below comments requiring FULL for a master ledger at 110-111; .babylon60rules requires synchronous FULL.",
+      "trigger": "Use this ledger class for committed transactions and suffer OS/power failure before WAL synchronization.",
+      "impact": "The configured durability is weaker than the class contract and committed recent transactions may be lost; no crash experiment was run.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Telemetry stop cancels the worker without draining pending events",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/c5_telemetry.py",
+      "line": 57,
+      "evidence": "stop docstring promises draining at 55 but cancels at 57, awaits the cancelled worker and clears it at 62; it never awaits queue.join or consumes remaining items.",
+      "trigger": "Ingest events and immediately stop before the background worker has consumed them.",
+      "impact": "Queued events remain unprocessed when stop returns, contrary to the shutdown contract.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Attestation test passes even for blocked or failed results",
+      "severity": "P2",
+      "path": "tests/test_attestation.py",
+      "line": 24,
+      "evidence": "The test branches only print status and errors at 24-29; it has no assertion about status, receipt or signature anywhere.",
+      "trigger": "run_chaos_monad returns a failure/error dictionary without raising.",
+      "impact": "The test succeeds and can give a false regression signal for a broken attestation pipeline.",
+      "confidence": "high",
+      "kind": "example"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "src/enclave.rs",
+      "line": 341,
+      "observation": "HardwareAuthority.authorize signs only payload_digest; intent_id, action_name and target_resource are not cryptographically bound by this adapter.",
+      "hypothesis": "A consumer that treats this attestation as authority for the entire CanonicalIntent could substitute action/resource while retaining the digest.",
+      "limitation": "Targeted src search found no non-test authorize consumer; no execution bypass established."
+    },
+    {
+      "path": "scripts/c5_thermo/exergy_dashboard_server.py",
+      "line": 79,
+      "observation": "Server binds to all interfaces and /api/metrics returns full ledger rows without authentication.",
+      "hypothesis": "Ledger data may be exposed to other hosts where network access permits it.",
+      "limitation": "Data sensitivity and deployment network controls were not established."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".clinerules",
+      "status": "metadata_only",
+      "ranges": [],
+      "inventory_hash": "not_applicable",
+      "symlink_target": ".babylon60rules"
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/nul-zk/src/ast.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          62
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/c5_telemetry.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          62
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/genomics/transducer.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          183
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/transducers/pulmones_worker.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          145
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "02_EDIN_SWARMS/agents_archi/__init__.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          118
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "crates/eridu-infer/scripts/setup_appliance.sh",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          131
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "docs/06_theory/TETRADA_CAUSAL_BABYLON60.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "examples/poc_bifurcation_6_parser.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          198
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "scripts/c5_cortex/autoconsolidate.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          58
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "scripts/c5_isomorphisms/c5_logos_ethos_ship_engine.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          240
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "scripts/c5_thermo/exergy_dashboard_server.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          97
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "src/enclave.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          685
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "tests/test_attestation.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          33
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "tests/test_kernel_native_modules.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          45
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "tools/existence_gap.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          112
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/cache-reserve/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          132
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/pulumi/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          198
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/waf/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          113
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-neural-face-swap-cuadrilla/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          148
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents_registry.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          1104
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/c5-axiomatic-kernel/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          589
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/youtube-analysis-pipeline/scripts/yt_audit.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          55
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "tools/skill_library/global/github-architect/references/rubric.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          117
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "tools/ui_onboarding_gold/index.html",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          582
+        ]
+      ],
+      "inventory_hash": "match"
+    }
+  ],
+  "tool_limitations": [
+    "Native codebase graph tools absent from ALL_TOOLS; targeted text reads/search used.",
+    "Static audit only; no tests, builds, runtime processes or hardware operations executed.",
+    "External vendor reference claims were read but not independently verified; no API/version findings claimed."
+  ],
+  "tests_run": []
+}

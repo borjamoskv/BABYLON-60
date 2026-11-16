@@ -1,0 +1,704 @@
+{
+  "reviewer": "03",
+  "date": "2026-10-30",
+  "lot": 12,
+  "group": "review_trust_m0",
+  "decision": "APPROVED_WITH_EXPLICIT_SCOPE",
+  "open_actionable_findings": [],
+  "source_sha256": {
+    "01_KISH_ENGINE/babylon60/attestation/conformal_tree.py": "519f8c6c4eb3a3021b27893de5e4028e96a13415bec48a03fc97dd3104df99d1",
+    "01_KISH_ENGINE/babylon60/attestation/merkle_anchor.py": "5cba54beb0a8d463e2d6e9b50d2ebcdc3f10783210ad83702d674f88358cbbe1",
+    "tools/tamkarum_license_provisioner.py": "82122b5395b03935802e1fed43129b161a1c459cb8ec15fe40f5e36d53829662",
+    "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py": "d150a286d1267fc6afa26dd6c59d41266f40c26a428cf29885465af041a083fc"
+  },
+  "test_source_sha256": {
+    "tests/test_swarm100_lot12_s2_trust_regressions.py": "6af67ddb23f305882179f87ecc0c3ef99bf287c2858e6a806bced9a144e60c3f",
+    "tests/test_swarm100_lot12_m0_regressions.py": "06bf1ca5e14982cc89bad53d9c731a2950942a41789e59c3affd0c47456f97b0"
+  },
+  "additional_test_source_sha256": {
+    "tests/test_swarm100_round2_regressions.py": "15d7903736ed3914d3ea79d158906e9b07e79eb6a267556482d62bb341949f3e"
+  },
+  "supporting_source_sha256": {
+    "01_KISH_ENGINE/babylon60/compliance_exporter/m0_evidence_pack.py": "82dc6e8cf8c106a5c7a8c2f68b9ee188457a6d3e618968d38e83acdefc1ddd2c"
+  },
+  "harness_sha256": {
+    "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-adversarial.py": "705ec476e41ed336850af9b0c5e73b444e5d8918f8d146b4d03a6aeb5ff82830",
+    "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-regressions.py": "fc9839ce43ec056720a4c772407e4c2db40f612062e8542d5e45dbec06849da8"
+  },
+  "candidates": [
+    {
+      "candidate_id": "SW100-C0271",
+      "severity": "P1",
+      "decision": "REPRODUCED",
+      "remediation_state": "FIXED",
+      "path": "01_KISH_ENGINE/babylon60/attestation/conformal_tree.py",
+      "current_source_sha256": "519f8c6c4eb3a3021b27893de5e4028e96a13415bec48a03fc97dd3104df99d1",
+      "rationale": "The self-supplied manifest key no longer establishes trust. A caller argument or explicit environment configuration must pin the same raw Ed25519 key, and the v2 signature commits every manifest field except the signature value itself. Independently constructed signatures pass only with the external pin; foreign/absent pins, old root-only signatures, nested/unknown-field changes and altered owned-ledger data reject. Authentication without a database is explicitly limited to the signed manifest.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/attestation/conformal_tree.py",
+          "start_line": 37,
+          "end_line": 55,
+          "observation": "Canonical compact UTF-8 JSON commits the complete object excluding only sovereign_identity.ed25519_signature_b64; nonfinite values and duplicate input fields are rejected."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/attestation/conformal_tree.py",
+          "start_line": 178,
+          "end_line": 239,
+          "observation": "External key argument overrides environment; strict base64/raw key length and v2 schema/context precede full-body Ed25519 verification."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/attestation/conformal_tree.py",
+          "start_line": 241,
+          "end_line": 300,
+          "observation": "Optional ledger recomputes root and count. Hardware remains NOT_VERIFIED and require_hardware prevents overall success; verification_scope distinguishes manifest-only from manifest-and-ledger."
+        }
+      ],
+      "guards": [
+        "External pinned raw Ed25519 key",
+        "Complete v2 body signature and explicit payload context",
+        "Legacy root-only schema rejected",
+        "Strict duplicate JSON rejection",
+        "Database root/cardinality checked when supplied",
+        "Hardware cannot be promoted by matching a host UUID"
+      ],
+      "limits": [
+        "The caller/environment defines trusted key policy; custody, revocation, rotation and real-world identity proof are not established.",
+        "No database means authenticated document only.",
+        "Host metadata is informational; no hardware attestation verifier exists.",
+        "Membership-only helper and unchanged CLI presentation are not independently upgraded to a new trust contract by this review."
+      ],
+      "runtime_executed": true,
+      "runtime_scope": "Owned temporary HOME/repo/SQLite, synthetic identifiers and ephemeral software keys only. No operator keys/data, actual hardware or protected native execution, services, network, deployment or Git mutations. Regression license CLI writes only owned temporary outputs; independent controls block subprocess/network/kill before imports.",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-adversarial.py",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-adversarial.log",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-regressions.py",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-regressions.log",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-v04-regressions.log",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-ruff.log",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-runner-final-ruff.log",
+        "docs/security/evidence/swarm100-lot12-20261030/s2_trust/result.json",
+        "docs/security/evidence/swarm100-lot12-20261030/s2_trust/before-tests.log",
+        "docs/security/evidence/swarm100-lot12-20261030/s2_trust/reviewer-boolean-before.log",
+        "docs/security/evidence/swarm100-lot12-20261030/s2_trust/after-tests.log",
+        "docs/security/evidence/swarm100-lot12-20261030/m0/result.json",
+        "docs/security/evidence/swarm100-lot12-20261030/m0/before-tests.log",
+        "docs/security/evidence/swarm100-lot12-20261030/m0/after-tests.log",
+        "docs/security/evidence/swarm100-lot12-20261030/m0/related-tests.log"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0276",
+      "severity": "P1",
+      "decision": "REPRODUCED",
+      "remediation_state": "FIXED",
+      "path": "01_KISH_ENGINE/babylon60/attestation/merkle_anchor.py",
+      "current_source_sha256": "5cba54beb0a8d463e2d6e9b50d2ebcdc3f10783210ad83702d674f88358cbbe1",
+      "rationale": "Ordinary software hashing no longer emits a hardware-sealed claim or a simulated TPM signature. The object carries SOFTWARE_ONLY_UNATTESTED, an empty hardware signature and a real boolean False. Explicit hardware requirements raise before identifier access. The original false-attestation defect is fixed; implementing hardware verification remains unavailable and is not claimed as repaired functionality.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/attestation/merkle_anchor.py",
+          "start_line": 104,
+          "end_line": 133,
+          "observation": "Hardware-required request fails before identity metadata access; software measurement uses SHA-256 and returns empty signature, explicit software status and boolean False."
+        }
+      ],
+      "guards": [
+        "No simulated hardware signature",
+        "No signing-seed access for software measurement",
+        "False is a JSON/Python boolean, not a truthy string",
+        "Explicit require_hardware fails closed"
+      ],
+      "limits": [
+        "Physical identifier discovery remains metadata only and was replaced with a synthetic provider in tests.",
+        "No TPM/Secure Enclave signing or hardware verification is implemented or tested.",
+        "generate_notary_checkpoint remains outside C0276; no closure of its claims by inference."
+      ],
+      "runtime_executed": true,
+      "runtime_scope": "Owned temporary HOME/repo/SQLite, synthetic identifiers and ephemeral software keys only. No operator keys/data, actual hardware or protected native execution, services, network, deployment or Git mutations. Regression license CLI writes only owned temporary outputs; independent controls block subprocess/network/kill before imports.",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-adversarial.py",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-adversarial.log",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-regressions.py",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-regressions.log",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-v04-regressions.log",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-ruff.log",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-runner-final-ruff.log",
+        "docs/security/evidence/swarm100-lot12-20261030/s2_trust/result.json",
+        "docs/security/evidence/swarm100-lot12-20261030/s2_trust/before-tests.log",
+        "docs/security/evidence/swarm100-lot12-20261030/s2_trust/reviewer-boolean-before.log",
+        "docs/security/evidence/swarm100-lot12-20261030/s2_trust/after-tests.log",
+        "docs/security/evidence/swarm100-lot12-20261030/m0/result.json",
+        "docs/security/evidence/swarm100-lot12-20261030/m0/before-tests.log",
+        "docs/security/evidence/swarm100-lot12-20261030/m0/after-tests.log",
+        "docs/security/evidence/swarm100-lot12-20261030/m0/related-tests.log"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0432",
+      "severity": "P1",
+      "decision": "REPRODUCED",
+      "remediation_state": "FIXED",
+      "path": "tools/tamkarum_license_provisioner.py",
+      "current_source_sha256": "82122b5395b03935802e1fed43129b161a1c459cb8ec15fe40f5e36d53829662",
+      "rationale": "The publicly derivable signing fallback is removed. Missing, malformed, wrong-length and zero configured authority seeds reject before output creation; an explicit ephemeral fixture key signs the complete license body, and entitlement mutation invalidates that signature. The result describes a configured software authority rather than asserting independently authenticated issuer identity.",
+      "source_checks": [
+        {
+          "path": "tools/tamkarum_license_provisioner.py",
+          "start_line": 58,
+          "end_line": 66,
+          "observation": "An explicit 64-hex-character nonzero Ed25519 seed is required before payload generation."
+        },
+        {
+          "path": "tools/tamkarum_license_provisioner.py",
+          "start_line": 94,
+          "end_line": 116,
+          "observation": "The complete license body is signed and sealed as SIGNED_WITH_CONFIGURED_AUTHORITY."
+        },
+        {
+          "path": "tools/tamkarum_license_provisioner.py",
+          "start_line": 190,
+          "end_line": 223,
+          "observation": "CLI creates directories/files only after certificate generation has validated the configured authority."
+        }
+      ],
+      "guards": [
+        "No deterministic seed fallback",
+        "Strict configured seed validation",
+        "Whole-license software signature",
+        "Missing authority prevents CLI output creation"
+      ],
+      "limits": [
+        "Configured private key validity does not prove legal authority, key entropy, custody, hardware provenance or an externally pinned verifier identity.",
+        "Invoice/legal descriptions and CLI output collision behavior are outside C0432; no real license or invoice was issued."
+      ],
+      "runtime_executed": true,
+      "runtime_scope": "Owned temporary HOME/repo/SQLite, synthetic identifiers and ephemeral software keys only. No operator keys/data, actual hardware or protected native execution, services, network, deployment or Git mutations. Regression license CLI writes only owned temporary outputs; independent controls block subprocess/network/kill before imports.",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-adversarial.py",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-adversarial.log",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-regressions.py",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-regressions.log",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-v04-regressions.log",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-ruff.log",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-runner-final-ruff.log",
+        "docs/security/evidence/swarm100-lot12-20261030/s2_trust/result.json",
+        "docs/security/evidence/swarm100-lot12-20261030/s2_trust/before-tests.log",
+        "docs/security/evidence/swarm100-lot12-20261030/s2_trust/reviewer-boolean-before.log",
+        "docs/security/evidence/swarm100-lot12-20261030/s2_trust/after-tests.log",
+        "docs/security/evidence/swarm100-lot12-20261030/m0/result.json",
+        "docs/security/evidence/swarm100-lot12-20261030/m0/before-tests.log",
+        "docs/security/evidence/swarm100-lot12-20261030/m0/after-tests.log",
+        "docs/security/evidence/swarm100-lot12-20261030/m0/related-tests.log"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0175",
+      "severity": "P1",
+      "decision": "REPRODUCED",
+      "remediation_state": "FIXED",
+      "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+      "current_source_sha256": "d150a286d1267fc6afa26dd6c59d41266f40c26a428cf29885465af041a083fc",
+      "rationale": "The signed digest map must now cover exactly all eleven mandatory M0 content files and match a strict checksum table. Independently re-signing a pack after omitting each required entry rejects; mutating each required byte stream also rejects. Invalid maps, malformed digests, duplicate/non-UTF8 checksums and noncanonical extra paths reject. Complete packs generated from a synthetic repository remain valid. This fixes content omission without adding an external identity anchor.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+          "start_line": 810,
+          "end_line": 844,
+          "observation": "Fixed required layout contains eleven content files plus three verification metadata artifacts."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+          "start_line": 859,
+          "end_line": 906,
+          "observation": "Envelope digest/signature and checksum-file digest are verified before coverage validation."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+          "start_line": 918,
+          "end_line": 978,
+          "observation": "Coverage must equal the required content set; digest values are lowercase hex64; checksum entries are UTF-8, canonical, unique and equal to the signed map; all actual content hashes are compared."
+        }
+      ],
+      "guards": [
+        "Exact eleven-content coverage",
+        "No arbitrary digest-selected paths",
+        "Strict SHA-256 syntax",
+        "Strict checksum UTF-8/duplicates/layout",
+        "Signature/checksum metadata excluded only to avoid self-reference",
+        "Unreadable content rejects"
+      ],
+      "limits": [
+        "M0 still verifies its signature against the key supplied in its metadata. An independently re-keyed complete fixture remains accepted; external identity authentication is outside C0175.",
+        "No hostile concurrent mutation, symlink-safe snapshot, universal nested-schema validation or truth-of-observation guarantee is claimed.",
+        "The fixed layout intentionally rejects extra digest entries; future content additions require a contract update."
+      ],
+      "runtime_executed": true,
+      "runtime_scope": "Owned temporary HOME/repo/SQLite, synthetic identifiers and ephemeral software keys only. No operator keys/data, actual hardware or protected native execution, services, network, deployment or Git mutations. Regression license CLI writes only owned temporary outputs; independent controls block subprocess/network/kill before imports.",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-adversarial.py",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-adversarial.log",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-regressions.py",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-regressions.log",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-v04-regressions.log",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-ruff.log",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-runner-final-ruff.log",
+        "docs/security/evidence/swarm100-lot12-20261030/s2_trust/result.json",
+        "docs/security/evidence/swarm100-lot12-20261030/s2_trust/before-tests.log",
+        "docs/security/evidence/swarm100-lot12-20261030/s2_trust/reviewer-boolean-before.log",
+        "docs/security/evidence/swarm100-lot12-20261030/s2_trust/after-tests.log",
+        "docs/security/evidence/swarm100-lot12-20261030/m0/result.json",
+        "docs/security/evidence/swarm100-lot12-20261030/m0/before-tests.log",
+        "docs/security/evidence/swarm100-lot12-20261030/m0/after-tests.log",
+        "docs/security/evidence/swarm100-lot12-20261030/m0/related-tests.log"
+      ]
+    }
+  ],
+  "independent_controls": {
+    "count": 13,
+    "checks": [
+      {
+        "name": "external_pin_required_and_explicit_empty_does_not_fall_back",
+        "cases": 5,
+        "passed": true
+      },
+      {
+        "name": "all_signed_manifest_fields_including_unknown_nested_identity_fields",
+        "cases": 11,
+        "passed": true
+      },
+      {
+        "name": "legacy_root_signature_schema_and_duplicate_fields_rejected",
+        "cases": 5,
+        "passed": true
+      },
+      {
+        "name": "owned_sqlite_root_and_cardinality_match_then_mutation_rejected",
+        "cases": 2,
+        "passed": true
+      },
+      {
+        "name": "software_quote_negative_boolean_and_hardware_requirement_never_approved",
+        "cases": 3,
+        "passed": true
+      },
+      {
+        "name": "license_requires_explicit_software_authority_and_signs_entitlements",
+        "cases": 9,
+        "passed": true
+      },
+      {
+        "name": "real_m0_producer_complete_pack_accepted_with_fixture_key_and_repo",
+        "cases": 1,
+        "passed": true
+      },
+      {
+        "name": "each_of_eleven_required_m0_content_digests_cannot_be_omitted_even_when_resigned",
+        "cases": 11,
+        "passed": true
+      },
+      {
+        "name": "every_required_content_byte_stream_is_checked",
+        "cases": 11,
+        "passed": true
+      },
+      {
+        "name": "invalid_digest_maps_and_noncanonical_paths_rejected_before_content_hash_reads",
+        "cases": 7,
+        "passed": true
+      },
+      {
+        "name": "signed_checksum_format_duplicates_coverage_and_digest_values_rejected",
+        "cases": 8,
+        "passed": true
+      },
+      {
+        "name": "m0_external_identity_anchor_not_inferred_from_content_integrity",
+        "cases": 1,
+        "passed": true,
+        "observation": "Re-signing an otherwise complete fixture pack with another software key remains accepted: this API does not authenticate an externally pinned identity, outside C0175."
+      },
+      {
+        "name": "bounded_software_warmup_and_concurrent_valid_tampered_pairs",
+        "warmup_pairs": 3,
+        "parallel_pairs": 16,
+        "threads": 4,
+        "passed": true
+      }
+    ],
+    "software_burst": {
+      "warmup_pairs": 3,
+      "parallel_valid_tampered_pairs": 16,
+      "threads": 4,
+      "performance_claim": false
+    }
+  },
+  "validation": [
+    {
+      "performed_by": "reviewer",
+      "command": ".venv/bin/python docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-adversarial.py",
+      "result": "13 independent controls PASS; no forbidden calls; before/after source and test hashes equal",
+      "log": "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-adversarial.log"
+    },
+    {
+      "performed_by": "reviewer",
+      "command": ".venv/bin/python docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-regressions.py",
+      "result": "78 passed in 1.96s: 36 trust + 33 M0 + 9 legacy CRL/V03 controls",
+      "log": "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-regressions.log"
+    },
+    {
+      "performed_by": "reviewer",
+      "command": ".venv/bin/python docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-regressions.py --v04",
+      "result": "8 passed in 0.33s: preserved JSON-ledger integrity/V04 controls including C0177",
+      "log": "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-v04-regressions.log"
+    },
+    {
+      "performed_by": "reviewer",
+      "command": "Ruff check on four production sources, two author test files and both independent harnesses; runner checked again after adding V04 selection",
+      "result": "PASS",
+      "logs": [
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-ruff.log",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-runner-final-ruff.log"
+      ]
+    }
+  ],
+  "baseline": [
+    {
+      "performed_by": "implementation_author; log read by reviewer",
+      "result": "Trust initial 7 failures, of which 6 behavioral and 1 nonhex-seed exception-message mismatch",
+      "log": "docs/security/evidence/swarm100-lot12-20261030/s2_trust/before-tests.log",
+      "before_source_sha256": {
+        "01_KISH_ENGINE/babylon60/attestation/conformal_tree.py": "251c9da8553af921d2597ce899e5f5baabfa61412c90818a629db90cbb9694fe",
+        "01_KISH_ENGINE/babylon60/attestation/merkle_anchor.py": "cf90589a3faf04117731c693bb62a0f0486ea9ca9091af17ce915964dc170ce9",
+        "tools/tamkarum_license_provisioner.py": "312b37a43a708ef232ccedf7fbd6bc57c33c181e00fee72eba13b9d6fb2a9096"
+      }
+    },
+    {
+      "performed_by": "implementation_author; log read by reviewer",
+      "result": "M0 before 23 failed, 10 passed; eleven omitted/re-signed content digests were accepted before patch",
+      "log": "docs/security/evidence/swarm100-lot12-20261030/m0/before-tests.log",
+      "before_source_sha256": {
+        "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py": "624eb292a797ac7094c4b84357606180465b09f3b7381f5292dba44ac4484634"
+      }
+    }
+  ],
+  "resolved_review_findings": [
+    {
+      "finding": "New hardware_attestation_verified string FALSE would be truthy",
+      "detection": "Reviewer static inspection; author reproduced the failing boolean-identity assertion before correction. Reviewer did not execute the uncorrected version.",
+      "before_log": "docs/security/evidence/swarm100-lot12-20261030/s2_trust/reviewer-boolean-before.log",
+      "resolution": "Return real False boolean; reviewer independently checked it and reran author regression against final hash.",
+      "state": "FIXED"
+    }
+  ],
+  "preserved_colateral": {
+    "SW100-C0177": {
+      "remediation_state": "FIXED",
+      "basis": "Eight V04 JSON-integrity tests pass; _verify_json_ledger is byte-identical to prior committed implementation. This is V04, not CRL.",
+      "function_sha256": "caa72b84130a0e350bacfb268e21f4a25d7b4a190787065d661ccd5e5575c201"
+    },
+    "additional_CRL_controls": {
+      "cases": 9,
+      "basis": "V03 malformed/missing/schema-invalid CRL and signed revoked certificate controls pass; verify_compliance_certificate remains byte-identical.",
+      "function_sha256": "e83b47c2014e87a1b389aa0432356345625d6b2a8a61ee89a7128bf4b14d3cbb"
+    }
+  },
+  "consumer_inspection": [
+    {
+      "path": "01_KISH_ENGINE/babylon60/cli/bounty_cli.py",
+      "start_line": 132,
+      "end_line": 167,
+      "observation": "Existing CLI calls verify_manifest without key argument; environment pin is the supported configuration channel; exceptions or false overall_valid cause nonzero result. CLI wording is unchanged."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py",
+      "start_line": 305,
+      "end_line": 325,
+      "observation": "Certificate attaches the returned hardware-anchor object; no new hardware signer is invoked."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+      "start_line": 179,
+      "end_line": 188,
+      "observation": "AL3 attaches quote before persistence; the returned object now explicitly denies hardware verification. AL3 policy redesign is outside this review."
+    },
+    {
+      "path": "scripts/c5_l1_ledger/seal_bounty_aeon.py",
+      "observed_sha256": "a3686548681ee16f73a088d06bd67443d73272afe868fc5e9c381e69d40cc6b0",
+      "start_line": 144,
+      "end_line": 185,
+      "observation": "Scoped current-source inspection: v2 schema/payload context precede signature, complete artifact is canonicalized, only signature value is then added before JSON output. Full identity lifecycle is reviewed separately; no producer execution by this reviewer."
+    }
+  ],
+  "discovery": {
+    "project": "babylon-60",
+    "graph_first": true,
+    "initial_generation": "2026-10-30T00:09:04Z",
+    "coverage": "Graph identified functions/callers. Changed paths were read directly in scoped chunks. Final whole-repository reindex aborted while concurrent implementation edits were in progress; prior graph preserved, and no final freshness claim is made. Final direct-source/test hashes were stable across reviewer executions.",
+    "index_attempt": "2026-10-30T01:47:00Z to 2026-10-30T01:47:08Z, aborted_previous_preserved"
+  },
+  "runtime_executed": true,
+  "protected_runtime_executed": false,
+  "runtime_scope": "Owned temporary HOME/repo/SQLite, synthetic identifiers and ephemeral software keys only. No operator keys/data, actual hardware or protected native execution, services, network, deployment or Git mutations. Regression license CLI writes only owned temporary outputs; independent controls block subprocess/network/kill before imports.",
+  "limitations": [
+    "Approval applies only to the four named defect contracts and frozen source hashes. No closure of other findings in the same modules is inferred.",
+    "Ephemeral Ed25519 signatures are software fixture evidence, not hardware or deployed authority attestation.",
+    "Key configuration is assumed to be supplied by a trusted caller/environment; key lifecycle, real-world authority and external M0 signer trust remain outside these IDs.",
+    "No network, operator identity, real license, services, protected runtime, hardware stress or power-loss test was performed.",
+    "Existing package import side effects were bypassed for independent adversarial controls; regression runner establishes synthetic HOME/configuration and disables dotenv/native extension loading before imports."
+  ],
+  "evidence_paths": [
+    "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-adversarial.py",
+    "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-adversarial.log",
+    "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-regressions.py",
+    "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-regressions.log",
+    "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-v04-regressions.log",
+    "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-ruff.log",
+    "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-runner-final-ruff.log",
+    "docs/security/evidence/swarm100-lot12-20261030/s2_trust/result.json",
+    "docs/security/evidence/swarm100-lot12-20261030/s2_trust/before-tests.log",
+    "docs/security/evidence/swarm100-lot12-20261030/s2_trust/reviewer-boolean-before.log",
+    "docs/security/evidence/swarm100-lot12-20261030/s2_trust/after-tests.log",
+    "docs/security/evidence/swarm100-lot12-20261030/m0/result.json",
+    "docs/security/evidence/swarm100-lot12-20261030/m0/before-tests.log",
+    "docs/security/evidence/swarm100-lot12-20261030/m0/after-tests.log",
+    "docs/security/evidence/swarm100-lot12-20261030/m0/related-tests.log"
+  ],
+  "evidence_sha256": {
+    "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-adversarial.py": "705ec476e41ed336850af9b0c5e73b444e5d8918f8d146b4d03a6aeb5ff82830",
+    "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-adversarial.log": "c34fe6315362e5e7f85dd31b227204ed92909353103672d9e010abbe59d5e9d7",
+    "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-regressions.py": "fc9839ce43ec056720a4c772407e4c2db40f612062e8542d5e45dbec06849da8",
+    "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-regressions.log": "880a780a9b939d48d15e536ee3b2897cf0f40d5c31e17c2670522642e907f48b",
+    "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-v04-regressions.log": "d9b6e5c02b23d964e94cf4d93bb0f8f073c61752727e64fbe4ad1c14bb5552f8",
+    "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-runner-final-ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "docs/security/evidence/swarm100-lot12-20261030/s2_trust/result.json": "43da2b5ec55acef538a59137bfda53840fdfe8e550c00ad8c66aec8533f15552",
+    "docs/security/evidence/swarm100-lot12-20261030/s2_trust/before-tests.log": "4cd46cf80ca691b85f5aa864ab91e9897de9a4fac90c09e669b7d5236d0bf01b",
+    "docs/security/evidence/swarm100-lot12-20261030/s2_trust/reviewer-boolean-before.log": "ad8e3d79a2e0296fc08763e8b606a5192926acd3beba5736e2412b109e9a6359",
+    "docs/security/evidence/swarm100-lot12-20261030/s2_trust/after-tests.log": "45856908faef3bf02edb86a8f31cf0c86f4f75c42d175d669821d99d302fb027",
+    "docs/security/evidence/swarm100-lot12-20261030/m0/result.json": "cfbd87867b8ecdb7646f84f707c397b878ed3539aece55cf2e78967b2bbebf38",
+    "docs/security/evidence/swarm100-lot12-20261030/m0/before-tests.log": "3fa5d9b1d7b9d0a071ae7a85783723e11c8395b0a9df44e9c16d18a7d4dba816",
+    "docs/security/evidence/swarm100-lot12-20261030/m0/after-tests.log": "1fca5689568c86237e02dc84dece0d2dfd79efea808b0b6fbd38dd4524374045",
+    "docs/security/evidence/swarm100-lot12-20261030/m0/related-tests.log": "22e9f0101bbcbc1ec2cc726a7706ec54a78474ec20e6e6de8605b29db33bb4c7"
+  },
+  "final_hashes_stable": true,
+  "per_id": {
+    "SW100-C0271": {
+      "state": "FIXED",
+      "decision": "REPRODUCED",
+      "path": "01_KISH_ENGINE/babylon60/attestation/conformal_tree.py",
+      "current_source_sha256": "519f8c6c4eb3a3021b27893de5e4028e96a13415bec48a03fc97dd3104df99d1",
+      "rationale": "The self-supplied manifest key no longer establishes trust. A caller argument or explicit environment configuration must pin the same raw Ed25519 key, and the v2 signature commits every manifest field except the signature value itself. Independently constructed signatures pass only with the external pin; foreign/absent pins, old root-only signatures, nested/unknown-field changes and altered owned-ledger data reject. Authentication without a database is explicitly limited to the signed manifest.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/attestation/conformal_tree.py",
+          "start_line": 37,
+          "end_line": 55,
+          "observation": "Canonical compact UTF-8 JSON commits the complete object excluding only sovereign_identity.ed25519_signature_b64; nonfinite values and duplicate input fields are rejected."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/attestation/conformal_tree.py",
+          "start_line": 178,
+          "end_line": 239,
+          "observation": "External key argument overrides environment; strict base64/raw key length and v2 schema/context precede full-body Ed25519 verification."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/attestation/conformal_tree.py",
+          "start_line": 241,
+          "end_line": 300,
+          "observation": "Optional ledger recomputes root and count. Hardware remains NOT_VERIFIED and require_hardware prevents overall success; verification_scope distinguishes manifest-only from manifest-and-ledger."
+        }
+      ],
+      "guards": [
+        "External pinned raw Ed25519 key",
+        "Complete v2 body signature and explicit payload context",
+        "Legacy root-only schema rejected",
+        "Strict duplicate JSON rejection",
+        "Database root/cardinality checked when supplied",
+        "Hardware cannot be promoted by matching a host UUID"
+      ],
+      "limits": [
+        "The caller/environment defines trusted key policy; custody, revocation, rotation and real-world identity proof are not established.",
+        "No database means authenticated document only.",
+        "Host metadata is informational; no hardware attestation verifier exists.",
+        "Membership-only helper and unchanged CLI presentation are not independently upgraded to a new trust contract by this review."
+      ],
+      "runtime_executed": true,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-adversarial.py",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-adversarial.log",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-regressions.py",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-regressions.log",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-v04-regressions.log",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-ruff.log",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-runner-final-ruff.log",
+        "docs/security/evidence/swarm100-lot12-20261030/s2_trust/result.json",
+        "docs/security/evidence/swarm100-lot12-20261030/s2_trust/before-tests.log",
+        "docs/security/evidence/swarm100-lot12-20261030/s2_trust/reviewer-boolean-before.log",
+        "docs/security/evidence/swarm100-lot12-20261030/s2_trust/after-tests.log",
+        "docs/security/evidence/swarm100-lot12-20261030/m0/result.json",
+        "docs/security/evidence/swarm100-lot12-20261030/m0/before-tests.log",
+        "docs/security/evidence/swarm100-lot12-20261030/m0/after-tests.log",
+        "docs/security/evidence/swarm100-lot12-20261030/m0/related-tests.log"
+      ]
+    },
+    "SW100-C0276": {
+      "state": "FIXED",
+      "decision": "REPRODUCED",
+      "path": "01_KISH_ENGINE/babylon60/attestation/merkle_anchor.py",
+      "current_source_sha256": "5cba54beb0a8d463e2d6e9b50d2ebcdc3f10783210ad83702d674f88358cbbe1",
+      "rationale": "Ordinary software hashing no longer emits a hardware-sealed claim or a simulated TPM signature. The object carries SOFTWARE_ONLY_UNATTESTED, an empty hardware signature and a real boolean False. Explicit hardware requirements raise before identifier access. The original false-attestation defect is fixed; implementing hardware verification remains unavailable and is not claimed as repaired functionality.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/attestation/merkle_anchor.py",
+          "start_line": 104,
+          "end_line": 133,
+          "observation": "Hardware-required request fails before identity metadata access; software measurement uses SHA-256 and returns empty signature, explicit software status and boolean False."
+        }
+      ],
+      "guards": [
+        "No simulated hardware signature",
+        "No signing-seed access for software measurement",
+        "False is a JSON/Python boolean, not a truthy string",
+        "Explicit require_hardware fails closed"
+      ],
+      "limits": [
+        "Physical identifier discovery remains metadata only and was replaced with a synthetic provider in tests.",
+        "No TPM/Secure Enclave signing or hardware verification is implemented or tested.",
+        "generate_notary_checkpoint remains outside C0276; no closure of its claims by inference."
+      ],
+      "runtime_executed": true,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-adversarial.py",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-adversarial.log",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-regressions.py",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-regressions.log",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-v04-regressions.log",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-ruff.log",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-runner-final-ruff.log",
+        "docs/security/evidence/swarm100-lot12-20261030/s2_trust/result.json",
+        "docs/security/evidence/swarm100-lot12-20261030/s2_trust/before-tests.log",
+        "docs/security/evidence/swarm100-lot12-20261030/s2_trust/reviewer-boolean-before.log",
+        "docs/security/evidence/swarm100-lot12-20261030/s2_trust/after-tests.log",
+        "docs/security/evidence/swarm100-lot12-20261030/m0/result.json",
+        "docs/security/evidence/swarm100-lot12-20261030/m0/before-tests.log",
+        "docs/security/evidence/swarm100-lot12-20261030/m0/after-tests.log",
+        "docs/security/evidence/swarm100-lot12-20261030/m0/related-tests.log"
+      ]
+    },
+    "SW100-C0432": {
+      "state": "FIXED",
+      "decision": "REPRODUCED",
+      "path": "tools/tamkarum_license_provisioner.py",
+      "current_source_sha256": "82122b5395b03935802e1fed43129b161a1c459cb8ec15fe40f5e36d53829662",
+      "rationale": "The publicly derivable signing fallback is removed. Missing, malformed, wrong-length and zero configured authority seeds reject before output creation; an explicit ephemeral fixture key signs the complete license body, and entitlement mutation invalidates that signature. The result describes a configured software authority rather than asserting independently authenticated issuer identity.",
+      "source_checks": [
+        {
+          "path": "tools/tamkarum_license_provisioner.py",
+          "start_line": 58,
+          "end_line": 66,
+          "observation": "An explicit 64-hex-character nonzero Ed25519 seed is required before payload generation."
+        },
+        {
+          "path": "tools/tamkarum_license_provisioner.py",
+          "start_line": 94,
+          "end_line": 116,
+          "observation": "The complete license body is signed and sealed as SIGNED_WITH_CONFIGURED_AUTHORITY."
+        },
+        {
+          "path": "tools/tamkarum_license_provisioner.py",
+          "start_line": 190,
+          "end_line": 223,
+          "observation": "CLI creates directories/files only after certificate generation has validated the configured authority."
+        }
+      ],
+      "guards": [
+        "No deterministic seed fallback",
+        "Strict configured seed validation",
+        "Whole-license software signature",
+        "Missing authority prevents CLI output creation"
+      ],
+      "limits": [
+        "Configured private key validity does not prove legal authority, key entropy, custody, hardware provenance or an externally pinned verifier identity.",
+        "Invoice/legal descriptions and CLI output collision behavior are outside C0432; no real license or invoice was issued."
+      ],
+      "runtime_executed": true,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-adversarial.py",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-adversarial.log",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-regressions.py",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-regressions.log",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-v04-regressions.log",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-ruff.log",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-runner-final-ruff.log",
+        "docs/security/evidence/swarm100-lot12-20261030/s2_trust/result.json",
+        "docs/security/evidence/swarm100-lot12-20261030/s2_trust/before-tests.log",
+        "docs/security/evidence/swarm100-lot12-20261030/s2_trust/reviewer-boolean-before.log",
+        "docs/security/evidence/swarm100-lot12-20261030/s2_trust/after-tests.log",
+        "docs/security/evidence/swarm100-lot12-20261030/m0/result.json",
+        "docs/security/evidence/swarm100-lot12-20261030/m0/before-tests.log",
+        "docs/security/evidence/swarm100-lot12-20261030/m0/after-tests.log",
+        "docs/security/evidence/swarm100-lot12-20261030/m0/related-tests.log"
+      ]
+    },
+    "SW100-C0175": {
+      "state": "FIXED",
+      "decision": "REPRODUCED",
+      "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+      "current_source_sha256": "d150a286d1267fc6afa26dd6c59d41266f40c26a428cf29885465af041a083fc",
+      "rationale": "The signed digest map must now cover exactly all eleven mandatory M0 content files and match a strict checksum table. Independently re-signing a pack after omitting each required entry rejects; mutating each required byte stream also rejects. Invalid maps, malformed digests, duplicate/non-UTF8 checksums and noncanonical extra paths reject. Complete packs generated from a synthetic repository remain valid. This fixes content omission without adding an external identity anchor.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+          "start_line": 810,
+          "end_line": 844,
+          "observation": "Fixed required layout contains eleven content files plus three verification metadata artifacts."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+          "start_line": 859,
+          "end_line": 906,
+          "observation": "Envelope digest/signature and checksum-file digest are verified before coverage validation."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+          "start_line": 918,
+          "end_line": 978,
+          "observation": "Coverage must equal the required content set; digest values are lowercase hex64; checksum entries are UTF-8, canonical, unique and equal to the signed map; all actual content hashes are compared."
+        }
+      ],
+      "guards": [
+        "Exact eleven-content coverage",
+        "No arbitrary digest-selected paths",
+        "Strict SHA-256 syntax",
+        "Strict checksum UTF-8/duplicates/layout",
+        "Signature/checksum metadata excluded only to avoid self-reference",
+        "Unreadable content rejects"
+      ],
+      "limits": [
+        "M0 still verifies its signature against the key supplied in its metadata. An independently re-keyed complete fixture remains accepted; external identity authentication is outside C0175.",
+        "No hostile concurrent mutation, symlink-safe snapshot, universal nested-schema validation or truth-of-observation guarantee is claimed.",
+        "The fixed layout intentionally rejects extra digest entries; future content additions require a contract update."
+      ],
+      "runtime_executed": true,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-adversarial.py",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-adversarial.log",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-regressions.py",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-regressions.log",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-v04-regressions.log",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-ruff.log",
+        "docs/security/evidence/swarm100-lot12-20261030/review_trust_m0/independent-runner-final-ruff.log",
+        "docs/security/evidence/swarm100-lot12-20261030/s2_trust/result.json",
+        "docs/security/evidence/swarm100-lot12-20261030/s2_trust/before-tests.log",
+        "docs/security/evidence/swarm100-lot12-20261030/s2_trust/reviewer-boolean-before.log",
+        "docs/security/evidence/swarm100-lot12-20261030/s2_trust/after-tests.log",
+        "docs/security/evidence/swarm100-lot12-20261030/m0/result.json",
+        "docs/security/evidence/swarm100-lot12-20261030/m0/before-tests.log",
+        "docs/security/evidence/swarm100-lot12-20261030/m0/after-tests.log",
+        "docs/security/evidence/swarm100-lot12-20261030/m0/related-tests.log"
+      ]
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "source_sha256": "0ed86cc1484873c06ce37407766c8490b89a1906906bd19af7e27c8a8a0ee855",
+  "input_size": 4194305,
+  "operator_runtime_executed": false,
+  "generator": "SUCCESS",
+  "verifier": "ValueError: artifact is not a bounded regular file"
+}

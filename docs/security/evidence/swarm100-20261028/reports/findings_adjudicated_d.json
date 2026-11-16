@@ -1,0 +1,108 @@
+{
+  "lead": "d",
+  "adjudications": [
+    {
+      "finding": {
+        "title": "License authority falls back to a publicly derivable signing key",
+        "severity": "P1",
+        "path": "tools/tamkarum_license_provisioner.py",
+        "line": 97,
+        "evidence": "Absent or wrong-length BABYLON_LICENSE_ED25519_SEED falls back to SHA-256 of a source-code literal (98-102), then output is labeled VALID_AUTHENTICATED_LICENSE (115).",
+        "trigger": "Generate a certificate without an explicitly configured valid signing seed.",
+        "impact": "Anyone with this source can derive the identical authority key and forge certificates signed with the default key. No runtime verifier consumer was established; finding applies to issued certificate authenticity.",
+        "confidence": "high",
+        "kind": "runtime"
+      },
+      "decision": "retained",
+      "source_checks": "CLI main at tools/tamkarum_license_provisioner.py:207 and onboarding daemon at scripts/zero_touch_onboarding_daemon.py:114 call issuer. Lines97-115 choose a source-derived seed and label output authenticated. No production pinned-key verifier established.",
+      "scope": "Retained P1 for issued-certificate authenticity; no entitlement-enforcement bypass asserted.",
+      "tests_run": []
+    },
+    {
+      "finding": {
+        "title": "Consolidation discards divergent same-name master ledgers",
+        "severity": "P1",
+        "path": "scripts/c5_cortex/consolidate_dbs.py",
+        "line": 70,
+        "evidence": "_process_master_db returns True when destination already exists (lines 33-35); caller then unconditionally calls _purge_db_file.",
+        "trigger": "A master ledger exists in ~/.babylon60/dbs and the repository contains a different ledger with the same basename.",
+        "impact": "Source ledger and sidecars are deleted without comparing, merging, or preserving its records.",
+        "confidence": "high",
+        "kind": "runtime"
+      },
+      "decision": "retained",
+      "source_checks": "Read consolidate_dbs.py:26-35 and50-82. Main calls consolidate_dbs; existing destination returns True; caller always invokes purge at70, no equality/content/backup guard.",
+      "scope": "Retained P1: divergent same-name source loss on explicit local CLI execution.",
+      "tests_run": []
+    },
+    {
+      "finding": {
+        "title": "Copying only SQLite main file loses WAL commits",
+        "severity": "P1",
+        "path": "scripts/c5_cortex/consolidate_dbs.py",
+        "line": 32,
+        "evidence": "shutil.copy2 copies only db_path; _purge_db_file unlinks its -wal and -shm at lines 41-42.",
+        "trigger": "Consolidate a WAL-mode master ledger with committed pages still in its WAL.",
+        "impact": "Central copy omits committed transactions, then the source WAL carrying them is removed.",
+        "confidence": "high",
+        "kind": "runtime"
+      },
+      "decision": "retained",
+      "source_checks": "Read consolidate_dbs.py:30-42 and63-70. Only main database copied; caller removes main and WAL/SHM. No SQLite backup API, checkpoint or writer exclusion.",
+      "scope": "Retained P1 conditional on committed live WAL; no destructive reproduction executed.",
+      "tests_run": []
+    },
+    {
+      "finding": {
+        "title": "Extension purge accepts directory traversal as extension ID",
+        "severity": "P1",
+        "path": "tools/skill_library/global/c5-browser-forensics-and-extension-triage/scripts/browser_forensics.py",
+        "line": 171,
+        "evidence": "Only nonempty input is checked (158-161); os.path.join(profile, Extensions, ext_id) is passed to shutil.rmtree (171-173), also for settings paths (179-181).",
+        "trigger": "Invoke purge --id ../.. or provide an absolute directory as --id.",
+        "impact": "Deletion escapes the extension directory and can recursively delete the browser root or another writable directory.",
+        "confidence": "high",
+        "kind": "runtime"
+      },
+      "decision": "retained",
+      "source_checks": "Read browser_forensics.py:157-181 and targeted dispatcher at271. Nonempty ID alone is checked; os.path.join passes absolute or traversal target to rmtree; no containment guard.",
+      "scope": "Retained P1 local destructive CLI input validation; not a remote entrypoint claim.",
+      "tests_run": []
+    },
+    {
+      "finding": {
+        "title": "Native Hamming batch accepts buffers shorter than its stride",
+        "severity": "P1",
+        "path": "01_KISH_ENGINE/babylon60/transducers/void_vec.py",
+        "line": 88,
+        "evidence": "flat_batch joins arbitrary byte strings; q_len alone is passed as the native stride without validating each length. Cross-file utils/void_accel.c:28,34-35 and 58,64-65 read each target at i*len.",
+        "trigger": "A compatible native library is loaded and a batch member is shorter than query.",
+        "impact": "Native code reads outside the provided batch buffer; malformed input can crash the process or compute distances from unrelated memory. Native-library loading was not exercised.",
+        "confidence": "high",
+        "kind": "runtime"
+      },
+      "decision": "retained",
+      "source_checks": "Read void_vec.py:48-92,119-131 and utils/void_accel.c:18-79. Public batch joins variable-length buffers and passes query length as stride. C reads count*len. Loader requires compatible .so beside transducers module; build provenance not established.",
+      "scope": "Retained P1 conditional native-memory safety defect. No native load/PoC executed; scalar-only execution is not affected.",
+      "tests_run": []
+    },
+    {
+      "decision": "new_confirmed_static",
+      "severity": "P1",
+      "path": "01_KISH_ENGINE/babylon60/utils/void_accel.c",
+      "line": 32,
+      "title": "SIMD loop bound underflows for short equal-length vectors",
+      "trigger": "Compatible NEON accelerator receives len <16, or AVX512 accelerator len<64, including equal-length query and batch.",
+      "evidence": "size_t len is unsigned; j<=len-16 / j<=len-64 underflows before comparison and enters vector load at j=0.",
+      "impact": "Out-of-bounds reads and potential crash even without batch length mismatch.",
+      "confidence": "high",
+      "kind": "runtime",
+      "limitation": "Native library compilation/loading and exact artifact provenance not verified; no runtime PoC.",
+      "tests_run": []
+    }
+  ],
+  "tool_limitations": [
+    "Graph tools unavailable.",
+    "Static independent source checks; no tests or effects executed."
+  ]
+}

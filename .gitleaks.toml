@@ -25,6 +25,8 @@ commits = [
   "bc8b2bc9c2e3df9f46c8335b76d47480d22c38a4",
   "ded6cbc98e3ab4e25f20aee961c1385974992654",
   "005a854c28603a6430767cf1de0310a7bbf057dc",
+  # Fixture sintética sk-proj-FAKE_ en test_f4_runner_and_analysis.py (acortada en 5d9ebd1b)
+  "3d4e63dfb30270c204c2f02a4bb31ca01bd3cc15",
 ]
 regexes = [
   '''\b[0-9a-fA-F]{40}\b''',
@@ -76,6 +78,12 @@ id = "generic-api-key"
 description = "Digests SHA-256 de archivos en evidencia JSON (claves como keys.py, token_*.py)"
 condition = "AND"
 paths = ['''docs/security/evidence/.+\.json$''']
+regexes = ['''^[0-9a-f]{64}$''']
+
+[[rules.allowlists]]
+description = "Digests SHA-256 de archivos en manifiesto de release (claves como tests/*key*.py)"
+condition = "AND"
+paths = ['''^RELEASE_MANIFEST\.json$''']
 regexes = ['''^[0-9a-f]{64}$''']
 
 [[rules.allowlists]]

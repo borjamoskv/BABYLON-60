@@ -1,0 +1,16 @@
+{
+  "git_head": "28257bd74fce31446b0350d094e9dab148a1aea7",
+  "source_sha256": {
+    "01_KISH_ENGINE/babylon60/transducers/c5_mail_transducer.py": "f0b8bb74745c4b68221c8b5558c1c5d3b35072774c6841bebc7867a1c09c660f",
+    "tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py": "002d35e9e34b1cbd4e2a970d96a33e833500c23b74098de2937991f4bd6967c7",
+    "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py": "002d35e9e34b1cbd4e2a970d96a33e833500c23b74098de2937991f4bd6967c7",
+    "tools/tamkarum_attestation_engine.py": "58a4b019757f70af13e1d9dee6d73212356216f713f60a7be9bb9e4050ff29b2"
+  },
+  "production_scope": [
+    "01_KISH_ENGINE/babylon60/transducers/c5_mail_transducer.py",
+    "tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "tools/tamkarum_attestation_engine.py"
+  ],
+  "tests_sha256": "b4eadcda38e26bbf8ec47ee703d13faa3074bbdd4c7e0a5261b396ca032bde70"
+}

@@ -1,0 +1,18 @@
+{
+  "command": [
+    "uv",
+    "run",
+    "--locked",
+    "--no-sync",
+    "ruff",
+    "check",
+    "01_KISH_ENGINE/babylon60/transducers/c5_mail_transducer.py",
+    "tools/tamkarum_attestation_engine.py",
+    "tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "tests/test_swarm100_lot1_regressions.py"
+  ],
+  "exit_code": 0,
+  "log": "docs/security/evidence/swarm100-lot1-20261028/ruff.log",
+  "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+}

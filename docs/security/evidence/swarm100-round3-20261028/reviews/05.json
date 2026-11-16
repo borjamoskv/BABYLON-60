@@ -1,0 +1,1108 @@
+{
+  "reviewer": "05",
+  "candidates": [
+    {
+      "candidate_id": "SW100-C0046",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "rationale": "The current delete path renames the live target into quarantine before either budget persistence or the first deletion WAL intent. A process crash or a propagated persistence failure in that interval leaves an object whose recovery is rejected for absent intent. This is a recovery/availability gap; the object is retained rather than proven destroyed. No crash or native filesystem operation was executed.",
+      "guards": [
+        "Epoch/effect/nonzero-nonce and budget checks precede rename, but do not durably describe the quarantine move.",
+        "Recovery deliberately requires a matching durable intent; that prevents false receipts but makes this pre-intent state unrecoverable through this API."
+      ],
+      "source_checks": [
+        {
+          "path": "src/secure_fs.rs",
+          "start_line": 996,
+          "end_line": 1028,
+          "observation": "Backend quarantine is an actual confined rename, not only a prepared name."
+        },
+        {
+          "path": "src/secure_fs.rs",
+          "start_line": 2120,
+          "end_line": 2145,
+          "observation": "Rename and verification occur before budget append and AttemptReserved WAL append."
+        },
+        {
+          "path": "src/secure_fs.rs",
+          "start_line": 2322,
+          "end_line": 2341,
+          "observation": "Recovery fails immediately if the nonce lacks a WAL record."
+        }
+      ],
+      "runtime_executed": false,
+      "path": "src/secure_fs.rs",
+      "current_source_sha256": "9d34f7d50683b237b0eb7705721738a6595ea6661d4ed85d6fce5ee9cdb564bf",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/05-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0047",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "rationale": "secure_delete_scoped accepts tx_nonce independently from auth.nonce, derives the quarantine name from the former and persists the latter. Recovery reconstructs a name from its WAL nonce; with distinct values and a failed delete it probes the wrong object. Existing inspected callers commonly pass the same nonce, limiting the finding to the public API's unconstrained input contract.",
+      "guards": [
+        "auth.nonce must be nonzero and unused; no equality or derivation check binds tx_nonce to it.",
+        "Recovery binds device/inode/pre-hash to its WAL record but has no stored quarantine basename."
+      ],
+      "source_checks": [
+        {
+          "path": "src/secure_fs.rs",
+          "start_line": 2068,
+          "end_line": 2075,
+          "observation": "Public signature accepts two separately supplied identities."
+        },
+        {
+          "path": "src/secure_fs.rs",
+          "start_line": 2101,
+          "end_line": 2144,
+          "observation": "Nonzero/replay checks use auth.nonce; quarantine name uses tx_nonce; WAL uses auth.nonce."
+        },
+        {
+          "path": "src/secure_fs.rs",
+          "start_line": 2342,
+          "end_line": 2371,
+          "observation": "Recovery derives del_<nonce> and fails ambiguously if that name is absent."
+        },
+        {
+          "path": "tests/omega_mediation_campaign.rs",
+          "start_line": 450,
+          "end_line": 456,
+          "observation": "Inspected consumer supplies auth.nonce as tx_nonce, but this convention is not enforced in the API."
+        }
+      ],
+      "runtime_executed": false,
+      "path": "src/secure_fs.rs",
+      "current_source_sha256": "9d34f7d50683b237b0eb7705721738a6595ea6661d4ed85d6fce5ee9cdb564bf",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/05-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0052",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "rationale": "Budget usage is loaded at construction and then only changed in each instance's local map. The hybrid flock serializes effects and refreshes nonce/WAL state, but never reloads .budget_usage.bin. Two already-created instances with a one-effect policy and distinct authorized nonces can therefore each authorize against their own zero count. This is static cross-instance accounting analysis; no concurrent or native effects were run.",
+      "guards": [
+        "A process-shared flock prevents overlapping execution, but cannot make the separately cached usage maps coherent.",
+        "Policy and target checks exist and are mandatory; the issue assumes valid provisioning in both instances."
+      ],
+      "source_checks": [
+        {
+          "path": "src/secure_fs.rs",
+          "start_line": 1352,
+          "end_line": 1382,
+          "observation": "Constructor loads usage map before the normal hybrid-gate refresh."
+        },
+        {
+          "path": "src/secure_fs.rs",
+          "start_line": 1392,
+          "end_line": 1429,
+          "observation": "Shared flock surrounds refresh and execution."
+        },
+        {
+          "path": "src/secure_fs.rs",
+          "start_line": 1434,
+          "end_line": 1480,
+          "observation": "Refresh reloads consumed nonces and effect WAL only."
+        },
+        {
+          "path": "src/secure_fs.rs",
+          "start_line": 1618,
+          "end_line": 1696,
+          "observation": "Authorization consults cached usage, and commit updates that map then appends durable usage."
+        }
+      ],
+      "runtime_executed": false,
+      "path": "src/secure_fs.rs",
+      "current_source_sha256": "9d34f7d50683b237b0eb7705721738a6595ea6661d4ed85d6fce5ee9cdb564bf",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/05-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0053",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "rationale": "Mutation reserves its effect WAL, performs the backend effect, and only then records budget usage. If the process stops before that accounting append, restart reconstructs usage without the successful effect. Reconciliation can recognize matching inode/post-hash and append OutcomeKnown without restoring the missing charge. The WAL cannot attribute that charge because it stores neither authority_id nor effect byte count. No crash injection or runtime execution was performed.",
+      "guards": [
+        "Durable AttemptReserved prevents silent retry of the same nonce; it does not charge subsequent distinct-nonce effects.",
+        "Reconciliation verifies physical identity/hash before confirming, but does not reconcile budget accounting."
+      ],
+      "source_checks": [
+        {
+          "path": "src/secure_fs.rs",
+          "start_line": 459,
+          "end_line": 478,
+          "observation": "WAL fields omit authority identity and charged byte count."
+        },
+        {
+          "path": "src/secure_fs.rs",
+          "start_line": 2254,
+          "end_line": 2295,
+          "observation": "Mutation execution precedes commit_budget_usage."
+        },
+        {
+          "path": "src/secure_fs.rs",
+          "start_line": 1914,
+          "end_line": 1931,
+          "observation": "Matching post-state leads directly to OutcomeKnown without budget repair."
+        },
+        {
+          "path": "src/secure_fs.rs",
+          "start_line": 1352,
+          "end_line": 1367,
+          "observation": "Restart reconstructs budget only from .budget_usage.bin."
+        }
+      ],
+      "runtime_executed": false,
+      "path": "src/secure_fs.rs",
+      "current_source_sha256": "9d34f7d50683b237b0eb7705721738a6595ea6661d4ed85d6fce5ee9cdb564bf",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/05-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0292",
+      "decision": "ALREADY_FIXED",
+      "severity": "P1",
+      "remediation_state": "FIXED",
+      "rationale": "The current verifier explicitly rejects a file whose content cannot be parsed as JSON; it no longer accepts a Markdown root marker. A bounded pure-Python check of the current source definitions returned False for the original arbitrary-root Markdown fixture. CLI behavior still maps that False to failure. This verifies the specific old acceptance path, not package initialization or integrity coverage of all crystal fields.",
+      "guards": [
+        "JSON object and statement schema checks precede Merkle comparison.",
+        "The verifier now documents that thesis/author/justification/Markdown are outside the legacy commitment."
+      ],
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/autodidact/crystal_compiler.py",
+          "start_line": 194,
+          "end_line": 225,
+          "observation": "Markdown parse failure returns False and dict shape is checked."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/cli/main_dispatcher.py",
+          "start_line": 663,
+          "end_line": 676,
+          "observation": "CLI prints success only for a True verifier result."
+        },
+        {
+          "path": "tests/test_swarm100_round2_regressions.py",
+          "start_line": 308,
+          "end_line": 311,
+          "observation": "Existing regression expresses the original Markdown-root rejection case."
+        }
+      ],
+      "runtime_executed": true,
+      "path": "01_KISH_ENGINE/babylon60/autodidact/crystal_compiler.py",
+      "current_source_sha256": "bd2a08e1e421690740a95743af291b37706129ed5634a9d554a0f18c8723abbe",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/05-source-checks.json",
+        "docs/security/evidence/swarm100-round3-20261028/05-pure-checks.py",
+        "docs/security/evidence/swarm100-round3-20261028/05-pure-checks-results.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0293",
+      "decision": "ALREADY_FIXED",
+      "severity": "P2",
+      "remediation_state": "FIXED",
+      "rationale": "Both producer and verifier now replace a missing/empty evidence digest with SHA-256(claim) and encode the same FALSIFY leaf. The current source definitions compiled and exported synthetic crystals with evidence_digest=None and evidence_digest='' and both verified successfully. This is a pure implementation check with no package integration or native runtime.",
+      "guards": [
+        "Verifier requires a string claim before applying the fallback.",
+        "Explicitly supplied digests still follow the existing leaf format; only the reported absent-digest mismatch is adjudicated."
+      ],
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/autodidact/crystal_compiler.py",
+          "start_line": 41,
+          "end_line": 57,
+          "observation": "Producer uses digest-or-SHA256(claim) before encoding the leaf."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/autodidact/crystal_compiler.py",
+          "start_line": 254,
+          "end_line": 268,
+          "observation": "Verifier now applies the identical fallback for None/empty digest."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/autodidact/types.py",
+          "start_line": 113,
+          "end_line": 130,
+          "observation": "FalsificationVerdict defaults to None and preserves the serialized field."
+        }
+      ],
+      "runtime_executed": true,
+      "path": "01_KISH_ENGINE/babylon60/autodidact/crystal_compiler.py",
+      "current_source_sha256": "bd2a08e1e421690740a95743af291b37706129ed5634a9d554a0f18c8723abbe",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/05-source-checks.json",
+        "docs/security/evidence/swarm100-round3-20261028/05-pure-checks.py",
+        "docs/security/evidence/swarm100-round3-20261028/05-pure-checks-results.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0132",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "rationale": "The public orchestrator maps every unrecognized backend string to MOONSHOT_REMOTE and immediately sends the original user prompt through the selected client for decomposition. With a configured remote credential, a typo in a local selector can thus disclose the prompt to the remote provider. This is conditional on calling this API with an invalid selector; no configured key was read and no request was sent.",
+      "guards": [
+        "Known local values route locally; there is no rejection guard on unknown values.",
+        "Logging the selected backend is not a consent or validation guard."
+      ],
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+          "start_line": 512,
+          "end_line": 552,
+          "observation": "Unknown backend defaults to Moonshot before client construction and task decomposition."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+          "start_line": 120,
+          "end_line": 142,
+          "observation": "Moonshot selection chooses remote URL, key and model."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+          "start_line": 297,
+          "end_line": 311,
+          "observation": "Client sends messages and optional Bearer credential."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+          "start_line": 344,
+          "end_line": 364,
+          "observation": "The original prompt is included in the first call."
+        }
+      ],
+      "runtime_executed": false,
+      "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+      "current_source_sha256": "764668378ccdb637bf3d4ff1ef247ee4a4dc28ef24a0c95327515f6c58d5f577",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/05-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0133",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "rationale": "Both remote endpoint factories validate hostname only; an http:// URL for an allowed public provider host is accepted unchanged. The HTTP client receives that URL with messages and a Bearer header when a key is configured. This establishes a missing TLS requirement in the configured path, not observed disclosure; no network request or credential read was performed.",
+      "guards": [
+        "Host allowlists reject unrelated hosts, but there is no scheme check.",
+        "Local HTTP endpoints are also supported; the reported problem specifically concerns public remote-provider hosts."
+      ],
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+          "start_line": 52,
+          "end_line": 75,
+          "observation": "Factories return allowed-host URLs without requiring https."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+          "start_line": 244,
+          "end_line": 253,
+          "observation": "The accepted URL is directly passed to AsyncClient.post."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+          "start_line": 297,
+          "end_line": 311,
+          "observation": "Headers include the selected API key and payload includes messages."
+        }
+      ],
+      "runtime_executed": false,
+      "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+      "current_source_sha256": "764668378ccdb637bf3d4ff1ef247ee4a4dc28ef24a0c95327515f6c58d5f577",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/05-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0516",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "rationale": "An AWAIT instruction puts a coroutine in Waiting; a subsequent Waiting turn unconditionally requeues it and continues before either clock increment or max_ticks enforcement. If no coroutine can EXECUTE the symbol, the queue remains nonempty forever. This concerns the example interpreter/harness, not the production scheduler; the native example was not run.",
+      "guards": [
+        "EXECUTE wakes matching waiters only while some ready coroutine reaches that instruction.",
+        "max_ticks is checked after ready-instruction execution and therefore cannot bound the waiting-only loop."
+      ],
+      "source_checks": [
+        {
+          "path": "examples/poc_navier_stokes_hunter.rs",
+          "start_line": 210,
+          "end_line": 234,
+          "observation": "Waiting branch skips progress and tick guard."
+        },
+        {
+          "path": "examples/poc_navier_stokes_hunter.rs",
+          "start_line": 308,
+          "end_line": 325,
+          "observation": "AWAIT is reachable and EXECUTE is the wake-up path."
+        },
+        {
+          "path": "examples/poc_navier_stokes_hunter.rs",
+          "start_line": 350,
+          "end_line": 357,
+          "observation": "Failsafe is below the unconditional continue."
+        }
+      ],
+      "runtime_executed": false,
+      "path": "examples/poc_navier_stokes_hunter.rs",
+      "current_source_sha256": "af86782ac5088f92ee292626218e369d586edc159f31db3e70b20278706dd8ac",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/05-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0517",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "rationale": "Every returning engine execution reports vorticity_peak=59, and main asserts that this reported constant equals 59. Consequently the vorticity assertion does not test a calculated peak. Other blowup and ledger assertions may still exercise their own behavior; the finding is restricted to the vorticity evidence and success wording.",
+      "guards": [
+        "main also checks blowup state and repeated ledger hashes; neither derives or validates vorticity_peak."
+      ],
+      "source_checks": [
+        {
+          "path": "examples/poc_navier_stokes_hunter.rs",
+          "start_line": 360,
+          "end_line": 365,
+          "observation": "ExecutionResult hardcodes the peak."
+        },
+        {
+          "path": "examples/poc_navier_stokes_hunter.rs",
+          "start_line": 373,
+          "end_line": 400,
+          "observation": "Consumer prints and asserts the constant while independently testing other fields."
+        }
+      ],
+      "runtime_executed": false,
+      "path": "examples/poc_navier_stokes_hunter.rs",
+      "current_source_sha256": "af86782ac5088f92ee292626218e369d586edc159f31db3e70b20278706dd8ac",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/05-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0574",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "rationale": "The maintenance script traverses .git and unlinks each *.lock there without checking owner, age, active process, or obtaining Git's lock. Thus an index.lock or packed-refs.lock held by another operation can be removed, defeating its mutual exclusion. Repository corruption is a possible consequence, not a reproduced outcome; the purge script was not executed.",
+      "guards": [
+        "Cargo.lock and uv.lock exclusions protect dependency lockfiles, not Git operational locks.",
+        "Exception handling catches unlink failures but is not a live-owner guard."
+      ],
+      "source_checks": [
+        {
+          "path": "scripts/c5_verifiers/purge_residuals.py",
+          "start_line": 19,
+          "end_line": 21,
+          "observation": "Script targets the repository root."
+        },
+        {
+          "path": "scripts/c5_verifiers/purge_residuals.py",
+          "start_line": 34,
+          "end_line": 64,
+          "observation": "Walk includes .git and deletes operational lockfiles based only on suffix/path."
+        },
+        {
+          "path": "scripts/c5_verifiers/purge_residuals.py",
+          "start_line": 94,
+          "end_line": 95,
+          "observation": "Main directly invokes the purge."
+        }
+      ],
+      "runtime_executed": false,
+      "path": "scripts/c5_verifiers/purge_residuals.py",
+      "current_source_sha256": "a6bcbf4d8a6e09c0cfa8362b8745d788ca3999d82a80de2fb9145419bf63f55f",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/05-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0575",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "rationale": "Every immediate scratch/*.db* match is unlinked without ownership/temporary marker, age, backup, open-use check, or checkpoint. If a scratch database or its WAL is still required, this can remove active data. The path restricts the blast radius to scratch but does not prove every match disposable. No real database or purge operation was opened/executed.",
+      "guards": [
+        "Deletion is restricted to the root scratch directory and immediate glob matches.",
+        "Errors are logged, but successful deletion has no recovery or usage guard."
+      ],
+      "source_checks": [
+        {
+          "path": "scripts/c5_verifiers/purge_residuals.py",
+          "start_line": 66,
+          "end_line": 74,
+          "observation": "All scratch *.db* paths are unlinked unconditionally."
+        },
+        {
+          "path": "scripts/c5_verifiers/purge_residuals.py",
+          "start_line": 76,
+          "end_line": 95,
+          "observation": "The script reports completion and exposes this path through main."
+        }
+      ],
+      "runtime_executed": false,
+      "path": "scripts/c5_verifiers/purge_residuals.py",
+      "current_source_sha256": "a6bcbf4d8a6e09c0cfa8362b8745d788ca3999d82a80de2fb9145419bf63f55f",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/05-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0197",
+      "decision": "REJECTED",
+      "severity": "P3",
+      "remediation_state": "NOT_APPLICABLE",
+      "rationale": "The original path arithmetic is incorrect. Relative links resolve from 00_ABZU_KERNEL/crates/babylon60-compiler/: the first '..' reaches crates, the second 00_ABZU_KERNEL, and the third the repository root. Fresh lexical path checks found all three referenced files at the intended root targets. No documentation edit is needed for this candidate.",
+      "guards": [
+        "The depth is computed from the README's containing directory, not from the README filename."
+      ],
+      "source_checks": [
+        {
+          "path": "00_ABZU_KERNEL/crates/babylon60-compiler/README.md",
+          "start_line": 4,
+          "end_line": 7,
+          "observation": "All questioned links use three parent traversals, exactly matching the containing-directory depth."
+        }
+      ],
+      "runtime_executed": false,
+      "path": "00_ABZU_KERNEL/crates/babylon60-compiler/README.md",
+      "current_source_sha256": "54c8a1a081f0d789ab0bbebd125197039bdb7dbb1fe8c39a09caade337a7d340",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/05-source-checks.json",
+        "docs/security/evidence/swarm100-round3-20261028/05-pure-checks.py",
+        "docs/security/evidence/swarm100-round3-20261028/05-pure-checks-results.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0591",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "rationale": "The CLI counts every received block in total, but the anomaly-only healthy-block continue bypasses its sole max_events check. An all-healthy unbounded stream therefore does not stop after the configured number. Interpreting --max as emitted anomalies also does not match implementation, because total includes filtered events. No gRPC connection or Rust process was launched.",
+      "guards": [
+        "A stream ending naturally terminates the loop; that does not enforce the configured bound on a live stream.",
+        "max_events parsing is optional, but a valid positive bound still lies below the bypass."
+      ],
+      "source_checks": [
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/c5_cli.rs",
+          "start_line": 22,
+          "end_line": 29,
+          "observation": "CLI parses max_events and anomaly-only independently."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/c5_cli.rs",
+          "start_line": 65,
+          "end_line": 90,
+          "observation": "total increments for every block; healthy filtered blocks continue early."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/c5_cli.rs",
+          "start_line": 106,
+          "end_line": 108,
+          "observation": "Only max_events check occurs after the filter."
+        }
+      ],
+      "runtime_executed": false,
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/c5_cli.rs",
+      "current_source_sha256": "05c9e4a7b4c472085e5d6f7614cf7132131e9d74e0a273c31fb579a254e7351e",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/05-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0076",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "rationale": "Status classification uses PASS/CUMPLIDO substrings, so NOT PASSED, INCUMPLIDO and NO CUMPLIDO meet the positive predicate. The DTO carries that boolean directly to both renderers, which produce a success badge/check. This is a misleading report classification, not a legal compliance determination.",
+      "guards": [
+        "Exact positive checks exist for CONFORME/COMPLIANT/KONFORM, but do not constrain the broader substrings.",
+        "HTML escaping protects markup only; it does not correct the status boolean."
+      ],
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/compliance_exporter/template_engine.py",
+          "start_line": 270,
+          "end_line": 294,
+          "observation": "Negative statuses match the positive substring test and are stored as status_ok."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/compliance_exporter/template_engine.py",
+          "start_line": 367,
+          "end_line": 384,
+          "observation": "Fallback uses status_ok to render the green success badge."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/compliance_exporter/templates/compliance_matrix.html.j2",
+          "start_line": 12,
+          "end_line": 21,
+          "observation": "Jinja path uses the same boolean for its success badge."
+        }
+      ],
+      "runtime_executed": false,
+      "path": "01_KISH_ENGINE/babylon60/compliance_exporter/template_engine.py",
+      "current_source_sha256": "48f9e8044083caf21308d2ab10abc88375679ff59bf21fce4af42fa69ea04559",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/05-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0547",
+      "decision": "REPRODUCED",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "rationale": "A pure-Python execution of the unchanged source accepted record_step(0, -100, verified_outcome=True): consumed_units became -500, remaining_units became 600 from a 100-unit lease, and tripped stayed false. The public accounting API therefore admits negative costs. Targeted searches found its direct tests/registry but did not establish production budget-enforcement integration.",
+      "guards": [
+        "An already-tripped lease rejects new steps; over-budget and repeated-unverified guards run after append.",
+        "No nonnegative validation applies to token counts; verified_outcome=True avoids the unrelated unverified-step counter."
+      ],
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/guards/token_lease_guard.py",
+          "start_line": 20,
+          "end_line": 38,
+          "observation": "Usage dataclass has no validation and output tokens are multiplied by five."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/guards/token_lease_guard.py",
+          "start_line": 51,
+          "end_line": 57,
+          "observation": "Negative consumed units increase remaining budget."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/guards/token_lease_guard.py",
+          "start_line": 68,
+          "end_line": 100,
+          "observation": "record_step appends values directly before its circuit-breaker checks."
+        },
+        {
+          "path": "tests/test_v1_v2_v3_frontier_assimilation.py",
+          "start_line": 40,
+          "end_line": 65,
+          "observation": "Inspected consumer tests nominal accounting and circuit-breaker behavior."
+        }
+      ],
+      "runtime_executed": true,
+      "path": "01_KISH_ENGINE/babylon60/guards/token_lease_guard.py",
+      "current_source_sha256": "808cd8dacd5a3e3130e6dcf9b8c96a4fc3d58ee3a20571e2e44a632aedfa8df4",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/05-source-checks.json",
+        "docs/security/evidence/swarm100-round3-20261028/05-pure-checks.py",
+        "docs/security/evidence/swarm100-round3-20261028/05-pure-checks-results.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0472",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "rationale": "ffmpeg measurement uses check=False and its return code is never consulted before parsing the last matching stderr summary. If a failed process leaves in-range loudness/peak text and ffprobe supplies valid video geometry, evaluate_metrics can return verified=True and the orchestrator can cache the result. No decoder/ffmpeg invocation or media fixture was executed, so actual tool failure-output combinations remain untested.",
+      "guards": [
+        "ffprobe nonzero return code is rejected, and missing loudness/peak summaries default to rejecting values.",
+        "Geometry and numeric bounds are checked, but neither establishes successful completion of the audio measurement."
+      ],
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/transducers/render_exergy_guard.py",
+          "start_line": 381,
+          "end_line": 413,
+          "observation": "Probe status/schema are checked before measurement."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/transducers/render_exergy_guard.py",
+          "start_line": 415,
+          "end_line": 442,
+          "observation": "Measurement status is ignored while stderr is parsed and passed to evaluate_metrics."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/transducers/render_exergy_guard.py",
+          "start_line": 453,
+          "end_line": 495,
+          "observation": "In-range values reach verified=True."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/transducers/render_exergy_guard.py",
+          "start_line": 596,
+          "end_line": 625,
+          "observation": "Orchestrator gates and caches on the verified boolean."
+        }
+      ],
+      "runtime_executed": false,
+      "path": "01_KISH_ENGINE/babylon60/transducers/render_exergy_guard.py",
+      "current_source_sha256": "e6d79cd0e4294ba1990495f8bb70f5e77a50d3d4277eced6ec6338f29a9d2ba2",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/05-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0578",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "rationale": "The topology owns one engine and memory for its lifetime and resets only scheduler nodes between research cycles. Both verification and final compile still consume the engine's accumulated statements/history, so reusing the instance for unrelated topics contaminates topic-scoped results. The original extra implication about proving a new synthesis is narrowed: current derive_theorem only supports identity and rejects unrelated conclusions; old premises can enter the threshold but cannot by themselves prove the advertised new sentence.",
+      "guards": [
+        "The scheduler DAG is rebuilt, but engine.statements/falsifier.history are not reset or topic-filtered.",
+        "Current derive_theorem rejects unsupported new conclusions, mitigating that separate synthesis overclaim."
+      ],
+      "source_checks": [
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/topologies/autodidact_topology.py",
+          "start_line": 43,
+          "end_line": 67,
+          "observation": "Engine/memory are initialized once, with no cycle reset."
+        },
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/topologies/autodidact_topology.py",
+          "start_line": 113,
+          "end_line": 121,
+          "observation": "Verifier iterates every retained statement."
+        },
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/topologies/autodidact_topology.py",
+          "start_line": 170,
+          "end_line": 207,
+          "observation": "Synthesis/compile uses shared engine and only scheduler.nodes is cleared."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/autodidact/engine.py",
+          "start_line": 89,
+          "end_line": 112,
+          "observation": "New assertions append to existing engine statements."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/autodidact/engine.py",
+          "start_line": 174,
+          "end_line": 189,
+          "observation": "Current derivation contract rejects conclusions not supported by identity."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/autodidact/engine.py",
+          "start_line": 221,
+          "end_line": 230,
+          "observation": "Compile passes all statements and falsifier history."
+        }
+      ],
+      "runtime_executed": false,
+      "path": "02_EDIN_SWARMS/agents_archi/topologies/autodidact_topology.py",
+      "current_source_sha256": "e2d0122cac7c757b87fa7a648c7384c6457fd7f17617049099501110abeeb7ab",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/05-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0100",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "rationale": "The ADR still claims zero false negatives and 100% neutralization of systematic false beliefs. Current kernel documentation explicitly limits SolverOutcome to caller-supplied constraint checks and disclaims external factual truth, while the referenced demo classifies literal true/false fixtures. Those sources do not establish the ADR's universal factual-detection guarantee. This is a documentation/evidence-scope finding, not a claim that the classifier or effect dispatch was bypassed.",
+      "guards": [
+        "Kernel comments now state the factual-truth limitation and distinguish Unknown/Error outcomes.",
+        "Those implementation-level caveats have not corrected the conflicting ADR statement."
+      ],
+      "source_checks": [
+        {
+          "path": "docs/adr/ADR-007-semantic-entropy-zero-float-firewall.md",
+          "start_line": 22,
+          "end_line": 36,
+          "observation": "ADR asserts territorial SAT/UNSAT verification and zero false negatives."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/babylon60-kernel/src/semantic_entropy.rs",
+          "start_line": 25,
+          "end_line": 41,
+          "observation": "Solver outcomes are caller reports and do not establish factual truth."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/babylon60-kernel/src/semantic_entropy.rs",
+          "start_line": 180,
+          "end_line": 209,
+          "observation": "Classification is conditional on the supplied SolverOutcome."
+        },
+        {
+          "path": "scripts/c5_demos/falsacion_semantic_entropy_baremetal.rs",
+          "start_line": 185,
+          "end_line": 220,
+          "observation": "Demonstration feeds literal booleans to four quadrants."
+        }
+      ],
+      "runtime_executed": false,
+      "path": "docs/adr/ADR-007-semantic-entropy-zero-float-firewall.md",
+      "current_source_sha256": "1fe9512c8897d0326cde28e174cfb7896f8396c74e043d1a130bd9bfcb016959",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/05-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0408",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "rationale": "The CLI send handler only constructs a compatibility event, appends it to the ledger and prints SENT/Correo enviado. The current ledger facade routes that event to the local actor queue and SQLite persistence; it does not invoke email delivery. The positive print therefore overstates what this command accomplishes. No real account, ledger, recipient or network transport was accessed.",
+      "guards": [
+        "The ledger acknowledgement establishes local append success, not SMTP/provider delivery.",
+        "A compatibility-event test explicitly documents that BABYLON_MAIL_SENT has no network delivery."
+      ],
+      "source_checks": [
+        {
+          "path": "scripts/c5_cli/babylon_mail_cli.py",
+          "start_line": 73,
+          "end_line": 89,
+          "observation": "Handler has a ledger append followed by a delivery-success print."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py",
+          "start_line": 855,
+          "end_line": 873,
+          "observation": "Current facade waits for local actor acknowledgement."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+          "start_line": 355,
+          "end_line": 368,
+          "observation": "Actor converts the event into a queued ledger event and opens SQLite."
+        },
+        {
+          "path": "tests/test_optional_mail_mcp.py",
+          "start_line": 86,
+          "end_line": 93,
+          "observation": "Existing consumer test identifies the event as compatibility-only without delivery."
+        }
+      ],
+      "runtime_executed": false,
+      "path": "scripts/c5_cli/babylon_mail_cli.py",
+      "current_source_sha256": "de8d6fbcabcab8433fb4117a0556b931c7e4b2a9ecc7f5713bd9e9c46c984e62",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/05-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0165",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "rationale": "The theorem correctly states a consequence of four Boolean fields being true, but the surrounding text expands that result to impossibility of fraud/legal noncompliance. No evidence parsing, signature verification, attestation or semantic relation to real documents appears in the model; the accepted pack simply supplies four true values. Confirmed only as a proof-scope/documentation overclaim, not as a legal judgment or failed Lean proof.",
+      "guards": [
+        "A false Boolean causes rejection, as the sample fraudulent_pack demonstrates.",
+        "The guard assumes the flags' truthfulness; proving their conjunction cannot establish the external facts they name."
+      ],
+      "source_checks": [
+        {
+          "path": "scripts/c5_demos/poc_annex_vi_compliance.lean",
+          "start_line": 7,
+          "end_line": 31,
+          "observation": "Universal legal/cryptographic wording precedes a four-Boolean conjunction."
+        },
+        {
+          "path": "scripts/c5_demos/poc_annex_vi_compliance.lean",
+          "start_line": 33,
+          "end_line": 63,
+          "observation": "The theorem decomposes the conjunction and the accepted fixture hardcodes true."
+        },
+        {
+          "path": "scripts/c5_demos/poc_annex_vi_compliance.lean",
+          "start_line": 65,
+          "end_line": 77,
+          "observation": "Rejected fixture merely sets flags false; final print calls the result absolute certification."
+        }
+      ],
+      "runtime_executed": false,
+      "path": "scripts/c5_demos/poc_annex_vi_compliance.lean",
+      "current_source_sha256": "99b11fc699931938f6cdcf9762643f3d6927788ff472b8c8cfd61d865d4f098d",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/05-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0401",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "rationale": "evaluate_specialist starts with passed=True and its catch-all only formats a verified message. Matrix entry A001 has no dedicated branch and therefore contributes success without checking its claimed invariant. Main counts and persists those successes. Severity is limited to P2 because no release/security-enforcement consumer of this script's verdict was established; this is an affirmative audit-evidence defect, not a demonstrated runtime compromise.",
+      "guards": [
+        "Specific implemented branches can set passed=False, and exceptions fail closed within those branches.",
+        "The catch-all has no test and cannot throw from an absent verification step."
+      ],
+      "source_checks": [
+        {
+          "path": "scripts/c5_edin/f13_233_specialist_audit_matrix.py",
+          "start_line": 53,
+          "end_line": 59,
+          "observation": "A001 is an actual registered invariant."
+        },
+        {
+          "path": "scripts/c5_edin/f13_233_specialist_audit_matrix.py",
+          "start_line": 355,
+          "end_line": 368,
+          "observation": "Evaluator defaults to success before branching."
+        },
+        {
+          "path": "scripts/c5_edin/f13_233_specialist_audit_matrix.py",
+          "start_line": 552,
+          "end_line": 575,
+          "observation": "Fallback only emits a verified claim and returns passed."
+        },
+        {
+          "path": "scripts/c5_edin/f13_233_specialist_audit_matrix.py",
+          "start_line": 615,
+          "end_line": 661,
+          "observation": "Counts drive saved telemetry and the zero-failure verdict."
+        }
+      ],
+      "runtime_executed": false,
+      "path": "scripts/c5_edin/f13_233_specialist_audit_matrix.py",
+      "current_source_sha256": "06445406d22cfee29ca20bfd25cf0fc755c1fe03f820e97d8833c901a28e4e90",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/05-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0156",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "rationale": "An audit worker only stats the path, waits, and emits APPROVED plus a fixed exergy value; it never reads source or performs a structural/behavioral check. The collector treats those records as approved and prints topology/RFO conclusions unconditionally. This invalidates those claimed audit measurements, while not establishing any particular defect in audited code. The script was not run.",
+      "guards": [
+        "Extension/path filters bound discovery, and stat may fail on missing files; neither verifies source correctness.",
+        "Empty files receive zero exergy but still receive APPROVED."
+      ],
+      "source_checks": [
+        {
+          "path": "scripts/c5_quality_gates/legion_100_agents_full_monorepo.py",
+          "start_line": 14,
+          "end_line": 34,
+          "observation": "Worker issues approval after os.stat and sleep only."
+        },
+        {
+          "path": "scripts/c5_quality_gates/legion_100_agents_full_monorepo.py",
+          "start_line": 44,
+          "end_line": 60,
+          "observation": "Discovered files are dispatched without further validation."
+        },
+        {
+          "path": "scripts/c5_quality_gates/legion_100_agents_full_monorepo.py",
+          "start_line": 67,
+          "end_line": 78,
+          "observation": "Collector counts approvals and prints unmeasured final claims."
+        }
+      ],
+      "runtime_executed": false,
+      "path": "scripts/c5_quality_gates/legion_100_agents_full_monorepo.py",
+      "current_source_sha256": "f8eda84e6ea9db461d19348501cc98b164a66e0ebec5936cef9bb44149882a18",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/05-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0355",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "rationale": "The documented --json mode still prints three banner lines before executing tasks; only per-task and final human-readable output are conditional. Thus stdout cannot be parsed as one JSON document even when all commands succeed. No worker commands or subprocesses were launched.",
+      "guards": [
+        "Subprocess output is captured and per-agent prints are gated on not args.json.",
+        "The unconditional startup banner remains outside those guards."
+      ],
+      "source_checks": [
+        {
+          "path": "scripts/c5_sharur/sharur_21_agentes.py",
+          "start_line": 2,
+          "end_line": 6,
+          "observation": "Module advertises native JSON M2M mode."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_21_agentes.py",
+          "start_line": 66,
+          "end_line": 69,
+          "observation": "Flag is parsed normally."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_21_agentes.py",
+          "start_line": 116,
+          "end_line": 149,
+          "observation": "Banner is unconditional, whereas per-agent output and final JSON are conditional."
+        }
+      ],
+      "runtime_executed": false,
+      "path": "scripts/c5_sharur/sharur_21_agentes.py",
+      "current_source_sha256": "a92edd32f39a522c0ed62042b221f8bde4a88b3c02d975675015a2972dafc5dc",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/05-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0218",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "rationale": "calculate_metrics hardcodes the verification count, false-claim count and credibility score and serializes them as epistemic_audit; no input evidence or verification stage exists in this script. The arithmetic estimates may be deterministic for its assumptions, but they cannot establish the separately labelled verified claims. No historical allegation was fact-checked and the script's external output path was not written.",
+      "guards": [
+        "Comments identify data-size estimates, but do not label the audit counts as unverified/manual assumptions.",
+        "This adjudication concerns report provenance, not the factual truth of the referenced incident."
+      ],
+      "source_checks": [
+        {
+          "path": "scripts/repatriated/audit_titan_jwt.py",
+          "start_line": 5,
+          "end_line": 36,
+          "observation": "Inputs and claimed factual judgment are literals."
+        },
+        {
+          "path": "scripts/repatriated/audit_titan_jwt.py",
+          "start_line": 38,
+          "end_line": 70,
+          "observation": "Report labels literals verified_claims and final_credibility_score, then writes/prints them."
+        }
+      ],
+      "runtime_executed": false,
+      "path": "scripts/repatriated/audit_titan_jwt.py",
+      "current_source_sha256": "d2371a34e8cd1c7f6284f17b828a723951802208c7519c00507fa2f037d490ea",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/05-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0237",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "rationale": "The interoperability test builds only if target/debug/babylon-skills-mcp is absent. An already-present executable is launched directly, with no source revision, timestamp or content binding, so the test can assess stale behavior after Rust source changes. This is a verification gap; no stale executable was launched and no production vulnerability is inferred.",
+      "guards": [
+        "The build path checks subprocess success when used, and response assertions validate the binary actually launched.",
+        "Neither guard establishes that an existing binary corresponds to the current checkout."
+      ],
+      "source_checks": [
+        {
+          "path": "tests/test_cortex_mcp_server.py",
+          "start_line": 634,
+          "end_line": 662,
+          "observation": "Existence alone controls whether a build occurs before launch."
+        },
+        {
+          "path": "tests/test_cortex_mcp_server.py",
+          "start_line": 683,
+          "end_line": 696,
+          "observation": "Assertions check returned behavior but not source/build provenance."
+        }
+      ],
+      "runtime_executed": false,
+      "path": "tests/test_cortex_mcp_server.py",
+      "current_source_sha256": "2e6e54e8fd190b35fba170293832e9b59649a21abfdedfcdd8352e4ba57eacc8",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/05-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0200",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "rationale": "The Drizzle example declares const users while referring to users inside that same initializer. The lexical binding is uninitialized at that read, so the example cannot successfully evaluate as written; an imported schema also cannot safely share the same binding in this scope. The displayed snippet additionally lacks eq/schema imports. This is a JavaScript example defect independent of current Drizzle API behavior; no database or Worker was invoked.",
+      "guards": [
+        "There is no enclosing alternate binding shown that avoids the lexical self-reference.",
+        "The adjacent Kysely snippet uses a string table name and does not repair the Drizzle example."
+      ],
+      "source_checks": [
+        {
+          "path": "tools/skill_library/codex_overrides/cloudflare/references/hyperdrive/api.md",
+          "start_line": 118,
+          "end_line": 128,
+          "observation": "Displayed imports and query contain the self-referential const declaration."
+        }
+      ],
+      "runtime_executed": false,
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/hyperdrive/api.md",
+      "current_source_sha256": "7e7bb032dc6151ca8e3c30b278efa19d617362e9225f7a5f77a176585f10f7e5",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/05-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0417",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "rationale": "Both benchmark branches measure imports and local formatting/template operations, but the report always attributes 70% of perceived latency to the framework whenever LangChain is available. That percentage is a literal unrelated to any computed ratio and the benchmark does not measure network/LLM/perceived latency. Confirmed as unsupported report attribution, with no conclusion about actual framework performance.",
+      "guards": [
+        "An import failure causes the report to return before the claim.",
+        "When imports succeed, measured ratios are printed but do not control or calculate the fixed attribution."
+      ],
+      "source_checks": [
+        {
+          "path": "tools/skill_library/global/c5-debloat-agent-kernel/scripts/langchain_autopsy.py",
+          "start_line": 22,
+          "end_line": 46,
+          "observation": "Baseline measures imports and 10,000 in-memory formatting operations."
+        },
+        {
+          "path": "tools/skill_library/global/c5-debloat-agent-kernel/scripts/langchain_autopsy.py",
+          "start_line": 49,
+          "end_line": 78,
+          "observation": "Framework branch measures imports and local template chain invocation."
+        },
+        {
+          "path": "tools/skill_library/global/c5-debloat-agent-kernel/scripts/langchain_autopsy.py",
+          "start_line": 81,
+          "end_line": 113,
+          "observation": "Report's 70% claim is unconditional on measured ratios after successful imports."
+        }
+      ],
+      "runtime_executed": false,
+      "path": "tools/skill_library/global/c5-debloat-agent-kernel/scripts/langchain_autopsy.py",
+      "current_source_sha256": "56c6be2e9cea0de41b5dc4f45a9411f1c87effe5ae6d98f306aa2a8b8ad773a3",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/05-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0126",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "rationale": "The mutation procedure explicitly offers imperative written confirmation as an alternative to Touch ID, conflicting with the canonical requirement for hardware attestation bound to the real effect hash. Other parts of the same module still demand biometrics, so the document is internally inconsistent. Confirmed only as conflicting guidance; no executable consumer or working attestation bypass was established.",
+      "guards": [
+        "The canonical manifest takes precedence and still prohibits bypassing hardware attestation.",
+        "The module also requires dry-run/operator approval and mentions KudurruBudgetGate; those statements do not make textual confirmation hardware evidence."
+      ],
+      "source_checks": [
+        {
+          "path": "tools/skill_library/global/c5-wetware-and-venture-ops/references/modules/c5-tamkarum-60/MODULE.md",
+          "start_line": 25,
+          "end_line": 27,
+          "observation": "Module's high-level invariant requires biometrics."
+        },
+        {
+          "path": "tools/skill_library/global/c5-wetware-and-venture-ops/references/modules/c5-tamkarum-60/MODULE.md",
+          "start_line": 118,
+          "end_line": 128,
+          "observation": "Detailed step introduces written confirmation as an alternative before release."
+        },
+        {
+          "path": ".babylon60rules",
+          "start_line": 5,
+          "end_line": 11,
+          "observation": "Canonical authority/security contract requires hardware attestation tied to the true effect hash."
+        }
+      ],
+      "runtime_executed": false,
+      "path": "tools/skill_library/global/c5-wetware-and-venture-ops/references/modules/c5-tamkarum-60/MODULE.md",
+      "current_source_sha256": "ef44e85349d0ba483d29b603253be6080c7b4205c3f98e184c9b35a342d490c6",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/05-source-checks.json"
+      ]
+    }
+  ]
+}

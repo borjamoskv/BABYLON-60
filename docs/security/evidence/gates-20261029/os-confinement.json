@@ -1,0 +1,12 @@
+{
+  "result": {
+    "status": "ERROR",
+    "is_valid": false,
+    "error_code": "EXECUTION_FAILED",
+    "reason": "Confined MCP exited 73: DENIAL errno=1 type=PermissionError\n",
+    "latency_ms": 0.0
+  },
+  "outside_write_observed_by_other_process": "False",
+  "source_sha256": "6696488a56d185d2b03380e7a93213cefe0a8cb3233dbe1fd8323b87867c395c",
+  "scope": "One real denial attempt; temporary filesystem and loopback witnesses only"
+}

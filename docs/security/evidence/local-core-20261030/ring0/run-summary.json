@@ -1,0 +1,142 @@
+{
+  "commit": "6e164040705b5f19ac0d0a377b4d28f8f835232d",
+  "base": "eb28fa97bb0440d59878b955222aa0617a1c236b",
+  "branch": "codex/local-core-ring0",
+  "worktree": "/Users/borjafernandezangulo/.codex/worktrees/local-core-ring0/BABYLON-60",
+  "files": [
+    {
+      "path": "01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift",
+      "blake3": "13dfd060814adedabc3d22e61d06190c49b6914d9bf5b70924116ea660f83947"
+    },
+    {
+      "path": "src/enclave.rs",
+      "blake3": "e417da028fa91489036eb5390f1576042164c428a43c670c09c75ffd745941b3"
+    },
+    {
+      "path": "tests/test_biometric_signing_contract.py",
+      "blake3": "95d6bfcf4af9e13f38064b3fcd7e22f4569b7e169ab6fdbd0c8d40a6e1227aca"
+    }
+  ],
+  "checks": [
+    {
+      "name": "no-sound red reproduction",
+      "exit_code": 101,
+      "result": "expected failure",
+      "log": "no-sound-red.log"
+    },
+    {
+      "name": "Rust enclave tests",
+      "exit_code": 0,
+      "passed": 14,
+      "initially_ignored": 1,
+      "log": "enclave-green.log"
+    },
+    {
+      "name": "Rust recovery integration tests",
+      "exit_code": 0,
+      "passed": 70,
+      "log": "recovery.log"
+    },
+    {
+      "name": "Rust secure_fs unit tests",
+      "exit_code": 0,
+      "passed": 7,
+      "log": "secure-fs-unit.log"
+    },
+    {
+      "name": "Swift/Python software and inspection boundary tests",
+      "exit_code": 0,
+      "passed": 17,
+      "log": "biometric-contract-isolated.log"
+    },
+    {
+      "name": "Explicit Swift-to-Rust COSE software fixture",
+      "exit_code": 0,
+      "passed": 1,
+      "log": "swift-rust-cose.log"
+    },
+    {
+      "name": "cargo check --locked --features python",
+      "exit_code": 0,
+      "log": "cargo-check-python.log"
+    },
+    {
+      "name": "cargo build --locked --features python",
+      "exit_code": 0,
+      "log": "cargo-build-python.log"
+    },
+    {
+      "name": "Swift native gate compile",
+      "exit_code": 0,
+      "log": "gate-build.log"
+    },
+    {
+      "name": "Ruff",
+      "exit_code": 0,
+      "log": "ruff.log"
+    },
+    {
+      "name": "semantic workspace audit",
+      "exit_code": 0,
+      "log": "semantic.log"
+    },
+    {
+      "name": "token budget workspace audit, skip ghost listeners",
+      "exit_code": 0,
+      "log": "token-budget.log"
+    },
+    {
+      "name": "topology worktree",
+      "exit_code": 0,
+      "log": "topology.log"
+    },
+    {
+      "name": "topology staged",
+      "exit_code": 0,
+      "log": "topology-staged.log"
+    }
+  ],
+  "native_smoke": {
+    "module": "_babylon60_mcp",
+    "revision": 1,
+    "ungranted_tool_denied": true,
+    "hardware_invoked": false
+  },
+  "inspection": {
+    "command": [
+      "/Users/borjafernandezangulo/.codex/local-core-evidence/capture-20261029T230935Z/ring0/c5_biometric_gate",
+      "--inspect-public-key"
+    ],
+    "exit_code": 0,
+    "key_before": {
+      "sha256": "2402c2dcfc1832bd614873665d0f31223c2bdf0b4484b799617dd5a3bf976e42",
+      "mode": "0o600",
+      "inode": 550595345,
+      "size": 838,
+      "mtime_ns": 1792808010993115189
+    },
+    "key_after": {
+      "sha256": "2402c2dcfc1832bd614873665d0f31223c2bdf0b4484b799617dd5a3bf976e42",
+      "mode": "0o600",
+      "inode": 550595345,
+      "size": 838,
+      "mtime_ns": 1792808010993115189
+    },
+    "unchanged": true,
+    "binary_sha256": "b303a0b155ed12abbf4c3574f476df6249095e0127f2e8efcc8b8e9b07cf63d7",
+    "source_sha256": "79b6ea08597c31f5b39a705464823dd0d23175f189c8005d0e84c9d385d7a92d",
+    "attempts": 1,
+    "authentication_requested": false,
+    "signature_requested": false,
+    "status": "PUBLIC_KEY_INSPECTED",
+    "public_key_sha256": "fd7e4f541f712d8ed5d717ae2fdc3df71807e97b130f1d375d3b964120845c4a",
+    "returned_record_hash_matches": true
+  },
+  "limits": [
+    "No signing or authentication performed.",
+    "Public inspection does not constitute hardware attestation or trusted provisioning.",
+    "No key, global pin or installed gate changed.",
+    "Global configuration and ghost listener telemetry were not audited."
+  ],
+  "initial_test_environment_failure": "uv run pytest without --extra dev selected the global pytest executable and hit pytest-randomly/thinc seed errors before tests. Preserved biometric-contract.log; rerun with --extra dev python -m pytest in the dedicated 3.14 venv passed."
+}

@@ -1,0 +1,308 @@
+- generic [active] [ref=f1e1]:
+  - link "Skip to main content" [ref=f1e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=f1e3]:
+    - checkbox "Open or close navigation menu" [ref=f1e4]
+    - generic [ref=f1e5]:
+      - link "BABYLON Home" [ref=f1e6] [cursor=pointer]:
+        - /url: /en
+        - generic [ref=f1e7]: BABYLON
+      - navigation "Main navigation" [ref=f1e8]:
+        - link "AI ACT" [ref=f1e9] [cursor=pointer]:
+          - /url: /en/eu-ai-act/
+        - link "CORTEX" [ref=f1e10] [cursor=pointer]:
+          - /url: /en/cortex/
+        - link "GUARD" [ref=f1e11] [cursor=pointer]:
+          - /url: /en/babylon/
+        - link "ENTERPRISE" [ref=f1e12] [cursor=pointer]:
+          - /url: /en/enterprise/
+        - link "ASSURANCE" [ref=f1e13] [cursor=pointer]:
+          - /url: /en/assurance/
+        - link "RESEARCH" [ref=f1e14] [cursor=pointer]:
+          - /url: /en/research/
+        - link "BLOG" [ref=f1e15] [cursor=pointer]:
+          - /url: /en/blog/
+        - link "DOCS" [ref=f1e16] [cursor=pointer]:
+          - /url: /en/docs/
+      - generic [ref=f1e17]:
+        - link "REQUEST ACCESS" [ref=f1e18] [cursor=pointer]:
+          - /url: /en/cortex/
+        - link "Switch to ES" [ref=f1e19] [cursor=pointer]:
+          - /url: /enterprise/
+          - generic [ref=f1e20]: ES
+  - main [ref=f1e21]:
+    - generic [ref=f1e23]:
+      - generic [ref=f1e24]:
+        - generic [ref=f1e25]: REGULATION · EU AI ACT GOVERNANCE
+        - 'heading "Enterprise: integration and governance" [level=1] [ref=f1e26]'
+        - paragraph [ref=f1e27]: Technical controls to support your AI Act assessment
+        - paragraph [ref=f1e28]: Connect requirements for your use case to documented controls and test evidence. Integration, organisational assessment and conformity must be verified for each deployment.
+      - paragraph [ref=f1e29]:
+        - text: These mappings do not certify compliance. Review scope, official sources and limits in the
+        - link "AI Act guide" [ref=f1e30] [cursor=pointer]:
+          - /url: /en/eu-ai-act/
+        - text: .
+      - region [ref=f1e31]:
+        - generic [ref=f1e32]: PROPOSAL · NOT AVAILABLE TO PURCHASE
+        - 'heading "Monthly subscriptions: what would be included" [level=2] [ref=f1e33]'
+        - paragraph [ref=f1e34]: "Commercial draft for review: proposed prices and benefits, with no billing, renewal or licence activation. It does not replace existing Enterprise quotes."
+        - generic [ref=f1e35]:
+          - article [ref=f1e36]:
+            - text: Individual
+            - generic [ref=f1e37]: 49 € / month
+            - list [ref=f1e38]:
+              - listitem [ref=f1e39]: "CORTEX: local memory and retrieval within documented capabilities"
+              - listitem [ref=f1e40]: "BABYLON: local execution controls; NEMESIS as its verification layer"
+              - listitem [ref=f1e41]: "Proposed scope: up to 1 user and 1 local host"
+              - listitem [ref=f1e42]: Updates during the subscription, documentation and guides
+              - listitem [ref=f1e43]: Documentation support; no engineering enquiries included
+            - paragraph [ref=f1e44]: Proposed price before applicable taxes.
+            - link "Enquire about this proposal →" [ref=f1e45] [cursor=pointer]:
+              - /url: mailto:borja@babylon60.com?subject=Subscription%20proposal%3A%20Individual
+          - article [ref=f1e46]:
+            - text: Equipo / Team
+            - generic [ref=f1e47]: 199 € / month
+            - list [ref=f1e48]:
+              - listitem [ref=f1e49]: "CORTEX: local memory and retrieval within documented capabilities"
+              - listitem [ref=f1e50]: "BABYLON: local execution controls; NEMESIS as its verification layer"
+              - listitem [ref=f1e51]: "Proposed scope: up to 5 users and 3 local hosts"
+              - listitem [ref=f1e52]: Updates during the subscription, documentation and guides
+              - listitem [ref=f1e53]: "Asynchronous support: up to 2 enquiries per month"
+            - paragraph [ref=f1e54]: Proposed price before applicable taxes.
+            - link "Enquire about this proposal →" [ref=f1e55] [cursor=pointer]:
+              - /url: mailto:borja@babylon60.com?subject=Subscription%20proposal%3A%20Equipo%20%2F%20Team
+          - article [ref=f1e56]:
+            - text: Business
+            - generic [ref=f1e57]: 499 € / month
+            - list [ref=f1e58]:
+              - listitem [ref=f1e59]: "CORTEX: local memory and retrieval within documented capabilities"
+              - listitem [ref=f1e60]: "BABYLON: local execution controls; NEMESIS as its verification layer"
+              - listitem [ref=f1e61]: "Proposed scope: up to 15 users and 10 local hosts"
+              - listitem [ref=f1e62]: Updates during the subscription, documentation and guides
+              - listitem [ref=f1e63]: "Asynchronous support: up to 2 enquiries per month"
+              - listitem [ref=f1e64]: Up to 2 hours of technical guidance per month; no rollover
+            - paragraph [ref=f1e65]: Proposed price before applicable taxes.
+            - link "Enquire about this proposal →" [ref=f1e66] [cursor=pointer]:
+              - /url: mailto:borja@babylon60.com?subject=Subscription%20proposal%3A%20Business
+        - paragraph [ref=f1e67]: The proposal covers usage rights, updates and the support listed. It excludes model/API usage, cloud infrastructure, hardware, legal audits, AI Act certification, SLAs and guarantees for unverified integrations. Available capabilities remain limited by product evidence. The test environment enforces registered user/host limits; physical hardware is not attested.
+        - generic [ref=f1e68]:
+          - generic [ref=f1e69]:
+            - heading "Proposed renewal and cancellation" [level=3] [ref=f1e70]
+            - paragraph [ref=f1e71]: Monthly periods, cancellation before the next period and access until the paid period ends. This page creates no active subscriptions. Usage rights, data handling and final terms require an approved contract.
+          - generic [ref=f1e72]:
+            - heading "Local data and execution" [level=3] [ref=f1e73]
+            - paragraph [ref=f1e74]: The proposal does not turn the local engine into a cloud service. Hosting, backups and operations remain with the customer unless specifically agreed otherwise.
+          - generic [ref=f1e75]:
+            - 'heading "Real payments: disabled" [level=3] [ref=f1e76]'
+            - paragraph [ref=f1e77]: Hosted Stripe Checkout is available in the separate test environment. Real purchases require approved terms and tax setup. This page creates no commercial subscriptions or licences.
+            - link "Stripe Checkout ↗" [ref=f1e78] [cursor=pointer]:
+              - /url: https://docs.stripe.com/payments/checkout
+      - generic [ref=f1e79]:
+        - heading "Indicative mappings for high-risk systems" [level=2] [ref=f1e80]
+        - generic [ref=f1e81]:
+          - article [ref=f1e82]:
+            - generic [ref=f1e83]: Article 12 · Automatic logging
+            - generic [ref=f1e85]:
+              - generic [ref=f1e86]:
+                - generic [ref=f1e87]: "REQUIREMENT · SUBJECT TO APPLICABLE SCOPE:"
+                - paragraph [ref=f1e88]: Logging capabilities appropriate to the intended purpose of a high-risk system.
+              - generic [ref=f1e89]:
+                - generic [ref=f1e90]: "RELATED TECHNICAL CONTROL:"
+                - paragraph [ref=f1e91]: Receipts and records documented by BABYLON. Assess their integrity, completeness and durability for each configuration.
+              - link "cose_ed25519_receipt · verified" [ref=f1e95] [cursor=pointer]:
+                - /url: /en/assurance/
+          - article [ref=f1e96]:
+            - generic [ref=f1e97]: Article 14 · Human oversight
+            - generic [ref=f1e99]:
+              - generic [ref=f1e100]:
+                - generic [ref=f1e101]: "REQUIREMENT · SUBJECT TO APPLICABLE SCOPE:"
+                - paragraph [ref=f1e102]: Design for effective human oversight proportionate to risk.
+              - generic [ref=f1e103]:
+                - generic [ref=f1e104]: "RELATED TECHNICAL CONTROL:"
+                - paragraph [ref=f1e105]: Documented authorisation controls. Authentication does not establish understanding, authority or opportunity to intervene.
+              - link "secure_enclave_p256 · verified_local" [ref=f1e109] [cursor=pointer]:
+                - /url: /en/assurance/
+          - article [ref=f1e110]:
+            - generic [ref=f1e111]: Article 15 · Accuracy, robustness and cybersecurity
+            - generic [ref=f1e113]:
+              - generic [ref=f1e114]:
+                - generic [ref=f1e115]: "REQUIREMENT · SUBJECT TO APPLICABLE SCOPE:"
+                - paragraph [ref=f1e116]: Appropriate and consistent levels throughout a high-risk system lifecycle.
+              - generic [ref=f1e117]:
+                - generic [ref=f1e118]: "RELATED TECHNICAL CONTROL:"
+                - paragraph [ref=f1e119]: Stopping and containment are related controls. They do not independently establish accuracy or cover all threats.
+              - link "inv_04_fail_stop_halt · verified" [ref=f1e123] [cursor=pointer]:
+                - /url: /en/assurance/
+      - generic [ref=f1e125]:
+        - generic [ref=f1e126]: "Local technical evidence pack:"
+        - generic [ref=f1e127]:
+          - generic [ref=f1e128]: $
+          - generic [ref=f1e129]: python3 tools/generate_compliance_audit_pack.py
+        - paragraph [ref=f1e130]: Documentation describes an evidence-pack generator. Verify its availability, content and reproduction before using it in an audit. A technical package does not certify legal compliance.
+      - paragraph [ref=f1e131]: Indicative service proposals, subject to a written quote, technical acceptance and contract. The amounts below are not an available checkout, production certification or an active SLA.
+      - generic [ref=f1e132]:
+        - heading "Sovereign Enterprise Licensing" [level=2] [ref=f1e133]
+        - generic [ref=f1e134]:
+          - generic [ref=f1e135]:
+            - generic [ref=f1e136]:
+              - heading "Pilot & Audit Pack" [level=3] [ref=f1e137]
+              - generic [ref=f1e138]: €15,000
+            - paragraph [ref=f1e139]: Single development/pilot cluster license, CLI compliance report generator, and native C-ABI Ring-0 binary.
+            - list [ref=f1e140]:
+              - listitem [ref=f1e141]: ✓ Single dev / pilot cluster license
+              - listitem [ref=f1e142]: ✓ Cryptographic compliance audit report generator
+              - listitem [ref=f1e143]: ✓ Sovereign Ring-0 binary with standard C-ABI
+              - listitem [ref=f1e144]: ✓ RFC 9942 COSE_Sign1 cryptographic receipts
+            - link "Request a pilot proposal" [ref=f1e145] [cursor=pointer]:
+              - /url: "#onboarding-portal"
+          - generic [ref=f1e146]:
+            - generic [ref=f1e147]: PROPOSED INTEGRATION & SUPPORT
+            - generic [ref=f1e148]:
+              - heading "Enterprise Production Cluster" [level=3] [ref=f1e149]
+              - generic [ref=f1e150]: €60,000 / year
+            - paragraph [ref=f1e151]: Proposed assessment and integration. Environment review, formal evidence and support are subject to scope, acceptance tests and contract.
+            - list [ref=f1e152]:
+              - listitem [ref=f1e153]: ✓ Production-readiness assessment for the agreed workload
+              - listitem [ref=f1e154]: ✓ Secure Enclave / Touch ID hardware integration support
+              - listitem [ref=f1e155]: ✓ Inductive and safety proofs in Lean 4
+              - listitem [ref=f1e156]: ✓ Support scope and response targets to be agreed in writing
+            - link "Request Enterprise Cluster" [ref=f1e157] [cursor=pointer]:
+              - /url: mailto:borja@babylon60.com?subject=Inquiry%3A%20Enterprise%20Cluster%20BABYLON-60
+      - generic [ref=f1e158]:
+        - text: CONTRACTING · SCOPE REVIEW
+        - heading "Request an integration proposal" [level=3] [ref=f1e159]
+        - paragraph [ref=f1e160]: Describe your use case, users, hosts and support needs. Availability, licensing, taxes and terms are confirmed in a written proposal before contracting.
+        - paragraph [ref=f1e161]: This site does not process payments or issue invoices or licences. No automatic signup or renewal is enabled.
+        - generic [ref=f1e162]:
+          - link "Request a proposal by email →" [ref=f1e163] [cursor=pointer]:
+            - /url: mailto:borja@babylon60.com?subject=BABYLON%20integration%20proposal
+          - link "Review evidence and limits" [ref=f1e164] [cursor=pointer]:
+            - /url: /en/assurance/
+      - generic [ref=f1e165]:
+        - heading "Supported Platforms & Infrastructure Boundaries" [level=2] [ref=f1e166]
+        - generic [ref=f1e167]:
+          - generic [ref=f1e168]:
+            - generic [ref=f1e169]: ● EXPERIMENTAL · LOCAL EVIDENCE
+            - heading "macOS arm64 (Apple Silicon M-Series)" [level=3] [ref=f1e170]
+            - paragraph [ref=f1e171]: Local test results and filesystem assumptions are listed in Assurance. Automated software-key tests do not establish Secure Enclave origin or Touch ID human presence. No independent production certification is claimed.
+          - generic [ref=f1e172]:
+            - generic [ref=f1e173]: ◌ IN ACTIVE DEVELOPMENT (H2 2027)
+            - heading "Linux x86_64 / aarch64 (Bare-Metal & Cluster)" [level=3] [ref=f1e174]
+            - paragraph [ref=f1e175]: Architectural Ring-0 mediation (00_ABZU_KERNEL) under development using eBPF kprobes and cgroups v2 namespaces. Currently available only in simulation harnesses under NDA.
+          - generic [ref=f1e176]:
+            - generic [ref=f1e177]: ■ TCB BOUNDARY DELIMITATION
+            - heading "Local mediation and storage" [level=3] [ref=f1e178]
+            - paragraph [ref=f1e179]: The broker and ledger run locally. Configured external model providers may receive inference context; review the provider and tool data flow separately from local storage.
+      - generic [ref=f1e180]:
+        - heading "Pilot Acceptance Criteria (PoC) & SLA Terms" [level=2] [ref=f1e181]
+        - generic [ref=f1e182]:
+          - generic [ref=f1e183]:
+            - heading "MEASURABLE PILOT ACCEPTANCE CRITERIA (30-DAY POC)" [level=3] [ref=f1e184]
+            - list [ref=f1e185]:
+              - listitem [ref=f1e186]:
+                - text: ■
+                - strong [ref=f1e187]: "Fail-Closed Interception:"
+                - text: Agree the mediated routes and workload, then measure unauthorized effects with an independent observer. A DENY response alone is insufficient.
+              - listitem [ref=f1e188]:
+                - text: ■
+                - strong [ref=f1e189]: "Cryptographic Traceability:"
+                - text: Verify receipts against a trusted key and the observed effect. Unsigned historical reports do not satisfy this criterion.
+              - listitem [ref=f1e190]:
+                - text: ■
+                - strong [ref=f1e191]: "Crash Recovery:"
+                - text: Test process interruption, replay rejection and reconciliation of unknown outcomes. Process death does not establish power-loss safety.
+          - generic [ref=f1e192]:
+            - heading "SUPPORT TERMS TO AGREE BEFORE CONTRACTING" [level=3] [ref=f1e193]
+            - list [ref=f1e194]:
+              - listitem [ref=f1e195]:
+                - text: ■
+                - strong [ref=f1e196]: "Response Time:"
+                - text: Severity, coverage hours, response targets and remedies require an approved contract; this page activates no SLA.
+              - listitem [ref=f1e197]:
+                - text: ■
+                - strong [ref=f1e198]: "Technical Support:"
+                - text: Define the responsible contact, support channel and available capacity in the proposal.
+              - listitem [ref=f1e199]:
+                - text: ■
+                - strong [ref=f1e200]: "Assisted Formal Verification:"
+                - text: Custom security policy formalization and inductive safety proofs in Lean 4.
+      - generic [ref=f1e201]:
+        - generic [ref=f1e202]: NOTICE ON MONOREPO STATUS & TECHNICAL AUDIT
+        - paragraph [ref=f1e203]:
+          - text: Published source is available in
+          - link "borjamoskv/BABYLON-60" [ref=f1e204] [cursor=pointer]:
+            - /url: https://github.com/borjamoskv/BABYLON-60
+          - text: under its included licence. The public revision, the local working tree and the evidence snapshot may differ. Confirm the required revision and reproduction scope before an audit.
+        - link "Request scope for an independent technical audit →" [ref=f1e205] [cursor=pointer]:
+          - /url: mailto:borja@babylon60.com?subject=Inquiry%3A%20Monorepo%20Access%20for%20Technical%20Audit%20(NDA)
+      - generic [ref=f1e207]:
+        - heading "Asynchronous contracting and direct machine verification:" [level=2] [ref=f1e208]
+        - link "borja@babylon60.com" [ref=f1e209] [cursor=pointer]:
+          - /url: mailto:borja@babylon60.com
+  - contentinfo [ref=f1e210]:
+    - generic [ref=f1e211]:
+      - generic [ref=f1e212]:
+        - generic [ref=f1e213]:
+          - heading "SOURCES AUDIT & CRYPTOGRAPHIC PROVENANCE" [level=4] [ref=f1e214]
+          - generic [ref=f1e215]:
+            - generic [ref=f1e216]:
+              - text: "Source Substrate:"
+              - link "borjamoskv/BABYLON-60" [ref=f1e217] [cursor=pointer]:
+                - /url: https://github.com/borjamoskv/BABYLON-60
+              - text: (Published source · check licence and revision)
+            - generic [ref=f1e218]:
+              - text: "Commit:"
+              - code [ref=f1e219]: 8add5b83845e161236af039997be9943b1c0221d+dirty
+            - generic [ref=f1e220]:
+              - text: "Branch:"
+              - code [ref=f1e221]: codex/integration-review-20261023
+            - generic [ref=f1e222]: "Snapshot date: 2026-10-24T01:29:50.822Z"
+        - generic [ref=f1e223]:
+          - heading "Contact & Research:" [level=4] [ref=f1e224]
+          - generic [ref=f1e225]:
+            - generic [ref=f1e226]: Borja Fernández Angulo
+            - generic [ref=f1e227]: Complex Systems Researcher
+            - link "borja@babylon60.com" [ref=f1e229] [cursor=pointer]:
+              - /url: mailto:borja@babylon60.com
+      - generic [ref=f1e230]:
+        - generic [ref=f1e231]: "Audited primary sources (SHA-256):"
+        - generic [ref=f1e232]:
+          - generic [ref=f1e233]:
+            - generic [ref=f1e234]: CLAIMS.toml
+            - code [ref=f1e235]: 79f3269add7ccc0d...d162aa53
+          - generic [ref=f1e236]:
+            - generic [ref=f1e237]: scripts/c5_quality_gates/claims_sitrep.json
+            - code [ref=f1e238]: 988ff4ea1a8de822...c1c7a746
+          - generic [ref=f1e239]:
+            - generic [ref=f1e240]: RELEASE_MANIFEST.json
+            - code [ref=f1e241]: e0d5f43ea76bba9c...e7786fd9
+          - generic [ref=f1e242]:
+            - generic [ref=f1e243]: scripts/c5_quality_gates/compile_claims_manifest.py
+            - code [ref=f1e244]: 9fd62031792cde40...834dd65a
+          - generic [ref=f1e245]:
+            - generic [ref=f1e246]: docs/01_spec/spec_nemesis.md
+            - code [ref=f1e247]: 13d1e8401688f60a...ca083380
+          - generic [ref=f1e248]:
+            - generic [ref=f1e249]: reports/nemesis_verified_report.json
+            - code [ref=f1e250]: 9aa033bf12de94c1...fc94b7a6
+          - generic [ref=f1e251]:
+            - generic [ref=f1e252]: reports/nemesis_evidence_report.json
+            - code [ref=f1e253]: fe8fb8c6003167cc...cf2f3beb
+          - generic [ref=f1e254]:
+            - generic [ref=f1e255]: reports/nemesis-kernel-report.json
+            - code [ref=f1e256]: 443dfc30371b82b3...88695288
+          - generic [ref=f1e257]:
+            - generic [ref=f1e258]: reports/nemesis-crash-report.json
+            - code [ref=f1e259]: eb1e55af821ccc65...ca2f23f9
+          - generic [ref=f1e260]:
+            - generic [ref=f1e261]: reports/nemesis-model-report.json
+            - code [ref=f1e262]: cc0f1e7fac03efbe...10135ade
+          - generic [ref=f1e263]:
+            - generic [ref=f1e264]: reports/ax0-adversarial-report.json
+            - code [ref=f1e265]: 77945423639ba1da...94a9adae
+          - generic [ref=f1e266]:
+            - generic [ref=f1e267]: proof/lean/AX0.lean
+            - code [ref=f1e268]: b0c763ec1fe82695...67994cd1
+      - generic [ref=f1e269]:
+        - generic [ref=f1e270]: BABYLON-60 is an experimental silicon governance and local-first evidence runtime.
+        - generic [ref=f1e271]: © 2026 Borja Fernández Angulo

@@ -1,0 +1,1104 @@
+{
+  "version": "1.0.0",
+  "total_agents": 47,
+  "agents": [
+    {
+      "id": 1,
+      "slug": "routines",
+      "agent_name": "c5_agent_01_routines",
+      "display_name": "Agente 01: routines («Automatismos a piñón fijo»)",
+      "transducer": "T3",
+      "category": "Día a día",
+      "mission": "Gestionar recordatorios, resúmenes periódicos y comprobaciones desatendidas mediante demonios locales launchd y temporizadores cron sexagesimales.",
+      "triggers": [
+        "avísame cada",
+        "recuérdame a las",
+        "revisa todos los días",
+        "schedule check"
+      ],
+      "anti_trigger": "Acción puntual e inmediata sin periodicidad.",
+      "execution_route": "daemon:launchd / schedule (5-field cron)",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": true,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_01_routines.md"
+    },
+    {
+      "id": 2,
+      "slug": "scheduling",
+      "agent_name": "c5_agent_02_scheduling",
+      "display_name": "Agente 02: scheduling («Mover la agenda sin mirar la pantalla»)",
+      "transducer": "T3",
+      "category": "Día a día",
+      "mission": "Gestionar eventos de calendario, detectar colisiones de horario y verificar disponibilidad mediante EventKit nativo e icalBuddy sin pasar por OAuths en nube.",
+      "triggers": [
+        "pon una reunión",
+        "calendario",
+        "disponibilidad",
+        "agenda cita"
+      ],
+      "anti_trigger": "Recordatorios sueltos sin franja temporal bloqueada.",
+      "execution_route": "eventkit:icalBuddy / c5-interactive-gantt-planner",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": true,
+        "mcp": false,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_02_scheduling.md"
+    },
+    {
+      "id": 3,
+      "slug": "skill-authoring",
+      "agent_name": "c5_agent_03_skill_authoring",
+      "display_name": "Agente 03: skill-authoring («Fabricar una herramienta nueva»)",
+      "transducer": "T4",
+      "category": "Día a día",
+      "mission": "Sintetizar, modificar o archivar habilidades reutilizables bajo el formato SKILL.md y la ontología C5-REAL utilizando cortex-skill-genesis.",
+      "triggers": [
+        "guarda este flujo como skill",
+        "crea una skill",
+        "herramienta reutilizable"
+      ],
+      "anti_trigger": "Comandos bash desechables de un solo uso.",
+      "execution_route": "skill:cortex-skill-genesis",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": true,
+        "mcp": true,
+        "subagents": true
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_03_skill_authoring.md"
+    },
+    {
+      "id": 4,
+      "slug": "learn-from-demonstration",
+      "agent_name": "c5_agent_04_learn_from_demonstration",
+      "display_name": "Agente 04: learn-from-demonstration («Copiar lo que hago en pantalla»)",
+      "transducer": "T4",
+      "category": "Día a día",
+      "mission": "Analizar trazas de eventos CDP y grabaciones de interacción para destilar selectores semánticos y flujos reproducibles en silicio.",
+      "triggers": [
+        "aprende de esta grabación",
+        "mira mi pantalla",
+        "record demonstration"
+      ],
+      "anti_trigger": "Peticiones donde el flujo ya está parametrizado por código.",
+      "execution_route": "cdp:trace_recorder / dom_parser",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": true,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_04_learn_from_demonstration.md"
+    },
+    {
+      "id": 5,
+      "slug": "channels",
+      "agent_name": "c5_agent_05_channels",
+      "display_name": "Agente 05: channels («Abrir la esclusa de mensajes»)",
+      "transducer": "T3",
+      "category": "Día a día",
+      "mission": "Conectar y gestionar pasarelas locales de mensajería (WhatsApp Nexus, sockets Unix) manteniendo el aislamiento de Markov.",
+      "triggers": [
+        "conecta slack",
+        "vincula telegram",
+        "avísame por whatsapp"
+      ],
+      "anti_trigger": "Envío de un mensaje suelto a un usuario.",
+      "execution_route": "gateway:whatsapp-nexus-protocol / local_socket",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": true,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_05_channels.md"
+    },
+    {
+      "id": 6,
+      "slug": "send-on-behalf",
+      "agent_name": "c5_agent_06_send_on_behalf",
+      "display_name": "Agente 06: send-on-behalf («Firmar y despachar por cuenta ajena»)",
+      "transducer": "T3",
+      "category": "Día a día",
+      "mission": "Redactar correspondencia y despacharla en segundo plano mediante MTA local (/usr/sbin/sendmail) garantizando cero robo de foco y aprobación previa del borrador.",
+      "triggers": [
+        "mándale un correo a",
+        "escribe un email",
+        "draft email to"
+      ],
+      "anti_trigger": "Despacho directo sin validación previa del borrador por el Operador.",
+      "execution_route": "mta:/usr/sbin/sendmail (headless background dispatch)",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": true,
+        "mcp": false,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_06_send_on_behalf.md"
+    },
+    {
+      "id": 7,
+      "slug": "voice",
+      "agent_name": "c5_agent_07_voice",
+      "display_name": "Agente 07: voice («Voz que no suena a lata»)",
+      "transducer": "T4",
+      "category": "Día a día",
+      "mission": "Sintetizar notas de voz y audio broadcast de ultra-alta fidelidad utilizando F5-TTS sobre los núcleos MPS de Apple Silicon.",
+      "triggers": [
+        "dímelo en voz",
+        "léeme esto en audio",
+        "nota de voz",
+        "voice memo"
+      ],
+      "anti_trigger": "Respuestas estándar de texto en el canal de chat.",
+      "execution_route": "dsp:f5tts-voice-cloning-sota (Apple Silicon MPS)",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": true,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_07_voice.md"
+    },
+    {
+      "id": 8,
+      "slug": "code-changes",
+      "agent_name": "c5_agent_08_code_changes",
+      "display_name": "Agente 08: code-changes («Tocar código sin romper el tinglado»)",
+      "transducer": "T4",
+      "category": "Día a día",
+      "mission": "Ejecutar refactorizaciones y mutaciones atómicas en repositorios locales validadas por c5-thermos-audit y compilación estricta.",
+      "triggers": [
+        "modifica la función",
+        "refactoriza este archivo",
+        "arregla este bug"
+      ],
+      "anti_trigger": "Consultas teóricas o lectura de código sin mutación.",
+      "execution_route": "fs:replace_file_content / c5-thermos-audit",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": true,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_08_code_changes.md"
+    },
+    {
+      "id": 9,
+      "slug": "source-control",
+      "agent_name": "c5_agent_09_source_control",
+      "display_name": "Agente 09: source-control («El libro mayor de los cambios»)",
+      "transducer": "T4",
+      "category": "Día a día",
+      "mission": "Gestionar ramas, commits atómicos y pull requests utilizando Jujutsu (jj) integrado con el DAG de Git y firmado en hardware.",
+      "triggers": [
+        "haz un commit y push",
+        "abre una pull request",
+        "create pr"
+      ],
+      "anti_trigger": "Mutación de archivos locales sin intención de versión.",
+      "execution_route": "vcs:jujutsu-vcs-management (jj / git DAG)",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": true,
+        "mcp": false,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_09_source_control.md"
+    },
+    {
+      "id": 10,
+      "slug": "add-connector",
+      "agent_name": "c5_agent_10_add_connector",
+      "display_name": "Agente 10: add-connector («Enchufar un cable nuevo»)",
+      "transducer": "T1",
+      "category": "Día a día",
+      "mission": "Autenticar y conectar APIs y herramientas externas inyectando credenciales volátiles mediante 1Password CLI local (op run) acoplado a Touch ID.",
+      "triggers": [
+        "conecta mi cuenta de",
+        "instala el conector de",
+        "install connector"
+      ],
+      "anti_trigger": "Navegación web pública sin credenciales de usuario.",
+      "execution_route": "auth:c5-1password-secrets (op run / zero-cloud-leak)",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": true,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_10_add_connector.md"
+    },
+    {
+      "id": 11,
+      "slug": "purchases",
+      "agent_name": "c5_agent_11_purchases",
+      "display_name": "Agente 11: purchases («Pasar la tarjeta sin que te desplumen»)",
+      "transducer": "T1",
+      "category": "Día a día",
+      "mission": "Mediar transacciones y checkout con bloqueo inexorable: exige la atestación biométrica NIST P-256 de Borja en el Secure Enclave (c5_biometric_gate).",
+      "triggers": [
+        "compra esto",
+        "reserva el billete y págalo",
+        "haz el checkout"
+      ],
+      "anti_trigger": "Búsqueda y comparación sin compromiso de fondos.",
+      "execution_route": "gate:c5_biometric_gate (Touch ID NIST P-256 / KudurruGate)",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": true,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_11_purchases.md"
+    },
+    {
+      "id": 12,
+      "slug": "shopping",
+      "agent_name": "c5_agent_12_shopping",
+      "display_name": "Agente 12: shopping («Comparar precios sin tragarse anuncios»)",
+      "transducer": "T2",
+      "category": "Día a día",
+      "mission": "Auditar precios, stock y especificaciones técnicas a través de transductores multi-fuente sin sesgo comercial ni cookies infladas.",
+      "triggers": [
+        "busca el mejor precio",
+        "compara artículo",
+        "price check"
+      ],
+      "anti_trigger": "Ejecución final de cobro en pasarela bancaria.",
+      "execution_route": "transducer:TAMKARUM-60 (multi-source scraping)",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": false,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_12_shopping.md"
+    },
+    {
+      "id": 13,
+      "slug": "sign-in",
+      "agent_name": "c5_agent_13_sign_in",
+      "display_name": "Agente 13: sign-in («Pasar el portero de la discoteca»)",
+      "transducer": "T1",
+      "category": "Día a día",
+      "mission": "Gestionar sesiones persistentes en perfiles Chromium locales aislados con inyección segura de contraseñas y MFA mediante 1Password local.",
+      "triggers": [
+        "inicia sesión en",
+        "entra con mi cuenta a",
+        "resuelve el captcha"
+      ],
+      "anti_trigger": "Navegación en dominios públicos sin pantalla de login.",
+      "execution_route": "auth:1Password CLI + local chromium user-data-dir",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": true,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_13_sign_in.md"
+    },
+    {
+      "id": 14,
+      "slug": "in-chat-forms",
+      "agent_name": "c5_agent_14_in_chat_forms",
+      "display_name": "Agente 14: in-chat-forms («Rellenar casillas desde el teclado»)",
+      "transducer": "T4",
+      "category": "Día a día",
+      "mission": "Resolver formularios web interactivos y recopilar datos estructurados mediante widgets modales reactivos en la consola.",
+      "triggers": [
+        "rellena este formulario",
+        "completa los campos de envío"
+      ],
+      "anti_trigger": "Formularios de tarjeta bancaria (derivados a T1).",
+      "execution_route": "ui:ask_question modal / generative_ui widgets",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": false,
+        "mcp": false,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_14_in_chat_forms.md"
+    },
+    {
+      "id": 15,
+      "slug": "box-desktop",
+      "agent_name": "c5_agent_15_box_desktop",
+      "display_name": "Agente 15: box-desktop («El ordenador fantasma de la nube»)",
+      "transducer": "T4",
+      "category": "Día a día",
+      "mission": "Gobernar Chromium headless local mediante Chrome DevTools Protocol (CDP) en Apple Silicon para automatizar webs que carecen de API.",
+      "triggers": [
+        "abre el navegador y haz",
+        "entra en esta web sin api"
+      ],
+      "anti_trigger": "Servicios con endpoint API local disponible.",
+      "execution_route": "cdp:browser-subagent-orchestrator (Chromium headless local)",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": true,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_15_box_desktop.md"
+    },
+    {
+      "id": 16,
+      "slug": "no-connector-fallback",
+      "agent_name": "c5_agent_16_no_connector_fallback",
+      "display_name": "Agente 16: no-connector-fallback («Buscarse la vida cuando no hay enchufe»)",
+      "transducer": "T4",
+      "category": "Día a día",
+      "mission": "Activar la cadena de degradación elegante (cURL estructurado -> parsing Readability DOM -> interacción CDP) ante caída de APIs.",
+      "triggers": [
+        "el conector está fallando",
+        "se atascó el login"
+      ],
+      "anti_trigger": "Cuando la API responde HTTP 200 nominalmente.",
+      "execution_route": "chain:cURL -> Readability DOM -> Local CDP",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": true,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_16_no_connector_fallback.md"
+    },
+    {
+      "id": 17,
+      "slug": "export-bot-template",
+      "agent_name": "c5_agent_17_export_bot_template",
+      "display_name": "Agente 17: export-bot-template («Empaquetar el clon para llevar»)",
+      "transducer": "T4",
+      "category": "Día a día",
+      "mission": "Serializar especificaciones de configuración, skills y prompts en artefactos portátiles HANDOFF.md depurados de credenciales privadas.",
+      "triggers": [
+        "exporta la plantilla",
+        "copia para compartir"
+      ],
+      "anti_trigger": "Backup con datos de historial o credenciales privadas.",
+      "execution_route": "handoff:HANDOFF.md / git-versioned skills",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": true,
+        "mcp": false,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_17_export_bot_template.md"
+    },
+    {
+      "id": 18,
+      "slug": "group-chat-turns",
+      "agent_name": "c5_agent_18_group_chat_turns",
+      "display_name": "Agente 18: group-chat-turns («Saber cuándo callar en el barullo»)",
+      "transducer": "T3",
+      "category": "Día a día",
+      "mission": "Discernir cuándo responder e interactuar en salas grupales multi-usuario aplicando el protocolo de silencio operativo y modos MODO A1/A2.",
+      "triggers": [
+        "@bot",
+        "grupo nexus",
+        "sala grupal"
+      ],
+      "anti_trigger": "Charlas generales donde el bot no es interpelado directamente.",
+      "execution_route": "filter:c5_epistemic_output_format (MODO A1 / A2)",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": true,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_18_group_chat_turns.md"
+    },
+    {
+      "id": 19,
+      "slug": "flight-booking",
+      "agent_name": "c5_agent_19_flight_booking",
+      "display_name": "Agente 19: flight-booking («Cazar billetes sin pagar peajes»)",
+      "transducer": "T2",
+      "category": "Viajes y Consumo",
+      "mission": "Buscar e inspeccionar tarifas aéreas óptimas en ITA Matrix / Google Flights sin tracking de cookies dinámicas.",
+      "triggers": [
+        "búscame un vuelo",
+        "billetes de avión"
+      ],
+      "anti_trigger": "Consultas meteorológicas sin intención de viaje.",
+      "execution_route": "transducer:Google Flights / ITA Matrix JSON headless",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": false,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_19_flight_booking.md"
+    },
+    {
+      "id": 20,
+      "slug": "accommodation-booking",
+      "agent_name": "c5_agent_20_accommodation_booking",
+      "display_name": "Agente 20: accommodation-booking («Buscar techo sin trampa de fotos»)",
+      "transducer": "T2",
+      "category": "Viajes y Consumo",
+      "mission": "Agregar y comparar opciones de hospedaje multi-fuente evaluando aislamiento acústico y ubicación real sin sobreprecio de intermediarios.",
+      "triggers": [
+        "busca hotel en",
+        "alojamiento para"
+      ],
+      "anti_trigger": "Anuncios particulares de Airbnb (enrutados a primitiva 26).",
+      "execution_route": "transducer:Multi-source hotel aggregator (cURL / CDP)",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": false,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_20_accommodation_booking.md"
+    },
+    {
+      "id": 21,
+      "slug": "rideshare",
+      "agent_name": "c5_agent_21_rideshare",
+      "display_name": "Agente 21: rideshare («Pedir coche sin abrir la app del móvil»)",
+      "transducer": "T2",
+      "category": "Viajes y Consumo",
+      "mission": "Consultar estimaciones de tiempo y despachar peticiones de transporte bajo demanda con aprobación Touch ID obligatoria.",
+      "triggers": [
+        "pídeme un uber",
+        "cuánto tarda un cabify"
+      ],
+      "anti_trigger": "Rutas de transporte público regular.",
+      "execution_route": "api:Headless Cabify/Uber + Touch ID gate",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": true,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_21_rideshare.md"
+    },
+    {
+      "id": 22,
+      "slug": "restaurant-recommendations",
+      "agent_name": "c5_agent_22_restaurant_recommendations",
+      "display_name": "Agente 22: restaurant-recommendations («Comer bien sin caer en trampas de turistas»)",
+      "transducer": "T2",
+      "category": "Viajes y Consumo",
+      "mission": "Filtrar y recomendar gastronomía de alta exergía mediante contraste Popperiano de reseñas independientes vetando patrocinios.",
+      "triggers": [
+        "dónde cenar bien",
+        "recomiéndame un restaurante"
+      ],
+      "anti_trigger": "Reserva inmediata de mesa (enrutada a primitiva 23).",
+      "execution_route": "radar:Popperian local gastronomy filter",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": false,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_22_restaurant_recommendations.md"
+    },
+    {
+      "id": 23,
+      "slug": "restaurant-booking",
+      "agent_name": "c5_agent_23_restaurant_booking",
+      "display_name": "Agente 23: restaurant-booking («Poner la mesa sin hacer cola al teléfono»)",
+      "transducer": "T2",
+      "category": "Viajes y Consumo",
+      "mission": "Gestionar reservas en locales gastronómicos mediante playbooks headless interactivos sobre plataformas de restauración.",
+      "triggers": [
+        "reserva mesa en",
+        "hueco hoy a las"
+      ],
+      "anti_trigger": "Comida a domicilio (enrutada a primitiva 24).",
+      "execution_route": "playbook:OpenTable / Resy headless local session",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": true,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_23_restaurant_booking.md"
+    },
+    {
+      "id": 24,
+      "slug": "food-ordering",
+      "agent_name": "c5_agent_24_food_ordering",
+      "display_name": "Agente 24: food-ordering («Pedir comida sin que te cobren triple comisión»)",
+      "transducer": "T2",
+      "category": "Viajes y Consumo",
+      "mission": "Gestionar pedidos de comida a hostelería directa o agregadores locales con tope presupuestario en KudurruBudgetGate.",
+      "triggers": [
+        "pide comida a domicilio",
+        "pide unas pizzas"
+      ],
+      "anti_trigger": "Cesta de supermercado cruda (enrutada a primitiva 37).",
+      "execution_route": "relocation:Glovo / JustEat / Hostelería directa",
+      "relocation": "Glovo / JustEat / Hostelería directa",
+      "tools": {
+        "read": true,
+        "write": true,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_24_food_ordering.md"
+    },
+    {
+      "id": 25,
+      "slug": "job-search",
+      "agent_name": "c5_agent_25_job_search",
+      "display_name": "Agente 25: job-search («Buscar curro con bisturí»)",
+      "transducer": "T4",
+      "category": "Viajes y Consumo",
+      "mission": "Rastrear vacantes técnicas de alta especificidad (Rust, C5, IA) con análisis ATS y scoring STAR sin perfil público expuesto.",
+      "triggers": [
+        "busca ofertas de",
+        "puestos de rust"
+      ],
+      "anti_trigger": "Redacción completa de currículum o simulación de entrevista.",
+      "execution_route": "skill:c5-career-and-interview-architect",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": true,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_25_job_search.md"
+    },
+    {
+      "id": 26,
+      "slug": "site-playbooks-airbnb",
+      "agent_name": "c5_agent_26_site_playbooks_airbnb",
+      "display_name": "Agente 26: site-playbooks-airbnb («Inspección de estancias vacacionales»)",
+      "transducer": "T2",
+      "category": "Playbooks de Plataforma",
+      "mission": "Extraer anuncios de estancias, precios finales desglosados y reseñas reales sin cookies de seguimiento.",
+      "triggers": [
+        "busca en airbnb",
+        "anuncio de airbnb"
+      ],
+      "anti_trigger": "Herramientas de anfitrión o gestión de anuncios propios.",
+      "execution_route": "cdp:browser-subagent-orchestrator (solo lectura / scraping DOM)",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": false,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_26_site_playbooks_airbnb.md"
+    },
+    {
+      "id": 27,
+      "slug": "site-playbooks-bestbuy",
+      "agent_name": "c5_agent_27_site_playbooks_bestbuy",
+      "display_name": "Agente 27: site-playbooks-bestbuy («Caza de gadgets en tienda americana»)",
+      "transducer": "T2",
+      "category": "Playbooks de Plataforma",
+      "mission": "Monitorear stock y precios en el catálogo de Best Buy mediante cURL headless.",
+      "triggers": [
+        "busca en best buy",
+        "stock en best buy"
+      ],
+      "anti_trigger": "Compras en España sin servicio físico de Best Buy.",
+      "execution_route": "curl:Headless cURL (modo US)",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": false,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_27_site_playbooks_bestbuy.md"
+    },
+    {
+      "id": 28,
+      "slug": "site-playbooks-costco",
+      "agent_name": "c5_agent_28_site_playbooks_costco",
+      "display_name": "Agente 28: site-playbooks-costco («Auditoría a granel»)",
+      "transducer": "T2",
+      "category": "Playbooks de Plataforma",
+      "mission": "Auditar stock y precios unitarios del catálogo de Costco.",
+      "triggers": [
+        "precio en costco",
+        "carrito same-day costco"
+      ],
+      "anti_trigger": "Consultas sin carnet de socio activo en almacén de claves.",
+      "execution_route": "curl:Costco unit catalog auditor",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": false,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_28_site_playbooks_costco.md"
+    },
+    {
+      "id": 29,
+      "slug": "site-playbooks-craigslist",
+      "agent_name": "c5_agent_29_site_playbooks_craigslist",
+      "display_name": "Agente 29: site-playbooks-craigslist («Rastreo de tablón local»)",
+      "transducer": "T2",
+      "category": "Playbooks de Plataforma",
+      "mission": "Escanear tablones de anuncios clasificados. En territorio soberano español colapsa en Wallapop / Milanuncios.",
+      "triggers": [
+        "busca en craigslist",
+        "clasificados craigslist"
+      ],
+      "anti_trigger": "Publicar anuncios o contactar vendedores (solo lectura).",
+      "execution_route": "relocation:Wallapop / Milanuncios (Scraping DOM headless)",
+      "relocation": "Wallapop / Milanuncios",
+      "tools": {
+        "read": true,
+        "write": false,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_29_site_playbooks_craigslist.md"
+    },
+    {
+      "id": 30,
+      "slug": "site-playbooks-doordash",
+      "agent_name": "c5_agent_30_site_playbooks_doordash",
+      "display_name": "Agente 30: site-playbooks-doordash («Comida y recados en DoorDash»)",
+      "transducer": "T2",
+      "category": "Playbooks de Plataforma",
+      "mission": "Consultar cartas y armar carritos. En territorio soberano español colapsa en Glovo / JustEat / Carta local.",
+      "triggers": [
+        "carta en doordash",
+        "carrito doordash"
+      ],
+      "anti_trigger": "Ejecución de cobro sin verificación dactilar en Ring-0.",
+      "execution_route": "relocation:Glovo / JustEat / Hostelería directa",
+      "relocation": "Glovo / JustEat / Hostelería directa",
+      "tools": {
+        "read": true,
+        "write": true,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_30_site_playbooks_doordash.md"
+    },
+    {
+      "id": 31,
+      "slug": "site-playbooks-ebay",
+      "agent_name": "c5_agent_31_site_playbooks_ebay",
+      "display_name": "Agente 31: site-playbooks-ebay («Pujas y compras de segunda mano»)",
+      "transducer": "T2",
+      "category": "Playbooks de Plataforma",
+      "mission": "Auditar historial de ventas cerradas y valor medio de mercado de artículos en eBay.",
+      "triggers": [
+        "busca en ebay",
+        "precio de venta en ebay"
+      ],
+      "anti_trigger": "Pujas de último segundo (sniping) sin saldo garantizado.",
+      "execution_route": "api:eBay Completed Listings / cURL headless",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": false,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_31_site_playbooks_ebay.md"
+    },
+    {
+      "id": 32,
+      "slug": "site-playbooks-etsy",
+      "agent_name": "c5_agent_32_site_playbooks_etsy",
+      "display_name": "Agente 32: site-playbooks-etsy («Artesanía y personalizaciones»)",
+      "transducer": "T2",
+      "category": "Playbooks de Plataforma",
+      "mission": "Filtrar y auditar artículos artesanos descartando revendedores industriales mediante búsqueda inversa.",
+      "triggers": [
+        "busca en etsy",
+        "artesanía en etsy"
+      ],
+      "anti_trigger": "Herramientas de vendedor (gestión de tienda).",
+      "execution_route": "filter:Reverse image search anti-AliExpress",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": false,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_32_site_playbooks_etsy.md"
+    },
+    {
+      "id": 33,
+      "slug": "site-playbooks-expedia",
+      "agent_name": "c5_agent_33_site_playbooks_expedia",
+      "display_name": "Agente 33: site-playbooks-expedia («Comparador general de viajes»)",
+      "transducer": "T2",
+      "category": "Playbooks de Plataforma",
+      "mission": "Auditar paquetes turísticos y opciones hoteleras en Expedia mediante scraping headless sin recargo de sesión.",
+      "triggers": [
+        "compara en expedia",
+        "paquetes de viaje expedia"
+      ],
+      "anti_trigger": "Búsquedas de aerolínea monomarca directa.",
+      "execution_route": "transducer:Multi-OTA headless aggregator",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": false,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_33_site_playbooks_expedia.md"
+    },
+    {
+      "id": 34,
+      "slug": "site-playbooks-facebook-marketplace",
+      "agent_name": "c5_agent_34_site_playbooks_facebook_marketplace",
+      "display_name": "Agente 34: site-playbooks-facebook-marketplace («Segunda mano vecinal»)",
+      "transducer": "T2",
+      "category": "Playbooks de Plataforma",
+      "mission": "Rastrear oportunidades de segunda mano y alquiler en Facebook Marketplace mediante perfil local aislado.",
+      "triggers": [
+        "facebook marketplace",
+        "alquileres en marketplace"
+      ],
+      "anti_trigger": "Enviar mensajes al vendedor o publicar artículos.",
+      "execution_route": "cdp:Isolated local Chromium profile",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": false,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_34_site_playbooks_facebook_marketplace.md"
+    },
+    {
+      "id": 35,
+      "slug": "site-playbooks-fedex",
+      "agent_name": "c5_agent_35_site_playbooks_fedex",
+      "display_name": "Agente 35: site-playbooks-fedex («Rastreo logístico de FedEx»)",
+      "transducer": "T2",
+      "category": "Playbooks de Plataforma",
+      "mission": "Consultar la telemetría exacta de paquetes de FedEx mediante API directa o puerta de enlace SEUR.",
+      "triggers": [
+        "seguimiento de fedex",
+        "tracking fedex"
+      ],
+      "anti_trigger": "Envíos de otras compañías logísticas.",
+      "execution_route": "api:FedEx Direct API / SEUR Gateway",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": false,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_35_site_playbooks_fedex.md"
+    },
+    {
+      "id": 36,
+      "slug": "site-playbooks-google-flights",
+      "agent_name": "c5_agent_36_site_playbooks_google_flights",
+      "display_name": "Agente 36: site-playbooks-google-flights («El radar global de tarifas aéreas»)",
+      "transducer": "T2",
+      "category": "Playbooks de Plataforma",
+      "mission": "Extraer itinerarios y curvas de precios mínimos en Google Flights vía endpoints públicos estructurados.",
+      "triggers": [
+        "google flights",
+        "itinerarios google flights"
+      ],
+      "anti_trigger": "Intentar procesar compras dentro del motor.",
+      "execution_route": "api:Google Flights public JSON endpoint / Playwright",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": false,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_36_site_playbooks_google_flights.md"
+    },
+    {
+      "id": 37,
+      "slug": "site-playbooks-instacart",
+      "agent_name": "c5_agent_37_site_playbooks_instacart",
+      "display_name": "Agente 37: site-playbooks-instacart («Cesta de la compra a domicilio»)",
+      "transducer": "T2",
+      "category": "Playbooks de Plataforma",
+      "mission": "Confeccionar cestas de la compra. En territorio soberano español colapsa en Mercadona / Carrefour / Alcampo.",
+      "triggers": [
+        "compra en instacart",
+        "supermercado instacart"
+      ],
+      "anti_trigger": "Confirmación de entrega sin desglose de comisiones.",
+      "execution_route": "relocation:Mercadona / Carrefour / Alcampo",
+      "relocation": "Mercadona / Carrefour / Alcampo",
+      "tools": {
+        "read": true,
+        "write": true,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_37_site_playbooks_instacart.md"
+    },
+    {
+      "id": 38,
+      "slug": "site-playbooks-linkedin",
+      "agent_name": "c5_agent_38_site_playbooks_linkedin",
+      "display_name": "Agente 38: site-playbooks-linkedin («Radar de empleo corporativo»)",
+      "transducer": "T2",
+      "category": "Playbooks de Plataforma",
+      "mission": "Rastrear ofertas de empleo en LinkedIn mediante navegador headless sin iniciar sesión pública.",
+      "triggers": [
+        "ofertas en linkedin",
+        "empleo en linkedin"
+      ],
+      "anti_trigger": "Postulación directa o mutación de perfil personal.",
+      "execution_route": "cdp:Headless CDP job scraper sin sesión pública",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": false,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_38_site_playbooks_linkedin.md"
+    },
+    {
+      "id": 39,
+      "slug": "site-playbooks-luma",
+      "agent_name": "c5_agent_39_site_playbooks_luma",
+      "display_name": "Agente 39: site-playbooks-luma («Eventos y comunidad tech»)",
+      "transducer": "T2",
+      "category": "Playbooks de Plataforma",
+      "mission": "Inspeccionar calendarios y registrar eventos técnicos en Luma consumiendo feeds ICS estructurados.",
+      "triggers": [
+        "eventos en luma",
+        "ficha de evento en luma"
+      ],
+      "anti_trigger": "Cancelación de eventos gestionados por el anfitrión.",
+      "execution_route": "api:Luma ICS parser / REST API",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": true,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_39_site_playbooks_luma.md"
+    },
+    {
+      "id": 40,
+      "slug": "site-playbooks-opentable",
+      "agent_name": "c5_agent_40_site_playbooks_opentable",
+      "display_name": "Agente 40: site-playbooks-opentable («Reserva directa en OpenTable»)",
+      "transducer": "T2",
+      "category": "Playbooks de Plataforma",
+      "mission": "Monitorear huecos libres y cancelaciones de última hora en restaurantes adscritos a OpenTable.",
+      "triggers": [
+        "mesa en opentable",
+        "reserva en opentable"
+      ],
+      "anti_trigger": "Restaurantes integrados en la red Resy.",
+      "execution_route": "playbook:OpenTable headless cancellation poller",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": true,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_40_site_playbooks_opentable.md"
+    },
+    {
+      "id": 41,
+      "slug": "site-playbooks-realtor",
+      "agent_name": "c5_agent_41_site_playbooks_realtor",
+      "display_name": "Agente 41: site-playbooks-realtor («Listados inmobiliarios en EE. UU.»)",
+      "transducer": "T2",
+      "category": "Playbooks de Plataforma",
+      "mission": "Auditar métricas inmobiliarias. En territorio soberano español colapsa en Idealista y Catastro API.",
+      "triggers": [
+        "casas en realtor",
+        "colegios en realtor"
+      ],
+      "anti_trigger": "Búsquedas inmobiliarias en territorio europeo.",
+      "execution_route": "relocation:Idealista / Sede Electrónica del Catastro",
+      "relocation": "Idealista / Catastro API",
+      "tools": {
+        "read": true,
+        "write": false,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_41_site_playbooks_realtor.md"
+    },
+    {
+      "id": 42,
+      "slug": "site-playbooks-resy",
+      "agent_name": "c5_agent_42_site_playbooks_resy",
+      "display_name": "Agente 42: site-playbooks-resy («Mesa en locales exclusivos»)",
+      "transducer": "T2",
+      "category": "Playbooks de Plataforma",
+      "mission": "Disparar peticiones de reserva en locales de alta demanda en Resy coordinadas con schedule al milisegundo.",
+      "triggers": [
+        "mesas libres en resy",
+        "reserva por resy"
+      ],
+      "anti_trigger": "Restaurantes no adscritos a la red Resy.",
+      "execution_route": "playbook:Resy millisecond launchd/schedule trigger",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": true,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_42_site_playbooks_resy.md"
+    },
+    {
+      "id": 43,
+      "slug": "site-playbooks-southwest",
+      "agent_name": "c5_agent_43_site_playbooks_southwest",
+      "display_name": "Agente 43: site-playbooks-southwest («Tarifas de aerolínea Southwest»)",
+      "transducer": "T2",
+      "category": "Playbooks de Plataforma",
+      "mission": "Consultar tarifas punto a punto. En territorio soberano español colapsa en Renfe Cercanías/AVE e Iberia/Vueling.",
+      "triggers": [
+        "tarifas de southwest",
+        "vuelos southwest"
+      ],
+      "anti_trigger": "Reservas, check-in o cambios de vuelo (no soportado).",
+      "execution_route": "relocation:Renfe Cercanías/AVE + Iberia / Vueling",
+      "relocation": "Renfe Cercanías/AVE + Iberia / Vueling",
+      "tools": {
+        "read": true,
+        "write": false,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_43_site_playbooks_southwest.md"
+    },
+    {
+      "id": 44,
+      "slug": "site-playbooks-target",
+      "agent_name": "c5_agent_44_site_playbooks_target",
+      "display_name": "Agente 44: site-playbooks-target («Precios y recogida en Target»)",
+      "transducer": "T2",
+      "category": "Playbooks de Plataforma",
+      "mission": "Consultar stock físico y precios en Target mediante transductor cURL headless.",
+      "triggers": [
+        "busca en target",
+        "stock en target"
+      ],
+      "anti_trigger": "Compras en tiendas fuera de Estados Unidos.",
+      "execution_route": "curl:Target cURL headless (modo US)",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": false,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_44_site_playbooks_target.md"
+    },
+    {
+      "id": 45,
+      "slug": "site-playbooks-united",
+      "agent_name": "c5_agent_45_site_playbooks_united",
+      "display_name": "Agente 45: site-playbooks-united («Vuelos de United con millas»)",
+      "transducer": "T2",
+      "category": "Playbooks de Plataforma",
+      "mission": "Monitorear disponibilidad de billetes Saver con millas en la red de Star Alliance / United.",
+      "triggers": [
+        "vuelos de united",
+        "millas en united"
+      ],
+      "anti_trigger": "Gestión de un billete ya emitido o cambio de asiento.",
+      "execution_route": "parser:United Saver award availability engine",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": false,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_45_site_playbooks_united.md"
+    },
+    {
+      "id": 46,
+      "slug": "site-playbooks-ups",
+      "agent_name": "c5_agent_46_site_playbooks_ups",
+      "display_name": "Agente 46: site-playbooks-ups («Rastreo logístico de UPS»)",
+      "transducer": "T2",
+      "category": "Playbooks de Plataforma",
+      "mission": "Consultar telemetría de tránsito de paquetes de UPS mediante API directa o puerta de enlace GLS.",
+      "triggers": [
+        "seguimiento de ups",
+        "tracking ups"
+      ],
+      "anti_trigger": "Paquetes de otras agencias logísticas.",
+      "execution_route": "api:UPS Tracking API / GLS Gateway",
+      "relocation": "Nativa / No requiere relocalización",
+      "tools": {
+        "read": true,
+        "write": false,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_46_site_playbooks_ups.md"
+    },
+    {
+      "id": 47,
+      "slug": "site-playbooks-usps",
+      "agent_name": "c5_agent_47_site_playbooks_usps",
+      "display_name": "Agente 47: site-playbooks-usps («Rastreo del servicio postal estadounidense»)",
+      "transducer": "T2",
+      "category": "Playbooks de Plataforma",
+      "mission": "Seguimiento de envíos postales. En territorio soberano español colapsa en la API y webhooks de Correos España.",
+      "triggers": [
+        "tracking de usps",
+        "correos usps"
+      ],
+      "anti_trigger": "Envíos de paquetería privada internacional.",
+      "execution_route": "relocation:Correos España API",
+      "relocation": "Correos España API",
+      "tools": {
+        "read": true,
+        "write": false,
+        "mcp": true,
+        "subagents": false
+      },
+      "spec_file": "/Users/borjafernandezangulo/.gemini/config/skills/c5-autonomous-agent-primitives/agents/agent_47_site_playbooks_usps.md"
+    }
+  ]
+}

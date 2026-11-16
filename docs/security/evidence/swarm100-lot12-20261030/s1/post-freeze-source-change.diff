@@ -1,0 +1,13 @@
+--- approved/scripts/c5_l1_ledger/ledger_snapshot_engine.py
++++ current/scripts/c5_l1_ledger/ledger_snapshot_engine.py
+@@ -97,7 +97,9 @@
+                 try:
+                     _unlink_owned(path, identity)
+                 except OSError:
+-                    error.add_note("Snapshot output cleanup failed; inspect unpublished files")
++                    add_note = getattr(error, "add_note", None)
++                    if callable(add_note):
++                        add_note("Snapshot output cleanup failed; inspect unpublished files")
+             raise
+         finally:
+             os.close(dest_fd)

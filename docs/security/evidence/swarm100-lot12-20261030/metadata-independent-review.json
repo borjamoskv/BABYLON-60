@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-30",
+  "decision": "CHANGES_REQUIRED",
+  "scope": "Global metadata review pending a stable source snapshot; no final approval.",
+  "open_actionable_findings": [
+    {
+      "kind": "CONCURRENT_OUTSIDE_SOURCE_DRIFT",
+      "prepared_not_applied": [
+        "SW100-C0425",
+        "SW100-C0458",
+        "SW100-C0513"
+      ],
+      "status": "Reconciliation stopped after strict stale-source rejection; three documentary OPEN inputs are prepared. Await source-stability coordination before any further apply."
+    }
+  ],
+  "completed_before_control_blocker": [
+    "30 selected update states/rationales/source checks matched the then-current per-ID reviews",
+    "23 collateral plus6 outside-scope metadata payloads prepared with preserved states",
+    "C0461 unpatched duplicate surface reviewed and explicitly OPEN"
+  ],
+  "actual_reconciler_control_status": "Strict canonical reconciler rejected concurrent outside source drift before output writes. No negative case is reported passed until it has actually run against stable current metadata.",
+  "repro_command": [
+    "python3",
+    "docs/security/evidence/swarm100-lot12-20261030/metadata-independent-check.py"
+  ],
+  "product_source_edited": false,
+  "canonical_files_written": false,
+  "limits": [
+    "This interim artifact cannot support status VALIDATED or any completion claim.",
+    "The checker intercepts reconciler writes in memory and checks canonical before/after hashes."
+  ]
+}

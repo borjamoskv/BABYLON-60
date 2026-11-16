@@ -1,0 +1,51 @@
+{
+  "solver-configured": {
+    "command": [
+      "cargo",
+      "test",
+      "-q",
+      "--locked",
+      "-p",
+      "babylon60-compiler",
+      "--test",
+      "semantic_solver_adapter",
+      "--test",
+      "solver_trust"
+    ],
+    "exit_code": 101
+  },
+  "derive-skill-lock": {
+    "command": [
+      "cargo",
+      "run",
+      "-q",
+      "--locked",
+      "-p",
+      "babylon-skills-mcp",
+      "--",
+      "--catalog",
+      "/Users/borjafernandezangulo/.codex/worktrees/pending-local-audit/BABYLON-60/docs/skills.json",
+      "--skills-dir",
+      "/Users/borjafernandezangulo/.codex/worktrees/pending-local-audit/BABYLON-60/.agents/skills",
+      "--emit-lockfile",
+      "/Users/borjafernandezangulo/.codex/local-core-evidence/pending-audit-20261030T000841Z/derived-skills-lock.json"
+    ],
+    "exit_code": 0
+  },
+  "entropy-release": {
+    "command": [
+      "cargo",
+      "test",
+      "-q",
+      "--locked",
+      "--release",
+      "-p",
+      "babylon60-kernel",
+      "--test",
+      "semantic_entropy_regressions",
+      "--test",
+      "semantic_solver_outcomes"
+    ],
+    "exit_code": 0
+  }
+}

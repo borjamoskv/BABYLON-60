@@ -1,0 +1,33 @@
+{
+  "paths": [
+    "01_KISH_ENGINE/babylon60/bft/consensus_committer.py",
+    "01_KISH_ENGINE/babylon60/bft/consensus_ledger.py",
+    "01_KISH_ENGINE/babylon60/cli/llm_attest.py",
+    "01_KISH_ENGINE/babylon60/database/core.py",
+    "01_KISH_ENGINE/babylon60/mcp/cortex_mcp_server.py",
+    "01_KISH_ENGINE/babylon60/mcp/effect_dispatch.py",
+    "01_KISH_ENGINE/babylon60/mcp/mail_integration.py",
+    "01_KISH_ENGINE/babylon60/memory/__init__.py",
+    "01_KISH_ENGINE/babylon60/memory/provenance_arbiter.py",
+    "01_KISH_ENGINE/babylon60/verification/finding_contract.py",
+    "scripts/c5_cli/doxastic_kripke_engine.py",
+    "scripts/c5_cli/markov_bridge.py",
+    "scripts/c5_demos/poc_graph_isomorphism_wl.py",
+    "scripts/c5_isomorphisms/c5_ultimate_causal_determinant.py",
+    "tests/test_attest_proof_regressions.py",
+    "tests/test_biometric_signing_contract.py",
+    "tests/test_consensus_atomic_commit.py",
+    "tests/test_consensus_fault_recovery.py",
+    "tests/test_consensus_recovery_regressions.py",
+    "tests/test_database_config_cleanup.py",
+    "tests/test_doxastic_kripke_engine.py",
+    "tests/test_finding_evidence_contract.py",
+    "tests/test_fl027_provenance_authority.py",
+    "tests/test_fl_mcp01_dispatch.py",
+    "tests/test_graph_isomorphism_regressions.py",
+    "tests/test_inv_c5_28_falsification.py",
+    "tests/test_markov_bridge.py",
+    "tests/test_semantic_entropy_lean_alignment.py"
+  ],
+  "exit_code": 1
+}

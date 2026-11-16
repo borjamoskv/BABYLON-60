@@ -1,0 +1,12 @@
+{
+  "source_sha256": {
+    "proof/bundles/attestation_bundle_v1/verify": "da44e559a79a11fa860e19cdafd5402490332964c6893719eb742bb7ed7bc99e",
+    "scripts/generate_attestation_bundle.py": "588f38c54732f3a2d5b88e7986b3ae3629db6c88dd3be945e5dfef4e7f265c4c",
+    "scripts/generate_attestation_bundle_v2.py": "83f1835ffb64bd6cc0139279f1f1c6b2c9a8b0bddae3f0a8fbfbd465b8e6069f",
+    "proof/bundles/attestation_bundle_v2/verify": "bc1bff6c68dee804263e0f6e3a1c48bb879ad9c21ceed7881dbc83ffe6a1d8f2",
+    "uv.lock": "d78739746ac5d442a074ad73cbc7fc06d6e803558126f65fbc3d6d251d4c1fb4",
+    "Cargo.lock": "7c772f6e6ffd29594c5b9bdadb004be09c57af67b60b7be1b56c034a174491b4",
+    "pyproject.toml": "50d4594dd2125fcbe7df0578394b5d2c2e6ac7c7dddb4b5fc9be68229eb8d0cd"
+  },
+  "git_head": "28257bd74fce31446b0350d094e9dab148a1aea7"
+}

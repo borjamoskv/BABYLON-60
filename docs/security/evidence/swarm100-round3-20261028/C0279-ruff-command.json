@@ -1,0 +1,14 @@
+{
+  "command": [
+    "uv",
+    "run",
+    "--locked",
+    "--no-sync",
+    "ruff",
+    "check",
+    "scripts/c5_sharur/agent_beeper.py"
+  ],
+  "exit_code": 0,
+  "log": "docs/security/evidence/swarm100-round3-20261028/C0279-ruff.log",
+  "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+}

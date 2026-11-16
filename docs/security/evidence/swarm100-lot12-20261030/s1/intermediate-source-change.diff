@@ -1,0 +1,54 @@
+diff --git a/scripts/c5_l1_ledger/ledger_snapshot_engine.py b/scripts/c5_l1_ledger/ledger_snapshot_engine.py
+index f74a6529..32b04c3b 100755
+--- a/scripts/c5_l1_ledger/ledger_snapshot_engine.py
++++ b/scripts/c5_l1_ledger/ledger_snapshot_engine.py
+@@ -21,7 +21,7 @@ from pathlib import Path
+ 
+ from babylon60.bft.ledger_actor import BFTLedgerActor, LedgerEvent
+ 
+-REPO_ROOT = Path(__file__).parent.parents[2]
++REPO_ROOT = Path(__file__).resolve().parents[2]
+ SNAPSHOT_DIR = REPO_ROOT / "audit" / "snapshots"
+ DB_PATH = REPO_ROOT / "cortex.db"
+ AUTHOR = "Telmo Dinámico de Moskv (borjamoskv)"
+@@ -41,20 +41,19 @@ def get_latest_commit() -> str:
+ 
+ 
+ def create_snapshot() -> Path:
++    if not DB_PATH.is_file():
++        raise FileNotFoundError(f"Source database not found: {DB_PATH}")
++
+     SNAPSHOT_DIR.mkdir(parents=True, exist_ok=True)
+     timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
+-    dest_db = SNAPSHOT_DIR / f"cortex_snapshot_{timestamp}.db"
+-
+-    # SQLite VACUUM INTO to safely create a consistent snapshot without blocking WAL
+-    if DB_PATH.exists():
+-        conn = sqlite3.connect(DB_PATH)
+-        try:
+-            conn.execute("VACUUM INTO ?", (str(dest_db),))
+-        finally:
+-            conn.close()
+-    else:
+-        # Create empty db if cortex.db doesn't exist yet
+-        sqlite3.connect(dest_db).close()
++    token = f"{timestamp}_{uuid.uuid4().hex}"
++    dest_db = SNAPSHOT_DIR / f"cortex_snapshot_{token}.db"
++
++    conn = sqlite3.connect(DB_PATH)
++    try:
++        conn.execute("VACUUM INTO ?", (str(dest_db),))
++    finally:
++        conn.close()
+ 
+     db_hash = compute_sha256(dest_db)
+     commit_sha = get_latest_commit()
+@@ -67,7 +66,7 @@ def create_snapshot() -> Path:
+         "created_at": datetime.now(timezone.utc).isoformat(),
+     }
+ 
+-    manifest_path = SNAPSHOT_DIR / f"manifest_{timestamp}.json"
++    manifest_path = SNAPSHOT_DIR / f"manifest_{token}.json"
+     with open(manifest_path, "w") as f:
+         json.dump(manifest, f, indent=2)
+ 

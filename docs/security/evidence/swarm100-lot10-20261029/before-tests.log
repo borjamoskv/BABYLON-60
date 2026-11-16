@@ -1,0 +1,191 @@
+FFFFFFFFF                                                                [100%]
+=================================== FAILURES ===================================
+______ test_c0574_preserves_open_git_lock_inode_and_contents[index.lock] _______
+tests/test_swarm100_lot10_regressions.py:58: in test_c0574_preserves_open_git_lock_inode_and_contents
+    assert lock.exists()
+E   AssertionError: assert False
+E    +  where False = exists()
+E    +    where exists = PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-804/test_c0574_preserves_open_git_0/owned workspace/.git/index.lock').exists
+----------------------------- Captured stdout call -----------------------------
+======================================================================
+ 🧹 ANERGY PURGE ENGINE — PURGA DE RESIDUOS & ENTROPÍA TEMPORAL
+======================================================================
+
+--- INFORME DE PURGA DE RESIDUOS ---
+  • Directorios Cache (__pycache__/.pytest_cache) : 0 eliminados
+  • Archivos Bytecode (*.pyc)                      : 0 eliminados
+  • Archivos de Sistema (.DS_Store)                : 0 eliminados
+  • Bases de Datos Temporales en Scratch (*.db)     : 0 eliminados
+  • Cerrojos Huérfanos (*.lock)                     : 1 eliminados
+
+======================================================================
+  VERDICT: RESIDUAL PURGE COMPLETE — REPOSITORIO LIBRE DE ANERGÍA (0% ENTROPÍA)
+======================================================================
+___ test_c0574_preserves_open_git_lock_inode_and_contents[packed-refs.lock] ____
+tests/test_swarm100_lot10_regressions.py:58: in test_c0574_preserves_open_git_lock_inode_and_contents
+    assert lock.exists()
+E   AssertionError: assert False
+E    +  where False = exists()
+E    +    where exists = PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-804/test_c0574_preserves_open_git_1/owned workspace/.git/packed-refs.lock').exists
+----------------------------- Captured stdout call -----------------------------
+======================================================================
+ 🧹 ANERGY PURGE ENGINE — PURGA DE RESIDUOS & ENTROPÍA TEMPORAL
+======================================================================
+
+--- INFORME DE PURGA DE RESIDUOS ---
+  • Directorios Cache (__pycache__/.pytest_cache) : 0 eliminados
+  • Archivos Bytecode (*.pyc)                      : 0 eliminados
+  • Archivos de Sistema (.DS_Store)                : 0 eliminados
+  • Bases de Datos Temporales en Scratch (*.db)     : 0 eliminados
+  • Cerrojos Huérfanos (*.lock)                     : 1 eliminados
+
+======================================================================
+  VERDICT: RESIDUAL PURGE COMPLETE — REPOSITORIO LIBRE DE ANERGÍA (0% ENTROPÍA)
+======================================================================
+_______ test_c0574_preserves_git_exclusion_while_lock_descriptor_is_open _______
+tests/test_swarm100_lot10_regressions.py:73: in test_c0574_preserves_git_exclusion_while_lock_descriptor_is_open
+    assert after.returncode!=0,'lock deletion let a competing Git update succeed'
+E   AssertionError: lock deletion let a competing Git update succeed
+E   assert 0 != 0
+E    +  where 0 = CompletedProcess(args=['git', 'add', '--', 'README.md'], returncode=0, stdout=b'', stderr=b'').returncode
+----------------------------- Captured stdout call -----------------------------
+======================================================================
+ 🧹 ANERGY PURGE ENGINE — PURGA DE RESIDUOS & ENTROPÍA TEMPORAL
+======================================================================
+
+--- INFORME DE PURGA DE RESIDUOS ---
+  • Directorios Cache (__pycache__/.pytest_cache) : 0 eliminados
+  • Archivos Bytecode (*.pyc)                      : 0 eliminados
+  • Archivos de Sistema (.DS_Store)                : 0 eliminados
+  • Bases de Datos Temporales en Scratch (*.db)     : 0 eliminados
+  • Cerrojos Huérfanos (*.lock)                     : 1 eliminados
+
+======================================================================
+  VERDICT: RESIDUAL PURGE COMPLETE — REPOSITORIO LIBRE DE ANERGÍA (0% ENTROPÍA)
+======================================================================
+____________ test_c0575_preserves_live_sqlite_database_wal_and_shm _____________
+tests/test_swarm100_lot10_regressions.py:94: in test_c0575_preserves_live_sqlite_database_wal_and_shm
+    assert path.exists(),path.name
+E   AssertionError: active.db
+E   assert False
+E    +  where False = exists()
+E    +    where exists = PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-804/test_c0575_preserves_live_sqli0/owned workspace/scratch/active.db').exists
+----------------------------- Captured stdout call -----------------------------
+======================================================================
+ 🧹 ANERGY PURGE ENGINE — PURGA DE RESIDUOS & ENTROPÍA TEMPORAL
+======================================================================
+
+--- INFORME DE PURGA DE RESIDUOS ---
+  • Directorios Cache (__pycache__/.pytest_cache) : 0 eliminados
+  • Archivos Bytecode (*.pyc)                      : 0 eliminados
+  • Archivos de Sistema (.DS_Store)                : 0 eliminados
+  • Bases de Datos Temporales en Scratch (*.db)     : 3 eliminados
+  • Cerrojos Huérfanos (*.lock)                     : 0 eliminados
+
+======================================================================
+  VERDICT: RESIDUAL PURGE COMPLETE — REPOSITORIO LIBRE DE ANERGÍA (0% ENTROPÍA)
+======================================================================
+_______ test_c0575_preserves_unowned_database_lookalikes[keep.db.backup] _______
+tests/test_swarm100_lot10_regressions.py:109: in test_c0575_preserves_unowned_database_lookalikes
+    assert target.exists() and target.stat().st_ino==before
+E   AssertionError: assert (False)
+E    +  where False = exists()
+E    +    where exists = PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-804/test_c0575_preserves_unowned_d0/owned workspace/scratch/keep.db.backup').exists
+----------------------------- Captured stdout call -----------------------------
+======================================================================
+ 🧹 ANERGY PURGE ENGINE — PURGA DE RESIDUOS & ENTROPÍA TEMPORAL
+======================================================================
+
+--- INFORME DE PURGA DE RESIDUOS ---
+  • Directorios Cache (__pycache__/.pytest_cache) : 0 eliminados
+  • Archivos Bytecode (*.pyc)                      : 0 eliminados
+  • Archivos de Sistema (.DS_Store)                : 0 eliminados
+  • Bases de Datos Temporales en Scratch (*.db)     : 1 eliminados
+  • Cerrojos Huérfanos (*.lock)                     : 0 eliminados
+
+======================================================================
+  VERDICT: RESIDUAL PURGE COMPLETE — REPOSITORIO LIBRE DE ANERGÍA (0% ENTROPÍA)
+======================================================================
+________ test_c0575_preserves_unowned_database_lookalikes[notes.db.txt] ________
+tests/test_swarm100_lot10_regressions.py:109: in test_c0575_preserves_unowned_database_lookalikes
+    assert target.exists() and target.stat().st_ino==before
+E   AssertionError: assert (False)
+E    +  where False = exists()
+E    +    where exists = PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-804/test_c0575_preserves_unowned_d1/owned workspace/scratch/notes.db.txt').exists
+----------------------------- Captured stdout call -----------------------------
+======================================================================
+ 🧹 ANERGY PURGE ENGINE — PURGA DE RESIDUOS & ENTROPÍA TEMPORAL
+======================================================================
+
+--- INFORME DE PURGA DE RESIDUOS ---
+  • Directorios Cache (__pycache__/.pytest_cache) : 0 eliminados
+  • Archivos Bytecode (*.pyc)                      : 0 eliminados
+  • Archivos de Sistema (.DS_Store)                : 0 eliminados
+  • Bases de Datos Temporales en Scratch (*.db)     : 1 eliminados
+  • Cerrojos Huérfanos (*.lock)                     : 0 eliminados
+
+======================================================================
+  VERDICT: RESIDUAL PURGE COMPLETE — REPOSITORIO LIBRE DE ANERGÍA (0% ENTROPÍA)
+======================================================================
+_______ test_c0575_preserves_unowned_database_lookalikes[foreign.db-wal] _______
+tests/test_swarm100_lot10_regressions.py:109: in test_c0575_preserves_unowned_database_lookalikes
+    assert target.exists() and target.stat().st_ino==before
+E   AssertionError: assert (False)
+E    +  where False = exists()
+E    +    where exists = PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-804/test_c0575_preserves_unowned_d2/owned workspace/scratch/foreign.db-wal').exists
+----------------------------- Captured stdout call -----------------------------
+======================================================================
+ 🧹 ANERGY PURGE ENGINE — PURGA DE RESIDUOS & ENTROPÍA TEMPORAL
+======================================================================
+
+--- INFORME DE PURGA DE RESIDUOS ---
+  • Directorios Cache (__pycache__/.pytest_cache) : 0 eliminados
+  • Archivos Bytecode (*.pyc)                      : 0 eliminados
+  • Archivos de Sistema (.DS_Store)                : 0 eliminados
+  • Bases de Datos Temporales en Scratch (*.db)     : 1 eliminados
+  • Cerrojos Huérfanos (*.lock)                     : 0 eliminados
+
+======================================================================
+  VERDICT: RESIDUAL PURGE COMPLETE — REPOSITORIO LIBRE DE ANERGÍA (0% ENTROPÍA)
+======================================================================
+________ test_c0575_cache_directory_is_not_authority_to_delete_database ________
+tests/test_swarm100_lot10_regressions.py:119: in test_c0575_cache_directory_is_not_authority_to_delete_database
+    assert database.exists() and database.read_bytes()==b'owned fixture data requiring preservation'
+E   AssertionError: assert (False)
+E    +  where False = exists()
+E    +    where exists = PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-804/test_c0575_cache_directory_is_0/owned workspace/.pytest_cache/active.db').exists
+----------------------------- Captured stdout call -----------------------------
+======================================================================
+ 🧹 ANERGY PURGE ENGINE — PURGA DE RESIDUOS & ENTROPÍA TEMPORAL
+======================================================================
+
+--- INFORME DE PURGA DE RESIDUOS ---
+  • Directorios Cache (__pycache__/.pytest_cache) : 1 eliminados
+  • Archivos Bytecode (*.pyc)                      : 0 eliminados
+  • Archivos de Sistema (.DS_Store)                : 0 eliminados
+  • Bases de Datos Temporales en Scratch (*.db)     : 0 eliminados
+  • Cerrojos Huérfanos (*.lock)                     : 0 eliminados
+
+======================================================================
+  VERDICT: RESIDUAL PURGE COMPLETE — REPOSITORIO LIBRE DE ANERGÍA (0% ENTROPÍA)
+======================================================================
+__________________ test_report_does_not_certify_zero_entropy ___________________
+tests/test_swarm100_lot10_regressions.py:125: in test_report_does_not_certify_zero_entropy
+    assert '0% ENTROP' not in output
+E   AssertionError: assert '0% ENTROP' not in '===========...==========\n'
+E     
+E     '0% ENTROP' is contained here:
+E        ANERGÍA (0% ENTROPÍA)
+E     ?           +++++++++
+E       ======================================================================
+=========================== short test summary info ============================
+FAILED tests/test_swarm100_lot10_regressions.py::test_c0574_preserves_open_git_lock_inode_and_contents[index.lock]
+FAILED tests/test_swarm100_lot10_regressions.py::test_c0574_preserves_open_git_lock_inode_and_contents[packed-refs.lock]
+FAILED tests/test_swarm100_lot10_regressions.py::test_c0574_preserves_git_exclusion_while_lock_descriptor_is_open
+FAILED tests/test_swarm100_lot10_regressions.py::test_c0575_preserves_live_sqlite_database_wal_and_shm
+FAILED tests/test_swarm100_lot10_regressions.py::test_c0575_preserves_unowned_database_lookalikes[keep.db.backup]
+FAILED tests/test_swarm100_lot10_regressions.py::test_c0575_preserves_unowned_database_lookalikes[notes.db.txt]
+FAILED tests/test_swarm100_lot10_regressions.py::test_c0575_preserves_unowned_database_lookalikes[foreign.db-wal]
+FAILED tests/test_swarm100_lot10_regressions.py::test_c0575_cache_directory_is_not_authority_to_delete_database
+FAILED tests/test_swarm100_lot10_regressions.py::test_report_does_not_certify_zero_entropy
+9 failed in 0.41s

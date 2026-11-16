@@ -1,0 +1,21 @@
+{
+  "result": "PASS_STATIC_SEPARATE_SURFACE_REVIEW",
+  "candidate_id": "SW100-C0461",
+  "canonical_id": "SW100-C0103",
+  "decision_preserved": "DUPLICATE",
+  "independent_surface_state": "OPEN",
+  "canonical_state": "FIXED",
+  "copy_source_sha256": "ecda4dca2ee77aa986d1898aad7fbd998bc07723bf7126c1e697fbd155638d62",
+  "canonical_source_sha256": "61d95dcae8a1a3c86c1ffcad16f748b02ddd104362fdf5f41812a7f75955e684",
+  "original_copy_sha256": "ecda4dca2ee77aa986d1898aad7fbd998bc07723bf7126c1e697fbd155638d62",
+  "copy_unchanged_from_original": true,
+  "copy_regular_non_symlink": true,
+  "distinct_physical_files": true,
+  "copy_outside29selected_production_paths": true,
+  "ast_subprocess_run_shell_true": true,
+  "checks_within_current_source_bounds": true,
+  "reviewer_scope_limit": "Fixture executable only; no real downloader, TLS, network, subtitles service or packaged secondary copy certified.",
+  "product_runtime_executed": false,
+  "product_source_edited": false,
+  "limits": "No shell payload or downloader executed; independent_surface_state is narrowly reviewed metadata for the unchanged packaged path/hash. No automatic expansion to other duplicates is authorized by this evidence."
+}

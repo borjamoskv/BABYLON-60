@@ -1,0 +1,337 @@
+FFF                                                                      [100%]
+=================================== FAILURES ===================================
+____________ test_c0428_stop_drains_event_queued_before_worker_loop ____________
+
+fut = <Future cancelled>, timeout = 3
+
+    async def wait_for(fut, timeout):
+        """Wait for the single Future or coroutine to complete, with timeout.
+    
+        Coroutine will be wrapped in Task.
+    
+        Returns result of the Future or coroutine.  When a timeout occurs,
+        it cancels the task and raises TimeoutError.  To avoid the task
+        cancellation, wrap it in shield().
+    
+        If the wait is cancelled, the task is also cancelled.
+    
+        If the task suppresses the cancellation and returns a value instead,
+        that value is returned.
+    
+        This function is a coroutine.
+        """
+        # The special case for timeout <= 0 is for the following case:
+        #
+        # async def test_waitfor():
+        #     func_started = False
+        #
+        #     async def func():
+        #         nonlocal func_started
+        #         func_started = True
+        #
+        #     try:
+        #         await asyncio.wait_for(func(), 0)
+        #     except asyncio.TimeoutError:
+        #         assert not func_started
+        #     else:
+        #         assert False
+        #
+        # asyncio.run(test_waitfor())
+    
+    
+        if timeout is not None and timeout <= 0:
+            fut = ensure_future(fut)
+    
+            if fut.done():
+                return fut.result()
+    
+            await _cancel_and_wait(fut)
+            try:
+                return fut.result()
+            except exceptions.CancelledError as exc:
+                raise TimeoutError from exc
+    
+        async with timeouts.timeout(timeout):
+>           return await fut
+                   ^^^^^^^^^
+E           asyncio.exceptions.CancelledError
+
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/tasks.py:488: CancelledError
+
+The above exception was the direct cause of the following exception:
+
+tmp_path = PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-768/test_c0428_stop_drains_event_q0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x108e955b0>
+
+    @pytest.mark.asyncio
+    async def test_c0428_stop_drains_event_queued_before_worker_loop(tmp_path, monkeypatch):
+        actor = BFTLedgerActor(tmp_path/'shutdown.db')
+        entered, release = asyncio.Event(), asyncio.Event()
+        initialize = actor._init_db
+    
+        async def held_init(db):
+            await initialize(db)
+            entered.set()
+            await release.wait()
+    
+        monkeypatch.setattr(actor, '_init_db', held_init)
+        pending = stopping = None
+        try:
+            await actor.start()
+            await bounded(entered.wait())
+            pending = actor.append(event())
+            stopping = asyncio.create_task(actor.stop())
+            await bounded(actor._stop_event.wait())
+            release.set()
+>           await bounded(stopping)
+
+tests/test_swarm100_lot5_regressions.py:70: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_swarm100_lot5_regressions.py:47: in bounded
+    return await asyncio.wait_for(asyncio.shield(future), timeout=3)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/tasks.py:487: in wait_for
+    async with timeouts.timeout(timeout):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Timeout [expired]>
+exc_type = <class 'asyncio.exceptions.CancelledError'>
+exc_val = CancelledError(), exc_tb = <traceback object at 0x108f73bc0>
+
+    async def __aexit__(
+        self,
+        exc_type: type[BaseException] | None,
+        exc_val: BaseException | None,
+        exc_tb: TracebackType | None,
+    ) -> bool | None:
+        assert self._state in (_State.ENTERED, _State.EXPIRING)
+    
+        if self._timeout_handler is not None:
+            self._timeout_handler.cancel()
+            self._timeout_handler = None
+    
+        if self._state is _State.EXPIRING:
+            self._state = _State.EXPIRED
+    
+            if self._task.uncancel() <= self._cancelling and exc_type is not None:
+                # Since there are no new cancel requests, we're
+                # handling this.
+                if issubclass(exc_type, exceptions.CancelledError):
+>                   raise TimeoutError from exc_val
+E                   TimeoutError
+
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/timeouts.py:115: TimeoutError
+______________ test_c0429_encrypted_retry_preserves_original_row _______________
+
+self = <babylon60.bft.ledger_actor.BFTLedgerActor object at 0x109062d50>
+db = <aiosqlite.core.Connection object at 0x109063b10>
+event_id = '7a95f5df-4d42-5c4c-8664-753cd935b8ec'
+event = LedgerEvent(stream='fixture', entity_id='1', event_type='CREATED', payload={'index': 1}, cortex_taint='fixture-taint', source_db='fixture', source_table='events', source_pk='1', created_at=None, agent_id='')
+stored_payload = 'C5ENC:gAAAAABq4nFD0Gt_u4JXot0i7leWpoehpHjOg6v_5s8cd_nTaSFWJRHT8NlcgL5FUXKSz_NfhLwG_86KiaUPqSa7K9GY_oM21g=='
+created_at = '2026-10-28T22:03:47.015684Z'
+
+    async def _execute_insert_tx(
+        self, db: aiosqlite.Connection, event_id: str, event: LedgerEvent, stored_payload: str, created_at: str
+    ) -> tuple[int, str]:
+        await db.execute("BEGIN IMMEDIATE")
+        try:
+            cursor = await db.execute(
+                "SELECT seq, entry_hash, payload_json FROM ledger_entries WHERE event_id = ?", (event_id,)
+            )
+            row = await cursor.fetchone()
+            if row:
+                existing_payload = str(row[2])
+                if existing_payload != stored_payload:
+                    await db.execute("ROLLBACK")
+>                   raise ValueError(f"Fail-fast: INV_BFT_04 Collision on event_id {event_id}: payload mismatch")
+E                   ValueError: Fail-fast: INV_BFT_04 Collision on event_id 7a95f5df-4d42-5c4c-8664-753cd935b8ec: payload mismatch
+
+01_KISH_ENGINE/babylon60/bft/ledger_actor.py:435: ValueError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-768/test_c0429_encrypted_retry_pre0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x1090c27b0>
+
+    @pytest.mark.asyncio
+    async def test_c0429_encrypted_retry_preserves_original_row(tmp_path, monkeypatch):
+        monkeypatch.setenv('CORTEX_VAULT_KEY', Fernet.generate_key().decode())
+        actor = BFTLedgerActor(tmp_path/'encrypted.db')
+        first = second = None
+        try:
+            await actor.start()
+            first=actor.append(event())
+            original=await bounded(first)
+            async with aiosqlite.connect(actor._db_path) as db:
+                before=await (await db.execute('SELECT * FROM ledger_entries')).fetchall()
+            second=actor.append(event())
+>           assert await bounded(second)==original
+                   ^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_swarm100_lot5_regressions.py:90: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_swarm100_lot5_regressions.py:47: in bounded
+    return await asyncio.wait_for(asyncio.shield(future), timeout=3)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/tasks.py:488: in wait_for
+    return await fut
+           ^^^^^^^^^
+01_KISH_ENGINE/babylon60/bft/ledger_actor.py:477: in _execute_insert_tx
+    await db.execute("ROLLBACK")
+.venv/lib/python3.14/site-packages/aiosqlite/core.py:223: in execute
+    cursor = await self._execute(self._conn.execute, sql, parameters)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.14/site-packages/aiosqlite/core.py:160: in _execute
+    return await future
+           ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+tx = <_queue.SimpleQueue object at 0x1094a1900>
+
+    def _connection_worker_thread(tx: _TxQueue):
+        """
+        Execute function calls on a separate thread.
+    
+        :meta private:
+        """
+        while True:
+            # Continues running until all queue items are processed,
+            # even after connection is closed (so we can finalize all
+            # futures)
+    
+            future, function = tx.get()
+    
+            try:
+                LOG.debug("executing %s", function)
+>               result = function()
+                         ^^^^^^^^^^
+E               sqlite3.OperationalError: cannot rollback - no transaction is active
+
+.venv/lib/python3.14/site-packages/aiosqlite/core.py:63: OperationalError
+________ test_c0430_sql_rejection_rolls_back_once_and_worker_continues _________
+
+fut = <Future cancelled>, timeout = 3
+
+    async def wait_for(fut, timeout):
+        """Wait for the single Future or coroutine to complete, with timeout.
+    
+        Coroutine will be wrapped in Task.
+    
+        Returns result of the Future or coroutine.  When a timeout occurs,
+        it cancels the task and raises TimeoutError.  To avoid the task
+        cancellation, wrap it in shield().
+    
+        If the wait is cancelled, the task is also cancelled.
+    
+        If the task suppresses the cancellation and returns a value instead,
+        that value is returned.
+    
+        This function is a coroutine.
+        """
+        # The special case for timeout <= 0 is for the following case:
+        #
+        # async def test_waitfor():
+        #     func_started = False
+        #
+        #     async def func():
+        #         nonlocal func_started
+        #         func_started = True
+        #
+        #     try:
+        #         await asyncio.wait_for(func(), 0)
+        #     except asyncio.TimeoutError:
+        #         assert not func_started
+        #     else:
+        #         assert False
+        #
+        # asyncio.run(test_waitfor())
+    
+    
+        if timeout is not None and timeout <= 0:
+            fut = ensure_future(fut)
+    
+            if fut.done():
+                return fut.result()
+    
+            await _cancel_and_wait(fut)
+            try:
+                return fut.result()
+            except exceptions.CancelledError as exc:
+                raise TimeoutError from exc
+    
+        async with timeouts.timeout(timeout):
+>           return await fut
+                   ^^^^^^^^^
+E           asyncio.exceptions.CancelledError
+
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/tasks.py:488: CancelledError
+
+The above exception was the direct cause of the following exception:
+
+tmp_path = PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-768/test_c0430_sql_rejection_rolls0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x109188380>
+
+    @pytest.mark.asyncio
+    async def test_c0430_sql_rejection_rolls_back_once_and_worker_continues(tmp_path, monkeypatch):
+        actor = BFTLedgerActor(tmp_path/'rollback.db')
+        trace=[]
+        initialize=actor._init_db
+    
+        async def traced_init(db):
+            await initialize(db)
+            await db.set_trace_callback(trace.append)
+    
+        monkeypatch.setattr(actor, '_init_db', traced_init)
+        rejected = following = None
+        try:
+            await actor.start()
+            rejected=actor.append(event(stream=''))  # Real SQLite CHECK failure inside BEGIN.
+            with pytest.raises(aiosqlite.IntegrityError):
+                await bounded(rejected)
+            following=actor.append(event(2))
+>           assert (await bounded(following))['seq']==1
+                    ^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_swarm100_lot5_regressions.py:118: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_swarm100_lot5_regressions.py:47: in bounded
+    return await asyncio.wait_for(asyncio.shield(future), timeout=3)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/tasks.py:487: in wait_for
+    async with timeouts.timeout(timeout):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Timeout [expired]>
+exc_type = <class 'asyncio.exceptions.CancelledError'>
+exc_val = CancelledError(), exc_tb = <traceback object at 0x1096a5b80>
+
+    async def __aexit__(
+        self,
+        exc_type: type[BaseException] | None,
+        exc_val: BaseException | None,
+        exc_tb: TracebackType | None,
+    ) -> bool | None:
+        assert self._state in (_State.ENTERED, _State.EXPIRING)
+    
+        if self._timeout_handler is not None:
+            self._timeout_handler.cancel()
+            self._timeout_handler = None
+    
+        if self._state is _State.EXPIRING:
+            self._state = _State.EXPIRED
+    
+            if self._task.uncancel() <= self._cancelling and exc_type is not None:
+                # Since there are no new cancel requests, we're
+                # handling this.
+                if issubclass(exc_type, exceptions.CancelledError):
+>                   raise TimeoutError from exc_val
+E                   TimeoutError
+
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/timeouts.py:115: TimeoutError
+=========================== short test summary info ============================
+FAILED tests/test_swarm100_lot5_regressions.py::test_c0428_stop_drains_event_queued_before_worker_loop
+FAILED tests/test_swarm100_lot5_regressions.py::test_c0429_encrypted_retry_preserves_original_row
+FAILED tests/test_swarm100_lot5_regressions.py::test_c0430_sql_rejection_rolls_back_once_and_worker_continues
+3 failed in 6.33s

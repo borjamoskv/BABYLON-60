@@ -1,0 +1,31 @@
+{
+  "command": [
+    "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.venv/bin/python",
+    "-c",
+    "import sys,types,socket\nfrom pathlib import Path\nroot=Path(sys.argv.pop(1))\ndef forbidden(*a,**k):raise AssertionError(\"Network/DNS forbidden in independent review\")\nsocket.socket.connect=forbidden\nsocket.socket.connect_ex=forbidden\nsocket.getaddrinfo=forbidden\nsys.modules[\"dotenv\"]=types.SimpleNamespace(load_dotenv=lambda *a,**k:None)\npackage=types.ModuleType(\"babylon60\");package.__path__=[str(root/\"01_KISH_ENGINE/babylon60\")];sys.modules[\"babylon60\"]=package\nimport pytest\nraise SystemExit(pytest.main(sys.argv[1:]))\n",
+    "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+    "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot6_regressions.py",
+    "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_audit_swarm_rate_limit.py",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "-p",
+    "pytest_asyncio.plugin"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 1.969,
+  "source_sha256": {
+    "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py": "f247036e27e11087b2b34d064cced7d998a39372288baa62a838bcf6e878b529",
+    "tests/test_swarm100_lot6_regressions.py": "559a6fb243a3745f3259933356a184e9362a88c7a14202b0b9baa45a37d1e63c",
+    "tests/test_audit_swarm_rate_limit.py": "5d95a5ea01c1bd5151ad6b234d841c030d4683b28dc1f3871257aa03f0a9d618"
+  },
+  "source_sha256_after": {
+    "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py": "f247036e27e11087b2b34d064cced7d998a39372288baa62a838bcf6e878b529",
+    "tests/test_swarm100_lot6_regressions.py": "559a6fb243a3745f3259933356a184e9362a88c7a14202b0b9baa45a37d1e63c",
+    "tests/test_audit_swarm_rate_limit.py": "5d95a5ea01c1bd5151ad6b234d841c030d4683b28dc1f3871257aa03f0a9d618"
+  },
+  "stable": true,
+  "temporary_HOME_cwd": true,
+  "plugins": "Only explicit pytest_asyncio.plugin; automatic plugins disabled",
+  "import_scope": "Actual module/dependencies via isolated namespace; dotenv and socket/DNS blocked before import; environment wholly synthetic."
+}

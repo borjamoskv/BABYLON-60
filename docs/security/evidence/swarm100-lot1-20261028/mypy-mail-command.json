@@ -1,0 +1,14 @@
+{
+  "command": [
+    "uv",
+    "run",
+    "--locked",
+    "--no-sync",
+    "mypy",
+    "--follow-imports=silent",
+    "01_KISH_ENGINE/babylon60/transducers/c5_mail_transducer.py"
+  ],
+  "exit_code": 0,
+  "log": "docs/security/evidence/swarm100-lot1-20261028/mypy-mail.log",
+  "log_sha256": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e"
+}

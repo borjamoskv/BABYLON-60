@@ -1,0 +1,15 @@
+{
+  "expected_changed_source": [
+    "01_KISH_ENGINE/babylon60/core/cortex_persist.py"
+  ],
+  "preserved_boundaries": {
+    "scripts/c5_verifiers/purge_residuals.py": "cd2e547cfac8adf1b0ce6358da3fe20cebc3c45a4bfa0fc339828dcd2a819f7c",
+    "scripts/c5_thermo/c5_exergy_optimizer_monitor.py": "1d82392ac3cddd6fd9b226b64c5a28562eea25de29fd5ac4afbbd9ea4cf50d2d",
+    "scripts/c5_cortex/cortex_objectives_transducer.py": "18805a13c7a3c2853b8824c9424dbff05c2d27ebad9c89e2f3b2c98aaf7692ca",
+    "scripts/c5_verifiers/fast_smt_gate.py": "853cd9746178aede419bee382b6e6416482fdbfb8a5eb753269732e3d5e384c1",
+    "pyproject.toml": "50d4594dd2125fcbe7df0578394b5d2c2e6ac7c7dddb4b5fc9be68229eb8d0cd",
+    "uv.lock": "d78739746ac5d442a074ad73cbc7fc06d6e803558126f65fbc3d6d251d4c1fb4",
+    "Cargo.lock": "7c772f6e6ffd29594c5b9bdadb004be09c57af67b60b7be1b56c034a174491b4"
+  },
+  "runtime_scope": "Only synthetic HOME fixtures; prior production files and dependency manifests unchanged against parent before-source manifest."
+}

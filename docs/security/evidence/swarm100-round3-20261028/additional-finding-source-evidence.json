@@ -1,0 +1,106 @@
+{
+  "same_path_original_ids": [
+    "SW100-C0413",
+    "SW100-C0414"
+  ],
+  "deduplication": "C0413 concerns unavailable secret scanning; C0414 concerns documented dry-run local preparation. Neither alleges mutable-reference publication after attestation. No duplicate among original title/evidence comparisons.",
+  "source_sha256": "704da66f24d45ae3634083273a9c0dfecc8e07530b5a6520ff3f1f336fc58830",
+  "source_checks": [
+    {
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "start_line": 47,
+      "end_line": 55,
+      "observation": "Each invocation derives and saves CLEAN_TREE from the HEAD it reads.",
+      "source_lines": [
+        "# 2. Síntesis del Árbol Canónico Destilado (Zero Historical Bloat / Zero .agents)",
+        "echo -n \"[2/6] Sintetizando árbol limpio en índice temporal (excluyendo .agents)... \"",
+        "TEMP_INDEX=$(mktemp)",
+        "export GIT_INDEX_FILE=\"$TEMP_INDEX\"",
+        "git read-tree HEAD",
+        "git rm --cached -r -q --ignore-unmatch .agents/rules .agents/mcp_config.json",
+        "CLEAN_TREE=$(git write-tree)",
+        "rm -f \"$TEMP_INDEX\"",
+        "unset GIT_INDEX_FILE"
+      ]
+    },
+    {
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "start_line": 95,
+      "end_line": 105,
+      "observation": "TREE_DIGEST is bound to that invocation's tree and CLEAN_COMMIT is saved, but a shared release branch is overwritten.",
+      "source_lines": [
+        "# 6. Sello Biométrico Somático (Touch ID / Secure Enclave) y Forja de Rama Huérfana",
+        "TREE_DIGEST=\"$CLEAN_TREE\"",
+        "echo \"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\"",
+        "echo \"  Clean Tree Digest (SHA-1 Git): $TREE_DIGEST\"",
+        "echo \"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\"",
+        "",
+        "# Forjar commit huérfano local 'release/v5.0-clean'",
+        "COMMIT_MSG=\"feat(release): BABYLON-60 v5.0 Sovereign Core (Clean Distillation)\"",
+        "CLEAN_COMMIT=$(git commit-tree \"$CLEAN_TREE\" -m \"$COMMIT_MSG\")",
+        "git branch -f release/v5.0-clean \"$CLEAN_COMMIT\"",
+        "echo \"[6/6] Rama huérfana forjada en silicio: release/v5.0-clean -> $CLEAN_COMMIT\""
+      ]
+    },
+    {
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "start_line": 107,
+      "end_line": 123,
+      "observation": "Biometric authorization receives TREE_DIGEST, creating a window before publication.",
+      "source_lines": [
+        "if [ \"$DRY_RUN\" -eq 0 ]; then",
+        "    echo \"  Solicitando atestación somática en silicio (Touch ID)...\"",
+        "    if command -v c5_biometric_gate >/dev/null 2>&1; then",
+        "        if ! c5_biometric_gate --causal-hash \"$TREE_DIGEST\" --action \"Proyección Pública\" --agent \"MOSKV-1\" --scope \"BABYLON-60-PUBLIC\" --no-sound; then",
+        "            echo \"FATAL: Atestación biométrica fallida o cancelada por el operador.\"",
+        "            exit 1",
+        "        fi",
+        "    elif [ -f \"$REPO_ROOT/01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift\" ]; then",
+        "        if ! swift \"$REPO_ROOT/01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift\" --causal-hash \"$TREE_DIGEST\" --action \"Proyección Pública\" --agent \"MOSKV-1\" --scope \"BABYLON-60-PUBLIC\" --no-sound; then",
+        "            echo \"FATAL: Atestación biométrica fallida o cancelada por el operador.\"",
+        "            exit 1",
+        "        fi",
+        "    else",
+        "        echo \"FATAL: c5_biometric_gate no disponible; abortando en Fail-Stop 0xDEAD_6060.\"",
+        "        exit 1",
+        "    fi",
+        "    echo \"[AUTORIZACIÓN BIOMÉTRICA CONCEDIDA]\""
+      ]
+    },
+    {
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "start_line": 126,
+      "end_line": 132,
+      "observation": "A dry-run invocation still updates the shared branch before exiting.",
+      "source_lines": [
+        "# 7. Despacho hacia el Repositorio Público",
+        "if [ \"$DRY_RUN\" -eq 1 ]; then",
+        "    echo \"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\"",
+        "    echo \"  [DRY-RUN EXITOSO] El árbol cumple 100% de las invariantes para publicación.\"",
+        "    echo \"  Rama local lista: release/v5.0-clean ($CLEAN_COMMIT)\"",
+        "    echo \"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\"",
+        "    exit 0"
+      ]
+    },
+    {
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "start_line": 135,
+      "end_line": 145,
+      "observation": "After the gate, push uses release/v5.0-clean:main instead of the saved CLEAN_COMMIT, with no intervening ref-equality verification.",
+      "source_lines": [
+        "if ! git remote get-url \"$TARGET_REMOTE\" >/dev/null 2>&1; then",
+        "    echo \"AVISO: El remote '$TARGET_REMOTE' no está configurado en este repositorio.\"",
+        "    echo \"Para vincular el repositorio público independiente, ejecuta:\"",
+        "    echo \"  git remote add $TARGET_REMOTE git@github.com:borjamoskv/babylon60-core.git\"",
+        "    echo \"Luego vuelve a ejecutar este script:\"",
+        "    echo \"  ./scripts/c5_git_utils/c5_distill_public_mirror.sh $TARGET_REMOTE\"",
+        "    exit 0",
+        "fi",
+        "",
+        "echo \"Despachando rama limpia hacia '$TARGET_REMOTE' (main)...\"",
+        "git push \"$TARGET_REMOTE\" release/v5.0-clean:main --force"
+      ]
+    }
+  ],
+  "runtime_executed": false
+}

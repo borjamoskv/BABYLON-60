@@ -1,0 +1,425 @@
+{
+  "shard": "052",
+  "findings": [
+    {
+      "title": "Purge targets its installed package and moves importable modules",
+      "severity": "P1",
+      "path": "01_KISH_ENGINE/babylon60/cortex/cortex_purge_anergy.py",
+      "line": 23,
+      "evidence": "PROJECT_ROOT is dirname(__file__); categorize_and_move enumerates it at line92 and moves every unprotected .py at103. __init__.py, cortex_chaos_monad.py and gemini_labs_nexus.py are not protected.",
+      "trigger": "Run this module as its __main__ entrypoint in the checkout or installed package.",
+      "impact": "Moves package implementation files into .cortex/archive/scripts and breaks subsequent imports; does not operate on the repository root advertised by its report.",
+      "confidence": "high (static source)",
+      "kind": "runtime"
+    },
+    {
+      "title": "Rule evaluation reports SAT when a required property is absent",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/cortex/crates/cortex-guard/src/eval.rs",
+      "line": 54,
+      "evidence": "Violation creation is inside if let Some(val); missing properties have no branch. Line78 sets SAT whenever violations is empty. main.rs131 consumes this result and132 derives has_violations solely from the empty list.",
+      "trigger": "Evaluate a matching IFC entity without the rule.target property.",
+      "impact": "A model with no evidence for the regulated dimension receives SAT and no violation; deleting the numeric property can turn a failing check into a passing report.",
+      "confidence": "high (static source)",
+      "kind": "runtime"
+    },
+    {
+      "title": "Prove ignores source and declares compilation without invoking Lean",
+      "severity": "P2",
+      "path": "crates/b60-lang/src/main.rs",
+      "line": 174,
+      "evidence": "Source is read into _source and unused; sample_phases is fixed at183; generated theorem is constant at195-203, and211 reports compiled successfully after only fs::write.",
+      "trigger": "Invoke b60 prove on any readable file, including invalid B60 input.",
+      "impact": "CLI reports formal proof compilation for input it neither parses nor proves, allowing consumers to mistake emission for checked verification.",
+      "confidence": "high (static source)",
+      "kind": "runtime"
+    },
+    {
+      "title": "Stress concurrency limit is private to each agent",
+      "severity": "P2",
+      "path": "tests/test_swarm_stress.py",
+      "line": 41,
+      "evidence": "Each stress_agent allocates asyncio.Semaphore(MAX_CONCURRENCY); run_stress_test launches500 agents at65-67.",
+      "trigger": "Run the stress test expecting MAX_CONCURRENCY=50 to bound simultaneous agent work.",
+      "impact": "Every task gets its own50 permits so all500 can enter; the test does not exercise or enforce its declared concurrency cap.",
+      "confidence": "high (static source)",
+      "kind": "test"
+    },
+    {
+      "title": "ASAR scanner example returns an already closed stream",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/electron-asar-forensic-audit/MODULE.md",
+      "line": 57,
+      "evidence": "scan_asar opens f with a with block at41 and returns f at57; downstream example line138 calls f.seek.",
+      "trigger": "Use the documented scan_asar return stream in its documented IPC extraction loop.",
+      "impact": "The with context closes f before the caller receives it, so extraction raises ValueError instead of scanning the archive.",
+      "confidence": "high (static source)",
+      "kind": "example/docs"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "01_KISH_ENGINE/babylon60/autodidact/engine.py",
+      "line": 103,
+      "claim": "Native statement-verification exceptions are logged and preserve the Python is_valid result. Whether native checks add a stronger security invariant requires tracing the CortexKernel verifier contract; no execution bypass is asserted."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".agents/skills/c5-ring0-babylon-kernel-project/references/modules/c5-rea-clean-room/MODULE.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          48
+        ]
+      ],
+      "expected_sha256": "f251f06be60a9fc7d1276b52fd2ebfdf20c8269ea3d242797fb4da9820e860cf",
+      "observed_sha256": "f251f06be60a9fc7d1276b52fd2ebfdf20c8269ea3d242797fb4da9820e860cf",
+      "hash_mismatch": false
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-fuzz/fuzz/Cargo.toml",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          20
+        ]
+      ],
+      "expected_sha256": "531ebfbbadca7182dd1a1aa0f941c1dabcbf94e5208d1206db916a95a4a7dc92",
+      "observed_sha256": "531ebfbbadca7182dd1a1aa0f941c1dabcbf94e5208d1206db916a95a4a7dc92",
+      "hash_mismatch": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/autodidact/engine.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          200
+        ],
+        [
+          201,
+          256
+        ]
+      ],
+      "expected_sha256": "f9ee71a4652511097986fec241dd4c0932e99227e72452b3e928e29c4b7895bd",
+      "observed_sha256": "f9ee71a4652511097986fec241dd4c0932e99227e72452b3e928e29c4b7895bd",
+      "hash_mismatch": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/cortex/cortex_purge_anergy.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          179
+        ]
+      ],
+      "expected_sha256": "7bcfb0040094964013cd1e539cb0a8051e71fd0f7fbfbe18e5a2de17c7fa6d1c",
+      "observed_sha256": "7bcfb0040094964013cd1e539cb0a8051e71fd0f7fbfbe18e5a2de17c7fa6d1c",
+      "hash_mismatch": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/primitives/serialization_boundary.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          68
+        ]
+      ],
+      "expected_sha256": "a81a2e3271e9b1d351cb13870e88668cb69cb91a3420ac903d8567f7116af57f",
+      "observed_sha256": "a81a2e3271e9b1d351cb13870e88668cb69cb91a3420ac903d8567f7116af57f",
+      "hash_mismatch": false
+    },
+    {
+      "path": "01_KISH_ENGINE/cortex/crates/cortex-guard/src/eval.rs",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          96
+        ]
+      ],
+      "expected_sha256": "f852b89ce4c2d9889aa096a4144c8a76fd44131c2c860002bfff089ecc53fd9c",
+      "observed_sha256": "f852b89ce4c2d9889aa096a4144c8a76fd44131c2c860002bfff089ecc53fd9c",
+      "hash_mismatch": false
+    },
+    {
+      "path": "crates/b60-lang/src/main.rs",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          200
+        ],
+        [
+          201,
+          350
+        ]
+      ],
+      "expected_sha256": "289ed9d9b2b5c841abccaaa8404f80a82257c11e1db2ba07bc6a0ae99d29ad1d",
+      "observed_sha256": "289ed9d9b2b5c841abccaaa8404f80a82257c11e1db2ba07bc6a0ae99d29ad1d",
+      "hash_mismatch": false
+    },
+    {
+      "path": "docs/04_research/evaluacion_falsacion_llm_models_2026.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          95
+        ]
+      ],
+      "expected_sha256": "80b5e6a5b772aab562217578a0922e33efcc7cc85ec2ca50e431cb529a0b4517",
+      "observed_sha256": "80b5e6a5b772aab562217578a0922e33efcc7cc85ec2ca50e431cb529a0b4517",
+      "hash_mismatch": false
+    },
+    {
+      "path": "docs/security/integration-review-2026-10-23.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          200
+        ],
+        [
+          201,
+          221
+        ]
+      ],
+      "expected_sha256": "9628f45f3c944a6663b35050e8cd34410b26afd5352ff5a5abca1369aa17f377",
+      "observed_sha256": "9628f45f3c944a6663b35050e8cd34410b26afd5352ff5a5abca1369aa17f377",
+      "hash_mismatch": false
+    },
+    {
+      "path": "reports/ax0-adversarial-report.json",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          15
+        ]
+      ],
+      "expected_sha256": "77945423639ba1da76b6e9e47f23ccb9a5194733c34aa3f9f22ad25394a9adae",
+      "observed_sha256": "77945423639ba1da76b6e9e47f23ccb9a5194733c34aa3f9f22ad25394a9adae",
+      "hash_mismatch": false
+    },
+    {
+      "path": "scripts/c5_demos/shared_manifest_poc.rs",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          67
+        ]
+      ],
+      "expected_sha256": "4d54ad4c57a7781844a1c22d08327264e38b3bd46a5ab9e6030b294d73d1478c",
+      "observed_sha256": "4d54ad4c57a7781844a1c22d08327264e38b3bd46a5ab9e6030b294d73d1478c",
+      "hash_mismatch": false
+    },
+    {
+      "path": "scripts/c5_sharur/c5_sharur_1000_workspace_swarm.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          174
+        ]
+      ],
+      "expected_sha256": "4a7052141c7cea597a12304d2ad929144ec26c65098f6addb16e46a62cf66099",
+      "observed_sha256": "4a7052141c7cea597a12304d2ad929144ec26c65098f6addb16e46a62cf66099",
+      "hash_mismatch": false
+    },
+    {
+      "path": "scripts/repatriated/titan_jwt_audit_results.json",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          28
+        ]
+      ],
+      "expected_sha256": "14caa50f8bfb3546cbf9f043dc20d5ac73aea76d305f8607275e16d943022653",
+      "observed_sha256": "14caa50f8bfb3546cbf9f043dc20d5ac73aea76d305f8607275e16d943022653",
+      "hash_mismatch": false
+    },
+    {
+      "path": "tests/nemesis_wave6_forged_authority.rs",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          104
+        ]
+      ],
+      "expected_sha256": "7827b635cb383da0eb9078ced612dca0f87536260e56327bba4f1bd0653260da",
+      "observed_sha256": "7827b635cb383da0eb9078ced612dca0f87536260e56327bba4f1bd0653260da",
+      "hash_mismatch": false
+    },
+    {
+      "path": "tests/test_experience_pilot.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          200
+        ],
+        [
+          201,
+          400
+        ],
+        [
+          401,
+          437
+        ]
+      ],
+      "expected_sha256": "19a3513e17488f1a03266b30e93291e8c9420362c08ac6a313801f85a785c1e3",
+      "observed_sha256": "19a3513e17488f1a03266b30e93291e8c9420362c08ac6a313801f85a785c1e3",
+      "hash_mismatch": false
+    },
+    {
+      "path": "tests/test_swarm_stress.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          110
+        ]
+      ],
+      "expected_sha256": "513bd2b3bf6a7bdb0326979189ef020f9313eda345584e45f01a7c2528744355",
+      "observed_sha256": "513bd2b3bf6a7bdb0326979189ef020f9313eda345584e45f01a7c2528744355",
+      "hash_mismatch": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/argo-smart-routing/gotchas.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          111
+        ]
+      ],
+      "expected_sha256": "747217b3c1e704d474e3cfee74f4e79ab66b54c80e2de9ce9d55a2f760d492b0",
+      "observed_sha256": "747217b3c1e704d474e3cfee74f4e79ab66b54c80e2de9ce9d55a2f760d492b0",
+      "hash_mismatch": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/miniflare/patterns.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          181
+        ]
+      ],
+      "expected_sha256": "57b2b90bd938481f97da2258d5e17f398486762fd90b8f7fe9d8bb7164b74d67",
+      "observed_sha256": "57b2b90bd938481f97da2258d5e17f398486762fd90b8f7fe9d8bb7164b74d67",
+      "hash_mismatch": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/tail-workers/gotchas.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          192
+        ]
+      ],
+      "expected_sha256": "67a73b788aebd9459a267113ac998219ad209e11fcb5a14da4dc0f5a400d355f",
+      "observed_sha256": "67a73b788aebd9459a267113ac998219ad209e11fcb5a14da4dc0f5a400d355f",
+      "hash_mismatch": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/turnstile-spin/scripts/auth-probe.sh",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          200
+        ],
+        [
+          201,
+          285
+        ]
+      ],
+      "expected_sha256": "a54d7ab1f6e6ac98a6aeb45498d7bb3568d173669d2d3a7c6a08b56ed2c20182",
+      "observed_sha256": "a54d7ab1f6e6ac98a6aeb45498d7bb3568d173669d2d3a7c6a08b56ed2c20182",
+      "hash_mismatch": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents/agent_20_accommodation_booking.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          60
+        ]
+      ],
+      "expected_sha256": "e78f2f1b265841a28d98756c2c773879c71cd6339a85cfc7a570f8cb99ef0354",
+      "observed_sha256": "e78f2f1b265841a28d98756c2c773879c71cd6339a85cfc7a570f8cb99ef0354",
+      "hash_mismatch": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-debloat-agent-kernel/MODULE.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          99
+        ]
+      ],
+      "expected_sha256": "bc94943ccd1ee8b09f1f0ac6277bc8746af4e29cf0a462ab35c14a64d4a7b883",
+      "observed_sha256": "bc94943ccd1ee8b09f1f0ac6277bc8746af4e29cf0a462ab35c14a64d4a7b883",
+      "hash_mismatch": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/electron-asar-forensic-audit/MODULE.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          142
+        ]
+      ],
+      "expected_sha256": "71ff85027d6b42db7b06bd8290ca74b7be899437e57ea6e67aee7e20927f55b4",
+      "observed_sha256": "71ff85027d6b42db7b06bd8290ca74b7be899437e57ea6e67aee7e20927f55b4",
+      "hash_mismatch": false
+    },
+    {
+      "path": "tools/skill_library/global/flstudio-mcp-production/examples/Brownian_Motion_Walk.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          70
+        ]
+      ],
+      "expected_sha256": "ac7ab70e2b0e6c1e67aceb240e0908ba5f920945efa34e335474955b8bac0812",
+      "observed_sha256": "ac7ab70e2b0e6c1e67aceb240e0908ba5f920945efa34e335474955b8bac0812",
+      "hash_mismatch": false
+    },
+    {
+      "path": "tools/skill_library/workspace/c5-ring0-babylon-kernel-project/references/modules/c5-rea-clean-room/MODULE.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          48
+        ]
+      ],
+      "expected_sha256": "f251f06be60a9fc7d1276b52fd2ebfdf20c8269ea3d242797fb4da9820e860cf",
+      "observed_sha256": "f251f06be60a9fc7d1276b52fd2ebfdf20c8269ea3d242797fb4da9820e860cf",
+      "hash_mismatch": false
+    }
+  ],
+  "tool_limitations": [
+    "Native codebase graph tools unavailable in session; used targeted source reads.",
+    "Static audit only: no project tests, builds or runtime execution.",
+    "Initial combined read output truncated; missing cortex/serialization/eval and security-report ranges were reread explicitly.",
+    "External Cloudflare version/API claims were not independently verified; no API-specific finding asserted."
+  ],
+  "tests_run": []
+}

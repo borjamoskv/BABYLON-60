@@ -1,0 +1,14 @@
+{
+  "source_sha256": "241eab6330f473a6fcc3da5ff1d4512c098a9c73e102bdb7e5b4d34500aa71cf",
+  "configured_timeout_seconds": 20,
+  "observed_elapsed_before_forced_cleanup": 21.00313383305911,
+  "still_waiting_after_timeout": true,
+  "cleanup_completed": true,
+  "errors_after_cleanup": [
+    {
+      "type": "JSONDecodeError",
+      "message": "Expecting property name enclosed in double quotes: line 1 column 2 (char 1)"
+    }
+  ],
+  "scope": "Synthetic child process only; no MCP server, gate, or authentication"
+}

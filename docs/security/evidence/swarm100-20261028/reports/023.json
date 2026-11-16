@@ -1,0 +1,421 @@
+{
+  "shard": "023",
+  "findings": [
+    {
+      "title": "Canonical event serialization is ambiguous for delimiter-bearing fields",
+      "severity": "P2",
+      "path": "docs/reference/interpreter.py",
+      "line": 76,
+      "evidence": "serialize_canonical concatenates event_id, comma-joined parents, tick, payload and signature using unescaped delimiters.",
+      "trigger": "Two otherwise identical events with payload/signature pairs (a|b,c) and (a,b|c).",
+      "impact": "Both serialize to the same canonical bytes and graph digest despite different event content; the reference cannot serve as an integrity oracle.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Exported global hash does not bind artifact state",
+      "severity": "P2",
+      "path": "docs/reference/interpreter.py",
+      "line": 150,
+      "evidence": "global_hash is SHA256 of the constant bytes artifact_state_v3; program and canonical_graph are not included.",
+      "trigger": "Export different programs or ledger states through B60MinimalVM.export_artifact.",
+      "impact": "Every manifest has the same global_hash, preventing consumers of this example field from detecting artifact substitution.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Reference CLI announces proof dispatch that never occurs",
+      "severity": "P2",
+      "path": "docs/reference/interpreter.py",
+      "line": 174,
+      "evidence": "static_proof at lines 114-116 is pass; export_artifact returns only in-memory values, while CLI prints Proof IR extracted. Dispatched to Lean/Coq Backends.",
+      "trigger": "Run any non-HALTED reference program.",
+      "impact": "Example output misrepresents absent formal verification as completed proof generation and dispatch. No production proof bypass is alleged.",
+      "confidence": "high",
+      "kind": "docs"
+    },
+    {
+      "title": "FD exhaustion test also passes when target operation succeeds",
+      "severity": "P2",
+      "path": "tests/adversarial_nemesis.rs",
+      "line": 325,
+      "evidence": "Descriptor duplication stops after 5001 even if exhaustion was not reached; the only result assertion is inside if let Err(e) = res.",
+      "trigger": "Run with a soft descriptor limit above the fixed duplication cap.",
+      "impact": "Test can report success without entering EMFILE or validating failure under actual exhaustion, leaving the named failure path untested.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "BLE discovery filters on characteristic UUID instead of advertised service",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-wetware-and-venture-ops/references/modules/somatic-ble-transduction/MODULE.md",
+      "line": 65,
+      "evidence": "Architecture line 29 identifies service 0000180d... and characteristic 00002a37...; scanner instead searches service_uuids for HR_MEASUREMENT_UUID (00002a37...).",
+      "trigger": "A standard heart-rate device advertises the 0x180d service described by this same document.",
+      "impact": "The supplied daemon example does not discover the intended device and returns Emisor no encontrado.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Cross-device rejection test compares a device ID with itself",
+      "severity": "P2",
+      "path": "tests/adversarial_nemesis.rs",
+      "line": 489,
+      "evidence": "test_nemesis_v12_mount_boundary_exdev_fail_closed asserts q.dev == q.dev and checks only the display string of a constructed CrossDeviceUnsupported error. It never supplies a different mount or invokes an operation expected to return EXDEV.",
+      "trigger": "A regression removes cross-device rejection from the backend.",
+      "impact": "This named security regression test still passes because none of its assertions exercise the rejection behavior.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Concurrent revocation test asserts a locally manufactured abort",
+      "severity": "P2",
+      "path": "tests/adversarial_nemesis.rs",
+      "line": 417,
+      "evidence": "The revocation thread stores true and is joined before the branch; the true branch constructs EffectTxState::Aborted and asserts it equals itself. It neither revokes an orchestrator authority nor dispatches a guarded operation.",
+      "trigger": "A regression disables actual revocation enforcement.",
+      "impact": "test_nemesis_v09_concurrent_capability_revocation remains green without testing revocation or any concurrent operation against the orchestrator. The simulation is labelled in a comment but cannot support the suite security-coverage claim.",
+      "confidence": "high",
+      "kind": "example"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "01_KISH_ENGINE/babylon60/verification/finding_contract.py",
+      "line": 35,
+      "description": "Digest validation accepts any nonempty 64-character value other than the empty SHA256, including nonhex strings. This weakens the proposed model schema; no effect consumer was found in the targeted verification package search, so no execution or authorization bypass is asserted."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".agents/skills/c5-audiovisual-acreativo-sota-project/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          47
+        ]
+      ],
+      "sha256_matches": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": ".gitignore",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          148
+        ]
+      ],
+      "sha256_matches": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/shield.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          66
+        ]
+      ],
+      "sha256_matches": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/core/__init__.py",
+      "status": "reviewed_full",
+      "ranges": [],
+      "sha256_matches": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/mcp/__init__.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          10
+        ]
+      ],
+      "sha256_matches": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/verification/finding_contract.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          119
+        ]
+      ],
+      "sha256_matches": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "SECURITY.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          38
+        ]
+      ],
+      "sha256_matches": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "docs/02_ontology/spec_c5_graph_isomorphism.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          48
+        ]
+      ],
+      "sha256_matches": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "docs/reference/interpreter.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          175
+        ]
+      ],
+      "sha256_matches": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "proof/lean/AcsEnvelope.lean",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          370
+        ]
+      ],
+      "sha256_matches": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "scripts/c5_demos/official_eu_compliance_certificate.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          8
+        ]
+      ],
+      "sha256_matches": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "scripts/c5_quality_gates/governance_documents.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          108
+        ]
+      ],
+      "sha256_matches": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "scripts/guards/verify_commit_trailers.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          51
+        ]
+      ],
+      "sha256_matches": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tests/adversarial_nemesis.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          190
+        ],
+        [
+          191,
+          380
+        ],
+        [
+          381,
+          570
+        ],
+        [
+          571,
+          760
+        ],
+        [
+          761,
+          950
+        ],
+        [
+          951,
+          1140
+        ],
+        [
+          1141,
+          1330
+        ],
+        [
+          1331,
+          1348
+        ]
+      ],
+      "sha256_matches": true,
+      "notes": "Entire file statically reviewed in chunks of at most 200 lines; no execution."
+    },
+    {
+      "path": "tests/test_ci_runner_policy.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          122
+        ]
+      ],
+      "sha256_matches": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tests/test_release_evidence.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          111
+        ]
+      ],
+      "sha256_matches": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/ai-gateway/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          175
+        ]
+      ],
+      "sha256_matches": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/flagship/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          59
+        ]
+      ],
+      "sha256_matches": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/smart-placement/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          138
+        ]
+      ],
+      "sha256_matches": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workflows/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          152
+        ]
+      ],
+      "sha256_matches": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/remotion-audio-reactive-video/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          126
+        ]
+      ],
+      "sha256_matches": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_27_site_playbooks_bestbuy.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "sha256_matches": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-ring0-babylon-kernel/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          44
+        ]
+      ],
+      "sha256_matches": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-wetware-and-venture-ops/references/modules/somatic-ble-transduction/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          77
+        ]
+      ],
+      "sha256_matches": true,
+      "notes": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/workspace/babylon60-architecture/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "sha256_matches": true,
+      "notes": "Static text review; no execution."
+    }
+  ],
+  "tool_limitations": [
+    "Native codebase graph tools were not exposed; discovery used bounded text reads and targeted rg.",
+    "Initial combined read output was truncated; affected small files were subsequently reread in bounded groups.",
+    "No repository code, tests, build, runtime, external API verification, commits or push were executed.",
+    "Frozen shard SHA256 values matched all 25 assigned paths; no symlinks among assigned paths."
+  ],
+  "tests_run": []
+}

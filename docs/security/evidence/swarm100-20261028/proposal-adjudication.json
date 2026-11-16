@@ -1,0 +1,46 @@
+{
+  "finding_id": "R11",
+  "status": "CONFIRMED_STATIC_NO_EXECUTION_BYPASS",
+  "source_checks": [
+    {
+      "path": "01_KISH_ENGINE/babylon60/mcp/skills_snapshot.py",
+      "lines": [
+        692,
+        727,
+        783,
+        820,
+        900
+      ],
+      "observation": "Proposal uses client epoch/roots and RAM nonce; returns effects_executed:0."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/mcp/cortex_mcp_server.py",
+      "lines": [
+        727,
+        740,
+        743,
+        1412
+      ],
+      "observation": "Observation dispatch returns proposal; actual effects use independent dispatcher."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/mcp/effect_dispatch.py",
+      "lines": [
+        291,
+        296,
+        329
+      ],
+      "observation": "Execution requires exact-call authorization/native grant; proposal dictionaries cannot substitute."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/verification/verification_gate.py",
+      "lines": [
+        184,
+        203
+      ],
+      "observation": "Real effect path uses host time and durable execute_once transaction."
+    }
+  ],
+  "decision": "Reject earlier execution-bypass interpretation; retain inaccurate VERIFIED/ALLOW proposal reporting as P2.",
+  "evidence_kind": "Static source tracing; no runtime authority bypass tested."
+}

@@ -1,0 +1,22 @@
+{
+  "command": [
+    "uv",
+    "run",
+    "--locked",
+    "--no-sync",
+    "python",
+    "docs/security/evidence/swarm100-lot12-20261030/run_confined_tests.py",
+    "tests/test_compliance_and_attestation.py",
+    "tests/test_compliance_exporter.py",
+    "tests/test_standalone_verifier.py",
+    "tests/test_m0_evidence_pack_acceptance.py",
+    "-q",
+    "-o",
+    "addopts=--tb=short"
+  ],
+  "exit_code": 0,
+  "log": "docs/security/evidence/swarm100-lot12-20261030/foreign-source-compatibility.log",
+  "external_source": "01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py",
+  "external_source_sha256_before": "8db5af15753dd5caa6aa35d32aeb302fa98ecc1b315cdd39394739cb25e67ae6",
+  "external_source_sha256_after": "8db5af15753dd5caa6aa35d32aeb302fa98ecc1b315cdd39394739cb25e67ae6"
+}

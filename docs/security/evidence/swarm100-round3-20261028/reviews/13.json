@@ -1,0 +1,1196 @@
+{
+  "reviewer": "13",
+  "candidates": [
+    {
+      "candidate_id": "SW100-C0247",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "crates/b60-lang/src/compiler.rs",
+      "current_source_sha256": "e1be982667c360a0c71ba2c5f54e2344939bc4a1d4b62b66eb5e55aa43e211f1",
+      "rationale": "Current NIG, DAH and LAL independently find the first '[' and ']' and slice an inclusive range without ordering them. For 'NIG X ] [ Y', start is beyond end+1; Rust string indexing panics before a Result error can be returned. The CLI handles only the Result. Static control-flow conclusion; compiler/native binary was not run.",
+      "source_checks": [
+        {
+          "path": "crates/b60-lang/src/compiler.rs",
+          "start_line": 127,
+          "end_line": 158,
+          "observation": "NIG checks token count then slices independently located brackets."
+        },
+        {
+          "path": "crates/b60-lang/src/compiler.rs",
+          "start_line": 160,
+          "end_line": 203,
+          "observation": "DAH and LAL repeat the unchecked bracket range."
+        },
+        {
+          "path": "crates/b60-lang/src/main.rs",
+          "start_line": 75,
+          "end_line": 94,
+          "observation": "File source is passed directly to compile_source; match only handles Ok/Err."
+        }
+      ],
+      "guards": [
+        "At least three tokens are required, but the malformed example satisfies that guard.",
+        "Comment stripping and whitespace trimming do not reorder brackets; the presence check does not validate their order."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/13-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0248",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "crates/b60-lang/src/compiler.rs",
+      "current_source_sha256": "e1be982667c360a0c71ba2c5f54e2344939bc4a1d4b62b66eb5e55aa43e211f1",
+      "rationale": "resolve_reg allocates new symbolic names cyclically over registers 2..7. Seven distinct destinations therefore assign the first and seventh names to register 2; NIG emits LoadReg for that destination, and the VM writes the physical slot. There is no lifetime analysis, spilling or allocation-exhaustion error. No compiled program was executed.",
+      "source_checks": [
+        {
+          "path": "crates/b60-lang/src/compiler.rs",
+          "start_line": 35,
+          "end_line": 46,
+          "observation": "New symbolic allocation uses 2 + (symbol count as u8 % 6)."
+        },
+        {
+          "path": "crates/b60-lang/src/compiler.rs",
+          "start_line": 127,
+          "end_line": 150,
+          "observation": "NIG lowers its symbolic destination to LoadReg."
+        },
+        {
+          "path": "crates/b60-lang/src/vm.rs",
+          "start_line": 283,
+          "end_line": 291,
+          "observation": "LoadReg pops and assigns directly into the selected physical register."
+        }
+      ],
+      "guards": [
+        "Physical register indices are constrained modulo eight, preventing an array-index escape but not semantic aliasing.",
+        "Existing names keep their original entry; the collision is between distinct new symbols."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/13-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0251",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "crates/b60-lang/src/compiler.rs",
+      "current_source_sha256": "e1be982667c360a0c71ba2c5f54e2344939bc4a1d4b62b66eb5e55aa43e211f1",
+      "rationale": "The parser computes [ Y - - ] as 1*60^2=3600, but the NIG path clamps it with min(255), silently lowering 255. DAH/LAL have the same clamp and the VM reads one byte as seconds. This is saturation rather than bit truncation, but the reported value corruption is concrete. Native VM/compiler execution was not performed.",
+      "source_checks": [
+        {
+          "path": "crates/b60-lang/src/compiler.rs",
+          "start_line": 20,
+          "end_line": 32,
+          "observation": "Cuneiform literal parser returns a u64 weighted by powers of 60."
+        },
+        {
+          "path": "crates/b60-lang/src/compiler.rs",
+          "start_line": 127,
+          "end_line": 150,
+          "observation": "NIG applies min(255) then emits one second byte."
+        },
+        {
+          "path": "crates/b60-lang/src/compiler.rs",
+          "start_line": 169,
+          "end_line": 203,
+          "observation": "DAH/LAL repeat the clamp."
+        },
+        {
+          "path": "crates/b60-lang/src/vm.rs",
+          "start_line": 271,
+          "end_line": 280,
+          "observation": "SexaPack consumes the emitted u8 as u64 seconds."
+        }
+      ],
+      "guards": [
+        "Saturating arithmetic protects parser overflow but does not preserve the parsed value during lowering.",
+        "The direct SEXA_PACK path rejects invalid u8 input; that diagnostic is absent from cuneiform lowering."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/13-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0572",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bft_engine.rs",
+      "current_source_sha256": "ad8738ce55700ee5a448a4441893d287a1cb25b3f848f0b4d4262f2e74b412b9",
+      "rationale": "The sole completion sender is captured by the orchestrator thread. Its 15-second timeout breaks that thread with an incomplete DAG, so the receiver eventually yields None. completed_count advances only for Some, and None neither breaks nor returns, leaving cleanup unreachable and run_dag nonterminating. Tokio's official recv contract supports this inference. The CPU rate and scheduling fairness of the loop were not measured.",
+      "source_checks": [
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/bft_engine.rs",
+          "start_line": 48,
+          "end_line": 60,
+          "observation": "Concurrency limit is retained without a nonzero check."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/bft_engine.rs",
+          "start_line": 183,
+          "end_line": 184,
+          "observation": "Creates the completion channel and node count."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/bft_engine.rs",
+          "start_line": 215,
+          "end_line": 243,
+          "observation": "Producer thread times out after 15s; zero concurrency prevents publishing."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/bft_engine.rs",
+          "start_line": 263,
+          "end_line": 267,
+          "observation": "Completed nodes are sent through the captured sender."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/bft_engine.rs",
+          "start_line": 299,
+          "end_line": 356,
+          "observation": "Consumer has no None branch; worker stop and rollback follow the loop."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/bindings.rs",
+          "start_line": 368,
+          "end_line": 384,
+          "observation": "Binding waits for the engine on a current-thread Tokio runtime."
+        }
+      ],
+      "guards": [
+        "Topological sort rejects malformed DAG structure before work; it does not enforce completion.",
+        "The timeout exits only the producer, not the receiver loop.",
+        "Constructor and Python binding accept concurrency_limit=0; a successfully initialized nonempty DAG then has no scheduled tasks."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/13-source-checks.json",
+        "docs/security/evidence/swarm100-round3-20261028/13-official-docs.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0573",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bft_engine.rs",
+      "current_source_sha256": "ad8738ce55700ee5a448a4441893d287a1cb25b3f848f0b4d4262f2e74b412b9",
+      "rationale": "Node completion mutates shared memory before SQLite persistence. Node/score failures explicitly restore the snapshot, whereas each SQLite error exits via ? with no restoration. A late persistence failure after passing the score gate therefore leaves memory updated while the Python binding labels the error a rollback. Early lock-acquisition failures do not exhibit this symptom; a post-admission database failure is required. No native/database fault experiment was run.",
+      "source_checks": [
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/bft_engine.rs",
+          "start_line": 69,
+          "end_line": 106,
+          "observation": "Lock and snapshot are established before work."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/bft_engine.rs",
+          "start_line": 330,
+          "end_line": 356,
+          "observation": "Memory is changed; explicit failure restores snapshot."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/bft_engine.rs",
+          "start_line": 376,
+          "end_line": 411,
+          "observation": "Score rejection restores; SQLite open, schema, insert and commit errors return without restore."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/bindings.rs",
+          "start_line": 376,
+          "end_line": 383,
+          "observation": "Every engine error is presented as BFT Rollback Triggered."
+        }
+      ],
+      "guards": [
+        "Thermal lock and topology validation can stop the operation before mutation.",
+        "Node failure and score<700 restore the snapshot, but neither covers later database errors.",
+        "The SQL transaction can roll back durable writes independently; it does not restore KdaMemoryBuffer."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/13-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0062",
+      "decision": "REPRODUCED",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py",
+      "current_source_sha256": "d7747b65250fa8292a301082981ccd89830c53f815dd410dd87bc120becb57e1",
+      "rationale": "The unchanged method body returns ACTIVE/valid=True for an unsigned future-dated synthetic certificate. The isolated AST check also confirmed revoked and expired controls reject, demonstrating that those guards work but signature authentication is absent. The separate signature verifier is not called here. Reproduction covers this method only, not issuer trust, signing hardware or an external relying party.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py",
+          "start_line": 377,
+          "end_line": 416,
+          "observation": "Separate Ed25519 signature-verification method exists."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py",
+          "start_line": 419,
+          "end_line": 464,
+          "observation": "Lifecycle promises signature checking but only verifies revocation and expiry."
+        },
+        {
+          "path": "tests/test_compliance_exporter.py",
+          "start_line": 100,
+          "end_line": 126,
+          "observation": "Lifecycle tests assert active/revoked/expired status without testing unsigned rejection."
+        }
+      ],
+      "guards": [
+        "CRL membership, presence/format of valid_until and expiration are checked.",
+        "verify_certificate_signature exists separately, but lifecycle does not call it and callers in the inspected tests treat lifecycle valid as sufficient."
+      ],
+      "runtime_executed": true,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/13-source-checks.json",
+        "docs/security/evidence/swarm100-round3-20261028/13-pure-checks.py",
+        "docs/security/evidence/swarm100-round3-20261028/13-pure-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0063",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py",
+      "current_source_sha256": "d7747b65250fa8292a301082981ccd89830c53f815dd410dd87bc120becb57e1",
+      "rationale": "The packet attaches caller-supplied redacted decision_data to an independently obtained event proof and signs the combined object, without fetching or recomputing the logged event from that data. get_event_proof proves an entry-hash leaf, not the decision data. The existing test deliberately supplies loan data against action_id/risk_score events. Static confirmation of missing correspondence; signer, hardware quote and ledger were not executed.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py",
+          "start_line": 466,
+          "end_line": 498,
+          "observation": "Proof and caller decision data are collected independently then signed."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py",
+          "start_line": 616,
+          "end_line": 630,
+          "observation": "Proof is generated from entry_hash values only."
+        },
+        {
+          "path": "tests/test_compliance_exporter.py",
+          "start_line": 138,
+          "end_line": 159,
+          "observation": "Test stores action_id events but packet uses unrelated APPROVE_LOAN decision data."
+        }
+      ],
+      "guards": [
+        "Ledger integrity_verified is required and get_event_proof bounds-checks seq.",
+        "Redaction protects selected fields and the signature binds the packet contents, but neither proves that its decision_data was the logged event."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/13-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0524",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "02_EDIN_SWARMS/agents_archi/orchestrator/royal_rumble.py",
+      "current_source_sha256": "e0177be4c0c951725e3486a48de1de8d29a711984f6d4f7919a691ae9d93faa1",
+      "rationale": "Normal execution evaluates and checks replay for the initial action. After failure, recovery_fixer may return a different proposal; only an idempotency key is computed before dispatching it, without re-evaluating path policy, failed signatures or replay. Successful recovery is recorded as ADMIT. This confirms an authorization gap at the callback boundary; a real sandbox may enforce additional controls and no OS escape is claimed.",
+      "source_checks": [
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/orchestrator/royal_rumble.py",
+          "start_line": 99,
+          "end_line": 136,
+          "observation": "Gateway contains the path and repeated-failure checks."
+        },
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/orchestrator/royal_rumble.py",
+          "start_line": 204,
+          "end_line": 226,
+          "observation": "Only the original proposal is evaluated and replay-checked."
+        },
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/orchestrator/royal_rumble.py",
+          "start_line": 301,
+          "end_line": 331,
+          "observation": "Changed recovery proposal is dispatched and success recorded as ADMIT without reevaluation."
+        }
+      ],
+      "guards": [
+        "Initial gateway denies sensitive free-model actions and repeated failed signatures.",
+        "Work/recovery quotas and the first action's WAL record are enforced.",
+        "None of those checks validate the newly returned recovery proposal before its callback."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/13-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0525",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "02_EDIN_SWARMS/agents_archi/orchestrator/royal_rumble.py",
+      "current_source_sha256": "e0177be4c0c951725e3486a48de1de8d29a711984f6d4f7919a691ae9d93faa1",
+      "rationale": "The admitted verdict flags irreversible or architectural actions as requiring independent review. The executor merely debits recovery quota and sets a boolean, then invokes the runner. When quota is unavailable it still invokes the runner; when available it can report structured_review=True without a review result. No reviewer callable or approval decision exists in this execution interface. The claim is limited to this executor, not the behavior of arbitrary injected runners.",
+      "source_checks": [
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/orchestrator/royal_rumble.py",
+          "start_line": 128,
+          "end_line": 136,
+          "observation": "Irreversible/architectural actions are admitted with requires_structured_review=True."
+        },
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/orchestrator/royal_rumble.py",
+          "start_line": 184,
+          "end_line": 198,
+          "observation": "Executor API accepts a runner and optional recovery fixer, no reviewer."
+        },
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/orchestrator/royal_rumble.py",
+          "start_line": 248,
+          "end_line": 281,
+          "observation": "Review branch only counts quota before unconditional runner call and flag reporting."
+        }
+      ],
+      "guards": [
+        "Initial deterministic DENY still blocks the original action.",
+        "The work quota can block execution, but review quota exhaustion cannot.",
+        "The recovery callback is for post-failure correction and does not implement the required pre-dispatch review."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/13-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0227",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_demos/poc_legion_1000.py",
+      "current_source_sha256": "2813f5d4b5a13bab2ae6d50e144299f60dfe5c2388b550719e226bbe30141509",
+      "rationale": "The PoC reads persisted count but never uses it to enforce its stated at-least-one-row criterion; its final assertion checks generation attempts. This assertion gap is statically confirmed. The current cold ledger does drain on stop and propagate recorded persistence errors, so a normal zero-row successful full run has not been established; the finding does not imply all SQLite failures are silent.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_demos/poc_legion_1000.py",
+          "start_line": 7,
+          "end_line": 15,
+          "observation": "Documented acceptance includes insertion of at least one test receipt."
+        },
+        {
+          "path": "scripts/c5_demos/poc_legion_1000.py",
+          "start_line": 194,
+          "end_line": 205,
+          "observation": "Generation count increments after enqueue, ignoring enqueue's boolean."
+        },
+        {
+          "path": "scripts/c5_demos/poc_legion_1000.py",
+          "start_line": 231,
+          "end_line": 248,
+          "observation": "stop is called; persisted count only printed; assertion checks generated receipts."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/bounty_cold_ledger.py",
+          "start_line": 28,
+          "end_line": 38,
+          "observation": "Fresh queue capacity defaults to 50,000."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/bounty_cold_ledger.py",
+          "start_line": 75,
+          "end_line": 105,
+          "observation": "Current stop drains, joins and raises persistence errors/timeouts."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/bounty_cold_ledger.py",
+          "start_line": 135,
+          "end_line": 151,
+          "observation": "Flush records errors for stop to propagate."
+        }
+      ],
+      "guards": [
+        "Temporary database and total_corrupted_dropped assertion limit the demonstration.",
+        "Current stop joins the worker, raises stored persistence errors and rejects a drain timeout.",
+        "The fresh ledger's 50,000-item queue exceeds the 100-advisory batch; ordinary queue saturation is not a demonstrated zero-row trigger here."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/13-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0228",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_demos/poc_legion_1000.py",
+      "current_source_sha256": "2813f5d4b5a13bab2ae6d50e144299f60dfe5c2388b550719e226bbe30141509",
+      "rationale": "The final success line states topology validated for 1000 agents, while the code creates 1000 advisory records, selects only 100 and invokes three processors sequentially. Data record count is not an agent census or concurrency test. Header/docstring correctly disclose the reduced synthetic batch, but the final broader claim remains unsupported. No PoC run or concurrency benchmark was performed.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_demos/poc_legion_1000.py",
+          "start_line": 7,
+          "end_line": 15,
+          "observation": "Declares synthetic advisories and a 100-item analysis batch."
+        },
+        {
+          "path": "scripts/c5_demos/poc_legion_1000.py",
+          "start_line": 140,
+          "end_line": 150,
+          "observation": "Generates 1000 data records then selects 100."
+        },
+        {
+          "path": "scripts/c5_demos/poc_legion_1000.py",
+          "start_line": 171,
+          "end_line": 183,
+          "observation": "Three domain processing calls occur sequentially."
+        },
+        {
+          "path": "scripts/c5_demos/poc_legion_1000.py",
+          "start_line": 247,
+          "end_line": 248,
+          "observation": "Success message claims 1000-agent topology validation."
+        }
+      ],
+      "guards": [
+        "Docstring explicitly says a 100-advisory cycle and synthetic inputs.",
+        "The batch banner accurately states one batch of 100; these are useful scope disclosures but do not substantiate the final 1000-agent claim."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/13-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0111",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/sandbox/patterns.md",
+      "current_source_sha256": "ce18f7dde2ee8a70d5aa92ebd2ff3059ff249203a827481c40bce3e27f6959b2",
+      "rationale": "The multi-tenant handler obtains identity directly from X-User-ID and uses it as the session key under one fixed sandbox. A caller selecting another key reaches that session with no authenticated identity binding in the shown handler. This is a defect in the adopted example; no deployment, edge authentication configuration or actual cross-tenant access was observed.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/codex_overrides/cloudflare/references/sandbox/patterns.md",
+          "start_line": 165,
+          "end_line": 188,
+          "observation": "Caller-selected header chooses getSession/createSession and the resulting session executes submitted code."
+        },
+        {
+          "path": "tools/skill_library/codex_overrides/cloudflare/references/sandbox/README.md",
+          "start_line": 7,
+          "end_line": 11,
+          "observation": "Same sandbox ID is documented to persist across requests."
+        }
+      ],
+      "guards": [
+        "Container isolation is outside this identity selection step.",
+        "A trusted upstream component that authenticates and rewrites the header could mitigate adoption, but the example neither supplies nor requires one.",
+        "try/catch handles session lookup failure, not caller authorization."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/13-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0112",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/sandbox/patterns.md",
+      "current_source_sha256": "ce18f7dde2ee8a70d5aa92ebd2ff3059ff249203a827481c40bce3e27f6959b2",
+      "rationale": "The legacy CI/CD example inserts raw request JSON repo/branch strings into a shell command without validation or escaping. The local reference uses getSandbox/string-exec and 0.7.0 images; official 0.x documentation confirms shell command semantics. Scope is the legacy example and commands inside its container. Official SDK 1.0 uses argument arrays without an implicit shell; that API is not claimed vulnerable. No request, shell payload or deployment was executed.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/codex_overrides/cloudflare/references/sandbox/patterns.md",
+          "start_line": 130,
+          "end_line": 150,
+          "observation": "JSON repo and branch flow directly into template-literal sandbox.exec."
+        },
+        {
+          "path": "tools/skill_library/codex_overrides/cloudflare/references/sandbox/README.md",
+          "start_line": 16,
+          "end_line": 29,
+          "observation": "Reference uses legacy getSandbox and string-command exec."
+        },
+        {
+          "path": "tools/skill_library/codex_overrides/cloudflare/references/sandbox/README.md",
+          "start_line": 60,
+          "end_line": 64,
+          "observation": "Reference container image is sandbox:0.7.0."
+        }
+      ],
+      "guards": [
+        "A distinct sandbox name does not quote the git command.",
+        "Container confinement limits effects to its granted resources; no host escape is inferred.",
+        "The example has no repository/branch allowlist or shell escaping."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/13-source-checks.json",
+        "docs/security/evidence/swarm100-round3-20261028/13-official-docs.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0161",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "00_ABZU_KERNEL/formal_verification/BabylonBFT.tla",
+      "current_source_sha256": "835a3123f95cb2848307bef8f7c32e7a90467ca25a980b519f7daf1030d2db0f",
+      "rationale": "The complete model has only state/responded/agreeing variables and Agents/Quorum constants. Termination is an unbounded eventual-state property under weak fairness; no physical clock, deadline or bounded network delay is represented. Comments nevertheless claim convergence in T seconds and absolute freedom from temporal deadlocks. This confirms a mismatch in stated proof scope, not a claim that the eventual property was model-checked or is false.",
+      "source_checks": [
+        {
+          "path": "00_ABZU_KERNEL/formal_verification/BabylonBFT.tla",
+          "start_line": 7,
+          "end_line": 14,
+          "observation": "Physical-deadlock claim accompanies a model without clock variables."
+        },
+        {
+          "path": "00_ABZU_KERNEL/formal_verification/BabylonBFT.tla",
+          "start_line": 28,
+          "end_line": 59,
+          "observation": "Transitions and weak fairness contain no time bound."
+        },
+        {
+          "path": "00_ABZU_KERNEL/formal_verification/BabylonBFT.tla",
+          "start_line": 74,
+          "end_line": 79,
+          "observation": "Eventually termination is described as a guaranteed T-second result."
+        }
+      ],
+      "guards": [
+        "Weak fairness is an explicit assumption that requires eventually enabled progress; it is not a numerical deadline.",
+        "Failure is an allowed terminal outcome.",
+        "No TLC/Lean/native verification was run in this review."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/13-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0280",
+      "decision": "REPRODUCED",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/cortex/cortex_bpe_tokenizer.py",
+      "current_source_sha256": "f3c58fd2b30604fc96445d2b2f1f375f1f5b4495a06f591eb5939706bdf4892e",
+      "rationale": "The source-AST class check reproduces KeyError for U+20AC both before and after training on that character alone; ASCII round-trips as a control. The vocabulary enumerates only code points 0..255 and training registers merged pairs, while encode indexes remaining characters directly. Reproduction is isolated class behavior; integration with an SSM service and broader input routing were not executed.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/cortex/cortex_bpe_tokenizer.py",
+          "start_line": 19,
+          "end_line": 24,
+          "observation": "Initial vocabulary covers 256 Unicode characters."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/cortex/cortex_bpe_tokenizer.py",
+          "start_line": 46,
+          "end_line": 64,
+          "observation": "Training only inserts merged strings."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/cortex/cortex_bpe_tokenizer.py",
+          "start_line": 66,
+          "end_line": 85,
+          "observation": "Encode splits Unicode characters and indexes vocabulary with no fallback."
+        }
+      ],
+      "guards": [
+        "Known multi-character merges may encode some trained non-Latin substrings.",
+        "There is no byte conversion, unknown-token fallback or singleton-vocabulary extension for the failing one-character input.",
+        "Targeted callers search found tests and the purge inventory, not an established production ingress."
+      ],
+      "runtime_executed": true,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/13-source-checks.json",
+        "docs/security/evidence/swarm100-round3-20261028/13-pure-checks.py",
+        "docs/security/evidence/swarm100-round3-20261028/13-pure-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0181",
+      "decision": "REPRODUCED",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/memory/__init__.py",
+      "current_source_sha256": "71fbf235a5134fe2a65224a535a0c5319318a86617d06d26aeabd40ca84a2204",
+      "rationale": "The exported MemoryStore still implements set as pass and get as an unconditional None. An isolated AST execution of that exact class confirmed set(key,value) returns without error and a subsequent get loses the value. The file is dirty versus Git but the relevant implementation is not corrected. Targeted search found no active internal consumer; the confirmed impact is the public class contract, not observed production data loss.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/memory/__init__.py",
+          "start_line": 43,
+          "end_line": 48,
+          "observation": "Class contains no-op setter and always-empty getter."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/memory/__init__.py",
+          "start_line": 64,
+          "end_line": 70,
+          "observation": "The class remains exported publicly."
+        }
+      ],
+      "guards": [
+        "MemoryGovernanceEngine is a separate export and does not implement these stub methods.",
+        "The public __all__ explicitly includes MemoryStore.",
+        "No operator data, package import or persistent store was used in reproduction."
+      ],
+      "runtime_executed": true,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/13-source-checks.json",
+        "docs/security/evidence/swarm100-round3-20261028/13-pure-checks.py",
+        "docs/security/evidence/swarm100-round3-20261028/13-pure-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0299",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/cortex/crates/cortex-guard/src/eval.rs",
+      "current_source_sha256": "f852b89ce4c2d9889aa096a4144c8a76fd44131c2c860002bfff089ecc53fd9c",
+      "rationale": "Matching IFC entities lacking rule.property are skipped by the if-let branch, leaving violations empty and yielding SAT. The parser accepts entities without such properties and the CLI derives failure solely from violations. The candidate's phrase 'rule.target property' is imprecise: target selects the entity type, while property selects its numeric field. The missing-property fail-open is statically confirmed; no legal compliance conclusion or native test is claimed.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/cortex/crates/cortex-guard/src/eval.rs",
+          "start_line": 41,
+          "end_line": 78,
+          "observation": "Absent rule.property has no error/unknown branch; empty violations produces SAT."
+        },
+        {
+          "path": "01_KISH_ENGINE/cortex/crates/cortex-guard/src/ifc.rs",
+          "start_line": 157,
+          "end_line": 185,
+          "observation": "Only discovered properties/default coordinates are added; parser returns model without required-property validation."
+        },
+        {
+          "path": "01_KISH_ENGINE/cortex/crates/cortex-guard/src/main.rs",
+          "start_line": 112,
+          "end_line": 132,
+          "observation": "CLI parses model/rules then trusts evaluate's violations list."
+        }
+      ],
+      "guards": [
+        "Entity-type matching limits which entities are checked.",
+        "Present numeric values are evaluated against the operator/threshold.",
+        "Parser property extraction and coordinate defaults fill some values but do not require every rule's property."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/13-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0423",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "crates/cadt_mediator/src/lib.rs",
+      "current_source_sha256": "cf0135ff49519dee0e8c4de7acfb67d2a48c6d033f5438a98104f5206e734b66",
+      "rationale": "try_admit performs unchecked current+cost in both its comparison and CAS. With max_heat>=1, admitting 1 then passing usize::MAX overflows before the limit comparison. Checked-overflow builds panic; builds with overflow checking disabled may wrap to zero and admit. The public API accepts that cost, but the inspected production authorize call uses constant 1; no external large-cost ingress was established and native execution was not performed.",
+      "source_checks": [
+        {
+          "path": "crates/cadt_mediator/src/lib.rs",
+          "start_line": 44,
+          "end_line": 69,
+          "observation": "Public constructor and admission loop lack checked addition."
+        },
+        {
+          "path": "crates/cadt_mediator/src/lib.rs",
+          "start_line": 72,
+          "end_line": 85,
+          "observation": "Cooling uses saturation while admission does not."
+        },
+        {
+          "path": "crates/cadt_mediator/src/lib.rs",
+          "start_line": 120,
+          "end_line": 128,
+          "observation": "Existing authorize caller passes the bounded constant 1."
+        },
+        {
+          "path": "Cargo.toml",
+          "start_line": 91,
+          "end_line": 94,
+          "observation": "Release profile does not opt into overflow-checks here."
+        }
+      ],
+      "guards": [
+        "Atomic compare-exchange handles contention but not integer overflow.",
+        "dissipate uses saturating_sub; admission has no corresponding checked_add.",
+        "The inspected authorize wrapper passes only cost=1, narrowing routine exposure."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/13-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0452",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "examples/poc_bifurcation_4_structs.rs",
+      "current_source_sha256": "ae09e66a32595ad50476185e913311d26507293904b0a63cf100226aa2141166",
+      "rationale": "Layout assigns Bool one byte, but untyped Store/VolatileStore and Load always emit qword memory access. A two-Bool layout has size 2 and offsets 0/1, so the generated stores exceed the requested object extent and overlap fields if run against that allocation. The included Sensor uses size 16 with Bool in tail padding and hides the mismatch. This confirms emitted-code inconsistency only; assembly was not assembled/executed and no host memory corruption was observed.",
+      "source_checks": [
+        {
+          "path": "examples/poc_bifurcation_4_structs.rs",
+          "start_line": 46,
+          "end_line": 85,
+          "observation": "Layout computes field sizes/offsets and Bool=(1,1)."
+        },
+        {
+          "path": "examples/poc_bifurcation_4_structs.rs",
+          "start_line": 102,
+          "end_line": 108,
+          "observation": "Store IR does not encode pointed-to width."
+        },
+        {
+          "path": "examples/poc_bifurcation_4_structs.rs",
+          "start_line": 187,
+          "end_line": 205,
+          "observation": "Alloc takes requested size; store/load dereference eight bytes."
+        },
+        {
+          "path": "examples/poc_bifurcation_4_structs.rs",
+          "start_line": 248,
+          "end_line": 275,
+          "observation": "Existing Sensor example asserts a 16-byte allocation with trailing Bool."
+        }
+      ],
+      "guards": [
+        "Per-register stack slots are eight bytes, which is consistent for registers but not for pointed-to Bool fields.",
+        "Layout applies alignment/padding; backend store instructions do not carry a field width.",
+        "The demonstration's tail padding can keep its particular store within allocation bounds."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/13-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0570",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_demos/benchmark_governance_10k.py",
+      "current_source_sha256": "2a294f9150dcfdcef4ef960c07687d22536c64079fd2c6b4b1e0d880707a7704",
+      "rationale": "The benchmark measures a Python simulator with a prescribed 5ms transport sleep against a different Python Lock/bytearray workload, then states speed, legal-evidence retention, fleet freezing and financial conclusions about named products. HITL/cost figures are arithmetic assumptions, not product measurements. The initial simulation label is real but does not justify those comparative empirical claims. No benchmark or vendor implementation was run.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_demos/benchmark_governance_10k.py",
+          "start_line": 7,
+          "end_line": 20,
+          "observation": "Simulator scope and stronger architectural descriptions coexist."
+        },
+        {
+          "path": "scripts/c5_demos/benchmark_governance_10k.py",
+          "start_line": 50,
+          "end_line": 79,
+          "observation": "Prescribed transport sleep determines one benchmark workload."
+        },
+        {
+          "path": "scripts/c5_demos/benchmark_governance_10k.py",
+          "start_line": 90,
+          "end_line": 105,
+          "observation": "HITL outcome is arithmetic from assumed rates."
+        },
+        {
+          "path": "scripts/c5_demos/benchmark_governance_10k.py",
+          "start_line": 120,
+          "end_line": 146,
+          "observation": "C5 workload is Python bytearray plus Lock."
+        },
+        {
+          "path": "scripts/c5_demos/benchmark_governance_10k.py",
+          "start_line": 195,
+          "end_line": 203,
+          "observation": "Financial outcome is derived from fixed token/price assumptions."
+        },
+        {
+          "path": "scripts/c5_demos/benchmark_governance_10k.py",
+          "start_line": 232,
+          "end_line": 238,
+          "observation": "Printed conclusions attribute results to external products."
+        }
+      ],
+      "guards": [
+        "Module docstring says it simulates paradigms and some classes are named Simulator.",
+        "Network latency, escalation rate and pricing are explicit assumptions.",
+        "The C5 path uses a Python mutex; it does not exercise the claimed lock-free C-ABI runtime."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/13-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0282",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_demos/poc_srp_soc_falsification.py",
+      "current_source_sha256": "f0a58feadf5615726d571780a4daec26569fa2bc07c895d7c45a4b8371f998bb",
+      "rationale": "The conflict model uses consecutive-actor changes for A but last remembered per-file owners with no eviction for B/C, despite calling this a two-change window. Disjoint C file assignments guarantee zero cross-actor collisions. Runtime timing also gives A an accumulating audit-log append absent from B/C. These asymmetric models do not support the report's unconditional comparative architecture conclusions. No timing or Monte Carlo execution was performed.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_demos/poc_srp_soc_falsification.py",
+          "start_line": 57,
+          "end_line": 62,
+          "observation": "A both hashes and appends each digest to a growing log."
+        },
+        {
+          "path": "scripts/c5_demos/poc_srp_soc_falsification.py",
+          "start_line": 90,
+          "end_line": 117,
+          "observation": "B hashes without retaining an audit log."
+        },
+        {
+          "path": "scripts/c5_demos/poc_srp_soc_falsification.py",
+          "start_line": 139,
+          "end_line": 143,
+          "observation": "C hashes without retaining an audit log."
+        },
+        {
+          "path": "scripts/c5_demos/poc_srp_soc_falsification.py",
+          "start_line": 176,
+          "end_line": 237,
+          "observation": "Disjoint C mappings and incompatible conflict-history accounting."
+        },
+        {
+          "path": "scripts/c5_demos/poc_srp_soc_falsification.py",
+          "start_line": 239,
+          "end_line": 255,
+          "observation": "Timed loops call the unequal workloads."
+        },
+        {
+          "path": "scripts/c5_demos/poc_srp_soc_falsification.py",
+          "start_line": 327,
+          "end_line": 335,
+          "observation": "Conclusions are emitted unconditionally."
+        }
+      ],
+      "guards": [
+        "A fixed random seed improves reproducibility of the chosen assumptions.",
+        "The code names a simulation, which limits its empirical scope.",
+        "No equivalence check normalizes persistence work, conflict unit or history window across variants."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/13-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0479",
+      "decision": "REPRODUCED",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_isomorphisms/cancer_isomorphism_pipeline.py",
+      "current_source_sha256": "6bdc252dd232ff94e0f6a95d4e03ae15045f198239baa189c2c33b7bc15e3062",
+      "rationale": "The extracted current function accepts only an output-format flag and emits fixed invariants, including spectral_radius_bound=0.021 and ATTESTED. Isolated execution confirmed those outputs without any cellular model or observation input. The source contains no computation or attestation procedure establishing them. This is a false evidence-status defect in the script, not a biomedical conclusion or evaluation of a real treatment/model.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_isomorphisms/cancer_isomorphism_pipeline.py",
+          "start_line": 17,
+          "end_line": 32,
+          "observation": "Payload literals unconditionally declare numerical and Boolean invariants and ATTESTED."
+        },
+        {
+          "path": "scripts/c5_isomorphisms/cancer_isomorphism_pipeline.py",
+          "start_line": 34,
+          "end_line": 49,
+          "observation": "Text output repeats attestation; CLI supplies only the format flag."
+        }
+      ],
+      "guards": [
+        "No simulation/example/unverified discriminator accompanies the emitted status.",
+        "The --json switch changes formatting only.",
+        "Reproduction executed only this pure function and captured stdout."
+      ],
+      "runtime_executed": true,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/13-source-checks.json",
+        "docs/security/evidence/swarm100-round3-20261028/13-pure-checks.py",
+        "docs/security/evidence/swarm100-round3-20261028/13-pure-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0249",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_setup/install_into_repo.sh",
+      "current_source_sha256": "63251a0eb2467336de0fa225edee101e573bb4f42d6d9acc8aadd13b6fee1485",
+      "rationale": "The installer ignores all copy failures and proceeds to git commit without a pathspec or isolation of pre-existing staged entries. If installation paths stage successfully, unrelated entries already in the index are eligible for the same commit. Git/copy failures do not prevent the unconditional READY message. Review is static; the installer was not run and no repository/index was mutated.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_setup/install_into_repo.sh",
+          "start_line": 5,
+          "end_line": 14,
+          "observation": "Input checks cover path presence and directory existence."
+        },
+        {
+          "path": "scripts/c5_setup/install_into_repo.sh",
+          "start_line": 18,
+          "end_line": 27,
+          "observation": "Copy/chmod errors are suppressed with || true."
+        },
+        {
+          "path": "scripts/c5_setup/install_into_repo.sh",
+          "start_line": 29,
+          "end_line": 34,
+          "observation": "Unscoped commit and unconditional readiness output follow staging."
+        }
+      ],
+      "guards": [
+        "Argument and target-directory checks reject only missing/invalid target paths.",
+        "Quoted paths limit shell word splitting but do not scope git commit to installer files.",
+        "No clean-index check, explicit path-only commit, fail-fast mode or return-status gate is present."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/13-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0520",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_utils/python_spsc_reader.py",
+      "current_source_sha256": "0ba50441ce6d276752fc11398ec1119d478b906b3bec79da4c213de369571ad6",
+      "rationale": "The Python example's fields begin with a 16-byte session_id, while canonical SharedManifest begins status_flag/seq/epoch_id and places payload_hash at byte 16. A size==64 assertion cannot establish these different fields' ABI equivalence or 64-byte alignment. The canonical Rust source and offset test corroborate the mismatch. The example allocates only its own local object, so no live shared-memory corruption or cross-process race was reproduced.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_utils/python_spsc_reader.py",
+          "start_line": 15,
+          "end_line": 31,
+          "observation": "Different ctypes fields and size-only verification claim alignment/isomorphism."
+        },
+        {
+          "path": "scripts/c5_utils/python_spsc_reader.py",
+          "start_line": 33,
+          "end_line": 49,
+          "observation": "Main reads its own local ctypes object."
+        },
+        {
+          "path": "src/shared_manifest_core.rs",
+          "start_line": 9,
+          "end_line": 22,
+          "observation": "Canonical fields and 64-byte alignment are declared."
+        },
+        {
+          "path": "src/manifest.rs",
+          "start_line": 69,
+          "end_line": 78,
+          "observation": "Offset tests specify status at 0, seq at 4, epoch at 8, hash at 16."
+        }
+      ],
+      "guards": [
+        "The size assertion ensures only total length.",
+        "The demonstration's buffer is local and does not map the canonical Rust manifest.",
+        "Rust canonical source explicitly uses repr(C, align(64)); the Python declaration contains no equivalent 64-byte alignment requirement."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/13-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0319",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/sharur/run_sharur_1000.py",
+      "current_source_sha256": "8ce3d7d53f9c6d4f99b87828f3f667212d6265c478bec6f20982244868d4de32",
+      "rationale": "Each purported worker sleeps then derives a score only from its integer index, assigning security-themed verdicts and cohort names without performing those checks. JSON summarizes these values as falsaciones/apex_agents without a simulation marker. The code really creates 1000 coroutine tasks, but that fact establishes neither substantive reviewers nor hardware/security evidence. The script was not imported or run because top-level asyncio.run would launch the demonstration.",
+      "source_checks": [
+        {
+          "path": "scripts/sharur/run_sharur_1000.py",
+          "start_line": 3,
+          "end_line": 16,
+          "observation": "Cohort names reference CPU, SMT and SEP topics without inputs."
+        },
+        {
+          "path": "scripts/sharur/run_sharur_1000.py",
+          "start_line": 19,
+          "end_line": 40,
+          "observation": "Worker consists of sleep, arithmetic score and threshold verdict."
+        },
+        {
+          "path": "scripts/sharur/run_sharur_1000.py",
+          "start_line": 42,
+          "end_line": 65,
+          "observation": "Output aggregates arithmetic results without simulation metadata."
+        },
+        {
+          "path": "scripts/sharur/run_sharur_1000.py",
+          "start_line": 67,
+          "end_line": 67,
+          "observation": "Import itself would execute the demonstration."
+        }
+      ],
+      "guards": [
+        "Cohort labels provide no measurement inputs or validators.",
+        "Duration is a real elapsed-time expression but does not authenticate the synthetic scores.",
+        "There is no data/model/hardware-check argument in execute_legion_1000 or agent_worker."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/13-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0316",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tests/test_syntax_integrity.py",
+      "current_source_sha256": "e6cebd30f322c782f9b19fc04b61233a7d3309572d2674ba8395ab6609f359a8",
+      "rationale": "Despite claiming every tracked Python module, collection walks only named root directories and root-level *.py files. 01_KISH_ENGINE is absent, so the primary package is outside this test's collected inputs. A syntax error exclusively in that package is not directly checked by this test. Other CI/import tests may catch it independently; this review does not claim the entire CI would pass. No files were corrupted and no pytest collection was run.",
+      "source_checks": [
+        {
+          "path": "tests/test_syntax_integrity.py",
+          "start_line": 5,
+          "end_line": 8,
+          "observation": "Docstring claims coverage of every tracked module."
+        },
+        {
+          "path": "tests/test_syntax_integrity.py",
+          "start_line": 16,
+          "end_line": 31,
+          "observation": "Explicit roots omit 01_KISH_ENGINE and root glob is nonrecursive."
+        },
+        {
+          "path": "tests/test_syntax_integrity.py",
+          "start_line": 34,
+          "end_line": 36,
+          "observation": "Only enumerated paths are compiled."
+        }
+      ],
+      "guards": [
+        "Excluded directory parts reduce noise but do not add missing roots.",
+        "py_compile checks each collected path without imports, so it cannot indirectly compile omitted dependencies.",
+        "The conclusion is the coverage gap of this gate, not the aggregate repository test suite."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/13-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0130",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workers/patterns.md",
+      "current_source_sha256": "07bd565af6bec9a9fcfe413c48f611c6b4ae346a887befc3eb2262b3f1dd3de1",
+      "rationale": "The complete illustrated Auth block accepts any header beginning 'Bearer ' and proceeds to the feature-routing example. It never validates a credential's value or signature. Thus 'Bearer arbitrary' satisfies the shown predicate. This confirms an incomplete insecure authentication example if adopted as its authorization gate; no running Worker or bypass of separately configured upstream authentication was established.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/codex_overrides/cloudflare/references/workers/patterns.md",
+          "start_line": 142,
+          "end_line": 155,
+          "observation": "The Auth section contains only a startsWith predicate before subsequent request handling."
+        }
+      ],
+      "guards": [
+        "Missing/non-Bearer headers are rejected.",
+        "The snippet is not a full application, so external middleware could provide authentication but is not specified here.",
+        "Security response headers and deterministic rollout hashing do not validate tokens."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/13-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0235",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/global/c5-rubin-acoustic-linter/scripts/audit_acoustic_exergy.py",
+      "current_source_sha256": "09e896c0248a2e38125a0af54bcd92a6306ee66fbb7b2e6558e45ae11da8ca7f",
+      "rationale": "The returned TruePeak_dBFS is computed from max(abs((left+right)/2)), with a floor at 1e-6. For equal opposite channels the mono signal is zero, giving -120 dBFS while each channel can have a full-scale sample peak. No reconstruction/oversampling is present in the peak path. This statically establishes channel cancellation and mislabeled sample-peak measurement; no actual audio file, standards conformance test or DSP execution was used.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/global/c5-rubin-acoustic-linter/scripts/audit_acoustic_exergy.py",
+          "start_line": 82,
+          "end_line": 89,
+          "observation": "Downmix then sample maximum is used directly for the peak result."
+        },
+        {
+          "path": "tools/skill_library/global/c5-rubin-acoustic-linter/scripts/audit_acoustic_exergy.py",
+          "start_line": 91,
+          "end_line": 99,
+          "observation": "Phase coherence is a separate failure criterion."
+        },
+        {
+          "path": "tools/skill_library/global/c5-rubin-acoustic-linter/scripts/audit_acoustic_exergy.py",
+          "start_line": 116,
+          "end_line": 124,
+          "observation": "Mono sample-peak value is exported under TruePeak_dBFS."
+        }
+      ],
+      "guards": [
+        "A separate low-end phase-coherence check may flag anti-phase audio; it does not correct the TruePeak_dBFS field.",
+        "The 1e-6 floor prevents log(0) but masks silence/cancellation at -120 dBFS.",
+        "Crest-factor and spectral helpers also use mono; they are separate metrics."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/13-source-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0523",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/global/github-architect/scripts/scitt_attestor.py",
+      "current_source_sha256": "4162a94ce35fac08bd23c96df84f72cd413620ac4d1732ec87fbe4a3cc658b80",
+      "rationale": "generate_scitt_attestation hardcodes builder hardware, entropy source, zero_leakage_certified=True and SLSA_BUILD_LEVEL_3. Its observed inputs are repository Git metadata and file hashes; no corresponding hardware/build-security checks or signatures are created. The returned receipt contains only the statement and a SHA-256 digest, which does not authenticate those claims. Static scope only; no attestor run, receipt publication or downstream acceptance was tested.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/global/github-architect/scripts/scitt_attestor.py",
+          "start_line": 22,
+          "end_line": 60,
+          "observation": "Inputs gather Git metadata and tracked-file hashes."
+        },
+        {
+          "path": "tools/skill_library/global/github-architect/scripts/scitt_attestor.py",
+          "start_line": 63,
+          "end_line": 108,
+          "observation": "Attestation claims are constants; receipt includes no signature."
+        },
+        {
+          "path": "tools/skill_library/global/github-architect/scripts/scitt_attestor.py",
+          "start_line": 118,
+          "end_line": 135,
+          "observation": "CLI emits the receipt and optionally writes it without further verification."
+        }
+      ],
+      "guards": [
+        "File hashes and Git metadata provide some repository-state information.",
+        "The timestamp and digest identify an emitted statement but do not validate its hardware/security predicates.",
+        "--write gates local receipt persistence, not verification of the predicates."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/13-source-checks.json"
+      ]
+    }
+  ]
+}
+

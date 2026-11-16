@@ -1,0 +1,8 @@
+{
+  "source_sha256": "52f572b4516ca299237b844a5627ab277d63f2dfcd8406ee436039ec758deff9",
+  "operator_runtime_executed": false,
+  "fixture": "255 selected paths with 84 components of 200 ASCII bytes, plus CLAIMS.toml",
+  "generator": "SUCCESS",
+  "manifest_size": 4336732,
+  "verifier": "ValueError: artifact is not a bounded regular file"
+}

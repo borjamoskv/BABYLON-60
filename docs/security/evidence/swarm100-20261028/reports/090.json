@@ -1,0 +1,425 @@
+{
+  "shard": "090",
+  "findings": [
+    {
+      "title": "Missing remote credentials produce successful fabricated task output",
+      "severity": "P1",
+      "path": "02_EDIN_SWARMS/agents_archi/orchestrator/swarm.py",
+      "line": 305,
+      "evidence": "call returns a plain AIR-GAP MOCK string when a remote key is absent (300-305); execute_dag marks every non-LLMCallError as OK (389-398).",
+      "trigger": "Run default remote SwarmOrchestrator without configured API credentials.",
+      "impact": "All tasks report OK without inference; downstream consumers cannot distinguish successful work from a test substitute.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Extension purge accepts directory traversal as extension ID",
+      "severity": "P1",
+      "path": "tools/skill_library/global/c5-browser-forensics-and-extension-triage/scripts/browser_forensics.py",
+      "line": 171,
+      "evidence": "Only nonempty input is checked (158-161); os.path.join(profile, Extensions, ext_id) is passed to shutil.rmtree (171-173), also for settings paths (179-181).",
+      "trigger": "Invoke purge --id ../.. or provide an absolute directory as --id.",
+      "impact": "Deletion escapes the extension directory and can recursively delete the browser root or another writable directory.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Extension scan misses wildcard content-script injections",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-browser-forensics-and-extension-triage/scripts/browser_forensics.py",
+      "line": 143,
+      "evidence": "hit_matches uses domain in m and reports no extension intercepts domain when no literal substring matches (143,152-153).",
+      "trigger": "Scan example.com while an extension declares <all_urls> or *://*/*.",
+      "impact": "Tool reports no intercepting extension although a broad match pattern includes the requested domain, undermining forensic triage.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Falsifiability acceptance is disabled by optimized Python",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/cli/onco_transducer.py",
+      "line": 218,
+      "evidence": "delta > falsifiability_threshold is enforced only by assert (218-220); success is logged unconditionally afterwards (222).",
+      "trigger": "Launch CLI using python -O with a nonempty graph and drivers whose measured delta fails threshold.",
+      "impact": "Rejected simulations instead finish successfully and are described as suitable for in-vitro follow-up.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Selecting therapy targets from a set makes pipeline nondeterministic",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/cli/onco_transducer.py",
+      "line": 126,
+      "evidence": "get_structural_driver_nodes returns list(set(G.nodes()) - matched_in_nodes); execute_pipeline selects drivers[:3] at 205-207.",
+      "trigger": "Same input has more than three unmatched string nodes and Python hash randomization differs across processes.",
+      "impact": "Therapy targets and resulting delta can vary for identical input, contradicting the deterministic pipeline contract.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Frozen saga proposals retain externally mutable payloads",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/guards/saga_contract.py",
+      "line": 30,
+      "evidence": "payload is a Mapping supplied by caller, hash is recomputed from its current contents at 36; transition_to reuses the same payload object at 58.",
+      "trigger": "Create a proposal from a dict then mutate that dict, including after transition_to(COMMITTED).",
+      "impact": "Committed proposal content and its hash change without any state transition; frozen dataclass does not preserve evidence integrity. This is a data-contract defect, not evidence of an execution authorization bypass.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Stress example certifies latency bounds without checking them",
+      "severity": "P2",
+      "path": "examples/poc_stress_manifest_spmc.rs",
+      "line": 298,
+      "evidence": "Baseline <5ns success at 100 is unconditional; poison timer starts only after poison_thread.join (285-291); <1ms certification at 298 has no latency assertion; final sub-100ns text at 309 is fixed.",
+      "trigger": "Run example on hardware or scheduling conditions that exceed the printed latency thresholds.",
+      "impact": "Example still prints certified bounds; poison timing omits the interval between poisoning and producer join, so it cannot substantiate propagation latency.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Scheduled-operation deduplication commits success before operation",
+      "severity": "P2",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/cron-triggers/gotchas.md",
+      "line": 110,
+      "evidence": "Sample writes execution ID at 110 before awaiting performIdempotentOperation at 111.",
+      "trigger": "Operation rejects after the KV put succeeds and the same execution is retried.",
+      "impact": "Retry sees existing marker at 102-107 and skips the failed operation permanently; example loses work.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Sample-peak scaling is presented as a true-peak guarantee",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/djstudio-mcp/MODULE.md",
+      "line": 452,
+      "evidence": "Formula uses max(abs(x)) of discrete samples (453) then guarantees zero inter-sample saturation (454).",
+      "trigger": "Implement the prescribed scalar ceiling on a waveform whose reconstructed inter-sample peak exceeds its sample peak.",
+      "impact": "Samples meet the ceiling while reconstructed output can exceed it; documented -1dBTP guarantee requires oversampled/reconstruction peak measurement.",
+      "confidence": "high",
+      "kind": "docs"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug_falsification.yml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          31
+        ]
+      ],
+      "sha256_expected": "58d3890494ed78038a2bf85dd80fca89a422add200ce173b13c46d190352e7f0",
+      "sha256_observed": "58d3890494ed78038a2bf85dd80fca89a422add200ce173b13c46d190352e7f0",
+      "inventory_hash_match": true
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/proto/c5_exergy.proto",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          25
+        ]
+      ],
+      "sha256_expected": "2ace763fb3dff81579f80298a9ef04609e99c3d2f97894aebfb60e8a5d919ef6",
+      "sha256_observed": "2ace763fb3dff81579f80298a9ef04609e99c3d2f97894aebfb60e8a5d919ef6",
+      "inventory_hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/cli/onco_transducer.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          253
+        ]
+      ],
+      "sha256_expected": "efd727d8edef74f3eaa02c5e05fa7c93a6c97e0a40036b911fc03a86eac80e5e",
+      "sha256_observed": "efd727d8edef74f3eaa02c5e05fa7c93a6c97e0a40036b911fc03a86eac80e5e",
+      "inventory_hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/guards/saga_contract.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          59
+        ]
+      ],
+      "sha256_expected": "d127155094d4f989da562fcbe3008d87566a4499fdeaabce0a54c8ff6f9689bd",
+      "sha256_observed": "d127155094d4f989da562fcbe3008d87566a4499fdeaabce0a54c8ff6f9689bd",
+      "inventory_hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/utils/canonical.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          12
+        ]
+      ],
+      "sha256_expected": "56bee98ead59b3f216127d7d24a0dbcb668b6c7dc67c8f70b81d2da6aa9082ca",
+      "sha256_observed": "56bee98ead59b3f216127d7d24a0dbcb668b6c7dc67c8f70b81d2da6aa9082ca",
+      "inventory_hash_match": true
+    },
+    {
+      "path": "02_EDIN_SWARMS/agents_archi/orchestrator/swarm.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          414
+        ]
+      ],
+      "sha256_expected": "dd58f1b736cdb9f4dfad5f0b67dd4ec9e757b4806d2f289b6aea617232a54c12",
+      "sha256_observed": "dd58f1b736cdb9f4dfad5f0b67dd4ec9e757b4806d2f289b6aea617232a54c12",
+      "inventory_hash_match": true
+    },
+    {
+      "path": "crates/eridu-infer/src/uma.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          107
+        ]
+      ],
+      "sha256_expected": "25dfd5e4c14b326e73ad4de862e5df723212d66e0d08cf080a46b672c5b45a0e",
+      "sha256_observed": "25dfd5e4c14b326e73ad4de862e5df723212d66e0d08cf080a46b672c5b45a0e",
+      "inventory_hash_match": true
+    },
+    {
+      "path": "docs/06_theory/evidence/lean-harness-20261026.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          257
+        ]
+      ],
+      "sha256_expected": "ac7f462b8cc7a9bae8511bef7e0a04c6680cf47883a29d09d3f42ae74c25dfc2",
+      "sha256_observed": "ac7f462b8cc7a9bae8511bef7e0a04c6680cf47883a29d09d3f42ae74c25dfc2",
+      "inventory_hash_match": true
+    },
+    {
+      "path": "examples/poc_stress_manifest_spmc.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          311
+        ]
+      ],
+      "sha256_expected": "c2312e49af3e57b409fbc8bf8a7e00b1721fea440d62eb57f0d1427b300b0fea",
+      "sha256_observed": "c2312e49af3e57b409fbc8bf8a7e00b1721fea440d62eb57f0d1427b300b0fea",
+      "inventory_hash_match": true
+    },
+    {
+      "path": "scripts/c5_demos/SessionDialecticalSynthesis.lean",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          143
+        ]
+      ],
+      "sha256_expected": "971b7118c30d395829b14f82a2cb1d0e062ae2541018d84d8d7854c4555e02ac",
+      "sha256_observed": "971b7118c30d395829b14f82a2cb1d0e062ae2541018d84d8d7854c4555e02ac",
+      "inventory_hash_match": true
+    },
+    {
+      "path": "scripts/c5_legion/legion_100_audit_sitrep.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          911
+        ]
+      ],
+      "sha256_expected": "eb5f5046e6e4977ae6a93d6f78f09795038930a6819f7aba05a986aaaf6b209f",
+      "sha256_observed": "eb5f5046e6e4977ae6a93d6f78f09795038930a6819f7aba05a986aaaf6b209f",
+      "inventory_hash_match": true
+    },
+    {
+      "path": "scripts/c5_verifiers/conformance_test.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          142
+        ]
+      ],
+      "sha256_expected": "e033ca2b48a670bc48e628ffabf0d8d01560b3f7fc24af76b29676350881579d",
+      "sha256_observed": "e033ca2b48a670bc48e628ffabf0d8d01560b3f7fc24af76b29676350881579d",
+      "inventory_hash_match": true
+    },
+    {
+      "path": "src/fl011.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          159
+        ]
+      ],
+      "sha256_expected": "30e2104a9ca4ef19fb3a11e93b347bf7473a679280cb99f0c76320e13f5d9678",
+      "sha256_observed": "30e2104a9ca4ef19fb3a11e93b347bf7473a679280cb99f0c76320e13f5d9678",
+      "inventory_hash_match": true
+    },
+    {
+      "path": "tests/test_audit_mcp_lifecycle_regressions.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          133
+        ]
+      ],
+      "sha256_expected": "d3ed11dc653b5579a12c6a2aa87c037fa6a2fc52015977232a450e004d80ab1a",
+      "sha256_observed": "d3ed11dc653b5579a12c6a2aa87c037fa6a2fc52015977232a450e004d80ab1a",
+      "inventory_hash_match": true
+    },
+    {
+      "path": "tests/test_linguistic_entropy.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          41
+        ]
+      ],
+      "sha256_expected": "b785282fdaebbd82643dd5adac4100dad694560761c7204341ea52c777689ba7",
+      "sha256_observed": "b785282fdaebbd82643dd5adac4100dad694560761c7204341ea52c777689ba7",
+      "inventory_hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/agents-sdk/references/browse-the-web.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          63
+        ]
+      ],
+      "sha256_expected": "e35b6627eee0bcd0f86e264ad0973aa5c364a5bd3ec14838ad36217faf47c841",
+      "sha256_observed": "e35b6627eee0bcd0f86e264ad0973aa5c364a5bd3ec14838ad36217faf47c841",
+      "inventory_hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/cron-triggers/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          199
+        ]
+      ],
+      "sha256_expected": "958059804d1a3c091114a13dc5e7aa4f632974202ebff182ce1ee8245df103f0",
+      "sha256_observed": "958059804d1a3c091114a13dc5e7aa4f632974202ebff182ce1ee8245df103f0",
+      "inventory_hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/r2-data-catalog/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          98
+        ]
+      ],
+      "sha256_expected": "fffc79472ae6ed229cbcfadfd938d1ce0e60e07386ea6a17913cab602e4e1d34",
+      "sha256_observed": "fffc79472ae6ed229cbcfadfd938d1ce0e60e07386ea6a17913cab602e4e1d34",
+      "inventory_hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workerd/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          78
+        ]
+      ],
+      "sha256_expected": "daed9e582eff91b2c29dc77701c7c18a3d92fde0dc6883b2913df26094c0c597",
+      "sha256_observed": "daed9e582eff91b2c29dc77701c7c18a3d92fde0dc6883b2913df26094c0c597",
+      "inventory_hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/djstudio-mcp/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          455
+        ]
+      ],
+      "sha256_expected": "bd98de8e7c57f49fd784e9483b06e84df428a6504dc670d9c06868cf2bed0647",
+      "sha256_observed": "bd98de8e7c57f49fd784e9483b06e84df428a6504dc670d9c06868cf2bed0647",
+      "inventory_hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-browser-forensics-and-extension-triage/scripts/browser_forensics.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          276
+        ]
+      ],
+      "sha256_expected": "57ce214bbe5979e64b06b05a1e5554fc26f9705986dd382c78f330baa1ae06f9",
+      "sha256_observed": "57ce214bbe5979e64b06b05a1e5554fc26f9705986dd382c78f330baa1ae06f9",
+      "inventory_hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/c5-terminological-archaeology/scripts/c5_canonical_term_mapper.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          393
+        ]
+      ],
+      "sha256_expected": "d245c51c547e8fdd4ab8a4dfb798ead2b7c7546b706f17c368bb7c859ccd22cb",
+      "sha256_observed": "d245c51c547e8fdd4ab8a4dfb798ead2b7c7546b706f17c368bb7c859ccd22cb",
+      "inventory_hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-sovereign-binary-architect/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "sha256_expected": "631718be274831fbd18337054cf9f0680bfa0d9ac031dd65af9285770ad95c55",
+      "sha256_observed": "631718be274831fbd18337054cf9f0680bfa0d9ac031dd65af9285770ad95c55",
+      "inventory_hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/homebrew-ecosystem-management/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "sha256_expected": "358b7478f887a09071112551bd49ca18d16ae6a5f6bb1d1b32584486553a7bb9",
+      "sha256_observed": "358b7478f887a09071112551bd49ca18d16ae6a5f6bb1d1b32584486553a7bb9",
+      "inventory_hash_match": true
+    }
+  ],
+  "tool_limitations": [
+    "Native codebase graph tools are not exposed in this session; targeted source reads and rg used.",
+    "Static audit only: no tests, protected runtime, builds, benchmarks, external service calls, or dependency documentation checks executed.",
+    "All assigned inventory hashes matched; no assigned symlinks observed."
+  ],
+  "tests_run": []
+}

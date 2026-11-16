@@ -1,0 +1,16 @@
+{
+  "command": [
+    "uv",
+    "run",
+    "--locked",
+    "--no-sync",
+    "mypy",
+    "--follow-imports=silent",
+    "--check-untyped-defs",
+    "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+    "01_KISH_ENGINE/babylon60/crypto/identity.py",
+    "01_KISH_ENGINE/babylon60/crypto/keys.py",
+    "scripts/c5_l1_ledger/seal_bounty_aeon.py"
+  ],
+  "exit_code": 0
+}

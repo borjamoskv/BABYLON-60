@@ -40,6 +40,7 @@ fn query(adapter: &Z3Adapter, id: u64, body: &str) -> EntropyQuery {
 }
 
 #[test]
+#[ignore = "requiere el Z3 auditado: BABYLON_Z3_BIN (make test-z3)"]
 fn real_sat_and_unsat_reach_all_four_entropy_variants() {
     let _budget = process_budget();
     let adapter = adapter();
@@ -77,6 +78,7 @@ fn real_sat_and_unsat_reach_all_four_entropy_variants() {
 }
 
 #[test]
+#[ignore = "requiere el Z3 auditado: BABYLON_Z3_BIN (make test-z3)"]
 fn real_unknown_retains_resource_reason_and_cannot_be_admitted() {
     let _budget = process_budget();
     let limits = SolverLimits {
@@ -100,6 +102,7 @@ fn real_unknown_retains_resource_reason_and_cannot_be_admitted() {
 }
 
 #[test]
+#[ignore = "requiere el Z3 auditado: BABYLON_Z3_BIN (make test-z3)"]
 fn receipt_rejects_other_request_body_partition_and_policy() {
     let _budget = process_budget();
     let adapter = adapter();
@@ -138,6 +141,7 @@ fn receipt_rejects_other_request_body_partition_and_policy() {
 }
 
 #[test]
+#[ignore = "requiere el Z3 auditado: BABYLON_Z3_BIN (make test-z3)"]
 fn separate_processes_do_not_retain_previous_assertions() {
     let _budget = process_budget();
     let adapter = adapter();
@@ -199,6 +203,7 @@ fn input_validation_and_control_command_injection_are_rejected_before_execution(
 }
 
 #[test]
+#[ignore = "requiere el Z3 auditado: BABYLON_Z3_BIN (make test-z3)"]
 fn real_parser_handles_comments_quoted_symbols_and_strings() {
     let _budget = process_budget();
     let adapter = adapter();
@@ -221,6 +226,7 @@ fn real_parser_handles_comments_quoted_symbols_and_strings() {
 }
 
 #[test]
+#[ignore = "requiere el Z3 auditado: BABYLON_Z3_BIN (make test-z3)"]
 fn real_solver_parse_error_never_accepts_later_sat_output() {
     let _budget = process_budget();
     let adapter = adapter();
@@ -340,6 +346,7 @@ mod negative_processes {
     }
 
     #[test]
+    #[ignore = "requiere el Z3 auditado: BABYLON_Z3_BIN (make test-z3)"]
     fn temporary_io_failure_preserves_transport_error() {
         let _budget = process_budget();
         let fixture = Fixture::new();

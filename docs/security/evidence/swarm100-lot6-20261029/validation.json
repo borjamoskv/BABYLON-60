@@ -1,0 +1,222 @@
+{
+  "date": "2026-10-29",
+  "timezone": "Europe/Madrid",
+  "scope": "Only swarm_orchestrator.py production edited. Real HTTPX with MockTransport/controlled recorders, synthetic HOME/environment and dotenv blocked before imports; TCP/DNS prohibited. Inference credentials cleared, signing seed synthetic, strike_rs blocked. No provider network, operator credential, native/hardware auth or ATTESTED. No dependencies/lockfiles/commits/publication. Global telemetry omitted.",
+  "checks": {
+    "related-tests": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "python",
+        "-c",
+        "import os,sys,socket,tempfile\nhome=tempfile.TemporaryDirectory(prefix='b60-lot6-tests-')\nos.environ['HOME']=home.name\nfor key in ['CORTEX_VAULT_KEY','KIMI_API_KEY','MOONSHOT_API_KEY','OPENROUTER_API_KEY','MOONSHOT_API_URL','OPENROUTER_API_URL','MOONSHOT_MODEL','OPENROUTER_MODEL']:\n    os.environ.pop(key,None)\nos.environ['BABYLON60_SIGNING_SEED']='00'*32\nimport dotenv\ndotenv.load_dotenv=lambda *a,**k:False\ndotenv.dotenv_values=lambda *a,**k:{}\nsys.modules['strike_rs']=None\ndef blocked(*a,**k):\n    raise AssertionError('DNS/network forbidden in confined regression suite')\noriginal=socket.socket.connect\noriginal_ex=socket.socket.connect_ex\ndef connect(self,*a,**k):\n    if self.family in (socket.AF_INET,socket.AF_INET6):return blocked()\n    return original(self,*a,**k)\ndef connect_ex(self,*a,**k):\n    if self.family in (socket.AF_INET,socket.AF_INET6):return blocked()\n    return original_ex(self,*a,**k)\nsocket.socket.connect=connect\nsocket.socket.connect_ex=connect_ex\nsocket.getaddrinfo=blocked\nimport pytest\nraise SystemExit(pytest.main(sys.argv[1:]))\n",
+        "tests/test_swarm100_lot6_regressions.py",
+        "tests/test_audit_swarm_rate_limit.py",
+        "tests/test_swarm100_lot5_regressions.py",
+        "tests/test_ledger_resilience.py",
+        "tests/test_ledger_vault_verify.py",
+        "tests/test_wheel_runtime_regressions.py::test_actor_detects_removed_tail",
+        "tests/test_wheel_runtime_regressions.py::test_actor_concurrent_reads_use_consistent_snapshots",
+        "tests/test_finding_evidence_contract.py",
+        "tests/test_swarm100_lot4_regressions.py",
+        "tests/test_swarm100_lot3_regressions.py",
+        "tests/test_swarm100_lot2_regressions.py",
+        "tests/test_swarm100_lot1_regressions.py",
+        "tests/test_agent_beeper_regressions.py",
+        "tests/test_autodidact_derivation_regressions.py",
+        "tests/test_swarm100_round2_regressions.py",
+        "tests/test_standalone_verifier.py",
+        "tests/test_memory_governance_falsification.py",
+        "tests/test_compliance_exporter.py",
+        "tests/test_m0_evidence_pack_acceptance.py",
+        "tests/test_autodidact_omega_v2.py",
+        "tests/test_autodidact_omega_pipeline.py",
+        "tests/test_cortex_persist_batch_regressions.py",
+        "tests/test_ledger_cross_equivalence.py",
+        "tests/test_fl027_provenance_authority.py",
+        "-q",
+        "-rs",
+        "-o",
+        "addopts=--tb=short"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot6-20261029/related-tests.log",
+      "log_sha256": "2ba1a4ec4296a44c86ecb0d674043e6a73cbac15686ee50583a48f08b0492d42",
+      "source_sha256_before_and_after": {
+        "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py": "f247036e27e11087b2b34d064cced7d998a39372288baa62a838bcf6e878b529",
+        "tests/test_swarm100_lot6_regressions.py": "559a6fb243a3745f3259933356a184e9362a88c7a14202b0b9baa45a37d1e63c"
+      }
+    },
+    "ruff": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "ruff",
+        "check",
+        "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+        "tests/test_swarm100_lot6_regressions.py",
+        "docs/security/evidence/swarm100-lot6-20261029/reconcile_lot6.py",
+        "docs/security/evidence/swarm100-lot6-20261029/independent-adversarial.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot6-20261029/ruff.log",
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "mypy": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "mypy",
+        "--follow-imports=silent",
+        "--check-untyped-defs",
+        "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot6-20261029/mypy.log",
+      "log_sha256": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e"
+    },
+    "semantic-gate": {
+      "command": [
+        "python3",
+        "scripts/c5_quality_gates/audit_semantic_contracts.py",
+        "--workspace-only"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot6-20261029/semantic-gate.log",
+      "log_sha256": "5949e674dcddaf1b07015b03a1dd0b374e0b66a39f2d95157c200ce6dd13f1ee"
+    },
+    "budget-gate": {
+      "command": [
+        "python3",
+        "scripts/c5_quality_gates/audit_token_budget.py",
+        "--workspace-only",
+        "--skip-ghost-listeners"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot6-20261029/budget-gate.log",
+      "log_sha256": "d0b6780eb1edd315af3e6cf33cb6b44387f78ee81a63c8e23aabd3121e82a37a"
+    },
+    "topology-gate": {
+      "command": [
+        "python3",
+        "scripts/guards/verify_active_topology.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot6-20261029/topology-gate.log",
+      "log_sha256": "3045a29b461272aed5ff2d6a5c031c4955237179787acbd8421abad260e899a6"
+    },
+    "diff-check": {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot6-20261029/diff-check.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "registry-updates": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "python",
+        "docs/security/evidence/swarm100-lot6-20261029/reconcile_lot6.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot6-20261029/registry-updates.log",
+      "log_sha256": "432e31f9341094a974638aae7fa372a4e29d8376d5139ba52122a52f70ac69a0"
+    },
+    "registry": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "python",
+        "docs/security/evidence/swarm100-round3-20261028/reconcile_registry.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot6-20261029/registry.log",
+      "log_sha256": "4dbd884178453874c86c9608133da5912c7ae7b960fbea0abc9134aca99e8c65"
+    }
+  },
+  "source_sha256": {
+    "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py": "f247036e27e11087b2b34d064cced7d998a39372288baa62a838bcf6e878b529",
+    "tests/test_swarm100_lot6_regressions.py": "559a6fb243a3745f3259933356a184e9362a88c7a14202b0b9baa45a37d1e63c"
+  },
+  "results": {
+    "related_passed": 650,
+    "related_skipped": 1,
+    "new_regressions": 104,
+    "existing_rate_limit_passed": 10,
+    "independent_adversarial_passed": 9,
+    "skip_reason": "Native strike_rs path intentionally blocked before collection; extension-dependent test skipped."
+  },
+  "independent_review": {
+    "path": "docs/security/evidence/swarm100-lot6-20261029/independent-review.json",
+    "sha256": "d86771d8be16878a997936aea5dcb05f85c09583539ecca665af9dc5e373b654",
+    "decision": "APPROVED_WITH_EXPLICIT_SCOPE"
+  },
+  "consumers_and_dependency_files_unchanged": true,
+  "lot7_source_unchanged": true,
+  "not_verified": [
+    "real TLS handshake, DNS routing, provider availability or credential acceptance",
+    "OS-level network containment outside these fixtures",
+    "atomic concurrent cross-thread mutation of config or immutable caller-message snapshot",
+    "external provider SDKs or other source modules not in this lot",
+    "hardware/SCITT/physical operator identity"
+  ],
+  "registry_summary": {
+    "original_candidates": 598,
+    "round3_assigned": 582,
+    "round3_reviewed": 582,
+    "round3_decisions": {
+      "CONFIRMED_STATIC": 492,
+      "REPRODUCED": 53,
+      "ALREADY_FIXED": 28,
+      "REJECTED": 4,
+      "DUPLICATE": 5
+    },
+    "round3_remediation_states": {
+      "OPEN": 544,
+      "FIXED": 31,
+      "MITIGATED": 3,
+      "NOT_APPLICABLE": 4
+    },
+    "all_decisions": {
+      "CONFIRMED_STATIC": 492,
+      "REPRODUCED": 53,
+      "ALREADY_FIXED": 39,
+      "REJECTED": 4,
+      "DUPLICATE": 10
+    },
+    "all_remediation_states": {
+      "OPEN": 549,
+      "FIXED": 41,
+      "MITIGATED": 4,
+      "NOT_APPLICABLE": 4
+    },
+    "needs_validation_ids": [],
+    "unique_open_findings": 543,
+    "unique_open_severity": {
+      "P2": 472,
+      "P3": 10,
+      "P1": 61
+    },
+    "additional_findings_outside_original_inventory": 1,
+    "additional_decisions": {
+      "ALREADY_FIXED": 1
+    },
+    "scope": "Every assigned candidate reviewed; static confirmation is not correction or runtime certification."
+  },
+  "local_links_checked": 41,
+  "verification_complete": true
+}

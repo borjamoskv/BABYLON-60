@@ -1,0 +1,34 @@
+{
+  "audit_date": "2026-10-24",
+  "timezone": "Europe/Madrid",
+  "mirror": {
+    "repository": "https://github.com/borjamoskv/babylon60-verification",
+    "commit": "a4657d9fcfeff49791ae75486cd03f3509a2c1f7"
+  },
+  "public_repository": {
+    "private": false,
+    "created_at": "2026-10-18T18:03:58Z",
+    "stars": 1,
+    "license": "NOASSERTION",
+    "default_branch": "main",
+    "repository": "https://github.com/borjamoskv/BABYLON-60",
+    "commit": "c54d3453ec538597ef9e66e48011d676864f0421"
+  },
+  "local_repository": {
+    "path": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+    "head": "a620e383d695e82d14b57066967194b8c8a3022b",
+    "branch": "codex/integration-review-20261023",
+    "initial_dirty_paths": 13
+  },
+  "tools": {
+    "graph": "native calls succeeded; refreshed babylon-60 index; mirror separately indexed with partial Lean parser coverage",
+    "docs": "Context7 Claude Code, Docker MCP Gateway, Cursor",
+    "web": "primary sources; anonymous GitHub page reports Public"
+  },
+  "limitations": [
+    "Runtime suites were not executed in this audit",
+    "No API calls to LLM providers were made",
+    "No independently trusted release signing key was supplied",
+    "HTTP requests for structured pricing returned 403; price claim not verified"
+  ]
+}

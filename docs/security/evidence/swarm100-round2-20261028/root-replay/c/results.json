@@ -1,0 +1,140 @@
+{
+  "scope": "actual unchanged Python APIs, process-local fixtures only",
+  "isolation": {
+    "package_shells": true,
+    "default_key_loader_called": false,
+    "database": ":memory:",
+    "network_and_process_guard": true
+  },
+  "cases": [
+    {
+      "id": "crystal_json_content_integrity",
+      "status": "confirmed",
+      "inputs": {
+        "original": {
+          "affiliation": "test",
+          "author": "isolated audit fixture",
+          "compiled_at_iso": "2026-10-28T13:34:58.352717+00:00",
+          "falsification_verdicts": [],
+          "markdown_content": "# CRISTAL EPISTÉMICO: FIXTURE\n\n**Por isolated audit fixture**  \n*test*  \n**Fecha de Compilación:** `2026-10-28T13:34:58.352717+00:00`  \n**Merkle Root (SHA-256):** `80179501d4e5ce87568a569dde9e28c5eb82f5d3cfc0cc4cd193ac061ceffa1c`  \n\n---\n\n## 1. Tesis y Núcleo Conceptual\n\nfixture\n\n---\n\n## 2. Proposiciones Formales Verificadas (Lógica de Harrop Ω₀)\n\n| # | Modalidad | Hash Statement | Proposición | Justificación | Confianza |\n| :--- | :--- | :--- | :--- | :--- | :--- |\n| 1 | `EPISTEMIC` | `STMT:761b15e3729...` | All fixture triangles have three sides. | Observation | 1.00 |\n\n---\n\n## 3. Registro de Falsaciones Popperianas (Silicio y Verificación Empírica)\n\n*No se registraron anomalías ni falsaciones en la corrida de verificación.*\n\n---\n\n## 4. Atestación Causal e Integridad C5-REAL\n\n- **Autoridad de Compilación:** `isolated audit fixture`\n- **Árbol de Evidencia:** 1 aserciones verificadas, 0 tests de demarcación.\n- **Sello Merkle WORM:** `80179501d4e5ce87568a569dde9e28c5eb82f5d3cfc0cc4cd193ac061ceffa1c`\n\n---\n**Firmado:**  \n**isolated audit fixture**  \n*test*\n",
+          "merkle_root": "80179501d4e5ce87568a569dde9e28c5eb82f5d3cfc0cc4cd193ac061ceffa1c",
+          "statements": [
+            {
+              "confidence": 1.0,
+              "content": "All fixture triangles have three sides.",
+              "dependencies": [],
+              "justification_kind": "Observation",
+              "modality": "epistemic",
+              "obligations": [
+                "provenance",
+                "reproducibility"
+              ],
+              "statement_hash": "STMT:761b15e37297970f86a4928cd1914118b2ec1cad428edd2149a5940b33a81f65",
+              "status": "candidate"
+            }
+          ],
+          "thesis": "fixture",
+          "topic": "fixture"
+        },
+        "tampered": {
+          "affiliation": "test",
+          "author": "isolated audit fixture",
+          "compiled_at_iso": "2026-10-28T13:34:58.352717+00:00",
+          "falsification_verdicts": [],
+          "markdown_content": "# CRISTAL EPISTÉMICO: FIXTURE\n\n**Por isolated audit fixture**  \n*test*  \n**Fecha de Compilación:** `2026-10-28T13:34:58.352717+00:00`  \n**Merkle Root (SHA-256):** `80179501d4e5ce87568a569dde9e28c5eb82f5d3cfc0cc4cd193ac061ceffa1c`  \n\n---\n\n## 1. Tesis y Núcleo Conceptual\n\nfixture\n\n---\n\n## 2. Proposiciones Formales Verificadas (Lógica de Harrop Ω₀)\n\n| # | Modalidad | Hash Statement | Proposición | Justificación | Confianza |\n| :--- | :--- | :--- | :--- | :--- | :--- |\n| 1 | `EPISTEMIC` | `STMT:761b15e3729...` | All fixture triangles have three sides. | Observation | 1.00 |\n\n---\n\n## 3. Registro de Falsaciones Popperianas (Silicio y Verificación Empírica)\n\n*No se registraron anomalías ni falsaciones en la corrida de verificación.*\n\n---\n\n## 4. Atestación Causal e Integridad C5-REAL\n\n- **Autoridad de Compilación:** `isolated audit fixture`\n- **Árbol de Evidencia:** 1 aserciones verificadas, 0 tests de demarcación.\n- **Sello Merkle WORM:** `80179501d4e5ce87568a569dde9e28c5eb82f5d3cfc0cc4cd193ac061ceffa1c`\n\n---\n**Firmado:**  \n**isolated audit fixture**  \n*test*\n",
+          "merkle_root": "80179501d4e5ce87568a569dde9e28c5eb82f5d3cfc0cc4cd193ac061ceffa1c",
+          "statements": [
+            {
+              "confidence": 1.0,
+              "content": "All fixture triangles have five sides.",
+              "dependencies": [],
+              "justification_kind": "Observation",
+              "modality": "epistemic",
+              "obligations": [
+                "provenance",
+                "reproducibility"
+              ],
+              "statement_hash": "STMT:761b15e37297970f86a4928cd1914118b2ec1cad428edd2149a5940b33a81f65",
+              "status": "candidate"
+            }
+          ],
+          "thesis": "fixture",
+          "topic": "fixture"
+        }
+      },
+      "actual": {
+        "original": [
+          true,
+          "INTEGRITY_VERIFIED: Merkle Root matches 80179501d4e5ce87568a569dde9e28c5eb82f5d3cfc0cc4cd193ac061ceffa1c"
+        ],
+        "tampered": [
+          true,
+          "INTEGRITY_VERIFIED: Merkle Root matches 80179501d4e5ce87568a569dde9e28c5eb82f5d3cfc0cc4cd193ac061ceffa1c"
+        ],
+        "changed_leaf_hash_control": [
+          false,
+          "MERKLE_MISMATCH: Declared 80179501d4e5ce87568a569dde9e28c5eb82f5d3cfc0cc4cd193ac061ceffa1c, computed c75b643bc73d4dcb855a7d6fa51f30cb344f04c5b315473ba29f61f3fa784825"
+        ]
+      },
+      "limit": "API accepts altered content; CLI and external consumers not executed."
+    },
+    {
+      "id": "unrelated_derive_goal",
+      "status": "confirmed",
+      "inputs": {
+        "premise": "All fixture triangles have three sides.",
+        "goal": "All fixture triangles have five sides.",
+        "db_path": null
+      },
+      "actual": {
+        "goal": "All fixture triangles have five sides.",
+        "justification_kind": "FormalProof",
+        "parameters": {
+          "proof_term": "derived[All fixture triangles have three sides.]",
+          "premises": [
+            "All fixture triangles have three sides."
+          ]
+        },
+        "confidence": 1.0,
+        "status": "canonical",
+        "verify": true,
+        "registered": true,
+        "deontic_negative_control": "HumeViolationError"
+      },
+      "limit": "Observed labels/registry state, not a valid logical proof or an external effect authorization."
+    },
+    {
+      "id": "crypto_shredding_decryptability",
+      "status": "confirmed",
+      "inputs": {
+        "master_key_fixture": "bytes(range(32)); public synthetic fixture",
+        "tenant": "round2-fixture-tenant",
+        "fact_id": 42,
+        "plaintext": "public non-sensitive fixture text",
+        "ciphertext": "v6_aesgcm:MhFfDgjpw1nUAkbh7vcznsxJ2oyuSJVJKO3aQAQoknUn1aDOxmp/dQwbtMyvgBplo4dNBSYA1Fyze9cXgg=="
+      },
+      "actual": {
+        "shred_success": true,
+        "persistent_marker": true,
+        "in_memory_marker": true,
+        "plaintext_before": "public non-sensitive fixture text",
+        "plaintext_after": "public non-sensitive fixture text",
+        "plaintext_recreated_encrypter": "public non-sensitive fixture text"
+      },
+      "limit": "Cryptographic erasure API behavior only; application query filters and real data not tested."
+    }
+  ],
+  "source_sha256": {
+    "01_KISH_ENGINE/babylon60/autodidact/types.py": "5aa59b3488ccf03d7a0bf0f8d4e2573a4f074843c5fde8a852af667e77d9049a",
+    "01_KISH_ENGINE/babylon60/autodidact/epistemology.py": "b7385f413c53dacc2278e594c4d642db6b30b510581bb2a1995b807b550da7fb",
+    "01_KISH_ENGINE/babylon60/autodidact/crystal_compiler.py": "df12946f0b9950e0f603538b8da9ea22d7d36d1b699871f24ed415c82112b39d",
+    "01_KISH_ENGINE/babylon60/verifiable_inference/__init__.py": "7c9b8102eba3e7cfa401b6e859ada46b657ff870cf559cc44ef62915184da4b7",
+    "01_KISH_ENGINE/babylon60/autodidact/falsifier.py": "fd153208b19f3d62a1f8707dc704e8c7f3fd6a36f40bb03adf3ad6353a3c5b08",
+    "01_KISH_ENGINE/babylon60/autodidact/fetchers.py": "5f37064ac590f59c48b21cd01b1a77bd1530a5a566d75d2027018fca44667887",
+    "01_KISH_ENGINE/babylon60/autodidact/engine.py": "f9ee71a4652511097986fec241dd4c0932e99227e72452b3e928e29c4b7895bd",
+    "01_KISH_ENGINE/babylon60/primitives/errors.py": "922c2146ec768d25a8f641b2322a145501ce5bfa2510b90741537a0338c913d5",
+    "01_KISH_ENGINE/babylon60/crypto/aes.py": "aa6f6fffdd0eb5ee038b6b97655f8631cafeb951cb14730053968c9353a97bd5",
+    "01_KISH_ENGINE/babylon60/crypto/shredder.py": "168ff4a5b7b0b7ed198726bdd418d1af15fc5a36d9d5264a36e6cd06214b0b9c"
+  },
+  "python_version": "3.14.7 (main, Aug  5 2026, 10:29:49) [Clang 21.0.0 (clang-2100.1.1.101)]"
+}

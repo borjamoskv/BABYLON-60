@@ -1,0 +1,99 @@
+{
+  "lead": "b",
+  "method": "Static independent caller/consumer/guard inspection; no runtime or destructive PoCs",
+  "findings": [
+    {
+      "source_shard": "028",
+      "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+      "line": 75,
+      "title": "Memory JSON truncates in place",
+      "decision": "retained",
+      "severity": "P1",
+      "source_checks": [
+        "crystallize_session reads project/ghost/system and calls _write_json at 113,129,156; CLI calls crystallize_session at177.",
+        "_write_json uses open(path,\"w\") followed by f.write with no temporary rename/fsync/recovery.",
+        "_read_json kills process on JSONDecodeError."
+      ],
+      "counterexample": "Process interruption after truncation but before complete write destroys prior JSON; next startup cannot recover from this module.",
+      "assumptions": [
+        "Memory topology exists; writer is invoked."
+      ],
+      "limits": "Static persistence bug; no crash PoC or disk durability test."
+    },
+    {
+      "source_shard": "029",
+      "path": "01_KISH_ENGINE/babylon60/verifier/cli.py",
+      "line": 78,
+      "title": "Malformed CRL file falls back to filename literal",
+      "decision": "retained",
+      "severity": "P1",
+      "source_checks": [
+        "parse_crl_arg catches every file decode/read exception then splits the filename string (78\u201381).",
+        "main passes that list directly to verify_compliance_certificate (125\u2013130).",
+        "standalone_verify rejects only cert_id in crl at713; no later CRL load guard."
+      ],
+      "counterexample": "Existing CRL file becomes invalid JSON; revoked certificate ID does not equal path literal and passes the revocation check if other checks pass.",
+      "assumptions": [
+        "Verifier is run with --cert and --crl; certificate otherwise valid and unexpired."
+      ],
+      "limits": "No forgery claim; caller-supplied CRL must be reliably parsed."
+    },
+    {
+      "source_shard": "030",
+      "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+      "line": 450,
+      "title": "JSON ledger hashes are trusted without binding event fields",
+      "decision": "retained",
+      "severity": "P1",
+      "source_checks": [
+        "_verify_json_ledger list/events branches take entry_hash/hash verbatim (450\u2013468).",
+        "Returns integrity_verified=True and verified=True on matching Merkle root (508\u2013515).",
+        "verify_compliance_certificate passes signed expected root to verify_offline_evidence and accepts verified at728\u2013739."
+      ],
+      "counterexample": "Alter payload fields of an event dictionary while retaining its entry_hash; leaves and signed-root comparison remain unchanged.",
+      "assumptions": [
+        "JSON ledger includes event payloads and entry_hash values; certificate/root is otherwise valid."
+      ],
+      "limits": "Hash-only manifests may legitimately attest hashes alone; vulnerability is claiming event integrity for event dictionaries without recomputation."
+    },
+    {
+      "source_shard": "032",
+      "path": "01_KISH_ENGINE/babylon60/memory/governance.py",
+      "line": 468,
+      "title": "Revocation and dependency validation are separated from insertion",
+      "decision": "retained",
+      "severity": "P1",
+      "source_checks": [
+        "add_record checks ACTIVE parent then commits at468.",
+        "Ledger append happens outside that transaction, insertion opens a new BEGIN IMMEDIATE at496.",
+        "revoke_record calculates closure and commits at632\u2013638; final update opens another transaction at666.",
+        "_get_connection creates independent SQLite connections; FULL durability and foreign keys do not recheck parent status."
+      ],
+      "counterexample": "A validates active parent and releases transaction; B revokes parent and computes closure without not-yet-inserted A child; A inserts child with ACTIVE initial status.",
+      "assumptions": [
+        "Concurrent legitimate add_record and revoke_record callers for same dependency graph."
+      ],
+      "limits": "No production API authorization bypass asserted; class concurrency/state invariant defect."
+    },
+    {
+      "source_shard": "037",
+      "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/backend_x86.rs",
+      "line": 88,
+      "title": "Compiler stack frame is fixed despite unbounded spills",
+      "decision": "downgraded",
+      "severity": "P2",
+      "original_severity": "P1",
+      "source_checks": [
+        "get_offset starts16 and advances8 for every new Reg, without bound.",
+        "compile reserves256 bytes then emits sys_alloc/sys_free calls.",
+        "32nd distinct Reg has offset264, equal to call return slot at rsp-8 for aligned rbp.",
+        "Targeted consumer search found only public module export in src/lib.rs, no repository executable caller."
+      ],
+      "counterexample": "Generate >31 live spill slots then call sys_alloc/sys_free; call return address overwrites a spill at264, corrupting generated-program value.",
+      "assumptions": [
+        "Caller uses exposed X86Backend.compile with sufficiently large valid IR and executes emitted assembly."
+      ],
+      "limits": "Compiler output defect confirmed statically; deployed consumer/executed exploit not established. P2 matches demonstrated scope."
+    }
+  ]
+}

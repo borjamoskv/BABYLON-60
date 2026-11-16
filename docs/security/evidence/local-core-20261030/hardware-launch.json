@@ -1,0 +1,23 @@
+{
+  "command": [
+    "uv",
+    "run",
+    "--locked",
+    "--no-sync",
+    "python",
+    "-I",
+    "tests/manual/hardware_mcp_cycle.py",
+    "--execute-once",
+    "--evidence-dir",
+    "/Users/borjafernandezangulo/.codex/local-core-evidence/capture-20261029T230935Z/hardware-final",
+    "--capability-library",
+    "/Users/borjafernandezangulo/.codex/local-core-evidence/capture-20261029T230935Z/candidate-b9640a52ca/libbabylon60.dylib",
+    "--gate-blake3",
+    "0197d1edcbab5aa434f2d4c44b5c190d6c02ae7d9d3d16580bfca33f87ac5974",
+    "--library-blake3",
+    "e18992001a78b6675234ddf19da9e0ad5918b7a75c25ac15892eb53ece1dd0d8"
+  ],
+  "candidate": "b9640a52ca031d1978232255d31e69efb011f9b9",
+  "pin_confirmation": "operator-pin-confirmation.json",
+  "retry_permitted": false
+}

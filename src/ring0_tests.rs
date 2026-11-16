@@ -557,3 +557,72 @@ mod ring0_integration {
         std::fs::remove_file(path).unwrap();
     }
 }
+
+/// Vectores dorados de serialización de los backends Linux (TD-RING0-001).
+/// No abren `/dev/tpmrm0` ni `/dev/nsm`: ejercitan solo las funciones puras de codificación.
+/// Solo prueban el formato del paquete; no sustituyen atestación sobre hardware real.
+#[cfg(all(test, target_os = "linux"))]
+mod linux_backend_golden_vectors {
+    use crate::ring0::linux_tpm2::parse_quote_response;
+
+    fn unhex(s: &str) -> Vec<u8> {
+        (0..s.len())
+            .step_by(2)
+            .map(|i| u8::from_str_radix(&s[i..i + 2], 16).expect("hex"))
+            .collect()
+    }
+
+    /// Respuesta TPM2_Quote ECDSA-SHA256: extraData=0x11*32, pcrDigest=0x33*32, r=0x44*32, s=0x55*32.
+    const QUOTE_RESP_HEX: &str = "8002000000ee00000000000000db0091ff54434780180022000b2222222222222222222222222222222222222222222222222222222222222222002011111111111111111111111111111111111111111111111111111111111111110000000000000001000000000000000001000000000000000000000001000b03814000002033333333333333333333333333333333333333333333333333333333333333330018000b00204444444444444444444444444444444444444444444444444444444444444444002055555555555555555555555555555555555555555555555555555555555555550000010000";
+
+    fn resp() -> Vec<u8> {
+        unhex(QUOTE_RESP_HEX)
+    }
+
+    fn parse(r: &[u8]) -> Result<([u8; 64], [u8; 32]), &'static str> {
+        parse_quote_response(r, &[0x11; 32], &[0x33; 32])
+    }
+
+    #[test]
+    fn tpm2_quote_response_golden_vector_parses() {
+        let (sig, pcr) = parse(&resp()).expect("respuesta valida");
+        assert_eq!(&sig[..32], &[0x44; 32]);
+        assert_eq!(&sig[32..], &[0x55; 32]);
+        assert_eq!(pcr, [0x33; 32]);
+    }
+
+    #[test]
+    fn tpm2_quote_response_fails_closed() {
+        let mutate = |f: &dyn Fn(&mut Vec<u8>)| {
+            let mut r = resp();
+            f(&mut r);
+            parse(&r).unwrap_err()
+        };
+        assert_eq!(mutate(&|r| r.truncate(5)), "LinuxTPM2_ShortRead");
+        assert_eq!(mutate(&|r| r.truncate(100)), "LinuxTPM2_SizeMismatch");
+        assert_eq!(mutate(&|r| r[9] = 1), "LinuxTPM2_ResponseCode");
+        assert_eq!(mutate(&|r| r[1] = 0x01), "LinuxTPM2_BadTag");
+        assert_eq!(mutate(&|r| r[16] ^= 1), "LinuxTPM2_NotTpmGenerated");
+        assert_eq!(mutate(&|r| r[21] = 0x14), "LinuxTPM2_NotQuote");
+        assert_eq!(mutate(&|r| r[60] ^= 1), "LinuxTPM2_ExtraDataMismatch");
+        assert_eq!(mutate(&|r| r[129] ^= 1), "LinuxTPM2_PcrMismatch");
+        assert_eq!(mutate(&|r| r[162] = 0x14), "LinuxTPM2_UnsupportedSigAlg");
+        assert_eq!(mutate(&|r| r[164] = 0x04), "LinuxTPM2_UnsupportedSigHash");
+        // `r` de 31 B desplaza el framing de `s`: la respuesta queda mal formada y se rechaza.
+        assert_eq!(mutate(&|r| r[166] = 31), "LinuxTPM2_Malformed");
+        assert_eq!(mutate(&|r| r[167..199].fill(0)), "LinuxTPM2_ZeroSignature");
+        assert_eq!(mutate(&|r| r[201..233].fill(0)), "LinuxTPM2_ZeroSignature");
+    }
+
+    #[test]
+    fn tpm2_quote_response_rejects_other_digest_or_pcr() {
+        assert_eq!(
+            parse_quote_response(&resp(), &[0x12; 32], &[0x33; 32]).unwrap_err(),
+            "LinuxTPM2_ExtraDataMismatch"
+        );
+        assert_eq!(
+            parse_quote_response(&resp(), &[0x11; 32], &[0x34; 32]).unwrap_err(),
+            "LinuxTPM2_PcrMismatch"
+        );
+    }
+}

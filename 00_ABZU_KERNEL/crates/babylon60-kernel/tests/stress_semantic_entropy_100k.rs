@@ -1,10 +1,132 @@
 use babylon60_kernel::semantic_entropy::{
     BitmaskSemanticKernel, SemanticEntropyVerdict, SolverOutcome, ERR_CONFABULATION,
-    ERR_INCORRECT_BELIEF,
+    ERR_INCORRECT_BELIEF, TAU_SEM_Q16,
 };
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::thread;
 use std::time::Instant;
+
+fn matrix_from_labels(labels: &[usize]) -> u64 {
+    let mut matrix = 0u64;
+    for (i, left) in labels.iter().enumerate() {
+        for (j, right) in labels.iter().enumerate() {
+            if left == right {
+                matrix |= 1u64 << (i * 8 + j);
+            }
+        }
+    }
+    matrix
+}
+
+fn exact_shannon_bits(labels: &[usize]) -> f64 {
+    let mut counts = [0usize; 8];
+    for &label in labels {
+        counts[label] += 1;
+    }
+    let n = labels.len() as f64;
+    let mut h = 0.0f64;
+    for c in counts.into_iter().filter(|&c| c > 0) {
+        let p = (c as f64) / n;
+        h -= p * p.log2();
+    }
+    h
+}
+
+fn enumerate_rgf_partitions(
+    n: usize,
+    idx: usize,
+    max_used: usize,
+    cur: &mut [usize],
+    visit: &mut impl FnMut(&[usize]),
+) {
+    if idx == n {
+        visit(&cur[..n]);
+        return;
+    }
+    for label in 0..=max_used {
+        cur[idx] = label;
+        enumerate_rgf_partitions(n, idx + 1, max_used, cur, visit);
+    }
+    cur[idx] = max_used + 1;
+    enumerate_rgf_partitions(n, idx + 1, max_used + 1, cur, visit);
+}
+
+#[test]
+fn numerical_stability_and_refinement_monotonicity_across_all_5295_bell_partitions() {
+    let mut total_partitions = 0usize;
+    let mut max_abs_bits_err = 0.0f64;
+    let mut min_threshold_margin_bits = f64::INFINITY;
+    let mut refinement_checks = 0usize;
+    let mut buf = [0usize; 8];
+
+    for n in 1..=8 {
+        buf[0] = 0;
+        enumerate_rgf_partitions(n, 1, 0, &mut buf, &mut |labels| {
+            total_partitions += 1;
+            let matrix = matrix_from_labels(labels);
+            let (h_q16, num_classes) = BitmaskSemanticKernel::compute_quotient_entropy(matrix, n)
+                .expect("valid RGF partition must succeed");
+            let h_q16_bits = (h_q16 as f64) / 65536.0;
+            let h_exact = exact_shannon_bits(labels);
+            let abs_err = (h_q16_bits - h_exact).abs();
+            if abs_err > max_abs_bits_err {
+                max_abs_bits_err = abs_err;
+            }
+
+            // Verify zero threshold-flip discrepancy at 0.85 bits (TAU_SEM_Q16 = 55706)
+            let q16_above = h_q16 > TAU_SEM_Q16;
+            let exact_above = h_exact > 0.85;
+            assert_eq!(
+                q16_above, exact_above,
+                "Threshold flip at n={n}, labels={labels:?}: h_q16={h_q16} vs h_exact={h_exact}"
+            );
+            let margin = (h_exact - 0.85).abs();
+            if margin < min_threshold_margin_bits {
+                min_threshold_margin_bits = margin;
+            }
+
+            // Strict refinement monotonicity: merging any two distinct classes strictly lowers H_Q16
+            let k = num_classes as usize;
+            if k >= 2 {
+                for c_a in 0..k {
+                    for c_b in (c_a + 1)..k {
+                        let mut coarse = [0usize; 8];
+                        for (idx, &lbl) in labels.iter().enumerate() {
+                            coarse[idx] = if lbl == c_b {
+                                c_a
+                            } else if lbl > c_b {
+                                lbl - 1
+                            } else {
+                                lbl
+                            };
+                        }
+                        let coarse_mat = matrix_from_labels(&coarse[..n]);
+                        let (h_coarse_q16, coarse_k) =
+                            BitmaskSemanticKernel::compute_quotient_entropy(coarse_mat, n)
+                                .expect("coarsened partition must remain valid");
+                        assert_eq!(coarse_k, num_classes - 1);
+                        assert!(
+                            h_q16 > h_coarse_q16,
+                            "Monotonicity violated: fine={h_q16} <= coarse={h_coarse_q16} for {labels:?}"
+                        );
+                        refinement_checks += 1;
+                    }
+                }
+            }
+        });
+    }
+
+    assert_eq!(total_partitions, 5_295);
+    assert!(
+        max_abs_bits_err <= 4.0 / 65536.0,
+        "Q16 quantization error exceeded 4 ULP bound: {max_abs_bits_err}"
+    );
+    assert!(
+        min_threshold_margin_bits > max_abs_bits_err,
+        "Threshold safety margin ({min_threshold_margin_bits}) smaller than max Q16 error ({max_abs_bits_err})"
+    );
+    assert!(refinement_checks > 20_000);
+}
 
 #[test]
 fn stress_test_100k_semantic_entropy_ring0() {
@@ -71,8 +193,8 @@ fn stress_test_100k_semantic_entropy_ring0() {
                                 num_classes,
                             } = verdict
                             {
-                                debug_assert_eq!(h_sem_q16, 0);
-                                debug_assert_eq!(num_classes, 1);
+                                assert_eq!(h_sem_q16, 0);
+                                assert_eq!(num_classes, 1);
                                 local_genuine += 1;
                             }
                         }
@@ -83,10 +205,13 @@ fn stress_test_100k_semantic_entropy_ring0() {
                                 5,
                                 SolverOutcome::Unsat,
                             );
-                            if let SemanticEntropyVerdict::ApoptosisConfabulation { code, .. } =
-                                verdict
+                            if let SemanticEntropyVerdict::ApoptosisConfabulation {
+                                h_sem_q16,
+                                code,
+                            } = verdict
                             {
-                                debug_assert_eq!(code, ERR_CONFABULATION);
+                                assert_eq!(h_sem_q16, 152_170);
+                                assert_eq!(code, ERR_CONFABULATION);
                                 local_confab += 1;
                             }
                         }
@@ -98,10 +223,12 @@ fn stress_test_100k_semantic_entropy_ring0() {
                                 SolverOutcome::Unsat,
                             );
                             if let SemanticEntropyVerdict::ApoptosisIncorrectBelief {
-                                code, ..
+                                h_sem_q16,
+                                code,
                             } = verdict
                             {
-                                debug_assert_eq!(code, ERR_INCORRECT_BELIEF);
+                                assert_eq!(h_sem_q16, 0);
+                                assert_eq!(code, ERR_INCORRECT_BELIEF);
                                 local_belief += 1;
                             }
                         }
@@ -114,8 +241,8 @@ fn stress_test_100k_semantic_entropy_ring0() {
                                 num_classes,
                             } = verdict
                             {
-                                debug_assert_eq!(num_classes, 2);
-                                debug_assert_eq!(h_sem_q16, 63633);
+                                assert_eq!(num_classes, 2);
+                                assert_eq!(h_sem_q16, 63633);
                                 local_poly += 1;
                             }
                         }

@@ -1,0 +1,53 @@
+{
+  "regressions": {
+    "command": [
+      "uv",
+      "run",
+      "--locked",
+      "--no-sync",
+      "pytest",
+      "tests/test_swarm100_lot12_s6_formal_regressions.py",
+      "-q",
+      "-o",
+      "addopts=--tb=short"
+    ],
+    "exit_code": 0,
+    "log": "docs/security/evidence/swarm100-lot12-20261030/s6_formal/regressions.log",
+    "log_sha256": "2d9df45b098405285f8778a8e5247f554b4a962fb49ed33d5f8e07d805520914"
+  },
+  "ruff": {
+    "command": [
+      "uv",
+      "run",
+      "--locked",
+      "--no-sync",
+      "ruff",
+      "check",
+      "scripts/c5_destiladora/proof_emitter_lean4.py",
+      "scripts/babylon60/gen_oncology_primitives.py",
+      "scripts/c5_destiladora/test_destiladora_e2e.py",
+      "tests/test_swarm100_lot12_s6_formal_regressions.py"
+    ],
+    "exit_code": 0,
+    "log": "docs/security/evidence/swarm100-lot12-20261030/s6_formal/ruff.log",
+    "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+  },
+  "mypy": {
+    "command": [
+      "uv",
+      "run",
+      "--locked",
+      "--no-sync",
+      "mypy",
+      "--follow-imports=silent",
+      "--check-untyped-defs",
+      "scripts/c5_destiladora/proof_emitter_lean4.py",
+      "scripts/babylon60/gen_oncology_primitives.py",
+      "scripts/c5_destiladora/test_destiladora_e2e.py"
+    ],
+    "exit_code": 0,
+    "log": "docs/security/evidence/swarm100-lot12-20261030/s6_formal/mypy.log",
+    "log_sha256": "8228fcc5ce46d42d01caf3cd941f4e9c5f2bcc372bb5b147a2f0572d2dd675a8"
+  },
+  "lean_binary": "/Users/borjafernandezangulo/.elan/toolchains/leanprover--lean4---v4.35.0/bin/lean"
+}

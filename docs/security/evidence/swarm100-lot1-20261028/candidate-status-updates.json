@@ -1,0 +1,174 @@
+[
+  {
+    "candidate_id": "SW100-C0373",
+    "decision": "ALREADY_FIXED",
+    "severity": "P1",
+    "remediation_state": "FIXED",
+    "path": "01_KISH_ENGINE/babylon60/transducers/c5_mail_transducer.py",
+    "current_source_sha256": "cc8a44e972c6064ce2d2016d3f645316dd5163031d805afb35530dae9f6abbcb",
+    "rationale": "Errors return stable codes/static messages and numeric transport status, without command, stderr, exception or arbitrary provider error body. Successful IDs redact the credential. Synthetic failure and normal-result regressions pass.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/transducers/c5_mail_transducer.py",
+        "start_line": 33,
+        "end_line": 96,
+        "observation": "Allowlisted failure data; command-bearing exception details discarded."
+      }
+    ],
+    "guards": [
+      "Trust and coverage are limited to the explicit module contract; no hardware or claim-truth certification."
+    ],
+    "runtime_executed": true,
+    "runtime_scope": "Real Python modules, synthetic credentials/keys and temporary files; no network or operator data.",
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot1-20261028/before-tests.log",
+      "docs/security/evidence/swarm100-lot1-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot1-20261028/independent-review.json",
+      "docs/security/evidence/swarm100-lot1-20261028/cli-smoke.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/03.json",
+    "resolution_type": "CODE_AND_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0420",
+    "decision": "ALREADY_FIXED",
+    "severity": "P1",
+    "remediation_state": "FIXED",
+    "path": "tools/tamkarum_attestation_engine.py",
+    "current_source_sha256": "00b7a4344558ccc8fe02042e14f669251c5a33768144235a36ebff173df19e9d",
+    "rationale": "Signed v2 verifies an external raw Ed25519 trust key over the complete header/payload and recomputes named current artifacts, manifest root, commit and canonical topology. Missing/changed state rejects. Authorized signed fixtures pass API and actual CLI, so this is not an always-reject mitigation. Legacy unsigned JSON does not authenticate. No hardware/SCITT registration/claim truth is certified.",
+    "source_checks": [
+      {
+        "path": "tools/tamkarum_attestation_engine.py",
+        "start_line": 124,
+        "end_line": 170,
+        "observation": "External trust and complete signature precede current-state comparison."
+      },
+      {
+        "path": "tools/tamkarum_attestation_engine.py",
+        "start_line": 93,
+        "end_line": 101,
+        "observation": "Named explicit files read once; bytes hashed and declared manifest root compared."
+      },
+      {
+        "path": "tools/tamkarum_attestation_engine.py",
+        "start_line": 108,
+        "end_line": 121,
+        "observation": "Explicitly UNSIGNED producer without fabricated audits."
+      }
+    ],
+    "guards": [
+      "Trust and coverage are limited to the explicit module contract; no hardware or claim-truth certification."
+    ],
+    "runtime_executed": true,
+    "runtime_scope": "Real Python modules, synthetic credentials/keys and temporary files; no network or operator data.",
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot1-20261028/before-tests.log",
+      "docs/security/evidence/swarm100-lot1-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot1-20261028/independent-review.json",
+      "docs/security/evidence/swarm100-lot1-20261028/cli-smoke.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/03.json",
+    "resolution_type": "CODE_AND_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0421",
+    "decision": "ALREADY_FIXED",
+    "severity": "P2",
+    "remediation_state": "FIXED",
+    "path": "tools/tamkarum_attestation_engine.py",
+    "current_source_sha256": "00b7a4344558ccc8fe02042e14f669251c5a33768144235a36ebff173df19e9d",
+    "rationale": "Rejected verification returns 1 through SystemExit(main()). Real CLI checks return 0 for the authorized coherent fixture, 1 for changed evidence/missing trust, and 2 for absent/conflicting operation options before emission.",
+    "source_checks": [
+      {
+        "path": "tools/tamkarum_attestation_engine.py",
+        "start_line": 173,
+        "end_line": 205,
+        "observation": "Verification result controls process status; no implicit emission or ignored verify-only emit flags."
+      }
+    ],
+    "guards": [
+      "Trust and coverage are limited to the explicit module contract; no hardware or claim-truth certification."
+    ],
+    "runtime_executed": true,
+    "runtime_scope": "Real Python modules, synthetic credentials/keys and temporary files; no network or operator data.",
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot1-20261028/before-tests.log",
+      "docs/security/evidence/swarm100-lot1-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot1-20261028/independent-review.json",
+      "docs/security/evidence/swarm100-lot1-20261028/cli-smoke.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/03.json",
+    "resolution_type": "CODE_AND_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0501",
+    "decision": "ALREADY_FIXED",
+    "severity": "P1",
+    "remediation_state": "FIXED",
+    "path": "tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "current_source_sha256": "b898d7fabe6b598f204eca17116b2cba25cf8c05e49612451568f4c5273ca44a",
+    "rationale": "SOCINT v2 binds each name and recursively typed JSON value with leaf/node/empty domains, rejects unsupported/nonfinite values and seals after final analysis fields. Both identical copies pass swap/rename/type/nested and producer tests. This verifies body integrity, not authorship; timestamp metadata is outside the commitment.",
+    "source_checks": [
+      {
+        "path": "tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+        "start_line": 721,
+        "end_line": 738,
+        "observation": "Name/type/value commitments in deterministic key order."
+      },
+      {
+        "path": "tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+        "start_line": 741,
+        "end_line": 750,
+        "observation": "Version and exact final body coverage."
+      },
+      {
+        "path": "tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+        "start_line": 753,
+        "end_line": 765,
+        "observation": "Recomputes every body field; legacy/extra/missing coverage rejects."
+      }
+    ],
+    "guards": [
+      "Trust and coverage are limited to the explicit module contract; no hardware or claim-truth certification."
+    ],
+    "runtime_executed": true,
+    "runtime_scope": "Real Python modules, synthetic credentials/keys and temporary files; no network or operator data.",
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot1-20261028/before-tests.log",
+      "docs/security/evidence/swarm100-lot1-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot1-20261028/independent-review.json",
+      "docs/security/evidence/swarm100-lot1-20261028/cli-smoke.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/03.json",
+    "resolution_type": "CODE_AND_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0264",
+    "decision": "DUPLICATE",
+    "severity": "P2",
+    "remediation_state": "FIXED",
+    "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "current_source_sha256": "b898d7fabe6b598f204eca17116b2cba25cf8c05e49612451568f4c5273ca44a",
+    "rationale": "Same omission as C0501 in a distinct identical bundled copy. Both implementations now use v2 and pass the shared parameterized regressions; preserve this affected path and inherit FIXED.",
+    "source_checks": [
+      {
+        "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+        "start_line": 721,
+        "end_line": 738,
+        "observation": "Bundled v2 name/type/value commitment."
+      }
+    ],
+    "guards": [
+      "Same v2 implementation in both paths; scope is body integrity, not author authentication."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot1-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot1-20261028/independent-review.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/01.json",
+    "canonical_id": "SW100-C0501",
+    "runtime_scope": "Both full Python source modules exercised with synthetic evidence; no extraction network or operator data."
+  }
+]

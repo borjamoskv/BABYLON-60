@@ -1,0 +1,114 @@
+[
+  {
+    "candidate_id": "SW100-C0132",
+    "decision": "ALREADY_FIXED",
+    "severity": "P1",
+    "remediation_state": "FIXED",
+    "rationale": "Unknown selectors now raise SecurityError before config/defaults/client/credential access, rather than selecting Moonshot. Direct configuration and mutated clients also revalidate backend/endpoint. Import no longer reads .env or configures global logging; only the selected provider resolves lazy URL/key/model values after validation, while local roles read no remote keys. Existing .api_key consumer compatibility is covered. Six original confined regressions failed; patched selector/order/local/known-route cases pass with zero attempts on rejection.",
+    "guards": [
+      "Known default moonshot remains remote; only unknown selectors lose the implicit remote fallback.",
+      "Selected official provider hosts require HTTPS/443. Explicit loopback gateway overrides retain the old HTTP/HTTPS exception and may carry the selected remote Bearer.",
+      "Local roles only select canonical loopback hosts and never attach Authorization or resolve remote keys.",
+      "URL/key/model/timeout are fixed per call and retry; next call revalidates configuration. This is not a cross-thread configuration transaction or immutable caller-message snapshot.",
+      "The HTTPX transport uses follow_redirects=False and trust_env=False. Operator proxy/CA environment is no longer an implicit routing input.",
+      "API keys are lazy/hidden from repr; own errors do not echo URL, body, prompt or exception text. Arbitrary caller/third-party logging is outside this guarantee.",
+      "HTTPX MockTransport/recorders only, synthetic HOME/env and dotenv blocked before import; sockets/DNS prohibited. No provider, real credential, native/hardware auth or ATTESTED.",
+      "No real TLS handshake, DNS routing, service availability or OS network containment is certified."
+    ],
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+        "start_line": 56,
+        "end_line": 64,
+        "observation": "Exact enum/known-string selection; invalid values never become a remote default."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+        "start_line": 600,
+        "end_line": 701,
+        "observation": "Validates the requested backend before constructing configuration or client."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+        "start_line": 155,
+        "end_line": 163,
+        "observation": "Inert defaults validate only the selected endpoint before any credential resolution."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+        "start_line": 174,
+        "end_line": 183,
+        "observation": "Resolves only selected credentials; local roles return no key."
+      }
+    ],
+    "runtime_executed": true,
+    "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+    "current_source_sha256": "f247036e27e11087b2b34d064cced7d998a39372288baa62a838bcf6e878b529",
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot6-20261029/before-tests.log",
+      "docs/security/evidence/swarm100-lot6-20261029/related-tests.log",
+      "docs/security/evidence/swarm100-lot6-20261029/independent-review.json",
+      "docs/security/evidence/swarm100-lot6-20261029/scope-check.json",
+      "docs/security/evidence/swarm100-lot6-20261029/validation.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/05.json",
+    "runtime_scope": "Actual HTTPX parser/client with MockTransport and controlled async retry barriers; synthetic env and TCP/DNS forbidden.",
+    "resolution_type": "CODE_AND_CONFINED_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0133",
+    "decision": "ALREADY_FIXED",
+    "severity": "P1",
+    "remediation_state": "FIXED",
+    "rationale": "Endpoint policy validates raw syntax with urllib/HTTPX and exact role/host, rejecting official provider HTTP, non-443 external ports, userinfo, query/fragment, controls/backslash and ambiguous or unsupported hosts before credentials/headers/client creation. Explicit configs and the final HTTP helper share the guard. Per-call immutable target prevents retry-time config mutation from sending an old provider key to a new endpoint; redirects and ambient proxy routing are disabled. HTTP/exception diagnostics no longer echo response bodies or secret-bearing text. The original allowlist loopback gateway exception is retained and explicitly bounded; this is not a claim that every remote-role override uses HTTPS.",
+    "guards": [
+      "Known default moonshot remains remote; only unknown selectors lose the implicit remote fallback.",
+      "Selected official provider hosts require HTTPS/443. Explicit loopback gateway overrides retain the old HTTP/HTTPS exception and may carry the selected remote Bearer.",
+      "Local roles only select canonical loopback hosts and never attach Authorization or resolve remote keys.",
+      "URL/key/model/timeout are fixed per call and retry; next call revalidates configuration. This is not a cross-thread configuration transaction or immutable caller-message snapshot.",
+      "The HTTPX transport uses follow_redirects=False and trust_env=False. Operator proxy/CA environment is no longer an implicit routing input.",
+      "API keys are lazy/hidden from repr; own errors do not echo URL, body, prompt or exception text. Arbitrary caller/third-party logging is outside this guarantee.",
+      "HTTPX MockTransport/recorders only, synthetic HOME/env and dotenv blocked before import; sockets/DNS prohibited. No provider, real credential, native/hardware auth or ATTESTED.",
+      "No real TLS handshake, DNS routing, service availability or OS network containment is certified."
+    ],
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+        "start_line": 67,
+        "end_line": 91,
+        "observation": "Validates syntax, canonical host and selected-role HTTPS/loopback contract."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+        "start_line": 196,
+        "end_line": 198,
+        "observation": "Freezes URL/backend/key/model/timeout after URL validation."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+        "start_line": 320,
+        "end_line": 339,
+        "observation": "Revalidates at dispatch, rejects local auth/Host/proxy overrides, and disables redirects/environment trust."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+        "start_line": 384,
+        "end_line": 424,
+        "observation": "Uses one target for all retries and only safe diagnostic categories/codes."
+      }
+    ],
+    "runtime_executed": true,
+    "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+    "current_source_sha256": "f247036e27e11087b2b34d064cced7d998a39372288baa62a838bcf6e878b529",
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot6-20261029/before-tests.log",
+      "docs/security/evidence/swarm100-lot6-20261029/related-tests.log",
+      "docs/security/evidence/swarm100-lot6-20261029/independent-review.json",
+      "docs/security/evidence/swarm100-lot6-20261029/scope-check.json",
+      "docs/security/evidence/swarm100-lot6-20261029/validation.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/05.json",
+    "runtime_scope": "Actual HTTPX parser/client with MockTransport and controlled async retry barriers; synthetic env and TCP/DNS forbidden.",
+    "resolution_type": "CODE_AND_CONFINED_REGRESSIONS_VERIFIED"
+  }
+]

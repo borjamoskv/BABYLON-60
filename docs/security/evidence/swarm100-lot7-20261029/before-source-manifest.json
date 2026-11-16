@@ -1,0 +1,10 @@
+{
+  "source_sha256": {
+    "scripts/c5_verifiers/fast_smt_gate.py": "ef4c442f821689838b76a7aaa5cf29c625de2dac3df0a5bd1e2856cfdb526748",
+    "scripts/c5_quality_gates/daily_sovereign_maintenance.py": "bf5d3827f8b3c3c85a1904c1a0082c8d67a25b0b9834c482040426d915373b95",
+    "pyproject.toml": "50d4594dd2125fcbe7df0578394b5d2c2e6ac7c7dddb4b5fc9be68229eb8d0cd",
+    "uv.lock": "d78739746ac5d442a074ad73cbc7fc06d6e803558126f65fbc3d6d251d4c1fb4",
+    "Cargo.lock": "7c772f6e6ffd29594c5b9bdadb004be09c57af67b60b7be1b56c034a174491b4"
+  },
+  "git_head": "28257bd74fce31446b0350d094e9dab148a1aea7"
+}

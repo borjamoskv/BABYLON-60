@@ -285,6 +285,29 @@ impl Atms {
         self.is_believed(node)
     }
 
+    /// Returns the set of `omega0::hash_statement` digests for statements whose
+    /// ATMS node has been refuted (empty label after contradiction).
+    pub fn contradicted_statement_hashes(&self) -> std::collections::HashSet<String> {
+        use crate::omega0::{Modality, Statement, hash_statement};
+        let mut out = std::collections::HashSet::new();
+        for (idx, node) in self.nodes.iter().enumerate() {
+            if idx == self.contradiction {
+                continue;
+            }
+            if node.label.is_empty() {
+                for modality in [Modality::Epistemic, Modality::Deontic] {
+                    let stmt = Statement {
+                        content: node.datum.clone(),
+                        modality,
+                        obligations: Vec::new(),
+                    };
+                    out.insert(hash_statement(&stmt));
+                }
+            }
+        }
+        out
+    }
+
     // ── propagation engine ──────────────────────────────────
 
     fn propagate(&mut self) {

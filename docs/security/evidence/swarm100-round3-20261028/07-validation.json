@@ -1,0 +1,22 @@
+{
+  "reviewer": "07",
+  "status": "PASS",
+  "candidates": 29,
+  "decisions": {
+    "CONFIRMED_STATIC": 20,
+    "REPRODUCED": 8,
+    "NEEDS_VALIDATION": 1
+  },
+  "remediation_states": {
+    "OPEN": 28,
+    "UNKNOWN": 1
+  },
+  "source_checks_validated": 84,
+  "distinct_source_ranges_validated": 84,
+  "fixture_cases_present": 11,
+  "review_sha256": "474ce603dbe9e37e28cff4f26aa302d06c880a9f21c51163938467cca5846eb7",
+  "limits": [
+    "Schema/freshness checks do not prove adjudications correct.",
+    "No production source change or protected runtime execution."
+  ]
+}

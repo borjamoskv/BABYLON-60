@@ -1,0 +1,347 @@
+{
+  "shard": "095",
+  "findings": [
+    {
+      "title": "Closed completion channel causes an infinite busy loop after consensus timeout",
+      "severity": "P1",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bft_engine.rs",
+      "line": 307,
+      "evidence": "Orchestrator exits on its 15-second timeout at lines 228\u2013232, dropping tx_completed; receive loop at 306\u2013346 handles only Some and never None. BftSwarmEngine::run_dag calls this engine on a current-thread Tokio runtime (bindings.rs:368\u2013380).",
+      "trigger": "A nonempty DAG fails to complete within 15 seconds, including concurrency_limit=0 or unavailable quorum.",
+      "impact": "recv immediately returns None forever; request never returns, rollback and worker-stop code remain unreachable, and the async thread spins.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Database errors leave committed in-memory DAG changes despite rollback error",
+      "severity": "P1",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bft_engine.rs",
+      "line": 408,
+      "evidence": "Memory is mutated at 335; snapshot restoration occurs only for node failure and score failure. Database open/pragma/insert/commit errors at 384\u2013408 return through ? without restoring snapshot. bindings.rs reports every Err as BFT Rollback Triggered.",
+      "trigger": "A DAG passes node and score checks, then SQLite open, insert, or commit fails.",
+      "impact": "Caller receives an error claiming rollback while shared memory retains the DAG changes and durable state does not reflect them.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Residual purge deletes active Git lock files without checking ownership",
+      "severity": "P1",
+      "path": "scripts/c5_verifiers/purge_residuals.py",
+      "line": 58,
+      "evidence": "Every *.lock whose path contains .git is unlinked at 58\u201362, with no process, age, or lock-owner check; command-line main invokes purge_repository_residuals at 95.",
+      "trigger": "Run this maintenance script while Git holds index.lock, packed-refs.lock, or another repository lock.",
+      "impact": "Removes mutual exclusion for an active Git operation, permitting concurrent writers and potentially losing repository updates.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Residual purge treats every scratch database and WAL as disposable",
+      "severity": "P2",
+      "path": "scripts/c5_verifiers/purge_residuals.py",
+      "line": 69,
+      "evidence": "scratch.glob(\"*.db*\") unlinks all matches at 69\u201372; no temporary marker, age, open-database check, backup, or WAL checkpoint is required.",
+      "trigger": "Run purge while a scratch SQLite database contains required data or is open with uncheckpointed writes.",
+      "impact": "Deletes database and sidecar files indiscriminately, causing data loss or breaking active database users.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Canonical annealing example replaces random acceptance with a fixed cutoff",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-adaptive-annealing-engine/MODULE.md",
+      "line": 120,
+      "evidence": "The claimed Metropolis-Hastings criterion compares exp(-dE/T) to the constant 0.5 rather than a random uniform draw.",
+      "trigger": "Use the documented canonical engine for optimization with repeated uphill proposals at a fixed positive temperature.",
+      "impact": "Every uphill step above T*ln(2) is always rejected and every smaller step is always accepted; the example does not implement the stochastic acceptance it claims.",
+      "confidence": "high",
+      "kind": "example"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".github/copilot-instructions.md",
+      "status": "metadata_only",
+      "ranges": [],
+      "target": "../.babylon60rules",
+      "inventory_match": true
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bft_engine.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          510
+        ]
+      ],
+      "sha256": "ad8738ce55700ee5a448a4441893d287a1cb25b3f848f0b4d4262f2e74b412b9",
+      "inventory_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/cognitive_pilot/judging.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          204
+        ]
+      ],
+      "sha256": "770b6a1f5956f44e3f8b323b335e1b00cb689f9bc8eae6c6cee0a109b0825bf2",
+      "inventory_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/__init__.py",
+      "status": "reviewed_full",
+      "ranges": [],
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "inventory_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/utils/hygiene.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          12
+        ]
+      ],
+      "sha256": "298b6d8f842ca7785c92f288270d38a85bc7a0f41441ad15109de8434d0213ed",
+      "inventory_match": true
+    },
+    {
+      "path": "02_EDIN_SWARMS/agents_archi/topologies/__init__.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          55
+        ]
+      ],
+      "sha256": "a6970efcb7b34dcf7715b7cac8eb37879aedb335e91203132df19274584bd048",
+      "inventory_match": true
+    },
+    {
+      "path": "deploy/launchd/com.c5real.babylon60.daily.plist",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          33
+        ]
+      ],
+      "sha256": "90b60300c06f2dd01c04508a0179804f0978c2ef533bc62d781049e1bf5c16bc",
+      "inventory_match": true
+    },
+    {
+      "path": "docs/BLUEPRINT_V1.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          87
+        ]
+      ],
+      "sha256": "2ed8cf26a93b366fcb72bce2d6036ce1dfb85c36d8d48b54c49444d802d56b83",
+      "inventory_match": true
+    },
+    {
+      "path": "examples/tpm_worm_poc.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          197
+        ]
+      ],
+      "sha256": "496a6acb010fe6a1aea3048532da73ba578a205f70b3023ccc1a3bf1afc0d2ed",
+      "inventory_match": true
+    },
+    {
+      "path": "scripts/c5_demos/c5_alpha_hunter.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          205
+        ]
+      ],
+      "sha256": "36443e3e761166d163d60c3c2e81dd797a8d1f7de929e21be02d0a0c99d029a5",
+      "inventory_match": true
+    },
+    {
+      "path": "scripts/c5_orchestrator/c5_purge_manifest.sh",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          27
+        ]
+      ],
+      "sha256": "42f57fef537503e51f98d83d1ca4740768fd08dd8bc0c72291f2da3957c0c18a",
+      "inventory_match": true
+    },
+    {
+      "path": "scripts/c5_verifiers/purge_residuals.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          95
+        ]
+      ],
+      "sha256": "a6bcbf4d8a6e09c0cfa8362b8745d788ca3999d82a80de2fb9145419bf63f55f",
+      "inventory_match": true
+    },
+    {
+      "path": "src/larsa_bft.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          344
+        ]
+      ],
+      "sha256": "ec4c6222f0c9b6c724c0fd6a13880dfc01993801d5751265e4f6aa59dcc4f242",
+      "inventory_match": true
+    },
+    {
+      "path": "tests/test_audit_release_gates.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          201
+        ]
+      ],
+      "sha256": "b3738edfdd4c3f7b2c364959c58209cb98330a15b45ca0013501098cd87972ad",
+      "inventory_match": true
+    },
+    {
+      "path": "tests/test_mcp_protocol_compatibility.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "sha256": "1b2c9aab3ab05978eed5f8512f1574710bc58fbcad8b706e1a17a6dfc693f685",
+      "inventory_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/agents-sdk/references/durable-execution.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          51
+        ]
+      ],
+      "sha256": "7cea752aa3423745be812cc97df38b6beeea97900b97b21f171fc3ad1a5e281b",
+      "inventory_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/d1/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          98
+        ]
+      ],
+      "sha256": "df6caaa551930b3d2b5f8350e1c4937d47227acb16671d41f032fca814f0aebb",
+      "inventory_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/r2-sql/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          50
+        ]
+      ],
+      "sha256": "742a0b853a519bbc02085c4c71b22dc5a82516a0a6fefd2e0696b371e04cb052",
+      "inventory_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workers-ai/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          197
+        ]
+      ],
+      "sha256": "0c813cf62bff68e1fc606c8649e1f7921dd4b36f56a65742628cb77e75d93528",
+      "inventory_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/examples/AIR_Moon_Safari_Rhodes.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          80
+        ]
+      ],
+      "sha256": "0000bbeaa2ba2f6dadc838811bfcfb53bd9b30f3534c148a1edc67ac68ff0ce5",
+      "inventory_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-adaptive-annealing-engine/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          141
+        ]
+      ],
+      "sha256": "c8155a0be1209be3fe30998ba2b38ef7ed99f58393bd5808015e8ebeadba83d5",
+      "inventory_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/categorical-hallucination-audit/scripts/audit_kl_d.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          119
+        ]
+      ],
+      "sha256": "34f7e6532eed0d70c2cd0d5795c5b269b02cdc44b2e0e8a69fdf89eb9728a0dc",
+      "inventory_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-spaced-repetition-architect/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          41
+        ]
+      ],
+      "sha256": "d45bfc18015e7771ccae1ac81707db783be298be092bdff57ff051c69589d6fe",
+      "inventory_match": true
+    },
+    {
+      "path": "tools/skill_library/global/pika-generative-video-pipeline/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "sha256": "0ec16842254a5b17d34d5a26d71470cc022e3b1e46990f99b6fff3acbf50cb13",
+      "inventory_match": true
+    }
+  ],
+  "tool_limitations": [
+    "Native graph discovery tools are not exposed in this session (ALL_TOOLS name search returned no search_graph/index_repository); used bounded text reads and targeted rg.",
+    "Static source audit only; no tests, runtime programs, API/version verification, or external documentation calls performed. External service examples were read but their current platform limits were not independently verified.",
+    "Symlink reviewed as metadata only; not followed. All assigned text hashes matched inventory at read time."
+  ],
+  "tests_run": []
+}

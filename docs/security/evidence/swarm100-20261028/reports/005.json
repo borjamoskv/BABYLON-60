@@ -1,0 +1,369 @@
+{
+  "shard": "005",
+  "findings": [
+    {
+      "title": "Hunter clears its risk window after every sample",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/kernel/c6_absolute/eip7702_hunter.py",
+      "line": 72,
+      "evidence": "Lines 59-65 append one sample then evaluate the buffer; both branches clear it at 68/72. CTRE computes a percentile over the supplied list.",
+      "trigger": "Call scan_and_reconcile repeatedly on a new hunter.",
+      "impact": "The advertised recent window never exceeds one observation; tail risk over the inference window is not measured.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Hunter reports on-chain commits without submitting transactions",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/kernel/c6_absolute/eip7702_hunter.py",
+      "line": 73,
+      "evidence": "The commit branch only increments executed_txs, clears a list and returns \"Exergy injected on-chain\"; the only Web3 operation is get_block at line 35.",
+      "trigger": "Run the CLI with either a live RPC or no RPC and receive a COMMIT result.",
+      "impact": "Operators receive fabricated transaction-success telemetry; the count records local decisions rather than on-chain effects. No execution bypass is alleged.",
+      "confidence": "high",
+      "kind": "docs"
+    },
+    {
+      "title": "Formal validation recipe calls a removed Make target",
+      "severity": "P2",
+      "path": "docs/RESULTADOS.md",
+      "line": 55,
+      "evidence": "The recipe invokes make verify_lean; the inspected root Makefile defines test-lean (cd proof/lean && lake build) and no verify_lean target.",
+      "trigger": "Follow step 3 of the documented end-to-end demonstration.",
+      "impact": "The formal validation step stops with a missing target instead of producing the promised Lean validation.",
+      "confidence": "high",
+      "kind": "docs"
+    },
+    {
+      "title": "Entropy gate labels agreement as safe without checking correctness",
+      "severity": "P2",
+      "path": "scripts/c5_verifiers/verify_semantic_entropy_gate.py",
+      "line": 92,
+      "evidence": "cluster_samples groups identical nonempty texts together; H is then zero. Lines 80-94 label that result safe and return True; no correctness or evidence predicate exists. Line 152 additionally claims isolated memory and guaranteed fail-stop from repeated string fixtures.",
+      "trigger": "Supply two or more identical false or unsafe answers.",
+      "impact": "The PoC accepts the samples and prints a safe-transition verdict even though it has only measured lexical agreement. These verdicts cannot establish hallucination blocking or isolation.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Swing formula does not implement its declared triplet ratio",
+      "severity": "P3",
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/examples/Kerri_Chandler_MPC60.py",
+      "line": 35,
+      "evidence": "At swing_pct=66.7 the code computes int((16.7/50)*(120*0.667))=26 ticks; a 240-tick sixteenth pair at 66.7 percent places the second note near tick 160, requiring about 40 ticks offset.",
+      "trigger": "Choose 66.7 percent swing (the source explicitly calls this pure triplet swing).",
+      "impact": "Generated offbeat timing is about 146 rather than 160 ticks, so the supplied swing percentage and stated triplet behavior disagree.",
+      "confidence": "high",
+      "kind": "example"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".agents/rules/c5_ci_falsification_invariant.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          19
+        ]
+      ],
+      "sha256_status": "matched",
+      "notes": "Static text inspection; no runtime verification."
+    },
+    {
+      "path": ".github/workflows/doc_aesthetic_linter.yml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          38
+        ]
+      ],
+      "sha256_status": "matched",
+      "notes": "Static text inspection; no runtime verification."
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/poc_t3_stress_test_fast.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          84
+        ]
+      ],
+      "sha256_status": "matched",
+      "notes": "Static text inspection; no runtime verification."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/compat/optional.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          47
+        ]
+      ],
+      "sha256_status": "matched",
+      "notes": "Static text inspection; no runtime verification."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/c6_absolute/eip7702_hunter.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          99
+        ]
+      ],
+      "sha256_status": "matched",
+      "notes": "Static text inspection; no runtime verification."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/utils/semantic_heartbeat.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          12
+        ]
+      ],
+      "sha256_status": "matched",
+      "notes": "Static text inspection; no runtime verification."
+    },
+    {
+      "path": "02_EDIN_SWARMS/tests/test_babylon21_consolidation.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          192
+        ]
+      ],
+      "sha256_status": "matched",
+      "notes": "Static text inspection; no runtime verification."
+    },
+    {
+      "path": "docs/01_spec/spec_architecture.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          109
+        ]
+      ],
+      "sha256_status": "matched",
+      "notes": "Static text inspection; no runtime verification."
+    },
+    {
+      "path": "docs/RESULTADOS.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          83
+        ]
+      ],
+      "sha256_status": "matched",
+      "notes": "Static text inspection; no runtime verification."
+    },
+    {
+      "path": "proof/bundles/attestation_bundle_v1/environment.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          9
+        ]
+      ],
+      "sha256_status": "matched",
+      "notes": "Static text inspection; no runtime verification."
+    },
+    {
+      "path": "scripts/c5_demos/c5_topology_ctl.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          132
+        ]
+      ],
+      "sha256_status": "matched",
+      "notes": "Static text inspection; no runtime verification."
+    },
+    {
+      "path": "scripts/c5_quality_gates/audit_semantic_contracts.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          307
+        ]
+      ],
+      "sha256_status": "matched",
+      "notes": "Static text inspection; no runtime verification."
+    },
+    {
+      "path": "scripts/c5_verifiers/verify_semantic_entropy_gate.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          156
+        ]
+      ],
+      "sha256_status": "matched",
+      "notes": "Static text inspection; no runtime verification."
+    },
+    {
+      "path": "src/proof_ir.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          123
+        ]
+      ],
+      "sha256_status": "matched",
+      "notes": "Static text inspection; no runtime verification."
+    },
+    {
+      "path": "tests/test_autodidact_omega_pipeline.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          230
+        ]
+      ],
+      "sha256_status": "matched",
+      "notes": "Static text inspection; no runtime verification."
+    },
+    {
+      "path": "tests/test_nemesis_report_generator.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          269
+        ]
+      ],
+      "sha256_status": "matched",
+      "notes": "Static text inspection; no runtime verification."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/agents-sdk/references/think.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          112
+        ]
+      ],
+      "sha256_status": "matched",
+      "notes": "Static text inspection; no runtime verification."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/do-storage/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          150
+        ]
+      ],
+      "sha256_status": "matched",
+      "notes": "Static text inspection; no runtime verification."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/realtime-sfu/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          137
+        ]
+      ],
+      "sha256_status": "matched",
+      "notes": "Static text inspection; no runtime verification."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workers-playground/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          127
+        ]
+      ],
+      "sha256_status": "matched",
+      "notes": "Static text inspection; no runtime verification."
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/examples/Kerri_Chandler_MPC60.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          118
+        ]
+      ],
+      "sha256_status": "matched",
+      "notes": "Static text inspection; no runtime verification."
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_09_source_control.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          61
+        ]
+      ],
+      "sha256_status": "matched",
+      "notes": "Static text inspection; no runtime verification."
+    },
+    {
+      "path": "tools/skill_library/global/c5-kudurru-64/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "sha256_status": "matched",
+      "notes": "Static text inspection; no runtime verification."
+    },
+    {
+      "path": "tools/skill_library/global/c5-thermos-audit/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "sha256_status": "matched",
+      "notes": "Static text inspection; no runtime verification."
+    },
+    {
+      "path": "tools/skill_library/global/suno-bracket-tagging/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "sha256_status": "matched",
+      "notes": "Static text inspection; no runtime verification."
+    }
+  ],
+  "tool_limitations": [
+    "Native codebase-memory graph tools were not exposed in the session; used targeted file reads and rg.",
+    "No tests, repository runtime, compilation, CI queries, or external library/API validation executed (audit-only scope).",
+    "No hash mismatches observed against shard entries. Frozen manifest metadata inspected; all 25 assigned paths are regular text files."
+  ],
+  "tests_run": []
+}

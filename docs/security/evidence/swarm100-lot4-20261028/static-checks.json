@@ -1,0 +1,49 @@
+[
+  {
+    "name": "ruff",
+    "command": [
+      "uv",
+      "run",
+      "--locked",
+      "--no-sync",
+      "ruff",
+      "check",
+      "proof/bundles/attestation_bundle_v1/verify",
+      "scripts/generate_attestation_bundle.py",
+      "scripts/generate_attestation_bundle_v2.py",
+      "tests/test_swarm100_lot4_regressions.py",
+      "docs/security/evidence/swarm100-lot4-20261028/reconcile_lot4.py",
+      "docs/security/evidence/swarm100-lot4-20261028/independent-adversarial.py"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "mypy",
+    "command": [
+      "uv",
+      "run",
+      "--locked",
+      "--no-sync",
+      "mypy",
+      "--follow-imports=silent",
+      "--check-untyped-defs",
+      "proof/bundles/attestation_bundle_v1/verify",
+      "scripts/generate_attestation_bundle.py",
+      "scripts/generate_attestation_bundle_v2.py"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "compile",
+    "command": [
+      "uv",
+      "run",
+      "--locked",
+      "--no-sync",
+      "python",
+      "-c",
+      "import ast; from pathlib import Path; [ast.parse(Path(p).read_text()) for p in ['proof/bundles/attestation_bundle_v1/verify','scripts/generate_attestation_bundle.py','scripts/generate_attestation_bundle_v2.py']]"
+    ],
+    "exit_code": 0
+  }
+]

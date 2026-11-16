@@ -1,0 +1,72 @@
+FFFFFFFF                                                                 [100%]
+=================================== FAILURES ===================================
+________ test_c0167_failed_partial_write_keeps_previous_bytes_and_inode ________
+tests/test_swarm100_lot11_regressions.py:78: in test_c0167_failed_partial_write_keeps_previous_bytes_and_inode
+    assert (target.stat().st_ino,target.read_bytes())==before
+E   assert (556621588, b'{\n  "') == (556621588, b...isions": []}')
+E     
+E     At index 1 diff: b'{\n  "' != b'{"meta": {}, "recent_changes": [], "decisions": []}'
+E     Use -v to get more diff
+_______________ test_c0167_file_and_parent_sync_precede_success ________________
+tests/test_swarm100_lot11_regressions.py:90: in test_c0167_file_and_parent_sync_precede_success
+    assert calls==['file','directory']
+E   AssertionError: assert [] == ['file', 'directory']
+E     
+E     Right contains 2 more items, first extra item: 'file'
+E     Use -v to get more diff
+_________ test_c0168_cooperating_threads_do_not_lose_updates[project] __________
+tests/test_swarm100_lot11_regressions.py:142: in test_c0168_cooperating_threads_do_not_lose_updates
+    assert {row['desc'] for row in memory.read('projects/alpha.json')['recent_changes']}=={'change A','change B'}
+E   AssertionError: assert {'change A'} == {'change A', 'change B'}
+E     
+E     Extra items in the right set:
+E     'change B'
+E     Use -v to get more diff
+----------------------------- Captured stdout call -----------------------------
+[+] CORTEX PERSIST: Ontología cristalizada con success para alpha
+[+] CORTEX PERSIST: Ontología cristalizada con success para alpha
+__________ test_c0168_cooperating_threads_do_not_lose_updates[ghosts] __________
+tests/test_swarm100_lot11_regressions.py:144: in test_c0168_cooperating_threads_do_not_lose_updates
+    assert set(memory.read('ghosts.json'))=={'alpha','beta'}
+E   AssertionError: assert {'alpha'} == {'alpha', 'beta'}
+E     
+E     Extra items in the right set:
+E     'beta'
+E     Use -v to get more diff
+----------------------------- Captured stdout call -----------------------------
+[+] CORTEX PERSIST: Ontología cristalizada con success para beta
+[+] CORTEX PERSIST: Ontología cristalizada con success para alpha
+__________ test_c0168_cooperating_threads_do_not_lose_updates[system] __________
+tests/test_swarm100_lot11_regressions.py:146: in test_c0168_cooperating_threads_do_not_lose_updates
+    assert {row['conversation_id'] for row in memory.read('system.json')['sessions_log']}=={'A','B'}
+E   AssertionError: assert {'A'} == {'A', 'B'}
+E     
+E     Extra items in the right set:
+E     'B'
+E     Use -v to get more diff
+----------------------------- Captured stdout call -----------------------------
+[+] CORTEX PERSIST: Ontología cristalizada con success para beta
+[+] CORTEX PERSIST: Ontología cristalizada con success para alpha
+_____________ test_c0169_timestamp_preserves_utc_instant[instant0] _____________
+tests/test_swarm100_lot11_regressions.py:159: in test_c0169_timestamp_preserves_utc_instant
+    assert actual==instant
+E   assert datetime.datetime(2026, 1, 15, 12, 34, 56, tzinfo=datetime.timezone(datetime.timedelta(seconds=7200))) == datetime.datetime(2026, 1, 15, 12, 34, 56, tzinfo=datetime.timezone.utc)
+_____________ test_c0169_timestamp_preserves_utc_instant[instant1] _____________
+tests/test_swarm100_lot11_regressions.py:159: in test_c0169_timestamp_preserves_utc_instant
+    assert actual==instant
+E   assert datetime.datetime(2026, 7, 15, 12, 34, 56, tzinfo=datetime.timezone(datetime.timedelta(seconds=7200))) == datetime.datetime(2026, 7, 15, 12, 34, 56, tzinfo=datetime.timezone.utc)
+________ test_c0167_nonfinite_json_is_rejected_before_destination_write ________
+tests/test_swarm100_lot11_regressions.py:165: in test_c0167_nonfinite_json_is_rejected_before_destination_write
+    with pytest.raises((RuntimeError,ValueError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE any of (RuntimeError, ValueError)
+=========================== short test summary info ============================
+FAILED tests/test_swarm100_lot11_regressions.py::test_c0167_failed_partial_write_keeps_previous_bytes_and_inode
+FAILED tests/test_swarm100_lot11_regressions.py::test_c0167_file_and_parent_sync_precede_success
+FAILED tests/test_swarm100_lot11_regressions.py::test_c0168_cooperating_threads_do_not_lose_updates[project]
+FAILED tests/test_swarm100_lot11_regressions.py::test_c0168_cooperating_threads_do_not_lose_updates[ghosts]
+FAILED tests/test_swarm100_lot11_regressions.py::test_c0168_cooperating_threads_do_not_lose_updates[system]
+FAILED tests/test_swarm100_lot11_regressions.py::test_c0169_timestamp_preserves_utc_instant[instant0]
+FAILED tests/test_swarm100_lot11_regressions.py::test_c0169_timestamp_preserves_utc_instant[instant1]
+FAILED tests/test_swarm100_lot11_regressions.py::test_c0167_nonfinite_json_is_rejected_before_destination_write
+8 failed in 0.47s

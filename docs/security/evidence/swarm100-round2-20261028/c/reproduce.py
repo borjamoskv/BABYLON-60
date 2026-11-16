@@ -1,0 +1,183 @@
+"""Isolated tests of unchanged repository APIs; no package initializers/user state."""
+
+import copy
+import hashlib
+import importlib.util
+import json
+import pathlib
+import sqlite3
+import sys
+import types
+
+sys.dont_write_bytecode = True
+ROOT = pathlib.Path("/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60")
+OUT = pathlib.Path(__file__).resolve().parent
+SRC = ROOT / "01_KISH_ENGINE/babylon60"
+loaded = {}
+# Package shells bypass unrelated broad initializers, not tested API functions.
+for name, path in [
+    ("babylon60", SRC),
+    ("babylon60.autodidact", SRC / "autodidact"),
+    ("babylon60.crypto", SRC / "crypto"),
+    ("babylon60.primitives", SRC / "primitives"),
+]:
+    module = types.ModuleType(name)
+    module.__path__ = [str(path)]
+    sys.modules[name] = module
+
+
+def load(name, relative):
+    path = SRC / relative
+    loaded[str(path.relative_to(ROOT))] = hashlib.sha256(path.read_bytes()).hexdigest()
+    spec = importlib.util.spec_from_file_location(name, path)
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+# Block accidental network, child processes, and persistent filesystem writes.
+def audit(event, args):
+    if event in ("socket.connect", "socket.bind", "subprocess.Popen", "os.system"):
+        raise RuntimeError("isolation guard: " + event)
+    if event == "open":
+        path, mode, flags = args
+        writing = (isinstance(mode, str) and any(x in mode for x in "wax+")) or (
+            isinstance(flags, int) and flags & (1 | 2 | 64 | 512 | 1024)
+        )
+        if writing and isinstance(path, (str, bytes)) and not pathlib.Path(path).resolve().is_relative_to(OUT):
+            raise RuntimeError("isolation guard: write outside fixture output")
+
+
+sys.addaudithook(audit)
+results = {
+    "scope": "actual unchanged Python APIs, process-local fixtures only",
+    "isolation": {
+        "package_shells": True,
+        "default_key_loader_called": False,
+        "database": ":memory:",
+        "network_and_process_guard": True,
+    },
+    "cases": [],
+}
+t = load("babylon60.autodidact.types", "autodidact/types.py")
+e = load("babylon60.autodidact.epistemology", "autodidact/epistemology.py")
+c = load("babylon60.autodidact.crystal_compiler", "autodidact/crystal_compiler.py")
+premise = t.JustifiedStatement(
+    t.Statement(
+        "All fixture triangles have three sides.",
+        t.Modality.EPISTEMIC,
+        [t.Obligation.PROVENANCE, t.Obligation.REPRODUCIBILITY],
+    ),
+    t.Justification("Observation", {"fixture": "geometry"}, 1.0),
+)
+compiler = c.CrystalCompiler(author="isolated audit fixture", affiliation="test")
+original = json.loads(compiler.export_json(compiler.compile("fixture", "fixture", [premise])))
+mutated = copy.deepcopy(original)
+mutated["statements"][0]["content"] = "All fixture triangles have five sides."
+base = compiler.verify_crystal_integrity(original)
+changed = compiler.verify_crystal_integrity(mutated)
+# Control: changing the recorded leaf hash without updating root is rejected.
+bad_hash = copy.deepcopy(mutated)
+bad_hash["statements"][0]["statement_hash"] += "-tampered"
+control = compiler.verify_crystal_integrity(bad_hash)
+results["cases"].append(
+    {
+        "id": "crystal_json_content_integrity",
+        "status": "confirmed" if base[0] and changed[0] and not control[0] else "rejected",
+        "inputs": {"original": original, "tampered": mutated},
+        "actual": {"original": base, "tampered": changed, "changed_leaf_hash_control": control},
+        "limit": "API accepts altered content; CLI and external consumers not executed.",
+    }
+)
+load("babylon60.verifiable_inference", "verifiable_inference/__init__.py")
+load("babylon60.autodidact.falsifier", "autodidact/falsifier.py")
+load("babylon60.autodidact.fetchers", "autodidact/fetchers.py")
+engine_module = load("babylon60.autodidact.engine", "autodidact/engine.py")
+engine = engine_module.AutodidactOmegaEngine(db_path=None)
+goal = "All fixture triangles have five sides."
+derived = engine.derive_theorem([premise], goal)
+# Modal restriction is still tested as a negative control.
+try:
+    e.derive([premise], t.Statement("Fixture operator must deploy.", t.Modality.DEONTIC))
+    modal_control = "unexpected acceptance"
+except e.HumeViolationError:
+    modal_control = "HumeViolationError"
+results["cases"].append(
+    {
+        "id": "unrelated_derive_goal",
+        "status": "confirmed"
+        if derived.justification.kind == "FormalProof"
+        and derived.status == t.StatementStatus.CANONICAL
+        and e.verify(derived)
+        else "rejected",
+        "inputs": {"premise": premise.statement.content, "goal": goal, "db_path": None},
+        "actual": {
+            "goal": derived.statement.content,
+            "justification_kind": derived.justification.kind,
+            "parameters": derived.justification.parameters,
+            "confidence": derived.justification.confidence,
+            "status": derived.status.value,
+            "verify": e.verify(derived),
+            "registered": derived.statement_hash in engine.statement_registry,
+            "deontic_negative_control": modal_control,
+        },
+        "limit": "Observed labels/registry state, not a valid logical proof or an external effect authorization.",
+    }
+)
+try:
+    load("babylon60.primitives.errors", "primitives/errors.py")
+    aes = load("babylon60.crypto.aes", "crypto/aes.py")
+    shred = load("babylon60.crypto.shredder", "crypto/shredder.py")
+    fixture_key = bytes(range(32))  # public deterministic fixture, never user material
+    enc = aes.CortexEncrypter(fixture_key, strict_mode=True)
+    # Supply documented singleton backing state with fixture only; never resolve keyring.
+    aes._default_encrypter_instance = enc
+    tenant = "round2-fixture-tenant"
+    plaintext = "public non-sensitive fixture text"
+    fact_id = 42
+    ciphertext = enc.encrypt_str(plaintext, tenant)
+    conn = sqlite3.connect(":memory:")
+    sh = shred.CryptoShredder(conn)
+    before = enc.decrypt_str(ciphertext, tenant)
+    outcome = sh.shred_fact(fact_id, tenant, reason="isolated audit fixture")
+    marker = f"{tenant}:fact:{fact_id}" in enc._shredded_facts
+    after = enc.decrypt_str(ciphertext, tenant)
+    recreated = aes.CortexEncrypter(fixture_key, strict_mode=True).decrypt_str(ciphertext, tenant)
+    results["cases"].append(
+        {
+            "id": "crypto_shredding_decryptability",
+            "status": "confirmed"
+            if outcome.success and marker and before == after == recreated == plaintext
+            else "rejected",
+            "inputs": {
+                "master_key_fixture": "bytes(range(32)); public synthetic fixture",
+                "tenant": tenant,
+                "fact_id": fact_id,
+                "plaintext": plaintext,
+                "ciphertext": ciphertext,
+            },
+            "actual": {
+                "shred_success": outcome.success,
+                "persistent_marker": sh.is_shredded(fact_id, tenant),
+                "in_memory_marker": marker,
+                "plaintext_before": before,
+                "plaintext_after": after,
+                "plaintext_recreated_encrypter": recreated,
+            },
+            "limit": "Cryptographic erasure API behavior only; application query filters and real data not tested.",
+        }
+    )
+    conn.close()
+except Exception as exc:
+    results["cases"].append(
+        {
+            "id": "crypto_shredding_decryptability",
+            "status": "inconclusive",
+            "error": type(exc).__name__ + ": " + str(exc),
+        }
+    )
+results["source_sha256"] = loaded
+results["python_version"] = sys.version
+(OUT / "results.json").write_text(json.dumps(results, indent=2, ensure_ascii=False))
+print(json.dumps({x["id"]: x["status"] for x in results["cases"]}))

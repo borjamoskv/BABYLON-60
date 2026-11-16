@@ -1,0 +1,96 @@
+{
+  "reviewed_sha256": "ebec6651f9dc5cfbc9e0cfb431077b469dcd2c7ead8b0d7ad9e3086e6a48f8c3",
+  "observed_sha256": "bf0787e8b2290673336c2f2d6e6bd593b19d30c4ec5d95f1991c2b40e2a59ec6",
+  "reviewed_snapshot_recovered_exactly": true,
+  "changes": "Added annotation-only imports/types; replaced two direct fixture assignments with monkeypatch.setattr and the required fixture arguments. No assertions or test cases removed.",
+  "normalization": {
+    "reviewed_sha256": "ebec6651f9dc5cfbc9e0cfb431077b469dcd2c7ead8b0d7ad9e3086e6a48f8c3",
+    "observed_sha256": "bf0787e8b2290673336c2f2d6e6bd593b19d30c4ec5d95f1991c2b40e2a59ec6",
+    "normalized_ast_identical": true,
+    "normalization_scope": "Remove added annotation-only typing/aiosqlite imports and annotations; normalize only the two known new monkeypatch.setattr assignments/fixture args to their previous assignment representation. No assertion, value or control-flow normalization.",
+    "assertions_identical": true,
+    "assertion_count": 36,
+    "test_function_names_identical": true,
+    "test_function_names": [
+      "test_c0434_shutdown_drains_already_accepted",
+      "test_c0358_rejected_enqueue_propagates",
+      "test_c0208_queued_claims_use_committed_predecessor",
+      "test_c0509_failed_dag_awaits_sibling_before_unlock",
+      "test_queue_failure_rolls_back_and_shutdown_reports_it",
+      "test_queue_full_and_cancelled_shutdown_caller",
+      "test_queue_lifecycle_rejects_unstarted_closed_and_duplicate_init",
+      "test_queue_repeated_bursts_preserve_every_accepted_row",
+      "test_pipeline_success_reports_admission_only",
+      "test_pipeline_worker_exception_propagates",
+      "test_kernel_concurrent_instances_and_restart_keep_chain",
+      "test_kernel_replay_missing_id_conflict_and_payload_snapshot",
+      "test_kernel_stop_drains_and_rejects_new_or_invalid_claims",
+      "test_dag_repeated_cancellation_does_not_release_during_cleanup",
+      "test_dag_warmup_failures_leave_no_siblings",
+      "test_queue_close_or_cancel_during_initialization_cannot_reopen",
+      "test_kernel_cancelled_claim_processing_propagates_cancellation"
+    ],
+    "writer_attribution": "Unknown. S3 implementing agent did not make these changes after final freeze. Concurrent commits are observable; writer identity is not inferred."
+  },
+  "production_hashes_unchanged": true,
+  "checks": [
+    {
+      "name": "related",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "python",
+        "docs/security/evidence/swarm100-lot12-20261030/s3/run_related.py"
+      ],
+      "log": "docs/security/evidence/swarm100-lot12-20261030/s3/hash-drift/related-tests.log",
+      "log_sha256": "f140e43a5b9ab7defcff408562528d6edf6f15e74810833b63e756cbff131078",
+      "exit_code": 0,
+      "result": "32 passed"
+    },
+    {
+      "name": "ruff",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "ruff",
+        "check",
+        "01_KISH_ENGINE/babylon60/bft/master_ledger_queue.py",
+        "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py",
+        "01_KISH_ENGINE/babylon60/core/moskv_kernel.py",
+        "02_EDIN_SWARMS/agents_archi/orchestrator/kda_dag_swarm.py",
+        "tests/test_swarm100_lot12_s3_regressions.py",
+        "tests/test_itera2_invariants.py"
+      ],
+      "log": "docs/security/evidence/swarm100-lot12-20261030/s3/hash-drift/ruff.log",
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "exit_code": 0,
+      "result": "All checks passed"
+    },
+    {
+      "name": "mypy",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "mypy",
+        "--follow-imports=silent",
+        "--check-untyped-defs",
+        "01_KISH_ENGINE/babylon60/bft/master_ledger_queue.py",
+        "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py",
+        "01_KISH_ENGINE/babylon60/core/moskv_kernel.py",
+        "02_EDIN_SWARMS/agents_archi/orchestrator/kda_dag_swarm.py"
+      ],
+      "log": "docs/security/evidence/swarm100-lot12-20261030/s3/hash-drift/mypy.log",
+      "log_sha256": "71144743c83babea384888a735db0c4daba3d4d7b7942b6839984bd5c21b52bb",
+      "exit_code": 0,
+      "result": "Success: no issues found in 4 source files"
+    }
+  ],
+  "attribution": "No S3 implementing-agent edit after freeze; external writer unknown.",
+  "current_test_matches_observed_snapshot": true
+}

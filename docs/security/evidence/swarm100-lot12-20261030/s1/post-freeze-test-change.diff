@@ -1,0 +1,73 @@
+--- approved/tests/test_swarm100_lot12_s1_regressions.py
++++ current/tests/test_swarm100_lot12_s1_regressions.py
+@@ -8,7 +8,7 @@
+ import stat
+ import threading
+ import uuid
+-from datetime import datetime, timezone
++from datetime import datetime, timezone, tzinfo
+ from pathlib import Path
+ from typing import Any
+ 
+@@ -19,8 +19,8 @@
+ 
+ class FixedDateTime(datetime):
+     @classmethod
+-    def now(cls, tz: object = None) -> datetime:
+-        return datetime(2026, 10, 30, 12, 0, 0, tzinfo=timezone.utc)
++    def now(cls, tz: tzinfo | None = None) -> "FixedDateTime":
++        return cls(2026, 10, 30, 12, 0, 0, tzinfo=timezone.utc)
+ 
+ 
+ def load_copy(tmp_path: Path) -> tuple[Any, Path]:
+@@ -30,7 +30,7 @@
+     path.write_bytes(SOURCE.read_bytes())
+     spec = importlib.util.spec_from_file_location(f"snapshot_fixture_{uuid.uuid4().hex}", path)
+     assert spec is not None and spec.loader is not None
+-    module = importlib.util.module_from_spec(spec)
++    module: Any = importlib.util.module_from_spec(spec)
+     spec.loader.exec_module(module)
+     module.get_latest_commit = lambda: "fixture-commit"
+     return module, repo
+@@ -126,7 +126,7 @@
+     module.DB_PATH = repo / "cortex.db"
+     module.SNAPSHOT_DIR = repo / "audit/snapshots"
+     module.datetime = FixedDateTime
+-    outputs = []
++    outputs: list[Path] = []
+     with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
+         for _ in range(3 + 10):
+             outputs.extend(pool.map(lambda _: module.create_snapshot(), range(4)))
+@@ -372,3 +372,32 @@
+     assert list(module.SNAPSHOT_DIR.iterdir()) == []
+     with sqlite3.connect(repo / "cortex.db") as conn:
+         assert conn.execute("SELECT value FROM payload").fetchall() == [("fixture-row",)]
++
++
++def test_cleanup_without_exception_notes_preserves_primary_error_and_continues(tmp_path, monkeypatch) -> None:
++    module, repo = load_copy(tmp_path)
++    populate(repo / "cortex.db")
++    module.DB_PATH = repo / "cortex.db"
++    module.SNAPSHOT_DIR = repo / "audit/snapshots"
++    error = OSError("primary publication failure")
++    monkeypatch.setattr(error, "add_note", None, raising=False)  # Python 3.10 has no exception notes.
++    original_unlink = module._unlink_owned
++    cleaned: list[Path] = []
++
++    def fail_publication(*_args, **_kwargs):
++        raise error
++
++    def fail_database_cleanup(path, identity):
++        cleaned.append(path)
++        if path.suffix == ".db":
++            raise OSError("secondary cleanup failure")
++        original_unlink(path, identity)
++
++    monkeypatch.setattr(module.os, "link", fail_publication)
++    monkeypatch.setattr(module, "_unlink_owned", fail_database_cleanup)
++    with pytest.raises(OSError) as caught:
++        module.create_snapshot()
++    assert caught.value is error
++    assert len(cleaned) == 2
++    assert not list(module.SNAPSHOT_DIR.glob(".tmp_*.json"))
++    assert not list(module.SNAPSHOT_DIR.glob("manifest_*.json"))

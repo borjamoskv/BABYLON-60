@@ -1,0 +1,403 @@
+{
+  "shard": "093",
+  "findings": [
+    {
+      "title": "SMT gate reports literal assertions as verified invariants",
+      "severity": "P1",
+      "path": "scripts/c5_verifiers/fast_smt_gate.py",
+      "line": 27,
+      "evidence": "Lines 27-121 append True for DAG, KDA, BFT, physical and epistemic properties without inspecting their implementations; lines 197 and 215 derive SYSTEM_SOUND_AND_COMPLIANT from those flags. Only root/skills existence is checked.",
+      "trigger": "Run this verifier in a workspace containing README.md and .agents, even when the claimed algorithmic properties are broken.",
+      "impact": "Produces a successful verification verdict without evidence for the advertised invariants. No current workflow consumer was found in the targeted search; this finding concerns the executable verifier output itself.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "SCITT receipt fabricates a signature and does not bind the verification results",
+      "severity": "P1",
+      "path": "scripts/c5_verifiers/fast_smt_gate.py",
+      "line": 137,
+      "evidence": "Receipt digest hashes only invariant IDs (137-138); signature_ed25519 is a formatted string (153); Article 15 compliance is always True (150).",
+      "trigger": "Generate --scitt or --json output, including a run with failed flags or changed details.",
+      "impact": "Emits an object labelled cryptographic attestation although no signing occurs and result values are outside the digest. Consumers cannot authenticate the claimed results from this receipt.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Admitted result ignores publication failure after poison",
+      "severity": "P2",
+      "path": "examples/poc_zero_touch_gate.rs",
+      "line": 228,
+      "evidence": "audit_and_execute discards slot.publish Result at 228 and unconditionally returns Admitted at 230; publish returns PoisonedHalt at 103-104.",
+      "trigger": "Call trigger_apoptosis(), then audit_and_execute with an otherwise qualifying inquiry.",
+      "impact": "Example reports an admitted ticket and SAFE hash despite rejecting the capital update.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Verified commit is independent of the causally bound descriptor",
+      "severity": "P2",
+      "path": "crates/mxc_broker_poc/src/main.rs",
+      "line": 69,
+      "evidence": "verified_commit creates a temporary file and persists to caller-supplied target_path (70-73); neither self.fd nor self.inode nor the original path is consulted.",
+      "trigger": "Bind an authorized file, then invoke verified_commit with another target path, or replace a destination parent after binding.",
+      "impact": "PoC writes a destination that was never checked by bind_causal_path; its demonstrated binding does not constrain the commit.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "New ATMS premises bypass an already established unconditional contradiction",
+      "severity": "P2",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/atms.rs",
+      "line": 171,
+      "evidence": "add_premise inserts label {empty} without checking nogoods (171-178); contradict([]) creates empty nogood via contributions (330,350) and add_nogood; is_believed and contradiction_free test only label nonemptiness (230-231,284-285).",
+      "trigger": "Call contradict(&[]), then add_premise(\"p\"), then contradiction_free(p) before another propagation.",
+      "impact": "Returns contradiction-free for a node in an ATMS where every environment is inconsistent, violating its public consistency claim.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Voice generation reports full synchronization after synthesis errors",
+      "severity": "P2",
+      "path": "scripts/c5_demos/batch_gen_borja_voices.py",
+      "line": 80,
+      "evidence": "Nonzero synthesis status only prints stderr at 77-78; loop continues and prints 100% synchronized at 80; main returns no failure.",
+      "trigger": "F5-TTS subprocess starts but fails for one or more phrases.",
+      "impact": "Batch returns successful process status and full synchronization message with missing outputs.",
+      "confidence": "high",
+      "kind": "example"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "02_EDIN_SWARMS/agents_archi/protocols/attestation.py",
+      "line": 100,
+      "description": "Hardware creation requests signing only payload_hash, while verify supports only seed-derived Ed25519 over the full envelope preimage. Native gate contract and actual message consumers were not traced, so interoperable hardware verification remains unverified."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/d1/api.md",
+      "line": 74,
+      "description": "Sessions example with timeout object and close() appears inconsistent with the D1 bookmark/session interface; external version documentation was not consulted, so no confirmed API finding is asserted."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".github/PULL_REQUEST_TEMPLATE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          14
+        ]
+      ],
+      "inventory_sha256": "3c31647abc999c4678336665a07321219c537bea9b88e76ae6c7657174ccbaa5",
+      "observed_sha256": "3c31647abc999c4678336665a07321219c537bea9b88e76ae6c7657174ccbaa5",
+      "hash_match": true
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/atms.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          679
+        ]
+      ],
+      "inventory_sha256": "c07d7a1d4efde47155a40cdde8bb2c4471c4fe975561d69cc41096c9cb68a44e",
+      "observed_sha256": "c07d7a1d4efde47155a40cdde8bb2c4471c4fe975561d69cc41096c9cb68a44e",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/cognitive_pilot/bank.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          271
+        ]
+      ],
+      "inventory_sha256": "30ab0d154d816ddd6a963abbe9d1c8550bc50d314da501dcc677bee76ce6a773",
+      "observed_sha256": "30ab0d154d816ddd6a963abbe9d1c8550bc50d314da501dcc677bee76ce6a773",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/install_policy.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          402
+        ]
+      ],
+      "inventory_sha256": "4e89e262847dd2a725589ef86e11bf9937cf61930e89894baf2f0b62a781dfe5",
+      "observed_sha256": "4e89e262847dd2a725589ef86e11bf9937cf61930e89894baf2f0b62a781dfe5",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/utils/export.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          12
+        ]
+      ],
+      "inventory_sha256": "c17e522710652d28e7a7754f9c6da94121730c1119b965f318b159248043121b",
+      "observed_sha256": "c17e522710652d28e7a7754f9c6da94121730c1119b965f318b159248043121b",
+      "hash_match": true
+    },
+    {
+      "path": "02_EDIN_SWARMS/agents_archi/protocols/attestation.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          165
+        ]
+      ],
+      "inventory_sha256": "d2d6f8b1d34a9d4102b8d2402941ce0fadc6582caa6ff32cafe8ab8db535d085",
+      "observed_sha256": "d2d6f8b1d34a9d4102b8d2402941ce0fadc6582caa6ff32cafe8ab8db535d085",
+      "hash_match": true
+    },
+    {
+      "path": "crates/mxc_broker_poc/src/main.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          153
+        ]
+      ],
+      "inventory_sha256": "52c3430b68be8dc8402bf4c87f1413feb17e5788a3e600ec6db3e5ef9f7ed3cf",
+      "observed_sha256": "52c3430b68be8dc8402bf4c87f1413feb17e5788a3e600ec6db3e5ef9f7ed3cf",
+      "hash_match": true
+    },
+    {
+      "path": "docs/06_theory/evidence/lean-scope-20261025.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          784
+        ]
+      ],
+      "inventory_sha256": "d69b85b123e211928c100cc2f16f193702ad7a1e0385f3961473df2bc45a1806",
+      "observed_sha256": "d69b85b123e211928c100cc2f16f193702ad7a1e0385f3961473df2bc45a1806",
+      "hash_match": true
+    },
+    {
+      "path": "examples/poc_zero_touch_gate.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          368
+        ]
+      ],
+      "inventory_sha256": "e043bca4c138b94c18e65a16723171963fe131ee7b6268564d08ff039c13b459",
+      "observed_sha256": "e043bca4c138b94c18e65a16723171963fe131ee7b6268564d08ff039c13b459",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_demos/batch_gen_borja_voices.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          84
+        ]
+      ],
+      "inventory_sha256": "6f1881c800cb7f1af897b6ab562edea78b1be737fcc635299af54ff9fdaa3210",
+      "observed_sha256": "6f1881c800cb7f1af897b6ab562edea78b1be737fcc635299af54ff9fdaa3210",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_log_custody/c5_preserve_claude_local_logs.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          19
+        ]
+      ],
+      "inventory_sha256": "1f33ef3da9e673ae2b43f37851b5468f5ce1ce4ddefcdb19f4a58a6dc6c6f3c1",
+      "observed_sha256": "1f33ef3da9e673ae2b43f37851b5468f5ce1ce4ddefcdb19f4a58a6dc6c6f3c1",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_verifiers/fast_smt_gate.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          231
+        ]
+      ],
+      "inventory_sha256": "ef4c442f821689838b76a7aaa5cf29c625de2dac3df0a5bd1e2856cfdb526748",
+      "observed_sha256": "ef4c442f821689838b76a7aaa5cf29c625de2dac3df0a5bd1e2856cfdb526748",
+      "hash_match": true
+    },
+    {
+      "path": "src/halt.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          358
+        ]
+      ],
+      "inventory_sha256": "d7c416ce08d8b2c30d93f6997cba2f40a2251fb00b545331199759456fcbf354",
+      "observed_sha256": "d7c416ce08d8b2c30d93f6997cba2f40a2251fb00b545331199759456fcbf354",
+      "hash_match": true
+    },
+    {
+      "path": "tests/test_audit_private_evidence.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          121
+        ]
+      ],
+      "inventory_sha256": "a15ebe937c3d2b3a62c0af293529b4413494d7267e09672abb18bd7c5a53fe35",
+      "observed_sha256": "a15ebe937c3d2b3a62c0af293529b4413494d7267e09672abb18bd7c5a53fe35",
+      "hash_match": true
+    },
+    {
+      "path": "tests/test_master_ledger_queue.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          31
+        ]
+      ],
+      "inventory_sha256": "867a47209923c291f1c9bf55693923e5ca439bbe6afe6bc43c6e93e90ef75807",
+      "observed_sha256": "867a47209923c291f1c9bf55693923e5ca439bbe6afe6bc43c6e93e90ef75807",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/agents-sdk/references/codemode.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          110
+        ]
+      ],
+      "inventory_sha256": "35d9639fe1db69400479c34670a71090031608276ebf9bc1c5e7fa32f77d487b",
+      "observed_sha256": "35d9639fe1db69400479c34670a71090031608276ebf9bc1c5e7fa32f77d487b",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/d1/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          196
+        ]
+      ],
+      "inventory_sha256": "ea957b3260a43c46ab7845303ed34065655b4367683bf502c53b334e5fa4c776",
+      "observed_sha256": "ea957b3260a43c46ab7845303ed34065655b4367683bf502c53b334e5fa4c776",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/r2-sql/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          64
+        ]
+      ],
+      "inventory_sha256": "ebfb497e2abfb46b4e0ac29ae3ac8088d8de69fb2d409435781d114e56c9ab12",
+      "observed_sha256": "ebfb497e2abfb46b4e0ac29ae3ac8088d8de69fb2d409435781d114e56c9ab12",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workerd/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          139
+        ]
+      ],
+      "inventory_sha256": "ed3107537e54d440445408131b89db5f81f869902bade11cda7978f31234f74a",
+      "observed_sha256": "ed3107537e54d440445408131b89db5f81f869902bade11cda7978f31234f74a",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          245
+        ]
+      ],
+      "inventory_sha256": "e5b3c1d1348bed63c8e5d7f65193acebf547c12f44dafbeab7b1ac94719c98e7",
+      "observed_sha256": "e5b3c1d1348bed63c8e5d7f65193acebf547c12f44dafbeab7b1ac94719c98e7",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/anergy-purge-protocol/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          51
+        ]
+      ],
+      "inventory_sha256": "435a0ddf6e9e6afdcb4e84a9c5f6eabf3975b14d98b1c860c1c46833097b2b61",
+      "observed_sha256": "435a0ddf6e9e6afdcb4e84a9c5f6eabf3975b14d98b1c860c1c46833097b2b61",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/c5-terminological-archaeology/scripts/c5_orphan_phrase_detector.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          256
+        ]
+      ],
+      "inventory_sha256": "626dfebab6708f019f3a0d1d3b7859599ebcc665e20c8f0be12ee0d67e8d1024",
+      "observed_sha256": "626dfebab6708f019f3a0d1d3b7859599ebcc665e20c8f0be12ee0d67e8d1024",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-sovereign-inference-runtime/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          41
+        ]
+      ],
+      "inventory_sha256": "46dc3c285b2615369ba93cb517b67b2f7b477adc6e7c6831804c23f23159f460",
+      "observed_sha256": "46dc3c285b2615369ba93cb517b67b2f7b477adc6e7c6831804c23f23159f460",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/macos-lulu-firewall-diagnostics/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "inventory_sha256": "75d5518f00834a818071fe657a46ff319791d9fd3feb97ae9ecc133da4b035e3",
+      "observed_sha256": "75d5518f00834a818071fe657a46ff319791d9fd3feb97ae9ecc133da4b035e3",
+      "hash_match": true
+    }
+  ],
+  "tool_limitations": [
+    "Native codebase graph tools absent from exposed tool inventory; targeted text fallback used.",
+    "Static source audit only; tests, runtime, hardware, CI, external APIs, physical claims and current service documentation not executed or certified.",
+    "Some combined tool outputs were truncated; affected source sections were re-read in bounded chunks."
+  ],
+  "tests_run": []
+}

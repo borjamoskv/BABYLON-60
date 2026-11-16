@@ -384,7 +384,6 @@ def validate_config(config: dict[str, object]) -> None:
     hosts = {
         "local_mlx": {"localhost", "127.0.0.1"},
         "local_vllm": {"localhost", "127.0.0.1"},
-        "moonshot": {"api.moonshot.cn"},
         "openrouter": {"openrouter.ai"},
         "gemini_compat": {"generativelanguage.googleapis.com"},
         "ollama_native": {"127.0.0.1"},

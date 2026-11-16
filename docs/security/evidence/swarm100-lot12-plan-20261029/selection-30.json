@@ -1,0 +1,1046 @@
+[
+  {
+    "candidate_id": "SW100-C0528",
+    "path": "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "For this checked-in script location, Path(__file__).parent.parents[2] denotes the parent of BABYLON-60. Both DB_PATH and SNAPSHOT_DIR therefore refer outside the repository. If that source DB is absent, create_snapshot explicitly writes an empty destination DB and emits a manifest; main then starts the ledger actor against the same mislocated DB_PATH. Existing tests replace both globals, so they do not check the default path. Actual database existence/content and ledger mutation were deliberately not inspected or exercised.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+        "start_line": 24,
+        "end_line": 26,
+        "observation": "Root expression is one directory above the repository; both storage locations derive from it."
+      },
+      {
+        "path": "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+        "start_line": 43,
+        "end_line": 74,
+        "observation": "Missing source creates an empty destination that is hashed and returned as a manifest."
+      },
+      {
+        "path": "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+        "start_line": 77,
+        "end_line": 105,
+        "observation": "Main records the snapshot using a ledger actor built from DB_PATH."
+      },
+      {
+        "path": "tests/test_ledger_snapshot_engine.py",
+        "start_line": 25,
+        "end_line": 43,
+        "observation": "Test patches DB_PATH and SNAPSHOT_DIR, avoiding the default root computation."
+      }
+    ],
+    "group": "S1 — Snapshots",
+    "source_sha256": "126474f8d45284fee75951c5a9ddd7abc350352be7df3adb6df8653aeb8e3ca2",
+    "title": "Snapshot engine resolves its root above the repository"
+  },
+  {
+    "candidate_id": "SW100-C0529",
+    "path": "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+    "severity": "P2",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "Snapshot and manifest names contain only a UTC timestamp to the second. Two calls in that second select the same destination, with no exclusive name allocation, lock, or retry. For an existing nonempty source snapshot, VACUUM INTO cannot safely create another independent backup at that same nonempty destination; any exception propagates past create_snapshot/main. The later manifest write is also nonexclusive. The name collision and unhandled collision path are statically confirmed; concurrent SQLite execution was not performed.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+        "start_line": 43,
+        "end_line": 57,
+        "observation": "Destination derives solely from second-resolution timestamp, and VACUUM INTO has no collision recovery."
+      },
+      {
+        "path": "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+        "start_line": 62,
+        "end_line": 74,
+        "observation": "Manifest repeats the same timestamp and is opened in write mode."
+      },
+      {
+        "path": "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+        "start_line": 99,
+        "end_line": 106,
+        "observation": "Main does not handle create_snapshot failures."
+      },
+      {
+        "path": "tests/test_ledger_snapshot_engine.py",
+        "start_line": 25,
+        "end_line": 43,
+        "observation": "Existing test calls create_snapshot once and does not exercise duplicate timestamps."
+      }
+    ],
+    "group": "S1 — Snapshots",
+    "source_sha256": "126474f8d45284fee75951c5a9ddd7abc350352be7df3adb6df8653aeb8e3ca2",
+    "title": "Second-resolution filenames cause snapshot collisions"
+  },
+  {
+    "candidate_id": "SW100-C0337",
+    "path": "01_KISH_ENGINE/babylon60/crypto/identity.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "forge_identity generates fresh seed material and uses touch(exist_ok=True) followed by open(...,w) on the existing master seed path. It neither rejects an existing identity nor writes via an atomic replacement with durability checks. The seal_bounty_aeon consumer calls it after any load exception, including decryption failures, so a wrong passphrase can lead to replacing the previous private identity instead of preserving it. An interrupted write can leave unreadable content. Loss of future signing capability with the original key is supported; historical signatures remain verifiable if their public key was separately retained. No actual seed or operator identity was accessed.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/crypto/identity.py",
+        "start_line": 75,
+        "end_line": 109,
+        "observation": "New random seed unconditionally replaces master_seed.enc through a truncating write."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/crypto/identity.py",
+        "start_line": 111,
+        "end_line": 131,
+        "observation": "Load raises for missing/corrupt content or decryption failure."
+      },
+      {
+        "path": "scripts/c5_l1_ledger/seal_bounty_aeon.py",
+        "start_line": 126,
+        "end_line": 134,
+        "observation": "Broad exception from load triggers forge, then uses the resulting private key."
+      }
+    ],
+    "group": "S2 — Identidad y confianza",
+    "source_sha256": "4c98615751f6c55215f4bc60122346085c00bcb5cb540af18eba49883211d1b8",
+    "title": "Identity forging truncates existing master seed and is not atomic"
+  },
+  {
+    "candidate_id": "SW100-C0345",
+    "path": "01_KISH_ENGINE/babylon60/crypto/keys.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "Manager loads a full metadata snapshot once and rewrites it using mode w without lock, reload or atomic replacement. A stale manager can overwrite another manager revocation or key addition; later is_revoked reads restored stale metadata. Revocation separately deletes private key material, limiting direct key resurrection, but does not preserve metadata or concurrent additions.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/crypto/keys.py",
+        "start_line": 70,
+        "end_line": 87,
+        "observation": "Snapshot plus full truncate-and-rewrite."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/crypto/keys.py",
+        "start_line": 119,
+        "end_line": 125,
+        "observation": "Generation saves complete cached metadata."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/crypto/keys.py",
+        "start_line": 164,
+        "end_line": 185,
+        "observation": "Revocation saves metadata then attempts key deletion."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/crypto/keys.py",
+        "start_line": 187,
+        "end_line": 206,
+        "observation": "Consumers use cached revocation/expiration/key records."
+      }
+    ],
+    "group": "S2 — Identidad y confianza",
+    "source_sha256": "cbf5b3ded4cf854df1d11d37a4d61d0f0122604881c7a02fb0f00497822ee305",
+    "title": "Metadata writes can overwrite another manager’s keys or revocations"
+  },
+  {
+    "candidate_id": "SW100-C0533",
+    "path": "scripts/c5_l1_ledger/seal_bounty_aeon.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "Sealer catches every identity-load exception and calls forge_identity at the same storage path. Corrupt JSON or failed AEAD decryption can therefore cause a fresh random seed to truncate master_seed.enc, if forging subsequently succeeds. New key signs the root and enters the artifact. No operator identity data was accessed and no identity operation was executed.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_l1_ledger/seal_bounty_aeon.py",
+        "start_line": 123,
+        "end_line": 135,
+        "observation": "Broad load-error handler forges new identity."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/crypto/identity.py",
+        "start_line": 53,
+        "end_line": 62,
+        "observation": "Both paths target master_seed.enc."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/crypto/identity.py",
+        "start_line": 75,
+        "end_line": 109,
+        "observation": "Fresh random seed written with mode w to same path."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/crypto/identity.py",
+        "start_line": 111,
+        "end_line": 131,
+        "observation": "Corruption or wrong passphrase raises."
+      },
+      {
+        "path": "scripts/c5_l1_ledger/seal_bounty_aeon.py",
+        "start_line": 162,
+        "end_line": 165,
+        "observation": "Artifact consumes new public key/signature."
+      }
+    ],
+    "group": "S2 — Identidad y confianza",
+    "source_sha256": "154e38e4308b098e7687b266f337ec684b5ebd9488afcf186ab52c85139f8916",
+    "title": "Identity decryption failure silently overwrites the master identity"
+  },
+  {
+    "candidate_id": "SW100-C0271",
+    "path": "01_KISH_ENGINE/babylon60/attestation/conformal_tree.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "verify_manifest authenticates the root against the public key embedded in that same manifest. It has no expected-key or trusted-identity parameter. With no db_path, tree_valid remains None and does not prevent overall_valid; the hardware UUID comparison is informational and excluded from the verdict. A self-signed root with the required status therefore satisfies this verifier without proving the advertised L0/sovereign identity. The CLI reports success from overall_valid. No protected runtime authorization bypass or native attestation execution is established.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/attestation/conformal_tree.py",
+        "start_line": 142,
+        "end_line": 159,
+        "observation": "Verifier signature accepts any supplied Ed25519 key; manifest API has no trust-anchor input."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/attestation/conformal_tree.py",
+        "start_line": 165,
+        "end_line": 207,
+        "observation": "Key/signature come from JSON, database is optional, and overall_valid omits pinned identity and host match."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/cli/bounty_cli.py",
+        "start_line": 132,
+        "end_line": 167,
+        "observation": "CLI prints verified and returns zero solely from report overall_valid."
+      }
+    ],
+    "group": "S2 — Identidad y confianza",
+    "source_sha256": "251c9da8553af921d2597ce899e5f5baabfa61412c90818a629db90cbb9694fe",
+    "title": "Manifest verification trusts the public key supplied by the manifest"
+  },
+  {
+    "candidate_id": "SW100-C0276",
+    "path": "01_KISH_ENGINE/babylon60/attestation/merkle_anchor.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "generate_hardware_pcr_quote computes two ordinary SHA-256 digests and emits tpm_quote_signature plus TPM_2_0_HARDWARE_SEALED. Its default seed is the hardware UUID returned in the same object. Reading a UUID, or using an environment seed, does not invoke TPM/Secure Enclave signing. The misleading object is attached to certificate/decision evidence and AL3 session data. No hardware identity or real secret was read during this review.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/attestation/merkle_anchor.py",
+        "start_line": 105,
+        "end_line": 128,
+        "observation": "Software hash construction and hardware-sealed output labels."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py",
+        "start_line": 305,
+        "end_line": 320,
+        "observation": "Certificate contains the returned hardware_anchor object."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py",
+        "start_line": 473,
+        "end_line": 497,
+        "observation": "Decision evidence validates ledger integrity then attaches software quote."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+        "start_line": 179,
+        "end_line": 188,
+        "observation": "AL3 sessions attach quote before writing bundle manifest."
+      }
+    ],
+    "group": "S2 — Identidad y confianza",
+    "source_sha256": "cf90589a3faf04117731c693bb62a0f0486ea9ca9091af17ce915964dc170ce9",
+    "title": "Software hashes are exported as hardware-sealed TPM quotes"
+  },
+  {
+    "candidate_id": "SW100-C0432",
+    "path": "tools/tamkarum_license_provisioner.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "Absent or wrong-length seed configuration derives the signing seed from a fixed source literal, making the default authority key reproducible by anyone with source. The function signs arbitrary supplied client entitlements and marks the seal VALID_AUTHENTICATED_LICENSE; CLI writes it as an issued certificate. The finding concerns default certificate authenticity; no runtime verifier consumer or deployed use was established and no certificate was generated.",
+    "source_checks": [
+      {
+        "path": "tools/tamkarum_license_provisioner.py",
+        "start_line": 94,
+        "end_line": 115,
+        "observation": "Deterministic public fallback plus authenticated status."
+      },
+      {
+        "path": "tools/tamkarum_license_provisioner.py",
+        "start_line": 191,
+        "end_line": 219,
+        "observation": "CLI directly issues and persists generated certificate without additional key guard."
+      }
+    ],
+    "group": "S2 — Identidad y confianza",
+    "source_sha256": "312b37a43a708ef232ccedf7fbd6bc57c33c181e00fee72eba13b9d6fb2a9096",
+    "title": "License authority falls back to a publicly derivable signing key"
+  },
+  {
+    "candidate_id": "SW100-C0434",
+    "path": "01_KISH_ENGINE/babylon60/bft/master_ledger_queue.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "shutdown sets the stop event before awaiting the writer. If queued transactions were accepted before the writer gets scheduled, its while condition is immediately false, so it closes the DB with those queue items unprocessed and reports clean shutdown. The sentinel cannot override the outer loop condition. Current module explicitly scopes this queue to auxiliary databases, so loss is not asserted for the canonical ledger actor.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/bft/master_ledger_queue.py",
+        "start_line": 5,
+        "end_line": 10,
+        "observation": "Queue contract excludes canonical Master Ledger."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/bft/master_ledger_queue.py",
+        "start_line": 35,
+        "end_line": 39,
+        "observation": "Writer is scheduled asynchronously."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/bft/master_ledger_queue.py",
+        "start_line": 51,
+        "end_line": 91,
+        "observation": "Loop checks stop before dequeuing; batches commit transactionally."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/bft/master_ledger_queue.py",
+        "start_line": 93,
+        "end_line": 120,
+        "observation": "Submit enqueues, shutdown sets stop then sentinel and waits."
+      }
+    ],
+    "group": "S3 — Colas y entrega",
+    "source_sha256": "94b6186add7e38c0234d971014908ccb0082de5003ba2adfa2e89fb8e1fd62ab",
+    "title": "Shutdown stops before draining accepted transactions"
+  },
+  {
+    "candidate_id": "SW100-C0358",
+    "path": "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "All three risk loops append receipts before enqueue and ignore its boolean result. Ledger returns False on full queue or shutdown, while report and CLI still include the receipt as a normal sealed claim. Worker failure exceptions now propagate but do not cover false returns. This is unreported persistence rejection; even true enqueue alone is not a durability acknowledgement.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py",
+        "start_line": 125,
+        "end_line": 166,
+        "observation": "Three domains ignore enqueue acceptance."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/bft/bounty_cold_ledger.py",
+        "start_line": 103,
+        "end_line": 121,
+        "observation": "Failed worker raises; closed/full queue returns False."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py",
+        "start_line": 184,
+        "end_line": 195,
+        "observation": "Report includes all generated receipts."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/cli/bounty_cli.py",
+        "start_line": 270,
+        "end_line": 279,
+        "observation": "CLI displays/exports receipts without persistence status."
+      }
+    ],
+    "group": "S3 — Colas y entrega",
+    "source_sha256": "24df531cfbb817964c4da27b4220351c4080eb4ab9b54c789b11a16d7b07909b",
+    "title": "Handle rejected cold-ledger enqueue results"
+  },
+  {
+    "candidate_id": "SW100-C0208",
+    "path": "01_KISH_ENGINE/babylon60/core/moskv_kernel.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "Two distinct claims ingested before the first insert snapshot the same _last_hash. The first autocommitted row consumes the UNIQUE prev_hash value; the second raises IntegrityError. The collision handler looks up only the second claim_id, accepts a missing row, and prints legitimate replay while that accepted tracking ID was never stored. Single-writer processing does not repair predecessors captured during ingestion.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/core/moskv_kernel.py",
+        "start_line": 59,
+        "end_line": 67,
+        "observation": "Both prev_hash and current_hash are UNIQUE and claim_id is the primary key."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/core/moskv_kernel.py",
+        "start_line": 82,
+        "end_line": 98,
+        "observation": "Ingestion snapshots _last_hash into the queued claim before persistence."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/core/moskv_kernel.py",
+        "start_line": 106,
+        "end_line": 118,
+        "observation": "An absent collision lookup row is accepted without an error."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/core/moskv_kernel.py",
+        "start_line": 121,
+        "end_line": 169,
+        "observation": "Every IntegrityError is handled as replay and processing marks the queue task done."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/database/core.py",
+        "start_line": 47,
+        "end_line": 60,
+        "observation": "The current database connector uses isolation_level=None; successful insert is autocommitted."
+      }
+    ],
+    "group": "S3 — Colas y entrega",
+    "source_sha256": "2f420cb48c43b1aac7b921d4cd690ba4b27044129aeee8e8f29796db9a07cf27",
+    "title": "Queued claims capture an obsolete predecessor and are silently discarded"
+  },
+  {
+    "candidate_id": "SW100-C0509",
+    "path": "02_EDIN_SWARMS/agents_archi/orchestrator/kda_dag_swarm.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "execute_dag holds ThermalLock around asyncio.gather with default exception behavior. On the first task exception, gather raises while sibling tasks may remain pending/running; context exit removes the lock with no sibling cancellation or drain. In a surviving caller event loop, those tasks can continue and overlap a second scheduler that acquires the freed lock. Static concurrency analysis, not an observed protected workload overlap.",
+    "source_checks": [
+      {
+        "path": "02_EDIN_SWARMS/agents_archi/orchestrator/kda_dag_swarm.py",
+        "start_line": 107,
+        "end_line": 126,
+        "observation": "Lock acquisition is exclusive, exit unconditionally removes acquired lock."
+      },
+      {
+        "path": "02_EDIN_SWARMS/agents_archi/orchestrator/kda_dag_swarm.py",
+        "start_line": 181,
+        "end_line": 209,
+        "observation": "Coroutines are gathered with no exception cleanup before leaving lock scope."
+      }
+    ],
+    "group": "S3 — Colas y entrega",
+    "source_sha256": "7df1e0d00504451e2bae540a4d9f8b23973dc2696773d0c2030afe1fdb07a2ff",
+    "title": "DAG failure releases global lock while sibling tasks still execute"
+  },
+  {
+    "candidate_id": "SW100-C0422",
+    "path": "01_KISH_ENGINE/services/email_inbound/worker.js",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "After three failed webhook attempts, the email handler only console.errors and resolves normally. No setReject, thrown error, forwarding or durable enqueue follows exhaustion. The payload is not retained by this handler and failure is not propagated. Official Cloudflare handler documentation describes explicit forward/reject actions; this static finding does not assert a measured SMTP response or unseen deployment rule.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/services/email_inbound/worker.js",
+        "start_line": 44,
+        "end_line": 50,
+        "observation": "Worker email entry point requires secret."
+      },
+      {
+        "path": "01_KISH_ENGINE/services/email_inbound/worker.js",
+        "start_line": 98,
+        "end_line": 138,
+        "observation": "Retry loop and final log-only failure path."
+      }
+    ],
+    "group": "S3 — Colas y entrega",
+    "source_sha256": "0e7c5066a1765789be6bdf28d4e16e7e1cfda63d3c47e276723e5eb276ce8719",
+    "title": "Inbound email acknowledges exhausted webhook delivery failures"
+  },
+  {
+    "candidate_id": "SW100-C0435",
+    "path": "scripts/c5_cli/moskv_native_host.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "The fixed shared /tmp pathname is accessed through Path.exists/read_text/write_text. The --enqueue path can follow a precreated symlink and overwrite a file writable by the host user; malformed old content is replaced by a new JSON queue. Scope is a local precreation attack under filesystem conditions that permit following the symlink; no exploit or real queue access was performed.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_cli/moskv_native_host.py",
+        "start_line": 180,
+        "end_line": 196,
+        "observation": "No exclusive create, ownership test or no-follow descriptor protects the queue."
+      },
+      {
+        "path": "scripts/c5_cli/moskv_native_host.py",
+        "start_line": 199,
+        "end_line": 210,
+        "observation": "Queue consumption uses the same following reads/writes."
+      },
+      {
+        "path": "scripts/c5_cli/moskv_native_host.py",
+        "start_line": 293,
+        "end_line": 312,
+        "observation": "--enqueue calls enqueue_prompt directly before the native messaging loop."
+      }
+    ],
+    "group": "S4 — Operaciones de archivos y Git",
+    "source_sha256": "37e151085da1c01ecd002c9e7839ff366510527c55442a983f6e4a062c08d92a",
+    "title": "Shared /tmp prompt queue follows attacker-controlled symlinks"
+  },
+  {
+    "candidate_id": "SW100-C0298",
+    "path": "01_KISH_ENGINE/babylon60/cortex/cortex_purge_anergy.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "PROJECT_ROOT is the cortex package directory, not the repository root. The __main__ path calls categorize_and_move, which moves each unprotected .py to a nested archive. __init__.py and the present gemini_labs_nexus.py are unprotected; moving such implementation modules breaks their original import paths. Correction to candidate evidence: cortex_chaos_monad.py IS protected at line 68 and is not an affected example. No purge ran.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/cortex/cortex_purge_anergy.py",
+        "start_line": 23,
+        "end_line": 28,
+        "observation": "Root and archive are derived from the package's own __file__ directory."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/cortex/cortex_purge_anergy.py",
+        "start_line": 30,
+        "end_line": 69,
+        "observation": "Protected set includes cortex_chaos_monad.py but not __init__.py or gemini_labs_nexus.py."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/cortex/cortex_purge_anergy.py",
+        "start_line": 77,
+        "end_line": 114,
+        "observation": "All other .py files are moved by main."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/cortex/cortex_purge_anergy.py",
+        "start_line": 178,
+        "end_line": 179,
+        "observation": "Direct execution calls main, not safe_purge_anergy."
+      }
+    ],
+    "group": "S4 — Operaciones de archivos y Git",
+    "source_sha256": "7bcfb0040094964013cd1e539cb0a8051e71fd0f7fbfbe18e5a2de17c7fa6d1c",
+    "title": "Purge targets its installed package and moves importable modules"
+  },
+  {
+    "candidate_id": "SW100-C0437",
+    "path": "scripts/c5_git_utils/rewrite_commits.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "When main is already checked out with uncommitted tracked changes or local commits, _ensure_main executes reset --hard origin/main before rewrite validation or any backup/clean-state check. The header assumes a backup was already created but neither verifies it nor protects uncommitted work. This is a destructive CLI path, reviewed without executing any Git mutation.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_git_utils/rewrite_commits.py",
+        "start_line": 6,
+        "end_line": 17,
+        "observation": "The header claims prior backup preservation but the script implements no backup step."
+      },
+      {
+        "path": "scripts/c5_git_utils/rewrite_commits.py",
+        "start_line": 28,
+        "end_line": 30,
+        "observation": "checkout main is immediately followed by reset --hard origin/main."
+      },
+      {
+        "path": "scripts/c5_git_utils/rewrite_commits.py",
+        "start_line": 89,
+        "end_line": 102,
+        "observation": "main invokes the reset helper before rewrite and validation."
+      }
+    ],
+    "group": "S4 — Operaciones de archivos y Git",
+    "source_sha256": "30401c75520a9b251d52d7601f6fae6ea4c25723e904dbe8120dd03008ee4a6f",
+    "title": "History rewrite discards local work before establishing backup"
+  },
+  {
+    "candidate_id": "SW100-C0448",
+    "path": "scripts/c5_icloud_deploy.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "For each returned zone record, deletion tests only type=MX or TXT content containing v=spf1, never record name. A returned subdomain MX/SPF therefore reaches DELETE, while replacement list restores only apex mail records and the apex DKIM name. Static conditional dataflow finding; actual DNS records, credentials and remote mutation were not accessed.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_icloud_deploy.py",
+        "start_line": 28,
+        "end_line": 48,
+        "observation": "Script selects a zone then requests dns_records without a name filter."
+      },
+      {
+        "path": "scripts/c5_icloud_deploy.py",
+        "start_line": 50,
+        "end_line": 58,
+        "observation": "Deletion predicates never compare r.name against domain."
+      },
+      {
+        "path": "scripts/c5_icloud_deploy.py",
+        "start_line": 62,
+        "end_line": 73,
+        "observation": "Replacement records target the fixed apex domain and its DKIM label."
+      }
+    ],
+    "group": "S4 — Operaciones de archivos y Git",
+    "source_sha256": "fb8414b9e3583108e1caaae3dec41a5bada01efb17c7c1d415029592cbee328e",
+    "title": "Mail migration deletes records belonging to unrelated subdomains"
+  },
+  {
+    "candidate_id": "SW100-C0490",
+    "path": "tools/install_shield.sh",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "Installation removes an existing regular instruction file and immediately replaces it with a canonical symlink. Its previous text is not read or backed up anywhere on this path. This affects existing workspace rule files and Copilot instructions whenever the installer is invoked there; no installer was executed.",
+    "source_checks": [
+      {
+        "path": "tools/install_shield.sh",
+        "start_line": 151,
+        "end_line": 165,
+        "observation": "Canonical rules creation preserves an existing .babylon60rules but does not preserve other rule-file contents."
+      },
+      {
+        "path": "tools/install_shield.sh",
+        "start_line": 168,
+        "end_line": 181,
+        "observation": "Nonmatching links and all regular rule files are removed before symlink creation."
+      },
+      {
+        "path": ".babylon60rules",
+        "start_line": 19,
+        "end_line": 19,
+        "observation": "The canonical manifest requires preserving differences before replacing regular instruction files."
+      }
+    ],
+    "group": "S4 — Operaciones de archivos y Git",
+    "source_sha256": "bbedf380b5945b2c432af96352a0f640ccf09e1e9858ad1498ad61a33919583d",
+    "title": "Installer destroys pre-existing agent instruction files without preserving differences"
+  },
+  {
+    "candidate_id": "SW100-C0103",
+    "path": "tools/skill_library/global/youtube-analysis-pipeline/scripts/yt_audit.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "fetch_youtube_audit interpolates user URL and output_dir into command strings that run_cmd executes with shell=True. The CLI passes sys.argv values directly. Double quotes do not suppress command substitution; crafted input containing substitution or a closing quote can cause shell execution before yt-dlp handles the URL. os.makedirs merely creates the directory and provides no shell validation. This is a local command-injection sink; exploitation requires an operator or caller to supply attacker-influenced input, and no malicious command or acquisition script was executed.",
+    "source_checks": [
+      {
+        "path": "tools/skill_library/global/youtube-analysis-pipeline/scripts/yt_audit.py",
+        "start_line": 7,
+        "end_line": 17,
+        "observation": "Command runner uses shell=True and metadata command directly interpolates URL."
+      },
+      {
+        "path": "tools/skill_library/global/youtube-analysis-pipeline/scripts/yt_audit.py",
+        "start_line": 35,
+        "end_line": 42,
+        "observation": "Subtitle and list commands repeat interpolation, including output directory."
+      },
+      {
+        "path": "tools/skill_library/global/youtube-analysis-pipeline/scripts/yt_audit.py",
+        "start_line": 48,
+        "end_line": 55,
+        "observation": "CLI directly forwards positional input without escaping or allowlisting."
+      }
+    ],
+    "group": "S5 — Entrada y aislamiento",
+    "source_sha256": "ecda4dca2ee77aa986d1898aad7fbd998bc07723bf7126c1e697fbd155638d62",
+    "title": "YouTube URL and output directory are interpolated into a shell"
+  },
+  {
+    "candidate_id": "SW100-C0221",
+    "path": "01_KISH_ENGINE/babylon60/core/popperian_filter.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "evaluate_payload truncates its local text and can still return passed=True with truncated=True. BrowserAgent checks only passed, then caches, attests and returns the original raw_payload. An acceptable anchored prefix followed by a rejected hype suffix beyond the cutoff is thus never examined yet is labeled VERIFIED_AND_ATTESTED. Scope is the filter-consumer mismatch, not proof of security containment bypass.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/core/popperian_filter.py",
+        "start_line": 103,
+        "end_line": 118,
+        "observation": "Oversize input is locally sliced rather than rejected or returned as filtered content."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/core/popperian_filter.py",
+        "start_line": 137,
+        "end_line": 164,
+        "observation": "Checks run on the truncated normalized text; successful result can retain truncated=True."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/core/browser_agent.py",
+        "start_line": 108,
+        "end_line": 134,
+        "observation": "Consumer does not check truncated and uses raw_payload for cache, attestation and returned content."
+      }
+    ],
+    "group": "S5 — Entrada y aislamiento",
+    "source_sha256": "371150377d929d086bd465398a67ee6811f1e310a834d989aec3ad37183a8b3b",
+    "title": "Reject oversized content or return the exact bytes that were filtered"
+  },
+  {
+    "candidate_id": "SW100-C0294",
+    "path": "01_KISH_ENGINE/babylon60/primitives/sandbox.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "The 13-node expression x = [0] * 10**10 passes the exact validator in the bounded fixture. safe_exec runs the allowed expression in the host process and captures output in an unbounded StringIO, so AST size/depth and an alarm do not cap allocation/output growth. The dangerous allocation was deliberately never executed; no OOM/crash is claimed as reproduced.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/primitives/sandbox.py",
+        "start_line": 68,
+        "end_line": 100,
+        "observation": "Whitelist admits constants, lists, multiplication and exponentiation."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/primitives/sandbox.py",
+        "start_line": 284,
+        "end_line": 312,
+        "observation": "Validation limits AST shape and blocked names/attributes, not allocated size."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/primitives/sandbox.py",
+        "start_line": 389,
+        "end_line": 408,
+        "observation": "In-process exec, signal timeout and unbounded StringIO capture."
+      }
+    ],
+    "group": "S5 — Entrada y aislamiento",
+    "source_sha256": "22f22c9765c6605bd02ba1a7dce990d31764867fbe469ad2244e54b5c52a0fa4",
+    "title": "In-process sandbox has no allocation or output bound"
+  },
+  {
+    "candidate_id": "SW100-C0486",
+    "path": "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "A sensitive non-LegalTech context with no strict floor/sovereign role can retain an explicit :free model alongside a paid models array. Preflight checks only payload.models when present; the full payload is then passed to urlopen. The postflight floor check occurs after transmission. This statically confirms bypass of the local model-selection guard, not proof that a specific free provider received content or that the gateway honored model over models.",
+    "source_checks": [
+      {
+        "path": "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+        "start_line": 623,
+        "end_line": 643,
+        "observation": "Strict/sovereign modes validate explicit model and candidates."
+      },
+      {
+        "path": "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+        "start_line": 653,
+        "end_line": 688,
+        "observation": "Explicit target and independent candidate models both enter payload."
+      },
+      {
+        "path": "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+        "start_line": 720,
+        "end_line": 732,
+        "observation": "General sensitivity does not itself enable enforce_floor."
+      },
+      {
+        "path": "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+        "start_line": 769,
+        "end_line": 788,
+        "observation": "Free-model veto iterates only candidate_list."
+      },
+      {
+        "path": "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+        "start_line": 820,
+        "end_line": 838,
+        "observation": "Request transmission precedes postflight model check."
+      }
+    ],
+    "group": "S5 — Entrada y aislamiento",
+    "source_sha256": "eccd5ae01bb29f6e4faeaf3ce275d341a46112e030923d7139222d632d22834a",
+    "title": "Sensitive routing omits the explicit target from its free-model veto"
+  },
+  {
+    "candidate_id": "SW100-C0113",
+    "path": "01_KISH_ENGINE/babylon60/kernel/ns_z3_firewall.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "Only the three leading minors are checked. For lambda_max=0 and S=diag(0,1,1), residual M=diag(0,-1,-1) gives all three checked minors zero while e_y^T M e_y=-1. Even imposing trace-free S would not fix this: S=diag(0,1,-1) is another counterexample. The SAT branch labels these constraints VALID_PROOF. Static algebraic refutation; Z3 was not run.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/kernel/ns_z3_firewall.py",
+        "start_line": 79,
+        "end_line": 115,
+        "observation": "Declared all-vector PSD bound is implemented using only leading 1x1, 2x2 and 3x3 determinants."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/kernel/ns_z3_firewall.py",
+        "start_line": 117,
+        "end_line": 126,
+        "observation": "Satisfiable nonnegative leading-minor constraints produce VALID_PROOF."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/kernel/ns_z3_firewall.py",
+        "start_line": 64,
+        "end_line": 74,
+        "observation": "Unknown-result rejection does not add missing principal-minor constraints."
+      },
+      {
+        "path": "tests/test_ns_z3_firewall.py",
+        "start_line": 19,
+        "end_line": 45,
+        "observation": "Existing examples avoid the zero-leading-minor indefinite case."
+      }
+    ],
+    "group": "S5 — Entrada y aislamiento",
+    "source_sha256": "8c770d13506eea3376bb072d905d7ce65994395989bc0686ba18a779c6d5a65d",
+    "title": "PSD check accepts indefinite residual matrices"
+  },
+  {
+    "candidate_id": "SW100-C0175",
+    "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "Current changed source still validates required file existence but never requires signed digest coverage for evidence content. It checks only entries supplied in file_digests (default empty), so omitted claims/scope/regulatory files can be changed without a content-hash comparison. Later logic consumes those files and may return valid=true. This requires a signed pack whose envelope omitted content digests; normal complete packs retain their digest protection. Signature/checksum metadata self-reference is not the proposed coverage requirement.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+        "start_line": 810,
+        "end_line": 845,
+        "observation": "Required files are tested for existence and JSON documents loaded."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+        "start_line": 856,
+        "end_line": 944,
+        "observation": "Signature and checksum-file hash verified, but content loop only visits supplied file_digests."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+        "start_line": 996,
+        "end_line": 1048,
+        "observation": "Unsigned-by-omission scope, mappings and claims influence verdict."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+        "start_line": 1075,
+        "end_line": 1085,
+        "observation": "Success reports all checks valid."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/verifier/cli.py",
+        "start_line": 96,
+        "end_line": 103,
+        "observation": "Pack valid controls PASS and exit 0."
+      }
+    ],
+    "group": "S6 — Verificación y auditoría",
+    "source_sha256": "624eb292a797ac7094c4b84357606180465b09f3b7381f5292dba44ac4484634",
+    "title": "Require digest coverage for every required evidence file"
+  },
+  {
+    "candidate_id": "SW100-C0328",
+    "path": "scripts/c5_sharur/sharur_100_conversation_reporters.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "Reporter agents 64/65/67-70 and 83-86 emit static PASS/control claims; agent 99 unconditionally emits ATTESTED_C5_REAL with health_index 98.6. Neither branch checks the asserted controls or other agent results. The auditor schedules these functions and persists the aggregate; constant PASS entries inflate its score. Other agents may still report actual FAIL/WARN, so the defect is unsupported certification alongside them, not universal masking of all failures.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_sharur/sharur_100_conversation_reporters.py",
+        "start_line": 96,
+        "end_line": 138,
+        "observation": "Several topology/integrity verdicts are literal PASS constants."
+      },
+      {
+        "path": "scripts/c5_sharur/sharur_100_conversation_reporters.py",
+        "start_line": 243,
+        "end_line": 265,
+        "observation": "Security/privacy verdicts are constants without corpus checks."
+      },
+      {
+        "path": "scripts/c5_sharur/sharur_100_conversation_reporters.py",
+        "start_line": 341,
+        "end_line": 380,
+        "observation": "Certification is unconditional; score derives from PASS count."
+      },
+      {
+        "path": "scripts/c5_sharur/sharur_100_conversation_auditor.py",
+        "start_line": 749,
+        "end_line": 775,
+        "observation": "All reporters are scheduled and report emitted."
+      }
+    ],
+    "group": "S6 — Verificación y auditoría",
+    "source_sha256": "f9b264129a7c50751534dfbc378420de3a94c83068a4ba957fad3f0ca9d99c13",
+    "title": "Forensic report certifies controls without checking them"
+  },
+  {
+    "candidate_id": "SW100-C0343",
+    "path": "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "The auditor returns PASS plus certification strings for atomic ordering, seqlock behavior, biometrics and formal properties without inspecting or executing those checks. Linguistic entropy is assigned as 4.967 although an entropy function exists. run_100_agents_audit aggregates and persists these results. Some file-existence/listing checks are real, but do not substantiate the unrelated security/formal/physical conclusions. This confirms an audit-evidence fabrication mechanism in code; the script was not run.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py",
+        "start_line": 64,
+        "end_line": 114,
+        "observation": "Ring-0 claims are mostly unconditional strings under a default PASS."
+      },
+      {
+        "path": "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py",
+        "start_line": 120,
+        "end_line": 154,
+        "observation": "Formal cohort assigns certification strings without compiling/checking proofs."
+      },
+      {
+        "path": "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py",
+        "start_line": 160,
+        "end_line": 174,
+        "observation": "Entropy measurement is a constant, not the function at 51-58."
+      },
+      {
+        "path": "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py",
+        "start_line": 324,
+        "end_line": 362,
+        "observation": "Results are counted and emitted as a structured SITREP."
+      },
+      {
+        "path": "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py",
+        "start_line": 367,
+        "end_line": 381,
+        "observation": "CLI persists and presents the aggregate as an audit report."
+      }
+    ],
+    "group": "S6 — Verificación y auditoría",
+    "source_sha256": "32cef58031bab84d9fb78b0cbb3ab132008d6f7431f4fe4f6c29da34a8b8876a",
+    "title": "Full-spectrum auditor emits PASS and certified measurements without performing checks"
+  },
+  {
+    "candidate_id": "SW100-C0354",
+    "path": "scripts/c5_sharur/sharur_100_swarm_execution.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "Each supposed audit agent only selects a descriptive target and sleeps, then returns PASS, deterministic synthetic exergy and silicon-verified evidence. Aggregate counts and critical_fixes_attested are literals; the JSON report has no simulation flag. This contradicts the script purpose of auditing/certifying fixes and produces unsupported machine-readable evidence. No report generation or target auditing was executed in this review.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_sharur/sharur_100_swarm_execution.py",
+        "start_line": 1,
+        "end_line": 5,
+        "observation": "Header presents the harness as auditing/certifying resolution of findings."
+      },
+      {
+        "path": "scripts/c5_sharur/sharur_100_swarm_execution.py",
+        "start_line": 149,
+        "end_line": 175,
+        "observation": "Worker sleeps and returns constant verification-shaped result."
+      },
+      {
+        "path": "scripts/c5_sharur/sharur_100_swarm_execution.py",
+        "start_line": 178,
+        "end_line": 202,
+        "observation": "Sitrep hardcodes passes/fix attestation and writes JSON."
+      }
+    ],
+    "group": "S6 — Verificación y auditoría",
+    "source_sha256": "84b155a4f3ff7c106ba7e9eb9e3068bc123d5976757e353da78223b966e324d1",
+    "title": "Label simulated audit results instead of emitting verified passes"
+  },
+  {
+    "candidate_id": "SW100-C0378",
+    "path": "scripts/c5_destiladora/proof_emitter_lean4.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "The emitter selects z3_precondition but never uses it to instantiate the Lean proof. Every cluster receives the fixed state-machine template parameterized by signature prefix/file count, and successful Lean exit marks the cluster PROVED. Its claimed Rust-isomorphic gate checks poisoned, sequence and writer state, while downstream codegen consumes PROVED rows and emits only full signature/file-count checks. Thus neither the extracted precondition nor the implementation correspondence is established by the generated proof. No Lean compiler, generated binary or database mutation was executed.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_destiladora/proof_emitter_lean4.py",
+        "start_line": 54,
+        "end_line": 92,
+        "observation": "Fixed Lean model includes poison/sequence/writer conditions and a signature prefix."
+      },
+      {
+        "path": "scripts/c5_destiladora/proof_emitter_lean4.py",
+        "start_line": 164,
+        "end_line": 198,
+        "observation": "z3_precondition is queried but omitted from the template parameters."
+      },
+      {
+        "path": "scripts/c5_destiladora/proof_emitter_lean4.py",
+        "start_line": 203,
+        "end_line": 220,
+        "observation": "Lean compilation success updates proof and cluster status to PROVED."
+      },
+      {
+        "path": "scripts/c5_destiladora/codegen_rust_b60.py",
+        "start_line": 28,
+        "end_line": 65,
+        "observation": "Generator selects PROVED rows and builds signature/file-count specs."
+      },
+      {
+        "path": "scripts/c5_destiladora/codegen_rust_b60.py",
+        "start_line": 124,
+        "end_line": 134,
+        "observation": "Generated function checks only signature and file count."
+      }
+    ],
+    "group": "S6 — Verificación y auditoría",
+    "source_sha256": "e0f85cdf754c6d4ea3e1367176dd7eb3caa296a82d07eb86f7f976b5b70cf85c",
+    "title": "PROVED status certifies a fixed model unrelated to extracted preconditions"
+  },
+  {
+    "candidate_id": "SW100-C0360",
+    "path": "scripts/babylon60/gen_oncology_primitives.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "The generated axiom applies to every List OncologyPrimitive, while the structure is constructible using empty strings and PrimitiveLayer.meta. Applying it to List.replicate 301 p yields False from a provable length inequality. This confirms a logical inconsistency in the emitted axiom, independent of runtime containment; no Lean compiler or proof was executed.",
+    "source_checks": [
+      {
+        "path": "scripts/babylon60/gen_oncology_primitives.py",
+        "start_line": 85,
+        "end_line": 103,
+        "observation": "The namespace contains an inhabited PrimitiveLayer and a freely constructible OncologyPrimitive structure."
+      },
+      {
+        "path": "scripts/babylon60/gen_oncology_primitives.py",
+        "start_line": 142,
+        "end_line": 152,
+        "observation": "The generator unconditionally emits the universal list-length axiom and writes it."
+      },
+      {
+        "path": "scripts/babylon60/gen_oncology_primitives.py",
+        "start_line": 155,
+        "end_line": 167,
+        "observation": "The CLI always requests Lean export after parsing."
+      }
+    ],
+    "group": "S6 — Verificación y auditoría",
+    "source_sha256": "df8f6fdde757fb4321a270e0b6b2e9b91d8dd67884e13b238e3c6387b2dea5e3",
+    "title": "Remove globally inconsistent list-length axiom from generated Lean"
+  },
+  {
+    "candidate_id": "SW100-C0385",
+    "path": "scripts/c5_destiladora/test_destiladora_e2e.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "The E2E script explicitly passes repository data/cortex_memory.db to ingestion and inserts three synthetic successful traces. It then updates every cortex_invariant_clusters row to ACCUMULATING/UNTESTED without WHERE and feeds that database to extraction/proof/code generation. The ingestor commits these records and increments existing sample counts. Running this demonstration can contaminate persistent evidence and reset existing cluster status; the script was not run and operator databases were not read.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_destiladora/test_destiladora_e2e.py",
+        "start_line": 29,
+        "end_line": 38,
+        "observation": "DB_PATH points to repository data/cortex_memory.db."
+      },
+      {
+        "path": "scripts/c5_destiladora/test_destiladora_e2e.py",
+        "start_line": 61,
+        "end_line": 98,
+        "observation": "Synthetic traces enter that DB; unqualified UPDATE resets all clusters; downstream extractor consumes it."
+      },
+      {
+        "path": "scripts/c5_destiladora/goal_trace_ingestor.py",
+        "start_line": 20,
+        "end_line": 21,
+        "observation": "Default operational DB is the same path."
+      },
+      {
+        "path": "scripts/c5_destiladora/goal_trace_ingestor.py",
+        "start_line": 70,
+        "end_line": 114,
+        "observation": "Writes are committed and cluster sample_count is incremented."
+      }
+    ],
+    "group": "S6 — Verificación y auditoría",
+    "source_sha256": "4faf9b3fddcdb37f6ba083bdf5fe813c46ae3bd230ad35617c9a5088492a70de",
+    "title": "E2E script contaminates and resets the persistent CORTEX database"
+  }
+]

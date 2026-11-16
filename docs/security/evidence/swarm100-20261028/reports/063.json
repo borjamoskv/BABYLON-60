@@ -1,0 +1,372 @@
+{
+  "shard": "063",
+  "findings": [
+    {
+      "title": "JSON telemetry is preceded by an unconditional banner",
+      "severity": "P2",
+      "path": "scripts/c5_sharur/sharur_21_agentes.py",
+      "line": 121,
+      "evidence": "Lines 121\u2013123 print a banner unconditionally; --json only controls per-agent printing and the final json.dumps at lines 149\u2013150.",
+      "trigger": "Invoke the documented --json mode and parse stdout as JSON.",
+      "impact": "A JSON consumer rejects stdout even when all underlying commands complete; the advertised M2M output contract is broken.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Code generation records uncompiled rules as compiled and active",
+      "severity": "P2",
+      "path": "scripts/c5_destiladora/codegen_rust_b60.py",
+      "line": 191,
+      "evidence": "After writing Rust, lines 191\u2013205 insert execution_time_ns=180000 and update status=COMPILED without invoking a compiler or timing execution. destiladora_schema.sql lines 55\u201360 describe measured latency and default active_in_ring0=1; test_destiladora_e2e.py only invokes cargo later at line 133.",
+      "trigger": "Run generate_rust_fastpath with a proved cluster, including one whose generated Rust fails compilation.",
+      "impact": "Persistent rule metadata advertises compilation, activation and measured execution time before those facts are established, and remains so if the later compilation fails.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Rekor public key contract disagrees with both ledger callers",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/crypto/rekor_client.py",
+      "line": 56,
+      "evidence": "anchor_payload documents public_key_pem and base64-encodes its UTF-8 contents into publicKey.content. ledger_actor.py lines 341\u2013352 and cortex_persist_ledger.py lines 804\u2013815 instead pass base64 of the raw 32-byte NaCl verification key. Thus the submitted key decodes to base64 text rather than the promised PEM public key.",
+      "trigger": "Either ledger uses the default RekorClient to anchor its head.",
+      "impact": "The callers do not satisfy the client key encoding contract; anchoring requests contain an incorrectly serialized public key. Remote acceptance was not tested.",
+      "confidence": "high",
+      "kind": "runtime"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".agents/skills/c5-wetware-and-venture-ops-project/scripts/route.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          8
+        ]
+      ],
+      "manifest_sha256": "88aac236a6050ef905dba48128adb132657dd3b16cb03ce302ea59b89117ab09",
+      "observed_sha256": "88aac236a6050ef905dba48128adb132657dd3b16cb03ce302ea59b89117ab09",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-kernel/src/lib.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          20
+        ]
+      ],
+      "manifest_sha256": "3872cc9866d104b222f4bba3b2bdcde27afc6ec13969287348c4f17953bdc29e",
+      "observed_sha256": "3872cc9866d104b222f4bba3b2bdcde27afc6ec13969287348c4f17953bdc29e",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/bft/bounty_cold_ledger.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          177
+        ]
+      ],
+      "manifest_sha256": "09a3b4d98b95696f1a02f0cc5ed53fcd6a66b5cbb6b5ea18fe899023e0aee656",
+      "observed_sha256": "09a3b4d98b95696f1a02f0cc5ed53fcd6a66b5cbb6b5ea18fe899023e0aee656",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/crypto/rekor_client.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          95
+        ]
+      ],
+      "manifest_sha256": "e37c6a359b59b24b841014d15487356b08e080500571f39503002dc51daa2321",
+      "observed_sha256": "e37c6a359b59b24b841014d15487356b08e080500571f39503002dc51daa2321",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/transducers/__init__.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          4
+        ]
+      ],
+      "manifest_sha256": "9e571cd9dd1dbc07ab83f8737886e1bf429780be12009a79c36975bdcfcb3e3c",
+      "observed_sha256": "9e571cd9dd1dbc07ab83f8737886e1bf429780be12009a79c36975bdcfcb3e3c",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/cortex/transducers/video_remotion/package-lock.json",
+      "status": "reviewed_partial",
+      "ranges": [
+        [
+          1,
+          100
+        ]
+      ],
+      "manifest_sha256": "6febe59b9d5657720772c7410161210a32bbc74d4f15795e0841191e85f98614",
+      "observed_sha256": "6febe59b9d5657720772c7410161210a32bbc74d4f15795e0841191e85f98614",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "crates/babylon-attest/src/lib.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          6
+        ]
+      ],
+      "manifest_sha256": "b7678295e70b056473a5bf0d0f5af98f6e8fc3644080794ca6de1f1e0ece6960",
+      "observed_sha256": "b7678295e70b056473a5bf0d0f5af98f6e8fc3644080794ca6de1f1e0ece6960",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "docs/06_theory/04_chaitin_kolmogorov.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          41
+        ]
+      ],
+      "manifest_sha256": "e36b23e28c853e89470f341ae31bf74094202f52fb6d9a24ecbdee69fe2fde36",
+      "observed_sha256": "e36b23e28c853e89470f341ae31bf74094202f52fb6d9a24ecbdee69fe2fde36",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "examples/archived_peripherals/codex_virtual_hud.py.disabled",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          124
+        ]
+      ],
+      "manifest_sha256": "fc613eea726d06ae2bf064f03cdda075cf6c407501ac857e9f47278bc4f67ee9",
+      "observed_sha256": "fc613eea726d06ae2bf064f03cdda075cf6c407501ac857e9f47278bc4f67ee9",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/aider_local.sh",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          20
+        ]
+      ],
+      "manifest_sha256": "38c6ecbb283b494159f387fd171df140e58eae18477a57d1298313fa0a71637e",
+      "observed_sha256": "38c6ecbb283b494159f387fd171df140e58eae18477a57d1298313fa0a71637e",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/c5_destiladora/codegen_rust_b60.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          212
+        ]
+      ],
+      "manifest_sha256": "8ee34a5eb6ff6926058da864ba632c9701689383f8deb67b2cd166ef3bfc13bf",
+      "observed_sha256": "8ee34a5eb6ff6926058da864ba632c9701689383f8deb67b2cd166ef3bfc13bf",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/c5_sharur/sharur_21_agentes.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          159
+        ]
+      ],
+      "manifest_sha256": "a92edd32f39a522c0ed62042b221f8bde4a88b3c02d975675015a2972dafc5dc",
+      "observed_sha256": "a92edd32f39a522c0ed62042b221f8bde4a88b3c02d975675015a2972dafc5dc",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "src/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          68
+        ]
+      ],
+      "manifest_sha256": "f91e71dac1f542041ea0fadecf2e7b480cb9bdf85e7d97a4f7b352f45d98626e",
+      "observed_sha256": "f91e71dac1f542041ea0fadecf2e7b480cb9bdf85e7d97a4f7b352f45d98626e",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/seqlock_loom.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          299
+        ]
+      ],
+      "manifest_sha256": "8d8c2b28a069eb9f913254c8a809cdc97b83efca658403205693053fa554e4b1",
+      "observed_sha256": "8d8c2b28a069eb9f913254c8a809cdc97b83efca658403205693053fa554e4b1",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/test_ghost_node_detector.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          84
+        ]
+      ],
+      "manifest_sha256": "ca68235613e5ba037240bcff5474dd1e0f2b9d3f81d2967b169be0809de50e0e",
+      "observed_sha256": "ca68235613e5ba037240bcff5474dd1e0f2b9d3f81d2967b169be0809de50e0e",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/test_windows_migration_gate.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          190
+        ]
+      ],
+      "manifest_sha256": "219c390dd91735dd6fe106d57418d17bc745c9827562aaf17bea8185b23fecd3",
+      "observed_sha256": "219c390dd91735dd6fe106d57418d17bc745c9827562aaf17bea8185b23fecd3",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/bot-management/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          169
+        ]
+      ],
+      "manifest_sha256": "4db2a9e3507dac50ebaa419bf6e54a5d26a7cc52c743735a444dd43591614c1c",
+      "observed_sha256": "4db2a9e3507dac50ebaa419bf6e54a5d26a7cc52c743735a444dd43591614c1c",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/pages-functions/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          98
+        ]
+      ],
+      "manifest_sha256": "7961024c9fafd29555b98395a738b1c434ac27dc243c8efdf3a0d08dc0cf5c6a",
+      "observed_sha256": "7961024c9fafd29555b98395a738b1c434ac27dc243c8efdf3a0d08dc0cf5c6a",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/tunnel/networking.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          168
+        ]
+      ],
+      "manifest_sha256": "99f51bcb065fdd62df94aa116f11effde03d81c4299f369770492346add235ca",
+      "observed_sha256": "99f51bcb065fdd62df94aa116f11effde03d81c4299f369770492346add235ca",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/youtube-remotion-sota/agents/openai.yaml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          4
+        ]
+      ],
+      "manifest_sha256": "70cf7ca880bd6c22419dbf9b9986bd4c58984d9ff10143ff968c85989b9595d0",
+      "observed_sha256": "70cf7ca880bd6c22419dbf9b9986bd4c58984d9ff10143ff968c85989b9595d0",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents/agent_31_site_playbooks_ebay.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "manifest_sha256": "d2a1b174208133d53a107fe5ca8a2cb221a77a04c3c5bd9ef41fb70ef4f65210",
+      "observed_sha256": "d2a1b174208133d53a107fe5ca8a2cb221a77a04c3c5bd9ef41fb70ef4f65210",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/cortex-skill-genesis/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          82
+        ]
+      ],
+      "manifest_sha256": "b96a00ff722c0e117a6052cf619a30bd8356170bda3efc9bb406fd18ae300019",
+      "observed_sha256": "b96a00ff722c0e117a6052cf619a30bd8356170bda3efc9bb406fd18ae300019",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/github-architect/references/upstream_github_spec.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          117
+        ]
+      ],
+      "manifest_sha256": "11fb8cf604ced4238d0e73512c3627555f4a99cbd533f4978aab18e6fb378ec8",
+      "observed_sha256": "11fb8cf604ced4238d0e73512c3627555f4a99cbd533f4978aab18e6fb378ec8",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/flstudio-mcp-production/examples/Satin_Jackets_Penrose.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          101
+        ]
+      ],
+      "manifest_sha256": "d31de1c830a8e1799abe4163e74e46293281254f12beb0894a1baa715e2295c0",
+      "observed_sha256": "d31de1c830a8e1799abe4163e74e46293281254f12beb0894a1baa715e2295c0",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/workspace/lora-swarm-pipeline/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          41
+        ]
+      ],
+      "manifest_sha256": "06b45ee6bcca7134edbcc9dee36708208679b2266270c01b0192529cd77fa6b2",
+      "observed_sha256": "06b45ee6bcca7134edbcc9dee36708208679b2266270c01b0192529cd77fa6b2",
+      "changed_since_manifest": false
+    }
+  ],
+  "tool_limitations": [
+    "No codebase-memory graph tools exposed in ALL_TOOLS; used targeted text reads and rg.",
+    "package-lock.json reviewed only lines 1\u2013100; remaining dependency entries were not reviewed.",
+    "No tests, runtime executions, remote API calls, or external documentation validation performed as instructed."
+  ],
+  "tests_run": []
+}

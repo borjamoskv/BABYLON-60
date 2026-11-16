@@ -1,0 +1,1006 @@
+{
+  "main_head": "15eeb1788ceb3f62d51fdb1a6c702cfd4996ac3d",
+  "records": [
+    {
+      "path": ".agents/skills/c5-ring0-babylon-kernel-project/references/modules/thermo-audit/MODULE.md",
+      "captured_sha256": "9cd985ce2e029415825cca5c06c36d04287f9a32d9179f63bb74c0ed1a755ec2",
+      "head_tracked": true,
+      "head_sha256": "9cd985ce2e029415825cca5c06c36d04287f9a32d9179f63bb74c0ed1a755ec2",
+      "same_as_capture": true
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/lib.rs",
+      "captured_sha256": "3fea108275672570af2d64b029e4cfd057bf8cc165cc9fdaa34ec9222890f9a2",
+      "head_tracked": true,
+      "head_sha256": "3fea108275672570af2d64b029e4cfd057bf8cc165cc9fdaa34ec9222890f9a2",
+      "same_as_capture": true
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-kernel/src/semantic_entropy.rs",
+      "captured_sha256": "1208444705ee1771c887586f24d7b7a85673865419c3687632ca0e3debd2e240",
+      "head_tracked": true,
+      "head_sha256": "1208444705ee1771c887586f24d7b7a85673865419c3687632ca0e3debd2e240",
+      "same_as_capture": true
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-kernel/tests/stress_semantic_entropy_100k.rs",
+      "captured_sha256": "ad7fbd66505a043fff51c74187e3026801a4c267a382138e73ece3f5f056df3a",
+      "head_tracked": true,
+      "head_sha256": "ad7fbd66505a043fff51c74187e3026801a4c267a382138e73ece3f5f056df3a",
+      "same_as_capture": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/cli/llm_attest.py",
+      "captured_sha256": "236a0c06217d58a77c9ce965d749250f5b686914997e5eaca3c7082e34db59b1",
+      "head_tracked": true,
+      "head_sha256": "236a0c06217d58a77c9ce965d749250f5b686914997e5eaca3c7082e34db59b1",
+      "same_as_capture": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/mcp/effect_dispatch.py",
+      "captured_sha256": "359bf7595fc9283977e122ef16177e06bb34eb1565e522ab221387a79cab7dee",
+      "head_tracked": true,
+      "head_sha256": "359bf7595fc9283977e122ef16177e06bb34eb1565e522ab221387a79cab7dee",
+      "same_as_capture": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/memory/__init__.py",
+      "captured_sha256": "71fbf235a5134fe2a65224a535a0c5319318a86617d06d26aeabd40ca84a2204",
+      "head_tracked": true,
+      "head_sha256": "71fbf235a5134fe2a65224a535a0c5319318a86617d06d26aeabd40ca84a2204",
+      "same_as_capture": true
+    },
+    {
+      "path": "01_KISH_ENGINE/cortex/crates/cortex-core/src/provenance.rs",
+      "captured_sha256": "1c2f8693ce5c9cdb4faabdc1336730745b8ba5930426bce0555418b525de54ae",
+      "head_tracked": true,
+      "head_sha256": "1c2f8693ce5c9cdb4faabdc1336730745b8ba5930426bce0555418b525de54ae",
+      "same_as_capture": true
+    },
+    {
+      "path": "01_KISH_ENGINE/cortex/crates/cortex-core/src/reopen.rs",
+      "captured_sha256": "3319c6c9ae845995af9df533f6dfa67e1b55b270081ef5754d15af2a3e8db13a",
+      "head_tracked": true,
+      "head_sha256": "3319c6c9ae845995af9df533f6dfa67e1b55b270081ef5754d15af2a3e8db13a",
+      "same_as_capture": true
+    },
+    {
+      "path": "Cargo.lock",
+      "captured_sha256": "5fb00af45f542e23eafdd82cbd6bd7a08c40675f5310f7a24f7b782b578ad6c6",
+      "head_tracked": true,
+      "head_sha256": "5fb00af45f542e23eafdd82cbd6bd7a08c40675f5310f7a24f7b782b578ad6c6",
+      "same_as_capture": true
+    },
+    {
+      "path": "README.md",
+      "captured_sha256": "32743efd67d92c8f28608191616428a6b956137f3f067da5946bcffcf08bb26e",
+      "head_tracked": true,
+      "head_sha256": "32743efd67d92c8f28608191616428a6b956137f3f067da5946bcffcf08bb26e",
+      "same_as_capture": true
+    },
+    {
+      "path": "crates/babylon-skills-mcp/src/lib.rs",
+      "captured_sha256": "789611513b90d1dfee802d49ef3914379369b0f9503ac468e5688c04d1f64b98",
+      "head_tracked": true,
+      "head_sha256": "789611513b90d1dfee802d49ef3914379369b0f9503ac468e5688c04d1f64b98",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/00_index.md",
+      "captured_sha256": "e171526cad4eb08fd5150020b1b75f30026b59bc7993807f6f69037911361b50",
+      "head_tracked": true,
+      "head_sha256": "e171526cad4eb08fd5150020b1b75f30026b59bc7993807f6f69037911361b50",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/01_spec/spec_architecture.md",
+      "captured_sha256": "1a8220f7036873c55fbac7866ae854585aa577399d52bf672385e186b69a49c7",
+      "head_tracked": true,
+      "head_sha256": "1a8220f7036873c55fbac7866ae854585aa577399d52bf672385e186b69a49c7",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/01_spec/spec_cryptographic_profile.md",
+      "captured_sha256": "12185dbe327866b10fc130d151ffcba977c6b23483ad29a01df0f70dffa23b24",
+      "head_tracked": true,
+      "head_sha256": "12185dbe327866b10fc130d151ffcba977c6b23483ad29a01df0f70dffa23b24",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/01_spec/spec_exergy_ontology.md",
+      "captured_sha256": "8855cb9beb0116ce4a8398b1848e9f3178e8e1be70f073726bde2707d126dea5",
+      "head_tracked": true,
+      "head_sha256": "8855cb9beb0116ce4a8398b1848e9f3178e8e1be70f073726bde2707d126dea5",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/01_spec/spec_graph_canonical.md",
+      "captured_sha256": "72da4621117a3f5333143ab780206b5df0ef0ead44a24be7bcad845291ac9edd",
+      "head_tracked": true,
+      "head_sha256": "72da4621117a3f5333143ab780206b5df0ef0ead44a24be7bcad845291ac9edd",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/01_spec/spec_invariants.md",
+      "captured_sha256": "ea7500a3a435709e7f7e9e32c8e2c2f5b34e7a5bb825d02563d0707c8bd6b503",
+      "head_tracked": true,
+      "head_sha256": "ea7500a3a435709e7f7e9e32c8e2c2f5b34e7a5bb825d02563d0707c8bd6b503",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/01_spec/spec_security_model.md",
+      "captured_sha256": "8610e95a9e9b5cab6c87232bbfb9563925535bfe141c5ef06a146f381f77d93b",
+      "head_tracked": true,
+      "head_sha256": "8610e95a9e9b5cab6c87232bbfb9563925535bfe141c5ef06a146f381f77d93b",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/01_spec/spec_semantic_entropy_dual_firewall.md",
+      "captured_sha256": "0171ddf3dc6bc1e86fa2e987914c7ab8a3d17f33e0c05287e87b284b43922be8",
+      "head_tracked": true,
+      "head_sha256": "0171ddf3dc6bc1e86fa2e987914c7ab8a3d17f33e0c05287e87b284b43922be8",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/03_guides/agent_contracts.md",
+      "captured_sha256": "4f137f727344d4ee7b746c746958d234fb37e16af33d5968216952faf06a3cae",
+      "head_tracked": true,
+      "head_sha256": "4f137f727344d4ee7b746c746958d234fb37e16af33d5968216952faf06a3cae",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/06_theory/00_index.md",
+      "captured_sha256": "c095bf496e972f8c6f3f4fa5372905a7923d4790fd69c4de50268cbfb50f7762",
+      "head_tracked": true,
+      "head_sha256": "c095bf496e972f8c6f3f4fa5372905a7923d4790fd69c4de50268cbfb50f7762",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/06_theory/BABYLON60_PROOF_CARRYING_EXECUTION.md",
+      "captured_sha256": "4467a1331e8e4cc36c4da70c480664fde3ac457733f964b2eb170e63528c2378",
+      "head_tracked": true,
+      "head_sha256": "4467a1331e8e4cc36c4da70c480664fde3ac457733f964b2eb170e63528c2378",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/README.md",
+      "captured_sha256": "809a2d7ff63da985e64bc139cedf6802b37c716bda8f8bceb65ac1bca1407045",
+      "head_tracked": true,
+      "head_sha256": "809a2d7ff63da985e64bc139cedf6802b37c716bda8f8bceb65ac1bca1407045",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/fl-mcp01-authority-drift.md",
+      "captured_sha256": "49697145d6f63f79bbb50029dc67a82d9d77dfaa7c2704b114f767c0ef2bba7b",
+      "head_tracked": true,
+      "head_sha256": "49697145d6f63f79bbb50029dc67a82d9d77dfaa7c2704b114f767c0ef2bba7b",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/wheel-102-runtime-regressions-2026-10-24.md",
+      "captured_sha256": "cc41718123c3e0bafde59ee8ec1ba7c80c45d9c553ecd052739851221e761741",
+      "head_tracked": true,
+      "head_sha256": "cc41718123c3e0bafde59ee8ec1ba7c80c45d9c553ecd052739851221e761741",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/skills-lock.json",
+      "captured_sha256": "5fc2b22858104e53dd647179a4ea005b4c2965d6539d13a7cbe45cdc364c7caa",
+      "head_tracked": true,
+      "head_sha256": "92b7434e39a4043cceb29da86ab56db28f9ff95b790d3f274cf6eb265a5953be",
+      "same_as_capture": false
+    },
+    {
+      "path": "scripts/c5_cli/markov_bridge.py",
+      "captured_sha256": "91d27a7a9b4adbbdc599076978d2941a90012df856c50a30bee7aacb2f1d72dc",
+      "head_tracked": true,
+      "head_sha256": "91d27a7a9b4adbbdc599076978d2941a90012df856c50a30bee7aacb2f1d72dc",
+      "same_as_capture": true
+    },
+    {
+      "path": "scripts/c5_demos/SemanticEntropyApoptosis.lean",
+      "captured_sha256": "60404fc42537b71063183fcbf78ec43b19afd37357485bf261e815d5d1c227d1",
+      "head_tracked": true,
+      "head_sha256": "60404fc42537b71063183fcbf78ec43b19afd37357485bf261e815d5d1c227d1",
+      "same_as_capture": true
+    },
+    {
+      "path": "scripts/c5_demos/poc_graph_isomorphism_wl.py",
+      "captured_sha256": "ac10dfda74ebe68926f6ad7b82e6f3611ed736f2bef819c09fb638de5d7cc095",
+      "head_tracked": true,
+      "head_sha256": "ac10dfda74ebe68926f6ad7b82e6f3611ed736f2bef819c09fb638de5d7cc095",
+      "same_as_capture": true
+    },
+    {
+      "path": "scripts/c5_isomorphisms/c5_ultimate_causal_determinant.py",
+      "captured_sha256": "138dcb231d90607494c8f48f3146433188beda2cc2aff6ca73b58092e35bece1",
+      "head_tracked": true,
+      "head_sha256": "138dcb231d90607494c8f48f3146433188beda2cc2aff6ca73b58092e35bece1",
+      "same_as_capture": true
+    },
+    {
+      "path": "skills-lock.json",
+      "captured_sha256": "5fc2b22858104e53dd647179a4ea005b4c2965d6539d13a7cbe45cdc364c7caa",
+      "head_tracked": true,
+      "head_sha256": "92b7434e39a4043cceb29da86ab56db28f9ff95b790d3f274cf6eb265a5953be",
+      "same_as_capture": false
+    },
+    {
+      "path": "tests/test_inv_c5_28_falsification.py",
+      "captured_sha256": "a1d46874571b8d2bb78061a6311362b7755582b36f4af662172419a488971686",
+      "head_tracked": true,
+      "head_sha256": "a1d46874571b8d2bb78061a6311362b7755582b36f4af662172419a488971686",
+      "same_as_capture": true
+    },
+    {
+      "path": "tests/test_markov_bridge.py",
+      "captured_sha256": "e056f066cb884228b2591ac12379fcd9b493666010190e53e3ad1e0fa8f12077",
+      "head_tracked": true,
+      "head_sha256": "e056f066cb884228b2591ac12379fcd9b493666010190e53e3ad1e0fa8f12077",
+      "same_as_capture": true
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/semantic_solver.rs",
+      "captured_sha256": "d1b83c17afb3f8955a5af3b6790db207e64c5448c3481e9e4b8fda6f3f5c4bf4",
+      "head_tracked": true,
+      "head_sha256": "d1b83c17afb3f8955a5af3b6790db207e64c5448c3481e9e4b8fda6f3f5c4bf4",
+      "same_as_capture": true
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/solver_replay.rs",
+      "captured_sha256": "1ad2d4a4ceb2b0e417f003fe356db342a43422faa8315fcb2b65d471c7950a3b",
+      "head_tracked": true,
+      "head_sha256": "1ad2d4a4ceb2b0e417f003fe356db342a43422faa8315fcb2b65d471c7950a3b",
+      "same_as_capture": true
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-compiler/tests/semantic_solver_adapter.rs",
+      "captured_sha256": "7c42d174d9b8d568fbf44b42240d56bd9bd1fb839ec271af2457e62ec5b355f0",
+      "head_tracked": true,
+      "head_sha256": "7c42d174d9b8d568fbf44b42240d56bd9bd1fb839ec271af2457e62ec5b355f0",
+      "same_as_capture": true
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-compiler/tests/solver_trust.rs",
+      "captured_sha256": "5cc1fb29d504fe3b2488a05b851b1ede1391a9246c0da9a1fe33be740e2ba4ff",
+      "head_tracked": true,
+      "head_sha256": "5cc1fb29d504fe3b2488a05b851b1ede1391a9246c0da9a1fe33be740e2ba4ff",
+      "same_as_capture": true
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-compiler/tests/support/solver_trust_support.rs",
+      "captured_sha256": "96c0244e0f3a43bfe1698c6b74dc27266301790b5f97069014af1cae25fcc35e",
+      "head_tracked": true,
+      "head_sha256": "96c0244e0f3a43bfe1698c6b74dc27266301790b5f97069014af1cae25fcc35e",
+      "same_as_capture": true
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-kernel/tests/semantic_entropy_regressions.rs",
+      "captured_sha256": "a14f30e7da74e6c676d346924bc82601bda4035d39fc6708a31e5b58aac8cc59",
+      "head_tracked": true,
+      "head_sha256": "a14f30e7da74e6c676d346924bc82601bda4035d39fc6708a31e5b58aac8cc59",
+      "same_as_capture": true
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-kernel/tests/semantic_solver_outcomes.rs",
+      "captured_sha256": "907f9b7cc1dcc9652bf719a8764b4ba532c426fa0cd3923d16315a91927ad7cd",
+      "head_tracked": true,
+      "head_sha256": "907f9b7cc1dcc9652bf719a8764b4ba532c426fa0cd3923d16315a91927ad7cd",
+      "same_as_capture": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/cortex/approval_experiment.py",
+      "captured_sha256": "fd46a0f156218f4d75db811f8cbe8713d1cfd66051c805d08d0783afeade66ed",
+      "head_tracked": true,
+      "head_sha256": "fd46a0f156218f4d75db811f8cbe8713d1cfd66051c805d08d0783afeade66ed",
+      "same_as_capture": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/cortex/approval_human_trial.py",
+      "captured_sha256": "4d1a85f1ee3e96ec8b7c510158aafb412becd698820100b42571c929a8898210",
+      "head_tracked": true,
+      "head_sha256": "4d1a85f1ee3e96ec8b7c510158aafb412becd698820100b42571c929a8898210",
+      "same_as_capture": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/cortex/approval_integrity.py",
+      "captured_sha256": "001e67071bd02091ed7f059f1e4a23af54980928758e250c6ebb0fda40e0c24e",
+      "head_tracked": true,
+      "head_sha256": "001e67071bd02091ed7f059f1e4a23af54980928758e250c6ebb0fda40e0c24e",
+      "same_as_capture": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/cortex/approval_trial_cases.py",
+      "captured_sha256": "0f77482375c93ff65e8d335587c6136555108bad9b715e905f201ad02a1e1b51",
+      "head_tracked": true,
+      "head_sha256": "0f77482375c93ff65e8d335587c6136555108bad9b715e905f201ad02a1e1b51",
+      "same_as_capture": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/cortex/approval_trial_status.py",
+      "captured_sha256": "af5b8c25dead4af45d192cbb6c2fbd7c33c0fa253b7026cb2f03ed4e4f10c799",
+      "head_tracked": true,
+      "head_sha256": "af5b8c25dead4af45d192cbb6c2fbd7c33c0fa253b7026cb2f03ed4e4f10c799",
+      "same_as_capture": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/memory/provenance_arbiter.py",
+      "captured_sha256": "e0a3488fcfd1f231c7d3e0c34e92262c4e028b1b8bd65e908d4404a51d482342",
+      "head_tracked": true,
+      "head_sha256": "e0a3488fcfd1f231c7d3e0c34e92262c4e028b1b8bd65e908d4404a51d482342",
+      "same_as_capture": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/verification/finding_contract.py",
+      "captured_sha256": "8ded45ed596a822eeaddd371d8c48887ad31e6d8bb12a2ec78cde8c679336512",
+      "head_tracked": true,
+      "head_sha256": "8ded45ed596a822eeaddd371d8c48887ad31e6d8bb12a2ec78cde8c679336512",
+      "same_as_capture": true
+    },
+    {
+      "path": "crates/babylon-skills-mcp/src/confined_fs.rs",
+      "captured_sha256": "8847dc4d15854871b9922b01f71e4a57919314b70dda1090d0ebf5697313bc39",
+      "head_tracked": true,
+      "head_sha256": "8847dc4d15854871b9922b01f71e4a57919314b70dda1090d0ebf5697313bc39",
+      "same_as_capture": true
+    },
+    {
+      "path": "crates/babylon-skills-mcp/tests/fl_path01_capability_root_escape.rs",
+      "captured_sha256": "218fa6be7f1a12623239f4855ec9c6193c202bf61c250a7eaa991d9e523524c8",
+      "head_tracked": true,
+      "head_sha256": "218fa6be7f1a12623239f4855ec9c6193c202bf61c250a7eaa991d9e523524c8",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/01_spec/AUDIT_SCIENTIFIC_GUARANTEES_2026.md",
+      "captured_sha256": "1b9f2f1c494fdb936c6f9ae9fbb8d37a98a7aad8a9caabe7b2d3bf509ba1e2eb",
+      "head_tracked": true,
+      "head_sha256": "1b9f2f1c494fdb936c6f9ae9fbb8d37a98a7aad8a9caabe7b2d3bf509ba1e2eb",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/01_spec/evidence/algorithm-repairs-20261026.json",
+      "captured_sha256": "ab5acb7b8744d26bc065ff24fb2a60c06b7c93fb5a215be29f3257ae243bfa2e",
+      "head_tracked": true,
+      "head_sha256": "ab5acb7b8744d26bc065ff24fb2a60c06b7c93fb5a215be29f3257ae243bfa2e",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/01_spec/evidence/scientific-guarantees-20261026.json",
+      "captured_sha256": "344d700347f7e6ae65c7f9a38711702c07224b5c15b77fa9a0c2b0f3ceaff075",
+      "head_tracked": true,
+      "head_sha256": "344d700347f7e6ae65c7f9a38711702c07224b5c15b77fa9a0c2b0f3ceaff075",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/01_spec/evidence/solver-adapter-20261026.json",
+      "captured_sha256": "0e3a0872109cb28020a3e5d24f3a53d8219d100ebf60d7ad8a86f46f83ae91e7",
+      "head_tracked": true,
+      "head_sha256": "0e3a0872109cb28020a3e5d24f3a53d8219d100ebf60d7ad8a86f46f83ae91e7",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/01_spec/evidence/solver-outcomes-20261026.json",
+      "captured_sha256": "a83ac2570d17f6e79951add53e76973f41a4559cd2f48384bb9ee3665dcdf7f8",
+      "head_tracked": true,
+      "head_sha256": "a83ac2570d17f6e79951add53e76973f41a4559cd2f48384bb9ee3665dcdf7f8",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/01_spec/spec_finding_evidence_contract.md",
+      "captured_sha256": "11684f7b416b7ed2949d44a10da74771b51559948034c0a03a96d72d0583fde6",
+      "head_tracked": true,
+      "head_sha256": "11684f7b416b7ed2949d44a10da74771b51559948034c0a03a96d72d0583fde6",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/06_theory/AUDIT_LEAN_SCOPE_2026.md",
+      "captured_sha256": "c2211920f97727ba5291f804b484fb0bc7e62642b730ce4d5e77d0c8eec6c2fa",
+      "head_tracked": true,
+      "head_sha256": "c2211920f97727ba5291f804b484fb0bc7e62642b730ce4d5e77d0c8eec6c2fa",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/06_theory/evidence/lean-harness-20261026.json",
+      "captured_sha256": "ac7f462b8cc7a9bae8511bef7e0a04c6680cf47883a29d09d3f42ae74c25dfc2",
+      "head_tracked": true,
+      "head_sha256": "ac7f462b8cc7a9bae8511bef7e0a04c6680cf47883a29d09d3f42ae74c25dfc2",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/06_theory/evidence/lean-naming-20261026.json",
+      "captured_sha256": "e38296a0764fda98468853141d9b4600665372d8e2b4b2d4baad0220eef74a26",
+      "head_tracked": true,
+      "head_sha256": "e38296a0764fda98468853141d9b4600665372d8e2b4b2d4baad0220eef74a26",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/06_theory/evidence/lean-reporting-20261026.json",
+      "captured_sha256": "28b6041bd363afe77a4db4136a01ad5ea15cec73b098670bedfeb8725061d52c",
+      "head_tracked": true,
+      "head_sha256": "28b6041bd363afe77a4db4136a01ad5ea15cec73b098670bedfeb8725061d52c",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/06_theory/evidence/lean-scope-20261025.json",
+      "captured_sha256": "d69b85b123e211928c100cc2f16f193702ad7a1e0385f3961473df2bc45a1806",
+      "head_tracked": true,
+      "head_sha256": "d69b85b123e211928c100cc2f16f193702ad7a1e0385f3961473df2bc45a1806",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/capabilityguard-comparison-20261030/bundle/LICENSE",
+      "captured_sha256": "4c0feb0f48586176789f42815859e2714a0486cccc72fbc9e3422eb29d155536",
+      "head_tracked": true,
+      "head_sha256": "4c0feb0f48586176789f42815859e2714a0486cccc72fbc9e3422eb29d155536",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/capabilityguard-comparison-20261030/bundle/PROMPT.txt",
+      "captured_sha256": "bc1b73d0ee92f066a1586f9a88d75f9b30dfc49f71f56622de1913d2c5ef822d",
+      "head_tracked": true,
+      "head_sha256": "bc1b73d0ee92f066a1586f9a88d75f9b30dfc49f71f56622de1913d2c5ef822d",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/capabilityguard-comparison-20261030/bundle/README.md",
+      "captured_sha256": "561a8d0b9f4f5be83d0fa29b310b679b9a691931b6ec161eaa60084bfd9dc72e",
+      "head_tracked": true,
+      "head_sha256": "561a8d0b9f4f5be83d0fa29b310b679b9a691931b6ec161eaa60084bfd9dc72e",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/capabilityguard-comparison-20261030/bundle/acceptance/cases.json",
+      "captured_sha256": "2af80f3d7ebdb7bc6a79fdc3afbd9d9ac55db414db27512c32f7c7689d511eb9",
+      "head_tracked": true,
+      "head_sha256": "2af80f3d7ebdb7bc6a79fdc3afbd9d9ac55db414db27512c32f7c7689d511eb9",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/capabilityguard-comparison-20261030/bundle/acceptance/test_acceptance.py",
+      "captured_sha256": "4601dfe69b55e3ab5329611eea29307a3da0a6963dddfaa192dc66e25b4cfa10",
+      "head_tracked": true,
+      "head_sha256": "4601dfe69b55e3ab5329611eea29307a3da0a6963dddfaa192dc66e25b4cfa10",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/capabilityguard-comparison-20261030/bundle/acceptance/test_harness.py",
+      "captured_sha256": "70e8ba4f552c636d8a5c3d51ef3adadca9a5d88e5b7731eba5307dfe67c35d20",
+      "head_tracked": true,
+      "head_sha256": "70e8ba4f552c636d8a5c3d51ef3adadca9a5d88e5b7731eba5307dfe67c35d20",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/capabilityguard-comparison-20261030/bundle/benchmark.py",
+      "captured_sha256": "0a9738a9905ee1cf5091ef5d0cdbe4cda24994a29a2c846fa2cc6dd3f0938508",
+      "head_tracked": true,
+      "head_sha256": "0a9738a9905ee1cf5091ef5d0cdbe4cda24994a29a2c846fa2cc6dd3f0938508",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/capabilityguard-comparison-20261030/bundle/campaign.json",
+      "captured_sha256": "99bfa7e5983f5ee6eee13296e5f8ab539563c2d1d12115daf475e75c91115653",
+      "head_tracked": true,
+      "head_sha256": "99bfa7e5983f5ee6eee13296e5f8ab539563c2d1d12115daf475e75c91115653",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/capabilityguard-comparison-20261030/bundle/context/AGENTS-source.txt",
+      "captured_sha256": "1c40bfdd2083849bc1f3c266a67871a1594068bc843207c4a1244fe0884f138b",
+      "head_tracked": true,
+      "head_sha256": "1c40bfdd2083849bc1f3c266a67871a1594068bc843207c4a1244fe0884f138b",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/capabilityguard-comparison-20261030/bundle/context/agent-contracts-source.txt",
+      "captured_sha256": "4f137f727344d4ee7b746c746958d234fb37e16af33d5968216952faf06a3cae",
+      "head_tracked": true,
+      "head_sha256": "4f137f727344d4ee7b746c746958d234fb37e16af33d5968216952faf06a3cae",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/capabilityguard-comparison-20261030/bundle/context/babylon60rules.txt",
+      "captured_sha256": "896ef66813dae7b753c365db39817a8f144f525dc1ae4f3259660b1f53db557c",
+      "head_tracked": true,
+      "head_sha256": "896ef66813dae7b753c365db39817a8f144f525dc1ae4f3259660b1f53db557c",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/capabilityguard-comparison-20261030/bundle/criteria.json",
+      "captured_sha256": "c4a8e3887927d5a02a470b9e1f4231c50eab259a77b97c2565bbb6c248cdb480",
+      "head_tracked": true,
+      "head_sha256": "c4a8e3887927d5a02a470b9e1f4231c50eab259a77b97c2565bbb6c248cdb480",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/capabilityguard-comparison-20261030/bundle/env/.python-version",
+      "captured_sha256": "922fe0c3de073b01988e23348ea184456161678c5e329e6f34be89be24383f93",
+      "head_tracked": true,
+      "head_sha256": "922fe0c3de073b01988e23348ea184456161678c5e329e6f34be89be24383f93",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/capabilityguard-comparison-20261030/bundle/env/pyproject.toml",
+      "captured_sha256": "1accb083238f81e9809d5577d5d2cb587790bb3557fec0ddf2392bd68394574b",
+      "head_tracked": true,
+      "head_sha256": "1accb083238f81e9809d5577d5d2cb587790bb3557fec0ddf2392bd68394574b",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/capabilityguard-comparison-20261030/bundle/env/uv.lock",
+      "captured_sha256": "e57e60c04203f1d0719886c548b3ec499b3613874d900eb0b2de8c4087b9f65a",
+      "head_tracked": true,
+      "head_sha256": "e57e60c04203f1d0719886c548b3ec499b3613874d900eb0b2de8c4087b9f65a",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/capabilityguard-comparison-20261030/bundle/manifest.json",
+      "captured_sha256": "6f2595471683cde1d5f23509738df755c6784a69441b96196afd5f9996da8422",
+      "head_tracked": true,
+      "head_sha256": "6f2595471683cde1d5f23509738df755c6784a69441b96196afd5f9996da8422",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/capabilityguard-comparison-20261030/bundle/metrics-template.json",
+      "captured_sha256": "a771895f635ed7542654e08790f49a9cc1a4ffd18b9cc3caba7b5584b3efc96c",
+      "head_tracked": true,
+      "head_sha256": "a771895f635ed7542654e08790f49a9cc1a4ffd18b9cc3caba7b5584b3efc96c",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/capabilityguard-comparison-20261030/bundle/snapshot/AGENTS.md",
+      "captured_sha256": "9dcffbba7ad5544d527a46b637f4d536bd57646b016e675e6570b26c97576b86",
+      "head_tracked": true,
+      "head_sha256": "9dcffbba7ad5544d527a46b637f4d536bd57646b016e675e6570b26c97576b86",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/capabilityguard-comparison-20261030/bundle/snapshot/src/babylon60/__init__.py",
+      "captured_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "head_tracked": true,
+      "head_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/capabilityguard-comparison-20261030/bundle/snapshot/src/babylon60/guards/__init__.py",
+      "captured_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "head_tracked": true,
+      "head_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/capabilityguard-comparison-20261030/bundle/snapshot/src/babylon60/guards/capabilities.py",
+      "captured_sha256": "633edc9551bdd3183409a8e5ce70e32cf15de31f017762f59547fec6d80d68d9",
+      "head_tracked": true,
+      "head_sha256": "633edc9551bdd3183409a8e5ce70e32cf15de31f017762f59547fec6d80d68d9",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/capabilityguard-comparison-20261030/bundle/snapshot/src/babylon60/guards/capability_guard.py",
+      "captured_sha256": "a98c659b79bfd805db90c03bd67c1ec530c7c39573dd2615a223917f1654e261",
+      "head_tracked": true,
+      "head_sha256": "a98c659b79bfd805db90c03bd67c1ec530c7c39573dd2615a223917f1654e261",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/capabilityguard-comparison-20261030/bundle/source-manifest.json",
+      "captured_sha256": "f6834d150d012efc33685929f9a420d5e7148635c24d1fc24242231082c47850",
+      "head_tracked": true,
+      "head_sha256": "f6834d150d012efc33685929f9a420d5e7148635c24d1fc24242231082c47850",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/capabilityguard-comparison-20261030/capabilityguard-comparison-v1.zip",
+      "captured_sha256": "aa2bb4227a1aa5f09ed4a406d39d0af53fbbcee5f8b4804b3711b0810a959ca6",
+      "head_tracked": true,
+      "head_sha256": "aa2bb4227a1aa5f09ed4a406d39d0af53fbbcee5f8b4804b3711b0810a959ca6",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/capabilityguard-comparison-20261030/capabilityguard-comparison-v1.zip.sha256",
+      "captured_sha256": "85654b719eea40be49d733b32530f515c93389e0b9f53f0a45c53436528be35e",
+      "head_tracked": true,
+      "head_sha256": "85654b719eea40be49d733b32530f515c93389e0b9f53f0a45c53436528be35e",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/capabilityguard-comparison-20261030/delivery-manifest.json",
+      "captured_sha256": "87e690f0c61bb31663c79c410428d29157bc769530e52d0e458df6299c9c5174",
+      "head_tracked": true,
+      "head_sha256": "87e690f0c61bb31663c79c410428d29157bc769530e52d0e458df6299c9c5174",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/capabilityguard-comparison-20261030/validation/baseline-final/acceptance.xml",
+      "captured_sha256": "0e5b3253911f3996aa0d121ec845ccfa3838750968534f673339c4e2d18237db",
+      "head_tracked": true,
+      "head_sha256": "0e5b3253911f3996aa0d121ec845ccfa3838750968534f673339c4e2d18237db",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/capabilityguard-comparison-20261030/validation/baseline-final/candidate/AGENTS.md",
+      "captured_sha256": "9dcffbba7ad5544d527a46b637f4d536bd57646b016e675e6570b26c97576b86",
+      "head_tracked": true,
+      "head_sha256": "9dcffbba7ad5544d527a46b637f4d536bd57646b016e675e6570b26c97576b86",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/capabilityguard-comparison-20261030/validation/baseline-final/candidate/src/babylon60/__init__.py",
+      "captured_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "head_tracked": true,
+      "head_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/capabilityguard-comparison-20261030/validation/baseline-final/candidate/src/babylon60/guards/__init__.py",
+      "captured_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "head_tracked": true,
+      "head_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/capabilityguard-comparison-20261030/validation/baseline-final/candidate/src/babylon60/guards/capabilities.py",
+      "captured_sha256": "633edc9551bdd3183409a8e5ce70e32cf15de31f017762f59547fec6d80d68d9",
+      "head_tracked": true,
+      "head_sha256": "633edc9551bdd3183409a8e5ce70e32cf15de31f017762f59547fec6d80d68d9",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/capabilityguard-comparison-20261030/validation/baseline-final/candidate/src/babylon60/guards/capability_guard.py",
+      "captured_sha256": "a98c659b79bfd805db90c03bd67c1ec530c7c39573dd2615a223917f1654e261",
+      "head_tracked": true,
+      "head_sha256": "a98c659b79bfd805db90c03bd67c1ec530c7c39573dd2615a223917f1654e261",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/capabilityguard-comparison-20261030/validation/baseline-final/result.json",
+      "captured_sha256": "80cf030c741c8c1fd52035375e041aa9e005d359c822a52c01d3af8154b2ba86",
+      "head_tracked": true,
+      "head_sha256": "80cf030c741c8c1fd52035375e041aa9e005d359c822a52c01d3af8154b2ba86",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/capabilityguard-comparison-20261030/validation/baseline-final/submission.diff",
+      "captured_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "head_tracked": true,
+      "head_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/capabilityguard-comparison-20261030/validation/checks-final.json",
+      "captured_sha256": "d662ec415ccb5c615903c3a155c4d956b4d8cf6fed317f59acd040af6e98bd04",
+      "head_tracked": true,
+      "head_sha256": "d662ec415ccb5c615903c3a155c4d956b4d8cf6fed317f59acd040af6e98bd04",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/capabilityguard-comparison-20261030/validation/closure.json",
+      "captured_sha256": "70078aa5f77bf3d854f1236b39fc78a3a2618feb543a3ac2edfe1e95e2e874d7",
+      "head_tracked": true,
+      "head_sha256": "70078aa5f77bf3d854f1236b39fc78a3a2618feb543a3ac2edfe1e95e2e874d7",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/capabilityguard-comparison-20261030/validation/harness-final.xml",
+      "captured_sha256": "8d860322f6c8350ac6a4d955c04178073e5611077588fe53cb3082adc9e37c80",
+      "head_tracked": true,
+      "head_sha256": "8d860322f6c8350ac6a4d955c04178073e5611077588fe53cb3082adc9e37c80",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/capabilityguard-comparison-20261030/validation/root-instruction-drift.diff",
+      "captured_sha256": "6b1601b13b6cf741261edbe25fda31cf0022cbb77b1b7d706a1a34db2e6e809b",
+      "head_tracked": true,
+      "head_sha256": "6b1601b13b6cf741261edbe25fda31cf0022cbb77b1b7d706a1a34db2e6e809b",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/gates-20261029/audit.json",
+      "captured_sha256": "db295085beda6cc876bcddb58ae0f0225d07032f2b2b8b82406780f80a5fcd3e",
+      "head_tracked": true,
+      "head_sha256": "db295085beda6cc876bcddb58ae0f0225d07032f2b2b8b82406780f80a5fcd3e",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/gates-20261029/closure.json",
+      "captured_sha256": "591598561630eb8763c58c6e6254525f613298e44eff678214cf03715577856c",
+      "head_tracked": true,
+      "head_sha256": "591598561630eb8763c58c6e6254525f613298e44eff678214cf03715577856c",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/gates-20261029/integrity.json",
+      "captured_sha256": "b3113dd8f4fea86d19e9ef4702fd6795cf33fedb091c3e2cb3cca437dbbc3f91",
+      "head_tracked": true,
+      "head_sha256": "b3113dd8f4fea86d19e9ef4702fd6795cf33fedb091c3e2cb3cca437dbbc3f91",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/gates-20261029/os-confinement.json",
+      "captured_sha256": "9250a3755d4456243aee46aa3366663c4cd6bf098ec36c81503455897cd397e7",
+      "head_tracked": true,
+      "head_sha256": "9250a3755d4456243aee46aa3366663c4cd6bf098ec36c81503455897cd397e7",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/gates-20261029/probe_capability_guard.py",
+      "captured_sha256": "eca090526e9ed8a85baff0e5108ec14fad0111baa1e5b01c765c9633fb47f115",
+      "head_tracked": true,
+      "head_sha256": "eca090526e9ed8a85baff0e5108ec14fad0111baa1e5b01c765c9633fb47f115",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/gates-20261029/probe_os_confinement.py",
+      "captured_sha256": "70041ee85e8b85d28e4a898bab8b439afc02f767abac38f39d284fc7f95cb841",
+      "head_tracked": true,
+      "head_sha256": "70041ee85e8b85d28e4a898bab8b439afc02f767abac38f39d284fc7f95cb841",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/gates-20261029/reproduce.py",
+      "captured_sha256": "ec9581dd7b920306b24bcbdb7703a4dc707d14b0ca674d42c6b656f3650c2326",
+      "head_tracked": true,
+      "head_sha256": "ec9581dd7b920306b24bcbdb7703a4dc707d14b0ca674d42c6b656f3650c2326",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/gates-20261029/run-final/effective-hooks.json",
+      "captured_sha256": "add63a2f3666fca3ed6b3802ba818ca3569c3bd6292555d503a7e769e5dac214",
+      "head_tracked": true,
+      "head_sha256": "add63a2f3666fca3ed6b3802ba818ca3569c3bd6292555d503a7e769e5dac214",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/gates-20261029/run-final/results.json",
+      "captured_sha256": "de74096693ea5dc88a5fc2cc1c6c78533703efad33221b9b16518b3b75f2c213",
+      "head_tracked": true,
+      "head_sha256": "de74096693ea5dc88a5fc2cc1c6c78533703efad33221b9b16518b3b75f2c213",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/gates-20261029/supplemental.json",
+      "captured_sha256": "c6b77183f9fc5c94a616beb0d93dab01f53058d760df77c2a67aa69a170496e3",
+      "head_tracked": true,
+      "head_sha256": "c6b77183f9fc5c94a616beb0d93dab01f53058d760df77c2a67aa69a170496e3",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/evidence/recovery-audit-2026-10-26.rs",
+      "captured_sha256": "51f2d5907b3d871c9ae456558ea1c6de292ec239fe87b334b6747c5bb1a56fad",
+      "head_tracked": true,
+      "head_sha256": "51f2d5907b3d871c9ae456558ea1c6de292ec239fe87b334b6747c5bb1a56fad",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/experimental-audit-plan-2026-10-26.md",
+      "captured_sha256": "b7a50234f47e45a4502969905c4015b72608ef33233fa203695266aa41c2fb62",
+      "head_tracked": true,
+      "head_sha256": "b7a50234f47e45a4502969905c4015b72608ef33233fa203695266aa41c2fb62",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/fl-approval01-human-trial.md",
+      "captured_sha256": "6c4a6b91691f5461e8cc81a2c75e739e02e12861c62b314284685408fcb261be",
+      "head_tracked": true,
+      "head_sha256": "6c4a6b91691f5461e8cc81a2c75e739e02e12861c62b314284685408fcb261be",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/fl-approval01-independent-judgment.md",
+      "captured_sha256": "0afda11af644f848b92b82ddaadf9ba436d203199ae7d8574411562938007260",
+      "head_tracked": true,
+      "head_sha256": "0afda11af644f848b92b82ddaadf9ba436d203199ae7d8574411562938007260",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/fl-path01-capability-root-escape.md",
+      "captured_sha256": "f0357a1c282e89ac4c69027685923b6f3caed67b8166b5907e606fff2f7f567a",
+      "head_tracked": true,
+      "head_sha256": "f0357a1c282e89ac4c69027685923b6f3caed67b8166b5907e606fff2f7f567a",
+      "same_as_capture": true
+    },
+    {
+      "path": "docs/security/fl-rec01-recovery-provenance.md",
+      "captured_sha256": "5802089c41cd771466aaff2d4ceaace36448f3ebffc8231caf04c4766ccbfdb9",
+      "head_tracked": true,
+      "head_sha256": "5802089c41cd771466aaff2d4ceaace36448f3ebffc8231caf04c4766ccbfdb9",
+      "same_as_capture": true
+    },
+    {
+      "path": "examples/fl_approval01_simulation.py",
+      "captured_sha256": "b0c00581c28cca983fe1f3d4031cac6ea5950981121fc796cf603d08178a8426",
+      "head_tracked": true,
+      "head_sha256": "b0c00581c28cca983fe1f3d4031cac6ea5950981121fc796cf603d08178a8426",
+      "same_as_capture": true
+    },
+    {
+      "path": "scripts/c5_cli/doxastic_kripke_engine.py",
+      "captured_sha256": "564186b81b2b53ace810cb6ad9c4674fefc46ca11299c67e5cc26a12595bb806",
+      "head_tracked": true,
+      "head_sha256": "564186b81b2b53ace810cb6ad9c4674fefc46ca11299c67e5cc26a12595bb806",
+      "same_as_capture": true
+    },
+    {
+      "path": "tests/test_attest_proof_regressions.py",
+      "captured_sha256": "dd166b60a6dbdc07f63868ac63834115d8adf7d0066ebf8893d9362f923479ce",
+      "head_tracked": true,
+      "head_sha256": "dd166b60a6dbdc07f63868ac63834115d8adf7d0066ebf8893d9362f923479ce",
+      "same_as_capture": true
+    },
+    {
+      "path": "tests/test_babylon_work.py",
+      "captured_sha256": "b55698937902ad430cb42dcf89d3d78fd7de92308ff69fc384c21f40dc5676d8",
+      "head_tracked": true,
+      "head_sha256": "b55698937902ad430cb42dcf89d3d78fd7de92308ff69fc384c21f40dc5676d8",
+      "same_as_capture": true
+    },
+    {
+      "path": "tests/test_babylon_work_runtime.py",
+      "captured_sha256": "7e53382c6f4717182c0a78c0b057ba8a66f51e1b23c63307cd9e95c3c0f56d0c",
+      "head_tracked": true,
+      "head_sha256": "7e53382c6f4717182c0a78c0b057ba8a66f51e1b23c63307cd9e95c3c0f56d0c",
+      "same_as_capture": true
+    },
+    {
+      "path": "tests/test_doxastic_kripke_engine.py",
+      "captured_sha256": "d0a7bc09f8ec6252a369dfa0a058a3edb86f2d01f1699264bb1cef894569e42b",
+      "head_tracked": true,
+      "head_sha256": "d0a7bc09f8ec6252a369dfa0a058a3edb86f2d01f1699264bb1cef894569e42b",
+      "same_as_capture": true
+    },
+    {
+      "path": "tests/test_finding_evidence_contract.py",
+      "captured_sha256": "4fd131ccfc0b661561ef985719df5b5f737395a667719f310ab94cb73982b954",
+      "head_tracked": true,
+      "head_sha256": "4fd131ccfc0b661561ef985719df5b5f737395a667719f310ab94cb73982b954",
+      "same_as_capture": true
+    },
+    {
+      "path": "tests/test_fl027_provenance_authority.py",
+      "captured_sha256": "c8d556d30540d9310bc289eadf5a43f00258089d2ef9eacab8b61c9fd9f56200",
+      "head_tracked": true,
+      "head_sha256": "c8d556d30540d9310bc289eadf5a43f00258089d2ef9eacab8b61c9fd9f56200",
+      "same_as_capture": true
+    },
+    {
+      "path": "tests/test_fl_approval01_experiment.py",
+      "captured_sha256": "ff920257ac6807827214b3f919e395b582b573c7f0e5b34682dcc1de01fab887",
+      "head_tracked": true,
+      "head_sha256": "ff920257ac6807827214b3f919e395b582b573c7f0e5b34682dcc1de01fab887",
+      "same_as_capture": true
+    },
+    {
+      "path": "tests/test_fl_approval01_human_trial.py",
+      "captured_sha256": "d327af840de25f88e912a6ea6a85a4af4b65c9d0ad89342424f6d7cadebe117a",
+      "head_tracked": true,
+      "head_sha256": "d327af840de25f88e912a6ea6a85a4af4b65c9d0ad89342424f6d7cadebe117a",
+      "same_as_capture": true
+    },
+    {
+      "path": "tests/test_fl_approval01_integrity.py",
+      "captured_sha256": "1f5dee0e65b376967419fb01ce89d58c3d593211661911e6c7d9ed5e470526db",
+      "head_tracked": true,
+      "head_sha256": "1f5dee0e65b376967419fb01ce89d58c3d593211661911e6c7d9ed5e470526db",
+      "same_as_capture": true
+    },
+    {
+      "path": "tests/test_fl_approval01_trial_cases.py",
+      "captured_sha256": "c01b02da9eaeb0ce887ce9a060a9473a34c7585ec84699ec3dab5b524fdea80e",
+      "head_tracked": true,
+      "head_sha256": "c01b02da9eaeb0ce887ce9a060a9473a34c7585ec84699ec3dab5b524fdea80e",
+      "same_as_capture": true
+    },
+    {
+      "path": "tests/test_fl_approval01_trial_status.py",
+      "captured_sha256": "1670fd49615481adcba6dca27b4935d529cc06aba5ab0a92090094c0c0029f89",
+      "head_tracked": true,
+      "head_sha256": "1670fd49615481adcba6dca27b4935d529cc06aba5ab0a92090094c0c0029f89",
+      "same_as_capture": true
+    },
+    {
+      "path": "tests/test_graph_isomorphism_regressions.py",
+      "captured_sha256": "583eb19d54347d1fde441853111281b770f49e64512f942981a1146d206c2632",
+      "head_tracked": true,
+      "head_sha256": "583eb19d54347d1fde441853111281b770f49e64512f942981a1146d206c2632",
+      "same_as_capture": true
+    },
+    {
+      "path": "tests/test_red_team_falsification_matrix.py",
+      "captured_sha256": "08f91722ee4775ef75ddfcb1efb8b3709012667d3b3aaf8fbee81f2bb71da257",
+      "head_tracked": true,
+      "head_sha256": "08f91722ee4775ef75ddfcb1efb8b3709012667d3b3aaf8fbee81f2bb71da257",
+      "same_as_capture": true
+    },
+    {
+      "path": "tests/test_semantic_entropy_lean_alignment.py",
+      "captured_sha256": "aa29234617ea5a7d4230db2d7bf846ae00a3308878acd048990dce05d888ee39",
+      "head_tracked": true,
+      "head_sha256": "aa29234617ea5a7d4230db2d7bf846ae00a3308878acd048990dce05d888ee39",
+      "same_as_capture": true
+    },
+    {
+      "path": "tools/babylon_work/README.md",
+      "captured_sha256": "9642aee3ca6656e98387b8ca1e60bbed2c9ebf54a4a116753850bdce6874fb0b",
+      "head_tracked": true,
+      "head_sha256": "9642aee3ca6656e98387b8ca1e60bbed2c9ebf54a4a116753850bdce6874fb0b",
+      "same_as_capture": true
+    },
+    {
+      "path": "tools/babylon_work/__init__.py",
+      "captured_sha256": "33c3686a399a235ff4c49ebec2da7835232b635f7096204e0d5d6b9c6e0d48e3",
+      "head_tracked": true,
+      "head_sha256": "33c3686a399a235ff4c49ebec2da7835232b635f7096204e0d5d6b9c6e0d48e3",
+      "same_as_capture": true
+    },
+    {
+      "path": "tools/babylon_work/effects.py",
+      "captured_sha256": "7e0dc416cf4acdefddc0c28350489c378ab53f45d7edd80aea3ec9b76c5b9dfd",
+      "head_tracked": true,
+      "head_sha256": "7e0dc416cf4acdefddc0c28350489c378ab53f45d7edd80aea3ec9b76c5b9dfd",
+      "same_as_capture": true
+    },
+    {
+      "path": "tools/babylon_work/index.html",
+      "captured_sha256": "3385870d114c263694d9e73694e0e86ebf790ab0d48e8d3a45514020c17a97dc",
+      "head_tracked": true,
+      "head_sha256": "3385870d114c263694d9e73694e0e86ebf790ab0d48e8d3a45514020c17a97dc",
+      "same_as_capture": true
+    },
+    {
+      "path": "tools/babylon_work/providers.py",
+      "captured_sha256": "1c3adc5dcca1e766fd8b586ec99a96855102630ad9ec3742b7df92cf344ab300",
+      "head_tracked": true,
+      "head_sha256": "1c3adc5dcca1e766fd8b586ec99a96855102630ad9ec3742b7df92cf344ab300",
+      "same_as_capture": true
+    },
+    {
+      "path": "tools/babylon_work/runs.py",
+      "captured_sha256": "1b1de062c3039e6d49ff26d29e0dd267def49a25324238e2beecd768ed4df63d",
+      "head_tracked": true,
+      "head_sha256": "1b1de062c3039e6d49ff26d29e0dd267def49a25324238e2beecd768ed4df63d",
+      "same_as_capture": true
+    },
+    {
+      "path": "tools/babylon_work/runtime-ui.js",
+      "captured_sha256": "5389efabc251b9df2a37f3f0f048c38a4760e0cc43a6fc194fcddc0c4e587f84",
+      "head_tracked": true,
+      "head_sha256": "5389efabc251b9df2a37f3f0f048c38a4760e0cc43a6fc194fcddc0c4e587f84",
+      "same_as_capture": true
+    },
+    {
+      "path": "tools/babylon_work/runtime.py",
+      "captured_sha256": "4057b5f354010caa5b9371191d4e5f93a30fd55aec63056bb9b8bd5769f48369",
+      "head_tracked": true,
+      "head_sha256": "4057b5f354010caa5b9371191d4e5f93a30fd55aec63056bb9b8bd5769f48369",
+      "same_as_capture": true
+    },
+    {
+      "path": "tools/babylon_work/server.py",
+      "captured_sha256": "5551ce7a130b2c638cce92ee07f11fbab6a610682831ca31166b7a2fe52609e3",
+      "head_tracked": true,
+      "head_sha256": "5551ce7a130b2c638cce92ee07f11fbab6a610682831ca31166b7a2fe52609e3",
+      "same_as_capture": true
+    },
+    {
+      "path": "tools/babylon_work/work.css",
+      "captured_sha256": "90c1174263d3b30b1020294e0de861dde8da8873c884874890c79a8d71fae1c0",
+      "head_tracked": true,
+      "head_sha256": "90c1174263d3b30b1020294e0de861dde8da8873c884874890c79a8d71fae1c0",
+      "same_as_capture": true
+    },
+    {
+      "path": "tools/babylon_work/work.js",
+      "captured_sha256": "2a9e619ab2c937d2465faa320311034e5479d6dfe03d39f4b7482fccbffbc02e",
+      "head_tracked": true,
+      "head_sha256": "2a9e619ab2c937d2465faa320311034e5479d6dfe03d39f4b7482fccbffbc02e",
+      "same_as_capture": true
+    },
+    {
+      "path": "tools/babylon_work/workspace.py",
+      "captured_sha256": "e66bf65e6570de1e56c19f7129e1b3c0fbafaa1b9ad3eda7b5f395be048fe49f",
+      "head_tracked": true,
+      "head_sha256": "e66bf65e6570de1e56c19f7129e1b3c0fbafaa1b9ad3eda7b5f395be048fe49f",
+      "same_as_capture": true
+    }
+  ]
+}

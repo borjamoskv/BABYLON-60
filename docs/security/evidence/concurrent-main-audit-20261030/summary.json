@@ -1,0 +1,769 @@
+{
+  "date": "2026-10-30",
+  "base": "2aef1202a019daa36b3985f8e957e846c2400671",
+  "code_candidate": "065da849438170720d0fb2a4938cc194ffb78aad",
+  "initial_capture_paths": 116,
+  "pre_promotion_paths": 205,
+  "later_paths_count": 89,
+  "verified_paths": {
+    "scripts/c5_l1_ledger/ledger_snapshot_engine.py": {
+      "sha256": "60eb867625b819350f09654e51234ba9ed41313213aa93d9092564da6362d405",
+      "mode": 493
+    },
+    "tests/test_swarm100_lot12_s1_regressions.py": {
+      "sha256": "160420dff65c0bf043328c7165cfddb64f467c7eb884b8c0920aa0d4ba311d36",
+      "mode": 420
+    },
+    "01_KISH_ENGINE/babylon60/crypto/identity.py": {
+      "sha256": "43f60f696fc05f0b6fd63d5c17045e105e249bc08cee3cc68e8e6ee419edade8",
+      "mode": 420
+    },
+    "scripts/c5_l1_ledger/seal_bounty_aeon.py": {
+      "sha256": "a76581bc976b4321605d775235bb8a4a7c939d27118d58c75f60f4c8b0d24fc5",
+      "mode": 420
+    },
+    "tests/test_swarm100_lot12_s2_identity_regressions.py": {
+      "sha256": "179590069647b03f35a51b5f7f95471ed037b55eca13665c62c7babe281486c8",
+      "mode": 420
+    },
+    "01_KISH_ENGINE/babylon60/crypto/keys.py": {
+      "sha256": "d5b8e5336c00eac48e87b1288325c03054c6d15e821074256388ffd9e2782136",
+      "mode": 420
+    },
+    "tools/tamkarum_license_provisioner.py": {
+      "sha256": "82122b5395b03935802e1fed43129b161a1c459cb8ec15fe40f5e36d53829662",
+      "mode": 420
+    },
+    "tests/test_swarm100_lot12_s2_trust_regressions.py": {
+      "sha256": "24a2a0c42e19b3b24f4f6462eba88341f40582c8e7a8be1c6402f216b0531da1",
+      "mode": 420
+    },
+    "01_KISH_ENGINE/babylon60/bft/master_ledger_queue.py": {
+      "sha256": "633f2be983c6070d6adcdb921e6daece9efff2ea9239b69e602ebf5cdcc772cc",
+      "mode": 420
+    },
+    "tests/test_itera2_invariants.py": {
+      "sha256": "58d90cd0961103d0fb1da04b780ba4070d0f0e337a198479edea3012e5622488",
+      "mode": 420
+    },
+    "tests/test_swarm100_lot12_s3_regressions.py": {
+      "sha256": "58b0adfe5f6f5520b65cd148f91417ff569c26ddcfaa7691bc88c4fb9ecf769b",
+      "mode": 420
+    },
+    "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py": {
+      "sha256": "132813d0e2d2eb29be76afecb6ee5c04bface45ada673a6925ea55112b924ca9",
+      "mode": 420
+    },
+    "02_EDIN_SWARMS/agents_archi/orchestrator/kda_dag_swarm.py": {
+      "sha256": "3bd234ee55fd543163b66f317745dee973f048faa9ac2140dafe830e3bb5a216",
+      "mode": 420
+    },
+    "01_KISH_ENGINE/services/email_inbound/worker.js": {
+      "sha256": "60372817d7d57f13db3c00ed056dc4550cbeef43736ced6546eb20d09d9030a3",
+      "mode": 420
+    },
+    "tests/test_swarm100_lot12_s3_worker.mjs": {
+      "sha256": "4840565308dea32226a3a21bc0e5aae32ec0453b2c5749f4c65234f027ddbff8",
+      "mode": 420
+    },
+    "scripts/c5_cli/moskv_native_host.py": {
+      "sha256": "ea28bbfee08801da5c9fb44fe82bd2350c90b5f85fb92e778df3f60f8a297432",
+      "mode": 493
+    },
+    "tests/test_swarm100_lot12_s4_regressions.py": {
+      "sha256": "27468faad4cdee59e641ae06cb7b528f17f4211006d12c2fca943835176baded",
+      "mode": 420
+    },
+    "scripts/c5_git_utils/rewrite_commits.py": {
+      "sha256": "64f47ebb82ad50e35af48a9d6177f9c9b05acb7227e6c272dc89a14db15c2aa8",
+      "mode": 493
+    },
+    "tools/install_shield.sh": {
+      "sha256": "cd9166eae829e327e4f9422bc7203b3e164e7d6f6e8522e2fc69bc55403c9e48",
+      "mode": 493
+    },
+    "scripts/c5_icloud_deploy.py": {
+      "sha256": "226f59b9d8988ae41fb779a3aaffa3ee5ead720428ecb6454eb995bbcfcc1c49",
+      "mode": 420
+    },
+    "tools/skill_library/global/youtube-analysis-pipeline/scripts/yt_audit.py": {
+      "sha256": "61d95dcae8a1a3c86c1ffcad16f748b02ddd104362fdf5f41812a7f75955e684",
+      "mode": 493
+    },
+    "tests/test_swarm100_lot12_s5_regressions.py": {
+      "sha256": "ff3407d366ecd7c7ba9785cc82b11a3d41069c8e00e3533bd483dcf332a1b063",
+      "mode": 420
+    },
+    "01_KISH_ENGINE/babylon60/core/popperian_filter.py": {
+      "sha256": "aa6d9790230ae6056fa811f5b783542758f17dd4f21289df0f04a343a12e5f88",
+      "mode": 493
+    },
+    "02_EDIN_SWARMS/agents_archi/clients/openrouter.py": {
+      "sha256": "57773548924aef80661afcc6d6878e46ef7267777bb447404b91c89a02ebb6c0",
+      "mode": 420
+    },
+    "01_KISH_ENGINE/babylon60/kernel/ns_z3_firewall.py": {
+      "sha256": "701af0343b17e1270f5457985a0554427dfa161698e787a0ca340061e97ed35c",
+      "mode": 420
+    },
+    "scripts/c5_destiladora/proof_emitter_lean4.py": {
+      "sha256": "09c13761b760338fc9d747725c66f04f7a166acac92e5d2c950ad3ed047167fb",
+      "mode": 420
+    },
+    "scripts/c5_destiladora/test_destiladora_e2e.py": {
+      "sha256": "3d43668716203b1d41ccce51dc5ed2cfa924175dd460aa62e241c689f49c856f",
+      "mode": 420
+    },
+    "tests/test_swarm100_lot12_s6_formal_regressions.py": {
+      "sha256": "aeeaabadf47fb30a90130cd124773bbd5e096954e1ac041948ebbda3c5dc6aa7",
+      "mode": 420
+    },
+    "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py": {
+      "sha256": "d150a286d1267fc6afa26dd6c59d41266f40c26a428cf29885465af041a083fc",
+      "mode": 420
+    },
+    "tests/test_swarm100_lot12_m0_regressions.py": {
+      "sha256": "06bf1ca5e14982cc89bad53d9c731a2950942a41789e59c3affd0c47456f97b0",
+      "mode": 420
+    },
+    "scripts/c5_sharur/sharur_100_conversation_reporters.py": {
+      "sha256": "6212c3afe9a9691ca533969b7a088529a8d29393ae9116ae6eae73fefff988b7",
+      "mode": 420
+    },
+    "tests/test_swarm100_lot12_s6_reports_regressions.py": {
+      "sha256": "5c7b332b8632f9b79af87977be6687402baff26a0019210bbae29477b3d5a928",
+      "mode": 420
+    },
+    "scripts/c5_sharur/sharur_100_swarm_execution.py": {
+      "sha256": "4f80f3a51c21477e689a03f9fc78962dfe9a1a2f43ff01c307718e6b4cb5bfcc",
+      "mode": 420
+    }
+  },
+  "atomic_commits": [
+    {
+      "key": "snapshots",
+      "commit": "a9b6c29db4531562db373500dbf34080677d1ba8",
+      "title": "[AX-0] SNAPSHOT: Publica copias SQLite completas sin colisiones",
+      "paths": [
+        "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+        "tests/test_swarm100_lot12_s1_regressions.py"
+      ],
+      "checks": {
+        "diff": {
+          "exit_code": 0,
+          "output": ""
+        },
+        "topology": {
+          "exit_code": 0,
+          "output": "PASS: instruction files, required direct symlinks and MCP registration references (Git index; VS Code if present)\n"
+        }
+      }
+    },
+    {
+      "key": "identity",
+      "commit": "40134392e57762107ec477f6d13fa4247bfd3ec8",
+      "title": "[AX-0] IDENTIDAD: Conserva semillas existentes y aborta carga invalida",
+      "paths": [
+        "01_KISH_ENGINE/babylon60/crypto/identity.py",
+        "scripts/c5_l1_ledger/seal_bounty_aeon.py",
+        "tests/test_swarm100_lot12_s2_identity_regressions.py"
+      ],
+      "checks": {
+        "diff": {
+          "exit_code": 0,
+          "output": ""
+        },
+        "topology": {
+          "exit_code": 0,
+          "output": "PASS: instruction files, required direct symlinks and MCP registration references (Git index; VS Code if present)\n"
+        }
+      }
+    },
+    {
+      "key": "key-metadata",
+      "commit": "b199f5fd5b7fd314f583382aa9a41403e1b3991e",
+      "title": "[AX-0] CLAVES: Serializa metadatos y preserva revocaciones",
+      "paths": [
+        "01_KISH_ENGINE/babylon60/crypto/keys.py",
+        "tests/test_swarm100_lot12_s2_identity_regressions.py"
+      ],
+      "checks": {
+        "diff": {
+          "exit_code": 0,
+          "output": ""
+        },
+        "topology": {
+          "exit_code": 0,
+          "output": "PASS: instruction files, required direct symlinks and MCP registration references (Git index; VS Code if present)\n"
+        }
+      }
+    },
+    {
+      "key": "licenses",
+      "commit": "c49805af7573d40d3d68b186a008bfe334b34ac0",
+      "title": "[AX-0] LICENCIAS: Exige autoridad software explicita para firmar",
+      "paths": [
+        "tools/tamkarum_license_provisioner.py",
+        "tests/test_swarm100_lot12_s2_trust_regressions.py"
+      ],
+      "checks": {
+        "diff": {
+          "exit_code": 0,
+          "output": ""
+        },
+        "topology": {
+          "exit_code": 0,
+          "output": "PASS: instruction files, required direct symlinks and MCP registration references (Git index; VS Code if present)\n"
+        }
+      }
+    },
+    {
+      "key": "ledger-queue",
+      "commit": "328a887368669508e6c260c4f311166f0c7e968b",
+      "title": "[AX-0] LEDGER: Drena admisiones y propaga fallos de persistencia",
+      "paths": [
+        "01_KISH_ENGINE/babylon60/bft/master_ledger_queue.py",
+        "tests/test_itera2_invariants.py",
+        "tests/test_swarm100_lot12_s3_regressions.py"
+      ],
+      "checks": {
+        "diff": {
+          "exit_code": 0,
+          "output": ""
+        },
+        "topology": {
+          "exit_code": 0,
+          "output": "PASS: instruction files, required direct symlinks and MCP registration references (Git index; VS Code if present)\n"
+        }
+      }
+    },
+    {
+      "key": "bounty-admission",
+      "commit": "cc6331965194e9db3d5192a228135c96efce48ca",
+      "title": "[AX-0] BFT: Propaga rechazos y distingue admision de persistencia",
+      "paths": [
+        "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py",
+        "tests/test_swarm100_lot12_s3_regressions.py"
+      ],
+      "checks": {
+        "diff": {
+          "exit_code": 0,
+          "output": ""
+        },
+        "topology": {
+          "exit_code": 0,
+          "output": "PASS: instruction files, required direct symlinks and MCP registration references (Git index; VS Code if present)\n"
+        }
+      }
+    },
+    {
+      "key": "dag-cleanup",
+      "commit": "f95fc46ee5feeb0a2b0d9d0f3c484b44b8ec908f",
+      "title": "[AX-0] DAG: Espera hermanos cancelados antes de liberar exclusion",
+      "paths": [
+        "02_EDIN_SWARMS/agents_archi/orchestrator/kda_dag_swarm.py",
+        "tests/test_swarm100_lot12_s3_regressions.py"
+      ],
+      "checks": {
+        "diff": {
+          "exit_code": 0,
+          "output": ""
+        },
+        "topology": {
+          "exit_code": 0,
+          "output": "PASS: instruction files, required direct symlinks and MCP registration references (Git index; VS Code if present)\n"
+        }
+      }
+    },
+    {
+      "key": "email-delivery",
+      "commit": "695b0a729c9486436729a10a3b4aa03f813874c0",
+      "title": "[AX-0] EMAIL: Rechaza entrega tras agotar intentos de webhook",
+      "paths": [
+        "01_KISH_ENGINE/services/email_inbound/worker.js",
+        "tests/test_swarm100_lot12_s3_worker.mjs"
+      ],
+      "checks": {
+        "diff": {
+          "exit_code": 0,
+          "output": ""
+        },
+        "topology": {
+          "exit_code": 0,
+          "output": "PASS: instruction files, required direct symlinks and MCP registration references (Git index; VS Code if present)\n"
+        }
+      }
+    },
+    {
+      "key": "native-queue",
+      "commit": "8aef497f045fd574c4245a4f73da2cd12b1a2f93",
+      "title": "[AX-0] COLA: Confina archivos y serializa prompts concurrentes",
+      "paths": [
+        "scripts/c5_cli/moskv_native_host.py",
+        "tests/test_swarm100_lot12_s4_regressions.py"
+      ],
+      "checks": {
+        "diff": {
+          "exit_code": 0,
+          "output": ""
+        },
+        "topology": {
+          "exit_code": 0,
+          "output": "PASS: instruction files, required direct symlinks and MCP registration references (Git index; VS Code if present)\n"
+        }
+      }
+    },
+    {
+      "key": "git-preflight",
+      "commit": "d215dfbdfd4c44a52bee877d738b09b2cdff89cf",
+      "title": "[AX-0] GIT: Exige respaldo y estado estable antes de reescribir",
+      "paths": [
+        "scripts/c5_git_utils/rewrite_commits.py",
+        "tests/test_swarm100_lot12_s4_regressions.py"
+      ],
+      "checks": {
+        "diff": {
+          "exit_code": 0,
+          "output": ""
+        },
+        "topology": {
+          "exit_code": 0,
+          "output": "PASS: instruction files, required direct symlinks and MCP registration references (Git index; VS Code if present)\n"
+        }
+      }
+    },
+    {
+      "key": "instruction-install",
+      "commit": "612f9ce8f30be717e55921a6b839cac6b7f68509",
+      "title": "[AX-0] INSTALACION: Respalda instrucciones y rechaza rutas inseguras",
+      "paths": [
+        "tools/install_shield.sh",
+        "tests/test_swarm100_lot12_s4_regressions.py"
+      ],
+      "checks": {
+        "diff": {
+          "exit_code": 0,
+          "output": ""
+        },
+        "topology": {
+          "exit_code": 0,
+          "output": "PASS: instruction files, required direct symlinks and MCP registration references (Git index; VS Code if present)\n"
+        }
+      }
+    },
+    {
+      "key": "dns-filter",
+      "commit": "fe0a424ac63a6db76446bec21f9dd1e1bab914c8",
+      "title": "[AX-0] DNS: Limita seleccion de registros a nombres exactos",
+      "paths": [
+        "scripts/c5_icloud_deploy.py",
+        "tests/test_swarm100_lot12_s4_regressions.py"
+      ],
+      "checks": {
+        "diff": {
+          "exit_code": 0,
+          "output": ""
+        },
+        "topology": {
+          "exit_code": 0,
+          "output": "PASS: instruction files, required direct symlinks and MCP registration references (Git index; VS Code if present)\n"
+        }
+      }
+    },
+    {
+      "key": "youtube-argv",
+      "commit": "fb6c061a347bd7ca869c6939e1413ef938888e9f",
+      "title": "[AX-0] YOUTUBE: Ejecuta argumentos literales sin interprete shell",
+      "paths": [
+        "tools/skill_library/global/youtube-analysis-pipeline/scripts/yt_audit.py",
+        "tests/test_swarm100_lot12_s5_regressions.py"
+      ],
+      "checks": {
+        "diff": {
+          "exit_code": 0,
+          "output": ""
+        },
+        "topology": {
+          "exit_code": 0,
+          "output": "PASS: instruction files, required direct symlinks and MCP registration references (Git index; VS Code if present)\n"
+        }
+      }
+    },
+    {
+      "key": "input-bounds",
+      "commit": "39197dbf89b9afe74962b64ac5ba29b020d69349",
+      "title": "[AX-0] FILTRO: Rechaza entradas completas fuera de limite",
+      "paths": [
+        "01_KISH_ENGINE/babylon60/core/popperian_filter.py",
+        "tests/test_swarm100_lot12_s5_regressions.py"
+      ],
+      "checks": {
+        "diff": {
+          "exit_code": 0,
+          "output": ""
+        },
+        "topology": {
+          "exit_code": 0,
+          "output": "PASS: instruction files, required direct symlinks and MCP registration references (Git index; VS Code if present)\n"
+        }
+      }
+    },
+    {
+      "key": "routing-policy",
+      "commit": "788c4e90fca471ac437d49c4089839c07baac61b",
+      "title": "[AX-0] ROUTING: Valida todos los modelos transmitidos",
+      "paths": [
+        "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+        "tests/test_swarm100_lot12_s5_regressions.py"
+      ],
+      "checks": {
+        "diff": {
+          "exit_code": 0,
+          "output": ""
+        },
+        "topology": {
+          "exit_code": 0,
+          "output": "PASS: instruction files, required direct symlinks and MCP registration references (Git index; VS Code if present)\n"
+        }
+      }
+    },
+    {
+      "key": "psd-firewall",
+      "commit": "cc3b170a6cb924bb0005c099f841df9a44a7bbdc",
+      "title": "[AX-0] SMT: Comprueba todos los menores principales exactos",
+      "paths": [
+        "01_KISH_ENGINE/babylon60/kernel/ns_z3_firewall.py",
+        "tests/test_swarm100_lot12_s5_regressions.py"
+      ],
+      "checks": {
+        "diff": {
+          "exit_code": 0,
+          "output": ""
+        },
+        "topology": {
+          "exit_code": 0,
+          "output": "PASS: instruction files, required direct symlinks and MCP registration references (Git index; VS Code if present)\n"
+        }
+      }
+    },
+    {
+      "key": "formal-status",
+      "commit": "203c9a15aaf621c10208494a32b43586375153b8",
+      "title": "[AX-0] FORMAL: Retira certificacion sin comprobador y aisla demo",
+      "paths": [
+        "scripts/c5_destiladora/proof_emitter_lean4.py",
+        "scripts/c5_destiladora/test_destiladora_e2e.py",
+        "tests/test_swarm100_lot12_s6_formal_regressions.py"
+      ],
+      "checks": {
+        "diff": {
+          "exit_code": 0,
+          "output": ""
+        },
+        "topology": {
+          "exit_code": 0,
+          "output": "PASS: instruction files, required direct symlinks and MCP registration references (Git index; VS Code if present)\n"
+        }
+      }
+    },
+    {
+      "key": "m0-manifest",
+      "commit": "9cd02cec928947f1a115ee51898feb9ad3661b1a",
+      "title": "[AX-0] M0: Exige todos los archivos y digests del sobre firmado",
+      "paths": [
+        "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+        "tests/test_swarm100_lot12_m0_regressions.py"
+      ],
+      "checks": {
+        "diff": {
+          "exit_code": 0,
+          "output": ""
+        },
+        "topology": {
+          "exit_code": 0,
+          "output": "PASS: instruction files, required direct symlinks and MCP registration references (Git index; VS Code if present)\n"
+        }
+      }
+    },
+    {
+      "key": "honest-reports",
+      "commit": "f810a9a887f5271b044d02bb5c5d4309f35c1e71",
+      "title": "[AX-0] INFORMES: Distingue observaciones y controles no ejecutados",
+      "paths": [
+        "scripts/c5_sharur/sharur_100_conversation_reporters.py",
+        "tests/test_swarm100_lot12_s6_reports_regressions.py"
+      ],
+      "checks": {
+        "diff": {
+          "exit_code": 0,
+          "output": ""
+        },
+        "topology": {
+          "exit_code": 0,
+          "output": "PASS: instruction files, required direct symlinks and MCP registration references (Git index; VS Code if present)\n"
+        }
+      }
+    },
+    {
+      "key": "swarm-simulation",
+      "commit": "065da849438170720d0fb2a4938cc194ffb78aad",
+      "title": "[AX-0] SWARM: Declara simulacion sin atribuir mediciones ni pases",
+      "paths": [
+        "scripts/c5_sharur/sharur_100_swarm_execution.py",
+        "tests/test_swarm100_lot12_s6_reports_regressions.py"
+      ],
+      "checks": {
+        "diff": {
+          "exit_code": 0,
+          "output": ""
+        },
+        "topology": {
+          "exit_code": 0,
+          "output": "PASS: instruction files, required direct symlinks and MCP registration references (Git index; VS Code if present)\n"
+        }
+      }
+    }
+  ],
+  "blocked": [
+    {
+      "id": "AC-01",
+      "severity": "P1",
+      "paths": [
+        "01_KISH_ENGINE/babylon60/cortex/cortex_purge_anergy.py"
+      ],
+      "observation": "La nueva raiz selecciona configuracion activa versionada para archivar; destinos de archivo tambien pueden atravesar symlinks.",
+      "evidence_kind": "static selection; no purge execution"
+    },
+    {
+      "id": "AC-02",
+      "severity": "P1",
+      "paths": [
+        "01_KISH_ENGINE/babylon60/primitives/sandbox.py"
+      ],
+      "observation": "El filtro AST admite referencias a frames de generadores; el padre captura stdout/stderr sin cota y solo termina el hijo directo.",
+      "evidence_kind": "static admission and source review; payload not executed"
+    },
+    {
+      "id": "AC-03",
+      "severity": "P2",
+      "paths": [
+        "01_KISH_ENGINE/babylon60/core/moskv_kernel.py"
+      ],
+      "observation": "Cancelacion/error elimina de la cola el claim extraido sin registrar failed/unknown y deja admision abierta tras morir el escritor.",
+      "evidence_kind": "source and regression review"
+    },
+    {
+      "id": "AC-04",
+      "severity": "P2",
+      "paths": [
+        "01_KISH_ENGINE/babylon60/attestation/conformal_tree.py",
+        "01_KISH_ENGINE/babylon60/attestation/merkle_anchor.py",
+        "scripts/c5_l1_ledger/seal_bounty_aeon.py"
+      ],
+      "observation": "El nuevo productor v2 firma el manifiesto completo; el verificador Rust actual verifica solo bytes de la raiz. Se conserva exclusivamente el hunk de identidad de sealer, manteniendo v1.",
+      "evidence_kind": "Python/Rust consumer comparison"
+    },
+    {
+      "id": "AC-05",
+      "severity": "P2",
+      "paths": [
+        "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py"
+      ],
+      "observation": "La igualdad de listas Python acepta JSON true e integer 1 como iguales.",
+      "evidence_kind": "pure in-memory counterexample"
+    },
+    {
+      "id": "AC-06",
+      "severity": "P2",
+      "paths": [
+        "scripts/babylon60/gen_oncology_primitives.py"
+      ],
+      "observation": "El CLI escribe JSON antes de la nueva validacion de cardinalidad del exportador Lean; un error puede dejar JSON nuevo y Lean anterior.",
+      "evidence_kind": "static CLI path; no joint output acceptance"
+    }
+  ],
+  "acceptance": {
+    "pytest": {
+      "passed": 354,
+      "failed": 0,
+      "skipped": 0,
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--extra",
+        "dev",
+        "python",
+        "-m",
+        "pytest",
+        "tests/test_swarm100_lot12_m0_regressions.py",
+        "tests/test_swarm100_lot12_s1_regressions.py",
+        "tests/test_swarm100_lot12_s2_identity_regressions.py",
+        "tests/test_swarm100_lot12_s2_trust_regressions.py",
+        "tests/test_swarm100_lot12_s3_regressions.py",
+        "tests/test_swarm100_lot12_s4_regressions.py",
+        "tests/test_swarm100_lot12_s5_regressions.py",
+        "tests/test_swarm100_lot12_s6_formal_regressions.py",
+        "tests/test_swarm100_lot12_s6_reports_regressions.py",
+        "tests/test_ledger_snapshot_engine.py",
+        "tests/test_bounty_aeon_sealer.py",
+        "tests/test_itera2_invariants.py",
+        "tests/test_finding_evidence_contract.py",
+        "tests/test_fl027_provenance_authority.py",
+        "-q",
+        "-rs"
+      ]
+    },
+    "worker": {
+      "fixtures_passed": 4,
+      "command": [
+        "node",
+        "--experimental-vm-modules",
+        "tests/test_swarm100_lot12_s3_worker.mjs"
+      ]
+    },
+    "ruff": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--extra",
+        "dev",
+        "ruff",
+        "check",
+        "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py",
+        "01_KISH_ENGINE/babylon60/bft/master_ledger_queue.py",
+        "01_KISH_ENGINE/babylon60/core/popperian_filter.py",
+        "01_KISH_ENGINE/babylon60/crypto/identity.py",
+        "01_KISH_ENGINE/babylon60/crypto/keys.py",
+        "01_KISH_ENGINE/babylon60/kernel/ns_z3_firewall.py",
+        "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+        "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+        "02_EDIN_SWARMS/agents_archi/orchestrator/kda_dag_swarm.py",
+        "scripts/c5_cli/moskv_native_host.py",
+        "scripts/c5_destiladora/proof_emitter_lean4.py",
+        "scripts/c5_destiladora/test_destiladora_e2e.py",
+        "scripts/c5_git_utils/rewrite_commits.py",
+        "scripts/c5_icloud_deploy.py",
+        "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+        "scripts/c5_l1_ledger/seal_bounty_aeon.py",
+        "scripts/c5_sharur/sharur_100_conversation_reporters.py",
+        "scripts/c5_sharur/sharur_100_swarm_execution.py",
+        "tests/test_itera2_invariants.py",
+        "tests/test_swarm100_lot12_m0_regressions.py",
+        "tests/test_swarm100_lot12_s1_regressions.py",
+        "tests/test_swarm100_lot12_s2_identity_regressions.py",
+        "tests/test_swarm100_lot12_s2_trust_regressions.py",
+        "tests/test_swarm100_lot12_s3_regressions.py",
+        "tests/test_swarm100_lot12_s4_regressions.py",
+        "tests/test_swarm100_lot12_s5_regressions.py",
+        "tests/test_swarm100_lot12_s6_formal_regressions.py",
+        "tests/test_swarm100_lot12_s6_reports_regressions.py",
+        "tools/skill_library/global/youtube-analysis-pipeline/scripts/yt_audit.py",
+        "tools/tamkarum_license_provisioner.py"
+      ],
+      "exit_code": 0,
+      "output": "Uninstalled 1 package in 4ms\nInstalled 1 package in 2ms\nAll checks passed!\n"
+    },
+    "mypy": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--extra",
+        "dev",
+        "mypy",
+        "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py",
+        "01_KISH_ENGINE/babylon60/bft/master_ledger_queue.py",
+        "01_KISH_ENGINE/babylon60/core/popperian_filter.py",
+        "01_KISH_ENGINE/babylon60/crypto/identity.py",
+        "01_KISH_ENGINE/babylon60/crypto/keys.py",
+        "01_KISH_ENGINE/babylon60/kernel/ns_z3_firewall.py",
+        "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+        "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+        "02_EDIN_SWARMS/agents_archi/orchestrator/kda_dag_swarm.py",
+        "scripts/c5_cli/moskv_native_host.py",
+        "scripts/c5_destiladora/proof_emitter_lean4.py",
+        "scripts/c5_destiladora/test_destiladora_e2e.py",
+        "scripts/c5_git_utils/rewrite_commits.py",
+        "scripts/c5_icloud_deploy.py",
+        "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+        "scripts/c5_l1_ledger/seal_bounty_aeon.py",
+        "scripts/c5_sharur/sharur_100_conversation_reporters.py",
+        "scripts/c5_sharur/sharur_100_swarm_execution.py",
+        "tests/test_itera2_invariants.py",
+        "tests/test_swarm100_lot12_m0_regressions.py",
+        "tests/test_swarm100_lot12_s1_regressions.py",
+        "tests/test_swarm100_lot12_s2_identity_regressions.py",
+        "tests/test_swarm100_lot12_s2_trust_regressions.py",
+        "tests/test_swarm100_lot12_s3_regressions.py",
+        "tests/test_swarm100_lot12_s4_regressions.py",
+        "tests/test_swarm100_lot12_s5_regressions.py",
+        "tests/test_swarm100_lot12_s6_formal_regressions.py",
+        "tests/test_swarm100_lot12_s6_reports_regressions.py",
+        "tools/skill_library/global/youtube-analysis-pipeline/scripts/yt_audit.py",
+        "tools/tamkarum_license_provisioner.py"
+      ],
+      "exit_code": 0,
+      "output": "Uninstalled 1 package in 1ms\nInstalled 1 package in 1ms\nSuccess: no issues found in 30 source files\n"
+    },
+    "gates": {
+      "semantic": {
+        "command": [
+          "python3",
+          "scripts/c5_quality_gates/audit_semantic_contracts.py",
+          "--workspace-only"
+        ],
+        "exit_code": 0,
+        "output": "PASS: known semantic patterns (63 documents, 41 Python files), local links/anchors in 16 governance documents; not a proof of semantic consistency or runtime.\n"
+      },
+      "budget": {
+        "command": [
+          "python3",
+          "scripts/c5_quality_gates/audit_token_budget.py",
+          "--workspace-only",
+          "--skip-ghost-listeners"
+        ],
+        "exit_code": 0,
+        "output": "=== [C5-REAL] AUDITORÍA DE PRESUPUESTO DE TOKENS ===\n■ .babylon60rules (workspace, counted once): 3,964 B (~991 estimated tokens)\n■ AGENTS.md (workspace, counted once): 4,808 B (~1,202 estimated tokens)\n■ Global rules: NOT_CHECKED (workspace-only)\n■ Reglas always_on (Global: 0, Workspace: 0): 0 B (~0 estimated tokens)\n■ INSPECTED ALWAYS_ON: 8,772 B / 40,000 B (~2,193 estimated tokens; actual client context not measured)\n■ Reglas condicionales (model_decision): 0 global + 8 workspace (bodies excluded from this budget; client loading not measured)\n■ Ghost Listeners (conversation_summaries.db): NOT_CHECKED (explicitly skipped)\nPASS: Workspace token budget within inline ceiling; global rules and cross-scope duplicates not checked.\n"
+      },
+      "topology": {
+        "command": [
+          "python3",
+          "scripts/guards/verify_active_topology.py"
+        ],
+        "exit_code": 0,
+        "output": "PASS: instruction files, required direct symlinks and MCP registration references (worktree; VS Code if present)\n"
+      },
+      "diff": {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "exit_code": 0,
+        "output": ""
+      }
+    }
+  },
+  "preservation": {
+    "unchanged_paths": 202,
+    "intentional_adjustments": [
+      "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+      "tests/test_swarm100_lot12_s1_regressions.py",
+      "tests/test_swarm100_lot12_s3_regressions.py"
+    ],
+    "other_paths_changed": [],
+    "working_paths_changed_by_merge": []
+  },
+  "limits": [
+    "Verified committed content; main retains concurrent uncommitted fragments.",
+    "No production keys, real ledgers, services, deployment, hardware authentication or remote push.",
+    "Python3.10 exception-note absence simulated; full3.10 interpreter not exercised.",
+    "Formal emitter withdraws PROVED eligibility; registered checker is not implemented.",
+    "JSON atomicity is per file; no cross-file transaction.",
+    "Private-key persistence in OS keyring, physical power cuts and universal isolation are not certified."
+  ],
+  "experimental_ring0": "Excluded as one coordinated block with lib.rs, tests, SQL, Lean and Cargo. Native Apple symbol implementation/link and physical backends need acceptance; static TPM, SQL/Lean genesis and theorem-strength issues were reported.",
+  "later_regulatory_ci": "Post-capture regulatory/compliance/CI changes and lot12/13 reconciliation reports are preserved but not accepted by this audit."
+}

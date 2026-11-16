@@ -1,0 +1,7 @@
+{
+  "source_sha256": {
+    "scripts/c5_git_utils/c5_distill_public_mirror.sh": "92236e509279cd93355ca574c76070008b7adfabc8cd93ceb87acf3b18f02c0f",
+    "scripts/c5_git_utils/c5_ship.sh": "fb71a99a81f7254d4ec50bcacfae80bddf6c909e459c0d2c389d77c3d342dff8",
+    "tests/test_swarm100_lot3_regressions.py": "25060b92b5d9f0aab1075f52060613292e0845607a8ccf2303dd9588cf1e5549"
+  }
+}

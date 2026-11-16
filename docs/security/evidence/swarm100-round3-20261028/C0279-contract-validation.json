@@ -1,0 +1,18 @@
+{
+  "source_path": "scripts/c5_sharur/agent_beeper.py",
+  "before_sha256": "2601874532f18a3286ab7b0cf306672b20ae4eab61b40e57c1ccdaf6283f39cb",
+  "executable_ast_sha256": "e8777a1528a5df66bc5dd3e91ab12ffb207614ddc2d88f1183010200e174e7c0",
+  "change_scope": "docstrings only; preserve retained one-broadcast global barrier and existing unicast behavior",
+  "after_sha256": "92aa547bdf314d6dd303e31c55daa1c86a40e8c883e16d4fcd408a2b9f27a9fa",
+  "executable_ast_unchanged": true,
+  "checks": {
+    "pre_broadcast_wait_suspends": "PASS",
+    "broadcast_wakes_waiter": "PASS",
+    "late_waiter_gets_retained_broadcast": "PASS",
+    "repeated_wait_gets_retained_broadcast": "PASS",
+    "fresh_instance_waits_for_next_round": "PASS",
+    "original_instance_retains_original_round": "PASS",
+    "C0278_unicast_defect_still_reproduced": "PASS"
+  },
+  "runtime_scope": "Direct import of the stdlib-only source and in-memory asyncio calls with synthetic payloads; no swarm simulation/native/DB/network/operator data."
+}

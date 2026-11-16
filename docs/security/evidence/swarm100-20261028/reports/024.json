@@ -1,0 +1,417 @@
+{
+  "shard": "024",
+  "findings": [
+    {
+      "title": "Malformed tool arguments terminate the stdio server",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/mcp/cortex_mcp_server.py",
+      "line": 1437,
+      "evidence": "process_request invokes handler(params) without exception handling; run_stdio lines 1454-1461 also has no exception boundary. _tool_query_ledger converts an arbitrary string limit using int() at lines 1009-1010; _read_message calls json.loads at line 613 without a parse-error handler.",
+      "trigger": "Send tools/call for bft_query_ledger with arguments.limit=\"invalid\", or send malformed JSON over the connected stdio transport.",
+      "impact": "An input validation error escapes the main loop and kills the MCP process, interrupting subsequent legitimate requests instead of returning a per-request error.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Lamport allocation races across browser agent connections",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/core/browser_agent.py",
+      "line": 51,
+      "evidence": "_next_lamport_t lines 39-44 reads MAX(lamport_t)+1 before the separate INSERT at lines 54-60. The schema lines 13-21 has no unique constraint on lamport_t. URLCacheSync opens connect_sync; database/core.py:70 uses isolation_level=None.",
+      "trigger": "Two BrowserResearchAgent instances sharing a database both read the same MAX before either inserts an attestation.",
+      "impact": "Both inserts can persist the same logical tick, violating the declared Lamport ordering and leaving no deterministic per-event ordering.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Cache commits before the attestation and hides interrupted writes",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/core/browser_agent.py",
+      "line": 120,
+      "evidence": "cache.put is called at line 120 and _record_attestation only at line 125. URLCacheSync uses the autocommit connection (database/core.py:70). The cache-hit return at lines 87-95 neither checks nor repairs bft_attestations.",
+      "trigger": "The process exits, or the attestation INSERT fails, after cache.put has committed and before the attestation is persisted.",
+      "impact": "Subsequent calls return cached content marked passed without the promised audit record, and normal cache hits never recover that missing record.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Conformity simulator authorizes CE marking even when checks fail",
+      "severity": "P2",
+      "path": "scripts/c5_demos/poc_aesia_conformity_inspector.py",
+      "line": 149,
+      "evidence": "overall_status at line 148 depends on all_passed, but market_access_declaration is unconditionally CE_MARKING_AUTHORIZED at line 149; audit_sitrep returns False when SITREP is absent (49-51), and generate_annex_vi_pack still writes the declaration (164-165).",
+      "trigger": "Run this explicitly labelled simulator with a missing SITREP or any failing checklist.",
+      "impact": "The generated example declaration asserts authorization while recording NON_CONFORMANT, creating a contradictory output that cannot support the claimed marking. This is an example artifact issue, not evidence of a production legal approval flow.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Conformity example labels a status string as verified hardware evidence",
+      "severity": "P2",
+      "path": "scripts/c5_demos/poc_aesia_conformity_inspector.py",
+      "line": 83,
+      "evidence": "Lines 82-87 check only whether ROOT-named tasks have attestation.status == ATTESTED_BY_OPERATOR. No signature, trusted key or payload binding is checked; line 95 nevertheless emits Hardware (Secure Enclave P-256) validada, and line 96 takes a signature substring without verification.",
+      "trigger": "Provide a SITREP ROOT task with the expected status string and an arbitrary or absent signature.",
+      "impact": "The example marks human-supervision evidence PASS and claims validated hardware without authenticating any evidence. Simulator labeling limits the scope but does not make that evidence statement accurate.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Flagship prerequisite check prints the API token",
+      "severity": "P2",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/flagship/api.md",
+      "line": 155,
+      "evidence": "The documented Check with shell block echoes CLOUDFLARE_API_TOKEN using its full current value when set.",
+      "trigger": "Follow the prerequisite instructions with a real token in the environment, especially via a terminal tool whose output is logged.",
+      "impact": "The credential is copied into terminal history/transcripts or agent tool output although only presence needs checking. No actual credential was read during this audit.",
+      "confidence": "high",
+      "kind": "docs"
+    },
+    {
+      "title": "Audio example mutates persistent DSP state during rendering",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/remotion-audio-reactive-video/examples/AudioReactiveMaster.tsx",
+      "line": 53,
+      "evidence": "Line 36 memoizes a mutable ballisticState once; lines 53-56 pass it into extractBands on every render. SpectralFlux.ts:95-99 overwrites prevSpectrum and applies ballistics; :51-60 incorporates and updates smoothedValues.",
+      "trigger": "Render the same frame after a different preceding frame, seek backwards, or rerender the same component/frame.",
+      "impact": "Onset and smoothed band values depend on render history rather than only frame and input audio. Preview seeking and independently rendered segments can produce differing camera and glow values for the same frame.",
+      "confidence": "high",
+      "kind": "example"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".agents/skills/c5-audiovisual-acreativo-sota-project/references/aliases.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          202
+        ]
+      ],
+      "sha256_expected": "1b92ce4435609d864d6481fb5501dfc32e861e73131d5f661529a18c8dfa4d66",
+      "sha256_observed": "1b92ce4435609d864d6481fb5501dfc32e861e73131d5f661529a18c8dfa4d66",
+      "hash_match": true
+    },
+    {
+      "path": ".gitleaks.toml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          67
+        ]
+      ],
+      "sha256_expected": "e90ec17a0fa1c1817f2f6c4ee79953b5f42a4d89a56bfe70bbd95cc1a86decfd",
+      "sha256_observed": "e90ec17a0fa1c1817f2f6c4ee79953b5f42a4d89a56bfe70bbd95cc1a86decfd",
+      "hash_match": true
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/sync_bridge.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          96
+        ]
+      ],
+      "sha256_expected": "32ca21f67fe202b1e492ced6521b783b19184454ddccdc21bf78cb2857d1b07b",
+      "sha256_observed": "32ca21f67fe202b1e492ced6521b783b19184454ddccdc21bf78cb2857d1b07b",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/core/browser_agent.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          139
+        ]
+      ],
+      "sha256_expected": "d4e8512bfe9676665697c01cd83eb99cd4d385c0e120d750acf87936bdad31e2",
+      "sha256_observed": "d4e8512bfe9676665697c01cd83eb99cd4d385c0e120d750acf87936bdad31e2",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/mcp/cortex_mcp_server.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          1511
+        ]
+      ],
+      "sha256_expected": "ae79aebe7b9f65b31eae72dce580c13417ddf298bc6246a091582d8761a7932b",
+      "sha256_observed": "ae79aebe7b9f65b31eae72dce580c13417ddf298bc6246a091582d8761a7932b",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/verification/hardware_attestation.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          85
+        ]
+      ],
+      "sha256_expected": "b2e021e2e31d0315a1025a1bd5c72463e3650a0b1237d9243d4b71d9812ab1ae",
+      "sha256_observed": "b2e021e2e31d0315a1025a1bd5c72463e3650a0b1237d9243d4b71d9812ab1ae",
+      "hash_match": true
+    },
+    {
+      "path": "WHY_BABYLON_60.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          129
+        ]
+      ],
+      "sha256_expected": "f885f7bc582eb23be91634ea8ccdd0c9e4cd5a2265de726e4bcdc913710ae812",
+      "sha256_observed": "f885f7bc582eb23be91634ea8ccdd0c9e4cd5a2265de726e4bcdc913710ae812",
+      "hash_match": true
+    },
+    {
+      "path": "docs/03_guides/00_index.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "sha256_expected": "8710a2ca24e1367432c7564263fc78e7197f62fb3e981613f5f0f0452473ac1a",
+      "sha256_observed": "8710a2ca24e1367432c7564263fc78e7197f62fb3e981613f5f0f0452473ac1a",
+      "hash_match": true
+    },
+    {
+      "path": "docs/security/cognitive-pilot-real-evaluation-2026-10-23.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          185
+        ]
+      ],
+      "sha256_expected": "7725184d3c0d125b25e49816317767f3640e127ef5323605cef6e098fc794760",
+      "sha256_observed": "7725184d3c0d125b25e49816317767f3640e127ef5323605cef6e098fc794760",
+      "hash_match": true
+    },
+    {
+      "path": "proof/lean/Babylon.lean",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          464
+        ]
+      ],
+      "sha256_expected": "909bdb5bcd6c8f2ee8e93d5ed97949419c7d8fa772c42e6d6d049fdfa574606e",
+      "sha256_observed": "909bdb5bcd6c8f2ee8e93d5ed97949419c7d8fa772c42e6d6d049fdfa574606e",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_demos/poc_aesia_conformity_inspector.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          176
+        ]
+      ],
+      "sha256_expected": "4f9a50aa535f23f233cf539b6d1f3e9e8ee5d36ece8ae84ae0077a7ff61219b5",
+      "sha256_observed": "4f9a50aa535f23f233cf539b6d1f3e9e8ee5d36ece8ae84ae0077a7ff61219b5",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_quality_gates/grok_sampling_benchmark.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          141
+        ]
+      ],
+      "sha256_expected": "957f8cc6b93093d6f90b93eed8e03bbc5ab84ced55159d28baa1e5bab10bb5eb",
+      "sha256_observed": "957f8cc6b93093d6f90b93eed8e03bbc5ab84ced55159d28baa1e5bab10bb5eb",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/guards/verify_publish_run.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          26
+        ]
+      ],
+      "sha256_expected": "7371c3bf4f81e7ed6596705168b0317be2655ac7671db25f103aabc1049a665e",
+      "sha256_observed": "7371c3bf4f81e7ed6596705168b0317be2655ac7671db25f103aabc1049a665e",
+      "hash_match": true
+    },
+    {
+      "path": "tests/babylon60/primitives/test_disintegration_matrix.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "sha256_expected": "08574af3e0a80f25f1d13eb2e4d3334e32c15c2f4ee454058de15dccb05b47b4",
+      "sha256_observed": "08574af3e0a80f25f1d13eb2e4d3334e32c15c2f4ee454058de15dccb05b47b4",
+      "hash_match": true
+    },
+    {
+      "path": "tests/test_clean_room_aot_dissector.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          332
+        ]
+      ],
+      "sha256_expected": "64b72d11ed6954a254491289eddfa812418a4ee0da991203aab0b3de1dc4073b",
+      "sha256_observed": "64b72d11ed6954a254491289eddfa812418a4ee0da991203aab0b3de1dc4073b",
+      "hash_match": true
+    },
+    {
+      "path": "tests/test_release_verification.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          377
+        ]
+      ],
+      "sha256_expected": "32172a65f7e65556fec7a107e85a9e584a2a716827ce5bf5cb24128b45756958",
+      "sha256_observed": "32172a65f7e65556fec7a107e85a9e584a2a716827ce5bf5cb24128b45756958",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/ai-gateway/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          111
+        ]
+      ],
+      "sha256_expected": "1135a774a42e059942ccb12d8ba514e6479d7f8f5f47400b4053f6da5984b532",
+      "sha256_observed": "1135a774a42e059942ccb12d8ba514e6479d7f8f5f47400b4053f6da5984b532",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/flagship/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          390
+        ]
+      ],
+      "sha256_expected": "c7b8eb86ed852a3f37709f000988aeb89860c24aedee58527379e475f0996894",
+      "sha256_observed": "c7b8eb86ed852a3f37709f000988aeb89860c24aedee58527379e475f0996894",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/smart-placement/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          183
+        ]
+      ],
+      "sha256_expected": "a57aaf74c479e9f45db165fab1e762c1f5d58aeb4111a27425865cbac4f4a648",
+      "sha256_observed": "a57aaf74c479e9f45db165fab1e762c1f5d58aeb4111a27425865cbac4f4a648",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workflows/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          90
+        ]
+      ],
+      "sha256_expected": "c64acde26a76972db9b900a7e6e5f6394fb9ffeb6e7bbb3c728e6e13cf98cfba",
+      "sha256_observed": "c64acde26a76972db9b900a7e6e5f6394fb9ffeb6e7bbb3c728e6e13cf98cfba",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/remotion-audio-reactive-video/examples/AudioReactiveMaster.tsx",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          193
+        ]
+      ],
+      "sha256_expected": "b25dd4fa4dffa5e29f4d8d8ebd4d788e37286ea845c90fa6161115f5b8948422",
+      "sha256_observed": "b25dd4fa4dffa5e29f4d8d8ebd4d788e37286ea845c90fa6161115f5b8948422",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_28_site_playbooks_costco.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "sha256_expected": "1fbcf3768ebf30eb322e8518fa1e66c2b16726becd5ed42615fc5bae237ce413",
+      "sha256_observed": "1fbcf3768ebf30eb322e8518fa1e66c2b16726becd5ed42615fc5bae237ce413",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-ring0-babylon-kernel/references/modules/babylon-shield/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          78
+        ]
+      ],
+      "sha256_expected": "cbed11eacc5ad8dd00af0cfeaedd69ac984d2a9b25fc5925efb825c917d88ded",
+      "sha256_observed": "cbed11eacc5ad8dd00af0cfeaedd69ac984d2a9b25fc5925efb825c917d88ded",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-wetware-divergente/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "sha256_expected": "587d333fea332785ac8b42bb4c8b08a887a3cd219a1a00539029266ef1ebd8ec",
+      "sha256_observed": "587d333fea332785ac8b42bb4c8b08a887a3cd219a1a00539029266ef1ebd8ec",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/workspace/babylon60-kernel-invariants/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "sha256_expected": "5de50e1331eb2319a5adaf1540baf65a89c50f15f01e17551931371cd4957f3a",
+      "sha256_observed": "5de50e1331eb2319a5adaf1540baf65a89c50f15f01e17551931371cd4957f3a",
+      "hash_match": true
+    }
+  ],
+  "tool_limitations": [
+    "No native codebase-memory graph tools exposed in this session; targeted text reads and rg used.",
+    "Static audit only: no repository tests, builds, application runtime, network/API validation, or hardware checks executed.",
+    "Cross-file source was read only to trace local behavior; external Cloudflare API contracts were not independently validated.",
+    "All assigned paths matched the frozen shard manifest; no symlinks or unreviewable assigned paths observed."
+  ],
+  "tests_run": []
+}

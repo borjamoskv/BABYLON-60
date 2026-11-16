@@ -1,0 +1,6 @@
+{
+  "executable": "/Users/borjafernandezangulo/.codex/worktrees/pending-local-audit/BABYLON-60/.venv/bin/z3",
+  "blake3": "4a6b119d2f5e1dbce075f596f15f7a0243d0d2f55713a1e4ca439fd7c2d7104f",
+  "version": "Z3 version 5.1.0 - 64 bit",
+  "scope": "Explicit fixture-only anchor for Z3 from uv.lock installed z3-solver; no product/global trust changed"
+}

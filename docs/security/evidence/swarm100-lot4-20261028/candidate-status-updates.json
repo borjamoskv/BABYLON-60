@@ -1,0 +1,291 @@
+[
+  {
+    "candidate_id": "SW100-C0060",
+    "decision": "ALREADY_FIXED",
+    "severity": "P2",
+    "remediation_state": "FIXED",
+    "path": "proof/bundles/attestation_bundle_v1/verify",
+    "current_source_sha256": "9dae74bb71d75c7c5f93216b41d82caed7771dc48c034024366630046fe4ab87",
+    "rationale": "The old v1 verifier returned exit0 after failed hash/signature checks. It now rejects unsupported legacy input and all integrity/signature failures with nonzero status; unsigned default is NOT_AUTHENTICATED/exit2. Valid new-format signed integrity against an explicit external software fixture anchor succeeds without certifying execution or hardware.",
+    "source_checks": [
+      {
+        "path": "proof/bundles/attestation_bundle_v1/verify",
+        "start_line": 204,
+        "end_line": 296,
+        "observation": "The old v1 verifier returned exit0 after failed hash/signature checks. It now rejects unsupported legacy input and all integrity/signature failures with nonzero status; unsigned default is NOT_AUTHENTICATED/exit2. Valid new-format signed integrity against an explicit external software fixture anchor succeeds without certifying execution or hardware."
+      }
+    ],
+    "guards": [
+      "Legacy signatures cannot authenticate new metadata retroactively; legacy/unknown schemas are rejected.",
+      "Generators emit only unsigned NOT_EXECUTED/UNVERIFIED snapshots and never load/generate private keys.",
+      "Integrity-only is explicitly unauthenticated; a signature is checked only against an external P256 key.",
+      "Signature math does not establish hardware provenance, test execution or physical operator approval.",
+      "Scope is the exact SELECTED_FILES inventory, not the entire repository or a consistent live-worktree transaction.",
+      "All generation/signing/verification here used owned temporary fixtures and software-only test keys; no ATTESTED object.",
+      "Historical materials and the separate v2 verifier remain unchanged; C0135/C0136 remain OPEN."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot4-20261028/before-tests.log",
+      "docs/security/evidence/swarm100-lot4-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot4-20261028/independent-review.json",
+      "docs/security/evidence/swarm100-lot4-20261028/validation.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/07.json",
+    "runtime_scope": "Copied CLI entrypoints, portable verifier and bounded pure helpers in temporary fixtures; only software test signatures.",
+    "resolution_type": "CODE_AND_CONFINED_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0061",
+    "decision": "ALREADY_FIXED",
+    "severity": "P1",
+    "remediation_state": "FIXED",
+    "path": "proof/bundles/attestation_bundle_v1/verify",
+    "current_source_sha256": "9dae74bb71d75c7c5f93216b41d82caed7771dc48c034024366630046fe4ab87",
+    "rationale": "New schema binds every manifest field (including commit/time/schema/producer), component path/type/size/BLAKE3 and the exact selected artifact inventory. Bytes are re-read from the explicit external root through nofollow descriptors. Domain-separated ECDSA P256/SHA256 covers the full canonical manifest, checked only with an external trust key. Legacy causal-hash signatures cannot establish this binding and are rejected, not upgraded. Tampered metadata, rehashed manifests, source changes and wrong signature representations are rejected in confined tests.",
+    "source_checks": [
+      {
+        "path": "proof/bundles/attestation_bundle_v1/verify",
+        "start_line": 204,
+        "end_line": 296,
+        "observation": "New schema binds every manifest field (including commit/time/schema/producer), component path/type/size/BLAKE3 and the exact selected artifact inventory. Bytes are re-read from the explicit external root through nofollow descriptors. Domain-separated ECDSA P256/SHA256 covers the full canonical manifest, checked only with an external trust key. Legacy causal-hash signatures cannot establish this binding and are rejected, not upgraded. Tampered metadata, rehashed manifests, source changes and wrong signature representations are rejected in confined tests."
+      }
+    ],
+    "guards": [
+      "Legacy signatures cannot authenticate new metadata retroactively; legacy/unknown schemas are rejected.",
+      "Generators emit only unsigned NOT_EXECUTED/UNVERIFIED snapshots and never load/generate private keys.",
+      "Integrity-only is explicitly unauthenticated; a signature is checked only against an external P256 key.",
+      "Signature math does not establish hardware provenance, test execution or physical operator approval.",
+      "Scope is the exact SELECTED_FILES inventory, not the entire repository or a consistent live-worktree transaction.",
+      "All generation/signing/verification here used owned temporary fixtures and software-only test keys; no ATTESTED object.",
+      "Historical materials and the separate v2 verifier remain unchanged; C0135/C0136 remain OPEN."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot4-20261028/before-tests.log",
+      "docs/security/evidence/swarm100-lot4-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot4-20261028/independent-review.json",
+      "docs/security/evidence/swarm100-lot4-20261028/validation.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/07.json",
+    "runtime_scope": "Copied CLI entrypoints, portable verifier and bounded pure helpers in temporary fixtures; only software test signatures.",
+    "resolution_type": "CODE_AND_CONFINED_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0083",
+    "decision": "ALREADY_FIXED",
+    "severity": "P1",
+    "remediation_state": "FIXED",
+    "path": "scripts/generate_attestation_bundle.py",
+    "current_source_sha256": "e043c9463b2ed0c0d5c0a9d353ab3a5a1e11747129473c778db3eb06fa897553",
+    "rationale": "The v1 entrypoint is import-safe and requires a new explicit output. Its common builder emits suites NOT_EXECUTED, hardware UNVERIFIED and certification NONE; hard-coded PASS/counts, copied signature/key and fixed historical timestamp are removed. Missing inputs fail before output and existing output is never overwritten. No automatic signing or empirical attestation is offered by the unsigned snapshot builder.",
+    "source_checks": [
+      {
+        "path": "scripts/generate_attestation_bundle.py",
+        "start_line": 7,
+        "end_line": 10,
+        "observation": "Import-safe wrapper delegates to the canonical new-format builder only on explicit CLI execution."
+      },
+      {
+        "path": "proof/bundles/attestation_bundle_v1/verify",
+        "start_line": 152,
+        "end_line": 197,
+        "observation": "The v1 entrypoint is import-safe and requires a new explicit output. Its common builder emits suites NOT_EXECUTED, hardware UNVERIFIED and certification NONE; hard-coded PASS/counts, copied signature/key and fixed historical timestamp are removed. Missing inputs fail before output and existing output is never overwritten. No automatic signing or empirical attestation is offered by the unsigned snapshot builder."
+      }
+    ],
+    "guards": [
+      "Legacy signatures cannot authenticate new metadata retroactively; legacy/unknown schemas are rejected.",
+      "Generators emit only unsigned NOT_EXECUTED/UNVERIFIED snapshots and never load/generate private keys.",
+      "Integrity-only is explicitly unauthenticated; a signature is checked only against an external P256 key.",
+      "Signature math does not establish hardware provenance, test execution or physical operator approval.",
+      "Scope is the exact SELECTED_FILES inventory, not the entire repository or a consistent live-worktree transaction.",
+      "All generation/signing/verification here used owned temporary fixtures and software-only test keys; no ATTESTED object.",
+      "Historical materials and the separate v2 verifier remain unchanged; C0135/C0136 remain OPEN."
+    ],
+    "runtime_executed": true,
+    "runtime_scope": "Copied CLI entrypoints, portable verifier and bounded pure helpers in temporary fixtures; only software test signatures.",
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot4-20261028/before-tests.log",
+      "docs/security/evidence/swarm100-lot4-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot4-20261028/independent-review.json",
+      "docs/security/evidence/swarm100-lot4-20261028/validation.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/03.json",
+    "resolution_type": "CODE_AND_CONFINED_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0086",
+    "decision": "ALREADY_FIXED",
+    "severity": "P1",
+    "remediation_state": "FIXED",
+    "path": "scripts/generate_attestation_bundle_v2.py",
+    "current_source_sha256": "4ce522faf18df94eb9710fedf017a162104cb79f747562436f8eb80f0a9cc884",
+    "rationale": "The v2 entrypoint no longer fabricates trial/pass counts, loads a persistent private key or signs invented results. The builder has no execution-evidence ingestion contract and always emits NOT_EXECUTED; even externally signed PASS-like fixture payloads are rejected by the new verifier. This is an honest unsigned snapshot workflow, not implemented test execution or hardware attestation.",
+    "source_checks": [
+      {
+        "path": "scripts/generate_attestation_bundle_v2.py",
+        "start_line": 12,
+        "end_line": 15,
+        "observation": "Import-safe wrapper delegates to the canonical new-format builder only on explicit CLI execution."
+      },
+      {
+        "path": "proof/bundles/attestation_bundle_v1/verify",
+        "start_line": 152,
+        "end_line": 197,
+        "observation": "The v2 entrypoint no longer fabricates trial/pass counts, loads a persistent private key or signs invented results. The builder has no execution-evidence ingestion contract and always emits NOT_EXECUTED; even externally signed PASS-like fixture payloads are rejected by the new verifier. This is an honest unsigned snapshot workflow, not implemented test execution or hardware attestation."
+      }
+    ],
+    "guards": [
+      "Legacy signatures cannot authenticate new metadata retroactively; legacy/unknown schemas are rejected.",
+      "Generators emit only unsigned NOT_EXECUTED/UNVERIFIED snapshots and never load/generate private keys.",
+      "Integrity-only is explicitly unauthenticated; a signature is checked only against an external P256 key.",
+      "Signature math does not establish hardware provenance, test execution or physical operator approval.",
+      "Scope is the exact SELECTED_FILES inventory, not the entire repository or a consistent live-worktree transaction.",
+      "All generation/signing/verification here used owned temporary fixtures and software-only test keys; no ATTESTED object.",
+      "Historical materials and the separate v2 verifier remain unchanged; C0135/C0136 remain OPEN."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot4-20261028/before-tests.log",
+      "docs/security/evidence/swarm100-lot4-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot4-20261028/independent-review.json",
+      "docs/security/evidence/swarm100-lot4-20261028/validation.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/07.json",
+    "runtime_scope": "Copied CLI entrypoints, portable verifier and bounded pure helpers in temporary fixtures; only software test signatures.",
+    "resolution_type": "CODE_AND_CONFINED_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0087",
+    "decision": "ALREADY_FIXED",
+    "severity": "P1",
+    "remediation_state": "FIXED",
+    "path": "scripts/generate_attestation_bundle_v2.py",
+    "current_source_sha256": "4ce522faf18df94eb9710fedf017a162104cb79f747562436f8eb80f0a9cc884",
+    "rationale": "Newly generated bundles copy the canonical portable verifier, whose selected-file checks read actual external artifact bytes and validate path/type/size/BLAKE3 and the bound claims snapshot. A changed/deleted/FIFO/symlink artifact fails even if stored digest strings remain unchanged. The historical v2 verifier is not regenerated and its separate C0135/C0136 stay OPEN.",
+    "source_checks": [
+      {
+        "path": "scripts/generate_attestation_bundle_v2.py",
+        "start_line": 12,
+        "end_line": 15,
+        "observation": "Import-safe wrapper delegates to the canonical new-format builder only on explicit CLI execution."
+      },
+      {
+        "path": "proof/bundles/attestation_bundle_v1/verify",
+        "start_line": 204,
+        "end_line": 296,
+        "observation": "Newly generated bundles copy the canonical portable verifier, whose selected-file checks read actual external artifact bytes and validate path/type/size/BLAKE3 and the bound claims snapshot. A changed/deleted/FIFO/symlink artifact fails even if stored digest strings remain unchanged. The historical v2 verifier is not regenerated and its separate C0135/C0136 stay OPEN."
+      }
+    ],
+    "guards": [
+      "Legacy signatures cannot authenticate new metadata retroactively; legacy/unknown schemas are rejected.",
+      "Generators emit only unsigned NOT_EXECUTED/UNVERIFIED snapshots and never load/generate private keys.",
+      "Integrity-only is explicitly unauthenticated; a signature is checked only against an external P256 key.",
+      "Signature math does not establish hardware provenance, test execution or physical operator approval.",
+      "Scope is the exact SELECTED_FILES inventory, not the entire repository or a consistent live-worktree transaction.",
+      "All generation/signing/verification here used owned temporary fixtures and software-only test keys; no ATTESTED object.",
+      "Historical materials and the separate v2 verifier remain unchanged; C0135/C0136 remain OPEN."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot4-20261028/before-tests.log",
+      "docs/security/evidence/swarm100-lot4-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot4-20261028/independent-review.json",
+      "docs/security/evidence/swarm100-lot4-20261028/validation.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/07.json",
+    "runtime_scope": "Copied CLI entrypoints, portable verifier and bounded pure helpers in temporary fixtures; only software test signatures.",
+    "resolution_type": "CODE_AND_CONFINED_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0088",
+    "decision": "ALREADY_FIXED",
+    "severity": "P2",
+    "remediation_state": "FIXED",
+    "path": "scripts/generate_attestation_bundle_v2.py",
+    "current_source_sha256": "4ce522faf18df94eb9710fedf017a162104cb79f747562436f8eb80f0a9cc884",
+    "rationale": "Environment fields come from observed platform/Python APIs, with empty/unavailable text recorded as UNKNOWN; provenance is OBSERVED_PLATFORM_ONLY and hardware remains UNVERIFIED. Fixed Apple chip/runtime/filesystem/TRNG certification strings are removed from generation. Fake FixtureOS and empty-platform regressions prove the output is derived from the observation provider, without asserting real hardware certification.",
+    "source_checks": [
+      {
+        "path": "scripts/generate_attestation_bundle_v2.py",
+        "start_line": 12,
+        "end_line": 15,
+        "observation": "Import-safe wrapper delegates to the canonical new-format builder only on explicit CLI execution."
+      },
+      {
+        "path": "proof/bundles/attestation_bundle_v1/verify",
+        "start_line": 152,
+        "end_line": 197,
+        "observation": "Environment fields come from observed platform/Python APIs, with empty/unavailable text recorded as UNKNOWN; provenance is OBSERVED_PLATFORM_ONLY and hardware remains UNVERIFIED. Fixed Apple chip/runtime/filesystem/TRNG certification strings are removed from generation. Fake FixtureOS and empty-platform regressions prove the output is derived from the observation provider, without asserting real hardware certification."
+      }
+    ],
+    "guards": [
+      "Legacy signatures cannot authenticate new metadata retroactively; legacy/unknown schemas are rejected.",
+      "Generators emit only unsigned NOT_EXECUTED/UNVERIFIED snapshots and never load/generate private keys.",
+      "Integrity-only is explicitly unauthenticated; a signature is checked only against an external P256 key.",
+      "Signature math does not establish hardware provenance, test execution or physical operator approval.",
+      "Scope is the exact SELECTED_FILES inventory, not the entire repository or a consistent live-worktree transaction.",
+      "All generation/signing/verification here used owned temporary fixtures and software-only test keys; no ATTESTED object.",
+      "Historical materials and the separate v2 verifier remain unchanged; C0135/C0136 remain OPEN."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot4-20261028/before-tests.log",
+      "docs/security/evidence/swarm100-lot4-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot4-20261028/independent-review.json",
+      "docs/security/evidence/swarm100-lot4-20261028/validation.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/07.json",
+    "runtime_scope": "Copied CLI entrypoints, portable verifier and bounded pure helpers in temporary fixtures; only software test signatures.",
+    "resolution_type": "CODE_AND_CONFINED_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0135",
+    "decision": "CONFIRMED_STATIC",
+    "severity": "P2",
+    "remediation_state": "OPEN",
+    "path": "proof/bundles/attestation_bundle_v2/verify",
+    "current_source_sha256": "bc1bff6c68dee804263e0f6e3a1c48bb879ad9c21ceed7881dbc83ffe6a1d8f2",
+    "rationale": "The verifier reads artifact.sha256 and compares it only with manifest.artifact_hash, then labels ARTIFACT HASH VERIFIED. The generator hashes actual source files, but the verifier neither accepts an artifact/root input nor recomputes that aggregate. An unchanged bundle can therefore verify its recorded digest independently of changed artifact bytes. This is a binding/wording limitation of the verifier, not evidence that a signature was forged. Re-reviewed after Lot4: the new producer emits v3 selected-file snapshots with a new portable verifier; it does not regenerate or fix this historical v2 verifier. Its string-only artifact check remains and C0135 stays OPEN/P2. The cross-source reference is refreshed because the old producer was replaced, not because this copy was fixed.",
+    "source_checks": [
+      {
+        "path": "proof/bundles/attestation_bundle_v2/verify",
+        "start_line": 10,
+        "end_line": 24,
+        "observation": "Required files include digest metadata, not the underlying source artifact set."
+      },
+      {
+        "path": "proof/bundles/attestation_bundle_v2/verify",
+        "start_line": 49,
+        "end_line": 64,
+        "observation": "Artifact check compares strings and incorporates that recorded digest into the joint digest."
+      },
+      {
+        "path": "proof/bundles/attestation_bundle_v2/verify",
+        "start_line": 108,
+        "end_line": 116,
+        "observation": "Output calls that result ARTIFACT HASH VERIFIED."
+      },
+      {
+        "path": "scripts/generate_attestation_bundle_v2.py",
+        "start_line": 12,
+        "end_line": 15,
+        "observation": "Current wrapper produces a different contract; the separately stored historical v2 verifier is unchanged."
+      }
+    ],
+    "guards": [
+      "Joint digest and signature can authenticate the recorded artifact hash; they do not verify the current artifact bytes.",
+      "Verifier is useful for detached bundle consistency, but that scope should not be presented as checking current artifacts."
+    ],
+    "runtime_executed": false,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-round3-20261028/08-source-evidence.json",
+      "docs/security/evidence/swarm100-round3-20261028/08-validation.json",
+      "docs/security/evidence/swarm100-lot4-20261028/before-tests.log",
+      "docs/security/evidence/swarm100-lot4-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot4-20261028/independent-review.json",
+      "docs/security/evidence/swarm100-lot4-20261028/validation.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/08.json"
+  }
+]

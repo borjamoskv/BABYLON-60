@@ -1,0 +1,28 @@
+{
+  "command": [
+    "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.venv/bin/python",
+    "-c",
+    "import sys,types\nfrom pathlib import Path\nroot=Path(sys.argv.pop(1))\nsys.modules[\"strike_rs\"]=None\npackage=types.ModuleType(\"babylon60\")\npackage.__path__=[str(root/\"01_KISH_ENGINE/babylon60\")]\nsys.modules[\"babylon60\"]=package\nimport pytest\nraise SystemExit(pytest.main(sys.argv[1:]))\n",
+    "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+    "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot5_regressions.py",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "-p",
+    "pytest_asyncio.plugin"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 0.62,
+  "source_sha256": {
+    "01_KISH_ENGINE/babylon60/bft/ledger_actor.py": "a6fb163e3c668ea18d987dc0544111e8de83bc458e2f365bc1ae144b1022df2f",
+    "tests/test_swarm100_lot5_regressions.py": "dbf22efcf0d183f982b7a7a125a00d2d09dcd30908a79027fee1a3159baf7250"
+  },
+  "source_sha256_after": {
+    "01_KISH_ENGINE/babylon60/bft/ledger_actor.py": "a6fb163e3c668ea18d987dc0544111e8de83bc458e2f365bc1ae144b1022df2f",
+    "tests/test_swarm100_lot5_regressions.py": "dbf22efcf0d183f982b7a7a125a00d2d09dcd30908a79027fee1a3159baf7250"
+  },
+  "stable": true,
+  "temporary_HOME_cwd": true,
+  "plugins": "Only explicit pytest_asyncio.plugin; automatic plugins disabled",
+  "import_scope": "Namespace package avoids unrelated root initializer; actual ledger and pure dependency sources used. strike_rs blocked before import."
+}

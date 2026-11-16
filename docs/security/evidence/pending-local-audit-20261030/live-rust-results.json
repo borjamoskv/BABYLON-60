@@ -1,0 +1,42 @@
+{
+  "solver-fixed": {
+    "command": [
+      "cargo",
+      "test",
+      "-q",
+      "--locked",
+      "-p",
+      "babylon60-compiler",
+      "--test",
+      "semantic_solver_adapter",
+      "--test",
+      "solver_trust"
+    ],
+    "exit_code": 101
+  },
+  "confinement-live": {
+    "command": [
+      "cargo",
+      "test",
+      "-q",
+      "--locked",
+      "-p",
+      "babylon-skills-mcp"
+    ],
+    "exit_code": 0
+  },
+  "native-live-build": {
+    "command": [
+      "cargo",
+      "build",
+      "-q",
+      "--locked",
+      "-p",
+      "babylon60_root",
+      "--lib",
+      "--features",
+      "python"
+    ],
+    "exit_code": 0
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "checks": [
+    {
+      "case": "duplicate_keys",
+      "passed": true
+    },
+    {
+      "case": "array_root",
+      "passed": true
+    },
+    {
+      "case": "null_root",
+      "passed": true
+    },
+    {
+      "case": "oversized_output",
+      "passed": true
+    },
+    {
+      "case": "timeout_rejected_before_gate_0",
+      "passed": true
+    },
+    {
+      "case": "timeout_rejected_before_gate_61",
+      "passed": true
+    },
+    {
+      "case": "timeout_rejected_before_gate_not-an-integer",
+      "passed": true
+    },
+    {
+      "case": "timeout_kills_group_after_gate_leader_exits",
+      "passed": true
+    },
+    {
+      "case": "all_ten_effect_fields_bound",
+      "passed": true
+    },
+    {
+      "case": "symlink_is_scanned_as_raw_blob_not_followed",
+      "passed": true
+    }
+  ],
+  "passed": 10,
+  "scope": "Temporary fixture-owned commands; no real Git, Swift, biometric gate, network, publish or ATTESTED objects."
+}

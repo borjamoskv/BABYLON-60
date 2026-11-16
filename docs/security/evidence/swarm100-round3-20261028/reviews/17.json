@@ -1,0 +1,1128 @@
+{
+  "reviewer": "17",
+  "candidates": [
+    {
+      "candidate_id": "SW100-C0566",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "examples/swarm_1000_gate1_adversarial.rs",
+      "current_source_sha256": "87cbe6a16befa94314448b36597ec3a1b5c85964d4a1e5750f00b384d870824e",
+      "rationale": "Replay vector signs a zero precondition and discards the first execution result. The actual adapter computes a domain-separated resource hash and the executor verifies it before reserving a nonce. Any error on the second call counts as replay rejection. The harness therefore never establishes successful first consumption or a replay-specific error; this is coverage failure, not a demonstrated executor replay bypass.",
+      "source_checks": [
+        {
+          "path": "examples/swarm_1000_gate1_adversarial.rs",
+          "start_line": 88,
+          "end_line": 96,
+          "observation": "Each vector starts with a new resource at counter 100."
+        },
+        {
+          "path": "examples/swarm_1000_gate1_adversarial.rs",
+          "start_line": 151,
+          "end_line": 168,
+          "observation": "Zero precondition; first result ignored before asserted nonce consumption."
+        },
+        {
+          "path": "examples/swarm_1000_gate1_adversarial.rs",
+          "start_line": 188,
+          "end_line": 217,
+          "observation": "Any error increments named rejection count and feeds report."
+        },
+        {
+          "path": "src/executor_ipc.rs",
+          "start_line": 167,
+          "end_line": 172,
+          "observation": "Actual precondition is computed from resource state."
+        },
+        {
+          "path": "src/executor.rs",
+          "start_line": 1015,
+          "end_line": 1024,
+          "observation": "Authorization checked before nonce reservation."
+        }
+      ],
+      "guards": [
+        "Signer, policy and expiry do not validate the zero resource digest.",
+        "Executor guards remain present; harness does not distinguish which rejected."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/17-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0567",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "examples/swarm_1000_gate1_adversarial.rs",
+      "current_source_sha256": "87cbe6a16befa94314448b36597ec3a1b5c85964d4a1e5750f00b384d870824e",
+      "rationale": "Crash cohort does uninterrupted quarantine, verification and destruction with one orchestrator. Its report declares five crash points and SIGKILL_SIMULATED from a counter of verification errors, without interruption, restart, durable reload or recovery invocation. Current recover_quarantined requires a durable matching intent. The report overstates coverage; the observed source supports only sequential filesystem operations.",
+      "source_checks": [
+        {
+          "path": "examples/swarm_1000_gate1_adversarial.rs",
+          "start_line": 317,
+          "end_line": 355,
+          "observation": "Full cohort has no interruption or recovery call."
+        },
+        {
+          "path": "examples/swarm_1000_gate1_adversarial.rs",
+          "start_line": 356,
+          "end_line": 369,
+          "observation": "Literal crash-point list and PASS verdict from verification counter."
+        },
+        {
+          "path": "src/secure_fs.rs",
+          "start_line": 2316,
+          "end_line": 2354,
+          "observation": "Actual recovery API checks durable intent and identity."
+        }
+      ],
+      "guards": [
+        "unwrap failures abort ordinary operations, without testing restart recovery.",
+        "Recovery guards exist but are not exercised here."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/17-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0568",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "examples/swarm_1000_gate1_adversarial.rs",
+      "current_source_sha256": "87cbe6a16befa94314448b36597ec3a1b5c85964d4a1e5750f00b384d870824e",
+      "rationale": "The harness ignores all secure_delete errors and bases PASS solely on zero unauthorized effects, without requiring honest commits or attack rejections. In current source the called compatibility API always returns MissingAuthorization, so every call reaching it enters the ignored branch. This is a vacuous harness success, not a bypass of the separately authorized scoped deletion API.",
+      "source_checks": [
+        {
+          "path": "examples/swarm_1000_gate1_adversarial.rs",
+          "start_line": 261,
+          "end_line": 281,
+          "observation": "Legacy call and wildcard error suppression."
+        },
+        {
+          "path": "examples/swarm_1000_gate1_adversarial.rs",
+          "start_line": 287,
+          "end_line": 303,
+          "observation": "Join checked, but PASS has no coverage minimum."
+        },
+        {
+          "path": "src/secure_fs.rs",
+          "start_line": 2055,
+          "end_line": 2065,
+          "observation": "Legacy API unconditionally rejects missing authority."
+        },
+        {
+          "path": "src/secure_fs.rs",
+          "start_line": 2084,
+          "end_line": 2121,
+          "observation": "Scoped API validates epoch, effect, nonce and budget."
+        }
+      ],
+      "guards": [
+        "Setup/pinning failures may abort earlier.",
+        "MissingAuthorization is fail-closed; report misclassifies its outcome."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/17-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0077",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/gateway/tier3.rs",
+      "current_source_sha256": "fadac1e715e582527ad3470a9045a866d1297d2ed7e489c3609ed52d91fcacd2",
+      "rationale": "Mock infer slices a Rust string at byte min(len,32). A 31-byte ASCII prefix followed by a multibyte character places byte 32 inside that character and panics. Engine forwards the prompt under timeout without character normalization or panic handling. Scope is the mock backend selected by tests/PoCs, not a demonstrated production inference outage.",
+      "source_checks": [
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/gateway/tier3.rs",
+          "start_line": 347,
+          "end_line": 375,
+          "observation": "Zero failure rate reaches unchecked byte slice."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/gateway/tier3.rs",
+          "start_line": 232,
+          "end_line": 249,
+          "observation": "Engine passes original prompt to backend."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/gateway/tier3.rs",
+          "start_line": 398,
+          "end_line": 415,
+          "observation": "Mock consumer test uses short ASCII input."
+        }
+      ],
+      "guards": [
+        "Short input and character-aligned byte 32 are safe.",
+        "Cooldown or stochastic failure can stop earlier, but does not validate boundaries."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/17-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0078",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/gateway/tier3.rs",
+      "current_source_sha256": "fadac1e715e582527ad3470a9045a866d1297d2ed7e489c3609ed52d91fcacd2",
+      "rationale": "attested hashes content then model_id without framing. Pairs (ab,c) and (a,bc) feed identical bytes abc and receive identical content_hash without a cryptographic collision. Mock output uses the constructor; determinism test changes model while holding content fixed. Confirmed scope is ambiguous pair binding; no production authorization consumer was established by scoped search.",
+      "source_checks": [
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/gateway/tier3.rs",
+          "start_line": 67,
+          "end_line": 94,
+          "observation": "Public constructor concatenates independently variable fields."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/gateway/tier3.rs",
+          "start_line": 365,
+          "end_line": 375,
+          "observation": "Mock output uses attested constructor."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/gateway/tier3.rs",
+          "start_line": 482,
+          "end_line": 491,
+          "observation": "Current test misses ambiguous content/model boundaries."
+        }
+      ],
+      "guards": [
+        "BLAKE3 cannot distinguish identical encoded bytes.",
+        "Default mock model is fixed, but public constructor accepts arbitrary model IDs."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/17-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0365",
+      "decision": "ALREADY_FIXED",
+      "severity": "P2",
+      "remediation_state": "MITIGATED",
+      "path": "01_KISH_ENGINE/babylon60/crypto/shredder.py",
+      "current_source_sha256": "d37ef6f1f53ac5195566087516d927a1604a19a5dc7a2c75492052e77d6c9988",
+      "rationale": "Original shred_fact_async missing-table failure is removed from that call path: current method returns an unsuccessful CRYPTO_ERASURE_UNSUPPORTED result without querying shredded_keys. Constructor still skips async schema and historical read APIs still query it. The reported shred-call defect is mitigated by fail-closed refusal; real async erasure remains unavailable.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/crypto/shredder.py",
+          "start_line": 69,
+          "end_line": 103,
+          "observation": "Only sync connections get automatic schema."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/crypto/shredder.py",
+          "start_line": 132,
+          "end_line": 138,
+          "observation": "Historical marker reader still depends on table existence."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/crypto/shredder.py",
+          "start_line": 169,
+          "end_line": 189,
+          "observation": "Async shredding returns explicit unsupported failure without SQL."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/crypto/shredder.py",
+          "start_line": 208,
+          "end_line": 229,
+          "observation": "Batch consumer records unsuccessful results as failures."
+        }
+      ],
+      "guards": [
+        "Wrong connection kind still intentionally raises TypeError.",
+        "Does not claim fresh-database historical reads or actual erasure now work."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/17-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0366",
+      "decision": "ALREADY_FIXED",
+      "severity": "P2",
+      "remediation_state": "FIXED",
+      "path": "01_KISH_ENGINE/babylon60/crypto/shredder.py",
+      "current_source_sha256": "d37ef6f1f53ac5195566087516d927a1604a19a5dc7a2c75492052e77d6c9988",
+      "rationale": "Current audit_timestamp uses time.time() as UTC epoch seconds instead of time.monotonic(). The original uptime-as-calendar-time expression is absent from the inspected function. This is a source-confirmed timestamp correction only; no compliance, erasure or protected-runtime certification is inferred.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/crypto/shredder.py",
+          "start_line": 231,
+          "end_line": 260,
+          "observation": "Report now calls datetime.fromtimestamp(time.time(), tz=timezone.utc)."
+        },
+        {
+          "path": "tests/test_swarm100_round2_regressions.py",
+          "start_line": 314,
+          "end_line": 325,
+          "observation": "Existing audit consumer checks compliant=False, not timestamp correctness."
+        }
+      ],
+      "guards": [
+        "Audit still needs a sync database with schema.",
+        "No protected erasure subsystem execution performed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/17-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0341",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "path": "crates/babylon-attest/src/conformal_tree.rs",
+      "current_source_sha256": "6f6d83eeda8e035f9ecb67d48c81dd78e6dd3c520827cf10018792650705db95",
+      "rationale": "Verifier gets its only public key from the same untrusted manifest containing the signature. There is no externally trusted key comparison, and CLI accepts only a manifest path. Signature validity plus caller-supplied FROZEN_C5_REAL status drives kernel attestation success and zero exit. This establishes embedded-key self-consistency, not authorized operator identity.",
+      "source_checks": [
+        {
+          "path": "crates/babylon-attest/src/conformal_tree.rs",
+          "start_line": 194,
+          "end_line": 219,
+          "observation": "Status/key parsing guards, but key trust source is manifest itself."
+        },
+        {
+          "path": "crates/babylon-attest/src/conformal_tree.rs",
+          "start_line": 224,
+          "end_line": 245,
+          "observation": "overall_valid is root signature plus status."
+        },
+        {
+          "path": "crates/babylon-attest/src/main.rs",
+          "start_line": 83,
+          "end_line": 88,
+          "observation": "CLI has no separate trusted-key argument."
+        },
+        {
+          "path": "crates/babylon-attest/src/main.rs",
+          "start_line": 519,
+          "end_line": 540,
+          "observation": "Consumer presents successful kernel verification and exits zero."
+        }
+      ],
+      "guards": [
+        "Ed25519 signature and public-key length checks exist.",
+        "Those checks do not establish signer authorization."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/17-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0342",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "crates/babylon-attest/src/conformal_tree.rs",
+      "current_source_sha256": "6f6d83eeda8e035f9ecb67d48c81dd78e6dd3c520827cf10018792650705db95",
+      "rationale": "Only decoded merkle_root bytes enter signature verification. aeon_id, claim count and hardware_uuid are copied from unsigned fields and printed in the successful attestation report; signed_payload is parsed but unused. Changing those fields does not alter root signature validity. Confirmed issue is metadata authenticity in the report, while the root itself still receives signature verification.",
+      "source_checks": [
+        {
+          "path": "crates/babylon-attest/src/conformal_tree.rs",
+          "start_line": 163,
+          "end_line": 181,
+          "observation": "Manifest separates metadata and root, with unused signed_payload."
+        },
+        {
+          "path": "crates/babylon-attest/src/conformal_tree.rs",
+          "start_line": 224,
+          "end_line": 245,
+          "observation": "Only root verified; unsigned metadata returned."
+        },
+        {
+          "path": "crates/babylon-attest/src/main.rs",
+          "start_line": 521,
+          "end_line": 537,
+          "observation": "Report displays metadata alongside formal attestation success."
+        }
+      ],
+      "guards": [
+        "Root changes require a valid signature.",
+        "Literal status validation is not cryptographic metadata binding."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/17-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0533",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_l1_ledger/seal_bounty_aeon.py",
+      "current_source_sha256": "154e38e4308b098e7687b266f337ec684b5ebd9488afcf186ab52c85139f8916",
+      "rationale": "Sealer catches every identity-load exception and calls forge_identity at the same storage path. Corrupt JSON or failed AEAD decryption can therefore cause a fresh random seed to truncate master_seed.enc, if forging subsequently succeeds. New key signs the root and enters the artifact. No operator identity data was accessed and no identity operation was executed.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_l1_ledger/seal_bounty_aeon.py",
+          "start_line": 123,
+          "end_line": 135,
+          "observation": "Broad load-error handler forges new identity."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/crypto/identity.py",
+          "start_line": 53,
+          "end_line": 62,
+          "observation": "Both paths target master_seed.enc."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/crypto/identity.py",
+          "start_line": 75,
+          "end_line": 109,
+          "observation": "Fresh random seed written with mode w to same path."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/crypto/identity.py",
+          "start_line": 111,
+          "end_line": 131,
+          "observation": "Corruption or wrong passphrase raises."
+        },
+        {
+          "path": "scripts/c5_l1_ledger/seal_bounty_aeon.py",
+          "start_line": 162,
+          "end_line": 165,
+          "observation": "Artifact consumes new public key/signature."
+        }
+      ],
+      "guards": [
+        "AEAD correctly rejects corruption; caller reacts destructively.",
+        "Earlier ledger/hardware stages can fail first, but no load-error classification protects existing seed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/17-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0534",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_l1_ledger/seal_bounty_aeon.py",
+      "current_source_sha256": "154e38e4308b098e7687b266f337ec684b5ebd9488afcf186ab52c85139f8916",
+      "rationale": "TSA authentication label depends solely on presence of tsr_b64. Client returns that field for any HTTP 200 body, without parsing timestamp status, signature, certificate trust or message imprint; sealer persists the label and token. Malformed or rejection bodies can be labeled authenticated. No TSA network request or remote mutation was performed.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_l1_ledger/seal_bounty_aeon.py",
+          "start_line": 115,
+          "end_line": 121,
+          "observation": "Field presence determines authenticated label."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/crypto/rfc3161.py",
+          "start_line": 85,
+          "end_line": 119,
+          "observation": "HTTP 200 body is directly base64-encoded."
+        },
+        {
+          "path": "scripts/c5_l1_ledger/seal_bounty_aeon.py",
+          "start_line": 146,
+          "end_line": 165,
+          "observation": "Artifact stores response and authentication label."
+        },
+        {
+          "path": "scripts/c5_l1_ledger/seal_bounty_aeon.py",
+          "start_line": 179,
+          "end_line": 180,
+          "observation": "Artifact persisted without token validation."
+        }
+      ],
+      "guards": [
+        "Missing/failed response gets offline label.",
+        "HTTP success and transport security do not verify RFC3161 token signature or imprint."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/17-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0474",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-neural-face-swap-cuadrilla/scripts/c5_smoother.py",
+      "current_source_sha256": "692772e971af6ac1180ec1727ca7c4f52de4cc9053684490ab126ecd9bb643de",
+      "rationale": "New assigned track is appended but never added to matched_tracks. Lost-track loop then increments its lost count and appends it again with default max_extrapolate=2. CLI iterates assignments without deduplication, allowing the same eligible face to be swapped twice. Scope is enabled tracking, assigned identity and a face passing size filters.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-neural-face-swap-cuadrilla/scripts/c5_smoother.py",
+          "start_line": 95,
+          "end_line": 106,
+          "observation": "Default extrapolation limit is two frames."
+        },
+        {
+          "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-neural-face-swap-cuadrilla/scripts/c5_smoother.py",
+          "start_line": 153,
+          "end_line": 182,
+          "observation": "Only previously matched tracks enter matched_tracks."
+        },
+        {
+          "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-neural-face-swap-cuadrilla/scripts/c5_smoother.py",
+          "start_line": 191,
+          "end_line": 228,
+          "observation": "New track later treated as lost and emitted again."
+        },
+        {
+          "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+          "start_line": 277,
+          "end_line": 305,
+          "observation": "CLI consumes every assignment with identity/size filters."
+        }
+      ],
+      "guards": [
+        "Negative identity is not emitted.",
+        "Disabled tracking or small-face filtering can avoid the swap; neither deduplicates eligible new tracks."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/17-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0475",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-neural-face-swap-cuadrilla/scripts/c5_smoother.py",
+      "current_source_sha256": "692772e971af6ac1180ec1727ca7c4f52de4cc9053684490ab126ecd9bb643de",
+      "rationale": "Blur mode sizes foreground from target width without fitting target height. A 1080x2400 source into 1080x1920 gives scaled_h=2400 and y_offset=-240, leaving only the final 240 destination rows for 2400 foreground rows. Assignment cannot fit. CLI passes actual source dimensions and blur mode through; no native imaging pipeline was run.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-neural-face-swap-cuadrilla/scripts/c5_smoother.py",
+          "start_line": 236,
+          "end_line": 246,
+          "observation": "Constructor preserves actual source dimensions."
+        },
+        {
+          "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-neural-face-swap-cuadrilla/scripts/c5_smoother.py",
+          "start_line": 264,
+          "end_line": 285,
+          "observation": "Blur scaling and negative-offset assignment have no fit/crop guard."
+        },
+        {
+          "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+          "start_line": 450,
+          "end_line": 460,
+          "observation": "Consumer constructs tracker from video dimensions."
+        },
+        {
+          "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+          "start_line": 498,
+          "end_line": 500,
+          "observation": "Consumer directly writes reframed output."
+        }
+      ],
+      "guards": [
+        "Crop mode takes a separate resize path.",
+        "Missing tracker is skipped, but available tracker accepts tall aspect ratios."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/17-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0358",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py",
+      "current_source_sha256": "24df531cfbb817964c4da27b4220351c4080eb4ab9b54c789b11a16d7b07909b",
+      "rationale": "All three risk loops append receipts before enqueue and ignore its boolean result. Ledger returns False on full queue or shutdown, while report and CLI still include the receipt as a normal sealed claim. Worker failure exceptions now propagate but do not cover false returns. This is unreported persistence rejection; even true enqueue alone is not a durability acknowledgement.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py",
+          "start_line": 125,
+          "end_line": 166,
+          "observation": "Three domains ignore enqueue acceptance."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/bounty_cold_ledger.py",
+          "start_line": 103,
+          "end_line": 121,
+          "observation": "Failed worker raises; closed/full queue returns False."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py",
+          "start_line": 184,
+          "end_line": 195,
+          "observation": "Report includes all generated receipts."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/cli/bounty_cli.py",
+          "start_line": 270,
+          "end_line": 279,
+          "observation": "CLI displays/exports receipts without persistence status."
+        }
+      ],
+      "guards": [
+        "Risk threshold and auto-attest gate generation.",
+        "Failure exceptions protect a different path than boolean backpressure rejection."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/17-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0345",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/crypto/keys.py",
+      "current_source_sha256": "cbf5b3ded4cf854df1d11d37a4d61d0f0122604881c7a02fb0f00497822ee305",
+      "rationale": "Manager loads a full metadata snapshot once and rewrites it using mode w without lock, reload or atomic replacement. A stale manager can overwrite another manager revocation or key addition; later is_revoked reads restored stale metadata. Revocation separately deletes private key material, limiting direct key resurrection, but does not preserve metadata or concurrent additions.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/crypto/keys.py",
+          "start_line": 70,
+          "end_line": 87,
+          "observation": "Snapshot plus full truncate-and-rewrite."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/crypto/keys.py",
+          "start_line": 119,
+          "end_line": 125,
+          "observation": "Generation saves complete cached metadata."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/crypto/keys.py",
+          "start_line": 164,
+          "end_line": 185,
+          "observation": "Revocation saves metadata then attempts key deletion."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/crypto/keys.py",
+          "start_line": 187,
+          "end_line": 206,
+          "observation": "Consumers use cached revocation/expiration/key records."
+        }
+      ],
+      "guards": [
+        "OS keyring protection is independent of metadata concurrency.",
+        "Deleting private key can prevent signing; it does not prevent stale revocation metadata restoration."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/17-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0259",
+      "decision": "REPRODUCED",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/primitives/cbor.py",
+      "current_source_sha256": "befd58e5ae2587434cf7f31f841ba80d6da64e5666b20917650910dfa1b3e377",
+      "rationale": "Pure execution of current decoder accepts 4378 as b'x' and 6378 as 'x' although each header declares length three; 0001 returns zero and ignores trailing item. Byte/text reads do not enforce length and loads does not require end-of-input. Public cbor_loads export and valid-roundtrip consumer were inspected; no production authorization exploit is claimed.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/primitives/cbor.py",
+          "start_line": 127,
+          "end_line": 153,
+          "observation": "Initial-byte EOF checked, payload length unchecked."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/primitives/cbor.py",
+          "start_line": 156,
+          "end_line": 161,
+          "observation": "Top-level loads returns after one item."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/primitives/__init__.py",
+          "start_line": 5,
+          "end_line": 16,
+          "observation": "Decoder exposed as cbor_loads."
+        },
+        {
+          "path": "tests/babylon60/primitives/test_sovereign_primitives.py",
+          "start_line": 18,
+          "end_line": 27,
+          "observation": "Consumer covers valid roundtrip."
+        }
+      ],
+      "guards": [
+        "Empty initial input and invalid UTF-8 can raise.",
+        "These checks do not reject truncated valid text/bytes or trailing data."
+      ],
+      "runtime_executed": true,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/17-source-evidence.json",
+        "docs/security/evidence/swarm100-round3-20261028/17-pure-checks.py",
+        "docs/security/evidence/swarm100-round3-20261028/17-pure-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0411",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P3",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/extensions/moskv-fx-scavenger/setup_native_host.sh",
+      "current_source_sha256": "e8bf290cfe8211782b512679d82242aa8af8feedd38367fad6937d3fa1458e98",
+      "rationale": "--dry-run promises no disk writes, but unconditional chmod +x occurs before the dry-run return. An existing nonexecutable kernel script has its permissions changed by preview. Native host setup was not run.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/extensions/moskv-fx-scavenger/setup_native_host.sh",
+          "start_line": 18,
+          "end_line": 24,
+          "observation": "Help promises nonwriting preview."
+        },
+        {
+          "path": "01_KISH_ENGINE/extensions/moskv-fx-scavenger/setup_native_host.sh",
+          "start_line": 59,
+          "end_line": 64,
+          "observation": "Existence check followed by unconditional chmod."
+        },
+        {
+          "path": "01_KISH_ENGINE/extensions/moskv-fx-scavenger/setup_native_host.sh",
+          "start_line": 132,
+          "end_line": 140,
+          "observation": "Dry-run only guards later manifest writes."
+        }
+      ],
+      "guards": [
+        "Missing script aborts before chmod.",
+        "Already executable files may show no mode difference; nonexecutable trigger remains valid."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/17-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0565",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "path": "deploy/Dockerfile",
+      "current_source_sha256": "1cc2c6c057ce3d5d5971619402ca85976190903af0e3b2e3b316d688d52538e6",
+      "rationale": "Docker pins rust:1.80-alpine and builds the copied workspace. Workspace members declare edition 2024; official Rust release notes place stabilization at 1.85. Root also declares rust-version 1.89. Current manifests therefore exceed the builder toolchain. No Docker build, install or deployment was performed.",
+      "source_checks": [
+        {
+          "path": "deploy/Dockerfile",
+          "start_line": 6,
+          "end_line": 14,
+          "observation": "Pinned builder copies workspace and runs Cargo."
+        },
+        {
+          "path": "Cargo.toml",
+          "start_line": 1,
+          "end_line": 20,
+          "observation": "Workspace includes member globs; root rust-version is 1.89."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/Cargo.toml",
+          "start_line": 1,
+          "end_line": 6,
+          "observation": "Member edition 2024."
+        },
+        {
+          "path": "crates/cadt_mediator/Cargo.toml",
+          "start_line": 1,
+          "end_line": 6,
+          "observation": "Member edition 2024."
+        }
+      ],
+      "guards": [
+        "Selecting -p does not remove workspace manifest discovery.",
+        "No toolchain upgrade appears before build."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/17-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0536",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "examples/poc_stress_dec_mimetic.rs",
+      "current_source_sha256": "63a1905bacc25d02c675fbc333276b8e67978647f3895c13cbea22607ab91e35",
+      "rationale": "Every multiple of 50 takes the preceding modulo-10 branch, making the two-failure branch unreachable. quorum_poisoned_events cannot increment, but output certifies BFT stability after only a final RUNNING assertion. This is a test-coverage/reporting defect, not demonstrated consensus rejection failure.",
+      "source_checks": [
+        {
+          "path": "examples/poc_stress_dec_mimetic.rs",
+          "start_line": 137,
+          "end_line": 160,
+          "observation": "Branch order prevents two-node-failure execution."
+        },
+        {
+          "path": "examples/poc_stress_dec_mimetic.rs",
+          "start_line": 161,
+          "end_line": 168,
+          "observation": "Counter printed without coverage assertion; success certified."
+        }
+      ],
+      "guards": [
+        "Single-failure and ordinary RUNNING assertions still execute.",
+        "They do not substitute for unreachable POISONED assertion."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/17-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0020",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_demos/c5_shm_manifest.rs",
+      "current_source_sha256": "16294fa3c41be24a121c88d20365566466a51825d4f40713457754bdcf170f79",
+      "rationale": "On ordinary documented 64-bit C layout, AtomicU16 ends at offset 46, AtomicU32 aligns to 48 and ends at 52, then padding ends at 66. align(64) rounds size to 128, contradicting validate_alignment's size 64 assertion. Related Python example maps only 64 bytes. Scope is the standalone example, not canonical production manifest; no native compilation or mmap was run.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_demos/c5_shm_manifest.rs",
+          "start_line": 1,
+          "end_line": 20,
+          "observation": "Field order needs padding before ebr_ticket."
+        },
+        {
+          "path": "scripts/c5_demos/c5_shm_manifest.rs",
+          "start_line": 36,
+          "end_line": 44,
+          "observation": "Validator asserts 64-byte size and describes ctypes mapping."
+        },
+        {
+          "path": "scripts/c5_demos/poc_shm_orchestrator.py",
+          "start_line": 11,
+          "end_line": 32,
+          "observation": "Related example repeats fields and maps 64 bytes."
+        }
+      ],
+      "guards": [
+        "align(64) cannot shrink 66 bytes of laid-out fields.",
+        "Scoped symbol search did not establish production use of this example struct."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/17-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0333",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_demos/zk_causal_gate_stress_test.py",
+      "current_source_sha256": "ac3db734b7911555b87838da274bcfe98663c931f2bbbf75b77a6cf66e70f705",
+      "rationale": "Simulated validators always accept: sleep then True, or hash-expression or True. Timing consumers discard even those results, then claim surviving O(1) invariant and no deadlocks solely from speedup >50. Explicit simulator names do not justify final certification language. Confirmed issue is misleading demonstration evidence, not an actual ZK verifier defect.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_demos/zk_causal_gate_stress_test.py",
+          "start_line": 10,
+          "end_line": 30,
+          "observation": "Always-true simulated validators and timing-only consumers."
+        },
+        {
+          "path": "scripts/c5_demos/zk_causal_gate_stress_test.py",
+          "start_line": 65,
+          "end_line": 81,
+          "observation": "Speedup condition controls invariant/deadlock claims; main runs benchmark."
+        }
+      ],
+      "guards": [
+        "Function docstrings call the operations simulations.",
+        "No real verifier or malformed-proof rejection is exercised."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/17-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0588",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_orchestrator/c5_session_deskimming_engine.py",
+      "current_source_sha256": "593b18bff1699cf838a5c66770344c25b3bce8666132e929017078eec7f31827",
+      "rationale": "Module import creates audit directories. run_deskimming always truncates fixed deskimming_receipt.json regardless of dry_run; flag gates copying/chmod only. Preview can overwrite a prior real receipt despite CLI promise to simulate without writes. No operator brain directories or previous receipts were accessed.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_orchestrator/c5_session_deskimming_engine.py",
+          "start_line": 25,
+          "end_line": 31,
+          "observation": "Import-time mkdir operations."
+        },
+        {
+          "path": "scripts/c5_orchestrator/c5_session_deskimming_engine.py",
+          "start_line": 57,
+          "end_line": 78,
+          "observation": "Dry-run gates copy/chmod only."
+        },
+        {
+          "path": "scripts/c5_orchestrator/c5_session_deskimming_engine.py",
+          "start_line": 90,
+          "end_line": 115,
+          "observation": "Unconditional receipt write and contradictory CLI promise."
+        }
+      ],
+      "guards": [
+        "Missing source scripts change actions, not receipt write.",
+        "A dry_run field labels the replacement but does not preserve prior evidence."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/17-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0289",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_sharur/c5_bounty_sharur_exfiltration.py",
+      "current_source_sha256": "0caf0417da02a3c034de541cb9e52df621e40a159980e1a35a7a359299363159",
+      "rationale": "Future exceptions are logged and omitted from result list; only successes increase completed count. Export contains only that filtered list with no failed claim or completeness status, then function announces successful closure and returns normally. Empty-input return is separate. No remote client or operator ledger was accessed.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_sharur/c5_bounty_sharur_exfiltration.py",
+          "start_line": 154,
+          "end_line": 177,
+          "observation": "Per-future exceptions are swallowed without result record."
+        },
+        {
+          "path": "scripts/c5_sharur/c5_bounty_sharur_exfiltration.py",
+          "start_line": 195,
+          "end_line": 218,
+          "observation": "Filtered summary/export and unconditional successful closure."
+        },
+        {
+          "path": "scripts/c5_sharur/c5_bounty_sharur_exfiltration.py",
+          "start_line": 259,
+          "end_line": 273,
+          "observation": "CLI calls operation without checking missing task outcomes."
+        }
+      ],
+      "guards": [
+        "Exceptions are logged, but not preserved in exported results.",
+        "Offline fallback can handle ordinary failed responses, not exceptions bypassing it."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/17-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0005",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_verifiers/verify_execution.sh",
+      "current_source_sha256": "847847dffe82976bd653c7787baaf9714e107770c047d31e797c68701d844046",
+      "rationale": "Verifier checks only tracked worktree/index diffs. With untracked files alone both succeed and it prints repository clean and execution audited. Later log and last-commit hashing also omit untracked additions. Scope is inaccurate verifier output; no Git mutation was performed.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_verifiers/verify_execution.sh",
+          "start_line": 5,
+          "end_line": 20,
+          "observation": "No untracked status check before clean claim."
+        },
+        {
+          "path": "scripts/c5_verifiers/verify_execution.sh",
+          "start_line": 22,
+          "end_line": 34,
+          "observation": "Only prior-commit paths hashed before final audit claim."
+        }
+      ],
+      "guards": [
+        "Tracked or staged differences correctly fail.",
+        "set -e catches command failures, not untracked files invisible to diff."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/17-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0550",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "src/fluid_thermo.rs",
+      "current_source_sha256": "69beaf68335f4780f52b453e629d0490fce067f946099387396398bbc140dfa5",
+      "rationale": "Cubing mesh_n occurs in usize before f64 conversion without a bound. On 64-bit targets 4194304 cubed is 2^66, overflowing usize: checked arithmetic panics, unchecked arithmetic wraps to zero and returns the wrong floor. Module is public; inspected example uses a small mesh, so large-input production reachability is not established.",
+      "source_checks": [
+        {
+          "path": "src/fluid_thermo.rs",
+          "start_line": 36,
+          "end_line": 46,
+          "observation": "Unchecked integer cube before floating cast."
+        },
+        {
+          "path": "src/lib.rs",
+          "start_line": 99,
+          "end_line": 99,
+          "observation": "Public module export."
+        },
+        {
+          "path": "examples/omega_100_synthesis.rs",
+          "start_line": 74,
+          "end_line": 91,
+          "observation": "Consumer uses floor and asserts only positivity."
+        }
+      ],
+      "guards": [
+        "Small input meshes do not overflow.",
+        "Function exposes no validation or checked multiplication."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/17-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0190",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/ai-search/gotchas.md",
+      "current_source_sha256": "e548c0f2cba170e81dd3e9e15b7cf430eabd7e73770ed29589b90dc20c3bf452",
+      "rationale": "Example labels a single gte comparison as starts-with. Later unrelated paths docs/zzz/ and private/ satisfy the same lower bound. Official current Cloudflare filtering docs require lower and upper range bounds for folder prefix. Confirmed scope is documentation/retrieval example, not tenant authorization; no service query was executed.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/codex_overrides/cloudflare/references/ai-search/gotchas.md",
+          "start_line": 10,
+          "end_line": 13,
+          "observation": "Prefix claim has only lower bound."
+        },
+        {
+          "path": "tools/skill_library/codex_overrides/cloudflare/references/ai-search/README.md",
+          "start_line": 118,
+          "end_line": 132,
+          "observation": "Reference index routes consumers to gotchas."
+        }
+      ],
+      "guards": [
+        "No tenant boundary behavior demonstrated.",
+        "Filter syntax can vary by API version; missing upper bound remains corroborated by official semantics."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/17-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0022",
+      "decision": "REPRODUCED",
+      "severity": "P3",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/examples/Euclidean_Polyrhythm_Generator.py",
+      "current_source_sha256": "6d5ae3cc1e5c7713fca3cdea108973f42f02eea8686f89a8f74073a9f02c059a",
+      "rationale": "Current AST-selected rhythm functions generated exactly the same 48 notes and attributes for mode 0 and 1 using synthetic in-memory Score/Note objects. Mode is never read and both layers scale to BAR, despite UI forwarding selection. Missing functionality reproduced without loading FL Studio or calling an app.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/examples/Euclidean_Polyrhythm_Generator.py",
+          "start_line": 51,
+          "end_line": 69,
+          "observation": "Two mode UI choices and mode argument."
+        },
+        {
+          "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/examples/Euclidean_Polyrhythm_Generator.py",
+          "start_line": 71,
+          "end_line": 108,
+          "observation": "Fixed BAR scaling; apply forwards unused mode."
+        }
+      ],
+      "guards": [
+        "Host-module availability gates dialog but does not add generator mode logic.",
+        "Fixture verifies note computation only, not app integration."
+      ],
+      "runtime_executed": true,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/17-source-evidence.json",
+        "docs/security/evidence/swarm100-round3-20261028/17-pure-checks.py",
+        "docs/security/evidence/swarm100-round3-20261028/17-pure-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0302",
+      "decision": "REPRODUCED",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/electron-asar-forensic-audit/MODULE.md",
+      "current_source_sha256": "71ff85027d6b42db7b06bd8290ca74b7be899437e57ea6e67aee7e20927f55b4",
+      "rationale": "Documented scanner executed on a tiny synthetic archive returns a closed stream; documented seek then raises ValueError: seek of closed file. Returning inside with open closes the stream before caller use. This reproduces example lifecycle failure independently of full ASAR-format correctness; no application archive was opened.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/electron-asar-forensic-audit/MODULE.md",
+          "start_line": 37,
+          "end_line": 58,
+          "observation": "Returns file handle from within context manager."
+        },
+        {
+          "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/electron-asar-forensic-audit/MODULE.md",
+          "start_line": 132,
+          "end_line": 141,
+          "observation": "Documented consumer seeks/reads returned stream."
+        }
+      ],
+      "guards": [
+        "Malformed headers may fail earlier.",
+        "Valid synthetic header reaches return; consumer never reopens file."
+      ],
+      "runtime_executed": true,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/17-source-evidence.json",
+        "docs/security/evidence/swarm100-round3-20261028/17-pure-checks.py",
+        "docs/security/evidence/swarm100-round3-20261028/17-pure-checks.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0174",
+      "decision": "REPRODUCED",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/workspace/c5-anti-slop-ui/scripts/audit_ui_slop.py",
+      "current_source_sha256": "f5686da74c66d1879ffbfb522fb7b6111d53ff952f6cbbd228127154dbe3518f",
+      "rationale": "Direct inspection of synthetic HTML text-[17px] reports C5-UI-002, but directory audit of the same file under build-review/src returns no findings. Ignore logic searches substrings of full ancestor path. main treats empty findings as compliant without scanned-file coverage. Isolated pure source execution reproduces the missed lint coverage.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/workspace/c5-anti-slop-ui/scripts/audit_ui_slop.py",
+          "start_line": 92,
+          "end_line": 101,
+          "observation": "Fixture violates font-size rule."
+        },
+        {
+          "path": "tools/skill_library/workspace/c5-anti-slop-ui/scripts/audit_ui_slop.py",
+          "start_line": 123,
+          "end_line": 138,
+          "observation": "Full-path substring match skips tree."
+        },
+        {
+          "path": "tools/skill_library/workspace/c5-anti-slop-ui/scripts/audit_ui_slop.py",
+          "start_line": 146,
+          "end_line": 159,
+          "observation": "Existing path plus no findings produces compliance/exit zero."
+        }
+      ],
+      "guards": [
+        "Direct file audit bypasses directory exclusion and catches violation.",
+        "Intended build-output exclusions overmatch arbitrary ancestor components."
+      ],
+      "runtime_executed": true,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/17-source-evidence.json",
+        "docs/security/evidence/swarm100-round3-20261028/17-pure-checks.py",
+        "docs/security/evidence/swarm100-round3-20261028/17-pure-checks.json"
+      ]
+    }
+  ]
+}

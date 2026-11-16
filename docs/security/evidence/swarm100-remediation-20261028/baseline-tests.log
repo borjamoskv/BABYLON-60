@@ -1,0 +1,292 @@
+Uninstalled 1 package in 5ms
+Installed 1 package in 5ms
+FFFFFFFFFFFFFFFFF.FFFFFFFFFFFFFFFFF.                                     [100%]
+=================================== FAILURES ===================================
+_______________________ test_v01_no_unobserved_campaigns _______________________
+tests/test_swarm100_round2_regressions.py:44: in test_v01_no_unobserved_campaigns
+    assert results["campaigns"] == {}
+E   AssertionError: assert {'AUTH-002': ...SCAPES', ...}} == {}
+E     
+E     Left contains 4 more items:
+E     {'AUTH-002': {'attack_vector': 'unauthenticated_ipc_and_confused_deputy_handle_swap',
+E                   'bypass_detected': False,
+E                   'enforcement_mode_tested': 'BROKER_MEDIATED',
+E                   'independent_inode_observation': 'ZERO_UNAUTHORIZED_EFFECTS_OVER_10000_TRIALS',
+E                   'mechanism': 'COSE_Sign1 capability ticket + '...
+E     
+E     ...Full output truncated (28 lines hidden), use '-vv' to show
+______________ test_v02_existing_output_is_never_deleted[claims] _______________
+tests/test_swarm100_round2_regressions.py:63: in test_v02_existing_output_is_never_deleted
+    assert sentinel.read_bytes() == b"preserve previous output"
+           ^^^^^^^^^^^^^^^^^^^^^
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py:777: in read_bytes
+    with self.open(mode='rb', buffering=0) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py:771: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: '/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-700/test_v02_existing_output_is_ne0/existing/sentinel'
+______________ test_v02_existing_output_is_never_deleted[ledger] _______________
+tests/test_swarm100_round2_regressions.py:63: in test_v02_existing_output_is_never_deleted
+    assert sentinel.read_bytes() == b"preserve previous output"
+           ^^^^^^^^^^^^^^^^^^^^^
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py:777: in read_bytes
+    with self.open(mode='rb', buffering=0) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py:771: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: '/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-700/test_v02_existing_output_is_ne1/existing/sentinel'
+___________ test_v02_existing_output_is_never_deleted[valid_inputs] ____________
+tests/test_swarm100_round2_regressions.py:61: in test_v02_existing_output_is_never_deleted
+    with pytest.raises((ValueError, FileExistsError, FileNotFoundError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE any of (ValueError, FileExistsError, FileNotFoundError)
+__________________ test_v03_crl_rejects_bad_file[{malformed] ___________________
+tests/test_swarm100_round2_regressions.py:70: in test_v03_crl_rejects_bad_file
+    with pytest.raises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+______________________ test_v03_crl_rejects_bad_file[{}] _______________________
+tests/test_swarm100_round2_regressions.py:70: in test_v03_crl_rejects_bad_file
+    with pytest.raises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+_____________________ test_v03_crl_rejects_bad_file[null] ______________________
+tests/test_swarm100_round2_regressions.py:70: in test_v03_crl_rejects_bad_file
+    with pytest.raises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+____________ test_v03_crl_rejects_bad_file[{"revocations":"cert"}] _____________
+tests/test_swarm100_round2_regressions.py:70: in test_v03_crl_rejects_bad_file
+    with pytest.raises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+_____________________ test_v03_crl_rejects_bad_file[[17]] ______________________
+tests/test_swarm100_round2_regressions.py:70: in test_v03_crl_rejects_bad_file
+    with pytest.raises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+_____________________ test_v03_crl_rejects_bad_file[[""]] ______________________
+tests/test_swarm100_round2_regressions.py:70: in test_v03_crl_rejects_bad_file
+    with pytest.raises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+____________________ test_v03_crl_missing_file_and_controls ____________________
+tests/test_swarm100_round2_regressions.py:75: in test_v03_crl_missing_file_and_controls
+    with pytest.raises((ValueError, OSError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE any of (ValueError, OSError)
+__________________ test_v03_cli_rejects_crl_without_traceback __________________
+tests/test_swarm100_round2_regressions.py:92: in test_v03_cli_rejects_crl_without_traceback
+    assert "CRL" in result["detail"]
+E   assert 'CRL' in "SCHEMA_INVALID: missing required field 'certificate_id'"
+_______________ test_v04_payload_hash_must_commit_content[False] _______________
+tests/test_swarm100_round2_regressions.py:108: in test_v04_payload_hash_must_commit_content
+    assert not verify_offline_evidence(ledger, root)["verified"]
+E   assert not True
+_______________ test_v04_payload_hash_must_commit_content[True] ________________
+tests/test_swarm100_round2_regressions.py:108: in test_v04_payload_hash_must_commit_content
+    assert not verify_offline_evidence(ledger, root)["verified"]
+E   assert not True
+_________________ test_v04_invalid_json_shape_rejected[data0] __________________
+tests/test_swarm100_round2_regressions.py:116: in test_v04_invalid_json_shape_rejected
+    assert not verify_offline_evidence(ledger)["verified"]
+E   assert not True
+_________________ test_v04_invalid_json_shape_rejected[data1] __________________
+tests/test_swarm100_round2_regressions.py:116: in test_v04_invalid_json_shape_rejected
+    assert not verify_offline_evidence(ledger)["verified"]
+E   assert not True
+_________________ test_v04_invalid_json_shape_rejected[data2] __________________
+tests/test_swarm100_round2_regressions.py:116: in test_v04_invalid_json_shape_rejected
+    assert not verify_offline_evidence(ledger)["verified"]
+E   assert not True
+_________________ test_v04_invalid_json_shape_rejected[data4] __________________
+tests/test_swarm100_round2_regressions.py:116: in test_v04_invalid_json_shape_rejected
+    assert not verify_offline_evidence(ledger)["verified"]
+E   assert not True
+_____________________ test_v04_hash_only_scope_is_explicit _____________________
+tests/test_swarm100_round2_regressions.py:124: in test_v04_hash_only_scope_is_explicit
+    assert result["verification_scope"] == "HASH_COMMITMENTS_ONLY"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'verification_scope'
+________________ test_v05_serializes_closure_and_insertion[add] ________________
+tests/test_swarm100_round2_regressions.py:164: in test_v05_serializes_closure_and_insertion
+    with pytest.raises(TimeoutError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE TimeoutError
+______________ test_v05_serializes_closure_and_insertion[revoke] _______________
+tests/test_swarm100_round2_regressions.py:164: in test_v05_serializes_closure_and_insertion
+    with pytest.raises(TimeoutError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE TimeoutError
+________________ test_v05_record_and_receipt_rollback_together _________________
+tests/test_swarm100_round2_regressions.py:186: in test_v05_record_and_receipt_rollback_together
+    assert conn.execute("SELECT COUNT(*) FROM cortex_ledger").fetchone()[0] == 0
+E   assert 1 == 0
+___________ test_v06_recompute_statement_content[content-five sides] ___________
+tests/test_swarm100_round2_regressions.py:198: in test_v06_recompute_statement_content
+    assert not compiler.verify_crystal_integrity(tampered)[0]
+E   assert not True
+____________ test_v06_recompute_statement_content[modality-deontic] ____________
+tests/test_swarm100_round2_regressions.py:198: in test_v06_recompute_statement_content
+    assert not compiler.verify_crystal_integrity(tampered)[0]
+E   assert not True
+___________ test_v06_recompute_statement_content[obligations-value2] ___________
+tests/test_swarm100_round2_regressions.py:198: in test_v06_recompute_statement_content
+    assert not compiler.verify_crystal_integrity(tampered)[0]
+E   assert not True
+___________________ test_v06_markdown_root_is_not_integrity ____________________
+tests/test_swarm100_round2_regressions.py:204: in test_v06_markdown_root_is_not_integrity
+    assert not CrystalCompiler.verify_crystal_integrity(str(path))[0]
+E   assert not True
+_____ test_v08_shredding_does_not_claim_success_for_recoverable_ciphertext _____
+tests/test_swarm100_round2_regressions.py:213: in test_v08_shredding_does_not_claim_success_for_recoverable_ciphertext
+    result = shredder.shred_fact(42, "fixture")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+01_KISH_ENGINE/babylon60/crypto/shredder.py:215: in shred_fact
+    self._invalidate_fact_key(fact_id, tenant_id)
+01_KISH_ENGINE/babylon60/crypto/shredder.py:356: in _invalidate_fact_key
+    enc = get_default_encrypter()
+          ^^^^^^^^^^^^^^^^^^^^^^^
+01_KISH_ENGINE/babylon60/crypto/aes.py:167: in get_default_encrypter
+    _default_encrypter_instance = CortexEncrypter(get_master_key())
+                                                  ^^^^^^^^^^^^^^^^
+01_KISH_ENGINE/babylon60/crypto/keyring.py:158: in get_master_key
+    passphrase = _get_passphrase()
+                 ^^^^^^^^^^^^^^^^^
+01_KISH_ENGINE/babylon60/crypto/keyring.py:60: in _get_passphrase
+    raise ValueError(
+E   ValueError: KDF-0 Violation: CORTEX_KDF_PASSPHRASE environment variable is required to cryptographically unwrap the L0 Master Key.
+____________________ test_v08_async_shredding_fails_closed _____________________
+tests/test_swarm100_round2_regressions.py:226: in test_v08_async_shredding_fails_closed
+    result = await shredder.shred_fact_async(42, "fixture")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+01_KISH_ENGINE/babylon60/crypto/shredder.py:274: in shred_fact_async
+    self._invalidate_fact_key(fact_id, tenant_id)
+01_KISH_ENGINE/babylon60/crypto/shredder.py:356: in _invalidate_fact_key
+    enc = get_default_encrypter()
+          ^^^^^^^^^^^^^^^^^^^^^^^
+01_KISH_ENGINE/babylon60/crypto/aes.py:167: in get_default_encrypter
+    _default_encrypter_instance = CortexEncrypter(get_master_key())
+                                                  ^^^^^^^^^^^^^^^^
+01_KISH_ENGINE/babylon60/crypto/keyring.py:158: in get_master_key
+    passphrase = _get_passphrase()
+                 ^^^^^^^^^^^^^^^^^
+01_KISH_ENGINE/babylon60/crypto/keyring.py:60: in _get_passphrase
+    raise ValueError(
+E   ValueError: KDF-0 Violation: CORTEX_KDF_PASSPHRASE environment variable is required to cryptographically unwrap the L0 Master Key.
+_______________ test_v09_divergent_and_unknown_databases_survive _______________
+tests/test_swarm100_round2_regressions.py:269: in test_v09_divergent_and_unknown_databases_survive
+    assert source.exists() and other.exists()
+E   AssertionError: assert (False)
+E    +  where False = exists()
+E    +    where exists = PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-700/test_v09_divergent_and_unknown0/repo/cortex.db').exists
+----------------------------- Captured stdout call -----------------------------
+🟢 Initiating Consolidación BFT Causal-Determinist hacia /private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-700/test_v09_divergent_and_unknown0/central
+🧹 Purgada DB local: unrecognized.db
+⚠️ Ledger Maestro ya existe en destino, ignorando: cortex.db
+🧹 Purgada DB local: cortex.db
+
+============================================================
+ CONSOLIDACIÓN COMPLETADA
+============================================================
+ Ledgers Maestros movidos a ~/.babylon60/dbs/ : 1
+ Bases de datos de entropía local purgadas      : 2
+============================================================
+
+__________ test_v10_backup_includes_committed_wal_and_retains_source ___________
+tests/test_swarm100_round2_regressions.py:288: in test_v10_backup_includes_committed_wal_and_retains_source
+    assert rows(dest) == [("wal-only",)]
+E   AssertionError: assert [] == [('wal-only',)]
+E     
+E     Right contains one more item: ('wal-only',)
+E     Use -v to get more diff
+----------------------------- Captured stdout call -----------------------------
+🟢 Initiating Consolidación BFT Causal-Determinist hacia /private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-700/test_v10_backup_includes_commi0/central
+📦 Moviendo Ledger Maestro: cortex.db -> /private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-700/test_v10_backup_includes_commi0/central/cortex.db
+🧹 Purgada DB local: cortex.db
+
+============================================================
+ CONSOLIDACIÓN COMPLETADA
+============================================================
+ Ledgers Maestros movidos a ~/.babylon60/dbs/ : 1
+ Bases de datos de entropía local purgadas      : 1
+============================================================
+
+__________________ test_v11_purge_confines_deletion[relative] __________________
+tests/test_swarm100_round2_regressions.py:317: in test_v11_purge_confines_deletion
+    with pytest.raises((ValueError, OSError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE any of (ValueError, OSError)
+----------------------------- Captured stdout call -----------------------------
+=== ATOMIC PURGE OF EXTENSION: ../victim ===
+  [Default] Deleted Extension directory: /private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-700/test_v11_purge_confines_deleti0/Chrome/Default/Extensions/../victim
+
+Purge complete. Files/dirs removed: 1, Preferences cleaned: 0
+__________________ test_v11_purge_confines_deletion[absolute] __________________
+tests/test_swarm100_round2_regressions.py:317: in test_v11_purge_confines_deletion
+    with pytest.raises((ValueError, OSError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE any of (ValueError, OSError)
+----------------------------- Captured stdout call -----------------------------
+=== ATOMIC PURGE OF EXTENSION: /private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-700/test_v11_purge_confines_deleti1/Chrome/Default/victim ===
+  [Default] Deleted Extension directory: /private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-700/test_v11_purge_confines_deleti1/Chrome/Default/victim
+
+Purge complete. Files/dirs removed: 1, Preferences cleaned: 0
+__________________ test_v11_purge_confines_deletion[invalid] ___________________
+tests/test_swarm100_round2_regressions.py:317: in test_v11_purge_confines_deletion
+    with pytest.raises((ValueError, OSError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE any of (ValueError, OSError)
+----------------------------- Captured stdout call -----------------------------
+=== ATOMIC PURGE OF EXTENSION: . ===
+  [Default] Deleted Extension directory: /private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-700/test_v11_purge_confines_deleti2/Chrome/Default/Extensions/.
+
+Purge complete. Files/dirs removed: 1, Preferences cleaned: 0
+__________________ test_v11_purge_confines_deletion[symlink] ___________________
+tests/test_swarm100_round2_regressions.py:317: in test_v11_purge_confines_deletion
+    with pytest.raises((ValueError, OSError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE any of (ValueError, OSError)
+----------------------------- Captured stdout call -----------------------------
+=== ATOMIC PURGE OF EXTENSION: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa ===
+  [Default] Deleted Extension directory: /private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-700/test_v11_purge_confines_deleti3/Chrome/Default/Extensions/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+Purge complete. Files/dirs removed: 1, Preferences cleaned: 0
+=========================== short test summary info ============================
+FAILED tests/test_swarm100_round2_regressions.py::test_v01_no_unobserved_campaigns
+FAILED tests/test_swarm100_round2_regressions.py::test_v02_existing_output_is_never_deleted[claims]
+FAILED tests/test_swarm100_round2_regressions.py::test_v02_existing_output_is_never_deleted[ledger]
+FAILED tests/test_swarm100_round2_regressions.py::test_v02_existing_output_is_never_deleted[valid_inputs]
+FAILED tests/test_swarm100_round2_regressions.py::test_v03_crl_rejects_bad_file[{malformed]
+FAILED tests/test_swarm100_round2_regressions.py::test_v03_crl_rejects_bad_file[{}]
+FAILED tests/test_swarm100_round2_regressions.py::test_v03_crl_rejects_bad_file[null]
+FAILED tests/test_swarm100_round2_regressions.py::test_v03_crl_rejects_bad_file[{"revocations":"cert"}]
+FAILED tests/test_swarm100_round2_regressions.py::test_v03_crl_rejects_bad_file[[17]]
+FAILED tests/test_swarm100_round2_regressions.py::test_v03_crl_rejects_bad_file[[""]]
+FAILED tests/test_swarm100_round2_regressions.py::test_v03_crl_missing_file_and_controls
+FAILED tests/test_swarm100_round2_regressions.py::test_v03_cli_rejects_crl_without_traceback
+FAILED tests/test_swarm100_round2_regressions.py::test_v04_payload_hash_must_commit_content[False]
+FAILED tests/test_swarm100_round2_regressions.py::test_v04_payload_hash_must_commit_content[True]
+FAILED tests/test_swarm100_round2_regressions.py::test_v04_invalid_json_shape_rejected[data0]
+FAILED tests/test_swarm100_round2_regressions.py::test_v04_invalid_json_shape_rejected[data1]
+FAILED tests/test_swarm100_round2_regressions.py::test_v04_invalid_json_shape_rejected[data2]
+FAILED tests/test_swarm100_round2_regressions.py::test_v04_invalid_json_shape_rejected[data4]
+FAILED tests/test_swarm100_round2_regressions.py::test_v04_hash_only_scope_is_explicit
+FAILED tests/test_swarm100_round2_regressions.py::test_v05_serializes_closure_and_insertion[add]
+FAILED tests/test_swarm100_round2_regressions.py::test_v05_serializes_closure_and_insertion[revoke]
+FAILED tests/test_swarm100_round2_regressions.py::test_v05_record_and_receipt_rollback_together
+FAILED tests/test_swarm100_round2_regressions.py::test_v06_recompute_statement_content[content-five sides]
+FAILED tests/test_swarm100_round2_regressions.py::test_v06_recompute_statement_content[modality-deontic]
+FAILED tests/test_swarm100_round2_regressions.py::test_v06_recompute_statement_content[obligations-value2]
+FAILED tests/test_swarm100_round2_regressions.py::test_v06_markdown_root_is_not_integrity
+FAILED tests/test_swarm100_round2_regressions.py::test_v08_shredding_does_not_claim_success_for_recoverable_ciphertext
+FAILED tests/test_swarm100_round2_regressions.py::test_v08_async_shredding_fails_closed
+FAILED tests/test_swarm100_round2_regressions.py::test_v09_divergent_and_unknown_databases_survive
+FAILED tests/test_swarm100_round2_regressions.py::test_v10_backup_includes_committed_wal_and_retains_source
+FAILED tests/test_swarm100_round2_regressions.py::test_v11_purge_confines_deletion[relative]
+FAILED tests/test_swarm100_round2_regressions.py::test_v11_purge_confines_deletion[absolute]
+FAILED tests/test_swarm100_round2_regressions.py::test_v11_purge_confines_deletion[invalid]
+FAILED tests/test_swarm100_round2_regressions.py::test_v11_purge_confines_deletion[symlink]
+34 failed, 2 passed in 20.82s

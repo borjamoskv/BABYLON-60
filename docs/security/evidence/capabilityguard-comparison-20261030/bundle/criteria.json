@@ -1,0 +1,71 @@
+{
+  "fixed_before_trials": true,
+  "criteria": [
+    {
+      "id": "CG-01",
+      "description": "None conserva read y compute",
+      "status": "pending",
+      "evidence": null
+    },
+    {
+      "id": "CG-02",
+      "description": "Una lista vacía concede cero capacidades",
+      "status": "pending",
+      "evidence": null
+    },
+    {
+      "id": "CG-03",
+      "description": "Solo permite acciones string no vacías concedidas con coincidencia exacta",
+      "status": "pending",
+      "evidence": null
+    },
+    {
+      "id": "CG-04",
+      "description": "LOW/MEDIUM/HIGH permiten acciones concedidas; CRITICAL rechaza",
+      "status": "pending",
+      "evidence": null
+    },
+    {
+      "id": "CG-05",
+      "description": "Riesgos de tipo inválido devuelven False sin excepción",
+      "status": "pending",
+      "evidence": null
+    },
+    {
+      "id": "CG-06",
+      "description": "Acciones de tipo inválido devuelven False sin excepción",
+      "status": "pending",
+      "evidence": null
+    },
+    {
+      "id": "CG-07",
+      "description": "Firmas públicas y RiskTier conservados",
+      "status": "pending",
+      "evidence": null
+    },
+    {
+      "id": "CG-08",
+      "description": "validate_tool_execution permanece fuera del cambio",
+      "status": "pending",
+      "evidence": null
+    },
+    {
+      "id": "CG-09",
+      "description": "No cambia otros archivos de baseline, dependencias o evaluador",
+      "status": "pending",
+      "evidence": null
+    },
+    {
+      "id": "CG-10",
+      "description": "Incluye regresiones propias aprobadas sin skips y Ruff limpio",
+      "status": "pending",
+      "evidence": null
+    },
+    {
+      "id": "CG-11",
+      "description": "Revisión humana ciega de alcance, explicación y límites",
+      "status": "pending",
+      "evidence": null
+    }
+  ]
+}

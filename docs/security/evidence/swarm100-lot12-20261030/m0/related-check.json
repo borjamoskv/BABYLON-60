@@ -1,0 +1,27 @@
+{
+  "command": [
+    "uv",
+    "run",
+    "--locked",
+    "--no-sync",
+    "python",
+    "docs/security/evidence/swarm100-lot12-20261030/m0/run_checks.py",
+    "related"
+  ],
+  "pytest_args": [
+    "--tb=short",
+    "tests/test_swarm100_lot12_m0_regressions.py",
+    "tests/test_m0_evidence_pack_acceptance.py",
+    "tests/test_standalone_verifier.py",
+    "tests/test_compliance_exporter.py",
+    "tests/test_swarm100_round2_regressions.py",
+    "-q",
+    "-rs",
+    "-o",
+    "addopts=--tb=short"
+  ],
+  "exit_code": 0,
+  "source_sha256": "d150a286d1267fc6afa26dd6c59d41266f40c26a428cf29885465af041a083fc",
+  "test_sha256": "06bf1ca5e14982cc89bad53d9c731a2950942a41789e59c3affd0c47456f97b0",
+  "scope": "Disposable HOME, synthetic Ed25519 keys and SQLite pack data; TCP/DNS blocked; no operator identities/hardware/services."
+}

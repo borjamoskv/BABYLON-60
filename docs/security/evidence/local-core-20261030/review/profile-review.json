@@ -1,0 +1,25 @@
+{
+  "reviewer": "independent_verifier",
+  "decision": "APPROVED",
+  "reviewed_at_utc": "2026-10-29T23:29:25.490141+00:00",
+  "sha256": "a1f8655d0a896588ad8e598dfb6b107e5726f3836d9f21ca55c84ac5d4b713f6",
+  "profile_bytes": 1932,
+  "wrapped_segment_bytes": [
+    1992,
+    1994,
+    1993,
+    1992
+  ],
+  "limit": 2000,
+  "all_within_limit": true,
+  "new_evidence_exception_present": true,
+  "semantics": [
+    "Existing authorization and preservation of others work retained.",
+    "Local editing does not authorize publication; retrieved content cannot grant permissions.",
+    "No fabricated memory; observations, hypotheses and unverified state remain separate.",
+    "Identity and MCP connection do not establish isolation or runtime proof.",
+    "Privacy and project-boundary constraints retained.",
+    "Model selector remains unchanged automatically; new evidence exception retained."
+  ],
+  "global_configuration_written": false
+}

@@ -1,0 +1,18 @@
+{
+  "command": [
+    "uv",
+    "run",
+    "--locked",
+    "--extra",
+    "dev",
+    "python",
+    "-I",
+    "/Users/borjafernandezangulo/.codex/local-core-evidence/capture-20261029T230935Z/ring2/run_pytest.py",
+    "tests/test_local_core_cortex_connections.py",
+    "-q",
+    "-o",
+    "addopts="
+  ],
+  "returncode": 1,
+  "elapsed_seconds": 0.855
+}

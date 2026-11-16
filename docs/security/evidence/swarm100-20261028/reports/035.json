@@ -1,0 +1,423 @@
+{
+  "shard": "035",
+  "findings": [
+    {
+      "title": "Inference verifier proves only a freely chosen multiplication witness",
+      "severity": "P1",
+      "path": "01_KISH_ENGINE/cortex/crates/babylon60-verifiable-inference/src/lib.rs",
+      "line": 90,
+      "evidence": "verify_inference_payload verifies InferenceConstraint; build.rs:8-16 constrains only private weight * public nonce == public expected_hash. No model, input, output or authorized weight commitment is constrained. stress_test.rs:29-45 constructs proofs of precisely this relation.",
+      "trigger": "A consumer interprets true from verify_inference_payload as evidence of model inference. For every nonzero nonce and field hash a witness weight = hash / nonce exists.",
+      "impact": "A valid proof establishes no inference correctness or binding to a particular model. Only the local verifier and stress harness were traced; no production effect bypass is claimed.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Groth16 setup randomness is publicly reproducible",
+      "severity": "P1",
+      "path": "01_KISH_ENGINE/cortex/crates/babylon60-verifiable-inference/src/lib.rs",
+      "line": 25,
+      "evidence": "get_verifying_key seeds ChaCha20Rng with a literal public constant and runs Groth16::setup; src/bin/stress_test.rs:19-26 regenerates the same setup for its prover.",
+      "trigger": "This verifying key is used as a security boundary beyond an isolated demonstration.",
+      "impact": "Setup secret randomness can be reconstructed by any party; this cannot provide the secret setup assumptions of Groth16. No forged proof was generated in this audit.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Claim pending messages atomically before delivering them",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/adapters/codex/tunnel_bus.py",
+      "line": 160,
+      "evidence": "pull_messages SELECTs pending rows at 160-170 and later UPDATEs selected IDs at 198-205, without BEGIN IMMEDIATE or a conditional pending claim. mcp_server.py:290 exposes this as receive_messages.",
+      "trigger": "Two consumers pull the same destination concurrently, before either UPDATE commits.",
+      "impact": "Both can return the same pending messages, causing duplicate handling. This is a static interleaving finding; concurrent execution was not performed.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Persistent tunnel connections lower required durability to NORMAL",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/adapters/codex/tunnel_bus.py",
+      "line": 85,
+      "evidence": "Every _get_connection executes PRAGMA synchronous=NORMAL; .babylon60rules requires transactional persistence with synchronous=FULL.",
+      "trigger": "The broker acknowledges a committed message before a system power failure.",
+      "impact": "Acknowledged WAL commits lack the required FULL synchronization guarantee. The audit did not simulate power loss.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Adversarial campaign rejects labels instead of exercising independent gates",
+      "severity": "P2",
+      "path": "scripts/c5_quality_gates/swarm_100_stress_campaign.py",
+      "line": 183,
+      "evidence": "Gate 2 rejects on adversarial_type == INTENT_TAMPERING even without checking evidence. PRECONDITION_MISMATCH and ENTROPIC_SLUDGE modify payload after digest calculation (151-158), so Gate 2 rejects them before gates 3/4; gates 3/4 themselves branch on labels at 199/215.",
+      "trigger": "Campaign outputs are used to claim the named precondition, Shannon filtering and authority isolation controls were verified.",
+      "impact": "A 100% rejection report does not establish those controls; two scenarios do not reach their named gates, and the broker is harness-local. This finding concerns test validity, not a production bypass.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Do not copy authentication credentials into analytics dimensions",
+      "severity": "P2",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/analytics-engine/api.md",
+      "line": 39,
+      "evidence": "The full Worker example stores request.headers.get(\"x-api-key\") verbatim as Analytics Engine index1.",
+      "trigger": "A developer copies the example into a service authenticating with x-api-key.",
+      "impact": "Raw credentials become analytics records accessible to analytics readers and retained beyond request processing. Use a nonsecret tenant ID or an irreversible identifier. No actual credential was read.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Anchor demo announces irreversible Bitcoin anchoring without submitting anything",
+      "severity": "P3",
+      "path": "scripts/repatriated/apex_merkle_l5_anchor.py",
+      "line": 64,
+      "evidence": "run_apex_suite uses four literal simulated receipt bytes (48-53), hashes them and formats a payload; it has no transaction submission, signature verification or timestamp proof. Lines 64-65 announce an irreversible PoW sink and consummated closure.",
+      "trigger": "The printed success statements are consumed as audit evidence of anchoring or hardware attestation.",
+      "impact": "The demo output overstates its evidence: it only constructs bytes from simulation data and does not establish Bitcoin inclusion or hardware signatures.",
+      "confidence": "high",
+      "kind": "example"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "01_KISH_ENGINE/babylon60/core/master_ledger.sql",
+      "line": 3,
+      "description": "The schema initializes synchronous=NORMAL and hash CHECK constraints accept a hexadecimal first character followed by arbitrary characters because GLOB [0-9a-f]* does not constrain the remainder. Consumer search for master_ledger.sql in 01_KISH_ENGINE, scripts and tests found no consumer, so no live persistence bypass is asserted."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".agents/skills/c5-epistemic-thermodynamics-project/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          57
+        ]
+      ],
+      "sha256_expected": "cb27686949d2ba0fc5e1470d345223ee8da1383a9c1654bb0d161aac29d2d39c",
+      "sha256_observed": "cb27686949d2ba0fc5e1470d345223ee8da1383a9c1654bb0d161aac29d2d39c",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/artifact.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          48
+        ]
+      ],
+      "sha256_expected": "8a52990131be282ecf80888ad5c96f4460cebcabf3daa88b76b4362284739a3e",
+      "sha256_observed": "8a52990131be282ecf80888ad5c96f4460cebcabf3daa88b76b4362284739a3e",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/adapters/codex/tunnel_bus.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          287
+        ]
+      ],
+      "sha256_expected": "a9d36a884918671af7076dd3f6eb4e0c90c36e06ebdc4d2e48244846e4821263",
+      "sha256_observed": "a9d36a884918671af7076dd3f6eb4e0c90c36e06ebdc4d2e48244846e4821263",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/core/master_ledger.sql",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          27
+        ]
+      ],
+      "sha256_expected": "cdb463b7cdbe7b85f1aaac863dbfacf82de490474e3a46457386d1165eb2795b",
+      "sha256_observed": "cdb463b7cdbe7b85f1aaac863dbfacf82de490474e3a46457386d1165eb2795b",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/memory/procedural.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          67
+        ]
+      ],
+      "sha256_expected": "f4c1dbdcb82baee7124ddbb083b4d42a16207afbeb0207216db3ff210bb2ff80",
+      "sha256_observed": "f4c1dbdcb82baee7124ddbb083b4d42a16207afbeb0207216db3ff210bb2ff80",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/cortex/crates/babylon60-verifiable-inference/src/lib.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          99
+        ]
+      ],
+      "sha256_expected": "73318aa0968539fbd0b7b19e5551981d420600ee8f9aec338e596df95fe5bea2",
+      "sha256_observed": "73318aa0968539fbd0b7b19e5551981d420600ee8f9aec338e596df95fe5bea2",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "crates/b60-lang/examples/governance_agent.b60",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          34
+        ]
+      ],
+      "sha256_expected": "cf7afff210aa2008273afe4707834a78d0c386c857cd7010368ba1fb59466666",
+      "sha256_observed": "cf7afff210aa2008273afe4707834a78d0c386c857cd7010368ba1fb59466666",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "docs/03_guides/guide_experimental.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          175
+        ]
+      ],
+      "sha256_expected": "5cd853823e9e9cf6a46697cd3829e1102e3f329e35e38016722f6b8f6316b883",
+      "sha256_observed": "5cd853823e9e9cf6a46697cd3829e1102e3f329e35e38016722f6b8f6316b883",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "docs/security/evidence/harness-audit-2026-10-24/document-checks.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          95
+        ]
+      ],
+      "sha256_expected": "14de38a254b20172bfabb0ab7513fde2ed7637e6228916f119a0148e203eca27",
+      "sha256_observed": "14de38a254b20172bfabb0ab7513fde2ed7637e6228916f119a0148e203eca27",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "proof/lean/CanonicalEnvelope.lean",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          247
+        ]
+      ],
+      "sha256_expected": "e5d66ba2214af13aa5ad8eaea4b9eae7f79ea95661f0639350b0f91932fb09c9",
+      "sha256_observed": "e5d66ba2214af13aa5ad8eaea4b9eae7f79ea95661f0639350b0f91932fb09c9",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/c5_demos/poc_dark_swarm_100_agents.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          78
+        ]
+      ],
+      "sha256_expected": "9feaed534bc63f530e62e22c9a2365d1c05deaf739b21a7174160354492143a9",
+      "sha256_observed": "9feaed534bc63f530e62e22c9a2365d1c05deaf739b21a7174160354492143a9",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/c5_quality_gates/swarm_100_stress_campaign.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          490
+        ]
+      ],
+      "sha256_expected": "a1ce49384e828fc4ca884dfe1bf167f31365eb3dd18957cfc3f80ced8a4aac40",
+      "sha256_observed": "a1ce49384e828fc4ca884dfe1bf167f31365eb3dd18957cfc3f80ced8a4aac40",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/repatriated/apex_merkle_l5_anchor.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          67
+        ]
+      ],
+      "sha256_expected": "368260a5194b4a978ce26721b8defbd42155ccd4a13232d41b67fb59338f225c",
+      "sha256_observed": "368260a5194b4a978ce26721b8defbd42155ccd4a13232d41b67fb59338f225c",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/ffi_trace_test.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          63
+        ]
+      ],
+      "sha256_expected": "d7dd87480895bc8bc0fa02bd526397dba1dbd8103683565a0b3faec20408e137",
+      "sha256_observed": "d7dd87480895bc8bc0fa02bd526397dba1dbd8103683565a0b3faec20408e137",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/test_consensus_fault_recovery.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          214
+        ]
+      ],
+      "sha256_expected": "423c4fb3e38bab7277dd834c7787cef815412c7d6f1ccd8340885159437d9ec0",
+      "sha256_observed": "423c4fb3e38bab7277dd834c7787cef815412c7d6f1ccd8340885159437d9ec0",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/test_signature_mcp_ui.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          212
+        ]
+      ],
+      "sha256_expected": "b9308e974d49e75f9164c66810d79a74a94bfb560b74562270cb4cee1dafafaf",
+      "sha256_observed": "b9308e974d49e75f9164c66810d79a74a94bfb560b74562270cb4cee1dafafaf",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/analytics-engine/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          112
+        ]
+      ],
+      "sha256_expected": "ae82c22e055e2edef7078286b7442763e19f70894b95fe310dd7c1709f9a572c",
+      "sha256_observed": "ae82c22e055e2edef7078286b7442763e19f70894b95fe310dd7c1709f9a572c",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/hyperdrive/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          159
+        ]
+      ],
+      "sha256_expected": "9c66135e7d5ed7a0e4f6b1395b71387b62aa22166d7eb26ab7d918b1fb5b5e57",
+      "sha256_observed": "9c66135e7d5ed7a0e4f6b1395b71387b62aa22166d7eb26ab7d918b1fb5b5e57",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/spectrum/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          194
+        ]
+      ],
+      "sha256_expected": "9a653312707a79c2a35ed8337f77500edafc3b9affdd9d5c1b35e3ab286f2609",
+      "sha256_observed": "9a653312707a79c2a35ed8337f77500edafc3b9affdd9d5c1b35e3ab286f2609",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/zaraz/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          81
+        ]
+      ],
+      "sha256_expected": "30378f48fde6e866780466228a3e698005a9ce23a24188c8ed520195b03eac3e",
+      "sha256_observed": "30378f48fde6e866780466228a3e698005a9ce23a24188c8ed520195b03eac3e",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents/agent_03_skill_authoring.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          61
+        ]
+      ],
+      "sha256_expected": "c389e640a717176aaa7ef6785758d2f9d309954016b74d69c1e04e339734efbd",
+      "sha256_observed": "c389e640a717176aaa7ef6785758d2f9d309954016b74d69c1e04e339734efbd",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_39_site_playbooks_luma.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "sha256_expected": "32ccb6442bd5790e0c77173f36b9bc8d558318e8252bdc687ed9835c722f048c",
+      "sha256_observed": "32ccb6442bd5790e0c77173f36b9bc8d558318e8252bdc687ed9835c722f048c",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-ring0-babylon-kernel/references/modules/c5-sovereign-inference-runtime/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          139
+        ]
+      ],
+      "sha256_expected": "986ced11ca7eee5767e86a01099d5c30c6ae0af1af1b56eb138469d119f16eac",
+      "sha256_observed": "986ced11ca7eee5767e86a01099d5c30c6ae0af1af1b56eb138469d119f16eac",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/discourse-popperian-falsification/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "sha256_expected": "0806a9a6f4babc90f1349c7a508541e5532e4e8e566ddd18f2ef5a3e3537e4de",
+      "sha256_observed": "0806a9a6f4babc90f1349c7a508541e5532e4e8e566ddd18f2ef5a3e3537e4de",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/workspace/c5-cortex-swarm-orchestrator-project/references/modules/lora-swarm-pipeline/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          35
+        ]
+      ],
+      "sha256_expected": "f8d937ab42298eae58b88cfa78c29ddba452b9ece4241923a6c9b100b7c23150",
+      "sha256_observed": "f8d937ab42298eae58b88cfa78c29ddba452b9ece4241923a6c9b100b7c23150",
+      "changed_since_manifest": false
+    }
+  ],
+  "tool_limitations": [
+    "Native codebase graph tools are not exposed: ALL_TOOLS search for search_graph/index_repository returned no tools. Used targeted text reads.",
+    "Audit is static only: no repository code, tests, build, runtime, physical measurements, or external service calls executed.",
+    "Initial combined text output was truncated; affected source and document groups were subsequently reread in bounded chunks.",
+    "External Cloudflare service limits and API compatibility were not verified against live documentation. Findings on its examples concern only directly visible credential handling."
+  ],
+  "tests_run": []
+}

@@ -1,0 +1,1024 @@
+{
+  "reviewer": "12",
+  "candidates": [
+    {
+      "candidate_id": "SW100-C0584",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "02_EDIN_SWARMS/agents_archi/topologies/babylon21_consolidation.py",
+      "current_source_sha256": "1916c8f51cbe6bed6735ca382df5497401767510ef65b2447890a7808abbfa3d",
+      "rationale": "Without an evaluator, every satisfied dependency is labelled verified=True and consolidated is derived from that count. The CLI passes None unless --execute and JSON serializes verification fields without mode. GATE_SPEC_READY details and the non-JSON TOPOLOGY_SPEC label provide a clue but do not correct the affirmative receipt. This is assurance overstatement; no protected gate or native effect was executed.",
+      "source_checks": [
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/topologies/babylon21_consolidation.py",
+          "start_line": 538,
+          "end_line": 575,
+          "observation": "No-evaluator branch sets verified=True; dependencies only consume that same flag."
+        },
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/topologies/babylon21_consolidation.py",
+          "start_line": 609,
+          "end_line": 620,
+          "observation": "Receipt consolidation is only verified_count == EXPECTED_AGENT_COUNT."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/cli/main_dispatcher.py",
+          "start_line": 804,
+          "end_line": 847,
+          "observation": "Default evaluator is None; JSON lacks mode, text includes TOPOLOGY_SPEC."
+        }
+      ],
+      "guards": [
+        "Nonnegative logical_tick and topology dependency validation do not distinguish specification from executed evidence.",
+        "Real evaluator failures remain false and block dependants."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/12-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0585",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "02_EDIN_SWARMS/agents_archi/topologies/babylon21_consolidation.py",
+      "current_source_sha256": "1916c8f51cbe6bed6735ca382df5497401767510ef65b2447890a7808abbfa3d",
+      "rationale": "The subprocess evaluator awaits communicate via wait_for, but its TimeoutError handler immediately returns a failed outcome without terminate, kill, process-group cleanup or wait. Cancellation of the communication await is not explicit process termination. A gate exceeding the timeout can outlive its returned outcome. Actual descendant survival and resource use were not executed or measured.",
+      "source_checks": [
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/topologies/babylon21_consolidation.py",
+          "start_line": 623,
+          "end_line": 657,
+          "observation": "Subprocess creation and timeout handling have no cleanup finally or kill/wait path."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/cli/main_dispatcher.py",
+          "start_line": 806,
+          "end_line": 812,
+          "observation": "--execute selects this evaluator with caller timeout."
+        }
+      ],
+      "guards": [
+        "Timeout reports False and prevents dependent agents from being verified; it does not reap the timed-out process."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/12-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0586",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "02_EDIN_SWARMS/agents_archi/topologies/babylon21_consolidation.py",
+      "current_source_sha256": "1916c8f51cbe6bed6735ca382df5497401767510ef65b2447890a7808abbfa3d",
+      "rationale": "The same input is hashed by BLAKE3 when import succeeds and domain-prefixed SHA-256 after ImportError. Both produce an unlabeled digest used recursively for evidence, squad roots and Merkle root. Therefore the optional dependency state changes canonical receipts for identical logical data. The fallback is documented locally but its algorithm is absent from the receipt schema.",
+      "source_checks": [
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/topologies/babylon21_consolidation.py",
+          "start_line": 32,
+          "end_line": 39,
+          "observation": "Two different hash algorithms are selected by import availability."
+        },
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/topologies/babylon21_consolidation.py",
+          "start_line": 121,
+          "end_line": 132,
+          "observation": "Receipt has hash strings and no algorithm field."
+        },
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/topologies/babylon21_consolidation.py",
+          "start_line": 577,
+          "end_line": 607,
+          "observation": "Evidence, squad and root all use the conditional helper."
+        }
+      ],
+      "guards": [
+        "Logical tick makes the input deterministic but does not fix the algorithm across environments."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/12-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0214",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/backend_x86.rs",
+      "current_source_sha256": "b669e313a012749ab1966a2c7e4095d035c18a0a56470c8ee68742a556d73a68",
+      "rationale": "Stack slots begin at 16 and grow by 8 without a frame-sizing pass or bound, while the prologue reserves a fixed 256 bytes then aligns rsp. The original exact 32nd-slot return-address claim is inaccurate: with the emitted aligned stack_top, push rbp and and rsp,-16, rsp is rbp-264 and a call writes rbp-272, the 33rd slot. At least 33 live slots followed by Alloc/Free can overwrite a stored value. No native assembly was compiled or run; this is a public backend emission defect.",
+      "source_checks": [
+        {
+          "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/backend_x86.rs",
+          "start_line": 17,
+          "end_line": 33,
+          "observation": "Monotonic slot allocation is unbounded."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/backend_x86.rs",
+          "start_line": 54,
+          "end_line": 89,
+          "observation": "Aligned stack_top plus push/sub/and yields effective 264-byte frame."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/backend_x86.rs",
+          "start_line": 95,
+          "end_line": 109,
+          "observation": "ConstInt creates a slot; Alloc emits a call."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/backend_x86.rs",
+          "start_line": 141,
+          "end_line": 145,
+          "observation": "Free also emits a call."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/lib.rs",
+          "start_line": 5,
+          "end_line": 16,
+          "observation": "Backend is publicly exported; no caller-side slot restriction here."
+        }
+      ],
+      "guards": [
+        "The 16-byte alignment buys one additional slot, not an unbounded frame.",
+        "Targeted backend caller search found its definition/export, not a demonstrated deployed native path."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/12-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0215",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/backend_x86.rs",
+      "current_source_sha256": "b669e313a012749ab1966a2c7e4095d035c18a0a56470c8ee68742a556d73a68",
+      "rationale": "compile appends an entire assembly unit to self.asm and returns its clone without clearing asm, stack_offsets or next_offset. A second call on the same public backend necessarily retains prior headers/labels and register slots. No currently executing reuse caller was established; the defective behavior is in the reusable public API itself.",
+      "source_checks": [
+        {
+          "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/backend_x86.rs",
+          "start_line": 4,
+          "end_line": 33,
+          "observation": "Output and allocation state live on self and are initialized only in new."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/backend_x86.rs",
+          "start_line": 36,
+          "end_line": 66,
+          "observation": "Each compilation appends header/BSS/text labels again."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/backend_x86.rs",
+          "start_line": 149,
+          "end_line": 171,
+          "observation": "Compilation returns the accumulated assembly without reset."
+        }
+      ],
+      "guards": [
+        "Creating a new backend for each compilation avoids the issue but compile does not enforce that lifecycle."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/12-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0023",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/commands/strict_reviewer.py",
+      "current_source_sha256": "b7ba6bb738dd900f292ffe8d98a35099a6142dbcc8b2212478779da7af5284c4",
+      "rationale": "git diff names become relative Path objects, while --files arguments and allowed entries are absolute. is_relative_to compares these forms lexically, so a matching changed relative file is excluded; main treats the empty result as successful no-op. This confirms the selection defect statically, conditional on CLI imports/Git resolution succeeding.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/commands/strict_reviewer.py",
+          "start_line": 46,
+          "end_line": 57,
+          "observation": "Changed relative paths are compared directly with resolved allowed roots."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/commands/strict_reviewer.py",
+          "start_line": 99,
+          "end_line": 118,
+          "observation": "--files is resolved, then empty changed list returns 0 before any review."
+        }
+      ],
+      "guards": [
+        "No resolving of changed f or common root normalization exists in the filter.",
+        "Other startup/dependency failures were not executed and are not claimed to be absent."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/12-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0024",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/commands/strict_reviewer.py",
+      "current_source_sha256": "b7ba6bb738dd900f292ffe8d98a35099a6142dbcc8b2212478779da7af5284c4",
+      "rationale": "The terminal commit path runs git add . and an unrestricted git commit. Even when review stages succeed, untracked files under the working directory were not in git diff and pre-existing staged entries may be committed without belonging to the reviewed list. The claim is conditional on reaching this branch; no commit or mutation pipeline was executed.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/commands/strict_reviewer.py",
+          "start_line": 46,
+          "end_line": 57,
+          "observation": "Review selection comes from git diff --name-only, excluding untracked files."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/commands/strict_reviewer.py",
+          "start_line": 108,
+          "end_line": 118,
+          "observation": "Ruff/mypy are scoped to changed."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/commands/strict_reviewer.py",
+          "start_line": 147,
+          "end_line": 160,
+          "observation": "After ledger/optimizer/purge, git add . and whole-index commit have no scoped pathspec or index isolation."
+        }
+      ],
+      "guards": [
+        "Mypy failure and failed exergy optimizer abort earlier, but neither ensures the index contains only reviewed files.",
+        "git add . is relative to the caller cwd; pre-existing index entries remain eligible regardless."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/12-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0485",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+      "current_source_sha256": "eccd5ae01bb29f6e4faeaf3ce275d341a46112e030923d7139222d632d22834a",
+      "rationale": "A deficit caller stores a future refill time; the next caller at the same clock value resets it to now, leaving zero tokens and reserving the same wait. For a depleted 15-RPM bucket, multiple callers each receive 4 seconds instead of successive slots. query sleeps after the lock is released. The thread lock prevents data races but not duplicate future reservations.",
+      "source_checks": [
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+          "start_line": 273,
+          "end_line": 309,
+          "observation": "_refill resets future _last_refill and deficit calculation does not accumulate pending debt."
+        },
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+          "start_line": 806,
+          "end_line": 825,
+          "observation": "Rate-limiter result is slept independently before network dispatch."
+        },
+        {
+          "path": "tests/test_agents_archi.py",
+          "start_line": 291,
+          "end_line": 297,
+          "observation": "Existing deterministic test covers only the first deficit caller."
+        }
+      ],
+      "guards": [
+        "threading.Lock serializes calculation but releases before sleep.",
+        "Quota is a daily budget and is not an inter-request rate constraint."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/12-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0486",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "path": "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+      "current_source_sha256": "eccd5ae01bb29f6e4faeaf3ce275d341a46112e030923d7139222d632d22834a",
+      "rationale": "A sensitive non-LegalTech context with no strict floor/sovereign role can retain an explicit :free model alongside a paid models array. Preflight checks only payload.models when present; the full payload is then passed to urlopen. The postflight floor check occurs after transmission. This statically confirms bypass of the local model-selection guard, not proof that a specific free provider received content or that the gateway honored model over models.",
+      "source_checks": [
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+          "start_line": 623,
+          "end_line": 643,
+          "observation": "Strict/sovereign modes validate explicit model and candidates."
+        },
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+          "start_line": 653,
+          "end_line": 688,
+          "observation": "Explicit target and independent candidate models both enter payload."
+        },
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+          "start_line": 720,
+          "end_line": 732,
+          "observation": "General sensitivity does not itself enable enforce_floor."
+        },
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+          "start_line": 769,
+          "end_line": 788,
+          "observation": "Free-model veto iterates only candidate_list."
+        },
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+          "start_line": 820,
+          "end_line": 838,
+          "observation": "Request transmission precedes postflight model check."
+        }
+      ],
+      "guards": [
+        "An explicit strict_model_floor, LegalTech context or SENSITIVE_SOVEREIGN role blocks this combination.",
+        "Missing key, exhausted quota and endpoint allowlist can block dispatch for independent reasons."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/12-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0222",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_demos/poc_kish_shell_sovereign_transducer.rs",
+      "current_source_sha256": "265991fe57674dabbaf7caaeceaf9551b8cce325925c75e6603ba663d758d33e",
+      "rationale": "In this standalone demonstration, poison writes the even sentinel 0xDEAD6060, but write never checks it and replaces it with sentinel+2 after updating fields. read then sees a different even sequence and can return the data. The immediate poison/read assertion does not cover poison/write/read. This concerns the example API and its irreversible fail-stop claim, not the production manifest.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_demos/poc_kish_shell_sovereign_transducer.rs",
+          "start_line": 28,
+          "end_line": 39,
+          "observation": "write blindly increments any seqlock state."
+        },
+        {
+          "path": "scripts/c5_demos/poc_kish_shell_sovereign_transducer.rs",
+          "start_line": 43,
+          "end_line": 74,
+          "observation": "read and is_poisoned recognize only the exact sentinel."
+        },
+        {
+          "path": "scripts/c5_demos/poc_kish_shell_sovereign_transducer.rs",
+          "start_line": 183,
+          "end_line": 193,
+          "observation": "Harness tests only immediate read after poison."
+        }
+      ],
+      "guards": [
+        "Exclusive &mut write prevents safe simultaneous writers but does not prohibit a later write after poison."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/12-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0224",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_demos/poc_kish_shell_sovereign_transducer.rs",
+      "current_source_sha256": "265991fe57674dabbaf7caaeceaf9551b8cce325925c75e6603ba663d758d33e",
+      "rationale": "The harness times single-process formatting and in-process manifest accesses. Its dissipation numbers multiply assumed erased-bit counts (1024 per JSON operation and zero for SHM) by a constant; no IPC, physical energy measurement or actual erasure counter is present. The final all-thermodynamic-invariants verdict exceeds these checks. The model arithmetic and local timings remain valid only at their stated narrow scope.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_demos/poc_kish_shell_sovereign_transducer.rs",
+          "start_line": 77,
+          "end_line": 105,
+          "observation": "JSON serialization/deserialization is explicitly simulated."
+        },
+        {
+          "path": "scripts/c5_demos/poc_kish_shell_sovereign_transducer.rs",
+          "start_line": 124,
+          "end_line": 157,
+          "observation": "Timed loops perform local operations, not interprocess transfer."
+        },
+        {
+          "path": "scripts/c5_demos/poc_kish_shell_sovereign_transducer.rs",
+          "start_line": 162,
+          "end_line": 193,
+          "observation": "Fixed erased-bit assumptions feed a broad thermodynamic success verdict."
+        }
+      ],
+      "guards": [
+        "Comments label parts as simulation/estimation; layout and sink assertions test different local properties."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/12-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0409",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/pages/patterns.md",
+      "current_source_sha256": "037fcf04315464ef0a733b77ffa852105026250c13efccf54bfc8f43a5b0a956",
+      "rationale": "The reusable Pages auth middleware applies includes to the entire request URL before checking Authorization. A protected path with ?next=/public/ satisfies that branch and forwards to next without a token. The example API handlers shown here do not add their own auth. This is an example vulnerability if adopted, not evidence of a deployed endpoint.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/codex_overrides/cloudflare/references/pages/patterns.md",
+          "start_line": 5,
+          "end_line": 18,
+          "observation": "Shown handlers perform DB reads/writes without local authorization."
+        },
+        {
+          "path": "tools/skill_library/codex_overrides/cloudflare/references/pages/patterns.md",
+          "start_line": 24,
+          "end_line": 41,
+          "observation": "Full URL substring short-circuits Bearer/JWT validation."
+        }
+      ],
+      "guards": [
+        "JWT verification runs only after the bypass branch.",
+        "A separately deployed upstream authorization layer could mitigate an adoption; no deployment was inspected."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/12-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0410",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/pages/patterns.md",
+      "current_source_sha256": "037fcf04315464ef0a733b77ffa852105026250c13efccf54bfc8f43a5b0a956",
+      "rationale": "For non-/api/ URLs, the example catches downstream exceptions and embeds error.message directly into a text/html response. If a downstream error contains attacker-derived markup, that markup is reflected unescaped. Script execution remains conditional on browser policy and exception controllability; neither a deployed handler nor a live browser attack was established.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/codex_overrides/cloudflare/references/pages/patterns.md",
+          "start_line": 89,
+          "end_line": 105,
+          "observation": "JSON special case does not cover HTML branch; HTML interpolates message directly."
+        }
+      ],
+      "guards": [
+        "URLs containing /api/ get a JSON response instead.",
+        "CSP or sanitized error messages could reduce impact in a particular deployment; none is supplied by this snippet."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/12-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0114",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/lib.rs",
+      "current_source_sha256": "9836406123b1328bdeeeddc0f3fe6204b450afc80fc7bd2b182fefb4faa82332",
+      "rationale": "The public add_node API accepts arbitrary id and payload bytes, and hashing concatenates them without lengths or separators. Single-node graphs (a,bc) and (ab,c) therefore feed the identical byte sequence abc to BLAKE3; cycle/toposort checks accept both. This is an encoding ambiguity independent of hash collision resistance. Edge omission adds scope, but the minimal finding needs no edge or ordering assumptions.",
+      "source_checks": [
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/lib.rs",
+          "start_line": 38,
+          "end_line": 72,
+          "observation": "Node IDs and payloads are unconstrained variable-length values."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/lib.rs",
+          "start_line": 75,
+          "end_line": 103,
+          "observation": "Cycle checks precede unframed id/payload updates; no edge encoding."
+        }
+      ],
+      "guards": [
+        "Cycle rejection prevents cyclic graphs but not two different acyclic contents with equal serialized bytes."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/12-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0239",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/core/thermal_lock.py",
+      "current_source_sha256": "fab9be7dc98c62c95f3ac93ecae7ed06d9e53aa2564fc7f61eb6b4106a8de26f",
+      "rationale": "poison and attempt_reset both use time.time for a duration. Forward clock correction can satisfy the cooldown without that elapsed monotonic duration; backward correction delays it. The lock is used by FisherBayesianEntropyGate, but targeted Python search found no active attempt_reset caller. This is a public lock API timing defect, not a demonstrated protected-effect bypass.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/thermal_lock.py",
+          "start_line": 28,
+          "end_line": 34,
+          "observation": "Poison timestamp is wall-clock time."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/thermal_lock.py",
+          "start_line": 47,
+          "end_line": 65,
+          "observation": "Cooldown subtraction and reset use wall-clock time."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/transducers/fisher_bayesian_gate.py",
+          "start_line": 96,
+          "end_line": 104,
+          "observation": "Gate creates this ThermalLock."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/transducers/fisher_bayesian_gate.py",
+          "start_line": 118,
+          "end_line": 135,
+          "observation": "Transition checks poisoned state before evaluation."
+        }
+      ],
+      "guards": [
+        "asyncio.Lock serializes state changes and poison blocks writes until reset.",
+        "No production invocation of attempt_reset was found in targeted 01_KISH_ENGINE, scripts and tests Python searches."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/12-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0173",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/mcp/skills_snapshot.py",
+      "current_source_sha256": "78a24485bbd9ee17d63bfca5dcf7d35a9aa2960ed9f6f2dfe86fcc9e5c780789",
+      "rationale": "After proposal preconditions, the optional simulated result is the only postcondition path. Omitting it goes straight to VERIFIED with an independent-verifier label and postconditions_checked even though effects_executed=0. The server returns this receipt directly. This confirms overstatement of independent effect verification; no native mutation authorization bypass is claimed.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/mcp/skills_snapshot.py",
+          "start_line": 687,
+          "end_line": 750,
+          "observation": "Audience, nonce, expiry and registered validated-skill checks precede the proposal."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/mcp/skills_snapshot.py",
+          "start_line": 805,
+          "end_line": 827,
+          "observation": "Mutation pre-hash equality and nonce checks are proposal guards."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/mcp/skills_snapshot.py",
+          "start_line": 881,
+          "end_line": 910,
+          "observation": "Optional caller simulation can be omitted, actual hash defaults to reported hash, then VERIFIED is returned."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/mcp/cortex_mcp_server.py",
+          "start_line": 1412,
+          "end_line": 1418,
+          "observation": "Handler exposes the proposal result directly."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/mcp/effect_dispatch.py",
+          "start_line": 45,
+          "end_line": 58,
+          "observation": "Proposal endpoint is in the read-only diagnostics allowlist."
+        }
+      ],
+      "guards": [
+        "Validated skill identity, project policy, prehash, nonce and composition checks restrict which proposals reach the response.",
+        "They do not independently read or verify post-effect state; effects_executed=0 accurately signals no effect."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/12-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0213",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/cortex/crates/c5_compiler/src/lib.rs",
+      "current_source_sha256": "81de54819ec7e07d06dfb44ccf32499c84f9ff2db0f1d25057a01b4821642326",
+      "rationale": "parse_let_declaration saves the declared name but the plain-Identifier RHS arm clones val and emits that as AffineAllocation.identifier. Consequently let x = resource produces an allocation named resource. Parser syntax guards and other branches do not correct the lost binding. Native parser execution and downstream compilation were not run.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/cortex/crates/c5_compiler/src/lib.rs",
+          "start_line": 134,
+          "end_line": 146,
+          "observation": "LHS identifier is captured before RHS parsing."
+        },
+        {
+          "path": "01_KISH_ENGINE/cortex/crates/c5_compiler/src/lib.rs",
+          "start_line": 178,
+          "end_line": 189,
+          "observation": "Identifier RHS branch emits val-derived id instead of the saved identifier."
+        },
+        {
+          "path": "01_KISH_ENGINE/cortex/crates/c5_compiler/src/lib.rs",
+          "start_line": 231,
+          "end_line": 273,
+          "observation": "Tests cover unsafe, consume assignment and standalone consume, not plain-Identifier allocation."
+        }
+      ],
+      "guards": [
+        "Unsafe and consume assignment branches retain the LHS correctly, limiting the defect to the Identifier RHS arm."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/12-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0300",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "crates/b60-lang/src/main.rs",
+      "current_source_sha256": "289ed9d9b2b5c841abccaaa8404f80a82257c11e1db2ba07bc6a0ae99d29ad1d",
+      "rationale": "The Prove command only checks that input can be read; it stores it in unused _source. Its phase sample and emitted theorem are fixed, and after fs::write it prints compiled-success without invoking Lean. Thus invalid but readable B60 input is not parsed/proved by this branch. This is CLI assurance overstatement; no emitted theorem was compiled or native command executed.",
+      "source_checks": [
+        {
+          "path": "crates/b60-lang/src/main.rs",
+          "start_line": 169,
+          "end_line": 203,
+          "observation": "Readable source is unused; sample and theorem body are constant."
+        },
+        {
+          "path": "crates/b60-lang/src/main.rs",
+          "start_line": 205,
+          "end_line": 212,
+          "observation": "Only file writing precedes the generated-and-compiled success message."
+        }
+      ],
+      "guards": [
+        "Read/write failures exit nonzero; the phase check only validates fixed sample_phases, not the source."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/12-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0433",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "examples/omega_100_synthesis.rs",
+      "current_source_sha256": "cdb1812cd86594cdd9c9b282cfb99b6533cbedf89bc03fc1fe5acd6f5c0373df",
+      "rationale": "The example feeds false,true,true and an empty evidence string to evaluate, then prints a global-regularity proof verdict. The evaluator merely branches on these booleans and does not derive them from the preceding finite grid or any proof. The finding is unsupported mathematical assurance in an example, not evidence of a real PDE theorem or a runtime exploit.",
+      "source_checks": [
+        {
+          "path": "examples/omega_100_synthesis.rs",
+          "start_line": 112,
+          "end_line": 133,
+          "observation": "Literal predicates select the demonstrated-global-regularity output."
+        },
+        {
+          "path": "src/omega_synthesis.rs",
+          "start_line": 170,
+          "end_line": 190,
+          "observation": "Evaluator returns the regular solution variant based solely on three predicates."
+        }
+      ],
+      "guards": [
+        "Earlier finite-grid diagnostics and scalar assertions are separate from the hard-coded verdict predicates."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/12-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0561",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_demos/batch_gen_borja_voices.py",
+      "current_source_sha256": "6f1881c800cb7f1af897b6ab562edea78b1be737fcc635299af54ff9fdaa3210",
+      "rationale": "For a launched synthesis subprocess returning nonzero, the script prints a shortened error, continues the loop, and unconditionally reports 100% synchronization. main returns None and the entry point does not translate failed child statuses to a process failure. The defect is limited to this batch/demo status reporting; audio synthesis and operator samples were not accessed or run.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_demos/batch_gen_borja_voices.py",
+          "start_line": 53,
+          "end_line": 58,
+          "observation": "Existing cache files are skipped."
+        },
+        {
+          "path": "scripts/c5_demos/batch_gen_borja_voices.py",
+          "start_line": 60,
+          "end_line": 84,
+          "observation": "Nonzero child return code is only printed; final success and normal main return remain unconditional."
+        }
+      ],
+      "guards": [
+        "A failure to start the child can raise before this path, so the finding specifically concerns children that start and return failure."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/12-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0262",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_demos/poc_sovereign_spark_daemon.py",
+      "current_source_sha256": "dd8c448f8e19a4e773db00e40252badda0402988bc31d647e9009895ec5ac643",
+      "rationale": "The demo constructs a Swift path but never invokes it. It signs a string with HMAC-SHA256 under a source-constant-derived key, yet reports ATTESTED_BY_OPERATOR and SECURE_ENCLAVE_P256_LOCAL, returns True, and exports committed demo receipts. The surrounding simulation comment does not label the machine-readable receipt as simulated. Only demo state/receipt handling is established, not a production authorization bypass.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_demos/poc_sovereign_spark_daemon.py",
+          "start_line": 111,
+          "end_line": 139,
+          "observation": "No hardware call; fixed-key HMAC is labeled operator/P256 hardware attestation."
+        },
+        {
+          "path": "scripts/c5_demos/poc_sovereign_spark_daemon.py",
+          "start_line": 161,
+          "end_line": 191,
+          "observation": "True permits COMMITTED demo state and writes attestation to sitrep."
+        }
+      ],
+      "guards": [
+        "Missing skill aborts the demo task; caller consumes the gate boolean but the gate itself always returns True.",
+        "Targeted search found this daemon definition and local demo instantiation, without a production consumer."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/12-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0473",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_isomorphisms/c5_ultimate_causal_determinant.py",
+      "current_source_sha256": "138dcb231d90607494c8f48f3146433188beda2cc2aff6ca73b58092e35bece1",
+      "rationale": "Despite other working-tree edits to this file, the current constructor still starts lamport_clock at zero and _init_db only creates the table. Reopening persisted higher-clock rows then accepting a lower-clock proof can append a lower value. The unique taint constraint is not a clock monotonicity constraint; matching replay can return -1. This is a persistence API defect; no operator ledger or database was opened.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_isomorphisms/c5_ultimate_causal_determinant.py",
+          "start_line": 215,
+          "end_line": 247,
+          "observation": "Initialization never reloads maximum persisted clock; update uses only local/proof clocks."
+        },
+        {
+          "path": "scripts/c5_isomorphisms/c5_ultimate_causal_determinant.py",
+          "start_line": 248,
+          "end_line": 275,
+          "observation": "Rows have no monotonic clock constraint, and equal-hash payload replay returns -1."
+        },
+        {
+          "path": "scripts/c5_isomorphisms/c5_ultimate_causal_determinant.py",
+          "start_line": 294,
+          "end_line": 297,
+          "observation": "Causal loop constructs a fresh actor from db_path."
+        }
+      ],
+      "guards": [
+        "ATMS rejects conflicting environments, not clock regression.",
+        "UNIQUE taint_hash prevents exact duplicate rows but does not restore clock state."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/12-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0236",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_quality_gates/verify_claims.py",
+      "current_source_sha256": "2b100a46f048e5c6f3b98900900ffb8fa6ad1c13130ba3b023a2f9e5a81f38c5",
+      "rationale": "source_commit explicitly ignores untracked status and digests tracked diffs, while source_tree_digest enumerates git ls-files only. The current compiler lib.rs imports semantic_solver and solver_replay, and git ls-files --error-unmatch confirms both files remain untracked. Their byte changes can therefore escape both source identifiers used by local claims receipts. No verification suite, runtime exploit or release bypass was executed.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_quality_gates/verify_claims.py",
+          "start_line": 95,
+          "end_line": 118,
+          "observation": "Both source identifiers omit untracked file contents."
+        },
+        {
+          "path": "scripts/c5_quality_gates/verify_claims.py",
+          "start_line": 291,
+          "end_line": 294,
+          "observation": "Verification captures these identifiers before processing claims."
+        },
+        {
+          "path": "scripts/c5_quality_gates/verify_claims.py",
+          "start_line": 410,
+          "end_line": 420,
+          "observation": "Sitrep persists both identifiers."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/lib.rs",
+          "start_line": 12,
+          "end_line": 16,
+          "observation": "Current tracked module declarations include the two untracked Rust sources."
+        }
+      ],
+      "guards": [
+        "Other dirty tracked files can change the digest, but isolated changes to these untracked modules cannot.",
+        "Current index status is recorded in reviewer evidence; changed hashes alone are not treated as a fix."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/12-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0512",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_utils/export_country_compliance.py",
+      "current_source_sha256": "bf34d5d5454ebdb8aa16e96326a23ab7cb56b4339f528a91a81c32753a115e81",
+      "rationale": "The CLI forwards a bare --output value to export_single_locale. After certificate generation, os.path.dirname(\"certificate.md\") is empty and os.makedirs receives an empty path, raising before export_markdown_report. This is a basename handling defect conditional on certificate generation succeeding. No certificate, hardware quote or operator data was generated.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_utils/export_country_compliance.py",
+          "start_line": 29,
+          "end_line": 42,
+          "observation": "Parent directory creation is unconditional for the explicit output string."
+        },
+        {
+          "path": "scripts/c5_utils/export_country_compliance.py",
+          "start_line": 60,
+          "end_line": 74,
+          "observation": "Single-locale CLI passes --output unchanged."
+        }
+      ],
+      "guards": [
+        "Default output contains docs/audits and avoids the empty-parent case; --all does not forward --output."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/12-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0312",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/sharur/download_papers.py",
+      "current_source_sha256": "50c4b76768721defa3f5e5511dddb80bb10a768d9ae37287f43a0bec5c22b3a5",
+      "rationale": "At module load the script globally replaces the default HTTPS context factory with the unverified one. Both metadata and paper urlopen calls omit an explicit verified context, so HTTPS authenticity checks are disabled in this process. This permits interception/substitution under an active network attacker; no live requests, certificate attack or paper download were performed.",
+      "source_checks": [
+        {
+          "path": "scripts/sharur/download_papers.py",
+          "start_line": 1,
+          "end_line": 6,
+          "observation": "Global ssl default factory is overwritten on import."
+        },
+        {
+          "path": "scripts/sharur/download_papers.py",
+          "start_line": 14,
+          "end_line": 35,
+          "observation": "Top-level loop downloads metadata and documents without explicit verification or independent content integrity checks."
+        }
+      ],
+      "guards": [
+        "Exception handling logs transport/parsing errors but cannot restore missing peer-certificate validation."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/12-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0301",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tests/test_swarm_stress.py",
+      "current_source_sha256": "513bd2b3bf6a7bdb0326979189ef020f9313eda345584e45f01a7c2528744355",
+      "rationale": "Each of the 500 scheduled stress_agent coroutines creates its own 50-permit semaphore. Each coroutine acquires only its own permit after a shared event wake-up, so no shared 50-agent cap exists. The pager releases all waiters and its implementation has no concurrency limiter. This concerns the stress harness claim and scheduling, not a demonstrated production overload.",
+      "source_checks": [
+        {
+          "path": "tests/test_swarm_stress.py",
+          "start_line": 32,
+          "end_line": 48,
+          "observation": "Semaphore is local to each agent rather than shared."
+        },
+        {
+          "path": "tests/test_swarm_stress.py",
+          "start_line": 63,
+          "end_line": 79,
+          "observation": "500 tasks are created and the common pager event is signaled."
+        },
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/orchestrator/swarm.py",
+          "start_line": 129,
+          "end_line": 146,
+          "observation": "AgentPager wraps a shared asyncio.Event without a capacity limiter."
+        }
+      ],
+      "guards": [
+        "asyncio scheduling and 0.01-second simulated work limit observed duration but do not enforce MAX_CONCURRENCY."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/12-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0497",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/waf/patterns.md",
+      "current_source_sha256": "027abe57121053f97bf4fd1dd226769628b0e293631356c4326cacc4209dcd63",
+      "rationale": "The reusable WAF examples block cf.waf.score >50 and SQLi/XSS >30, and challenge >20. Official Cloudflare attack-score documentation checked through Context7 and web says 1 is malicious and 99 likely clean; thus the examples select clean/high-score requests and omit lowest scores. This is confirmed documentation/example logic, not a deployed zone finding. Severity is reduced from proposed P1 to P2 for the observed example-only scope.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/codex_overrides/cloudflare/references/waf/patterns.md",
+          "start_line": 54,
+          "end_line": 73,
+          "observation": "Custom rules use reversed high-score comparisons."
+        },
+        {
+          "path": "tools/skill_library/codex_overrides/cloudflare/references/waf/patterns.md",
+          "start_line": 158,
+          "end_line": 174,
+          "observation": "Complete setup repeats the reversed comparisons."
+        }
+      ],
+      "guards": [
+        "Independent managed rules, geography rules or existing policy may block malicious requests; these score rules themselves are inverted.",
+        "Numeric score availability depends on the Cloudflare plan; no zone was inspected."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/12-source-evidence.json",
+        "docs/security/evidence/swarm100-round3-20261028/12-external-docs.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0189",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/global/c5-ring0-babylon-kernel/references/modules/c5-mushushu-0/MODULE.md",
+      "current_source_sha256": "f61f794008862672dc40bfcce985c82b645d28d69b72672a354ef768c52492ce",
+      "rationale": "The documented formal gate accepts any truthy formal_proof when claims/premises do not overlap, then hashes repr and returns PENDING_ATTESTATION. A nonempty arbitrary proof string with empty claims and premises satisfies that routine without proof checking. The surrounding prose claims formal closure. This is a documentation/example assurance defect; targeted consumer search did not establish production invocation.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/global/c5-ring0-babylon-kernel/references/modules/c5-mushushu-0/MODULE.md",
+          "start_line": 50,
+          "end_line": 78,
+          "observation": "Formal closure prose accompanies only truthiness, list-overlap and hashing checks."
+        }
+      ],
+      "guards": [
+        "Missing proof and explicit claim/premise overlap are rejected.",
+        "PENDING_ATTESTATION is not an executed effect or hardware authorization, and no stronger claim is made here."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/12-source-evidence.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0514",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/global/github-architect/scripts/repo_transductor.py",
+      "current_source_sha256": "7a4ba77528ed9c131b842eebb28c0896b2358cc576df36dea1749017a443d1ba",
+      "rationale": "For an arbitrary repository missing LICENSE, generic remediation unconditionally schedules a fixed MIT template attributed to a fixed author; --apply writes it with all other repairs. No license or copyright-owner selection is offered. The default dry-run prevents an immediate write but does not make generic apply an informed license choice. This confirms a tooling/governance defect, not a conclusion that a legally effective rights transfer occurred.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/global/github-architect/scripts/repo_transductor.py",
+          "start_line": 95,
+          "end_line": 115,
+          "observation": "Template hard-codes MIT terms and a named copyright holder."
+        },
+        {
+          "path": "tools/skill_library/global/github-architect/scripts/repo_transductor.py",
+          "start_line": 188,
+          "end_line": 191,
+          "observation": "Missing LICENSE schedules that template without policy selection."
+        },
+        {
+          "path": "tools/skill_library/global/github-architect/scripts/repo_transductor.py",
+          "start_line": 213,
+          "end_line": 239,
+          "observation": "Generic --apply writes scheduled content; CLI has only repo_path and --apply."
+        }
+      ],
+      "guards": [
+        "Existing LICENSE is preserved; default mode only projects actions.",
+        "An operator can inspect the dry-run and refrain from applying, but the program has no explicit license selection."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/12-source-evidence.json"
+      ]
+    }
+  ]
+}

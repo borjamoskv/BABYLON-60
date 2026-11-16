@@ -1,0 +1,16 @@
+{
+  "command": [
+    "uv",
+    "run",
+    "--locked",
+    "--no-sync",
+    "mypy",
+    "--follow-imports=silent",
+    "01_KISH_ENGINE/babylon60/commands/itera.py",
+    "scripts/repatriated/c5_sharur_100_anergy_purge.py",
+    "scripts/c5_cortex/autoconsolidate.py"
+  ],
+  "exit_code": 0,
+  "log": "docs/security/evidence/swarm100-lot2-20261028/mypy-core.log",
+  "log_sha256": "8228fcc5ce46d42d01caf3cd941f4e9c5f2bcc372bb5b147a2f0572d2dd675a8"
+}

@@ -1,0 +1,387 @@
+{
+  "shard": "079",
+  "findings": [
+    {
+      "title": "Queue failure handler references an unbound exception",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/transducers/pulmones.py",
+      "line": 117,
+      "evidence": "except sqlite3.Error at line 99 does not bind exc; exc is assigned only if the nested fallback fails at line 115.",
+      "trigger": "An enqueue fails after db_path has already switched to _fallback_path.",
+      "impact": "Logging raises UnboundLocalError instead of returning the documented graceful queue failure.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Half-open circuit admits every concurrent caller",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/transducers/pulmones.py",
+      "line": 152,
+      "evidence": "can_execute changes OPEN to HALF_OPEN for the first caller, but returns True unconditionally for all subsequent HALF_OPEN callers.",
+      "trigger": "Concurrent decorated calls arrive after recovery_timeout while the first probe is awaiting its network result.",
+      "impact": "The recovering endpoint receives concurrent probes rather than the claimed single trial, defeating throttling during recovery.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Assimilation target can escape the incoming directory",
+      "severity": "P2",
+      "path": "scripts/c5_thermo/exergy_arbitrage_engine.py",
+      "line": 82,
+      "evidence": "CLI --target-name flows unchanged through assimilate_payload to INCOMING_DIR / target_filename and write_text at line 83; no containment validation.",
+      "trigger": "Invoke assimilate with an absolute path or ../ segments naming an existing writable parent.",
+      "impact": "The command overwrites files outside its documented incoming forge directory; no remote invocation or production authorization bypass is asserted.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Code fence extractor matches a literal backslash instead of a newline",
+      "severity": "P2",
+      "path": "scripts/c5_thermo/exergy_arbitrage_engine.py",
+      "line": 41,
+      "evidence": "The regex string contains four escaped backslashes before n, yielding a regex for a literal backslash followed by n rather than a line break. Fallback retains Markdown fences.",
+      "trigger": "Normal remote output is ```python followed by a newline, Python code, and a closing fence.",
+      "impact": "Python/JSON fenced responses fail syntax verification, while other extensions can be saved with fence markup intact.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Reallocation clears live borrow state without invalidating references",
+      "severity": "P2",
+      "path": "examples/poc_bifurcation_5_lifetimes.rs",
+      "line": 68,
+      "evidence": "Alloc blindly inserts Unborrowed into states; existing reference_map entries are retained.",
+      "trigger": "Alloc R0; BorrowMut R1 from R0; Alloc R0; Free R0. The second Alloc erases Mut(R1), so Free returns Ok while R1 remains mapped.",
+      "impact": "The example checker loses the outstanding R1 borrow and can accept Free R0 while R1 remains mapped, undermining its demonstrated lifetime guarantee.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Certificate panel presents static text as verified hardware attestation",
+      "severity": "P2",
+      "path": "tools/ui_babylon_ide/index.html",
+      "line": 843,
+      "evidence": "Step 3 contains a hard-coded VERIFIED token and immutable Secure Enclave signature claims; setStep exposes it directly and launchWorkbench only logs and alerts.",
+      "trigger": "Open the SCITT Attestation tab without any backend result.",
+      "impact": "The UI displays a verified certificate without signature or receipt verification. This is a presentation claim defect; no actual protected execution is demonstrated.",
+      "confidence": "high",
+      "kind": "example"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "01_KISH_ENGINE/babylon60/transducers/pulmones.py",
+      "line": 87,
+      "description": "Persistent next_retry_at uses monotonic time, which is not stable across reboot; no dequeue consumer was established, so replay behavior remains unconfirmed."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".claude/settings.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          19
+        ]
+      ],
+      "inventory_sha256": "304b45229521fdc85a9f6073dbcca4e9ef0c74ee7b2f409beb90fafdac4cb170",
+      "hash_match": true
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/nul-zk/Cargo.toml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          16
+        ]
+      ],
+      "inventory_sha256": "7b6bdbf07506cab94fd12e06d39f07f512c8759f694557a9a44652b5c3d6f100",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/bft/webkit_memory_connector.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          150
+        ]
+      ],
+      "inventory_sha256": "3655611a09177f63ec83ba1b0bfa53ce022c5d3160fbdd63dfaaef4ea06454cd",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/genomics/models.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          90
+        ]
+      ],
+      "inventory_sha256": "98344f313be1d6bd96d3c3ebe6f274fe91e101fa64f293ec69e6fd9d87c209dc",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/transducers/pulmones.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          226
+        ]
+      ],
+      "inventory_sha256": "ea2d2ac9e2ce8f08a336b72197e19232a983bfa1807717b0249e39dbe4d0e900",
+      "hash_match": true
+    },
+    {
+      "path": "02_EDIN_SWARMS/adapters/go_studio/go.mod",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          3
+        ]
+      ],
+      "inventory_sha256": "907f3cd495bcebec1401193699dff116fdd02c51423e963249baa59825170880",
+      "hash_match": true
+    },
+    {
+      "path": "crates/eridu-infer/SPEC.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          33
+        ]
+      ],
+      "inventory_sha256": "33285cdfbb80f19ad793b1077d0d25ab761237ede548ba1e89ba443e14b30c18",
+      "hash_match": true
+    },
+    {
+      "path": "docs/06_theory/STATUS_THEORY.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          152
+        ]
+      ],
+      "inventory_sha256": "c7988958a7f64e34c994a0d1b35a4ac1710a63e3e5be43ecf83acaa6a5a109ed",
+      "hash_match": true
+    },
+    {
+      "path": "examples/poc_bifurcation_5_lifetimes.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          232
+        ]
+      ],
+      "inventory_sha256": "7ec891cf54d31fe46333372ba4ac60b22bd080b277782fdc71b3d415f04c6269",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_cli/pty_tmux_bridge.sh",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          92
+        ]
+      ],
+      "inventory_sha256": "2aa69bc995979bb1026676910d25a5ec669385a2e460b692e51656a44675e885",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_isomorphisms/c5_isomorphism_sabu_agent.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          183
+        ]
+      ],
+      "inventory_sha256": "676a65163841e769442dd4825d47d860bb9470edf611b21dfb1d6003b0fa1201",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_thermo/exergy_arbitrage_engine.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          120
+        ]
+      ],
+      "inventory_sha256": "3cc2fed0312b38f94538f6a47faffe22f68e374f8d157fe76857d3d57f154233",
+      "hash_match": true
+    },
+    {
+      "path": "src/dec_tests.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          254
+        ]
+      ],
+      "inventory_sha256": "4a7a829f3fe770715b171da6041583273dfb796ed39dfa21059e1fdf8cab836e",
+      "hash_match": true
+    },
+    {
+      "path": "tests/test_attest_proof_regressions.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          71
+        ]
+      ],
+      "inventory_sha256": "dd166b60a6dbdc07f63868ac63834115d8adf7d0066ebf8893d9362f923479ce",
+      "hash_match": true
+    },
+    {
+      "path": "tests/test_kernel_mcp_bridge.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          497
+        ]
+      ],
+      "inventory_sha256": "3f0779839b1a76c739bfd4e6f846ec0e8b4cbad0cd01595ac6ce499f8d467b52",
+      "hash_match": true
+    },
+    {
+      "path": "tools/examples/scheduler.b60",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          21
+        ]
+      ],
+      "inventory_sha256": "0a008b9b8c7f699b63b320bca64ae05f16e1a091c5e01fff761aadf7bdb8dbca",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/cache-reserve/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          169
+        ]
+      ],
+      "inventory_sha256": "7a033bcbe69e1617d6df25d202c8ecf58fe40a1a06b91c7b71d9ac1964886869",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/pulumi/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          200
+        ]
+      ],
+      "inventory_sha256": "5e6459dbe3bcd802965fbc8467c54744671d5a9b3c600fececb2db314295797d",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/vectorize/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          90
+        ]
+      ],
+      "inventory_sha256": "dcc4227997e7a856444a701b9243a9a1c8d1cb38680429ac3047b761f85e71c3",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-metodo-acreativo/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          175
+        ]
+      ],
+      "inventory_sha256": "e87f35c67b6cd051b1a94725dc8789778962544b30fb0ae12a8e04a8f7359861",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents/agent_47_site_playbooks_usps.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "inventory_sha256": "860056488f5dbd2562fc1341ebe4e6aed08f5850bfd059e1d4d5aafb1879ac50",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/c5-academic-peer-reviewer/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          48
+        ]
+      ],
+      "inventory_sha256": "fc7eebd73780f56ea43ba187e2098cb0d20deb39e3f6f3c06a6d2cf7a9160554",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/youtube-analysis-pipeline/scripts/parse_vtt.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          74
+        ]
+      ],
+      "inventory_sha256": "61844c39c3ca9ccd3a3fd0f7e497f5deddac42381e83cabc30e6825b2051315d",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/github-architect/references/canonical_blueprints.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          170
+        ]
+      ],
+      "inventory_sha256": "deffe083a758c15502f5a2542dcf44e557673a5f10c53146812aad1f8153e265",
+      "hash_match": true
+    },
+    {
+      "path": "tools/ui_babylon_ide/index.html",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          1167
+        ]
+      ],
+      "inventory_sha256": "8c37f845c4538ff9d16328f13299f4d0f77e01b891e4356c905323a779035214",
+      "hash_match": true
+    }
+  ],
+  "tool_limitations": [
+    "Native codebase-memory graph tools were not exposed; targeted file reads used.",
+    "Read-only static audit only; no tests or runtime executed.",
+    "One broad read was output-truncated; affected file sections were subsequently read separately.",
+    "Consumer tracing for persistent queue replay was not completed; its monotonic timestamp concern is a hypothesis."
+  ],
+  "tests_run": []
+}

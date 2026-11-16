@@ -109,13 +109,20 @@ $$J(N):=\frac{\widetilde{\mathrm{Cap}}\,\widetilde V\,\widetilde F}{\widetilde C
 
 Aquí F = fiabilidad, K = complejidad y R = riesgo. Definirlos sin doble conteo es una obligación metodológica, no un resultado. La identidad se deduce por logaritmos; la desigualdad > 0 es un **criterio propuesto de mejora local de J**, no una ley universal de escalado ni una predicción demostrada. Para N discreto usar diferencias logarítmicas entre dos escalas positivas distintas.
 
-La USL de Gunther [7], $U(N)=N/[1+\sigma(N-1)+\kappa N(N-1)]$, es un modelo de capacidad con parámetros de contención/coherencia que requieren ajuste y validación. No prueba los índices económicos anteriores. `SharedManifest`, `SpscRingBuffer`, `KudurruBudgetGate`, SCITT/COSE y NEMESIS son referencias de diseño heredadas, no evidencia de rendimiento, márgenes, confinamiento o fiabilidad medida en esta revisión.
+La USL de Gunther [7], $U(N)=N/[1+\sigma(N-1)+\kappa N(N-1)]$, es un modelo de capacidad con parámetros de contención ($\sigma$) y coherencia ($\kappa$) que requieren ajuste y validación empírica. El módulo [`scalability_usl.py`](../../01_KISH_ENGINE/babylon60/metrics/scalability_usl.py) y su suite [`test_scalability_usl.py`](../../tests/unit/test_scalability_usl.py) implementan la evaluación de $U(N)$, el punto crítico de colapso retrógrado $N^* = \sqrt{(1-\sigma)/\kappa}$, la latencia en cola $G/G/1$ de Kingman, las elasticidades logarítmicas de $J(N)$ y el ajuste por mínimos cuadrados (`fit_usl_parameters`).
+
+En calibraciones controladas sobre el hardware del entorno (Apple M3 Pro, 12 núcleos físicos: 6P + 6E, barrido $N \in [1, 32]$):
+- **Ring-0 aislado en caché (`#[repr(align(64))]`)**: $\sigma \approx 0{,}0775$, $\kappa \approx 0{,}00148$ ($R^2 = 0{,}9629$), techo de Amdahl $1/\sigma \approx 12{,}90\times$, con punto crítico predicho en $N^* \approx 24{,}96$ hilos y pico medido en $N=24$ ($4.751{,}57\text{ MOps/s}$, $7{,}38\times$ frente a monohilo).
+- **Contención por falsa compartición (línea 64B compartida / tormenta MESI)**: $\sigma = 1{,}0$, $\kappa \approx 0{,}1754$, colapso retrógrado inmediato ($N^* \le 1$, degradación del $92\%$ entre $N=1$ y $N=32$).
+- **Contención en runtime interpretado (Python GIL + lock)**: $\sigma \approx 0{,}8069$, $\kappa \approx 0{,}00075$ ($R^2 = 0{,}9999$), con techo asintótico de Amdahl confinado en $1/\sigma \approx 1{,}24\times$.
+
+Estos ajustes caracterizan regímenes de concurrencia y contención específicos en silicio; no prueban por sí solos los índices económicos agregados. `SharedManifest`, `SpscRingBuffer`, `KudurruBudgetGate`, SCITT/COSE y NEMESIS son referencias de diseño, cuyo comportamiento real se sujeta a los contratos y pruebas del entorno.
 
 ## 7. Verificación formal acotada: Lean 4
 
 El bloque siguiente es autocontenido, sin Mathlib. **Demuestra únicamente** conservación, cotas y antitonicidad de una resta de presupuestos naturales bajo las hipótesis indicadas, y un contraejemplo discreto que separa déficit y etiqueta de corrección. La resta de naturales trunca a cero; `within` evita interpretar un exceso como déficit válido.
 
-Es un modelo discreto auxiliar: no calcula entropía Shannon, logaritmos, KL ni sus cotas reales, no prueba la derivada anterior y no establece una correspondencia con runtime. Esas fórmulas se justifican matemáticamente en el texto y sus fuentes, no mediante este bloque. Se eliminan `token_exergy_theorem` y `slop_horizon_inequality` como axiomas científicos; declarar una proposición con `axiom` no la demuestra.
+Es un modelo discreto auxiliar: no calcula entropía Shannon, logaritmos, KL ni sus cotas reales, no prueba la derivada anterior y no establece una correspondencia con runtime. Esas fórmulas se justifican matemáticamente en el texto y sus fuentes, no mediante este bloque. Se eliminan `[OBSOLETO: token_exergy_theorem]` y `[OBSOLETO: slop_horizon_inequality]` como axiomas científicos; declarar una proposición con `axiom` no la demuestra.
 
 ```lean
 import Lean

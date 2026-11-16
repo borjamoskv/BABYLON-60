@@ -1,0 +1,409 @@
+{
+  "shard": "031",
+  "findings": [
+    {
+      "title": "Cache audit resolves benchmark below scripts instead of repository root",
+      "severity": "P2",
+      "path": "scripts/c5_quality_gates/run_cache_audit.py",
+      "line": 25,
+      "evidence": "Two dirname calls on scripts/c5_quality_gates/run_cache_audit.py produce scripts/. Lines 26-27 then select scripts/tests/cache_kinetic_benchmark.cpp; targeted file inventory locates source at tests/cache_kinetic_benchmark.cpp.",
+      "trigger": "Run the documented cache audit runner from the repository.",
+      "impact": "Compilation receives a nonexistent source path and the audit exits before collecting benchmark evidence.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Single-chunk ledger example accepts an invalid chunk",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-ring0-babylon-kernel/references/modules/c5-lean4-neurosymbolic-architect/MODULE.md",
+      "line": 255,
+      "evidence": "verifyLedgerStream returns true for [_] regardless of deltaValid; only the two-or-more branch calls verifyChunkBoundary, which checks validity.",
+      "trigger": "Apply the canonical example to a singleton Chunk with deltaValid=false.",
+      "impact": "The documented verifier accepts a ledger explicitly marked invalid. This is an example defect; no production consumer or deployed bypass is asserted.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Exported MemoryStore silently drops all writes",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/memory/__init__.py",
+      "line": 43,
+      "evidence": "MemoryStore.set is pass (lines 47-48); get unconditionally returns None (44-45). The class is exported in __all__. Targeted search found no current internal caller.",
+      "trigger": "A consumer imports the public MemoryStore API, calls set and subsequently get.",
+      "impact": "The write reports no failure and data cannot be retrieved; the public persistence-looking API cannot preserve state. No active internal data-loss path is claimed.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Effective resistance silently treats disconnected graphs as finite",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/core/discrete_curvature.py",
+      "line": 20,
+      "evidence": "The function accepts arbitrary nx.Graph, checks only node count, and always returns N*trace(pinv(L)). For two isolated vertices L and pinv(L) are zero, so the returned total resistance is zero although no intervertex conduction path exists.",
+      "trigger": "Call compute_effective_resistance, or get_structural_debt_triple, on a disconnected graph with at least two vertices.",
+      "impact": "Disconnected structure is assigned a finite, potentially zero total resistance and misleading structural-debt output. Scope is the exported analytical function; no control-policy consumer is asserted.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Cache report unconditionally claims mitigation and patentability",
+      "severity": "P2",
+      "path": "scripts/c5_quality_gates/run_cache_audit.py",
+      "line": 57,
+      "evidence": "The runner writes a fixed conclusion asserting complete L1 false-sharing mitigation and technical patentability after any exit-zero benchmark. It neither parses measurements nor checks a threshold or environment.",
+      "trigger": "After fixing the path issue, benchmark exits zero even when results do not show the expected performance improvement.",
+      "impact": "Generated evidence states success independent of measured results and makes a patentability assertion unsupported by the benchmark.",
+      "confidence": "high",
+      "kind": "docs"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".agents/skills/c5-cortex-swarm-orchestrator-project/references/modules/lora-swarm-pipeline/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          35
+        ]
+      ],
+      "sha256_expected": "f8d937ab42298eae58b88cfa78c29ddba452b9ece4241923a6c9b100b7c23150",
+      "sha256_observed": "f8d937ab42298eae58b88cfa78c29ddba452b9ece4241923a6c9b100b7c23150",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "00_ABZU_KERNEL/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          23
+        ]
+      ],
+      "sha256_expected": "99ef8f387eaf46eb8e9e51c2c25bee32e654dd4fb9fd5ff76568c46723aae4ff",
+      "sha256_observed": "99ef8f387eaf46eb8e9e51c2c25bee32e654dd4fb9fd5ff76568c46723aae4ff",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/adapters/adapter_config.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "sha256_expected": "531ee22ae30ad1d349958591698111b6b7a5a753442a85e21129627032e71661",
+      "sha256_observed": "531ee22ae30ad1d349958591698111b6b7a5a753442a85e21129627032e71661",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/core/discrete_curvature.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          89
+        ]
+      ],
+      "sha256_expected": "667a50147e34ceca8cc6db196ecd565d625c7bc01f9f25b5794386c020b9e9f1",
+      "sha256_observed": "667a50147e34ceca8cc6db196ecd565d625c7bc01f9f25b5794386c020b9e9f1",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/memory/__init__.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          85
+        ]
+      ],
+      "sha256_expected": "71fbf235a5134fe2a65224a535a0c5319318a86617d06d26aeabd40ca84a2204",
+      "sha256_observed": "71fbf235a5134fe2a65224a535a0c5319318a86617d06d26aeabd40ca84a2204",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/cortex/crates/babylon60-verifiable-inference/Cargo.lock",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          93
+        ]
+      ],
+      "sha256_expected": "18a5bc4d71b669b321d7ae48e1bed80dfd64b4869eb8afbe8ac98eb4736c5fd4",
+      "sha256_observed": "18a5bc4d71b669b321d7ae48e1bed80dfd64b4869eb8afbe8ac98eb4736c5fd4",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "contracts/license_template.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          15
+        ]
+      ],
+      "sha256_expected": "07e683d3610f853df685a56f32c6d57e36488283a37390c7972a90eedbead753",
+      "sha256_observed": "07e683d3610f853df685a56f32c6d57e36488283a37390c7972a90eedbead753",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "docs/03_guides/guide_c5_axiom_verification.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          74
+        ]
+      ],
+      "sha256_expected": "3cc1a94083ab85ac358e508e53c6366ab7cd66a2d65e3bc2b4e088ceb4832de8",
+      "sha256_observed": "3cc1a94083ab85ac358e508e53c6366ab7cd66a2d65e3bc2b4e088ceb4832de8",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "docs/security/evidence/external-audit-remediation-2026-10-24/quality-gates.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          32
+        ]
+      ],
+      "sha256_expected": "bbb02f4e769365ba3ccbd54179183858a89fd7033f2d260cdd5d96bba854a0fb",
+      "sha256_observed": "bbb02f4e769365ba3ccbd54179183858a89fd7033f2d260cdd5d96bba854a0fb",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "proof/lean/BabylonStressTrace.lean",
+      "status": "reviewed_partial",
+      "ranges": [
+        [
+          1,
+          170
+        ],
+        [
+          5950,
+          6022
+        ]
+      ],
+      "sha256_expected": "f19d80ec05dda8cfc4858b778f2a9b6869055a7fb322681f6eecdaf8ce97252b",
+      "sha256_observed": "f19d80ec05dda8cfc4858b778f2a9b6869055a7fb322681f6eecdaf8ce97252b",
+      "changed_since_manifest": false,
+      "supplemental_static_inspection": {
+        "range": [
+          17,
+          6016
+        ],
+        "method": "Read source data only with Python standard library; regex grammar and explicit expected thread/sequence/action pattern checks, no Lean execution. Does not replace line-by-line semantic review.",
+        "rows_matched": 6000,
+        "anomalies": []
+      }
+    },
+    {
+      "path": "scripts/c5_demos/poc_biometric_gate.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          46
+        ]
+      ],
+      "sha256_expected": "7e6ed13e53233b191b9911088b0f51bf2f639fb74ce79258a173539ee191cc71",
+      "sha256_observed": "7e6ed13e53233b191b9911088b0f51bf2f639fb74ce79258a173539ee191cc71",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/c5_quality_gates/run_cache_audit.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          66
+        ]
+      ],
+      "sha256_expected": "952272523f57d6870a88dbfae5cad94e7402a530346d79415a47a51efceb34e9",
+      "sha256_observed": "952272523f57d6870a88dbfae5cad94e7402a530346d79415a47a51efceb34e9",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/package_release.sh",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          76
+        ]
+      ],
+      "sha256_expected": "a3d7e00913c0f11caab92478344452806e57c46a172c3ffd139826c36109a039",
+      "sha256_observed": "a3d7e00913c0f11caab92478344452806e57c46a172c3ffd139826c36109a039",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/conftest.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          55
+        ]
+      ],
+      "sha256_expected": "340d6f5daa7fad2aa9df72b3240ef42562058cbb5328f4fc0b9ed5455aeb8c1a",
+      "sha256_observed": "340d6f5daa7fad2aa9df72b3240ef42562058cbb5328f4fc0b9ed5455aeb8c1a",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/test_compliance_and_attestation.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          76
+        ]
+      ],
+      "sha256_expected": "68d5ef77cdc1dea667a2c92a90eab761aa9e94e1c8c41ac0356e9119392174f6",
+      "sha256_observed": "68d5ef77cdc1dea667a2c92a90eab761aa9e94e1c8c41ac0356e9119392174f6",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/test_shadow_router_c5.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          107
+        ]
+      ],
+      "sha256_expected": "a9d91d69930bad4ee482806b9110c576de858ae2593c2b5185fa3e9af7d4aeef",
+      "sha256_observed": "a9d91d69930bad4ee482806b9110c576de858ae2593c2b5185fa3e9af7d4aeef",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/ai-search/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          88
+        ]
+      ],
+      "sha256_expected": "59af92d0c3b196bea13ac72e18b42db528721f8971c7d335b27951b77aa4ddb0",
+      "sha256_observed": "59af92d0c3b196bea13ac72e18b42db528721f8971c7d335b27951b77aa4ddb0",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/graphql-api/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          110
+        ]
+      ],
+      "sha256_expected": "59dbb9a541db17cdac52665fd6883d2eb660ec6fea4b45cc87c291d2e2b4a50f",
+      "sha256_observed": "59dbb9a541db17cdac52665fd6883d2eb660ec6fea4b45cc87c291d2e2b4a50f",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/snippets/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          86
+        ]
+      ],
+      "sha256_expected": "301c7167f03075505498f1f6b5fe1c72a393065a8228f42c435fde9f1b694150",
+      "sha256_observed": "301c7167f03075505498f1f6b5fe1c72a393065a8228f42c435fde9f1b694150",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/zaraz/IMPLEMENTATION_SUMMARY.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          121
+        ]
+      ],
+      "sha256_expected": "eba1671fc4ba17fae19d1ff2d1b312d5042b5821e7a4dbc2f6367a4fa8bd5506",
+      "sha256_observed": "eba1671fc4ba17fae19d1ff2d1b312d5042b5821e7a4dbc2f6367a4fa8bd5506",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/youtube-remotion-sota/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          163
+        ]
+      ],
+      "sha256_expected": "f6e3ef9301e20145d95c682e032cbecca6b0bd9c2da137be7c95d72c09f677c9",
+      "sha256_observed": "f6e3ef9301e20145d95c682e032cbecca6b0bd9c2da137be7c95d72c09f677c9",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_35_site_playbooks_fedex.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "sha256_expected": "73c70666c3f9b893676c4e7f1098df8ba112c6eaa208162112ed6c48a07d0118",
+      "sha256_observed": "73c70666c3f9b893676c4e7f1098df8ba112c6eaa208162112ed6c48a07d0118",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-ring0-babylon-kernel/references/modules/c5-lean4-neurosymbolic-architect/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          259
+        ]
+      ],
+      "sha256_expected": "505be44b68fe2828ea98b42d7350e8247e0c09c2721787f8806e35333a36aa30",
+      "sha256_observed": "505be44b68fe2828ea98b42d7350e8247e0c09c2721787f8806e35333a36aa30",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/cortex-skill-composer/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          41
+        ]
+      ],
+      "sha256_expected": "5f403d70b6adeb4aa9c20c79e8bb1c683f99e713335d30f03d1e6420b23fb5fe",
+      "sha256_observed": "5f403d70b6adeb4aa9c20c79e8bb1c683f99e713335d30f03d1e6420b23fb5fe",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/workspace/c5-audiovisual-acreativo-sota-project/references/modules/audiovisual-sota/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          38
+        ]
+      ],
+      "sha256_expected": "9466223b2accde47aed0b2769f83bc094f5a908d21471296ac872d85f29df641",
+      "sha256_observed": "9466223b2accde47aed0b2769f83bc094f5a908d21471296ac872d85f29df641",
+      "changed_since_manifest": false
+    }
+  ],
+  "tool_limitations": [
+    "No native codebase-memory graph tools exposed in ALL_TOOLS; used targeted text search.",
+    "BabylonStressTrace.lean reviewed only at the recorded header/tail ranges; middle literal events were not reviewed.",
+    "Initial large batched output was truncated; smaller follow-up reads recovered relevant non-proof text.",
+    "No tests, runtime programs, builds, biometrics, network calls, commits or pushes were executed. Cross-file supporting reads: attestation/merkle_anchor.py and scripts/c5_verifiers/axiom_verifier_z3.py.",
+    "Follow-up added direct review lines 71-170 and static source-data pattern inspection of all 6000 literal event rows. Lines 171-5949 remain outside direct manual review; status remains reviewed_partial."
+  ],
+  "tests_run": []
+}

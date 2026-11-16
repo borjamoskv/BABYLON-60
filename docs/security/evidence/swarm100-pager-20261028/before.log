@@ -1,0 +1,178 @@
+FFFFF..FFFF.FF                                                           [100%]
+=================================== FAILURES ===================================
+_______ test_second_broadcast_is_rejected_without_replacing_first[first] _______
+tests/test_agent_beeper_regressions.py:18: in test_second_broadcast_is_rejected_without_replacing_first
+    with pytest.raises(RuntimeError, match="already emitted"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE RuntimeError
+____ test_second_broadcast_is_rejected_without_replacing_first[replacement] ____
+tests/test_agent_beeper_regressions.py:18: in test_second_broadcast_is_rejected_without_replacing_first
+    with pytest.raises(RuntimeError, match="already emitted"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE RuntimeError
+_______________ test_unicast_wakes_an_already_suspended_receiver _______________
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/tasks.py:488: in wait_for
+    return await fut
+           ^^^^^^^^^
+scripts/c5_sharur/agent_beeper.py:75: in wait_for_beep
+    await self._global_event.wait()
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/locks.py:213: in wait
+    await fut
+E   asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+tests/test_agent_beeper_regressions.py:29: in test_unicast_wakes_an_already_suspended_receiver
+    assert await receive(waiter) == "addressed"
+           ^^^^^^^^^^^^^^^^^^^^^
+tests/test_agent_beeper_regressions.py:11: in receive
+    return await asyncio.wait_for(task, timeout=0.5)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/tasks.py:487: in wait_for
+    async with timeouts.timeout(timeout):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/timeouts.py:115: in __aexit__
+    raise TimeoutError from exc_val
+E   TimeoutError
+___________ test_unicast_before_wait_is_consumed_once_and_can_repeat ___________
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/tasks.py:488: in wait_for
+    return await fut
+           ^^^^^^^^^
+scripts/c5_sharur/agent_beeper.py:75: in wait_for_beep
+    await self._global_event.wait()
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/locks.py:213: in wait
+    await fut
+E   asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+tests/test_agent_beeper_regressions.py:41: in test_unicast_before_wait_is_consumed_once_and_can_repeat
+    assert await receive(waiter) == "next"
+           ^^^^^^^^^^^^^^^^^^^^^
+tests/test_agent_beeper_regressions.py:11: in receive
+    return await asyncio.wait_for(task, timeout=0.5)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/tasks.py:487: in wait_for
+    async with timeouts.timeout(timeout):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/timeouts.py:115: in __aexit__
+    raise TimeoutError from exc_val
+E   TimeoutError
+_________________ test_unicast_does_not_release_another_tenant _________________
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/tasks.py:488: in wait_for
+    return await fut
+           ^^^^^^^^^
+scripts/c5_sharur/agent_beeper.py:75: in wait_for_beep
+    await self._global_event.wait()
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/locks.py:213: in wait
+    await fut
+E   asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+tests/test_agent_beeper_regressions.py:51: in test_unicast_does_not_release_another_tenant
+    assert await receive(addressed) == "private"
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_agent_beeper_regressions.py:11: in receive
+    return await asyncio.wait_for(task, timeout=0.5)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/tasks.py:487: in wait_for
+    async with timeouts.timeout(timeout):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/timeouts.py:115: in __aexit__
+    raise TimeoutError from exc_val
+E   TimeoutError
+_____________________ test_cancelled_wait_can_be_replaced ______________________
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/tasks.py:488: in wait_for
+    return await fut
+           ^^^^^^^^^
+scripts/c5_sharur/agent_beeper.py:75: in wait_for_beep
+    await self._global_event.wait()
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/locks.py:213: in wait
+    await fut
+E   asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+tests/test_agent_beeper_regressions.py:91: in test_cancelled_wait_can_be_replaced
+    assert await receive(replacement) == "after cancellation"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_agent_beeper_regressions.py:11: in receive
+    return await asyncio.wait_for(task, timeout=0.5)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/tasks.py:487: in wait_for
+    async with timeouts.timeout(timeout):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/timeouts.py:115: in __aexit__
+    raise TimeoutError from exc_val
+E   TimeoutError
+__ test_deregistration_releases_old_wait_without_crossing_registration[False] __
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/tasks.py:488: in wait_for
+    return await fut
+           ^^^^^^^^^
+scripts/c5_sharur/agent_beeper.py:75: in wait_for_beep
+    await self._global_event.wait()
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/locks.py:213: in wait
+    await fut
+E   asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+tests/test_agent_beeper_regressions.py:104: in test_deregistration_releases_old_wait_without_crossing_registration
+    await receive(waiter)
+tests/test_agent_beeper_regressions.py:11: in receive
+    return await asyncio.wait_for(task, timeout=0.5)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/tasks.py:487: in wait_for
+    async with timeouts.timeout(timeout):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/timeouts.py:115: in __aexit__
+    raise TimeoutError from exc_val
+E   TimeoutError
+__ test_deregistration_releases_old_wait_without_crossing_registration[True] ___
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/tasks.py:488: in wait_for
+    return await fut
+           ^^^^^^^^^
+scripts/c5_sharur/agent_beeper.py:75: in wait_for_beep
+    await self._global_event.wait()
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/locks.py:213: in wait
+    await fut
+E   asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+tests/test_agent_beeper_regressions.py:104: in test_deregistration_releases_old_wait_without_crossing_registration
+    await receive(waiter)
+tests/test_agent_beeper_regressions.py:11: in receive
+    return await asyncio.wait_for(task, timeout=0.5)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/tasks.py:487: in wait_for
+    async with timeouts.timeout(timeout):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/timeouts.py:115: in __aexit__
+    raise TimeoutError from exc_val
+E   TimeoutError
+_________ test_one_unicast_has_one_consumer_among_same_tenant_waiters __________
+tests/test_agent_beeper_regressions.py:116: in test_one_unicast_has_one_consumer_among_same_tenant_waiters
+    assert sum(w.done() for w in waiters) == 1
+E   assert 0 == 1
+E    +  where 0 = sum(<generator object test_one_unicast_has_one_consumer_among_same_tenant_waiters.<locals>.<genexpr> at 0x10b5a2330>)
+______________ test_concurrent_broadcast_attempts_have_one_winner ______________
+tests/test_agent_beeper_regressions.py:147: in test_concurrent_broadcast_attempts_have_one_winner
+    assert len(winners) == 1
+E   assert 32 == 1
+E    +  where 32 = len([0, 1, 2, 3, 4, 5, ...])
+__________ test_mixed_delivery_with_warmup_and_repeated_fresh_rounds ___________
+tests/test_agent_beeper_regressions.py:166: in test_mixed_delivery_with_warmup_and_repeated_fresh_rounds
+    await round_trip()
+tests/test_agent_beeper_regressions.py:159: in round_trip
+    assert all(waiters[i].done() for i in range(0, 32, 2))
+E   assert False
+E    +  where False = all(<generator object test_mixed_delivery_with_warmup_and_repeated_fresh_rounds.<locals>.round_trip.<locals>.<genexpr> at 0x10b688e40>)
+=========================== short test summary info ============================
+FAILED tests/test_agent_beeper_regressions.py::test_second_broadcast_is_rejected_without_replacing_first[first]
+FAILED tests/test_agent_beeper_regressions.py::test_second_broadcast_is_rejected_without_replacing_first[replacement]
+FAILED tests/test_agent_beeper_regressions.py::test_unicast_wakes_an_already_suspended_receiver
+FAILED tests/test_agent_beeper_regressions.py::test_unicast_before_wait_is_consumed_once_and_can_repeat
+FAILED tests/test_agent_beeper_regressions.py::test_unicast_does_not_release_another_tenant
+FAILED tests/test_agent_beeper_regressions.py::test_cancelled_wait_can_be_replaced
+FAILED tests/test_agent_beeper_regressions.py::test_deregistration_releases_old_wait_without_crossing_registration[False]
+FAILED tests/test_agent_beeper_regressions.py::test_deregistration_releases_old_wait_without_crossing_registration[True]
+FAILED tests/test_agent_beeper_regressions.py::test_one_unicast_has_one_consumer_among_same_tenant_waiters
+FAILED tests/test_agent_beeper_regressions.py::test_concurrent_broadcast_attempts_have_one_winner
+FAILED tests/test_agent_beeper_regressions.py::test_mixed_delivery_with_warmup_and_repeated_fresh_rounds
+11 failed, 3 passed in 3.57s

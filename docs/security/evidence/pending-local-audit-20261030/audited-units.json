@@ -1,0 +1,221 @@
+{
+  "lockfile": {
+    "paths": [
+      "Cargo.lock"
+    ],
+    "tests": [],
+    "status": "pending",
+    "owner": "local-pending-audit",
+    "acceptance": "Review diff and actual behavior, targeted tests, quality checks, no unexpected effects",
+    "audit_status": "VERIFIED_WITH_EXPLICIT_SCOPE",
+    "consolidation": "Committed concurrently by another session before this audit could consolidate selected groups; history preserved"
+  },
+  "attest": {
+    "paths": [
+      "01_KISH_ENGINE/babylon60/cli/llm_attest.py",
+      "tests/test_attest_proof_regressions.py"
+    ],
+    "tests": [
+      "tests/test_attest_proof_regressions.py"
+    ],
+    "status": "pending",
+    "owner": "local-pending-audit",
+    "acceptance": "Review diff and actual behavior, targeted tests, quality checks, no unexpected effects",
+    "audit_status": "VERIFIED_WITH_EXPLICIT_SCOPE",
+    "consolidation": "Committed concurrently by another session before this audit could consolidate selected groups; history preserved"
+  },
+  "markov": {
+    "paths": [
+      "scripts/c5_cli/markov_bridge.py",
+      "tests/test_markov_bridge.py"
+    ],
+    "tests": [
+      "tests/test_markov_bridge.py"
+    ],
+    "status": "pending",
+    "owner": "local-pending-audit",
+    "acceptance": "Review diff and actual behavior, targeted tests, quality checks, no unexpected effects",
+    "audit_status": "VERIFIED_WITH_EXPLICIT_SCOPE",
+    "consolidation": "Committed concurrently by another session before this audit could consolidate selected groups; history preserved"
+  },
+  "kripke": {
+    "paths": [
+      "scripts/c5_cli/doxastic_kripke_engine.py",
+      "tests/test_doxastic_kripke_engine.py"
+    ],
+    "tests": [
+      "tests/test_doxastic_kripke_engine.py"
+    ],
+    "status": "pending",
+    "owner": "local-pending-audit",
+    "acceptance": "Review diff and actual behavior, targeted tests, quality checks, no unexpected effects",
+    "audit_status": "VERIFIED_WITH_EXPLICIT_SCOPE",
+    "consolidation": "Committed concurrently by another session before this audit could consolidate selected groups; history preserved"
+  },
+  "graphs": {
+    "paths": [
+      "scripts/c5_demos/poc_graph_isomorphism_wl.py",
+      "scripts/c5_isomorphisms/c5_ultimate_causal_determinant.py",
+      "tests/test_inv_c5_28_falsification.py",
+      "tests/test_graph_isomorphism_regressions.py"
+    ],
+    "tests": [
+      "tests/test_inv_c5_28_falsification.py",
+      "tests/test_graph_isomorphism_regressions.py"
+    ],
+    "status": "pending",
+    "owner": "local-pending-audit",
+    "acceptance": "Review diff and actual behavior, targeted tests, quality checks, no unexpected effects",
+    "audit_status": "VERIFIED_WITH_EXPLICIT_SCOPE",
+    "consolidation": "Committed concurrently by another session before this audit could consolidate selected groups; history preserved"
+  },
+  "provenance-python": {
+    "paths": [
+      "01_KISH_ENGINE/babylon60/memory/__init__.py",
+      "01_KISH_ENGINE/babylon60/memory/provenance_arbiter.py",
+      "tests/test_fl027_provenance_authority.py"
+    ],
+    "tests": [
+      "tests/test_fl027_provenance_authority.py"
+    ],
+    "status": "pending",
+    "owner": "local-pending-audit",
+    "acceptance": "Review diff and actual behavior, targeted tests, quality checks, no unexpected effects",
+    "audit_status": "FAILED_NEGATIVE_PROBE",
+    "consolidation": "Committed concurrently by another session before this audit could consolidate selected groups; history preserved"
+  },
+  "finding-contract": {
+    "paths": [
+      "01_KISH_ENGINE/babylon60/verification/finding_contract.py",
+      "tests/test_finding_evidence_contract.py",
+      "docs/01_spec/spec_finding_evidence_contract.md"
+    ],
+    "tests": [
+      "tests/test_finding_evidence_contract.py"
+    ],
+    "status": "pending",
+    "owner": "local-pending-audit",
+    "acceptance": "Review diff and actual behavior, targeted tests, quality checks, no unexpected effects",
+    "audit_status": "FAILED_NEGATIVE_PROBE",
+    "consolidation": "Committed concurrently by another session before this audit could consolidate selected groups; history preserved"
+  },
+  "approval-experiment": {
+    "paths": [
+      "01_KISH_ENGINE/babylon60/cortex/approval_experiment.py",
+      "01_KISH_ENGINE/babylon60/cortex/approval_human_trial.py",
+      "01_KISH_ENGINE/babylon60/cortex/approval_integrity.py",
+      "01_KISH_ENGINE/babylon60/cortex/approval_trial_cases.py",
+      "01_KISH_ENGINE/babylon60/cortex/approval_trial_status.py",
+      "tests/test_fl_approval01_experiment.py",
+      "tests/test_fl_approval01_human_trial.py",
+      "tests/test_fl_approval01_integrity.py",
+      "tests/test_fl_approval01_trial_cases.py",
+      "tests/test_fl_approval01_trial_status.py",
+      "examples/fl_approval01_simulation.py",
+      "docs/security/fl-approval01-human-trial.md",
+      "docs/security/fl-approval01-independent-judgment.md"
+    ],
+    "tests": [
+      "tests/test_fl_approval01_experiment.py",
+      "tests/test_fl_approval01_human_trial.py",
+      "tests/test_fl_approval01_integrity.py",
+      "tests/test_fl_approval01_trial_cases.py",
+      "tests/test_fl_approval01_trial_status.py"
+    ],
+    "status": "pending",
+    "owner": "local-pending-audit",
+    "acceptance": "Review diff and actual behavior, targeted tests, quality checks, no unexpected effects",
+    "audit_status": "VERIFIED_WITH_EXPLICIT_SCOPE",
+    "consolidation": "Committed concurrently by another session before this audit could consolidate selected groups; history preserved"
+  },
+  "babylon-work": {
+    "paths": [
+      "tools/babylon_work/runtime-ui.js",
+      "tools/babylon_work/effects.py",
+      "tools/babylon_work/server.py",
+      "tools/babylon_work/index.html",
+      "tools/babylon_work/work.css",
+      "tools/babylon_work/__init__.py",
+      "tools/babylon_work/runtime.py",
+      "tools/babylon_work/README.md",
+      "tools/babylon_work/providers.py",
+      "tools/babylon_work/workspace.py",
+      "tools/babylon_work/work.js",
+      "tools/babylon_work/runs.py",
+      "01_KISH_ENGINE/babylon60/mcp/effect_dispatch.py",
+      "tests/test_babylon_work.py",
+      "tests/test_babylon_work_runtime.py"
+    ],
+    "tests": [
+      "tests/test_babylon_work.py",
+      "tests/test_babylon_work_runtime.py"
+    ],
+    "status": "pending",
+    "owner": "local-pending-audit",
+    "acceptance": "Review diff and actual behavior, targeted tests, quality checks, no unexpected effects",
+    "audit_status": "VERIFIED_WITH_EXPLICIT_SCOPE",
+    "consolidation": "Committed concurrently by another session before this audit could consolidate selected groups; history preserved"
+  },
+  "confinement": {
+    "paths": [
+      "crates/babylon-skills-mcp/src/lib.rs",
+      "crates/babylon-skills-mcp/src/confined_fs.rs",
+      "crates/babylon-skills-mcp/tests/fl_path01_capability_root_escape.rs",
+      "docs/security/fl-path01-capability-root-escape.md"
+    ],
+    "tests": [],
+    "status": "pending",
+    "owner": "local-pending-audit",
+    "acceptance": "Review diff and actual behavior, targeted tests, quality checks, no unexpected effects",
+    "audit_status": "VERIFIED_WITH_EXPLICIT_SCOPE",
+    "consolidation": "Committed concurrently by another session before this audit could consolidate selected groups; history preserved"
+  },
+  "entropy": {
+    "paths": [
+      "00_ABZU_KERNEL/crates/babylon60-compiler/tests/solver_trust.rs",
+      "00_ABZU_KERNEL/crates/babylon60-compiler/tests/semantic_solver_adapter.rs",
+      "00_ABZU_KERNEL/crates/babylon60-compiler/src/semantic_solver.rs",
+      "00_ABZU_KERNEL/crates/babylon60-compiler/src/lib.rs",
+      "00_ABZU_KERNEL/crates/babylon60-compiler/src/solver_replay.rs",
+      "00_ABZU_KERNEL/crates/babylon60-compiler/tests/support/solver_trust_support.rs",
+      "00_ABZU_KERNEL/crates/babylon60-kernel/tests/semantic_entropy_regressions.rs",
+      "00_ABZU_KERNEL/crates/babylon60-kernel/tests/semantic_solver_outcomes.rs",
+      "00_ABZU_KERNEL/crates/babylon60-kernel/tests/stress_semantic_entropy_100k.rs",
+      "00_ABZU_KERNEL/crates/babylon60-kernel/src/semantic_entropy.rs",
+      "scripts/c5_demos/SemanticEntropyApoptosis.lean",
+      "tests/test_semantic_entropy_lean_alignment.py"
+    ],
+    "tests": [
+      "tests/test_semantic_entropy_lean_alignment.py"
+    ],
+    "status": "pending",
+    "owner": "local-pending-audit",
+    "acceptance": "Review diff and actual behavior, targeted tests, quality checks, no unexpected effects",
+    "audit_status": "VERIFIED_WITH_EXPLICIT_SCOPE",
+    "consolidation": "Committed concurrently by another session before this audit could consolidate selected groups; history preserved"
+  },
+  "skill-locks": {
+    "paths": [
+      "skills-lock.json",
+      "docs/skills-lock.json"
+    ],
+    "tests": [],
+    "status": "pending",
+    "owner": "local-pending-audit",
+    "acceptance": "Review diff and actual behavior, targeted tests, quality checks, no unexpected effects",
+    "audit_status": "VERIFIED_WITH_EXPLICIT_SCOPE",
+    "consolidation": "Committed concurrently by another session before this audit could consolidate selected groups; history preserved"
+  },
+  "provenance-rust": {
+    "paths": [
+      "01_KISH_ENGINE/cortex/crates/cortex-core/src/provenance.rs",
+      "01_KISH_ENGINE/cortex/crates/cortex-core/src/reopen.rs"
+    ],
+    "tests": [],
+    "status": "pending",
+    "owner": "local-pending-audit",
+    "acceptance": "Review diff and actual behavior, targeted tests, quality checks, no unexpected effects",
+    "audit_status": "MIGRATION_NOT_VERIFIED",
+    "consolidation": "Committed concurrently by another session before this audit could consolidate selected groups; history preserved"
+  }
+}

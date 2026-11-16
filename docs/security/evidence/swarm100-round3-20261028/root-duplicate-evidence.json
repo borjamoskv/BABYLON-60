@@ -1,0 +1,43 @@
+{
+  "copies": [
+    {
+      "path": "tools/skill_library/global/anergy-purge-protocol/scripts/anergy_purge.py",
+      "sha256": "82b6881e3cc765b82d70814a477beaa7e46c3b074c7485a843b6baf303e16253",
+      "lines_178_190": [
+        "    # 6. CLASE B \u2014 SQLite WAL Hu\u00e9rfanos (*.db-shm, *.db-wal)",
+        "    for root, dirs, files in os.walk(workspace_path):",
+        "        if any(p in root for p in [\".venv\", \"node_modules\", \".git\"]):",
+        "            continue",
+        "        for f in files:",
+        "            if f.endswith(\".db-shm\") or f.endswith(\".db-wal\"):",
+        "                fp = Path(root) / f",
+        "                if fp.is_file():",
+        "                    sz = fp.stat().st_size",
+        "                    stats[\"wal_orphans\"] += 1",
+        "                    stats[\"wal_bytes\"] += sz",
+        "                    if not dry_run:",
+        "                        fp.unlink(missing_ok=True)"
+      ]
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/anergy-purge-protocol/scripts/anergy_purge.py",
+      "sha256": "82b6881e3cc765b82d70814a477beaa7e46c3b074c7485a843b6baf303e16253",
+      "lines_178_190": [
+        "    # 6. CLASE B \u2014 SQLite WAL Hu\u00e9rfanos (*.db-shm, *.db-wal)",
+        "    for root, dirs, files in os.walk(workspace_path):",
+        "        if any(p in root for p in [\".venv\", \"node_modules\", \".git\"]):",
+        "            continue",
+        "        for f in files:",
+        "            if f.endswith(\".db-shm\") or f.endswith(\".db-wal\"):",
+        "                fp = Path(root) / f",
+        "                if fp.is_file():",
+        "                    sz = fp.stat().st_size",
+        "                    stats[\"wal_orphans\"] += 1",
+        "                    stats[\"wal_bytes\"] += sz",
+        "                    if not dry_run:",
+        "                        fp.unlink(missing_ok=True)"
+      ]
+    }
+  ],
+  "runtime_executed": false
+}

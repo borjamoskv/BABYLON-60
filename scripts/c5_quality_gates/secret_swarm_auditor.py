@@ -5,6 +5,7 @@
 # ============================================================================
 # Causal-Determinist: Swarm Thread Dispatcher for TOP SECRET Auditing (ULTRATHINK P0 - ITERATION 3)
 # Vector: BFT_STATE_LOOP, SARIF Integration, Delta Scanning, Zero-Anergy Whitelisting
+import io
 import os
 import re
 import math
@@ -123,11 +124,6 @@ PUBLIC_FIXTURE_EXCEPTIONS: dict[tuple[str, str, str], str] = {
         "e3d9492aaee746695480484628be01e33ad27418feefa1b482496c5cf6bd3651",
     ): "Noncredential OpenRouter client fixture in four isolated dispatch tests.",
     (
-        "tests/test_swarm100_lot6_regressions.py",
-        "GENERIC_SECRET",
-        "e94cf501a0fef052565a5c0884fb4b8ee185ec725738dbeb4d80af64a854bf7d",
-    ): "Synthetic sentinel used to assert that error diagnostics do not echo secrets.",
-    (
         "docs/security/evidence/local-core-20261030/hardware-final/hardware-receipt.json",
         "HIGH_ENTROPY_STRING",
         "d6349e0456f4819d694ff715a7059030f5e553b2ba38718a9c23a0f22e4b661e",
@@ -182,6 +178,46 @@ PUBLIC_FIXTURE_EXCEPTIONS: dict[tuple[str, str, str], str] = {
         "GENERIC_SECRET",
         "43eeccf6afd8e94ea043043f7820e0c409e7bc8313f7b568f0ac066036bcae7f",
     ): "Explicit synthetic secret sentinel in the archived independent queue worker.",
+    (
+        "scripts/c5_tests/test_gemini4_frontier_router.py",
+        "GENERIC_SECRET",
+        "011b23b193c7c8cb31f0262e98f2c8b2aa956e37bcc9107b342d56a4ccf1d7b5",
+    ): "Synthetic Gemini router key for the fallback and 24h cache-hit tests.",
+    (
+        "scripts/c5_tests/test_gemini4_frontier_router.py",
+        "GENERIC_SECRET",
+        "188c25d6a779dad3d9be6fdd25e141d4eb2d735dc14da5242a0dd127cb492485",
+    ): "Synthetic Gemini router key for the provisioned-carbon resolution test.",
+    (
+        "scripts/c5_tests/test_gemini4_frontier_router.py",
+        "GENERIC_SECRET",
+        "79b4a9d253012aa3a7e6bc1487bcef483e67d745dde379ec9fcfb7174f9b198f",
+    ): "Synthetic pre-rotation key in the cache-invalidation-on-rotation test.",
+    (
+        "scripts/c5_tests/test_gemini4_frontier_router.py",
+        "GENERIC_SECRET",
+        "ccf2ac0d022defb092262a87151986a8ea3a785c4f98db6f4dd8512d8188e618",
+    ): "Synthetic post-rotation key in the cache-invalidation-on-rotation test.",
+    (
+        "scripts/c5_tests/test_gemini4_frontier_router.py",
+        "GENERIC_SECRET",
+        "3c7e5a0d44e086b6c022afb720f8d159afbd6f64e23a6fd447aeb6d84941203f",
+    ): "Synthetic key without Gemini 4 access in the governance-invariants test.",
+    (
+        "scripts/c5_tests/test_gemini4_frontier_router.py",
+        "GENERIC_SECRET",
+        "3ac40859321966eb2a50f4c1f5c6a50a8124bf7013ca5617c039f296e78be11f",
+    ): "Synthetic Gemini router key for the Hydrogen/Argon periodic selector test.",
+    (
+        "tests/test_swarm100_lot6_regressions.py",
+        "GENERIC_SECRET",
+        "3cbf68562a9308ff378ae16c6d58c41f3ccd0cc4d9d94337e6b061d89cb36382",
+    ): "Synthetic sentinel used to assert that error diagnostics do not echo secrets.",
+    (
+        "docs/security/evidence/swarm100-lot12-20261030/s2_identity/before-tests.log",
+        "HIGH_ENTROPY_STRING",
+        "5df326f28526f326cc7c99ef533b8c3a7b8b709b0dd99821e4ff66c242374606",
+    ): "Archived pytest failure output containing a public ssh-ed25519 key fixture, not a secret.",
 }
 
 
@@ -366,18 +402,21 @@ def _is_public_fixture(finding: Dict[str, Any], root: str) -> bool:
 
 def scan_file(filepath: str, root: str | None = None) -> List[Dict[str, Any]]:
     findings: List[Dict[str, Any]] = []
-    if not os.path.isfile(filepath) or os.path.islink(filepath):
+    if not os.path.isfile(filepath):
         return findings
     if filepath.endswith("test_compliance_exporter.py") or filepath.endswith("secret_swarm_auditor.py"):
         return findings
 
     try:
-        with open(filepath, "rb") as bf:
+        flags = os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0)
+        fd = os.open(filepath, flags)
+        with os.fdopen(fd, "rb") as bf:
             chunk = bf.read(8192)
             if b"\x00" in chunk:
                 return findings
-        with open(filepath, "r", encoding="utf-8", errors="ignore") as f:
-            for line_no, line in enumerate(f, start=1):
+            bf.seek(0)
+            text_stream = io.TextIOWrapper(bf, encoding="utf-8", errors="ignore")
+            for line_no, line in enumerate(text_stream, start=1):
                 findings.extend(_scan_line_for_patterns(filepath, line_no, line))
                 findings.extend(_scan_line_for_entropy(filepath, line_no, line))
     except (UnicodeDecodeError, OSError):

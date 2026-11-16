@@ -1,0 +1,32 @@
+{
+  "command": [
+    "uv",
+    "run",
+    "--locked",
+    "--no-sync",
+    "python",
+    "-I",
+    "-m",
+    "pytest",
+    "-p",
+    "pytest_asyncio.plugin",
+    "tests/test_attest_proof_regressions.py",
+    "tests/test_markov_bridge.py",
+    "tests/test_doxastic_kripke_engine.py",
+    "tests/test_inv_c5_28_falsification.py",
+    "tests/test_graph_isomorphism_regressions.py",
+    "tests/test_fl_approval01_experiment.py",
+    "tests/test_fl_approval01_human_trial.py",
+    "tests/test_fl_approval01_integrity.py",
+    "tests/test_fl_approval01_trial_cases.py",
+    "tests/test_fl_approval01_trial_status.py",
+    "tests/test_babylon_work.py",
+    "tests/test_babylon_work_runtime.py",
+    "tests/test_semantic_entropy_lean_alignment.py",
+    "-q",
+    "-rs",
+    "--junitxml=/Users/borjafernandezangulo/.codex/local-core-evidence/pending-audit-20261030T000841Z/live-python.xml"
+  ],
+  "exit_code": 0,
+  "base": "15eeb1788ceb3f62d51fdb1a6c702cfd4996ac3d"
+}

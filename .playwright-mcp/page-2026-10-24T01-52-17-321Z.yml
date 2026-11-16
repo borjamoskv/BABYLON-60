@@ -1,0 +1,244 @@
+- generic [active] [ref=e1]:
+  - link "Saltar al contenido" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=e3]:
+    - checkbox "Abrir o cerrar menú de navegación" [ref=e4]
+    - generic [ref=e5]:
+      - link "BABYLON Home" [ref=e6] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e7]: BABYLON
+      - navigation "Navegación principal" [ref=e8]:
+        - link "AI ACT" [ref=e9] [cursor=pointer]:
+          - /url: /eu-ai-act/
+        - link "CORTEX" [ref=e10] [cursor=pointer]:
+          - /url: /cortex/
+        - link "GUARD" [ref=e11] [cursor=pointer]:
+          - /url: /babylon/
+        - link "ENTERPRISE" [ref=e12] [cursor=pointer]:
+          - /url: /enterprise/
+        - link "PRUEBAS Y LÍMITES" [ref=e13] [cursor=pointer]:
+          - /url: /pruebas-y-limites/
+        - link "RESEARCH" [ref=e14] [cursor=pointer]:
+          - /url: /research/
+        - link "BLOG" [ref=e15] [cursor=pointer]:
+          - /url: /blog/
+        - link "DOCS" [ref=e16] [cursor=pointer]:
+          - /url: /documentacion/
+      - generic [ref=e17]:
+        - link "SOLICITAR ACCESO" [ref=e18] [cursor=pointer]:
+          - /url: /cortex/
+        - link "Cambiar a EN" [ref=e19] [cursor=pointer]:
+          - /url: /en/docs/
+          - generic [ref=e20]: EN
+  - main [ref=e21]:
+    - generic [ref=e23]:
+      - generic [ref=e24]:
+        - heading "Documentación y Recursos" [level=1] [ref=e25]
+        - paragraph [ref=e26]: Especificaciones formales, repositorios de código y guías técnicas de BABYLON-60.
+      - generic [ref=e27]:
+        - heading "Verificación independiente · paquete mínimo" [level=2] [ref=e28]
+        - paragraph [ref=e29]: Descarga AX0, CLAIMS.toml, los informes y un verificador de integridad. Puedes compilar el modelo formal sin el árbol de trabajo del autor. El paquete conserva los límites y las divergencias de los informes históricos.
+        - paragraph [ref=e30]:
+          - link "Repositorio público · Verification Mirror" [ref=e31] [cursor=pointer]:
+            - /url: https://github.com/borjamoskv/babylon60-verification
+          - link "Descargar paquete ZIP" [ref=e32] [cursor=pointer]:
+            - /url: /verification/verification-mirror.zip
+          - link "Instrucciones y alcance" [ref=e33] [cursor=pointer]:
+            - /url: /verification/README.md
+          - link "AX0.lean" [ref=e34] [cursor=pointer]:
+            - /url: /verification/proof/lean/AX0.lean
+          - link "Manifiesto SHA-256" [ref=e35] [cursor=pointer]:
+            - /url: /verification/mirror-manifest.json
+        - paragraph [ref=e36]: Descomprime el ZIP y ejecuta este único comando desde la carpeta extraída. Requiere Python 3.10+ y Elan con la versión de Lean indicada en lean-toolchain.
+        - code [ref=e38]: ./verify.sh
+        - paragraph [ref=e39]: El comando verifica primero la integridad y coherencia de los archivos y después compila AX0 con lake build. Si fallan los hashes, se detiene antes de compilar; cualquier fallo devuelve un código distinto de cero. Una firma de release requiere una clave pública obtenida por un canal de confianza; los hashes por sí solos no prueban identidad ni certifican el runtime.
+        - paragraph [ref=e40]:
+          - text: mirror-manifest.json · SHA-256
+          - code [ref=e41]: 302b25aba7c7ced7abf7cd406c0808b8e2aba9f8c09ced52ea0e9d9c66a722e9
+        - paragraph [ref=e42]:
+          - text: "Fuente única del ZIP:"
+          - link "de1f87ca85c9" [ref=e43] [cursor=pointer]:
+            - /url: https://github.com/borjamoskv/babylon60-verification/commit/de1f87ca85c9363009c63e5f8cad8953478b5b7b
+        - heading "Última ejecución local de claims" [level=3] [ref=e44]
+        - paragraph [ref=e45]: Este panel procede del snapshot local de la web. El ZIP tiene su propia revisión y manifiesto, indicados arriba; los dos conjuntos pueden corresponder a fuentes distintas.
+        - generic [ref=e46]:
+          - term [ref=e47]: Fecha de ejecución
+          - definition [ref=e48]: 2026-10-23T13:01:15.112Z
+          - term [ref=e49]: Fuente de la ejecución
+          - definition [ref=e50]:
+            - code [ref=e51]: a25ff274308fbe74c10be6b0fc7513da93b78887+dirty:cc512bce910ae7bd
+          - term [ref=e52]: Claims con fallo
+          - definition [ref=e53]: 0 / 28
+          - term [ref=e54]: CLAIMS.toml ↔ sitrep
+          - definition [ref=e55]: MATCH
+          - term [ref=e56]: Fuentes actuales ↔ ejecución
+          - definition [ref=e57]: MISMATCH
+          - term [ref=e58]: Presencia humana Secure Enclave
+          - definition [ref=e59]: NO_VERIFICADO
+        - paragraph [ref=e60]: Las nuevas suites de ACS, intención firmada y Seatbelt tienen el resultado y el alcance indicados a continuación. No sustituyen los informes NEMESIS antiguos ni demuestran resistencia a cortes de alimentación.
+        - list [ref=e61]:
+          - listitem [ref=e62]:
+            - code [ref=e63]: FL_016_owasp_acs_vop1_and_drift_guard
+            - text: ":"
+            - strong [ref=e64]: verified_local
+            - paragraph [ref=e65]: AF_UNIX local enforcement, 7-tuple T_auth evaluation, VOP-1 tri-state reconciliation, and Phi_BABYLON verified-work metric
+          - listitem [ref=e66]:
+            - code [ref=e67]: signed_dispatch_intent
+            - text: ":"
+            - strong [ref=e68]: verified_local
+            - paragraph [ref=e69]: Software-generated ephemeral P-256 keys; private local nonce database; process death rather than power loss. Does not demonstrate Secure Enclave key origin or human presence.
+          - listitem [ref=e70]:
+            - code [ref=e71]: mcp_seatbelt_confinement
+            - text: ":"
+            - strong [ref=e72]: verified_local
+            - paragraph [ref=e73]: macOS sandbox-exec, private temporary files and tested MCP candidates. Linux isolation and arbitrary desktop effects are outside this suite.
+      - paragraph [ref=e74]:
+        - text: La publicación
+        - link "babylon60 1.0.2 de PyPI" [ref=e75] [cursor=pointer]:
+          - /url: https://pypi.org/project/babylon60/1.0.2/
+        - text: es un artefacto histórico distinto del snapshot documentado aquí. Para reproducir esta arquitectura, identifica la revisión Git y su licencia; instalar ese paquete no reproduce la versión actual.
+      - generic [ref=e76]:
+        - heading "Requisitos del Sistema, Instalación y Primera Ejecución" [level=2] [ref=e77]
+        - generic [ref=e78]:
+          - generic [ref=e79]:
+            - generic [ref=e80]:
+              - heading "REQUISITOS PREVIOS DEL SISTEMA" [level=3] [ref=e81]
+              - list [ref=e82]:
+                - listitem [ref=e83]:
+                  - text: ●
+                  - strong [ref=e84]: "Hardware:"
+                  - text: Apple Silicon (M1/M2/M3/M4) recomendado con Secure Enclave TRNG; o Linux x86_64.
+                - listitem [ref=e85]:
+                  - text: ●
+                  - strong [ref=e86]: "Sistema de Archivos:"
+                  - text: APFS obligatorio en macOS (para renames atómicos y cuarentena Copy-on-Write
+                  - code [ref=e87]: "0700"
+                  - text: ).
+                - listitem [ref=e88]:
+                  - text: ●
+                  - strong [ref=e89]: "Toolchain:"
+                  - text: Rust 1.80+ (toolchain nightly recomendado para alineación de caché
+                  - code [ref=e90]: KUDURRU-64
+                  - text: ), Git.
+                - listitem [ref=e91]:
+                  - text: ●
+                  - strong [ref=e92]: "Fuente:"
+                  - text: Fija la revisión pública que vas a probar y consulta su licencia. El snapshot local puede incluir cambios no publicados.
+            - generic [ref=e93]:
+              - 'heading "PASO A PASO: COMPILACIÓN & EJECUCIÓN" [level=3] [ref=e94]'
+              - generic [ref=e95]:
+                - generic [ref=e96]: "# 1. Clonar el código publicado"
+                - generic [ref=e97]: $ git clone https://github.com/borjamoskv/BABYLON-60.git
+                - generic [ref=e98]: $ cd BABYLON-60
+                - generic [ref=e99]: "# 2. Compilar kernel soberano Ring-0"
+                - generic [ref=e100]: $ cargo build --locked --release --bin babylon60_kernel
+                - generic [ref=e101]: "# 3. Ejecutar suite de invariantes NEMESIS"
+                - generic [ref=e102]: $ cargo test --locked --test acs_authenticated --test nemesis_wave3 --features cortex-persist
+          - generic [ref=e103]:
+            - generic [ref=e104]: RESULTADOS Y ALCANCE
+            - paragraph [ref=e105]: Los resultados observados están en «Última ejecución local de claims». Consulta CLAIMS.toml para reproducir cada suite y distinguir SIGKILL real, simulación y pruebas formales.
+      - generic [ref=e106]:
+        - heading "Recursos disponibles" [level=2] [ref=e107]
+        - generic [ref=e108]:
+          - link "GitHub · Código publicado (consultar licencia y revisión) Repositorio Central BABYLON-60 → Código fuente, kernel en Rust (00_ABZU_KERNEL), motor de persistencia y suites de prueba en silicio." [ref=e109] [cursor=pointer]:
+            - /url: https://github.com/borjamoskv/BABYLON-60
+            - generic [ref=e110]: GitHub · Código publicado (consultar licencia y revisión)
+            - heading "Repositorio Central BABYLON-60 →" [level=3] [ref=e111]
+            - paragraph [ref=e112]: Código fuente, kernel en Rust (00_ABZU_KERNEL), motor de persistencia y suites de prueba en silicio.
+          - link "Markdown · Especificación publicada Especificación del Dominio de Seguridad NEMESIS → Definición de las 6 invariantes canónicas (NEM-I1 a NEM-I6), modelo de amenazas y delimitación del TCB." [ref=e113] [cursor=pointer]:
+            - /url: https://github.com/borjamoskv/BABYLON-60/blob/main/docs/01_spec/spec_nemesis.md
+            - generic [ref=e114]: Markdown · Especificación publicada
+            - heading "Especificación del Dominio de Seguridad NEMESIS →" [level=3] [ref=e115]
+            - paragraph [ref=e116]: Definición de las 6 invariantes canónicas (NEM-I1 a NEM-I6), modelo de amenazas y delimitación del TCB.
+          - link "TOML · Manifiesto publicado Manifiesto de Claims Epistémicos (CLAIMS.toml) → Catálogo con los comandos de reproducción exacta de cada afirmación arquitectónica verificada." [ref=e117] [cursor=pointer]:
+            - /url: https://github.com/borjamoskv/BABYLON-60/blob/main/CLAIMS.toml
+            - generic [ref=e118]: TOML · Manifiesto publicado
+            - heading "Manifiesto de Claims Epistémicos (CLAIMS.toml) →" [level=3] [ref=e119]
+            - paragraph [ref=e120]: Catálogo con los comandos de reproducción exacta de cada afirmación arquitectónica verificada.
+          - link "Starlight · Repo Hub de Documentación Técnica (babylon60-docs) → Arquitectura, teoría de categorías, descomposición bayesiana y sonificación Tonnetz en Astro/Starlight." [ref=e121] [cursor=pointer]:
+            - /url: https://github.com/borjamoskv/babylon60-docs
+            - generic [ref=e122]: Starlight · Repo
+            - heading "Hub de Documentación Técnica (babylon60-docs) →" [level=3] [ref=e123]
+            - paragraph [ref=e124]: Arquitectura, teoría de categorías, descomposición bayesiana y sonificación Tonnetz en Astro/Starlight.
+      - generic [ref=e125]:
+        - heading "Recursos previstos" [level=2] [ref=e126]
+        - generic [ref=e127]:
+          - generic [ref=e128]:
+            - generic [ref=e129]: Roadmap v5.1
+            - heading "Publicación de binarios en Crates.io" [level=3] [ref=e130]
+            - paragraph [ref=e131]: Distribución compilada de las crates babylon-kernel y b60-lang para cargo install.
+          - generic [ref=e132]:
+            - generic [ref=e133]: En preparación
+            - heading "Atestación de hardware Secure Enclave P-256 en CI" [level=3] [ref=e134]
+            - paragraph [ref=e135]: La verificación P-256 con claves software y nonces persistentes se prueba por separado. Acreditar presencia humana con Touch ID exige aprovisionamiento nativo de Secure Enclave, reutilización cero y una prueba interactiva específica.
+          - generic [ref=e136]:
+            - generic [ref=e137]: En preparación
+            - heading "SDK de Integración para Agentes Multi-Framework" [level=3] [ref=e138]
+            - paragraph [ref=e139]: Conectores C-ABI sin fricción para frameworks de agentes autónomos basados en IPC Zero-Copy.
+  - contentinfo [ref=e140]:
+    - generic [ref=e141]:
+      - generic [ref=e142]:
+        - generic [ref=e143]:
+          - heading "AUDITORÍA DE FUENTES Y PROCEDENCIA CRIPTOGRÁFICA" [level=4] [ref=e144]
+          - generic [ref=e145]:
+            - generic [ref=e146]:
+              - text: "Sustrato origen:"
+              - link "borjamoskv/BABYLON-60" [ref=e147] [cursor=pointer]:
+                - /url: https://github.com/borjamoskv/BABYLON-60
+              - text: (Código publicado · consultar licencia y revisión)
+            - generic [ref=e148]:
+              - text: "Commit:"
+              - code [ref=e149]: 8add5b83845e161236af039997be9943b1c0221d+dirty
+            - generic [ref=e150]:
+              - text: "Rama:"
+              - code [ref=e151]: codex/integration-review-20261023
+            - generic [ref=e152]: "Fecha de snapshot: 2026-10-24T01:29:50.822Z"
+        - generic [ref=e153]:
+          - heading "Contacto e Investigación:" [level=4] [ref=e154]
+          - generic [ref=e155]:
+            - generic [ref=e156]: Borja Fernández Angulo
+            - generic [ref=e157]: Investigador en Sistemas Complejos
+            - link "borja@babylon60.com" [ref=e159] [cursor=pointer]:
+              - /url: mailto:borja@babylon60.com
+      - generic [ref=e160]:
+        - generic [ref=e161]: "Fuentes primarias auditadas (SHA-256):"
+        - generic [ref=e162]:
+          - generic [ref=e163]:
+            - generic [ref=e164]: CLAIMS.toml
+            - code [ref=e165]: 79f3269add7ccc0d...d162aa53
+          - generic [ref=e166]:
+            - generic [ref=e167]: scripts/c5_quality_gates/claims_sitrep.json
+            - code [ref=e168]: 988ff4ea1a8de822...c1c7a746
+          - generic [ref=e169]:
+            - generic [ref=e170]: RELEASE_MANIFEST.json
+            - code [ref=e171]: e0d5f43ea76bba9c...e7786fd9
+          - generic [ref=e172]:
+            - generic [ref=e173]: scripts/c5_quality_gates/compile_claims_manifest.py
+            - code [ref=e174]: 9fd62031792cde40...834dd65a
+          - generic [ref=e175]:
+            - generic [ref=e176]: docs/01_spec/spec_nemesis.md
+            - code [ref=e177]: 13d1e8401688f60a...ca083380
+          - generic [ref=e178]:
+            - generic [ref=e179]: reports/nemesis_verified_report.json
+            - code [ref=e180]: 9aa033bf12de94c1...fc94b7a6
+          - generic [ref=e181]:
+            - generic [ref=e182]: reports/nemesis_evidence_report.json
+            - code [ref=e183]: fe8fb8c6003167cc...cf2f3beb
+          - generic [ref=e184]:
+            - generic [ref=e185]: reports/nemesis-kernel-report.json
+            - code [ref=e186]: 443dfc30371b82b3...88695288
+          - generic [ref=e187]:
+            - generic [ref=e188]: reports/nemesis-crash-report.json
+            - code [ref=e189]: eb1e55af821ccc65...ca2f23f9
+          - generic [ref=e190]:
+            - generic [ref=e191]: reports/nemesis-model-report.json
+            - code [ref=e192]: cc0f1e7fac03efbe...10135ade
+          - generic [ref=e193]:
+            - generic [ref=e194]: reports/ax0-adversarial-report.json
+            - code [ref=e195]: 77945423639ba1da...94a9adae
+          - generic [ref=e196]:
+            - generic [ref=e197]: proof/lean/AX0.lean
+            - code [ref=e198]: b0c763ec1fe82695...67994cd1
+      - generic [ref=e199]:
+        - generic [ref=e200]: BABYLON-60 es una arquitectura experimental de gobernanza en silicio y evidencia local-first.
+        - generic [ref=e201]: © 2026 Borja Fernández Angulo

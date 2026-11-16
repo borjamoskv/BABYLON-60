@@ -1,0 +1,21 @@
+{
+  "result": "PASS",
+  "only_production_file_edited_in_this_lot": "scripts/c5_verifiers/fast_smt_gate.py",
+  "source_sha256_before": "ef4c442f821689838b76a7aaa5cf29c625de2dac3df0a5bd1e2856cfdb526748",
+  "source_sha256_after": "853cd9746178aede419bee382b6e6416482fdbfb8a5eb753269732e3d5e384c1",
+  "unchanged_consumer_dependencies_and_lockfiles": {
+    "scripts/c5_quality_gates/daily_sovereign_maintenance.py": true,
+    "pyproject.toml": true,
+    "uv.lock": true,
+    "Cargo.lock": true
+  },
+  "lot8_sources_unchanged": {
+    "scripts/c5_cortex/cortex_objectives_transducer.py": "061f5a4f7ec065db523efc14441885f0c27d5ff6bc4506ff5bb850f9d4d45251"
+  },
+  "historical_receipts": "Not regenerated or rewritten",
+  "limits": [
+    "No SMT implementation or proof",
+    "No real maintenance/auto-fixer/solver/signing/hardware/network",
+    "Global telemetry omitted; no commit/publication/dependency change"
+  ]
+}

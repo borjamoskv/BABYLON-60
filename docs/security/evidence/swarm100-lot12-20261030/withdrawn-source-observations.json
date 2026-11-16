@@ -1,0 +1,35 @@
+{
+  "schema": "babylon60.swarm100.withdrawn-source-observation.v1",
+  "date": "2026-10-30",
+  "git_head_at_observation": "4bd6403f29354e6ceedcb3270e5ffb2315fc2648",
+  "scope": "Two deleted product paths; no restoration. Audit-version and last-present Git archives preserve history for strict missing-source validation.",
+  "sources": [
+    {
+      "path": "examples/poc_navier_stokes_hunter.rs",
+      "git_revision": "3d8b4840c6ce0c5d7dab2d760cbb4ac5b0d71b8b",
+      "git_blob_sha256": "af86782ac5088f92ee292626218e369d586edc159f31db3e70b20278706dd8ac",
+      "archive_path": "docs/security/evidence/swarm100-lot12-20261030/withdrawn-source-archives/poc_navier_stokes_hunter.af86782a.rs.txt",
+      "archive_lines": 414,
+      "source_lexists": false,
+      "observation": "Product path is absent; archive contains exact pinned historical Git blob. Pending withdrawal adjudication, not a fix or restoration."
+    },
+    {
+      "path": "tools/examples/navier_stokes_hunter.b60",
+      "git_revision": "fdef72d277426a61246c5fb8bb1404d4efe7d2a3",
+      "git_blob_sha256": "2546fef1626b071581f37f8270d6a8496c4760913baf8709b0c0da5c0b861fbf",
+      "archive_path": "docs/security/evidence/swarm100-lot12-20261030/withdrawn-source-archives/navier_stokes_hunter.2546fef1.b60.txt",
+      "archive_lines": 73,
+      "source_lexists": false,
+      "observation": "Product path is absent; archive contains exact pinned historical Git blob. Pending withdrawal adjudication, not a fix or restoration."
+    },
+    {
+      "path": "examples/poc_navier_stokes_hunter.rs",
+      "git_revision": "fdef72d277426a61246c5fb8bb1404d4efe7d2a3",
+      "git_blob_sha256": "b5d4446757baf4aede27bf92497b2071c164cd0a2e470968ccd50a83f79d9bf9",
+      "archive_path": "docs/security/evidence/swarm100-lot12-20261030/withdrawn-source-archives/poc_navier_stokes_hunter.b5d44467.last-present.rs.txt",
+      "archive_lines": 737,
+      "source_lexists": false,
+      "observation": "Product path is absent; archive contains exact pinned historical Git blob. Pending withdrawal adjudication, not a fix or restoration."
+    }
+  ]
+}

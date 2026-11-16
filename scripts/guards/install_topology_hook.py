@@ -76,10 +76,21 @@ def install(root: Path) -> tuple[Path, int]:
     scripts = {}
     for name in sorted(names):
         target = destination / name
-        if target.is_symlink() or (
-            target.exists() and not target.read_text().startswith("#!/bin/sh\n" + MARKER + "\n")
-        ):
-            raise RuntimeError(f"Refusing to overwrite an unrelated hook: {target}")
+        flags = os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0)
+        try:
+            fd = os.open(target, flags)
+        except FileNotFoundError:
+            pass
+        except OSError as exc:
+            raise RuntimeError(f"Refusing to overwrite an unrelated hook (symlink or unreadable): {target} ({exc})") from exc
+        else:
+            try:
+                with os.fdopen(fd, "r", encoding="utf-8") as f:
+                    content = f.read()
+                if not content.startswith("#!/bin/sh\n" + MARKER + "\n"):
+                    raise RuntimeError(f"Refusing to overwrite an unrelated hook: {target}")
+            except (OSError, UnicodeError) as exc:
+                raise RuntimeError(f"Refusing to overwrite an unrelated hook: {target} ({exc})") from exc
         commands = ["#!/bin/sh", MARKER]
         if name == "pre-commit":
             commands.extend(
@@ -117,7 +128,7 @@ def install(root: Path) -> tuple[Path, int]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--repo-root", type=Path, default=Path(__file__).resolve().parents[2])
+    parser.add_argument("--repo-root", type=Path, default=Path(__file__).absolute().parents[2])
     args = parser.parse_args()
     try:
         directory, count = install(args.repo_root)

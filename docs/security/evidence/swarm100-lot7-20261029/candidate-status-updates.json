@@ -1,0 +1,108 @@
+[
+  {
+    "candidate_id": "SW100-C0556",
+    "decision": "ALREADY_FIXED",
+    "severity": "P1",
+    "remediation_state": "FIXED",
+    "path": "scripts/c5_verifiers/fast_smt_gate.py",
+    "current_source_sha256": "853cd9746178aede419bee382b6e6416482fdbfb8a5eb753269732e3d5e384c1",
+    "rationale": "Replaced literal True/path-existence pseudo-verification with a complete, validated 25-ID catalogue of NOT_EXECUTED records. Directory-entry observations are separate and cannot authorize a PASS. Absent checkers, UNKNOWN, FAIL and invalid/missing inventories all block gate success in default, JSON, legacy --scitt and strict modes. The present-script maintenance consumer rejects that nonzero status in isolated function tests. Seven original reproductions failed before the patch; the final regression suite covers exit codes and honest statuses. This fixes false success without implementing or proving the underlying invariants.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_verifiers/fast_smt_gate.py",
+        "start_line": 87,
+        "end_line": 90,
+        "observation": "All catalogue entries explicitly lack an executable checker."
+      },
+      {
+        "path": "scripts/c5_verifiers/fast_smt_gate.py",
+        "start_line": 122,
+        "end_line": 144,
+        "observation": "Requires every unique known ID, explicit fields and supported non-PASS statuses."
+      },
+      {
+        "path": "scripts/c5_verifiers/fast_smt_gate.py",
+        "start_line": 165,
+        "end_line": 196,
+        "observation": "Read-only typed metadata observations remain separate from invariants."
+      },
+      {
+        "path": "scripts/c5_verifiers/fast_smt_gate.py",
+        "start_line": 250,
+        "end_line": 275,
+        "observation": "No supported inventory can produce a zero gate exit; invalid data also blocks."
+      }
+    ],
+    "guards": [
+      "FIXED refers to unsupported success and fabricated/unbound receipts. No solver/checker was added: all 25 properties remain NOT_EXECUTED/NOT_IMPLEMENTED and are not certified.",
+      "FAIL/UNKNOWN are reported caller statuses, not proof. PASS and legacy boolean tuples are rejected; no inventory state makes this gate return zero.",
+      "JSON v3 and legacy --scitt/API names emit unsigned reports. Old boolean receipt inputs are incompatible and explicitly rejected; historical receipts were not rewritten.",
+      "BLAKE3 binds the complete canonical body/configuration with a domain, excluding only its own digest. It provides content consistency, not signature, authenticity or tamper resistance against recomputation.",
+      "Observations are typed directory-entry metadata only, never invariant checks. Exported observations remain REPORTED_OBSERVATIONS_NOT_PROOF; path roots are not an OS sandbox.",
+      "No Ed25519 key, SCITT issuance, hardware approval, legal assessment or ATTESTED occurs. Timing is report latency, never SMT verification latency.",
+      "Only copied source and synthetic HOME/root, sockets/DNS prohibited; consumer phase extracted alone with subprocess doubles. No full maintenance, auto-fixer or native solver executed.",
+      "Present-gate nonzero makes the observed consumer phase fail. The separate consumer missing-script default-success branch remains outside this single-file fix."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot7-20261029/before-tests.log",
+      "docs/security/evidence/swarm100-lot7-20261029/related-tests.log",
+      "docs/security/evidence/swarm100-lot7-20261029/independent-review.json",
+      "docs/security/evidence/swarm100-lot7-20261029/scope-check.json",
+      "docs/security/evidence/swarm100-lot7-20261029/validation.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/04.json",
+    "runtime_scope": "Copied CLI/report functions and owned temporary paths; consumer function only with subprocess doubles. No SMT proof or real maintenance/signing.",
+    "resolution_type": "CODE_AND_CONFINED_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0557",
+    "decision": "ALREADY_FIXED",
+    "severity": "P1",
+    "remediation_state": "FIXED",
+    "path": "scripts/c5_verifiers/fast_smt_gate.py",
+    "current_source_sha256": "853cd9746178aede419bee382b6e6416482fdbfb8a5eb753269732e3d5e384c1",
+    "rationale": "Replaced the ID-only digest, formatted pseudo-Ed25519 signature and literal compliance with a versioned UNSIGNED report. Strict canonical JSON and domain-separated BLAKE3 bind all body fields, including ID/status/description/detail, configuration, observations, metrics and local timestamp. Mutation tests with fixed IDs/time and an independently recomputed digest verify content binding. The report expressly says signature None/UNSIGNED, SCITT NOT_ISSUED, certification NONE, legal NOT_ASSESSED and hardware UNVERIFIED. Legacy boolean receipt inputs are rejected; no authenticator or signer is claimed.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_verifiers/fast_smt_gate.py",
+        "start_line": 82,
+        "end_line": 84,
+        "observation": "Canonical sorted UTF-8 JSON rejects NaN/infinity in serialized values."
+      },
+      {
+        "path": "scripts/c5_verifiers/fast_smt_gate.py",
+        "start_line": 152,
+        "end_line": 162,
+        "observation": "Allows only the explicit supported unsigned catalogue profile."
+      },
+      {
+        "path": "scripts/c5_verifiers/fast_smt_gate.py",
+        "start_line": 222,
+        "end_line": 247,
+        "observation": "Legacy API alias exports unsigned full-content report with no fabricated signature or compliance."
+      }
+    ],
+    "guards": [
+      "FIXED refers to unsupported success and fabricated/unbound receipts. No solver/checker was added: all 25 properties remain NOT_EXECUTED/NOT_IMPLEMENTED and are not certified.",
+      "FAIL/UNKNOWN are reported caller statuses, not proof. PASS and legacy boolean tuples are rejected; no inventory state makes this gate return zero.",
+      "JSON v3 and legacy --scitt/API names emit unsigned reports. Old boolean receipt inputs are incompatible and explicitly rejected; historical receipts were not rewritten.",
+      "BLAKE3 binds the complete canonical body/configuration with a domain, excluding only its own digest. It provides content consistency, not signature, authenticity or tamper resistance against recomputation.",
+      "Observations are typed directory-entry metadata only, never invariant checks. Exported observations remain REPORTED_OBSERVATIONS_NOT_PROOF; path roots are not an OS sandbox.",
+      "No Ed25519 key, SCITT issuance, hardware approval, legal assessment or ATTESTED occurs. Timing is report latency, never SMT verification latency.",
+      "Only copied source and synthetic HOME/root, sockets/DNS prohibited; consumer phase extracted alone with subprocess doubles. No full maintenance, auto-fixer or native solver executed.",
+      "Present-gate nonzero makes the observed consumer phase fail. The separate consumer missing-script default-success branch remains outside this single-file fix."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot7-20261029/before-tests.log",
+      "docs/security/evidence/swarm100-lot7-20261029/related-tests.log",
+      "docs/security/evidence/swarm100-lot7-20261029/independent-review.json",
+      "docs/security/evidence/swarm100-lot7-20261029/scope-check.json",
+      "docs/security/evidence/swarm100-lot7-20261029/validation.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/04.json",
+    "runtime_scope": "Copied CLI/report functions and owned temporary paths; consumer function only with subprocess doubles. No SMT proof or real maintenance/signing.",
+    "resolution_type": "CODE_AND_CONFINED_REGRESSIONS_VERIFIED"
+  }
+]

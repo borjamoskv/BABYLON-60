@@ -16,7 +16,7 @@ def snapshot() -> ImmutableSkillsSnapshot:
 
 
 def proposal(snapshot: ImmutableSkillsSnapshot, target: Path) -> dict[str, object]:
-    skill = snapshot.resolve("c5-neural-face-swap-cuadrilla")
+    skill = snapshot.resolve("cortex-skill-genesis")
     assert skill is not None
     return {
         "skill_id": skill.name,
@@ -87,7 +87,7 @@ def test_proposal_requires_exact_identity(snapshot, tmp_path, field, value):
 @pytest.mark.parametrize("field", ["effect_profile", "guard_invariants", "skill_id"])
 def test_lock_pins_policy_as_well_as_artifact(snapshot, field):
     lock = deepcopy(snapshot.to_lockfile())
-    entry = lock["skills"]["c5-neural-face-swap-cuadrilla"]
+    entry = lock["skills"]["cortex-skill-genesis"]
     if field == "effect_profile":
         entry[field]["requires_action_lease"] = False
     elif field == "guard_invariants":

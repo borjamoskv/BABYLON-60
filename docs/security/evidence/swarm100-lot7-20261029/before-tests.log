@@ -1,0 +1,135 @@
+FFFFFFF                                                                  [100%]
+=================================== FAILURES ===================================
+___________ test_c0556_markers_do_not_authorize_quality_gate[--json] ___________
+
+fixture = namespace(root=PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pyte...t-779/test_c0556_markers_do_not_auth0/workspace/fast_smt_gate.py'>, cli=<function fixture.<locals>.cli at 0x10b4ece00>)
+flag = '--json'
+
+    @pytest.mark.parametrize('flag',['--json','--scitt'])
+    def test_c0556_markers_do_not_authorize_quality_gate(fixture,flag):
+        result=fixture.cli(flag)
+>       assert result.returncode!=0,result.stdout
+E       AssertionError: b'{
+E           "schema_version": "2.0",
+E           "type": "C5_FAST_SMT_AUDIT",
+E           "metrics": {
+E             "total_invariants": 25,
+E             "pas..._status": "ARMED_AND_READY"
+E             },
+E             "signature_ed25519": "sig_ed25519_c1b6581582d3b51b5e9f13b4734ca003"
+E           }
+E         }
+E         '
+E       assert 0 != 0
+E        +  where 0 = CompletedProcess(args=['/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.venv/bin/python3', '/private/var/folders/r...MED_AND_READY"\n    },\n    "signature_ed25519": "sig_ed25519_c1b6581582d3b51b5e9f13b4734ca003"\n  }\n}\n', stderr=b'').returncode
+
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot7_regressions.py:47: AssertionError
+__________ test_c0556_markers_do_not_authorize_quality_gate[--scitt] ___________
+
+fixture = namespace(root=PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pyte...t-779/test_c0556_markers_do_not_auth1/workspace/fast_smt_gate.py'>, cli=<function fixture.<locals>.cli at 0x10b4ecca0>)
+flag = '--scitt'
+
+    @pytest.mark.parametrize('flag',['--json','--scitt'])
+    def test_c0556_markers_do_not_authorize_quality_gate(fixture,flag):
+        result=fixture.cli(flag)
+>       assert result.returncode!=0,result.stdout
+E       AssertionError: b'{
+E           "@context": "https://ietf.org/scitt/v1",
+E           "type": "C5_REAL_SCITT_ATTESTATION_RECEIPT",
+E           "issuer": "did:c5re...p_circuit_status": "ARMED_AND_READY"
+E           },
+E           "signature_ed25519": "sig_ed25519_c1b6581582d3b51b5e9f13b4734ca003"
+E         }
+E         '
+E       assert 0 != 0
+E        +  where 0 = CompletedProcess(args=['/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.venv/bin/python3', '/private/var/folders/r...tus": "ARMED_AND_READY"\n  },\n  "signature_ed25519": "sig_ed25519_c1b6581582d3b51b5e9f13b4734ca003"\n}\n', stderr=b'').returncode
+
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot7_regressions.py:47: AssertionError
+___________ test_default_text_mode_also_rejects_missing_verification ___________
+
+fixture = namespace(root=PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pyte...t-779/test_default_text_mode_also_re0/workspace/fast_smt_gate.py'>, cli=<function fixture.<locals>.cli at 0x10b4edf30>)
+
+    def test_default_text_mode_also_rejects_missing_verification(fixture):
+        (fixture.root/'README.md').unlink()
+        (fixture.root/'.agents').rmdir()
+        result=fixture.cli()
+>       assert result.returncode!=0,result.stdout
+E       AssertionError: b'======================================================================
+E          \xe2\x9a\xa1 BABYLON-60 FAST SMT VERIFIER G...0.00 ms)
+E           VERDICT: EPISOMIC HALT TRIGGERED
+E         ======================================================================
+E         '
+E       assert 0 != 0
+E        +  where 0 = CompletedProcess(args=['/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.venv/bin/python3', '/private/var/folders/r...ERDICT: EPISOMIC HALT TRIGGERED\n======================================================================\n', stderr=b'').returncode
+
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot7_regressions.py:56: AssertionError
+_________ test_c0557_legacy_boolean_records_are_not_silently_upgraded __________
+
+fixture = namespace(root=PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pyte...t-779/test_c0557_legacy_boolean_reco0/workspace/fast_smt_gate.py'>, cli=<function fixture.<locals>.cli at 0x10b4eca90>)
+
+    def test_c0557_legacy_boolean_records_are_not_silently_upgraded(fixture):
+        m=fixture.module
+        legacy=[('AX-DAG-1','fixture',True,'no checker executed')]
+>       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot7_regressions.py:62: Failed
+___________ test_c0557_receipt_is_not_a_fabricated_ed25519_signature ___________
+
+fixture = namespace(root=PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pyte...t-779/test_c0557_receipt_is_not_a_fa0/workspace/fast_smt_gate.py'>, cli=<function fixture.<locals>.cli at 0x10b4ee090>)
+
+    def test_c0557_receipt_is_not_a_fabricated_ed25519_signature(fixture):
+        m=fixture.module
+        try:
+            receipt=m.generate_scitt_receipt([('AX-DAG-1','fixture',False,'fixture failure')],1.0)
+        except ValueError:
+            return  # A new schema must reject the unsupported legacy data.
+>       assert not receipt.get('signature_ed25519')
+E       AssertionError: assert not 'sig_ed25519_cf975eb7a41a1dcc7a689b7b175362a2'
+E        +  where 'sig_ed25519_cf975eb7a41a1dcc7a689b7b175362a2' = <built-in method get of dict object at 0x10b496240>('signature_ed25519')
+E        +    where <built-in method get of dict object at 0x10b496240> = {'@context': 'https://ietf.org/scitt/v1', 'type': 'C5_REAL_SCITT_ATTESTATION_RECEIPT', 'issuer': 'did:c5real:babylon60:smt_gate', 'timestamp': 1793238679, ...}.get
+
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot7_regressions.py:72: AssertionError
+__________ test_c0557_outcome_and_detail_cannot_keep_ids_only_digest ___________
+
+fixture = namespace(root=PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pyte...t-779/test_c0557_outcome_and_detail_0/workspace/fast_smt_gate.py'>, cli=<function fixture.<locals>.cli at 0x10b514670>)
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10b544950>
+
+    def test_c0557_outcome_and_detail_cannot_keep_ids_only_digest(fixture,monkeypatch):
+        m=fixture.module
+        monkeypatch.setattr(m,'time',SimpleNamespace(time=lambda:12345))
+        before=[('AX-DAG-1','fixture',True,'before')]
+        after=[('AX-DAG-1','fixture',False,'after')]
+        try:
+            first=m.generate_scitt_receipt(before,1.0)
+            second=m.generate_scitt_receipt(after,1.0)
+        except ValueError:
+            return  # Detailed positive coverage of the new export schema follows.
+>       assert first.get('merkle_root_sha3_256')!=second.get('merkle_root_sha3_256')
+E       AssertionError: assert 'cf975eb7a41a1dcc7a689b7b175362a26db395fad00f306f4c79eb6d8a5271a1' != 'cf975eb7a41a1dcc7a689b7b175362a26db395fad00f306f4c79eb6d8a5271a1'
+E        +  where 'cf975eb7a41a1dcc7a689b7b175362a26db395fad00f306f4c79eb6d8a5271a1' = <built-in method get of dict object at 0x10b41f500>('merkle_root_sha3_256')
+E        +    where <built-in method get of dict object at 0x10b41f500> = {'@context': 'https://ietf.org/scitt/v1', 'type': 'C5_REAL_SCITT_ATTESTATION_RECEIPT', 'issuer': 'did:c5real:babylon60:smt_gate', 'timestamp': 12345, ...}.get
+E        +  and   'cf975eb7a41a1dcc7a689b7b175362a26db395fad00f306f4c79eb6d8a5271a1' = <built-in method get of dict object at 0x10b41f540>('merkle_root_sha3_256')
+E        +    where <built-in method get of dict object at 0x10b41f540> = {'@context': 'https://ietf.org/scitt/v1', 'type': 'C5_REAL_SCITT_ATTESTATION_RECEIPT', 'issuer': 'did:c5real:babylon60:smt_gate', 'timestamp': 12345, ...}.get
+
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot7_regressions.py:86: AssertionError
+_________________ test_empty_export_is_not_a_verified_receipt __________________
+
+fixture = namespace(root=PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pyte...t-779/test_empty_export_is_not_a_ver0/workspace/fast_smt_gate.py'>, cli=<function fixture.<locals>.cli at 0x10b4ee1f0>)
+
+    def test_empty_export_is_not_a_verified_receipt(fixture):
+>       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot7_regressions.py:90: Failed
+=========================== short test summary info ============================
+FAILED tests/test_swarm100_lot7_regressions.py::test_c0556_markers_do_not_authorize_quality_gate[--json]
+FAILED tests/test_swarm100_lot7_regressions.py::test_c0556_markers_do_not_authorize_quality_gate[--scitt]
+FAILED tests/test_swarm100_lot7_regressions.py::test_default_text_mode_also_rejects_missing_verification
+FAILED tests/test_swarm100_lot7_regressions.py::test_c0557_legacy_boolean_records_are_not_silently_upgraded
+FAILED tests/test_swarm100_lot7_regressions.py::test_c0557_receipt_is_not_a_fabricated_ed25519_signature
+FAILED tests/test_swarm100_lot7_regressions.py::test_c0557_outcome_and_detail_cannot_keep_ids_only_digest
+FAILED tests/test_swarm100_lot7_regressions.py::test_empty_export_is_not_a_verified_receipt
+7 failed in 0.35s

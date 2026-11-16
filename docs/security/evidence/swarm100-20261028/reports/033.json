@@ -1,0 +1,418 @@
+{
+  "shard": "033",
+  "findings": [
+    {
+      "title": "Differential comparison reads both artifacts after the Rust run",
+      "severity": "P2",
+      "path": "tests/differential/mod.rs",
+      "line": 47,
+      "evidence": "Rust .output() completes at lines 31-33 before py_ir is read at line 47; rs_ir is then read from the same artifact_bundle_v3/proof.ir at line 51. src/babylon60.rs:594 writes that path. Cargo.toml:76-77 registers this test.",
+      "trigger": "Reference interpreter exists and both commands complete successfully.",
+      "impact": "The comparison can hash the Rust-produced artifact twice and pass despite a different Python trace. Currently the missing reference/interpreter.py also causes an early successful return at lines 15-18.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Preflight suppresses compilation failure and still approves",
+      "severity": "P2",
+      "path": "scripts/preflight.sh",
+      "line": 5,
+      "evidence": "cargo check failure is consumed by || echo; the script continues to its unconditional APPROVED message and exit 0 when the following script returns success.",
+      "trigger": "cargo check exits nonzero while enforce_c5_rules.sh returns zero.",
+      "impact": "Callers receive successful environment validation for a workspace that did not compile.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Environment preflight also changes remote branch protection",
+      "severity": "P2",
+      "path": "scripts/preflight.sh",
+      "line": 7,
+      "evidence": "The environment validation calls ./scripts/enforce_c5_rules.sh, whose lines 17-37 execute gh api --method PUT on /repos/borjamoskv/BABYLON-60/branches/main/protection, with no opt-in argument.",
+      "trigger": "A user runs preflight with an authenticated gh account able to administer the repository.",
+      "impact": "A routine validation invocation can change remote review and branch-protection policy. This is a traced side effect, not evidence that it has occurred.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Auditor follows file symlinks when rewriting targets",
+      "severity": "P2",
+      "path": "scripts/c5_quality_gates/sharur_3600_audit_swarm.py",
+      "line": 101,
+      "evidence": "collect_targets accepts item.is_file() at line 60; audit_file uses stat/read_text/write_text at lines 75,83,101 without rejecting symlinks or checking target containment. run_swarm forwards collected paths with dry_run false by default.",
+      "trigger": "A matching-extension symlink inside the audited tree points to a writable outside file containing a case variant of one replacement term, and the CLI runs without --dry-run.",
+      "impact": "The advertised workspace audit can modify a file outside the selected root through the symlink.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Codex query reports success after a failed execution with partial text",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/adapters/codex/codex_driver.py",
+      "line": 160,
+      "evidence": "Failure is returned only when proc.returncode != 0 AND not full_text; every other path returns success True at line 169. _parse_codex_events does not propagate failed turn events.",
+      "trigger": "Codex emits an agent_message then exits nonzero, for example after a later tool or turn failure.",
+      "impact": "Consumers receive success True with partial output and lose the execution failure signal.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Tenant example treats a lower bound as prefix isolation",
+      "severity": "P2",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/ai-search/patterns.md",
+      "line": 24,
+      "evidence": "The Multitenancy example has only folder gte tenants/${tenantId}/ and calls it a starts-with pattern. Official Cloudflare filtering documentation defines gte as greater-than-or-equal and requires an upper bound for folder prefix matching: https://developers.cloudflare.com/ai-search/configuration/retrieval/filtering/ ; legacy format documentation also requires two range bounds: https://developers.cloudflare.com/ai-search/api/migration/autorag-filter-format/ .",
+      "trigger": "A developer adapts the multitenancy example to an API accepting its filter shape in an index shared across tenants.",
+      "impact": "A lexically later tenant folder satisfies the lone lower bound; this example is insufficient to isolate tenant retrieval. Current APIs may reject this older filter shape instead. No active deployed consumer was established.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Compiler README links resolve outside the repository root targets",
+      "severity": "P3",
+      "path": "00_ABZU_KERNEL/crates/babylon60-compiler/README.md",
+      "line": 4,
+      "evidence": "Links ../../../proof/lean/BabylonTrace.lean and ../../../CLAIMS.toml resolve to 00_ABZU_KERNEL/proof/lean/BabylonTrace.lean and 00_ABZU_KERNEL/CLAIMS.toml, rather than root proof/lean and CLAIMS.toml; the same prefix occurs on line 7.",
+      "trigger": "Reader follows proof or claims links from the compiler README.",
+      "impact": "The documented evidence links do not point to the intended root proof and claims files.",
+      "confidence": "high",
+      "kind": "docs"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".agents/skills/c5-cortex-swarm-orchestrator-project/references/modules/writing-for-agents/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          44
+        ]
+      ],
+      "expected_sha256": "a5cf38e0887299dd168a14ad4877370fdcebdbc257ba9d5535919bc70828fe04",
+      "observed_sha256": "a5cf38e0887299dd168a14ad4877370fdcebdbc257ba9d5535919bc70828fe04",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-compiler/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          70
+        ]
+      ],
+      "expected_sha256": "54c8a1a081f0d789ab0bbebd125197039bdb7dbb1fe8c39a09caade337a7d340",
+      "observed_sha256": "54c8a1a081f0d789ab0bbebd125197039bdb7dbb1fe8c39a09caade337a7d340",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/adapters/codex/codex_driver.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          300
+        ]
+      ],
+      "expected_sha256": "abd41e4dbce2610cefaf4b9f9a411ebd473a9ae86e7d0455466f4757c30a2ea1",
+      "observed_sha256": "abd41e4dbce2610cefaf4b9f9a411ebd473a9ae86e7d0455466f4757c30a2ea1",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/core/jcs.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          78
+        ]
+      ],
+      "expected_sha256": "c12c5e7d55b28f694f5ba15f48717cf3f803b28563d555f25fcb7712c042ed9f",
+      "observed_sha256": "c12c5e7d55b28f694f5ba15f48717cf3f803b28563d555f25fcb7712c042ed9f",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/memory/learning.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          232
+        ]
+      ],
+      "expected_sha256": "c5b8f9afdc69ed98850e621ed07e9e8c7bdb4744226bd1a111f463969da904cc",
+      "observed_sha256": "c5b8f9afdc69ed98850e621ed07e9e8c7bdb4744226bd1a111f463969da904cc",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/cortex/crates/babylon60-verifiable-inference/build.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          26
+        ]
+      ],
+      "expected_sha256": "307ea8443525ea893f6335c27b8d86be0bb809dbff1c740c37a20c14aa58e978",
+      "observed_sha256": "307ea8443525ea893f6335c27b8d86be0bb809dbff1c740c37a20c14aa58e978",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "crates/b60-lang/Cargo.toml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          46
+        ]
+      ],
+      "expected_sha256": "a79063dea3f221cd890a94601e0f8025e2f0757122f69b6ba11591d6e1eca95d",
+      "observed_sha256": "a79063dea3f221cd890a94601e0f8025e2f0757122f69b6ba11591d6e1eca95d",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "docs/03_guides/guide_codex_first_use.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          90
+        ]
+      ],
+      "expected_sha256": "033475740998fb17e77da6226ab2994274a1252d14c0af87f7972865573111b7",
+      "observed_sha256": "033475740998fb17e77da6226ab2994274a1252d14c0af87f7972865573111b7",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "docs/security/evidence/harness-audit-2026-10-24/commit-selection.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          87
+        ]
+      ],
+      "expected_sha256": "56e6b85be8f48e8412888180bfe5be6842018d6c564f983657bd6ac1eb48d5ae",
+      "observed_sha256": "56e6b85be8f48e8412888180bfe5be6842018d6c564f983657bd6ac1eb48d5ae",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "proof/lean/C5Affine.lean",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          23
+        ]
+      ],
+      "expected_sha256": "22d65535f432825ba16a4baa1258a25da9689b72197fbd93fb33381785add050",
+      "observed_sha256": "22d65535f432825ba16a4baa1258a25da9689b72197fbd93fb33381785add050",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/c5_demos/poc_cortex_top.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          84
+        ]
+      ],
+      "expected_sha256": "bc603cefdf6ef1efefbfeb10e640d07d5e6806ab3a5ffe06377e0bd10471fe35",
+      "observed_sha256": "bc603cefdf6ef1efefbfeb10e640d07d5e6806ab3a5ffe06377e0bd10471fe35",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/c5_quality_gates/sharur_3600_audit_swarm.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          242
+        ]
+      ],
+      "expected_sha256": "a1f47fd1a7b98c75960abd33bfc761b4a13b9b68cc0d1f8a90d97feeb591e206",
+      "observed_sha256": "a1f47fd1a7b98c75960abd33bfc761b4a13b9b68cc0d1f8a90d97feeb591e206",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/preflight.sh",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          9
+        ]
+      ],
+      "expected_sha256": "531424dfa3b7515d514d9a3fef33f4429c5a4cb3209fe0fd5f35181db4e8f2d9",
+      "observed_sha256": "531424dfa3b7515d514d9a3fef33f4429c5a4cb3209fe0fd5f35181db4e8f2d9",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/differential/mod.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          63
+        ]
+      ],
+      "expected_sha256": "707b740f2f4ff22a4e4510ef4d72e395e0aaa0ff72107789a9da3c0313cf1845",
+      "observed_sha256": "707b740f2f4ff22a4e4510ef4d72e395e0aaa0ff72107789a9da3c0313cf1845",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/test_compliance_html_injection.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          51
+        ]
+      ],
+      "expected_sha256": "553f5050625f4ee5306dce1dfadd84f0046a98e2b894ac1352de04607603d61a",
+      "observed_sha256": "553f5050625f4ee5306dce1dfadd84f0046a98e2b894ac1352de04607603d61a",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/test_signature_cortex_mcp.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          85
+        ]
+      ],
+      "expected_sha256": "490e4a7f00ef21a8680519ec01eed854c9203e07821522b8b20f05e766c83178",
+      "observed_sha256": "490e4a7f00ef21a8680519ec01eed854c9203e07821522b8b20f05e766c83178",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/ai-search/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          85
+        ]
+      ],
+      "expected_sha256": "1215875bf8a9e6317d31019a84a124aa7ba7e85bac10b92bc445d0ef7383d619",
+      "observed_sha256": "1215875bf8a9e6317d31019a84a124aa7ba7e85bac10b92bc445d0ef7383d619",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/hyperdrive/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          82
+        ]
+      ],
+      "expected_sha256": "4d0e1a0e8366975d6ac0dcfd183e8b0a925f582c35917897aace568addff09f6",
+      "observed_sha256": "4d0e1a0e8366975d6ac0dcfd183e8b0a925f582c35917897aace568addff09f6",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/spectrum/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          52
+        ]
+      ],
+      "expected_sha256": "6dfd516d6e54696accbe6bb499f4e70686061abd0afa192897b32d7fd0c3f32e",
+      "observed_sha256": "6dfd516d6e54696accbe6bb499f4e70686061abd0afa192897b32d7fd0c3f32e",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/zaraz/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          112
+        ]
+      ],
+      "expected_sha256": "6b28a3e1525d46aad707b1bf4edd2739df9f48ae880f71a705448270b42f8b9e",
+      "observed_sha256": "6b28a3e1525d46aad707b1bf4edd2739df9f48ae880f71a705448270b42f8b9e",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents/agent_01_routines.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          62
+        ]
+      ],
+      "expected_sha256": "15da58f7c39cd0917a349ca70fa7cb0babe1f8dbcdf6d7fc81a4cf02ff30320e",
+      "observed_sha256": "15da58f7c39cd0917a349ca70fa7cb0babe1f8dbcdf6d7fc81a4cf02ff30320e",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_37_site_playbooks_instacart.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "expected_sha256": "7eaca69c8010007af62a25b6f775358355e79ad481e8da49ce2a3c396f1f0385",
+      "observed_sha256": "7eaca69c8010007af62a25b6f775358355e79ad481e8da49ce2a3c396f1f0385",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-ring0-babylon-kernel/references/modules/c5-silicon-stress-suite/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          185
+        ]
+      ],
+      "expected_sha256": "85cabfd0c987ba7fdfc47551de9aab06e39709b9fb6da96cd8287b6a4e092500",
+      "observed_sha256": "85cabfd0c987ba7fdfc47551de9aab06e39709b9fb6da96cd8287b6a4e092500",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/cortex-telemetry/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "expected_sha256": "a9ce0622193e666fa9ae27d7f3ed29c0dcdb45c8006eea5f8a95176a614f4b81",
+      "observed_sha256": "a9ce0622193e666fa9ae27d7f3ed29c0dcdb45c8006eea5f8a95176a614f4b81",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/workspace/c5-audiovisual-acreativo-sota-project/references/modules/c5-anti-slop-ui/scripts/audit_ui_slop.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          172
+        ]
+      ],
+      "expected_sha256": "f5686da74c66d1879ffbfb522fb7b6111d53ff952f6cbbd228127154dbe3518f",
+      "observed_sha256": "f5686da74c66d1879ffbfb522fb7b6111d53ff952f6cbbd228127154dbe3518f",
+      "changed_since_manifest": false
+    }
+  ],
+  "tool_limitations": [
+    "No native codebase graph tool exposed in this session; used targeted text reads and rg.",
+    "No tests, builds, application runtime, protected effects, or remote mutations executed; findings are static source observations.",
+    "An initial batched read was truncated; affected files were read in subsequent bounded commands.",
+    "Reference interpreter and .github/workflows/preflight.yml were absent when targeted reads were attempted.",
+    "External Cloudflare filter semantics checked against official documentation; no deployed consumer or tenant data was accessed."
+  ],
+  "tests_run": []
+}

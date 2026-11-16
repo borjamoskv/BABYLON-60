@@ -1,0 +1,14 @@
+[
+  {
+    "candidate_id": "SW100-C0461",
+    "severity": "P1",
+    "title": "YouTube URL and output directory are interpolated into shell commands",
+    "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/youtube-analysis-pipeline/scripts/yt_audit.py",
+    "decision": "DUPLICATE",
+    "remediation_state": "OPEN",
+    "registry": "registry.json",
+    "canonical_id": "SW100-C0103",
+    "counting_unit": "SEPARATE_DUPLICATE_SURFACE",
+    "source_sha256": "ecda4dca2ee77aa986d1898aad7fbd998bc07723bf7126c1e697fbd155638d62"
+  }
+]

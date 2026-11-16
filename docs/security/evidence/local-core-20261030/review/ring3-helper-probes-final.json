@@ -1,0 +1,17 @@
+{
+  "scope": "software-only synthetic helper probes",
+  "source_sha256": "0674a0056e4b032cb64d4c60b7be957bdc32f24917b8ef2218a99fe3fcc16d2d",
+  "results": [
+    {
+      "case": "missing-operator",
+      "rejected": true,
+      "error": "Receipt operator does not match the OS user"
+    },
+    {
+      "case": "bool-int-task-mismatch",
+      "rejected": true,
+      "error": "Signed task differs from the task prepared by MCP"
+    }
+  ],
+  "hardware_attempted": false
+}

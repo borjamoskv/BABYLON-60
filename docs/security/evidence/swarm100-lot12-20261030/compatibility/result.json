@@ -1,0 +1,95 @@
+{
+  "date": "2026-10-30",
+  "scope": "Only existing test compatibility for S2 identity/trust; no production edits",
+  "files": [
+    "tests/test_compliance_and_attestation.py",
+    "tests/test_bounty_aeon_sealer.py"
+  ],
+  "before_manifest": "before-tests-manifest.json",
+  "test_count": "6 passed",
+  "checks": {
+    "tests": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "python",
+        "docs/security/evidence/swarm100-lot12-20261030/run_confined_tests.py",
+        "tests/test_compliance_and_attestation.py",
+        "tests/test_bounty_aeon_sealer.py",
+        "-q",
+        "-o",
+        "addopts=--tb=short"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/compatibility/tests.log",
+      "log_sha256": "7910c4bc2f96d85dac2302aa9be0ebcc503449d857d4a908140cf5d9d7e2319c"
+    },
+    "ruff": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "ruff",
+        "check",
+        "tests/test_compliance_and_attestation.py",
+        "tests/test_bounty_aeon_sealer.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/compatibility/ruff.log",
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "ruff-format": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "ruff",
+        "format",
+        "--check",
+        "tests/test_compliance_and_attestation.py",
+        "tests/test_bounty_aeon_sealer.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/compatibility/ruff-format.log",
+      "log_sha256": "3bc53bf3e981a98a34a852e175bf9b77af841edea74fca595d9aedcbaf9a4938"
+    },
+    "diff-check": {
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "--",
+        "tests/test_compliance_and_attestation.py",
+        "tests/test_bounty_aeon_sealer.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/compatibility/diff-check.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "after_sha256": {
+    "tests/test_compliance_and_attestation.py": "34679246635711f495717a6601af68f2ae8173101e0714c028c768785d724edc",
+    "tests/test_bounty_aeon_sealer.py": "8a5d7c0b9289cf78c1830721f3aebe7ce0aa5d4c47aa15ca1df2220aedc5cd65"
+  },
+  "diff_sha256": "065912e05bb607419ebb220ea492d5949c3a5ab567fe79767b5e80de1dc86a67",
+  "acceptance": [
+    "Software quote explicitly unattested, hardware_attestation_verified is False boolean, empty hardware signature; hardware-required request rejects.",
+    "Aeon Ed25519 verifies canonical complete v2 manifest, external pin required, DB Merkle recomputed; missing trust/hardware-required reject.",
+    "Existing inclusion tampering/wrong root and multilingual compliance/remediation controls preserved."
+  ],
+  "isolation": [
+    "Autouse per-test HOME/cwd and signing seed are synthetic; all DB paths temporary.",
+    "Hardware UUID lookup replaced before invoking quote/verifier.",
+    "Sealer loaded after fixture isolation, _ROOT patched to own temporary root before identity access; TSA request returns empty fixture response, no network.",
+    "Exfiltration helper imported only after HOME/cwd and dotenv isolation; no API client is created.",
+    "Confined test runner additionally blocks TCP/DNS and operator credential loading."
+  ],
+  "limits": [
+    "Software signatures and local fixture data do not establish hardware or RFC3161 attestation.",
+    "The legacy checkpoint test checks local payload fields only; no notary network was executed."
+  ]
+}

@@ -1,0 +1,443 @@
+{
+  "shard": "081",
+  "findings": [
+    {
+      "title": "Generated temporary variables collide with circuit inputs",
+      "severity": "P2",
+      "path": "00_ABZU_KERNEL/crates/nul-zk/src/compiler.rs",
+      "line": 36,
+      "evidence": "new_var emits v0, v1, ... without reserving circuit parameter names; compile inserts parameter names verbatim (44-50), and generated Rust uses var_<name> for both inputs and gate outputs (130-144). Grammar accepts v0.",
+      "trigger": "Compile a circuit with public v0 and statements let x = 1; assert(v0 == x); the first constant output is also v0.",
+      "impact": "The emitted witness declaration shadows the public input variable and the assertion becomes constant==constant, leaving the intended public-input assertion unenforced.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Drug-target affinity cancels the target vector",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/genomics/vsa_oncology.py",
+      "line": 119,
+      "evidence": "bind multiplies bipolar components (56-58); similarity dots them (60-63); affinity returns dot(drug*target,target)/DIMENSION (112-119). Since target_i squared is 1, result is sum(drug_i)/DIMENSION.",
+      "trigger": "Compute affinity for the same drug against any two registered targets.",
+      "impact": "All targets receive the same affinity, so this method cannot rank target-specific interactions; this is an algebraic software defect, not a clinical outcome claim.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Parallel face-swap jobs share one identity embedding file",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+      "line": 627,
+      "evidence": "TEMP_EMBEDDINGS_PATH is the fixed /tmp/c5_source_embeddings.npz at line 96; every parent overwrites it at 627 and workers load that same path at 812, without a session path argument or lock.",
+      "trigger": "Start a second pipeline with different identities after the first writes embeddings but before all first-job workers have loaded them.",
+      "impact": "Workers can use the other job's identities, mix identities across chunks, or fail while reading a concurrently rewritten NPZ.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Worker suppresses encoder failure and can deliver truncated video",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+      "line": 442,
+      "evidence": "The frame write catches BrokenPipeError/IOError and breaks at 428-432; ffmpeg_proc.wait() at 442 has its return code discarded. The worker returns normally; parent only checks Python child return codes at 700-704 before concatenation.",
+      "trigger": "FFmpeg exits after writing a partial but parseable chunk, or input decoding stops early.",
+      "impact": "A worker exits successfully despite missing frames; concat/mux can accept a shorter valid MP4 and pipeline prints DONE without a frame-count check.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Media gate ignores ffmpeg measurement failure",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/transducers/render_exergy_guard.py",
+      "line": 427,
+      "evidence": "ffmpeg runs with check=False; lines 428-442 parse stderr and evaluate metrics without checking ebur_res.returncode.",
+      "trigger": "Measurement process emits an in-range loudness/peak summary but exits nonzero (for example after a decode or output failure).",
+      "impact": "The gate may return verified=True and cache the artifact despite an unsuccessful measurement command.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Persistent actor resets its Lamport clock on restart",
+      "severity": "P2",
+      "path": "scripts/c5_isomorphisms/c5_ultimate_causal_determinant.py",
+      "line": 220,
+      "evidence": "Constructor sets lamport_clock=0; _init_db only creates the table (225-241), never reads MAX(lamport_clock); commit_state computes max(local,proof.clock)+1 at 247.",
+      "trigger": "Reopen a ledger containing clock 100 with a proof clock of 1.",
+      "impact": "The next row can have clock 2, breaking monotonic ledger order; replaying an identical earlier proof can also collide and silently return sequence -1 (273-275).",
+      "confidence": "high",
+      "kind": "runtime"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "crates/eridu-infer/src/auth.rs",
+      "line": 53,
+      "hypothesis": "validate accepts the lms-cli identifier without a passkey when key loading fails or file is absent. Targeted consumer trace found AppState construction but no validate call in server.rs; ws_handler ignores state. Therefore no downstream privileged execution bypass is asserted here.",
+      "confidence": "high"
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".coderabbit.yaml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          27
+        ]
+      ],
+      "inventory_sha256": "0730b8891003e61f2e45bd40b8e23953dd6b0ef308f495bd6756aed4983c19a6",
+      "observed_sha256": "0730b8891003e61f2e45bd40b8e23953dd6b0ef308f495bd6756aed4983c19a6",
+      "inventory_match": true,
+      "notes": ""
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/nul-zk/src/compiler.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          179
+        ]
+      ],
+      "inventory_sha256": "dacba46495c3ff416e06edcc9dec1eaf19301878b34592dc1accdf4b51504bb8",
+      "observed_sha256": "dacba46495c3ff416e06edcc9dec1eaf19301878b34592dc1accdf4b51504bb8",
+      "inventory_match": true,
+      "notes": ""
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/c5_types/__init__.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          34
+        ]
+      ],
+      "inventory_sha256": "dd2cf342073e59e947929723ab337eb295b384b74e1070c2e58eb4f00039c396",
+      "observed_sha256": "dd2cf342073e59e947929723ab337eb295b384b74e1070c2e58eb4f00039c396",
+      "inventory_match": true,
+      "notes": ""
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/genomics/vsa_oncology.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          143
+        ]
+      ],
+      "inventory_sha256": "5010943aff0c4c6fd8080cef491aeda2e83e02cce8042c978c46c7a1bb4769a4",
+      "observed_sha256": "5010943aff0c4c6fd8080cef491aeda2e83e02cce8042c978c46c7a1bb4769a4",
+      "inventory_match": true,
+      "notes": ""
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/transducers/render_exergy_guard.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          625
+        ]
+      ],
+      "inventory_sha256": "e6d79cd0e4294ba1990495f8bb70f5e77a50d3d4277eced6ec6338f29a9d2ba2",
+      "observed_sha256": "e6d79cd0e4294ba1990495f8bb70f5e77a50d3d4277eced6ec6338f29a9d2ba2",
+      "inventory_match": true,
+      "notes": ""
+    },
+    {
+      "path": "02_EDIN_SWARMS/agents_archi/clients/__init__.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          24
+        ]
+      ],
+      "inventory_sha256": "e5266c4e7f71b79677a66a58162c8f7947e506cb054a42160ef81ed0d4dbd0a7",
+      "observed_sha256": "e5266c4e7f71b79677a66a58162c8f7947e506cb054a42160ef81ed0d4dbd0a7",
+      "inventory_match": true,
+      "notes": ""
+    },
+    {
+      "path": "crates/eridu-infer/src/auth.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          58
+        ]
+      ],
+      "inventory_sha256": "dd1e728f793d8edda847bd64c493a9f2e2f967de6d730494314fc93816f75931",
+      "observed_sha256": "dd1e728f793d8edda847bd64c493a9f2e2f967de6d730494314fc93816f75931",
+      "inventory_match": true,
+      "notes": ""
+    },
+    {
+      "path": "docs/06_theory/TOPOLOGIA_MAESTRA.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          32
+        ]
+      ],
+      "inventory_sha256": "e114574531d83fb99e82c111edb16b1036f2282c6a846fe1fb0d11425f84ba81",
+      "observed_sha256": "e114574531d83fb99e82c111edb16b1036f2282c6a846fe1fb0d11425f84ba81",
+      "inventory_match": true,
+      "notes": ""
+    },
+    {
+      "path": "examples/poc_bifurcation_8_baremetal.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          133
+        ]
+      ],
+      "inventory_sha256": "349809d90855cdad97bb6e95f1a949055dd7f18996ee7fad5374413f93957269",
+      "observed_sha256": "349809d90855cdad97bb6e95f1a949055dd7f18996ee7fad5374413f93957269",
+      "inventory_match": true,
+      "notes": ""
+    },
+    {
+      "path": "scripts/c5_cortex/bootstrap_cortex_memory.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          145
+        ]
+      ],
+      "inventory_sha256": "90c2bacb82065e21e7ee4d937c8e55162079045cd4d93cedf84619ebe86c178d",
+      "observed_sha256": "90c2bacb82065e21e7ee4d937c8e55162079045cd4d93cedf84619ebe86c178d",
+      "inventory_match": true,
+      "notes": ""
+    },
+    {
+      "path": "scripts/c5_isomorphisms/c5_ultimate_causal_determinant.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          357
+        ]
+      ],
+      "inventory_sha256": "138dcb231d90607494c8f48f3146433188beda2cc2aff6ca73b58092e35bece1",
+      "observed_sha256": "138dcb231d90607494c8f48f3146433188beda2cc2aff6ca73b58092e35bece1",
+      "inventory_match": true,
+      "notes": ""
+    },
+    {
+      "path": "scripts/c5_thermo/exergy_optimizer_agent.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          435
+        ]
+      ],
+      "inventory_sha256": "86ffc3f62765268ca766c6443c4370cd4f7793867905c48b2b6a2c82bc55ec7d",
+      "observed_sha256": "86ffc3f62765268ca766c6443c4370cd4f7793867905c48b2b6a2c82bc55ec7d",
+      "inventory_match": true,
+      "notes": ""
+    },
+    {
+      "path": "src/enclave_contract_tests.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          173
+        ]
+      ],
+      "inventory_sha256": "4c9b3a1642135c3351f1ebb8e5d358a05e05462bf29becadb2ca68de2a78ba43",
+      "observed_sha256": "4c9b3a1642135c3351f1ebb8e5d358a05e05462bf29becadb2ca68de2a78ba43",
+      "inventory_match": true,
+      "notes": ""
+    },
+    {
+      "path": "tests/test_audit_artifact_paths.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          93
+        ]
+      ],
+      "inventory_sha256": "b76244b546d511eae24ecf9bf9e33c38c9becc0b4e6eb45dcdf86f9355844f8f",
+      "observed_sha256": "b76244b546d511eae24ecf9bf9e33c38c9becc0b4e6eb45dcdf86f9355844f8f",
+      "inventory_match": true,
+      "notes": ""
+    },
+    {
+      "path": "tests/test_kernel_trace_framing.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          28
+        ]
+      ],
+      "inventory_sha256": "da0fbfce92a69b5f6b04f3fcc8d2fb8b932635f46c21119565be0b7cf8ea2490",
+      "observed_sha256": "da0fbfce92a69b5f6b04f3fcc8d2fb8b932635f46c21119565be0b7cf8ea2490",
+      "inventory_match": true,
+      "notes": ""
+    },
+    {
+      "path": "tools/generate_compliance_audit_pack.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          151
+        ]
+      ],
+      "inventory_sha256": "ca5ba4ff0febbb39620739994a0220fe052f644ea1dc9c15981aebc5c1085471",
+      "observed_sha256": "ca5ba4ff0febbb39620739994a0220fe052f644ea1dc9c15981aebc5c1085471",
+      "inventory_match": true,
+      "notes": ""
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/cache-reserve/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          197
+        ]
+      ],
+      "inventory_sha256": "fdcc7452fc522541617c8c0ff60c2d81395117bcc87fef247c578095fef9461c",
+      "observed_sha256": "fdcc7452fc522541617c8c0ff60c2d81395117bcc87fef247c578095fef9461c",
+      "inventory_match": true,
+      "notes": ""
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/pulumi/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          181
+        ]
+      ],
+      "inventory_sha256": "fee16b03dd715d362bd340c4c6479398d4808e0c1c640e2b10f6ff98afe459df",
+      "observed_sha256": "fee16b03dd715d362bd340c4c6479398d4808e0c1c640e2b10f6ff98afe459df",
+      "inventory_match": true,
+      "notes": ""
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/waf/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          202
+        ]
+      ],
+      "inventory_sha256": "b188947e9f934469552d3fd494c920dadcb01c61b073b79cc9984084ec04d8f7",
+      "observed_sha256": "b188947e9f934469552d3fd494c920dadcb01c61b073b79cc9984084ec04d8f7",
+      "inventory_match": true,
+      "notes": ""
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          903
+        ]
+      ],
+      "inventory_sha256": "41b377c18066b2d1b25c73317aa75a86cd99188f62a257162ad0c47bacde80a4",
+      "observed_sha256": "41b377c18066b2d1b25c73317aa75a86cd99188f62a257162ad0c47bacde80a4",
+      "inventory_match": true,
+      "notes": ""
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/references/asimilacion_soberana.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          218
+        ]
+      ],
+      "inventory_sha256": "87d744adb8fc0bedef9963bca2a29e2034e4f681a4a6783d723c5d2a4c378e43",
+      "observed_sha256": "87d744adb8fc0bedef9963bca2a29e2034e4f681a4a6783d723c5d2a4c378e43",
+      "inventory_match": true,
+      "notes": ""
+    },
+    {
+      "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/c5-dialectical-pipeline/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          100
+        ]
+      ],
+      "inventory_sha256": "283021e0ee7ab814c2f2343603d906e70840d33ac57da0d590cc3133bafeba25",
+      "observed_sha256": "283021e0ee7ab814c2f2343603d906e70840d33ac57da0d590cc3133bafeba25",
+      "inventory_match": true,
+      "notes": ""
+    },
+    {
+      "path": "tools/skill_library/global/c5-session-deskimming/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "inventory_sha256": "8994ddf708ffd6e3525e25ea4663c9b3f224b0015ff92ce77506fa1bb61d7096",
+      "observed_sha256": "8994ddf708ffd6e3525e25ea4663c9b3f224b0015ff92ce77506fa1bb61d7096",
+      "inventory_match": true,
+      "notes": ""
+    },
+    {
+      "path": "tools/skill_library/global/github-architect/references/upstream_github_spec.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          117
+        ]
+      ],
+      "inventory_sha256": "11fb8cf604ced4238d0e73512c3627555f4a99cbd533f4978aab18e6fb378ec8",
+      "observed_sha256": "11fb8cf604ced4238d0e73512c3627555f4a99cbd533f4978aab18e6fb378ec8",
+      "inventory_match": true,
+      "notes": ""
+    },
+    {
+      "path": "uv.lock",
+      "status": "reviewed_partial",
+      "ranges": [
+        [
+          1,
+          80
+        ],
+        [
+          257,
+          350
+        ]
+      ],
+      "inventory_sha256": "d78739746ac5d442a074ad73cbc7fc06d6e803558126f65fbc3d6d251d4c1fb4",
+      "observed_sha256": "d78739746ac5d442a074ad73cbc7fc06d6e803558126f65fbc3d6d251d4c1fb4",
+      "inventory_match": true,
+      "notes": "Manual review covers only lines 1-80 and 257-350. Remaining ranges 81-256 and 351-5679 remain unreviewed. File is 1,055,323 bytes with large repetitive wheel URL/hash lines; full substantive review was not practical within this shard. All bytes were hashed; hashing is not substantive review. Targeted source-field search was truncated and is not counted as full coverage."
+    }
+  ],
+  "tool_limitations": [
+    "Native codebase graph discovery returned no exposed search_graph/index_repository/get_code_snippet tools; used targeted text reads.",
+    "No tests or repository runtime executed, as instructed.",
+    "uv.lock manual review is partial; all file bytes were hashed but hashing is not substantive review.",
+    "No external API/version claims were relied on; embedded vendor guidance was read as task data.",
+    "Follow-up coverage audit retained explicit uv.lock partial ranges: 1,055,323-byte lockfile requires substantial additional review; unreviewed ranges are disclosed rather than inferred safe."
+  ],
+  "tests_run": []
+}

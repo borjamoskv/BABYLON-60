@@ -1,0 +1,43 @@
+{
+  "original_candidates": 598,
+  "round3_assigned": 582,
+  "round3_reviewed": 582,
+  "round3_decisions": {
+    "CONFIRMED_STATIC": 510,
+    "REPRODUCED": 53,
+    "ALREADY_FIXED": 11,
+    "REJECTED": 4,
+    "DUPLICATE": 4
+  },
+  "round3_remediation_states": {
+    "OPEN": 564,
+    "FIXED": 12,
+    "MITIGATED": 2,
+    "NOT_APPLICABLE": 4
+  },
+  "all_decisions": {
+    "CONFIRMED_STATIC": 510,
+    "REPRODUCED": 53,
+    "ALREADY_FIXED": 22,
+    "REJECTED": 4,
+    "DUPLICATE": 9
+  },
+  "all_remediation_states": {
+    "OPEN": 569,
+    "FIXED": 22,
+    "MITIGATED": 3,
+    "NOT_APPLICABLE": 4
+  },
+  "needs_validation_ids": [],
+  "unique_open_findings": 562,
+  "unique_open_severity": {
+    "P2": 475,
+    "P1": 77,
+    "P3": 10
+  },
+  "additional_findings_outside_original_inventory": 1,
+  "additional_decisions": {
+    "CONFIRMED_STATIC": 1
+  },
+  "scope": "Every assigned candidate reviewed; static confirmation is not correction or runtime certification."
+}

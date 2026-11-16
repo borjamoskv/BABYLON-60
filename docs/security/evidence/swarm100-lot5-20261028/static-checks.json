@@ -1,0 +1,32 @@
+[
+  {
+    "name": "ruff",
+    "command": [
+      "uv",
+      "run",
+      "--locked",
+      "--no-sync",
+      "ruff",
+      "check",
+      "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+      "tests/test_swarm100_lot5_regressions.py",
+      "docs/security/evidence/swarm100-lot5-20261028/reconcile_lot5.py",
+      "docs/security/evidence/swarm100-lot5-20261028/independent-adversarial.py"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "mypy",
+    "command": [
+      "uv",
+      "run",
+      "--locked",
+      "--no-sync",
+      "mypy",
+      "--follow-imports=silent",
+      "--check-untyped-defs",
+      "01_KISH_ENGINE/babylon60/bft/ledger_actor.py"
+    ],
+    "exit_code": 0
+  }
+]

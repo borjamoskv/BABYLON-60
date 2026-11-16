@@ -1,0 +1,14 @@
+{
+  "auditor_reports": 100,
+  "expected_reports": 100,
+  "assigned_paths": 2483,
+  "coverage_status_counts": {
+    "reviewed_full": 2459,
+    "partial": 5,
+    "reviewed_partial": 10,
+    "metadata_only": 9
+  },
+  "source_hash_changes": [],
+  "links_json_validation": "PASS",
+  "candidate_references": "PASS"
+}

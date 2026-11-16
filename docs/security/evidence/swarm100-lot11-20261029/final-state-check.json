@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "original_ids": 598,
+  "round3_ids": 582,
+  "unique_open": 533,
+  "unique_open_severity": {
+    "P2": 469,
+    "P3": 10,
+    "P1": 54
+  },
+  "fixed_in_lot": [
+    "SW100-C0167",
+    "SW100-C0168",
+    "SW100-C0169"
+  ],
+  "unrelated_root_adjudications_unchanged": true,
+  "lot12_not_applied": true,
+  "local_links_checked": {
+    "PLAN_SWARM100_LOTE11_2026-10-29.md": 2,
+    "PLAN_SWARM100_LOTE12_2026-10-29.md": 1,
+    "REMEDIATION_SWARM100_LOTE11_2026-10-29.md": 7,
+    "AUDIT_SWARM100_ROUND3_2026-10-28.md": 36
+  },
+  "limits": "Static reconciliation and local link/hash checks, not certification of runtime or multi-file atomicity, noncooperating writers or physical power-cut durability."
+}

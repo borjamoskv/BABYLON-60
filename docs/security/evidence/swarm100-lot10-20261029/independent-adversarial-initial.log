@@ -1,0 +1,69 @@
+{
+  "reviewer": "03",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "active_old_git_locks_and_mutual_exclusion_preserved",
+      "passed": true,
+      "locks": 2
+    },
+    {
+      "name": "live_sqlite_wal_shm_preserved_in_scratch_and_misnamed_cache",
+      "passed": true,
+      "cases": 2
+    },
+    {
+      "name": "only_recognized_current_bytecode_deleted_precise_report",
+      "passed": true,
+      "deleted": 3,
+      "preserved_fixtures": 10
+    },
+    {
+      "name": "symlinks_fifo_hardlinks_and_external_target_preserved",
+      "passed": true
+    },
+    {
+      "name": "foreign_owner_candidate_preserved",
+      "passed": true
+    },
+    {
+      "name": "git_file_and_alternate_named_metadata_subtrees_preserved",
+      "passed": true,
+      "cases": 2
+    },
+    {
+      "name": "unlink_failure_reported_without_false_deletion_and_cli_nonzero",
+      "passed": true
+    },
+    {
+      "name": "replacement_before_open_preserved_by_identity_check",
+      "passed": true
+    },
+    {
+      "name": "content_change_after_read_preserved_before_unlink",
+      "passed": true
+    },
+    {
+      "name": "scan_budgets_stop_with_explicit_errors",
+      "passed": true,
+      "cases": 2
+    },
+    {
+      "name": "missing_and_symlink_roots_fail_closed",
+      "passed": true,
+      "cases": 2
+    }
+  ],
+  "check_count": 11,
+  "fixtures": 14,
+  "forbidden_calls": [],
+  "source_sha256_before": {
+    "scripts/c5_verifiers/purge_residuals.py": "cd2e547cfac8adf1b0ce6358da3fe20cebc3c45a4bfa0fc339828dcd2a819f7c",
+    "tests/test_swarm100_lot10_regressions.py": "256c4d044f9d0402589985adb4e728ff5b43194cc427a0139cb76233c420131a"
+  },
+  "source_sha256_after": {
+    "scripts/c5_verifiers/purge_residuals.py": "cd2e547cfac8adf1b0ce6358da3fe20cebc3c45a4bfa0fc339828dcd2a819f7c",
+    "tests/test_swarm100_lot10_regressions.py": "256c4d044f9d0402589985adb4e728ff5b43194cc427a0139cb76233c420131a"
+  },
+  "scope": "Only owned temporary roots; open Git locks and live SQLite fixtures; no actual-project purge, operator databases, network, hardware or automatic verifier execution."
+}

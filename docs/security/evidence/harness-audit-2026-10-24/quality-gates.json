@@ -1,0 +1,14 @@
+[
+  {
+    "command": "python3 scripts/c5_quality_gates/audit_token_budget.py",
+    "exit_code": 0,
+    "stdout": "=== [C5-REAL] AUDITORÍA DE PRESUPUESTO DE TOKENS ===\n■ AGENTS.md (workspace): 4,808 B (~1,202 tok)\n■ Reglas always_on (Global: 3, Workspace: 0): 18,290 B (~4,572 tok)\n■ TOTAL PREFILL ALWAYS_ON: 23,098 B / 40,000 B (~5,774 tok)\n■ Reglas condicionales (model_decision): 28 global + 7 workspace (0 tokens de prefill fijo; solo descripción)\n■ Ghost Listeners (conversation_summaries.db): RUNNING=0, not_fully_idle=0\nPASS: Token budget within inline ceiling and zero duplicate always_on rules.\n",
+    "stderr": ""
+  },
+  {
+    "command": "python3 scripts/guards/verify_active_topology.py",
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.babylon60rules: Expected exactly one signature field: LLM\n/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.babylon60rules: Expected exactly one signature field: MODO COGNITIVO\n/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.babylon60rules: Expected exactly one signature field: TOPOLOGÍA ACTIVA\n/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.babylon60rules: Expected exactly one signature field: RÉGIMEN TÉRMICO\n/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.babylon60rules: Expected exactly one signature field: EXERGÍA INFORMATIVA\n/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.babylon60rules: Expected exactly one signature field: MUTACIÓN CAUSAL\n/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.babylon60rules: Expected exactly one literal topology line: [ TOPOLOGÍA ACTIVA ]: MOSKV-1\n/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/AGENTS.md: Expected exactly one signature field: LLM\n/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/AGENTS.md: Expected exactly one signature field: MODO COGNITIVO\n/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/AGENTS.md: Expected exactly one signature field: TOPOLOGÍA ACTIVA\n/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/AGENTS.md: Expected exactly one signature field: RÉGIMEN TÉRMICO\n/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/AGENTS.md: Expected exactly one signature field: EXERGÍA INFORMATIVA\n/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/AGENTS.md: Expected exactly one signature field: MUTACIÓN CAUSAL\n/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/AGENTS.md: Expected exactly one literal topology line: [ TOPOLOGÍA ACTIVA ]: MOSKV-1\n"
+  }
+]

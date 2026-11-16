@@ -1,0 +1,52 @@
+{
+  "audit_date": "2026-10-24",
+  "timezone": "Europe/Madrid",
+  "scope": "Follow-up repair and validation; public mirror verification is unchanged",
+  "controls": [
+    {
+      "command": "python3 scripts/guards/verify_active_topology.py",
+      "chunk_id": "f2fdab",
+      "wall_time_seconds": 0.000007667,
+      "exit_code": 0,
+      "original_token_count": 24,
+      "output": "PASS: instruction files, required direct symlinks and MCP registration references (worktree)\n"
+    },
+    {
+      "command": "python3 scripts/c5_quality_gates/audit_token_budget.py --workspace-only --skip-ghost-listeners",
+      "chunk_id": "2fd0a1",
+      "wall_time_seconds": 0.000006625,
+      "exit_code": 0,
+      "original_token_count": 189,
+      "output": "=== [C5-REAL] AUDITORÍA DE PRESUPUESTO DE TOKENS ===\n■ .babylon60rules (workspace, counted once): 5,082 B (~1,270 estimated tokens)\n■ AGENTS.md (workspace, counted once): 4,808 B (~1,202 estimated tokens)\n■ Global rules: NOT_CHECKED (workspace-only)\n■ Reglas always_on (Global: 0, Workspace: 0): 0 B (~0 estimated tokens)\n■ INSPECTED ALWAYS_ON: 9,890 B / 40,000 B (~2,472 estimated tokens; actual client context not measured)\n■ Reglas condicionales (model_decision): 0 global + 7 workspace (bodies excluded from this budget; client loading not measured)\n■ Ghost Listeners (conversation_summaries.db): NOT_CHECKED (explicitly skipped)\nPASS: Workspace token budget within inline ceiling; global rules and cross-scope duplicates not checked.\n"
+    },
+    {
+      "command": "python3 scripts/c5_quality_gates/audit_semantic_contracts.py --workspace-only",
+      "chunk_id": "1d32ce",
+      "wall_time_seconds": 0.069298542,
+      "exit_code": 0,
+      "original_token_count": 40,
+      "output": "PASS: known semantic patterns (62 documents, 41 Python files), local links/anchors in 15 governance documents; not a proof of semantic consistency or runtime.\n"
+    },
+    {
+      "command": "python3 scripts/guards/verify_active_topology.py --self-test",
+      "chunk_id": "187ff2",
+      "wall_time_seconds": 0.083812708,
+      "exit_code": 0,
+      "original_token_count": 13,
+      "output": "PASS: 6400 signature acceptance/rejection checks\n"
+    }
+  ],
+  "regression_tests": {
+    "command": "uv run --locked pytest tests/test_instruction_gate_regressions.py tests/test_semantic_contracts_gate.py tests/test_visual_signature_guard.py tests/test_c5_signature_engine.py tests/test_signature_panel_render.py -q",
+    "exit_code": 0,
+    "output_summary": "168 passed, 103 subtests passed in 6.85s",
+    "new_regression_cases": 10
+  },
+  "lint": {
+    "command": "uv run --locked ruff check scripts/guards/verify_active_topology.py scripts/c5_quality_gates/audit_token_budget.py tests/test_instruction_gate_regressions.py",
+    "exit_code": 0,
+    "output": "All checks passed!"
+  },
+  "preservation": "Concurrent topology and workspace-budget implementations were retained; this follow-up added independent CLI regressions and a scoped budget success message. No rules, lockfiles, Git index, or unrelated code were intentionally modified.",
+  "staged_scope": "Tested against a disposable Git repository only. The operator's index was not staged or modified."
+}

@@ -1,0 +1,67 @@
+Uninstalled 1 package in 5ms
+Installed 1 package in 5ms
+FFFFFFFFFF                                                               [100%]
+=================================== FAILURES ===================================
+_ test_unrelated_conclusion_is_rejected[obligations0-All fixture triangles have five sides.] _
+tests/test_autodidact_derivation_regressions.py:31: in test_unrelated_conclusion_is_rejected
+    with pytest.raises(ValueError, match="UNPROVEN_DERIVATION"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+_ test_unrelated_conclusion_is_rejected[obligations0-An unrelated assertion is true.] _
+tests/test_autodidact_derivation_regressions.py:31: in test_unrelated_conclusion_is_rejected
+    with pytest.raises(ValueError, match="UNPROVEN_DERIVATION"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+_ test_unrelated_conclusion_is_rejected[obligations1-All fixture triangles have five sides.] _
+tests/test_autodidact_derivation_regressions.py:31: in test_unrelated_conclusion_is_rejected
+    with pytest.raises(ValueError, match="UNPROVEN_DERIVATION"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+_ test_unrelated_conclusion_is_rejected[obligations1-An unrelated assertion is true.] _
+tests/test_autodidact_derivation_regressions.py:31: in test_unrelated_conclusion_is_rejected
+    with pytest.raises(ValueError, match="UNPROVEN_DERIVATION"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+_______________ test_engine_rejection_leaves_registry_unchanged ________________
+tests/test_autodidact_derivation_regressions.py:39: in test_engine_rejection_leaves_registry_unchanged
+    with pytest.raises(ValueError, match="UNPROVEN_DERIVATION"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+_______________ test_identity_preserves_evidence_and_confidence ________________
+tests/test_autodidact_derivation_regressions.py:47: in test_identity_preserves_evidence_and_confidence
+    assert result.justification.kind == "Observation"
+E   AssertionError: assert 'FormalProof' == 'Observation'
+E     
+E     - Observation
+E     + FormalProof
+____________________ test_identity_does_not_add_obligations ____________________
+tests/test_autodidact_derivation_regressions.py:58: in test_identity_does_not_add_obligations
+    with pytest.raises(ValueError, match="UNPROVEN_DERIVATION"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+_____________________ test_stale_premise_hash_is_rejected ______________________
+tests/test_autodidact_derivation_regressions.py:66: in test_stale_premise_hash_is_rejected
+    with pytest.raises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+________________ test_identity_does_not_create_self_dependency _________________
+tests/test_autodidact_derivation_regressions.py:74: in test_identity_does_not_create_self_dependency
+    assert result is p
+E   AssertionError: assert JustifiedStatement(statement=Statement(content='fixture', modality=<Modality.EPISTEMIC: 'epistemic'>, obligations=[<Ob...Status.CANONICAL: 'canonical'>, dependencies=['STMT:1664cdd1c2b917d459cb929ef82a0faa0e1a286001d09cd79779999db9289cea']) is JustifiedStatement(statement=Statement(content='fixture', modality=<Modality.EPISTEMIC: 'epistemic'>, obligations=[<Ob...79999db9289cea', created_at_ns=1793201351639921000, status=<StatementStatus.STABILIZED: 'stabilized'>, dependencies=[])
+_ test_falsified_premise_is_rejected_without_explicit_contradiction_obligation _
+tests/test_autodidact_derivation_regressions.py:82: in test_falsified_premise_is_rejected_without_explicit_contradiction_obligation
+    with pytest.raises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+=========================== short test summary info ============================
+FAILED tests/test_autodidact_derivation_regressions.py::test_unrelated_conclusion_is_rejected[obligations0-All fixture triangles have five sides.]
+FAILED tests/test_autodidact_derivation_regressions.py::test_unrelated_conclusion_is_rejected[obligations0-An unrelated assertion is true.]
+FAILED tests/test_autodidact_derivation_regressions.py::test_unrelated_conclusion_is_rejected[obligations1-All fixture triangles have five sides.]
+FAILED tests/test_autodidact_derivation_regressions.py::test_unrelated_conclusion_is_rejected[obligations1-An unrelated assertion is true.]
+FAILED tests/test_autodidact_derivation_regressions.py::test_engine_rejection_leaves_registry_unchanged
+FAILED tests/test_autodidact_derivation_regressions.py::test_identity_preserves_evidence_and_confidence
+FAILED tests/test_autodidact_derivation_regressions.py::test_identity_does_not_add_obligations
+FAILED tests/test_autodidact_derivation_regressions.py::test_stale_premise_hash_is_rejected
+FAILED tests/test_autodidact_derivation_regressions.py::test_identity_does_not_create_self_dependency
+FAILED tests/test_autodidact_derivation_regressions.py::test_falsified_premise_is_rejected_without_explicit_contradiction_obligation
+10 failed in 0.48s

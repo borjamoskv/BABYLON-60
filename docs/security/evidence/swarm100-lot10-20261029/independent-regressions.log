@@ -1,0 +1,16 @@
+{
+  "source_sha256_before": {
+    "scripts/c5_verifiers/purge_residuals.py": "cd2e547cfac8adf1b0ce6358da3fe20cebc3c45a4bfa0fc339828dcd2a819f7c",
+    "tests/test_swarm100_lot10_regressions.py": "256c4d044f9d0402589985adb4e728ff5b43194cc427a0139cb76233c420131a"
+  }
+}
+............................................................             [100%]
+60 passed in 6.90s
+
+{
+  "source_sha256_after": {
+    "scripts/c5_verifiers/purge_residuals.py": "cd2e547cfac8adf1b0ce6358da3fe20cebc3c45a4bfa0fc339828dcd2a819f7c",
+    "tests/test_swarm100_lot10_regressions.py": "256c4d044f9d0402589985adb4e728ff5b43194cc427a0139cb76233c420131a"
+  },
+  "exit_code": 0
+}

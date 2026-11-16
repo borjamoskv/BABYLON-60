@@ -1,0 +1,28 @@
+{
+  "candidate_manifest_sha256": "302b25aba7c7ced7abf7cd406c0808b8e2aba9f8c09ced52ea0e9d9c66a722e9",
+  "candidate_artifacts": 19,
+  "candidate_release_origin": {
+    "RELEASE_MANIFEST.json": {
+      "source_repository": "https://github.com/borjamoskv/BABYLON-60",
+      "source_head": "1fb053dcf6d1d8d40080d4fc37821f93dd648ddc",
+      "working_tree_dirty": true,
+      "sha256": "e0d5f43ea76bba9c0c5861f1f9acec77206bd159bd1f1cb586431496e7786fd9",
+      "scope": "Unsigned manifest for the already recorded historical claim run; not a new runtime execution or current-tree attestation. Original manifest preserved in reports/historical-release-manifest.json."
+    }
+  },
+  "website_download": {
+    "repository_url": "https://github.com/borjamoskv/babylon60-verification",
+    "source_commit": "eb20966c61cb6214c3d80392bb8d504045d7f7c5",
+    "manifest_sha256": "2840cf6c8bc1dc722480d67a69faa0bb779382c9fdf1be76b785dde77eb8229c",
+    "archive_sha256": "9ec62604216199c03aa7b7c07ed2a8f8c2568139158dfa1d5d73bd1d43496ba3",
+    "file_count": 17
+  },
+  "files": {
+    "/Users/borjafernandezangulo/10_PROJECTS/babylon60-verification/verify.py": "098a7fb445900aabb64634cac1149ca4baa66a3c459800e4cdfb8147016a4030",
+    "/Users/borjafernandezangulo/10_PROJECTS/babylon60-verification/tests/test_mirror_bindings.py": "eb5aac135cc076bfae6aa8992b152e2753538b77979b3d4d4026d93358a89854",
+    "/Users/borjafernandezangulo/10_PROJECTS/babylon60.com/public/_headers": "218a76fd8b5bff173d1a898afe7a61a7985efeaee45cd4d9946fab136ac3846c",
+    "/Users/borjafernandezangulo/10_PROJECTS/babylon60.com/src/components/LeanProofInspector.astro": "860af651474cfbf49fac84974541100b206fc528c71e84ef2f2312630df57671",
+    "/Users/borjafernandezangulo/10_PROJECTS/babylon60.com/src/pages/en/enterprise.astro": "10e14cb7e74db87c176d7b83bc1bea1efaa0e4899bcd529c5319409e99dddaa7"
+  },
+  "publication": "No commit, push or deployment performed by this task."
+}

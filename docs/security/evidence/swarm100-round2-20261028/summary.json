@@ -1,0 +1,19 @@
+{
+  "scope": "Continuation of100-agent audit; four existing coordinators, root replay; no new swarm",
+  "families_reproduced": 11,
+  "fixture_scenarios_reproduced": 13,
+  "duplicate_pairs_confirmed": 5,
+  "original_candidates": 598,
+  "remaining_records_without_round2_final_status": 582,
+  "unmerged_provisional_groups_after_these5_duplicate_pairs": 593,
+  "important_limit": "Provisional groups may contain further duplicates; remaining records are not all confirmed issues. V07 downgraded P1 to P2 for demonstrated model-only scope.",
+  "existing_tests": {
+    "passed": 59,
+    "command": "uv run --locked pytest tests/test_standalone_verifier.py tests/test_memory_governance_falsification.py tests/test_compliance_exporter.py -q -o addopts=--tb=short",
+    "evidence": "existing-tests.log"
+  },
+  "source_edits": false,
+  "production_state_used": false,
+  "graph_tools": "unavailable; targeted source fallback",
+  "original_round_evidence_modified": false
+}

@@ -1,0 +1,76 @@
+{
+  "rust-check": {
+    "command": [
+      "cargo",
+      "check",
+      "-q",
+      "--locked",
+      "-p",
+      "babylon-skills-mcp",
+      "-p",
+      "babylon60-kernel",
+      "-p",
+      "babylon60-compiler"
+    ],
+    "exit_code": 0,
+    "seconds": 2.60509558301419
+  },
+  "confinement": {
+    "command": [
+      "cargo",
+      "test",
+      "-q",
+      "--locked",
+      "-p",
+      "babylon-skills-mcp"
+    ],
+    "exit_code": 101,
+    "seconds": 4.5890263330657035
+  },
+  "entropy-lib": {
+    "command": [
+      "cargo",
+      "test",
+      "-q",
+      "--locked",
+      "-p",
+      "babylon60-kernel",
+      "--lib",
+      "semantic_entropy::tests"
+    ],
+    "exit_code": 0,
+    "seconds": 5.013028166955337
+  },
+  "entropy-regressions": {
+    "command": [
+      "cargo",
+      "test",
+      "-q",
+      "--locked",
+      "-p",
+      "babylon60-kernel",
+      "--test",
+      "semantic_entropy_regressions",
+      "--test",
+      "semantic_solver_outcomes"
+    ],
+    "exit_code": 0,
+    "seconds": 1.2956442499998957
+  },
+  "solver-adapter": {
+    "command": [
+      "cargo",
+      "test",
+      "-q",
+      "--locked",
+      "-p",
+      "babylon60-compiler",
+      "--test",
+      "semantic_solver_adapter",
+      "--test",
+      "solver_trust"
+    ],
+    "exit_code": 101,
+    "seconds": 6.837180875008926
+  }
+}

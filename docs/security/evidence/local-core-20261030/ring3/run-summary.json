@@ -1,0 +1,18 @@
+{
+  "revision": "e224322754b7a8213186d7642c3667aaf0aaa878",
+  "branch": "codex/local-core-ring3",
+  "worktree": "/Users/borjafernandezangulo/.codex/worktrees/local-core-ring3/BABYLON-60",
+  "status": "",
+  "artifact_blake3": {
+    "c5_biometric_gate": "c6d6020b36484e86f615ca75a435138658e68dbf067a5816ecee45c4b017a8b1",
+    "libbabylon60.dylib": "e8c49acaf8a4368bed4515c0f371736775ecc53abd718ad4fb1f134e373d8364"
+  },
+  "native_software_tests": "72 passed, 1 deselected",
+  "deselected": "test_rust_babylon_skills_mcp_stdio_interop invokes Cargo (R0 ownership)",
+  "ruff": "PASS",
+  "mypy": "PASS (2 source files)",
+  "topology_staged": "PASS before commit and commit hook",
+  "hardware": "NOT_RUN",
+  "onboarding": "BASE_FAILURE: session_profile.md has 2432 bytes; loader maximum 2000. Integrator owns remediation.",
+  "scope": "Manual hardware acceptance only; no product API changes."
+}

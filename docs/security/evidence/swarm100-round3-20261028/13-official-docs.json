@@ -1,0 +1,31 @@
+{
+  "reviewer": "13",
+  "checked_at": "2026-10-28",
+  "sources": [
+    {
+      "url": "https://docs.rs/tokio/latest/tokio/sync/mpsc/struct.Receiver.html",
+      "method": "Context7 native resolve_library_id then query_docs",
+      "observation": "After senders drop and buffered messages drain, recv returns None; a caller must treat that as termination. This supports the missing None branch analysis, not a measured CPU-load claim.",
+      "candidates": [
+        "SW100-C0572"
+      ]
+    },
+    {
+      "url": "https://developers.cloudflare.com/sandbox/sdk/api/commands/",
+      "method": "Context7 and direct official web read",
+      "observation": "The retained Sandbox SDK 0.x documentation accepts a command string; related execution docs show shell pipes and command chaining. The local reference uses 0.7.0 container examples.",
+      "candidates": [
+        "SW100-C0112"
+      ]
+    },
+    {
+      "url": "https://developers.cloudflare.com/sandbox/sdk/migrate/changes-in-1-0/",
+      "method": "Context7 and direct official web read",
+      "observation": "Sandbox SDK 1.0 uses an argument array without an implicit shell. The injection finding is limited to the local legacy string-command example, not claimed for 1.0 argument-array calls.",
+      "candidates": [
+        "SW100-C0112"
+      ]
+    }
+  ]
+}
+

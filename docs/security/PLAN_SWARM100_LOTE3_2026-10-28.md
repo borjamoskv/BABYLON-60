@@ -2,7 +2,7 @@
 
 Estado: ejecutado localmente. Véase el
 [informe de corrección](REMEDIATION_SWARM100_LOTE3_2026-10-28.md). Los
-[hashes de selección](evidence/swarm100-lot2-20261028/lot3-selection.json)
+[hashes de selección](RETENTION.md)
 fijaron el estado previo. Se agruparon dos P1 originales y el P1 adicional de
 referencia mutable, inicialmente CONFIRMED_STATIC/OPEN. Los tres tienen
 reproducción confinada y corrección ejecutable.

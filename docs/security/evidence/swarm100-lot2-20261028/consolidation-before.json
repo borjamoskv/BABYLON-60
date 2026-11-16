@@ -1,0 +1,24 @@
+{
+  "candidate_id": "SW100-C0460",
+  "scope": "Original helper, real SQLite and synthetic rows in a temporary directory",
+  "before": [
+    [
+      "one",
+      1,
+      "alpha"
+    ],
+    [
+      "two",
+      2,
+      "beta"
+    ],
+    [
+      "three",
+      3,
+      "gamma"
+    ]
+  ],
+  "after": [],
+  "replacement_persisted": false,
+  "observed_loss": 3
+}

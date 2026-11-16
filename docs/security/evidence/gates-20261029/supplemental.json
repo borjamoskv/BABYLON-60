@@ -1,0 +1,34 @@
+{
+  "results": [
+    {
+      "name": "capability-guard-probe",
+      "argv": [
+        ".venv/bin/python",
+        "docs/security/evidence/gates-20261029/probe_capability_guard.py"
+      ],
+      "exit_code": 0,
+      "log": "capability-guard-probe.log"
+    },
+    {
+      "name": "sandbox-denial-tests",
+      "argv": [
+        "uv",
+        "run",
+        "--locked",
+        "pytest",
+        "tests/test_audit_mcp_confinement.py",
+        "-q"
+      ],
+      "exit_code": 0,
+      "log": "sandbox-denial-tests.log"
+    }
+  ],
+  "source_sha256": {
+    "01_KISH_ENGINE/babylon60/guards/capability_guard.py": "a98c659b79bfd805db90c03bd67c1ec530c7c39573dd2615a223917f1654e261",
+    "01_KISH_ENGINE/babylon60/guards/capabilities.py": "633edc9551bdd3183409a8e5ce70e32cf15de31f017762f59547fec6d80d68d9",
+    "01_KISH_ENGINE/babylon60/kernel/mcp_sandbox_validator.py": "6696488a56d185d2b03380e7a93213cefe0a8cb3233dbe1fd8323b87867c395c",
+    "tests/test_audit_mcp_confinement.py": "e79439e5c79f76a80789397df0ce5c359ea2fb7aa15433e0deecc95d678ed5aa",
+    "docs/security/evidence/gates-20261029/probe_capability_guard.py": "eca090526e9ed8a85baff0e5108ec14fad0111baa1e5b01c765c9633fb47f115"
+  },
+  "limits": "Sandbox tests exercise rejection branches with launch spies; no live OS confinement claim."
+}

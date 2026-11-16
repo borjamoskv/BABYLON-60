@@ -1,0 +1,368 @@
+{
+  "shard": "083",
+  "findings": [
+    {
+      "title": "Array display truncation corrupts the GGUF parse cursor",
+      "severity": "P1",
+      "path": "crates/eridu-infer/src/gguf.rs",
+      "line": 233,
+      "evidence": "The ARRAY branch consumes count.min(10) values then returns that cursor, without skipping remaining elements.",
+      "trigger": "Load a valid GGUF metadata array containing more than ten elements, such as tokenizer vocabulary.",
+      "impact": "The next metadata key or tensor descriptor is read from inside the array; ordinary models fail to load or receive incorrect descriptors.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Truncated GGUF metadata panics instead of returning an error",
+      "severity": "P1",
+      "path": "crates/eridu-infer/src/gguf.rs",
+      "line": 176,
+      "evidence": "parse_metadata_value directly indexes mmap[cursor] and slices cursor..cursor+N; caller checks the type tag but not its payload.",
+      "trigger": "A file ends immediately after a UINT8 metadata type tag, or contains a truncated string/scalar payload.",
+      "impact": "Untrusted model input can panic the inference process rather than produce load_mmap Err.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Consolidation discards divergent same-name master ledgers",
+      "severity": "P1",
+      "path": "scripts/c5_cortex/consolidate_dbs.py",
+      "line": 70,
+      "evidence": "_process_master_db returns True when destination already exists (lines 33-35); caller then unconditionally calls _purge_db_file.",
+      "trigger": "A master ledger exists in ~/.babylon60/dbs and the repository contains a different ledger with the same basename.",
+      "impact": "Source ledger and sidecars are deleted without comparing, merging, or preserving its records.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Copying only SQLite main file loses WAL commits",
+      "severity": "P1",
+      "path": "scripts/c5_cortex/consolidate_dbs.py",
+      "line": 32,
+      "evidence": "shutil.copy2 copies only db_path; _purge_db_file unlinks its -wal and -shm at lines 41-42.",
+      "trigger": "Consolidate a WAL-mode master ledger with committed pages still in its WAL.",
+      "impact": "Central copy omits committed transactions, then the source WAL carrying them is removed.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Concurrent rate limiter callers reserve the same future slot",
+      "severity": "P2",
+      "path": "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+      "line": 292,
+      "evidence": "_refill resets _last_refill=now even when it was a future reservation; every deficit caller then sets tokens=0 and last_refill=clock()+wait_s.",
+      "trigger": "Several threads acquire while the bucket is empty before the first waiting caller wakes.",
+      "impact": "They all receive approximately the same wait and dispatch together, violating the intended rate bound and increasing upstream throttling.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Sensitive routing omits the explicit target from its free-model veto",
+      "severity": "P1",
+      "path": "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+      "line": 770,
+      "evidence": "candidate_list uses payload.models whenever present; build_chat_payload chooses explicit model as payload.model independently (lines 649-650); sensitive context does not imply enforce_floor at line 732.",
+      "trigger": "query receives sensitive context_paths, an explicit :free model, and a paid-only models list.",
+      "impact": "The pre-dispatch sensitive guard approves a payload retaining the free target. Postflight rejection happens after the prompt has already been transmitted; this defeats the local confidentiality check regardless of gateway routing outcome.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Receipt interpolation fails to escape JSON control characters",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift",
+      "line": 386,
+      "evidence": "prompt/action/scope/agent only replace double quotes before interpolation into jsonResponse; backslashes and newlines are not JSON encoded.",
+      "trigger": "An authorized invocation includes a multiline prompt or a path containing backslashes.",
+      "impact": "Successful biometric signing emits malformed or altered JSON fields, causing receipt consumers to reject or misinterpret the result.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Generator computes scripts directory as its output root",
+      "severity": "P2",
+      "path": "scripts/c5_isomorphisms/gen_oncology_primitives.py",
+      "line": 292,
+      "evidence": "dirname(dirname(__file__)) from scripts/c5_isomorphisms resolves to scripts; output paths append cortex, babylon60 and docs.",
+      "trigger": "Run this generator from its current repository location.",
+      "impact": "It writes scripts/cortex, scripts/babylon60 and scripts/docs instead of updating canonical repository outputs.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "History sanitizer certifies all history after sampling only 100 commits",
+      "severity": "P2",
+      "path": "tools/skill_library/global/github-architect/scripts/git_history_sanitizer.py",
+      "line": 78,
+      "evidence": "Content scanning uses git log -n 100 without --all, while line 110 certifies all commits in history.",
+      "trigger": "A secret in a normal source filename exists only in an older commit or another branch outside the sampled log.",
+      "impact": "audit_git_history can return clean and the CLI certifies zero leakage despite unscanned reachable content; filename and size checks do not detect those secrets.",
+      "confidence": "high",
+      "kind": "runtime"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".codexrules",
+      "status": "metadata_only",
+      "ranges": [],
+      "inventory_hash": "not_applicable",
+      "symlink_target": ".babylon60rules"
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/nul-zk/src/nul_grammar.pest",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/cli/__init__.py",
+      "status": "reviewed_full",
+      "ranges": [],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          423
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/transducers/turboquant.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          144
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          957
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "crates/eridu-infer/src/gguf.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          257
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "docs/06_theory/axiom_bayesian_disintegration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          47
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "examples/poc_epistemic_lease.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          223
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "scripts/c5_cortex/consolidate_dbs.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          82
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "scripts/c5_isomorphisms/gen_oncology_primitives.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          314
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "scripts/c5_thermo/stress_100m_bft.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          146
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "src/executor_ipc.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          581
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "tests/test_audit_cold_ledger_regressions.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          146
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "tests/test_lead_data_boundaries.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          205
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "tools/ignite_sovereign.sh",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          170
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/containers/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          187
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/queues/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          96
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/waf/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          204
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-poster-and-sign-craft/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          125
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/references/colapso_dialectico.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          117
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/c5-information-thermodynamics/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          123
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "tools/skill_library/global/c5-silicon-stress-suite/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "inventory_hash": "match"
+    },
+    {
+      "path": "tools/skill_library/global/github-architect/scripts/git_history_sanitizer.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          125
+        ]
+      ],
+      "inventory_hash": "match"
+    }
+  ],
+  "tool_limitations": [
+    "Native codebase graph tools were not exposed in this session; targeted file reads and rg used.",
+    "Static audit only: no tests, builds, application execution, or external API behavior verification.",
+    "All assigned text hashes matched inventory; symlink inspected as metadata only."
+  ],
+  "tests_run": []
+}

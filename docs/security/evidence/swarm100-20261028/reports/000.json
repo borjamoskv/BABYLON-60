@@ -1,0 +1,403 @@
+{
+  "shard": "000",
+  "findings": [
+    {
+      "title": "CDP request futures retained after timeout",
+      "path": "01_KISH_ENGINE/babylon60/kernel/browser_cdp_engine.py",
+      "line": 147,
+      "evidence": "Pending map insertion precedes send and wait_for; only receiving matching reply pops it. No finally cleanup.",
+      "trigger": "Repeated requests time out or ws.send raises without replies.",
+      "impact": "Pending map grows without bound for lifetime of page.",
+      "kind": "runtime",
+      "severity": "P2",
+      "confidence": "high"
+    },
+    {
+      "title": "Navigation retains a listener on every call",
+      "path": "01_KISH_ENGINE/babylon60/kernel/browser_cdp_engine.py",
+      "line": 160,
+      "evidence": "navigate registers _on_load, on appends listeners, and no path removes it.",
+      "trigger": "Repeated navigate calls.",
+      "impact": "Unbounded callbacks/futures and linear event processing growth.",
+      "kind": "runtime",
+      "severity": "P2",
+      "confidence": "high"
+    },
+    {
+      "title": "Browser launch timeout leaves browser process alive",
+      "path": "01_KISH_ENGINE/babylon60/kernel/browser_cdp_engine.py",
+      "line": 459,
+      "evidence": "launch returns False on endpoint timeout; __aenter__ raises and __aexit__ is never entered.",
+      "trigger": "Browser process starts but DevTools readiness fails.",
+      "impact": "Browser child and profile remain until explicit close or process teardown.",
+      "kind": "runtime",
+      "severity": "P2",
+      "confidence": "high"
+    },
+    {
+      "title": "PoC prints success after DAG timeout",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/poc_bft_zerocopy_dag.rs",
+      "line": 162,
+      "evidence": "Timeout at151-154 breaks without failure flag; unconditional success print and normal main return follow.",
+      "trigger": "DAG fails to complete within timeout.",
+      "impact": "Failed PoC is reported successful and exits zero.",
+      "kind": "example",
+      "severity": "P2",
+      "confidence": "high"
+    },
+    {
+      "title": "Execution verifier ignores untracked files",
+      "path": "scripts/c5_verifiers/verify_execution.sh",
+      "line": 10,
+      "evidence": "Only git diff and git diff --cached are checked before clean claim.",
+      "trigger": "Untracked new source or generated output exists with no tracked diff.",
+      "impact": "Verifier reports clean repository despite uncommitted disk additions.",
+      "kind": "tooling",
+      "severity": "P2",
+      "confidence": "high"
+    },
+    {
+      "title": "Legal oracle turns network failures into healthy empty result",
+      "path": "scripts/c5_demos/c5_legal_oracle.py",
+      "line": 64,
+      "evidence": "Fetch exception returns([],[]); main writes sitrep, prints no threats and operational verdict.",
+      "trigger": "Fetch fails or times out.",
+      "impact": "Unavailable scan becomes indistinguishable from successful zero-result scan.",
+      "kind": "example",
+      "severity": "P2",
+      "confidence": "high"
+    },
+    {
+      "title": "Non-persist witness digest silently replaces SHA256 with XOR",
+      "severity": "P2",
+      "path": "src/omega_mediation.rs",
+      "line": 1596,
+      "evidence": "cfg(not(cortex-persist)) ignores domain and XOR-folds payload into32bytes; PhysicalResourceWitness uses it at1689.",
+      "trigger": "Library built without cortex-persist; same-inode64byte content mutated at positions0 and32 by toggling low bit from zero to one.",
+      "impact": "Both paired contributions change identically so digest remains unchanged; physical witness can miss content mutation. This is an API configuration issue, not proof of a deployed bypass.",
+      "confidence": "high",
+      "kind": "runtime-library"
+    },
+    {
+      "title": "Evidence digest omits observer visibility and witness identity fields",
+      "severity": "P2",
+      "path": "src/omega_mediation.rs",
+      "line": 1787,
+      "evidence": "to_cortex_evidence hashes selected fields but excludes observer_visibility, threat_model_limitations, witness inodes and broker_authorized_mutation while storing them in artifact.",
+      "trigger": "Two reports differ only in omitted visibility/limitations or witness inode fields.",
+      "impact": "Distinct evidence artifacts share digest; digest cannot authenticate claimed complete artifact.",
+      "confidence": "high",
+      "kind": "runtime-library"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/browser_cdp_engine.py",
+      "line": 412,
+      "description": "Unconditional --no-sandbox weakens browser isolation. Only own standalone demo caller found in targeted package search; no production consumer established, so not promoted to runtime P1."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".agents/mcp_config.json",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          16
+        ]
+      ],
+      "sha256_match": true,
+      "unreviewed_ranges": []
+    },
+    {
+      "path": ".github/workflows/codeql.yml",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          41
+        ]
+      ],
+      "sha256_match": true,
+      "unreviewed_ranges": []
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/poc_bft_zerocopy_dag.rs",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          168
+        ]
+      ],
+      "sha256_match": true,
+      "unreviewed_ranges": []
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/commands/__init__.py",
+      "status": "reviewed_full",
+      "ranges_read": [],
+      "sha256_match": true,
+      "unreviewed_ranges": []
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/browser_cdp_engine.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          602
+        ]
+      ],
+      "sha256_match": true,
+      "unreviewed_ranges": []
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/utils/pulmones.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          12
+        ]
+      ],
+      "sha256_match": true,
+      "unreviewed_ranges": []
+    },
+    {
+      "path": "02_EDIN_SWARMS/agents_archi/topologies/rea_harness_topology.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          346
+        ]
+      ],
+      "sha256_match": true,
+      "unreviewed_ranges": []
+    },
+    {
+      "path": "docs/01_spec/artifact_format_v1.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          56
+        ]
+      ],
+      "sha256_match": true,
+      "unreviewed_ranges": []
+    },
+    {
+      "path": "docs/KERNEL.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          41
+        ]
+      ],
+      "sha256_match": true,
+      "unreviewed_ranges": []
+    },
+    {
+      "path": "proof/README.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          67
+        ]
+      ],
+      "sha256_match": true,
+      "unreviewed_ranges": []
+    },
+    {
+      "path": "scripts/c5_demos/c5_legal_oracle.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          137
+        ]
+      ],
+      "sha256_match": true,
+      "unreviewed_ranges": []
+    },
+    {
+      "path": "scripts/c5_quality_gates/audit_entropy_3strata.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          267
+        ]
+      ],
+      "sha256_match": true,
+      "unreviewed_ranges": []
+    },
+    {
+      "path": "scripts/c5_verifiers/verify_execution.sh",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          34
+        ]
+      ],
+      "sha256_match": true,
+      "unreviewed_ranges": []
+    },
+    {
+      "path": "src/omega_mediation.rs",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          2237
+        ]
+      ],
+      "sha256_match": true,
+      "unreviewed_ranges": []
+    },
+    {
+      "path": "tests/test_audit_swarm_client.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          159
+        ]
+      ],
+      "sha256_match": true,
+      "unreviewed_ranges": []
+    },
+    {
+      "path": "tests/test_metamemory_persistence.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          39
+        ]
+      ],
+      "sha256_match": true,
+      "unreviewed_ranges": []
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/agents-sdk/references/queue-retries.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          79
+        ]
+      ],
+      "sha256_match": true,
+      "unreviewed_ranges": []
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/ddos/gotchas.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          107
+        ]
+      ],
+      "sha256_match": true,
+      "unreviewed_ranges": []
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/r2/configuration.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          165
+        ]
+      ],
+      "sha256_match": true,
+      "unreviewed_ranges": []
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workers-for-platforms/README.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          89
+        ]
+      ],
+      "sha256_match": true,
+      "unreviewed_ranges": []
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/examples/Cellular_Automata_Music.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          81
+        ]
+      ],
+      "sha256_match": true,
+      "unreviewed_ranges": []
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_04_learn_from_demonstration.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          61
+        ]
+      ],
+      "sha256_match": true,
+      "unreviewed_ranges": []
+    },
+    {
+      "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/polymath-concept-synthesis/MODULE.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          133
+        ]
+      ],
+      "sha256_match": true,
+      "unreviewed_ranges": []
+    },
+    {
+      "path": "tools/skill_library/global/c5-terminological-archaeology/SKILL.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          41
+        ]
+      ],
+      "sha256_match": true,
+      "unreviewed_ranges": []
+    },
+    {
+      "path": "tools/skill_library/global/remotion-audio-reactive-video/examples/audio_reactive_kernel.wgsl",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          53
+        ]
+      ],
+      "sha256_match": true,
+      "unreviewed_ranges": []
+    }
+  ],
+  "tool_limitations": [
+    "Native graph tools unavailable; targeted text fallback.",
+    "Static audit; no test/runtime execution.",
+    "External API reference documents read but current external API behavior not verified."
+  ],
+  "tests_run": []
+}

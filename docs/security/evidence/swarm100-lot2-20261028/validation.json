@@ -1,0 +1,340 @@
+{
+  "date": "2026-10-28",
+  "scope": "Five declared production sources only; real Python helpers and temporary SQLite/files. Legacy ITERA find interpreted strictly inside the fixture. No operator data/global purge, network, protected native service, hardware auth, commit or deployment. Global telemetry/configuration omitted.",
+  "checks": {
+    "related-tests": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "pytest",
+        "tests/test_swarm100_lot2_regressions.py",
+        "tests/test_swarm100_lot1_regressions.py",
+        "tests/test_agent_beeper_regressions.py",
+        "tests/test_autodidact_derivation_regressions.py",
+        "tests/test_swarm100_round2_regressions.py",
+        "tests/test_standalone_verifier.py",
+        "tests/test_memory_governance_falsification.py",
+        "tests/test_compliance_exporter.py",
+        "tests/test_m0_evidence_pack_acceptance.py",
+        "tests/test_autodidact_omega_v2.py",
+        "tests/test_autodidact_omega_pipeline.py",
+        "tests/test_cortex_persist_batch_regressions.py",
+        "tests/test_ledger_cross_equivalence.py",
+        "tests/test_fl027_provenance_authority.py",
+        "-q",
+        "-rs",
+        "-o",
+        "addopts=--tb=short"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot2-20261028/related-tests.log",
+      "log_sha256": "605d56936566a8081dae97f18e98f7cb203b230e6f52ac6fb19a58df54b130c2"
+    },
+    "ruff": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "ruff",
+        "check",
+        "01_KISH_ENGINE/babylon60/commands/itera.py",
+        "scripts/repatriated/c5_sharur_100_anergy_purge.py",
+        "scripts/c5_cortex/autoconsolidate.py",
+        "tools/skill_library/global/anergy-purge-protocol/scripts/anergy_purge.py",
+        "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/anergy-purge-protocol/scripts/anergy_purge.py",
+        "tests/test_swarm100_lot2_regressions.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot2-20261028/ruff.log",
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "mypy-core": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "mypy",
+        "--follow-imports=silent",
+        "01_KISH_ENGINE/babylon60/commands/itera.py",
+        "scripts/repatriated/c5_sharur_100_anergy_purge.py",
+        "scripts/c5_cortex/autoconsolidate.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot2-20261028/mypy-core.log",
+      "log_sha256": "8228fcc5ce46d42d01caf3cd941f4e9c5f2bcc372bb5b147a2f0572d2dd675a8"
+    },
+    "mypy-purge": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "mypy",
+        "--follow-imports=silent",
+        "tools/skill_library/global/anergy-purge-protocol/scripts/anergy_purge.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot2-20261028/mypy-purge.log",
+      "log_sha256": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e"
+    },
+    "mypy-purge-bundled": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "mypy",
+        "--follow-imports=silent",
+        "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/anergy-purge-protocol/scripts/anergy_purge.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot2-20261028/mypy-purge-bundled.log",
+      "log_sha256": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e"
+    },
+    "semantic-gate": {
+      "command": [
+        "python3",
+        "scripts/c5_quality_gates/audit_semantic_contracts.py",
+        "--workspace-only"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot2-20261028/semantic-gate.log",
+      "log_sha256": "5949e674dcddaf1b07015b03a1dd0b374e0b66a39f2d95157c200ce6dd13f1ee"
+    },
+    "budget-gate": {
+      "command": [
+        "python3",
+        "scripts/c5_quality_gates/audit_token_budget.py",
+        "--workspace-only",
+        "--skip-ghost-listeners"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot2-20261028/budget-gate.log",
+      "log_sha256": "d0b6780eb1edd315af3e6cf33cb6b44387f78ee81a63c8e23aabd3121e82a37a"
+    },
+    "topology-gate": {
+      "command": [
+        "python3",
+        "scripts/guards/verify_active_topology.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot2-20261028/topology-gate.log",
+      "log_sha256": "3045a29b461272aed5ff2d6a5c031c4955237179787acbd8421abad260e899a6"
+    },
+    "diff-check": {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot2-20261028/diff-check.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "ruff-evidence": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "ruff",
+        "check",
+        "docs/security/evidence/swarm100-lot2-20261028/reconcile_lot2.py",
+        "docs/security/evidence/swarm100-lot2-20261028/independent-adversarial.py",
+        "docs/security/evidence/swarm100-round3-20261028/reconcile_registry.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot2-20261028/ruff-evidence.log",
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "registry": {
+      "command": [
+        "python3",
+        "docs/security/evidence/swarm100-round3-20261028/reconcile_registry.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot2-20261028/registry.log",
+      "log_sha256": "ddc33e7b0a85cfd34d7aba1d4283312e2018ac41c08cd2e05233612632712e8c"
+    },
+    "historical_range_validator": {
+      "historical_ranges_preserved": true,
+      "invalid_current_range_rejected": true,
+      "valid_current_range_accepted": true,
+      "method": "Exact AST-selected current validator on a temporary one-line source; no audit data modified"
+    },
+    "dependency_manifests": {
+      "command": [
+        "git",
+        "diff",
+        "--exit-code",
+        "--",
+        "pyproject.toml",
+        "uv.lock",
+        "Cargo.toml",
+        "Cargo.lock"
+      ],
+      "exit_code": 0,
+      "output": ""
+    }
+  },
+  "before": {
+    "passed": 2,
+    "failed": 44,
+    "synthetic_journal_rows_lost": 3,
+    "test_source": "docs/security/evidence/swarm100-lot2-20261028/initial-regressions.py.txt",
+    "confined_harness_snapshot": "docs/security/evidence/swarm100-lot2-20261028/confined-initial-regressions.py.txt"
+  },
+  "after": {
+    "lot2_regressions_passed": 80,
+    "related_suite_passed": 322,
+    "skipped": 1,
+    "files": 14,
+    "skip_reason": "Existing strike_rs extension not built"
+  },
+  "source_sha256": {
+    "scripts/c5_cortex/autoconsolidate.py": "b77ad4fbd80b3872e95b58f935b951f928179de72150374dac9fa3d5b216a025",
+    "01_KISH_ENGINE/babylon60/commands/itera.py": "1d7a6b220a8dee0902df04777f0d048ade7dc002b09879978edbcff078f78fe7",
+    "scripts/repatriated/c5_sharur_100_anergy_purge.py": "7e8a21a0e3a80e7155911b4e88b00e2e72265b8267d248effd677b448530b8fa",
+    "tools/skill_library/global/anergy-purge-protocol/scripts/anergy_purge.py": "21307153c17e3337fef4dbb91fc3053c02a8a2617a9cf644490ece5ce0c0614e",
+    "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/anergy-purge-protocol/scripts/anergy_purge.py": "21307153c17e3337fef4dbb91fc3053c02a8a2617a9cf644490ece5ce0c0614e"
+  },
+  "test_sha256": "ec5234a8d58ca6d09234f49fa2351d057f6e95181c9e429fb3afc2836bd1c906",
+  "document_sha256": {
+    "docs/security/REMEDIATION_SWARM100_LOTE2_2026-10-28.md": "ac9bbb81b021b8b645dbba90df444ac8ffe9a2949c49058600da7154f4665712",
+    "docs/security/PLAN_SWARM100_LOTE2_2026-10-28.md": "542cab8a69befea59341d283d3c229e924846e77247b1850df02dd25c1ee2455",
+    "docs/security/PLAN_SWARM100_LOTE3_2026-10-28.md": "890b23cd883baa347a82c60eb82af10a99dcf02ceb3f0686c0149fe8900c64d5",
+    "docs/security/AUDIT_SWARM100_ROUND3_2026-10-28.md": "5ab87c351b227a73d64c9d37d077ba57497e5e8966b93c620dd6452fbbee441e"
+  },
+  "independent_review": "docs/security/evidence/swarm100-lot2-20261028/independent-review.json",
+  "fixed_ids": [
+    "SW100-C0018",
+    "SW100-C0219",
+    "SW100-C0387",
+    "SW100-C0563",
+    "SW100-C0562",
+    "SW100-C0388"
+  ],
+  "mitigated_ids": [
+    "SW100-C0460"
+  ],
+  "unchanged_open_id": "SW100-C0223",
+  "lot1_sources_unchanged": true,
+  "lot3_sources_unchanged": true,
+  "registry_summary": {
+    "original_candidates": 598,
+    "round3_assigned": 582,
+    "round3_reviewed": 582,
+    "round3_decisions": {
+      "CONFIRMED_STATIC": 504,
+      "REPRODUCED": 54,
+      "ALREADY_FIXED": 15,
+      "REJECTED": 4,
+      "DUPLICATE": 5
+    },
+    "round3_remediation_states": {
+      "OPEN": 557,
+      "FIXED": 18,
+      "MITIGATED": 3,
+      "NOT_APPLICABLE": 4
+    },
+    "all_decisions": {
+      "CONFIRMED_STATIC": 504,
+      "REPRODUCED": 54,
+      "ALREADY_FIXED": 26,
+      "REJECTED": 4,
+      "DUPLICATE": 10
+    },
+    "all_remediation_states": {
+      "OPEN": 562,
+      "FIXED": 28,
+      "MITIGATED": 4,
+      "NOT_APPLICABLE": 4
+    },
+    "needs_validation_ids": [],
+    "unique_open_findings": 556,
+    "unique_open_severity": {
+      "P2": 474,
+      "P3": 10,
+      "P1": 72
+    },
+    "additional_findings_outside_original_inventory": 1,
+    "additional_decisions": {
+      "CONFIRMED_STATIC": 1
+    },
+    "scope": "Every assigned candidate reviewed; static confirmation is not correction or runtime certification."
+  },
+  "validation_python": "3.14.7 (main, Aug  5 2026, 10:29:49) [Clang 21.0.0 (clang-2100.1.1.101)]",
+  "document_links": [
+    {
+      "document": "docs/security/REMEDIATION_SWARM100_LOTE2_2026-10-28.md",
+      "checked": 11,
+      "missing": []
+    },
+    {
+      "document": "docs/security/PLAN_SWARM100_LOTE2_2026-10-28.md",
+      "checked": 3,
+      "missing": []
+    },
+    {
+      "document": "docs/security/PLAN_SWARM100_LOTE3_2026-10-28.md",
+      "checked": 1,
+      "missing": []
+    },
+    {
+      "document": "docs/security/AUDIT_SWARM100_ROUND3_2026-10-28.md",
+      "checked": 27,
+      "missing": []
+    }
+  ],
+  "artifact_sha256": {
+    "docs/security/evidence/swarm100-lot2-20261028/after-tests-expanded.log": "5627fee0fd87609dffca423f8a360bdd9d5c11e88c4a83b8fb5ac7a0809efa7b",
+    "docs/security/evidence/swarm100-lot2-20261028/after-tests-first.log": "bfc80f91be0c90c0f2a426fe601667c39689e2fdf46b6934805f3b2ce8a1124a",
+    "docs/security/evidence/swarm100-lot2-20261028/before-source-manifest.json": "f75938ca64ab234645ca91d01b3779e2d3b5521fcd58b2ce0834534a5bfbe40f",
+    "docs/security/evidence/swarm100-lot2-20261028/before-tests-confined.log": "ea35e04c2aa999fe07c67751432b316466d6a55c32b8e67f069018506e39cf6e",
+    "docs/security/evidence/swarm100-lot2-20261028/before-tests.log": "f2a79ed7e37dad018601297fd1571e8ce61ec0af940fac02ba052af66a43a0bf",
+    "docs/security/evidence/swarm100-lot2-20261028/budget-gate-command.json": "e9dbae362840a0d2775b58d1b3b9e5074da0248c4f3349255ea7927b30c941ab",
+    "docs/security/evidence/swarm100-lot2-20261028/budget-gate.log": "d0b6780eb1edd315af3e6cf33cb6b44387f78ee81a63c8e23aabd3121e82a37a",
+    "docs/security/evidence/swarm100-lot2-20261028/candidate-status-updates.json": "ce491ce3fd5482156b241f90c6a44114d853935fafa480e9d482b815c8f6e102",
+    "docs/security/evidence/swarm100-lot2-20261028/confined-initial-regressions.py.txt": "6206713566d322e414bb21e9b45553ab3c1d734bc22812fe1b55f7e07c43850d",
+    "docs/security/evidence/swarm100-lot2-20261028/consolidation-before.json": "d306e42a4c7fbfd2b0447127b61c2d591cb9cfbb2a75ee6852261530daf0f53b",
+    "docs/security/evidence/swarm100-lot2-20261028/diff-check-command.json": "884f7a0c74d272e4c77a32ea322cd0376cf13a4f6db527529fe4225461dee2fe",
+    "docs/security/evidence/swarm100-lot2-20261028/diff-check.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "docs/security/evidence/swarm100-lot2-20261028/independent-adversarial.json": "35c87acc17f0f3b548d72883d1e04d7b6d724bc280b129e471c2d8dff3086170",
+    "docs/security/evidence/swarm100-lot2-20261028/independent-adversarial.py": "6049bbe176daa6220c16a2bc5541200d41cdd390fae83d518138315113bb19c2",
+    "docs/security/evidence/swarm100-lot2-20261028/independent-review.json": "457cf19f2c83a8af073d3fd30bcfc4625058c1b420cf79a5e6dcefb856c2e857",
+    "docs/security/evidence/swarm100-lot2-20261028/initial-regressions.py.txt": "770e80f2d16411513543e1c68b212a0736cedaa66932a1f18cfc7f699ab0221a",
+    "docs/security/evidence/swarm100-lot2-20261028/lot3-selection.json": "ba66654dbc994b8131e999a98ebd149ce570098435d71c0c920e4b64dac1f7fa",
+    "docs/security/evidence/swarm100-lot2-20261028/mypy-cohort-before.log": "8ef5e54b7d4b6f9adc5292918f282477fd075bb1c4a9c564eb993c4391110ff2",
+    "docs/security/evidence/swarm100-lot2-20261028/mypy-core-command.json": "39e4fe732331e9c0ffe79315cbbe2c9b82d3116f95e05dd544072c0b67eb4d25",
+    "docs/security/evidence/swarm100-lot2-20261028/mypy-core.log": "8228fcc5ce46d42d01caf3cd941f4e9c5f2bcc372bb5b147a2f0572d2dd675a8",
+    "docs/security/evidence/swarm100-lot2-20261028/mypy-purge-bundled-command.json": "d5a2febed8d9dc04d19b7507c05cbc4588173ff862be593d155699b53d0e39bf",
+    "docs/security/evidence/swarm100-lot2-20261028/mypy-purge-bundled.log": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e",
+    "docs/security/evidence/swarm100-lot2-20261028/mypy-purge-command.json": "c1f2a732a05df2e11373eec28cd8ebee138327953392b83ad6c0f1d5af9af3d7",
+    "docs/security/evidence/swarm100-lot2-20261028/mypy-purge.log": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e",
+    "docs/security/evidence/swarm100-lot2-20261028/reconcile_lot2.py": "4c1358c444a07e79a1be0066bd1d10add7e9522939e68eb7217281c68eeca087",
+    "docs/security/evidence/swarm100-lot2-20261028/registry.log": "ddc33e7b0a85cfd34d7aba1d4283312e2018ac41c08cd2e05233612632712e8c",
+    "docs/security/evidence/swarm100-lot2-20261028/related-tests-command.json": "caa4265b8d5cfbdae0513c11d65387350476065406d1d5d39e779dc74a529716",
+    "docs/security/evidence/swarm100-lot2-20261028/related-tests.log": "605d56936566a8081dae97f18e98f7cb203b230e6f52ac6fb19a58df54b130c2",
+    "docs/security/evidence/swarm100-lot2-20261028/ruff-before.log": "7cabbb79827bfd0e8c4fbec0ecc29ae1e5fad891e3518ee4183f174771916b13",
+    "docs/security/evidence/swarm100-lot2-20261028/ruff-command.json": "d0388344d2cbf9c23b6a7a8e31df985147af784f802fad735b8d8498d055701e",
+    "docs/security/evidence/swarm100-lot2-20261028/ruff-evidence-command.json": "cc8588120c50a17fab93175fb9b61094506f6f151180df28231988a34a268f4c",
+    "docs/security/evidence/swarm100-lot2-20261028/ruff-evidence.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "docs/security/evidence/swarm100-lot2-20261028/ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "docs/security/evidence/swarm100-lot2-20261028/semantic-gate-command.json": "62703f08f3389316af0f9c717f2f7858961d2612fd23e00201ae2db1f1771110",
+    "docs/security/evidence/swarm100-lot2-20261028/semantic-gate.log": "5949e674dcddaf1b07015b03a1dd0b374e0b66a39f2d95157c200ce6dd13f1ee",
+    "docs/security/evidence/swarm100-lot2-20261028/topology-gate-command.json": "8de0bdfd3b4dd393dc826179a3cb30ef3127df559bc94085000cc8405c47684f",
+    "docs/security/evidence/swarm100-lot2-20261028/topology-gate.log": "3045a29b461272aed5ff2d6a5c031c4955237179787acbd8421abad260e899a6",
+    "docs/security/evidence/swarm100-lot2-20261028/validator-check.json": "660721184bcf7642369b9b24d0dc05da951c013c5d5e3140285bfc04ff65b8c2"
+  },
+  "registry_sha256": {
+    "docs/security/evidence/swarm100-round3-20261028/root-adjudications.json": "1652a192ce40ecd7982fc4258bdb3e21fbd28af3fd168fa28bfceb5a410f8de1",
+    "docs/security/evidence/swarm100-round3-20261028/registry.json": "8b3ec6d96083f62fa1a91c53164ff072782eab9786a04f648c8d6d14f72565ff",
+    "docs/security/evidence/swarm100-round3-20261028/registry-summary.json": "ddc33e7b0a85cfd34d7aba1d4283312e2018ac41c08cd2e05233612632712e8c",
+    "docs/security/evidence/swarm100-round3-20261028/remediation-queue.json": "7a48010984dba87cc907652d9637ceeb9f87ec70b5f460d81f1b54cb28c9474c",
+    "docs/security/evidence/swarm100-round3-20261028/reconcile_registry.py": "13f5085957bd1e3ed59b20624d1069be6b6cfb87b83b09a998cd0061db5c7ab5"
+  }
+}

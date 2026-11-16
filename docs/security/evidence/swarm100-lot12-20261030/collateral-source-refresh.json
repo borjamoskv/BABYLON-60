@@ -1,0 +1,1285 @@
+{
+  "scope": "23 collateral source refreshes; zero new closures; original decisions/severities/states retained",
+  "updates": [
+    {
+      "candidate_id": "SW100-C0032",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tests/test_moskv_native_host.py",
+      "current_source_sha256": "c59a51e487e00890fa2bb4c7e4b1a1193693038e9c493dd4a9c58ae16be7cdbc",
+      "rationale": "The FIFO test still imports the configured production QUEUE_FILE and unlinks it without a temporary-path fixture. The production default has moved from shared /tmp to a private per-user queue, so the old absolute-/tmp wording is historical; the test still targets the configured queue. No destructive test was run.",
+      "source_checks": [
+        {
+          "path": "tests/test_moskv_native_host.py",
+          "start_line": 100,
+          "end_line": 120,
+          "observation": "The FIFO test directly deletes, enqueues into and reads the production QUEUE_FILE."
+        },
+        {
+          "path": "scripts/c5_cli/moskv_native_host.py",
+          "start_line": 184,
+          "end_line": 184,
+          "observation": "Configured production queue remains the test's imported target; default is now private per-user storage."
+        },
+        {
+          "path": "scripts/c5_cli/moskv_native_host.py",
+          "start_line": 213,
+          "end_line": 239,
+          "observation": "Current queue accesses are serialized in a private descriptor-anchored store; test isolation is a separate obligation."
+        },
+        {
+          "path": "tests/conftest.py",
+          "start_line": 38,
+          "end_line": 43,
+          "observation": "The autouse fixture only invokes garbage collection."
+        },
+        {
+          "path": "tests/conftest.py",
+          "start_line": 46,
+          "end_line": 55,
+          "observation": "Optional isolation changes CWD/TMPDIR, but is not requested and cannot rewrite this absolute constant."
+        }
+      ],
+      "guards": [
+        "No test-local monkeypatch or fixture redirects QUEUE_FILE.",
+        "The separately named hermetic selftest does not guard this FIFO test.",
+        "Only Lote12 selected IDs receive new remediation outcomes. This collateral record retains its inherited decision/severity/remediation state.",
+        "Range/source refresh is explicit static maintenance. Except C0177 V04 revalidation, no historical reproduction is rerun or new runtime guarantee claimed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/before-source-snapshots.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh.json",
+        "docs/security/evidence/swarm100-round3-20261028/09-review-method.md"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/09.json",
+      "resolution_type": "COLLATERAL_SOURCE_REFRESH_NO_NEW_CLOSURE",
+      "source_refresh": {
+        "inherited_decision": "CONFIRMED_STATIC",
+        "inherited_remediation_state": "OPEN",
+        "previous_current_source_sha256": "c59a51e487e00890fa2bb4c7e4b1a1193693038e9c493dd4a9c58ae16be7cdbc",
+        "previous_rationale": "The FIFO test imports the production fixed /tmp queue path and unlinks it at both ends without requesting a temporary fixture or monkeypatch. The active autouse fixture only runs garbage collection and does not replace the path. Running this test can delete the native host queue or race host operations. No test touching that queue was executed.",
+        "pending_separate_readjudication": false
+      }
+    },
+    {
+      "candidate_id": "SW100-C0073",
+      "decision": "ALREADY_FIXED",
+      "severity": "P2",
+      "remediation_state": "FIXED",
+      "path": "01_KISH_ENGINE/babylon60/compliance_exporter/m0_evidence_pack.py",
+      "current_source_sha256": "06c036efed923098a8986bca00daad3c9e5f61e27d262471498954bac703ed25",
+      "rationale": "The compiler's rejection of a false ledger verdict and the verifier's ordering/hash rejection branches remain byte-identical. Concurrent work outside Lote12 added nine lines of regulatory-catalogue metadata earlier in the compiler source, moving its rejection fragment from623-637 to632-646 without changing it. The current V01 temporary-fixture regression also passes without promoting unobserved campaigns. This preserves the previously FIXED ignored-verdict issue, not another selected closure or a legal/regulatory conformity guarantee.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/compliance_exporter/m0_evidence_pack.py",
+          "start_line": 632,
+          "end_line": 646,
+          "observation": "Existing ledger is backed up and rejected if verified is false before ledger_info is used."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+          "start_line": 320,
+          "end_line": 354,
+          "observation": "Invalid version, ordering and chain states return verified=False."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+          "start_line": 370,
+          "end_line": 377,
+          "observation": "Entry hash mismatch returns verified=False."
+        }
+      ],
+      "guards": [
+        "Current fail-closed guard is lines 632–633.",
+        "Partial output directories may remain after failure; that is distinct from the assigned success-shaped deliverable assertion.",
+        "Only Lote12 selected IDs receive new remediation outcomes. This collateral record retains its inherited decision/severity/remediation state.",
+        "Range/source refresh is explicit static maintenance; C0073 has current V01 temporary-fixture compatibility revalidation, not a new closure or regulatory conformity guarantee."
+      ],
+      "runtime_executed": true,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/before-source-snapshots.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh.json",
+        "docs/security/evidence/swarm100-round3-20261028/04-source-evidence.json"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/04.json",
+      "resolution_type": "COLLATERAL_SOURCE_REFRESH_NO_NEW_CLOSURE",
+      "source_refresh": {
+        "inherited_decision": "ALREADY_FIXED",
+        "inherited_remediation_state": "FIXED",
+        "previous_current_source_sha256": "82dc6e8cf8c106a5c7a8c2f68b9ee188457a6d3e618968d38e83acdefc1ddd2c",
+        "previous_rationale": "The assigned source hash is stale. Current compile_pack verifies the copied ledger, immediately tests ev_check[\"verified\"], and raises ValueError before constructing ledger_info when false. The current verifier returns verified=False for unsupported versions, sequence discontinuity, Lamport regressions and broken hashes. The specific ignored-verdict assertion is therefore already corrected in current code. This classification records static remediation only; no pack/signing/database runtime validation was performed.",
+        "pending_separate_readjudication": false
+      }
+    },
+    {
+      "candidate_id": "SW100-C0176",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+      "current_source_sha256": "d150a286d1267fc6afa26dd6c59d41266f40c26a428cf29885465af041a083fc",
+      "rationale": "The current verifier still guards trace cardinality/hash comparisons with if trace_lines. Mandatory digest coverage added for C0175 does not make a legitimately signed empty trace consistent with a nonempty ledger. This is current source inspection, not a new signed-pack reproduction.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+          "start_line": 970,
+          "end_line": 1018,
+          "observation": "Ledger verification precedes trace read; all trace consistency checks are conditional on nonempty lines."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+          "start_line": 1099,
+          "end_line": 1109,
+          "observation": "Final valid=true has no independent empty-trace rejection."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/verifier/cli.py",
+          "start_line": 96,
+          "end_line": 103,
+          "observation": "valid=true is treated as success."
+        }
+      ],
+      "guards": [
+        "Nonempty traces have count and Merkle checks.",
+        "Ledger validity and signed file integrity do not establish trace completeness.",
+        "Only Lote12 selected IDs receive new remediation outcomes. This collateral record retains its inherited decision/severity/remediation state.",
+        "Range/source refresh is explicit static maintenance. Except C0177 V04 revalidation, no historical reproduction is rerun or new runtime guarantee claimed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/before-source-snapshots.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh.json",
+        "docs/security/evidence/swarm100-round3-20261028/reviews/00-notes.json"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/00.json",
+      "resolution_type": "COLLATERAL_SOURCE_REFRESH_NO_NEW_CLOSURE",
+      "source_refresh": {
+        "inherited_decision": "CONFIRMED_STATIC",
+        "inherited_remediation_state": "OPEN",
+        "previous_current_source_sha256": "624eb292a797ac7094c4b84357606180465b09f3b7381f5292dba44ac4484634",
+        "previous_rationale": "The current changed verifier still wraps both trace-count and trace-hash comparisons in if trace_lines. A valid signed nonempty ledger accompanied by an empty or whitespace-only trace skips both checks and can reach success when other conditions pass. A matching signed digest proves the empty file is unmodified, not that it matches the ledger.",
+        "pending_separate_readjudication": false
+      }
+    },
+    {
+      "candidate_id": "SW100-C0177",
+      "decision": "ALREADY_FIXED",
+      "remediation_state": "FIXED",
+      "basis": "round2_remediation",
+      "evidence": "docs/security/evidence/swarm100-remediation-20261028/validation.json",
+      "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+      "severity": "P1",
+      "current_source_sha256": "d150a286d1267fc6afa26dd6c59d41266f40c26a428cf29885465af041a083fc",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+          "start_line": 434,
+          "end_line": 545,
+          "observation": "Recomputes content-bearing event digests; rejects changed payloads while delimiting hash-only commitments."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+          "start_line": 548,
+          "end_line": 775,
+          "observation": "Certificate verification propagates ledger-integrity failure; V04 current regressions preserve rejection."
+        }
+      ],
+      "rationale": "The JSON ledger verifier still recomputes event-content digests and rejects altered payloads through both offline and certificate verification. Eight confined V04 cases passed against the current source, including both event envelope shapes, malformed shapes and explicit hash-commitment-only scope. This preserves the prior FIXED state and is not an additional Lote12 closure.",
+      "runtime_executed": true,
+      "resolution_type": "COLLATERAL_SOURCE_REFRESH_NO_NEW_CLOSURE",
+      "guards": [
+        "Only Lote12 selected IDs receive new remediation outcomes. This collateral record retains its inherited decision/severity/remediation state.",
+        "Range/source refresh is explicit static maintenance. Except C0177 V04 revalidation, no historical reproduction is rerun or new runtime guarantee claimed."
+      ],
+      "source_refresh": {
+        "inherited_decision": "ALREADY_FIXED",
+        "inherited_remediation_state": "FIXED",
+        "previous_current_source_sha256": null,
+        "previous_rationale": null,
+        "pending_separate_readjudication": false
+      },
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/before-source-snapshots.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0272",
+      "decision": "REPRODUCED",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/attestation/conformal_tree.py",
+      "current_source_sha256": "519f8c6c4eb3a3021b27893de5e4028e96a13415bec48a03fc97dd3104df99d1",
+      "rationale": "The public claim-leaf helper still joins unrestricted fields with colons, and manifest recomputation still calls it. The complete-manifest signature/trust-anchor change does not change that leaf encoding. The historic delimiter-collision reproduction was not rerun; no new producer reachability claim is made.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/attestation/conformal_tree.py",
+          "start_line": 62,
+          "end_line": 71,
+          "observation": "Leaf fields are joined with unescaped colons."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/attestation/conformal_tree.py",
+          "start_line": 252,
+          "end_line": 268,
+          "observation": "Manifest recomputation passes persisted claim strings into that helper."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/bounty_cold_ledger.py",
+          "start_line": 41,
+          "end_line": 54,
+          "observation": "Claim/advisory strings are TEXT without colon restrictions."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/attestation/__init__.py",
+          "start_line": 1,
+          "end_line": 19,
+          "observation": "Helper is exported by the attestation package."
+        }
+      ],
+      "guards": [
+        "The digest is BLAKE3, but the preimage encoding is not injective.",
+        "The database imposes a primary key and NOT NULL fields, not a delimiter grammar.",
+        "No full upstream ingestion/exploitation claim is made.",
+        "Only Lote12 selected IDs receive new remediation outcomes. This collateral record retains its inherited decision/severity/remediation state.",
+        "Range/source refresh is explicit static maintenance. Except C0177 V04 revalidation, no historical reproduction is rerun or new runtime guarantee claimed."
+      ],
+      "runtime_executed": false,
+      "runtime_scope": "Only AST-selected Python source or expressions in a synthetic isolated fixture; no product/native service, hardware gate, network or operator data.",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/before-source-snapshots.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh.json",
+        "docs/security/evidence/swarm100-round3-20261028/03-isolated-fixtures.json",
+        "docs/security/evidence/swarm100-round3-20261028/03-isolated-fixtures.py",
+        "docs/security/evidence/swarm100-round3-20261028/03-source-evidence.json"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/03.json",
+      "resolution_type": "COLLATERAL_SOURCE_REFRESH_NO_NEW_CLOSURE",
+      "source_refresh": {
+        "inherited_decision": "REPRODUCED",
+        "inherited_remediation_state": "OPEN",
+        "previous_current_source_sha256": "251c9da8553af921d2597ce899e5f5baabfa61412c90818a629db90cbb9694fe",
+        "previous_rationale": "The exported claim leaf helper concatenates five unrestricted strings with colons. AST-selected evaluation of its actual preimage expression gives the identical string for (claim_id='a:b', advisory_id='c') and (claim_id='a', advisory_id='b:c') with the other fields fixed. Identical hash input entails identical BLAKE3 output without any cryptographic collision. Verifier recomputation uses this helper, and the inspected ledger schema has no delimiter restriction. Reachability through every upstream claim producer was not established; confirmation is limited to this public encoding and verifier boundary.",
+        "pending_separate_readjudication": false
+      }
+    },
+    {
+      "candidate_id": "SW100-C0277",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/attestation/merkle_anchor.py",
+      "current_source_sha256": "5cba54beb0a8d463e2d6e9b50d2ebcdc3f10783210ad83702d674f88358cbbe1",
+      "rationale": "generate_notary_checkpoint remains byte-identical: its default branch returns CHECKPOINT_SEALED and 3f+1_QUORUM_VERIFIED from a hash/time calculation without validator interaction. Hardware-quote changes are separate. No network or consensus runtime was executed.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/attestation/merkle_anchor.py",
+          "start_line": 135,
+          "end_line": 166,
+          "observation": "Entire checkpoint method only hashes, reads time and returns dictionaries."
+        }
+      ],
+      "guards": [
+        "simulate_network_failure=True labels LOCAL_ONLY_UNATTESTED_MODE; default False claims sealing without evidence.",
+        "No notary network or runtime call executed.",
+        "Only Lote12 selected IDs receive new remediation outcomes. This collateral record retains its inherited decision/severity/remediation state.",
+        "Range/source refresh is explicit static maintenance. Except C0177 V04 revalidation, no historical reproduction is rerun or new runtime guarantee claimed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/before-source-snapshots.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh.json",
+        "docs/security/evidence/swarm100-round3-20261028/04-source-evidence.json"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/04.json",
+      "resolution_type": "COLLATERAL_SOURCE_REFRESH_NO_NEW_CLOSURE",
+      "source_refresh": {
+        "inherited_decision": "CONFIRMED_STATIC",
+        "inherited_remediation_state": "OPEN",
+        "previous_current_source_sha256": "cf90589a3faf04117731c693bb62a0f0486ea9ca9091af17ce915964dc170ce9",
+        "previous_rationale": "The normal generate_notary_checkpoint branch constructs a hash-derived ID and returns CHECKPOINT_SEALED / 3f+1_QUORUM_VERIFIED without contacting validators, checking signatures, collecting votes, or storing a checkpoint. The explicit simulated-failure branch does not establish success in the default branch. Confirmed as a misleading public API result; no internal caller was found by targeted search of 01_KISH_ENGINE/babylon60, so severity is scoped below demonstrated live consensus compromise.",
+        "pending_separate_readjudication": false
+      }
+    },
+    {
+      "candidate_id": "SW100-C0295",
+      "decision": "REPRODUCED",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/primitives/sandbox.py",
+      "current_source_sha256": "750fd030aef40012bb73af11254b90a7b308d57f803ba78b88e2e21d5eb3fa22",
+      "rationale": "PENDING_SEPARATE_READJUDICATION: the old in-process catch tuple has been removed. safe_exec now launches a bounded worker; the worker catches ordinary Exception, while this host rejects unsupported resource enforcement before user code. The historical escaping-error trigger is not asserted to remain in current code. OPEN and its inherited REPRODUCED decision are retained only pending a separate, platform-scoped adjudication; no new error reproduction or closure is claimed.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/primitives/sandbox.py",
+          "start_line": 345,
+          "end_line": 383,
+          "observation": "Current API returns worker outcomes; old in-process exception path is removed and awaits separate adjudication."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/primitives/sandbox.py",
+          "start_line": 414,
+          "end_line": 461,
+          "observation": "Worker rejects unsupported limits and catches ordinary runtime exceptions; no current escaping-error defect is asserted by this refresh."
+        }
+      ],
+      "guards": [
+        "TimeoutError, ValueError, TypeError, OSError and KeyError are handled.",
+        "The reproduced exceptions are ordinary generated-code errors, not a sandbox escape.",
+        "Only Lote12 selected IDs receive new remediation outcomes. This collateral record retains its inherited decision/severity/remediation state.",
+        "Range/source refresh is explicit static maintenance. Except C0177 V04 revalidation, no historical reproduction is rerun or new runtime guarantee claimed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/before-source-snapshots.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh.json",
+        "docs/security/evidence/swarm100-round3-20261028/07-fixture-results.json",
+        "docs/security/evidence/swarm100-round3-20261028/07-fixtures.py",
+        "docs/security/evidence/swarm100-round3-20261028/07-source-evidence.json"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/07.json",
+      "resolution_type": "COLLATERAL_SOURCE_REFRESH_NO_NEW_CLOSURE",
+      "source_refresh": {
+        "inherited_decision": "REPRODUCED",
+        "inherited_remediation_state": "OPEN",
+        "previous_current_source_sha256": "22f22c9765c6605bd02ba1a7dce990d31764867fbe469ad2244e54b5c52a0fa4",
+        "previous_rationale": "Exact ASTSandbox.safe_exec raised ZeroDivisionError for 1 / 0 and NameError for a missing synthetic identifier instead of returning failed ExecResult. Both expressions pass the whitelist; these exceptions are outside its catch tuple. Fixture executed only those tiny expressions.",
+        "pending_separate_readjudication": true
+      }
+    },
+    {
+      "candidate_id": "SW100-C0323",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_sharur/sharur_100_conversation_auditor.py",
+      "current_source_sha256": "42ce019054e4d77b0165c005bfc73676af664f14bba823c5c859ee7dea85f1c4",
+      "rationale": "The primary conversation auditor is unchanged and retains its unconditional/unsupported cohort verdict branches. The secondary reporter no longer derives an exergy score from PASS counts and now distinguishes observed/unexecuted results. This narrows the old rationale: no current claim is made that the reporter still fabricates that score. The unchanged auditor issue remains OPEN without a new runtime audit.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_sharur/sharur_100_conversation_auditor.py",
+          "start_line": 444,
+          "end_line": 484,
+          "observation": "Agents 21,22,24-27 return unconditional PASS with fixed claims."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_conversation_auditor.py",
+          "start_line": 585,
+          "end_line": 608,
+          "observation": "No samples becomes nominal 4.5/PASS; further checks also hardcode success."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_conversation_reporters.py",
+          "start_line": 184,
+          "end_line": 213,
+          "observation": "Reporter now separates execution statuses and emits no derived exergy score; original primary auditor issue remains separately recorded."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_conversation_auditor.py",
+          "start_line": 764,
+          "end_line": 775,
+          "observation": "Report is compiled and emitted."
+        }
+      ],
+      "guards": [
+        "Other cohort branches use measurements, which does not validate the unconditional branches.",
+        "Empty entropy is explicitly recognized but converted to nominal success.",
+        "No downstream distinction marks these passes as unevaluated or synthetic.",
+        "Only Lote12 selected IDs receive new remediation outcomes. This collateral record retains its inherited decision/severity/remediation state.",
+        "Range/source refresh is explicit static maintenance. Except C0177 V04 revalidation, no historical reproduction is rerun or new runtime guarantee claimed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/before-source-snapshots.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh.json",
+        "docs/security/evidence/swarm100-round3-20261028/06-source-snapshot.json"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/06.json",
+      "resolution_type": "COLLATERAL_SOURCE_REFRESH_NO_NEW_CLOSURE",
+      "source_refresh": {
+        "inherited_decision": "CONFIRMED_STATIC",
+        "inherited_remediation_state": "OPEN",
+        "previous_current_source_sha256": "42ce019054e4d77b0165c005bfc73676af664f14bba823c5c859ee7dea85f1c4",
+        "previous_rationale": "Several cohort branches emit PASS and compliance claims without consulting corpus evidence; the empty entropy branch substitutes 4.5 and PASS. compile_swarm_sitrep counts these passes and derives its score from that count, then renders them as forensic results. This is a report-evidence defect; neither actual transcript quality nor physical energy/isolation was evaluated.",
+        "pending_separate_readjudication": false
+      }
+    },
+    {
+      "candidate_id": "SW100-C0334",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_sharur/sharur_100_conversations_sitrep.json",
+      "current_source_sha256": "7c20663b9d3e9aaa69560c546c3905e97371a1692931808318da08f47454d752",
+      "rationale": "The archived sitrep JSON is unchanged and still contains its historical certification/health literals. The current reporter now emits NOT_ATTESTED, null health/exergy values and explicit unexecuted controls; it cannot retroactively authenticate the archive. OPEN is preserved for the archived provenance issue, not as a claim that the repaired generator still emits the old literals.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_sharur/sharur_100_conversations_sitrep.json",
+          "start_line": 1399,
+          "end_line": 1411,
+          "observation": "Historical record contains formal certification and fixed health score."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_conversation_reporters.py",
+          "start_line": 67,
+          "end_line": 123,
+          "observation": "Current cohort reports counts/unexecuted controls instead of the historical fixed sync/isolation verdicts."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_conversation_reporters.py",
+          "start_line": 129,
+          "end_line": 178,
+          "observation": "Current certification is NOT_ATTESTED and health is null; this does not validate the unchanged archived report."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_conversation_reporters.py",
+          "start_line": 250,
+          "end_line": 261,
+          "observation": "Serializes current result fields, not independent proof of historical archived values."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_conversation_reporters.py",
+          "start_line": 250,
+          "end_line": 254,
+          "observation": "Result dataclass is serialized as archived JSON."
+        }
+      ],
+      "guards": [
+        "Other branches do compute corpus statistics, but those measurements do not justify these constant security assertions.",
+        "Elapsed-time measurement is not an attestation check.",
+        "Treat report as historical unverified output; no present runtime condition follows from it.",
+        "Only Lote12 selected IDs receive new remediation outcomes. This collateral record retains its inherited decision/severity/remediation state.",
+        "Range/source refresh is explicit static maintenance. Except C0177 V04 revalidation, no historical reproduction is rerun or new runtime guarantee claimed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/before-source-snapshots.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh.json"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/01.json",
+      "resolution_type": "COLLATERAL_SOURCE_REFRESH_NO_NEW_CLOSURE",
+      "source_refresh": {
+        "inherited_decision": "CONFIRMED_STATIC",
+        "inherited_remediation_state": "OPEN",
+        "previous_current_source_sha256": "7c20663b9d3e9aaa69560c546c3905e97371a1692931808318da08f47454d752",
+        "previous_rationale": "The archived sitrep still asserts PASS/ATTESTED_C5_REAL and health_index=98.6. Its traced generator assigns those literals directly for agent 99; sync integrity and workspace isolation likewise have constant success branches. emit_sitrep_reports serializes these results without independent verification. Confirmed historical provenance overclaim; this review did not access source conversations or certify current workspace state.",
+        "pending_separate_readjudication": false
+      }
+    },
+    {
+      "candidate_id": "SW100-C0353",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/bft/bounty_claim_attester.py",
+      "current_source_sha256": "d15a2d2e01379343df172270a392506538ae8cbffba5eac77f18510098852ba0",
+      "rationale": "Receipt generation/verification in the primary attester is unchanged. The pipeline still generates receipts from risk findings and attempts enqueue; it now checks enqueue rejection. That queue fix does not bind omitted finding metadata into receipt verification. No new attestation or ledger effect was executed.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/bounty_claim_attester.py",
+          "start_line": 28,
+          "end_line": 61,
+          "observation": "Frozen dataclass has metadata and a broader compute_claim_hash, but immutability does not prevent constructing a modified copy."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/bounty_claim_attester.py",
+          "start_line": 77,
+          "end_line": 118,
+          "observation": "Generation and verification use only two root inputs."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py",
+          "start_line": 92,
+          "end_line": 200,
+          "observation": "Risk findings still select generated receipts; enqueue rejection is now explicit and does not repair the separate upstream metadata/decoder issue."
+        }
+      ],
+      "guards": [
+        "Changing payload_hash or hardware_anchor without matching root is detected.",
+        "Frozen dataclass blocks assignment but not deserialization/copy construction.",
+        "No hardware UUID extraction or ledger write was executed.",
+        "Only Lote12 selected IDs receive new remediation outcomes. This collateral record retains its inherited decision/severity/remediation state.",
+        "Range/source refresh is explicit static maintenance. Except C0177 V04 revalidation, no historical reproduction is rerun or new runtime guarantee claimed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/before-source-snapshots.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh.json",
+        "docs/security/evidence/swarm100-round3-20261028/16-source-evidence.json"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/16.json",
+      "resolution_type": "COLLATERAL_SOURCE_REFRESH_NO_NEW_CLOSURE",
+      "source_refresh": {
+        "inherited_decision": "CONFIRMED_STATIC",
+        "inherited_remediation_state": "OPEN",
+        "previous_current_source_sha256": "d15a2d2e01379343df172270a392506538ae8cbffba5eac77f18510098852ba0",
+        "previous_rationale": "Receipt generation and verification both root only payload_hash plus a hardware-anchor hash. Replacing advisory_id, claim_id, domain, finding_summary, risk_score or timestamp leaves those two inputs and the root unchanged, hence verify_receipt returns the same result. compute_claim_hash includes those metadata fields but verification never compares its output. The pipeline directly generates and enqueues these receipts. This establishes incomplete receipt coherence checking, without claiming a downstream authorization bypass or that all raw_payload copies omit finding metadata.",
+        "pending_separate_readjudication": false
+      }
+    },
+    {
+      "candidate_id": "SW100-C0356",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_destiladora/codegen_rust_b60.py",
+      "current_source_sha256": "8ee34a5eb6ff6926058da864ba632c9701689383f8deb67b2cd166ef3bfc13bf",
+      "rationale": "The public code generator and its schema remain unchanged, including its metadata promotion without compiler evidence. The repaired demonstration stops before Rust generation, so the old E2E reachability statement is historical. The generator issue stays OPEN; no claim of current demo activation or runtime deployment is made.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_destiladora/codegen_rust_b60.py",
+          "start_line": 28,
+          "end_line": 44,
+          "observation": "Generator selects proved/compiled rows with Lean proof status."
+        },
+        {
+          "path": "scripts/c5_destiladora/codegen_rust_b60.py",
+          "start_line": 182,
+          "end_line": 208,
+          "observation": "Source write followed by committed fixed timing and COMPILED update."
+        },
+        {
+          "path": "scripts/c5_destiladora/destiladora_schema.sql",
+          "start_line": 49,
+          "end_line": 58,
+          "observation": "Latency is documented measured and active_in_ring0 defaults to 1."
+        },
+        {
+          "path": "scripts/c5_destiladora/test_destiladora_e2e.py",
+          "start_line": 43,
+          "end_line": 91,
+          "observation": "Synthetic report stops before Rust and marks benchmark/native compilation NOT_EXECUTED; former demo behavior is not claimed current."
+        },
+        {
+          "path": "scripts/c5_destiladora/test_destiladora_e2e.py",
+          "start_line": 94,
+          "end_line": 114,
+          "observation": "Disposable demo returns failure until verified correspondence exists; no measured fast-path speedup is emitted."
+        }
+      ],
+      "guards": [
+        "Proof-status filter and generated unit-test source do not constitute successful Rust compilation or runtime timing.",
+        "ON CONFLICT DO NOTHING preserves existing rule rows but initial inserts remain misleading.",
+        "Only Lote12 selected IDs receive new remediation outcomes. This collateral record retains its inherited decision/severity/remediation state.",
+        "Range/source refresh is explicit static maintenance. Except C0177 V04 revalidation, no historical reproduction is rerun or new runtime guarantee claimed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/before-source-snapshots.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh.json",
+        "docs/security/evidence/swarm100-round3-20261028/reviews/00-notes.json"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/00.json",
+      "resolution_type": "COLLATERAL_SOURCE_REFRESH_NO_NEW_CLOSURE",
+      "source_refresh": {
+        "inherited_decision": "CONFIRMED_STATIC",
+        "inherited_remediation_state": "OPEN",
+        "previous_current_source_sha256": "8ee34a5eb6ff6926058da864ba632c9701689383f8deb67b2cd166ef3bfc13bf",
+        "previous_rationale": "generate_rust_fastpath writes source then commits metadata claiming status COMPILED and fixed execution_time_ns=180000 without invoking a compiler or measurement. On newly inserted rows active_in_ring0 defaults to 1. The E2E caller compiles later and merely returns False on failure, after metadata was already committed. This confirms misleading persistent state, not actual activation in running Ring-0.",
+        "pending_separate_readjudication": false
+      }
+    },
+    {
+      "candidate_id": "SW100-C0361",
+      "decision": "REJECTED",
+      "severity": "P2",
+      "remediation_state": "NOT_APPLICABLE",
+      "path": "scripts/babylon60/gen_oncology_primitives.py",
+      "current_source_sha256": "291fec22430e3841a4770943ca0cc584fb0ac6195ddaa3ae4c5cf9567ae8b1e1",
+      "rationale": "The previous rejection remains valid: EOF namespace termination is legal Lean syntax. The current generator additionally emits an explicit end Babylon60.Oncology. The historical omission is now absent, but neither version establishes the claimed compilation defect. NOT_APPLICABLE is preserved without inferring any other formal guarantee.",
+      "source_checks": [
+        {
+          "path": "scripts/babylon60/gen_oncology_primitives.py",
+          "start_line": 79,
+          "end_line": 169,
+          "observation": "Current generated module has explicit namespace/end; historical EOF termination was legal and the rejected defect stays NOT_APPLICABLE."
+        }
+      ],
+      "guards": [
+        "Lean language semantics close the namespace at EOF.",
+        "Official documentation was consulted; no compiler was executed.",
+        "Only Lote12 selected IDs receive new remediation outcomes. This collateral record retains its inherited decision/severity/remediation state.",
+        "Range/source refresh is explicit static maintenance. Except C0177 V04 revalidation, no historical reproduction is rerun or new runtime guarantee claimed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/before-source-snapshots.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh.json",
+        "docs/security/evidence/swarm100-round3-20261028/09-review-method.md"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/09.json",
+      "resolution_type": "COLLATERAL_SOURCE_REFRESH_NO_NEW_CLOSURE",
+      "source_refresh": {
+        "inherited_decision": "REJECTED",
+        "inherited_remediation_state": "NOT_APPLICABLE",
+        "previous_current_source_sha256": "df8f6fdde757fb4321a270e0b6b2e9b91d8dd67884e13b238e3c6387b2dea5e3",
+        "previous_rationale": "Rejected: absence of an explicit end at EOF is permitted by Lean. The official Namespaces and Sections reference states that namespace scope ends at a matching end or EOF and that the end command is optional at file end. The source has this omission but it is not the claimed compilation defect. This does not validate other generated declarations.",
+        "pending_separate_readjudication": false
+      }
+    },
+    {
+      "candidate_id": "SW100-C0375",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/bft/bounty_ring_dispatcher.py",
+      "current_source_sha256": "0bb4feab793ed3ca3281e6e57730e920bf66d7c1ad60317f9af31c1543a07ece",
+      "rationale": "The primary bounded-deque dispatcher is unchanged, and the pipeline still dispatches all frames before draining domain queues. Checking a later cold-ledger enqueue return does not remove bounded-deque eviction at dispatch. OPEN is preserved on source inspection; no new concurrent dispatch run was performed.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/bounty_ring_dispatcher.py",
+          "start_line": 29,
+          "end_line": 58,
+          "observation": "Telemetry lacks overflow count; all queues have maxlen."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/bounty_ring_dispatcher.py",
+          "start_line": 70,
+          "end_line": 110,
+          "observation": "Validation and FFI checks precede unchecked queue append and success count."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py",
+          "start_line": 104,
+          "end_line": 125,
+          "observation": "Whole batch is dispatched before any domain drainage."
+        }
+      ],
+      "guards": [
+        "MAC/channel identity, monotonic Lamport tick and FFI publish guards reject malformed/unpublished frames.",
+        "The finding requires valid frames that pass those guards and exceed per-domain capacity before drainage.",
+        "Corrupted-drop telemetry is updated on other failures but no queue-eviction counter exists.",
+        "Only Lote12 selected IDs receive new remediation outcomes. This collateral record retains its inherited decision/severity/remediation state.",
+        "Range/source refresh is explicit static maintenance. Except C0177 V04 revalidation, no historical reproduction is rerun or new runtime guarantee claimed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/before-source-snapshots.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh.json",
+        "docs/security/evidence/swarm100-round3-20261028/18-source-evidence.json"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/18.json",
+      "resolution_type": "COLLATERAL_SOURCE_REFRESH_NO_NEW_CLOSURE",
+      "source_refresh": {
+        "inherited_decision": "CONFIRMED_STATIC",
+        "inherited_remediation_state": "OPEN",
+        "previous_current_source_sha256": "0bb4feab793ed3ca3281e6e57730e920bf66d7c1ad60317f9af31c1543a07ece",
+        "previous_rationale": "Every domain queue is deque(maxlen=capacity), and routing appends without a full-queue check while total_dispatched increases. Python bounded deques evict the oldest item on append. The pipeline dispatches the complete frame batch before draining domains, so more than capacity accepted frames for one domain silently remove earlier work.",
+        "pending_separate_readjudication": false
+      }
+    },
+    {
+      "candidate_id": "SW100-C0376",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_destiladora/invariant_extractor_z3.py",
+      "current_source_sha256": "09c6fbf9668323bca1c56bdfa441277ff641a57bc3fcc59189477a416a0f5959",
+      "rationale": "The primary extractor/ingestor still have their recorded first-trace/cluster-validation limitations. The repaired proof emitter now refuses certification and no longer independently promotes a selected trace to PROVED. The extractor issue remains OPEN, with downstream proof amplification explicitly no longer asserted for this path.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_destiladora/invariant_extractor_z3.py",
+          "start_line": 52,
+          "end_line": 86,
+          "observation": "Only traces[0] supplies FILES_COUNT, and SAT checks the asserted assumptions."
+        },
+        {
+          "path": "scripts/c5_destiladora/invariant_extractor_z3.py",
+          "start_line": 90,
+          "end_line": 117,
+          "observation": "SAT results persist the cluster as EXTRACTED."
+        },
+        {
+          "path": "scripts/c5_destiladora/goal_trace_ingestor.py",
+          "start_line": 60,
+          "end_line": 62,
+          "observation": "Input digest hashes concatenated filenames plus contract, without boundaries or a count."
+        },
+        {
+          "path": "scripts/c5_destiladora/goal_trace_ingestor.py",
+          "start_line": 101,
+          "end_line": 110,
+          "observation": "Same digest and gate command produce the same cluster ID."
+        },
+        {
+          "path": "scripts/c5_destiladora/proof_emitter_lean4.py",
+          "start_line": 31,
+          "end_line": 78,
+          "observation": "Current emitter withdraws PROVED eligibility; the unchanged extractor's cluster-validation issue is not repaired by that rejection."
+        },
+        {
+          "path": "scripts/c5_destiladora/codegen_rust_b60.py",
+          "start_line": 37,
+          "end_line": 65,
+          "observation": "Codegen requires proof status but derives cardinality from another LIMIT 1 query."
+        }
+      ],
+      "guards": [
+        "Minimum cluster sample_count and successful exit-code filtering exist, but they do not compare observed cardinalities.",
+        "The ingestor digest narrows ordinary collisions but admits the explicit serialization-ambiguity witness.",
+        "Lean/PROVED requirements establish the generated model, not empirical agreement of all stored traces.",
+        "Only Lote12 selected IDs receive new remediation outcomes. This collateral record retains its inherited decision/severity/remediation state.",
+        "Range/source refresh is explicit static maintenance. Except C0177 V04 revalidation, no historical reproduction is rerun or new runtime guarantee claimed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/before-source-snapshots.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh.json",
+        "docs/security/evidence/swarm100-round3-20261028/02-source-snapshots.json"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/02.json",
+      "resolution_type": "COLLATERAL_SOURCE_REFRESH_NO_NEW_CLOSURE",
+      "source_refresh": {
+        "inherited_decision": "CONFIRMED_STATIC",
+        "inherited_remediation_state": "OPEN",
+        "previous_current_source_sha256": "09c6fbf9668323bca1c56bdfa441277ff641a57bc3fcc59189477a416a0f5959",
+        "previous_rationale": "The extractor checks satisfiability of its asserted first-trace count and marks the cluster EXTRACTED without testing the remaining traces. The ingestor does include filenames in the digest, but uses delimiter-free concatenation: [\"ab\", \"c\"] and [\"abc\"] produce the same preimage with the same contract and gate command while containing different counts. Thus this guard does not make the trigger impossible. Downstream proof/codegen independently select LIMIT 1, so they do not repair the missing cluster validation. This supports false cluster-invariant promotion, not an authorization bypass.",
+        "pending_separate_readjudication": false
+      }
+    },
+    {
+      "candidate_id": "SW100-C0386",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_destiladora/test_destiladora_e2e.py",
+      "current_source_sha256": "3d43668716203b1d41ccce51dc5ed2cfa924175dd460aa62e241c689f49c856f",
+      "rationale": "PENDING_SEPARATE_READJUDICATION: the old timed-compiler/literal-speedup report has been removed. The current synthetic demo declares benchmark and native compilation NOT_EXECUTED and exits unsuccessfully while correspondence is unverified. The old benchmark defect is not claimed to persist in current code. OPEN and the inherited CONFIRMED_STATIC decision are retained pending separate adjudication; no benchmark or closure was performed here.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_destiladora/test_destiladora_e2e.py",
+          "start_line": 43,
+          "end_line": 91,
+          "observation": "Synthetic report stops before Rust and marks benchmark/native compilation NOT_EXECUTED; former demo behavior is not claimed current."
+        },
+        {
+          "path": "scripts/c5_destiladora/test_destiladora_e2e.py",
+          "start_line": 94,
+          "end_line": 114,
+          "observation": "Disposable demo returns failure until verified correspondence exists; no measured fast-path speedup is emitted."
+        }
+      ],
+      "guards": [
+        "Cargo check and test return codes are checked; those checks do not validate latency or speedup.",
+        "Only Lote12 selected IDs receive new remediation outcomes. This collateral record retains its inherited decision/severity/remediation state.",
+        "Range/source refresh is explicit static maintenance. Except C0177 V04 revalidation, no historical reproduction is rerun or new runtime guarantee claimed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/before-source-snapshots.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh.json",
+        "docs/security/evidence/swarm100-round3-20261028/14-review-evidence.json"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/14.json",
+      "resolution_type": "COLLATERAL_SOURCE_REFRESH_NO_NEW_CLOSURE",
+      "source_refresh": {
+        "inherited_decision": "CONFIRMED_STATIC",
+        "inherited_remediation_state": "OPEN",
+        "previous_current_source_sha256": "4faf9b3fddcdb37f6ba083bdf5fe813c46ae3bd230ad35617c9a5088492a70de",
+        "previous_rationale": "The final report labels a literal 0.18 ms as measured and prints literal 27,444x acceleration. The only captured elapsed interval is cargo check, and the subsequent test subprocess is not timed. Earlier return-code checks determine whether the report is printed, not whether its latency claims were measured. Confirmed as misleading demonstration evidence; no benchmark was performed.",
+        "pending_separate_readjudication": true
+      }
+    },
+    {
+      "candidate_id": "SW100-C0405",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/bft/defi_bytecode_scraper.py",
+      "current_source_sha256": "a53545028651256202910f1e531ebb096c64b46a21f91859ec629dbb17d698d0",
+      "rationale": "The primary EVM decoder is unchanged, including the recorded TLOAD constant. The pipeline still uses risk findings to select receipts, now with observable enqueue rejection. That delivery change does not repair opcode decoding. OPEN is preserved without a new EVM runtime or standards assertion.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/defi_bytecode_scraper.py",
+          "start_line": 41,
+          "end_line": 49,
+          "observation": "TLOAD is defined as 0x5C+2."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/defi_bytecode_scraper.py",
+          "start_line": 132,
+          "end_line": 149,
+          "observation": "Disassembler skips PUSH operands but preserves standalone opcodes."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/defi_bytecode_scraper.py",
+          "start_line": 222,
+          "end_line": 242,
+          "observation": "Incorrect count drives imbalance findings."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py",
+          "start_line": 92,
+          "end_line": 200,
+          "observation": "Risk findings still select generated receipts; enqueue rejection is now explicit and does not repair the separate upstream metadata/decoder issue."
+        }
+      ],
+      "guards": [
+        "PUSH-data exclusion avoids one false-positive class but cannot correct an incorrect opcode constant.",
+        "No EVM transaction or receipt generation was executed.",
+        "Only Lote12 selected IDs receive new remediation outcomes. This collateral record retains its inherited decision/severity/remediation state.",
+        "Range/source refresh is explicit static maintenance. Except C0177 V04 revalidation, no historical reproduction is rerun or new runtime guarantee claimed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/before-source-snapshots.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh.json",
+        "docs/security/evidence/swarm100-round3-20261028/reviews/00-notes.json"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/00.json",
+      "resolution_type": "COLLATERAL_SOURCE_REFRESH_NO_NEW_CLOSURE",
+      "source_refresh": {
+        "inherited_decision": "CONFIRMED_STATIC",
+        "inherited_remediation_state": "OPEN",
+        "previous_current_source_sha256": "a53545028651256202910f1e531ebb096c64b46a21f91859ec629dbb17d698d0",
+        "previous_rationale": "The current TLOAD constant evaluates to 0x5e and analyze_bytecode counts that byte. EIP-1153 specifies TLOAD=0x5c and TSTORE=0x5d (official source https://eips.ethereum.org/EIPS/eip-1153, read 2026-10-28). Actual 0x5c reads are omitted and 0x5e is mislabeled. Counts feed transient-storage risk findings and the orchestrator receipt threshold.",
+        "pending_separate_readjudication": false
+      }
+    },
+    {
+      "candidate_id": "SW100-C0406",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/bft/defi_bytecode_scraper.py",
+      "current_source_sha256": "a53545028651256202910f1e531ebb096c64b46a21f91859ec629dbb17d698d0",
+      "rationale": "The primary hook-permission address decoding is unchanged. The pipeline still uses its risk findings when selecting receipts, although enqueue rejection is now observed. OPEN is preserved; no new EVM/contract execution was performed.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/defi_bytecode_scraper.py",
+          "start_line": 25,
+          "end_line": 39,
+          "observation": "Flag values are consistent with 14 low-bit mask but comment incorrectly says high bits."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/defi_bytecode_scraper.py",
+          "start_line": 72,
+          "end_line": 101,
+          "observation": "Length validation followed by high-bit extraction."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/defi_bytecode_scraper.py",
+          "start_line": 284,
+          "end_line": 298,
+          "observation": "Hook permissions directly modify findings and risk."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py",
+          "start_line": 92,
+          "end_line": 200,
+          "observation": "Risk findings still select generated receipts; enqueue rejection is now explicit and does not repair the separate upstream metadata/decoder issue."
+        }
+      ],
+      "guards": [
+        "40-hex-character length check does not validate bit placement.",
+        "No hook deployment or on-chain behavior was executed.",
+        "Only Lote12 selected IDs receive new remediation outcomes. This collateral record retains its inherited decision/severity/remediation state.",
+        "Range/source refresh is explicit static maintenance. Except C0177 V04 revalidation, no historical reproduction is rerun or new runtime guarantee claimed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/before-source-snapshots.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh.json",
+        "docs/security/evidence/swarm100-round3-20261028/reviews/00-notes.json"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/00.json",
+      "resolution_type": "COLLATERAL_SOURCE_REFRESH_NO_NEW_CLOSURE",
+      "source_refresh": {
+        "inherited_decision": "CONFIRMED_STATIC",
+        "inherited_remediation_state": "OPEN",
+        "previous_current_source_sha256": "a53545028651256202910f1e531ebb096c64b46a21f91859ec629dbb17d698d0",
+        "previous_rationale": "from_address shifts away the low 146 bits before masking. Official Uniswap v4 Hooks.sol inspects low address bits and sets BEFORE_SWAP_FLAG=1<<7 (https://raw.githubusercontent.com/Uniswap/v4-core/main/src/libraries/Hooks.sol, read 2026-10-28). Address 0x0000000000000000000000000000000000000080 is decoded as zero here despite that flag. Resulting risk findings/receipt selection can be wrong.",
+        "pending_separate_readjudication": false
+      }
+    },
+    {
+      "candidate_id": "SW100-C0426",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_git_utils/commit_polisher.py",
+      "current_source_sha256": "d50ad9a564ea458fb5f70ad99fc881bbdd847bf222596bc7761ab8074636e6d6",
+      "rationale": "The unchanged commit polisher still names scripts/rewrite_commits.py, which is absent. The implementation continues to exist under scripts/c5_git_utils/rewrite_commits.py; its backup-safety repair does not fix that caller path. No rewrite or Git mutation was executed for this review.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_git_utils/commit_polisher.py",
+          "start_line": 24,
+          "end_line": 26,
+          "observation": "Working directory is repository root."
+        },
+        {
+          "path": "scripts/c5_git_utils/commit_polisher.py",
+          "start_line": 59,
+          "end_line": 65,
+          "observation": "Rewrite path is hard-coded to the absent location."
+        },
+        {
+          "path": "scripts/c5_git_utils/commit_polisher.py",
+          "start_line": 96,
+          "end_line": 112,
+          "observation": "Caller reaches rewrite only after reviewer/optimizer and handles failure by continuing."
+        },
+        {
+          "path": "scripts/c5_git_utils/rewrite_commits.py",
+          "start_line": 1,
+          "end_line": 18,
+          "observation": "Rewrite implementation remains in scripts/c5_git_utils; the polisher's obsolete scripts/rewrite_commits.py path is still absent."
+        }
+      ],
+      "guards": [
+        "Reviewer and optimizer can prevent reaching the bad path; successful prerequisites do not repair it.",
+        "Targeted filename inventory included scripts, engine, tests, tools and .github; no repository alias to the old path was found.",
+        "Only Lote12 selected IDs receive new remediation outcomes. This collateral record retains its inherited decision/severity/remediation state.",
+        "Range/source refresh is explicit static maintenance. Except C0177 V04 revalidation, no historical reproduction is rerun or new runtime guarantee claimed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/before-source-snapshots.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh.json",
+        "docs/security/evidence/swarm100-round3-20261028/08-source-evidence.json",
+        "docs/security/evidence/swarm100-round3-20261028/08-validation.json"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/08.json",
+      "resolution_type": "COLLATERAL_SOURCE_REFRESH_NO_NEW_CLOSURE",
+      "source_refresh": {
+        "inherited_decision": "CONFIRMED_STATIC",
+        "inherited_remediation_state": "OPEN",
+        "previous_current_source_sha256": "d50ad9a564ea458fb5f70ad99fc881bbdd847bf222596bc7761ab8074636e6d6",
+        "previous_rationale": "The rewrite subprocess uses scripts/rewrite_commits.py under the repository root. That exact path is absent in the current filesystem, while scripts/c5_git_utils/rewrite_commits.py exists. If strict review and optimization pass, the call raises CalledProcessError and takes the retry/failure-recording branch. Source/path checks only; no Git rewriting or daemon execution occurred.",
+        "pending_separate_readjudication": false
+      }
+    },
+    {
+      "candidate_id": "SW100-C0436",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_cli/moskv_native_host.py",
+      "current_source_sha256": "ea28bbfee08801da5c9fb44fe82bd2350c90b5f85fb92e778df3f60f8a297432",
+      "rationale": "PENDING_SEPARATE_READJUDICATION: the old unlocked read/modify/truncate operations were replaced by a shared flock, descriptor-relative reads and atomic replacement. The historic lost-update/truncated-JSON trigger is not asserted to persist. OPEN and its inherited CONFIRMED_STATIC decision are retained pending explicit separate concurrency adjudication; this source refresh performs no new race reproduction or closure.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_cli/moskv_native_host.py",
+          "start_line": 213,
+          "end_line": 239,
+          "observation": "Shared flock covers current cooperative operations; old unlocked protocol is removed and awaits separate adjudication."
+        },
+        {
+          "path": "scripts/c5_cli/moskv_native_host.py",
+          "start_line": 258,
+          "end_line": 274,
+          "observation": "Current writes use an exclusive temporary, fsync and descriptor-relative atomic replace."
+        },
+        {
+          "path": "scripts/c5_cli/moskv_native_host.py",
+          "start_line": 288,
+          "end_line": 296,
+          "observation": "Whole read/append/write now executes inside the common queue-store context."
+        },
+        {
+          "path": "scripts/c5_cli/moskv_native_host.py",
+          "start_line": 299,
+          "end_line": 307,
+          "observation": "Whole read/pop/write now executes inside the common queue-store context."
+        },
+        {
+          "path": "scripts/c5_cli/moskv_native_host.py",
+          "start_line": 326,
+          "end_line": 334,
+          "observation": "READY consumes from this queue."
+        },
+        {
+          "path": "scripts/c5_cli/moskv_native_host.py",
+          "start_line": 402,
+          "end_line": 409,
+          "observation": "Separate --enqueue invocations produce into the same queue."
+        }
+      ],
+      "guards": [
+        "Serial operations preserve their simple FIFO behavior.",
+        "JSON shape checks reject malformed structure but do not serialize concurrent writers.",
+        "Only Lote12 selected IDs receive new remediation outcomes. This collateral record retains its inherited decision/severity/remediation state.",
+        "Range/source refresh is explicit static maintenance. Except C0177 V04 revalidation, no historical reproduction is rerun or new runtime guarantee claimed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/before-source-snapshots.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh.json"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/10.json",
+      "resolution_type": "COLLATERAL_SOURCE_REFRESH_NO_NEW_CLOSURE",
+      "source_refresh": {
+        "inherited_decision": "CONFIRMED_STATIC",
+        "inherited_remediation_state": "OPEN",
+        "previous_current_source_sha256": "37e151085da1c01ecd002c9e7839ff366510527c55442a983f6e4a062c08d92a",
+        "previous_rationale": "Queue producers and consumer each read, modify, and overwrite the entire JSON file without a shared lock or atomic update. Two producers can both read Q then leave only Q+A or Q+B; a consumer can race an enqueue and lose or restore a prompt. A partial write can also be treated as an empty queue. No concurrent processes were executed.",
+        "pending_separate_readjudication": true
+      }
+    },
+    {
+      "candidate_id": "SW100-C0485",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+      "current_source_sha256": "57773548924aef80661afcc6d6878e46ef7267777bb447404b91c89a02ebb6c0",
+      "rationale": "The token-bucket refill/debt code is unchanged, and query still sleeps separately after a reservation. The sensitive-explicit-destination repair is outside those branches. OPEN is preserved for the recorded reservation defect, without a new timing or provider run.",
+      "source_checks": [
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+          "start_line": 273,
+          "end_line": 309,
+          "observation": "_refill resets future _last_refill and deficit calculation does not accumulate pending debt."
+        },
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+          "start_line": 807,
+          "end_line": 826,
+          "observation": "Rate-limiter result is slept independently before network dispatch."
+        },
+        {
+          "path": "tests/test_agents_archi.py",
+          "start_line": 291,
+          "end_line": 297,
+          "observation": "Existing deterministic test covers only the first deficit caller."
+        }
+      ],
+      "guards": [
+        "threading.Lock serializes calculation but releases before sleep.",
+        "Quota is a daily budget and is not an inter-request rate constraint.",
+        "Only Lote12 selected IDs receive new remediation outcomes. This collateral record retains its inherited decision/severity/remediation state.",
+        "Range/source refresh is explicit static maintenance. Except C0177 V04 revalidation, no historical reproduction is rerun or new runtime guarantee claimed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/before-source-snapshots.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh.json",
+        "docs/security/evidence/swarm100-round3-20261028/12-source-evidence.json"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/12.json",
+      "resolution_type": "COLLATERAL_SOURCE_REFRESH_NO_NEW_CLOSURE",
+      "source_refresh": {
+        "inherited_decision": "CONFIRMED_STATIC",
+        "inherited_remediation_state": "OPEN",
+        "previous_current_source_sha256": "eccd5ae01bb29f6e4faeaf3ce275d341a46112e030923d7139222d632d22834a",
+        "previous_rationale": "A deficit caller stores a future refill time; the next caller at the same clock value resets it to now, leaving zero tokens and reserving the same wait. For a depleted 15-RPM bucket, multiple callers each receive 4 seconds instead of successive slots. query sleeps after the lock is released. The thread lock prevents data races but not duplicate future reservations.",
+        "pending_separate_readjudication": false
+      }
+    },
+    {
+      "candidate_id": "SW100-C0491",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/install_shield.sh",
+      "current_source_sha256": "cd9166eae829e327e4f9422bc7203b3e164e7d6f6e8522e2fc69bc55403c9e48",
+      "rationale": "The installer acquisition loop still removes an existing lock after its retry count, and release still removes the path without ownership validation. Instruction-preservation changes do not repair that lock protocol. OPEN is preserved without running installation or lock contenders.",
+      "source_checks": [
+        {
+          "path": "tools/install_shield.sh",
+          "start_line": 37,
+          "end_line": 50,
+          "observation": "Acquisition forcibly removes an existing lock after a retry count and release unconditionally removes the path."
+        },
+        {
+          "path": "tools/install_shield.sh",
+          "start_line": 52,
+          "end_line": 53,
+          "observation": "The lock and EXIT trap cover the installation body."
+        },
+        {
+          "path": "tools/install_shield.sh",
+          "start_line": 241,
+          "end_line": 242,
+          "observation": "Normal completion also removes the lock without ownership validation."
+        }
+      ],
+      "guards": [
+        "mkdir provides atomic initial acquisition only.",
+        "Neither a PID/nonce nor an ownership/inode check protects eviction or release.",
+        "Only Lote12 selected IDs receive new remediation outcomes. This collateral record retains its inherited decision/severity/remediation state.",
+        "Range/source refresh is explicit static maintenance. Except C0177 V04 revalidation, no historical reproduction is rerun or new runtime guarantee claimed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/before-source-snapshots.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh.json",
+        "docs/security/evidence/swarm100-round3-20261028/09-review-method.md"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/09.json",
+      "resolution_type": "COLLATERAL_SOURCE_REFRESH_NO_NEW_CLOSURE",
+      "source_refresh": {
+        "inherited_decision": "CONFIRMED_STATIC",
+        "inherited_remediation_state": "OPEN",
+        "previous_current_source_sha256": "bbedf380b5945b2c432af96352a0f640ccf09e1e9858ad1498ad61a33919583d",
+        "previous_rationale": "A competing installer deletes the shared lock directory after more than 200 failed mkdir attempts separated by 5ms sleeps, regardless of owner liveness. A still-running owner can therefore overlap a new owner; either release may remove the replacement lock. The nominal wait is about one second plus command overhead, not a stale-owner proof.",
+        "pending_separate_readjudication": false
+      }
+    },
+    {
+      "candidate_id": "SW100-C0492",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/install_shield.sh",
+      "current_source_sha256": "cd9166eae829e327e4f9422bc7203b3e164e7d6f6e8522e2fc69bc55403c9e48",
+      "rationale": "Uninstall still removes any symlink at the instruction paths without testing its target. Installation now backs up replaced instructions; this does not add an ownership check to uninstall. OPEN is preserved; no uninstall or user instruction mutation was executed.",
+      "source_checks": [
+        {
+          "path": "tools/install_shield.sh",
+          "start_line": 64,
+          "end_line": 80,
+          "observation": "Uninstall removes any -L entry in the seven instruction paths."
+        },
+        {
+          "path": "tools/install_shield.sh",
+          "start_line": 180,
+          "end_line": 201,
+          "observation": "Installation preserves replaced instructions; uninstall target ownership remains unchecked."
+        }
+      ],
+      "guards": [
+        "The --uninstall flag gates this operation.",
+        "The -L check distinguishes symlinks from regular files but does not establish installer ownership.",
+        "Only Lote12 selected IDs receive new remediation outcomes. This collateral record retains its inherited decision/severity/remediation state.",
+        "Range/source refresh is explicit static maintenance. Except C0177 V04 revalidation, no historical reproduction is rerun or new runtime guarantee claimed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/before-source-snapshots.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh.json",
+        "docs/security/evidence/swarm100-round3-20261028/09-review-method.md"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/09.json",
+      "resolution_type": "COLLATERAL_SOURCE_REFRESH_NO_NEW_CLOSURE",
+      "source_refresh": {
+        "inherited_decision": "CONFIRMED_STATIC",
+        "inherited_remediation_state": "OPEN",
+        "previous_current_source_sha256": "bbedf380b5945b2c432af96352a0f640ccf09e1e9858ad1498ad61a33919583d",
+        "previous_rationale": "Uninstall removes every symlink at the listed workspace instruction paths without checking whether its target belongs to Shield. An unrelated pre-existing link therefore satisfies the deletion branch. This is a direct uninstall behavior; no uninstall was run.",
+        "pending_separate_readjudication": false
+      }
+    },
+    {
+      "candidate_id": "SW100-C0534",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_l1_ledger/seal_bounty_aeon.py",
+      "current_source_sha256": "a3686548681ee16f73a088d06bd67443d73272afe868fc5e9c381e69d40cc6b0",
+      "rationale": "The sealer still chooses AUTHENTICATED_RFC3161_TSA solely from tsr_b64 field presence and persists that status/token. Its complete-manifest software signature authenticates the chosen bytes, not a TSA signature/imprint/trust chain. The RFC3161 client is unchanged; OPEN is preserved without a TSA request.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_l1_ledger/seal_bounty_aeon.py",
+          "start_line": 126,
+          "end_line": 132,
+          "observation": "Field presence determines authenticated label."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/crypto/rfc3161.py",
+          "start_line": 85,
+          "end_line": 119,
+          "observation": "HTTP 200 body is directly base64-encoded."
+        },
+        {
+          "path": "scripts/c5_l1_ledger/seal_bounty_aeon.py",
+          "start_line": 130,
+          "end_line": 131,
+          "observation": "TSA authenticated label is still selected solely from tsr_b64 presence."
+        },
+        {
+          "path": "scripts/c5_l1_ledger/seal_bounty_aeon.py",
+          "start_line": 156,
+          "end_line": 160,
+          "observation": "Artifact stores the label and token; software manifest signing is not TSA verification."
+        },
+        {
+          "path": "scripts/c5_l1_ledger/seal_bounty_aeon.py",
+          "start_line": 184,
+          "end_line": 185,
+          "observation": "Artifact persisted without token validation."
+        }
+      ],
+      "guards": [
+        "Missing/failed response gets offline label.",
+        "HTTP success and transport security do not verify RFC3161 token signature or imprint.",
+        "Only Lote12 selected IDs receive new remediation outcomes. This collateral record retains its inherited decision/severity/remediation state.",
+        "Range/source refresh is explicit static maintenance. Except C0177 V04 revalidation, no historical reproduction is rerun or new runtime guarantee claimed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/before-source-snapshots.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/collateral-source-refresh.json",
+        "docs/security/evidence/swarm100-round3-20261028/17-source-evidence.json"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/17.json",
+      "resolution_type": "COLLATERAL_SOURCE_REFRESH_NO_NEW_CLOSURE",
+      "source_refresh": {
+        "inherited_decision": "CONFIRMED_STATIC",
+        "inherited_remediation_state": "OPEN",
+        "previous_current_source_sha256": "154e38e4308b098e7687b266f337ec684b5ebd9488afcf186ab52c85139f8916",
+        "previous_rationale": "TSA authentication label depends solely on presence of tsr_b64. Client returns that field for any HTTP 200 body, without parsing timestamp status, signature, certificate trust or message imprint; sealer persists the label and token. Malformed or rejection bodies can be labeled authenticated. No TSA network request or remote mutation was performed.",
+        "pending_separate_readjudication": false
+      }
+    }
+  ],
+  "source_sha256": {
+    "01_KISH_ENGINE/babylon60/attestation/__init__.py": "a09badf60fadd101026c903d3d8069dfd251ae7fe912766785d7559e2a831b54",
+    "01_KISH_ENGINE/babylon60/attestation/conformal_tree.py": "519f8c6c4eb3a3021b27893de5e4028e96a13415bec48a03fc97dd3104df99d1",
+    "01_KISH_ENGINE/babylon60/attestation/merkle_anchor.py": "5cba54beb0a8d463e2d6e9b50d2ebcdc3f10783210ad83702d674f88358cbbe1",
+    "01_KISH_ENGINE/babylon60/bft/bounty_claim_attester.py": "d15a2d2e01379343df172270a392506538ae8cbffba5eac77f18510098852ba0",
+    "01_KISH_ENGINE/babylon60/bft/bounty_cold_ledger.py": "09a3b4d98b95696f1a02f0cc5ed53fcd6a66b5cbb6b5ea18fe899023e0aee656",
+    "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py": "132813d0e2d2eb29be76afecb6ee5c04bface45ada673a6925ea55112b924ca9",
+    "01_KISH_ENGINE/babylon60/bft/bounty_ring_dispatcher.py": "0bb4feab793ed3ca3281e6e57730e920bf66d7c1ad60317f9af31c1543a07ece",
+    "01_KISH_ENGINE/babylon60/bft/defi_bytecode_scraper.py": "a53545028651256202910f1e531ebb096c64b46a21f91859ec629dbb17d698d0",
+    "01_KISH_ENGINE/babylon60/compliance_exporter/m0_evidence_pack.py": "06c036efed923098a8986bca00daad3c9e5f61e27d262471498954bac703ed25",
+    "01_KISH_ENGINE/babylon60/crypto/rfc3161.py": "51606325310efa614ed04cf91a10cb13b5672a97c9dbd02a819ef0acd7e49acc",
+    "01_KISH_ENGINE/babylon60/primitives/sandbox.py": "750fd030aef40012bb73af11254b90a7b308d57f803ba78b88e2e21d5eb3fa22",
+    "01_KISH_ENGINE/babylon60/verifier/cli.py": "ac06ddc82d3c8920af4f10fc328076d817421b10b38b5a238a0e560d4f6a9599",
+    "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py": "d150a286d1267fc6afa26dd6c59d41266f40c26a428cf29885465af041a083fc",
+    "02_EDIN_SWARMS/agents_archi/clients/openrouter.py": "57773548924aef80661afcc6d6878e46ef7267777bb447404b91c89a02ebb6c0",
+    "scripts/babylon60/gen_oncology_primitives.py": "291fec22430e3841a4770943ca0cc584fb0ac6195ddaa3ae4c5cf9567ae8b1e1",
+    "scripts/c5_cli/moskv_native_host.py": "ea28bbfee08801da5c9fb44fe82bd2350c90b5f85fb92e778df3f60f8a297432",
+    "scripts/c5_destiladora/codegen_rust_b60.py": "8ee34a5eb6ff6926058da864ba632c9701689383f8deb67b2cd166ef3bfc13bf",
+    "scripts/c5_destiladora/destiladora_schema.sql": "0e4de5848a549b248640e4f39d9de2bbac920b506f860833cc4cdaffc61da2ef",
+    "scripts/c5_destiladora/goal_trace_ingestor.py": "b7ce8630f10b4ecc66b22a547ee559068351c1913a66623b57d57e3239999e4c",
+    "scripts/c5_destiladora/invariant_extractor_z3.py": "09c6fbf9668323bca1c56bdfa441277ff641a57bc3fcc59189477a416a0f5959",
+    "scripts/c5_destiladora/proof_emitter_lean4.py": "09c13761b760338fc9d747725c66f04f7a166acac92e5d2c950ad3ed047167fb",
+    "scripts/c5_destiladora/test_destiladora_e2e.py": "3d43668716203b1d41ccce51dc5ed2cfa924175dd460aa62e241c689f49c856f",
+    "scripts/c5_git_utils/commit_polisher.py": "d50ad9a564ea458fb5f70ad99fc881bbdd847bf222596bc7761ab8074636e6d6",
+    "scripts/c5_git_utils/rewrite_commits.py": "64f47ebb82ad50e35af48a9d6177f9c9b05acb7227e6c272dc89a14db15c2aa8",
+    "scripts/c5_l1_ledger/seal_bounty_aeon.py": "a3686548681ee16f73a088d06bd67443d73272afe868fc5e9c381e69d40cc6b0",
+    "scripts/c5_sharur/sharur_100_conversation_auditor.py": "42ce019054e4d77b0165c005bfc73676af664f14bba823c5c859ee7dea85f1c4",
+    "scripts/c5_sharur/sharur_100_conversation_reporters.py": "6212c3afe9a9691ca533969b7a088529a8d29393ae9116ae6eae73fefff988b7",
+    "scripts/c5_sharur/sharur_100_conversations_sitrep.json": "7c20663b9d3e9aaa69560c546c3905e97371a1692931808318da08f47454d752",
+    "tests/conftest.py": "340d6f5daa7fad2aa9df72b3240ef42562058cbb5328f4fc0b9ed5455aeb8c1a",
+    "tests/test_agents_archi.py": "9f6242f5827f79cfb1630993904415a7caa6acded7f46847a332ced3aac53b04",
+    "tests/test_moskv_native_host.py": "c59a51e487e00890fa2bb4c7e4b1a1193693038e9c493dd4a9c58ae16be7cdbc",
+    "tools/install_shield.sh": "cd9166eae829e327e4f9422bc7203b3e164e7d6f6e8522e2fc69bc55403c9e48"
+  }
+}

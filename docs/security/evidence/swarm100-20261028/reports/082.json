@@ -1,0 +1,427 @@
+{
+  "shard": "082",
+  "findings": [
+    {
+      "title": "New face tracks are returned twice on their first frame",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-neural-face-swap-cuadrilla/scripts/c5_smoother.py",
+      "line": 220,
+      "evidence": "New tracks are appended at lines 215-216 but never added to matched_tracks; the lost-track loop at 219-224 increments their lost count and appends the same face again. c5_face_swap_cli.py:280 consumes tracker.update assignments.",
+      "trigger": "Any previously unseen detected face with an assigned identity.",
+      "impact": "The face is processed twice in one frame and starts with lost=1 despite having just been detected, producing redundant swaps and incorrect extrapolation lifetime.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Blur framing fails for sources taller than the output aspect ratio",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-neural-face-swap-cuadrilla/scripts/c5_smoother.py",
+      "line": 284,
+      "evidence": "scaled_h is computed exclusively from target_w/src_w at 279-281; negative y_offset is used directly for the destination slice at 283-284 without fitting/cropping foreground.",
+      "trigger": "A portrait source such as 1080x2400 with default 1080x1920 output and mode=blur.",
+      "impact": "The destination slice cannot accommodate the full foreground array, so NumPy assignment raises a shape error and framing aborts.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Gate receipts assert verified compliance without evaluating it",
+      "severity": "P2",
+      "path": "crates/eridu-infer/src/gate.rs",
+      "line": 97,
+      "evidence": "evaluate_and_seal only hashes tick/model/prompt and publishes a digest (62-89); it unconditionally emits EU_AI_ACT_COMPLIANT_ARTICLE_12_14_VERIFIED at 97. server.rs:139 calls this on request content and uses its seal in generated responses.",
+      "trigger": "Any inference request for which publish succeeds.",
+      "impact": "A receipt represents regulatory verification and attestation without policy checks, evidence validation, authority signature, or compliance evaluation. This is an unsupported runtime output claim, not evidence of a cryptographic authorization bypass.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Receipt hash does not distinguish model/prompt boundaries",
+      "severity": "P2",
+      "path": "crates/eridu-infer/src/gate.rs",
+      "line": 67,
+      "evidence": "The hash updates concatenate tick bytes, model bytes and prompt bytes at 66-68 without length prefixes or separators.",
+      "trigger": "Two gates at the same tick evaluate (model=\"ab\", prompt=\"c\") and (model=\"a\", prompt=\"bc\").",
+      "impact": "Different inference inputs yield identical prompt_hash and attestation_seal without a SHA-256 collision, undermining receipt input binding.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Vault consolidation records a fixed session catalogue instead of reading source sessions",
+      "severity": "P2",
+      "path": "scripts/c5_cortex/consolidate_babylon_vault.py",
+      "line": 164,
+      "evidence": "REPORT_PATH and REPORT_FALLBACK are declared but never read; the loop inserts the static UNCONSOLIDATED_SESSIONS into L1/L3 and vault_consolidations, commits at 212, and reports SUCCESS at 224.",
+      "trigger": "Running consolidation against an empty vault or with source logs missing or differing from the embedded catalogue.",
+      "impact": "Persistent memory is populated with summaries and consolidation attestations without evidence that those sessions exist or were actually consolidated; subsequent runs skip those IDs.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Cancer pipeline emits attested numerical invariants without inputs or computation",
+      "severity": "P2",
+      "path": "scripts/c5_isomorphisms/cancer_isomorphism_pipeline.py",
+      "line": 23,
+      "evidence": "run_cancer_isomorphism_pipeline constructs fixed morphism_preservation=True, spectral_radius_bound=0.021, isomorphism_degree=1:1_DETERMINISTIC and status=ATTESTED at 18-28. CLI accepts only --json.",
+      "trigger": "Any invocation, including with no cellular model or observations available.",
+      "impact": "Machine consumers receive fabricated verification status and a numerical bound presented as pipeline results; this supplies no scientific evidence for the asserted invariants.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Repository inventory falsely marks every repository as having a README",
+      "severity": "P2",
+      "path": "tools/skill_library/global/github-architect/scripts/fetch_repos_graphql.py",
+      "line": 100,
+      "evidence": "GraphQL requests workflows but never a README object; enrichment nevertheless writes has_readme=True unconditionally.",
+      "trigger": "A queried repository lacks a README.",
+      "impact": "Downstream repository audits are given a false positive for documentation presence and can skip needed remediation.",
+      "confidence": "high",
+      "kind": "runtime"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "src/executor.rs",
+      "line": 1070,
+      "hypothesis": "An adapter returning Err after a partial external effect is durably classified FAILED rather than UNKNOWN. EffectAdapter Error has no failure-certainty variant; whether reachable requires reviewing individual adapters. No bypass claim is made."
+    },
+    {
+      "path": "tools/grounding_interceptor.py",
+      "line": 41,
+      "hypothesis": "Default seeded VERIFIED records have literal digests without local source acquisition or comparison. Consumer trace confirms registry presence is enough for acceptance, but source authenticity and digest correctness were not externally checked in this shard."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".codex/config.toml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          7
+        ]
+      ],
+      "inventory_sha256": "6f97fde9131844095a6554d7983b904a1f937071562bb376885942a0d5a83033",
+      "observed_sha256": "6f97fde9131844095a6554d7983b904a1f937071562bb376885942a0d5a83033",
+      "hash_match": true
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/nul-zk/src/lib.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          17
+        ]
+      ],
+      "inventory_sha256": "8fcbcab5ff86230e36fc9a9715fb011afd153e9ea232890811d49b4e3d486ceb",
+      "observed_sha256": "8fcbcab5ff86230e36fc9a9715fb011afd153e9ea232890811d49b4e3d486ceb",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/c5_types/algebraic.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          144
+        ]
+      ],
+      "inventory_sha256": "2dbb25f46db530226ba28d57e9bfda483fbf23d8bf460d46c832299a3b6f699a",
+      "observed_sha256": "2dbb25f46db530226ba28d57e9bfda483fbf23d8bf460d46c832299a3b6f699a",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/guards/__init__.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          20
+        ]
+      ],
+      "inventory_sha256": "7b9fe3b459a96a019412bdeb9f0a3ff16429805568ef611ff9a9701026ee463f",
+      "observed_sha256": "7b9fe3b459a96a019412bdeb9f0a3ff16429805568ef611ff9a9701026ee463f",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/transducers/semantic_heartbeat.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          74
+        ]
+      ],
+      "inventory_sha256": "bccb2d2fab21b79e0acca54f7fd9e5a299a788b1c3f1e2a481ee713b805638c0",
+      "observed_sha256": "bccb2d2fab21b79e0acca54f7fd9e5a299a788b1c3f1e2a481ee713b805638c0",
+      "hash_match": true
+    },
+    {
+      "path": "02_EDIN_SWARMS/agents_archi/clients/kimi.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          90
+        ]
+      ],
+      "inventory_sha256": "bcf6d99a79c27f21b96a5b76c62d7c0d2f4e86cb3c123bb8fe11f2ebe248682c",
+      "observed_sha256": "bcf6d99a79c27f21b96a5b76c62d7c0d2f4e86cb3c123bb8fe11f2ebe248682c",
+      "hash_match": true
+    },
+    {
+      "path": "crates/eridu-infer/src/gate.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          111
+        ]
+      ],
+      "inventory_sha256": "acf0950ea7cc73b9f06b5f823a13070dd924c3b5be5df80c38c3d89c155bd6b4",
+      "observed_sha256": "acf0950ea7cc73b9f06b5f823a13070dd924c3b5be5df80c38c3d89c155bd6b4",
+      "hash_match": true
+    },
+    {
+      "path": "docs/06_theory/VECTOR_A_MASTER_LEDGER_DESIGN.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          131
+        ]
+      ],
+      "inventory_sha256": "c18763a098e85af3678869fcfe2e00f81626f236c2713b3241e15e4d4043d92c",
+      "observed_sha256": "c18763a098e85af3678869fcfe2e00f81626f236c2713b3241e15e4d4043d92c",
+      "hash_match": true
+    },
+    {
+      "path": "examples/poc_biometric_gate_bridge.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          73
+        ]
+      ],
+      "inventory_sha256": "4edb568298f34957a77ac11d19b4356b71dfe18b05dc9a63a09a1e410793f597",
+      "observed_sha256": "4edb568298f34957a77ac11d19b4356b71dfe18b05dc9a63a09a1e410793f597",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_cortex/consolidate_babylon_vault.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          238
+        ]
+      ],
+      "inventory_sha256": "9f3e240384cab9bf42076bd4a64bc6116a16ad6c210ef233827c372e9ef83421",
+      "observed_sha256": "9f3e240384cab9bf42076bd4a64bc6116a16ad6c210ef233827c372e9ef83421",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_isomorphisms/cancer_isomorphism_pipeline.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          53
+        ]
+      ],
+      "inventory_sha256": "6bdc252dd232ff94e0f6a95d4e03ae15045f198239baa189c2c33b7bc15e3062",
+      "observed_sha256": "6bdc252dd232ff94e0f6a95d4e03ae15045f198239baa189c2c33b7bc15e3062",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_thermo/silicon_thermal_telemetry.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          76
+        ]
+      ],
+      "inventory_sha256": "c7d9b2af786ac70c4bbd27ad20556e91b6c75a10f9fd0933955d4bc4cdc75a69",
+      "observed_sha256": "c7d9b2af786ac70c4bbd27ad20556e91b6c75a10f9fd0933955d4bc4cdc75a69",
+      "hash_match": true
+    },
+    {
+      "path": "src/executor.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          1098
+        ]
+      ],
+      "inventory_sha256": "5ee23a545b54b9746b02a0a806528548e28fdcf9a1b58d83390572bb47a0dce9",
+      "observed_sha256": "5ee23a545b54b9746b02a0a806528548e28fdcf9a1b58d83390572bb47a0dce9",
+      "hash_match": true
+    },
+    {
+      "path": "tests/test_audit_causal_clock_regressions.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          190
+        ]
+      ],
+      "inventory_sha256": "a19d77a2839968ddcc1c74031f9c71b6acb3357b313f8311471a5bb0e69c22e6",
+      "observed_sha256": "a19d77a2839968ddcc1c74031f9c71b6acb3357b313f8311471a5bb0e69c22e6",
+      "hash_match": true
+    },
+    {
+      "path": "tests/test_landauer.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          27
+        ]
+      ],
+      "inventory_sha256": "abf16088047adb9d5cdef14a3a6355a3bebe232fe6b24fd7befe1e7419460c3c",
+      "observed_sha256": "abf16088047adb9d5cdef14a3a6355a3bebe232fe6b24fd7befe1e7419460c3c",
+      "hash_match": true
+    },
+    {
+      "path": "tools/grounding_interceptor.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          148
+        ]
+      ],
+      "inventory_sha256": "d1418689212062acfacfce192840b1358e1abded0d61e58a87b86a0aa668e9eb",
+      "observed_sha256": "d1418689212062acfacfce192840b1358e1abded0d61e58a87b86a0aa668e9eb",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/containers/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          85
+        ]
+      ],
+      "inventory_sha256": "84ac21e42da260e8a2a5cbf677b455a7a06e0585dcd56be49895c014a26ae998",
+      "observed_sha256": "84ac21e42da260e8a2a5cbf677b455a7a06e0585dcd56be49895c014a26ae998",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/pulumi/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          191
+        ]
+      ],
+      "inventory_sha256": "975cd37cd6735d790624d042982a683f05f96dd6509f9da8ada7e78f8e645f2e",
+      "observed_sha256": "975cd37cd6735d790624d042982a683f05f96dd6509f9da8ada7e78f8e645f2e",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/waf/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          203
+        ]
+      ],
+      "inventory_sha256": "e4fb36ebccdb73eb8be9513d316a7294ab62a6ce355b7e09498a77af91cdb095",
+      "observed_sha256": "e4fb36ebccdb73eb8be9513d316a7294ab62a6ce355b7e09498a77af91cdb095",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-neural-face-swap-cuadrilla/scripts/c5_smoother.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          655
+        ]
+      ],
+      "inventory_sha256": "692772e971af6ac1180ec1727ca7c4f52de4cc9053684490ab126ecd9bb643de",
+      "observed_sha256": "692772e971af6ac1180ec1727ca7c4f52de4cc9053684490ab126ecd9bb643de",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/references/catalogo_47_primitivas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          103
+        ]
+      ],
+      "inventory_sha256": "9c3470335747ed395297471a423e03f2c82fb1b7ab0e442e6b083b433ce5753e",
+      "observed_sha256": "9c3470335747ed395297471a423e03f2c82fb1b7ab0e442e6b083b433ce5753e",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/c5-exergy-scale-evaluator/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          67
+        ]
+      ],
+      "inventory_sha256": "008f84cf47dd48f1caebac9eb44dd39f8b1bbd77f71f955cf20b112f982c6635",
+      "observed_sha256": "008f84cf47dd48f1caebac9eb44dd39f8b1bbd77f71f955cf20b112f982c6635",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-sharur-3600/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "inventory_sha256": "111cdb31ae55b7c0cd9e710b973ee545cd96eb47288dd6056eb94a6b2c868628",
+      "observed_sha256": "111cdb31ae55b7c0cd9e710b973ee545cd96eb47288dd6056eb94a6b2c868628",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/github-architect/scripts/fetch_repos_graphql.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          116
+        ]
+      ],
+      "inventory_sha256": "b7faf64c372ad76a55c29c94e89397ae61eafc0b26172adc80a282d1feaea7da",
+      "observed_sha256": "b7faf64c372ad76a55c29c94e89397ae61eafc0b26172adc80a282d1feaea7da",
+      "hash_match": true
+    },
+    {
+      "path": "verify.sh",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          10
+        ]
+      ],
+      "inventory_sha256": "51cce62c1a4a6a1216af7c46af780568fc5c40b5b784ce220540f225fbd0a622",
+      "observed_sha256": "51cce62c1a4a6a1216af7c46af780568fc5c40b5b784ce220540f225fbd0a622",
+      "hash_match": true
+    }
+  ],
+  "tool_limitations": [
+    "No native codebase graph tools were exposed (tool metadata search returned no search_graph/index_repository); used targeted text reads and rg.",
+    "Audit is static only: no repository tests or runtime programs executed; no external compliance or scientific claim verified.",
+    "Shared worktree already contains unrelated modifications; no repository writes made."
+  ],
+  "tests_run": []
+}

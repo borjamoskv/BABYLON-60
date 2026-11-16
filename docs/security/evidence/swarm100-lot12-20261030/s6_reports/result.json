@@ -1,0 +1,130 @@
+{
+  "date": "2026-10-30",
+  "scope": "three production reporters; temporary corpus and copied CLI roots; no operator data, hardware, providers, Git mutations or live swarm",
+  "ids": {
+    "SW100-C0328": {
+      "proposed_state": "FIXED",
+      "acceptance": "Unsupported controls have NOT_EXECUTED status; observations labeled; no constant global certification, health or exergy score."
+    },
+    "SW100-C0343": {
+      "proposed_state": "FIXED",
+      "acceptance": "Only explicitly executed file/content predicates may PASS; unsupported controls NOT_EXECUTED; entropy computed only from supplied text."
+    },
+    "SW100-C0354": {
+      "proposed_state": "FIXED",
+      "acceptance": "Each worker and aggregate labeled simulation; no PASS, attestations or hardware measurement; aggregate counts derived from results."
+    }
+  },
+  "baseline": "before-tests.json",
+  "before_tests": "3 failed, 40 deselected, before editing the three original sources",
+  "tests": "45 passed",
+  "checks": {
+    "after-tests": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "pytest",
+        "tests/test_swarm100_lot12_s6_reports_regressions.py",
+        "-q",
+        "-o",
+        "addopts=--tb=short"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/s6_reports/after-tests.log",
+      "log_sha256": "42958bb98d936295c86144f164a50a39c650db9adef2c57bcba8f5abd35ed873"
+    },
+    "ruff": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "ruff",
+        "check",
+        "scripts/c5_sharur/sharur_100_conversation_reporters.py",
+        "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py",
+        "scripts/c5_sharur/sharur_100_swarm_execution.py",
+        "tests/test_swarm100_lot12_s6_reports_regressions.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/s6_reports/ruff.log",
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "ruff-format": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "ruff",
+        "format",
+        "--check",
+        "scripts/c5_sharur/sharur_100_conversation_reporters.py",
+        "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py",
+        "scripts/c5_sharur/sharur_100_swarm_execution.py",
+        "tests/test_swarm100_lot12_s6_reports_regressions.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/s6_reports/ruff-format.log",
+      "log_sha256": "177f260a5645724013185e4b140c7045cc39e56c0c97b120f5cb23599f85f0de"
+    },
+    "mypy": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "mypy",
+        "--follow-imports=silent",
+        "--check-untyped-defs",
+        "scripts/c5_sharur/sharur_100_conversation_reporters.py",
+        "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py",
+        "scripts/c5_sharur/sharur_100_swarm_execution.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/s6_reports/mypy.log",
+      "log_sha256": "8228fcc5ce46d42d01caf3cd941f4e9c5f2bcc372bb5b147a2f0572d2dd675a8"
+    },
+    "diff-check": {
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "--",
+        "scripts/c5_sharur/sharur_100_conversation_reporters.py",
+        "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py",
+        "scripts/c5_sharur/sharur_100_swarm_execution.py",
+        "tests/test_swarm100_lot12_s6_reports_regressions.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/s6_reports/diff-check.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "source_sha256_before_and_after_checks": {
+    "scripts/c5_sharur/sharur_100_conversation_reporters.py": "6212c3afe9a9691ca533969b7a088529a8d29393ae9116ae6eae73fefff988b7",
+    "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py": "ad281a15848a638ca92de4eba53d203094dd4241cb305b591ff3f56254a1439c",
+    "scripts/c5_sharur/sharur_100_swarm_execution.py": "4f80f3a51c21477e689a03f9fc78962dfe9a1a2f43ff01c307718e6b4cb5bfcc",
+    "tests/test_swarm100_lot12_s6_reports_regressions.py": "d21e91fe1a308555c0be8ca59da4a9ec8ba7b2e334ddd8bbbd7a160165efffd1"
+  },
+  "graph_discovery": {
+    "project": "babylon-60",
+    "searches": [
+      "sharur_100_conversation_reporters",
+      "sharur_100_full_spectrum_auditor",
+      "sharur_100_swarm_execution"
+    ],
+    "consumer": "sharur_100_conversation_auditor.run_sharur_100_swarm",
+    "consumer_compatibility": "Existing positional AgentResult structure and renderer entry points retained; additive aggregate counters; absent scores null, existing consumer prints score without numeric formatting."
+  },
+  "limits": [
+    "NOT_EXECUTED controls remain unimplemented; no security/hardware/formal certification is inferred.",
+    "File-presence and literal-content checks report only their stated predicates, not runtime behavior.",
+    "Supplied corpus observations are not independently authenticated and cannot establish original events.",
+    "The concurrent swarm harness remains a simulation, not target verification.",
+    "No performance or physical entropy claim follows from elapsed time or character Shannon entropy.",
+    "Independent review is assigned by the parent after this implementation."
+  ]
+}

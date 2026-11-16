@@ -1,0 +1,420 @@
+{
+  "shard": "086",
+  "findings": [
+    {
+      "title": "Sexagesimal conversion silently truncates the high limb",
+      "severity": "P2",
+      "path": "src/f60.rs",
+      "line": 36,
+      "evidence": "from_decimal casts value / 3600 to u32; saturating_add delegates to this conversion.",
+      "trigger": "from_decimal(3600 * 2**32), or adding one to the maximum canonical three-limb value.",
+      "impact": "The value wraps to zero instead of rejecting or saturating; ordering and computed bounds become incorrect.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Saturating radius loses the claimed interval enclosure",
+      "severity": "P2",
+      "path": "src/f60.rs",
+      "line": 102,
+      "evidence": "add_ball and sub_ball use u32::saturating_add for uncertainty radii.",
+      "trigger": "Add two F60Ball values centered at zero with radius u32::MAX each.",
+      "impact": "The mathematical sum can reach 2*u32::MAX but returned upper_bound is only u32::MAX; contains falsely excludes valid results.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "DAG failure releases global lock while sibling tasks still execute",
+      "severity": "P1",
+      "path": "02_EDIN_SWARMS/agents_archi/orchestrator/kda_dag_swarm.py",
+      "line": 208,
+      "evidence": "asyncio.gather propagates the first exception; ThermalLock exits immediately; sibling coroutines have no cancellation or draining in finally.",
+      "trigger": "Run independent tasks where one raises while another awaits an operation, with caller catching the error and keeping the loop alive.",
+      "impact": "The remaining task continues after lock removal, permitting another scheduler run to overlap protected work.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Repeated consensus hash replaces a prior epoch",
+      "severity": "P2",
+      "path": "scripts/c5_l1_ledger/bittensor_yuma_consensus_c5.py",
+      "line": 164,
+      "evidence": "state_hash is UNIQUE and insertion uses INSERT OR REPLACE; hash construction excludes epoch.",
+      "trigger": "Persist the same consensus state at two different epochs, including a stable one-validator simulation.",
+      "impact": "SQLite replacement removes the previous epoch row, so ledger history silently loses observations.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Durability regression inspects a fresh SQLite connection",
+      "severity": "P2",
+      "path": "tests/test_ledger_cross_equivalence.py",
+      "line": 39,
+      "evidence": "Test opens sqlite3.connect(sync_db) then reads PRAGMA synchronous; repeats with a fresh connection for actor_db at lines 57-62.",
+      "trigger": "Remove or weaken the writer connection synchronous setting while SQLite fresh connections retain default FULL.",
+      "impact": "The test still passes because synchronous is connection-local and it checks the reader default rather than either writer.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Explicit output basename fails before exporting",
+      "severity": "P2",
+      "path": "scripts/c5_utils/export_country_compliance.py",
+      "line": 38,
+      "evidence": "os.makedirs(os.path.dirname(out_path), exist_ok=True) receives an empty string for a bare filename.",
+      "trigger": "Invoke --output certificate.md.",
+      "impact": "CLI raises FileNotFoundError instead of writing the requested report.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Lean example ignores sequence continuity when declaring causality preserved",
+      "severity": "P2",
+      "path": "examples/poc_lean4_emitter.rs",
+      "line": 82,
+      "evidence": "validateTransition names current sequence _currentSeq and checks parity only; chunks start validation from 0,false independently.",
+      "trigger": "Validate an odd WriteBegin followed by any even WriteEnd, including a decreasing sequence; or compare independently validated chunks.",
+      "impact": "The proof accepts nonmonotonic sequences and provides no cross-chunk continuity, while line 48 declares end-to-end causality preservation.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Repository remediation grants MIT rights without a license selection",
+      "severity": "P2",
+      "path": "tools/skill_library/global/github-architect/scripts/repo_transductor.py",
+      "line": 191,
+      "evidence": "When LICENSE is missing, remediate_repository schedules LICENSE_MIT_TEMPLATE, attributed to a fixed author, and --apply writes it.",
+      "trigger": "Apply generic repository remediation to a repository with no LICENSE and different ownership or intended terms.",
+      "impact": "The tool adds a permissive rights grant and incorrect copyright attribution without an explicit license decision.",
+      "confidence": "high",
+      "kind": "runtime"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "01_KISH_ENGINE/babylon60/guards/contradiction_guard.py",
+      "line": 30,
+      "description": "Contradiction detection only recognizes a sentinel literal and never reads axioms/project state. Targeted package search found exports but no active consumer; no production authorization bypass asserted."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".gemini/settings.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          27
+        ]
+      ],
+      "inventory_sha256": "e9d7230eed8aa3a194f97e61c4cb9c91ca25e9d857b5efc3748e2f87f07f9141",
+      "observed_sha256": "e9d7230eed8aa3a194f97e61c4cb9c91ca25e9d857b5efc3748e2f87f07f9141",
+      "hash_match": true
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/nul-zk/tests/circuit_compilation.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          49
+        ]
+      ],
+      "inventory_sha256": "4e7163d6116b3e86b99b5fd9eced35d8f25f907e72f691f02d7ee15925b17829",
+      "observed_sha256": "4e7163d6116b3e86b99b5fd9eced35d8f25f907e72f691f02d7ee15925b17829",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/cli/bridge.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          117
+        ]
+      ],
+      "inventory_sha256": "23a329914217720c81e1151e601bedffd66b7bae6050cc94b5c50824ffc7e7db",
+      "observed_sha256": "23a329914217720c81e1151e601bedffd66b7bae6050cc94b5c50824ffc7e7db",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/guards/contradiction_guard.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          32
+        ]
+      ],
+      "inventory_sha256": "b7430686bd75edc2633b57816df16b702d27474e96d67ec0a109192dd3e8308c",
+      "observed_sha256": "b7430686bd75edc2633b57816df16b702d27474e96d67ec0a109192dd3e8308c",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/types/__init__.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          26
+        ]
+      ],
+      "inventory_sha256": "2472fe51cc2e6c18fde8051309d41b75d0f230fe40938473748929d47ada351b",
+      "observed_sha256": "2472fe51cc2e6c18fde8051309d41b75d0f230fe40938473748929d47ada351b",
+      "hash_match": true
+    },
+    {
+      "path": "02_EDIN_SWARMS/agents_archi/orchestrator/kda_dag_swarm.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          284
+        ]
+      ],
+      "inventory_sha256": "7df1e0d00504451e2bae540a4d9f8b23973dc2696773d0c2030afe1fdb07a2ff",
+      "observed_sha256": "7df1e0d00504451e2bae540a4d9f8b23973dc2696773d0c2030afe1fdb07a2ff",
+      "hash_match": true
+    },
+    {
+      "path": "crates/eridu-infer/src/lib.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          112
+        ]
+      ],
+      "inventory_sha256": "bc1aeeb0c5b7e6fd8909b13f76b56b7551af2c35b6c929adb754b0e50c13bcb8",
+      "observed_sha256": "bc1aeeb0c5b7e6fd8909b13f76b56b7551af2c35b6c929adb754b0e50c13bcb8",
+      "hash_match": true
+    },
+    {
+      "path": "docs/06_theory/axiom_oncology_protocol.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          43
+        ]
+      ],
+      "inventory_sha256": "9288bf44eada99fbd62da59017842e45911de9f6b395ad8fc45591c3bbb3d157",
+      "observed_sha256": "9288bf44eada99fbd62da59017842e45911de9f6b395ad8fc45591c3bbb3d157",
+      "hash_match": true
+    },
+    {
+      "path": "examples/poc_lean4_emitter.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          113
+        ]
+      ],
+      "inventory_sha256": "ff76d77179f17f5dfec8846dd5ff800ad6113fb21a65fb82c09cc25ac2be85d3",
+      "observed_sha256": "ff76d77179f17f5dfec8846dd5ff800ad6113fb21a65fb82c09cc25ac2be85d3",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_cortex/poc_fl008_fail_closed.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          516
+        ]
+      ],
+      "inventory_sha256": "56596ae6da7d23e5bb1cdeb01a1c5a441d44ea535e027c89b1094b4d60bce602",
+      "observed_sha256": "56596ae6da7d23e5bb1cdeb01a1c5a441d44ea535e027c89b1094b4d60bce602",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_l1_ledger/bittensor_yuma_consensus_c5.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          321
+        ]
+      ],
+      "inventory_sha256": "b24743c2b5bebaf35f429db027b5ca20515a893d0f1eed7137ea9793b67479c0",
+      "observed_sha256": "b24743c2b5bebaf35f429db027b5ca20515a893d0f1eed7137ea9793b67479c0",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_utils/export_country_compliance.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          78
+        ]
+      ],
+      "inventory_sha256": "bf34d5d5454ebdb8aa16e96326a23ab7cb56b4339f528a91a81c32753a115e81",
+      "observed_sha256": "bf34d5d5454ebdb8aa16e96326a23ab7cb56b4339f528a91a81c32753a115e81",
+      "hash_match": true
+    },
+    {
+      "path": "src/f60.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          246
+        ]
+      ],
+      "inventory_sha256": "a3481c392165e87ae5fd93b7ba9b40096b2f38e8f844dbea8ea5a29ef14a72d5",
+      "observed_sha256": "a3481c392165e87ae5fd93b7ba9b40096b2f38e8f844dbea8ea5a29ef14a72d5",
+      "hash_match": true
+    },
+    {
+      "path": "tests/test_audit_existence_gate.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          44
+        ]
+      ],
+      "inventory_sha256": "222ffa78a43da68f445ccf3e646736d63bef2187607107f0cba349123192242a",
+      "observed_sha256": "222ffa78a43da68f445ccf3e646736d63bef2187607107f0cba349123192242a",
+      "hash_match": true
+    },
+    {
+      "path": "tests/test_ledger_cross_equivalence.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          255
+        ]
+      ],
+      "inventory_sha256": "4af93fcf471f7be0bfa1a6b6855c11390e1b8158852ea048fe2af24501bd538a",
+      "observed_sha256": "4af93fcf471f7be0bfa1a6b6855c11390e1b8158852ea048fe2af24501bd538a",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          27
+        ]
+      ],
+      "inventory_sha256": "00d43bcdc455c130952281e1b41b29adedfa47d0f09ee48f0c9d90dbfcf479d3",
+      "observed_sha256": "00d43bcdc455c130952281e1b41b29adedfa47d0f09ee48f0c9d90dbfcf479d3",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/containers/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          202
+        ]
+      ],
+      "inventory_sha256": "3170d787f22b4891aed8ef2a9567e5186f87922dff6055fdb6ad0a576f7fad2d",
+      "observed_sha256": "3170d787f22b4891aed8ef2a9567e5186f87922dff6055fdb6ad0a576f7fad2d",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/queues/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          206
+        ]
+      ],
+      "inventory_sha256": "4d68d4d61c5199f1c0cae0074ce2e602f2c0ddf95377019332d01641bbe0e899",
+      "observed_sha256": "4d68d4d61c5199f1c0cae0074ce2e602f2c0ddf95377019332d01641bbe0e899",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/web-analytics/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          76
+        ]
+      ],
+      "inventory_sha256": "075434a2076f5a98b7a03f929a91bd5716bfe7a08faf468f26dcdb6b6027d516",
+      "observed_sha256": "075434a2076f5a98b7a03f929a91bd5716bfe7a08faf468f26dcdb6b6027d516",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-solar-thermodynamic-architecture/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          73
+        ]
+      ],
+      "inventory_sha256": "d080fb0ba3a11d982be5efb9baf69f0d5ac6547ef8b94de0a2c7a9391321ab32",
+      "observed_sha256": "d080fb0ba3a11d982be5efb9baf69f0d5ac6547ef8b94de0a2c7a9391321ab32",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/scripts/primitives_transducer.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          522
+        ]
+      ],
+      "inventory_sha256": "b30e5e77a8cac5517ebf9d8fa934552bf59c6ab23e8398ffb353204cd866fdf9",
+      "observed_sha256": "b30e5e77a8cac5517ebf9d8fa934552bf59c6ab23e8398ffb353204cd866fdf9",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/c5-ontological-translator/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          98
+        ]
+      ],
+      "inventory_sha256": "0f2553d42ed25c5fe95878941e6b346eca3e4a7b62aa74475c3d8574396f2441",
+      "observed_sha256": "0f2553d42ed25c5fe95878941e6b346eca3e4a7b62aa74475c3d8574396f2441",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-socint-extraction-suite/scripts/test_socint.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          583
+        ]
+      ],
+      "inventory_sha256": "e5f5672695c7385012eabd2a28411d62a1c3e03241acf13d5e7d90a9625b7290",
+      "observed_sha256": "e5f5672695c7385012eabd2a28411d62a1c3e03241acf13d5e7d90a9625b7290",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/github-architect/scripts/repo_transductor.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          254
+        ]
+      ],
+      "inventory_sha256": "7a4ba77528ed9c131b842eebb28c0896b2358cc576df36dea1749017a443d1ba",
+      "observed_sha256": "7a4ba77528ed9c131b842eebb28c0896b2358cc576df36dea1749017a443d1ba",
+      "hash_match": true
+    }
+  ],
+  "tool_limitations": [
+    "Native codebase graph tools were not exposed (tool metadata search returned none); used targeted text reads and rg.",
+    "Static audit only; no repository tests, runtimes, builds, simulations or external API verification executed.",
+    "Cloudflare current API/limit claims and scientific claims were read but not independently validated."
+  ],
+  "tests_run": []
+}

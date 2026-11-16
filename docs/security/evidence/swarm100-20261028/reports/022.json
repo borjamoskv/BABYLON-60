@@ -1,0 +1,359 @@
+{
+  "shard": "022",
+  "findings": [
+    {
+      "title": "Existing-entry updates preserve the old modality and bypass the rule gate",
+      "severity": "P1",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/session_governance.rs",
+      "line": 93,
+      "evidence": "The gate checks incoming modality at 88; the update branch at 94-97 changes content, version and attestation but never entry.modality.",
+      "trigger": "Insert an attested DeonticRule, then insert the same key with EpistemicFact and has_biometric_attestation=false.",
+      "impact": "The stored entry remains DeonticRule with replacement content and no attestation. Conversely promoting an existing fact with an attested rule leaves it typed as a fact. This is a local buffer invariant failure; downstream effect authorization was not established.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "State commitment omits boundaries between key and content",
+      "severity": "P2",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/session_governance.rs",
+      "line": 144,
+      "evidence": "state_digest feeds k.as_bytes() immediately followed by entry.content.as_bytes(), without lengths or separators (144-145).",
+      "trigger": "Compare singleton buffers with key=\"a\", content=\"bc\" and key=\"ab\", content=\"c\", and identical modality/version/frequency/attestation.",
+      "impact": "Different buffer states feed identical bytes to BLAKE3 and therefore have equal commitments without breaking the hash. The digest cannot uniquely bind the represented state.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Zero-capacity governance buffer still accepts an entry",
+      "severity": "P2",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/session_governance.rs",
+      "line": 101,
+      "evidence": "new accepts max_capacity=0 (56-60); insert evicts an empty map when len>=0 and then inserts unconditionally (101-114).",
+      "trigger": "Construct SessionGovernanceBuffer::new(0) and insert an EpistemicFact.",
+      "impact": "The buffer returns success and contains one entry despite its configured zero capacity. CapacityExceeded exists but is never returned.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Counterexample learning returns success without persisting feedback",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/verification/counterexample.py",
+      "line": 20,
+      "evidence": "The public learn_from_failure function promises persistence in its docstring (18), but its entire implementation is logger.info followed by return True (20-21); it is re-exported by verification/__init__.py.",
+      "trigger": "A caller invokes learn_from_failure with a verification counterexample expecting the documented durable feedback.",
+      "impact": "The caller receives success although no cortex memory operation occurs; feedback disappears when logging is disabled or logs expire. No active production caller was established.",
+      "confidence": "high",
+      "kind": "runtime"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".agents/skills/c5-anti-slop-ui/scripts/audit_ui_slop.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          172
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static source review; no runtime or external API certification."
+    },
+    {
+      "path": ".github/workflows/windows-terminal.yml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          112
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static source review; no runtime or external API certification."
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/session_governance.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          239
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static source review; no runtime or external API certification."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/compliance_exporter/templates/themes/legal_paper.css",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          188
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static source review; no runtime or external API certification."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/z3_firewall.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          122
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static source review; no runtime or external API certification."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/verification/counterexample.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          21
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static source review; no runtime or external API certification."
+    },
+    {
+      "path": "RELEASE_MANIFEST.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          31
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static source review; no runtime or external API certification."
+    },
+    {
+      "path": "docs/02_ontology/security_threat_model_v4.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          116
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static source review; no runtime or external API certification."
+    },
+    {
+      "path": "docs/papers/interoceptive-control/src/theory_model.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          71
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static source review; no runtime or external API certification."
+    },
+    {
+      "path": "proof/lean/AX0.lean",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          179
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static source review; no runtime or external API certification."
+    },
+    {
+      "path": "scripts/c5_demos/nul-zk-falsification/src/main.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          62
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static source review; no runtime or external API certification."
+    },
+    {
+      "path": "scripts/c5_quality_gates/generate_nemesis_report.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          386
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static source review; no runtime or external API certification."
+    },
+    {
+      "path": "scripts/guards/verify_active_topology.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          559
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static source review; no runtime or external API certification."
+    },
+    {
+      "path": "tests/admission_capability_test.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          304
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static source review; no runtime or external API certification."
+    },
+    {
+      "path": "tests/test_causal_hitl_verification_gate.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          110
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static source review; no runtime or external API certification."
+    },
+    {
+      "path": "tests/test_rea_harness_swarm_topology.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          118
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static source review; no runtime or external API certification."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/agents-sdk/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          192
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static source review; no runtime or external API certification."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/email-workers/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          102
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static source review; no runtime or external API certification."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/secrets-store/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          207
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static source review; no runtime or external API certification."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workflows/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          218
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static source review; no runtime or external API certification."
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/pika-generative-video-pipeline/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          80
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static source review; no runtime or external API certification."
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_26_site_playbooks_airbnb.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static source review; no runtime or external API certification."
+    },
+    {
+      "path": "tools/skill_library/global/c5-real-legaltech-analysis/scripts/legaltech_falsifier.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          234
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static source review; no runtime or external API certification."
+    },
+    {
+      "path": "tools/skill_library/global/c5-wetware-and-venture-ops/references/modules/c5-wetware-divergente/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          29
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static source review; no runtime or external API certification."
+    },
+    {
+      "path": "tools/skill_library/workspace/audiovisual-sota/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "sha256_status": "match",
+      "notes": "Static source review; no runtime or external API certification."
+    }
+  ],
+  "tool_limitations": [
+    "Native graph discovery tools are not exposed in this session; targeted source reads and rg used.",
+    "No tests, repository scripts, builds, runtime effects, commits, or pushes executed. Hashing and JSON report writing used only audit-local Python.",
+    "Third-party reference examples reviewed statically; current Cloudflare/Pika API validity not certified.",
+    "Working tree contains pre-existing modifications; frozen shard hashes matched all 25 assigned paths at review."
+  ],
+  "tests_run": []
+}

@@ -1,0 +1,401 @@
+{
+  "shard": "047",
+  "findings": [
+    {
+      "title": "Manifest verification trusts the public key supplied by the manifest",
+      "severity": "P1",
+      "path": "01_KISH_ENGINE/babylon60/attestation/conformal_tree.py",
+      "line": 173,
+      "evidence": "Lines 173\u2013177 read l0_public_key_b64 and signature from the same untrusted JSON; line 210 derives overall_valid without a pinned identity. Consumer bounty_cli.py:163\u2013165 prints verified and returns success based on this boolean.",
+      "trigger": "Supply a manifest signed by a newly generated attacker key, with status FROZEN_C5_REAL and omit optional db_path.",
+      "impact": "The verifier reports an arbitrary self-signed manifest as a verified sovereign Aeon; integrity of a supplied signature is mistaken for authenticity. No protected runtime effect was traced.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Claim leaf encoding admits delimiter collisions",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/attestation/conformal_tree.py",
+      "line": 47,
+      "evidence": "The five fields are joined with unescaped colons before hashing; (claim_id=\"a:b\", advisory_id=\"c\") and (claim_id=\"a\", advisory_id=\"b:c\") with identical remaining fields yield identical preimages.",
+      "trigger": "Call exported compute_claim_leaf_hash with colon-containing identifiers.",
+      "impact": "Distinct claim identities can share a leaf without breaking BLAKE3. Input validation at upstream ingestion was not established; scope is this public helper and verifier recomputation.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Symmetry verifier ignores additional reverse-kernel mass",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/primitives/disintegration_matrix.py",
+      "line": 96,
+      "evidence": "Only (x,y) pairs present in F are checked. For p={a:1}, F={a:{y:1}}, D={y:{a:1,b:1}}, all inspected terms match although the reverse joint has extra mass at b.",
+      "trigger": "Pass a supplied D with extra support not represented by F.",
+      "impact": "verify_symmetry returns true for unequal joint distributions, weakening the exported mathematical validation routine.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Host triage emits static corpus observations as current audit results",
+      "severity": "P2",
+      "path": "scripts/repatriated/sharur3600_host_triage_py.py",
+      "line": 78,
+      "evidence": "Workers select static AUDIT_CORPUS entries and add trigonometric jitter at lines 79\u201386; output at 128\u2013148 describes a completed workstation triage with findings and measured-looking scores, without reading the host.",
+      "trigger": "Run the script on a changed or unrelated host.",
+      "impact": "The saved report presents stale constants and synthesized metrics as host findings and may prompt inappropriate remediation. No host runtime state is inferred here.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Unboxing claims Touch ID readiness from file existence",
+      "severity": "P2",
+      "path": "scripts/c5_setup/unboxing_moskv1.py",
+      "line": 46,
+      "evidence": "check_touchid_gate returns swift_gate.exists() and platform.system()==Darwin; line 71 renders this as Secure Enclave TouchID [LISTO].",
+      "trigger": "Run on a Darwin host with the helper file but unavailable or unprovisioned Touch ID.",
+      "impact": "The onboarding output declares a security prerequisite ready without checking hardware, provisioning, or executing an attestation.",
+      "confidence": "high",
+      "kind": "runtime"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "proof/lean/gen_ax0.py",
+      "line": 15,
+      "claim": "The header describes nonce single-use but the emitted theorems establish four concrete FSM traces and contain no nonce state or universally quantified replay property.",
+      "status": "Proof scope mismatch; no claim about runtime nonce enforcement is inferred."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".agents/skills/c5-ring0-babylon-kernel-project/references/aliases.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          794
+        ]
+      ],
+      "sha256_expected": "76762fdc9a745465aac9ffb8a180f513b786f47ec5e9c2d59c1ca0693b8f1a04",
+      "sha256_observed": "76762fdc9a745465aac9ffb8a180f513b786f47ec5e9c2d59c1ca0693b8f1a04",
+      "changed": false
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/types.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          13
+        ]
+      ],
+      "sha256_expected": "9b0c1f017edceeb6566020792a08f51e27d90495b0e3fc1aca5cac01ade6e24d",
+      "sha256_observed": "9b0c1f017edceeb6566020792a08f51e27d90495b0e3fc1aca5cac01ade6e24d",
+      "changed": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/attestation/conformal_tree.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          274
+        ]
+      ],
+      "sha256_expected": "251c9da8553af921d2597ce899e5f5baabfa61412c90818a629db90cbb9694fe",
+      "sha256_observed": "251c9da8553af921d2597ce899e5f5baabfa61412c90818a629db90cbb9694fe",
+      "changed": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/cortex/audits/anergy_purge_audit.yaml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          14
+        ]
+      ],
+      "sha256_expected": "3ae7d995bbb71a72c3fd230a2ccfc2e2aaf6bfb131eabbca2adcc516e21fa2c2",
+      "sha256_observed": "3ae7d995bbb71a72c3fd230a2ccfc2e2aaf6bfb131eabbca2adcc516e21fa2c2",
+      "changed": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/primitives/disintegration_matrix.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          106
+        ]
+      ],
+      "sha256_expected": "e18caeb88b60d3642ca06b6438c0f9a7249b0e29b647c4b824ff8e42de4a73ed",
+      "sha256_observed": "e18caeb88b60d3642ca06b6438c0f9a7249b0e29b647c4b824ff8e42de4a73ed",
+      "changed": false
+    },
+    {
+      "path": "01_KISH_ENGINE/cortex/crates/cortex-guard/Cargo.toml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          24
+        ]
+      ],
+      "sha256_expected": "eaae039644996f52d9890e053fd1c102fa37bc2747424bceeca7594005aaa2a5",
+      "sha256_observed": "eaae039644996f52d9890e053fd1c102fa37bc2747424bceeca7594005aaa2a5",
+      "changed": false
+    },
+    {
+      "path": "crates/b60-lang/src/fisher.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          88
+        ]
+      ],
+      "sha256_expected": "9d96b82acc8ede9b78b183b7caed665bfca0379596398ba67b4f9e8897aed4b5",
+      "sha256_observed": "9d96b82acc8ede9b78b183b7caed665bfca0379596398ba67b4f9e8897aed4b5",
+      "changed": false
+    },
+    {
+      "path": "docs/04_research/CLEAN_ROOM_AOT_VS_REA_MCP_DISSECTION.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          78
+        ]
+      ],
+      "sha256_expected": "ff8ea5d5042c4cdb6980a9515042287ed186fe63ab07cb35bed2679842d4d6e5",
+      "sha256_observed": "ff8ea5d5042c4cdb6980a9515042287ed186fe63ab07cb35bed2679842d4d6e5",
+      "changed": false
+    },
+    {
+      "path": "docs/security/fl-mcp01-authority-drift.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          265
+        ]
+      ],
+      "sha256_expected": "49697145d6f63f79bbb50029dc67a82d9d77dfaa7c2704b114f767c0ef2bba7b",
+      "sha256_observed": "49697145d6f63f79bbb50029dc67a82d9d77dfaa7c2704b114f767c0ef2bba7b",
+      "changed": false
+    },
+    {
+      "path": "proof/lean/gen_ax0.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          92
+        ]
+      ],
+      "sha256_expected": "f4bc11a2f03e45ba8b14244f6d99a537a45ff7a63b0ee4f30111baa376a3333c",
+      "sha256_observed": "f4bc11a2f03e45ba8b14244f6d99a537a45ff7a63b0ee4f30111baa376a3333c",
+      "changed": false
+    },
+    {
+      "path": "scripts/c5_demos/poc_sovereign_spark_daemon.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          195
+        ]
+      ],
+      "sha256_expected": "fe142816c23c9483bc951d6867bf2c27b13edf8f51f93844b95e8a46e8bd5ae5",
+      "sha256_observed": "fe142816c23c9483bc951d6867bf2c27b13edf8f51f93844b95e8a46e8bd5ae5",
+      "changed": false
+    },
+    {
+      "path": "scripts/c5_setup/unboxing_moskv1.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          106
+        ]
+      ],
+      "sha256_expected": "1a83a212c0413118f7cd649f356744a2c4f74c04eda4c746ac492c80ed3c1178",
+      "sha256_observed": "1a83a212c0413118f7cd649f356744a2c4f74c04eda4c746ac492c80ed3c1178",
+      "changed": false
+    },
+    {
+      "path": "scripts/repatriated/sharur3600_host_triage_py.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          153
+        ]
+      ],
+      "sha256_expected": "60cb7205939fb06ee0f5bda3cd3cf24c9031bfafa54c4f7663881b627f379571",
+      "sha256_observed": "60cb7205939fb06ee0f5bda3cd3cf24c9031bfafa54c4f7663881b627f379571",
+      "changed": false
+    },
+    {
+      "path": "tests/licensing/test_hybrid_license.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          65
+        ]
+      ],
+      "sha256_expected": "5c50d66c687b551a24fd5e9f8f102c653a368ab10a4fb7d17dbf5d291951cd1a",
+      "sha256_observed": "5c50d66c687b551a24fd5e9f8f102c653a368ab10a4fb7d17dbf5d291951cd1a",
+      "changed": false
+    },
+    {
+      "path": "tests/test_distribution_and_social_swarms.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          174
+        ]
+      ],
+      "sha256_expected": "7bfead42ee96542afbcec5f52f566f46caa2d0028598e84ef9f357c07945fe07",
+      "sha256_observed": "7bfead42ee96542afbcec5f52f566f46caa2d0028598e84ef9f357c07945fe07",
+      "changed": false
+    },
+    {
+      "path": "tests/test_swarm_100_concurrency.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          17
+        ]
+      ],
+      "sha256_expected": "78111ea45bb8f480c22ffd1b209798fdf6e76790e0269570b2f926052854ca48",
+      "sha256_observed": "78111ea45bb8f480c22ffd1b209798fdf6e76790e0269570b2f926052854ca48",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/api/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          225
+        ]
+      ],
+      "sha256_expected": "b721d8e28866f376ca8ac91d8f7f9fa35726f6378f83796baed13687f6eca6e2",
+      "sha256_observed": "b721d8e28866f376ca8ac91d8f7f9fa35726f6378f83796baed13687f6eca6e2",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/kv/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          196
+        ]
+      ],
+      "sha256_expected": "a78bbcbee191b6fbeb60375945671416db8528a5e52c2a7667c81174cffa9d8e",
+      "sha256_observed": "a78bbcbee191b6fbeb60375945671416db8528a5e52c2a7667c81174cffa9d8e",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/stream/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          130
+        ]
+      ],
+      "sha256_expected": "fdb901e88bab4654e0156f9c4a98c1469b53bad1a6e4827119f61badb142ddfb",
+      "sha256_observed": "fdb901e88bab4654e0156f9c4a98c1469b53bad1a6e4827119f61badb142ddfb",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/turnstile-spin/references/hugo.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          114
+        ]
+      ],
+      "sha256_expected": "5bc91dca7264de9bcb163d4c8e21a20d64afcad7becdd69926f9c7a09d1bb05c",
+      "sha256_observed": "5bc91dca7264de9bcb163d4c8e21a20d64afcad7becdd69926f9c7a09d1bb05c",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents/agent_15_box_desktop.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "sha256_expected": "0759cc7f352657f0924c14ce4b24086b14242543784d28335f3555cf5bfe6d77",
+      "sha256_observed": "0759cc7f352657f0924c14ce4b24086b14242543784d28335f3555cf5bfe6d77",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/references/colapso_dialectico.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          117
+        ]
+      ],
+      "sha256_expected": "3d42a1bd14057023a322ebed6b9aa9eae23da9a3569181c2d18414135e2858fe",
+      "sha256_observed": "3d42a1bd14057023a322ebed6b9aa9eae23da9a3569181c2d18414135e2858fe",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/test_socint.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          583
+        ]
+      ],
+      "sha256_expected": "e5f5672695c7385012eabd2a28411d62a1c3e03241acf13d5e7d90a9625b7290",
+      "sha256_observed": "e5f5672695c7385012eabd2a28411d62a1c3e03241acf13d5e7d90a9625b7290",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/global/flstudio-mcp-production/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "sha256_expected": "6ffec5a6ff9de1aa425cb8c34cc8cb9622fda27fae8725ad7d6eb2d0bde3d866",
+      "sha256_observed": "6ffec5a6ff9de1aa425cb8c34cc8cb9622fda27fae8725ad7d6eb2d0bde3d866",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/workspace/c5-ring0-babylon-kernel-project/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          43
+        ]
+      ],
+      "sha256_expected": "afec3fb5acafd6596110673cb479feaa907f98db1d9523f1bef41bcc1eeee7d8",
+      "sha256_observed": "afec3fb5acafd6596110673cb479feaa907f98db1d9523f1bef41bcc1eeee7d8",
+      "changed": false
+    }
+  ],
+  "tool_limitations": [
+    "Native codebase graph tools were not exposed (tool inventory search returned no search_graph). Targeted file reads and rg used.",
+    "Static audit only; no tests, compilation, repository code execution, hardware checks, or external documentation validation.",
+    "One speculative cross-file lookup of transducers/bounty_aeon_sealer.py failed because that path does not exist; no absence conclusion taken."
+  ],
+  "tests_run": []
+}

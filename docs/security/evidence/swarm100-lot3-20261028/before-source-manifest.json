@@ -1,0 +1,8 @@
+{
+  "source_sha256": {
+    "scripts/c5_git_utils/c5_distill_public_mirror.sh": "704da66f24d45ae3634083273a9c0dfecc8e07530b5a6520ff3f1f336fc58830",
+    "scripts/c5_git_utils/c5_ship.sh": "12ccca5842ec398096cf79b3280d3d44c602244c8e866078b86b28dd57f74ce4"
+  },
+  "git_head": "28257bd74fce31446b0350d094e9dab148a1aea7",
+  "scope": "Two shell production scripts; no real Git mutations/publication or native biometric calls permitted in verification"
+}

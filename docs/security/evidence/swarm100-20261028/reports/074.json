@@ -1,0 +1,382 @@
+{
+  "shard": "074",
+  "findings": [
+    {
+      "title": "Push proceeds when neither biometric gate implementation is available",
+      "severity": "P1",
+      "path": "scripts/c5_git_utils/c5_ship.sh",
+      "line": 189,
+      "evidence": "The command lookup / Swift-file conditional ends at line 193 without an else rejection; line 197 directly runs git push origin main. This is a direct effect consumer, not merely proposal admission.",
+      "trigger": "A checkout has local commits ahead of origin/main and neither c5_biometric_gate on PATH nor the Swift source file is available.",
+      "impact": "The script publishes commits without obtaining the hardware attestation it explicitly requires. The Swift file currently exists, so this is a missing-gate failure-mode defect, not a claim that the current checkout bypassed authentication.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Optimizer resolves repository root one directory too low",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/transducers/hygiene.py",
+      "line": 27,
+      "evidence": "parents[3] is 01_KISH_ENGINE for this file. The child is invoked as scripts/c5_thermo/exergy_optimizer_agent.py with that cwd (lines 38-40), but the assigned repository stores it at scripts/c5_thermo/exergy_optimizer_agent.py beneath the repository root. pre_push_ledger_guard.verify_exergy lines 28-36 consumes the returned False.",
+      "trigger": "The repository pre-push exergy check invokes run_exergy_optimizer in a normal source checkout.",
+      "impact": "Python cannot open the script under 01_KISH_ENGINE/scripts; the check returns False and prevents pushes regardless of the optimizer result.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Attestation verification accepts stale artifacts and an editable self-checksum",
+      "severity": "P1",
+      "path": "tools/tamkarum_attestation_engine.py",
+      "line": 167,
+      "evidence": "verify_attestation reads every digest from the same saved JSON and hashes those strings, comparing only to another field in that JSON (lines 167-176). It never calls compute_file_sha256, get_git_head_commit, or checks a signature. CLI main --verify directly consumes it and prints validity.",
+      "trigger": "An input calendar/compliance file or Git HEAD changes after --emit, or a statement is edited and its unkeyed compound hash recomputed.",
+      "impact": "The verifier reports VÁLIDA (100% Integridad Causal) despite changed source artifacts; it supplies no authenticated provenance.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Verification failures still return a successful CLI exit status",
+      "severity": "P2",
+      "path": "tools/tamkarum_attestation_engine.py",
+      "line": 190,
+      "evidence": "main calls verify_attestation() but ignores the returned boolean; both missing statement (False at line 161) and checksum mismatch (False at line 180) reach normal process termination.",
+      "trigger": "Automation executes python tools/tamkarum_attestation_engine.py --verify on a missing or inconsistent statement.",
+      "impact": "Shell/CI callers that check process status receive success even when verification failed.",
+      "confidence": "high",
+      "kind": "runtime"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".agents/skills/wizard/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          22
+        ]
+      ],
+      "manifest_sha256": "d5459892c69663e6824b6eb0cf45776fa0f5673c84f2c1f18ec0c7156d525163",
+      "observed_sha256": "d5459892c69663e6824b6eb0cf45776fa0f5673c84f2c1f18ec0c7156d525163",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-kernel/tests/stress_semantic_entropy_100k.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          195
+        ]
+      ],
+      "manifest_sha256": "ad7fbd66505a043fff51c74187e3026801a4c267a382138e73ece3f5f056df3a",
+      "observed_sha256": "ad7fbd66505a043fff51c74187e3026801a4c267a382138e73ece3f5f056df3a",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/bft/exergy_binary_ipc.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          313
+        ]
+      ],
+      "manifest_sha256": "227f88ec2da104eea54fdc2f75b4b480058e67a865b93e35002396471176b254",
+      "observed_sha256": "227f88ec2da104eea54fdc2f75b4b480058e67a865b93e35002396471176b254",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/engine/cognitive/endocrine.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          85
+        ]
+      ],
+      "manifest_sha256": "b19a87cea7cea1379901636d30a0a093b265d469064444e303740365275ca0cc",
+      "observed_sha256": "b19a87cea7cea1379901636d30a0a093b265d469064444e303740365275ca0cc",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/transducers/hygiene.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          100
+        ]
+      ],
+      "manifest_sha256": "f81a1a493ba298b04440b9d667fb19af9398f62752b17866f152acfe13210445",
+      "observed_sha256": "f81a1a493ba298b04440b9d667fb19af9398f62752b17866f152acfe13210445",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/services/email_inbound/package.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          17
+        ]
+      ],
+      "manifest_sha256": "eef0fc18b89dc448c7397d14acb56d35e024af3fe3132f994e7af5d78a9fc4c6",
+      "observed_sha256": "eef0fc18b89dc448c7397d14acb56d35e024af3fe3132f994e7af5d78a9fc4c6",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "crates/cadt_mediator/Cargo.toml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          9
+        ]
+      ],
+      "manifest_sha256": "9c165e8c60fc4ff174561595fdf0d8cf8173f33399aab9dc6a712d3985e9ef79",
+      "observed_sha256": "9c165e8c60fc4ff174561595fdf0d8cf8173f33399aab9dc6a712d3985e9ef79",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "docs/06_theory/AUDIT_VERDICT_C5_REAL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          52
+        ]
+      ],
+      "manifest_sha256": "2a66c7b3a458d2e055db78f34b397e6056b1d1eabc8bd364e3801c1fff19592d",
+      "observed_sha256": "2a66c7b3a458d2e055db78f34b397e6056b1d1eabc8bd364e3801c1fff19592d",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "examples/fl008_mcp_capability_activation.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          332
+        ]
+      ],
+      "manifest_sha256": "ae959899157445163bdc41da41be5d08400125c58acb1e1babcd25939972a42c",
+      "observed_sha256": "ae959899157445163bdc41da41be5d08400125c58acb1e1babcd25939972a42c",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/c5_cli/launch_kernel_mcp.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          59
+        ]
+      ],
+      "manifest_sha256": "b24e55c11db196c46060dff0b5a1cd0e3c4a470b8e154476057120081092e390",
+      "observed_sha256": "b24e55c11db196c46060dff0b5a1cd0e3c4a470b8e154476057120081092e390",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/c5_git_utils/c5_ship.sh",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          202
+        ]
+      ],
+      "manifest_sha256": "12ccca5842ec398096cf79b3280d3d44c602244c8e866078b86b28dd57f74ce4",
+      "observed_sha256": "12ccca5842ec398096cf79b3280d3d44c602244c8e866078b86b28dd57f74ce4",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/c5_skills_ontology/sync_vault_uuids.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          79
+        ]
+      ],
+      "manifest_sha256": "27a4693e79a55d82f47ab2fabe343b43a238d165b304332db1f67694b4e28129",
+      "observed_sha256": "27a4693e79a55d82f47ab2fabe343b43a238d165b304332db1f67694b4e28129",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "src/capability.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          1163
+        ]
+      ],
+      "manifest_sha256": "eac6e09b5a9121178382aa5e59a302671fb81f09a1e8801856abe0ecba625a14",
+      "observed_sha256": "eac6e09b5a9121178382aa5e59a302671fb81f09a1e8801856abe0ecba625a14",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/test_api_ergonomics.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          366
+        ]
+      ],
+      "manifest_sha256": "6081e06d5ae66325dba7baebc4ae97688565e606b9529e7394d2ae4ba7f288e4",
+      "observed_sha256": "6081e06d5ae66325dba7baebc4ae97688565e606b9529e7394d2ae4ba7f288e4",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/test_inv_c5_28_falsification.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "manifest_sha256": "a1d46874571b8d2bb78061a6311362b7755582b36f4af662172419a488971686",
+      "observed_sha256": "a1d46874571b8d2bb78061a6311362b7755582b36f4af662172419a488971686",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/examples/exergy.b60",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          24
+        ]
+      ],
+      "manifest_sha256": "806f26831abbed5702d4504631281cc575ef3255baf18e42a12470fe40804164",
+      "observed_sha256": "806f26831abbed5702d4504631281cc575ef3255baf18e42a12470fe40804164",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/c3/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          81
+        ]
+      ],
+      "manifest_sha256": "01e7f90dfbfce4d20a86a41b3ca882dab74d0b540ea07952da2f4ff1c6b6626c",
+      "observed_sha256": "01e7f90dfbfce4d20a86a41b3ca882dab74d0b540ea07952da2f4ff1c6b6626c",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/pipelines/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          124
+        ]
+      ],
+      "manifest_sha256": "6dfced39253c563560c990fe062e3de2de9254cbde159771f488842ca2882597",
+      "observed_sha256": "6dfced39253c563560c990fe062e3de2de9254cbde159771f488842ca2882597",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/turnstile/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          193
+        ]
+      ],
+      "manifest_sha256": "7e73d6d9f009823c856bcb7fed73418a5fb157f1cf2b5d01b8de90e180123062",
+      "observed_sha256": "7e73d6d9f009823c856bcb7fed73418a5fb157f1cf2b5d01b8de90e180123062",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-2e-neuropharmacological-sovereignty/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "manifest_sha256": "15f881275e06b92ffe7ba559321dbdd6a792fe0e2c08feffac09639c77b6909b",
+      "observed_sha256": "15f881275e06b92ffe7ba559321dbdd6a792fe0e2c08feffac09639c77b6909b",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents/agent_42_site_playbooks_resy.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "manifest_sha256": "0480013264ce394efb22bfbde180817ad5e7b2769314e9c553bca4b8c18f6204",
+      "observed_sha256": "0480013264ce394efb22bfbde180817ad5e7b2769314e9c553bca4b8c18f6204",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-dialectical-pipeline/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "manifest_sha256": "2c7d973344b6beaa6611d65b501d8ff12ab2be1f11a6256b698752fe982386f8",
+      "observed_sha256": "2c7d973344b6beaa6611d65b501d8ff12ab2be1f11a6256b698752fe982386f8",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/vscode-git-packed-refs-diagnostics/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          108
+        ]
+      ],
+      "manifest_sha256": "c2261b65d48f03b28140953a69c3fd8748c1dff7deeb97c646e707dde53d7ef2",
+      "observed_sha256": "c2261b65d48f03b28140953a69c3fd8748c1dff7deeb97c646e707dde53d7ef2",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/flstudio-mcp-production/tests/test_flstudio_production.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          91
+        ]
+      ],
+      "manifest_sha256": "d5c4f8183f3bf9e65b2ed2e40d2a34b90bca4f278e6f2007179c0da4dcad176d",
+      "observed_sha256": "d5c4f8183f3bf9e65b2ed2e40d2a34b90bca4f278e6f2007179c0da4dcad176d",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/tamkarum_attestation_engine.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          196
+        ]
+      ],
+      "manifest_sha256": "58a4b019757f70af13e1d9dee6d73212356216f713f60a7be9bb9e4050ff29b2",
+      "observed_sha256": "58a4b019757f70af13e1d9dee6d73212356216f713f60a7be9bb9e4050ff29b2",
+      "changed_since_manifest": false
+    }
+  ],
+  "tool_limitations": [
+    "No codebase-memory graph tools are exposed in this session; targeted source reads and rg used.",
+    "Static audit only; no tests, runtime effects, builds, or external API verification performed. Third-party API examples were reviewed as local documentation, without certifying current provider behavior."
+  ],
+  "tests_run": []
+}

@@ -1,0 +1,252 @@
+{
+  "date": "2026-10-30",
+  "reviewer": "/root/lot12_review_queues",
+  "decision": "APPROVED_WITH_EXPLICIT_SCOPE",
+  "open_actionable_findings": [],
+  "source_sha256": {
+    "01_KISH_ENGINE/babylon60/bft/master_ledger_queue.py": "633f2be983c6070d6adcdb921e6daece9efff2ea9239b69e602ebf5cdcc772cc",
+    "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py": "132813d0e2d2eb29be76afecb6ee5c04bface45ada673a6925ea55112b924ca9",
+    "01_KISH_ENGINE/babylon60/core/moskv_kernel.py": "8affa57abcd40116c7884488f17c1856e7fb749e1823edcd61f572899dbb64f0",
+    "02_EDIN_SWARMS/agents_archi/orchestrator/kda_dag_swarm.py": "3bd234ee55fd543163b66f317745dee973f048faa9ac2140dafe830e3bb5a216",
+    "01_KISH_ENGINE/services/email_inbound/worker.js": "60372817d7d57f13db3c00ed056dc4550cbeef43736ced6546eb20d09d9030a3"
+  },
+  "test_source_sha256": {
+    "tests/test_swarm100_lot12_s3_regressions.py": "ebec6651f9dc5cfbc9e0cfb431077b469dcd2c7ead8b0d7ad9e3086e6a48f8c3",
+    "tests/test_swarm100_lot12_s3_worker.mjs": "4840565308dea32226a3a21bc0e5aae32ec0453b2c5749f4c65234f027ddbff8",
+    "tests/test_itera2_invariants.py": "58d90cd0961103d0fb1da04b780ba4070d0f0e337a198479edea3012e5622488"
+  },
+  "independent_test_sha256": {
+    "docs/security/evidence/swarm100-lot12-20261030/review_queues/test_independent_queues.py": "f5717466501873b932adc0bbe7ddabb8c0a91252d0da9168ad520adf2266d8c5",
+    "docs/security/evidence/swarm100-lot12-20261030/review_queues/independent_worker.mjs": "56ab22270a8a13d1eea4700f7c535df88aad58e9cf0c799ed668a43328d473a2"
+  },
+  "checks": {
+    "python": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "python",
+        "docs/security/evidence/swarm100-lot12-20261030/run_confined_tests.py",
+        "docs/security/evidence/swarm100-lot12-20261030/review_queues/test_independent_queues.py",
+        "tests/test_swarm100_lot12_s3_regressions.py",
+        "-q",
+        "-o",
+        "addopts=--tb=short"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/review_queues/final-python.log",
+      "log_sha256": "c1ba6da32609abd298a51e5e0f37a28418b3526a0bb8cb85aa0c7669d36f6541"
+    },
+    "node-independent": {
+      "command": [
+        "node",
+        "--experimental-vm-modules",
+        "docs/security/evidence/swarm100-lot12-20261030/review_queues/independent_worker.mjs"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/review_queues/final-node-independent.log",
+      "log_sha256": "0b762227a90dfff7f9eb5c8ce8d6c65ae6c4fd21acd9ac547e4f0825f917d013"
+    },
+    "node-regressions": {
+      "command": [
+        "node",
+        "--experimental-vm-modules",
+        "tests/test_swarm100_lot12_s3_worker.mjs"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/review_queues/final-node-regressions.log",
+      "log_sha256": "b37f31d53545f4d654cbe06e2167305d9ede56cba89db36606906bb7f5449562"
+    },
+    "ruff": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "ruff",
+        "check",
+        "01_KISH_ENGINE/babylon60/bft/master_ledger_queue.py",
+        "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py",
+        "01_KISH_ENGINE/babylon60/core/moskv_kernel.py",
+        "02_EDIN_SWARMS/agents_archi/orchestrator/kda_dag_swarm.py",
+        "tests/test_swarm100_lot12_s3_regressions.py",
+        "tests/test_itera2_invariants.py",
+        "docs/security/evidence/swarm100-lot12-20261030/review_queues/test_independent_queues.py",
+        "docs/security/evidence/swarm100-lot12-20261030/review_queues/validate_review.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/review_queues/final-ruff.log",
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "mypy": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "mypy",
+        "--check-untyped-defs",
+        "--follow-imports=silent",
+        "01_KISH_ENGINE/babylon60/bft/master_ledger_queue.py",
+        "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py",
+        "01_KISH_ENGINE/babylon60/core/moskv_kernel.py",
+        "02_EDIN_SWARMS/agents_archi/orchestrator/kda_dag_swarm.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/review_queues/final-mypy.log",
+      "log_sha256": "71144743c83babea384888a735db0c4daba3d4d7b7942b6839984bd5c21b52bb"
+    }
+  },
+  "observations": {
+    "python": "32 passed: 22 author regressions plus 10 independent controls.",
+    "node": "6 independent Worker fixtures and 4 author fixtures passed.",
+    "independent_counts": {
+      "auxiliary_queue_public_admissions": "5 rounds x 900 accepted rows, exact IDs and BLOB bytes; two rounds warmup",
+      "auxiliary_queue_failure": "700 exact accepted payloads retained after atomic first-batch rollback, no rows committed",
+      "kernel_concurrency": "120 accepted IDs from four stale-snapshot instances, concurrent real SQLite transactions, every SHA3-256 chain link recomputed",
+      "pipeline": "3 partial-cycle rejections at distinct domains plus successful 3-domain admission-only report",
+      "dag": "5 rounds with actual competing scheduler blocked during sibling cleanup; lock released only after task termination",
+      "cancellation": "Both independent red cases now green: cancelled active claim processing propagates, concurrent initialize/close cannot reopen admission"
+    }
+  },
+  "independent_findings_resolved": [
+    {
+      "candidate_id": "SW100-C0208",
+      "before_log": "docs/security/evidence/swarm100-lot12-20261030/review_queues/cancel-before.log",
+      "regression": "test_kernel_cancelled_processing_is_not_reported_as_normal_completion",
+      "resolution": "CancelledError is re-raised; an interrupted claim is not represented as a normally completed state-loop."
+    },
+    {
+      "candidate_id": "SW100-C0434",
+      "before_log": "docs/security/evidence/swarm100-lot12-20261030/review_queues/initialize-close-before.log",
+      "regression": "test_auxiliary_close_during_initialize_cannot_reopen_admission",
+      "resolution": "Queue owns a shielded initialization task; closure waits for it and closes its connection without reopening admission."
+    }
+  ],
+  "ids": {
+    "SW100-C0434": "FIXED: successful shutdown drains accepted auxiliary transactions; failure is raised and uncommitted batch/backlog retained in RAM. Lifecycle interleaving revalidated.",
+    "SW100-C0358": "FIXED: all three domain branches reject false enqueue and propagate writer failure; successful report says QUEUED_NOT_CONFIRMED.",
+    "SW100-C0208": "FIXED: committed tip/logical tick selected inside BEGIN IMMEDIATE; no absent-ID replay success; cancellation is observable.",
+    "SW100-C0509": "FIXED: failed/cancelled execution cancels and awaits siblings under exclusion, including repeated caller cancellation.",
+    "SW100-C0422": "FIXED: exhausted HTTP/transport attempts reject; valid 2xx delivery resolves without extra attempts."
+  },
+  "limits": [
+    "No operator database, HOME, hardware, attestation, real network/mail or Git mutation was used. SQLite and lock files belong to temporary fixtures.",
+    "Auxiliary queue admission and bounty enqueue are not durability acknowledgements. Failed transaction retention is in RAM; ambiguous COMMIT requires inspection before retry, not assumed rollback.",
+    "Kernel tracking is admission only. Stop drains; forced cancellation propagates but does not provide durable job recovery or per-claim acknowledgement. Caller must observe the loop and reconcile tracking IDs.",
+    "Tests exercise cooperative local SQLite/async tasks, not physical power failure, hostile writers or cross-event-loop/thread sharing.",
+    "DAG cleanup can retain the lock indefinitely for cancellation-resistant tasks; no forced termination or redesign of the inherited lock identity policy is claimed.",
+    "Node VM executes real Worker control flow with injected MIME/platform boundaries. It demonstrates rejection/resolution, not SMTP redelivery, deployment or platform retry guarantees."
+  ],
+  "per_id": {
+    "SW100-C0434": {
+      "state": "FIXED",
+      "rationale": "An ordered sentinel drains all accepted auxiliary transactions before normal shutdown. Batch and writer failures are observable and retain uncommitted work in RAM; a shielded owned initialization task cannot reopen admission after concurrent close or caller cancellation. Independent real-SQLite admission, rollback and lifecycle controls pass; durable job recovery and ambiguous-COMMIT resolution are not claimed.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/master_ledger_queue.py",
+          "start_line": 46,
+          "end_line": 57,
+          "observation": "Initialization is owned and shielded; cancellation starts shared closure rather than abandoning a connection being opened."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/master_ledger_queue.py",
+          "start_line": 83,
+          "end_line": 121,
+          "observation": "Ordered batches commit before the stop sentinel; failed batch/backlog is accounted for and retained, not silently discarded."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/master_ledger_queue.py",
+          "start_line": 133,
+          "end_line": 160,
+          "observation": "Closure waits for initialization and writer completion, raises for writer failure and closes the connection."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/master_ledger_queue.py",
+          "start_line": 123,
+          "end_line": 131,
+          "observation": "Admission rejects stopped or failed queues and enqueues without yielding between validation and insertion."
+        }
+      ]
+    },
+    "SW100-C0358": {
+      "state": "FIXED",
+      "rationale": "Each of the three domain branches checks enqueue acceptance and propagates rejection or writer exceptions before returning a success report. Positive reports identify QUEUED_NOT_CONFIRMED rather than claiming durability. Independent rejection at each partial-cycle position and a successful three-domain cycle pass with inert consumers; no atomic cross-domain transaction is claimed.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py",
+          "start_line": 141,
+          "end_line": 142,
+          "observation": "EVM enqueue false raises before the receipt can be included in a successful cycle report."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py",
+          "start_line": 155,
+          "end_line": 156,
+          "observation": "NATIVE enqueue false raises before the receipt can be included in a successful cycle report."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py",
+          "start_line": 169,
+          "end_line": 170,
+          "observation": "AI enqueue false raises before the receipt can be included in a successful cycle report."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py",
+          "start_line": 45,
+          "end_line": 74,
+          "observation": "Successful report explicitly labels receipt persistence as QUEUED_NOT_CONFIRMED."
+        }
+      ]
+    },
+    "SW100-C0208": {
+      "state": "FIXED",
+      "rationale": "The current committed tip and logical tick are selected within BEGIN IMMEDIATE before hashing and inserting. A missing tracking ID is not accepted as replay, and cancellation of an active state-loop is propagated rather than returning normal completion. Four concurrent instances preserve 120 admitted IDs and every independently recomputed chain link. Admission is not a per-claim durability acknowledgement or durable cancellation recovery.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/moskv_kernel.py",
+          "start_line": 128,
+          "end_line": 170,
+          "observation": "A write transaction reads the committed tip and selects predecessor/logical tick before INSERT; matching existing tracking IDs are checked explicitly."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/moskv_kernel.py",
+          "start_line": 112,
+          "end_line": 126,
+          "observation": "Missing tracking ID or differing payload raises instead of declaring a legitimate replay."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/moskv_kernel.py",
+          "start_line": 185,
+          "end_line": 200,
+          "observation": "Normal stop drains the accepted queue; cancellation is re-raised and cannot appear as normally completed processing."
+        }
+      ]
+    },
+    "SW100-C0509": {
+      "state": "FIXED",
+      "rationale": "The scheduler owns and shields all task completion. On failure or caller cancellation it cancels and awaits every sibling under ThermalLock, resisting repeated caller cancellation during cleanup. An actual competing scheduler remains excluded until cleanup completes in independent fixtures. A cancellation-resistant sibling can retain exclusion indefinitely; forced termination is not claimed.",
+      "source_checks": [
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/orchestrator/kda_dag_swarm.py",
+          "start_line": 181,
+          "end_line": 226,
+          "observation": "Failure cleanup cancels and awaits every owned task while still inside ThermalLock; repeated caller cancellation cannot interrupt the drain and release exclusion early."
+        }
+      ]
+    },
+    "SW100-C0422": {
+      "state": "FIXED",
+      "rationale": "After three exhausted HTTP or transport failures the Worker throws instead of resolving the email handler. Valid 2xx success resolves without unnecessary attempts. Independent Node fixtures execute real Worker control flow with injected MIME/platform boundaries; SMTP redelivery, deployment and platform retry guarantees remain unverified.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/services/email_inbound/worker.js",
+          "start_line": 103,
+          "end_line": 140,
+          "observation": "Delivery remains bounded to three attempts with backoff, and exhaustion throws a static error while valid 2xx delivery resolves."
+        }
+      ]
+    }
+  }
+}

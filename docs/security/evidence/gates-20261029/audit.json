@@ -1,0 +1,404 @@
+{
+  "date_client": "2026-10-29",
+  "repository": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+  "head": "28257bd74fce31446b0350d094e9dab148a1aea7",
+  "scope": "Puntos de enforcement de gobernanza, Git/CI, firma y ejecución de efectos en el working tree local, incluidos cambios previos. No certifica los mismos archivos en origin ni todos los algoritmos de dominio del repositorio.",
+  "definition": "Fail-closed significa que el camino examinado no admite el efecto con evidencia ausente/inválida o al fallar su control. Obligatoriedad, confinamiento OS e irreversibilidad son propiedades separadas.",
+  "headline": "Hay rechazos obligatorios dentro de APIs concretas y un halt real; no hay una barrera universal que cubra cualquier acción del agente.",
+  "gates": [
+    {
+      "id": "G01",
+      "name": "epistemic_halt",
+      "rejection": "FAIL_STOP_OBSERVED",
+      "mandatory_scope": "Solo al invocar la función",
+      "protected_operations": "Termina el proceso y cierra admisión del manifiesto",
+      "omission_or_limit": "No intercepta acciones que nunca pasan por esta ruta. El signer inyectable no tiene plazo impuesto: el presupuesto solo acota persistencia.",
+      "sources": [
+        "src/halt.rs:133",
+        "src/halt.rs:193",
+        "src/halt.rs:220"
+      ],
+      "evidence": [
+        "run-final/40-real-halt-aborts-despite-receipt-io-failure.log"
+      ]
+    },
+    {
+      "id": "G02",
+      "name": "SharedManifest publish/read/freeze",
+      "rejection": "FAIL_CLOSED_API",
+      "mandatory_scope": "Métodos del protocolo",
+      "protected_operations": "Rechaza publish y read tras freeze/POISONED",
+      "omission_or_limit": "Los campos atómicos públicos permiten restablecer seq y RUNNING desde el mismo espacio de memoria. No acredita irreversibilidad frente a escritores con acceso al mapping.",
+      "sources": [
+        "src/shared_manifest_core.rs:10",
+        "src/shared_manifest_core.rs:42",
+        "src/shared_manifest_core.rs:106",
+        "tests/unit_tests.rs:308"
+      ],
+      "evidence": [
+        "run-final/16-budget-no-attestation-and-reset-witness.log",
+        "run-final/37-legacy-irreversibility-test-passes.log"
+      ]
+    },
+    {
+      "id": "G03",
+      "name": "SovereignExecutor e IPC autenticado",
+      "rejection": "FAIL_CLOSED_TESTED",
+      "mandatory_scope": "execute_action y servidor IPC; adaptador y host de confianza",
+      "protected_operations": "Efectos del adaptador: exige clave admitida, firma, intent/policy/precondición, vigencia, época y reserva duradera de nonce",
+      "omission_or_limit": "No intercepta I/O realizado fuera del executor. El adaptador es de confianza, incluidas parse_intent y compute_precondition antes de autorizar.",
+      "sources": [
+        "src/executor.rs:916",
+        "src/executor.rs:1007"
+      ],
+      "evidence": [
+        "run-final/33-rust-executor-rejection-tests.log"
+      ]
+    },
+    {
+      "id": "G04",
+      "name": "EffectTxOrchestrator",
+      "rejection": "FAIL_CLOSED_TESTED",
+      "mandatory_scope": "secure_delete_scoped y secure_mutate_scoped",
+      "protected_operations": "Borrado y mutación confinados al recurso, política, época, cuota y nonce; las APIs antiguas sin contexto rechazan",
+      "omission_or_limit": "AuthorityContext es un contexto del llamador de confianza; este nivel no acredita por sí mismo biometría. No controla llamadas directas a filesystem fuera del broker.",
+      "sources": [
+        "src/secure_fs.rs:2057",
+        "src/secure_fs.rs:2068",
+        "src/secure_fs.rs:2202"
+      ],
+      "evidence": [
+        "run-final/34-rust-secure-fs-tests.log",
+        "run-final/35-rust-mcp-authority-tests.log"
+      ]
+    },
+    {
+      "id": "G05",
+      "name": "Cortex EffectDispatcher y broker nativo",
+      "rejection": "FAIL_CLOSED_TESTED",
+      "mandatory_scope": "Ingreso MCP y handlers mediados de Cortex",
+      "protected_operations": "bft_append_event, bft_send_sovereign_mail, blackboard_dispatch, royal_rumble_dispatch, detonate_ephemeral_mcp y work_run_checks",
+      "omission_or_limit": "Diagnósticos exentos no pasan por el gate. El host Python/nativo es de confianza; no hay confinamiento OS en el dispatcher. Tras empezar un efecto, un error se declara EFFECT_OUTCOME_UNKNOWN, sin prometer ausencia del efecto.",
+      "sources": [
+        "01_KISH_ENGINE/babylon60/mcp/effect_dispatch.py:46",
+        "01_KISH_ENGINE/babylon60/mcp/effect_dispatch.py:97",
+        "01_KISH_ENGINE/babylon60/mcp/effect_dispatch.py:277"
+      ],
+      "evidence": [
+        "run-final/32-python-rejection-and-dispatch-tests.log",
+        "run-final/35-rust-mcp-authority-tests.log"
+      ]
+    },
+    {
+      "id": "G06",
+      "name": "VerificationGate y aprobación exacta",
+      "rejection": "FAIL_CLOSED_CRITICAL",
+      "mandatory_scope": "Tareas críticas; execute_once exige tarea crítica firmada",
+      "protected_operations": "Aprueba tarea exacta con clave provisionada, ventana máxima de 300 segundos y consumo persistente de execution_id",
+      "omission_or_limit": "is_allowed permite operaciones registradas LOW/MEDIUM/HIGH sin firma. Un registro APPROVED sin firma no autoriza una tarea crítica. La confianza hardware depende del aprovisionamiento de la clave.",
+      "sources": [
+        "01_KISH_ENGINE/babylon60/verification/verification_gate.py:118",
+        "01_KISH_ENGINE/babylon60/verification/verification_gate.py:160",
+        "01_KISH_ENGINE/babylon60/verification/verification_gate.py:203"
+      ],
+      "evidence": [
+        "run-final/32-python-rejection-and-dispatch-tests.log"
+      ]
+    },
+    {
+      "id": "G07",
+      "name": "Touch ID y hardware_attestation",
+      "rejection": "FAIL_CLOSED_SOURCE_AND_SOFTWARE_TESTS",
+      "mandatory_scope": "Consumidores que invocan el helper y verifican contra su clave provisionada",
+      "protected_operations": "Firma del payload ligado a hash; helper exige biometría, contexto nuevo y plazo de 30 segundos",
+      "omission_or_limit": "Esta auditoría no abre Touch ID ni certifica procedencia hardware de la clave configurada o binario instalado. Una firma válida prueba posesión de la clave provisionada.",
+      "sources": [
+        "01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift:325",
+        "01_KISH_ENGINE/babylon60/verification/hardware_attestation.py:32",
+        "01_KISH_ENGINE/babylon60/verification/hardware_attestation.py:44"
+      ],
+      "evidence": [
+        "run-final/32-python-rejection-and-dispatch-tests.log"
+      ]
+    },
+    {
+      "id": "G08",
+      "name": "McpSandboxValidator y Seatbelt",
+      "rejection": "OS_DENIAL_OBSERVED",
+      "mandatory_scope": "Subprocesos creados por este validador",
+      "protected_operations": "Código MCP generado: prueba previa de confinamiento y ejecución bajo política OS",
+      "omission_or_limit": "Una escritura fuera de la raíz permitida fue rechazada con PermissionError errno=1; otro proceso observó ausencia del efecto. Esto no confina al host ni a procesos lanzados por otras rutas.",
+      "sources": [
+        "01_KISH_ENGINE/babylon60/kernel/mcp_sandbox_validator.py:142",
+        "01_KISH_ENGINE/babylon60/kernel/mcp_sandbox_validator.py:290"
+      ],
+      "evidence": [
+        "os-confinement.json",
+        "sandbox-denial-tests.log"
+      ]
+    },
+    {
+      "id": "G09",
+      "name": "TrustedDispatchVerifier y preflight legado",
+      "rejection": "FAIL_CLOSED_TESTED_API",
+      "mandatory_scope": "Consumidores explícitos de verify_and_consume",
+      "protected_operations": "Ticket P-256, ventana de 60 segundos, scope, control observado, época y nonce duradero; preflight legado sin confianza rechaza siempre",
+      "omission_or_limit": "Las llamadas encontradas a verify_and_consume en src son pruebas; no se certifica que toda automatización UI o CLI esté conectada a este API.",
+      "sources": [
+        "src/omega_mediation.rs:792",
+        "src/omega_mediation.rs:827"
+      ],
+      "evidence": [
+        "trusted-dispatch-tests.log"
+      ]
+    },
+    {
+      "id": "G10",
+      "name": "WormLedger",
+      "rejection": "FAIL_CLOSED_INTEGRITY_WITH_LIMITS",
+      "mandatory_scope": "append/open y auditoría contra ancla cuando se solicita",
+      "protected_operations": "Rechaza firmas inválidas, corrupción intermedia, symlinks y cuotas; anclas detectan truncado o reescritura",
+      "omission_or_limit": "Un prefijo válido truncado puede seguir siendo una cadena válida sin ancla externa confiable. La comprobación contra ancla es una llamada separada. No equivale a inmutabilidad física del archivo.",
+      "sources": [
+        "src/worm.rs:106",
+        "src/worm.rs:166",
+        "src/worm.rs:265",
+        "src/worm.rs:465"
+      ],
+      "evidence": [
+        "run-final/36-rust-worm-integrity-tests.log"
+      ]
+    },
+    {
+      "id": "G11",
+      "name": "Semántica, presupuesto, topología y firma",
+      "rejection": "FAIL_CLOSED_VALIDATORS_OPT_IN",
+      "mandatory_scope": "Al ejecutar scripts o jobs que los llaman",
+      "protected_operations": "Documentos y enlaces conocidos, presupuestos de bytes, symlinks/manifiestos MCP; --staged valida índice; --response valida estructura declarada",
+      "omission_or_limit": "No supervisan cada respuesta ni cada ejecución del agente. --workspace-only omite reglas globales; --skip-ghost-listeners omite telemetría explícitamente. Firma estructural no certifica verdad ni atestación.",
+      "sources": [
+        "scripts/guards/verify_active_topology.py:510",
+        "scripts/c5_quality_gates/audit_token_budget.py:99",
+        ".github/workflows/ci.yml:70"
+      ],
+      "evidence": [
+        "run-final/26-topology-self-test.log",
+        "run-final/27-semantic-workspace.log",
+        "run-final/28-budget-workspace.log",
+        "run-final/29-topology-workspace.log",
+        "run-final/30-topology-index.log",
+        "run-final/32-python-rejection-and-dispatch-tests.log"
+      ]
+    },
+    {
+      "id": "G12",
+      "name": "Hooks Git efectivos",
+      "rejection": "REJECT_WHEN_CALLED_BUT_OMITTABLE",
+      "mandatory_scope": "core.hooksPath local apunta a .git/topology-hooks",
+      "protected_operations": "pre-commit ejecuta topología sobre índice y luego hook global de temporales/AST. pre-push delega a Git LFS",
+      "omission_or_limit": "En repositorio temporal el mismo hook rechazó y --no-verify permitió el commit; un core.hooksPath alternativo también lo omitió. El AST global lee worktree, no blob staged. No se modificó configuración real.",
+      "sources": [
+        ".git/topology-hooks/pre-commit:1",
+        ".git/topology-hooks/pre-push:1",
+        "/Users/borjafernandezangulo/.git_hooks/pre-commit:1"
+      ],
+      "evidence": [
+        "run-final/effective-hooks.json",
+        "run-final/07-actual-hook-rejects-missing-topology.log",
+        "run-final/08-fixture-no-verify-commits.log",
+        "run-final/11-fixture-hooks-path-override-commits.log",
+        "run-final/13-global-ast-delegate-accepts-staged-syntax-error.log",
+        "run-final/14-staged-python-independent-compiler.log"
+      ]
+    },
+    {
+      "id": "G13",
+      "name": "Framework .pre-commit-config.yaml",
+      "rejection": "DECLARED_NOT_IN_ACTIVE_HOOK_CHAIN",
+      "mandatory_scope": "Configuración para una instalación explícita del framework",
+      "protected_operations": "Declara gitleaks, detect-secrets, canary, semántica, presupuesto, distribución, ghost nodes, Ruff, Cargo y dependencias",
+      "omission_or_limit": "Ni el hook efectivo ni su delegado invocan pre-commit. La presencia de .git/hooks/pre-commit no lo activa cuando core.hooksPath apunta a otro directorio. CI puede ejecutar controles equivalentes por separado.",
+      "sources": [
+        ".pre-commit-config.yaml:1",
+        ".git/topology-hooks/pre-commit:1"
+      ],
+      "evidence": [
+        "run-final/effective-hooks.json"
+      ]
+    },
+    {
+      "id": "G14",
+      "name": "c5_ship y c5_distill_public_mirror",
+      "rejection": "FAIL_CLOSED_WRAPPER_CONTROL_FLOW_TESTED",
+      "mandatory_scope": "Invocación completa de estos wrappers",
+      "protected_operations": "Publicación de commit y destino congelados, scanner requerido, helper obligatorio, binding de recibo y firma, un intento y rechazo de errores/timeouts",
+      "omission_or_limit": "No controla git push invocado por otra ruta. El helper seleccionado por PATH es de confianza y la procedencia hardware no se acredita solo con la clave autodeclarada del recibo. Pruebas de flujo usan ejecutables fixture sin publicar.",
+      "sources": [
+        "scripts/c5_git_utils/c5_ship.sh:261",
+        "scripts/c5_git_utils/c5_ship.sh:354",
+        "scripts/c5_git_utils/c5_ship.sh:548",
+        "tests/test_swarm100_lot3_regressions.py:195"
+      ],
+      "evidence": [
+        "run-final/32-python-rejection-and-dispatch-tests.log"
+      ]
+    },
+    {
+      "id": "G15",
+      "name": "CI general y claims de release",
+      "rejection": "FAIL_JOB_ON_FAILURE_WITH_CONDITIONAL_SCOPE",
+      "mandatory_scope": "Eventos y jobs definidos en YAML local",
+      "protected_operations": "Build/test Rust, calidad, secretos, dependencias y trailers; claims añade evidencia de release, entropía y estrés",
+      "omission_or_limit": "claims se omite en push normal a main y PR; exige tag v* o dispatch con full_release_evidence. Un resultado de CI general no acredita esa certificación. No se han leído runs remotos de un commit para certificar CI desplegado.",
+      "sources": [
+        ".github/workflows/ci.yml:28",
+        ".github/workflows/ci.yml:57",
+        ".github/workflows/ci.yml:86",
+        ".github/workflows/ci.yml:182"
+      ],
+      "evidence": [
+        "run-final/results.json"
+      ]
+    },
+    {
+      "id": "G16",
+      "name": "Publicación GHCR y freeze de registros",
+      "rejection": "FAIL_CLOSED_LOCAL_WORKFLOW_LOGIC",
+      "mandatory_scope": "production-deploy y sus entradas reutilizables; workflows PyPI/crates sin subida",
+      "protected_operations": "GHCR exige main actual y cinco workflows exitosos del SHA exacto; vuelve a comprobar tras entorno Production. PyPI/crates no incluyen paso de subida",
+      "omission_or_limit": "El gate requiere ci.yml del evento push/main, cuyo job claims queda omitido. Nombre Production no demuestra reviewers. CI no invoca el gate local Touch ID. Freeze cubre estos workflows, no una prohibición impuesta por el registro a otros clientes.",
+      "sources": [
+        "scripts/guards/verify_publish_run.py:8",
+        ".github/workflows/production-deploy.yml:28",
+        ".github/workflows/production-deploy.yml:76",
+        ".github/workflows/pypi-publish.yml:71",
+        ".github/workflows/crates-publish.yml:41"
+      ],
+      "evidence": [
+        "run-final/17-publish-validator-valid.log",
+        "run-final/18-publish-validator-missing.log",
+        "run-final/19-publish-validator-duplicate.log",
+        "run-final/20-publish-validator-headSha-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.log",
+        "run-final/32-python-rejection-and-dispatch-tests.log"
+      ]
+    },
+    {
+      "id": "G17",
+      "name": "CapabilityGuard Python",
+      "rejection": "FAIL_OPEN_FOR_TOOL_VALIDATION",
+      "mandatory_scope": "No consumidor productivo observado en rutas revisadas",
+      "protected_operations": "Solo rechaza cuando el llamador suministra explícitamente RiskTier.CRITICAL",
+      "omission_or_limit": "validate_tool_execution retorna siempre True; check_permission permite write con allowed_capabilities=[read] y riesgo LOW. No es un sandbox ni verificador de capabilities efectivo.",
+      "sources": [
+        "01_KISH_ENGINE/babylon60/guards/capability_guard.py:17"
+      ],
+      "evidence": [
+        "capability-guard-probe.log",
+        "supplemental.json"
+      ]
+    },
+    {
+      "id": "G18",
+      "name": "KudurruBudgetGate",
+      "rejection": "BUDGET_CHECK_ONLY",
+      "mandatory_scope": "evaluate_bid en estado local del objeto",
+      "protected_operations": "Límites de puja y gasto acumulado de la instancia; retorna ApoptosisHalt tras 60 épocas deficientes",
+      "omission_or_limit": "Acepta hash de atestación cero sin verificación; campos públicos/reset y Copy; ApoptosisHalt es un enum y no aborta proceso. CLI crea estado nuevo y muestra Biometric Lock Active con hash constante. No se observó envío real de pujas a redes.",
+      "sources": [
+        "src/tamkarum.rs:14",
+        "src/tamkarum.rs:87",
+        "src/bin/tamkarum.rs:15",
+        "src/bin/tamkarum.rs:32"
+      ],
+      "evidence": [
+        "run-final/16-budget-no-attestation-and-reset-witness.log"
+      ]
+    }
+  ],
+  "remote_controls": {
+    "main_protection": "NO_VERIFICADO: HTTP 403; API indica que la función requiere GitHub Pro o repositorio público",
+    "main_rules": "NO_VERIFICADO: HTTP 403 con el mismo mensaje",
+    "production_environment": "NO_VERIFICADO: HTTP 404; no permite afirmar reviewers ni aprobación efectiva",
+    "evidence": [
+      "run-final/41-main-protection.log",
+      "run-final/42-main-rules.log",
+      "run-final/43-production-environment.log"
+    ]
+  },
+  "validation": {
+    "python_passed": 291,
+    "rust_relevant_passed": 98,
+    "relevant_total": 389,
+    "legacy_weak_test_passed_but_not_counted_as_irreversibility_evidence": 1,
+    "trusted_dispatch_ignored": 1,
+    "hardware_test_deselected": 1,
+    "structural_signature_self_checks": 6400,
+    "unexpected_main_results": [],
+    "main_source_drift": [],
+    "software_keys_are_fixtures": true,
+    "real_os_outside_write_denied": "PermissionError errno=1, witnessed absent by another process",
+    "real_halt_exit": -6,
+    "hardware_authentication": "NOT_EXECUTED",
+    "publication": "NOT_EXECUTED",
+    "host_telemetry": "NOT_CHECKED; explicitly omitted"
+  },
+  "priority_actions": [
+    "Conectar explícitamente los controles deseados al hooksPath efectivo y validar blobs del índice para la sintaxis staged.",
+    "Implementar rechazo por defecto y lista de capabilities en CapabilityGuard, o retirar su promesa de enforcement mientras no exista.",
+    "Vincular presupuestos y estado terminal a una autoridad/verificador y almacenamiento protegidos; no presentar hash o enum como atestación o abort.",
+    "Sustituir el test heredado de irreversibilidad: actualmente vuelve a escribir POISONED antes de assert, ocultando el reset permitido.",
+    "Decidir si GHCR exige claims de release y, de ser así, comprobar ese job/evidencia explícitamente.",
+    "Verificar o provisionar las reglas remotas de main y Production antes de atribuirles bloqueo efectivo."
+  ],
+  "reproduction": [
+    "python3 docs/security/evidence/gates-20261029/reproduce.py --output /tmp/b60-gates-recheck --remote",
+    "uv run --locked python docs/security/evidence/gates-20261029/probe_capability_guard.py",
+    "uv run --locked python docs/security/evidence/gates-20261029/probe_os_confinement.py",
+    "uv run --locked pytest tests/test_audit_mcp_confinement.py -q",
+    "cargo test -q --locked -p babylon60_root --lib omega_mediation::trusted_dispatch_tests -- --test-threads=1"
+  ],
+  "evidence_index": "run-final/results.json",
+  "additional_evidence": [
+    "supplemental.json",
+    "os-confinement.json",
+    "trusted-dispatch-tests.log"
+  ],
+  "source_sha256": {
+    "src/halt.rs": "d7c416ce08d8b2c30d93f6997cba2f40a2251fb00b545331199759456fcbf354",
+    "src/shared_manifest_core.rs": "3e2bc4a0aa798d4e8459ca5f4e49270182e9da842940c801aeaa9c5063252c73",
+    "tests/unit_tests.rs": "71b7fa694ac8d3dc42ec587cbbc1f6ceb17fb041167848248d0ac6c238f56711",
+    "src/executor.rs": "5ee23a545b54b9746b02a0a806528548e28fdcf9a1b58d83390572bb47a0dce9",
+    "src/secure_fs.rs": "9d34f7d50683b237b0eb7705721738a6595ea6661d4ed85d6fce5ee9cdb564bf",
+    "01_KISH_ENGINE/babylon60/mcp/effect_dispatch.py": "359bf7595fc9283977e122ef16177e06bb34eb1565e522ab221387a79cab7dee",
+    "01_KISH_ENGINE/babylon60/verification/verification_gate.py": "42765e56f489add69663fa708e43c6f71aed4593bf9e302570ae77f2c040aa5f",
+    "01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift": "18d96a6ef76b88b80735d646f208a062ed817311d12e48cfaccb9dc394c93efa",
+    "01_KISH_ENGINE/babylon60/verification/hardware_attestation.py": "b2e021e2e31d0315a1025a1bd5c72463e3650a0b1237d9243d4b71d9812ab1ae",
+    "01_KISH_ENGINE/babylon60/kernel/mcp_sandbox_validator.py": "6696488a56d185d2b03380e7a93213cefe0a8cb3233dbe1fd8323b87867c395c",
+    "src/omega_mediation.rs": "dd7a53bc080b993424e850f43382a82a706a189ae307bcf8bc54338dda5f48cb",
+    "src/worm.rs": "d2715fbeee0e662d1346a87ddc8cd0919ab0b648e7748c1d21edcc2057f3ce17",
+    "scripts/guards/verify_active_topology.py": "83ecdd5c2700bc097a275666f79bae5599a386f028c3af9830f0b6903f1ca7b2",
+    "scripts/c5_quality_gates/audit_token_budget.py": "69a972ba8cad3cd7146798ae44dbdffb5bc28afc672e339214175adece397efb",
+    ".github/workflows/ci.yml": "0951862a3a34645a9b2f7473c1170eabb05a67a7b75cdbf709436327f0f2efcc",
+    ".git/topology-hooks/pre-commit": "d2f0bfef6b6c55a63884d9313ee34a7f3b3a812319c2ddb93774e7bfb1ee1590",
+    ".git/topology-hooks/pre-push": "0b450e19bd2a3c8ddc2ceeb8977c94dbaf1bb58c92d17669781fe44cc6b4f0ae",
+    "/Users/borjafernandezangulo/.git_hooks/pre-commit": "584261251bf8f5e6645305ea76689f0091dc12e1f0dbedbe09cea5e1c27a2c97",
+    ".pre-commit-config.yaml": "62dbce0d7b80ba72ca8a527b5ac0f0b2e7b3c24153346e4562dc17f0629f3ccf",
+    "scripts/c5_git_utils/c5_ship.sh": "fb71a99a81f7254d4ec50bcacfae80bddf6c909e459c0d2c389d77c3d342dff8",
+    "tests/test_swarm100_lot3_regressions.py": "25060b92b5d9f0aab1075f52060613292e0845607a8ccf2303dd9588cf1e5549",
+    "scripts/guards/verify_publish_run.py": "7371c3bf4f81e7ed6596705168b0317be2655ac7671db25f103aabc1049a665e",
+    ".github/workflows/production-deploy.yml": "8e2d7096311563509392ffc1a3affe576f862a942d6d7ef340115624674d2502",
+    ".github/workflows/pypi-publish.yml": "db74a3e3ce7de4032bb9b29b833e483283ab0e6f14c555bd606650de33a490b9",
+    ".github/workflows/crates-publish.yml": "b81c0998f9e83031bfa0fbe872be6bc9c5beb68c0539e81ef04b96a582d3e15e",
+    "01_KISH_ENGINE/babylon60/guards/capability_guard.py": "a98c659b79bfd805db90c03bd67c1ec530c7c39573dd2615a223917f1654e261",
+    "src/tamkarum.rs": "8a54bcad1cce6937275656ec1fcf028a75b1c4a3c17a2de0651db7577ec31082",
+    "src/bin/tamkarum.rs": "bbb1371e843253198eaf704bf7fc2e7125c7bb93e83eb7369560236d17c17145",
+    "src/receipt.rs": "d48656d5cfb3848eb7c81fb1a38cf2ad04938125cf37b81ac46563d3aff129c4",
+    "src/enclave.rs": "bd938cb5c2e6138272598dacf4bb4652e27cee1eba07208b45b63013a882abcf",
+    "src/capability.rs": "eac6e09b5a9121178382aa5e59a302671fb81f09a1e8801856abe0ecba625a14",
+    "src/mcp_python.rs": "f99c1b0d2c297b0c2c84c60c9a8b5a6ec3e499dc276157ff3f17e4d9339ab094",
+    "tests/test_audit_mcp_confinement.py": "e79439e5c79f76a80789397df0ce5c359ea2fb7aa15433e0deecc95d678ed5aa"
+  },
+  "artifact_changes": "Solo scripts de reproducción, catálogo y resultados de esta auditoría. Sin cambios de controles productivos, locks ni configuración; sin commit ni push.",
+  "integrity_manifest": "integrity.json",
+  "closure_evidence": "closure.json"
+}

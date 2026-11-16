@@ -1,0 +1,13 @@
+{
+  "https://babylon60.com/": {
+    "error": "HTTP Error 403: Forbidden"
+  },
+  "https://babylon60.com/enterprise/": {
+    "error": "HTTP Error 403: Forbidden"
+  },
+  "dns_co": {
+    "returncode": 0,
+    "stdout": "\n; <<>> DiG 9.10.6 <<>> @1.1.1.1 babylon60.co A +noall +comments +answer +time=3 +tries=1\n; (1 server found)\n;; global options: +cmd\n;; Got answer:\n;; ->>HEADER<<- opcode: QUERY, status: NXDOMAIN, id: 19605\n;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version: 0, flags:; udp: 1232\n",
+    "stderr": ""
+  }
+}

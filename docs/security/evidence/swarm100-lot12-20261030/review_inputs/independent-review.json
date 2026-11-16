@@ -1,0 +1,135 @@
+{
+  "schema": "swarm100.independent-review.v1",
+  "date": "2026-10-30",
+  "reviewer": "/root/lot12_review_inputs",
+  "decision": "APPROVED_WITH_EXPLICIT_SCOPE",
+  "open_actionable_findings": [],
+  "candidate_ids": [
+    "SW100-C0103",
+    "SW100-C0221",
+    "SW100-C0294",
+    "SW100-C0486",
+    "SW100-C0113"
+  ],
+  "per_id": {
+    "SW100-C0103": {
+      "state": "FIXED",
+      "observed": "Real owned yt-dlp fixture executable receives literal URL and output arguments, including shell syntax, newline, quotes and leading --exec URL. All three invocations retain -- separator; metadata is produced; no injected marker exists.",
+      "limits": "Fixture executable only; no real downloader, TLS, network, subtitles service or packaged secondary copy certified."
+    },
+    "SW100-C0221": {
+      "state": "FIXED",
+      "observed": "Default exact 1MiB ASCII payload passes actual entropy/hype/anchor policy, while oversized appended suffix rejects; multibyte exact-bound and unpaired surrogate reject checked without entropy stubs.",
+      "limits": "Existing heuristic semantic policy is unchanged; no general truth or content-security certification."
+    },
+    "SW100-C0294": {
+      "state": "MITIGATED",
+      "observed": "Actual disposable Darwin worker rejects benign, exceptional and infinite-loop snippets before execution with RESOURCE_LIMIT_UNAVAILABLE and empty stdout/output. Real bounded-output component enforces UTF-8 byte cap and preserves prior bytes after overflow.",
+      "limits": "Host Darwin cannot impose requested RLIMIT_AS/DATA. Linux positive kernel memory/output/timeout test skipped. No Linux runtime, OS file/network containment, process-tree isolation or usable memory-bounded evaluator certified on this host."
+    },
+    "SW100-C0486": {
+      "state": "FIXED",
+      "observed": "Sensitive explicit target and fallback list both checked; free targets (case/whitespace/openrouter/free variants) reject before quota and recorded dispatch. Strict local fallback receives no free target. Valid paid target/fallback payload still dispatches to recorder.",
+      "limits": "Synthetic keys and recorded transport only. No provider routing, gateway honesty, TLS or real network certified. The configured policy-enable switch is unchanged."
+    },
+    "SW100-C0113": {
+      "state": "FIXED",
+      "observed": "40 deterministic random Gram matrices pass; 40 indefinite matrices reject, each with an independently calculated negative quadratic-form witness. Singular/extreme decimal scales and NaN/infinity/bool/over-range rejection checked.",
+      "limits": "Checks a finite symmetric 3x3 residual using exact decimal-string rationals. Does not prove continuous Navier-Stokes flow or tolerate upstream floating-point measurement error."
+    }
+  },
+  "source_sha256": {
+    "tools/skill_library/global/youtube-analysis-pipeline/scripts/yt_audit.py": "61d95dcae8a1a3c86c1ffcad16f748b02ddd104362fdf5f41812a7f75955e684",
+    "01_KISH_ENGINE/babylon60/core/popperian_filter.py": "aa6d9790230ae6056fa811f5b783542758f17dd4f21289df0f04a343a12e5f88",
+    "01_KISH_ENGINE/babylon60/primitives/sandbox.py": "750fd030aef40012bb73af11254b90a7b308d57f803ba78b88e2e21d5eb3fa22",
+    "02_EDIN_SWARMS/agents_archi/clients/openrouter.py": "57773548924aef80661afcc6d6878e46ef7267777bb447404b91c89a02ebb6c0",
+    "01_KISH_ENGINE/babylon60/kernel/ns_z3_firewall.py": "701af0343b17e1270f5457985a0554427dfa161698e787a0ca340061e97ed35c"
+  },
+  "test_source_sha256": {
+    "tests/test_swarm100_lot12_s5_regressions.py": "b4de26f735828e02635e94232fa2872398e22f0501f34ba47886dac17e9c0b91",
+    "docs/security/evidence/swarm100-lot12-20261030/review_inputs/test_independent_inputs.py": "1daaab7b31ebe72db8c88a88c39a7b4d85351418a17196d00374d2a915eef5e8"
+  },
+  "author_result_sha256": "c4c870bbebf0f574da8057d827de033ca73017b9765b282e345a867849acceb8",
+  "checks": [
+    {
+      "name": "independent-and-related-tests",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "python",
+        "docs/security/evidence/swarm100-lot12-20261030/run_confined_tests.py",
+        "docs/security/evidence/swarm100-lot12-20261030/review_inputs/test_independent_inputs.py",
+        "tests/test_swarm100_lot12_s5_regressions.py",
+        "tests/test_ns_z3_firewall.py",
+        "tests/test_ns_z3_resource_exhaustion.py",
+        "tests/test_agents_archi.py",
+        "tests/test_gemini_labs_nexus.py",
+        "-q",
+        "-rs",
+        "-o",
+        "addopts=--tb=short"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/review_inputs/related-tests.log",
+      "log_sha256": "ffeb9cbd27660f6d20eb6980a29c360dfd762532b0c1705eb7d0907bf97f1226",
+      "passed": 97,
+      "skipped": 1,
+      "skip_reason": "Real RLIMIT_AS execution requires Linux"
+    },
+    {
+      "name": "independent-and-author-regressions",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "python",
+        "docs/security/evidence/swarm100-lot12-20261030/run_confined_tests.py",
+        "docs/security/evidence/swarm100-lot12-20261030/review_inputs/test_independent_inputs.py",
+        "tests/test_swarm100_lot12_s5_regressions.py",
+        "-q",
+        "-rs",
+        "-o",
+        "addopts=--tb=short"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/review_inputs/independent-tests.log",
+      "log_sha256": "a74b79ea3659f8ab959fdfe796710c26f8d55b7527afc8d8aae8d44a2c6cb49b",
+      "passed": 57,
+      "skipped": 1
+    },
+    {
+      "name": "ruff",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "ruff",
+        "check",
+        "docs/security/evidence/swarm100-lot12-20261030/review_inputs/test_independent_inputs.py",
+        "tools/skill_library/global/youtube-analysis-pipeline/scripts/yt_audit.py",
+        "01_KISH_ENGINE/babylon60/core/popperian_filter.py",
+        "01_KISH_ENGINE/babylon60/primitives/sandbox.py",
+        "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+        "01_KISH_ENGINE/babylon60/kernel/ns_z3_firewall.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/review_inputs/ruff.log",
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    }
+  ],
+  "independent_control_count": 20,
+  "matrix_subcases": {
+    "PSD_Gram": 40,
+    "indefinite_with_negative_witness": 40
+  },
+  "discovery": "Native graph search/get_code_snippet, then bounded source/diff reads for freshness and coverage. All five source hashes and author test hash match the final author result and initial before-source manifest.",
+  "confinement": "Parent run_confined_tests.py sets synthetic HOME/seed, removes provider/vault keys and blocks TCP/DNS; own executables, files, markers and subprocesses are temporary. No source, registry, lockfile, dependency or Git mutation performed.",
+  "limits": [
+    "Approval closes the four selected concrete defects and accepts explicit fail-closed mitigation for C0294. It does not certify the unavailable Linux resource implementation on Darwin.",
+    "Related open findings in the same files retain their state; no closure by file affinity."
+  ]
+}

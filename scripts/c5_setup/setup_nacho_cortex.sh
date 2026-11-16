@@ -34,9 +34,5 @@ command -v python3 >/dev/null 2>&1 || echo "⚠️ Python 3 no instalado"
 
 # 4. Inyección de variables de entorno recomendadas
 echo "[4/4] Verificando variables de entorno..."
-if [ -z "$KIMI_API_KEY" ]; then
-    echo "⚠️ Recuerda exportar KIMI_API_KEY en tu .zshrc / .bashrc:"
-    echo "   export KIMI_API_KEY='tu_clave_moonshot'"
-fi
 
 echo "✅ [CORTEX-SETUP] ¡Entorno preparado! La estación ya dispone de la infraestructura CORTEX."

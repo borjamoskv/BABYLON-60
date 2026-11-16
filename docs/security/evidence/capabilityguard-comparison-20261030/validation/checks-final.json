@@ -1,0 +1,122 @@
+{
+  "date_client": "2026-10-30",
+  "archive": "capabilityguard-comparison-v1.zip",
+  "archive_sha256": "aa2bb4227a1aa5f09ed4a406d39d0af53fbbcee5f8b4804b3711b0810a959ca6",
+  "archive_bytes": 46241,
+  "fresh_extraction_verified": true,
+  "commands": [
+    {
+      "name": "verify-final",
+      "argv": [
+        "python3",
+        "/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/benchmark.py",
+        "verify"
+      ],
+      "exit_code": 0,
+      "expected": 0
+    },
+    {
+      "name": "prepare-final",
+      "argv": [
+        "python3",
+        "/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/benchmark.py",
+        "prepare",
+        "--destination",
+        "/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/participant"
+      ],
+      "exit_code": 0,
+      "expected": 0
+    },
+    {
+      "name": "baseline-final",
+      "argv": [
+        "python3",
+        "/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/benchmark.py",
+        "evaluate",
+        "--workspace",
+        "/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/participant",
+        "--environment",
+        "/tmp/capabilityguard-comparison-env-20261030",
+        "--output",
+        "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/security/evidence/capabilityguard-comparison-20261030/validation/baseline-final"
+      ],
+      "exit_code": 1,
+      "expected": 1
+    },
+    {
+      "name": "harness-final",
+      "argv": [
+        "uv",
+        "run",
+        "--project",
+        "/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/env",
+        "--locked",
+        "--no-sync",
+        "pytest",
+        "/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_harness.py",
+        "-c",
+        "/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/env/pyproject.toml",
+        "--noconftest",
+        "--import-mode=importlib",
+        "-p",
+        "no:cacheprovider",
+        "-q",
+        "--junitxml",
+        "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/security/evidence/capabilityguard-comparison-20261030/validation/harness-final.xml"
+      ],
+      "exit_code": 0,
+      "expected": 0
+    }
+  ],
+  "snapshot_sha256": "38b1fa315b1a2b2d615202140d67e4e4b46ea194a9e1747df0456ff882b95ad7",
+  "prompt_sha256": "bc1b73d0ee92f066a1586f9a88d75f9b30dfc49f71f56622de1913d2c5ef822d",
+  "manifest_sha256": "6f2595471683cde1d5f23509738df755c6784a69441b96196afd5f9996da8422",
+  "baseline": {
+    "expected_rejection": true,
+    "tests": 127,
+    "passed": 42,
+    "failures": 85,
+    "errors": 0,
+    "skipped": 0,
+    "technical_acceptance": false
+  },
+  "harness_tests_passed": 10,
+  "comparison_trials_executed": 0,
+  "solution_included": false,
+  "source_observations": {
+    "01_KISH_ENGINE/babylon60/guards/capability_guard.py": {
+      "snapshot_sha256": "a98c659b79bfd805db90c03bd67c1ec530c7c39573dd2615a223917f1654e261",
+      "working_tree_sha256_now": "a98c659b79bfd805db90c03bd67c1ec530c7c39573dd2615a223917f1654e261"
+    },
+    "01_KISH_ENGINE/babylon60/guards/capabilities.py": {
+      "snapshot_sha256": "633edc9551bdd3183409a8e5ce70e32cf15de31f017762f59547fec6d80d68d9",
+      "working_tree_sha256_now": "633edc9551bdd3183409a8e5ce70e32cf15de31f017762f59547fec6d80d68d9"
+    },
+    ".babylon60rules": {
+      "snapshot_sha256": "896ef66813dae7b753c365db39817a8f144f525dc1ae4f3259660b1f53db557c",
+      "working_tree_sha256_now": "896ef66813dae7b753c365db39817a8f144f525dc1ae4f3259660b1f53db557c"
+    },
+    "AGENTS.md": {
+      "snapshot_sha256": "1c40bfdd2083849bc1f3c266a67871a1594068bc843207c4a1244fe0884f138b",
+      "working_tree_sha256_now": "1c40bfdd2083849bc1f3c266a67871a1594068bc843207c4a1244fe0884f138b"
+    },
+    "docs/03_guides/agent_contracts.md": {
+      "snapshot_sha256": "4f137f727344d4ee7b746c746958d234fb37e16af33d5968216952faf06a3cae",
+      "working_tree_sha256_now": "4f137f727344d4ee7b746c746958d234fb37e16af33d5968216952faf06a3cae"
+    }
+  },
+  "readme_local_links": "passed",
+  "environment": {
+    "python": "3.14.7 (main, Aug  5 2026, 10:29:49) [Clang 21.0.0 (clang-2100.1.1.101)]",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "pytest": "9.1.1",
+    "ruff": "0.16.10",
+    "lock_sha256": "e57e60c04203f1d0719886c548b3ec499b3613874d900eb0b2de8c4087b9f65a",
+    "uv": "uv 0.12.0 (b88d7c5c4 2026-07-28 aarch64-apple-darwin)"
+  },
+  "limits": [
+    "No successful solution was authored or applied",
+    "No A/B session was run; harness_validation entries are fixture tests",
+    "Unit contract only; no runtime, hardware attestation or OS confinement certification"
+  ]
+}

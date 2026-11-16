@@ -1,0 +1,94 @@
+{
+  "attest": {
+    "command": [
+      "/Users/borjafernandezangulo/.codex/worktrees/pending-local-audit/BABYLON-60/.venv/bin/ruff",
+      "check",
+      "01_KISH_ENGINE/babylon60/cli/llm_attest.py",
+      "tests/test_attest_proof_regressions.py"
+    ],
+    "exit_code": 0
+  },
+  "markov": {
+    "command": [
+      "/Users/borjafernandezangulo/.codex/worktrees/pending-local-audit/BABYLON-60/.venv/bin/ruff",
+      "check",
+      "scripts/c5_cli/markov_bridge.py",
+      "tests/test_markov_bridge.py"
+    ],
+    "exit_code": 0
+  },
+  "kripke": {
+    "command": [
+      "/Users/borjafernandezangulo/.codex/worktrees/pending-local-audit/BABYLON-60/.venv/bin/ruff",
+      "check",
+      "scripts/c5_cli/doxastic_kripke_engine.py",
+      "tests/test_doxastic_kripke_engine.py"
+    ],
+    "exit_code": 1
+  },
+  "graphs": {
+    "command": [
+      "/Users/borjafernandezangulo/.codex/worktrees/pending-local-audit/BABYLON-60/.venv/bin/ruff",
+      "check",
+      "scripts/c5_demos/poc_graph_isomorphism_wl.py",
+      "scripts/c5_isomorphisms/c5_ultimate_causal_determinant.py",
+      "tests/test_inv_c5_28_falsification.py",
+      "tests/test_graph_isomorphism_regressions.py"
+    ],
+    "exit_code": 0
+  },
+  "provenance-python": {
+    "command": [
+      "/Users/borjafernandezangulo/.codex/worktrees/pending-local-audit/BABYLON-60/.venv/bin/ruff",
+      "check",
+      "01_KISH_ENGINE/babylon60/memory/__init__.py",
+      "01_KISH_ENGINE/babylon60/memory/provenance_arbiter.py",
+      "tests/test_fl027_provenance_authority.py"
+    ],
+    "exit_code": 0
+  },
+  "finding-contract": {
+    "command": [
+      "/Users/borjafernandezangulo/.codex/worktrees/pending-local-audit/BABYLON-60/.venv/bin/ruff",
+      "check",
+      "01_KISH_ENGINE/babylon60/verification/finding_contract.py",
+      "tests/test_finding_evidence_contract.py"
+    ],
+    "exit_code": 0
+  },
+  "approval-experiment": {
+    "command": [
+      "/Users/borjafernandezangulo/.codex/worktrees/pending-local-audit/BABYLON-60/.venv/bin/ruff",
+      "check",
+      "01_KISH_ENGINE/babylon60/cortex/approval_experiment.py",
+      "01_KISH_ENGINE/babylon60/cortex/approval_human_trial.py",
+      "01_KISH_ENGINE/babylon60/cortex/approval_integrity.py",
+      "01_KISH_ENGINE/babylon60/cortex/approval_trial_cases.py",
+      "01_KISH_ENGINE/babylon60/cortex/approval_trial_status.py",
+      "tests/test_fl_approval01_experiment.py",
+      "tests/test_fl_approval01_human_trial.py",
+      "tests/test_fl_approval01_integrity.py",
+      "tests/test_fl_approval01_trial_cases.py",
+      "tests/test_fl_approval01_trial_status.py",
+      "examples/fl_approval01_simulation.py"
+    ],
+    "exit_code": 0
+  },
+  "babylon-work": {
+    "command": [
+      "/Users/borjafernandezangulo/.codex/worktrees/pending-local-audit/BABYLON-60/.venv/bin/ruff",
+      "check",
+      "tools/babylon_work/effects.py",
+      "tools/babylon_work/server.py",
+      "tools/babylon_work/__init__.py",
+      "tools/babylon_work/runtime.py",
+      "tools/babylon_work/providers.py",
+      "tools/babylon_work/workspace.py",
+      "tools/babylon_work/runs.py",
+      "01_KISH_ENGINE/babylon60/mcp/effect_dispatch.py",
+      "tests/test_babylon_work.py",
+      "tests/test_babylon_work_runtime.py"
+    ],
+    "exit_code": 0
+  }
+}

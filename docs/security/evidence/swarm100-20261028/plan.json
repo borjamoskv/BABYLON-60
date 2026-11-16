@@ -1,0 +1,42 @@
+{
+  "expected_result": "Auditoría estática integral con 100 auditores y cobertura explícita, hallazgos trazables, comprobaciones dirigidas y reporte persistente",
+  "allowed_writes": [
+    "/tmp/babylon60-audit-20261028",
+    "docs/security/AUDIT_SWARM100_2026-10-28.md",
+    "docs/security/evidence/swarm100-20261028/"
+  ],
+  "constraints": [
+    "Preservar cambios ajenos",
+    "No cambios de código ni dependencias",
+    "No despliegues ni efectos de producción",
+    "No afirmar completitud sin cobertura y validación",
+    "No confundir propuestas con ejecución",
+    "Registrar exclusiones y cambios concurrentes"
+  ],
+  "acceptance": [
+    {
+      "id": "A100",
+      "description": "100 informes de auditores con cobertura por ruta y rango",
+      "status": "passed",
+      "evidence": "coverage-summary.json; reports/000.json..099.json; 15 partial paths retained"
+    },
+    {
+      "id": "EVIDENCE",
+      "description": "Hallazgos priorizados con origen/trigger/impacto/líneas y adjudicación",
+      "status": "passed",
+      "evidence": "root-adjudications.json; isolated-reproductions.json; bundle-exit-reproduction.json"
+    },
+    {
+      "id": "CHECKS",
+      "description": "Resultados reales de controles documentales, cargo check raíz y tests dirigidos",
+      "status": "failed",
+      "evidence": "checks.json; 76 tests passed; root/component cargo check passed; Ruff failed4"
+    },
+    {
+      "id": "PRESERVE",
+      "description": "Ningún archivo preexistente modificado por la auditoría",
+      "status": "passed",
+      "evidence": "manifest.json input hashes unchanged; only audit artifacts added"
+    }
+  ]
+}

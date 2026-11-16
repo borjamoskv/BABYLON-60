@@ -1,0 +1,277 @@
+ M 00_ABZU_KERNEL/crates/babylon60-compiler/src/lib.rs
+ M 00_ABZU_KERNEL/crates/babylon60-kernel/src/semantic_entropy.rs
+ M 00_ABZU_KERNEL/crates/babylon60-kernel/tests/stress_semantic_entropy_100k.rs
+ M 01_KISH_ENGINE/babylon60/bft/consensus_committer.py
+ M 01_KISH_ENGINE/babylon60/bft/consensus_ledger.py
+ M 01_KISH_ENGINE/babylon60/cli/llm_attest.py
+ M 01_KISH_ENGINE/babylon60/database/core.py
+ M 01_KISH_ENGINE/babylon60/mcp/cortex_mcp_server.py
+ M 01_KISH_ENGINE/babylon60/mcp/effect_dispatch.py
+ M 01_KISH_ENGINE/babylon60/mcp/mail_integration.py
+ M 01_KISH_ENGINE/babylon60/memory/__init__.py
+ M 01_KISH_ENGINE/cortex/crates/cortex-core/src/provenance.rs
+ M 01_KISH_ENGINE/cortex/crates/cortex-core/src/reopen.rs
+ M CLAIMS.toml
+ M README.md
+ M crates/b60-lang/src/bin/fsm_poc.rs
+ M crates/b60-lang/src/bin/fsm_stress.rs
+ M crates/babylon-skills-mcp/src/lib.rs
+ M docs/00_index.md
+ M docs/01_spec/spec_architecture.md
+ M docs/01_spec/spec_cryptographic_profile.md
+ M docs/01_spec/spec_exergy_ontology.md
+ M docs/01_spec/spec_graph_canonical.md
+ M docs/01_spec/spec_invariants.md
+ M docs/01_spec/spec_security_model.md
+ M docs/01_spec/spec_semantic_entropy_dual_firewall.md
+ M docs/06_theory/00_index.md
+ M docs/06_theory/BABYLON60_PROOF_CARRYING_EXECUTION.md
+ M docs/README.md
+ M docs/security/fl-mcp01-authority-drift.md
+ M docs/security/wheel-102-runtime-regressions-2026-10-24.md
+ M proof/lean/AX0.lean
+ M proof/lean/AcsEnvelope.lean
+ M proof/lean/Babylon.lean
+ M proof/lean/BabylonAOTOracle.lean
+ M proof/lean/BabylonAeonChain.lean
+ M proof/lean/BabylonAeonStress.lean
+ M proof/lean/BabylonAutoTrace.lean
+ M proof/lean/BabylonOracle.lean
+ M proof/lean/BabylonStressCorrupt.lean
+ M proof/lean/BabylonStressTrace.lean
+ M proof/lean/BabylonTrace.lean
+ M proof/lean/C5Affine.lean
+ M proof/lean/C5PortHamiltonian.lean
+ M proof/lean/CanonicalEnvelope.lean
+ M proof/lean/CanonicalHead.lean
+ M proof/lean/Destiladora_838c463da193b48f.lean
+ M proof/lean/HolographicPoC.lean
+ M proof/lean/MolochLandauer.lean
+ M proof/lean/NavierStokesBKM.lean
+ M proof/lean/NavierStokesOracle.lean
+ M proof/lean/NavierStokesSobolevKato.lean
+ M proof/lean/NemesisWave4.lean
+ M proof/lean/TicketEnvelope.lean
+ M scripts/c5_cli/markov_bridge.py
+ M scripts/c5_demos/SemanticEntropyApoptosis.lean
+ T scripts/c5_demos/c5_biometric_gate.swift
+ M scripts/c5_demos/poc_graph_isomorphism_wl.py
+ M scripts/c5_isomorphisms/c5_ultimate_causal_determinant.py
+ M src/secure_fs.rs
+ M tests/adversarial_nemesis.rs
+ M tests/nemesis_wave3.rs
+ M tests/test_biometric_signing_contract.py
+ M tests/test_fl_mcp01_dispatch.py
+ M tests/test_inv_c5_28_falsification.py
+ M tests/test_markov_bridge.py
+?? .playwright-mcp/page-2026-10-26T15-50-46-377Z.yml
+?? .playwright-mcp/page-2026-10-26T15-51-46-160Z.yml
+?? .playwright-mcp/page-2026-10-26T15-51-47-252Z.yml
+?? .playwright-mcp/page-2026-10-26T15-51-48-304Z.yml
+?? .playwright-mcp/page-2026-10-26T15-51-49-510Z.yml
+?? .playwright-mcp/page-2026-10-26T15-51-50-560Z.yml
+?? .playwright-mcp/page-2026-10-26T15-51-52-007Z.yml
+?? .playwright-mcp/page-2026-10-26T15-52-57-170Z.yml
+?? .playwright-mcp/page-2026-10-26T15-52-58-196Z.yml
+?? .playwright-mcp/page-2026-10-26T15-54-11-566Z.yml
+?? .playwright-mcp/page-2026-10-26T15-54-23-884Z.yml
+?? .playwright-mcp/page-2026-10-26T15-54-25-408Z.yml
+?? .playwright-mcp/page-2026-10-26T15-54-27-475Z.yml
+?? .playwright-mcp/page-2026-10-26T17-09-00-996Z.yml
+?? .playwright-mcp/page-2026-10-26T18-11-06-587Z.yml
+?? .playwright-mcp/page-2026-10-26T18-31-31-216Z.yml
+?? .playwright-mcp/page-2026-10-26T18-31-42-412Z.yml
+?? .playwright-mcp/page-2026-10-26T18-31-43-501Z.yml
+?? .playwright-mcp/page-2026-10-26T18-31-48-591Z.yml
+?? .playwright-mcp/page-2026-10-26T18-31-49-905Z.yml
+?? .playwright-mcp/page-2026-10-26T18-35-17-601Z.yml
+?? .playwright-mcp/page-2026-10-26T18-40-15-778Z.yml
+?? .playwright-mcp/page-2026-10-26T19-52-25-553Z.yml
+?? .playwright-mcp/page-2026-10-26T19-59-44-035Z.yml
+?? .playwright-mcp/page-2026-10-26T20-01-10-152Z.yml
+?? .playwright-mcp/page-2026-10-26T20-01-17-336Z.yml
+?? .playwright-mcp/page-2026-10-26T20-06-25-829Z.yml
+?? .playwright-mcp/page-2026-10-26T20-07-24-249Z.yml
+?? .playwright-mcp/page-2026-10-26T20-07-53-771Z.yml
+?? .playwright-mcp/page-2026-10-26T20-08-09-205Z.yml
+?? .playwright-mcp/page-2026-10-26T20-08-11-282Z.yml
+?? .playwright-mcp/page-2026-10-26T20-08-13-492Z.yml
+?? .playwright-mcp/page-2026-10-26T20-08-15-643Z.yml
+?? .playwright-mcp/page-2026-10-26T20-08-18-291Z.yml
+?? .playwright-mcp/page-2026-10-26T20-08-37-181Z.yml
+?? .playwright-mcp/page-2026-10-26T20-59-58-043Z.yml
+?? .playwright-mcp/page-2026-10-26T21-09-11-523Z.yml
+?? .playwright-mcp/page-2026-10-26T21-17-52-079Z.yml
+?? .playwright-mcp/page-2026-10-27T17-49-18-034Z.yml
+?? 00_ABZU_KERNEL/crates/babylon60-compiler/src/semantic_solver.rs
+?? 00_ABZU_KERNEL/crates/babylon60-compiler/src/solver_replay.rs
+?? 00_ABZU_KERNEL/crates/babylon60-compiler/tests/semantic_solver_adapter.rs
+?? 00_ABZU_KERNEL/crates/babylon60-compiler/tests/solver_trust.rs
+?? 00_ABZU_KERNEL/crates/babylon60-compiler/tests/support/solver_trust_support.rs
+?? 00_ABZU_KERNEL/crates/babylon60-kernel/tests/semantic_entropy_regressions.rs
+?? 00_ABZU_KERNEL/crates/babylon60-kernel/tests/semantic_solver_outcomes.rs
+?? 01_KISH_ENGINE/babylon60/memory/provenance_arbiter.py
+?? 01_KISH_ENGINE/babylon60/verification/finding_contract.py
+?? crates/b60-lang/src/bin/support/lean_harness.rs
+?? crates/b60-lang/tests/lean_harness.rs
+?? crates/babylon-skills-mcp/src/confined_fs.rs
+?? crates/babylon-skills-mcp/tests/fl_path01_capability_root_escape.rs
+?? docs/01_spec/AUDIT_SCIENTIFIC_GUARANTEES_2026.md
+?? docs/01_spec/evidence/algorithm-repairs-20261026.json
+?? docs/01_spec/evidence/scientific-guarantees-20261026.json
+?? docs/01_spec/evidence/solver-adapter-20261026.json
+?? docs/01_spec/evidence/solver-outcomes-20261026.json
+?? docs/01_spec/spec_finding_evidence_contract.md
+?? docs/06_theory/AUDIT_LEAN_SCOPE_2026.md
+?? docs/06_theory/evidence/lean-harness-20261026.json
+?? docs/06_theory/evidence/lean-naming-20261026.json
+?? docs/06_theory/evidence/lean-reporting-20261026.json
+?? docs/06_theory/evidence/lean-scope-20261025.json
+?? docs/security/AUDIT_SWARM100_2026-10-28.md
+?? docs/security/evidence/recovery-audit-2026-10-26.rs
+?? docs/security/evidence/swarm100-20261028/actor-stop-reproduction.json
+?? docs/security/evidence/swarm100-20261028/artifact-validation.json
+?? docs/security/evidence/swarm100-20261028/autoconsolidate-reproduction.json
+?? docs/security/evidence/swarm100-20261028/bundle-exit-reproduction.json
+?? docs/security/evidence/swarm100-20261028/candidate-reference-validation.json
+?? docs/security/evidence/swarm100-20261028/candidates.json
+?? docs/security/evidence/swarm100-20261028/candidates.md
+?? docs/security/evidence/swarm100-20261028/checks.json
+?? docs/security/evidence/swarm100-20261028/coverage-summary.json
+?? docs/security/evidence/swarm100-20261028/coverage.json
+?? docs/security/evidence/swarm100-20261028/finding-digest-reproduction.json
+?? docs/security/evidence/swarm100-20261028/initial_status.txt
+?? docs/security/evidence/swarm100-20261028/isolated-reproductions.json
+?? docs/security/evidence/swarm100-20261028/manifest.json
+?? docs/security/evidence/swarm100-20261028/plan.json
+?? docs/security/evidence/swarm100-20261028/proposal-adjudication.json
+?? docs/security/evidence/swarm100-20261028/python-syntax.json
+?? docs/security/evidence/swarm100-20261028/reports/000.json
+?? docs/security/evidence/swarm100-20261028/reports/001.json
+?? docs/security/evidence/swarm100-20261028/reports/002.json
+?? docs/security/evidence/swarm100-20261028/reports/003.json
+?? docs/security/evidence/swarm100-20261028/reports/004.json
+?? docs/security/evidence/swarm100-20261028/reports/005.json
+?? docs/security/evidence/swarm100-20261028/reports/006.json
+?? docs/security/evidence/swarm100-20261028/reports/007.json
+?? docs/security/evidence/swarm100-20261028/reports/008.json
+?? docs/security/evidence/swarm100-20261028/reports/009.json
+?? docs/security/evidence/swarm100-20261028/reports/010.json
+?? docs/security/evidence/swarm100-20261028/reports/011.json
+?? docs/security/evidence/swarm100-20261028/reports/012.json
+?? docs/security/evidence/swarm100-20261028/reports/013.json
+?? docs/security/evidence/swarm100-20261028/reports/014.json
+?? docs/security/evidence/swarm100-20261028/reports/015.json
+?? docs/security/evidence/swarm100-20261028/reports/016.json
+?? docs/security/evidence/swarm100-20261028/reports/017.json
+?? docs/security/evidence/swarm100-20261028/reports/018.json
+?? docs/security/evidence/swarm100-20261028/reports/019.json
+?? docs/security/evidence/swarm100-20261028/reports/020.json
+?? docs/security/evidence/swarm100-20261028/reports/021.json
+?? docs/security/evidence/swarm100-20261028/reports/022.json
+?? docs/security/evidence/swarm100-20261028/reports/023.json
+?? docs/security/evidence/swarm100-20261028/reports/024.json
+?? docs/security/evidence/swarm100-20261028/reports/025.json
+?? docs/security/evidence/swarm100-20261028/reports/026.json
+?? docs/security/evidence/swarm100-20261028/reports/027.json
+?? docs/security/evidence/swarm100-20261028/reports/028.json
+?? docs/security/evidence/swarm100-20261028/reports/029.json
+?? docs/security/evidence/swarm100-20261028/reports/030.json
+?? docs/security/evidence/swarm100-20261028/reports/031.json
+?? docs/security/evidence/swarm100-20261028/reports/032.json
+?? docs/security/evidence/swarm100-20261028/reports/033.json
+?? docs/security/evidence/swarm100-20261028/reports/034.json
+?? docs/security/evidence/swarm100-20261028/reports/035.json
+?? docs/security/evidence/swarm100-20261028/reports/036.json
+?? docs/security/evidence/swarm100-20261028/reports/037.json
+?? docs/security/evidence/swarm100-20261028/reports/038.json
+?? docs/security/evidence/swarm100-20261028/reports/039.json
+?? docs/security/evidence/swarm100-20261028/reports/040.json
+?? docs/security/evidence/swarm100-20261028/reports/041.json
+?? docs/security/evidence/swarm100-20261028/reports/042.json
+?? docs/security/evidence/swarm100-20261028/reports/043.json
+?? docs/security/evidence/swarm100-20261028/reports/044.json
+?? docs/security/evidence/swarm100-20261028/reports/045.json
+?? docs/security/evidence/swarm100-20261028/reports/046.json
+?? docs/security/evidence/swarm100-20261028/reports/047.json
+?? docs/security/evidence/swarm100-20261028/reports/048.json
+?? docs/security/evidence/swarm100-20261028/reports/049.json
+?? docs/security/evidence/swarm100-20261028/reports/050.json
+?? docs/security/evidence/swarm100-20261028/reports/051.json
+?? docs/security/evidence/swarm100-20261028/reports/052.json
+?? docs/security/evidence/swarm100-20261028/reports/053.json
+?? docs/security/evidence/swarm100-20261028/reports/054.json
+?? docs/security/evidence/swarm100-20261028/reports/055.json
+?? docs/security/evidence/swarm100-20261028/reports/056.json
+?? docs/security/evidence/swarm100-20261028/reports/057.json
+?? docs/security/evidence/swarm100-20261028/reports/058.json
+?? docs/security/evidence/swarm100-20261028/reports/059.json
+?? docs/security/evidence/swarm100-20261028/reports/060.json
+?? docs/security/evidence/swarm100-20261028/reports/061.json
+?? docs/security/evidence/swarm100-20261028/reports/062.json
+?? docs/security/evidence/swarm100-20261028/reports/063.json
+?? docs/security/evidence/swarm100-20261028/reports/064.json
+?? docs/security/evidence/swarm100-20261028/reports/065.json
+?? docs/security/evidence/swarm100-20261028/reports/066.json
+?? docs/security/evidence/swarm100-20261028/reports/067.json
+?? docs/security/evidence/swarm100-20261028/reports/068.json
+?? docs/security/evidence/swarm100-20261028/reports/069.json
+?? docs/security/evidence/swarm100-20261028/reports/070.json
+?? docs/security/evidence/swarm100-20261028/reports/071.json
+?? docs/security/evidence/swarm100-20261028/reports/072.json
+?? docs/security/evidence/swarm100-20261028/reports/073.json
+?? docs/security/evidence/swarm100-20261028/reports/074.json
+?? docs/security/evidence/swarm100-20261028/reports/075.json
+?? docs/security/evidence/swarm100-20261028/reports/076.json
+?? docs/security/evidence/swarm100-20261028/reports/077.json
+?? docs/security/evidence/swarm100-20261028/reports/078.json
+?? docs/security/evidence/swarm100-20261028/reports/079.json
+?? docs/security/evidence/swarm100-20261028/reports/080.json
+?? docs/security/evidence/swarm100-20261028/reports/081.json
+?? docs/security/evidence/swarm100-20261028/reports/082.json
+?? docs/security/evidence/swarm100-20261028/reports/083.json
+?? docs/security/evidence/swarm100-20261028/reports/084.json
+?? docs/security/evidence/swarm100-20261028/reports/085.json
+?? docs/security/evidence/swarm100-20261028/reports/086.json
+?? docs/security/evidence/swarm100-20261028/reports/087.json
+?? docs/security/evidence/swarm100-20261028/reports/088.json
+?? docs/security/evidence/swarm100-20261028/reports/089.json
+?? docs/security/evidence/swarm100-20261028/reports/090.json
+?? docs/security/evidence/swarm100-20261028/reports/091.json
+?? docs/security/evidence/swarm100-20261028/reports/092.json
+?? docs/security/evidence/swarm100-20261028/reports/093.json
+?? docs/security/evidence/swarm100-20261028/reports/094.json
+?? docs/security/evidence/swarm100-20261028/reports/095.json
+?? docs/security/evidence/swarm100-20261028/reports/096.json
+?? docs/security/evidence/swarm100-20261028/reports/097.json
+?? docs/security/evidence/swarm100-20261028/reports/098.json
+?? docs/security/evidence/swarm100-20261028/reports/099.json
+?? docs/security/evidence/swarm100-20261028/reports/findings_adjudicated_a.json
+?? docs/security/evidence/swarm100-20261028/reports/findings_adjudicated_b.json
+?? docs/security/evidence/swarm100-20261028/reports/findings_adjudicated_c.json
+?? docs/security/evidence/swarm100-20261028/reports/findings_adjudicated_d.json
+?? docs/security/evidence/swarm100-20261028/reports/lead_a.json
+?? docs/security/evidence/swarm100-20261028/reports/lead_b.json
+?? docs/security/evidence/swarm100-20261028/reports/lead_c.json
+?? docs/security/evidence/swarm100-20261028/reports/lead_d.json
+?? docs/security/evidence/swarm100-20261028/reproductions/isolated_checks.py
+?? docs/security/evidence/swarm100-20261028/root-adjudications.json
+?? docs/security/evidence/swarm100-20261028/ruff-result.json
+?? docs/security/experimental-audit-plan-2026-10-26.md
+?? docs/security/fl-path01-capability-root-escape.md
+?? docs/security/fl-rec01-recovery-provenance.md
+?? proof/lean/README.md
+?? scripts/c5_cli/doxastic_kripke_engine.py
+?? tests/fl_rec01_recovery_provenance.rs
+?? tests/nemesis_wave6_forged_authority.rs
+?? tests/nemesis_wave7_provenance_drift.rs
+?? tests/test_attest_proof_regressions.py
+?? tests/test_consensus_atomic_commit.py
+?? tests/test_consensus_fault_recovery.py
+?? tests/test_consensus_recovery_regressions.py
+?? tests/test_database_config_cleanup.py
+?? tests/test_doxastic_kripke_engine.py
+?? tests/test_finding_evidence_contract.py
+?? tests/test_fl027_provenance_authority.py
+?? tests/test_graph_isomorphism_regressions.py
+?? tests/test_semantic_entropy_lean_alignment.py

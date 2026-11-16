@@ -1,0 +1,55 @@
+{
+  "scope": "Isolated stdlib checks; product entrypoints, native runtimes, operator data and network untouched.",
+  "results": [
+    {
+      "candidate_id": "SW100-C0243",
+      "generated": "def f():",
+      "observed": "IndentationError",
+      "passed": true
+    },
+    {
+      "candidate_id": "SW100-C0244",
+      "bindings": [
+        "operating",
+        "sig"
+      ],
+      "generated": "import os as operating\nimport signal as sig\ntry:\n    risky()\nexcept Exception:\n    os.kill(os.getpid(), signal.SIGKILL)\n    raise RuntimeError('FAIL-FAST: General Exception intercepted.')",
+      "passed": true,
+      "scope": "Transformed AST inspected; kill handler was never executed."
+    },
+    {
+      "candidate_id": "SW100-C0346",
+      "with_zero_weight": {
+        "no": 1.0,
+        "yes": 0.0
+      },
+      "with_missing_weight": {
+        "no": 1.0,
+        "yes": 0.0
+      },
+      "without_excluded_agent": {
+        "no": 0.2,
+        "yes": 0.8
+      },
+      "passed": true
+    },
+    {
+      "candidate_id": "SW100-C0569",
+      "input": [
+        "Every natural number equals zero"
+      ],
+      "generated": "namespace Babylon60.Theory.Counterexample\n\n/--\n  Firma formal generada din\u00e1micamente mediante `inject_lean4_stubs.py`.\n  Dominio: C5-REAL Formal Verification\n-/\nvariable {X Y : Type}\n\n/-- Every natural number equals zero -/\ntheorem theorem_1_every_natural_number_equals_zero (x : X) : True := by\n  trivial\n\nend Babylon60.Theory.Counterexample",
+      "passed": true,
+      "scope": "Generator only; no Lean compiler or proof runtime executed."
+    },
+    {
+      "candidate_id": "SW100-C0546",
+      "sample_peak": 0.8485281374238569,
+      "ceiling": 0.8912509381337456,
+      "documented_gain": 1.0,
+      "analytic_true_peak_after_gain": 1.2,
+      "passed": true,
+      "scope": "Pure mathematical counterexample to the documented formula; no audio runtime."
+    }
+  ]
+}

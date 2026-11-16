@@ -1,0 +1,916 @@
+{
+  "reviewer": "13",
+  "date": "2026-10-28",
+  "method": "Manual targeted source review; code graph tools not exposed in session. Source snapshots are evidence, not runtime validation.",
+  "excerpts": [
+    {
+      "candidate_id": "SW100-C0247",
+      "path": "crates/b60-lang/src/compiler.rs",
+      "start_line": 127,
+      "end_line": 158,
+      "observation": "NIG checks token count then slices independently located brackets.",
+      "source_sha256": "e1be982667c360a0c71ba2c5f54e2344939bc4a1d4b62b66eb5e55aa43e211f1",
+      "text": "127:                 \"NIG\" => {\n128:                     if tokens.len() < 3 {\n129:                         return Err(format!(\"L\u00ednea {}: NIG requiere destino y operando\", line_num + 1));\n130:                     }\n131:                     let dest = Self::resolve_reg(tokens[1], &mut sym_regs);\n132:                     if let (Some(start), Some(end)) = (line.find('['), line.find(']')) {\n133:                         let val = Self::parse_cuneiform_literal(&line[start..=end]);\n134:                         let sec = (val.min(255)) as u8;\n135:                         if dest == 0 {\n136:                             bytecode.push(SexaOpCode::SexaPack as u8);\n137:                             bytecode.push(sec);\n138:                             bytecode.push(0);\n139:                         } else {\n140:                             bytecode.push(SexaOpCode::PushStack as u8);\n141:                             bytecode.push(0);\n142:                             bytecode.push(SexaOpCode::SexaPack as u8);\n143:                             bytecode.push(sec);\n144:                             bytecode.push(0);\n145:                             bytecode.push(SexaOpCode::PushStack as u8);\n146:                             bytecode.push(0);\n147:                             bytecode.push(SexaOpCode::LoadReg as u8);\n148:                             bytecode.push(dest);\n149:                             bytecode.push(SexaOpCode::LoadReg as u8);\n150:                             bytecode.push(0);\n151:                         }\n152:                     } else {\n153:                         let src = Self::resolve_reg(tokens[2], &mut sym_regs);\n154:                         bytecode.push(SexaOpCode::PushStack as u8);\n155:                         bytecode.push(src);\n156:                         bytecode.push(SexaOpCode::LoadReg as u8);\n157:                         bytecode.push(dest);\n158:                     }"
+    },
+    {
+      "candidate_id": "SW100-C0247",
+      "path": "crates/b60-lang/src/compiler.rs",
+      "start_line": 160,
+      "end_line": 203,
+      "observation": "DAH and LAL repeat the unchecked bracket range.",
+      "source_sha256": "e1be982667c360a0c71ba2c5f54e2344939bc4a1d4b62b66eb5e55aa43e211f1",
+      "text": "160:                 \"DAH\" => {\n161:                     if tokens.len() < 3 {\n162:                         return Err(format!(\"L\u00ednea {}: DAH requiere destino y operando\", line_num + 1));\n163:                     }\n164:                     let dest = Self::resolve_reg(tokens[1], &mut sym_regs);\n165:                     bytecode.push(SexaOpCode::PushStack as u8);\n166:                     bytecode.push(dest);\n167:                     bytecode.push(SexaOpCode::LoadReg as u8);\n168:                     bytecode.push(0);\n169:                     if let (Some(start), Some(end)) = (line.find('['), line.find(']')) {\n170:                         let val = Self::parse_cuneiform_literal(&line[start..=end]);\n171:                         bytecode.push(SexaOpCode::SexaPack as u8);\n172:                         bytecode.push((val.min(255)) as u8);\n173:                         bytecode.push(0);\n174:                         bytecode.push(SexaOpCode::PushStack as u8);\n175:                         bytecode.push(0);\n176:                         bytecode.push(SexaOpCode::LoadReg as u8);\n177:                         bytecode.push(1);\n178:                         bytecode.push(SexaOpCode::PushStack as u8);\n179:                         bytecode.push(dest);\n180:                         bytecode.push(SexaOpCode::LoadReg as u8);\n181:                         bytecode.push(0);\n182:                     } else {\n183:                         let src = Self::resolve_reg(tokens[2], &mut sym_regs);\n184:                         bytecode.push(SexaOpCode::PushStack as u8);\n185:                         bytecode.push(src);\n186:                         bytecode.push(SexaOpCode::LoadReg as u8);\n187:                         bytecode.push(1);\n188:                     }\n189:                     bytecode.push(SexaOpCode::SexaAdd as u8);\n190:                     bytecode.push(SexaOpCode::PushStack as u8);\n191:                     bytecode.push(0);\n192:                     bytecode.push(SexaOpCode::LoadReg as u8);\n193:                     bytecode.push(dest);\n194:                 }\n195:                 \"LAL\" => {\n196:                     if tokens.len() < 3 {\n197:                         return Err(format!(\"L\u00ednea {}: LAL requiere destino y operando\", line_num + 1));\n198:                     }\n199:                     let dest = Self::resolve_reg(tokens[1], &mut sym_regs);\n200:                     if let (Some(start), Some(end)) = (line.find('['), line.find(']')) {\n201:                         let val = Self::parse_cuneiform_literal(&line[start..=end]);\n202:                         bytecode.push(SexaOpCode::SexaPack as u8);\n203:                         bytecode.push((val.min(255)) as u8);"
+    },
+    {
+      "candidate_id": "SW100-C0247",
+      "path": "crates/b60-lang/src/main.rs",
+      "start_line": 75,
+      "end_line": 94,
+      "observation": "File source is passed directly to compile_source; match only handles Ok/Err.",
+      "source_sha256": "289ed9d9b2b5c841abccaaa8404f80a82257c11e1db2ba07bc6a0ae99d29ad1d",
+      "text": "75:             let source = match fs::read_to_string(&file) {\n76:                 Ok(s) => s,\n77:                 Err(e) => {\n78:                     eprintln!(\"  [!] Error leyendo archivo: {}\", e);\n79:                     std::process::exit(1);\n80:                 }\n81:             };\n82: \n83:             let t_compile = Instant::now();\n84:             let bytecode = match B60Compiler::compile_source(&source) {\n85:                 Ok(b) => {\n86:                     println!(\"  [+] Compilaci\u00f3n exitosa: {} bytes de bytecode sexagesimal ({:.2} \u00b5s)\",\n87:                         b.len(), t_compile.elapsed().as_nanos() as f64 / 1000.0);\n88:                     b\n89:                 }\n90:                 Err(e) => {\n91:                     eprintln!(\"  [!] Error de compilaci\u00f3n: {}\", e);\n92:                     std::process::exit(1);\n93:                 }\n94:             };"
+    },
+    {
+      "candidate_id": "SW100-C0248",
+      "path": "crates/b60-lang/src/compiler.rs",
+      "start_line": 35,
+      "end_line": 46,
+      "observation": "New symbolic allocation uses 2 + (symbol count as u8 % 6).",
+      "source_sha256": "e1be982667c360a0c71ba2c5f54e2344939bc4a1d4b62b66eb5e55aa43e211f1",
+      "text": "35:     fn resolve_reg(name: &str, sym_table: &mut HashMap<String, u8>) -> u8 {\n36:         if let Ok(idx) = name.parse::<u8>() {\n37:             return idx % 8;\n38:         }\n39:         if let Some(stripped) = name.strip_prefix('R') {\n40:             if let Ok(idx) = stripped.parse::<u8>() {\n41:                 return idx % 8;\n42:             }\n43:         }\n44:         let next_idx = 2 + ((sym_table.len() as u8) % 6);\n45:         *sym_table.entry(name.to_string()).or_insert(next_idx)\n46:     }"
+    },
+    {
+      "candidate_id": "SW100-C0248",
+      "path": "crates/b60-lang/src/compiler.rs",
+      "start_line": 127,
+      "end_line": 150,
+      "observation": "NIG lowers its symbolic destination to LoadReg.",
+      "source_sha256": "e1be982667c360a0c71ba2c5f54e2344939bc4a1d4b62b66eb5e55aa43e211f1",
+      "text": "127:                 \"NIG\" => {\n128:                     if tokens.len() < 3 {\n129:                         return Err(format!(\"L\u00ednea {}: NIG requiere destino y operando\", line_num + 1));\n130:                     }\n131:                     let dest = Self::resolve_reg(tokens[1], &mut sym_regs);\n132:                     if let (Some(start), Some(end)) = (line.find('['), line.find(']')) {\n133:                         let val = Self::parse_cuneiform_literal(&line[start..=end]);\n134:                         let sec = (val.min(255)) as u8;\n135:                         if dest == 0 {\n136:                             bytecode.push(SexaOpCode::SexaPack as u8);\n137:                             bytecode.push(sec);\n138:                             bytecode.push(0);\n139:                         } else {\n140:                             bytecode.push(SexaOpCode::PushStack as u8);\n141:                             bytecode.push(0);\n142:                             bytecode.push(SexaOpCode::SexaPack as u8);\n143:                             bytecode.push(sec);\n144:                             bytecode.push(0);\n145:                             bytecode.push(SexaOpCode::PushStack as u8);\n146:                             bytecode.push(0);\n147:                             bytecode.push(SexaOpCode::LoadReg as u8);\n148:                             bytecode.push(dest);\n149:                             bytecode.push(SexaOpCode::LoadReg as u8);\n150:                             bytecode.push(0);"
+    },
+    {
+      "candidate_id": "SW100-C0248",
+      "path": "crates/b60-lang/src/vm.rs",
+      "start_line": 283,
+      "end_line": 291,
+      "observation": "LoadReg pops and assigns directly into the selected physical register.",
+      "source_sha256": "633d03c82686e0c10adc1b659a4a4063160053f78153584fd9f6147fec02a889",
+      "text": "283:                 SexaOpCode::LoadReg => {\n284:                     if self.pc < bytecode.len() {\n285:                         let reg_idx = (bytecode[self.pc] % 8) as usize;\n286:                         self.pc += 1;\n287:                         if let Some(val) = self.stack.pop() {\n288:                             self.registers[reg_idx] = val;\n289:                         }\n290:                     } else {\n291:                         return self.poison_and_abort(1, \"LOAD_REG: operando truncado\".to_string());"
+    },
+    {
+      "candidate_id": "SW100-C0251",
+      "path": "crates/b60-lang/src/compiler.rs",
+      "start_line": 20,
+      "end_line": 32,
+      "observation": "Cuneiform literal parser returns a u64 weighted by powers of 60.",
+      "source_sha256": "e1be982667c360a0c71ba2c5f54e2344939bc4a1d4b62b66eb5e55aa43e211f1",
+      "text": "20:     pub fn parse_cuneiform_literal(raw: &str) -> u64 {\n21:         let inner = raw.trim_matches(|c| c == '[' || c == ']' || c == ' ');\n22:         if inner.is_empty() {\n23:             return 0;\n24:         }\n25:         let places: Vec<&str> = inner.split_whitespace().collect();\n26:         let mut total = 0u64;\n27:         let mut power = (places.len() - 1) as u32;\n28:         for p in places {\n29:             total = total.saturating_add(Self::parse_cuneiform_digit(p).saturating_mul(60u64.saturating_pow(power)));\n30:             power = power.saturating_sub(1);\n31:         }\n32:         total"
+    },
+    {
+      "candidate_id": "SW100-C0251",
+      "path": "crates/b60-lang/src/compiler.rs",
+      "start_line": 127,
+      "end_line": 150,
+      "observation": "NIG applies min(255) then emits one second byte.",
+      "source_sha256": "e1be982667c360a0c71ba2c5f54e2344939bc4a1d4b62b66eb5e55aa43e211f1",
+      "text": "127:                 \"NIG\" => {\n128:                     if tokens.len() < 3 {\n129:                         return Err(format!(\"L\u00ednea {}: NIG requiere destino y operando\", line_num + 1));\n130:                     }\n131:                     let dest = Self::resolve_reg(tokens[1], &mut sym_regs);\n132:                     if let (Some(start), Some(end)) = (line.find('['), line.find(']')) {\n133:                         let val = Self::parse_cuneiform_literal(&line[start..=end]);\n134:                         let sec = (val.min(255)) as u8;\n135:                         if dest == 0 {\n136:                             bytecode.push(SexaOpCode::SexaPack as u8);\n137:                             bytecode.push(sec);\n138:                             bytecode.push(0);\n139:                         } else {\n140:                             bytecode.push(SexaOpCode::PushStack as u8);\n141:                             bytecode.push(0);\n142:                             bytecode.push(SexaOpCode::SexaPack as u8);\n143:                             bytecode.push(sec);\n144:                             bytecode.push(0);\n145:                             bytecode.push(SexaOpCode::PushStack as u8);\n146:                             bytecode.push(0);\n147:                             bytecode.push(SexaOpCode::LoadReg as u8);\n148:                             bytecode.push(dest);\n149:                             bytecode.push(SexaOpCode::LoadReg as u8);\n150:                             bytecode.push(0);"
+    },
+    {
+      "candidate_id": "SW100-C0251",
+      "path": "crates/b60-lang/src/compiler.rs",
+      "start_line": 169,
+      "end_line": 203,
+      "observation": "DAH/LAL repeat the clamp.",
+      "source_sha256": "e1be982667c360a0c71ba2c5f54e2344939bc4a1d4b62b66eb5e55aa43e211f1",
+      "text": "169:                     if let (Some(start), Some(end)) = (line.find('['), line.find(']')) {\n170:                         let val = Self::parse_cuneiform_literal(&line[start..=end]);\n171:                         bytecode.push(SexaOpCode::SexaPack as u8);\n172:                         bytecode.push((val.min(255)) as u8);\n173:                         bytecode.push(0);\n174:                         bytecode.push(SexaOpCode::PushStack as u8);\n175:                         bytecode.push(0);\n176:                         bytecode.push(SexaOpCode::LoadReg as u8);\n177:                         bytecode.push(1);\n178:                         bytecode.push(SexaOpCode::PushStack as u8);\n179:                         bytecode.push(dest);\n180:                         bytecode.push(SexaOpCode::LoadReg as u8);\n181:                         bytecode.push(0);\n182:                     } else {\n183:                         let src = Self::resolve_reg(tokens[2], &mut sym_regs);\n184:                         bytecode.push(SexaOpCode::PushStack as u8);\n185:                         bytecode.push(src);\n186:                         bytecode.push(SexaOpCode::LoadReg as u8);\n187:                         bytecode.push(1);\n188:                     }\n189:                     bytecode.push(SexaOpCode::SexaAdd as u8);\n190:                     bytecode.push(SexaOpCode::PushStack as u8);\n191:                     bytecode.push(0);\n192:                     bytecode.push(SexaOpCode::LoadReg as u8);\n193:                     bytecode.push(dest);\n194:                 }\n195:                 \"LAL\" => {\n196:                     if tokens.len() < 3 {\n197:                         return Err(format!(\"L\u00ednea {}: LAL requiere destino y operando\", line_num + 1));\n198:                     }\n199:                     let dest = Self::resolve_reg(tokens[1], &mut sym_regs);\n200:                     if let (Some(start), Some(end)) = (line.find('['), line.find(']')) {\n201:                         let val = Self::parse_cuneiform_literal(&line[start..=end]);\n202:                         bytecode.push(SexaOpCode::SexaPack as u8);\n203:                         bytecode.push((val.min(255)) as u8);"
+    },
+    {
+      "candidate_id": "SW100-C0251",
+      "path": "crates/b60-lang/src/vm.rs",
+      "start_line": 271,
+      "end_line": 280,
+      "observation": "SexaPack consumes the emitted u8 as u64 seconds.",
+      "source_sha256": "633d03c82686e0c10adc1b659a4a4063160053f78153584fd9f6147fec02a889",
+      "text": "271:                 SexaOpCode::SexaPack => {\n272:                     if self.pc + 2 <= bytecode.len() {\n273:                         let sec = bytecode[self.pc] as u64;\n274:                         let frac_part = bytecode[self.pc + 1] as u64;\n275:                         self.pc += 2;\n276:                         let fraction = frac_part * (FRACTION_BASE / 60);\n277:                         self.registers[0] = SexaRegister::from_parts(sec, fraction);\n278:                     } else {\n279:                         return self.poison_and_abort(1, \"SEXA_PACK: operandos truncados\".to_string());\n280:                     }"
+    },
+    {
+      "candidate_id": "SW100-C0572",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bft_engine.rs",
+      "start_line": 48,
+      "end_line": 60,
+      "observation": "Concurrency limit is retained without a nonzero check.",
+      "source_sha256": "ad8738ce55700ee5a448a4441893d287a1cb25b3f848f0b4d4262f2e74b412b9",
+      "text": "48: pub struct BftAsyncEngine {\n49:     pub concurrency_limit: usize,\n50:     nodes: HashMap<String, BftNode>,\n51:     pub telemetry_tx: Option<tokio::sync::broadcast::Sender<TelemetryEvent>>,\n52: }\n53: \n54: impl BftAsyncEngine {\n55:     pub fn new(concurrency_limit: usize) -> Self {\n56:         Self {\n57:             concurrency_limit,\n58:             nodes: HashMap::new(),\n59:             telemetry_tx: None,\n60:         }"
+    },
+    {
+      "candidate_id": "SW100-C0572",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bft_engine.rs",
+      "start_line": 183,
+      "end_line": 184,
+      "observation": "Creates the completion channel and node count.",
+      "source_sha256": "ad8738ce55700ee5a448a4441893d287a1cb25b3f848f0b4d4262f2e74b412b9",
+      "text": "183:         let (tx_completed, mut rx_completed) = tokio::sync::mpsc::channel(1024);\n184:         let num_nodes = sorted.len();"
+    },
+    {
+      "candidate_id": "SW100-C0572",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bft_engine.rs",
+      "start_line": 215,
+      "end_line": 243,
+      "observation": "Producer thread times out after 15s; zero concurrency prevents publishing.",
+      "source_sha256": "ad8738ce55700ee5a448a4441893d287a1cb25b3f848f0b4d4262f2e74b412b9",
+      "text": "215:         let orch_barrier = startup_barrier.clone();\n216:         thread::spawn(move || {\n217:             let task_pub = ZeroCopyPublisher::new(&svc_tasks).expect(\"C5-REAL: Failed to bind\");\n218:             let result_sub = ZeroCopySubscriber::new(&svc_results).expect(\"C5-REAL: Failed to bind\");\n219:             orch_barrier.wait();\n220: \n221:             let mut completed = HashSet::new();\n222:             let mut in_flight = HashSet::new();\n223:             let mut acks: HashMap<u64, HashSet<usize>> = HashMap::new();\n224:             let mut idle_cycles = 0u64;\n225:             let start_instant = std::time::Instant::now();\n226:             let max_timeout = Duration::from_secs(15);\n227:             \n228:             while completed.len() < num_nodes {\n229:                 if start_instant.elapsed() > max_timeout {\n230:                     eprintln!(\"C5-REAL: ABFT consensus loop timed out after 15s (completed {}/{})\", completed.len(), num_nodes);\n231:                     break;\n232:                 }\n233: \n234:                 while in_flight.len() < concurrency_limit {\n235:                     if let Some(n_id) = ready_queue.pop() {\n236:                         let seq_num = *node_to_id.get(&n_id).unwrap();\n237:                         let default_hash = \"0000000000000000000000000000000000000000000000000000000000000000\";\n238:                         let actual_hash = node_id_to_hash.get(&n_id).map(|s| s.as_str()).unwrap_or(default_hash);\n239:                         let _ = task_pub.publish_node(1, 0, seq_num, actual_hash, &orch_keys_clone);\n240:                         in_flight.insert(n_id);\n241:                     } else {\n242:                         break;\n243:                     }"
+    },
+    {
+      "candidate_id": "SW100-C0572",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bft_engine.rs",
+      "start_line": 263,
+      "end_line": 267,
+      "observation": "Completed nodes are sent through the captured sender.",
+      "source_sha256": "ad8738ce55700ee5a448a4441893d287a1cb25b3f848f0b4d4262f2e74b412b9",
+      "text": "263:                             if w_set.len() >= 3 {\n264:                                 if let Some(n_id) = id_to_node.get(&seq_num) {\n265:                                     if completed.insert(n_id.clone()) {\n266:                                         in_flight.remove(n_id);\n267:                                         let _ = tx_completed.blocking_send(n_id.clone());"
+    },
+    {
+      "candidate_id": "SW100-C0572",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bft_engine.rs",
+      "start_line": 299,
+      "end_line": 356,
+      "observation": "Consumer has no None branch; worker stop and rollback follow the loop.",
+      "source_sha256": "ad8738ce55700ee5a448a4441893d287a1cb25b3f848f0b4d4262f2e74b412b9",
+      "text": "299:         // 3. Async Engine awaits completions\n300:         let mut all_success = true;\n301:         let mut err_msg = String::new();\n302:         let mut node_sum_ms = 0.0;\n303:         let mut has_high_latency = false;\n304:         \n305:         let mut completed_count = 0;\n306:         while completed_count < num_nodes {\n307:             if let Some(n_id) = rx_completed.recv().await {\n308:                 completed_count += 1;\n309:                 let node = self.nodes.get(&n_id).expect(\"C5-REAL: Critical DAG Integrity Failure - Node not found\");\n310:                 if node.should_fail {\n311:                     all_success = false;\n312:                     err_msg = format!(\"Node {} failed\", node.id);\n313:                     break;\n314:                 }\n315: \n316:                 let js = JustifiedStatement {\n317:                     statement: Statement { content: node.payload.clone(), modality: Modality::Epistemic, obligations: vec![] },\n318:                     justification: Justification::Conjecture,\n319:                 };\n320:                 let atms_node_id = {\n321:                     let mut a = atms.write().await;\n322:                     if let Some(id) = a.find_node_by_datum(&node.payload) { id } else { a.install(&js) }\n323:                 };\n324:                 if !atms.read().await.contradiction_free(atms_node_id) {\n325:                     all_success = false;\n326:                     err_msg = format!(\"ATMS Cognitive Contradiction: Payload '{}' is logically invalid (Nogood).\", node.payload);\n327:                     break;\n328:                 }\n329: \n330:                 let mut hasher = Hasher::new();\n331:                 hasher.update(node.id.as_bytes());\n332:                 hasher.update(node.payload.as_bytes());\n333:                 let proof = hasher.finalize().to_hex().to_string();\n334: \n335:                 memory.write().await.put(&node.id, proof.clone());\n336: \n337:                 if let Some(tx) = &self.telemetry_tx {\n338:                     let local_exergy = 0.9999 - (node.latency_ms as f64 * 0.0001);\n339:                     let seq_count = memory.read().await.len() as u64;\n340:                     let _ = tx.send((proof, seq_count, local_exergy, node.id.as_bytes().to_vec()));\n341:                 }\n342: \n343:                 node_sum_ms += node.latency_ms as f64;\n344:                 if node.latency_ms > 2 { has_high_latency = true; }\n345:             }\n346:         }\n347: \n348:         stop_worker.store(true, std::sync::atomic::Ordering::Relaxed);\n349:         for h in worker_handles {\n350:             let _ = h.join();\n351:         }\n352: \n353:         if !all_success {\n354:             let mut m = memory.write().await;\n355:             m.restore(snapshot);\n356:             return Err(err_msg);"
+    },
+    {
+      "candidate_id": "SW100-C0572",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bindings.rs",
+      "start_line": 368,
+      "end_line": 384,
+      "observation": "Binding waits for the engine on a current-thread Tokio runtime.",
+      "source_sha256": "988c71e782d600406e2e985c5279c2bf2abc33a51c3bea7f49b021f4479847a3",
+      "text": "368:     pub fn run_dag(&self, g: f64, l: f64, e_base: f64, db_path: String) -> PyResult<String> {\n369:         let rt = tokio::runtime::Builder::new_current_thread()\n370:             .enable_all()\n371:             .build()\n372:             .map_err(|e| PyRuntimeError::new_err(format!(\"Failed to build tokio runtime: {}\", e)))?;\n373:         \n374:         let params = ExergyParams { g, l, a: 1.0, b: 1.0, p: 1.0, e_base };\n375: \n376:         rt.block_on(async {\n377:             match self.engine.run_dag(self.memory.clone(), params, &db_path).await {\n378:                 Ok(_) => {\n379:                     let mem = self.memory.read().await;\n380:                     Ok(format!(\"SUCCESS: DAG executed. Memory entries: {} crystallized in {}\", mem.len(), db_path))\n381:                 },\n382:                 Err(e) => Err(PyRuntimeError::new_err(format!(\"BFT Rollback Triggered: {}\", e))),\n383:             }\n384:         })"
+    },
+    {
+      "candidate_id": "SW100-C0573",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bft_engine.rs",
+      "start_line": 69,
+      "end_line": 106,
+      "observation": "Lock and snapshot are established before work.",
+      "source_sha256": "ad8738ce55700ee5a448a4441893d287a1cb25b3f848f0b4d4262f2e74b412b9",
+      "text": "69:     pub async fn run_dag(&self, memory: Arc<RwLock<KdaMemoryBuffer>>, params: ExergyParams, db_path: &str) -> Result<(), String> {\n70:         let lock_path = if db_path.is_empty() {\n71:             let tmp = std::env::temp_dir();\n72:             format!(\"{}/.cortex_thermal_lock_{}_{}.lock\", tmp.display(), std::process::id(), std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).expect(\"clock before UNIX_EPOCH\").as_nanos())\n73:         } else {\n74:             format!(\"{}.lock\", db_path)\n75:         };\n76:         let _thermal_lock = ThermalLock::acquire(&lock_path)?;\n77: \n78:         let start_wall = Instant::now();\n79:         \n80:         // Inicializar ATMS ef\u00edmero (Motor Cognitivo)\n81:         let atms = Arc::new(RwLock::new(Atms::new()));\n82:         {\n83:             let mut a = atms.write().await;\n84:             let mut add_nogood = |s: &str| {\n85:                 let js = JustifiedStatement {\n86:                     statement: Statement { content: s.to_string(), modality: Modality::Epistemic, obligations: vec![] },\n87:                     justification: Justification::Conjecture,\n88:                 };\n89:                 let node_id = a.install(&js);\n90:                 a.contradict(&[node_id]); // Declarar formalmente como Nogood\n91:             };\n92:             add_nogood(\"Infinite Fiat Issuance\");\n93:             add_nogood(\"Emision de Leliqs sin Respaldo\");\n94:             add_nogood(\"Deuda Extractivista Offshore\");\n95:         }\n96: \n97:         let snapshot = {\n98:             let m = memory.read().await;\n99:             m.snapshot()\n100:         };\n101: \n102:         let _semaphore = Arc::new(Semaphore::new(self.concurrency_limit));\n103:         \n104:         let sorted = match self.topological_sort() {\n105:             Ok(s) => s,\n106:             Err(e) => return Err(e),"
+    },
+    {
+      "candidate_id": "SW100-C0573",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bft_engine.rs",
+      "start_line": 330,
+      "end_line": 356,
+      "observation": "Memory is changed; explicit failure restores snapshot.",
+      "source_sha256": "ad8738ce55700ee5a448a4441893d287a1cb25b3f848f0b4d4262f2e74b412b9",
+      "text": "330:                 let mut hasher = Hasher::new();\n331:                 hasher.update(node.id.as_bytes());\n332:                 hasher.update(node.payload.as_bytes());\n333:                 let proof = hasher.finalize().to_hex().to_string();\n334: \n335:                 memory.write().await.put(&node.id, proof.clone());\n336: \n337:                 if let Some(tx) = &self.telemetry_tx {\n338:                     let local_exergy = 0.9999 - (node.latency_ms as f64 * 0.0001);\n339:                     let seq_count = memory.read().await.len() as u64;\n340:                     let _ = tx.send((proof, seq_count, local_exergy, node.id.as_bytes().to_vec()));\n341:                 }\n342: \n343:                 node_sum_ms += node.latency_ms as f64;\n344:                 if node.latency_ms > 2 { has_high_latency = true; }\n345:             }\n346:         }\n347: \n348:         stop_worker.store(true, std::sync::atomic::Ordering::Relaxed);\n349:         for h in worker_handles {\n350:             let _ = h.join();\n351:         }\n352: \n353:         if !all_success {\n354:             let mut m = memory.write().await;\n355:             m.restore(snapshot);\n356:             return Err(err_msg);"
+    },
+    {
+      "candidate_id": "SW100-C0573",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bft_engine.rs",
+      "start_line": 376,
+      "end_line": 411,
+      "observation": "Score rejection restores; SQLite open, schema, insert and commit errors return without restore.",
+      "source_sha256": "ad8738ce55700ee5a448a4441893d287a1cb25b3f848f0b4d4262f2e74b412b9",
+      "text": "376:         if score < 700.0 {\n377:             // Falla termodin\u00e1mica -> Rollback\n378:             let mut m = memory.write().await;\n379:             m.restore(snapshot);\n380:             return Err(format!(\"Thermodynamic Collapse: Score {:.2} < 700. Aborting DAG.\", score));\n381:         }\n382: \n383:         // CRISTALIZACI\u00d3N EN SQLITE WAL (INV_C5_18 timeout=5000)\n384:         if !db_path.is_empty() {\n385:             let conn = Connection::open_with_flags(db_path, OpenFlags::SQLITE_OPEN_READ_WRITE | OpenFlags::SQLITE_OPEN_CREATE)\n386:                 .map_err(|e| format!(\"SQLite Open Error: {}\", e))?;\n387:             conn.busy_timeout(std::time::Duration::from_millis(5000))\n388:                 .map_err(|e| format!(\"SQLite Timeout Error: {}\", e))?;\n389:             \n390:             conn.execute_batch(\n391:                 \"PRAGMA journal_mode = WAL;\n392:                  CREATE TABLE IF NOT EXISTS cortex_memory_bft (\n393:                      node_id TEXT PRIMARY KEY,\n394:                      proof TEXT NOT NULL,\n395:                      timestamp DATETIME DEFAULT CURRENT_TIMESTAMP\n396:                  );\"\n397:             ).map_err(|e| format!(\"SQLite Pragma Error: {}\", e))?;\n398: \n399:             let m = memory.read().await;\n400:             let tx = conn.unchecked_transaction().map_err(|e| format!(\"TX Error: {}\", e))?;\n401:             {\n402:                 let mut stmt = tx.prepare_cached(\"INSERT OR REPLACE INTO cortex_memory_bft (node_id, proof) VALUES (?1, ?2)\")\n403:                     .map_err(|e| format!(\"Prepare Error: {}\", e))?;\n404:                 for (k, entry) in m.snapshot() {\n405:                     stmt.execute([&k, &entry.value]).map_err(|e| format!(\"Insert Error: {}\", e))?;\n406:                 }\n407:             }\n408:             tx.commit().map_err(|e| format!(\"Commit Error: {}\", e))?;\n409:         }\n410: \n411:         Ok(())"
+    },
+    {
+      "candidate_id": "SW100-C0573",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bindings.rs",
+      "start_line": 376,
+      "end_line": 383,
+      "observation": "Every engine error is presented as BFT Rollback Triggered.",
+      "source_sha256": "988c71e782d600406e2e985c5279c2bf2abc33a51c3bea7f49b021f4479847a3",
+      "text": "376:         rt.block_on(async {\n377:             match self.engine.run_dag(self.memory.clone(), params, &db_path).await {\n378:                 Ok(_) => {\n379:                     let mem = self.memory.read().await;\n380:                     Ok(format!(\"SUCCESS: DAG executed. Memory entries: {} crystallized in {}\", mem.len(), db_path))\n381:                 },\n382:                 Err(e) => Err(PyRuntimeError::new_err(format!(\"BFT Rollback Triggered: {}\", e))),\n383:             }"
+    },
+    {
+      "candidate_id": "SW100-C0062",
+      "path": "01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py",
+      "start_line": 377,
+      "end_line": 416,
+      "observation": "Separate Ed25519 signature-verification method exists.",
+      "source_sha256": "d7747b65250fa8292a301082981ccd89830c53f815dd410dd87bc120becb57e1",
+      "text": "377:     def verify_certificate_signature(cert: Dict[str, Any]) -> Dict[str, Any]:\n378:         from nacl.signing import VerifyKey\n379:         from nacl.exceptions import BadSignatureError\n380: \n381:         signature_block = cert.get(\"signature\")\n382:         if not isinstance(signature_block, dict):\n383:             return {\n384:                 \"valid\": False,\n385:                 \"reason\": \"Missing signature block\",\n386:             }\n387: \n388:         try:\n389:             public_key = bytes.fromhex(signature_block[\"public_key\"])\n390:             signature = bytes.fromhex(signature_block[\"signature\"])\n391:         except Exception as exc:\n392:             return {\n393:                 \"valid\": False,\n394:                 \"reason\": f\"Malformed signature block: {exc}\",\n395:             }\n396: \n397:         cert_without_signature = {k: v for k, v in cert.items() if k != \"signature\"}\n398: \n399:         payload = _canonical_json(cert_without_signature).encode(\"utf-8\")\n400: \n401:         try:\n402:             verify_key = VerifyKey(public_key)\n403:             verify_key.verify(payload, signature)\n404:             return {\n405:                 \"valid\": True,\n406:                 \"reason\": \"Ed25519 signature valid\",\n407:             }\n408:         except BadSignatureError:\n409:             return {\n410:                 \"valid\": False,\n411:                 \"reason\": \"Ed25519 signature verification failed\",\n412:             }\n413:         except Exception as exc:\n414:             return {\n415:                 \"valid\": False,\n416:                 \"reason\": f\"Signature verification error: {exc}\","
+    },
+    {
+      "candidate_id": "SW100-C0062",
+      "path": "01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py",
+      "start_line": 419,
+      "end_line": 464,
+      "observation": "Lifecycle promises signature checking but only verifies revocation and expiry.",
+      "source_sha256": "d7747b65250fa8292a301082981ccd89830c53f815dd410dd87bc120becb57e1",
+      "text": "419:     @staticmethod\n420:     def verify_certificate_lifecycle(cert: Dict[str, Any], crl: Optional[List[str]] = None) -> Dict[str, Any]:\n421:         \"\"\"\n422:         Verifies certificate lifecycle status (expiration, revocation, and signature).\n423:         \"\"\"\n424:         cert_id = cert.get(\"certificate_id\", \"\")\n425:         valid_until = cert.get(\"valid_until\")\n426: \n427:         if crl and cert_id in crl:\n428:             return {\n429:                 \"valid\": False,\n430:                 \"status\": \"REVOKED\",\n431:                 \"reason\": f\"Certificate {cert_id} is present in Certificate Revocation List (CRL)\",\n432:             }\n433: \n434:         if not valid_until:\n435:             return {\n436:                 \"valid\": False,\n437:                 \"status\": \"INVALID\",\n438:                 \"reason\": \"Certificate is missing valid_until\",\n439:             }\n440: \n441:         try:\n442:             expires = datetime.strptime(\n443:                 valid_until,\n444:                 \"%Y-%m-%dT%H:%M:%SZ\",\n445:             ).replace(tzinfo=timezone.utc)\n446:         except ValueError as exc:\n447:             return {\n448:                 \"valid\": False,\n449:                 \"status\": \"INVALID\",\n450:                 \"reason\": f\"Invalid valid_until timestamp: {exc}\",\n451:             }\n452: \n453:         if time.time() > expires.timestamp():\n454:             return {\n455:                 \"valid\": False,\n456:                 \"status\": \"EXPIRED\",\n457:                 \"reason\": f\"Certificate expired on {valid_until}\",\n458:             }\n459: \n460:         return {\n461:             \"valid\": True,\n462:             \"status\": \"ACTIVE\",\n463:             \"reason\": \"Certificate is active, unexpired, and not revoked\",\n464:         }"
+    },
+    {
+      "candidate_id": "SW100-C0062",
+      "path": "tests/test_compliance_exporter.py",
+      "start_line": 100,
+      "end_line": 126,
+      "observation": "Lifecycle tests assert active/revoked/expired status without testing unsigned rejection.",
+      "source_sha256": "23a69c5cabb9a8049762e9fe9864c611c4c407eb92470998c5530ca30bfc330f",
+      "text": "100:     # Verificaci\u00f3n de ciclo de vida activo\n101:     status = EUAIActComplianceExporter.verify_certificate_lifecycle(cert)\n102:     assert status[\"valid\"] is True\n103:     assert status[\"status\"] == \"ACTIVE\"\n104: \n105:     # Simular expiraci\u00f3n manipulando valid_until\n106:     expired_cert = dict(cert)\n107:     expired_cert[\"valid_until\"] = \"2020-01-01T00:00:00Z\"\n108:     status_expired = EUAIActComplianceExporter.verify_certificate_lifecycle(expired_cert)\n109:     assert status_expired[\"valid\"] is False\n110:     assert status_expired[\"status\"] == \"EXPIRED\"\n111: \n112: \n113: def test_certificate_revocation(temp_bundle_dir: str) -> None:\n114:     \"\"\"Verifica el mecanismo de revocaci\u00f3n de certificados contra lista CRL.\"\"\"\n115:     exporter = EUAIActComplianceExporter(artifact_bundle_path=temp_bundle_dir)\n116:     cert = exporter.generate_certificate(system_id=\"SYS-REVOKE-01\", operator_name=\"Acme Corp\")\n117:     cert_id = cert[\"certificate_id\"]\n118: \n119:     # Activo sin CRL\n120:     assert EUAIActComplianceExporter.verify_certificate_lifecycle(cert)[\"valid\"] is True\n121: \n122:     # Revocar certificado incluy\u00e9ndolo en la CRL\n123:     crl = [cert_id, \"SOME-OTHER-CERT-ID\"]\n124:     revocation_check = EUAIActComplianceExporter.verify_certificate_lifecycle(cert, crl=crl)\n125:     assert revocation_check[\"valid\"] is False\n126:     assert revocation_check[\"status\"] == \"REVOKED\""
+    },
+    {
+      "candidate_id": "SW100-C0063",
+      "path": "01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py",
+      "start_line": 466,
+      "end_line": 498,
+      "observation": "Proof and caller decision data are collected independently then signed.",
+      "source_sha256": "d7747b65250fa8292a301082981ccd89830c53f815dd410dd87bc120becb57e1",
+      "text": "466:     def create_decision_evidence_packet(\n467:         self,\n468:         seq: int,\n469:         decision_data: Dict[str, Any],\n470:         ledger: Any,\n471:         operator_name: str = \"SOVEREIGN_OPERATOR\",\n472:     ) -> Dict[str, Any]:\n473:         attestation = ledger.get_state_attestation()\n474:         if not attestation.get(\"integrity_verified\"):\n475:             raise RuntimeError(\"Ledger integrity verification failed; cannot create DEP\")\n476: \n477:         merkle_root = ledger.get_merkle_root()\n478:         proof_packet = ledger.get_event_proof(seq)\n479:         hw_quote = MerkleCausalAnchor().generate_hardware_pcr_quote(merkle_root)\n480: \n481:         timestamp_iso = time.strftime(\"%Y-%m-%dT%H:%M:%SZ\", time.gmtime())\n482:         leaf_h = proof_packet.get(\"leaf_hash\", \"\")\n483:         dep_id = f\"DEP-{hashlib.sha256(f'{seq}:{leaf_h}:{timestamp_iso}'.encode()).hexdigest()[:16].upper()}\"\n484: \n485:         packet: Dict[str, Any] = {\n486:             \"dep_id\": dep_id,\n487:             \"seq\": seq,\n488:             \"decision_data\": self.redact_sensitive_data(decision_data),\n489:             \"merkle_inclusion_proof\": proof_packet,\n490:             \"global_merkle_root\": merkle_root,\n491:             \"hardware_anchor\": hw_quote,\n492:             \"issued_at\": timestamp_iso,\n493:             \"operator\": operator_name,\n494:             \"compliance_binding\": \"EU_AI_ACT_ART12_CAUSAL_TRACEABILITY\",\n495:         }\n496: \n497:         packet[\"signature\"] = self.sign_certificate(packet)\n498:         return packet"
+    },
+    {
+      "candidate_id": "SW100-C0063",
+      "path": "01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py",
+      "start_line": 616,
+      "end_line": 630,
+      "observation": "Proof is generated from entry_hash values only.",
+      "source_sha256": "15292238c8f9b7e87f70ce0b4e8256569bb1cc612497102afa5b373092e85db6",
+      "text": "616:     def get_event_proof(self, seq: int) -> MerkleProof:\n617:         \"\"\"\n618:         Genera una prueba de inclusi\u00f3n de Merkle O(log N) para un evento espec\u00edfico por seq.\n619:         Cumple con el est\u00e1ndar de evidencia verificable del EU AI Act.\n620:         \"\"\"\n621:         with self._get_connection() as conn:\n622:             cursor = conn.cursor()\n623:             cursor.execute(\"SELECT entry_hash FROM cortex_ledger ORDER BY seq ASC\")\n624:             leaves = [row[0] for row in cursor.fetchall()]\n625: \n626:         if seq < 1 or seq > len(leaves):\n627:             raise IndexError(f\"seq {seq} fuera de rango (total eventos: {len(leaves)})\")\n628: \n629:         target_index = seq - 1\n630:         return generate_merkle_proof(leaves, target_index)"
+    },
+    {
+      "candidate_id": "SW100-C0063",
+      "path": "tests/test_compliance_exporter.py",
+      "start_line": 138,
+      "end_line": 159,
+      "observation": "Test stores action_id events but packet uses unrelated APPROVE_LOAN decision data.",
+      "source_sha256": "23a69c5cabb9a8049762e9fe9864c611c4c407eb92470998c5530ca30bfc330f",
+      "text": "138:         # Inserci\u00f3n de 5 eventos de prueba\n139:         for i in range(1, 6):\n140:             ledger.append_event(\n141:                 CortexEvent(\n142:                     event_type=\"DECISION_ACTION\",\n143:                     payload={\"action_id\": f\"act_{i}\", \"risk_score\": 0.05 * i},\n144:                     cortex_taint=f\"taint:{i}\",\n145:                 )\n146:             )\n147: \n148:         exporter = EUAIActComplianceExporter(artifact_bundle_path=temp_bundle_dir, ledger_path=ledger_file)\n149:         dep = exporter.create_decision_evidence_packet(\n150:             seq=3,\n151:             decision_data={\"action\": \"APPROVE_LOAN\", \"amount\": 50000, \"user_api_key\": \"secret_123\"},\n152:             ledger=ledger,\n153:         )\n154: \n155:         assert dep[\"seq\"] == 3\n156:         assert \"dep_id\" in dep\n157:         assert dep[\"decision_data\"][\"user_api_key\"] == \"[REDACTED_AUDIT_SAFE]\"\n158:         assert \"merkle_inclusion_proof\" in dep\n159:         assert dep[\"merkle_inclusion_proof\"][\"total_leaves\"] == 5"
+    },
+    {
+      "candidate_id": "SW100-C0524",
+      "path": "02_EDIN_SWARMS/agents_archi/orchestrator/royal_rumble.py",
+      "start_line": 99,
+      "end_line": 136,
+      "observation": "Gateway contains the path and repeated-failure checks.",
+      "source_sha256": "e0177be4c0c951725e3486a48de1de8d29a711984f6d4f7919a691ae9d93faa1",
+      "text": "99:         idem_key = compute_idempotency_key(\n100:             task_id=task_id,\n101:             step_index=proposal.step_index,\n102:             tool_name=proposal.tool_name,\n103:             args_payload={\"target_path\": proposal.target_path, **proposal.args},\n104:         )\n105: \n106:         # Rule 1: Block sensitive Ring-0 / Lean 4 paths on :free endpoints\n107:         if not allow_sensitive_on_free and SensitivePathGuard.is_free_model(proposal.model_used):\n108:             if SensitivePathGuard.is_sensitive(\n109:                 prompt=json.dumps(proposal.args),\n110:                 context_paths=[proposal.target_path],\n111:             ):\n112:                 return TrustGatewayVerdict(\n113:                     admitted=False,\n114:                     reason=\"DENY_SENSITIVE_PATH_ON_FREE_ENDPOINT\",\n115:                     idempotency_key=idem_key,\n116:                     requires_structured_review=False,\n117:                 )\n118: \n119:         # Rule 2: Block repeated identical failed calls (anti-limerence loop)\n120:         if idem_key in failed_signatures:\n121:             return TrustGatewayVerdict(\n122:                 admitted=False,\n123:                 reason=\"DENY_REPEATED_FAILED_CALL\",\n124:                 idempotency_key=idem_key,\n125:                 requires_structured_review=True,\n126:             )\n127: \n128:         # Rule 3: \"Iterar sin redundar\" \u2014 require independent structured review ONLY when\n129:         # action is irreversible, architectural, or follows >= 2 consecutive failures\n130:         needs_review = proposal.irreversible or proposal.architectural or consecutive_failures >= 2\n131: \n132:         return TrustGatewayVerdict(\n133:             admitted=True,\n134:             reason=\"ADMIT_DETERMINISTIC_RULES_PASSED\",\n135:             idempotency_key=idem_key,\n136:             requires_structured_review=needs_review,"
+    },
+    {
+      "candidate_id": "SW100-C0524",
+      "path": "02_EDIN_SWARMS/agents_archi/orchestrator/royal_rumble.py",
+      "start_line": 204,
+      "end_line": 226,
+      "observation": "Only the original proposal is evaluated and replay-checked.",
+      "source_sha256": "e0177be4c0c951725e3486a48de1de8d29a711984f6d4f7919a691ae9d93faa1",
+      "text": "204:         cp = self.wal.get_checkpoint(task_id)\n205:         consecutive_failures = int(cp[\"consecutive_failures\"]) if cp else 0\n206:         failed_sigs = self.wal.get_failed_action_signatures(task_id)\n207: \n208:         verdict = BabylonTrustGateway.evaluate(\n209:             proposal,\n210:             task_id=task_id,\n211:             consecutive_failures=consecutive_failures,\n212:             failed_signatures=failed_sigs,\n213:         )\n214: \n215:         # Idempotent replay check: if already executed and passed before a crash, skip re-execution\n216:         existing_event = self.wal.has_idempotency_key(verdict.idempotency_key)\n217:         if existing_event is not None and existing_event[\"test_status\"] == \"PASS\":\n218:             return {\n219:                 \"status\": \"IDEMPOTENT_SKIP\",\n220:                 \"step_index\": proposal.step_index,\n221:                 \"event_id\": existing_event[\"event_id\"],\n222:                 \"structured_review\": False,\n223:             }\n224: \n225:         # Gateway DENY: record unauthorized attempt in WAL and block sandbox execution\n226:         if not verdict.admitted:"
+    },
+    {
+      "candidate_id": "SW100-C0524",
+      "path": "02_EDIN_SWARMS/agents_archi/orchestrator/royal_rumble.py",
+      "start_line": 301,
+      "end_line": 331,
+      "observation": "Changed recovery proposal is dispatched and success recorded as ADMIT without reevaluation.",
+      "source_sha256": "e0177be4c0c951725e3486a48de1de8d29a711984f6d4f7919a691ae9d93faa1",
+      "text": "301:         # Trigger RECOVERY path using the reserved 20% RPD recovery budget\n302:         if recovery_fixer is not None and self.quota.can_spend(\"recovery\"):\n303:             self.quota.record_attempt(\"recovery\")\n304:             fixed_proposal = recovery_fixer(proposal, err_msg)\n305:             fixed_key = compute_idempotency_key(\n306:                 task_id=task_id,\n307:                 step_index=fixed_proposal.step_index,\n308:                 tool_name=fixed_proposal.tool_name,\n309:                 args_payload={\"target_path\": fixed_proposal.target_path, **fixed_proposal.args},\n310:             )\n311:             ok2, ev2, err2 = sandbox_runner(fixed_proposal)\n312:             if ok2:\n313:                 ev_id = self.wal.record_step_atomic(\n314:                     task_id=task_id,\n315:                     step_index=fixed_proposal.step_index,\n316:                     logical_tick=fixed_proposal.logical_tick + 1,\n317:                     idempotency_key=fixed_key,\n318:                     model_id=OpenRouterRoleTier.STRUCTURED_REVIEW.value,\n319:                     phase=\"recovery\",\n320:                     gateway_decision=\"ADMIT\",\n321:                     test_status=\"PASS\",\n322:                     evidence_hash=ev2,\n323:                     error_detail=\"\",\n324:                     update_completed_step=True,\n325:                     consecutive_failures=0,\n326:                 )\n327:                 return {\n328:                     \"status\": \"RECOVERED_PASS\",\n329:                     \"step_index\": fixed_proposal.step_index,\n330:                     \"event_id\": ev_id,\n331:                     \"structured_review\": True,"
+    },
+    {
+      "candidate_id": "SW100-C0525",
+      "path": "02_EDIN_SWARMS/agents_archi/orchestrator/royal_rumble.py",
+      "start_line": 128,
+      "end_line": 136,
+      "observation": "Irreversible/architectural actions are admitted with requires_structured_review=True.",
+      "source_sha256": "e0177be4c0c951725e3486a48de1de8d29a711984f6d4f7919a691ae9d93faa1",
+      "text": "128:         # Rule 3: \"Iterar sin redundar\" \u2014 require independent structured review ONLY when\n129:         # action is irreversible, architectural, or follows >= 2 consecutive failures\n130:         needs_review = proposal.irreversible or proposal.architectural or consecutive_failures >= 2\n131: \n132:         return TrustGatewayVerdict(\n133:             admitted=True,\n134:             reason=\"ADMIT_DETERMINISTIC_RULES_PASSED\",\n135:             idempotency_key=idem_key,\n136:             requires_structured_review=needs_review,"
+    },
+    {
+      "candidate_id": "SW100-C0525",
+      "path": "02_EDIN_SWARMS/agents_archi/orchestrator/royal_rumble.py",
+      "start_line": 184,
+      "end_line": 198,
+      "observation": "Executor API accepts a runner and optional recovery fixer, no reviewer.",
+      "source_sha256": "e0177be4c0c951725e3486a48de1de8d29a711984f6d4f7919a691ae9d93faa1",
+      "text": "184:     def __init__(\n185:         self,\n186:         wal_store: CortexWalStore,\n187:         quota: Optional[QuotaBudgetTracker] = None,\n188:     ) -> None:\n189:         self.wal = wal_store\n190:         self.quota = quota or QuotaBudgetTracker(daily_limit=1000, work_ratio=0.80)\n191: \n192:     def execute_step(\n193:         self,\n194:         task_id: str,\n195:         proposal: ProposedToolAction,\n196:         sandbox_runner: Callable[[ProposedToolAction], Tuple[bool, str, str]],\n197:         recovery_fixer: Optional[Callable[[ProposedToolAction, str], ProposedToolAction]] = None,\n198:     ) -> Dict[str, Any]:"
+    },
+    {
+      "candidate_id": "SW100-C0525",
+      "path": "02_EDIN_SWARMS/agents_archi/orchestrator/royal_rumble.py",
+      "start_line": 248,
+      "end_line": 281,
+      "observation": "Review branch only counts quota before unconditional runner call and flag reporting.",
+      "source_sha256": "e0177be4c0c951725e3486a48de1de8d29a711984f6d4f7919a691ae9d93faa1",
+      "text": "248:         # Spend nominal WORK call\n249:         if not self.quota.can_spend(\"work\"):\n250:             return {\"status\": \"QUOTA_EXHAUSTED\", \"phase\": \"work\"}\n251:         self.quota.record_attempt(\"work\")\n252: \n253:         # Conditional independent review (Nemotron 3 Super JSON Schema) ONLY when required\n254:         structured_review_used = False\n255:         if verdict.requires_structured_review:\n256:             if self.quota.can_spend(\"recovery\"):\n257:                 self.quota.record_attempt(\"recovery\")\n258:                 structured_review_used = True\n259: \n260:         passed, evidence_hash, err_msg = sandbox_runner(proposal)\n261: \n262:         if passed:\n263:             event_id = self.wal.record_step_atomic(\n264:                 task_id=task_id,\n265:                 step_index=proposal.step_index,\n266:                 logical_tick=proposal.logical_tick,\n267:                 idempotency_key=verdict.idempotency_key,\n268:                 model_id=proposal.model_used,\n269:                 phase=\"work\",\n270:                 gateway_decision=\"ADMIT\",\n271:                 test_status=\"PASS\",\n272:                 evidence_hash=evidence_hash,\n273:                 error_detail=\"\",\n274:                 update_completed_step=True,\n275:                 consecutive_failures=0,\n276:             )\n277:             return {\n278:                 \"status\": \"PASS\",\n279:                 \"step_index\": proposal.step_index,\n280:                 \"event_id\": event_id,\n281:                 \"structured_review\": structured_review_used,"
+    },
+    {
+      "candidate_id": "SW100-C0227",
+      "path": "scripts/c5_demos/poc_legion_1000.py",
+      "start_line": 7,
+      "end_line": 15,
+      "observation": "Documented acceptance includes insertion of at least one test receipt.",
+      "source_sha256": "2813f5d4b5a13bab2ae6d50e144299f60dfe5c2388b550719e226bbe30141509",
+      "text": "7: \"\"\"poc_legion_1000.py \u2014 PoC de Falsaci\u00f3n Emp\u00edrica para el Operativo Legi\u00f3n \u03a9-1000.\n8: \n9: Valida:\n10: 1. Generaci\u00f3n de 1000 advisories sint\u00e9ticos realistas (3 dominios).\n11: 2. Ingesti\u00f3n y despacho B60IPC sin corrupciones.\n12: 3. Ciclo de an\u00e1lisis de un lote de 100 advisories (1/10 del total).\n13: 4. Inserci\u00f3n de \u22651 recibo SCITT en un Cold Ledger de test (temp dir).\n14: \n15: INVARIANTE: Este script NO toca bounty_ledger.db de producci\u00f3n."
+    },
+    {
+      "candidate_id": "SW100-C0227",
+      "path": "scripts/c5_demos/poc_legion_1000.py",
+      "start_line": 194,
+      "end_line": 205,
+      "observation": "Generation count increments after enqueue, ignoring enqueue's boolean.",
+      "source_sha256": "2813f5d4b5a13bab2ae6d50e144299f60dfe5c2388b550719e226bbe30141509",
+      "text": "194:     receipts_generated = 0\n195:     for res in evm_results:\n196:         if res.risk_score >= 0.5:\n197:             r = attester.generate_receipt(\n198:                 advisory_id=res.contract_address or \"EVM-UNKNOWN\",\n199:                 domain=\"DOMAIN_EVM\",\n200:                 finding_summary=\"; \".join(res.findings[:2]),\n201:                 risk_score=res.risk_score,\n202:                 raw_payload=res.to_dict(),\n203:             )\n204:             ledger.enqueue_receipt(r)\n205:             receipts_generated += 1"
+    },
+    {
+      "candidate_id": "SW100-C0227",
+      "path": "scripts/c5_demos/poc_legion_1000.py",
+      "start_line": 231,
+      "end_line": 248,
+      "observation": "stop is called; persisted count only printed; assertion checks generated receipts.",
+      "source_sha256": "2813f5d4b5a13bab2ae6d50e144299f60dfe5c2388b550719e226bbe30141509",
+      "text": "231:     # Dar tiempo al ColdLedger async para drenar\n232:     time.sleep(0.5)\n233:     ledger.stop()\n234: \n235:     elapsed = (time.perf_counter() - t0) * 1000\n236:     print(f\"[\u2713] Recibos SCITT encolados: {receipts_generated}\")\n237:     print(f\"[\u2713] DB temporal: {db_path}\")\n238:     print(f\"[\u2713] Tiempo total PoC: {elapsed:.1f} ms\")\n239: \n240:     # Verificar DB\n241:     import sqlite3\n242:     conn = sqlite3.connect(db_path)\n243:     count = conn.execute(\"SELECT COUNT(*) FROM bounty_claims\").fetchone()[0]\n244:     conn.close()\n245:     print(f\"[\u2713] Recibos persistidos en SQLite: {count}\")\n246: \n247:     assert receipts_generated >= 1, \"FALLO: ning\u00fan recibo generado\"\n248:     print(\"\\n\u2705 POC SUPERADO \u2014 Topolog\u00eda validada para 1000 agentes\")"
+    },
+    {
+      "candidate_id": "SW100-C0227",
+      "path": "01_KISH_ENGINE/babylon60/bft/bounty_cold_ledger.py",
+      "start_line": 28,
+      "end_line": 38,
+      "observation": "Fresh queue capacity defaults to 50,000.",
+      "source_sha256": "09a3b4d98b95696f1a02f0cc5ed53fcd6a66b5cbb6b5ea18fe899023e0aee656",
+      "text": "28:     def __init__(self, db_path: str = \"bounty_ledger.db\", max_queue_size: int = 50_000) -> None:\n29:         self._db_path = db_path\n30:         self._sqlite = BFTSQLite(db_path=self._db_path)\n31:         self._queue: queue.Queue[Optional[BountyClaimReceipt]] = queue.Queue(maxsize=max_queue_size)\n32:         self._worker_thread: Optional[threading.Thread] = None\n33:         self._failure: Optional[Exception] = None\n34:         self._failed_receipts: tuple[BountyClaimReceipt, ...] = ()\n35:         self._state_lock = threading.Lock()\n36:         self._shutdown_lock = threading.Lock()\n37:         self._closed = False\n38:         self._sentinel_enqueued = False"
+    },
+    {
+      "candidate_id": "SW100-C0227",
+      "path": "01_KISH_ENGINE/babylon60/bft/bounty_cold_ledger.py",
+      "start_line": 75,
+      "end_line": 105,
+      "observation": "Current stop drains, joins and raises persistence errors/timeouts.",
+      "source_sha256": "09a3b4d98b95696f1a02f0cc5ed53fcd6a66b5cbb6b5ea18fe899023e0aee656",
+      "text": "75:     def stop(self, timeout: float = 30.0) -> None:\n76:         \"\"\"Detiene el daemon de drenaje de forma ordenada (Apoptosis de I/O).\"\"\"\n77:         with self._shutdown_lock:\n78:             with self._state_lock:\n79:                 self._raise_if_failed()\n80:                 self._closed = True\n81:                 if self._worker_thread is None:\n82:                     self._start_worker()\n83:                 worker = self._worker_thread\n84:             if not self._sentinel_enqueued:\n85:                 try:\n86:                     self._queue.put(None, timeout=timeout)\n87:                     self._sentinel_enqueued = True\n88:                 except queue.Full as exc:\n89:                     self._raise_if_failed()\n90:                     raise TimeoutError(\"Cold ledger shutdown queue remained full\") from exc\n91:             if worker is not None:\n92:                 worker.join(timeout=timeout)\n93:                 self._raise_if_failed()\n94:                 if worker.is_alive():\n95:                     raise TimeoutError(\"Cold ledger worker did not finish draining\")\n96: \n97:     @property\n98:     def failed_receipts(self) -> tuple[BountyClaimReceipt, ...]:\n99:         \"\"\"Retained failed batch for explicit recovery; not a durable acknowledgement.\"\"\"\n100:         with self._state_lock:\n101:             return self._failed_receipts\n102: \n103:     def _raise_if_failed(self) -> None:\n104:         if self._failure is not None:\n105:             raise BFTDatabaseError(\"Cold ledger persistence failed; receipts remain pending\") from self._failure"
+    },
+    {
+      "candidate_id": "SW100-C0227",
+      "path": "01_KISH_ENGINE/babylon60/bft/bounty_cold_ledger.py",
+      "start_line": 135,
+      "end_line": 151,
+      "observation": "Flush records errors for stop to propagate.",
+      "source_sha256": "09a3b4d98b95696f1a02f0cc5ed53fcd6a66b5cbb6b5ea18fe899023e0aee656",
+      "text": "135:         def _flush() -> bool:\n136:             if not batch:\n137:                 return True\n138:             try:\n139:                 self._sqlite.executemany_with_backoff(insert_query, batch)\n140:                 logger.debug(f\"[ColdLedger] Lote de {len(batch)} recibos consolidado.\")\n141:             except Exception as e:\n142:                 with self._state_lock:\n143:                     self._failure = e\n144:                     self._failed_receipts = tuple(batch_receipts)\n145:                 logger.error(f\"[ColdLedger] Fallo catastr\u00f3fico persistiendo lote: {e}\")\n146:                 return False\n147:             for _ in batch_receipts:\n148:                 self._queue.task_done()\n149:             batch.clear()\n150:             batch_receipts.clear()\n151:             return True"
+    },
+    {
+      "candidate_id": "SW100-C0228",
+      "path": "scripts/c5_demos/poc_legion_1000.py",
+      "start_line": 7,
+      "end_line": 15,
+      "observation": "Declares synthetic advisories and a 100-item analysis batch.",
+      "source_sha256": "2813f5d4b5a13bab2ae6d50e144299f60dfe5c2388b550719e226bbe30141509",
+      "text": "7: \"\"\"poc_legion_1000.py \u2014 PoC de Falsaci\u00f3n Emp\u00edrica para el Operativo Legi\u00f3n \u03a9-1000.\n8: \n9: Valida:\n10: 1. Generaci\u00f3n de 1000 advisories sint\u00e9ticos realistas (3 dominios).\n11: 2. Ingesti\u00f3n y despacho B60IPC sin corrupciones.\n12: 3. Ciclo de an\u00e1lisis de un lote de 100 advisories (1/10 del total).\n13: 4. Inserci\u00f3n de \u22651 recibo SCITT en un Cold Ledger de test (temp dir).\n14: \n15: INVARIANTE: Este script NO toca bounty_ledger.db de producci\u00f3n."
+    },
+    {
+      "candidate_id": "SW100-C0228",
+      "path": "scripts/c5_demos/poc_legion_1000.py",
+      "start_line": 140,
+      "end_line": 150,
+      "observation": "Generates 1000 data records then selects 100.",
+      "source_sha256": "2813f5d4b5a13bab2ae6d50e144299f60dfe5c2388b550719e226bbe30141509",
+      "text": "140:     print(\"\ud83d\udd2c POC LEGI\u00d3N \u03a9-1000: FALSACI\u00d3N EMP\u00cdRICA (1 lote de 100 advisories)\")\n141:     print(\"=\" * 70)\n142: \n143:     # 1. Generar 1000 advisories\n144:     t0 = time.perf_counter()\n145:     all_advisories = generate_synthetic_advisories(1000)\n146:     gen_ms = (time.perf_counter() - t0) * 1000\n147:     print(f\"[\u2713] Generados {len(all_advisories)} advisories sint\u00e9ticos en {gen_ms:.1f} ms\")\n148: \n149:     # 2. Usar solo el primer lote de 100 para el PoC\n150:     batch = all_advisories[:100]"
+    },
+    {
+      "candidate_id": "SW100-C0228",
+      "path": "scripts/c5_demos/poc_legion_1000.py",
+      "start_line": 171,
+      "end_line": 183,
+      "observation": "Three domain processing calls occur sequentially.",
+      "source_sha256": "2813f5d4b5a13bab2ae6d50e144299f60dfe5c2388b550719e226bbe30141509",
+      "text": "171:     # 5. An\u00e1lisis especializado\n172:     defi = DeFiBytecodeScraper()\n173:     webkit = WebKitMemoryConnector()\n174:     saga1 = Saga1MlSentinel()\n175: \n176:     evm_batch = dispatcher.drain_domain(BountyDomain.DOMAIN_EVM)\n177:     evm_results = defi.process_advisories(evm_batch)\n178: \n179:     nat_batch = dispatcher.drain_domain(BountyDomain.DOMAIN_NATIVE)\n180:     nat_results = webkit.process_advisories(nat_batch)\n181: \n182:     ai_batch = dispatcher.drain_domain(BountyDomain.DOMAIN_AI)\n183:     ai_results = saga1.process_advisories(ai_batch)"
+    },
+    {
+      "candidate_id": "SW100-C0228",
+      "path": "scripts/c5_demos/poc_legion_1000.py",
+      "start_line": 247,
+      "end_line": 248,
+      "observation": "Success message claims 1000-agent topology validation.",
+      "source_sha256": "2813f5d4b5a13bab2ae6d50e144299f60dfe5c2388b550719e226bbe30141509",
+      "text": "247:     assert receipts_generated >= 1, \"FALLO: ning\u00fan recibo generado\"\n248:     print(\"\\n\u2705 POC SUPERADO \u2014 Topolog\u00eda validada para 1000 agentes\")"
+    },
+    {
+      "candidate_id": "SW100-C0111",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/sandbox/patterns.md",
+      "start_line": 165,
+      "end_line": 188,
+      "observation": "Caller-selected header chooses getSession/createSession and the resulting session executes submitted code.",
+      "source_sha256": "ce18f7dde2ee8a70d5aa92ebd2ff3059ff249203a827481c40bce3e27f6959b2",
+      "text": "165: ## Multi-Tenant Pattern\n166: \n167: ```typescript\n168: export default {\n169:   async fetch(request: Request, env: Env): Promise<Response> {\n170:     const userId = request.headers.get('X-User-ID');\n171:     const sandbox = getSandbox(env.Sandbox, 'multi-tenant');\n172: \n173:     // Each user gets isolated session\n174:     let session;\n175:     try {\n176:       session = await sandbox.getSession(userId);\n177:     } catch {\n178:       session = await sandbox.createSession({\n179:         id: userId,\n180:         cwd: `/workspace/users/${userId}`,\n181:         env: { USER_ID: userId }\n182:       });\n183:     }\n184: \n185:     const code = await request.text();\n186:     const result = await session.exec(`python3 -c \"${code}\"`);\n187: \n188:     return Response.json({ output: result.stdout });"
+    },
+    {
+      "candidate_id": "SW100-C0111",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/sandbox/README.md",
+      "start_line": 7,
+      "end_line": 11,
+      "observation": "Same sandbox ID is documented to persist across requests.",
+      "source_sha256": "ee7e1f0bc5d0475028571964d6d50352bf48848ac90d8148f1ec15105fdceccb",
+      "text": "7: ## Architecture\n8: \n9: - Each sandbox = Durable Object + Container\n10: - Persistent across requests (same ID = same sandbox)\n11: - Isolated filesystem/processes/network"
+    },
+    {
+      "candidate_id": "SW100-C0112",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/sandbox/patterns.md",
+      "start_line": 130,
+      "end_line": 150,
+      "observation": "JSON repo and branch flow directly into template-literal sandbox.exec.",
+      "source_sha256": "ce18f7dde2ee8a70d5aa92ebd2ff3059ff249203a827481c40bce3e27f6959b2",
+      "text": "130: ## CI/CD Pipeline\n131: \n132: ```typescript\n133: export default {\n134:   async fetch(request: Request, env: Env): Promise<Response> {\n135:     const { repo, branch } = await request.json();\n136:     const sandbox = getSandbox(env.Sandbox, `ci-${repo}-${Date.now()}`);\n137: \n138:     await sandbox.exec(`git clone -b ${branch} ${repo} /workspace/repo`);\n139: \n140:     const install = await sandbox.exec('npm install', {\n141:       cwd: '/workspace/repo',\n142:       stream: true,\n143:       onOutput: (stream, data) => console.log(data)\n144:     });\n145: \n146:     if (!install.success) {\n147:       return Response.json({ success: false, error: 'Install failed' });\n148:     }\n149: \n150:     const test = await sandbox.exec('npm test', { cwd: '/workspace/repo' });"
+    },
+    {
+      "candidate_id": "SW100-C0112",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/sandbox/README.md",
+      "start_line": 16,
+      "end_line": 29,
+      "observation": "Reference uses legacy getSandbox and string-command exec.",
+      "source_sha256": "ee7e1f0bc5d0475028571964d6d50352bf48848ac90d8148f1ec15105fdceccb",
+      "text": "16: ```typescript\n17: import { getSandbox, proxyToSandbox, type Sandbox } from '@cloudflare/sandbox';\n18: export { Sandbox } from '@cloudflare/sandbox';\n19: \n20: type Env = { Sandbox: DurableObjectNamespace<Sandbox>; };\n21: \n22: export default {\n23:   async fetch(request: Request, env: Env): Promise<Response> {\n24:     // CRITICAL: proxyToSandbox MUST be called first for preview URLs\n25:     const proxyResponse = await proxyToSandbox(request, env);\n26:     if (proxyResponse) return proxyResponse;\n27: \n28:     const sandbox = getSandbox(env.Sandbox, 'my-sandbox');\n29:     const result = await sandbox.exec('python3 -c \"print(2 + 2)\"');"
+    },
+    {
+      "candidate_id": "SW100-C0112",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/sandbox/README.md",
+      "start_line": 60,
+      "end_line": 64,
+      "observation": "Reference container image is sandbox:0.7.0.",
+      "source_sha256": "ee7e1f0bc5d0475028571964d6d50352bf48848ac90d8148f1ec15105fdceccb",
+      "text": "60: **Dockerfile**:\n61: ```dockerfile\n62: FROM docker.io/cloudflare/sandbox:0.7.0\n63: RUN pip3 install --no-cache-dir pandas numpy matplotlib\n64: EXPOSE 8080 3000  # Required for wrangler dev"
+    },
+    {
+      "candidate_id": "SW100-C0161",
+      "path": "00_ABZU_KERNEL/formal_verification/BabylonBFT.tla",
+      "start_line": 7,
+      "end_line": 14,
+      "observation": "Physical-deadlock claim accompanies a model without clock variables.",
+      "source_sha256": "835a3123f95cb2848307bef8f7c32e7a90467ca25a980b519f7daf1030d2db0f",
+      "text": "7: \\* LIVENESS: Demostraci\u00f3n Termodin\u00e1mica (Ausencia Absoluta de Deadlocks Temporales)\n8: \\* ============================================================================\n9: \n10: CONSTANTS Agents, Quorum\n11: \n12: VARIABLES state, responded, agreeing\n13: \n14: vars == <<state, responded, agreeing>>"
+    },
+    {
+      "candidate_id": "SW100-C0161",
+      "path": "00_ABZU_KERNEL/formal_verification/BabylonBFT.tla",
+      "start_line": 28,
+      "end_line": 59,
+      "observation": "Transitions and weak fairness contain no time bound.",
+      "source_sha256": "835a3123f95cb2848307bef8f7c32e7a90467ca25a980b519f7daf1030d2db0f",
+      "text": "28: \\* Transici\u00f3n: Agentes respondiendo (incluyendo timeouts y fallos)\n29: AgentResponds(a) ==\n30:     /\\ state = \"Generating\"\n31:     /\\ a \\notin responded\n32:     /\\ responded' = responded \\union {a}\n33:     /\\ \\/ agreeing' = agreeing \\union {a}\n34:        \\/ UNCHANGED agreeing\n35:     /\\ UNCHANGED state\n36: \n37: \\* Transici\u00f3n: Colapso BFT\n38: CheckConsensus ==\n39:     /\\ state = \"Generating\"\n40:     /\\ \\/ Cardinality(agreeing) >= Quorum  \n41:        \\/ Cardinality(responded) = Cardinality(Agents) \n42:     /\\ state' = IF Cardinality(agreeing) >= Quorum THEN \"ConsensusReached\" ELSE \"Failed\"\n43:     /\\ UNCHANGED <<responded, agreeing>>\n44: \n45: \\* Funci\u00f3n de Transici\u00f3n Global\n46: Next == Start \\/ (\\E a \\in Agents : AgentResponds(a)) \\/ CheckConsensus\n47: \n48: \\* -------------------------------------------------------------------------\n49: \\* CONDICIONES TERMODIN\u00c1MICAS DE FAIRNESS (L\u00edmites F\u00edsicos en $T$)\n50: \\* -------------------------------------------------------------------------\n51: \\* Obligamos matem\u00e1ticamente al verificador a asumir que ninguna acci\u00f3n se \n52: \\* quedar\u00e1 colgada infinitamente. Si una acci\u00f3n puede ocurrir (ej. Timeout), OCURRIR\u00c1.\n53: Fairness == \n54:     /\\ WF_vars(Start)\n55:     /\\ WF_vars(CheckConsensus)\n56:     /\\ \\A a \\in Agents : WF_vars(AgentResponds(a))\n57: \n58: \\* LA ESPECIFICACI\u00d3N COMPLETA: Estado Inicial + Transiciones + Implacabilidad del Tiempo\n59: Spec == Init /\\ [][Next]_vars /\\ Fairness"
+    },
+    {
+      "candidate_id": "SW100-C0161",
+      "path": "00_ABZU_KERNEL/formal_verification/BabylonBFT.tla",
+      "start_line": 74,
+      "end_line": 79,
+      "observation": "Eventually termination is described as a guaranteed T-second result.",
+      "source_sha256": "835a3123f95cb2848307bef8f7c32e7a90467ca25a980b519f7daf1030d2db0f",
+      "text": "74: \\* INVARIANTE DE TEMPORALIDAD C5-REAL (Liveness)\n75: \\* -------------------------------------------------------------------------\n76: \\* Operador Diamante \"<>\" (Eventually): DEMUESTRA que sin importar los caminos\n77: \\* probabil\u00edsticos o los fallos bizantinos de la red, el sistema colapsar\u00e1 \n78: \\* obligatoriamente en $T$ segundos hacia una resoluci\u00f3n determinista.\n79: Termination == <>(state = \"ConsensusReached\" \\/ state = \"Failed\")"
+    },
+    {
+      "candidate_id": "SW100-C0280",
+      "path": "01_KISH_ENGINE/babylon60/cortex/cortex_bpe_tokenizer.py",
+      "start_line": 19,
+      "end_line": 24,
+      "observation": "Initial vocabulary covers 256 Unicode characters.",
+      "source_sha256": "f3c58fd2b30604fc96445d2b2f1f375f1f5b4495a06f591eb5939706bdf4892e",
+      "text": "19:     def __init__(self) -> None:\n20:         # Base vocabulary (ASCII/UTF-8 subset for structural invariant)\n21:         self.vocab: Dict[str, int] = {chr(i): i for i in range(256)}\n22:         self.inverse_vocab: Dict[int, str] = {i: chr(i) for i in range(256)}\n23:         self.merges: Dict[Tuple[str, str], int] = {}\n24:         self.next_token_id = 256"
+    },
+    {
+      "candidate_id": "SW100-C0280",
+      "path": "01_KISH_ENGINE/babylon60/cortex/cortex_bpe_tokenizer.py",
+      "start_line": 46,
+      "end_line": 64,
+      "observation": "Training only inserts merged strings.",
+      "source_sha256": "f3c58fd2b30604fc96445d2b2f1f375f1f5b4495a06f591eb5939706bdf4892e",
+      "text": "46:     def train(self, text: str, num_merges: int) -> None:\n47:         \"\"\"Trains the BPE model by extracting high-exergy patterns.\"\"\"\n48:         tokens = list(text)\n49:         for _ in range(num_merges):\n50:             stats = self.get_stats(tokens)\n51:             if not stats:\n52:                 break\n53: \n54:             # Find most frequent pair\n55:             best_pair = max(stats, key=stats.__getitem__)\n56:             new_token_str = best_pair[0] + best_pair[1]\n57: \n58:             # Register merge\n59:             self.merges[best_pair] = self.next_token_id\n60:             self.vocab[new_token_str] = self.next_token_id\n61:             self.inverse_vocab[self.next_token_id] = new_token_str\n62:             self.next_token_id += 1\n63: \n64:             tokens = self.merge(tokens, best_pair, new_token_str)"
+    },
+    {
+      "candidate_id": "SW100-C0280",
+      "path": "01_KISH_ENGINE/babylon60/cortex/cortex_bpe_tokenizer.py",
+      "start_line": 66,
+      "end_line": 85,
+      "observation": "Encode splits Unicode characters and indexes vocabulary with no fallback.",
+      "source_sha256": "f3c58fd2b30604fc96445d2b2f1f375f1f5b4495a06f591eb5939706bdf4892e",
+      "text": "66:     def encode(self, text: str) -> List[int]:\n67:         \"\"\"Encodes text into kinetic token IDs.\"\"\"\n68:         tokens = list(text)\n69:         while len(tokens) > 1:\n70:             stats = self.get_stats(tokens)\n71:             # Find the pair that exists in our merges with the lowest merge index (first learned)\n72:             # For simplicity in this primitive, we greedily apply known merges\n73:             pair_to_merge = None\n74:             for pair in stats:\n75:                 if pair in self.merges:\n76:                     pair_to_merge = pair\n77:                     break\n78: \n79:             if not pair_to_merge:\n80:                 break\n81: \n82:             new_token_str = pair_to_merge[0] + pair_to_merge[1]\n83:             tokens = self.merge(tokens, pair_to_merge, new_token_str)\n84: \n85:         return [self.vocab[t] for t in tokens]"
+    },
+    {
+      "candidate_id": "SW100-C0181",
+      "path": "01_KISH_ENGINE/babylon60/memory/__init__.py",
+      "start_line": 43,
+      "end_line": 48,
+      "observation": "Class contains no-op setter and always-empty getter.",
+      "source_sha256": "71fbf235a5134fe2a65224a535a0c5319318a86617d06d26aeabd40ca84a2204",
+      "text": "43: class MemoryStore:\n44:     def get(self, *args: object, **kwargs: object) -> object | None:\n45:         return None\n46: \n47:     def set(self, *args: object, **kwargs: object) -> None:\n48:         pass"
+    },
+    {
+      "candidate_id": "SW100-C0181",
+      "path": "01_KISH_ENGINE/babylon60/memory/__init__.py",
+      "start_line": 64,
+      "end_line": 70,
+      "observation": "The class remains exported publicly.",
+      "source_sha256": "71fbf235a5134fe2a65224a535a0c5319318a86617d06d26aeabd40ca84a2204",
+      "text": "64:     \"MemoryGovernanceEngine\",\n65:     \"MemoryKind\",\n66:     \"MemoryModality\",\n67:     \"MemoryRecordView\",\n68:     \"MemoryStatus\",\n69:     \"MemoryStore\",\n70:     \"ProvenanceAuthorityError\","
+    },
+    {
+      "candidate_id": "SW100-C0299",
+      "path": "01_KISH_ENGINE/cortex/crates/cortex-guard/src/eval.rs",
+      "start_line": 41,
+      "end_line": 78,
+      "observation": "Absent rule.property has no error/unknown branch; empty violations produces SAT.",
+      "source_sha256": "f852b89ce4c2d9889aa096a4144c8a76fd44131c2c860002bfff089ecc53fd9c",
+      "text": "41:     for rule in &rulebook.rules {\n42:         let matching_entities = model.find_entities_by_type(&rule.target);\n43: \n44:         for entity in matching_entities {\n45:             // Check if entity has the target property\n46:             let val_opt = entity\n47:                 .numeric_properties\n48:                 .iter()\n49:                 .find(|(k, _)| k.eq_ignore_ascii_case(&rule.property))\n50:                 .map(|(_, v)| *v);\n51: \n52:             if let Some(val) = val_opt {\n53:                 let passed = rule.operator.evaluate(val, rule.threshold);\n54:                 if !passed {\n55:                     let unit_str = rule.unit.as_deref().unwrap_or(\"\");\n56:                     let unit_suffix = if unit_str.is_empty() {\n57:                         \"\".to_string()\n58:                     } else {\n59:                         format!(\" {}\", unit_str)\n60:                     };\n61: \n62:                     violations.push(Violation {\n63:                         code: rule.code.clone(),\n64:                         title: rule.title.clone(),\n65:                         description: rule.description.clone(),\n66:                         measured: format!(\"{}{}\", format_val(val), unit_suffix).trim().to_string(),\n67:                         limit: format!(\"{}{}\", format_val(rule.threshold), unit_suffix).trim().to_string(),\n68:                         legal_citation: rule.legal_citation.clone(),\n69:                         file_path: file_str.clone(),\n70:                         line: entity.line_number,\n71:                         severity: rule.severity.clone(),\n72:                     });\n73:                 }\n74:             }\n75:         }\n76:     }\n77: \n78:     let status = if violations.is_empty() { \"SAT\" } else { \"UNSAT\" };"
+    },
+    {
+      "candidate_id": "SW100-C0299",
+      "path": "01_KISH_ENGINE/cortex/crates/cortex-guard/src/ifc.rs",
+      "start_line": 157,
+      "end_line": 185,
+      "observation": "Only discovered properties/default coordinates are added; parser returns model without required-property validation.",
+      "source_sha256": "531205976c17f9d5cd715f1002ebce53ace0a59580b6c5d3409d6482df02c998",
+      "text": "157:         // Assign resolved properties and spatial coordinates to entities\n158:         for (ent_id, ent) in entities.iter_mut() {\n159:             if let Some(props) = element_props.remove(ent_id) {\n160:                 ent.numeric_properties.extend(props);\n161:             }\n162: \n163:             // Also check direct placement references for coordinates\n164:             for r in extract_ref_ids(&ent.raw_params) {\n165:                 if let Some(c) = local_coords.get(&r) {\n166:                     ent.coordinates = Some(*c);\n167:                     // Automatically add Setback / Coordinate properties if not present\n168:                     ent.numeric_properties.entry(\"CoordinateX\".to_string()).or_insert(c.0);\n169:                     ent.numeric_properties.entry(\"CoordinateY\".to_string()).or_insert(c.1);\n170:                     ent.numeric_properties.entry(\"CoordinateZ\".to_string()).or_insert(c.2);\n171:                     ent.numeric_properties.entry(\"SetbackDistance\".to_string()).or_insert(c.0.abs().min(c.1.abs()));\n172:                     break;\n173:                 }\n174:             }\n175:         }\n176: \n177:         Ok(Self { entities, file_path })\n178:     }\n179: \n180:     pub fn find_entities_by_type(&self, type_name: &str) -> Vec<&StepEntity> {\n181:         let needle = type_name.to_uppercase();\n182:         self.entities\n183:             .values()\n184:             .filter(|e| e.name == needle || e.name.replace('_', \"\") == needle)\n185:             .collect()"
+    },
+    {
+      "candidate_id": "SW100-C0299",
+      "path": "01_KISH_ENGINE/cortex/crates/cortex-guard/src/main.rs",
+      "start_line": 112,
+      "end_line": 132,
+      "observation": "CLI parses model/rules then trusts evaluate's violations list.",
+      "source_sha256": "341e7e3d3c69f6e7762aa6ab5214264e7ca9e26b4847adee22a6aa157621e547",
+      "text": "112:             // 3. Parse IFC STEP Model\n113:             let model = match IfcModel::parse(&ifc_content, ifc.clone()) {\n114:                 Ok(m) => m,\n115:                 Err(e) => {\n116:                     eprintln!(\"CRASH [ERR_305]: Failed to parse STEP ISO 10303-21 in '{}': {}\", ifc.display(), e);\n117:                     exit(3);\n118:                 }\n119:             };\n120: \n121:             // 4. Parse PGOU / CTE Rulebook\n122:             let rulebook = match Rulebook::parse(&pgou_content, &pgou) {\n123:                 Ok(r) => r,\n124:                 Err(e) => {\n125:                     eprintln!(\"CRASH [ERR_306]: Failed to parse PGOU / CTE Rulebook in '{}': {}\", pgou.display(), e);\n126:                     exit(3);\n127:                 }\n128:             };\n129: \n130:             // 5. Run Deterministic Constraint Solver\n131:             let result = evaluate(&model, &rulebook, ifc_hash, pgou_hash, start_time);\n132:             let has_violations = !result.violations.is_empty();"
+    },
+    {
+      "candidate_id": "SW100-C0423",
+      "path": "crates/cadt_mediator/src/lib.rs",
+      "start_line": 44,
+      "end_line": 69,
+      "observation": "Public constructor and admission loop lack checked addition.",
+      "source_sha256": "cf0135ff49519dee0e8c4de7acfb67d2a48c6d033f5438a98104f5206e734b66",
+      "text": "44: impl ThermalLock {\n45:     pub const fn new(max_heat: usize) -> Self {\n46:         Self {\n47:             heat_level: AtomicUsize::new(0),\n48:             max_heat,\n49:         }\n50:     }\n51: \n52:     /// Admite un efecto si la fricci\u00f3n no supera el umbral.\n53:     /// Si supera el umbral, cae en el sumidero t\u00e9rmico (Ring-0) sin despertar a la CPU.\n54:     pub fn try_admit(&self, cost: usize) -> bool {\n55:         let mut current = self.heat_level.load(Ordering::Acquire);\n56:         loop {\n57:             if current + cost > self.max_heat {\n58:                 return false; // Sumidero T\u00e9rmico (Drop silencioso)\n59:             }\n60:             match self.heat_level.compare_exchange_weak(\n61:                 current,\n62:                 current + cost,\n63:                 Ordering::AcqRel,\n64:                 Ordering::Acquire,\n65:             ) {\n66:                 Ok(_) => return true,\n67:                 Err(actual) => current = actual,\n68:             }\n69:         }"
+    },
+    {
+      "candidate_id": "SW100-C0423",
+      "path": "crates/cadt_mediator/src/lib.rs",
+      "start_line": 72,
+      "end_line": 85,
+      "observation": "Cooling uses saturation while admission does not.",
+      "source_sha256": "cf0135ff49519dee0e8c4de7acfb67d2a48c6d033f5438a98104f5206e734b66",
+      "text": "72:     pub fn dissipate(&self, cooling: usize) {\n73:         let mut current = self.heat_level.load(Ordering::Acquire);\n74:         loop {\n75:             let next = current.saturating_sub(cooling);\n76:             match self.heat_level.compare_exchange_weak(\n77:                 current,\n78:                 next,\n79:                 Ordering::AcqRel,\n80:                 Ordering::Acquire,\n81:             ) {\n82:                 Ok(_) => return,\n83:                 Err(actual) => current = actual,\n84:             }\n85:         }"
+    },
+    {
+      "candidate_id": "SW100-C0423",
+      "path": "crates/cadt_mediator/src/lib.rs",
+      "start_line": 120,
+      "end_line": 128,
+      "observation": "Existing authorize caller passes the bounded constant 1.",
+      "source_sha256": "cf0135ff49519dee0e8c4de7acfb67d2a48c6d033f5438a98104f5206e734b66",
+      "text": "120: impl<S> Omega0<S, Authority> {\n121:     /// Funci\u00f3n restringida. Solo el Guardi\u00e1n tras el Sello Existencial puede instanciar esto.\n122:     /// Consume la cognici\u00f3n y devuelve la autoridad *si y solo si* se supera el Gate.\n123:     pub fn authorize(proposal: Omega0<S, Cognition>, thermal: &ThermalLock) -> Result<Self, Omega0Error> {\n124:         // En la implementaci\u00f3n real, aqu\u00ed se inyectar\u00eda `c5_biometric_gate` \n125:         // y la malla de desintegraci\u00f3n Bayesiana (Nivel 6).\n126:         \n127:         if !thermal.try_admit(1) {\n128:             return Err(Omega0Error::BudgetExceeded);"
+    },
+    {
+      "candidate_id": "SW100-C0423",
+      "path": "Cargo.toml",
+      "start_line": 91,
+      "end_line": 94,
+      "observation": "Release profile does not opt into overflow-checks here.",
+      "source_sha256": "ac947bfc2a5374df2bfe33f5dd2425981883a09068742590e8e39757d9361673",
+      "text": "91: [profile.release]\n92: lto = \"fat\"\n93: codegen-units = 1\n94: opt-level = 3"
+    },
+    {
+      "candidate_id": "SW100-C0452",
+      "path": "examples/poc_bifurcation_4_structs.rs",
+      "start_line": 46,
+      "end_line": 85,
+      "observation": "Layout computes field sizes/offsets and Bool=(1,1).",
+      "source_sha256": "ae09e66a32595ad50476185e913311d26507293904b0a63cf100226aa2141166",
+      "text": "46:     pub fn compute_layout(&mut self, def: &StructDef) {\n47:         let mut current_offset = 0;\n48:         let mut max_alignment = 1;\n49:         let mut offsets = HashMap::new();\n50:         let mut types = HashMap::new();\n51: \n52:         for (fname, ftype) in &def.fields {\n53:             let (size, align) = self.size_and_align(ftype);\n54:             \n55:             // Alineamiento del offset actual (Padding)\n56:             if current_offset % align != 0 {\n57:                 current_offset += align - (current_offset % align);\n58:             }\n59:             \n60:             offsets.insert(fname.clone(), current_offset);\n61:             types.insert(fname.clone(), ftype.clone());\n62:             \n63:             current_offset += size;\n64:             if align > max_alignment {\n65:                 max_alignment = align;\n66:             }\n67:         }\n68: \n69:         // Padding final del struct entero (Tail Padding)\n70:         if current_offset % max_alignment != 0 {\n71:             current_offset += max_alignment - (current_offset % max_alignment);\n72:         }\n73: \n74:         self.structs.insert(def.name.clone(), StructLayout {\n75:             size: current_offset,\n76:             alignment: max_alignment,\n77:             field_offsets: offsets,\n78:             field_types: types,\n79:         });\n80:     }\n81: \n82:     pub fn size_and_align(&self, ty: &Type) -> (usize, usize) {\n83:         match ty {\n84:             Type::I64 | Type::Pointer(_) => (8, 8), // 64-bit C-ABI\n85:             Type::Bool => (1, 1),"
+    },
+    {
+      "candidate_id": "SW100-C0452",
+      "path": "examples/poc_bifurcation_4_structs.rs",
+      "start_line": 102,
+      "end_line": 108,
+      "observation": "Store IR does not encode pointed-to width.",
+      "source_sha256": "ae09e66a32595ad50476185e913311d26507293904b0a63cf100226aa2141166",
+      "text": "102: pub enum IrOp {\n103:     ConstInt { dest: Reg, val: i64 },\n104:     ConstBool { dest: Reg, val: bool },\n105:     Alloc { dest: Reg, size: usize },\n106:     Free { ptr: Reg },\n107:     Store { ptr: Reg, val: Reg },\n108:     VolatileStore { ptr: Reg, val: Reg },"
+    },
+    {
+      "candidate_id": "SW100-C0452",
+      "path": "examples/poc_bifurcation_4_structs.rs",
+      "start_line": 187,
+      "end_line": 205,
+      "observation": "Alloc takes requested size; store/load dereference eight bytes.",
+      "source_sha256": "ae09e66a32595ad50476185e913311d26507293904b0a63cf100226aa2141166",
+      "text": "187:                     IrOp::Alloc { dest, size } => {\n188:                         self.asm.push_str(&format!(\"    mov rdi, {}  ; call arg1: size\\n\", size));\n189:                         self.asm.push_str(\"    call sys_alloc\\n\");\n190:                         let off = self.get_offset(*dest);\n191:                         self.asm.push_str(&format!(\"    mov qword [rbp - {}], rax  ; ptr -> Reg({})\\n\", off, dest.0));\n192:                     }\n193:                     IrOp::Store { ptr, val } | IrOp::VolatileStore { ptr, val } => {\n194:                         let ptr_off = self.get_offset(*ptr);\n195:                         let val_off = self.get_offset(*val);\n196:                         self.asm.push_str(&format!(\"    mov rax, qword [rbp - {}]  ; load ptr\\n\", ptr_off));\n197:                         self.asm.push_str(&format!(\"    mov rcx, qword [rbp - {}]  ; load val\\n\", val_off));\n198:                         self.asm.push_str(\"    mov qword [rax], rcx\\n\");\n199:                     }\n200:                     IrOp::Load { dest, ptr } => {\n201:                         let dest_off = self.get_offset(*dest);\n202:                         let ptr_off = self.get_offset(*ptr);\n203:                         self.asm.push_str(&format!(\"    mov rax, qword [rbp - {}]  ; load ptr\\n\", ptr_off));\n204:                         self.asm.push_str(\"    mov rcx, qword [rax]  ; deref\\n\");\n205:                         self.asm.push_str(&format!(\"    mov qword [rbp - {}], rcx\\n\", dest_off));"
+    },
+    {
+      "candidate_id": "SW100-C0452",
+      "path": "examples/poc_bifurcation_4_structs.rs",
+      "start_line": 248,
+      "end_line": 275,
+      "observation": "Existing Sensor example asserts a 16-byte allocation with trailing Bool.",
+      "source_sha256": "ae09e66a32595ad50476185e913311d26507293904b0a63cf100226aa2141166",
+      "text": "248: fn test_struct_compilation() {\n249:     let mut layout = LayoutEngine::new();\n250:     \n251:     // struct Sensor { temperature: i64, active: bool }\n252:     let sensor_def = StructDef {\n253:         name: \"Sensor\".to_string(),\n254:         fields: vec![\n255:             (\"temperature\".to_string(), Type::I64),\n256:             (\"active\".to_string(), Type::Bool),\n257:         ],\n258:     };\n259:     layout.compute_layout(&sensor_def);\n260:     \n261:     let sensor_layout = layout.structs.get(\"Sensor\").unwrap();\n262:     println!(\"--- C5-REAL: LAYOUT COMPUTADO ---\");\n263:     println!(\"Struct Sensor: size={}, align={}\", sensor_layout.size, sensor_layout.alignment);\n264:     println!(\"  temperature: offset={}\", sensor_layout.field_offsets.get(\"temperature\").unwrap());\n265:     println!(\"  active:      offset={}\", sensor_layout.field_offsets.get(\"active\").unwrap());\n266:     \n267:     assert_eq!(sensor_layout.size, 16); // 8(i64) + 1(bool) + 7(padding) = 16\n268: \n269:     // IR Causal Graph\n270:     let blocks = vec![\n271:         BasicBlock {\n272:             id: BlockId(0),\n273:             instructions: vec![\n274:                 // 1. SysCall alloc (size din\u00e1mico del Layout Engine)\n275:                 IrOp::Alloc { dest: Reg(0), size: sensor_layout.size },"
+    },
+    {
+      "candidate_id": "SW100-C0570",
+      "path": "scripts/c5_demos/benchmark_governance_10k.py",
+      "start_line": 7,
+      "end_line": 20,
+      "observation": "Simulator scope and stronger architectural descriptions coexist.",
+      "source_sha256": "2a294f9150dcfdcef4ef960c07687d22536c64079fd2c6b4b1e0d880707a7704",
+      "text": "7: \"\"\"\n8: benchmark_governance_10k.py\n9: \n10: Simula el comportamiento de 10.000 agentes concurrentes emitiendo invocaciones\n11: de herramientas bajo cuatro paradigmas de gobernanza:\n12: \n13: 1. Paradigma Sem\u00e1ntico LLM-as-a-Judge (AgentAudit / SupraWall Layer 2):\n14:    - Proyecci\u00f3n de cuotas, latencias de red y coste en d\u00f3lares.\n15: 2. Paradigma Buffer de Telemetr\u00eda Mutex-Bounded (Disseqt AI TraceBuffer):\n16:    - R\u00e9plica exacta de threading.Lock() + buffer de 1.000 spans con descarte.\n17: 3. Paradigma Human-in-the-Loop Escalation (KLA Digital / SupraWall APPROVAL):\n18:    - Modelo M/M/c de saturaci\u00f3n de cola humana ante 10k agentes.\n19: 4. Paradigma C5-REAL C-ABI Ring-0 (SharedManifest / Bitmask ACL / Lock-Free Ring):\n20:    - Evaluaci\u00f3n en memoria compartida, operaciones bit a bit, cero asignaciones."
+    },
+    {
+      "candidate_id": "SW100-C0570",
+      "path": "scripts/c5_demos/benchmark_governance_10k.py",
+      "start_line": 50,
+      "end_line": 79,
+      "observation": "Prescribed transport sleep determines one benchmark workload.",
+      "source_sha256": "2a294f9150dcfdcef4ef960c07687d22536c64079fd2c6b4b1e0d880707a7704",
+      "text": "50: class DisseqtTraceBufferSimulator:\n51:     \"\"\"\n52:     R\u00e9plica EXACTA de src/disseqt_agentic_sdk/buffer/buffer.py:\n53:     - Lock de threading adquirido en add_span()\n54:     - Si len(buffer) >= max_batch_size, invoca _flush_locked() MIENTRAS SOSTIENE EL LOCK\n55:     - self.transport.send_spans_with_failures() ejecuta HTTP POST s\u00edncrono bajo el lock\n56:     \"\"\"\n57:     def __init__(self, max_batch_size: int = 100, max_retained: int = 1000, network_latency_sec: float = 0.005) -> None:\n58:         self.lock = threading.Lock()\n59:         self.buffer: List[DisseqtSpan] = []\n60:         self.max_batch_size = max_batch_size\n61:         self.max_retained = max_retained\n62:         self.network_latency_sec = network_latency_sec # 5ms por batch (altamente optimista)\n63:         self.dropped_spans = 0\n64:         self.flushed_spans = 0\n65: \n66:     def add_span(self, span: DisseqtSpan) -> None:\n67:         with self.lock:\n68:             # Drop si excede retenci\u00f3n m\u00e1xima\n69:             if len(self.buffer) >= self.max_retained:\n70:                 excess = len(self.buffer) - self.max_retained + 1\n71:                 del self.buffer[:excess]\n72:                 self.dropped_spans += excess\n73:             self.buffer.append(span)\n74:             # Flush bloqueante bajo el lock\n75:             if len(self.buffer) >= self.max_batch_size:\n76:                 # Simula la llamada HTTP POST s\u00edncrona de self.transport.send_spans_with_failures()\n77:                 time.sleep(self.network_latency_sec)\n78:                 self.flushed_spans += len(self.buffer)\n79:                 self.buffer.clear()"
+    },
+    {
+      "candidate_id": "SW100-C0570",
+      "path": "scripts/c5_demos/benchmark_governance_10k.py",
+      "start_line": 90,
+      "end_line": 105,
+      "observation": "HITL outcome is arithmetic from assumed rates.",
+      "source_sha256": "2a294f9150dcfdcef4ef960c07687d22536c64079fd2c6b4b1e0d880707a7704",
+      "text": "90:     def __init__(self, escalation_rate: float = 0.01, human_review_sec: float = 15.0, human_pool: int = 5) -> None:\n91:         self.escalation_rate = escalation_rate\n92:         self.human_review_sec = human_review_sec\n93:         self.human_pool = human_pool\n94:         self.escalated_cases = 0\n95: \n96:     def process_actions(self, total_actions: int) -> HitlMetrics:\n97:         escalated = int(total_actions * self.escalation_rate)\n98:         # Capacidad del equipo: human_pool revisores atendiendo a human_review_sec por ticket\n99:         throughput_per_sec = self.human_pool / self.human_review_sec\n100:         backlog_clear_time_hours = (escalated / max(0.001, throughput_per_sec)) / 3600.0\n101:         return {\n102:             \"escalated_requests\": escalated,\n103:             \"human_pool_size\": self.human_pool,\n104:             \"backlog_clearing_time_hours\": backlog_clear_time_hours,\n105:             \"blocked_agents_percent\": (escalated / total_actions) * 100.0"
+    },
+    {
+      "candidate_id": "SW100-C0570",
+      "path": "scripts/c5_demos/benchmark_governance_10k.py",
+      "start_line": 120,
+      "end_line": 146,
+      "observation": "C5 workload is Python bytearray plus Lock.",
+      "source_sha256": "2a294f9150dcfdcef4ef960c07687d22536c64079fd2c6b4b1e0d880707a7704",
+      "text": "120: class C5RealSovereignGate:\n121:     \"\"\"\n122:     Barrera de ejecuci\u00f3n de ultra-baja exerg\u00eda:\n123:     - Decisi\u00f3n determinista por \u00c1lgebra Booleana sobre entero de 64 bits.\n124:     - Anillo de telemetr\u00eda sin locks (Atomic Increment simulado por array est\u00e1tico).\n125:     - Cero serializaci\u00f3n JSON, cero asignaciones de memoria din\u00e1micas.\n126:     \"\"\"\n127:     def __init__(self, capacity: int = 50_000) -> None:\n128:         self.capacity = capacity\n129:         # Buffer de telemetr\u00eda binaria compacta (16 bytes por evento: agent_id (4B), tool_id (2B), decision (2B), timestamp_us (8B))\n130:         self.telemetry_buffer = bytearray(capacity * 16)\n131:         self.head = 0\n132:         self.lock = threading.Lock() # Lock ligero solo para emular atomic fetch_add en Python\n133: \n134:     def evaluate_and_record(self, agent_id: int, agent_caps: int, required_caps: int, tool_id: int) -> bool:\n135:         # 1. Decisi\u00f3n a nivel de bitwise CPU (< 50ns)\n136:         allowed = (agent_caps & required_caps) == required_caps\n137:         decision_code = 1 if allowed else 0\n138: \n139:         # 2. Escritura binaria de telemetr\u00eda (16 bytes fijos)\n140:         with self.lock:\n141:             idx = self.head % self.capacity\n142:             self.head += 1\n143: \n144:         offset = idx * 16\n145:         # Empaqueta struct: <IHHQ (agent_id, tool_id, decision, timestamp)\n146:         struct.pack_into(\"<IHHQ\", self.telemetry_buffer, offset, agent_id, tool_id, decision_code, int(time.time() * 1e6))"
+    },
+    {
+      "candidate_id": "SW100-C0570",
+      "path": "scripts/c5_demos/benchmark_governance_10k.py",
+      "start_line": 195,
+      "end_line": 203,
+      "observation": "Financial outcome is derived from fixed token/price assumptions.",
+      "source_sha256": "2a294f9150dcfdcef4ef960c07687d22536c64079fd2c6b4b1e0d880707a7704",
+      "text": "195:     avg_tokens_per_check = 850\n196:     cost_per_million_tokens = 3.00 # $3/M tokens promedio entrada/salida\n197:     total_tokens = llm_calls_needed * avg_tokens_per_check\n198:     estimated_cost_usd = (total_tokens / 1_000_000.0) * cost_per_million_tokens\n199:     # Con latencia promedio de 800ms por llamada LLM\n200:     print(f\"  \u00bb Llamadas requeridas a LLM de arbitraje: {llm_calls_needed:,} llamadas\")\n201:     print(f\"  \u00bb Tokens consumidos solo en gobernanza:   {total_tokens:,} tokens\")\n202:     print(f\"  \u00bb Coste financiero por r\u00e1faga:           ${estimated_cost_usd:.2f} USD\")\n203:     print(f\"  \u00bb Tasa de l\u00edmite de cuota (Rate Limit):   Requiere {llm_calls_needed / 5.0:,.0f} RPM (excede Tier 5 est\u00e1ndar)\")"
+    },
+    {
+      "candidate_id": "SW100-C0570",
+      "path": "scripts/c5_demos/benchmark_governance_10k.py",
+      "start_line": 232,
+      "end_line": 238,
+      "observation": "Printed conclusions attribute results to external products.",
+      "source_sha256": "2a294f9150dcfdcef4ef960c07687d22536c64079fd2c6b4b1e0d880707a7704",
+      "text": "232:     print(\"\\n\" + \"=\" * 80)\n233:     print(\"S\u00cdNTESIS DE LA DISRUPCI\u00d3N (C5-REAL vs ENFOQUES CONVENCIONALES):\")\n234:     speedup = (disseqt_time / c5_time)\n235:     print(f\"  1. Aceleraci\u00f3n de Throughput: C5-REAL es {speedup:.1f}x m\u00e1s r\u00e1pido que Disseqt TraceBuffer.\")\n236:     print(f\"  2. Integridad Epist\u00e9mica:     Disseqt descarta {disseqt_loss_rate:.1f}% de evidencia legal. C5-REAL: 100% preservado.\")\n237:     print(f\"  3. Cero Par\u00e1lisis Antr\u00f3pica:  KLA/SupraWall congelan la flota durante {hitl_metrics['backlog_clearing_time_hours']:.1f} horas. C5-REAL: Fail-stop determinista.\")\n238:     print(f\"  4. Cero Anerg\u00eda Financiera:   SupraWall L2/AgentAudit drenan ${estimated_cost_usd:.2f} por r\u00e1faga. C5-REAL: Cero consumo de cuota.\")"
+    },
+    {
+      "candidate_id": "SW100-C0282",
+      "path": "scripts/c5_demos/poc_srp_soc_falsification.py",
+      "start_line": 57,
+      "end_line": 62,
+      "observation": "A both hashes and appends each digest to a growing log.",
+      "source_sha256": "f0a58feadf5615726d571780a4daec26569fa2bc07c895d7c45a4b8371f998bb",
+      "text": "57:     # Faceta Compliance / Auditor\u00eda Legal\n58:     def emit_compliance_record(self) -> str:\n59:         payload = f\"{self.emp_id}:{self.hourly_rate}:{self.hours_worked}:{self.tax_rate}\"\n60:         digest = hashlib.sha256(payload.encode()).hexdigest()\n61:         self.audit_log.append(digest)\n62:         return digest"
+    },
+    {
+      "candidate_id": "SW100-C0282",
+      "path": "scripts/c5_demos/poc_srp_soc_falsification.py",
+      "start_line": 90,
+      "end_line": 117,
+      "observation": "B hashes without retaining an audit log.",
+      "source_sha256": "f0a58feadf5615726d571780a4daec26569fa2bc07c895d7c45a4b8371f998bb",
+      "text": "90: class ComplianceDigestHasherService:\n91:     def __init__(self, formatter):\n92:         self.formatter = formatter\n93:     def compute(self, emp_id: str, rate: float, hours: float, tax: float) -> str:\n94:         payload = self.formatter.format_payload(emp_id, rate, hours, tax)\n95:         return hashlib.sha256(payload.encode()).hexdigest()\n96: \n97: class HyperfragmentedFacadeCoordinator:\n98:     \"\"\"Coordinador an\u00e9rgico que requiere instanciar 6 servicios para operar.\"\"\"\n99:     def __init__(self):\n100:         self.tax_service = TaxPolicyService()\n101:         self.pay_service = PayCalculatorService(self.tax_service)\n102:         self.reg_service = RegularHoursCalculatorService()\n103:         self.ovt_service = OvertimeHoursCalculatorService()\n104:         self.formatter_service = ComplianceDigestFormatterService()\n105:         self.hasher_service = ComplianceDigestHasherService(self.formatter_service)\n106: \n107:     def calculate_pay(self, rate: float, hours: float) -> float:\n108:         return self.pay_service.execute(rate, hours)\n109: \n110:     def report_hours(self, hours: float) -> Dict[str, float]:\n111:         return {\n112:             \"regular\": self.reg_service.execute(hours),\n113:             \"overtime\": self.ovt_service.execute(hours),\n114:         }\n115: \n116:     def emit_compliance_record(self, emp_id: str, rate: float, hours: float) -> str:\n117:         return self.hasher_service.compute(emp_id, rate, hours, self.tax_service.get_rate())"
+    },
+    {
+      "candidate_id": "SW100-C0282",
+      "path": "scripts/c5_demos/poc_srp_soc_falsification.py",
+      "start_line": 139,
+      "end_line": 143,
+      "observation": "C hashes without retaining an audit log.",
+      "source_sha256": "f0a58feadf5615726d571780a4daec26569fa2bc07c895d7c45a4b8371f998bb",
+      "text": "139: class ComplianceAuditSubsystem:\n140:     \"\"\"Actor: Regulatory / Compliance. Responsabilidad \u00fanica de atestaci\u00f3n.\"\"\"\n141:     def emit_record(self, emp_id: str, rate: float, hours: float, tax: float) -> str:\n142:         payload = f\"{emp_id}:{rate}:{hours}:{tax}\"\n143:         return hashlib.sha256(payload.encode()).hexdigest()"
+    },
+    {
+      "candidate_id": "SW100-C0282",
+      "path": "scripts/c5_demos/poc_srp_soc_falsification.py",
+      "start_line": 176,
+      "end_line": 237,
+      "observation": "Disjoint C mappings and incompatible conflict-history accounting.",
+      "source_sha256": "f0a58feadf5615726d571780a4daec26569fa2bc07c895d7c45a4b8371f998bb",
+      "text": "176:     files_b = {\n177:         \"CFO\": [\"pay_service.py\", \"tax_service.py\", \"facade.py\"],\n178:         \"COO\": [\"regular_calc.py\", \"overtime_calc.py\", \"facade.py\"],\n179:         \"COMPLIANCE\": [\"formatter.py\", \"hasher.py\", \"tax_service.py\", \"facade.py\"]\n180:     }\n181: \n182:     files_c = {\n183:         \"CFO\": [\"cfo_payroll.py\"],\n184:         \"COO\": [\"coo_reporting.py\"],\n185:         \"COMPLIANCE\": [\"compliance_audit.py\"]\n186:     }\n187: \n188:     # Contadores Topolog\u00eda A\n189:     topo_a_conflicts = 0\n190:     topo_a_touched = []\n191: \n192:     # Contadores Topolog\u00eda B\n193:     topo_b_conflicts = 0\n194:     topo_b_touched = []\n195:     topo_b_shotgun = 0\n196: \n197:     # Contadores Topolog\u00eda C\n198:     topo_c_conflicts = 0\n199:     topo_c_touched = []\n200:     topo_c_shotgun = 0\n201: \n202:     # Ventana de concurrencia para medir carreras entre actores (ventana de 2 cambios concurrentes)\n203:     recent_window_a: List[str] = []\n204:     recent_window_b: Dict[str, str] = {} # archivo -> actor\n205:     recent_window_c: Dict[str, str] = {} # archivo -> actor\n206: \n207:     for cycle in range(cycles):\n208:         actor = random.choice(actors)\n209: \n210:         # --- TOPOLOG\u00cdA A: 1 archivo mutado siempre ---\n211:         topo_a_touched.append(1)\n212:         if len(recent_window_a) > 0 and recent_window_a[-1] != actor:\n213:             # Colisi\u00f3n multiactor directa sobre el mismo archivo monol\u00edtico\n214:             topo_a_conflicts += 1\n215:         recent_window_a.append(actor)\n216:         if len(recent_window_a) > 5:\n217:             recent_window_a.pop(0)\n218: \n219:         # --- TOPOLOG\u00cdA B: Modifica m\u00faltiples micro-archivos por cambio ---\n220:         b_modified = files_b[actor]\n221:         topo_b_touched.append(len(b_modified))\n222:         if len(b_modified) > 1:\n223:             topo_b_shotgun += 1\n224:         for f in b_modified:\n225:             if f in recent_window_b and recent_window_b[f] != actor:\n226:                 topo_b_conflicts += 1\n227:             recent_window_b[f] = actor\n228: \n229:         # --- TOPOLOG\u00cdA C: Modifica exactamente su m\u00f3dulo ---\n230:         c_modified = files_c[actor]\n231:         topo_c_touched.append(len(c_modified))\n232:         if len(c_modified) > 1:\n233:             topo_c_shotgun += 1\n234:         for f in c_modified:\n235:             if f in recent_window_c and recent_window_c[f] != actor:\n236:                 topo_c_conflicts += 1\n237:             recent_window_c[f] = actor"
+    },
+    {
+      "candidate_id": "SW100-C0282",
+      "path": "scripts/c5_demos/poc_srp_soc_falsification.py",
+      "start_line": 239,
+      "end_line": 255,
+      "observation": "Timed loops call the unequal workloads.",
+      "source_sha256": "f0a58feadf5615726d571780a4daec26569fa2bc07c895d7c45a4b8371f998bb",
+      "text": "239:     # Benchmark de despacho CPU en silicio\n240:     n_ops = 50_000\n241: \n242:     # Test Topo A\n243:     obj_a = MonolithicEmployeeManager(\"EMP-001\", 50.0, 45.0)\n244:     t0 = time.perf_counter()\n245:     for _ in range(n_ops):\n246:         _ = obj_a.calculate_pay()\n247:         _ = obj_a.report_hours()\n248:         _ = obj_a.emit_compliance_record()\n249:     t_a_total = (time.perf_counter() - t0) * 1e6 / n_ops\n250: \n251:     # Test Topo B\n252:     facade_b = HyperfragmentedFacadeCoordinator()\n253:     t0 = time.perf_counter()\n254:     for _ in range(n_ops):\n255:         _ = facade_b.calculate_pay(50.0, 45.0)"
+    },
+    {
+      "candidate_id": "SW100-C0282",
+      "path": "scripts/c5_demos/poc_srp_soc_falsification.py",
+      "start_line": 327,
+      "end_line": 335,
+      "observation": "Conclusions are emitted unconditionally.",
+      "source_sha256": "f0a58feadf5615726d571780a4daec26569fa2bc07c895d7c45a4b8371f998bb",
+      "text": "327:     print(\"=\" * 86)\n328:     print(\"\\n[ CONCLUSI\u00d3N METROL\u00d3GICA POPPERIANA ]:\")\n329:     print(\"1. TOPOLOG\u00cdA A colapsa por COLISIONES MULTIACTOR (Divergent Change masivo).\")\n330:     print(\"   Cualquier cambio de un actor perturba el espacio de los dem\u00e1s.\")\n331:     print(\"2. TOPOLOG\u00cdA B colapsa por SHOTGUN SURGERY y SOBRECARGA DE INDIRECCI\u00d3N.\")\n332:     print(\"   La hiperfragmentaci\u00f3n dispersa la l\u00f3gica en m\u00faltiples micro-archivos, aumentando\")\n333:     print(\"   el tiempo de despacho y reintroduciendo conflictos en la fachada compartida.\")\n334:     print(\"3. TOPOLOG\u00cdA C (C5-REAL) alcanza CERO COLISIONES DE MERGE (0 conflictos),\")\n335:     print(\"   CERO SHOTGUN SURGERY (1.0 archivos/cambio) y m\u00e1xima localidad en silicio.\\n\")"
+    },
+    {
+      "candidate_id": "SW100-C0479",
+      "path": "scripts/c5_isomorphisms/cancer_isomorphism_pipeline.py",
+      "start_line": 17,
+      "end_line": 32,
+      "observation": "Payload literals unconditionally declare numerical and Boolean invariants and ATTESTED.",
+      "source_sha256": "6bdc252dd232ff94e0f6a95d4e03ae15045f198239baa189c2c33b7bc15e3062",
+      "text": "17: def run_cancer_isomorphism_pipeline(json_output: bool = False) -> None:\n18:     payload: dict[str, Any] = {\n19:         \"schema_version\": \"1.0\",\n20:         \"type\": \"C5_CANCER_ISOMORPHISM_PIPELINE\",\n21:         \"category\": \"Cat(CellularDynamics)\",\n22:         \"invariants\": {\n23:             \"morphism_preservation\": True,\n24:             \"spectral_radius_bound\": 0.021,\n25:             \"isomorphism_degree\": \"1:1_DETERMINISTIC\"\n26:         },\n27:         \"status\": \"ATTESTED\"\n28:     }\n29: \n30:     if json_output:\n31:         print(json.dumps(payload, indent=2))\n32:         return"
+    },
+    {
+      "candidate_id": "SW100-C0479",
+      "path": "scripts/c5_isomorphisms/cancer_isomorphism_pipeline.py",
+      "start_line": 34,
+      "end_line": 49,
+      "observation": "Text output repeats attestation; CLI supplies only the format flag.",
+      "source_sha256": "6bdc252dd232ff94e0f6a95d4e03ae15045f198239baa189c2c33b7bc15e3062",
+      "text": "34:     print(\"============================================================\")\n35:     print(\" \ud83e\udde9 C5 CANCER ISOMORPHISM PIPELINE\")\n36:     print(\"============================================================\")\n37:     print(\" Morphism Preservation      : \u2705 TRUE\")\n38:     print(f\" Spectral Radius Bound      : {payload['invariants']['spectral_radius_bound']}\")\n39:     print(f\" Isomorphism Degree         : {payload['invariants']['isomorphism_degree']}\")\n40:     print(\" Status                      : \u2705 ATTESTED\")\n41:     print(\"============================================================\\n\")\n42: \n43: \n44: def main() -> None:\n45:     parser = argparse.ArgumentParser(description=\"Categorical Cancer Isomorphism Pipeline\")\n46:     parser.add_argument(\"--json\", action=\"store_true\", help=\"Emit JSON payload for M2M communication\")\n47:     args = parser.parse_args()\n48: \n49:     run_cancer_isomorphism_pipeline(json_output=args.json)"
+    },
+    {
+      "candidate_id": "SW100-C0249",
+      "path": "scripts/c5_setup/install_into_repo.sh",
+      "start_line": 5,
+      "end_line": 14,
+      "observation": "Input checks cover path presence and directory existence.",
+      "source_sha256": "63251a0eb2467336de0fa225edee101e573bb4f42d6d9acc8aadd13b6fee1485",
+      "text": "5: if [ -z \"$1\" ]; then\n6:   echo \"Usage: ./install_into_repo.sh <path_to_repo>\"\n7:   exit 1\n8: fi\n9: \n10: TARGET_REPO=\"$1\"\n11: if [ ! -d \"$TARGET_REPO\" ]; then\n12:   echo \"Error: Directory $TARGET_REPO does not exist.\"\n13:   exit 1\n14: fi"
+    },
+    {
+      "candidate_id": "SW100-C0249",
+      "path": "scripts/c5_setup/install_into_repo.sh",
+      "start_line": 18,
+      "end_line": 27,
+      "observation": "Copy/chmod errors are suppressed with || true.",
+      "source_sha256": "63251a0eb2467336de0fa225edee101e573bb4f42d6d9acc8aadd13b6fee1485",
+      "text": "18: SRC_DIR=\"$(pwd)\"\n19: mkdir -p \"$TARGET_REPO/scripts\"\n20: mkdir -p \"$TARGET_REPO/.github/workflows\"\n21: \n22: cp \"$SRC_DIR/scripts/preflight.sh\" \"$TARGET_REPO/scripts/\" 2>/dev/null || true\n23: cp \"$SRC_DIR/scripts/verify-counters.mjs\" \"$TARGET_REPO/scripts/\" 2>/dev/null || true\n24: cp \"$SRC_DIR/.github/workflows/preflight.yml\" \"$TARGET_REPO/.github/workflows/\" 2>/dev/null || true\n25: cp \"$SRC_DIR/RELEASE.md\" \"$TARGET_REPO/\" 2>/dev/null || true\n26: \n27: chmod +x \"$TARGET_REPO/scripts/preflight.sh\" 2>/dev/null || true"
+    },
+    {
+      "candidate_id": "SW100-C0249",
+      "path": "scripts/c5_setup/install_into_repo.sh",
+      "start_line": 29,
+      "end_line": 34,
+      "observation": "Unscoped commit and unconditional readiness output follow staging.",
+      "source_sha256": "63251a0eb2467336de0fa225edee101e573bb4f42d6d9acc8aadd13b6fee1485",
+      "text": "29: echo \"\u2588\u2584 FORCING GIT SENTINEL IN $TARGET_REPO\"\n30: cd \"$TARGET_REPO\"\n31: git add scripts/preflight.sh scripts/verify-counters.mjs .github/workflows/preflight.yml RELEASE.md\n32: git commit -m \"chore(release-kit): inject autonomous C5-REAL preflight and verification protocol\"\n33: \n34: echo \"\u26a1 [ATP SAVED: +940] - READY FOR PUSH & CACHE PURGE\""
+    },
+    {
+      "candidate_id": "SW100-C0520",
+      "path": "scripts/c5_utils/python_spsc_reader.py",
+      "start_line": 15,
+      "end_line": 31,
+      "observation": "Different ctypes fields and size-only verification claim alignment/isomorphism.",
+      "source_sha256": "0ba50441ce6d276752fc11398ec1119d478b906b3bec79da4c213de369571ad6",
+      "text": "15: # Definici\u00f3n del C-ABI de SharedManifest (64 bytes, align 64)\n16: class SharedManifestCTypes(ctypes.Structure):\n17:     _fields_ = [\n18:         (\"session_id\", ctypes.c_uint8 * 16),\n19:         (\"domain_mask\", ctypes.c_uint32),\n20:         (\"effect_class\", ctypes.c_uint32),\n21:         (\"timestamp_l5\", ctypes.c_uint64),\n22:         (\"exergy_cost_joules\", ctypes.c_double),\n23:         (\"reserved_padding\", ctypes.c_uint8 * 24),\n24:     ]\n25: \n26: \n27: def verify_manifest_struct_alignment() -> None:\n28:     size = ctypes.sizeof(SharedManifestCTypes)\n29:     print(f\"[*] CTypes SharedManifest Size: {size} bytes\")\n30:     assert size == 64, f\"Error: tama\u00f1o de SharedManifestCTypes es {size} bytes, se requer\u00edan 64\"\n31:     print(\"[\u2713] Alineaci\u00f3n e isomorfismo de memoria C-ABI verificado (64 Bytes).\")"
+    },
+    {
+      "candidate_id": "SW100-C0520",
+      "path": "scripts/c5_utils/python_spsc_reader.py",
+      "start_line": 33,
+      "end_line": 49,
+      "observation": "Main reads its own local ctypes object.",
+      "source_sha256": "0ba50441ce6d276752fc11398ec1119d478b906b3bec79da4c213de369571ad6",
+      "text": "33: def main() -> None:\n34:     print(\"=== BABYLON-60 Python Zero-Copy Multiprocess Reader Bridge ===\")\n35:     verify_manifest_struct_alignment()\n36: \n37:     # Creaci\u00f3n de manifest de prueba en memoria compartida / buffer local\n38:     manifest_buf = SharedManifestCTypes()\n39:     manifest_buf.domain_mask = 31\n40:     manifest_buf.effect_class = 2  # HITL\n41:     manifest_buf.timestamp_l5 = 1691234567\n42:     manifest_buf.exergy_cost_joules = 12.5\n43: \n44:     # Lectura pura sin RFO\n45:     effect = manifest_buf.effect_class\n46:     domain = manifest_buf.domain_mask\n47:     print(f\"[+] Estado le\u00eddo: effect_class={effect} | domain_mask={domain}\")\n48:     print(f\"[+] Timestamp L5: {manifest_buf.timestamp_l5}\")\n49:     print(f\"[+] Exerg\u00eda: {manifest_buf.exergy_cost_joules} J\")"
+    },
+    {
+      "candidate_id": "SW100-C0520",
+      "path": "src/shared_manifest_core.rs",
+      "start_line": 9,
+      "end_line": 22,
+      "observation": "Canonical fields and 64-byte alignment are declared.",
+      "source_sha256": "3e2bc4a0aa798d4e8459ca5f4e49270182e9da842940c801aeaa9c5063252c73",
+      "text": "9: /// Shared C-ABI storage and protocol. All payload accesses are atomic.\n10: #[repr(C, align(64))]\n11: #[derive(Debug)]\n12: pub struct SharedManifest {\n13:     /// Admission flag at byte zero.\n14:     pub status_flag: AtomicU32,\n15:     /// Wrapping 32-bit sequence; odd denotes exclusive ownership.\n16:     pub seq: AtomicU32,\n17:     /// Caller-supplied logical epoch.\n18:     pub epoch_id: AtomicU64,\n19:     /// Atomic hash words.\n20:     pub payload_hash: [AtomicU64; 4],\n21:     /// Fixed C ABI padding.\n22:     pub _padding: [u8; 16],"
+    },
+    {
+      "candidate_id": "SW100-C0520",
+      "path": "src/manifest.rs",
+      "start_line": 69,
+      "end_line": 78,
+      "observation": "Offset tests specify status at 0, seq at 4, epoch at 8, hash at 16.",
+      "source_sha256": "05b05b57fa86e867e91e93fb95949a6694585457d9961b3edbe1fd7d44006cb1",
+      "text": "69:     /// Runtime mirror of `_LAYOUT_ASSERTS` plus field offsets from the C-ABI table.\n70:     #[test]\n71:     fn layout_is_64_bytes_aligned_with_documented_offsets() {\n72:         assert_eq!(size_of::<SharedManifest>(), 64);\n73:         assert_eq!(align_of::<SharedManifest>(), 64);\n74:         assert_eq!(offset_of!(SharedManifest, status_flag), 0x00);\n75:         assert_eq!(offset_of!(SharedManifest, seq), 0x04);\n76:         assert_eq!(offset_of!(SharedManifest, epoch_id), 0x08);\n77:         assert_eq!(offset_of!(SharedManifest, payload_hash), 0x10);\n78:         assert_eq!(offset_of!(SharedManifest, _padding), 0x30);"
+    },
+    {
+      "candidate_id": "SW100-C0319",
+      "path": "scripts/sharur/run_sharur_1000.py",
+      "start_line": 3,
+      "end_line": 16,
+      "observation": "Cohort names reference CPU, SMT and SEP topics without inputs.",
+      "source_sha256": "8ce3d7d53f9c6d4f99b87828f3f667212d6265c478bec6f20982244868d4de32",
+      "text": "3: async def execute_legion_1000():\n4:     t0 = time.perf_counter()\n5:     \n6:     cohort_names = {\n7:         1: \"RDTSC & Timing Side-Channels (Evasi\u00f3n T\u00e9rmica)\",\n8:         2: \"VMExit Latency Fuzzing (Detecci\u00f3n de Hipervisor)\",\n9:         3: \"TLB & Memory Shadowing\",\n10:         4: \"Manipulaci\u00f3n de DR (Hardware Breakpoints)\",\n11:         5: \"Cache Eviction Traces (L1/L2/L3)\",\n12:         6: \"Vulnerabilidades de Microc\u00f3digo CPU\",\n13:         7: \"Intercepci\u00f3n de IPC y Sockets\",\n14:         8: \"Verificaci\u00f3n SMT del Aislamiento VT-x\",\n15:         9: \"Atestaci\u00f3n de Secure Enclave (SEP)\",\n16:         10: \"L\u00edmites Termodin\u00e1micos de Confabulaci\u00f3n\""
+    },
+    {
+      "candidate_id": "SW100-C0319",
+      "path": "scripts/sharur/run_sharur_1000.py",
+      "start_line": 19,
+      "end_line": 40,
+      "observation": "Worker consists of sleep, arithmetic score and threshold verdict.",
+      "source_sha256": "8ce3d7d53f9c6d4f99b87828f3f667212d6265c478bec6f20982244868d4de32",
+      "text": "19:     async def agent_worker(agent_idx):\n20:         cohort_id = (agent_idx // 100) + 1\n21:         agent_id = f\"SHARUR_1K_{agent_idx:04d}\"\n22:         \n23:         await asyncio.sleep(0.005 + (agent_idx % 10) * 0.001)\n24:         \n25:         exergy = 15000.0 + (agent_idx * 17.3) % 6000.0\n26:         \n27:         if exergy >= 20900:\n28:             verdict = \"CAMBIO_2_EXERGIA (BIFURCACI\u00d3N TOPOL\u00d3GICA)\"\n29:         elif exergy >= 18000:\n30:             verdict = \"FALSACI\u00d3N_POPPERIANA\"\n31:         else:\n32:             verdict = \"CAMBIO_1 (RUIDO AN\u00c9RGICO)\"\n33:             \n34:         return {\n35:             \"agent_id\": agent_id,\n36:             \"cohort_id\": cohort_id,\n37:             \"cohort_name\": cohort_names[cohort_id],\n38:             \"verdict\": verdict,\n39:             \"exergy_score\": exergy\n40:         }"
+    },
+    {
+      "candidate_id": "SW100-C0319",
+      "path": "scripts/sharur/run_sharur_1000.py",
+      "start_line": 42,
+      "end_line": 65,
+      "observation": "Output aggregates arithmetic results without simulation metadata.",
+      "source_sha256": "8ce3d7d53f9c6d4f99b87828f3f667212d6265c478bec6f20982244868d4de32",
+      "text": "42:     tasks = [asyncio.create_task(agent_worker(i)) for i in range(1000)]\n43:     results = await asyncio.gather(*tasks)\n44:     dur_ms = (time.perf_counter() - t0) * 1000\n45:     \n46:     stats = {}\n47:     for r in results:\n48:         cid = r['cohort_id']\n49:         if cid not in stats:\n50:             stats[cid] = {'name': r['cohort_name'], 'total_exergy': 0, 'c2': 0, 'falsaciones': 0, 'c1': 0, 'count': 0}\n51:         stats[cid]['total_exergy'] += r['exergy_score']\n52:         stats[cid]['count'] += 1\n53:         if \"CAMBIO_2\" in r['verdict']: stats[cid]['c2'] += 1\n54:         elif \"FALSACI\u00d3N\" in r['verdict']: stats[cid]['falsaciones'] += 1\n55:         else: stats[cid]['c1'] += 1\n56:         \n57:     for cid in stats:\n58:         stats[cid]['avg_exergy'] = stats[cid]['total_exergy'] / stats[cid]['count']\n59:         \n60:     out = {\n61:         \"duration_ms\": dur_ms,\n62:         \"cohort_stats\": stats,\n63:         \"apex_agents\": [r for r in results if r['exergy_score'] >= 20950]\n64:     }\n65:     print(json.dumps(out, indent=2))"
+    },
+    {
+      "candidate_id": "SW100-C0319",
+      "path": "scripts/sharur/run_sharur_1000.py",
+      "start_line": 67,
+      "end_line": 67,
+      "observation": "Import itself would execute the demonstration.",
+      "source_sha256": "8ce3d7d53f9c6d4f99b87828f3f667212d6265c478bec6f20982244868d4de32",
+      "text": "67: asyncio.run(execute_legion_1000())"
+    },
+    {
+      "candidate_id": "SW100-C0316",
+      "path": "tests/test_syntax_integrity.py",
+      "start_line": 5,
+      "end_line": 8,
+      "observation": "Docstring claims coverage of every tracked module.",
+      "source_sha256": "e6cebd30f322c782f9b19fc04b61233a7d3309572d2674ba8395ab6609f359a8",
+      "text": "5: \"\"\"INV_SYNTAX_INTEGRITY: every tracked Python module must compile.\n6: \n7: Fail-fast invariant: a single SyntaxError anywhere in the tracked tree\n8: is a structural failure. Compilation only \u2014 no imports, no side effects."
+    },
+    {
+      "candidate_id": "SW100-C0316",
+      "path": "tests/test_syntax_integrity.py",
+      "start_line": 16,
+      "end_line": 31,
+      "observation": "Explicit roots omit 01_KISH_ENGINE and root glob is nonrecursive.",
+      "source_sha256": "e6cebd30f322c782f9b19fc04b61233a7d3309572d2674ba8395ab6609f359a8",
+      "text": "16: ROOT = Path(__file__).resolve().parent.parent\n17: TRACKED_DIRS = (\"cli\", \"core\", \"bft\", \"analysis\", \"adapters\", \"compiler\", \"contracts\", \"cortex\", \"scripts\", \"tests\")\n18: EXCLUDED_PARTS = {\"__pycache__\", \"node_modules\", \"fable_modules\", \"bin\", \"obj\"}\n19: \n20: \n21: def _tracked_python_files() -> list[Path]:\n22:     files: list[Path] = []\n23:     for dirname in TRACKED_DIRS:\n24:         base = ROOT / dirname\n25:         if not base.is_dir():\n26:             continue\n27:         for path in sorted(base.rglob(\"*.py\")):\n28:             if EXCLUDED_PARTS.isdisjoint(path.parts):\n29:                 files.append(path)\n30:     files.extend(sorted(ROOT.glob(\"*.py\")))\n31:     return files"
+    },
+    {
+      "candidate_id": "SW100-C0316",
+      "path": "tests/test_syntax_integrity.py",
+      "start_line": 34,
+      "end_line": 36,
+      "observation": "Only enumerated paths are compiled.",
+      "source_sha256": "e6cebd30f322c782f9b19fc04b61233a7d3309572d2674ba8395ab6609f359a8",
+      "text": "34: @pytest.mark.parametrize(\"path\", _tracked_python_files(), ids=lambda p: str(p.relative_to(ROOT)))\n35: def test_module_compiles(path: Path) -> None:\n36:     py_compile.compile(str(path), doraise=True)"
+    },
+    {
+      "candidate_id": "SW100-C0130",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workers/patterns.md",
+      "start_line": 142,
+      "end_line": 155,
+      "observation": "The Auth section contains only a startsWith predicate before subsequent request handling.",
+      "source_sha256": "07bd565af6bec9a9fcfe413c48f611c6b4ae346a887befc3eb2262b3f1dd3de1",
+      "text": "142: ## Security & Rate Limiting\n143: \n144: ```typescript\n145: // Security headers\n146: const security = { 'X-Content-Type-Options': 'nosniff', 'X-Frame-Options': 'DENY' };\n147: \n148: // Auth\n149: const auth = request.headers.get('Authorization');\n150: if (!auth?.startsWith('Bearer ')) return new Response('Unauthorized', { status: 401 });\n151: \n152: // Gradual rollouts (deterministic user bucketing)\n153: const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(userId));\n154: if (new Uint8Array(hash)[0] % 100 < rolloutPercent) return newFeature(request);\n155: ```"
+    },
+    {
+      "candidate_id": "SW100-C0235",
+      "path": "tools/skill_library/global/c5-rubin-acoustic-linter/scripts/audit_acoustic_exergy.py",
+      "start_line": 82,
+      "end_line": 89,
+      "observation": "Downmix then sample maximum is used directly for the peak result.",
+      "source_sha256": "09e896c0248a2e38125a0af54bcd92a6306ee66fbb7b2e6558e45ae11da8ca7f",
+      "text": "82: def audit_acoustic_exergy(left: np.ndarray, right: np.ndarray, fs: int = 48000) -> dict:\n83:     mono = 0.5 * (left + right)\n84:     cf = compute_crest_factor(mono)\n85:     sfm = compute_spectral_flatness_mid(mono, fs=fs)\n86:     lpc = compute_low_end_phase_coherence(left, right, fs=fs)\n87:     tsi = compute_temporal_smearing_index(mono, fs=fs)\n88:     peak = float(np.max(np.abs(mono)))\n89:     true_peak_dbfs = float(20.0 * np.log10(max(1e-6, peak)))"
+    },
+    {
+      "candidate_id": "SW100-C0235",
+      "path": "tools/skill_library/global/c5-rubin-acoustic-linter/scripts/audit_acoustic_exergy.py",
+      "start_line": 91,
+      "end_line": 99,
+      "observation": "Phase coherence is a separate failure criterion.",
+      "source_sha256": "09e896c0248a2e38125a0af54bcd92a6306ee66fbb7b2e6558e45ae11da8ca7f",
+      "text": "91:     failures = []\n92:     if cf < 8.0:\n93:         failures.append(f\"Anerg\u00eda por Hipercompresi\u00f3n: Crest Factor {cf:.2f} dB < 8.0 dB\")\n94:     if sfm > 0.35:\n95:         failures.append(f\"Anerg\u00eda por Capas Par\u00e1sitas / Ruido: Spectral Flatness (500-5000Hz) {sfm:.4f} > 0.35\")\n96:     if lpc < 0.85:\n97:         failures.append(f\"Anerg\u00eda por Desfase en Subgrave: LPC (<120Hz) {lpc:.3f} < 0.85\")\n98:     if tsi > 0.65:\n99:         failures.append(f\"Anerg\u00eda por Emborronamiento Temporal: TSI {tsi:.3f} > 0.65\")"
+    },
+    {
+      "candidate_id": "SW100-C0235",
+      "path": "tools/skill_library/global/c5-rubin-acoustic-linter/scripts/audit_acoustic_exergy.py",
+      "start_line": 116,
+      "end_line": 124,
+      "observation": "Mono sample-peak value is exported under TruePeak_dBFS.",
+      "source_sha256": "09e896c0248a2e38125a0af54bcd92a6306ee66fbb7b2e6558e45ae11da8ca7f",
+      "text": "116:     return {\n117:         \"CrestFactor_dB\": round(cf, 2),\n118:         \"SpectralFlatness\": round(sfm, 4),\n119:         \"LowEndPhaseCoherence\": round(lpc, 4),\n120:         \"TemporalSmearingIndex\": round(tsi, 3),\n121:         \"TruePeak_dBFS\": round(true_peak_dbfs, 2),\n122:         \"ExergyScore_21k\": int(round(score)),\n123:         \"Veredicto\": \"EXERG\u00cdA PURA (EL HUESO)\" if is_pure_bone else \"NATA AC\u00daSTICA DETECTADA\",\n124:         \"Anomal\u00edas\": failures"
+    },
+    {
+      "candidate_id": "SW100-C0523",
+      "path": "tools/skill_library/global/github-architect/scripts/scitt_attestor.py",
+      "start_line": 22,
+      "end_line": 60,
+      "observation": "Inputs gather Git metadata and tracked-file hashes.",
+      "source_sha256": "4162a94ce35fac08bd23c96df84f72cd413620ac4d1732ec87fbe4a3cc658b80",
+      "text": "22: def get_git_info(repo_path: str) -> Dict[str, str]:\n23:     try:\n24:         commit_sha = subprocess.check_output([\"git\", \"rev-parse\", \"HEAD\"], cwd=repo_path, text=True).strip()\n25:     except Exception:\n26:         commit_sha = \"0000000000000000000000000000000000000000\"\n27: \n28:     try:\n29:         branch = subprocess.check_output([\"git\", \"rev-parse\", \"--abbrev-ref\", \"HEAD\"], cwd=repo_path, text=True).strip()\n30:     except Exception:\n31:         branch = \"unknown\"\n32: \n33:     return {\"commit_sha\": commit_sha, \"branch\": branch}\n34: \n35: def compute_repo_merkle_root(repo_path: str) -> Dict[str, Any]:\n36:     \"\"\"Computes SHA-256 hashes of all tracked files in git and builds a Merkle root.\"\"\"\n37:     try:\n38:         tracked_files = subprocess.check_output(\n39:             [\"git\", \"ls-files\"], cwd=repo_path, text=True\n40:         ).splitlines()\n41:     except Exception:\n42:         tracked_files = []\n43: \n44:     file_hashes: List[Dict[str, str]] = []\n45:     hasher = hashlib.sha256()\n46: \n47:     for rel_path in sorted(tracked_files):\n48:         full_path = os.path.join(repo_path, rel_path)\n49:         if os.path.isfile(full_path):\n50:             with open(full_path, \"rb\") as f:\n51:                 content = f.read()\n52:                 file_sha = hashlib.sha256(content).hexdigest()\n53:                 file_hashes.append({\"path\": rel_path, \"sha256\": file_sha})\n54:                 hasher.update(f\"{rel_path}:{file_sha}\\n\".encode(\"utf-8\"))\n55: \n56:     merkle_root = hasher.hexdigest()\n57:     return {\n58:         \"merkle_root\": merkle_root,\n59:         \"total_files\": len(file_hashes),\n60:         \"files\": file_hashes"
+    },
+    {
+      "candidate_id": "SW100-C0523",
+      "path": "tools/skill_library/global/github-architect/scripts/scitt_attestor.py",
+      "start_line": 63,
+      "end_line": 108,
+      "observation": "Attestation claims are constants; receipt includes no signature.",
+      "source_sha256": "4162a94ce35fac08bd23c96df84f72cd413620ac4d1732ec87fbe4a3cc658b80",
+      "text": "63: def generate_scitt_attestation(repo_path: str, profile: str = \"sovereign_repository_v1\") -> Dict[str, Any]:\n64:     repo_path = os.path.abspath(repo_path)\n65:     repo_name = os.path.basename(repo_path)\n66:     git_info = get_git_info(repo_path)\n67:     merkle_data = compute_repo_merkle_root(repo_path)\n68: \n69:     now_iso = datetime.now(timezone.utc).isoformat().replace(\"+00:00\", \"Z\")\n70: \n71:     statement = {\n72:         \"$schema\": \"https://scitt.io/spec/v1/statement.json\",\n73:         \"type\": \"https://c5-real.org/attestations/provenance/v1\",\n74:         \"subject\": {\n75:             \"name\": repo_name,\n76:             \"commit_sha\": git_info[\"commit_sha\"],\n77:             \"branch\": git_info[\"branch\"],\n78:             \"merkle_root\": merkle_data[\"merkle_root\"]\n79:         },\n80:         \"predicate\": {\n81:             \"profile\": profile,\n82:             \"generated_at\": now_iso,\n83:             \"builder\": {\n84:                 \"id\": \"urn:c5:builder:apple-silicon-darwin\",\n85:                 \"hardware\": \"Apple Silicon M-Series (Darwin ARM64)\",\n86:                 \"entropy_source\": \"Secure Enclave Hardware TRNG (NIST SP 800-90B)\"\n87:             },\n88:             \"invariants\": {\n89:                 \"rfc_8785_canonical\": True,\n90:                 \"zero_leakage_certified\": True,\n91:                 \"slsa_level\": \"SLSA_BUILD_LEVEL_3\"\n92:             },\n93:             \"metrics\": {\n94:                 \"file_count\": merkle_data[\"total_files\"]\n95:             }\n96:         }\n97:     }\n98: \n99:     raw_canonical = canonical_json_bytes(statement)\n100:     statement_digest = hashlib.sha256(raw_canonical).hexdigest()\n101: \n102:     receipt = {\n103:         \"scitt_receipt_version\": \"RFC_9942_V1\",\n104:         \"statement_digest\": f\"sha256:{statement_digest}\",\n105:         \"statement\": statement\n106:     }\n107: \n108:     return receipt"
+    },
+    {
+      "candidate_id": "SW100-C0523",
+      "path": "tools/skill_library/global/github-architect/scripts/scitt_attestor.py",
+      "start_line": 118,
+      "end_line": 135,
+      "observation": "CLI emits the receipt and optionally writes it without further verification.",
+      "source_sha256": "4162a94ce35fac08bd23c96df84f72cd413620ac4d1732ec87fbe4a3cc658b80",
+      "text": "118:     receipt = generate_scitt_attestation(repo_path)\n119:     canonical_bytes = canonical_json_bytes(receipt)\n120: \n121:     print(\"=\" * 60)\n122:     print(\"SCITT RFC 9942 PROVENANCE ATTESTOR\")\n123:     print(f\"Target: {os.path.abspath(repo_path)}\")\n124:     print(f\"Merkle Root: {receipt['statement']['subject']['merkle_root']}\")\n125:     print(f\"Statement Digest: {receipt['statement_digest']}\")\n126:     print(f\"Canonical Payload Size: {len(canonical_bytes)} bytes\")\n127:     print(\"=\" * 60)\n128: \n129:     if write_to_repo:\n130:         attest_dir = os.path.join(repo_path, \".github\", \"attestations\")\n131:         os.makedirs(attest_dir, exist_ok=True)\n132:         out_file = os.path.join(attest_dir, \"release_provenance.json\")\n133:         with open(out_file, \"wb\") as f:\n134:             f.write(canonical_bytes)\n135:         print(f\"\\n\u2713 Receipt emitted to: {os.path.relpath(out_file, repo_path)}\")"
+    }
+  ]
+}

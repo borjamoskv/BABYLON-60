@@ -1,0 +1,32 @@
+{
+  "selected": [
+    {
+      "candidate_id": "SW100-C0413",
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "sha256": "704da66f24d45ae3634083273a9c0dfecc8e07530b5a6520ff3f1f336fc58830",
+      "decision": "CONFIRMED_STATIC",
+      "state": "PLAN_ONLY"
+    },
+    {
+      "candidate_id": "SW100-C0418",
+      "path": "scripts/c5_git_utils/c5_ship.sh",
+      "sha256": "12ccca5842ec398096cf79b3280d3d44c602244c8e866078b86b28dd57f74ce4",
+      "decision": "CONFIRMED_STATIC",
+      "state": "PLAN_ONLY"
+    },
+    {
+      "candidate_id": "SW100-R3-0001",
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "sha256": "704da66f24d45ae3634083273a9c0dfecc8e07530b5a6520ff3f1f336fc58830",
+      "decision": "CONFIRMED_STATIC",
+      "state": "PLAN_ONLY",
+      "outside_original_598": true
+    }
+  ],
+  "production_paths": [
+    "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+    "scripts/c5_git_utils/c5_ship.sh"
+  ],
+  "execution_state": "PLAN_ONLY_NO_SOURCE_EDITS",
+  "scope": "Two original static P1 plus the additional static publication-reference P1."
+}

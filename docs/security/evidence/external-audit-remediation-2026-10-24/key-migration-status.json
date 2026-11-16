@@ -1,0 +1,24 @@
+{
+  "status": "created_but_not_activated",
+  "checked_at": 1792808120.8273542,
+  "failure_stage": "caller receipt validation",
+  "failure": "Expected agent MOSKV-1; native gate qualifies agent with calling application",
+  "authentication_process_exit_code": 0,
+  "status_and_causal_hash_checked_before_failure": true,
+  "complete_receipt_persisted": false,
+  "signature_verified": false,
+  "active_key_unchanged": true,
+  "trust_config_unchanged": true,
+  "pending_key_record_sha256": "2402c2dcfc1832bd614873665d0f31223c2bdf0b4484b799617dd5a3bf976e42",
+  "authentication_retry_performed": false,
+  "web_deployment_attempted": false,
+  "legal_published": false,
+  "integration_fix": "Signed deployment plan now binds full Codex · MOSKV-1 agent label; native gate receives that exact label",
+  "deployment_regression_tests": {
+    "before_fix_failed": 1,
+    "after_fix_passed": 11
+  },
+  "web_preparation_exit_code": 0,
+  "web_preparation_status": "prepared",
+  "legal_draft_in_dist": false
+}

@@ -92,7 +92,9 @@ pub fn step(mut state: MachineState, instr: &Instruction) -> Result<MachineState
             }
             let mut cell = state.read_reg(*dest).clone();
             if let Value::ImmI64(lhs) = cell.value {
-                cell.value = Value::ImmI64(lhs / rhs);
+                // C0335: MIN / -1 desborda; se trata como halt crítico definido, sin pánico.
+                let quotient = lhs.checked_div(rhs).ok_or(HaltReason::Critical)?;
+                cell.value = Value::ImmI64(quotient);
                 state.write_reg(*dest, cell);
             } else {
                 return Err(HaltReason::Critical);
@@ -172,6 +174,25 @@ mod tests {
         let state = step(state, &emit_instr).expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
         assert_eq!(state.ledger.len(), 1);
         assert_ne!(state.ledger.root_hash(), [0u8; 32]);
+    }
+
+    #[test]
+    fn test_div_min_by_minus_one_is_critical_halt() {
+        // C0335: i64::MIN / -1 desborda; debe producir halt crítico, no pánico.
+        let state = MachineState::new();
+        let load = Instruction { opcode: Opcode::LoadImm(Reg::R1, i64::MIN) };
+        let state = step(state, &load).expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
+        let div = Instruction { opcode: Opcode::Div(Reg::R1, Value::ImmI64(-1)) };
+        assert_eq!(step(state, &div), Err(HaltReason::Critical));
+    }
+
+    #[test]
+    fn test_div_by_zero_is_critical_halt() {
+        let state = MachineState::new();
+        let load = Instruction { opcode: Opcode::LoadImm(Reg::R1, 7) };
+        let state = step(state, &load).expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
+        let div = Instruction { opcode: Opcode::Div(Reg::R1, Value::ImmI64(0)) };
+        assert_eq!(step(state, &div), Err(HaltReason::Critical));
     }
 }
 

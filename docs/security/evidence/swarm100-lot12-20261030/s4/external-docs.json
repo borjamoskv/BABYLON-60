@@ -1,0 +1,8 @@
+{
+  "context7": "/newren/git-filter-repo",
+  "sources": [
+    "https://github.com/newren/git-filter-repo/blob/main/_autodocs/configuration.md",
+    "https://github.com/newren/git-filter-repo/blob/main/Documentation/git-filter-repo.txt"
+  ],
+  "observation": "Current --message-callback consumes a bytes message and a function body or existing file containing that body; legacy script has a nested callback with metadata and dotted module string. That separate functional defect was reported, not silently certified as tested."
+}

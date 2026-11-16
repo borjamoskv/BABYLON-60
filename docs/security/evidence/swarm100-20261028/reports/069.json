@@ -1,0 +1,408 @@
+{
+  "shard": "069",
+  "findings": [
+    {
+      "title": "Delete only proven orphan WAL files",
+      "severity": "P1",
+      "path": "tools/skill_library/global/anergy-purge-protocol/scripts/anergy_purge.py",
+      "line": 183,
+      "evidence": "Lines 178–189 delete every *.db-wal and *.db-shm without checking an open database, checkpoint, or base file. CANONICAL_PROTECTED_DIRS is never consulted. main calls purge_anergy with destructive mode by default.",
+      "trigger": "Run the CLI on a workspace containing a live WAL-mode SQLite database or a closed database with uncheckpointed committed WAL data.",
+      "impact": "Committed transactions can be discarded; live connections can continue against unlinked WAL/shared-memory files.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Scope listener resets to an explicitly selected operation",
+      "severity": "P2",
+      "path": "tools/skill_library/global/anergy-purge-protocol/scripts/anergy_purge.py",
+      "line": 191,
+      "evidence": "purge_anergy(workspace_path) opens Path.home()/.gemini/antigravity/conversation_summaries.db and updates every RUNNING/not_fully_idle record at lines 203–206. This is independent of workspace_path.",
+      "trigger": "Run an ordinary non-dry workspace cleanup while another chat is active.",
+      "impact": "Unrelated running chats are marked idle outside the selected workspace.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Generate calibration constants in the module actually compiled",
+      "severity": "P2",
+      "path": "scripts/c5_calibrations/calibrate_aphairesis.py",
+      "line": 145,
+      "evidence": "__file__ lives in scripts/c5_calibrations; joining .. / src writes scripts/src/generated_aphairesis_constants.rs. src/lib.rs:71 instead loads repository src/generated_aphairesis_constants.rs.",
+      "trigger": "Run the documented calibration generator.",
+      "impact": "Compiled constants remain stale while the command reports successful generation.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Do not certify hardware and SLSA properties without evidence",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/github-architect/scripts/scitt_attestor.py",
+      "line": 83,
+      "evidence": "generate_scitt_attestation hardcodes Apple Silicon, Secure Enclave TRNG, zero_leakage_certified=True and SLSA_BUILD_LEVEL_3; returned receipt consists only of statement and its SHA-256 digest, with no signing, hardware lookup or provenance verification.",
+      "trigger": "Invoke the standalone CLI on any directory, including a non-Git directory (which silently receives an all-zero commit).",
+      "impact": "Exported provenance represents unmeasured and unauthenticated security properties as certified.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Keep channel selection ranges disjoint",
+      "severity": "P2",
+      "path": "tools/skill_library/global/flstudio-mcp-production/hardware/device_Antigravity_MCP.py",
+      "line": 116,
+      "evidence": "Selection uses cc_num < chan_count before elif 16 <= cc_num < 16 + chan_count and elif 32 <= cc_num < 32 + chan_count.",
+      "trigger": "With 20 channels, send channel-7 CC 16 intended to mute channel 0; with 40 channels send CC32 intended to solo channel0.",
+      "impact": "The earlier select branch consumes the message and selects channel16/32 rather than applying mute/solo.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Port-53 filtering also removes the documented TLS port 5349",
+      "severity": "P2",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/turn/patterns.md",
+      "line": 64,
+      "evidence": "Both examples use !url.includes(':53'); ':5349' contains ':53'. The same document recommends turns:turn.cloudflare.com:5349?transport=tcp.",
+      "trigger": "Copy either filter into TURN credential setup.",
+      "impact": "The filter silently discards the TLS fallback endpoint on port5349.",
+      "confidence": "high",
+      "kind": "example"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "src/bin/babylon60_kernel.rs",
+      "line": 218,
+      "evidence": "handle_validate signs only a manifest pointer-derived string; action description and executable hash are absent from signed bytes.",
+      "hypothesis": "Receipt may be insufficient if consumers interpret it as action or executable authorization.",
+      "limitation": "No downstream authorization consumer established; no bypass finding asserted."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".agents/skills/skill_catalog.generated.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          1576
+        ]
+      ],
+      "manifest_sha256": "28a715b117b8dda249b7bd3e0783472f0984d91d0506706605e0299b2ea63885",
+      "observed_sha256": "28a715b117b8dda249b7bd3e0783472f0984d91d0506706605e0299b2ea63885",
+      "changed": false
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-kernel/src/state.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          71
+        ]
+      ],
+      "manifest_sha256": "0c311192dfe9757314a838db6b8e83acfb52c60ab79bf6ea3ed5ac66ed7ab46f",
+      "observed_sha256": "0c311192dfe9757314a838db6b8e83acfb52c60ab79bf6ea3ed5ac66ed7ab46f",
+      "changed": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/bft/consensus_validator.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          83
+        ]
+      ],
+      "manifest_sha256": "9f93db639d04a1e4e4f0ba243eaaf9e4e6d2089479f069062fa92a8a31abff12",
+      "observed_sha256": "9f93db639d04a1e4e4f0ba243eaaf9e4e6d2089479f069062fa92a8a31abff12",
+      "changed": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/database/__init__.py",
+      "status": "reviewed_full",
+      "ranges": [],
+      "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "observed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "changed": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/transducers/clean_room_aot_dissector.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          1219
+        ]
+      ],
+      "manifest_sha256": "c6f29582f91fbda3e7c29630d3d724320ba7cc7927999381832543d9f0b12721",
+      "observed_sha256": "c6f29582f91fbda3e7c29630d3d724320ba7cc7927999381832543d9f0b12721",
+      "changed": false
+    },
+    {
+      "path": "01_KISH_ENGINE/extensions/moskv-fx-scavenger/background.js",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          85
+        ]
+      ],
+      "manifest_sha256": "0a273eba1ee686b60318a54a73f26da68955abadd46996b54ad0b8809cf8d97e",
+      "observed_sha256": "0a273eba1ee686b60318a54a73f26da68955abadd46996b54ad0b8809cf8d97e",
+      "changed": false
+    },
+    {
+      "path": "crates/babylon-skills-mcp/src/confined_fs.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          130
+        ]
+      ],
+      "manifest_sha256": "8847dc4d15854871b9922b01f71e4a57919314b70dda1090d0ebf5697313bc39",
+      "observed_sha256": "8847dc4d15854871b9922b01f71e4a57919314b70dda1090d0ebf5697313bc39",
+      "changed": false
+    },
+    {
+      "path": "docs/06_theory/10_physical_realization.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          31
+        ]
+      ],
+      "manifest_sha256": "0fe219ea7ed5e8ae4a16494e14a6af666f1bfd51621cfae1131899caa12dfdc8",
+      "observed_sha256": "0fe219ea7ed5e8ae4a16494e14a6af666f1bfd51621cfae1131899caa12dfdc8",
+      "changed": false
+    },
+    {
+      "path": "examples/biometric_test.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          34
+        ]
+      ],
+      "manifest_sha256": "41a543099f617cee4592ab9a9dc27dcfa03985de4c4d4b491f1751337fe3e45d",
+      "observed_sha256": "41a543099f617cee4592ab9a9dc27dcfa03985de4c4d4b491f1751337fe3e45d",
+      "changed": false
+    },
+    {
+      "path": "scripts/c5_calibrations/calibrate_aphairesis.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          149
+        ]
+      ],
+      "manifest_sha256": "e88cdd4a2474cc9625d6ee2628213086684a3efffe031320c933455580e253e7",
+      "observed_sha256": "e88cdd4a2474cc9625d6ee2628213086684a3efffe031320c933455580e253e7",
+      "changed": false
+    },
+    {
+      "path": "scripts/c5_edin/edin_swarm_commander.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          91
+        ]
+      ],
+      "manifest_sha256": "411982cd631dc2ab23479b8b002f92a5cb721a0a6c6de74bb46fd5348410a22d",
+      "observed_sha256": "411982cd631dc2ab23479b8b002f92a5cb721a0a6c6de74bb46fd5348410a22d",
+      "changed": false
+    },
+    {
+      "path": "scripts/c5_skills_ontology/build_skill_library.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          145
+        ]
+      ],
+      "manifest_sha256": "95ebd1cabd787ac72aca6b9908934711987add11a75df376eca0d0ac1824c1a8",
+      "observed_sha256": "95ebd1cabd787ac72aca6b9908934711987add11a75df376eca0d0ac1824c1a8",
+      "changed": false
+    },
+    {
+      "path": "src/bin/babylon60_kernel.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          398
+        ]
+      ],
+      "manifest_sha256": "f6bc9808e036afefa141c5ee2c3f81606a9a73b0351db3bbb967f4c441380e87",
+      "observed_sha256": "f6bc9808e036afefa141c5ee2c3f81606a9a73b0351db3bbb967f4c441380e87",
+      "changed": false
+    },
+    {
+      "path": "tests/startup_sigkill_regressions.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          242
+        ]
+      ],
+      "manifest_sha256": "06afdb8e197ae25549d619acab75cfead0aaba16b60bc387f8358db6a4d8084e",
+      "observed_sha256": "06afdb8e197ae25549d619acab75cfead0aaba16b60bc387f8358db6a4d8084e",
+      "changed": false
+    },
+    {
+      "path": "tests/test_grounding_interceptor.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          219
+        ]
+      ],
+      "manifest_sha256": "f60561bc8de4bad9ddb084bde7d90c471dea064973e4d7c0b9af10ea12340c43",
+      "observed_sha256": "f60561bc8de4bad9ddb084bde7d90c471dea064973e4d7c0b9af10ea12340c43",
+      "changed": false
+    },
+    {
+      "path": "tools/Anergy_Audit.yml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          15
+        ]
+      ],
+      "manifest_sha256": "0318baef6b97e7941fefff033d575e61c42704a59b5f73c0a18b88996be509a1",
+      "observed_sha256": "0318baef6b97e7941fefff033d575e61c42704a59b5f73c0a18b88996be509a1",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/browser-rendering/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          78
+        ]
+      ],
+      "manifest_sha256": "db9206a7f14bf13d5f8ade9875927662796016c52b0221b54c3e08238890b952",
+      "observed_sha256": "db9206a7f14bf13d5f8ade9875927662796016c52b0221b54c3e08238890b952",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/pages/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          204
+        ]
+      ],
+      "manifest_sha256": "22875bfabcdb615581d4626cca0e16802346e39fe122733e6607125d517af6ae",
+      "observed_sha256": "22875bfabcdb615581d4626cca0e16802346e39fe122733e6607125d517af6ae",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/turn/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          213
+        ]
+      ],
+      "manifest_sha256": "38c6deb1f2c48e3b2179aed6fcf88e0870724056c0a19347f4fa421eb7edb0da",
+      "observed_sha256": "38c6deb1f2c48e3b2179aed6fcf88e0870724056c0a19347f4fa421eb7edb0da",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/global/anergy-purge-protocol/scripts/anergy_purge.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          262
+        ]
+      ],
+      "manifest_sha256": "82b6881e3cc765b82d70814a477beaa7e46c3b074c7485a843b6baf303e16253",
+      "observed_sha256": "82b6881e3cc765b82d70814a477beaa7e46c3b074c7485a843b6baf303e16253",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents/agent_37_site_playbooks_instacart.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "manifest_sha256": "7eaca69c8010007af62a25b6f775358355e79ad481e8da49ce2a3c396f1f0385",
+      "observed_sha256": "7eaca69c8010007af62a25b6f775358355e79ad481e8da49ce2a3c396f1f0385",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/swarm-quantum-collapse/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          138
+        ]
+      ],
+      "manifest_sha256": "38d2dfabeac992b227c9d6f6c8bfffbae33a4284bef2cfd7d386333938b90f89",
+      "observed_sha256": "38d2dfabeac992b227c9d6f6c8bfffbae33a4284bef2cfd7d386333938b90f89",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/github-architect/scripts/scitt_attestor.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          142
+        ]
+      ],
+      "manifest_sha256": "4162a94ce35fac08bd23c96df84f72cd413620ac4d1732ec87fbe4a3cc658b80",
+      "observed_sha256": "4162a94ce35fac08bd23c96df84f72cd413620ac4d1732ec87fbe4a3cc658b80",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/global/flstudio-mcp-production/hardware/device_Antigravity_MCP.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          197
+        ]
+      ],
+      "manifest_sha256": "784140f39e7b577de989186e75aeb2d2e3cb6342639cbea5ba6702b415d7d3e9",
+      "observed_sha256": "784140f39e7b577de989186e75aeb2d2e3cb6342639cbea5ba6702b415d7d3e9",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/workspace/wizard/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "manifest_sha256": "4bc9b97717a19e87510538c5b9929a0e47e5e5b0ad55c240c29bdaea7e0dfdd0",
+      "observed_sha256": "4bc9b97717a19e87510538c5b9929a0e47e5e5b0ad55c240c29bdaea7e0dfdd0",
+      "changed": false
+    }
+  ],
+  "tool_limitations": [
+    "No native codebase-memory graph tools exposed; targeted text reads and rg used.",
+    "Static inspection only: no tests, application execution, hardware operations, compilation or network documentation checks.",
+    "Some aggregated output was truncated; affected source sections were reread in bounded excerpts."
+  ],
+  "tests_run": []
+}

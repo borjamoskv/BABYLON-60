@@ -1,0 +1,370 @@
+{
+  "shard": "002",
+  "findings": [
+    {
+      "title": "Auto purge unlinks SQLite WAL files without checkpoint or connection coordination",
+      "severity": "P1",
+      "path": "01_KISH_ENGINE/babylon60/commands/itera.py",
+      "line": 24,
+      "evidence": "Lines 23-24 delete all *.db-shm and *.db-wal recursively from cwd. strict_reviewer.py:155 calls run_auto_purge before git add/commit; no SQLite checkpoint or exclusive ownership is checked.",
+      "trigger": "Strict reviewer or another caller runs purge while a database has committed WAL content not checkpointed into its main database.",
+      "impact": "Committed database contents can be lost or concurrent clients disrupted; WAL files are persistent transaction state rather than disposable caches.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "License gate treats conjunctive restrictive licenses as permissive alternatives",
+      "severity": "P2",
+      "path": "scripts/c5_quality_gates/audit_license_compliance.py",
+      "line": 64,
+      "evidence": "The parser splits only OR, then any permissive substring anywhere suppresses the restrictive result at line 73.",
+      "trigger": "A dependency declares MIT AND GPL-3.0-only (or another conjunction containing permissive and restrictive licenses).",
+      "impact": "The commercial distribution gate accepts a license expression whose restrictive obligations remain mandatory.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Example manifest occupies 128 bytes on the documented 64-bit targets",
+      "severity": "P2",
+      "path": "scripts/c5_demos/c5_shm_manifest.rs",
+      "line": 16,
+      "evidence": "repr(C, align(64)) fields place exergy_score at offset 44, insert two bytes before the 4-byte ebr_ticket at 48, then padding[14] ends at 66; size rounds to 128. validate_alignment asserts size==64 at line 38.",
+      "trigger": "Compile and use this example on macOS/Linux 64-bit targets with normal AtomicU32 alignment.",
+      "impact": "The advertised 64-byte layout is false and validate_alignment panics when called; copying the example breaks the stated ctypes/shared-memory layout.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Stress harness reports success even when health transitions fail",
+      "severity": "P2",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/poc_t3_engine_stress.rs",
+      "line": 162,
+      "evidence": "saw_degraded, saw_dead and recovered are printed but never asserted; final line unconditionally prints empirical success.",
+      "trigger": "The engine regresses to never enter Degraded/Dead or reset fails to restore Healthy while hash checks still pass.",
+      "impact": "The harness exits successfully and announces passed falsification despite the very health transitions it promises to verify failing.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Polymeter selector has no effect on generated rhythm",
+      "severity": "P3",
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/examples/Euclidean_Polyrhythm_Generator.py",
+      "line": 63,
+      "evidence": "Dialog exposes fixed-bar polyrhythm versus continuous polymeter at line 60 and apply forwards mode at line 108, but generate_euclidean never reads mode and scales both patterns to BAR.",
+      "trigger": "Select Polimetro Continuo in the dialog.",
+      "impact": "Output remains identical to fixed-bar mode; the offered polymeter feature is absent.",
+      "confidence": "high",
+      "kind": "example"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".agents/rules/_archive/c5_agent_topology_invariant.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          162
+        ]
+      ],
+      "hash_status": "match",
+      "notes": "Static source review only; no runtime verification."
+    },
+    {
+      "path": ".github/workflows/crates-publish.yml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          47
+        ]
+      ],
+      "hash_status": "match",
+      "notes": "Static source review only; no runtime verification."
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/poc_t3_engine_stress.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          214
+        ]
+      ],
+      "hash_status": "match",
+      "notes": "Static source review only; no runtime verification."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/commands/itera.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          30
+        ]
+      ],
+      "hash_status": "match",
+      "notes": "Static source review only; no runtime verification."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/c6_absolute/__init__.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          4
+        ]
+      ],
+      "hash_status": "match",
+      "notes": "Static source review only; no runtime verification."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/utils/record_voice.scpt",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          17
+        ]
+      ],
+      "hash_status": "match",
+      "notes": "Static source review only; no runtime verification."
+    },
+    {
+      "path": "02_EDIN_SWARMS/agents_archi/topologies/social_media_team.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          235
+        ]
+      ],
+      "hash_status": "match",
+      "notes": "Static source review only; no runtime verification."
+    },
+    {
+      "path": "docs/01_spec/evidence/scientific-guarantees-20261026.json",
+      "status": "partial",
+      "ranges": [
+        [
+          1,
+          30
+        ]
+      ],
+      "hash_status": "match",
+      "notes": "Static source review only; no runtime verification."
+    },
+    {
+      "path": "docs/PROJECT.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          69
+        ]
+      ],
+      "hash_status": "match",
+      "notes": "Static source review only; no runtime verification."
+    },
+    {
+      "path": "proof/bundles/attestation_bundle_v1/causal_hash",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          1
+        ]
+      ],
+      "hash_status": "match",
+      "notes": "Static source review only; no runtime verification."
+    },
+    {
+      "path": "scripts/c5_demos/c5_shm_manifest.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          44
+        ]
+      ],
+      "hash_status": "match",
+      "notes": "Static source review only; no runtime verification."
+    },
+    {
+      "path": "scripts/c5_quality_gates/audit_license_compliance.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          174
+        ]
+      ],
+      "hash_status": "match",
+      "notes": "Static source review only; no runtime verification."
+    },
+    {
+      "path": "scripts/c5_verifiers/verify_lean_proofs.sh",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          50
+        ]
+      ],
+      "hash_status": "match",
+      "notes": "Static source review only; no runtime verification."
+    },
+    {
+      "path": "src/ontology.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          979
+        ]
+      ],
+      "hash_status": "match",
+      "notes": "Static source review only; no runtime verification."
+    },
+    {
+      "path": "tests/test_audit_test_guards.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          57
+        ]
+      ],
+      "hash_status": "match",
+      "notes": "Static source review only; no runtime verification."
+    },
+    {
+      "path": "tests/test_moloch_landauer_gate.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          275
+        ]
+      ],
+      "hash_status": "match",
+      "notes": "Static source review only; no runtime verification."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/agents-sdk/references/server-driven-messages.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          63
+        ]
+      ],
+      "hash_status": "match",
+      "notes": "Static source review only; no runtime verification."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/do-storage/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          75
+        ]
+      ],
+      "hash_status": "match",
+      "notes": "Static source review only; no runtime verification."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/r2/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          193
+        ]
+      ],
+      "hash_status": "match",
+      "notes": "Static source review only; no runtime verification."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workers-for-platforms/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          167
+        ]
+      ],
+      "hash_status": "match",
+      "notes": "Static source review only; no runtime verification."
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/examples/Euclidean_Polyrhythm_Generator.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          112
+        ]
+      ],
+      "hash_status": "match",
+      "notes": "Static source review only; no runtime verification."
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_06_send_on_behalf.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          61
+        ]
+      ],
+      "hash_status": "match",
+      "notes": "Static source review only; no runtime verification."
+    },
+    {
+      "path": "tools/skill_library/global/c5-gemini-api-2026-standards/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "hash_status": "match",
+      "notes": "Static source review only; no runtime verification."
+    },
+    {
+      "path": "tools/skill_library/global/c5-terminological-archaeology/scripts/c5_delta_boundary_linter.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          300
+        ]
+      ],
+      "hash_status": "match",
+      "notes": "Static source review only; no runtime verification."
+    },
+    {
+      "path": "tools/skill_library/global/skills.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          3731
+        ]
+      ],
+      "hash_status": "match",
+      "notes": "Static source review only; no runtime verification."
+    }
+  ],
+  "tool_limitations": [
+    "Codebase graph tools are not exposed in the native session; targeted source reads and rg used.",
+    "Large aggregate outputs initially truncated; ontology.rs and skills.json completed through bounded follow-up reads. Evidence JSON remains explicit partial.",
+    "No external API behavior conclusions made; example API references were reviewed statically without online verification.",
+    "All assigned files matched frozen shard SHA-256; no symlinks found."
+  ],
+  "tests_run": []
+}

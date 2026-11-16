@@ -1,0 +1,59 @@
+[
+  {
+    "name": "bash-distill",
+    "command": [
+      "bash",
+      "-n",
+      "scripts/c5_git_utils/c5_distill_public_mirror.sh"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "bash-ship",
+    "command": [
+      "bash",
+      "-n",
+      "scripts/c5_git_utils/c5_ship.sh"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "shellcheck",
+    "command": [
+      "shellcheck",
+      "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "scripts/c5_git_utils/c5_ship.sh"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "ruff",
+    "command": [
+      "uv",
+      "run",
+      "--locked",
+      "--no-sync",
+      "ruff",
+      "check",
+      "tests/test_swarm100_lot3_regressions.py",
+      "docs/security/evidence/swarm100-lot3-20261028/reconcile_lot3.py",
+      "docs/security/evidence/swarm100-lot3-20261028/inline-c5_distill_public_mirror.sh.py",
+      "docs/security/evidence/swarm100-lot3-20261028/inline-c5_ship.sh.py"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "mypy-inline",
+    "command": [
+      "uv",
+      "run",
+      "--locked",
+      "--no-sync",
+      "mypy",
+      "--follow-imports=silent",
+      "--check-untyped-defs",
+      "docs/security/evidence/swarm100-lot3-20261028/inline-c5_distill_public_mirror.sh.py"
+    ],
+    "exit_code": 0
+  }
+]

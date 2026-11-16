@@ -1,0 +1,65 @@
+{
+  "scope": "Root replay of actual API counterexamples, fresh fixtures; no production state",
+  "repo": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+  "output": "/private/tmp/babylon60-audit-round2-20261028/final-replay",
+  "results": [
+    {
+      "lane": "a",
+      "exit_code": 0,
+      "source_script_sha256": "2316e51a296d25c143c0704e52bde7acd7db44a0b578a875f6e7acbb9578a52d",
+      "rendered_script_sha256": "2316e51a296d25c143c0704e52bde7acd7db44a0b578a875f6e7acbb9578a52d",
+      "path_adjustments_only": true,
+      "case_confirmations": {
+        "default_unobserved_campaigns": true,
+        "invalid_claims_output_deleted": true,
+        "invalid_ledger_output_deleted": true
+      },
+      "result_file": "/private/tmp/babylon60-audit-round2-20261028/final-replay/a/result.json",
+      "replay_passed": true
+    },
+    {
+      "lane": "b",
+      "exit_code": 0,
+      "source_script_sha256": "4f5e440af45673fdac8ef254ded83aa126b2b6cc64ee370c39c7d489d392d4c0",
+      "rendered_script_sha256": "4f5e440af45673fdac8ef254ded83aa126b2b6cc64ee370c39c7d489d392d4c0",
+      "path_adjustments_only": true,
+      "case_confirmations": {
+        "malformed_crl": true,
+        "json_ledger_payload": true,
+        "governance_parent_revocation_interleaving": true
+      },
+      "result_file": "/private/tmp/babylon60-audit-round2-20261028/final-replay/b/results.json",
+      "replay_passed": true
+    },
+    {
+      "lane": "c",
+      "exit_code": 0,
+      "source_script_sha256": "56c37b1c42085635a17df7c7bb33a9b1d40ab79d904905e9e18c8d85c5633711",
+      "rendered_script_sha256": "56c37b1c42085635a17df7c7bb33a9b1d40ab79d904905e9e18c8d85c5633711",
+      "path_adjustments_only": true,
+      "case_confirmations": {
+        "crystal_json_content_integrity": true,
+        "unrelated_derive_goal": true,
+        "crypto_shredding_decryptability": true
+      },
+      "result_file": "/private/tmp/babylon60-audit-round2-20261028/final-replay/c/results.json",
+      "replay_passed": true
+    },
+    {
+      "lane": "d",
+      "exit_code": 0,
+      "source_script_sha256": "9fa9156187892e3397fbe775c9ed46b59f09791050ff57266fab50521a50949c",
+      "rendered_script_sha256": "9fa9156187892e3397fbe775c9ed46b59f09791050ff57266fab50521a50949c",
+      "path_adjustments_only": true,
+      "case_confirmations": {
+        "divergent_same_name_ledger_deletion": true,
+        "committed_wal_omitted_then_deleted": true,
+        "extension_purge_relative_traversal": true,
+        "extension_purge_absolute_path": true
+      },
+      "result_file": "/private/tmp/babylon60-audit-round2-20261028/final-replay/d/results.json",
+      "replay_passed": true
+    }
+  ],
+  "passed": true
+}

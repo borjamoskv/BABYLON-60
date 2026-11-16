@@ -1,0 +1,16 @@
+{
+  "source_sha256_before": {
+    "scripts/c5_cortex/cortex_objectives_transducer.py": "18805a13c7a3c2853b8824c9424dbff05c2d27ebad9c89e2f3b2c98aaf7692ca",
+    "tests/test_swarm100_lot8_regressions.py": "6df5efd0e57b915ea3c014225841950056ee9b3a0d76b5174d1f471ce6e8b7ec"
+  }
+}
+.............................................................            [100%]
+61 passed in 30.30s
+
+{
+  "source_sha256_after": {
+    "scripts/c5_cortex/cortex_objectives_transducer.py": "18805a13c7a3c2853b8824c9424dbff05c2d27ebad9c89e2f3b2c98aaf7692ca",
+    "tests/test_swarm100_lot8_regressions.py": "6df5efd0e57b915ea3c014225841950056ee9b3a0d76b5174d1f471ce6e8b7ec"
+  },
+  "exit_code": 0
+}

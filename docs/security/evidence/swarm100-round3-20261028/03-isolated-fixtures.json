@@ -1,0 +1,66 @@
+{
+  "scope": "Isolated Python source functions and explicit models only; no product/native runtime, protected effects, network, operator data, or repository source writes.",
+  "checks": [
+    {
+      "candidate_id": "SW100-C0457",
+      "kind": "isolated_source_function",
+      "fences_retained": true,
+      "syntax_valid": false,
+      "lines": 3
+    },
+    {
+      "candidate_id": "SW100-C0501",
+      "kind": "isolated_source_function",
+      "swapped_and_renamed_fields_same_root": true,
+      "root": "a22ed754def56ad727faec032cedf18c65a94f65afb0723ba333924d8d278a05"
+    },
+    {
+      "candidate_id": "SW100-C0272",
+      "kind": "source_preimage_expression",
+      "distinct_fields_identical_preimage": true,
+      "preimage": "a:b:c:example:p:r"
+    },
+    {
+      "candidate_id": "SW100-C0074",
+      "kind": "isolated_source_classes",
+      "record_status": "REVOKED",
+      "intercept_status": "COMMITTED",
+      "verified_count": 1
+    },
+    {
+      "candidate_id": "SW100-C0075",
+      "kind": "isolated_source_class_with_injected_connect_failure",
+      "registration_raised": true,
+      "record_still_cached": true,
+      "database_opened": false
+    },
+    {
+      "candidate_id": "SW100-C0373",
+      "kind": "isolated_source_class_with_injected_curl_failure",
+      "synthetic_token_in_error_detail": true,
+      "network_executed": false,
+      "keychain_read": false
+    },
+    {
+      "candidate_id": "SW100-C0420",
+      "kind": "isolated_source_function_with_synthetic_statement",
+      "editable_self_checksum_accepted": true,
+      "source_artifacts_read": false
+    },
+    {
+      "candidate_id": "SW100-C0535",
+      "kind": "isolated_source_structure_in_local_memory",
+      "stored_input_length": 16,
+      "returned_length": 3,
+      "returned_hex": "616263",
+      "shared_memory_opened": false
+    },
+    {
+      "candidate_id": "SW100-C0431",
+      "kind": "sqlite_in_memory_read_sequence_model",
+      "aggregate_count_before": 1,
+      "leaf_count_after": 2,
+      "product_ledger_executed": false
+    }
+  ]
+}

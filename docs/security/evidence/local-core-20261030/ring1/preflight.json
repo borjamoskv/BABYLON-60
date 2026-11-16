@@ -1,0 +1,19 @@
+{
+  "root": "/Users/borjafernandezangulo/.codex/worktrees/local-core-ring1/BABYLON-60",
+  "head": "eb28fa97bb0440d59878b955222aa0617a1c236b",
+  "cache_source": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/proof/lean/.lake/packages",
+  "cache_is_independent_copy": true,
+  "source_sha256": {
+    "crates/b60-lang/src/bin/fsm_poc.rs": "ec8e7250c972599dffe89b0ab174fe19663612c71a58ce95fa25ff44b34743c9",
+    "crates/b60-lang/src/bin/fsm_stress.rs": "b0901878bb1f090f85d157e630f6662cf98600f7d891012d02da38487f26d5b2",
+    "crates/b60-lang/src/bin/support/lean_harness.rs": "0742b61c2bd2987894f6d67f7054d020d011491c3c75e672bacffeba24488359",
+    "crates/b60-lang/tests/lean_harness.rs": "15a6ab7abc3aad7211ac268436cfaec2c2f69a0a437d1d5a3c8377290a891f98",
+    "proof/lean/BabylonTrace.lean": "83b00a15497eaf2d2362fda7dfa6ce8090c59435dfede6ecb7fac54ad18c76ba",
+    "proof/lean/AX0.lean": "ff038f17b706f18c3fba64e1e907e34e5efa3b578fc02d98f08b1013cce77fd0",
+    "proof/lean/NemesisWave4.lean": "78ac71a9f718b05d5c1d6a936b1d317f2a3b94aa9ed4f9d1a307ab5317da8a0f",
+    "proof/lean/lakefile.toml": "99c1cf005aac1e3793aaba1ea1775d8e4d6c3e94b2f1dbd9b08723b2283aa631",
+    "proof/lean/lake-manifest.json": "9325276f014362af0d80077ed4126abdec7dc79d64bf576708cc542b155220fa",
+    "proof/lean/lean-toolchain": "108ca2895820de2c74101f81de81756b41ca0165dfdc8ced16a82c3f810152d0",
+    "Cargo.lock": "7c772f6e6ffd29594c5b9bdadb004be09c57af67b60b7be1b56c034a174491b4"
+  }
+}

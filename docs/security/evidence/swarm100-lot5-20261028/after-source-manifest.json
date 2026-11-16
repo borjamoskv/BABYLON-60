@@ -1,0 +1,8 @@
+{
+  "source_sha256": {
+    "01_KISH_ENGINE/babylon60/bft/ledger_actor.py": "a6fb163e3c668ea18d987dc0544111e8de83bc458e2f365bc1ae144b1022df2f"
+  },
+  "test_source_sha256": {
+    "tests/test_swarm100_lot5_regressions.py": "dbf22efcf0d183f982b7a7a125a00d2d09dcd30908a79027fee1a3159baf7250"
+  }
+}

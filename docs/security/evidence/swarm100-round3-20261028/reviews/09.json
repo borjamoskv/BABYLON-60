@@ -1,0 +1,1125 @@
+{
+  "reviewer": "09",
+  "candidates": [
+    {
+      "candidate_id": "SW100-C0167",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+      "current_source_sha256": "c84b230f9424e7ff676750c535f450b03739f057583ac28e1468f342818b9ca0",
+      "rationale": "The current writer serializes before opening, but open(..., \"w\") truncates the live destination and writes in place. A crash or short/failed write can leave corrupt JSON; project, ghosts and system are also separate commits. This is a durability defect in the directly callable consolidation API, not proof that corruption occurred on this host.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+          "start_line": 70,
+          "end_line": 79,
+          "observation": "Payload JSON validation occurs before an in-place truncating write; no temporary file, atomic replacement or fsync."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+          "start_line": 81,
+          "end_line": 113,
+          "observation": "Project read/modify/write is the first independent update."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+          "start_line": 115,
+          "end_line": 155,
+          "observation": "Ghosts and system are read and written independently after project persistence."
+        }
+      ],
+      "guards": [
+        "Pre-serialization catches invalid JSON before truncation but does not make the write crash-safe.",
+        "Topology existence check and SIGKILL on error provide no rollback."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/09-review-method.md"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0168",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+      "current_source_sha256": "c84b230f9424e7ff676750c535f450b03739f057583ac28e1468f342818b9ca0",
+      "rationale": "Two consolidators can read the same project/system snapshot and overwrite each other after their separate modifications. The globals ghosts.json and system.json are shared even across different project instances. No lock, version check or serialized writer surrounds the read-modify-write operations. Concurrent use remains a trigger; no live race was run.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+          "start_line": 35,
+          "end_line": 45,
+          "observation": "Every instance uses shared memory files under the same base directory."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+          "start_line": 85,
+          "end_line": 113,
+          "observation": "Project changes and decisions derive from a prior read and replace the file."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+          "start_line": 115,
+          "end_line": 155,
+          "observation": "Shared ghosts and session list repeat the unlocked read-modify-write pattern."
+        }
+      ],
+      "guards": [
+        "Recent-change deduplication and session-id removal operate only on the stale local snapshot.",
+        "There is no interprocess or per-instance consolidation lock."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/09-review-method.md"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0169",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+      "current_source_sha256": "c84b230f9424e7ff676750c535f450b03739f057583ac28e1468f342818b9ca0",
+      "rationale": "datetime.now(timezone.utc) supplies UTC clock fields, then the format labels them +02:00 without conversion. ISO consumers therefore interpret an instant two hours earlier than the captured UTC time. The same value is persisted in project, ghosts and system timestamps; daylight-saving comments do not perform conversion.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+          "start_line": 56,
+          "end_line": 60,
+          "observation": "UTC datetime is formatted with literal +02:00."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+          "start_line": 81,
+          "end_line": 98,
+          "observation": "The result becomes last_touched and ghost timestamp."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+          "start_line": 138,
+          "end_line": 155,
+          "observation": "The result becomes session date and system last_updated."
+        }
+      ],
+      "guards": [
+        "Timezone-aware input is present, but strftime replaces the offset with a literal instead of converting it."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/09-review-method.md"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0490",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "path": "tools/install_shield.sh",
+      "current_source_sha256": "bbedf380b5945b2c432af96352a0f640ccf09e1e9858ad1498ad61a33919583d",
+      "rationale": "Installation removes an existing regular instruction file and immediately replaces it with a canonical symlink. Its previous text is not read or backed up anywhere on this path. This affects existing workspace rule files and Copilot instructions whenever the installer is invoked there; no installer was executed.",
+      "source_checks": [
+        {
+          "path": "tools/install_shield.sh",
+          "start_line": 151,
+          "end_line": 165,
+          "observation": "Canonical rules creation preserves an existing .babylon60rules but does not preserve other rule-file contents."
+        },
+        {
+          "path": "tools/install_shield.sh",
+          "start_line": 168,
+          "end_line": 181,
+          "observation": "Nonmatching links and all regular rule files are removed before symlink creation."
+        },
+        {
+          "path": ".babylon60rules",
+          "start_line": 19,
+          "end_line": 19,
+          "observation": "The canonical manifest requires preserving differences before replacing regular instruction files."
+        }
+      ],
+      "guards": [
+        "Already-correct symlinks are skipped.",
+        "set -euo pipefail stops command errors but cannot recover deleted regular-file contents."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/09-review-method.md"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0491",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/install_shield.sh",
+      "current_source_sha256": "bbedf380b5945b2c432af96352a0f640ccf09e1e9858ad1498ad61a33919583d",
+      "rationale": "A competing installer deletes the shared lock directory after more than 200 failed mkdir attempts separated by 5ms sleeps, regardless of owner liveness. A still-running owner can therefore overlap a new owner; either release may remove the replacement lock. The nominal wait is about one second plus command overhead, not a stale-owner proof.",
+      "source_checks": [
+        {
+          "path": "tools/install_shield.sh",
+          "start_line": 37,
+          "end_line": 50,
+          "observation": "Acquisition forcibly removes an existing lock after a retry count and release unconditionally removes the path."
+        },
+        {
+          "path": "tools/install_shield.sh",
+          "start_line": 52,
+          "end_line": 53,
+          "observation": "The lock and EXIT trap cover the installation body."
+        },
+        {
+          "path": "tools/install_shield.sh",
+          "start_line": 207,
+          "end_line": 208,
+          "observation": "Normal completion also removes the lock without ownership validation."
+        }
+      ],
+      "guards": [
+        "mkdir provides atomic initial acquisition only.",
+        "Neither a PID/nonce nor an ownership/inode check protects eviction or release."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/09-review-method.md"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0492",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/install_shield.sh",
+      "current_source_sha256": "bbedf380b5945b2c432af96352a0f640ccf09e1e9858ad1498ad61a33919583d",
+      "rationale": "Uninstall removes every symlink at the listed workspace instruction paths without checking whether its target belongs to Shield. An unrelated pre-existing link therefore satisfies the deletion branch. This is a direct uninstall behavior; no uninstall was run.",
+      "source_checks": [
+        {
+          "path": "tools/install_shield.sh",
+          "start_line": 58,
+          "end_line": 74,
+          "observation": "Uninstall removes any -L entry in the seven instruction paths."
+        },
+        {
+          "path": "tools/install_shield.sh",
+          "start_line": 168,
+          "end_line": 181,
+          "observation": "Installation compares expected link targets, demonstrating that the matching guard exists only on install."
+        }
+      ],
+      "guards": [
+        "The --uninstall flag gates this operation.",
+        "The -L check distinguishes symlinks from regular files but does not establish installer ownership."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/09-review-method.md"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0462",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/transducers/pulmones_worker.py",
+      "current_source_sha256": "cbb9322baf05f4c8054d0c98997c633e9b5dce2d397bff7931a522b4bb4dea89",
+      "rationale": "The persistent SQLite deadline stores time.monotonic()+delay and is compared against a later boot/process clock with no boot identity or rebasing. A reboot that restarts the monotonic epoch can defer old retries by the previous uptime, or otherwise alter the intended delay. Persistence of the raw monotonic reading does not create a durable clock.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/transducers/pulmones_worker.py",
+          "start_line": 41,
+          "end_line": 55,
+          "observation": "The consumer compares persisted next_retry_at with time.monotonic()."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/transducers/pulmones_worker.py",
+          "start_line": 72,
+          "end_line": 83,
+          "observation": "Backoff updates persist another monotonic reading."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/transducers/pulmones.py",
+          "start_line": 62,
+          "end_line": 93,
+          "observation": "The producer persists REAL next_retry_at and computes it from time.monotonic()."
+        }
+      ],
+      "guards": [
+        "Both producer and consumer use the same clock within a boot.",
+        "No boot marker, recovery rebasing or durable wall-clock conversion is present."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/09-review-method.md"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0463",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/transducers/pulmones_worker.py",
+      "current_source_sha256": "cbb9322baf05f4c8054d0c98997c633e9b5dce2d397bff7931a522b4bb4dea89",
+      "rationale": "Two worker instances can SELECT the same due row before either executes and deletes it. Fetching performs no status change, lease or transactional claim; each independently invokes the stored callable before deletion. Duplicate side effects are possible for non-idempotent callables. No concurrent worker deployment or effect was executed.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/transducers/pulmones_worker.py",
+          "start_line": 41,
+          "end_line": 66,
+          "observation": "Fetching only reads due rows and returns them."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/transducers/pulmones_worker.py",
+          "start_line": 68,
+          "end_line": 83,
+          "observation": "Deletion and backoff use later independent connections."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/transducers/pulmones_worker.py",
+          "start_line": 95,
+          "end_line": 131,
+          "observation": "Execution awaits the callable, then removes the task; the loop may be started in multiple instances."
+        }
+      ],
+      "guards": [
+        "A single start_loop waits for its batch to finish, preventing self-overlap in that one loop.",
+        "There is no process singleton, row lease or idempotency key protecting multiple loops/workers."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/09-review-method.md"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0360",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "path": "scripts/babylon60/gen_oncology_primitives.py",
+      "current_source_sha256": "df8f6fdde757fb4321a270e0b6b2e9b91d8dd67884e13b238e3c6387b2dea5e3",
+      "rationale": "The generated axiom applies to every List OncologyPrimitive, while the structure is constructible using empty strings and PrimitiveLayer.meta. Applying it to List.replicate 301 p yields False from a provable length inequality. This confirms a logical inconsistency in the emitted axiom, independent of runtime containment; no Lean compiler or proof was executed.",
+      "source_checks": [
+        {
+          "path": "scripts/babylon60/gen_oncology_primitives.py",
+          "start_line": 85,
+          "end_line": 103,
+          "observation": "The namespace contains an inhabited PrimitiveLayer and a freely constructible OncologyPrimitive structure."
+        },
+        {
+          "path": "scripts/babylon60/gen_oncology_primitives.py",
+          "start_line": 142,
+          "end_line": 152,
+          "observation": "The generator unconditionally emits the universal list-length axiom and writes it."
+        },
+        {
+          "path": "scripts/babylon60/gen_oncology_primitives.py",
+          "start_line": 155,
+          "end_line": 167,
+          "observation": "The CLI always requests Lean export after parsing."
+        }
+      ],
+      "guards": [
+        "The axiom has no distinctness, catalogue-membership or bounded-list precondition.",
+        "The separate catalogue-count theorem does not restrict arbitrary lists."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/09-review-method.md"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0361",
+      "decision": "REJECTED",
+      "severity": "P2",
+      "remediation_state": "NOT_APPLICABLE",
+      "path": "scripts/babylon60/gen_oncology_primitives.py",
+      "current_source_sha256": "df8f6fdde757fb4321a270e0b6b2e9b91d8dd67884e13b238e3c6387b2dea5e3",
+      "rationale": "Rejected: absence of an explicit end at EOF is permitted by Lean. The official Namespaces and Sections reference states that namespace scope ends at a matching end or EOF and that the end command is optional at file end. The source has this omission but it is not the claimed compilation defect. This does not validate other generated declarations.",
+      "source_checks": [
+        {
+          "path": "scripts/babylon60/gen_oncology_primitives.py",
+          "start_line": 79,
+          "end_line": 85,
+          "observation": "The generated module opens Babylon60.Oncology."
+        },
+        {
+          "path": "scripts/babylon60/gen_oncology_primitives.py",
+          "start_line": 142,
+          "end_line": 152,
+          "observation": "The writer ends after declarations without appending end; this is valid EOF scope termination."
+        }
+      ],
+      "guards": [
+        "Lean language semantics close the namespace at EOF.",
+        "Official documentation was consulted; no compiler was executed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/09-review-method.md"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0219",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "path": "scripts/repatriated/c5_sharur_100_anergy_purge.py",
+      "current_source_sha256": "f0a21461244d7c362a9c5e4699f832a0f151fa7519eac020374056ae31de74ad",
+      "rationale": "The purge labels WAL/SHM files as orphans solely by suffix and unlinks them under workspace and cortex roots. Committed WAL pages may be the only durable copy before checkpointing; deleting such journals or live coordination files can lose data or disrupt SQLite. The active-file condition was not exercised and no database files were touched.",
+      "source_checks": [
+        {
+          "path": "scripts/repatriated/c5_sharur_100_anergy_purge.py",
+          "start_line": 22,
+          "end_line": 39,
+          "observation": "Roots include all 10_PROJECTS and .cortex except substring exclusions."
+        },
+        {
+          "path": "scripts/repatriated/c5_sharur_100_anergy_purge.py",
+          "start_line": 84,
+          "end_line": 106,
+          "observation": "Suffix match directly reaches unlink without a database, checkpoint or liveness check."
+        },
+        {
+          "path": "scripts/repatriated/c5_sharur_100_anergy_purge.py",
+          "start_line": 330,
+          "end_line": 338,
+          "observation": "main unconditionally schedules this cohort."
+        }
+      ],
+      "guards": [
+        "Missing roots and explicitly protected path substrings are skipped.",
+        "Those exclusions do not establish that remaining WAL/SHM files are orphaned."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/09-review-method.md"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0223",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/repatriated/c5_sharur_100_anergy_purge.py",
+      "current_source_sha256": "f0a21461244d7c362a9c5e4699f832a0f151fa7519eac020374056ae31de74ad",
+      "rationale": "The Lean cleanup traverses all WORKSPACE and recursively removes each unprotected .lake directory. It does not test whether the containing project is archived or whether package checkouts contain local work. Active dependency checkouts and build products are therefore within its deletion scope. No purge ran.",
+      "source_checks": [
+        {
+          "path": "scripts/repatriated/c5_sharur_100_anergy_purge.py",
+          "start_line": 22,
+          "end_line": 39,
+          "observation": "WORKSPACE spans 10_PROJECTS and protection is a fixed substring list."
+        },
+        {
+          "path": "scripts/repatriated/c5_sharur_100_anergy_purge.py",
+          "start_line": 170,
+          "end_line": 181,
+          "observation": "Despite an archived-project comment, every unprotected .lake is passed to rmtree."
+        },
+        {
+          "path": "scripts/repatriated/c5_sharur_100_anergy_purge.py",
+          "start_line": 330,
+          "end_line": 338,
+          "observation": "main schedules cohort 2 alongside the other purges."
+        }
+      ],
+      "guards": [
+        "Protected substrings restrict some projects.",
+        "There is no archived-state, disposable-product or clean-checkout test."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/09-review-method.md"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0335",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "path": "00_ABZU_KERNEL/crates/babylon60-kernel/src/eval.rs",
+      "current_source_sha256": "5172ee1d8ff1eb3b33d3cf0c2bbe7c1dced0c870799ba2d5b043fda8b4c27fc3",
+      "rationale": "Public step accepts LoadImm of any i64 and Div with immediate -1. Its divisor-zero and operand-type guards permit i64::MIN / -1, which overflows signed division instead of returning HaltReason::Critical. The no-panic API claim is therefore false for this accepted input. No Rust/native binary was compiled or executed.",
+      "source_checks": [
+        {
+          "path": "00_ABZU_KERNEL/crates/babylon60-kernel/src/eval.rs",
+          "start_line": 14,
+          "end_line": 28,
+          "observation": "The public transition claims no panics and accepts every LoadImm i64."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/babylon60-kernel/src/eval.rs",
+          "start_line": 82,
+          "end_line": 99,
+          "observation": "Only zero/type guards precede unchecked signed division."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/babylon60-kernel/src/isa.rs",
+          "start_line": 34,
+          "end_line": 41,
+          "observation": "The ISA represents LoadImm i64 and Div without a constrained operand subtype."
+        }
+      ],
+      "guards": [
+        "Division by zero and noninteger operands return Critical.",
+        "The MIN/-1 overflow case is not checked or handled with checked_div."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/09-review-method.md"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0048",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/poc_zerocopy_hypervisor.rs",
+      "current_source_sha256": "7d04c4d442e628ad6c855b4f10a7414ec4e70a7f5211efbc233a2943ccfe98b7",
+      "rationale": "The subscriber may return normally on receive error, and the main receive-count wait may break on timeout; both paths still join and print empirical success. Publish failures and invalid signatures do fail, but incomplete valid delivery is not required to fail. The verdict and malloc claim exceed the observations this example collects; no IPC PoC ran.",
+      "source_checks": [
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/poc_zerocopy_hypervisor.rs",
+          "start_line": 49,
+          "end_line": 65,
+          "observation": "Invalid signatures exit 1, but receive errors merely break the subscriber loop."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/poc_zerocopy_hypervisor.rs",
+          "start_line": 91,
+          "end_line": 103,
+          "observation": "A receive-count deficit can time out and continue after join."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/poc_zerocopy_hypervisor.rs",
+          "start_line": 105,
+          "end_line": 115,
+          "observation": "Rates and success text are unconditional after the wait, without final count equality or allocation measurement."
+        }
+      ],
+      "guards": [
+        "Publisher errors, thread panic and invalid signatures fail visibly.",
+        "A normal subscriber error exit or timeout with missing messages is not a failing verdict."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/09-review-method.md"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0208",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/core/moskv_kernel.py",
+      "current_source_sha256": "2f420cb48c43b1aac7b921d4cd690ba4b27044129aeee8e8f29796db9a07cf27",
+      "rationale": "Two distinct claims ingested before the first insert snapshot the same _last_hash. The first autocommitted row consumes the UNIQUE prev_hash value; the second raises IntegrityError. The collision handler looks up only the second claim_id, accepts a missing row, and prints legitimate replay while that accepted tracking ID was never stored. Single-writer processing does not repair predecessors captured during ingestion.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/moskv_kernel.py",
+          "start_line": 59,
+          "end_line": 67,
+          "observation": "Both prev_hash and current_hash are UNIQUE and claim_id is the primary key."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/moskv_kernel.py",
+          "start_line": 82,
+          "end_line": 98,
+          "observation": "Ingestion snapshots _last_hash into the queued claim before persistence."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/moskv_kernel.py",
+          "start_line": 106,
+          "end_line": 118,
+          "observation": "An absent collision lookup row is accepted without an error."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/moskv_kernel.py",
+          "start_line": 121,
+          "end_line": 169,
+          "observation": "Every IntegrityError is handled as replay and processing marks the queue task done."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/database/core.py",
+          "start_line": 47,
+          "end_line": 60,
+          "observation": "The current database connector uses isolation_level=None; successful insert is autocommitted."
+        }
+      ],
+      "guards": [
+        "Confidence filtering allows normal C4/C5 claims and is unrelated to predecessor assignment.",
+        "A matching claim_id with different payload is rejected; absent claim_id and collisions on other UNIQUE columns are not."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/09-review-method.md"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0106",
+      "decision": "REPRODUCED",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/kernel/mcp_scaffolder.py",
+      "current_source_sha256": "cac7a05212a070984fc87da6ad14baa373bde3801204112b8d5b81b0e550a80c",
+      "rationale": "Reproduced with the exact current scaffolder class extracted by AST into an isolated namespace and an in-memory writer. A description containing a triple-double-quote returned a success path, while ast.parse rejected the generated text as an unterminated triple-quoted string. No generated MCP was executed and no execution-authorization bypass is claimed.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/mcp_scaffolder.py",
+          "start_line": 126,
+          "end_line": 160,
+          "observation": "Filename confinement and implementation-body AST validation do not validate the description or complete generated module."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/mcp_scaffolder.py",
+          "start_line": 183,
+          "end_line": 189,
+          "observation": "The description is inserted directly inside a triple-double-quoted docstring."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/mcp_scaffolder.py",
+          "start_line": 337,
+          "end_line": 343,
+          "observation": "The complete code is written and success returned without parsing it."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/mcp_deductive_engine.py",
+          "start_line": 21,
+          "end_line": 30,
+          "observation": "Contract description is an unconstrained string."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/mcp_deductive_engine.py",
+          "start_line": 82,
+          "end_line": 98,
+          "observation": "custom_description passes through directly."
+        }
+      ],
+      "guards": [
+        "O_EXCL/O_NOFOLLOW protect artifact creation, not generated syntax.",
+        "The implementation-only AST gate does not inspect the description interpolation."
+      ],
+      "runtime_executed": true,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/09-review-method.md",
+        "docs/security/evidence/swarm100-round3-20261028/09-source-probes.py",
+        "docs/security/evidence/swarm100-round3-20261028/09-source-probes.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0141",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/verification/counterexample.py",
+      "current_source_sha256": "d2eba457ba0bed97cc95850c2a9776c4592dd2fe8ce93cd4dfedee1f45a0642b",
+      "rationale": "The exported function documents persistence of counterexample feedback, but its only effect is logger.info followed by unconditional True. There is no durable memory operation or result indicating lack of persistence. Targeted application/scripts search found only the definition and re-export, so this is an exported-API contract defect with production-call reachability unestablished.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/verification/counterexample.py",
+          "start_line": 16,
+          "end_line": 21,
+          "observation": "The complete function promises persistence, logs and returns True."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/verification/__init__.py",
+          "start_line": 5,
+          "end_line": 7,
+          "observation": "The package imports the public function."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/verification/__init__.py",
+          "start_line": 27,
+          "end_line": 30,
+          "observation": "The function is included in __all__."
+        }
+      ],
+      "guards": [
+        "External logging handlers might retain logs but are not a cortex persistence operation or its acknowledged result.",
+        "No active production caller was established by targeted search."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/09-review-method.md"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0220",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "crates/b60-lang/src/arithmetic.rs",
+      "current_source_sha256": "bc58dc521b4bf5040ec203e34e311f47b9c8639939b7065acec029bbb00588d4",
+      "rationale": "from_rational(0,60,60) returns fields (0,FRACTION_BASE) instead of the canonical (1,0). Derived fieldwise equality/order distinguish equal durations, and sub against new(1,0) returns underflow because seconds is smaller. The denominator-divisibility guard accepts this input; no numerator bound or normalization is imposed. No Rust execution occurred.",
+      "source_checks": [
+        {
+          "path": "crates/b60-lang/src/arithmetic.rs",
+          "start_line": 5,
+          "end_line": 11,
+          "observation": "Tick60 derives fieldwise equality/order over public seconds and sexa_units."
+        },
+        {
+          "path": "crates/b60-lang/src/arithmetic.rs",
+          "start_line": 18,
+          "end_line": 33,
+          "observation": "new normalizes carry, but from_rational directly returns num*factor."
+        },
+        {
+          "path": "crates/b60-lang/src/arithmetic.rs",
+          "start_line": 45,
+          "end_line": 54,
+          "observation": "sub uses normalized-field assumptions in its underflow check."
+        }
+      ],
+      "guards": [
+        "The denominator divisibility assertion does not require num<denom.",
+        "Existing common fractional call sites do not constrain this public constructor."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/09-review-method.md"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0398",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "examples/fl005_toctou_stress.rs",
+      "current_source_sha256": "25580acea40e38729c0df1e3bc9261d727a5b655c115a278b427e46db724aa4e",
+      "rationale": "Confirmed with a narrowed current trigger: --workers 2 --iterations 2 makes both workers execute only iter=0, so neither attacks the protected backend; worker 1 takes the direct clean mutation branch and can provide the single authorized operation needed by pass. The original 1-worker deletion trigger no longer works because current secure_delete returns MissingAuthorization. The separate naive baseline always attempts attacks, but is not part of pass. No native run was executed.",
+      "source_checks": [
+        {
+          "path": "examples/fl005_toctou_stress.rs",
+          "start_line": 196,
+          "end_line": 228,
+          "observation": "Only iterations not divisible by three perform the adversarial swap."
+        },
+        {
+          "path": "examples/fl005_toctou_stress.rs",
+          "start_line": 234,
+          "end_line": 286,
+          "observation": "Worker 0/iter 0 deletes; worker 1/iter 0 directly invokes NativeSecureFs::secure_mutate and increments authorized_mutations on success."
+        },
+        {
+          "path": "examples/fl005_toctou_stress.rs",
+          "start_line": 322,
+          "end_line": 325,
+          "observation": "A separate naive baseline always runs 500 iterations."
+        },
+        {
+          "path": "examples/fl005_toctou_stress.rs",
+          "start_line": 353,
+          "end_line": 360,
+          "observation": "Two workers and two total iterations yield one iteration per worker."
+        },
+        {
+          "path": "examples/fl005_toctou_stress.rs",
+          "start_line": 399,
+          "end_line": 444,
+          "observation": "The pass predicate omits attack count, security_aborts and baseline success and controls the success status/exit."
+        },
+        {
+          "path": "src/secure_fs.rs",
+          "start_line": 2055,
+          "end_line": 2065,
+          "observation": "The compatibility deletion API now rejects all calls with MissingAuthorization."
+        },
+        {
+          "path": "src/secure_fs.rs",
+          "start_line": 1088,
+          "end_line": 1125,
+          "observation": "The direct native mutation backend checks descriptor identity and prestate; it remains the clean mutation branch used here."
+        }
+      ],
+      "guards": [
+        "Victim existence, inode and hash plus zero damage and one authorized operation are required.",
+        "Current deletion authorization blocks the old minimal trigger but does not fix the pass predicate.",
+        "Naive baseline attacks do not establish containment of attacks on the protected backend."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/09-review-method.md"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0478",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_cortex/consolidate_babylon_vault.py",
+      "current_source_sha256": "9f3e240384cab9bf42076bd4a64bc6116a16ad6c210ef233827c372e9ef83421",
+      "rationale": "The consolidation source uses a fixed embedded catalogue, hashes those embedded summaries, writes L1/L3/consolidation records, commits and reports SUCCESS. It never reads the declared report paths or session logs. Existing-session lookup only avoids reimporting an ID; it does not establish source existence or that its actual content was consolidated. No vault was opened.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_cortex/consolidate_babylon_vault.py",
+          "start_line": 18,
+          "end_line": 35,
+          "observation": "Report locations are declared and the embedded session catalogue begins."
+        },
+        {
+          "path": "scripts/c5_cortex/consolidate_babylon_vault.py",
+          "start_line": 164,
+          "end_line": 181,
+          "observation": "The loop trusts each static tuple and creates consolidated-memory nodes."
+        },
+        {
+          "path": "scripts/c5_cortex/consolidate_babylon_vault.py",
+          "start_line": 184,
+          "end_line": 224,
+          "observation": "Static tuples become inference records and consolidation receipts, then commit and SUCCESS."
+        }
+      ],
+      "guards": [
+        "Already-consolidated session IDs are skipped.",
+        "No source read, source digest or evidence-existence check precedes recording a consolidation."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/09-review-method.md"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0234",
+      "decision": "REPRODUCED",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_demos/poc_mass_stage3_resolution.py",
+      "current_source_sha256": "1b6386d8b691e4f22003cbbe4e971e332aa927d300f6cb0f4df2c07478731f6b",
+      "rationale": "Reproduced by executing only the exact current pure demonstration classes. With all three simulated tiers false and delegate_to_kernel=True, execute_request returns RESOLVED/Tier1:Antigravity. calls_resolved remains zero, so the returned status and counter also disagree. This is a demonstration defect, not evidence about the production gateway.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_demos/poc_mass_stage3_resolution.py",
+          "start_line": 33,
+          "end_line": 45,
+          "observation": "MockGatewayState exposes independently false tier flags and a resolved counter."
+        },
+        {
+          "path": "scripts/c5_demos/poc_mass_stage3_resolution.py",
+          "start_line": 47,
+          "end_line": 75,
+          "observation": "Delegated mode bypasses the Python breaker; a total outage falls through to the unconditional Tier1 success return."
+        }
+      ],
+      "guards": [
+        "Nondelegated mode eventually returns CIRCUIT_BREAKER_BLOCKED_PYTHON.",
+        "The delegated all-tiers-down branch has no terminal failure return."
+      ],
+      "runtime_executed": true,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/09-review-method.md",
+        "docs/security/evidence/swarm100-round3-20261028/09-source-probes.py",
+        "docs/security/evidence/swarm100-round3-20261028/09-source-probes.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0437",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_git_utils/rewrite_commits.py",
+      "current_source_sha256": "30401c75520a9b251d52d7601f6fae6ea4c25723e904dbe8120dd03008ee4a6f",
+      "rationale": "When main is already checked out with uncommitted tracked changes or local commits, _ensure_main executes reset --hard origin/main before rewrite validation or any backup/clean-state check. The header assumes a backup was already created but neither verifies it nor protects uncommitted work. This is a destructive CLI path, reviewed without executing any Git mutation.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_git_utils/rewrite_commits.py",
+          "start_line": 6,
+          "end_line": 17,
+          "observation": "The header claims prior backup preservation but the script implements no backup step."
+        },
+        {
+          "path": "scripts/c5_git_utils/rewrite_commits.py",
+          "start_line": 28,
+          "end_line": 30,
+          "observation": "checkout main is immediately followed by reset --hard origin/main."
+        },
+        {
+          "path": "scripts/c5_git_utils/rewrite_commits.py",
+          "start_line": 89,
+          "end_line": 102,
+          "observation": "main invokes the reset helper before rewrite and validation."
+        }
+      ],
+      "guards": [
+        "check=True stops subprocess errors; checkout may refuse conflicting branch switches.",
+        "Already being on main permits the destructive reset; an existing branch backup would not preserve uncommitted changes."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/09-review-method.md"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0210",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_quality_gates/swarm_lock_guard.py",
+      "current_source_sha256": "304453e8a4f21c1da0b2ecc2dfa2117d52f62493ab9c9534d5ff5ba1490abad5",
+      "rationale": "Stale detection reads existence and mtime separately from unlink. One contender may replace a stale lock before another unlinks based on the old observation; release similarly removes whichever lock occupies the path. Age alone also evicts a still-running operation after 300 seconds. Targeted search found no external mutation consumer, so impact is established for the helper contract, not a proven deployed race.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_quality_gates/swarm_lock_guard.py",
+          "start_line": 16,
+          "end_line": 37,
+          "observation": "Age-based eviction precedes O_EXCL acquisition; no owner or inode is checked."
+        },
+        {
+          "path": "scripts/c5_quality_gates/swarm_lock_guard.py",
+          "start_line": 44,
+          "end_line": 58,
+          "observation": "Release unlinks any existing lock, and the CLI immediately releases after acquisition."
+        }
+      ],
+      "guards": [
+        "O_EXCL makes initial creation atomic.",
+        "Written PID/EPOCH are not read to validate liveness or ownership, and no heartbeat exists."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/09-review-method.md"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0416",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_skills_ontology/sync_skills_registry.py",
+      "current_source_sha256": "d8e8b78660f81d52b7a0f26de41a58a30d456a173cd33f96283d369f8dfa6eb4",
+      "rationale": "Verify computes removal of ghost entries and updates routing metadata/adjacency in memory, then returns only whether new physical skills were missing. A registry with no missing physical skill but stale entries or changed metadata therefore passes while its stored bytes remain stale. CLI maps the boolean to exit 0. No real registry synchronization was run.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_skills_ontology/sync_skills_registry.py",
+          "start_line": 363,
+          "end_line": 389,
+          "observation": "The loaded registry is reduced by purged_skills before only missing physical skills are counted."
+        },
+        {
+          "path": "scripts/c5_skills_ontology/sync_skills_registry.py",
+          "start_line": 417,
+          "end_line": 469,
+          "observation": "Scope, role, aliases, descriptions and audit data are recomputed."
+        },
+        {
+          "path": "scripts/c5_skills_ontology/sync_skills_registry.py",
+          "start_line": 476,
+          "end_line": 498,
+          "observation": "verify_only returns len(missing)==0 and exits before writing or comparing the recomputed registry."
+        },
+        {
+          "path": "scripts/c5_skills_ontology/sync_skills_registry.py",
+          "start_line": 513,
+          "end_line": 523,
+          "observation": "--verify passes that boolean to process exit."
+        }
+      ],
+      "guards": [
+        "A missing registry or a newly missing physical skill can fail verification.",
+        "There is no stored-vs-recomputed content comparison for purges or metadata changes."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/09-review-method.md"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0258",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/repatriated/run_swarm_batch_021_040.py",
+      "current_source_sha256": "374ead608060216a9dc2a8c28b1a34a382e0fef8f9b8f3bd1c024a4834fcbd9c",
+      "rationale": "Every keyword/default branch assigns SURVIVE in advance; the causal score counts those labels and the other scores use text statistics. The report then asserts POPPERIAN_SURVIVED, checked invariants and successful falsification, without performing any falsification procedure. The defect is unsupported report certification; it is not an adjudication of every underlying scientific claim. The report writer was not run.",
+      "source_checks": [
+        {
+          "path": "scripts/repatriated/run_swarm_batch_021_040.py",
+          "start_line": 24,
+          "end_line": 64,
+          "observation": "Topic matching assigns only SURVIVE and computes line/token/label scores."
+        },
+        {
+          "path": "scripts/repatriated/run_swarm_batch_021_040.py",
+          "start_line": 68,
+          "end_line": 96,
+          "observation": "The rendered report claims structural invariants checked and resistance to falsification."
+        },
+        {
+          "path": "scripts/repatriated/run_swarm_batch_021_040.py",
+          "start_line": 113,
+          "end_line": 124,
+          "observation": "The report approves corpus inclusion and writes those claims to disk."
+        }
+      ],
+      "guards": [
+        "Text statistics and keyword selection provide no empirical or logical rejection condition.",
+        "No failure verdict or falsification result is consumed by the generator."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/09-review-method.md"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0032",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tests/test_moskv_native_host.py",
+      "current_source_sha256": "c59a51e487e00890fa2bb4c7e4b1a1193693038e9c493dd4a9c58ae16be7cdbc",
+      "rationale": "The FIFO test imports the production fixed /tmp queue path and unlinks it at both ends without requesting a temporary fixture or monkeypatch. The active autouse fixture only runs garbage collection and does not replace the path. Running this test can delete the native host queue or race host operations. No test touching that queue was executed.",
+      "source_checks": [
+        {
+          "path": "tests/test_moskv_native_host.py",
+          "start_line": 100,
+          "end_line": 120,
+          "observation": "The FIFO test directly deletes, enqueues into and reads the production QUEUE_FILE."
+        },
+        {
+          "path": "scripts/c5_cli/moskv_native_host.py",
+          "start_line": 180,
+          "end_line": 210,
+          "observation": "QUEUE_FILE is an absolute fixed path and both enqueue/dequeue use it."
+        },
+        {
+          "path": "tests/conftest.py",
+          "start_line": 38,
+          "end_line": 43,
+          "observation": "The autouse fixture only invokes garbage collection."
+        },
+        {
+          "path": "tests/conftest.py",
+          "start_line": 46,
+          "end_line": 55,
+          "observation": "Optional isolation changes CWD/TMPDIR, but is not requested and cannot rewrite this absolute constant."
+        }
+      ],
+      "guards": [
+        "No test-local monkeypatch or fixture redirects QUEUE_FILE.",
+        "The separately named hermetic selftest does not guard this FIFO test."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/09-review-method.md"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0380",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/turn/configuration.md",
+      "current_source_sha256": "8df0cf402a41dd2a8205b9fc94f868df48273ef9e85cf1ad690732ac1e2469b7",
+      "rationale": "The complete Basic Worker example treats any nonempty Authorization header as authenticated, then uses the server TURN secret to obtain and return credentials. If copied into a reachable deployment with working credentials, an arbitrary header can obtain relay access. This is an insecure documentation example; no deployed endpoint or actual Cloudflare request was identified or invoked.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/codex_overrides/cloudflare/references/turn/configuration.md",
+          "start_line": 76,
+          "end_line": 98,
+          "observation": "The only client-auth guard tests header presence before the upstream request."
+        },
+        {
+          "path": "tools/skill_library/codex_overrides/cloudflare/references/turn/configuration.md",
+          "start_line": 100,
+          "end_line": 125,
+          "observation": "Successful upstream credentials are returned without any further client validation."
+        }
+      ],
+      "guards": [
+        "Missing headers are rejected and upstream failure produces HTTP 500.",
+        "Neither header content, signature, issuer, expiry nor server-side session is verified in this complete example."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/09-review-method.md"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0104",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/global/c5-neural-face-swap-cuadrilla/scripts/c5_smoother.py",
+      "current_source_sha256": "f7bff84335095d0c44722ad7ebb37f3e128372cd9c76ec632e76f8cba05065ad",
+      "rationale": "A new assigned track is appended at creation but never added to matched_tracks. The following lost-track loop immediately increments its lost count to one and appends that same face/identity/track again under the default extrapolation threshold. The CLI iterates every assignment and has no duplicate-track filter, allowing redundant swap/compositing for an eligible face. No image or inference pipeline was run.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/global/c5-neural-face-swap-cuadrilla/scripts/c5_smoother.py",
+          "start_line": 118,
+          "end_line": 123,
+          "observation": "The default max_extrapolate is two."
+        },
+        {
+          "path": "tools/skill_library/global/c5-neural-face-swap-cuadrilla/scripts/c5_smoother.py",
+          "start_line": 174,
+          "end_line": 193,
+          "observation": "matched_tracks starts empty and only existing matches are inserted."
+        },
+        {
+          "path": "tools/skill_library/global/c5-neural-face-swap-cuadrilla/scripts/c5_smoother.py",
+          "start_line": 256,
+          "end_line": 280,
+          "observation": "New tracks are appended, then treated as lost and appended again."
+        },
+        {
+          "path": "tools/skill_library/global/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+          "start_line": 334,
+          "end_line": 334,
+          "observation": "The consumer explicitly constructs FaceTracker with max_extrapolate=2."
+        },
+        {
+          "path": "tools/skill_library/global/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+          "start_line": 365,
+          "end_line": 408,
+          "observation": "The consumer iterates all assignments, checking identity and size but not uniqueness."
+        }
+      ],
+      "guards": [
+        "Unassigned identity_idx<0 tracks are not appended.",
+        "max_extrapolate=0 suppresses the duplicate append, but the active consumer uses two and lost is still incremented.",
+        "Small faces can be skipped by the consumer; an eligible assigned face reaches repeated processing."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/09-review-method.md"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0266",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/global/f5tts-voice-cloning-sota/scripts/synthesize_vocal_clone.py",
+      "current_source_sha256": "7f579d14afdf8388c7e40f6accba159f184f6a7f9f7d9f91bec7f34f575f6311",
+      "rationale": "Every synthesis writes the same absolute raw audio file before ffmpeg reads it, without exclusivity, locking, a per-run directory or subsequent removal. Overlapping invocations with distinct intended outputs can therefore convert another run's audio or race a partial write; successful runs also retain the intermediate speech file. No model, voice manifest, audio or ffmpeg process was accessed.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/global/f5tts-voice-cloning-sota/scripts/synthesize_vocal_clone.py",
+          "start_line": 55,
+          "end_line": 59,
+          "observation": "The final output can differ by argument or speaker; this does not isolate the intermediate file."
+        },
+        {
+          "path": "tools/skill_library/global/f5tts-voice-cloning-sota/scripts/synthesize_vocal_clone.py",
+          "start_line": 107,
+          "end_line": 108,
+          "observation": "All invocations write /tmp/f5_raw_synthesis.wav."
+        },
+        {
+          "path": "tools/skill_library/global/f5tts-voice-cloning-sota/scripts/synthesize_vocal_clone.py",
+          "start_line": 121,
+          "end_line": 140,
+          "observation": "ffmpeg later reads that path; completion and clipboard code never clean the intermediate."
+        }
+      ],
+      "guards": [
+        "Manifest/reference checks occur earlier but do not serialize synthesis calls.",
+        "check=True detects ffmpeg failure, not a valid conversion of another invocation's audio."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/09-review-method.md"
+      ]
+    }
+  ]
+}

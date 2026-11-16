@@ -1,0 +1,26 @@
+{
+  "command": [
+    "uv",
+    "run",
+    "--locked",
+    "--no-sync",
+    "python",
+    "-c",
+    "import os,tempfile,socket,sys\nhome=tempfile.TemporaryDirectory(prefix=\"b60-lot12-s4-home-\")\nos.environ[\"HOME\"]=os.path.realpath(home.name)\nfor key in [\"CLOUDFLARE_API_TOKEN\",\"APPLE_DOMAIN_CODE\",\"CORTEX_VAULT_KEY\",\"KIMI_API_KEY\",\"MOONSHOT_API_KEY\",\"OPENROUTER_API_KEY\"]:os.environ.pop(key,None)\nos.environ[\"BABYLON60_SIGNING_SEED\"]=\"00\"*32\nimport dotenv\ndotenv.load_dotenv=lambda *a,**k:False\ndotenv.dotenv_values=lambda *a,**k:{}\ndef blocked(*a,**k):raise AssertionError(\"Network forbidden in S4 fixtures\")\nsocket.getaddrinfo=blocked\noriginal=socket.socket.connect\ndef connect(self,*a,**k):\n if self.family in (socket.AF_INET,socket.AF_INET6):return blocked()\n return original(self,*a,**k)\nsocket.socket.connect=connect\nimport pytest\nraise SystemExit(pytest.main(sys.argv[1:]))\n",
+    "/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/b60-s4-original-aa_a5lqu/tests/test_original_five.py",
+    "-q",
+    "-o",
+    "addopts=--tb=short"
+  ],
+  "exit_code": 1,
+  "source_sha256": {
+    "scripts/c5_cli/moskv_native_host.py": "37e151085da1c01ecd002c9e7839ff366510527c55442a983f6e4a062c08d92a",
+    "01_KISH_ENGINE/babylon60/cortex/cortex_purge_anergy.py": "7bcfb0040094964013cd1e539cb0a8051e71fd0f7fbfbe18e5a2de17c7fa6d1c",
+    "scripts/c5_git_utils/rewrite_commits.py": "30401c75520a9b251d52d7601f6fae6ea4c25723e904dbe8120dd03008ee4a6f",
+    "scripts/c5_icloud_deploy.py": "fb8414b9e3583108e1caaae3dec41a5bada01efb17c7c1d415029592cbee328e",
+    "tools/install_shield.sh": "bbedf380b5945b2c432af96352a0f640ccf09e1e9858ad1498ad61a33919583d"
+  },
+  "harness": "baseline_five_cases.py",
+  "harness_sha256": "9eabb68eff4e75a367fff30d2a3628b0333d6fd50a481786f44f37e2b120d133",
+  "note": "Five initial behavioral counterexamples replayed against immutable pre-edit source snapshots; no live source rollback."
+}

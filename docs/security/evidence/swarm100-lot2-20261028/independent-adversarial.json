@@ -1,0 +1,41 @@
+{
+  "checks": [
+    {
+      "source": "tools/skill_library/global/anergy-purge-protocol/scripts/anergy_purge.py",
+      "case": "unlink_failure_preserves_and_counts_zero",
+      "passed": true
+    },
+    {
+      "source": "tools/skill_library/global/anergy-purge-protocol/scripts/anergy_purge.py",
+      "case": "fifo_symlink_unknown_bytecode_and_home_guard",
+      "passed": true
+    },
+    {
+      "source": "tools/skill_library/global/anergy-purge-protocol/scripts/anergy_purge.py",
+      "case": "replacement_before_inode_recheck_preserved",
+      "passed": true
+    },
+    {
+      "source": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/anergy-purge-protocol/scripts/anergy_purge.py",
+      "case": "unlink_failure_preserves_and_counts_zero",
+      "passed": true
+    },
+    {
+      "source": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/anergy-purge-protocol/scripts/anergy_purge.py",
+      "case": "fifo_symlink_unknown_bytecode_and_home_guard",
+      "passed": true
+    },
+    {
+      "source": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/anergy-purge-protocol/scripts/anergy_purge.py",
+      "case": "replacement_before_inode_recheck_preserved",
+      "passed": true
+    },
+    {
+      "source": "scripts/c5_cortex/autoconsolidate.py",
+      "case": "rejects_before_path_resolution",
+      "passed": true
+    }
+  ],
+  "passed": 7,
+  "scope": "temporary files only; no main/cohorts/global stores/network"
+}

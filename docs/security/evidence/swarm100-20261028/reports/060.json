@@ -1,0 +1,430 @@
+{
+  "shard": "060",
+  "findings": [
+    {
+      "title": "Aeon verifier trusts the public key supplied by the untrusted manifest",
+      "severity": "P1",
+      "path": "crates/babylon-attest/src/conformal_tree.rs",
+      "line": 206,
+      "evidence": "Lines 206-219 construct VerifyingKey exclusively from sovereign_identity.l0_public_key_b64; lines 227-236 make overall_valid depend on that signature and a literal status. Consumer main.rs:519-537 returns success for overall_valid.",
+      "trigger": "An arbitrary signer supplies a manifest containing its own public key and a signature over its chosen root.",
+      "impact": "verify-aeon reports successful kernel attestation for an identity never provisioned or trusted by the operator.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Aeon identity, claim count and hardware metadata are outside the signature",
+      "severity": "P2",
+      "path": "crates/babylon-attest/src/conformal_tree.rs",
+      "line": 227,
+      "evidence": "Only hex-decoded merkle_root is passed to vk.verify. aeon_id, total_claims_sealed and hardware_uuid are subsequently returned and printed by main.rs:522-534 without cryptographic binding; signed_payload is unused.",
+      "trigger": "Change an existing valid manifest's aeon_id, total_claims_sealed or hardware_attestation while retaining its root/signature.",
+      "impact": "The CLI still certifies the modified manifest and prints unverified metadata alongside the valid signature.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Full-spectrum auditor emits PASS and certified measurements without performing checks",
+      "severity": "P1",
+      "path": "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py",
+      "line": 80,
+      "evidence": "audit_cohort_ring0 sets PASS and assigns atomic/concurrency/biometric claims as strings (lines 80 onward). Formal cohort likewise assigns certification strings; linguistic entropy is a constant (ent=4.967), not calc_shannon_entropy. run_100_agents_audit aggregates these verdicts and persists them as a SITREP.",
+      "trigger": "Run the advertised audit against a broken or unverified implementation.",
+      "impact": "Audit artifact claims successful security/formal/physical verification even though the relevant implementation and measurements were never inspected.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Deployment script exits successfully after both publication commands fail",
+      "severity": "P2",
+      "path": "scripts/c5_deploy/deploy.sh",
+      "line": 12,
+      "evidence": "The gh repo create command falls back to git push; neither final failure is checked, and the last echo on line 14 determines a successful shell exit status. No set -e is present.",
+      "trigger": "Repository creation and fallback push both fail (for example missing authorization or absent master branch).",
+      "impact": "Caller receives exit 0 and BABYLON-60 Online despite no successful publication.",
+      "confidence": "high",
+      "kind": "runtime"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-kernel/src/forensic_quarantine/mod.rs",
+      "line": 33,
+      "hypothesis": "Cryptographic/WORM description exceeds this in-memory API: public mutable fields and public recomputable FNV-1a checksum do not authenticate snapshots. Targeted reference search found only local tests, so no production integrity-gate bypass is established."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/bft/b60_native.py",
+      "line": 392,
+      "hypothesis": "verify_mimetic_nilpotency returns documented success code 0 when native verifier is absent. Targeted references found no external consumer, so impact on protected execution is unestablished."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/tunnel/api.md",
+      "line": 165,
+      "hypothesis": "Tunnel token and DNS/private-route example API paths merit official API validation; no network or deployed behavior was checked in this audit."
+    },
+    {
+      "path": "01_KISH_ENGINE/cortex/crates/cortex-lsp/src/diagnostics.rs",
+      "line": 21,
+      "hypothesis": "String find and len supply UTF-8 byte columns to published diagnostics; Unicode documents may need protocol-position conversion. Consumer publish_diagnostics traced, but protocol encoding negotiation not fully reviewed."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".agents/skills/c5-wetware-and-venture-ops-project/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          50
+        ]
+      ],
+      "manifest_sha256": "bc7c134d408afe15f8749c4f82f115e3b64f22abdec7ea2e3c330e77426468d7",
+      "observed_sha256": "bc7c134d408afe15f8749c4f82f115e3b64f22abdec7ea2e3c330e77426468d7",
+      "changed": false,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-kernel/src/forensic_quarantine/mod.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          78
+        ]
+      ],
+      "manifest_sha256": "833fdc7b516e25e0dd87089bd9307e79be5f381e335198e65c7f71c84f2dc0ee",
+      "observed_sha256": "833fdc7b516e25e0dd87089bd9307e79be5f381e335198e65c7f71c84f2dc0ee",
+      "changed": false,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/bft/b60_native.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          392
+        ]
+      ],
+      "manifest_sha256": "97f4211c7c417b8da8aa1d20b311110af744684044dbf82fa431c0c18afdeda8",
+      "observed_sha256": "97f4211c7c417b8da8aa1d20b311110af744684044dbf82fa431c0c18afdeda8",
+      "changed": false,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/crypto/keyring.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          198
+        ]
+      ],
+      "manifest_sha256": "e854daf9da75a37980d42920a79ff41ec50eb31c20e427696467e6eab9a6b7c0",
+      "observed_sha256": "e854daf9da75a37980d42920a79ff41ec50eb31c20e427696467e6eab9a6b7c0",
+      "changed": false,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/session_profile.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          38
+        ]
+      ],
+      "manifest_sha256": "38944aa74019d4c2caf4ae703e15106f30377bc008b85576ea1c2adbafd226be",
+      "observed_sha256": "38944aa74019d4c2caf4ae703e15106f30377bc008b85576ea1c2adbafd226be",
+      "changed": false,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/cortex/crates/cortex-lsp/src/diagnostics.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          82
+        ]
+      ],
+      "manifest_sha256": "f2cd73cf2580e2cf1f1485babac489e7dc25b76299a5ea8f739866bef209e34e",
+      "observed_sha256": "f2cd73cf2580e2cf1f1485babac489e7dc25b76299a5ea8f739866bef209e34e",
+      "changed": false,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "crates/babylon-attest/src/conformal_tree.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          293
+        ]
+      ],
+      "manifest_sha256": "6f6d83eeda8e035f9ecb67d48c81dd78e6dd3c520827cf10018792650705db95",
+      "observed_sha256": "6f6d83eeda8e035f9ecb67d48c81dd78e6dd3c520827cf10018792650705db95",
+      "changed": false,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "docs/06_theory/01_robinson_arithmetic.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          43
+        ]
+      ],
+      "manifest_sha256": "1013fc2bcdcc489ba8d500093e6263f5ba07f868da290617e0f1d6a37acc6245",
+      "observed_sha256": "1013fc2bcdcc489ba8d500093e6263f5ba07f868da290617e0f1d6a37acc6245",
+      "changed": false,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "docs/skills.json",
+      "status": "reviewed_partial",
+      "ranges": [
+        [
+          1,
+          100
+        ]
+      ],
+      "manifest_sha256": "ff03e61c32555bc32fa0fd3fe93e94d762abc19f640a8f5190f81f4b7d9fb6b4",
+      "observed_sha256": "ff03e61c32555bc32fa0fd3fe93e94d762abc19f640a8f5190f81f4b7d9fb6b4",
+      "changed": false,
+      "notes": "JSON parsed completely for structure/counts; only first 100 source lines reviewed semantically."
+    },
+    {
+      "path": "sbom.cargo.cdx.json",
+      "status": "reviewed_partial",
+      "ranges": [
+        [
+          1,
+          100
+        ]
+      ],
+      "manifest_sha256": "d95f459ca476d20b5e0be5329dbbe0453024017d66025cc3427df24ece4d4843",
+      "observed_sha256": "d95f459ca476d20b5e0be5329dbbe0453024017d66025cc3427df24ece4d4843",
+      "changed": false,
+      "notes": "JSON parsed completely for structure/counts; only first 100 source lines reviewed semantically."
+    },
+    {
+      "path": "scripts/c5_deploy/deploy.sh",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          14
+        ]
+      ],
+      "manifest_sha256": "ac431904bfbe1885f2ed90c5f1112c4ccc7d99af8dcbcf720f5632708b282d28",
+      "observed_sha256": "ac431904bfbe1885f2ed90c5f1112c4ccc7d99af8dcbcf720f5632708b282d28",
+      "changed": false,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          386
+        ]
+      ],
+      "manifest_sha256": "32cef58031bab84d9fb78b0cbb3ab132008d6f7431f4fe4f6c29da34a8b8876a",
+      "observed_sha256": "32cef58031bab84d9fb78b0cbb3ab132008d6f7431f4fe4f6c29da34a8b8876a",
+      "changed": false,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "scripts/zero_touch_fundraising_poc.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          399
+        ]
+      ],
+      "manifest_sha256": "6d55742ac5233e0c274b4e025ac4cde5c37549e7a1f9e0698e075e67685ce787",
+      "observed_sha256": "6d55742ac5233e0c274b4e025ac4cde5c37549e7a1f9e0698e075e67685ce787",
+      "changed": false,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "tests/property_test.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          58
+        ]
+      ],
+      "manifest_sha256": "7c6fb4fd0d00ae01c0410da2cc511e71117ce5c5e31c1409fc6234ce28325858",
+      "observed_sha256": "7c6fb4fd0d00ae01c0410da2cc511e71117ce5c5e31c1409fc6234ce28325858",
+      "changed": false,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "tests/test_fl_mcp01_dispatch.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          613
+        ]
+      ],
+      "manifest_sha256": "cfb2aeb5c75c8b07d649218a195e2896f566f2ffae2d29bbebc4c3c3df952448",
+      "observed_sha256": "cfb2aeb5c75c8b07d649218a195e2896f566f2ffae2d29bbebc4c3c3df952448",
+      "changed": false,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "tests/test_visual_signature_guard.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          364
+        ]
+      ],
+      "manifest_sha256": "599a5a396fce4501e0de9981a696bc440f50ac12488a236faa7f0f81bb9ae311",
+      "observed_sha256": "599a5a396fce4501e0de9981a696bc440f50ac12488a236faa7f0f81bb9ae311",
+      "changed": false,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/bindings/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          208
+        ]
+      ],
+      "manifest_sha256": "717a119164ee651cfacb8486cba24379e2d8befd1925193747760c4c958de0a7",
+      "observed_sha256": "717a119164ee651cfacb8486cba24379e2d8befd1925193747760c4c958de0a7",
+      "changed": false,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/observability/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          169
+        ]
+      ],
+      "manifest_sha256": "fece0453b3aa1a9d85bc2338ef1a04982dc04aab88e5a72dcbfd0b10ce023b24",
+      "observed_sha256": "fece0453b3aa1a9d85bc2338ef1a04982dc04aab88e5a72dcbfd0b10ce023b24",
+      "changed": false,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/tunnel/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          193
+        ]
+      ],
+      "manifest_sha256": "698055870e668a0827b8bbb83d9016b093e22e4a95f4aabeaca7ef2e0d1e099f",
+      "observed_sha256": "698055870e668a0827b8bbb83d9016b093e22e4a95f4aabeaca7ef2e0d1e099f",
+      "changed": false,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/workers-best-practices/references/rules.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          463
+        ]
+      ],
+      "manifest_sha256": "a4ed597ad250c8560abd63004e58abc4b7ba964c7ab046e72ae08c0417f5e376",
+      "observed_sha256": "a4ed597ad250c8560abd63004e58abc4b7ba964c7ab046e72ae08c0417f5e376",
+      "changed": false,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents/agent_28_site_playbooks_costco.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "manifest_sha256": "1fbcf3768ebf30eb322e8518fa1e66c2b16726becd5ed42615fc5bae237ce413",
+      "observed_sha256": "1fbcf3768ebf30eb322e8518fa1e66c2b16726becd5ed42615fc5bae237ce413",
+      "changed": false,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/cortex-skill-auditor/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          43
+        ]
+      ],
+      "manifest_sha256": "e40924c65e4dbaa82aa27174c5af9a8b0ec6995839dc482f035bff16e0d89dab",
+      "observed_sha256": "e40924c65e4dbaa82aa27174c5af9a8b0ec6995839dc482f035bff16e0d89dab",
+      "changed": false,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/github-architect/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          75
+        ]
+      ],
+      "manifest_sha256": "cf912d55c66912a3832bf4b6012ab38cc6a3c6644c102abf6ffc19afd2fac53d",
+      "observed_sha256": "cf912d55c66912a3832bf4b6012ab38cc6a3c6644c102abf6ffc19afd2fac53d",
+      "changed": false,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/flstudio-mcp-production/examples/Maceo_Plex_Kick.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          85
+        ]
+      ],
+      "manifest_sha256": "d885433cfe00d404891a88dc3c230a3f025279870ca396f7f8accc8c093b6864",
+      "observed_sha256": "d885433cfe00d404891a88dc3c230a3f025279870ca396f7f8accc8c093b6864",
+      "changed": false,
+      "notes": "Static source review; no execution."
+    },
+    {
+      "path": "tools/skill_library/workspace/c5-wetware-and-venture-ops-project/references/modules/adaptive-cron/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          30
+        ]
+      ],
+      "manifest_sha256": "62ecaa628207d50f24e374852129c9709b47d2ff2340aa0a5236ef817ddea516",
+      "observed_sha256": "62ecaa628207d50f24e374852129c9709b47d2ff2340aa0a5236ef817ddea516",
+      "changed": false,
+      "notes": "Static source review; no execution."
+    }
+  ],
+  "tool_limitations": [
+    "Native codebase graph tools are not exposed in ALL_TOOLS; used targeted source reads and rg.",
+    "No tests, builds, runtime, network, deployment or commits executed per audit scope.",
+    "Large generated JSON files received partial semantic review; JSON parsing and manifest hash checks are not full content review.",
+    "Working tree was dirty on main; preserved all existing changes."
+  ],
+  "tests_run": []
+}

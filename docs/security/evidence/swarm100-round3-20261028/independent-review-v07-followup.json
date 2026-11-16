@@ -1,0 +1,130 @@
+{
+  "review": "V07 independent follow-up",
+  "date": "2026-10-28",
+  "verdict": "NO_ACTIONABLE_FINDINGS_WITHIN_REVIEWED_SCOPE",
+  "prior_findings": [
+    {
+      "title": "Unvalidated registry hit replaces evidence or returns stale content",
+      "resolution": "RESOLVED_IN_CURRENT_SOURCE",
+      "source": "01_KISH_ENGINE/babylon60/autodidact/engine.py:192-203"
+    },
+    {
+      "title": "Imported identity loses ancestral dependencies and invalidation cascade",
+      "resolution": "RESOLVED_IN_CURRENT_SOURCE",
+      "source": "01_KISH_ENGINE/babylon60/autodidact/epistemology.py:148-174; engine.py:205-216"
+    }
+  ],
+  "new_findings": [],
+  "method": "Exact Python functions/types/methods extracted with AST from current files and executed with disposable in-memory state; no target-module imports, native APIs, persisted DBs, operator data or network access. The target engine constructor was intentionally not executed.",
+  "checks": [
+    {
+      "test": "registry mismatch rejects evidence",
+      "result": "PASS",
+      "exception": "UnverifiedPremiseError",
+      "state_unchanged": true
+    },
+    {
+      "test": "registry mismatch rejects content",
+      "result": "PASS",
+      "exception": "UnverifiedPremiseError",
+      "state_unchanged": true
+    },
+    {
+      "test": "registry mismatch rejects status",
+      "result": "PASS",
+      "exception": "UnverifiedPremiseError",
+      "state_unchanged": true
+    },
+    {
+      "test": "registry mismatch rejects dependencies",
+      "result": "PASS",
+      "exception": "UnverifiedPremiseError",
+      "state_unchanged": true
+    },
+    {
+      "test": "registry mismatch rejects stored_hash",
+      "result": "PASS",
+      "exception": "UnverifiedPremiseError",
+      "state_unchanged": true
+    },
+    {
+      "test": "original imported-identity ancestor cascade reproducer now passes",
+      "result": "PASS"
+    },
+    {
+      "test": "valid exact registry identity reuses record without duplication or self edge",
+      "result": "PASS"
+    },
+    {
+      "test": "known nogood ancestor rejected before registry/DAG mutation",
+      "result": "PASS",
+      "exception": "UnverifiedPremiseError",
+      "state_unchanged": true
+    },
+    {
+      "test": "multi-level standalone ancestry retained and direct ancestor invalidates imported result",
+      "result": "PASS"
+    },
+    {
+      "test": "unrelated natural-language goal rejected",
+      "result": "PASS",
+      "exception": "UnprovenDerivationError",
+      "state_unchanged": null
+    },
+    {
+      "test": "additional obligation rejected",
+      "result": "PASS",
+      "exception": "UnprovenDerivationError",
+      "state_unchanged": null
+    },
+    {
+      "test": "stale input premise rejected",
+      "result": "PASS",
+      "exception": "UnverifiedPremiseError",
+      "state_unchanged": null
+    },
+    {
+      "test": "invalid input status rejected: falsified",
+      "result": "PASS",
+      "exception": "UnverifiedPremiseError",
+      "state_unchanged": null
+    },
+    {
+      "test": "invalid input status rejected: discredited",
+      "result": "PASS",
+      "exception": "UnverifiedPremiseError",
+      "state_unchanged": null
+    },
+    {
+      "test": "unrelated engine call remains mutation-free",
+      "result": "PASS",
+      "exception": "UnprovenDerivationError",
+      "state_unchanged": true
+    },
+    {
+      "test": "identity preserves evidence confidence status with deep-copy isolation",
+      "result": "PASS"
+    },
+    {
+      "test": "equivalent cached identity retains and registers ancestry",
+      "result": "PASS"
+    }
+  ],
+  "check_count": 17,
+  "all_checks_passed": true,
+  "reviewed_source_sha256": {
+    "01_KISH_ENGINE/babylon60/autodidact/types.py": "5aa59b3488ccf03d7a0bf0f8d4e2573a4f074843c5fde8a852af667e77d9049a",
+    "01_KISH_ENGINE/babylon60/autodidact/epistemology.py": "09b6d8b9431e31ae3b1ac99c6a08e67be900d69f5046fb9d2dcd9f97d505de72",
+    "01_KISH_ENGINE/babylon60/autodidact/engine.py": "65a1c55fe6b53260d2dc60d0b291b2128540a52fb6c05568c616a2f63015143d",
+    "01_KISH_ENGINE/babylon60/autodidact/__init__.py": "ee44d015b7b87e38a02d5c894c5ad2a8dae8eb1e72a3e233a2b57d57c7a857c8",
+    "tests/test_autodidact_derivation_regressions.py": "c0edf27cd5b0d5788913ce3464ec124563a0de4fcacbfddb641205aff4cd945b",
+    "tests/test_autodidact_omega_pipeline.py": "f8cad30bc913212acabd2f4aa58ff362dee62a15439a86eb509f8fd7d9b652fb",
+    "tests/test_autodidact_omega_v2.py": "4cb52bdef86cbfede2f4b1b56fecf05e2a63d423bd5a49dffbc7b7137aca9831"
+  },
+  "prior_evidence_sha256": "97b0ab537aca8d445b459d5aec421adae918745c9bde49e7d8f3ee6f0986c3c4",
+  "limitations": [
+    "No full-package integration or protected runtime executed.",
+    "Epistemic-modality paths exercised; existing native Hume integration not invoked.",
+    "Justification semantic truth is outside this identity-only change; verifier remains an obligation-label checker."
+  ]
+}

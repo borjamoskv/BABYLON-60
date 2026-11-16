@@ -1,0 +1,386 @@
+{
+  "shard": "017",
+  "findings": [
+    {
+      "title": "Chain verification does not authenticate statement or justification payloads",
+      "severity": "P1",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/ledger.rs",
+      "line": 367,
+      "evidence": "verify_chain hashes stored s_hash/j_hash only (lines 345-374); get_statement/get_justification load payloads without recomputing hashes (497-526). publisher.rs:31-47 verifies then exports these payloads; bindings.rs:35-44 rehydrates them.",
+      "trigger": "Modify statements.content/modality/obligations_json or justifications.payload_json in an existing database without changing their hash keys.",
+      "impact": "Replay and export accept altered knowledge while chain verification succeeds; valid JSON tampering is not detected.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Nogood primary key prevents revoking the same statement in multiple environments",
+      "severity": "P2",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/ledger.rs",
+      "line": 107,
+      "evidence": "atms_nogoods_log declares nogood_hash TEXT PRIMARY KEY rather than (nogood_hash, environment_id); assert_nogood unconditionally inserts at 335-338.",
+      "trigger": "Call assert_nogood(hash, env_a), then assert_nogood(hash, env_b), or repeat the same revocation.",
+      "impact": "Second revocation returns a SQLite uniqueness error, preventing a per-environment causal revocation record and making retry non-idempotent.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Derived assertion and explicit dependency edges commit separately",
+      "severity": "P2",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/ledger.rs",
+      "line": 310,
+      "evidence": "assert_derived_knowledge calls assert_knowledge, which commits at 299, before beginning its edge transaction at 312; replay propagation relies on edges at 444-465.",
+      "trigger": "Process stops or edge insertion/commit fails after assert_knowledge commits and before assert_derived_knowledge commits its edges.",
+      "impact": "A persisted derived assertion survives without its explicit causal parents, so subsequent revocation closure may omit it.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Technical specification recommends weaker persistence than the canonical contract",
+      "severity": "P2",
+      "path": "docs/01_spec/spec_technical.md",
+      "line": 85,
+      "evidence": "Connection configuration uses PRAGMA synchronous = NORMAL; .babylon60rules requires synchronous = FULL and ledger.rs:57 implements FULL.",
+      "trigger": "An implementer copies section 3.1 as the connection configuration for a new persistent ledger.",
+      "impact": "The normative example contradicts the required durability setting and can propagate a weaker persistence configuration.",
+      "confidence": "high",
+      "kind": "docs"
+    },
+    {
+      "title": "Multi-tenant example trusts a caller-selected identity",
+      "severity": "P2",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/sandbox/patterns.md",
+      "line": 170,
+      "evidence": "userId comes directly from X-User-ID; getSession(userId) and createSession({id:userId}) use it within the shared multi-tenant sandbox (170-181).",
+      "trigger": "Deploy the documented handler where different callers can set X-User-ID and request another caller's session ID.",
+      "impact": "The example supplies no authentication binding, allowing session selection across tenants if adopted directly; this is an example defect, not evidence of a deployed service.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "CI example interpolates request JSON into a shell command",
+      "severity": "P2",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/sandbox/patterns.md",
+      "line": 138,
+      "evidence": "repo and branch are read from request.json at 135 and directly interpolated into sandbox.exec git clone at 138.",
+      "trigger": "Adopt the example and submit shell metacharacters through repo or branch.",
+      "impact": "Input changes the command structure and can execute unintended shell commands inside the CI sandbox; no host escape is claimed.",
+      "confidence": "high",
+      "kind": "example"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/sandbox/patterns.md",
+      "line": 186,
+      "description": "The code-execution example also interpolates arbitrary code into python3 -c shell syntax; whether a particular Cloudflare SDK version adds command-layer protections was not verified. The explicit code execution feature itself is intentional."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".agents/skills/babylon60-kernel-invariants/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          24
+        ]
+      ],
+      "sha256_match": true,
+      "notes": "SHA-256 matches frozen shard; text reviewed statically; no runtime execution."
+    },
+    {
+      "path": ".github/workflows/secret_audit.yml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          31
+        ]
+      ],
+      "sha256_match": true,
+      "notes": "SHA-256 matches frozen shard; text reviewed statically; no runtime execution."
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/ledger.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          743
+        ]
+      ],
+      "sha256_match": true,
+      "notes": "SHA-256 matches frozen shard; text reviewed statically; no runtime execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/compliance_exporter/templates/footer.html.j2",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          3
+        ]
+      ],
+      "sha256_match": true,
+      "notes": "SHA-256 matches frozen shard; text reviewed statically; no runtime execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/native_messaging_host.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          147
+        ]
+      ],
+      "sha256_match": true,
+      "notes": "SHA-256 matches frozen shard; text reviewed statically; no runtime execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/utils/watchdog_tui.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          48
+        ]
+      ],
+      "sha256_match": true,
+      "notes": "SHA-256 matches frozen shard; text reviewed statically; no runtime execution."
+    },
+    {
+      "path": "HANDOFF.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          31
+        ]
+      ],
+      "sha256_match": true,
+      "notes": "SHA-256 matches frozen shard; text reviewed statically; no runtime execution."
+    },
+    {
+      "path": "docs/01_spec/spec_technical.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          113
+        ]
+      ],
+      "sha256_match": true,
+      "notes": "SHA-256 matches frozen shard; text reviewed statically; no runtime execution."
+    },
+    {
+      "path": "docs/cortex_lsp_setup.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          87
+        ]
+      ],
+      "sha256_match": true,
+      "notes": "SHA-256 matches frozen shard; text reviewed statically; no runtime execution."
+    },
+    {
+      "path": "proof/bundles/attestation_bundle_v2/manifest.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          15
+        ]
+      ],
+      "sha256_match": true,
+      "notes": "SHA-256 matches frozen shard; text reviewed statically; no runtime execution."
+    },
+    {
+      "path": "scripts/c5_demos/lakefile.toml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          10
+        ]
+      ],
+      "sha256_match": true,
+      "notes": "SHA-256 matches frozen shard; text reviewed statically; no runtime execution."
+    },
+    {
+      "path": "scripts/c5_quality_gates/documented_reference_contexts.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          629
+        ]
+      ],
+      "sha256_match": true,
+      "notes": "All lines reviewed statically, including previously truncated 291-419 read separately. SHA-256 matches frozen shard. Reference target existence/context hashes were not exhaustively revalidated."
+    },
+    {
+      "path": "scripts/guards/c5_ide_symlink_guard.sh",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          5
+        ]
+      ],
+      "sha256_match": true,
+      "notes": "SHA-256 matches frozen shard; text reviewed statically; no runtime execution."
+    },
+    {
+      "path": "src/z3_oracle.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          84
+        ]
+      ],
+      "sha256_match": true,
+      "notes": "SHA-256 matches frozen shard; text reviewed statically; no runtime execution."
+    },
+    {
+      "path": "tests/test_bounty_ingestion_pipeline.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          201
+        ]
+      ],
+      "sha256_match": true,
+      "notes": "SHA-256 matches frozen shard; text reviewed statically; no runtime execution."
+    },
+    {
+      "path": "tests/test_presentation_contract.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          169
+        ]
+      ],
+      "sha256_match": true,
+      "notes": "SHA-256 matches frozen shard; text reviewed statically; no runtime execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          248
+        ]
+      ],
+      "sha256_match": true,
+      "notes": "SHA-256 matches frozen shard; text reviewed statically; no runtime execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/email-routing/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          229
+        ]
+      ],
+      "sha256_match": true,
+      "notes": "SHA-256 matches frozen shard; text reviewed statically; no runtime execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/sandbox/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          201
+        ]
+      ],
+      "sha256_match": true,
+      "notes": "SHA-256 matches frozen shard; text reviewed statically; no runtime execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workers/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          185
+        ]
+      ],
+      "sha256_match": true,
+      "notes": "SHA-256 matches frozen shard; text reviewed statically; no runtime execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/scripts/flstudio_mcp_cli.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          196
+        ]
+      ],
+      "sha256_match": true,
+      "notes": "SHA-256 matches frozen shard; text reviewed statically; no runtime execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_21_rideshare.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "sha256_match": true,
+      "notes": "SHA-256 matches frozen shard; text reviewed statically; no runtime execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-ontological-translator/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "sha256_match": true,
+      "notes": "SHA-256 matches frozen shard; text reviewed statically; no runtime execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-wetware-and-venture-ops/references/modules/c5-somatic-panic-deescalation/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          68
+        ]
+      ],
+      "sha256_match": true,
+      "notes": "SHA-256 matches frozen shard; text reviewed statically; no runtime execution."
+    },
+    {
+      "path": "tools/skill_library/global/youtube-remotion-sota/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "sha256_match": true,
+      "notes": "SHA-256 matches frozen shard; text reviewed statically; no runtime execution."
+    }
+  ],
+  "tool_limitations": [
+    "No codebase graph tools exposed by this session; discovery used targeted rg and bounded source reads.",
+    "No tests, builds, runtime checks, external API validation, or medical/legal claim validation performed under audit-only scope.",
+    "Hash comparisons matched all 25 assigned files. Frozen manifest metadata was read; repository contained pre-existing changes and was not modified."
+  ],
+  "tests_run": []
+}

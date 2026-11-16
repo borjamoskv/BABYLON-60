@@ -1,0 +1,32 @@
+[
+  {
+    "command": [
+      "bash",
+      "-n",
+      "tools/install_shield.sh"
+    ],
+    "stdin_source": null,
+    "exit_code": 0,
+    "log": "docs/security/evidence/swarm100-lot12-20261030/language-final-0.log"
+  },
+  {
+    "command": [
+      "node",
+      "--input-type=module",
+      "--check"
+    ],
+    "stdin_source": "01_KISH_ENGINE/services/email_inbound/worker.js",
+    "exit_code": 0,
+    "log": "docs/security/evidence/swarm100-lot12-20261030/language-final-1.log"
+  },
+  {
+    "command": [
+      "node",
+      "--experimental-vm-modules",
+      "tests/test_swarm100_lot12_s3_worker.mjs"
+    ],
+    "stdin_source": null,
+    "exit_code": 0,
+    "log": "docs/security/evidence/swarm100-lot12-20261030/language-final-2.log"
+  }
+]

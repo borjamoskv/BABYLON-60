@@ -1,0 +1,28 @@
+{
+  "malformed_digest": {
+    "source": "01_KISH_ENGINE/babylon60/verification/finding_contract.py",
+    "source_sha256": "8ded45ed596a822eeaddd371d8c48887ad31e6d8bb12a2ec78cde8c679336512",
+    "constructed": true,
+    "verified": true,
+    "input_digest": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+    "scope": "pure model; no runtime effect"
+  },
+  "actor_shutdown": {
+    "source": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+    "source_sha256": "c0dddf3e209bb945fa1f49a3d372b66b18968ebfcc2ea864ce35b26ebb16b237",
+    "enqueued": 3,
+    "persisted_rows": 1,
+    "unresolved_futures": 2,
+    "stop_timed_out": true,
+    "native_ipc_disabled": true,
+    "scope": "real temporary SQLite; no production database"
+  },
+  "journal_consolidation": {
+    "source": "scripts/c5_cortex/autoconsolidate.py",
+    "source_sha256": "cf266eda26d8c6e1f92177ad7d4effa81b7c0067d246b7c0fb9508f7d25eae93",
+    "initial_rows": 3,
+    "remaining_rows": 0,
+    "replacement_persisted": false,
+    "scope": "real temporary SQLite; no production database"
+  }
+}

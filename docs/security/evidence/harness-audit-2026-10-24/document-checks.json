@@ -1,0 +1,95 @@
+{
+  "report": "docs/security/harness-audit-2026-10-24.md",
+  "local_links": [
+    {
+      "target": "evidence/harness-audit-2026-10-24/source-provenance.json",
+      "exists": true
+    },
+    {
+      "target": "../../02_EDIN_SWARMS/agents_archi/orchestrator/swarm.py",
+      "exists": true
+    },
+    {
+      "target": "evidence/harness-audit-2026-10-24/mirror-manifest.json",
+      "exists": true
+    },
+    {
+      "target": "evidence/harness-audit-2026-10-24/verification-results.json",
+      "exists": true
+    },
+    {
+      "target": "evidence/harness-audit-2026-10-24/negative-controls.json",
+      "exists": true
+    },
+    {
+      "target": "evidence/harness-audit-2026-10-24/artifact-findings.json",
+      "exists": true
+    },
+    {
+      "target": "evidence/harness-audit-2026-10-24/web-facts.json",
+      "exists": true
+    },
+    {
+      "target": "evidence/harness-audit-2026-10-24/followup-controls.json",
+      "exists": true
+    },
+    {
+      "target": "evidence/harness-audit-2026-10-24/quality-gates.json",
+      "exists": true
+    },
+    {
+      "target": "evidence/harness-audit-2026-10-24/concurrent-document-gates.json",
+      "exists": true
+    },
+    {
+      "target": "evidence/harness-audit-2026-10-24/document-checks.json",
+      "exists": true
+    },
+    {
+      "target": "evidence/harness-audit-2026-10-24/commit-selection.json",
+      "exists": true
+    }
+  ],
+  "json_files_parsed": [
+    "artifact-findings.json",
+    "commit-selection.json",
+    "concurrent-document-gates.json",
+    "document-checks.json",
+    "followup-before-controls.json",
+    "followup-controls.json",
+    "mirror-manifest.json",
+    "negative-controls.json",
+    "quality-gates.json",
+    "source-provenance.json",
+    "verification-results.json",
+    "web-facts.json"
+  ],
+  "fences_balanced": true,
+  "document_errors": [],
+  "repository_gate_failures": [],
+  "superseded_repository_gate_failures": [
+    {
+      "command": "python3 scripts/guards/verify_active_topology.py",
+      "exit_code": 1
+    },
+    {
+      "command": "python3 scripts/c5_quality_gates/audit_token_budget.py --workspace-only --skip-ghost-listeners",
+      "exit_code": 2
+    }
+  ],
+  "current_control_evidence": "followup-controls.json",
+  "reproduced_failure_evidence": "followup-before-controls.json",
+  "observed_source_sha256": {
+    "scripts/guards/verify_active_topology.py": "154b69e3cade52c1e880a85f5627a72520bd8be7c9bd869f616eb16bbd11d712",
+    "scripts/c5_quality_gates/audit_token_budget.py": "b2691d55ad10bc4693889a8ca25c3b834e957e8417269f56d55511bd872286c7",
+    "scripts/c5_quality_gates/governance_documents.py": "dcf068c788883eb708e36e08d8be046f4f09de35117c0accebb7d01be8ef04e1",
+    "scripts/c5_quality_gates/audit_semantic_contracts.py": "d19bbaa6595d88735be46ed2cb88307d2e8feb4b0f6ab5fe066ca9118ef08bf1",
+    "tests/test_instruction_gate_regressions.py": "9ee00a43fc9d682698e39f1b1dadcb1aea66c9ee79f1a1fa539d9e2dc8688a2a",
+    ".babylon60rules": "896ef66813dae7b753c365db39817a8f144f525dc1ae4f3259660b1f53db557c",
+    "AGENTS.md": "1c40bfdd2083849bc1f3c266a67871a1594068bc843207c4a1244fe0884f138b",
+    "uv.lock": "d78739746ac5d442a074ad73cbc7fc06d6e803558126f65fbc3d6d251d4c1fb4",
+    "Cargo.lock": "6feb30a642ee2fa6ca16dd6f73d01713104738a440d9d98a6e528c22c8307eb7"
+  },
+  "scope": "Follow-up document links/anchors, JSON, and current local gate outcomes. Historical failures retained separately; no runtime certification.",
+  "commit_selection_evidence": "commit-selection.json"
+}

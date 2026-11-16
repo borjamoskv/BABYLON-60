@@ -1,0 +1,18 @@
+{
+  "unchanged": true,
+  "before": {
+    "sha256": "2402c2dcfc1832bd614873665d0f31223c2bdf0b4484b799617dd5a3bf976e42",
+    "mode": "0o600",
+    "inode": 550595345,
+    "size": 838,
+    "mtime_ns": 1792808010993115189
+  },
+  "after": {
+    "sha256": "2402c2dcfc1832bd614873665d0f31223c2bdf0b4484b799617dd5a3bf976e42",
+    "mode": "0o600",
+    "inode": 550595345,
+    "size": 838,
+    "mtime_ns": 1792808010993115189
+  },
+  "private_key_material_recorded": false
+}

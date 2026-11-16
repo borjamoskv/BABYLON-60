@@ -1,0 +1,301 @@
+{
+  "reviewer": "03",
+  "date": "2026-10-29",
+  "lot": 10,
+  "decision": "APPROVED_WITH_EXPLICIT_SCOPE",
+  "open_actionable_findings": [],
+  "source_sha256": {
+    "scripts/c5_verifiers/purge_residuals.py": "cd2e547cfac8adf1b0ce6358da3fe20cebc3c45a4bfa0fc339828dcd2a819f7c"
+  },
+  "test_source_sha256": {
+    "tests/test_swarm100_lot10_regressions.py": "256c4d044f9d0402589985adb4e728ff5b43194cc427a0139cb76233c420131a"
+  },
+  "harness_sha256": {
+    "docs/security/evidence/swarm100-lot10-20261029/independent-adversarial.py": "8158311087d02d45db1f218c8588d68ec3af6c9ea2e25f2f0013c54a8f55f8e9"
+  },
+  "unchanged_boundary_sha256": {
+    "scripts/c5_thermo/c5_exergy_optimizer_monitor.py": "1d82392ac3cddd6fd9b226b64c5a28562eea25de29fd5ac4afbbd9ea4cf50d2d",
+    "scripts/c5_cortex/cortex_objectives_transducer.py": "18805a13c7a3c2853b8824c9424dbff05c2d27ebad9c89e2f3b2c98aaf7692ca",
+    "scripts/c5_verifiers/fast_smt_gate.py": "853cd9746178aede419bee382b6e6416482fdbfb8a5eb753269732e3d5e384c1",
+    "pyproject.toml": "50d4594dd2125fcbe7df0578394b5d2c2e6ac7c7dddb4b5fc9be68229eb8d0cd",
+    "uv.lock": "d78739746ac5d442a074ad73cbc7fc06d6e803558126f65fbc3d6d251d4c1fb4",
+    "Cargo.lock": "7c772f6e6ffd29594c5b9bdadb004be09c57af67b60b7be1b56c034a174491b4"
+  },
+  "candidates": [
+    {
+      "decision": "REPRODUCED",
+      "remediation_state": "FIXED",
+      "path": "scripts/c5_verifiers/purge_residuals.py",
+      "current_source_sha256": "cd2e547cfac8adf1b0ce6358da3fe20cebc3c45a4bfa0fc339828dcd2a819f7c",
+      "runtime_executed": true,
+      "runtime_scope": "Only owned temporary roots, live SQLite fixtures and benign Git lock checks; no actual-project purge, operator data, network, hardware or verifier runtime.",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot10-20261029/independent-adversarial.py",
+        "docs/security/evidence/swarm100-lot10-20261029/independent-adversarial-initial.log",
+        "docs/security/evidence/swarm100-lot10-20261029/independent-regressions.log",
+        "docs/security/evidence/swarm100-lot10-20261029/independent-ruff.log",
+        "docs/security/evidence/swarm100-lot10-20261029/before-source-manifest.json",
+        "docs/security/evidence/swarm100-lot10-20261029/before-tests.log"
+      ],
+      "candidate_id": "SW100-C0574",
+      "severity": "P1",
+      "rationale": "The reproduced unlink of operational Git locks by filename is fixed: no lock-deletion branch remains; lock names and Git metadata are excluded. Independent open index.lock/packed-refs.lock preserved inode/content despite old timestamps, and competing Git add remained blocked. These tests show lock preservation, not that prior unlink would necessarily corrupt a repository.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_verifiers/purge_residuals.py",
+          "start_line": 57,
+          "end_line": 65,
+          "observation": "Conservatively identifies bare/main Git metadata (HEAD+objects+refs) and worktree metadata (HEAD+commondir+gitdir) under alternate directory names; metadata subtrees are not scanned for deletion."
+        },
+        {
+          "path": "scripts/c5_verifiers/purge_residuals.py",
+          "start_line": 68,
+          "end_line": 71,
+          "observation": "Case-folded lock/database/SQLite/journal markers and WAL/SHM suffixes are preservation rules, never deletion authority."
+        },
+        {
+          "path": "scripts/c5_verifiers/purge_residuals.py",
+          "start_line": 100,
+          "end_line": 143,
+          "observation": "Bounded descriptor-relative traversal preserves excluded names including .git/scratch/opaque caches, all directories, links/special files, other-device directories and ordinary files. Only .pyc under __pycache__ reaches the deletion helper. Errors are retained in the report and do not imply deletion."
+        },
+        {
+          "path": "scripts/c5_verifiers/purge_residuals.py",
+          "start_line": 146,
+          "end_line": 165,
+          "observation": "Opens only selected root without following a final symlink; returns a structured effects report with NOT_REQUESTED verification. SCOPED_OK means no recorded errors, not repository certification. No SQLite operations or verify_va call."
+        },
+        {
+          "path": "scripts/c5_verifiers/purge_residuals.py",
+          "start_line": 168,
+          "end_line": 180,
+          "observation": "Text/JSON output describes scoped effects and preserves limits; nonzero on report errors; no 0%-entropy or repository-clean certification."
+        }
+      ],
+      "guards": [
+        "Git directory/file and recognized metadata subtree exclusion",
+        "All lock-like names preserved",
+        "No age/PID orphan heuristic",
+        "No directory removal",
+        "No automatic verifier invocation"
+      ]
+    },
+    {
+      "decision": "REPRODUCED",
+      "remediation_state": "FIXED",
+      "path": "scripts/c5_verifiers/purge_residuals.py",
+      "current_source_sha256": "cd2e547cfac8adf1b0ce6358da3fe20cebc3c45a4bfa0fc339828dcd2a819f7c",
+      "runtime_executed": true,
+      "runtime_scope": "Only owned temporary roots, live SQLite fixtures and benign Git lock checks; no actual-project purge, operator data, network, hardware or verifier runtime.",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot10-20261029/independent-adversarial.py",
+        "docs/security/evidence/swarm100-lot10-20261029/independent-adversarial-initial.log",
+        "docs/security/evidence/swarm100-lot10-20261029/independent-regressions.log",
+        "docs/security/evidence/swarm100-lot10-20261029/independent-ruff.log",
+        "docs/security/evidence/swarm100-lot10-20261029/before-source-manifest.json",
+        "docs/security/evidence/swarm100-lot10-20261029/before-tests.log"
+      ],
+      "candidate_id": "SW100-C0575",
+      "severity": "P2",
+      "rationale": "The reproduced scratch/*.db* deletion is removed. Scratch and opaque cache subtrees are preserved; database/sidecar/lock names are preservation rules, and only narrowly recognized owned single-link bytecode may be removed. Independent active SQLite/WAL/SHM remained byte- and inode-identical in scratch and in __pycache__ with a .pyc filename; the live connection remained usable.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_verifiers/purge_residuals.py",
+          "start_line": 68,
+          "end_line": 71,
+          "observation": "Case-folded lock/database/SQLite/journal markers and WAL/SHM suffixes are preservation rules, never deletion authority."
+        },
+        {
+          "path": "scripts/c5_verifiers/purge_residuals.py",
+          "start_line": 52,
+          "end_line": 54,
+          "observation": "Identity/content-change guard includes device, inode, mode, owner, link count, size, mtime and ctime."
+        },
+        {
+          "path": "scripts/c5_verifiers/purge_residuals.py",
+          "start_line": 74,
+          "end_line": 97,
+          "observation": "Only caller-selected regular .pyc candidates owned by the current UID with one link are considered. Open is directory-relative O_NOFOLLOW/O_NONBLOCK; fstat matches prior entry; 17-byte read requires current magic and valid header flags, then fstat/path stat are rechecked. Deletion is recorded only after successful unlink. No bytecode body is deserialized or executed."
+        },
+        {
+          "path": "scripts/c5_verifiers/purge_residuals.py",
+          "start_line": 100,
+          "end_line": 143,
+          "observation": "Bounded descriptor-relative traversal preserves excluded names including .git/scratch/opaque caches, all directories, links/special files, other-device directories and ordinary files. Only .pyc under __pycache__ reaches the deletion helper. Errors are retained in the report and do not imply deletion."
+        },
+        {
+          "path": "scripts/c5_verifiers/purge_residuals.py",
+          "start_line": 146,
+          "end_line": 165,
+          "observation": "Opens only selected root without following a final symlink; returns a structured effects report with NOT_REQUESTED verification. SCOPED_OK means no recorded errors, not repository certification. No SQLite operations or verify_va call."
+        }
+      ],
+      "guards": [
+        "No scratch database glob/unlink",
+        "No rmtree of cache directories",
+        "Database/sidecar name preservation",
+        "No SQLite open/checkpoint/VACUUM in cleanup",
+        "Unknown headers, links, foreign/shared files and special files preserved"
+      ]
+    }
+  ],
+  "source_checks": [
+    {
+      "path": "scripts/c5_verifiers/purge_residuals.py",
+      "start_line": 57,
+      "end_line": 65,
+      "observation": "Conservatively identifies bare/main Git metadata (HEAD+objects+refs) and worktree metadata (HEAD+commondir+gitdir) under alternate directory names; metadata subtrees are not scanned for deletion."
+    },
+    {
+      "path": "scripts/c5_verifiers/purge_residuals.py",
+      "start_line": 68,
+      "end_line": 71,
+      "observation": "Case-folded lock/database/SQLite/journal markers and WAL/SHM suffixes are preservation rules, never deletion authority."
+    },
+    {
+      "path": "scripts/c5_verifiers/purge_residuals.py",
+      "start_line": 52,
+      "end_line": 54,
+      "observation": "Identity/content-change guard includes device, inode, mode, owner, link count, size, mtime and ctime."
+    },
+    {
+      "path": "scripts/c5_verifiers/purge_residuals.py",
+      "start_line": 74,
+      "end_line": 97,
+      "observation": "Only caller-selected regular .pyc candidates owned by the current UID with one link are considered. Open is directory-relative O_NOFOLLOW/O_NONBLOCK; fstat matches prior entry; 17-byte read requires current magic and valid header flags, then fstat/path stat are rechecked. Deletion is recorded only after successful unlink. No bytecode body is deserialized or executed."
+    },
+    {
+      "path": "scripts/c5_verifiers/purge_residuals.py",
+      "start_line": 100,
+      "end_line": 143,
+      "observation": "Bounded descriptor-relative traversal preserves excluded names including .git/scratch/opaque caches, all directories, links/special files, other-device directories and ordinary files. Only .pyc under __pycache__ reaches the deletion helper. Errors are retained in the report and do not imply deletion."
+    },
+    {
+      "path": "scripts/c5_verifiers/purge_residuals.py",
+      "start_line": 146,
+      "end_line": 165,
+      "observation": "Opens only selected root without following a final symlink; returns a structured effects report with NOT_REQUESTED verification. SCOPED_OK means no recorded errors, not repository certification. No SQLite operations or verify_va call."
+    },
+    {
+      "path": "scripts/c5_verifiers/purge_residuals.py",
+      "start_line": 168,
+      "end_line": 180,
+      "observation": "Text/JSON output describes scoped effects and preserves limits; nonzero on report errors; no 0%-entropy or repository-clean certification."
+    }
+  ],
+  "independent_controls": [
+    {
+      "name": "active_old_git_locks_and_mutual_exclusion_preserved",
+      "passed": true,
+      "locks": 2
+    },
+    {
+      "name": "live_sqlite_wal_shm_preserved_in_scratch_and_misnamed_cache",
+      "passed": true,
+      "cases": 2
+    },
+    {
+      "name": "only_recognized_current_bytecode_deleted_precise_report",
+      "passed": true,
+      "deleted": 3,
+      "preserved_fixtures": 10
+    },
+    {
+      "name": "symlinks_fifo_hardlinks_and_external_target_preserved",
+      "passed": true
+    },
+    {
+      "name": "foreign_owner_candidate_preserved",
+      "passed": true
+    },
+    {
+      "name": "git_file_and_alternate_named_metadata_subtrees_preserved",
+      "passed": true,
+      "cases": 2
+    },
+    {
+      "name": "unlink_failure_reported_without_false_deletion_and_cli_nonzero",
+      "passed": true
+    },
+    {
+      "name": "replacement_before_open_preserved_by_identity_check",
+      "passed": true
+    },
+    {
+      "name": "content_change_after_read_preserved_before_unlink",
+      "passed": true
+    },
+    {
+      "name": "scan_budgets_stop_with_explicit_errors",
+      "passed": true,
+      "cases": 2
+    },
+    {
+      "name": "missing_and_symlink_roots_fail_closed",
+      "passed": true,
+      "cases": 2
+    }
+  ],
+  "validation": {
+    "independent_control_count": 11,
+    "temporary_roots": 14,
+    "independent_log": "docs/security/evidence/swarm100-lot10-20261029/independent-adversarial-initial.log",
+    "regressions": {
+      "executed_by_reviewer": true,
+      "passed": 60,
+      "failed": 0,
+      "duration_seconds": 6.9,
+      "log": "docs/security/evidence/swarm100-lot10-20261029/independent-regressions.log"
+    },
+    "ruff": {
+      "executed_by_reviewer": true,
+      "result": "PASS",
+      "log": "docs/security/evidence/swarm100-lot10-20261029/independent-ruff.log",
+      "paths": [
+        "scripts/c5_verifiers/purge_residuals.py",
+        "tests/test_swarm100_lot10_regressions.py",
+        "docs/security/evidence/swarm100-lot10-20261029/independent-adversarial.py"
+      ]
+    },
+    "source_and_test_hashes_stable_before_after": true
+  },
+  "baseline": {
+    "source_sha256": "a6bcbf4d8a6e09c0cfa8362b8745d788ca3999d82a80de2fb9145419bf63f55f",
+    "result": "9 failed in 0.41s",
+    "log": "docs/security/evidence/swarm100-lot10-20261029/before-tests.log",
+    "execution": "Parent baseline log inspected, not independently rerun against original production."
+  },
+  "limitations": [
+    "Recognition examines 17 bytes, current-Python magic and header flags. It does not prove bytecode correctness, provenance or that a caller has semantic authority over every matching artifact. No marshal body is read or executed by production cleanup.",
+    "Descriptor-relative checks reduce substitution/symlink risks but stat/fstat and unlink are not one atomic identity-conditional operation. A concurrent writer can replace a pathname after the final check; no global transaction or hostile-concurrency guarantee is claimed.",
+    "Directories, .DS_Store, opaque caches, scratch, different-Python/unknown bytecode, shared/hardlinked/foreign-owned and special files are intentionally preserved. This is a narrower cleanup capability than the former recursive purge.",
+    "Entry/depth limits or access errors produce ERROR and a nonzero CLI result; prior successful individual deletions are not rolled back. Reports reflect observed entries/subtrees, not an inventory of contents beneath excluded subtrees.",
+    "SCOPED_OK means only that the bounded selected scan recorded no errors. It does not certify overall repository safety, zero entropy, absence of residual data, physical storage reclaimed or any V_A property.",
+    "No purge was run on the actual workspace. All databases were explicitly created inside owned temporary fixtures; Git checks operated only in a temporary repository with isolated HOME/system/global configuration. No operator DB, native protected runtime, network, hardware, keys, publication or ATTESTED artifact was involved."
+  ],
+  "discovery": {
+    "project": "babylon-60",
+    "root": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+    "method": "Native graph search/get_code_snippet/trace_path and coverage first; bounded exact-source reads; changed file reindexed asynchronously and completion observed.",
+    "final_generation": "2026-10-29T22:20:41Z",
+    "freshness": "metadata_match",
+    "consumer_scope": "Script entry point; former verify_va dependency inspected read-only, never executed.",
+    "caveat": "Graph coverage is best effort and source hashes are the review anchors.",
+    "recorded_at": "2026-10-29T22:20:42Z"
+  },
+  "documentation": [
+    {
+      "library": "/python/cpython",
+      "url": "https://github.com/python/cpython/blob/main/Doc/library/os.rst",
+      "supports": "Directory-descriptor relative stat/open/unlink semantics and non-following symlink inspection; these interfaces do not expose atomic inode-conditional unlink."
+    }
+  ],
+  "evidence_paths": [
+    "docs/security/evidence/swarm100-lot10-20261029/independent-adversarial.py",
+    "docs/security/evidence/swarm100-lot10-20261029/independent-adversarial-initial.log",
+    "docs/security/evidence/swarm100-lot10-20261029/independent-regressions.log",
+    "docs/security/evidence/swarm100-lot10-20261029/independent-ruff.log",
+    "docs/security/evidence/swarm100-lot10-20261029/before-source-manifest.json",
+    "docs/security/evidence/swarm100-lot10-20261029/before-tests.log"
+  ]
+}

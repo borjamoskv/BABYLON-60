@@ -1,0 +1,15 @@
+{
+  "reviewer": "06",
+  "complete_candidates": 29,
+  "source_ranges_validated": 84,
+  "current_hashes_match": 29,
+  "referenced_evidence_exists": true,
+  "isolated_source_subset_checks_passed": 5,
+  "protected_runtime_executed": false,
+  "shared_workspace_gates": "Delegated to parent for one aggregate pass; no per-shard global gate executed.",
+  "ruff": {
+    "command": "ruff check docs/security/evidence/swarm100-round3-20261028/06-reproductions.py",
+    "exit_code": 0,
+    "result": "All checks passed!"
+  }
+}

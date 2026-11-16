@@ -16,6 +16,14 @@ from pathlib import Path
 
 RESTRICTIVE_LICENSES = frozenset({"GPL-1", "GPL-2", "GPL-3", "AGPL"})
 PERMISSIVE_KEYWORDS = frozenset({"MIT", "APACHE", "BSD", "ISC", "CC0", "0BSD", "ZLIB", "UNICODE-3.0"})
+REPO_ROOT = Path(__file__).absolute().parents[2]
+
+
+def _is_confined_to_repo(path: Path, root: Path = REPO_ROOT) -> bool:
+    try:
+        return path.resolve().is_relative_to(root.resolve())
+    except OSError:
+        return False
 
 
 def audit_cargo_licenses() -> tuple[list[str], list[str], int]:
@@ -61,14 +69,8 @@ def audit_cargo_licenses() -> tuple[list[str], list[str], int]:
 
         # Split logical license combinations: e.g. "MIT OR Apache-2.0 OR LGPL-2.1-or-later"
         parts = [part.strip(" ()") for part in lic.replace("/", " OR ").split(" OR ")]
-        has_permissive = any(
-            any(perm in part.upper() for perm in PERMISSIVE_KEYWORDS)
-            for part in parts
-        )
-        is_restrictive = any(
-            any(r in part.upper() for r in RESTRICTIVE_LICENSES)
-            for part in parts
-        )
+        has_permissive = any(any(perm in part.upper() for perm in PERMISSIVE_KEYWORDS) for part in parts)
+        is_restrictive = any(any(r in part.upper() for r in RESTRICTIVE_LICENSES) for part in parts)
 
         if is_restrictive and not has_permissive:
             copyleft_violations.append(
@@ -81,11 +83,14 @@ def audit_cargo_licenses() -> tuple[list[str], list[str], int]:
 def audit_node_manifests() -> tuple[list[str], int]:
     violations = []
     total = 0
-    workspace_root = Path(__file__).resolve().parents[2]
+    workspace_root = REPO_ROOT
 
     for p in workspace_root.rglob("package.json"):
         # Ignore external / build directories
         if any(ignored in p.parts for ignored in ("node_modules", "target", ".venv", ".lake", ".git")):
+            continue
+        if not _is_confined_to_repo(p, workspace_root):
+            violations.append(f"{p}: Unconfined manifest path escapes REPO_ROOT")
             continue
         total += 1
         try:
@@ -103,20 +108,18 @@ def audit_node_manifests() -> tuple[list[str], int]:
                 f"{p.relative_to(workspace_root)}: Permissive license {lic!r} violates Sovereign Dual-License"
             )
         if not is_private:
-            violations.append(
-                f"{p.relative_to(workspace_root)}: Missing 'private: true' to block registry upload"
-            )
+            violations.append(f"{p.relative_to(workspace_root)}: Missing 'private: true' to block registry upload")
 
     return violations, total
 
 
 def audit_workflow_publish_locks() -> tuple[list[str], int]:
-    violations = []
+    violations: list[str] = []
     total = 0
-    workspace_root = Path(__file__).resolve().parents[2]
+    workspace_root = REPO_ROOT
     workflows_dir = workspace_root / ".github" / "workflows"
 
-    if not workflows_dir.exists():
+    if not workflows_dir.exists() or not _is_confined_to_repo(workflows_dir, workspace_root):
         return violations, total
 
     forbidden_patterns = [
@@ -126,6 +129,9 @@ def audit_workflow_publish_locks() -> tuple[list[str], int]:
     ]
 
     for wf in workflows_dir.glob("*.yml"):
+        if not _is_confined_to_repo(wf, workspace_root):
+            violations.append(f"{wf.name}: Unconfined workflow path escapes REPO_ROOT")
+            continue
         total += 1
         content = wf.read_text(encoding="utf-8")
         for pattern, desc in forbidden_patterns:
@@ -149,7 +155,9 @@ def main() -> int:
             print(f"   [COPYLEFT] {v}", file=sys.stderr)
         failed = True
     else:
-        print(f"✓ [LICENSE-GATE] Audited {total_cargo} Cargo crates. 100% permissive dependencies, zero copyleft violations, own crates strictly locked.")
+        print(
+            f"✓ [LICENSE-GATE] Audited {total_cargo} Cargo crates. 100% permissive dependencies, zero copyleft violations, own crates strictly locked."
+        )
 
     if node_violations:
         print(f"❌ [LICENSE-GATE] Node package parity failure across {total_node} manifests:", file=sys.stderr)

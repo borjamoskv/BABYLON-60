@@ -1,0 +1,66 @@
+[
+  {
+    "candidate_id": "SW100-C0132",
+    "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "The public orchestrator maps every unrecognized backend string to MOONSHOT_REMOTE and immediately sends the original user prompt through the selected client for decomposition. With a configured remote credential, a typo in a local selector can thus disclose the prompt to the remote provider. This is conditional on calling this API with an invalid selector; no configured key was read and no request was sent.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+        "start_line": 512,
+        "end_line": 552,
+        "observation": "Unknown backend defaults to Moonshot before client construction and task decomposition."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+        "start_line": 120,
+        "end_line": 142,
+        "observation": "Moonshot selection chooses remote URL, key and model."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+        "start_line": 297,
+        "end_line": 311,
+        "observation": "Client sends messages and optional Bearer credential."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+        "start_line": 344,
+        "end_line": 364,
+        "observation": "The original prompt is included in the first call."
+      }
+    ],
+    "source_sha256": "764668378ccdb637bf3d4ff1ef247ee4a4dc28ef24a0c95327515f6c58d5f577"
+  },
+  {
+    "candidate_id": "SW100-C0133",
+    "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "Both remote endpoint factories validate hostname only; an http:// URL for an allowed public provider host is accepted unchanged. The HTTP client receives that URL with messages and a Bearer header when a key is configured. This establishes a missing TLS requirement in the configured path, not observed disclosure; no network request or credential read was performed.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+        "start_line": 52,
+        "end_line": 75,
+        "observation": "Factories return allowed-host URLs without requiring https."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+        "start_line": 244,
+        "end_line": 253,
+        "observation": "The accepted URL is directly passed to AsyncClient.post."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+        "start_line": 297,
+        "end_line": 311,
+        "observation": "Headers include the selected API key and payload includes messages."
+      }
+    ],
+    "source_sha256": "764668378ccdb637bf3d4ff1ef247ee4a4dc28ef24a0c95327515f6c58d5f577"
+  }
+]

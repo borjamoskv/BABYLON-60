@@ -1,0 +1,37 @@
+[
+  {
+    "check": "final-acceptance-software-native",
+    "exit": 0,
+    "command": [
+      "pytest",
+      "tests/test_manual_hardware_cycle.py",
+      "tests/test_fl_mcp01_dispatch.py",
+      "tests/test_cortex_mcp_server.py",
+      "-q",
+      "-rs",
+      "-k",
+      "not test_rust_babylon_skills_mcp_stdio_interop"
+    ]
+  },
+  {
+    "check": "final-ruff",
+    "exit": 0,
+    "command": [
+      "ruff",
+      "check",
+      "tests/manual/hardware_mcp_cycle.py",
+      "tests/test_manual_hardware_cycle.py",
+      "tests/test_fl_mcp01_dispatch.py"
+    ]
+  },
+  {
+    "check": "final-mypy",
+    "exit": 0,
+    "command": [
+      "mypy",
+      "tests/manual/hardware_mcp_cycle.py",
+      "tests/test_manual_hardware_cycle.py",
+      "--follow-imports=skip"
+    ]
+  }
+]

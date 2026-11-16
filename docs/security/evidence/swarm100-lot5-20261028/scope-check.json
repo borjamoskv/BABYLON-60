@@ -1,0 +1,17 @@
+{
+  "result": "PASS",
+  "unchanged_ast": {
+    "LedgerEvent": true,
+    "_compute_entry_hash": true,
+    "_compute_entry_hash_wrapper": true,
+    "cortex_event_to_ledger_event": true,
+    "_init_db": true,
+    "_verified_checkpoint": true,
+    "verify_chain": true,
+    "get_state_attestation": true,
+    "anchor_to_rekor": true,
+    "unchanged_created_at": true,
+    "unchanged_idempotent_key": true,
+    "unchanged_event_id": true
+  }
+}

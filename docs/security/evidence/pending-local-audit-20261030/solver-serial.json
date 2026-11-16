@@ -1,0 +1,18 @@
+{
+  "command": [
+    "cargo",
+    "test",
+    "-q",
+    "--locked",
+    "-p",
+    "babylon60-compiler",
+    "--test",
+    "semantic_solver_adapter",
+    "--test",
+    "solver_trust",
+    "--",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "note": "Serial test scheduling avoids process-startup contention; product deadlines/authentication unchanged"
+}

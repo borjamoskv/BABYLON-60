@@ -1,0 +1,436 @@
+{
+  "shard": "072",
+  "findings": [
+    {
+      "title": "TLOAD is decoded as 0x5e instead of 0x5c",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/bft/defi_bytecode_scraper.py",
+      "line": 44,
+      "evidence": "OPCODE_TLOAD = 0x5C + 2 is counted at lines 223-224; EIP-1153 specifies TLOAD=0x5c and TSTORE=0x5d (https://eips.ethereum.org/EIPS/eip-1153). bounty_pipeline_orchestrator.py:117,130-145 consumes these results for risk-based receipts.",
+      "trigger": "Analyze bytecode containing 5c or 5e.",
+      "impact": "Actual transient reads are missed and unrelated 0x5e instructions are labeled transient reads; balance heuristics and risk receipts become incorrect.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Hook permissions use the most significant address bits",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/bft/defi_bytecode_scraper.py",
+      "line": 83,
+      "evidence": "bits = (addr_int >> (160 - 14)) & 0x3FFF; official Hooks.sol uses the least significant bits (https://raw.githubusercontent.com/Uniswap/v4-core/main/src/libraries/Hooks.sol). analyze_bytecode consumes before_swap and delta flags at lines 287-299.",
+      "trigger": "A hook address ends with 0080 while its high bits are zero, or high bits are set with low hook bits absent.",
+      "impact": "Misses active BEFORE_SWAP and misattributes unrelated address bits as permissions, changing downstream risk decisions.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Updating an existing engine key creates stale eviction entries",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/engine/__init__.py",
+      "line": 33,
+      "evidence": "Every store appends record_key to _keys even when _store already contains it; eviction at lines 28-30 removes the dictionary record for the oldest occurrence. query iterates duplicate _keys at lines 41-46.",
+      "trigger": "With capacity=2, store a, update a, then store b.",
+      "impact": "Eviction removes the current updated a record although another a entry remains, and queries before eviction return duplicate copies of the latest record.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Mail send announces delivery after only appending a local ledger event",
+      "severity": "P2",
+      "path": "scripts/c5_cli/babylon_mail_cli.py",
+      "line": 89,
+      "evidence": "cmd_send only constructs CortexEvent and calls ledger.append_event before printing [SENT] Correo enviado. The ledger append implementation persists a local row; no transport invocation occurs. tests/test_optional_mail_mcp.py:93 explicitly calls BABYLON_MAIL_SENT a compatibility event with no network delivery.",
+      "trigger": "Run the advertised send subcommand expecting recipient delivery.",
+      "impact": "User receives a successful delivery message although the mail is only stored locally; recipient never receives it through this command.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Auth middleware can be skipped through the query string",
+      "severity": "P2",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/pages/patterns.md",
+      "line": 27,
+      "evidence": "Auth example checks context.request.url.includes('/public/') before verifying Authorization; context.next() forwards to the documented routes.",
+      "trigger": "Use the example middleware with a request such as /api/todos/1?next=/public/.",
+      "impact": "Unauthenticated requests can reach protected handlers if this reusable example is adopted. This is an example vulnerability, not evidence of a deployed service.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "HTML error response interpolates exception text without escaping",
+      "severity": "P2",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/pages/patterns.md",
+      "line": 99,
+      "evidence": "The error middleware interpolates ${error.message} into an HTML response with text/html.",
+      "trigger": "A downstream handler throws an exception whose message contains attacker-controlled HTML.",
+      "impact": "The example reflects markup into the browser, enabling script injection under an applicable policy. No deployed endpoint was established.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Native host dry-run changes executable permissions",
+      "severity": "P3",
+      "path": "01_KISH_ENGINE/extensions/moskv-fx-scavenger/setup_native_host.sh",
+      "line": 64,
+      "evidence": "chmod +x \"$KERNEL_SCRIPT\" runs before the DRY_RUN conditional at lines 132-137.",
+      "trigger": "Run --dry-run when moskv_native_host.py is not already executable.",
+      "impact": "A command documented as printing the manifest without writing changes repository file permissions.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Chunk allocation ignores the supplied swarm size",
+      "severity": "P2",
+      "path": "scripts/c5_edin/remotion_swarm_orchestrator.py",
+      "line": 40,
+      "evidence": "allocate_chunks loops over self.swarm_size but uses FRAMES_PER_AGENT calculated from the global SWARM_SIZE=10000.",
+      "trigger": "Instantiate AgencyHypervisor with any non-default swarm_size.",
+      "impact": "Allocated chunks cover fewer than TOTAL_FRAMES for a smaller swarm or extend beyond it for a larger swarm; the provided default simulation does not exercise this.",
+      "confidence": "high",
+      "kind": "example"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "tools/codex_tunnel.py",
+      "line": 309,
+      "observation": "Daemon accepts status ATTESTED plus signature string length >=64 without cryptographic verification or hash/key binding.",
+      "uncertainty": "Traced replies to MCP text output via adapters/codex/mcp_server.py:279-281; no protected-effect consumer found in targeted reads. Therefore no authorization bypass is asserted.",
+      "kind": "runtime"
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".agents/skills/thermo-audit/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          22
+        ]
+      ],
+      "manifest_sha256": "b169b5c46868c0ad0ec6603045627d05b036091acdd3d83aa7269b8d8dbe2fa2",
+      "observed_sha256": "b169b5c46868c0ad0ec6603045627d05b036091acdd3d83aa7269b8d8dbe2fa2",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-kernel/tests/semantic_solver_outcomes.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          181
+        ]
+      ],
+      "manifest_sha256": "907f9b7cc1dcc9652bf719a8764b4ba532c426fa0cd3923d16315a91927ad7cd",
+      "observed_sha256": "907f9b7cc1dcc9652bf719a8764b4ba532c426fa0cd3923d16315a91927ad7cd",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/bft/defi_bytecode_scraper.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          323
+        ]
+      ],
+      "manifest_sha256": "a53545028651256202910f1e531ebb096c64b46a21f91859ec629dbb17d698d0",
+      "observed_sha256": "a53545028651256202910f1e531ebb096c64b46a21f91859ec629dbb17d698d0",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/engine/__init__.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          49
+        ]
+      ],
+      "manifest_sha256": "2ec1058abece8b18e6134713bd1c6a493da43735c79e34b1b9415e6df77e3cdf",
+      "observed_sha256": "2ec1058abece8b18e6134713bd1c6a493da43735c79e34b1b9415e6df77e3cdf",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/transducers/fisher_bayesian_gate.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          172
+        ]
+      ],
+      "manifest_sha256": "ccf8206f38a9e3256a7919ab71ac6c217720fdefad1712f7c4e206f8e2c26a40",
+      "observed_sha256": "ccf8206f38a9e3256a7919ab71ac6c217720fdefad1712f7c4e206f8e2c26a40",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/extensions/moskv-fx-scavenger/setup_native_host.sh",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          148
+        ]
+      ],
+      "manifest_sha256": "e8bf290cfe8211782b512679d82242aa8af8feedd38367fad6937d3fa1458e98",
+      "observed_sha256": "e8bf290cfe8211782b512679d82242aa8af8feedd38367fad6937d3fa1458e98",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "crates/babylon-skills-mcp/tests/fl_path01_capability_root_escape.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          467
+        ]
+      ],
+      "manifest_sha256": "218fa6be7f1a12623239f4855ec9c6193c202bf61c250a7eaa991d9e523524c8",
+      "observed_sha256": "218fa6be7f1a12623239f4855ec9c6193c202bf61c250a7eaa991d9e523524c8",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "docs/06_theory/AUDIT_SCIENTIFIC_STATUS_2026.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          102
+        ]
+      ],
+      "manifest_sha256": "7ae2ae07b41a7bb218dc730a5e351c7f6aee0d89fe7cb6b9c392fefc578ac31b",
+      "observed_sha256": "7ae2ae07b41a7bb218dc730a5e351c7f6aee0d89fe7cb6b9c392fefc578ac31b",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "examples/fl007_admission_stress.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          88
+        ]
+      ],
+      "manifest_sha256": "1fb81b28ef6c0a7e9d484eaf28aa27dc47d7f459f4ae0139fabf941720c49ea3",
+      "observed_sha256": "1fb81b28ef6c0a7e9d484eaf28aa27dc47d7f459f4ae0139fabf941720c49ea3",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/c5_cli/babylon_mail_cli.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          134
+        ]
+      ],
+      "manifest_sha256": "de8d6fbcabcab8433fb4117a0556b931c7e4b2a9ecc7f5713bd9e9c46c984e62",
+      "observed_sha256": "de8d6fbcabcab8433fb4117a0556b931c7e4b2a9ecc7f5713bd9e9c46c984e62",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/c5_edin/remotion_swarm_orchestrator.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          77
+        ]
+      ],
+      "manifest_sha256": "21cf20ecf7bb50ec37f1405896cbb154fa992e3158976cd43b04e536a4b0836b",
+      "observed_sha256": "21cf20ecf7bb50ec37f1405896cbb154fa992e3158976cd43b04e536a4b0836b",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/c5_skills_ontology/optimize_all_skill_triggers.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          350
+        ]
+      ],
+      "manifest_sha256": "1a4656c29a745b205298bd17118eb3c8a25d75cf8c89c063a673816b7aeede5b",
+      "observed_sha256": "1a4656c29a745b205298bd17118eb3c8a25d75cf8c89c063a673816b7aeede5b",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "src/bin/tamkarum.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          58
+        ]
+      ],
+      "manifest_sha256": "bbb1371e843253198eaf704bf7fc2e7125c7bb93e83eb7369560236d17c17145",
+      "observed_sha256": "bbb1371e843253198eaf704bf7fc2e7125c7bb93e83eb7369560236d17c17145",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/test_a02_authorization_regressions.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          106
+        ]
+      ],
+      "manifest_sha256": "7a6376468e570afe97765dfc96058e3267c09971f144f04215132eca4e7cdc99",
+      "observed_sha256": "7a6376468e570afe97765dfc96058e3267c09971f144f04215132eca4e7cdc99",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/test_install_policy.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          370
+        ]
+      ],
+      "manifest_sha256": "3b14d69776cc2c457f0c4dfec7cea78ad2003c036e675128be6ea57e1d92e471",
+      "observed_sha256": "3b14d69776cc2c457f0c4dfec7cea78ad2003c036e675128be6ea57e1d92e471",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/codex_tunnel.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          410
+        ]
+      ],
+      "manifest_sha256": "4754f01150569ae66e57e220f8e2596cea11ae944e84e274bf40209dc0482ab1",
+      "observed_sha256": "4754f01150569ae66e57e220f8e2596cea11ae944e84e274bf40209dc0482ab1",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/c3/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          111
+        ]
+      ],
+      "manifest_sha256": "a29848e8c74b2a8055330461f2ffec6ccb14d5d61b97b8214195ee7787c70d20",
+      "observed_sha256": "a29848e8c74b2a8055330461f2ffec6ccb14d5d61b97b8214195ee7787c70d20",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/pages/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          204
+        ]
+      ],
+      "manifest_sha256": "037fcf04315464ef0a733b77ffa852105026250c13efccf54bfc8f43a5b0a956",
+      "observed_sha256": "037fcf04315464ef0a733b77ffa852105026250c13efccf54bfc8f43a5b0a956",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/turnstile/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          224
+        ]
+      ],
+      "manifest_sha256": "d2d0c2ddd83d41b8b36a0d340807740bbb5e786835cdce284c27f2a2bd502033",
+      "observed_sha256": "d2d0c2ddd83d41b8b36a0d340807740bbb5e786835cdce284c27f2a2bd502033",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/babylon-shield/babylon_exergy_linter.sh",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          53
+        ]
+      ],
+      "manifest_sha256": "976b392518ab55a5a1d20446cb4e9604a7651f962c4fe975206755148214c919",
+      "observed_sha256": "976b392518ab55a5a1d20446cb4e9604a7651f962c4fe975206755148214c919",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents/agent_40_site_playbooks_opentable.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "manifest_sha256": "b2523198ad6d566a49831b4a121bb98c4e613d1e517aa329d0fdb46850fa35e3",
+      "observed_sha256": "b2523198ad6d566a49831b4a121bb98c4e613d1e517aa329d0fdb46850fa35e3",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-debloat-agent-kernel/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "manifest_sha256": "d16c65679535336d336e0a90d909cbdd3f84493d7e818723bb38ce7083b1e6ee",
+      "observed_sha256": "d16c65679535336d336e0a90d909cbdd3f84493d7e818723bb38ce7083b1e6ee",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/macos-lulu-firewall-diagnostics/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          63
+        ]
+      ],
+      "manifest_sha256": "c6db3ecf649334fbfa7db8250b838b7616ef5246c7b5af23ac984db1a2fe192c",
+      "observed_sha256": "c6db3ecf649334fbfa7db8250b838b7616ef5246c7b5af23ac984db1a2fe192c",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/flstudio-mcp-production/scripts/pianoroll_deployer.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          121
+        ]
+      ],
+      "manifest_sha256": "746065b4b2ba59de0cda1736da7ebc7411a0ab3b2543f070330d71d2417f9486",
+      "observed_sha256": "746065b4b2ba59de0cda1736da7ebc7411a0ab3b2543f070330d71d2417f9486",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skills/babylon60-kernel-invariants/agents/openai.yaml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          4
+        ]
+      ],
+      "manifest_sha256": "f32f8d67665d0253ba85072453438e1d6346e3d164b3f7fdf1a6121ea401d057",
+      "observed_sha256": "f32f8d67665d0253ba85072453438e1d6346e3d164b3f7fdf1a6121ea401d057",
+      "changed_since_manifest": false
+    }
+  ],
+  "tool_limitations": [
+    "No codebase-memory graph tools exposed in the native session tool inventory; used targeted rg and bounded source reads.",
+    "Audit only: no test, build, runtime, installation, biometric, stress, or remote CI execution.",
+    "Historical claims and linked theory sources were not independently revalidated.",
+    "Initial and final manifest hashes match for all 25 assigned regular text files; no assigned symlinks encountered."
+  ],
+  "tests_run": []
+}

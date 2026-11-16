@@ -1,0 +1,278 @@
+{
+  "date": "2026-10-28",
+  "scope": "Two declared shell sources only. All executable Git/scanner/gate behavior under tests uses owned temporary doubles; pure Python contract functions are exercised separately. No real Git commit/merge/remote, Swift, biometric auth, ATTESTED test receipt or publication. Global telemetry/configuration omitted.",
+  "checks": {
+    "related-tests": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "pytest",
+        "tests/test_swarm100_lot3_regressions.py",
+        "tests/test_swarm100_lot2_regressions.py",
+        "tests/test_swarm100_lot1_regressions.py",
+        "tests/test_agent_beeper_regressions.py",
+        "tests/test_autodidact_derivation_regressions.py",
+        "tests/test_swarm100_round2_regressions.py",
+        "tests/test_standalone_verifier.py",
+        "tests/test_memory_governance_falsification.py",
+        "tests/test_compliance_exporter.py",
+        "tests/test_m0_evidence_pack_acceptance.py",
+        "tests/test_autodidact_omega_v2.py",
+        "tests/test_autodidact_omega_pipeline.py",
+        "tests/test_cortex_persist_batch_regressions.py",
+        "tests/test_ledger_cross_equivalence.py",
+        "tests/test_fl027_provenance_authority.py",
+        "-q",
+        "-rs",
+        "-o",
+        "addopts=--tb=short"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot3-20261028/related-tests.log",
+      "log_sha256": "96dccafe037f5ee7f7ead574113a1510298797397e06c2f4c08113c1cf8d652f",
+      "coverage_note": "391 cases: 69 Lot3 regressions collected before the two final cleanup negatives were added. The only final behavior change was receipt cleanup; the final four targeted storage/order cases cover it. Remaining previously reviewed production code was unchanged."
+    },
+    "bash-distill": {
+      "command": [
+        "bash",
+        "-n",
+        "scripts/c5_git_utils/c5_distill_public_mirror.sh"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot3-20261028/bash-distill.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "bash-ship": {
+      "command": [
+        "bash",
+        "-n",
+        "scripts/c5_git_utils/c5_ship.sh"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot3-20261028/bash-ship.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shellcheck": {
+      "command": [
+        "shellcheck",
+        "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+        "scripts/c5_git_utils/c5_ship.sh"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot3-20261028/shellcheck.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "ruff": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "ruff",
+        "check",
+        "tests/test_swarm100_lot3_regressions.py",
+        "docs/security/evidence/swarm100-lot3-20261028/reconcile_lot3.py",
+        "docs/security/evidence/swarm100-lot3-20261028/inline-c5_distill_public_mirror.sh.py",
+        "docs/security/evidence/swarm100-lot3-20261028/inline-c5_ship.sh.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot3-20261028/ruff.log",
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "superseded_by": "ruff-final"
+    },
+    "mypy-inline": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "mypy",
+        "--follow-imports=silent",
+        "--check-untyped-defs",
+        "docs/security/evidence/swarm100-lot3-20261028/inline-c5_distill_public_mirror.sh.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot3-20261028/mypy-inline.log",
+      "log_sha256": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e"
+    },
+    "semantic-gate": {
+      "command": [
+        "python3",
+        "scripts/c5_quality_gates/audit_semantic_contracts.py",
+        "--workspace-only"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot3-20261028/semantic-gate.log",
+      "log_sha256": "5949e674dcddaf1b07015b03a1dd0b374e0b66a39f2d95157c200ce6dd13f1ee"
+    },
+    "budget-gate": {
+      "command": [
+        "python3",
+        "scripts/c5_quality_gates/audit_token_budget.py",
+        "--workspace-only",
+        "--skip-ghost-listeners"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot3-20261028/budget-gate.log",
+      "log_sha256": "d0b6780eb1edd315af3e6cf33cb6b44387f78ee81a63c8e23aabd3121e82a37a"
+    },
+    "topology-gate": {
+      "command": [
+        "python3",
+        "scripts/guards/verify_active_topology.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot3-20261028/topology-gate.log",
+      "log_sha256": "3045a29b461272aed5ff2d6a5c031c4955237179787acbd8421abad260e899a6"
+    },
+    "diff-check": {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot3-20261028/diff-check.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "ruff-final": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "ruff",
+        "check",
+        "tests/test_swarm100_lot3_regressions.py",
+        "docs/security/evidence/swarm100-lot3-20261028/reconcile_lot3.py",
+        "docs/security/evidence/swarm100-lot3-20261028/independent-adversarial.py",
+        "docs/security/evidence/swarm100-lot3-20261028/inline-c5_distill_public_mirror.sh.py",
+        "docs/security/evidence/swarm100-lot3-20261028/inline-c5_ship.sh.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot3-20261028/ruff-final.log",
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "registry-updates": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "python",
+        "docs/security/evidence/swarm100-lot3-20261028/reconcile_lot3.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot3-20261028/registry-updates.log",
+      "log_sha256": "202554dfe7f875d73e9fc17943b0971207f350f48c74efb20afa0d85ade6d3d3"
+    },
+    "registry": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "python",
+        "docs/security/evidence/swarm100-round3-20261028/reconcile_registry.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot3-20261028/registry.log",
+      "log_sha256": "acb783a0429216808538e73cc28f099392d1979c6233da1bcc996b8f548ec56f"
+    },
+    "retention-tests": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "pytest",
+        "tests/test_swarm100_lot3_regressions.py",
+        "-q",
+        "-k",
+        "receipt",
+        "-o",
+        "addopts="
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot3-20261028/retention-tests.log",
+      "test_source_sha256": "25060b92b5d9f0aab1075f52060613292e0845607a8ccf2303dd9588cf1e5549",
+      "log_sha256": "2df575d0882235a1a882f9dca36e46a3d6fde34fbb8b724ed2ea44af92a3f529"
+    }
+  },
+  "source_sha256": {
+    "scripts/c5_git_utils/c5_distill_public_mirror.sh": "92236e509279cd93355ca574c76070008b7adfabc8cd93ceb87acf3b18f02c0f",
+    "scripts/c5_git_utils/c5_ship.sh": "fb71a99a81f7254d4ec50bcacfae80bddf6c909e459c0d2c389d77c3d342dff8"
+  },
+  "test_sha256": "25060b92b5d9f0aab1075f52060613292e0845607a8ccf2303dd9588cf1e5549",
+  "results": {
+    "related_passed": 391,
+    "related_skipped": 1,
+    "new_regressions": 71,
+    "skip_reason": "strike_rs extension not built; no native build attempted",
+    "retention_targeted_passed": 4,
+    "total_distinct_passed": 393
+  },
+  "not_verified": [
+    "Secure Enclave provenance and physical operator approval",
+    "real Gitleaks scan of the monorepo",
+    "real remote push or transport identity",
+    "native Swift/hardware integration"
+  ],
+  "lot4_sources_unchanged": true,
+  "independent_review": {
+    "path": "docs/security/evidence/swarm100-lot3-20261028/independent-review.json",
+    "sha256": "90d2d35912df0b500589f01b6bc7f6b7b73f64becb21a8565e8637490523e40b",
+    "decision": "APPROVED_WITH_EXPLICIT_SCOPE",
+    "adversarial_passed": 14,
+    "scope": "10 original confined controls plus 4 storage controls; staged test/hash provenance retained by reviewer."
+  },
+  "registry_summary": {
+    "original_candidates": 598,
+    "round3_assigned": 582,
+    "round3_reviewed": 582,
+    "round3_decisions": {
+      "CONFIRMED_STATIC": 502,
+      "REPRODUCED": 54,
+      "ALREADY_FIXED": 17,
+      "REJECTED": 4,
+      "DUPLICATE": 5
+    },
+    "round3_remediation_states": {
+      "OPEN": 555,
+      "FIXED": 20,
+      "MITIGATED": 3,
+      "NOT_APPLICABLE": 4
+    },
+    "all_decisions": {
+      "CONFIRMED_STATIC": 502,
+      "REPRODUCED": 54,
+      "ALREADY_FIXED": 28,
+      "REJECTED": 4,
+      "DUPLICATE": 10
+    },
+    "all_remediation_states": {
+      "OPEN": 560,
+      "FIXED": 30,
+      "MITIGATED": 4,
+      "NOT_APPLICABLE": 4
+    },
+    "needs_validation_ids": [],
+    "unique_open_findings": 554,
+    "unique_open_severity": {
+      "P2": 474,
+      "P3": 10,
+      "P1": 70
+    },
+    "additional_findings_outside_original_inventory": 1,
+    "additional_decisions": {
+      "ALREADY_FIXED": 1
+    },
+    "scope": "Every assigned candidate reviewed; static confirmation is not correction or runtime certification."
+  },
+  "inline_helpers_match_sources": true,
+  "receipt_retention": "Ship retains the last verified approval+effect descriptor atomically with mode0600 before push; approval retention does not attest push success. Prior receipts are never reused.",
+  "local_links_checked": 36,
+  "verification_complete": true
+}

@@ -1,0 +1,752 @@
+{
+  "candidate": "b9640a52ca031d1978232255d31e69efb011f9b9",
+  "command": [
+    "uv",
+    "run",
+    "--locked",
+    "--no-sync",
+    "python",
+    "-I",
+    "-m",
+    "pytest",
+    "tests/test_manual_hardware_cycle.py",
+    "tests/test_fl_mcp01_dispatch.py",
+    "tests/test_cortex_mcp_server.py",
+    "tests/test_codex_onboarding.py",
+    "tests/test_local_core_cortex_connections.py",
+    "tests/test_biometric_signing_contract.py",
+    "-vv",
+    "-rs",
+    "-k",
+    "not hardware_attested_fixture_effect and not rust_babylon_skills_mcp_stdio_interop",
+    "--junitxml=/Users/borjafernandezangulo/.codex/local-core-evidence/capture-20261029T230935Z/review/final-native-run/results.xml"
+  ],
+  "cwd": "/Users/borjafernandezangulo/.codex/worktrees/local-core-integration/BABYLON-60",
+  "origins": {
+    "babylon60": "/Users/borjafernandezangulo/.codex/worktrees/local-core-integration/BABYLON-60/01_KISH_ENGINE/babylon60/__init__.py",
+    "babylon60.mcp.cortex_mcp_server": "/Users/borjafernandezangulo/.codex/worktrees/local-core-integration/BABYLON-60/01_KISH_ENGINE/babylon60/mcp/cortex_mcp_server.py",
+    "babylon60.mcp.effect_dispatch": "/Users/borjafernandezangulo/.codex/worktrees/local-core-integration/BABYLON-60/01_KISH_ENGINE/babylon60/mcp/effect_dispatch.py",
+    "babylon60.bft.cortex_persist_ledger": "/Users/borjafernandezangulo/.codex/worktrees/local-core-integration/BABYLON-60/01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py",
+    "babylon60.verification.verification_gate": "/Users/borjafernandezangulo/.codex/worktrees/local-core-integration/BABYLON-60/01_KISH_ENGINE/babylon60/verification/verification_gate.py"
+  },
+  "exit_code": 0,
+  "source_and_artifact_hashes_before": {
+    "/Users/borjafernandezangulo/.codex/worktrees/local-core-integration/BABYLON-60/tests/test_manual_hardware_cycle.py": "6172d1695deb5e5ee75c35891819ad199c45b4091c8a402f27409e0d0e4f7d74",
+    "/Users/borjafernandezangulo/.codex/worktrees/local-core-integration/BABYLON-60/tests/test_fl_mcp01_dispatch.py": "20cdfa52b213174cea284a9a84688342510068bf2ec2efecbfdf96f714f83e70",
+    "/Users/borjafernandezangulo/.codex/worktrees/local-core-integration/BABYLON-60/tests/test_cortex_mcp_server.py": "2e6e54e8fd190b35fba170293832e9b59649a21abfdedfcdd8352e4ba57eacc8",
+    "/Users/borjafernandezangulo/.codex/worktrees/local-core-integration/BABYLON-60/tests/test_codex_onboarding.py": "02f01d38cd7981a87696adc10dbb2a15b4637e5bf676b2d7a04fec0fcacfb31b",
+    "/Users/borjafernandezangulo/.codex/worktrees/local-core-integration/BABYLON-60/tests/test_local_core_cortex_connections.py": "46514e53301b0179d00303af5a009a68c89cd176359c2bbe8dd22499d5c23528",
+    "/Users/borjafernandezangulo/.codex/worktrees/local-core-integration/BABYLON-60/tests/test_biometric_signing_contract.py": "0fb50002e7a95d00e3af8b4a949b4ecb9e581fa99f7ee686fdd94ae6c2ac1209",
+    "/Users/borjafernandezangulo/.codex/worktrees/local-core-integration/BABYLON-60/01_KISH_ENGINE/babylon60/guards/c5_biometric_gate": "9b799dbd8804229bc34d41f72a61203313ed35fd0327117d606f58e2e8c65f47",
+    "/Users/borjafernandezangulo/.codex/local-core-evidence/capture-20261029T230935Z/candidate-b9640a52ca/libbabylon60.dylib": "66319a746759aab2e01ec32a815d3932ef846c3054246a9e1c86ffc2de1211ad",
+    "/Users/borjafernandezangulo/.codex/worktrees/local-core-integration/BABYLON-60/tests/manual/hardware_mcp_cycle.py": "0674a0056e4b032cb64d4c60b7be957bdc32f24917b8ef2218a99fe3fcc16d2d"
+  },
+  "source_and_artifact_hashes_after": {
+    "/Users/borjafernandezangulo/.codex/worktrees/local-core-integration/BABYLON-60/tests/test_manual_hardware_cycle.py": "6172d1695deb5e5ee75c35891819ad199c45b4091c8a402f27409e0d0e4f7d74",
+    "/Users/borjafernandezangulo/.codex/worktrees/local-core-integration/BABYLON-60/tests/test_fl_mcp01_dispatch.py": "20cdfa52b213174cea284a9a84688342510068bf2ec2efecbfdf96f714f83e70",
+    "/Users/borjafernandezangulo/.codex/worktrees/local-core-integration/BABYLON-60/tests/test_cortex_mcp_server.py": "2e6e54e8fd190b35fba170293832e9b59649a21abfdedfcdd8352e4ba57eacc8",
+    "/Users/borjafernandezangulo/.codex/worktrees/local-core-integration/BABYLON-60/tests/test_codex_onboarding.py": "02f01d38cd7981a87696adc10dbb2a15b4637e5bf676b2d7a04fec0fcacfb31b",
+    "/Users/borjafernandezangulo/.codex/worktrees/local-core-integration/BABYLON-60/tests/test_local_core_cortex_connections.py": "46514e53301b0179d00303af5a009a68c89cd176359c2bbe8dd22499d5c23528",
+    "/Users/borjafernandezangulo/.codex/worktrees/local-core-integration/BABYLON-60/tests/test_biometric_signing_contract.py": "0fb50002e7a95d00e3af8b4a949b4ecb9e581fa99f7ee686fdd94ae6c2ac1209",
+    "/Users/borjafernandezangulo/.codex/worktrees/local-core-integration/BABYLON-60/01_KISH_ENGINE/babylon60/guards/c5_biometric_gate": "9b799dbd8804229bc34d41f72a61203313ed35fd0327117d606f58e2e8c65f47",
+    "/Users/borjafernandezangulo/.codex/local-core-evidence/capture-20261029T230935Z/candidate-b9640a52ca/libbabylon60.dylib": "66319a746759aab2e01ec32a815d3932ef846c3054246a9e1c86ffc2de1211ad",
+    "/Users/borjafernandezangulo/.codex/worktrees/local-core-integration/BABYLON-60/tests/manual/hardware_mcp_cycle.py": "0674a0056e4b032cb64d4c60b7be957bdc32f24917b8ef2218a99fe3fcc16d2d"
+  },
+  "hashes_unchanged": true,
+  "head_after": "b9640a52ca031d1978232255d31e69efb011f9b9",
+  "git_status_after": "",
+  "cases": [
+    {
+      "class": "tests.test_manual_hardware_cycle",
+      "name": "test_observer_verifies_exact_stored_bytes_in_separate_process",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_manual_hardware_cycle",
+      "name": "test_observer_rejects_signed_record_tampering[task]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_manual_hardware_cycle",
+      "name": "test_observer_rejects_signed_record_tampering[nonce]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_manual_hardware_cycle",
+      "name": "test_observer_rejects_signed_record_tampering[receipt_hash]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_manual_hardware_cycle",
+      "name": "test_observer_rejects_signed_record_tampering[key]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_manual_hardware_cycle",
+      "name": "test_observer_rejects_signed_record_tampering[signature]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_manual_hardware_cycle",
+      "name": "test_valid_receipt_cannot_authorize_a_different_prepared_task",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_manual_hardware_cycle",
+      "name": "test_signed_boolean_cannot_alias_integer_in_prepared_task",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_manual_hardware_cycle",
+      "name": "test_valid_signature_requires_operator_identity[operator_user-None]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_manual_hardware_cycle",
+      "name": "test_valid_signature_requires_operator_identity[operator_user-another-user]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_manual_hardware_cycle",
+      "name": "test_valid_signature_requires_operator_identity[operator_name-None]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_manual_hardware_cycle",
+      "name": "test_valid_signature_requires_operator_identity[operator_name-  ]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_manual_hardware_cycle",
+      "name": "test_independent_reopen_proves_exact_consumption_and_event",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_manual_hardware_cycle",
+      "name": "test_success_response_cannot_replace_physical_evidence[consumed-value0]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_manual_hardware_cycle",
+      "name": "test_success_response_cannot_replace_physical_evidence[events-value1]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_manual_hardware_cycle",
+      "name": "test_success_response_cannot_replace_physical_evidence[approvals-value2]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_manual_hardware_cycle",
+      "name": "test_attempt_marker_is_exclusive_and_keeps_original_task",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_manual_hardware_cycle",
+      "name": "test_missing_pin_fails_before_helper_or_attempt_and_cannot_reuse_directory",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_manual_hardware_cycle",
+      "name": "test_inspection_cannot_establish_its_own_pin",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_manual_hardware_cycle",
+      "name": "test_partial_stdio_response_has_a_complete_message_deadline",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_manual_hardware_cycle",
+      "name": "test_manual_stdio_client_executes_once_and_restarts_with_software_authority",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_fl_mcp01_dispatch",
+      "name": "test_unconfigured_dispatch_cannot_append",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_fl_mcp01_dispatch",
+      "name": "test_direct_handler_cannot_bypass_dispatch",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_fl_mcp01_dispatch",
+      "name": "test_async_handler_finishes_before_dispatch_returns",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_fl_mcp01_dispatch",
+      "name": "test_async_failure_after_effect_stays_unknown_and_consumed[error]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_fl_mcp01_dispatch",
+      "name": "test_async_failure_after_effect_stays_unknown_and_consumed[cancel]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_fl_mcp01_dispatch",
+      "name": "test_child_tasks_finish_before_policy_and_approval_locks_release",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_fl_mcp01_dispatch",
+      "name": "test_invocation_authority_does_not_transfer[child]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_fl_mcp01_dispatch",
+      "name": "test_invocation_authority_does_not_transfer[thread]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_fl_mcp01_dispatch",
+      "name": "test_invocation_authority_does_not_transfer[different_tool]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_fl_mcp01_dispatch",
+      "name": "test_invocation_authority_does_not_transfer[policy]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_fl_mcp01_dispatch",
+      "name": "test_copied_context_expires_after_completion",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_fl_mcp01_dispatch",
+      "name": "test_unclassified_direct_handler_defaults_to_denied",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_fl_mcp01_dispatch",
+      "name": "test_mail_handler_direct_access_is_guarded",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_fl_mcp01_dispatch",
+      "name": "test_async_direct_handler_requires_its_own_invocation",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_fl_mcp01_dispatch",
+      "name": "test_existing_application_loop_is_not_reentered_or_consumed",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_fl_mcp01_dispatch",
+      "name": "test_failed_async_parent_cancels_its_pending_effects",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_fl_mcp01_dispatch",
+      "name": "test_signed_mail_handler_still_records_once",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_fl_mcp01_dispatch",
+      "name": "test_native_signed_effect_and_alias_have_independent_witness",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_fl_mcp01_dispatch",
+      "name": "test_denials_preserve_physical_fixture[arguments]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_fl_mcp01_dispatch",
+      "name": "test_denials_preserve_physical_fixture[execution_id]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_fl_mcp01_dispatch",
+      "name": "test_denials_preserve_physical_fixture[forged_boolean]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_fl_mcp01_dispatch",
+      "name": "test_denials_preserve_physical_fixture[wrong_key]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_fl_mcp01_dispatch",
+      "name": "test_denials_preserve_physical_fixture[revoked]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_fl_mcp01_dispatch",
+      "name": "test_denials_preserve_physical_fixture[aba]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_fl_mcp01_dispatch",
+      "name": "test_denials_preserve_physical_fixture[grant_revoked]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_fl_mcp01_dispatch",
+      "name": "test_external_policy_matrix_with_signed_calls",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_fl_mcp01_dispatch",
+      "name": "test_crash_after_consumption_never_replays",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_fl_mcp01_dispatch",
+      "name": "test_policy_update_waits_for_actual_handler",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_fl_mcp01_dispatch",
+      "name": "test_stdio_roundtrip_independent_observer",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_fl_mcp01_dispatch",
+      "name": "test_handler_failure_is_unknown_not_a_false_denial",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_fl_mcp01_dispatch",
+      "name": "test_native_availability_cannot_replace_pinned_authority",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_cortex_mcp_server",
+      "name": "test_mcp_initialize",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_cortex_mcp_server",
+      "name": "test_mcp_tools_list",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_cortex_mcp_server",
+      "name": "test_mcp_resources_list",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_cortex_mcp_server",
+      "name": "test_mcp_tool_bft_append_and_query",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_cortex_mcp_server",
+      "name": "test_mcp_causal_tools_and_resources",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_cortex_mcp_server",
+      "name": "test_mcp_resource_read",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_cortex_mcp_server",
+      "name": "test_mcp_canonical_tool_and_resource_aliases",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_cortex_mcp_server",
+      "name": "test_mcp_detonate_ephemeral_bomb",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_cortex_mcp_server",
+      "name": "test_mcp_use_canonical_names_mode",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_cortex_mcp_server",
+      "name": "test_cli_tools_and_skills_introspection",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_cortex_mcp_server",
+      "name": "test_cmd_mcp_bomb_cli",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_cortex_mcp_server",
+      "name": "test_mcp_skills_catalog_resource_read",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_cortex_mcp_server",
+      "name": "test_mcp_bft_route_skill_tool",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_cortex_mcp_server",
+      "name": "test_mcp_prompts_list_and_get",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_cortex_mcp_server",
+      "name": "test_mcp_skills_snapshot_immutability_and_sep2640",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_cortex_mcp_server",
+      "name": "test_v31_gateway_3_primitives_and_fl_p08_to_fl_p11",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_cortex_mcp_server",
+      "name": "test_fl_p08_tool_shadowing_and_unvalidated_classification",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_cortex_mcp_server",
+      "name": "test_fl_p09_chaining_exfiltration",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_cortex_mcp_server",
+      "name": "test_fl_p10_audience_bound_nonce_expiration_and_no_passthrough",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_cortex_mcp_server",
+      "name": "test_fl_p11_postcondition_false_positive_rebuke",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_codex_onboarding",
+      "name": "test_setup_idempotent_and_remove_preserve_foreign_bytes",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_codex_onboarding",
+      "name": "test_dry_run_has_no_managed_writes_or_cli_mutations",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_codex_onboarding",
+      "name": "test_new_codex_home_can_be_previewed_then_initialized",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_codex_onboarding",
+      "name": "test_effective_override_is_migrated_without_duplicate",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_codex_onboarding",
+      "name": "test_homonymous_foreign_mcp_conflicts_without_changes",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_codex_onboarding",
+      "name": "test_existing_identical_registration_is_reused_without_claiming_it",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_codex_onboarding",
+      "name": "test_missing_cli_and_broken_config_are_actionable_and_do_not_leak",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_codex_onboarding",
+      "name": "test_partial_registration_failure_rolls_back_only_owned_changes[False]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_codex_onboarding",
+      "name": "test_partial_registration_failure_rolls_back_only_owned_changes[True]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_codex_onboarding",
+      "name": "test_state_failure_reverts_registration_and_preferences",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_codex_onboarding",
+      "name": "test_rollback_preserves_external_instruction_edit",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_codex_onboarding",
+      "name": "test_atomic_replace_detects_changes_before_replace",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_codex_onboarding",
+      "name": "test_instruction_links_are_rejected[symbolic]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_codex_onboarding",
+      "name": "test_instruction_links_are_rejected[hard]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_codex_onboarding",
+      "name": "test_linked_codex_config_is_not_rewritten",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_codex_onboarding",
+      "name": "test_modified_managed_block_and_registration_are_preserved",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_codex_onboarding",
+      "name": "test_external_tool_filters_and_timeouts_are_not_removed",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_codex_onboarding",
+      "name": "test_unexposed_config_changes_are_guarded_without_rebasing",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_codex_onboarding",
+      "name": "test_external_config_edit_before_mutation_is_preserved",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_codex_onboarding",
+      "name": "test_concurrent_override_activation_does_not_report_configured",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_codex_onboarding",
+      "name": "test_effective_override_does_not_read_inactive_symlink",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_codex_onboarding",
+      "name": "test_unknown_markers_and_corrupt_state_do_not_overwrite",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_codex_onboarding",
+      "name": "test_multiple_codex_homes_keep_separate_ownership",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_codex_onboarding",
+      "name": "test_doctor_keeps_behavior_unverified_and_uses_expected_executable",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_codex_onboarding",
+      "name": "test_probe_uses_protocol_sequence_and_temporary_paths",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_codex_onboarding",
+      "name": "test_probe_rejects_notification_flood_and_reaps_peer",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_codex_onboarding",
+      "name": "test_windows_cmd_discovery_does_not_require_shell",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_codex_onboarding",
+      "name": "test_windows_npm_shim_is_called_directly_through_node",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_codex_onboarding",
+      "name": "test_unknown_windows_batch_shim_fails_with_actionable_message",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_local_core_cortex_connections",
+      "name": "test_owned_connections_close_before_return[_init_db-args0]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_local_core_cortex_connections",
+      "name": "test_owned_connections_close_before_return[query_events-args1]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_local_core_cortex_connections",
+      "name": "test_owned_connections_close_before_return[append_event-args2]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_local_core_cortex_connections",
+      "name": "test_owned_connections_close_before_return[append_batch-args3]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_local_core_cortex_connections",
+      "name": "test_owned_connections_close_before_return[verify_integrity-args4]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_local_core_cortex_connections",
+      "name": "test_owned_connections_close_before_return[get_merkle_root-args5]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_local_core_cortex_connections",
+      "name": "test_owned_connections_close_before_return[get_event_proof-args6]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_local_core_cortex_connections",
+      "name": "test_owned_connections_close_before_return[get_mmr-args7]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_local_core_cortex_connections",
+      "name": "test_owned_connections_close_before_return[get_mmr_root-args8]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_local_core_cortex_connections",
+      "name": "test_owned_connections_close_before_return[get_mmr_event_proof-args9]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_local_core_cortex_connections",
+      "name": "test_owned_connections_close_before_return[get_state_attestation-args10]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_local_core_cortex_connections",
+      "name": "test_configuration_failure_closes_connection[1]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_local_core_cortex_connections",
+      "name": "test_configuration_failure_closes_connection[2]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_local_core_cortex_connections",
+      "name": "test_configuration_failure_closes_connection[3]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_local_core_cortex_connections",
+      "name": "test_query_failure_closes_connection",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_local_core_cortex_connections",
+      "name": "test_failed_batch_closes_connection_and_preserves_committed_history",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_local_core_cortex_connections",
+      "name": "test_external_connection_remains_owned_by_caller",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_biometric_signing_contract",
+      "name": "test_demo_gate_has_one_canonical_source",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_biometric_signing_contract",
+      "name": "test_swift_protocol_and_key_records",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_biometric_signing_contract",
+      "name": "test_swift_signature_verifies_original_bytes",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_biometric_signing_contract",
+      "name": "test_bad_payload_is_rejected[0]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_biometric_signing_contract",
+      "name": "test_bad_payload_is_rejected[zz]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_biometric_signing_contract",
+      "name": "test_bad_payload_is_rejected[00 01]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_biometric_signing_contract",
+      "name": "test_bad_payload_is_rejected[00]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_biometric_signing_contract",
+      "name": "test_inspection_binds_public_point_to_unchanged_record",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_biometric_signing_contract",
+      "name": "test_inspection_cli_rejects_before_loading_hardware[missing]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_biometric_signing_contract",
+      "name": "test_inspection_cli_rejects_before_loading_hardware[symlink]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_biometric_signing_contract",
+      "name": "test_inspection_cli_rejects_before_loading_hardware[directory]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_biometric_signing_contract",
+      "name": "test_inspection_cli_rejects_before_loading_hardware[fifo]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_biometric_signing_contract",
+      "name": "test_inspection_cli_rejects_before_loading_hardware[permissions]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_biometric_signing_contract",
+      "name": "test_inspection_cli_rejects_before_loading_hardware[legacy]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_biometric_signing_contract",
+      "name": "test_inspection_cli_rejects_before_loading_hardware[oversized]",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_biometric_signing_contract",
+      "name": "test_inspection_rejects_mixed_signing_arguments",
+      "status": "passed"
+    },
+    {
+      "class": "tests.test_biometric_signing_contract",
+      "name": "test_inspection_rejects_invalid_public_point",
+      "status": "passed"
+    }
+  ],
+  "case_count": 135,
+  "passed": 135,
+  "failed": 0,
+  "skipped": 0,
+  "explicitly_deselected": [
+    "test_rust_babylon_skills_mcp_stdio_interop: separate Rust MCP server outside the selected Python MCP/native broker surface"
+  ],
+  "hardware_attempted": false,
+  "operator_home_used": false,
+  "completed_at_utc": "2026-10-29T23:33:32.326401+00:00",
+  "excluded_surface": "The Rust babylon-skills-mcp stdio interoperability test was collected and explicitly deselected; it would build/test a separate server.",
+  "required_native_functions": 17,
+  "required_native_cases": 27,
+  "all_required_native_executed_and_passed": true,
+  "preventive_filter_not_collected": [
+    "test_hardware_attested_fixture_effect: removed from automated suite by R3; filter is precautionary"
+  ]
+}

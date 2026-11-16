@@ -1,0 +1,56 @@
+{
+  "source_sha256": "f247036e27e11087b2b34d064cced7d998a39372288baa62a838bcf6e878b529",
+  "final_source_sha256": "f247036e27e11087b2b34d064cced7d998a39372288baa62a838bcf6e878b529",
+  "source_stable": true,
+  "checks": [
+    {
+      "name": "import_and_invalid_selector",
+      "status": "PASS",
+      "detail": "No dotenv/global logging side effect; invalid public/direct selectors reject before any environment read or HTTP client."
+    },
+    {
+      "name": "endpoint_adversarial_corpus",
+      "status": "PASS",
+      "detail": "24 malformed, ambiguous or unauthorized endpoint variants rejected before credentials/client."
+    },
+    {
+      "name": "valid_routes_and_loopback_exception",
+      "status": "PASS",
+      "detail": "Both providers, both local backends and explicit remote loopback gateway follow the declared header/destination contract."
+    },
+    {
+      "name": "mutable_config_retry_snapshot",
+      "status": "PASS",
+      "detail": "Mutation during response/backoff cannot mix old credentials with the next provider; next call revalidates its new target."
+    },
+    {
+      "name": "redirects_refused",
+      "status": "PASS",
+      "detail": "All five standard redirect statuses stop after the first mocked request."
+    },
+    {
+      "name": "direct_dispatch_guards",
+      "status": "PASS",
+      "detail": "Direct dispatch cannot bypass URL/backend checks or route using Host/proxy/local-Authorization headers."
+    },
+    {
+      "name": "invalid_mutation_revalidated",
+      "status": "PASS",
+      "detail": "Invalid post-construction mutation is rejected by both api_key and call before credential lookup or transport."
+    },
+    {
+      "name": "sanitized_diagnostics",
+      "status": "PASS",
+      "detail": "HTTP response body and exception text are omitted from module diagnostics."
+    },
+    {
+      "name": "request_cancellation",
+      "status": "PASS",
+      "detail": "Cancellation closes the mocked in-flight handler and is not retried or classified as provider failure."
+    }
+  ],
+  "passed": 9,
+  "failed": 0,
+  "socket_attempts": 0,
+  "scope": "Synthetic environment, dotenv blocked before module import, HTTPX MockTransport only; no real credentials, DNS, network, telemetry capture, native service, hardware or ATTESTED."
+}

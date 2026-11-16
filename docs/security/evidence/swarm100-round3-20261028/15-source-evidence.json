@@ -1,0 +1,621 @@
+{
+  "reviewer": "15",
+  "date": "2026-10-28",
+  "repository": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+  "scope": "29 assigned candidates; static source/caller review and five isolated stdlib checks. No native protected runtime, operator data, service startup, remote mutation, deployment or product source edit.",
+  "discovery": "No graph search/index tools exposed in ALL_TOOLS; scoped source reads and rg used. Current cited source hashes all match assignment hashes; matching hash itself was not treated as proof of correctness.",
+  "external_references": [
+    {
+      "candidate_id": "SW100-C0348",
+      "url": "https://github.com/microsoft/language-server-protocol/blob/gh-pages/_specifications/lsp/3.18/specification.md",
+      "observation": "Microsoft base protocol supports required Content-Length and optional Content-Type, with CRLF separation after all header fields."
+    },
+    {
+      "candidate_id": "SW100-C0546",
+      "url": "https://www.itu.int/dms_pubrec/itu-r/rec/bs/R-REC-BS.1770-3-201208-S%21%21PDF-E.pdf",
+      "observation": "ITU explains intersample reconstruction/oversampling for true-peak metering; analytic counterexample independently demonstrates the candidate formula defect."
+    }
+  ],
+  "scoped_searches": [
+    "rg bootstrap_genesis|IdentityBootstrap in 01_KISH_ENGINE/babylon60: only definition and internal call found.",
+    "rg evaluate_provenance_claim in 01_KISH_ENGINE/babylon60: definition and package export found; protected runtime consumer not established.",
+    "rg AttestationContract|attestation_contract in src tests examples: definition and src/lib.rs export only.",
+    "rg verify_statement_content in strike-rs and babylon60: definition plus Autodidact typed/guarded caller.",
+    "rg read_timeout|nonblocking|thread::spawn in crates/babylon-attest/src/main.rs: none found.",
+    "rg CANONICAL_PROTECTED_DIRS in anergy_purge.py: declaration only."
+  ],
+  "source_checks": [
+    {
+      "path": "crates/babylon-attest/src/main.rs",
+      "start_line": 143,
+      "end_line": 178,
+      "observation": "CLI license policy rejects exhausted, expired and invalid licenses.",
+      "sha256": "a50b4f186785736d8f54b5871a9e17857b41ae5f223d4c31d02d95ab0941e863",
+      "excerpt": "143: fn enforce_license_policy() -> Result<(), String> {\n144:     let current_blocks = ledger::get_chain_blocks()\n145:         .map(|b| b.len())\n146:         .unwrap_or(0);\n147: \n148:     match license::check_license_file(env::license_file(), current_blocks) {\n149:         LicenseStatus::Active(lic) => {\n150:             println!(\n151:                 \"\\x1b[32m[LICENSE ACTIVE]\\x1b[0m Organization: {} | Tier: {} | Max Agents: {}\",\n152:                 lic.org, lic.tier, lic.max_agents\n153:             );\n154:             Ok(())\n155:         }\n156:         LicenseStatus::CommunityEvaluation {\n157:             events_count,\n158:             max_events,\n159:         } => {\n160:             if events_count >= max_events {\n161:                 return Err(format!(\n162:                     \"COMMUNITY EVALUATION LIMIT EXCEEDED ({} / {} events). Enterprise license required.\",\n163:                     events_count, max_events\n164:                 ));\n165:             }\n166:             println!(\n167:                 \"\\x1b[33m[COMMUNITY EVALUATION]\\x1b[0m {}/{} events consumed. For enterprise BYOC, visit https://agents.archi\",\n168:                 events_count, max_events\n169:             );\n170:             Ok(())\n171:         }\n172:         LicenseStatus::Expired { org, expired_at } => {\n173:             Err(format!(\"LICENSE EXPIRED for {} at timestamp {}. Please renew subscription.\", org, expired_at))\n174:         }\n175:         LicenseStatus::Invalid(reason) => {\n176:             Err(format!(\"INVALID LICENSE: {}. Fail-closed security halt.\", reason))\n177:         }\n178:     }"
+    },
+    {
+      "path": "crates/babylon-attest/src/main.rs",
+      "start_line": 201,
+      "end_line": 205,
+      "observation": "Attest invokes license enforcement before reading format.",
+      "sha256": "a50b4f186785736d8f54b5871a9e17857b41ae5f223d4c31d02d95ab0941e863",
+      "excerpt": "201:         Commands::Attest { payload, file, format } => {\n202:             if let Err(e) = enforce_license_policy() {\n203:                 eprintln!(\"\\x1b[31m[LICENSE HALT]\\x1b[0m {}\", e);\n204:                 std::process::exit(1);\n205:             }"
+    },
+    {
+      "path": "crates/babylon-attest/src/main.rs",
+      "start_line": 227,
+      "end_line": 243,
+      "observation": "Json/Scitt print JSON to that same stdout.",
+      "sha256": "a50b4f186785736d8f54b5871a9e17857b41ae5f223d4c31d02d95ab0941e863",
+      "excerpt": "227:             match ledger::append_event(parsed_payload) {\n228:                 Ok(block) => match format {\n229:                     OutputFormat::Human => {\n230:                         println!(\"\\x1b[32m[ATTESTATION COMMITTED]\\x1b[0m\");\n231:                         println!(\"Block Height: {}\", block.index);\n232:                         println!(\"Block Hash:   {}\", block.block_hash);\n233:                         println!(\"Prev Hash:    {}\", block.prev_hash);\n234:                         println!(\"Timestamp:    {}\", block.timestamp);\n235:                         println!(\"Signature:    {}...\", &block.signature[..16]);\n236:                     }\n237:                     OutputFormat::Json => {\n238:                         println!(\"{}\", serde_json::to_string_pretty(&block).expect(\"BFT Fallback\"));\n239:                     }\n240:                     OutputFormat::Scitt => {\n241:                         let voucher = ledger::export_scitt_voucher(&block);\n242:                         println!(\"{}\", serde_json::to_string_pretty(&voucher).expect(\"BFT Fallback\"));\n243:                     }"
+    },
+    {
+      "path": "crates/babylon-attest/src/main.rs",
+      "start_line": 386,
+      "end_line": 419,
+      "observation": "UID check and socket 0600 precede a serial blocking stream.read.",
+      "sha256": "a50b4f186785736d8f54b5871a9e17857b41ae5f223d4c31d02d95ab0941e863",
+      "excerpt": "386:                 #[cfg(not(target_os = \"linux\"))]\n387:                 fn peer_matches_host_uid(stream: &UnixStream) -> bool {\n388:                     let mut peer_uid: u32 = u32::MAX;\n389:                     let mut peer_gid: u32 = u32::MAX;\n390:                     let rc = unsafe {\n391:                         libc::getpeereid(stream.as_raw_fd(), &mut peer_uid, &mut peer_gid)\n392:                     };\n393:                     rc == 0 && peer_uid == unsafe { libc::geteuid() }\n394:                 }\n395: \n396:                 let _ = fs::remove_file(&socket);\n397:                 println!(\n398:                     \"\\x1b[32m[BABYLON-ATTEST SIDECAR]\\x1b[0m Listening on AF_UNIX {}\",\n399:                     socket.display()\n400:                 );\n401: \n402:                 let listener = match UnixListener::bind(&socket) {\n403:                     Ok(l) => l,\n404:                     Err(e) => {\n405:                         eprintln!(\"\\x1b[31m[ERROR]\\x1b[0m Cannot bind to {}: {}\", socket.display(), e);\n406:                         std::process::exit(1);\n407:                     }\n408:                 };\n409:                 let _ = fs::set_permissions(&socket, fs::Permissions::from_mode(0o600));\n410: \n411:                 for mut stream in listener.incoming().flatten() {\n412:                     let peer_ok = peer_matches_host_uid(&stream);\n413:                     if !peer_ok {\n414:                         let _ = stream.write_all(b\"HTTP/1.1 403 FORBIDDEN\\r\\nContent-Type: application/json\\r\\n\\r\\n{\\\"error\\\":\\\"getpeereid UID mismatch\\\"}\");\n415:                         continue;\n416:                     }\n417: \n418:                     let mut buffer = [0u8; 8192];\n419:                     if let Ok(bytes_read) = stream.read(&mut buffer) {"
+    },
+    {
+      "path": "crates/babylon-attest/src/main.rs",
+      "start_line": 501,
+      "end_line": 509,
+      "observation": "Response write and loop iteration are also synchronous; no worker dispatch.",
+      "sha256": "a50b4f186785736d8f54b5871a9e17857b41ae5f223d4c31d02d95ab0941e863",
+      "excerpt": "501:                         let response = format!(\n502:                             \"{}\\r\\nContent-Type: application/json\\r\\nContent-Length: {}\\r\\nConnection: close\\r\\n\\r\\n{}\",\n503:                             status_line,\n504:                             response_body.len(),\n505:                             response_body\n506:                         );\n507:                         let _ = stream.write_all(response.as_bytes());\n508:                     }\n509:                 }"
+    },
+    {
+      "path": "crates/babylon-attest/src/main.rs",
+      "start_line": 361,
+      "end_line": 365,
+      "observation": "Serve starts without enforce_license_policy.",
+      "sha256": "a50b4f186785736d8f54b5871a9e17857b41ae5f223d4c31d02d95ab0941e863",
+      "excerpt": "361:         Commands::Serve { socket } => {\n362:             #[cfg(unix)]\n363:             {\n364:                 use std::os::unix::fs::PermissionsExt;\n365:                 use std::os::unix::io::AsRawFd;"
+    },
+    {
+      "path": "crates/babylon-attest/src/main.rs",
+      "start_line": 436,
+      "end_line": 491,
+      "observation": "Token comparison and object JSON validation lead directly to append_event.",
+      "sha256": "a50b4f186785736d8f54b5871a9e17857b41ae5f223d4c31d02d95ab0941e863",
+      "excerpt": "436:                         } else if request_str.starts_with(\"POST /attest\") {\n437:                             // Gate de Autenticación y Fail-Closed (D2 / INV_C5_ONWIRE_CANON: X-Babylon-Token / Authorization / COSE_Sign1)\n438:                             let expected_token = std::env::var(\"BABYLON_ATTEST_TOKEN\")\n439:                                 .ok()\n440:                                 .filter(|v| !v.trim().is_empty())\n441:                                 .or_else(|| {\n442:                                     std::fs::read_to_string(env::license_file())\n443:                                         .ok()\n444:                                         .map(|s| s.trim().to_string())\n445:                                         .filter(|s| !s.is_empty())\n446:                                 });\n447: \n448:                             if let Some((headers_part, body)) = request_str.split_once(\"\\r\\n\\r\\n\") {\n449:                                 let provided_token = headers_part\n450:                                     .lines()\n451:                                     .find_map(|line| {\n452:                                         let lower = line.to_ascii_lowercase();\n453:                                         if lower.starts_with(\"x-babylon-token:\") {\n454:                                             Some(line[\"x-babylon-token:\".len()..].trim())\n455:                                         } else if lower.starts_with(\"authorization:\") {\n456:                                             let val = line[\"authorization:\".len()..].trim();\n457:                                             Some(val.strip_prefix(\"Bearer \").unwrap_or(val).trim())\n458:                                         } else if lower.starts_with(\"x-cose-sign1:\") {\n459:                                             Some(line[\"x-cose-sign1:\".len()..].trim())\n460:                                         } else {\n461:                                             None\n462:                                         }\n463:                                     });\n464: \n465:                                 let is_authorized = matches!((&expected_token, provided_token), (Some(exp), Some(prov)) if !prov.is_empty() && exp == prov);\n466: \n467:                                 if !is_authorized {\n468:                                     (\n469:                                         \"HTTP/1.1 401 UNAUTHORIZED\",\n470:                                         \"{\\\"error\\\": \\\"Unauthorized: valid X-Babylon-Token, Authorization Bearer or COSE_Sign1 required\\\"}\".to_string(),\n471:                                     )\n472:                                 } else {\n473:                                     match serde_json::from_str::<serde_json::Value>(body.trim_matches('\\0')) {\n474:                                         Ok(parsed) if parsed.is_object() => match ledger::append_event(parsed) {\n475:                                             Ok(b) => (\n476:                                                 \"HTTP/1.1 200 OK\",\n477:                                                 serde_json::to_string_pretty(&b).expect(\"BFT Fallback\"),\n478:                                             ),\n479:                                             Err(e) => (\n480:                                                 \"HTTP/1.1 500 INTERNAL SERVER ERROR\",\n481:                                                 serde_json::json!({\"error\": e}).to_string(),\n482:                                             ),\n483:                                         },\n484:                                         Ok(_) => (\n485:                                             \"HTTP/1.1 400 BAD REQUEST\",\n486:                                             \"{\\\"error\\\": \\\"Fail-Closed: Attestation payload must be a JSON object\\\"}\".to_string(),\n487:                                         ),\n488:                                         Err(_) => (\n489:                                             \"HTTP/1.1 400 BAD REQUEST\",\n490:                                             \"{\\\"error\\\": \\\"Fail-Closed: Malformed JSON rejected from WORM ledger\\\"}\".to_string(),\n491:                                         ),"
+    },
+    {
+      "path": "crates/babylon-attest/src/ledger.rs",
+      "start_line": 120,
+      "end_line": 168,
+      "observation": "Append implementation contains no license enforcement.",
+      "sha256": "d9d0ce0c0cae2e92ae723199f6abdeb91fbde09c272a2811395e7298adb1bb27",
+      "excerpt": "120: pub fn append_event(payload: serde_json::Value) -> Result<Block, String> {\n121:     env::ensure_dirs().map_err(|e| format!(\"Failed to create directories: {}\", e))?;\n122:     let (sk, vk) = get_or_create_node_keys()?;\n123:     let blocks = get_chain_blocks()?;\n124: \n125:     let (index, prev_hash) = if let Some(last) = blocks.last() {\n126:         (last.index + 1, last.block_hash.clone())\n127:     } else {\n128:         (0, \"0\".repeat(64))\n129:     };\n130: \n131:     let now = SystemTime::now()\n132:         .duration_since(UNIX_EPOCH)\n133:         .map_err(|e| format!(\"BftCollisionError {{ kind: \\\"TemporalInversion\\\", details: \\\"{}\\\" }}\", e))?\n134:         .as_secs();\n135: \n136:     let canonical_payload_bytes = serde_json::to_vec(&payload)\n137:         .map_err(|e| format!(\"Payload serialization error: {}\", e))?;\n138:     let payload_hash = compute_blake3_256(&canonical_payload_bytes);\n139:     let signer_pubkey = hex::encode(vk.to_bytes());\n140: \n141:     let commitment = compute_block_commitment(index, now, &prev_hash, &payload_hash, &signer_pubkey);\n142:     let sig: Signature = sk.sign(&commitment);\n143:     let signature = hex::encode(sig.to_bytes());\n144: \n145:     let block_hash = compute_blake3_256(&commitment);\n146: \n147:     let block = Block {\n148:         index,\n149:         timestamp: now,\n150:         prev_hash,\n151:         payload_hash,\n152:         payload,\n153:         signer_pubkey,\n154:         signature,\n155:         block_hash,\n156:     };\n157: \n158:     let serialized = serde_json::to_string(&block).map_err(|e| format!(\"Block serialization error: {}\", e))?;\n159: \n160:     let mut file = OpenOptions::new()\n161:         .create(true)\n162:         .append(true)\n163:         .open(env::ledger_file())\n164:         .map_err(|e| format!(\"Failed to open ledger for appending: {}\", e))?;\n165: \n166:     writeln!(file, \"{}\", serialized).map_err(|e| format!(\"Failed to write block: {}\", e))?;\n167: \n168:     Ok(block)"
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bindings.rs",
+      "start_line": 154,
+      "end_line": 182,
+      "observation": "Verification never uses self.atms or self.ledger.",
+      "sha256": "988c71e782d600406e2e985c5279c2bf2abc33a51c3bea7f49b021f4479847a3",
+      "excerpt": "154:     /// Valida formalmente una aserción contra el kernel de Harrop Ω₀\n155:     pub fn verify_statement_content(&self, content: &str, modality: &str, obligations: Vec<String>) -> PyResult<bool> {\n156:         let mod_enum = match modality.to_lowercase().as_str() {\n157:             \"epistemic\" => Modality::Epistemic,\n158:             \"deontic\" => Modality::Deontic,\n159:             _ => return Err(PyRuntimeError::new_err(\"Modalidad inválida: use 'epistemic' o 'deontic'\")),\n160:         };\n161:         let mut obs_vec = Vec::new();\n162:         for ob in obligations {\n163:             match ob.to_lowercase().as_str() {\n164:                 \"provenance\" => obs_vec.push(crate::omega0::Obligation::Provenance),\n165:                 \"reproducibility\" => obs_vec.push(crate::omega0::Obligation::Reproducibility),\n166:                 \"contradiction\" => obs_vec.push(crate::omega0::Obligation::Contradiction),\n167:                 \"confidence\" => obs_vec.push(crate::omega0::Obligation::Confidence),\n168:                 \"freshness\" => obs_vec.push(crate::omega0::Obligation::Freshness),\n169:                 \"completeness\" => obs_vec.push(crate::omega0::Obligation::Completeness),\n170:                 _ => {},\n171:             }\n172:         }\n173:         let stmt = Statement {\n174:             content: content.to_string(),\n175:             modality: mod_enum,\n176:             obligations: obs_vec,\n177:         };\n178:         let js = JustifiedStatement {\n179:             statement: stmt,\n180:             justification: Justification::Observation { timestamp: 0, sensor: \"native_pyo3\".to_string() },\n181:         };\n182:         Ok(crate::omega0::verify(&js))"
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/omega0.rs",
+      "start_line": 133,
+      "end_line": 145,
+      "observation": "Empty obligation lists return true.",
+      "sha256": "3fe6d13236fed9f12d96ef09608039b56db5a829d918829a1a474adaea650fb2",
+      "excerpt": "133: pub fn verify(js: &JustifiedStatement) -> bool {\n134:     verify_with_nogoods(js, &std::collections::HashSet::new())\n135: }\n136: \n137: /// Verification with active nogoods set to resolve Obligation::Contradiction.\n138: pub fn verify_with_nogoods(js: &JustifiedStatement, nogoods: &std::collections::HashSet<String>) -> bool {\n139:     let s = &js.statement;\n140:     let j = &js.justification;\n141: \n142:     // A statement with no obligations is trivially verified.\n143:     if s.obligations.is_empty() {\n144:         return true;\n145:     }"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/autodidact/engine.py",
+      "start_line": 89,
+      "end_line": 104,
+      "observation": "Existing consumer verifies first and converts enum obligations to their values.",
+      "sha256": "5219b43011f4c2f98ca85197d75c6087ca0177370c1922b2eaafb0288bc4d503",
+      "excerpt": "89:         stmt = Statement(content=content, modality=modality, obligations=obligations)\n90:         just = Justification(kind=justification_kind, parameters=justification_params, confidence=confidence)\n91: \n92:         js = JustifiedStatement(statement=stmt, justification=just)\n93:         js.statement_hash = hash_statement(stmt)\n94:         js.status = StatementStatus.CANDIDATE\n95: \n96:         # Si el statement ya estuviese falsado en el oráculo, verify fallará si tiene Obligation.CONTRADICTION\n97:         is_valid = verify(js, nogoods=self.falsifier.nogoods)\n98:         if self.cortex_kernel and is_valid:\n99:             try:\n100:                 obs_list = [o.value for o in stmt.obligations]\n101:                 if not self.cortex_kernel.verify_statement_content(stmt.content, stmt.modality.value, obs_list):\n102:                     is_valid = False\n103:             except Exception as ex:\n104:                 logger.debug(f\"Verificación local Harrop activa: {ex}\")"
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bindings.rs",
+      "start_line": 94,
+      "end_line": 118,
+      "observation": "contradict_knowledge persists and installs the contradiction.",
+      "sha256": "988c71e782d600406e2e985c5279c2bf2abc33a51c3bea7f49b021f4479847a3",
+      "excerpt": "94:     /// Inyecta una contradicción (nogood) en el Kernel y propaga DDB en ATMS\n95:     pub fn contradict_knowledge(&mut self, content: &str, environment_id: &str) -> PyResult<String> {\n96:         let stmt = Statement {\n97:             content: content.to_string(),\n98:             modality: Modality::Epistemic,\n99:             obligations: vec![],\n100:         };\n101:         let js = JustifiedStatement {\n102:             statement: stmt.clone(),\n103:             justification: Justification::Conjecture,\n104:         };\n105:         // Ensure statement is recorded in Master Ledger so nogood replay can find it\n106:         self.ledger.assert_knowledge(&js, environment_id)\n107:             .map_err(|e| PyRuntimeError::new_err(format!(\"Causal-Determinist FATAL: Ledger error asserting knowledge for nogood: {}\", e)))?;\n108: \n109:         let statement_hash = MasterLedger::hash_statement(&stmt);\n110:         let taint = self.ledger.assert_nogood(&statement_hash, environment_id)\n111:             .map_err(|e| PyRuntimeError::new_err(format!(\"Causal-Determinist FATAL: Ledger error asserting nogood: {}\", e)))?;\n112:             \n113:         let node_id = if let Some(node_id) = self.atms.find_node_by_datum(content) {\n114:             node_id\n115:         } else {\n116:             self.atms.install(&js)\n117:         };\n118:         self.atms.contradict(&[node_id]);"
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/omega0.rs",
+      "start_line": 133,
+      "end_line": 154,
+      "observation": "Wrapper supplies empty set; Contradiction only tests set membership.",
+      "sha256": "3fe6d13236fed9f12d96ef09608039b56db5a829d918829a1a474adaea650fb2",
+      "excerpt": "133: pub fn verify(js: &JustifiedStatement) -> bool {\n134:     verify_with_nogoods(js, &std::collections::HashSet::new())\n135: }\n136: \n137: /// Verification with active nogoods set to resolve Obligation::Contradiction.\n138: pub fn verify_with_nogoods(js: &JustifiedStatement, nogoods: &std::collections::HashSet<String>) -> bool {\n139:     let s = &js.statement;\n140:     let j = &js.justification;\n141: \n142:     // A statement with no obligations is trivially verified.\n143:     if s.obligations.is_empty() {\n144:         return true;\n145:     }\n146: \n147:     for obligation in &s.obligations {\n148:         let satisfied = match obligation {\n149:             Obligation::Provenance => has_provenance(j),\n150:             Obligation::Reproducibility => has_reproducibility(j),\n151:             Obligation::Confidence => has_sufficient_confidence(j),\n152:             Obligation::Contradiction => {\n153:                 let s_hash = hash_statement(s);\n154:                 !nogoods.contains(&s_hash)"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/autodidact/engine.py",
+      "start_line": 96,
+      "end_line": 104,
+      "observation": "Python consumer rejects against its own falsifier nogoods first.",
+      "sha256": "5219b43011f4c2f98ca85197d75c6087ca0177370c1922b2eaafb0288bc4d503",
+      "excerpt": "96:         # Si el statement ya estuviese falsado en el oráculo, verify fallará si tiene Obligation.CONTRADICTION\n97:         is_valid = verify(js, nogoods=self.falsifier.nogoods)\n98:         if self.cortex_kernel and is_valid:\n99:             try:\n100:                 obs_list = [o.value for o in stmt.obligations]\n101:                 if not self.cortex_kernel.verify_statement_content(stmt.content, stmt.modality.value, obs_list):\n102:                     is_valid = False\n103:             except Exception as ex:\n104:                 logger.debug(f\"Verificación local Harrop activa: {ex}\")"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/core/thermo_ast_pruner.py",
+      "start_line": 16,
+      "end_line": 19,
+      "observation": "Every constant-expression statement is removed.",
+      "sha256": "d4b31e027ea5bc5d6fd75fc59a1d5c76f35cec86e90ee880ca69a9e723dd2c18",
+      "excerpt": "16:     def visit_Expr(self, node: ast.Expr) -> Optional[ast.AST]:\n17:         if isinstance(node.value, ast.Constant):\n18:             return None\n19:         return self.generic_visit(node)"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/core/thermo_ast_pruner.py",
+      "start_line": 79,
+      "end_line": 87,
+      "observation": "Unparsed AST is written without inserting pass or parsing output.",
+      "sha256": "d4b31e027ea5bc5d6fd75fc59a1d5c76f35cec86e90ee880ca69a9e723dd2c18",
+      "excerpt": "79: def transmute_file(filepath: str) -> None:\n80:     with open(filepath, \"r\", encoding=\"utf-8\") as f:\n81:         content = f.read()\n82:         tree = ast.parse(content)\n83:     purger = AnergiaPurger()\n84:     mutated_tree = purger.visit(tree)\n85:     ast.fix_missing_locations(mutated_tree)\n86:     with open(filepath, \"w\", encoding=\"utf-8\") as f:\n87:         f.write(ast.unparse(mutated_tree))"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/core/thermo_ast_pruner.py",
+      "start_line": 90,
+      "end_line": 100,
+      "observation": "CLI feeds requested paths directly to transmute_file.",
+      "sha256": "d4b31e027ea5bc5d6fd75fc59a1d5c76f35cec86e90ee880ca69a9e723dd2c18",
+      "excerpt": "90: if __name__ == \"__main__\":\n91:     parser = argparse.ArgumentParser(description=\"BABYLON-60 Thermo AST Pruner\")\n92:     parser.add_argument(\"files\", nargs=\"+\", help=\"Files to prune\")\n93:     args = parser.parse_args()\n94:     for f in args.files:\n95:         try:\n96:             transmute_file(f)\n97:         except (OSError, SyntaxError, ValueError, AttributeError, TypeError):\n98:             os.kill(os.getpid(), signal.SIGKILL)\n99:             raise RuntimeError(\"FAIL-FAST: General Exception intercepted.\")\n100:     print(f\"Successfully pruned {len(args.files)} files.\")"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/core/thermo_ast_pruner.py",
+      "start_line": 21,
+      "end_line": 49,
+      "observation": "Broad handlers are replaced using bare os and signal names.",
+      "sha256": "d4b31e027ea5bc5d6fd75fc59a1d5c76f35cec86e90ee880ca69a9e723dd2c18",
+      "excerpt": "21:     def visit_Try(self, node: ast.Try) -> ast.AST:\n22:         for i, handler in enumerate(node.handlers):\n23:             if handler.type is None or (isinstance(handler.type, ast.Name) and handler.type.id == \"Exception\"):\n24:                 kill_node = ast.Expr(\n25:                     value=ast.Call(\n26:                         func=ast.Attribute(value=ast.Name(id=\"os\", ctx=ast.Load()), attr=\"kill\", ctx=ast.Load()),\n27:                         args=[\n28:                             ast.Call(\n29:                                 func=ast.Attribute(\n30:                                     value=ast.Name(id=\"os\", ctx=ast.Load()), attr=\"getpid\", ctx=ast.Load()\n31:                                 ),\n32:                                 args=[],\n33:                                 keywords=[],\n34:                             ),\n35:                             ast.Attribute(value=ast.Name(id=\"signal\", ctx=ast.Load()), attr=\"SIGKILL\", ctx=ast.Load()),\n36:                         ],\n37:                         keywords=[],\n38:                     )\n39:                 )\n40:                 raise_node = ast.Raise(\n41:                     exc=ast.Call(\n42:                         func=ast.Name(id=\"RuntimeError\", ctx=ast.Load()),\n43:                         args=[ast.Constant(value=\"FAIL-FAST: General Exception intercepted.\")],\n44:                         keywords=[],\n45:                     ),\n46:                     cause=None,\n47:                 )\n48:                 node.handlers[i].body = [kill_node, raise_node]\n49:                 self.injected_kill = True"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/core/thermo_ast_pruner.py",
+      "start_line": 52,
+      "end_line": 75,
+      "observation": "Import detection uses alias.name and suppresses required bare imports even when asname is different.",
+      "sha256": "d4b31e027ea5bc5d6fd75fc59a1d5c76f35cec86e90ee880ca69a9e723dd2c18",
+      "excerpt": "52:     def _find_import_flags(self, body: list[ast.stmt]) -> tuple[int, bool, bool]:\n53:         insert_idx = 0\n54:         has_os = False\n55:         has_signal = False\n56:         for idx, child in enumerate(body):\n57:             if isinstance(child, ast.ImportFrom) and child.module == \"__future__\":\n58:                 insert_idx = idx + 1\n59:             if isinstance(child, ast.Import):\n60:                 names = [na.name for na in child.names]\n61:                 if \"os\" in names:\n62:                     has_os = True\n63:                 if \"signal\" in names:\n64:                     has_signal = True\n65:         return insert_idx, has_os, has_signal\n66: \n67:     def visit_Module(self, node: ast.Module) -> ast.Module:\n68:         visited = self.generic_visit(node)\n69:         assert isinstance(visited, ast.Module)\n70:         if self.injected_kill:\n71:             insert_idx, has_os, has_signal = self._find_import_flags(visited.body)\n72:             if not has_signal:\n73:                 visited.body.insert(insert_idx, ast.Import(names=[ast.alias(name=\"signal\", asname=None)]))\n74:             if not has_os:\n75:                 visited.body.insert(insert_idx, ast.Import(names=[ast.alias(name=\"os\", asname=None)]))"
+    },
+    {
+      "path": "crates/b60-lang/src/repl.rs",
+      "start_line": 30,
+      "end_line": 34,
+      "observation": "Empty input yields an empty response, not EXIT.",
+      "sha256": "b916a5b79453daf1f8a48915e06b874a434a39a59311ad00f9a966865accda84",
+      "excerpt": "30:     pub fn eval_line(&mut self, line: &str) -> String {\n31:         let trimmed = line.trim();\n32:         if trimmed.is_empty() {\n33:             return String::new();\n34:         }"
+    },
+    {
+      "path": "crates/b60-lang/src/repl.rs",
+      "start_line": 159,
+      "end_line": 183,
+      "observation": "Only read errors or literal EXIT terminate; Ok(0) is ignored.",
+      "sha256": "b916a5b79453daf1f8a48915e06b874a434a39a59311ad00f9a966865accda84",
+      "excerpt": "159:     pub fn run_interactive(&mut self) {\n160:         println!(\"==================================================================\");\n161:         println!(\"         B60 INTERACTIVE REPL · SISTEMA OPERATIVO C5-REAL         \");\n162:         println!(\"  Escribe 'help' para ver comandos o 'exit' para salir.           \");\n163:         println!(\"==================================================================\");\n164: \n165:         let stdin = io::stdin();\n166:         loop {\n167:             print!(\"b60> \");\n168:             let _ = io::stdout().flush();\n169: \n170:             let mut buffer = String::new();\n171:             if stdin.read_line(&mut buffer).is_err() {\n172:                 break;\n173:             }\n174: \n175:             let output = self.eval_line(&buffer);\n176:             if output == \"EXIT\" {\n177:                 println!(\"Saliendo de B60 REPL. Homeostasis preservada.\");\n178:                 break;\n179:             }\n180:             if !output.is_empty() {\n181:                 println!(\"{}\", output);\n182:             }\n183:         }"
+    },
+    {
+      "path": "crates/b60-lang/src/main.rs",
+      "start_line": 267,
+      "end_line": 269,
+      "observation": "REPL is a CLI-accessible path.",
+      "sha256": "289ed9d9b2b5c841abccaaa8404f80a82257c11e1db2ba07bc6a0ae99d29ad1d",
+      "excerpt": "267:         Commands::Repl => {\n268:             let mut repl = b60_lang::B60Repl::new();\n269:             repl.run_interactive();"
+    },
+    {
+      "path": "crates/b60-lang/src/repl.rs",
+      "start_line": 51,
+      "end_line": 64,
+      "observation": "All four operands parse as u64 and are added without checked_add or bounds.",
+      "sha256": "b916a5b79453daf1f8a48915e06b874a434a39a59311ad00f9a966865accda84",
+      "excerpt": "51:             \"sexa\" => {\n52:                 if parts.len() >= 6 && parts[1] == \"add\" {\n53:                     let s1: u64 = parts[2].parse().unwrap_or(0);\n54:                     let f1: u64 = parts[3].parse().unwrap_or(0);\n55:                     let s2: u64 = parts[4].parse().unwrap_or(0);\n56:                     let f2: u64 = parts[5].parse().unwrap_or(0);\n57: \n58:                     let total_frac = f1 + f2;\n59:                     let carry = total_frac / FRACTION_BASE;\n60:                     let rem = total_frac % FRACTION_BASE;\n61:                     let total_s = s1 + s2 + carry;\n62:                     format!(\"Resultado Q60: {}s + {}/{} u (carry: {})\", total_s, rem, FRACTION_BASE, carry)\n63:                 } else {\n64:                     \"Uso: sexa add <s1> <f1> <s2> <f2>\".to_string()"
+    },
+    {
+      "path": "crates/b60-lang/src/repl.rs",
+      "start_line": 39,
+      "end_line": 40,
+      "observation": "Help advertises exact Q60 addition.",
+      "sha256": "b916a5b79453daf1f8a48915e06b874a434a39a59311ad00f9a966865accda84",
+      "excerpt": "39:                 \"Comandos disponibles en B60 REPL:\\n\\\n40:                  • sexa add <s1> <f1> <s2> <f2>         - Suma sexagesimal exacta Q60\\n\\"
+    },
+    {
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "start_line": 8,
+      "end_line": 12,
+      "observation": "Header declares strict Gitleaks scanning as a verified invariant.",
+      "sha256": "704da66f24d45ae3634083273a9c0dfecc8e07530b5a6520ff3f1f336fc58830",
+      "excerpt": "8: # Invariantes verificadas en silicio:\n9: # 1. Cero archivos de marketing, bases de datos o leads (.csv, .jsonl, .db, .vtt).\n10: # 2. Peso total del bundle archivado estrictamente menor a 20 MB.\n11: # 3. Escaneo estricto de secretos con Gitleaks (cero hallazgos).\n12: # 4. Atestación biométrica física obligatoria en el Secure Enclave (Touch ID)."
+    },
+    {
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "start_line": 82,
+      "end_line": 93,
+      "observation": "Missing scanner only warns; scanner failures when installed do abort.",
+      "sha256": "704da66f24d45ae3634083273a9c0dfecc8e07530b5a6520ff3f1f336fc58830",
+      "excerpt": "82: # 5. Escaneo de Secretos con Gitleaks\n83: echo -n \"[5/6] Ejecutando escaneo Gitleaks sobre el árbol de código... \"\n84: if command -v gitleaks >/dev/null 2>&1; then\n85:     if ! gitleaks detect --config=\"$REPO_ROOT/.gitleaks.toml\" --source=\"$REPO_ROOT\" --no-git --redact >/dev/null 2>&1; then\n86:         echo \"ERROR\"\n87:         echo \"FATAL: Gitleaks detectó posibles secretos en el código. Revisa .gitleaks.toml o purga las claves.\"\n88:         exit 1\n89:     fi\n90:     echo \"OK (0 secretos detectados)\"\n91: else\n92:     echo \"WARNING (gitleaks no instalado en PATH; se omite escaneo dinámico)\"\n93: fi"
+    },
+    {
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "start_line": 107,
+      "end_line": 145,
+      "observation": "Biometric gate and remote handling lead to git push without another scan.",
+      "sha256": "704da66f24d45ae3634083273a9c0dfecc8e07530b5a6520ff3f1f336fc58830",
+      "excerpt": "107: if [ \"$DRY_RUN\" -eq 0 ]; then\n108:     echo \"  Solicitando atestación somática en silicio (Touch ID)...\"\n109:     if command -v c5_biometric_gate >/dev/null 2>&1; then\n110:         if ! c5_biometric_gate --causal-hash \"$TREE_DIGEST\" --action \"Proyección Pública\" --agent \"MOSKV-1\" --scope \"BABYLON-60-PUBLIC\" --no-sound; then\n111:             echo \"FATAL: Atestación biométrica fallida o cancelada por el operador.\"\n112:             exit 1\n113:         fi\n114:     elif [ -f \"$REPO_ROOT/01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift\" ]; then\n115:         if ! swift \"$REPO_ROOT/01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift\" --causal-hash \"$TREE_DIGEST\" --action \"Proyección Pública\" --agent \"MOSKV-1\" --scope \"BABYLON-60-PUBLIC\" --no-sound; then\n116:             echo \"FATAL: Atestación biométrica fallida o cancelada por el operador.\"\n117:             exit 1\n118:         fi\n119:     else\n120:         echo \"FATAL: c5_biometric_gate no disponible; abortando en Fail-Stop 0xDEAD_6060.\"\n121:         exit 1\n122:     fi\n123:     echo \"[AUTORIZACIÓN BIOMÉTRICA CONCEDIDA]\"\n124: fi\n125: \n126: # 7. Despacho hacia el Repositorio Público\n127: if [ \"$DRY_RUN\" -eq 1 ]; then\n128:     echo \"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\"\n129:     echo \"  [DRY-RUN EXITOSO] El árbol cumple 100% de las invariantes para publicación.\"\n130:     echo \"  Rama local lista: release/v5.0-clean ($CLEAN_COMMIT)\"\n131:     echo \"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\"\n132:     exit 0\n133: fi\n134: \n135: if ! git remote get-url \"$TARGET_REMOTE\" >/dev/null 2>&1; then\n136:     echo \"AVISO: El remote '$TARGET_REMOTE' no está configurado en este repositorio.\"\n137:     echo \"Para vincular el repositorio público independiente, ejecuta:\"\n138:     echo \"  git remote add $TARGET_REMOTE git@github.com:borjamoskv/babylon60-core.git\"\n139:     echo \"Luego vuelve a ejecutar este script:\"\n140:     echo \"  ./scripts/c5_git_utils/c5_distill_public_mirror.sh $TARGET_REMOTE\"\n141:     exit 0\n142: fi\n143: \n144: echo \"Despachando rama limpia hacia '$TARGET_REMOTE' (main)...\"\n145: git push \"$TARGET_REMOTE\" release/v5.0-clean:main --force"
+    },
+    {
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "start_line": 19,
+      "end_line": 24,
+      "observation": "DRY-RUN is explicitly described as omitting git push.",
+      "sha256": "704da66f24d45ae3634083273a9c0dfecc8e07530b5a6520ff3f1f336fc58830",
+      "excerpt": "19: DRY_RUN=0\n20: \n21: if [ \"${1:-}\" = \"--dry-run\" ] || [ \"${2:-}\" = \"--dry-run\" ]; then\n22:     DRY_RUN=1\n23:     echo \"[C5-PROJECTION] Modo DRY-RUN activo. Se verificarán invariantes sin ejecutar git push.\"\n24: fi"
+    },
+    {
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "start_line": 101,
+      "end_line": 105,
+      "observation": "commit-tree and branch -f intentionally prepare the named local release branch.",
+      "sha256": "704da66f24d45ae3634083273a9c0dfecc8e07530b5a6520ff3f1f336fc58830",
+      "excerpt": "101: # Forjar commit huérfano local 'release/v5.0-clean'\n102: COMMIT_MSG=\"feat(release): BABYLON-60 v5.0 Sovereign Core (Clean Distillation)\"\n103: CLEAN_COMMIT=$(git commit-tree \"$CLEAN_TREE\" -m \"$COMMIT_MSG\")\n104: git branch -f release/v5.0-clean \"$CLEAN_COMMIT\"\n105: echo \"[6/6] Rama huérfana forjada en silicio: release/v5.0-clean -> $CLEAN_COMMIT\""
+    },
+    {
+      "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+      "start_line": 126,
+      "end_line": 132,
+      "observation": "Dry-run exit reports that local branch as ready.",
+      "sha256": "704da66f24d45ae3634083273a9c0dfecc8e07530b5a6520ff3f1f336fc58830",
+      "excerpt": "126: # 7. Despacho hacia el Repositorio Público\n127: if [ \"$DRY_RUN\" -eq 1 ]; then\n128:     echo \"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\"\n129:     echo \"  [DRY-RUN EXITOSO] El árbol cumple 100% de las invariantes para publicación.\"\n130:     echo \"  Rama local lista: release/v5.0-clean ($CLEAN_COMMIT)\"\n131:     echo \"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\"\n132:     exit 0"
+    },
+    {
+      "path": "tools/skill_library/global/anergy-purge-protocol/scripts/anergy_purge.py",
+      "start_line": 39,
+      "end_line": 53,
+      "observation": "Protected directories are declared.",
+      "sha256": "82b6881e3cc765b82d70814a477beaa7e46c3b074c7485a843b6baf303e16253",
+      "excerpt": "39: CANONICAL_PROTECTED_DIRS = [\n40:     \"babylon-web\",\n41:     \"apps/web\",\n42:     \"apps/babylon60-ide\",\n43:     \"remotion\",\n44:     \"ley_menores_remotion\",\n45:     \"sota_documentary_remotion\",\n46:     \"strike-rs/.venv\",\n47:     \".uv_python\",\n48:     \"youtube-research-remotion\",\n49:     \"cortex-persist\",\n50:     \"02_CORTEX_ENGINE/cortex\",\n51:     \"data/cortex_memory.db\",\n52:     \"artifact_bundle_v3\",\n53: ]"
+    },
+    {
+      "path": "tools/skill_library/global/anergy-purge-protocol/scripts/anergy_purge.py",
+      "start_line": 178,
+      "end_line": 190,
+      "observation": "WAL/SHM deletion depends only on suffix, is_file and dry_run.",
+      "sha256": "82b6881e3cc765b82d70814a477beaa7e46c3b074c7485a843b6baf303e16253",
+      "excerpt": "178:     # 6. CLASE B — SQLite WAL Huérfanos (*.db-shm, *.db-wal)\n179:     for root, dirs, files in os.walk(workspace_path):\n180:         if any(p in root for p in [\".venv\", \"node_modules\", \".git\"]):\n181:             continue\n182:         for f in files:\n183:             if f.endswith(\".db-shm\") or f.endswith(\".db-wal\"):\n184:                 fp = Path(root) / f\n185:                 if fp.is_file():\n186:                     sz = fp.stat().st_size\n187:                     stats[\"wal_orphans\"] += 1\n188:                     stats[\"wal_bytes\"] += sz\n189:                     if not dry_run:\n190:                         fp.unlink(missing_ok=True)"
+    },
+    {
+      "path": "tools/skill_library/global/anergy-purge-protocol/scripts/anergy_purge.py",
+      "start_line": 241,
+      "end_line": 258,
+      "observation": "Ordinary workspace CLI invocation reaches that same purge function.",
+      "sha256": "82b6881e3cc765b82d70814a477beaa7e46c3b074c7485a843b6baf303e16253",
+      "excerpt": "241: def main():\n242:     parser = argparse.ArgumentParser(description=\"Purga de anergía de alta exergía.\")\n243:     parser.add_argument(\n244:         \"--workspace\",\n245:         type=Path,\n246:         default=Path.cwd(),\n247:         help=\"Ruta raíz del workspace a sanear (default: $PWD)\",\n248:     )\n249:     parser.add_argument(\n250:         \"--dry-run\",\n251:         action=\"store_true\",\n252:         help=\"Calcular telemetría sin mutar o eliminar archivos.\",\n253:     )\n254:     args = parser.parse_args()\n255: \n256:     ws = args.workspace.resolve()\n257:     stats = purge_anergy(ws, dry_run=args.dry_run)\n258:     print_brutalist_table(stats, ws)"
+    },
+    {
+      "path": "tools/skill_library/global/anergy-purge-protocol/scripts/anergy_purge.py",
+      "start_line": 67,
+      "end_line": 67,
+      "observation": "Function takes workspace_path and defaults dry_run to false.",
+      "sha256": "82b6881e3cc765b82d70814a477beaa7e46c3b074c7485a843b6baf303e16253",
+      "excerpt": "67: def purge_anergy(workspace_path: Path, dry_run: bool = False) -> dict:"
+    },
+    {
+      "path": "tools/skill_library/global/anergy-purge-protocol/scripts/anergy_purge.py",
+      "start_line": 192,
+      "end_line": 208,
+      "observation": "Global home database selection and broad status predicate have no workspace/session filter.",
+      "sha256": "82b6881e3cc765b82d70814a477beaa7e46c3b074c7485a843b6baf303e16253",
+      "excerpt": "192:     # 7. CLASE L — Ghost Listeners en conversation_summaries.db\n193:     db_path = Path.home() / \".gemini\" / \"antigravity\" / \"conversation_summaries.db\"\n194:     if db_path.is_file():\n195:         try:\n196:             conn = sqlite3.connect(db_path)\n197:             cur = conn.cursor()\n198:             cur.execute(\n199:                 \"SELECT count(*) FROM conversation_summaries WHERE status = 'CASCADE_RUN_STATUS_RUNNING' OR not_fully_idle = 1\"\n200:             )\n201:             count = cur.fetchone()[0]\n202:             stats[\"ghost_listeners_reset\"] = count\n203:             if not dry_run and count > 0:\n204:                 cur.execute(\n205:                     \"UPDATE conversation_summaries SET status = 'CASCADE_RUN_STATUS_IDLE', not_fully_idle = 0 WHERE status = 'CASCADE_RUN_STATUS_RUNNING' OR not_fully_idle = 1\"\n206:                 )\n207:                 conn.commit()\n208:             conn.close()"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/bft/bayesian_swarm.py",
+      "start_line": 47,
+      "end_line": 64,
+      "observation": "Optional weights default uniformly only when no mapping is supplied.",
+      "sha256": "53b700f012d78228be18a05fe32abf00c9eaa8b9101c9bc058e311c5069cef4d",
+      "excerpt": "47:     def logarithmic_opinion_pool(\n48:         self, opinions: Dict[str, Dict[str, float]], weights: Dict[str, float] | None = None\n49:     ) -> Dict[str, float]:\n50:         \"\"\"\n51:         Computes the Logarithmic Opinion Pool (LogOP) of multiple categorical distributions.\n52: \n53:         opinions: Dict mapping agent_id -> Dict[hypothesis -> probability]\n54:         weights: Optional dict mapping agent_id -> weight. Defaults to uniform weights.\n55: \n56:         Returns a normalized categorical distribution Dict[hypothesis -> probability].\n57:         \"\"\"\n58:         if not opinions:\n59:             return {}\n60: \n61:         # Default to uniform weights if none provided\n62:         if weights is None:\n63:             w = 1.0 / len(opinions)\n64:             weights = {agent: w for agent in opinions.keys()}"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/bft/bayesian_swarm.py",
+      "start_line": 73,
+      "end_line": 105,
+      "observation": "Missing weights default zero, but nonpositive probability veto happens before multiplication.",
+      "sha256": "53b700f012d78228be18a05fe32abf00c9eaa8b9101c9bc058e311c5069cef4d",
+      "excerpt": "73:         for hyp in hypotheses:\n74:             log_sum = 0.0\n75:             vetoed = False\n76:             for agent, dist in opinions.items():\n77:                 p = dist.get(hyp, 0.0)\n78:                 w = weights.get(agent, 0.0)\n79: \n80:                 if p <= 0.0:\n81:                     vetoed = True\n82:                     break  # Veto absolute (LogOP property)\n83: \n84:                 # Geometric weighted component in logarithmic domain to prevent underflow\n85:                 p_clamped = max(p, 1e-300)\n86:                 try:\n87:                     val = math.log(p_clamped)\n88:                     if math.isinf(val):\n89:                         vetoed = True\n90:                         break\n91:                     log_sum += w * val\n92:                 except ValueError:\n93:                     vetoed = True\n94:                     break\n95: \n96:             if vetoed:\n97:                 aggregated_unnormalized[hyp] = 0.0\n98:             else:\n99:                 aggregated_unnormalized[hyp] = math.exp(log_sum)\n100: \n101:         # Normalize\n102:         total_mass = sum(aggregated_unnormalized.values())\n103:         if total_mass == 0.0:\n104:             # If all hypotheses were vetoed or total mass is 0\n105:             return {hyp: 0.0 for hyp in hypotheses}"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/bft/bayesian_swarm.py",
+      "start_line": 31,
+      "end_line": 40,
+      "observation": "Async wrapper forwards weights without filtering zero-weight opinions.",
+      "sha256": "53b700f012d78228be18a05fe32abf00c9eaa8b9101c9bc058e311c5069cef4d",
+      "excerpt": "31:     async def async_pool_and_update(\n32:         self, opinions: Dict[str, Dict[str, float]], weights: Dict[str, float] | None = None\n33:     ) -> Dict[str, float]:\n34:         \"\"\"\n35:         [FRENTE-037] Thread-safe/coroutine-safe asynchronous opinion pool update.\n36:         Acquires asyncio.Lock to prevent lost updates or dirty reads under swarm concurrency.\n37:         \"\"\"\n38:         async with self._get_lock():\n39:             result = self.logarithmic_opinion_pool(opinions, weights)\n40:             self._current_beliefs = result"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/crypto/bootstrap.py",
+      "start_line": 24,
+      "end_line": 40,
+      "observation": "Ed25519 key is serialized as unencrypted PEM.",
+      "sha256": "cae46a9505543666c9f01409555589d1c870515e7c2dd70a333975ed1a126071",
+      "excerpt": "24:     def generate_identity() -> tuple[ed25519.Ed25519PrivateKey, str, str]:\n25:         \"\"\"Generate Ed25519 keypair.\"\"\"\n26:         private_key = ed25519.Ed25519PrivateKey.generate()\n27:         public_key = private_key.public_key()\n28: \n29:         priv_bytes = private_key.private_bytes(\n30:             encoding=serialization.Encoding.PEM,\n31:             format=serialization.PrivateFormat.PKCS8,\n32:             encryption_algorithm=serialization.NoEncryption(),\n33:         ).decode(\"utf-8\")\n34: \n35:         pub_bytes = public_key.public_bytes(\n36:             encoding=serialization.Encoding.PEM,\n37:             format=serialization.PublicFormat.SubjectPublicKeyInfo,\n38:         ).decode(\"utf-8\")\n39: \n40:         return private_key, priv_bytes, pub_bytes"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/crypto/bootstrap.py",
+      "start_line": 43,
+      "end_line": 65,
+      "observation": "Empty-ledger guard leads to direct insertion of that PEM into private_key_enc.",
+      "sha256": "cae46a9505543666c9f01409555589d1c870515e7c2dd70a333975ed1a126071",
+      "excerpt": "43:     async def bootstrap_genesis(conn: aiosqlite.Connection, tenant_id: str = \"cortex-swarm-0\") -> None:\n44:         \"\"\"Inject the GENESIS block if cortex_ledger is empty.\"\"\"\n45:         # Assume cortex_ledger is already created by migration\n46:         async with conn.execute(\"SELECT COUNT(*) FROM cortex_ledger\") as cursor:\n47:             row = await cursor.fetchone()\n48:             count = int(row[0]) if row else 0\n49: \n50:         if count > 0:\n51:             return  # Already bootstrapped\n52: \n53:         logger.info(\"Causal-Determinist: Bootstrapping CORTEX-PERSIST Genesis block...\")\n54:         private_key, priv_pem, pub_pem = IdentityBootstrap.generate_identity()\n55: \n56:         await conn.execute(\"\"\"\n57:             CREATE TABLE IF NOT EXISTS cortex_identity (\n58:                 tenant_id TEXT PRIMARY KEY,\n59:                 public_key_pem TEXT NOT NULL,\n60:                 private_key_enc TEXT\n61:             )\n62:         \"\"\")\n63:         await conn.execute(\n64:             \"INSERT INTO cortex_identity (tenant_id, public_key_pem, private_key_enc) VALUES (?, ?, ?)\",\n65:             (tenant_id, pub_pem, priv_pem),"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/crypto/bootstrap.py",
+      "start_line": 80,
+      "end_line": 97,
+      "observation": "Genesis and identity changes are committed together.",
+      "sha256": "cae46a9505543666c9f01409555589d1c870515e7c2dd70a333975ed1a126071",
+      "excerpt": "80:         await conn.execute(\n81:             \"\"\"INSERT INTO cortex_ledger\n82:                (lamport_t, agent_id, event_id, event_type, timestamp, prev_hash, payload_hash, signature, payload)\n83:                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)\"\"\",\n84:             (\n85:                 0,\n86:                 tenant_id,\n87:                 \"EVT_GENESIS\",\n88:                 \"GENESIS\",\n89:                 timestamp,\n90:                 \"0000000000000000000000000000000000000000000000000000000000000000\",\n91:                 payload_hash,\n92:                 signature,\n93:                 json.dumps(payload_dict),\n94:             ),\n95:         )\n96:         await conn.commit()\n97:         logger.info(\"Causal-Determinist: Genesis block successfully injected.\")"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/memory/provenance_arbiter.py",
+      "start_line": 131,
+      "end_line": 177,
+      "observation": "Public envelope accepts receipt labels and verify_integrity only checks b3: prefix.",
+      "sha256": "e0a3488fcfd1f231c7d3e0c34e92262c4e028b1b8bd65e908d4404a51d482342",
+      "excerpt": "131: @dataclass(frozen=True)\n132: class ProvenanceEnvelope:\n133:     \"\"\"CORTEX provenance record separating content identity, event identity, and authority.\"\"\"\n134: \n135:     content: str\n136:     host_platform: str\n137:     derivation_kind: DerivationKind\n138:     claimed_created_at_utc: Optional[str] = None\n139:     retrieved_at_utc: Optional[str] = None\n140:     original_authoring_platform: Optional[str] = None\n141:     execution_runtime: Optional[str] = None\n142:     event_tuple: Optional[EventIdentityTuple] = None\n143:     native_export_digest_b3: Optional[str] = None\n144:     external_anchor_digest_b3: Optional[str] = None\n145:     external_anchor_not_later_than_tick: Optional[int] = None\n146:     contemporaneous_witness_id: Optional[str] = None\n147:     execution_receipt_digest_b3: Optional[str] = None\n148: \n149:     @property\n150:     def content_identity(self) -> str:\n151:         return compute_content_identity(self.content)\n152: \n153:     @property\n154:     def event_identity(self) -> Optional[str]:\n155:         if self.event_tuple is None:\n156:             return None\n157:         return self.event_tuple.compute_event_identity()\n158: \n159:     def verify_integrity(self, expected_content_b3: Optional[str] = None) -> bool:\n160:         \"\"\"Verify content BLAKE3 integrity and structural consistency.\"\"\"\n161:         if not self.content or not self.content.strip():\n162:             return False\n163:         if not self.host_platform or not self.host_platform.strip():\n164:             return False\n165:         if expected_content_b3 is not None:\n166:             if not hmac.compare_digest(self.content_identity, expected_content_b3):\n167:                 return False\n168:         if self.native_export_digest_b3 is not None:\n169:             if not self.native_export_digest_b3.startswith(\"b3:\"):\n170:                 return False\n171:         if self.external_anchor_digest_b3 is not None:\n172:             if not self.external_anchor_digest_b3.startswith(\"b3:\"):\n173:                 return False\n174:         if self.execution_receipt_digest_b3 is not None:\n175:             if not self.execution_receipt_digest_b3.startswith(\"b3:\"):\n176:                 return False\n177:         return True"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/memory/provenance_arbiter.py",
+      "start_line": 179,
+      "end_line": 203,
+      "observation": "Presence of other labels promotes effective provenance level.",
+      "sha256": "e0a3488fcfd1f231c7d3e0c34e92262c4e028b1b8bd65e908d4404a51d482342",
+      "excerpt": "179:     def effective_provenance_level(self) -> ProvenanceLevel:\n180:         \"\"\"Compute the highest provenance level strictly supported by verified fields.\"\"\"\n181:         if self.event_tuple is None:\n182:             if self.claimed_created_at_utc:\n183:                 return ProvenanceLevel.TIMESTAMPED_RECORD\n184:             return ProvenanceLevel.CLAIMED\n185: \n186:         if self.native_export_digest_b3 is None:\n187:             return ProvenanceLevel.PLATFORM_UI_RECORD\n188: \n189:         if (\n190:             self.contemporaneous_witness_id is not None\n191:             and self.external_anchor_digest_b3 is not None\n192:             and self.external_anchor_not_later_than_tick is not None\n193:             and self.external_anchor_not_later_than_tick <= self.event_tuple.logical_tick\n194:         ):\n195:             return ProvenanceLevel.CONTEMPORANEOUS_WITNESS\n196: \n197:         if (\n198:             self.external_anchor_digest_b3 is not None\n199:             and self.external_anchor_not_later_than_tick is not None\n200:         ):\n201:             return ProvenanceLevel.EXTERNALLY_ANCHORED\n202: \n203:         return ProvenanceLevel.NATIVE_EXPORT_VERIFIED"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/memory/provenance_arbiter.py",
+      "start_line": 270,
+      "end_line": 275,
+      "observation": "Claim minimum defaults to CLAIMED.",
+      "sha256": "e0a3488fcfd1f231c7d3e0c34e92262c4e028b1b8bd65e908d4404a51d482342",
+      "excerpt": "270:     scope: ClaimScope\n271:     claimed_platform: Optional[str] = None\n272:     claimed_conversation_id: Optional[str] = None\n273:     claimed_derivation: Optional[DerivationKind] = None\n274:     claimed_min_level: ProvenanceLevel = ProvenanceLevel.CLAIMED\n275:     claimed_executed: bool = False"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/memory/provenance_arbiter.py",
+      "start_line": 311,
+      "end_line": 339,
+      "observation": "Only envelope integrity is checked; origin starts true for an unspecified platform.",
+      "sha256": "e0a3488fcfd1f231c7d3e0c34e92262c4e028b1b8bd65e908d4404a51d482342",
+      "excerpt": "311: def evaluate_provenance_claim(\n312:     envelope: ProvenanceEnvelope,\n313:     claim: AttributionClaim,\n314:     *,\n315:     expected_content_b3: Optional[str] = None,\n316: ) -> AttributionDecision:\n317:     \"\"\"Evaluate Attested(e) => OriginVerified(e) & IntegrityVerified(e) & ScopeBound(e).\"\"\"\n318:     integrity_ok = envelope.verify_integrity(expected_content_b3=expected_content_b3)\n319:     eff_level = envelope.effective_provenance_level()\n320:     c_id = envelope.content_identity\n321:     e_id = envelope.event_identity\n322: \n323:     if not integrity_ok:\n324:         return AttributionDecision(\n325:             claim_id=claim.claim_id,\n326:             outcome=VerdictOutcome.REJECTED_OVERATTRIBUTION,\n327:             origin_verified=False,\n328:             integrity_verified=False,\n329:             scope_bound=False,\n330:             effective_level=eff_level,\n331:             content_identity=c_id,\n332:             event_identity=e_id,\n333:             reason=\"Integrity verification failed (content or digest mismatch)\",\n334:         )\n335: \n336:     # 1. Check OriginVerified\n337:     origin_ok = True\n338:     origin_reason = \"origin verified\"\n339:     if claim.claimed_platform is not None:"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/memory/provenance_arbiter.py",
+      "start_line": 407,
+      "end_line": 447,
+      "observation": "Runtime guard requires presence/derivation and then returns ATTESTED.",
+      "sha256": "e0a3488fcfd1f231c7d3e0c34e92262c4e028b1b8bd65e908d4404a51d482342",
+      "excerpt": "407:     if scope_ok and (claim.claimed_executed or claim.scope == ClaimScope.RUNTIME_EXECUTION):\n408:         if (\n409:             envelope.execution_runtime is None\n410:             or envelope.execution_receipt_digest_b3 is None\n411:             or envelope.derivation_kind != DerivationKind.EXECUTION_RECEIPT\n412:         ):\n413:             scope_ok = False\n414:             scope_reason = (\n415:                 \"architecture prompt or conversation record without execution_runtime \"\n416:                 \"and execution_receipt_digest_b3 cannot attest RUNTIME_EXECUTION\"\n417:             )\n418: \n419:     if scope_ok and claim.claimed_before_tick is not None:\n420:         # Internal claimed_created_at_utc never counts as an external temporal witness\n421:         if (\n422:             envelope.external_anchor_digest_b3 is None\n423:             or envelope.external_anchor_not_later_than_tick is None\n424:         ):\n425:             scope_ok = False\n426:             scope_reason = (\n427:                 \"internal timestamp cannot act as external temporal witness; \"\n428:                 \"external_anchor_not_later_than_tick is required\"\n429:             )\n430:         elif envelope.external_anchor_not_later_than_tick > claim.claimed_before_tick:\n431:             scope_ok = False\n432:             scope_reason = (\n433:                 f\"external anchor tick ({envelope.external_anchor_not_later_than_tick}) is later \"\n434:                 f\"than claimed bound ({claim.claimed_before_tick})\"\n435:             )\n436: \n437:     if origin_ok and scope_ok:\n438:         return AttributionDecision(\n439:             claim_id=claim.claim_id,\n440:             outcome=VerdictOutcome.ATTESTED,\n441:             origin_verified=True,\n442:             integrity_verified=True,\n443:             scope_bound=True,\n444:             effective_level=eff_level,\n445:             content_identity=c_id,\n446:             event_identity=e_id,\n447:             reason=\"All provenance, integrity, and scope constraints verified\","
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/memory/__init__.py",
+      "start_line": 30,
+      "end_line": 40,
+      "observation": "Evaluator is publicly imported by memory package.",
+      "sha256": "71fbf235a5134fe2a65224a535a0c5319318a86617d06d26aeabd40ca84a2204",
+      "excerpt": "30:     FL027OracleMetrics,\n31:     ProvenanceAuthorityError,\n32:     ProvenanceEnvelope,\n33:     ProvenanceLevel,\n34:     VerdictOutcome,\n35:     canonical_content_bytes,\n36:     compose_event_evidence,\n37:     compute_content_identity,\n38:     compute_fl027_metrics,\n39:     evaluate_provenance_claim,\n40: )"
+    },
+    {
+      "path": "01_KISH_ENGINE/cortex/crates/cortex-lsp/src/main.rs",
+      "start_line": 28,
+      "end_line": 64,
+      "observation": "Parser reads one assumed delimiter line and then exactly content_length bytes; JSON failures continue.",
+      "sha256": "148d6513d6992a0a6353ac0ab904323121586270187acb72b6b5d10fd062641c",
+      "excerpt": "28:     loop {\n29:         // Read Content-Length header\n30:         let mut line = String::new();\n31:         let bytes_read = reader.read_line(&mut line).await?;\n32:         if bytes_read == 0 {\n33:             break; // EOF\n34:         }\n35: \n36:         let line = line.trim();\n37:         if !line.starts_with(\"Content-Length:\") {\n38:             continue;\n39:         }\n40: \n41:         let length_str = line.trim_start_matches(\"Content-Length:\").trim();\n42:         let content_length: usize = match length_str.parse() {\n43:             Ok(len) => len,\n44:             Err(_) => continue,\n45:         };\n46: \n47:         // Read empty delimiter line (\\r\\n)\n48:         let mut delimiter = String::new();\n49:         reader.read_line(&mut delimiter).await?;\n50: \n51:         // Read payload exact bytes\n52:         let mut buffer = vec![0u8; content_length];\n53:         reader.read_exact(&mut buffer).await?;\n54: \n55:         let body_str = match String::from_utf8(buffer) {\n56:             Ok(s) => s,\n57:             Err(_) => continue,\n58:         };\n59: \n60:         // Handle JSON-RPC message\n61:         let request: JsonRpcRequest = match serde_json::from_str(&body_str) {\n62:             Ok(req) => req,\n63:             Err(_) => continue,\n64:         };"
+    },
+    {
+      "path": "crates/eridu-infer/src/main.rs",
+      "start_line": 18,
+      "end_line": 25,
+      "observation": "Install CLI returns install_launchd_service result directly.",
+      "sha256": "6d536eed3821e707ac3d46994ba6750ab9224a3293e5e9343ec5c5c64359162e",
+      "excerpt": "18: async fn main() -> Result<(), Box<dyn std::error::Error>> {\n19:     let args: Vec<String> = env::args().collect();\n20: \n21:     if args.len() > 1 {\n22:         match args[1].as_str() {\n23:             \"--install-daemon\" | \"install\" => {\n24:                 return install_launchd_service();\n25:             }"
+    },
+    {
+      "path": "crates/eridu-infer/src/main.rs",
+      "start_line": 197,
+      "end_line": 225,
+      "observation": "Spawn failure propagates via ?, but nonzero child exit falls through to Ok.",
+      "sha256": "6d536eed3821e707ac3d46994ba6750ab9224a3293e5e9343ec5c5c64359162e",
+      "excerpt": "197:     fs::write(&plist_path, plist_content)?;\n198:     println!(\"[+] Plist generado en: {}\", plist_path.display());\n199: \n200:     let _ = Command::new(\"launchctl\")\n201:         .args([\"unload\", plist_path.to_str().unwrap()])\n202:         .output();\n203: \n204:     let output = Command::new(\"launchctl\")\n205:         .args([\"load\", plist_path.to_str().unwrap()])\n206:         .output()?;\n207: \n208:     if output.status.success() {\n209:         println!(\n210:             \"[+] Servicio launchd {} cargado exitosamente.\",\n211:             DAEMON_LABEL\n212:         );\n213:         println!(\"[+] Binario de ejecución: {}\", bin_path.display());\n214:         println!(\n215:             \"[+] Logs en tiempo real : tail -f {}\",\n216:             stdout_path.display()\n217:         );\n218:     } else {\n219:         eprintln!(\n220:             \"[-] Error al cargar launchctl: {}\",\n221:             String::from_utf8_lossy(&output.stderr)\n222:         );\n223:     }\n224: \n225:     Ok(())"
+    },
+    {
+      "path": "examples/poc_kudurru_silicon_ns.rs",
+      "start_line": 370,
+      "end_line": 397,
+      "observation": "Reader counts only NaN energy/enstrophy as torn; RetryExhausted does not fail.",
+      "sha256": "1113988b83f760d8e49bb88d4eb326f910be197ff1a3c73fda9bcabf26acde37",
+      "excerpt": "370:     for r_id in 0..num_readers {\n371:         let slot_clone = Arc::clone(&slot);\n372:         let h = thread::spawn(move || {\n373:             let mut read_count = 0u64;\n374:             let mut valid_snapshots = 0u64;\n375:             let mut torn_reads = 0u64;\n376:             let mut retry_count = 0u64;\n377: \n378:             while read_count < iterations {\n379:                 match slot_clone.read() {\n380:                     Ok(snap) => {\n381:                         // Verificación de integridad física: la suma de energía y enstrofía debe ser finita\n382:                         if snap.kinetic_energy.is_nan() || snap.enstrophy.is_nan() {\n383:                             torn_reads += 1;\n384:                         } else {\n385:                             valid_snapshots += 1;\n386:                         }\n387:                     }\n388:                     Err(FluidHaltError::RetryExhausted) => {\n389:                         retry_count += 1;\n390:                     }\n391:                     Err(FluidHaltError::Poisoned) => {\n392:                         break;\n393:                     }\n394:                 }\n395:                 read_count += 1;\n396:             }\n397:             (r_id, read_count, valid_snapshots, torn_reads, retry_count)"
+    },
+    {
+      "path": "examples/poc_kudurru_silicon_ns.rs",
+      "start_line": 402,
+      "end_line": 415,
+      "observation": "Writer publishes finite epoch-derived values that could be cross-checked.",
+      "sha256": "1113988b83f760d8e49bb88d4eb326f910be197ff1a3c73fda9bcabf26acde37",
+      "excerpt": "402:     // Escritor (Primum Movens de Simulación)\n403:     let slot_writer = Arc::clone(&slot);\n404:     let writer_handle = thread::spawn(move || {\n405:         for step in 1..=iterations {\n406:             let snap = FluidSnapshot {\n407:                 epoch_id: step,\n408:                 kinetic_energy: 0.5 * (step as f64 * 0.001).cos().powi(2),\n409:                 enstrophy: 1.2 * (step as f64 * 0.001).sin().powi(2),\n410:                 max_vorticity: 4.5 + (step as f64 * 0.0001),\n411:                 bkm_accumulated: step as f64 * 0.0045,\n412:                 max_divergence: 1e-15,\n413:                 cf_smoothness: 0.985,\n414:             };\n415:             slot_writer.publish(step, &snap);"
+    },
+    {
+      "path": "examples/poc_kudurru_silicon_ns.rs",
+      "start_line": 419,
+      "end_line": 440,
+      "observation": "Valid/exhausted totals are unused; final coherence claim depends only on zero torn count.",
+      "sha256": "1113988b83f760d8e49bb88d4eb326f910be197ff1a3c73fda9bcabf26acde37",
+      "excerpt": "419:     writer_handle.join().expect(\"Writer thread failed\");\n420:     let mut total_reads = 0u64;\n421:     let mut _total_valid = 0u64;\n422:     let mut total_torn = 0u64;\n423:     let mut _total_exhausted = 0u64;\n424: \n425:     for h in reader_handles {\n426:         let (id, count, valid, torn, exhausted) = h.join().expect(\"Reader failed\");\n427:         total_reads += count;\n428:         _total_valid += valid;\n429:         total_torn += torn;\n430:         _total_exhausted += exhausted;\n431:         println!(\"    > Lector #{}: {} lecturas, {} válidas, {} torn reads, {} retries agotados\", id, count, valid, torn, exhausted);\n432:     }\n433: \n434:     let elapsed_spmc = t0_spmc.elapsed();\n435:     println!(\"  [✓] SPMC Stress Test Completado en {:?}\", elapsed_spmc);\n436:     println!(\"  > Total Lecturas Evaluadas:   {}\", total_reads);\n437:     println!(\"  > Total Torn Reads (Corrupción): {} (EXACTAMENTE CERO)\", total_torn);\n438:     println!(\"  > Throughput Lector:          {:.2} M ops/s\", (total_reads as f64 / elapsed_spmc.as_secs_f64()) / 1_000_000.0);\n439:     assert_eq!(total_torn, 0, \"Violación crítica: torn read detectado en Seqlock\");\n440:     println!(\"  [✓] Coherencia Seqlock SPMC validada al 100%.\\n\");"
+    },
+    {
+      "path": "scripts/c5_demos/c5_killer_demo_60s.py",
+      "start_line": 3,
+      "end_line": 19,
+      "observation": "Header describes physical authorization, Secure Enclave signature and kernel transition.",
+      "sha256": "3804b9655110642c4c03316aa68b5a9143858db5eb638ba33308a4fd51566603",
+      "excerpt": "3: BABYLON-60 — Demo Asesino en 60 Segundos (C5-REAL / v5.0)\n4: Demostración de causal gating, autorización física de hardware, ledger WORM y fail-stop determinista.\n5: \n6: Flujo de 13 pasos:\n7:  1. Agente recibe prompt destructivo: 'borra production.db'\n8:  2. Agente estocástico propone acción: 'DELETE_FILE(production.db)'\n9:  3. EDIN (Ring-2) genera intención sintética.\n10:  4. KISH (Ring-1) evalúa política y clasifica riesgo: 'CRITICAL'.\n11:  5. ABZU (Ring-0) interviene: EXECUTION DENIED (Axioma AX-0: LLM != authority).\n12:  6. Interfaz solicita autorización biométrica Touch ID / Secure Enclave.\n13:  7. Operador Biológico autentica en silicio.\n14:  8. Secure Enclave firma criptográficamente el intent_hash (P-256 ECDSA).\n15:  9. BABYLON ejecuta la mutación autorizada.\n16: 10. Ledger append-only persiste el registro estructurado forense.\n17: 11. Raíz Merkle transmuta deterministamente.\n18: 12. Adversario manipula directamente el archivo SQLite en reposo.\n19: 13. Auditoría forense detecta la mutación: TAMPER DETECTED -> POISONED (0xDEAD_6060)."
+    },
+    {
+      "path": "scripts/c5_demos/c5_killer_demo_60s.py",
+      "start_line": 87,
+      "end_line": 114,
+      "observation": "Biometric output and ATTESTED identity are printed; fixed bytes and hardcoded effect replace those mechanisms.",
+      "sha256": "3804b9655110642c4c03316aa68b5a9143858db5eb638ba33308a4fd51566603",
+      "excerpt": "87:     # 6. Activación del Gate Biométrico\n88:     print(\"\\n[PASO 6] Despacho del Gate Biométrico de Silicio\")\n89:     print(\"  ┌─ [C5-GATE · TOUCH ID / SECURE ENCLAVE]\")\n90:     print(f\"  ├▸ Acción: {proposed_action['operation']} {proposed_action['target']}\")\n91:     print(f\"  ├▸ Origen: Claude 3.5 Sonnet (EDIN)\")\n92:     print(f\"  ├▸ Ámbito: Ring-0 Sovereign Kernel\")\n93:     print(f\"  └▸ Causal: {intent_hash[:8]}…{intent_hash[-6:]}\")\n94:     time.sleep(0.6)\n95: \n96:     # 7. Operador Biológico autoriza\n97:     print(\"\\n[PASO 7] Atestación Somática del Operador Biológico\")\n98:     print(\"  [+] Contacto dactilar detectado en sensor Touch ID.\")\n99:     operator_user = os.environ.get(\"USER\", \"borja\")\n100:     print(f\"  [✓] Operador Raíz verificado: {operator_user} (Status: ATTESTED)\")\n101:     time.sleep(0.4)\n102: \n103:     # 8. Secure Enclave firma\n104:     print(\"\\n[PASO 8] Firma Criptográfica en Secure Enclave (Apple Silicon TEE)\")\n105:     mock_tee_key = base64.b64encode(b\"BABYLON60_MOCK_TEE_PUBKEY_P256_TEST_VECTOR\").decode()\n106:     mock_der_sig = base64.b64encode(b\"BABYLON60_MOCK_TEE_DER_SIGNATURE_TEST_VECTOR\").decode()\n107:     print(f\"  > Clave Pública TEE: {mock_tee_key[:24]}...\")\n108:     print(f\"  > Firma ASN.1 DER (P-256 ECDSA): {mock_der_sig[:24]}...\")\n109:     time.sleep(0.3)\n110: \n111:     # 9. Ejecución controlada\n112:     print(\"\\n[PASO 9] Ejecución de la Acción Autorizada\")\n113:     execution_result = {\"status\": \"DELETED\", \"target\": \"production.db\", \"exit_code\": 0}\n114:     print(f\"  [✓] Mutación ejecutada con éxito bajo atestación causal.\")"
+    },
+    {
+      "path": "scripts/c5_demos/c5_killer_demo_60s.py",
+      "start_line": 164,
+      "end_line": 189,
+      "observation": "Tamper mismatch prints a kernel transition and unconditional broad final proof claim.",
+      "sha256": "3804b9655110642c4c03316aa68b5a9143858db5eb638ba33308a4fd51566603",
+      "excerpt": "164:     # 13. Auditoría forense -> Fail-stop POISONED\n165:     print(\"\\n[PASO 13] Auditoría Forense determinista: babylon60 audit\")\n166:     conn = sqlite3.connect(str(demo_db_path))\n167:     row = conn.execute(\"SELECT prev_hash, prompt, model, action, risk, auth_sig, result, event_hash FROM events WHERE id = 1\").fetchone()\n168:     recomputed_payload = f\"{row[0]}|{row[1]}|{row[2]}|{row[3]}|{row[4]}|{row[5]}|{row[6]}\"\n169:     recomputed_hash = hashlib.sha3_256(recomputed_payload.encode()).hexdigest()\n170:     stored_hash = row[7]\n171:     \n172:     print(f\"  > Hash Almacenado : {stored_hash}\")\n173:     print(f\"  > Hash Recalculado: {recomputed_hash}\")\n174:     \n175:     if recomputed_hash != stored_hash:\n176:         print(\"\\n  \\x1b[1;31m========================================================================\\x1b[0m\")\n177:         print(\"  \\x1b[1;31m[X] FORENSIC TAMPER DETECTED: Discrepancia criptográfica en Hash-Chain!\\x1b[0m\")\n178:         print(f\"  \\x1b[1;31m[X] APOPTOSIS DETERMINISTA DISPARADA: Estado = POISONED (0x{POISONED_STATE:X})\\x1b[0m\")\n179:         print(\"  \\x1b[1;31m[X] Kernel Fail-Stop Ejecutado: Transición irreversible a 0xDEAD_6060.\\x1b[0m\")\n180:         print(\"  \\x1b[1;31m========================================================================\\x1b[0m\")\n181:     else:\n182:         print(\"  [OK] Integridad preservada.\")\n183:         \n184:     conn.close()\n185:     if demo_db_path.exists():\n186:         demo_db_path.unlink()\n187:         \n188:     print(\"\\n[✓] Demo asesino finalizado en < 60 segundos.\")\n189:     print(\"    Demuestra fehacientemente: Capability Security + Human Gate + Cryptographic Provenance + Fail-Stop.\")"
+    },
+    {
+      "path": "scripts/c5_demos/stress_test_multi_ide_injection.py",
+      "start_line": 42,
+      "end_line": 52,
+      "observation": "Injection success means subprocess return code zero only.",
+      "sha256": "aeb9bc8180e9d6bd900a8e5759a435e61c0a15d9bf929ff6dfda9c3713663184",
+      "excerpt": "42: def run_single_injection() -> tuple[bool, float]:\n43:     start = time.perf_counter()\n44:     res = subprocess.run(\n45:         [str(INSTALL_SCRIPT)],\n46:         cwd=str(PROJECT_ROOT),\n47:         stdout=subprocess.PIPE,\n48:         stderr=subprocess.PIPE,\n49:         text=True\n50:     )\n51:     elapsed = (time.perf_counter() - start) * 1000  # ms\n52:     return res.returncode == 0, elapsed"
+    },
+    {
+      "path": "scripts/c5_demos/stress_test_multi_ide_injection.py",
+      "start_line": 137,
+      "end_line": 160,
+      "observation": "Integrity audit precedes concurrent mutations, and final success checks only failures counts.",
+      "sha256": "aeb9bc8180e9d6bd900a8e5759a435e61c0a15d9bf929ff6dfda9c3713663184",
+      "excerpt": "137:     print(\"\\n[2] Verificando Invariantes de Integridad en 8 Entornos (incl. OpenAI Codex)...\")\n138:     audit_errors = audit_target_integrities()\n139:     \n140:     if audit_errors:\n141:         print(\"❌ FALSACIÓN EMPÍRICA FALLIDA. Se detectaron errores:\")\n142:         for err in audit_errors:\n143:             print(f\"   - {err}\")\n144:         sys.exit(1)\n145:     else:\n146:         print(\"✅ TODAS LAS AUDITORÍAS PASARON SATISFACTORIAMENTE:\")\n147:         for env_name, path in TARGET_PATHS.items():\n148:             print(f\"   - [{env_name}] -> {path} (VALIDADO, CERO DUPLICACIÓN)\")\n149:             \n150:     print(\"\\n[3] Prueba de Concurrencia Simultánea (10 hilos en paralelo)...\")\n151:     with ThreadPoolExecutor(max_workers=10) as executor:\n152:         futures = [executor.submit(run_single_injection) for _ in range(10)]\n153:         results = [f.result() for f in futures]\n154:         \n155:     concurrent_failures = sum(1 for ok, _ in results if not ok)\n156:     print(f\"  └─ Fallos bajo concurrencia paralela: {concurrent_failures}\")\n157:     \n158:     if concurrent_failures == 0 and failures == 0:\n159:         print(\"\\n\" + \"=\" * 70)\n160:         print(\"🏆 DEMOSTRACIÓN COMPROBADA: El instalador v2.2 es Idempotente, Zero-Anergy y Multi-Ecosystem Safe.\")"
+    },
+    {
+      "path": "scripts/c5_l1_ledger/bittensor_yuma_consensus_c5.py",
+      "start_line": 95,
+      "end_line": 105,
+      "observation": "Digest contains normalized ranks/trust/consensus/dividends, no epoch.",
+      "sha256": "b24743c2b5bebaf35f429db027b5ca20515a893d0f1eed7137ea9793b67479c0",
+      "excerpt": "95:     # 8. Cryptographic State Ledger Anchor (SHA3-256)\n96:     state_payload = json.dumps(\n97:         {\n98:             \"ranks\": [round(r, 8) for r in ranks],\n99:             \"trust\": [round(t, 8) for t in trust],\n100:             \"consensus\": [round(c, 8) for c in consensus],\n101:             \"dividends\": [round(d, 8) for d in dividends],\n102:         },\n103:         sort_keys=True,\n104:     ).encode(\"utf-8\")\n105:     state_hash = hashlib.sha3_256(state_payload).hexdigest()"
+    },
+    {
+      "path": "scripts/c5_l1_ledger/bittensor_yuma_consensus_c5.py",
+      "start_line": 147,
+      "end_line": 179,
+      "observation": "Schema declares UNIQUE state_hash and INSERT OR REPLACE commits the new epoch.",
+      "sha256": "b24743c2b5bebaf35f429db027b5ca20515a893d0f1eed7137ea9793b67479c0",
+      "excerpt": "147:     conn = sqlite3.connect(db_path, timeout=5.0)\n148:     try:\n149:         conn.execute(\"PRAGMA journal_mode=WAL;\")\n150:         conn.execute(\"PRAGMA busy_timeout=5000;\")\n151:         conn.execute(\"\"\"\n152:             CREATE TABLE IF NOT EXISTS yuma_consensus_ledger (\n153:                 epoch INTEGER PRIMARY KEY,\n154:                 state_hash TEXT UNIQUE NOT NULL,\n155:                 ranks_json TEXT NOT NULL,\n156:                 trust_json TEXT NOT NULL,\n157:                 dividends_json TEXT NOT NULL,\n158:                 emission_json TEXT NOT NULL,\n159:                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n160:             );\n161:         \"\"\")\n162:         conn.execute(\n163:             \"\"\"\n164:             INSERT OR REPLACE INTO yuma_consensus_ledger\n165:             (epoch, state_hash, ranks_json, trust_json, dividends_json, emission_json)\n166:             VALUES (?, ?, ?, ?, ?, ?);\n167:         \"\"\",\n168:             (\n169:                 epoch,\n170:                 state_hash,\n171:                 json.dumps([round(r, 8) for r in ranks]),\n172:                 json.dumps([round(t, 8) for t in trust]),\n173:                 json.dumps([round(d, 8) for d in dividends]),\n174:                 json.dumps(emission),\n175:             ),\n176:         )\n177:         conn.commit()\n178:     finally:\n179:         conn.close()"
+    },
+    {
+      "path": "scripts/c5_l1_ledger/bittensor_yuma_consensus_c5.py",
+      "start_line": 203,
+      "end_line": 208,
+      "observation": "Each simulated epoch is persisted with that state digest.",
+      "sha256": "b24743c2b5bebaf35f429db027b5ca20515a893d0f1eed7137ea9793b67479c0",
+      "excerpt": "203:     for t in range(1, epochs + 1):\n204:         ranks, trust, consensus, dividends, state_hash = compute_yuma_consensus(weights, stakes)\n205:         emission = simulate_subnet_emission(1.0, ranks, dividends)\n206: \n207:         # Persist to SQLite WAL ledger\n208:         persist_consensus_ledger(db_path, t, state_hash, ranks, trust, dividends, emission)"
+    },
+    {
+      "path": "scripts/c5_setup/setup_nacho_cortex.sh",
+      "start_line": 20,
+      "end_line": 27,
+      "observation": "One dirname selects scripts as REPO_ROOT; missing .agents silently skips synchronization.",
+      "sha256": "bb15cea511da3aa58c6b3903ac15640bb55d54b0cedb248073e8f9e293fe5ea1",
+      "excerpt": "20: # 2. Sincronizar catálogo de Skills desde el repositorio\n21: SCRIPT_DIR=\"$( cd \"$( dirname \"${BASH_SOURCE[0]}\" )\" && pwd )\"\n22: REPO_ROOT=\"$( dirname \"${SCRIPT_DIR}\" )\"\n23: \n24: if [ -d \"${REPO_ROOT}/.agents\" ]; then\n25:     echo \"[2/4] Copiando gobernanza y reglas de workspace...\"\n26:     cp -r \"${REPO_ROOT}/.agents\" \"${HOME_DIR}/.agents\" 2>/dev/null || true\n27: fi"
+    },
+    {
+      "path": "scripts/c5_setup/setup_nacho_cortex.sh",
+      "start_line": 29,
+      "end_line": 42,
+      "observation": "Subsequent command checks only warn and final readiness is unconditional.",
+      "sha256": "bb15cea511da3aa58c6b3903ac15640bb55d54b0cedb248073e8f9e293fe5ea1",
+      "excerpt": "29: # 3. Verificar binarios requeridos (jj, python3, git)\n30: echo \"[3/4] Comprobando binarios del sistema...\"\n31: command -v git >/dev/null 2>&1 || echo \"⚠️ Git no instalado\"\n32: command -v jj >/dev/null 2>&1 || echo \"⚠️ Jujutsu (jj) no instalado (Ejecutar: brew install jujutsu)\"\n33: command -v python3 >/dev/null 2>&1 || echo \"⚠️ Python 3 no instalado\"\n34: \n35: # 4. Inyección de variables de entorno recomendadas\n36: echo \"[4/4] Verificando variables de entorno...\"\n37: if [ -z \"$KIMI_API_KEY\" ]; then\n38:     echo \"⚠️ Recuerda exportar KIMI_API_KEY en tu .zshrc / .bashrc:\"\n39:     echo \"   export KIMI_API_KEY='tu_clave_moonshot'\"\n40: fi\n41: \n42: echo \"✅ [CORTEX-SETUP] ¡Entorno preparado! La estación ya dispone de la infraestructura CORTEX.\""
+    },
+    {
+      "path": "scripts/c5_verifiers/inject_lean4_stubs.py",
+      "start_line": 24,
+      "end_line": 47,
+      "observation": "Extractor retains theorem headings as strings.",
+      "sha256": "ff614c2d31a8359c2bb3852eb093663124e3853b91d032d6a079bbcc84f15814",
+      "excerpt": "24: def extract_axioms_and_theorems(content: str):\n25:     \"\"\"\n26:     Extrae encabezados de axiomas y teoremas de un documento Markdown.\n27:     Ejemplos:\n28:       - AX-BD-1: Simetría de Probabilidad Conjunta\n29:       - AX-TZ-1: Homeostasis Tríadica\n30:       - Teorema 1: Extinción del Origen Espurio\n31:     \"\"\"\n32:     axioms = []\n33:     theorems = []\n34: \n35:     # Extraer axiomas AX-XX-N\n36:     ax_matches = re.findall(r'AX-[A-Z]+-\\d+[:\\s]+([^\\n>]+)', content)\n37:     for ax in ax_matches:\n38:         clean_ax = ax.strip().strip('*').strip()\n39:         axioms.append(clean_ax)\n40: \n41:     # Extraer teoremas\n42:     th_matches = re.findall(r'Teorema\\s+\\d+[:\\s]+([^\\n>]+)', content, re.IGNORECASE)\n43:     for th in th_matches:\n44:         clean_th = th.strip().strip('*').strip()\n45:         theorems.append(clean_th)\n46: \n47:     return axioms, theorems"
+    },
+    {
+      "path": "scripts/c5_verifiers/inject_lean4_stubs.py",
+      "start_line": 49,
+      "end_line": 85,
+      "observation": "Generator emits the same True proposition for every theorem/axiom.",
+      "sha256": "ff614c2d31a8359c2bb3852eb093663124e3853b91d032d6a079bbcc84f15814",
+      "excerpt": "49: def generate_lean_code(module_name: str, axioms: list, theorems: list) -> str:\n50:     namespace = f\"Babylon60.Theory.{module_name}\"\n51:     lines = [\n52:         f\"namespace {namespace}\",\n53:         \"\",\n54:         \"/--\",\n55:         \"  Firma formal generada dinámicamente mediante `inject_lean4_stubs.py`.\",\n56:         \"  Dominio: C5-REAL Formal Verification\",\n57:         \"-/\",\n58:         \"variable {X Y : Type}\",\n59:         \"\"\n60:     ]\n61: \n62:     if not axioms and not theorems:\n63:         lines.extend([\n64:             \"/-- Axioma Cánonico por Defecto -/\",\n65:             \"axiom ax_canonical_invariant : ∀ (x : X), True\",\n66:             \"\",\n67:             \"theorem formal_axiomatization (x : X) : True := by\",\n68:             \"  exact ax_canonical_invariant x\",\n69:         ])\n70:     else:\n71:         for idx, ax in enumerate(axioms, 1):\n72:             var_name = f\"ax_{idx}_{re.sub(r'[^a-z0-9]', '_', ax.lower())}\".rstrip('_')\n73:             lines.append(f\"/-- {ax} -/\")\n74:             lines.append(f\"axiom {var_name} : ∀ (x : X), True\")\n75:             lines.append(\"\")\n76: \n77:         for idx, th in enumerate(theorems, 1):\n78:             var_name = f\"theorem_{idx}_{re.sub(r'[^a-z0-9]', '_', th.lower())}\".rstrip('_')\n79:             lines.append(f\"/-- {th} -/\")\n80:             lines.append(f\"theorem {var_name} (x : X) : True := by\")\n81:             lines.append(\"  trivial\")\n82:             lines.append(\"\")\n83: \n84:     lines.append(f\"end {namespace}\")\n85:     return \"\\n\".join(lines)"
+    },
+    {
+      "path": "scripts/c5_verifiers/inject_lean4_stubs.py",
+      "start_line": 87,
+      "end_line": 115,
+      "observation": "Writer presents generated stubs as Verificación Formal/Puente Isomorfo.",
+      "sha256": "ff614c2d31a8359c2bb3852eb093663124e3853b91d032d6a079bbcc84f15814",
+      "excerpt": "87: def process_file(filepath: Path, export_lean: bool = False, dry_run: bool = False):\n88:     try:\n89:         content = filepath.read_text(encoding=\"utf-8\")\n90:         stem = filepath.stem\n91:         module_name = camel_case(stem)\n92:         \n93:         axioms, theorems = extract_axioms_and_theorems(content)\n94:         lean_code = generate_lean_code(module_name, axioms, theorems)\n95: \n96:         status_msgs = []\n97: \n98:         # 1. Exportar a proof/lean/<ModuleName>.lean si export_lean está activo\n99:         if export_lean:\n100:             LEAN_PROOF_DIR.mkdir(parents=True, exist_ok=True)\n101:             lean_file = LEAN_PROOF_DIR / f\"{module_name}.lean\"\n102:             if not dry_run:\n103:                 lean_file.write_text(f\"-- Auto-generated by inject_lean4_stubs.py\\n\\n{lean_code}\\n\", encoding=\"utf-8\")\n104:             status_msgs.append(f\"📄 Lean File: {lean_file.name}\")\n105: \n106:         # 2. Inyectar stub Markdown en el archivo .md\n107:         md_section = f\"\\n\\n## 🔬 Verificación Formal (Lean 4)\\n\\n> [!TIP]\\n> **Puente Isomorfo C5-REAL**\\n> Firma topológica extraída dinámicamente para demostración formal en Lean 4.\\n\\n```lean\\n{lean_code}\\n```\\n\"\n108: \n109:         if \"## 🔬 Verificación Formal (Lean 4)\" in content:\n110:             status_msgs.append(\"⏩ Stub Markdown: Ya existía\")\n111:         else:\n112:             if not dry_run:\n113:                 new_content = content.rstrip() + md_section\n114:                 filepath.write_text(new_content, encoding=\"utf-8\")\n115:             status_msgs.append(\"✅ Stub Markdown: Inyectado\")"
+    },
+    {
+      "path": "src/attestation_contract.rs",
+      "start_line": 10,
+      "end_line": 23,
+      "observation": "Header assumes SPMC but public atomics and shared-reference API do not encode writer ownership.",
+      "sha256": "76606e3e22161aa1216be083186aff747cdc29c95e656cb4dd1385d6bf618d84",
+      "excerpt": "10: /// Contrato SPMC Seqlock de 64 bytes para evitar Torn Reads en Attestation (Nivel 1).\n11: /// Protege lecturas concurrentes de `count` y `payload_hash`.\n12: #[repr(C, align(64))]\n13: pub struct AttestationContract {\n14:     /// Estado actual (RUNNING o POISONED).\n15:     pub status_flag: AtomicU32,     // 0x00\n16:     /// Número de secuencia del seqlock.\n17:     pub seq: AtomicU32,             // 0x04\n18:     /// Contador monótono de atestaciones.\n19:     pub count: AtomicU64,           // 0x08\n20:     /// Hash criptográfico de la atestación (256 bits).\n21:     pub payload_hash: [AtomicU64; 4],// 0x10\n22:     /// Padding para alinear a 64 bytes exactos.\n23:     pub _padding: [u8; 16],         // 0x30"
+    },
+    {
+      "path": "src/attestation_contract.rs",
+      "start_line": 49,
+      "end_line": 63,
+      "observation": "publish increments seq without exclusion or an odd-sequence CAS guard.",
+      "sha256": "76606e3e22161aa1216be083186aff747cdc29c95e656cb4dd1385d6bf618d84",
+      "excerpt": "49:     /// Publica un nuevo conteo y hash atómicamente.\n50:     pub fn publish(&self, new_count: u64, hash: &[u64; 4]) -> Result<(), &'static str> {\n51:         if self.status_flag.load(Ordering::Relaxed) == POISONED {\n52:             return Err(\"POISONED_STATE\");\n53:         }\n54:         let s = self.seq.fetch_add(1, Ordering::Release);\n55:         core::sync::atomic::fence(Ordering::Release);\n56:         \n57:         self.count.store(new_count, Ordering::Relaxed);\n58:         for (slot, &val) in self.payload_hash.iter().zip(hash.iter()) {\n59:             slot.store(val, Ordering::Relaxed);\n60:         }\n61:         \n62:         self.seq.store(s.wrapping_add(2), Ordering::Release);\n63:         Ok(())"
+    },
+    {
+      "path": "src/attestation_contract.rs",
+      "start_line": 66,
+      "end_line": 94,
+      "observation": "read accepts equal even sequence surrounding payload reads.",
+      "sha256": "76606e3e22161aa1216be083186aff747cdc29c95e656cb4dd1385d6bf618d84",
+      "excerpt": "66:     /// Lee atómicamente el conteo y el hash.\n67:     pub fn read(&self) -> Option<(u64, [u64; 4])> {\n68:         let mut retries = 0;\n69:         while retries < MAX_RETRIES {\n70:             if self.status_flag.load(Ordering::Relaxed) == POISONED {\n71:                 return None;\n72:             }\n73:             let s1 = self.seq.load(Ordering::Acquire);\n74:             if !s1.is_multiple_of(2) {\n75:                 retries += 1;\n76:                 core::hint::spin_loop();\n77:                 continue;\n78:             }\n79:             \n80:             let current_count = self.count.load(Ordering::Relaxed);\n81:             let mut hash = [0u64; 4];\n82:             for (slot, val) in self.payload_hash.iter().zip(hash.iter_mut()) {\n83:                 *val = slot.load(Ordering::Relaxed);\n84:             }\n85:             \n86:             core::sync::atomic::fence(Ordering::Acquire);\n87:             let s2 = self.seq.load(Ordering::Acquire);\n88:             if s1 == s2 {\n89:                 return Some((current_count, hash));\n90:             }\n91:             retries += 1;\n92:             core::hint::spin_loop();\n93:         }\n94:         None"
+    },
+    {
+      "path": "src/lib.rs",
+      "start_line": 113,
+      "end_line": 114,
+      "observation": "Module is publicly exported.",
+      "sha256": "d3ecd074ba2582e1bb89c7e98ba767c3e83485bc8225840aa04be36732701737",
+      "excerpt": "113: /// Contrato SPMC Seqlock de 64 bytes para evitar Torn Reads en Attestation (Nivel 1)\n114: pub mod attestation_contract;"
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/agents-sdk/gotchas.md",
+      "start_line": 94,
+      "end_line": 103,
+      "observation": "Suggested reconnection example has synchronous onStart with await inside its body.",
+      "sha256": "507501bb9e7f7f3b1a9f19baa6762179281f52124fc049a1c48294b368aac634",
+      "excerpt": "94: ### \"MCP connection loss on hibernation\"\n95: \n96: **Cause:** MCP server connections don't survive hibernation\\\n97: **Solution:** Re-register servers in `onStart()` or check connection status:\n98: ```ts\n99: onStart() {\n100:   // Re-register MCP servers after hibernation\n101:   await this.mcp.registerServer(\"github\", { url: env.MCP_URL, auth: {...} });\n102: }\n103: ```"
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/djstudio-mcp/MODULE.md",
+      "start_line": 449,
+      "end_line": 455,
+      "observation": "Discrete max(abs(x)) scalar ceiling is labeled True Peak and guarantees zero inter-sample saturation.",
+      "sha256": "bd98de8e7c57f49fd784e9483b06e84df428a6504dc670d9c06868cf2bed0647",
+      "excerpt": "449: ## 23. Masterización de Club y Streaming EBU R128 (-14.0 a -15.0 LUFS / -1.0 dBTP)\n450: \n451: * **Medición ITU-R BS.1770-4 en RAM:** Utilizar `pyloudnorm` para computar sonoridad integrada sobre buffers float32 sin dependencias lentas de disco.\n452: * **Limitación True Peak (-1.0 dBTP):** Aplicación de techo de seguridad con atenuación de ganancia escalar:\n453:   $$g = \\min\\left(1.0, \\frac{10^{-1.0/20}}{\\max(|x|)}\\right)$$\n454:   Garantiza cero saturación inter-sample en convertidores DAC de CDJ/Pioneer en salas de club y plataformas de streaming.\n455: * **Exportación Directa:** Salida continua en FLAC 24-bit / 48.0 kHz (`soundfile` con `subtype='PCM_24'`)."
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-sovereign-identity-hardening/MODULE.md",
+      "start_line": 36,
+      "end_line": 52,
+      "observation": "curl -s result flows directly to grep; all absent matches print success.",
+      "sha256": "67dff44786dc19dc360e80d0a0eb19f5d930e43b7427124dafbd31cde5251b05",
+      "excerpt": "36: ```bash\n37: #!/usr/bin/env bash\n38: # Script k-Anonimato C5-REAL para verificación de contraseñas expuestas\n39: PASSWORD=\"$1\"\n40: SHA1_HASH=$(echo -n \"$PASSWORD\" | openssl sha1 | awk '{print toupper($2)}')\n41: PREFIX=\"${SHA1_HASH:0:5}\"\n42: SUFFIX=\"${SHA1_HASH:5}\"\n43: \n44: RESPONSE=$(curl -s \"https://api.pwnedpasswords.com/range/$PREFIX\")\n45: MATCH=$(echo \"$RESPONSE\" | grep -i \"^$SUFFIX\")\n46: \n47: if [ -n \"$MATCH\" ]; then\n48:     COUNT=$(echo \"$MATCH\" | cut -d':' -f2 | tr -d '\\r')\n49:     echo \"[!] ALERTA: Contraseña expuesta $COUNT veces en brechas de datos.\"\n50: else\n51:     echo \"[✓] OK: No se registraron coincidencias para el hash.\"\n52: fi"
+    },
+    {
+      "path": "tools/skill_library/global/whatsapp-nexus-protocol/scripts/group_wizard.js",
+      "start_line": 1,
+      "end_line": 15,
+      "observation": "Complete file shows logging-only createGroup and direct invocation for any nonempty args.",
+      "sha256": "7ab20be3dd2a33792fae675994122c0291dad8b26f159a8c885a869a94561122",
+      "excerpt": "1: // group_wizard.js - Self-contained Baileys group wizard\n2: const fs = require('fs');\n3: const path = require('path');\n4: \n5: async function createGroup(participants) {\n6:     console.log(`[WA-NEXUS] Creando grupo soberano con participantes: ${participants.join(', ')}`);\n7:     // Lógica determinista de inicialización Baileys en entorno local\n8: }\n9: \n10: const args = process.argv.slice(2);\n11: if (args.length === 0) {\n12:     console.log(\"Uso: node group_wizard.js <telefono1> <telefono2> ...\");\n13:     process.exit(1);\n14: }\n15: createGroup(args);"
+    }
+  ]
+}

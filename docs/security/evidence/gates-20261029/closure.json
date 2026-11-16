@@ -1,0 +1,12 @@
+{
+  "audited_source_drift": [],
+  "reference_source_drift": [],
+  "tracked_git_status_unchanged": true,
+  "lockfile_diff": "",
+  "ruff": "PASS, all three audit scripts",
+  "semantic_contracts": "PASS, workspace-only",
+  "token_budget": "PASS, workspace-only; host telemetry explicitly omitted",
+  "topology": "PASS, worktree and index in main run",
+  "catalogue_source_and_evidence_paths": "PASS",
+  "unexpected_main_results": []
+}

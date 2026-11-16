@@ -1,0 +1,402 @@
+{
+  "shard": "059",
+  "findings": [
+    {
+      "title": "Signed integer division can panic instead of returning Critical halt",
+      "severity": "P1",
+      "path": "00_ABZU_KERNEL/crates/babylon60-kernel/src/eval.rs",
+      "line": 95,
+      "evidence": "Div checks rhs == 0 only, then evaluates lhs / rhs. LoadImm accepts every i64, including i64::MIN.",
+      "trigger": "LoadImm R1 i64::MIN followed by Div R1 -1.",
+      "impact": "Signed division overflow panics, violating step's documented no-panic transition contract; callers cannot handle this through HaltReason.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Ledger audit reports HEALTHY without inspecting any ledger",
+      "severity": "P1",
+      "path": "01_KISH_ENGINE/cortex/crates/cortex-lsp/src/actions.rs",
+      "line": 103,
+      "evidence": "c5.auditLedger returns constant HEALTHY and compliance Verified JSON. No ledger path, read, hash recomputation, or BFT check occurs. main.rs:142-166 routes workspace/executeCommand directly to this function.",
+      "trigger": "Invoke the advertised ledger-audit CodeAction with a missing or corrupted ledger.",
+      "impact": "The editor receives a successful integrity/compliance assertion with no evidence.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Identity forging truncates existing master seed and is not atomic",
+      "severity": "P1",
+      "path": "01_KISH_ENGINE/babylon60/crypto/identity.py",
+      "line": 101,
+      "evidence": "touch(exist_ok=True) followed by open(...,\"w\") replaces master_seed.enc unconditionally; no existing-identity rejection, temporary-file rename, or fsync. Cross-file consumer seal_bounty_aeon.py:126-129 calls forge_identity after any load exception.",
+      "trigger": "A caller attempts recovery from a wrong passphrase/decryption error, or process interruption occurs during replacement.",
+      "impact": "The existing identity can be silently replaced or left unreadable, losing the signing identity needed to verify historical records.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Production-labelled dispatcher returns successful work without calling providers",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-tri-provider-swarm/scripts/tri_swarm_dispatcher.py",
+      "line": 63,
+      "evidence": "All three dispatch methods sleep and return fixed SUCCESS results; prompts are never sent and keys/URLs are unused. Header labels this a Production Script; the adjacent MODULE.md:90-98 describes its executable harness.",
+      "trigger": "Use dispatch_task/run_swarm_campaign for a plan, context analysis, or code mutation.",
+      "impact": "Results claim planning or mutation completion despite no provider inference or code effect. Scope is this shipped skill harness, not evidence of deployment elsewhere.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Release verifier accepts a bundle with no manifest digest binding",
+      "severity": "P2",
+      "path": "scripts/verify_release.sh",
+      "line": 193,
+      "evidence": "When --bundle is supplied, SHA-256 comparison is conditional on truthy release_bundle metadata. Without that optional metadata the digest is computed and discarded, followed by VERIFIED. CI invokes the script with --bundle (.github/workflows/ci.yml:146).",
+      "trigger": "Verify any existing bundle against otherwise valid evidence whose manifest has no release_bundle object.",
+      "impact": "The verified message does not establish that the supplied bundle is the release described by the evidence.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Benchmark extrapolates Python loops into isolation guarantees",
+      "severity": "P2",
+      "path": "scripts/c5_demos/zk_shm_starvation_stress_test.py",
+      "line": 66,
+      "evidence": "Both branches compute the same SHA-256 predicate; the eBPF branch additionally runs empty Python loops. No eBPF, syscall, shared-memory IPC, isolation, or agent termination is exercised. A measured speedup prints that a corrupt agent dies at zero cost.",
+      "trigger": "Run stress_test and obtain speedup > 2.",
+      "impact": "The printed success certifies unsupported isolation and zero-cost claims from an intentionally unequal simulation.",
+      "confidence": "high",
+      "kind": "example"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".agents/skills/c5-ultrathink-epistemic-audit/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          23
+        ]
+      ],
+      "manifest_sha256": "c87d626a8af1c92091432c971d60a46be5d96e5486de81bf2e6076234592d325",
+      "observed_sha256": "c87d626a8af1c92091432c971d60a46be5d96e5486de81bf2e6076234592d325",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-kernel/src/eval.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          178
+        ]
+      ],
+      "manifest_sha256": "5172ee1d8ff1eb3b33d3cf0c2bbe7c1dced0c870799ba2d5b043fda8b4c27fc3",
+      "observed_sha256": "5172ee1d8ff1eb3b33d3cf0c2bbe7c1dced0c870799ba2d5b043fda8b4c27fc3",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/bft/__init__.py",
+      "status": "reviewed_full",
+      "ranges": [],
+      "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "observed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/crypto/identity.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          288
+        ]
+      ],
+      "manifest_sha256": "4c98615751f6c55215f4bc60122346085c00bcb5cb540af18eba49883211d1b8",
+      "observed_sha256": "4c98615751f6c55215f4bc60122346085c00bcb5cb540af18eba49883211d1b8",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/services/voice_cloner.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          30
+        ]
+      ],
+      "manifest_sha256": "509c6f9b0fa6e73a0b6d65d0a65d9cbc719511b7c70b74f96ee1cbb7e599a72e",
+      "observed_sha256": "509c6f9b0fa6e73a0b6d65d0a65d9cbc719511b7c70b74f96ee1cbb7e599a72e",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/cortex/crates/cortex-lsp/src/actions.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          114
+        ]
+      ],
+      "manifest_sha256": "62d448193e772b1568ffdec9f110662daee65c99cf19f093a9444c586b8cee86",
+      "observed_sha256": "62d448193e772b1568ffdec9f110662daee65c99cf19f093a9444c586b8cee86",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "crates/babylon-attest/Cargo.toml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          29
+        ]
+      ],
+      "manifest_sha256": "e4356b188b4fefda13d3a65c4462a59529c1298fb82f547be1dc3a6d55256d96",
+      "observed_sha256": "e4356b188b4fefda13d3a65c4462a59529c1298fb82f547be1dc3a6d55256d96",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "docs/06_theory/00_index.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          55
+        ]
+      ],
+      "manifest_sha256": "c095bf496e972f8c6f3f4fa5372905a7923d4790fd69c4de50268cbfb50f7762",
+      "observed_sha256": "c095bf496e972f8c6f3f4fa5372905a7923d4790fd69c4de50268cbfb50f7762",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "docs/skills-lock.json",
+      "status": "reviewed_partial",
+      "ranges": [
+        [
+          1,
+          160
+        ]
+      ],
+      "manifest_sha256": "98929c60a897ea3235bb2b39b6b7593c057626039e6b11454501d51a8509284f",
+      "observed_sha256": "98929c60a897ea3235bb2b39b6b7593c057626039e6b11454501d51a8509284f",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "reports/nemesis_verified_report.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          48
+        ]
+      ],
+      "manifest_sha256": "9aa033bf12de94c181410e0d4f7161b31c32e17cbaae6cb51522ffecfc94b7a6",
+      "observed_sha256": "9aa033bf12de94c181410e0d4f7161b31c32e17cbaae6cb51522ffecfc94b7a6",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/c5_demos/zk_shm_starvation_stress_test.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          70
+        ]
+      ],
+      "manifest_sha256": "af45696a18a19f8c2d9cdba63aa6ba301e6f16cbc9a8eb3563107f65eb53168e",
+      "observed_sha256": "af45696a18a19f8c2d9cdba63aa6ba301e6f16cbc9a8eb3563107f65eb53168e",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/c5_sharur/sharur_100_disk_forensic_auditor.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          370
+        ]
+      ],
+      "manifest_sha256": "ce4c4829eb893effd8b0a056f1dafd401b61998d509398ef9b8bf2734a1c7d9a",
+      "observed_sha256": "ce4c4829eb893effd8b0a056f1dafd401b61998d509398ef9b8bf2734a1c7d9a",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/verify_release.sh",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          269
+        ]
+      ],
+      "manifest_sha256": "75c09bd4ac762f8a6a730dbfa04f3950e4486d69183f178c4afc8cd42e30cbaf",
+      "observed_sha256": "75c09bd4ac762f8a6a730dbfa04f3950e4486d69183f178c4afc8cd42e30cbaf",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/property/mod.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          55
+        ]
+      ],
+      "manifest_sha256": "51527f679b871d0c0c087725212b0408daf6108813daafb9d42df336862d5ab8",
+      "observed_sha256": "51527f679b871d0c0c087725212b0408daf6108813daafb9d42df336862d5ab8",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/test_fl027_provenance_authority.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          502
+        ]
+      ],
+      "manifest_sha256": "c8d556d30540d9310bc289eadf5a43f00258089d2ef9eacab8b61c9fd9f56200",
+      "observed_sha256": "c8d556d30540d9310bc289eadf5a43f00258089d2ef9eacab8b61c9fd9f56200",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/test_verifiable_inference.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          26
+        ]
+      ],
+      "manifest_sha256": "af34e41bc2167ea6678793706d75132dc3bf6047414264a412ffecd202eeaa7f",
+      "observed_sha256": "af34e41bc2167ea6678793706d75132dc3bf6047414264a412ffecd202eeaa7f",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/bindings/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          188
+        ]
+      ],
+      "manifest_sha256": "6d4aebd5ebfa655fdae4cc1b75a7a1afd67ad6c4c9ce353bad1366b178873372",
+      "observed_sha256": "6d4aebd5ebfa655fdae4cc1b75a7a1afd67ad6c4c9ce353bad1366b178873372",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/observability/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          164
+        ]
+      ],
+      "manifest_sha256": "9f345a0ff81542ddeadac16406a5c86c99c2027355d18b87db18145a44028a88",
+      "observed_sha256": "9f345a0ff81542ddeadac16406a5c86c99c2027355d18b87db18145a44028a88",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/tunnel/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          129
+        ]
+      ],
+      "manifest_sha256": "6d1fd0f6eb6fd7909e67657f0739c0c5a72dc6895c2e4653f3251cbec6a372c2",
+      "observed_sha256": "6d1fd0f6eb6fd7909e67657f0739c0c5a72dc6895c2e4653f3251cbec6a372c2",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/workers-best-practices/references/review.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          174
+        ]
+      ],
+      "manifest_sha256": "3e32da345be0906d020e5235d01f2b6398a41216900b5370a267e3f17757ade0",
+      "observed_sha256": "3e32da345be0906d020e5235d01f2b6398a41216900b5370a267e3f17757ade0",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents/agent_27_site_playbooks_bestbuy.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "manifest_sha256": "d73ded1ae99259de3c0696b1f6b3c80f939289abc15723499b3225e6abf51105",
+      "observed_sha256": "d73ded1ae99259de3c0696b1f6b3c80f939289abc15723499b3225e6abf51105",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-tri-provider-swarm/scripts/tri_swarm_dispatcher.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          131
+        ]
+      ],
+      "manifest_sha256": "68e34604fb1c3158ea6b09a8e85a1c7f7f529a4642fd104b30793e92425a05ed",
+      "observed_sha256": "68e34604fb1c3158ea6b09a8e85a1c7f7f529a4642fd104b30793e92425a05ed",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/github-api-rate-limit-optimization/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          59
+        ]
+      ],
+      "manifest_sha256": "1b339e44a8ec8ef2b754f546edbc6902f224d50bc3302c59249661b5397c080c",
+      "observed_sha256": "1b339e44a8ec8ef2b754f546edbc6902f224d50bc3302c59249661b5397c080c",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/flstudio-mcp-production/examples/Kerri_Chandler_MPC60.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          118
+        ]
+      ],
+      "manifest_sha256": "549ad52a5cfe332cdf1da4c77ef9f15b46fba2f28467dfd0683ee2433a158b6a",
+      "observed_sha256": "549ad52a5cfe332cdf1da4c77ef9f15b46fba2f28467dfd0683ee2433a158b6a",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/workspace/c5-wetware-and-venture-ops-project/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          44
+        ]
+      ],
+      "manifest_sha256": "6ce4aad78c6725dfa17b06e0311e0716ad3b67687a2198aea2f1c8ff0e84b575",
+      "observed_sha256": "6ce4aad78c6725dfa17b06e0311e0716ad3b67687a2198aea2f1c8ff0e84b575",
+      "changed_since_manifest": false
+    }
+  ],
+  "tool_limitations": [
+    "No codebase-memory graph tools exposed in ALL_TOOLS; used targeted source and reference searches.",
+    "docs/skills-lock.json reviewed only lines 1-160; remaining 161-4836 not reviewed.",
+    "Static audit only: no tests, project runtime, build, network API verification, commit, or push performed.",
+    "External Cloudflare/GitHub API reference facts not independently checked; no API-specific finding asserted.",
+    "Repository was on main with pre-existing modified files; no repository files changed."
+  ],
+  "tests_run": []
+}

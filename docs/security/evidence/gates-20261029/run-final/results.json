@@ -1,0 +1,801 @@
+{
+  "audit_date_client": "2026-10-29",
+  "root": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+  "source_sha256": {
+    ".babylon60rules": "896ef66813dae7b753c365db39817a8f144f525dc1ae4f3259660b1f53db557c",
+    ".github/workflows/babylon60_sanity_ci.yml": "79322808667a6f8baee70605b68f6bde31ab6dce2ada5c8a4ebd8c3fe77edf7d",
+    ".github/workflows/ci.yml": "0951862a3a34645a9b2f7473c1170eabb05a67a7b75cdbf709436327f0f2efcc",
+    ".github/workflows/codeql.yml": "0118636cd275567c44f0fd2ce90551330d87dbc33594cef5b60d787003ffb53d",
+    ".github/workflows/conformance.yml": "7a5a88e5063406ce0ac8e1a8b2df76abcec68c4309f0af60130b3844aa8fb819",
+    ".github/workflows/crates-publish.yml": "b81c0998f9e83031bfa0fbe872be6bc9c5beb68c0539e81ef04b96a582d3e15e",
+    ".github/workflows/dependency-audit.yml": "af7d3c51e59df7f9e6221fda9b806085bedb98c8bfee38d3bff5dbd8a38c702c",
+    ".github/workflows/deploy_docs.yml": "809ecbf98e73804a8e837b1c7bb4b25c353b5dde2b03a817ecab853af9a2772e",
+    ".github/workflows/doc_aesthetic_linter.yml": "8841c6cca49e03d787253cca2f09d5195f72fbf1d0a5e4d48bbe1d79150a8e05",
+    ".github/workflows/docker-ghcr.yml": "d53f11908910140423fe4b9ebdd704fcc8061d053ee068e844ae39d0b1a57613",
+    ".github/workflows/existence_gap_gate.yml": "f08caac341d2d4ed629df94164758ca5604cf761e27668f706374e641e624897",
+    ".github/workflows/fuzz.yml": "8266ffec0f214334b0cbcc0108881bc483cecca0f09898b1d585819901976187",
+    ".github/workflows/gitleaks.yml": "a87ca123561f956bd39b8cc751d70b92ede0820ced1c125773c19104547f54f9",
+    ".github/workflows/labeler.yml": "87f833d362c935a106446b8b03f2345074fb1f9a93865eccc6bf7ee3af042ea5",
+    ".github/workflows/loom.yml": "0b4dc5b80e4b9f17b6f13c6012942ea805e2ce560204614c50bf3993ea765536",
+    ".github/workflows/macos-native.yml": "7b7ecdb9f699aacc6a387e0b5dbfd5c4daae4429f9ef5d266cb96d5a183bdb44",
+    ".github/workflows/oidc-deploy.yml": "513786029e249298ea322e800f97d8a778c770e02bcc4465e3f21d555b3518ea",
+    ".github/workflows/production-deploy.yml": "8e2d7096311563509392ffc1a3affe576f862a942d6d7ef340115624674d2502",
+    ".github/workflows/pypi-publish.yml": "db74a3e3ce7de4032bb9b29b833e483283ab0e6f14c555bd606650de33a490b9",
+    ".github/workflows/python-tests.yml": "bb84c71dd2b88f50e731fe3e6455c177ef50cbd90b3cb2ec341e259dc54c8494",
+    ".github/workflows/secret_audit.yml": "f83b3d90948a5a6bfd90b4c818e86c5915511445a28637244c7da0f653f5aee3",
+    ".github/workflows/skill-convergence-audit.yml": "016753b1177baa2a8e4199ba6eb019fefcaffc96e31266cedc9f786de830123b",
+    ".github/workflows/stale.yml": "bdef03fea3ffcede2d8303d4a8943a2ac6e935bd0f08831f630422467497ac47",
+    ".github/workflows/verify_lean.yml": "3c5287e28eaeb4200ca5c2eb8a0a1fb4a22b02625f343a6de14cb3cf6687c3e6",
+    ".github/workflows/verify_ledger.yml": "5ef6fceb19e664de4b758524fb69fbe0820dfe0f13f0e234375947a30ea7142e",
+    ".github/workflows/windows-terminal.yml": "3c7a6b78ed0c2fbda8b73fa405aef6abc37ced024563f756efb8738a54defc03",
+    ".pre-commit-config.yaml": "62dbce0d7b80ba72ca8a527b5ac0f0b2e7b3c24153346e4562dc17f0629f3ccf",
+    "01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift": "18d96a6ef76b88b80735d646f208a062ed817311d12e48cfaccb9dc394c93efa",
+    "01_KISH_ENGINE/babylon60/mcp/cortex_mcp_server.py": "ae79aebe7b9f65b31eae72dce580c13417ddf298bc6246a091582d8761a7932b",
+    "01_KISH_ENGINE/babylon60/mcp/effect_dispatch.py": "359bf7595fc9283977e122ef16177e06bb34eb1565e522ab221387a79cab7dee",
+    "01_KISH_ENGINE/babylon60/verification/hardware_attestation.py": "b2e021e2e31d0315a1025a1bd5c72463e3650a0b1237d9243d4b71d9812ab1ae",
+    "01_KISH_ENGINE/babylon60/verification/verification_gate.py": "42765e56f489add69663fa708e43c6f71aed4593bf9e302570ae77f2c040aa5f",
+    "Cargo.lock": "7c772f6e6ffd29594c5b9bdadb004be09c57af67b60b7be1b56c034a174491b4",
+    "docs/security/evidence/gates-20261029/reproduce.py": "ec9581dd7b920306b24bcbdb7703a4dc707d14b0ca674d42c6b656f3650c2326",
+    "scripts/c5_git_utils/c5_ship.sh": "fb71a99a81f7254d4ec50bcacfae80bddf6c909e459c0d2c389d77c3d342dff8",
+    "scripts/c5_quality_gates/audit_semantic_contracts.py": "111c7aea7ac1829e7601e48010ad0862800b6b8504774f5627d3b9b9a0b2c6c9",
+    "scripts/c5_quality_gates/audit_token_budget.py": "69a972ba8cad3cd7146798ae44dbdffb5bc28afc672e339214175adece397efb",
+    "scripts/guards/verify_active_topology.py": "83ecdd5c2700bc097a275666f79bae5599a386f028c3af9830f0b6903f1ca7b2",
+    "scripts/guards/verify_publish_run.py": "7371c3bf4f81e7ed6596705168b0317be2655ac7671db25f103aabc1049a665e",
+    "src/bin/tamkarum.rs": "bbb1371e843253198eaf704bf7fc2e7125c7bb93e83eb7369560236d17c17145",
+    "src/executor.rs": "5ee23a545b54b9746b02a0a806528548e28fdcf9a1b58d83390572bb47a0dce9",
+    "src/executor_tests.rs": "30cceb819c9233b6d1577438552a608f39e62d5267ed9620dc5295e2f41ac1a0",
+    "src/halt.rs": "d7c416ce08d8b2c30d93f6997cba2f40a2251fb00b545331199759456fcbf354",
+    "src/manifest.rs": "05b05b57fa86e867e91e93fb95949a6694585457d9961b3edbe1fd7d44006cb1",
+    "src/secure_fs.rs": "9d34f7d50683b237b0eb7705721738a6595ea6661d4ed85d6fce5ee9cdb564bf",
+    "src/shared_manifest_core.rs": "3e2bc4a0aa798d4e8459ca5f4e49270182e9da842940c801aeaa9c5063252c73",
+    "src/tamkarum.rs": "8a54bcad1cce6937275656ec1fcf028a75b1c4a3c17a2de0651db7577ec31082",
+    "src/worm.rs": "d2715fbeee0e662d1346a87ddc8cd0919ab0b648e7748c1d21edcc2057f3ce17",
+    "tests/a02_effect_authorization.rs": "d29b86301d3b37b43d648a48815da20173e1ce286b52b0956f615b6448d39d45",
+    "tests/fl_mcp01_authority_drift.rs": "6caee766bd6f157ee24bb8238ab24ee3ec08e8ea42d9ffe122bc36f3d0248db5",
+    "tests/test_audit_release_gates.py": "b3738edfdd4c3f7b2c364959c58209cb98330a15b45ca0013501098cd87972ad",
+    "tests/test_biometric_signing_contract.py": "a6039d0cb27591cba30cba77a18cfe6ea7a83d021daf20156154cac806d32755",
+    "tests/test_causal_hitl_verification_gate.py": "087003fc38be6bb12f290c3594f53764a820ffc460d74408862d65aea51df29f",
+    "tests/test_fl_mcp01_dispatch.py": "cfb2aeb5c75c8b07d649218a195e2896f566f2ffae2d29bbebc4c3c3df952448",
+    "tests/test_governance_gates.py": "d01ca490a03551536644b8bbe0dc17c816ba882ea4a66c30aac983630187393a",
+    "tests/test_instruction_gate_regressions.py": "9ee00a43fc9d682698e39f1b1dadcb1aea66c9ee79f1a1fa539d9e2dc8688a2a",
+    "tests/test_semantic_contracts_gate.py": "c4df5f5e2717f59e6e58c2c99f7cd3f5dfccaaf4848e4df76f38fc9f48b8a4b6",
+    "tests/test_swarm100_lot3_regressions.py": "25060b92b5d9f0aab1075f52060613292e0845607a8ccf2303dd9588cf1e5549",
+    "tests/unit_tests.rs": "71b7fa694ac8d3dc42ec587cbbc1f6ceb17fb041167848248d0ac6c238f56711",
+    "uv.lock": "d78739746ac5d442a074ad73cbc7fc06d6e803558126f65fbc3d6d251d4c1fb4"
+  },
+  "source_files_changed_during_run": [],
+  "results": [
+    {
+      "name": "git-head",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+      "exit_code": 0,
+      "expected": 0,
+      "expectation_met": true,
+      "passed_tests": null,
+      "seconds": 0.006,
+      "log": "00-git-head.log"
+    },
+    {
+      "name": "git-status",
+      "argv": [
+        "git",
+        "status",
+        "--porcelain=v1",
+        "--untracked-files=no"
+      ],
+      "cwd": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+      "exit_code": 0,
+      "expected": 0,
+      "expectation_met": true,
+      "passed_tests": null,
+      "seconds": 0.009,
+      "log": "01-git-status.log"
+    },
+    {
+      "name": "git-version",
+      "argv": [
+        "git",
+        "--version"
+      ],
+      "cwd": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+      "exit_code": 0,
+      "expected": 0,
+      "expectation_met": true,
+      "passed_tests": null,
+      "seconds": 0.005,
+      "log": "02-git-version.log"
+    },
+    {
+      "name": "rust-version",
+      "argv": [
+        "rustc",
+        "--version"
+      ],
+      "cwd": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+      "exit_code": 0,
+      "expected": 0,
+      "expectation_met": true,
+      "passed_tests": null,
+      "seconds": 0.165,
+      "log": "03-rust-version.log"
+    },
+    {
+      "name": "uv-version",
+      "argv": [
+        "uv",
+        "--version"
+      ],
+      "cwd": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+      "exit_code": 0,
+      "expected": 0,
+      "expectation_met": true,
+      "passed_tests": null,
+      "seconds": 0.008,
+      "log": "04-uv-version.log"
+    },
+    {
+      "name": "fixture-init",
+      "argv": [
+        "git",
+        "init",
+        "-q"
+      ],
+      "cwd": "/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/b60-gates-audit-3csk2zo0/repo",
+      "exit_code": 0,
+      "expected": 0,
+      "expectation_met": true,
+      "passed_tests": null,
+      "seconds": 0.012,
+      "log": "05-fixture-init.log"
+    },
+    {
+      "name": "fixture-stage",
+      "argv": [
+        "git",
+        "add",
+        "witness.txt"
+      ],
+      "cwd": "/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/b60-gates-audit-3csk2zo0/repo",
+      "exit_code": 0,
+      "expected": 0,
+      "expectation_met": true,
+      "passed_tests": null,
+      "seconds": 0.008,
+      "log": "06-fixture-stage.log"
+    },
+    {
+      "name": "actual-hook-rejects-missing-topology",
+      "argv": [
+        "git",
+        "-c",
+        "commit.gpgsign=false",
+        "commit",
+        "-qm",
+        "fixture"
+      ],
+      "cwd": "/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/b60-gates-audit-3csk2zo0/repo",
+      "exit_code": 1,
+      "expected": "nonzero",
+      "expectation_met": true,
+      "passed_tests": null,
+      "seconds": 0.229,
+      "log": "07-actual-hook-rejects-missing-topology.log"
+    },
+    {
+      "name": "fixture-no-verify-commits",
+      "argv": [
+        "git",
+        "-c",
+        "commit.gpgsign=false",
+        "commit",
+        "--no-verify",
+        "-qm",
+        "fixture"
+      ],
+      "cwd": "/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/b60-gates-audit-3csk2zo0/repo",
+      "exit_code": 0,
+      "expected": 0,
+      "expectation_met": true,
+      "passed_tests": null,
+      "seconds": 0.014,
+      "log": "08-fixture-no-verify-commits.log"
+    },
+    {
+      "name": "fixture-independent-commit-observer",
+      "argv": [
+        "git",
+        "show",
+        "HEAD:witness.txt"
+      ],
+      "cwd": "/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/b60-gates-audit-3csk2zo0/repo",
+      "exit_code": 0,
+      "expected": 0,
+      "expectation_met": true,
+      "passed_tests": null,
+      "seconds": 0.006,
+      "log": "09-fixture-independent-commit-observer.log"
+    },
+    {
+      "name": "fixture-stage-second",
+      "argv": [
+        "git",
+        "add",
+        "second.txt"
+      ],
+      "cwd": "/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/b60-gates-audit-3csk2zo0/repo",
+      "exit_code": 0,
+      "expected": 0,
+      "expectation_met": true,
+      "passed_tests": null,
+      "seconds": 0.008,
+      "log": "10-fixture-stage-second.log"
+    },
+    {
+      "name": "fixture-hooks-path-override-commits",
+      "argv": [
+        "git",
+        "-c",
+        "core.hooksPath=/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/b60-gates-audit-3csk2zo0/empty-hooks",
+        "-c",
+        "commit.gpgsign=false",
+        "commit",
+        "-qm",
+        "fixture two"
+      ],
+      "cwd": "/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/b60-gates-audit-3csk2zo0/repo",
+      "exit_code": 0,
+      "expected": 0,
+      "expectation_met": true,
+      "passed_tests": null,
+      "seconds": 0.018,
+      "log": "11-fixture-hooks-path-override-commits.log"
+    },
+    {
+      "name": "fixture-stage-invalid-python",
+      "argv": [
+        "git",
+        "add",
+        "syntax_fixture.py"
+      ],
+      "cwd": "/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/b60-gates-audit-3csk2zo0/repo",
+      "exit_code": 0,
+      "expected": 0,
+      "expectation_met": true,
+      "passed_tests": null,
+      "seconds": 0.008,
+      "log": "12-fixture-stage-invalid-python.log"
+    },
+    {
+      "name": "global-ast-delegate-accepts-staged-syntax-error",
+      "argv": [
+        "/Users/borjafernandezangulo/.git_hooks/pre-commit"
+      ],
+      "cwd": "/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/b60-gates-audit-3csk2zo0/repo",
+      "exit_code": 0,
+      "expected": 0,
+      "expectation_met": true,
+      "passed_tests": null,
+      "seconds": 0.068,
+      "log": "13-global-ast-delegate-accepts-staged-syntax-error.log"
+    },
+    {
+      "name": "staged-python-independent-compiler",
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-c",
+        "import sys; compile(sys.stdin.read(), 'staged', 'exec')"
+      ],
+      "cwd": "/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/b60-gates-audit-3csk2zo0/repo",
+      "exit_code": 1,
+      "expected": "nonzero",
+      "expectation_met": true,
+      "passed_tests": null,
+      "seconds": 0.04,
+      "log": "14-staged-python-independent-compiler.log"
+    },
+    {
+      "name": "compile-actual-budget-module",
+      "argv": [
+        "rustc",
+        "--edition=2021",
+        "-Awarnings",
+        "/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/b60-gates-audit-3csk2zo0/budget.rs",
+        "-o",
+        "/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/b60-gates-audit-3csk2zo0/budget"
+      ],
+      "cwd": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+      "exit_code": 0,
+      "expected": 0,
+      "expectation_met": true,
+      "passed_tests": null,
+      "seconds": 0.727,
+      "log": "15-compile-actual-budget-module.log"
+    },
+    {
+      "name": "budget-no-attestation-and-reset-witness",
+      "argv": [
+        "/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/b60-gates-audit-3csk2zo0/budget"
+      ],
+      "cwd": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+      "exit_code": 0,
+      "expected": 0,
+      "expectation_met": true,
+      "passed_tests": null,
+      "seconds": 0.46,
+      "log": "16-budget-no-attestation-and-reset-witness.log"
+    },
+    {
+      "name": "publish-validator-valid",
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "scripts/guards/verify_publish_run.py"
+      ],
+      "cwd": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+      "exit_code": 0,
+      "expected": 0,
+      "expectation_met": true,
+      "passed_tests": null,
+      "seconds": 0.031,
+      "log": "17-publish-validator-valid.log"
+    },
+    {
+      "name": "publish-validator-missing",
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "scripts/guards/verify_publish_run.py"
+      ],
+      "cwd": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+      "exit_code": 1,
+      "expected": "nonzero",
+      "expectation_met": true,
+      "passed_tests": null,
+      "seconds": 0.03,
+      "log": "18-publish-validator-missing.log"
+    },
+    {
+      "name": "publish-validator-duplicate",
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "scripts/guards/verify_publish_run.py"
+      ],
+      "cwd": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+      "exit_code": 1,
+      "expected": "nonzero",
+      "expectation_met": true,
+      "passed_tests": null,
+      "seconds": 0.033,
+      "log": "19-publish-validator-duplicate.log"
+    },
+    {
+      "name": "publish-validator-headSha-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "scripts/guards/verify_publish_run.py"
+      ],
+      "cwd": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+      "exit_code": 1,
+      "expected": "nonzero",
+      "expectation_met": true,
+      "passed_tests": null,
+      "seconds": 0.029,
+      "log": "20-publish-validator-headSha-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.log"
+    },
+    {
+      "name": "publish-validator-status-in_progress",
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "scripts/guards/verify_publish_run.py"
+      ],
+      "cwd": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+      "exit_code": 1,
+      "expected": "nonzero",
+      "expectation_met": true,
+      "passed_tests": null,
+      "seconds": 0.028,
+      "log": "21-publish-validator-status-in_progress.log"
+    },
+    {
+      "name": "publish-validator-conclusion-failure",
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "scripts/guards/verify_publish_run.py"
+      ],
+      "cwd": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+      "exit_code": 1,
+      "expected": "nonzero",
+      "expectation_met": true,
+      "passed_tests": null,
+      "seconds": 0.028,
+      "log": "22-publish-validator-conclusion-failure.log"
+    },
+    {
+      "name": "publish-validator-conclusion-cancelled",
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "scripts/guards/verify_publish_run.py"
+      ],
+      "cwd": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+      "exit_code": 1,
+      "expected": "nonzero",
+      "expectation_met": true,
+      "passed_tests": null,
+      "seconds": 0.028,
+      "log": "23-publish-validator-conclusion-cancelled.log"
+    },
+    {
+      "name": "publish-validator-event-pull_request",
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "scripts/guards/verify_publish_run.py"
+      ],
+      "cwd": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+      "exit_code": 1,
+      "expected": "nonzero",
+      "expectation_met": true,
+      "passed_tests": null,
+      "seconds": 0.026,
+      "log": "24-publish-validator-event-pull_request.log"
+    },
+    {
+      "name": "publish-validator-headBranch-feature",
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "scripts/guards/verify_publish_run.py"
+      ],
+      "cwd": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+      "exit_code": 1,
+      "expected": "nonzero",
+      "expectation_met": true,
+      "passed_tests": null,
+      "seconds": 0.026,
+      "log": "25-publish-validator-headBranch-feature.log"
+    },
+    {
+      "name": "topology-self-test",
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "scripts/guards/verify_active_topology.py",
+        "--self-test"
+      ],
+      "cwd": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+      "exit_code": 0,
+      "expected": 0,
+      "expectation_met": true,
+      "passed_tests": null,
+      "seconds": 0.182,
+      "log": "26-topology-self-test.log"
+    },
+    {
+      "name": "semantic-workspace",
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "scripts/c5_quality_gates/audit_semantic_contracts.py",
+        "--workspace-only"
+      ],
+      "cwd": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+      "exit_code": 0,
+      "expected": null,
+      "expectation_met": null,
+      "passed_tests": null,
+      "seconds": 0.175,
+      "log": "27-semantic-workspace.log"
+    },
+    {
+      "name": "budget-workspace",
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "scripts/c5_quality_gates/audit_token_budget.py",
+        "--workspace-only",
+        "--skip-ghost-listeners"
+      ],
+      "cwd": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+      "exit_code": 0,
+      "expected": null,
+      "expectation_met": null,
+      "passed_tests": null,
+      "seconds": 0.043,
+      "log": "28-budget-workspace.log"
+    },
+    {
+      "name": "topology-workspace",
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "scripts/guards/verify_active_topology.py"
+      ],
+      "cwd": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+      "exit_code": 0,
+      "expected": null,
+      "expectation_met": null,
+      "passed_tests": null,
+      "seconds": 0.048,
+      "log": "29-topology-workspace.log"
+    },
+    {
+      "name": "topology-index",
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "scripts/guards/verify_active_topology.py",
+        "--staged"
+      ],
+      "cwd": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+      "exit_code": 0,
+      "expected": null,
+      "expectation_met": null,
+      "passed_tests": null,
+      "seconds": 0.237,
+      "log": "30-topology-index.log"
+    },
+    {
+      "name": "native-build",
+      "argv": [
+        "cargo",
+        "build",
+        "-q",
+        "--locked",
+        "-p",
+        "babylon60_root",
+        "--lib",
+        "--features",
+        "python"
+      ],
+      "cwd": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+      "exit_code": 0,
+      "expected": 0,
+      "expectation_met": true,
+      "passed_tests": null,
+      "seconds": 1.503,
+      "log": "31-native-build.log"
+    },
+    {
+      "name": "python-rejection-and-dispatch-tests",
+      "argv": [
+        "uv",
+        "run",
+        "--locked",
+        "pytest",
+        "tests/test_governance_gates.py",
+        "tests/test_instruction_gate_regressions.py",
+        "tests/test_semantic_contracts_gate.py",
+        "tests/test_audit_release_gates.py",
+        "tests/test_causal_hitl_verification_gate.py",
+        "tests/test_fl_mcp01_dispatch.py",
+        "tests/test_biometric_signing_contract.py",
+        "tests/test_swarm100_lot3_regressions.py",
+        "-k",
+        "not hardware_attested_fixture_effect",
+        "-q"
+      ],
+      "cwd": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+      "exit_code": 0,
+      "expected": 0,
+      "expectation_met": true,
+      "passed_tests": 277,
+      "seconds": 88.005,
+      "log": "32-python-rejection-and-dispatch-tests.log"
+    },
+    {
+      "name": "rust-executor-rejection-tests",
+      "argv": [
+        "cargo",
+        "test",
+        "-q",
+        "--locked",
+        "-p",
+        "babylon60_root",
+        "--lib",
+        "executor::",
+        "--",
+        "--test-threads=1"
+      ],
+      "cwd": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+      "exit_code": 0,
+      "expected": 0,
+      "expectation_met": true,
+      "passed_tests": 44,
+      "seconds": 4.872,
+      "log": "33-rust-executor-rejection-tests.log"
+    },
+    {
+      "name": "rust-secure-fs-tests",
+      "argv": [
+        "cargo",
+        "test",
+        "-q",
+        "--locked",
+        "-p",
+        "babylon60_root",
+        "--lib",
+        "secure_fs::tests",
+        "--",
+        "--test-threads=1"
+      ],
+      "cwd": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+      "exit_code": 0,
+      "expected": 0,
+      "expectation_met": true,
+      "passed_tests": 7,
+      "seconds": 0.25,
+      "log": "34-rust-secure-fs-tests.log"
+    },
+    {
+      "name": "rust-mcp-authority-tests",
+      "argv": [
+        "cargo",
+        "test",
+        "-q",
+        "--locked",
+        "-p",
+        "babylon60_root",
+        "--test",
+        "fl_mcp01_authority_drift",
+        "--test",
+        "a02_effect_authorization",
+        "--",
+        "--test-threads=1"
+      ],
+      "cwd": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+      "exit_code": 0,
+      "expected": 0,
+      "expectation_met": true,
+      "passed_tests": 11,
+      "seconds": 4.643,
+      "log": "35-rust-mcp-authority-tests.log"
+    },
+    {
+      "name": "rust-worm-integrity-tests",
+      "argv": [
+        "cargo",
+        "test",
+        "-q",
+        "--locked",
+        "-p",
+        "babylon60_root",
+        "--lib",
+        "worm::tests",
+        "--",
+        "--test-threads=1"
+      ],
+      "cwd": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+      "exit_code": 0,
+      "expected": 0,
+      "expectation_met": true,
+      "passed_tests": 24,
+      "seconds": 0.219,
+      "log": "36-rust-worm-integrity-tests.log"
+    },
+    {
+      "name": "legacy-irreversibility-test-passes",
+      "argv": [
+        "cargo",
+        "test",
+        "-q",
+        "--locked",
+        "-p",
+        "babylon60_root",
+        "--test",
+        "unit_tests",
+        "inv4_poison_is_irreversible",
+        "--",
+        "--test-threads=1"
+      ],
+      "cwd": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+      "exit_code": 0,
+      "expected": 0,
+      "expectation_met": true,
+      "passed_tests": null,
+      "seconds": 0.908,
+      "log": "37-legacy-irreversibility-test-passes.log"
+    },
+    {
+      "name": "default-native-build",
+      "argv": [
+        "cargo",
+        "build",
+        "-q",
+        "--locked",
+        "-p",
+        "babylon60_root",
+        "--lib"
+      ],
+      "cwd": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+      "exit_code": 0,
+      "expected": 0,
+      "expectation_met": true,
+      "passed_tests": null,
+      "seconds": 1.108,
+      "log": "38-default-native-build.log"
+    },
+    {
+      "name": "compile-real-halt-probe",
+      "argv": [
+        "rustc",
+        "--edition=2021",
+        "/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/b60-halt-audit-ajnspxet/halt_probe.rs",
+        "--extern",
+        "babylon60=/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/target/debug/libbabylon60.rlib",
+        "-L",
+        "dependency=/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/target/debug/deps",
+        "-o",
+        "/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/b60-halt-audit-ajnspxet/halt_probe"
+      ],
+      "cwd": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+      "exit_code": 0,
+      "expected": 0,
+      "expectation_met": true,
+      "passed_tests": null,
+      "seconds": 0.203,
+      "log": "39-compile-real-halt-probe.log"
+    },
+    {
+      "name": "real-halt-aborts-despite-receipt-io-failure",
+      "argv": [
+        "/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/b60-halt-audit-ajnspxet/halt_probe"
+      ],
+      "cwd": "/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/b60-halt-audit-ajnspxet",
+      "exit_code": -6,
+      "expected": -6,
+      "expectation_met": true,
+      "passed_tests": null,
+      "seconds": 0.47,
+      "log": "40-real-halt-aborts-despite-receipt-io-failure.log"
+    },
+    {
+      "name": "main-protection",
+      "argv": [
+        "gh",
+        "api",
+        "repos/borjamoskv/BABYLON-60-VAULT/branches/main/protection"
+      ],
+      "cwd": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+      "exit_code": 1,
+      "expected": null,
+      "expectation_met": null,
+      "passed_tests": null,
+      "seconds": 0.679,
+      "log": "41-main-protection.log"
+    },
+    {
+      "name": "main-rules",
+      "argv": [
+        "gh",
+        "api",
+        "repos/borjamoskv/BABYLON-60-VAULT/rules/branches/main"
+      ],
+      "cwd": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+      "exit_code": 1,
+      "expected": null,
+      "expectation_met": null,
+      "passed_tests": null,
+      "seconds": 0.435,
+      "log": "42-main-rules.log"
+    },
+    {
+      "name": "production-environment",
+      "argv": [
+        "gh",
+        "api",
+        "repos/borjamoskv/BABYLON-60-VAULT/environments/Production"
+      ],
+      "cwd": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+      "exit_code": 1,
+      "expected": null,
+      "expectation_met": null,
+      "passed_tests": null,
+      "seconds": 0.437,
+      "log": "43-production-environment.log"
+    }
+  ],
+  "unexpected_results": [],
+  "limits": [
+    "No live biometric authentication or hardware provenance claim",
+    "No production effects, network publication, or configuration changes",
+    "Remote 403/404 are observations, not proof of effective protection",
+    "Host telemetry omitted; source hashes identify the dirty working tree",
+    "Returned DENY is distinguished from an effect that already started"
+  ]
+}

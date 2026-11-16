@@ -1,0 +1,118 @@
+[
+  {
+    "candidate_id": "SW100-C0061",
+    "path": "proof/bundles/attestation_bundle_v1/verify",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "source_sha256": "da44e559a79a11fa860e19cdafd5402490332964c6893719eb742bb7ed7bc99e",
+    "rationale": "The verifier compares copied digest strings and verifies a signature over causal_hash alone. It neither computes a digest of claims/environment/tests/commit/timestamp nor compares any artifact bytes; nonempty manifest alone produces ARTIFACT VERIFIED. Thus metadata can change without changing either checked digest string or the signed value. The finding concerns bundle-integrity assertions, not a hardware/root trust bypass.",
+    "source_checks": [
+      {
+        "path": "proof/bundles/attestation_bundle_v1/verify",
+        "start_line": 12,
+        "end_line": 16,
+        "observation": "Metadata filenames are only required to exist."
+      },
+      {
+        "path": "proof/bundles/attestation_bundle_v1/verify",
+        "start_line": 24,
+        "end_line": 48,
+        "observation": "Hash comparison and signature consume stored strings, not metadata/artifact bytes."
+      },
+      {
+        "path": "proof/bundles/attestation_bundle_v1/verify",
+        "start_line": 53,
+        "end_line": 73,
+        "observation": "Unbound JSON changes displayed provenance/counts; ARTIFACT uses manifest truthiness."
+      }
+    ]
+  },
+  {
+    "candidate_id": "SW100-C0083",
+    "path": "scripts/generate_attestation_bundle.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "source_sha256": "588f38c54732f3a2d5b88e7986b3ae3629db6c88dd3be945e5dfef4e7f265c4c",
+    "rationale": "The generator writes freshly timestamped PASS values and fixed gate counts without executing those gates. It also reuses a fixed causal hash, signature/key and timestamp while taking the current Git commit and artifact bytes for other fields. The resulting bundle cannot establish that those current-checkout gates passed or that fixed signing material binds this new snapshot. The manifest explicitly marks hardware UNVERIFIED and certification NONE, which limits certification claims but does not qualify the fabricated PASS fields. No generator or external signing action was executed.",
+    "source_checks": [
+      {
+        "path": "scripts/generate_attestation_bundle.py",
+        "start_line": 15,
+        "end_line": 30,
+        "observation": "Current commit and selected artifact bytes are read for some fields."
+      },
+      {
+        "path": "scripts/generate_attestation_bundle.py",
+        "start_line": 54,
+        "end_line": 68,
+        "observation": "test-results.json receives constant PASS outcomes/counts with current timestamp."
+      },
+      {
+        "path": "scripts/generate_attestation_bundle.py",
+        "start_line": 70,
+        "end_line": 101,
+        "observation": "Fixed signing material/timestamp coexist with current snapshot fields and explicit uncertified metadata."
+      }
+    ]
+  },
+  {
+    "candidate_id": "SW100-C0086",
+    "path": "scripts/generate_attestation_bundle_v2.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "source_sha256": "83f1835ffb64bd6cc0139279f1f1c6b2c9a8b0bddae3f0a8fbfbd465b8e6069f",
+    "rationale": "The generator computes a current checkout artifact digest and current timestamp, but constructs all claimed suite outcomes from source literals. Those bytes feed the joint digest and ECDSA signing path, so generation can bind invented current test evidence to an untested artifact. The script was not imported or executed, and no key was read.",
+    "source_checks": [
+      {
+        "path": "scripts/generate_attestation_bundle_v2.py",
+        "start_line": 30,
+        "end_line": 53,
+        "observation": "Artifact digest is assembled from current files."
+      },
+      {
+        "path": "scripts/generate_attestation_bundle_v2.py",
+        "start_line": 105,
+        "end_line": 180,
+        "observation": "Trial counts, zero violations and pass counts are literals serialized with a fresh timestamp."
+      },
+      {
+        "path": "scripts/generate_attestation_bundle_v2.py",
+        "start_line": 204,
+        "end_line": 243,
+        "observation": "Literal-result digest is included in the signed joint digest."
+      }
+    ]
+  },
+  {
+    "candidate_id": "SW100-C0087",
+    "path": "scripts/generate_attestation_bundle_v2.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "source_sha256": "83f1835ffb64bd6cc0139279f1f1c6b2c9a8b0bddae3f0a8fbfbd465b8e6069f",
+    "rationale": "The generated verifier authenticates the stored artifact digest as part of its joint signature but never recomputes it from any supplied source or binary. Unchanged bundle files can retain ARTIFACT HASH VERIFIED after the implementation changes. This is a missing artifact-to-attestation binding, not evidence that an existing signature can be forged.",
+    "source_checks": [
+      {
+        "path": "scripts/generate_attestation_bundle_v2.py",
+        "start_line": 301,
+        "end_line": 322,
+        "observation": "Claims, tests and environment bytes are hashed; artifact is checked only as two matching stored strings."
+      },
+      {
+        "path": "scripts/generate_attestation_bundle_v2.py",
+        "start_line": 324,
+        "end_line": 350,
+        "observation": "Joint digest/signature verification consumes that stored artifact hash."
+      },
+      {
+        "path": "scripts/generate_attestation_bundle_v2.py",
+        "start_line": 382,
+        "end_line": 409,
+        "observation": "ARTIFACT HASH VERIFIED and successful exit depend on that string comparison."
+      }
+    ]
+  }
+]

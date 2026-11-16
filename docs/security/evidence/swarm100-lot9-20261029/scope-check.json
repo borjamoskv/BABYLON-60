@@ -1,0 +1,30 @@
+{
+  "result": "PASS",
+  "only_production_source": "scripts/c5_thermo/c5_exergy_optimizer_monitor.py",
+  "unchanged_function_ast": {
+    "audit_git_entropy": true,
+    "_get_table_counts": true,
+    "audit_db_census": true,
+    "_parse_int_token": true,
+    "audit_ruff": true,
+    "_parse_passed_count_from_line": true,
+    "audit_tests": true,
+    "crystallize_status": true,
+    "append_mutation": true,
+    "_print_db_census_entry": true
+  },
+  "caller_audit_producers_unchanged": true,
+  "unchanged_dependencies_and_previous_sources": {
+    "scripts/c5_cortex/cortex_objectives_transducer.py": true,
+    "scripts/c5_verifiers/fast_smt_gate.py": true,
+    "pyproject.toml": true,
+    "uv.lock": true,
+    "Cargo.lock": true
+  },
+  "impacted_registry_ids": [
+    "SW100-C0438"
+  ],
+  "lot10_sources_unchanged": {
+    "scripts/c5_verifiers/purge_residuals.py": "a6bcbf4d8a6e09c0cfa8362b8745d788ca3999d82a80de2fb9145419bf63f55f"
+  }
+}

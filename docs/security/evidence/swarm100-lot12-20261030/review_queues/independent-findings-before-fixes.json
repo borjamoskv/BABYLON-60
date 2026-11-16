@@ -1,0 +1,22 @@
+[
+  {
+    "candidate_id": "SW100-C0208",
+    "status": "REPRODUCED_ACTIONABLE",
+    "source": "01_KISH_ENGINE/babylon60/core/moskv_kernel.py",
+    "test": "test_kernel_cancelled_processing_is_not_reported_as_normal_completion",
+    "log": "cancel-before.log",
+    "observation": "Cancellation after dequeue and before BEGIN is consumed by bft_state_loop. Awaiting the loop returns normally though the accepted tracking ID has not been committed.",
+    "source_sha256_at_review": "86034910d9abb70115ba771470e83a330d6d930c7d6b5d3a66349a94ca28628c",
+    "log_sha256": "fb2eff0c4e9151e2eb1b501f787c2ec51c56c0a32502e0b200acd44e1d968566"
+  },
+  {
+    "candidate_id": "SW100-C0434",
+    "status": "REPRODUCED_ACTIONABLE",
+    "source": "01_KISH_ENGINE/babylon60/bft/master_ledger_queue.py",
+    "test": "test_auxiliary_close_during_initialize_cannot_reopen_admission",
+    "log": "initialize-close-before.log",
+    "observation": "initialize awaits a real SQLite connection. Concurrent shutdown completes; resumed initialization sets accepting true and public submission succeeds after close.",
+    "source_sha256_at_review": "9aa48b253b5614703132869b5b915f7f70613029dd44d79275ade812b9772a66",
+    "log_sha256": "8da2a0cca713e5a005815acda70218098630fc7c9eb81843b1f1ce7978bc6538"
+  }
+]

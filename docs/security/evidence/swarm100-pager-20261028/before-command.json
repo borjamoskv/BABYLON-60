@@ -1,0 +1,16 @@
+{
+  "command": [
+    "uv",
+    "run",
+    "--locked",
+    "--no-sync",
+    "pytest",
+    "tests/test_agent_beeper_regressions.py",
+    "-q",
+    "-o",
+    "addopts=--tb=short"
+  ],
+  "exit_code": 1,
+  "log": "docs/security/evidence/swarm100-pager-20261028/before.log",
+  "log_sha256": "a285850966f7198558fc530ed4024bde7596b8a5f88d635d2f81a9ad49124919"
+}

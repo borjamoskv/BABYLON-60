@@ -1,0 +1,436 @@
+{
+  "shard": "049",
+  "findings": [
+    {
+      "title": "Path import inserted before __future__ imports makes rewritten modules invalid",
+      "severity": "P1",
+      "path": "scripts/c5_sharur/auto_heal_hardcoded_paths.py",
+      "line": 119,
+      "evidence": "ensure_pathlib_import inserts at index 0 or 1 (docstring only), without skipping future imports; heal_file writes ast.unparse output without compilation.",
+      "trigger": "A module containing from __future__ import annotations and a matching home-path literal, without an existing Path import.",
+      "impact": "The remediation writes an import ahead of __future__, causing SyntaxError when the rewritten module is imported.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Existing pathlib import incorrectly treated as a bound Path name",
+      "severity": "P2",
+      "path": "scripts/c5_sharur/auto_heal_hardcoded_paths.py",
+      "line": 103,
+      "evidence": "import pathlib and from pathlib import Path as P both set has_pathlib=True, while visit_Constant generates unqualified Path.home().",
+      "trigger": "A rewritten module uses import pathlib (or aliases Path) without independently binding Path.",
+      "impact": "Generated path expressions raise NameError, breaking code the remediation claims to repair.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Bundling success claims are emitted without checking measured results",
+      "severity": "P2",
+      "path": "scripts/c5_demos/poc_vsa_saturation_stress.py",
+      "line": 225,
+      "evidence": "The function prints fixed SNR >15 dB / 100% recall K<=50 and >98% K=300 claims after displaying results, and the final bundling verdict is always 100% PASS. No assertions check bundling_results.",
+      "trigger": "Computed bundling recall or SNR falls below the printed threshold.",
+      "impact": "The demonstration reports certification and PASS despite a failed or degraded measurement.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Lean verification silently passes when compiler is absent",
+      "severity": "P2",
+      "path": "tests/test_entropy_synthesis_omega.py",
+      "line": 97,
+      "evidence": "test_i4_lean4_standalone_oracle only runs subprocess and checks its result inside if Path(lean_bin).is_file(); there is no else failure or pytest.skip.",
+      "trigger": "Neither shutil.which(\"lean\") nor /opt/homebrew/bin/lean resolves to an existing compiler file.",
+      "impact": "The test reports a pass although no Lean verification occurred.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Password audit requires plaintext secret in command-line arguments",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-sovereign-identity-hardening/scripts/check_pwned_pass.sh",
+      "line": 15,
+      "evidence": "Usage instructs passing the password as $1 and assigns PASSWORD=\"$1\"; no hidden terminal or stdin input path exists.",
+      "trigger": "User follows the documented invocation with a real password.",
+      "impact": "Password can enter shell history and process argument inspection despite the network k-anonymity protection.",
+      "confidence": "high",
+      "kind": "example"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "01_KISH_ENGINE/babylon60/cortex/cortex_chaos_monad.py",
+      "line": 74,
+      "description": "The whitelist admits full numpy/networkx modules, including ordinary public I/O methods; AST filtering blocks open and os names but does not restrict numpy.save/load or networkx read/write APIs. run_chaos_monad passes validated code to exec with OS sandbox disabled by default. Potential filesystem access outside intended sandbox.",
+      "evidence": "allowed_imports at line 74; _safe_import returns unrestricted imported module; subprocess wrapper exec(code, env, env); use_seatbelt=False default. Native callers found in tests/test_attestation.py and tests/test_ast_markov_blanket_evasion.py.",
+      "remaining_verification": "No payload executed; confirm installed module imports succeed under memory limits and trace any productive caller before classifying a live boundary bypass."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".agents/skills/c5-ring0-babylon-kernel-project/references/modules/babylon60-architecture/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          92
+        ]
+      ],
+      "expected_sha256": "c0fc8357a0292a3e05f1ff352776eed170ff69265d7ea6864ce1100d7e66a3e9",
+      "observed_sha256": "c0fc8357a0292a3e05f1ff352776eed170ff69265d7ea6864ce1100d7e66a3e9",
+      "changed": false,
+      "symlink": false
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-compiler/tests/solver_trust.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          542
+        ]
+      ],
+      "expected_sha256": "5cc1fb29d504fe3b2488a05b851b1ede1391a9246c0da9a1fe33be740e2ba4ff",
+      "observed_sha256": "5cc1fb29d504fe3b2488a05b851b1ede1391a9246c0da9a1fe33be740e2ba4ff",
+      "changed": false,
+      "symlink": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/attestation/merkle_b3.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          91
+        ]
+      ],
+      "expected_sha256": "e8bb8e8d73e8c23a97f5fca3a9420ac2b50775e853ea21e84fc2e46971347f2b",
+      "observed_sha256": "e8bb8e8d73e8c23a97f5fca3a9420ac2b50775e853ea21e84fc2e46971347f2b",
+      "changed": false,
+      "symlink": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/cortex/cortex_chaos_monad.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          282
+        ]
+      ],
+      "expected_sha256": "caad983c0aed5a38ca741dd04246c2e932bacb11ca369691e00627d97c328e74",
+      "observed_sha256": "caad983c0aed5a38ca741dd04246c2e932bacb11ca369691e00627d97c328e74",
+      "changed": false,
+      "symlink": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/primitives/matrix.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          92
+        ]
+      ],
+      "expected_sha256": "88ff07e1b0e51f70b57e944b59ab5d9fea4b66ae6c323979440f44287397d5d8",
+      "observed_sha256": "88ff07e1b0e51f70b57e944b59ab5d9fea4b66ae6c323979440f44287397d5d8",
+      "changed": false,
+      "symlink": false
+    },
+    {
+      "path": "01_KISH_ENGINE/cortex/crates/cortex-guard/fixtures/edificio_infractor.ifc",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          28
+        ]
+      ],
+      "expected_sha256": "f0d9ded30b2dbbfce5b3345b980ae38cdf68831f34453363604b6eee169f9ea2",
+      "observed_sha256": "f0d9ded30b2dbbfce5b3345b980ae38cdf68831f34453363604b6eee169f9ea2",
+      "changed": false,
+      "symlink": false
+    },
+    {
+      "path": "crates/b60-lang/src/isa.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          166
+        ]
+      ],
+      "expected_sha256": "05a8544e4de5fc809d1e51e065879c0db6e383595fee5c4976df010cbfb4514c",
+      "observed_sha256": "05a8544e4de5fc809d1e51e065879c0db6e383595fee5c4976df010cbfb4514c",
+      "changed": false,
+      "symlink": false
+    },
+    {
+      "path": "docs/04_research/README_APEX.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          139
+        ]
+      ],
+      "expected_sha256": "77e2391ee4b93ba080e1297dda7be88029979360c0a122afea56fffc5ea9d587",
+      "observed_sha256": "77e2391ee4b93ba080e1297dda7be88029979360c0a122afea56fffc5ea9d587",
+      "changed": false,
+      "symlink": false
+    },
+    {
+      "path": "docs/security/fl-rec01-recovery-provenance.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          102
+        ]
+      ],
+      "expected_sha256": "5802089c41cd771466aaff2d4ceaace36448f3ebffc8231caf04c4766ccbfdb9",
+      "observed_sha256": "5802089c41cd771466aaff2d4ceaace36448f3ebffc8231caf04c4766ccbfdb9",
+      "changed": false,
+      "symlink": false
+    },
+    {
+      "path": "proof/lean/lakefile.toml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          70
+        ]
+      ],
+      "expected_sha256": "99c1cf005aac1e3793aaba1ea1775d8e4d6c3e94b2f1dbd9b08723b2283aa631",
+      "observed_sha256": "99c1cf005aac1e3793aaba1ea1775d8e4d6c3e94b2f1dbd9b08723b2283aa631",
+      "changed": false,
+      "symlink": false
+    },
+    {
+      "path": "scripts/c5_demos/poc_vsa_saturation_stress.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          257
+        ]
+      ],
+      "expected_sha256": "96a77ceb7115b8bd315be27dc6c9f59b34d70859310c16b2bf36750399278cd4",
+      "observed_sha256": "96a77ceb7115b8bd315be27dc6c9f59b34d70859310c16b2bf36750399278cd4",
+      "changed": false,
+      "symlink": false
+    },
+    {
+      "path": "scripts/c5_sharur/auto_heal_hardcoded_paths.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          171
+        ]
+      ],
+      "expected_sha256": "7c9de3cae32521d67c006d60918502b33be3722e45c133c4e03c7b2d7342d9f3",
+      "observed_sha256": "7c9de3cae32521d67c006d60918502b33be3722e45c133c4e03c7b2d7342d9f3",
+      "changed": false,
+      "symlink": false
+    },
+    {
+      "path": "scripts/repatriated/sharur_legion_100_results.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          44
+        ]
+      ],
+      "expected_sha256": "ddaa1f3dd1e3da76f3b00d75cc672b5c30b2e746215dc0fc539a5336153705c9",
+      "observed_sha256": "ddaa1f3dd1e3da76f3b00d75cc672b5c30b2e746215dc0fc539a5336153705c9",
+      "changed": false,
+      "symlink": false
+    },
+    {
+      "path": "tests/licensing/test_sovereign_license.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          98
+        ]
+      ],
+      "expected_sha256": "0e7f70822267dd4d7358bea8f1c52d39be0a31f8b95c536720b6c5e02b2e14fc",
+      "observed_sha256": "0e7f70822267dd4d7358bea8f1c52d39be0a31f8b95c536720b6c5e02b2e14fc",
+      "changed": false,
+      "symlink": false
+    },
+    {
+      "path": "tests/test_entropy_synthesis_omega.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          99
+        ]
+      ],
+      "expected_sha256": "7212414026eaceef8d39c73836354dab177d992b462314a6a41e62c18c091d41",
+      "observed_sha256": "7212414026eaceef8d39c73836354dab177d992b462314a6a41e62c18c091d41",
+      "changed": false,
+      "symlink": false
+    },
+    {
+      "path": "tests/test_swarm_kda_dag_scheduler.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          172
+        ]
+      ],
+      "expected_sha256": "884584549b83da4b99530438387d57cebc3aec8563195762cb585c4a44eddf18",
+      "observed_sha256": "884584549b83da4b99530438387d57cebc3aec8563195762cb585c4a44eddf18",
+      "changed": false,
+      "symlink": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/argo-smart-routing/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          90
+        ]
+      ],
+      "expected_sha256": "2e3e8c27203bd6cd39c16978f50e7c990291a4062ceae94ba8c7e10904b214d9",
+      "observed_sha256": "2e3e8c27203bd6cd39c16978f50e7c990291a4062ceae94ba8c7e10904b214d9",
+      "changed": false,
+      "symlink": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/miniflare/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          187
+        ]
+      ],
+      "expected_sha256": "e17cff9393c0d55d9b2b012f55e0fc611535e899529eed33827c3a285bb00e60",
+      "observed_sha256": "e17cff9393c0d55d9b2b012f55e0fc611535e899529eed33827c3a285bb00e60",
+      "changed": false,
+      "symlink": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/tail-workers/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          89
+        ]
+      ],
+      "expected_sha256": "22776dd6348b07d2c7132ee4a52715f49bc61c1bb50d0af81e49281e44bb9799",
+      "observed_sha256": "22776dd6348b07d2c7132ee4a52715f49bc61c1bb50d0af81e49281e44bb9799",
+      "changed": false,
+      "symlink": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/turnstile-spin/references/nextjs-pages.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          82
+        ]
+      ],
+      "expected_sha256": "f6fa729155fa682f6c77b157cbb75492caf172f7451bcc889bc417441a3f02a5",
+      "observed_sha256": "f6fa729155fa682f6c77b157cbb75492caf172f7451bcc889bc417441a3f02a5",
+      "changed": false,
+      "symlink": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents/agent_17_export_bot_template.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "expected_sha256": "223c046aaea33d3f0e11676ed9d96b3953e611a25c21422a573f48fec8c6b333",
+      "observed_sha256": "223c046aaea33d3f0e11676ed9d96b3953e611a25c21422a573f48fec8c6b333",
+      "changed": false,
+      "symlink": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/scripts/generate_47_agents.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          457
+        ]
+      ],
+      "expected_sha256": "6691e48085e948be4d51fac8847b3d7c9ab31d5b87c34fd3f788540ef2d8b9a3",
+      "observed_sha256": "6691e48085e948be4d51fac8847b3d7c9ab31d5b87c34fd3f788540ef2d8b9a3",
+      "changed": false,
+      "symlink": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-sovereign-identity-hardening/scripts/check_pwned_pass.sh",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          52
+        ]
+      ],
+      "expected_sha256": "3589f071058fa0500ac0769217b67eb068f119fe970aa16ebd9a61b4ce00899e",
+      "observed_sha256": "3589f071058fa0500ac0769217b67eb068f119fe970aa16ebd9a61b4ce00899e",
+      "changed": false,
+      "symlink": false
+    },
+    {
+      "path": "tools/skill_library/global/flstudio-mcp-production/examples/AIR_Moon_Safari_Rhodes.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          80
+        ]
+      ],
+      "expected_sha256": "0000bbeaa2ba2f6dadc838811bfcfb53bd9b30f3534c148a1edc67ac68ff0ce5",
+      "observed_sha256": "0000bbeaa2ba2f6dadc838811bfcfb53bd9b30f3534c148a1edc67ac68ff0ce5",
+      "changed": false,
+      "symlink": false
+    },
+    {
+      "path": "tools/skill_library/workspace/c5-ring0-babylon-kernel-project/references/modules/babylon60-architecture/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          92
+        ]
+      ],
+      "expected_sha256": "c0fc8357a0292a3e05f1ff352776eed170ff69265d7ea6864ce1100d7e66a3e9",
+      "observed_sha256": "c0fc8357a0292a3e05f1ff352776eed170ff69265d7ea6864ce1100d7e66a3e9",
+      "changed": false,
+      "symlink": false
+    }
+  ],
+  "tool_limitations": [
+    "No native codebase-memory graph tools exposed; used targeted text reads and rg.",
+    "Initial combined read was truncated and exceeded 200 lines per file; subsequent bounded reads recovered missing source ranges.",
+    "No runtime, tests, protected effects, external service operations, or repository mutations executed. Cloudflare external API statements were reviewed as source examples without current provider verification."
+  ],
+  "tests_run": [],
+  "repository_state": {
+    "branch": "main",
+    "dirty": true,
+    "preserved": true
+  },
+  "instructions_read": [
+    "AGENTS.md",
+    ".babylon60rules"
+  ]
+}

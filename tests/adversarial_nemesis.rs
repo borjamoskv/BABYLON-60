@@ -27,7 +27,7 @@
 
 use std::ffi::CString;
 use std::path::{Path, PathBuf};
-use std::sync::atomic::{AtomicBool, AtomicU64, Ordering};
+use std::sync::atomic::{AtomicU64, Ordering};
 use std::sync::Arc;
 use std::thread;
 
@@ -296,35 +296,76 @@ fn test_nemesis_v06_path_escape_and_null_bytes() {
 // ---------------------------------------------------------------------------
 #[test]
 fn test_nemesis_v07_fd_exhaustion_fail_closed() {
+    use std::os::fd::{AsRawFd, FromRawFd, OwnedFd};
+
+    const CHILD_ENV: &str = "BABYLON60_NEMESIS_FD_EXHAUSTION_CHILD";
+    const CHILD_OK: &str = "NEMESIS_V07_EMFILE_VERIFIED";
+    if std::env::var_os(CHILD_ENV).is_none() {
+        // Descriptor exhaustion is process-wide: never run it alongside the
+        // other libtest threads, including the 100-worker V02 race.
+        let output = std::process::Command::new(std::env::current_exe().unwrap())
+            .args([
+                "--exact",
+                "test_nemesis_v07_fd_exhaustion_fail_closed",
+                "--nocapture",
+                "--test-threads=1",
+            ])
+            .env(CHILD_ENV, "1")
+            .output()
+            .expect("start isolated descriptor-exhaustion test");
+        assert!(
+            output.status.success(),
+            "isolated V07 failed: {}\nstdout: {}\nstderr: {}",
+            output.status,
+            String::from_utf8_lossy(&output.stdout),
+            String::from_utf8_lossy(&output.stderr),
+        );
+        assert!(String::from_utf8_lossy(&output.stdout).contains(CHILD_OK));
+        return;
+    }
+
     let td = NemesisTestDir::new("v07_fd_exhaust");
     std::fs::write(td.path().join("target.dat"), b"test").unwrap();
-    let root_fd = open_dir_fd(td.path());
+    // SAFETY: open_dir_fd returns a fresh descriptor owned by this test.
+    let root_fd = unsafe { OwnedFd::from_raw_fd(open_dir_fd(td.path())) };
 
-    // Agotar FDs intencionalmente abriendo muchos descriptores hasta el límite suave
-    let mut leak_fds = Vec::new();
-    loop {
-        let fd = unsafe { libc::dup(root_fd) };
+    // Bound the work even on hosts with a very high soft limit. Only this
+    // re-executed child changes its limit; the parent suite remains parallel.
+    let mut original_limit = libc::rlimit { rlim_cur: 0, rlim_max: 0 };
+    assert_eq!(unsafe { libc::getrlimit(libc::RLIMIT_NOFILE, &mut original_limit) }, 0);
+    let child_limit = libc::rlimit {
+        rlim_cur: original_limit.rlim_cur.min(128),
+        rlim_max: original_limit.rlim_max,
+    };
+    assert_eq!(unsafe { libc::setrlimit(libc::RLIMIT_NOFILE, &child_limit) }, 0);
+
+    let mut held_fds = Vec::new();
+    let exhaustion = loop {
+        let fd = unsafe { libc::dup(root_fd.as_raw_fd()) };
         if fd < 0 {
-            break; // Límite alcanzado
+            break std::io::Error::last_os_error();
         }
-        leak_fds.push(fd);
-        if leak_fds.len() > 5000 {
-            break;
-        }
-    }
+        // SAFETY: dup returned a fresh descriptor, transferred to this owner.
+        held_fds.push(unsafe { OwnedFd::from_raw_fd(fd) });
+    };
 
-    // Operación bajo presión de FDs debe fallar limpiamente (Fail-Closed), nunca crash
-    let res = NativeSecureFs::pin_object(root_fd, "target.dat", [0x07; 32]);
-    // Liberar los FDs para no alterar el resto del proceso
-    for fd in leak_fds {
-        unsafe { libc::close(fd) };
-    }
-    unsafe { libc::close(root_fd) };
+    let res = NativeSecureFs::pin_object(root_fd.as_raw_fd(), "target.dat", [0x07; 32])
+        // Own even an unexpected successful result so it cannot leak.
+        .map(|(fd, _)| unsafe { OwnedFd::from_raw_fd(fd) });
+    drop(held_fds);
+    assert_eq!(unsafe { libc::setrlimit(libc::RLIMIT_NOFILE, &original_limit) }, 0);
 
-    // Si falló, debe ser un IoError estándar (EMFILE), nunca pánico
-    if let Err(e) = res {
-        assert!(matches!(e, SecureFsError::IoError(_)));
+    assert_eq!(exhaustion.raw_os_error(), Some(libc::EMFILE));
+    match res {
+        Err(SecureFsError::IoError(error)) => assert_eq!(error.raw_os_error(), Some(libc::EMFILE)),
+        other => panic!("V07 must reject with EMFILE, got {other:?}"),
     }
+    assert_eq!(std::fs::read(td.path().join("target.dat")).unwrap(), b"test");
+    let (fd, _) = NativeSecureFs::pin_object(root_fd.as_raw_fd(), "target.dat", [0x07; 32])
+        .expect("pin succeeds after descriptor pressure is released");
+    // SAFETY: pin_object transfers ownership of its successful descriptor.
+    drop(unsafe { OwnedFd::from_raw_fd(fd) });
+    println!("{CHILD_OK}");
 }
 
 // ---------------------------------------------------------------------------
@@ -706,7 +747,7 @@ fn test_nemesis_v18_concurrent_modification_quiescence_and_rejection() {
     let orch = EffectTxOrchestrator::<NativeSecureFs>::new(td.path()).unwrap();
     let root_fd = open_dir_fd(td.path());
 
-    // 1. Caso A: Mutación Concurrente Transitoria (Quiescencia estabilizada con éxito)
+    // 1. Caso A: Captura de un archivo estable.
     let p_transient = td.path().join("transient_mod.dat");
     std::fs::write(&p_transient, b"initial payload").unwrap();
 
@@ -714,62 +755,18 @@ fn test_nemesis_v18_concurrent_modification_quiescence_and_rejection() {
     assert_eq!(id_transient.state.size, 15);
     unsafe { libc::close(fd_transient) };
 
-    // 2. Caso B: Mutación Concurrente Sostenida No-Acotada (Rechazo Fail-Closed determinista)
-    // Un archivo de múltiples bloques (512 KB) forzado a mutar continuamente durante el hashing.
-    let p_unbounded = td.path().join("unbounded_mod.dat");
-    let large_buf = vec![0xAAu8; 512 * 1024];
-    std::fs::write(&p_unbounded, &large_buf).unwrap();
-
-    let open_fd = {
-        let c = CString::new("unbounded_mod.dat").unwrap();
-        unsafe { libc::openat(root_fd, c.as_ptr(), libc::O_RDWR | libc::O_NOFOLLOW | libc::O_CLOEXEC) }
-    };
-    assert!(open_fd >= 0);
-
-    let writer_started = Arc::new(AtomicBool::new(false));
-    let writer_started_clone = Arc::clone(&writer_started);
-    let writer_running = Arc::new(AtomicBool::new(true));
-    let writer_running_clone = Arc::clone(&writer_running);
-
-    let writer_handle = thread::spawn(move || {
-        let mut counter = 0u64;
-        let mut burst = [0xBBu8; 1024];
-        while writer_running_clone.load(Ordering::Relaxed) {
-            counter += 1;
-            burst[0..8].copy_from_slice(&counter.to_be_bytes());
-            unsafe {
-                libc::pwrite(open_fd, burst.as_ptr() as *const libc::c_void, burst.len(), 0);
-                let new_size = (512 * 1024) + (counter % 1024) as usize;
-                libc::ftruncate(open_fd, new_size as libc::off_t);
-            }
-            writer_started_clone.store(true, Ordering::Release);
-        }
-        unsafe { libc::close(open_fd) };
-    });
-
-    while !writer_started.load(Ordering::Acquire) {
-        std::thread::yield_now();
-    }
-
-    // Intentamos pin_object mientras el escritor sigue mutando sin descanso
-    let pin_res = NativeSecureFs::pin_object(root_fd, "unbounded_mod.dat", [0x18; 32]);
-    writer_running.store(false, Ordering::SeqCst);
-    writer_handle.join().unwrap();
-
-    // Verificamos que el intento de pin falló con IdentityUnstable (fail-closed, nunca torn-read)
-    assert!(pin_res.is_err(), "V18 FAIL-OPEN: Persistent concurrent modification must be rejected");
-    match pin_res.err().unwrap() {
-        SecureFsError::IdentityUnstable => {
-            // Éxito: el bracket TOCTOU detectó la divergencia en todos los intentos
-        }
-        other => panic!("Expected SecureFsError::IdentityUnstable, got {:?}", other),
-    }
+    // 2. Mutations inside the before/after fstat bracket are exercised with
+    // deterministic filesystem interleavings in secure_fs unit tests:
+    // identity_rejects_mutation_during_every_hash_attempt and
+    // identity_converges_after_transient_mutation_during_hash. A free-running
+    // writer here can be descheduled for an entire valid stable capture.
 
     // 3. Caso C: Modificación Concurrente entre Pin y Quarantine (Ataque de Mutación Intermedia)
     let p_inter = td.path().join("inter_mod.dat");
     std::fs::write(&p_inter, b"legitimate pre-pin data").unwrap();
 
-    let (_, id_pinned) = NativeSecureFs::pin_object(root_fd, "inter_mod.dat", [0x18; 32]).unwrap();
+    let (fd_pinned, id_pinned) = NativeSecureFs::pin_object(root_fd, "inter_mod.dat", [0x18; 32]).unwrap();
+    unsafe { libc::close(fd_pinned) };
     let nonce = [0x18; 32];
 
     // El atacante muta el contenido del archivo en el VFS antes de la cuarentena

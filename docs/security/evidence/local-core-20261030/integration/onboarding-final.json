@@ -1,0 +1,15 @@
+{
+  "command": [
+    "/Users/borjafernandezangulo/.codex/worktrees/local-core-integration/BABYLON-60/.venv/bin/python",
+    "-I",
+    "-m",
+    "pytest",
+    "-p",
+    "pytest_asyncio.plugin",
+    "tests/test_codex_onboarding.py",
+    "-q",
+    "-rs"
+  ],
+  "returncode": 0,
+  "profile_bytes": 1932
+}

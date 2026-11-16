@@ -1,0 +1,245 @@
+{
+  "reviewer": "adjudicate_03",
+  "reviewed_at": "2026-10-28T19:31:28.598253+00:00",
+  "decision": "APPROVED_WITH_EXPLICIT_SCOPE",
+  "open_actionable_findings": [],
+  "scope": {
+    "production_paths": [
+      "01_KISH_ENGINE/babylon60/commands/itera.py",
+      "scripts/repatriated/c5_sharur_100_anergy_purge.py",
+      "scripts/c5_cortex/autoconsolidate.py",
+      "tools/skill_library/global/anergy-purge-protocol/scripts/anergy_purge.py",
+      "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/anergy-purge-protocol/scripts/anergy_purge.py"
+    ],
+    "candidate_ids": [
+      "SW100-C0018",
+      "SW100-C0219",
+      "SW100-C0387",
+      "SW100-C0460",
+      "SW100-C0562",
+      "SW100-C0563",
+      "SW100-C0388"
+    ],
+    "production_or_tests_edited_by_reviewer": false,
+    "native_or_protected_runtime_executed": false,
+    "operator_data_network_real_purge_global_cohorts_executed": false,
+    "graph_discovery": "No native graph discovery/reference tools were exposed; scoped source, consumer and contract reads were used.",
+    "fixture_confinement": "Regression autouse fixture replaces Path.home and cwd before importing helpers. Independent adversarial fixture additionally confines environment HOME and BABYLON_HOME. Every deletion target is under TemporaryDirectory/pytest tmp_path; no main/global cohorts are called."
+  },
+  "source_sha256": {
+    "01_KISH_ENGINE/babylon60/commands/itera.py": "1d7a6b220a8dee0902df04777f0d048ade7dc002b09879978edbcff078f78fe7",
+    "scripts/repatriated/c5_sharur_100_anergy_purge.py": "7e8a21a0e3a80e7155911b4e88b00e2e72265b8267d248effd677b448530b8fa",
+    "scripts/c5_cortex/autoconsolidate.py": "b77ad4fbd80b3872e95b58f935b951f928179de72150374dac9fa3d5b216a025",
+    "tools/skill_library/global/anergy-purge-protocol/scripts/anergy_purge.py": "21307153c17e3337fef4dbb91fc3053c02a8a2617a9cf644490ece5ce0c0614e",
+    "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/anergy-purge-protocol/scripts/anergy_purge.py": "21307153c17e3337fef4dbb91fc3053c02a8a2617a9cf644490ece5ce0c0614e",
+    "tests/test_swarm100_lot2_regressions.py": "ec5234a8d58ca6d09234f49fa2351d057f6e95181c9e429fb3afc2836bd1c906"
+  },
+  "copies_byte_identical": true,
+  "finding_assessment": [
+    {
+      "candidate_id": "SW100-C0018",
+      "assessment": "FIXED_IN_REVIEWED_SOURCE",
+      "remediation_state": "FIXED",
+      "basis": "run_auto_purge no longer deletes SQLite sidecars or whole __pycache__ directories. It unlinks only regular .pyc files with interpreter magic under __pycache__, anchored to cwd; active WAL/read/write and cache controls pass."
+    },
+    {
+      "candidate_id": "SW100-C0219",
+      "assessment": "FIXED_IN_REVIEWED_SOURCE",
+      "remediation_state": "FIXED",
+      "basis": "run_cohort_1 uses cwd or its explicit workspace, traverses descriptor-relative without following symlinks, and removes only recognized regular .pyc. It never traverses CORTEX_DIR or classifies WAL/SHM as orphans. Other-workspace cache and active SQLite controls pass. Other cohorts/main remain outside this assessment."
+    },
+    {
+      "candidate_id": "SW100-C0387",
+      "assessment": "FIXED_IN_REVIEWED_SOURCE",
+      "remediation_state": "FIXED",
+      "basis": "Both copies remove the WAL/SHM purge and blanket directory removal, reserve recognized SQLite names and DB/WAL/rollback headers, preserve failed inspection and protected subtrees, and count no recovered bytes in dry-run. Active databases inside scratch/out/cache and 23 interleaved committed writer steps per copy survive with integrity_check=ok."
+    },
+    {
+      "candidate_id": "SW100-C0562",
+      "assessment": "DUPLICATE_FIXED_IN_REVIEWED_SOURCE",
+      "remediation_state": "FIXED",
+      "canonical_id": "SW100-C0387",
+      "basis": "The bundled copy has identical bytes to the primary source and runs the same parameterized SQLite, confinement, dry-run and writer regressions."
+    },
+    {
+      "candidate_id": "SW100-C0563",
+      "assessment": "FIXED_IN_REVIEWED_SOURCE",
+      "remediation_state": "FIXED",
+      "basis": "Both copies remove sqlite3 and global-session maintenance. purge_anergy does not call Path.home or open global databases, reports NOT_CHECKED, and preserves two fixture sessions from different workspaces with an access spy."
+    },
+    {
+      "candidate_id": "SW100-C0460",
+      "assessment": "MITIGATED_BY_EXPLICIT_REJECTION",
+      "remediation_state": "MITIGATED",
+      "basis": "No durable JournalEntry schema/producer was found in the scoped code/contracts. autoconsolidate and load/merge/save all reject before opening or resolving a database path. Originals and new-writer ability survive; CLI returns 2. This disables the unsafe operation; no replacement persistence or functioning consolidation is claimed."
+    },
+    {
+      "candidate_id": "SW100-C0388",
+      "assessment": "DUPLICATE_FIXED_IN_REVIEWED_SOURCE",
+      "remediation_state": "FIXED",
+      "canonical_id": "SW100-C0563",
+      "basis": "Round3 primary and bundled records cite the same unconditional home-directory conversation status reset. Both sources were byte-identical before and remain byte-identical after the patch. Removal of global lookup/update and dual-copy temporary-HOME/access-spy tests resolve this duplicate as well; no additional production behavior was changed."
+    }
+  ],
+  "checks": [
+    {
+      "command": ".venv/bin/python -m pytest tests/test_swarm100_lot2_regressions.py -q --tb=short",
+      "exit_code": 0,
+      "result": "80 passed in 1.70s",
+      "tested_source_snapshot": "previous_source_sha256 (before label/comment-only correction)"
+    },
+    {
+      "command": ".venv/bin/ruff check 01_KISH_ENGINE/babylon60/commands/itera.py scripts/repatriated/c5_sharur_100_anergy_purge.py scripts/c5_cortex/autoconsolidate.py tools/skill_library/global/anergy-purge-protocol/scripts/anergy_purge.py tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/anergy-purge-protocol/scripts/anergy_purge.py tests/test_swarm100_lot2_regressions.py",
+      "exit_code": 0,
+      "result": "All checks passed!",
+      "tested_source_snapshot": "previous_source_sha256 (before label/comment-only correction)"
+    },
+    {
+      "command": ".venv/bin/python docs/security/evidence/swarm100-lot2-20261028/independent-adversarial.py",
+      "exit_code": 0,
+      "result": "7 independent adversarial checks passed",
+      "evidence_path": "docs/security/evidence/swarm100-lot2-20261028/independent-adversarial.json",
+      "tested_source_snapshot": "previous_source_sha256 (before label/comment-only correction)"
+    }
+  ],
+  "source_checks": [
+    {
+      "path": "01_KISH_ENGINE/babylon60/commands/itera.py",
+      "start_line": 12,
+      "end_line": 48,
+      "observation": "No subprocess/find/rmtree/SQLite-sidecar deletion. Cwd rootfd, fwalk without symlink following, .pyc magic and inode checks, regular-file-only unlink; failures preserve candidates."
+    },
+    {
+      "path": "scripts/repatriated/c5_sharur_100_anergy_purge.py",
+      "start_line": 85,
+      "end_line": 130,
+      "observation": "Only cohort_1 was reviewed/executed. Default scope is cwd instead of global WORKSPACE; no CORTEX_DIR access, dry-run guards unlink/counts, protected subtrees remain."
+    },
+    {
+      "path": "scripts/c5_cortex/autoconsolidate.py",
+      "start_line": 7,
+      "end_line": 48,
+      "observation": "Unsupported error is the sole operation outcome after positive integer batch validation. All persistence helpers fail explicitly; no database API/path resolution remains."
+    },
+    {
+      "path": "tools/skill_library/global/anergy-purge-protocol/scripts/anergy_purge.py",
+      "start_line": 44,
+      "end_line": 75,
+      "observation": "Protect canonical components/subpaths, SQLite database/sidecar/superjournal names before considering artifact categories."
+    },
+    {
+      "path": "tools/skill_library/global/anergy-purge-protocol/scripts/anergy_purge.py",
+      "start_line": 78,
+      "end_line": 152,
+      "observation": "No broad directory removal. Inspect regular-file header through nofollow descriptor, preserve SQLite magic and unknown .pyc, recheck inode, then unlink by directory fd. Count recovered size only after unlink succeeds."
+    },
+    {
+      "path": "tools/skill_library/global/anergy-purge-protocol/scripts/anergy_purge.py",
+      "start_line": 155,
+      "end_line": 181,
+      "observation": "Dry-run and unexamined global sessions stated explicitly; CLI refuses errors and never calls global-session cleanup. Display now identifies the counter as logical file bytes removed."
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/anergy-purge-protocol/scripts/anergy_purge.py",
+      "start_line": 44,
+      "end_line": 181,
+      "observation": "Byte-identical implementation; tested separately through the same regression and independent fixtures."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/commands/strict_reviewer.py",
+      "start_line": 149,
+      "end_line": 162,
+      "observation": "Caller invokes run_auto_purge before subsequent git operations. Caller was read only and never executed; its other effects are not approved by this review."
+    },
+    {
+      "path": "tests/test_swarm100_lot2_regressions.py",
+      "start_line": 32,
+      "end_line": 37,
+      "observation": "Autouse temporary HOME-method/cwd fixture runs before helper imports, including cohort global path constants."
+    },
+    {
+      "path": "tests/test_swarm100_lot2_regressions.py",
+      "start_line": 297,
+      "end_line": 402,
+      "observation": "Additional tests reserve SQLite magic under deceptive artifact suffixes, superjournals, symlink roots, 3 warmup + 20 committed-writer interleavings per copy, refusing legacy JournalEntry helpers and CLI."
+    },
+    {
+      "path": "scripts/repatriated/c5_sharur_100_anergy_purge.py",
+      "start_line": 163,
+      "end_line": 171,
+      "observation": "C0223 is unchanged and OPEN: cohort 2 iterates global WORKSPACE and calls rmtree on every unprotected .lake without proving archived state. Read only, never executed."
+    }
+  ],
+  "limitations": [
+    "Consolidation is deliberately unavailable. An explicit durable schema, payload/causal merge contract and transactional persistence implementation remain required before functional resolution of C0460.",
+    "Descriptor-relative O_NOFOLLOW and inode recheck protect the tested symlink/replacement cases. They do not make inspection plus unlink atomic against a hostile rename after the final stat; source documents this limit.",
+    "SQLite preservation recognizes the listed plaintext DB/WAL/rollback magic and sidecar names. Arbitrary encrypted/custom-VFS state disguised as eligible artifacts is outside the demonstrated contract.",
+    "The legacy total_bytes_recovered counter sums logical st_size of successfully unlinked entries. Current labels/comments now say logical bytes removed; no physically released blocks, open-file retention or hardlink allocation are measured.",
+    "Only run_cohort_1 is certified for C0219. Other cohorts and the global main still have separate broad operations and were not executed or certified.",
+    "Fixtures validate local filesystem behavior, data preservation and fail-closed paths; they do not certify operator runtime, performance, protected native runtime or production campaigns."
+  ],
+  "evidence_paths": [
+    "docs/security/evidence/swarm100-lot2-20261028/independent-adversarial.py",
+    "docs/security/evidence/swarm100-lot2-20261028/independent-adversarial.json",
+    "tests/test_swarm100_lot2_regressions.py",
+    "docs/security/evidence/swarm100-lot2-20261028/before-source-manifest.json",
+    "docs/security/evidence/swarm100-lot2-20261028/consolidation-before.json"
+  ],
+  "evidence_sha256": {
+    "docs/security/evidence/swarm100-lot2-20261028/independent-adversarial.py": "6049bbe176daa6220c16a2bc5541200d41cdd390fae83d518138315113bb19c2",
+    "docs/security/evidence/swarm100-lot2-20261028/independent-adversarial.json": "35c87acc17f0f3b548d72883d1e04d7b6d724bc280b129e471c2d8dff3086170",
+    "docs/security/evidence/swarm100-lot2-20261028/before-source-manifest.json": "f75938ca64ab234645ca91d01b3779e2d3b5521fcd58b2ce0834534a5bfbe40f",
+    "docs/security/evidence/swarm100-lot2-20261028/consolidation-before.json": "d306e42a4c7fbfd2b0447127b61c2d591cb9cfbb2a75ee6852261530daf0f53b"
+  },
+  "previous_source_sha256": {
+    "01_KISH_ENGINE/babylon60/commands/itera.py": "1d7a6b220a8dee0902df04777f0d048ade7dc002b09879978edbcff078f78fe7",
+    "scripts/repatriated/c5_sharur_100_anergy_purge.py": "5c9449786f420a0e6267f5c16c5d66aeff13ea66baf0183d7e8e3c6f1b6495de",
+    "scripts/c5_cortex/autoconsolidate.py": "b77ad4fbd80b3872e95b58f935b951f928179de72150374dac9fa3d5b216a025",
+    "tools/skill_library/global/anergy-purge-protocol/scripts/anergy_purge.py": "a19406e502024de9c86ca4353b15f28fb40f475efacc19edae89a8b97917a873",
+    "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/anergy-purge-protocol/scripts/anergy_purge.py": "a19406e502024de9c86ca4353b15f28fb40f475efacc19edae89a8b97917a873",
+    "tests/test_swarm100_lot2_regressions.py": "ec5234a8d58ca6d09234f49fa2351d057f6e95181c9e429fb3afc2836bd1c906"
+  },
+  "review_updates": [
+    {
+      "reviewed_at": "2026-10-28T19:33:52.810786+00:00",
+      "scope": "Three label/comment-only changes and one duplicate reconciliation. No runtime guard, traversal, deletion or persistence behavior changed.",
+      "changes": [
+        {
+          "path": "scripts/repatriated/c5_sharur_100_anergy_purge.py",
+          "previous_sha256": "5c9449786f420a0e6267f5c16c5d66aeff13ea66baf0183d7e8e3c6f1b6495de",
+          "current_sha256": "7e8a21a0e3a80e7155911b4e88b00e2e72265b8267d248effd677b448530b8fa",
+          "change": "run_cohort_1 output label now specifies logical bytes removed.",
+          "exact_previous_bytes_reconstructed_by_reverting_only_labels_and_comment": true
+        },
+        {
+          "path": "tools/skill_library/global/anergy-purge-protocol/scripts/anergy_purge.py",
+          "previous_sha256": "a19406e502024de9c86ca4353b15f28fb40f475efacc19edae89a8b97917a873",
+          "current_sha256": "21307153c17e3337fef4dbb91fc3053c02a8a2617a9cf644490ece5ce0c0614e",
+          "change": "Output label specifies logical file bytes removed; a comment documents total_bytes_recovered as a legacy logical-size key.",
+          "exact_previous_bytes_reconstructed_by_reverting_only_labels_and_comment": true
+        },
+        {
+          "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/anergy-purge-protocol/scripts/anergy_purge.py",
+          "previous_sha256": "a19406e502024de9c86ca4353b15f28fb40f475efacc19edae89a8b97917a873",
+          "current_sha256": "21307153c17e3337fef4dbb91fc3053c02a8a2617a9cf644490ece5ce0c0614e",
+          "change": "Output label specifies logical file bytes removed; a comment documents total_bytes_recovered as a legacy logical-size key.",
+          "exact_previous_bytes_reconstructed_by_reverting_only_labels_and_comment": true
+        }
+      ],
+      "checks": "Reverting only the specified label/comment edits reproduces the previously tested SHA256 for each entire file. All three current files parse as Python. No repeated 80-test run for this output-only update; prior results remain attributed to previous_source_sha256.",
+      "duplicate_reconciliation": "C0388 and C0563 describe the identical global home-database status reset in the primary and bundled copies. Added C0388 as duplicate of C0563; the existing dual-copy HOME/access-spy regression applies.",
+      "unchanged_open_finding": "C0223 remains OPEN. Cohort 2 still recursively removes every unprotected .lake beneath WORKSPACE; it was not modified or executed."
+    }
+  ],
+  "out_of_scope_open_findings": [
+    {
+      "candidate_id": "SW100-C0223",
+      "remediation_state": "OPEN",
+      "path": "scripts/repatriated/c5_sharur_100_anergy_purge.py",
+      "current_source_sha256": "7e8a21a0e3a80e7155911b4e88b00e2e72265b8267d248effd677b448530b8fa",
+      "start_line": 163,
+      "end_line": 171,
+      "runtime_executed": false
+    }
+  ]
+}

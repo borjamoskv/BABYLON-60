@@ -1,0 +1,30 @@
+{
+  "reviewer": "07",
+  "retrieved_date": "2026-10-28",
+  "sources": [
+    {
+      "candidate_id": "SW100-C0182",
+      "url": "https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.distance_measures.effective_graph_resistance.html",
+      "method": "web.open official NetworkX documentation",
+      "observation": "Defines effective graph resistance as sum of pairwise resistance distances and specifies infinity for disconnected graphs. Used to interpret the two-isolate fixture, not to certify unrelated curvature metrics."
+    },
+    {
+      "candidate_id": "SW100-C0521",
+      "url": "https://developers.cloudflare.com/queues/configuration/javascript-apis/",
+      "method": "native Context7 resolve_library_id then query_docs; library /websites/developers_cloudflare_queues",
+      "observation": "MessageBatch.ackAll marks all messages successfully delivered independently of subsequent handler success."
+    },
+    {
+      "candidate_id": "SW100-C0521",
+      "url": "https://developers.cloudflare.com/queues/configuration/batching-retries/",
+      "method": "native Context7 query_docs",
+      "observation": "ackAll has the acknowledgement effect of successful consumer completion."
+    },
+    {
+      "candidate_id": "SW100-C0521",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch",
+      "method": "web.open Fetch API documentation",
+      "observation": "Fetch resolves with Response for HTTP error status; caller checks ok/status. Network failures reject."
+    }
+  ]
+}

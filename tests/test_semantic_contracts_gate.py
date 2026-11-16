@@ -264,3 +264,396 @@ def test_wrapped_orders_override_example_context(tmp_path: Path, order: str) -> 
     path = tmp_path / "rule.md"
     path.write_text(f"## Examples\n{order}\n```bash\nwrangler deploy\n```")
     assert any(v.rule_id == "SEM-003" for v in scan_markdown_files([path]))
+
+
+def test_path_symlink_confinement_ast_gate(tmp_path: Path) -> None:
+    bad = tmp_path / "bad_gate.py"
+    bad.write_text("from pathlib import Path\nROOT = Path(__file__).resolve().parents[2]\n", encoding="utf-8")
+    violations = scan_python_fail_open([bad])
+    assert len(violations) == 1
+    assert violations[0].rule_id == "AST-007"
+
+    good = tmp_path / "good_gate.py"
+    good.write_text("from pathlib import Path\nROOT = Path(__file__).absolute().parents[2]\n", encoding="utf-8")
+    assert scan_python_fail_open([good]) == []
+
+
+@pytest.mark.parametrize(
+    "snippet",
+    [
+        "import sqlite3\ndef check():\n    try: pass\n    except Exception:\n        return {'ok': True}\n",
+        "import sqlite3\ndef check():\n    try: pass\n    except:\n        return {'admitted': True}\n",
+    ],
+)
+def test_sqlite_fail_open_dict_and_broad_except(tmp_path: Path, snippet: str) -> None:
+    path = tmp_path / "engine_mod.py"
+    path.write_text(snippet, encoding="utf-8")
+    violations = scan_python_fail_open([path], check_symlink_resolve=False)
+    assert len(violations) == 1
+    assert violations[0].rule_id == "AST-006"
+
+
+def test_audit_scripts_quality_ast_multiline_except_pass() -> None:
+    import ast
+    from scripts.c5_quality_gates.audit_scripts_quality import find_ast_anti_patterns
+
+    bare_multiline = ast.parse("try:\n    x = 1\nexcept:\n    pass\n")
+    findings_bare = find_ast_anti_patterns(bare_multiline, is_quality_gate=False)
+    assert len(findings_bare) == 1
+    assert findings_bare[0][0] == 3
+
+    broad_gate = ast.parse("try:\n    x = 1\nexcept Exception:\n    pass\n")
+    assert len(find_ast_anti_patterns(broad_gate, is_quality_gate=True)) == 1
+    assert find_ast_anti_patterns(broad_gate, is_quality_gate=False) == []
+
+
+def test_git_diff_binary_safe_ast_gate(tmp_path: Path) -> None:
+    bad = tmp_path / "bad_diff.py"
+    bad.write_text(
+        'import subprocess\nsubprocess.run(["git", "diff", "HEAD"], capture_output=True, text=True)\n',
+        encoding="utf-8",
+    )
+    violations = scan_python_fail_open([bad])
+    assert len(violations) == 1
+    assert violations[0].rule_id == "AST-008"
+
+    good = tmp_path / "good_diff.py"
+    good.write_text(
+        'import subprocess\nsubprocess.run(["git", "diff", "HEAD"], capture_output=True, text=False)\n',
+        encoding="utf-8",
+    )
+    assert scan_python_fail_open([good]) == []
+
+
+def test_biometric_gate_legacy_message_ast_gate(tmp_path: Path) -> None:
+    bad = tmp_path / "bad_gate.py"
+    bad.write_text(
+        'import subprocess\nsubprocess.run(["c5_biometric_gate", "--message", "Deploy"])\n',
+        encoding="utf-8",
+    )
+    violations = scan_python_fail_open([bad])
+    assert len(violations) == 1
+    assert violations[0].rule_id == "AST-009"
+
+    good = tmp_path / "good_gate.py"
+    good.write_text(
+        'import subprocess\nsubprocess.run(["c5_biometric_gate", "--action", "Deploy", "--causal-hash", "abc"])\n',
+        encoding="utf-8",
+    )
+    assert scan_python_fail_open([good]) == []
+
+
+def test_struct_cbor_d_specifier_ast_gate(tmp_path: Path) -> None:
+    bad = tmp_path / "bad_struct.py"
+    bad.write_text("import struct\nstruct.pack('>D', 1.23)\n", encoding="utf-8")
+    violations = scan_python_fail_open([bad])
+    assert len(violations) == 1
+    assert violations[0].rule_id == "AST-010"
+
+    good = tmp_path / "good_struct.py"
+    good.write_text("import struct\nstruct.pack('>Bd', 0xFB, 1.23)\n", encoding="utf-8")
+    assert scan_python_fail_open([good]) == []
+
+
+def test_wal_synchronous_full_ast_gate(tmp_path: Path) -> None:
+    bad_normal = tmp_path / "bad_normal.py"
+    bad_normal.write_text(
+        'import sqlite3\nconn = sqlite3.connect(":memory:")\nconn.execute("PRAGMA synchronous = NORMAL;")\n',
+        encoding="utf-8",
+    )
+    violations = scan_python_fail_open([bad_normal])
+    assert len(violations) == 1
+    assert violations[0].rule_id == "AST-011"
+
+    bad_off = tmp_path / "bad_off.py"
+    bad_off.write_text(
+        'import sqlite3\nconn = sqlite3.connect(":memory:")\nconn.execute("PRAGMA synchronous=OFF")\n', encoding="utf-8"
+    )
+    assert any(v.rule_id == "AST-011" for v in scan_python_fail_open([bad_off]))
+
+    bad_numeric = tmp_path / "bad_numeric.py"
+    bad_numeric.write_text(
+        'import sqlite3\nconn = sqlite3.connect(":memory:")\nconn.execute("PRAGMA synchronous = 1")\n', encoding="utf-8"
+    )
+    assert any(v.rule_id == "AST-011" for v in scan_python_fail_open([bad_numeric]))
+
+    good_full = tmp_path / "good_full.py"
+    good_full.write_text(
+        'import sqlite3\nconn = sqlite3.connect(":memory:")\nconn.execute("PRAGMA synchronous = FULL;")\n',
+        encoding="utf-8",
+    )
+    assert scan_python_fail_open([good_full]) == []
+
+    good_query = tmp_path / "good_query.py"
+    good_query.write_text(
+        'import sqlite3\nconn = sqlite3.connect(":memory:")\nsync = conn.execute("PRAGMA synchronous;").fetchone()[0]\n',
+        encoding="utf-8",
+    )
+    assert scan_python_fail_open([good_query]) == []
+
+    docstring_sample = tmp_path / "docstring_sample.py"
+    docstring_sample.write_text(
+        '"""Module ensuring PRAGMA synchronous = NORMAL is documented as forbidden."""\n\ndef helper():\n    """Helper notes that PRAGMA synchronous = OFF causes corruption."""\n    return 1\n',
+        encoding="utf-8",
+    )
+    assert scan_python_fail_open([docstring_sample]) == []
+
+
+def test_canonical_logical_tick_ast_gate(tmp_path: Path) -> None:
+    bad_hash_time = tmp_path / "bad_hash_time.py"
+    bad_hash_time.write_text(
+        'import hashlib, time\nh = hashlib.sha256(f"claim:{time.time()}".encode()).hexdigest()\n',
+        encoding="utf-8",
+    )
+    violations = scan_python_fail_open([bad_hash_time])
+    assert len(violations) == 1
+    assert violations[0].rule_id == "AST-012"
+
+    bad_fn_time = tmp_path / "bad_fn_time.py"
+    bad_fn_time.write_text(
+        'import time\ndef compute_canonical_event_hash(payload: str) -> str:\n    return f"{payload}:{time.time()}"\n',
+        encoding="utf-8",
+    )
+    violations_fn = scan_python_fail_open([bad_fn_time])
+    assert any(v.rule_id == "AST-012" for v in violations_fn)
+
+    good_logical = tmp_path / "good_logical.py"
+    good_logical.write_text(
+        'import hashlib\ndef compute_canonical_event_hash(payload: str, logical_tick: int) -> str:\n    return hashlib.sha256(f"{payload}:{logical_tick}".encode()).hexdigest()\n',
+        encoding="utf-8",
+    )
+    assert scan_python_fail_open([good_logical]) == []
+
+    good_wall_clock = tmp_path / "good_wall_clock.py"
+    good_wall_clock.write_text(
+        "import time\nstart = time.time()\nelapsed = time.time() - start\n",
+        encoding="utf-8",
+    )
+    assert scan_python_fail_open([good_wall_clock]) == []
+
+
+def test_secure_enclave_point_normalization_ast_gate(tmp_path: Path) -> None:
+    bad_raw = tmp_path / "bad_raw.py"
+    bad_raw.write_text("sec1_key = b'...' \nder_key = b'...' \nmatch = (sec1_key == der_key)\n", encoding="utf-8")
+    violations = scan_python_fail_open([bad_raw])
+    assert len(violations) == 1
+    assert violations[0].rule_id == "AST-013"
+
+    bad_dict = tmp_path / "bad_dict.py"
+    bad_dict.write_text('valid = (response["public_key_sec1"] == policy["spki_der_hex"])\n', encoding="utf-8")
+    assert any(v.rule_id == "AST-013" for v in scan_python_fail_open([bad_dict]))
+
+    bad_cryptography_compare = tmp_path / "bad_cryptography_compare.py"
+    bad_cryptography_compare.write_text(
+        "def bad_compare(pub):\n"
+        "    from cryptography.hazmat.primitives import serialization\n"
+        "    raw = pub.public_bytes(serialization.Encoding.X962, serialization.PublicFormat.UncompressedPoint)\n"
+        "    der = pub.public_bytes(\n"
+        "        serialization.Encoding.SubjectPublicKeyInfo,\n"
+        "        serialization.PublicFormat.SubjectPublicKeyInfo,\n"
+        "    )\n"
+        "    return raw == der\n",
+        encoding="utf-8",
+    )
+    assert any(v.rule_id == "AST-013" for v in scan_python_fail_open([bad_cryptography_compare]))
+
+    bad_compressed = tmp_path / "bad_compressed.py"
+    bad_compressed.write_text(
+        "def bad_compressed_compare(pub):\n"
+        "    from cryptography.hazmat.primitives import serialization\n"
+        "    comp = pub.public_bytes(serialization.Encoding.X962, serialization.PublicFormat.CompressedPoint)\n"
+        "    uncomp = pub.public_bytes(serialization.Encoding.X962, serialization.PublicFormat.UncompressedPoint)\n"
+        "    return comp == uncomp\n",
+        encoding="utf-8",
+    )
+    assert any(v.rule_id == "AST-013" for v in scan_python_fail_open([bad_compressed]))
+
+    bad_hash_concat = tmp_path / "bad_hash_concat.py"
+    bad_hash_concat.write_text(
+        "import hashlib\n"
+        "def bad_digest(sec1_bytes: bytes, spki_bytes: bytes) -> bytes:\n"
+        "    return hashlib.sha256(sec1_bytes + spki_bytes).digest()\n",
+        encoding="utf-8",
+    )
+    assert any(v.rule_id == "AST-013" for v in scan_python_fail_open([bad_hash_concat]))
+
+    good_cryptography_compare = tmp_path / "good_cryptography_compare.py"
+    good_cryptography_compare.write_text(
+        "def good_compare(pub, pub_bytes: bytes):\n"
+        "    from cryptography.hazmat.primitives import serialization\n"
+        "    point_bytes = serialization.load_der_public_key(pub_bytes).public_bytes(\n"
+        "        serialization.Encoding.X962,\n"
+        "        serialization.PublicFormat.UncompressedPoint,\n"
+        "    )\n"
+        "    other_point_bytes = pub.other_point\n"
+        "    return point_bytes == other_point_bytes\n",
+        encoding="utf-8",
+    )
+    assert scan_python_fail_open([good_cryptography_compare]) == []
+
+    good_func = tmp_path / "good_func.py"
+    good_func.write_text("valid = same_public_key(sec1_key, der_key)\n", encoding="utf-8")
+    assert scan_python_fail_open([good_func]) == []
+
+    good_norm = tmp_path / "good_norm.py"
+    good_norm.write_text("valid = (to_sec1(der_key) == sec1_key)\n", encoding="utf-8")
+    assert scan_python_fail_open([good_norm]) == []
+
+    good_sec1_sec1 = tmp_path / "good_sec1_sec1.py"
+    good_sec1_sec1.write_text("valid = (sec1_a == sec1_b)\n", encoding="utf-8")
+    assert scan_python_fail_open([good_sec1_sec1]) == []
+
+
+def test_fs_descriptor_nofollow_toctou_ast_gate(tmp_path: Path) -> None:
+    bad_is_symlink_open = tmp_path / "bad_is_symlink_open.py"
+    bad_is_symlink_open.write_text(
+        "def check_file(path):\n"
+        "    if path.is_symlink():\n"
+        "        raise ValueError('Symlinks forbidden')\n"
+        "    with open(path, 'r') as f:\n"
+        "        return f.read()\n",
+        encoding="utf-8",
+    )
+    violations = scan_python_fail_open([bad_is_symlink_open])
+    assert len(violations) == 1
+    assert violations[0].rule_id == "AST-014"
+
+    bad_is_symlink_read_text = tmp_path / "bad_is_symlink_read_text.py"
+    bad_is_symlink_read_text.write_text(
+        "def check_doc(doc_path):\n    if doc_path.is_symlink():\n        return ''\n    return doc_path.read_text()\n",
+        encoding="utf-8",
+    )
+    violations_text = scan_python_fail_open([bad_is_symlink_read_text])
+    assert any(v.rule_id == "AST-014" for v in violations_text)
+
+    bad_os_islink = tmp_path / "bad_os_islink.py"
+    bad_os_islink.write_text(
+        "import os\n"
+        "def scan(target):\n"
+        "    if os.path.islink(target):\n"
+        "        return None\n"
+        "    with open(target, 'rb') as f:\n"
+        "        return f.read()\n",
+        encoding="utf-8",
+    )
+    assert any(v.rule_id == "AST-014" for v in scan_python_fail_open([bad_os_islink]))
+
+    bad_path_open = tmp_path / "bad_path_open.py"
+    bad_path_open.write_text(
+        "def load(target_path):\n"
+        "    if not target_path.is_symlink():\n"
+        "        with target_path.open('r') as f:\n"
+        "            return f.read()\n",
+        encoding="utf-8",
+    )
+    assert any(v.rule_id == "AST-014" for v in scan_python_fail_open([bad_path_open]))
+
+    good_atomic = tmp_path / "good_atomic.py"
+    good_atomic.write_text(
+        "import os\n"
+        "def safe_read(path):\n"
+        "    flags = os.O_RDONLY | getattr(os, 'O_NOFOLLOW', 0)\n"
+        "    fd = os.open(path, flags)\n"
+        "    with os.fdopen(fd, 'r', encoding='utf-8') as f:\n"
+        "        return f.read()\n",
+        encoding="utf-8",
+    )
+    assert scan_python_fail_open([good_atomic]) == []
+
+    good_unlink = tmp_path / "good_unlink.py"
+    good_unlink.write_text(
+        "def remove_symlink(path):\n    if path.is_symlink():\n        path.unlink()\n",
+        encoding="utf-8",
+    )
+    assert scan_python_fail_open([good_unlink]) == []
+
+
+def test_quality_gates_confinement_helpers_reject_traversal_and_symlinks(tmp_path: Path) -> None:
+    from scripts.c5_quality_gates.audit_license_compliance import _is_confined_to_repo as license_confined
+    from scripts.c5_quality_gates.audit_ring2_sqlite_isolation import _is_confined_to_repo as ring2_confined
+    from scripts.c5_quality_gates.legion_100_agents_full_monorepo import _is_confined_to_repo as legion_confined
+    from scripts.c5_quality_gates.swarm_100_stress_campaign import _ensure_confined_to_repo as swarm_confined
+    from scripts.c5_quality_gates.symlink_depth_auditor import _is_confined_to_repo as symlink_confined
+    from scripts.c5_quality_gates.sync_docs_index import _is_confined_to_repo as docs_confined
+    from scripts.c5_quality_gates.sync_version import _ensure_confined_to_repo as version_confined
+
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    outside = tmp_path / "outside.txt"
+    outside.write_text("escape\n", encoding="utf-8")
+    inside = repo / "inside.txt"
+    inside.write_text("ok\n", encoding="utf-8")
+    escape_link = repo / "escape_link.txt"
+    escape_link.symlink_to(outside)
+    dotdot_path = repo / "sub" / ".." / ".." / "outside.txt"
+
+    for fn in (license_confined, ring2_confined, legion_confined, symlink_confined, docs_confined):
+        assert fn(inside, repo) is True
+        assert fn(escape_link, repo) is False
+        assert fn(dotdot_path, repo) is False
+
+    for ensure_fn in (swarm_confined, version_confined):
+        assert ensure_fn(inside, repo) == inside.resolve()
+        with pytest.raises(ValueError, match="Unconfined path outside REPO_ROOT"):
+            ensure_fn(escape_link, repo)
+        with pytest.raises(ValueError, match="Unconfined path outside REPO_ROOT"):
+            ensure_fn(dotdot_path, repo)
+
+
+def test_canonical_hash_float_forbidden_ast_gate(tmp_path: Path) -> None:
+    bad_float_arg = tmp_path / "bad_float_arg.py"
+    bad_float_arg.write_text(
+        "import hashlib\n"
+        "def compute_canonical_event_hash(weight: float, logical_tick: int) -> str:\n"
+        "    return hashlib.sha256(f'{weight}:{logical_tick}'.encode()).hexdigest()\n",
+        encoding="utf-8",
+    )
+    violations = scan_python_fail_open([bad_float_arg])
+    assert any(v.rule_id == "AST-015" for v in violations)
+
+    bad_float_literal = tmp_path / "bad_float_literal.py"
+    bad_float_literal.write_text(
+        "import hashlib\n"
+        "def bft_leaf_hash(logical_tick: int) -> str:\n"
+        "    ratio = float(logical_tick) * 0.5\n"
+        "    return hashlib.sha256(str(ratio).encode()).hexdigest()\n",
+        encoding="utf-8",
+    )
+    assert any(v.rule_id == "AST-015" for v in scan_python_fail_open([bad_float_literal]))
+
+    good_int_hash = tmp_path / "good_int_hash.py"
+    good_int_hash.write_text(
+        "import hashlib\n"
+        "def compute_canonical_event_hash(weight_bps: int, logical_tick: int) -> str:\n"
+        "    return hashlib.sha256(f'{weight_bps}:{logical_tick}'.encode()).hexdigest()\n",
+        encoding="utf-8",
+    )
+    assert scan_python_fail_open([good_int_hash]) == []
+
+
+def test_fail_closed_audit_except_ast_gate(tmp_path: Path) -> None:
+    bad_audit_pass = tmp_path / "bad_audit_pass.py"
+    bad_audit_pass.write_text(
+        "def audit_contract_state(target):\n"
+        "    try:\n"
+        "        target.check()\n"
+        "    except Exception:\n"
+        "        pass\n"
+        "    return True\n",
+        encoding="utf-8",
+    )
+    violations = scan_python_fail_open([bad_audit_pass])
+    assert len(violations) == 1
+    assert violations[0].rule_id == "AST-016"
+
+    good_audit_fail_closed = tmp_path / "good_audit_fail_closed.py"
+    good_audit_fail_closed.write_text(
+        "def audit_contract_state(target) -> bool:\n"
+        "    try:\n"
+        "        target.check()\n"
+        "    except Exception:\n"
+        "        return False\n"
+        "    return True\n",
+        encoding="utf-8",
+    )
+    assert scan_python_fail_open([good_audit_fail_closed]) == []

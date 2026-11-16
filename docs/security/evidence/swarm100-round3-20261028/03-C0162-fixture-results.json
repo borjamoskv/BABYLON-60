@@ -1,0 +1,112 @@
+{
+  "candidate_id": "SW100-C0162",
+  "source_path": "tools/skill_library/global/categorical-hallucination-audit/scripts/audit_kl_d.py",
+  "source_sha256": "34f7e6532eed0d70c2cd0d5795c5b269b02cdc44b2e0e8a69fdf89eb9728a0dc",
+  "scope": "Isolated exact-source mathematical functions; no product/native runtime or external effects.",
+  "assumption": "One Markov process on the shared history with the provided transition matrix, as required by local MODULE.md:42-45. No assumption about pi0's time origin is needed for the bridge coherence test.",
+  "inputs": {
+    "states": [
+      "A",
+      "B"
+    ],
+    "T": [
+      [
+        0.8,
+        0.2
+      ],
+      [
+        0.1,
+        0.9
+      ]
+    ],
+    "pi0": [
+      1,
+      0
+    ],
+    "history": {
+      "0": "A",
+      "1": "B",
+      "2": "B"
+    },
+    "window": [
+      2
+    ],
+    "targets": [
+      0,
+      1
+    ]
+  },
+  "actual_audit_output": [
+    {
+      "target_t": 0,
+      "true_state": "A",
+      "p_true": 1.0,
+      "hallucination_rate": 0.0,
+      "surprisal_bits": -0.0,
+      "wasserstein_dist": 0.0,
+      "distribution": {
+        "A": 1.0,
+        "B": 0.0
+      }
+    },
+    {
+      "target_t": 1,
+      "true_state": "B",
+      "p_true": 0.0,
+      "hallucination_rate": 1.0,
+      "surprisal_bits": 100.0,
+      "wasserstein_dist": 1.0,
+      "distribution": {
+        "A": 1.0,
+        "B": 0.0
+      }
+    }
+  ],
+  "actual_q0": [
+    1.0,
+    0.0
+  ],
+  "actual_q1": [
+    1.0,
+    0.0
+  ],
+  "required_q1_from_actual_q0": [
+    "8/17",
+    "9/17"
+  ],
+  "required_q1_float": [
+    0.47058823529411764,
+    0.5294117647058824
+  ],
+  "bridge_rows": [
+    [
+      "8/17",
+      "9/17"
+    ],
+    [
+      "2/83",
+      "81/83"
+    ]
+  ],
+  "conditional_coherence_violated": true,
+  "stationary_prior_control": {
+    "pi": [
+      "1/3",
+      "2/3"
+    ],
+    "q0": [
+      0.16999999999999998,
+      0.83
+    ],
+    "q1": [
+      0.1,
+      0.9
+    ],
+    "bridge_required_q1": [
+      0.09999999999999999,
+      0.8999999999999999
+    ],
+    "coherent": true
+  },
+  "limit": "The primitive's undocumented pi0 time origin remains ambiguous. A single-target call can be correct if pi0 is that target's marginal. The reproduced defect is the public multi-target audit reusing one unrestricted vector as all target marginals under its single-process contract."
+}

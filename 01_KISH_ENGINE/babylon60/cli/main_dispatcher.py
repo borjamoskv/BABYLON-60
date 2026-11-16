@@ -216,6 +216,7 @@ def cmd_tools(args: argparse.Namespace) -> int:
                         "bft_verify_merkle_root",
                         "causal_evaluate_task_risk",
                         "causal_verify_ledger",
+                        "babylon_autoroute_evaluate",
                     },
                     "summary": clean_desc.split(". ")[0] + ".",
                 }
@@ -579,6 +580,65 @@ def cmd_dashboard(args: argparse.Namespace) -> int:
     return 0
 
 
+def _safe_eval_expr(source: str) -> object:
+    """Evalúa literales, aritmética, comparaciones y lógica booleana; sin nombres ni llamadas."""
+    import ast
+    from collections.abc import Callable
+    import operator as op
+    from typing import Any
+
+    binops: dict[type[ast.operator], Callable[[Any, Any], object]] = {
+        ast.Add: op.add, ast.Sub: op.sub, ast.Mult: op.mul, ast.Div: op.truediv,
+        ast.FloorDiv: op.floordiv, ast.Mod: op.mod, ast.Pow: op.pow,
+    }  # fmt: skip
+    unops: dict[type[ast.unaryop], Callable[[Any], object]] = {
+        ast.UAdd: op.pos,
+        ast.USub: op.neg,
+        ast.Not: op.not_,
+    }
+    cmpops: dict[type[ast.cmpop], Callable[[Any, Any], object]] = {
+        ast.Eq: op.eq, ast.NotEq: op.ne, ast.Lt: op.lt, ast.LtE: op.le,
+        ast.Gt: op.gt, ast.GtE: op.ge, ast.In: lambda a, b: a in b,
+        ast.NotIn: lambda a, b: a not in b,
+    }  # fmt: skip
+
+    def ev(node: ast.AST) -> object:
+        if isinstance(node, ast.Constant):
+            return node.value
+        if isinstance(node, (ast.Tuple, ast.List, ast.Set)):
+            items = [ev(e) for e in node.elts]
+            return {ast.Tuple: tuple, ast.List: list, ast.Set: set}[type(node)](items)
+        if isinstance(node, ast.Dict) and all(k is not None for k in node.keys):
+            return {ev(k): ev(v) for k, v in zip(node.keys, node.values)}  # type: ignore[arg-type]
+        if isinstance(node, ast.BinOp) and type(node.op) in binops:
+            left, right = ev(node.left), ev(node.right)
+            if isinstance(node.op, ast.Pow) and isinstance(right, (int, float)) and abs(right) > 1024:
+                raise ValueError("exponente fuera de rango")
+            return binops[type(node.op)](left, right)
+        if isinstance(node, ast.UnaryOp) and type(node.op) in unops:
+            return unops[type(node.op)](ev(node.operand))
+        if isinstance(node, ast.BoolOp):
+            result: object = isinstance(node.op, ast.And)
+            for value in node.values:
+                result = ev(value)
+                if bool(result) != isinstance(node.op, ast.And):
+                    break
+            return result
+        if isinstance(node, ast.Compare):
+            left = ev(node.left)
+            for cmp_op, comparator in zip(node.ops, node.comparators):
+                if type(cmp_op) not in cmpops:
+                    raise ValueError(f"operador no permitido: {type(cmp_op).__name__}")
+                right = ev(comparator)
+                if not cmpops[type(cmp_op)](left, right):
+                    return False
+                left = right
+            return True
+        raise ValueError(f"expresión no permitida: {type(node).__name__}")
+
+    return ev(ast.parse(source.strip(), mode="eval").body)
+
+
 def cmd_autodidact(args: argparse.Namespace) -> int:
     """Run AUTODIDACT-Ω Epistemic Engine (C5-REAL)."""
     from babylon60.autodidact import AutodidactOmegaEngine, Modality, Obligation
@@ -604,12 +664,12 @@ def cmd_autodidact(args: argparse.Namespace) -> int:
         print(f"[*] Sometiendo a falsación Popperiana: '{claim}'")
         # Test canario: evaluación determinista de expresión o claim
         expr = args.expr
-        test_fn = (lambda: eval(expr)) if expr else (lambda: True)
+        test_fn = (lambda: _safe_eval_expr(expr)) if expr else (lambda: True)
         expected = args.expected
         verdict = engine.falsifier.falsify_assertion(
             engine.assert_hypothesis(claim, Modality.EPISTEMIC).statement,
             test_fn=test_fn,
-            expected_output=eval(expected) if expected else None,
+            expected_output=_safe_eval_expr(expected) if expected else None,
         )
         print(f"[+] Veredicto: {verdict.verdict}")
         print(f"[+] Nodo Contradicción: {verdict.contradiction_node or 'None'}")
@@ -847,6 +907,42 @@ def cmd_consolidate21(args: argparse.Namespace) -> int:
     return 0 if receipt.consolidated else 1
 
 
+def cmd_consolidate_conversations(args: argparse.Namespace) -> int:
+    """Audit and optionally consolidate conversation sessions into an out-of-repo WAL vault."""
+    import json
+
+    from babylon60.memory.conversation_consolidation import consolidate_conversations, render_markdown_catalog
+
+    try:
+        report = consolidate_conversations(
+            brain_root=args.brain_root,
+            db_path=args.db_path,
+            catalog_ref=args.catalog_ref,
+            catalog_out=args.catalog_out,
+            dry_run=not args.execute,
+            logical_tick=int(args.tick),
+        )
+    except (OSError, ValueError) as exc:
+        if args.json:
+            print(json.dumps({"schema_version": "2.0", "status": "ERROR", "error": str(exc)}, indent=2))
+        else:
+            print(f"[consolidate-conversations] ERROR: {exc}", file=sys.stderr)
+        return 2
+
+    if args.json:
+        print(json.dumps(report.to_dict(include_sessions=not args.summary_only), indent=2, ensure_ascii=False))
+    else:
+        print(
+            f"[consolidate-conversations] status={report.status} mode={report.mode} "
+            f"sessions={report.sessions_scanned} crystals={report.crystal_md_count} "
+            f"new={report.new_crystal_candidates} conflicts={report.conflicts_count} "
+            f"manifest={report.manifest_b3}"
+        )
+        if report.brain_root is not None and not args.summary_only:
+            print(render_markdown_catalog(report))
+    return 0
+
+
 def cmd_rea(args: argparse.Namespace) -> int:
     """Execute or inspect REA Master Agent and REA Subagents (claw-code, OpenClaw, DeepSeek Harness)."""
     import asyncio
@@ -986,6 +1082,78 @@ def cmd_rea(args: argparse.Namespace) -> int:
     return 0 if (receipt.simulation_completed and receipt.cortafuegos_17_passed) else 1
 
 
+def cmd_autoroute(args: argparse.Namespace) -> int:
+    """Universal Autoroute v3.0 — Capability, Effort, and KV-Cache Hysteresis Evaluator."""
+    from dataclasses import asdict
+    import json
+    import time
+
+    from babylon60.cognitive_pilot.universal_autoroute import (
+        evaluate_universal_route,
+        load_fleet_profiles,
+    )
+
+    action = getattr(args, "autoroute_action", None) or "evaluate"
+    as_json = bool(getattr(args, "json", False))
+
+    if getattr(args, "check", False) or getattr(args, "status", False) or action == "profiles":
+        profiles = load_fleet_profiles()
+        if as_json:
+            print(json.dumps(profiles, indent=2, ensure_ascii=False))
+        else:
+            prof_map = profiles.get("profiles", {})
+            hosts = ", ".join(sorted(prof_map.keys())) if isinstance(prof_map, dict) else "none"
+            print(f"[AUTOROUTE-v3] schema={profiles.get('schema_version')} hosts={hosts}")
+        return 0
+
+    if action == "benchmark":
+        iters = max(1, int(getattr(args, "iterations", 1000)))
+        t0 = time.perf_counter_ns()
+        for i in range(iters):
+            evaluate_universal_route(
+                "Orchestrator (Argon)",
+                "Orchestrator",
+                f"Implementa parche en modulo_{i % 5}.py",
+                host=str(getattr(args, "host", "antigravity_ui")),
+            )
+        elapsed_us = (time.perf_counter_ns() - t0) / 1_000.0
+        avg_us = elapsed_us / iters
+        payload = {"iterations": iters, "total_us": round(elapsed_us, 2), "avg_us": round(avg_us, 3)}
+        if as_json:
+            print(json.dumps(payload, indent=2, ensure_ascii=False))
+        else:
+            print(f"[AUTOROUTE-BENCHMARK] iterations={iters} avg_latency={avg_us:.3f} us")
+        return 0 if avg_us < 250.0 else 1
+
+    prompt = str(getattr(args, "prompt", "") or "")
+    model = str(getattr(args, "model", "Orchestrator (Argon)") or "Orchestrator (Argon)")
+    effort = str(getattr(args, "effort", "") or "")
+    host = str(getattr(args, "host", "antigravity_ui") or "antigravity_ui")
+    ctx_tokens = int(getattr(args, "context_tokens", 0) or 0)
+    rework = int(getattr(args, "rework_failures", 0) or 0)
+
+    verdict = evaluate_universal_route(
+        model,
+        effort,
+        prompt,
+        source="babylon60 CLI",
+        host=host,
+        context_tokens=ctx_tokens,
+        rework_failures=rework,
+    )
+    if as_json:
+        print(json.dumps(asdict(verdict), indent=2, ensure_ascii=False))
+    else:
+        opt_target = verdict.concrete_option or verdict.capability_description
+        print(
+            f"[AUTOROUTE] status={verdict.status} action={verdict.recommended_action} "
+            f"target={opt_target} latency={verdict.latency_ns / 1000.0:.2f}us hmac={verdict.receipt_hmac}"
+        )
+        if verdict.constitutional_notice:
+            print(f"  -> {verdict.constitutional_notice}")
+    return 0
+
+
 def main() -> None:
     if sys.platform == "win32":
         for stream in (sys.stdout, sys.stderr):
@@ -1015,6 +1183,23 @@ def main() -> None:
     p_consolidate21.add_argument("--timeout", type=float, default=90.0, help="Per-agent gate timeout in seconds")
     p_consolidate21.add_argument("--json", action="store_true", help="Output ConsolidationSealReceipt as JSON")
     p_consolidate21.set_defaults(func=cmd_consolidate21)
+
+    p_consolidate_conv = subparsers.add_parser(
+        "consolidate-conversations",
+        aliases=["consolidate-brain"],
+        help="Audit and consolidate conversation sessions into an out-of-repo SQLite WAL vault",
+    )
+    p_consolidate_conv.add_argument("--brain-root", type=Path, default=None, help="Explicit brain root to inspect")
+    p_consolidate_conv.add_argument("--db-path", type=Path, default=None, help="Out-of-repo SQLite WAL vault DB path")
+    p_consolidate_conv.add_argument("--catalog-ref", type=Path, default=None, help="Reference Markdown catalog")
+    p_consolidate_conv.add_argument("--catalog-out", type=Path, default=None, help="Output Markdown catalog path")
+    conv_mode = p_consolidate_conv.add_mutually_exclusive_group()
+    conv_mode.add_argument("--dry-run", action="store_true", help="Read-only audit inventory (default)")
+    conv_mode.add_argument("--execute", action="store_true", help="Persist consolidated records to WAL DB/catalog")
+    p_consolidate_conv.add_argument("--tick", type=int, default=60, help="Canonical logical tick (default: 60)")
+    p_consolidate_conv.add_argument("--summary-only", action="store_true", help="Omit per-session payload")
+    p_consolidate_conv.add_argument("--json", action="store_true", help="Output ConsolidationReport as JSON")
+    p_consolidate_conv.set_defaults(func=cmd_consolidate_conversations)
 
     p_presentation = subparsers.add_parser("presentation", help="Read the shared agent presentation contract")
     p_presentation.add_argument("--json", action="store_true", help="Return the contract as structured JSON")
@@ -1220,6 +1405,35 @@ def main() -> None:
     p_rea.add_argument("--tick", type=int, default=60, help="Canonical logical tick (default: 60)")
     p_rea.add_argument("--json", action="store_true", help="Output result as structured JSON")
     p_rea.set_defaults(func=cmd_rea)
+
+    # autoroute
+    p_autoroute = subparsers.add_parser(
+        "autoroute",
+        aliases=["route"],
+        help="Universal Autoroute v3.0 — Capability, Effort, and KV-Cache Hysteresis Evaluator",
+    )
+    p_autoroute.add_argument(
+        "autoroute_action",
+        nargs="?",
+        choices=["evaluate", "profiles", "benchmark"],
+        default="evaluate",
+        help="Autoroute action: evaluate (default), profiles, or benchmark",
+    )
+    p_autoroute.add_argument("--prompt", default="", help="Task prompt or query to evaluate")
+    p_autoroute.add_argument("--model", default="Orchestrator (Argon)", help="Active observed model label")
+    p_autoroute.add_argument("--effort", default="", help="Active observed reasoning effort/mode")
+    p_autoroute.add_argument(
+        "--host",
+        default="antigravity_ui",
+        help="Host profile (antigravity_ui, claude_code, codex_cli, gemini_cli, local_loopback, or generic)",
+    )
+    p_autoroute.add_argument("--context-tokens", type=int, default=0, help="Accumulated context tokens in session")
+    p_autoroute.add_argument("--rework-failures", type=int, default=0, help="Consecutive verification failures observed")
+    p_autoroute.add_argument("--iterations", type=int, default=1000, help="Benchmark iteration count")
+    p_autoroute.add_argument("--check", action="store_true", help="Inspect profiles without evaluating a turn")
+    p_autoroute.add_argument("--status", action="store_true", help="Print loaded profile summary")
+    p_autoroute.add_argument("--json", action="store_true", help="Output wire-pure JSON")
+    p_autoroute.set_defaults(func=cmd_autoroute)
 
     args = parser.parse_args()
     if not hasattr(args, "func"):

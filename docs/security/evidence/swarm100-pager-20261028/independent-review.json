@@ -1,0 +1,140 @@
+{
+  "reviewer": "independent-reviewer-00",
+  "date": "2026-10-28",
+  "scope": [
+    "scripts/c5_sharur/agent_beeper.py",
+    "tests/test_agent_beeper_regressions.py"
+  ],
+  "verdict": "NO_ACTIONABLE_FINDINGS_WITHIN_SINGLE_EVENT_LOOP_CONTRACT",
+  "findings": [],
+  "candidate_assessment": [
+    {
+      "candidate_id": "SW100-C0278",
+      "status": "RESOLVED_IN_CURRENT_CODE",
+      "evidence": "wait_for_beep awaits the tenant event which beep_agent sets; suspended receiver regressions and scheduled-boundary cases passed."
+    },
+    {
+      "candidate_id": "SW100-C0279",
+      "status": "RESOLVED_UNDER_EXPLICIT_SINGLE_BROADCAST_CONTRACT",
+      "evidence": "Second beep_swarm raises RuntimeError before replacing payload, including same-value and falsy payload cases. Retained first pulse for repeated/late waits remains intentional; this is not a reusable queue."
+    }
+  ],
+  "automated_suite": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 uv run --locked --no-sync pytest tests/test_agent_beeper_regressions.py -q -p no:cacheprovider",
+    "exit_code": 0,
+    "passed": 14,
+    "duration_seconds_reported": 0.31
+  },
+  "independent_checks": [
+    {
+      "name": "Cancellation after unicast emission preserves payload for replacement",
+      "result": "PASS"
+    },
+    {
+      "name": "Cancelling first awakened same-tenant consumer lets second consume once",
+      "result": "PASS"
+    },
+    {
+      "name": "Broadcast remains available after awakened consumer cancellation",
+      "result": "PASS"
+    },
+    {
+      "name": "64 concurrent same-tenant waiters consume 64 separately scheduled unicasts exactly once",
+      "result": "PASS"
+    },
+    {
+      "name": "Mixed fanout with 512 tenants and current/late/repeated receivers",
+      "result": "PASS",
+      "warmup_rounds": 3,
+      "checked_rounds": 20,
+      "waiters_per_round": 512,
+      "performance_claim": false
+    },
+    {
+      "name": "Deregistration after pending signal rejects all old waiters and prevents payload crossing registration",
+      "result": "PASS"
+    },
+    {
+      "name": "Falsy/None broadcast payloads survive fanout and second emission rejects before state change",
+      "result": "PASS",
+      "payload_cases": 6
+    },
+    {
+      "name": "Unicast after broadcast is consumed before retained global pulse",
+      "result": "PASS"
+    },
+    {
+      "name": "Scheduled unicast around event wait boundary has no lost wakeup",
+      "result": "PASS",
+      "rounds": 100
+    },
+    {
+      "name": "Repeated registration/deregistration keeps counts consistent and unknown tenant unicast does not leak",
+      "result": "PASS"
+    },
+    {
+      "name": "Independent scenarios leave no pending asyncio tasks",
+      "result": "PASS"
+    }
+  ],
+  "source_sha256": {
+    "scripts/c5_sharur/agent_beeper.py": "50741a443c61b3364dc877d3f567ad1daac5c9b104672c2e692ab29fb972bfb0",
+    "tests/test_agent_beeper_regressions.py": "7fcc7b9e3374db3953ede14fe5bb48210257324000561b2cdd77272b79e1ad48"
+  },
+  "supporting_source_checks": [
+    {
+      "path": "scripts/c5_sharur/agent_beeper.py",
+      "start_line": 66,
+      "end_line": 82,
+      "observation": "Identity check, payload consumption and event clear are synchronous; no await under RLock and no task yield before entering Event.wait."
+    },
+    {
+      "path": "scripts/c5_sharur/agent_beeper.py",
+      "start_line": 51,
+      "end_line": 58,
+      "observation": "Deregistration removes payload and sets old event to wake waiters; identity prevents crossing a new registration."
+    },
+    {
+      "path": "scripts/c5_sharur/agent_beeper.py",
+      "start_line": 84,
+      "end_line": 105,
+      "observation": "Unicast sets the same per-tenant event; broadcast rejects second emission before mutation and sets all registered events."
+    },
+    {
+      "path": "scripts/c5_sharur/sharur_swarm_core.py",
+      "start_line": 80,
+      "end_line": 101,
+      "observation": "Scoped consumer creates a fresh pager and issues one global broadcast."
+    }
+  ],
+  "official_documentation": [
+    {
+      "url": "https://github.com/python/cpython/blob/main/Doc/library/asyncio-sync.rst",
+      "method": "Context7 query_docs /python/cpython",
+      "observation": "Event.set wakes all current waiters; clear affects subsequent waits; Event is not thread-safe."
+    }
+  ],
+  "limitations": [
+    "All exercised calls ran on one event-loop thread, as required by the class contract; no cross-thread safety claim.",
+    "The existing unicast mailbox retains only one pending payload per tenant; bursts without consumption can overwrite earlier values. This behavior predates the fix and no FIFO guarantee is introduced.",
+    "Fanout coverage is bounded and supports delivery behavior, not advertised latency or million-agent scaling. Event fanout cost also depends on total waiting tasks when multiple waiters share a tenant.",
+    "No protected native runtime, operator data, filesystem database, remote effects or external swarm was executed. Only source/tests/evidence files were read and this report written.",
+    "Repeated waits after broadcast intentionally return the retained pulse; callers needing another round must create a new pager."
+  ],
+  "execution_source_sha256": {
+    "scripts/c5_sharur/agent_beeper.py": "7193a35d8863793718926586b67ecf2371a460e14c93a89fd83c627d524fad81",
+    "tests/test_agent_beeper_regressions.py": "7fcc7b9e3374db3953ede14fe5bb48210257324000561b2cdd77272b79e1ad48"
+  },
+  "documentation_only_refresh": {
+    "date": "2026-10-28",
+    "previous_source_sha256": "7193a35d8863793718926586b67ecf2371a460e14c93a89fd83c627d524fad81",
+    "current_source_sha256": "50741a443c61b3364dc877d3f567ad1daac5c9b104672c2e692ab29fb972bfb0",
+    "prior_report_sha256": "efff106c49fbaf2aa0be415a4df6f9d61e007bf092247e7aacb21ca09a9c422f",
+    "verification": "Reconstructed the previously reviewed bytes by reversing exactly the two docstring substitutions and matched their recorded SHA-256. ASTs after removing docstrings are identical; tests hash unchanged.",
+    "executable_ast_sha256": "7b5daa700891a3d335f4f0aa0e269a55e01163eb7173afc66b5d4cc9da727459",
+    "executable_equivalence": true,
+    "suite_reexecuted": false,
+    "scope_note": "Existing 14 regression and 11 independent-check results were executed against execution_source_sha256. Their executable implementation is unchanged; only cost descriptions now distinguish N registered agents from W waiting tasks.",
+    "bounded_diff": "--- previously-reviewed/scripts/c5_sharur/agent_beeper.py\n+++ current/scripts/c5_sharur/agent_beeper.py\n@@ -22,6 +22,7 @@\n     \"\"\"\n     Notificaciones unicast y barrera global en un único event loop.\n-    No crea sub-tareas para combinar eventos. Unicast es O(1); la difusión\n-    despierta los eventos de los N agentes registrados y cuesta O(N).\n+    No crea sub-tareas para combinar eventos. La difusión recorre los N\n+    registros y despierta sus W esperas actuales: O(N + W). Unicast señala\n+    un único evento y su coste depende de las esperas de ese destinatario.\n \n     La difusión global es una barrera de una sola emisión por instancia.\n@@ -82,5 +83,5 @@\n \n     def beep_agent(self, tenant_id: int, payload: T) -> None:\n-        \"\"\"Emite un pulso unicast O(1) a un agente específico.\"\"\"\n+        \"\"\"Señala el evento unicast de un agente específico.\"\"\"\n         with self._lock:\n             if tenant_id in self._unicast_events:\n"
+  }
+}

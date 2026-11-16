@@ -1,0 +1,38 @@
+Uninstalled 1 package in 3ms
+Installed 1 package in 3ms
+..........FFFFF                                                          [100%]
+=================================== FAILURES ===================================
+_____ test_registry_collision_cannot_replace_validated_identity[evidence] ______
+tests/test_autodidact_derivation_regressions.py:102: in test_registry_collision_cannot_replace_validated_identity
+    with pytest.raises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+______ test_registry_collision_cannot_replace_validated_identity[content] ______
+tests/test_autodidact_derivation_regressions.py:102: in test_registry_collision_cannot_replace_validated_identity
+    with pytest.raises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+______ test_registry_collision_cannot_replace_validated_identity[status] _______
+tests/test_autodidact_derivation_regressions.py:102: in test_registry_collision_cannot_replace_validated_identity
+    with pytest.raises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+______ test_imported_identity_retains_ancestry_and_falsification_cascade _______
+tests/test_autodidact_derivation_regressions.py:113: in test_imported_identity_retains_ancestry_and_falsification_cascade
+    assert result.dependencies == [ancestor_hash]
+E   AssertionError: assert [] == ['STMT:761b15...940b33a81f65']
+E     
+E     Right contains one more item: 'STMT:761b15e37297970f86a4928cd1914118b2ec1cad428edd2149a5940b33a81f65'
+E     Use -v to get more diff
+_______________ test_identity_rejects_a_known_falsified_ancestor _______________
+tests/test_autodidact_derivation_regressions.py:123: in test_identity_rejects_a_known_falsified_ancestor
+    with pytest.raises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+=========================== short test summary info ============================
+FAILED tests/test_autodidact_derivation_regressions.py::test_registry_collision_cannot_replace_validated_identity[evidence]
+FAILED tests/test_autodidact_derivation_regressions.py::test_registry_collision_cannot_replace_validated_identity[content]
+FAILED tests/test_autodidact_derivation_regressions.py::test_registry_collision_cannot_replace_validated_identity[status]
+FAILED tests/test_autodidact_derivation_regressions.py::test_imported_identity_retains_ancestry_and_falsification_cascade
+FAILED tests/test_autodidact_derivation_regressions.py::test_identity_rejects_a_known_falsified_ancestor
+5 failed, 10 passed in 0.54s

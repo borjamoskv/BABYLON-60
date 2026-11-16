@@ -1,0 +1,402 @@
+{
+  "shard": "084",
+  "findings": [
+    {
+      "title": "Installer destroys pre-existing agent instruction files without preserving differences",
+      "severity": "P1",
+      "path": "tools/install_shield.sh",
+      "line": 170,
+      "evidence": "Lines 168-171 remove any regular .cursorrules/.windsurfrules/.codexrules/CLAUDE.md/.clinerules/.roorules and replace it with a link; lines 179-181 do the same for Copilot. No backup or content preservation occurs. .babylon60rules requires preserving differences before replacing regular files.",
+      "trigger": "Install Shield in a project with existing custom regular instruction files.",
+      "impact": "Existing project instructions are irreversibly lost from the working directory.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "A contender removes an active installer lock after approximately one second",
+      "severity": "P2",
+      "path": "tools/install_shield.sh",
+      "line": 44,
+      "evidence": "acquire_lock unconditionally rm -rf removes LOCK_DIR after 200 failed mkdir attempts with sleep 0.005; no owner PID, liveness, or ownership check exists. release_lock also deletes whichever lock currently exists.",
+      "trigger": "Two installs/uninstalls overlap and the first takes more than the fixed wait interval.",
+      "impact": "Both processes can enter the critical section and race on global skills, configuration and workspace rules.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Uninstall deletes unrelated symlinked instruction files",
+      "severity": "P2",
+      "path": "tools/install_shield.sh",
+      "line": 67,
+      "evidence": "The uninstall loop checks only -L and immediately rm -f; unlike installation it never verifies readlink target or an installation ownership manifest.",
+      "trigger": "Run --uninstall in a project whose CLAUDE.md or other listed instruction file links to a user-maintained source.",
+      "impact": "The unrelated project instruction link is removed even when Shield did not create it.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Ledger model field reaches innerHTML without escaping",
+      "severity": "P1",
+      "path": "crates/eridu-infer/src/hud.rs",
+      "line": 520,
+      "evidence": "HUD lines 516-525 interpolate r.model_id into tbody.innerHTML. server.rs:118-139 accepts req.model and passes it directly to evaluate_and_seal; gate.rs:91-100 stores model.to_string() in recent_receipts. Router lines 53-62 show no route authentication layer.",
+      "trigger": "A caller able to access the local chat endpoint submits a model string containing active HTML, then an operator opens or refreshes the ledger tab.",
+      "impact": "Stored script-capable markup executes in the HUD origin and can read or modify the local UI and call same-origin endpoints. Static source trace only; no browser exploit executed.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "HUD reports verified compliance from the existence of a response or receipt",
+      "severity": "P2",
+      "path": "crates/eridu-infer/src/hud.rs",
+      "line": 496,
+      "evidence": "The response badge hardcodes ESTADO: CONFORME EU AI ACT and ledger line 522 hardcodes VERIFICADO (ART. 12-14). No verification status is evaluated. gate.rs:97 likewise assigns a constant compliance string, and server.rs:146-198 generates formatted response templates.",
+      "trigger": "Any chat response with choices, including the default model branch, or any receipt listed in the HUD.",
+      "impact": "The interface presents a compliance verification as completed without displaying evidence or a verifier decision; scope is the UI claim, not a legal assessment.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Seqlock stress oracle accepts mixed finite snapshots and even zero successful reads",
+      "severity": "P2",
+      "path": "examples/poc_kudurru_silicon_ns.rs",
+      "line": 382,
+      "evidence": "Reader accepts every snapshot whose kinetic_energy and enstrophy are not NaN; all writer values at lines 406-414 are finite. It does not compare fields to epoch_id. RetryExhausted increments a counter; final assertion at 439 checks only total_torn == 0 and ignores _total_valid/_total_exhausted.",
+      "trigger": "The example reads fields from different publications, reads initial zero state before the writer, or exhausts every read.",
+      "impact": "The example can print coherence validated at 100% despite never establishing a coherent publication. This is a defect in the example validation, not evidence of an actual production torn read.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Queue acknowledgement guidance reverses the first-call-wins contract",
+      "severity": "P2",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/queues/api.md",
+      "line": 95,
+      "evidence": "Lines 95-105 say last call wins and demonstrate ack(); retry() as causing retry. Official Cloudflare documentation https://developers.cloudflare.com/queues/configuration/batching-retries/ states the first ack/retry wins and subsequent calls are ignored (retrieved 2026-10-28).",
+      "trigger": "A consumer follows the example by acknowledging a message and subsequently trying to retry it after discovering a processing failure.",
+      "impact": "The message remains acknowledged and is not retried, risking loss of intended work. This is documentation/example guidance, not a traced production consumer.",
+      "confidence": "high",
+      "kind": "docs"
+    },
+    {
+      "title": "WAF score examples block clean traffic and spare the most suspicious requests",
+      "severity": "P1",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/waf/patterns.md",
+      "line": 64,
+      "evidence": "Lines 64-68 block cf.waf.score gt 50 and SQLi/XSS scores gt 30; lines 172-173 repeat the reversed comparisons. Official https://developers.cloudflare.com/waf/detections/attack-score/ documents 1 as almost certainly malicious and 99 as likely clean (retrieved 2026-10-28).",
+      "trigger": "Deploy the documented custom-score rules to an applicable Cloudflare zone.",
+      "impact": "Likely clean requests are blocked/challenged while scores 1-20 evade these score rules; other independent rules may still mitigate them.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Advertised 90-second polling bound does not bound network reads",
+      "severity": "P2",
+      "path": "scripts/c5_cortex/cortex_labs_poc.py",
+      "line": 68,
+      "evidence": "Both urlopen calls at lines 51 and 68 omit timeout; the elapsed-time condition at 89 executes only between calls. A stalled response can block inside urlopen/read past the deadline.",
+      "trigger": "The remote endpoint stalls during connection, response headers or body while run_fsm is polling.",
+      "impact": "The PoC can hang indefinitely instead of enforcing its declared 90-second bound.",
+      "confidence": "high",
+      "kind": "example"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "scripts/c5_isomorphisms/oncology_primitives_catalog.json",
+      "note": "Catalog includes clinical indications and dated references; textual coverage is complete, but a systematic clinical fact-check and downstream consumption audit were outside this shard. No medical correctness guarantee is inferred."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".cursor/mcp.json",
+      "status": "metadata_only",
+      "ranges": [],
+      "inventory_match": true,
+      "note": "Inspected link target metadata only; did not read target."
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/nul-zk/src/parser.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          134
+        ]
+      ],
+      "inventory_match": true,
+      "sha256": "7d19ac15912b6e00191a8ccb4f259ec93b0745dc832da23c191f68501327eb5c"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/cli/attest_character_count.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          50
+        ]
+      ],
+      "inventory_match": true,
+      "sha256": "88b2f1619da0d16883f8f4300f6214370be17ac042fcc75651e51aa9727f7d92"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/guards/capabilities.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          15
+        ]
+      ],
+      "inventory_match": true,
+      "sha256": "633edc9551bdd3183409a8e5ce70e32cf15de31f017762f59547fec6d80d68d9"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/transducers/void_mih.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          56
+        ]
+      ],
+      "inventory_match": true,
+      "sha256": "018d3ff86db69f27292f0f78d5986c835052ee11cb27076415bb2f6da806e47e"
+    },
+    {
+      "path": "02_EDIN_SWARMS/agents_archi/orchestrator/__init__.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          72
+        ]
+      ],
+      "inventory_match": true,
+      "sha256": "816e0e2559b71a5fbcf3c7e3a65233c08bcf0b23101c3ecd9f57361f266d6771"
+    },
+    {
+      "path": "crates/eridu-infer/src/hud.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          538
+        ]
+      ],
+      "inventory_match": true,
+      "sha256": "6c537744b07f015222c70591c963b2b3df24fec1e4312c6c027749b2b65a047b"
+    },
+    {
+      "path": "docs/06_theory/axiom_cyclic_conformal_aeon.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          38
+        ]
+      ],
+      "inventory_match": true,
+      "sha256": "7a31dbe384a357bf39203012349ff72e3ae68ad6ebaac8400383494014d192eb"
+    },
+    {
+      "path": "examples/poc_kudurru_silicon_ns.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          500
+        ]
+      ],
+      "inventory_match": true,
+      "sha256": "1113988b83f760d8e49bb88d4eb326f910be197ff1a3c73fda9bcabf26acde37"
+    },
+    {
+      "path": "scripts/c5_cortex/cortex_labs_poc.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          123
+        ]
+      ],
+      "inventory_match": true,
+      "sha256": "a0817105cca6ecff94f128298146bebc5f236b65151eafa5751832e646cc1bcc"
+    },
+    {
+      "path": "scripts/c5_isomorphisms/oncology_primitives_catalog.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          2402
+        ]
+      ],
+      "inventory_match": true,
+      "sha256": "ad50d825e2038a4fc3e80b42a717ce79872003a06c58bc941934b90c0f9f24c4"
+    },
+    {
+      "path": "scripts/c5_thermo/stress_10m.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          53
+        ]
+      ],
+      "inventory_match": true,
+      "sha256": "292d7fb2046c7bef4371e6e8132e1c22c72aab16361b535d22b027d3b9cadb1d"
+    },
+    {
+      "path": "src/executor_ipc_tests.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          382
+        ]
+      ],
+      "inventory_match": true,
+      "sha256": "4304e3b3fdbff440bf4eb7cb2edd62dde43a456a600d60e9a509990238ad2514"
+    },
+    {
+      "path": "tests/test_audit_consensus_quorum.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          49
+        ]
+      ],
+      "inventory_match": true,
+      "sha256": "145e09421451a5ca2677a81fe793e162f3d6775f9f2ef269c42029da81bb4062"
+    },
+    {
+      "path": "tests/test_lean_envelope_bijection.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          147
+        ]
+      ],
+      "inventory_match": true,
+      "sha256": "942c136ac834bfc16368f74049cba8116c38d678e23782c851266decf3b6433b"
+    },
+    {
+      "path": "tools/install_shield.sh",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          228
+        ]
+      ],
+      "inventory_match": true,
+      "sha256": "bbedf380b5945b2c432af96352a0f640ccf09e1e9858ad1498ad61a33919583d"
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/containers/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          188
+        ]
+      ],
+      "inventory_match": true,
+      "sha256": "00af782c2e2ab7c95cd4491d0269eddc12efcc541ec67a5692ab0b50bc7c6cdd"
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/queues/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          206
+        ]
+      ],
+      "inventory_match": true,
+      "sha256": "a702d7161738bc49949db6efc44208a933688354b0434f01f647bbbc2432bc42"
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/waf/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          197
+        ]
+      ],
+      "inventory_match": true,
+      "sha256": "027abe57121053f97bf4fd1dd226769628b0e293631356c4326cacc4209dcd63"
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-rubin-acoustic-linter/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          104
+        ]
+      ],
+      "inventory_match": true,
+      "sha256": "6796d5ce895968f428fbdc1bf96f5316e65712c83590d5f259ffb72ac89747b3"
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/references/triggers_47_primitivas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          286
+        ]
+      ],
+      "inventory_match": true,
+      "sha256": "d5a219d7cbbf9da29339adc6ee22dfc63a5dc32f4d38bc9afaff3980dbc6157c"
+    },
+    {
+      "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/c5-lexicon-enforcer/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          139
+        ]
+      ],
+      "inventory_match": true,
+      "sha256": "5a9b6dbf7002ca4ed975623ab46e2a79d32d054963be2c17eb3c995432434b65"
+    },
+    {
+      "path": "tools/skill_library/global/c5-socint-extraction-suite/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "inventory_match": true,
+      "sha256": "c1db63e4de56fa96d72a74875ba9dc401e33047bfbbc4331086478b789ff1da5"
+    },
+    {
+      "path": "tools/skill_library/global/github-architect/scripts/readme_linter.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          177
+        ]
+      ],
+      "inventory_match": true,
+      "sha256": "50474d0b4a1573f21634860ac32fda50251130422aa27e650e8325c38bd39ad4"
+    }
+  ],
+  "tool_limitations": [
+    "No native codebase-memory graph tools exposed in this session; discovered tool names yielded none. Used bounded source reads and targeted rg.",
+    "Audit-only: no project scripts, tests, compilation, browser actions, protected runtime effects or commits were executed. Python was used only to read/hash inventory and serialize this report.",
+    "Assigned inventory hashes all matched at initial and report-time checks. Existing repository changes were preserved.",
+    "External API facts for two example/documentation findings were checked against official Cloudflare documentation via native web tool; no external service configuration was modified."
+  ],
+  "tests_run": []
+}

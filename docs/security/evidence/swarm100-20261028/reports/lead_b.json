@@ -1,0 +1,270 @@
+{
+  "lead": "b",
+  "personally_audited_shard": "025",
+  "child_spawn_count": 24,
+  "auditors_including_lead": 25,
+  "children": [
+    {
+      "name": "/root/swarm100_b/s026",
+      "shard": "026",
+      "status": "completed",
+      "report": "/tmp/babylon60-audit-20261028/reports/026.json"
+    },
+    {
+      "name": "/root/swarm100_b/s027",
+      "shard": "027",
+      "status": "completed",
+      "report": "/tmp/babylon60-audit-20261028/reports/027.json"
+    },
+    {
+      "name": "/root/swarm100_b/s028",
+      "shard": "028",
+      "status": "completed",
+      "report": "/tmp/babylon60-audit-20261028/reports/028.json"
+    },
+    {
+      "name": "/root/swarm100_b/s029",
+      "shard": "029",
+      "status": "completed",
+      "report": "/tmp/babylon60-audit-20261028/reports/029.json"
+    },
+    {
+      "name": "/root/swarm100_b/s030",
+      "shard": "030",
+      "status": "completed",
+      "report": "/tmp/babylon60-audit-20261028/reports/030.json"
+    },
+    {
+      "name": "/root/swarm100_b/s031",
+      "shard": "031",
+      "status": "completed",
+      "report": "/tmp/babylon60-audit-20261028/reports/031.json"
+    },
+    {
+      "name": "/root/swarm100_b/s032",
+      "shard": "032",
+      "status": "completed",
+      "report": "/tmp/babylon60-audit-20261028/reports/032.json"
+    },
+    {
+      "name": "/root/swarm100_b/s033",
+      "shard": "033",
+      "status": "completed",
+      "report": "/tmp/babylon60-audit-20261028/reports/033.json"
+    },
+    {
+      "name": "/root/swarm100_b/s034",
+      "shard": "034",
+      "status": "completed",
+      "report": "/tmp/babylon60-audit-20261028/reports/034.json"
+    },
+    {
+      "name": "/root/swarm100_b/s035",
+      "shard": "035",
+      "status": "completed",
+      "report": "/tmp/babylon60-audit-20261028/reports/035.json"
+    },
+    {
+      "name": "/root/swarm100_b/s036",
+      "shard": "036",
+      "status": "completed",
+      "report": "/tmp/babylon60-audit-20261028/reports/036.json"
+    },
+    {
+      "name": "/root/swarm100_b/s037",
+      "shard": "037",
+      "status": "completed",
+      "report": "/tmp/babylon60-audit-20261028/reports/037.json"
+    },
+    {
+      "name": "/root/swarm100_b/s038",
+      "shard": "038",
+      "status": "completed",
+      "report": "/tmp/babylon60-audit-20261028/reports/038.json"
+    },
+    {
+      "name": "/root/swarm100_b/s039",
+      "shard": "039",
+      "status": "completed",
+      "report": "/tmp/babylon60-audit-20261028/reports/039.json"
+    },
+    {
+      "name": "/root/swarm100_b/s040",
+      "shard": "040",
+      "status": "completed",
+      "report": "/tmp/babylon60-audit-20261028/reports/040.json"
+    },
+    {
+      "name": "/root/swarm100_b/s041",
+      "shard": "041",
+      "status": "completed",
+      "report": "/tmp/babylon60-audit-20261028/reports/041.json"
+    },
+    {
+      "name": "/root/swarm100_b/s042",
+      "shard": "042",
+      "status": "completed",
+      "report": "/tmp/babylon60-audit-20261028/reports/042.json"
+    },
+    {
+      "name": "/root/swarm100_b/s043",
+      "shard": "043",
+      "status": "completed",
+      "report": "/tmp/babylon60-audit-20261028/reports/043.json"
+    },
+    {
+      "name": "/root/swarm100_b/s044",
+      "shard": "044",
+      "status": "completed",
+      "report": "/tmp/babylon60-audit-20261028/reports/044.json"
+    },
+    {
+      "name": "/root/swarm100_b/s045",
+      "shard": "045",
+      "status": "completed",
+      "report": "/tmp/babylon60-audit-20261028/reports/045.json"
+    },
+    {
+      "name": "/root/swarm100_b/s046",
+      "shard": "046",
+      "status": "completed",
+      "report": "/tmp/babylon60-audit-20261028/reports/046.json"
+    },
+    {
+      "name": "/root/swarm100_b/s047",
+      "shard": "047",
+      "status": "completed",
+      "report": "/tmp/babylon60-audit-20261028/reports/047.json"
+    },
+    {
+      "name": "/root/swarm100_b/s048",
+      "shard": "048",
+      "status": "completed",
+      "report": "/tmp/babylon60-audit-20261028/reports/048.json"
+    },
+    {
+      "name": "/root/swarm100_b/s049",
+      "shard": "049",
+      "status": "completed",
+      "report": "/tmp/babylon60-audit-20261028/reports/049.json"
+    }
+  ],
+  "coverage_counts": {
+    "reviewed_full": 619,
+    "partial": 2,
+    "metadata_only": 2,
+    "reviewed_partial": 2
+  },
+  "coverage_gaps": [
+    {
+      "shard": 26,
+      "path": "proof/lean/BabylonAeonChain.lean",
+      "status": "partial",
+      "ranges": [
+        [
+          1,
+          360
+        ],
+        [
+          1515,
+          1528
+        ],
+        [
+          3023,
+          3035
+        ],
+        [
+          4530,
+          4542
+        ],
+        [
+          6037,
+          6049
+        ],
+        [
+          7440,
+          7551
+        ]
+      ],
+      "inventory_sha256": "233b3e079981dbcc75850dbfdfbacbb5151af2e15f49289391494cf61e31370e",
+      "observed_sha256": "233b3e079981dbcc75850dbfdfbacbb5151af2e15f49289391494cf61e31370e",
+      "changed_source": false,
+      "notes": "Partial manual review in stated ranges. Additional source-text grammar scan inspected all 7551 lines in <=200-line chunks: 7500 literal Event rows match the repeated thread/sequence/action construction across five blocks; all 36 nonblank nonliteral lines emitted for review. This structural scan does not constitute complete manual review or Lean evaluation."
+    },
+    {
+      "shard": 31,
+      "path": "proof/lean/BabylonStressTrace.lean",
+      "status": "reviewed_partial",
+      "ranges": [
+        [
+          1,
+          170
+        ],
+        [
+          5950,
+          6022
+        ]
+      ],
+      "sha256_expected": "f19d80ec05dda8cfc4858b778f2a9b6869055a7fb322681f6eecdaf8ce97252b",
+      "sha256_observed": "f19d80ec05dda8cfc4858b778f2a9b6869055a7fb322681f6eecdaf8ce97252b",
+      "changed_since_manifest": false,
+      "supplemental_static_inspection": {
+        "range": [
+          17,
+          6016
+        ],
+        "method": "Read source data only with Python standard library; regex grammar and explicit expected thread/sequence/action pattern checks, no Lean execution. Does not replace line-by-line semantic review.",
+        "rows_matched": 6000,
+        "anomalies": []
+      }
+    },
+    {
+      "shard": 37,
+      "path": "tests/fixtures/fake_aws_credentials",
+      "status": "reviewed_partial",
+      "ranges": [
+        [
+          1,
+          6
+        ]
+      ],
+      "sha256_expected": "5238a0a1a73b831dfce76f4fdbae93e8c6030ca9c75603fdb1d5425c586b09a7",
+      "sha256_observed": "5238a0a1a73b831dfce76f4fdbae93e8c6030ca9c75603fdb1d5425c586b09a7",
+      "changed": false,
+      "notes": "Credential-shaped values redacted before display; only structure/comments reviewed."
+    },
+    {
+      "shard": 39,
+      "path": "tests/fixtures/oncology_300.json",
+      "status": "partial",
+      "ranges": [
+        [
+          1,
+          700
+        ]
+      ],
+      "sha256_manifest": "b4be01f6f0cf30c7c52ee04bd4f26b0e19417943b0f6eff4af1dbd7cc5def8bd",
+      "sha256_observed": "b4be01f6f0cf30c7c52ee04bd4f26b0e19417943b0f6eff4af1dbd7cc5def8bd",
+      "changed": false,
+      "unreviewed_ranges": [
+        [
+          701,
+          3007
+        ]
+      ]
+    }
+  ],
+  "inventory_path_mismatches": [],
+  "findings_raw_severity_counts": {
+    "P2": 111,
+    "P3": 3,
+    "P1": 19
+  },
+  "adjudication_report": "/tmp/babylon60-audit-20261028/reports/findings_adjudicated_b.json",
+  "tests_run": [],
+  "limitations": [
+    "Native graph tools not exposed; targeted source reads used.",
+    "Static audit only. Generated traces/fixtures and redacted credentials have explicit partial coverage.",
+    "Source findings are candidates unless independently adjudicated; raw shard severities preserved."
+  ]
+}

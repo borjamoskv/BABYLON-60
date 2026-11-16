@@ -101,14 +101,43 @@ impl ActionEngine {
                 }
             }
             "c5.auditLedger" => {
+                // C0336: no se aprueba sin inspeccionar el ledger solicitado. Este crate no incluye
+                // verificador de cadena, así que nunca devuelve HEALTHY: como mucho, NO_VERIFICADO.
+                let ledger_path = args
+                    .as_ref()
+                    .and_then(|a| a.first())
+                    .and_then(|v| v.get("ledger_path"))
+                    .and_then(|v| v.as_str())
+                    .ok_or_else(|| "auditLedger: ledger_path requerido; sin ledger no hay inspección".to_string())?;
+                if !std::path::Path::new(ledger_path).is_file() {
+                    return Err(format!("auditLedger: ledger ausente: {}", ledger_path));
+                }
                 Ok(serde_json::json!({
-                    "status": "HEALTHY",
-                    "bft_engine": "strike-rs ZeroCopy",
-                    "ledger_type": "SQLite WAL Hash-Chained",
-                    "compliance": "EU AI Act Art. 14 Verified"
+                    "status": "NO_VERIFICADO",
+                    "ledger_path": ledger_path,
+                    "reason": "verificador de cadena no disponible en cortex-lsp"
                 }))
             }
             _ => Err(format!("Comando desconocido: {}", command_name)),
         }
+    }
+}
+
+#[cfg(test)]
+mod c0336_tests {
+    use super::*;
+
+    #[tokio::test]
+    async fn audit_ledger_never_reports_healthy_without_inspecting_a_ledger() {
+        // C0336: sin ledger solicitado no hay inspección: no puede aprobarse.
+        let no_args = ActionEngine::execute_command("c5.auditLedger", None).await;
+        assert!(no_args.as_ref().map_or(true, |v| v["status"] != "HEALTHY"), "C0336: HEALTHY sin ledger: {:?}", no_args);
+
+        let missing = ActionEngine::execute_command(
+            "c5.auditLedger",
+            Some(vec![serde_json::json!({"ledger_path": "/nonexistent/c0336.db"})]),
+        )
+        .await;
+        assert!(missing.as_ref().map_or(true, |v| v["status"] != "HEALTHY"), "C0336: HEALTHY con ledger ausente: {:?}", missing);
     }
 }

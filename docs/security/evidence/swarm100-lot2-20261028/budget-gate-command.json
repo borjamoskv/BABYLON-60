@@ -1,0 +1,11 @@
+{
+  "command": [
+    "python3",
+    "scripts/c5_quality_gates/audit_token_budget.py",
+    "--workspace-only",
+    "--skip-ghost-listeners"
+  ],
+  "exit_code": 0,
+  "log": "docs/security/evidence/swarm100-lot2-20261028/budget-gate.log",
+  "log_sha256": "d0b6780eb1edd315af3e6cf33cb6b44387f78ee81a63c8e23aabd3121e82a37a"
+}

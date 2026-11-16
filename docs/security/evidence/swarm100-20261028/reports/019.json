@@ -1,0 +1,404 @@
+{
+  "shard": "019",
+  "findings": [
+    {
+      "title": "derive manufactures FormalProof without checking entailment",
+      "severity": "P2",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/omega0.rs",
+      "line": 248,
+      "evidence": "Lines 223-240 check modality and premise verification only; lines 248-253 clone any goal and format premise text as a proof term. FormalProof is accepted for reproducibility/confidence at 179-195 without interpreting that term.",
+      "trigger": "Call derive with a verified epistemic premise A and an unrelated epistemic goal B with Provenance, Reproducibility, Confidence and Completeness obligations.",
+      "impact": "Returns a FormalProof that verify accepts for B although A does not entail B. This is an unsound proof API, not evidence of a protected runtime effect bypass.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Deduplicate statements by modality as well as content",
+      "severity": "P2",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/omega0.rs",
+      "line": 278,
+      "evidence": "seen_content stores only js.statement.content although Modality is a semantic field (45-49) and derive requires a Deontic premise (223-230).",
+      "trigger": "Optimize two individually verified statements sharing content, first Epistemic then Deontic.",
+      "impact": "Drops the Deontic premise; a subsequent Deontic derivation that previously passed fails HumeViolation, violating stated conservativity at 262/267.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Freshness obligation never checks observation age",
+      "severity": "P2",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/omega0.rs",
+      "line": 199,
+      "evidence": "has_freshness returns true for every non-Conjecture justification, including Observation timestamp 0. orchestrator.rs:67-88 accepts caller timestamps, calls verify and persists the observation. bindings.rs:179-182 constructs timestamp 0 and invokes verify.",
+      "trigger": "Verify or inject an arbitrarily old Observation carrying Obligation::Freshness.",
+      "impact": "The freshness guard passes stale observations and persists them as verified knowledge; no age policy or current-time comparison is performed.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Reject expert slices larger than the configured active budget",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/verifiable_inference/edge0_moe_streamer.py",
+      "line": 171,
+      "evidence": "Eviction loop runs only while _prefetched_keys is nonempty; lines 177-180 append a slice and increment bytes even if that single byte_length exceeds max_active_ram_bytes.",
+      "trigger": "Configure a 1 KiB budget and a slice of 2 KiB, then prefetch it into an empty pool.",
+      "impact": "Internal active_resident_bytes exceeds the configured ceiling immediately. The counter already fails its advertised bound; actual RSS is not measured or certified here.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Read path copies complete expert outside active-byte accounting",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/verifiable_inference/edge0_moe_streamer.py",
+      "line": 191,
+      "evidence": "read_expert_bytes slices mmap and returns bytes without testing max_active_ram_bytes or changing _active_resident_bytes; accounting is confined to prefetch_layer_experts.",
+      "trigger": "Call read_expert_bytes for a large slice without prefetching, or retain repeated results.",
+      "impact": "Allocates expert-sized byte buffers beyond the accounting/budget policy and contradicts zero-copy/strict-RAM claims. No measured hardware ceiling is asserted.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Extension audit targets a package path absent from this checkout",
+      "severity": "P2",
+      "path": "scripts/c5_quality_gates/extensions_apoptosis_auditor.py",
+      "line": 20,
+      "evidence": "EXT_DIR is REPO_ROOT / babylon60 / extensions; caller_dirs uses the same obsolete root at 58-61. Filesystem metadata inspection found babylon60 and babylon60/extensions absent. Lines 46-48 return without a failure exit.",
+      "trigger": "Run the audit from this repository layout.",
+      "impact": "Skips extension reachability entirely and exits successfully, so its output cannot serve as a working pruning/quality gate.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Ablation violation metric is hardcoded for the gated condition",
+      "severity": "P2",
+      "path": "docs/papers/interoceptive-control/benchmarks/run_ablation_matrix.py",
+      "line": 113,
+      "evidence": "Conditions 0/1 compute synthetic violations (52/78); condition 2 always emits 0. spinal_gate.py:91-97 samples proposed costs and throws when is_viable is false, which is caught at benchmark lines 103-105.",
+      "trigger": "The gate encounters a nonviable reading and throws SpinalPainException.",
+      "impact": "Benchmark records zero violations despite observing a nonviable reading, while baselines use different synthetic definitions. Reported between-condition violation comparison is structurally biased; this is an example benchmark, not a validated empirical agent evaluation.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Written confirmation is described as a substitute for hardware attestation",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-wetware-and-venture-ops/references/modules/c5-tamkarum-60/MODULE.md",
+      "line": 127,
+      "evidence": "Step 2 permits Touch ID or confirmacion explicita imperativa; canonical .babylon60rules requires hardware attestation tied to the real hash for protected runtime transactions.",
+      "trigger": "An operator/agent follows this module to release a financial mutation using textual confirmation alone.",
+      "impact": "Procedure instructs a weaker authorization path than the canonical contract. This is a documentation conflict; no execution consumer or working runtime bypass was established.",
+      "confidence": "high",
+      "kind": "docs"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".agents/skills/biographical-thermo/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          22
+        ]
+      ],
+      "hash_match": true,
+      "notes": "Static review; no execution."
+    },
+    {
+      "path": ".github/workflows/stale.yml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          28
+        ]
+      ],
+      "hash_match": true,
+      "notes": "Static review; no execution."
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/omega0.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          597
+        ]
+      ],
+      "hash_match": true,
+      "notes": "Static review; no execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/compliance_exporter/templates/metadata_grid.html.j2",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          18
+        ]
+      ],
+      "hash_match": true,
+      "notes": "Static review; no execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/quantum_sync.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          112
+        ]
+      ],
+      "hash_match": true,
+      "notes": "Static review; no execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/verifiable_inference/edge0_moe_streamer.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          191
+        ]
+      ],
+      "hash_match": true,
+      "notes": "Static review; no execution."
+    },
+    {
+      "path": "Makefile",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          99
+        ]
+      ],
+      "hash_match": true,
+      "notes": "Static review; no execution."
+    },
+    {
+      "path": "docs/02_ontology/axiom_oncologia_300_primitivas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          598
+        ]
+      ],
+      "hash_match": true,
+      "notes": "Static source/text review only; external scientific and cloud API assertions not independently validated."
+    },
+    {
+      "path": "docs/papers/interoceptive-control/benchmarks/run_ablation_matrix.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          166
+        ]
+      ],
+      "hash_match": true,
+      "notes": "Static review; no execution."
+    },
+    {
+      "path": "proof/bundles/attestation_bundle_v2/test_results.sha256",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          1
+        ]
+      ],
+      "hash_match": true,
+      "notes": "Static review; no execution."
+    },
+    {
+      "path": "scripts/c5_demos/legal_friction_sitrep.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          74
+        ]
+      ],
+      "hash_match": true,
+      "notes": "Static review; no execution."
+    },
+    {
+      "path": "scripts/c5_quality_gates/extensions_apoptosis_auditor.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          118
+        ]
+      ],
+      "hash_match": true,
+      "notes": "Static review; no execution."
+    },
+    {
+      "path": "scripts/guards/install_topology_hook.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          132
+        ]
+      ],
+      "hash_match": true,
+      "notes": "Static review; no execution."
+    },
+    {
+      "path": "tests/a02_effect_authorization.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          190
+        ]
+      ],
+      "hash_match": true,
+      "notes": "Static review; no execution."
+    },
+    {
+      "path": "tests/test_c5_invariants.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          357
+        ]
+      ],
+      "hash_match": true,
+      "notes": "Static review; no execution."
+    },
+    {
+      "path": "tests/test_quarantine_snapshot.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          41
+        ]
+      ],
+      "hash_match": true,
+      "notes": "Static review; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/agents-sdk/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          190
+        ]
+      ],
+      "hash_match": true,
+      "notes": "Static source/text review only; external scientific and cloud API assertions not independently validated."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/email-workers/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          237
+        ]
+      ],
+      "hash_match": true,
+      "notes": "Static source/text review only; external scientific and cloud API assertions not independently validated."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/secrets-store/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          200
+        ]
+      ],
+      "hash_match": true,
+      "notes": "Static source/text review only; external scientific and cloud API assertions not independently validated."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workers/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          137
+        ]
+      ],
+      "hash_match": true,
+      "notes": "Static source/text review only; external scientific and cloud API assertions not independently validated."
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/scripts/scala_generator.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          287
+        ]
+      ],
+      "hash_match": true,
+      "notes": "Static review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_23_restaurant_booking.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "hash_match": true,
+      "notes": "Static review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-popperian-falsification-auditor/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "hash_match": true,
+      "notes": "Static review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-wetware-and-venture-ops/references/modules/c5-tamkarum-60/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          156
+        ]
+      ],
+      "hash_match": true,
+      "notes": "Static review; no execution."
+    },
+    {
+      "path": "tools/skill_library/router.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          165
+        ]
+      ],
+      "hash_match": true,
+      "notes": "Static review; no execution."
+    }
+  ],
+  "tool_limitations": [
+    "No codebase-memory graph tools exposed; discovered tool metadata and used targeted text/source fallback.",
+    "No tests, builds, benchmark/runtime execution or external API validation performed under audit-only task.",
+    "Some combined reads were output-truncated; affected ranges were reread in bounded chunks.",
+    "All assigned regular files matched frozen shard SHA-256 values; no assigned symlinks or hash mismatches.",
+    "Repository is on main with pre-existing modifications; no repository files changed."
+  ],
+  "tests_run": []
+}

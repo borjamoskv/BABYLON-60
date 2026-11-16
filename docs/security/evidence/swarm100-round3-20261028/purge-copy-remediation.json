@@ -1,0 +1,8 @@
+{
+  "candidate_id": "SW100-C0242",
+  "original_source_sha256": "57ce214bbe5979e64b06b05a1e5554fc26f9705986dd382c78f330baa1ae06f9",
+  "current_source_sha256": "739394836cb01e679667570eb96e94ed625e73390f9d66ebab32c1101b9f5324",
+  "canonical_implementation": "tools/skill_library/global/c5-browser-forensics-and-extension-triage/scripts/browser_forensics.py",
+  "affected_copy": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-browser-forensics-and-extension-triage/scripts/browser_forensics.py",
+  "basis": "Nested source equals pre-remediation canonical source byte for byte; hardened primary implementation copied after verifying equality."
+}

@@ -18,7 +18,7 @@ import sys
 from pathlib import Path
 from typing import Any
 
-SCRIPTS_DIR = Path(__file__).resolve().parent.parent
+SCRIPTS_DIR = Path(__file__).absolute().parent.parent
 REPO_ROOT = SCRIPTS_DIR.parent
 SHEBANG = "#!/usr/bin/env python3"
 
@@ -37,6 +37,31 @@ BANNED_PATTERNS = [
 ]
 
 ALLOWED_DATA_EXTENSIONS = {".py", ".sh", ".json", ".db", ".sqlite", ".md"}
+
+
+def _is_noop_handler_body(body: list[ast.stmt]) -> bool:
+    if not body:
+        return True
+    return all(
+        isinstance(stmt, ast.Pass)
+        or (isinstance(stmt, ast.Expr) and isinstance(stmt.value, ast.Constant) and stmt.value.value is Ellipsis)
+        for stmt in body
+    )
+
+
+def find_ast_anti_patterns(tree: ast.AST, *, is_quality_gate: bool = False) -> list[tuple[int, str]]:
+    """Detect multiline or single-line swallowed exception handlers via AST."""
+    findings: list[tuple[int, str]] = []
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.ExceptHandler) or not _is_noop_handler_body(node.body):
+            continue
+        if node.type is None:
+            findings.append((node.lineno, "Swallowed raw exception handler without logging"))
+            continue
+        names = {t.id for t in ast.walk(node.type) if isinstance(t, ast.Name)}
+        if "BaseException" in names or (is_quality_gate and "Exception" in names):
+            findings.append((node.lineno, "Swallowed broad exception handler without logging in quality gate"))
+    return findings
 
 
 def auto_fix_script(py_file: Path) -> bool:
@@ -106,8 +131,9 @@ def audit_scripts(auto_fix: bool = False, json_output: bool = False) -> bool:
             else:
                 violations.append({"file": rel_path, "type": "Shebang", "message": "Missing or displaced Shebang on Line 1"})
 
+        parsed_tree: ast.AST | None = None
         try:
-            ast.parse(py_file.read_text(encoding="utf-8"), filename=str(py_file))
+            parsed_tree = ast.parse(py_file.read_text(encoding="utf-8"), filename=str(py_file))
             passed_ast += 1
         except SyntaxError as e:
             violations.append({"file": rel_path, "type": "AST Syntax", "message": f"Syntax error: {e.msg}", "line": e.lineno})
@@ -118,6 +144,12 @@ def audit_scripts(auto_fix: bool = False, json_output: bool = False) -> bool:
             for idx, line in enumerate(current_lines, 1):
                 if pattern.search(line):
                     violations.append({"file": rel_path, "type": "Anti-Pattern", "message": reason, "line": idx})
+                    file_violations += 1
+        if parsed_tree is not None:
+            is_gate = "c5_quality_gates" in py_file.parts
+            for line_no, reason in find_ast_anti_patterns(parsed_tree, is_quality_gate=is_gate):
+                if not any(v["file"] == rel_path and v.get("line") == line_no for v in violations):
+                    violations.append({"file": rel_path, "type": "Anti-Pattern", "message": reason, "line": line_no})
                     file_violations += 1
         if file_violations == 0:
             passed_patterns += 1

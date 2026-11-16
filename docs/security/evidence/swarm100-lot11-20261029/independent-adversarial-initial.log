@@ -1,0 +1,62 @@
+{
+  "reviewer": "03",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "four_precommit_failures_preserve_prior_bytes_inode",
+      "passed": true,
+      "cases": 4
+    },
+    {
+      "name": "write_all_and_file_parent_sync_order",
+      "passed": true
+    },
+    {
+      "name": "postreplace_failures_report_new_visible_json_without_rollback",
+      "passed": true,
+      "cases": 2
+    },
+    {
+      "name": "ambiguous_replace_preserves_third_party_file_and_reports_unknown",
+      "passed": true
+    },
+    {
+      "name": "exclusive_temp_collision_does_not_remove_existing_file",
+      "passed": true
+    },
+    {
+      "name": "session_partial_progress_explicit_and_no_success_print",
+      "passed": true
+    },
+    {
+      "name": "common_lock_serializes_projects_and_shared_instance_threads",
+      "passed": true,
+      "additional_parallel_sessions": 8
+    },
+    {
+      "name": "replaced_memory_root_cannot_use_old_lock_for_new_files",
+      "passed": true
+    },
+    {
+      "name": "winter_summer_utc_instant_and_historical_values_preserved",
+      "passed": true,
+      "cases": 2
+    },
+    {
+      "name": "invalid_payload_project_components_and_destination_symlink_rejected",
+      "passed": true
+    }
+  ],
+  "check_count": 10,
+  "fixtures": 15,
+  "prohibited_calls": [],
+  "source_sha256_before": {
+    "01_KISH_ENGINE/babylon60/core/cortex_persist.py": "24bd06ab165e103831cd150f107ffd300279cf2367b80924ac90f575a279ba6c",
+    "tests/test_swarm100_lot11_regressions.py": "9345bfb00fc362dd0cc8ec36e49281b587c014e12e4f886372a8d1f1601c277e"
+  },
+  "source_sha256_after": {
+    "01_KISH_ENGINE/babylon60/core/cortex_persist.py": "24bd06ab165e103831cd150f107ffd300279cf2367b80924ac90f575a279ba6c",
+    "tests/test_swarm100_lot11_regressions.py": "9345bfb00fc362dd0cc8ec36e49281b587c014e12e4f886372a8d1f1601c277e"
+  },
+  "scope": "Synthetic HOME/.agent/memory only; kill/network/subprocess blocked before import. Filesystem faults and cooperating threads, not real memory, hardware, power-cut or global three-file transaction certification."
+}

@@ -144,7 +144,29 @@ def test_dry_run_describes_install_and_setup_without_installed_package(installer
 
 
 @pytest.mark.skipif(sys.platform == "win32", reason="requires Bash")
-@pytest.mark.parametrize("args", [("--client",), ("--client", "other"), ("--unknown",)])
+@pytest.mark.parametrize("profile_args", [("--profile", "terminal-mcp"), ("--profile=terminal-mcp",)])
+def test_profile_terminal_mcp_supported_in_dry_run_and_install(installer, profile_args):
+    _, _, env = installer
+    dry = run_installer(installer, *profile_args, "--dry-run")
+    assert dry.returncode == 0, dry.stderr
+    assert "BABYLON_TERMINAL_VERIFIED" in dry.stdout
+    result = run_installer(installer, *profile_args)
+    assert result.returncode == 0, result.stderr
+    assert calls(env) == [["uv", "sync", "--locked", "--no-dev", "--no-editable"], ["cli", "--help"]]
+
+
+@pytest.mark.skipif(sys.platform == "win32", reason="requires Bash")
+@pytest.mark.parametrize(
+    "args",
+    [
+        ("--client",),
+        ("--client", "other"),
+        ("--profile",),
+        ("--profile", "other"),
+        ("--profile=other",),
+        ("--unknown",),
+    ],
+)
 def test_invalid_options_do_not_install(installer, args):
     result = run_installer(installer, *args)
     assert result.returncode == 2

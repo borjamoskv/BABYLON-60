@@ -1,0 +1,573 @@
+{
+  "reviewer": "18",
+  "review_date": "2026-10-28",
+  "method": "Scoped current-source and caller/guard inspection. No product runtime, native launch, operator data access, deployment or remote mutation. Codebase graph tools were absent from the exposed session inventory; scoped rg/nl reads used instead.",
+  "source_snapshots": [
+    {
+      "path": "scripts/c5_demos/c5_model_voice_announcer.py",
+      "sha256": "d1787a45babe9064bfff95287214047048c922c2ec1e06a72c1a7dc4a32af66d",
+      "start_line": 113,
+      "end_line": 127,
+      "excerpt": "def extract_model_change(line: str) -> str | None:\n    \"\"\"Extrae el cambio de modelo desde un registro JSON de transcript.jsonl.\"\"\"\n    try:\n        data = json.loads(line)\n        content = data.get(\"content\", \"\")\n        if \"<USER_SETTINGS_CHANGE>\" in content:\n            m = re.search(r\"from\\s+([^\\n\\.]+?)\\s+to\\s+([^\\n\\.]+?)\\.\", content)\n            if m:\n                return m.group(2).strip()\n            m2 = re.search(r\"Model Selection`?\\s+(?:to|is)\\s+([^\\n\\.]+)\", content)\n            if m2:\n                return m2.group(1).strip()\n    except Exception:\n        pass\n    return None"
+    },
+    {
+      "path": "scripts/c5_demos/c5_model_voice_announcer.py",
+      "sha256": "d1787a45babe9064bfff95287214047048c922c2ec1e06a72c1a7dc4a32af66d",
+      "start_line": 137,
+      "end_line": 166,
+      "excerpt": "    last_model = None\n    last_pos = 0\n\n    if transcript_path.exists():\n        last_pos = transcript_path.stat().st_size\n\n    iteration = 0\n    running = True\n    try:\n        while running:\n            iteration += 1\n            if max_iterations is not None and iteration >= max_iterations:\n                running = False\n            if transcript_path.exists():\n                curr_size = transcript_path.stat().st_size\n                if curr_size > last_pos:\n                    with open(transcript_path, \"r\", encoding=\"utf-8\", errors=\"ignore\") as f:\n                        f.seek(last_pos)\n                        lines = f.readlines()\n                        last_pos = f.tell()\n\n                    for line in lines:\n                        new_model = extract_model_change(line)\n                        if new_model and new_model != last_model:\n                            last_model = new_model\n                            msg = f\"Topología activa: {new_model}.\"\n                            print(f\"\\n[🎙️ CLON BORJA]: {msg}\")\n                            speak_cloned(msg, blocking=False)\n\n            time.sleep(0.5)"
+    },
+    {
+      "path": "scripts/c5_demos/c5_model_voice_announcer.py",
+      "sha256": "d1787a45babe9064bfff95287214047048c922c2ec1e06a72c1a7dc4a32af66d",
+      "start_line": 171,
+      "end_line": 191,
+      "excerpt": "def main() -> None:\n    parser = argparse.ArgumentParser(description=\"Antigravity Voice Watcher (Borja Neural Clone)\")\n    parser.add_argument(\"--say\", type=str, help=\"Pronunciar texto con el clon de Borja\")\n    parser.add_argument(\"--watch\", action=\"store_true\", help=\"Monitorear cambios de modelo en tiempo real\")\n    parser.add_argument(\"--path\", type=str, help=\"Ruta al transcript.jsonl\")\n\n    args = parser.parse_args()\n\n    if args.say:\n        speak_cloned(args.say, blocking=True)\n        return\n\n    if args.watch:\n        if args.path:\n            p = Path(args.path)\n        else:\n            base = Path.home() / \".gemini\" / \"antigravity\" / \"brain\"\n            conv_id = \"b6e348e5-5c68-4b43-bcab-8e3abcd8cad5\"\n            p = base / conv_id / \".system_generated\" / \"logs\" / \"transcript.jsonl\"\n\n        watch_transcript(p)"
+    },
+    {
+      "path": "scripts/c5_demos/c5_model_voice_announcer.py",
+      "sha256": "d1787a45babe9064bfff95287214047048c922c2ec1e06a72c1a7dc4a32af66d",
+      "start_line": 137,
+      "end_line": 156,
+      "excerpt": "    last_model = None\n    last_pos = 0\n\n    if transcript_path.exists():\n        last_pos = transcript_path.stat().st_size\n\n    iteration = 0\n    running = True\n    try:\n        while running:\n            iteration += 1\n            if max_iterations is not None and iteration >= max_iterations:\n                running = False\n            if transcript_path.exists():\n                curr_size = transcript_path.stat().st_size\n                if curr_size > last_pos:\n                    with open(transcript_path, \"r\", encoding=\"utf-8\", errors=\"ignore\") as f:\n                        f.seek(last_pos)\n                        lines = f.readlines()\n                        last_pos = f.tell()"
+    },
+    {
+      "path": "scripts/c5_demos/c5_model_voice_announcer.py",
+      "sha256": "d1787a45babe9064bfff95287214047048c922c2ec1e06a72c1a7dc4a32af66d",
+      "start_line": 37,
+      "end_line": 70,
+      "excerpt": "def sanitize_filename(text: str) -> str:\n    nfkd = unicodedata.normalize(\"NFKD\", text)\n    ascii_text = nfkd.encode(\"ASCII\", \"ignore\").decode(\"utf-8\")\n    slug = re.sub(r\"[^\\w\\s-]\", \"\", ascii_text).strip().lower()\n    return re.sub(r\"[-\\s]+\", \"_\", slug)\n\n\ndef speak_cloned(text: str, blocking: bool = False) -> None:\n    \"\"\"\n    Reproduce el anuncio utilizando el clon neuronal de voz de Borja.\n    Si el archivo de audio pre-renderizado existe, se reproduce instantáneamente con afplay.\n    Si no, se sintetiza mediante F5-TTS y se almacena en la caché.\n    \"\"\"\n    MODELS_CACHE_DIR.mkdir(parents=True, exist_ok=True)\n    slug = sanitize_filename(text)\n    cached_wav = MODELS_CACHE_DIR / f\"{slug}.wav\"\n\n    # Caso 1: Audio específico ya existe en caché o raíz de voice_samples\n    direct_wav = SAMPLES_DIR / f\"{slug}.wav\"\n    target_wav = cached_wav if cached_wav.exists() else (direct_wav if direct_wav.exists() else None)\n\n    if target_wav and target_wav.exists():\n        # Cerrojo de serialización para prevenir colisiones acústicas\n        lock_file = Path(\"/tmp/c5_voice_playback.lock\")\n        try:\n            import fcntl\n            with open(lock_file, \"w\") as lf:\n                fcntl.flock(lf, fcntl.LOCK_EX)\n                # Despachar notificación nativa visual en macOS\n                cmd_banner = [\n                    \"osascript\", \"-e\",\n                    f'display notification \"{text}\" with title \"Antigravity Topology\" subtitle \"Soberanía C5-REAL\" sound name \"Tink\"'\n                ]\n                subprocess.Popen(cmd_banner, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)"
+    },
+    {
+      "path": "scripts/c5_demos/c5_model_voice_announcer.py",
+      "sha256": "d1787a45babe9064bfff95287214047048c922c2ec1e06a72c1a7dc4a32af66d",
+      "start_line": 113,
+      "end_line": 124,
+      "excerpt": "def extract_model_change(line: str) -> str | None:\n    \"\"\"Extrae el cambio de modelo desde un registro JSON de transcript.jsonl.\"\"\"\n    try:\n        data = json.loads(line)\n        content = data.get(\"content\", \"\")\n        if \"<USER_SETTINGS_CHANGE>\" in content:\n            m = re.search(r\"from\\s+([^\\n\\.]+?)\\s+to\\s+([^\\n\\.]+?)\\.\", content)\n            if m:\n                return m.group(2).strip()\n            m2 = re.search(r\"Model Selection`?\\s+(?:to|is)\\s+([^\\n\\.]+)\", content)\n            if m2:\n                return m2.group(1).strip()"
+    },
+    {
+      "path": "scripts/c5_demos/c5_model_voice_announcer.py",
+      "sha256": "d1787a45babe9064bfff95287214047048c922c2ec1e06a72c1a7dc4a32af66d",
+      "start_line": 171,
+      "end_line": 180,
+      "excerpt": "def main() -> None:\n    parser = argparse.ArgumentParser(description=\"Antigravity Voice Watcher (Borja Neural Clone)\")\n    parser.add_argument(\"--say\", type=str, help=\"Pronunciar texto con el clon de Borja\")\n    parser.add_argument(\"--watch\", action=\"store_true\", help=\"Monitorear cambios de modelo en tiempo real\")\n    parser.add_argument(\"--path\", type=str, help=\"Ruta al transcript.jsonl\")\n\n    args = parser.parse_args()\n\n    if args.say:\n        speak_cloned(args.say, blocking=True)"
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/hypervisor.rs",
+      "sha256": "79af81bc27f34508c5798234efff054d3ca7e2a357066e77119cafe17f6589dc",
+      "start_line": 302,
+      "end_line": 341,
+      "excerpt": "/// Spawn an owned writer with interruptible adaptive polling.\npub fn spawn_writer_daemon(hypervisor: Arc<SwarmHypervisor>, service_name_str: &str, stop_signal: Arc<AtomicBool>, max_events: Option<usize>) -> WriterDaemonHandle {\n    let service_name_str = service_name_str.to_string();\n    let worker_stop = Arc::clone(&stop_signal);\n    let worker = thread::spawn(move || {\n        let service_name = match ServiceName::new(&service_name_str) {\n            Ok(name) => name,\n            Err(_) => return,\n        };\n\n        let node = match NodeBuilder::new().create::<ipc::Service>() {\n            Ok(node) => node,\n            Err(_) => return,\n        };\n        let service = match node.service_builder(&service_name)\n        .publish_subscribe::<IpcEnvelope>()\n            .open_or_create() {\n                Ok(s) => s,\n                Err(_) => return,\n            };\n\n        let subscriber = match service.subscriber_builder().create() {\n            Ok(sub) => sub,\n            Err(_) => return,\n        };\n\n        let mut processed = 0usize;\n        let mut backoff = WriterIdleBackoff(WriterIdleBackoff::MIN);\n        // Boundable loop: halted via stop_signal or max_events limit (INV_C5_TURING_CASTRATION)\n        while !worker_stop.load(Ordering::Acquire) {\n            if let Some(limit) = max_events\n                && processed >= limit {\n                    break;\n                }\n\n            match subscriber.receive() {\n                Ok(Some(sample)) => {\n                    backoff.reset();\n                    let env = &*sample;\n                    if let Ok(unpacked) = ExergyPacket::unpack(&env.data[..env.len]) {"
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bft_iceoryx2.rs",
+      "sha256": "c722b818b8de1017c843c1e7d24356ad4f008bafedd388ccba0bbe7d2a11f1c0",
+      "start_line": 76,
+      "end_line": 105,
+      "excerpt": "#[derive(Debug, ZeroCopySend)]\n#[repr(C)]\npub struct IpcEnvelope {\n    pub len: usize,\n    pub data: [u8; 8192],\n}\n\npub fn publish_exergy_packet(service_name_str: &str, packet: &ExergyPacket) -> Result<(), Box<dyn std::error::Error>> {\n    let service_name = ServiceName::new(service_name_str)?;\n        let node = NodeBuilder::new().create::<ipc::Service>()?;\n    let service = node.service_builder(&service_name)\n        .publish_subscribe::<IpcEnvelope>()\n        .open_or_create()?;\n\n    let publisher = service.publisher_builder().create()?;\n    let packed = packet.pack()?;\n    if packed.len() > 8192 {\n        return Err(\"Payload exceeds 8192 bytes fixed envelope\".into());\n    }\n    \n    let mut env = IpcEnvelope {\n        len: packed.len(),\n        data: [0; 8192],\n    };\n    env.data[..packed.len()].copy_from_slice(&packed);\n    \n    let sample = publisher.loan_uninit()?;\n    let sample = sample.write_payload(env);\n    \n    sample.send()?;"
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bindings.rs",
+      "sha256": "988c71e782d600406e2e985c5279c2bf2abc33a51c3bea7f49b021f4479847a3",
+      "start_line": 209,
+      "end_line": 214,
+      "excerpt": "    #[staticmethod]\n    /// Retain the returned handle, or use it as a context manager, while the writer runs.\n    pub fn start_writer_daemon(service_name: &str, _db_path: &str) -> PyResult<WriterDaemon> {\n        let stop_signal = std::sync::Arc::new(std::sync::atomic::AtomicBool::new(false));\n        let handle = spawn_writer_daemon(std::sync::Arc::new(crate::hypervisor::SwarmHypervisor::new()), service_name, stop_signal, None);\n        Ok(WriterDaemon { handle })"
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/hypervisor.rs",
+      "sha256": "79af81bc27f34508c5798234efff054d3ca7e2a357066e77119cafe17f6589dc",
+      "start_line": 97,
+      "end_line": 117,
+      "excerpt": "    pub fn publish_node(\n        &self, \n        sender_id: u64, \n        view: u64, \n        seq_num: u64, \n        payload_hash_hex: &str,\n        keypair: &SigningKey\n    ) -> Result<(), Box<dyn std::error::Error>> {\n        let mut payload_hash = [0u8; 32];\n        if payload_hash_hex.len() == 64\n            && let Ok(bytes) = hex::decode(payload_hash_hex) {\n                payload_hash.copy_from_slice(&bytes);\n            }\n\n        let msg = BftMessage::sign(sender_id, view, seq_num, payload_hash, keypair);\n\n        let sample = self.publisher.loan_uninit()?;\n        let sample = sample.write_payload(msg);\n\n        sample.send()?;\n        Ok(())"
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/hypervisor.rs",
+      "sha256": "79af81bc27f34508c5798234efff054d3ca7e2a357066e77119cafe17f6589dc",
+      "start_line": 50,
+      "end_line": 68,
+      "excerpt": "        \n        let sig = keypair.sign(&msg_bytes);\n        Self {\n            sender_id,\n            view,\n            seq_num,\n            payload_hash,\n            signature: sig.to_bytes(),\n        }\n    }\n\n    pub fn verify(&self, pubkey: &VerifyingKey) -> bool {\n        let mut msg_bytes = Vec::new();\n        msg_bytes.extend_from_slice(&self.sender_id.to_le_bytes());\n        msg_bytes.extend_from_slice(&self.view.to_le_bytes());\n        msg_bytes.extend_from_slice(&self.seq_num.to_le_bytes());\n        msg_bytes.extend_from_slice(&self.payload_hash);\n        let sig = Signature::from_bytes(&self.signature);\n        pubkey.verify_strict(&msg_bytes, &sig).is_ok()"
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bindings.rs",
+      "sha256": "988c71e782d600406e2e985c5279c2bf2abc33a51c3bea7f49b021f4479847a3",
+      "start_line": 203,
+      "end_line": 205,
+      "excerpt": "    pub fn publish_node(&self, sender_id: u64, view: u64, seq_num: u64, payload_hash_hex: &str) -> PyResult<()> {\n        self.publisher.publish_node(sender_id, view, seq_num, payload_hash_hex, &self.keypair)\n            .map_err(|e| PyRuntimeError::new_err(format!(\"Publish failed: {}\", e)))"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/c6_absolute/ctre_engine.py",
+      "sha256": "9639264bb77d25173d295a4c0009d6d97130c3aa4405ebbfdf974e0a8ea4f96d",
+      "start_line": 24,
+      "end_line": 62,
+      "excerpt": "    def __init__(self, alpha: float = 0.05, variance_threshold: float = 0.015):\n        assert 0.0 < alpha < 1.0, \"Alpha must be probabilistic in (0, 1).\"\n        assert variance_threshold > 0.0, \"Variance threshold must be strictly positive.\"\n        self.alpha: float = float(alpha)\n        self.threshold: float = float(variance_threshold)\n        self.history: List[Dict[str, Any]] = []\n\n    def calculate_cvar(self, drift_samples: np.ndarray) -> float:\n        \"\"\"Calculates expected loss in the α-tail worst cases.\"\"\"\n        if len(drift_samples) == 0:\n            return 0.0\n        var_limit = np.percentile(drift_samples, 100 * (1 - self.alpha))\n        tail_risks = drift_samples[drift_samples >= var_limit]\n        if len(tail_risks) == 0:\n            return float(var_limit)\n        return float(np.mean(tail_risks))\n\n    def enforce_thermodynamic_brake(self, drift_observations: List[float]) -> Tuple[str, float]:\n        \"\"\"\n        Enforces the negentropic gate.\n        Returns Tuple[Action, CVaR_Risk].\n        Action is either 'ACTION_ABORT' or 'ACTION_COMMIT'.\n        \"\"\"\n        assert len(drift_observations) > 0, \"Static friction: Observations array cannot be empty.\"\n\n        arr = np.array(drift_observations, dtype=np.float64)\n        cvar_risk = round(self.calculate_cvar(arr), 5)\n\n        action = \"ACTION_ABORT\" if cvar_risk > self.threshold else \"ACTION_COMMIT\"\n\n        telemetry = {\n            \"sample_count\": len(drift_observations),\n            \"cvar_risk\": cvar_risk,\n            \"threshold\": self.threshold,\n            \"action\": action,\n        }\n        self.history.append(telemetry)\n\n        return action, cvar_risk"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/c6_absolute/eip7702_hunter.py",
+      "sha256": "a42435d57aa1ed47ab90ce188bfe56538a3d1ca5799e425a560d33ddc2e708e7",
+      "start_line": 54,
+      "end_line": 73,
+      "excerpt": "    def scan_and_reconcile(self, inject_mempool_shock: bool = False) -> str:\n        # Sample current entropy\n        sample = self.sampler.sample_network_entropy()\n        if inject_mempool_shock:\n            sample += random.uniform(0.05, 0.15)\n        self.mempool_variance_buffer.append(sample)\n\n        # Retain recent window\n        if len(self.mempool_variance_buffer) > 20:\n            self.mempool_variance_buffer.pop(0)\n\n        action, risk = self.ctre.enforce_thermodynamic_brake(self.mempool_variance_buffer)\n        if action == \"ACTION_ABORT\":\n            self.aborted_txs += 1\n            self.mempool_variance_buffer.clear()\n            return f\"ABORT (CVaR: {risk:.5f} > {self.ctre.threshold:.5f}) - Capital preserved.\"\n        else:\n            self.executed_txs += 1\n            self.mempool_variance_buffer.clear()\n            return f\"COMMIT (CVaR: {risk:.5f} <= {self.ctre.threshold:.5f}) - Exergy injected on-chain.\""
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/c6_absolute/ctre_engine.py",
+      "sha256": "9639264bb77d25173d295a4c0009d6d97130c3aa4405ebbfdf974e0a8ea4f96d",
+      "start_line": 24,
+      "end_line": 52,
+      "excerpt": "    def __init__(self, alpha: float = 0.05, variance_threshold: float = 0.015):\n        assert 0.0 < alpha < 1.0, \"Alpha must be probabilistic in (0, 1).\"\n        assert variance_threshold > 0.0, \"Variance threshold must be strictly positive.\"\n        self.alpha: float = float(alpha)\n        self.threshold: float = float(variance_threshold)\n        self.history: List[Dict[str, Any]] = []\n\n    def calculate_cvar(self, drift_samples: np.ndarray) -> float:\n        \"\"\"Calculates expected loss in the α-tail worst cases.\"\"\"\n        if len(drift_samples) == 0:\n            return 0.0\n        var_limit = np.percentile(drift_samples, 100 * (1 - self.alpha))\n        tail_risks = drift_samples[drift_samples >= var_limit]\n        if len(tail_risks) == 0:\n            return float(var_limit)\n        return float(np.mean(tail_risks))\n\n    def enforce_thermodynamic_brake(self, drift_observations: List[float]) -> Tuple[str, float]:\n        \"\"\"\n        Enforces the negentropic gate.\n        Returns Tuple[Action, CVaR_Risk].\n        Action is either 'ACTION_ABORT' or 'ACTION_COMMIT'.\n        \"\"\"\n        assert len(drift_observations) > 0, \"Static friction: Observations array cannot be empty.\"\n\n        arr = np.array(drift_observations, dtype=np.float64)\n        cvar_risk = round(self.calculate_cvar(arr), 5)\n\n        action = \"ACTION_ABORT\" if cvar_risk > self.threshold else \"ACTION_COMMIT\""
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/c6_absolute/eip7702_hunter.py",
+      "sha256": "a42435d57aa1ed47ab90ce188bfe56538a3d1ca5799e425a560d33ddc2e708e7",
+      "start_line": 65,
+      "end_line": 73,
+      "excerpt": "        action, risk = self.ctre.enforce_thermodynamic_brake(self.mempool_variance_buffer)\n        if action == \"ACTION_ABORT\":\n            self.aborted_txs += 1\n            self.mempool_variance_buffer.clear()\n            return f\"ABORT (CVaR: {risk:.5f} > {self.ctre.threshold:.5f}) - Capital preserved.\"\n        else:\n            self.executed_txs += 1\n            self.mempool_variance_buffer.clear()\n            return f\"COMMIT (CVaR: {risk:.5f} <= {self.ctre.threshold:.5f}) - Exergy injected on-chain.\""
+    },
+    {
+      "path": "crates/babylon-skills-mcp/src/lib.rs",
+      "sha256": "789611513b90d1dfee802d49ef3914379369b0f9503ac468e5688c04d1f64b98",
+      "start_line": 1494,
+      "end_line": 1568,
+      "excerpt": "        // --- 1. FL-P10: Audience-bound credential, explicit project_id, nonce, expiration & zero passthrough ---\n        let Some(cred_obj) = args.get(\"credential\").and_then(Value::as_object) else {\n            return json!({\n                \"isError\": true,\n                \"status\": \"DENIED\",\n                \"decision\": \"DENIED\",\n                \"failure_class\": \"MISSING_AUDIENCE_CREDENTIAL\",\n                \"error\": \"FL-P10: Missing audience-bound credential\"\n            });\n        };\n\n        let passthrough_token = cred_obj\n            .get(\"passthrough_token\")\n            .and_then(|v| {\n                if v.is_null() {\n                    None\n                } else {\n                    Some(v.as_str().unwrap_or(\"non-string\").to_string())\n                }\n            })\n            .filter(|s| !s.trim().is_empty());\n\n        if passthrough_token.is_some() {\n            return json!({\n                \"isError\": true,\n                \"status\": \"DENIED\",\n                \"decision\": \"DENIED\",\n                \"failure_class\": \"TOKEN_PASSTHROUGH_FORBIDDEN\",\n                \"error\": \"FL-P10: Downstream token passthrough is strictly forbidden\"\n            });\n        }\n\n        let audience = cred_obj\n            .get(\"audience\")\n            .and_then(Value::as_str)\n            .unwrap_or(\"\");\n        let project_id = cred_obj\n            .get(\"project_id\")\n            .and_then(Value::as_str)\n            .unwrap_or(\"\")\n            .trim();\n        let nonce = cred_obj\n            .get(\"nonce\")\n            .and_then(Value::as_str)\n            .unwrap_or(\"\")\n            .trim();\n        let current_epoch = cred_obj\n            .get(\"current_epoch\")\n            .or_else(|| args.get(\"current_epoch\"))\n            .and_then(Value::as_u64)\n            .unwrap_or(1);\n        let expires_at_epoch = cred_obj\n            .get(\"expires_at_epoch\")\n            .or_else(|| args.get(\"expires_at_epoch\"))\n            .and_then(Value::as_u64)\n            .unwrap_or(current_epoch.saturating_add(60));\n\n        if audience != GATEWAY_EXPECTED_AUDIENCE || project_id.is_empty() || nonce.is_empty() {\n            return json!({\n                \"isError\": true,\n                \"status\": \"DENIED\",\n                \"decision\": \"DENIED\",\n                \"failure_class\": \"INVALID_AUDIENCE_OR_NONCE\",\n                \"error\": \"FL-P10: Credential must bind exact audience, non-empty project_id, and unique nonce\"\n            });\n        }\n\n        if expires_at_epoch == 0 || current_epoch > expires_at_epoch {\n            return json!({\n                \"isError\": true,\n                \"status\": \"DENIED\",\n                \"decision\": \"DENIED\",\n                \"failure_class\": \"CREDENTIAL_EXPIRED\",\n                \"error\": \"FL-P10: Audience-bound credential or nonce lease has expired\"\n            });"
+    },
+    {
+      "path": "crates/babylon-skills-mcp/src/lib.rs",
+      "sha256": "789611513b90d1dfee802d49ef3914379369b0f9503ac468e5688c04d1f64b98",
+      "start_line": 1571,
+      "end_line": 1626,
+      "excerpt": "        // --- 2. FL-P08: Lockfile, Tool Shadowing & Classification validation ---\n        let Some(snap) = self.snapshot.resolve(skill_id) else {\n            return json!({\n                \"isError\": true,\n                \"status\": \"DENIED\",\n                \"decision\": \"DENIED\",\n                \"failure_class\": \"TOOL_SHADOWING_OR_UNREGISTERED\",\n                \"error\": format!(\"FL-P08: Skill '{skill_id}' is not registered in skills-lock.json\")\n            });\n        };\n\n        let Some(locked) = self.lockfile.skills.get(&snap.name) else {\n            return json!({\n                \"isError\": true,\n                \"status\": \"DENIED\",\n                \"decision\": \"DENIED\",\n                \"failure_class\": \"TOOL_SHADOWING_OR_UNREGISTERED\",\n                \"error\": format!(\"FL-P08: Skill '{}' is absent from skills-lock.json\", snap.name)\n            });\n        };\n\n        if !snap.effect_profile.validated\n            || snap.effect_profile.class == EffectClass::Unvalidated\n            || !locked.effect_profile.validated\n            || locked.effect_profile.class == EffectClass::Unvalidated\n        {\n            return json!({\n                \"isError\": true,\n                \"status\": \"DENIED\",\n                \"decision\": \"DENIED\",\n                \"failure_class\": \"UNVALIDATED_EFFECT_CLASSIFICATION\",\n                \"error\": format!(\"FASE 1 / GUARD: Skill '{}' has unvalidated effect classification => DENY\", snap.name)\n            });\n        }\n\n        if locked.version != version\n            || locked.tool_identity_hash != snap.tool_identity_hash\n            || provided_identity_hash.is_some_and(|h| h != locked.tool_identity_hash)\n        {\n            return json!({\n                \"isError\": true,\n                \"status\": \"DENIED\",\n                \"decision\": \"DENIED\",\n                \"failure_class\": \"TOOL_IDENTITY_MISMATCH\",\n                \"error\": \"FL-P08: tool_identity_hash or version mismatch against skills-lock.json\"\n            });\n        }\n\n        if !self.is_skill_visible(project_id, &snap.name) {\n            return json!({\n                \"isError\": true,\n                \"status\": \"DENIED\",\n                \"decision\": \"DENIED\",\n                \"failure_class\": \"PROJECT_POLICY_DENIED\",\n                \"error\": format!(\"Skill '{}' is not allowed for project '{project_id}'\", snap.name)\n            });"
+    },
+    {
+      "path": "crates/babylon-skills-mcp/src/lib.rs",
+      "sha256": "789611513b90d1dfee802d49ef3914379369b0f9503ac468e5688c04d1f64b98",
+      "start_line": 1724,
+      "end_line": 1752,
+      "excerpt": "        // --- 4. Delegate GUARD evaluation & compositional flow check to `McpCapabilityBroker` ---\n        let mut guard = self.guard_state.lock().expect(\"guard mutex\");\n        let nonce_key = (project_id.to_string(), nonce.to_string());\n        let is_human_approved = guard.human_approved_nonces.contains(&nonce_key);\n\n        let proposal_input = GuardProposalInput {\n            skill_id: snap.name.clone(),\n            version: snap.version.clone(),\n            tool_identity_hash: tool_id_bytes,\n            artifact_sha256: artifact_bytes,\n            audience: audience.to_string(),\n            expected_audience: GATEWAY_EXPECTED_AUDIENCE.to_string(),\n            project_id: project_id.to_string(),\n            trace_id: trace_id.clone(),\n            nonce: nonce.to_string(),\n            passthrough_token: None,\n            resource_uri: target_path.to_string(),\n            allowed_roots,\n            args_digest: args_digest_bytes,\n            precondition_snapshot_hash: pre_digest_bytes,\n            expected_pre_hash,\n            observed_pre_hash,\n            network_destination,\n            current_epoch,\n            expires_at_epoch,\n            human_approved: is_human_approved,\n        };\n\n        let grant = match guard.broker.propose_skill_effect(proposal_input) {"
+    },
+    {
+      "path": "crates/babylon-skills-mcp/src/lib.rs",
+      "sha256": "789611513b90d1dfee802d49ef3914379369b0f9503ac468e5688c04d1f64b98",
+      "start_line": 1829,
+      "end_line": 1899,
+      "excerpt": "        // --- 5. FL-P11: Independent Postcondition Verification via Broker State Machine ---\n        if let Some(exec_res) = args\n            .get(\"simulated_execution_result\")\n            .and_then(Value::as_object)\n        {\n            let reported_post_str = exec_res\n                .get(\"observed_post_hash\")\n                .and_then(Value::as_str)\n                .unwrap_or(\"\");\n            let physical_disk_post_str = exec_res\n                .get(\"actual_file_sha256\")\n                .and_then(Value::as_str)\n                .unwrap_or(reported_post_str);\n\n            let reported_bytes = if reported_post_str.is_empty() {\n                [0u8; 32]\n            } else {\n                parse_hex32(reported_post_str)\n                    .unwrap_or_else(|| sha256_digest(reported_post_str.as_bytes()))\n            };\n            let physical_bytes = if physical_disk_post_str.is_empty() {\n                [0xFFu8; 32]\n            } else {\n                parse_hex32(physical_disk_post_str)\n                    .unwrap_or_else(|| sha256_digest(physical_disk_post_str.as_bytes()))\n            };\n\n            let verify_outcome = guard.broker.execute_and_verify_skill_effect(\n                &grant.capability_id,\n                audience,\n                project_id,\n                target_path,\n                &args_digest_bytes,\n                current_epoch,\n                || {\n                    if reported_post_str.is_empty() {\n                        Err(FailureReason::IoError(\"Empty reported_post_hash\".into()))\n                    } else {\n                        Ok(reported_bytes)\n                    }\n                },\n                || Ok(physical_bytes),\n            );\n\n            match verify_outcome {\n                Ok((_, EffectState::Verified)) => {}\n                _ => {\n                    return json!({\n                        \"isError\": true,\n                        \"status\": \"FAILED\",\n                        \"decision\": \"DENIED\",\n                        \"failure_class\": \"POSTCONDITION_VERIFICATION_FAILED\",\n                        \"action_capability\": capability,\n                        \"error\": \"FL-P11: Independent verifier refuted postcondition (tool returned 200 OK without applying valid state mutation)\"\n                    });\n                }\n            }\n        }\n\n        json!({\n            \"isError\": false,\n            \"status\": \"VERIFIED\",\n            \"decision\": \"ALLOW\",\n            \"broker_state\": \"Authorized\",\n            \"effects_executed\": 0,\n            \"action_capability\": capability,\n            \"evidence\": {\n                \"verified_by\": \"babylon-skills-mcp-independent-verifier\",\n                \"lockfile_ref\": locked.lockfile_ref,\n                \"postconditions_checked\": snap.guard_invariants.postconditions\n            }"
+    },
+    {
+      "path": "crates/babylon-skills-mcp/src/lib.rs",
+      "sha256": "789611513b90d1dfee802d49ef3914379369b0f9503ac468e5688c04d1f64b98",
+      "start_line": 1903,
+      "end_line": 1946,
+      "excerpt": "    /// Execute a side effect exclusively when presented with a valid `ActionCapability` issued by `propose_effect`,\n    /// followed by independent physical postcondition verification (FASE 3 & FL-P11).\n    #[allow(clippy::too_many_arguments)]\n    pub fn execute_with_capability<FExec, FVerify>(\n        &self,\n        capability: &ActionCapability,\n        audience: &str,\n        current_epoch: u64,\n        execute_fn: FExec,\n        independent_verifier_fn: FVerify,\n    ) -> Result<EffectState, RejectReason>\n    where\n        FExec: FnOnce() -> Result<[u8; 32], FailureReason>,\n        FVerify: FnOnce() -> Result<[u8; 32], FailureReason>,\n    {\n        let parse_hex32 = |s: &str| -> Result<[u8; 32], RejectReason> {\n            let b = hex::decode(s.trim()).map_err(|_| RejectReason::StaleCapability)?;\n            if b.len() == 32 {\n                let mut arr = [0u8; 32];\n                arr.copy_from_slice(&b);\n                Ok(arr)\n            } else {\n                Err(RejectReason::StaleCapability)\n            }\n        };\n\n        let cap_id = parse_hex32(&capability.capability_id)?;\n        let args_digest = parse_hex32(&capability.argument_digest)?;\n\n        let mut guard = self\n            .guard_state\n            .lock()\n            .map_err(|_| RejectReason::PolicyDenied(\"GUARD_MUTEX_POISONED\".into()))?;\n        let (_, state) = guard.broker.execute_and_verify_skill_effect(\n            &cap_id,\n            audience,\n            &capability.project_id,\n            &capability.target_resource,\n            &args_digest,\n            current_epoch,\n            execute_fn,\n            independent_verifier_fn,\n        )?;\n        Ok(state)"
+    },
+    {
+      "path": "crates/babylon-skills-mcp/src/lib.rs",
+      "sha256": "789611513b90d1dfee802d49ef3914379369b0f9503ac468e5688c04d1f64b98",
+      "start_line": 1978,
+      "end_line": 1998,
+      "excerpt": "            \"tools/call\" => {\n                let tool_name = params.get(\"name\").and_then(Value::as_str).unwrap_or(\"\");\n                let tool_args = params\n                    .get(\"arguments\")\n                    .and_then(Value::as_object)\n                    .cloned()\n                    .unwrap_or_default();\n                match tool_name {\n                    \"skills.discover\" => self.handle_skills_discover(&tool_args),\n                    \"skills.inspect\" => self.handle_skills_inspect(&tool_args),\n                    \"skills.propose_effect\" => self.handle_skills_propose_effect(&tool_args),\n                    other => json!({\n                        \"isError\": true,\n                        \"status\": \"DENIED\",\n                        \"error\": format!(\"Unknown or unexposed gateway tool: {other}\")\n                    }),\n                }\n            }\n            \"skills.discover\" => self.handle_skills_discover(&params),\n            \"skills.inspect\" => self.handle_skills_inspect(&params),\n            \"skills.propose_effect\" => self.handle_skills_propose_effect(&params),"
+    },
+    {
+      "path": "crates/babylon-skills-mcp/src/lib.rs",
+      "sha256": "789611513b90d1dfee802d49ef3914379369b0f9503ac468e5688c04d1f64b98",
+      "start_line": 1208,
+      "end_line": 1252,
+      "excerpt": "    /// Configure a project allowlist for `Visible(s, p)` filtering.\n    pub fn set_project_allowlist<I, S>(&self, project_id: &str, allowed_skills: I)\n    where\n        I: IntoIterator<Item = S>,\n        S: Into<String>,\n    {\n        if let Ok(mut guard) = self.guard_state.lock() {\n            guard.project_allowlists.insert(\n                project_id.to_string(),\n                allowed_skills.into_iter().map(Into::into).collect(),\n            );\n        }\n    }\n\n    /// Record an out-of-band human approval for a specific `(project_id, nonce)` invocation.\n    pub fn approve_invocation(&self, project_id: &str, nonce: &str) {\n        if let Ok(mut guard) = self.guard_state.lock() {\n            guard\n                .human_approved_nonces\n                .insert((project_id.to_string(), nonce.to_string()));\n        }\n    }\n\n    /// Access the underlying immutable snapshot.\n    pub fn snapshot(&self) -> &ImmutableSkillsSnapshot {\n        &self.snapshot\n    }\n\n    /// Access the active `SkillsLockfile`.\n    pub fn lockfile(&self) -> &SkillsLockfile {\n        &self.lockfile\n    }\n\n    /// Validate whether a skill is visible to `project_id` (`Visible(s, p)`).\n    fn is_skill_visible(&self, project_id: &str, skill_id: &str) -> bool {\n        if !self.lockfile.skills.contains_key(skill_id) {\n            return false;\n        }\n        if let Ok(guard) = self.guard_state.lock() {\n            if let Some(allowlist) = guard.project_allowlists.get(project_id) {\n                return allowlist.contains(skill_id);\n            }\n        }\n        true\n    }"
+    },
+    {
+      "path": "crates/babylon-skills-mcp/src/lib.rs",
+      "sha256": "789611513b90d1dfee802d49ef3914379369b0f9503ac468e5688c04d1f64b98",
+      "start_line": 1949,
+      "end_line": 1959,
+      "excerpt": "    /// Process a single JSON-RPC 2.0 request and return a JSON-RPC 2.0 response.\n    pub fn process_request(&self, request: &Value) -> Option<Value> {\n        let method = request.get(\"method\").and_then(Value::as_str).unwrap_or(\"\");\n        let id = request.get(\"id\").cloned();\n        let params = request\n            .get(\"params\")\n            .and_then(Value::as_object)\n            .cloned()\n            .unwrap_or_default();\n\n        let result = match method {"
+    },
+    {
+      "path": "crates/babylon-skills-mcp/src/lib.rs",
+      "sha256": "789611513b90d1dfee802d49ef3914379369b0f9503ac468e5688c04d1f64b98",
+      "start_line": 2050,
+      "end_line": 2105,
+      "excerpt": "            \"skills/get\" => {\n                let id_str = params\n                    .get(\"uri\")\n                    .or_else(|| params.get(\"name\"))\n                    .and_then(Value::as_str)\n                    .unwrap_or(\"\");\n                if let Some(snap) = self.snapshot.resolve(id_str) {\n                    let res_list: Vec<Value> = snap\n                        .resources\n                        .iter()\n                        .map(|r| {\n                            json!({\n                                \"path\": r.relative_path,\n                                \"uri\": r.uri,\n                                \"mimeType\": r.mime_type,\n                                \"size\": r.size_bytes,\n                                \"digest\": format!(\"sha256:{}\", r.sha256_hex)\n                            })\n                        })\n                        .collect();\n                    json!({\n                        \"isError\": false,\n                        \"skill\": {\n                            \"name\": snap.name,\n                            \"canonical_alias\": snap.canonical_alias,\n                            \"version\": snap.version,\n                            \"display_name\": snap.display_name,\n                            \"uri\": snap.uri,\n                            \"description\": snap.description,\n                            \"role\": snap.role,\n                            \"scope\": snap.scope,\n                            \"tier\": snap.tier,\n                            \"category\": snap.category,\n                            \"manifest_sha256\": format!(\"sha256:{}\", snap.manifest_sha256_hex),\n                            \"tool_identity_hash\": snap.tool_identity_hash,\n                            \"effect_profile\": snap.effect_profile,\n                            \"guard_invariants\": snap.guard_invariants,\n                            \"resources\": res_list\n                        }\n                    })\n                } else {\n                    json!({\n                        \"isError\": true,\n                        \"skill\": Value::Null,\n                        \"error\": format!(\"Unknown skill: {id_str}\")\n                    })\n                }\n            }\n            \"resources/read\" => {\n                let uri = params.get(\"uri\").and_then(Value::as_str).unwrap_or(\"\");\n                if let Some(res) = self.snapshot.read_resource(uri) {\n                    json!({\n                        \"contents\": [{\n                            \"uri\": uri,\n                            \"mimeType\": res.mime_type,\n                            \"text\": res.text,"
+    },
+    {
+      "path": "crates/babylon-skills-mcp/src/lib.rs",
+      "sha256": "789611513b90d1dfee802d49ef3914379369b0f9503ac468e5688c04d1f64b98",
+      "start_line": 2123,
+      "end_line": 2172,
+      "excerpt": "            \"prompts/list\" => {\n                let mut prompts = Vec::new();\n                for sname in &self.snapshot.workspace_skill_names {\n                    if let Some(snap) = self.snapshot.skills_by_name.get(sname) {\n                        let primary = if self.use_canonical_names {\n                            &snap.canonical_alias\n                        } else {\n                            &snap.name\n                        };\n                        prompts.push(json!({\n                            \"name\": primary,\n                            \"canonical_alias\": snap.canonical_alias,\n                            \"legacy_name\": snap.name,\n                            \"description\": format!(\"[{}] {}\", snap.canonical_alias, snap.description),\n                            \"arguments\": [{\n                                \"name\": \"task\",\n                                \"description\": \"Optional task or target context to execute with this CORTEX skill.\",\n                                \"required\": false\n                            }]\n                        }));\n                    }\n                }\n                json!({ \"prompts\": prompts })\n            }\n            \"prompts/get\" => {\n                let target = params.get(\"name\").and_then(Value::as_str).unwrap_or(\"\");\n                let task_arg = params\n                    .get(\"arguments\")\n                    .and_then(Value::as_object)\n                    .and_then(|a| a.get(\"task\"))\n                    .and_then(Value::as_str)\n                    .unwrap_or(\"\")\n                    .trim();\n                if let Some(snap) = self.snapshot.resolve(target) {\n                    let mut body = snap.skill_md_text.clone().unwrap_or_else(|| {\n                        format!(\n                            \"# CORTEX Skill: {}\\n- Canonical Alias: `{}` (ID: `{}`)\\n- Role Triad: `{}` | Tier: `{}` | Scope: `{}`\\n- Description: {}\\n\",\n                            snap.display_name, snap.canonical_alias, snap.name, snap.role, snap.tier, snap.scope, snap.description\n                        )\n                    });\n                    if !task_arg.is_empty() {\n                        body.push_str(&format!(\"\\n\\n## Active Operator Task\\n{task_arg}\\n\"));\n                    }\n                    json!({\n                        \"description\": snap.description,\n                        \"messages\": [{\n                            \"role\": \"user\",\n                            \"content\": { \"type\": \"text\", \"text\": body }\n                        }]\n                    })"
+    },
+    {
+      "path": "scripts/c5_quality_gates/run_cache_audit.py",
+      "sha256": "952272523f57d6870a88dbfae5cad94e7402a530346d79415a47a51efceb34e9",
+      "start_line": 15,
+      "end_line": 38,
+      "excerpt": "def run_command(cmd, cwd=None):\n    print(f\"[*] Executing: {' '.join(cmd)}\")\n    result = subprocess.run(cmd, cwd=cwd, text=True, capture_output=True)\n    if result.returncode != 0:\n        print(f\"[ERROR] Command failed with code {result.returncode}\")\n        print(result.stderr)\n        sys.exit(result.returncode)\n    return result.stdout\n\ndef main() -> None:\n    workspace_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))\n    test_src = os.path.join(workspace_dir, \"tests\", \"cache_kinetic_benchmark.cpp\")\n    test_bin = os.path.join(workspace_dir, \"tests\", \"cache_kinetic_benchmark_bin\")\n\n    print(\"[*] Compiling KINETIC ENGINE benchmark (C++20, -O3)...\")\n    compile_cmd = [\n        \"clang++\",\n        \"-O3\",\n        \"-std=c++20\",\n        \"-pthread\",\n        test_src,\n        \"-o\", test_bin\n    ]\n    run_command(compile_cmd)"
+    },
+    {
+      "path": "tests/cache_kinetic_benchmark.cpp",
+      "sha256": "e9a4f7906c7b4b00538f655d9983476a934ed4b12082c291babc52a4bce91e09",
+      "start_line": 160,
+      "end_line": 175,
+      "excerpt": "int main(int argc, char** argv) {\n    std::size_t total_ops = 10'000'000;\n    if (argc > 1) {\n        total_ops = std::stoull(argv[1]);\n    }\n\n    std::cout << \"[KINETIC ENGINE] INICIANDO BENCHMARK DE TOPOLOGÍA (Xi-Exergy)\\n\\n\";\n\n    // 1. Variante Degradada (False Sharing activo)\n    RunBenchmark<false>(\"MODO DEGRADADO (False Sharing L1 Cache)\", total_ops);\n\n    // 2. Variante Kinetic (Aislamiento Cache Line)\n    RunBenchmark<true>(\"MODO KINETIC (AX-CONC-01 Aislamiento)\", total_ops);\n\n    return 0;\n}"
+    },
+    {
+      "path": "scripts/c5_quality_gates/run_cache_audit.py",
+      "sha256": "952272523f57d6870a88dbfae5cad94e7402a530346d79415a47a51efceb34e9",
+      "start_line": 42,
+      "end_line": 59,
+      "excerpt": "    try:\n        output = run_command([test_bin, \"10000000\"])\n        print(\"\\n\" + \"=\"*80)\n        print(output)\n        print(\"=\"*80 + \"\\n\")\n        \n        # Guardar en reporte\n        report_path = os.path.join(workspace_dir, \"KINETIC_CACHE_AUDIT.md\")\n        with open(report_path, \"w\") as f:\n            f.write(\"# KINETIC ENGINE: False Sharing Mitigation Audit\\n\\n\")\n            f.write(\"## Empirical Results (macOS ARM64)\\n\\n\")\n            f.write(\"```text\\n\")\n            f.write(output)\n            f.write(\"```\\n\\n\")\n            f.write(\"## Conclusion\\n\")\n            f.write(\"The KINETIC Mode (with strict 64-byte `alignas` isolation) completely mitigates the L1 Cache False Sharing observed in the DEGRADED mode. This proves the thermodynamic efficiency and technical patentability of the topological structural compression.\\n\")\n            \n        print(f\"[*] Audit report generated at: {report_path}\")"
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/anergy-purge-protocol/scripts/anergy_purge.py",
+      "sha256": "82b6881e3cc765b82d70814a477beaa7e46c3b074c7485a843b6baf303e16253",
+      "start_line": 39,
+      "end_line": 53,
+      "excerpt": "CANONICAL_PROTECTED_DIRS = [\n    \"babylon-web\",\n    \"apps/web\",\n    \"apps/babylon60-ide\",\n    \"remotion\",\n    \"ley_menores_remotion\",\n    \"sota_documentary_remotion\",\n    \"strike-rs/.venv\",\n    \".uv_python\",\n    \"youtube-research-remotion\",\n    \"cortex-persist\",\n    \"02_CORTEX_ENGINE/cortex\",\n    \"data/cortex_memory.db\",\n    \"artifact_bundle_v3\",\n]"
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/anergy-purge-protocol/scripts/anergy_purge.py",
+      "sha256": "82b6881e3cc765b82d70814a477beaa7e46c3b074c7485a843b6baf303e16253",
+      "start_line": 178,
+      "end_line": 190,
+      "excerpt": "    # 6. CLASE B — SQLite WAL Huérfanos (*.db-shm, *.db-wal)\n    for root, dirs, files in os.walk(workspace_path):\n        if any(p in root for p in [\".venv\", \"node_modules\", \".git\"]):\n            continue\n        for f in files:\n            if f.endswith(\".db-shm\") or f.endswith(\".db-wal\"):\n                fp = Path(root) / f\n                if fp.is_file():\n                    sz = fp.stat().st_size\n                    stats[\"wal_orphans\"] += 1\n                    stats[\"wal_bytes\"] += sz\n                    if not dry_run:\n                        fp.unlink(missing_ok=True)"
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/anergy-purge-protocol/scripts/anergy_purge.py",
+      "sha256": "82b6881e3cc765b82d70814a477beaa7e46c3b074c7485a843b6baf303e16253",
+      "start_line": 241,
+      "end_line": 257,
+      "excerpt": "def main():\n    parser = argparse.ArgumentParser(description=\"Purga de anergía de alta exergía.\")\n    parser.add_argument(\n        \"--workspace\",\n        type=Path,\n        default=Path.cwd(),\n        help=\"Ruta raíz del workspace a sanear (default: $PWD)\",\n    )\n    parser.add_argument(\n        \"--dry-run\",\n        action=\"store_true\",\n        help=\"Calcular telemetría sin mutar o eliminar archivos.\",\n    )\n    args = parser.parse_args()\n\n    ws = args.workspace.resolve()\n    stats = purge_anergy(ws, dry_run=args.dry_run)"
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/anergy-purge-protocol/scripts/anergy_purge.py",
+      "sha256": "82b6881e3cc765b82d70814a477beaa7e46c3b074c7485a843b6baf303e16253",
+      "start_line": 193,
+      "end_line": 210,
+      "excerpt": "    db_path = Path.home() / \".gemini\" / \"antigravity\" / \"conversation_summaries.db\"\n    if db_path.is_file():\n        try:\n            conn = sqlite3.connect(db_path)\n            cur = conn.cursor()\n            cur.execute(\n                \"SELECT count(*) FROM conversation_summaries WHERE status = 'CASCADE_RUN_STATUS_RUNNING' OR not_fully_idle = 1\"\n            )\n            count = cur.fetchone()[0]\n            stats[\"ghost_listeners_reset\"] = count\n            if not dry_run and count > 0:\n                cur.execute(\n                    \"UPDATE conversation_summaries SET status = 'CASCADE_RUN_STATUS_IDLE', not_fully_idle = 0 WHERE status = 'CASCADE_RUN_STATUS_RUNNING' OR not_fully_idle = 1\"\n                )\n                conn.commit()\n            conn.close()\n        except Exception as e:\n            print(f\"[WARN] Error al acceder a conversation_summaries.db: {e}\", file=sys.stderr)"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/bft/bounty_ring_dispatcher.py",
+      "sha256": "0bb4feab793ed3ca3281e6e57730e920bf66d7c1ad60317f9af31c1543a07ece",
+      "start_line": 29,
+      "end_line": 58,
+      "excerpt": "@dataclass\nclass BountyDispatchTelemetry:\n    \"\"\"Métricas operativas de la ruta de despacho lock-free.\"\"\"\n\n    total_frames_received: int = 0\n    total_dispatched: int = 0\n    total_corrupted_dropped: int = 0\n    evm_dispatches: int = 0\n    native_dispatches: int = 0\n    ai_dispatches: int = 0\n    general_dispatches: int = 0\n\n\nclass BountyRingDispatcher:\n    \"\"\"Despachador en memoria para eventos B60IPC segregados por vector causal.\"\"\"\n\n    def __init__(self, queue_capacity: int = 2_048, *, mac_key: bytes | None = None) -> None:\n        self._mac_key = require_ipc_mac_key(mac_key)\n        self._last_lamport = 0\n        self._capacity = queue_capacity\n        self._telemetry = BountyDispatchTelemetry()\n\n        # Bridge C-FFI para persistencia causal lock-free (64B)\n        self._ffi_writer = SharedManifestFFIWriter()\n\n        # Colas en memoria segregadas por dominio canónico\n        self._evm_queue: Deque[BountyAdvisory] = deque(maxlen=self._capacity)\n        self._native_queue: Deque[BountyAdvisory] = deque(maxlen=self._capacity)\n        self._ai_queue: Deque[BountyAdvisory] = deque(maxlen=self._capacity)\n        self._general_queue: Deque[BountyAdvisory] = deque(maxlen=self._capacity)"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/bft/bounty_ring_dispatcher.py",
+      "sha256": "0bb4feab793ed3ca3281e6e57730e920bf66d7c1ad60317f9af31c1543a07ece",
+      "start_line": 70,
+      "end_line": 110,
+      "excerpt": "    def dispatch_frame(self, raw_frame: bytes) -> Optional[BountyAdvisory]:\n        \"\"\"Desempaqueta una trama B60IPC y la enruta a su atractor causal.\"\"\"\n        self._telemetry.total_frames_received += 1\n\n        try:\n            sender, recipient, payload, lamport_t = unpack_agent_message(raw_frame, mac_key=self._mac_key)\n            if sender != \"bounty_feed_transducer\" or recipient != \"bounty_ring_dispatcher\":\n                raise ValueError(\"B60IPC channel identity mismatch\")\n            if lamport_t <= self._last_lamport:\n                raise ValueError(\"B60IPC stale or replayed logical tick\")\n            advisory = BountyAdvisory.from_dict(payload)\n        except Exception as exc:\n            self._telemetry.total_corrupted_dropped += 1\n            logger.warning(\"Trama B60IPC corrupta rechazada sin pánico: %s\", exc)\n            return None\n\n        # Anclaje C-FFI Termodinámico (Lock-Free Seqlock)\n        payload_hash = blake3(raw_frame).digest()\n        if not self._ffi_writer.publish(lamport_t, payload_hash):\n            self._telemetry.total_corrupted_dropped += 1\n            return None\n\n        self._last_lamport = lamport_t\n        self._route_advisory(advisory)\n        self._telemetry.total_dispatched += 1\n        return advisory\n\n    def _route_advisory(self, advisory: BountyAdvisory) -> None:\n        \"\"\"Enruta la oportunidad a la cola del subsistema correspondiente.\"\"\"\n        if advisory.domain == BountyDomain.DOMAIN_EVM:\n            self._evm_queue.append(advisory)\n            self._telemetry.evm_dispatches += 1\n        elif advisory.domain == BountyDomain.DOMAIN_NATIVE:\n            self._native_queue.append(advisory)\n            self._telemetry.native_dispatches += 1\n        elif advisory.domain == BountyDomain.DOMAIN_AI:\n            self._ai_queue.append(advisory)\n            self._telemetry.ai_dispatches += 1\n        else:\n            self._general_queue.append(advisory)\n            self._telemetry.general_dispatches += 1"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py",
+      "sha256": "24df531cfbb817964c4da27b4220351c4080eb4ab9b54c789b11a16d7b07909b",
+      "start_line": 102,
+      "end_line": 123,
+      "excerpt": "        # 1. Fase de Ingestión\n        frames: List[bytes] = []\n        if synthetic_items:\n            frames = self.transducer.ingest_raw_advisories(synthetic_items)\n        elif client:\n            frames = await self.transducer.poll_live_network(client, per_page=per_page)\n\n        # 2. Fase de Despacho en memoria lock-free\n        for f in frames:\n            self.dispatcher.dispatch_frame(f)\n\n        pre_drain_depths = self.dispatcher.get_queue_depths()\n\n        # 3. Fase de Drenaje y Especialistas de Dominio\n        evm_batch = self.dispatcher.drain_domain(BountyDomain.DOMAIN_EVM)\n        evm_results = self.defi_scraper.process_advisories(evm_batch) if evm_batch else []\n\n        native_batch = self.dispatcher.drain_domain(BountyDomain.DOMAIN_NATIVE)\n        native_results = self.webkit_connector.process_advisories(native_batch) if native_batch else []\n\n        ai_batch = self.dispatcher.drain_domain(BountyDomain.DOMAIN_AI)\n        ai_results = self.ai_sentinel.process_advisories(ai_batch) if ai_batch else []"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/crypto/rekor_client.py",
+      "sha256": "e37c6a359b59b24b841014d15487356b08e080500571f39503002dc51daa2321",
+      "start_line": 36,
+      "end_line": 65,
+      "excerpt": "    def anchor_payload(self, payload_hash: str, signature_b64: str, public_key_pem: str) -> RekorAnchorResult | None:\n        \"\"\"\n        Submits a hashed record (hashedrekord) to Rekor to prove existence at a point in time.\n\n        Args:\n            payload_hash: The SHA-256 hash of the payload (e.g., Merkle Root or Entry Hash).\n            signature_b64: Base64 encoded signature of the payload.\n            public_key_pem: PEM encoded public key.\n\n        Returns:\n            The transparency log entry containing UUID and logIndex, or None if it fails.\n        \"\"\"\n        # Hashedrekord schema version 0.0.1\n        data = {\n            \"kind\": \"hashedrekord\",\n            \"apiVersion\": \"0.0.1\",\n            \"spec\": {\n                \"signature\": {\n                    \"content\": signature_b64,\n                    \"publicKey\": {\"content\": base64.b64encode(public_key_pem.encode(\"utf-8\")).decode(\"utf-8\")},\n                },\n                \"data\": {\"hash\": {\"algorithm\": \"sha256\", \"value\": payload_hash}},\n            },\n        }\n\n        req = urllib.request.Request(\n            f\"{self.rekor_url}/api/v1/log/entries\",\n            data=json.dumps(data).encode(\"utf-8\"),\n            headers={\"Content-Type\": \"application/json\", \"Accept\": \"application/json\"},\n            method=\"POST\","
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+      "sha256": "c0dddf3e209bb945fa1f49a3d372b66b18968ebfcc2ea864ce35b26ebb16b237",
+      "start_line": 329,
+      "end_line": 353,
+      "excerpt": "        from nacl.signing import SigningKey\n\n        seed = seed_hex or os.environ.get(\"BABYLON60_SIGNING_SEED\", \"\").strip()\n        if seed:\n            try:\n                sk = SigningKey(bytes.fromhex(seed))\n            except Exception:\n                sk = SigningKey.generate()\n        else:\n            sk = SigningKey.generate()\n\n        signed = sk.sign(head_json)\n        sig_b64 = base64.b64encode(signed.signature).decode(\"utf-8\")\n        pk_b64 = base64.b64encode(sk.verify_key.encode()).decode(\"utf-8\")\n\n        if rekor_client is None:\n            try:\n                from babylon60.crypto.rekor_client import RekorClient\n\n                rekor_client = RekorClient()\n            except ImportError:\n                return None\n\n        anchor_res = rekor_client.anchor_payload(payload_hash, sig_b64, pk_b64)\n        return dict(anchor_res) if anchor_res else None"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py",
+      "sha256": "15292238c8f9b7e87f70ce0b4e8256569bb1cc612497102afa5b373092e85db6",
+      "start_line": 816,
+      "end_line": 840,
+      "excerpt": "        from nacl.signing import SigningKey\n\n        seed = seed_hex or os.environ.get(\"BABYLON60_SIGNING_SEED\", \"\").strip()\n        if seed:\n            try:\n                sk = SigningKey(bytes.fromhex(seed))\n            except Exception:\n                sk = SigningKey.generate()\n        else:\n            sk = SigningKey.generate()\n\n        signed = sk.sign(head_json)\n        sig_b64 = base64.b64encode(signed.signature).decode(\"utf-8\")\n        pk_b64 = base64.b64encode(sk.verify_key.encode()).decode(\"utf-8\")\n\n        if rekor_client is None:\n            try:\n                from babylon60.crypto.rekor_client import RekorClient\n\n                rekor_client = RekorClient()\n            except ImportError:\n                return None\n\n        anchor_res = rekor_client.anchor_payload(payload_hash, sig_b64, pk_b64)\n        return dict(anchor_res) if anchor_res else None"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/primitives/disintegration_matrix.py",
+      "sha256": "e18caeb88b60d3642ca06b6438c0f9a7249b0e29b647c4b824ff8e42de4a73ed",
+      "start_line": 33,
+      "end_line": 63,
+      "excerpt": "def disintegrate(p: dict[str, float], F: dict[str, dict[str, float]], y: str) -> dict[str, float]:\n    \"\"\"\n    f†_p(y)(x) = p(x)·F[x,y] / Σ_x' p(x')·F[x',y]\n    Computes the posterior distribution.\n    Enforces strict structural invariants.\n    \"\"\"\n    q = pushforward(p, F)\n    qy = q.get(y, 0.0)\n\n    if qy <= TOL:\n        raise ValueError(f\"hallucinated: observation '{y}' outside pushforward support (q(y)=0).\")\n\n    posterior = {}\n    p_supp = support(p)\n\n    # Iterate strictly over prior support to ensure invariant mechanically\n    for x in p_supp:\n        px = p[x]\n        Fx = F.get(x, {})\n        Fxy = Fx.get(y, 0.0)\n\n        numerator = px * Fxy\n        if numerator > 0:\n            posterior[x] = numerator / qy\n\n    # Explicit invariant check: posterior support ⊆ prior support\n    post_supp = support(posterior)\n    if not post_supp.issubset(p_supp):\n        raise ValueError(\"hallucinated: posterior assigns mass outside prior support.\")\n\n    return posterior"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/primitives/disintegration_matrix.py",
+      "sha256": "e18caeb88b60d3642ca06b6438c0f9a7249b0e29b647c4b824ff8e42de4a73ed",
+      "start_line": 87,
+      "end_line": 106,
+      "excerpt": "def verify_symmetry(\n    p: dict[str, float], F: dict[str, dict[str, float]], D: dict[str, dict[str, float]], tol: float = 1e-6\n) -> bool:\n    \"\"\"\n    Verifies the Joint Probability Symmetry (AX-BD-1):\n    p ⊗ f = (p·f) ⊗ f†_p\n    \"\"\"\n    q = pushforward(p, F)\n\n    for x, px in p.items():\n        for y, Fxy in F.get(x, {}).items():\n            joint_left = px * Fxy\n\n            qy = q.get(y, 0.0)\n            Dyx = D.get(y, {}).get(x, 0.0)\n            joint_right = qy * Dyx\n\n            if abs(joint_left - joint_right) > tol:\n                return False\n    return True"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/primitives/__init__.py",
+      "sha256": "50e7384d2af0cba5e87ce5bb438b4863ce4bd4b3b6f23d42ecb06f689ca6d7d6",
+      "start_line": 5,
+      "end_line": 9,
+      "excerpt": "from .async_db import AsyncConnection, AsyncCursor, connect\nfrom .cbor import dumps as cbor_dumps, loads as cbor_loads\nfrom .disintegration_matrix import disintegrate, disintegration_matrix, pushforward, support, verify_symmetry\nfrom .matrix import Matrix, Vector, dict_to_vector, vector_to_dict\nfrom .tonnetz_monitor import compute_shannon_entropy, evaluate_tonnetz_oversight"
+    },
+    {
+      "path": "tests/babylon60/primitives/test_disintegration_matrix.py",
+      "sha256": "08574af3e0a80f25f1d13eb2e4d3334e32c15c2f4ee454058de15dccb05b47b4",
+      "start_line": 18,
+      "end_line": 26,
+      "excerpt": "    # 2. Test disintegration\n    post_obs1 = disintegrate(p, F, \"obs_1\")\n    assert \"state_C\" not in post_obs1 or post_obs1[\"state_C\"] == 0.0\n\n    # 3. Test full matrix\n    D = disintegration_matrix(p, F)\n\n    # 4. Verify AX-BD-1 Symmetry Invariant\n    assert verify_symmetry(p, F, D) is True"
+    },
+    {
+      "path": "01_KISH_ENGINE/services/email_inbound/worker.js",
+      "sha256": "0e7c5066a1765789be6bdf28d4e16e7e1cfda63d3c47e276723e5eb276ce8719",
+      "start_line": 44,
+      "end_line": 50,
+      "excerpt": "export default {\n  async email(message, env, ctx) {\n    const webhookUrl = env.WEBHOOK_URL || 'https://api.babylon60.com/api/v1/inbound-email';\n    const webhookSecret = env.WEBHOOK_SECRET;\n    if (!webhookSecret) {\n      throw new Error('WEBHOOK_SECRET is required but not configured in the environment.');\n    }"
+    },
+    {
+      "path": "01_KISH_ENGINE/services/email_inbound/worker.js",
+      "sha256": "0e7c5066a1765789be6bdf28d4e16e7e1cfda63d3c47e276723e5eb276ce8719",
+      "start_line": 98,
+      "end_line": 138,
+      "excerpt": "    // Deliver to Webhook with retry logic (up to 3 attempts)\n    let attempts = 0;\n    let delivered = false;\n    let lastError = null;\n\n    while (attempts < 3 && !delivered) {\n      attempts++;\n      try {\n        const response = await fetch(webhookUrl, {\n          method: 'POST',\n          headers: {\n            'Content-Type': 'application/json',\n            'X-Babylon-Signature': signature,\n            'Authorization': `Bearer ${webhookSecret}`,\n            'User-Agent': 'Cloudflare-Email-Worker/BABYLON-60-v2',\n          },\n          body: payloadStr,\n        });\n\n        if (response.ok) {\n          delivered = true;\n          console.log(`[Attempt ${attempts}] Email successfully delivered to Webhook for ${message.to}`);\n        } else {\n          lastError = `Status ${response.status}: ${await response.text()}`;\n          console.warn(`[Attempt ${attempts}] Webhook delivery status ${response.status}. Retrying...`);\n        }\n      } catch (err) {\n        lastError = err.message;\n        console.warn(`[Attempt ${attempts}] Webhook fetch error: ${err.message}. Retrying...`);\n      }\n\n      if (!delivered && attempts < 3) {\n        // Disipación de Anergía (Aforismo 3): Backoff térmico para evitar colapso de endpoint\n        await new Promise(resolve => setTimeout(resolve, 1000 * attempts));\n      }\n    }\n\n    if (!delivered) {\n      console.error(`Failed to deliver email after ${attempts} attempts. Last error: ${lastError}`);\n    }\n  }"
+    },
+    {
+      "path": "docs/01_spec/spec_technical.md",
+      "sha256": "a793fa1cb821f6a9211941f555f4efbca4989f50d95056f890f514dbeff444b4",
+      "start_line": 78,
+      "end_line": 87,
+      "excerpt": "## 3. Termodinámica de Concurrencia y Consenso BFT\n\n### 3.1 Blindaje Anti-Deadlock\n- **Configuración de Conexión:**\n  ```sql\n  PRAGMA journal_mode = WAL;\n  PRAGMA busy_timeout = 5000;\n  PRAGMA synchronous = NORMAL;\n  ```\n- **Concurrencia Single-Writer / Multi-Reader:** Múltiples lectores concurrentes en memoria; escritor único serializado con cola BFT."
+    },
+    {
+      "path": ".babylon60rules",
+      "sha256": "896ef66813dae7b753c365db39817a8f144f525dc1ae4f3259660b1f53db557c",
+      "start_line": 14,
+      "end_line": 20,
+      "excerpt": "\n- Separar observación, hipótesis y obligación (`INV_C5_HUME_GUILLOTINE`). Una especificación, compilación o test parcial no certifica el sistema. Toda garantía declarada requiere fuente, ámbito y comprobación reproducible; comunicar fallos como fallos y propiedades pendientes como `NO_VERIFICADO`.\n- Fijar resultado, rutas, restricciones y aceptación antes de editar; conservar los criterios hasta el cierre. Preservar trabajo ajeno. Explorar antes de preguntar, resolver decisiones reversibles autorizadas y continuar el trabajo independiente ante bloqueos acotados. Aplicar el [procedimiento](AGENTS.md#ejecución).\n- Cargar [contratos técnicos](docs/03_guides/agent_contracts.md) según el cambio. Mantener SQLite/WAL fuera de la ruta caliente, persistencia transaccional con `synchronous = FULL` y hashes de consenso basados en `logical_tick`.\n- Separar motor ejecutable, corpus teórico y activos privados GTM/OpSec. Conservar evidencia necesaria con retención acotada; no almacenar deliberaciones internas del LLM. Las perspectivas filosóficas y preferencias personales son contexto opcional solicitado, no obligaciones generales ni hechos demostrados.\n- `.cursorrules`, `.windsurfrules`, `.codexrules`, `CLAUDE.md`, `.clinerules`, `.roorules` y `.github/copilot-instructions.md` deben ser symlinks directos a este archivo. Preservar diferencias antes de reemplazar archivos regulares.\n"
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/ledger.rs",
+      "sha256": "800aa62d709a86659527b83b732f426a109446ebf83732e45c1f0cf609f0e794",
+      "start_line": 52,
+      "end_line": 59,
+      "excerpt": "impl MasterLedger {\n    pub fn new(db_path: &str) -> Result<Self> {\n        let conn = Connection::open(db_path)?;\n        \n        conn.pragma_update(None, \"journal_mode\", \"WAL\")?;\n        conn.pragma_update(None, \"synchronous\", \"FULL\")?;\n        conn.pragma_update(None, \"foreign_keys\", \"ON\")?;\n        conn.busy_timeout(Duration::from_millis(5000))?;"
+    },
+    {
+      "path": "examples/poc_stress_manifest_spmc.rs",
+      "sha256": "c2312e49af3e57b409fbc8bf8a7e00b1721fea440d62eb57f0d1427b300b0fea",
+      "start_line": 60,
+      "end_line": 100,
+      "excerpt": "\n    println!(\"  > Tamaño de estructura:      {} B\", size_of::<SharedManifest>());\n    println!(\"  > Alineación requerida:      {} B\", align_of::<SharedManifest>());\n    println!(\"  > Dirección en memoria:      0x{:016X}\", ptr);\n    println!(\"  > Offset dentro de caché:    {} B (Debe ser 0)\", ptr % 64);\n\n    assert_eq!(size_of::<SharedManifest>(), 64, \"INV-1 FAIL: Size != 64 B\");\n    assert_eq!(align_of::<SharedManifest>(), 64, \"INV-1 FAIL: Align != 64 B\");\n    assert_eq!(ptr % 64, 0, \"INV-1 FAIL: Ptr no alineado a 64 bytes\");\n    println!(\"  [✓] INV-1 Certificado: Cero False Sharing en ARM64 / Apple Silicon.\\n\");\n\n    // ────────────────────────────────────────────────────────────────────────\n    // 1. Línea Base No Contendida (10M operaciones)\n    // ────────────────────────────────────────────────────────────────────────\n    println!(\"[1/4] Evaluando latencias baseline sin contención (10,000,000 iteraciones)...\");\n    manifest.status_flag.store(RUNNING, Ordering::Release);\n\n    // Baseline Productor\n    let write_iters = 10_000_000u64;\n    let t0 = Instant::now();\n    for i in 1..=write_iters {\n        let h = make_hash(i);\n        seqlock::publish(manifest, i, &h);\n    }\n    let write_elapsed = t0.elapsed();\n    let write_ns_op = write_elapsed.as_nanos() as f64 / write_iters as f64;\n    let write_mops = (write_iters as f64 / write_elapsed.as_secs_f64()) / 1_000_000.0;\n    println!(\"  > Productor (Publish):   {:?} ({:.2} ns/op, {:.2} Mops/sec)\", write_elapsed, write_ns_op, write_mops);\n\n    // Baseline Consumidor\n    let read_iters = 10_000_000u64;\n    let t1 = Instant::now();\n    for _ in 1..=read_iters {\n        let res = seqlock::read(manifest);\n        black_box(res);\n    }\n    let read_elapsed = t1.elapsed();\n    let read_ns_op = read_elapsed.as_nanos() as f64 / read_iters as f64;\n    let read_mops = (read_iters as f64 / read_elapsed.as_secs_f64()) / 1_000_000.0;\n    println!(\"  > Consumidor (Read):      {:?} ({:.2} ns/op, {:.2} Mops/sec)\", read_elapsed, read_ns_op, read_mops);\n    println!(\"  [✓] Latencias baseline verificadas en régimen nanosegundo (< 5 ns/op).\\n\");"
+    },
+    {
+      "path": "examples/poc_stress_manifest_spmc.rs",
+      "sha256": "c2312e49af3e57b409fbc8bf8a7e00b1721fea440d62eb57f0d1427b300b0fea",
+      "start_line": 273,
+      "end_line": 309,
+      "excerpt": "    let poison_thread = thread::spawn(move || {\n        let t_start = Instant::now();\n        let mut e = 1000u64;\n        while t_start.elapsed() < Duration::from_millis(50) {\n            let h = make_hash(e);\n            seqlock::publish(manifest, e, &h);\n            e += 1;\n        }\n        manifest.status_flag.store(POISONED, Ordering::Release);\n        manifest.seq.fetch_add(1, Ordering::SeqCst);\n    });\n\n    poison_thread.join().expect(\"Poison injector panicked\");\n\n    let t_poison_start = Instant::now();\n    for w in workers {\n        w.join().expect(\"Worker thread panicked during poison\");\n    }\n    let poison_propagation_time = t_poison_start.elapsed();\n\n    let confirmed_halts = halt_detected_count.load(Ordering::SeqCst);\n    println!(\"  > Hilos en ejecución:           {}\", num_workers);\n    println!(\"  > Hilos con Fail-Stop activo:   {} / {}\", confirmed_halts, num_workers);\n    println!(\"  > Tiempo de propagación POISON: {:?}\", poison_propagation_time);\n    assert_eq!(confirmed_halts, num_workers as u64, \"Fallo: No todos los hilos detectaron el estado POISONED\");\n    println!(\"  [✓] INV-4 Certificado: Transición determinista hacia atractor de parada en < 1 ms.\\n\");\n\n    // ────────────────────────────────────────────────────────────────────────\n    // 4. Síntesis y Veredicto Final\n    // ────────────────────────────────────────────────────────────────────────\n    println!(\"===========================================================================\");\n    println!(\" 🛡️  VEREDICTO DE ESTRÉS: KERNEL SHAREDMANIFEST RESILIENTE (ALTA EXERGÍA)\");\n    println!(\"===========================================================================\");\n    println!(\"  - Conformidad INV-1 (64B Cache Residence) : 100% PASS\");\n    println!(\"  - Conformidad INV-2 (SPMC Zero Torn Reads): 100% PASS (0 errores en 30M ops)\");\n    println!(\"  - Conformidad INV-4 (Deterministic Fail-Stop): 100% PASS\");\n    println!(\"  - Latencia Media en Contención:           Sub-100 nanosegundos\");"
+    },
+    {
+      "path": "scripts/c5_demos/c5_sovereign_compliance_orchestrator.py",
+      "sha256": "f4d3372c3f3cc3a637948d8862be6f745675fce1af0469c3085d958648917860",
+      "start_line": 67,
+      "end_line": 89,
+      "excerpt": "        manifest_data = {\n            \"global_hash\": \"6060c5c5\" + \"0\" * 56,\n            \"operator\": \"Borja (Sovereign Root)\",\n            \"system_id\": \"BABYLON-60-NODE-01\",\n            \"timestamp\": time.time(),\n        }\n        manifest_path = tmp_bundle / \"manifest.json\"\n        with open(manifest_path, \"w\", encoding=\"utf-8\") as f:\n            json.dump(manifest_data, f)\n\n        exporter = EUAIActComplianceExporter(artifact_bundle_path=str(tmp_bundle))\n        cert = exporter.generate_certificate(\n            system_id=\"BABYLON-60-CORE\",\n            operator_name=\"Borja (Sovereign Operator)\",\n            locale=\"es\",\n        )\n        signed_cert = exporter.sign_certificate(cert)\n    finally:\n        shutil.rmtree(tmp_bundle, ignore_errors=True)\n\n    cert_path = ROOT_DIR / \"scripts\" / \"c5_demos\" / \"official_eu_compliance_certificate.json\"\n    with open(cert_path, \"w\", encoding=\"utf-8\") as f:\n        json.dump(signed_cert, f, indent=2, ensure_ascii=False)"
+    },
+    {
+      "path": "scripts/c5_demos/c5_sovereign_compliance_orchestrator.py",
+      "sha256": "f4d3372c3f3cc3a637948d8862be6f745675fce1af0469c3085d958648917860",
+      "start_line": 94,
+      "end_line": 113,
+      "excerpt": "    # 4. Auditoría Técnica Instantánea mediante el Verificador Autónomo de Rust\n    print(\"[4/4] Ejecutando Verificador Autónomo de Conformidad (babylon_verifier_bin)...\")\n    verifier_bin = ROOT_DIR / \"scripts\" / \"c5_demos\" / \"babylon_verifier_bin\"\n    if not verifier_bin.exists():\n        subprocess.run(\n            [\"rustc\", \"-O\", \"-C\", \"opt-level=3\", str(ROOT_DIR / \"scripts\" / \"c5_demos\" / \"c5_verifier_cli.rs\"), \"-o\", str(verifier_bin)],\n            check=True\n        )\n    pack_path = ROOT_DIR / \"scripts\" / \"c5_demos\" / \"eu_ai_act_annex_vi_pack.json\"\n    \n    res_verifier = subprocess.run([str(verifier_bin), \"--pack\", str(pack_path)], capture_output=True, text=True, check=True)\n    print(\"------------------------------------------------------------------------\")\n    for line in res_verifier.stdout.splitlines():\n        if \"PASS\" in line or \"DICTAMEN\" in line or \"MARCADO CE\" in line or \"Tiempo\" in line:\n            print(f\"  {line.strip()}\")\n    print(\"------------------------------------------------------------------------\")\n\n    total_time_ms = (time.perf_counter() - t_start) * 1000\n    print(f\"[+] PIPELINE SOBERANO COMPLETO EN {total_time_ms:.2f} ms.\")\n    print(\"DICTAMEN: La cadena integral Silicio -> Kernel -> Teorema -> Certificado es 100% Conforme.\")"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py",
+      "sha256": "d7747b65250fa8292a301082981ccd89830c53f815dd410dd87bc120becb57e1",
+      "start_line": 133,
+      "end_line": 152,
+      "excerpt": "    def verify_evidence(self, manifest: Dict[str, Any], ledger_path: Optional[str] = None) -> Dict[str, Any]:\n        resolved = ledger_path or self.ledger_path or manifest.get(\"ledger_path\")\n        global_hash = manifest.get(\"global_hash\", \"UNKNOWN_HASH\")\n        result: Dict[str, Any] = {\n            \"ledger_path\": resolved,\n            \"ledger_present\": False,\n            \"integrity_verified\": None,\n            \"ledger_merkle_root\": None,\n            \"manifest_global_hash\": global_hash,\n            \"evidence_match\": None,\n            \"verified\": False,\n            \"detail\": STATUS_UNVERIFIED,\n        }\n\n        if resolved is not None and not isinstance(resolved, (str, os.PathLike)):\n            result[\"detail\"] = \"LEDGER_PATH_INVALID\"\n            return result\n\n        if not resolved:\n            return result"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py",
+      "sha256": "d7747b65250fa8292a301082981ccd89830c53f815dd410dd87bc120becb57e1",
+      "start_line": 241,
+      "end_line": 263,
+      "excerpt": "    def generate_certificate(\n        self,\n        system_id: str,\n        operator_name: str,\n        locale: str = \"es\",\n        ledger_path: Optional[str] = None,\n        validity_days: int = 90,\n    ) -> Dict[str, Any]:\n        \"\"\"Generates a structured compliance certificate localized for target locale/country.\"\"\"\n        t = get_translation(locale)\n        manifest = self.load_manifest()\n        global_hash = manifest.get(\"global_hash\", \"UNKNOWN_HASH\")\n\n        if not global_hash or global_hash == \"UNKNOWN_HASH\":\n            raise ValueError(\n                \"Manifest global_hash is missing or UNKNOWN_HASH. \"\n                \"Cannot generate a compliance certificate without an evidence root.\"\n            )\n\n        is_quarantined = manifest.get(\"_is_quarantine\", False)\n\n        verification = self.verify_evidence(manifest, ledger_path)\n        verified = verification[\"verified\"]"
+    },
+    {
+      "path": "scripts/c5_demos/zk_shm_starvation_stress_test.py",
+      "sha256": "af45696a18a19f8c2d9cdba63aa6ba301e6f16cbc9a8eb3563107f65eb53168e",
+      "start_line": 7,
+      "end_line": 26,
+      "excerpt": "def simulate_syscall_overhead() -> None:\n    \"\"\"Simula el costo termodinámico de un context switch del kernel (Syscall).\"\"\"\n    for _ in range(200):\n        pass\n\ndef simulate_ebpf_rejection(payload: bytes) -> bool:\n    \"\"\"Tesis Previa (eBPF): Paga overhead de syscall, evalúa, paga overhead de SIGKILL.\"\"\"\n    simulate_syscall_overhead()\n    is_valid = hashlib.sha256(payload).hexdigest().startswith(\"00\")\n    if not is_valid:\n        simulate_syscall_overhead() # Fricción penal de rechazo en Ring-0\n        return False\n    return True\n\ndef simulate_shm_starvation(payload: bytes) -> bool:\n    \"\"\"Cambio 2 (ZK-SHM): Lectura de memoria user-space L1. Cero burocracia OS.\"\"\"\n    is_valid = hashlib.sha256(payload).hexdigest().startswith(\"00\")\n    if not is_valid:\n        return False # Rechazo pasivo: se ignora el puntero\n    return True"
+    },
+    {
+      "path": "scripts/c5_demos/zk_shm_starvation_stress_test.py",
+      "sha256": "af45696a18a19f8c2d9cdba63aa6ba301e6f16cbc9a8eb3563107f65eb53168e",
+      "start_line": 28,
+      "end_line": 70,
+      "excerpt": "def stress_test() -> None:\n    print(\"🔥 C5-REAL: Iniciando Auditoría Termodinámica (ZK-SHM vs eBPF) 🔥\")\n    print(f\"Iteraciones (Mensajes de Ataque): {ITERATIONS}\\n\")\n\n    # Payload corrupto determinista\n    payload = b\"corrupted_agent_state_transition\"\n\n    # 1. Topología eBPF (Dirigismo del Kernel)\n    print(\">>> TOPOLOGÍA LEGACY (eBPF Interceptando Syscalls)\")\n    start_ebpf = time.perf_counter()\n    dropped_ebpf = 0\n    for _ in range(ITERATIONS):\n        if not simulate_ebpf_rejection(payload):\n            dropped_ebpf += 1\n    end_ebpf = time.perf_counter()\n\n    # 2. Topología ZK-SHM (Muerte por inanición epistémica)\n    print(\">>> TOPOLOGÍA NUEVA (ZK-SHM Lock-Free Starvation)\")\n    start_shm = time.perf_counter()\n    dropped_shm = 0\n    for _ in range(ITERATIONS):\n        if not simulate_shm_starvation(payload):\n            dropped_shm += 1\n    end_shm = time.perf_counter()\n\n    time_ebpf = end_ebpf - start_ebpf\n    time_shm = end_shm - start_shm\n\n    print(\"\\n[ RESULTADOS DE FALSACIÓN ]\")\n    print(f\"eBPF Total Time: {time_ebpf:.4f}s | Throughput de Rechazo: {ITERATIONS / time_ebpf:,.0f} msgs/sec\")\n    print(\"---\")\n    print(f\"SHM Total Time : {time_shm:.4f}s | Throughput de Rechazo: {ITERATIONS / time_shm:,.0f} msgs/sec\")\n\n    speedup = time_ebpf / time_shm\n    print(f\"\\n⚡ Aceleración Exergética: {speedup:.2f}x\")\n    \n    if speedup > 2:\n        print(\"✅ FALSACIÓN SUPERADA: La topología SHM aniquila la fricción del kernel. El agente corrupto muere por inanición a costo cero.\")\n    else:\n        print(\"❌ FALLO CAUSAL: El aislamiento autopoiético no supera a la burocracia del OS.\")\n\nif __name__ == \"__main__\":\n    stress_test()"
+    },
+    {
+      "path": "scripts/c5_quality_gates/audit_fixer.py",
+      "sha256": "0ec8954f076ca6cf80af3283d100a202aa813135e4f27f57176899610ecb1132",
+      "start_line": 24,
+      "end_line": 50,
+      "excerpt": "MYTHOLOGICAL_REPLACEMENTS = {\n    r\"\\bmagia\\b\": \"determinismo causal\",\n    r\"\\bmagical\\b\": \"deterministic\",\n    r\"\\bmagic\\b\": \"deterministic\",\n    r\"\\boráculo\\b\": \"atestador\",\n    r\"\\boracle\\b\": \"attestor\",\n    r\"\\bBFT\\s*Local\\b\": \"Causal Mesh Attestation\",\n    r\"\\bMagia\\b\": \"Determinismo Causal\",\n    r\"\\bMagical\\b\": \"Deterministic\",\n    r\"\\bMagic\\b\": \"Deterministic\",\n    r\"\\bOráculo\\b\": \"Atestador\",\n    r\"\\bOracle\\b\": \"Attestor\",\n}\n\n\ndef fix_file(filepath, issues) -> bool:\n    try:\n        with open(filepath, \"r\", encoding=\"utf-8\") as f:\n            content = f.read()\n\n        original_content = content\n\n        # 1. Replace Mythological Terms\n        for issue in issues:\n            if issue[\"type\"] == \"MythologicalTerm\":\n                for pattern, replacement in MYTHOLOGICAL_REPLACEMENTS.items():\n                    content = re.sub(pattern, replacement, content)"
+    },
+    {
+      "path": "scripts/c5_quality_gates/audit_fixer.py",
+      "sha256": "0ec8954f076ca6cf80af3283d100a202aa813135e4f27f57176899610ecb1132",
+      "start_line": 67,
+      "end_line": 88,
+      "excerpt": "        if content != original_content:\n            with open(filepath, \"w\", encoding=\"utf-8\") as f:\n                f.write(content)\n            return True\n        return False\n    except Exception as e:\n        print(f\"Failed to fix {filepath}: {e}\")\n        return False\n\n\ndef main() -> None:\n    report_path = os.path.join(REPO_ROOT, \"scratch\", \"audit_report.json\")\n    with open(report_path, \"r\", encoding=\"utf-8\") as f:\n        report = json.load(f)\n\n    fixed_count = 0\n    for item in report:\n        filepath = item[\"file\"]\n        issues = item.get(\"issues\", [])\n        if any(i[\"type\"] in (\"MythologicalTerm\", \"MissingHeader\") for i in issues):\n            if fix_file(filepath, issues):\n                fixed_count += 1"
+    },
+    {
+      "path": "scripts/c5_sharur/c5_bounty_sharur_omega_10k.py",
+      "sha256": "0f6184a7d1aa6fbb09acdbf78fe692d5f3b786cacb6552387b49f3b3a2c3a1ce",
+      "start_line": 49,
+      "end_line": 53,
+      "excerpt": ")\n\n# ── Constantes termodinámicas ─────────────────────────────────────────────\nLANDAUER_BOUND_300K = 2.8705e-21  # Joules/bit @ 300 K\nDEFAULT_TOTAL = 10_000"
+    },
+    {
+      "path": "scripts/c5_sharur/c5_bounty_sharur_omega_10k.py",
+      "sha256": "0f6184a7d1aa6fbb09acdbf78fe692d5f3b786cacb6552387b49f3b3a2c3a1ce",
+      "start_line": 245,
+      "end_line": 257,
+      "excerpt": "    elapsed_ms = (time.perf_counter() - t0) * 1000\n    total_bits = sum(len(f) for f in frames) * 8\n    landauer = total_bits * LANDAUER_BOUND_300K\n\n    return BatchResult(\n        batch_id=batch_id,\n        frames_in=len(frames),\n        evm_count=len(evm_results),\n        native_count=len(nat_results),\n        ai_count=len(ai_results),\n        receipts=receipts,\n        elapsed_ms=elapsed_ms,\n        landauer_joules=landauer,"
+    },
+    {
+      "path": "scripts/c5_sharur/c5_bounty_sharur_omega_10k.py",
+      "sha256": "0f6184a7d1aa6fbb09acdbf78fe692d5f3b786cacb6552387b49f3b3a2c3a1ce",
+      "start_line": 366,
+      "end_line": 389,
+      "excerpt": "    # 5. Reporte final\n    elapsed_total = (time.perf_counter() - t_global) * 1000\n    total_frames = sum(br.frames_in for br in batch_results)\n    total_landauer = sum(br.landauer_joules for br in batch_results)\n    total_evm = sum(br.evm_count for br in batch_results)\n    total_nat = sum(br.native_count for br in batch_results)\n    total_ai = sum(br.ai_count for br in batch_results)\n    avg_batch_ms = sum(br.elapsed_ms for br in batch_results) / max(len(batch_results), 1)\n    throughput = (total_frames / (elapsed_total / 1000)) if elapsed_total > 0 else 0.0\n\n    print(f\"\\n{'=' * 80}\")\n    print(\"📊 REPORTE FINAL — CONVERGENCIA DE ENJAMBRE SOBERANO Ω-10 000\")\n    print(f\"{'=' * 80}\")\n    print(f\"  Advisories procesados : {total_frames:,} / {effective_total:,}\")\n    print(f\"  Análisis EVM          : {total_evm:,}\")\n    print(f\"  Análisis NATIVE       : {total_nat:,}\")\n    print(f\"  Análisis AI           : {total_ai:,}\")\n    print(f\"  SCITT Claims (LEDGER) : {total_receipts:,}\")\n    print(f\"  LogOP P(HIGH_RISK)    : {p_high:.4f}\")\n    print(f\"  Entropía Shannon      : {shannon_entropy:.4f} bits\")\n    print(f\"  Landauer disipado     : {total_landauer:.4e} J\")\n    print(f\"  Throughput global     : {throughput:,.1f} advisories/s\")\n    print(f\"  Latencia media/lote   : {avg_batch_ms:.1f} ms\")\n    print(f\"  Tiempo total enjambre : {elapsed_total:.0f} ms ({elapsed_total / 1000:.2f} s)\")"
+    },
+    {
+      "path": "scripts/c5_verifiers/verify_oncology_primitives_dag.py",
+      "sha256": "2443567a826bf2925fd45b05ece7ff7d5ab1939e9fc247d7317be9f39d217419",
+      "start_line": 72,
+      "end_line": 96,
+      "excerpt": "    # A4: Desintegración Bayesiana e Invariante de No-Alucinación en Intervención Farmacológica\n    drugs = [p for p in PRIMITIVES if p[\"category\"] == \"drug\"]\n    targets = [p for p in PRIMITIVES if p[\"category\"] in (\"oncogene\", \"suppressor\", \"pathway\")]\n    prior_supp = {t[\"id\"] for t in targets}\n\n    # Simulate drug-target posterior support\n    hallucinated = 0\n    for d in drugs:\n        # Target IDs mentioned in drug primitive\n        implied_targets = {t[\"id\"] for t in targets if t[\"name\"].lower() in d[\"name\"].lower() or t[\"name\"].lower() in d[\"description\"].lower()}\n        invalid = implied_targets - prior_supp\n        if invalid:\n            hallucinated += 1\n\n    a4_ok = hallucinated == 0\n    print(r\"  [\" + (\"✓ PASS\" if a4_ok else \"✗ FAIL\") + rf\"] Axioma A4 (Desintegración Bayesiana e Invariante No-Alucinación): supp(f^\\dagger_p(diana)) ⊆ supp(prior) auditado en {len(drugs)} fármacos.\")\n\n    print(\"-\" * 78)\n    all_passed = a1_ok and a2_ok and a3_ok and a4_ok\n    if all_passed:\n        print(\"  VERDICT: ALL 300 ONCOLOGY PRIMITIVES SATISFY C5-REAL AXIOMS — ONTOLOGY SOUND\")\n    else:\n        print(\"  VERDICT: AXIOM VIOLATION DETECTED IN ONCOLOGY ONTOLOGY\")\n    print(\"=\" * 78)\n    sys.exit(0 if all_passed else 1)"
+    },
+    {
+      "path": "scripts/c5_verifiers/verify_oncology_primitives_dag.py",
+      "sha256": "2443567a826bf2925fd45b05ece7ff7d5ab1939e9fc247d7317be9f39d217419",
+      "start_line": 25,
+      "end_line": 29,
+      "excerpt": "try:\n    from babylon60.oncology_primitives import PRIMITIVES\nexcept ImportError:\n    from scripts.c5_isomorphisms.gen_oncology_primitives import build_records\n    PRIMITIVES = build_records()"
+    },
+    {
+      "path": "src/omega_synthesis.rs",
+      "sha256": "899a1b3d518c4cf7c377be2861bf6d79d500a3181ca835a687a0460d84fa70eb",
+      "start_line": 29,
+      "end_line": 63,
+      "excerpt": "/// Genera una clave canónica inyectiva para eventos en el DAG: EV_{tick:08}_{seq:06}.\n#[inline]\npub fn generate_canonical_event_id(tick: u64, seq: u32) -> String {\n    format!(\"EV_{:08}_{:06}\", tick, seq)\n}\n\n// ---------------------------------------------------------------------------\n// [Iter 93] Árbol Merkle DAG Local en Memoria\n// ---------------------------------------------------------------------------\n/// Nodo en el árbol Merkle de transacciones causales sin latencia de disco.\n#[derive(Debug, Clone, PartialEq, Eq)]\npub struct MerkleNode {\n    /// Clave inyectiva del evento\n    pub event_id: String,\n    /// Hash criptográfico del estado (SHA-256)\n    pub state_hash: [u8; 32],\n    /// Hash del nodo padre\n    pub parent_hash: [u8; 32],\n}\n\nimpl MerkleNode {\n    /// Crea un nuevo nodo encadenado al padre\n    pub fn new(event_id: String, payload: &[u8], parent_hash: [u8; 32]) -> Self {\n        let mut hasher = Sha256::new();\n        hasher.update(event_id.as_bytes());\n        hasher.update(payload);\n        hasher.update(parent_hash);\n        let mut state_hash = [0u8; 32];\n        state_hash.copy_from_slice(&hasher.finalize());\n        Self {\n            event_id,\n            state_hash,\n            parent_hash,\n        }\n    }"
+    },
+    {
+      "path": "src/omega_synthesis.rs",
+      "sha256": "899a1b3d518c4cf7c377be2861bf6d79d500a3181ca835a687a0460d84fa70eb",
+      "start_line": 283,
+      "end_line": 298,
+      "excerpt": "    #[test]\n    fn test_canonical_event_id_bijection() {\n        let id1 = generate_canonical_event_id(10, 42);\n        let id2 = generate_canonical_event_id(10, 43);\n        assert_eq!(id1, \"EV_00000010_000042\");\n        assert_eq!(id2, \"EV_00000010_000043\");\n        assert_ne!(id1, id2, \"Las claves del DAG deben ser estrictamente inyectivas\");\n    }\n\n    #[test]\n    fn test_merkle_dag_chaining() {\n        let parent = [0u8; 32];\n        let n1 = MerkleNode::new(\"EV_00000001_000001\".to_string(), b\"STATE_A\", parent);\n        let n2 = MerkleNode::new(\"EV_00000001_000002\".to_string(), b\"STATE_B\", n1.state_hash);\n        assert_eq!(n2.parent_hash, n1.state_hash);\n        assert_ne!(n1.state_hash, n2.state_hash);"
+    },
+    {
+      "path": "src/lib.rs",
+      "sha256": "d3ecd074ba2582e1bb89c7e98ba767c3e83485bc8225840aa04be36732701737",
+      "start_line": 100,
+      "end_line": 103,
+      "excerpt": "/// Módulo de Síntesis Soberana, SCITT L5 y Punto Fijo Omega (Iteraciones 91-100).\n#[cfg(feature = \"research-math\")]\npub mod omega_synthesis;\n"
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/ai-search/patterns.md",
+      "sha256": "1215875bf8a9e6317d31019a84a124aa7ba7e85bac10b92bc445d0ef7383d619",
+      "start_line": 17,
+      "end_line": 29,
+      "excerpt": "## Multitenancy (Folder-Based)\n\n```typescript\nconst answer = await env.AI.autorag(\"saas-docs\").aiSearch({\n  query: \"refund policy\",\n  model: \"@cf/meta/llama-3.3-70b-instruct-fp8-fast\",\n  filters: {\n    column: \"folder\",\n    operator: \"gte\",  // \"starts with\" pattern\n    value: `tenants/${tenantId}/`\n  }\n});\n```"
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/ai-search/patterns.md",
+      "sha256": "1215875bf8a9e6317d31019a84a124aa7ba7e85bac10b92bc445d0ef7383d619",
+      "start_line": 57,
+      "end_line": 66,
+      "excerpt": "## Compound Filters\n\n```typescript\n// OR: Multiple folders\nfilters: {\n  operator: \"or\",\n  filters: [\n    { column: \"folder\", operator: \"gte\", value: \"docs/api/\" },\n    { column: \"folder\", operator: \"gte\", value: \"docs/auth/\" }\n  ]"
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/examples/Kerri_Chandler_MPC60.py",
+      "sha256": "549ad52a5cfe332cdf1da4c77ef9f15b46fba2f28467dfd0683ee2433a158b6a",
+      "start_line": 14,
+      "end_line": 50,
+      "excerpt": "def createDialog():\n    if not HAS_FLPIANOROLL:\n        return None\n    form = flp.ScriptDialog(\"Kerri Chandler MPC-60 Groove\", \"Matriz de swing Roger Linn MPC-60 y dinámica Deep House.\")\n    form.AddInputKnob(\"Compases\", 4, 1, 8)\n    form.AddInputKnob(\"Swing Porcentaje\", 62, 50, 75)\n    form.AddInputKnob(\"Ghost Note Prob\", 0.40, 0.0, 1.0)\n    form.AddInputCombo(\"Patron Ritmo\", \"Hi-Hats + Open Hat,Claps & Ghost Rims,Bassline Groove\", 0)\n    return form\n\ndef generate_mpc_groove(score_obj, bars=4, swing_pct=62, ghost_prob=0.40, pattern_type=0):\n    score_obj.clear()\n\n    BAR = 1920\n    BEAT = 480\n    SIXTEENTH = 120\n\n    # Cálculo formal de swing MPC (Roger Linn):\n    # En 50%: offset = 0. En 66.7%: tresillo puro.\n    # El swing retrasa las semicorcheas impares (pasos 1 y 3 dentro del tiempo).\n    swing_ratio = (swing_pct - 50.0) / 50.0\n    swing_offset = int(swing_ratio * (SIXTEENTH * 0.667))\n\n    current_time = 0\n\n    for bar in range(int(bars)):\n        for beat in range(4):\n            beat_start = current_time + (beat * BEAT)\n\n            for step in range(4):\n                # Calcular tiempo base con swing en pasos 1 y 3\n                step_time = beat_start + (step * SIXTEENTH)\n                if step % 2 == 1:\n                    step_time += swing_offset\n\n                # Humanización analógica de reloj de la MPC-60 (+/- 2 ticks de jitter)\n                step_time += random.randint(-2, 2)"
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/examples/Kerri_Chandler_MPC60.py",
+      "sha256": "549ad52a5cfe332cdf1da4c77ef9f15b46fba2f28467dfd0683ee2433a158b6a",
+      "start_line": 109,
+      "end_line": 118,
+      "excerpt": "def apply(form):\n    bars = form.GetInputValue(\"Compases\")\n    swing = form.GetInputValue(\"Swing Porcentaje\")\n    ghost = form.GetInputValue(\"Ghost Note Prob\")\n    ptype = form.GetInputValue(\"Patron Ritmo\")\n    generate_mpc_groove(flp.score, bars, swing, ghost, ptype)\n\ndef createScore():\n    target_score = flp.score if HAS_FLPIANOROLL else score\n    generate_mpc_groove(target_score)"
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/existence-gap-audit/scripts/existence_gap.py",
+      "sha256": "1346b99208b08670abf3e657c1746050ac46e496fcb1d3067ba7af673a7b9f0f",
+      "start_line": 263,
+      "end_line": 295,
+      "excerpt": "JSONC_COMMENT_RE = re.compile(r\"//[^\\n]*|/\\*.*?\\*/\", re.S)\n\n\ndef _load_jsonc(path: pathlib.Path):\n    \"\"\"tsconfig.json admite comentarios. json.loads no.\"\"\"\n    try:\n        raw = path.read_text(encoding=\"utf-8\", errors=\"replace\")\n    except Exception:\n        return {}\n    try:\n        return json.loads(JSONC_COMMENT_RE.sub(\"\", raw))\n    except Exception:\n        return {}\n\n\ndef ts_aliases(root: pathlib.Path):\n    \"\"\"compilerOptions.paths -> [(prefijo, [dirs])].\n\n    Sin esto, '@/components/Boton' se lee como paquete con scope '@/components'\n    y se consulta en npm, que devuelve 404. Todo proyecto Next.js o Vite con\n    alias produce un informe lleno de fantasmas inexistentes: el falso positivo\n    masivo que hace que nadie vuelva a mirar el informe.\n    \"\"\"\n    out = []\n    for name in (\"tsconfig.json\", \"jsconfig.json\"):\n        for cfg in list(root.glob(name)) + list(root.glob(\"*/\" + name)):\n            data = _load_jsonc(cfg)\n            co = (data or {}).get(\"compilerOptions\") or {}\n            base = (cfg.parent / (co.get(\"baseUrl\") or \".\")).resolve()\n            for pat, tgts in (co.get(\"paths\") or {}).items():\n                if isinstance(tgts, list):\n                    out.append((pat.rstrip(\"*\"), [str(base / t.rstrip(\"*\")) for t in tgts]))\n    return out"
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/existence-gap-audit/scripts/existence_gap.py",
+      "sha256": "1346b99208b08670abf3e657c1746050ac46e496fcb1d3067ba7af673a7b9f0f",
+      "start_line": 323,
+      "end_line": 354,
+      "excerpt": "def extract_js(root: pathlib.Path):\n    \"\"\"-> (imports externos, rutas locales rotas)\"\"\"\n    imports = collections.defaultdict(list)\n    broken_local = collections.defaultdict(list)\n    aliases = ts_aliases(root)\n    for p in walk(root, {\".js\", \".mjs\", \".cjs\", \".ts\", \".tsx\", \".jsx\", \".vue\", \".svelte\"}):\n        rel = p.relative_to(root).as_posix()\n        try:\n            text = p.read_text(encoding=\"utf-8\", errors=\"replace\")\n        except Exception:\n            continue\n        specs = [(m.group(1) or m.group(2), m.start()) for m in JS_IMPORT_RE.finditer(text)]\n        specs += [(m.group(1), m.start()) for m in JS_DYNAMIC_RE.finditer(text)]\n        for spec, pos in specs:\n            if not spec:\n                continue\n            lineno = text.count(\"\\n\", 0, pos) + 1\n            aliased = any(pre and spec.startswith(pre) for pre, _ in aliases)\n            if spec.startswith((\".\", \"/\")) or aliased:\n                # Ruta local: o existe en disco, o es un hueco de existencia.\n                # Delegarla al bundler es la misma excusa que descartar los\n                # imports relativos en Python, y oculta el mismo fallo.\n                if not js_resolves(spec, p, root, aliases):\n                    broken_local[spec].append((rel, lineno, spec))\n                continue\n            base = spec[5:] if spec.startswith(\"node:\") else spec\n            parts = base.split(\"/\")\n            top = \"/\".join(parts[:2]) if base.startswith(\"@\") else parts[0]\n            if top in NODE_BUILTINS or spec.startswith(\"node:\"):\n                continue\n            imports[top].append((rel, lineno, spec))\n    return imports, broken_local"
+    },
+    {
+      "path": "tools/tamkarum_batch_signer.py",
+      "sha256": "6a68f8fe3c819164aa0c1511fa48ef839087e8c0ac67b3c2bd5c52263c373444",
+      "start_line": 73,
+      "end_line": 95,
+      "excerpt": "    for idx, line in enumerate(lines, start=1):\n        line = line.strip()\n        if not line:\n            continue\n\n        try:\n            lead = json.loads(line)\n        except json.JSONDecodeError:\n            continue\n\n        lead_id = lead.get(\"lead_id\", f\"LEAD_{idx:05d}\")\n        company = lead.get(\"company_name\", \"Organización\")\n        role = lead.get(\"target_role\", \"CISO\")\n        contact_name = lead.get(\"contact_name\", \"Responsable de Seguridad\")\n        contact_email = lead.get(\"contact_email\", \"\")\n        sector = lead.get(\"sector\", \"Enterprise\")\n        risk_class = lead.get(\"eu_ai_act_risk_classification\", \"High Risk (Annex III)\")\n        pain_point = lead.get(\"infrastructure_pain_point\", \"Trazabilidad inmutable de agentes LLM\")\n        pitch_vector = lead.get(\"babylon60_pitch_vector\", \"Trazabilidad WORM RFC 9942 COSE_Sign1\")\n\n        # GUDEA-60: Craft Tailored Pitch\n        pitch_text = (\n            f\"Asunto: Controles Ring-0 y Trazabilidad WORM (EU AI Act) para los agentes de {company}\\n\\n\""
+    },
+    {
+      "path": "tools/tamkarum_batch_signer.py",
+      "sha256": "6a68f8fe3c819164aa0c1511fa48ef839087e8c0ac67b3c2bd5c52263c373444",
+      "start_line": 114,
+      "end_line": 145,
+      "excerpt": "        # LAHAMU-60: Hume Guillotine Audit\n        audit = DistributionDesignTeam.audit_creative_copy(pitch_text)\n\n        # Merkle leaf computation\n        payload_bytes = json.dumps(\n            {\"lead_id\": lead_id, \"company\": company, \"email\": contact_email, \"pitch\": pitch_text},\n            sort_keys=True,\n        ).encode(\"utf-8\")\n        leaf_hash = hashlib.sha256(payload_bytes).hexdigest()\n        leaves.append(leaf_hash)\n\n        if audit[\"passed\"]:\n            approved += 1\n        else:\n            rejected += 1\n\n        lead_record = {\n            \"lead_id\": lead_id,\n            \"company\": company,\n            \"role\": role,\n            \"email\": contact_email,\n            \"sector\": sector,\n            \"leaf_hash\": leaf_hash,\n            \"audit_status\": audit[\"status\"],\n            \"shannon_entropy\": audit[\"entropy_shannon_bits\"],\n            \"dispatch_approved\": audit[\"passed\"],\n        }\n        audited_leads.append(lead_record)\n\n        if output_drafts_dir and audit[\"passed\"]:\n            draft_file = output_drafts_dir / f\"{lead_id}_{company.replace(' ', '_')}.txt\"\n            draft_file.write_text(pitch_text, encoding=\"utf-8\")"
+    },
+    {
+      "path": "tools/tamkarum_batch_signer.py",
+      "sha256": "6a68f8fe3c819164aa0c1511fa48ef839087e8c0ac67b3c2bd5c52263c373444",
+      "start_line": 166,
+      "end_line": 197,
+      "excerpt": "def main():\n    parser = argparse.ArgumentParser(description=\"BABYLON-60 Tamkarum Batch Signer\")\n    parser.add_argument(\"--campaign\", type=str, default=\"all\", help=\"Campaign filename or 'all'/'tier1_spain'\")\n    parser.add_argument(\"--limit\", type=int, default=None, help=\"Limit leads per campaign (default: all)\")\n    parser.add_argument(\"--save-drafts\", action=\"store_true\", help=\"Save text draft files into campaigns/drafts_*\")\n    args = parser.parse_args()\n\n    print(\"=\" * 78)\n    print(\"      TAMKARUM BATCH SIGNER · INDUSTRIALIZACIÓN DE OUTBOUND WORM\")\n    print(\"=\" * 78)\n\n    campaign_files: List[Path] = []\n    if args.campaign in (\"all\", \"*\"):\n        campaign_files = sorted(list(CAMPAIGNS_DIR.glob(\"campaign_*.jsonl\")))\n    elif args.campaign in (\"tier1_spain\", \"tier1\"):\n        campaign_files = [CAMPAIGNS_DIR / \"campaign_tier1_spain_top_priority.jsonl\"]\n    else:\n        target = CAMPAIGNS_DIR / args.campaign\n        if not target.exists() and not target.suffix:\n            target = CAMPAIGNS_DIR / f\"campaign_{args.campaign}.jsonl\"\n        if target.exists():\n            campaign_files = [target]\n        else:\n            print(f\"[-] Campaña no encontrada: {args.campaign}\")\n            sys.exit(1)\n\n    all_manifests: List[Dict[str, Any]] = []\n    all_campaign_roots: List[str] = []\n\n    for cfile in campaign_files:\n        drafts_dir = (CAMPAIGNS_DIR / f\"drafts_{cfile.stem.replace('campaign_', '')}\") if args.save_drafts else None\n        res = process_campaign_file(cfile, limit=args.limit, output_drafts_dir=drafts_dir)"
+    },
+    {
+      "path": "02_EDIN_SWARMS/agents_archi/topologies/distribution_design.py",
+      "sha256": "709f2e05458743a95bfd72ae0f74667b0e571498dd05d4c99a28a4e6d32f3cff",
+      "start_line": 209,
+      "end_line": 245,
+      "excerpt": "    @classmethod\n    def audit_creative_copy(cls, copy_text: str) -> Dict[str, Any]:\n        \"\"\"\n        Executes LAHAMU-60's Hume Guillotine and anti-cheap-talk filter on candidate text.\n        Returns Pass/Fail verdict, detected violations, and computed Shannon entropy.\n        \"\"\"\n        violations: List[str] = []\n        lower_text = copy_text.lower()\n\n        # 1. Blacklist check\n        for pattern in cls.CHEAP_TALK_BLACKLIST:\n            matches = re.findall(pattern, lower_text)\n            if matches:\n                violations.append(f\"Cheap Talk Detectado: '{matches[0]}'\")\n\n        # 2. Shannon Entropy metric (H)\n        char_counts: Dict[str, int] = {}\n        for char in copy_text:\n            char_counts[char] = char_counts.get(char, 0) + 1\n\n        entropy = 0.0\n        total_len = len(copy_text)\n        if total_len > 0:\n            for count in char_counts.values():\n                p = count / total_len\n                entropy -= p * math.log2(p)\n\n        # 3. Verdict\n        passed = len(violations) == 0\n        status = \"PASS\" if passed else \"REJECT_FAIL_CLOSED\"\n\n        return {\n            \"status\": status,\n            \"passed\": passed,\n            \"entropy_shannon_bits\": round(entropy, 3),\n            \"entropy_nominal\": 3.79 <= entropy <= 5.88,\n            \"violations\": violations,"
+    }
+  ],
+  "external_documentation": [
+    {
+      "url": "https://developers.cloudflare.com/ai-search/configuration/retrieval/filtering/",
+      "method": "Native Context7 resolve_library_id + query_docs and web open, 2026-10-28",
+      "observation": "Current folder prefix guidance uses both $gte and $lt; a lone lower bound is insufficient."
+    },
+    {
+      "url": "https://developers.cloudflare.com/ai-search/api/migration/autorag-filter-format/",
+      "method": "Native Context7 query_docs and web open, 2026-10-28",
+      "observation": "Legacy filter schema uses type/key/value; prefix guidance combines two range bounds."
+    },
+    {
+      "url": "https://github.com/cloudflare/cloudflare-docs/blob/production/src/content/docs/email-service/api/route-emails/email-handler.mdx",
+      "method": "Native Context7 query_docs, 2026-10-28",
+      "observation": "Email handler API exposes explicit forward/reply/setReject actions; documented failure example attempts fallback and rejects if fallback fails. This was not used to infer an observed SMTP response."
+    }
+  ],
+  "path_observations": [
+    {
+      "path": "scripts/tests/cache_kinetic_benchmark.cpp",
+      "exists": false
+    },
+    {
+      "path": "tests/cache_kinetic_benchmark.cpp",
+      "exists": true
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "candidate_id": "SW100-C0162",
+  "decision": "REPRODUCED",
+  "severity": "P2",
+  "remediation_state": "OPEN",
+  "path": "tools/skill_library/global/categorical-hallucination-audit/scripts/audit_kl_d.py",
+  "current_source_sha256": "34f7e6532eed0d70c2cd0d5795c5b269b02cdc44b2e0e8a69fdf89eb9728a0dc",
+  "rationale": "The primitive docstring still does not explicitly define whether pi0 is at time zero or at target_t, so the stronger statement that every positive-target single call is wrong is not established. However, the canonical local MODULE.md:42-45 defines all retrodictions as conditionals of one joint process rho on the shared history, and audit_system/CLI accept multiple targets while passing the same unrestricted prior vector to every target. An independent exact-source fixture with T=[[0.8,0.2],[0.1,0.9]], pi0=[1,0], observation S2=B and targets [0,1] returns q0=q1=[1,0]. For any one Markov joint process with this T and observation, the function's own q0 fixes q1 through the Bayesian bridge identity: q1(j)=sum_i q0(i)*T(i,j)*T(j,B)/(T^2)(i,B). Exact rational evaluation requires q1=[8/17,9/17], contradicting the returned [1,0]. This confirms a multi-target temporal-prior coherence defect without assuming pi0's time origin. A stationary-prior control [1/3,2/3] satisfies the identity, showing the scope rather than claiming universal failure. Single-target callers supplying the target marginal can be correct; the public batch must either define a common initial time and propagate its prior, accept target-indexed marginals, or explicitly restrict/check stationary priors. No product or protected runtime was executed, and no remediation was performed.",
+  "source_checks": [
+    {
+      "path": "tools/skill_library/global/categorical-hallucination-audit/scripts/audit_kl_d.py",
+      "start_line": 18,
+      "end_line": 35,
+      "observation": "The primitive names a prior vector without a time origin. It normalizes T and pi0 but does not require stationarity or accept a target-indexed prior."
+    },
+    {
+      "path": "tools/skill_library/global/categorical-hallucination-audit/scripts/audit_kl_d.py",
+      "start_line": 45,
+      "end_line": 51,
+      "observation": "Every backward target multiplies the same pi0 directly by target-to-observation likelihood, treating it as that target's marginal."
+    },
+    {
+      "path": "tools/skill_library/global/categorical-hallucination-audit/scripts/audit_kl_d.py",
+      "start_line": 78,
+      "end_line": 101,
+      "observation": "audit_system calls the primitive for multiple target timesteps with the unchanged pi0 and converts each distribution into reported audit metrics."
+    },
+    {
+      "path": "tools/skill_library/global/categorical-hallucination-audit/scripts/audit_kl_d.py",
+      "start_line": 105,
+      "end_line": 112,
+      "observation": "The public JSON CLI exposes one pi0 and a list of targets, with no per-target prior or stationary-input restriction."
+    },
+    {
+      "path": "tools/skill_library/global/categorical-hallucination-audit/SKILL.md",
+      "start_line": 18,
+      "end_line": 31,
+      "observation": "The local alias preserves and links the canonical module contract; resources remain beside the alias and in the hub."
+    },
+    {
+      "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/categorical-hallucination-audit/MODULE.md",
+      "start_line": 42,
+      "end_line": 48,
+      "observation": "The canonical contract defines one joint process rho on the history and prediction/retrodiction as its Bayesian conditional marginals. This requires coherence across targets rather than unrelated target-specific processes."
+    },
+    {
+      "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/categorical-hallucination-audit/scripts/audit_kl_d.py",
+      "start_line": 78,
+      "end_line": 86,
+      "observation": "The canonical hub copy has the same SHA-256 as the assigned alias source and the same shared-pi0 batch consumer."
+    }
+  ],
+  "guards": [
+    "Row and prior normalization enforce probability totals but do not establish temporal marginal consistency.",
+    "All transition likelihoods in the fixture are positive, so the uniform fallback for zero-probability conditioning is not involved.",
+    "Observed-target, forward and internal-gap branches are not implicated by this counterexample.",
+    "A single call can be correct when pi0 is already the target marginal; a shared stationary prior also passes the independent bridge control.",
+    "The exact intended origin of pi0 remains undocumented. The confirmed finding is bounded to the observable incoherence of the multi-target consumer under the documented one-process contract, not a blanket single-call failure or a certification of Kan-extension theory."
+  ],
+  "runtime_executed": true,
+  "runtime_scope": "Only AST-selected mathematical source functions on synthetic inputs in the existing Python environment; no product/native service, protected gate, network, database or operator data.",
+  "evidence_paths": [
+    "docs/security/evidence/swarm100-round3-20261028/03-C0162-fixture.py",
+    "docs/security/evidence/swarm100-round3-20261028/03-C0162-fixture-results.json",
+    "docs/security/evidence/swarm100-round3-20261028/03-C0162-source-evidence.json"
+  ]
+}

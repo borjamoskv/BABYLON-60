@@ -1,0 +1,16 @@
+[
+  {
+    "case": "wrong_manifest_pin",
+    "expected_returncode": 1,
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "VERIFICATION FAILED: ValueError: Mirror manifest does not match the supplied SHA-256 pin\n"
+  },
+  {
+    "case": "tampered_artifact",
+    "expected_returncode": 1,
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "VERIFICATION FAILED: ValueError: Artifact integrity failure: CLAIMS.toml\n"
+  }
+]

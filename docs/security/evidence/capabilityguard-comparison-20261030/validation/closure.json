@@ -1,0 +1,42 @@
+{
+  "package_ready": true,
+  "solution_applied": false,
+  "comparison_trials_executed": 0,
+  "runtime_source_files_identical_to_capture": true,
+  "root_dependency_and_target_diff": "",
+  "ruff": "PASS",
+  "semantic_contracts_workspace": "PASS",
+  "topology_worktree": "PASS",
+  "root_instruction_budget": {
+    "status": "PASS",
+    "exit_code": 0,
+    "state_before": {
+      "sha256": {
+        ".babylon60rules": "2a75a056591f26deab72be23a3984a951320bfb9f5a57f1104e9261f211d5830",
+        "AGENTS.md": "1c40bfdd2083849bc1f3c266a67871a1594068bc843207c4a1244fe0884f138b"
+      },
+      "bytes": 10080
+    },
+    "state_after": {
+      "sha256": {
+        ".babylon60rules": "2a75a056591f26deab72be23a3984a951320bfb9f5a57f1104e9261f211d5830",
+        "AGENTS.md": "1c40bfdd2083849bc1f3c266a67871a1594068bc843207c4a1244fe0884f138b"
+      },
+      "bytes": 10080
+    },
+    "stable_during_check": true,
+    "limit_bytes": 10183,
+    "excess_bytes": 0,
+    "scope": "Latest read-only observation. Archived context remains frozen at capture; no root instructions edited by this task."
+  },
+  "omitted": "Global rules and host listener telemetry were explicitly excluded from the budget check.",
+  "root_instruction_budget_history": [
+    {
+      "status": "FAILED",
+      "observed_bytes": 10296,
+      "limit_bytes": 10183,
+      "excess_bytes": 113,
+      "note": "Observed in the first closure check; root instructions were subsequently changed outside this package."
+    }
+  ]
+}

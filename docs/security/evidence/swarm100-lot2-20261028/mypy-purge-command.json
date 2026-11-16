@@ -1,0 +1,14 @@
+{
+  "command": [
+    "uv",
+    "run",
+    "--locked",
+    "--no-sync",
+    "mypy",
+    "--follow-imports=silent",
+    "tools/skill_library/global/anergy-purge-protocol/scripts/anergy_purge.py"
+  ],
+  "exit_code": 0,
+  "log": "docs/security/evidence/swarm100-lot2-20261028/mypy-purge.log",
+  "log_sha256": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e"
+}

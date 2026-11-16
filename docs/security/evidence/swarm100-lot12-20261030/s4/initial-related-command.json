@@ -1,0 +1,18 @@
+{
+  "command": [
+    "uv",
+    "run",
+    "--locked",
+    "--no-sync",
+    "python",
+    "-c",
+    "import os,tempfile,socket,sys\nhome=tempfile.TemporaryDirectory(prefix=\"b60-lot12-s4-home-\")\nos.environ[\"HOME\"]=home.name\nfor key in [\"CLOUDFLARE_API_TOKEN\",\"APPLE_DOMAIN_CODE\",\"CORTEX_VAULT_KEY\",\"KIMI_API_KEY\",\"MOONSHOT_API_KEY\",\"OPENROUTER_API_KEY\"]:os.environ.pop(key,None)\nos.environ[\"BABYLON60_SIGNING_SEED\"]=\"00\"*32\nimport dotenv\ndotenv.load_dotenv=lambda *a,**k:False\ndotenv.dotenv_values=lambda *a,**k:{}\ndef blocked(*a,**k):raise AssertionError(\"Network forbidden in S4 fixtures\")\nsocket.getaddrinfo=blocked\noriginal=socket.socket.connect\ndef connect(self,*a,**k):\n if self.family in (socket.AF_INET,socket.AF_INET6):return blocked()\n return original(self,*a,**k)\nsocket.socket.connect=connect\nimport pytest\nraise SystemExit(pytest.main(sys.argv[1:]))\n",
+    "tests/test_swarm100_lot12_s4_regressions.py",
+    "tests/test_moskv_native_host.py",
+    "tests/test_audit_private_evidence.py",
+    "-q",
+    "-o",
+    "addopts=--tb=short"
+  ],
+  "exit_code": 1
+}

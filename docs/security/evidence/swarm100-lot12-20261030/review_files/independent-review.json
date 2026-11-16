@@ -1,0 +1,264 @@
+{
+  "reviewer": "/root/lot12_review_files",
+  "date": "2026-10-30",
+  "decision": "APPROVED_WITH_EXPLICIT_SCOPE",
+  "open_actionable_findings": [],
+  "candidate_ids": [
+    "SW100-C0435",
+    "SW100-C0298",
+    "SW100-C0437",
+    "SW100-C0448",
+    "SW100-C0490"
+  ],
+  "per_id": {
+    "SW100-C0435": {
+      "state": "FIXED",
+      "rationale": "Replaced the shared /tmp queue with a private user-owned directory and descriptor-relative no-follow reads, persistent cooperative flock, strict regular-file/schema checks, exclusive temporary creation and atomic replacement. Separate O_EXCL lock creation and no-create opening resolve the independently observed Darwin cold-start ENOENT without unlinking a live lock. Queue symlinks, hardlinks, public files, corrupt content and parent links reject; independent concurrent callers preserve all admitted entries.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_cli/moskv_native_host.py",
+          "start_line": 194,
+          "end_line": 209,
+          "observation": "Exclusive lock creation, existing-file opening without O_CREAT, bounded ENOENT handling; lock is never removed."
+        },
+        {
+          "path": "scripts/c5_cli/moskv_native_host.py",
+          "start_line": 213,
+          "end_line": 239,
+          "observation": "No-follow parent traversal, private ownership validation and stable flock descriptor."
+        },
+        {
+          "path": "scripts/c5_cli/moskv_native_host.py",
+          "start_line": 242,
+          "end_line": 255,
+          "observation": "No-follow private regular-file read with schema rejection preserving the old queue."
+        },
+        {
+          "path": "scripts/c5_cli/moskv_native_host.py",
+          "start_line": 258,
+          "end_line": 274,
+          "observation": "Exclusive temporary, file sync, atomic descriptor-relative replacement and directory sync."
+        }
+      ]
+    },
+    "SW100-C0298": {
+      "state": "FIXED",
+      "rationale": "The purge root is the logical repository, and importable Python/native source and bytecode suffixes are excluded rather than depending on a hand-maintained filename allowlist. Directories and symlinks are not moved and an existing archive destination rejects. An independent fixture package still imports and exposes its value after categorization; this does not certify database consolidation or other purge policies.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/cortex/cortex_purge_anergy.py",
+          "start_line": 78,
+          "end_line": 87,
+          "observation": "Python source, bytecode and native extension suffixes are excluded from archival."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/cortex/cortex_purge_anergy.py",
+          "start_line": 90,
+          "end_line": 113,
+          "observation": "Only regular files are considered and preexisting destination objects reject."
+        }
+      ]
+    },
+    "SW100-C0437": {
+      "state": "FIXED",
+      "rationale": "Preflight requires an already-selected main and a clean tracked/untracked tree without checkout/reset. A private exclusive recovery directory receives a synchronized bundle of all refs plus HEAD; Git verifies the bundle and original HEAD before the rewrite boundary. Independent real Git fixtures restore HEAD and contents by cloning the bundle and confirm branch/stash preservation. Dirty states and unsafe backup-directory links reject without history changes. Actual filter-repo, subsequent ledger writes and publication were not executed.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_git_utils/rewrite_commits.py",
+          "start_line": 34,
+          "end_line": 44,
+          "observation": "Main and clean tracked/untracked state required; byte porcelain avoids filename decoding errors."
+        },
+        {
+          "path": "scripts/c5_git_utils/rewrite_commits.py",
+          "start_line": 54,
+          "end_line": 95,
+          "observation": "Private recovery bundle created, synchronized and verified before rewrite admission."
+        },
+        {
+          "path": "scripts/c5_git_utils/rewrite_commits.py",
+          "start_line": 47,
+          "end_line": 51,
+          "observation": "Git checks bundle integrity and presence of the expected original HEAD."
+        },
+        {
+          "path": "scripts/c5_git_utils/rewrite_commits.py",
+          "start_line": 118,
+          "end_line": 131,
+          "observation": "Backup is reverified at the rewrite boundary."
+        }
+      ]
+    },
+    "SW100-C0448": {
+      "state": "FIXED",
+      "rationale": "Delete selection is restricted to an exact case-normalized apex domain (allowing one DNS terminal dot) and genuine SPF TXT prefixes. Neighbor and lookalike domains and unrelated apex TXT records survive independent recorded HTTP fixtures; an HTTP denial aborts the request helper. No real Cloudflare/iCloud changes, complete API behavior, transactional migration or idempotency are certified.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_icloud_deploy.py",
+          "start_line": 25,
+          "end_line": 83,
+          "observation": "Apex name equality gates all deletion, then only MX or leading v=spf1 TXT records qualify."
+        },
+        {
+          "path": "scripts/c5_icloud_deploy.py",
+          "start_line": 7,
+          "end_line": 23,
+          "observation": "HTTPError terminates the helper with failure rather than allowing the caller to continue."
+        }
+      ]
+    },
+    "SW100-C0490": {
+      "state": "FIXED",
+      "rationale": "Before installation, a symlinked or non-directory .github path is explicitly rejected. Each replaced regular instruction or noncanonical link is moved without overwrite into a fresh private workspace recovery directory before a canonical link is installed. The independent symlink-parent reproduction initially moved an external instruction; after the correction that external file and internal instructions remain intact and installation rejects. Independent valid installation retains exact workspace/Copilot instruction bytes in the backup.",
+      "source_checks": [
+        {
+          "path": "tools/install_shield.sh",
+          "start_line": 54,
+          "end_line": 60,
+          "observation": "Symlinked/non-directory .github is refused before instruction mutations."
+        },
+        {
+          "path": "tools/install_shield.sh",
+          "start_line": 177,
+          "end_line": 201,
+          "observation": "Fresh private recovery directory preserves existing instruction objects before replacement."
+        },
+        {
+          "path": "tools/install_shield.sh",
+          "start_line": 203,
+          "end_line": 218,
+          "observation": "Workspace and Copilot links are installed after preservation."
+        }
+      ]
+    }
+  },
+  "source_sha256": {
+    "scripts/c5_cli/moskv_native_host.py": "ea28bbfee08801da5c9fb44fe82bd2350c90b5f85fb92e778df3f60f8a297432",
+    "01_KISH_ENGINE/babylon60/cortex/cortex_purge_anergy.py": "408f432bcf364ea1f857cb856e51e4a29a5f6173570c207fd414d702fec1aaca",
+    "scripts/c5_git_utils/rewrite_commits.py": "64f47ebb82ad50e35af48a9d6177f9c9b05acb7227e6c272dc89a14db15c2aa8",
+    "scripts/c5_icloud_deploy.py": "226f59b9d8988ae41fb779a3aaffa3ee5ead720428ecb6454eb995bbcfcc1c49",
+    "tools/install_shield.sh": "cd9166eae829e327e4f9422bc7203b3e164e7d6f6e8522e2fc69bc55403c9e48"
+  },
+  "test_source_sha256": {
+    "tests/test_swarm100_lot12_s4_regressions.py": "8b53806f639702bd26d34299a78f0ef50560bde5a3b094b49b1c704279f2e5b3",
+    "tests/test_moskv_native_host.py": "c59a51e487e00890fa2bb4c7e4b1a1193693038e9c493dd4a9c58ae16be7cdbc",
+    "docs/security/evidence/swarm100-lot12-20261030/review_files/independent_checks.py": "d516951c971770f1ec1665a152ffc7ed4f091071b23777cce9c26f196e814002",
+    "docs/security/evidence/swarm100-lot12-20261030/review_files/queue_probe.py": "0646ae67f85916c45dfcfc43d5b3988eae245aa269042c362c75c052d6c9f3d7"
+  },
+  "validation": "docs/security/evidence/swarm100-lot12-20261030/review_files/validation.json",
+  "checks": {
+    "combined-tests": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "python",
+        "docs/security/evidence/swarm100-lot12-20261030/run_confined_tests.py",
+        "docs/security/evidence/swarm100-lot12-20261030/review_files/independent_checks.py",
+        "tests/test_swarm100_lot12_s4_regressions.py",
+        "tests/test_moskv_native_host.py",
+        "-q",
+        "-o",
+        "addopts=--tb=short"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/review_files/combined-tests-verified.log",
+      "log_sha256": "fddf0f3a85175d22aeb80ce3a8c793d20021dd8f0cbc548c976d4017b44e81ad"
+    },
+    "ruff": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "ruff",
+        "check",
+        "scripts/c5_cli/moskv_native_host.py",
+        "01_KISH_ENGINE/babylon60/cortex/cortex_purge_anergy.py",
+        "scripts/c5_git_utils/rewrite_commits.py",
+        "scripts/c5_icloud_deploy.py",
+        "tests/test_swarm100_lot12_s4_regressions.py",
+        "docs/security/evidence/swarm100-lot12-20261030/review_files/independent_checks.py",
+        "docs/security/evidence/swarm100-lot12-20261030/review_files/queue_probe.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/review_files/ruff-verified.log",
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "mypy": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "mypy",
+        "--follow-imports=silent",
+        "--check-untyped-defs",
+        "scripts/c5_cli/moskv_native_host.py",
+        "01_KISH_ENGINE/babylon60/cortex/cortex_purge_anergy.py",
+        "scripts/c5_git_utils/rewrite_commits.py",
+        "scripts/c5_icloud_deploy.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/review_files/mypy-verified.log",
+      "log_sha256": "71144743c83babea384888a735db0c4daba3d4d7b7942b6839984bd5c21b52bb"
+    },
+    "shell-syntax": {
+      "command": [
+        "bash",
+        "-n",
+        "tools/install_shield.sh"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/review_files/shell-syntax-verified.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "independent_tests": {
+    "pytest_cases": 8,
+    "combined_cases": 71,
+    "skipped": 0,
+    "warnings": [
+      "Existing hygiene import deprecation warning."
+    ],
+    "probe": "Cold-start direct thread probe reports queue_len 6, 6, 50 after fix, with no client exceptions."
+  },
+  "resolved_findings": [
+    {
+      "id": "REVIEW-S4-01",
+      "surface": "SW100-C0490",
+      "observation": "Installer followed a preexisting .github directory symlink and moved an external instruction.",
+      "before_evidence": "docs/security/evidence/swarm100-lot12-20261030/review_files/independent-first.log",
+      "fixed_by": "Reject symlink/non-directory .github before mutations.",
+      "regression": "test_installer_refuses_symlinked_copilot_directory",
+      "status": "FIXED_AND_RETESTED"
+    },
+    {
+      "id": "REVIEW-S4-02",
+      "surface": "SW100-C0435",
+      "observation": "Concurrent initial O_CREAT|O_NOFOLLOW open of .queue.lock returned ENOENT despite a live directory and extant lock, rejecting one of six callers.",
+      "before_evidence": [
+        "docs/security/evidence/swarm100-lot12-20261030/review_files/queue-recheck.log",
+        "docs/security/evidence/swarm100-lot12-20261030/review_files/queue-probe-resolved.log"
+      ],
+      "fixed_by": "Separate exclusive creation from existing-file opening and use bounded ENOENT retries; no lock deletion.",
+      "after_evidence": [
+        "docs/security/evidence/swarm100-lot12-20261030/review_files/independent-final.log",
+        "docs/security/evidence/swarm100-lot12-20261030/review_files/queue-probe-fixed.log"
+      ],
+      "status": "FIXED_AND_RETESTED"
+    }
+  ],
+  "fixture_adjustments": [
+    "The first standalone probe used macOS TMPDIR through /var, a symlink correctly rejected by no-follow traversal. The concurrency probe then used the physical pathname of its own newly created temporary fixture, without changing production root semantics."
+  ],
+  "scope_limits": [
+    "All execution used synthetic HOME, keys, directories and owned temporary repositories. No operator queues/instructions/data, provider/mail/iCloud/network/hardware or real repository history/publication was accessed or mutated.",
+    "Queue guarantees concern cooperating local POSIX clients. Same-UID hostile ancestor renames, noncooperating lock replacement, crash recovery and exactly-once retry semantics after post-replacement sync errors are not certified.",
+    "Installer preservation is for the selected workspace instruction replacement paths and preexisting parent-link rejection. Multi-file crash atomicity and arbitrary concurrent hostile same-UID parent swaps are outside the verified scope.",
+    "C0298 closes package/importable archival, not database or data-retention safety of other purge policies.",
+    "C0437 closes backup/dirty preflight, not correctness of inherited filter-repo callback, ledger pipeline or force-push; those effect boundaries were not executed.",
+    "C0448 verifies target record selection and HTTP-error control flow using recorded requests, not real DNS propagation or an atomic/idempotent migration."
+  ]
+}

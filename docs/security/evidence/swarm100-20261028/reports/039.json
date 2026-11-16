@@ -1,0 +1,403 @@
+{
+  "shard": "039",
+  "findings": [
+    {
+      "title": "Version synchronization reports success for missing required targets",
+      "severity": "P2",
+      "path": "scripts/c5_quality_gates/sync_version.py",
+      "line": 133,
+      "evidence": "check_or_update_file returns False for missing files or unmatched patterns (37–44); sync_all only returns failure for drift_detected when dry_run is true (133–139).",
+      "trigger": "Run --sync when a required target is absent or its version pattern has changed.",
+      "impact": "Script prints that all surfaces are aligned and exits zero although a required surface was never synchronized.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Aeon verifier proves individual blocks without checking their connecting states",
+      "severity": "P2",
+      "path": "crates/b60-lang/src/bin/aeon_chaining.rs",
+      "line": 112,
+      "evidence": "The emission loop proves runAeon(initial_i, events_i)=final_i independently; it never emits or checks final_i=initial_(i+1). main labels success as a formally verified chain (180–182).",
+      "trigger": "Supply valid AeonBlock values whose adjacent final and initial states differ to verify_aeons.",
+      "impact": "Successful Lean verification does not establish the advertised cross-block causal continuity. The included generator happens to supply connected states.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Legion PoC passes without asserting any receipt was persisted",
+      "severity": "P2",
+      "path": "scripts/c5_demos/poc_legion_1000.py",
+      "line": 247,
+      "evidence": "SQLite count is read and printed at 242–245; the sole final assertion checks receipts_generated >= 1, counting enqueue attempts.",
+      "trigger": "Receipts are generated but the asynchronous ledger stores zero rows without surfacing an exception here.",
+      "impact": "PoC reports success despite failing its stated acceptance criterion of at least one inserted receipt.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Legion PoC claims validation of 1000 agents from a sequential batch of 100 advisories",
+      "severity": "P2",
+      "path": "scripts/c5_demos/poc_legion_1000.py",
+      "line": 248,
+      "evidence": "batch = all_advisories[:100] at 153; three processors run sequentially; final success line claims topology validated for 1000 agents.",
+      "trigger": "A normal successful execution of this demonstration.",
+      "impact": "Output overstates the exercised scale and concurrency; it provides no 1000-agent runtime evidence.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Genomic mechanics metadata is shifted onto the next primitive",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/oncology_primitives.py",
+      "line": 1809,
+      "evidence": "ONC-145 describes TMB as somatic mutations per megabase, but carries chromosomal imbalance/spindle metadata (1791–1795). Its TMB formula and threshold instead appear under ONC-146 Mutational signatures (1809–1813); COSMIC signature metadata is under ONC-147 APOBEC, and the shift continues through ONC-154 TERT carrying the preceding ecDNA circular-amplicon mechanics.",
+      "trigger": "Read get(\"ONC-146\")[\"genomic_mechanics\"] or otherwise export the structured PRIMITIVES records.",
+      "impact": "Structured records return mechanics associated with a different named primitive, contradicting neighboring descriptions. No production clinical use or medical outcome established; this is a corpus association defect.",
+      "confidence": "high",
+      "kind": "docs"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "01_KISH_ENGINE/babylon60/core/replay_kernel.py",
+      "line": 135,
+      "hypothesis": "Concurrent admit_event calls can read the same head before inserting, since no transaction/serialization appears in this class.",
+      "limitation": "Targeted caller search in 01_KISH_ENGINE/tests/crates found only the definition; no production integration or schema constraints established, so no production bypass claim."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".agents/skills/c5-epistemic-thermodynamics-project/references/modules/c5-ultrathink-epistemic-audit/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          53
+        ]
+      ],
+      "sha256_manifest": "14c52b6c27bf5b71ea59494bd7e189e280618cd52ffe0f1d5be04aa9f6c492e7",
+      "sha256_observed": "14c52b6c27bf5b71ea59494bd7e189e280618cd52ffe0f1d5be04aa9f6c492e7",
+      "changed": false
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/ir.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          36
+        ]
+      ],
+      "sha256_manifest": "1d57791f13f85800e4091852be093dcc7869b54cf3a79cf54aa6bb3403374606",
+      "sha256_observed": "1d57791f13f85800e4091852be093dcc7869b54cf3a79cf54aa6bb3403374606",
+      "changed": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/agents/sovereign_mcp/__init__.py",
+      "status": "reviewed_full",
+      "ranges": [],
+      "sha256_manifest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sha256_observed": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "changed": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/core/replay_kernel.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          193
+        ]
+      ],
+      "sha256_manifest": "fc4cdef690b91e5e0c03e99ed1f984208a26683a505aea0cca7bec89c70559ea",
+      "sha256_observed": "fc4cdef690b91e5e0c03e99ed1f984208a26683a505aea0cca7bec89c70559ea",
+      "changed": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/oncology_primitives.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          3756
+        ]
+      ],
+      "sha256_manifest": "6f24b87083e7aa578c0e1a82141ff9a73ab38b4280bec38c6afa706372812ffd",
+      "sha256_observed": "6f24b87083e7aa578c0e1a82141ff9a73ab38b4280bec38c6afa706372812ffd",
+      "changed": false
+    },
+    {
+      "path": "01_KISH_ENGINE/cortex/crates/cortex-core/src/cognitive_gate.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          92
+        ]
+      ],
+      "sha256_manifest": "ea4019d1181802d88e40643fac9f6f747bcfb208c81e805a8fb5b07193bbc6f5",
+      "sha256_observed": "ea4019d1181802d88e40643fac9f6f747bcfb208c81e805a8fb5b07193bbc6f5",
+      "changed": false
+    },
+    {
+      "path": "crates/b60-lang/src/bin/aeon_chaining.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          189
+        ]
+      ],
+      "sha256_manifest": "020c38164a6186e62087328bb8d46bdb1ddc71c0d1b31c777fffd2fe054f8e40",
+      "sha256_observed": "020c38164a6186e62087328bb8d46bdb1ddc71c0d1b31c777fffd2fe054f8e40",
+      "changed": false
+    },
+    {
+      "path": "docs/03_guides/guide_kernel_mcp.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          128
+        ]
+      ],
+      "sha256_manifest": "3b9736f3df48c3bc8d8d6ae1c9f14889696ec1e645a1b709a0c16b15220318ed",
+      "sha256_observed": "3b9736f3df48c3bc8d8d6ae1c9f14889696ec1e645a1b709a0c16b15220318ed",
+      "changed": false
+    },
+    {
+      "path": "docs/security/evidence/harness-audit-2026-10-24/negative-controls.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          16
+        ]
+      ],
+      "sha256_manifest": "3ec30623fe8aa14b19ee30d8f3ee17fc2734a4638db34875da37b3c63227856b",
+      "sha256_observed": "3ec30623fe8aa14b19ee30d8f3ee17fc2734a4638db34875da37b3c63227856b",
+      "changed": false
+    },
+    {
+      "path": "proof/lean/MolochLandauer.lean",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          126
+        ]
+      ],
+      "sha256_manifest": "b050072b0cfe8763c58bfeb0e5e66a5d54839e0b97743955ecd2fb2d0a93f60e",
+      "sha256_observed": "b050072b0cfe8763c58bfeb0e5e66a5d54839e0b97743955ecd2fb2d0a93f60e",
+      "changed": false
+    },
+    {
+      "path": "scripts/c5_demos/poc_legion_1000.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          253
+        ]
+      ],
+      "sha256_manifest": "2813f5d4b5a13bab2ae6d50e144299f60dfe5c2388b550719e226bbe30141509",
+      "sha256_observed": "2813f5d4b5a13bab2ae6d50e144299f60dfe5c2388b550719e226bbe30141509",
+      "changed": false
+    },
+    {
+      "path": "scripts/c5_quality_gates/sync_version.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          151
+        ]
+      ],
+      "sha256_manifest": "2b5273913d38997c67c937b71df21893726bf0556f52a36925792c306f8b0237",
+      "sha256_observed": "2b5273913d38997c67c937b71df21893726bf0556f52a36925792c306f8b0237",
+      "changed": false
+    },
+    {
+      "path": "scripts/repatriated/copy_card.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          44
+        ]
+      ],
+      "sha256_manifest": "e2121b1705906f18dfd453a9254604c4cb931678a65fa5a5842cb04d69983af5",
+      "sha256_observed": "e2121b1705906f18dfd453a9254604c4cb931678a65fa5a5842cb04d69983af5",
+      "changed": false
+    },
+    {
+      "path": "tests/fixtures/oncology_300.json",
+      "status": "partial",
+      "ranges": [
+        [
+          1,
+          700
+        ]
+      ],
+      "sha256_manifest": "b4be01f6f0cf30c7c52ee04bd4f26b0e19417943b0f6eff4af1dbd7cc5def8bd",
+      "sha256_observed": "b4be01f6f0cf30c7c52ee04bd4f26b0e19417943b0f6eff4af1dbd7cc5def8bd",
+      "changed": false,
+      "unreviewed_ranges": [
+        [
+          701,
+          3007
+        ]
+      ]
+    },
+    {
+      "path": "tests/test_cortex_crypto_kernel.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          266
+        ]
+      ],
+      "sha256_manifest": "9286308c3165c113594f3efd2cc18f38aac831e5fb239b5e429d4924766c1e5a",
+      "sha256_observed": "9286308c3165c113594f3efd2cc18f38aac831e5fb239b5e429d4924766c1e5a",
+      "changed": false
+    },
+    {
+      "path": "tests/test_skill_learning.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          211
+        ]
+      ],
+      "sha256_manifest": "f66b3eb9d86dfc31e3c1af868e25dfaa423c617dbfbc32a94daced42ce71bf9b",
+      "sha256_observed": "f66b3eb9d86dfc31e3c1af868e25dfaa423c617dbfbc32a94daced42ce71bf9b",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/api-shield/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          44
+        ]
+      ],
+      "sha256_manifest": "6df692c74df9d2b4476c1c1154386f185af37a90b0850ad39de0f0c1f7c9772a",
+      "sha256_observed": "6df692c74df9d2b4476c1c1154386f185af37a90b0850ad39de0f0c1f7c9772a",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/images/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          96
+        ]
+      ],
+      "sha256_manifest": "92c62bd77b133bf58287e93f12dced76725c0dc699b28ecad2acdae709ceea3c",
+      "sha256_observed": "92c62bd77b133bf58287e93f12dced76725c0dc699b28ecad2acdae709ceea3c",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/static-assets/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          199
+        ]
+      ],
+      "sha256_manifest": "619acb0a8d9732395316fc0beeed11e1a10557e08c639338ac92473cea1c5701",
+      "sha256_observed": "619acb0a8d9732395316fc0beeed11e1a10557e08c639338ac92473cea1c5701",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/durable-objects/references/testing.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          264
+        ]
+      ],
+      "sha256_manifest": "6a247f1e5c0cdd74e8884e4e8dc5d73c82468e67c409f97f4a7f8ad03915465c",
+      "sha256_observed": "6a247f1e5c0cdd74e8884e4e8dc5d73c82468e67c409f97f4a7f8ad03915465c",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents/agent_07_voice.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          62
+        ]
+      ],
+      "sha256_manifest": "a6376c873057cf8e06d6ea77586e350b404c80978f325c9546a54a20e77fe0a8",
+      "sha256_observed": "a6376c873057cf8e06d6ea77586e350b404c80978f325c9546a54a20e77fe0a8",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_43_site_playbooks_southwest.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "sha256_manifest": "a2feeaa58bb78f6cbd5c2d98d9231d7b4a324d2670c55f3dfc01a29c00e56c2b",
+      "sha256_observed": "a2feeaa58bb78f6cbd5c2d98d9231d7b4a324d2670c55f3dfc01a29c00e56c2b",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-rubin-acoustic-linter/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "sha256_manifest": "0ea920f15a1721ed5365d1d2a3fb58472d61f4e10c0c7fc5607658e7c9454371",
+      "sha256_observed": "0ea920f15a1721ed5365d1d2a3fb58472d61f4e10c0c7fc5607658e7c9454371",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/global/electron-mac-bundle-collision-diagnostics/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "sha256_manifest": "291f844fab395612b92ccedd342d05bcbc0e6f1a66413a695a11c383731b5394",
+      "sha256_observed": "291f844fab395612b92ccedd342d05bcbc0e6f1a66413a695a11c383731b5394",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/workspace/c5-epistemic-thermodynamics-project/references/modules/biographical-thermo/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          33
+        ]
+      ],
+      "sha256_manifest": "dcdedc62771fcf684851e550f4f8f94b9f22460190ebde3a1cf82b9482a088ad",
+      "sha256_observed": "dcdedc62771fcf684851e550f4f8f94b9f22460190ebde3a1cf82b9482a088ad",
+      "changed": false
+    }
+  ],
+  "tool_limitations": [
+    "Native codebase-memory graph tools were absent from the exposed tool inventory; targeted text searches used instead.",
+    "Hash comparisons were made at report creation against the supplied manifest; no repository files were edited.",
+    "All oncology_primitives.py lines reviewed in chunks of at most 200; fixture remains partial at 1–700. Biomedical claims were not independently verified; the added finding concerns internal record association contradictions only.",
+    "No runtime, tests, compiler, physical measurements, medical validation, or external API verification performed."
+  ],
+  "tests_run": []
+}

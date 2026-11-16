@@ -1,0 +1,75 @@
+{
+  "checks": [
+    {
+      "check": "related-tests",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "pytest",
+        "tests/test_swarm100_lot12_s5_regressions.py",
+        "tests/test_ns_z3_firewall.py",
+        "tests/test_ns_z3_resource_exhaustion.py",
+        "tests/test_agents_archi.py",
+        "tests/test_gemini_labs_nexus.py",
+        "-q",
+        "-o",
+        "addopts=--tb=short"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/s5/related-tests.log",
+      "sha256": "70db6af586a7ab80aef6964ef26681e29ba0c5de4b53ac0fabff84636e615f20",
+      "environment": "HOME temporary; vault/provider keys removed"
+    },
+    {
+      "check": "ruff",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "ruff",
+        "check",
+        "tools/skill_library/global/youtube-analysis-pipeline/scripts/yt_audit.py",
+        "01_KISH_ENGINE/babylon60/core/popperian_filter.py",
+        "01_KISH_ENGINE/babylon60/primitives/sandbox.py",
+        "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+        "01_KISH_ENGINE/babylon60/kernel/ns_z3_firewall.py",
+        "tests/test_swarm100_lot12_s5_regressions.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/s5/ruff.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "environment": "HOME temporary; vault/provider keys removed"
+    },
+    {
+      "check": "mypy",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "mypy",
+        "--follow-imports=silent",
+        "--check-untyped-defs",
+        "tools/skill_library/global/youtube-analysis-pipeline/scripts/yt_audit.py",
+        "01_KISH_ENGINE/babylon60/core/popperian_filter.py",
+        "01_KISH_ENGINE/babylon60/primitives/sandbox.py",
+        "02_EDIN_SWARMS/agents_archi/clients/openrouter.py",
+        "01_KISH_ENGINE/babylon60/kernel/ns_z3_firewall.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/s5/mypy.log",
+      "sha256": "e317872697c2cbfdefa321527a6efe73290dff3a390b0fa8723b87092eccba6a",
+      "environment": "HOME temporary; vault/provider keys removed"
+    }
+  ],
+  "source_sha256": {
+    "tools/skill_library/global/youtube-analysis-pipeline/scripts/yt_audit.py": "61d95dcae8a1a3c86c1ffcad16f748b02ddd104362fdf5f41812a7f75955e684",
+    "01_KISH_ENGINE/babylon60/core/popperian_filter.py": "aa6d9790230ae6056fa811f5b783542758f17dd4f21289df0f04a343a12e5f88",
+    "01_KISH_ENGINE/babylon60/primitives/sandbox.py": "750fd030aef40012bb73af11254b90a7b308d57f803ba78b88e2e21d5eb3fa22",
+    "02_EDIN_SWARMS/agents_archi/clients/openrouter.py": "57773548924aef80661afcc6d6878e46ef7267777bb447404b91c89a02ebb6c0",
+    "01_KISH_ENGINE/babylon60/kernel/ns_z3_firewall.py": "701af0343b17e1270f5457985a0554427dfa161698e787a0ca340061e97ed35c"
+  }
+}

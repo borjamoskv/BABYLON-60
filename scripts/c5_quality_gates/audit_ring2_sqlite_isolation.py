@@ -16,10 +16,17 @@ import sys
 from pathlib import Path
 from typing import List, Optional, Tuple
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).absolute().parents[2]
 EDIN_DIR = REPO_ROOT / "02_EDIN_SWARMS"
 
 FORBIDDEN_MODULES = {"sqlite3", "aiosqlite"}
+
+
+def _is_confined_to_repo(path: Path, root: Path = REPO_ROOT) -> bool:
+    try:
+        return path.resolve().is_relative_to(root.resolve())
+    except OSError:
+        return False
 
 
 def _check_import_node(node: ast.Import) -> List[Tuple[int, str]]:
@@ -97,7 +104,9 @@ def _parse_ast_safely(file_path: Path) -> Tuple[Optional[ast.AST], Optional[str]
         return None, f"Error al parsear AST: {e}"
 
 
-def check_file_for_sqlite_imports(file_path: Path) -> List[Tuple[int, str]]:
+def check_file_for_sqlite_imports(file_path: Path, root: Path = REPO_ROOT) -> List[Tuple[int, str]]:
+    if not _is_confined_to_repo(file_path, root):
+        return [(1, "Ruta fuera de confinamiento REPO_ROOT (resolve/is_relative_to)")]
     tree, err = _parse_ast_safely(file_path)
     if err or tree is None:
         return [(1, err or "AST is None")]

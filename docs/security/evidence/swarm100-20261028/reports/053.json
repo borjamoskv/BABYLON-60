@@ -1,0 +1,423 @@
+{
+  "shard": "053",
+  "findings": [
+    {
+      "title": "Derivation creates FormalProof for an unrelated goal",
+      "severity": "P1",
+      "path": "01_KISH_ENGINE/babylon60/autodidact/epistemology.py",
+      "line": 146,
+      "evidence": "derive validates premises then constructs a string from premise contents and assigns kind=FormalProof/confidence=1.0 without checking a relation to goal. engine.py:189 calls it for an arbitrary supplied goal.",
+      "trigger": "A verified epistemic premise is passed with a logically unrelated epistemic goal.",
+      "impact": "The inference engine returns a fully confident formal proof of a conclusion that was never established.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Proof verifier ignores the claimed leaf index",
+      "severity": "P2",
+      "path": "crates/b60-lang/src/mmr.rs",
+      "line": 181,
+      "evidence": "verify_proof hashes inner_proof and peaks but never reads leaf_index or checks path orientation against its index.",
+      "trigger": "Change leaf_index in a valid generated proof, keeping its path, peaks and total_leaves.",
+      "impact": "Verification still returns true for a false positional membership claim; no external production consumer was established.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Malformed peak index panics instead of rejecting proof",
+      "severity": "P2",
+      "path": "crates/b60-lang/src/mmr.rs",
+      "line": 198,
+      "evidence": "other_peaks[..proof.peak_index] and [proof.peak_index..] are indexed without checking bounds.",
+      "trigger": "Call public verify_proof with peak_index greater than other_peaks.len().",
+      "impact": "Verifier panics on malformed input instead of returning false; exposure to remote inputs remains unverified.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "IFC parser splits semicolons inside quoted values",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/cortex/crates/cortex-guard/src/ifc.rs",
+      "line": 64,
+      "evidence": "current_statement.split(';') has no quote state; comment stripping likewise uses trimmed.find(\"/*\") regardless of quoting.",
+      "trigger": "A valid IFC string property contains a semicolon or /*.",
+      "impact": "Entities are silently lost or corrupted while parse returns Ok, affecting extracted compliance data.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Skill persistence reports success after failed copy",
+      "severity": "P2",
+      "path": "tools/skill_library/codex_overrides/turnstile-spin/scripts/persist-skill.sh",
+      "line": 87,
+      "evidence": "The script uses set -uo pipefail, not errexit; the copytree Python command is not checked and execution proceeds to a separate status=ok JSON emitter.",
+      "trigger": "Target creation or copying fails due to permissions, disk exhaustion or a concurrent target writer.",
+      "impact": "Caller receives successful exit/status although the canonical bundle is missing or only partly copied.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Setback distance fabricated from local placement axes",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/cortex/crates/cortex-guard/src/ifc.rs",
+      "line": 171,
+      "evidence": "SetbackDistance is populated as min(abs(x), abs(y)) from local placement without property boundary geometry or parent placement composition.",
+      "trigger": "Building has a translated/rotated parent placement or parcel boundary unrelated to the local axes.",
+      "impact": "A synthetic numeric setback is exposed as an actual property and can yield incorrect spatial compliance conclusions.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Garbage collection totals count repeated scans as reclaimable bytes",
+      "severity": "P2",
+      "path": "scripts/c5_sharur/garbage_collection_sitrep.json",
+      "line": 5,
+      "evidence": "SHARUR_GC_000 and SHARUR_GC_006 repeat the same target/pattern, sample paths and bytes_found=640958858. Similar cycles repeat in all cohorts; total_anergy_bytes aggregates these repeats rather than identifying unique files.",
+      "trigger": "Use total_anergy_bytes or cohort bytes as a storage evacuation/reclamation estimate.",
+      "impact": "The historical report overcounts storage by counting the same files across agents; no actual deletion or consumer execution was established.",
+      "confidence": "high",
+      "kind": "docs"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "reports/eu_ai_act_compliance_pack.json",
+      "line": 20,
+      "hypothesis": "COMPLIANT_IN_SILICON and 100% coverage may overstate compliance based on narrow technical tests. The historical generator and independent execution evidence were not traced; no legal conclusion was made."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".agents/skills/c5-ring0-babylon-kernel-project/references/modules/c5-sovereign-daemon-deployment/MODULE.md",
+      "status": "reviewed_full",
+      "read_ranges": [
+        [
+          1,
+          79
+        ]
+      ],
+      "inventory_sha256": "6f545eb93643449b8607f53f65afeba841af111b6ff7da6517e03f6b60e1fb2d",
+      "observed_sha256": "6f545eb93643449b8607f53f65afeba841af111b6ff7da6517e03f6b60e1fb2d",
+      "changed_since_inventory": false
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-fuzz/fuzz/fuzz_targets/fuzz_target_1.rs",
+      "status": "reviewed_full",
+      "read_ranges": [
+        [
+          1,
+          8
+        ]
+      ],
+      "inventory_sha256": "1d4866485509eca0ffb17623b6b031a8e4b12c53fa47f6dadce243acbdd70381",
+      "observed_sha256": "1d4866485509eca0ffb17623b6b031a8e4b12c53fa47f6dadce243acbdd70381",
+      "changed_since_inventory": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/autodidact/epistemology.py",
+      "status": "reviewed_full",
+      "read_ranges": [
+        [
+          1,
+          182
+        ]
+      ],
+      "inventory_sha256": "b7385f413c53dacc2278e594c4d642db6b30b510581bb2a1995b807b550da7fb",
+      "observed_sha256": "b7385f413c53dacc2278e594c4d642db6b30b510581bb2a1995b807b550da7fb",
+      "changed_since_inventory": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/cortex/cortex_ssm_mamba_core.py",
+      "status": "reviewed_full",
+      "read_ranges": [
+        [
+          1,
+          90
+        ]
+      ],
+      "inventory_sha256": "df0d36f4fc92bec828f8babdaf34d5762a8b2bc362bf754981bc25463212af0d",
+      "observed_sha256": "df0d36f4fc92bec828f8babdaf34d5762a8b2bc362bf754981bc25463212af0d",
+      "changed_since_inventory": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/primitives/tonnetz_monitor.py",
+      "status": "reviewed_full",
+      "read_ranges": [
+        [
+          1,
+          66
+        ]
+      ],
+      "inventory_sha256": "1ff2418a1e48ad883c71a98973fc0fae2891b33997d8340a2e1ef90cd2fd8cd4",
+      "observed_sha256": "1ff2418a1e48ad883c71a98973fc0fae2891b33997d8340a2e1ef90cd2fd8cd4",
+      "changed_since_inventory": false
+    },
+    {
+      "path": "01_KISH_ENGINE/cortex/crates/cortex-guard/src/ifc.rs",
+      "status": "reviewed_full",
+      "read_ranges": [
+        [
+          1,
+          303
+        ]
+      ],
+      "inventory_sha256": "531205976c17f9d5cd715f1002ebce53ace0a59580b6c5d3409d6482df02c998",
+      "observed_sha256": "531205976c17f9d5cd715f1002ebce53ace0a59580b6c5d3409d6482df02c998",
+      "changed_since_inventory": false
+    },
+    {
+      "path": "crates/b60-lang/src/mmr.rs",
+      "status": "reviewed_full",
+      "read_ranges": [
+        [
+          1,
+          246
+        ]
+      ],
+      "inventory_sha256": "3e985e6d6f20d02438d9474afb189edb4620120eac2e7248fcb909bc88f08a18",
+      "observed_sha256": "3e985e6d6f20d02438d9474afb189edb4620120eac2e7248fcb909bc88f08a18",
+      "changed_since_inventory": false
+    },
+    {
+      "path": "docs/04_research/sanedrin_reflexive_forking_audit.md",
+      "status": "reviewed_full",
+      "read_ranges": [
+        [
+          1,
+          44
+        ]
+      ],
+      "inventory_sha256": "62dfb9d5097cbeb045918410d46a9cd4ef7708f59fcfbf57971550279b239e5e",
+      "observed_sha256": "62dfb9d5097cbeb045918410d46a9cd4ef7708f59fcfbf57971550279b239e5e",
+      "changed_since_inventory": false
+    },
+    {
+      "path": "docs/security/intelligence-authority-acceptance.md",
+      "status": "reviewed_full",
+      "read_ranges": [
+        [
+          1,
+          154
+        ]
+      ],
+      "inventory_sha256": "8f759108885d2b6cdc6d2fd148ae6eb5ed8f5fa9cb8782a96818bf13feef4ec8",
+      "observed_sha256": "8f759108885d2b6cdc6d2fd148ae6eb5ed8f5fa9cb8782a96818bf13feef4ec8",
+      "changed_since_inventory": false
+    },
+    {
+      "path": "reports/eu_ai_act_compliance_pack.json",
+      "status": "reviewed_full",
+      "read_ranges": [
+        [
+          1,
+          102
+        ]
+      ],
+      "inventory_sha256": "4095d475ece85d8a3edc1b9aef6eb998241cdcf27428778bf9cac221a053958b",
+      "observed_sha256": "4095d475ece85d8a3edc1b9aef6eb998241cdcf27428778bf9cac221a053958b",
+      "changed_since_inventory": false
+    },
+    {
+      "path": "scripts/c5_demos/spark_daemon_sitrep.json",
+      "status": "reviewed_full",
+      "read_ranges": [
+        [
+          1,
+          42
+        ]
+      ],
+      "inventory_sha256": "1ce52ad9c531f8f0bed0b8e4041740bf27f4486bad0f40b905f7e2520f2381c4",
+      "observed_sha256": "1ce52ad9c531f8f0bed0b8e4041740bf27f4486bad0f40b905f7e2520f2381c4",
+      "changed_since_inventory": false
+    },
+    {
+      "path": "scripts/c5_sharur/garbage_collection_sitrep.json",
+      "status": "reviewed_full",
+      "read_ranges": [
+        [
+          1,
+          1643
+        ]
+      ],
+      "inventory_sha256": "1991de6485940cb5cf339928dc10a42e4b9b470e3a14c7b1da4ca61207c8f2aa",
+      "observed_sha256": "1991de6485940cb5cf339928dc10a42e4b9b470e3a14c7b1da4ca61207c8f2aa",
+      "changed_since_inventory": false
+    },
+    {
+      "path": "scripts/runner.py",
+      "status": "reviewed_full",
+      "read_ranges": [
+        [
+          1,
+          435
+        ]
+      ],
+      "inventory_sha256": "6fdcce3688e4fe6cb4b355c891d2bbea0185d399fd45c3319d5702aff64be445",
+      "observed_sha256": "6fdcce3688e4fe6cb4b355c891d2bbea0185d399fd45c3319d5702aff64be445",
+      "changed_since_inventory": false
+    },
+    {
+      "path": "tests/nemesis_wave7_provenance_drift.rs",
+      "status": "reviewed_full",
+      "read_ranges": [
+        [
+          1,
+          150
+        ]
+      ],
+      "inventory_sha256": "8406b1de31cdf47ce1931ed5c219d1cea2f1d213f5531dac91f813a4c654cf30",
+      "observed_sha256": "8406b1de31cdf47ce1931ed5c219d1cea2f1d213f5531dac91f813a4c654cf30",
+      "changed_since_inventory": false
+    },
+    {
+      "path": "tests/test_f60_arithmetic.py",
+      "status": "reviewed_full",
+      "read_ranges": [
+        [
+          1,
+          26
+        ]
+      ],
+      "inventory_sha256": "ca28c3b5a7edfcdeb2b3e07d2ee44a7d2a02cd535eeb211a226006bf595c3e9a",
+      "observed_sha256": "ca28c3b5a7edfcdeb2b3e07d2ee44a7d2a02cd535eeb211a226006bf595c3e9a",
+      "changed_since_inventory": false
+    },
+    {
+      "path": "tests/test_symlink_depth_auditor.py",
+      "status": "reviewed_full",
+      "read_ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "inventory_sha256": "f7e5a9dc90b60e302d0b22473e928d4ff120602680f6c899d43884790b408fd6",
+      "observed_sha256": "f7e5a9dc90b60e302d0b22473e928d4ff120602680f6c899d43884790b408fd6",
+      "changed_since_inventory": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/argo-smart-routing/patterns.md",
+      "status": "reviewed_full",
+      "read_ranges": [
+        [
+          1,
+          104
+        ]
+      ],
+      "inventory_sha256": "33ce9f183681a5a32a87860a2a66f244d7cd5da169b4f3b1bdcd61c56419c25b",
+      "observed_sha256": "33ce9f183681a5a32a87860a2a66f244d7cd5da169b4f3b1bdcd61c56419c25b",
+      "changed_since_inventory": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/network-interconnect/README.md",
+      "status": "reviewed_full",
+      "read_ranges": [
+        [
+          1,
+          99
+        ]
+      ],
+      "inventory_sha256": "2f99ee6bd1463fec8ce240e00980cd7b4dec60a70493fdf343d56530c2c87ca6",
+      "observed_sha256": "2f99ee6bd1463fec8ce240e00980cd7b4dec60a70493fdf343d56530c2c87ca6",
+      "changed_since_inventory": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/tail-workers/patterns.md",
+      "status": "reviewed_full",
+      "read_ranges": [
+        [
+          1,
+          180
+        ]
+      ],
+      "inventory_sha256": "d6a82a85e888047f23a9ad37dcddd4bb3702c8fb12da4fb41d006b691ab561d6",
+      "observed_sha256": "d6a82a85e888047f23a9ad37dcddd4bb3702c8fb12da4fb41d006b691ab561d6",
+      "changed_since_inventory": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/turnstile-spin/scripts/persist-skill.sh",
+      "status": "reviewed_full",
+      "read_ranges": [
+        [
+          1,
+          114
+        ]
+      ],
+      "inventory_sha256": "4fea0bcda9fded16dd63f77dad196474d3c15c1fe93ac4718b50517fa834330c",
+      "observed_sha256": "4fea0bcda9fded16dd63f77dad196474d3c15c1fe93ac4718b50517fa834330c",
+      "changed_since_inventory": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents/agent_21_rideshare.md",
+      "status": "reviewed_full",
+      "read_ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "inventory_sha256": "1d548047b5109c4e13c328cf84f311593a47822a5f1a618fc9894111439b131e",
+      "observed_sha256": "1d548047b5109c4e13c328cf84f311593a47822a5f1a618fc9894111439b131e",
+      "changed_since_inventory": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-debloat-agent-kernel/scripts/langchain_autopsy.py",
+      "status": "reviewed_full",
+      "read_ranges": [
+        [
+          1,
+          113
+        ]
+      ],
+      "inventory_sha256": "56c6be2e9cea0de41b5dc4f45a9411f1c87effe5ae6d98f306aa2a8b8ad773a3",
+      "observed_sha256": "56c6be2e9cea0de41b5dc4f45a9411f1c87effe5ae6d98f306aa2a8b8ad773a3",
+      "changed_since_inventory": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/electron-mac-bundle-collision-diagnostics/MODULE.md",
+      "status": "reviewed_full",
+      "read_ranges": [
+        [
+          1,
+          45
+        ]
+      ],
+      "inventory_sha256": "bdee37b0d19a0da82a7702a6767f71b7b6081d6d8e4fec6845cbb77dc8261488",
+      "observed_sha256": "bdee37b0d19a0da82a7702a6767f71b7b6081d6d8e4fec6845cbb77dc8261488",
+      "changed_since_inventory": false
+    },
+    {
+      "path": "tools/skill_library/global/flstudio-mcp-production/examples/C5_Full_Track_Arranger.py",
+      "status": "reviewed_full",
+      "read_ranges": [
+        [
+          1,
+          128
+        ]
+      ],
+      "inventory_sha256": "74bb86b23fe90b8c6aad73f737b1ca5cafb85447e0eafff4372d7c2137daa191",
+      "observed_sha256": "74bb86b23fe90b8c6aad73f737b1ca5cafb85447e0eafff4372d7c2137daa191",
+      "changed_since_inventory": false
+    },
+    {
+      "path": "tools/skill_library/workspace/c5-ring0-babylon-kernel-project/references/modules/c5-sovereign-daemon-deployment/MODULE.md",
+      "status": "reviewed_full",
+      "read_ranges": [
+        [
+          1,
+          79
+        ]
+      ],
+      "inventory_sha256": "6f545eb93643449b8607f53f65afeba841af111b6ff7da6517e03f6b60e1fb2d",
+      "observed_sha256": "6f545eb93643449b8607f53f65afeba841af111b6ff7da6517e03f6b60e1fb2d",
+      "changed_since_inventory": false
+    }
+  ],
+  "tool_limitations": [
+    "No native codebase graph tools exposed in ALL_TOOLS; targeted source reads and rg used.",
+    "Read-only static audit; no tests, builds, application runtime or external API validation.",
+    "Cloudflare reference text reviewed for local consistency only; current external service details not verified.",
+    "Initial output truncation resolved by bounded follow-up reads; all assigned text reviewed. Historical report metrics and effect execution not independently validated."
+  ],
+  "tests_run": []
+}

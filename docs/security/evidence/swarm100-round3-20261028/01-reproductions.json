@@ -1,0 +1,60 @@
+{
+  "reviewer": "01",
+  "execution_scope": "isolated in-memory Python source subsets only",
+  "results": {
+    "SW100-C0264": {
+      "scope": "actual extracted pure function",
+      "swapped_fields_same_digest": true,
+      "renamed_field_same_digest": true,
+      "scalar_type_change_same_digest": true
+    },
+    "SW100-C0270": {
+      "scope": "actual extracted pure classifier",
+      "input": "RFC 9999 proves that two plus two equals five",
+      "counts": {
+        "hechos_verificados": 1,
+        "evidencia_experimental": 0,
+        "modelos_doctrina": 0,
+        "especulacion_sesgo": 0
+      }
+    },
+    "SW100-C0268": {
+      "scope": "actual extracted final_output expression with two synthetic serialized reports",
+      "parse_error": "Extra data: line 3 column 1 (char 15)",
+      "output": "{\"id\": \"one\"}\n\n---\n\n{\"id\": \"two\"}"
+    },
+    "SW100-C0466": {
+      "scope": "actual extracted classes, in-memory asyncio queue only",
+      "pending_after_stop": 1,
+      "worker_cleared": true
+    },
+    "SW100-C0451": {
+      "scope": "actual extracted pure validator",
+      "result": {
+        "seq_id": "synthetic",
+        "length": 0,
+        "gc_content": 0.0,
+        "sha3_256": "a7ffc6f8bf1ed76651c14756a061d662f580ff4de43b49fa82d80a4b80f8434a",
+        "causal_taint": "borjamoskv:fasta_validator_c5",
+        "is_valid": true
+      }
+    },
+    "SW100-C0519": {
+      "scope": "actual extracted pure simulator; no real broker or effect",
+      "patch_id": "PATCH-0001",
+      "dynamic_patch_id": "PATCH-0002",
+      "audit": {
+        "patch_id": "PATCH-0001",
+        "action_attempted": null,
+        "broker_blocked": false,
+        "unauthorized_effect_committed": false,
+        "artifact_mismatch_detected": false
+      }
+    },
+    "SW100-C0084": {
+      "scope": "actual extracted simulator class; no demo loop, solver, external LLM or Ring-0 effect",
+      "unknown_opcode_accepted": true,
+      "message": "Validación formal Z3/Affine superada."
+    }
+  }
+}

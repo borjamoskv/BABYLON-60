@@ -1,0 +1,80 @@
+[
+  {
+    "candidate_id": "SW100-C0278",
+    "decision": "ALREADY_FIXED",
+    "severity": "P2",
+    "remediation_state": "FIXED",
+    "path": "scripts/c5_sharur/agent_beeper.py",
+    "current_source_sha256": "50741a443c61b3364dc877d3f567ad1daac5c9b104672c2e692ab29fb972bfb0",
+    "rationale": "Unicast now signals the same per-tenant event awaited by a suspended receiver; queued private payload is consumed once. Global broadcast wakes all registered tenant events, and late receivers read the retained global payload. Cancellation and deregistration/re-registration are covered.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_sharur/agent_beeper.py",
+        "start_line": 59,
+        "end_line": 81,
+        "observation": "Waits on the receiver event, consumes unicast once, checks registration identity and never holds lock across await."
+      },
+      {
+        "path": "scripts/c5_sharur/agent_beeper.py",
+        "start_line": 83,
+        "end_line": 88,
+        "observation": "Signals the same receiver event used by wait_for_beep."
+      },
+      {
+        "path": "scripts/c5_sharur/agent_beeper.py",
+        "start_line": 50,
+        "end_line": 57,
+        "observation": "Releases pending wait with a registration error instead of leaving it suspended."
+      }
+    ],
+    "guards": [
+      "Single event-loop thread is required for asyncio.Event delivery.",
+      "Broadcast is O(N + W): N registered tenants and W current waits. No performance measurement is claimed.",
+      "Unicast remains a last-write-wins single pending slot, not a message queue."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-pager-20261028/before.log",
+      "docs/security/evidence/swarm100-pager-20261028/after.log",
+      "docs/security/evidence/swarm100-pager-20261028/independent-review.json"
+    ],
+    "resolution_type": "CODE_AND_REGRESSIONS_VERIFIED",
+    "supersedes_snapshot": "docs/security/evidence/swarm100-round3-20261028/root-adjudications-before-pager-remediation.json"
+  },
+  {
+    "candidate_id": "SW100-C0279",
+    "decision": "ALREADY_FIXED",
+    "severity": "P2",
+    "remediation_state": "FIXED",
+    "path": "scripts/c5_sharur/agent_beeper.py",
+    "current_source_sha256": "50741a443c61b3364dc877d3f567ad1daac5c9b104672c2e692ab29fb972bfb0",
+    "rationale": "The prior documentation-only REJECTED decision was insufficient and is superseded. An internal _emitted flag is checked and set under the pager RLock; every second broadcast raises RuntimeError before modifying any payload or event. A fresh pager is required for another global round. The first broadcast remains available to late waiters. This is an executable single-emission invariant, not a docstring-only closure.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_sharur/agent_beeper.py",
+        "start_line": 35,
+        "end_line": 41,
+        "observation": "Internal emitted state starts false and an RLock protects state transitions."
+      },
+      {
+        "path": "scripts/c5_sharur/agent_beeper.py",
+        "start_line": 90,
+        "end_line": 104,
+        "observation": "Rejects second broadcast under lock before mutating payload; first broadcast signals all recipient events."
+      }
+    ],
+    "guards": [
+      "Single event-loop thread is required for asyncio.Event delivery.",
+      "Broadcast is O(N + W): N registered tenants and W current waits. No performance measurement is claimed.",
+      "Unicast remains a last-write-wins single pending slot, not a message queue."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-pager-20261028/before.log",
+      "docs/security/evidence/swarm100-pager-20261028/after.log",
+      "docs/security/evidence/swarm100-pager-20261028/independent-review.json"
+    ],
+    "resolution_type": "CODE_AND_REGRESSIONS_VERIFIED",
+    "supersedes_snapshot": "docs/security/evidence/swarm100-round3-20261028/root-adjudications-before-pager-remediation.json"
+  }
+]

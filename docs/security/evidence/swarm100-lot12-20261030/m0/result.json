@@ -1,0 +1,193 @@
+{
+  "group": "m0",
+  "candidate_ids": [
+    "SW100-C0175"
+  ],
+  "source_sha256": {
+    "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py": "d150a286d1267fc6afa26dd6c59d41266f40c26a428cf29885465af041a083fc"
+  },
+  "test_source_sha256": {
+    "tests/test_swarm100_lot12_m0_regressions.py": "06bf1ca5e14982cc89bad53d9c731a2950942a41789e59c3affd0c47456f97b0"
+  },
+  "checks": {
+    "before": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "python",
+        "docs/security/evidence/swarm100-lot12-20261030/m0/run_checks.py",
+        "before"
+      ],
+      "pytest_args": [
+        "--tb=short",
+        "tests/test_swarm100_lot12_m0_regressions.py",
+        "-q",
+        "-rs",
+        "-o",
+        "addopts=--tb=short"
+      ],
+      "exit_code": 1,
+      "source_sha256": "624eb292a797ac7094c4b84357606180465b09f3b7381f5292dba44ac4484634",
+      "test_sha256": "06bf1ca5e14982cc89bad53d9c731a2950942a41789e59c3affd0c47456f97b0",
+      "scope": "Disposable HOME, synthetic Ed25519 keys and SQLite pack data; TCP/DNS blocked; no operator identities/hardware/services."
+    },
+    "after": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "python",
+        "docs/security/evidence/swarm100-lot12-20261030/m0/run_checks.py",
+        "after"
+      ],
+      "pytest_args": [
+        "--tb=short",
+        "tests/test_swarm100_lot12_m0_regressions.py",
+        "-q",
+        "-rs",
+        "-o",
+        "addopts=--tb=short"
+      ],
+      "exit_code": 0,
+      "source_sha256": "d150a286d1267fc6afa26dd6c59d41266f40c26a428cf29885465af041a083fc",
+      "test_sha256": "06bf1ca5e14982cc89bad53d9c731a2950942a41789e59c3affd0c47456f97b0",
+      "scope": "Disposable HOME, synthetic Ed25519 keys and SQLite pack data; TCP/DNS blocked; no operator identities/hardware/services."
+    },
+    "related": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "python",
+        "docs/security/evidence/swarm100-lot12-20261030/m0/run_checks.py",
+        "related"
+      ],
+      "pytest_args": [
+        "--tb=short",
+        "tests/test_swarm100_lot12_m0_regressions.py",
+        "tests/test_m0_evidence_pack_acceptance.py",
+        "tests/test_standalone_verifier.py",
+        "tests/test_compliance_exporter.py",
+        "tests/test_swarm100_round2_regressions.py",
+        "-q",
+        "-rs",
+        "-o",
+        "addopts=--tb=short"
+      ],
+      "exit_code": 0,
+      "source_sha256": "d150a286d1267fc6afa26dd6c59d41266f40c26a428cf29885465af041a083fc",
+      "test_sha256": "06bf1ca5e14982cc89bad53d9c731a2950942a41789e59c3affd0c47456f97b0",
+      "scope": "Disposable HOME, synthetic Ed25519 keys and SQLite pack data; TCP/DNS blocked; no operator identities/hardware/services."
+    },
+    "ruff": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "ruff",
+        "check",
+        "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+        "tests/test_swarm100_lot12_m0_regressions.py",
+        "docs/security/evidence/swarm100-lot12-20261030/m0/run_checks.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/m0/ruff.log"
+    },
+    "mypy": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "mypy",
+        "--follow-imports=silent",
+        "--check-untyped-defs",
+        "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/m0/mypy.log"
+    }
+  },
+  "test_counts": {
+    "before_failed": 23,
+    "before_passed": 10,
+    "new_regressions_passed": 33,
+    "related_passed": 115,
+    "related_skipped": 0
+  },
+  "results": [
+    {
+      "candidate_id": "SW100-C0175",
+      "proposed_state": "FIXED",
+      "rationale": "All eleven mandatory M0 content files now require lower-case SHA-256 digests in a signed dictionary and an equal checksum table. Missing or extra entries, malformed digests/maps, duplicate checksum rows and invalid UTF-8 reject before digest-selected paths can be read. Read failures reject without fabricating integrity. Complete packs from the existing compiler remain accepted; eleven separately omitted/re-signed contents that previously passed now fail.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+          "start_line": 918,
+          "end_line": 940,
+          "observation": "Fixed M0 content coverage includes all mandatory contents, excluding only three self-referential verification artifacts; digest values must be lower-case hex64."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+          "start_line": 942,
+          "end_line": 978,
+          "observation": "Strict UTF-8/checksum entry validation, duplicate/path rejection, exact table/envelope equality and actual content hash comparison."
+        }
+      ],
+      "guards": [
+        "Coverage is for the fixed M0 content layout; additional file digests are rejected rather than interpreted as arbitrary read paths. A future layout extension needs an explicit verifier contract.",
+        "The signature continues to be checked against the public key supplied in existing metadata; this patch does not establish an independent identity trust anchor.",
+        "No hostile concurrent pack mutation or symlink-safe snapshot guarantee is claimed. Integrity concerns the bytes read by the existing verifier in owned fixtures.",
+        "The three verification metadata artifacts are excluded from recursive content hashing to avoid self-reference; checksum bytes are signed via their digest and the envelope/signature are independently checked.",
+        "Existing C0177 / V04 JSON integrity handling is unchanged: round2 test_v04_payload_hash_must_commit_content, test_v04_invalid_json_shape_rejected and test_v04_hash_only_scope_is_explicit pass in the 115-test related suite. CRL compatibility is covered separately by the v03 regressions."
+      ],
+      "runtime_executed": true,
+      "runtime_scope": "Owned temporary M0 packs, real SQLite and real Ed25519 fixture signatures; disposable HOME and blocked TCP/DNS."
+    }
+  ],
+  "evidence_paths": [
+    "docs/security/evidence/swarm100-lot12-20261030/m0/before-check.json",
+    "docs/security/evidence/swarm100-lot12-20261030/m0/before-tests.log",
+    "docs/security/evidence/swarm100-lot12-20261030/m0/after-check.json",
+    "docs/security/evidence/swarm100-lot12-20261030/m0/after-tests.log",
+    "docs/security/evidence/swarm100-lot12-20261030/m0/related-check.json",
+    "docs/security/evidence/swarm100-lot12-20261030/m0/related-tests.log",
+    "docs/security/evidence/swarm100-lot12-20261030/m0/ruff.log",
+    "docs/security/evidence/swarm100-lot12-20261030/m0/mypy.log"
+  ],
+  "preserved_findings": [
+    {
+      "candidate_id": "SW100-C0177",
+      "state": "FIXED",
+      "basis": "V04 JSON content-integrity verification is unchanged by the M0 coverage patch. The existing round2 V04 payload-tampering, invalid-shape and explicitly hash-only-scope tests all pass within the related suite.",
+      "tests": [
+        "tests/test_swarm100_round2_regressions.py::test_v04_payload_hash_must_commit_content",
+        "tests/test_swarm100_round2_regressions.py::test_v04_invalid_json_shape_rejected",
+        "tests/test_swarm100_round2_regressions.py::test_v04_hash_only_scope_is_explicit"
+      ]
+    }
+  ],
+  "independent_review": "Pending parent-assigned reviewer; this result does not self-approve.",
+  "artifact_sha256": {
+    "docs/security/evidence/swarm100-lot12-20261030/m0/related-tests.log": "22e9f0101bbcbc1ec2cc726a7706ec54a78474ec20e6e6de8605b29db33bb4c7",
+    "docs/security/evidence/swarm100-lot12-20261030/m0/related-check.json": "bf7a5dc35b0a335b69ba0c1dc8b76194dd7a5c0f93cc713f9305c7b209e7e9f5",
+    "docs/security/evidence/swarm100-lot12-20261030/m0/before-tests.log": "3fa5d9b1d7b9d0a071ae7a85783723e11c8395b0a9df44e9c16d18a7d4dba816",
+    "docs/security/evidence/swarm100-lot12-20261030/m0/before-check.json": "9766db0a473fe5afc2352dbfdbe94560f73fd19fcb15cae8a28b4469f26229d5",
+    "docs/security/evidence/swarm100-lot12-20261030/m0/after-check.json": "3a399d2a69a870ba51abc1432ff7cb1f655d7571f46fc6412f640b011fffb987",
+    "docs/security/evidence/swarm100-lot12-20261030/m0/mypy.log": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e",
+    "docs/security/evidence/swarm100-lot12-20261030/m0/ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "docs/security/evidence/swarm100-lot12-20261030/m0/run_checks.py": "da357d8398a9a83e14ee46ffb2affc7a716ab2fb4b98edf962a5a2292c992065",
+    "docs/security/evidence/swarm100-lot12-20261030/m0/after-tests.log": "1fca5689568c86237e02dc84dece0d2dfd79efea808b0b6fbd38dd4524374045"
+  },
+  "separate_compatibility_checks": [
+    {
+      "scope": "CRL / V03, separate from C0177 / V04",
+      "basis": "Existing v03 corrupt/missing/schema-invalid CRL and revocation controls pass in the same related suite."
+    }
+  ]
+}

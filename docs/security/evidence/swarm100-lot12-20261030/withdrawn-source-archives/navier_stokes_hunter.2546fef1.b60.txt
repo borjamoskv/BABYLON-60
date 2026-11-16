@@ -1,0 +1,73 @@
+DUB
+# ====================================================================
+# NAVIER-STOKES HUNTER — EJEMPLO SIMBÓLICO B60
+# Dos corrutinas coordinan contadores hasta que R10 alcanza un umbral.
+# El nombre es histórico: no se discretizan ni resuelven ecuaciones de fluidos.
+# ====================================================================
+
+# 1. Umbral entero; F60 solo es una etiqueta en este intérprete
+ALLOC F60 R0
+# Una posición sexagesimal: 50 + 9 = 59. Los espacios separan posiciones.
+NIG R0 [ <<<<<YYYYYYYYY ] # 59
+
+# 2. Retardo en ticks del planificador
+ALLOC TIME R1
+NIG R1 [ Y ] # Un tick lógico; sin equivalencia con tiempo físico
+
+# 3. Corrutinas cooperativas del ejemplo (un solo hilo)
+FORK TUBE_ALPHA
+FORK TUBE_OMEGA
+
+# La corrutina padre registra una señal en memoria y termina
+EXECUTE "SYMBOLIC_EXAMPLE_INITIALIZED"
+HALT
+
+# ====================================================================
+# CORRUTINA A: contador observado R10
+# ====================================================================
+MUB TUBE_ALPHA
+ALLOC F60 R10
+NIG R10 [ Y ]
+
+MUB ALPHA_LOOP
+# Incremento entero del contador
+DAH R10 [ Y ]
+
+# Espera la señal de OMEGA antes de comprobar el umbral
+AWAIT "COUNTER_SYNC" ALPHA_CHECK
+
+MUB ALPHA_CHECK
+# Diferencia entera: R11 = R0 - R10
+ALLOC F60 R11
+NIG R11 R0
+LAL R11 R10
+
+# Si R11 == 0, el contador ha alcanzado el umbral configurado
+NU R11 THRESHOLD_REACHED
+
+# Continuar si todavía no se ha alcanzado el umbral
+AFTER R1 ALPHA_LOOP
+
+
+# ====================================================================
+# CORRUTINA B: contador auxiliar y emisión de señales
+# ====================================================================
+MUB TUBE_OMEGA
+ALLOC F60 R20
+NIG R20 [ Y ]
+
+MUB OMEGA_LOOP
+DAH R20 [ Y ]
+
+# Reanuda ALPHA si está esperando esta señal
+EXECUTE "COUNTER_SYNC"
+AFTER R1 OMEGA_LOOP
+
+
+# ====================================================================
+# PARADA DEL INTÉRPRETE AL ALCANZAR EL UMBRAL
+# ====================================================================
+MUB THRESHOLD_REACHED
+# CRITICAL_HALT marca la parada local; no exporta pruebas ni persiste datos
+EXECUTE "CRITICAL_HALT"
+HALT

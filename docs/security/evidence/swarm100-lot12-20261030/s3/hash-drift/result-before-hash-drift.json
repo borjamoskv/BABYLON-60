@@ -1,0 +1,329 @@
+{
+  "group": "S3",
+  "production_frozen": true,
+  "sources": [
+    "01_KISH_ENGINE/babylon60/bft/master_ledger_queue.py",
+    "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py",
+    "01_KISH_ENGINE/babylon60/core/moskv_kernel.py",
+    "02_EDIN_SWARMS/agents_archi/orchestrator/kda_dag_swarm.py",
+    "01_KISH_ENGINE/services/email_inbound/worker.js"
+  ],
+  "tests": [
+    "tests/test_swarm100_lot12_s3_regressions.py",
+    "tests/test_swarm100_lot12_s3_worker.mjs",
+    "tests/test_itera2_invariants.py"
+  ],
+  "ids": [
+    {
+      "candidate_id": "SW100-C0434",
+      "path": "01_KISH_ENGINE/babylon60/bft/master_ledger_queue.py",
+      "state_proposed": "FIXED",
+      "tests": [
+        "test_c0434_shutdown_drains_already_accepted",
+        "test_queue_failure_rolls_back_and_shutdown_reports_it",
+        "test_queue_full_and_cancelled_shutdown_caller",
+        "test_queue_lifecycle_rejects_unstarted_closed_and_duplicate_init",
+        "test_queue_repeated_bursts_preserve_every_accepted_row",
+        "test_queue_close_or_cancel_during_initialization_cannot_reopen"
+      ],
+      "change": "Admission closes before an ordered shutdown sentinel. Full backlog cannot lose the sentinel silently. Shared shutdown task is shielded against caller cancellation. Batch rollback, terminal accounting, in-memory failed transactions and an exception expose failure instead of clean shutdown. Queue-full admission raises. Initialization is owned by a shielded task; close waits for it and closes the returned connection. Simultaneous initialize is rejected; cancelling initialize starts shared cleanup and cannot reopen admission.",
+      "limits": [
+        "Auxiliary queue only, not canonical ledger actor. Submission confirms admission only; normal shutdown confirms commits within SQLite contract.",
+        "Failed batch/backlog is retained in memory for caller recovery, not durable recovery storage; failed COMMIT can have an unknown outcome and retry must inspect the database.",
+        "No power-cut test or multi-event-loop/thread sharing guarantee."
+      ],
+      "source_sha256_before": "94b6186add7e38c0234d971014908ccb0082de5003ba2adfa2e89fb8e1fd62ab",
+      "source_sha256_after": "633f2be983c6070d6adcdb921e6daece9efff2ea9239b69e602ebf5cdcc772cc"
+    },
+    {
+      "candidate_id": "SW100-C0358",
+      "path": "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py",
+      "state_proposed": "FIXED",
+      "tests": [
+        "test_c0358_rejected_enqueue_propagates[EVM/NATIVE/AI]",
+        "test_pipeline_success_reports_admission_only",
+        "test_pipeline_worker_exception_propagates"
+      ],
+      "change": "Every domain checks enqueue acceptance before appending report receipt; False raises. Worker exceptions propagate. Successful report labels persistence QUEUED_NOT_CONFIRMED.",
+      "limits": [
+        "True enqueue is not a durability acknowledgement. No cross-domain all-or-nothing commit. Earlier accepted receipts can remain queued when a later domain fails.",
+        "Producer/ledger/attester boundaries in targeted tests use in-memory recorders and synthetic receipts, without starting a real cold-ledger actor or hardware query."
+      ],
+      "source_sha256_before": "24df531cfbb817964c4da27b4220351c4080eb4ab9b54c789b11a16d7b07909b",
+      "source_sha256_after": "132813d0e2d2eb29be76afecb6ee5c04bface45ada673a6925ea55112b924ca9"
+    },
+    {
+      "candidate_id": "SW100-C0208",
+      "path": "01_KISH_ENGINE/babylon60/core/moskv_kernel.py",
+      "state_proposed": "FIXED",
+      "tests": [
+        "test_c0208_queued_claims_use_committed_predecessor",
+        "test_kernel_concurrent_instances_and_restart_keep_chain",
+        "test_kernel_replay_missing_id_conflict_and_payload_snapshot",
+        "test_kernel_stop_drains_and_rejects_new_or_invalid_claims",
+        "test_kernel_cancelled_claim_processing_propagates_cancellation"
+      ],
+      "change": "BEGIN IMMEDIATE re-reads the committed tip and chooses the current predecessor/logical tick before hash and INSERT. Missing tracking ID cannot be called replay. Tracking IDs use UUID to avoid same-second cross-instance collisions; input JSON is copied. Invalid, stopped or full admission is explicit, and stop drains accepted backlog. Cancellation of the processing loop now propagates, rather than returning normal completion for an unpersisted extracted claim.",
+      "limits": [
+        "Tracking is admission, not per-claim durability acknowledgement; the state-loop task must be observed for processing failures.",
+        "Actual SQLite/WAL fixtures cover two concurrent instances, restart and chain linkage; no physical power-cut or hostile database-file replacement test.",
+        "Existing fail-stop process termination on catastrophic database error remains; test fixture replaces os.kill to prevent any process termination."
+      ],
+      "source_sha256_before": "2f420cb48c43b1aac7b921d4cd690ba4b27044129aeee8e8f29796db9a07cf27",
+      "source_sha256_after": "8affa57abcd40116c7884488f17c1856e7fb749e1823edcd61f572899dbb64f0"
+    },
+    {
+      "candidate_id": "SW100-C0509",
+      "path": "02_EDIN_SWARMS/agents_archi/orchestrator/kda_dag_swarm.py",
+      "state_proposed": "FIXED",
+      "tests": [
+        "test_c0509_failed_dag_awaits_sibling_before_unlock",
+        "test_dag_repeated_cancellation_does_not_release_during_cleanup",
+        "test_dag_warmup_failures_leave_no_siblings"
+      ],
+      "change": "Scheduler owns explicit tasks and shields the gather. On any exception/caller cancellation, it cancels and awaits all tasks under ThermalLock; repeated parent cancellation cannot interrupt the shared cleanup and free the lock early.",
+      "limits": [
+        "Cancellation-resistant tasks may keep the lock held indefinitely; no claim of forced termination.",
+        "Filesystem lock scope/identity/permissions are unchanged, outside this finding. Tests exercise cooperative tasks and real temporary lock paths."
+      ],
+      "source_sha256_before": "7df1e0d00504451e2bae540a4d9f8b23973dc2696773d0c2030afe1fdb07a2ff",
+      "source_sha256_after": "3bd234ee55fd543163b66f317745dee973f048faa9ac2140dafe830e3bb5a216"
+    },
+    {
+      "candidate_id": "SW100-C0422",
+      "path": "01_KISH_ENGINE/services/email_inbound/worker.js",
+      "state_proposed": "FIXED",
+      "tests": [
+        "Worker three failed HTTP attempts rejects",
+        "Worker three thrown network failures rejects",
+        "Worker retry then success resolves",
+        "Worker direct success resolves"
+      ],
+      "change": "Exhaustion throws a static error after existing bounded retry/backoff, so the email handler fails instead of resolving normally.",
+      "limits": [
+        "Node VM executes the actual Worker module with only postal-mime dependency and platform boundaries injected. No SMTP delivery, Cloudflare deployment or real webhook was performed.",
+        "Handler failure is observable; platform redelivery, durable queue retention and exactly-once webhook delivery are not guaranteed."
+      ],
+      "source_sha256_before": "0e7c5066a1765789be6bdf28d4e16e7e1cfda63d3c47e276723e5eb276ce8719",
+      "source_sha256_after": "60372817d7d57f13db3c00ed056dc4550cbeef43736ced6546eb20d09d9030a3"
+    }
+  ],
+  "checks": [
+    {
+      "name": "baseline-python-corrected",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "pytest",
+        "tests/test_swarm100_lot12_s3_regressions.py",
+        "-q",
+        "-o",
+        "addopts=--tb=short"
+      ],
+      "log": "before-tests-corrected.log",
+      "exit_code": 1,
+      "result": "6 failed: one C0434, three C0358 domain paths, one C0208, one C0509; executed before productive edits",
+      "log_sha256": "359db8f968c2fc097886b4d07ca1b67286c10199e82c5899b38f6c9fb0cd68aa"
+    },
+    {
+      "name": "baseline-worker",
+      "command": [
+        "node",
+        "--experimental-vm-modules",
+        "tests/test_swarm100_lot12_s3_worker.mjs"
+      ],
+      "log": "before-worker.log",
+      "exit_code": 1,
+      "result": "Missing rejection after three HTTP failures (C0422)",
+      "log_sha256": "abfa9bc93ab1ef1461a4894caa30546878b135f24d38316c19e5af63db332668"
+    },
+    {
+      "name": "new-python",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "pytest",
+        "tests/test_swarm100_lot12_s3_regressions.py",
+        "-q",
+        "-o",
+        "addopts=--tb=short"
+      ],
+      "log": "after-expanded-tests.log",
+      "exit_code": 0,
+      "result": "19 passed",
+      "log_sha256": "cfae3ebe245525339022d596ac9cba5cf22b91dc3aca06f42a18580ea734aa62"
+    },
+    {
+      "name": "worker",
+      "command": [
+        "node",
+        "--experimental-vm-modules",
+        "tests/test_swarm100_lot12_s3_worker.mjs"
+      ],
+      "log": "after-worker.log",
+      "exit_code": 0,
+      "result": "4 fixtures passed",
+      "log_sha256": "8c8f226b15d33ec9634bc0e5aa67441bfcb0239ff90f265e267722ab366faf68"
+    },
+    {
+      "name": "related",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "python",
+        "docs/security/evidence/swarm100-lot12-20261030/s3/run_related.py"
+      ],
+      "log": "related-tests.log",
+      "exit_code": 0,
+      "result": "29 passed: 19 new plus queue, DAG and two auxiliary invariant tests; HOME/cwd/default temporary-lock directory confined; Internet blocked; dotenv disabled; native extension blocked",
+      "log_sha256": "9ad0bd5e23c8c1fab5e80f414b6362d772676683553ccbcee0a21ca5943672d2"
+    },
+    {
+      "name": "ruff",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "ruff",
+        "check",
+        "01_KISH_ENGINE/babylon60/bft/master_ledger_queue.py",
+        "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py",
+        "01_KISH_ENGINE/babylon60/core/moskv_kernel.py",
+        "02_EDIN_SWARMS/agents_archi/orchestrator/kda_dag_swarm.py",
+        "tests/test_swarm100_lot12_s3_regressions.py",
+        "tests/test_itera2_invariants.py"
+      ],
+      "log": "ruff.log",
+      "exit_code": 0,
+      "result": "All checks passed",
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "name": "mypy",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "mypy",
+        "--follow-imports=silent",
+        "--check-untyped-defs",
+        "01_KISH_ENGINE/babylon60/bft/master_ledger_queue.py",
+        "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py",
+        "01_KISH_ENGINE/babylon60/core/moskv_kernel.py",
+        "02_EDIN_SWARMS/agents_archi/orchestrator/kda_dag_swarm.py"
+      ],
+      "log": "mypy.log",
+      "exit_code": 0,
+      "result": "Success: no issues found in 4 source files",
+      "log_sha256": "71144743c83babea384888a735db0c4daba3d4d7b7942b6839984bd5c21b52bb"
+    },
+    {
+      "name": "related-reviewed-final",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "python",
+        "docs/security/evidence/swarm100-lot12-20261030/s3/run_related.py"
+      ],
+      "log": "related-tests-final.log",
+      "log_sha256": "593604db088416f804dcf7579fc8d62b46f91210712a0634cd69a2b3d4c568a4",
+      "exit_code": 0,
+      "result": "32 passed: 22 new plus 10 related"
+    },
+    {
+      "name": "ruff-final",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "ruff",
+        "check",
+        "01_KISH_ENGINE/babylon60/bft/master_ledger_queue.py",
+        "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py",
+        "01_KISH_ENGINE/babylon60/core/moskv_kernel.py",
+        "02_EDIN_SWARMS/agents_archi/orchestrator/kda_dag_swarm.py",
+        "tests/test_swarm100_lot12_s3_regressions.py",
+        "tests/test_itera2_invariants.py"
+      ],
+      "log": "ruff-final.log",
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "exit_code": 0,
+      "result": "All checks passed"
+    },
+    {
+      "name": "mypy-final",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "mypy",
+        "--follow-imports=silent",
+        "--check-untyped-defs",
+        "01_KISH_ENGINE/babylon60/bft/master_ledger_queue.py",
+        "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py",
+        "01_KISH_ENGINE/babylon60/core/moskv_kernel.py",
+        "02_EDIN_SWARMS/agents_archi/orchestrator/kda_dag_swarm.py"
+      ],
+      "log": "mypy-final.log",
+      "log_sha256": "71144743c83babea384888a735db0c4daba3d4d7b7942b6839984bd5c21b52bb",
+      "exit_code": 0,
+      "result": "Success: no issues found in 4 source files"
+    },
+    {
+      "name": "worker-final",
+      "command": [
+        "node",
+        "--experimental-vm-modules",
+        "tests/test_swarm100_lot12_s3_worker.mjs"
+      ],
+      "log": "after-worker-final.log",
+      "log_sha256": "ea7970ac2caed520eba9bcb73150e7cde8579fca4fa4f614422f903818ff3c80",
+      "exit_code": 0,
+      "result": "4 fixtures passed"
+    }
+  ],
+  "before_fixture_correction": "Initial before-tests.log included DOMAIN_GENERAL, which has no specialist loop. That extra fixture was removed before any production edit; corrected baseline retains six actual defect failures.",
+  "shared_test_change_authorized": "Parent authorized only the shutdown expectation in tests/test_itera2_invariants.py::test_master_ledger_queue_zombie_prevention to require an observable RuntimeError; all other lines preserved.",
+  "source_sha256": {
+    "01_KISH_ENGINE/babylon60/bft/master_ledger_queue.py": "633f2be983c6070d6adcdb921e6daece9efff2ea9239b69e602ebf5cdcc772cc",
+    "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py": "132813d0e2d2eb29be76afecb6ee5c04bface45ada673a6925ea55112b924ca9",
+    "01_KISH_ENGINE/babylon60/core/moskv_kernel.py": "8affa57abcd40116c7884488f17c1856e7fb749e1823edcd61f572899dbb64f0",
+    "02_EDIN_SWARMS/agents_archi/orchestrator/kda_dag_swarm.py": "3bd234ee55fd543163b66f317745dee973f048faa9ac2140dafe830e3bb5a216",
+    "01_KISH_ENGINE/services/email_inbound/worker.js": "60372817d7d57f13db3c00ed056dc4550cbeef43736ced6546eb20d09d9030a3",
+    "tests/test_swarm100_lot12_s3_regressions.py": "ebec6651f9dc5cfbc9e0cfb431077b469dcd2c7ead8b0d7ad9e3086e6a48f8c3",
+    "tests/test_swarm100_lot12_s3_worker.mjs": "4840565308dea32226a3a21bc0e5aae32ec0453b2c5749f4c65234f027ddbff8",
+    "tests/test_itera2_invariants.py": "58d90cd0961103d0fb1da04b780ba4070d0f0e337a198479edea3012e5622488"
+  },
+  "official_docs": {
+    "libraryId": "/websites/developers_cloudflare_email-service",
+    "url": "https://developers.cloudflare.com/email-service/api/route-emails/email-handler",
+    "observation": "Email handler exceptions fail processing; setReject explicitly emits permanent SMTP rejection. This patch throws and does not promise a retry policy."
+  },
+  "scope": "No operator databases, identities, keys, network, native hardware query, email, deployment, registry editing, commits or push.",
+  "independent_findings_addressed": [
+    {
+      "id": "C0208-cancel",
+      "before_log": "../review_queues/cancel-before.log",
+      "observed": "State loop cancellation after claim extraction returned normally while the row was absent.",
+      "correction": "Re-raise CancelledError; test asserts exceptional completion and absence, without claiming persistence."
+    },
+    {
+      "id": "C0434-init-close",
+      "before_log": "../review_queues/initialize-close-before.log",
+      "observed": "A connection paused in initialize resumed after shutdown and reopened admission.",
+      "correction": "Owned shielded initialization plus shared close; test checks second initialize rejection, caller cancellation, closed real connection, and late submission rejection."
+    }
+  ]
+}

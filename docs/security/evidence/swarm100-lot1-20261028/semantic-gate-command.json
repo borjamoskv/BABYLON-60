@@ -1,0 +1,10 @@
+{
+  "command": [
+    "python3",
+    "scripts/c5_quality_gates/audit_semantic_contracts.py",
+    "--workspace-only"
+  ],
+  "exit_code": 0,
+  "log": "docs/security/evidence/swarm100-lot1-20261028/semantic-gate.log",
+  "log_sha256": "5949e674dcddaf1b07015b03a1dd0b374e0b66a39f2d95157c200ce6dd13f1ee"
+}

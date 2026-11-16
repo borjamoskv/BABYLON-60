@@ -1,0 +1,40 @@
+[
+  {
+    "check": "semantic",
+    "command": [
+      "python3",
+      "scripts/c5_quality_gates/audit_semantic_contracts.py",
+      "--workspace-only"
+    ],
+    "exit_code": 0,
+    "log": "semantic.log",
+    "log_sha256": "5949e674dcddaf1b07015b03a1dd0b374e0b66a39f2d95157c200ce6dd13f1ee"
+  },
+  {
+    "check": "budget",
+    "command": [
+      "python3",
+      "scripts/c5_quality_gates/audit_token_budget.py",
+      "--workspace-only",
+      "--skip-ghost-listeners"
+    ],
+    "exit_code": 0,
+    "log": "budget.log",
+    "log_sha256": "d0b6780eb1edd315af3e6cf33cb6b44387f78ee81a63c8e23aabd3121e82a37a"
+  },
+  {
+    "check": "topology",
+    "command": [
+      "python3",
+      "scripts/guards/verify_active_topology.py"
+    ],
+    "exit_code": 0,
+    "log": "topology.log",
+    "log_sha256": "3045a29b461272aed5ff2d6a5c031c4955237179787acbd8421abad260e899a6"
+  },
+  {
+    "check": "report_links",
+    "exit_code": 0,
+    "missing": []
+  }
+]

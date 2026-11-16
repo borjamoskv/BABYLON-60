@@ -1,0 +1,61 @@
+FFFFFFF                                                                  [100%]
+=================================== FAILURES ===================================
+___________ test_c0499_hook_rejection_is_never_bypassed[pre-commit] ____________
+tests/test_swarm100_lot8_regressions.py:83: in test_c0499_hook_rejection_is_never_bypassed
+    with pytest.raises(ERRORS):
+         ^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE any of (RuntimeError, SubprocessError, SystemExit)
+___________ test_c0499_hook_rejection_is_never_bypassed[commit-msg] ____________
+tests/test_swarm100_lot8_regressions.py:83: in test_c0499_hook_rejection_is_never_bypassed
+    with pytest.raises(ERRORS):
+         ^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE any of (RuntimeError, SubprocessError, SystemExit)
+___________ test_c0500_only_declared_outputs_are_committed[tracked] ____________
+tests/test_swarm100_lot8_regressions.py:97: in test_c0500_only_declared_outputs_are_committed
+    assert repo.changed()=={'cortex/ontology/babylon60_objectives.yaml'}
+E   AssertionError: assert {'cortex/onto...nrelated.txt'} == {'cortex/onto...ectives.yaml'}
+E     
+E     Extra items in the left set:
+E     'unrelated.txt'
+E     Use -v to get more diff
+__________ test_c0500_only_declared_outputs_are_committed[untracked] ___________
+tests/test_swarm100_lot8_regressions.py:97: in test_c0500_only_declared_outputs_are_committed
+    assert repo.changed()=={'cortex/ontology/babylon60_objectives.yaml'}
+E   AssertionError: assert {'cortex/onto...ntracked.txt'} == {'cortex/onto...ectives.yaml'}
+E     
+E     Extra items in the left set:
+E     'private-untracked.txt'
+E     Use -v to get more diff
+_______ test_c0500_yaml_consumer_does_not_commit_unrelated_project_edit ________
+tests/test_swarm100_lot8_regressions.py:106: in test_c0500_yaml_consumer_does_not_commit_unrelated_project_edit
+    assert repo.changed()=={'cortex/ontology/babylon60_objectives.yaml'}
+E   AssertionError: assert {'PROJECT.md'...ectives.yaml'} == {'cortex/onto...ectives.yaml'}
+E     
+E     Extra items in the left set:
+E     'PROJECT.md'
+E     Use -v to get more diff
+----------------------------- Captured stdout call -----------------------------
+Claim: Objetivo OBJ-001 añadido y registrado en Git Sentinel.
+Proof:
+  Base: "5c635299161cad1fe74e3691a02688b10e3aeddc"
+  Range: [1, 1]
+  Confidence: Causal-Determinist
+_____ test_c0500_prepared_index_is_rejected_without_changes[unrelated.txt] _____
+tests/test_swarm100_lot8_regressions.py:117: in test_c0500_prepared_index_is_rejected_without_changes
+    with pytest.raises(ERRORS):
+         ^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE any of (RuntimeError, SubprocessError, SystemExit)
+_ test_c0500_prepared_index_is_rejected_without_changes[cortex/ontology/babylon60_objectives.yaml] _
+tests/test_swarm100_lot8_regressions.py:117: in test_c0500_prepared_index_is_rejected_without_changes
+    with pytest.raises(ERRORS):
+         ^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE any of (RuntimeError, SubprocessError, SystemExit)
+=========================== short test summary info ============================
+FAILED tests/test_swarm100_lot8_regressions.py::test_c0499_hook_rejection_is_never_bypassed[pre-commit]
+FAILED tests/test_swarm100_lot8_regressions.py::test_c0499_hook_rejection_is_never_bypassed[commit-msg]
+FAILED tests/test_swarm100_lot8_regressions.py::test_c0500_only_declared_outputs_are_committed[tracked]
+FAILED tests/test_swarm100_lot8_regressions.py::test_c0500_only_declared_outputs_are_committed[untracked]
+FAILED tests/test_swarm100_lot8_regressions.py::test_c0500_yaml_consumer_does_not_commit_unrelated_project_edit
+FAILED tests/test_swarm100_lot8_regressions.py::test_c0500_prepared_index_is_rejected_without_changes[unrelated.txt]
+FAILED tests/test_swarm100_lot8_regressions.py::test_c0500_prepared_index_is_rejected_without_changes[cortex/ontology/babylon60_objectives.yaml]
+7 failed in 1.97s

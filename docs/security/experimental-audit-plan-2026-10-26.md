@@ -23,7 +23,7 @@ la comparación de conocimiento de FL-DBR-01 requieren bancos nuevos.
 
 Resultado: diagnóstico de los cinco experimentos, evidencia reproducible y
 secuencia de implementación. Rutas añadidas: este informe y su
-[sonda aislada de recuperación](evidence/recovery-audit-2026-10-26.rs).
+[sonda aislada de recuperación](RETENTION.md).
 El código productivo, dependencias y lockfiles quedan fuera de esta edición.
 Aceptación: fuentes locales identificadas, resultados leídos, distinción entre
 pruebas existentes y campañas pendientes, enlaces y controles documentales.
@@ -86,7 +86,7 @@ representaciones ambiguas en los recursos textuales.
 
 La ruta de ingestión de
 [`babylon-skills-mcp`](../../crates/babylon-skills-mcp/src/lib.rs) merece una
-revisión separada: `load` abre `_root_handle`, pero continúa recorriendo nombres;
+revisión separada: `load` abría `[OBSOLETO: _root_handle]`, pero continuaba recorriendo nombres (refactorizado posteriormente en [`load_from_root`](../../crates/babylon-skills-mcp/src/lib.rs#L712));
 `walk_skill_resources` comprueba el tipo antes de leer y `read_bytes_nofollow`
 usa `open(path, O_NOFOLLOW)` únicamente sobre la hoja. Ese descriptor raíz no
 interviene en las lecturas posteriores. El cambio concurrente de un componente

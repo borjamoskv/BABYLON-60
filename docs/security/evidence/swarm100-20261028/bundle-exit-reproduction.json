@@ -1,0 +1,8 @@
+{
+  "source": "proof/bundles/attestation_bundle_v1/verify",
+  "source_sha256": "da44e559a79a11fa860e19cdafd5402490332964c6893719eb742bb7ed7bc99e",
+  "returncode": 0,
+  "stdout": "ARTIFACT        VERIFIED\nHASH CHAIN      VERIFIED\nSIGNATURE       FAILED\nCLAIMS          8/21 SUPPORTED\nINVARIANTS      6 STALE\nENVIRONMENT     DARWIN/ARM64\nHW PROVENANCE   UNVERIFIED\nCERTIFICATION   NONE\n",
+  "stderr": "",
+  "scope": "synthetic bundle; intentionally invalid signature; no hardware or production state"
+}

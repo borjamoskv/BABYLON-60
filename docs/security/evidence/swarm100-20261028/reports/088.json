@@ -1,0 +1,402 @@
+{
+  "shard": "088",
+  "findings": [
+    {
+      "title": "Recovery proposals execute without Trust Gateway reevaluation",
+      "severity": "P1",
+      "path": "02_EDIN_SWARMS/agents_archi/orchestrator/royal_rumble.py",
+      "line": 311,
+      "evidence": "execute_step evaluates original proposal at 208-213, but recovery_fixer returns a new proposal at 304 and sandbox_runner(fixed_proposal) runs at 311 without evaluate or replay check.",
+      "trigger": "An admitted action fails and recovery_fixer changes the target to a sensitive path, tool, or previously failed action.",
+      "impact": "The callback receives the changed action without the deterministic rejection applied to normal actions; record_step_atomic then records ADMIT if it succeeds. Scope is this executor callback boundary, not proof of an OS sandbox escape.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Required structured review is only a quota counter",
+      "severity": "P1",
+      "path": "02_EDIN_SWARMS/agents_archi/orchestrator/royal_rumble.py",
+      "line": 255,
+      "evidence": "Lines 255-258 spend recovery quota and set structured_review_used=True; line 260 unconditionally calls sandbox_runner. No review callable, review output, or approval decision exists.",
+      "trigger": "An irreversible/architectural proposal requires review, including when recovery quota is exhausted.",
+      "impact": "The action executes without the required independent review, and successful events may report structured_review=True despite no review being performed.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Completion endpoint returns canned legal output as model inference",
+      "severity": "P1",
+      "path": "crates/eridu-infer/src/server.rs",
+      "line": 146,
+      "evidence": "Lines 146-198 choose format! strings based on model ID; gguf_model is only read for tensor_count at 144. The reply at 212-232 labels the response with the requested model and generated token usage.",
+      "trigger": "Any POST to /v1/chat/completions, including with missing/unloadable GGUF or an unrelated question.",
+      "impact": "Clients receive fixed legal conclusions and attested-success text rather than inference from the advertised model; conversation history other than the final content is ignored.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "WebSocket and completion routes never invoke the instantiated authentication validator",
+      "severity": "P1",
+      "path": "crates/eridu-infer/src/server.rs",
+      "line": 53,
+      "evidence": "create_router installs routes without authentication middleware (53-62); ws_handler discards AppState (238), and handle_socket acknowledges channels/RPC at 249-264 without credentials. chat_completions_handler likewise has no authentication extractor/check. main.rs 44-48 and 59-80 serves this router locally.",
+      "trigger": "A local process connects to /ws or POSTs completions without supplying the dual passkey.",
+      "impact": "The configured DualPasskeyAuth is unused; untrusted local clients can invoke these operations and obtain receipts. This is a localhost authorization gap, not remote network exposure.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Snapshot engine resolves its root above the repository",
+      "severity": "P1",
+      "path": "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+      "line": 24,
+      "evidence": "REPO_ROOT = Path(__file__).parent.parents[2]; for repo/scripts/c5_l1_ledger/ledger_snapshot_engine.py this is the repository parent. DB_PATH and SNAPSHOT_DIR derive from it at 25-26.",
+      "trigger": "Run the script from its checked-in location without monkeypatching globals.",
+      "impact": "It reads or creates the parent directory cortex.db and writes snapshots outside this repository, rather than backing up this repository cortex.db; the missing-source branch can silently produce an empty snapshot. Existing tests patch both paths and therefore conceal this error.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Second-resolution filenames cause snapshot collisions",
+      "severity": "P2",
+      "path": "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+      "line": 45,
+      "evidence": "Timestamp uses %Y%m%d_%H%M%S for both destination database (46) and manifest (70), without a unique suffix or retry. VACUUM INTO targets this same file at 52.",
+      "trigger": "Two calls create_snapshot occur within the same UTC second with an existing source database.",
+      "impact": "The second VACUUM INTO fails on the existing nonempty target, disrupting a valid backup request; concurrent writers may also contend for the manifest name.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Software-key example certifies hardware-bound attestation",
+      "severity": "P2",
+      "path": "examples/poc_scitt_hardware_receipt_stress.rs",
+      "line": 231,
+      "evidence": "ScittSigner::new generates an ed25519_dalek SigningKey with OsRng (30-34); sign accesses the in-process key (37-38). The final verdict prints hardware-bound certification at 231 and labels throughput hardware at 216.",
+      "trigger": "Run the example successfully on software signing alone.",
+      "impact": "Its output misrepresents software signature round trips as evidence of hardware-bound attestation, without any hardware key provider or hardware authorization step. The finding is limited to example claims.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Receipt example accepts missing or malformed required fields",
+      "severity": "P2",
+      "path": "examples/poc_scitt_hardware_receipt_stress.rs",
+      "line": 118,
+      "evidence": "Parser initializes epoch/hash/timestamp/strings to zero/empty (118-122), silently ignores mismatched types and invalid hash length (124-155), then returns Ok at 158.",
+      "trigger": "A validly signed CBOR map omits required fields or supplies wrong types.",
+      "impact": "Verification succeeds and returns default values rather than rejecting an invalid halt receipt; signature integrity alone does not establish the declared payload schema.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Trace validator ignores sequence continuity and incomplete writes",
+      "severity": "P2",
+      "path": "scripts/c5_demos/BabylonTracePoC.lean",
+      "line": 19,
+      "evidence": "validateTransition names _currentSeq but never reads it; only checks parity/write boolean (19-32). isValidTrace [] returns true even when inWrite=true (36).",
+      "trigger": "Validate a single WriteBegin with odd seq, or WriteBegin 3 followed by WriteEnd 2, starting at (0,false).",
+      "impact": "The example validator accepts unfinished or regressing traces despite its seqlock validation wording. Its two concrete decide proofs do not cover these cases or prove runtime seqlock correctness.",
+      "confidence": "high",
+      "kind": "example"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".gitattributes",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          5
+        ]
+      ],
+      "inventory_sha256": "f52f38127b48894a5d3d101dc7cca809ef73acfce174e2d95e099d6bddd05015",
+      "hash_match": true
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          67
+        ]
+      ],
+      "inventory_sha256": "b68fc0020c840d6c62aae402af73287bc72e20f6a232a5760fa67d46ce293c4f",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/cli/llm_attest.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          155
+        ]
+      ],
+      "inventory_sha256": "236a0c06217d58a77c9ce965d749250f5b686914997e5eaca3c7082e34db59b1",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/guards/license_verifier.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          86
+        ]
+      ],
+      "inventory_sha256": "de1c3bf9c3314fb914fa2ef95ac2834235ca404792796a93f657624d97caf4d6",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/utils/base60.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          12
+        ]
+      ],
+      "inventory_sha256": "8ec3cb19cc681d1a6c7b05dafbed602ebed68902fe259c5f486693fa9971267c",
+      "hash_match": true
+    },
+    {
+      "path": "02_EDIN_SWARMS/agents_archi/orchestrator/royal_rumble.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          488
+        ]
+      ],
+      "inventory_sha256": "e0177be4c0c951725e3486a48de1de8d29a711984f6d4f7919a691ae9d93faa1",
+      "hash_match": true
+    },
+    {
+      "path": "crates/eridu-infer/src/server.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          284
+        ]
+      ],
+      "inventory_sha256": "bbbc97cf3cb7e2cef458411dce71791d47560615310fb3107f0ab18e8ba5e903",
+      "hash_match": true
+    },
+    {
+      "path": "docs/06_theory/axiom_tonnetz_oversight.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "inventory_sha256": "46496e2cd58da05402e72df9ff0b536d37a14d40d6e8c2d0078019eb3a5c757e",
+      "hash_match": true
+    },
+    {
+      "path": "examples/poc_scitt_hardware_receipt_stress.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          233
+        ]
+      ],
+      "inventory_sha256": "7ccbcd78da745adf01006bf68f7831c7d61123b7ff73bed54dd805df8e7092e5",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_demos/BabylonTracePoC.lean",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          65
+        ]
+      ],
+      "inventory_sha256": "3a74c86e99a6017e7a875790d3db1be69ec8ba54c1117d78d88567215733a2bd",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          110
+        ]
+      ],
+      "inventory_sha256": "126474f8d45284fee75951c5a9ddd7abc350352be7df3adb6df8653aeb8e3ca2",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_verifiers/autodetect_invariants.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          138
+        ]
+      ],
+      "inventory_sha256": "c503ec8fee013f202a6be23fe435a6c1c6aa6b1ea1ee58f7c62ef2717cf95b42",
+      "hash_match": true
+    },
+    {
+      "path": "src/ffi_oracle.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          417
+        ]
+      ],
+      "inventory_sha256": "8be5566c83ba4c370f8c78f873a008c0addcf3e075959654326bf04e3f91936b",
+      "hash_match": true
+    },
+    {
+      "path": "tests/test_audit_lean_backend.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          113
+        ]
+      ],
+      "inventory_sha256": "21338206d19dd5e4155cb4f0cdb36b8889bb11604a8999fc99774a685100253a",
+      "hash_match": true
+    },
+    {
+      "path": "tests/test_ledger_snapshot_engine.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          59
+        ]
+      ],
+      "inventory_sha256": "b947465315f0d4e74c8248c22e930bf48476a999869b9221aeda2b0d7db62ace",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/checks/declarative.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          102
+        ]
+      ],
+      "inventory_sha256": "70ebd7ed3d9aa75fb637f066f54b095bc6c8000a1ecc057cce46cdb46f272a7c",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/cron-triggers/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          196
+        ]
+      ],
+      "inventory_sha256": "25a05ac03495ba0784f4e5d93c626407205eec4d306a7329fdaeb8d18d24536a",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/r2-data-catalog/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          75
+        ]
+      ],
+      "inventory_sha256": "b07f4b83262229427e5af643a719cafe8bd991fe2ce95cbf251222e61572ebad",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/web-analytics/integration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "inventory_sha256": "904815684b97837074c6a5ae995d74dd3ed88e87c1059a1bc3843b3a9c9b2e1e",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-spatial-audio-architect/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          69
+        ]
+      ],
+      "inventory_sha256": "4832ab50b4245339904161fdb87359943316f79d865aac956e3104d21d1e1a5a",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-axiomatic-kernel/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "inventory_sha256": "f1242ac1d0824ec633abd7c49dfe0b79760fcdc6b2ec92e637aae7a426847398",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/c5-systemic-dissection-protocol/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          49
+        ]
+      ],
+      "inventory_sha256": "6947faabc3f62fa387c21091bdd5bb4e82b11095250e274d1da5a56bda3d45c1",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-solar-thermodynamic-architecture/scripts/solar_engine.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          123
+        ]
+      ],
+      "inventory_sha256": "97e10bdef8e2c749af882850eb57042492fe5eff36f204026615a8a956fafde1",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/goal/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          38
+        ]
+      ],
+      "inventory_sha256": "552eac94901807b0ad93ea4db3d18666c2e11b65f30f84a5f08b3680d148b4ef",
+      "hash_match": true
+    }
+  ],
+  "tool_limitations": [
+    "No native codebase-memory graph tools exposed in this session (tool metadata search returned none); used targeted source reads and rg.",
+    "Static audit only; no tests, compiler, application runtime, or network/API validation executed.",
+    "Assigned file inventory hashes all matched at read time; no assigned symlinks.",
+    "External Cloudflare API/version assertions in reference documents were read but not independently verified; no findings based on uncertain current API behavior."
+  ],
+  "tests_run": []
+}

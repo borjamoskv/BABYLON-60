@@ -1,0 +1,14 @@
+{
+  "command": [
+    "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.venv/bin/python",
+    "-I",
+    "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/security/evidence/pending-local-audit-20261030/reproduce_negative_probes.py"
+  ],
+  "exit_code": 1,
+  "stdout": "{\n  \"finding_contract_accepts_nonhex_digest\": true,\n  \"provenance_outcome_for_malformed_export\": \"ATTESTED\",\n  \"effects_executed\": false\n}\n",
+  "meaning": "Expected nonzero: two counterexamples remain present, not a verified security contract",
+  "source_sha256": {
+    "01_KISH_ENGINE/babylon60/verification/finding_contract.py": "8ded45ed596a822eeaddd371d8c48887ad31e6d8bb12a2ec78cde8c679336512",
+    "01_KISH_ENGINE/babylon60/memory/provenance_arbiter.py": "e0a3488fcfd1f231c7d3e0c34e92262c4e028b1b8bd65e908d4404a51d482342"
+  }
+}

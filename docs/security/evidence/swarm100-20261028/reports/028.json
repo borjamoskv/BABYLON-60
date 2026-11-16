@@ -1,0 +1,370 @@
+{
+  "shard": "028",
+  "findings": [
+    {
+      "title": "Memory JSON is truncated in place without atomic replacement",
+      "severity": "P1",
+      "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+      "line": 75,
+      "evidence": "_write_json opens each destination with mode w; no temporary replacement or fsync. crystallize_session writes project, ghosts and system separately at lines 113,129,155.",
+      "trigger": "Process interruption or write failure after opening a memory file, or between the three writes.",
+      "impact": "Previously valid memory can become empty/partial, and the three ledgers can disagree; the next read kills the process instead of recovering.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Concurrent session consolidation loses completed updates",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+      "line": 87,
+      "evidence": "Project read-modify-write spans lines 87\u2013113; ghosts and system repeat the same pattern without locking or version checks.",
+      "trigger": "Two CLI invocations or ledger instances consolidate concurrently after reading the same initial JSON.",
+      "impact": "The later writer overwrites the other session changes, decisions or session log entries.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "UTC clock values are mislabeled with a +02:00 offset",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+      "line": 60,
+      "evidence": "datetime.now(timezone.utc) is formatted with the literal suffix +02:00 without timezone conversion.",
+      "trigger": "Any call to crystallize_session.",
+      "impact": "Persisted timestamps represent an instant two hours earlier than the actual event and cannot reliably be correlated with real UTC events.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Zero-operation benchmark indexes an empty latency vector",
+      "severity": "P2",
+      "path": "tests/cache_kinetic_benchmark.cpp",
+      "line": 145,
+      "evidence": "CLI accepts std::stoull(argv[1]); when total_ops is 0 neither loop records samples, yet percentile indexing and back() are unconditional.",
+      "trigger": "Run the standalone benchmark with argument 0.",
+      "impact": "Undefined behavior or crash instead of rejecting invalid benchmark input.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Advertised decision latency excludes receipt signing",
+      "severity": "P2",
+      "path": "scripts/c5_demos/poc_antigravity_model_router.py",
+      "line": 145,
+      "evidence": "t1 is captured before _sign_decision; latency_ns=t1-t0 is reported as decision latency although route signs and constructs the result afterward. The opening claim includes cryptographic receipts and a decision-latency target.",
+      "trigger": "Use the PoC latency distribution to evaluate the complete route call against its advertised target.",
+      "impact": "Reported figures omit HMAC/SHA3 work and cannot establish the claimed end-to-end decision latency.",
+      "confidence": "high",
+      "kind": "example"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".agents/skills/c5-audiovisual-acreativo-sota-project/scripts/route.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          8
+        ]
+      ],
+      "inventory_sha256": "88aac236a6050ef905dba48128adb132657dd3b16cb03ce302ea59b89117ab09",
+      "hash_match": true
+    },
+    {
+      "path": ".pre-commit-config.yaml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          99
+        ]
+      ],
+      "inventory_sha256": "62dbce0d7b80ba72ca8a527b5ac0f0b2e7b3c24153346e4562dc17f0629f3ccf",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          66
+        ]
+      ],
+      "inventory_sha256": "5936d7cceab67d292f1c91f2a3d57aef51637b5f1e4c67f094d4db000c662a1a",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          177
+        ]
+      ],
+      "inventory_sha256": "c84b230f9424e7ff676750c535f450b03739f057583ac28e1468f342818b9ca0",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/mcp/signature_ui.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          140
+        ]
+      ],
+      "inventory_sha256": "b08f4747ea549fae64874d35e482c752e746c2f6bc2644ab0d5da0a7e4569152",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/verifier/__init__.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          22
+        ]
+      ],
+      "inventory_sha256": "b0524b483f88949d2622ec7efbc69476133e604b83d31c1ead0c946f95f36c1b",
+      "hash_match": true
+    },
+    {
+      "path": "claims.lock",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          151
+        ]
+      ],
+      "inventory_sha256": "d2a937b14d2eb3260f9a44ee95f1eeb7a96be269d01b0e10396ca27aba0b634e",
+      "hash_match": true
+    },
+    {
+      "path": "docs/03_guides/guide_agent_workflow.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          157
+        ]
+      ],
+      "inventory_sha256": "aa6fef8cd2650905784b7826fe088ed89daa762aec83dae911165c33d70834d1",
+      "hash_match": true
+    },
+    {
+      "path": "docs/security/evidence/external-audit-remediation-2026-10-24/key-migration-status.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          24
+        ]
+      ],
+      "inventory_sha256": "897352a9cd5c5e4ec148514f520ef6d2af57b8e2999ae02e05bb950f52318dfb",
+      "hash_match": true
+    },
+    {
+      "path": "proof/lean/BabylonAutoTrace.lean",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          24
+        ]
+      ],
+      "inventory_sha256": "4d38fe24b1f65835473812a1b8099de49a793fbc42ce1ce96daaa501f87a651d",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_demos/poc_antigravity_model_router.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          252
+        ]
+      ],
+      "inventory_sha256": "d129fcfe5245d7153f4a6291b3c20c7b229f9c9a91353b806e3d866aff160057",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_quality_gates/pre_push_ledger_guard.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          102
+        ]
+      ],
+      "inventory_sha256": "531cc2afea8dfcca240af2a7d69ac42620034a53999a45065c0220477f1086fb",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/kimi_nexus/kimi_nexus.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          111
+        ]
+      ],
+      "inventory_sha256": "d25cc30074f2511d4c89c9130508b6c8ac132173b1dd6bc7676df9023e07fdc6",
+      "hash_match": true
+    },
+    {
+      "path": "tests/cache_kinetic_benchmark.cpp",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          175
+        ]
+      ],
+      "inventory_sha256": "e9a4f7906c7b4b00538f655d9983476a934ed4b12082c291babc52a4bce91e09",
+      "hash_match": true
+    },
+    {
+      "path": "tests/test_cognitive_pilot_ollama.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          246
+        ]
+      ],
+      "inventory_sha256": "ba42a00f470772e288868fcc978f0dcf716b040ce5e7f5e638198db18eb75c82",
+      "hash_match": true
+    },
+    {
+      "path": "tests/test_royal_rumble_epistemic_engine.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          207
+        ]
+      ],
+      "inventory_sha256": "32efbe04a6fb668c99c388cde7e463b5fa5fc555cdaf4fced50effa873f1ccb0",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/ai-gateway/troubleshooting.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          88
+        ]
+      ],
+      "inventory_sha256": "c79d02ce7b9e6cb361f1700eff6e12149fc74547aad3438501863d8cd02b2a79",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/graphql-api/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          147
+        ]
+      ],
+      "inventory_sha256": "324df669a01caceff7f0dbdb25e3b35dcaa40a5c20700605628c4bcb66b0d093",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/snippets/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          68
+        ]
+      ],
+      "inventory_sha256": "4f66291949e5fb2a66e49a98b392c2d18057ff36ba74906feae3aeef94f9701f",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/wrangler/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          197
+        ]
+      ],
+      "inventory_sha256": "fd28ead66875bdc6ae1ab9ed8c652b906a9e86979ba95b15ead3af0e8b23cac8",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/suno-bracket-tagging/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          104
+        ]
+      ],
+      "inventory_sha256": "94960fc1cf3a29ac69859ba562cafe6c51f6ac6f5ea6679c41d0381701a17192",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_32_site_playbooks_etsy.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "inventory_sha256": "3d0d7c5446768f3f0456e1bc6c470decbca77f930453f8cbb6bbc37b46101d6c",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-ring0-babylon-kernel/references/modules/c5-kudurru-64/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          99
+        ]
+      ],
+      "inventory_sha256": "470704793d1b86095e79ed10830dd6ad4b49ecf6f6050359f3f419e51ab908d3",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/cloudflare-mcp-usage/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "inventory_sha256": "d32f4c002f7edeb2fe2bcee094a1c8b0d0db749ee095cdb3c9e36a5c3c514838",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/workspace/c5-anti-slop-ui/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          41
+        ]
+      ],
+      "inventory_sha256": "820ace70968713db37ad6927ad574d5297dae6728c03972ec805f8e18c552fb1",
+      "hash_match": true
+    }
+  ],
+  "tool_limitations": [
+    "Native codebase graph tools were not exposed; used targeted source reads and rg.",
+    "Audit was static only; no tests, builds, runtime execution, external service calls or physical guarantees verified.",
+    "Assigned inventory hashes matched for all 25 paths. No symlinks appeared in the assigned inventory.",
+    "Third-party documentation statements were read but current API/version claims were not independently verified."
+  ],
+  "tests_run": []
+}

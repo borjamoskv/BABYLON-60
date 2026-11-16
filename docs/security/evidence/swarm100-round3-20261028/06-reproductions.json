@@ -1,0 +1,42 @@
+{
+  "reviewer": "06",
+  "protected_runtime_executed": false,
+  "source_subset_python_executed": true,
+  "real_user_data_read": false,
+  "checks": [
+    {
+      "candidate_id": "SW100-C0322",
+      "scope": "exact regex constant extracted from current source; synthetic noncredential only",
+      "pattern": "sk-[a-zA-Z0-9]{20,T}",
+      "ordinary_shape_match": false,
+      "literal_quantifier_shape_match": true
+    },
+    {
+      "candidate_id": "SW100-C0321",
+      "scope": "actual class with missing-input sentinel; no filesystem corpus scanned",
+      "exception": "AttributeError",
+      "missing_attribute": "index_duration"
+    },
+    {
+      "candidate_id": "SW100-C0412",
+      "scope": "actual allocator class; no renderer run",
+      "swarm_size": 2,
+      "target_frames": 72000,
+      "last_chunk_end": 14
+    },
+    {
+      "candidate_id": "SW100-C0415",
+      "scope": "actual in-memory classes; synthetic events only",
+      "absent_observer_first_order": "basket",
+      "absent_observer_second_order": "box",
+      "target_private_belief": "box"
+    },
+    {
+      "candidate_id": "SW100-C0595",
+      "scope": "actual topology class; one bounded synthetic callback",
+      "timeout_s": 0.001,
+      "status": "VERIFIED",
+      "elapsed_s": 0.0337
+    }
+  ]
+}

@@ -1,0 +1,420 @@
+{
+  "shard": "071",
+  "findings": [
+    {
+      "title": "Telemetry monitor displays fabricated security evidence as live state",
+      "severity": "P1",
+      "path": "src/bin/babylon_top.rs",
+      "line": 96,
+      "evidence": "main creates SharedManifest::new locally at line 112; render_screen prints fixed SUPPORTED NEMESIS claims, SEALED attestation (96-100), fixed receipt records (84-87), and ACTIVE hardware gate (35). No receipt or gate evidence is read.",
+      "trigger": "Run babylon_top, including on a host with no running kernel or attestation evidence.",
+      "impact": "Operator is shown successful security checks and committed effects that have never been observed.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Unimplemented specialists are counted as successful verification",
+      "severity": "P1",
+      "path": "scripts/c5_edin/f13_233_specialist_audit_matrix.py",
+      "line": 557,
+      "evidence": "evaluate_specialist initializes passed=True (362); its catch-all branch only sets a verified message (557-559). main counts those booleans and writes telemetry/zero-failure exit verdict (640-660).",
+      "trigger": "Any matrix entry without a specific evaluation branch, such as A001.",
+      "impact": "Audit reports assert verification without checking the claimed invariant; missing implementations increase successful totals.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "KL computation compares histograms with incompatible bin edges",
+      "severity": "P2",
+      "path": "scripts/c5_calibrations/topological_calibration.py",
+      "line": 76,
+      "evidence": "np.histogram(point_cloud,bins=50,density=True) and np.histogram(reconstructed_cloud,bins=50,density=True) independently choose edges, then their array indices are compared as the same events.",
+      "trigger": "Input and reconstructed clouds have different ranges, including translated distributions of the same shape.",
+      "impact": "Reported KL can hide displaced probability mass or compare unrelated intervals; returned calibration metrics are incorrect.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Configured invalid signing seed silently switches identity",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py",
+      "line": 798,
+      "evidence": "SigningKey(bytes.fromhex(seed)) is wrapped in broad except Exception that generates a fresh SigningKey, and anchor_payload then receives its public key (814).",
+      "trigger": "A nonempty configured seed is malformed or has wrong length.",
+      "impact": "Anchoring proceeds under an unexpected ephemeral identity instead of surfacing the signing-configuration error.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Crash harness cannot detect committed transactions with zero effects",
+      "severity": "P2",
+      "path": "examples/fl006_crash_consistency.rs",
+      "line": 471,
+      "evidence": "Worker commits the database before writing effects.log (191-208). Boundary 5 pauses only after the effect sync (211-213), leaving the commit/effect gap untested. Forensic invariant 2 iterates only effects_after_phase2 (470 onward), not committed ledger rows; replay rejects every COMMITTED nonce before checking its effect (258-262).",
+      "trigger": "A worker terminates after tx.commit() and before writing its effect, or an effect write fails after the commit.",
+      "impact": "A committed entry can retain zero effects and replay will not repair it; the claimed committed=>exactly_one_effect audit does not count this loss.",
+      "confidence": "high",
+      "kind": "example"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".agents/skills/symbiotic-cognitive-architecture/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          23
+        ]
+      ],
+      "manifest_sha256": "b2e9aba6df93259c5a8e84c993653d6eaeafeb8a99a1fb444d1ebffd6c1ff584",
+      "observed_sha256": "b2e9aba6df93259c5a8e84c993653d6eaeafeb8a99a1fb444d1ebffd6c1ff584",
+      "changed_since_manifest": false,
+      "note": "Static source/document review only; external API claims not independently certified."
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-kernel/tests/semantic_entropy_regressions.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          248
+        ]
+      ],
+      "manifest_sha256": "a14f30e7da74e6c676d346924bc82601bda4035d39fc6708a31e5b58aac8cc59",
+      "observed_sha256": "a14f30e7da74e6c676d346924bc82601bda4035d39fc6708a31e5b58aac8cc59",
+      "changed_since_manifest": false,
+      "note": "Static source/document review only; external API claims not independently certified."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          869
+        ]
+      ],
+      "manifest_sha256": "bbc6a521364c858f2888b31d94798772e7f3432687af7998c7d89802e455d772",
+      "observed_sha256": "bbc6a521364c858f2888b31d94798772e7f3432687af7998c7d89802e455d772",
+      "changed_since_manifest": false,
+      "note": "Static source/document review only; external API claims not independently certified."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/database/tlru_cache.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          131
+        ]
+      ],
+      "manifest_sha256": "12d08109767ba133bcdf225e7bf82fcd62164fb05ba045608ba53cbbf948da54",
+      "observed_sha256": "12d08109767ba133bcdf225e7bf82fcd62164fb05ba045608ba53cbbf948da54",
+      "changed_since_manifest": false,
+      "note": "Static source/document review only; external API claims not independently certified."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/transducers/export.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          137
+        ]
+      ],
+      "manifest_sha256": "b8a5d0e8e16c1500508f706e1e720c3af52cc1427c124c84aa56ea86106ad6ab",
+      "observed_sha256": "b8a5d0e8e16c1500508f706e1e720c3af52cc1427c124c84aa56ea86106ad6ab",
+      "changed_since_manifest": false,
+      "note": "Static source/document review only; external API claims not independently certified."
+    },
+    {
+      "path": "01_KISH_ENGINE/extensions/moskv-fx-scavenger/manifest.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          25
+        ]
+      ],
+      "manifest_sha256": "708234258308b9c9a019e71b0418e4833a0e96a60d70b4fa7b88c0a2ae1bf266",
+      "observed_sha256": "708234258308b9c9a019e71b0418e4833a0e96a60d70b4fa7b88c0a2ae1bf266",
+      "changed_since_manifest": false,
+      "note": "Static source/document review only; external API claims not independently certified."
+    },
+    {
+      "path": "crates/babylon-skills-mcp/src/main.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          147
+        ]
+      ],
+      "manifest_sha256": "258bd229cc186b919f9f6dbee0362f5d93e345e8853e04cc795217de2d6629d5",
+      "observed_sha256": "258bd229cc186b919f9f6dbee0362f5d93e345e8853e04cc795217de2d6629d5",
+      "changed_since_manifest": false,
+      "note": "Static source/document review only; external API claims not independently certified."
+    },
+    {
+      "path": "docs/06_theory/AUDIT_LEAN_SCOPE_2026.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          204
+        ]
+      ],
+      "manifest_sha256": "c2211920f97727ba5291f804b484fb0bc7e62642b730ce4d5e77d0c8eec6c2fa",
+      "observed_sha256": "c2211920f97727ba5291f804b484fb0bc7e62642b730ce4d5e77d0c8eec6c2fa",
+      "changed_since_manifest": false,
+      "note": "Static source/document review only; external API claims not independently certified."
+    },
+    {
+      "path": "examples/fl006_crash_consistency.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          626
+        ]
+      ],
+      "manifest_sha256": "1f964f29191546b2d8dcb94bb992d97f0ee6064333f2562cc4bb9d568447883f",
+      "observed_sha256": "1f964f29191546b2d8dcb94bb992d97f0ee6064333f2562cc4bb9d568447883f",
+      "changed_since_manifest": false,
+      "note": "Static source/document review only; external API claims not independently certified."
+    },
+    {
+      "path": "scripts/c5_calibrations/topological_calibration.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          101
+        ]
+      ],
+      "manifest_sha256": "54263f9c0944ef7764da3a4dd1bb1044dd7b7acd6b0c71501804e3251da69ab6",
+      "observed_sha256": "54263f9c0944ef7764da3a4dd1bb1044dd7b7acd6b0c71501804e3251da69ab6",
+      "changed_since_manifest": false,
+      "note": "Static source/document review only; external API claims not independently certified."
+    },
+    {
+      "path": "scripts/c5_edin/f13_233_specialist_audit_matrix.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          671
+        ]
+      ],
+      "manifest_sha256": "06445406d22cfee29ca20bfd25cf0fc755c1fe03f820e97d8833c901a28e4e90",
+      "observed_sha256": "06445406d22cfee29ca20bfd25cf0fc755c1fe03f820e97d8833c901a28e4e90",
+      "changed_since_manifest": false,
+      "note": "Static source/document review only; external API claims not independently certified."
+    },
+    {
+      "path": "scripts/c5_skills_ontology/maintain_skill_library.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          56
+        ]
+      ],
+      "manifest_sha256": "46b6d1ada6d6529fe5499275274bd43465afce1d1228f6cc2281dc071d3e8cd2",
+      "observed_sha256": "46b6d1ada6d6529fe5499275274bd43465afce1d1228f6cc2281dc071d3e8cd2",
+      "changed_since_manifest": false,
+      "note": "Static source/document review only; external API claims not independently certified."
+    },
+    {
+      "path": "src/bin/babylon_top.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          124
+        ]
+      ],
+      "manifest_sha256": "4872c42ed9045615d677967609306da18fe8f9ed50ae33242c5503aca21063df",
+      "observed_sha256": "4872c42ed9045615d677967609306da18fe8f9ed50ae33242c5503aca21063df",
+      "changed_since_manifest": false,
+      "note": "Static source/document review only; external API claims not independently certified."
+    },
+    {
+      "path": "tests/swarm_test.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          155
+        ]
+      ],
+      "manifest_sha256": "53c9afb78185a093bd1be24f1fee43b9bbbd2f284cede9559dc921c4721d56f1",
+      "observed_sha256": "53c9afb78185a093bd1be24f1fee43b9bbbd2f284cede9559dc921c4721d56f1",
+      "changed_since_manifest": false,
+      "note": "Static source/document review only; external API claims not independently certified."
+    },
+    {
+      "path": "tests/test_inbound_email.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          142
+        ]
+      ],
+      "manifest_sha256": "5aef8d3bee9f58deee3217597e8ced91cf5ab2ec92116843ce1b677381097132",
+      "observed_sha256": "5aef8d3bee9f58deee3217597e8ced91cf5ab2ec92116843ce1b677381097132",
+      "changed_since_manifest": false,
+      "note": "Static source/document review only; external API claims not independently certified."
+    },
+    {
+      "path": "tools/babylon60_mcp.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          1017
+        ]
+      ],
+      "manifest_sha256": "43d9678926c69934b7b82b24cf783a7b76bd2cab204cbe4a0e012ee4bceacc2e",
+      "observed_sha256": "43d9678926c69934b7b82b24cf783a7b76bd2cab204cbe4a0e012ee4bceacc2e",
+      "changed_since_manifest": false,
+      "note": "Static source/document review only; external API claims not independently certified."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/browser-rendering/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          91
+        ]
+      ],
+      "manifest_sha256": "ed518864d14d821619b23d0a6e4fe0b39b64c8da98ad17d3da07b4b42d35c161",
+      "observed_sha256": "ed518864d14d821619b23d0a6e4fe0b39b64c8da98ad17d3da07b4b42d35c161",
+      "changed_since_manifest": false,
+      "note": "Static source/document review only; external API claims not independently certified."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/pages/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          203
+        ]
+      ],
+      "manifest_sha256": "310d7e4f890e8724faa2c892299782838408d5c930a6d6cfbfb20953777d5515",
+      "observed_sha256": "310d7e4f890e8724faa2c892299782838408d5c930a6d6cfbfb20953777d5515",
+      "changed_since_manifest": false,
+      "note": "Static source/document review only; external API claims not independently certified."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/turnstile/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          240
+        ]
+      ],
+      "manifest_sha256": "19423eb55c5d43fd177a0c333375216da01a9727b8c216a2521f935a5863fecb",
+      "observed_sha256": "19423eb55c5d43fd177a0c333375216da01a9727b8c216a2521f935a5863fecb",
+      "changed_since_manifest": false,
+      "note": "Static source/document review only; external API claims not independently certified."
+    },
+    {
+      "path": "tools/skill_library/global/babylon-shield/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          41
+        ]
+      ],
+      "manifest_sha256": "8d068f78b238ab96bd05c9e7ef8431814c043e6e4d9eb9d59b5ebccb2477feb5",
+      "observed_sha256": "8d068f78b238ab96bd05c9e7ef8431814c043e6e4d9eb9d59b5ebccb2477feb5",
+      "changed_since_manifest": false,
+      "note": "Static source/document review only; external API claims not independently certified."
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents/agent_39_site_playbooks_luma.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "manifest_sha256": "32ccb6442bd5790e0c77173f36b9bc8d558318e8252bdc687ed9835c722f048c",
+      "observed_sha256": "32ccb6442bd5790e0c77173f36b9bc8d558318e8252bdc687ed9835c722f048c",
+      "changed_since_manifest": false,
+      "note": "Static source/document review only; external API claims not independently certified."
+    },
+    {
+      "path": "tools/skill_library/global/c5-ctm-formal-architect/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "manifest_sha256": "ac1770a3920c7df240fbbfbe5f1c8e6b21c8e00ed908d7f04cf5353d3eea4ced",
+      "observed_sha256": "ac1770a3920c7df240fbbfbe5f1c8e6b21c8e00ed908d7f04cf5353d3eea4ced",
+      "changed_since_manifest": false,
+      "note": "Static source/document review only; external API claims not independently certified."
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/jujutsu-vcs-management/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          55
+        ]
+      ],
+      "manifest_sha256": "9e3487291a047008d80ffe47740d475c5cdcacbe5979ccd2a20556068f86577a",
+      "observed_sha256": "9e3487291a047008d80ffe47740d475c5cdcacbe5979ccd2a20556068f86577a",
+      "changed_since_manifest": false,
+      "note": "Static source/document review only; external API claims not independently certified."
+    },
+    {
+      "path": "tools/skill_library/global/flstudio-mcp-production/scripts/flstudio_mcp_cli.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          196
+        ]
+      ],
+      "manifest_sha256": "9419eeb4ca480da8c0559c18f8205f02190fcd05c9a04c8298015ba602ce5e93",
+      "observed_sha256": "9419eeb4ca480da8c0559c18f8205f02190fcd05c9a04c8298015ba602ce5e93",
+      "changed_since_manifest": false,
+      "note": "Static source/document review only; external API claims not independently certified."
+    },
+    {
+      "path": "tools/skills/babylon60-kernel-invariants/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "manifest_sha256": "b0de9b9962a36729fabf7ebc3456ee7bac3ce185dbc7e468aa985a7884004058",
+      "observed_sha256": "b0de9b9962a36729fabf7ebc3456ee7bac3ce185dbc7e468aa985a7884004058",
+      "changed_since_manifest": false,
+      "note": "Static source/document review only; external API claims not independently certified."
+    }
+  ],
+  "tool_limitations": [
+    "No codebase-memory graph tools exposed in native session tool inventory; used targeted file reads and rg.",
+    "Initial bulk output truncation resolved by subsequent bounded reads of missing ranges.",
+    "Audit-only: no tests, builds, runtime, effects, commits or pushes performed.",
+    "Third-party documentation snippets statically reviewed; no claims of current external API certification."
+  ],
+  "tests_run": []
+}

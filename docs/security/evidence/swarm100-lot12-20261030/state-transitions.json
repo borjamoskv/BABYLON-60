@@ -1,0 +1,152 @@
+[
+  {
+    "candidate_id": "SW100-C0103",
+    "before": "OPEN",
+    "after": "FIXED"
+  },
+  {
+    "candidate_id": "SW100-C0113",
+    "before": "OPEN",
+    "after": "FIXED"
+  },
+  {
+    "candidate_id": "SW100-C0175",
+    "before": "OPEN",
+    "after": "FIXED"
+  },
+  {
+    "candidate_id": "SW100-C0208",
+    "before": "OPEN",
+    "after": "FIXED"
+  },
+  {
+    "candidate_id": "SW100-C0221",
+    "before": "OPEN",
+    "after": "FIXED"
+  },
+  {
+    "candidate_id": "SW100-C0271",
+    "before": "OPEN",
+    "after": "FIXED"
+  },
+  {
+    "candidate_id": "SW100-C0276",
+    "before": "OPEN",
+    "after": "FIXED"
+  },
+  {
+    "candidate_id": "SW100-C0294",
+    "before": "OPEN",
+    "after": "MITIGATED"
+  },
+  {
+    "candidate_id": "SW100-C0298",
+    "before": "OPEN",
+    "after": "FIXED"
+  },
+  {
+    "candidate_id": "SW100-C0328",
+    "before": "OPEN",
+    "after": "FIXED"
+  },
+  {
+    "candidate_id": "SW100-C0337",
+    "before": "OPEN",
+    "after": "FIXED"
+  },
+  {
+    "candidate_id": "SW100-C0343",
+    "before": "OPEN",
+    "after": "FIXED"
+  },
+  {
+    "candidate_id": "SW100-C0345",
+    "before": "OPEN",
+    "after": "FIXED"
+  },
+  {
+    "candidate_id": "SW100-C0354",
+    "before": "OPEN",
+    "after": "FIXED"
+  },
+  {
+    "candidate_id": "SW100-C0358",
+    "before": "OPEN",
+    "after": "FIXED"
+  },
+  {
+    "candidate_id": "SW100-C0360",
+    "before": "OPEN",
+    "after": "FIXED"
+  },
+  {
+    "candidate_id": "SW100-C0378",
+    "before": "OPEN",
+    "after": "MITIGATED"
+  },
+  {
+    "candidate_id": "SW100-C0385",
+    "before": "OPEN",
+    "after": "FIXED"
+  },
+  {
+    "candidate_id": "SW100-C0422",
+    "before": "OPEN",
+    "after": "FIXED"
+  },
+  {
+    "candidate_id": "SW100-C0432",
+    "before": "OPEN",
+    "after": "FIXED"
+  },
+  {
+    "candidate_id": "SW100-C0434",
+    "before": "OPEN",
+    "after": "FIXED"
+  },
+  {
+    "candidate_id": "SW100-C0435",
+    "before": "OPEN",
+    "after": "FIXED"
+  },
+  {
+    "candidate_id": "SW100-C0437",
+    "before": "OPEN",
+    "after": "FIXED"
+  },
+  {
+    "candidate_id": "SW100-C0448",
+    "before": "OPEN",
+    "after": "FIXED"
+  },
+  {
+    "candidate_id": "SW100-C0486",
+    "before": "OPEN",
+    "after": "FIXED"
+  },
+  {
+    "candidate_id": "SW100-C0490",
+    "before": "OPEN",
+    "after": "FIXED"
+  },
+  {
+    "candidate_id": "SW100-C0509",
+    "before": "OPEN",
+    "after": "FIXED"
+  },
+  {
+    "candidate_id": "SW100-C0528",
+    "before": "OPEN",
+    "after": "FIXED"
+  },
+  {
+    "candidate_id": "SW100-C0529",
+    "before": "OPEN",
+    "after": "FIXED"
+  },
+  {
+    "candidate_id": "SW100-C0533",
+    "before": "OPEN",
+    "after": "FIXED"
+  }
+]

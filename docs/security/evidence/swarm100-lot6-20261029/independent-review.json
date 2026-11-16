@@ -1,0 +1,315 @@
+{
+  "reviewer": "03",
+  "date": "2026-10-29",
+  "lot": 6,
+  "decision": "APPROVED_WITH_EXPLICIT_SCOPE",
+  "open_actionable_findings": [],
+  "source_sha256": {
+    "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py": "f247036e27e11087b2b34d064cced7d998a39372288baa62a838bcf6e878b529"
+  },
+  "test_source_sha256": {
+    "tests/test_swarm100_lot6_regressions.py": "559a6fb243a3745f3259933356a184e9362a88c7a14202b0b9baa45a37d1e63c",
+    "tests/test_audit_swarm_rate_limit.py": "5d95a5ea01c1bd5151ad6b234d841c030d4683b28dc1f3871257aa03f0a9d618"
+  },
+  "harness_source_sha256": {
+    "docs/security/evidence/swarm100-lot6-20261029/independent-adversarial.py": "17701afaa650735674df352f1c8de90dd4c1cb4f541e424b834f06d7390ca9de"
+  },
+  "scope": {
+    "production_paths": [
+      "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py"
+    ],
+    "production_edited_by_reviewer": false,
+    "shared_tests_edited_by_reviewer": false,
+    "evidence_directory": "docs/security/evidence/swarm100-lot6-20261029",
+    "graph_discovery": "No native codebase graph tools exposed; source discovery and consumer inspection used scoped reads/searches."
+  },
+  "source_checks": [
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+      "start_line": 56,
+      "end_line": 64,
+      "observation": "Only an existing InferenceBackend or an exact supported string is accepted. There is no unknown-selector remote fallback, and rejection does not echo the supplied value."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+      "start_line": 67,
+      "end_line": 91,
+      "observation": "Checks raw control/whitespace/backslash input, parses with urllib and HTTPX, and requires matching host/scheme interpretations. Rejects userinfo, query/fragment delimiters and malformed ports. Public provider routes require their exact host and HTTPS port 443. Explicit loopback gateways retain their separate HTTP/HTTPS allowance."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+      "start_line": 122,
+      "end_line": 218,
+      "observation": "Credential/model/remote URL defaults are inert and secret-bearing fields omit repr. __post_init__ validates only the selected backend/endpoint before any key lookup; inactive provider settings are not resolved."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+      "start_line": 209,
+      "end_line": 212,
+      "observation": "Maintains the consumer-facing api_key property, revalidating the selected backend/URL before resolving only that provider credential; local selection yields an empty key."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+      "start_line": 174,
+      "end_line": 183,
+      "observation": "Preserves KIMI_API_KEY then MOONSHOT_API_KEY precedence and explicit empty-key suppression; rejects malformed credential type/control characters without including their values in diagnostics."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+      "start_line": 113,
+      "end_line": 118,
+      "observation": "Frozen per-call target contains backend, URL, key, model and timeout; URL/key are omitted from repr."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+      "start_line": 368,
+      "end_line": 371,
+      "observation": "Revalidates a supplied config at client construction without resolving credentials or opening a transport."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+      "start_line": 384,
+      "end_line": 424,
+      "observation": "Validates before circuit-breaker/credential handling and snapshots the target for all retries. A later call revalidates changed config. Error results omit response bodies and exception text; cancellation propagates without retry."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+      "start_line": 320,
+      "end_line": 339,
+      "observation": "Requires an explicit backend argument, revalidates the final endpoint before client creation, blocks Host/proxy routing headers and local Authorization, and sets follow_redirects=False/trust_env=False. Redirect statuses raise rather than being followed."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+      "start_line": 345,
+      "end_line": 362,
+      "observation": "Existing Retry-After seconds/date parsing and 60-second cap remain; related tests cover exhaustion, backoff and successful reset."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+      "start_line": 432,
+      "end_line": 472,
+      "observation": "Logs only a generic planner action rather than the private prompt preview."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+      "start_line": 475,
+      "end_line": 529,
+      "observation": "Logs task identifiers/status rather than private task text."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+      "start_line": 600,
+      "end_line": 701,
+      "observation": "Public entrypoint parses the selector before constructing SwarmConfig, client or collecting telemetry; supported local/remote selections retain their explicit routes."
+    }
+  ],
+  "candidates": [
+    {
+      "candidate_id": "SW100-C0132",
+      "decision": "REPRODUCED",
+      "severity": "P1",
+      "remediation_state": "FIXED",
+      "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+      "current_source_sha256": "f247036e27e11087b2b34d064cced7d998a39372288baa62a838bcf6e878b529",
+      "rationale": "Unknown selectors are rejected before config/client construction, credential lookup or transport. Direct config construction and later mutable-config use follow the same validation. Known local selections neither resolve remote credentials nor send a Bearer header. The original red failure and final safe fixtures establish removal of the silent remote fallback, without invoking a real provider.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+          "start_line": 56,
+          "end_line": 64,
+          "observation": "Only an existing InferenceBackend or an exact supported string is accepted. There is no unknown-selector remote fallback, and rejection does not echo the supplied value."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+          "start_line": 122,
+          "end_line": 218,
+          "observation": "Credential/model/remote URL defaults are inert and secret-bearing fields omit repr. __post_init__ validates only the selected backend/endpoint before any key lookup; inactive provider settings are not resolved."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+          "start_line": 209,
+          "end_line": 212,
+          "observation": "Maintains the consumer-facing api_key property, revalidating the selected backend/URL before resolving only that provider credential; local selection yields an empty key."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+          "start_line": 368,
+          "end_line": 371,
+          "observation": "Revalidates a supplied config at client construction without resolving credentials or opening a transport."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+          "start_line": 384,
+          "end_line": 424,
+          "observation": "Validates before circuit-breaker/credential handling and snapshots the target for all retries. A later call revalidates changed config. Error results omit response bodies and exception text; cancellation propagates without retry."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+          "start_line": 600,
+          "end_line": 701,
+          "observation": "Public entrypoint parses the selector before constructing SwarmConfig, client or collecting telemetry; supported local/remote selections retain their explicit routes."
+        }
+      ],
+      "guards": [
+        "Every supported route is explicit; no unrecognized selector falls back to a provider.",
+        "Local backend roles never resolve/send remote Bearer credentials. A remote role may use its explicitly configured loopback gateway under the preserved contract.",
+        "Final HTTP dispatch validates again and disables redirects and environment-derived proxy settings."
+      ],
+      "runtime_executed": true,
+      "runtime_scope": "Actual source and HTTPX request construction exercised only through MockTransport/registrars under synthetic environment, blocked dotenv and denied network/DNS.",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot6-20261029/before-source-manifest.json",
+        "docs/security/evidence/swarm100-lot6-20261029/before-tests.log",
+        "docs/security/evidence/swarm100-lot6-20261029/independent-pytest.log",
+        "docs/security/evidence/swarm100-lot6-20261029/independent-pytest.json",
+        "docs/security/evidence/swarm100-lot6-20261029/independent-adversarial.py",
+        "docs/security/evidence/swarm100-lot6-20261029/independent-adversarial.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0133",
+      "decision": "REPRODUCED",
+      "severity": "P1",
+      "remediation_state": "FIXED",
+      "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+      "current_source_sha256": "f247036e27e11087b2b34d064cced7d998a39372288baa62a838bcf6e878b529",
+      "rationale": "Both default/environment and explicit public-provider URL paths now require exact provider hostname and HTTPS/443 before credentials or client construction. Final dispatch revalidates and cannot follow a redirect or ambient proxy. Target snapshots prevent a retry from pairing old credentials with a mutated destination. The explicit loopback-gateway exception is retained and separately documented; no real TLS/DNS/network claim is made.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+          "start_line": 67,
+          "end_line": 91,
+          "observation": "Checks raw control/whitespace/backslash input, parses with urllib and HTTPX, and requires matching host/scheme interpretations. Rejects userinfo, query/fragment delimiters and malformed ports. Public provider routes require their exact host and HTTPS port 443. Explicit loopback gateways retain their separate HTTP/HTTPS allowance."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+          "start_line": 209,
+          "end_line": 212,
+          "observation": "Maintains the consumer-facing api_key property, revalidating the selected backend/URL before resolving only that provider credential; local selection yields an empty key."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+          "start_line": 113,
+          "end_line": 118,
+          "observation": "Frozen per-call target contains backend, URL, key, model and timeout; URL/key are omitted from repr."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+          "start_line": 384,
+          "end_line": 424,
+          "observation": "Validates before circuit-breaker/credential handling and snapshots the target for all retries. A later call revalidates changed config. Error results omit response bodies and exception text; cancellation propagates without retry."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+          "start_line": 320,
+          "end_line": 339,
+          "observation": "Requires an explicit backend argument, revalidates the final endpoint before client creation, blocks Host/proxy routing headers and local Authorization, and sets follow_redirects=False/trust_env=False. Redirect statuses raise rather than being followed."
+        }
+      ],
+      "guards": [
+        "Every supported route is explicit; no unrecognized selector falls back to a provider.",
+        "Local backend roles never resolve/send remote Bearer credentials. A remote role may use its explicitly configured loopback gateway under the preserved contract.",
+        "Final HTTP dispatch validates again and disables redirects and environment-derived proxy settings."
+      ],
+      "runtime_executed": true,
+      "runtime_scope": "Actual source and HTTPX request construction exercised only through MockTransport/registrars under synthetic environment, blocked dotenv and denied network/DNS.",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot6-20261029/before-source-manifest.json",
+        "docs/security/evidence/swarm100-lot6-20261029/before-tests.log",
+        "docs/security/evidence/swarm100-lot6-20261029/independent-pytest.log",
+        "docs/security/evidence/swarm100-lot6-20261029/independent-pytest.json",
+        "docs/security/evidence/swarm100-lot6-20261029/independent-adversarial.py",
+        "docs/security/evidence/swarm100-lot6-20261029/independent-adversarial.json"
+      ]
+    }
+  ],
+  "resolved_review_findings": [],
+  "checks": [
+    {
+      "name": "Independent Lot6 and existing rate-limit regressions",
+      "status": "PASS",
+      "passed": 114,
+      "breakdown": {
+        "lot6": 104,
+        "existing_rate_limit": 10
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 1.969,
+      "source_hashes_stable": true,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot6-20261029/independent-pytest.json",
+        "docs/security/evidence/swarm100-lot6-20261029/independent-pytest.log"
+      ]
+    },
+    {
+      "name": "Independent adversarial controls",
+      "status": "PASS",
+      "passed": 9,
+      "failed": 0,
+      "socket_attempts": 0,
+      "source_hashes_stable": true,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot6-20261029/independent-adversarial.py",
+        "docs/security/evidence/swarm100-lot6-20261029/independent-adversarial.json"
+      ]
+    },
+    {
+      "name": "Ruff on production, regression file and reviewer harness",
+      "status": "PASS",
+      "exit_code": 0,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot6-20261029/independent-static.log"
+      ]
+    },
+    {
+      "name": "Consumer and adjacent Kimi source preserved",
+      "status": "PASS",
+      "source_sha256": {
+        "01_KISH_ENGINE/babylon60/cognitive_pilot/execution.py": "b893bf8701fbc0a5bc9ebc5de29baffb2e42e22011d180849cff278d66158bd5",
+        "01_KISH_ENGINE/babylon60/kernel/kimi_client.py": "68f59ae3f3ce07b2577eb7e79e09352839c7eae9c803b533290d0db5cba2fc34"
+      }
+    }
+  ],
+  "historical_checks": [
+    {
+      "name": "Provided baseline inspected, not rerun by this reviewer",
+      "failed": 6,
+      "source_sha256": "764668378ccdb637bf3d4ff1ef247ee4a4dc28ef24a0c95327515f6c58d5f577",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot6-20261029/before-source-manifest.json",
+        "docs/security/evidence/swarm100-lot6-20261029/before-tests.log"
+      ]
+    }
+  ],
+  "preserved_contract_exceptions": [
+    {
+      "name": "Explicit remote loopback gateway",
+      "description": "A Moonshot/OpenRouter role explicitly configured to 127.0.0.1, localhost or ::1 may use HTTP/HTTPS with a valid port and receive the selected provider Bearer credential. This deliberate gateway route is not the public-provider HTTPS path, and is separately exercised in the review. Local backend roles still forbid Authorization."
+    }
+  ],
+  "dependency_evidence": [
+    {
+      "library": "HTTPX",
+      "context7_id": "/encode/httpx",
+      "source": "https://github.com/encode/httpx/blob/master/httpx/_client.py",
+      "observation": "Context7 confirms AsyncClient does not follow redirects by default, while trust_env defaults true; the patch fixes both flags explicitly and MockTransport checks the behavior."
+    },
+    {
+      "library": "HTTPX environment configuration",
+      "source": "https://github.com/encode/httpx/blob/master/docs/environment_variables.md",
+      "observation": "trust_env=False disables environment-derived proxy and certificate configuration; no actual environment proxy or provider connection was used."
+    }
+  ],
+  "runtime_executed": true,
+  "protected_runtime_executed": false,
+  "limitations": [
+    "The source, tests and independent harness ran only with wholly synthetic environment/credentials, dotenv blocked before imports, MockTransport/registrars and denied socket/DNS operations. No provider, real key, native service, hardware, operator telemetry capture or ATTESTED object was used.",
+    "Checks establish application routing and SDK behavior in memory; they do not certify real DNS resolution, TLS negotiation/certificate chain, network isolation or endpoint service behavior.",
+    "The loopback allowance is a hostname/address contract. Actual host resolution and an explicitly configured local gateway remain trusted deployment inputs; no claim that all remote-backend requests are HTTPS is made.",
+    "The frozen snapshot covers backend, URL, credential, model and timeout. General cross-thread mutation safety and deep immutability of caller-owned message objects are not claimed.",
+    "Removing implicit load_dotenv is intentional: callers must supply configuration explicitly or through their established process environment. api_key remains available for the inspected cognitive_pilot consumer.",
+    "Secret checks cover module error results/logs and exposed config repr, not arbitrary external logging/tracing configured by other code.",
+    "tests/test_audit_swarm_client.py and tests/test_agents_archi.py target a different agents_archi implementation; they are not counted as direct coverage of this source. Parent-reported MyPy/broader-suite results are not independently attributed here.",
+    "This lot does not change C0431, historical-v2 C0135/C0136, C0460 or any planned Lot7 source."
+  ]
+}

@@ -1,0 +1,66 @@
+[
+  {
+    "candidate_id": "SW100-C0438",
+    "decision": "ALREADY_FIXED",
+    "severity": "P1",
+    "remediation_state": "FIXED",
+    "path": "scripts/c5_thermo/c5_exergy_optimizer_monitor.py",
+    "current_source_sha256": "1d82392ac3cddd6fd9b226b64c5a28562eea25de29fd5ac4afbbd9ea4cf50d2d",
+    "rationale": "The monitor no longer swallows failed Git results, disables signing, bypasses hooks, stages its obsolete/current source or consumes the full index. A STATUS-only preflight precedes all producers and is repeated before a single commit --only, with parent/branch/path postvalidation. Existing prepared/intent/special index entries and unsupported states reject without refresh; normal hook/signer rejection propagates without COMPLETE, retries or manual rollback. No-op is None/NO_CHANGE, not an old hash presented as a new commit. The caller no longer amends or rewrites historical PENDING markers: the actual commit OID is output only after validation. Eight initial red reproductions and final native-Git fixtures verify the specific defect. Monitor metrics, pre-append SHA3 and report persistence remain unverified outside this fix.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_thermo/c5_exergy_optimizer_monitor.py",
+        "start_line": 56,
+        "end_line": 64,
+        "observation": "Normal Git/config/hooks, binary subprocess and check=True; no signing override or swallowed error."
+      },
+      {
+        "path": "scripts/c5_thermo/c5_exergy_optimizer_monitor.py",
+        "start_line": 67,
+        "end_line": 69,
+        "observation": "Explicit filesystem decoding for presentation; raw paths/diffs stay bytes."
+      },
+      {
+        "path": "scripts/c5_thermo/c5_exergy_optimizer_monitor.py",
+        "start_line": 87,
+        "end_line": 132,
+        "observation": "Exact root/STATUS, regular tracked file and ordinary clean index/state, without implicit refresh."
+      },
+      {
+        "path": "scripts/c5_thermo/c5_exergy_optimizer_monitor.py",
+        "start_line": 271,
+        "end_line": 300,
+        "observation": "Single STATUS-only commit or None; stable baseline/parent/branch/path validation and no destructive rollback."
+      },
+      {
+        "path": "scripts/c5_thermo/c5_exergy_optimizer_monitor.py",
+        "start_line": 312,
+        "end_line": 367,
+        "observation": "Preflight before all producers; neutral row and one verified commit; no amend/historical replacement; NO_CHANGE or non-success on failure."
+      }
+    ],
+    "guards": [
+      "Git/config/hooks/clean filters are trusted executable code, not sandboxed. Unexpected effects can occur before postvalidation; they are not automatically undone.",
+      "Whole-file selection includes earlier unstaged edits in STATUS.md. No global transaction against concurrent writers/partial staging of the same output is certified.",
+      "Unrelated staging present at preflight rejects intact; late unrelated staging is preserved/excluded in fixtures. No arbitrary multi-process Git isolation claim.",
+      "STATUS.md must already be tracked/regular. New outputs and unsupported repository/index states fail explicitly before producer execution.",
+      "Ordinary failed commits discard Git temporary preparation. Hook/signer failures never trigger --no-verify, signature override, reset/clean/stash or retry.",
+      "No-op returns None and consumer prints NO_CHANGE; only a validated new commit can print COMPLETE with its full OID.",
+      "Producer writes can remain dirty on later Git failure. This is not a filesystem persistence rollback or an attestation of generated metrics.",
+      "Existing crystallize_status still hashes pre-append STATUS with SHA3 and ignores report. It does not bind the complete report/final row; these facts remain outside C0438.",
+      "Actual Git/harmless hooks/failing signer recorder only in owned temporary repositories with synthetic HOME/identity/config. All monitor database/audit/test producers are controlled in fixtures.",
+      "No monitor, helper/commit/amend on real checkout, operator database, real signing key, protected runtime, hardware, network, publication or ATTESTED. Global telemetry omitted."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot9-20261029/before-tests.log",
+      "docs/security/evidence/swarm100-lot9-20261029/related-tests.log",
+      "docs/security/evidence/swarm100-lot9-20261029/independent-review.json",
+      "docs/security/evidence/swarm100-lot9-20261029/scope-check.json",
+      "docs/security/evidence/swarm100-lot9-20261029/validation.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/10.json",
+    "runtime_scope": "Actual Git only in owned temporary repositories; monitor producers and signer recorder controlled, no real project execution/signing/network.",
+    "resolution_type": "CODE_AND_CONFINED_REGRESSIONS_VERIFIED"
+  }
+]

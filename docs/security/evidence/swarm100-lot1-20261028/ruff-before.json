@@ -1,0 +1,4240 @@
+[
+  {
+    "cell": null,
+    "code": "E741",
+    "end_location": {
+      "column": 37,
+      "row": 1527
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": null,
+    "location": {
+      "column": 36,
+      "row": 1527
+    },
+    "message": "Ambiguous variable name: `l`",
+    "name": "ambiguous-variable-name",
+    "noqa_row": 1527,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/ambiguous-variable-name"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 68,
+      "row": 2128
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"=== TELEMETRÍA DE BÓVEDA SOCINT C5-REAL (SQLite WAL) ===\"",
+          "end_location": {
+            "column": 68,
+            "row": 2128
+          },
+          "location": {
+            "column": 9,
+            "row": 2128
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 9,
+      "row": 2128
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2128,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 12,
+      "row": 2132
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 12,
+            "row": 2132
+          },
+          "location": {
+            "column": 9,
+            "row": 2132
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 9,
+      "row": 2132
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2132,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 40,
+      "row": 2133
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"Distribución por Plataforma:\"",
+          "end_location": {
+            "column": 40,
+            "row": 2133
+          },
+          "location": {
+            "column": 9,
+            "row": 2133
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 9,
+      "row": 2133
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2133,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 12,
+      "row": 2173
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 12,
+            "row": 2173
+          },
+          "location": {
+            "column": 9,
+            "row": 2173
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 9,
+      "row": 2173
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2173,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 76,
+      "row": 2174
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"> **Auditoría Forense C5:** Extracción Determinista en Silicio  \"",
+          "end_location": {
+            "column": 76,
+            "row": 2174
+          },
+          "location": {
+            "column": 9,
+            "row": 2174
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 9,
+      "row": 2174
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2174,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 66,
+      "row": 2176
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"> **Estado del Canal:** `Soberano · Zero Cloud Leak`  \"",
+          "end_location": {
+            "column": 66,
+            "row": 2176
+          },
+          "location": {
+            "column": 9,
+            "row": 2176
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 9,
+      "row": 2176
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2176,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 12,
+      "row": 2177
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 12,
+            "row": 2177
+          },
+          "location": {
+            "column": 9,
+            "row": 2177
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 9,
+      "row": 2177
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2177,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 15,
+      "row": 2178
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"---\"",
+          "end_location": {
+            "column": 15,
+            "row": 2178
+          },
+          "location": {
+            "column": 9,
+            "row": 2178
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 9,
+      "row": 2178
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2178,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 12,
+      "row": 2179
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 12,
+            "row": 2179
+          },
+          "location": {
+            "column": 9,
+            "row": 2179
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 9,
+      "row": 2179
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2179,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 20,
+      "row": 2186
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 20,
+            "row": 2186
+          },
+          "location": {
+            "column": 17,
+            "row": 2186
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2186
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2186,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 20,
+      "row": 2192
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 20,
+            "row": 2192
+          },
+          "location": {
+            "column": 17,
+            "row": 2192
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2192
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2192,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 33,
+      "row": 2193
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"### Biografía\"",
+          "end_location": {
+            "column": 33,
+            "row": 2193
+          },
+          "location": {
+            "column": 17,
+            "row": 2193
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2193
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2193,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 20,
+      "row": 2195
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 20,
+            "row": 2195
+          },
+          "location": {
+            "column": 17,
+            "row": 2195
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2195
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2195,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 20,
+      "row": 2202
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 20,
+            "row": 2202
+          },
+          "location": {
+            "column": 17,
+            "row": 2202
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2202
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2202,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 20,
+      "row": 2207
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 20,
+            "row": 2207
+          },
+          "location": {
+            "column": 17,
+            "row": 2207
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2207
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2207,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 51,
+      "row": 2208
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"### Contenido Completo del Hilo\"",
+          "end_location": {
+            "column": 51,
+            "row": 2208
+          },
+          "location": {
+            "column": 17,
+            "row": 2208
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2208
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2208,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 20,
+      "row": 2209
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 20,
+            "row": 2209
+          },
+          "location": {
+            "column": 17,
+            "row": 2209
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2209
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2209,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 27,
+      "row": 2210
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"```text\"",
+          "end_location": {
+            "column": 27,
+            "row": 2210
+          },
+          "location": {
+            "column": 17,
+            "row": 2210
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2210
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2210,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 23,
+      "row": 2212
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"```\"",
+          "end_location": {
+            "column": 23,
+            "row": 2212
+          },
+          "location": {
+            "column": 17,
+            "row": 2212
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2212
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2212,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 20,
+      "row": 2213
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 20,
+            "row": 2213
+          },
+          "location": {
+            "column": 17,
+            "row": 2213
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2213
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2213,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 63,
+      "row": 2226
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"## 🛰️ Telemetría de Publicación (X/Twitter)\"",
+          "end_location": {
+            "column": 63,
+            "row": 2226
+          },
+          "location": {
+            "column": 17,
+            "row": 2226
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2226
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2226,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 20,
+      "row": 2227
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 20,
+            "row": 2227
+          },
+          "location": {
+            "column": 17,
+            "row": 2227
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2227
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2227,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 20,
+      "row": 2232
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 20,
+            "row": 2232
+          },
+          "location": {
+            "column": 17,
+            "row": 2232
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2232
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2232,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 42,
+      "row": 2233
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"### Contenido Extraído\"",
+          "end_location": {
+            "column": 42,
+            "row": 2233
+          },
+          "location": {
+            "column": 17,
+            "row": 2233
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2233
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2233,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 20,
+      "row": 2234
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 20,
+            "row": 2234
+          },
+          "location": {
+            "column": 17,
+            "row": 2234
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2234
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2234,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 27,
+      "row": 2235
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"```text\"",
+          "end_location": {
+            "column": 27,
+            "row": 2235
+          },
+          "location": {
+            "column": 17,
+            "row": 2235
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2235
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2235,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 23,
+      "row": 2237
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"```\"",
+          "end_location": {
+            "column": 23,
+            "row": 2237
+          },
+          "location": {
+            "column": 17,
+            "row": 2237
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2237
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2237,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 20,
+      "row": 2238
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 20,
+            "row": 2238
+          },
+          "location": {
+            "column": 17,
+            "row": 2238
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2238
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2238,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 20,
+      "row": 2247
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 20,
+            "row": 2247
+          },
+          "location": {
+            "column": 17,
+            "row": 2247
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2247
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2247,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 20,
+      "row": 2253
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 20,
+            "row": 2253
+          },
+          "location": {
+            "column": 17,
+            "row": 2253
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2253
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2253,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 54,
+      "row": 2254
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"### Extracto / Cuerpo del Artículo\"",
+          "end_location": {
+            "column": 54,
+            "row": 2254
+          },
+          "location": {
+            "column": 17,
+            "row": 2254
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2254
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2254,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 20,
+      "row": 2255
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 20,
+            "row": 2255
+          },
+          "location": {
+            "column": 17,
+            "row": 2255
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2255
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2255,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 20,
+      "row": 2257
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 20,
+            "row": 2257
+          },
+          "location": {
+            "column": 17,
+            "row": 2257
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2257
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2257,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 20,
+      "row": 2265
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 20,
+            "row": 2265
+          },
+          "location": {
+            "column": 17,
+            "row": 2265
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2265
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2265,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 20,
+      "row": 2270
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 20,
+            "row": 2270
+          },
+          "location": {
+            "column": 17,
+            "row": 2270
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2270
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2270,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 63,
+      "row": 2271
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"### Distribución de Actividad por Subreddit\"",
+          "end_location": {
+            "column": 63,
+            "row": 2271
+          },
+          "location": {
+            "column": 17,
+            "row": 2271
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2271
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2271,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 20,
+      "row": 2272
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 20,
+            "row": 2272
+          },
+          "location": {
+            "column": 17,
+            "row": 2272
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2272
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2272,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 59,
+      "row": 2273
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"| Subreddit | Frecuencia | Proporción |\"",
+          "end_location": {
+            "column": 59,
+            "row": 2273
+          },
+          "location": {
+            "column": 17,
+            "row": 2273
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2273
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2273,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 42,
+      "row": 2274
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"| :--- | :--- | :--- |\"",
+          "end_location": {
+            "column": 42,
+            "row": 2274
+          },
+          "location": {
+            "column": 17,
+            "row": 2274
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2274
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2274,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 20,
+      "row": 2283
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 20,
+            "row": 2283
+          },
+          "location": {
+            "column": 17,
+            "row": 2283
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2283
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2283,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 20,
+      "row": 2288
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 20,
+            "row": 2288
+          },
+          "location": {
+            "column": 17,
+            "row": 2288
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2288
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2288,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 39,
+      "row": 2289
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"### Texto Principal\"",
+          "end_location": {
+            "column": 39,
+            "row": 2289
+          },
+          "location": {
+            "column": 17,
+            "row": 2289
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2289
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2289,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 20,
+      "row": 2291
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 20,
+            "row": 2291
+          },
+          "location": {
+            "column": 17,
+            "row": 2291
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2291
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2291,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 16,
+      "row": 2297
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 16,
+            "row": 2297
+          },
+          "location": {
+            "column": 13,
+            "row": 2297
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2297
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2297,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 16,
+      "row": 2300
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 16,
+            "row": 2300
+          },
+          "location": {
+            "column": 13,
+            "row": 2300
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2300
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2300,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 42,
+      "row": 2301
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"### Transcripción de Audio\"",
+          "end_location": {
+            "column": 42,
+            "row": 2301
+          },
+          "location": {
+            "column": 13,
+            "row": 2301
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2301
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2301,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 16,
+      "row": 2303
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 16,
+            "row": 2303
+          },
+          "location": {
+            "column": 13,
+            "row": 2303
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2303
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2303,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 20,
+      "row": 2310
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 20,
+            "row": 2310
+          },
+          "location": {
+            "column": 17,
+            "row": 2310
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2310
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2310,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 20,
+      "row": 2314
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 20,
+            "row": 2314
+          },
+          "location": {
+            "column": 17,
+            "row": 2314
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2314
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2314,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 20,
+      "row": 2316
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 20,
+            "row": 2316
+          },
+          "location": {
+            "column": 17,
+            "row": 2316
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2316
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2316,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 20,
+      "row": 2324
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 20,
+            "row": 2324
+          },
+          "location": {
+            "column": 17,
+            "row": 2324
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2324
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2324,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 20,
+      "row": 2327
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 20,
+            "row": 2327
+          },
+          "location": {
+            "column": 17,
+            "row": 2327
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2327
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2327,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 20,
+      "row": 2336
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 20,
+            "row": 2336
+          },
+          "location": {
+            "column": 17,
+            "row": 2336
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2336
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2336,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 20,
+      "row": 2340
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 20,
+            "row": 2340
+          },
+          "location": {
+            "column": 17,
+            "row": 2340
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2340
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2340,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 28,
+      "row": 2341
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"### Post\"",
+          "end_location": {
+            "column": 28,
+            "row": 2341
+          },
+          "location": {
+            "column": 17,
+            "row": 2341
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2341
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2341,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 20,
+      "row": 2343
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 20,
+            "row": 2343
+          },
+          "location": {
+            "column": 17,
+            "row": 2343
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2343
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2343,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 20,
+      "row": 2348
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 20,
+            "row": 2348
+          },
+          "location": {
+            "column": 17,
+            "row": 2348
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2348
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2348,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 20,
+      "row": 2352
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 20,
+            "row": 2352
+          },
+          "location": {
+            "column": 17,
+            "row": 2352
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2352
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2352,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 16,
+      "row": 2358
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 16,
+            "row": 2358
+          },
+          "location": {
+            "column": 13,
+            "row": 2358
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2358
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2358,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 16,
+      "row": 2361
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 16,
+            "row": 2361
+          },
+          "location": {
+            "column": 13,
+            "row": 2361
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2361
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2361,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 52,
+      "row": 2362
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"### Telemetría de Mensajes Recientes\"",
+          "end_location": {
+            "column": 52,
+            "row": 2362
+          },
+          "location": {
+            "column": 13,
+            "row": 2362
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2362
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2362,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 16,
+      "row": 2363
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 16,
+            "row": 2363
+          },
+          "location": {
+            "column": 13,
+            "row": 2363
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2363
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2363,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 20,
+      "row": 2373
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 20,
+            "row": 2373
+          },
+          "location": {
+            "column": 17,
+            "row": 2373
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2373
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2373,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 20,
+      "row": 2376
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 20,
+            "row": 2376
+          },
+          "location": {
+            "column": 17,
+            "row": 2376
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2376
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2376,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 45,
+      "row": 2377
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"### Historial Cronológico\"",
+          "end_location": {
+            "column": 45,
+            "row": 2377
+          },
+          "location": {
+            "column": 17,
+            "row": 2377
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2377
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2377,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 20,
+      "row": 2378
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 20,
+            "row": 2378
+          },
+          "location": {
+            "column": 17,
+            "row": 2378
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2378
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2378,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 20,
+      "row": 2386
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 20,
+            "row": 2386
+          },
+          "location": {
+            "column": 17,
+            "row": 2386
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2386
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2386,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 20,
+      "row": 2388
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 20,
+            "row": 2388
+          },
+          "location": {
+            "column": 17,
+            "row": 2388
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 17,
+      "row": 2388
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2388,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 16,
+      "row": 2398
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 16,
+            "row": 2398
+          },
+          "location": {
+            "column": 13,
+            "row": 2398
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2398
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2398,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 16,
+      "row": 2402
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 16,
+            "row": 2402
+          },
+          "location": {
+            "column": 13,
+            "row": 2402
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2402
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2402,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 24,
+      "row": 2403
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"### Toot\"",
+          "end_location": {
+            "column": 24,
+            "row": 2403
+          },
+          "location": {
+            "column": 13,
+            "row": 2403
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2403
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2403,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 16,
+      "row": 2405
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 16,
+            "row": 2405
+          },
+          "location": {
+            "column": 13,
+            "row": 2405
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2405
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2405,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 16,
+      "row": 2412
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 16,
+            "row": 2412
+          },
+          "location": {
+            "column": 13,
+            "row": 2412
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2412
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2412,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 16,
+      "row": 2416
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 16,
+            "row": 2416
+          },
+          "location": {
+            "column": 13,
+            "row": 2416
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2416
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2416,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 38,
+      "row": 2417
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"### Resumen de Mercado\"",
+          "end_location": {
+            "column": 38,
+            "row": 2417
+          },
+          "location": {
+            "column": 13,
+            "row": 2417
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2417
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2417,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 16,
+      "row": 2419
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 16,
+            "row": 2419
+          },
+          "location": {
+            "column": 13,
+            "row": 2419
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2419
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2419,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 16,
+      "row": 2425
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 16,
+            "row": 2425
+          },
+          "location": {
+            "column": 13,
+            "row": 2425
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2425
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2425,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 16,
+      "row": 2431
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 16,
+            "row": 2431
+          },
+          "location": {
+            "column": 13,
+            "row": 2431
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2431
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2431,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 40,
+      "row": 2432
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"### Editores Principales\"",
+          "end_location": {
+            "column": 40,
+            "row": 2432
+          },
+          "location": {
+            "column": 13,
+            "row": 2432
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2432
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2432,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 16,
+      "row": 2433
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 16,
+            "row": 2433
+          },
+          "location": {
+            "column": 13,
+            "row": 2433
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2433
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2433,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 19,
+      "row": 2442
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"---\"",
+          "end_location": {
+            "column": 19,
+            "row": 2442
+          },
+          "location": {
+            "column": 13,
+            "row": 2442
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2442
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2442,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 16,
+      "row": 2443
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 16,
+            "row": 2443
+          },
+          "location": {
+            "column": 13,
+            "row": 2443
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2443
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2443,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 75,
+      "row": 2444
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"## 🤖 Auditoría de Astroturfing & Shilling (Jaccard N-Grams)\"",
+          "end_location": {
+            "column": 75,
+            "row": 2444
+          },
+          "location": {
+            "column": 13,
+            "row": 2444
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2444
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2444,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 16,
+      "row": 2445
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 16,
+            "row": 2445
+          },
+          "location": {
+            "column": 13,
+            "row": 2445
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2445
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2445,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 16,
+      "row": 2450
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 16,
+            "row": 2450
+          },
+          "location": {
+            "column": 13,
+            "row": 2450
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2450
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2450,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 19,
+      "row": 2457
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"---\"",
+          "end_location": {
+            "column": 19,
+            "row": 2457
+          },
+          "location": {
+            "column": 13,
+            "row": 2457
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2457
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2457,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 16,
+      "row": 2458
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 16,
+            "row": 2458
+          },
+          "location": {
+            "column": 13,
+            "row": 2458
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2458
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2458,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 64,
+      "row": 2459
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"## ⚖️ Matriz de Auditoría Epistemológica C5-REAL\"",
+          "end_location": {
+            "column": 64,
+            "row": 2459
+          },
+          "location": {
+            "column": 13,
+            "row": 2459
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2459
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2459,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 16,
+      "row": 2460
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 16,
+            "row": 2460
+          },
+          "location": {
+            "column": 13,
+            "row": 2460
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2460
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2460,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 16,
+      "row": 2466
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 16,
+            "row": 2466
+          },
+          "location": {
+            "column": 13,
+            "row": 2466
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2466
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2466,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 19,
+      "row": 2473
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"---\"",
+          "end_location": {
+            "column": 19,
+            "row": 2473
+          },
+          "location": {
+            "column": 13,
+            "row": 2473
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2473
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2473,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 16,
+      "row": 2474
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 16,
+            "row": 2474
+          },
+          "location": {
+            "column": 13,
+            "row": 2474
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2474
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2474,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 64,
+      "row": 2475
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"## 📚 Dispersión Léxica & Entropía de Vocabulario\"",
+          "end_location": {
+            "column": 64,
+            "row": 2475
+          },
+          "location": {
+            "column": 13,
+            "row": 2475
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2475
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2475,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 16,
+      "row": 2476
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 16,
+            "row": 2476
+          },
+          "location": {
+            "column": 13,
+            "row": 2476
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2476
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2476,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 16,
+      "row": 2482
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 16,
+            "row": 2482
+          },
+          "location": {
+            "column": 13,
+            "row": 2482
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2482
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2482,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 19,
+      "row": 2489
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"---\"",
+          "end_location": {
+            "column": 19,
+            "row": 2489
+          },
+          "location": {
+            "column": 13,
+            "row": 2489
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2489
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2489,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 16,
+      "row": 2490
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 16,
+            "row": 2490
+          },
+          "location": {
+            "column": 13,
+            "row": 2490
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2490
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2490,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 65,
+      "row": 2491
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"## ⏱️ Dinámica Temporal & Ráfagas (CIB Detection)\"",
+          "end_location": {
+            "column": 65,
+            "row": 2491
+          },
+          "location": {
+            "column": 13,
+            "row": 2491
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2491
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2491,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 16,
+      "row": 2492
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 16,
+            "row": 2492
+          },
+          "location": {
+            "column": 13,
+            "row": 2492
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2492
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2492,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 16,
+      "row": 2498
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 16,
+            "row": 2498
+          },
+          "location": {
+            "column": 13,
+            "row": 2498
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2498
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2498,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 19,
+      "row": 2505
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"---\"",
+          "end_location": {
+            "column": 19,
+            "row": 2505
+          },
+          "location": {
+            "column": 13,
+            "row": 2505
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2505
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2505,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 16,
+      "row": 2506
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 16,
+            "row": 2506
+          },
+          "location": {
+            "column": 13,
+            "row": 2506
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2506
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2506,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 68,
+      "row": 2507
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"## 🎭 Análisis de Sentimiento & Volatilidad Emocional\"",
+          "end_location": {
+            "column": 68,
+            "row": 2507
+          },
+          "location": {
+            "column": 13,
+            "row": 2507
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2507
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2507,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 16,
+      "row": 2508
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 16,
+            "row": 2508
+          },
+          "location": {
+            "column": 13,
+            "row": 2508
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2508
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2508,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 16,
+      "row": 2513
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 16,
+            "row": 2513
+          },
+          "location": {
+            "column": 13,
+            "row": 2513
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2513
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2513,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 19,
+      "row": 2520
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"---\"",
+          "end_location": {
+            "column": 19,
+            "row": 2520
+          },
+          "location": {
+            "column": 13,
+            "row": 2520
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2520
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2520,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 16,
+      "row": 2521
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 16,
+            "row": 2521
+          },
+          "location": {
+            "column": 13,
+            "row": 2521
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2521
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2521,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 74,
+      "row": 2522
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"## 🔒 Sello Criptográfico de Evidencia (Merkle Attestation)\"",
+          "end_location": {
+            "column": 74,
+            "row": 2522
+          },
+          "location": {
+            "column": 13,
+            "row": 2522
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2522
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2522,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 16,
+      "row": 2523
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 16,
+            "row": 2523
+          },
+          "location": {
+            "column": 13,
+            "row": 2523
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2523
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2523,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 16,
+      "row": 2527
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 16,
+            "row": 2527
+          },
+          "location": {
+            "column": 13,
+            "row": 2527
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2527
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2527,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 19,
+      "row": 2534
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"---\"",
+          "end_location": {
+            "column": 19,
+            "row": 2534
+          },
+          "location": {
+            "column": 13,
+            "row": 2534
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2534
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2534,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 16,
+      "row": 2535
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 16,
+            "row": 2535
+          },
+          "location": {
+            "column": 13,
+            "row": 2535
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2535
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2535,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 75,
+      "row": 2536
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"## 🌐 Centralidad de Red & Actores Clave (PageRank & Degree)\"",
+          "end_location": {
+            "column": 75,
+            "row": 2536
+          },
+          "location": {
+            "column": 13,
+            "row": 2536
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2536
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2536,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 16,
+      "row": 2537
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 16,
+            "row": 2537
+          },
+          "location": {
+            "column": 13,
+            "row": 2537
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2537
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2537,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 19,
+      "row": 2547
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"---\"",
+          "end_location": {
+            "column": 19,
+            "row": 2547
+          },
+          "location": {
+            "column": 13,
+            "row": 2547
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2547
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2547,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 16,
+      "row": 2548
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 16,
+            "row": 2548
+          },
+          "location": {
+            "column": 13,
+            "row": 2548
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2548
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2548,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 68,
+      "row": 2549
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"## 🤝 Matriz de Acción Coordinada (CIB Co-Occurrence)\"",
+          "end_location": {
+            "column": 68,
+            "row": 2549
+          },
+          "location": {
+            "column": 13,
+            "row": 2549
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2549
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2549,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 16,
+      "row": 2550
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 16,
+            "row": 2550
+          },
+          "location": {
+            "column": 13,
+            "row": 2550
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2550
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2550,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 16,
+      "row": 2554
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\"",
+          "end_location": {
+            "column": 16,
+            "row": 2554
+          },
+          "location": {
+            "column": 13,
+            "row": 2554
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 13,
+      "row": 2554
+    },
+    "message": "f-string without any placeholders",
+    "name": "f-string-missing-placeholders",
+    "noqa_row": 2554,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F401",
+    "end_location": {
+      "column": 10,
+      "row": 26
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/tamkarum_attestation_engine.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 27
+          },
+          "location": {
+            "column": 1,
+            "row": 26
+          }
+        }
+      ],
+      "message": "Remove unused import: `os`"
+    },
+    "location": {
+      "column": 8,
+      "row": 26
+    },
+    "message": "`os` imported but unused",
+    "name": "unused-import",
+    "noqa_row": 26,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-import"
+  },
+  {
+    "cell": null,
+    "code": "E402",
+    "end_location": {
+      "column": 65,
+      "row": 36
+    },
+    "filename": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/tamkarum_attestation_engine.py",
+    "fix": null,
+    "location": {
+      "column": 1,
+      "row": 36
+    },
+    "message": "Module level import not at top of file",
+    "name": "module-import-not-at-top-of-file",
+    "noqa_row": 36,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/module-import-not-at-top-of-file"
+  }
+]

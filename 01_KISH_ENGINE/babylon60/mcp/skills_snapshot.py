@@ -126,15 +126,11 @@ def derive_v31_contract(
     is_network = (
         lower_cat == "socint & web"
         or "web" in lower_name
-        or "socint" in lower_name
+        or "network" in lower_name
+        or "http" in lower_name
         or "github" in lower_name
-        or "cloudflare" in lower_name
-        or "soulseek" in lower_name
-        or "youtube" in lower_name
-        or "safari" in lower_name
         or "gemini" in lower_name
         or "kimi" in lower_name
-        or "whatsapp" in lower_name
     )
 
     is_destructive = (
@@ -146,11 +142,6 @@ def derive_v31_contract(
         or "deploy" in lower_name
         or "genesis" in lower_name
         or "swap" in lower_name
-        or "production" in lower_name
-        or "remotion" in lower_name
-        or "f5tts" in lower_name
-        or "pika" in lower_name
-        or "gflow" in lower_name
         or (lower_role == "ejecutor" and "audit" not in lower_name)
     )
 

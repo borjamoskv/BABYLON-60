@@ -1,0 +1,4305 @@
+E741 Ambiguous variable name: `l`
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:1527:36
+     |
+1525 |         try:
+1526 |             status, body, _ = http_get(jina_url, timeout=12)
+1527 |             lines = [l.strip() for l in body.split("\n") if l.strip()]
+     |                                    ^
+1528 |             title = lines[0] if lines else f"Hilo {post_id}"
+1529 |             return {
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2128:9
+     |
+2127 |     lines = [
+2128 |         f"=== TELEMETRÍA DE BÓVEDA SOCINT C5-REAL (SQLite WAL) ===",
+     |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2129 |         f"Base de datos: {db_path}",
+2130 |         f"Registros Totales: {total_records}",
+     |
+help: Remove extraneous `f` prefix
+     |
+2127 |     lines = [
+     -         f"=== TELEMETRÍA DE BÓVEDA SOCINT C5-REAL (SQLite WAL) ===",
+2128 +         "=== TELEMETRÍA DE BÓVEDA SOCINT C5-REAL (SQLite WAL) ===",
+2129 |         f"Base de datos: {db_path}",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2132:9
+     |
+2130 |         f"Registros Totales: {total_records}",
+2131 |         f"Score SNR Medio Global: {avg_snr * 100:.1f}%",
+2132 |         f"",
+     |         ^^^
+2133 |         f"Distribución por Plataforma:",
+2134 |     ]
+     |
+help: Remove extraneous `f` prefix
+     |
+2131 |         f"Score SNR Medio Global: {avg_snr * 100:.1f}%",
+     -         f"",
+2132 +         "",
+2133 |         f"Distribución por Plataforma:",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2133:9
+     |
+2131 |         f"Score SNR Medio Global: {avg_snr * 100:.1f}%",
+2132 |         f"",
+2133 |         f"Distribución por Plataforma:",
+     |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2134 |     ]
+2135 |     for p, c in platforms:
+     |
+help: Remove extraneous `f` prefix
+     |
+2132 |         f"",
+     -         f"Distribución por Plataforma:",
+2133 +         "Distribución por Plataforma:",
+2134 |     ]
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2173:9
+     |
+2171 |     lines = [
+2172 |         f"# Informe de Inteligencia Social SOCINT C5-REAL: {plat}",
+2173 |         f"",
+     |         ^^^
+2174 |         f"> **Auditoría Forense C5:** Extracción Determinista en Silicio  ",
+2175 |         f"> **Fecha de Captura:** `{ts}`  ",
+     |
+help: Remove extraneous `f` prefix
+     |
+2172 |         f"# Informe de Inteligencia Social SOCINT C5-REAL: {plat}",
+     -         f"",
+2173 +         "",
+2174 |         f"> **Auditoría Forense C5:** Extracción Determinista en Silicio  ",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2174:9
+     |
+2172 |         f"# Informe de Inteligencia Social SOCINT C5-REAL: {plat}",
+2173 |         f"",
+2174 |         f"> **Auditoría Forense C5:** Extracción Determinista en Silicio  ",
+     |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2175 |         f"> **Fecha de Captura:** `{ts}`  ",
+2176 |         f"> **Estado del Canal:** `Soberano · Zero Cloud Leak`  ",
+     |
+help: Remove extraneous `f` prefix
+     |
+2173 |         f"",
+     -         f"> **Auditoría Forense C5:** Extracción Determinista en Silicio  ",
+2174 +         "> **Auditoría Forense C5:** Extracción Determinista en Silicio  ",
+2175 |         f"> **Fecha de Captura:** `{ts}`  ",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2176:9
+     |
+2174 |         f"> **Auditoría Forense C5:** Extracción Determinista en Silicio  ",
+2175 |         f"> **Fecha de Captura:** `{ts}`  ",
+2176 |         f"> **Estado del Canal:** `Soberano · Zero Cloud Leak`  ",
+     |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2177 |         f"",
+2178 |         f"---",
+     |
+help: Remove extraneous `f` prefix
+     |
+2175 |         f"> **Fecha de Captura:** `{ts}`  ",
+     -         f"> **Estado del Canal:** `Soberano · Zero Cloud Leak`  ",
+2176 +         "> **Estado del Canal:** `Soberano · Zero Cloud Leak`  ",
+2177 |         f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2177:9
+     |
+2175 |         f"> **Fecha de Captura:** `{ts}`  ",
+2176 |         f"> **Estado del Canal:** `Soberano · Zero Cloud Leak`  ",
+2177 |         f"",
+     |         ^^^
+2178 |         f"---",
+2179 |         f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2176 |         f"> **Estado del Canal:** `Soberano · Zero Cloud Leak`  ",
+     -         f"",
+2177 +         "",
+2178 |         f"---",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2178:9
+     |
+2176 |         f"> **Estado del Canal:** `Soberano · Zero Cloud Leak`  ",
+2177 |         f"",
+2178 |         f"---",
+     |         ^^^^^^
+2179 |         f"",
+2180 |     ]
+     |
+help: Remove extraneous `f` prefix
+     |
+2177 |         f"",
+     -         f"---",
+2178 +         "---",
+2179 |         f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2179:9
+     |
+2177 |         f"",
+2178 |         f"---",
+2179 |         f"",
+     |         ^^^
+2180 |     ]
+     |
+help: Remove extraneous `f` prefix
+     |
+2178 |         f"---",
+     -         f"",
+2179 +         "",
+2180 |     ]
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2186:17
+     |
+2184 | …     lines.extend([
+2185 | …         f"## 👤 Auditoría Forense de Perfil X (Twitter): @{data.get('screen_name')}",
+2186 | …         f"",
+     |           ^^^
+2187 | …         f"- **Nombre:** **{data.get('name')}** (`@{data.get('screen_name')}`)",
+2188 | …         f"- **Verificación:** `{'✅ ' + str(data.get('verification_type')).upper() if data.get('verified') else '❌ No verificado'…
+     |
+help: Remove extraneous `f` prefix
+     |
+2185 |                 f"## 👤 Auditoría Forense de Perfil X (Twitter): @{data.get('screen_name')}",
+     -                 f"",
+2186 +                 "",
+2187 |                 f"- **Nombre:** **{data.get('name')}** (`@{data.get('screen_name')}`)",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2192:17
+     |
+2190 | …     f"- **Actividad:** {data.get('tweets_count', 0):,} Tweets | {data.get('media_count', 0):,} Media | {data.get('likes', 0):,} Li…
+2191 | …     f"- **Fecha de Creación:** `{data.get('joined', 'N/A')}`",
+2192 | …     f"",
+     |       ^^^
+2193 | …     f"### Biografía",
+2194 | …     f"> {data.get('description', '*(Sin biografía)*')}",
+     |
+help: Remove extraneous `f` prefix
+     |
+2191 |                 f"- **Fecha de Creación:** `{data.get('joined', 'N/A')}`",
+     -                 f"",
+2192 +                 "",
+2193 |                 f"### Biografía",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2193:17
+     |
+2191 |                 f"- **Fecha de Creación:** `{data.get('joined', 'N/A')}`",
+2192 |                 f"",
+2193 |                 f"### Biografía",
+     |                 ^^^^^^^^^^^^^^^^
+2194 |                 f"> {data.get('description', '*(Sin biografía)*')}",
+2195 |                 f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2192 |                 f"",
+     -                 f"### Biografía",
+2193 +                 "### Biografía",
+2194 |                 f"> {data.get('description', '*(Sin biografía)*')}",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2195:17
+     |
+2193 |                 f"### Biografía",
+2194 |                 f"> {data.get('description', '*(Sin biografía)*')}",
+2195 |                 f"",
+     |                 ^^^
+2196 |             ])
+2197 |         elif data.get("type") == "thread":
+     |
+help: Remove extraneous `f` prefix
+     |
+2194 |                 f"> {data.get('description', '*(Sin biografía)*')}",
+     -                 f"",
+2195 +                 "",
+2196 |             ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2202:17
+     |
+2200 |             lines.extend([
+2201 |                 f"## 🧵 Hilo Desenlazado de X (Twitter): @{author.get('screen_name')}",
+2202 |                 f"",
+     |                 ^^^
+2203 |                 f"- **Autor:** **{author.get('name')}** (`@{author.get('screen_name')}`)",
+2204 |                 f"- **Total de Entregas:** `{data.get('total_tweets')}` tweets encadenados",
+     |
+help: Remove extraneous `f` prefix
+     |
+2201 |                 f"## 🧵 Hilo Desenlazado de X (Twitter): @{author.get('screen_name')}",
+     -                 f"",
+2202 +                 "",
+2203 |                 f"- **Autor:** **{author.get('name')}** (`@{author.get('screen_name')}`)",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2207:17
+     |
+2205 | …     f"- **Impacto Agregado:** {metrics.get('total_likes', 0):,} Likes | {metrics.get('total_retweets', 0):,} RTs | {metrics.get('t…
+2206 | …     f"- **Enlace Raíz:** [{data.get('url')}]({data.get('url')})",
+2207 | …     f"",
+     |       ^^^
+2208 | …     f"### Contenido Completo del Hilo",
+2209 | …     f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2206 |                 f"- **Enlace Raíz:** [{data.get('url')}]({data.get('url')})",
+     -                 f"",
+2207 +                 "",
+2208 |                 f"### Contenido Completo del Hilo",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2208:17
+     |
+2206 |                 f"- **Enlace Raíz:** [{data.get('url')}]({data.get('url')})",
+2207 |                 f"",
+2208 |                 f"### Contenido Completo del Hilo",
+     |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2209 |                 f"",
+2210 |                 f"```text",
+     |
+help: Remove extraneous `f` prefix
+     |
+2207 |                 f"",
+     -                 f"### Contenido Completo del Hilo",
+2208 +                 "### Contenido Completo del Hilo",
+2209 |                 f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2209:17
+     |
+2207 |                 f"",
+2208 |                 f"### Contenido Completo del Hilo",
+2209 |                 f"",
+     |                 ^^^
+2210 |                 f"```text",
+2211 |                 f"{data.get('text', '')}",
+     |
+help: Remove extraneous `f` prefix
+     |
+2208 |                 f"### Contenido Completo del Hilo",
+     -                 f"",
+2209 +                 "",
+2210 |                 f"```text",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2210:17
+     |
+2208 |                 f"### Contenido Completo del Hilo",
+2209 |                 f"",
+2210 |                 f"```text",
+     |                 ^^^^^^^^^^
+2211 |                 f"{data.get('text', '')}",
+2212 |                 f"```",
+     |
+help: Remove extraneous `f` prefix
+     |
+2209 |                 f"",
+     -                 f"```text",
+2210 +                 "```text",
+2211 |                 f"{data.get('text', '')}",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2212:17
+     |
+2210 |                 f"```text",
+2211 |                 f"{data.get('text', '')}",
+2212 |                 f"```",
+     |                 ^^^^^^
+2213 |                 f"",
+2214 |             ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2211 |                 f"{data.get('text', '')}",
+     -                 f"```",
+2212 +                 "```",
+2213 |                 f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2213:17
+     |
+2211 |                 f"{data.get('text', '')}",
+2212 |                 f"```",
+2213 |                 f"",
+     |                 ^^^
+2214 |             ])
+2215 |         else:
+     |
+help: Remove extraneous `f` prefix
+     |
+2212 |                 f"```",
+     -                 f"",
+2213 +                 "",
+2214 |             ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2226:17
+     |
+2224 |             screen_display = author.get('screen_name', author_display) if isinstance(author, dict) else str(author)
+2225 |             lines.extend([
+2226 |                 f"## 🛰️ Telemetría de Publicación (X/Twitter)",
+     |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2227 |                 f"",
+2228 |                 f"- **Autor:** **{author_display}** (`@{screen_display}`)",
+     |
+help: Remove extraneous `f` prefix
+     |
+2225 |             lines.extend([
+     -                 f"## 🛰️ Telemetría de Publicación (X/Twitter)",
+2226 +                 "## 🛰️ Telemetría de Publicación (X/Twitter)",
+2227 |                 f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2227:17
+     |
+2225 |             lines.extend([
+2226 |                 f"## 🛰️ Telemetría de Publicación (X/Twitter)",
+2227 |                 f"",
+     |                 ^^^
+2228 |                 f"- **Autor:** **{author_display}** (`@{screen_display}`)",
+2229 |                 f"- **URL:** [{data.get('url')}]({data.get('url')})",
+     |
+help: Remove extraneous `f` prefix
+     |
+2226 |                 f"## 🛰️ Telemetría de Publicación (X/Twitter)",
+     -                 f"",
+2227 +                 "",
+2228 |                 f"- **Autor:** **{author_display}** (`@{screen_display}`)",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2232:17
+     |
+2230 |                 f"- **Fecha:** `{data.get('created_at', 'N/A')}`",
+2231 |                 f"- **Métricas de Impacto:** {likes:,} Likes | {retweets:,} RTs | {replies:,} Replies | {views:,} Views",
+2232 |                 f"",
+     |                 ^^^
+2233 |                 f"### Contenido Extraído",
+2234 |                 f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2231 |                 f"- **Métricas de Impacto:** {likes:,} Likes | {retweets:,} RTs | {replies:,} Replies | {views:,} Views",
+     -                 f"",
+2232 +                 "",
+2233 |                 f"### Contenido Extraído",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2233:17
+     |
+2231 |                 f"- **Métricas de Impacto:** {likes:,} Likes | {retweets:,} RTs | {replies:,} Replies | {views:,} Views",
+2232 |                 f"",
+2233 |                 f"### Contenido Extraído",
+     |                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+2234 |                 f"",
+2235 |                 f"```text",
+     |
+help: Remove extraneous `f` prefix
+     |
+2232 |                 f"",
+     -                 f"### Contenido Extraído",
+2233 +                 "### Contenido Extraído",
+2234 |                 f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2234:17
+     |
+2232 |                 f"",
+2233 |                 f"### Contenido Extraído",
+2234 |                 f"",
+     |                 ^^^
+2235 |                 f"```text",
+2236 |                 f"{data.get('text', '')}",
+     |
+help: Remove extraneous `f` prefix
+     |
+2233 |                 f"### Contenido Extraído",
+     -                 f"",
+2234 +                 "",
+2235 |                 f"```text",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2235:17
+     |
+2233 |                 f"### Contenido Extraído",
+2234 |                 f"",
+2235 |                 f"```text",
+     |                 ^^^^^^^^^^
+2236 |                 f"{data.get('text', '')}",
+2237 |                 f"```",
+     |
+help: Remove extraneous `f` prefix
+     |
+2234 |                 f"",
+     -                 f"```text",
+2235 +                 "```text",
+2236 |                 f"{data.get('text', '')}",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2237:17
+     |
+2235 |                 f"```text",
+2236 |                 f"{data.get('text', '')}",
+2237 |                 f"```",
+     |                 ^^^^^^
+2238 |                 f"",
+2239 |             ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2236 |                 f"{data.get('text', '')}",
+     -                 f"```",
+2237 +                 "```",
+2238 |                 f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2238:17
+     |
+2236 |                 f"{data.get('text', '')}",
+2237 |                 f"```",
+2238 |                 f"",
+     |                 ^^^
+2239 |             ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2237 |                 f"```",
+     -                 f"",
+2238 +                 "",
+2239 |             ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2247:17
+     |
+2245 |             lines.extend([
+2246 |                 f"## 📰 Publicación de Substack: {data.get('title')}",
+2247 |                 f"",
+     |                 ^^^
+2248 |                 f"- **Autor:** `{data.get('author')}`",
+2249 |                 f"- **URL:** [{data.get('canonical_url')}]({data.get('canonical_url')})",
+     |
+help: Remove extraneous `f` prefix
+     |
+2246 |                 f"## 📰 Publicación de Substack: {data.get('title')}",
+     -                 f"",
+2247 +                 "",
+2248 |                 f"- **Autor:** `{data.get('author')}`",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2253:17
+     |
+2251 |                 f"- **Engagement:** {likes:,} Likes | {comments:,} Comentarios",
+2252 |                 f"- **Acceso:** `{'🔒 Paywalled' if data.get('paywalled') else '🔓 Abierto'}`",
+2253 |                 f"",
+     |                 ^^^
+2254 |                 f"### Extracto / Cuerpo del Artículo",
+2255 |                 f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2252 |                 f"- **Acceso:** `{'🔒 Paywalled' if data.get('paywalled') else '🔓 Abierto'}`",
+     -                 f"",
+2253 +                 "",
+2254 |                 f"### Extracto / Cuerpo del Artículo",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2254:17
+     |
+2252 |                 f"- **Acceso:** `{'🔒 Paywalled' if data.get('paywalled') else '🔓 Abierto'}`",
+2253 |                 f"",
+2254 |                 f"### Extracto / Cuerpo del Artículo",
+     |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2255 |                 f"",
+2256 |                 f"{data.get('content', '')[:2500]}...",
+     |
+help: Remove extraneous `f` prefix
+     |
+2253 |                 f"",
+     -                 f"### Extracto / Cuerpo del Artículo",
+2254 +                 "### Extracto / Cuerpo del Artículo",
+2255 |                 f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2255:17
+     |
+2253 |                 f"",
+2254 |                 f"### Extracto / Cuerpo del Artículo",
+2255 |                 f"",
+     |                 ^^^
+2256 |                 f"{data.get('content', '')[:2500]}...",
+2257 |                 f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2254 |                 f"### Extracto / Cuerpo del Artículo",
+     -                 f"",
+2255 +                 "",
+2256 |                 f"{data.get('content', '')[:2500]}...",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2257:17
+     |
+2255 |                 f"",
+2256 |                 f"{data.get('content', '')[:2500]}...",
+2257 |                 f"",
+     |                 ^^^
+2258 |             ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2256 |                 f"{data.get('content', '')[:2500]}...",
+     -                 f"",
+2257 +                 "",
+2258 |             ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2265:17
+     |
+2263 |             lines.extend([
+2264 |                 f"## 🕵️ Dossier Forense de Usuario Reddit: /u/{data.get('username')}",
+2265 |                 f"",
+     |                 ^^^
+2266 |                 f"- **URL:** [{data.get('url')}]({data.get('url')})",
+2267 |                 f"- **Posts Indexados:** `{data.get('total_submitted_indexed')}`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2264 |                 f"## 🕵️ Dossier Forense de Usuario Reddit: /u/{data.get('username')}",
+     -                 f"",
+2265 +                 "",
+2266 |                 f"- **URL:** [{data.get('url')}]({data.get('url')})",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2270:17
+     |
+2268 |                 f"- **Entropía de Subreddits (H):** `{data.get('subreddit_entropy')} bits`",
+2269 |                 f"- **Veredicto:** `{data.get('entropy_verdict')}`",
+2270 |                 f"",
+     |                 ^^^
+2271 |                 f"### Distribución de Actividad por Subreddit",
+2272 |                 f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2269 |                 f"- **Veredicto:** `{data.get('entropy_verdict')}`",
+     -                 f"",
+2270 +                 "",
+2271 |                 f"### Distribución de Actividad por Subreddit",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2271:17
+     |
+2269 |                 f"- **Veredicto:** `{data.get('entropy_verdict')}`",
+2270 |                 f"",
+2271 |                 f"### Distribución de Actividad por Subreddit",
+     |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2272 |                 f"",
+2273 |                 f"| Subreddit | Frecuencia | Proporción |",
+     |
+help: Remove extraneous `f` prefix
+     |
+2270 |                 f"",
+     -                 f"### Distribución de Actividad por Subreddit",
+2271 +                 "### Distribución de Actividad por Subreddit",
+2272 |                 f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2272:17
+     |
+2270 |                 f"",
+2271 |                 f"### Distribución de Actividad por Subreddit",
+2272 |                 f"",
+     |                 ^^^
+2273 |                 f"| Subreddit | Frecuencia | Proporción |",
+2274 |                 f"| :--- | :--- | :--- |",
+     |
+help: Remove extraneous `f` prefix
+     |
+2271 |                 f"### Distribución de Actividad por Subreddit",
+     -                 f"",
+2272 +                 "",
+2273 |                 f"| Subreddit | Frecuencia | Proporción |",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2273:17
+     |
+2271 |                 f"### Distribución de Actividad por Subreddit",
+2272 |                 f"",
+2273 |                 f"| Subreddit | Frecuencia | Proporción |",
+     |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2274 |                 f"| :--- | :--- | :--- |",
+2275 |             ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2272 |                 f"",
+     -                 f"| Subreddit | Frecuencia | Proporción |",
+2273 +                 "| Subreddit | Frecuencia | Proporción |",
+2274 |                 f"| :--- | :--- | :--- |",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2274:17
+     |
+2272 |                 f"",
+2273 |                 f"| Subreddit | Frecuencia | Proporción |",
+2274 |                 f"| :--- | :--- | :--- |",
+     |                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+2275 |             ])
+2276 |             tot = max(1, data.get("total_submitted_indexed", 1))
+     |
+help: Remove extraneous `f` prefix
+     |
+2273 |                 f"| Subreddit | Frecuencia | Proporción |",
+     -                 f"| :--- | :--- | :--- |",
+2274 +                 "| :--- | :--- | :--- |",
+2275 |             ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2283:17
+     |
+2281 |             lines.extend([
+2282 |                 f"## 👾 Hilo de Discusión en Reddit: r/{data.get('subreddit')}",
+2283 |                 f"",
+     |                 ^^^
+2284 |                 f"- **Título:** **{data.get('title')}**",
+2285 |                 f"- **Autor:** `/u/{data.get('author')}`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2282 |                 f"## 👾 Hilo de Discusión en Reddit: r/{data.get('subreddit')}",
+     -                 f"",
+2283 +                 "",
+2284 |                 f"- **Título:** **{data.get('title')}**",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2288:17
+     |
+2286 |                 f"- **Puntuación:** `{data.get('score', 0):,}` (Upvote Ratio: `{float(data.get('upvote_ratio', 1.0))*100:.1f}%`)",
+2287 |                 f"- **Enlace:** [{data.get('permalink')}]({data.get('permalink')})",
+2288 |                 f"",
+     |                 ^^^
+2289 |                 f"### Texto Principal",
+2290 |                 f"{data.get('selftext', '*(Sin texto)*')[:1500]}",
+     |
+help: Remove extraneous `f` prefix
+     |
+2287 |                 f"- **Enlace:** [{data.get('permalink')}]({data.get('permalink')})",
+     -                 f"",
+2288 +                 "",
+2289 |                 f"### Texto Principal",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2289:17
+     |
+2287 |                 f"- **Enlace:** [{data.get('permalink')}]({data.get('permalink')})",
+2288 |                 f"",
+2289 |                 f"### Texto Principal",
+     |                 ^^^^^^^^^^^^^^^^^^^^^^
+2290 |                 f"{data.get('selftext', '*(Sin texto)*')[:1500]}",
+2291 |                 f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2288 |                 f"",
+     -                 f"### Texto Principal",
+2289 +                 "### Texto Principal",
+2290 |                 f"{data.get('selftext', '*(Sin texto)*')[:1500]}",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2291:17
+     |
+2289 |                 f"### Texto Principal",
+2290 |                 f"{data.get('selftext', '*(Sin texto)*')[:1500]}",
+2291 |                 f"",
+     |                 ^^^
+2292 |             ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2290 |                 f"{data.get('selftext', '*(Sin texto)*')[:1500]}",
+     -                 f"",
+2291 +                 "",
+2292 |             ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2297:13
+     |
+2295 |         lines.extend([
+2296 |             f"## 📺 Telemetría de YouTube: {data.get('title')}",
+2297 |             f"",
+     |             ^^^
+2298 |             f"- **Creador / Canal:** **{data.get('author')}**",
+2299 |             f"- **URL:** [{data.get('url')}]({data.get('url')})",
+     |
+help: Remove extraneous `f` prefix
+     |
+2296 |             f"## 📺 Telemetría de YouTube: {data.get('title')}",
+     -             f"",
+2297 +             "",
+2298 |             f"- **Creador / Canal:** **{data.get('author')}**",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2300:13
+     |
+2298 |             f"- **Creador / Canal:** **{data.get('author')}**",
+2299 |             f"- **URL:** [{data.get('url')}]({data.get('url')})",
+2300 |             f"",
+     |             ^^^
+2301 |             f"### Transcripción de Audio",
+2302 |             f"{data.get('transcript', '')[:2000]}...",
+     |
+help: Remove extraneous `f` prefix
+     |
+2299 |             f"- **URL:** [{data.get('url')}]({data.get('url')})",
+     -             f"",
+2300 +             "",
+2301 |             f"### Transcripción de Audio",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2301:13
+     |
+2299 |             f"- **URL:** [{data.get('url')}]({data.get('url')})",
+2300 |             f"",
+2301 |             f"### Transcripción de Audio",
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2302 |             f"{data.get('transcript', '')[:2000]}...",
+2303 |             f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2300 |             f"",
+     -             f"### Transcripción de Audio",
+2301 +             "### Transcripción de Audio",
+2302 |             f"{data.get('transcript', '')[:2000]}...",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2303:13
+     |
+2301 |             f"### Transcripción de Audio",
+2302 |             f"{data.get('transcript', '')[:2000]}...",
+2303 |             f"",
+     |             ^^^
+2304 |         ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2302 |             f"{data.get('transcript', '')[:2000]}...",
+     -             f"",
+2303 +             "",
+2304 |         ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2310:17
+     |
+2308 |             lines.extend([
+2309 |                 f"## 🟠 Hacker News: {data.get('title')}",
+2310 |                 f"",
+     |                 ^^^
+2311 |                 f"- **Autor:** `/u/{data.get('author')}` | Puntos: `{data.get('points')}`",
+2312 |                 f"- **URL HN:** [{data.get('url')}]({data.get('url')})",
+     |
+help: Remove extraneous `f` prefix
+     |
+2309 |                 f"## 🟠 Hacker News: {data.get('title')}",
+     -                 f"",
+2310 +                 "",
+2311 |                 f"- **Autor:** `/u/{data.get('author')}` | Puntos: `{data.get('points')}`",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2314:17
+     |
+2312 |                 f"- **URL HN:** [{data.get('url')}]({data.get('url')})",
+2313 |                 f"- **Enlace Externo:** {data.get('external_url', 'N/A')}",
+2314 |                 f"",
+     |                 ^^^
+2315 |                 f"### Comentarios Destacados ({len(data.get('comments', []))} analizados)",
+2316 |                 f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2313 |                 f"- **Enlace Externo:** {data.get('external_url', 'N/A')}",
+     -                 f"",
+2314 +                 "",
+2315 |                 f"### Comentarios Destacados ({len(data.get('comments', []))} analizados)",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2316:17
+     |
+2314 |                 f"",
+2315 |                 f"### Comentarios Destacados ({len(data.get('comments', []))} analizados)",
+2316 |                 f"",
+     |                 ^^^
+2317 |             ])
+2318 |             for c in data.get("comments", [])[:6]:
+     |
+help: Remove extraneous `f` prefix
+     |
+2315 |                 f"### Comentarios Destacados ({len(data.get('comments', []))} analizados)",
+     -                 f"",
+2316 +                 "",
+2317 |             ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2324:17
+     |
+2322 |             lines.extend([
+2323 |                 f"## 🟠 Hacker News Usuario: {data.get('username')}",
+2324 |                 f"",
+     |                 ^^^
+2325 |                 f"- **Karma:** `{data.get('karma'):,}` | Envíos: `{data.get('submitted_count')}`",
+2326 |                 f"- **Biografía:** {data.get('about', '*(Sin biografía)*')}",
+     |
+help: Remove extraneous `f` prefix
+     |
+2323 |                 f"## 🟠 Hacker News Usuario: {data.get('username')}",
+     -                 f"",
+2324 +                 "",
+2325 |                 f"- **Karma:** `{data.get('karma'):,}` | Envíos: `{data.get('submitted_count')}`",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2327:17
+     |
+2325 |                 f"- **Karma:** `{data.get('karma'):,}` | Envíos: `{data.get('submitted_count')}`",
+2326 |                 f"- **Biografía:** {data.get('about', '*(Sin biografía)*')}",
+2327 |                 f"",
+     |                 ^^^
+2328 |             ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2326 |                 f"- **Biografía:** {data.get('about', '*(Sin biografía)*')}",
+     -                 f"",
+2327 +                 "",
+2328 |             ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2336:17
+     |
+2334 | …     lines.extend([
+2335 | …         f"## 🦋 Bluesky (ATProto): @{author.get('handle')}",
+2336 | …         f"",
+     |           ^^^
+2337 | …         f"- **Autor:** **{author.get('displayName')}** (`@{author.get('handle')}`)",
+2338 | …         f"- **Engagement:** {metrics.get('likes', 0):,} Likes | {metrics.get('reposts', 0):,} Reposts | {metrics.get('replies', 0)…
+     |
+help: Remove extraneous `f` prefix
+     |
+2335 |                 f"## 🦋 Bluesky (ATProto): @{author.get('handle')}",
+     -                 f"",
+2336 +                 "",
+2337 |                 f"- **Autor:** **{author.get('displayName')}** (`@{author.get('handle')}`)",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2340:17
+     |
+2338 | …     f"- **Engagement:** {metrics.get('likes', 0):,} Likes | {metrics.get('reposts', 0):,} Reposts | {metrics.get('replies', 0):,} …
+2339 | …     f"- **URL:** [{data.get('url')}]({data.get('url')})",
+2340 | …     f"",
+     |       ^^^
+2341 | …     f"### Post",
+2342 | …     f"```text\n{data.get('text', '')}\n```",
+     |
+help: Remove extraneous `f` prefix
+     |
+2339 |                 f"- **URL:** [{data.get('url')}]({data.get('url')})",
+     -                 f"",
+2340 +                 "",
+2341 |                 f"### Post",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2341:17
+     |
+2339 |                 f"- **URL:** [{data.get('url')}]({data.get('url')})",
+2340 |                 f"",
+2341 |                 f"### Post",
+     |                 ^^^^^^^^^^^
+2342 |                 f"```text\n{data.get('text', '')}\n```",
+2343 |                 f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2340 |                 f"",
+     -                 f"### Post",
+2341 +                 "### Post",
+2342 |                 f"```text\n{data.get('text', '')}\n```",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2343:17
+     |
+2341 |                 f"### Post",
+2342 |                 f"```text\n{data.get('text', '')}\n```",
+2343 |                 f"",
+     |                 ^^^
+2344 |             ])
+2345 |         elif data.get("type") == "profile":
+     |
+help: Remove extraneous `f` prefix
+     |
+2342 |                 f"```text\n{data.get('text', '')}\n```",
+     -                 f"",
+2343 +                 "",
+2344 |             ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2348:17
+     |
+2346 |             lines.extend([
+2347 |                 f"## 🦋 Bluesky Perfil: @{data.get('handle')}",
+2348 |                 f"",
+     |                 ^^^
+2349 |                 f"- **Nombre:** **{data.get('displayName')}** | Posts: `{data.get('postsCount', 0):,}`",
+2350 |                 f"- **Seguidores:** `{data.get('followersCount', 0):,}` | Siguiendo: `{data.get('followsCount', 0):,}`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2347 |                 f"## 🦋 Bluesky Perfil: @{data.get('handle')}",
+     -                 f"",
+2348 +                 "",
+2349 |                 f"- **Nombre:** **{data.get('displayName')}** | Posts: `{data.get('postsCount', 0):,}`",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2352:17
+     |
+2350 |                 f"- **Seguidores:** `{data.get('followersCount', 0):,}` | Siguiendo: `{data.get('followsCount', 0):,}`",
+2351 |                 f"- **Biografía:** {data.get('description', '')}",
+2352 |                 f"",
+     |                 ^^^
+2353 |             ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2351 |                 f"- **Biografía:** {data.get('description', '')}",
+     -                 f"",
+2352 +                 "",
+2353 |             ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2358:13
+     |
+2356 |         lines.extend([
+2357 |             f"## ✈️ Canal de Telegram: {data.get('channel')}",
+2358 |             f"",
+     |             ^^^
+2359 |             f"- **URL:** [{data.get('url')}]({data.get('url')})",
+2360 |             f"- **Mensajes Extraídos:** `{data.get('total_messages')}`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2357 |             f"## ✈️ Canal de Telegram: {data.get('channel')}",
+     -             f"",
+2358 +             "",
+2359 |             f"- **URL:** [{data.get('url')}]({data.get('url')})",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2361:13
+     |
+2359 |             f"- **URL:** [{data.get('url')}]({data.get('url')})",
+2360 |             f"- **Mensajes Extraídos:** `{data.get('total_messages')}`",
+2361 |             f"",
+     |             ^^^
+2362 |             f"### Telemetría de Mensajes Recientes",
+2363 |             f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2360 |             f"- **Mensajes Extraídos:** `{data.get('total_messages')}`",
+     -             f"",
+2361 +             "",
+2362 |             f"### Telemetría de Mensajes Recientes",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2362:13
+     |
+2360 |             f"- **Mensajes Extraídos:** `{data.get('total_messages')}`",
+2361 |             f"",
+2362 |             f"### Telemetría de Mensajes Recientes",
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2363 |             f"",
+2364 |         ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2361 |             f"",
+     -             f"### Telemetría de Mensajes Recientes",
+2362 +             "### Telemetría de Mensajes Recientes",
+2363 |             f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2363:13
+     |
+2361 |             f"",
+2362 |             f"### Telemetría de Mensajes Recientes",
+2363 |             f"",
+     |             ^^^
+2364 |         ])
+2365 |         for idx, m in enumerate(data.get("messages", [])[:5], 1):
+     |
+help: Remove extraneous `f` prefix
+     |
+2362 |             f"### Telemetría de Mensajes Recientes",
+     -             f"",
+2363 +             "",
+2364 |         ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2373:17
+     |
+2371 |             lines.extend([
+2372 |                 f"## 🐙 Actividad Pública de Desarrollador: @{data.get('username')}",
+2373 |                 f"",
+     |                 ^^^
+2374 |                 f"- **Eventos Recientes Indexados:** `{data.get('total_events')}`",
+2375 |                 f"- **Perfil:** [{data.get('url')}]({data.get('url')})",
+     |
+help: Remove extraneous `f` prefix
+     |
+2372 |                 f"## 🐙 Actividad Pública de Desarrollador: @{data.get('username')}",
+     -                 f"",
+2373 +                 "",
+2374 |                 f"- **Eventos Recientes Indexados:** `{data.get('total_events')}`",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2376:17
+     |
+2374 |                 f"- **Eventos Recientes Indexados:** `{data.get('total_events')}`",
+2375 |                 f"- **Perfil:** [{data.get('url')}]({data.get('url')})",
+2376 |                 f"",
+     |                 ^^^
+2377 |                 f"### Historial Cronológico",
+2378 |                 f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2375 |                 f"- **Perfil:** [{data.get('url')}]({data.get('url')})",
+     -                 f"",
+2376 +                 "",
+2377 |                 f"### Historial Cronológico",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2377:17
+     |
+2375 |                 f"- **Perfil:** [{data.get('url')}]({data.get('url')})",
+2376 |                 f"",
+2377 |                 f"### Historial Cronológico",
+     |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2378 |                 f"",
+2379 |             ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2376 |                 f"",
+     -                 f"### Historial Cronológico",
+2377 +                 "### Historial Cronológico",
+2378 |                 f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2378:17
+     |
+2376 |                 f"",
+2377 |                 f"### Historial Cronológico",
+2378 |                 f"",
+     |                 ^^^
+2379 |             ])
+2380 |             for ev in data.get("events", [])[:8]:
+     |
+help: Remove extraneous `f` prefix
+     |
+2377 |                 f"### Historial Cronológico",
+     -                 f"",
+2378 +                 "",
+2379 |             ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2386:17
+     |
+2384 |             lines.extend([
+2385 |                 f"## 🐙 Historial de Commits: {data.get('owner')}/{data.get('repo')}",
+2386 |                 f"",
+     |                 ^^^
+2387 |                 f"Total de commits indexados: **{data.get('total_commits')}**",
+2388 |                 f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2385 |                 f"## 🐙 Historial de Commits: {data.get('owner')}/{data.get('repo')}",
+     -                 f"",
+2386 +                 "",
+2387 |                 f"Total de commits indexados: **{data.get('total_commits')}**",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2388:17
+     |
+2386 |                 f"",
+2387 |                 f"Total de commits indexados: **{data.get('total_commits')}**",
+2388 |                 f"",
+     |                 ^^^
+2389 |             ])
+2390 |             for c in data.get("commits", [])[:8]:
+     |
+help: Remove extraneous `f` prefix
+     |
+2387 |                 f"Total de commits indexados: **{data.get('total_commits')}**",
+     -                 f"",
+2388 +                 "",
+2389 |             ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2398:13
+     |
+2396 |         lines.extend([
+2397 |             f"## 🐘 Fediverse / Mastodon ({data.get('instance')})",
+2398 |             f"",
+     |             ^^^
+2399 |             f"- **Autor:** `@{data.get('author')}`",
+2400 |             f"- **URL:** [{data.get('url')}]({data.get('url')})",
+     |
+help: Remove extraneous `f` prefix
+     |
+2397 |             f"## 🐘 Fediverse / Mastodon ({data.get('instance')})",
+     -             f"",
+2398 +             "",
+2399 |             f"- **Autor:** `@{data.get('author')}`",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2402:13
+     |
+2400 | …     f"- **URL:** [{data.get('url')}]({data.get('url')})",
+2401 | …     f"- **Engagement:** {metrics.get('favourites', 0)} Likes | {metrics.get('reblogs', 0)} Boosts | {metrics.get('replies', 0)} Re…
+2402 | …     f"",
+     |       ^^^
+2403 | …     f"### Toot",
+2404 | …     f"{data.get('content', '')}",
+     |
+help: Remove extraneous `f` prefix
+     |
+2401 |             f"- **Engagement:** {metrics.get('favourites', 0)} Likes | {metrics.get('reblogs', 0)} Boosts | {metrics.get('replies', 0)} Respuestas",
+     -             f"",
+2402 +             "",
+2403 |             f"### Toot",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2403:13
+     |
+2401 | …     f"- **Engagement:** {metrics.get('favourites', 0)} Likes | {metrics.get('reblogs', 0)} Boosts | {metrics.get('replies', 0)} Re…
+2402 | …     f"",
+2403 | …     f"### Toot",
+     |       ^^^^^^^^^^^
+2404 | …     f"{data.get('content', '')}",
+2405 | …     f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2402 |             f"",
+     -             f"### Toot",
+2403 +             "### Toot",
+2404 |             f"{data.get('content', '')}",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2405:13
+     |
+2403 |             f"### Toot",
+2404 |             f"{data.get('content', '')}",
+2405 |             f"",
+     |             ^^^
+2406 |         ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2404 |             f"{data.get('content', '')}",
+     -             f"",
+2405 +             "",
+2406 |         ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2412:13
+     |
+2410 |         lines.extend([
+2411 |             f"## 🎲 Mercado de Predicción ({plat}): {data.get('title')}",
+2412 |             f"",
+     |             ^^^
+2413 |             f"- **Probabilidad Implícita:** `{prob_str}`",
+2414 |             f"- **Volumen:** `${float(data.get('volume', 0)):,.2f}`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2411 |             f"## 🎲 Mercado de Predicción ({plat}): {data.get('title')}",
+     -             f"",
+2412 +             "",
+2413 |             f"- **Probabilidad Implícita:** `{prob_str}`",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2416:13
+     |
+2414 |             f"- **Volumen:** `${float(data.get('volume', 0)):,.2f}`",
+2415 |             f"- **URL:** [{data.get('url')}]({data.get('url')})",
+2416 |             f"",
+     |             ^^^
+2417 |             f"### Resumen de Mercado",
+2418 |             f"{data.get('content', '')}",
+     |
+help: Remove extraneous `f` prefix
+     |
+2415 |             f"- **URL:** [{data.get('url')}]({data.get('url')})",
+     -             f"",
+2416 +             "",
+2417 |             f"### Resumen de Mercado",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2417:13
+     |
+2415 |             f"- **URL:** [{data.get('url')}]({data.get('url')})",
+2416 |             f"",
+2417 |             f"### Resumen de Mercado",
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^
+2418 |             f"{data.get('content', '')}",
+2419 |             f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2416 |             f"",
+     -             f"### Resumen de Mercado",
+2417 +             "### Resumen de Mercado",
+2418 |             f"{data.get('content', '')}",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2419:13
+     |
+2417 |             f"### Resumen de Mercado",
+2418 |             f"{data.get('content', '')}",
+2419 |             f"",
+     |             ^^^
+2420 |         ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2418 |             f"{data.get('content', '')}",
+     -             f"",
+2419 +             "",
+2420 |         ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2425:13
+     |
+2423 |         lines.extend([
+2424 |             f"## 📖 Auditoría de Wikipedia: {data.get('title')} ({data.get('lang')}.wikipedia.org)",
+2425 |             f"",
+     |             ^^^
+2426 |             f"- **Revisiones Indexadas:** `{data.get('total_revisions_indexed')}` | Reversiones: `{data.get('revert_count')}`",
+2427 |             f"- **Índice de Guerra de Edición:** `{data.get('edit_war_index') * 100:.1f}%`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2424 |             f"## 📖 Auditoría de Wikipedia: {data.get('title')} ({data.get('lang')}.wikipedia.org)",
+     -             f"",
+2425 +             "",
+2426 |             f"- **Revisiones Indexadas:** `{data.get('total_revisions_indexed')}` | Reversiones: `{data.get('revert_count')}`",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2431:13
+     |
+2429 |             f"- **Veredicto Forense:** `{data.get('verdict')}`",
+2430 |             f"- **URL:** [{data.get('url')}]({data.get('url')})",
+2431 |             f"",
+     |             ^^^
+2432 |             f"### Editores Principales",
+2433 |             f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2430 |             f"- **URL:** [{data.get('url')}]({data.get('url')})",
+     -             f"",
+2431 +             "",
+2432 |             f"### Editores Principales",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2432:13
+     |
+2430 |             f"- **URL:** [{data.get('url')}]({data.get('url')})",
+2431 |             f"",
+2432 |             f"### Editores Principales",
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2433 |             f"",
+2434 |         ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2431 |             f"",
+     -             f"### Editores Principales",
+2432 +             "### Editores Principales",
+2433 |             f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2433:13
+     |
+2431 |             f"",
+2432 |             f"### Editores Principales",
+2433 |             f"",
+     |             ^^^
+2434 |         ])
+2435 |         for ed, cnt in data.get("top_editors", []):
+     |
+help: Remove extraneous `f` prefix
+     |
+2432 |             f"### Editores Principales",
+     -             f"",
+2433 +             "",
+2434 |         ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2442:13
+     |
+2440 |     if astroturf_audit and astroturf_audit.get("verdict"):
+2441 |         lines.extend([
+2442 |             f"---",
+     |             ^^^^^^
+2443 |             f"",
+2444 |             f"## 🤖 Auditoría de Astroturfing & Shilling (Jaccard N-Grams)",
+     |
+help: Remove extraneous `f` prefix
+     |
+2441 |         lines.extend([
+     -             f"---",
+2442 +             "---",
+2443 |             f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2443:13
+     |
+2441 |         lines.extend([
+2442 |             f"---",
+2443 |             f"",
+     |             ^^^
+2444 |             f"## 🤖 Auditoría de Astroturfing & Shilling (Jaccard N-Grams)",
+2445 |             f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2442 |             f"---",
+     -             f"",
+2443 +             "",
+2444 |             f"## 🤖 Auditoría de Astroturfing & Shilling (Jaccard N-Grams)",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2444:13
+     |
+2442 |             f"---",
+2443 |             f"",
+2444 |             f"## 🤖 Auditoría de Astroturfing & Shilling (Jaccard N-Grams)",
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2445 |             f"",
+2446 |             f"- **Veredicto Forense:** `{astroturf_audit.get('verdict')}`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2443 |             f"",
+     -             f"## 🤖 Auditoría de Astroturfing & Shilling (Jaccard N-Grams)",
+2444 +             "## 🤖 Auditoría de Astroturfing & Shilling (Jaccard N-Grams)",
+2445 |             f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2445:13
+     |
+2443 |             f"",
+2444 |             f"## 🤖 Auditoría de Astroturfing & Shilling (Jaccard N-Grams)",
+2445 |             f"",
+     |             ^^^
+2446 |             f"- **Veredicto Forense:** `{astroturf_audit.get('verdict')}`",
+2447 |             f"- **Índice de Riesgo Astroturf:** `{astroturf_audit.get('astroturf_risk_score') * 100:.1f}%`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2444 |             f"## 🤖 Auditoría de Astroturfing & Shilling (Jaccard N-Grams)",
+     -             f"",
+2445 +             "",
+2446 |             f"- **Veredicto Forense:** `{astroturf_audit.get('verdict')}`",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2450:13
+     |
+2448 |             f"- **Concentración de Autores:** `{astroturf_audit.get('author_concentration') * 100:.1f}%`",
+2449 |             f"- **Pares de Comentarios Cuasi-Idénticos:** `{astroturf_audit.get('duplicate_clusters')}`",
+2450 |             f"",
+     |             ^^^
+2451 |         ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2449 |             f"- **Pares de Comentarios Cuasi-Idénticos:** `{astroturf_audit.get('duplicate_clusters')}`",
+     -             f"",
+2450 +             "",
+2451 |         ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2457:13
+     |
+2455 |         c = epistemic_audit.get("counts", {})
+2456 |         lines.extend([
+2457 |             f"---",
+     |             ^^^^^^
+2458 |             f"",
+2459 |             f"## ⚖️ Matriz de Auditoría Epistemológica C5-REAL",
+     |
+help: Remove extraneous `f` prefix
+     |
+2456 |         lines.extend([
+     -             f"---",
+2457 +             "---",
+2458 |             f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2458:13
+     |
+2456 |         lines.extend([
+2457 |             f"---",
+2458 |             f"",
+     |             ^^^
+2459 |             f"## ⚖️ Matriz de Auditoría Epistemológica C5-REAL",
+2460 |             f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2457 |             f"---",
+     -             f"",
+2458 +             "",
+2459 |             f"## ⚖️ Matriz de Auditoría Epistemológica C5-REAL",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2459:13
+     |
+2457 |             f"---",
+2458 |             f"",
+2459 |             f"## ⚖️ Matriz de Auditoría Epistemológica C5-REAL",
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2460 |             f"",
+2461 |             f"- **Ratio de Señal/Ruido (SNR):** `{epistemic_audit.get('signal_ratio') * 100:.1f}%`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2458 |             f"",
+     -             f"## ⚖️ Matriz de Auditoría Epistemológica C5-REAL",
+2459 +             "## ⚖️ Matriz de Auditoría Epistemológica C5-REAL",
+2460 |             f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2460:13
+     |
+2458 |             f"",
+2459 |             f"## ⚖️ Matriz de Auditoría Epistemológica C5-REAL",
+2460 |             f"",
+     |             ^^^
+2461 |             f"- **Ratio de Señal/Ruido (SNR):** `{epistemic_audit.get('signal_ratio') * 100:.1f}%`",
+2462 |             f"- **Hechos Verificados:** `{c.get('hechos_verificados')}`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2459 |             f"## ⚖️ Matriz de Auditoría Epistemológica C5-REAL",
+     -             f"",
+2460 +             "",
+2461 |             f"- **Ratio de Señal/Ruido (SNR):** `{epistemic_audit.get('signal_ratio') * 100:.1f}%`",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2466:13
+     |
+2464 |             f"- **Modelos & Doctrina:** `{c.get('modelos_doctrina')}`",
+2465 |             f"- **Especulación & Sesgo / Falsa Causalidad:** `{c.get('especulacion_sesgo')}`",
+2466 |             f"",
+     |             ^^^
+2467 |         ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2465 |             f"- **Especulación & Sesgo / Falsa Causalidad:** `{c.get('especulacion_sesgo')}`",
+     -             f"",
+2466 +             "",
+2467 |         ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2473:13
+     |
+2471 |     if lexical:
+2472 |         lines.extend([
+2473 |             f"---",
+     |             ^^^^^^
+2474 |             f"",
+2475 |             f"## 📚 Dispersión Léxica & Entropía de Vocabulario",
+     |
+help: Remove extraneous `f` prefix
+     |
+2472 |         lines.extend([
+     -             f"---",
+2473 +             "---",
+2474 |             f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2474:13
+     |
+2472 |         lines.extend([
+2473 |             f"---",
+2474 |             f"",
+     |             ^^^
+2475 |             f"## 📚 Dispersión Léxica & Entropía de Vocabulario",
+2476 |             f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2473 |             f"---",
+     -             f"",
+2474 +             "",
+2475 |             f"## 📚 Dispersión Léxica & Entropía de Vocabulario",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2475:13
+     |
+2473 |             f"---",
+2474 |             f"",
+2475 |             f"## 📚 Dispersión Léxica & Entropía de Vocabulario",
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2476 |             f"",
+2477 |             f"- **Tokens Totales:** `{lexical.get('total_tokens')}`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2474 |             f"",
+     -             f"## 📚 Dispersión Léxica & Entropía de Vocabulario",
+2475 +             "## 📚 Dispersión Léxica & Entropía de Vocabulario",
+2476 |             f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2476:13
+     |
+2474 |             f"",
+2475 |             f"## 📚 Dispersión Léxica & Entropía de Vocabulario",
+2476 |             f"",
+     |             ^^^
+2477 |             f"- **Tokens Totales:** `{lexical.get('total_tokens')}`",
+2478 |             f"- **Vocabulario Único:** `{lexical.get('vocabulary')}`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2475 |             f"## 📚 Dispersión Léxica & Entropía de Vocabulario",
+     -             f"",
+2476 +             "",
+2477 |             f"- **Tokens Totales:** `{lexical.get('total_tokens')}`",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2482:13
+     |
+2480 |             f"- **Ratio Hapax Legomena (Unicidad):** `{lexical.get('hapax_ratio') * 100:.1f}%`",
+2481 |             f"- **Diagnóstico:** `{lexical.get('verdict')}`",
+2482 |             f"",
+     |             ^^^
+2483 |         ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2481 |             f"- **Diagnóstico:** `{lexical.get('verdict')}`",
+     -             f"",
+2482 +             "",
+2483 |         ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2489:13
+     |
+2487 |     if temporal:
+2488 |         lines.extend([
+2489 |             f"---",
+     |             ^^^^^^
+2490 |             f"",
+2491 |             f"## ⏱️ Dinámica Temporal & Ráfagas (CIB Detection)",
+     |
+help: Remove extraneous `f` prefix
+     |
+2488 |         lines.extend([
+     -             f"---",
+2489 +             "---",
+2490 |             f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2490:13
+     |
+2488 |         lines.extend([
+2489 |             f"---",
+2490 |             f"",
+     |             ^^^
+2491 |             f"## ⏱️ Dinámica Temporal & Ráfagas (CIB Detection)",
+2492 |             f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2489 |             f"---",
+     -             f"",
+2490 +             "",
+2491 |             f"## ⏱️ Dinámica Temporal & Ráfagas (CIB Detection)",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2491:13
+     |
+2489 |             f"---",
+2490 |             f"",
+2491 |             f"## ⏱️ Dinámica Temporal & Ráfagas (CIB Detection)",
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2492 |             f"",
+2493 |             f"- **Veredicto Temporal:** `{temporal.get('verdict')}`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2490 |             f"",
+     -             f"## ⏱️ Dinámica Temporal & Ráfagas (CIB Detection)",
+2491 +             "## ⏱️ Dinámica Temporal & Ráfagas (CIB Detection)",
+2492 |             f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2492:13
+     |
+2490 |             f"",
+2491 |             f"## ⏱️ Dinámica Temporal & Ráfagas (CIB Detection)",
+2492 |             f"",
+     |             ^^^
+2493 |             f"- **Veredicto Temporal:** `{temporal.get('verdict')}`",
+2494 |             f"- **Índice de Burstiness (B):** `{temporal.get('burstiness')}`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2491 |             f"## ⏱️ Dinámica Temporal & Ráfagas (CIB Detection)",
+     -             f"",
+2492 +             "",
+2493 |             f"- **Veredicto Temporal:** `{temporal.get('verdict')}`",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2498:13
+     |
+2496 |             f"- **Ráfagas Coordinadas (<=15s):** `{temporal.get('coordinated_clusters')}`",
+2497 |             f"- **Intervalo Medio entre Llegadas:** `{temporal.get('mean_delta_sec')}s`",
+2498 |             f"",
+     |             ^^^
+2499 |         ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2497 |             f"- **Intervalo Medio entre Llegadas:** `{temporal.get('mean_delta_sec')}s`",
+     -             f"",
+2498 +             "",
+2499 |         ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2505:13
+     |
+2503 |     if sentiment:
+2504 |         lines.extend([
+2505 |             f"---",
+     |             ^^^^^^
+2506 |             f"",
+2507 |             f"## 🎭 Análisis de Sentimiento & Volatilidad Emocional",
+     |
+help: Remove extraneous `f` prefix
+     |
+2504 |         lines.extend([
+     -             f"---",
+2505 +             "---",
+2506 |             f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2506:13
+     |
+2504 |         lines.extend([
+2505 |             f"---",
+2506 |             f"",
+     |             ^^^
+2507 |             f"## 🎭 Análisis de Sentimiento & Volatilidad Emocional",
+2508 |             f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2505 |             f"---",
+     -             f"",
+2506 +             "",
+2507 |             f"## 🎭 Análisis de Sentimiento & Volatilidad Emocional",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2507:13
+     |
+2505 |             f"---",
+2506 |             f"",
+2507 |             f"## 🎭 Análisis de Sentimiento & Volatilidad Emocional",
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2508 |             f"",
+2509 |             f"- **Veredicto de Tono:** `{sentiment.get('verdict')}`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2506 |             f"",
+     -             f"## 🎭 Análisis de Sentimiento & Volatilidad Emocional",
+2507 +             "## 🎭 Análisis de Sentimiento & Volatilidad Emocional",
+2508 |             f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2508:13
+     |
+2506 |             f"",
+2507 |             f"## 🎭 Análisis de Sentimiento & Volatilidad Emocional",
+2508 |             f"",
+     |             ^^^
+2509 |             f"- **Veredicto de Tono:** `{sentiment.get('verdict')}`",
+2510 |             f"- **Polaridad Media:** `{sentiment.get('mean_polarity') * 100:+.1f}%`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2507 |             f"## 🎭 Análisis de Sentimiento & Volatilidad Emocional",
+     -             f"",
+2508 +             "",
+2509 |             f"- **Veredicto de Tono:** `{sentiment.get('verdict')}`",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2513:13
+     |
+2511 |             f"- **Volatilidad Emocional:** `{sentiment.get('emotional_volatility')}`",
+2512 |             f"- **Alerta de Indignación Polarizada:** `{'SÍ' if sentiment.get('outrage_flag') else 'NO'}`",
+2513 |             f"",
+     |             ^^^
+2514 |         ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2512 |             f"- **Alerta de Indignación Polarizada:** `{'SÍ' if sentiment.get('outrage_flag') else 'NO'}`",
+     -             f"",
+2513 +             "",
+2514 |         ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2520:13
+     |
+2518 |     if merkle_seal:
+2519 |         lines.extend([
+2520 |             f"---",
+     |             ^^^^^^
+2521 |             f"",
+2522 |             f"## 🔒 Sello Criptográfico de Evidencia (Merkle Attestation)",
+     |
+help: Remove extraneous `f` prefix
+     |
+2519 |         lines.extend([
+     -             f"---",
+2520 +             "---",
+2521 |             f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2521:13
+     |
+2519 |         lines.extend([
+2520 |             f"---",
+2521 |             f"",
+     |             ^^^
+2522 |             f"## 🔒 Sello Criptográfico de Evidencia (Merkle Attestation)",
+2523 |             f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2520 |             f"---",
+     -             f"",
+2521 +             "",
+2522 |             f"## 🔒 Sello Criptográfico de Evidencia (Merkle Attestation)",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2522:13
+     |
+2520 |             f"---",
+2521 |             f"",
+2522 |             f"## 🔒 Sello Criptográfico de Evidencia (Merkle Attestation)",
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2523 |             f"",
+2524 |             f"- **Merkle Root:** `{merkle_seal.get('merkle_root')}`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2521 |             f"",
+     -             f"## 🔒 Sello Criptográfico de Evidencia (Merkle Attestation)",
+2522 +             "## 🔒 Sello Criptográfico de Evidencia (Merkle Attestation)",
+2523 |             f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2523:13
+     |
+2521 |             f"",
+2522 |             f"## 🔒 Sello Criptográfico de Evidencia (Merkle Attestation)",
+2523 |             f"",
+     |             ^^^
+2524 |             f"- **Merkle Root:** `{merkle_seal.get('merkle_root')}`",
+2525 |             f"- **Campos Sellados:** `{merkle_seal.get('leaf_count')}`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2522 |             f"## 🔒 Sello Criptográfico de Evidencia (Merkle Attestation)",
+     -             f"",
+2523 +             "",
+2524 |             f"- **Merkle Root:** `{merkle_seal.get('merkle_root')}`",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2527:13
+     |
+2525 |             f"- **Campos Sellados:** `{merkle_seal.get('leaf_count')}`",
+2526 |             f"- **Timestamp de Sello:** `{merkle_seal.get('sealed_at')}`",
+2527 |             f"",
+     |             ^^^
+2528 |         ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2526 |             f"- **Timestamp de Sello:** `{merkle_seal.get('sealed_at')}`",
+     -             f"",
+2527 +             "",
+2528 |         ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2534:13
+     |
+2532 |     if centrality:
+2533 |         lines.extend([
+2534 |             f"---",
+     |             ^^^^^^
+2535 |             f"",
+2536 |             f"## 🌐 Centralidad de Red & Actores Clave (PageRank & Degree)",
+     |
+help: Remove extraneous `f` prefix
+     |
+2533 |         lines.extend([
+     -             f"---",
+2534 +             "---",
+2535 |             f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2535:13
+     |
+2533 |         lines.extend([
+2534 |             f"---",
+2535 |             f"",
+     |             ^^^
+2536 |             f"## 🌐 Centralidad de Red & Actores Clave (PageRank & Degree)",
+2537 |             f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2534 |             f"---",
+     -             f"",
+2535 +             "",
+2536 |             f"## 🌐 Centralidad de Red & Actores Clave (PageRank & Degree)",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2536:13
+     |
+2534 |             f"---",
+2535 |             f"",
+2536 |             f"## 🌐 Centralidad de Red & Actores Clave (PageRank & Degree)",
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2537 |             f"",
+2538 |         ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2535 |             f"",
+     -             f"## 🌐 Centralidad de Red & Actores Clave (PageRank & Degree)",
+2536 +             "## 🌐 Centralidad de Red & Actores Clave (PageRank & Degree)",
+2537 |             f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2537:13
+     |
+2535 |             f"",
+2536 |             f"## 🌐 Centralidad de Red & Actores Clave (PageRank & Degree)",
+2537 |             f"",
+     |             ^^^
+2538 |         ])
+2539 |         for inf in centrality.get("top_influencers", [])[:5]:
+     |
+help: Remove extraneous `f` prefix
+     |
+2536 |             f"## 🌐 Centralidad de Red & Actores Clave (PageRank & Degree)",
+     -             f"",
+2537 +             "",
+2538 |         ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2547:13
+     |
+2545 |     if co_actions:
+2546 |         lines.extend([
+2547 |             f"---",
+     |             ^^^^^^
+2548 |             f"",
+2549 |             f"## 🤝 Matriz de Acción Coordinada (CIB Co-Occurrence)",
+     |
+help: Remove extraneous `f` prefix
+     |
+2546 |         lines.extend([
+     -             f"---",
+2547 +             "---",
+2548 |             f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2548:13
+     |
+2546 |         lines.extend([
+2547 |             f"---",
+2548 |             f"",
+     |             ^^^
+2549 |             f"## 🤝 Matriz de Acción Coordinada (CIB Co-Occurrence)",
+2550 |             f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2547 |             f"---",
+     -             f"",
+2548 +             "",
+2549 |             f"## 🤝 Matriz de Acción Coordinada (CIB Co-Occurrence)",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2549:13
+     |
+2547 |             f"---",
+2548 |             f"",
+2549 |             f"## 🤝 Matriz de Acción Coordinada (CIB Co-Occurrence)",
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2550 |             f"",
+2551 |             f"- **Veredicto de Sincronización:** `{co_actions.get('verdict')}`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2548 |             f"",
+     -             f"## 🤝 Matriz de Acción Coordinada (CIB Co-Occurrence)",
+2549 +             "## 🤝 Matriz de Acción Coordinada (CIB Co-Occurrence)",
+2550 |             f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2550:13
+     |
+2548 |             f"",
+2549 |             f"## 🤝 Matriz de Acción Coordinada (CIB Co-Occurrence)",
+2550 |             f"",
+     |             ^^^
+2551 |             f"- **Veredicto de Sincronización:** `{co_actions.get('verdict')}`",
+2552 |             f"- **Score de Sincronización CIB:** `{co_actions.get('cib_synchronization_score') * 100:.1f}%`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2549 |             f"## 🤝 Matriz de Acción Coordinada (CIB Co-Occurrence)",
+     -             f"",
+2550 +             "",
+2551 |             f"- **Veredicto de Sincronización:** `{co_actions.get('verdict')}`",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py:2554:13
+     |
+2552 |             f"- **Score de Sincronización CIB:** `{co_actions.get('cib_synchronization_score') * 100:.1f}%`",
+2553 |             f"- **Pares Sincronizados:** `{co_actions.get('total_synchronized_pairs')}`",
+2554 |             f"",
+     |             ^^^
+2555 |         ])
+2556 |         for p in co_actions.get("co_actions", [])[:5]:
+     |
+help: Remove extraneous `f` prefix
+     |
+2553 |             f"- **Pares Sincronizados:** `{co_actions.get('total_synchronized_pairs')}`",
+     -             f"",
+2554 +             "",
+2555 |         ])
+     |
+
+E741 Ambiguous variable name: `l`
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:1527:36
+     |
+1525 |         try:
+1526 |             status, body, _ = http_get(jina_url, timeout=12)
+1527 |             lines = [l.strip() for l in body.split("\n") if l.strip()]
+     |                                    ^
+1528 |             title = lines[0] if lines else f"Hilo {post_id}"
+1529 |             return {
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2128:9
+     |
+2127 |     lines = [
+2128 |         f"=== TELEMETRÍA DE BÓVEDA SOCINT C5-REAL (SQLite WAL) ===",
+     |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2129 |         f"Base de datos: {db_path}",
+2130 |         f"Registros Totales: {total_records}",
+     |
+help: Remove extraneous `f` prefix
+     |
+2127 |     lines = [
+     -         f"=== TELEMETRÍA DE BÓVEDA SOCINT C5-REAL (SQLite WAL) ===",
+2128 +         "=== TELEMETRÍA DE BÓVEDA SOCINT C5-REAL (SQLite WAL) ===",
+2129 |         f"Base de datos: {db_path}",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2132:9
+     |
+2130 |         f"Registros Totales: {total_records}",
+2131 |         f"Score SNR Medio Global: {avg_snr * 100:.1f}%",
+2132 |         f"",
+     |         ^^^
+2133 |         f"Distribución por Plataforma:",
+2134 |     ]
+     |
+help: Remove extraneous `f` prefix
+     |
+2131 |         f"Score SNR Medio Global: {avg_snr * 100:.1f}%",
+     -         f"",
+2132 +         "",
+2133 |         f"Distribución por Plataforma:",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2133:9
+     |
+2131 |         f"Score SNR Medio Global: {avg_snr * 100:.1f}%",
+2132 |         f"",
+2133 |         f"Distribución por Plataforma:",
+     |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2134 |     ]
+2135 |     for p, c in platforms:
+     |
+help: Remove extraneous `f` prefix
+     |
+2132 |         f"",
+     -         f"Distribución por Plataforma:",
+2133 +         "Distribución por Plataforma:",
+2134 |     ]
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2173:9
+     |
+2171 |     lines = [
+2172 |         f"# Informe de Inteligencia Social SOCINT C5-REAL: {plat}",
+2173 |         f"",
+     |         ^^^
+2174 |         f"> **Auditoría Forense C5:** Extracción Determinista en Silicio  ",
+2175 |         f"> **Fecha de Captura:** `{ts}`  ",
+     |
+help: Remove extraneous `f` prefix
+     |
+2172 |         f"# Informe de Inteligencia Social SOCINT C5-REAL: {plat}",
+     -         f"",
+2173 +         "",
+2174 |         f"> **Auditoría Forense C5:** Extracción Determinista en Silicio  ",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2174:9
+     |
+2172 |         f"# Informe de Inteligencia Social SOCINT C5-REAL: {plat}",
+2173 |         f"",
+2174 |         f"> **Auditoría Forense C5:** Extracción Determinista en Silicio  ",
+     |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2175 |         f"> **Fecha de Captura:** `{ts}`  ",
+2176 |         f"> **Estado del Canal:** `Soberano · Zero Cloud Leak`  ",
+     |
+help: Remove extraneous `f` prefix
+     |
+2173 |         f"",
+     -         f"> **Auditoría Forense C5:** Extracción Determinista en Silicio  ",
+2174 +         "> **Auditoría Forense C5:** Extracción Determinista en Silicio  ",
+2175 |         f"> **Fecha de Captura:** `{ts}`  ",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2176:9
+     |
+2174 |         f"> **Auditoría Forense C5:** Extracción Determinista en Silicio  ",
+2175 |         f"> **Fecha de Captura:** `{ts}`  ",
+2176 |         f"> **Estado del Canal:** `Soberano · Zero Cloud Leak`  ",
+     |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2177 |         f"",
+2178 |         f"---",
+     |
+help: Remove extraneous `f` prefix
+     |
+2175 |         f"> **Fecha de Captura:** `{ts}`  ",
+     -         f"> **Estado del Canal:** `Soberano · Zero Cloud Leak`  ",
+2176 +         "> **Estado del Canal:** `Soberano · Zero Cloud Leak`  ",
+2177 |         f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2177:9
+     |
+2175 |         f"> **Fecha de Captura:** `{ts}`  ",
+2176 |         f"> **Estado del Canal:** `Soberano · Zero Cloud Leak`  ",
+2177 |         f"",
+     |         ^^^
+2178 |         f"---",
+2179 |         f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2176 |         f"> **Estado del Canal:** `Soberano · Zero Cloud Leak`  ",
+     -         f"",
+2177 +         "",
+2178 |         f"---",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2178:9
+     |
+2176 |         f"> **Estado del Canal:** `Soberano · Zero Cloud Leak`  ",
+2177 |         f"",
+2178 |         f"---",
+     |         ^^^^^^
+2179 |         f"",
+2180 |     ]
+     |
+help: Remove extraneous `f` prefix
+     |
+2177 |         f"",
+     -         f"---",
+2178 +         "---",
+2179 |         f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2179:9
+     |
+2177 |         f"",
+2178 |         f"---",
+2179 |         f"",
+     |         ^^^
+2180 |     ]
+     |
+help: Remove extraneous `f` prefix
+     |
+2178 |         f"---",
+     -         f"",
+2179 +         "",
+2180 |     ]
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2186:17
+     |
+2184 | …     lines.extend([
+2185 | …         f"## 👤 Auditoría Forense de Perfil X (Twitter): @{data.get('screen_name')}",
+2186 | …         f"",
+     |           ^^^
+2187 | …         f"- **Nombre:** **{data.get('name')}** (`@{data.get('screen_name')}`)",
+2188 | …         f"- **Verificación:** `{'✅ ' + str(data.get('verification_type')).upper() if data.get('verified') else '❌ No verificado'…
+     |
+help: Remove extraneous `f` prefix
+     |
+2185 |                 f"## 👤 Auditoría Forense de Perfil X (Twitter): @{data.get('screen_name')}",
+     -                 f"",
+2186 +                 "",
+2187 |                 f"- **Nombre:** **{data.get('name')}** (`@{data.get('screen_name')}`)",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2192:17
+     |
+2190 | …     f"- **Actividad:** {data.get('tweets_count', 0):,} Tweets | {data.get('media_count', 0):,} Media | {data.get('likes', 0):,} Li…
+2191 | …     f"- **Fecha de Creación:** `{data.get('joined', 'N/A')}`",
+2192 | …     f"",
+     |       ^^^
+2193 | …     f"### Biografía",
+2194 | …     f"> {data.get('description', '*(Sin biografía)*')}",
+     |
+help: Remove extraneous `f` prefix
+     |
+2191 |                 f"- **Fecha de Creación:** `{data.get('joined', 'N/A')}`",
+     -                 f"",
+2192 +                 "",
+2193 |                 f"### Biografía",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2193:17
+     |
+2191 |                 f"- **Fecha de Creación:** `{data.get('joined', 'N/A')}`",
+2192 |                 f"",
+2193 |                 f"### Biografía",
+     |                 ^^^^^^^^^^^^^^^^
+2194 |                 f"> {data.get('description', '*(Sin biografía)*')}",
+2195 |                 f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2192 |                 f"",
+     -                 f"### Biografía",
+2193 +                 "### Biografía",
+2194 |                 f"> {data.get('description', '*(Sin biografía)*')}",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2195:17
+     |
+2193 |                 f"### Biografía",
+2194 |                 f"> {data.get('description', '*(Sin biografía)*')}",
+2195 |                 f"",
+     |                 ^^^
+2196 |             ])
+2197 |         elif data.get("type") == "thread":
+     |
+help: Remove extraneous `f` prefix
+     |
+2194 |                 f"> {data.get('description', '*(Sin biografía)*')}",
+     -                 f"",
+2195 +                 "",
+2196 |             ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2202:17
+     |
+2200 |             lines.extend([
+2201 |                 f"## 🧵 Hilo Desenlazado de X (Twitter): @{author.get('screen_name')}",
+2202 |                 f"",
+     |                 ^^^
+2203 |                 f"- **Autor:** **{author.get('name')}** (`@{author.get('screen_name')}`)",
+2204 |                 f"- **Total de Entregas:** `{data.get('total_tweets')}` tweets encadenados",
+     |
+help: Remove extraneous `f` prefix
+     |
+2201 |                 f"## 🧵 Hilo Desenlazado de X (Twitter): @{author.get('screen_name')}",
+     -                 f"",
+2202 +                 "",
+2203 |                 f"- **Autor:** **{author.get('name')}** (`@{author.get('screen_name')}`)",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2207:17
+     |
+2205 | …     f"- **Impacto Agregado:** {metrics.get('total_likes', 0):,} Likes | {metrics.get('total_retweets', 0):,} RTs | {metrics.get('t…
+2206 | …     f"- **Enlace Raíz:** [{data.get('url')}]({data.get('url')})",
+2207 | …     f"",
+     |       ^^^
+2208 | …     f"### Contenido Completo del Hilo",
+2209 | …     f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2206 |                 f"- **Enlace Raíz:** [{data.get('url')}]({data.get('url')})",
+     -                 f"",
+2207 +                 "",
+2208 |                 f"### Contenido Completo del Hilo",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2208:17
+     |
+2206 |                 f"- **Enlace Raíz:** [{data.get('url')}]({data.get('url')})",
+2207 |                 f"",
+2208 |                 f"### Contenido Completo del Hilo",
+     |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2209 |                 f"",
+2210 |                 f"```text",
+     |
+help: Remove extraneous `f` prefix
+     |
+2207 |                 f"",
+     -                 f"### Contenido Completo del Hilo",
+2208 +                 "### Contenido Completo del Hilo",
+2209 |                 f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2209:17
+     |
+2207 |                 f"",
+2208 |                 f"### Contenido Completo del Hilo",
+2209 |                 f"",
+     |                 ^^^
+2210 |                 f"```text",
+2211 |                 f"{data.get('text', '')}",
+     |
+help: Remove extraneous `f` prefix
+     |
+2208 |                 f"### Contenido Completo del Hilo",
+     -                 f"",
+2209 +                 "",
+2210 |                 f"```text",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2210:17
+     |
+2208 |                 f"### Contenido Completo del Hilo",
+2209 |                 f"",
+2210 |                 f"```text",
+     |                 ^^^^^^^^^^
+2211 |                 f"{data.get('text', '')}",
+2212 |                 f"```",
+     |
+help: Remove extraneous `f` prefix
+     |
+2209 |                 f"",
+     -                 f"```text",
+2210 +                 "```text",
+2211 |                 f"{data.get('text', '')}",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2212:17
+     |
+2210 |                 f"```text",
+2211 |                 f"{data.get('text', '')}",
+2212 |                 f"```",
+     |                 ^^^^^^
+2213 |                 f"",
+2214 |             ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2211 |                 f"{data.get('text', '')}",
+     -                 f"```",
+2212 +                 "```",
+2213 |                 f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2213:17
+     |
+2211 |                 f"{data.get('text', '')}",
+2212 |                 f"```",
+2213 |                 f"",
+     |                 ^^^
+2214 |             ])
+2215 |         else:
+     |
+help: Remove extraneous `f` prefix
+     |
+2212 |                 f"```",
+     -                 f"",
+2213 +                 "",
+2214 |             ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2226:17
+     |
+2224 |             screen_display = author.get('screen_name', author_display) if isinstance(author, dict) else str(author)
+2225 |             lines.extend([
+2226 |                 f"## 🛰️ Telemetría de Publicación (X/Twitter)",
+     |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2227 |                 f"",
+2228 |                 f"- **Autor:** **{author_display}** (`@{screen_display}`)",
+     |
+help: Remove extraneous `f` prefix
+     |
+2225 |             lines.extend([
+     -                 f"## 🛰️ Telemetría de Publicación (X/Twitter)",
+2226 +                 "## 🛰️ Telemetría de Publicación (X/Twitter)",
+2227 |                 f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2227:17
+     |
+2225 |             lines.extend([
+2226 |                 f"## 🛰️ Telemetría de Publicación (X/Twitter)",
+2227 |                 f"",
+     |                 ^^^
+2228 |                 f"- **Autor:** **{author_display}** (`@{screen_display}`)",
+2229 |                 f"- **URL:** [{data.get('url')}]({data.get('url')})",
+     |
+help: Remove extraneous `f` prefix
+     |
+2226 |                 f"## 🛰️ Telemetría de Publicación (X/Twitter)",
+     -                 f"",
+2227 +                 "",
+2228 |                 f"- **Autor:** **{author_display}** (`@{screen_display}`)",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2232:17
+     |
+2230 |                 f"- **Fecha:** `{data.get('created_at', 'N/A')}`",
+2231 |                 f"- **Métricas de Impacto:** {likes:,} Likes | {retweets:,} RTs | {replies:,} Replies | {views:,} Views",
+2232 |                 f"",
+     |                 ^^^
+2233 |                 f"### Contenido Extraído",
+2234 |                 f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2231 |                 f"- **Métricas de Impacto:** {likes:,} Likes | {retweets:,} RTs | {replies:,} Replies | {views:,} Views",
+     -                 f"",
+2232 +                 "",
+2233 |                 f"### Contenido Extraído",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2233:17
+     |
+2231 |                 f"- **Métricas de Impacto:** {likes:,} Likes | {retweets:,} RTs | {replies:,} Replies | {views:,} Views",
+2232 |                 f"",
+2233 |                 f"### Contenido Extraído",
+     |                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+2234 |                 f"",
+2235 |                 f"```text",
+     |
+help: Remove extraneous `f` prefix
+     |
+2232 |                 f"",
+     -                 f"### Contenido Extraído",
+2233 +                 "### Contenido Extraído",
+2234 |                 f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2234:17
+     |
+2232 |                 f"",
+2233 |                 f"### Contenido Extraído",
+2234 |                 f"",
+     |                 ^^^
+2235 |                 f"```text",
+2236 |                 f"{data.get('text', '')}",
+     |
+help: Remove extraneous `f` prefix
+     |
+2233 |                 f"### Contenido Extraído",
+     -                 f"",
+2234 +                 "",
+2235 |                 f"```text",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2235:17
+     |
+2233 |                 f"### Contenido Extraído",
+2234 |                 f"",
+2235 |                 f"```text",
+     |                 ^^^^^^^^^^
+2236 |                 f"{data.get('text', '')}",
+2237 |                 f"```",
+     |
+help: Remove extraneous `f` prefix
+     |
+2234 |                 f"",
+     -                 f"```text",
+2235 +                 "```text",
+2236 |                 f"{data.get('text', '')}",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2237:17
+     |
+2235 |                 f"```text",
+2236 |                 f"{data.get('text', '')}",
+2237 |                 f"```",
+     |                 ^^^^^^
+2238 |                 f"",
+2239 |             ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2236 |                 f"{data.get('text', '')}",
+     -                 f"```",
+2237 +                 "```",
+2238 |                 f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2238:17
+     |
+2236 |                 f"{data.get('text', '')}",
+2237 |                 f"```",
+2238 |                 f"",
+     |                 ^^^
+2239 |             ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2237 |                 f"```",
+     -                 f"",
+2238 +                 "",
+2239 |             ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2247:17
+     |
+2245 |             lines.extend([
+2246 |                 f"## 📰 Publicación de Substack: {data.get('title')}",
+2247 |                 f"",
+     |                 ^^^
+2248 |                 f"- **Autor:** `{data.get('author')}`",
+2249 |                 f"- **URL:** [{data.get('canonical_url')}]({data.get('canonical_url')})",
+     |
+help: Remove extraneous `f` prefix
+     |
+2246 |                 f"## 📰 Publicación de Substack: {data.get('title')}",
+     -                 f"",
+2247 +                 "",
+2248 |                 f"- **Autor:** `{data.get('author')}`",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2253:17
+     |
+2251 |                 f"- **Engagement:** {likes:,} Likes | {comments:,} Comentarios",
+2252 |                 f"- **Acceso:** `{'🔒 Paywalled' if data.get('paywalled') else '🔓 Abierto'}`",
+2253 |                 f"",
+     |                 ^^^
+2254 |                 f"### Extracto / Cuerpo del Artículo",
+2255 |                 f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2252 |                 f"- **Acceso:** `{'🔒 Paywalled' if data.get('paywalled') else '🔓 Abierto'}`",
+     -                 f"",
+2253 +                 "",
+2254 |                 f"### Extracto / Cuerpo del Artículo",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2254:17
+     |
+2252 |                 f"- **Acceso:** `{'🔒 Paywalled' if data.get('paywalled') else '🔓 Abierto'}`",
+2253 |                 f"",
+2254 |                 f"### Extracto / Cuerpo del Artículo",
+     |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2255 |                 f"",
+2256 |                 f"{data.get('content', '')[:2500]}...",
+     |
+help: Remove extraneous `f` prefix
+     |
+2253 |                 f"",
+     -                 f"### Extracto / Cuerpo del Artículo",
+2254 +                 "### Extracto / Cuerpo del Artículo",
+2255 |                 f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2255:17
+     |
+2253 |                 f"",
+2254 |                 f"### Extracto / Cuerpo del Artículo",
+2255 |                 f"",
+     |                 ^^^
+2256 |                 f"{data.get('content', '')[:2500]}...",
+2257 |                 f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2254 |                 f"### Extracto / Cuerpo del Artículo",
+     -                 f"",
+2255 +                 "",
+2256 |                 f"{data.get('content', '')[:2500]}...",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2257:17
+     |
+2255 |                 f"",
+2256 |                 f"{data.get('content', '')[:2500]}...",
+2257 |                 f"",
+     |                 ^^^
+2258 |             ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2256 |                 f"{data.get('content', '')[:2500]}...",
+     -                 f"",
+2257 +                 "",
+2258 |             ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2265:17
+     |
+2263 |             lines.extend([
+2264 |                 f"## 🕵️ Dossier Forense de Usuario Reddit: /u/{data.get('username')}",
+2265 |                 f"",
+     |                 ^^^
+2266 |                 f"- **URL:** [{data.get('url')}]({data.get('url')})",
+2267 |                 f"- **Posts Indexados:** `{data.get('total_submitted_indexed')}`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2264 |                 f"## 🕵️ Dossier Forense de Usuario Reddit: /u/{data.get('username')}",
+     -                 f"",
+2265 +                 "",
+2266 |                 f"- **URL:** [{data.get('url')}]({data.get('url')})",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2270:17
+     |
+2268 |                 f"- **Entropía de Subreddits (H):** `{data.get('subreddit_entropy')} bits`",
+2269 |                 f"- **Veredicto:** `{data.get('entropy_verdict')}`",
+2270 |                 f"",
+     |                 ^^^
+2271 |                 f"### Distribución de Actividad por Subreddit",
+2272 |                 f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2269 |                 f"- **Veredicto:** `{data.get('entropy_verdict')}`",
+     -                 f"",
+2270 +                 "",
+2271 |                 f"### Distribución de Actividad por Subreddit",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2271:17
+     |
+2269 |                 f"- **Veredicto:** `{data.get('entropy_verdict')}`",
+2270 |                 f"",
+2271 |                 f"### Distribución de Actividad por Subreddit",
+     |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2272 |                 f"",
+2273 |                 f"| Subreddit | Frecuencia | Proporción |",
+     |
+help: Remove extraneous `f` prefix
+     |
+2270 |                 f"",
+     -                 f"### Distribución de Actividad por Subreddit",
+2271 +                 "### Distribución de Actividad por Subreddit",
+2272 |                 f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2272:17
+     |
+2270 |                 f"",
+2271 |                 f"### Distribución de Actividad por Subreddit",
+2272 |                 f"",
+     |                 ^^^
+2273 |                 f"| Subreddit | Frecuencia | Proporción |",
+2274 |                 f"| :--- | :--- | :--- |",
+     |
+help: Remove extraneous `f` prefix
+     |
+2271 |                 f"### Distribución de Actividad por Subreddit",
+     -                 f"",
+2272 +                 "",
+2273 |                 f"| Subreddit | Frecuencia | Proporción |",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2273:17
+     |
+2271 |                 f"### Distribución de Actividad por Subreddit",
+2272 |                 f"",
+2273 |                 f"| Subreddit | Frecuencia | Proporción |",
+     |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2274 |                 f"| :--- | :--- | :--- |",
+2275 |             ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2272 |                 f"",
+     -                 f"| Subreddit | Frecuencia | Proporción |",
+2273 +                 "| Subreddit | Frecuencia | Proporción |",
+2274 |                 f"| :--- | :--- | :--- |",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2274:17
+     |
+2272 |                 f"",
+2273 |                 f"| Subreddit | Frecuencia | Proporción |",
+2274 |                 f"| :--- | :--- | :--- |",
+     |                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+2275 |             ])
+2276 |             tot = max(1, data.get("total_submitted_indexed", 1))
+     |
+help: Remove extraneous `f` prefix
+     |
+2273 |                 f"| Subreddit | Frecuencia | Proporción |",
+     -                 f"| :--- | :--- | :--- |",
+2274 +                 "| :--- | :--- | :--- |",
+2275 |             ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2283:17
+     |
+2281 |             lines.extend([
+2282 |                 f"## 👾 Hilo de Discusión en Reddit: r/{data.get('subreddit')}",
+2283 |                 f"",
+     |                 ^^^
+2284 |                 f"- **Título:** **{data.get('title')}**",
+2285 |                 f"- **Autor:** `/u/{data.get('author')}`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2282 |                 f"## 👾 Hilo de Discusión en Reddit: r/{data.get('subreddit')}",
+     -                 f"",
+2283 +                 "",
+2284 |                 f"- **Título:** **{data.get('title')}**",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2288:17
+     |
+2286 |                 f"- **Puntuación:** `{data.get('score', 0):,}` (Upvote Ratio: `{float(data.get('upvote_ratio', 1.0))*100:.1f}%`)",
+2287 |                 f"- **Enlace:** [{data.get('permalink')}]({data.get('permalink')})",
+2288 |                 f"",
+     |                 ^^^
+2289 |                 f"### Texto Principal",
+2290 |                 f"{data.get('selftext', '*(Sin texto)*')[:1500]}",
+     |
+help: Remove extraneous `f` prefix
+     |
+2287 |                 f"- **Enlace:** [{data.get('permalink')}]({data.get('permalink')})",
+     -                 f"",
+2288 +                 "",
+2289 |                 f"### Texto Principal",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2289:17
+     |
+2287 |                 f"- **Enlace:** [{data.get('permalink')}]({data.get('permalink')})",
+2288 |                 f"",
+2289 |                 f"### Texto Principal",
+     |                 ^^^^^^^^^^^^^^^^^^^^^^
+2290 |                 f"{data.get('selftext', '*(Sin texto)*')[:1500]}",
+2291 |                 f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2288 |                 f"",
+     -                 f"### Texto Principal",
+2289 +                 "### Texto Principal",
+2290 |                 f"{data.get('selftext', '*(Sin texto)*')[:1500]}",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2291:17
+     |
+2289 |                 f"### Texto Principal",
+2290 |                 f"{data.get('selftext', '*(Sin texto)*')[:1500]}",
+2291 |                 f"",
+     |                 ^^^
+2292 |             ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2290 |                 f"{data.get('selftext', '*(Sin texto)*')[:1500]}",
+     -                 f"",
+2291 +                 "",
+2292 |             ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2297:13
+     |
+2295 |         lines.extend([
+2296 |             f"## 📺 Telemetría de YouTube: {data.get('title')}",
+2297 |             f"",
+     |             ^^^
+2298 |             f"- **Creador / Canal:** **{data.get('author')}**",
+2299 |             f"- **URL:** [{data.get('url')}]({data.get('url')})",
+     |
+help: Remove extraneous `f` prefix
+     |
+2296 |             f"## 📺 Telemetría de YouTube: {data.get('title')}",
+     -             f"",
+2297 +             "",
+2298 |             f"- **Creador / Canal:** **{data.get('author')}**",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2300:13
+     |
+2298 |             f"- **Creador / Canal:** **{data.get('author')}**",
+2299 |             f"- **URL:** [{data.get('url')}]({data.get('url')})",
+2300 |             f"",
+     |             ^^^
+2301 |             f"### Transcripción de Audio",
+2302 |             f"{data.get('transcript', '')[:2000]}...",
+     |
+help: Remove extraneous `f` prefix
+     |
+2299 |             f"- **URL:** [{data.get('url')}]({data.get('url')})",
+     -             f"",
+2300 +             "",
+2301 |             f"### Transcripción de Audio",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2301:13
+     |
+2299 |             f"- **URL:** [{data.get('url')}]({data.get('url')})",
+2300 |             f"",
+2301 |             f"### Transcripción de Audio",
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2302 |             f"{data.get('transcript', '')[:2000]}...",
+2303 |             f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2300 |             f"",
+     -             f"### Transcripción de Audio",
+2301 +             "### Transcripción de Audio",
+2302 |             f"{data.get('transcript', '')[:2000]}...",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2303:13
+     |
+2301 |             f"### Transcripción de Audio",
+2302 |             f"{data.get('transcript', '')[:2000]}...",
+2303 |             f"",
+     |             ^^^
+2304 |         ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2302 |             f"{data.get('transcript', '')[:2000]}...",
+     -             f"",
+2303 +             "",
+2304 |         ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2310:17
+     |
+2308 |             lines.extend([
+2309 |                 f"## 🟠 Hacker News: {data.get('title')}",
+2310 |                 f"",
+     |                 ^^^
+2311 |                 f"- **Autor:** `/u/{data.get('author')}` | Puntos: `{data.get('points')}`",
+2312 |                 f"- **URL HN:** [{data.get('url')}]({data.get('url')})",
+     |
+help: Remove extraneous `f` prefix
+     |
+2309 |                 f"## 🟠 Hacker News: {data.get('title')}",
+     -                 f"",
+2310 +                 "",
+2311 |                 f"- **Autor:** `/u/{data.get('author')}` | Puntos: `{data.get('points')}`",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2314:17
+     |
+2312 |                 f"- **URL HN:** [{data.get('url')}]({data.get('url')})",
+2313 |                 f"- **Enlace Externo:** {data.get('external_url', 'N/A')}",
+2314 |                 f"",
+     |                 ^^^
+2315 |                 f"### Comentarios Destacados ({len(data.get('comments', []))} analizados)",
+2316 |                 f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2313 |                 f"- **Enlace Externo:** {data.get('external_url', 'N/A')}",
+     -                 f"",
+2314 +                 "",
+2315 |                 f"### Comentarios Destacados ({len(data.get('comments', []))} analizados)",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2316:17
+     |
+2314 |                 f"",
+2315 |                 f"### Comentarios Destacados ({len(data.get('comments', []))} analizados)",
+2316 |                 f"",
+     |                 ^^^
+2317 |             ])
+2318 |             for c in data.get("comments", [])[:6]:
+     |
+help: Remove extraneous `f` prefix
+     |
+2315 |                 f"### Comentarios Destacados ({len(data.get('comments', []))} analizados)",
+     -                 f"",
+2316 +                 "",
+2317 |             ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2324:17
+     |
+2322 |             lines.extend([
+2323 |                 f"## 🟠 Hacker News Usuario: {data.get('username')}",
+2324 |                 f"",
+     |                 ^^^
+2325 |                 f"- **Karma:** `{data.get('karma'):,}` | Envíos: `{data.get('submitted_count')}`",
+2326 |                 f"- **Biografía:** {data.get('about', '*(Sin biografía)*')}",
+     |
+help: Remove extraneous `f` prefix
+     |
+2323 |                 f"## 🟠 Hacker News Usuario: {data.get('username')}",
+     -                 f"",
+2324 +                 "",
+2325 |                 f"- **Karma:** `{data.get('karma'):,}` | Envíos: `{data.get('submitted_count')}`",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2327:17
+     |
+2325 |                 f"- **Karma:** `{data.get('karma'):,}` | Envíos: `{data.get('submitted_count')}`",
+2326 |                 f"- **Biografía:** {data.get('about', '*(Sin biografía)*')}",
+2327 |                 f"",
+     |                 ^^^
+2328 |             ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2326 |                 f"- **Biografía:** {data.get('about', '*(Sin biografía)*')}",
+     -                 f"",
+2327 +                 "",
+2328 |             ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2336:17
+     |
+2334 | …     lines.extend([
+2335 | …         f"## 🦋 Bluesky (ATProto): @{author.get('handle')}",
+2336 | …         f"",
+     |           ^^^
+2337 | …         f"- **Autor:** **{author.get('displayName')}** (`@{author.get('handle')}`)",
+2338 | …         f"- **Engagement:** {metrics.get('likes', 0):,} Likes | {metrics.get('reposts', 0):,} Reposts | {metrics.get('replies', 0)…
+     |
+help: Remove extraneous `f` prefix
+     |
+2335 |                 f"## 🦋 Bluesky (ATProto): @{author.get('handle')}",
+     -                 f"",
+2336 +                 "",
+2337 |                 f"- **Autor:** **{author.get('displayName')}** (`@{author.get('handle')}`)",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2340:17
+     |
+2338 | …     f"- **Engagement:** {metrics.get('likes', 0):,} Likes | {metrics.get('reposts', 0):,} Reposts | {metrics.get('replies', 0):,} …
+2339 | …     f"- **URL:** [{data.get('url')}]({data.get('url')})",
+2340 | …     f"",
+     |       ^^^
+2341 | …     f"### Post",
+2342 | …     f"```text\n{data.get('text', '')}\n```",
+     |
+help: Remove extraneous `f` prefix
+     |
+2339 |                 f"- **URL:** [{data.get('url')}]({data.get('url')})",
+     -                 f"",
+2340 +                 "",
+2341 |                 f"### Post",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2341:17
+     |
+2339 |                 f"- **URL:** [{data.get('url')}]({data.get('url')})",
+2340 |                 f"",
+2341 |                 f"### Post",
+     |                 ^^^^^^^^^^^
+2342 |                 f"```text\n{data.get('text', '')}\n```",
+2343 |                 f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2340 |                 f"",
+     -                 f"### Post",
+2341 +                 "### Post",
+2342 |                 f"```text\n{data.get('text', '')}\n```",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2343:17
+     |
+2341 |                 f"### Post",
+2342 |                 f"```text\n{data.get('text', '')}\n```",
+2343 |                 f"",
+     |                 ^^^
+2344 |             ])
+2345 |         elif data.get("type") == "profile":
+     |
+help: Remove extraneous `f` prefix
+     |
+2342 |                 f"```text\n{data.get('text', '')}\n```",
+     -                 f"",
+2343 +                 "",
+2344 |             ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2348:17
+     |
+2346 |             lines.extend([
+2347 |                 f"## 🦋 Bluesky Perfil: @{data.get('handle')}",
+2348 |                 f"",
+     |                 ^^^
+2349 |                 f"- **Nombre:** **{data.get('displayName')}** | Posts: `{data.get('postsCount', 0):,}`",
+2350 |                 f"- **Seguidores:** `{data.get('followersCount', 0):,}` | Siguiendo: `{data.get('followsCount', 0):,}`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2347 |                 f"## 🦋 Bluesky Perfil: @{data.get('handle')}",
+     -                 f"",
+2348 +                 "",
+2349 |                 f"- **Nombre:** **{data.get('displayName')}** | Posts: `{data.get('postsCount', 0):,}`",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2352:17
+     |
+2350 |                 f"- **Seguidores:** `{data.get('followersCount', 0):,}` | Siguiendo: `{data.get('followsCount', 0):,}`",
+2351 |                 f"- **Biografía:** {data.get('description', '')}",
+2352 |                 f"",
+     |                 ^^^
+2353 |             ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2351 |                 f"- **Biografía:** {data.get('description', '')}",
+     -                 f"",
+2352 +                 "",
+2353 |             ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2358:13
+     |
+2356 |         lines.extend([
+2357 |             f"## ✈️ Canal de Telegram: {data.get('channel')}",
+2358 |             f"",
+     |             ^^^
+2359 |             f"- **URL:** [{data.get('url')}]({data.get('url')})",
+2360 |             f"- **Mensajes Extraídos:** `{data.get('total_messages')}`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2357 |             f"## ✈️ Canal de Telegram: {data.get('channel')}",
+     -             f"",
+2358 +             "",
+2359 |             f"- **URL:** [{data.get('url')}]({data.get('url')})",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2361:13
+     |
+2359 |             f"- **URL:** [{data.get('url')}]({data.get('url')})",
+2360 |             f"- **Mensajes Extraídos:** `{data.get('total_messages')}`",
+2361 |             f"",
+     |             ^^^
+2362 |             f"### Telemetría de Mensajes Recientes",
+2363 |             f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2360 |             f"- **Mensajes Extraídos:** `{data.get('total_messages')}`",
+     -             f"",
+2361 +             "",
+2362 |             f"### Telemetría de Mensajes Recientes",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2362:13
+     |
+2360 |             f"- **Mensajes Extraídos:** `{data.get('total_messages')}`",
+2361 |             f"",
+2362 |             f"### Telemetría de Mensajes Recientes",
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2363 |             f"",
+2364 |         ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2361 |             f"",
+     -             f"### Telemetría de Mensajes Recientes",
+2362 +             "### Telemetría de Mensajes Recientes",
+2363 |             f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2363:13
+     |
+2361 |             f"",
+2362 |             f"### Telemetría de Mensajes Recientes",
+2363 |             f"",
+     |             ^^^
+2364 |         ])
+2365 |         for idx, m in enumerate(data.get("messages", [])[:5], 1):
+     |
+help: Remove extraneous `f` prefix
+     |
+2362 |             f"### Telemetría de Mensajes Recientes",
+     -             f"",
+2363 +             "",
+2364 |         ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2373:17
+     |
+2371 |             lines.extend([
+2372 |                 f"## 🐙 Actividad Pública de Desarrollador: @{data.get('username')}",
+2373 |                 f"",
+     |                 ^^^
+2374 |                 f"- **Eventos Recientes Indexados:** `{data.get('total_events')}`",
+2375 |                 f"- **Perfil:** [{data.get('url')}]({data.get('url')})",
+     |
+help: Remove extraneous `f` prefix
+     |
+2372 |                 f"## 🐙 Actividad Pública de Desarrollador: @{data.get('username')}",
+     -                 f"",
+2373 +                 "",
+2374 |                 f"- **Eventos Recientes Indexados:** `{data.get('total_events')}`",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2376:17
+     |
+2374 |                 f"- **Eventos Recientes Indexados:** `{data.get('total_events')}`",
+2375 |                 f"- **Perfil:** [{data.get('url')}]({data.get('url')})",
+2376 |                 f"",
+     |                 ^^^
+2377 |                 f"### Historial Cronológico",
+2378 |                 f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2375 |                 f"- **Perfil:** [{data.get('url')}]({data.get('url')})",
+     -                 f"",
+2376 +                 "",
+2377 |                 f"### Historial Cronológico",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2377:17
+     |
+2375 |                 f"- **Perfil:** [{data.get('url')}]({data.get('url')})",
+2376 |                 f"",
+2377 |                 f"### Historial Cronológico",
+     |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2378 |                 f"",
+2379 |             ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2376 |                 f"",
+     -                 f"### Historial Cronológico",
+2377 +                 "### Historial Cronológico",
+2378 |                 f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2378:17
+     |
+2376 |                 f"",
+2377 |                 f"### Historial Cronológico",
+2378 |                 f"",
+     |                 ^^^
+2379 |             ])
+2380 |             for ev in data.get("events", [])[:8]:
+     |
+help: Remove extraneous `f` prefix
+     |
+2377 |                 f"### Historial Cronológico",
+     -                 f"",
+2378 +                 "",
+2379 |             ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2386:17
+     |
+2384 |             lines.extend([
+2385 |                 f"## 🐙 Historial de Commits: {data.get('owner')}/{data.get('repo')}",
+2386 |                 f"",
+     |                 ^^^
+2387 |                 f"Total de commits indexados: **{data.get('total_commits')}**",
+2388 |                 f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2385 |                 f"## 🐙 Historial de Commits: {data.get('owner')}/{data.get('repo')}",
+     -                 f"",
+2386 +                 "",
+2387 |                 f"Total de commits indexados: **{data.get('total_commits')}**",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2388:17
+     |
+2386 |                 f"",
+2387 |                 f"Total de commits indexados: **{data.get('total_commits')}**",
+2388 |                 f"",
+     |                 ^^^
+2389 |             ])
+2390 |             for c in data.get("commits", [])[:8]:
+     |
+help: Remove extraneous `f` prefix
+     |
+2387 |                 f"Total de commits indexados: **{data.get('total_commits')}**",
+     -                 f"",
+2388 +                 "",
+2389 |             ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2398:13
+     |
+2396 |         lines.extend([
+2397 |             f"## 🐘 Fediverse / Mastodon ({data.get('instance')})",
+2398 |             f"",
+     |             ^^^
+2399 |             f"- **Autor:** `@{data.get('author')}`",
+2400 |             f"- **URL:** [{data.get('url')}]({data.get('url')})",
+     |
+help: Remove extraneous `f` prefix
+     |
+2397 |             f"## 🐘 Fediverse / Mastodon ({data.get('instance')})",
+     -             f"",
+2398 +             "",
+2399 |             f"- **Autor:** `@{data.get('author')}`",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2402:13
+     |
+2400 | …     f"- **URL:** [{data.get('url')}]({data.get('url')})",
+2401 | …     f"- **Engagement:** {metrics.get('favourites', 0)} Likes | {metrics.get('reblogs', 0)} Boosts | {metrics.get('replies', 0)} Re…
+2402 | …     f"",
+     |       ^^^
+2403 | …     f"### Toot",
+2404 | …     f"{data.get('content', '')}",
+     |
+help: Remove extraneous `f` prefix
+     |
+2401 |             f"- **Engagement:** {metrics.get('favourites', 0)} Likes | {metrics.get('reblogs', 0)} Boosts | {metrics.get('replies', 0)} Respuestas",
+     -             f"",
+2402 +             "",
+2403 |             f"### Toot",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2403:13
+     |
+2401 | …     f"- **Engagement:** {metrics.get('favourites', 0)} Likes | {metrics.get('reblogs', 0)} Boosts | {metrics.get('replies', 0)} Re…
+2402 | …     f"",
+2403 | …     f"### Toot",
+     |       ^^^^^^^^^^^
+2404 | …     f"{data.get('content', '')}",
+2405 | …     f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2402 |             f"",
+     -             f"### Toot",
+2403 +             "### Toot",
+2404 |             f"{data.get('content', '')}",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2405:13
+     |
+2403 |             f"### Toot",
+2404 |             f"{data.get('content', '')}",
+2405 |             f"",
+     |             ^^^
+2406 |         ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2404 |             f"{data.get('content', '')}",
+     -             f"",
+2405 +             "",
+2406 |         ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2412:13
+     |
+2410 |         lines.extend([
+2411 |             f"## 🎲 Mercado de Predicción ({plat}): {data.get('title')}",
+2412 |             f"",
+     |             ^^^
+2413 |             f"- **Probabilidad Implícita:** `{prob_str}`",
+2414 |             f"- **Volumen:** `${float(data.get('volume', 0)):,.2f}`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2411 |             f"## 🎲 Mercado de Predicción ({plat}): {data.get('title')}",
+     -             f"",
+2412 +             "",
+2413 |             f"- **Probabilidad Implícita:** `{prob_str}`",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2416:13
+     |
+2414 |             f"- **Volumen:** `${float(data.get('volume', 0)):,.2f}`",
+2415 |             f"- **URL:** [{data.get('url')}]({data.get('url')})",
+2416 |             f"",
+     |             ^^^
+2417 |             f"### Resumen de Mercado",
+2418 |             f"{data.get('content', '')}",
+     |
+help: Remove extraneous `f` prefix
+     |
+2415 |             f"- **URL:** [{data.get('url')}]({data.get('url')})",
+     -             f"",
+2416 +             "",
+2417 |             f"### Resumen de Mercado",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2417:13
+     |
+2415 |             f"- **URL:** [{data.get('url')}]({data.get('url')})",
+2416 |             f"",
+2417 |             f"### Resumen de Mercado",
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^
+2418 |             f"{data.get('content', '')}",
+2419 |             f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2416 |             f"",
+     -             f"### Resumen de Mercado",
+2417 +             "### Resumen de Mercado",
+2418 |             f"{data.get('content', '')}",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2419:13
+     |
+2417 |             f"### Resumen de Mercado",
+2418 |             f"{data.get('content', '')}",
+2419 |             f"",
+     |             ^^^
+2420 |         ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2418 |             f"{data.get('content', '')}",
+     -             f"",
+2419 +             "",
+2420 |         ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2425:13
+     |
+2423 |         lines.extend([
+2424 |             f"## 📖 Auditoría de Wikipedia: {data.get('title')} ({data.get('lang')}.wikipedia.org)",
+2425 |             f"",
+     |             ^^^
+2426 |             f"- **Revisiones Indexadas:** `{data.get('total_revisions_indexed')}` | Reversiones: `{data.get('revert_count')}`",
+2427 |             f"- **Índice de Guerra de Edición:** `{data.get('edit_war_index') * 100:.1f}%`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2424 |             f"## 📖 Auditoría de Wikipedia: {data.get('title')} ({data.get('lang')}.wikipedia.org)",
+     -             f"",
+2425 +             "",
+2426 |             f"- **Revisiones Indexadas:** `{data.get('total_revisions_indexed')}` | Reversiones: `{data.get('revert_count')}`",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2431:13
+     |
+2429 |             f"- **Veredicto Forense:** `{data.get('verdict')}`",
+2430 |             f"- **URL:** [{data.get('url')}]({data.get('url')})",
+2431 |             f"",
+     |             ^^^
+2432 |             f"### Editores Principales",
+2433 |             f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2430 |             f"- **URL:** [{data.get('url')}]({data.get('url')})",
+     -             f"",
+2431 +             "",
+2432 |             f"### Editores Principales",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2432:13
+     |
+2430 |             f"- **URL:** [{data.get('url')}]({data.get('url')})",
+2431 |             f"",
+2432 |             f"### Editores Principales",
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2433 |             f"",
+2434 |         ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2431 |             f"",
+     -             f"### Editores Principales",
+2432 +             "### Editores Principales",
+2433 |             f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2433:13
+     |
+2431 |             f"",
+2432 |             f"### Editores Principales",
+2433 |             f"",
+     |             ^^^
+2434 |         ])
+2435 |         for ed, cnt in data.get("top_editors", []):
+     |
+help: Remove extraneous `f` prefix
+     |
+2432 |             f"### Editores Principales",
+     -             f"",
+2433 +             "",
+2434 |         ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2442:13
+     |
+2440 |     if astroturf_audit and astroturf_audit.get("verdict"):
+2441 |         lines.extend([
+2442 |             f"---",
+     |             ^^^^^^
+2443 |             f"",
+2444 |             f"## 🤖 Auditoría de Astroturfing & Shilling (Jaccard N-Grams)",
+     |
+help: Remove extraneous `f` prefix
+     |
+2441 |         lines.extend([
+     -             f"---",
+2442 +             "---",
+2443 |             f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2443:13
+     |
+2441 |         lines.extend([
+2442 |             f"---",
+2443 |             f"",
+     |             ^^^
+2444 |             f"## 🤖 Auditoría de Astroturfing & Shilling (Jaccard N-Grams)",
+2445 |             f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2442 |             f"---",
+     -             f"",
+2443 +             "",
+2444 |             f"## 🤖 Auditoría de Astroturfing & Shilling (Jaccard N-Grams)",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2444:13
+     |
+2442 |             f"---",
+2443 |             f"",
+2444 |             f"## 🤖 Auditoría de Astroturfing & Shilling (Jaccard N-Grams)",
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2445 |             f"",
+2446 |             f"- **Veredicto Forense:** `{astroturf_audit.get('verdict')}`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2443 |             f"",
+     -             f"## 🤖 Auditoría de Astroturfing & Shilling (Jaccard N-Grams)",
+2444 +             "## 🤖 Auditoría de Astroturfing & Shilling (Jaccard N-Grams)",
+2445 |             f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2445:13
+     |
+2443 |             f"",
+2444 |             f"## 🤖 Auditoría de Astroturfing & Shilling (Jaccard N-Grams)",
+2445 |             f"",
+     |             ^^^
+2446 |             f"- **Veredicto Forense:** `{astroturf_audit.get('verdict')}`",
+2447 |             f"- **Índice de Riesgo Astroturf:** `{astroturf_audit.get('astroturf_risk_score') * 100:.1f}%`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2444 |             f"## 🤖 Auditoría de Astroturfing & Shilling (Jaccard N-Grams)",
+     -             f"",
+2445 +             "",
+2446 |             f"- **Veredicto Forense:** `{astroturf_audit.get('verdict')}`",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2450:13
+     |
+2448 |             f"- **Concentración de Autores:** `{astroturf_audit.get('author_concentration') * 100:.1f}%`",
+2449 |             f"- **Pares de Comentarios Cuasi-Idénticos:** `{astroturf_audit.get('duplicate_clusters')}`",
+2450 |             f"",
+     |             ^^^
+2451 |         ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2449 |             f"- **Pares de Comentarios Cuasi-Idénticos:** `{astroturf_audit.get('duplicate_clusters')}`",
+     -             f"",
+2450 +             "",
+2451 |         ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2457:13
+     |
+2455 |         c = epistemic_audit.get("counts", {})
+2456 |         lines.extend([
+2457 |             f"---",
+     |             ^^^^^^
+2458 |             f"",
+2459 |             f"## ⚖️ Matriz de Auditoría Epistemológica C5-REAL",
+     |
+help: Remove extraneous `f` prefix
+     |
+2456 |         lines.extend([
+     -             f"---",
+2457 +             "---",
+2458 |             f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2458:13
+     |
+2456 |         lines.extend([
+2457 |             f"---",
+2458 |             f"",
+     |             ^^^
+2459 |             f"## ⚖️ Matriz de Auditoría Epistemológica C5-REAL",
+2460 |             f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2457 |             f"---",
+     -             f"",
+2458 +             "",
+2459 |             f"## ⚖️ Matriz de Auditoría Epistemológica C5-REAL",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2459:13
+     |
+2457 |             f"---",
+2458 |             f"",
+2459 |             f"## ⚖️ Matriz de Auditoría Epistemológica C5-REAL",
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2460 |             f"",
+2461 |             f"- **Ratio de Señal/Ruido (SNR):** `{epistemic_audit.get('signal_ratio') * 100:.1f}%`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2458 |             f"",
+     -             f"## ⚖️ Matriz de Auditoría Epistemológica C5-REAL",
+2459 +             "## ⚖️ Matriz de Auditoría Epistemológica C5-REAL",
+2460 |             f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2460:13
+     |
+2458 |             f"",
+2459 |             f"## ⚖️ Matriz de Auditoría Epistemológica C5-REAL",
+2460 |             f"",
+     |             ^^^
+2461 |             f"- **Ratio de Señal/Ruido (SNR):** `{epistemic_audit.get('signal_ratio') * 100:.1f}%`",
+2462 |             f"- **Hechos Verificados:** `{c.get('hechos_verificados')}`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2459 |             f"## ⚖️ Matriz de Auditoría Epistemológica C5-REAL",
+     -             f"",
+2460 +             "",
+2461 |             f"- **Ratio de Señal/Ruido (SNR):** `{epistemic_audit.get('signal_ratio') * 100:.1f}%`",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2466:13
+     |
+2464 |             f"- **Modelos & Doctrina:** `{c.get('modelos_doctrina')}`",
+2465 |             f"- **Especulación & Sesgo / Falsa Causalidad:** `{c.get('especulacion_sesgo')}`",
+2466 |             f"",
+     |             ^^^
+2467 |         ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2465 |             f"- **Especulación & Sesgo / Falsa Causalidad:** `{c.get('especulacion_sesgo')}`",
+     -             f"",
+2466 +             "",
+2467 |         ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2473:13
+     |
+2471 |     if lexical:
+2472 |         lines.extend([
+2473 |             f"---",
+     |             ^^^^^^
+2474 |             f"",
+2475 |             f"## 📚 Dispersión Léxica & Entropía de Vocabulario",
+     |
+help: Remove extraneous `f` prefix
+     |
+2472 |         lines.extend([
+     -             f"---",
+2473 +             "---",
+2474 |             f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2474:13
+     |
+2472 |         lines.extend([
+2473 |             f"---",
+2474 |             f"",
+     |             ^^^
+2475 |             f"## 📚 Dispersión Léxica & Entropía de Vocabulario",
+2476 |             f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2473 |             f"---",
+     -             f"",
+2474 +             "",
+2475 |             f"## 📚 Dispersión Léxica & Entropía de Vocabulario",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2475:13
+     |
+2473 |             f"---",
+2474 |             f"",
+2475 |             f"## 📚 Dispersión Léxica & Entropía de Vocabulario",
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2476 |             f"",
+2477 |             f"- **Tokens Totales:** `{lexical.get('total_tokens')}`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2474 |             f"",
+     -             f"## 📚 Dispersión Léxica & Entropía de Vocabulario",
+2475 +             "## 📚 Dispersión Léxica & Entropía de Vocabulario",
+2476 |             f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2476:13
+     |
+2474 |             f"",
+2475 |             f"## 📚 Dispersión Léxica & Entropía de Vocabulario",
+2476 |             f"",
+     |             ^^^
+2477 |             f"- **Tokens Totales:** `{lexical.get('total_tokens')}`",
+2478 |             f"- **Vocabulario Único:** `{lexical.get('vocabulary')}`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2475 |             f"## 📚 Dispersión Léxica & Entropía de Vocabulario",
+     -             f"",
+2476 +             "",
+2477 |             f"- **Tokens Totales:** `{lexical.get('total_tokens')}`",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2482:13
+     |
+2480 |             f"- **Ratio Hapax Legomena (Unicidad):** `{lexical.get('hapax_ratio') * 100:.1f}%`",
+2481 |             f"- **Diagnóstico:** `{lexical.get('verdict')}`",
+2482 |             f"",
+     |             ^^^
+2483 |         ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2481 |             f"- **Diagnóstico:** `{lexical.get('verdict')}`",
+     -             f"",
+2482 +             "",
+2483 |         ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2489:13
+     |
+2487 |     if temporal:
+2488 |         lines.extend([
+2489 |             f"---",
+     |             ^^^^^^
+2490 |             f"",
+2491 |             f"## ⏱️ Dinámica Temporal & Ráfagas (CIB Detection)",
+     |
+help: Remove extraneous `f` prefix
+     |
+2488 |         lines.extend([
+     -             f"---",
+2489 +             "---",
+2490 |             f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2490:13
+     |
+2488 |         lines.extend([
+2489 |             f"---",
+2490 |             f"",
+     |             ^^^
+2491 |             f"## ⏱️ Dinámica Temporal & Ráfagas (CIB Detection)",
+2492 |             f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2489 |             f"---",
+     -             f"",
+2490 +             "",
+2491 |             f"## ⏱️ Dinámica Temporal & Ráfagas (CIB Detection)",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2491:13
+     |
+2489 |             f"---",
+2490 |             f"",
+2491 |             f"## ⏱️ Dinámica Temporal & Ráfagas (CIB Detection)",
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2492 |             f"",
+2493 |             f"- **Veredicto Temporal:** `{temporal.get('verdict')}`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2490 |             f"",
+     -             f"## ⏱️ Dinámica Temporal & Ráfagas (CIB Detection)",
+2491 +             "## ⏱️ Dinámica Temporal & Ráfagas (CIB Detection)",
+2492 |             f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2492:13
+     |
+2490 |             f"",
+2491 |             f"## ⏱️ Dinámica Temporal & Ráfagas (CIB Detection)",
+2492 |             f"",
+     |             ^^^
+2493 |             f"- **Veredicto Temporal:** `{temporal.get('verdict')}`",
+2494 |             f"- **Índice de Burstiness (B):** `{temporal.get('burstiness')}`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2491 |             f"## ⏱️ Dinámica Temporal & Ráfagas (CIB Detection)",
+     -             f"",
+2492 +             "",
+2493 |             f"- **Veredicto Temporal:** `{temporal.get('verdict')}`",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2498:13
+     |
+2496 |             f"- **Ráfagas Coordinadas (<=15s):** `{temporal.get('coordinated_clusters')}`",
+2497 |             f"- **Intervalo Medio entre Llegadas:** `{temporal.get('mean_delta_sec')}s`",
+2498 |             f"",
+     |             ^^^
+2499 |         ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2497 |             f"- **Intervalo Medio entre Llegadas:** `{temporal.get('mean_delta_sec')}s`",
+     -             f"",
+2498 +             "",
+2499 |         ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2505:13
+     |
+2503 |     if sentiment:
+2504 |         lines.extend([
+2505 |             f"---",
+     |             ^^^^^^
+2506 |             f"",
+2507 |             f"## 🎭 Análisis de Sentimiento & Volatilidad Emocional",
+     |
+help: Remove extraneous `f` prefix
+     |
+2504 |         lines.extend([
+     -             f"---",
+2505 +             "---",
+2506 |             f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2506:13
+     |
+2504 |         lines.extend([
+2505 |             f"---",
+2506 |             f"",
+     |             ^^^
+2507 |             f"## 🎭 Análisis de Sentimiento & Volatilidad Emocional",
+2508 |             f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2505 |             f"---",
+     -             f"",
+2506 +             "",
+2507 |             f"## 🎭 Análisis de Sentimiento & Volatilidad Emocional",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2507:13
+     |
+2505 |             f"---",
+2506 |             f"",
+2507 |             f"## 🎭 Análisis de Sentimiento & Volatilidad Emocional",
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2508 |             f"",
+2509 |             f"- **Veredicto de Tono:** `{sentiment.get('verdict')}`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2506 |             f"",
+     -             f"## 🎭 Análisis de Sentimiento & Volatilidad Emocional",
+2507 +             "## 🎭 Análisis de Sentimiento & Volatilidad Emocional",
+2508 |             f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2508:13
+     |
+2506 |             f"",
+2507 |             f"## 🎭 Análisis de Sentimiento & Volatilidad Emocional",
+2508 |             f"",
+     |             ^^^
+2509 |             f"- **Veredicto de Tono:** `{sentiment.get('verdict')}`",
+2510 |             f"- **Polaridad Media:** `{sentiment.get('mean_polarity') * 100:+.1f}%`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2507 |             f"## 🎭 Análisis de Sentimiento & Volatilidad Emocional",
+     -             f"",
+2508 +             "",
+2509 |             f"- **Veredicto de Tono:** `{sentiment.get('verdict')}`",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2513:13
+     |
+2511 |             f"- **Volatilidad Emocional:** `{sentiment.get('emotional_volatility')}`",
+2512 |             f"- **Alerta de Indignación Polarizada:** `{'SÍ' if sentiment.get('outrage_flag') else 'NO'}`",
+2513 |             f"",
+     |             ^^^
+2514 |         ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2512 |             f"- **Alerta de Indignación Polarizada:** `{'SÍ' if sentiment.get('outrage_flag') else 'NO'}`",
+     -             f"",
+2513 +             "",
+2514 |         ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2520:13
+     |
+2518 |     if merkle_seal:
+2519 |         lines.extend([
+2520 |             f"---",
+     |             ^^^^^^
+2521 |             f"",
+2522 |             f"## 🔒 Sello Criptográfico de Evidencia (Merkle Attestation)",
+     |
+help: Remove extraneous `f` prefix
+     |
+2519 |         lines.extend([
+     -             f"---",
+2520 +             "---",
+2521 |             f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2521:13
+     |
+2519 |         lines.extend([
+2520 |             f"---",
+2521 |             f"",
+     |             ^^^
+2522 |             f"## 🔒 Sello Criptográfico de Evidencia (Merkle Attestation)",
+2523 |             f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2520 |             f"---",
+     -             f"",
+2521 +             "",
+2522 |             f"## 🔒 Sello Criptográfico de Evidencia (Merkle Attestation)",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2522:13
+     |
+2520 |             f"---",
+2521 |             f"",
+2522 |             f"## 🔒 Sello Criptográfico de Evidencia (Merkle Attestation)",
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2523 |             f"",
+2524 |             f"- **Merkle Root:** `{merkle_seal.get('merkle_root')}`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2521 |             f"",
+     -             f"## 🔒 Sello Criptográfico de Evidencia (Merkle Attestation)",
+2522 +             "## 🔒 Sello Criptográfico de Evidencia (Merkle Attestation)",
+2523 |             f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2523:13
+     |
+2521 |             f"",
+2522 |             f"## 🔒 Sello Criptográfico de Evidencia (Merkle Attestation)",
+2523 |             f"",
+     |             ^^^
+2524 |             f"- **Merkle Root:** `{merkle_seal.get('merkle_root')}`",
+2525 |             f"- **Campos Sellados:** `{merkle_seal.get('leaf_count')}`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2522 |             f"## 🔒 Sello Criptográfico de Evidencia (Merkle Attestation)",
+     -             f"",
+2523 +             "",
+2524 |             f"- **Merkle Root:** `{merkle_seal.get('merkle_root')}`",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2527:13
+     |
+2525 |             f"- **Campos Sellados:** `{merkle_seal.get('leaf_count')}`",
+2526 |             f"- **Timestamp de Sello:** `{merkle_seal.get('sealed_at')}`",
+2527 |             f"",
+     |             ^^^
+2528 |         ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2526 |             f"- **Timestamp de Sello:** `{merkle_seal.get('sealed_at')}`",
+     -             f"",
+2527 +             "",
+2528 |         ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2534:13
+     |
+2532 |     if centrality:
+2533 |         lines.extend([
+2534 |             f"---",
+     |             ^^^^^^
+2535 |             f"",
+2536 |             f"## 🌐 Centralidad de Red & Actores Clave (PageRank & Degree)",
+     |
+help: Remove extraneous `f` prefix
+     |
+2533 |         lines.extend([
+     -             f"---",
+2534 +             "---",
+2535 |             f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2535:13
+     |
+2533 |         lines.extend([
+2534 |             f"---",
+2535 |             f"",
+     |             ^^^
+2536 |             f"## 🌐 Centralidad de Red & Actores Clave (PageRank & Degree)",
+2537 |             f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2534 |             f"---",
+     -             f"",
+2535 +             "",
+2536 |             f"## 🌐 Centralidad de Red & Actores Clave (PageRank & Degree)",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2536:13
+     |
+2534 |             f"---",
+2535 |             f"",
+2536 |             f"## 🌐 Centralidad de Red & Actores Clave (PageRank & Degree)",
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2537 |             f"",
+2538 |         ])
+     |
+help: Remove extraneous `f` prefix
+     |
+2535 |             f"",
+     -             f"## 🌐 Centralidad de Red & Actores Clave (PageRank & Degree)",
+2536 +             "## 🌐 Centralidad de Red & Actores Clave (PageRank & Degree)",
+2537 |             f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2537:13
+     |
+2535 |             f"",
+2536 |             f"## 🌐 Centralidad de Red & Actores Clave (PageRank & Degree)",
+2537 |             f"",
+     |             ^^^
+2538 |         ])
+2539 |         for inf in centrality.get("top_influencers", [])[:5]:
+     |
+help: Remove extraneous `f` prefix
+     |
+2536 |             f"## 🌐 Centralidad de Red & Actores Clave (PageRank & Degree)",
+     -             f"",
+2537 +             "",
+2538 |         ])
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2547:13
+     |
+2545 |     if co_actions:
+2546 |         lines.extend([
+2547 |             f"---",
+     |             ^^^^^^
+2548 |             f"",
+2549 |             f"## 🤝 Matriz de Acción Coordinada (CIB Co-Occurrence)",
+     |
+help: Remove extraneous `f` prefix
+     |
+2546 |         lines.extend([
+     -             f"---",
+2547 +             "---",
+2548 |             f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2548:13
+     |
+2546 |         lines.extend([
+2547 |             f"---",
+2548 |             f"",
+     |             ^^^
+2549 |             f"## 🤝 Matriz de Acción Coordinada (CIB Co-Occurrence)",
+2550 |             f"",
+     |
+help: Remove extraneous `f` prefix
+     |
+2547 |             f"---",
+     -             f"",
+2548 +             "",
+2549 |             f"## 🤝 Matriz de Acción Coordinada (CIB Co-Occurrence)",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2549:13
+     |
+2547 |             f"---",
+2548 |             f"",
+2549 |             f"## 🤝 Matriz de Acción Coordinada (CIB Co-Occurrence)",
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2550 |             f"",
+2551 |             f"- **Veredicto de Sincronización:** `{co_actions.get('verdict')}`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2548 |             f"",
+     -             f"## 🤝 Matriz de Acción Coordinada (CIB Co-Occurrence)",
+2549 +             "## 🤝 Matriz de Acción Coordinada (CIB Co-Occurrence)",
+2550 |             f"",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2550:13
+     |
+2548 |             f"",
+2549 |             f"## 🤝 Matriz de Acción Coordinada (CIB Co-Occurrence)",
+2550 |             f"",
+     |             ^^^
+2551 |             f"- **Veredicto de Sincronización:** `{co_actions.get('verdict')}`",
+2552 |             f"- **Score de Sincronización CIB:** `{co_actions.get('cib_synchronization_score') * 100:.1f}%`",
+     |
+help: Remove extraneous `f` prefix
+     |
+2549 |             f"## 🤝 Matriz de Acción Coordinada (CIB Co-Occurrence)",
+     -             f"",
+2550 +             "",
+2551 |             f"- **Veredicto de Sincronización:** `{co_actions.get('verdict')}`",
+     |
+
+F541 [*] f-string without any placeholders
+    --> tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py:2554:13
+     |
+2552 |             f"- **Score de Sincronización CIB:** `{co_actions.get('cib_synchronization_score') * 100:.1f}%`",
+2553 |             f"- **Pares Sincronizados:** `{co_actions.get('total_synchronized_pairs')}`",
+2554 |             f"",
+     |             ^^^
+2555 |         ])
+2556 |         for p in co_actions.get("co_actions", [])[:5]:
+     |
+help: Remove extraneous `f` prefix
+     |
+2553 |             f"- **Pares Sincronizados:** `{co_actions.get('total_synchronized_pairs')}`",
+     -             f"",
+2554 +             "",
+2555 |         ])
+     |
+
+F401 [*] `os` imported but unused
+  --> tools/tamkarum_attestation_engine.py:26:8
+   |
+24 | import hashlib
+25 | import json
+26 | import os
+   |        ^^
+27 | import subprocess
+28 | import sys
+   |
+help: Remove unused import: `os`
+   |
+25 | import json
+   - import os
+26 | import subprocess
+   |
+
+E402 Module level import not at top of file
+  --> tools/tamkarum_attestation_engine.py:36:1
+   |
+34 | sys.path.insert(0, str(BASE_DIR / "02_EDIN_SWARMS"))
+35 |
+36 | from agents_archi import DistributionDesignTeam, SocialMediaTeam
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+37 |
+38 | CAMPAIGNS_DIR = BASE_DIR / "campaigns"
+   |
+help: Move module level imports to top of file
+
+Found 242 errors.
+[*] 239 fixable with the `--fix` option.

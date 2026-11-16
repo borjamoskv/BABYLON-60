@@ -1,0 +1,234 @@
+{
+  "date": "2026-10-28",
+  "scope": "Three declared source files; generation/verification only in owned temporary fixtures, software-only signatures and explicit external fixture trust anchors. No ATTESTED object, actual operator key, original-root bundle generation, native/hardware auth, network, commit or publication. Global configuration and telemetry omitted.",
+  "checks": {
+    "related-tests": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "pytest",
+        "tests/test_finding_evidence_contract.py",
+        "tests/test_swarm100_lot4_regressions.py",
+        "tests/test_swarm100_lot3_regressions.py",
+        "tests/test_swarm100_lot2_regressions.py",
+        "tests/test_swarm100_lot1_regressions.py",
+        "tests/test_agent_beeper_regressions.py",
+        "tests/test_autodidact_derivation_regressions.py",
+        "tests/test_swarm100_round2_regressions.py",
+        "tests/test_standalone_verifier.py",
+        "tests/test_memory_governance_falsification.py",
+        "tests/test_compliance_exporter.py",
+        "tests/test_m0_evidence_pack_acceptance.py",
+        "tests/test_autodidact_omega_v2.py",
+        "tests/test_autodidact_omega_pipeline.py",
+        "tests/test_cortex_persist_batch_regressions.py",
+        "tests/test_ledger_cross_equivalence.py",
+        "tests/test_fl027_provenance_authority.py",
+        "-q",
+        "-rs",
+        "-o",
+        "addopts=--tb=short"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot4-20261028/related-tests.log",
+      "log_sha256": "a765851f184cac2838e8df01fd5ad715a1ef8729e9c91c1d63e6a2a392b295b4",
+      "source_sha256_before_and_after": {
+        "proof/bundles/attestation_bundle_v1/verify": "9dae74bb71d75c7c5f93216b41d82caed7771dc48c034024366630046fe4ab87",
+        "scripts/generate_attestation_bundle.py": "e043c9463b2ed0c0d5c0a9d353ab3a5a1e11747129473c778db3eb06fa897553",
+        "scripts/generate_attestation_bundle_v2.py": "4ce522faf18df94eb9710fedf017a162104cb79f747562436f8eb80f0a9cc884",
+        "tests/test_swarm100_lot4_regressions.py": "7a3cb593a78f3aff16c9edb9db12ef300565f88b8e4fd13a3d8e4bf76fb9e733"
+      }
+    },
+    "ruff": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "ruff",
+        "check",
+        "proof/bundles/attestation_bundle_v1/verify",
+        "scripts/generate_attestation_bundle.py",
+        "scripts/generate_attestation_bundle_v2.py",
+        "tests/test_swarm100_lot4_regressions.py",
+        "docs/security/evidence/swarm100-lot4-20261028/reconcile_lot4.py",
+        "docs/security/evidence/swarm100-lot4-20261028/independent-adversarial.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot4-20261028/ruff.log",
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "mypy": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "mypy",
+        "--follow-imports=silent",
+        "--check-untyped-defs",
+        "proof/bundles/attestation_bundle_v1/verify",
+        "scripts/generate_attestation_bundle.py",
+        "scripts/generate_attestation_bundle_v2.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot4-20261028/mypy.log",
+      "log_sha256": "8228fcc5ce46d42d01caf3cd941f4e9c5f2bcc372bb5b147a2f0572d2dd675a8"
+    },
+    "compile": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "python",
+        "-c",
+        "import ast; from pathlib import Path; [ast.parse(Path(p).read_text()) for p in ['proof/bundles/attestation_bundle_v1/verify','scripts/generate_attestation_bundle.py','scripts/generate_attestation_bundle_v2.py']]"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot4-20261028/compile.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "semantic-gate": {
+      "command": [
+        "python3",
+        "scripts/c5_quality_gates/audit_semantic_contracts.py",
+        "--workspace-only"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot4-20261028/semantic-gate.log",
+      "log_sha256": "5949e674dcddaf1b07015b03a1dd0b374e0b66a39f2d95157c200ce6dd13f1ee"
+    },
+    "budget-gate": {
+      "command": [
+        "python3",
+        "scripts/c5_quality_gates/audit_token_budget.py",
+        "--workspace-only",
+        "--skip-ghost-listeners"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot4-20261028/budget-gate.log",
+      "log_sha256": "d0b6780eb1edd315af3e6cf33cb6b44387f78ee81a63c8e23aabd3121e82a37a"
+    },
+    "topology-gate": {
+      "command": [
+        "python3",
+        "scripts/guards/verify_active_topology.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot4-20261028/topology-gate.log",
+      "log_sha256": "3045a29b461272aed5ff2d6a5c031c4955237179787acbd8421abad260e899a6"
+    },
+    "diff-check": {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot4-20261028/diff-check.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "registry-updates": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "python",
+        "docs/security/evidence/swarm100-lot4-20261028/reconcile_lot4.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot4-20261028/registry-updates.log",
+      "log_sha256": "a1b3aebef3d410355ccd81d469057b8d7adb5800ae87bc20ee22d5cb4948e3c4"
+    },
+    "registry": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "python",
+        "docs/security/evidence/swarm100-round3-20261028/reconcile_registry.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot4-20261028/registry.log",
+      "log_sha256": "aee3895c85b0f22a6b0752349d25a62b69a6abd82d5afca8b6ef661bb686b0b3"
+    }
+  },
+  "source_sha256": {
+    "proof/bundles/attestation_bundle_v1/verify": "9dae74bb71d75c7c5f93216b41d82caed7771dc48c034024366630046fe4ab87",
+    "scripts/generate_attestation_bundle.py": "e043c9463b2ed0c0d5c0a9d353ab3a5a1e11747129473c778db3eb06fa897553",
+    "scripts/generate_attestation_bundle_v2.py": "4ce522faf18df94eb9710fedf017a162104cb79f747562436f8eb80f0a9cc884",
+    "tests/test_swarm100_lot4_regressions.py": "7a3cb593a78f3aff16c9edb9db12ef300565f88b8e4fd13a3d8e4bf76fb9e733"
+  },
+  "results": {
+    "related_passed": 496,
+    "related_skipped": 1,
+    "new_regressions": 88,
+    "independent_adversarial_passed": 11,
+    "skip_reason": "strike_rs extension is not built; no native build attempted"
+  },
+  "independent_review": {
+    "path": "docs/security/evidence/swarm100-lot4-20261028/independent-review.json",
+    "sha256": "5e178dea2215769375ddf5bcf986fcee6f54b09a748e92dbc91a3fc66a7873b7",
+    "decision": "APPROVED_WITH_EXPLICIT_SCOPE"
+  },
+  "historical_components_unchanged": true,
+  "dependency_files_unchanged": true,
+  "lot5_sources_unchanged": true,
+  "not_verified": [
+    "hardware provenance or physical operator identity",
+    "actual external suite evidence ingestion/execution by snapshot builder",
+    "entire-repository or atomic live-worktree snapshot consistency",
+    "crash atomicity or hostile same-UID writer isolation",
+    "historical v2 verifier C0135/C0136 (still OPEN)"
+  ],
+  "registry_summary": {
+    "original_candidates": 598,
+    "round3_assigned": 582,
+    "round3_reviewed": 582,
+    "round3_decisions": {
+      "CONFIRMED_STATIC": 497,
+      "REPRODUCED": 53,
+      "ALREADY_FIXED": 23,
+      "REJECTED": 4,
+      "DUPLICATE": 5
+    },
+    "round3_remediation_states": {
+      "OPEN": 549,
+      "FIXED": 26,
+      "MITIGATED": 3,
+      "NOT_APPLICABLE": 4
+    },
+    "all_decisions": {
+      "CONFIRMED_STATIC": 497,
+      "REPRODUCED": 53,
+      "ALREADY_FIXED": 34,
+      "REJECTED": 4,
+      "DUPLICATE": 10
+    },
+    "all_remediation_states": {
+      "OPEN": 554,
+      "FIXED": 36,
+      "MITIGATED": 4,
+      "NOT_APPLICABLE": 4
+    },
+    "needs_validation_ids": [],
+    "unique_open_findings": 548,
+    "unique_open_severity": {
+      "P2": 472,
+      "P3": 10,
+      "P1": 66
+    },
+    "additional_findings_outside_original_inventory": 1,
+    "additional_decisions": {
+      "ALREADY_FIXED": 1
+    },
+    "scope": "Every assigned candidate reviewed; static confirmation is not correction or runtime certification."
+  },
+  "local_links_checked": 38,
+  "verification_complete": true
+}

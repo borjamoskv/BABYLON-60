@@ -1,0 +1,8 @@
+{
+  "source": "scripts/c5_cortex/autoconsolidate.py",
+  "source_sha256": "cf266eda26d8c6e1f92177ad7d4effa81b7c0067d246b7c0fb9508f7d25eae93",
+  "initial_rows": 3,
+  "remaining_rows": 0,
+  "replacement_persisted": false,
+  "scope": "real temporary SQLite; no production database"
+}

@@ -1,0 +1,72 @@
+[
+  {
+    "command": "python3 scripts/c5_quality_gates/audit_semantic_contracts.py --workspace-only",
+    "status": "PASS",
+    "exit_code": 0,
+    "evidence": "semantic.log",
+    "scope": "62docs/41Python; enlaces de15documentos de gobernanza; patrones conocidos"
+  },
+  {
+    "command": "python3 scripts/c5_quality_gates/audit_token_budget.py --workspace-only --skip-ghost-listeners",
+    "status": "PASS",
+    "exit_code": 0,
+    "evidence": "budget.log",
+    "scope": "9890B inspeccionados/40000B; global y telemetría omitidos"
+  },
+  {
+    "command": "python3 scripts/guards/verify_active_topology.py",
+    "status": "PASS",
+    "exit_code": 0,
+    "evidence": "topology.log",
+    "scope": "árbol de trabajo; no índice staged"
+  },
+  {
+    "command": "cargo check -q --locked",
+    "status": "PASS",
+    "exit_code": 0,
+    "evidence": "cargo-check.log",
+    "scope": "paquete raíz y sus dependencias; no certifica todo el workspace"
+  },
+  {
+    "command": "cargo check -q --locked -p babylon60-compiler -p babylon60-kernel -p babylon-skills-mcp",
+    "status": "PASS",
+    "exit_code": 0,
+    "evidence": "cargo-components.log",
+    "scope": "tres componentes seleccionados"
+  },
+  {
+    "command": "uv run --locked pytest tests/test_finding_evidence_contract.py tests/test_consensus_atomic_commit.py tests/test_consensus_fault_recovery.py tests/test_consensus_recovery_regressions.py tests/test_database_config_cleanup.py tests/test_fl027_provenance_authority.py -q -o addopts=--tb=short",
+    "status": "PASS",
+    "exit_code": 0,
+    "evidence": "pytest-directed.log",
+    "scope": "76passed; fixtures de pruebas, no suite completa"
+  },
+  {
+    "command": "ast.parse sobre los Python del inventario",
+    "status": "PASS",
+    "exit_code": 0,
+    "evidence": "python-syntax.json",
+    "scope": "881archivos; sintaxis, no resolución de imports/tipos"
+  },
+  {
+    "command": "uv run --locked ruff check <28Python modificados o nuevos>",
+    "status": "FAIL",
+    "exit_code": 1,
+    "evidence": "ruff-changed.log",
+    "scope": "4errores F401/F541 en scripts/c5_cli/doxastic_kripke_engine.py y tests/test_doxastic_kripke_engine.py"
+  },
+  {
+    "command": "git diff --check",
+    "status": "PASS",
+    "exit_code": 0,
+    "evidence": "diff-check.log",
+    "scope": "whitespace de cambios existentes"
+  },
+  {
+    "command": "uv run --locked python <evidence>/reproductions/isolated_checks.py",
+    "status": "COUNTEREXAMPLES_REPRODUCED",
+    "exit_code": 0,
+    "evidence": "isolated-reproductions.json",
+    "scope": "tres contraejemplos; salida0significa que el arnés observó los fallos esperados"
+  }
+]

@@ -24,6 +24,7 @@ from google.genai import types
 from scripts.c5_orchestrator.gemini4_frontier_router import (
     FALLBACK_MODEL,
     FLASH_FALLBACK_MODEL,
+    HYDROGEN_MODEL,
     PRIMARY_MODEL,
     build_gemini4_config,
     generate_content_frontier,
@@ -241,4 +242,40 @@ def test_generate_content_frontier_switches_to_flash_on_quota_zero() -> None:
     # Config passed to Flash should strip Argon thinking_config
     flash_call_cfg = client.calls[1][2]
     assert flash_call_cfg.thinking_config is None
+
+
+def test_resolve_hydrogen_and_argon_periodic_elements(tmp_path: Path) -> None:
+    cache_file = tmp_path / "periodic_cache.json"
+    full_periodic_client = _DummyClient(
+        [
+            "models/gemini-3.8-flash",
+            "models/gemini-4-hydrogen",
+            "models/gemini-4-argon",
+            "models/gemini-4-carbon",
+        ]
+    )
+
+    _, m_h, _, res_h = resolve_gemini4_frontier(
+        preferred_element="hydrogen",
+        thinking_level="low",
+        api_key="key-periodic",
+        client=full_periodic_client,
+        cache_path=cache_file,
+    )
+    assert m_h == HYDROGEN_MODEL
+    assert res_h.status == "HYDROGEN_ACTIVE"
+    assert res_h.requested_model == HYDROGEN_MODEL
+
+    _, m_a, _, res_a = resolve_gemini4_frontier(
+        preferred_element="argon",
+        thinking_level="medium",
+        api_key="key-periodic",
+        client=full_periodic_client,
+        cache_path=cache_file,
+    )
+    assert m_a == FALLBACK_MODEL
+    assert res_a.status == "ARGON_ACTIVE"
+    assert res_a.requested_model == FALLBACK_MODEL
+    assert res_a.cache_hit is True
+
 

@@ -1,0 +1,32 @@
+[
+  {
+    "command": [
+      "python3",
+      "scripts/c5_quality_gates/audit_semantic_contracts.py",
+      "--workspace-only"
+    ],
+    "exit_code": 0,
+    "stdout": "PASS: known semantic patterns (62 documents, 41 Python files), local links/anchors in 15 governance documents; not a proof of semantic consistency or runtime.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "python3",
+      "scripts/c5_quality_gates/audit_token_budget.py",
+      "--workspace-only",
+      "--skip-ghost-listeners"
+    ],
+    "exit_code": 0,
+    "stdout": "=== [C5-REAL] AUDITORÍA DE PRESUPUESTO DE TOKENS ===\n■ .babylon60rules (workspace, counted once): 5,082 B (~1,270 estimated tokens)\n■ AGENTS.md (workspace, counted once): 4,808 B (~1,202 estimated tokens)\n■ Global rules: NOT_CHECKED (workspace-only)\n■ Reglas always_on (Global: 0, Workspace: 0): 0 B (~0 estimated tokens)\n■ INSPECTED ALWAYS_ON: 9,890 B / 40,000 B (~2,472 estimated tokens; actual client context not measured)\n■ Reglas condicionales (model_decision): 0 global + 7 workspace (bodies excluded from this budget; client loading not measured)\n■ Ghost Listeners (conversation_summaries.db): NOT_CHECKED (explicitly skipped)\nPASS: Workspace token budget within inline ceiling; global rules and cross-scope duplicates not checked.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "python3",
+      "scripts/guards/verify_active_topology.py"
+    ],
+    "exit_code": 0,
+    "stdout": "PASS: instruction files, required direct symlinks and MCP registration references (worktree; VS Code if present)\n",
+    "stderr": ""
+  }
+]

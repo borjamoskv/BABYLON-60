@@ -18,7 +18,7 @@ Una prueba es un término del tipo de su proposición, **relativo a los axiomas 
 
 El chequeo de tipos es decidible en sistemas cuidadosamente diseñados; no hay aquí una cota universal O(N). Buscar habitantes en sistemas suficientemente expresivos puede ser indecidible; en sistemas más débiles puede ser decidible. Σ₁-completitud permite enumerar pruebas hasta encontrar las de instancias verdaderas, sin algoritmo total para todas las entradas ni garantía de rapidez.
 
-El ejemplo histórico `add_zero_right` solo reutilizaba un supuesto `q4`, con `QNat`, `QAdd` y `QZero` sin definir. Se retira como ejemplo ejecutable, no como refutación del axioma Q4. Tampoco se confunde el tipo nativo Nat de Lean, que tiene inducción, con un modelo abstracto de Q.
+El ejemplo histórico `[OBSOLETO: add_zero_right]` solo reutilizaba un supuesto `q4`, con `QNat`, `QAdd` y `[OBSOLETO: QZero]` sin definir. Se retira como ejemplo ejecutable, no como refutación del axioma Q4. Tampoco se confunde el tipo nativo Nat de Lean, que tiene inducción, con un modelo abstracto de Q.
 
 ## 3. HoTT y univalencia
 
@@ -28,4 +28,4 @@ En teoría de tipos homotópica, la univalencia relaciona equivalencia de tipos 
 
 Usar certificados de transiciones en BABYLON-60 es una propuesta de arquitectura. Su seguridad exige definir semántica, checker, axiomas confiados, parser y vínculo con el ejecutable. Una firma criptográfica autentica un mensaje bajo condiciones; no es una prueba de la proposición contenida.
 
-Se retira `document_epistemic_validity`, que solo asumía la validez del documento. No se declara formalizado Curry–Howard ni demostrada una complejidad del checker por este texto.
+Se retira `[OBSOLETO: document_epistemic_validity]`, que solo asumía la validez del documento. No se declara formalizado Curry–Howard ni demostrada una complejidad del checker por este texto.

@@ -1,0 +1,372 @@
+[
+  {
+    "path": "candidate-b9640a52ca/artifacts.json",
+    "sha256": "e422787d1e617675d51083b476e05a7d307ccd127c587b0e69c9d1fd4d10b640"
+  },
+  {
+    "path": "candidate-b9640a52ca/build-results.json",
+    "sha256": "6ab9f309203fd2a843618df4e63d2228eb3d3c96672e835e6278c0c29d6e3693"
+  },
+  {
+    "path": "capture-integrity.json",
+    "sha256": "a29631afe9a077f348bf02397ca9fed6253186f722c5e407d2c4e52374eca523"
+  },
+  {
+    "path": "consolidation.json",
+    "sha256": "6bc69102dc7864af4b3713f590e09df6af670ff9db991909c95ef6d4d01e4159"
+  },
+  {
+    "path": "criteria.json",
+    "sha256": "b9c0393c23fcd06b24c9683cfa45cbbad33b3f617e8cd84b8316db33d7d2cff9"
+  },
+  {
+    "path": "hardware-final/approval-command.json",
+    "sha256": "dd0cf304602520ddc540dcd2ae9eb19b5f56b4fd2f4686d193c4cbe942c1ab80"
+  },
+  {
+    "path": "hardware-final/attempt-started.json",
+    "sha256": "96e30de9edab8d9f4e5e391ec1d34c35f8e87ce46a4d7bcb4ac5323e012463c8"
+  },
+  {
+    "path": "hardware-final/candidate.json",
+    "sha256": "fc3112e84f6d9c331d254654fcaff844c68b531c1e2018fbd002e1319617df5d"
+  },
+  {
+    "path": "hardware-final/consumption-probe.json",
+    "sha256": "23b9203f06775b9d8a1df07c6f4228b88318a68016be9e6a059a316eaf6cf8ba"
+  },
+  {
+    "path": "hardware-final/execution-response.json",
+    "sha256": "4c0ac78bb9baf0b0c606149e721a7b11fb2ed40342dc4bc693ad69bd172f8908"
+  },
+  {
+    "path": "hardware-final/hardware-receipt.json",
+    "sha256": "8891cab844f129d118095a2ee458a864becd38f813e434ee69b8ce1bde5e71e2"
+  },
+  {
+    "path": "hardware-final/hashes-after.json",
+    "sha256": "bd5eab2e69de8b2e035d4f83354d5efa837107a70d2cb19f038676ef1a345204"
+  },
+  {
+    "path": "hardware-final/key-inspection.json",
+    "sha256": "5ce8a32e0e9332fedffc72416882c8e1f81f7d61e4c811ae247fa012198e5cea"
+  },
+  {
+    "path": "hardware-final/observation-approved.json",
+    "sha256": "413b87e36a3e230e616141abee0c66b36c98e947862a636d5688cd01aa199a0f"
+  },
+  {
+    "path": "hardware-final/observation-before.json",
+    "sha256": "f8ad15779c90f796279ad2871f6398776988eaa1f5aa0d9ed015c827212f2741"
+  },
+  {
+    "path": "hardware-final/observation-executed.json",
+    "sha256": "e0e59c884c873fb8ca983fce9cf7ccc369145a0a75f9db03e0d9c6f4a83c02c3"
+  },
+  {
+    "path": "hardware-final/observation-final.json",
+    "sha256": "9f810fdd6d1e4ae208ee325b018bf8520aa16c37e4ca0c354a2c466c128ab923"
+  },
+  {
+    "path": "hardware-final/observation-reopened.json",
+    "sha256": "3f0a49c9fb9bc60c6c0c027c2d8a30bf33a865f31d989693be367926ffc07c8f"
+  },
+  {
+    "path": "hardware-final/replay-response.json",
+    "sha256": "b3f99504ee9cd757ef976b8ddedf52bc1f46100a61c97b79e5591ea86a614628"
+  },
+  {
+    "path": "hardware-final/result.json",
+    "sha256": "f711d8aa8cf805914ead5babb62c7d5708e39a58261b4dce2efd93858a328c44"
+  },
+  {
+    "path": "hardware-final/signed-proof.json",
+    "sha256": "14a9dcf83236795386c679ead54f1b3e4fda32f66650c877bd267908e557274e"
+  },
+  {
+    "path": "hardware-final/task.json",
+    "sha256": "436b53c1082fe0f31b8f8b60d8d1bd27e749c1ae990abe9d3b462da0691ab701"
+  },
+  {
+    "path": "hardware-launch-result.json",
+    "sha256": "eaad28337616a645e32bba056ea54742b507b95650e5505c0c1b15510892237c"
+  },
+  {
+    "path": "hardware-launch.json",
+    "sha256": "149024f329e4f44f7db152fc1dd8600aff0c2795360e799947ee0147cf09549a"
+  },
+  {
+    "path": "imported.json",
+    "sha256": "8ad1b735c27581e6dcd5a35481a2f9afff3122b935513b384e8c8fefa91dcf94"
+  },
+  {
+    "path": "integration/final-quality.json",
+    "sha256": "141093b52c6a18ae7980d1b795fd186d6753a87633f0f176e08ae1c9936bc6bc"
+  },
+  {
+    "path": "integration/hardware-signature-check.json",
+    "sha256": "f19cacaf2d2f547c19b20cb4611fee3117d7266d250a8676aadd2f6950886e55"
+  },
+  {
+    "path": "integration/key-preservation-after-hardware.json",
+    "sha256": "efb287da6cd789931a2c204a94f288a32db0569d03a6bc9f29429c4be17c92d7"
+  },
+  {
+    "path": "integration/mypy-final.log",
+    "sha256": "14fdf673bd175fe32ef42df34666481bb15e465313f7dbef32d0aea2ba76a26e",
+    "storage": "raw-test-logs.tar.gz",
+    "member": "integration/mypy-final.log"
+  },
+  {
+    "path": "integration/onboarding-final.json",
+    "sha256": "3392663cf339dcc112fd37c11d1a48f57e039af7048a1cd3d9e7bf2ae3aac2c4"
+  },
+  {
+    "path": "integration/onboarding-final.log",
+    "sha256": "4c33d531386642c6f932aac6819b6aa5b96c222909bb894b70666de05748dad7",
+    "storage": "raw-test-logs.tar.gz",
+    "member": "integration/onboarding-final.log"
+  },
+  {
+    "path": "integration/ruff-final.log",
+    "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "storage": "raw-test-logs.tar.gz",
+    "member": "integration/ruff-final.log"
+  },
+  {
+    "path": "integration/source-preservation-final.json",
+    "sha256": "b6262696cd4a2e4766d16d603934642f5b9e7a0fb137602d10cf6d949da0ba16"
+  },
+  {
+    "path": "operator-pin-confirmation.json",
+    "sha256": "c0ad02ca6748bbbab5b67a54fbf3c772d37a5ce4284fc94d7e7e748015cc7457"
+  },
+  {
+    "path": "partition-review.json",
+    "sha256": "9bf0b8c76a1ca55d5862557f0483f11f8fb43a48c795f6ed72c9d65b34546648"
+  },
+  {
+    "path": "partition.json",
+    "sha256": "7414636901f4ba6dcd9e7d9d0937e70050457cfb86e7162b42410686f6a13e06"
+  },
+  {
+    "path": "retention.json",
+    "sha256": "8cff913ec002da8ebf79a44305d1509031fff05221b0655a22bcbe569891d2c5"
+  },
+  {
+    "path": "review/combined-code-review.json",
+    "sha256": "97c1b2d91edca1b585589d6d4a35763782fca01a63475a520c99732175f2c54c"
+  },
+  {
+    "path": "review/consolidation-review.json",
+    "sha256": "162e1687d3f0822accc91a7c07b5a509df6c9a2bdeda588c9c0ae46e29e6944a"
+  },
+  {
+    "path": "review/final-native-run/pytest.log",
+    "sha256": "2176b697bd957e44781a4dcdcb637233a4681fd98db1e7245d0d43ff6d970d73",
+    "storage": "raw-test-logs.tar.gz",
+    "member": "review/final-native-run/pytest.log"
+  },
+  {
+    "path": "review/final-native-run/report.json",
+    "sha256": "040df5b06b2dfa3b6fe36217ddbef444dad2dd5db6566d200e4b0976496c6d91"
+  },
+  {
+    "path": "review/final-native-run/required-native-nodes.json",
+    "sha256": "da5732e4264ea81718237a8f0c45966988383ffc6fc6087b9474e33b0e6f16cf"
+  },
+  {
+    "path": "review/final-native-run/results.xml",
+    "sha256": "9cfb352303a1be326188dda1a41b55683b301a2e1ec463a1bd358f659bee827b"
+  },
+  {
+    "path": "review/hardware-final-review.json",
+    "sha256": "a2f7e3368cfe094563ee7a4f6ba950bcaebff181c02c486a4dc2a26258da2627"
+  },
+  {
+    "path": "review/hardware-independent-observation.json",
+    "sha256": "d90cacd3ddaf7b9cfe0403cfe8a2b623f501a29754d039b155f63af907c53224"
+  },
+  {
+    "path": "review/hardware-readiness.json",
+    "sha256": "88e5fda1acfcdd640b8e278ea0f5630a5256ae60092037ac1c91ff169e3a752b"
+  },
+  {
+    "path": "review/independent_evidence_check.py",
+    "sha256": "fa774c7520ce04e5344d5e8e819058c6bd254ef6cfeeb8d15c0b703ee44b5565"
+  },
+  {
+    "path": "review/profile-review.json",
+    "sha256": "72f1f9ada762dc8cffceee1e0d9be5112f23bb0910c5d9ab983ded01f3b2e4e2"
+  },
+  {
+    "path": "review/ring0-inspection-review.json",
+    "sha256": "19f570af0ec73ea9aaa994fd6a6189443e0d978984e6f6c8df3fc6671e7068b1"
+  },
+  {
+    "path": "review/ring2-connection-review.json",
+    "sha256": "53a30f9a414e3106f8385ea5890233ddc46300f769770e76e0b0f1831ff28fb0"
+  },
+  {
+    "path": "review/ring3-helper-probes-final.json",
+    "sha256": "15664ca671c29bfd579f59588afd7f8fb845753bb1ce03a8099c960d3aaff649"
+  },
+  {
+    "path": "review/ring3-helper-probes.json",
+    "sha256": "d9bb2910aa1e3987d9c243afc1cf0ee5daed4430f23ca15f93151b55ebe62254"
+  },
+  {
+    "path": "review/ring3-partial-line-probe-final.json",
+    "sha256": "605daf40ed911172db662bdba1b4d45e215a459e7d254674fd8286e4f94d3e11"
+  },
+  {
+    "path": "review/ring3-partial-line-probe.json",
+    "sha256": "e70ee39fa075b77254b6f599cac119222f97a8532f8e20eaa6045ccc1d1b315e"
+  },
+  {
+    "path": "ring0/biometric-contract-isolated.log",
+    "sha256": "4628725f051513156d69ede7faee16f0bd1d2449cbe0be34c92adfe10debc7d8",
+    "storage": "raw-test-logs.tar.gz",
+    "member": "ring0/biometric-contract-isolated.log"
+  },
+  {
+    "path": "ring0/enclave-green.log",
+    "sha256": "7158fba51fd0c1e57ad1e6cb14ce72395b192f8f3987655eda8ed3ff43cf04b8",
+    "storage": "raw-test-logs.tar.gz",
+    "member": "ring0/enclave-green.log"
+  },
+  {
+    "path": "ring0/no-sound-red.log",
+    "sha256": "4992f608b9dbdf737a9d88b63038de4967aa63cdfb6d5025dfda0bc674f55d12",
+    "storage": "raw-test-logs.tar.gz",
+    "member": "ring0/no-sound-red.log"
+  },
+  {
+    "path": "ring0/public-key-inspection-evidence.json",
+    "sha256": "e716cdcad018310592c71cf6af2eef02d2c3092fa963839083980f72d382b576"
+  },
+  {
+    "path": "ring0/recovery.log",
+    "sha256": "6cc89742265ca3e3b9819bbf00892d3406c64813070c675ca53d02ef8c95fe1c",
+    "storage": "raw-test-logs.tar.gz",
+    "member": "ring0/recovery.log"
+  },
+  {
+    "path": "ring0/run-summary.json",
+    "sha256": "e23a0dc8c4b121593ce6b5a93cf2285756d9e8043e9fa391bad7d8e070639a11"
+  },
+  {
+    "path": "ring0/secure-fs-unit.log",
+    "sha256": "9b40da91525f281b5d2debe6a2bdb85b74899754f6755fed56af581a3e24905a",
+    "storage": "raw-test-logs.tar.gz",
+    "member": "ring0/secure-fs-unit.log"
+  },
+  {
+    "path": "ring1/cargo-checks.json",
+    "sha256": "9244e9549d34fb25e4e843fc532781054fea7a62d96abee974868e6879bf515b"
+  },
+  {
+    "path": "ring1/cargo-harness.json",
+    "sha256": "083b81fc8fdf418cb791371b92d16260a1c595f765fa257741c63aa4f13cf5f1"
+  },
+  {
+    "path": "ring1/cargo-harness.log",
+    "sha256": "acd0e293ed140706d5e0c19839ef83b844e8f6399e7e30ae905500fe5b693eef",
+    "storage": "raw-test-logs.tar.gz",
+    "member": "ring1/cargo-harness.log"
+  },
+  {
+    "path": "ring1/cargo-real-lean.json",
+    "sha256": "d2d50bee69d0b8cc79fc165333920994afaae05d6fffd225cb6a09e353817949"
+  },
+  {
+    "path": "ring1/cargo-real-lean.log",
+    "sha256": "7af983cf84ec39b70924bdcf3be1ca53b8aef24a25e353fe100bd04d1adb2dbf",
+    "storage": "raw-test-logs.tar.gz",
+    "member": "ring1/cargo-real-lean.log"
+  },
+  {
+    "path": "ring1/cli-poc.json",
+    "sha256": "aa0fbee45d6fd5b396edac5d40a75b1af8e8369a71a20f941e7483ff521b15e3"
+  },
+  {
+    "path": "ring1/cli-poc.log",
+    "sha256": "07f5857e488e328aaee1c837aefee8fdb6e6291e3b947d1f3f83eb673aad6224",
+    "storage": "raw-test-logs.tar.gz",
+    "member": "ring1/cli-poc.log"
+  },
+  {
+    "path": "ring1/cli-stress-quick.json",
+    "sha256": "d79c19ae7845d7563b8aa2a4750f1c91e9c77ee1d4f8a78c9a9a5418f607bf35"
+  },
+  {
+    "path": "ring1/cli-stress-quick.log",
+    "sha256": "255f6c62c4e9fbbf2ddb820b4b681ef475881909175726a8c59d9644b1d2cdca",
+    "storage": "raw-test-logs.tar.gz",
+    "member": "ring1/cli-stress-quick.log"
+  },
+  {
+    "path": "ring1/lean-build.json",
+    "sha256": "e07118ae9340124d09d1114ee1473975ca197ccb8c0bc233a667cb2ff94c40b7"
+  },
+  {
+    "path": "ring1/lean-build.log",
+    "sha256": "89d8f4738db05713746a6ddcf65e29bd5c0cf60d15e15f2dc8ff049d1b251338",
+    "storage": "raw-test-logs.tar.gz",
+    "member": "ring1/lean-build.log"
+  },
+  {
+    "path": "ring1/preflight.json",
+    "sha256": "0baf38a92e3d22e20e19d4f9cb9f89c33bde4c9981447d9bd83422c291526579"
+  },
+  {
+    "path": "ring1/status.json",
+    "sha256": "2458bd233c657821e95210e6724b084a208c57003774f03a188e27c6075028e3"
+  },
+  {
+    "path": "ring2/connection-green.json",
+    "sha256": "ca9acb3f20ae0814505a5d914f490aac735aa8f20318a012543cbec9bf88dce8"
+  },
+  {
+    "path": "ring2/connection-green.log",
+    "sha256": "b6e500260d5cb55e702992c563ddd2b5c9cf24167a2d5b1b2162e9eb3acc6135",
+    "storage": "raw-test-logs.tar.gz",
+    "member": "ring2/connection-green.log"
+  },
+  {
+    "path": "ring2/connection-red.json",
+    "sha256": "eff95b6b88516b7e03b34962fc87e1293b27bdad54e266f79514cb3ad084227e"
+  },
+  {
+    "path": "ring2/connection-red.log",
+    "sha256": "83c8bf75d5cbee38b2efc4e54fa26244c46c44df774778600babe767123fcec9",
+    "storage": "raw-test-logs.tar.gz",
+    "member": "ring2/connection-red.log"
+  },
+  {
+    "path": "ring2/final-tests.json",
+    "sha256": "e1d1c511e1151c9450f6c433d580ffe5b8ce0828611deca20d3a50020ced9333"
+  },
+  {
+    "path": "ring2/final-tests.log",
+    "sha256": "dca624f0af2458aee04fb9f10e37670f43512cf2cd49fb2dd35c3e1e545b297b",
+    "storage": "raw-test-logs.tar.gz",
+    "member": "ring2/final-tests.log"
+  },
+  {
+    "path": "ring2/manifest.json",
+    "sha256": "e9fdd583b7122bb19eee3cfd84d1767a625125bc15f144cfda9bcbfbec2e906d"
+  },
+  {
+    "path": "ring3/final-checks.json",
+    "sha256": "86c8f47db0d00043e1ee48854b5a924a8f4ddb2717db009cc52d0bbb4ffa1c46"
+  },
+  {
+    "path": "ring3/run-summary.json",
+    "sha256": "72f7fe925c60e909b2c14ad55e79415fbd1d40c904350c91c5eba69a9c01da7b"
+  },
+  {
+    "path": "raw-test-logs.tar.gz",
+    "sha256": "e482984201fdbbb57ee0552d92764a2ded3cc48fef51cd4235eaaa9ea5d114d2"
+  }
+]

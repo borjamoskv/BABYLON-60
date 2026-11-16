@@ -1,0 +1,191 @@
+{
+  "reviewer": "14",
+  "date_utc": "2026-10-28T15:51:02.768135+00:00",
+  "repository": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+  "method": "Independent bounded source reads with line numbers and SHA-256; consumer/guard searches; official read-only documentation; three isolated pure fixtures.",
+  "graph_availability": "Session ALL_TOOLS discovery found no codebase-memory search_graph/trace_path/get_code_snippet/query_graph/index_repository tools; targeted reads/rg used.",
+  "restrictions": "No source edits, production/native execution, operator-data access, deployment, external mutation or additional agents. Source review did not read runtime databases or account/session histories.",
+  "fixture_scope": "runtime_executed=true means the isolated pure fixture ran, not the application/native system. All application/native runtimes remained unexecuted.",
+  "observed_sources": [
+    {
+      "candidate_id": "SW100-C0349",
+      "path": "crates/babylon-attest/src/ledger.rs",
+      "sha256": "d9d0ce0c0cae2e92ae723199f6abdeb91fbde09c272a2811395e7298adb1bb27"
+    },
+    {
+      "candidate_id": "SW100-C0350",
+      "path": "crates/babylon-attest/src/ledger.rs",
+      "sha256": "d9d0ce0c0cae2e92ae723199f6abdeb91fbde09c272a2811395e7298adb1bb27"
+    },
+    {
+      "candidate_id": "SW100-C0351",
+      "path": "crates/babylon-attest/src/ledger.rs",
+      "sha256": "d9d0ce0c0cae2e92ae723199f6abdeb91fbde09c272a2811395e7298adb1bb27"
+    },
+    {
+      "candidate_id": "SW100-C0582",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/bft_interceptor.rs",
+      "sha256": "7b5575202fcb16996b6e8ff09d36caac7b957e21c4fe40576168e6ae3aed1234"
+    },
+    {
+      "candidate_id": "SW100-C0583",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/bft_interceptor.rs",
+      "sha256": "7b5575202fcb16996b6e8ff09d36caac7b957e21c4fe40576168e6ae3aed1234"
+    },
+    {
+      "candidate_id": "SW100-C0150",
+      "path": "01_KISH_ENGINE/babylon60/core/browser_agent.py",
+      "sha256": "d4e8512bfe9676665697c01cd83eb99cd4d385c0e120d750acf87936bdad31e2"
+    },
+    {
+      "candidate_id": "SW100-C0151",
+      "path": "01_KISH_ENGINE/babylon60/core/browser_agent.py",
+      "sha256": "d4e8512bfe9676665697c01cd83eb99cd4d385c0e120d750acf87936bdad31e2"
+    },
+    {
+      "candidate_id": "SW100-C0304",
+      "path": "crates/b60-lang/src/mmr.rs",
+      "sha256": "3e985e6d6f20d02438d9474afb189edb4620120eac2e7248fcb909bc88f08a18"
+    },
+    {
+      "candidate_id": "SW100-C0305",
+      "path": "crates/b60-lang/src/mmr.rs",
+      "sha256": "3e985e6d6f20d02438d9474afb189edb4620120eac2e7248fcb909bc88f08a18"
+    },
+    {
+      "candidate_id": "SW100-C0385",
+      "path": "scripts/c5_destiladora/test_destiladora_e2e.py",
+      "sha256": "4faf9b3fddcdb37f6ba083bdf5fe813c46ae3bd230ad35617c9a5088492a70de"
+    },
+    {
+      "candidate_id": "SW100-C0386",
+      "path": "scripts/c5_destiladora/test_destiladora_e2e.py",
+      "sha256": "4faf9b3fddcdb37f6ba083bdf5fe813c46ae3bd230ad35617c9a5088492a70de"
+    },
+    {
+      "candidate_id": "SW100-C0015",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workers-for-platforms/api.md",
+      "sha256": "e8c61ee7e1e6113e374fbc9df94962e072b53e011f93c9c82fd8b83e63867055"
+    },
+    {
+      "candidate_id": "SW100-C0016",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workers-for-platforms/api.md",
+      "sha256": "e8c61ee7e1e6113e374fbc9df94962e072b53e011f93c9c82fd8b83e63867055"
+    },
+    {
+      "candidate_id": "SW100-C0195",
+      "path": "01_KISH_ENGINE/babylon60/adapters/codex/codex_driver.py",
+      "sha256": "abd41e4dbce2610cefaf4b9f9a411ebd473a9ae86e7d0455466f4757c30a2ea1"
+    },
+    {
+      "candidate_id": "SW100-C0298",
+      "path": "01_KISH_ENGINE/babylon60/cortex/cortex_purge_anergy.py",
+      "sha256": "7bcfb0040094964013cd1e539cb0a8051e71fd0f7fbfbe18e5a2de17c7fa6d1c"
+    },
+    {
+      "candidate_id": "SW100-C0199",
+      "path": "01_KISH_ENGINE/babylon60/memory/metamemory.py",
+      "sha256": "3897b527d73c505688351b0f60008e4cbb8b4c3ca71816654d1d432a8f145004"
+    },
+    {
+      "candidate_id": "SW100-C0336",
+      "path": "01_KISH_ENGINE/cortex/crates/cortex-lsp/src/actions.rs",
+      "sha256": "62d448193e772b1568ffdec9f110662daee65c99cf19f093a9444c586b8cee86"
+    },
+    {
+      "candidate_id": "SW100-C0464",
+      "path": "crates/eridu-infer/scripts/setup_appliance.sh",
+      "sha256": "853dbece1522a04d329bc4ac60077e0aae2c4fec6f7dcc90138bbd1e372670ff"
+    },
+    {
+      "candidate_id": "SW100-C0458",
+      "path": "examples/poc_bifurcation_5_lifetimes.rs",
+      "sha256": "7ec891cf54d31fe46333372ba4ac60b22bd080b277782fdc71b3d415f04c6269"
+    },
+    {
+      "candidate_id": "SW100-C0592",
+      "path": "scripts/c5_demos/c5_darknode_core.py",
+      "sha256": "9587eb69acd9ab7c04e7739393fa9108ee5a6ace56cf0778010480f87a7fc205"
+    },
+    {
+      "candidate_id": "SW100-C0286",
+      "path": "scripts/c5_demos/poc_vsa_saturation_stress.py",
+      "sha256": "96a77ceb7115b8bd315be27dc6c9f59b34d70859310c16b2bf36750399278cd4"
+    },
+    {
+      "candidate_id": "SW100-C0488",
+      "path": "scripts/c5_isomorphisms/gen_oncology_primitives.py",
+      "sha256": "88b784c2d252e221b320722778be90ff3363dc9455307c65fadd91159c8c1286"
+    },
+    {
+      "candidate_id": "SW100-C0256",
+      "path": "scripts/c5_setup/setup_nacho_cortex.ps1",
+      "sha256": "5e82bdaee41d20083ccfdf49b305e1a5cd65a18e030979d26104b1e10747ca07"
+    },
+    {
+      "candidate_id": "SW100-C0537",
+      "path": "scripts/c5_verifiers/axiom_verifier_z3.py",
+      "sha256": "0e2738c769418d319cebf0ba8c08078b087a011dfd236139d8a1eeb828cfebe1"
+    },
+    {
+      "candidate_id": "SW100-C0339",
+      "path": "scripts/verify_release.sh",
+      "sha256": "75c09bd4ac762f8a6a730dbfa04f3950e4486d69183f178c4afc8cd42e30cbaf"
+    },
+    {
+      "candidate_id": "SW100-C0051",
+      "path": "tools/skill_library/codex_overrides/agents-sdk/references/webhooks-push.md",
+      "sha256": "c92e9f4566a71271eb4ffdcc219ed89fefc5294ecda47b43fc8863fb2b3e03f4"
+    },
+    {
+      "candidate_id": "SW100-C0307",
+      "path": "tools/skill_library/codex_overrides/turnstile-spin/scripts/persist-skill.sh",
+      "sha256": "4fea0bcda9fded16dd63f77dad196474d3c15c1fe93ac4718b50517fa834330c"
+    },
+    {
+      "candidate_id": "SW100-C0242",
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-browser-forensics-and-extension-triage/scripts/browser_forensics.py",
+      "sha256": "57ce214bbe5979e64b06b05a1e5554fc26f9705986dd382c78f330baa1ae06f9"
+    },
+    {
+      "candidate_id": "SW100-C0593",
+      "path": "tools/skill_library/global/remotion-audio-reactive-video/examples/AudioReactiveMaster.tsx",
+      "sha256": "b25dd4fa4dffa5e29f4d8d8ebd4d788e37286ea845c90fa6161115f5b8948422"
+    }
+  ],
+  "official_references": [
+    {
+      "candidate_id": "SW100-C0582",
+      "url": "https://doc.rust-lang.org/std/process/struct.Child.html",
+      "observation": "Dropping Child does not ensure child termination or wait."
+    },
+    {
+      "candidate_id": "SW100-C0464",
+      "url": "https://doc.rust-lang.org/cargo/reference/workspaces.html",
+      "observation": "Workspace members share target in the workspace root by default."
+    },
+    {
+      "candidate_id": "SW100-C0051",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Request/text",
+      "observation": "text() rejects with TypeError for a disturbed/locked body."
+    },
+    {
+      "candidate_id": "SW100-C0016",
+      "url": "https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#local-and-imported-type-declarations-now-conflict",
+      "observation": "Imported and local interface declarations conflict; augmentation requires separate module augmentation."
+    },
+    {
+      "candidate_id": "SW100-C0593",
+      "url": "https://github.com/remotion-dev/remotion/blob/main/packages/docs/docs/flickering.mdx",
+      "observation": "Components should derive visuals from frame and not rely on frame execution order.",
+      "retrieval": "Context7 /remotion-dev/remotion"
+    }
+  ],
+  "additional_scope_checks": {
+    "cargo_config": "No crates/.cargo/config(.toml) or crates/eridu-infer/.cargo/config(.toml) exists; root config inspected; global config/environment not inspected.",
+    "purge_modules": "rg --files confirmed cortex/__init__.py and cortex/gemini_labs_nexus.py exist; cortex_chaos_monad.py is protected.",
+    "mmr_consumers": "Targeted rg over crates/b60-lang/src and tests found public re-export and local positive test; external production consumer not established.",
+    "forensics_timing": "C0242 hash was read directly before coordinator announced a separate fix. Historical review deliberately not overwritten by remediation hash drift.",
+    "fixture_harness_correction": "First JSON fixture selected an earlier valid metadata example and failed its expectation; selector was anchored to Deploy with Bindings, then all three fixture groups passed. This was a fixture selection error, not a changed source finding."
+  }
+}

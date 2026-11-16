@@ -1,0 +1,498 @@
+{
+  "shard": "046",
+  "findings": [
+    {
+      "title": "Reject truncated CBOR byte/text strings",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/primitives/cbor.py",
+      "line": 141,
+      "evidence": "Major bytes/text returns stream.read(val) without requiring len == val. loads also returns after one item without checking trailing data. Static example: 0x43 followed by one byte returns that one byte although length says three.",
+      "trigger": "Decode a truncated byte/text item.",
+      "impact": "Malformed serialized input is accepted as a different value; strict framing and integrity callers cannot rely on decoder rejection.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Check arithmetic overflow at the C ABI boundary",
+      "severity": "P2",
+      "path": "crates/b60-lang/src/ffi.rs",
+      "line": 38,
+      "evidence": "b60_sexa_add performs f1 + f2 and s1 + s2 + carry as unchecked u64 additions and returns 0; API accepts arbitrary u64 arguments with no numeric preconditions.",
+      "trigger": "For example s1=u64::MAX, s2=1 with valid output pointers.",
+      "impact": "Release arithmetic can wrap while reporting exact addition success; overflow-checked builds panic across extern C and may abort the embedding process.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Compute the actual repository root in setup",
+      "severity": "P2",
+      "path": "scripts/c5_setup/setup_nacho_cortex.sh",
+      "line": 22,
+      "evidence": "SCRIPT_DIR is scripts/c5_setup, and a single dirname sets REPO_ROOT to scripts. Consequently line 24 looks for scripts/.agents rather than repository .agents, then skips copying and prints success at line 42.",
+      "trigger": "Run the setup script at its committed location.",
+      "impact": "The advertised governance/skill installation silently fails.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Label simulated receipts as simulated, without hardware identity",
+      "severity": "P2",
+      "path": "scripts/c5_demos/poc_sovereign_spark_daemon.py",
+      "line": 131,
+      "evidence": "trigger_biometric_gate never calls the swift_gate path. It generates an HMAC from a fixed source constant but writes status ATTESTED_BY_OPERATOR and mechanism SECURE_ENCLAVE_P256_LOCAL. execute_cycle consumes True and writes COMMITTED receipts to the demo sitrep.",
+      "trigger": "Execute the supplied demo critical task.",
+      "impact": "The example exports false operator/hardware attestation evidence. Only demo state and sitrep consumers were found; this is not evidence of a production authorization bypass.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Do not certify empirical survival from keyword templates",
+      "severity": "P2",
+      "path": "scripts/repatriated/run_swarm_batch_041_060.py",
+      "line": 74,
+      "evidence": "Every extract_meta branch selects preset SURVIVE postulates; metrics use line count and unique word ratio. Output unconditionally declares POPPERIAN_SURVIVED and claims empirical scrutiny at line 96, with no experiment or source verification.",
+      "trigger": "Process any input post matched by the batch slice.",
+      "impact": "Generated audit documents present predetermined assertions and heuristic scores as checked evidence.",
+      "confidence": "high",
+      "kind": "docs"
+    },
+    {
+      "title": "Bind field names and types into the evidence seal",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+      "line": 698,
+      "evidence": "compute_merkle_root hashes only str(val) or serialized container values, then sorts leaf hashes. Keys are excluded and order is discarded. For example {author:A,text:B} and {author:B,text:A} yield the same leaf multiset; scalar 1 and string 1 also have identical leaf bytes. Main inserts this root as merkle_seal at lines 2935–2940.",
+      "trigger": "Swap two scalar values between evidence fields, rename a field, or change a scalar type while retaining its string representation.",
+      "impact": "The advertised evidence seal cannot detect semantic tampering with field associations or scalar types.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Namespace vault record IDs by platform and instance",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+      "line": 2090,
+      "evidence": "save_to_vault selects data.id as record_id, table defines record_id alone as PRIMARY KEY, and INSERT OR REPLACE discards the existing record. Mastodon fetch_status emits status_id as id (line 1909) without instance namespace.",
+      "trigger": "Save two statuses with the same local numeric ID from different Mastodon instances into the shared vault.",
+      "impact": "The second capture silently replaces the first source record and its forensic content.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Use a unique temporary audio file for each synthesis",
+      "severity": "P2",
+      "path": "tools/skill_library/global/f5tts-voice-cloning-sota/scripts/synthesize_vocal_clone.py",
+      "line": 107,
+      "evidence": "Each invocation writes /tmp/f5_raw_synthesis.wav before launching ffmpeg against that same path; no exclusive creation, per-run directory or cleanup protects it.",
+      "trigger": "Two syntheses overlap after one writes its audio and before its ffmpeg has read it.",
+      "impact": "An output may contain another synthesis audio, or a concurrent write may corrupt conversion; the fixed file also retains synthesized speech.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Avoid treating missing failure logs as proof of all invariants",
+      "severity": "P2",
+      "path": "docs/03_guides/tutorial_hello_causal.md",
+      "line": 200,
+      "evidence": "Tutorial states that absence of CRITICAL HALT in a log is positive proof that execution maintained all invariants. No completeness or trusted monitoring premise accompanies the claim.",
+      "trigger": "Use tutorial guidance to accept an incomplete log or a run with an uninstrumented defect.",
+      "impact": "Readers are instructed to certify correctness from absence of an error message, exceeding the evidence supplied.",
+      "confidence": "high",
+      "kind": "docs"
+    },
+    {
+      "title": "Emit a valid JSON container for batch output",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+      "line": 2994,
+      "evidence": "For --format json each item is json.dumps(extracted_data), but final_output joins all_reports with a Markdown separator. The --batch option can produce two or more items.",
+      "trigger": "Run a batch with at least two successfully extracted URLs and --format json.",
+      "impact": "Output is not a JSON document and cannot be parsed by downstream JSON tooling.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Do not label watch-page text as an audio transcript",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+      "line": 1586,
+      "evidence": "YouTubeAdapter fetches the video watch URL through r.jina.ai, puts the entire first 10000 body characters into transcript_text, and reports it under Transcripción de Audio at line 2301. No captions or audio transcription stage exists in the adapter.",
+      "trigger": "Fetch a video through this adapter.",
+      "impact": "Page metadata and unrelated watch-page text can be presented and analyzed as words spoken in the video.",
+      "confidence": "high",
+      "kind": "docs"
+    },
+    {
+      "title": "Label regex matches as candidate facts rather than verified facts",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+      "line": 174,
+      "evidence": "EpistemicClassifier matches references such as RFC, sha256 or a legal keyword and increments hechos_verificados, which the Markdown report renders as Hechos Verificados at line 2462. There is no source retrieval, evidence validation or truth check in classify_text.",
+      "trigger": "Classify a false sentence that includes a matching reference keyword.",
+      "impact": "The report presents unverified textual claims as verified evidence.",
+      "confidence": "high",
+      "kind": "docs"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/static_proofs.rs",
+      "line": 43,
+      "claim": "Static proof obligations count allocations/frees without ordering, use-after-free or unknown frees; a balanced but misordered AST may still produce proven counts.",
+      "status": "Not claimed as a runtime bypass: targeted symbol search found no compiler consumer of this generator beyond its local test; additional integration tracing required."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".agents/skills/c5-ring0-babylon-kernel-project/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          57
+        ]
+      ],
+      "sha256_initial": "afd9fa87c51a4b44cfc257fae2c06da8c9f56058905c8069f190ef541e4f331f",
+      "sha256_final": "afd9fa87c51a4b44cfc257fae2c06da8c9f56058905c8069f190ef541e4f331f",
+      "changed_during_review": false,
+      "note": "Source-only review; no execution"
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/static_proofs.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          128
+        ]
+      ],
+      "sha256_initial": "b8b771d7aa8b8a1f07cdf6b5b1a24c19a9f30c7204363eeff5fb98c452fc0145",
+      "sha256_final": "b8b771d7aa8b8a1f07cdf6b5b1a24c19a9f30c7204363eeff5fb98c452fc0145",
+      "changed_during_review": false,
+      "note": "Source-only review; no execution"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/attestation/__init__.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          19
+        ]
+      ],
+      "sha256_initial": "a09badf60fadd101026c903d3d8069dfd251ae7fe912766785d7559e2a831b54",
+      "sha256_final": "a09badf60fadd101026c903d3d8069dfd251ae7fe912766785d7559e2a831b54",
+      "changed_during_review": false,
+      "note": "Source-only review; no execution"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/cortex/audits/__init__.py",
+      "status": "reviewed_full",
+      "ranges": [],
+      "sha256_initial": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sha256_final": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "changed_during_review": false,
+      "note": "Empty file reviewed"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/primitives/cbor.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          161
+        ]
+      ],
+      "sha256_initial": "befd58e5ae2587434cf7f31f841ba80d6da64e5666b20917650910dfa1b3e377",
+      "sha256_final": "befd58e5ae2587434cf7f31f841ba80d6da64e5666b20917650910dfa1b3e377",
+      "changed_during_review": false,
+      "note": "Source-only review; no execution"
+    },
+    {
+      "path": "01_KISH_ENGINE/cortex/crates/cortex-core/src/scoring.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          211
+        ]
+      ],
+      "sha256_initial": "8fb6f5566285b5385f7a5758e8bfc7ed47aa6af4ea0cadf346cb57f6619f81d5",
+      "sha256_final": "8fb6f5566285b5385f7a5758e8bfc7ed47aa6af4ea0cadf346cb57f6619f81d5",
+      "changed_during_review": false,
+      "note": "Source-only review; no execution"
+    },
+    {
+      "path": "crates/b60-lang/src/ffi.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          306
+        ]
+      ],
+      "sha256_initial": "94d2633044e106a01ca41304a7d430968bc56cdea2a5e2c785cb8c192f42f83b",
+      "sha256_final": "94d2633044e106a01ca41304a7d430968bc56cdea2a5e2c785cb8c192f42f83b",
+      "changed_during_review": false,
+      "note": "Source-only review; no execution"
+    },
+    {
+      "path": "docs/03_guides/tutorial_hello_causal.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          259
+        ]
+      ],
+      "sha256_initial": "04263be666811331b3db3d8d11acf3b53151faba79078b3b2c9bdd707e35d250",
+      "sha256_final": "04263be666811331b3db3d8d11acf3b53151faba79078b3b2c9bdd707e35d250",
+      "changed_during_review": false,
+      "note": "Source-only review; no execution"
+    },
+    {
+      "path": "docs/security/external-audit-remediation-2026-10-24.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          155
+        ]
+      ],
+      "sha256_initial": "978fa7c80f2431de0a7fc27e7989d7f549d3eed77cdd728f3d5497f0307fac41",
+      "sha256_final": "978fa7c80f2431de0a7fc27e7989d7f549d3eed77cdd728f3d5497f0307fac41",
+      "changed_during_review": false,
+      "note": "Source-only review; no execution"
+    },
+    {
+      "path": "proof/lean/babylon_tensor.c",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          27
+        ]
+      ],
+      "sha256_initial": "9d8229873685bdbd7e07b4a58e758cedf3b4acbffd6faddeaa7c78e8c221dacf",
+      "sha256_final": "9d8229873685bdbd7e07b4a58e758cedf3b4acbffd6faddeaa7c78e8c221dacf",
+      "changed_during_review": false,
+      "note": "Source-only review; no execution"
+    },
+    {
+      "path": "scripts/c5_demos/poc_sovereign_spark_daemon.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          248
+        ]
+      ],
+      "sha256_initial": "dd8c448f8e19a4e773db00e40252badda0402988bc31d647e9009895ec5ac643",
+      "sha256_final": "dd8c448f8e19a4e773db00e40252badda0402988bc31d647e9009895ec5ac643",
+      "changed_during_review": false,
+      "note": "Source-only review; no execution"
+    },
+    {
+      "path": "scripts/c5_setup/setup_nacho_cortex.sh",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          42
+        ]
+      ],
+      "sha256_initial": "bb15cea511da3aa58c6b3903ac15640bb55d54b0cedb248073e8f9e293fe5ea1",
+      "sha256_final": "bb15cea511da3aa58c6b3903ac15640bb55d54b0cedb248073e8f9e293fe5ea1",
+      "changed_during_review": false,
+      "note": "Source-only review; no execution"
+    },
+    {
+      "path": "scripts/repatriated/run_swarm_batch_041_060.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          170
+        ]
+      ],
+      "sha256_initial": "1a52d5991581a325325663dcf516dec1402a9fdd9410e892dc2ec93bc17f500e",
+      "sha256_final": "1a52d5991581a325325663dcf516dec1402a9fdd9410e892dc2ec93bc17f500e",
+      "changed_during_review": false,
+      "note": "Source-only review; no execution"
+    },
+    {
+      "path": "tests/kernel_security_audit.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          88
+        ]
+      ],
+      "sha256_initial": "6c702dff531f1207d65784e34752ae8838d96a88cfb685853aa8715693aa4839",
+      "sha256_final": "6c702dff531f1207d65784e34752ae8838d96a88cfb685853aa8715693aa4839",
+      "changed_during_review": false,
+      "note": "Source-only review; no execution"
+    },
+    {
+      "path": "tests/test_database_config_cleanup.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          70
+        ]
+      ],
+      "sha256_initial": "6a24830632ccb70e0f058aa78df3be3287bf033d3b4710a437961f539114dc76",
+      "sha256_final": "6a24830632ccb70e0f058aa78df3be3287bf033d3b4710a437961f539114dc76",
+      "changed_during_review": false,
+      "note": "Source-only review; no execution"
+    },
+    {
+      "path": "tests/test_standalone_verifier.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          289
+        ]
+      ],
+      "sha256_initial": "f4f2a8dabf537c859d18bdcee2b1e752e31111d44c810ff1c0aba6eac9e97e63",
+      "sha256_final": "f4f2a8dabf537c859d18bdcee2b1e752e31111d44c810ff1c0aba6eac9e97e63",
+      "changed_during_review": false,
+      "note": "Source-only review; no execution"
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/api/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          160
+        ]
+      ],
+      "sha256_initial": "6ea23fb895605fd2a2380580f7cd21ab39c51dde470067ed191fd387f6337cb4",
+      "sha256_final": "6ea23fb895605fd2a2380580f7cd21ab39c51dde470067ed191fd387f6337cb4",
+      "changed_during_review": false,
+      "note": "Source-only review; no execution"
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/kv/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          131
+        ]
+      ],
+      "sha256_initial": "6b05949efe3d6dd96523ebc92f4c7fb94d6548d4b05e6065c7f9df24d7acc4bf",
+      "sha256_final": "6b05949efe3d6dd96523ebc92f4c7fb94d6548d4b05e6065c7f9df24d7acc4bf",
+      "changed_during_review": false,
+      "note": "Source-only review; no execution"
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/stream/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          141
+        ]
+      ],
+      "sha256_initial": "74c156e9c665e9d523bcd7c5d9a763339aba0356b1dc69d723ef6bab41a25328",
+      "sha256_final": "74c156e9c665e9d523bcd7c5d9a763339aba0356b1dc69d723ef6bab41a25328",
+      "changed_during_review": false,
+      "note": "Source-only review; no execution"
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/turnstile-spin/references/astro.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          199
+        ]
+      ],
+      "sha256_initial": "6e2faeba9bf9ad24c062c6a723dc37c74644e5843dd7a06164999240e83d7a96",
+      "sha256_final": "6e2faeba9bf9ad24c062c6a723dc37c74644e5843dd7a06164999240e83d7a96",
+      "changed_during_review": false,
+      "note": "Source-only review; no execution"
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents/agent_14_in_chat_forms.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "sha256_initial": "5a3ab8737a5338d2a1f05380358a658eb73c81dc2b101b6900e5edcf3826ff65",
+      "sha256_final": "5a3ab8737a5338d2a1f05380358a658eb73c81dc2b101b6900e5edcf3826ff65",
+      "changed_during_review": false,
+      "note": "Source-only review; no execution"
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/references/catalogo_47_primitivas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          103
+        ]
+      ],
+      "sha256_initial": "9c3470335747ed395297471a423e03f2c82fb1b7ab0e442e6b083b433ce5753e",
+      "sha256_final": "9c3470335747ed395297471a423e03f2c82fb1b7ab0e442e6b083b433ce5753e",
+      "changed_during_review": false,
+      "note": "Source-only review; no execution"
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          3006
+        ]
+      ],
+      "sha256_initial": "002d35e9e34b1cbd4e2a970d96a33e833500c23b74098de2937991f4bd6967c7",
+      "sha256_final": "002d35e9e34b1cbd4e2a970d96a33e833500c23b74098de2937991f4bd6967c7",
+      "changed_during_review": false,
+      "note": "All source lines read in untruncated chunks of at most 200 lines; source-only review."
+    },
+    {
+      "path": "tools/skill_library/global/f5tts-voice-cloning-sota/scripts/synthesize_vocal_clone.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          140
+        ]
+      ],
+      "sha256_initial": "7f579d14afdf8388c7e40f6accba159f184f6a7f9f7d9f91bec7f34f575f6311",
+      "sha256_final": "7f579d14afdf8388c7e40f6accba159f184f6a7f9f7d9f91bec7f34f575f6311",
+      "changed_during_review": false,
+      "note": "Source-only review; no execution"
+    },
+    {
+      "path": "tools/skill_library/workspace/c5-rea-clean-room/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          41
+        ]
+      ],
+      "sha256_initial": "326efb519da2ec653cd42f7b411f7c20488975e6ea19d74e550b440b7242bc0f",
+      "sha256_final": "326efb519da2ec653cd42f7b411f7c20488975e6ea19d74e550b440b7242bc0f",
+      "changed_during_review": false,
+      "note": "Source-only review; no execution"
+    }
+  ],
+  "tool_limitations": [
+    "Native graph tools are not exposed in this session (metadata discovery returned no search_graph/query_graph); targeted text fallback used.",
+    "Audit-only: no tests, repository scripts, compilation, native effects, external service checks or benchmarks executed.",
+    "Historical external audit evidence and external product documentation were read as claims; their runtime results were not independently certified."
+  ],
+  "tests_run": []
+}

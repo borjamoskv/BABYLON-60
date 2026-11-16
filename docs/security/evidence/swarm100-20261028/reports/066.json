@@ -1,0 +1,384 @@
+{
+  "shard": "066",
+  "findings": [
+    {
+      "title": "Curl failure can return the mail API key in error detail",
+      "severity": "P1",
+      "path": "01_KISH_ENGINE/babylon60/transducers/c5_mail_transducer.py",
+      "line": 85,
+      "evidence": "Authorization bearer is embedded in cmd at lines 61\u201362. subprocess.run(check=True) raises CalledProcessError; when stderr is empty, str(e) includes the complete command. curl -s suppresses diagnostics, making the fallback relevant.",
+      "trigger": "curl exits nonzero without stderr, e.g. a network failure under silent mode.",
+      "impact": "Returned ERROR detail can disclose the bearer credential to callers or their logs.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Swarm entry point imports a module absent after renaming",
+      "severity": "P2",
+      "path": "scripts/c5_sharur/sharur_swarm.py",
+      "line": 17,
+      "evidence": "Imports legion_swarm_core; filename search finds scripts/c5_sharur/sharur_swarm_core.py only. That module defines run_legion_swarm at line 63.",
+      "trigger": "Execute the CLI directly in the repository without an unrelated external module on PYTHONPATH.",
+      "impact": "ModuleNotFoundError prevents CLI execution.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Bounded advisory queues silently discard accepted frames",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/bft/bounty_ring_dispatcher.py",
+      "line": 55,
+      "evidence": "All domain queues use deque(maxlen=capacity); _route_advisory appends without checking fullness and dispatch_frame increments total_dispatched. bounty_pipeline_orchestrator.py:109\u2013116 dispatches the entire batch before draining.",
+      "trigger": "More than queue_capacity valid advisories for one domain arrive in a cycle before drainage.",
+      "impact": "Oldest accepted advisories disappear without rejection or loss telemetry; specialist processing misses them.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Extractor promotes a satisfiable assumption set without checking the trace cluster",
+      "severity": "P2",
+      "path": "scripts/c5_destiladora/invariant_extractor_z3.py",
+      "line": 86,
+      "evidence": "Only traces[0] supplies files_count (lines 65\u201366); solver constraints assert that value and EXIT_CODE=0 and check satisfiability. No other trace is checked against that count. The result is persisted as EXTRACTED at lines 99\u2013106. proof_emitter_lean4.py:166\u2013196 consumes EXTRACTED and independently selects LIMIT 1; codegen_rust_b60.py:39\u201364 subsequently uses first-trace cardinality for dispatch.",
+      "trigger": "Successful traces in the same AST cluster touch different numbers of files.",
+      "impact": "A first-sample property is recorded as a cluster invariant and propagated into generated proof/dispatch artifacts; this is not evidence of an authorization bypass.",
+      "confidence": "high",
+      "kind": "runtime"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".agents/skills/lora-swarm-pipeline/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          22
+        ]
+      ],
+      "manifest_sha256": "d0e5c597e7071b8385e40cb76e67d33de24ae78bc77f6730e36cc9ab8e78802e",
+      "observed_sha256": "d0e5c597e7071b8385e40cb76e67d33de24ae78bc77f6730e36cc9ab8e78802e",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-kernel/src/scitt.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          64
+        ]
+      ],
+      "manifest_sha256": "2e5726b2b9f10c07f0788e11046157fd43860a812e792935efe8236b0d87ac04",
+      "observed_sha256": "2e5726b2b9f10c07f0788e11046157fd43860a812e792935efe8236b0d87ac04",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/bft/bounty_ring_dispatcher.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          135
+        ]
+      ],
+      "manifest_sha256": "0bb4feab793ed3ca3281e6e57730e920bf66d7c1ad60317f9af31c1543a07ece",
+      "observed_sha256": "0bb4feab793ed3ca3281e6e57730e920bf66d7c1ad60317f9af31c1543a07ece",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/dashboard/__init__.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          2
+        ]
+      ],
+      "manifest_sha256": "abe8f7f05ce366e0338fb1b7f17bd211f5676bf700fdb965ee7ff532e960fdf9",
+      "observed_sha256": "abe8f7f05ce366e0338fb1b7f17bd211f5676bf700fdb965ee7ff532e960fdf9",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/transducers/c5_mail_transducer.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          95
+        ]
+      ],
+      "manifest_sha256": "f0b8bb74745c4b68221c8b5558c1c5d3b35072774c6841bebc7867a1c09c660f",
+      "observed_sha256": "f0b8bb74745c4b68221c8b5558c1c5d3b35072774c6841bebc7867a1c09c660f",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/cortex/transducers/video_remotion/src/BabylonMasterclass.tsx",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          409
+        ]
+      ],
+      "manifest_sha256": "fea2445747d21e30babd6608dd985a6936b48c949143dc2b371e5e67b7176c1f",
+      "observed_sha256": "fea2445747d21e30babd6608dd985a6936b48c949143dc2b371e5e67b7176c1f",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "crates/babylon-attest/src/merkle_b3.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          166
+        ]
+      ],
+      "manifest_sha256": "3c1dcc97b1474e96cddfb776d88adb6516b7771a4d3c12137e6afec19b5db220",
+      "observed_sha256": "3c1dcc97b1474e96cddfb776d88adb6516b7771a4d3c12137e6afec19b5db220",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "docs/06_theory/07_cross_domain.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          34
+        ]
+      ],
+      "manifest_sha256": "476a47d881268b5e81abf0e17ef3ad0cb8c07d8e13355c28ea01b0f459b5e080",
+      "observed_sha256": "476a47d881268b5e81abf0e17ef3ad0cb8c07d8e13355c28ea01b0f459b5e080",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "examples/archived_peripherals/ouroboros_infinity.py.disabled",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          159
+        ]
+      ],
+      "manifest_sha256": "ed6e66cc0026d44ce7ba9727fbe63f4e39453561813273b6cb5c7350307a66c6",
+      "observed_sha256": "ed6e66cc0026d44ce7ba9727fbe63f4e39453561813273b6cb5c7350307a66c6",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/c5_assets/gen_blip_assets.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          46
+        ]
+      ],
+      "manifest_sha256": "fa81314585b5286f952031c81229e819b48c852b82d6859e2e180cdb4683cb81",
+      "observed_sha256": "fa81314585b5286f952031c81229e819b48c852b82d6859e2e180cdb4683cb81",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/c5_destiladora/invariant_extractor_z3.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          126
+        ]
+      ],
+      "manifest_sha256": "09c6fbf9668323bca1c56bdfa441277ff641a57bc3fcc59189477a416a0f5959",
+      "observed_sha256": "09c6fbf9668323bca1c56bdfa441277ff641a57bc3fcc59189477a416a0f5959",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/c5_sharur/sharur_swarm.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          58
+        ]
+      ],
+      "manifest_sha256": "eeff52dacfd66600f1d56ee502358dfc5a2785cb0694fd5c1121f67a5db9e4eb",
+      "observed_sha256": "eeff52dacfd66600f1d56ee502358dfc5a2785cb0694fd5c1121f67a5db9e4eb",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "src/aot_oracle.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          613
+        ]
+      ],
+      "manifest_sha256": "81878f1430ad72a065708aadbd97ffe2c08ef55aaa35dbde8d77f5ee0f34b094",
+      "observed_sha256": "81878f1430ad72a065708aadbd97ffe2c08ef55aaa35dbde8d77f5ee0f34b094",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/spsc_miri_probe/Cargo.toml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          16
+        ]
+      ],
+      "manifest_sha256": "26ce4510c8bcf242d7d1e98629debcae4972a3a85a1123a9148540b898a43941",
+      "observed_sha256": "26ce4510c8bcf242d7d1e98629debcae4972a3a85a1123a9148540b898a43941",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/test_graph_isomorphism_regressions.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          174
+        ]
+      ],
+      "manifest_sha256": "583eb19d54347d1fde441853111281b770f49e64512f942981a1146d206c2632",
+      "observed_sha256": "583eb19d54347d1fde441853111281b770f49e64512f942981a1146d206c2632",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/test_zero_touch_onboarding.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          95
+        ]
+      ],
+      "manifest_sha256": "4eccb92d1dce074743d629dd6222a8f26cbbcc550dafc09c3e70ef27689ff21f",
+      "observed_sha256": "4eccb92d1dce074743d629dd6222a8f26cbbcc550dafc09c3e70ef27689ff21f",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/bot-management/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          182
+        ]
+      ],
+      "manifest_sha256": "55ad66c51e886b10107074eb052420772f045f305f6faa05e908e54f91774775",
+      "observed_sha256": "55ad66c51e886b10107074eb052420772f045f305f6faa05e908e54f91774775",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/pages-functions/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          94
+        ]
+      ],
+      "manifest_sha256": "27685cf4db1ba2253806bcc82ed2e229d03b334c4fe2c7cd942d4f5150162ac1",
+      "observed_sha256": "27685cf4db1ba2253806bcc82ed2e229d03b334c4fe2c7cd942d4f5150162ac1",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/turn/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          239
+        ]
+      ],
+      "manifest_sha256": "edb24cd2264d1373e2cb02528fa292c0ba786ba36ff1d92ddef1ac51fb989bf8",
+      "observed_sha256": "edb24cd2264d1373e2cb02528fa292c0ba786ba36ff1d92ddef1ac51fb989bf8",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/youtube-remotion-sota/references/timeline-and-podcasts.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          63
+        ]
+      ],
+      "manifest_sha256": "a4cb778854d1d4813bbc561cafd8b00846f90c684d3438237b462ba99b435142",
+      "observed_sha256": "a4cb778854d1d4813bbc561cafd8b00846f90c684d3438237b462ba99b435142",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents/agent_34_site_playbooks_facebook_marketplace.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "manifest_sha256": "f06d7aa217797ec8d7f94f2e9ec6eb716810ee84d2119dff88974180747b4a7f",
+      "observed_sha256": "f06d7aa217797ec8d7f94f2e9ec6eb716810ee84d2119dff88974180747b4a7f",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/goal/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          64
+        ]
+      ],
+      "manifest_sha256": "1369cc11cc9c8f3f8733a7a536beb743311bf275b45fb9bcffcda6a31714f6b3",
+      "observed_sha256": "1369cc11cc9c8f3f8733a7a536beb743311bf275b45fb9bcffcda6a31714f6b3",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/github-architect/scripts/readme_linter.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          177
+        ]
+      ],
+      "manifest_sha256": "50474d0b4a1573f21634860ac32fda50251130422aa27e650e8325c38bd39ad4",
+      "observed_sha256": "50474d0b4a1573f21634860ac32fda50251130422aa27e650e8325c38bd39ad4",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/flstudio-mcp-production/examples/TB303_Acid_Pattern_Generator.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          93
+        ]
+      ],
+      "manifest_sha256": "ae19dbe63abfa49963f832ffc9aadde0df61d4c2e32cc1fffeed3f6507077a5d",
+      "observed_sha256": "ae19dbe63abfa49963f832ffc9aadde0df61d4c2e32cc1fffeed3f6507077a5d",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/workspace/symbiotic-cognitive-architecture/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "manifest_sha256": "9707d44caba91a5f44dbe6b00cce6764b36a19ef549cd0ff21639e9be1a767a1",
+      "observed_sha256": "9707d44caba91a5f44dbe6b00cce6764b36a19ef549cd0ff21639e9be1a767a1",
+      "changed_since_manifest": false
+    }
+  ],
+  "tool_limitations": [
+    "Codebase graph tools are not exposed in this session; targeted rg and source reads used.",
+    "Initial batched source output truncated; relevant omitted source was re-read in bounded chunks.",
+    "No runtime execution, tests, compilation, external API validation or physical guarantees assessed.",
+    "A targeted search included two missing candidate paths; subsequent focused filename/symbol searches resolved the swarm consumer."
+  ],
+  "tests_run": []
+}

@@ -1,0 +1,87 @@
+{
+  "scope": "Pure Python in-memory fixtures and repository metadata only; no native, protected, network, or operator-data execution.",
+  "results": {
+    "SW100-C0278": {
+      "unicast_woke_waiter": false,
+      "result_after_broadcast": "addressed"
+    },
+    "SW100-C0279": {
+      "successive_wait_results": [
+        "broadcast",
+        "broadcast"
+      ],
+      "scope": "Observed persistent latch; whether reuse is intended remains unvalidated."
+    },
+    "SW100-C0407": {
+      "before_eviction": [
+        [
+          "a",
+          "updated"
+        ],
+        [
+          "a",
+          "updated"
+        ]
+      ],
+      "after_eviction": [
+        [
+          "b",
+          "new"
+        ]
+      ]
+    },
+    "SW100-C0313": {
+      "parsed": {
+        "color": "",
+        "value": "\"abc"
+      }
+    },
+    "SW100-C0058": {
+      "relative": [
+        60,
+        64,
+        69
+      ],
+      "parallel_after_relative": [
+        60,
+        65,
+        69
+      ],
+      "expected_a_major_pitch_classes": [
+        1,
+        4,
+        9
+      ]
+    },
+    "SW100-C0477": {
+      "same_hash_input": true,
+      "sha256": "22a5c7045bc36a32e64f063ff4e7946d8a663238bf27e4f5b32713d987ec51ac",
+      "rust_executed": false
+    },
+    "SW100-C0117": {
+      "G": 12,
+      "L": 12,
+      "A": 0.01,
+      "B": 1,
+      "P": 1,
+      "M_p": 1,
+      "E_base": 0.04,
+      "T_w": 1,
+      "T_n": 0.23,
+      "score": 8.280000000000001
+    },
+    "SW100-C0309": {
+      "total_equals_sum_of_repeated_scans": 3392956074,
+      "duplicate_agents": [
+        "SHARUR_GC_000",
+        "SHARUR_GC_006"
+      ],
+      "equal_target_pattern_samples_bytes": true,
+      "operator_files_accessed": false
+    },
+    "SW100-C0041": {
+      "configured_path_exists": false,
+      "actual_entry_exists": true
+    }
+  }
+}

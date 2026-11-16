@@ -1,0 +1,8 @@
+{
+  "stop_timed_out": true,
+  "accepted": 3,
+  "persisted_rows": 1,
+  "unresolved_futures": 2,
+  "source_sha256": "c0dddf3e209bb945fa1f49a3d372b66b18968ebfcc2ea864ce35b26ebb16b237",
+  "scope": "isolated temporary SQLite fixture; no production state"
+}

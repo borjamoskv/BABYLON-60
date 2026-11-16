@@ -1,0 +1,345 @@
+{
+  "shard": "014",
+  "findings": [
+    {
+      "title": "Attestation generator signs hard-coded successful test results",
+      "severity": "P1",
+      "path": "scripts/generate_attestation_bundle_v2.py",
+      "line": 73,
+      "evidence": "test_results_data embeds SUPPORTED_WITHIN_DOMAIN, zero violations and suite pass counts (73-170); 174-180 serialize/hash them without invoking or loading test results.",
+      "trigger": "Run the generator on an untested or failing checkout.",
+      "impact": "It emits a cryptographically signed bundle presenting invented current test evidence and silicon certification.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Artifact verification compares two stored hashes without reading the artifact",
+      "severity": "P1",
+      "path": "scripts/generate_attestation_bundle_v2.py",
+      "line": 320,
+      "evidence": "Generated verifier sets artifact_hash_ok from artifact.sha256 == manifest artifact_hash; no artifact bytes or source tree are read (320-322).",
+      "trigger": "Modify the released source/binary while preserving an existing bundle.",
+      "impact": "Verifier still reports ARTIFACT HASH VERIFIED and can exit successfully; it cannot establish that the supplied implementation matches the attested artifact.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Environment provenance is hard-coded for every host",
+      "severity": "P2",
+      "path": "scripts/generate_attestation_bundle_v2.py",
+      "line": 188,
+      "evidence": "Only arch/os/release are observed; chip, filesystem, runtime, compiler, entropy and LOCAL_EMPIRICALLY_VERIFIED_SILICON are literals (188-194).",
+      "trigger": "Run generator on another host or toolchain.",
+      "impact": "Signed environment evidence misidentifies hardware/compiler/provenance, invalidating reproducibility claims.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "F60 numerator can overflow before applying the advertised score cap",
+      "severity": "P2",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/gelabp_calc.rs",
+      "line": 144,
+      "evidence": "Five unconstrained u64 parameters are multiplied into u128 at 144-148; final cap is applied only at 157.",
+      "trigger": "Call public compute_score_f60 with g=l=a=b=p=100000000 (100 in F60 units): product is 10^40, above u128 capacity.",
+      "impact": "Debug builds panic; release builds wrap and may return an incorrect bounded score rather than saturating at 1000. No production caller found in targeted references.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Watchdog uses a predictable writable script path",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/utils/watchdog_poc_v5.py",
+      "line": 21,
+      "evidence": "open(\"/tmp/alert_v5.scpt\", \"w\") follows symlinks and later os.system executes the same shared path (21-24).",
+      "trigger": "Another local user precreates the path as a symlink before this PoC runs, or swaps its contents between write and osascript.",
+      "impact": "Can overwrite a file writable by the runner or execute attacker-chosen AppleScript with runner privileges.",
+      "confidence": "high",
+      "kind": "example"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".agents/skills/apple-bypass/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          21
+        ]
+      ],
+      "note": "Static text review; SHA-256 matches frozen assignment."
+    },
+    {
+      "path": ".github/workflows/production-deploy.yml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          106
+        ]
+      ],
+      "note": "Static text review; SHA-256 matches frozen assignment."
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/gelabp_calc.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          189
+        ]
+      ],
+      "note": "Static text review; SHA-256 matches frozen assignment."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/compliance_exporter/templates/compliance_matrix.html.j2",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          27
+        ]
+      ],
+      "note": "Static text review; SHA-256 matches frozen assignment."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/mcp_lifecycle_manager.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          267
+        ]
+      ],
+      "note": "Static text review; SHA-256 matches frozen assignment."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/utils/watchdog_poc_v5.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          28
+        ]
+      ],
+      "note": "Static text review; SHA-256 matches frozen assignment."
+    },
+    {
+      "path": "Cargo.lock",
+      "status": "reviewed_partial",
+      "ranges": [
+        [
+          1,
+          100
+        ]
+      ],
+      "note": "Header and first dependency entries only; no advisory scan or complete dependency review. SHA-256 matches."
+    },
+    {
+      "path": "docs/01_spec/spec_proof_ir.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          113
+        ]
+      ],
+      "note": "Static text review; SHA-256 matches frozen assignment."
+    },
+    {
+      "path": "docs/adr/ADR-006-topologia-exposicion-repositorios.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          61
+        ]
+      ],
+      "note": "Static text review; SHA-256 matches frozen assignment."
+    },
+    {
+      "path": "proof/bundles/attestation_bundle_v2/environment.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          12
+        ]
+      ],
+      "note": "Static text review; SHA-256 matches frozen assignment."
+    },
+    {
+      "path": "scripts/c5_demos/falsacion_saga1_poc.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          93
+        ]
+      ],
+      "note": "Static text review; SHA-256 matches frozen assignment."
+    },
+    {
+      "path": "scripts/c5_quality_gates/compile_claims_manifest.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          321
+        ]
+      ],
+      "note": "Static text review; SHA-256 matches frozen assignment."
+    },
+    {
+      "path": "scripts/generate_attestation_bundle_v2.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          423
+        ]
+      ],
+      "note": "Static text review; SHA-256 matches frozen assignment."
+    },
+    {
+      "path": "src/telemetry.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          125
+        ]
+      ],
+      "note": "Static text review; SHA-256 matches frozen assignment."
+    },
+    {
+      "path": "tests/test_bounty_claim_attester.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          82
+        ]
+      ],
+      "note": "Static text review; SHA-256 matches frozen assignment."
+    },
+    {
+      "path": "tests/test_phase2_security_hardening.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          33
+        ]
+      ],
+      "note": "Static text review; SHA-256 matches frozen assignment."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare-email-service/references/sending.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          252
+        ]
+      ],
+      "note": "Static text review; SHA-256 matches frozen assignment."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/email-routing/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          195
+        ]
+      ],
+      "note": "Static text review; SHA-256 matches frozen assignment."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/sandbox/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          196
+        ]
+      ],
+      "note": "Static text review; SHA-256 matches frozen assignment."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workers-vpc/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          207
+        ]
+      ],
+      "note": "Static text review; SHA-256 matches frozen assignment."
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/examples/Xenharmonic_24TET_Bayati.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          114
+        ]
+      ],
+      "note": "Static text review; SHA-256 matches frozen assignment."
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_18_group_chat_turns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          61
+        ]
+      ],
+      "note": "Static text review; SHA-256 matches frozen assignment."
+    },
+    {
+      "path": "tools/skill_library/global/c5-neural-face-swap-cuadrilla/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "note": "Static text review; SHA-256 matches frozen assignment."
+    },
+    {
+      "path": "tools/skill_library/global/c5-wetware-and-venture-ops/references/modules/c5-epistemic-dissemination-engine/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          53
+        ]
+      ],
+      "note": "Static text review; SHA-256 matches frozen assignment."
+    },
+    {
+      "path": "tools/skill_library/global/youtube-analysis-pipeline/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "note": "Static text review; SHA-256 matches frozen assignment."
+    }
+  ],
+  "tool_limitations": [
+    "No native codebase-memory graph tools exposed; targeted text fallback used.",
+    "Audit only: no repository tests, builds, scripts or runtime executed. Hashing and report serialization only.",
+    "External Cloudflare API reference examples reviewed statically; current API validity not independently verified.",
+    "Cargo.lock coverage is partial; not a vulnerability advisory audit."
+  ],
+  "tests_run": []
+}

@@ -1,0 +1,22 @@
+{
+  "reviewer": "11",
+  "passed": true,
+  "exact_id_count": 29,
+  "duplicate_ids": 0,
+  "current_source_hashes_match": true,
+  "snapshot_hashes_match": true,
+  "source_line_ranges_valid": true,
+  "evidence_paths_exist": true,
+  "decisions": {
+    "CONFIRMED_STATIC": 23,
+    "REPRODUCED": 6
+  },
+  "remediation_states": {
+    "MITIGATED": 1,
+    "OPEN": 28
+  },
+  "isolated_fixtures_passed": 6,
+  "ruff": "passed",
+  "protected_runtime_executed": false,
+  "global_checks": "parent consolidated closing checks"
+}

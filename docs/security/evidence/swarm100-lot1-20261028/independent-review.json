@@ -1,0 +1,247 @@
+{
+  "reviewer": "adjudicate_03",
+  "reviewed_date": "2026-10-28",
+  "decision": "APPROVED_WITH_EXPLICIT_SCOPE",
+  "open_actionable_findings": [],
+  "scope": {
+    "production_paths": [
+      "01_KISH_ENGINE/babylon60/transducers/c5_mail_transducer.py",
+      "tools/tamkarum_attestation_engine.py",
+      "tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+      "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py"
+    ],
+    "tests_read_and_run": [
+      "tests/test_swarm100_lot1_regressions.py"
+    ],
+    "production_or_tests_edited_by_reviewer": false,
+    "native_or_protected_runtime_executed": false,
+    "real_mail_network_campaigns_keychain_or_real_emit_executed": false,
+    "graph_discovery": "Graph tools were not exposed; scoped source, diff, caller and contract reads were used."
+  },
+  "source_sha256": {
+    "01_KISH_ENGINE/babylon60/transducers/c5_mail_transducer.py": "cc8a44e972c6064ce2d2016d3f645316dd5163031d805afb35530dae9f6abbcb",
+    "tools/tamkarum_attestation_engine.py": "00b7a4344558ccc8fe02042e14f669251c5a33768144235a36ebff173df19e9d",
+    "tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py": "b898d7fabe6b598f204eca17116b2cba25cf8c05e49612451568f4c5273ca44a",
+    "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py": "b898d7fabe6b598f204eca17116b2cba25cf8c05e49612451568f4c5273ca44a",
+    "tests/test_swarm100_lot1_regressions.py": "f788d0470143912ded93b2856f68ddb7c802edca20696dd03cbb0f98405e929d"
+  },
+  "copies_byte_identical": true,
+  "finding_assessment": [
+    {
+      "candidate_id": "SW100-C0373",
+      "assessment": "FIXED_IN_REVIEWED_SOURCE",
+      "basis": "Failure results no longer serialize credential-bearing command/stderr/exception/provider bodies; all failure regressions and valid/no-key controls pass."
+    },
+    {
+      "candidate_id": "SW100-C0501",
+      "assessment": "FIXED_IN_REVIEWED_SOURCE",
+      "related_candidate_id": "SW100-C0264",
+      "basis": "Both distributed copies bind name plus recursively typed canonical value, use separated domains, version their seals and seal the final body; old ambiguity and subsequent body mutation regressions reject."
+    },
+    {
+      "candidate_id": "SW100-C0420",
+      "assessment": "FIXED_IN_REVIEWED_SOURCE",
+      "basis": "A coherent trusted-key signed fixture verifies, while editable legacy checksums, altered/missing evidence, unknown key, absent/invalid signature, malformed schema and current-state mismatches reject. This is functional authenticated verification, not a disabled-verifier mitigation."
+    },
+    {
+      "candidate_id": "SW100-C0421",
+      "assessment": "FIXED_IN_REVIEWED_SOURCE",
+      "basis": "CLI returns nonzero for failed verification and zero for the authorized signed fixture."
+    }
+  ],
+  "resolved_review_findings": [
+    {
+      "review_id": "LOT1-INDEPENDENT-01",
+      "severity": "P2",
+      "title": "Emit silently ignored explicit verification inputs",
+      "initial_observation": "The initial patch accepted --emit with evidence-path/expected-state flags, returned 0 and called the default generator, ignoring the selected inputs. Reproduced with generate_attestation_statement replaced by a spy; no emission or file read occurred.",
+      "resolution": "Main now leaves these parser options unset by default, applies default paths only for verification, and rejects all verify-only options when emit is selected.",
+      "validation": "Independent isolated replay now raises SystemExit(2) without calling the generator; seven flag regressions pass."
+    }
+  ],
+  "checks": [
+    {
+      "command": ".venv/bin/python -m pytest tests/test_swarm100_lot1_regressions.py -q",
+      "stage": "initial patch",
+      "exit_code": 0,
+      "result": "51 passed in 1.01s"
+    },
+    {
+      "command": ".venv/bin/python -m pytest tests/test_swarm100_lot1_regressions.py -q",
+      "stage": "final reviewed patch and integration additions",
+      "exit_code": 0,
+      "result": "62 passed in 1.12s"
+    },
+    {
+      "command": ".venv/bin/ruff check 01_KISH_ENGINE/babylon60/transducers/c5_mail_transducer.py tools/tamkarum_attestation_engine.py tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py tests/test_swarm100_lot1_regressions.py",
+      "exit_code": 0,
+      "result": "All checks passed!"
+    },
+    {
+      "method": "Independent typed-value collision and JSON roundtrip control, executed against each full SOCINT source module without main/network/vault calls.",
+      "inputs": [
+        null,
+        false,
+        true,
+        0,
+        1,
+        0.0,
+        -0.0,
+        1.0,
+        "0",
+        "1",
+        "null",
+        [],
+        {},
+        [
+          1
+        ],
+        [
+          1.0
+        ],
+        {
+          "x": 1
+        },
+        {
+          "x": 1.0
+        }
+      ],
+      "assertion": "17 distinct roots for {v: input}; verify_evidence_seal accepts JSON roundtrip of empty/one-field/three-field bodies. Altering sealed_at remains accepted, consistent with the explicitly excluded metadata scope.",
+      "result": "PASS on both copies"
+    },
+    {
+      "method": "Independent topology-boundary collision control with a synthetic agents_archi module and fake list_team rosters; restored sys.modules/sys.path afterwards.",
+      "inputs": {
+        "distribution_rosters": [
+          [
+            "ab",
+            "c"
+          ],
+          [
+            "a",
+            "bc"
+          ]
+        ],
+        "social_roster": []
+      },
+      "assertion": "compute_topology_sha256 digests differ; no real agents module imported.",
+      "result": "PASS"
+    },
+    {
+      "method": "Read-only AST comparison against Git HEAD for the primary SOCINT copy, normalizing only placeholder-free f-strings and the mechanical l-to-line rename.",
+      "changed_existing_functions": [
+        "compute_merkle_root",
+        "generate_markdown_report",
+        "main"
+      ],
+      "added_functions": [
+        "_typed_evidence_value",
+        "seal_evidence",
+        "verify_evidence_seal"
+      ],
+      "removed_functions": [],
+      "result": "No unrelated function-body changes detected after the declared mechanical normalizations."
+    }
+  ],
+  "source_checks": [
+    {
+      "path": "01_KISH_ENGINE/babylon60/transducers/c5_mail_transducer.py",
+      "start_line": 78,
+      "end_line": 96,
+      "observation": "Mail provider error bodies, stderr and exception text are excluded from returned errors. Stable codes/returncode remain; successful string IDs redact the exact configured token.",
+      "sha256": "cc8a44e972c6064ce2d2016d3f645316dd5163031d805afb35530dae9f6abbcb"
+    },
+    {
+      "path": "tools/tamkarum_attestation_engine.py",
+      "start_line": 1,
+      "end_line": 9,
+      "observation": "Versioned JSON/Ed25519 scope is explicit and does not claim COSE, registered SCITT or hardware attestation. The emitter is explicitly unsigned.",
+      "sha256": "00b7a4344558ccc8fe02042e14f669251c5a33768144235a36ebff173df19e9d"
+    },
+    {
+      "path": "tools/tamkarum_attestation_engine.py",
+      "start_line": 36,
+      "end_line": 57,
+      "observation": "Compact sorted UTF-8 canonical bytes reject nonfinite numbers; duplicate JSON keys are rejected and expected digests require nonzero lowercase hex.",
+      "sha256": "00b7a4344558ccc8fe02042e14f669251c5a33768144235a36ebff173df19e9d"
+    },
+    {
+      "path": "tools/tamkarum_attestation_engine.py",
+      "start_line": 60,
+      "end_line": 101,
+      "observation": "Failed Git lookup returns no fabricated digest; topology hashes named canonical JSON lists; selected evidence bytes are read once each for digests and the outreach root comes from the same bytes.",
+      "sha256": "00b7a4344558ccc8fe02042e14f669251c5a33768144235a36ebff173df19e9d"
+    },
+    {
+      "path": "tools/tamkarum_attestation_engine.py",
+      "start_line": 108,
+      "end_line": 121,
+      "observation": "Unsigned emitter records current selected evidence/commit/topology and contains no fabricated audit/compliance verdict.",
+      "sha256": "00b7a4344558ccc8fe02042e14f669251c5a33768144235a36ebff173df19e9d"
+    },
+    {
+      "path": "tools/tamkarum_attestation_engine.py",
+      "start_line": 124,
+      "end_line": 170,
+      "observation": "Verifier requires an external raw Ed25519 key, exact versioned envelope, full-body signature, compound digest, current or explicit offline expectations and recalculated evidence digests. Rejections return False.",
+      "sha256": "00b7a4344558ccc8fe02042e14f669251c5a33768144235a36ebff173df19e9d"
+    },
+    {
+      "path": "tools/tamkarum_attestation_engine.py",
+      "start_line": 173,
+      "end_line": 209,
+      "observation": "CLI requires an explicit mode, maps verification rejection to exit 1, and now rejects every verify-only option under emit before any generator call.",
+      "sha256": "00b7a4344558ccc8fe02042e14f669251c5a33768144235a36ebff173df19e9d"
+    },
+    {
+      "path": "tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+      "start_line": 695,
+      "end_line": 768,
+      "observation": "Merkle v2 recursively encodes JSON types, binds field names, separates leaf/node/empty domains, publishes exact covered fields, and verifies the complete body excluding declared seal metadata.",
+      "sha256": "b898d7fabe6b598f204eca17116b2cba25cf8c05e49612451568f4c5273ca44a"
+    },
+    {
+      "path": "tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+      "start_line": 2562,
+      "end_line": 2577,
+      "observation": "Markdown labels legacy seals, checks v2 before displaying VERIFIED, and discloses that timestamps/metadata and authorship are outside the seal.",
+      "sha256": "b898d7fabe6b598f204eca17116b2cba25cf8c05e49612451568f4c5273ca44a"
+    },
+    {
+      "path": "tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+      "start_line": 2979,
+      "end_line": 3000,
+      "observation": "Producer computes network/centrality/coordinated-action fields before invoking seal_evidence.",
+      "sha256": "b898d7fabe6b598f204eca17116b2cba25cf8c05e49612451568f4c5273ca44a"
+    },
+    {
+      "path": "tests/test_swarm100_lot1_regressions.py",
+      "start_line": 43,
+      "end_line": 115,
+      "observation": "Regression coverage includes mail transport/provider failures and valid/missing-key paths, both Merkle copies, typed/nested/order/empty/impar inputs and exact-body verification.",
+      "sha256": "f788d0470143912ded93b2856f68ddb7c802edca20696dd03cbb0f98405e929d"
+    },
+    {
+      "path": "tests/test_swarm100_lot1_regressions.py",
+      "start_line": 129,
+      "end_line": 251,
+      "observation": "Attestation cases use ephemeral keys and temporary evidence, testing valid trusted signatures and key/signature/schema/JSON/evidence/commit/topology rejections plus CLI status.",
+      "sha256": "f788d0470143912ded93b2856f68ddb7c802edca20696dd03cbb0f98405e929d"
+    },
+    {
+      "path": "tests/test_swarm100_lot1_regressions.py",
+      "start_line": 254,
+      "end_line": 300,
+      "observation": "Additional integration cases replace network adapters and output to temporary paths, prevent emit when verify-only flags are present, confine unsigned emission to temporary evidence, and reject failed current Git lookup.",
+      "sha256": "f788d0470143912ded93b2856f68ddb7c802edca20696dd03cbb0f98405e929d"
+    }
+  ],
+  "limits": [
+    "No deployment, native gate, hardware attestation, production extraction, real email or external service was exercised. The passing evidence is isolated local Python execution.",
+    "Mail credentials remain part of curl argv during actual dispatch; this review fixes and validates returned-error disclosure, not operating-system process-list confidentiality.",
+    "Merkle v2 authenticates no author by itself. Seal metadata, including sealed_at, is deliberately outside the committed body and is labeled as such. Legacy seals do not become v2.",
+    "Tamkarum trusts the caller-supplied external key and evidence/optional offline expectations. It verifies file-byte correspondence, signed body, Git commit identity and named roster lists, not campaign truth, whole-working-tree equivalence, complete agent configuration, key revocation/freshness or simultaneous multi-file snapshot atomicity.",
+    "No production signing key is created. The emitter remains unsigned; the verified success path uses temporary software keys supplied by the fixture.",
+    "MyPy, baseline before-patch regressions and global documentation gates are coordinator evidence, not independently rerun or certified by this review."
+  ]
+}

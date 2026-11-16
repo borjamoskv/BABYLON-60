@@ -1,0 +1,236 @@
+{
+  "date": "2026-10-30",
+  "reviewer": "/root/lot12_review_reports_formal",
+  "decision": "APPROVED_WITH_EXPLICIT_SCOPE",
+  "open_actionable_findings": [],
+  "source_sha256": {
+    "scripts/c5_sharur/sharur_100_conversation_reporters.py": "6212c3afe9a9691ca533969b7a088529a8d29393ae9116ae6eae73fefff988b7",
+    "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py": "ad281a15848a638ca92de4eba53d203094dd4241cb305b591ff3f56254a1439c",
+    "scripts/c5_sharur/sharur_100_swarm_execution.py": "4f80f3a51c21477e689a03f9fc78962dfe9a1a2f43ff01c307718e6b4cb5bfcc",
+    "scripts/c5_destiladora/proof_emitter_lean4.py": "09c13761b760338fc9d747725c66f04f7a166acac92e5d2c950ad3ed047167fb",
+    "scripts/babylon60/gen_oncology_primitives.py": "291fec22430e3841a4770943ca0cc584fb0ac6195ddaa3ae4c5cf9567ae8b1e1",
+    "scripts/c5_destiladora/test_destiladora_e2e.py": "3d43668716203b1d41ccce51dc5ed2cfa924175dd460aa62e241c689f49c856f"
+  },
+  "test_source_sha256": {
+    "tests/test_swarm100_lot12_s6_reports_regressions.py": "d21e91fe1a308555c0be8ca59da4a9ec8ba7b2e334ddd8bbbd7a160165efffd1",
+    "tests/test_swarm100_lot12_s6_formal_regressions.py": "5e43a2ab6ecc5be4eaaddfff72cd272bad9bc1cf952e6643d0fe6cb9a709b41c"
+  },
+  "independent_control_sha256": {
+    "docs/security/evidence/swarm100-lot12-20261030/review_reports_formal/independent_checks.py": "31b63536567accdfe3785e203e12211a984d1bec032fa466cb40d1fe2fcfd551"
+  },
+  "per_id": {
+    "SW100-C0328": {
+      "recommended_state": "FIXED",
+      "rationale": "Unsupported controls remain NOT_EXECUTED; census observations and locally executed thresholds have explicit supplied-corpus scope. Global certification/exergy fabricated constants removed.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_sharur/sharur_100_conversation_reporters.py",
+          "start_line": 67,
+          "end_line": 123,
+          "observation": "Unsupported controls remain NOT_EXECUTED; census observations and locally executed thresholds have explicit supplied-corpus scope. Global certification/exergy fabricated constants removed."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_conversation_reporters.py",
+          "start_line": 129,
+          "end_line": 178,
+          "observation": "Unsupported controls remain NOT_EXECUTED; census observations and locally executed thresholds have explicit supplied-corpus scope. Global certification/exergy fabricated constants removed."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_conversation_reporters.py",
+          "start_line": 184,
+          "end_line": 213,
+          "observation": "Unsupported controls remain NOT_EXECUTED; census observations and locally executed thresholds have explicit supplied-corpus scope. Global certification/exergy fabricated constants removed."
+        }
+      ],
+      "runtime_executed": true
+    },
+    "SW100-C0343": {
+      "recommended_state": "FIXED",
+      "rationale": "PASS is confined to actually executed file/content predicates; unsupported controls remain NOT_EXECUTED and character entropy requires supplied text.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py",
+          "start_line": 61,
+          "end_line": 72,
+          "observation": "PASS is confined to actually executed file/content predicates; unsupported controls remain NOT_EXECUTED and character entropy requires supplied text."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py",
+          "start_line": 75,
+          "end_line": 99,
+          "observation": "PASS is confined to actually executed file/content predicates; unsupported controls remain NOT_EXECUTED and character entropy requires supplied text."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py",
+          "start_line": 102,
+          "end_line": 115,
+          "observation": "PASS is confined to actually executed file/content predicates; unsupported controls remain NOT_EXECUTED and character entropy requires supplied text."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py",
+          "start_line": 118,
+          "end_line": 169,
+          "observation": "PASS is confined to actually executed file/content predicates; unsupported controls remain NOT_EXECUTED and character entropy requires supplied text."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py",
+          "start_line": 179,
+          "end_line": 220,
+          "observation": "PASS is confined to actually executed file/content predicates; unsupported controls remain NOT_EXECUTED and character entropy requires supplied text."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py",
+          "start_line": 223,
+          "end_line": 277,
+          "observation": "PASS is confined to actually executed file/content predicates; unsupported controls remain NOT_EXECUTED and character entropy requires supplied text."
+        }
+      ],
+      "runtime_executed": true
+    },
+    "SW100-C0354": {
+      "recommended_state": "FIXED",
+      "rationale": "Every worker and aggregate identify simulation; no target check, hardware measurement or critical fix receives PASS/attestation.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_sharur/sharur_100_swarm_execution.py",
+          "start_line": 149,
+          "end_line": 200,
+          "observation": "Every worker and aggregate identify simulation; no target check, hardware measurement or critical fix receives PASS/attestation."
+        }
+      ],
+      "runtime_executed": true
+    },
+    "SW100-C0378": {
+      "recommended_state": "MITIGATED",
+      "rationale": "Unsupported precondition-to-implementation correspondence cannot promote PROVED; legacy eligibility is withdrawn transactionally. Actual original Rust consumer selects zero rules after mitigation.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_destiladora/proof_emitter_lean4.py",
+          "start_line": 31,
+          "end_line": 78,
+          "observation": "Unsupported precondition-to-implementation correspondence cannot promote PROVED; legacy eligibility is withdrawn transactionally. Actual original Rust consumer selects zero rules after mitigation."
+        }
+      ],
+      "runtime_executed": true
+    },
+    "SW100-C0360": {
+      "recommended_state": "FIXED",
+      "rationale": "Removed universal contradictory axiom. Generated300-entry catalog compiles with Lean4.35; bound theorem requires its explicit length premise and cannot justify a301-entry contradiction.",
+      "source_checks": [
+        {
+          "path": "scripts/babylon60/gen_oncology_primitives.py",
+          "start_line": 79,
+          "end_line": 169,
+          "observation": "Removed universal contradictory axiom. Generated300-entry catalog compiles with Lean4.35; bound theorem requires its explicit length premise and cannot justify a301-entry contradiction."
+        }
+      ],
+      "runtime_executed": true
+    },
+    "SW100-C0385": {
+      "recommended_state": "FIXED",
+      "rationale": "Import has no pipeline or database effect; actual demonstration starts in a child with private temporary HOME/DB before imports and exits non-success while correspondence unavailable.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_destiladora/test_destiladora_e2e.py",
+          "start_line": 28,
+          "end_line": 40,
+          "observation": "Import has no pipeline or database effect; actual demonstration starts in a child with private temporary HOME/DB before imports and exits non-success while correspondence unavailable."
+        },
+        {
+          "path": "scripts/c5_destiladora/test_destiladora_e2e.py",
+          "start_line": 43,
+          "end_line": 91,
+          "observation": "Import has no pipeline or database effect; actual demonstration starts in a child with private temporary HOME/DB before imports and exits non-success while correspondence unavailable."
+        },
+        {
+          "path": "scripts/c5_destiladora/test_destiladora_e2e.py",
+          "start_line": 94,
+          "end_line": 114,
+          "observation": "Import has no pipeline or database effect; actual demonstration starts in a child with private temporary HOME/DB before imports and exits non-success while correspondence unavailable."
+        }
+      ],
+      "runtime_executed": true
+    }
+  },
+  "checks": {
+    "regressions_and_independent_controls": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "python",
+        "docs/security/evidence/swarm100-lot12-20261030/run_confined_tests.py",
+        "tests/test_swarm100_lot12_s6_reports_regressions.py",
+        "tests/test_swarm100_lot12_s6_formal_regressions.py",
+        "docs/security/evidence/swarm100-lot12-20261030/review_reports_formal/independent_checks.py",
+        "-q",
+        "-o",
+        "addopts=--tb=short"
+      ],
+      "env": {
+        "B60_REVIEW_LEAN_BINARY": "/Users/borjafernandezangulo/.elan/toolchains/leanprover--lean4---v4.35.0/bin/lean",
+        "BABYLON60_TEST_LEAN_BIN": "/Users/borjafernandezangulo/.elan/toolchains/leanprover--lean4---v4.35.0/bin/lean"
+      },
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/review_reports_formal/combined-final-tests.log",
+      "log_sha256": "c541f3ea6690fdb83de4be0c37c99f7ede32c42901b3400a1fe272d7a9fce46b",
+      "source_sha256_before_and_after": {
+        "scripts/c5_sharur/sharur_100_conversation_reporters.py": "6212c3afe9a9691ca533969b7a088529a8d29393ae9116ae6eae73fefff988b7",
+        "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py": "ad281a15848a638ca92de4eba53d203094dd4241cb305b591ff3f56254a1439c",
+        "scripts/c5_sharur/sharur_100_swarm_execution.py": "4f80f3a51c21477e689a03f9fc78962dfe9a1a2f43ff01c307718e6b4cb5bfcc",
+        "scripts/c5_destiladora/proof_emitter_lean4.py": "09c13761b760338fc9d747725c66f04f7a166acac92e5d2c950ad3ed047167fb",
+        "scripts/babylon60/gen_oncology_primitives.py": "291fec22430e3841a4770943ca0cc584fb0ac6195ddaa3ae4c5cf9567ae8b1e1",
+        "scripts/c5_destiladora/test_destiladora_e2e.py": "3d43668716203b1d41ccce51dc5ed2cfa924175dd460aa62e241c689f49c856f",
+        "tests/test_swarm100_lot12_s6_reports_regressions.py": "d21e91fe1a308555c0be8ca59da4a9ec8ba7b2e334ddd8bbbd7a160165efffd1",
+        "tests/test_swarm100_lot12_s6_formal_regressions.py": "5e43a2ab6ecc5be4eaaddfff72cd272bad9bc1cf952e6643d0fe6cb9a709b41c"
+      }
+    },
+    "own_ruff": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "ruff",
+        "check",
+        "docs/security/evidence/swarm100-lot12-20261030/review_reports_formal/independent_checks.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/review_reports_formal/ruff.log",
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    }
+  },
+  "executed_result": "76 passed, 0 skipped (45 reporter regressions +23 formal regressions +8 independent controls)",
+  "independent_controls": [
+    "Three rounds of all40cohort4/5reporters: supplied counts and actual threshold boundaries, unknownverdict aggregation, no fabricated certification.",
+    "Cargo/lock/transcript/catalog fixtures change the stated predicates; Unicode entropy measured from supplied text only.",
+    "Three complete100worker simulations keep zeroPASS/attestations and serialize the observed aggregate.",
+    "Actual SQLite withdraws oldPROVED/COMPILED eligibility; unmodified Rust codegen consumer emits zero certified rules.",
+    "Installed Lean4.35 binary compiles positive300catalog then rejects301counterexample; normalized oldaxiom model independently compiles False (explicitly not unmodified oldgenerator).",
+    "Actual copied-tree demoCLI leaves fixture operatorDB/HOME untouched, uses distinct private paths and removes its temporaries; moduleimport starts no child and changes noDB/CWD/sys.path."
+  ],
+  "review_findings_resolved": [
+    {
+      "finding": "A negative Lean test could pass from missing elan toolchain after HOME isolation.",
+      "resolution": "Author test now requires positive base compilation before counterexample and supports explicit installed Lean binary. Final run pins both author and reviewer tool paths.",
+      "scope": "Validation fixture, not a new production defect."
+    }
+  ],
+  "evidence_paths": [
+    "docs/security/evidence/swarm100-lot12-20261030/review_reports_formal/combined-final-tests.log",
+    "docs/security/evidence/swarm100-lot12-20261030/review_reports_formal/combined-final-command.json",
+    "docs/security/evidence/swarm100-lot12-20261030/review_reports_formal/baseline-normalized-lean.log",
+    "docs/security/evidence/swarm100-lot12-20261030/review_reports_formal/baseline-normalized-lean-command.json",
+    "docs/security/evidence/swarm100-lot12-20261030/review_reports_formal/independent_checks.py",
+    "docs/security/evidence/swarm100-lot12-20261030/review_reports_formal/ruff.log"
+  ],
+  "limits": [
+    "C0378 is MITIGATED: no translator/correspondence checker is implemented; verified code generation unavailable. Already generated or deployed Rust artifacts are not retired by database status changes.",
+    "C0360 proves only catalog cardinality and conditional list bound; no biological/therapeutic truth or Rust correspondence is certified. Old generator had syntax/recursion issues; old False proof explicitly used recorded normalizations.",
+    "Corpus observations are supplied data, not authenticated original events. Report PASS describes the narrow stated predicate, not system security/hardware/formal correctness.",
+    "Swarm remains explicit simulation. Reporter elapsed time and character entropy are not physical energy/entropy/performance certification.",
+    "Only disposable HOME/DB/files and copied CLI trees, synthetic samples, installed Lean binary and confined subprocesses were used. No operator database/identity, hardware, network service, deployment or Git mutation was executed.",
+    "Historical first-review logs preserve the environment failure; no failed compiler invocation is counted as a logical rejection."
+  ]
+}

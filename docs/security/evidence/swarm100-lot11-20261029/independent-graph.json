@@ -1,0 +1,35 @@
+{
+  "project": "babylon-60",
+  "signal": "best_effort",
+  "indexed_at": "2026-10-29T22:42:57Z",
+  "metadata": {
+    "generation": "2026-10-29T22:42:57Z",
+    "index_mode": "full",
+    "recorded_at": "2026-10-29T22:42:58Z",
+    "recording_status": "complete",
+    "ignored_files_stored": 362,
+    "ignored_files_total": 362,
+    "hash_records_complete": true,
+    "coverage_version": 9,
+    "generation_matches": true
+  },
+  "paths": [
+    {
+      "requested_path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+      "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+      "status": "no_recorded_issue",
+      "freshness": "metadata_match",
+      "recommended_action": "use_graph_with_best_effort_caveat",
+      "coverage": []
+    }
+  ],
+  "path_total": 1,
+  "path_returned": 1,
+  "path_has_more": false,
+  "scopes": [],
+  "scope_total": 0,
+  "scope_returned": 0,
+  "scope_truncated": false,
+  "has_more": false,
+  "caveat": "Best-effort signal only. No recorded issue does not prove graph or source completeness; read flagged source and qualify claims when metadata is changed or unavailable."
+}

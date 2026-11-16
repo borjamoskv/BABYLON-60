@@ -1,0 +1,7 @@
+{
+  "source_sha256": "d11e1d66dd63df2ca782df4b79ed9b6c4b48aa199d2f82d917f93259ed1cfb73",
+  "exception": "FileExistsError",
+  "preexisting_temporary_preserved": false,
+  "previous_receipt_preserved": true,
+  "scope": "Temporary files and extracted storage function only; no ATTESTED object, gate, Git, network or production mutation."
+}

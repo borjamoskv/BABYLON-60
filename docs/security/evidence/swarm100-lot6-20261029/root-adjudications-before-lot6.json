@@ -1,0 +1,1535 @@
+[
+  {
+    "candidate_id": "SW100-C0303",
+    "decision": "ALREADY_FIXED",
+    "remediation_state": "FIXED",
+    "severity": "P1",
+    "path": "01_KISH_ENGINE/babylon60/autodidact/epistemology.py",
+    "current_source_sha256": "09b6d8b9431e31ae3b1ac99c6a08e67be900d69f5046fb9d2dcd9f97d505de72",
+    "rationale": "V07 now rejects unrelated conclusions and additional obligations instead of manufacturing FormalProof or CANONICAL. Identity preserves evidence, confidence, status and ancestry; stale or falsified premises and incompatible registry entries are rejected. Fifteen regression cases and independent checks validate these paths. This closes the arbitrary-derivation defect, not the trustworthiness of externally supplied justification labels or a general proof verifier.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/autodidact/epistemology.py",
+        "start_line": 151,
+        "end_line": 187,
+        "observation": "All premises are checked; only modality/content identity with no added obligations is admitted and ancestry is retained."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/autodidact/engine.py",
+        "start_line": 186,
+        "end_line": 220,
+        "observation": "Cache reuse requires matching content hash, evidence, status and ancestry; the dependency DAG is registered without self edges."
+      }
+    ],
+    "guards": [],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-round3-20261028/v07-before.log",
+      "docs/security/evidence/swarm100-round3-20261028/v07-independent-before.log",
+      "docs/security/evidence/swarm100-round3-20261028/v07-independent-after.log",
+      "docs/security/evidence/swarm100-round3-20261028/independent-review-v07-followup.json"
+    ]
+  },
+  {
+    "candidate_id": "SW100-C0242",
+    "decision": "DUPLICATE",
+    "remediation_state": "FIXED",
+    "severity": "P1",
+    "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-browser-forensics-and-extension-triage/scripts/browser_forensics.py",
+    "current_source_sha256": "739394836cb01e679667570eb96e94ed625e73390f9d66ebab32c1101b9f5324",
+    "rationale": "Same traversal flaw as C0539 in a separate bundled copy. Reviewer14 preserved the vulnerable pre-remediation hash. Root propagated the hardened primary implementation to this copy and parametrized all eight purge regression cases across both paths; tests use temporary profiles. Both current files are byte-identical, so the duplicate inherits the verified fix without erasing this affected path.",
+    "source_checks": [
+      {
+        "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-browser-forensics-and-extension-triage/scripts/browser_forensics.py",
+        "start_line": 212,
+        "end_line": 258,
+        "observation": "Strict Chromium ID, fd-relative directories, O_NOFOLLOW, regular preferences and symlink-resistant deletion."
+      },
+      {
+        "path": "tools/skill_library/global/c5-browser-forensics-and-extension-triage/scripts/browser_forensics.py",
+        "start_line": 212,
+        "end_line": 258,
+        "observation": "Matching hardened primary copy; both implementations are exercised by the shared parametrized fixture."
+      }
+    ],
+    "guards": [],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-round3-20261028/purge-copy-remediation.json",
+      "docs/security/evidence/swarm100-round3-20261028/root-tests.log"
+    ],
+    "canonical_id": "SW100-C0539"
+  },
+  {
+    "candidate_id": "SW100-C0162",
+    "decision": "REPRODUCED",
+    "severity": "P2",
+    "remediation_state": "OPEN",
+    "path": "tools/skill_library/global/categorical-hallucination-audit/scripts/audit_kl_d.py",
+    "current_source_sha256": "34f7e6532eed0d70c2cd0d5795c5b269b02cdc44b2e0e8a69fdf89eb9728a0dc",
+    "rationale": "The primitive docstring still does not explicitly define whether pi0 is at time zero or at target_t, so the stronger statement that every positive-target single call is wrong is not established. However, the canonical local MODULE.md:42-45 defines all retrodictions as conditionals of one joint process rho on the shared history, and audit_system/CLI accept multiple targets while passing the same unrestricted prior vector to every target. An independent exact-source fixture with T=[[0.8,0.2],[0.1,0.9]], pi0=[1,0], observation S2=B and targets [0,1] returns q0=q1=[1,0]. For any one Markov joint process with this T and observation, the function's own q0 fixes q1 through the Bayesian bridge identity: q1(j)=sum_i q0(i)*T(i,j)*T(j,B)/(T^2)(i,B). Exact rational evaluation requires q1=[8/17,9/17], contradicting the returned [1,0]. This confirms a multi-target temporal-prior coherence defect without assuming pi0's time origin. A stationary-prior control [1/3,2/3] satisfies the identity, showing the scope rather than claiming universal failure. Single-target callers supplying the target marginal can be correct; the public batch must either define a common initial time and propagate its prior, accept target-indexed marginals, or explicitly restrict/check stationary priors. No product or protected runtime was executed, and no remediation was performed.",
+    "source_checks": [
+      {
+        "path": "tools/skill_library/global/categorical-hallucination-audit/scripts/audit_kl_d.py",
+        "start_line": 18,
+        "end_line": 35,
+        "observation": "The primitive names a prior vector without a time origin. It normalizes T and pi0 but does not require stationarity or accept a target-indexed prior."
+      },
+      {
+        "path": "tools/skill_library/global/categorical-hallucination-audit/scripts/audit_kl_d.py",
+        "start_line": 45,
+        "end_line": 51,
+        "observation": "Every backward target multiplies the same pi0 directly by target-to-observation likelihood, treating it as that target's marginal."
+      },
+      {
+        "path": "tools/skill_library/global/categorical-hallucination-audit/scripts/audit_kl_d.py",
+        "start_line": 78,
+        "end_line": 101,
+        "observation": "audit_system calls the primitive for multiple target timesteps with the unchanged pi0 and converts each distribution into reported audit metrics."
+      },
+      {
+        "path": "tools/skill_library/global/categorical-hallucination-audit/scripts/audit_kl_d.py",
+        "start_line": 105,
+        "end_line": 112,
+        "observation": "The public JSON CLI exposes one pi0 and a list of targets, with no per-target prior or stationary-input restriction."
+      },
+      {
+        "path": "tools/skill_library/global/categorical-hallucination-audit/SKILL.md",
+        "start_line": 18,
+        "end_line": 31,
+        "observation": "The local alias preserves and links the canonical module contract; resources remain beside the alias and in the hub."
+      },
+      {
+        "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/categorical-hallucination-audit/MODULE.md",
+        "start_line": 42,
+        "end_line": 48,
+        "observation": "The canonical contract defines one joint process rho on the history and prediction/retrodiction as its Bayesian conditional marginals. This requires coherence across targets rather than unrelated target-specific processes."
+      },
+      {
+        "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/categorical-hallucination-audit/scripts/audit_kl_d.py",
+        "start_line": 78,
+        "end_line": 86,
+        "observation": "The canonical hub copy has the same SHA-256 as the assigned alias source and the same shared-pi0 batch consumer."
+      }
+    ],
+    "guards": [
+      "Row and prior normalization enforce probability totals but do not establish temporal marginal consistency.",
+      "All transition likelihoods in the fixture are positive, so the uniform fallback for zero-probability conditioning is not involved.",
+      "Observed-target, forward and internal-gap branches are not implicated by this counterexample.",
+      "A single call can be correct when pi0 is already the target marginal; a shared stationary prior also passes the independent bridge control.",
+      "The exact intended origin of pi0 remains undocumented. The confirmed finding is bounded to the observable incoherence of the multi-target consumer under the documented one-process contract, not a blanket single-call failure or a certification of Kan-extension theory."
+    ],
+    "runtime_executed": true,
+    "runtime_scope": "Only AST-selected mathematical source functions on synthetic inputs in the existing Python environment; no product/native service, protected gate, network, database or operator data.",
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-round3-20261028/03-C0162-fixture.py",
+      "docs/security/evidence/swarm100-round3-20261028/03-C0162-fixture-results.json",
+      "docs/security/evidence/swarm100-round3-20261028/03-C0162-source-evidence.json"
+    ]
+  },
+  {
+    "candidate_id": "SW100-C0278",
+    "decision": "ALREADY_FIXED",
+    "severity": "P2",
+    "remediation_state": "FIXED",
+    "path": "scripts/c5_sharur/agent_beeper.py",
+    "current_source_sha256": "50741a443c61b3364dc877d3f567ad1daac5c9b104672c2e692ab29fb972bfb0",
+    "rationale": "Unicast now signals the same per-tenant event awaited by a suspended receiver; queued private payload is consumed once. Global broadcast wakes all registered tenant events, and late receivers read the retained global payload. Cancellation and deregistration/re-registration are covered.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_sharur/agent_beeper.py",
+        "start_line": 59,
+        "end_line": 81,
+        "observation": "Waits on the receiver event, consumes unicast once, checks registration identity and never holds lock across await."
+      },
+      {
+        "path": "scripts/c5_sharur/agent_beeper.py",
+        "start_line": 83,
+        "end_line": 88,
+        "observation": "Signals the same receiver event used by wait_for_beep."
+      },
+      {
+        "path": "scripts/c5_sharur/agent_beeper.py",
+        "start_line": 50,
+        "end_line": 57,
+        "observation": "Releases pending wait with a registration error instead of leaving it suspended."
+      }
+    ],
+    "guards": [
+      "Single event-loop thread is required for asyncio.Event delivery.",
+      "Broadcast is O(N + W): N registered tenants and W current waits. No performance measurement is claimed.",
+      "Unicast remains a last-write-wins single pending slot, not a message queue."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-pager-20261028/before.log",
+      "docs/security/evidence/swarm100-pager-20261028/after.log",
+      "docs/security/evidence/swarm100-pager-20261028/independent-review.json"
+    ],
+    "resolution_type": "CODE_AND_REGRESSIONS_VERIFIED",
+    "supersedes_snapshot": "docs/security/evidence/swarm100-round3-20261028/root-adjudications-before-pager-remediation.json"
+  },
+  {
+    "candidate_id": "SW100-C0279",
+    "decision": "ALREADY_FIXED",
+    "severity": "P2",
+    "remediation_state": "FIXED",
+    "path": "scripts/c5_sharur/agent_beeper.py",
+    "current_source_sha256": "50741a443c61b3364dc877d3f567ad1daac5c9b104672c2e692ab29fb972bfb0",
+    "rationale": "The prior documentation-only REJECTED decision was insufficient and is superseded. An internal _emitted flag is checked and set under the pager RLock; every second broadcast raises RuntimeError before modifying any payload or event. A fresh pager is required for another global round. The first broadcast remains available to late waiters. This is an executable single-emission invariant, not a docstring-only closure.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_sharur/agent_beeper.py",
+        "start_line": 35,
+        "end_line": 41,
+        "observation": "Internal emitted state starts false and an RLock protects state transitions."
+      },
+      {
+        "path": "scripts/c5_sharur/agent_beeper.py",
+        "start_line": 90,
+        "end_line": 104,
+        "observation": "Rejects second broadcast under lock before mutating payload; first broadcast signals all recipient events."
+      }
+    ],
+    "guards": [
+      "Single event-loop thread is required for asyncio.Event delivery.",
+      "Broadcast is O(N + W): N registered tenants and W current waits. No performance measurement is claimed.",
+      "Unicast remains a last-write-wins single pending slot, not a message queue."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-pager-20261028/before.log",
+      "docs/security/evidence/swarm100-pager-20261028/after.log",
+      "docs/security/evidence/swarm100-pager-20261028/independent-review.json"
+    ],
+    "resolution_type": "CODE_AND_REGRESSIONS_VERIFIED",
+    "supersedes_snapshot": "docs/security/evidence/swarm100-round3-20261028/root-adjudications-before-pager-remediation.json"
+  },
+  {
+    "candidate_id": "SW100-C0373",
+    "decision": "ALREADY_FIXED",
+    "severity": "P1",
+    "remediation_state": "FIXED",
+    "path": "01_KISH_ENGINE/babylon60/transducers/c5_mail_transducer.py",
+    "current_source_sha256": "cc8a44e972c6064ce2d2016d3f645316dd5163031d805afb35530dae9f6abbcb",
+    "rationale": "Errors return stable codes/static messages and numeric transport status, without command, stderr, exception or arbitrary provider error body. Successful IDs redact the credential. Synthetic failure and normal-result regressions pass.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/transducers/c5_mail_transducer.py",
+        "start_line": 33,
+        "end_line": 96,
+        "observation": "Allowlisted failure data; command-bearing exception details discarded."
+      }
+    ],
+    "guards": [
+      "Trust and coverage are limited to the explicit module contract; no hardware or claim-truth certification."
+    ],
+    "runtime_executed": true,
+    "runtime_scope": "Real Python modules, synthetic credentials/keys and temporary files; no network or operator data.",
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot1-20261028/before-tests.log",
+      "docs/security/evidence/swarm100-lot1-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot1-20261028/independent-review.json",
+      "docs/security/evidence/swarm100-lot1-20261028/cli-smoke.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/03.json",
+    "resolution_type": "CODE_AND_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0420",
+    "decision": "ALREADY_FIXED",
+    "severity": "P1",
+    "remediation_state": "FIXED",
+    "path": "tools/tamkarum_attestation_engine.py",
+    "current_source_sha256": "00b7a4344558ccc8fe02042e14f669251c5a33768144235a36ebff173df19e9d",
+    "rationale": "Signed v2 verifies an external raw Ed25519 trust key over the complete header/payload and recomputes named current artifacts, manifest root, commit and canonical topology. Missing/changed state rejects. Authorized signed fixtures pass API and actual CLI, so this is not an always-reject mitigation. Legacy unsigned JSON does not authenticate. No hardware/SCITT registration/claim truth is certified.",
+    "source_checks": [
+      {
+        "path": "tools/tamkarum_attestation_engine.py",
+        "start_line": 124,
+        "end_line": 170,
+        "observation": "External trust and complete signature precede current-state comparison."
+      },
+      {
+        "path": "tools/tamkarum_attestation_engine.py",
+        "start_line": 93,
+        "end_line": 101,
+        "observation": "Named explicit files read once; bytes hashed and declared manifest root compared."
+      },
+      {
+        "path": "tools/tamkarum_attestation_engine.py",
+        "start_line": 108,
+        "end_line": 121,
+        "observation": "Explicitly UNSIGNED producer without fabricated audits."
+      }
+    ],
+    "guards": [
+      "Trust and coverage are limited to the explicit module contract; no hardware or claim-truth certification."
+    ],
+    "runtime_executed": true,
+    "runtime_scope": "Real Python modules, synthetic credentials/keys and temporary files; no network or operator data.",
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot1-20261028/before-tests.log",
+      "docs/security/evidence/swarm100-lot1-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot1-20261028/independent-review.json",
+      "docs/security/evidence/swarm100-lot1-20261028/cli-smoke.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/03.json",
+    "resolution_type": "CODE_AND_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0421",
+    "decision": "ALREADY_FIXED",
+    "severity": "P2",
+    "remediation_state": "FIXED",
+    "path": "tools/tamkarum_attestation_engine.py",
+    "current_source_sha256": "00b7a4344558ccc8fe02042e14f669251c5a33768144235a36ebff173df19e9d",
+    "rationale": "Rejected verification returns 1 through SystemExit(main()). Real CLI checks return 0 for the authorized coherent fixture, 1 for changed evidence/missing trust, and 2 for absent/conflicting operation options before emission.",
+    "source_checks": [
+      {
+        "path": "tools/tamkarum_attestation_engine.py",
+        "start_line": 173,
+        "end_line": 205,
+        "observation": "Verification result controls process status; no implicit emission or ignored verify-only emit flags."
+      }
+    ],
+    "guards": [
+      "Trust and coverage are limited to the explicit module contract; no hardware or claim-truth certification."
+    ],
+    "runtime_executed": true,
+    "runtime_scope": "Real Python modules, synthetic credentials/keys and temporary files; no network or operator data.",
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot1-20261028/before-tests.log",
+      "docs/security/evidence/swarm100-lot1-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot1-20261028/independent-review.json",
+      "docs/security/evidence/swarm100-lot1-20261028/cli-smoke.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/03.json",
+    "resolution_type": "CODE_AND_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0501",
+    "decision": "ALREADY_FIXED",
+    "severity": "P1",
+    "remediation_state": "FIXED",
+    "path": "tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "current_source_sha256": "b898d7fabe6b598f204eca17116b2cba25cf8c05e49612451568f4c5273ca44a",
+    "rationale": "SOCINT v2 binds each name and recursively typed JSON value with leaf/node/empty domains, rejects unsupported/nonfinite values and seals after final analysis fields. Both identical copies pass swap/rename/type/nested and producer tests. This verifies body integrity, not authorship; timestamp metadata is outside the commitment.",
+    "source_checks": [
+      {
+        "path": "tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+        "start_line": 721,
+        "end_line": 738,
+        "observation": "Name/type/value commitments in deterministic key order."
+      },
+      {
+        "path": "tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+        "start_line": 741,
+        "end_line": 750,
+        "observation": "Version and exact final body coverage."
+      },
+      {
+        "path": "tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py",
+        "start_line": 753,
+        "end_line": 765,
+        "observation": "Recomputes every body field; legacy/extra/missing coverage rejects."
+      }
+    ],
+    "guards": [
+      "Trust and coverage are limited to the explicit module contract; no hardware or claim-truth certification."
+    ],
+    "runtime_executed": true,
+    "runtime_scope": "Real Python modules, synthetic credentials/keys and temporary files; no network or operator data.",
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot1-20261028/before-tests.log",
+      "docs/security/evidence/swarm100-lot1-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot1-20261028/independent-review.json",
+      "docs/security/evidence/swarm100-lot1-20261028/cli-smoke.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/03.json",
+    "resolution_type": "CODE_AND_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0264",
+    "decision": "DUPLICATE",
+    "severity": "P2",
+    "remediation_state": "FIXED",
+    "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "current_source_sha256": "b898d7fabe6b598f204eca17116b2cba25cf8c05e49612451568f4c5273ca44a",
+    "rationale": "Same omission as C0501 in a distinct identical bundled copy. Both implementations now use v2 and pass the shared parameterized regressions; preserve this affected path and inherit FIXED.",
+    "source_checks": [
+      {
+        "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+        "start_line": 721,
+        "end_line": 738,
+        "observation": "Bundled v2 name/type/value commitment."
+      }
+    ],
+    "guards": [
+      "Same v2 implementation in both paths; scope is body integrity, not author authentication."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot1-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot1-20261028/independent-review.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/01.json",
+    "canonical_id": "SW100-C0501",
+    "runtime_scope": "Both full Python source modules exercised with synthetic evidence; no extraction network or operator data."
+  },
+  {
+    "candidate_id": "SW100-C0265",
+    "decision": "CONFIRMED_STATIC",
+    "severity": "P2",
+    "remediation_state": "OPEN",
+    "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "current_source_sha256": "b898d7fabe6b598f204eca17116b2cba25cf8c05e49612451568f4c5273ca44a",
+    "rationale": "Mastodon results carry a local status_id separately from instance. save_to_vault selects id before URL, the sole primary key is record_id, and INSERT OR REPLACE therefore replaces an existing capture when a second instance has the same local ID. The optional save path calls this function without adding a namespace. Static storage defect; no vault or live instance was opened. Re-reviewed after Lot1: this separate behavior is unchanged and remains OPEN; sharing a modified source file does not close it.",
+    "source_checks": [
+      {
+        "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+        "start_line": 2134,
+        "end_line": 2138,
+        "observation": "Local ID remains the vault key."
+      },
+      {
+        "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+        "start_line": 2152,
+        "end_line": 2156,
+        "observation": "ID collisions still replace captures."
+      }
+    ],
+    "guards": [
+      "Bound SQL parameters prevent SQL injection but do not prevent logical key collisions.",
+      "Different instance URLs are stored as data, not included in the unique key.",
+      "Requires --save-vault and colliding IDs."
+    ],
+    "runtime_executed": false,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot1-20261028/remaining-socint-source-checks.json",
+      "docs/security/evidence/swarm100-lot1-20261028/independent-review.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/01.json"
+  },
+  {
+    "candidate_id": "SW100-C0268",
+    "decision": "REPRODUCED",
+    "severity": "P2",
+    "remediation_state": "OPEN",
+    "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "current_source_sha256": "b898d7fabe6b598f204eca17116b2cba25cf8c05e49612451568f4c5273ca44a",
+    "rationale": "Batch input yields multiple reports; JSON mode serializes each object separately, while the final non-CSV branch joins them with Markdown dashes. Executing the actual extracted join expression over two synthetic JSON objects produced JSONDecodeError: Extra data. This establishes invalid batch JSON, not network extraction behavior. Re-reviewed after Lot1: this separate behavior is unchanged and remains OPEN; sharing a modified source file does not close it.",
+    "source_checks": [
+      {
+        "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+        "start_line": 3036,
+        "end_line": 3040,
+        "observation": "Batch JSON retains the unrelated Markdown-separator defect."
+      }
+    ],
+    "guards": [
+      "Missing batch files and failed extractions are handled, but there is no multi-item JSON container.",
+      "A one-result batch can still be valid JSON."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-round3-20261028/01-reproductions.py",
+      "docs/security/evidence/swarm100-round3-20261028/01-reproductions.json",
+      "docs/security/evidence/swarm100-lot1-20261028/remaining-socint-source-checks.json",
+      "docs/security/evidence/swarm100-lot1-20261028/independent-review.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/01.json"
+  },
+  {
+    "candidate_id": "SW100-C0269",
+    "decision": "CONFIRMED_STATIC",
+    "severity": "P2",
+    "remediation_state": "OPEN",
+    "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "current_source_sha256": "b898d7fabe6b598f204eca17116b2cba25cf8c05e49612451568f4c5273ca44a",
+    "rationale": "The adapter sends the watch URL to the text-reading endpoint and assigns the first 10000 response characters to transcript/content/text without a caption or transcription parser. Markdown labels that field Transcripción de Audio. That is a source-provenance/presentation defect: a watch-page response is not established to be spoken audio. Actual remote response content was not fetched. Re-reviewed after Lot1: this separate behavior is unchanged and remains OPEN; sharing a modified source file does not close it.",
+    "source_checks": [
+      {
+        "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+        "start_line": 1630,
+        "end_line": 1634,
+        "observation": "Watch-page body remains transcript data."
+      },
+      {
+        "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+        "start_line": 2345,
+        "end_line": 2349,
+        "observation": "The unrelated audio-transcript label remains."
+      }
+    ],
+    "guards": [
+      "URL video-ID matching and HTTP timeouts bound request shape/duration, not transcript provenance.",
+      "Failures produce an empty field; successful body content is accepted without transcription metadata."
+    ],
+    "runtime_executed": false,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot1-20261028/remaining-socint-source-checks.json",
+      "docs/security/evidence/swarm100-lot1-20261028/independent-review.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/01.json"
+  },
+  {
+    "candidate_id": "SW100-C0270",
+    "decision": "REPRODUCED",
+    "severity": "P2",
+    "remediation_state": "OPEN",
+    "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "current_source_sha256": "b898d7fabe6b598f204eca17116b2cba25cf8c05e49612451568f4c5273ca44a",
+    "rationale": "Regex presence alone appends sentences to facts and publishes their count as hechos_verificados; the Markdown consumer renders Hechos Verificados. Executing the extracted classifier on \"RFC 9999 proves that two plus two equals five\" returned one verified fact. No truth or source validation occurs in this pure routine. Re-reviewed after Lot1: this separate behavior is unchanged and remains OPEN; sharing a modified source file does not close it.",
+    "source_checks": [
+      {
+        "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+        "start_line": 174,
+        "end_line": 178,
+        "observation": "Regex hits remain a verified-fact count."
+      },
+      {
+        "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+        "start_line": 2506,
+        "end_line": 2510,
+        "observation": "Consumer keeps the unrelated verified-fact label."
+      }
+    ],
+    "guards": [
+      "Sentences shorter than 16 characters are ignored, which does not establish truth for longer sentences.",
+      "Other categories are lower-priority elif branches after keyword-based facts."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-round3-20261028/01-reproductions.py",
+      "docs/security/evidence/swarm100-round3-20261028/01-reproductions.json",
+      "docs/security/evidence/swarm100-lot1-20261028/remaining-socint-source-checks.json",
+      "docs/security/evidence/swarm100-lot1-20261028/independent-review.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/01.json"
+  },
+  {
+    "candidate_id": "SW100-C0018",
+    "decision": "ALREADY_FIXED",
+    "severity": "P1",
+    "remediation_state": "FIXED",
+    "path": "01_KISH_ENGINE/babylon60/commands/itera.py",
+    "current_source_sha256": "1d7a6b220a8dee0902df04777f0d048ade7dc002b09879978edbcff078f78fe7",
+    "rationale": "Legacy find deletion of WAL/SHM and recursive cache removal are gone. Descriptor-relative cleanup removes only current-interpreter bytecode under cwd, preserves directories/SQLite and rejects symlink or replaced/uninspectable files. Temporary SQLite and cache regressions pass; legacy find was modeled strictly within the fixture, not invoked on the operator workspace.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/commands/itera.py",
+        "start_line": 12,
+        "end_line": 48,
+        "observation": "Legacy find deletion of WAL/SHM and recursive cache removal are gone. Descriptor-relative cleanup removes only current-interpreter bytecode under cwd, preserves directories/SQLite and rejects symlink or replaced/uninspectable files. Temporary SQLite and cache regressions pass; legacy find was modeled strictly within the fixture, not invoked on the operator workspace."
+      }
+    ],
+    "guards": [
+      "Temporary in-memory/filesystem fixtures only; no operator data or global purge executed.",
+      "Sizes are logical unlinked-file bytes, not measured physical space or energy."
+    ],
+    "runtime_executed": true,
+    "runtime_scope": "Real Python helpers and temporary SQLite; isolated legacy find interpreter for ITERA only.",
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot2-20261028/before-tests-confined.log",
+      "docs/security/evidence/swarm100-lot2-20261028/consolidation-before.json",
+      "docs/security/evidence/swarm100-lot2-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot2-20261028/independent-review.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/03.json",
+    "resolution_type": "CODE_AND_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0219",
+    "decision": "ALREADY_FIXED",
+    "severity": "P1",
+    "remediation_state": "FIXED",
+    "path": "scripts/repatriated/c5_sharur_100_anergy_purge.py",
+    "current_source_sha256": "7e8a21a0e3a80e7155911b4e88b00e2e72265b8267d248effd677b448530b8fa",
+    "rationale": "Cohort1 no longer scans WORKSPACE/CORTEX roots or deletes SQLite state. It selects cwd or an explicit workspace and removes only identified bytecode, using descriptor-relative O_NOFOLLOW operations and identity checks. Existing cohorts2-5/main are outside this correction and were not executed. Dry-run records zero actual removals.",
+    "source_checks": [
+      {
+        "path": "scripts/repatriated/c5_sharur_100_anergy_purge.py",
+        "start_line": 85,
+        "end_line": 130,
+        "observation": "Cohort1 no longer scans WORKSPACE/CORTEX roots or deletes SQLite state. It selects cwd or an explicit workspace and removes only identified bytecode, using descriptor-relative O_NOFOLLOW operations and identity checks. Existing cohorts2-5/main are outside this correction and were not executed. Dry-run records zero actual removals."
+      }
+    ],
+    "guards": [
+      "Temporary in-memory/filesystem fixtures only; no operator data or global purge executed.",
+      "Sizes are logical unlinked-file bytes, not measured physical space or energy."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot2-20261028/before-tests-confined.log",
+      "docs/security/evidence/swarm100-lot2-20261028/consolidation-before.json",
+      "docs/security/evidence/swarm100-lot2-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot2-20261028/independent-review.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/09.json",
+    "runtime_scope": "Real Python helpers and temporary SQLite; isolated legacy find interpreter for ITERA only.",
+    "resolution_type": "CODE_AND_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0387",
+    "decision": "ALREADY_FIXED",
+    "severity": "P1",
+    "remediation_state": "FIXED",
+    "path": "tools/skill_library/global/anergy-purge-protocol/scripts/anergy_purge.py",
+    "current_source_sha256": "21307153c17e3337fef4dbb91fc3053c02a8a2617a9cf644490ece5ce0c0614e",
+    "rationale": "Both purge copies preserve SQLite names/known headers and never classify or delete WAL/SHM as orphan caches. Files are processed individually under opened directory descriptors; no recursive directory removal. Live WAL, unusual locations, protected artifacts, symlinks and inspection failures pass controlled fixtures. This is not an atomic sandbox against hostile post-stat rename or arbitrary encrypted formats disguised as artifacts.",
+    "source_checks": [
+      {
+        "path": "tools/skill_library/global/anergy-purge-protocol/scripts/anergy_purge.py",
+        "start_line": 78,
+        "end_line": 152,
+        "observation": "Both purge copies preserve SQLite names/known headers and never classify or delete WAL/SHM as orphan caches. Files are processed individually under opened directory descriptors; no recursive directory removal. Live WAL, unusual locations, protected artifacts, symlinks and inspection failures pass controlled fixtures. This is not an atomic sandbox against hostile post-stat rename or arbitrary encrypted formats disguised as artifacts."
+      }
+    ],
+    "guards": [
+      "Temporary in-memory/filesystem fixtures only; no operator data or global purge executed.",
+      "Sizes are logical unlinked-file bytes, not measured physical space or energy."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot2-20261028/before-tests-confined.log",
+      "docs/security/evidence/swarm100-lot2-20261028/consolidation-before.json",
+      "docs/security/evidence/swarm100-lot2-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot2-20261028/independent-review.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/15.json",
+    "runtime_scope": "Real Python helpers and temporary SQLite; isolated legacy find interpreter for ITERA only.",
+    "resolution_type": "CODE_AND_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0563",
+    "decision": "ALREADY_FIXED",
+    "severity": "P1",
+    "remediation_state": "FIXED",
+    "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/anergy-purge-protocol/scripts/anergy_purge.py",
+    "current_source_sha256": "21307153c17e3337fef4dbb91fc3053c02a8a2617a9cf644490ece5ce0c0614e",
+    "rationale": "Global conversation maintenance and Path.home/sqlite3 access were removed from both workspace purge copies. Dry-run and ordinary mode leave two synthetic sessions active without resolving/opening the global path. The output reports global sessions NOT_CHECKED, with zero reset count.",
+    "source_checks": [
+      {
+        "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/anergy-purge-protocol/scripts/anergy_purge.py",
+        "start_line": 78,
+        "end_line": 152,
+        "observation": "Global conversation maintenance and Path.home/sqlite3 access were removed from both workspace purge copies. Dry-run and ordinary mode leave two synthetic sessions active without resolving/opening the global path. The output reports global sessions NOT_CHECKED, with zero reset count."
+      }
+    ],
+    "guards": [
+      "Temporary in-memory/filesystem fixtures only; no operator data or global purge executed.",
+      "Sizes are logical unlinked-file bytes, not measured physical space or energy."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot2-20261028/before-tests-confined.log",
+      "docs/security/evidence/swarm100-lot2-20261028/consolidation-before.json",
+      "docs/security/evidence/swarm100-lot2-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot2-20261028/independent-review.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/18.json",
+    "runtime_scope": "Real Python helpers and temporary SQLite; isolated legacy find interpreter for ITERA only.",
+    "resolution_type": "CODE_AND_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0460",
+    "decision": "REPRODUCED",
+    "severity": "P1",
+    "remediation_state": "MITIGATED",
+    "path": "scripts/c5_cortex/autoconsolidate.py",
+    "current_source_sha256": "b77ad4fbd80b3872e95b58f935b951f928179de72150374dac9fa3d5b216a025",
+    "rationale": "Original code deleted three real temporary journal rows without a replacement. No durable load/merge/save contract or schema consumer was found in the scoped search. Consolidation and the legacy JournalEntry operations now raise CONSOLIDATION_UNSUPPORTED before path resolution or database access, preserving exact rows and unrelated writes. This is rejection-based mitigation, not implemented consolidation; functional durability/transaction guarantees remain unavailable.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_cortex/autoconsolidate.py",
+        "start_line": 36,
+        "end_line": 40,
+        "observation": "Original code deleted three real temporary journal rows without a replacement. No durable load/merge/save contract or schema consumer was found in the scoped search. Consolidation and the legacy JournalEntry operations now raise CONSOLIDATION_UNSUPPORTED before path resolution or database access, preserving exact rows and unrelated writes. This is rejection-based mitigation, not implemented consolidation; functional durability/transaction guarantees remain unavailable."
+      }
+    ],
+    "guards": [
+      "Temporary in-memory/filesystem fixtures only; no operator data or global purge executed.",
+      "Sizes are logical unlinked-file bytes, not measured physical space or energy."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot2-20261028/before-tests-confined.log",
+      "docs/security/evidence/swarm100-lot2-20261028/consolidation-before.json",
+      "docs/security/evidence/swarm100-lot2-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot2-20261028/independent-review.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/08.json",
+    "runtime_scope": "Real Python helpers and temporary SQLite; isolated legacy find interpreter for ITERA only.",
+    "resolution_type": "CODE_AND_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0562",
+    "decision": "DUPLICATE",
+    "remediation_state": "FIXED",
+    "severity": "P1",
+    "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/anergy-purge-protocol/scripts/anergy_purge.py",
+    "current_source_sha256": "21307153c17e3337fef4dbb91fc3053c02a8a2617a9cf644490ece5ce0c0614e",
+    "rationale": "Same defect as SW100-C0387 in a separate byte-identical purge copy. Both implementations are patched and exercised by the shared regression suite; preserve this affected path and inherit FIXED.",
+    "source_checks": [
+      {
+        "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/anergy-purge-protocol/scripts/anergy_purge.py",
+        "start_line": 78,
+        "end_line": 152,
+        "observation": "Same defect as SW100-C0387 in a separate byte-identical purge copy. Both implementations are patched and exercised by the shared regression suite; preserve this affected path and inherit FIXED."
+      }
+    ],
+    "guards": [
+      "Separate physical copy retained; no operator global data read."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot2-20261028/before-tests-confined.log",
+      "docs/security/evidence/swarm100-lot2-20261028/consolidation-before.json",
+      "docs/security/evidence/swarm100-lot2-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot2-20261028/independent-review.json"
+    ],
+    "canonical_id": "SW100-C0387",
+    "runtime_scope": "Both Python purge implementations; only temporary workspace/session fixtures."
+  },
+  {
+    "candidate_id": "SW100-C0388",
+    "decision": "DUPLICATE",
+    "severity": "P2",
+    "remediation_state": "FIXED",
+    "path": "tools/skill_library/global/anergy-purge-protocol/scripts/anergy_purge.py",
+    "current_source_sha256": "21307153c17e3337fef4dbb91fc3053c02a8a2617a9cf644490ece5ce0c0614e",
+    "rationale": "Same defect as SW100-C0563 in a separate byte-identical purge copy. Both implementations are patched and exercised by the shared regression suite; preserve this affected path and inherit FIXED.",
+    "source_checks": [
+      {
+        "path": "tools/skill_library/global/anergy-purge-protocol/scripts/anergy_purge.py",
+        "start_line": 78,
+        "end_line": 152,
+        "observation": "Same defect as SW100-C0563 in a separate byte-identical purge copy. Both implementations are patched and exercised by the shared regression suite; preserve this affected path and inherit FIXED."
+      }
+    ],
+    "guards": [
+      "Separate physical copy retained; no operator global data read."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot2-20261028/before-tests-confined.log",
+      "docs/security/evidence/swarm100-lot2-20261028/consolidation-before.json",
+      "docs/security/evidence/swarm100-lot2-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot2-20261028/independent-review.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/15.json",
+    "canonical_id": "SW100-C0563",
+    "runtime_scope": "Both Python purge implementations; only temporary workspace/session fixtures."
+  },
+  {
+    "candidate_id": "SW100-C0223",
+    "decision": "CONFIRMED_STATIC",
+    "severity": "P2",
+    "remediation_state": "OPEN",
+    "path": "scripts/repatriated/c5_sharur_100_anergy_purge.py",
+    "current_source_sha256": "7e8a21a0e3a80e7155911b4e88b00e2e72265b8267d248effd677b448530b8fa",
+    "rationale": "The Lean cleanup traverses all WORKSPACE and recursively removes each unprotected .lake directory. It does not test whether the containing project is archived or whether package checkouts contain local work. Active dependency checkouts and build products are therefore within its deletion scope. No purge ran. Re-reviewed after Lot2: cohort2 still deletes unprotected .lake directories across WORKSPACE; cohort1's change does not fix this separate behavior. No cohort2/main execution was performed.",
+    "source_checks": [
+      {
+        "path": "scripts/repatriated/c5_sharur_100_anergy_purge.py",
+        "start_line": 135,
+        "end_line": 178,
+        "observation": "The separate .lake traversal/removal remains unchanged and OPEN."
+      }
+    ],
+    "guards": [
+      "Protected substrings restrict some projects.",
+      "There is no archived-state, disposable-product or clean-checkout test."
+    ],
+    "runtime_executed": false,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-round3-20261028/09-review-method.md",
+      "docs/security/evidence/swarm100-lot2-20261028/independent-review.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/09.json"
+  },
+  {
+    "candidate_id": "SW100-C0413",
+    "decision": "ALREADY_FIXED",
+    "severity": "P1",
+    "remediation_state": "FIXED",
+    "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+    "current_source_sha256": "92236e509279cd93355ca574c76070008b7adfabc8cd93ceb87acf3b18f02c0f",
+    "rationale": "Mandatory Gitleaks availability/failure now aborts. The scanner receives raw blobs from the selected immutable tree, including export-ignored paths and raw symlink data, with tracked policy/ignores and no Git replacement objects. A real serialized snapshot tar enforces the strict 20 MiB budget. Baseline fake publisher ran without Gitleaks; patched temporary regressions reject it. Zero scanner findings is not proof of absence of secrets.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+        "start_line": 380,
+        "end_line": 380,
+        "observation": "Missing mandatory scanner exits before local preparation or authorization."
+      },
+      {
+        "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+        "start_line": 139,
+        "end_line": 139,
+        "observation": "Snapshot is built from raw Git blobs, never worktree/archive filtering."
+      },
+      {
+        "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+        "start_line": 400,
+        "end_line": 400,
+        "observation": "Gitleaks runs on snapshot with frozen policy/ignore scope; any nonzero status aborts."
+      }
+    ],
+    "guards": [
+      "All Git/scanner/gate executable effects observed only through owned temporary doubles; no ATTESTED fixture.",
+      "Software field/signature checks do not attest hardware provenance independently of the trusted selected local gate.",
+      "Active pre-push hooks, LFS pointers and submodules are explicitly unsupported and rejected; no hook bypass.",
+      "Host transport binaries/configuration, hardware integration and real remote publication are outside this verification.",
+      "Ship atomically retains the verified receipt plus its effect descriptor at last_ship_receipt.json with mode 0600; no prior receipt is reused. Public projection receipt remains attempt-local."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot3-20261028/before-tests.log",
+      "docs/security/evidence/swarm100-lot3-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot3-20261028/independent-review.json",
+      "docs/security/evidence/swarm100-lot3-20261028/validation.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/15.json",
+    "runtime_scope": "Copied shell entrypoints with fake effect executables; pure binding/crypto functions and temporary snapshots.",
+    "resolution_type": "CODE_AND_CONFINED_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0418",
+    "decision": "ALREADY_FIXED",
+    "severity": "P1",
+    "remediation_state": "FIXED",
+    "path": "scripts/c5_git_utils/c5_ship.sh",
+    "current_source_sha256": "fb71a99a81f7254d4ec50bcacfae80bddf6c909e459c0d2c389d77c3d342dff8",
+    "rationale": "Missing both native and usable Swift gate aborts before aliases or local Git mutations. One selected gate attempt must return a bounded, fresh, effect-bound ATTESTED receipt with exact hash/action/scope, normalized agent, session operator and DER P256 signature; failure/cancellation/timeout/invalid output never dispatches or falls back. The baseline fixture dispatched without any gate. Rejection and pure software contract checks pass; no real hardware approval/publication was performed.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_git_utils/c5_ship.sh",
+        "start_line": 360,
+        "end_line": 360,
+        "observation": "Gate selection has an explicit abort when no provider exists."
+      },
+      {
+        "path": "scripts/c5_git_utils/c5_ship.sh",
+        "start_line": 410,
+        "end_line": 410,
+        "observation": "Gate preflight runs before aliases and mutation workflow."
+      },
+      {
+        "path": "scripts/c5_git_utils/c5_ship.sh",
+        "start_line": 554,
+        "end_line": 554,
+        "observation": "Gate must finish successfully before the immutable dispatcher is called."
+      }
+    ],
+    "guards": [
+      "All Git/scanner/gate executable effects observed only through owned temporary doubles; no ATTESTED fixture.",
+      "Software field/signature checks do not attest hardware provenance independently of the trusted selected local gate.",
+      "Active pre-push hooks, LFS pointers and submodules are explicitly unsupported and rejected; no hook bypass.",
+      "Host transport binaries/configuration, hardware integration and real remote publication are outside this verification.",
+      "Ship atomically retains the verified receipt plus its effect descriptor at last_ship_receipt.json with mode 0600; no prior receipt is reused. Public projection receipt remains attempt-local."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot3-20261028/before-tests.log",
+      "docs/security/evidence/swarm100-lot3-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot3-20261028/independent-review.json",
+      "docs/security/evidence/swarm100-lot3-20261028/validation.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/07.json",
+    "runtime_scope": "Copied shell entrypoints with fake effect executables; pure binding/crypto functions and temporary snapshots.",
+    "resolution_type": "CODE_AND_CONFINED_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0414",
+    "decision": "REJECTED",
+    "severity": "P2",
+    "remediation_state": "NOT_APPLICABLE",
+    "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+    "current_source_sha256": "92236e509279cd93355ca574c76070008b7adfabc8cd93ceb87acf3b18f02c0f",
+    "rationale": "Re-reviewed after Lot3: dry-run still explicitly permits local orphan commit/convenience branch preparation and exits before authorization or remote dispatch. Its prior-tip preservation was not part of the existing contract. This rejection is unchanged; the separate mutable-dispatch finding SW100-R3-0001 is fixed independently using the saved immutable commit.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+        "start_line": 407,
+        "end_line": 407,
+        "observation": "Local convenience branch preparation remains permitted."
+      },
+      {
+        "path": "scripts/c5_git_utils/c5_distill_public_mirror.sh",
+        "start_line": 409,
+        "end_line": 409,
+        "observation": "Preview exits before gate or publisher and states verification limits."
+      }
+    ],
+    "guards": [
+      "Preview local preparation remains allowed; authorization/push are explicitly NOT_CHECKED.",
+      "Convenience ref is no longer a dispatch source; the separate additional finding is handled independently."
+    ],
+    "runtime_executed": false,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot3-20261028/before-tests.log",
+      "docs/security/evidence/swarm100-lot3-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot3-20261028/independent-review.json",
+      "docs/security/evidence/swarm100-lot3-20261028/validation.json"
+    ]
+  },
+  {
+    "candidate_id": "SW100-C0060",
+    "decision": "ALREADY_FIXED",
+    "severity": "P2",
+    "remediation_state": "FIXED",
+    "path": "proof/bundles/attestation_bundle_v1/verify",
+    "current_source_sha256": "9dae74bb71d75c7c5f93216b41d82caed7771dc48c034024366630046fe4ab87",
+    "rationale": "The old v1 verifier returned exit0 after failed hash/signature checks. It now rejects unsupported legacy input and all integrity/signature failures with nonzero status; unsigned default is NOT_AUTHENTICATED/exit2. Valid new-format signed integrity against an explicit external software fixture anchor succeeds without certifying execution or hardware.",
+    "source_checks": [
+      {
+        "path": "proof/bundles/attestation_bundle_v1/verify",
+        "start_line": 204,
+        "end_line": 296,
+        "observation": "The old v1 verifier returned exit0 after failed hash/signature checks. It now rejects unsupported legacy input and all integrity/signature failures with nonzero status; unsigned default is NOT_AUTHENTICATED/exit2. Valid new-format signed integrity against an explicit external software fixture anchor succeeds without certifying execution or hardware."
+      }
+    ],
+    "guards": [
+      "Legacy signatures cannot authenticate new metadata retroactively; legacy/unknown schemas are rejected.",
+      "Generators emit only unsigned NOT_EXECUTED/UNVERIFIED snapshots and never load/generate private keys.",
+      "Integrity-only is explicitly unauthenticated; a signature is checked only against an external P256 key.",
+      "Signature math does not establish hardware provenance, test execution or physical operator approval.",
+      "Scope is the exact SELECTED_FILES inventory, not the entire repository or a consistent live-worktree transaction.",
+      "All generation/signing/verification here used owned temporary fixtures and software-only test keys; no ATTESTED object.",
+      "Historical materials and the separate v2 verifier remain unchanged; C0135/C0136 remain OPEN."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot4-20261028/before-tests.log",
+      "docs/security/evidence/swarm100-lot4-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot4-20261028/independent-review.json",
+      "docs/security/evidence/swarm100-lot4-20261028/validation.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/07.json",
+    "runtime_scope": "Copied CLI entrypoints, portable verifier and bounded pure helpers in temporary fixtures; only software test signatures.",
+    "resolution_type": "CODE_AND_CONFINED_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0061",
+    "decision": "ALREADY_FIXED",
+    "severity": "P1",
+    "remediation_state": "FIXED",
+    "path": "proof/bundles/attestation_bundle_v1/verify",
+    "current_source_sha256": "9dae74bb71d75c7c5f93216b41d82caed7771dc48c034024366630046fe4ab87",
+    "rationale": "New schema binds every manifest field (including commit/time/schema/producer), component path/type/size/BLAKE3 and the exact selected artifact inventory. Bytes are re-read from the explicit external root through nofollow descriptors. Domain-separated ECDSA P256/SHA256 covers the full canonical manifest, checked only with an external trust key. Legacy causal-hash signatures cannot establish this binding and are rejected, not upgraded. Tampered metadata, rehashed manifests, source changes and wrong signature representations are rejected in confined tests.",
+    "source_checks": [
+      {
+        "path": "proof/bundles/attestation_bundle_v1/verify",
+        "start_line": 204,
+        "end_line": 296,
+        "observation": "New schema binds every manifest field (including commit/time/schema/producer), component path/type/size/BLAKE3 and the exact selected artifact inventory. Bytes are re-read from the explicit external root through nofollow descriptors. Domain-separated ECDSA P256/SHA256 covers the full canonical manifest, checked only with an external trust key. Legacy causal-hash signatures cannot establish this binding and are rejected, not upgraded. Tampered metadata, rehashed manifests, source changes and wrong signature representations are rejected in confined tests."
+      }
+    ],
+    "guards": [
+      "Legacy signatures cannot authenticate new metadata retroactively; legacy/unknown schemas are rejected.",
+      "Generators emit only unsigned NOT_EXECUTED/UNVERIFIED snapshots and never load/generate private keys.",
+      "Integrity-only is explicitly unauthenticated; a signature is checked only against an external P256 key.",
+      "Signature math does not establish hardware provenance, test execution or physical operator approval.",
+      "Scope is the exact SELECTED_FILES inventory, not the entire repository or a consistent live-worktree transaction.",
+      "All generation/signing/verification here used owned temporary fixtures and software-only test keys; no ATTESTED object.",
+      "Historical materials and the separate v2 verifier remain unchanged; C0135/C0136 remain OPEN."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot4-20261028/before-tests.log",
+      "docs/security/evidence/swarm100-lot4-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot4-20261028/independent-review.json",
+      "docs/security/evidence/swarm100-lot4-20261028/validation.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/07.json",
+    "runtime_scope": "Copied CLI entrypoints, portable verifier and bounded pure helpers in temporary fixtures; only software test signatures.",
+    "resolution_type": "CODE_AND_CONFINED_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0083",
+    "decision": "ALREADY_FIXED",
+    "severity": "P1",
+    "remediation_state": "FIXED",
+    "path": "scripts/generate_attestation_bundle.py",
+    "current_source_sha256": "e043c9463b2ed0c0d5c0a9d353ab3a5a1e11747129473c778db3eb06fa897553",
+    "rationale": "The v1 entrypoint is import-safe and requires a new explicit output. Its common builder emits suites NOT_EXECUTED, hardware UNVERIFIED and certification NONE; hard-coded PASS/counts, copied signature/key and fixed historical timestamp are removed. Missing inputs fail before output and existing output is never overwritten. No automatic signing or empirical attestation is offered by the unsigned snapshot builder.",
+    "source_checks": [
+      {
+        "path": "scripts/generate_attestation_bundle.py",
+        "start_line": 7,
+        "end_line": 10,
+        "observation": "Import-safe wrapper delegates to the canonical new-format builder only on explicit CLI execution."
+      },
+      {
+        "path": "proof/bundles/attestation_bundle_v1/verify",
+        "start_line": 152,
+        "end_line": 197,
+        "observation": "The v1 entrypoint is import-safe and requires a new explicit output. Its common builder emits suites NOT_EXECUTED, hardware UNVERIFIED and certification NONE; hard-coded PASS/counts, copied signature/key and fixed historical timestamp are removed. Missing inputs fail before output and existing output is never overwritten. No automatic signing or empirical attestation is offered by the unsigned snapshot builder."
+      }
+    ],
+    "guards": [
+      "Legacy signatures cannot authenticate new metadata retroactively; legacy/unknown schemas are rejected.",
+      "Generators emit only unsigned NOT_EXECUTED/UNVERIFIED snapshots and never load/generate private keys.",
+      "Integrity-only is explicitly unauthenticated; a signature is checked only against an external P256 key.",
+      "Signature math does not establish hardware provenance, test execution or physical operator approval.",
+      "Scope is the exact SELECTED_FILES inventory, not the entire repository or a consistent live-worktree transaction.",
+      "All generation/signing/verification here used owned temporary fixtures and software-only test keys; no ATTESTED object.",
+      "Historical materials and the separate v2 verifier remain unchanged; C0135/C0136 remain OPEN."
+    ],
+    "runtime_executed": true,
+    "runtime_scope": "Copied CLI entrypoints, portable verifier and bounded pure helpers in temporary fixtures; only software test signatures.",
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot4-20261028/before-tests.log",
+      "docs/security/evidence/swarm100-lot4-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot4-20261028/independent-review.json",
+      "docs/security/evidence/swarm100-lot4-20261028/validation.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/03.json",
+    "resolution_type": "CODE_AND_CONFINED_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0086",
+    "decision": "ALREADY_FIXED",
+    "severity": "P1",
+    "remediation_state": "FIXED",
+    "path": "scripts/generate_attestation_bundle_v2.py",
+    "current_source_sha256": "4ce522faf18df94eb9710fedf017a162104cb79f747562436f8eb80f0a9cc884",
+    "rationale": "The v2 entrypoint no longer fabricates trial/pass counts, loads a persistent private key or signs invented results. The builder has no execution-evidence ingestion contract and always emits NOT_EXECUTED; even externally signed PASS-like fixture payloads are rejected by the new verifier. This is an honest unsigned snapshot workflow, not implemented test execution or hardware attestation.",
+    "source_checks": [
+      {
+        "path": "scripts/generate_attestation_bundle_v2.py",
+        "start_line": 12,
+        "end_line": 15,
+        "observation": "Import-safe wrapper delegates to the canonical new-format builder only on explicit CLI execution."
+      },
+      {
+        "path": "proof/bundles/attestation_bundle_v1/verify",
+        "start_line": 152,
+        "end_line": 197,
+        "observation": "The v2 entrypoint no longer fabricates trial/pass counts, loads a persistent private key or signs invented results. The builder has no execution-evidence ingestion contract and always emits NOT_EXECUTED; even externally signed PASS-like fixture payloads are rejected by the new verifier. This is an honest unsigned snapshot workflow, not implemented test execution or hardware attestation."
+      }
+    ],
+    "guards": [
+      "Legacy signatures cannot authenticate new metadata retroactively; legacy/unknown schemas are rejected.",
+      "Generators emit only unsigned NOT_EXECUTED/UNVERIFIED snapshots and never load/generate private keys.",
+      "Integrity-only is explicitly unauthenticated; a signature is checked only against an external P256 key.",
+      "Signature math does not establish hardware provenance, test execution or physical operator approval.",
+      "Scope is the exact SELECTED_FILES inventory, not the entire repository or a consistent live-worktree transaction.",
+      "All generation/signing/verification here used owned temporary fixtures and software-only test keys; no ATTESTED object.",
+      "Historical materials and the separate v2 verifier remain unchanged; C0135/C0136 remain OPEN."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot4-20261028/before-tests.log",
+      "docs/security/evidence/swarm100-lot4-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot4-20261028/independent-review.json",
+      "docs/security/evidence/swarm100-lot4-20261028/validation.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/07.json",
+    "runtime_scope": "Copied CLI entrypoints, portable verifier and bounded pure helpers in temporary fixtures; only software test signatures.",
+    "resolution_type": "CODE_AND_CONFINED_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0087",
+    "decision": "ALREADY_FIXED",
+    "severity": "P1",
+    "remediation_state": "FIXED",
+    "path": "scripts/generate_attestation_bundle_v2.py",
+    "current_source_sha256": "4ce522faf18df94eb9710fedf017a162104cb79f747562436f8eb80f0a9cc884",
+    "rationale": "Newly generated bundles copy the canonical portable verifier, whose selected-file checks read actual external artifact bytes and validate path/type/size/BLAKE3 and the bound claims snapshot. A changed/deleted/FIFO/symlink artifact fails even if stored digest strings remain unchanged. The historical v2 verifier is not regenerated and its separate C0135/C0136 stay OPEN.",
+    "source_checks": [
+      {
+        "path": "scripts/generate_attestation_bundle_v2.py",
+        "start_line": 12,
+        "end_line": 15,
+        "observation": "Import-safe wrapper delegates to the canonical new-format builder only on explicit CLI execution."
+      },
+      {
+        "path": "proof/bundles/attestation_bundle_v1/verify",
+        "start_line": 204,
+        "end_line": 296,
+        "observation": "Newly generated bundles copy the canonical portable verifier, whose selected-file checks read actual external artifact bytes and validate path/type/size/BLAKE3 and the bound claims snapshot. A changed/deleted/FIFO/symlink artifact fails even if stored digest strings remain unchanged. The historical v2 verifier is not regenerated and its separate C0135/C0136 stay OPEN."
+      }
+    ],
+    "guards": [
+      "Legacy signatures cannot authenticate new metadata retroactively; legacy/unknown schemas are rejected.",
+      "Generators emit only unsigned NOT_EXECUTED/UNVERIFIED snapshots and never load/generate private keys.",
+      "Integrity-only is explicitly unauthenticated; a signature is checked only against an external P256 key.",
+      "Signature math does not establish hardware provenance, test execution or physical operator approval.",
+      "Scope is the exact SELECTED_FILES inventory, not the entire repository or a consistent live-worktree transaction.",
+      "All generation/signing/verification here used owned temporary fixtures and software-only test keys; no ATTESTED object.",
+      "Historical materials and the separate v2 verifier remain unchanged; C0135/C0136 remain OPEN."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot4-20261028/before-tests.log",
+      "docs/security/evidence/swarm100-lot4-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot4-20261028/independent-review.json",
+      "docs/security/evidence/swarm100-lot4-20261028/validation.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/07.json",
+    "runtime_scope": "Copied CLI entrypoints, portable verifier and bounded pure helpers in temporary fixtures; only software test signatures.",
+    "resolution_type": "CODE_AND_CONFINED_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0088",
+    "decision": "ALREADY_FIXED",
+    "severity": "P2",
+    "remediation_state": "FIXED",
+    "path": "scripts/generate_attestation_bundle_v2.py",
+    "current_source_sha256": "4ce522faf18df94eb9710fedf017a162104cb79f747562436f8eb80f0a9cc884",
+    "rationale": "Environment fields come from observed platform/Python APIs, with empty/unavailable text recorded as UNKNOWN; provenance is OBSERVED_PLATFORM_ONLY and hardware remains UNVERIFIED. Fixed Apple chip/runtime/filesystem/TRNG certification strings are removed from generation. Fake FixtureOS and empty-platform regressions prove the output is derived from the observation provider, without asserting real hardware certification.",
+    "source_checks": [
+      {
+        "path": "scripts/generate_attestation_bundle_v2.py",
+        "start_line": 12,
+        "end_line": 15,
+        "observation": "Import-safe wrapper delegates to the canonical new-format builder only on explicit CLI execution."
+      },
+      {
+        "path": "proof/bundles/attestation_bundle_v1/verify",
+        "start_line": 152,
+        "end_line": 197,
+        "observation": "Environment fields come from observed platform/Python APIs, with empty/unavailable text recorded as UNKNOWN; provenance is OBSERVED_PLATFORM_ONLY and hardware remains UNVERIFIED. Fixed Apple chip/runtime/filesystem/TRNG certification strings are removed from generation. Fake FixtureOS and empty-platform regressions prove the output is derived from the observation provider, without asserting real hardware certification."
+      }
+    ],
+    "guards": [
+      "Legacy signatures cannot authenticate new metadata retroactively; legacy/unknown schemas are rejected.",
+      "Generators emit only unsigned NOT_EXECUTED/UNVERIFIED snapshots and never load/generate private keys.",
+      "Integrity-only is explicitly unauthenticated; a signature is checked only against an external P256 key.",
+      "Signature math does not establish hardware provenance, test execution or physical operator approval.",
+      "Scope is the exact SELECTED_FILES inventory, not the entire repository or a consistent live-worktree transaction.",
+      "All generation/signing/verification here used owned temporary fixtures and software-only test keys; no ATTESTED object.",
+      "Historical materials and the separate v2 verifier remain unchanged; C0135/C0136 remain OPEN."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot4-20261028/before-tests.log",
+      "docs/security/evidence/swarm100-lot4-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot4-20261028/independent-review.json",
+      "docs/security/evidence/swarm100-lot4-20261028/validation.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/07.json",
+    "runtime_scope": "Copied CLI entrypoints, portable verifier and bounded pure helpers in temporary fixtures; only software test signatures.",
+    "resolution_type": "CODE_AND_CONFINED_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0135",
+    "decision": "CONFIRMED_STATIC",
+    "severity": "P2",
+    "remediation_state": "OPEN",
+    "path": "proof/bundles/attestation_bundle_v2/verify",
+    "current_source_sha256": "bc1bff6c68dee804263e0f6e3a1c48bb879ad9c21ceed7881dbc83ffe6a1d8f2",
+    "rationale": "The verifier reads artifact.sha256 and compares it only with manifest.artifact_hash, then labels ARTIFACT HASH VERIFIED. The generator hashes actual source files, but the verifier neither accepts an artifact/root input nor recomputes that aggregate. An unchanged bundle can therefore verify its recorded digest independently of changed artifact bytes. This is a binding/wording limitation of the verifier, not evidence that a signature was forged. Re-reviewed after Lot4: the new producer emits v3 selected-file snapshots with a new portable verifier; it does not regenerate or fix this historical v2 verifier. Its string-only artifact check remains and C0135 stays OPEN/P2. The cross-source reference is refreshed because the old producer was replaced, not because this copy was fixed.",
+    "source_checks": [
+      {
+        "path": "proof/bundles/attestation_bundle_v2/verify",
+        "start_line": 10,
+        "end_line": 24,
+        "observation": "Required files include digest metadata, not the underlying source artifact set."
+      },
+      {
+        "path": "proof/bundles/attestation_bundle_v2/verify",
+        "start_line": 49,
+        "end_line": 64,
+        "observation": "Artifact check compares strings and incorporates that recorded digest into the joint digest."
+      },
+      {
+        "path": "proof/bundles/attestation_bundle_v2/verify",
+        "start_line": 108,
+        "end_line": 116,
+        "observation": "Output calls that result ARTIFACT HASH VERIFIED."
+      },
+      {
+        "path": "scripts/generate_attestation_bundle_v2.py",
+        "start_line": 12,
+        "end_line": 15,
+        "observation": "Current wrapper produces a different contract; the separately stored historical v2 verifier is unchanged."
+      }
+    ],
+    "guards": [
+      "Joint digest and signature can authenticate the recorded artifact hash; they do not verify the current artifact bytes.",
+      "Verifier is useful for detached bundle consistency, but that scope should not be presented as checking current artifacts."
+    ],
+    "runtime_executed": false,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-round3-20261028/08-source-evidence.json",
+      "docs/security/evidence/swarm100-round3-20261028/08-validation.json",
+      "docs/security/evidence/swarm100-lot4-20261028/before-tests.log",
+      "docs/security/evidence/swarm100-lot4-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot4-20261028/independent-review.json",
+      "docs/security/evidence/swarm100-lot4-20261028/validation.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/08.json"
+  },
+  {
+    "candidate_id": "SW100-C0428",
+    "decision": "ALREADY_FIXED",
+    "severity": "P1",
+    "remediation_state": "FIXED",
+    "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+    "current_source_sha256": "a6fb163e3c668ea18d987dc0544111e8de83bc458e2f365bc1ae144b1022df2f",
+    "rationale": "Lifecycle closes admission before awaiting shutdown and wakes an idle worker to drain all queued requests. Worker exit/fatal/init failure/pre-entry cancellation explicitly fails pending futures and balances queue accounting. Stop callers share the worker completion and cannot cancel it accidentally; repeated start is rejected, and completed restart recreates loop-bound queue/signals. Barrier and queue-full fixtures verify terminality, cancellation and sequential cross-loop reuse.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+        "start_line": 171,
+        "end_line": 183,
+        "observation": "Rejects live double start; reset loop-bound primitives only after previous worker completion."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+        "start_line": 185,
+        "end_line": 195,
+        "observation": "Closes admission synchronously and shields completion of the draining worker."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+        "start_line": 407,
+        "end_line": 468,
+        "observation": "Drains accepted work; defers cancellation until the current SQL process settles and fails remaining queued futures."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+        "start_line": 161,
+        "end_line": 169,
+        "observation": "Also settles the queue when cancellation happens before the worker first executes."
+      }
+    ],
+    "guards": [
+      "Only owned temporary SQLite/Fernet fixtures; strike_rs blocked. No operator database/key, IPC, Rekor/network or ATTESTED.",
+      "Single event loop at a time; completed stop/start permits sequential reuse on new event loops.",
+      "stop closes admission and waits accepted SQLite work; it is not a physical I/O deadline or a crash-durability proof.",
+      "Caller cancellation does not prove absence of a committed operation; the worker completes in-flight work before terminating.",
+      "Payload and vault key are captured when processing, not as an admission-time snapshot.",
+      "Idempotency covers the original row/result, not exactly-once native IPC delivery; optional broadcast behavior is preserved.",
+      "Historical schema/UUID/hash format, timestamp expression and C0431 attestation body are unchanged."
+    ],
+    "runtime_executed": true,
+    "runtime_scope": "Real asyncio/aiosqlite/Fernet in owned temporary roots, controlled barriers; native IPC explicitly blocked.",
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot5-20261028/before-tests.log",
+      "docs/security/evidence/swarm100-lot5-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot5-20261028/independent-review.json",
+      "docs/security/evidence/swarm100-lot5-20261028/scope-check.json",
+      "docs/security/evidence/swarm100-lot5-20261028/validation.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/03.json",
+    "resolution_type": "CODE_AND_CONFINED_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0429",
+    "decision": "ALREADY_FIXED",
+    "severity": "P1",
+    "remediation_state": "FIXED",
+    "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+    "current_source_sha256": "a6fb163e3c668ea18d987dc0544111e8de83bc458e2f365bc1ae144b1022df2f",
+    "rationale": "Encrypted retries compare authenticated canonical plaintext plus persisted event metadata, using the vault captured for the request. A matching retry returns the original seq/event_id/hash without rewriting ciphertext, timestamp or row. Missing/wrong original key and forced collision/metadata mismatch reject explicitly while later valid events still commit. Empty created_at retains the existing autogenerated-date semantics. UUID, SQL schema and historical chain hash format remain unchanged; this is row/result idempotency, not an exactly-once IPC guarantee.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+        "start_line": 482,
+        "end_line": 496,
+        "observation": "Authenticates/decrypts stored C5ENC data and requires canonical plaintext; no key means explicit rejection."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+        "start_line": 498,
+        "end_line": 515,
+        "observation": "Compares plaintext and persisted semantics; no generated timestamp or fresh ciphertext comparison."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+        "start_line": 574,
+        "end_line": 613,
+        "observation": "Captures canonical payload/vault before awaiting transaction and guards delivery to an already cancelled Future."
+      }
+    ],
+    "guards": [
+      "Only owned temporary SQLite/Fernet fixtures; strike_rs blocked. No operator database/key, IPC, Rekor/network or ATTESTED.",
+      "Single event loop at a time; completed stop/start permits sequential reuse on new event loops.",
+      "stop closes admission and waits accepted SQLite work; it is not a physical I/O deadline or a crash-durability proof.",
+      "Caller cancellation does not prove absence of a committed operation; the worker completes in-flight work before terminating.",
+      "Payload and vault key are captured when processing, not as an admission-time snapshot.",
+      "Idempotency covers the original row/result, not exactly-once native IPC delivery; optional broadcast behavior is preserved.",
+      "Historical schema/UUID/hash format, timestamp expression and C0431 attestation body are unchanged."
+    ],
+    "runtime_executed": true,
+    "runtime_scope": "Real asyncio/aiosqlite/Fernet in owned temporary roots, controlled barriers; native IPC explicitly blocked.",
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot5-20261028/before-tests.log",
+      "docs/security/evidence/swarm100-lot5-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot5-20261028/independent-review.json",
+      "docs/security/evidence/swarm100-lot5-20261028/scope-check.json",
+      "docs/security/evidence/swarm100-lot5-20261028/validation.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/03.json",
+    "resolution_type": "CODE_AND_CONFINED_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0430",
+    "decision": "ALREADY_FIXED",
+    "severity": "P1",
+    "remediation_state": "FIXED",
+    "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+    "current_source_sha256": "a6fb163e3c668ea18d987dc0544111e8de83bc458e2f365bc1ae144b1022df2f",
+    "rationale": "Only _execute_insert_tx owns BEGIN/COMMIT/ROLLBACK. It rolls back once only when a transaction is active; _process no longer rolls back a second time or closes the connection on ordinary rejection. ValueError/SQLite errors with confirmed clean state fail the current Future and allow subsequent work; failed rollback/uncertain state kills the writer and fails its backlog. SQL CHECK, commit-failure, rollback-failure and cancellation-during-commit fixtures independently observe rows, trace/transaction state and future outcomes.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+        "start_line": 517,
+        "end_line": 572,
+        "observation": "Single transaction owner; failure cleans up only an active transaction and rejects unconfirmed rollback."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+        "start_line": 407,
+        "end_line": 468,
+        "observation": "Recoverable request errors continue only with a clean connection; fatal failure settles backlog."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+        "start_line": 574,
+        "end_line": 613,
+        "observation": "Delegates the transaction directly and acknowledges only the confirmed result, without a second rollback."
+      }
+    ],
+    "guards": [
+      "Only owned temporary SQLite/Fernet fixtures; strike_rs blocked. No operator database/key, IPC, Rekor/network or ATTESTED.",
+      "Single event loop at a time; completed stop/start permits sequential reuse on new event loops.",
+      "stop closes admission and waits accepted SQLite work; it is not a physical I/O deadline or a crash-durability proof.",
+      "Caller cancellation does not prove absence of a committed operation; the worker completes in-flight work before terminating.",
+      "Payload and vault key are captured when processing, not as an admission-time snapshot.",
+      "Idempotency covers the original row/result, not exactly-once native IPC delivery; optional broadcast behavior is preserved.",
+      "Historical schema/UUID/hash format, timestamp expression and C0431 attestation body are unchanged."
+    ],
+    "runtime_executed": true,
+    "runtime_scope": "Real asyncio/aiosqlite/Fernet in owned temporary roots, controlled barriers; native IPC explicitly blocked.",
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot5-20261028/before-tests.log",
+      "docs/security/evidence/swarm100-lot5-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot5-20261028/independent-review.json",
+      "docs/security/evidence/swarm100-lot5-20261028/scope-check.json",
+      "docs/security/evidence/swarm100-lot5-20261028/validation.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/03.json",
+    "resolution_type": "CODE_AND_CONFINED_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0431",
+    "decision": "CONFIRMED_STATIC",
+    "severity": "P2",
+    "remediation_state": "OPEN",
+    "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+    "current_source_sha256": "a6fb163e3c668ea18d987dc0544111e8de83bc458e2f365bc1ae144b1022df2f",
+    "rationale": "get_state_attestation obtains aggregates and leaves in separate SELECTs without an explicit read transaction, then verifies integrity through verify_chain's separate connection/snapshot. Concurrent appends can make total_entries/max_seq and the roots refer to different states. The isolated in-memory SQLite model confirms that this SELECT sequence can observe count 1 and two leaves after an intervening commit; the actual asynchronous ledger was not executed. anchor_to_rekor consumes the mixed fields without a snapshot/checkpoint comparison. Re-reviewed after Lot5: The attestation still combines a read context with a separate verification snapshot; its body is AST-identical and remains OPEN.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+        "start_line": 313,
+        "end_line": 352,
+        "observation": "The attestation still combines a read context with a separate verification snapshot; its body is AST-identical and remains OPEN."
+      }
+    ],
+    "guards": [
+      "verify_chain now verifies its own transaction snapshot, but that snapshot is separate from the attestation aggregates and roots.",
+      "Errors during chain verification set integrity_verified false; successful verification is not bound to the earlier reported head."
+    ],
+    "runtime_executed": false,
+    "runtime_scope": "Static review only; any supporting model is identified separately and does not execute the product runtime.",
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-round3-20261028/03-source-evidence.json",
+      "docs/security/evidence/swarm100-round3-20261028/03-isolated-fixtures.py",
+      "docs/security/evidence/swarm100-round3-20261028/03-isolated-fixtures.json",
+      "docs/security/evidence/swarm100-lot5-20261028/before-tests.log",
+      "docs/security/evidence/swarm100-lot5-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot5-20261028/independent-review.json",
+      "docs/security/evidence/swarm100-lot5-20261028/scope-check.json",
+      "docs/security/evidence/swarm100-lot5-20261028/validation.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/03.json"
+  },
+  {
+    "candidate_id": "SW100-C0357",
+    "decision": "CONFIRMED_STATIC",
+    "severity": "P2",
+    "remediation_state": "OPEN",
+    "path": "01_KISH_ENGINE/babylon60/crypto/rekor_client.py",
+    "current_source_sha256": "e37c6a359b59b24b841014d15487356b08e080500571f39503002dc51daa2321",
+    "rationale": "The client documents PEM public_key_pem and base64-encodes its UTF-8 bytes. Both ledger callers instead pass base64(raw Ed25519 verify key), so one decode of the submitted content yields base64 text, not PEM. The current changed cortex_persist_ledger still uses this encoding. This confirms a local caller/client contract mismatch; remote Rekor acceptance and persistence were not tested. Re-reviewed after Lot5: Unchanged Rekor caller still base64-encodes the raw verify key and passes it as the third argument.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/crypto/rekor_client.py",
+        "start_line": 36,
+        "end_line": 65,
+        "observation": "Documented PEM argument is encoded into publicKey.content."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py",
+        "start_line": 816,
+        "end_line": 840,
+        "observation": "Second current caller has the same encoding mismatch."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+        "start_line": 354,
+        "end_line": 397,
+        "observation": "Unchanged Rekor caller still base64-encodes the raw verify key and passes it as the third argument."
+      }
+    ],
+    "guards": [
+      "Caller permits an injected alternate rekor_client; mismatch applies to the default RekorClient.",
+      "HTTP/transport errors are caught and reported as None.",
+      "No network anchoring request was issued."
+    ],
+    "runtime_executed": false,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-round3-20261028/18-source-evidence.json",
+      "docs/security/evidence/swarm100-lot5-20261028/before-tests.log",
+      "docs/security/evidence/swarm100-lot5-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot5-20261028/independent-review.json",
+      "docs/security/evidence/swarm100-lot5-20261028/scope-check.json",
+      "docs/security/evidence/swarm100-lot5-20261028/validation.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/18.json"
+  },
+  {
+    "candidate_id": "SW100-C0397",
+    "decision": "CONFIRMED_STATIC",
+    "severity": "P2",
+    "remediation_state": "OPEN",
+    "path": "scripts/c5_edin/edin_swarm_runner.py",
+    "current_source_sha256": "cff71c0cb84846cda92d55fd5c61d43e78e0a1a68185fb241b253d0a2c83b537",
+    "rationale": "execute_vector_agent reads only shard metadata, constructs a VECTOR_AUDIT_COMPLETED event with status C5_VERIFIED, and passes it to the ledger actor without opening or auditing the target. The function docstring says simulation, but no simulation field is included in the persisted payload. Main targets a persistent data/cib_async_ledger.db. The ledger actor serializes the supplied payload and inserts it; it checks causal trace/collision consistency rather than audit truth. Re-reviewed after Lot5: The actor still persists supplied canonical event data and does not establish that external audit claims were executed.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_edin/edin_swarm_runner.py",
+        "start_line": 23,
+        "end_line": 55,
+        "observation": "Persistent default path and unconditional verification event construction/append."
+      },
+      {
+        "path": "scripts/c5_edin/edin_swarm_runner.py",
+        "start_line": 66,
+        "end_line": 90,
+        "observation": "Main validates shard-file existence and dispatches metadata vectors to the actor."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+        "start_line": 574,
+        "end_line": 613,
+        "observation": "The actor still persists supplied canonical event data and does not establish that external audit claims were executed."
+      }
+    ],
+    "guards": [
+      "Missing shards aborts; actor startup/import must succeed and duplicate-event collision rules can reject writes.",
+      "These guards do not inspect target correctness. No ledger or runner executed."
+    ],
+    "runtime_executed": false,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-round3-20261028/04-source-evidence.json",
+      "docs/security/evidence/swarm100-lot5-20261028/before-tests.log",
+      "docs/security/evidence/swarm100-lot5-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot5-20261028/independent-review.json",
+      "docs/security/evidence/swarm100-lot5-20261028/scope-check.json",
+      "docs/security/evidence/swarm100-lot5-20261028/validation.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/04.json"
+  },
+  {
+    "candidate_id": "SW100-C0408",
+    "decision": "CONFIRMED_STATIC",
+    "severity": "P2",
+    "remediation_state": "OPEN",
+    "rationale": "The CLI send handler only constructs a compatibility event, appends it to the ledger and prints SENT/Correo enviado. The current ledger facade routes that event to the local actor queue and SQLite persistence; it does not invoke email delivery. The positive print therefore overstates what this command accomplishes. No real account, ledger, recipient or network transport was accessed. Re-reviewed after Lot5: The unchanged facade enqueues a local ledger event; this does not establish external email delivery.",
+    "guards": [
+      "The ledger acknowledgement establishes local append success, not SMTP/provider delivery.",
+      "A compatibility-event test explicitly documents that BABYLON_MAIL_SENT has no network delivery."
+    ],
+    "source_checks": [
+      {
+        "path": "scripts/c5_cli/babylon_mail_cli.py",
+        "start_line": 73,
+        "end_line": 89,
+        "observation": "Handler has a ledger append followed by a delivery-success print."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py",
+        "start_line": 855,
+        "end_line": 873,
+        "observation": "Current facade waits for local actor acknowledgement."
+      },
+      {
+        "path": "tests/test_optional_mail_mcp.py",
+        "start_line": 86,
+        "end_line": 93,
+        "observation": "Existing consumer test identifies the event as compatibility-only without delivery."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+        "start_line": 399,
+        "end_line": 405,
+        "observation": "The unchanged facade enqueues a local ledger event; this does not establish external email delivery."
+      }
+    ],
+    "runtime_executed": false,
+    "path": "scripts/c5_cli/babylon_mail_cli.py",
+    "current_source_sha256": "de8d6fbcabcab8433fb4117a0556b931c7e4b2a9ecc7f5713bd9e9c46c984e62",
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-round3-20261028/05-source-checks.json",
+      "docs/security/evidence/swarm100-lot5-20261028/before-tests.log",
+      "docs/security/evidence/swarm100-lot5-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot5-20261028/independent-review.json",
+      "docs/security/evidence/swarm100-lot5-20261028/scope-check.json",
+      "docs/security/evidence/swarm100-lot5-20261028/validation.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/05.json"
+  },
+  {
+    "candidate_id": "SW100-C0511",
+    "decision": "CONFIRMED_STATIC",
+    "severity": "P2",
+    "remediation_state": "OPEN",
+    "path": "tests/test_ledger_cross_equivalence.py",
+    "current_source_sha256": "4af93fcf471f7be0bfa1a6b6855c11390e1b8158852ea048fe2af24501bd538a",
+    "rationale": "The test reads PRAGMA synchronous through newly opened connections after exercising each writer, so it tests those new connections instead of the writer configuration. A synthetic SQLite fixture reproduced writer OFF=0 alongside fresh reader FULL=2. Current writer sources do set FULL; the confirmed defect is regression-test coverage, not observed ledger nondurability. Re-reviewed after Lot5: FULL is configured on the actual worker connection; the separate old test still checks a fresh connection and is unchanged.",
+    "source_checks": [
+      {
+        "path": "tests/test_ledger_cross_equivalence.py",
+        "start_line": 27,
+        "end_line": 62,
+        "observation": "Both durability assertions inspect freshly created sqlite3 connections."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py",
+        "start_line": 129,
+        "end_line": 134,
+        "observation": "Current synchronous writer sets FULL on its own connection."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+        "start_line": 407,
+        "end_line": 468,
+        "observation": "FULL is configured on the actual worker connection; the separate old test still checks a fresh connection and is unchanged."
+      }
+    ],
+    "guards": [
+      "Current writers explicitly configure FULL; externally supplied Cortex transactions also validate synchronous at lines 264-272.",
+      "Property fixture only; no mutation of production writers and no full pytest/ledger execution."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-round3-20261028/07-source-evidence.json",
+      "docs/security/evidence/swarm100-round3-20261028/07-fixtures.py",
+      "docs/security/evidence/swarm100-round3-20261028/07-fixture-results.json",
+      "docs/security/evidence/swarm100-lot5-20261028/before-tests.log",
+      "docs/security/evidence/swarm100-lot5-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot5-20261028/independent-review.json",
+      "docs/security/evidence/swarm100-lot5-20261028/scope-check.json",
+      "docs/security/evidence/swarm100-lot5-20261028/validation.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/07.json"
+  }
+]

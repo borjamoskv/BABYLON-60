@@ -1,0 +1,31 @@
+{
+  "reviewer": "06",
+  "retrieved_on": "2026-10-28",
+  "sources": [
+    {
+      "candidate_id": "SW100-C0496",
+      "provider": "Context7 query_docs plus web.open",
+      "library_id": "/websites/developers_cloudflare_queues",
+      "url": "https://developers.cloudflare.com/queues/configuration/batching-retries/",
+      "observation": "The first per-message ack or retry call determines the outcome. Further calls on that message are ignored. Explicit per-message decisions also take precedence over batch-wide calls.",
+      "local_contradiction": "api.md:95 claims last call wins; api.md:102-103 says retry overrides a prior ack.",
+      "service_mutation_performed": false
+    },
+    {
+      "candidate_id": "SW100-C0146",
+      "provider": "Context7 query_docs",
+      "library_id": "/hbldh/bleak",
+      "url": "https://github.com/hbldh/bleak/blob/develop/docs/api/scanner.rst",
+      "additional_url": "https://github.com/hbldh/bleak/blob/develop/docs/index.rst",
+      "observation": "Bleak scanner filters refer to service UUIDs carried by advertisements; notification subscriptions target characteristics. The local module itself identifies 180d as the service and 2a37 as the characteristic, then incorrectly uses 2a37 in the service-list predicate.",
+      "hardware_or_service_operation_performed": false
+    },
+    {
+      "candidate_id": "SW100-C0571",
+      "provider": "web.open",
+      "url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.rel_entr.html",
+      "observation": "The primary reference defines relative entropy as a sum of p*log(p/q) terms for distributions. A positive first argument with a zero second argument contributes infinity. An absent predictive distribution does not satisfy the local guide's precondition for evaluating KL.",
+      "model_inference": "The guide's assignment of zero KL to empty refusal lacks a specified predictive distribution or abstention convention."
+    }
+  ]
+}

@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="85" skipped="0" tests="127" time="0.245" timestamp="2026-10-30T00:47:26.439522+01:00" hostname="MacBook-Pro-de-Borja.local"><testcase classname="" name="test_permission_contract[P001]" time="0.000" /><testcase classname="" name="test_permission_contract[P002]" time="0.000" /><testcase classname="" name="test_permission_contract[P003]" time="0.000" /><testcase classname="" name="test_permission_contract[P004]" time="0.000" /><testcase classname="" name="test_permission_contract[P005]" time="0.000" /><testcase classname="" name="test_permission_contract[P006]" time="0.000" /><testcase classname="" name="test_permission_contract[P007]" time="0.000" /><testcase classname="" name="test_permission_contract[P008]" time="0.000" /><testcase classname="" name="test_permission_contract[P009]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P010]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P011]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P012]" time="0.000" /><testcase classname="" name="test_permission_contract[P013]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P014]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P015]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P016]" time="0.000" /><testcase classname="" name="test_permission_contract[P017]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P018]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P019]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P020]" time="0.000" /><testcase classname="" name="test_permission_contract[P021]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P022]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P023]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P024]" time="0.000" /><testcase classname="" name="test_permission_contract[P025]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P026]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P027]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P028]" time="0.000" /><testcase classname="" name="test_permission_contract[P029]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P030]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P031]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P032]" time="0.000" /><testcase classname="" name="test_permission_contract[P033]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P034]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P035]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P036]" time="0.000" /><testcase classname="" name="test_permission_contract[P037]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P038]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P039]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P040]" time="0.000" /><testcase classname="" name="test_permission_contract[P041]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P042]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P043]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P044]" time="0.000" /><testcase classname="" name="test_permission_contract[P045]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P046]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P047]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P048]" time="0.000" /><testcase classname="" name="test_permission_contract[P049]" time="0.000" /><testcase classname="" name="test_permission_contract[P050]" time="0.000" /><testcase classname="" name="test_permission_contract[P051]" time="0.000" /><testcase classname="" name="test_permission_contract[P052]" time="0.000" /><testcase classname="" name="test_permission_contract[P053]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P054]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P055]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P056]" time="0.000" /><testcase classname="" name="test_permission_contract[P057]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P058]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P059]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P060]" time="0.000" /><testcase classname="" name="test_permission_contract[P061]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P062]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P063]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P064]" time="0.000" /><testcase classname="" name="test_permission_contract[P065]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P066]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P067]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P068]" time="0.000" /><testcase classname="" name="test_permission_contract[P069]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P070]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P071]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P072]" time="0.000" /><testcase classname="" name="test_permission_contract[P073]" time="0.000" /><testcase classname="" name="test_permission_contract[P074]" time="0.000" /><testcase classname="" name="test_permission_contract[P075]" time="0.000" /><testcase classname="" name="test_permission_contract[P076]" time="0.000" /><testcase classname="" name="test_permission_contract[P077]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P078]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P079]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P080]" time="0.000" /><testcase classname="" name="test_permission_contract[P081]" time="0.000" /><testcase classname="" name="test_permission_contract[P082]" time="0.000" /><testcase classname="" name="test_permission_contract[P083]" time="0.000" /><testcase classname="" name="test_permission_contract[P084]" time="0.000" /><testcase classname="" name="test_permission_contract[P085]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P086]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P087]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P088]" time="0.000" /><testcase classname="" name="test_permission_contract[P089]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P090]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P091]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P092]" time="0.000" /><testcase classname="" name="test_permission_contract[P093]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P094]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P095]" time="0.000"><failure message="AssertionError: CG-01..04&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-01..04
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[P096]" time="0.000" /><testcase classname="" name="test_permission_contract[R001]" time="0.000"><failure message="AssertionError: CG-05&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-05
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[R002]" time="0.000"><failure message="AssertionError: CG-05&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-05
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[R003]" time="0.000"><failure message="AssertionError: CG-05&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-05
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[R004]" time="0.000"><failure message="AssertionError: CG-05&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-05
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[R005]" time="0.000"><failure message="AssertionError: CG-05&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-05
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[R006]" time="0.000"><failure message="AssertionError: CG-05&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-05
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[R007]" time="0.000"><failure message="AssertionError: CG-05&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-05
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[R008]" time="0.000"><failure message="AssertionError: CG-05&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-05
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[R009]" time="0.000"><failure message="AssertionError: CG-05&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-05
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[R010]" time="0.000"><failure message="AssertionError: CG-05&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-05
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[R011]" time="0.000"><failure message="AssertionError: CG-05&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-05
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[R012]" time="0.000"><failure message="AssertionError: CG-05&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-05
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[R013]" time="0.000"><failure message="AssertionError: CG-05&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-05
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[R014]" time="0.000"><failure message="AssertionError: CG-05&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-05
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[R015]" time="0.000"><failure message="AssertionError: CG-05&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-05
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[R016]" time="0.000"><failure message="AssertionError: CG-05&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-05
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[A001]" time="0.000"><failure message="AssertionError: CG-06&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-06
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[A002]" time="0.000"><failure message="AssertionError: CG-06&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-06
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[A003]" time="0.000"><failure message="AssertionError: CG-06&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-06
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[A004]" time="0.000"><failure message="AssertionError: CG-06&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-06
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[A005]" time="0.000"><failure message="AssertionError: CG-06&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-06
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[A006]" time="0.000"><failure message="AssertionError: CG-06&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-06
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[A007]" time="0.000"><failure message="AssertionError: CG-06&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-06
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[A008]" time="0.000"><failure message="AssertionError: CG-06&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-06
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[A009]" time="0.000"><failure message="AssertionError: CG-06&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-06
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[A010]" time="0.000"><failure message="AssertionError: CG-06&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-06
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[A011]" time="0.000"><failure message="AssertionError: CG-06&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-06
+E   assert True is False</failure></testcase><testcase classname="" name="test_permission_contract[A012]" time="0.000"><failure message="AssertionError: CG-06&#10;assert True is False">/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/cg-fresh-extract-ubjyzji5/capabilityguard-comparison-v1/acceptance/test_acceptance.py:34: in test_permission_contract
+    assert actual is case["expected"], case["criterion"]
+E   AssertionError: CG-06
+E   assert True is False</failure></testcase><testcase classname="" name="test_public_parameter_names_and_defaults" time="0.000" /><testcase classname="" name="test_tool_validation_remains_outside_this_task" time="0.000" /><testcase classname="" name="test_risk_tier_contract_is_preserved" time="0.000" /></testsuite></testsuites>

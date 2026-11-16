@@ -1,0 +1,33 @@
+{
+  "command": [
+    "uv",
+    "run",
+    "--locked",
+    "--no-sync",
+    "python",
+    "docs/security/evidence/swarm100-lot12-20261030/run_confined_tests.py",
+    "tests/test_swarm100_lot12_s6_reports_regressions.py",
+    "tests/test_swarm100_lot12_s6_formal_regressions.py",
+    "docs/security/evidence/swarm100-lot12-20261030/review_reports_formal/independent_checks.py",
+    "-q",
+    "-o",
+    "addopts=--tb=short"
+  ],
+  "env": {
+    "B60_REVIEW_LEAN_BINARY": "/Users/borjafernandezangulo/.elan/toolchains/leanprover--lean4---v4.35.0/bin/lean",
+    "BABYLON60_TEST_LEAN_BIN": "/Users/borjafernandezangulo/.elan/toolchains/leanprover--lean4---v4.35.0/bin/lean"
+  },
+  "exit_code": 0,
+  "log": "docs/security/evidence/swarm100-lot12-20261030/review_reports_formal/combined-final-tests.log",
+  "log_sha256": "c541f3ea6690fdb83de4be0c37c99f7ede32c42901b3400a1fe272d7a9fce46b",
+  "source_sha256_before_and_after": {
+    "scripts/c5_sharur/sharur_100_conversation_reporters.py": "6212c3afe9a9691ca533969b7a088529a8d29393ae9116ae6eae73fefff988b7",
+    "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py": "ad281a15848a638ca92de4eba53d203094dd4241cb305b591ff3f56254a1439c",
+    "scripts/c5_sharur/sharur_100_swarm_execution.py": "4f80f3a51c21477e689a03f9fc78962dfe9a1a2f43ff01c307718e6b4cb5bfcc",
+    "scripts/c5_destiladora/proof_emitter_lean4.py": "09c13761b760338fc9d747725c66f04f7a166acac92e5d2c950ad3ed047167fb",
+    "scripts/babylon60/gen_oncology_primitives.py": "291fec22430e3841a4770943ca0cc584fb0ac6195ddaa3ae4c5cf9567ae8b1e1",
+    "scripts/c5_destiladora/test_destiladora_e2e.py": "3d43668716203b1d41ccce51dc5ed2cfa924175dd460aa62e241c689f49c856f",
+    "tests/test_swarm100_lot12_s6_reports_regressions.py": "d21e91fe1a308555c0be8ca59da4a9ec8ba7b2e334ddd8bbbd7a160165efffd1",
+    "tests/test_swarm100_lot12_s6_formal_regressions.py": "5e43a2ab6ecc5be4eaaddfff72cd272bad9bc1cf952e6643d0fe6cb9a709b41c"
+  }
+}

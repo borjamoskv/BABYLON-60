@@ -1491,17 +1491,17 @@
       "version": "0.6.0"
     },
     {
-      "bom-ref": "pkg:pypi/opentelemetry-api@1.44.0",
+      "bom-ref": "pkg:pypi/opentelemetry-api@1.45.2",
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "67647e5e9566edcf421166fdf022b3537f818635daa852b289e34604dc6fb33a"
+          "content": "d7b0008e21e5fd61cbe7a7f34ca3b6905a78ab677d9bc395e299359c75cda6b4"
         }
       ],
       "name": "opentelemetry-api",
-      "purl": "pkg:pypi/opentelemetry-api@1.44.0",
+      "purl": "pkg:pypi/opentelemetry-api@1.45.2",
       "type": "library",
-      "version": "1.44.0"
+      "version": "1.45.2"
     },
     {
       "bom-ref": "pkg:pypi/packaging@26.3",
@@ -2649,7 +2649,7 @@
       },
       {
         "name": "babylon60:lockfile_sha256",
-        "value": "a3cadcf95ff05374408bbf063ffc6c116eeae41d8d563f145387a713644600ef"
+        "value": "75efd04de9e269ee96cd9f748ef947b6983e3c688c96351ead5b01dd68e67260"
       }
     ]
   },

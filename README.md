@@ -8,7 +8,7 @@ Deploy increasingly capable AI agents without automatically expanding their exec
 
 Model-agnostic authorization. Governed execution. Reproducible security evidence.
 
-[Web](https://babylon60.com/) · [Guía de usuario](docs/03_guides/USER_GUIDE.md) · [Mapa del monorepo](#-mapa-del-monorepo-y-cámaras-arquitectónicas) · [Evidencia y límites](CLAIMS.toml) · [Seguridad](SECURITY.md)
+[Web](https://babylon60.com/) · [Antes y Después](docs/03_guides/BEFORE_AND_AFTER.md) · [Guía de usuario](docs/03_guides/USER_GUIDE.md) · [Preguntas frecuentes](#-preguntas-frecuentes-para-humanos) · [Mapa del monorepo](#-mapa-del-monorepo-y-cámaras-arquitectónicas) · [Evidencia y límites](CLAIMS.toml) · [Seguridad](SECURITY.md)
 
 > **En 10 segundos:**
 > **Intelligence is not authority.** BABYLON-60 se plantea como infraestructura de control de efectos autónomos: el agente decide qué intentar; BABYLON-60 debe determinar qué puede ocurrir dentro del perímetro protegido. Un modelo más capaz puede descubrir, planificar y proponer más acciones; eso no debe concederle permisos adicionales ($\text{INV-}\Omega$).
@@ -32,6 +32,23 @@ distribution; the simulations do not establish clinical validity.
 >
 > **Core Technical Specification:**
 > BABYLON-60 is a user-space authorization and effect broker for AI agents. On macOS ARM64, its application code runs at EL0. Protected effects require valid broker authorization, while operating-system confinement must prevent agent processes from accessing protected resources directly. The broker is a component of the deployment’s trusted computing base. Formal claims apply to identified specifications and assumptions; implementation and isolation require separate evidence.
+
+---
+
+## 👤 Para usuarios de IA: qué cambia en tu día a día
+
+Si utilizas asistentes de IA para escribir, programar, analizar documentos o gestionar tareas, no necesitas conocer la criptografía interna del sistema para aprovecharlo. **BABYLON-60** actúa en tres frentes prácticos sobre tus conversaciones y herramientas:
+
+| Problema cotidiano con la IA | Sin BABYLON-60 | Con BABYLON-60 (objetivo de producto y alcance declarado) |
+| :--- | :--- | :--- |
+| **1. Respuestas llenas de paja** | Abre con varios párrafos de cortesía vacía y esconde la conclusión al final. | **Resultado en la primera línea** ([contrato de presentación](01_KISH_ENGINE/babylon60/presentation.md)): abre con la respuesta, detalla lo comprobado y señala lo pendiente. |
+| **2. Mezcla de tus datos con invenciones** | Combina lo que dice tu documento real con suposiciones estadísticas sin avisar. | **Memoria con candado (`Fuente ≠ Inferencia`):** el servidor MCP (`CORTEX`) separa tus registros originales (`SourceRecord`) de las deducciones del modelo (`INFERENCE`). |
+| **3. Miedo a que borre o rompa archivos** | Si el agente tiene acceso a tu equipo, un fallo del modelo ejecuta el cambio directamente. | **Freno de mano físico (`Touch ID` / autorización firmada):** la IA lee y redacta libremente; las acciones de riesgo dentro del perímetro protegido (`L2` + `L3`) exigen autorización firmada antes de ejecutarse. |
+| **4. Gasto innecesario de cuota** | Consume siempre el modelo activo aunque la tarea sea rutinaria. | **Aviso de selector y razonamiento:** recomienda bajar o subir el nivel del modelo cuando la tarea observada lo justifica. |
+
+- 👉 **[Ver 3 ejemplos reales Antes y Después en 1 minuto (`BEFORE_AND_AFTER.md`)](docs/03_guides/BEFORE_AND_AFTER.md)**
+- 👉 **[Activar en tu primera conversación de Codex (`guide_codex_first_use.md`)](docs/03_guides/guide_codex_first_use.md)**
+- 👉 **[Leer las Preguntas Frecuentes para Humanos (Touch ID, batería y desinstalación)](#-preguntas-frecuentes-para-humanos)**
 
 ---
 
@@ -296,13 +313,13 @@ La estructura `ObjectIdentity` separa el localizador físico inmutable en el VFS
 
 | Algoritmo | Rol Normativo | Superficies de Código, Formatos y Alcance |
 | :--- | :--- | :--- |
-| **`BLAKE3`** | **Canónico / On-Wire / WAL Binario (`INV_C5_ONWIRE_CANON`)** | Digest de 32 bytes para tramas IPC inter-agente, digest de código y herramientas MCP (`code_hash`); [`merkle_b3.py`](./01_KISH_ENGINE/babylon60/attestation/merkle_b3.py) usa los prefijos completos `B60-LEAF-v1\0`, `B60-NODE-v1\0` y `B60-ROOT-v1\0`, cardinalidad y raíz etiquetada `b3:`. No son los bytes únicos `0x00`/`0x01`. La matriz declara además BLAKE3 para registros de 154 bytes en `.effect_wal.bin` (`FL_014`); la [revisión del perfil](./docs/01_spec/spec_cryptographic_profile.md) distingue requisito y formato observado. |
-| **`SHA-256`** | **Hardware FIPS 186-4 y Testigos Físicos C-ABI** | Pre-hash obligatorio para firmas ECDSA NIST P-256 en el puente del Apple Secure Enclave ([`src/enclave.rs`](./src/enclave.rs)), digestos de contenido e inodo sobre descriptor abierto (`compute_fd_hash` y `WalRecord` en [`src/secure_fs.rs`](./src/secure_fs.rs), `sha256_digest` en [`src/capability.rs`](./src/capability.rs), [`src/executor.rs`](./src/executor.rs), [`src/omega_mediation.rs`](./src/omega_mediation.rs), `tool_identity_hash` en [`skills-lock.json`](./skills-lock.json)) y sellado de artefactos de release (`CLAIMS.toml`, SBOMs, `checksums.sha256`). |
+| **`BLAKE3`** | **Canónico / On-Wire (`INV_C5_ONWIRE_CANON`)** | Digest de 32 bytes para tramas IPC inter-agente, digest de código y herramientas MCP (`code_hash`); [`merkle_b3.py`](./01_KISH_ENGINE/babylon60/attestation/merkle_b3.py) usa los prefijos completos `B60-LEAF-v1\0`, `B60-NODE-v1\0` y `B60-ROOT-v1\0`, cardinalidad y raíz etiquetada `b3:`. No son los bytes únicos `0x00`/`0x01`. No reinterpreta formatos legados persistidos en disco; una migración futura de `.effect_wal.bin` a BLAKE3 requiere versionado explícito conforme a la [revisión del perfil](./docs/01_spec/spec_cryptographic_profile.md). |
+| **`SHA-256`** | **Hardware FIPS 186-4, Testigos Físicos C-ABI y WAL Legado (`SHA256_LEGACY_EFFECT_WAL`)** | Pre-hash obligatorio para firmas ECDSA NIST P-256 en el puente del Apple Secure Enclave ([`src/enclave.rs`](./src/enclave.rs)), digestos de contenido e inodo sobre descriptor abierto (`compute_fd_hash` en [`src/secure_fs.rs`](./src/secure_fs.rs), `sha256_digest` en [`src/capability.rs`](./src/capability.rs), [`src/executor.rs`](./src/executor.rs), [`src/omega_mediation.rs`](./src/omega_mediation.rs), `tool_identity_hash` en [`skills-lock.json`](./skills-lock.json)), formato persistido actual de 154 bytes en `.effect_wal.bin` (`WalRecord` en [`src/secure_fs.rs`](./src/secure_fs.rs): `SHA-256` sobre los primeros 122 bytes, sin etiqueta de versión/algoritmo; `FL_014`) y sellado de artefactos de release (`CLAIMS.toml`, SBOMs, `checksums.sha256`). |
 | **`SHA3-256`** | **Legado / Compatibilidad en Persistencia L0 Python** | Retenido en el encadenamiento de filas del ledger SQLite Python ([`01_KISH_ENGINE/babylon60/bft/`](./01_KISH_ENGINE/README.md)) y en las hojas Merkle legadas de `evidence.json` (`sha3-256:`) para verificación dual retrocompatible en [`standalone_verify.py`](./01_KISH_ENGINE/babylon60/verifier/standalone_verify.py). Excluido de recibos `COSE_Sign1` ([`src/receipt.rs`](./src/receipt.rs)) por no figurar en el registro IANA COSE Algorithms. |
 
 - **Matriz Normativa de Hashes (`BLAKE3` · `SHA-256` · `SHA3-256`):**
-  - **`BLAKE3` (Canónico / On-Wire / WAL Binario — `INV_C5_ONWIRE_CANON`):** Digest canónico para tramas IPC inter-agente, código/herramientas MCP, árboles Merkle conformes v1 (`b3:` / kernel Rust) y registros atómicos de 154 bytes en `.effect_wal.bin`.
-  - **`SHA-256` (Hardware FIPS 186-4 y Testigos Físicos C-ABI):** Pre-hash obligatorio para firmas hardware NIST P-256 del Apple Secure Enclave, digestos de precondición e inodos en `00_ABZU_KERNEL` (`secure_fs.rs`, `executor.rs`, `omega_mediation.rs`), y sellado de artefactos de distribución (`CLAIMS.toml`, SBOMs).
+  - **`BLAKE3` (Canónico / On-Wire — `INV_C5_ONWIRE_CANON`):** Digest canónico para tramas IPC inter-agente, código/herramientas MCP y árboles Merkle conformes v1 (`b3:` / kernel Rust). No reinterpreta bytes legados ya persistidos en disco.
+  - **`SHA-256` (Hardware FIPS 186-4, Testigos Físicos C-ABI y WAL Legado — `SHA256_LEGACY_EFFECT_WAL`):** Pre-hash obligatorio para firmas hardware NIST P-256 del Apple Secure Enclave, digestos de precondición e inodos en `00_ABZU_KERNEL` (`secure_fs.rs`, `executor.rs`, `omega_mediation.rs`), registros persistidos de 154 bytes en `.effect_wal.bin` (`SHA-256` sobre los primeros 122 bytes en `src/secure_fs.rs`; una migración a BLAKE3 exige versionado explícito), y sellado de artefactos de distribución (`CLAIMS.toml`, SBOMs).
   - **`SHA3-256` (Legado / Compatibilidad en Persistencia L0 Python):** Retenido en el encadenamiento de filas del ledger SQLite Python (`01_KISH_ENGINE`) y en las hojas Merkle de `evidence.json` (`sha3-256:`) para verificación dual retrocompatible en `standalone_verify.py`.
 
 ---

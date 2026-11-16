@@ -1,0 +1,20 @@
+{
+  "steps": [
+    {
+      "command": [
+        "python3",
+        "docs/security/evidence/swarm100-lot12-20261030/reconcile_lot12.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "python3",
+        "docs/security/evidence/swarm100-round3-20261028/reconcile_registry.py"
+      ],
+      "exit_code": 1
+    }
+  ],
+  "result": "STOPPED_AT_FAILURE",
+  "outside_records": 8
+}

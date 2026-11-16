@@ -1,0 +1,318 @@
+{
+  "reviewer": "03",
+  "date": "2026-10-29",
+  "lot": 7,
+  "decision": "APPROVED_WITH_EXPLICIT_SCOPE",
+  "open_actionable_findings": [],
+  "source_sha256": {
+    "scripts/c5_verifiers/fast_smt_gate.py": "853cd9746178aede419bee382b6e6416482fdbfb8a5eb753269732e3d5e384c1"
+  },
+  "test_source_sha256": {
+    "tests/test_swarm100_lot7_regressions.py": "25f251af35f404cfc70cceac168c25401e286ae21b734c0c7eab30a72d8418a1"
+  },
+  "harness_sha256": {
+    "docs/security/evidence/swarm100-lot7-20261029/independent-adversarial.py": "d57744dc4a74fdae174ab63254e404bd1060298e9d6f8eed5a5c30ba198b275b"
+  },
+  "unchanged_consumer_sha256": {
+    "scripts/c5_quality_gates/daily_sovereign_maintenance.py": "bf5d3827f8b3c3c85a1904c1a0082c8d67a25b0b9834c482040426d915373b95"
+  },
+  "source_checks": [
+    {
+      "path": "scripts/c5_verifiers/fast_smt_gate.py",
+      "start_line": 87,
+      "end_line": 90,
+      "observation": "All six catalogue groups return explicit NOT_EXECUTED records; this helper declares that no executable checker is registered."
+    },
+    {
+      "path": "scripts/c5_verifiers/fast_smt_gate.py",
+      "start_line": 117,
+      "end_line": 119,
+      "observation": "Collects 25 catalogue entries across all six groups. No solver, native process, assertion of property truth, or hardware operation is executed."
+    },
+    {
+      "path": "scripts/c5_verifiers/fast_smt_gate.py",
+      "start_line": 122,
+      "end_line": 144,
+      "observation": "Requires exactly the complete unique ID set and exact text fields, copies records, rejects legacy tuples/boolean values and all unsupported statuses including PASS."
+    },
+    {
+      "path": "scripts/c5_verifiers/fast_smt_gate.py",
+      "start_line": 165,
+      "end_line": 196,
+      "observation": "Opens only the selected root with O_DIRECTORY/O_NOFOLLOW, inspects five entries using descriptor-relative stat without following links, closes descriptor, and distinguishes absent/uninspectable/type mismatch. These are path observations only."
+    },
+    {
+      "path": "scripts/c5_verifiers/fast_smt_gate.py",
+      "start_line": 152,
+      "end_line": 162,
+      "observation": "Exact schema/profile/fields; explicit boolean strict and absolute text root; control-character roots rejected."
+    },
+    {
+      "path": "scripts/c5_verifiers/fast_smt_gate.py",
+      "start_line": 199,
+      "end_line": 219,
+      "observation": "Exact fixed path/kind/ID set, explicit allowed observation statuses, complete unique inventory or explicitly empty NOT_COLLECTED."
+    },
+    {
+      "path": "scripts/c5_verifiers/fast_smt_gate.py",
+      "start_line": 222,
+      "end_line": 247,
+      "observation": "Legacy API is a versioned UNSIGNED report; no signature/SCITT receipt/legal certification/hardware approval. Complete canonical body and configuration are bound by domain-separated BLAKE3. Caller statuses and observations remain reported claims, never proof."
+    },
+    {
+      "path": "scripts/c5_verifiers/fast_smt_gate.py",
+      "start_line": 250,
+      "end_line": 275,
+      "observation": "Returns 1 for reported FAIL or invalid report, 2 for NOT_EXECUTED/UNKNOWN across JSON, legacy --scitt, text and strict/non-strict. Errors contain only exception class; there is no success path without a checker."
+    },
+    {
+      "path": "scripts/c5_verifiers/fast_smt_gate.py",
+      "start_line": 278,
+      "end_line": 285,
+      "observation": "CLI retains aliases and describes --scitt as unsigned reporting without SCITT issuance; explicit --root restricts the selected observations."
+    },
+    {
+      "path": "scripts/c5_quality_gates/daily_sovereign_maintenance.py",
+      "start_line": 152,
+      "end_line": 183,
+      "observation": "Unchanged consumer rejects any nonzero exit from a present gate. AST-extracted function with three subprocess doubles confirms exit 1/2 propagation. Missing-script default True remains outside this lot; real maintenance/--fix/canary never executed."
+    }
+  ],
+  "candidates": [
+    {
+      "path": "scripts/c5_verifiers/fast_smt_gate.py",
+      "current_source_sha256": "853cd9746178aede419bee382b6e6416482fdbfb8a5eb753269732e3d5e384c1",
+      "severity": "P1",
+      "decision": "REPRODUCED",
+      "remediation_state": "FIXED",
+      "runtime_executed": true,
+      "runtime_scope": "Copied-script or pure Python fixtures only, owned temporary HOME/root; no protected runtime.",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot7-20261029/independent-adversarial.py",
+        "docs/security/evidence/swarm100-lot7-20261029/independent-adversarial.log",
+        "docs/security/evidence/swarm100-lot7-20261029/independent-regressions.log",
+        "docs/security/evidence/swarm100-lot7-20261029/independent-ruff.log",
+        "docs/security/evidence/swarm100-lot7-20261029/independent-observation-provenance-before.json",
+        "docs/security/evidence/swarm100-lot7-20261029/before-source-manifest.json",
+        "docs/security/evidence/swarm100-lot7-20261029/before-tests.log"
+      ],
+      "candidate_id": "SW100-C0556",
+      "rationale": "The reproduced false-positive/unsafe-success defect is fixed: markers and constants cannot yield successful verification; all 25 unimplemented catalogue entries remain NOT_EXECUTED, no PASS is accepted, and every operative output mode exits nonzero. This closes false assertions, not the unimplemented SMT/property checks.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_verifiers/fast_smt_gate.py",
+          "start_line": 87,
+          "end_line": 90,
+          "observation": "All six catalogue groups return explicit NOT_EXECUTED records; this helper declares that no executable checker is registered."
+        },
+        {
+          "path": "scripts/c5_verifiers/fast_smt_gate.py",
+          "start_line": 117,
+          "end_line": 119,
+          "observation": "Collects 25 catalogue entries across all six groups. No solver, native process, assertion of property truth, or hardware operation is executed."
+        },
+        {
+          "path": "scripts/c5_verifiers/fast_smt_gate.py",
+          "start_line": 122,
+          "end_line": 144,
+          "observation": "Requires exactly the complete unique ID set and exact text fields, copies records, rejects legacy tuples/boolean values and all unsupported statuses including PASS."
+        },
+        {
+          "path": "scripts/c5_verifiers/fast_smt_gate.py",
+          "start_line": 165,
+          "end_line": 196,
+          "observation": "Opens only the selected root with O_DIRECTORY/O_NOFOLLOW, inspects five entries using descriptor-relative stat without following links, closes descriptor, and distinguishes absent/uninspectable/type mismatch. These are path observations only."
+        },
+        {
+          "path": "scripts/c5_verifiers/fast_smt_gate.py",
+          "start_line": 250,
+          "end_line": 275,
+          "observation": "Returns 1 for reported FAIL or invalid report, 2 for NOT_EXECUTED/UNKNOWN across JSON, legacy --scitt, text and strict/non-strict. Errors contain only exception class; there is no success path without a checker."
+        },
+        {
+          "path": "scripts/c5_quality_gates/daily_sovereign_maintenance.py",
+          "start_line": 152,
+          "end_line": 183,
+          "observation": "Unchanged consumer rejects any nonzero exit from a present gate. AST-extracted function with three subprocess doubles confirms exit 1/2 propagation. Missing-script default True remains outside this lot; real maintenance/--fix/canary never executed."
+        }
+      ],
+      "guards": [
+        "Complete unique inventory",
+        "PASS unavailable without a registered checker",
+        "No success exit for absence of verification",
+        "Path observations separate from invariant truth"
+      ]
+    },
+    {
+      "path": "scripts/c5_verifiers/fast_smt_gate.py",
+      "current_source_sha256": "853cd9746178aede419bee382b6e6416482fdbfb8a5eb753269732e3d5e384c1",
+      "severity": "P1",
+      "decision": "REPRODUCED",
+      "remediation_state": "FIXED",
+      "runtime_executed": true,
+      "runtime_scope": "Copied-script or pure Python fixtures only, owned temporary HOME/root; no protected runtime.",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot7-20261029/independent-adversarial.py",
+        "docs/security/evidence/swarm100-lot7-20261029/independent-adversarial.log",
+        "docs/security/evidence/swarm100-lot7-20261029/independent-regressions.log",
+        "docs/security/evidence/swarm100-lot7-20261029/independent-ruff.log",
+        "docs/security/evidence/swarm100-lot7-20261029/independent-observation-provenance-before.json",
+        "docs/security/evidence/swarm100-lot7-20261029/before-source-manifest.json",
+        "docs/security/evidence/swarm100-lot7-20261029/before-tests.log"
+      ],
+      "candidate_id": "SW100-C0557",
+      "rationale": "The reproduced IDs-only digest and fabricated signature/compliance defect is fixed: BLAKE3 binds the complete canonical body with an explicit domain; software report is always UNSIGNED/NOT_ISSUED/NOT_ASSESSED/UNVERIFIED with signature null and caller-reported provenance. The digest proves no authorship, trusted time, SCITT transparency or invariant correctness.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_verifiers/fast_smt_gate.py",
+          "start_line": 122,
+          "end_line": 144,
+          "observation": "Requires exactly the complete unique ID set and exact text fields, copies records, rejects legacy tuples/boolean values and all unsupported statuses including PASS."
+        },
+        {
+          "path": "scripts/c5_verifiers/fast_smt_gate.py",
+          "start_line": 152,
+          "end_line": 162,
+          "observation": "Exact schema/profile/fields; explicit boolean strict and absolute text root; control-character roots rejected."
+        },
+        {
+          "path": "scripts/c5_verifiers/fast_smt_gate.py",
+          "start_line": 199,
+          "end_line": 219,
+          "observation": "Exact fixed path/kind/ID set, explicit allowed observation statuses, complete unique inventory or explicitly empty NOT_COLLECTED."
+        },
+        {
+          "path": "scripts/c5_verifiers/fast_smt_gate.py",
+          "start_line": 222,
+          "end_line": 247,
+          "observation": "Legacy API is a versioned UNSIGNED report; no signature/SCITT receipt/legal certification/hardware approval. Complete canonical body and configuration are bound by domain-separated BLAKE3. Caller statuses and observations remain reported claims, never proof."
+        },
+        {
+          "path": "scripts/c5_verifiers/fast_smt_gate.py",
+          "start_line": 278,
+          "end_line": 285,
+          "observation": "CLI retains aliases and describes --scitt as unsigned reporting without SCITT issuance; explicit --root restricts the selected observations."
+        }
+      ],
+      "guards": [
+        "Exact input schemas reject legacy booleans and unsupported PASS",
+        "Canonical JSON disallows nonfinite values",
+        "Whole-body domain-separated digest",
+        "No signing key, signature, certificate or attestation manufacture"
+      ]
+    }
+  ],
+  "independent_controls": [
+    {
+      "name": "complete_catalogue_unexecuted_despite_markers",
+      "passed": true,
+      "count": 25
+    },
+    {
+      "name": "all_modes_fail_closed",
+      "passed": true,
+      "combinations": 24
+    },
+    {
+      "name": "schema_inventory_and_legacy_rejection",
+      "passed": true,
+      "cases": 13
+    },
+    {
+      "name": "complete_body_domain_digest_and_order",
+      "passed": true,
+      "body_fields": 22,
+      "same_id_mutations": 3
+    },
+    {
+      "name": "pure_export_provenance_and_unsigned_claims",
+      "passed": true
+    },
+    {
+      "name": "input_copying_and_invalid_configuration_latency",
+      "passed": true,
+      "invalid_cases": 10
+    },
+    {
+      "name": "entries_no_symlink_or_fifo_following_no_parent_claim",
+      "passed": true,
+      "cases": 5
+    },
+    {
+      "name": "observation_opens_only_root_then_descriptor_stat",
+      "passed": true,
+      "open_calls": 1
+    },
+    {
+      "name": "consumer_ast_with_three_doubles_propagates_nonzero",
+      "passed": true,
+      "limitation": "Missing gate defaults to PASS in unchanged consumer, outside Lot 7 scope."
+    }
+  ],
+  "validation": {
+    "independent_control_count": 9,
+    "independent_controls": "9 passed; 24 output-mode/status combinations; 13 malformed inventories; 22 body fields; no network/process attempts.",
+    "regressions": {
+      "passed": 71,
+      "failed": 0,
+      "duration_seconds": 1.27,
+      "log": "docs/security/evidence/swarm100-lot7-20261029/independent-regressions.log",
+      "warning": "One pytest warning: asyncio_mode is unknown because automatic plugins were deliberately disabled; these tests are synchronous.",
+      "executed_by_reviewer": true,
+      "environment": "Temporary cwd/HOME; plugin autoload disabled; copied gate CLI observes fixture paths only; no production maintenance invocation."
+    },
+    "ruff": {
+      "result": "PASS",
+      "executed_by_reviewer": true,
+      "log": "docs/security/evidence/swarm100-lot7-20261029/independent-ruff.log",
+      "paths": [
+        "scripts/c5_verifiers/fast_smt_gate.py",
+        "tests/test_swarm100_lot7_regressions.py",
+        "docs/security/evidence/swarm100-lot7-20261029/independent-adversarial.py"
+      ]
+    },
+    "source_hashes_stable_before_after": true,
+    "parent_related_suite": {
+      "passed": 721,
+      "skipped": 1,
+      "skip_reason": "strike_rs blocked",
+      "duration_seconds": 85.47,
+      "independently_executed": false,
+      "source": "Parent report; not counted among reviewer controls."
+    }
+  },
+  "resolved_findings": [
+    {
+      "id": "LOT7-OBSERVATION-PROVENANCE",
+      "prior_evidence": "docs/security/evidence/swarm100-lot7-20261029/independent-observation-provenance-before.json",
+      "prior_source_sha256": "bcc453d2a28aa117e0df6949c0a4561d866064bad3a577cb3a3cd060eed36d0b",
+      "before": "Pure export accepted caller observations but labeled them COLLECTED_READ_ONLY without reading a path.",
+      "after": "Pure export labels supplied observations REPORTED_OBSERVATIONS_NOT_PROOF; no observations yields NOT_COLLECTED. Independent guard forbids all path reads during export.",
+      "remediation_state": "FIXED"
+    }
+  ],
+  "baseline": {
+    "source_sha256": "ef4c442f821689838b76a7aaa5cf29c625de2dac3df0a5bd1e2856cfdb526748",
+    "log": "docs/security/evidence/swarm100-lot7-20261029/before-tests.log",
+    "result": "7 failed in 0.35s",
+    "execution": "Parent reproduction log inspected; reviewer did not rerun old production source."
+  },
+  "limitations": [
+    "No executable SMT or other invariant checker exists in this source: all 25 properties remain NOT_EXECUTED and unproved. FIXED concerns the specific false-positive and fabricated-receipt defects.",
+    "This unsigned digest is self-consistency only; no authentication, trusted clock, hardware provenance, legal compliance, actual SCITT receipt or external transparency verification is claimed.",
+    "Caller-supplied statuses and observations are explicitly reported data, not proof that checks or path observations ran.",
+    "Observation scope is five selected directory entries with a descriptor bound to the opened root; no content, complete repository snapshot, cross-entry atomicity, or invariant proof is established.",
+    "The unchanged maintenance consumer defaults to success if the gate script is absent. This separate missing-script behavior is outside the authorized one-source lot and was demonstrated only with an AST-extracted function plus doubles.",
+    "No maintenance, auto-fix, canary, solver, native protected runtime, network, provider, keys, attestation, deployment or publication was executed. No ATTESTED artifact was generated."
+  ],
+  "discovery": "Graph tooling was unavailable in this session; scoped source/document reads and caller literal search were used.",
+  "evidence_paths": [
+    "docs/security/evidence/swarm100-lot7-20261029/independent-adversarial.py",
+    "docs/security/evidence/swarm100-lot7-20261029/independent-adversarial.log",
+    "docs/security/evidence/swarm100-lot7-20261029/independent-regressions.log",
+    "docs/security/evidence/swarm100-lot7-20261029/independent-ruff.log",
+    "docs/security/evidence/swarm100-lot7-20261029/independent-observation-provenance-before.json",
+    "docs/security/evidence/swarm100-lot7-20261029/before-source-manifest.json",
+    "docs/security/evidence/swarm100-lot7-20261029/before-tests.log"
+  ]
+}

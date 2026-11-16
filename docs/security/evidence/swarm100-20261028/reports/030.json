@@ -1,0 +1,349 @@
+{
+  "shard": "030",
+  "findings": [
+    {
+      "title": "Require digest coverage for every required evidence file",
+      "severity": "P1",
+      "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+      "line": 889,
+      "evidence": "signed_file_digests defaults to {}; only supplied entries are hashed at lines 904\u2013924. required_rel_files is checked for existence only. CLI consumes valid as PASS and exit 0 (verifier/cli.py:89\u201395).",
+      "trigger": "A pack has a signed envelope omitting claims.json, scope.json, regulatory matrix or other required files from file_digests.",
+      "impact": "Omitted files can be changed without invalidating signature/checksums; checksums_valid can still be true and mutable claims affect final verdict.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Reject an empty execution trace for a nonempty ledger",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+      "line": 954,
+      "evidence": "All count/hash comparisons are nested under if trace_lines; an empty trace skips the promised cross-check.",
+      "trigger": "Pack contains a nonempty valid ledger and an empty execution-trace.jsonl with matching updated signed file digest.",
+      "impact": "Verifier reports evidence verifiable despite no execution trace corresponding to the ledger.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Recompute JSON event hashes before declaring integrity verified",
+      "severity": "P1",
+      "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+      "line": 450,
+      "evidence": "When an event dictionary has entry_hash/hash, only that supplied hash enters leaves; remaining event fields are ignored. The result sets integrity_verified true. verify_compliance_certificate uses this result at lines 728\u2013740.",
+      "trigger": "Change payload fields in an exported JSON event while retaining its entry_hash and certificate Merkle root.",
+      "impact": "Certificate verification can still succeed although event contents were changed; the documented recomputation and integrity guarantee do not hold for JSON evidence.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Remove the shared bearer credential from the launchd template",
+      "severity": "P1",
+      "path": "contracts/com.c5real.moskv1.kernel.plist",
+      "line": 33,
+      "evidence": "Plist embeds a literal bearer credential. tools/babylon60_mcp.py:975\u2013996 reads this environment variable and :873 compares incoming authorization to it. Credential value intentionally omitted.",
+      "trigger": "Deploy this launchd template unchanged.",
+      "impact": "Anyone with repository/template access knows the bearer credential for that deployment; loopback limits network reach but does not make the shared value secret. No deployment or exploitation was tested.",
+      "confidence": "high",
+      "kind": "runtime"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".agents/skills/c5-cortex-swarm-orchestrator-project/references/aliases.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          313
+        ]
+      ],
+      "sha256_observed": "2726f9b70814805ab8e058ed1e327767ff764838c98403d117d5b4ed3bda6772",
+      "changed": false
+    },
+    {
+      "path": ".windsurfrules",
+      "status": "metadata_only",
+      "ranges": [],
+      "target": ".babylon60rules",
+      "changed": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/adapters/__init__.py",
+      "status": "reviewed_full",
+      "ranges": [],
+      "sha256_observed": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "changed": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/core/crypto_utils.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          74
+        ]
+      ],
+      "sha256_observed": "cc5d79b755a17f7ea8cfc5b30aa4203669efee355115f09533589db100eb6640",
+      "changed": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/mcp_instructions.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          13
+        ]
+      ],
+      "sha256_observed": "eedd836a25fb3658431a2fc52d6fadfaaa2bb0557d64a087d6584842c8384337",
+      "changed": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          1065
+        ]
+      ],
+      "sha256_observed": "bc5045430f0910c80906d669f3d9d622066c490f2a29560e512d7ddbedb78dcd",
+      "changed": false
+    },
+    {
+      "path": "contracts/com.c5real.moskv1.kernel.plist",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          36
+        ]
+      ],
+      "sha256_observed": "56b8bc8385398cced7239c622abf0407b6a26ca71aa03aa59f2825428f3a42a6",
+      "changed": false
+    },
+    {
+      "path": "docs/03_guides/guide_bio_silico_transduction.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          71
+        ]
+      ],
+      "sha256_observed": "30a78b6ab93992bc72e8eb7e57b38f2e05799ef8d1e743da8e5be185410df4d5",
+      "changed": false
+    },
+    {
+      "path": "docs/security/evidence/external-audit-remediation-2026-10-24/publication-status.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          51
+        ]
+      ],
+      "sha256_observed": "6b1736de5d7846634ee23a90aeb95b4d9554f03800d12293c799eb87cc31fecc",
+      "changed": false
+    },
+    {
+      "path": "proof/lean/BabylonStressCorrupt.lean",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          1525
+        ]
+      ],
+      "sha256_observed": "4a1f254a48998625538f972a1a88aeff14381aea9d7bd63029d2e9ab3f3c4ff3",
+      "changed": false,
+      "notes": "All literal event rows read in bounded chunks; truncated aggregate output ranges were reread without truncation. Static review only; negative fixture was not compiled."
+    },
+    {
+      "path": "scripts/c5_demos/poc_b3.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          38
+        ]
+      ],
+      "sha256_observed": "83b1fbc914caa5f55e5854c94554c2dc73a6880aed5800fd474519eebe3920d4",
+      "changed": false
+    },
+    {
+      "path": "scripts/c5_quality_gates/rea_bundle_guard.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          26
+        ]
+      ],
+      "sha256_observed": "d5e8fb142a9bfa11b0a270b6f98de1f81459fd0eecc3a88eb07c1ef33321db4c",
+      "changed": false
+    },
+    {
+      "path": "scripts/outreach_cockpit.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          110
+        ]
+      ],
+      "sha256_observed": "815834f20f92bf5459d4bb4015bca21362e7a1be1fe79651308a9306e355f2f7",
+      "changed": false
+    },
+    {
+      "path": "tests/conformance/vectors/event_basic.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          10
+        ]
+      ],
+      "sha256_observed": "6863d3dd2b92bb12bcba9fb09908a92d694c47e18ee156828d02e5cbb7ba8377",
+      "changed": false
+    },
+    {
+      "path": "tests/test_commit_polisher.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          42
+        ]
+      ],
+      "sha256_observed": "92f106efa7a3ea0623156d35ebbd0ec521d2ff81012f32b10706e7b382f06cd7",
+      "changed": false
+    },
+    {
+      "path": "tests/test_semantic_entropy_lean_alignment.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          94
+        ]
+      ],
+      "sha256_observed": "aa29234617ea5a7d4230db2d7bf846ae00a3308878acd048990dce05d888ee39",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/ai-search/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          87
+        ]
+      ],
+      "sha256_observed": "cff4ce1bee49988265f176fe5a0bdd69714a1b6e215a65662ddbf305f981d05f",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/graphql-api/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          118
+        ]
+      ],
+      "sha256_observed": "765e696dfd11bfa87d231c011b10fb2c10a2e33d704d7c6d04f1f125585c5b92",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/snippets/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          227
+        ]
+      ],
+      "sha256_observed": "cf2c9181749bce692fe73426ae999d52977ba266a690ec140c6280d3c0941caf",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/wrangler/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          209
+        ]
+      ],
+      "sha256_observed": "208f4f1b7c288a4ce1f635b35f6aeef830e4e7a87e551b078fbde305ee8f7426",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/suno-bracket-tagging/references/subgenre_genesis_protocol.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          32
+        ]
+      ],
+      "sha256_observed": "b23b84e986d3c5e557d99dad98b7868a7c977ab6dbaa1e3b0609d331fd20d6dd",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_34_site_playbooks_facebook_marketplace.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "sha256_observed": "f06d7aa217797ec8d7f94f2e9ec6eb716810ee84d2119dff88974180747b4a7f",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-ring0-babylon-kernel/references/modules/c5-lean4-axiomatic-orchestrator/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          127
+        ]
+      ],
+      "sha256_observed": "cb459724a901bbb524f5cafe418bf23ef3a868e34fa99aaafbb2cd7b3cc7ecd0",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/global/cortex-skill-auditor/scripts/audit_declarative_skills.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          11
+        ]
+      ],
+      "sha256_observed": "675b2e950bdc72a1f4d980ce3c02a43e7e2e43f84754cc9e2930d0943cdb04e4",
+      "changed": false
+    },
+    {
+      "path": "tools/skill_library/workspace/c5-audiovisual-acreativo-sota-project/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "sha256_observed": "ab2b6aa50e8c34b3322f9ccc972943929c630949008c4a099480c904165af299",
+      "changed": false
+    }
+  ],
+  "tool_limitations": [
+    "Native codebase graph tools not exposed in current session; targeted text searches used.",
+    "Static inspection only; tests, runtime execution, network verification and deployment prohibited by audit scope.",
+    "External API examples inspected as text; current Cloudflare API compatibility not verified."
+  ],
+  "tests_run": []
+}

@@ -1,0 +1,431 @@
+{
+  "shard": "008",
+  "findings": [
+    {
+      "title": "Verifier certifies attacker-controlled text without verifying any signature",
+      "severity": "P1",
+      "path": "scripts/c5_demos/c5_verifier_cli.rs",
+      "line": 84,
+      "evidence": "Lines 62-103 only call content.contains; line 84 searches a hardware-signature label; lines 108-114 print absolute certification. The file imports only std. scripts/c5_demos/c5_sovereign_compliance_orchestrator.py:99-104 compiles and runs this CLI.",
+      "trigger": "Pass --pack a plaintext file containing the searched labels, one quoted PASS token, and the two exact final status substrings, with no valid JSON, signature, chain, or proof.",
+      "impact": "The demo reports a valid hardware signature, intact zero-knowledge proof, and absolute compliance for unauthenticated bytes; it cannot serve as an evidence verifier. No runtime authorization bypass is inferred.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Unknown obligations silently become successful empty verification",
+      "severity": "P2",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bindings.rs",
+      "line": 170,
+      "evidence": "verify_statement_content drops unknown obligation strings in the wildcard arm. omega0.rs:142-144 returns true when obligations is empty.",
+      "trigger": "Call verify_statement_content with valid modality and only an unknown or misspelled obligation such as reproduciblity.",
+      "impact": "The Python-facing verification API returns true after removing the requested constraint instead of rejecting unsupported obligations.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Contradiction verification ignores kernel nogoods",
+      "severity": "P2",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bindings.rs",
+      "line": 182,
+      "evidence": "The method calls omega0::verify(&js), which constructs an empty nogoods set at omega0.rs:133-134; Contradiction merely checks absence from that set at lines 152-154. contradict_knowledge updates self.atms at bindings.rs:112-119 but this verification method never queries it.",
+      "trigger": "Assert a contradiction for content X, then call verify_statement_content(X, epistemic, [contradiction]).",
+      "impact": "The API returns true for an obligation that the same kernel state marks contradicted. This is a verification-result defect, not a proven execution-gate bypass.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Property tests do not exercise the engine whose concurrency they claim to check",
+      "severity": "P2",
+      "path": "tests/test_axioms_hypothesis.py",
+      "line": 263,
+      "evidence": "Lines 263-267 clamp generated integers with min(c, limit), then assert the clamp is <= limit. The file imports no production BFT/KDA implementation; other tests similarly construct local dictionaries and duplicate formulas.",
+      "trigger": "Change or break the production BFT concurrency limiter and run this property suite.",
+      "impact": "The concurrency test remains satisfied regardless of the production limiter, so it cannot detect the stated regression; use generated DAGs against the actual engine.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Relative transformation breaks the root-position invariant for subsequent transforms",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/examples/Neo_Riemannian_Tonnetz.py",
+      "line": 31,
+      "evidence": "r_transform([60,64,67], True) returns [60,64,69], False; p_transform assumes the second element is the minor third and increments it. Composition therefore yields [60,65,69] instead of an A-major pitch set [61,64,69]. generate_tonnetz_walk repeatedly feeds these arrays into transforms at lines 83-88.",
+      "trigger": "Select the P-R alternating mode or any walk with a major R followed by minor P.",
+      "impact": "The generated progression leaves the intended Neo-Riemannian transformations because inverted relative triads are interpreted as root-position triads.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Architecture manifest points its formal foundation to a missing proof path",
+      "severity": "P3",
+      "path": "ARCHITECTURE_MANIFEST.md",
+      "line": 5,
+      "evidence": "The foundation and section 2 link docs/proof/lean/BabylonTrace.lean; a targeted read reports No such file or directory. The whitepaper instead links proof/lean/BabylonTrace.lean.",
+      "trigger": "Follow the formal-foundation or bisimulation link from this manifest.",
+      "impact": "Readers cannot inspect the cited proof through the documented reference.",
+      "confidence": "high",
+      "kind": "docs"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".agents/rules/c5_release_governance_invariant.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          22
+        ]
+      ],
+      "sha256_expected": "3264e77106f70a6d13d82968d26e112e55941d40c89b8a40ab9efc9fc54918b5",
+      "sha256_actual": "3264e77106f70a6d13d82968d26e112e55941d40c89b8a40ab9efc9fc54918b5",
+      "hash_match": true,
+      "notes": "Static source review only; no execution."
+    },
+    {
+      "path": ".github/workflows/fuzz.yml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          24
+        ]
+      ],
+      "sha256_expected": "8266ffec0f214334b0cbcc0108881bc483cecca0f09898b1d585819901976187",
+      "sha256_actual": "8266ffec0f214334b0cbcc0108881bc483cecca0f09898b1d585819901976187",
+      "hash_match": true,
+      "notes": "Static source review only; no execution."
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bindings.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          438
+        ]
+      ],
+      "sha256_expected": "988c71e782d600406e2e985c5279c2bf2abc33a51c3bea7f49b021f4479847a3",
+      "sha256_actual": "988c71e782d600406e2e985c5279c2bf2abc33a51c3bea7f49b021f4479847a3",
+      "hash_match": true,
+      "notes": "Static source review only; no execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/compliance_exporter/__init__.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          19
+        ]
+      ],
+      "sha256_expected": "eea8ee981b69bd029986ff10c20fe0a17b55b2ca191b2ff35dcb3aa2e7a84477",
+      "sha256_actual": "eea8ee981b69bd029986ff10c20fe0a17b55b2ca191b2ff35dcb3aa2e7a84477",
+      "hash_match": true,
+      "notes": "Static source review only; no execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/c6_absolute/test_c6_suite.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          145
+        ]
+      ],
+      "sha256_expected": "dd096623b37dffb3f290d59662c9dda96c631fd1be1f3f0a020a6dc0673c0497",
+      "sha256_actual": "dd096623b37dffb3f290d59662c9dda96c631fd1be1f3f0a020a6dc0673c0497",
+      "hash_match": true,
+      "notes": "Static source review only; no execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/utils/void_mih.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          12
+        ]
+      ],
+      "sha256_expected": "ab215491b7acfe235f3d2549ba036c92169944091b64d93fdc3a8f1e335bd3eb",
+      "sha256_actual": "ab215491b7acfe235f3d2549ba036c92169944091b64d93fdc3a8f1e335bd3eb",
+      "hash_match": true,
+      "notes": "Static source review only; no execution."
+    },
+    {
+      "path": "ARCHITECTURE_MANIFEST.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          166
+        ]
+      ],
+      "sha256_expected": "1f974647cad9da4dc51cb9c1b3e2110caecee6a57a2b24fd58ef7534ac6b1fc8",
+      "sha256_actual": "1f974647cad9da4dc51cb9c1b3e2110caecee6a57a2b24fd58ef7534ac6b1fc8",
+      "hash_match": true,
+      "notes": "Static source review only; no execution."
+    },
+    {
+      "path": "docs/01_spec/spec_cryptographic_profile.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          50
+        ]
+      ],
+      "sha256_expected": "12185dbe327866b10fc130d151ffcba977c6b23483ad29a01df0f70dffa23b24",
+      "sha256_actual": "12185dbe327866b10fc130d151ffcba977c6b23483ad29a01df0f70dffa23b24",
+      "hash_match": true,
+      "notes": "Static source review only; no execution."
+    },
+    {
+      "path": "docs/WHITEPAPER.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          393
+        ]
+      ],
+      "sha256_expected": "9c47a3a740ed97efad5c6f9df4f012687f83685e2e1072c4ed56bcc5b018ba82",
+      "sha256_actual": "9c47a3a740ed97efad5c6f9df4f012687f83685e2e1072c4ed56bcc5b018ba82",
+      "hash_match": true,
+      "notes": "Static source review only; no execution."
+    },
+    {
+      "path": "proof/bundles/attestation_bundle_v1/timestamp",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          1
+        ]
+      ],
+      "sha256_expected": "93b0355249abd95c5ca7e5c7c9b48eeb4137f012583ea5a7c9487460fbe128cf",
+      "sha256_actual": "93b0355249abd95c5ca7e5c7c9b48eeb4137f012583ea5a7c9487460fbe128cf",
+      "hash_match": true,
+      "notes": "Static source review only; no execution."
+    },
+    {
+      "path": "scripts/c5_demos/c5_verifier_cli.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          119
+        ]
+      ],
+      "sha256_expected": "d3aff0f8d68d635452f7675a0cd63fa992b1a2375e935d1d7e48c27c3bb03c30",
+      "sha256_actual": "d3aff0f8d68d635452f7675a0cd63fa992b1a2375e935d1d7e48c27c3bb03c30",
+      "hash_match": true,
+      "notes": "Static source review only; no execution."
+    },
+    {
+      "path": "scripts/c5_quality_gates/audit_token_budget.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          224
+        ]
+      ],
+      "sha256_expected": "69a972ba8cad3cd7146798ae44dbdffb5bc28afc672e339214175adece397efb",
+      "sha256_actual": "69a972ba8cad3cd7146798ae44dbdffb5bc28afc672e339214175adece397efb",
+      "hash_match": true,
+      "notes": "Static source review only; no execution."
+    },
+    {
+      "path": "scripts/create_macos_app.sh",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          98
+        ]
+      ],
+      "sha256_expected": "76d2d83d030636614d901072bb3931b611de35c27dc13931ce982cd4080a7d16",
+      "sha256_actual": "76d2d83d030636614d901072bb3931b611de35c27dc13931ce982cd4080a7d16",
+      "hash_match": true,
+      "notes": "Static source review only; no execution."
+    },
+    {
+      "path": "src/semantic_closure.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          65
+        ]
+      ],
+      "sha256_expected": "09ee5f91236ff4ba318a9618eacf60410e3b2819f4c651fd9aedaf2b3e024a4a",
+      "sha256_actual": "09ee5f91236ff4ba318a9618eacf60410e3b2819f4c651fd9aedaf2b3e024a4a",
+      "hash_match": true,
+      "notes": "Static source review only; no execution."
+    },
+    {
+      "path": "tests/test_axioms_hypothesis.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          529
+        ]
+      ],
+      "sha256_expected": "caec85e208d37833c4d1b0f6b87758bdce7ea1a370b7793a07f8eff214e897aa",
+      "sha256_actual": "caec85e208d37833c4d1b0f6b87758bdce7ea1a370b7793a07f8eff214e897aa",
+      "hash_match": true,
+      "notes": "Static source review only; no execution."
+    },
+    {
+      "path": "tests/test_ns_z3_resource_exhaustion.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          45
+        ]
+      ],
+      "sha256_expected": "5455a67eb14383b5e1403c9379d2b39d18a57f473c493bcc011b7889dae60a3f",
+      "sha256_actual": "5455a67eb14383b5e1403c9379d2b39d18a57f473c493bcc011b7889dae60a3f",
+      "hash_match": true,
+      "notes": "Static source review only; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/agents-sdk/references/workflows.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          132
+        ]
+      ],
+      "sha256_expected": "1778b2dee2788d0238c1d4b61e3ee42538a24166770cf33c38d78c22c1ac6dbe",
+      "sha256_actual": "1778b2dee2788d0238c1d4b61e3ee42538a24166770cf33c38d78c22c1ac6dbe",
+      "hash_match": true,
+      "notes": "Static source review only; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/durable-objects/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          185
+        ]
+      ],
+      "sha256_expected": "ac042dd31d515c9b522864bb46950a4471af1fa9a6e7b29427e65de7a499c770",
+      "sha256_actual": "ac042dd31d515c9b522864bb46950a4471af1fa9a6e7b29427e65de7a499c770",
+      "hash_match": true,
+      "notes": "Static source review only; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/realtimekit/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          113
+        ]
+      ],
+      "sha256_expected": "190ecae4bb2ed00795cec6b59df4b0b3045cbc07d09b818abe398c239e97d531",
+      "sha256_actual": "190ecae4bb2ed00795cec6b59df4b0b3045cbc07d09b818abe398c239e97d531",
+      "hash_match": true,
+      "notes": "Static source review only; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workers-playground/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          88
+        ]
+      ],
+      "sha256_expected": "478b65b6a1827a2c95789dfe6038c16837a7dd463b6b943c630afea63a7454bd",
+      "sha256_actual": "478b65b6a1827a2c95789dfe6038c16837a7dd463b6b943c630afea63a7454bd",
+      "hash_match": true,
+      "notes": "Static source review only; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/examples/Neo_Riemannian_Tonnetz.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          103
+        ]
+      ],
+      "sha256_expected": "7ff60f1a36dd50ec6d19a019bd47e70405e8fa1e6d3d10316ac80b71c0b00408",
+      "sha256_actual": "7ff60f1a36dd50ec6d19a019bd47e70405e8fa1e6d3d10316ac80b71c0b00408",
+      "hash_match": true,
+      "notes": "Static source review only; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_12_shopping.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          61
+        ]
+      ],
+      "sha256_expected": "5d61ee516134e624815b369997ec154b5893b61bff15ce6efc376b204e050e34",
+      "sha256_actual": "5d61ee516134e624815b369997ec154b5893b61bff15ce6efc376b204e050e34",
+      "hash_match": true,
+      "notes": "Static source review only; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-lean4-neurosymbolic-architect/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "sha256_expected": "e40ab7c0a7e90922a3630e98e3d0d146b2b0f6b03ee1bbdd117eed2c8ce5f0b2",
+      "sha256_actual": "e40ab7c0a7e90922a3630e98e3d0d146b2b0f6b03ee1bbdd117eed2c8ce5f0b2",
+      "hash_match": true,
+      "notes": "Static source review only; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-venture-pitch-architect/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "sha256_expected": "3f6324474946b120cb2cae5611f93053d5e45e7cf797b115b5a30069c4027e89",
+      "sha256_actual": "3f6324474946b120cb2cae5611f93053d5e45e7cf797b115b5a30069c4027e89",
+      "hash_match": true,
+      "notes": "Static source review only; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/swarm-quantum-collapse/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "sha256_expected": "e5c2686ab6da7166990318df23511a3673be4d581b22f8d75b8b778c98b3d434",
+      "sha256_actual": "e5c2686ab6da7166990318df23511a3673be4d581b22f8d75b8b778c98b3d434",
+      "hash_match": true,
+      "notes": "Static source review only; no execution."
+    }
+  ],
+  "tool_limitations": [
+    "Codebase graph tools are not exposed in this session; targeted source reads and rg used.",
+    "No tests, builds, application runtime, external service changes, or proof compilation were executed, as required by the audit-only scope.",
+    "A combined initial read was truncated; relevant assigned sources were subsequently read in bounded focused calls.",
+    "No current external API behavior is certified by this static review."
+  ],
+  "tests_run": []
+}

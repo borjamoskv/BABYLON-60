@@ -1,0 +1,395 @@
+{
+  "shard": "009",
+  "findings": [
+    {
+      "title": "Verifier exits successfully after failed hash or signature checks",
+      "severity": "P2",
+      "path": "proof/bundles/attestation_bundle_v1/verify",
+      "line": 75,
+      "evidence": "Lines 34 and 37-51 calculate failure flags; lines 66-73 only print them; main returns normally at line 76. Only missing files call sys.exit(1).",
+      "trigger": "Run verifier on a complete bundle with mismatched binary.sha3 or invalid signature.",
+      "impact": "Shell/CI consumers checking the exit status accept a failed verification as success.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Signed causal hash does not authenticate bundle metadata or artifact",
+      "severity": "P1",
+      "path": "proof/bundles/attestation_bundle_v1/verify",
+      "line": 34,
+      "evidence": "Hash chain compares two copied strings; signature covers causal_hash_str only (48). ARTIFACT is VERIFIED whenever manifest is nonempty (66). commit.txt, claims.snapshot, timestamp and binary bytes are not hashed or bound to the signed value.",
+      "trigger": "Modify claims.snapshot, environment.json, test-results.json or commit.txt in an otherwise valid signed bundle.",
+      "impact": "The verifier can retain VERIFIED hash/signature/artifact rows while reporting attacker-modified provenance or claim counts; it does not verify the advertised bundle integrity.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Lifecycle validation never verifies the certificate signature",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py",
+      "line": 460,
+      "evidence": "Docstring at 422 promises expiration, revocation and signature verification. Implementation only checks CRL membership and valid_until, then returns valid=True at 460-464 without calling verify_certificate_signature.",
+      "trigger": "Pass a fabricated unsigned certificate with a future valid_until and no matching CRL entry to verify_certificate_lifecycle.",
+      "impact": "Caller receives ACTIVE/valid=True for an unauthenticated or modified certificate.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Decision evidence packet does not bind decision data to the proved ledger event",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py",
+      "line": 488,
+      "evidence": "Lines 473-479 obtain ledger integrity/root/proof for seq; line 488 independently includes caller-supplied decision_data, with no lookup or comparison. CortexPersistLedger.get_event_proof (592-608) returns only an entry-hash inclusion proof. Existing test at tests/test_compliance_exporter.py:149 supplies loan data unrelated to the stored action_id payload.",
+      "trigger": "Create a packet for a valid ledger seq while supplying decision_data describing a different action.",
+      "impact": "Signed packet presents unrelated decision data alongside a valid inclusion proof; third parties cannot establish that the claimed decision was logged from this packet.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Packet packing silently truncates sender and recipient lengths",
+      "severity": "P2",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/exergy_binary_ipc.rs",
+      "line": 29,
+      "evidence": "Sender/recipient byte lengths are cast to u16 at 29-30 while complete strings are copied at 35-36; unpack requires raw length to match truncated lengths at 78-80.",
+      "trigger": "Call pack with a sender or recipient whose UTF-8 encoding exceeds 65535 bytes (API has no documented limit validation).",
+      "impact": "pack returns Ok with a packet its own unpack rejects; callers lose round-trip correctness instead of receiving an explicit size error.",
+      "confidence": "high",
+      "kind": "runtime"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".agents/rules/c5_sovereign_antigravity_invariant.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          13
+        ]
+      ],
+      "sha256_expected": "65606af9d812cb0e1c126d092f8103d979aedfb15a697bdf1682490338e8e3ee",
+      "sha256_actual": "65606af9d812cb0e1c126d092f8103d979aedfb15a697bdf1682490338e8e3ee",
+      "hash_match": true
+    },
+    {
+      "path": ".github/workflows/gitleaks.yml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          50
+        ]
+      ],
+      "sha256_expected": "a87ca123561f956bd39b8cc751d70b92ede0820ced1c125773c19104547f54f9",
+      "sha256_actual": "a87ca123561f956bd39b8cc751d70b92ede0820ced1c125773c19104547f54f9",
+      "hash_match": true
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/exergy_binary_ipc.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          145
+        ]
+      ],
+      "sha256_expected": "1e1d3dfcf3d6ad0b5be0fa9836c63d651a0d5ceb75c8be87cae351026133bfcf",
+      "sha256_actual": "1e1d3dfcf3d6ad0b5be0fa9836c63d651a0d5ceb75c8be87cae351026133bfcf",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          675
+        ]
+      ],
+      "sha256_expected": "d7747b65250fa8292a301082981ccd89830c53f815dd410dd87bc120becb57e1",
+      "sha256_actual": "d7747b65250fa8292a301082981ccd89830c53f815dd410dd87bc120becb57e1",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/cognitive_guardrail.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          52
+        ]
+      ],
+      "sha256_expected": "43f53165cce132019e4526d003a7747db8fe2ce7f5454bee7d647c84560202d8",
+      "sha256_actual": "43f53165cce132019e4526d003a7747db8fe2ce7f5454bee7d647c84560202d8",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/utils/void_vec.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          12
+        ]
+      ],
+      "sha256_expected": "b16becfbc6c784c2ccf3c0c27a7af02a67b142becf41493f213959d403ce953f",
+      "sha256_actual": "b16becfbc6c784c2ccf3c0c27a7af02a67b142becf41493f213959d403ce953f",
+      "hash_match": true
+    },
+    {
+      "path": "CITATION.cff",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          19
+        ]
+      ],
+      "sha256_expected": "e2a1c430bbf6c730947dac990415b97cc20133e4400ebab2295ed18abf52bc0c",
+      "sha256_actual": "e2a1c430bbf6c730947dac990415b97cc20133e4400ebab2295ed18abf52bc0c",
+      "hash_match": true
+    },
+    {
+      "path": "docs/01_spec/spec_exergy_ontology.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          73
+        ]
+      ],
+      "sha256_expected": "8855cb9beb0116ce4a8398b1848e9f3178e8e1be70f073726bde2707d126dea5",
+      "sha256_actual": "8855cb9beb0116ce4a8398b1848e9f3178e8e1be70f073726bde2707d126dea5",
+      "hash_match": true
+    },
+    {
+      "path": "docs/adr/ADR-001-lean4-over-coq-isabelle.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          51
+        ]
+      ],
+      "sha256_expected": "da131c1cc89c4f0c7489419fab579b102d6e3ba296ee437e6028646a5e7627ab",
+      "sha256_actual": "da131c1cc89c4f0c7489419fab579b102d6e3ba296ee437e6028646a5e7627ab",
+      "hash_match": true
+    },
+    {
+      "path": "proof/bundles/attestation_bundle_v1/verify",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          76
+        ]
+      ],
+      "sha256_expected": "da44e559a79a11fa860e19cdafd5402490332964c6893719eb742bb7ed7bc99e",
+      "sha256_actual": "da44e559a79a11fa860e19cdafd5402490332964c6893719eb742bb7ed7bc99e",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_demos/eu_ai_act_annex_vi_pack.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          45
+        ]
+      ],
+      "sha256_expected": "09186d7e9eb930fdf17675ba2d0c9627daa163a2c886eed95dc130af4e7a7c6f",
+      "sha256_actual": "09186d7e9eb930fdf17675ba2d0c9627daa163a2c886eed95dc130af4e7a7c6f",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_quality_gates/c5_commit_enforcer.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          102
+        ]
+      ],
+      "sha256_expected": "eb099c80f441c7772fe5e22cfc601d3b7a0835ad14055e5cbc427a0f4f02732e",
+      "sha256_actual": "eb099c80f441c7772fe5e22cfc601d3b7a0835ad14055e5cbc427a0f4f02732e",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/dispatch_daily_ai_report.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          112
+        ]
+      ],
+      "sha256_expected": "e89d5bd721bead0855c564ffd158a853b0f7b6f0fe14c3b165c1ce2867b995a2",
+      "sha256_actual": "e89d5bd721bead0855c564ffd158a853b0f7b6f0fe14c3b165c1ce2867b995a2",
+      "hash_match": true
+    },
+    {
+      "path": "src/seqlock.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          11
+        ]
+      ],
+      "sha256_expected": "9b4d05ed8094545ec3bef6b3f5d7517146ef8b3bc40d959548635bffc3d8eb9a",
+      "sha256_actual": "9b4d05ed8094545ec3bef6b3f5d7517146ef8b3bc40d959548635bffc3d8eb9a",
+      "hash_match": true
+    },
+    {
+      "path": "tests/test_b60_native_bridge.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          175
+        ]
+      ],
+      "sha256_expected": "9aeebd79a8c5c656b1fdae7ee2634122f6ccbc6eaed079a5f9b1dc7e6bdbe96f",
+      "sha256_actual": "9aeebd79a8c5c656b1fdae7ee2634122f6ccbc6eaed079a5f9b1dc7e6bdbe96f",
+      "hash_match": true
+    },
+    {
+      "path": "tests/test_onco_distribution.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          255
+        ]
+      ],
+      "sha256_expected": "7cf58a3c9abefd03fe238f5e225050eaec1f410ef70897a0a5a65b3abe1db36b",
+      "sha256_actual": "7cf58a3c9abefd03fe238f5e225050eaec1f410ef70897a0a5a65b3abe1db36b",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare-email-service/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          103
+        ]
+      ],
+      "sha256_expected": "a62531900a08f9f6c352061d42e8b10a35009f5e1c6f91bbf18752feedad5a79",
+      "sha256_actual": "a62531900a08f9f6c352061d42e8b10a35009f5e1c6f91bbf18752feedad5a79",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/durable-objects/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          187
+        ]
+      ],
+      "sha256_expected": "eb5130f010a09e1c86942cbe784653dfee88ab8f326a964604d0a08e15f8fcd1",
+      "sha256_actual": "eb5130f010a09e1c86942cbe784653dfee88ab8f326a964604d0a08e15f8fcd1",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/realtimekit/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          212
+        ]
+      ],
+      "sha256_expected": "37020e6102c6f4f080f430f3de20c83532930e59cdcaaee52752d1fe62190152",
+      "sha256_actual": "37020e6102c6f4f080f430f3de20c83532930e59cdcaaee52752d1fe62190152",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workers-playground/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          132
+        ]
+      ],
+      "sha256_expected": "c95d27741ecccbad12386ff4fa9dae6c8ff21438bf83f3edfd177ec156a8da69",
+      "sha256_actual": "c95d27741ecccbad12386ff4fa9dae6c8ff21438bf83f3edfd177ec156a8da69",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/examples/Satin_Jackets_Penrose.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          101
+        ]
+      ],
+      "sha256_expected": "d31de1c830a8e1799abe4163e74e46293281254f12beb0894a1baa715e2295c0",
+      "sha256_actual": "d31de1c830a8e1799abe4163e74e46293281254f12beb0894a1baa715e2295c0",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_13_sign_in.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          61
+        ]
+      ],
+      "sha256_expected": "5feca9f6c32e4c1b0a9f8e949bbd27fb1262bb75d950de6453f6d9b20991e99b",
+      "sha256_actual": "5feca9f6c32e4c1b0a9f8e949bbd27fb1262bb75d950de6453f6d9b20991e99b",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-lexicon-enforcer/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          41
+        ]
+      ],
+      "sha256_expected": "abcda86d16ade25f90b47e25f85eca8e0ebdafa517de020d911c80942126ee2d",
+      "sha256_actual": "abcda86d16ade25f90b47e25f85eca8e0ebdafa517de020d911c80942126ee2d",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-video-quality-audit/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "sha256_expected": "8fd6a2ab7c592dace18184c22d4d5752dd9b7b83b240d6535710d6ba76497180",
+      "sha256_actual": "8fd6a2ab7c592dace18184c22d4d5752dd9b7b83b240d6535710d6ba76497180",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/swarm-router/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          41
+        ]
+      ],
+      "sha256_expected": "6fc2a87b735738ddbf4a78ec3d0194b13099e0ffc1dbfb3febc318d0eb7dc826",
+      "sha256_actual": "6fc2a87b735738ddbf4a78ec3d0194b13099e0ffc1dbfb3febc318d0eb7dc826",
+      "hash_match": true
+    }
+  ],
+  "tool_limitations": [
+    "No codebase-memory graph discovery tools exposed in current session; used targeted text reads and rg.",
+    "Static audit only: no repository tests, binaries, verifier execution, network services or runtime actions were run.",
+    "Cloudflare reference examples were read as documentation; current external API behavior was not certified.",
+    "All 25 assigned regular files matched frozen shard SHA-256 values at initial check; all were rehashed when writing report."
+  ],
+  "tests_run": []
+}

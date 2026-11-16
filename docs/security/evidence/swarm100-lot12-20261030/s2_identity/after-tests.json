@@ -1,0 +1,17 @@
+{
+  "command": [
+    "uv",
+    "run",
+    "--locked",
+    "--no-sync",
+    "pytest",
+    "tests/test_swarm100_lot12_s2_identity_regressions.py",
+    "tests/test_crypto_canonical.py",
+    "tests/test_bounty_aeon_sealer.py::test_conformal_merkle_tree_inclusion_and_falsification",
+    "-q",
+    "-o",
+    "addopts=--tb=short"
+  ],
+  "exit_code": 0,
+  "log_sha256": "7a909edbd5635f2c0d5e9f1b7b12267aea4a2524a80e77ee1a4943fc23b62237"
+}

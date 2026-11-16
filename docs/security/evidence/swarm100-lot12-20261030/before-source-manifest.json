@@ -1,0 +1,41 @@
+{
+  "git_head": "dc37db58bf3760a19cdb637fd1cef75375a230d3",
+  "source_sha256": {
+    "01_KISH_ENGINE/babylon60/attestation/conformal_tree.py": "251c9da8553af921d2597ce899e5f5baabfa61412c90818a629db90cbb9694fe",
+    "01_KISH_ENGINE/babylon60/attestation/merkle_anchor.py": "cf90589a3faf04117731c693bb62a0f0486ea9ca9091af17ce915964dc170ce9",
+    "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py": "24df531cfbb817964c4da27b4220351c4080eb4ab9b54c789b11a16d7b07909b",
+    "01_KISH_ENGINE/babylon60/bft/master_ledger_queue.py": "94b6186add7e38c0234d971014908ccb0082de5003ba2adfa2e89fb8e1fd62ab",
+    "01_KISH_ENGINE/babylon60/core/moskv_kernel.py": "2f420cb48c43b1aac7b921d4cd690ba4b27044129aeee8e8f29796db9a07cf27",
+    "01_KISH_ENGINE/babylon60/core/popperian_filter.py": "371150377d929d086bd465398a67ee6811f1e310a834d989aec3ad37183a8b3b",
+    "01_KISH_ENGINE/babylon60/cortex/cortex_purge_anergy.py": "7bcfb0040094964013cd1e539cb0a8051e71fd0f7fbfbe18e5a2de17c7fa6d1c",
+    "01_KISH_ENGINE/babylon60/crypto/identity.py": "4c98615751f6c55215f4bc60122346085c00bcb5cb540af18eba49883211d1b8",
+    "01_KISH_ENGINE/babylon60/crypto/keys.py": "cbf5b3ded4cf854df1d11d37a4d61d0f0122604881c7a02fb0f00497822ee305",
+    "01_KISH_ENGINE/babylon60/kernel/ns_z3_firewall.py": "8c770d13506eea3376bb072d905d7ce65994395989bc0686ba18a779c6d5a65d",
+    "01_KISH_ENGINE/babylon60/primitives/sandbox.py": "22f22c9765c6605bd02ba1a7dce990d31764867fbe469ad2244e54b5c52a0fa4",
+    "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py": "624eb292a797ac7094c4b84357606180465b09f3b7381f5292dba44ac4484634",
+    "01_KISH_ENGINE/services/email_inbound/worker.js": "0e7c5066a1765789be6bdf28d4e16e7e1cfda63d3c47e276723e5eb276ce8719",
+    "02_EDIN_SWARMS/agents_archi/clients/openrouter.py": "eccd5ae01bb29f6e4faeaf3ce275d341a46112e030923d7139222d632d22834a",
+    "02_EDIN_SWARMS/agents_archi/orchestrator/kda_dag_swarm.py": "7df1e0d00504451e2bae540a4d9f8b23973dc2696773d0c2030afe1fdb07a2ff",
+    "scripts/babylon60/gen_oncology_primitives.py": "df8f6fdde757fb4321a270e0b6b2e9b91d8dd67884e13b238e3c6387b2dea5e3",
+    "scripts/c5_cli/moskv_native_host.py": "37e151085da1c01ecd002c9e7839ff366510527c55442a983f6e4a062c08d92a",
+    "scripts/c5_destiladora/proof_emitter_lean4.py": "e0f85cdf754c6d4ea3e1367176dd7eb3caa296a82d07eb86f7f976b5b70cf85c",
+    "scripts/c5_destiladora/test_destiladora_e2e.py": "4faf9b3fddcdb37f6ba083bdf5fe813c46ae3bd230ad35617c9a5088492a70de",
+    "scripts/c5_git_utils/rewrite_commits.py": "30401c75520a9b251d52d7601f6fae6ea4c25723e904dbe8120dd03008ee4a6f",
+    "scripts/c5_icloud_deploy.py": "fb8414b9e3583108e1caaae3dec41a5bada01efb17c7c1d415029592cbee328e",
+    "scripts/c5_l1_ledger/ledger_snapshot_engine.py": "126474f8d45284fee75951c5a9ddd7abc350352be7df3adb6df8653aeb8e3ca2",
+    "scripts/c5_l1_ledger/seal_bounty_aeon.py": "154e38e4308b098e7687b266f337ec684b5ebd9488afcf186ab52c85139f8916",
+    "scripts/c5_sharur/sharur_100_conversation_reporters.py": "f9b264129a7c50751534dfbc378420de3a94c83068a4ba957fad3f0ca9d99c13",
+    "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py": "32cef58031bab84d9fb78b0cbb3ab132008d6f7431f4fe4f6c29da34a8b8876a",
+    "scripts/c5_sharur/sharur_100_swarm_execution.py": "84b155a4f3ff7c106ba7e9eb9e3068bc123d5976757e353da78223b966e324d1",
+    "tools/install_shield.sh": "bbedf380b5945b2c432af96352a0f640ccf09e1e9858ad1498ad61a33919583d",
+    "tools/skill_library/global/youtube-analysis-pipeline/scripts/yt_audit.py": "ecda4dca2ee77aa986d1898aad7fbd998bc07723bf7126c1e697fbd155638d62",
+    "tools/tamkarum_license_provisioner.py": "312b37a43a708ef232ccedf7fbd6bc57c33c181e00fee72eba13b9d6fb2a9096"
+  },
+  "changed_since_plan": [],
+  "initial_status": " M src/lib.rs\n?? src/flash_defense.rs\n?? tests/nemesis_wave8_flash_defense.rs\n",
+  "lockfiles_sha256": {
+    "uv.lock": "d78739746ac5d442a074ad73cbc7fc06d6e803558126f65fbc3d6d251d4c1fb4",
+    "Cargo.lock": "5fb00af45f542e23eafdd82cbd6bd7a08c40675f5310f7a24f7b782b578ad6c6",
+    "pyproject.toml": "50d4594dd2125fcbe7df0578394b5d2c2e6ac7c7dddb4b5fc9be68229eb8d0cd"
+  }
+}

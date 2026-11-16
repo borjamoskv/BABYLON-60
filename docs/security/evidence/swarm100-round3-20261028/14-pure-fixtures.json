@@ -1,0 +1,103 @@
+{
+  "fixture_kind": "isolated_pure_source_fragments",
+  "production_runtime_executed": false,
+  "records": [
+    {
+      "candidate_id": "SW100-C0592",
+      "source_sha256": "9587eb69acd9ab7c04e7739393fa9108ee5a6ace56cf0778010480f87a7fc205",
+      "results": [
+        {
+          "input": [
+            1,
+            1
+          ],
+          "fields": {
+            "sar": 0,
+            "u": 1,
+            "gin": 0,
+            "frac": 0
+          },
+          "actual": 60.0,
+          "expected": 1.0
+        },
+        {
+          "input": [
+            59,
+            60
+          ],
+          "fields": {
+            "sar": 0,
+            "u": 0,
+            "gin": 59,
+            "frac": 0
+          },
+          "actual": 59.0,
+          "expected": 0.9833333333333333
+        }
+      ],
+      "scope": "Only extracted pure Sexagesimal60 class executed; no attestation/native code imported."
+    },
+    {
+      "candidate_id": "SW100-C0199",
+      "source_sha256": "3897b527d73c505688351b0f60008e4cbb8b4c3ca71816654d1d432a8f145004",
+      "results": [
+        {
+          "intent": "alpha beta",
+          "candidate_names": [
+            "alpha"
+          ],
+          "judgment": {
+            "fok_score": 0.7,
+            "tip_of_tongue": false,
+            "relevance_matches": [
+              "alpha"
+            ]
+          }
+        },
+        {
+          "intent": "alpha beta",
+          "candidate_names": [
+            "unrelated"
+          ],
+          "judgment": {
+            "fok_score": 0.5,
+            "tip_of_tongue": false,
+            "relevance_matches": []
+          }
+        },
+        {
+          "intent": "a",
+          "candidate_names": [
+            "skill"
+          ],
+          "judgment": {
+            "fok_score": 0.7,
+            "tip_of_tongue": false,
+            "relevance_matches": [
+              "skill"
+            ]
+          }
+        },
+        {
+          "intent": "alpha",
+          "candidate_names": [],
+          "judgment": {
+            "fok_score": 0.1,
+            "tip_of_tongue": false,
+            "relevance_matches": []
+          }
+        }
+      ],
+      "scope": "Extracted pure FOK method and result dataclass only; no ledger imports. Universal unreachability is additionally established from score floor >= 0.5 versus < 0.35 predicate."
+    },
+    {
+      "candidate_id": "SW100-C0015",
+      "source_sha256": "e8c61ee7e1e6113e374fbc9df94962e072b53e011f93c9c82fd8b83e63867055",
+      "result": "JSONDecodeError",
+      "line": 7,
+      "column": 41,
+      "message": "Expecting ',' delimiter",
+      "scope": "Extracted metadata parsed in memory after replacing only the shell KV substitution; curl and Cloudflare not called."
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "source_sha256": {
+    "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py": "764668378ccdb637bf3d4ff1ef247ee4a4dc28ef24a0c95327515f6c58d5f577",
+    "01_KISH_ENGINE/babylon60/cognitive_pilot/execution.py": "b893bf8701fbc0a5bc9ebc5de29baffb2e42e22011d180849cff278d66158bd5",
+    "01_KISH_ENGINE/babylon60/kernel/kimi_client.py": "68f59ae3f3ce07b2577eb7e79e09352839c7eae9c803b533290d0db5cba2fc34",
+    "pyproject.toml": "50d4594dd2125fcbe7df0578394b5d2c2e6ac7c7dddb4b5fc9be68229eb8d0cd",
+    "uv.lock": "d78739746ac5d442a074ad73cbc7fc06d6e803558126f65fbc3d6d251d4c1fb4",
+    "Cargo.lock": "7c772f6e6ffd29594c5b9bdadb004be09c57af67b60b7be1b56c034a174491b4"
+  },
+  "git_head": "28257bd74fce31446b0350d094e9dab148a1aea7"
+}

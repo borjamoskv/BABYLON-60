@@ -1,0 +1,83 @@
+[
+  {
+    "candidate_id": "SW100-C0428",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+    "rationale": "stop() sets the termination event before queue.join(), while the worker only enters its consume loop when that event is unset. A queued item present before the worker reaches the loop remains unfinished, so join and the item's future can remain pending. The task-done guard in append only rejects later appends; it does not drain or fail already queued futures. This is a current static shutdown defect, not an observed production hang.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+        "start_line": 143,
+        "end_line": 172,
+        "observation": "stop sets _stop_event before awaiting join; append has no stopping-state check."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+        "start_line": 363,
+        "end_line": 397,
+        "observation": "Worker exits its while condition without acquiring or task_done-ing remaining queued items."
+      }
+    ],
+    "source_sha256": "c0dddf3e209bb945fa1f49a3d372b66b18968ebfcc2ea864ce35b26ebb16b237"
+  },
+  {
+    "candidate_id": "SW100-C0429",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+    "rationale": "The idempotency key is computed from plaintext, but every encrypted append creates fresh Fernet ciphertext and the duplicate-event path compares that ciphertext byte-for-byte. A repeat of the same event therefore collides when its randomized ciphertext differs. Rollback amplification is separately tracked by SW100-C0430; this record is the independently actionable encrypted-idempotency defect. No encrypted production ledger was opened.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+        "start_line": 425,
+        "end_line": 437,
+        "observation": "Existing event IDs compare stored_payload directly to the persisted payload_json."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+        "start_line": 480,
+        "end_line": 502,
+        "observation": "UUID key uses canonical plaintext, then Fernet.encrypt runs anew before each transaction."
+      }
+    ],
+    "source_sha256": "c0dddf3e209bb945fa1f49a3d372b66b18968ebfcc2ea864ce35b26ebb16b237"
+  },
+  {
+    "candidate_id": "SW100-C0430",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+    "rationale": "_execute_insert_tx rolls back on transaction exceptions, then _process executes ROLLBACK again without checking transaction state. After a successful first rollback, the second can fail because no transaction exists; the handler closes the connection and raises RuntimeError, which terminates the worker and leaves later queued requests unresolved. The collision branch also rolls back before entering the same transaction exception handler. The issue remains open independently of encrypted retries.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+        "start_line": 431,
+        "end_line": 437,
+        "observation": "Collision path performs an explicit rollback then raises."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+        "start_line": 464,
+        "end_line": 478,
+        "observation": "Transaction exception handler unconditionally performs rollback."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+        "start_line": 500,
+        "end_line": 512,
+        "observation": "Caller performs another rollback and closes the connection when it fails."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+        "start_line": 385,
+        "end_line": 397,
+        "observation": "Non-ValueError process exceptions terminate the worker."
+      }
+    ],
+    "source_sha256": "c0dddf3e209bb945fa1f49a3d372b66b18968ebfcc2ea864ce35b26ebb16b237"
+  }
+]

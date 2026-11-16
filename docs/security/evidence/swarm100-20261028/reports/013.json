@@ -1,0 +1,369 @@
+{
+  "shard": "013",
+  "findings": [
+    {
+      "title": "Kelly inputs do not constrain an approved bid",
+      "severity": "P2",
+      "path": "src/tamkarum.rs",
+      "line": 112,
+      "evidence": "evaluate_bid rejects only zero probability/odds, then commits the entire proposed bid at lines 119-123. It never computes the Kelly fraction or validates probability <=10000. The claims sitrep labels Kelly bid caps verified.",
+      "trigger": "Call evaluate_bid with an in-cap positive bid, win_prob_scaled=1 and positive odds (a negative-expectation wager).",
+      "impact": "The exported budget gate returns Allowed and charges spend despite the promised Kelly constraint. No external auction execution was established; observed consumer src/bin/tamkarum.rs prints verdicts.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "List samples generate object-only MCP schemas",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/kernel/mcp_deductive_engine.py",
+      "line": 112,
+      "evidence": "isinstance(val, (dict, list)) sets p_type=\"object\". to_json_schema emits that type directly; mcp_scaffolder.py:147 maps object to dict and :152 embeds the schema.",
+      "trigger": "Deduce a contract from sample_calls containing an args value such as [1,2].",
+      "impact": "Generated tool schema rejects the same array-shaped argument it was inferred from, breaking tools that accept lists.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Attestation generator emits unexecuted PASS results",
+      "severity": "P1",
+      "path": "scripts/generate_attestation_bundle.py",
+      "line": 55,
+      "evidence": "test_data hardcodes copy_lint/link_checker/evidence_validator to PASS and fixed counts, then writes a fresh timestamp. The only executed subprocess in this generator is git rev-parse. Lines 71-87 also reuse fixed signature/hash/timestamp rather than binding the current commit and artifact digest.",
+      "trigger": "Run the generator on any checkout, including one with failing gates or changed artifacts.",
+      "impact": "The generated current-checkout evidence bundle contains fabricated gate outcomes and stale signing material, so it cannot support the claimed reproducible external verification. The manifest does state certification NONE and hardware UNVERIFIED, which does not qualify the PASS outcomes.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Demo reports universal containment from two fixed simulated traces",
+      "severity": "P2",
+      "path": "scripts/c5_demos/falsacion_llm_gate.py",
+      "line": 122,
+      "evidence": "The loop at 97-101 only chooses between two constant traces. verify_trace has no rejection branch for unknown operations (56-74), and its successful message claims Z3 although no solver is invoked. Final output claims 100% subordination and no leaks to Ring-0.",
+      "trigger": "Run the demonstration or use its terminal verdict as security evidence.",
+      "impact": "Evidence overstates an isolated Python simulator as containment of external LLMs and Ring-0; an unknown opcode is silently accepted by this simulator. No production execution bypass is alleged.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Group creation wizard completes without creating a group",
+      "severity": "P2",
+      "path": "tools/skill_library/global/whatsapp-nexus-protocol/scripts/group_wizard.js",
+      "line": 5,
+      "evidence": "createGroup only logs participants (lines 5-8); no Baileys import, connection, or group-create call exists. The command invokes it unconditionally for nonempty arguments at line 15.",
+      "trigger": "Invoke the advertised self-contained group wizard with participant arguments.",
+      "impact": "The script exits successfully after displaying a creation message while producing no WhatsApp group.",
+      "confidence": "high",
+      "kind": "example"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".agents/skills/adaptive-cron/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          22
+        ]
+      ],
+      "hash_match": true,
+      "sha256_observed": "3cee395c87895d99a8d2a3613640c942f536a0bfba4c7f21e876258ce0c38bdb"
+    },
+    {
+      "path": ".github/workflows/oidc-deploy.yml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          26
+        ]
+      ],
+      "hash_match": true,
+      "sha256_observed": "513786029e249298ea322e800f97d8a778c770e02bcc4465e3f21d555b3518ea"
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/gateway/tier3_ollama.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          170
+        ]
+      ],
+      "hash_match": true,
+      "sha256_observed": "de45ba7f3ec1c27962f240eba4a66b3ceaf26ee5c114a0ce875ceaac8dbec6f1"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/compliance_exporter/templates/base_report.html.j2",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          22
+        ]
+      ],
+      "hash_match": true,
+      "sha256_observed": "dd25333c036136503c05bba357df8056cb9c861ae4ec7d9bd2dade6884b05ce6"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/mcp_deductive_engine.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          157
+        ]
+      ],
+      "hash_match": true,
+      "sha256_observed": "620a17b45eeb5be4f908f021fbf4c0dbb25560694db791ae792a670ad31cf2ac"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/utils/watchdog_poc_v4.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          26
+        ]
+      ],
+      "hash_match": true,
+      "sha256_observed": "3f1706e6210377f09e8e8ec2c63355e4065d094efae8ad65d4ecf1b6bd892343"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "hash_match": true,
+      "sha256_observed": "28a8f42c948ac63bca21de76426de02531c3610b6d6e16cd4bf1c06ec3ad0f27"
+    },
+    {
+      "path": "docs/01_spec/spec_nemesis.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          309
+        ]
+      ],
+      "hash_match": true,
+      "sha256_observed": "13d1e8401688f60a23798cb66d02406abeac3abef2d09f55184233e8ca083380"
+    },
+    {
+      "path": "docs/adr/ADR-005-sovereign-dual-license.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          65
+        ]
+      ],
+      "hash_match": true,
+      "sha256_observed": "38dfd6172c1dc515da0dadde4829ef6c472c31d460df40249841c1d41ce6b107"
+    },
+    {
+      "path": "proof/bundles/attestation_bundle_v2/commit.txt",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          1
+        ]
+      ],
+      "hash_match": true,
+      "sha256_observed": "c2795f6409371c6c24e99841f540ffcfd656125228bda93a1779f6592ee936d8"
+    },
+    {
+      "path": "scripts/c5_demos/falsacion_llm_gate.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          123
+        ]
+      ],
+      "hash_match": true,
+      "sha256_observed": "86cf7616988088ed65bcf3b3a7e04345a6a6bfa7f09c950002e45ebfef83d6a0"
+    },
+    {
+      "path": "scripts/c5_quality_gates/claims_sitrep.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          301
+        ]
+      ],
+      "hash_match": true,
+      "sha256_observed": "6ab2b4c81b4ae816279ad1a72237c78beb8b719b95bdcf6c1fddc3a0eed188b7"
+    },
+    {
+      "path": "scripts/generate_attestation_bundle.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          103
+        ]
+      ],
+      "hash_match": true,
+      "sha256_observed": "588f38c54732f3a2d5b88e7986b3ae3629db6c88dd3be945e5dfef4e7f265c4c"
+    },
+    {
+      "path": "src/tamkarum.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          183
+        ]
+      ],
+      "hash_match": true,
+      "sha256_observed": "8a54bcad1cce6937275656ec1fcf028a75b1c4a3c17a2de0651db7577ec31082"
+    },
+    {
+      "path": "tests/test_bounty_aeon_sealer.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          201
+        ]
+      ],
+      "hash_match": true,
+      "sha256_observed": "255c800b5de3536962c28729ded017c7f3aae85c91303ad21d61fbb01074a358"
+    },
+    {
+      "path": "tests/test_optional_mail_mcp.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          155
+        ]
+      ],
+      "hash_match": true,
+      "sha256_observed": "b5048d3785979c746f1cb0a2b87fc2c50bbf8f369cb95a5d69c3bb1ad2bcc3ca"
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare-email-service/references/routing.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          199
+        ]
+      ],
+      "hash_match": true,
+      "sha256_observed": "db54ef436d72bfa1454a6da95be6a33b29b94266a1e8d1bffe86ffe0e007565c"
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/email-routing/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          89
+        ]
+      ],
+      "hash_match": true,
+      "sha256_observed": "0d2189c79711b3d8a790642e455e55516430ee7e606007841d640124b8b527b6"
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/sandbox/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          96
+        ]
+      ],
+      "hash_match": true,
+      "sha256_observed": "ee7e1f0bc5d0475028571964d6d50352bf48848ac90d8148f1ec15105fdceccb"
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workers-vpc/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          167
+        ]
+      ],
+      "hash_match": true,
+      "sha256_observed": "70e2d004800e75ccdbbdcc37623b97d9f5b4592183aae1421e21bad19e111d80"
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/examples/Trap_808_Glide_Architect.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          82
+        ]
+      ],
+      "hash_match": true,
+      "sha256_observed": "5db035077b406bde5d6e657816cf6bfc8eb8fbeb68b9047d11dfb06eba277371"
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_17_export_bot_template.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "hash_match": true,
+      "sha256_observed": "223c046aaea33d3f0e11676ed9d96b3953e611a25c21422a573f48fec8c6b333"
+    },
+    {
+      "path": "tools/skill_library/global/c5-mushushu-0/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "hash_match": true,
+      "sha256_observed": "859258c7230410d26e61232dcb632e49b8f4a6ff8eb7f9e62f5ed1020e96d1d4"
+    },
+    {
+      "path": "tools/skill_library/global/c5-wetware-and-venture-ops/references/modules/c5-codebase-valuation-audit/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          154
+        ]
+      ],
+      "hash_match": true,
+      "sha256_observed": "ffa16c3a4754bb104d99d233134ad20fb2323a4f680ba67fbd84d77bfb003f59"
+    },
+    {
+      "path": "tools/skill_library/global/whatsapp-nexus-protocol/scripts/group_wizard.js",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          15
+        ]
+      ],
+      "hash_match": true,
+      "sha256_observed": "7ab20be3dd2a33792fae675994122c0291dad8b26f159a8c885a869a94561122"
+    }
+  ],
+  "tool_limitations": [
+    "No codebase-memory graph tools exposed in native session; targeted rg and bounded source reads used.",
+    "Audit was static only: no repository tests, builds, runtime, network API verification, or effect execution.",
+    "Claims in external platform reference documents were read but current third-party platform behavior was not independently certified."
+  ],
+  "tests_run": []
+}

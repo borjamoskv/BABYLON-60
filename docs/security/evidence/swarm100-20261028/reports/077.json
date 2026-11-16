@@ -1,0 +1,428 @@
+{
+  "shard": "077",
+  "findings": [
+    {
+      "title": "Shutdown stops before draining accepted transactions",
+      "severity": "P1",
+      "path": "01_KISH_ENGINE/babylon60/bft/master_ledger_queue.py",
+      "line": 108,
+      "evidence": "shutdown sets _stop_event before awaiting writer; loop condition at line 54 exits when set. Sentinel does not override that condition.",
+      "trigger": "Submit transactions then immediately await shutdown, before writer drains queue.",
+      "impact": "Accepted auxiliary database writes can be lost while shutdown logs clean completion; queued task counts remain unfinished.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Shared /tmp prompt queue follows attacker-controlled symlinks",
+      "severity": "P1",
+      "path": "scripts/c5_cli/moskv_native_host.py",
+      "line": 195,
+      "evidence": "QUEUE_FILE is fixed /tmp/moskv_fx_queue.json (181); exists/read_text/write_text follow symlinks with no owner or O_NOFOLLOW checks.",
+      "trigger": "Another local user precreates this predictable pathname as a symlink to a file writable by host user; user invokes --enqueue.",
+      "impact": "Host overwrites target file with JSON under its own privileges; same shared queue also permits prompt injection. No runtime exploitation performed.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Concurrent prompt producers and consumers lose FIFO updates",
+      "severity": "P2",
+      "path": "scripts/c5_cli/moskv_native_host.py",
+      "line": 187,
+      "evidence": "enqueue_prompt and get_next_prompt independently read JSON, modify a list, and write whole file at lines 195 and 206 without locking or atomic replacement.",
+      "trigger": "Two --enqueue processes overlap, or READY consumes while CLI enqueues.",
+      "impact": "Last writer loses newly enqueued prompts or restores consumed prompts; readers can see partial JSON and reset queue.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "History rewrite discards local work before establishing backup",
+      "severity": "P1",
+      "path": "scripts/c5_git_utils/rewrite_commits.py",
+      "line": 30,
+      "evidence": "_ensure_main executes checkout main then reset --hard origin/main; main calls it first (90). No clean-tree check or backup creation exists although header claims preservation.",
+      "trigger": "Operator runs script with uncommitted main changes or local main commits ahead of origin/main.",
+      "impact": "Tracked work and local main history are discarded before rewrite validation. This is direct CLI behavior, not inferred downstream execution.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "State monitor commits unrelated staged changes",
+      "severity": "P1",
+      "path": "scripts/c5_thermo/c5_exergy_optimizer_monitor.py",
+      "line": 202,
+      "evidence": "git_sentinel_commit runs git commit without path restriction on existing index, then c5_real_colapso amends at 270; _git ignores return codes and disables signing, commit skips hooks.",
+      "trigger": "Run monitor with unrelated staged changes present.",
+      "impact": "Unrelated changes are included in automatic commit/amend without review; failed git commands can still be reported as completed.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "TCW classifier omits required flanking nucleotide",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/genomics/engine.py",
+      "line": 77,
+      "evidence": "Forward branch checks middle C and final A/T but never motif[0] == T; reverse branch checks middle G and first A/T but never final A. Docstring at 88 specifies TCW.",
+      "trigger": "Pass C>T with context ACA or CCA, or G>A with TGC.",
+      "impact": "Non-TCW variants are counted as TCW and can change reported enrichment and is_apobec_driven. This finding concerns implemented string predicate, without clinical efficacy claims.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Energy and enstrophy truncate squared i64 values to u64",
+      "severity": "P2",
+      "path": "src/dec.rs",
+      "line": 379,
+      "evidence": "discrete_enstrophy and discrete_kinetic_energy square in i128 then cast each square to u64 before summation (379,384).",
+      "trigger": "Form containing a value 4294967296 (2^32).",
+      "impact": "Its square 2^64 truncates to zero, returning zero energy/enstrophy for a nonzero field; larger sums also overflow u64. Pure arithmetic counterexample, no execution.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Physical grid spacing absent from numerical RHS",
+      "severity": "P2",
+      "path": "src/dec.rs",
+      "line": 802,
+      "evidence": "Taylor-Green initializer stores point velocities (679,685), grid_spacing_h is 2*pi/n (650), but compute_vorticity returns unscaled d1 differences (703) and compute_rhs uses unscaled curl and curl-adjoint without 1/h or 1/h^2 (796-802).",
+      "trigger": "Run the stated [0,2pi)^3 velocity simulation at two mesh resolutions with same physical viscosity.",
+      "impact": "Advection and diffusion rates scale with resolution instead of the configured physical PDE; CFL uses physical h while RHS uses lattice differences. Limited to code discretization consistency.",
+      "confidence": "high",
+      "kind": "runtime"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".cargo/audit.toml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          3
+        ]
+      ],
+      "inventory_sha256": "fdb69fb468d38984621a359486a83e2a4e9edd559c131f75860b3d46de6b9889",
+      "observed_sha256": "fdb69fb468d38984621a359486a83e2a4e9edd559c131f75860b3d46de6b9889",
+      "hash_match": true
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-runtime/Cargo.toml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          17
+        ]
+      ],
+      "inventory_sha256": "66e56c7d370ebb025c51d60a057975f374f6a56d68ec446e91ca62e5f01bb180",
+      "observed_sha256": "66e56c7d370ebb025c51d60a057975f374f6a56d68ec446e91ca62e5f01bb180",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/bft/master_ledger_queue.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          120
+        ]
+      ],
+      "inventory_sha256": "94b6186add7e38c0234d971014908ccb0082de5003ba2adfa2e89fb8e1fd62ab",
+      "observed_sha256": "94b6186add7e38c0234d971014908ccb0082de5003ba2adfa2e89fb8e1fd62ab",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/genomics/engine.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          181
+        ]
+      ],
+      "inventory_sha256": "70559972965d468a8a9ef20317d4315532b420aa67a680963c67dd96fa8134cb",
+      "observed_sha256": "70559972965d468a8a9ef20317d4315532b420aa67a680963c67dd96fa8134cb",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/transducers/linguistic_entropy.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          369
+        ]
+      ],
+      "inventory_sha256": "ec59acbb88fa74bb0b12cbdb05b5cbe8bc49095cd1beb2f24dc892a9a39d5e58",
+      "observed_sha256": "ec59acbb88fa74bb0b12cbdb05b5cbe8bc49095cd1beb2f24dc892a9a39d5e58",
+      "hash_match": true
+    },
+    {
+      "path": "02_EDIN_SWARMS/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          65
+        ]
+      ],
+      "inventory_sha256": "76d8b2d55b395168713a701d92010e47274a9a883a52731dc5f93d590aa1d573",
+      "observed_sha256": "76d8b2d55b395168713a701d92010e47274a9a883a52731dc5f93d590aa1d573",
+      "hash_match": true
+    },
+    {
+      "path": "crates/eridu-infer/Cargo.toml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          28
+        ]
+      ],
+      "inventory_sha256": "f2492c824867d8eb3f65919bb8b3e5d13861a0dd08b82b769816b607b9b4ea5d",
+      "observed_sha256": "f2492c824867d8eb3f65919bb8b3e5d13861a0dd08b82b769816b607b9b4ea5d",
+      "hash_match": true
+    },
+    {
+      "path": "docs/06_theory/CONTINUIDAD_SIN_OBEDIENCIA_TEORIA_ARQUITECTONICA.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          369
+        ]
+      ],
+      "inventory_sha256": "12d537f9b3f9b22851ec4b5f91904a1a4e8878188060996fbfdea9286ef84f1a",
+      "observed_sha256": "12d537f9b3f9b22851ec4b5f91904a1a4e8878188060996fbfdea9286ef84f1a",
+      "hash_match": true
+    },
+    {
+      "path": "examples/poc_bifurcacion.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          98
+        ]
+      ],
+      "inventory_sha256": "eca96958823ede5ad6b4040e7c2c3f94817ee6bd4e9414f6470061cc47b1a6a6",
+      "observed_sha256": "eca96958823ede5ad6b4040e7c2c3f94817ee6bd4e9414f6470061cc47b1a6a6",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_cli/moskv_native_host.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          355
+        ]
+      ],
+      "inventory_sha256": "37e151085da1c01ecd002c9e7839ff366510527c55442a983f6e4a062c08d92a",
+      "observed_sha256": "37e151085da1c01ecd002c9e7839ff366510527c55442a983f6e4a062c08d92a",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_git_utils/rewrite_commits.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          102
+        ]
+      ],
+      "inventory_sha256": "30401c75520a9b251d52d7601f6fae6ea4c25723e904dbe8120dd03008ee4a6f",
+      "observed_sha256": "30401c75520a9b251d52d7601f6fae6ea4c25723e904dbe8120dd03008ee4a6f",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_thermo/c5_exergy_optimizer_monitor.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          280
+        ]
+      ],
+      "inventory_sha256": "2f2b8cfcede8d34ad2f57ecfe765060debf85a946d2645ea38dd228e0196c861",
+      "observed_sha256": "2f2b8cfcede8d34ad2f57ecfe765060debf85a946d2645ea38dd228e0196c861",
+      "hash_match": true
+    },
+    {
+      "path": "src/dec.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          871
+        ]
+      ],
+      "inventory_sha256": "220cace5a5f440c3bf2582445ecedd6f1574dd1075e7227b8e38c6abc845d938",
+      "observed_sha256": "220cace5a5f440c3bf2582445ecedd6f1574dd1075e7227b8e38c6abc845d938",
+      "hash_match": true
+    },
+    {
+      "path": "tests/test_async_db_threading.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          102
+        ]
+      ],
+      "inventory_sha256": "e4bd8150fab7a24d7de6aebd83b235ed12fab8e56616a3eef677a13278fa1786",
+      "observed_sha256": "e4bd8150fab7a24d7de6aebd83b235ed12fab8e56616a3eef677a13278fa1786",
+      "hash_match": true
+    },
+    {
+      "path": "tests/test_iteracion2_fixes.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          135
+        ]
+      ],
+      "inventory_sha256": "cee8e43e328ae7e04b2790356f2a03e7a16c05e0c1e09526400d00ea110d5de3",
+      "observed_sha256": "cee8e43e328ae7e04b2790356f2a03e7a16c05e0c1e09526400d00ea110d5de3",
+      "hash_match": true
+    },
+    {
+      "path": "tools/examples/hello_causal.b60",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          45
+        ]
+      ],
+      "inventory_sha256": "f75826ad90d11d47777298364c21a108065af93b2cc668257309b7a30c02f9ee",
+      "observed_sha256": "f75826ad90d11d47777298364c21a108065af93b2cc668257309b7a30c02f9ee",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/cache-reserve/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          147
+        ]
+      ],
+      "inventory_sha256": "90f848f9b142ddbfd911eea882b46bd45b5062efeda6b22e5be3d526c6155144",
+      "observed_sha256": "90f848f9b142ddbfd911eea882b46bd45b5062efeda6b22e5be3d526c6155144",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/pipelines/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          130
+        ]
+      ],
+      "inventory_sha256": "2790aa7ad664b4ba467d39f8fe8952b663876b56ba4d229bb7d4b15251823f4c",
+      "observed_sha256": "2790aa7ad664b4ba467d39f8fe8952b663876b56ba4d229bb7d4b15251823f4c",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/vectorize/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          88
+        ]
+      ],
+      "inventory_sha256": "057eaef43f53e8bd71699ca17a3d296eb0c165ce1c1a304d71dea53ee9ab0908",
+      "observed_sha256": "057eaef43f53e8bd71699ca17a3d296eb0c165ce1c1a304d71dea53ee9ab0908",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          41
+        ]
+      ],
+      "inventory_sha256": "677ac958fb0f574862708c871b8b97309f80f50633ae483af38e275d4a8b0bd2",
+      "observed_sha256": "677ac958fb0f574862708c871b8b97309f80f50633ae483af38e275d4a8b0bd2",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents/agent_45_site_playbooks_united.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "inventory_sha256": "e43b83c1002059c88c9416941defad65b59b1d0b6df9c8c767789e85a7b0d7ef",
+      "observed_sha256": "e43b83c1002059c88c9416941defad65b59b1d0b6df9c8c767789e85a7b0d7ef",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-epistemic-thermodynamics/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          48
+        ]
+      ],
+      "inventory_sha256": "f3d40f3312a8a1d60c3a037a8f9d36d121b5e1e613723f5a6c691d193d565bc2",
+      "observed_sha256": "f3d40f3312a8a1d60c3a037a8f9d36d121b5e1e613723f5a6c691d193d565bc2",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/whatsapp-nexus-protocol/scripts/group_wizard.js",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          15
+        ]
+      ],
+      "inventory_sha256": "7ab20be3dd2a33792fae675994122c0291dad8b26f159a8c885a869a94561122",
+      "observed_sha256": "7ab20be3dd2a33792fae675994122c0291dad8b26f159a8c885a869a94561122",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/github-api-rate-limit-optimization/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "inventory_sha256": "11f10320ac72acc127aba275eaf8ab5cc0b7589b0d292604e949403432fd8a9e",
+      "observed_sha256": "11f10320ac72acc127aba275eaf8ab5cc0b7589b0d292604e949403432fd8a9e",
+      "hash_match": true
+    },
+    {
+      "path": "tools/tamkarum_swarm_orchestrator.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          334
+        ]
+      ],
+      "inventory_sha256": "5b82078d20166c30a0a562ed45f74c6f4be59cd49ec909b8deb06e2404fec3a0",
+      "observed_sha256": "5b82078d20166c30a0a562ed45f74c6f4be59cd49ec909b8deb06e2404fec3a0",
+      "hash_match": true
+    }
+  ],
+  "tool_limitations": [
+    "Native codebase-memory graph tools not exposed in ALL_TOOLS; used targeted text search and source reads.",
+    "Audit only: no tests, builds, scripts under audit, or runtime effects executed.",
+    "External vendor reference documents reviewed as text; product/API freshness was not independently verified.",
+    "All 25 assigned files were regular text files and inventory hashes matched; no assigned symlinks."
+  ],
+  "tests_run": []
+}

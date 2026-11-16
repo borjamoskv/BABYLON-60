@@ -1,0 +1,7 @@
+{
+  "source_sha256": "668ef1b2511a52fff1acf5f1ac4bfd325e3fd4b6789116f47bf01c733fa21b19",
+  "empty_observation": "platform.machine",
+  "operator_runtime_executed": false,
+  "generator": "SUCCESS",
+  "verifier": "ValueError: unverified platform cannot certify hardware"
+}

@@ -23,7 +23,7 @@ fn snapshot() -> ImmutableSkillsSnapshot {
 }
 
 fn proposal(snapshot: &ImmutableSkillsSnapshot, target: &Path) -> Value {
-    let skill = snapshot.resolve("c5-neural-face-swap-cuadrilla").unwrap();
+    let skill = snapshot.resolve("cortex-skill-genesis").unwrap();
     let pre_hash = hex::encode(sha256_digest(b"before"));
     json!({
         "skill_id": skill.name, "version": skill.version, "tool_identity_hash": skill.tool_identity_hash,
@@ -102,7 +102,7 @@ fn lock_pins_policy_as_well_as_artifact() {
         let mut lock = snapshot.to_lockfile();
         let entry = lock
             .skills
-            .get_mut("c5-neural-face-swap-cuadrilla")
+            .get_mut("cortex-skill-genesis")
             .unwrap();
         match field {
             "effect_profile" => entry.effect_profile.requires_action_lease = false,

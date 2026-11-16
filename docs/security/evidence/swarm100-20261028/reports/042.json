@@ -1,0 +1,410 @@
+{
+  "shard": "042",
+  "findings": [
+    {
+      "title": "Resolve the actual field offset when lowering assignments",
+      "severity": "P2",
+      "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/lowering.rs",
+      "line": 49,
+      "evidence": "AssignField discards _field and emits FieldPtr offset: 0 at line 56. LayoutEngine already records field_offsets; backend_x86.rs lines 133-139 uses the IR offset to generate LEA.",
+      "trigger": "Call the exported LoweringContext.lower API with a struct containing multiple fields and an assignment to a non-first field.",
+      "impact": "Generated IR writes the first field instead of the requested field. This is an acknowledged PoC limitation; no active lowering caller was found within the compiler crate, so no deployed runtime consequence is asserted.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Use a monotonic clock for the cooldown interval",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/core/thermal_lock.py",
+      "line": 55,
+      "evidence": "poison records time.time() at line 33; attempt_reset subtracts time.time() at line 55 to enforce a duration. FisherBayesianEntropyGate imports and instantiates this lock and checks it before evaluation (transducers/fisher_bayesian_gate.py lines 104,125).",
+      "trigger": "System wall clock advances by at least cooldown_seconds after poison, or moves backward while a reset is attempted.",
+      "impact": "The public reset method may allow reset before the elapsed cooldown, or reject it excessively long. No active attempt_reset caller was found in the targeted Python search; this is a lock API defect, not a demonstrated protected-effect bypass.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Create a private temporary directory before writing and executing the demo",
+      "severity": "P2",
+      "path": "scripts/c5_demos/poc_quasar_triple_vector.sh",
+      "line": 22,
+      "evidence": "SESSION_HASH derives from Bash RANDOM (line 16); the script uses mkdir -p on a predictable /tmp path, writes main.rs there, builds quasar_engine, writes retrovirus.flac with -y and finally replaces TARGET_FLAC (lines 24-81).",
+      "trigger": "Another local principal precreates one of the limited candidate temporary directories or symlinks before this demo runs.",
+      "impact": "The demo can follow preexisting filesystem objects when writing sources/output and executing its built artifact. Use mktemp -d with a private directory rather than accepting a preexisting shared /tmp path. This is an example-script local filesystem issue; no script was executed.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Label generated swarm findings and metrics as synthetic in exported evidence",
+      "severity": "P2",
+      "path": "scripts/repatriated/legion_100_swarm_audit.py",
+      "line": 95,
+      "evidence": "execute_agent selects a constant corpus item (line 92), adds sine/cosine perturbations to fixed scores (95-99), sleeps (102), and exports these as findings with exergy_score, kolmogorov_ratio and shannon_entropy (111-114,157-167). The JSON contains no synthetic/simulation qualifier; console calls them 100 concurrent agents.",
+      "trigger": "Run the script and consume legion_100_results.json as the audit evidence suggested by its audit docstring.",
+      "impact": "The output presents predetermined judgments and manufactured metric variations as agent audit results, with no source retrieval or measurement. It should explicitly mark simulation and avoid presenting fixed metrics as measured quantities. No downstream consumer or real agent execution is established.",
+      "confidence": "high",
+      "kind": "example"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".agents/skills/c5-epistemic-thermodynamics-project/references/modules/symbiotic-cognitive-architecture/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          131
+        ]
+      ],
+      "sha256_expected": "bf013041f7743108ec248faf62906facc91f3d6847f2c19511de45703c79da01",
+      "sha256_observed": "bf013041f7743108ec248faf62906facc91f3d6847f2c19511de45703c79da01",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/lowering.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          73
+        ]
+      ],
+      "sha256_expected": "e8bf353651f3bfba1c929f1d891ab72d9b45bc257fbc200f22e44e5e2b11fb01",
+      "sha256_observed": "e8bf353651f3bfba1c929f1d891ab72d9b45bc257fbc200f22e44e5e2b11fb01",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/api/__init__.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          19
+        ]
+      ],
+      "sha256_expected": "4b16d7b995c0dee5141d15bc812e1f6b2cac6a940c2693214839a44f92291965",
+      "sha256_observed": "4b16d7b995c0dee5141d15bc812e1f6b2cac6a940c2693214839a44f92291965",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/core/thermal_lock.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          65
+        ]
+      ],
+      "sha256_expected": "fab9be7dc98c62c95f3ac93ecae7ed06d9e53aa2564fc7f61eb6b4106a8de26f",
+      "sha256_observed": "fab9be7dc98c62c95f3ac93ecae7ed06d9e53aa2564fc7f61eb6b4106a8de26f",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/primitives/__init__.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          31
+        ]
+      ],
+      "sha256_expected": "50e7384d2af0cba5e87ce5bb438b4863ce4bd4b3b6f23d42ecb06f689ca6d7d6",
+      "sha256_observed": "50e7384d2af0cba5e87ce5bb438b4863ce4bd4b3b6f23d42ecb06f689ca6d7d6",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "01_KISH_ENGINE/cortex/crates/cortex-core/src/lib.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          7
+        ]
+      ],
+      "sha256_expected": "1cb984865f22f62c8226dfbabcdd0679230f392b8f2142ee26bb2762b2c5de46",
+      "sha256_observed": "1cb984865f22f62c8226dfbabcdd0679230f392b8f2142ee26bb2762b2c5de46",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "crates/b60-lang/src/bin/fsm_stress.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          80
+        ]
+      ],
+      "sha256_expected": "b0901878bb1f090f85d157e630f6662cf98600f7d891012d02da38487f26d5b2",
+      "sha256_observed": "b0901878bb1f090f85d157e630f6662cf98600f7d891012d02da38487f26d5b2",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "docs/03_guides/guide_repository_source_of_truth.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "sha256_expected": "e29c038e769ce039787c219707dc5bc65c00d17f27b65448021720a0250b0dc9",
+      "sha256_observed": "e29c038e769ce039787c219707dc5bc65c00d17f27b65448021720a0250b0dc9",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "docs/security/evidence/harness-audit-2026-10-24/verification-results.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          59
+        ]
+      ],
+      "sha256_expected": "c42aec74b4890179bf7fae15e2c05549afbf5067ddd526bc1f31b11f42f3b8c5",
+      "sha256_observed": "c42aec74b4890179bf7fae15e2c05549afbf5067ddd526bc1f31b11f42f3b8c5",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "proof/lean/NavierStokesSobolevKato.lean",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          145
+        ]
+      ],
+      "sha256_expected": "f744326608118898f44ece1ea7c9c0546233066dac20a05d83d4fd7e7d04d208",
+      "sha256_observed": "f744326608118898f44ece1ea7c9c0546233066dac20a05d83d4fd7e7d04d208",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "scripts/c5_demos/poc_quasar_triple_vector.sh",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          87
+        ]
+      ],
+      "sha256_expected": "2402fb28efe41c78aa731b0ba5b522b6a54145cb187bc8ac002107c37e92b45b",
+      "sha256_observed": "2402fb28efe41c78aa731b0ba5b522b6a54145cb187bc8ac002107c37e92b45b",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "scripts/c5_quality_gates/verify_distribution.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          142
+        ]
+      ],
+      "sha256_expected": "a4923200d622b846ba2a603c9b43d064a45dd0055df78cbb3b1f884fa2f40ee0",
+      "sha256_observed": "a4923200d622b846ba2a603c9b43d064a45dd0055df78cbb3b1f884fa2f40ee0",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "scripts/repatriated/legion_100_swarm_audit.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          172
+        ]
+      ],
+      "sha256_expected": "498bccec19e43c8d8ea7960ad1bd3c7df56188e2b0bff7418e453736cd02fefc",
+      "sha256_observed": "498bccec19e43c8d8ea7960ad1bd3c7df56188e2b0bff7418e453736cd02fefc",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "tests/fl_mcp01_authority_drift.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          348
+        ]
+      ],
+      "sha256_expected": "6caee766bd6f157ee24bb8238ab24ee3ec08e8ea42d9ffe122bc36f3d0248db5",
+      "sha256_observed": "6caee766bd6f157ee24bb8238ab24ee3ec08e8ea42d9ffe122bc36f3d0248db5",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "tests/test_cortex_persist_batch_regressions.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          108
+        ]
+      ],
+      "sha256_expected": "239ef3d615128923beaa8192120e0e733d5deeb057c990d72093d4b13edec8f7",
+      "sha256_observed": "239ef3d615128923beaa8192120e0e733d5deeb057c990d72093d4b13edec8f7",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "tests/test_skill_maintenance.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          167
+        ]
+      ],
+      "sha256_expected": "4c1d9389aa14ab119b74f90fa2ae8afa14820ba58a8080d450b7d7697d3f3813",
+      "sha256_observed": "4c1d9389aa14ab119b74f90fa2ae8afa14820ba58a8080d450b7d7697d3f3813",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/api-shield/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          125
+        ]
+      ],
+      "sha256_expected": "485d767b531a8e8035bbc782cde8a39fc77e78d582f2b8106019168f72bddec1",
+      "sha256_observed": "485d767b531a8e8035bbc782cde8a39fc77e78d582f2b8106019168f72bddec1",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/images/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          115
+        ]
+      ],
+      "sha256_expected": "b1cfebd7afdd7024e581e4a1002a304af0c00e630d4cd4623e97caae1c02fcd1",
+      "sha256_observed": "b1cfebd7afdd7024e581e4a1002a304af0c00e630d4cd4623e97caae1c02fcd1",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/static-assets/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          189
+        ]
+      ],
+      "sha256_expected": "a9b508f7936d8edf7c63c65fb217d27f6aa555209a21e0a65eadf7a32d9ec9c4",
+      "sha256_observed": "a9b508f7936d8edf7c63c65fb217d27f6aa555209a21e0a65eadf7a32d9ec9c4",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/sandbox-sdk/references/api-quick-ref.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          113
+        ]
+      ],
+      "sha256_expected": "a4e33b6a4543aff84a4cee75fb6b3b26bf96340c7026266a5fc4df3aa699f08c",
+      "sha256_observed": "a4e33b6a4543aff84a4cee75fb6b3b26bf96340c7026266a5fc4df3aa699f08c",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents/agent_10_add_connector.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          61
+        ]
+      ],
+      "sha256_expected": "a1b57c38562a91ce77f45c34d5650936b9e5f1530533e1e3276860244eeb3e2c",
+      "sha256_observed": "a1b57c38562a91ce77f45c34d5650936b9e5f1530533e1e3276860244eeb3e2c",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_46_site_playbooks_ups.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "sha256_expected": "9e47faa54f66d0e82a23af44b742b82f9416a935b6a2a0d3c35739614b79d65b",
+      "sha256_observed": "9e47faa54f66d0e82a23af44b742b82f9416a935b6a2a0d3c35739614b79d65b",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-browser-forensics-and-extension-triage/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          90
+        ]
+      ],
+      "sha256_expected": "6f27185df5d5867305cf87e1dd80f6af22891616483a8ec27ac4e623106b44d8",
+      "sha256_observed": "6f27185df5d5867305cf87e1dd80f6af22891616483a8ec27ac4e623106b44d8",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "tools/skill_library/global/existence-gap-audit/scripts/ci_supply_chain.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          266
+        ]
+      ],
+      "sha256_expected": "3082e5052e4db46256c073b8c403aac944fd62c0afb3a23fc3ac3ce6829cad4f",
+      "sha256_observed": "3082e5052e4db46256c073b8c403aac944fd62c0afb3a23fc3ac3ce6829cad4f",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "tools/skill_library/workspace/c5-epistemic-thermodynamics-project/references/modules/cloud-chamber/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "sha256_expected": "3e05f20fadd475daa5ab07387c14cd430c340d66c8e934f59a89790f836b13f8",
+      "sha256_observed": "3e05f20fadd475daa5ab07387c14cd430c340d66c8e934f59a89790f836b13f8",
+      "changed_since_manifest": false,
+      "symlink": false
+    }
+  ],
+  "tool_limitations": [
+    "No native codebase-memory graph tools were exposed: inspected session tool names for search_graph/index_repository and received none; used targeted source reads and rg.",
+    "Static audit only: no tests, builds, runtime harnesses, protected effects, network calls, or repository edits performed.",
+    "Large combined read output was truncated; smaller follow-up reads recovered affected assigned-file ranges.",
+    "External product documentation examples were reviewed as text; current Cloudflare service/API compatibility was not independently verified.",
+    "Working tree was dirty on main; existing changes were preserved. Hash comparisons cover assigned files at report creation, not a frozen repository snapshot."
+  ],
+  "tests_run": []
+}

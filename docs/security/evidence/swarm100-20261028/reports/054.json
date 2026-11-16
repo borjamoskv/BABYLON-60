@@ -1,0 +1,424 @@
+{
+  "shard": "054",
+  "findings": [
+    {
+      "title": "REPL spins indefinitely after stdin reaches EOF",
+      "severity": "P2",
+      "path": "crates/b60-lang/src/repl.rs",
+      "line": 171,
+      "evidence": "read_line result is checked only with is_err(); Ok(0) falls through to eval_line of an empty buffer and immediately repeats the loop. CLI declares Repl in main.rs:56.",
+      "trigger": "Close stdin with Ctrl-D or run the interactive REPL with an exhausted pipe.",
+      "impact": "Process remains running, repeatedly prints prompts and consumes CPU/output resources.",
+      "confidence": "high (static inspection; not executed)",
+      "kind": "runtime"
+    },
+    {
+      "title": "Sexagesimal addition overflows for accepted u64 operands",
+      "severity": "P2",
+      "path": "crates/b60-lang/src/repl.rs",
+      "line": 58,
+      "evidence": "User inputs are parsed as unrestricted u64 at lines 53-56; f1 + f2 and s1 + s2 + carry use unchecked arithmetic at 58 and 61.",
+      "trigger": "sexa add 18446744073709551615 0 1 0, or two maximal fraction operands.",
+      "impact": "Debug builds panic; release builds can wrap and report an incorrect exact Q60 result.",
+      "confidence": "high (static inspection; not executed)",
+      "kind": "runtime"
+    },
+    {
+      "title": "Paper downloader disables HTTPS certificate validation globally",
+      "severity": "P2",
+      "path": "scripts/sharur/download_papers.py",
+      "line": 6,
+      "evidence": "ssl._create_default_https_context is replaced by ssl._create_unverified_context before urlopen calls at lines 20 and 28.",
+      "trigger": "Execute this script on a network where HTTPS traffic can be intercepted.",
+      "impact": "Crossref metadata and downloaded paper bytes can be substituted without certificate errors; imported use also alters later urllib HTTPS behavior in that process.",
+      "confidence": "high (static inspection; not executed)",
+      "kind": "runtime"
+    },
+    {
+      "title": "YAML parser strips hash characters inside quoted strings",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/primitives/yaml_parser.py",
+      "line": 83,
+      "evidence": "re.sub(r\"#.*$\", \"\", line_raw) runs before _parse_scalar processes quotes. parse_yaml is publicly reexported by primitives/__init__.py.",
+      "trigger": "Parse a supported scalar such as color: \"#ffffff\" or value: \"abc#def\".",
+      "impact": "Configuration strings are silently truncated, with quote fragments retained; valid quoted YAML scalar values cannot be represented reliably.",
+      "confidence": "high (static inspection; not executed)",
+      "kind": "runtime"
+    },
+    {
+      "title": "Gemini generation tool returns a canned response without invoking Gemini",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/cortex/gemini_labs_nexus.py",
+      "line": 144,
+      "evidence": "The registered gemini_labs_generate tool formats a fixed response_text; GEMINI_API_KEY is read but no API client/request appears anywhere in this module. Result and telemetry label it GEMINI_GENERATE (149-152).",
+      "trigger": "Invoke gemini_labs_generate with FastMCP installed.",
+      "impact": "Callers receive a purported generated response independent of prompt content, and the ledger records a model generation that never occurred.",
+      "confidence": "high (static inspection; not executed)",
+      "kind": "runtime"
+    },
+    {
+      "title": "Receipt producer labels a public hash prefix as an Ed25519 signature",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/cortex/gemini_labs_nexus.py",
+      "line": 90,
+      "evidence": "signature_ed25519 is the literal prefix sig_ed25519_ plus merkle_root[:32]; no private key/sign operation exists. Both MCP tools return this object (147-152,161-165), and append_auto_log persists it.",
+      "trigger": "Generate a receipt through either MCP tool.",
+      "impact": "Returned and persisted receipts cannot provide the advertised signature authentication; anyone can construct that field. No downstream authorization bypass is claimed.",
+      "confidence": "high (static inspection; not executed)",
+      "kind": "runtime"
+    },
+    {
+      "title": "Syntax integrity gate omits the primary babylon60 package",
+      "severity": "P2",
+      "path": "tests/test_syntax_integrity.py",
+      "line": 17,
+      "evidence": "TRACKED_DIRS lists root directories cli/core/etc but omits 01_KISH_ENGINE; enumeration at 23-30 scans only those roots and root-level Python files. Assigned runtime modules live in 01_KISH_ENGINE/babylon60/.",
+      "trigger": "A SyntaxError is introduced into 01_KISH_ENGINE/babylon60 while this test is used as the advertised every-tracked-module syntax gate.",
+      "impact": "The advertised structural gate never compiles the primary package and can pass despite syntax errors there.",
+      "confidence": "high (static inspection; not executed)",
+      "kind": "runtime"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "01_KISH_ENGINE/babylon60/autodidact/falsifier.py",
+      "line": 110,
+      "hypothesis": "When expected_proof_hex is absent, proof is generated from the same payload then verified and the statement is marked SUPPORTED without binding statement content to payload. Only a test caller was located; whether any real consumer treats this as statement-truth evidence is unverified."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".agents/skills/c5-ring0-babylon-kernel-project/references/modules/rlhf-sentinel/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          38
+        ]
+      ],
+      "manifest_sha256": "34f3e4a3e30fffbf056a4bbaeab4f37c835a063a695d6010bd48807e82d21c4b",
+      "observed_sha256": "34f3e4a3e30fffbf056a4bbaeab4f37c835a063a695d6010bd48807e82d21c4b",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-fuzz/src/lib.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          57
+        ]
+      ],
+      "manifest_sha256": "726a4f9fc38220ae9004840e8442a5dbf2fd4a9a29097a8a9205f8bbc5752f13",
+      "observed_sha256": "726a4f9fc38220ae9004840e8442a5dbf2fd4a9a29097a8a9205f8bbc5752f13",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/autodidact/falsifier.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          144
+        ]
+      ],
+      "manifest_sha256": "fd153208b19f3d62a1f8707dc704e8c7f3fd6a36f40bb03adf3ad6353a3c5b08",
+      "observed_sha256": "fd153208b19f3d62a1f8707dc704e8c7f3fd6a36f40bb03adf3ad6353a3c5b08",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/cortex/gemini_labs_nexus.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          182
+        ]
+      ],
+      "manifest_sha256": "4dd008708e114dd964dc0c54dbf627a1176e6cafa333cde8f1fc234674f1a21e",
+      "observed_sha256": "4dd008708e114dd964dc0c54dbf627a1176e6cafa333cde8f1fc234674f1a21e",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/primitives/yaml_parser.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          122
+        ]
+      ],
+      "manifest_sha256": "72d68f0dc4d5455279703919d6f48fe578f191b714666e2f1e55178669adb683",
+      "observed_sha256": "72d68f0dc4d5455279703919d6f48fe578f191b714666e2f1e55178669adb683",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/cortex/crates/cortex-guard/src/lib.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          6
+        ]
+      ],
+      "manifest_sha256": "73b383d85bc89f06ebb75a9053b043f2efa3b039494d0cde2ff2df3b771d7404",
+      "observed_sha256": "73b383d85bc89f06ebb75a9053b043f2efa3b039494d0cde2ff2df3b771d7404",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "crates/b60-lang/src/repl.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          211
+        ]
+      ],
+      "manifest_sha256": "b916a5b79453daf1f8a48915e06b874a434a39a59311ad00f9a966865accda84",
+      "observed_sha256": "b916a5b79453daf1f8a48915e06b874a434a39a59311ad00f9a966865accda84",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "docs/04_research/sharur_222_swarm_topology.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          44
+        ]
+      ],
+      "manifest_sha256": "0998ad69ee2851789156775217a31739e21def27c572c2808b1f6a1125fbae02",
+      "observed_sha256": "0998ad69ee2851789156775217a31739e21def27c572c2808b1f6a1125fbae02",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "docs/security/kernel-audit-2026-10-15.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          88
+        ]
+      ],
+      "manifest_sha256": "3bb9bb09fe1253a7ccb2d20f4c03e38312017dcdbae5146eaa8f9dc004dbf989",
+      "observed_sha256": "3bb9bb09fe1253a7ccb2d20f4c03e38312017dcdbae5146eaa8f9dc004dbf989",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "reports/nemesis-crash-report.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          15
+        ]
+      ],
+      "manifest_sha256": "eb1e55af821ccc65160c5232eaa0953ab306c67b4271239edb8c2b82ca2f23f9",
+      "observed_sha256": "eb1e55af821ccc65160c5232eaa0953ab306c67b4271239edb8c2b82ca2f23f9",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/c5_demos/stress_test_lean.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          90
+        ]
+      ],
+      "manifest_sha256": "aa6b870853abc41f90ebcfc740082e9f8e3b1f24f67180bce2a31f8956dec33d",
+      "observed_sha256": "aa6b870853abc41f90ebcfc740082e9f8e3b1f24f67180bce2a31f8956dec33d",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/c5_sharur/sharur_10000_orchestrator.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          121
+        ]
+      ],
+      "manifest_sha256": "bffbcb6152c9fe0745d5830d399977fc0bc27fc0943ae51ade223ed242b4d191",
+      "observed_sha256": "bffbcb6152c9fe0745d5830d399977fc0bc27fc0943ae51ade223ed242b4d191",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/sharur/download_papers.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          35
+        ]
+      ],
+      "manifest_sha256": "50c4b76768721defa3f5e5511dddb80bb10a768d9ae37287f43a0bec5c22b3a5",
+      "observed_sha256": "50c4b76768721defa3f5e5511dddb80bb10a768d9ae37287f43a0bec5c22b3a5",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/nonce_instance_regressions.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          293
+        ]
+      ],
+      "manifest_sha256": "2fb1c81ac6fb9443c01caa83d193d1155a184c3d65b8f0497908ea55d88aea9c",
+      "observed_sha256": "2fb1c81ac6fb9443c01caa83d193d1155a184c3d65b8f0497908ea55d88aea9c",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/test_finding_evidence_contract.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          122
+        ]
+      ],
+      "manifest_sha256": "4fd131ccfc0b661561ef985719df5b5f737395a667719f310ab94cb73982b954",
+      "observed_sha256": "4fd131ccfc0b661561ef985719df5b5f737395a667719f310ab94cb73982b954",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/test_syntax_integrity.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          36
+        ]
+      ],
+      "manifest_sha256": "e6cebd30f322c782f9b19fc04b61233a7d3309572d2674ba8395ab6609f359a8",
+      "observed_sha256": "e6cebd30f322c782f9b19fc04b61233a7d3309572d2674ba8395ab6609f359a8",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/artifacts/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          79
+        ]
+      ],
+      "manifest_sha256": "e8aa10618239977383223dccbfd132fc791899a8005cd083bb8c0a1562c1dc3d",
+      "observed_sha256": "e8aa10618239977383223dccbfd132fc791899a8005cd083bb8c0a1562c1dc3d",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/network-interconnect/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          199
+        ]
+      ],
+      "manifest_sha256": "1bd28cde37bcd8703056298b54c59bf157987f0bb520dcbb03448d363b28045f",
+      "observed_sha256": "1bd28cde37bcd8703056298b54c59bf157987f0bb520dcbb03448d363b28045f",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/terraform/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          102
+        ]
+      ],
+      "manifest_sha256": "5654b9d1a8c4a9373c241f805011e98947fbe46ecad87bd4f70f5c7a1c4498ed",
+      "observed_sha256": "5654b9d1a8c4a9373c241f805011e98947fbe46ecad87bd4f70f5c7a1c4498ed",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/turnstile-spin/scripts/validate.sh",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          137
+        ]
+      ],
+      "manifest_sha256": "45af59068104650ac8b247cf2059d985fa17960d9c2f3d867287fc296771de81",
+      "observed_sha256": "45af59068104650ac8b247cf2059d985fa17960d9c2f3d867287fc296771de81",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents/agent_22_restaurant_recommendations.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "manifest_sha256": "adaa4a854173475616d369734638b5d429982f774e4ae69ba39e3f5893920a7c",
+      "observed_sha256": "adaa4a854173475616d369734638b5d429982f774e4ae69ba39e3f5893920a7c",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-gemini-api-2026-standards/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          41
+        ]
+      ],
+      "manifest_sha256": "93879227025b5cd614e180f4bf2d58214bcd6ea127714950a070610118c073d1",
+      "observed_sha256": "93879227025b5cd614e180f4bf2d58214bcd6ea127714950a070610118c073d1",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/existence-gap-audit/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          190
+        ]
+      ],
+      "manifest_sha256": "459cf55af41c9e273644927903cd90653eaba1138ac69018db9e4dcca832b155",
+      "observed_sha256": "459cf55af41c9e273644927903cd90653eaba1138ac69018db9e4dcca832b155",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/flstudio-mcp-production/examples/Cellular_Automata_Music.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          81
+        ]
+      ],
+      "manifest_sha256": "75c6ea68ec821746fefd0c35d9fee8e298d64e8b404b31227068d18743e79bc3",
+      "observed_sha256": "75c6ea68ec821746fefd0c35d9fee8e298d64e8b404b31227068d18743e79bc3",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/workspace/c5-ring0-babylon-kernel-project/references/modules/rlhf-sentinel/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          38
+        ]
+      ],
+      "manifest_sha256": "34f3e4a3e30fffbf056a4bbaeab4f37c835a063a695d6010bd48807e82d21c4b",
+      "observed_sha256": "34f3e4a3e30fffbf056a4bbaeab4f37c835a063a695d6010bd48807e82d21c4b",
+      "changed_since_manifest": false
+    }
+  ],
+  "tool_limitations": [
+    "No codebase-memory graph tools exposed in session; used targeted rg and source reads.",
+    "Audit-only: no tests, imports, runtime execution, compilation, network requests or external API validation performed.",
+    "External Cloudflare API reference accuracy was not independently verified; references reviewed as text.",
+    "One targeted rg guessed a nonexistent kernel eval path; no absence inference made.",
+    "Existing workspace changes preserved."
+  ],
+  "tests_run": []
+}

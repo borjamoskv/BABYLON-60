@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "selected_unique_open_ids": 30,
+  "severity": {
+    "P1": 29,
+    "P2": 1
+  },
+  "production_files": 29,
+  "all_selected_source_hashes_unchanged": true,
+  "all_selected_ids_still_open": true,
+  "plan_rows_match_selection": true,
+  "local_links_checked": 3,
+  "registry_unique_open": 533,
+  "plan_sha256": "191c5f329ca8afc775725db7a64bb9c57e9093ce29c2c982b31103f48a9377c5",
+  "changes": "Planning documents and evidence only; no production or registry state edits.",
+  "documentary_controls": "semantic, workspace token budget, topology and git diff --check passed; global telemetry omitted"
+}

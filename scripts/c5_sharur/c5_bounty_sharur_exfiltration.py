@@ -30,11 +30,6 @@ from typing import Any, Dict, List, Optional
 _ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, os.path.join(_ROOT, "01_KISH_ENGINE"))
 
-try:
-    from babylon60.kernel.kimi_client import KimiClient
-except ImportError:
-    KimiClient = None  # type: ignore[assignment, misc]
-
 from babylon60.bft.bounty_remediation import synthesize_domain_remediation  # noqa: E402
 
 logging.basicConfig(level=logging.INFO, format="%(message)s")
@@ -86,41 +81,15 @@ def fetch_scitt_claims(
         return []
 
 
-_api_disabled = False
-
-
-
 def legion_subagent_task(claim: Dict[str, Any], use_api: bool = True) -> Dict[str, Any]:
     """Tarea autónoma ejecutada por un subagente del enjambre Legión."""
-    global _api_disabled
     claim_id = claim.get("claim_id", "")
     advisory = claim.get("advisory_id", "")
     domain = claim.get("domain", "")
     risk_score = claim.get("risk_score", 0.0)
 
-    # Intentar Kimi K3 si está configurado y habilitado
-    analysis_text = ""
-    if use_api and not _api_disabled and KimiClient is not None:
-        client = KimiClient()
-        if client.is_configured():
-            system_prompt = (
-                "Eres un analizador forense cibernético operando bajo el framework termodinámico C5-REAL. "
-                "Emite una autopsia técnica y mitigación en 3 líneas."
-            )
-            prompt = (
-                f"Dominio: {domain}. Advisory: {advisory}. Riesgo: {risk_score}. "
-                f"Resumen del hallazgo: {claim.get('finding_summary', '')}. "
-                f"Hash: {claim.get('payload_hash', '')[:16]}. Emite diagnóstico y mitigación determinista."
-            )
-            res = client.query(prompt=prompt, system_prompt=system_prompt, max_tokens=150)
-            if res.get("success", False):
-                analysis_text = str(res.get("content", ""))
-            else:
-                _api_disabled = True
-
-    if not analysis_text:
-        # Motor heurístico determinista de alta exergía
-        analysis_text = synthesize_domain_remediation(claim)
+    # Motor heurístico determinista; `use_api` se conserva por compatibilidad y no tiene efecto.
+    analysis_text = synthesize_domain_remediation(claim)
 
     return {
         "claim_id": claim_id,

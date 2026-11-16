@@ -61,7 +61,8 @@ def calc_shannon_entropy(text: str) -> float:
 class BrainCorpusIndex:
     """In-memory indexed representation of all conversations and artifacts (RFO = 0)."""
 
-    def __init__(self):
+    def __init__(self, brain_dir: Path | None = None):
+        self.brain_dir: Path = brain_dir or BRAIN_DIR
         self.conv_dirs: list[Path] = []
         self.transcripts: list[Path] = []
         self.artifacts: list[Path] = []
@@ -101,15 +102,16 @@ class BrainCorpusIndex:
 
     def index(self):
         t0 = time.perf_counter()
-        if not BRAIN_DIR.exists():
+        if not self.brain_dir.exists():
+            self.index_duration = time.perf_counter() - t0
             return
 
-        self.conv_dirs = [p for p in BRAIN_DIR.iterdir() if p.is_dir() and p.name != "tempmediaStorage"]
+        self.conv_dirs = [p for p in self.brain_dir.iterdir() if p.is_dir() and p.name != "tempmediaStorage"]
 
         # Regexes for secrets
         patterns = {
             "gemini": re.compile(r"AIzaSy[a-zA-Z0-9_-]{33}"),
-            "openai": re.compile(r"sk-[a-zA-Z0-9]{20,T}"),
+            "openai": re.compile(r"sk-[a-zA-Z0-9]{20,}"),
             "anthropic": re.compile(r"sk-ant-[a-zA-Z0-9_-]{20,}"),
             "github": re.compile(r"gh[pous]_[a-zA-Z0-9]{36}"),
             "ssh": re.compile(r"-----BEGIN (?:OPENSSH|RSA) PRIVATE KEY-----"),
@@ -355,7 +357,7 @@ async def run_cohort_1(agent_id: int, corpus: BrainCorpusIndex, sem: asyncio.Sem
 
         elif agent_id == 12:
             target = "Scratch Directory & Temporary Files Health"
-            scratch_dirs = list(BRAIN_DIR.glob("*/scratch"))
+            scratch_dirs = list(corpus.brain_dir.glob("*/scratch"))
             details = f"Directorios de scratch activos en brain: {len(scratch_dirs)} (aislamiento local de pruebas)"
             verdict = "PASS"
             metrics = {"scratch_dirs": len(scratch_dirs)}
@@ -720,7 +722,7 @@ async def run_cohort_3(agent_id: int, corpus: BrainCorpusIndex, sem: asyncio.Sem
 # ---------------------------------------------------------------------------
 # Orquestador del Enjambre Sexagesimal SHARUR-3600 (100 Agentes)
 # ---------------------------------------------------------------------------
-async def run_sharur_100_swarm() -> SwarmSitrep:
+async def run_sharur_100_swarm(brain_dir: Path | None = None) -> SwarmSitrep:
     t_global_0 = time.perf_counter()
 
     print("=" * 80)
@@ -729,8 +731,8 @@ async def run_sharur_100_swarm() -> SwarmSitrep:
     print("=" * 80)
 
     # 1. Indexar el corpus completo en memoria
-    print("\n[+] Paso 1/3: Indexando 511 sesiones y 3,148 artefactos en ~/.gemini/antigravity/brain/...")
-    corpus = BrainCorpusIndex()
+    print("\n[+] Paso 1/3: Indexando sesiones y artefactos en el directorio brain especificado...")
+    corpus = BrainCorpusIndex(brain_dir=brain_dir)
     await asyncio.to_thread(corpus.index)
     print(f"    ✔ Indexado completado en {corpus.index_duration:.2f}s:")
     print(f"      - Sesiones: {len(corpus.conv_dirs)} carpetas ({len(corpus.transcripts)} transcripts)")

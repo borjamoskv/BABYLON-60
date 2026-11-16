@@ -1,0 +1,7 @@
+{
+  "derivation_exit": 0,
+  "matches_root_lock": true,
+  "matches_docs_lock": true,
+  "expected_snapshot": "8dab1b125b42622358807ba69af92cdcd15bacaba718d44e31c41f4c32232605",
+  "stored_snapshot": "8dab1b125b42622358807ba69af92cdcd15bacaba718d44e31c41f4c32232605"
+}

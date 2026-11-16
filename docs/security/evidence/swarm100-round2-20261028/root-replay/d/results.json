@@ -1,0 +1,320 @@
+{
+  "python": "3.14.7",
+  "sqlite": "3.53.4",
+  "source_hashes_before": {
+    "consolidate": "ceb44ff71f51d780eefc8eb82bc9e55c00df136b12e9073a04c77a1f6232c390",
+    "browser": "57ce214bbe5979e64b06b05a1e5554fc26f9705986dd382c78f330baa1ae06f9",
+    "native": "30a83dc46a550cf95f77ea168a8a416456cfbed12a77186a9d18e421b3b61a64",
+    "wrapper": "e505217fea124947cf141d5463b1861fb3c0b049e135411cd92b6831f51bede0"
+  },
+  "cases": [
+    {
+      "verdict": "corroborated",
+      "input": {
+        "source_name": "cortex.db",
+        "existing_destination_name": "cortex.db"
+      },
+      "before": {
+        "source": [
+          [
+            "unique_source_record"
+          ]
+        ],
+        "destination": [
+          [
+            "unique_destination_record"
+          ]
+        ]
+      },
+      "after": {
+        "source_exists": false,
+        "destination": [
+          [
+            "unique_destination_record"
+          ]
+        ]
+      },
+      "condition": "Different source and existing destination with identical basename; function invoked explicitly.",
+      "name": "divergent_same_name_ledger_deletion",
+      "execution": "completed",
+      "stdout": "\ud83d\udfe2 Initiating Consolidaci\u00f3n BFT Causal-Determinist hacia /private/tmp/babylon60-audit-round2-20261028/final-replay/d/fixture-j7ulspx7/divergent/central\n\u26a0\ufe0f Ledger Maestro ya existe en destino, ignorando: cortex.db\n\ud83e\uddf9 Purgada DB local: cortex.db\n\n============================================================\n CONSOLIDACI\u00d3N COMPLETADA\n============================================================\n Ledgers Maestros movidos a ~/.babylon60/dbs/ : 1\n Bases de datos de entrop\u00eda local purgadas      : 1\n============================================================\n\n"
+    },
+    {
+      "verdict": "corroborated",
+      "before": {
+        "mode": "wal",
+        "checkpoint": [
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "source_rows": [
+          [
+            "committed_only_in_wal"
+          ]
+        ],
+        "wal_exists": true,
+        "wal_bytes": 4152
+      },
+      "after": {
+        "source_exists": false,
+        "source_wal_exists": false,
+        "destination_rows": []
+      },
+      "condition": "WAL committed row not checkpointed; live connection kept open during consolidation; no destination exists.",
+      "name": "committed_wal_omitted_then_deleted",
+      "execution": "completed",
+      "stdout": "\ud83d\udfe2 Initiating Consolidaci\u00f3n BFT Causal-Determinist hacia /private/tmp/babylon60-audit-round2-20261028/final-replay/d/fixture-j7ulspx7/wal/central\n\ud83d\udce6 Moviendo Ledger Maestro: cortex.db -> /private/tmp/babylon60-audit-round2-20261028/final-replay/d/fixture-j7ulspx7/wal/central/cortex.db\n\ud83e\uddf9 Purgada DB local: cortex.db\n\n============================================================\n CONSOLIDACI\u00d3N COMPLETADA\n============================================================\n Ledgers Maestros movidos a ~/.babylon60/dbs/ : 1\n Bases de datos de entrop\u00eda local purgadas      : 1\n============================================================\n\n"
+    },
+    {
+      "verdict": "corroborated",
+      "input": {
+        "id": "../victim",
+        "profiles": [
+          "/private/tmp/babylon60-audit-round2-20261028/final-replay/d/fixture-j7ulspx7/browser_relative/Chrome/Default"
+        ]
+      },
+      "before": {
+        "sentinel_exists": true,
+        "victim_inside_extensions": false
+      },
+      "after": {
+        "victim_exists": false,
+        "sentinel_exists": false,
+        "profile_exists": true
+      },
+      "condition": "CLI-equivalent purge callback; only fake Chrome base redirected; target is a new fixture directory outside Extensions.",
+      "name": "extension_purge_relative_traversal",
+      "execution": "completed",
+      "stdout": "=== ATOMIC PURGE OF EXTENSION: ../victim ===\n  [Default] Deleted Extension directory: /private/tmp/babylon60-audit-round2-20261028/final-replay/d/fixture-j7ulspx7/browser_relative/Chrome/Default/Extensions/../victim\n\nPurge complete. Files/dirs removed: 1, Preferences cleaned: 0\n"
+    },
+    {
+      "verdict": "corroborated",
+      "input": {
+        "id": "/private/tmp/babylon60-audit-round2-20261028/final-replay/d/fixture-j7ulspx7/browser_absolute/other_directory",
+        "profiles": [
+          "/private/tmp/babylon60-audit-round2-20261028/final-replay/d/fixture-j7ulspx7/browser_absolute/Chrome/Default"
+        ]
+      },
+      "before": {
+        "sentinel_exists": true,
+        "victim_inside_extensions": false
+      },
+      "after": {
+        "victim_exists": false,
+        "sentinel_exists": false,
+        "profile_exists": true
+      },
+      "condition": "CLI-equivalent purge callback; only fake Chrome base redirected; target is a new fixture directory outside Extensions.",
+      "name": "extension_purge_absolute_path",
+      "execution": "completed",
+      "stdout": "=== ATOMIC PURGE OF EXTENSION: /private/tmp/babylon60-audit-round2-20261028/final-replay/d/fixture-j7ulspx7/browser_absolute/other_directory ===\n  [Default] Deleted Extension directory: /private/tmp/babylon60-audit-round2-20261028/final-replay/d/fixture-j7ulspx7/browser_absolute/other_directory\n\nPurge complete. Files/dirs removed: 1, Preferences cleaned: 0\n"
+    }
+  ],
+  "limits": [
+    "All mutations confined to new disposable fixture root.",
+    "No actual browser profile, user database, network, credentials, hardware or native accelerator execution.",
+    "Actual Python source functions imported after top-level inspection; production globals redirected before function calls.",
+    "These fixtures validate stated failure triggers, not deployed reachability or production data loss."
+  ],
+  "fixture_root": "/private/tmp/babylon60-audit-round2-20261028/final-replay/d/fixture-j7ulspx7",
+  "native_boundary_analysis": {
+    "verdict": "corroborated_static_mathematical",
+    "source_lines": [
+      32,
+      63
+    ],
+    "witnesses": [
+      {
+        "size_t_bits": 32,
+        "vector_bytes": 16,
+        "len": 0,
+        "initial_j": 0,
+        "wrapped_bound": 4294967280,
+        "loop_enters": true,
+        "first_load_in_bounds": false
+      },
+      {
+        "size_t_bits": 32,
+        "vector_bytes": 16,
+        "len": 1,
+        "initial_j": 0,
+        "wrapped_bound": 4294967281,
+        "loop_enters": true,
+        "first_load_in_bounds": false
+      },
+      {
+        "size_t_bits": 32,
+        "vector_bytes": 16,
+        "len": 15,
+        "initial_j": 0,
+        "wrapped_bound": 4294967295,
+        "loop_enters": true,
+        "first_load_in_bounds": false
+      },
+      {
+        "size_t_bits": 32,
+        "vector_bytes": 16,
+        "len": 16,
+        "initial_j": 0,
+        "wrapped_bound": 0,
+        "loop_enters": true,
+        "first_load_in_bounds": true
+      },
+      {
+        "size_t_bits": 32,
+        "vector_bytes": 16,
+        "len": 17,
+        "initial_j": 0,
+        "wrapped_bound": 1,
+        "loop_enters": true,
+        "first_load_in_bounds": true
+      },
+      {
+        "size_t_bits": 32,
+        "vector_bytes": 64,
+        "len": 0,
+        "initial_j": 0,
+        "wrapped_bound": 4294967232,
+        "loop_enters": true,
+        "first_load_in_bounds": false
+      },
+      {
+        "size_t_bits": 32,
+        "vector_bytes": 64,
+        "len": 1,
+        "initial_j": 0,
+        "wrapped_bound": 4294967233,
+        "loop_enters": true,
+        "first_load_in_bounds": false
+      },
+      {
+        "size_t_bits": 32,
+        "vector_bytes": 64,
+        "len": 63,
+        "initial_j": 0,
+        "wrapped_bound": 4294967295,
+        "loop_enters": true,
+        "first_load_in_bounds": false
+      },
+      {
+        "size_t_bits": 32,
+        "vector_bytes": 64,
+        "len": 64,
+        "initial_j": 0,
+        "wrapped_bound": 0,
+        "loop_enters": true,
+        "first_load_in_bounds": true
+      },
+      {
+        "size_t_bits": 32,
+        "vector_bytes": 64,
+        "len": 65,
+        "initial_j": 0,
+        "wrapped_bound": 1,
+        "loop_enters": true,
+        "first_load_in_bounds": true
+      },
+      {
+        "size_t_bits": 64,
+        "vector_bytes": 16,
+        "len": 0,
+        "initial_j": 0,
+        "wrapped_bound": 18446744073709551600,
+        "loop_enters": true,
+        "first_load_in_bounds": false
+      },
+      {
+        "size_t_bits": 64,
+        "vector_bytes": 16,
+        "len": 1,
+        "initial_j": 0,
+        "wrapped_bound": 18446744073709551601,
+        "loop_enters": true,
+        "first_load_in_bounds": false
+      },
+      {
+        "size_t_bits": 64,
+        "vector_bytes": 16,
+        "len": 15,
+        "initial_j": 0,
+        "wrapped_bound": 18446744073709551615,
+        "loop_enters": true,
+        "first_load_in_bounds": false
+      },
+      {
+        "size_t_bits": 64,
+        "vector_bytes": 16,
+        "len": 16,
+        "initial_j": 0,
+        "wrapped_bound": 0,
+        "loop_enters": true,
+        "first_load_in_bounds": true
+      },
+      {
+        "size_t_bits": 64,
+        "vector_bytes": 16,
+        "len": 17,
+        "initial_j": 0,
+        "wrapped_bound": 1,
+        "loop_enters": true,
+        "first_load_in_bounds": true
+      },
+      {
+        "size_t_bits": 64,
+        "vector_bytes": 64,
+        "len": 0,
+        "initial_j": 0,
+        "wrapped_bound": 18446744073709551552,
+        "loop_enters": true,
+        "first_load_in_bounds": false
+      },
+      {
+        "size_t_bits": 64,
+        "vector_bytes": 64,
+        "len": 1,
+        "initial_j": 0,
+        "wrapped_bound": 18446744073709551553,
+        "loop_enters": true,
+        "first_load_in_bounds": false
+      },
+      {
+        "size_t_bits": 64,
+        "vector_bytes": 64,
+        "len": 63,
+        "initial_j": 0,
+        "wrapped_bound": 18446744073709551615,
+        "loop_enters": true,
+        "first_load_in_bounds": false
+      },
+      {
+        "size_t_bits": 64,
+        "vector_bytes": 64,
+        "len": 64,
+        "initial_j": 0,
+        "wrapped_bound": 0,
+        "loop_enters": true,
+        "first_load_in_bounds": true
+      },
+      {
+        "size_t_bits": 64,
+        "vector_bytes": 64,
+        "len": 65,
+        "initial_j": 0,
+        "wrapped_bound": 1,
+        "loop_enters": true,
+        "first_load_in_bounds": true
+      }
+    ],
+    "condition": "C size_t subtraction is unsigned. For len<vector width, initial comparison admits a load wider than buffer. Applies only if matching native accelerator source is compiled/loaded; artifact provenance not established."
+  },
+  "source_hashes_after": {
+    "consolidate": "ceb44ff71f51d780eefc8eb82bc9e55c00df136b12e9073a04c77a1f6232c390",
+    "browser": "57ce214bbe5979e64b06b05a1e5554fc26f9705986dd382c78f330baa1ae06f9",
+    "native": "30a83dc46a550cf95f77ea168a8a416456cfbed12a77186a9d18e421b3b61a64",
+    "wrapper": "e505217fea124947cf141d5463b1861fb3c0b049e135411cd92b6831f51bede0"
+  },
+  "source_unchanged": true
+}

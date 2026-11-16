@@ -1,0 +1,413 @@
+{
+  "shard": "062",
+  "findings": [
+    {
+      "title": "Serialize ledger read-modify-append across writers",
+      "severity": "P1",
+      "path": "crates/babylon-attest/src/ledger.rs",
+      "line": 123,
+      "evidence": "append_event reads the entire chain at 123, derives index/prev_hash at 125-129, then opens an independent append handle at 160-166; no lock covers that interval. CLI main.rs:227 and :474 invoke this function.",
+      "trigger": "Two processes append to the same existing ledger before either write completes.",
+      "impact": "Both can acknowledge blocks with the same index and predecessor; verify_chain subsequently rejects index continuity.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Sync committed ledger records before acknowledging success",
+      "severity": "P1",
+      "path": "crates/babylon-attest/src/ledger.rs",
+      "line": 166,
+      "evidence": "Only writeln! precedes Ok(block); no sync_data/sync_all or transactional durable commit exists. main.rs:230 displays ATTESTATION COMMITTED.",
+      "trigger": "Storage or host failure after append_event returns but before OS cache reaches durable media.",
+      "impact": "An acknowledged attestation can disappear or leave a partial final JSON line, preventing subsequent chain reads.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Export the actual block hash algorithm",
+      "severity": "P2",
+      "path": "crates/babylon-attest/src/ledger.rs",
+      "line": 273,
+      "evidence": "append_event computes block_hash with BLAKE3 at 145; export_scitt_voucher unconditionally labels leaf_hash_algorithm SHA-256 at 273. main.rs:241 exports that voucher.",
+      "trigger": "A newly appended block is requested using the SCITT output format.",
+      "impact": "An independent consumer applying the declared hash algorithm cannot reproduce the advertised leaf commitment.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Enforce the advertised subprocess timeout",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/tools/context7_client.py",
+      "line": 52,
+      "evidence": "_call_tool accepts timeout=15 at 21 but never uses it; blocking readline at 52 and 77 and stderr.read at 54/79 have no deadline.",
+      "trigger": "The Node MCP process starts but never emits a complete initialization/tool response, or keeps stderr open after stdout closes.",
+      "impact": "CLI call hangs indefinitely and never reaches finally to terminate the child.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Bind finding metadata into receipt verification",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/bft/bounty_claim_attester.py",
+      "line": 116,
+      "evidence": "generate_receipt root at 96 uses only payload_hash and hardware hash; verify_receipt at 116-118 recomputes those same two leaves. claim_id/advisory_id/domain/finding_summary/risk_score/timestamp are excluded. compute_claim_hash includes them but its output is never compared by verify_receipt. Pipeline orchestrator imports/creates this attester at 24/86.",
+      "trigger": "A receipt is copied with a different advisory, summary, risk score or timestamp while keeping its payload hash, hardware anchor and root.",
+      "impact": "verify_receipt still returns true for altered claim metadata, despite documenting receipt hash coherence.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Label simulated audit results instead of emitting verified passes",
+      "severity": "P1",
+      "path": "scripts/c5_sharur/sharur_100_swarm_execution.py",
+      "line": 169,
+      "evidence": "run_agent only awaits asyncio.sleep at 160 and returns constant PASS and silicon verification evidence at 169-172. It performs no target inspection. execute_sharur_100 writes these records and critical_fixes_attested to legion_100_audit_sitrep.json at 200-202.",
+      "trigger": "Executing the script when any named audit target is absent or broken.",
+      "impact": "Produces a machine-readable 100/100 passing attestation report unrelated to repository correctness; consumers may mistake simulation for measured audit evidence.",
+      "confidence": "high",
+      "kind": "example"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "scripts/c5_deploy_pipeline.sh",
+      "line": 36,
+      "hypothesis": "When both gate executable and Swift file are absent, script prints successful authorization without running a gate; native demo executions also occur before the gate. No real deployment consumer or protected downstream effect was established, so this is not asserted as a runtime authorization bypass."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".agents/skills/c5-wetware-and-venture-ops-project/references/modules/adaptive-cron/MODULE.md",
+      "manifest_sha256": "62ecaa628207d50f24e374852129c9709b47d2ff2340aa0a5236ef817ddea516",
+      "observed_sha256": "62ecaa628207d50f24e374852129c9709b47d2ff2340aa0a5236ef817ddea516",
+      "hash_changed": false,
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          30
+        ]
+      ]
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-kernel/src/ledger.rs",
+      "manifest_sha256": "19708039c070859728752265f5a734c446734b09ea0a98baf899b6cff3a8f71f",
+      "observed_sha256": "19708039c070859728752265f5a734c446734b09ea0a98baf899b6cff3a8f71f",
+      "hash_changed": false,
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          272
+        ]
+      ]
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/bft/bounty_claim_attester.py",
+      "manifest_sha256": "d15a2d2e01379343df172270a392506538ae8cbffba5eac77f18510098852ba0",
+      "observed_sha256": "d15a2d2e01379343df172270a392506538ae8cbffba5eac77f18510098852ba0",
+      "hash_changed": false,
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          118
+        ]
+      ]
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/crypto/provider.py",
+      "manifest_sha256": "e1a508481c24b8e04d2d75c8df36973cbdab08c9356d39ba605621e5be33a085",
+      "observed_sha256": "e1a508481c24b8e04d2d75c8df36973cbdab08c9356d39ba605621e5be33a085",
+      "hash_changed": false,
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          143
+        ]
+      ]
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/tools/context7_client.py",
+      "manifest_sha256": "0ed422ed2c21dabda2fea5740737d26b0c33ea51ab35708570d41ba69f6a463b",
+      "observed_sha256": "0ed422ed2c21dabda2fea5740737d26b0c33ea51ab35708570d41ba69f6a463b",
+      "hash_changed": false,
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          143
+        ]
+      ]
+    },
+    {
+      "path": "01_KISH_ENGINE/cortex/crates/cortex-lsp/src/protocol.rs",
+      "manifest_sha256": "589b9c07946da0170db5ad3954e264bd57212fd3277dc7ee1f177a56c24bdd36",
+      "observed_sha256": "589b9c07946da0170db5ad3954e264bd57212fd3277dc7ee1f177a56c24bdd36",
+      "hash_changed": false,
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          81
+        ]
+      ]
+    },
+    {
+      "path": "crates/babylon-attest/src/ledger.rs",
+      "manifest_sha256": "d9d0ce0c0cae2e92ae723199f6abdeb91fbde09c272a2811395e7298adb1bb27",
+      "observed_sha256": "d9d0ce0c0cae2e92ae723199f6abdeb91fbde09c272a2811395e7298adb1bb27",
+      "hash_changed": false,
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          312
+        ]
+      ]
+    },
+    {
+      "path": "docs/06_theory/03_computability_turing.md",
+      "manifest_sha256": "ac3140928af823e41e32c8f934b98972f3e8e039190451ebc80e239937180661",
+      "observed_sha256": "ac3140928af823e41e32c8f934b98972f3e8e039190451ebc80e239937180661",
+      "hash_changed": false,
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          33
+        ]
+      ]
+    },
+    {
+      "path": "examples/archived_peripherals/README.md",
+      "manifest_sha256": "9cdf42e4ef94fcba7513b20ca0f493b6377da7ed9564c299e2685793db3842bb",
+      "observed_sha256": "9cdf42e4ef94fcba7513b20ca0f493b6377da7ed9564c299e2685793db3842bb",
+      "hash_changed": false,
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          19
+        ]
+      ]
+    },
+    {
+      "path": "scripts/README.md",
+      "manifest_sha256": "4636127b548064bd9624abfcf19983a1d093affeceb7e6f48def1bd28e7f5c3e",
+      "observed_sha256": "4636127b548064bd9624abfcf19983a1d093affeceb7e6f48def1bd28e7f5c3e",
+      "hash_changed": false,
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          364
+        ]
+      ]
+    },
+    {
+      "path": "scripts/c5_deploy_pipeline.sh",
+      "manifest_sha256": "6d13edecc519fa27a31c2b7bd18c26a358c90e4e69cbdc28bb01b0e58631807a",
+      "observed_sha256": "6d13edecc519fa27a31c2b7bd18c26a358c90e4e69cbdc28bb01b0e58631807a",
+      "hash_changed": false,
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          44
+        ]
+      ]
+    },
+    {
+      "path": "scripts/c5_sharur/sharur_100_swarm_execution.py",
+      "manifest_sha256": "84b155a4f3ff7c106ba7e9eb9e3068bc123d5976757e353da78223b966e324d1",
+      "observed_sha256": "84b155a4f3ff7c106ba7e9eb9e3068bc123d5976757e353da78223b966e324d1",
+      "hash_changed": false,
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          219
+        ]
+      ]
+    },
+    {
+      "path": "skills-lock.json",
+      "manifest_sha256": "98929c60a897ea3235bb2b39b6b7593c057626039e6b11454501d51a8509284f",
+      "observed_sha256": "98929c60a897ea3235bb2b39b6b7593c057626039e6b11454501d51a8509284f",
+      "hash_changed": false,
+      "status": "reviewed_partial",
+      "ranges": [
+        [
+          1,
+          200
+        ]
+      ],
+      "reason": "Remaining entries not individually reviewed; no whole-lock correctness conclusion."
+    },
+    {
+      "path": "tests/replay/mod.rs",
+      "manifest_sha256": "203c27547a7a25f6e77e39ae751f910e0dc88a509a7f3010cae8f0b97e3c3f0e",
+      "observed_sha256": "203c27547a7a25f6e77e39ae751f910e0dc88a509a7f3010cae8f0b97e3c3f0e",
+      "hash_changed": false,
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          110
+        ]
+      ]
+    },
+    {
+      "path": "tests/test_gemini_labs_nexus.py",
+      "manifest_sha256": "8271293695ad8c9573ac20dcf146084cc05bada1e336356b25c88ec89422d73b",
+      "observed_sha256": "8271293695ad8c9573ac20dcf146084cc05bada1e336356b25c88ec89422d73b",
+      "hash_changed": false,
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          78
+        ]
+      ]
+    },
+    {
+      "path": "tests/test_wheel_runtime_regressions.py",
+      "manifest_sha256": "1a8336e2e8dd1e09f3eb94410ce2da1a689464bc9b9fd3c0c88215596eefe45f",
+      "observed_sha256": "1a8336e2e8dd1e09f3eb94410ce2da1a689464bc9b9fd3c0c88215596eefe45f",
+      "hash_changed": false,
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          271
+        ]
+      ]
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/bot-management/README.md",
+      "manifest_sha256": "4d50475aa586fb08cadbc7067d55b7ef1a6e5556bad3587b23e35ae37d541967",
+      "observed_sha256": "4d50475aa586fb08cadbc7067d55b7ef1a6e5556bad3587b23e35ae37d541967",
+      "hash_changed": false,
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          94
+        ]
+      ]
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/observability/patterns.md",
+      "manifest_sha256": "e83a6eb55b3f84ecc20faf7af32a82d4a9c29cdd6803a94d82faf96fe70f5272",
+      "observed_sha256": "e83a6eb55b3f84ecc20faf7af32a82d4a9c29cdd6803a94d82faf96fe70f5272",
+      "hash_changed": false,
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          105
+        ]
+      ]
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/tunnel/gotchas.md",
+      "manifest_sha256": "267e3fad1f1a328bec1786ce883f7d658ee328ee5e812c2a4ee61739b507c691",
+      "observed_sha256": "267e3fad1f1a328bec1786ce883f7d658ee328ee5e812c2a4ee61739b507c691",
+      "hash_changed": false,
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          147
+        ]
+      ]
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/youtube-remotion-sota/SKILL.md",
+      "manifest_sha256": "f71643fdc453eac78bc5df83ac9421e9074a783cfda3c0431e47da59e65b0686",
+      "observed_sha256": "f71643fdc453eac78bc5df83ac9421e9074a783cfda3c0431e47da59e65b0686",
+      "hash_changed": false,
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          84
+        ]
+      ]
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents/agent_30_site_playbooks_doordash.md",
+      "manifest_sha256": "4b37c93d602a76e23b7b3f7f125749238b9c7f27030c85c96084ad4d8d0e3bc4",
+      "observed_sha256": "4b37c93d602a76e23b7b3f7f125749238b9c7f27030c85c96084ad4d8d0e3bc4",
+      "hash_changed": false,
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ]
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/cortex-skill-composer/MODULE.md",
+      "manifest_sha256": "1afbc5962bed9162dd588164547e3d5c1ee4d315ae1ebd33d00a6dc8ac6fcf46",
+      "observed_sha256": "1afbc5962bed9162dd588164547e3d5c1ee4d315ae1ebd33d00a6dc8ac6fcf46",
+      "hash_changed": false,
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          93
+        ]
+      ]
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/github-architect/references/rubric.md",
+      "manifest_sha256": "79895331292bb7f3a78829f4d704673aac0366134f353ff14bd236ada349a672",
+      "observed_sha256": "79895331292bb7f3a78829f4d704673aac0366134f353ff14bd236ada349a672",
+      "hash_changed": false,
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          117
+        ]
+      ]
+    },
+    {
+      "path": "tools/skill_library/global/flstudio-mcp-production/examples/Neo_Riemannian_Tonnetz.py",
+      "manifest_sha256": "7ff60f1a36dd50ec6d19a019bd47e70405e8fa1e6d3d10316ac80b71c0b00408",
+      "observed_sha256": "7ff60f1a36dd50ec6d19a019bd47e70405e8fa1e6d3d10316ac80b71c0b00408",
+      "hash_changed": false,
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          103
+        ]
+      ]
+    },
+    {
+      "path": "tools/skill_library/workspace/grill-me-v2/SKILL.md",
+      "manifest_sha256": "b270c13fa81e4b234d28db179ce261da48445d9f67d772e926cb98bddcef50d7",
+      "observed_sha256": "b270c13fa81e4b234d28db179ce261da48445d9f67d772e926cb98bddcef50d7",
+      "hash_changed": false,
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ]
+    }
+  ],
+  "tool_limitations": [
+    "Native graph/index tools were not exposed (ALL_TOOLS discovery returned none); used targeted source reads and rg.",
+    "No tests, compilation, runtime effects, commits or pushes executed, per audit scope.",
+    "External Cloudflare product claims were not verified; no findings rely on current external API behavior.",
+    "skills-lock.json remains text-reviewed only at lines 1-200; remaining 201-4836 entries were not individually reviewed. No whole-lock correctness conclusion."
+  ],
+  "tests_run": []
+}

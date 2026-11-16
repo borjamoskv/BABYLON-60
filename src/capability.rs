@@ -84,15 +84,40 @@ pub fn sha256_digest(data: &[u8]) -> [u8; 32] {
     hasher.finalize().into()
 }
 
+/// Returns `true` if `value` contains Unicode combining/decomposed marks (NFD hazard on APFS)
+/// or shell/variable expansion tokens (`$`, `~`) that create parser differentials (`O11`).
+pub fn has_nfd_combining_or_expansion_hazard(value: &str) -> bool {
+    value.chars().any(|ch| {
+        matches!(
+            ch,
+            '$'
+                | '~'
+                | '\u{0300}'..='\u{036F}' // Combining Diacritical Marks (NFD)
+                | '\u{1160}'..='\u{11FF}' // Hangul Jamo conjoining medial/final (NFD)
+                | '\u{1AB0}'..='\u{1AFF}' // Combining Diacritical Marks Extended
+                | '\u{1DC0}'..='\u{1DFF}' // Combining Diacritical Marks Supplement
+                | '\u{20D0}'..='\u{20FF}' // Combining Diacritical Marks for Symbols
+                | '\u{FE20}'..='\u{FE2F}' // Combining Half Marks
+                | '\u{FEFF}'              // Zero-Width No-Break Space / BOM
+        )
+    })
+}
+
 /// Conservative, component-aware resource scope check.
 ///
 /// Resource scopes are opaque normalized URI/path identifiers, not filesystem
 /// authorization. The OS-level executor must independently resolve resources
-/// via directory descriptors. Reject ambiguous encodings and dot segments.
+/// via directory descriptors. Reject ambiguous encodings, NFD decomposition,
+/// variable expansion tokens, and dot segments (`O11`).
 fn resource_in_scope(resource_uri: &str, scope: &str) -> bool {
     fn unambiguous(value: &str) -> bool {
-        if value.is_empty() || value.contains('\\') || value.contains('%')
-            || value.contains('?') || value.contains('#') || value.contains('\0')
+        if value.is_empty()
+            || value.contains('\\')
+            || value.contains('%')
+            || value.contains('?')
+            || value.contains('#')
+            || value.contains('\0')
+            || has_nfd_combining_or_expansion_hazard(value)
             || value.chars().any(char::is_control)
         {
             return false;
@@ -393,6 +418,9 @@ pub struct McpCapabilityBroker {
     guard_capabilities: HashMap<[u8; 32], GuardCapabilityGrant>,
     /// Canonical [`EffectState`] transition log (`request_or_cap_id -> EffectState`).
     effect_states: HashMap<[u8; 32], EffectState>,
+    /// Single-use MCP tokens already committed (`token_id -> commit_epoch`).
+    /// In-memory only: it does not survive a process crash.
+    consumed_tokens: HashMap<[u8; 32], u64>,
 }
 
 impl McpCapabilityBroker {
@@ -413,6 +441,7 @@ impl McpCapabilityBroker {
             compositional_traces: HashMap::new(),
             guard_capabilities: HashMap::new(),
             effect_states: HashMap::new(),
+            consumed_tokens: HashMap::new(),
         }
     }
 
@@ -597,6 +626,61 @@ impl McpCapabilityBroker {
         requested_effect: EffectKind,
         valid_duration_epochs: u64,
     ) -> Result<McpCapabilityToken, RejectReason> {
+        self.request_capability_internal(
+            server_id,
+            tool_name,
+            tool_code_hash,
+            args,
+            resource_uri,
+            requested_effect,
+            valid_duration_epochs,
+            None,
+        )
+    }
+
+    /// Issues a single-invocation capability bound to a non-zero 32-byte `invocation_nonce`.
+    /// Rejects any nonce whose derived `token_id` was already consumed or revoked.
+    #[allow(clippy::too_many_arguments)]
+    pub fn request_capability_with_nonce(
+        &self,
+        server_id: &[u8; 32],
+        tool_name: &str,
+        tool_code_hash: &[u8; 32],
+        args: &[u8],
+        resource_uri: &str,
+        requested_effect: EffectKind,
+        valid_duration_epochs: u64,
+        invocation_nonce: &[u8; 32],
+    ) -> Result<McpCapabilityToken, RejectReason> {
+        if invocation_nonce == &[0u8; 32] {
+            return Err(RejectReason::PolicyDenied(
+                "Zero invocation nonce forbidden".to_string(),
+            ));
+        }
+        self.request_capability_internal(
+            server_id,
+            tool_name,
+            tool_code_hash,
+            args,
+            resource_uri,
+            requested_effect,
+            valid_duration_epochs,
+            Some(invocation_nonce),
+        )
+    }
+
+    #[allow(clippy::too_many_arguments)]
+    fn request_capability_internal(
+        &self,
+        server_id: &[u8; 32],
+        tool_name: &str,
+        tool_code_hash: &[u8; 32],
+        args: &[u8],
+        resource_uri: &str,
+        requested_effect: EffectKind,
+        valid_duration_epochs: u64,
+        invocation_nonce: Option<&[u8; 32]>,
+    ) -> Result<McpCapabilityToken, RejectReason> {
         let server = self
             .servers
             .get(server_id)
@@ -639,14 +723,23 @@ impl McpCapabilityBroker {
         let args_digest = sha256_digest(args);
 
         // Compute unique deterministic token ID:
-        let mut token_seed = Vec::with_capacity(128);
+        let mut token_seed = Vec::with_capacity(160);
         token_seed.extend_from_slice(server_id);
         token_seed.extend_from_slice(tool_name.as_bytes());
         token_seed.extend_from_slice(tool_code_hash);
         token_seed.extend_from_slice(&args_digest);
         token_seed.extend_from_slice(&server.current_epoch.to_le_bytes());
         token_seed.extend_from_slice(&(requested_effect as u32).to_le_bytes());
+        if let Some(nonce) = invocation_nonce {
+            token_seed.extend_from_slice(nonce);
+        }
         let token_id = sha256_digest(&token_seed);
+        if self.consumed_tokens.contains_key(&token_id) {
+            return Err(RejectReason::NonceAlreadyConsumed(token_id));
+        }
+        if self.revoked_tokens.contains_key(&token_id) {
+            return Err(RejectReason::StaleCapability);
+        }
 
         Ok(McpCapabilityToken {
             token_id,
@@ -771,6 +864,39 @@ impl McpCapabilityBroker {
             commit_epoch: t_commit,
             evidence_digest,
         })
+    }
+
+    /// Single-use variant of [`Self::commit_execution`]: a token admits at most
+    /// one effect. A second commit with the same token is rejected as replay
+    /// even when every other binding (args, scope, epoch) still matches.
+    /// Consumption is recorded only after all commit gates pass.
+    #[allow(clippy::too_many_arguments)]
+    pub fn commit_execution_once(
+        &mut self,
+        token: &McpCapabilityToken,
+        server_id: &[u8; 32],
+        tool_name: &str,
+        tool_code_hash: &[u8; 32],
+        args: &[u8],
+        resource_uri: &str,
+        effect: EffectKind,
+        t_commit: u64,
+    ) -> Result<McpExecutionEvidence, RejectReason> {
+        if self.consumed_tokens.contains_key(&token.token_id) {
+            return Err(RejectReason::NonceAlreadyConsumed(token.token_id));
+        }
+        let evidence = self.commit_execution(
+            token,
+            server_id,
+            tool_name,
+            tool_code_hash,
+            args,
+            resource_uri,
+            effect,
+            t_commit,
+        )?;
+        self.consumed_tokens.insert(token.token_id, t_commit);
+        Ok(evidence)
     }
 
     // -----------------------------------------------------------------------
@@ -1159,5 +1285,28 @@ impl McpCapabilityBroker {
             .insert(*capability_id, final_state.clone());
 
         Ok((evidence, final_state))
+    }
+}
+
+#[cfg(test)]
+mod o11_parser_differential_tests {
+    use super::*;
+
+    #[test]
+    fn test_o11_parser_differential_unicode_nfd_and_var_expansion_rejected() {
+        let scope = "file:///workspace/safe";
+        // Canonical NFC path is accepted
+        assert!(resource_in_scope("file:///workspace/safe/caf\u{00E9}.txt", scope));
+
+        // Decomposed NFD ("cafe" + U+0301 COMBINING ACUTE ACCENT) collides on APFS but differs in bytes: must be rejected (O11)
+        assert!(!resource_in_scope("file:///workspace/safe/cafe\u{0301}.txt", scope));
+        assert!(has_nfd_combining_or_expansion_hazard("cafe\u{0301}.txt"));
+
+        // Variable expansion ($HOME) and tilde (~) differentials must be rejected (O11)
+        assert!(!resource_in_scope("file:///workspace/safe/$HOME/secret.txt", scope));
+        assert!(!resource_in_scope("file:///workspace/safe/~/secret.txt", scope));
+        // Relative traversal and URL encoding remain rejected
+        assert!(!resource_in_scope("file:///workspace/safe/../etc/passwd", scope));
+        assert!(!resource_in_scope("file:///workspace/safe/%2e%2e/passwd", scope));
     }
 }

@@ -1,0 +1,415 @@
+FFFFF.FFF.FFF.FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF                      [100%]
+=================================== FAILURES ===================================
+_________ test_mail_never_returns_credential_or_command[empty_stderr] __________
+tests/test_swarm100_lot1_regressions.py:57: in test_mail_never_returns_credential_or_command
+    assert TOKEN not in rendered
+E   assert 'SYNTHETIC_LOT1_CREDENTIAL' not in '{"status": ... status 7."}'
+E     
+E     'SYNTHETIC_LOT1_CREDENTIAL' is contained here:
+E     ?           ^^
+E       n: Bearer SYNTHETIC_LOT1_CREDENTIAL', '-H', 'Content-Type: application/json', '-d', '{\"from\": \"Borja <borja@babylon60.com>\", \"to\": [\"fixture@example.invalid\"], \"subject\": \"fixture\", \"html\": \"fixture\", \"text\": \"\", \"reply_to\": \"borja@babylon60.com\"}']' returned non-zero exit status 7."}
+E     ?           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_________ test_mail_never_returns_credential_or_command[token_stderr] __________
+tests/test_swarm100_lot1_regressions.py:57: in test_mail_never_returns_credential_or_command
+    assert TOKEN not in rendered
+E   assert 'SYNTHETIC_LOT1_CREDENTIAL' not in '{"status": ...CREDENTIAL"}'
+E     
+E     'SYNTHETIC_LOT1_CREDENTIAL' is contained here:
+E       {"status": "ERROR", "detail": "SYNTHETIC_LOT1_CREDENTIAL"}
+____________ test_mail_never_returns_credential_or_command[generic] ____________
+tests/test_swarm100_lot1_regressions.py:57: in test_mail_never_returns_credential_or_command
+    assert TOKEN not in rendered
+E   assert 'SYNTHETIC_LOT1_CREDENTIAL' not in '{"status": ...com\\"}\']"}'
+E     
+E     'SYNTHETIC_LOT1_CREDENTIAL' is contained here:
+E       n: Bearer SYNTHETIC_LOT1_CREDENTIAL; argv=['curl', '-s', '-w', '\\n%{http_code}', '-X', 'POST', 'https://api.resend.com/emails', '-H', 'Authorization: Bearer SYNTHETIC_LOT1_CREDENTIAL', '-H', 'Content-Type: application/json', '-d', '{\"from\": \"Borja <borja@babylon60.com>\", \"to\": [\"fixture@example.invalid\"], \"subject\": \"fixture\", \"html\": \"fixture\", \"text\": \"\", \"reply_to\": \"borja@babylon60.com\"}']"}
+E     ?           +++++++++++++++++++++++++
+_________ test_mail_never_returns_credential_or_command[bad_response] __________
+tests/test_swarm100_lot1_regressions.py:57: in test_mail_never_returns_credential_or_command
+    assert TOKEN not in rendered
+E   assert 'SYNTHETIC_LOT1_CREDENTIAL' not in '{"status": ...EDENTIAL\'"}'
+E     
+E     'SYNTHETIC_LOT1_CREDENTIAL' is contained here:
+E       base 10: 'SYNTHETIC_LOT1_CREDENTIAL'"}
+_________ test_mail_never_returns_credential_or_command[http_failure] __________
+tests/test_swarm100_lot1_regressions.py:57: in test_mail_never_returns_credential_or_command
+    assert TOKEN not in rendered
+E   assert 'SYNTHETIC_LOT1_CREDENTIAL' not in '{"status": ...REDENTIAL"}}'
+E     
+E     'SYNTHETIC_LOT1_CREDENTIAL' is contained here:
+E       n: Bearer SYNTHETIC_LOT1_CREDENTIAL"}}
+_________ test_socint_seal_binds_names_types_and_values[primary-swap] __________
+tests/test_swarm100_lot1_regressions.py:86: in test_socint_seal_binds_names_types_and_values
+    assert socint.compute_merkle_root(original) != socint.compute_merkle_root(changed)
+E   AssertionError: assert 'accba516ae16c198822ed1dc42d6c6ac2202235ee9ea91fbc03abcd4eac8b34c' != 'accba516ae16c198822ed1dc42d6c6ac2202235ee9ea91fbc03abcd4eac8b34c'
+E    +  where 'accba516ae16c198822ed1dc42d6c6ac2202235ee9ea91fbc03abcd4eac8b34c' = <function compute_merkle_root at 0x109500930>({'author': 'alice', 'text': 'hello', 'nested': {'value': 1}})
+E    +    where <function compute_merkle_root at 0x109500930> = <module 'lot1_socint_fixture' from '/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py'>.compute_merkle_root
+E    +  and   'accba516ae16c198822ed1dc42d6c6ac2202235ee9ea91fbc03abcd4eac8b34c' = <function compute_merkle_root at 0x109500930>({'author': 'hello', 'text': 'alice', 'nested': {'value': 1}})
+E    +    where <function compute_merkle_root at 0x109500930> = <module 'lot1_socint_fixture' from '/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py'>.compute_merkle_root
+________ test_socint_seal_binds_names_types_and_values[primary-rename] _________
+tests/test_swarm100_lot1_regressions.py:86: in test_socint_seal_binds_names_types_and_values
+    assert socint.compute_merkle_root(original) != socint.compute_merkle_root(changed)
+E   AssertionError: assert 'accba516ae16c198822ed1dc42d6c6ac2202235ee9ea91fbc03abcd4eac8b34c' != 'accba516ae16c198822ed1dc42d6c6ac2202235ee9ea91fbc03abcd4eac8b34c'
+E    +  where 'accba516ae16c198822ed1dc42d6c6ac2202235ee9ea91fbc03abcd4eac8b34c' = <function compute_merkle_root at 0x1094f8720>({'author': 'alice', 'text': 'hello', 'nested': {'value': 1}})
+E    +    where <function compute_merkle_root at 0x1094f8720> = <module 'lot1_socint_fixture' from '/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py'>.compute_merkle_root
+E    +  and   'accba516ae16c198822ed1dc42d6c6ac2202235ee9ea91fbc03abcd4eac8b34c' = <function compute_merkle_root at 0x1094f8720>({'text': 'hello', 'nested': {'value': 1}, 'renamed': 'alice'})
+E    +    where <function compute_merkle_root at 0x1094f8720> = <module 'lot1_socint_fixture' from '/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py'>.compute_merkle_root
+_________ test_socint_seal_binds_names_types_and_values[primary-type] __________
+tests/test_swarm100_lot1_regressions.py:86: in test_socint_seal_binds_names_types_and_values
+    assert socint.compute_merkle_root(original) != socint.compute_merkle_root(changed)
+E   AssertionError: assert '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b' != '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b'
+E    +  where '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b' = <function compute_merkle_root at 0x109501220>({'value': 1})
+E    +    where <function compute_merkle_root at 0x109501220> = <module 'lot1_socint_fixture' from '/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py'>.compute_merkle_root
+E    +  and   '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b' = <function compute_merkle_root at 0x109501220>({'value': '1'})
+E    +    where <function compute_merkle_root at 0x109501220> = <module 'lot1_socint_fixture' from '/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py'>.compute_merkle_root
+_________ test_socint_seal_binds_names_types_and_values[bundled-swap] __________
+tests/test_swarm100_lot1_regressions.py:86: in test_socint_seal_binds_names_types_and_values
+    assert socint.compute_merkle_root(original) != socint.compute_merkle_root(changed)
+E   AssertionError: assert 'accba516ae16c198822ed1dc42d6c6ac2202235ee9ea91fbc03abcd4eac8b34c' != 'accba516ae16c198822ed1dc42d6c6ac2202235ee9ea91fbc03abcd4eac8b34c'
+E    +  where 'accba516ae16c198822ed1dc42d6c6ac2202235ee9ea91fbc03abcd4eac8b34c' = <function compute_merkle_root at 0x109402820>({'author': 'alice', 'text': 'hello', 'nested': {'value': 1}})
+E    +    where <function compute_merkle_root at 0x109402820> = <module 'lot1_socint_fixture' from '/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py'>.compute_merkle_root
+E    +  and   'accba516ae16c198822ed1dc42d6c6ac2202235ee9ea91fbc03abcd4eac8b34c' = <function compute_merkle_root at 0x109402820>({'author': 'hello', 'text': 'alice', 'nested': {'value': 1}})
+E    +    where <function compute_merkle_root at 0x109402820> = <module 'lot1_socint_fixture' from '/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py'>.compute_merkle_root
+________ test_socint_seal_binds_names_types_and_values[bundled-rename] _________
+tests/test_swarm100_lot1_regressions.py:86: in test_socint_seal_binds_names_types_and_values
+    assert socint.compute_merkle_root(original) != socint.compute_merkle_root(changed)
+E   AssertionError: assert 'accba516ae16c198822ed1dc42d6c6ac2202235ee9ea91fbc03abcd4eac8b34c' != 'accba516ae16c198822ed1dc42d6c6ac2202235ee9ea91fbc03abcd4eac8b34c'
+E    +  where 'accba516ae16c198822ed1dc42d6c6ac2202235ee9ea91fbc03abcd4eac8b34c' = <function compute_merkle_root at 0x1094f8f60>({'author': 'alice', 'text': 'hello', 'nested': {'value': 1}})
+E    +    where <function compute_merkle_root at 0x1094f8f60> = <module 'lot1_socint_fixture' from '/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py'>.compute_merkle_root
+E    +  and   'accba516ae16c198822ed1dc42d6c6ac2202235ee9ea91fbc03abcd4eac8b34c' = <function compute_merkle_root at 0x1094f8f60>({'text': 'hello', 'nested': {'value': 1}, 'renamed': 'alice'})
+E    +    where <function compute_merkle_root at 0x1094f8f60> = <module 'lot1_socint_fixture' from '/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py'>.compute_merkle_root
+_________ test_socint_seal_binds_names_types_and_values[bundled-type] __________
+tests/test_swarm100_lot1_regressions.py:86: in test_socint_seal_binds_names_types_and_values
+    assert socint.compute_merkle_root(original) != socint.compute_merkle_root(changed)
+E   AssertionError: assert '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b' != '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b'
+E    +  where '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b' = <function compute_merkle_root at 0x109500d50>({'value': 1})
+E    +    where <function compute_merkle_root at 0x109500d50> = <module 'lot1_socint_fixture' from '/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py'>.compute_merkle_root
+E    +  and   '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b' = <function compute_merkle_root at 0x109500d50>({'value': '1'})
+E    +    where <function compute_merkle_root at 0x109500d50> = <module 'lot1_socint_fixture' from '/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py'>.compute_merkle_root
+________ test_socint_determinism_and_empty_odd_nested_records[primary] _________
+tests/test_swarm100_lot1_regressions.py:94: in test_socint_determinism_and_empty_odd_nested_records
+    assert socint.compute_merkle_root({}) != socint.compute_merkle_root({"empty": ""})
+E   AssertionError: assert 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855' != 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
+E    +  where 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855' = <function compute_merkle_root at 0x109502da0>({})
+E    +    where <function compute_merkle_root at 0x109502da0> = <module 'lot1_socint_fixture' from '/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py'>.compute_merkle_root
+E    +  and   'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855' = <function compute_merkle_root at 0x109502da0>({'empty': ''})
+E    +    where <function compute_merkle_root at 0x109502da0> = <module 'lot1_socint_fixture' from '/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-socint-extraction-suite/scripts/socint_extract.py'>.compute_merkle_root
+________ test_socint_determinism_and_empty_odd_nested_records[bundled] _________
+tests/test_swarm100_lot1_regressions.py:94: in test_socint_determinism_and_empty_odd_nested_records
+    assert socint.compute_merkle_root({}) != socint.compute_merkle_root({"empty": ""})
+E   AssertionError: assert 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855' != 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
+E    +  where 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855' = <function compute_merkle_root at 0x1094f9850>({})
+E    +    where <function compute_merkle_root at 0x1094f9850> = <module 'lot1_socint_fixture' from '/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py'>.compute_merkle_root
+E    +  and   'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855' = <function compute_merkle_root at 0x1094f9850>({'empty': ''})
+E    +    where <function compute_merkle_root at 0x1094f9850> = <module 'lot1_socint_fixture' from '/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py'>.compute_merkle_root
+________ test_socint_rejects_non_json_or_nonfinite_values[primary-nan] _________
+tests/test_swarm100_lot1_regressions.py:99: in test_socint_rejects_non_json_or_nonfinite_values
+    with pytest.raises((TypeError, ValueError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE any of (TypeError, ValueError)
+________ test_socint_rejects_non_json_or_nonfinite_values[primary-inf] _________
+tests/test_swarm100_lot1_regressions.py:99: in test_socint_rejects_non_json_or_nonfinite_values
+    with pytest.raises((TypeError, ValueError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE any of (TypeError, ValueError)
+_______ test_socint_rejects_non_json_or_nonfinite_values[primary-value2] _______
+tests/test_swarm100_lot1_regressions.py:99: in test_socint_rejects_non_json_or_nonfinite_values
+    with pytest.raises((TypeError, ValueError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE any of (TypeError, ValueError)
+_______ test_socint_rejects_non_json_or_nonfinite_values[primary-value3] _______
+tests/test_swarm100_lot1_regressions.py:99: in test_socint_rejects_non_json_or_nonfinite_values
+    with pytest.raises((TypeError, ValueError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE any of (TypeError, ValueError)
+________ test_socint_rejects_non_json_or_nonfinite_values[bundled-nan] _________
+tests/test_swarm100_lot1_regressions.py:99: in test_socint_rejects_non_json_or_nonfinite_values
+    with pytest.raises((TypeError, ValueError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE any of (TypeError, ValueError)
+________ test_socint_rejects_non_json_or_nonfinite_values[bundled-inf] _________
+tests/test_swarm100_lot1_regressions.py:99: in test_socint_rejects_non_json_or_nonfinite_values
+    with pytest.raises((TypeError, ValueError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE any of (TypeError, ValueError)
+_______ test_socint_rejects_non_json_or_nonfinite_values[bundled-value2] _______
+tests/test_swarm100_lot1_regressions.py:99: in test_socint_rejects_non_json_or_nonfinite_values
+    with pytest.raises((TypeError, ValueError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE any of (TypeError, ValueError)
+_______ test_socint_rejects_non_json_or_nonfinite_values[bundled-value3] _______
+tests/test_swarm100_lot1_regressions.py:99: in test_socint_rejects_non_json_or_nonfinite_values
+    with pytest.raises((TypeError, ValueError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE any of (TypeError, ValueError)
+___________ test_socint_versioned_seal_verifies_exact_body[primary] ____________
+tests/test_swarm100_lot1_regressions.py:105: in test_socint_versioned_seal_verifies_exact_body
+    result = socint.seal_evidence(original)
+             ^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'lot1_socint_fixture' has no attribute 'seal_evidence'
+___________ test_socint_versioned_seal_verifies_exact_body[bundled] ____________
+tests/test_swarm100_lot1_regressions.py:105: in test_socint_versioned_seal_verifies_exact_body
+    result = socint.seal_evidence(original)
+             ^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'lot1_socint_fixture' has no attribute 'seal_evidence'
+___________ test_legacy_editable_self_checksum_is_not_authentication ___________
+tests/test_swarm100_lot1_regressions.py:161: in test_legacy_editable_self_checksum_is_not_authentication
+    assert not attestation.verify_attestation()
+E   AssertionError: assert not True
+E    +  where True = <function verify_attestation at 0x109c7be20>()
+E    +    where <function verify_attestation at 0x109c7be20> = <module 'lot1_attestation_fixture' from '/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/tamkarum_attestation_engine.py'>.verify_attestation
+----------------------------- Captured stdout call -----------------------------
+[+] Verificación de Declaración SCITT: VÁLIDA (100% Integridad Causal)
+    • Compound Hash: 76a702058a466265f0d5636d10252c0388432a4a657104572b0e970a0f27cce8
+_______________ test_authorized_signed_current_evidence_verifies _______________
+tests/test_swarm100_lot1_regressions.py:165: in test_authorized_signed_current_evidence_verifies
+    assert verify(attestation, signed_evidence)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_swarm100_lot1_regressions.py:150: in verify
+    return module.verify_attestation(**options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: verify_attestation() got an unexpected keyword argument 'statement_path'
+_____ test_stale_or_missing_evidence_is_rejected[modify-outreach_manifest] _____
+tests/test_swarm100_lot1_regressions.py:176: in test_stale_or_missing_evidence_is_rejected
+    assert not verify(attestation, signed_evidence)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_swarm100_lot1_regressions.py:150: in verify
+    return module.verify_attestation(**options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: verify_attestation() got an unexpected keyword argument 'statement_path'
+______ test_stale_or_missing_evidence_is_rejected[modify-social_calendar] ______
+tests/test_swarm100_lot1_regressions.py:176: in test_stale_or_missing_evidence_is_rejected
+    assert not verify(attestation, signed_evidence)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_swarm100_lot1_regressions.py:150: in verify
+    return module.verify_attestation(**options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: verify_attestation() got an unexpected keyword argument 'statement_path'
+______ test_stale_or_missing_evidence_is_rejected[modify-compliance_pack] ______
+tests/test_swarm100_lot1_regressions.py:176: in test_stale_or_missing_evidence_is_rejected
+    assert not verify(attestation, signed_evidence)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_swarm100_lot1_regressions.py:150: in verify
+    return module.verify_attestation(**options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: verify_attestation() got an unexpected keyword argument 'statement_path'
+_____ test_stale_or_missing_evidence_is_rejected[delete-outreach_manifest] _____
+tests/test_swarm100_lot1_regressions.py:176: in test_stale_or_missing_evidence_is_rejected
+    assert not verify(attestation, signed_evidence)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_swarm100_lot1_regressions.py:150: in verify
+    return module.verify_attestation(**options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: verify_attestation() got an unexpected keyword argument 'statement_path'
+______ test_stale_or_missing_evidence_is_rejected[delete-social_calendar] ______
+tests/test_swarm100_lot1_regressions.py:176: in test_stale_or_missing_evidence_is_rejected
+    assert not verify(attestation, signed_evidence)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_swarm100_lot1_regressions.py:150: in verify
+    return module.verify_attestation(**options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: verify_attestation() got an unexpected keyword argument 'statement_path'
+______ test_stale_or_missing_evidence_is_rejected[delete-compliance_pack] ______
+tests/test_swarm100_lot1_regressions.py:176: in test_stale_or_missing_evidence_is_rejected
+    assert not verify(attestation, signed_evidence)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_swarm100_lot1_regressions.py:150: in verify
+    return module.verify_attestation(**options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: verify_attestation() got an unexpected keyword argument 'statement_path'
+___ test_attestation_rejects_authentication_or_state_mismatch[untrusted_key] ___
+tests/test_swarm100_lot1_regressions.py:212: in test_attestation_rejects_authentication_or_state_mismatch
+    assert not verify(attestation, fixture, **options)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_swarm100_lot1_regressions.py:150: in verify
+    return module.verify_attestation(**options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: verify_attestation() got an unexpected keyword argument 'statement_path'
+____ test_attestation_rejects_authentication_or_state_mismatch[missing_key] ____
+tests/test_swarm100_lot1_regressions.py:212: in test_attestation_rejects_authentication_or_state_mismatch
+    assert not verify(attestation, fixture, **options)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_swarm100_lot1_regressions.py:150: in verify
+    return module.verify_attestation(**options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: verify_attestation() got an unexpected keyword argument 'statement_path'
+_____ test_attestation_rejects_authentication_or_state_mismatch[unsigned] ______
+tests/test_swarm100_lot1_regressions.py:212: in test_attestation_rejects_authentication_or_state_mismatch
+    assert not verify(attestation, fixture, **options)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_swarm100_lot1_regressions.py:150: in verify
+    return module.verify_attestation(**options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: verify_attestation() got an unexpected keyword argument 'statement_path'
+___ test_attestation_rejects_authentication_or_state_mismatch[bad_signature] ___
+tests/test_swarm100_lot1_regressions.py:212: in test_attestation_rejects_authentication_or_state_mismatch
+    assert not verify(attestation, fixture, **options)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_swarm100_lot1_regressions.py:150: in verify
+    return module.verify_attestation(**options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: verify_attestation() got an unexpected keyword argument 'statement_path'
+______ test_attestation_rejects_authentication_or_state_mismatch[commit] _______
+tests/test_swarm100_lot1_regressions.py:212: in test_attestation_rejects_authentication_or_state_mismatch
+    assert not verify(attestation, fixture, **options)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_swarm100_lot1_regressions.py:150: in verify
+    return module.verify_attestation(**options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: verify_attestation() got an unexpected keyword argument 'statement_path'
+_____ test_attestation_rejects_authentication_or_state_mismatch[topology] ______
+tests/test_swarm100_lot1_regressions.py:212: in test_attestation_rejects_authentication_or_state_mismatch
+    assert not verify(attestation, fixture, **options)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_swarm100_lot1_regressions.py:150: in verify
+    return module.verify_attestation(**options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: verify_attestation() got an unexpected keyword argument 'statement_path'
+___ test_attestation_rejects_authentication_or_state_mismatch[outreach_root] ___
+tests/test_swarm100_lot1_regressions.py:212: in test_attestation_rejects_authentication_or_state_mismatch
+    assert not verify(attestation, fixture, **options)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_swarm100_lot1_regressions.py:150: in verify
+    return module.verify_attestation(**options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: verify_attestation() got an unexpected keyword argument 'statement_path'
+______ test_attestation_rejects_authentication_or_state_mismatch[schema] _______
+tests/test_swarm100_lot1_regressions.py:212: in test_attestation_rejects_authentication_or_state_mismatch
+    assert not verify(attestation, fixture, **options)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_swarm100_lot1_regressions.py:150: in verify
+    return module.verify_attestation(**options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: verify_attestation() got an unexpected keyword argument 'statement_path'
+__ test_attestation_rejects_authentication_or_state_mismatch[edited_rehashed] __
+tests/test_swarm100_lot1_regressions.py:212: in test_attestation_rejects_authentication_or_state_mismatch
+    assert not verify(attestation, fixture, **options)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_swarm100_lot1_regressions.py:150: in verify
+    return module.verify_attestation(**options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: verify_attestation() got an unexpected keyword argument 'statement_path'
+_ test_duplicate_json_keys_are_rejected_even_with_matching_effective_signature _
+tests/test_swarm100_lot1_regressions.py:219: in test_duplicate_json_keys_are_rejected_even_with_matching_effective_signature
+    assert not verify(attestation, signed_evidence)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_swarm100_lot1_regressions.py:150: in verify
+    return module.verify_attestation(**options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: verify_attestation() got an unexpected keyword argument 'statement_path'
+____________________ test_nonfinite_signed_json_is_rejected ____________________
+tests/test_swarm100_lot1_regressions.py:226: in test_nonfinite_signed_json_is_rejected
+    assert not verify(attestation, signed_evidence)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_swarm100_lot1_regressions.py:150: in verify
+    return module.verify_attestation(**options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: verify_attestation() got an unexpected keyword argument 'statement_path'
+__________ test_malformed_statement_rejects_without_raising[not-json] __________
+tests/test_swarm100_lot1_regressions.py:232: in test_malformed_statement_rejects_without_raising
+    assert not verify(attestation, signed_evidence)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_swarm100_lot1_regressions.py:150: in verify
+    return module.verify_attestation(**options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: verify_attestation() got an unexpected keyword argument 'statement_path'
+_____________ test_malformed_statement_rejects_without_raising[[]] _____________
+tests/test_swarm100_lot1_regressions.py:232: in test_malformed_statement_rejects_without_raising
+    assert not verify(attestation, signed_evidence)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_swarm100_lot1_regressions.py:150: in verify
+    return module.verify_attestation(**options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: verify_attestation() got an unexpected keyword argument 'statement_path'
+____________ test_malformed_statement_rejects_without_raising[null] ____________
+tests/test_swarm100_lot1_regressions.py:232: in test_malformed_statement_rejects_without_raising
+    assert not verify(attestation, signed_evidence)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_swarm100_lot1_regressions.py:150: in verify
+    return module.verify_attestation(**options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: verify_attestation() got an unexpected keyword argument 'statement_path'
+_ test_malformed_statement_rejects_without_raising[{"header":[],"payload":{}}] _
+tests/test_swarm100_lot1_regressions.py:232: in test_malformed_statement_rejects_without_raising
+    assert not verify(attestation, signed_evidence)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_swarm100_lot1_regressions.py:150: in verify
+    return module.verify_attestation(**options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: verify_attestation() got an unexpected keyword argument 'statement_path'
+_______________________ test_cli_failure_returns_nonzero _______________________
+tests/test_swarm100_lot1_regressions.py:240: in test_cli_failure_returns_nonzero
+    assert attestation.main() == 1
+E   AssertionError: assert None == 1
+E    +  where None = <function main at 0x109501a60>()
+E    +    where <function main at 0x109501a60> = <module 'lot1_attestation_fixture' from '/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/tamkarum_attestation_engine.py'>.main
+----------------------------- Captured stdout call -----------------------------
+[+] Verificación de Declaración SCITT: CORRUPTA / DISCREPANCIA
+    • Compound Hash: d00d9be38948fb145335e663ae2d01c00ac71d268566521ce4abfc4ff1038e11
+__________________ test_cli_accepts_explicit_trusted_fixture ___________________
+tests/test_swarm100_lot1_regressions.py:251: in test_cli_accepts_explicit_trusted_fixture
+    assert attestation.main() == 0
+           ^^^^^^^^^^^^^^^^^^
+tools/tamkarum_attestation_engine.py:187: in main
+    args = parser.parse_args()
+           ^^^^^^^^^^^^^^^^^^^
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:2012: in parse_args
+    self.error(msg)
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:2785: in error
+    self.exit(2, _('%(prog)s: error: %(message)s\n') % args)
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py:2772: in exit
+    _sys.exit(status)
+E   SystemExit: 2
+----------------------------- Captured stderr call -----------------------------
+usage: tamkarum [-h] [--emit] [--verify]
+tamkarum: error: unrecognized arguments: --statement /private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-708/test_cli_accepts_explicit_trus0/statement.json --trusted-key /private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-708/test_cli_accepts_explicit_trus0/public.raw --expected-commit bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb --expected-topology-sha256 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc --outreach-manifest /private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-708/test_cli_accepts_explicit_trus0/outreach_manifest.json --social-calendar /private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-708/test_cli_accepts_explicit_trus0/social_calendar.json --compliance-pack /private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-708/test_cli_accepts_explicit_trus0/compliance_pack.json
+=========================== short test summary info ============================
+FAILED tests/test_swarm100_lot1_regressions.py::test_mail_never_returns_credential_or_command[empty_stderr]
+FAILED tests/test_swarm100_lot1_regressions.py::test_mail_never_returns_credential_or_command[token_stderr]
+FAILED tests/test_swarm100_lot1_regressions.py::test_mail_never_returns_credential_or_command[generic]
+FAILED tests/test_swarm100_lot1_regressions.py::test_mail_never_returns_credential_or_command[bad_response]
+FAILED tests/test_swarm100_lot1_regressions.py::test_mail_never_returns_credential_or_command[http_failure]
+FAILED tests/test_swarm100_lot1_regressions.py::test_socint_seal_binds_names_types_and_values[primary-swap]
+FAILED tests/test_swarm100_lot1_regressions.py::test_socint_seal_binds_names_types_and_values[primary-rename]
+FAILED tests/test_swarm100_lot1_regressions.py::test_socint_seal_binds_names_types_and_values[primary-type]
+FAILED tests/test_swarm100_lot1_regressions.py::test_socint_seal_binds_names_types_and_values[bundled-swap]
+FAILED tests/test_swarm100_lot1_regressions.py::test_socint_seal_binds_names_types_and_values[bundled-rename]
+FAILED tests/test_swarm100_lot1_regressions.py::test_socint_seal_binds_names_types_and_values[bundled-type]
+FAILED tests/test_swarm100_lot1_regressions.py::test_socint_determinism_and_empty_odd_nested_records[primary]
+FAILED tests/test_swarm100_lot1_regressions.py::test_socint_determinism_and_empty_odd_nested_records[bundled]
+FAILED tests/test_swarm100_lot1_regressions.py::test_socint_rejects_non_json_or_nonfinite_values[primary-nan]
+FAILED tests/test_swarm100_lot1_regressions.py::test_socint_rejects_non_json_or_nonfinite_values[primary-inf]
+FAILED tests/test_swarm100_lot1_regressions.py::test_socint_rejects_non_json_or_nonfinite_values[primary-value2]
+FAILED tests/test_swarm100_lot1_regressions.py::test_socint_rejects_non_json_or_nonfinite_values[primary-value3]
+FAILED tests/test_swarm100_lot1_regressions.py::test_socint_rejects_non_json_or_nonfinite_values[bundled-nan]
+FAILED tests/test_swarm100_lot1_regressions.py::test_socint_rejects_non_json_or_nonfinite_values[bundled-inf]
+FAILED tests/test_swarm100_lot1_regressions.py::test_socint_rejects_non_json_or_nonfinite_values[bundled-value2]
+FAILED tests/test_swarm100_lot1_regressions.py::test_socint_rejects_non_json_or_nonfinite_values[bundled-value3]
+FAILED tests/test_swarm100_lot1_regressions.py::test_socint_versioned_seal_verifies_exact_body[primary]
+FAILED tests/test_swarm100_lot1_regressions.py::test_socint_versioned_seal_verifies_exact_body[bundled]
+FAILED tests/test_swarm100_lot1_regressions.py::test_legacy_editable_self_checksum_is_not_authentication
+FAILED tests/test_swarm100_lot1_regressions.py::test_authorized_signed_current_evidence_verifies
+FAILED tests/test_swarm100_lot1_regressions.py::test_stale_or_missing_evidence_is_rejected[modify-outreach_manifest]
+FAILED tests/test_swarm100_lot1_regressions.py::test_stale_or_missing_evidence_is_rejected[modify-social_calendar]
+FAILED tests/test_swarm100_lot1_regressions.py::test_stale_or_missing_evidence_is_rejected[modify-compliance_pack]
+FAILED tests/test_swarm100_lot1_regressions.py::test_stale_or_missing_evidence_is_rejected[delete-outreach_manifest]
+FAILED tests/test_swarm100_lot1_regressions.py::test_stale_or_missing_evidence_is_rejected[delete-social_calendar]
+FAILED tests/test_swarm100_lot1_regressions.py::test_stale_or_missing_evidence_is_rejected[delete-compliance_pack]
+FAILED tests/test_swarm100_lot1_regressions.py::test_attestation_rejects_authentication_or_state_mismatch[untrusted_key]
+FAILED tests/test_swarm100_lot1_regressions.py::test_attestation_rejects_authentication_or_state_mismatch[missing_key]
+FAILED tests/test_swarm100_lot1_regressions.py::test_attestation_rejects_authentication_or_state_mismatch[unsigned]
+FAILED tests/test_swarm100_lot1_regressions.py::test_attestation_rejects_authentication_or_state_mismatch[bad_signature]
+FAILED tests/test_swarm100_lot1_regressions.py::test_attestation_rejects_authentication_or_state_mismatch[commit]
+FAILED tests/test_swarm100_lot1_regressions.py::test_attestation_rejects_authentication_or_state_mismatch[topology]
+FAILED tests/test_swarm100_lot1_regressions.py::test_attestation_rejects_authentication_or_state_mismatch[outreach_root]
+FAILED tests/test_swarm100_lot1_regressions.py::test_attestation_rejects_authentication_or_state_mismatch[schema]
+FAILED tests/test_swarm100_lot1_regressions.py::test_attestation_rejects_authentication_or_state_mismatch[edited_rehashed]
+FAILED tests/test_swarm100_lot1_regressions.py::test_duplicate_json_keys_are_rejected_even_with_matching_effective_signature
+FAILED tests/test_swarm100_lot1_regressions.py::test_nonfinite_signed_json_is_rejected
+FAILED tests/test_swarm100_lot1_regressions.py::test_malformed_statement_rejects_without_raising[not-json]
+FAILED tests/test_swarm100_lot1_regressions.py::test_malformed_statement_rejects_without_raising[[]]
+FAILED tests/test_swarm100_lot1_regressions.py::test_malformed_statement_rejects_without_raising[null]
+FAILED tests/test_swarm100_lot1_regressions.py::test_malformed_statement_rejects_without_raising[{"header":[],"payload":{}}]
+FAILED tests/test_swarm100_lot1_regressions.py::test_cli_failure_returns_nonzero
+FAILED tests/test_swarm100_lot1_regressions.py::test_cli_accepts_explicit_trusted_fixture
+48 failed, 3 passed in 2.30s

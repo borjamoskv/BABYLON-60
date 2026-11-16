@@ -1,0 +1,9 @@
+=== [C5-REAL] AUDITORÍA DE PRESUPUESTO DE TOKENS ===
+■ .babylon60rules (workspace, counted once): 5,082 B (~1,270 estimated tokens)
+■ AGENTS.md (workspace, counted once): 4,808 B (~1,202 estimated tokens)
+■ Global rules: NOT_CHECKED (workspace-only)
+■ Reglas always_on (Global: 0, Workspace: 0): 0 B (~0 estimated tokens)
+■ INSPECTED ALWAYS_ON: 9,890 B / 40,000 B (~2,472 estimated tokens; actual client context not measured)
+■ Reglas condicionales (model_decision): 0 global + 7 workspace (bodies excluded from this budget; client loading not measured)
+■ Ghost Listeners (conversation_summaries.db): NOT_CHECKED (explicitly skipped)
+PASS: Workspace token budget within inline ceiling; global rules and cross-scope duplicates not checked.

@@ -38,6 +38,16 @@ class _Lesson:
                 window.append(attempt)
         practice = [attempt for attempt in window if attempt["held_out"] is False]
         held_out = [attempt for attempt in window if attempt["held_out"] is True]
+        contaminated_variants = {
+            attempt["variant_id"]
+            for attempt in self.attempts
+            if attempt["held_out"] is False or attempt["success"] is False
+        }
+        contaminated_sessions = {
+            attempt["session_id"]
+            for attempt in self.attempts
+            if attempt["held_out"] is False or attempt["success"] is False
+        }
         first_exposure: dict[object, dict[str, object]] = {}
         for attempt in practice:
             first_exposure.setdefault(attempt["variant_id"], attempt)
@@ -45,10 +55,8 @@ class _Lesson:
             for second in first_exposure.values():
                 if first["variant_id"] == second["variant_id"] or first["session_id"] == second["session_id"]:
                     continue
-                practice_variants = {attempt["variant_id"] for attempt in practice}
-                practice_sessions = {attempt["session_id"] for attempt in practice}
                 if any(
-                    test["variant_id"] not in practice_variants and test["session_id"] not in practice_sessions
+                    test["variant_id"] not in contaminated_variants and test["session_id"] not in contaminated_sessions
                     for test in held_out
                 ):
                     return True
@@ -154,7 +162,7 @@ class SkillLearning:
         if not isinstance(active_only, bool):
             raise ValueError("active_only must be a boolean")
         lesson_ids: list[str] = []
-        for _, proposal in self._history(_PROPOSED):
+        for _, proposal in sorted(self._history(_PROPOSED), key=lambda event: event[0]):
             if skill_id is not None and proposal["skill_id"] != skill_id:
                 continue
             if context is not None and proposal["context"] != context:
@@ -201,6 +209,9 @@ class SkillLearning:
 
         def validate() -> None:
             lesson = self._load(lesson_id)
+            for _, other in self._history(_ATTEMPT):
+                if other.get("attempt_id") == attempt_id and other != payload:
+                    raise ValueError("attempt_id already names different evidence")
             for previous in lesson.attempts:
                 if previous["attempt_id"] == attempt_id:
                     if previous != payload:

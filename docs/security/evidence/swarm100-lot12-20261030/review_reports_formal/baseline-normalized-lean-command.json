@@ -1,0 +1,10 @@
+{
+  "command": [
+    "/Users/borjafernandezangulo/.elan/toolchains/leanprover--lean4---v4.35.0/bin/lean",
+    "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/docs/security/evidence/swarm100-lot12-20261030/s6_formal/original-axiom-counterexample-normalized.lean"
+  ],
+  "exit_code": 0,
+  "log": "docs/security/evidence/swarm100-lot12-20261030/review_reports_formal/baseline-normalized-lean.log",
+  "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "scope": "Normalized syntax/namespace model of old axiom; not unmodified old generator compilation"
+}

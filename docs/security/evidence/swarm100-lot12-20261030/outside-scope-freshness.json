@@ -1,0 +1,17 @@
+{
+  "outside_scope_drift": {
+    "01_KISH_ENGINE/babylon60/memory/provenance_arbiter.py": [
+      "SW100-C0209"
+    ],
+    "01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py": [
+      "SW100-C0403"
+    ],
+    "scripts/c5_cli/doxastic_kripke_engine.py": [
+      "SW100-C0415"
+    ],
+    "01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift": [
+      "SW100-C0487"
+    ]
+  },
+  "basis": "Current inventory source hashes compared with worktree before Lote12 reconciliation; not a runtime check."
+}

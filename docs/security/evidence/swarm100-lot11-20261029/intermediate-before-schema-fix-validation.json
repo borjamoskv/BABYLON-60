@@ -1,0 +1,77 @@
+{
+  "date": "2026-10-29",
+  "timezone": "Europe/Madrid",
+  "scope": "Only core/cortex_persist.py production edited. Seeded owned synthetic HOME/.agent/memory before importing copied module; original os.kill inert, TCP/DNS blocked. Actual JSON/descriptor/flock/fsync/replace effects only on temporary fixture files; owned Python children use controlled abrupt exits, no operator process is killed. No operator memory, protected runtime, keys/signing/hardware, dependencies/lockfiles/publication or ATTESTED. Per-file replacement and cooperative local POSIX writers only; three files are separate commits, no power-cut/hostile-writer certification or automatic orphan recovery. Global telemetry omitted.",
+  "checks": {
+    "related-tests": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "python",
+        "-c",
+        "import os,sys,socket,tempfile\nhome=tempfile.TemporaryDirectory(prefix='b60-lot11-tests-')\nos.environ['HOME']=home.name\nfor key in ['CORTEX_VAULT_KEY','KIMI_API_KEY','MOONSHOT_API_KEY','OPENROUTER_API_KEY','MOONSHOT_API_URL','OPENROUTER_API_URL','MOONSHOT_MODEL','OPENROUTER_MODEL']:\n    os.environ.pop(key,None)\nos.environ['BABYLON60_SIGNING_SEED']='00'*32\nimport dotenv\ndotenv.load_dotenv=lambda *a,**k:False\ndotenv.dotenv_values=lambda *a,**k:{}\nsys.modules['strike_rs']=None\ndef blocked(*a,**k):\n    raise AssertionError('DNS/network forbidden in confined regression suite')\noriginal=socket.socket.connect\noriginal_ex=socket.socket.connect_ex\ndef connect(self,*a,**k):\n    if self.family in (socket.AF_INET,socket.AF_INET6):return blocked()\n    return original(self,*a,**k)\ndef connect_ex(self,*a,**k):\n    if self.family in (socket.AF_INET,socket.AF_INET6):return blocked()\n    return original_ex(self,*a,**k)\nsocket.socket.connect=connect\nsocket.socket.connect_ex=connect_ex\nsocket.getaddrinfo=blocked\nimport pytest\nraise SystemExit(pytest.main(sys.argv[1:]))\n",
+        "tests/test_swarm100_lot11_regressions.py",
+        "tests/test_swarm100_lot10_regressions.py",
+        "tests/test_swarm100_lot9_regressions.py",
+        "tests/test_swarm100_lot8_regressions.py",
+        "tests/test_swarm100_lot7_regressions.py",
+        "tests/test_swarm100_lot6_regressions.py",
+        "tests/test_audit_swarm_rate_limit.py",
+        "tests/test_swarm100_lot5_regressions.py",
+        "tests/test_ledger_resilience.py",
+        "tests/test_ledger_vault_verify.py",
+        "tests/test_wheel_runtime_regressions.py::test_actor_detects_removed_tail",
+        "tests/test_wheel_runtime_regressions.py::test_actor_concurrent_reads_use_consistent_snapshots",
+        "tests/test_finding_evidence_contract.py",
+        "tests/test_swarm100_lot4_regressions.py",
+        "tests/test_swarm100_lot3_regressions.py",
+        "tests/test_swarm100_lot2_regressions.py",
+        "tests/test_swarm100_lot1_regressions.py",
+        "tests/test_agent_beeper_regressions.py",
+        "tests/test_autodidact_derivation_regressions.py",
+        "tests/test_swarm100_round2_regressions.py",
+        "tests/test_standalone_verifier.py",
+        "tests/test_memory_governance_falsification.py",
+        "tests/test_compliance_exporter.py",
+        "tests/test_m0_evidence_pack_acceptance.py",
+        "tests/test_autodidact_omega_v2.py",
+        "tests/test_autodidact_omega_pipeline.py",
+        "tests/test_cortex_persist_batch_regressions.py",
+        "tests/test_ledger_cross_equivalence.py",
+        "tests/test_fl027_provenance_authority.py",
+        "-q",
+        "-rs",
+        "-o",
+        "addopts=--tb=short"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot11-20261029/related-tests.log",
+      "log_sha256": "1f953c25407814785ae3b676c8ec9310b1e2980f7f2a481a8e7410042af6464c",
+      "source_sha256_before_and_after": {
+        "01_KISH_ENGINE/babylon60/core/cortex_persist.py": "24bd06ab165e103831cd150f107ffd300279cf2367b80924ac90f575a279ba6c",
+        "tests/test_swarm100_lot11_regressions.py": "032f6ea8d0b41ddd29dac38af1ca2df101e77da8275265091dd16bd256b3d775"
+      }
+    },
+    "mypy": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "mypy",
+        "--follow-imports=silent",
+        "--check-untyped-defs",
+        "01_KISH_ENGINE/babylon60/core/cortex_persist.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot11-20261029/mypy.log",
+      "log_sha256": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e",
+      "source_sha256_before_and_after": {
+        "01_KISH_ENGINE/babylon60/core/cortex_persist.py": "24bd06ab165e103831cd150f107ffd300279cf2367b80924ac90f575a279ba6c",
+        "tests/test_swarm100_lot11_regressions.py": "032f6ea8d0b41ddd29dac38af1ca2df101e77da8275265091dd16bd256b3d775"
+      }
+    }
+  }
+}

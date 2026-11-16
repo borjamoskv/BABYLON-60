@@ -1,0 +1,11 @@
+{
+  "source_sha256": "668553163dd25c3eb8c22e97eee7b90d12725fb821033e7036a5c565a4e8f1b6",
+  "runtime_scope": "Temporary SQLite, no vault key, no native IPC, no operator data",
+  "first_result": {
+    "seq": 1,
+    "event_id": "66ee35d0-0ec6-5d89-91b4-eb52c09263ef",
+    "entry_hash": "e1795a01be5a63d0789da8453e25c6ba6249dc150fe3fe41cca0f2a5e879dfa1"
+  },
+  "retry_error": "ValueError: Fail-fast: INV_BFT_04 Collision on event_id 66ee35d0-0ec6-5d89-91b4-eb52c09263ef: payload or metadata mismatch",
+  "chain_valid": true
+}

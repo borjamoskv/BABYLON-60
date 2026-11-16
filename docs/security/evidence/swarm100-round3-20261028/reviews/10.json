@@ -1,0 +1,1116 @@
+{
+  "reviewer": "10",
+  "candidates": [
+    {
+      "candidate_id": "SW100-C0001",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/kernel/browser_cdp_engine.py",
+      "current_source_sha256": "e3473ca0c7087ead3e66ee93238986a1a5b0a9968282b188df021e96af58b1a8",
+      "rationale": "send retains a new Future in _pending_requests before both ws.send and wait_for. A send error or timeout without a subsequent matching response has no removal path, so repeated failures retain entries for the lifetime of the CDPPage. This is source-level resource retention; no browser or network was launched.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/browser_cdp_engine.py",
+          "start_line": 138,
+          "end_line": 149,
+          "observation": "Map insertion precedes both awaits and there is no finally cleanup."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/browser_cdp_engine.py",
+          "start_line": 86,
+          "end_line": 118,
+          "observation": "Only receiving a matching id removes its entry; listener termination does not clear pending requests."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/browser_cdp_engine.py",
+          "start_line": 324,
+          "end_line": 336,
+          "observation": "close cancels receive task and closes WebSocket without clearing the map."
+        }
+      ],
+      "guards": [
+        "wait_for limits waiting but cancels the Future without deleting its map entry.",
+        "A late matching response does remove its entry; the failure case requires absent responses."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0002",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/kernel/browser_cdp_engine.py",
+      "current_source_sha256": "e3473ca0c7087ead3e66ee93238986a1a5b0a9968282b188df021e96af58b1a8",
+      "rationale": "Every navigate(wait_until_load=True) appends a closure retaining its load Future; all completion, readyState and timeout exits leave that callback registered. Repeated calls on one page therefore retain callbacks and increase event dispatch work. No browser execution or RSS measurement was performed.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/browser_cdp_engine.py",
+          "start_line": 151,
+          "end_line": 179,
+          "observation": "All navigation completion paths omit listener removal."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/browser_cdp_engine.py",
+          "start_line": 318,
+          "end_line": 336,
+          "observation": "on only appends; close also does not clear event listeners."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/browser_cdp_engine.py",
+          "start_line": 110,
+          "end_line": 114,
+          "observation": "Each event traverses all callbacks for its method."
+        }
+      ],
+      "guards": [
+        "loaded_fut.done() prevents repeated completion errors but does not release the callback.",
+        "wait_until_load=False does not register the listener."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0003",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/kernel/browser_cdp_engine.py",
+      "current_source_sha256": "e3473ca0c7087ead3e66ee93238986a1a5b0a9968282b188df021e96af58b1a8",
+      "rationale": "After Popen succeeds, endpoint timeout or a later exception returns False without terminating the process. __aenter__ then raises; its __aexit__ cleanup is not entered. A failed context-manager launch can therefore retain its browser child until separate close or process termination. TemporaryDirectory finalization may eventually clean the profile; indefinite profile retention is not asserted.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/browser_cdp_engine.py",
+          "start_line": 395,
+          "end_line": 422,
+          "observation": "Temporary profile and Popen are created before readiness checks."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/browser_cdp_engine.py",
+          "start_line": 424,
+          "end_line": 461,
+          "observation": "Readiness failures return False without close."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/browser_cdp_engine.py",
+          "start_line": 503,
+          "end_line": 532,
+          "observation": "Cleanup exists only in close/__aexit__; failed __aenter__ raises before context entry."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/browser_cdp_engine.py",
+          "start_line": 558,
+          "end_line": 563,
+          "observation": "The standalone caller uses async with BrowserEngine."
+        }
+      ],
+      "guards": [
+        "No-binary failure occurs before process creation.",
+        "An explicit caller close can terminate the process, but __aenter__ does not call it on failure."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0097",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/global/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+      "current_source_sha256": "d5360124b49372becd300d853bf0ab8f396afa42432a04f6f6cc810f6e531bf4",
+      "rationale": "Identity preparation for every job writes the same global NPZ path, and subprocess workers reload that path without a parent-job identifier. An overlapping preparation can replace the embeddings before another job loads them. The scope is cross-job identity substitution in this local CLI; no biometric data or model was loaded.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/global/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+          "start_line": 103,
+          "end_line": 103,
+          "observation": "TEMP_EMBEDDINGS_PATH is the fixed /tmp/c5_source_embeddings.npz."
+        },
+        {
+          "path": "tools/skill_library/global/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+          "start_line": 712,
+          "end_line": 736,
+          "observation": "Source and target embeddings are written together to the fixed file."
+        },
+        {
+          "path": "tools/skill_library/global/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+          "start_line": 1013,
+          "end_line": 1047,
+          "observation": "Worker commands pass frame/output settings but no unique embeddings path."
+        },
+        {
+          "path": "tools/skill_library/global/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+          "start_line": 1175,
+          "end_line": 1200,
+          "observation": "Workers reload the shared file for source and target identities."
+        }
+      ],
+      "guards": [
+        "Single-worker path passes in-memory source faces directly.",
+        "Per-session video output names do not isolate the globally named embeddings file."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0098",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/global/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+      "current_source_sha256": "d5360124b49372becd300d853bf0ab8f396afa42432a04f6f6cc810f6e531bf4",
+      "rationale": "The outer video pipeline can accept start_frame>0 and render that subrange, while the extracted audio starts at the beginning of the input and is muxed without seek/offset. Thus a later visual segment is paired with beginning audio. The effect is conditional on an audio-bearing input and successful rendering; no media was accessed or rendered.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/global/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+          "start_line": 946,
+          "end_line": 983,
+          "observation": "Audio extraction has no seek while range_start is forwarded to rendering."
+        },
+        {
+          "path": "tools/skill_library/global/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+          "start_line": 338,
+          "end_line": 356,
+          "observation": "Worker seeks the capture to start_frame and calculates the subrange length."
+        },
+        {
+          "path": "tools/skill_library/global/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+          "start_line": 1065,
+          "end_line": 1076,
+          "observation": "Final mux reads the complete audio file, applies aresample, and uses shortest without range offset."
+        },
+        {
+          "path": "tools/skill_library/global/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+          "start_line": 1167,
+          "end_line": 1173,
+          "observation": "start/end frame flags are accepted although hidden from help."
+        }
+      ],
+      "guards": [
+        "start_frame=0 avoids this offset mismatch.",
+        "-shortest limits duration; it does not align audio to the source frame offset."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0099",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/global/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+      "current_source_sha256": "d5360124b49372becd300d853bf0ab8f396afa42432a04f6f6cc810f6e531bf4",
+      "rationale": "With an enhancer enabled and no BiSeNet mask session/helper, the image pipeline computes a replacement patch but never assigns it into res. The elliptical paste is the else of the enhancer condition, so it is unavailable in this branch. The unchanged pixel buffer is then saved and DONE is printed. No image or native inference ran.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/global/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+          "start_line": 781,
+          "end_line": 794,
+          "observation": "Selecting ellipse leaves bisenet_sess as None."
+        },
+        {
+          "path": "tools/skill_library/global/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+          "start_line": 819,
+          "end_line": 887,
+          "observation": "res starts as input copy; enhanced paste occurs only inside BiSeNet condition and fallback belongs to enhancer==none."
+        },
+        {
+          "path": "tools/skill_library/global/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+          "start_line": 896,
+          "end_line": 906,
+          "observation": "The same res buffer is written and completion is announced."
+        },
+        {
+          "path": "tools/skill_library/global/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+          "start_line": 1137,
+          "end_line": 1145,
+          "observation": "The CLI permits an enabled enhancer with mask ellipse."
+        }
+      ],
+      "guards": [
+        "enhancer=none reaches the fallback paste.",
+        "A working BiSeNet mask branch does paste the enhanced patch."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0122",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/verifiable_inference/edge0_moe_streamer.py",
+      "current_source_sha256": "887aa86afc30d76fe562a9a12bd9180ea5182e7325a449bfd13e9c90e804cb3c",
+      "rationale": "The eviction loop stops when the prefetch list is empty, even if the new expert itself exceeds the configured ceiling. It then appends the key and adds byte_length unconditionally: a 2048-byte expert with a 1024-byte budget yields an accounted 2048 bytes. This proves an accounting invariant failure, not measured resident RAM.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/verifiable_inference/edge0_moe_streamer.py",
+          "start_line": 104,
+          "end_line": 116,
+          "observation": "Constructor stores arbitrary budget and metadata with no per-slice ceiling check."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/verifiable_inference/edge0_moe_streamer.py",
+          "start_line": 155,
+          "end_line": 183,
+          "observation": "Eviction depends on a nonempty key list; addition proceeds after that list empties."
+        },
+        {
+          "path": "tests/test_v1_v2_v3_frontier_assimilation.py",
+          "start_line": 85,
+          "end_line": 114,
+          "observation": "Existing test uses 4096-byte slices under an 8192-byte budget and never tests an individually oversized slice."
+        }
+      ],
+      "guards": [
+        "Older prefetched keys are evicted when present.",
+        "Missing expert metadata is skipped. Neither guard rejects an individual oversize slice."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0123",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/verifiable_inference/edge0_moe_streamer.py",
+      "current_source_sha256": "887aa86afc30d76fe562a9a12bd9180ea5182e7325a449bfd13e9c90e804cb3c",
+      "rationale": "read_expert_bytes returns a full mmap slice as bytes without checking or updating the active-byte counter. It can be called without prefetch, and returned buffers can outlive eviction or accumulate in the caller. This violates the class-level strict-RAM/zero-copy claim; actual RSS and OS residency are not measured.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/verifiable_inference/edge0_moe_streamer.py",
+          "start_line": 1,
+          "end_line": 7,
+          "observation": "Module advertises zero-copy streaming."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/verifiable_inference/edge0_moe_streamer.py",
+          "start_line": 99,
+          "end_line": 116,
+          "observation": "Class advertises strict active-RAM ceiling and maintains a prefetch counter."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/verifiable_inference/edge0_moe_streamer.py",
+          "start_line": 170,
+          "end_line": 191,
+          "observation": "Only prefetch updates accounting; read opens on demand and returns the complete slice."
+        },
+        {
+          "path": "tests/test_v1_v2_v3_frontier_assimilation.py",
+          "start_line": 100,
+          "end_line": 112,
+          "observation": "Caller receives and retains exp1_data while more prefetches occur; test checks only the counter."
+        }
+      ],
+      "guards": [
+        "close resets prefetch accounting and mmap, but cannot reclaim bytes already returned to callers.",
+        "The claimed strict bound cannot be inferred from madvise or its accounting counter."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0435",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_cli/moskv_native_host.py",
+      "current_source_sha256": "37e151085da1c01ecd002c9e7839ff366510527c55442a983f6e4a062c08d92a",
+      "rationale": "The fixed shared /tmp pathname is accessed through Path.exists/read_text/write_text. The --enqueue path can follow a precreated symlink and overwrite a file writable by the host user; malformed old content is replaced by a new JSON queue. Scope is a local precreation attack under filesystem conditions that permit following the symlink; no exploit or real queue access was performed.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_cli/moskv_native_host.py",
+          "start_line": 180,
+          "end_line": 196,
+          "observation": "No exclusive create, ownership test or no-follow descriptor protects the queue."
+        },
+        {
+          "path": "scripts/c5_cli/moskv_native_host.py",
+          "start_line": 199,
+          "end_line": 210,
+          "observation": "Queue consumption uses the same following reads/writes."
+        },
+        {
+          "path": "scripts/c5_cli/moskv_native_host.py",
+          "start_line": 293,
+          "end_line": 312,
+          "observation": "--enqueue calls enqueue_prompt directly before the native messaging loop."
+        }
+      ],
+      "guards": [
+        "Target permissions still constrain writes; arbitrary privilege escalation is not claimed.",
+        "Existing-path and JSON checks do not establish ownership or prevent symlink traversal."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0436",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_cli/moskv_native_host.py",
+      "current_source_sha256": "37e151085da1c01ecd002c9e7839ff366510527c55442a983f6e4a062c08d92a",
+      "rationale": "Queue producers and consumer each read, modify, and overwrite the entire JSON file without a shared lock or atomic update. Two producers can both read Q then leave only Q+A or Q+B; a consumer can race an enqueue and lose or restore a prompt. A partial write can also be treated as an empty queue. No concurrent processes were executed.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_cli/moskv_native_host.py",
+          "start_line": 184,
+          "end_line": 210,
+          "observation": "Both operations perform independent whole-file read-modify-write and swallow parse failures."
+        },
+        {
+          "path": "scripts/c5_cli/moskv_native_host.py",
+          "start_line": 229,
+          "end_line": 237,
+          "observation": "READY consumes from this queue."
+        },
+        {
+          "path": "scripts/c5_cli/moskv_native_host.py",
+          "start_line": 305,
+          "end_line": 312,
+          "observation": "Separate --enqueue invocations produce into the same queue."
+        }
+      ],
+      "guards": [
+        "Serial operations preserve their simple FIFO behavior.",
+        "JSON shape checks reject malformed structure but do not serialize concurrent writers."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0440",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "src/dec.rs",
+      "current_source_sha256": "220cace5a5f440c3bf2582445ecedd6f1574dd1075e7227b8e38c6abc845d938",
+      "rationale": "Both invariant functions narrow each nonnegative i128 square to u64 before summing. An allowed i64 value 2^32 has square 2^64, which becomes zero on this cast, so a singleton nonzero form returns zero. Summation can additionally overflow depending on build overflow policy. This is a static arithmetic counterexample, not an executed Rust test.",
+      "source_checks": [
+        {
+          "path": "src/dec.rs",
+          "start_line": 71,
+          "end_line": 89,
+          "observation": "Public forms expose unconstrained Vec<i64> values."
+        },
+        {
+          "path": "src/dec.rs",
+          "start_line": 376,
+          "end_line": 385,
+          "observation": "Both squares are cast to u64 before sum and division."
+        }
+      ],
+      "guards": [
+        "The i128 intermediate avoids signed multiplication overflow for i64 inputs, but the subsequent u64 cast truncates.",
+        "No magnitude validation is present in these APIs."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0441",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "src/dec.rs",
+      "current_source_sha256": "220cace5a5f440c3bf2582445ecedd6f1574dd1075e7227b8e38c6abc845d938",
+      "rationale": "The physical initializer stores sampled velocity components on [0,2pi)^3, while the floating curl and adjoint use bare lattice differences. The RHS multiplies the resulting Laplacian only by viscosity; no h^-1/h^-2 factors or equivalent metric conversion appear. Consequently its physical rates change with resolution while the CFL calculation uses h. This confirms discretization inconsistency under the documented physical interpretation; no simulation accuracy or stability was measured.",
+      "source_checks": [
+        {
+          "path": "src/dec.rs",
+          "start_line": 273,
+          "end_line": 335,
+          "observation": "Floating differential and codifferential operators contain only unscaled differences."
+        },
+        {
+          "path": "src/dec.rs",
+          "start_line": 639,
+          "end_line": 695,
+          "observation": "h is 2pi/n but Taylor-Green stores pointwise amplitude*sin*cos*cos without edge-length factor."
+        },
+        {
+          "path": "src/dec.rs",
+          "start_line": 701,
+          "end_line": 704,
+          "observation": "Vorticity is the unscaled d1 result."
+        },
+        {
+          "path": "src/dec.rs",
+          "start_line": 794,
+          "end_line": 807,
+          "observation": "RHS directly combines Lamb and viscosity times the curl adjoint."
+        },
+        {
+          "path": "src/dec.rs",
+          "start_line": 811,
+          "end_line": 855,
+          "observation": "RK4 uses RHS directly, while CFL uses physical h."
+        }
+      ],
+      "guards": [
+        "Shape assertions and Helmholtz-Hodge projection do not supply missing metric scale.",
+        "Pure incidence operators can legitimately be unscaled on integrated cochains; the mismatch is their use with this point-sampled physical initializer and time/viscosity interpretation."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0468",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "00_ABZU_KERNEL/crates/nul-zk/src/compiler.rs",
+      "current_source_sha256": "dacba46495c3ff416e06edcc9dec1eaf19301878b34592dc1accdf4b51504bb8",
+      "rationale": "Compiler-generated v0/v1 names share the namespace of accepted input identifiers. For public v0; let x=1; assert(v0==x), both assertion operands resolve to string v0, and generated Rust shadows var_v0 with the constant witness. The intended public-input equality is therefore absent from the emitted constraints. Static IR/emission defect; the Rust/Arkworks output was not compiled or proved.",
+      "source_checks": [
+        {
+          "path": "00_ABZU_KERNEL/crates/nul-zk/src/compiler.rs",
+          "start_line": 23,
+          "end_line": 63,
+          "observation": "Counter starts at zero, input names are used verbatim, and new_var does not reserve them."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/nul-zk/src/compiler.rs",
+          "start_line": 79,
+          "end_line": 87,
+          "observation": "Literal 1 generates the first temporary v0; identifier v0 still resolves to v0."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/nul-zk/src/compiler.rs",
+          "start_line": 128,
+          "end_line": 142,
+          "observation": "Input variable and constant witness both emit let var_v0."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/nul-zk/src/compiler.rs",
+          "start_line": 168,
+          "end_line": 169,
+          "observation": "AssertEq uses those colliding names."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/nul-zk/src/nul_grammar.pest",
+          "start_line": 4,
+          "end_line": 12,
+          "observation": "Grammar accepts identifier v0 as a public parameter."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/nul-zk/src/lib.rs",
+          "start_line": 10,
+          "end_line": 16,
+          "observation": "Public source compiler connects parser, compiler and code generator without a uniqueness pass."
+        }
+      ],
+      "guards": [
+        "Undefined identifiers are rejected, but v0 is defined.",
+        "No claim about deployed proofs or acceptance by a native verifier is made."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0064",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/exergy_binary_ipc.rs",
+      "current_source_sha256": "1e1d3dfcf3d6ad0b5be0fa9836c63d651a0d5ceb75c8be87cae351026133bfcf",
+      "rationale": "pack stores string lengths modulo 65536 while retaining all bytes. A 65536-byte sender produces header sender_len=0 and a packet whose total size cannot match unpack expected_total, despite pack returning Ok. This remains a public API round-trip defect. The observed publishing transport rejects packets over 8192 bytes, limiting its downstream exposure.",
+      "source_checks": [
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/exergy_binary_ipc.rs",
+          "start_line": 18,
+          "end_line": 50,
+          "observation": "Unchecked u16 casts precede complete body copies and Ok(packet)."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/exergy_binary_ipc.rs",
+          "start_line": 68,
+          "end_line": 80,
+          "observation": "unpack computes exact total from narrowed lengths and rejects mismatch."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/bft_iceoryx2.rs",
+          "start_line": 83,
+          "end_line": 94,
+          "observation": "Publisher calls pack then rejects packed length greater than 8192."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/strike-rs/src/bindings.rs",
+          "start_line": 290,
+          "end_line": 303,
+          "observation": "Binding accepts unbounded strings but publishes through the 8192-byte guard."
+        }
+      ],
+      "guards": [
+        "Unpack exact-length and MAC checks fail closed.",
+        "The 8192-byte publication limit prevents this oversize packet from that transport, but does not restore pack/unpack correctness for direct callers."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0221",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/core/popperian_filter.py",
+      "current_source_sha256": "371150377d929d086bd465398a67ee6811f1e310a834d989aec3ad37183a8b3b",
+      "rationale": "evaluate_payload truncates its local text and can still return passed=True with truncated=True. BrowserAgent checks only passed, then caches, attests and returns the original raw_payload. An acceptable anchored prefix followed by a rejected hype suffix beyond the cutoff is thus never examined yet is labeled VERIFIED_AND_ATTESTED. Scope is the filter-consumer mismatch, not proof of security containment bypass.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/popperian_filter.py",
+          "start_line": 103,
+          "end_line": 118,
+          "observation": "Oversize input is locally sliced rather than rejected or returned as filtered content."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/popperian_filter.py",
+          "start_line": 137,
+          "end_line": 164,
+          "observation": "Checks run on the truncated normalized text; successful result can retain truncated=True."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/browser_agent.py",
+          "start_line": 108,
+          "end_line": 134,
+          "observation": "Consumer does not check truncated and uses raw_payload for cache, attestation and returned content."
+        }
+      ],
+      "guards": [
+        "Entropy, hype and anchor checks still constrain the prefix.",
+        "causal_taint is required by the consumer but does not bind examined bytes to emitted bytes."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0113",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/kernel/ns_z3_firewall.py",
+      "current_source_sha256": "8c770d13506eea3376bb072d905d7ce65994395989bc0686ba18a779c6d5a65d",
+      "rationale": "Only the three leading minors are checked. For lambda_max=0 and S=diag(0,1,1), residual M=diag(0,-1,-1) gives all three checked minors zero while e_y^T M e_y=-1. Even imposing trace-free S would not fix this: S=diag(0,1,-1) is another counterexample. The SAT branch labels these constraints VALID_PROOF. Static algebraic refutation; Z3 was not run.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/ns_z3_firewall.py",
+          "start_line": 79,
+          "end_line": 115,
+          "observation": "Declared all-vector PSD bound is implemented using only leading 1x1, 2x2 and 3x3 determinants."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/ns_z3_firewall.py",
+          "start_line": 117,
+          "end_line": 126,
+          "observation": "Satisfiable nonnegative leading-minor constraints produce VALID_PROOF."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/ns_z3_firewall.py",
+          "start_line": 64,
+          "end_line": 74,
+          "observation": "Unknown-result rejection does not add missing principal-minor constraints."
+        },
+        {
+          "path": "tests/test_ns_z3_firewall.py",
+          "start_line": 19,
+          "end_line": 45,
+          "observation": "Existing examples avoid the zero-leading-minor indefinite case."
+        }
+      ],
+      "guards": [
+        "Timeout/unknown guard prevents inconclusive SMT results being treated as proofs, but cannot correct the mathematical predicate.",
+        "No positive-leading-minor precondition or all-principal-minors check is present."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0159",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/verification/verification_gate.py",
+      "current_source_sha256": "42765e56f489add69663fa708e43c6f71aed4593bf9e302570ae77f2c040aa5f",
+      "rationale": "Two separate connections can read the same last digest before either enters its insert transaction, then sequentially commit rows referencing that same predecessor. verify_ledger_integrity rejects the second row. WAL/FULL protect durability but do not serialize this read-compute-insert sequence. This is a static interleaving argument, not a concurrency test or claim of approval bypass.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/verification/verification_gate.py",
+          "start_line": 69,
+          "end_line": 116,
+          "observation": "Each gate creates its own connection; ledger schema has no predecessor uniqueness or chain trigger."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/verification/verification_gate.py",
+          "start_line": 240,
+          "end_line": 277,
+          "observation": "Last digest SELECT occurs before with-connection INSERT transaction."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/verification/verification_gate.py",
+          "start_line": 406,
+          "end_line": 425,
+          "observation": "Verifier requires predecessor to equal the immediately prior digest."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/cli/main_dispatcher.py",
+          "start_line": 57,
+          "end_line": 63,
+          "observation": "CLI opens its own gate and calls register_sign_off directly for rejection."
+        }
+      ],
+      "guards": [
+        "execute_once has BEGIN IMMEDIATE for effect consumption, but register_sign_off is a separate method without that protection.",
+        "Signed-approval validation does not serialize audit-chain appends."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0226",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "crates/b60-lang/src/bin/aeon_chaining.rs",
+      "current_source_sha256": "020c38164a6186e62087328bb8d46bdb1ddc71c0d1b31c777fffd2fe054f8e40",
+      "rationale": "The emitter proves each block transition independently and includes no equality linking adjacent final/initial states. Two empty blocks with distinct states each satisfy runAeon(s,[])=s while disconnected. The built-in generator happens to maintain continuity, which narrows exposure to other verify_aeons inputs and the advertised proof scope. No Lean or native process was executed.",
+      "source_checks": [
+        {
+          "path": "crates/b60-lang/src/bin/aeon_chaining.rs",
+          "start_line": 57,
+          "end_line": 80,
+          "observation": "Verifier emits provided blocks and relies on Lean command success."
+        },
+        {
+          "path": "crates/b60-lang/src/bin/aeon_chaining.rs",
+          "start_line": 96,
+          "end_line": 118,
+          "observation": "Per-block theorem has no reference to neighboring block states."
+        },
+        {
+          "path": "crates/b60-lang/src/bin/aeon_chaining.rs",
+          "start_line": 168,
+          "end_line": 182,
+          "observation": "Demo generator carries final sequence forward but reports formal chain continuity."
+        },
+        {
+          "path": "proof/lean/BabylonTrace.lean",
+          "start_line": 61,
+          "end_line": 64,
+          "observation": "Empty event list preserves any supplied state, supporting the disconnected-block counterexample."
+        }
+      ],
+      "guards": [
+        "Built-in main constructs connected states.",
+        "That construction is not a checked precondition of public verify_aeons nor a theorem about cross-block continuity."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0404",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "examples/fl006_crash_consistency.rs",
+      "current_source_sha256": "1f964f29191546b2d8dcb94bb992d97f0ee6064333f2562cc4bb9d568447883f",
+      "rationale": "Worker commits before applying its effect, but injected boundary 5 waits only after effect sync. Replay rejects any COMMITTED nonce without consulting effects. Audit invariant 2 iterates existing effect records, so a committed row with no effect is absent from its domain and not counted. This is a gap in the example harness and its exactly-one-effect claim; no crash test or production transaction ran.",
+      "source_checks": [
+        {
+          "path": "examples/fl006_crash_consistency.rs",
+          "start_line": 184,
+          "end_line": 207,
+          "observation": "Commit/effect gap exists and boundary 5 occurs after effect durability."
+        },
+        {
+          "path": "examples/fl006_crash_consistency.rs",
+          "start_line": 243,
+          "end_line": 257,
+          "observation": "Replay rejects COMMITTED regardless of effect existence."
+        },
+        {
+          "path": "examples/fl006_crash_consistency.rs",
+          "start_line": 446,
+          "end_line": 492,
+          "observation": "ACK checks cover acknowledged nonces; committed-to-effect audit visits only effect keys."
+        }
+      ],
+      "guards": [
+        "IMMEDIATE transactions, SQLite integrity and sync_all protect their individual operations.",
+        "They do not atomically join ledger commit to external effect or detect a missing unacknowledged effect."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0498",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_cortex/cortex_labs_poc.py",
+      "current_source_sha256": "a0817105cca6ecff94f128298146bebc5f236b65151eafa5751832e646cc1bcc",
+      "rationale": "Both HTTP calls omit timeout and read response bodies synchronously. The polling deadline is tested only before _poll_single returns control, so a stalled connection/header/body can exceed the advertised 90 seconds. Standalone code sets no global socket deadline. No request, credential prompt or endpoint interaction was performed.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_cortex/cortex_labs_poc.py",
+          "start_line": 44,
+          "end_line": 59,
+          "observation": "Submission urlopen/read has no explicit timeout."
+        },
+        {
+          "path": "scripts/c5_cortex/cortex_labs_poc.py",
+          "start_line": 62,
+          "end_line": 73,
+          "observation": "Polling urlopen/read has no explicit timeout."
+        },
+        {
+          "path": "scripts/c5_cortex/cortex_labs_poc.py",
+          "start_line": 84,
+          "end_line": 103,
+          "observation": "90-second loop condition is outside the blocking polling call."
+        },
+        {
+          "path": "scripts/c5_cortex/cortex_labs_poc.py",
+          "start_line": 106,
+          "end_line": 123,
+          "observation": "Standalone caller invokes run_fsm without installing another deadline."
+        }
+      ],
+      "guards": [
+        "HTTPError handling applies only after an HTTP response/error arrives.",
+        "Elapsed-time and sleep limit repeated polls but cannot interrupt a blocked read."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0240",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_demos/poc_quasar_triple_vector.sh",
+      "current_source_sha256": "2402fb28efe41c78aa731b0ba5b522b6a54145cb187bc8ac002107c37e92b45b",
+      "rationale": "The demo accepts a preexisting /tmp directory derived from Bash RANDOM, writes source/output within it and executes the built path. A local principal able to precreate or alter that directory can influence followed filesystem objects. This is a local temporary-directory isolation defect, conditional on permissions; the shell, compiler and media commands were not run.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_demos/poc_quasar_triple_vector.sh",
+          "start_line": 15,
+          "end_line": 27,
+          "observation": "Small random input is hashed, then mkdir -p and cd accept an existing predictable path before main.rs write."
+        },
+        {
+          "path": "scripts/c5_demos/poc_quasar_triple_vector.sh",
+          "start_line": 58,
+          "end_line": 72,
+          "observation": "Compiler output is subsequently executed from that shared path."
+        },
+        {
+          "path": "scripts/c5_demos/poc_quasar_triple_vector.sh",
+          "start_line": 76,
+          "end_line": 81,
+          "observation": "Media output is overwritten in that directory and moved onto target."
+        }
+      ],
+      "guards": [
+        "set -e stops command errors but does not establish directory ownership or exclusive creation.",
+        "Target existence check does not protect temporary path components."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0448",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_icloud_deploy.py",
+      "current_source_sha256": "fb8414b9e3583108e1caaae3dec41a5bada01efb17c7c1d415029592cbee328e",
+      "rationale": "For each returned zone record, deletion tests only type=MX or TXT content containing v=spf1, never record name. A returned subdomain MX/SPF therefore reaches DELETE, while replacement list restores only apex mail records and the apex DKIM name. Static conditional dataflow finding; actual DNS records, credentials and remote mutation were not accessed.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_icloud_deploy.py",
+          "start_line": 28,
+          "end_line": 48,
+          "observation": "Script selects a zone then requests dns_records without a name filter."
+        },
+        {
+          "path": "scripts/c5_icloud_deploy.py",
+          "start_line": 50,
+          "end_line": 58,
+          "observation": "Deletion predicates never compare r.name against domain."
+        },
+        {
+          "path": "scripts/c5_icloud_deploy.py",
+          "start_line": 62,
+          "end_line": 73,
+          "observation": "Replacement records target the fixed apex domain and its DKIM label."
+        }
+      ],
+      "guards": [
+        "Environment-variable and zone existence checks gate startup but do not restrict deletion to apex records.",
+        "Only records present in the returned page are affected; no assertion about current production DNS inventory is made."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0216",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_quality_gates/symlink_depth_auditor.py",
+      "current_source_sha256": "59c4391fef4e113a028ea31fadbff8c3b4db59b441392110e7cbb34b30238df6",
+      "rationale": "The documented exact two-level rule is implemented as a check of only the first two components. ../../../other-project/file therefore returns True and cannot become a violation. The entry point can consequently report conformity for an overdeep target. Static predicate evaluation; no repository symlink mutation was performed.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_quality_gates/symlink_depth_auditor.py",
+          "start_line": 6,
+          "end_line": 23,
+          "observation": "Exactly-two contract conflicts with len>=2 and the two-prefix check."
+        },
+        {
+          "path": "scripts/c5_quality_gates/symlink_depth_auditor.py",
+          "start_line": 26,
+          "end_line": 47,
+          "observation": "Audit consumes predicate unchanged and main reports success if no violations."
+        },
+        {
+          "path": "scripts/c5_quality_gates/pre_push_ledger_guard.py",
+          "start_line": 54,
+          "end_line": 64,
+          "observation": "Ledger guard treats auditor exit 0 as verified."
+        },
+        {
+          "path": "tests/test_symlink_depth_auditor.py",
+          "start_line": 10,
+          "end_line": 26,
+          "observation": "Tests cover two-level success and one-level failure, not three-level failure."
+        }
+      ],
+      "guards": [
+        "Excluded directories limit traversal but do not enforce upper depth.",
+        "This finding is about the auditor rule, not proof that any particular live symlink escapes a boundary."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0438",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_thermo/c5_exergy_optimizer_monitor.py",
+      "current_source_sha256": "2f2b8cfcede8d34ad2f57ecfe765060debf85a946d2645ea38dd228e0196c861",
+      "rationale": "git_sentinel_commit invokes unrestricted git commit on the existing index, so unrelated already-staged changes are included. Its caller later performs unrestricted amend. _git suppresses signing and returns stdout without checking returncode; the stale added script path may fail while subsequent commit still consumes existing staged content. Source-level Git integrity risk; no git mutation was executed.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_thermo/c5_exergy_optimizer_monitor.py",
+          "start_line": 53,
+          "end_line": 60,
+          "observation": "Git helper disables signing and ignores returncode."
+        },
+        {
+          "path": "scripts/c5_thermo/c5_exergy_optimizer_monitor.py",
+          "start_line": 199,
+          "end_line": 203,
+          "observation": "Commit has no path restriction or clean-index guard; add uses scripts/c5_exergy_optimizer_monitor.py."
+        },
+        {
+          "path": "scripts/c5_thermo/c5_exergy_optimizer_monitor.py",
+          "start_line": 220,
+          "end_line": 227,
+          "observation": "Dirty state is printed but does not block mutation."
+        },
+        {
+          "path": "scripts/c5_thermo/c5_exergy_optimizer_monitor.py",
+          "start_line": 258,
+          "end_line": 280,
+          "observation": "Main unconditionally commits, stages STATUS and amends, then prints completion."
+        }
+      ],
+      "guards": [
+        "Audit output is informational, not an approval or clean-index precondition.",
+        "--no-verify suppresses hooks; no active automation deployment is asserted."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0263",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/repatriated/run_swarm_batch_041_060.py",
+      "current_source_sha256": "1a52d5991581a325325663dcf516dec1402a9fdd9410e892dc2ec93bc17f500e",
+      "rationale": "The script assigns SURVIVE verdicts from keyword-selected literal templates, derives scores from length/word diversity, and always emits POPPERIAN_SURVIVED plus empirical-scrutiny claims. It performs no experiment or cited-source verification. The candidate incorrectly calls these extract_meta branches; they are top-level batch branches, but the substantive finding holds. No private corpus or generated audit was accessed.",
+      "source_checks": [
+        {
+          "path": "scripts/repatriated/run_swarm_batch_041_060.py",
+          "start_line": 24,
+          "end_line": 64,
+          "observation": "Every top-level keyword/default branch selects literal SURVIVE postulates and heuristic scores."
+        },
+        {
+          "path": "scripts/repatriated/run_swarm_batch_041_060.py",
+          "start_line": 68,
+          "end_line": 75,
+          "observation": "Every generated audit receives POPPERIAN_SURVIVED and checked-invariants label."
+        },
+        {
+          "path": "scripts/repatriated/run_swarm_batch_041_060.py",
+          "start_line": 91,
+          "end_line": 114,
+          "observation": "Template asserts empirical survival and final epistemic approval without a corresponding check."
+        }
+      ],
+      "guards": [
+        "The input slice may be empty on a particular installation; the defect is conditional on processing an input.",
+        "Existing citation strings are labels, not evidence that the sources or claims were checked."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0290",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tests/test_swarm_reverse_engineering_bench.py",
+      "current_source_sha256": "22f4f93a33eca9ec05fdfe671c503093206a8a20ef79225c4deb82cfe698ff5e",
+      "rationale": "The simulation stores one 16-character digest per agent and builds a task list proportional to num_agents. Its asserted total payload is explicitly 16*N, yet the benchmark labels that total Confinamiento O(1) and the test describes strict O(1) confinement. Constant per-record size is valid; constant total retained memory is not established and is contradicted by the data structure. No benchmark or hardware telemetry was run.",
+      "source_checks": [
+        {
+          "path": "tests/test_swarm_reverse_engineering_bench.py",
+          "start_line": 92,
+          "end_line": 130,
+          "observation": "Global wal_log grows by one digest per agent; total_payload_bytes sums the whole list."
+        },
+        {
+          "path": "tests/test_swarm_reverse_engineering_bench.py",
+          "start_line": 172,
+          "end_line": 175,
+          "observation": "Printed total payload is labeled O(1)."
+        },
+        {
+          "path": "tests/test_swarm_reverse_engineering_bench.py",
+          "start_line": 196,
+          "end_line": 203,
+          "observation": "Test accepts 200*16 total payload while describing O(1) bounded memory."
+        }
+      ],
+      "guards": [
+        "Semaphore bounds active transition concurrency, not WAL or scheduled-task storage.",
+        "Per-agent local projection can remain O(1); the finding is limited to the total-memory claim."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0392",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/turn/patterns.md",
+      "current_source_sha256": "38c6deb1f2c48e3b2179aed6fcf88e0870724056c0a19347f4fa421eb7edb0da",
+      "rationale": "Both example filters reject any URL containing :53. The document itself supplies turns:turn.cloudflare.com:5349?transport=tcp; that literal contains :53 and is removed despite the recommendation to retain TLS port 5349. Static string mismatch in documentation; no TURN credentials or WebRTC session was used.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/codex_overrides/cloudflare/references/turn/patterns.md",
+          "start_line": 30,
+          "end_line": 34,
+          "observation": "Example endpoint includes :5349."
+        },
+        {
+          "path": "tools/skill_library/codex_overrides/cloudflare/references/turn/patterns.md",
+          "start_line": 48,
+          "end_line": 70,
+          "observation": "Port recommendation includes 5349 but filter rejects substring :53."
+        },
+        {
+          "path": "tools/skill_library/codex_overrides/cloudflare/references/turn/patterns.md",
+          "start_line": 141,
+          "end_line": 148,
+          "observation": "Credential-cache example repeats the substring filter and stores its output."
+        }
+      ],
+      "guards": [
+        "Other TLS endpoint 443 may remain available.",
+        "No assertion is made about current service availability or a live connection failure."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0157",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/global/c5-ring0-babylon-kernel/references/modules/babylon-shield/babylon_exergy_linter.sh",
+      "current_source_sha256": "976b392518ab55a5a1d20446cb4e9604a7651f962c4fe975206755148214c919",
+      "rationale": "The linter derives filenames from the index but grep reads the working-tree file, allowing a staged violation to be hidden by an unstaged correction. Unquoted expansion in the for list also splits whitespace-containing filenames; missing pieces can leave FAILED at zero. Static script defect; neither a commit nor any active hook invocation was performed.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/global/c5-ring0-babylon-kernel/references/modules/babylon-shield/babylon_exergy_linter.sh",
+          "start_line": 7,
+          "end_line": 19,
+          "observation": "Index supplies names, loop word-splits them, and grep reads the working-tree path."
+        },
+        {
+          "path": "tools/skill_library/global/c5-ring0-babylon-kernel/references/modules/babylon-shield/babylon_exergy_linter.sh",
+          "start_line": 20,
+          "end_line": 43,
+          "observation": "All content rules inspect that same file path and only matches set FAILED."
+        },
+        {
+          "path": "tools/skill_library/global/c5-ring0-babylon-kernel/references/modules/babylon-shield/babylon_exergy_linter.sh",
+          "start_line": 47,
+          "end_line": 53,
+          "observation": "No grep-read failure check prevents a success exit."
+        }
+      ],
+      "guards": [
+        "Filtering extensions constrains file types but does not bind scanned bytes to the Git index.",
+        "No active hook integration is inferred from this standalone reference script."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    },
+    {
+      "candidate_id": "SW100-C0324",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P3",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/global/flstudio-mcp-production/examples/Euclidean_Polyrhythm_Generator.py",
+      "current_source_sha256": "6d5ae3cc1e5c7713fca3cdea108973f42f02eea8686f89a8f74073a9f02c059a",
+      "rationale": "Dialog exposes two modes and apply forwards the selected value, but generate_euclidean never reads mode. Both layers always divide a fixed BAR by their step count, so toggling only the mode yields the same generation path. This is a functional gap in the example; FL Studio was not opened or changed.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/global/flstudio-mcp-production/examples/Euclidean_Polyrhythm_Generator.py",
+          "start_line": 51,
+          "end_line": 63,
+          "observation": "Dialog offers fixed-bar and continuous-polymeter modes; generator accepts mode."
+        },
+        {
+          "path": "tools/skill_library/global/flstudio-mcp-production/examples/Euclidean_Polyrhythm_Generator.py",
+          "start_line": 64,
+          "end_line": 99,
+          "observation": "Timing uses BAR//n for both layers with no mode branch."
+        },
+        {
+          "path": "tools/skill_library/global/flstudio-mcp-production/examples/Euclidean_Polyrhythm_Generator.py",
+          "start_line": 101,
+          "end_line": 108,
+          "observation": "apply forwards the selected mode unchanged."
+        }
+      ],
+      "guards": [
+        "Rhythm pulse and step settings affect output, but the mode setting does not.",
+        "No claim of correctness of other timing behavior is made."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": []
+    }
+  ]
+}

@@ -52,9 +52,4 @@ if (Get-Command python -ErrorAction SilentlyContinue) {
 
 # 4. Verificación de variables de entorno
 Write-Host "[4/4] Verificando variables de entorno..." -ForegroundColor Green
-if (-not $env:KIMI_API_KEY) {
-    Write-Host "  ⚠️ Recuerda configurar KIMI_API_KEY en PowerShell:" -ForegroundColor Yellow
-    Write-Host '     $env:KIMI_API_KEY="tu_clave_moonshot"' -ForegroundColor Gray
-}
-
 Write-Host "`n✅ [CORTEX-SETUP-WIN] ¡Entorno Windows preparado con éxito!" -ForegroundColor Cyan

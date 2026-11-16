@@ -11,7 +11,6 @@
 | Módulo | Tipo | Propósito & Capacidades |
 |---|---|---|
 | [`browser_cdp_engine.py`](browser_cdp_engine.py) | Python / CDP | Motor de control e interacción directa vía Chrome DevTools Protocol (CDP). |
-| [`kimi_client.py`](kimi_client.py) | Python / API | Cliente para la pasarela de inferencia Moonshot AI (Kimi) con manejo de errores y reintentos. |
 | [`quantum_sync.py`](quantum_sync.py) | Python / VCS | Sincronizador determinista de repositorios con detección de Git y Jujutsu VCS (`jj`). |
 | [`bft_consensus.py`](bft_consensus.py) · [`bft_sqlite.py`](bft_sqlite.py) | Python / BFT | Primitivas de consenso y persistencia SQLite para el subsistema BFT. |
 | [`bft_db_async.py`](bft_db_async.py) · [`bft_falsification.py`](bft_falsification.py) | Python / BFT | Persistencia asíncrona y evaluación de falsación de proposiciones. |

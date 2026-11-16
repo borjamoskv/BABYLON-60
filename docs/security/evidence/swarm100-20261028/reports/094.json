@@ -1,0 +1,436 @@
+{
+  "shard": "094",
+  "findings": [
+    {
+      "title": "Purge unlinks live SQLite WAL and shared-memory files",
+      "severity": "P1",
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/anergy-purge-protocol/scripts/anergy_purge.py",
+      "line": 183,
+      "evidence": "Lines 178–190 classify every *.db-wal/*.db-shm as orphan and unlink it, without opening/checkpointing the database, checking live users, or applying CANONICAL_PROTECTED_DIRS.",
+      "trigger": "Invoke bundled script without --dry-run on a workspace containing a WAL-mode database with uncheckpointed committed writes.",
+      "impact": "Deletes recovery data and coordination files; subsequent database access can lose committed changes or encounter corruption. This is a callable bundled maintenance script, not evidence that it has been executed.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Workspace purge resets unrelated live global sessions",
+      "severity": "P1",
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/anergy-purge-protocol/scripts/anergy_purge.py",
+      "line": 193,
+      "evidence": "Lines 193–207 unconditionally target ~/.gemini/antigravity/conversation_summaries.db and UPDATE every RUNNING/not_fully_idle row to IDLE. No workspace filter or process-liveness check exists.",
+      "trigger": "Run purge for any workspace while another Antigravity conversation is running.",
+      "impact": "Global session bookkeeping is changed to idle despite live work, outside the selected workspace and without establishing that listeners are ghosts.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Composite action inputs are interpolated into Bash source",
+      "severity": "P1",
+      "path": ".github/actions/archi-guard/action.yml",
+      "line": 38,
+      "evidence": "Lines 38–42 directly embed inputs in run text; ifc-path, pgou-path, format and strict become shell source. format is also unquoted in the redirect.",
+      "trigger": "A caller passes an input containing shell command substitution or quotes, for example an ifc-path containing $(...).",
+      "impact": "Commands execute with the workflow step privileges before cortex-guard receives arguments. Pass inputs through environment variables and validate output format.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Container build pins compiler older than workspace manifests",
+      "severity": "P1",
+      "path": "deploy/Dockerfile",
+      "line": 7,
+      "evidence": "Builder uses rust:1.80-alpine and copies the entire workspace before cargo build at line 14. Workspace members include 00_ABZU_KERNEL/crates/strike-rs and crates/cadt_mediator, whose manifests declare edition = \"2024\"; Cargo.lock is version 4.",
+      "trigger": "Build Dockerfile against this checkout.",
+      "impact": "Cargo 1.80 cannot parse the 2024 workspace manifests, preventing the image from building. Static manifest incompatibility; build was not run.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Replay campaign never establishes a successfully consumed authorization",
+      "severity": "P2",
+      "path": "examples/swarm_1000_gate1_adversarial.rs",
+      "line": 161,
+      "evidence": "Replay authorization has resource_precondition_digest [0;32], then ignores the first execute_action result at line 166. src/executor_ipc.rs:167–172 computes the actual precondition using CanonicalHasher; src/executor.rs:1019 checks authorization against it before reservation. The replay match accepts any error at 193.",
+      "trigger": "Run replay vector against SyntheticResource::new(res_i,100).",
+      "impact": "A precondition mismatch can reject both calls without exercising replay defense, yet the report records replay rejection as successful adversarial coverage.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Crash report declares five tested points without interruption or recovery",
+      "severity": "P2",
+      "path": "examples/swarm_1000_gate1_adversarial.rs",
+      "line": 365,
+      "evidence": "Cohort lines 326–355 synchronously quarantine, verify and destroy each file. No crash injection, restart, recovery operation or durable state reload occurs. Report nevertheless lists PREPARE/QUARANTINE/VERIFY/DISPATCH/COMMIT and SIGKILL_SIMULATED.",
+      "trigger": "Run the Gate 1 example and consume nemesis-crash-report.json.",
+      "impact": "PASS_ZERO_AMBIGUOUS_RECOVERIES can be emitted without testing any crash-recovery path, overstating persistence evidence.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "NEMESIS report passes when all secure-delete operations fail",
+      "severity": "P2",
+      "path": "examples/swarm_1000_gate1_adversarial.rs",
+      "line": 280,
+      "evidence": "Match ignores all results except Committed and SecurityAbort (line 280). PASS_ZERO_TOCTOU_EXPLOITS is based only on unauth_count==0 at 301; no expected count of honest commits or attack rejections is asserted.",
+      "trigger": "secure_delete returns an infrastructure/error result for every attack and honest operation.",
+      "impact": "Harness reports security success for a completely nonfunctional deletion path; report cannot distinguish effective enforcement from universal errors.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Stub exporter labels tautologies as verification of extracted claims",
+      "severity": "P2",
+      "path": "scripts/c5_verifiers/inject_lean4_stubs.py",
+      "line": 80,
+      "evidence": "generate_lean_code discards statement semantics: every extracted axiom becomes forall x, True (74), every theorem becomes True := by trivial (80–81). process_file injects this under Verificación Formal / Puente Isomorfo (107).",
+      "trigger": "Run exporter on a document containing a nontrivial or false theorem.",
+      "impact": "Generated Lean proves only True while the injected section presents a formal bridge to the document claim. No evidence of a production authorization consumer is asserted.",
+      "confidence": "high",
+      "kind": "docs"
+    },
+    {
+      "title": "Benchmark conclusions attribute simulator assumptions to external products",
+      "severity": "P2",
+      "path": "scripts/c5_demos/benchmark_governance_10k.py",
+      "line": 235,
+      "evidence": "Disseqt simulator explicitly sleeps 5ms per batch (57,77); C5 branch uses Python Lock and bytearray (130–146). Lines 235–238 present measured simulator ratio and assumed cost/queue arithmetic as statements about Disseqt, KLA/SupraWall and AgentAudit, without running their implementations.",
+      "trigger": "Run comparative demonstration and reuse printed conclusions.",
+      "impact": "Output cannot support product performance, evidence-preservation or fleet-freeze claims; it measures the chosen simulation and unrelated work rather than equivalent product behavior.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Refusal is assigned zero KL without a probability distribution",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/categorical-hallucination-audit/MODULE.md",
+      "line": 54,
+      "evidence": "Line 54 assigns D_KL=0 to silence/empty output, while lines 48–50 define KL between normalized predictive distributions p and q. An empty output does not define q; zero mass on positive-p outcomes instead gives infinite KL.",
+      "trigger": "Apply the stated operational signatures to compare a refusing system with a calibrated predictor.",
+      "impact": "Mathematical audit can score absence of a predictive distribution as perfect calibration; abstention requires a separate coverage/selective-risk metric.",
+      "confidence": "high",
+      "kind": "docs"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".github/actions/archi-guard/action.yml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          49
+        ]
+      ],
+      "inventory_sha256": "590bb0f38dd90a13a969f7b979e2f85323e7d4cc31cab6b6e12657b548d688ad",
+      "observed_sha256": "590bb0f38dd90a13a969f7b979e2f85323e7d4cc31cab6b6e12657b548d688ad",
+      "hash_match": true
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bayesian.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          154
+        ]
+      ],
+      "inventory_sha256": "073ddad26275316d74409815cdefa46d46dac759ed6f18cf306c25ebea5664cd",
+      "observed_sha256": "073ddad26275316d74409815cdefa46d46dac759ed6f18cf306c25ebea5664cd",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/cognitive_pilot/execution.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          373
+        ]
+      ],
+      "inventory_sha256": "b893bf8701fbc0a5bc9ebc5de29baffb2e42e22011d180849cff278d66158bd5",
+      "observed_sha256": "b893bf8701fbc0a5bc9ebc5de29baffb2e42e22011d180849cff278d66158bd5",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          32
+        ]
+      ],
+      "inventory_sha256": "9f25b2ed24cec062ac2a75857b3fb372cc4d1620599170f0238a312eb5a55a9a",
+      "observed_sha256": "9f25b2ed24cec062ac2a75857b3fb372cc4d1620599170f0238a312eb5a55a9a",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/utils/http.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          12
+        ]
+      ],
+      "inventory_sha256": "152fa96cb281f40454255de05b381d8eaeb17dc696e33415a521575a6572e3e5",
+      "observed_sha256": "152fa96cb281f40454255de05b381d8eaeb17dc696e33415a521575a6572e3e5",
+      "hash_match": true
+    },
+    {
+      "path": "02_EDIN_SWARMS/agents_archi/protocols/bayesian_disintegration.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          113
+        ]
+      ],
+      "inventory_sha256": "e847837d42c7f0b8e8ddc71b5dff9dd884196240a25da2c5f5443af59369f189",
+      "observed_sha256": "e847837d42c7f0b8e8ddc71b5dff9dd884196240a25da2c5f5443af59369f189",
+      "hash_match": true
+    },
+    {
+      "path": "deploy/Dockerfile",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          32
+        ]
+      ],
+      "inventory_sha256": "1cc2c6c057ce3d5d5971619402ca85976190903af0e3b2e3b316d688d52538e6",
+      "observed_sha256": "1cc2c6c057ce3d5d5971619402ca85976190903af0e3b2e3b316d688d52538e6",
+      "hash_match": true
+    },
+    {
+      "path": "docs/10_sharur_swarm_cta_spec.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          34
+        ]
+      ],
+      "inventory_sha256": "2033ccfdcc0243fe39fdf25289b5bc5ef6bd4236655ef8aed438fe41242e48f8",
+      "observed_sha256": "2033ccfdcc0243fe39fdf25289b5bc5ef6bd4236655ef8aed438fe41242e48f8",
+      "hash_match": true
+    },
+    {
+      "path": "examples/swarm_1000_gate1_adversarial.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          440
+        ]
+      ],
+      "inventory_sha256": "87cbe6a16befa94314448b36597ec3a1b5c85964d4a1e5750f00b384d870824e",
+      "observed_sha256": "87cbe6a16befa94314448b36597ec3a1b5c85964d4a1e5750f00b384d870824e",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_demos/benchmark_governance_10k.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          242
+        ]
+      ],
+      "inventory_sha256": "2a294f9150dcfdcef4ef960c07687d22536c64079fd2c6b4b1e0d880707a7704",
+      "observed_sha256": "2a294f9150dcfdcef4ef960c07687d22536c64079fd2c6b4b1e0d880707a7704",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_log_custody/c5_preserve_logs.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          121
+        ]
+      ],
+      "inventory_sha256": "fbff8ee0271b6dbc87f97ddd1737f749fec0d97ca61364b2a18e3f091f47835d",
+      "observed_sha256": "fbff8ee0271b6dbc87f97ddd1737f749fec0d97ca61364b2a18e3f091f47835d",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_verifiers/inject_lean4_stubs.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          153
+        ]
+      ],
+      "inventory_sha256": "ff614c2d31a8359c2bb3852eb093663124e3853b91d032d6a079bbcc84f15814",
+      "observed_sha256": "ff614c2d31a8359c2bb3852eb093663124e3853b91d032d6a079bbcc84f15814",
+      "hash_match": true
+    },
+    {
+      "path": "src/larsa.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          114
+        ]
+      ],
+      "inventory_sha256": "9cdcf0ad7845cbb83ee75861aaa1b9ec6567c56e027c657da771e6c33d3780e8",
+      "observed_sha256": "9cdcf0ad7845cbb83ee75861aaa1b9ec6567c56e027c657da771e6c33d3780e8",
+      "hash_match": true
+    },
+    {
+      "path": "tests/test_audit_public_claims.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          89
+        ]
+      ],
+      "inventory_sha256": "25a1c017bfeddec60bdf8c3d4b0e556281dd5164985dd9d6d254b40ccfb311df",
+      "observed_sha256": "25a1c017bfeddec60bdf8c3d4b0e556281dd5164985dd9d6d254b40ccfb311df",
+      "hash_match": true
+    },
+    {
+      "path": "tests/test_mcp_deduction.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          115
+        ]
+      ],
+      "inventory_sha256": "4ba0ece6e2613d2666cb1265e59cb4931bbabcaf7eb53cc2138151c0e96cf426",
+      "observed_sha256": "4ba0ece6e2613d2666cb1265e59cb4931bbabcaf7eb53cc2138151c0e96cf426",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/agents-sdk/references/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          72
+        ]
+      ],
+      "inventory_sha256": "91842e59fb17eff0d40df1cf16905aca8abd3ad9a939f8d15bfd6c5b84175354",
+      "observed_sha256": "91842e59fb17eff0d40df1cf16905aca8abd3ad9a939f8d15bfd6c5b84175354",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/d1/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          191
+        ]
+      ],
+      "inventory_sha256": "94d31fee923ac3c9859f5741692ec843101463bc72dd8ead1fd3b086bb48a834",
+      "observed_sha256": "94d31fee923ac3c9859f5741692ec843101463bc72dd8ead1fd3b086bb48a834",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/r2-sql/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          121
+        ]
+      ],
+      "inventory_sha256": "4d5601b6c29df2a54eb68786e69aa2f1bc0d86409515394ea46edb762bb32d66",
+      "observed_sha256": "4d5601b6c29df2a54eb68786e69aa2f1bc0d86409515394ea46edb762bb32d66",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workerd/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          192
+        ]
+      ],
+      "inventory_sha256": "db771fb75822afa39974f7ee1ac291a6fa903f1cc9a85400b099b589a7c8573a",
+      "observed_sha256": "db771fb75822afa39974f7ee1ac291a6fa903f1cc9a85400b099b589a7c8573a",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/dsp/formulas_and_mixer_architectures.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          77
+        ]
+      ],
+      "inventory_sha256": "8d32ff278d6430f0d05ba5654cc41a3c7848950ff566897d1c4a7e431c142ea5",
+      "observed_sha256": "8d32ff278d6430f0d05ba5654cc41a3c7848950ff566897d1c4a7e431c142ea5",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/anergy-purge-protocol/scripts/anergy_purge.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          262
+        ]
+      ],
+      "inventory_sha256": "82b6881e3cc765b82d70814a477beaa7e46c3b074c7485a843b6baf303e16253",
+      "observed_sha256": "82b6881e3cc765b82d70814a477beaa7e46c3b074c7485a843b6baf303e16253",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/categorical-hallucination-audit/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          81
+        ]
+      ],
+      "inventory_sha256": "d7e3bff4781f1a14721b49450a9f77dff6e09eb30c9b3fb8344cc98c565c72c0",
+      "observed_sha256": "d7e3bff4781f1a14721b49450a9f77dff6e09eb30c9b3fb8344cc98c565c72c0",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-sovereign-system1-engine/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "inventory_sha256": "7db1076847d075f0159d39e325e406468da33dbbe0156d8430aeb6d3c01ed914",
+      "observed_sha256": "7db1076847d075f0159d39e325e406468da33dbbe0156d8430aeb6d3c01ed914",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/opentimestamps-l5-diagnostics/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "inventory_sha256": "40386930d6ea2befbe626785c56ef3231a7abea1c2f7571c2d2d9dcb7070c606",
+      "observed_sha256": "40386930d6ea2befbe626785c56ef3231a7abea1c2f7571c2d2d9dcb7070c606",
+      "hash_match": true
+    }
+  ],
+  "tool_limitations": [
+    "No native codebase-memory graph tools exposed (ALL_TOOLS search returned empty); used targeted text reads and rg.",
+    "Audit is static only: no repository tests, builds, runtime, external APIs, or physical measurements executed.",
+    "Cross-file adjudication limited to workspace manifests, Cargo.lock, src/executor.rs and src/executor_ipc.rs."
+  ],
+  "tests_run": []
+}

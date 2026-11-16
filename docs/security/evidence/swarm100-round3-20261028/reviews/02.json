@@ -1,0 +1,1157 @@
+{
+  "reviewer": "02",
+  "candidates": [
+    {
+      "candidate_id": "SW100-C0252",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+      "current_source_sha256": "940edb14fa37c65a3419fa9394fa3465f1acb6208d303db33203a07d4c915b84",
+      "rationale": "The public audit(session_id=...) passes a nonempty caller string unchanged to AuditSession. bundle_dir joins it directly to storage_dir; an absolute component replaces that base and ../ components escape it. The two fixed evidence filenames are then opened in write mode. This confirms caller-directed writes/overwrites outside the advertised bundle directory; no remote or less-privileged caller was established, so priority is narrowed to P2.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+          "start_line": 77,
+          "end_line": 84,
+          "observation": "The destination uses os.path.join(base_dir, self.session_id) with no ID/path confinement."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+          "start_line": 215,
+          "end_line": 241,
+          "observation": "manifest.json and events.json are written with mode w."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+          "start_line": 305,
+          "end_line": 336,
+          "observation": "audit generates a safe identifier only when the supplied identifier is falsey; otherwise forwards it unchanged."
+        }
+      ],
+      "guards": [
+        "Default-generated identifiers are safe, but caller-supplied nonempty identifiers bypass that default.",
+        "Filesystem permissions still constrain writes; neither privilege escalation nor remote reachability is claimed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/02-source-snapshots.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0253",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+      "current_source_sha256": "940edb14fa37c65a3419fa9394fa3465f1acb6208d303db33203a07d4c915b84",
+      "rationale": "log_step takes the same lock as close but does not reject a closed session. A retained session reference can append after close has persisted the event list and signed its earlier count/root; subsequent close returns immediately. The summary count then changes while the sealed files and root remain stale. This is a sequential API defect as well as a possible interleaving; no concurrent runtime was executed.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+          "start_line": 110,
+          "end_line": 158,
+          "observation": "The entire locked log path appends without an is_closed guard."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+          "start_line": 160,
+          "end_line": 193,
+          "observation": "The closed flag short-circuits repeat closing before resealing/persisting."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+          "start_line": 243,
+          "end_line": 258,
+          "observation": "Summary computes total_events from the mutable list while returning the previous root."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+          "start_line": 548,
+          "end_line": 555,
+          "observation": "Compliance export also skips close once is_closed is true."
+        }
+      ],
+      "guards": [
+        "The lock serializes mutations, but does not enforce the session lifecycle.",
+        "Context-manager use reduces accidental late logging; public log_step and retained references remain callable."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/02-source-snapshots.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0254",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+      "current_source_sha256": "940edb14fa37c65a3419fa9394fa3465f1acb6208d303db33203a07d4c915b84",
+      "rationale": "close sets is_closed before accumulator finalization, hardware quotation and both evidence writes. An IOError during persistence propagates with the flag retained. A retry takes the early return and cannot finish writing or register completion; export also trusts the closed flag. This confirms a nonrecoverable partial-close state, not that a storage failure actually occurred.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+          "start_line": 160,
+          "end_line": 193,
+          "observation": "Closure is committed in memory before effectful operations and completion registration."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+          "start_line": 215,
+          "end_line": 241,
+          "observation": "Separate truncating manifest/events writes can fail or leave a partial bundle."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+          "start_line": 548,
+          "end_line": 555,
+          "observation": "Export only closes sessions whose flag is false."
+        }
+      ],
+      "guards": [
+        "Signing exceptions are caught separately at 204-213; filesystem failures are not rolled back.",
+        "The session lock avoids concurrent close bodies but supplies no transactional/retry state."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/02-source-snapshots.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0255",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+      "current_source_sha256": "940edb14fa37c65a3419fa9394fa3465f1acb6208d303db33203a07d4c915b84",
+      "rationale": "For nonempty AL0/AL1 sessions the code calls finalize although only AL2/AL3 append leaves. finalize therefore returns the digest of empty bytes regardless of the logged events, and the manifest exposes it as global_hash. AL1 event-local chain_hash values exist, but the final chain head is absent from the manifest/summary. The confirmed defect is the nonbinding exported aggregate field, not a claim that AL0/AL1 were promised Ed25519/Merkle assurance.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+          "start_line": 128,
+          "end_line": 150,
+          "observation": "Only AL2 and AL3 populate the accumulator; AL1 updates a separate chain."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+          "start_line": 172,
+          "end_line": 177,
+          "observation": "Every nonempty session finalizes that accumulator."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/api/batch_accumulator.py",
+          "start_line": 101,
+          "end_line": 117,
+          "observation": "No leaves causes the empty digest to be returned."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+          "start_line": 221,
+          "end_line": 258,
+          "observation": "Manifest/summary export the aggregate root but no chain head."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/api/assurance.py",
+          "start_line": 45,
+          "end_line": 62,
+          "observation": "AL0/AL1 explicitly do not require signing or Merkle batching, narrowing the assertion."
+        }
+      ],
+      "guards": [
+        "AL0 step hashes and AL1 per-event chain hashes are still computed and stored.",
+        "The unsupported aggregate root, rather than missing higher-assurance signing, is the finding."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/02-source-snapshots.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0203",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/adapters/codex/tunnel_bus.py",
+      "current_source_sha256": "a9d36a884918671af7076dd3f6eb4e0c90c36e06ebdc4d2e48244846e4821263",
+      "rationale": "pull_messages completes a SELECT/fetch before its UPDATE begins the write transaction. Two separate connections can select the same pending rows and subsequently both perform the unconditional ID update and return their captured messages. The exposed receive_messages wrapper uses this path with pending status and mark_delivered true by default. Duplicate claim/delivery is statically supported; actual parallel consumers were not run.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/adapters/codex/tunnel_bus.py",
+          "start_line": 81,
+          "end_line": 87,
+          "observation": "Each call creates an independent SQLite connection; no common lock is taken."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/adapters/codex/tunnel_bus.py",
+          "start_line": 151,
+          "end_line": 207,
+          "observation": "Selection and later ID-only update have no BEGIN IMMEDIATE, pending compare-and-swap or claim result check."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/adapters/codex/mcp_server.py",
+          "start_line": 287,
+          "end_line": 305,
+          "observation": "MCP receive forwards to this pending-message pull path."
+        }
+      ],
+      "guards": [
+        "SQLite serializes writes, but the preceding reads can both observe pending rows.",
+        "With mark_delivered=False repeated observation is intentional; this finding concerns the default true case."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/02-source-snapshots.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0204",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/adapters/codex/tunnel_bus.py",
+      "current_source_sha256": "a9d36a884918671af7076dd3f6eb4e0c90c36e06ebdc4d2e48244846e4821263",
+      "rationale": "Every broker connection explicitly configures WAL with synchronous=NORMAL; push acknowledges only after commit, but that connection policy does not meet the repository requirement for FULL transactional persistence. This is a configuration/contract violation with potential acknowledged-message loss on power failure. No loss, host durability setting or power-cut experiment is asserted.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/adapters/codex/tunnel_bus.py",
+          "start_line": 81,
+          "end_line": 87,
+          "observation": "Connection factory always applies synchronous=NORMAL."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/adapters/codex/tunnel_bus.py",
+          "start_line": 128,
+          "end_line": 149,
+          "observation": "push commits then returns a pending-message acknowledgement."
+        },
+        {
+          "path": ".babylon60rules",
+          "start_line": 14,
+          "end_line": 19,
+          "observation": "Canonical work/evidence section requires transactional persistence with synchronous=FULL."
+        }
+      ],
+      "guards": [
+        "WAL, busy_timeout and commit are present; none replaces the required FULL synchronization policy.",
+        "Scope is this persistent SQLite broker; no empirical crash-recovery claim."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/02-source-snapshots.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0067",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/kernel/devsecops_attest.py",
+      "current_source_sha256": "24a4f47bc5a0a1aebf14060c6fd1166e24ca5488028cb8d4752a902c4a58571e",
+      "rationale": "The attestor lock uses a separate exists check followed by ordinary truncating open. Two processes can both pass the check and acquire the nominal lock; either finally block can then remove the shared pathname while the other remains inside run_attestation. This is a static exclusivity defect in the local simulated attestor, not a demonstrated hardware-attestation bypass.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/devsecops_attest.py",
+          "start_line": 37,
+          "end_line": 46,
+          "observation": "Check/create and check/remove are separate operations, with no exclusive creation or owner identity."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/devsecops_attest.py",
+          "start_line": 59,
+          "end_line": 78,
+          "observation": "The protected path is a simulated anchor and releases the shared lock in finally."
+        }
+      ],
+      "guards": [
+        "The exists check rejects an already-visible lock but not simultaneous acquisition.",
+        "run_attestation has finally cleanup; that cleanup is not owner-bound."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/02-source-snapshots.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0068",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/kernel/devsecops_attest.py",
+      "current_source_sha256": "24a4f47bc5a0a1aebf14060c6fd1166e24ca5488028cb8d4752a902c4a58571e",
+      "rationale": "get_git_tree_hash is cached solely by its path argument while its computation depends on external HEAD. Repeated generate_attestation_payload calls for the same path reuse the old digest after HEAD changes and attach a new timestamp. The local CLI normally exits after one call, so the stale-cache trigger requires a reused/long-lived Python process; no actual Git changes or attestation run were performed.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/devsecops_attest.py",
+          "start_line": 19,
+          "end_line": 26,
+          "observation": "lru_cache wraps git ls-tree HEAD using only path as the cache key."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/devsecops_attest.py",
+          "start_line": 48,
+          "end_line": 57,
+          "observation": "Payload construction reuses the path-only cache and supplies a fresh timestamp."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/kernel/devsecops_attest.py",
+          "start_line": 71,
+          "end_line": 84,
+          "observation": "The function is reusable via L5Attestor even though the direct CLI invokes it once."
+        }
+      ],
+      "guards": [
+        "A new process or eviction/cache_clear would refresh the value, but this code does not invalidate on HEAD changes.",
+        "The downstream anchor is explicitly simulated at 59-69."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/02-source-snapshots.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0481",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "path": "crates/eridu-infer/src/gguf.rs",
+      "current_source_sha256": "4db2253f39ce1211f2c8d7f09b149861739db8be3f4e95e0c5da3f5aa37f1972",
+      "rationale": "The ARRAY branch advances through at most ten elements and returns that intermediate cursor; adding an ellipsis only changes display text. load_mmap trusts the returned cursor for the next metadata key/tensor descriptor. Thus a valid array with eleven or more elements is parsed from inside its own remaining payload, breaking ordinary model loading. No model file or native parser was executed.",
+      "source_checks": [
+        {
+          "path": "crates/eridu-infer/src/gguf.rs",
+          "start_line": 60,
+          "end_line": 85,
+          "observation": "Metadata parsing adopts new_cursor unconditionally."
+        },
+        {
+          "path": "crates/eridu-infer/src/gguf.rs",
+          "start_line": 227,
+          "end_line": 241,
+          "observation": "count.min(10) controls consumption, and no skip traverses the rest."
+        },
+        {
+          "path": "crates/eridu-infer/src/gguf.rs",
+          "start_line": 92,
+          "end_line": 99,
+          "observation": "The same cursor becomes the start of tensor descriptors."
+        },
+        {
+          "path": "crates/eridu-infer/src/server.rs",
+          "start_line": 35,
+          "end_line": 48,
+          "observation": "ERIDU_GGUF_PATH is loaded during AppState creation; load errors become None."
+        }
+      ],
+      "guards": [
+        "Header/type checks and tensor read bounds cannot restore a cursor left inside the array.",
+        "The consumer may degrade to no model on Err rather than crash; the valid-array parsing defect remains."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/02-source-snapshots.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0482",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "crates/eridu-infer/src/gguf.rs",
+      "current_source_sha256": "4db2253f39ce1211f2c8d7f09b149861739db8be3f4e95e0c5da3f5aa37f1972",
+      "rationale": "After checking that the metadata type tag fits, load_mmap can call parse_metadata_value with cursor equal to input length. UINT8 directly indexes mmap[cursor], and other supported payloads use unchecked ranges. This yields a Rust bounds panic rather than the advertised Result error. The observed consumer loads a locally selected model at startup; remote exploitability and process abort behavior were not established, so severity is P2.",
+      "source_checks": [
+        {
+          "path": "crates/eridu-infer/src/gguf.rs",
+          "start_line": 61,
+          "end_line": 83,
+          "observation": "Only key and type tag bounds are checked before the value parser."
+        },
+        {
+          "path": "crates/eridu-infer/src/gguf.rs",
+          "start_line": 173,
+          "end_line": 213,
+          "observation": "Supported scalar/string branches index or slice payload without bounds checks."
+        },
+        {
+          "path": "crates/eridu-infer/src/server.rs",
+          "start_line": 35,
+          "end_line": 48,
+          "observation": "The consumer converts Err to None but does not catch a parser panic."
+        }
+      ],
+      "guards": [
+        "Magic/version/header/key/type checks protect earlier fields only.",
+        "Rust bounds checks prevent an out-of-bounds memory read, but cause the availability failure."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/02-source-snapshots.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0284",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_sharur/auto_heal_hardcoded_paths.py",
+      "current_source_sha256": "7c9de3cae32521d67c006d60918502b33be3722e45c133c4e03c7b2d7342d9f3",
+      "rationale": "When rewriting a matching path literal, ensure_pathlib_import inserts its ordinary import before an existing __future__ import (index zero, or index one after a docstring). heal_file unparses and writes without compiling the resulting module. A future-annotations module without a Path binding is therefore converted to syntactically invalid Python. Scope is an explicitly invoked maintenance rewrite, so severity is P2.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_sharur/auto_heal_hardcoded_paths.py",
+          "start_line": 95,
+          "end_line": 120,
+          "observation": "Import insertion only accounts for an initial constant/docstring, not future imports."
+        },
+        {
+          "path": "scripts/c5_sharur/auto_heal_hardcoded_paths.py",
+          "start_line": 123,
+          "end_line": 145,
+          "observation": "heal_file transforms, unparses and overwrites without a post-transform compile check."
+        },
+        {
+          "path": "scripts/c5_sharur/auto_heal_hardcoded_paths.py",
+          "start_line": 149,
+          "end_line": 164,
+          "observation": "The maintenance CLI applies the rewrite across script files."
+        }
+      ],
+      "guards": [
+        "Existing direct Path imports avoid insertion.",
+        "The initial ast.parse validates only the original source and does not validate future-import placement after mutation."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/02-source-snapshots.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0285",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_sharur/auto_heal_hardcoded_paths.py",
+      "current_source_sha256": "7c9de3cae32521d67c006d60918502b33be3722e45c133c4e03c7b2d7342d9f3",
+      "rationale": "The import detector accepts import pathlib and from pathlib import Path as P, although neither binds the unqualified name Path. The transformer always emits Path.home(). For a module with either import form and no other Path binding, the rewrite leaves an unresolved name and fails at use. This is separate from the future-import-order defect.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_sharur/auto_heal_hardcoded_paths.py",
+          "start_line": 54,
+          "end_line": 91,
+          "observation": "Generated expressions use ast.Name(id=\"Path\")."
+        },
+        {
+          "path": "scripts/c5_sharur/auto_heal_hardcoded_paths.py",
+          "start_line": 95,
+          "end_line": 106,
+          "observation": "Import detection ignores alias binding and treats import pathlib as sufficient."
+        },
+        {
+          "path": "scripts/c5_sharur/auto_heal_hardcoded_paths.py",
+          "start_line": 130,
+          "end_line": 145,
+          "observation": "The transformed source is written once ensure_pathlib_import decides no insertion is needed."
+        }
+      ],
+      "guards": [
+        "A genuine unaliased from pathlib import Path already works.",
+        "Some target modules may independently bind Path; the defect is conditional on the specified import forms without that binding."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/02-source-snapshots.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0025",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/global/c5-terminological-archaeology/scripts/c5_lexicon_notary.py",
+      "current_source_sha256": "d96987b85fee7bfd75bf877e6fa4c2ed2d72b71611466ae517d4393e61406c2f",
+      "rationale": "The CLI advertises no writing for --dry-run and guards lexicon and skill updates, but always invokes _generate_anagnorisis_log once entries exist. That function writes ANAGNORISIS_LOG.md whenever artifact_dir exists and receives no dry-run flag. --term with --dry-run and an existing artifact directory can therefore overwrite the log; no personal lexicon or artifact was accessed.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/global/c5-terminological-archaeology/scripts/c5_lexicon_notary.py",
+          "start_line": 116,
+          "end_line": 123,
+          "observation": "register_entry correctly suppresses its own persistent write on dry-run."
+        },
+        {
+          "path": "tools/skill_library/global/c5-terminological-archaeology/scripts/c5_lexicon_notary.py",
+          "start_line": 177,
+          "end_line": 200,
+          "observation": "Log helper writes the fixed session filename whenever the directory exists."
+        },
+        {
+          "path": "tools/skill_library/global/c5-terminological-archaeology/scripts/c5_lexicon_notary.py",
+          "start_line": 247,
+          "end_line": 276,
+          "observation": "Dry-run promises no writing and manual-term path includes the entry."
+        },
+        {
+          "path": "tools/skill_library/global/c5-terminological-archaeology/scripts/c5_lexicon_notary.py",
+          "start_line": 326,
+          "end_line": 341,
+          "observation": "The final log call is unconditional even while skill injection receives dry_run."
+        }
+      ],
+      "guards": [
+        "No log is written when artifact_dir is absent/nonexistent or no entries are registered.",
+        "The earlier lexicon and skill guards do not cover this final helper."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/02-source-snapshots.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0026",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/global/c5-terminological-archaeology/scripts/c5_lexicon_notary.py",
+      "current_source_sha256": "d96987b85fee7bfd75bf877e6fa4c2ed2d72b71611466ae517d4393e61406c2f",
+      "rationale": "_inject_phase_2f removes the first matching phase heading and all following text using a greedy DOTALL suffix before appending a replacement block. An existing later heading/instruction is consequently erased in a normal write. This confirms data loss conditional on phase 2f not being the last section; no installed skill was modified.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/global/c5-terminological-archaeology/scripts/c5_lexicon_notary.py",
+          "start_line": 148,
+          "end_line": 174,
+          "observation": "The replacement regex extends through EOF and the resulting content is written."
+        },
+        {
+          "path": "tools/skill_library/global/c5-terminological-archaeology/scripts/c5_lexicon_notary.py",
+          "start_line": 334,
+          "end_line": 338,
+          "observation": "CLI invokes this update on the accumulated entries."
+        }
+      ],
+      "guards": [
+        "The helper requires the target skill to exist.",
+        "dry_run prevents persistence; ordinary updates have no next-heading bound or preservation guard."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/02-source-snapshots.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0010",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/commands/grill_you.py",
+      "current_source_sha256": "4f2313bad24b372e7510379c0125e698ab3481921d8b57a70ed5677532fcfad2",
+      "rationale": "to_yaml surrounds topic and decision values in raw double quotes without YAML escaping. A topic such as a quoted phrase or a quote/newline field sequence changes the serialized structure or makes it invalid; run_grill_you forwards the caller topic into the report unchanged. This confirms a serialization defect, not execution of YAML tags or a privileged downstream consumer.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/commands/grill_you.py",
+          "start_line": 39,
+          "end_line": 56,
+          "observation": "Topic and each decision string are interpolated directly into YAML scalars."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/commands/grill_you.py",
+          "start_line": 116,
+          "end_line": 128,
+          "observation": "Engine and public convenience function preserve caller topic."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/commands/grill_you.py",
+          "start_line": 131,
+          "end_line": 134,
+          "observation": "The direct module consumer prints the resulting YAML."
+        }
+      ],
+      "guards": [
+        "Built-in decision strings are static in run(), reducing their direct input exposure.",
+        "GrillYouReport is public and accepts arbitrary strings; no serializer or sanitization guard is used."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/02-source-snapshots.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0469",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/genomics/vsa_oncology.py",
+      "current_source_sha256": "5010943aff0c4c6fd8080cef491aeda2e83e02cce8042c978c46c7a1bb4769a4",
+      "rationale": "All registered target vectors come from from_seed and contain only -1/+1. bind multiplies coordinates; similarity then dots drug*target with target. Therefore target_i squared is one, so the result is sum(drug_i)/DIMENSION for every registered target. This algebraically confirms loss of target specificity. No biological/clinical accuracy, treatment outcome or production caller is asserted.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/genomics/vsa_oncology.py",
+          "start_line": 44,
+          "end_line": 62,
+          "observation": "Seed vectors are bipolar; bind and similarity implement component multiplication and normalized dot product."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/genomics/vsa_oncology.py",
+          "start_line": 89,
+          "end_line": 99,
+          "observation": "Registered target vectors are generated through that bipolar construction."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/genomics/vsa_oncology.py",
+          "start_line": 112,
+          "end_line": 119,
+          "observation": "Affinity computes similarity(bind(drug,target),target)."
+        }
+      ],
+      "guards": [
+        "The missing-target KeyError is present but only checks registry membership.",
+        "The cancellation proof is restricted to registered bipolar vectors, not arbitrary externally mutated data."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/02-source-snapshots.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0363",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/transducers/appgen_ast_transducer.py",
+      "current_source_sha256": "e67ba98017e62d6c7cc3145255ad62f79b32115384f422649bc6309cbe550131",
+      "rationale": "JavaScript/TypeScript inputs are only scanned for delimiter balance. The string const x = ; has no unmatched delimiters and therefore returns true; zero_token_feedback_loop translates that result into APPROVED. JSON has an additional parser and Python uses ast.parse, neither of which protects JS/TS. Targeted consumers were tests and the extraction helper, so no authorization bypass or production execution is claimed.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/transducers/appgen_ast_transducer.py",
+          "start_line": 27,
+          "end_line": 39,
+          "observation": "Python parses but JS/TS enters a separate scan branch."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/transducers/appgen_ast_transducer.py",
+          "start_line": 39,
+          "end_line": 86,
+          "observation": "The JS/TS path ends with true after delimiter checking; only JSON receives a real parser."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/transducers/appgen_ast_transducer.py",
+          "start_line": 95,
+          "end_line": 117,
+          "observation": "Extracted files expose that Boolean as is_valid."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/transducers/appgen_ast_transducer.py",
+          "start_line": 121,
+          "end_line": 135,
+          "observation": "True becomes status APPROVED."
+        }
+      ],
+      "guards": [
+        "Unbalanced delimiters are rejected and JSON/Python have stronger checks.",
+        "APPROVED here is a syntax API result; no production dispatch dependency was established."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/02-source-snapshots.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0515",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "02_EDIN_SWARMS/agents_archi/orchestrator/lifecycle.py",
+      "current_source_sha256": "7b796da789a8a0d5845447e267853681453c9a230e22491ff461fcad8c1111ad",
+      "rationale": "transition_to updates current_state/history before invoking the manager callback. _log_causal_event catches IOError and returns normally even if open/write/flush/fsync fails, so transition_to returns true. Recovery replays only persisted WAL records, permitting loss of a newly accepted POISONED state after restart. This is a failure-ordering defect; no actual WAL, crash or lifecycle runtime was exercised.",
+      "source_checks": [
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/orchestrator/lifecycle.py",
+          "start_line": 95,
+          "end_line": 121,
+          "observation": "State changes precede callback and success return."
+        },
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/orchestrator/lifecycle.py",
+          "start_line": 180,
+          "end_line": 208,
+          "observation": "Recovery restores only WAL records, while persistence failures are logged and swallowed."
+        },
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/orchestrator/lifecycle.py",
+          "start_line": 210,
+          "end_line": 211,
+          "observation": "Transition callback routes directly into the swallowing logger."
+        },
+        {
+          "path": "02_EDIN_SWARMS/agents_archi/orchestrator/lifecycle.py",
+          "start_line": 226,
+          "end_line": 242,
+          "observation": "Spawn also publishes a handle before the unacknowledged WAL write."
+        }
+      ],
+      "guards": [
+        "POISONED is terminal in the live FSM; the defect concerns restoration after a failed record write.",
+        "flock, flush and fsync provide controls on the success path but their errors are not propagated."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/02-source-snapshots.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0283",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "docs/04_research/LOS_10_MAYORES_DESCUBRIMIENTOS_Y_AVANCES.md",
+      "current_source_sha256": "a0838daae711adb988f57aed2e99c30996b7b674b4187708dd5a2f3ce7c3b1e5",
+      "rationale": "The research text still presents Lean checking as physical impossibility of torn reads and absolute code certification. Current BabylonTrace explicitly limits the theorem to even sequence declarations and disclaims payload coherence/physical torn-read absence; AX0 proves at-most-one dispatch in its modeled trace. Updating those Lean scopes has not corrected this document. This is an unsupported documentation claim, not evidence that the Rust runtime actually violates a theorem.",
+      "source_checks": [
+        {
+          "path": "docs/04_research/LOS_10_MAYORES_DESCUBRIMIENTOS_Y_AVANCES.md",
+          "start_line": 183,
+          "end_line": 208,
+          "observation": "Document claims physical impossibility and absolute mathematical validity after Lean checking."
+        },
+        {
+          "path": "proof/lean/BabylonTrace.lean",
+          "start_line": 148,
+          "end_line": 169,
+          "observation": "The theorem establishes TraceReadsEven for accepted model traces and explicitly limits physical implications."
+        },
+        {
+          "path": "proof/lean/AX0.lean",
+          "start_line": 139,
+          "end_line": 154,
+          "observation": "The AX0 theorem is about countDispatches on a modeled AuthEvent trace."
+        }
+      ],
+      "guards": [
+        "The phrase under the Seqlock/FSM rules is a model assumption, not an implementation-refinement proof.",
+        "Current source comments narrow the theorem, but the separately published document retains the stronger claims."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/02-source-snapshots.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0389",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_calibrations/calibrate_aphairesis.py",
+      "current_source_sha256": "e88cdd4a2474cc9625d6ee2628213086684a3efffe031320c933455580e253e7",
+      "rationale": "main constructs its output as dirname(__file__)/../src, which from scripts/c5_calibrations is scripts/src/generated_aphairesis_constants.rs. The research-math module declared in root src/lib.rs resolves to root src/generated_aphairesis_constants.rs instead. The emitter creates directories and reports success, leaving compiled constants stale. Inspection found the root source exists and scripts/src output does not; the generator was not run.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_calibrations/calibrate_aphairesis.py",
+          "start_line": 123,
+          "end_line": 126,
+          "observation": "Emitter creates and writes exactly the supplied output path and reports success."
+        },
+        {
+          "path": "scripts/c5_calibrations/calibrate_aphairesis.py",
+          "start_line": 128,
+          "end_line": 149,
+          "observation": "main joins one parent from scripts/c5_calibrations, yielding scripts/src."
+        },
+        {
+          "path": "src/lib.rs",
+          "start_line": 67,
+          "end_line": 71,
+          "observation": "The compiled module is declared from repository src under feature research-math."
+        }
+      ],
+      "guards": [
+        "Custom direct calls to emit_rust_constants may choose a correct destination.",
+        "The defect affects the documented main generator and matters when research-math compiles that module."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/02-source-snapshots.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0095",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_demos/falsacion_semantic_entropy_baremetal.rs",
+      "current_source_sha256": "9f95e06f542336b82fa1dc3752e3a5297034b10d8098e8a768fb1294d77755a2",
+      "rationale": "The demo API accepts n=8, but computes its domain mask by shifting an eight-bit one by eight. That shift is outside the type width and is not a valid way to form 0xff; checked execution can panic. The demo main only supplies n=5, so its existing benchmark does not exercise the failing admitted boundary. No native code was run; unchecked-build output is not claimed.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_demos/falsacion_semantic_entropy_baremetal.rs",
+          "start_line": 40,
+          "end_line": 63,
+          "observation": "Public contract/debug assertion admit eight, followed by the overflowing u8 mask expression."
+        },
+        {
+          "path": "scripts/c5_demos/falsacion_semantic_entropy_baremetal.rs",
+          "start_line": 88,
+          "end_line": 101,
+          "observation": "evaluate_manifest forwards the caller n without narrowing it."
+        },
+        {
+          "path": "scripts/c5_demos/falsacion_semantic_entropy_baremetal.rs",
+          "start_line": 138,
+          "end_line": 148,
+          "observation": "The demonstration inputs are five-sample graphs."
+        },
+        {
+          "path": "scripts/c5_demos/falsacion_semantic_entropy_baremetal.rs",
+          "start_line": 191,
+          "end_line": 215,
+          "observation": "All visible benchmark dispatches use n=5."
+        }
+      ],
+      "guards": [
+        "n==0 returns early and n<=8 is only debug_asserted.",
+        "The boundary defect is in the example implementation; no production runtime dependency was established."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/02-source-snapshots.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0376",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_destiladora/invariant_extractor_z3.py",
+      "current_source_sha256": "09c6fbf9668323bca1c56bdfa441277ff641a57bc3fcc59189477a416a0f5959",
+      "rationale": "The extractor checks satisfiability of its asserted first-trace count and marks the cluster EXTRACTED without testing the remaining traces. The ingestor does include filenames in the digest, but uses delimiter-free concatenation: [\"ab\", \"c\"] and [\"abc\"] produce the same preimage with the same contract and gate command while containing different counts. Thus this guard does not make the trigger impossible. Downstream proof/codegen independently select LIMIT 1, so they do not repair the missing cluster validation. This supports false cluster-invariant promotion, not an authorization bypass.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_destiladora/invariant_extractor_z3.py",
+          "start_line": 52,
+          "end_line": 86,
+          "observation": "Only traces[0] supplies FILES_COUNT, and SAT checks the asserted assumptions."
+        },
+        {
+          "path": "scripts/c5_destiladora/invariant_extractor_z3.py",
+          "start_line": 90,
+          "end_line": 117,
+          "observation": "SAT results persist the cluster as EXTRACTED."
+        },
+        {
+          "path": "scripts/c5_destiladora/goal_trace_ingestor.py",
+          "start_line": 60,
+          "end_line": 62,
+          "observation": "Input digest hashes concatenated filenames plus contract, without boundaries or a count."
+        },
+        {
+          "path": "scripts/c5_destiladora/goal_trace_ingestor.py",
+          "start_line": 101,
+          "end_line": 110,
+          "observation": "Same digest and gate command produce the same cluster ID."
+        },
+        {
+          "path": "scripts/c5_destiladora/proof_emitter_lean4.py",
+          "start_line": 164,
+          "end_line": 196,
+          "observation": "Proof generation consumes EXTRACTED and independently selects one successful trace."
+        },
+        {
+          "path": "scripts/c5_destiladora/codegen_rust_b60.py",
+          "start_line": 37,
+          "end_line": 65,
+          "observation": "Codegen requires proof status but derives cardinality from another LIMIT 1 query."
+        }
+      ],
+      "guards": [
+        "Minimum cluster sample_count and successful exit-code filtering exist, but they do not compare observed cardinalities.",
+        "The ingestor digest narrows ordinary collisions but admits the explicit serialization-ambiguity witness.",
+        "Lean/PROVED requirements establish the generated model, not empirical agreement of all stored traces."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/02-source-snapshots.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0069",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_quality_gates/canary_check.py",
+      "current_source_sha256": "843c22a34b3a354091be1e1af1c4c2a14a631bc3c18b29de0915d595fcf0b849",
+      "rationale": "The gate promises index integrity, but flags a declared canary only if absent from both git ls-files and the working tree. Removing its index entry while retaining a local file makes the conjunction false, allowing a commit without the canary. Pre-commit installs this script. This is a static staged-state counterexample; no actual canary data, Git index or token was modified.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_quality_gates/canary_check.py",
+          "start_line": 11,
+          "end_line": 17,
+          "observation": "The documented purpose is to fail when a planted canary disappears from the index."
+        },
+        {
+          "path": "scripts/c5_quality_gates/canary_check.py",
+          "start_line": 43,
+          "end_line": 48,
+          "observation": "The tracked list comes from git ls-files."
+        },
+        {
+          "path": "scripts/c5_quality_gates/canary_check.py",
+          "start_line": 62,
+          "end_line": 77,
+          "observation": "Working-tree existence suppresses a missing-index failure."
+        },
+        {
+          "path": ".pre-commit-config.yaml",
+          "start_line": 42,
+          "end_line": 46,
+          "observation": "The script is installed as canary-guard."
+        }
+      ],
+      "guards": [
+        "No-manifest mode is intentionally idle; the finding assumes a declared planted canary.",
+        "The separate forbidden-tracked-files leak check does not enforce canary presence."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/02-source-snapshots.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0343",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py",
+      "current_source_sha256": "32cef58031bab84d9fb78b0cbb3ab132008d6f7431f4fe4f6c29da34a8b8876a",
+      "rationale": "The auditor returns PASS plus certification strings for atomic ordering, seqlock behavior, biometrics and formal properties without inspecting or executing those checks. Linguistic entropy is assigned as 4.967 although an entropy function exists. run_100_agents_audit aggregates and persists these results. Some file-existence/listing checks are real, but do not substantiate the unrelated security/formal/physical conclusions. This confirms an audit-evidence fabrication mechanism in code; the script was not run.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py",
+          "start_line": 64,
+          "end_line": 114,
+          "observation": "Ring-0 claims are mostly unconditional strings under a default PASS."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py",
+          "start_line": 120,
+          "end_line": 154,
+          "observation": "Formal cohort assigns certification strings without compiling/checking proofs."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py",
+          "start_line": 160,
+          "end_line": 174,
+          "observation": "Entropy measurement is a constant, not the function at 51-58."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py",
+          "start_line": 324,
+          "end_line": 362,
+          "observation": "Results are counted and emitted as a structured SITREP."
+        },
+        {
+          "path": "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py",
+          "start_line": 367,
+          "end_line": 381,
+          "observation": "CLI persists and presents the aggregate as an audit report."
+        }
+      ],
+      "guards": [
+        "File enumeration/existence checks and perf_counter measure limited real properties only.",
+        "No simulation/demo label or evidence-required gate accompanies the unsupported PASS results."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/02-source-snapshots.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0080",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/enforce_c5_rules.sh",
+      "current_source_sha256": "a7b07433c48575a0ece594a092d3f9915f82a6c2e57464bfd747f4f788186edc",
+      "rationale": "The script enables set -e, but the branch-protection API call is the left side of an OR list whose fallback echo succeeds. It then prints dispatched and exits with success; missing gh also explicitly exits zero. The preflight caller consequently proceeds to APPROVED even if protections were not applied. This confirms status suppression; no remote API call or current branch-protection state was checked.",
+      "source_checks": [
+        {
+          "path": "scripts/enforce_c5_rules.sh",
+          "start_line": 5,
+          "end_line": 18,
+          "observation": "Strict shell mode is overridden for this API failure path; missing CLI exits zero."
+        },
+        {
+          "path": "scripts/enforce_c5_rules.sh",
+          "start_line": 18,
+          "end_line": 37,
+          "observation": "The failing gh command is followed by successful fallback/final echo."
+        },
+        {
+          "path": "scripts/preflight.sh",
+          "start_line": 1,
+          "end_line": 9,
+          "observation": "The caller relies on script status and emits APPROVED."
+        }
+      ],
+      "guards": [
+        "A visible informational message acknowledges failure but is not a failing machine status.",
+        "The claim is about error propagation, not the current GitHub policy configuration."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/02-source-snapshots.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0191",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tests/differential/mod.rs",
+      "current_source_sha256": "707b740f2f4ff22a4e4510ef4d72e395e0aaa0ff72107789a9da3c0313cf1845",
+      "rationale": "Both commands complete before the test reads either proof.ir. It then reads the same pathname twice, so a successful Rust write replaces the Python artifact before py_ir is captured and the test can compare the Rust result with itself. The current checkout also lacks reference/interpreter.py, which selects a successful skip. This leaves the test unsound rather than fixed; no interpreter/kernel execution was performed.",
+      "source_checks": [
+        {
+          "path": "tests/differential/mod.rs",
+          "start_line": 15,
+          "end_line": 32,
+          "observation": "Missing reference returns success; when present, Python and Rust commands both finish before artifact reads."
+        },
+        {
+          "path": "tests/differential/mod.rs",
+          "start_line": 36,
+          "end_line": 61,
+          "observation": "Both hashes are computed from reads of the same path after the Rust run."
+        },
+        {
+          "path": "src/babylon60.rs",
+          "start_line": 589,
+          "end_line": 598,
+          "observation": "The Rust writer writes the path read by both test branches."
+        },
+        {
+          "path": "Cargo.toml",
+          "start_line": 75,
+          "end_line": 77,
+          "observation": "Cargo explicitly registers the differential test."
+        }
+      ],
+      "guards": [
+        "Successful process status checks do not retain the Python artifact.",
+        "Current missing-reference skip limits immediate reachability; supplying the reference reactivates the flawed comparison."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/02-source-snapshots.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0548",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/cron-triggers/patterns.md",
+      "current_source_sha256": "3607db3353208a0839c2e0cb9a32f563fa1b6eb03aa01be3bfc71b8ea1ddc4c5",
+      "rationale": "The batch-processing example waits for all requests to settle, then persists queueData.slice(100) regardless of which requests rejected. Failed first-batch entries are therefore absent from the saved queue; fulfilled HTTP error responses also count as processed because no response.ok check exists. This is a defect in a copyable documentation example, not evidence of a deployed worker losing work.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/codex_overrides/cloudflare/references/cron-triggers/patterns.md",
+          "start_line": 64,
+          "end_line": 76,
+          "observation": "The processed-results list affects logging only; queue removal always drops the full batch."
+        },
+        {
+          "path": "tools/skill_library/codex_overrides/cloudflare/references/cron-triggers/patterns.md",
+          "start_line": 79,
+          "end_line": 91,
+          "observation": "The following queue-integration example is a separate snippet and does not alter the batch-processing implementation."
+        }
+      ],
+      "guards": [
+        "Promise.allSettled prevents one rejection from aborting observation of other results, but supplies no retry retention.",
+        "No network requests or cloud deployment were performed."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/02-source-snapshots.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0540",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/global/c5-browser-forensics-and-extension-triage/scripts/browser_forensics.py",
+      "current_source_sha256": "739394836cb01e679667570eb96e94ed625e73390f9d66ebab32c1101b9f5324",
+      "rationale": "Despite current changes to purge confinement, cmd_scan still selects match patterns with the literal expression domain in m. For domain example.com both <all_urls> and *://*/* fail that test, yet cover the domain; if no literal match exists the tool states that no extension intercepts it. This confirms the wildcard false negative in current source. No browser profile or operator extension data was read.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/global/c5-browser-forensics-and-extension-triage/scripts/browser_forensics.py",
+          "start_line": 68,
+          "end_line": 80,
+          "observation": "Metadata preserves content_scripts matches as declared."
+        },
+        {
+          "path": "tools/skill_library/global/c5-browser-forensics-and-extension-triage/scripts/browser_forensics.py",
+          "start_line": 130,
+          "end_line": 164,
+          "observation": "The scan filters by substring and emits a definitive absence message."
+        },
+        {
+          "path": "tools/skill_library/global/c5-browser-forensics-and-extension-triage/scripts/browser_forensics.py",
+          "start_line": 212,
+          "end_line": 258,
+          "observation": "Current remediation is in the separate purge path, which does not change scan matching."
+        },
+        {
+          "path": "tests/test_swarm100_round2_regressions.py",
+          "start_line": 443,
+          "end_line": 487,
+          "observation": "Visible regression coverage exercises purge confinement and valid removal, not scan wildcards."
+        }
+      ],
+      "guards": [
+        "The domain is lowercased and missing metadata is skipped; neither implements match-pattern semantics.",
+        "Purge ID validation and nofollow descriptor controls apply to deletion only."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/02-source-snapshots.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0453",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/youtube-analysis-pipeline/MODULE.md",
+      "current_source_sha256": "609c2c89d6555cc9ee1e9cc1d74e436ddd8c154f9c447167463160ca29bc80cb",
+      "rationale": "The comment-audit fallback explicitly instructs producing a SOCINT audit from expected audience sociology after comment acquisition fails. It does call the reasoning theoretical, and the earlier video-content phase classifies hypotheses, so this is not proof that output must conceal fabrication. However, the fallback does not require an unavailable-comments disclosure or output labeling and immediately applies audience/user-vector language. The confirmed documentation defect is substituting predictions for the requested observed-comment audit with inadequate provenance; no generated report or audience reaction was asserted.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/youtube-analysis-pipeline/MODULE.md",
+          "start_line": 144,
+          "end_line": 153,
+          "observation": "An earlier video-content phase distinguishes verified facts, models and hypotheses; this partially limits interpretation."
+        },
+        {
+          "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/youtube-analysis-pipeline/MODULE.md",
+          "start_line": 190,
+          "end_line": 205,
+          "observation": "After retrieval timeout/error the fallback directs a theoretical SOCINT audit rather than obtaining comments."
+        },
+        {
+          "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/youtube-analysis-pipeline/MODULE.md",
+          "start_line": 206,
+          "end_line": 221,
+          "observation": "The subsequent vectors refer to actual user contributions and audience complaints without a fallback-specific provenance rule."
+        }
+      ],
+      "guards": [
+        "The word theoretically and the earlier epistemic categories are partial guards; they do not require disclosure that comments were unavailable.",
+        "No LLM run following the module was tested, so actual fabrication/misleading presentation remains unobserved."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-round3-20261028/02-source-snapshots.json"
+      ]
+    }
+  ]
+}

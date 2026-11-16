@@ -1,0 +1,94 @@
+{
+  "date": "2026-10-30",
+  "source_and_test_sha256_before": {
+    "scripts/c5_cli/moskv_native_host.py": "ea28bbfee08801da5c9fb44fe82bd2350c90b5f85fb92e778df3f60f8a297432",
+    "01_KISH_ENGINE/babylon60/cortex/cortex_purge_anergy.py": "408f432bcf364ea1f857cb856e51e4a29a5f6173570c207fd414d702fec1aaca",
+    "scripts/c5_git_utils/rewrite_commits.py": "64f47ebb82ad50e35af48a9d6177f9c9b05acb7227e6c272dc89a14db15c2aa8",
+    "scripts/c5_icloud_deploy.py": "226f59b9d8988ae41fb779a3aaffa3ee5ead720428ecb6454eb995bbcfcc1c49",
+    "tools/install_shield.sh": "cd9166eae829e327e4f9422bc7203b3e164e7d6f6e8522e2fc69bc55403c9e48",
+    "tests/test_swarm100_lot12_s4_regressions.py": "8b53806f639702bd26d34299a78f0ef50560bde5a3b094b49b1c704279f2e5b3",
+    "tests/test_moskv_native_host.py": "c59a51e487e00890fa2bb4c7e4b1a1193693038e9c493dd4a9c58ae16be7cdbc",
+    "docs/security/evidence/swarm100-lot12-20261030/review_files/independent_checks.py": "d516951c971770f1ec1665a152ffc7ed4f091071b23777cce9c26f196e814002",
+    "docs/security/evidence/swarm100-lot12-20261030/review_files/queue_probe.py": "0646ae67f85916c45dfcfc43d5b3988eae245aa269042c362c75c052d6c9f3d7"
+  },
+  "source_and_test_sha256_after": {
+    "scripts/c5_cli/moskv_native_host.py": "ea28bbfee08801da5c9fb44fe82bd2350c90b5f85fb92e778df3f60f8a297432",
+    "01_KISH_ENGINE/babylon60/cortex/cortex_purge_anergy.py": "408f432bcf364ea1f857cb856e51e4a29a5f6173570c207fd414d702fec1aaca",
+    "scripts/c5_git_utils/rewrite_commits.py": "64f47ebb82ad50e35af48a9d6177f9c9b05acb7227e6c272dc89a14db15c2aa8",
+    "scripts/c5_icloud_deploy.py": "226f59b9d8988ae41fb779a3aaffa3ee5ead720428ecb6454eb995bbcfcc1c49",
+    "tools/install_shield.sh": "cd9166eae829e327e4f9422bc7203b3e164e7d6f6e8522e2fc69bc55403c9e48",
+    "tests/test_swarm100_lot12_s4_regressions.py": "8b53806f639702bd26d34299a78f0ef50560bde5a3b094b49b1c704279f2e5b3",
+    "tests/test_moskv_native_host.py": "c59a51e487e00890fa2bb4c7e4b1a1193693038e9c493dd4a9c58ae16be7cdbc",
+    "docs/security/evidence/swarm100-lot12-20261030/review_files/independent_checks.py": "d516951c971770f1ec1665a152ffc7ed4f091071b23777cce9c26f196e814002",
+    "docs/security/evidence/swarm100-lot12-20261030/review_files/queue_probe.py": "0646ae67f85916c45dfcfc43d5b3988eae245aa269042c362c75c052d6c9f3d7"
+  },
+  "checks": {
+    "combined-tests": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "python",
+        "docs/security/evidence/swarm100-lot12-20261030/run_confined_tests.py",
+        "docs/security/evidence/swarm100-lot12-20261030/review_files/independent_checks.py",
+        "tests/test_swarm100_lot12_s4_regressions.py",
+        "tests/test_moskv_native_host.py",
+        "-q",
+        "-o",
+        "addopts=--tb=short"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/review_files/combined-tests-verified.log",
+      "log_sha256": "fddf0f3a85175d22aeb80ce3a8c793d20021dd8f0cbc548c976d4017b44e81ad"
+    },
+    "ruff": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "ruff",
+        "check",
+        "scripts/c5_cli/moskv_native_host.py",
+        "01_KISH_ENGINE/babylon60/cortex/cortex_purge_anergy.py",
+        "scripts/c5_git_utils/rewrite_commits.py",
+        "scripts/c5_icloud_deploy.py",
+        "tests/test_swarm100_lot12_s4_regressions.py",
+        "docs/security/evidence/swarm100-lot12-20261030/review_files/independent_checks.py",
+        "docs/security/evidence/swarm100-lot12-20261030/review_files/queue_probe.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/review_files/ruff-verified.log",
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "mypy": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "mypy",
+        "--follow-imports=silent",
+        "--check-untyped-defs",
+        "scripts/c5_cli/moskv_native_host.py",
+        "01_KISH_ENGINE/babylon60/cortex/cortex_purge_anergy.py",
+        "scripts/c5_git_utils/rewrite_commits.py",
+        "scripts/c5_icloud_deploy.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/review_files/mypy-verified.log",
+      "log_sha256": "71144743c83babea384888a735db0c4daba3d4d7b7942b6839984bd5c21b52bb"
+    },
+    "shell-syntax": {
+      "command": [
+        "bash",
+        "-n",
+        "tools/install_shield.sh"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/review_files/shell-syntax-verified.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}

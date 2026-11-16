@@ -1,0 +1,388 @@
+{
+  "shard": "016",
+  "findings": [
+    {
+      "title": "Restore accepts snapshots larger than the configured capacity",
+      "severity": "P2",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/kda_memory.rs",
+      "line": 90,
+      "evidence": "restore replaces entries without comparing snapshot.len() to capacity; put evicts only one entry before adding one (51-62).",
+      "trigger": "Restore a snapshot of three entries into a buffer of capacity two, then insert new keys.",
+      "impact": "The advertised bounded buffer remains oversized indefinitely; callers cannot rely on capacity as a memory bound.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Zero-capacity KDA buffer still admits an entry",
+      "severity": "P2",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/kda_memory.rs",
+      "line": 51,
+      "evidence": "At capacity zero evict_lfu returns on an empty map (67-68), then put inserts unconditionally (55-62).",
+      "trigger": "KdaMemoryBuffer::new(0).put(\"key\", value).",
+      "impact": "len becomes one despite a zero capacity; disabling storage via a zero quota is ineffective.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "YouTube URL and output directory are interpolated into a shell",
+      "severity": "P1",
+      "path": "tools/skill_library/global/youtube-analysis-pipeline/scripts/yt_audit.py",
+      "line": 17,
+      "evidence": "run_cmd uses subprocess.run(shell=True) at line 9; URL is placed in double quotes at 17/36/42 and output_dir at 36.",
+      "trigger": "A supplied URL or output directory contains shell substitution such as $(command), or a quote that terminates the quoted argument.",
+      "impact": "Executing the acquisition script runs attacker-controlled shell commands with the operator account privileges.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "New face tracks are returned twice on their first frame",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-neural-face-swap-cuadrilla/scripts/c5_smoother.py",
+      "line": 272,
+      "evidence": "New track is appended to assignments at 267-268 but never added to matched_tracks; the lost-track loop at 272-276 immediately increments lost and appends it again. c5_face_swap_cli.py:368-372 consumes update and :396 iterates every assignment.",
+      "trigger": "A detected face has no existing matching track and is assigned an identity with default max_extrapolate=2.",
+      "impact": "Face-swap processing runs twice for the same face on its initial frame, adds redundant inference/compositing, and incorrectly marks a new track as lost.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Synthetic entropy demo presents label lookup as an empirical NLI comparison",
+      "severity": "P2",
+      "path": "scripts/c5_demos/falsacion_semantic_entropy_stress.py",
+      "line": 91,
+      "evidence": "Clustering compares supplied semantic_id labels, probe weights are random (56-58), yet measurements are labeled Oxford NLI clustering (263) and SEP acceleration (347).",
+      "trigger": "Use run_empirical_stress_test output as comparative evidence about the cited semantic entropy or trained probe methods.",
+      "impact": "The reported speedup measures integer label grouping versus a random linear projection on fabricated activations, so it does not validate the referenced NLI/probe implementations.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Unescaped description can break generated Python source",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/kernel/mcp_scaffolder.py",
+      "line": 188,
+      "evidence": "contract.description is interpolated directly into a triple-double-quoted function docstring; McpCandidateContract is an unconstrained dataclass and deduce_contract accepts custom_description.",
+      "trigger": "A valid description includes a triple-double-quote sequence.",
+      "impact": "Scaffolding succeeds and persists a syntactically invalid server artifact; later initialization fails. No claim of execution-authorization bypass is made.",
+      "confidence": "high",
+      "kind": "runtime"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "src/worm.rs",
+      "line": 181,
+      "hypothesis": "Creation fsyncs the file but no parent-directory fsync is visible in reviewed production lines 1-389; crash durability of a newly created pathname requires further platform/caller analysis.",
+      "status": "not established as a defect in this audit"
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".agents/skills/babylon60-architecture/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          22
+        ]
+      ],
+      "sha256_matches_manifest": true,
+      "notes": "Static source review only; no runtime guarantees certified."
+    },
+    {
+      "path": ".github/workflows/python-tests.yml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          53
+        ]
+      ],
+      "sha256_matches_manifest": true,
+      "notes": "Static source review only; no runtime guarantees certified."
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/kda_memory.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          127
+        ]
+      ],
+      "sha256_matches_manifest": true,
+      "notes": "Static source review only; no runtime guarantees certified."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/compliance_exporter/templates/executive_summary.html.j2",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          4
+        ]
+      ],
+      "sha256_matches_manifest": true,
+      "notes": "Static source review only; no runtime guarantees certified."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/mcp_scaffolder.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          343
+        ]
+      ],
+      "sha256_matches_manifest": true,
+      "notes": "Static source review only; no runtime guarantees certified."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/utils/watchdog_poc_v6.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          88
+        ]
+      ],
+      "sha256_matches_manifest": true,
+      "notes": "Static source review only; no runtime guarantees certified."
+    },
+    {
+      "path": "Dockerfile",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          68
+        ]
+      ],
+      "sha256_matches_manifest": true,
+      "notes": "Static source review only; no runtime guarantees certified."
+    },
+    {
+      "path": "docs/01_spec/spec_semantic_entropy_dual_firewall.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          119
+        ]
+      ],
+      "sha256_matches_manifest": true,
+      "notes": "Static source review only; no runtime guarantees certified."
+    },
+    {
+      "path": "docs/adr/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          17
+        ]
+      ],
+      "sha256_matches_manifest": true,
+      "notes": "Static source review only; no runtime guarantees certified."
+    },
+    {
+      "path": "proof/bundles/attestation_bundle_v2/joint_digest",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          1
+        ]
+      ],
+      "sha256_matches_manifest": true,
+      "notes": "Static source review only; no runtime guarantees certified."
+    },
+    {
+      "path": "scripts/c5_demos/falsacion_semantic_entropy_stress.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          378
+        ]
+      ],
+      "sha256_matches_manifest": true,
+      "notes": "Static source review only; no runtime guarantees certified."
+    },
+    {
+      "path": "scripts/c5_quality_gates/detect_ghost_nodes.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          146
+        ]
+      ],
+      "sha256_matches_manifest": true,
+      "notes": "Static source review only; no runtime guarantees certified."
+    },
+    {
+      "path": "scripts/generate_scripts_readme.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          200
+        ]
+      ],
+      "sha256_matches_manifest": true,
+      "notes": "Static source review only; no runtime guarantees certified."
+    },
+    {
+      "path": "src/worm.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          837
+        ]
+      ],
+      "sha256_matches_manifest": true,
+      "notes": "Static source review only; no runtime guarantees certified."
+    },
+    {
+      "path": "tests/test_bounty_end_to_end_coupling.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          212
+        ]
+      ],
+      "sha256_matches_manifest": true,
+      "notes": "Static source review only; no runtime guarantees certified."
+    },
+    {
+      "path": "tests/test_pre_push_ledger_guard.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          87
+        ]
+      ],
+      "sha256_matches_manifest": true,
+      "notes": "Static source review only; no runtime guarantees certified."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare-one/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          176
+        ]
+      ],
+      "sha256_matches_manifest": true,
+      "notes": "Static source review only; no runtime guarantees certified."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/email-routing/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          196
+        ]
+      ],
+      "sha256_matches_manifest": true,
+      "notes": "Static source review only; no runtime guarantees certified."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/sandbox/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          194
+        ]
+      ],
+      "sha256_matches_manifest": true,
+      "notes": "Static source review only; no runtime guarantees certified."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workers/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          195
+        ]
+      ],
+      "sha256_matches_manifest": true,
+      "notes": "Static source review only; no runtime guarantees certified."
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/scripts/coremidi_bridge.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          96
+        ]
+      ],
+      "sha256_matches_manifest": true,
+      "notes": "Static source review only; no runtime guarantees certified."
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_20_accommodation_booking.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "sha256_matches_manifest": true,
+      "notes": "Static source review only; no runtime guarantees certified."
+    },
+    {
+      "path": "tools/skill_library/global/c5-neural-face-swap-cuadrilla/scripts/c5_smoother.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          714
+        ]
+      ],
+      "sha256_matches_manifest": true,
+      "notes": "Static source review only; no runtime guarantees certified."
+    },
+    {
+      "path": "tools/skill_library/global/c5-wetware-and-venture-ops/references/modules/c5-real-legaltech-analysis/scripts/legaltech_falsifier.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          234
+        ]
+      ],
+      "sha256_matches_manifest": true,
+      "notes": "Static source review only; no runtime guarantees certified."
+    },
+    {
+      "path": "tools/skill_library/global/youtube-analysis-pipeline/scripts/yt_audit.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          55
+        ]
+      ],
+      "sha256_matches_manifest": true,
+      "notes": "Static source review only; no runtime guarantees certified."
+    }
+  ],
+  "tool_limitations": [
+    "Native codebase graph tools are not exposed; used targeted text reads.",
+    "No repository tests, runtime commands, build, commit or push executed, as requested.",
+    "Third-party Cloudflare API statements were read as documentary examples; external accuracy not certified.",
+    "Initial full-manifest display was truncated; shard metadata and all assigned SHA-256 values were checked directly."
+  ],
+  "tests_run": []
+}

@@ -1,0 +1,35 @@
+{
+  "reviewer": "independent_verifier",
+  "reviewed_at_utc": "2026-10-29T23:31:35.938360+00:00",
+  "decision": "CODE_REVIEW_APPROVED_NATIVE_TESTS_AND_HARDWARE_PENDING",
+  "candidate": "b9640a52ca031d1978232255d31e69efb011f9b9",
+  "open_actionable_findings": [],
+  "resolved_findings": [
+    "PART-01: unrelated llm_attest correction excluded",
+    "HWREV-01: operator identity required",
+    "HWREV-02: canonical task comparison rejects bool/int substitution",
+    "HWREV-03: complete-response timeout enforced"
+  ],
+  "accepted_components": {
+    "partition": "partition-review.json",
+    "consolidation": "consolidation-review.json",
+    "ring2_code": "ring2-connection-review.json",
+    "ring2_independent_tests": "ring2-independent-tests.json",
+    "ring0_code": "ring0-inspection-review.json",
+    "profile": "profile-review.json",
+    "runner_falsification": [
+      "ring3-helper-probes.json",
+      "ring3-helper-probes-final.json",
+      "ring3-partial-line-probe.json",
+      "ring3-partial-line-probe-final.json"
+    ],
+    "independent_observer": "observer-falsification.json"
+  },
+  "runner_sha256": "0674a0056e4b032cb64d4c60b7be957bdc32f24917b8ef2218a99fe3fcc16d2d",
+  "pending": [
+    "Independent native MCP and runner tests with the final native library; no mandatory skips.",
+    "Final compiled gate/library hashes and clean candidate frozen.",
+    "One real operator-approved hardware attempt and independent observation."
+  ],
+  "hardware_attempts_by_reviewer": 0
+}

@@ -1,0 +1,66 @@
+[
+  {
+    "member": "attest.log",
+    "sha256": "3c30e39c13dcdca5cf4c3087e897cc62d23f15b742f10706448e375f289c58af"
+  },
+  {
+    "member": "markov.log",
+    "sha256": "495c0256ece6b92008f1b0c0e9159bbc3d5c9e2858cb4d32912327f4d8718345"
+  },
+  {
+    "member": "graphs.log",
+    "sha256": "d383630a024ca9a0d6aee749ef2ea4c35a8d01af417c4088754bf80c290ef6d6"
+  },
+  {
+    "member": "approval-experiment.log",
+    "sha256": "6df24331a0ee6261fcfb6e77a993f4038ef70656f842721c0ac25ad396af52ee"
+  },
+  {
+    "member": "work-native.log",
+    "sha256": "a2865d7bbf17fe5134d9c2a491e1c6caaf212eba5f98a139a84de5e8fd9aa8be"
+  },
+  {
+    "member": "lean-alignment.log",
+    "sha256": "ec233c76e08c5015262f9720e11a0b2f5fe19b95a1b43269b246858aeb44f090"
+  },
+  {
+    "member": "live-python.log",
+    "sha256": "5611818011bb5d857cf603a8612c9e1d5eb13100dda3c3f8f334128a3d1c3bb2"
+  },
+  {
+    "member": "confinement-live.log",
+    "sha256": "6f55531a8377c52efaca15852c4ace78730b5ddff6972fef54a92639adb3b200"
+  },
+  {
+    "member": "solver-adapter.log",
+    "sha256": "d542ada8bb9849dd6aec177dbd61aefd964eaebf9b4eb82bd0f203f68bd6ba8d"
+  },
+  {
+    "member": "solver-configured.log",
+    "sha256": "6259bdcc3c19f183a8b6509c9c4c689a574e533b72e9bf5cf841b41382d554ed"
+  },
+  {
+    "member": "solver-fixed.log",
+    "sha256": "5aaa5b1d75407280aa835ef27a4ebbce6728591682331b218cc6a9c1a85f4cce"
+  },
+  {
+    "member": "solver-serial.log",
+    "sha256": "32695adb71806b963f2f5d8ea2f3262220d2cebd70f74a1213d2a03aac5c0a43"
+  },
+  {
+    "member": "entropy-lib.log",
+    "sha256": "3010e40ac3b04bda455d8f0f97e0e0c3ce9ae50263da32754ab3f6e88eae320d"
+  },
+  {
+    "member": "entropy-regressions.log",
+    "sha256": "fc880f324907bc6ec1d84a4b540f29e8a1160844709c6518bb492042a93b7d66"
+  },
+  {
+    "member": "entropy-release.log",
+    "sha256": "13f06e9d9ad296281437cbeab60d6956fa2e146bebf800b1988532481357cf5c"
+  },
+  {
+    "member": "kripke-ruff.log",
+    "sha256": "9d4d17ab7e63caa4a29ab5b77738abd7c1ce646badfddbb4d3b84767308bdc78"
+  }
+]

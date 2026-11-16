@@ -1,0 +1,10 @@
+{
+  "selected": 30,
+  "collateral_state_preserved": 23,
+  "outside_prior_drift_state_preserved": 18,
+  "root_updates": 72,
+  "separate_duplicate_surface_retained_open": [
+    "SW100-C0461"
+  ],
+  "historical_round2_hash_rule": "Historical hash is not compared with current bytes only when a later fully validated root override exists; historical record remains in history."
+}

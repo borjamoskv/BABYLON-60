@@ -1,0 +1,41 @@
+{
+  "format_version": 1,
+  "run_id": null,
+  "condition": null,
+  "repetition": null,
+  "status": "not_started",
+  "started_at": null,
+  "started_monotonic_ns": null,
+  "first_technically_accepted_submission_seconds": null,
+  "resubmissions_after_first": null,
+  "attempts": [],
+  "human_review": {"status": "pending", "reviewer_blinded": null, "evidence": null},
+  "operator_observations": {
+    "new_chat_confirmed": null,
+    "prompt_delivered_unchanged": null,
+    "model_exposed": null,
+    "reasoning_effort_exposed": null,
+    "available_tools_observed": null,
+    "authorization_scope_observed": null,
+    "injected_instructions_observed": null,
+    "interventions_count": null,
+    "interventions_definition": "Mensajes humanos adicionales tras el prompt, excluida la entrega uniforme de resultados de aceptación.",
+    "operator_wait_seconds": null,
+    "agent_command_count": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost_amount": null,
+    "cost_currency": null,
+    "cost_source": null,
+    "transcript_or_event_evidence": null,
+    "notes": null
+  },
+  "metric_limits": [
+    "El intervalo automático va desde start hasta la entrega de un artefacto aceptado técnicamente; incluye demoras del operador.",
+    "No equivale a latencia de inferencia ni a tiempo activo del agente.",
+    "El retrabajo automático cuenta nuevas entregas después de la primera; no cuenta ediciones internas no observadas.",
+    "Los valores null son no observados y nunca se interpretan como cero.",
+    "Las observaciones manuales requieren una fuente; no deducir modelo, esfuerzo, tokens ni coste.",
+    "Los checks estructurales y unitarios no certifican el resto del runtime."
+  ]
+}

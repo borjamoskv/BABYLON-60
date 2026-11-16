@@ -1,0 +1,254 @@
+{
+  "reviewer": "03",
+  "date": "2026-10-29",
+  "lot": 9,
+  "decision": "APPROVED_WITH_EXPLICIT_SCOPE",
+  "open_actionable_findings": [],
+  "source_sha256": {
+    "scripts/c5_thermo/c5_exergy_optimizer_monitor.py": "1d82392ac3cddd6fd9b226b64c5a28562eea25de29fd5ac4afbbd9ea4cf50d2d"
+  },
+  "test_source_sha256": {
+    "tests/test_swarm100_lot9_regressions.py": "be2f18081837e889c5ccbb1ec8b9f552f0850c06d8651b4fdbea7b53fa81c710"
+  },
+  "harness_sha256": {
+    "docs/security/evidence/swarm100-lot9-20261029/independent-adversarial.py": "ee1157e960b2e92b42a64dbe8af4940872040ae2502d8c04392bd8d21a044497"
+  },
+  "unchanged_boundary_sha256": {
+    "scripts/c5_cortex/cortex_objectives_transducer.py": "18805a13c7a3c2853b8824c9424dbff05c2d27ebad9c89e2f3b2c98aaf7692ca",
+    "scripts/c5_verifiers/fast_smt_gate.py": "853cd9746178aede419bee382b6e6416482fdbfb8a5eb753269732e3d5e384c1",
+    "pyproject.toml": "50d4594dd2125fcbe7df0578394b5d2c2e6ac7c7dddb4b5fc9be68229eb8d0cd",
+    "uv.lock": "d78739746ac5d442a074ad73cbc7fc06d6e803558126f65fbc3d6d251d4c1fb4",
+    "Cargo.lock": "7c772f6e6ffd29594c5b9bdadb004be09c57af67b60b7be1b56c034a174491b4"
+  },
+  "candidates": [
+    {
+      "candidate_id": "SW100-C0438",
+      "decision": "REPRODUCED",
+      "severity": "P1",
+      "remediation_state": "FIXED",
+      "path": "scripts/c5_thermo/c5_exergy_optimizer_monitor.py",
+      "current_source_sha256": "1d82392ac3cddd6fd9b226b64c5a28562eea25de29fd5ac4afbbd9ea4cf50d2d",
+      "rationale": "The reproduced Git-integrity defect is fixed in scope: errors no longer become stdout success; signing and hooks are respected; no obsolete source is staged; only tracked STATUS is committed after a clean-index/root/state preflight. The caller runs preflight before producers, performs no amend or historical hash replacement, and does not print COMPLETE for rejection or no-op. Commit hash is returned only after parent/path/branch validation. This does not establish sandboxed hooks, same-file concurrent-writer isolation, or correctness of the monitor census/metrics/report digest.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_thermo/c5_exergy_optimizer_monitor.py",
+          "start_line": 56,
+          "end_line": 64,
+          "observation": "Rejects ambient repository/index/injected config selectors, uses literal pathspecs and GIT_OPTIONAL_LOCKS=0, preserves raw stdout bytes and raises on nonzero Git return. No signing override, hook bypass or silent failure."
+        },
+        {
+          "path": "scripts/c5_thermo/c5_exergy_optimizer_monitor.py",
+          "start_line": 67,
+          "end_line": 69,
+          "observation": "Decodes metadata explicitly using filesystem decoding; binary path/diff checks use _git_bytes directly."
+        },
+        {
+          "path": "scripts/c5_thermo/c5_exergy_optimizer_monitor.py",
+          "start_line": 79,
+          "end_line": 84,
+          "observation": "Reads index via O_NOFOLLOW/O_NONBLOCK, rejects nonregular files and snapshots bytes without reset/restore."
+        },
+        {
+          "path": "scripts/c5_thermo/c5_exergy_optimizer_monitor.py",
+          "start_line": 87,
+          "end_line": 132,
+          "observation": "Requires exact root/STATUS path, existing symbolic HEAD, no pending Git operation, normal index (no sparse/split/special flags), no prepared entries including intent-to-add, and tracked regular STATUS. Descriptor-based output check rejects symlinks/FIFO. Confirms index bytes and HEAD/branch are unchanged before returning baseline."
+        },
+        {
+          "path": "scripts/c5_thermo/c5_exergy_optimizer_monitor.py",
+          "start_line": 271,
+          "end_line": 300,
+          "observation": "Validates digest syntax and baseline, repeats preflight, returns None for genuine no-change. Uses one normal git commit --only -- STATUS.md, respects hooks/signing, propagates failure and checks parent/changed route/branch before returning full real hash. No add of obsolete source, amend, bypass or automatic rollback."
+        },
+        {
+          "path": "scripts/c5_thermo/c5_exergy_optimizer_monitor.py",
+          "start_line": 312,
+          "end_line": 367,
+          "observation": "Initial preflight precedes all audits/producers. Appends neutral COMMIT_REFERENCE_IN_STDOUT, performs one commit with the initial baseline, reports NO_CHANGE without COMPLETE on None. Prints commit hash only after successful helper return; no historical marker replacement or amend."
+        }
+      ],
+      "guards": [
+        "Raw bytes and check=True for Git errors",
+        "No bypass of signing configuration or hooks",
+        "Initial caller preflight before all producers and baseline comparison before commit",
+        "STATUS-only literal pathspec and --only",
+        "Prepared/special index rejected without rewriting it",
+        "No amend, manual staging, reset or automatic rollback",
+        "Explicit None/NO_CHANGE instead of reusing old HEAD as a new-commit proof"
+      ],
+      "runtime_executed": true,
+      "runtime_scope": "Owned temporary Git repositories, synthetic author, benign hooks/signing-failure recorder; all census/linter/test audits replaced, SQLite/network/process kill blocked. No real key or protected runtime.",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot9-20261029/independent-adversarial.py",
+        "docs/security/evidence/swarm100-lot9-20261029/independent-adversarial-initial.log",
+        "docs/security/evidence/swarm100-lot9-20261029/independent-regressions.log",
+        "docs/security/evidence/swarm100-lot9-20261029/independent-ruff.log",
+        "docs/security/evidence/swarm100-lot9-20261029/before-source-manifest.json",
+        "docs/security/evidence/swarm100-lot9-20261029/before-tests.log"
+      ]
+    }
+  ],
+  "source_checks": [
+    {
+      "path": "scripts/c5_thermo/c5_exergy_optimizer_monitor.py",
+      "start_line": 56,
+      "end_line": 64,
+      "observation": "Rejects ambient repository/index/injected config selectors, uses literal pathspecs and GIT_OPTIONAL_LOCKS=0, preserves raw stdout bytes and raises on nonzero Git return. No signing override, hook bypass or silent failure."
+    },
+    {
+      "path": "scripts/c5_thermo/c5_exergy_optimizer_monitor.py",
+      "start_line": 67,
+      "end_line": 69,
+      "observation": "Decodes metadata explicitly using filesystem decoding; binary path/diff checks use _git_bytes directly."
+    },
+    {
+      "path": "scripts/c5_thermo/c5_exergy_optimizer_monitor.py",
+      "start_line": 79,
+      "end_line": 84,
+      "observation": "Reads index via O_NOFOLLOW/O_NONBLOCK, rejects nonregular files and snapshots bytes without reset/restore."
+    },
+    {
+      "path": "scripts/c5_thermo/c5_exergy_optimizer_monitor.py",
+      "start_line": 87,
+      "end_line": 132,
+      "observation": "Requires exact root/STATUS path, existing symbolic HEAD, no pending Git operation, normal index (no sparse/split/special flags), no prepared entries including intent-to-add, and tracked regular STATUS. Descriptor-based output check rejects symlinks/FIFO. Confirms index bytes and HEAD/branch are unchanged before returning baseline."
+    },
+    {
+      "path": "scripts/c5_thermo/c5_exergy_optimizer_monitor.py",
+      "start_line": 271,
+      "end_line": 300,
+      "observation": "Validates digest syntax and baseline, repeats preflight, returns None for genuine no-change. Uses one normal git commit --only -- STATUS.md, respects hooks/signing, propagates failure and checks parent/changed route/branch before returning full real hash. No add of obsolete source, amend, bypass or automatic rollback."
+    },
+    {
+      "path": "scripts/c5_thermo/c5_exergy_optimizer_monitor.py",
+      "start_line": 312,
+      "end_line": 367,
+      "observation": "Initial preflight precedes all audits/producers. Appends neutral COMMIT_REFERENCE_IN_STDOUT, performs one commit with the initial baseline, reports NO_CHANGE without COMPLETE on None. Prints commit hash only after successful helper return; no historical marker replacement or amend."
+    },
+    {
+      "path": "scripts/c5_thermo/c5_exergy_optimizer_monitor.py",
+      "start_line": 253,
+      "end_line": 258,
+      "observation": "Existing function hashes STATUS content before append and ignores the report argument. This review does not claim a digest of the final appended document or report/census binding."
+    },
+    {
+      "path": "scripts/c5_thermo/c5_exergy_optimizer_monitor.py",
+      "start_line": 164,
+      "end_line": 182,
+      "observation": "Existing operator-database census is outside execution and remediation scope; fixtures replace it and block sqlite3.connect."
+    },
+    {
+      "path": "scripts/c5_thermo/c5_exergy_optimizer_monitor.py",
+      "start_line": 192,
+      "end_line": 221,
+      "observation": "Actual broad linter audit is never executed by reviewer fixtures; replaced with an inert result. Audit metric semantics are not closed by C0438."
+    },
+    {
+      "path": "scripts/c5_thermo/c5_exergy_optimizer_monitor.py",
+      "start_line": 237,
+      "end_line": 250,
+      "observation": "Actual broad test-running producer is never executed by reviewer fixtures; replaced with inert FIXTURE_ONLY data. Test/audit metric semantics remain outside the candidate."
+    }
+  ],
+  "independent_controls": [
+    {
+      "name": "git_errors_propagate_and_raw_bytes_preserved",
+      "passed": true
+    },
+    {
+      "name": "status_only_without_obsolete_source_or_foreign_capture",
+      "passed": true
+    },
+    {
+      "name": "three_hook_rejections_preserve_index_and_head_once",
+      "passed": true,
+      "cases": 3
+    },
+    {
+      "name": "initial_preflight_rejects_before_all_audits_or_writes",
+      "passed": true,
+      "cases": 2
+    },
+    {
+      "name": "caller_respects_signing_config_without_real_key_or_false_success",
+      "passed": true
+    },
+    {
+      "name": "caller_single_commit_no_amend_no_historical_rewrite",
+      "passed": true
+    },
+    {
+      "name": "noop_none_and_caller_no_change_without_commit_proof",
+      "passed": true
+    },
+    {
+      "name": "audit_interval_external_staging_rejected_and_preserved",
+      "passed": true
+    },
+    {
+      "name": "last_moment_foreign_staging_preserved_and_excluded",
+      "passed": true
+    },
+    {
+      "name": "status_type_and_path_override_rejected",
+      "passed": true,
+      "cases": 3
+    }
+  ],
+  "validation": {
+    "independent_control_count": 10,
+    "temporary_repositories": 15,
+    "git_command_count": 610,
+    "independent_log": "docs/security/evidence/swarm100-lot9-20261029/independent-adversarial-initial.log",
+    "regressions": {
+      "executed_by_reviewer": true,
+      "passed": 47,
+      "failed": 0,
+      "duration_seconds": 28.02,
+      "log": "docs/security/evidence/swarm100-lot9-20261029/independent-regressions.log"
+    },
+    "ruff": {
+      "executed_by_reviewer": true,
+      "result": "PASS",
+      "log": "docs/security/evidence/swarm100-lot9-20261029/independent-ruff.log",
+      "paths": [
+        "scripts/c5_thermo/c5_exergy_optimizer_monitor.py",
+        "tests/test_swarm100_lot9_regressions.py",
+        "docs/security/evidence/swarm100-lot9-20261029/independent-adversarial.py"
+      ]
+    },
+    "source_and_test_hashes_stable_before_after": true
+  },
+  "baseline": {
+    "source_sha256": "2f2b8cfcede8d34ad2f57ecfe765060debf85a946d2645ea38dd228e0196c861",
+    "result": "8 failed in 2.21s",
+    "log": "docs/security/evidence/swarm100-lot9-20261029/before-tests.log",
+    "execution": "Parent baseline reproduction log inspected; reviewer did not rerun original production."
+  },
+  "limitations": [
+    "Git/configuration/filters/hooks/signing programs are trusted executables. They are not sandboxed, and a hook can create effects before postvalidation detects unexpected state. No automatic destructive undo is attempted.",
+    "Whole-file STATUS selection does not separate prior edits by hunk and is not a global transaction against a concurrent writer preparing/changing that same file between checks and Git taking its lock. These boundaries match the explicitly accepted Lot 8 contract; no stronger isolation is claimed.",
+    "The original census, linter/test result semantics and report-ignored crystallize_status behavior remain outside C0438. The SHA3 is computed before the appended row; it is not asserted to bind the final document or complete report.",
+    "On a commit/signing/hook failure, a generated STATUS row may remain uncommitted. No rollback of producer writes or ledger-level transaction is claimed.",
+    "A missing/untracked STATUS, unsupported index/Git operation, or detached/unborn state requires an explicit separate intervention; this helper does not create/traverse alternate indexes or add new output paths automatically.",
+    "No actual monitor ran against this checkout or operator databases. No real audits, real signing key, hardware, native protected service, network, publication or ATTESTED generation occurred. Fixture signer only logs an invocation and exits with failure.",
+    "The 47 regressions and ten independent controls are scoped tests. They do not certify runtime metrics, audit correctness or future immutability of a branch."
+  ],
+  "discovery": {
+    "project": "babylon-60",
+    "root": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+    "method": "Native graph search/snippets/inbound traces and coverage first; after source change, bounded source reads and completed asynchronous reindex.",
+    "final_generation": "2026-10-29T21:24:39Z",
+    "freshness": "metadata_match",
+    "production_caller": "c5_real_colapso",
+    "caveat": "Best-effort graph evidence corroborated with current source and hashes."
+  },
+  "evidence_paths": [
+    "docs/security/evidence/swarm100-lot9-20261029/independent-adversarial.py",
+    "docs/security/evidence/swarm100-lot9-20261029/independent-adversarial-initial.log",
+    "docs/security/evidence/swarm100-lot9-20261029/independent-regressions.log",
+    "docs/security/evidence/swarm100-lot9-20261029/independent-ruff.log",
+    "docs/security/evidence/swarm100-lot9-20261029/before-source-manifest.json",
+    "docs/security/evidence/swarm100-lot9-20261029/before-tests.log"
+  ]
+}

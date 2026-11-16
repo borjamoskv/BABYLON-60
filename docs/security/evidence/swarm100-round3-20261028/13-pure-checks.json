@@ -1,0 +1,26 @@
+{
+  "scope": "isolated current-source AST bodies; not full package/runtime integration",
+  "checks": [
+    {
+      "candidate_id": "SW100-C0280",
+      "source_sha256": "f3c58fd2b30604fc96445d2b2f1f375f1f5b4495a06f591eb5939706bdf4892e",
+      "observation": "ASCII control round-trips; encoding U+20AC raises KeyError before and after training on U+20AC alone."
+    },
+    {
+      "candidate_id": "SW100-C0181",
+      "source_sha256": "71fbf235a5134fe2a65224a535a0c5319318a86617d06d26aeabd40ca84a2204",
+      "observation": "set(key,value) returns None without error, then get(key) returns None. Only the exported class body was executed."
+    },
+    {
+      "candidate_id": "SW100-C0062",
+      "source_sha256": "d7747b65250fa8292a301082981ccd89830c53f815dd410dd87bc120becb57e1",
+      "observation": "Unsigned synthetic future certificate gets valid=True/ACTIVE; revoked and expired controls reject. No certificate exporter initialization or signer was executed."
+    },
+    {
+      "candidate_id": "SW100-C0479",
+      "source_sha256": "6bdc252dd232ff94e0f6a95d4e03ae15045f198239baa189c2c33b7bc15e3062",
+      "observation": "Calling the extracted function with only json_output=True emits ATTESTED and bound 0.021 without model/data inputs. No scientific computation or validation inferred."
+    }
+  ],
+  "passed": 4
+}

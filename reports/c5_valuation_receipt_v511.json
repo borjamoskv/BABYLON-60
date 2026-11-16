@@ -1,0 +1,84 @@
+{
+  "schema": "https://babylon60.com/schemas/c5-valuation-receipt/v1.json",
+  "target_repository": "borjamoskv/BABYLON-60",
+  "version_tag": "v5.1.1",
+  "methodology": "COCOMO-II-Post-Architecture + C5-Epistemic-Gating",
+  "silicon_metrics": {
+    "total_physical_loc": 604000,
+    "effective_logical_ksloc": 192.0,
+    "language_breakdown": {
+      "lean4_formal_proofs": {
+        "files": 637,
+        "loc": 183000,
+        "share_pct": 30.3,
+        "effort_multiplier": 2.15,
+        "proprietary_ring0_breakdown": {
+          "proprietary_files": 26,
+          "proprietary_loc": 20133,
+          "verified_theorems_and_lemmas": 144,
+          "formal_declarations_total": 372,
+          "lake_toolchain_files": 611,
+          "lake_toolchain_loc": 162867
+        }
+      },
+      "rust_layer0_el0_kernel": {
+        "loc": 155200,
+        "share_pct": 25.7,
+        "effort_multiplier": 1.65
+      },
+      "python_kish_edin_orchestration": {
+        "loc": 265800,
+        "share_pct": 44.0,
+        "effort_multiplier": 1.15
+      }
+    }
+  },
+  "epistemic_verification": {
+    "claims_total": 33,
+    "claims_stratification": {
+      "L1_FORMAL": 3,
+      "L2_IMPLEMENTATION": 18,
+      "L3_ISOLATION": 4,
+      "L4_EXPERIMENTAL": 8
+    },
+    "active_release_manifest_claims": {
+      "total": 28,
+      "L1_FORMAL": 2,
+      "L2_IMPLEMENTATION": 17,
+      "L3_ISOLATION": 2,
+      "L4_EXPERIMENTAL": 7,
+      "evidence_root": "sha3-256:411e0639ecb6239f73bee9483865abae653b4931dcfa49b984f5340f38eeea20"
+    },
+    "failures": 0,
+    "sbom_audited_packages": {
+      "rust_crates": 498,
+      "python_packages": 203
+    },
+    "bitcoin_anchor_block": 974412
+  },
+  "economic_valuation_eur": {
+    "rely_cplx_weighted_effort_person_months": 468.0,
+    "minimum_schedule_compression_months": 20.5,
+    "gross_clean_room_replacement_cost_eur": 5264000,
+    "epistemic_quality_premium_multiplier": 1.25,
+    "single_author_bus_factor_discount": 0.45,
+    "el0_alpha_scope_discount": 0.10,
+    "net_risk_adjusted_ip_floor_eur": 3257100,
+    "case_study_zero_bus_factor_discount": 0.18,
+    "case_study_zero_net_ip_floor_eur": 4200000,
+    "self_hosting_compression_ratio_kappa": "30x-39x"
+  },
+  "commercial_contract_anchors": {
+    "contract_ref": "contracts/ENTERPRISE_LICENSE.md",
+    "provenance_ref": "contracts/IP_PROVENANCE.md",
+    "enterprise_pilot_eur": 15000,
+    "enterprise_pilot_human_effort_hours": 9.5,
+    "enterprise_pilot_gross_margin_pct": 92.4,
+    "production_cluster_annual_eur": 60000,
+    "target_enterprise_acv_eur": "180000-240000",
+    "jurisdiction": [
+      "Delaware, USA",
+      "Basque Autonomous Law (Bizkaia, EU)"
+    ]
+  }
+}

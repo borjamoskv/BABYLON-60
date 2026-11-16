@@ -1,0 +1,26 @@
+{
+  "description": "Historical real native challenge. Cryptographic regression fixture, not current hardware attestation or release authorization.",
+  "response": {
+    "challenge": {
+      "backend_digest": "ab7e4bcbc006857e9e2b2935c906dc1490659afc4bc1ecfaffdd9354d4112d52",
+      "binary_sha256": "9163e5ad9b0626e3970cb0c082b63d81fd99370e872007714c4f2c4b5daa3ea2",
+      "nonce": "7599684e43c2310b80d5c5a78d866717723b153f0494e7e50d349d046db8260d",
+      "purpose": "INDEPENDENT_VALIDATION_ONLY",
+      "schema": "babylon60.euai.native_validation.v1"
+    },
+    "measurement_status": "UNAVAILABLE",
+    "public_key_hex": "044968f7f4ef3e90a256996bf3378fe15453e82bc87ef43570bbcf37329cc47e33444a74c53d4157d65cd441f3d092b780109d7c7a8cc494ca916fa335ce54cf28",
+    "publication_authorized": false,
+    "signature_hex": "27e79ac1f1831194e04dfb721ca96c06bf7c68eab6c8f7f6bab72077eaf64a85b0416f8c3a1f77841579ed8dfb7d8a690467a60fb00258c0cef1a7dbd1d996d4",
+    "status": "REQUIRES_INDEPENDENT_REVIEW"
+  },
+  "expected_challenge": {
+    "backend_digest": "ab7e4bcbc006857e9e2b2935c906dc1490659afc4bc1ecfaffdd9354d4112d52",
+    "binary_sha256": "9163e5ad9b0626e3970cb0c082b63d81fd99370e872007714c4f2c4b5daa3ea2",
+    "nonce": "7599684e43c2310b80d5c5a78d866717723b153f0494e7e50d349d046db8260d",
+    "purpose": "INDEPENDENT_VALIDATION_ONLY",
+    "schema": "babylon60.euai.native_validation.v1"
+  },
+  "provisioned_public_key_hex": "044968f7f4ef3e90a256996bf3378fe15453e82bc87ef43570bbcf37329cc47e33444a74c53d4157d65cd441f3d092b780109d7c7a8cc494ca916fa335ce54cf28",
+  "observed_at": 1793328648
+}

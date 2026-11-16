@@ -1,0 +1,342 @@
+{
+  "shard": "029",
+  "findings": [
+    {
+      "title": "Malformed CRL files silently become certificate-ID literals",
+      "severity": "P1",
+      "path": "01_KISH_ENGINE/babylon60/verifier/cli.py",
+      "line": 78,
+      "evidence": "parse_crl_arg catches every JSON/read exception and falls back to splitting the original file path (lines 78-81); main passes that list to verify_compliance_certificate at 118-123. standalone_verify.py:713 only revokes when certificate_id occurs in that list.",
+      "trigger": "An explicitly supplied CRL file is truncated, invalid JSON, or cannot be read while the certificate otherwise validates.",
+      "impact": "The CLI can report a revoked certificate valid because the requested revocation source was ignored without error. Fail closed for file parse/read/schema errors.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Proposal endpoint reports postconditions VERIFIED without checking an effect",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/mcp/skills_snapshot.py",
+      "line": 902,
+      "evidence": "Lines 881-898 inspect only optional simulated_execution_result, and actual_file_sha256 defaults to the reported value. Lines 900-909 unconditionally emit VERIFIED, independent-verifier evidence and postconditions_checked despite effects_executed=0. cortex_mcp_server.py:1412-1418 returns this payload directly; effect_dispatch.py:56 categorizes this endpoint as read-only.",
+      "trigger": "A caller proposes a validated mutation with matching caller-supplied pre-hashes and omits simulated_execution_result.",
+      "impact": "MCP consumers receive false verification evidence for a proposal with no independently observed postcondition. This finding concerns returned assurance; no native execution authorization bypass is established.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Directory linter skips arbitrary source paths containing build or dist",
+      "severity": "P2",
+      "path": "tools/skill_library/workspace/c5-anti-slop-ui/scripts/audit_ui_slop.py",
+      "line": 130,
+      "evidence": "audit_directory tests ignored substrings against the entire root path and returns no violations for skipped roots; main lines 157-159 prints compliance and exits zero for an empty result.",
+      "trigger": "Audit a source tree under a path such as /tmp/build-review/src or /tmp/distribution-ui containing frontend violations.",
+      "impact": "All matching directories silently escape inspection and the tool reports compliance. Match directory components and report empty coverage explicitly.",
+      "confidence": "high",
+      "kind": "runtime"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".agents/skills/c5-cortex-swarm-orchestrator-project/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          48
+        ]
+      ],
+      "inventory_hash": "match",
+      "note": "Static text review; no execution."
+    },
+    {
+      "path": ".roorules",
+      "status": "metadata_only",
+      "ranges": [],
+      "inventory_hash": "not_applicable",
+      "note": "Symlink target inspected by readlink only: .babylon60rules"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/__init__.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          29
+        ]
+      ],
+      "inventory_hash": "match",
+      "note": "Static text review; no execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/core/crypto.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          19
+        ]
+      ],
+      "inventory_hash": "match",
+      "note": "Static text review; no execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/mcp/skills_snapshot.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          1036
+        ]
+      ],
+      "inventory_hash": "match",
+      "note": "Static text review; no execution."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/verifier/cli.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          191
+        ]
+      ],
+      "inventory_hash": "match",
+      "note": "Static text review; no execution."
+    },
+    {
+      "path": "contracts/ENTERPRISE_LICENSE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          49
+        ]
+      ],
+      "inventory_hash": "match",
+      "note": "Static text review; no execution."
+    },
+    {
+      "path": "docs/03_guides/guide_babylon60_complete.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          163
+        ]
+      ],
+      "inventory_hash": "match",
+      "note": "Static text review; no execution."
+    },
+    {
+      "path": "docs/security/evidence/external-audit-remediation-2026-10-24/publication-documentation-gates.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          32
+        ]
+      ],
+      "inventory_hash": "match",
+      "note": "Static text review; no execution."
+    },
+    {
+      "path": "proof/lean/BabylonOracle.lean",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          65
+        ]
+      ],
+      "inventory_hash": "match",
+      "note": "Static text review; no execution."
+    },
+    {
+      "path": "scripts/c5_demos/poc_b1_b2.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          77
+        ]
+      ],
+      "inventory_hash": "match",
+      "note": "Static text review; no execution."
+    },
+    {
+      "path": "scripts/c5_quality_gates/prompt_exergy_oracle.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          455
+        ]
+      ],
+      "inventory_hash": "match",
+      "note": "Static text review; no execution."
+    },
+    {
+      "path": "scripts/lead_data_policy.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          74
+        ]
+      ],
+      "inventory_hash": "match",
+      "note": "Static text review; no execution."
+    },
+    {
+      "path": "tests/cold_start_regressions.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          171
+        ]
+      ],
+      "inventory_hash": "match",
+      "note": "Static text review; no execution."
+    },
+    {
+      "path": "tests/test_cognitive_pilot_runner.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          120
+        ]
+      ],
+      "inventory_hash": "match",
+      "note": "Static text review; no execution."
+    },
+    {
+      "path": "tests/test_semantic_contracts_gate.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          266
+        ]
+      ],
+      "inventory_hash": "match",
+      "note": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/ai-search/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          138
+        ]
+      ],
+      "inventory_hash": "match",
+      "note": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/graphql-api/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          175
+        ]
+      ],
+      "inventory_hash": "match",
+      "note": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/snippets/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          198
+        ]
+      ],
+      "inventory_hash": "match",
+      "note": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/wrangler/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          197
+        ]
+      ],
+      "inventory_hash": "match",
+      "note": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/suno-bracket-tagging/references/neural_audio_engineering_handbook.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          85
+        ]
+      ],
+      "inventory_hash": "match",
+      "note": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_33_site_playbooks_expedia.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "inventory_hash": "match",
+      "note": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/c5-ring0-babylon-kernel/references/modules/c5-larsa-120/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          85
+        ]
+      ],
+      "inventory_hash": "match",
+      "note": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/global/cortex-skill-auditor/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          41
+        ]
+      ],
+      "inventory_hash": "match",
+      "note": "Static text review; no execution."
+    },
+    {
+      "path": "tools/skill_library/workspace/c5-anti-slop-ui/scripts/audit_ui_slop.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          172
+        ]
+      ],
+      "inventory_hash": "match",
+      "note": "Static text review; no execution."
+    }
+  ],
+  "tool_limitations": [
+    "Native graph discovery returned no exposed search_graph/index_repository tools; used targeted text reads and rg.",
+    "Audit-only: no tests, runtime, builds, external API schema verification or physical claims validation. Cloudflare reference compatibility not certified.",
+    "Read AGENTS.md and .babylon60rules. Preserved dirty worktree; report is the only written artifact."
+  ],
+  "tests_run": []
+}

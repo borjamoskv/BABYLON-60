@@ -1,0 +1,373 @@
+{
+  "shard": "097",
+  "findings": [
+    {
+      "title": "SIGTERM seals the ledger without terminating the intercepted child",
+      "severity": "P2",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/bft_interceptor.rs",
+      "line": 237,
+      "evidence": "Signals only set shutdown_flag (181-182); the wait loop exits on it, seals, and returns (237-253). No kill or wait follows a signal.",
+      "trigger": "Send SIGTERM/SIGINT while the spawned real CLI is still running.",
+      "impact": "The wrapper exits and reports closure while its child can continue running and modifying files outside the monitoring lifetime.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Persistence failures are discarded while closure is reported successful",
+      "severity": "P2",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/bft_interceptor.rs",
+      "line": 248,
+      "evidence": "FS_EVENT inserts discard Result at 211; CLOSURE_SEAL insert discards Result at 248 followed by unconditional closure output at 249-250 and Ok at 253.",
+      "trigger": "An insert fails, for example because another writer advanced the head (122-123), disk is full, or SQLite rejects the write.",
+      "impact": "Events or the final seal are absent despite successful process status and closure output; callers cannot distinguish audit loss.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Specification-only consolidation emits verified and consolidated results",
+      "severity": "P2",
+      "path": "02_EDIN_SWARMS/agents_archi/topologies/babylon21_consolidation.py",
+      "line": 561,
+      "evidence": "Missing evaluator sets verified=True (561-563), and consolidated derives solely from verified_count (619). main_dispatcher.py:807-832 passes None unless --execute and serializes these fields; JSON lacks a mode field.",
+      "trigger": "Call execute_consolidation without a gate evaluator, or the CLI consolidate21 JSON path without --execute.",
+      "impact": "Consumers receive 21 verified outcomes and consolidated=true without running gates. This is a misleading evidence receipt, not evidence of a runtime authorization bypass.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Timed-out consolidation gate subprocesses are left running",
+      "severity": "P2",
+      "path": "02_EDIN_SWARMS/agents_archi/topologies/babylon21_consolidation.py",
+      "line": 652,
+      "evidence": "create_subprocess_shell at 638 and wait_for(proc.communicate()) at 644-647 are followed by timeout return at 652-653, with no terminate/kill/wait cleanup.",
+      "trigger": "A gate exceeds timeout_s; cmd_consolidate21 --execute supplies this evaluator (main_dispatcher.py:807-812).",
+      "impact": "The gate and shell descendants can continue consuming resources and writing output after the topology reports timeout, overlapping later work.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Canonical seal digest changes with optional dependency installation",
+      "severity": "P2",
+      "path": "02_EDIN_SWARMS/agents_archi/topologies/babylon21_consolidation.py",
+      "line": 38,
+      "evidence": "_canonical_blake3_hex returns BLAKE3 when import succeeds (35-37), otherwise prefixed SHA-256 (38-39). Both flow into identical receipt fields without an algorithm identifier.",
+      "trigger": "Replay the same logical tick and outcomes in environments with and without blake3.",
+      "impact": "Identical causal data yields incompatible evidence, squad and Merkle digests despite the deterministic canonical receipt contract.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "BFT persistence explicitly weakens required durability",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/kernel/bft_db_async.py",
+      "line": 16,
+      "evidence": "persist_bft_event sets journal_mode=WAL then synchronous=NORMAL before commit; the canonical rules require transactional persistence synchronous=FULL.",
+      "trigger": "A caller uses persist_bft_event and the host loses power after an acknowledged commit.",
+      "impact": "The helper provides weaker durability than its BFT persistence contract. No production callers were found in targeted Python searches, so deployed reachability is not established.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Deskimming dry-run writes and replaces its audit receipt",
+      "severity": "P2",
+      "path": "scripts/c5_orchestrator/c5_session_deskimming_engine.py",
+      "line": 102,
+      "evidence": "--dry-run is documented as simulate without writing (111), but audit directories are created at import (30-31) and receipt_file is opened with w unconditionally (102-104).",
+      "trigger": "Run the script with --dry-run after a prior real receipt exists.",
+      "impact": "The preview mutates the filesystem and overwrites prior audit evidence with a simulated receipt.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Autocognition audit asserts checks it never performs",
+      "severity": "P2",
+      "path": "scripts/c5_verifiers/verify_anergy_token_purge.py",
+      "line": 185,
+      "evidence": "Generated YAML hardcodes ANNIHILATED_ZERO_CIRCULAR_LOOPS, 0 ruff issues/0 clippy warnings, no orphaned branches and ZERO_NOISE_ACCUMULATION_VERIFIED (185-190). The function only computes transcript metrics then persists the artifact.",
+      "trigger": "Run run_autocognition_audit in a checkout with lint issues, orphan branches, loops, or no transcript (103-112).",
+      "impact": "The produced audit declares verified cleanup and tool results without obtaining them, creating false evidence for downstream readers.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Explicit conversation selection is ignored in favor of another session",
+      "severity": "P2",
+      "path": "scripts/c5_verifiers/verify_anergy_token_purge.py",
+      "line": 28,
+      "evidence": "get_conversation_id evaluates environment values without assigning/returning them at 28; it selects the UUID directory with newest mtime at 43-45, which feeds TRANSCRIPT_PATH at 52.",
+      "trigger": "Set CONVERSATION_ID or ANTIGRAVITY_CONVERSATION_ID to an active session while another UUID directory has newer mtime.",
+      "impact": "The audit reads and attributes metrics to a different conversation, breaking its stated active-session scope.",
+      "confidence": "high",
+      "kind": "runtime"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".github/labeler.yml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          53
+        ]
+      ],
+      "inventory_match": true
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/bft_interceptor.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          453
+        ]
+      ],
+      "inventory_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/cognitive_pilot/review.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          174
+        ]
+      ],
+      "inventory_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/bft_db_async.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          25
+        ]
+      ],
+      "inventory_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/utils/landauer_utils.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          12
+        ]
+      ],
+      "inventory_match": true
+    },
+    {
+      "path": "02_EDIN_SWARMS/agents_archi/topologies/babylon21_consolidation.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          657
+        ]
+      ],
+      "inventory_match": true
+    },
+    {
+      "path": "deploy/manifests/manifest_v4.2.0_sealed.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          53
+        ]
+      ],
+      "inventory_match": true
+    },
+    {
+      "path": "docs/COMMERCIAL_LICENSE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          68
+        ]
+      ],
+      "inventory_match": true
+    },
+    {
+      "path": "install.sh",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          99
+        ]
+      ],
+      "inventory_match": true
+    },
+    {
+      "path": "scripts/c5_demos/c5_biometric_gate.swift",
+      "status": "metadata_only",
+      "ranges": [],
+      "target": "../../01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift",
+      "inventory_match": true
+    },
+    {
+      "path": "scripts/c5_orchestrator/c5_session_deskimming_engine.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          118
+        ]
+      ],
+      "inventory_match": true
+    },
+    {
+      "path": "scripts/c5_verifiers/verify_anergy_token_purge.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          250
+        ]
+      ],
+      "inventory_match": true
+    },
+    {
+      "path": "src/lib.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          139
+        ]
+      ],
+      "inventory_match": true
+    },
+    {
+      "path": "tests/test_audit_resource_limits.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          182
+        ]
+      ],
+      "inventory_match": true
+    },
+    {
+      "path": "tests/test_memory_governance_falsification.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          620
+        ]
+      ],
+      "inventory_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/agents-sdk/references/human-in-the-loop.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          67
+        ]
+      ],
+      "inventory_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/ddos/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          41
+        ]
+      ],
+      "inventory_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/r2-sql/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          118
+        ]
+      ],
+      "inventory_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workers-ai/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          97
+        ]
+      ],
+      "inventory_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/examples/Bill_Evans_Rootless_Voicings.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          74
+        ]
+      ],
+      "inventory_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_01_routines.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          62
+        ]
+      ],
+      "inventory_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/cta-cognitive-transition-algebra/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          67
+        ]
+      ],
+      "inventory_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-sre-postmortem-architect/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "inventory_match": true
+    },
+    {
+      "path": "tools/skill_library/global/remotion-audio-reactive-video/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "inventory_match": true
+    }
+  ],
+  "tool_limitations": [
+    "No native codebase-memory graph tools exposed in this session; discovered tool metadata contained no search_graph/index_repository/get_architecture. Used targeted source reads and rg.",
+    "Static audit only; no repository runtime or tests executed. External API examples were inspected textually; no current external API/version claims were independently verified.",
+    "No physical deletion, hardware attestation, legal compliance, or deployed authorization guarantees inferred from source text. All assigned text hashes matched inventory; symlink target matched and was not followed."
+  ],
+  "tests_run": []
+}

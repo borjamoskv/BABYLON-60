@@ -1,0 +1,104 @@
+FFFFFF                                                                   [100%]
+=================================== FAILURES ===================================
+_______ test_c0132_unknown_selector_rejects_before_credentials_or_client _______
+
+fixture = namespace(module=<module 'swarm_lot6_fixture' from '/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/01_KISH_ENGINE/...'https://api.moonshot.cn/v1/chat/completions')>], clients=[{'timeout': 120.0}], responses=[], dotenv_reads=['blocked'])
+
+    @pytest.mark.asyncio
+    async def test_c0132_unknown_selector_rejects_before_credentials_or_client(fixture):
+        m=fixture.module
+>       with pytest.raises(m.SecurityError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE SecurityError
+
+tests/test_swarm100_lot6_regressions.py:62: Failed
+_ test_c0133_http_provider_override_rejects_before_credentials[MOONSHOT_REMOTE-MOONSHOT_API_URL-http://api.moonshot.cn/v1/chat/completions] _
+
+fixture = namespace(module=<module 'swarm_lot6_fixture' from '/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/01_KISH_ENGINE/... 'http://api.moonshot.cn/v1/chat/completions')>], clients=[{'timeout': 120.0}], responses=[], dotenv_reads=['blocked'])
+backend = 'MOONSHOT_REMOTE', variable = 'MOONSHOT_API_URL'
+url = 'http://api.moonshot.cn/v1/chat/completions'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize('backend,variable,url',[
+        ('MOONSHOT_REMOTE','MOONSHOT_API_URL','http://api.moonshot.cn/v1/chat/completions'),
+        ('OPENROUTER_REMOTE','OPENROUTER_API_URL','http://openrouter.ai/api/v1/chat/completions')])
+    async def test_c0133_http_provider_override_rejects_before_credentials(fixture,backend,variable,url):
+        m=fixture.module
+        fixture.env[variable]=url
+>       with pytest.raises(m.SecurityError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE SecurityError
+
+tests/test_swarm100_lot6_regressions.py:75: Failed
+_ test_c0133_http_provider_override_rejects_before_credentials[OPENROUTER_REMOTE-OPENROUTER_API_URL-http://openrouter.ai/api/v1/chat/completions] _
+
+fixture = namespace(module=<module 'swarm_lot6_fixture' from '/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/01_KISH_ENGINE/...http://openrouter.ai/api/v1/chat/completions')>], clients=[{'timeout': 120.0}], responses=[], dotenv_reads=['blocked'])
+backend = 'OPENROUTER_REMOTE', variable = 'OPENROUTER_API_URL'
+url = 'http://openrouter.ai/api/v1/chat/completions'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize('backend,variable,url',[
+        ('MOONSHOT_REMOTE','MOONSHOT_API_URL','http://api.moonshot.cn/v1/chat/completions'),
+        ('OPENROUTER_REMOTE','OPENROUTER_API_URL','http://openrouter.ai/api/v1/chat/completions')])
+    async def test_c0133_http_provider_override_rejects_before_credentials(fixture,backend,variable,url):
+        m=fixture.module
+        fixture.env[variable]=url
+>       with pytest.raises(m.SecurityError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE SecurityError
+
+tests/test_swarm100_lot6_regressions.py:75: Failed
+_ test_explicit_endpoint_cannot_bypass_provider_validation[MOONSHOT_REMOTE-moonshot_url-http://api.moonshot.cn/v1/chat/completions] _
+
+fixture = namespace(module=<module 'swarm_lot6_fixture' from '/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/01_KISH_ENGINE/... 'http://api.moonshot.cn/v1/chat/completions')>], clients=[{'timeout': 120.0}], responses=[], dotenv_reads=['blocked'])
+backend = 'MOONSHOT_REMOTE', field = 'moonshot_url'
+url = 'http://api.moonshot.cn/v1/chat/completions'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize('backend,field,url',[
+        ('MOONSHOT_REMOTE','moonshot_url','http://api.moonshot.cn/v1/chat/completions'),
+        ('OPENROUTER_REMOTE','openrouter_url','http://openrouter.ai/api/v1/chat/completions')])
+    async def test_explicit_endpoint_cannot_bypass_provider_validation(fixture,backend,field,url):
+        m=fixture.module
+>       with pytest.raises(m.SecurityError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE SecurityError
+
+tests/test_swarm100_lot6_regressions.py:88: Failed
+_ test_explicit_endpoint_cannot_bypass_provider_validation[OPENROUTER_REMOTE-openrouter_url-http://openrouter.ai/api/v1/chat/completions] _
+
+fixture = namespace(module=<module 'swarm_lot6_fixture' from '/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/01_KISH_ENGINE/...http://openrouter.ai/api/v1/chat/completions')>], clients=[{'timeout': 120.0}], responses=[], dotenv_reads=['blocked'])
+backend = 'OPENROUTER_REMOTE', field = 'openrouter_url'
+url = 'http://openrouter.ai/api/v1/chat/completions'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize('backend,field,url',[
+        ('MOONSHOT_REMOTE','moonshot_url','http://api.moonshot.cn/v1/chat/completions'),
+        ('OPENROUTER_REMOTE','openrouter_url','http://openrouter.ai/api/v1/chat/completions')])
+    async def test_explicit_endpoint_cannot_bypass_provider_validation(fixture,backend,field,url):
+        m=fixture.module
+>       with pytest.raises(m.SecurityError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE SecurityError
+
+tests/test_swarm100_lot6_regressions.py:88: Failed
+_______________________ test_import_does_not_load_dotenv _______________________
+
+fixture = namespace(module=<module 'swarm_lot6_fixture' from '/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/01_KISH_ENGINE/...NROUTER_API_KEY': 'fixture-openrouter-secret'}, reads=[], posts=[], clients=[], responses=[], dotenv_reads=['blocked'])
+
+    def test_import_does_not_load_dotenv(fixture):
+>       assert fixture.dotenv_reads==[]
+E       AssertionError: assert ['blocked'] == []
+E         
+E         Left contains one more item: 'blocked'
+E         Use -v to get more diff
+
+tests/test_swarm100_lot6_regressions.py:95: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_swarm100_lot6_regressions.py::test_c0132_unknown_selector_rejects_before_credentials_or_client
+FAILED tests/test_swarm100_lot6_regressions.py::test_c0133_http_provider_override_rejects_before_credentials[MOONSHOT_REMOTE-MOONSHOT_API_URL-http://api.moonshot.cn/v1/chat/completions]
+FAILED tests/test_swarm100_lot6_regressions.py::test_c0133_http_provider_override_rejects_before_credentials[OPENROUTER_REMOTE-OPENROUTER_API_URL-http://openrouter.ai/api/v1/chat/completions]
+FAILED tests/test_swarm100_lot6_regressions.py::test_explicit_endpoint_cannot_bypass_provider_validation[MOONSHOT_REMOTE-moonshot_url-http://api.moonshot.cn/v1/chat/completions]
+FAILED tests/test_swarm100_lot6_regressions.py::test_explicit_endpoint_cannot_bypass_provider_validation[OPENROUTER_REMOTE-openrouter_url-http://openrouter.ai/api/v1/chat/completions]
+FAILED tests/test_swarm100_lot6_regressions.py::test_import_does_not_load_dotenv
+6 failed in 0.32s

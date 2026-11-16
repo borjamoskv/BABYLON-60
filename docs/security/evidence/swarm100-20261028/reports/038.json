@@ -1,0 +1,444 @@
+{
+  "shard": "038",
+  "findings": [
+    {
+      "title": "Do not unlink SQLite journals based solely on their suffix",
+      "severity": "P1",
+      "path": "scripts/repatriated/c5_sharur_100_anergy_purge.py",
+      "line": 98,
+      "evidence": "run_cohort_1 unlinks every .db-wal/.db-shm under WORKSPACE and CORTEX_DIR; no connection, checkpoint, liveness or orphan check precedes unlink. main invokes it unconditionally.",
+      "trigger": "Run this purge while a non-protected SQLite database has committed WAL pages not checkpointed into the main file.",
+      "impact": "The script can remove durable committed pages and disrupt active database coordination; the comment calling these files orphans does not establish that they are orphaned.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Normalize rational ticks before returning them",
+      "severity": "P2",
+      "path": "crates/b60-lang/src/arithmetic.rs",
+      "line": 29,
+      "evidence": "from_rational constructs Tick60 directly with seconds unchanged and sexa_units=num*factor, while new normalizes units and sub/derived ordering rely on normalized seconds.",
+      "trigger": "Tick60::from_rational(0, 60, 60) produces (0,FRACTION_BASE), whereas Tick60::new(1,0) produces (1,0).",
+      "impact": "Equivalent durations compare unequal and sub of the former minus the latter incorrectly returns underflow. Use the normalizing constructor and define overflow handling.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Reject oversized content or return the exact bytes that were filtered",
+      "severity": "P1",
+      "path": "01_KISH_ENGINE/babylon60/core/popperian_filter.py",
+      "line": 112,
+      "evidence": "evaluate_payload truncates only its local text variable then can return passed=True with truncated=True. browser_agent.py:109-135 accepts passed, stores raw_payload, attests raw_payload and returns raw_payload.",
+      "trigger": "A fetched payload has an acceptable first MAX_PAYLOAD_BYTES characters containing an anchor, followed by content that the filter would reject.",
+      "impact": "The unexamined suffix is emitted and cached as VERIFIED_AND_ATTESTED; this is a demonstrated source-level consumer mismatch, not a claim about OS containment. Reject oversize data or propagate a filtered payload.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Preserve poisoning when the example writer is called again",
+      "severity": "P2",
+      "path": "scripts/c5_demos/poc_kish_shell_sovereign_transducer.rs",
+      "line": 31,
+      "evidence": "write loads any seqlock value and overwrites it with seq+1 then seq+2; poison stores 0xDEAD_6060, but write never checks it.",
+      "trigger": "In the standalone example, call poison(), then write(), then read().",
+      "impact": "The supposedly irreversible fail-stop becomes a readable live state. The existing test only reads immediately after poison and misses this transition; no production adoption is asserted.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Limit Lean cleanup to verified disposable build products",
+      "severity": "P2",
+      "path": "scripts/repatriated/c5_sharur_100_anergy_purge.py",
+      "line": 175,
+      "evidence": "The comment scopes cleanup to obsolete caches in archived projects, but traversal covers all WORKSPACE and rmtree removes the complete .lake directory without archive/state checks.",
+      "trigger": "Run the script with an active unprotected Lean project under ~/10_PROJECTS.",
+      "impact": "Deletes active fetched dependencies and any local changes under .lake/packages, and removes artifacts needed by subsequent verification. The implementation does not enforce its stated archived-only scope.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Label model arithmetic separately from physical thermodynamic evidence",
+      "severity": "P2",
+      "path": "scripts/c5_demos/poc_kish_shell_sovereign_transducer.rs",
+      "line": 166,
+      "evidence": "bits_erased_json=1024*iterations and bits_erased_shm=0 are fixed assumptions; the harness times single-process simulated JSON formatting and local manifest calls, then prints that every thermodynamic invariant passed at line 192.",
+      "trigger": "Use the PoC output as the evidence promised by its empirical falsification/thermodynamic verdict.",
+      "impact": "The verdict overstates the actual checks: no physical energy measurement, real IPC transfer, or erasure accounting is performed. Restrict the conclusion to the local example and explicitly declared model assumptions.",
+      "confidence": "high",
+      "kind": "example"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/borrowck.rs",
+      "line": 144,
+      "observation": "FieldPtr is ignored by the checker although it produces an address used by the x86 backend; no internal BorrowChecker caller was found in the compiler subtree.",
+      "hypothesis": "Clients that check field-address loads may reject valid allocations as UseAfterFree because destination provenance is absent. No runtime bypass claimed; integration and external callers remain unverified."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/static-assets/README.md",
+      "line": 13,
+      "observation": "Quick-start configuration specifies assets.directory but handler references env.ASSETS; no assets.binding is shown.",
+      "hypothesis": "Example likely requires an explicit ASSETS binding. External current API semantics were not checked, so this remains a documentation hypothesis."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".agents/skills/c5-epistemic-thermodynamics-project/references/modules/c5-alpha-extraction-pipeline/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          49
+        ]
+      ],
+      "sha256_expected": "7551f806aa480382f9a2ac2fdb554b1f6bef3f812eaefec18cb95c4acc70ced2",
+      "sha256_observed": "7551f806aa480382f9a2ac2fdb554b1f6bef3f812eaefec18cb95c4acc70ced2",
+      "hash_changed": false,
+      "notes": "All text read in <=200-line chunks; static inspection only."
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/borrowck.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          147
+        ]
+      ],
+      "sha256_expected": "216410300c2868ed6e501bd44dfdbb422c9186180de28cdf86ca72bb3e3060f4",
+      "sha256_observed": "216410300c2868ed6e501bd44dfdbb422c9186180de28cdf86ca72bb3e3060f4",
+      "hash_changed": false,
+      "notes": "All text read in <=200-line chunks; static inspection only."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/agents/sovereign_mcp/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          43
+        ]
+      ],
+      "sha256_expected": "96adb270ee677e9e1ee13c346e23da04fe15eec90bd7763cf319dcfc05b99408",
+      "sha256_observed": "96adb270ee677e9e1ee13c346e23da04fe15eec90bd7763cf319dcfc05b99408",
+      "hash_changed": false,
+      "notes": "All text read in <=200-line chunks; static inspection only."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/core/popperian_filter.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          211
+        ]
+      ],
+      "sha256_expected": "371150377d929d086bd465398a67ee6811f1e310a834d989aec3ad37183a8b3b",
+      "sha256_observed": "371150377d929d086bd465398a67ee6811f1e310a834d989aec3ad37183a8b3b",
+      "hash_changed": false,
+      "notes": "All text read in <=200-line chunks; static inspection only."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/onboarding.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          680
+        ]
+      ],
+      "sha256_expected": "f2dc1bb9c5d8ee3f30ca983fd54578fc997f31d19db3de71234777427cda81fb",
+      "sha256_observed": "f2dc1bb9c5d8ee3f30ca983fd54578fc997f31d19db3de71234777427cda81fb",
+      "hash_changed": false,
+      "notes": "All text read in <=200-line chunks; static inspection only."
+    },
+    {
+      "path": "01_KISH_ENGINE/cortex/crates/cortex-core/Cargo.toml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          14
+        ]
+      ],
+      "sha256_expected": "3d4eee6a7655c069b12ad7636ce481b8939bf2d5ab43ec7f5e91eb2ce34edc2a",
+      "sha256_observed": "3d4eee6a7655c069b12ad7636ce481b8939bf2d5ab43ec7f5e91eb2ce34edc2a",
+      "hash_changed": false,
+      "notes": "All text read in <=200-line chunks; static inspection only."
+    },
+    {
+      "path": "crates/b60-lang/src/arithmetic.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          56
+        ]
+      ],
+      "sha256_expected": "bc58dc521b4bf5040ec203e34e311f47b9c8639939b7065acec029bbb00588d4",
+      "sha256_observed": "bc58dc521b4bf5040ec203e34e311f47b9c8639939b7065acec029bbb00588d4",
+      "hash_changed": false,
+      "notes": "All text read in <=200-line chunks; static inspection only."
+    },
+    {
+      "path": "docs/03_guides/guide_fl_pkg_01.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          134
+        ]
+      ],
+      "sha256_expected": "d6b42321f32bf0abd804fa0cb672d0bbd6673aac4fcc495ffe47455c2bdad529",
+      "sha256_observed": "d6b42321f32bf0abd804fa0cb672d0bbd6673aac4fcc495ffe47455c2bdad529",
+      "hash_changed": false,
+      "notes": "All text read in <=200-line chunks; static inspection only."
+    },
+    {
+      "path": "docs/security/evidence/harness-audit-2026-10-24/mirror-manifest.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          106
+        ]
+      ],
+      "sha256_expected": "82f77891b6e9301134855b3d57fedc036d33e2ccaf81f052afcc79c5c061cabb",
+      "sha256_observed": "82f77891b6e9301134855b3d57fedc036d33e2ccaf81f052afcc79c5c061cabb",
+      "hash_changed": false,
+      "notes": "All text read in <=200-line chunks; static inspection only."
+    },
+    {
+      "path": "proof/lean/HolographicPoC.lean",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          24
+        ]
+      ],
+      "sha256_expected": "d51f82f9967190657371ee7d43188dc140c6871b7c3680822599bd8cb595af72",
+      "sha256_observed": "d51f82f9967190657371ee7d43188dc140c6871b7c3680822599bd8cb595af72",
+      "hash_changed": false,
+      "notes": "All text read in <=200-line chunks; static inspection only."
+    },
+    {
+      "path": "scripts/c5_demos/poc_kish_shell_sovereign_transducer.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          194
+        ]
+      ],
+      "sha256_expected": "265991fe57674dabbaf7caaeceaf9551b8cce325925c75e6603ba663d758d33e",
+      "sha256_observed": "265991fe57674dabbaf7caaeceaf9551b8cce325925c75e6603ba663d758d33e",
+      "hash_changed": false,
+      "notes": "All text read in <=200-line chunks; static inspection only."
+    },
+    {
+      "path": "scripts/c5_quality_gates/sync_docs_index.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          125
+        ]
+      ],
+      "sha256_expected": "748f57a3c360f0ecfb86c9b772dbc447b54e11363b89282b5ec2103a380249d4",
+      "sha256_observed": "748f57a3c360f0ecfb86c9b772dbc447b54e11363b89282b5ec2103a380249d4",
+      "hash_changed": false,
+      "notes": "All text read in <=200-line chunks; static inspection only."
+    },
+    {
+      "path": "scripts/repatriated/c5_sharur_100_anergy_purge.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          399
+        ]
+      ],
+      "sha256_expected": "f0a21461244d7c362a9c5e4699f832a0f151fa7519eac020374056ae31de74ad",
+      "sha256_observed": "f0a21461244d7c362a9c5e4699f832a0f151fa7519eac020374056ae31de74ad",
+      "hash_changed": false,
+      "notes": "All text read in <=200-line chunks; static inspection only."
+    },
+    {
+      "path": "tests/fixtures/nonce_sync_sigkill_interpose.c",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          94
+        ]
+      ],
+      "sha256_expected": "1ce41dffe2206dedfba4931b9c375bb55dedc5bf4a9fe5f399ced598245b323f",
+      "sha256_observed": "1ce41dffe2206dedfba4931b9c375bb55dedc5bf4a9fe5f399ced598245b323f",
+      "hash_changed": false,
+      "notes": "All text read in <=200-line chunks; static inspection only."
+    },
+    {
+      "path": "tests/test_cortex_bpe_tokenizer.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          45
+        ]
+      ],
+      "sha256_expected": "c3f331b5d0dc3d058ca4302554703233d1e69788c4b0cbe198352afe0e6a17fe",
+      "sha256_observed": "c3f331b5d0dc3d058ca4302554703233d1e69788c4b0cbe198352afe0e6a17fe",
+      "hash_changed": false,
+      "notes": "All text read in <=200-line chunks; static inspection only."
+    },
+    {
+      "path": "tests/test_skill_intent_routing.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          74
+        ]
+      ],
+      "sha256_expected": "ee0f2482e97877a6949a7eeb4d3a6372c2faff7f6e84f401e6b8f0409c8ba570",
+      "sha256_observed": "ee0f2482e97877a6949a7eeb4d3a6372c2faff7f6e84f401e6b8f0409c8ba570",
+      "hash_changed": false,
+      "notes": "All text read in <=200-line chunks; static inspection only."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/analytics-engine/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          83
+        ]
+      ],
+      "sha256_expected": "092079ff8831b03a0e9267ed30ab8915936c9e09cf089389203d3ed858ffb5e7",
+      "sha256_observed": "092079ff8831b03a0e9267ed30ab8915936c9e09cf089389203d3ed858ffb5e7",
+      "hash_changed": false,
+      "notes": "All text read in <=200-line chunks; static inspection only."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/images/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          61
+        ]
+      ],
+      "sha256_expected": "981ad62f9a8874469e523a16f43741f3a564b13f0dc21bbf8c695ffa83ed2a7a",
+      "sha256_observed": "981ad62f9a8874469e523a16f43741f3a564b13f0dc21bbf8c695ffa83ed2a7a",
+      "hash_changed": false,
+      "notes": "All text read in <=200-line chunks; static inspection only."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/static-assets/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          65
+        ]
+      ],
+      "sha256_expected": "ef31f6ca300cb5fb1f111a626f6d92ef2b5b48a3ed97c2203874c33a2f38c0e8",
+      "sha256_observed": "ef31f6ca300cb5fb1f111a626f6d92ef2b5b48a3ed97c2203874c33a2f38c0e8",
+      "hash_changed": false,
+      "notes": "All text read in <=200-line chunks; static inspection only."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/durable-objects/references/rules.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          295
+        ]
+      ],
+      "sha256_expected": "b1087f99c424364dd4c4bc6f99ad076646a6f65435a87c6393c354e745cf9b94",
+      "sha256_observed": "b1087f99c424364dd4c4bc6f99ad076646a6f65435a87c6393c354e745cf9b94",
+      "hash_changed": false,
+      "notes": "All text read in <=200-line chunks; static inspection only."
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents/agent_06_send_on_behalf.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          61
+        ]
+      ],
+      "sha256_expected": "6e72f2ddaae787cb5a8cb8d161eaaf2203e923e44751c69d1f98ff26a754f767",
+      "sha256_observed": "6e72f2ddaae787cb5a8cb8d161eaaf2203e923e44751c69d1f98ff26a754f767",
+      "hash_changed": false,
+      "notes": "All text read in <=200-line chunks; static inspection only."
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_42_site_playbooks_resy.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "sha256_expected": "0480013264ce394efb22bfbde180817ad5e7b2769314e9c553bca4b8c18f6204",
+      "sha256_observed": "0480013264ce394efb22bfbde180817ad5e7b2769314e9c553bca4b8c18f6204",
+      "hash_changed": false,
+      "notes": "All text read in <=200-line chunks; static inspection only."
+    },
+    {
+      "path": "tools/skill_library/global/c5-ring0-babylon-kernel/references/modules/opentimestamps-l5-diagnostics/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          58
+        ]
+      ],
+      "sha256_expected": "4d05fc060052483e83f8c8a8cefc1b69a9c72df48e55c89f0255ebc81cd347d9",
+      "sha256_observed": "4d05fc060052483e83f8c8a8cefc1b69a9c72df48e55c89f0255ebc81cd347d9",
+      "hash_changed": false,
+      "notes": "All text read in <=200-line chunks; static inspection only."
+    },
+    {
+      "path": "tools/skill_library/global/electron-asar-forensic-audit/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "sha256_expected": "b575bdcd8ee6047318237bdf1b0189008e448b576ab538d312f05eb00d3c3876",
+      "sha256_observed": "b575bdcd8ee6047318237bdf1b0189008e448b576ab538d312f05eb00d3c3876",
+      "hash_changed": false,
+      "notes": "All text read in <=200-line chunks; static inspection only."
+    },
+    {
+      "path": "tools/skill_library/workspace/c5-epistemic-thermodynamics-project/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          44
+        ]
+      ],
+      "sha256_expected": "be6450afa9db9a6b9d9b3a2b5fb53473e40869f717fbdca296daf7ac5274944e",
+      "sha256_observed": "be6450afa9db9a6b9d9b3a2b5fb53473e40869f717fbdca296daf7ac5274944e",
+      "hash_changed": false,
+      "notes": "All text read in <=200-line chunks; static inspection only."
+    }
+  ],
+  "tool_limitations": [
+    "Native codebase-memory graph tools were not exposed (ALL_TOOLS search for search_graph/index_repository returned empty); used targeted source reads and rg.",
+    "No runtime, compilation, test, network service or external documentation verification was performed, per audit-only scope.",
+    "Only assigned paths have full coverage; supporting cross-file snippets were inspected for evidence and do not imply complete cross-file coverage.",
+    "Initial and final assigned-path SHA-256 checks match shard manifest."
+  ],
+  "tests_run": []
+}

@@ -1,0 +1,16 @@
+{
+  "scope": "Original source loaded from captured baseline; explicit temporary DB/Lean directory and installed compiler, no operator data",
+  "source_sha256": "e0f85cdf754c6d4ea3e1367176dd7eb3caa296a82d07eb86f7f976b5b70cf85c",
+  "lean_binary": "/Users/borjafernandezangulo/.elan/toolchains/leanprover--lean4---v4.35.0/bin/lean",
+  "precondition": "False",
+  "report": {
+    "total_evaluated": 1,
+    "results": [
+      {
+        "cluster_id": "abcdef1234567890",
+        "status": "PROVED",
+        "path": "/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/b60-original-proof-2ocxzyv1/lean/Destiladora_abcdef1234567890.lean"
+      }
+    ]
+  }
+}

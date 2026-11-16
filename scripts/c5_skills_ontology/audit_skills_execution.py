@@ -18,12 +18,18 @@ import time
 from pathlib import Path
 
 # Add project root and ontology scripts to sys.path
-REPO_ROOT = Path(__file__).resolve().parent.parent.parent
+REPO_ROOT = Path(__file__).absolute().parent.parent.parent
 ONTOLOGY_SCRIPTS = REPO_ROOT / "scripts" / "c5_skills_ontology"
 if str(ONTOLOGY_SCRIPTS) not in sys.path:
     sys.path.insert(0, str(ONTOLOGY_SCRIPTS))
 
+import c5_skill_router
 from c5_skill_router import collect_all_skills, load_canonical_data
+
+REPO_GLOBAL_SKILLS = REPO_ROOT / "tools" / "skill_library" / "global"
+if REPO_GLOBAL_SKILLS.is_dir():
+    c5_skill_router.GLOBAL_SKILLS_DIR = REPO_GLOBAL_SKILLS
+    c5_skill_router.GLOBAL_SKILLS_JSON = REPO_GLOBAL_SKILLS / "skills.json"
 
 
 def run_full_skills_audit() -> bool:
@@ -63,13 +69,13 @@ def run_full_skills_audit() -> bool:
 
     print("\n--- Intent Resolution Benchmark Suite ---")
     test_benchmarks = [
-        ("Deep Research & arXiv", "deep research arXiv", "c5-alpha-extraction-pipeline"),
+        ("Alpha Extraction & arXiv", "alpha extraction pipeline arXiv", "c5-alpha-extraction-pipeline"),
         ("Existence Gap Audit", "auditar existencia de imports ghost", "existence-gap-audit"),
         ("Categorical Hallucination", "audit alucinacion categorica Markov", "categorical-hallucination-audit"),
         ("Thermo Audit & Branch Review", "thermos audit revision termonuclear de rama", "c5-thermos-audit"),
-        ("Cloudflare Workers", "desplegar worker cloudflare", "cloudflare-mcp-usage"),
+        ("LARSA Consensus", "consenso bft isostatico larsa-120", "c5-larsa-120"),
         ("Swarm Quantum Collapse", "orquestar enjambre swarm quantum collapse", "swarm-quantum-collapse"),
-        ("FL Studio MCP DSP", "generar script piano roll FL Studio MIDI", "flstudio-mcp-production"),
+        ("Mushushu Firewall", "firewall epistemico mushushu-0 apoptosis", "c5-mushushu-0"),
         ("Handoff Protocol", "handoff traspaso de contexto y sesion", "handoff"),
         ("Linguistic Entropy Audit", "auditoría de entropía de lenguaje", "c5-information-thermodynamics"),
         ("Typo-Resilient Entropy Route", "auditorai de entropai de lenguaje", "c5-information-thermodynamics"),

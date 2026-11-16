@@ -1,0 +1,16 @@
+{
+  "command": [
+    "uv",
+    "run",
+    "--locked",
+    "--no-sync",
+    "pytest",
+    "tests/test_swarm100_lot12_s2_identity_regressions.py",
+    "-q",
+    "-o",
+    "addopts=--tb=short"
+  ],
+  "exit_code": 1,
+  "test_sha256": "641a4387b5932c443005e8f9a1572553a88a8c70789ae6e2a77730357cf87295",
+  "log_sha256": "c7827df5a4962c677fed0f90b3df29668358f40235ec6e4004326532098ed2f7"
+}

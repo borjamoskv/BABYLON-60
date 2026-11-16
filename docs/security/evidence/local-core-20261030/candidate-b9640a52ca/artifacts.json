@@ -1,0 +1,16 @@
+{
+  "revision": "b9640a52ca031d1978232255d31e69efb011f9b9",
+  "artifacts": {
+    "/Users/borjafernandezangulo/.codex/worktrees/local-core-integration/BABYLON-60/01_KISH_ENGINE/babylon60/guards/c5_biometric_gate": {
+      "sha256": "9b799dbd8804229bc34d41f72a61203313ed35fd0327117d606f58e2e8c65f47",
+      "blake3": "0197d1edcbab5aa434f2d4c44b5c190d6c02ae7d9d3d16580bfca33f87ac5974",
+      "size": 162496
+    },
+    "/Users/borjafernandezangulo/.codex/local-core-evidence/capture-20261029T230935Z/candidate-b9640a52ca/libbabylon60.dylib": {
+      "sha256": "66319a746759aab2e01ec32a815d3932ef846c3054246a9e1c86ffc2de1211ad",
+      "blake3": "e18992001a78b6675234ddf19da9e0ad5918b7a75c25ac15892eb53ece1dd0d8",
+      "size": 2845680
+    }
+  },
+  "source_swift_sha256": "79b6ea08597c31f5b39a705464823dd0d23175f189c8005d0e84c9d385d7a92d"
+}

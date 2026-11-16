@@ -1,0 +1,54 @@
+..FFFFF                                                                  [100%]
+=================================== FAILURES ===================================
+__ test_emit_rejects_verify_only_options_before_writing[--outreach-manifest] ___
+tests/test_swarm100_lot1_regressions.py:277: in test_emit_rejects_verify_only_options_before_writing
+    attestation.main()
+tools/tamkarum_attestation_engine.py:197: in main
+    generate_attestation_statement()
+tests/test_swarm100_lot1_regressions.py:274: in <lambda>
+    monkeypatch.setattr(attestation, "generate_attestation_statement", lambda: pytest.fail("Must not emit"))
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: Must not emit
+___ test_emit_rejects_verify_only_options_before_writing[--social-calendar] ____
+tests/test_swarm100_lot1_regressions.py:277: in test_emit_rejects_verify_only_options_before_writing
+    attestation.main()
+tools/tamkarum_attestation_engine.py:197: in main
+    generate_attestation_statement()
+tests/test_swarm100_lot1_regressions.py:274: in <lambda>
+    monkeypatch.setattr(attestation, "generate_attestation_statement", lambda: pytest.fail("Must not emit"))
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: Must not emit
+___ test_emit_rejects_verify_only_options_before_writing[--compliance-pack] ____
+tests/test_swarm100_lot1_regressions.py:277: in test_emit_rejects_verify_only_options_before_writing
+    attestation.main()
+tools/tamkarum_attestation_engine.py:197: in main
+    generate_attestation_statement()
+tests/test_swarm100_lot1_regressions.py:274: in <lambda>
+    monkeypatch.setattr(attestation, "generate_attestation_statement", lambda: pytest.fail("Must not emit"))
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: Must not emit
+___ test_emit_rejects_verify_only_options_before_writing[--expected-commit] ____
+tests/test_swarm100_lot1_regressions.py:277: in test_emit_rejects_verify_only_options_before_writing
+    attestation.main()
+tools/tamkarum_attestation_engine.py:197: in main
+    generate_attestation_statement()
+tests/test_swarm100_lot1_regressions.py:274: in <lambda>
+    monkeypatch.setattr(attestation, "generate_attestation_statement", lambda: pytest.fail("Must not emit"))
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: Must not emit
+_ test_emit_rejects_verify_only_options_before_writing[--expected-topology-sha256] _
+tests/test_swarm100_lot1_regressions.py:277: in test_emit_rejects_verify_only_options_before_writing
+    attestation.main()
+tools/tamkarum_attestation_engine.py:197: in main
+    generate_attestation_statement()
+tests/test_swarm100_lot1_regressions.py:274: in <lambda>
+    monkeypatch.setattr(attestation, "generate_attestation_statement", lambda: pytest.fail("Must not emit"))
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: Must not emit
+=========================== short test summary info ============================
+FAILED tests/test_swarm100_lot1_regressions.py::test_emit_rejects_verify_only_options_before_writing[--outreach-manifest]
+FAILED tests/test_swarm100_lot1_regressions.py::test_emit_rejects_verify_only_options_before_writing[--social-calendar]
+FAILED tests/test_swarm100_lot1_regressions.py::test_emit_rejects_verify_only_options_before_writing[--compliance-pack]
+FAILED tests/test_swarm100_lot1_regressions.py::test_emit_rejects_verify_only_options_before_writing[--expected-commit]
+FAILED tests/test_swarm100_lot1_regressions.py::test_emit_rejects_verify_only_options_before_writing[--expected-topology-sha256]
+5 failed, 2 passed, 55 deselected in 0.32s

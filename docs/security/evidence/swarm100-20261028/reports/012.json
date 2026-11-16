@@ -1,0 +1,401 @@
+{
+  "shard": "012",
+  "findings": [
+    {
+      "title": "Negative compliance statuses render as successful",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/compliance_exporter/template_engine.py",
+      "line": 275,
+      "evidence": "status_ok uses substring PASS or CUMPLIDO; both fallback line 381 and templates/compliance_matrix.html.j2:17 render this boolean as a green check.",
+      "trigger": "An article status is INCUMPLIDO, NO CUMPLIDO, or NOT PASSED.",
+      "impact": "A failing article is visually marked compliant in exported audit reports.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Mock inference panics on a UTF-8 byte boundary",
+      "severity": "P2",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/gateway/tier3.rs",
+      "line": 366,
+      "evidence": "&prompt[..prompt.len().min(32)] slices a Rust str at byte 32 without checking a character boundary.",
+      "trigger": "Call MockLocalBackend.infer with 31 ASCII characters followed by a multibyte character.",
+      "impact": "The mock panics instead of returning Tier3Error, breaking non-ASCII PoC/stress inputs.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Attestation digest does not delimit content from model identity",
+      "severity": "P2",
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/gateway/tier3.rs",
+      "line": 82,
+      "evidence": "Hasher updates content bytes followed immediately by model_id bytes, without lengths or separators.",
+      "trigger": "Compare attested(content=\"ab\", model_id=\"c\") with attested(content=\"a\", model_id=\"bc\").",
+      "impact": "Different content/model pairs receive identical content_hash without a cryptographic collision; this digest cannot uniquely bind the pair.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "I/O demo deletes a preexisting database in the working directory",
+      "severity": "P2",
+      "path": "scripts/c5_demos/falsacion_io_sync.py",
+      "line": 14,
+      "evidence": "db_path is the fixed relative name falsacion_agentes.db; existing file is removed before opening, and removed again at line 29.",
+      "trigger": "Run the demo in a directory containing a database with that name.",
+      "impact": "Existing user data is irreversibly removed; use an owned temporary file.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Branch protection enforcement suppresses API failures",
+      "severity": "P2",
+      "path": "scripts/enforce_c5_rules.sh",
+      "line": 18,
+      "evidence": "gh api PUT failure is handled by || echo; execution then reaches the success-style dispatched message and exits successfully. Missing gh also exits 0 at line 14.",
+      "trigger": "GitHub rejects the branch protection request or gh is unavailable.",
+      "impact": "Automation can treat enforcement as successful while required branch protections were never applied.",
+      "confidence": "high",
+      "kind": "runtime"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "tools/skill_library/global/c5-wetware-and-venture-ops/references/modules/c5-2e-neuropharmacological-sovereignty/MODULE.md",
+      "line": 34,
+      "description": "Module directs changing routine stimulant use to isolated PRN and provides supplement doses; no prescriber review is required in the text. Clinical claims and appropriate treatment require medical-source review; no medical factual validation or runtime application performed."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".agents/skills/_skill_router.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          165
+        ]
+      ],
+      "sha256_expected": "35df8cc5f7a550646ab4c4f0e0afe99b0c2408e20ddc860487b634b04f6b6aa4",
+      "sha256_actual": "35df8cc5f7a550646ab4c4f0e0afe99b0c2408e20ddc860487b634b04f6b6aa4",
+      "hash_match": true
+    },
+    {
+      "path": ".github/workflows/macos-native.yml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          62
+        ]
+      ],
+      "sha256_expected": "7b7ecdb9f699aacc6a387e0b5dbfd5c4daae4429f9ef5d266cb96d5a183bdb44",
+      "sha256_actual": "7b7ecdb9f699aacc6a387e0b5dbfd5c4daae4429f9ef5d266cb96d5a183bdb44",
+      "hash_match": true
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/gateway/tier3.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          499
+        ]
+      ],
+      "sha256_expected": "fadac1e715e582527ad3470a9045a866d1297d2ed7e489c3609ed52d91fcacd2",
+      "sha256_actual": "fadac1e715e582527ad3470a9045a866d1297d2ed7e489c3609ed52d91fcacd2",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/compliance_exporter/template_engine.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          563
+        ]
+      ],
+      "sha256_expected": "48f9e8044083caf21308d2ab10abc88375679ff59bf21fce4af42fa69ea04559",
+      "sha256_actual": "48f9e8044083caf21308d2ab10abc88375679ff59bf21fce4af42fa69ea04559",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/kimi_client.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          85
+        ]
+      ],
+      "sha256_expected": "68f59ae3f3ce07b2577eb7e79e09352839c7eae9c803b533290d0db5cba2fc34",
+      "sha256_actual": "68f59ae3f3ce07b2577eb7e79e09352839c7eae9c803b533290d0db5cba2fc34",
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/utils/watchdog_poc_v3.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          31
+        ]
+      ],
+      "sha256_expected": "644980f6ff8b3d14ae5c23852ff3bd675efe10f94c6b6f8e4acaef9d06af1994",
+      "sha256_actual": "644980f6ff8b3d14ae5c23852ff3bd675efe10f94c6b6f8e4acaef9d06af1994",
+      "hash_match": true
+    },
+    {
+      "path": "CODEOWNERS",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          1
+        ]
+      ],
+      "sha256_expected": "7f01409df8f421029a9bd9732ee90f4f30f9024abbc32b51ab7d0d801dd643de",
+      "sha256_actual": "7f01409df8f421029a9bd9732ee90f4f30f9024abbc32b51ab7d0d801dd643de",
+      "hash_match": true
+    },
+    {
+      "path": "docs/01_spec/spec_invariants.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          69
+        ]
+      ],
+      "sha256_expected": "ea7500a3a435709e7f7e9e32c8e2c2f5b34e7a5bb825d02563d0707c8bd6b503",
+      "sha256_actual": "ea7500a3a435709e7f7e9e32c8e2c2f5b34e7a5bb825d02563d0707c8bd6b503",
+      "hash_match": true
+    },
+    {
+      "path": "docs/adr/ADR-004-taint-tracking-isolation.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          56
+        ]
+      ],
+      "sha256_expected": "5e0f31b0a9c82d3f6d7a06ffaabd51c370e090e0faf44998713af70768fd3ac8",
+      "sha256_actual": "5e0f31b0a9c82d3f6d7a06ffaabd51c370e090e0faf44998713af70768fd3ac8",
+      "hash_match": true
+    },
+    {
+      "path": "proof/bundles/attestation_bundle_v2/claims_manifest.sha256",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          1
+        ]
+      ],
+      "sha256_expected": "30c67fed36a138d251b00771cab2c67f83e4869787ed94e1aa606f92a7f623fd",
+      "sha256_actual": "30c67fed36a138d251b00771cab2c67f83e4869787ed94e1aa606f92a7f623fd",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_demos/falsacion_io_sync.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          52
+        ]
+      ],
+      "sha256_expected": "0994977891ebdd5f0a7247265a4f2f3583816bf880a26d6d59ea2c227319552e",
+      "sha256_actual": "0994977891ebdd5f0a7247265a4f2f3583816bf880a26d6d59ea2c227319552e",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_quality_gates/check_openrouter_free_catalog.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          127
+        ]
+      ],
+      "sha256_expected": "fc15c74de6459da4bb31ad4ce164cabb849a3a34f40336551e6e4c06e4477a31",
+      "sha256_actual": "fc15c74de6459da4bb31ad4ce164cabb849a3a34f40336551e6e4c06e4477a31",
+      "hash_match": true
+    },
+    {
+      "path": "scripts/enforce_c5_rules.sh",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          37
+        ]
+      ],
+      "sha256_expected": "a7b07433c48575a0ece594a092d3f9915f82a6c2e57464bfd747f4f788186edc",
+      "sha256_actual": "a7b07433c48575a0ece594a092d3f9915f82a6c2e57464bfd747f4f788186edc",
+      "hash_match": true
+    },
+    {
+      "path": "src/spsc_ring.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          197
+        ]
+      ],
+      "sha256_expected": "2a962e2182616eb17ff6448bc558fa6eb5bb4fc8a0672e8298f4daa47efc539f",
+      "sha256_actual": "2a962e2182616eb17ff6448bc558fa6eb5bb4fc8a0672e8298f4daa47efc539f",
+      "hash_match": true
+    },
+    {
+      "path": "tests/test_bittensor_yuma_consensus.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          104
+        ]
+      ],
+      "sha256_expected": "6fe99cb1b846a58cd0ffa6e6e0eadc87a7127f02817578e7e09aeaa85b871064",
+      "sha256_actual": "6fe99cb1b846a58cd0ffa6e6e0eadc87a7127f02817578e7e09aeaa85b871064",
+      "hash_match": true
+    },
+    {
+      "path": "tests/test_opsec_zero_secret_gate.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          182
+        ]
+      ],
+      "sha256_expected": "93316805dbf0140cba48fe78628ca99aa0d5cf3f4d869e4cb39d5310941e0bf7",
+      "sha256_actual": "93316805dbf0140cba48fe78628ca99aa0d5cf3f4d869e4cb39d5310941e0bf7",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare-email-service/references/rest-api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          184
+        ]
+      ],
+      "sha256_expected": "edc9da52397ed70db9a0a520d5d7d075d6acd396fd8637e34c6dc1252a3303e7",
+      "sha256_actual": "edc9da52397ed70db9a0a520d5d7d075d6acd396fd8637e34c6dc1252a3303e7",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/durable-objects/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          201
+        ]
+      ],
+      "sha256_expected": "752d12fc802a901c67864486e266bf035be2901569ad1ebded79b587356b6284",
+      "sha256_actual": "752d12fc802a901c67864486e266bf035be2901569ad1ebded79b587356b6284",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/realtimekit/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          223
+        ]
+      ],
+      "sha256_expected": "6deff54b73b75100eeac50039ad068ea89325fa9eb2834d3d37f8cea962b0527",
+      "sha256_actual": "6deff54b73b75100eeac50039ad068ea89325fa9eb2834d3d37f8cea962b0527",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workers-vpc/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          147
+        ]
+      ],
+      "sha256_expected": "2bff2271b75ed4db399fe927324e6304577fef7022b19e4a6631a3bd415482de",
+      "sha256_actual": "2bff2271b75ed4db399fe927324e6304577fef7022b19e4a6631a3bd415482de",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/examples/TB303_Acid_Pattern_Generator.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          93
+        ]
+      ],
+      "sha256_expected": "ae19dbe63abfa49963f832ffc9aadde0df61d4c2e32cc1fffeed3f6507077a5d",
+      "sha256_actual": "ae19dbe63abfa49963f832ffc9aadde0df61d4c2e32cc1fffeed3f6507077a5d",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_16_no_connector_fallback.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "sha256_expected": "376de1a172717e8543e7ee17546ad9e978d4826946879862781d660f1a5c74f1",
+      "sha256_actual": "376de1a172717e8543e7ee17546ad9e978d4826946879862781d660f1a5c74f1",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-metodo-acreativo/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "sha256_expected": "258ae1ff9aeabf329c6819ee4fab9f1372c7415d0d2899f1b494c4098cd6c2e5",
+      "sha256_actual": "258ae1ff9aeabf329c6819ee4fab9f1372c7415d0d2899f1b494c4098cd6c2e5",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-wetware-and-venture-ops/references/modules/c5-2e-neuropharmacological-sovereignty/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          132
+        ]
+      ],
+      "sha256_expected": "d6995d525897f654c43edaa0c5125963fd2f1d4d98b3ec7307ac5c0e084fd171",
+      "sha256_actual": "d6995d525897f654c43edaa0c5125963fd2f1d4d98b3ec7307ac5c0e084fd171",
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/whatsapp-nexus-protocol/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          41
+        ]
+      ],
+      "sha256_expected": "bf81e9e5531a89d59eaf012f00b9cbf35db480c6dd2c80b19a7af46e02adcfda",
+      "sha256_actual": "bf81e9e5531a89d59eaf012f00b9cbf35db480c6dd2c80b19a7af46e02adcfda",
+      "hash_match": true
+    }
+  ],
+  "tool_limitations": [
+    "No native codebase-memory graph tools exposed; targeted source reads and rg used.",
+    "Static audit only; no tests or runtime execution permitted.",
+    "External API/library/clinical claims in reference documents were read but not independently validated.",
+    "Initial combined read was truncated; affected files were subsequently read individually or in bounded chunks."
+  ],
+  "tests_run": []
+}

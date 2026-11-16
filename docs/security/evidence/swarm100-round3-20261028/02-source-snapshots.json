@@ -1,0 +1,671 @@
+{
+  "reviewer": "02",
+  "method": "Static targeted source/guard/consumer inspection. Native codebase graph tools were not exposed in this session. No production runtime, network, operator data, databases, model files or protected effects were executed/accessed.",
+  "snapshots": [
+    {
+      "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+      "start_line": 77,
+      "end_line": 84,
+      "source_sha256": "940edb14fa37c65a3419fa9394fa3465f1acb6208d303db33203a07d4c915b84",
+      "numbered_source": "77:     @property\n78:     def bundle_dir(self) -> str:\n79:         \"\"\"Directory path where this session's evidence bundle is stored.\"\"\"\n80:         if self._bundle_dir is None:\n81:             base_dir = self.tracer.storage_dir or os.path.join(tempfile.gettempdir(), \"b60_bundles\")\n82:             self._bundle_dir = os.path.join(base_dir, self.session_id)\n83:             os.makedirs(self._bundle_dir, exist_ok=True)\n84:         return self._bundle_dir"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+      "start_line": 215,
+      "end_line": 241,
+      "source_sha256": "940edb14fa37c65a3419fa9394fa3465f1acb6208d303db33203a07d4c915b84",
+      "numbered_source": "215:     def _write_bundle_manifest(self) -> None:\n216:         \"\"\"Writes manifest.json and events.json into the session bundle directory.\"\"\"\n217:         bundle_dir = self.bundle_dir\n218:         manifest_path = os.path.join(bundle_dir, \"manifest.json\")\n219:         events_path = os.path.join(bundle_dir, \"events.json\")\n220: \n221:         manifest_data = {\n222:             \"global_hash\": self.global_merkle_root,\n223:             \"session_id\": self.session_id,\n224:             \"system_id\": self.tracer.system_name,\n225:             \"system_name\": self.tracer.system_name,\n226:             \"operator\": self.operator_name,\n227:             \"operator_name\": self.operator_name,\n228:             \"assurance_level\": self.assurance_level.value,\n229:             \"events_count\": len(self.events),\n230:             \"start_time\": self.start_time,\n231:             \"end_time\": self.end_time,\n232:             \"duration_ms\": ((self.end_time or time.time()) - self.start_time) * 1000,\n233:             \"signature\": self.signature_info,\n234:             \"hardware_anchor\": self.hardware_anchor,\n235:         }\n236: \n237:         with open(manifest_path, \"w\", encoding=\"utf-8\") as f:\n238:             json.dump(manifest_data, f, indent=2, ensure_ascii=False)\n239: \n240:         with open(events_path, \"w\", encoding=\"utf-8\") as f:\n241:             json.dump(self.events, f, indent=2, ensure_ascii=False)"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+      "start_line": 305,
+      "end_line": 336,
+      "source_sha256": "940edb14fa37c65a3419fa9394fa3465f1acb6208d303db33203a07d4c915b84",
+      "numbered_source": "305:     def audit(\n306:         self,\n307:         session_id: Optional[str] = None,\n308:         assurance_level: Optional[Union[AssuranceLevel, str]] = None,\n309:         operator_name: Optional[str] = None,\n310:         metadata: Optional[Dict[str, Any]] = None,\n311:     ) -> AuditSession:\n312:         \"\"\"\n313:         Creates and returns an AuditSession context manager.\n314: \n315:         Example:\n316:             with tracer.audit(session_id=\"s123\") as session:\n317:                 session.log_step(\"input\", {\"text\": \"hello\"})\n318:         \"\"\"\n319:         if not session_id:\n320:             session_id = f\"b60_sess_{hashlib.sha256(os.urandom(16)).hexdigest()[:12]}\"\n321: \n322:         lvl = AssuranceLevel.parse(assurance_level) if assurance_level is not None else self.assurance_level\n323:         op = operator_name or self.operator_name\n324: \n325:         session = AuditSession(\n326:             tracer=self,\n327:             session_id=session_id,\n328:             assurance_level=lvl,\n329:             operator_name=op,\n330:             metadata=metadata,\n331:         )\n332: \n333:         with self._lock:\n334:             self._active_sessions[session_id] = session\n335: \n336:         return session"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+      "start_line": 110,
+      "end_line": 158,
+      "source_sha256": "940edb14fa37c65a3419fa9394fa3465f1acb6208d303db33203a07d4c915b84",
+      "numbered_source": "110:         with self._lock:\n111:             step_index = len(self.events)\n112: \n113:             step_data: Dict[str, Any] = {\n114:                 \"session_id\": self.session_id,\n115:                 \"step_index\": step_index,\n116:                 \"action\": action,\n117:                 \"payload\": merged_payload,\n118:                 \"metadata\": merged_metadata,\n119:                 \"timestamp\": iso_ts,\n120:             }\n121: \n122:             canonical_str = _canonical_json(step_data)\n123:             step_hash = hashlib.sha256(canonical_str.encode(\"utf-8\")).hexdigest()\n124: \n125:             event_record: Dict[str, Any] = dict(step_data)\n126:             event_record[\"hash\"] = step_hash\n127: \n128:             if self.assurance_level == AssuranceLevel.AL0_TRANSPARENT:\n129:                 # AL0: fast local hash only\n130:                 pass\n131: \n132:             elif self.assurance_level == AssuranceLevel.AL1_STANDARD:\n133:                 # AL1: incremental linear hash chain\n134:                 chain_input = f\"{self.prev_hash}:{step_hash}\".encode(\"utf-8\")\n135:                 self.prev_hash = hashlib.sha256(chain_input).hexdigest()\n136:                 event_record[\"chain_hash\"] = self.prev_hash\n137: \n138:             elif self.assurance_level == AssuranceLevel.AL2_COMPLIANCE:\n139:                 # AL2: incremental chain + batch Merkle accumulation\n140:                 chain_input = f\"{self.prev_hash}:{step_hash}\".encode(\"utf-8\")\n141:                 self.prev_hash = hashlib.sha256(chain_input).hexdigest()\n142:                 event_record[\"chain_hash\"] = self.prev_hash\n143:                 self.accumulator.add_leaf(step_hash)\n144: \n145:             elif self.assurance_level == AssuranceLevel.AL3_SOVEREIGN:\n146:                 # AL3: full chain + Merkle + per-step hardware identity\n147:                 chain_input = f\"{self.prev_hash}:{step_hash}\".encode(\"utf-8\")\n148:                 self.prev_hash = hashlib.sha3_256(chain_input).hexdigest()\n149:                 event_record[\"chain_hash\"] = self.prev_hash\n150:                 self.accumulator.add_leaf(step_hash)\n151: \n152:                 anchor = MerkleCausalAnchor()\n153:                 hw_id = anchor.get_hardware_identity()\n154:                 event_record[\"hardware_uuid\"] = hw_id.get(\"uuid\", \"GENERIC_HOST\")\n155:                 event_record[\"enclave_type\"] = hw_id.get(\"enclave_type\", \"GENERIC_HOST\")\n156: \n157:             self.events.append(event_record)\n158:             return event_record"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+      "start_line": 160,
+      "end_line": 193,
+      "source_sha256": "940edb14fa37c65a3419fa9394fa3465f1acb6208d303db33203a07d4c915b84",
+      "numbered_source": "160:     def close(self) -> Dict[str, Any]:\n161:         \"\"\"\n162:         Closes the session, seals the Merkle tree, produces cryptographic attestations,\n163:         and saves the evidence bundle manifest.\n164:         \"\"\"\n165:         with self._lock:\n166:             if self.is_closed:\n167:                 return self.get_summary()\n168: \n169:             self.end_time = time.time()\n170:             self.is_closed = True\n171: \n172:             # Compute final Merkle root\n173:             if self.events:\n174:                 self.global_merkle_root = self.accumulator.finalize()\n175:             else:\n176:                 empty_seed = f\"EMPTY_SESSION:{self.session_id}:{self.start_time}\".encode(\"utf-8\")\n177:                 self.global_merkle_root = hashlib.sha256(empty_seed).hexdigest()\n178: \n179:             # Cryptographic sealing based on assurance level\n180:             if self.assurance_level in (AssuranceLevel.AL2_COMPLIANCE, AssuranceLevel.AL3_SOVEREIGN):\n181:                 self._sign_session_digest()\n182: \n183:             if self.assurance_level == AssuranceLevel.AL3_SOVEREIGN:\n184:                 anchor = MerkleCausalAnchor()\n185:                 self.hardware_anchor = anchor.generate_hardware_pcr_quote(self.global_merkle_root)\n186: \n187:             # Persist bundle manifest\n188:             self._write_bundle_manifest()\n189: \n190:             # Register completed session with tracer\n191:             self.tracer._register_completed_session(self)\n192: \n193:             return self.get_summary()"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+      "start_line": 243,
+      "end_line": 258,
+      "source_sha256": "940edb14fa37c65a3419fa9394fa3465f1acb6208d303db33203a07d4c915b84",
+      "numbered_source": "243:     def get_summary(self) -> Dict[str, Any]:\n244:         \"\"\"Returns structured session summary.\"\"\"\n245:         duration_ms = ((self.end_time or time.time()) - self.start_time) * 1000\n246:         return {\n247:             \"session_id\": self.session_id,\n248:             \"system_name\": self.tracer.system_name,\n249:             \"operator_name\": self.operator_name,\n250:             \"assurance_level\": self.assurance_level.value,\n251:             \"total_events\": len(self.events),\n252:             \"global_merkle_root\": self.global_merkle_root,\n253:             \"duration_ms\": duration_ms,\n254:             \"is_closed\": self.is_closed,\n255:             \"bundle_dir\": self.bundle_dir,\n256:             \"signature\": self.signature_info,\n257:             \"hardware_anchor\": self.hardware_anchor,\n258:         }"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+      "start_line": 548,
+      "end_line": 555,
+      "source_sha256": "940edb14fa37c65a3419fa9394fa3465f1acb6208d303db33203a07d4c915b84",
+      "numbered_source": "548:         if not session.is_closed:\n549:             session.close()\n550: \n551:         bundle_path = session.bundle_dir\n552:         exporter = EUAIActComplianceExporter(\n553:             artifact_bundle_path=bundle_path,\n554:             ledger_path=self.ledger_path,\n555:         )"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+      "start_line": 128,
+      "end_line": 150,
+      "source_sha256": "940edb14fa37c65a3419fa9394fa3465f1acb6208d303db33203a07d4c915b84",
+      "numbered_source": "128:             if self.assurance_level == AssuranceLevel.AL0_TRANSPARENT:\n129:                 # AL0: fast local hash only\n130:                 pass\n131: \n132:             elif self.assurance_level == AssuranceLevel.AL1_STANDARD:\n133:                 # AL1: incremental linear hash chain\n134:                 chain_input = f\"{self.prev_hash}:{step_hash}\".encode(\"utf-8\")\n135:                 self.prev_hash = hashlib.sha256(chain_input).hexdigest()\n136:                 event_record[\"chain_hash\"] = self.prev_hash\n137: \n138:             elif self.assurance_level == AssuranceLevel.AL2_COMPLIANCE:\n139:                 # AL2: incremental chain + batch Merkle accumulation\n140:                 chain_input = f\"{self.prev_hash}:{step_hash}\".encode(\"utf-8\")\n141:                 self.prev_hash = hashlib.sha256(chain_input).hexdigest()\n142:                 event_record[\"chain_hash\"] = self.prev_hash\n143:                 self.accumulator.add_leaf(step_hash)\n144: \n145:             elif self.assurance_level == AssuranceLevel.AL3_SOVEREIGN:\n146:                 # AL3: full chain + Merkle + per-step hardware identity\n147:                 chain_input = f\"{self.prev_hash}:{step_hash}\".encode(\"utf-8\")\n148:                 self.prev_hash = hashlib.sha3_256(chain_input).hexdigest()\n149:                 event_record[\"chain_hash\"] = self.prev_hash\n150:                 self.accumulator.add_leaf(step_hash)"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+      "start_line": 172,
+      "end_line": 177,
+      "source_sha256": "940edb14fa37c65a3419fa9394fa3465f1acb6208d303db33203a07d4c915b84",
+      "numbered_source": "172:             # Compute final Merkle root\n173:             if self.events:\n174:                 self.global_merkle_root = self.accumulator.finalize()\n175:             else:\n176:                 empty_seed = f\"EMPTY_SESSION:{self.session_id}:{self.start_time}\".encode(\"utf-8\")\n177:                 self.global_merkle_root = hashlib.sha256(empty_seed).hexdigest()"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/api/batch_accumulator.py",
+      "start_line": 101,
+      "end_line": 117,
+      "source_sha256": "2cc1eee4ebbda30c9485b2ad5109ebb2f42b84b597a717c5716bdb697f735950",
+      "numbered_source": "101:     def finalize(self) -> str:\n102:         \"\"\"\n103:         Closes the accumulator, flushing any pending buffer items and computing\n104:         the final global Merkle root over all accumulated leaves.\n105:         \"\"\"\n106:         with self._lock:\n107:             if self._buffer:\n108:                 self._flush_locked()\n109: \n110:             if not self._all_leaves:\n111:                 empty_root = self._hash_bytes(b\"\")\n112:                 self._current_merkle_root = empty_root\n113:                 return empty_root\n114: \n115:             global_root = self.compute_merkle_root(self._all_leaves, algorithm=self.algorithm)\n116:             self._current_merkle_root = global_root\n117:             return global_root"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/api/tracer.py",
+      "start_line": 221,
+      "end_line": 258,
+      "source_sha256": "940edb14fa37c65a3419fa9394fa3465f1acb6208d303db33203a07d4c915b84",
+      "numbered_source": "221:         manifest_data = {\n222:             \"global_hash\": self.global_merkle_root,\n223:             \"session_id\": self.session_id,\n224:             \"system_id\": self.tracer.system_name,\n225:             \"system_name\": self.tracer.system_name,\n226:             \"operator\": self.operator_name,\n227:             \"operator_name\": self.operator_name,\n228:             \"assurance_level\": self.assurance_level.value,\n229:             \"events_count\": len(self.events),\n230:             \"start_time\": self.start_time,\n231:             \"end_time\": self.end_time,\n232:             \"duration_ms\": ((self.end_time or time.time()) - self.start_time) * 1000,\n233:             \"signature\": self.signature_info,\n234:             \"hardware_anchor\": self.hardware_anchor,\n235:         }\n236: \n237:         with open(manifest_path, \"w\", encoding=\"utf-8\") as f:\n238:             json.dump(manifest_data, f, indent=2, ensure_ascii=False)\n239: \n240:         with open(events_path, \"w\", encoding=\"utf-8\") as f:\n241:             json.dump(self.events, f, indent=2, ensure_ascii=False)\n242: \n243:     def get_summary(self) -> Dict[str, Any]:\n244:         \"\"\"Returns structured session summary.\"\"\"\n245:         duration_ms = ((self.end_time or time.time()) - self.start_time) * 1000\n246:         return {\n247:             \"session_id\": self.session_id,\n248:             \"system_name\": self.tracer.system_name,\n249:             \"operator_name\": self.operator_name,\n250:             \"assurance_level\": self.assurance_level.value,\n251:             \"total_events\": len(self.events),\n252:             \"global_merkle_root\": self.global_merkle_root,\n253:             \"duration_ms\": duration_ms,\n254:             \"is_closed\": self.is_closed,\n255:             \"bundle_dir\": self.bundle_dir,\n256:             \"signature\": self.signature_info,\n257:             \"hardware_anchor\": self.hardware_anchor,\n258:         }"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/api/assurance.py",
+      "start_line": 45,
+      "end_line": 62,
+      "source_sha256": "eeb3471715e9168c058910452554bbe554cb68633ef740d21a1233d02dab9b20",
+      "numbered_source": "45:     def requires_signature(self) -> bool:\n46:         \"\"\"Whether this level requires Ed25519 digital signatures.\"\"\"\n47:         return self in (self.AL2_COMPLIANCE, self.AL3_SOVEREIGN)\n48: \n49:     @property\n50:     def requires_hardware_anchor(self) -> bool:\n51:         \"\"\"Whether this level requires a physical hardware enclave or PCR anchor.\"\"\"\n52:         return self == self.AL3_SOVEREIGN\n53: \n54:     @property\n55:     def requires_hash_chain(self) -> bool:\n56:         \"\"\"Whether this level maintains an incremental hash chain across events.\"\"\"\n57:         return self in (self.AL1_STANDARD, self.AL2_COMPLIANCE, self.AL3_SOVEREIGN)\n58: \n59:     @property\n60:     def requires_merkle_batching(self) -> bool:\n61:         \"\"\"Whether this level aggregates events into balanced Merkle trees.\"\"\"\n62:         return self in (self.AL2_COMPLIANCE, self.AL3_SOVEREIGN)"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/adapters/codex/tunnel_bus.py",
+      "start_line": 81,
+      "end_line": 87,
+      "source_sha256": "a9d36a884918671af7076dd3f6eb4e0c90c36e06ebdc4d2e48244846e4821263",
+      "numbered_source": "81:     def _get_connection(self) -> sqlite3.Connection:\n82:         conn = sqlite3.connect(str(self.db_path), timeout=5.0)\n83:         conn.row_factory = sqlite3.Row\n84:         conn.execute(\"PRAGMA journal_mode=WAL;\")\n85:         conn.execute(\"PRAGMA synchronous=NORMAL;\")\n86:         conn.execute(\"PRAGMA busy_timeout=5000;\")\n87:         return conn"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/adapters/codex/tunnel_bus.py",
+      "start_line": 151,
+      "end_line": 207,
+      "source_sha256": "a9d36a884918671af7076dd3f6eb4e0c90c36e06ebdc4d2e48244846e4821263",
+      "numbered_source": "151:     def pull_messages(\n152:         self,\n153:         destination: str,\n154:         status: str = \"pending\",\n155:         limit: int = 10,\n156:         mark_delivered: bool = True,\n157:     ) -> list[TunnelMessage]:\n158:         \"\"\"Pull messages addressed to destination.\"\"\"\n159:         with self._get_connection() as conn:\n160:             cur = conn.execute(\n161:                 \"\"\"\n162:                 SELECT id, source, destination, msg_type, correlation_id, payload, created_at_ms, status, response_payload\n163:                 FROM tunnel_messages\n164:                 WHERE destination = ? AND status = ?\n165:                 ORDER BY created_at_ms ASC\n166:                 LIMIT ?\n167:                 \"\"\",\n168:                 (destination, status, limit),\n169:             )\n170:             rows = cur.fetchall()\n171:             messages: list[TunnelMessage] = []\n172:             for row in rows:\n173:                 try:\n174:                     payload = json.loads(row[\"payload\"])\n175:                 except Exception:\n176:                     payload = {\"raw\": row[\"payload\"]}\n177:                 resp_payload = None\n178:                 if row[\"response_payload\"]:\n179:                     try:\n180:                         resp_payload = json.loads(row[\"response_payload\"])\n181:                     except Exception:\n182:                         resp_payload = {\"raw\": row[\"response_payload\"]}\n183: \n184:                 messages.append(\n185:                     TunnelMessage(\n186:                         id=row[\"id\"],\n187:                         source=row[\"source\"],\n188:                         destination=row[\"destination\"],\n189:                         msg_type=row[\"msg_type\"],\n190:                         correlation_id=row[\"correlation_id\"],\n191:                         payload=payload,\n192:                         created_at_ms=row[\"created_at_ms\"],\n193:                         status=row[\"status\"],\n194:                         response_payload=resp_payload,\n195:                     )\n196:                 )\n197: \n198:             if mark_delivered and messages:\n199:                 ids = [m.id for m in messages]\n200:                 placeholders = \",\".join(\"?\" * len(ids))\n201:                 conn.execute(\n202:                     f\"UPDATE tunnel_messages SET status = 'delivered' WHERE id IN ({placeholders})\",\n203:                     ids,\n204:                 )\n205:                 conn.commit()\n206: \n207:             return messages"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/adapters/codex/mcp_server.py",
+      "start_line": 287,
+      "end_line": 305,
+      "source_sha256": "6c8a87fb4a5d33af65732af623ebdfd7f4b90af0dbae559151c2a94b491ecbad",
+      "numbered_source": "287:     def _tool_receive_messages(self, args: dict[str, Any]) -> ToolResult:\n288:         limit = int(args.get(\"limit\", 5))\n289:         mark_del = bool(args.get(\"mark_delivered\", True))\n290:         messages = self._bus.pull_messages(\n291:             destination=\"codex\",\n292:             status=\"pending\",\n293:             limit=limit,\n294:             mark_delivered=mark_del,\n295:         )\n296:         data = [m.to_dict() for m in messages]\n297:         return {\n298:             \"content\": [\n299:                 {\n300:                     \"type\": \"text\",\n301:                     \"text\": json.dumps(data, indent=2, ensure_ascii=False)\n302:                     if data\n303:                     else \"No pending messages from Antigravity.\",\n304:                 }\n305:             ]"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/adapters/codex/tunnel_bus.py",
+      "start_line": 128,
+      "end_line": 149,
+      "source_sha256": "a9d36a884918671af7076dd3f6eb4e0c90c36e06ebdc4d2e48244846e4821263",
+      "numbered_source": "128:         with self._get_connection() as conn:\n129:             conn.execute(\n130:                 \"\"\"\n131:                 INSERT INTO tunnel_messages (\n132:                     id, source, destination, msg_type, correlation_id, payload, created_at_ms, status, response_payload\n133:                 ) VALUES (?, ?, ?, ?, ?, ?, ?, 'pending', NULL)\n134:                 \"\"\",\n135:                 (msg_id, source, destination, msg_type, correlation_id, payload_str, created_at),\n136:             )\n137:             conn.commit()\n138: \n139:         return TunnelMessage(\n140:             id=msg_id,\n141:             source=source,\n142:             destination=destination,\n143:             msg_type=msg_type,\n144:             correlation_id=correlation_id,\n145:             payload=payload,\n146:             created_at_ms=created_at,\n147:             status=\"pending\",\n148:             response_payload=None,\n149:         )"
+    },
+    {
+      "path": ".babylon60rules",
+      "start_line": 14,
+      "end_line": 19,
+      "source_sha256": "896ef66813dae7b753c365db39817a8f144f525dc1ae4f3259660b1f53db557c",
+      "numbered_source": "14: \n15: - Separar observación, hipótesis y obligación (`INV_C5_HUME_GUILLOTINE`). Una especificación, compilación o test parcial no certifica el sistema. Toda garantía declarada requiere fuente, ámbito y comprobación reproducible; comunicar fallos como fallos y propiedades pendientes como `NO_VERIFICADO`.\n16: - Fijar resultado, rutas, restricciones y aceptación antes de editar; conservar los criterios hasta el cierre. Preservar trabajo ajeno. Explorar antes de preguntar, resolver decisiones reversibles autorizadas y continuar el trabajo independiente ante bloqueos acotados. Aplicar el [procedimiento](AGENTS.md#ejecución).\n17: - Cargar [contratos técnicos](docs/03_guides/agent_contracts.md) según el cambio. Mantener SQLite/WAL fuera de la ruta caliente, persistencia transaccional con `synchronous = FULL` y hashes de consenso basados en `logical_tick`.\n18: - Separar motor ejecutable, corpus teórico y activos privados GTM/OpSec. Conservar evidencia necesaria con retención acotada; no almacenar deliberaciones internas del LLM. Las perspectivas filosóficas y preferencias personales son contexto opcional solicitado, no obligaciones generales ni hechos demostrados.\n19: - `.cursorrules`, `.windsurfrules`, `.codexrules`, `CLAUDE.md`, `.clinerules`, `.roorules` y `.github/copilot-instructions.md` deben ser symlinks directos a este archivo. Preservar diferencias antes de reemplazar archivos regulares."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/devsecops_attest.py",
+      "start_line": 37,
+      "end_line": 46,
+      "source_sha256": "24a4f47bc5a0a1aebf14060c6fd1166e24ca5488028cb8d4752a902c4a58571e",
+      "numbered_source": "37:     def _acquire_lock(self) -> None:\n38:         \"\"\"Protección candado .lock para exclusión mutua durante atestación.\"\"\"\n39:         if os.path.exists(LOCK_FILE):\n40:             raise AttestationError(\"Attestation is currently locked by another process.\")\n41:         with open(LOCK_FILE, \"w\") as f:\n42:             f.write(str(time.time()))\n43: \n44:     def _release_lock(self) -> None:\n45:         if os.path.exists(LOCK_FILE):\n46:             os.remove(LOCK_FILE)"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/devsecops_attest.py",
+      "start_line": 59,
+      "end_line": 78,
+      "source_sha256": "24a4f47bc5a0a1aebf14060c6fd1166e24ca5488028cb8d4752a902c4a58571e",
+      "numbered_source": "59:     def anchor_to_bitcoin(self, payload: Dict[str, Any]) -> None:\n60:         \"\"\"\n61:         Anclaje asíncrono a Bitcoin (Simulado).\n62:         En un entorno real usaría OpenTimestamps u otra red L1.\n63:         \"\"\"\n64:         payload_str = json.dumps(payload, sort_keys=True)\n65:         merkle_root = hashlib.sha256(payload_str.encode()).hexdigest()\n66:         logger.info(f\"[L5-ATTEST] Anclando estado criptográfico (raíz: {merkle_root[:8]}...) a L1.\")\n67:         # Simulación de la latencia asíncrona de anclaje L1\n68:         time.sleep(1.0)\n69:         logger.info(\"[L5-ATTEST] Anclaje completado exitosamente.\")\n70: \n71:     def run_attestation(self) -> None:\n72:         self._acquire_lock()\n73:         try:\n74:             payload = self.generate_attestation_payload()\n75:             self.anchor_to_bitcoin(payload)\n76:             logger.info(\"Atestación DevSecOps finalizada.\")\n77:         finally:\n78:             self._release_lock()"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/devsecops_attest.py",
+      "start_line": 19,
+      "end_line": 26,
+      "source_sha256": "24a4f47bc5a0a1aebf14060c6fd1166e24ca5488028cb8d4752a902c4a58571e",
+      "numbered_source": "19: @lru_cache(maxsize=128)\n20: def get_git_tree_hash(path: str) -> str:\n21:     \"\"\"Caché LRU del árbol Git para evitar cómputo termodinámico innecesario.\"\"\"\n22:     try:\n23:         result = subprocess.run([\"git\", \"ls-tree\", \"HEAD\", path], capture_output=True, text=True, check=True)\n24:         return hashlib.sha256(result.stdout.encode()).hexdigest()\n25:     except subprocess.CalledProcessError:\n26:         return \"\""
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/devsecops_attest.py",
+      "start_line": 48,
+      "end_line": 57,
+      "source_sha256": "24a4f47bc5a0a1aebf14060c6fd1166e24ca5488028cb8d4752a902c4a58571e",
+      "numbered_source": "48:     def generate_attestation_payload(self) -> Dict[str, Any]:\n49:         \"\"\"Genera el payload determinista a partir de los metadatos Git.\"\"\"\n50:         tree_hash = get_git_tree_hash(self.target_dir)\n51:         payload = {\n52:             \"timestamp\": time.time(),\n53:             \"target_dir\": self.target_dir,\n54:             \"git_tree_sha256\": tree_hash,\n55:             \"c5_real_invariant\": \"Zero-Anergy\",\n56:         }\n57:         return payload"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/devsecops_attest.py",
+      "start_line": 71,
+      "end_line": 84,
+      "source_sha256": "24a4f47bc5a0a1aebf14060c6fd1166e24ca5488028cb8d4752a902c4a58571e",
+      "numbered_source": "71:     def run_attestation(self) -> None:\n72:         self._acquire_lock()\n73:         try:\n74:             payload = self.generate_attestation_payload()\n75:             self.anchor_to_bitcoin(payload)\n76:             logger.info(\"Atestación DevSecOps finalizada.\")\n77:         finally:\n78:             self._release_lock()\n79: \n80: \n81: if __name__ == \"__main__\":\n82:     logging.basicConfig(level=logging.INFO)\n83:     attestor = L5Attestor(\"src\")\n84:     attestor.run_attestation()"
+    },
+    {
+      "path": "crates/eridu-infer/src/gguf.rs",
+      "start_line": 60,
+      "end_line": 85,
+      "source_sha256": "4db2253f39ce1211f2c8d7f09b149861739db8be3f4e95e0c5da3f5aa37f1972",
+      "numbered_source": "60:         // Parseo de metadatos KV\n61:         for _ in 0..metadata_kv_count {\n62:             if cursor + 8 > mmap.len() {\n63:                 return Err(\"Buffer truncado al leer clave de metadatos\".into());\n64:             }\n65:             let key_len = LittleEndian::read_u64(&mmap[cursor..cursor + 8]) as usize;\n66:             cursor += 8;\n67: \n68:             if cursor + key_len > mmap.len() {\n69:                 return Err(\"Buffer truncado al leer contenido de clave\".into());\n70:             }\n71:             let key = std::str::from_utf8(&mmap[cursor..cursor + key_len])\n72:                 .map_err(|e| format!(\"Clave no es UTF-8 válido: {}\", e))?\n73:                 .to_string();\n74:             cursor += key_len;\n75: \n76:             if cursor + 4 > mmap.len() {\n77:                 return Err(\"Buffer truncado al leer tipo de valor\".into());\n78:             }\n79:             let val_type = LittleEndian::read_u32(&mmap[cursor..cursor + 4]);\n80:             cursor += 4;\n81: \n82:             let (val_str, new_cursor) = parse_metadata_value(&mmap, cursor, val_type)?;\n83:             cursor = new_cursor;\n84:             metadata.insert(key, val_str);\n85:         }"
+    },
+    {
+      "path": "crates/eridu-infer/src/gguf.rs",
+      "start_line": 227,
+      "end_line": 241,
+      "source_sha256": "4db2253f39ce1211f2c8d7f09b149861739db8be3f4e95e0c5da3f5aa37f1972",
+      "numbered_source": "227:         9 => { // ARRAY\n228:             let elem_type = LittleEndian::read_u32(&mmap[cursor..cursor + 4]);\n229:             cursor += 4;\n230:             let count = LittleEndian::read_u64(&mmap[cursor..cursor + 8]) as usize;\n231:             cursor += 8;\n232:             let mut items = Vec::new();\n233:             for _ in 0..count.min(10) { // Limitamos para display\n234:                 let (val, next) = parse_metadata_value(mmap, cursor, elem_type)?;\n235:                 items.push(val);\n236:                 cursor = next;\n237:             }\n238:             if count > 10 {\n239:                 items.push(format!(\"... (+{} elementos)\", count - 10));\n240:             }\n241:             Ok((format!(\"[{}]\", items.join(\", \")), cursor))"
+    },
+    {
+      "path": "crates/eridu-infer/src/gguf.rs",
+      "start_line": 92,
+      "end_line": 99,
+      "source_sha256": "4db2253f39ce1211f2c8d7f09b149861739db8be3f4e95e0c5da3f5aa37f1972",
+      "numbered_source": "92:         // Parseo de descriptores de tensores\n93:         let mut tensors = Vec::with_capacity(tensor_count as usize);\n94:         for _ in 0..tensor_count {\n95:             if cursor + 8 > mmap.len() {\n96:                 return Err(\"Buffer truncado al leer nombre de tensor\".into());\n97:             }\n98:             let name_len = LittleEndian::read_u64(&mmap[cursor..cursor + 8]) as usize;\n99:             cursor += 8;"
+    },
+    {
+      "path": "crates/eridu-infer/src/server.rs",
+      "start_line": 35,
+      "end_line": 48,
+      "source_sha256": "bbbc97cf3cb7e2cef458411dce71791d47560615310fb3107f0ab18e8ba5e903",
+      "numbered_source": "35: impl AppState {\n36:     pub fn new() -> Result<Self, String> {\n37:         let gate = BabylonCausalGate::new();\n38:         let uma_pool = UmaBufferPool::new(4, DARWIN_PAGE_SIZE)?;\n39:         let telemetry = Arc::new(TelemetrySnapshot::new(InferenceTelemetryBlock::default()));\n40:         let gguf_model = std::env::var(\"ERIDU_GGUF_PATH\")\n41:             .ok()\n42:             .and_then(|p| GgufModel::load_mmap(p).ok());\n43:         Ok(Self {\n44:             gate: Mutex::new(gate),\n45:             auth: DualPasskeyAuth::new(),\n46:             uma_pool: Mutex::new(uma_pool),\n47:             telemetry,\n48:             gguf_model,"
+    },
+    {
+      "path": "crates/eridu-infer/src/gguf.rs",
+      "start_line": 61,
+      "end_line": 83,
+      "source_sha256": "4db2253f39ce1211f2c8d7f09b149861739db8be3f4e95e0c5da3f5aa37f1972",
+      "numbered_source": "61:         for _ in 0..metadata_kv_count {\n62:             if cursor + 8 > mmap.len() {\n63:                 return Err(\"Buffer truncado al leer clave de metadatos\".into());\n64:             }\n65:             let key_len = LittleEndian::read_u64(&mmap[cursor..cursor + 8]) as usize;\n66:             cursor += 8;\n67: \n68:             if cursor + key_len > mmap.len() {\n69:                 return Err(\"Buffer truncado al leer contenido de clave\".into());\n70:             }\n71:             let key = std::str::from_utf8(&mmap[cursor..cursor + key_len])\n72:                 .map_err(|e| format!(\"Clave no es UTF-8 válido: {}\", e))?\n73:                 .to_string();\n74:             cursor += key_len;\n75: \n76:             if cursor + 4 > mmap.len() {\n77:                 return Err(\"Buffer truncado al leer tipo de valor\".into());\n78:             }\n79:             let val_type = LittleEndian::read_u32(&mmap[cursor..cursor + 4]);\n80:             cursor += 4;\n81: \n82:             let (val_str, new_cursor) = parse_metadata_value(&mmap, cursor, val_type)?;\n83:             cursor = new_cursor;"
+    },
+    {
+      "path": "crates/eridu-infer/src/gguf.rs",
+      "start_line": 173,
+      "end_line": 213,
+      "source_sha256": "4db2253f39ce1211f2c8d7f09b149861739db8be3f4e95e0c5da3f5aa37f1972",
+      "numbered_source": "173: fn parse_metadata_value(mmap: &[u8], mut cursor: usize, val_type: u32) -> Result<(String, usize), String> {\n174:     match val_type {\n175:         0 => { // UINT8\n176:             let v = mmap[cursor];\n177:             Ok((v.to_string(), cursor + 1))\n178:         }\n179:         1 => { // INT8\n180:             let v = mmap[cursor] as i8;\n181:             Ok((v.to_string(), cursor + 1))\n182:         }\n183:         2 => { // UINT16\n184:             let v = LittleEndian::read_u16(&mmap[cursor..cursor + 2]);\n185:             Ok((v.to_string(), cursor + 2))\n186:         }\n187:         3 => { // INT16\n188:             let v = LittleEndian::read_i16(&mmap[cursor..cursor + 2]);\n189:             Ok((v.to_string(), cursor + 2))\n190:         }\n191:         4 => { // UINT32\n192:             let v = LittleEndian::read_u32(&mmap[cursor..cursor + 4]);\n193:             Ok((v.to_string(), cursor + 4))\n194:         }\n195:         5 => { // INT32\n196:             let v = LittleEndian::read_i32(&mmap[cursor..cursor + 4]);\n197:             Ok((v.to_string(), cursor + 4))\n198:         }\n199:         6 => { // FLOAT32\n200:             let v = LittleEndian::read_f32(&mmap[cursor..cursor + 4]);\n201:             Ok((v.to_string(), cursor + 4))\n202:         }\n203:         7 => { // BOOL\n204:             let v = mmap[cursor] != 0;\n205:             Ok((v.to_string(), cursor + 1))\n206:         }\n207:         8 => { // STRING\n208:             let s_len = LittleEndian::read_u64(&mmap[cursor..cursor + 8]) as usize;\n209:             cursor += 8;\n210:             let s = std::str::from_utf8(&mmap[cursor..cursor + s_len])\n211:                 .map_err(|e| format!(\"String inválido: {}\", e))?\n212:                 .to_string();\n213:             Ok((s, cursor + s_len))"
+    },
+    {
+      "path": "scripts/c5_sharur/auto_heal_hardcoded_paths.py",
+      "start_line": 95,
+      "end_line": 120,
+      "source_sha256": "7c9de3cae32521d67c006d60918502b33be3722e45c133c4e03c7b2d7342d9f3",
+      "numbered_source": "95: def ensure_pathlib_import(tree: ast.Module) -> None:\n96:     \"\"\"Inserts 'from pathlib import Path' if not present in module body.\"\"\"\n97:     has_pathlib = False\n98:     for node in tree.body:\n99:         if isinstance(node, ast.ImportFrom) and node.module == \"pathlib\":\n100:             if any(alias.name == \"Path\" for alias in node.names):\n101:                 has_pathlib = True\n102:                 break\n103:         elif isinstance(node, ast.Import):\n104:             if any(alias.name == \"pathlib\" for alias in node.names):\n105:                 has_pathlib = True\n106:                 break\n107: \n108:     if not has_pathlib:\n109:         import_node = ast.ImportFrom(\n110:             module=\"pathlib\",\n111:             names=[ast.alias(name=\"Path\", asname=None)],\n112:             level=0\n113:         )\n114:         idx = 0\n115:         # Insert after shebang/module docstring if present\n116:         if (tree.body and isinstance(tree.body[0], ast.Expr) and \n117:                 isinstance(tree.body[0].value, ast.Constant)):\n118:             idx = 1\n119:         tree.body.insert(idx, import_node)\n120:         ast.fix_missing_locations(tree)"
+    },
+    {
+      "path": "scripts/c5_sharur/auto_heal_hardcoded_paths.py",
+      "start_line": 123,
+      "end_line": 145,
+      "source_sha256": "7c9de3cae32521d67c006d60918502b33be3722e45c133c4e03c7b2d7342d9f3",
+      "numbered_source": "123: def heal_file(filepath: Path) -> bool:\n124:     try:\n125:         content = filepath.read_text(encoding=\"utf-8\")\n126:         tree = ast.parse(content, filename=str(filepath))\n127:     except Exception:\n128:         return False\n129: \n130:     transformer = HardcodedPathRemediator()\n131:     new_tree = transformer.visit(tree)\n132: \n133:     if transformer.modified:\n134:         ast.fix_missing_locations(new_tree)\n135:         if transformer.needs_pathlib:\n136:             ensure_pathlib_import(new_tree)\n137:         \n138:         remediated_code = ast.unparse(new_tree)\n139:         # Preserve shebang if original had one\n140:         lines = content.splitlines()\n141:         if lines and lines[0].startswith(\"#!\"):\n142:             remediated_code = f\"{lines[0]}\\n\" + remediated_code\n143: \n144:         filepath.write_text(remediated_code + \"\\n\", encoding=\"utf-8\")\n145:         return True"
+    },
+    {
+      "path": "scripts/c5_sharur/auto_heal_hardcoded_paths.py",
+      "start_line": 149,
+      "end_line": 164,
+      "source_sha256": "7c9de3cae32521d67c006d60918502b33be3722e45c133c4e03c7b2d7342d9f3",
+      "numbered_source": "149: def main() -> None:\n150:     print(\"[*] Initiating AST Sovereign Auto-Heal Engine for Hardcoded Paths...\")\n151:     target_dir = WORKSPACE_DIR / \"scripts\"\n152:     if not target_dir.exists():\n153:         target_dir = WORKSPACE_DIR\n154: \n155:     healed_count = 0\n156:     for root, _, files in os.walk(target_dir):\n157:         if \".git\" in root or \"__pycache__\" in root or \"node_modules\" in root:\n158:             continue\n159:         for f in files:\n160:             if f.endswith(\".py\"):\n161:                 filepath = Path(root) / f\n162:                 if heal_file(filepath):\n163:                     rel = filepath.relative_to(WORKSPACE_DIR)\n164:                     print(f\"  [⚡ AST HEALED] Remediated: {rel}\")"
+    },
+    {
+      "path": "scripts/c5_sharur/auto_heal_hardcoded_paths.py",
+      "start_line": 54,
+      "end_line": 91,
+      "source_sha256": "7c9de3cae32521d67c006d60918502b33be3722e45c133c4e03c7b2d7342d9f3",
+      "numbered_source": "54:                 # Build AST: str(Path.home() / \"rel_path\") or str(Path.home())\n55:                 if rel_path:\n56:                     new_node = ast.Call(\n57:                         func=ast.Name(id=\"str\", ctx=ast.Load()),\n58:                         args=[\n59:                             ast.BinOp(\n60:                                 left=ast.Call(\n61:                                     func=ast.Attribute(\n62:                                         value=ast.Name(id=\"Path\", ctx=ast.Load()),\n63:                                         attr=\"home\",\n64:                                         ctx=ast.Load()\n65:                                     ),\n66:                                     args=[],\n67:                                     keywords=[]\n68:                                 ),\n69:                                 op=ast.Div(),\n70:                                 right=ast.Constant(value=rel_path)\n71:                             )\n72:                         ],\n73:                         keywords=[]\n74:                     )\n75:                 else:\n76:                     new_node = ast.Call(\n77:                         func=ast.Name(id=\"str\", ctx=ast.Load()),\n78:                         args=[\n79:                             ast.Call(\n80:                                 func=ast.Attribute(\n81:                                     value=ast.Name(id=\"Path\", ctx=ast.Load()),\n82:                                     attr=\"home\",\n83:                                     ctx=ast.Load()\n84:                                 ),\n85:                                 args=[],\n86:                                 keywords=[]\n87:                             )\n88:                         ],\n89:                         keywords=[]\n90:                     )\n91:                 return ast.copy_location(new_node, node)"
+    },
+    {
+      "path": "scripts/c5_sharur/auto_heal_hardcoded_paths.py",
+      "start_line": 95,
+      "end_line": 106,
+      "source_sha256": "7c9de3cae32521d67c006d60918502b33be3722e45c133c4e03c7b2d7342d9f3",
+      "numbered_source": "95: def ensure_pathlib_import(tree: ast.Module) -> None:\n96:     \"\"\"Inserts 'from pathlib import Path' if not present in module body.\"\"\"\n97:     has_pathlib = False\n98:     for node in tree.body:\n99:         if isinstance(node, ast.ImportFrom) and node.module == \"pathlib\":\n100:             if any(alias.name == \"Path\" for alias in node.names):\n101:                 has_pathlib = True\n102:                 break\n103:         elif isinstance(node, ast.Import):\n104:             if any(alias.name == \"pathlib\" for alias in node.names):\n105:                 has_pathlib = True\n106:                 break"
+    },
+    {
+      "path": "scripts/c5_sharur/auto_heal_hardcoded_paths.py",
+      "start_line": 130,
+      "end_line": 145,
+      "source_sha256": "7c9de3cae32521d67c006d60918502b33be3722e45c133c4e03c7b2d7342d9f3",
+      "numbered_source": "130:     transformer = HardcodedPathRemediator()\n131:     new_tree = transformer.visit(tree)\n132: \n133:     if transformer.modified:\n134:         ast.fix_missing_locations(new_tree)\n135:         if transformer.needs_pathlib:\n136:             ensure_pathlib_import(new_tree)\n137:         \n138:         remediated_code = ast.unparse(new_tree)\n139:         # Preserve shebang if original had one\n140:         lines = content.splitlines()\n141:         if lines and lines[0].startswith(\"#!\"):\n142:             remediated_code = f\"{lines[0]}\\n\" + remediated_code\n143: \n144:         filepath.write_text(remediated_code + \"\\n\", encoding=\"utf-8\")\n145:         return True"
+    },
+    {
+      "path": "tools/skill_library/global/c5-terminological-archaeology/scripts/c5_lexicon_notary.py",
+      "start_line": 116,
+      "end_line": 123,
+      "source_sha256": "d96987b85fee7bfd75bf877e6fa4c2ed2d72b71611466ae517d4393e61406c2f",
+      "numbered_source": "116:     if dry_run:\n117:         print(f\"[DRY-RUN] Registro pendiente: '{key}'\")\n118:         print(json.dumps(entry, indent=2, ensure_ascii=False))\n119:     else:\n120:         _save_lexicon(lexicon)\n121:         print(f\"  ✅ Registrado en lexicón: '{key}' (coverage={entry['coverage']})\", file=sys.stderr)\n122: \n123:     return True, key"
+    },
+    {
+      "path": "tools/skill_library/global/c5-terminological-archaeology/scripts/c5_lexicon_notary.py",
+      "start_line": 177,
+      "end_line": 200,
+      "source_sha256": "d96987b85fee7bfd75bf877e6fa4c2ed2d72b71611466ae517d4393e61406c2f",
+      "numbered_source": "177: def _generate_anagnorisis_log(entries: list[dict], artifact_dir: Optional[Path]) -> str:\n178:     \"\"\"Genera el contenido del ANAGNORISIS_LOG.md de sesión.\"\"\"\n179:     now = datetime.now(timezone.utc).strftime(\"%Y-%m-%d %H:%M UTC\")\n180:     lines = [\n181:         f\"# ANAGNORISIS_LOG — Sesión {now}\\n\\n\",\n182:         \"Términos registrados en esta sesión de arqueología terminológica:\\n\\n\",\n183:         \"| Término | Cobertura | Veredicto | Delta |\\n\",\n184:         \"| :--- | :--- | :--- | :--- |\\n\",\n185:     ]\n186:     for e in entries:\n187:         term = e.get(\"canonical_term\", \"?\")\n188:         cov = e.get(\"coverage\", 0.0)\n189:         verdict = e.get(\"verdict\", \"?\")\n190:         delta = e.get(\"delta\", \"\") or \"—\"\n191:         lines.append(f\"| {term} | {cov:.2f} | {verdict} | {delta[:60]} |\\n\")\n192: \n193:     content = \"\".join(lines)\n194: \n195:     if artifact_dir and artifact_dir.exists():\n196:         log_path = artifact_dir / \"ANAGNORISIS_LOG.md\"\n197:         log_path.write_text(content, encoding=\"utf-8\")\n198:         print(f\"  ✅ Log de sesión: {log_path}\", file=sys.stderr)\n199: \n200:     return content"
+    },
+    {
+      "path": "tools/skill_library/global/c5-terminological-archaeology/scripts/c5_lexicon_notary.py",
+      "start_line": 247,
+      "end_line": 276,
+      "source_sha256": "d96987b85fee7bfd75bf877e6fa4c2ed2d72b71611466ae517d4393e61406c2f",
+      "numbered_source": "247:     p.add_argument(\"--artifact-dir\", help=\"Directorio de artefactos de sesión para ANAGNORISIS_LOG.md\")\n248:     p.add_argument(\"--dry-run\", action=\"store_true\", help=\"No escribir — solo mostrar lo que se haría\")\n249:     p.add_argument(\"--verbose\", action=\"store_true\")\n250:     p.add_argument(\"--test\", action=\"store_true\")\n251:     args = p.parse_args()\n252: \n253:     if args.test:\n254:         run_tests()\n255: \n256:     artifact_dir = Path(args.artifact_dir) if args.artifact_dir else None\n257:     registered: list[dict] = []\n258: \n259:     # Modo 1: Registro manual de un único término\n260:     if args.term:\n261:         entry = _build_entry(\n262:             canonical_term=args.term,\n263:             intuicion=args.intuition,\n264:             coverage=1.0,  # Registro manual = cobertura asumida máxima\n265:             verdict=\"CONVERGE\",\n266:             delta=None,\n267:             author=args.author,\n268:             year=args.year,\n269:             work=args.work,\n270:             ref_url=args.ref_url,\n271:             conversation_id=args.conversation_id,\n272:             discipline=args.discipline,\n273:         )\n274:         was_written, key = register_entry(entry, dry_run=args.dry_run, verbose=args.verbose)\n275:         if was_written or args.dry_run:\n276:             registered.append(entry)"
+    },
+    {
+      "path": "tools/skill_library/global/c5-terminological-archaeology/scripts/c5_lexicon_notary.py",
+      "start_line": 326,
+      "end_line": 341,
+      "source_sha256": "d96987b85fee7bfd75bf877e6fa4c2ed2d72b71611466ae517d4393e61406c2f",
+      "numbered_source": "326:     if not registered:\n327:         print(\"  ⚠️  No hay entradas para registrar.\", file=sys.stderr)\n328:         return\n329: \n330:     # Cargar TODAS las entradas del lexicón para la tabla completa de Fase 2f\n331:     lexicon = _load_lexicon()\n332:     all_entries = [v for k, v in lexicon.items() if not k.startswith(\"_\") and isinstance(v, dict)]\n333: \n334:     # Inyectar Fase 2f en el lexicon-enforcer\n335:     _inject_phase_2f(all_entries, dry_run=args.dry_run)\n336: \n337:     # Generar log de sesión\n338:     _generate_anagnorisis_log(registered, artifact_dir=artifact_dir)\n339: \n340:     total = len(registered)\n341:     print(f\"\\n✅ NOTARIO: {total} término(s) {'registrado(s)' if not args.dry_run else 'en dry-run'}\", file=sys.stderr)"
+    },
+    {
+      "path": "tools/skill_library/global/c5-terminological-archaeology/scripts/c5_lexicon_notary.py",
+      "start_line": 148,
+      "end_line": 174,
+      "source_sha256": "d96987b85fee7bfd75bf877e6fa4c2ed2d72b71611466ae517d4393e61406c2f",
+      "numbered_source": "148: def _inject_phase_2f(entries: list[dict], dry_run: bool = False) -> bool:\n149:     \"\"\"Inyecta o actualiza la Fase 2f en el SKILL.md del lexicon-enforcer.\"\"\"\n150:     if not LEXICON_ENFORCER_SKILL.exists():\n151:         print(f\"  ⚠️  {LEXICON_ENFORCER_SKILL} no encontrado — Fase 2f omitida\", file=sys.stderr)\n152:         return False\n153: \n154:     content = LEXICON_ENFORCER_SKILL.read_text(encoding=\"utf-8\")\n155:     new_block = _build_phase_2f_block(entries)\n156: \n157:     # Eliminar bloque anterior de Fase 2f si existe\n158:     content = re.sub(\n159:         r\"\\n\\n### Fase 2f:.*\",\n160:         \"\",\n161:         content,\n162:         flags=re.DOTALL,\n163:     )\n164: \n165:     new_content = content.rstrip() + new_block\n166: \n167:     if dry_run:\n168:         print(\"[DRY-RUN] Bloque Fase 2f generado (no escrito):\")\n169:         print(new_block[:500])\n170:         return True\n171: \n172:     LEXICON_ENFORCER_SKILL.write_text(new_content, encoding=\"utf-8\")\n173:     print(f\"  ✅ Fase 2f inyectada en {LEXICON_ENFORCER_SKILL}\", file=sys.stderr)\n174:     return True"
+    },
+    {
+      "path": "tools/skill_library/global/c5-terminological-archaeology/scripts/c5_lexicon_notary.py",
+      "start_line": 334,
+      "end_line": 338,
+      "source_sha256": "d96987b85fee7bfd75bf877e6fa4c2ed2d72b71611466ae517d4393e61406c2f",
+      "numbered_source": "334:     # Inyectar Fase 2f en el lexicon-enforcer\n335:     _inject_phase_2f(all_entries, dry_run=args.dry_run)\n336: \n337:     # Generar log de sesión\n338:     _generate_anagnorisis_log(registered, artifact_dir=artifact_dir)"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/commands/grill_you.py",
+      "start_line": 39,
+      "end_line": 56,
+      "source_sha256": "4f2313bad24b372e7510379c0125e698ab3481921d8b57a70ed5677532fcfad2",
+      "numbered_source": "39:     def to_yaml(self) -> str:\n40:         decisions_str = \"\\n\".join(\n41:             f'  - question: \"{d.question}\"\\n'\n42:             f'    selected: \"{d.selected_option}\"\\n'\n43:             f'    rationale: \"{d.rationale}\"\\n'\n44:             f'    invariant: \"{d.target_invariant}\"'\n45:             for d in self.decisions\n46:         )\n47:         return (\n48:             \"Claim: Auto-entrevista de arquitectura (/grill-you) completada de forma autónoma sin fricción.\\n\"\n49:             \"Proof:\\n\"\n50:             f'  Topic: \"{self.topic}\"\\n'\n51:             f\"  Timestamp: {int(self.timestamp)}\\n\"\n52:             f\"  ExergyScore: {self.exergy_score}/1000.0\\n\"\n53:             f'  CORTEX_TAINT: \"{self.taint_hash}\"\\n'\n54:             \"Decisions:\\n\"\n55:             f\"{decisions_str}\\n\"\n56:         )"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/commands/grill_you.py",
+      "start_line": 116,
+      "end_line": 128,
+      "source_sha256": "4f2313bad24b372e7510379c0125e698ab3481921d8b57a70ed5677532fcfad2",
+      "numbered_source": "116:         return GrillYouReport(\n117:             topic=self.topic,\n118:             timestamp=now,\n119:             decisions=decisions,\n120:             exergy_score=1000.0,\n121:             taint_hash=taint_hash,\n122:         )\n123: \n124: \n125: def run_grill_you(topic: str = \"AgencyHypervisor Multi-Tenant Engine\") -> GrillYouReport:\n126:     \"\"\"Execute the /grill-you autonomous self-interview protocol.\"\"\"\n127:     engine = GrillYouEngine(topic=topic)\n128:     return engine.run()"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/commands/grill_you.py",
+      "start_line": 131,
+      "end_line": 134,
+      "source_sha256": "4f2313bad24b372e7510379c0125e698ab3481921d8b57a70ed5677532fcfad2",
+      "numbered_source": "131: if __name__ == \"__main__\":\n132:     report = run_grill_you()\n133:     print(\"█▄ Causal-Determinist GRILL-YOU AUTONOMOUS REPORT\\n\")\n134:     print(report.to_yaml())"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/genomics/vsa_oncology.py",
+      "start_line": 44,
+      "end_line": 62,
+      "source_sha256": "5010943aff0c4c6fd8080cef491aeda2e83e02cce8042c978c46c7a1bb4769a4",
+      "numbered_source": "44:     @classmethod\n45:     def from_seed(cls, seed_str: str) -> HyperVector:\n46:         \"\"\"Genera un vector hiperdimensional determinista e insesgado mediante Keccak SHAKE-256.\"\"\"\n47:         raw_bytes = hashlib.shake_256(seed_str.encode(\"utf-8\")).digest((DIMENSION + 7) // 8)\n48:         vec: list[int] = []\n49:         for b in raw_bytes:\n50:             for i in range(8):\n51:                 if len(vec) < DIMENSION:\n52:                     vec.append(1 if (b & (1 << i)) != 0 else -1)\n53:         return cls(vec)\n54: \n55:     def bind(self, other: HyperVector) -> HyperVector:\n56:         \"\"\"Binding O(1): Multiplicación componente a componente (Isomorfo a XOR).\"\"\"\n57:         return HyperVector([a * b for a, b in zip(self.data, other.data)])\n58: \n59:     def similarity(self, other: HyperVector) -> float:\n60:         \"\"\"Similitud cosenoidal normalizada en [-1.0, 1.0].\"\"\"\n61:         dot = sum(a * b for a, b in zip(self.data, other.data))\n62:         return dot / float(DIMENSION)"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/genomics/vsa_oncology.py",
+      "start_line": 89,
+      "end_line": 99,
+      "source_sha256": "5010943aff0c4c6fd8080cef491aeda2e83e02cce8042c978c46c7a1bb4769a4",
+      "numbered_source": "89:     def _load_primitives(self) -> None:\n90:         if not self.json_path.exists():\n91:             raise FileNotFoundError(f\"No se encuentra el catálogo ontológico en: {self.json_path}\")\n92: \n93:         with open(self.json_path, \"r\", encoding=\"utf-8\") as f:\n94:             data = json.load(f)\n95:             raw_list = data.get(\"primitives\", [])\n96:             for item in raw_list:\n97:                 p_id = item[\"id\"]\n98:                 self.primitives[p_id] = item\n99:                 self.vectors[p_id] = HyperVector.from_seed(f\"C5_ONC_{p_id}_{item['name']}\")"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/genomics/vsa_oncology.py",
+      "start_line": 112,
+      "end_line": 119,
+      "source_sha256": "5010943aff0c4c6fd8080cef491aeda2e83e02cce8042c978c46c7a1bb4769a4",
+      "numbered_source": "112:     def compute_drug_target_affinity(self, drug_name: str, target_id: str) -> float:\n113:         \"\"\"Calcula la resonancia hiperdimensional entre intervención y diana.\"\"\"\n114:         if target_id not in self.vectors:\n115:             raise KeyError(f\"Diana {target_id} no registrada.\")\n116:         v_drug = HyperVector.from_seed(f\"C5_DRUG_{drug_name}\")\n117:         v_target = self.vectors[target_id]\n118:         bound = v_drug.bind(v_target)\n119:         return bound.similarity(v_target)"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/transducers/appgen_ast_transducer.py",
+      "start_line": 27,
+      "end_line": 39,
+      "source_sha256": "e67ba98017e62d6c7cc3145255ad62f79b32115384f422649bc6309cbe550131",
+      "numbered_source": "27:     def validate_syntax(code: str, language: str = \"python\") -> Tuple[bool, Optional[str], Optional[int]]:\n28:         \"\"\"Valida mecánicamente en silicio si el código compila/parsea sin invocar LLMs.\n29:         Retorna (is_valid, error_msg, line_number).\n30:         \"\"\"\n31:         lang = language.lower().strip()\n32:         if lang in (\"python\", \"py\"):\n33:             try:\n34:                 ast.parse(code)\n35:                 return True, None, None\n36:             except SyntaxError as e:\n37:                 return False, e.msg, e.lineno\n38: \n39:         elif lang in (\"typescript\", \"javascript\", \"tsx\", \"jsx\", \"ts\", \"js\", \"json\"):"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/transducers/appgen_ast_transducer.py",
+      "start_line": 39,
+      "end_line": 86,
+      "source_sha256": "e67ba98017e62d6c7cc3145255ad62f79b32115384f422649bc6309cbe550131",
+      "numbered_source": "39:         elif lang in (\"typescript\", \"javascript\", \"tsx\", \"jsx\", \"ts\", \"js\", \"json\"):\n40:             # Verificación de sintaxis de delimitadores y balance estructural en silicio\n41:             stack = []\n42:             pairs = {\")\": \"(\", \"}\": \"{\", \"]\": \"[\"}\n43:             in_string = False\n44:             str_char = \"\"\n45:             lines = code.split(\"\\n\")\n46: \n47:             for line_no, line in enumerate(lines, start=1):\n48:                 idx = 0\n49:                 while idx < len(line):\n50:                     ch = line[idx]\n51:                     # Control de strings literales\n52:                     if ch in (\"'\", '\"', \"`\"):\n53:                         if not in_string:\n54:                             in_string = True\n55:                             str_char = ch\n56:                         elif ch == str_char and (idx == 0 or line[idx - 1] != \"\\\\\"):\n57:                             in_string = False\n58:                     elif not in_string:\n59:                         # Comentarios de línea única\n60:                         if ch == \"/\" and idx + 1 < len(line) and line[idx + 1] == \"/\":\n61:                             break\n62:                         if ch in \"({[\":\n63:                             stack.append((ch, line_no))\n64:                         elif ch in \")}]\":\n65:                             if not stack:\n66:                                 return False, f\"Delimitador de cierre '{ch}' inesperado\", line_no\n67:                             top, top_line = stack.pop()\n68:                             if pairs[ch] != top:\n69:                                 return False, f\"Desbalance: '{ch}' cierra '{top}' de línea {top_line}\", line_no\n70:                     idx += 1\n71: \n72:             if stack:\n73:                 top, top_line = stack[-1]\n74:                 return False, f\"Delimitador abierto '{top}' en línea {top_line} sin cerrar\", top_line\n75: \n76:             # Si es JSON puro, parsear con json.loads\n77:             if lang == \"json\":\n78:                 try:\n79:                     json.loads(code)\n80:                 except json.JSONDecodeError as e:\n81:                     return False, e.msg, e.lineno\n82: \n83:             return True, None, None\n84: \n85:         # Para otros lenguajes, fallback a balance estructural básico\n86:         return True, None, None"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/transducers/appgen_ast_transducer.py",
+      "start_line": 95,
+      "end_line": 117,
+      "source_sha256": "e67ba98017e62d6c7cc3145255ad62f79b32115384f422649bc6309cbe550131",
+      "numbered_source": "95:         for m in matches:\n96:             lang_or_file, explicit_file, body = m.groups()\n97:             target_path = explicit_file or lang_or_file or \"snippet.txt\"\n98:             lang = (\n99:                 \"python\"\n100:                 if target_path.endswith(\".py\")\n101:                 else \"typescript\"\n102:                 if target_path.endswith((\".ts\", \".tsx\"))\n103:                 else \"text\"\n104:             )\n105: \n106:             is_valid, err_msg, line = cls.validate_syntax(body, language=lang)\n107:             extracted.append(\n108:                 {\n109:                     \"path\": target_path,\n110:                     \"language\": lang,\n111:                     \"code\": body,\n112:                     \"is_valid\": is_valid,\n113:                     \"error\": err_msg,\n114:                     \"error_line\": line,\n115:                     \"sha256\": hashlib.sha256(body.encode(\"utf-8\")).hexdigest(),\n116:                 }\n117:             )"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/transducers/appgen_ast_transducer.py",
+      "start_line": 121,
+      "end_line": 135,
+      "source_sha256": "e67ba98017e62d6c7cc3145255ad62f79b32115384f422649bc6309cbe550131",
+      "numbered_source": "121:     @classmethod\n122:     def zero_token_feedback_loop(cls, code: str, language: str) -> Dict[str, Any]:\n123:         \"\"\"Bucle de retroalimentación de Anillo-0 a coste cero.\n124:         Genera restricciones causales sin gastar tokens en otro LLM.\n125:         \"\"\"\n126:         is_valid, err_msg, line = cls.validate_syntax(code, language)\n127:         if is_valid:\n128:             return {\"status\": \"APPROVED\", \"zero_token_cost\": True, \"constraint\": None}\n129: \n130:         return {\n131:             \"status\": \"REJECTED\",\n132:             \"zero_token_cost\": True,\n133:             \"error_code\": \"AST_SYNTAX_ERROR\",\n134:             \"line\": line,\n135:             \"constraint\": f\"CORRECT_SYNTAX: Line {line} -> {err_msg}\","
+    },
+    {
+      "path": "02_EDIN_SWARMS/agents_archi/orchestrator/lifecycle.py",
+      "start_line": 95,
+      "end_line": 121,
+      "source_sha256": "7b796da789a8a0d5845447e267853681453c9a230e22491ff461fcad8c1111ad",
+      "numbered_source": "95:     def transition_to(self, new_state: SubagentState, reason: str = \"\") -> bool:\n96:         \"\"\"Transitions agent to a new state if valid according to the FSM graph.\"\"\"\n97:         if self.current_state == SubagentState.POISONED:\n98:             raise RuntimeError(f\"Agent {self.agent_id} is POISONED (fail-stop active). Cannot transition.\")\n99: \n100:         if new_state not in VALID_TRANSITIONS.get(self.current_state, set()):\n101:             raise ValueError(\n102:                 f\"Invalid transition for agent {self.agent_id}: {self.current_state.value} -> {new_state.value}\"\n103:             )\n104: \n105:         now = time.time()\n106:         self.history.append(\n107:             {\n108:                 \"from\": self.current_state.value,\n109:                 \"to\": new_state.value,\n110:                 \"timestamp\": now,\n111:                 \"duration_s\": round(now - self.state_entered_at, 4),\n112:                 \"reason\": reason,\n113:             }\n114:         )\n115:         self.current_state = new_state\n116:         self.state_entered_at = now\n117: \n118:         if self.transition_callback:\n119:             self.transition_callback(self.agent_id, new_state.value, reason)\n120: \n121:         return True"
+    },
+    {
+      "path": "02_EDIN_SWARMS/agents_archi/orchestrator/lifecycle.py",
+      "start_line": 180,
+      "end_line": 208,
+      "source_sha256": "7b796da789a8a0d5845447e267853681453c9a230e22491ff461fcad8c1111ad",
+      "numbered_source": "180:         if os.path.exists(self.WAL_PATH):\n181:             logger.info(f\"Restoring agent topology from WAL: {self.WAL_PATH}\")\n182:             with open(self.WAL_PATH, \"r\") as f:\n183:                 for line in f:\n184:                     try:\n185:                         record = json.loads(line)\n186:                         if record.get(\"event\") == \"SPAWN\":\n187:                             self.spawn(record[\"agent_id\"], record[\"role\"], restore=True)\n188:                         elif record.get(\"event\") == \"TRANSITION\":\n189:                             agent = self.get(record[\"agent_id\"])\n190:                             if agent:\n191:                                 # Restaurar estado sin disparar callbacks al WAL\n192:                                 agent.current_state = SubagentState(record[\"new_state\"])\n193:                                 agent.state_entered_at = record.get(\"timestamp\", time.time())\n194:                     except Exception as e:\n195:                         logger.warning(f\"Failed to parse WAL record: {e}\")\n196: \n197:     def _log_causal_event(self, event_type: str, data: dict[str, str]) -> None:\n198:         \"\"\"Registra transiciones atómicamente en disco para evitar amnesia de Apoptosis.\"\"\"\n199:         record = json.dumps({\"timestamp\": time.time(), \"event\": event_type, **data})\n200:         try:\n201:             with open(self.WAL_PATH, \"a\") as f:\n202:                 fcntl.flock(f, fcntl.LOCK_EX)\n203:                 f.write(f\"{record}\\n\")\n204:                 f.flush()\n205:                 os.fsync(f.fileno())\n206:                 fcntl.flock(f, fcntl.LOCK_UN)\n207:         except IOError as e:\n208:             logger.error(f\"WAL write failed: {e}\")"
+    },
+    {
+      "path": "02_EDIN_SWARMS/agents_archi/orchestrator/lifecycle.py",
+      "start_line": 210,
+      "end_line": 211,
+      "source_sha256": "7b796da789a8a0d5845447e267853681453c9a230e22491ff461fcad8c1111ad",
+      "numbered_source": "210:     def _on_agent_transition(self, agent_id: str, new_state: str, reason: str) -> None:\n211:         self._log_causal_event(\"TRANSITION\", {\"agent_id\": agent_id, \"new_state\": new_state, \"reason\": reason})"
+    },
+    {
+      "path": "02_EDIN_SWARMS/agents_archi/orchestrator/lifecycle.py",
+      "start_line": 226,
+      "end_line": 242,
+      "source_sha256": "7b796da789a8a0d5845447e267853681453c9a230e22491ff461fcad8c1111ad",
+      "numbered_source": "226:     def spawn(\n227:         self, agent_id: str, role: str = \"generalist\", timeout_s: Optional[float] = None, restore: bool = False\n228:     ) -> SubagentHandle:\n229:         \"\"\"Spawns and registers a new subagent with bounded state duration.\"\"\"\n230:         effective_timeout = timeout_s if timeout_s is not None else self.default_timeout_s\n231:         handle = SubagentHandle(\n232:             agent_id=agent_id,\n233:             role=role,\n234:             max_state_duration_s=effective_timeout,\n235:             transition_callback=self._on_agent_transition,\n236:         )\n237:         self._agents[agent_id] = handle\n238: \n239:         if not restore:\n240:             self._log_causal_event(\"SPAWN\", {\"agent_id\": agent_id, \"role\": role})\n241: \n242:         return handle"
+    },
+    {
+      "path": "docs/04_research/LOS_10_MAYORES_DESCUBRIMIENTOS_Y_AVANCES.md",
+      "start_line": 183,
+      "end_line": 208,
+      "source_sha256": "a0838daae711adb988f57aed2e99c30996b7b674b4187708dd5a2f3ce7c3b1e5",
+      "numbered_source": "183: ## 6. Verificación Formal en Lean 4 («No me jures que no falla: demuéstramelo con teoremas»)\n184: \n185: $$\\boxed{\\forall \\, \\tau \\in \\text{ExecutionTraces}, \\quad \\text{WellFormed}(\\tau) \\implies \\text{AX0_Safe}(\\tau) \\land \\text{NoTornReads}(\\tau)}$$\n186: \n187: ### 💥 El Barro: La Hostia en Producción\n188: Durante meses, tuvimos una suite de más de 400 tests unitarios en Python y Rust. Todos los días pasaban en verde en GitHub Actions (`400 passed in 12.4s`). Nos sentíamos seguros.  \n189: Hasta que un viernes por la tarde, corriendo una prueba de concurrencia pesada durante 8 horas seguidas, el sistema falló una sola vez. Una carrera entre un lector y un escritor que se daba una vez cada 20 millones de ciclos de CPU. El test no lo pillaba porque duraba 12 segundos. Nos dimos cuenta de la trampa: **los tests empíricos solo demuestran la presencia de errores, jamás su ausencia** (Dijkstra).\n190: \n191: ### 🔄 La Solución Intentada Frustrada\n192: Subir el número de iteraciones en los tests de CI: ponerlos a correr 10.000 veces. Lo único que conseguimos fue quemar minutos de GitHub Actions, aumentar la factura y seguir con la incertidumbre probabilística en el cuerpo.\n193: \n194: ### ⚡ El Salto Topológico y la Forja en Silicio\n195: Decidimos cruzar el rubicón hacia los métodos formales puros. Escribimos la semántica del motor en **Lean 4** (`proof/lean/BabylonTrace.lean` y `proof/lean/AX0.lean`).  \n196: No escribimos tests: formulamos teoremas matemáticos universales:\n197: ```lean\n198: theorem no_torn_reads_universal (trace : ExecutionTrace) (h : WellFormed trace) :\n199:   NoTornReads trace := by ...\n200: ```\n201: El compilador de Lean 4 verifica matemáticamente por inducción estructural que, bajo las reglas de nuestro Seqlock y de nuestra máquina de estados, es **físicamente imposible** que exista una traza de ejecución donde ocurra una lectura rota o una violación de AX-0. Pasamos de la probabilidad a la certeza matemática de silicio.\n202: \n203: ### 🧪 La Prueba del Nueve Hoy\n204: Comprueba las pruebas formales en tu máquina:\n205: ```bash\n206: lean proof/lean/BabylonTrace.lean && lean proof/lean/AX0.lean\n207: ```\n208: Cero errores. El verificador de tipos de Lean 4 certifica la validez matemática absoluta del código."
+    },
+    {
+      "path": "proof/lean/BabylonTrace.lean",
+      "start_line": 148,
+      "end_line": 169,
+      "source_sha256": "83b00a15497eaf2d2362fda7dfa6ce8090c59435dfede6ecb7fac54ad18c76ba",
+      "numbered_source": "148: /--\n149:   TEOREMA CANÓNICO SEQLOCK (C5-REAL):\n150:   Para CUALQUIER traza de longitud arbitraria, si la ejecución es válida\n151:   a partir del estado inicial en reposo (seq=0, writer=none), TODA lectura\n152:   declara una secuencia par. No implica que el estado global sea par durante\n153:   la lectura ni demuestra coherencia del payload o ausencia física de torn reads.\n154:   El nombre histórico se conserva por compatibilidad con consumidores.\n155: -/\n156: theorem no_torn_reads_universal (trace : List Event) :\n157:   validateTrace trace = true → TraceReadsEven trace := by\n158:   intro h\n159:   dsimp [validateTrace, validateTraceRecursive] at h\n160:   cases h_aeon : runAeon (some { seq := 0, writer := none }) trace with\n161:   | none =>\n162:     rw [h_aeon] at h\n163:     contradiction\n164:   | some finalState =>\n165:     exact runAeon_reads_even { seq := 0, writer := none } trace finalState h_aeon\n166: \n167: /-- Testigo de firma anti-debilitamiento (bloquea mutación m3 de tautología vacía) -/\n168: abbrev NoTornReadsProp : Prop :=\n169:   ∀ (trace : List Event), validateTrace trace = true → TraceReadsEven trace"
+    },
+    {
+      "path": "proof/lean/AX0.lean",
+      "start_line": 139,
+      "end_line": 154,
+      "source_sha256": "ff038f17b706f18c3fba64e1e907e34e5efa3b578fc02d98f08b1013cce77fd0",
+      "numbered_source": "139: /--\n140:   TEOREMA CANÓNICO AUTH_001:\n141:   Para CUALQUIER traza de longitud arbitraria, si la ejecución es válida\n142:   comenzando en Proposed, el evento 'dispatch' ocurre como máximo UNA vez.\n143: -/\n144: theorem auth_001_universal_inductive_safety (trace : List AuthEvent) :\n145:   validateTrace trace .Proposed = true → countDispatches trace ≤ 1 := by\n146:   intro h\n147:   have h_max := max_dispatches_from_state trace .Proposed h\n148:   exact h_max\n149: \n150: /-- Testigo de firma anti-debilitamiento (bloquea mutación m3 de tautología vacía) -/\n151: abbrev Auth001SafetyProp : Prop :=\n152:   ∀ (trace : List AuthEvent), validateTrace trace .Proposed = true → countDispatches trace ≤ 1\n153: \n154: example : Auth001SafetyProp := auth_001_universal_inductive_safety"
+    },
+    {
+      "path": "scripts/c5_calibrations/calibrate_aphairesis.py",
+      "start_line": 123,
+      "end_line": 126,
+      "source_sha256": "e88cdd4a2474cc9625d6ee2628213086684a3efffe031320c933455580e253e7",
+      "numbered_source": "123:     os.makedirs(os.path.dirname(output_filepath), exist_ok=True)\n124:     with open(output_filepath, \"w\", encoding=\"utf-8\") as f:\n125:         f.write(code)\n126:     print(f\"[✓] Constantes Rust emitidas exitosamente en: {output_filepath}\")"
+    },
+    {
+      "path": "scripts/c5_calibrations/calibrate_aphairesis.py",
+      "start_line": 128,
+      "end_line": 149,
+      "source_sha256": "e88cdd4a2474cc9625d6ee2628213086684a3efffe031320c933455580e253e7",
+      "numbered_source": "128: def main() -> None:\n129:     np.random.seed(42)\n130:     # Generar nube de datos de prueba isomórfica al corpus (1000 muestras, d=64)\n131:     N = 1000\n132:     d_raw = 64\n133:     d_compressed = 16\n134:     \n135:     X_raw = np.random.randn(N, d_raw)\n136:     # Simular proyección f: X -> Y (reducción de dimensionalidad PCA/Sheaf)\n137:     u, s, vh = np.linalg.svd(X_raw, full_matrices=False)\n138:     Y_compressed = u[:, :d_compressed] @ np.diag(s[:d_compressed])\n139:     \n140:     # Reconstructor f*: Y -> X^\n141:     def f_reconstruct(Y):\n142:         return Y @ vh[:d_compressed, :]\n143:     \n144:     calib = calibrate_operator(X_raw, Y_compressed, f_reconstruct)\n145:     output_rs = os.path.join(os.path.dirname(__file__), \"..\", \"src\", \"generated_aphairesis_constants.rs\")\n146:     emit_rust_constants(calib, output_rs)\n147: \n148: if __name__ == \"__main__\":\n149:     main()"
+    },
+    {
+      "path": "src/lib.rs",
+      "start_line": 67,
+      "end_line": 71,
+      "source_sha256": "d3ecd074ba2582e1bb89c7e98ba767c3e83485bc8225840aa04be36732701737",
+      "numbered_source": "67: /// Módulo de invariantes termodinámicos y bisimulación.\n68: pub mod thermodynamics;\n69: /// Módulo de constantes de calibración topológica de Aphairesis auto-generado.\n70: #[cfg(feature = \"research-math\")]\n71: pub mod generated_aphairesis_constants;"
+    },
+    {
+      "path": "scripts/c5_demos/falsacion_semantic_entropy_baremetal.rs",
+      "start_line": 40,
+      "end_line": 63,
+      "source_sha256": "9f95e06f542336b82fa1dc3752e3a5297034b10d8098e8a768fb1294d77755a2",
+      "numbered_source": "40: impl BitmaskSemanticEngine {\n41:     /// Particiona hasta N=8 muestras representadas en una matriz de adyacencia de 64 bits.\n42:     /// La celda (i, j) está en el bit (i * 8 + j).\n43:     #[inline(always)]\n44:     pub fn cluster_and_compute_entropy(adj_matrix: u64, n: usize) -> (u16, u8) {\n45:         debug_assert!(n <= 8);\n46:         if n == 0 {\n47:             return (0, 0);\n48:         }\n49: \n50:         let mut visited: u8 = 0;\n51:         let mut class_sizes = [0u8; 8];\n52:         let mut num_classes = 0usize;\n53: \n54:         for i in 0..n {\n55:             let mask_i = 1u8 << i;\n56:             if (visited & mask_i) != 0 {\n57:                 continue;\n58:             }\n59: \n60:             // Fila i de la matriz de adyacencia (8 bits)\n61:             let row_i = ((adj_matrix >> (i * 8)) & 0xFF) as u8;\n62:             // Nueva clase conteniendo a i y a todos los j equivalentes\n63:             let class_members = row_i & ((1u8 << n) - 1);"
+    },
+    {
+      "path": "scripts/c5_demos/falsacion_semantic_entropy_baremetal.rs",
+      "start_line": 88,
+      "end_line": 101,
+      "source_sha256": "9f95e06f542336b82fa1dc3752e3a5297034b10d8098e8a768fb1294d77755a2",
+      "numbered_source": "88:     /// Filtro de doble barrera causal en silicio (KUDURRU-64)\n89:     #[inline(always)]\n90:     pub fn evaluate_manifest(\n91:         manifest: &mut KudurruManifest,\n92:         adj_matrix: u64,\n93:         n: usize,\n94:         is_z3_sat: bool,\n95:     ) {\n96:         manifest.magic = MAGIC_BABYLON;\n97:         manifest.entailment_mask = adj_matrix;\n98: \n99:         // Fase 1: Filtro de Entropía Semántica (Confabulaciones)\n100:         let (h_sem_scaled, k) = Self::cluster_and_compute_entropy(adj_matrix, n);\n101:         manifest.h_sem_scaled = h_sem_scaled;"
+    },
+    {
+      "path": "scripts/c5_demos/falsacion_semantic_entropy_baremetal.rs",
+      "start_line": 138,
+      "end_line": 148,
+      "source_sha256": "9f95e06f542336b82fa1dc3752e3a5297034b10d8098e8a768fb1294d77755a2",
+      "numbered_source": "138:     // Matrices de adyacencia sintéticas (N=5 muestras)\n139:     // 1. Conocimiento Genuino: Clique completo 5x5 (todas las muestras equivalentes)\n140:     let mut adj_genuine: u64 = 0;\n141:     for i in 0..5 {\n142:         adj_genuine |= (0b0001_1111u64) << (i * 8);\n143:     }\n144: \n145:     // 2. Confabulación Estocástica: Identidad 5x5 (cada muestra es su propia clase disjunta, K=5)\n146:     let mut adj_confab: u64 = 0;\n147:     for i in 0..5 {\n148:         adj_confab |= (1u64 << i) << (i * 8);"
+    },
+    {
+      "path": "scripts/c5_demos/falsacion_semantic_entropy_baremetal.rs",
+      "start_line": 191,
+      "end_line": 215,
+      "source_sha256": "9f95e06f542336b82fa1dc3752e3a5297034b10d8098e8a768fb1294d77755a2",
+      "numbered_source": "191:         match quad {\n192:             0 => {\n193:                 // Q1: Conocimiento Genuino (SAT en Z3)\n194:                 BitmaskSemanticEngine::evaluate_manifest(manifest, adj_genuine, 5, true);\n195:                 if manifest.status == STATUS_VERIFIED {\n196:                     count_verified += 1;\n197:                 }\n198:             }\n199:             1 => {\n200:                 // Q2: Confabulación Estocástica (H_sem alto)\n201:                 BitmaskSemanticEngine::evaluate_manifest(manifest, adj_confab, 5, false);\n202:                 if manifest.status == STATUS_APOPTOSIS && manifest.error_code == ERR_CONFABULATION {\n203:                     count_confab_apoptosis += 1;\n204:                 }\n205:             }\n206:             2 => {\n207:                 // Q3: Creencia Errónea Sistemática (H_sem ~ 0, pero UNSAT en Z3)\n208:                 BitmaskSemanticEngine::evaluate_manifest(manifest, adj_incorrect_belief, 5, false);\n209:                 if manifest.status == STATUS_APOPTOSIS && manifest.error_code == ERR_INCORRECT_BELIEF {\n210:                     count_belief_apoptosis += 1;\n211:                 }\n212:             }\n213:             _ => {\n214:                 // Q4: Polisemia Legítima (H_sem moderado, SAT en Z3)\n215:                 BitmaskSemanticEngine::evaluate_manifest(manifest, adj_poly, 5, true);"
+    },
+    {
+      "path": "scripts/c5_destiladora/invariant_extractor_z3.py",
+      "start_line": 52,
+      "end_line": 86,
+      "source_sha256": "09c6fbf9668323bca1c56bdfa441277ff641a57bc3fcc59189477a416a0f5959",
+      "numbered_source": "52:             # Recuperar trazas asociadas\n53:             cursor.execute(\n54:                 \"\"\"\n55:                 SELECT trace_id, files_touched_json, tool_sequence_json, exit_gate_cmd, exit_gate_code\n56:                 FROM cortex_goal_traces\n57:                 WHERE input_ast_digest = ? AND exit_gate_code = 0\n58:                 \"\"\",\n59:                 (ast_sig,)\n60:             )\n61:             traces = cursor.fetchall()\n62:             if not traces:\n63:                 continue\n64: \n65:             files_list = json.loads(traces[0][\"files_touched_json\"])\n66:             expected_files_count = len(files_list)\n67:             ast_prefix_u64 = int(ast_sig[:16], 16)\n68: \n69:             # Formular verificación en Z3 (Vértice Gamma pre-Lean)\n70:             solver = z3.Solver()\n71:             \n72:             exit_code = z3.Int(\"exit_code\")\n73:             files_count = z3.Int(\"files_count\")\n74:             sig_prefix = z3.BitVec(\"sig_prefix\", 64)\n75:             seq_in = z3.BitVec(\"seq_in\", 64)\n76:             seq_out = z3.BitVec(\"seq_out\", 64)\n77: \n78:             # Precondiciones e invariante de paridad Seqlock en BitVec64\n79:             solver.add(exit_code == 0)\n80:             solver.add(files_count == expected_files_count)\n81:             solver.add(sig_prefix == z3.BitVecVal(ast_prefix_u64, 64))\n82:             solver.add((seq_in & z3.BitVecVal(1, 64)) == z3.BitVecVal(0, 64))\n83:             solver.add(seq_out == seq_in + z3.BitVecVal(2, 64))\n84:             solver.add((seq_out & z3.BitVecVal(1, 64)) == z3.BitVecVal(0, 64))\n85:             \n86:             is_sat = solver.check() == z3.sat"
+    },
+    {
+      "path": "scripts/c5_destiladora/invariant_extractor_z3.py",
+      "start_line": 90,
+      "end_line": 117,
+      "source_sha256": "09c6fbf9668323bca1c56bdfa441277ff641a57bc3fcc59189477a416a0f5959",
+      "numbered_source": "90:             if is_sat:\n91:                 precondition_str = (\n92:                     f\"AST_SIG_U64==0x{ast_sig[:16]} && FILES_COUNT=={expected_files_count} \"\n93:                     f\"&& SEQLOCK_EVEN(seq_in) && EXIT_CODE==0\"\n94:                 )\n95:                 fn_name = f\"resolve_crystallized_{cluster_id}\"\n96:                 \n97:                 with conn:\n98:                     conn.execute(\n99:                         \"\"\"\n100:                         UPDATE cortex_invariant_clusters\n101:                         SET z3_precondition = ?,\n102:                             crystallized_fn_name = ?,\n103:                             status = 'EXTRACTED'\n104:                         WHERE cluster_id = ?\n105:                         \"\"\",\n106:                         (precondition_str, fn_name, cluster_id)\n107:                     )\n108:                 \n109:                 results.append({\n110:                     \"cluster_id\": cluster_id,\n111:                     \"ast_signature\": ast_sig,\n112:                     \"files_count\": expected_files_count,\n113:                     \"sample_count\": sample_count,\n114:                     \"precondition\": precondition_str,\n115:                     \"crystallized_fn\": fn_name,\n116:                     \"status\": \"EXTRACTED\"\n117:                 })"
+    },
+    {
+      "path": "scripts/c5_destiladora/goal_trace_ingestor.py",
+      "start_line": 60,
+      "end_line": 62,
+      "source_sha256": "b7ce8630f10b4ecc66b22a547ee559068351c1913a66623b57d57e3239999e4c",
+      "numbered_source": "60:     # Hash de contexto de entrada\n61:     ast_inputs_combined = \"\".join(files_touched) + contract_text\n62:     input_ast_digest = calculate_sha256(ast_inputs_combined)"
+    },
+    {
+      "path": "scripts/c5_destiladora/goal_trace_ingestor.py",
+      "start_line": 101,
+      "end_line": 110,
+      "source_sha256": "b7ce8630f10b4ecc66b22a547ee559068351c1913a66623b57d57e3239999e4c",
+      "numbered_source": "101:         # Actualizar o crear cluster de similitud estructural\n102:         cluster_id = calculate_sha256(f\"{input_ast_digest}:{exit_gate_cmd}\")[:16]\n103:         conn.execute(\n104:             \"\"\"\n105:             INSERT INTO cortex_invariant_clusters (cluster_id, ast_signature, sample_count, status)\n106:             VALUES (?, ?, 1, 'ACCUMULATING')\n107:             ON CONFLICT(cluster_id) DO UPDATE SET\n108:                 sample_count = sample_count + 1\n109:             \"\"\",\n110:             (cluster_id, input_ast_digest),"
+    },
+    {
+      "path": "scripts/c5_destiladora/proof_emitter_lean4.py",
+      "start_line": 164,
+      "end_line": 196,
+      "source_sha256": "e0f85cdf754c6d4ea3e1367176dd7eb3caa296a82d07eb86f7f976b5b70cf85c",
+      "numbered_source": "164:         cursor.execute(\n165:             \"\"\"\n166:             SELECT cluster_id, ast_signature, z3_precondition\n167:             FROM cortex_invariant_clusters\n168:             WHERE status = 'EXTRACTED'\n169:             \"\"\"\n170:         )\n171:         clusters = cursor.fetchall()\n172:         lean_bin = shutil.which(\"lean\") or \"/opt/homebrew/bin/lean\"\n173: \n174:         verified = []\n175:         for c in clusters:\n176:             cid = c[\"cluster_id\"]\n177:             ast_sig = c[\"ast_signature\"]\n178:             cursor.execute(\n179:                 \"\"\"\n180:                 SELECT files_touched_json FROM cortex_goal_traces\n181:                 WHERE input_ast_digest = ? AND exit_gate_code = 0\n182:                 LIMIT 1\n183:                 \"\"\",\n184:                 (ast_sig,),\n185:             )\n186:             trace_row = cursor.fetchone()\n187:             files_count = len(json.loads(trace_row[\"files_touched_json\"])) if trace_row else 1\n188: \n189:             thm_name = f\"thm_invariant_{cid}\"\n190:             lean_filename = f\"Destiladora_{cid}.lean\"\n191:             lean_path = self.lean_dir / lean_filename\n192: \n193:             lean_content = LEAN_TEMPLATE.format(\n194:                 cluster_id=cid,\n195:                 ast_sig=ast_sig[:16],\n196:                 files_count=files_count,"
+    },
+    {
+      "path": "scripts/c5_destiladora/codegen_rust_b60.py",
+      "start_line": 37,
+      "end_line": 65,
+      "source_sha256": "8ee34a5eb6ff6926058da864ba632c9701689383f8deb67b2cd166ef3bfc13bf",
+      "numbered_source": "37:     cursor.execute(\n38:         \"\"\"\n39:         SELECT cluster_id, ast_signature, z3_precondition, crystallized_fn_name\n40:         FROM cortex_invariant_clusters\n41:         WHERE (status = 'PROVED' OR status = 'COMPILED') AND lean4_proof_status = 'PROVED'\n42:         \"\"\"\n43:     )\n44:     rows = cursor.fetchall()\n45: \n46:     cluster_specs = []\n47:     for row in rows:\n48:         cid = row[\"cluster_id\"]\n49:         ast_sig = row[\"ast_signature\"]\n50:         fn_name = row[\"crystallized_fn_name\"] or f\"resolve_crystallized_{cid}\"\n51:         cursor.execute(\n52:             \"\"\"\n53:             SELECT files_touched_json FROM cortex_goal_traces\n54:             WHERE input_ast_digest = ? AND exit_gate_code = 0\n55:             LIMIT 1\n56:             \"\"\",\n57:             (ast_sig,),\n58:         )\n59:         trace_row = cursor.fetchone()\n60:         files_count = len(json.loads(trace_row[\"files_touched_json\"])) if trace_row else 1\n61:         cluster_specs.append({\n62:             \"cluster_id\": cid,\n63:             \"ast_sig\": ast_sig,\n64:             \"fn_name\": fn_name,\n65:             \"files_count\": files_count,"
+    },
+    {
+      "path": "scripts/c5_quality_gates/canary_check.py",
+      "start_line": 11,
+      "end_line": 17,
+      "source_sha256": "843c22a34b3a354091be1e1af1c4c2a14a631bc3c18b29de0915d595fcf0b849",
+      "numbered_source": "11:   1. Avisa si un fichero de credencial local que DEBERÍA existir fuera\n12:      del repo aparece DENTRO del árbol (fuga inminente).\n13:   2. Falla el commit/push si un patrón canary declarado en\n14:      `docs/CANARY_TOKENS.md` ha desaparecido del índice (posible purga\n15:      accidental o maliciosa del señuelo).\n16: \n17: Exit 0 = OK · Exit 1 = canary perdido o fuga detectada."
+    },
+    {
+      "path": "scripts/c5_quality_gates/canary_check.py",
+      "start_line": 43,
+      "end_line": 48,
+      "source_sha256": "843c22a34b3a354091be1e1af1c4c2a14a631bc3c18b29de0915d595fcf0b849",
+      "numbered_source": "43: def _tracked_files() -> list[str]:\n44:     try:\n45:         out = subprocess.run(\n46:             [\"git\", \"ls-files\"], capture_output=True, text=True, check=False\n47:         ).stdout\n48:         return [ln for ln in out.splitlines() if ln]"
+    },
+    {
+      "path": "scripts/c5_quality_gates/canary_check.py",
+      "start_line": 62,
+      "end_line": 77,
+      "source_sha256": "843c22a34b3a354091be1e1af1c4c2a14a631bc3c18b29de0915d595fcf0b849",
+      "numbered_source": "62:     # 2. Canaries declarados y plantados (- [x] canary_path: ...)\n63:     if CANARY_MANIFEST.exists():\n64:         body = CANARY_MANIFEST.read_text(encoding=\"utf-8\", errors=\"replace\")\n65:         declared = re.findall(r\"-\\s*\\[[xX]\\]\\s*canary_path:\\s*(\\S+)\", body)\n66:         for path in declared:\n67:             if path not in tracked and not Path(path).exists():\n68:                 failures.append(f\"CANARY LOST: '{path}' declarado como plantado pero ausente\")\n69:     else:\n70:         print(\"[Ω-12] idle: docs/CANARY_TOKENS.md no existe (canaries no plantados aún)\")\n71: \n72:     if failures:\n73:         for f in failures:\n74:             print(f\"[Ω-12 FAIL] {f}\", file=sys.stderr)\n75:         return 1\n76:     print(\"[Ω-12 OK] sin fugas; canaries íntegros (o idle)\")\n77:     return 0"
+    },
+    {
+      "path": ".pre-commit-config.yaml",
+      "start_line": 42,
+      "end_line": 46,
+      "source_sha256": "62dbce0d7b80ba72ca8a527b5ac0f0b2e7b3c24153346e4562dc17f0629f3ccf",
+      "numbered_source": "42:       - id: canary-guard\n43:         name: canary tokens present in tree\n44:         entry: python3 scripts/c5_quality_gates/canary_check.py\n45:         language: system\n46:         pass_filenames: false"
+    },
+    {
+      "path": "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py",
+      "start_line": 64,
+      "end_line": 114,
+      "source_sha256": "32cef58031bab84d9fb78b0cbb3ab132008d6f7431f4fe4f6c29da34a8b8876a",
+      "numbered_source": "64: async def audit_cohort_ring0(agent_id: int, sem: asyncio.Semaphore) -> AgentAuditResult:\n65:     async with sem:\n66:         t0 = time.perf_counter()\n67:         target = f\"Ring-0 / Hardware Spec (Agent {agent_id:03d})\"\n68:         verdict = \"PASS\"\n69:         details = \"Alineación y cotas verificadas\"\n70: \n71:         if agent_id == 1:\n72:             target = \"SharedManifest 64B L1 Cache Alignment\"\n73:             shm_files = list(REPO_ROOT.glob(\"**/shared_manifest*.rs\")) + list(\n74:                 REPO_ROOT.glob(\"**/c5_shared_manifest*.py\")\n75:             )\n76:             details = f\"Inspeccionados {len(shm_files)} archivos de manifiesto compartido (align=64)\"\n77:         elif agent_id == 2:\n78:             target = \"Atomic Acquire-Release Primitives\"\n79:             details = \"Primitivas atómicas sin bloqueo SPMC certificadas en Ring-0\"\n80:         elif agent_id == 3:\n81:             target = \"Seqlock Par/Impar Aristotélico\"\n82:             details = \"Secuencia par (lectores libres RFO=0) e impar (escritor único) conforme\"\n83:         elif agent_id == 4:\n84:             target = \"Fail-Stop Apoptosis 0xDEAD_6060\"\n85:             details = \"Código de veneno inmutable 0xDEAD_6060 configurado en orquestador\"\n86:         elif agent_id == 5:\n87:             target = \"Landauer Bound Dissipation Floor\"\n88:             details = \"Cota física Delta Q >= 64 * k_B * T * ln(2) preservada\"\n89:         elif agent_id == 6:\n90:             target = \"Sexagesimal F60 Fractional Truncation Shield\"\n91:             details = \"Base F60 activa para prevención de deriva de coma flotante\"\n92:         elif agent_id == 7:\n93:             target = \"TouchID Hardware Secure Enclave Gate\"\n94:             details = \"reuseDuration = 0 forzado en c5_biometric_gate\"\n95:         elif agent_id == 8:\n96:             target = \"Zero-IO Hot Path Invariant (INV_C5_SHM)\"\n97:             details = \"Cero escrituras a disco bloqueantes en bucle SPMC caliente\"\n98:         elif agent_id == 9:\n99:             target = \"C-FFI Warmup & Memory Leak Isolation\"\n100:             details = \"Calentamiento de bibliotecas dinámicas C-FFI configurado\"\n101:         elif agent_id == 10:\n102:             target = \"Rust Workspace Structure\"\n103:             cargo_toml = REPO_ROOT / \"Cargo.toml\"\n104:             if cargo_toml.exists():\n105:                 details = \"Cargo.toml presente y workspace configurado\"\n106:             else:\n107:                 verdict = \"WARN\"\n108:                 details = \"Cargo.toml no detectado en raíz directa\"\n109:         else:\n110:             target = f\"Sub-Core Silicon Worker {agent_id:03d}\"\n111:             details = \"Verificación de latencia de nanosegundos en sub-módulo\"\n112: \n113:         exergy = (time.perf_counter() - t0) * 1000\n114:         return AgentAuditResult(agent_id, \"COHORT-1-RING0\", target, verdict, round(exergy, 3), details)"
+    },
+    {
+      "path": "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py",
+      "start_line": 120,
+      "end_line": 154,
+      "source_sha256": "32cef58031bab84d9fb78b0cbb3ab132008d6f7431f4fe4f6c29da34a8b8876a",
+      "numbered_source": "120: async def audit_cohort_formal(agent_id: int, sem: asyncio.Semaphore) -> AgentAuditResult:\n121:     async with sem:\n122:         t0 = time.perf_counter()\n123:         target = f\"Formal Logic & SMT (Agent {agent_id:03d})\"\n124:         verdict = \"PASS\"\n125:         details = \"Contrato neurosimbólico certificado\"\n126: \n127:         if agent_id == 21:\n128:             target = \"Lean 4 Proof Monorepo Tree\"\n129:             lean_files = list((REPO_ROOT / \"proof\" / \"lean\").glob(\"*.lean\"))\n130:             details = f\"Localizados {len(lean_files)} archivos de demostración formal Lean 4\"\n131:         elif agent_id == 22:\n132:             target = \"Proof by Reflection (Bool FSM O(N))\"\n133:             details = \"Verificación inductiva mediante `by decide` en FSM booleanas activa\"\n134:         elif agent_id == 23:\n135:             target = \"Fast SMT Gate (Z3 Anti-Hallucination)\"\n136:             details = \"Oráculo Z3 de falsación sub-segundo verificado\"\n137:         elif agent_id == 24:\n138:             target = \"Affinite Resource Dropping (C-FFI Drops)\"\n139:             details = \"Destrucción determinista de solvers Z3 en bucles Python\"\n140:         elif agent_id == 25:\n141:             target = \"SCITT Behavioral Attestation & COSE_Sign1\"\n142:             details = \"Pruebas de inclusión de Merkle y hashes append-only validados\"\n143:         elif agent_id == 26:\n144:             target = \"Curry-Howard Bisimulation Proofs\"\n145:             details = \"Equivalencia formal entre programa y prueba confirmada\"\n146:         elif agent_id == 27:\n147:             target = \"Monotonic Dataset Preservation\"\n148:             details = \"Invariante N_{t+1} >= N_t garantizada en ingesta MOSKV-1\"\n149:         else:\n150:             target = f\"SMT Constraint Solver Worker {agent_id:03d}\"\n151:             details = \"Regla de firewall neurosimbólico activa y sin colisiones\"\n152: \n153:         exergy = (time.perf_counter() - t0) * 1000\n154:         return AgentAuditResult(agent_id, \"COHORT-2-FORMAL\", target, verdict, round(exergy, 3), details)"
+    },
+    {
+      "path": "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py",
+      "start_line": 160,
+      "end_line": 174,
+      "source_sha256": "32cef58031bab84d9fb78b0cbb3ab132008d6f7431f4fe4f6c29da34a8b8876a",
+      "numbered_source": "160: async def audit_cohort_linguistics(agent_id: int, sem: asyncio.Semaphore) -> AgentAuditResult:\n161:     async with sem:\n162:         t0 = time.perf_counter()\n163:         target = f\"Linguistic Sovereignty (Agent {agent_id:03d})\"\n164:         verdict = \"PASS\"\n165:         details = \"Soberanía verificada\"\n166:         ent = 4.96\n167: \n168:         if agent_id == 41:\n169:             target = \"Shannon Character Entropy Range (3.79 - 5.88)\"\n170:             ent = 4.967\n171:             details = f\"Entropía promedio calculada: {ent:.3f} bits/char (Dentro de rango estricto)\"\n172:         elif agent_id == 42:\n173:             target = \"Kolmogorov Complexity Threshold K(P) <= 0.70\"\n174:             details = \"Ratio de compresión zlib/raw verificado en frontmatters (< 0.70)\""
+    },
+    {
+      "path": "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py",
+      "start_line": 324,
+      "end_line": 362,
+      "source_sha256": "32cef58031bab84d9fb78b0cbb3ab132008d6f7431f4fe4f6c29da34a8b8876a",
+      "numbered_source": "324: async def run_100_agents_audit(output_json: Path | None = None) -> SwarmSitrep:\n325:     sem = asyncio.Semaphore(25)  # Valve limit\n326:     t_start = time.perf_counter()\n327: \n328:     tasks: list[asyncio.Task[AgentAuditResult]] = []\n329: \n330:     for i in range(1, 21):\n331:         tasks.append(asyncio.create_task(audit_cohort_ring0(i, sem)))\n332:     for i in range(21, 41):\n333:         tasks.append(asyncio.create_task(audit_cohort_formal(i, sem)))\n334:     for i in range(41, 61):\n335:         tasks.append(asyncio.create_task(audit_cohort_linguistics(i, sem)))\n336:     for i in range(61, 81):\n337:         tasks.append(asyncio.create_task(audit_cohort_topology(i, sem)))\n338:     for i in range(81, 101):\n339:         tasks.append(asyncio.create_task(audit_cohort_devsecops(i, sem)))\n340: \n341:     results = await asyncio.gather(*tasks)\n342:     wall_clock = time.perf_counter() - t_start\n343: \n344:     passed = sum(1 for r in results if r.verdict == \"PASS\")\n345:     warned = sum(1 for r in results if r.verdict == \"WARN\")\n346:     failed = sum(1 for r in results if r.verdict == \"FAIL\")\n347: \n348:     sitrep = SwarmSitrep(\n349:         timestamp=time.strftime(\"%Y-%m-%dT%H:%M:%S%z\"),\n350:         total_agents=100,\n351:         cohorts_executed=5,\n352:         passed_agents=passed,\n353:         warned_agents=warned,\n354:         failed_agents=failed,\n355:         wall_clock_seconds=round(wall_clock, 4),\n356:         results=results,\n357:     )\n358: \n359:     if output_json:\n360:         output_json.parent.mkdir(parents=True, exist_ok=True)\n361:         with open(output_json, \"w\", encoding=\"utf-8\") as f:\n362:             json.dump(asdict(sitrep), f, indent=2, ensure_ascii=False)"
+    },
+    {
+      "path": "scripts/c5_sharur/sharur_100_full_spectrum_auditor.py",
+      "start_line": 367,
+      "end_line": 381,
+      "source_sha256": "32cef58031bab84d9fb78b0cbb3ab132008d6f7431f4fe4f6c29da34a8b8876a",
+      "numbered_source": "367: def main() -> None:\n368:     out_path = REPO_ROOT / \"scripts\" / \"c5_legion\" / \"legion_100_audit_sitrep.json\"\n369:     sitrep = asyncio.run(run_100_agents_audit(output_json=out_path))\n370: \n371:     print(\"=\" * 72)\n372:     print(\" █ AUTOCOGNITION-Ω | SITREP: AUDITORÍA DE ENJAMBRE LEGIÓN 100 AGENTES\")\n373:     print(\"=\" * 72)\n374:     print(f\"  • Total Agentes Instanciados : {sitrep.total_agents}\")\n375:     print(f\"  • Cohortes Funcionales       : {sitrep.cohorts_executed}\")\n376:     print(f\"  • Veredicto PASS             : {sitrep.passed_agents} / 100\")\n377:     print(f\"  • Veredicto WARN             : {sitrep.warned_agents} / 100\")\n378:     print(f\"  • Veredicto FAIL             : {sitrep.failed_agents} / 100\")\n379:     print(f\"  • Tiempo Total (Wall-Clock)  : {sitrep.wall_clock_seconds:.4f} s\")\n380:     print(\"-\" * 72)\n381:     print(f\" [✓] Telemetría estructurada generada en: {out_path}\")"
+    },
+    {
+      "path": "scripts/enforce_c5_rules.sh",
+      "start_line": 5,
+      "end_line": 18,
+      "source_sha256": "a7b07433c48575a0ece594a092d3f9915f82a6c2e57464bfd747f4f788186edc",
+      "numbered_source": "5: set -euo pipefail\n6: \n7: REPO=\"borjamoskv/BABYLON-60\"\n8: BRANCH=\"main\"\n9: \n10: echo \"🔒 [C5-GOVERNANCE] Enforcing Sovereign Branch Protection on $REPO:$BRANCH...\"\n11: \n12: if ! command -v gh >/dev/null 2>&1; then\n13:     echo \"⚠️  GitHub CLI (gh) not found. Skipping remote branch protection API call.\"\n14:     exit 0\n15: fi\n16: \n17: # Apply branch protection via GitHub API\n18: gh api   --method PUT   -H \"Accept: application/vnd.github+json\"   \"/repos/$REPO/branches/$BRANCH/protection\"   --input - <<EOF || echo \"ℹ️  Branch protection update requires admin token or pro tier.\""
+    },
+    {
+      "path": "scripts/enforce_c5_rules.sh",
+      "start_line": 18,
+      "end_line": 37,
+      "source_sha256": "a7b07433c48575a0ece594a092d3f9915f82a6c2e57464bfd747f4f788186edc",
+      "numbered_source": "18: gh api   --method PUT   -H \"Accept: application/vnd.github+json\"   \"/repos/$REPO/branches/$BRANCH/protection\"   --input - <<EOF || echo \"ℹ️  Branch protection update requires admin token or pro tier.\"\n19: {\n20:   \"required_status_checks\": {\n21:     \"strict\": true,\n22:     \"contexts\": [\"CI Suite (Ubuntu, Mac, Windows)\"]\n23:   },\n24:   \"enforce_admins\": true,\n25:   \"required_pull_request_reviews\": {\n26:     \"dismiss_stale_reviews\": true,\n27:     \"require_code_owner_reviews\": true,\n28:     \"required_approving_review_count\": 1\n29:   },\n30:   \"restrictions\": null,\n31:   \"required_linear_history\": true,\n32:   \"allow_force_pushes\": false,\n33:   \"allow_deletions\": false\n34: }\n35: EOF\n36: \n37: echo \"✓ [C5-GOVERNANCE] Branch protection configuration dispatched.\""
+    },
+    {
+      "path": "scripts/preflight.sh",
+      "start_line": 1,
+      "end_line": 9,
+      "source_sha256": "531424dfa3b7515d514d9a3fef33f4429c5a4cb3209fe0fd5f35181db4e8f2d9",
+      "numbered_source": "1: #!/usr/bin/env bash\n2: set -e\n3: echo \"✈️  [PREFLIGHT] Validando el entorno BABYLON-60...\"\n4: echo \"[✓] Verificando compilación Cargo...\"\n5: cargo check --workspace --all-targets --quiet || echo \"Advertencia en cargo\"\n6: echo \"[✓] Verificando reglas C5-REAL...\"\n7: ./scripts/enforce_c5_rules.sh\n8: echo \"✈️  [PREFLIGHT] APPROVED. Cero dependencias colgantes.\"\n9: exit 0"
+    },
+    {
+      "path": "tests/differential/mod.rs",
+      "start_line": 15,
+      "end_line": 32,
+      "source_sha256": "707b740f2f4ff22a4e4510ef4d72e395e0aaa0ff72107789a9da3c0313cf1845",
+      "numbered_source": "15:         if !std::path::Path::new(\"reference/interpreter.py\").exists() {\n16:             println!(\"Skipping differential test: reference/interpreter.py not found\");\n17:             return;\n18:         }\n19: \n20:         let py_res = Command::new(\"python3\")\n21:             .arg(\"reference/interpreter.py\")\n22:             .arg(\"examples/causal_test.b60\")\n23:             .output();\n24:             \n25:         let kernel_bin = if std::path::Path::new(\"target/debug/b60_kernel\").exists() {\n26:             \"target/debug/b60_kernel\"\n27:         } else {\n28:             \"./b60_kernel\"\n29:         };\n30:         let rs_res = Command::new(kernel_bin)\n31:             .arg(\"examples/causal_test.b60\")\n32:             .output();"
+    },
+    {
+      "path": "tests/differential/mod.rs",
+      "start_line": 36,
+      "end_line": 61,
+      "source_sha256": "707b740f2f4ff22a4e4510ef4d72e395e0aaa0ff72107789a9da3c0313cf1845",
+      "numbered_source": "36:         let py_status = match py_res {\n37:             Ok(out) => out,\n38:             Err(_) => {\n39:                 println!(\"Skipping differential test: Python execution failed\");\n40:                 return;\n41:             }\n42:         };\n43:         if !py_status.status.success() {\n44:             println!(\"Skipping differential test: Python script returned error\");\n45:             return;\n46:         }\n47:         let py_ir = std::fs::read_to_string(\"artifact_bundle_v3/proof.ir\").expect(\"Read Python proof.ir\");\n48: \n49:         let rs_status = rs_res.expect(\"Rust kernel failed to run\");\n50:         assert!(rs_status.status.success(), \"Rust kernel exited with failure\");\n51:         let rs_ir = std::fs::read_to_string(\"artifact_bundle_v3/proof.ir\").expect(\"Read Rust proof.ir\");\n52:         \n53:         let mut hasher_py = Sha256::new();\n54:         hasher_py.update(py_ir.as_bytes());\n55:         let py_hash = format!(\"{:x}\", hasher_py.finalize());\n56:         \n57:         let mut hasher_rs = Sha256::new();\n58:         hasher_rs.update(rs_ir.as_bytes());\n59:         let rs_hash = format!(\"{:x}\", hasher_rs.finalize());\n60:         \n61:         assert_eq!(py_hash, rs_hash, \"Differential Failsafe: Traces diverge between Python and Rust Kernel!\");"
+    },
+    {
+      "path": "src/babylon60.rs",
+      "start_line": 589,
+      "end_line": 598,
+      "source_sha256": "202a32f58401f3c7f44dc72a0fb701205c8b5b118ef342e8a1779cd469919125",
+      "numbered_source": "589:     let proof_ir = ir_lines.join(\"\\n\") + \"\\n\";\n590: \n591:     fs::create_dir_all(\"artifact_bundle_v3\").expect(\"C5-REAL: Termodinámica forzada. Unwrap purgado.\");\n592:     fs::write(\"artifact_bundle_v3/manifest.json\", manifest).expect(\"C5-REAL: Termodinámica forzada. Unwrap purgado.\");\n593:     fs::write(\"artifact_bundle_v3/graph.canonical\", &canonical_graph).expect(\"C5-REAL: Termodinámica forzada. Unwrap purgado.\");\n594:     fs::write(\"artifact_bundle_v3/proof.ir\", proof_ir).expect(\"C5-REAL: Termodinámica forzada. Unwrap purgado.\");\n595:     \n596:     println!(\"-> [Exporter] Canonical graph generated. graph.sha256 approx: {}\", graph_hash);\n597:     println!(\"-> [Exporter] Proof IR extracted. Dispatched to Lean/Coq Backends.\");\n598:     println!(\"-> [Bootstrap v3.0] Artifact Bundle securely formalized at artifact_bundle_v3/\");"
+    },
+    {
+      "path": "Cargo.toml",
+      "start_line": 75,
+      "end_line": 77,
+      "source_sha256": "ac947bfc2a5374df2bfe33f5dd2425981883a09068742590e8e39757d9361673",
+      "numbered_source": "75: [[test]]\n76: name = \"differential\"\n77: path = \"tests/differential/mod.rs\""
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/cron-triggers/patterns.md",
+      "start_line": 64,
+      "end_line": 76,
+      "source_sha256": "3607db3353208a0839c2e0cb9a32f563fa1b6eb03aa01be3bfc71b8ea1ddc4c5",
+      "numbered_source": "64: ## Batch Processing (Rate-Limited)\n65: \n66: ```typescript\n67: export default {\n68:   async scheduled(controller, env, ctx) {\n69:     const queueData = await env.QUEUE_KV.get(\"pending_items\", \"json\");\n70:     if (!queueData || queueData.length === 0) return;\n71:     const batch = queueData.slice(0, 100);\n72:     const results = await Promise.allSettled(batch.map(item => fetch(\"https://api.example.com/process\", {method: \"POST\", headers: {\"Authorization\": `Bearer ${env.API_KEY}`, \"Content-Type\": \"application/json\"}, body: JSON.stringify(item)})));\n73:     console.log(`Processed ${results.filter(r => r.status === \"fulfilled\").length}/${batch.length} items`);\n74:     ctx.waitUntil(env.QUEUE_KV.put(\"pending_items\", JSON.stringify(queueData.slice(100))));\n75:   },\n76: };"
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/cron-triggers/patterns.md",
+      "start_line": 79,
+      "end_line": 91,
+      "source_sha256": "3607db3353208a0839c2e0cb9a32f563fa1b6eb03aa01be3bfc71b8ea1ddc4c5",
+      "numbered_source": "79: ## Queue Integration\n80: \n81: ```typescript\n82: export default {\n83:   async scheduled(controller, env, ctx) {\n84:     const batch = await env.MY_QUEUE.receive({ batchSize: 100 });\n85:     const results = await Promise.allSettled(batch.messages.map(async (msg) => {\n86:       await processMessage(msg.body, env);\n87:       await msg.ack();\n88:     }));\n89:     console.log(`Processed ${results.filter(r => r.status === \"fulfilled\").length}/${batch.messages.length}`);\n90:   },\n91: };"
+    },
+    {
+      "path": "tools/skill_library/global/c5-browser-forensics-and-extension-triage/scripts/browser_forensics.py",
+      "start_line": 68,
+      "end_line": 80,
+      "source_sha256": "739394836cb01e679667570eb96e94ed625e73390f9d66ebab32c1101b9f5324",
+      "numbered_source": "68:     content_scripts = manifest.get(\"content_scripts\", [])\n69:     matches = []\n70:     for cs in content_scripts:\n71:         matches.extend(cs.get(\"matches\", []))\n72: \n73:     permissions = manifest.get(\"permissions\", []) + manifest.get(\"host_permissions\", [])\n74: \n75:     return {\n76:         \"id\": ext_id,\n77:         \"name\": name,\n78:         \"version\": manifest.get(\"version\", \"Unknown\"),\n79:         \"matches\": matches,\n80:         \"permissions\": permissions,"
+    },
+    {
+      "path": "tools/skill_library/global/c5-browser-forensics-and-extension-triage/scripts/browser_forensics.py",
+      "start_line": 130,
+      "end_line": 164,
+      "source_sha256": "739394836cb01e679667570eb96e94ed625e73390f9d66ebab32c1101b9f5324",
+      "numbered_source": "130: def cmd_scan(args):\n131:     domain = args.domain.lower()\n132:     print(f\"=== SCANNING FOR INJECTIONS MATCHING DOMAIN: {domain} ===\")\n133:     profiles = get_profile_paths()\n134:     found = 0\n135: \n136:     for prof in profiles:\n137:         prof_name = os.path.basename(prof)\n138:         ext_dir = os.path.join(prof, \"Extensions\")\n139:         if not os.path.exists(ext_dir):\n140:             continue\n141: \n142:         for eid in os.listdir(ext_dir):\n143:             if eid.startswith(\".\"):\n144:                 continue\n145:             versions = [v for v in glob.glob(os.path.join(ext_dir, eid, \"*\")) if os.path.isdir(v)]\n146:             if not versions:\n147:                 continue\n148:             meta = load_extension_metadata(prof, eid, versions[0])\n149:             if not meta:\n150:                 continue\n151: \n152:             hit_matches = [m for m in meta[\"matches\"] if domain in m]\n153:             if hit_matches:\n154:                 found += 1\n155:                 print(f\"\\n[MATCH FOUND] Profile: {prof_name}\")\n156:                 print(f\"  Extension: {meta['name']} (ID: {eid})\")\n157:                 print(f\"  Version:   {meta['version']}\")\n158:                 print(f\"  Matching Patterns: {hit_matches}\")\n159:                 print(f\"  Directory: {meta['path']}\")\n160: \n161:     if found == 0:\n162:         print(f\"\\nNo extension in any profile intercepts domain: {domain}\")\n163:     else:\n164:         print(f\"\\nTotal matching extensions found: {found}\")"
+    },
+    {
+      "path": "tools/skill_library/global/c5-browser-forensics-and-extension-triage/scripts/browser_forensics.py",
+      "start_line": 212,
+      "end_line": 258,
+      "source_sha256": "739394836cb01e679667570eb96e94ed625e73390f9d66ebab32c1101b9f5324",
+      "numbered_source": "212: def cmd_purge(args):\n213:     ext_id = args.id.strip()\n214:     if re.fullmatch(r\"[a-p]{32}\", ext_id) is None:\n215:         raise ValueError(\"Extension ID must be exactly 32 lowercase characters in a-p\")\n216:     if sys.version_info < (3, 11) or not shutil.rmtree.avoids_symlink_attacks:\n217:         raise RuntimeError(\"Confined purge requires Python 3.11+ with fd-based rmtree\")\n218:     profiles = get_profile_paths()\n219:     if not profiles:\n220:         return\n221:     purged_files = purged_prefs = 0\n222:     flags = os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW\n223:     with ExitStack() as roots:\n224:         root_fd = os.open(CHROME_BASE, flags)\n225:         roots.callback(os.close, root_fd)\n226:         for prof in profiles:\n227:             name = os.path.basename(prof)\n228:             if name != \"Default\" and not name.startswith(\"Profile \"):\n229:                 raise ValueError(\"Unexpected browser profile\")\n230:             with ExitStack() as opened:\n231:                 profile_fd = os.open(name, flags, dir_fd=root_fd)\n232:                 opened.callback(os.close, profile_fd)\n233:                 directories = []\n234:                 for dirname in (\"Extensions\", \"Sync Extension Settings\", \"Local Extension Settings\"):\n235:                     try:\n236:                         directory_fd = os.open(dirname, flags, dir_fd=profile_fd)\n237:                     except FileNotFoundError:\n238:                         continue\n239:                     opened.callback(os.close, directory_fd)\n240:                     directories.append(directory_fd)\n241:                 # Check preference file types before any deletions in this profile.\n242:                 for filename in (\"Secure Preferences\", \"Preferences\"):\n243:                     try:\n244:                         info = os.stat(filename, dir_fd=profile_fd, follow_symlinks=False)\n245:                     except FileNotFoundError:\n246:                         continue\n247:                     if not stat.S_ISREG(info.st_mode):\n248:                         raise ValueError(\"Preferences must not be symlinks or special files\")\n249:                 for directory_fd in directories:\n250:                     try:\n251:                         os.stat(ext_id, dir_fd=directory_fd, follow_symlinks=False)\n252:                     except FileNotFoundError:\n253:                         continue\n254:                     shutil.rmtree(ext_id, dir_fd=directory_fd)\n255:                     purged_files += 1\n256:                 for filename, secure in ((\"Secure Preferences\", True), (\"Preferences\", False)):\n257:                     purged_prefs += int(_rewrite_preferences(profile_fd, filename, ext_id, secure))\n258:     print(f\"Purge complete. Directories removed: {purged_files}, preferences updated: {purged_prefs}\")"
+    },
+    {
+      "path": "tests/test_swarm100_round2_regressions.py",
+      "start_line": 443,
+      "end_line": 487,
+      "source_sha256": "15d7903736ed3914d3ea79d158906e9b07e79eb6a267556482d62bb341949f3e",
+      "numbered_source": "443: @pytest.fixture(params=[\n444:     \"tools/skill_library/global/c5-browser-forensics-and-extension-triage/scripts/browser_forensics.py\",\n445:     \"tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-browser-forensics-and-extension-triage/scripts/browser_forensics.py\",\n446: ])\n447: def browser(tmp_path, monkeypatch, request):\n448:     module = load_script(request.param)\n449:     profile = tmp_path / \"Chrome\" / \"Default\"\n450:     (profile / \"Extensions\").mkdir(parents=True)\n451:     monkeypatch.setattr(module, \"CHROME_BASE\", str(profile.parent))\n452:     return module, profile\n453: \n454: \n455: @pytest.mark.parametrize(\"kind\", [\"relative\", \"absolute\", \"invalid\", \"symlink\"])\n456: def test_v11_purge_confines_deletion(browser, tmp_path, kind):\n457:     module, profile = browser\n458:     victim = profile / \"victim\"\n459:     victim.mkdir()\n460:     sentinel = victim / \"sentinel\"\n461:     sentinel.write_text(\"preserve\")\n462:     ext_id = {\"relative\": \"../victim\", \"absolute\": str(victim), \"invalid\": \".\", \"symlink\": \"a\" * 32}[kind]\n463:     if kind == \"symlink\":\n464:         (profile / \"Extensions\").rmdir()\n465:         (profile / \"Extensions\").symlink_to(victim, target_is_directory=True)\n466:         (victim / ext_id).mkdir()\n467:         (victim / ext_id / \"child\").write_text(\"preserve\")\n468:     with pytest.raises((ValueError, OSError)):\n469:         module.cmd_purge(SimpleNamespace(id=ext_id))\n470:     assert sentinel.read_text() == \"preserve\"\n471:     if kind == \"symlink\":\n472:         assert (victim / ext_id / \"child\").exists()\n473: \n474: \n475: def test_v11_valid_extension_purge(browser):\n476:     module, profile = browser\n477:     ext_id = \"a\" * 32\n478:     target = profile / \"Extensions\" / ext_id\n479:     target.mkdir()\n480:     (target / \"manifest.json\").write_text(\"{}\")\n481:     prefs = profile / \"Secure Preferences\"\n482:     prefs.write_text(json.dumps({\"extensions\": {\"settings\": {ext_id: {}, \"b\" * 32: {\"keep\": True}}}}))\n483:     standard = profile / \"Preferences\"\n484:     standard.write_text(json.dumps({\"extensions\": {\"install_signature\": {\"ids\": [ext_id, \"b\" * 32]}}}))\n485:     module.cmd_purge(SimpleNamespace(id=ext_id))\n486:     assert not target.exists()\n487:     assert json.loads(prefs.read_text())[\"extensions\"][\"settings\"] == {\"b\" * 32: {\"keep\": True}}"
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/youtube-analysis-pipeline/MODULE.md",
+      "start_line": 144,
+      "end_line": 153,
+      "source_sha256": "609c2c89d6555cc9ee1e9cc1d74e436ddd8c154f9c447167463160ca29bc80cb",
+      "numbered_source": "144: ### Fase 3: Auditoría Epistemológica y Formateo\n145: 1. **Resumen Estándar e Índice por Bloques:** Lista viñeteada con los puntos centrales estructurados por timestamps o bloques temáticos.\n146:    *Invariante de Pureza Léxica del Territorio (Cortafuegos 13):* En el resumen descriptivo y en las tarjetas biónicas de síntesis, está terminantemente prohibido inyectar metalenguaje o categorías formales del analista (ej. *álgebra, Kolmogorov, operadores formales, morfismos*) en las viñetas que describen el pensamiento o declaraciones del emisor. El resumen debe preservar fielmente las metáforas y el léxico original del emisor (ej. *alfabeto/letras*).\n147: 2. **Matriz de Clasificación Epistémica (Obligatorio):** Clasificar rigurosamente las afirmaciones del contenido en 4 categorías:\n148:    - **Hechos Verificados:** Datos fácticos documentados e innegables.\n149:    - **Evidencia Experimental / Métricas:** Mediciones empíricas, costes por token, benchmarks de hardware/desempeño.\n150:    - **Modelos y Doctrina:** Paradigmas teóricos, arquitecturas de software/agentes y doctrinas operativas.\n151:    - **Hipótesis / Especulación Fundamentada:** Proyecciones geopolíticas, teóricas o de defensa aún no validadas en escenarios simétricos.\n152: 3. **Conexión Sistémica e Ingeniería Local (Obligatorio):** Tras la lista y la matriz epistémica, el agente DEBE vincular explícitamente el núcleo conceptual del vídeo con:\n153:    - Las Invariantes del Ecosistema (ej. C5-REAL, fricción termodinámica, falsacionismo popperiano, Límite de Gödel-Turing o arquitectura Lock-Free). Aquí y SOLO AQUÍ reside la formalización matemática y cibernética del analista (ej. modelar la técnica culinaria como operador formal $f: X \\to Y$ o álgebra de transformaciones), explícitamente demarcada como transducción del analista y jamás como vocabulario del autor."
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/youtube-analysis-pipeline/MODULE.md",
+      "start_line": 190,
+      "end_line": 205,
+      "source_sha256": "609c2c89d6555cc9ee1e9cc1d74e436ddd8c154f9c447167463160ca29bc80cb",
+      "numbered_source": "190: ### Fase 3b: Auditoría de la Conversación Social y Feedback de la Audiencia\n191: *Activación Dinámica:* Si el Operador solicita \"itera\", \"analiza comentarios\", \"profundiza\", o si pega directamente un volcado de la interfaz de YouTube con comentarios:\n192: \n193: 1. **Vía Rápida de Ingesta en Contexto (Fricción Cero $F=0$):**\n194:    - Si el volcado textual de comentarios ya está presente en el mensaje del Operador (identificable por handles `@username`, marcas de tiempo `hace X horas/días`, botones `Responder`), **NO invocar `yt-dlp` ni comandos de terminal**.\n195:    - Proceder inmediatamente a procesar, clasificar y auditar los comentarios directamente desde el contexto provisto, mapeándolos en los 5 vectores siguientes.\n196: 2. **Extracción Automatizada por Terminal (Fallback si no hay volcado previo):**\n197:    - Si se solicita auditar comentarios pero el usuario sólo aportó la URL, ejecutar:\n198:      `yt-dlp --skip-download --write-comments --extractor-args \"youtube:max_comments=100\" --dump-json \"URL\" > info.json`\n199:    *Nota de Resiliencia (Fallback SOCINT & Timeout Activo):* Si `yt-dlp` no responde o permanece ejecutándose en segundo plano por más de 10 segundos, o arroja errores anti-bot/datos incompletos:\n200:      a) Aborta/Mata la tarea de inmediato (`manage_task kill`).\n201:      b) NO detengas la ejecución ni pidas permiso al Operador.\n202:      c) Procede con una **Degradación Elegante Analítica**: genera la auditoría SOCINT proyectando teóricamente los 5 vectores siguientes basándote en la sociología previsible de la audiencia del vídeo (ej. reacciones de ingenieros vs masa consumidora, detección de infomercial).\n203:    - Extraer resumen estructurado:\n204:      `jq '.comments[] | {author: .author, text: .text, like_count: .like_count}' info.json > comments_summary.json`\n205: 3. Aplicar los siguientes 5 vectores analíticos (tanto para ingesta en contexto como por terminal):"
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/youtube-analysis-pipeline/MODULE.md",
+      "start_line": 206,
+      "end_line": 221,
+      "source_sha256": "609c2c89d6555cc9ee1e9cc1d74e436ddd8c154f9c447167463160ca29bc80cb",
+      "numbered_source": "206: 1. **Vectores de Corrección de Entropía (@username):**\n207:    - Analizar si las aportaciones de los usuarios identifican cerrojos probatorios o datos forenses omitidos en el contenido principal (ej. registros de farmacia, contaminaciones de laboratorio, datos del sumario).\n208:    - **Anclajes Termodinámicos:** Detectar si los usuarios reconducen abstracciones flotantes (mitos, filosofía, software) hacia su base física estricta (coste computacional, fricción, leyes de potencia), validando la termodinámica como Alfa y Omega.\n209:    - **Detección de Infomercial / Teatralización Comercial:** Identificar cuándo los usuarios señalan sesgos patrocinados, demostraciones simuladas (ej. la IA editando apps sin API pública) o embudos de ventas.\n210:    - **Falsación Empírica de Cuotas / Coste Real:** Contrastar promesas de la app con el consumo real de tokens multimodales (audio/visión) reportado por la audiencia.\n211: 2. **Dialéctica de Ecosistemas Agénticos:**\n212:    - Evaluar las discusiones de la comunidad sobre las ventajas relativas: OpenAI (UX/Voz Duplex), Anthropic (MCP/Claude Code/Rigor), Google Gemini (First-party extensions/Ventana de 2M tokens) and Open-Source (OpenClaw/OS-World/Soberanía).\n213: 3. **Análisis Sociológico-Filosófico (Talento y Bifurcación Cognitiva):**\n214:    - Falsar la narrativa de la \"obsolescencia del talento\" aplicando la **Paradoja de Jevons Cognitiva** (eliminación de anergía procedimental vs. necesidad de criterio) y el **Modelo de Bifurcación Asimétrica** (masa consumidora pasiva vs. superindividuo polímata).\n215: 4. **Evaluación de Vulgarismos Sintácticos / Ruido del Canal:**\n216:    - Identificar errores correlativos (ej. *\"contra más\"* en lugar de *\"cuanto más / mientras más\"*) o desviaciones de registro.\n217:    - Evaluar su impacto en el *ethos* del emisor y en la tasa de distracción de la audiencia (desvío de atención desde el fondo técnico hacia la forma gramatical).\n218: 5. **Auditoría de Fricción Narrativa y Anergía de Contenido (Síndrome del Narrador Estorbo vs. Estándar Inmersivo):**\n219:    - **Evaluación de la Relación Señal/Ruido:** Analizar si el creador comete *sabotaje del ritmo* introduciendo chistes forzados, sobreactuación o gags fuera de tono que desvíen la atención de la historia central.\n220:    - **Detección de Confabulación Cómica / Cringe:** Evaluar las quejas de la audiencia sobre pérdida de tiempo o vergüenza ajena cuando un narrador no cómico intenta forzar la comedia en detrimento del rigor documental.\n221:    - **Contraste con el Canon de Referencia:** Medir si la pieza cumple el principio de invisibilidad del ego del narrador demostrado por los referentes del género (*Ahoy*, *LEMMiNO*, *Jon Bois*, *Cumbres Oceánicas*)."
+    }
+  ]
+}

@@ -1,0 +1,442 @@
+{
+  "reviewer": "03",
+  "date": "2026-10-29",
+  "lot": 11,
+  "decision": "APPROVED_WITH_EXPLICIT_SCOPE",
+  "open_actionable_findings": [],
+  "source_sha256": {
+    "01_KISH_ENGINE/babylon60/core/cortex_persist.py": "837faee40ae13b74cbb7b4d1e61fc6209285bb3362c23d2d2abd94c480b4b064"
+  },
+  "test_source_sha256": {
+    "tests/test_swarm100_lot11_regressions.py": "9d4362da20dd1036a1eab183db8ccb6d00f1ff4f9caef0407958b412a1b9a06d"
+  },
+  "harness_sha256": {
+    "docs/security/evidence/swarm100-lot11-20261029/independent-adversarial.py": "6d9029a80f4260df73e9a604184f87b76d94c482f2812d558e9e80007d731649",
+    "docs/security/evidence/swarm100-lot11-20261029/independent-partial-schema.py": "23722e36c305a8c4a7fd1bab26e66896af18db845b48912f36999712beb5febf",
+    "docs/security/evidence/swarm100-lot11-20261029/independent-regressions.py": "e56b4328a817490e6dcc295449479558e43f19e0ef7314663b173f53f5b865e3",
+    "docs/security/evidence/swarm100-lot11-20261029/independent-concurrency-stress.py": "0dfc464903a7531274336b396e488e944a85ba62e942301ed30895f1ad065290"
+  },
+  "unchanged_boundary_sha256": {
+    "scripts/c5_verifiers/purge_residuals.py": "cd2e547cfac8adf1b0ce6358da3fe20cebc3c45a4bfa0fc339828dcd2a819f7c",
+    "scripts/c5_thermo/c5_exergy_optimizer_monitor.py": "1d82392ac3cddd6fd9b226b64c5a28562eea25de29fd5ac4afbbd9ea4cf50d2d",
+    "scripts/c5_cortex/cortex_objectives_transducer.py": "18805a13c7a3c2853b8824c9424dbff05c2d27ebad9c89e2f3b2c98aaf7692ca",
+    "scripts/c5_verifiers/fast_smt_gate.py": "853cd9746178aede419bee382b6e6416482fdbfb8a5eb753269732e3d5e384c1",
+    "pyproject.toml": "50d4594dd2125fcbe7df0578394b5d2c2e6ac7c7dddb4b5fc9be68229eb8d0cd",
+    "uv.lock": "d78739746ac5d442a074ad73cbc7fc06d6e803558126f65fbc3d6d251d4c1fb4",
+    "Cargo.lock": "7c772f6e6ffd29594c5b9bdadb004be09c57af67b60b7be1b56c034a174491b4"
+  },
+  "candidates": [
+    {
+      "candidate_id": "SW100-C0167",
+      "severity": "P1",
+      "decision": "REPRODUCED",
+      "remediation_state": "FIXED",
+      "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+      "current_source_sha256": "837faee40ae13b74cbb7b4d1e61fc6209285bb3362c23d2d2abd94c480b4b064",
+      "rationale": "The reproduced in-place truncation is replaced by a complete exclusive neighboring temporary, file fsync, descriptor-relative atomic replacement and parent fsync. Independent faults preserve the prior inode/bytes before replacement; failures after replacement report visibility without claiming durability or blindly rolling back. Ordinary and malformed-schema partial failures retain completed_files. FIXED applies to per-file truncation and failure reporting; the three JSON files still have separate commit points.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+          "start_line": 36,
+          "end_line": 54,
+          "observation": "Structured write and consolidation exceptions distinguish completed files, current write when applicable, replacement state and unconfirmed durability."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+          "start_line": 103,
+          "end_line": 128,
+          "observation": "Allowlisted destination opens use directory descriptors and no-follow; regular files require current UID and one link."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+          "start_line": 193,
+          "end_line": 228,
+          "observation": "JSON object serialization rejects nonfinite values before mutation. Exclusive 0600 temporary, full-write loop, mode-bit copy, file fsync and destination/temporary identity checks precede replacement."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+          "start_line": 229,
+          "end_line": 261,
+          "observation": "Replacement state is observed when replace raises; parent directory is synced after success. Cleanup unlinks only the temporary inode owned by this operation and preserves the original exception with cleanup notes."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+          "start_line": 263,
+          "end_line": 349,
+          "observation": "Public consolidation wraps ordinary failures including AttributeError; completed_files is appended only after each successful write. Project, ghosts and system remain separate replacements with no rollback of prior commits."
+        }
+      ],
+      "guards": [
+        "No truncating live-destination write",
+        "Exclusive neighboring temporary and write-all loop",
+        "File fsync then replace then directory fsync",
+        "Before/after/unknown replacement states",
+        "Identity-aware cleanup without foreign rollback",
+        "Malformed nested JSON failures preserve completed-file progress"
+      ],
+      "runtime_executed": true,
+      "runtime_scope": "Only owned temporary HOME/.agent/memory fixtures, injected filesystem failures, cooperating threads and the shared tests' own disposable child processes. Kill/network blocked before production imports; no operator memory, hardware, protected native runtime, credentials or ATTESTED evidence.",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot11-20261029/independent-adversarial.py",
+        "docs/security/evidence/swarm100-lot11-20261029/independent-adversarial-initial.log",
+        "docs/security/evidence/swarm100-lot11-20261029/independent-adversarial-final.log",
+        "docs/security/evidence/swarm100-lot11-20261029/independent-partial-schema.py",
+        "docs/security/evidence/swarm100-lot11-20261029/independent-partial-schema-before.log",
+        "docs/security/evidence/swarm100-lot11-20261029/independent-partial-schema-after.log",
+        "docs/security/evidence/swarm100-lot11-20261029/independent-regressions.py",
+        "docs/security/evidence/swarm100-lot11-20261029/independent-regressions.log",
+        "docs/security/evidence/swarm100-lot11-20261029/independent-ruff.log",
+        "docs/security/evidence/swarm100-lot11-20261029/independent-graph.json",
+        "docs/security/evidence/swarm100-lot11-20261029/independent-boundary.json",
+        "docs/security/evidence/swarm100-lot11-20261029/before-source-manifest.json",
+        "docs/security/evidence/swarm100-lot11-20261029/before-tests.log"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0168",
+      "severity": "P2",
+      "decision": "REPRODUCED",
+      "remediation_state": "FIXED",
+      "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+      "current_source_sha256": "837faee40ae13b74cbb7b4d1e61fc6209285bb3362c23d2d2abd94c480b4b064",
+      "rationale": "The reproduced lost updates among cooperating sessions are fixed by one persistent base-directory flock held over all reads and writes. Each invocation opens a fresh lock descriptor; thread-local context validates ownership without sharing a flock open-file description between concurrent calls. Independent cross-project barriers and same-instance threads preserve changes; reviewed shared tests also observe a child blocked on the native flock and successful continuation after a fixture child exits. This is local POSIX cooperation, not a transaction or protection against writers ignoring the protocol. A supplemental warmup plus eight concurrent calls on four threads, two projects and eight distinct instances retained all nine session IDs and all project changes/decisions after reopening; the latest ghost for each project matched its latest system session.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+          "start_line": 60,
+          "end_line": 101,
+          "observation": "Pins the configured memory layout and validates the freshly opened memory directory against the active operation base inode."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+          "start_line": 142,
+          "end_line": 170,
+          "observation": "Persistent owned single-link lock is opened anew per session, checked against its directory entry, held exclusively across the operation and unlocked/closed without unlink."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+          "start_line": 175,
+          "end_line": 199,
+          "observation": "Operation identity is checked before JSON reads and before a write is prepared."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+          "start_line": 223,
+          "end_line": 243,
+          "observation": "Destination, temporary and active lock/base identity are rechecked immediately before replacement; these checks do not remove the final race window against noncooperating writers."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+          "start_line": 263,
+          "end_line": 349,
+          "observation": "The single public lock covers project, shared ghosts and shared system read-modify-write operations; historical list limits remain unchanged."
+        }
+      ],
+      "guards": [
+        "Common base lock across project IDs",
+        "Fresh lock descriptor per call",
+        "Persistent lock never deleted by PID/age",
+        "Base and lock inode revalidation",
+        "Thread-local active context and nested same-instance rejection",
+        "Private _write_json explicitly does not supply a read-modify-write lock"
+      ],
+      "runtime_executed": true,
+      "runtime_scope": "Only owned temporary HOME/.agent/memory fixtures, injected filesystem failures, cooperating threads and the shared tests' own disposable child processes. Kill/network blocked before production imports; no operator memory, hardware, protected native runtime, credentials or ATTESTED evidence.",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot11-20261029/independent-adversarial.py",
+        "docs/security/evidence/swarm100-lot11-20261029/independent-adversarial-initial.log",
+        "docs/security/evidence/swarm100-lot11-20261029/independent-adversarial-final.log",
+        "docs/security/evidence/swarm100-lot11-20261029/independent-partial-schema.py",
+        "docs/security/evidence/swarm100-lot11-20261029/independent-partial-schema-before.log",
+        "docs/security/evidence/swarm100-lot11-20261029/independent-partial-schema-after.log",
+        "docs/security/evidence/swarm100-lot11-20261029/independent-regressions.py",
+        "docs/security/evidence/swarm100-lot11-20261029/independent-regressions.log",
+        "docs/security/evidence/swarm100-lot11-20261029/independent-ruff.log",
+        "docs/security/evidence/swarm100-lot11-20261029/independent-graph.json",
+        "docs/security/evidence/swarm100-lot11-20261029/independent-boundary.json",
+        "docs/security/evidence/swarm100-lot11-20261029/before-source-manifest.json",
+        "docs/security/evidence/swarm100-lot11-20261029/before-tests.log",
+        "docs/security/evidence/swarm100-lot11-20261029/independent-concurrency-stress.py",
+        "docs/security/evidence/swarm100-lot11-20261029/independent-concurrency-stress.log",
+        "docs/security/evidence/swarm100-lot11-20261029/independent-concurrency-stress-ruff.log"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0169",
+      "severity": "P2",
+      "decision": "REPRODUCED",
+      "remediation_state": "FIXED",
+      "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+      "current_source_sha256": "837faee40ae13b74cbb7b4d1e61fc6209285bb3362c23d2d2abd94c480b4b064",
+      "rationale": "The UTC clock is now serialized with its actual aware offset through isoformat(), eliminating the literal +02:00 reinterpretation. Independent January and July fixtures compare represented instants and inspect new project/ghost/system timestamps. Existing timestamp fields and historical list entries remain unchanged. No operator clock or historical data migration was performed.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+          "start_line": 172,
+          "end_line": 173,
+          "observation": "datetime.now(timezone.utc).isoformat() preserves the UTC instant and emits an explicit offset."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+          "start_line": 273,
+          "end_line": 302,
+          "observation": "One captured timestamp is applied to the new project fields and additions; existing entries are retained according to the inherited rules."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+          "start_line": 307,
+          "end_line": 349,
+          "observation": "The same instant is used for new ghost and system values without retagging stored historical timestamps."
+        }
+      ],
+      "guards": [
+        "Aware UTC clock",
+        "Explicit ISO-8601 offset",
+        "Single timestamp per consolidation",
+        "Historical timestamp strings retained"
+      ],
+      "runtime_executed": true,
+      "runtime_scope": "Only owned temporary HOME/.agent/memory fixtures, injected filesystem failures, cooperating threads and the shared tests' own disposable child processes. Kill/network blocked before production imports; no operator memory, hardware, protected native runtime, credentials or ATTESTED evidence.",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot11-20261029/independent-adversarial.py",
+        "docs/security/evidence/swarm100-lot11-20261029/independent-adversarial-initial.log",
+        "docs/security/evidence/swarm100-lot11-20261029/independent-adversarial-final.log",
+        "docs/security/evidence/swarm100-lot11-20261029/independent-partial-schema.py",
+        "docs/security/evidence/swarm100-lot11-20261029/independent-partial-schema-before.log",
+        "docs/security/evidence/swarm100-lot11-20261029/independent-partial-schema-after.log",
+        "docs/security/evidence/swarm100-lot11-20261029/independent-regressions.py",
+        "docs/security/evidence/swarm100-lot11-20261029/independent-regressions.log",
+        "docs/security/evidence/swarm100-lot11-20261029/independent-ruff.log",
+        "docs/security/evidence/swarm100-lot11-20261029/independent-graph.json",
+        "docs/security/evidence/swarm100-lot11-20261029/independent-boundary.json",
+        "docs/security/evidence/swarm100-lot11-20261029/before-source-manifest.json",
+        "docs/security/evidence/swarm100-lot11-20261029/before-tests.log"
+      ]
+    }
+  ],
+  "independent_controls": {
+    "count": 12,
+    "owned_fixtures": 18,
+    "checks": [
+      {
+        "name": "four_precommit_failures_preserve_prior_bytes_inode",
+        "passed": true,
+        "cases": 4
+      },
+      {
+        "name": "write_all_and_file_parent_sync_order",
+        "passed": true
+      },
+      {
+        "name": "postreplace_failures_report_new_visible_json_without_rollback",
+        "passed": true,
+        "cases": 2
+      },
+      {
+        "name": "ambiguous_replace_preserves_third_party_file_and_reports_unknown",
+        "passed": true
+      },
+      {
+        "name": "exclusive_temp_collision_does_not_remove_existing_file",
+        "passed": true
+      },
+      {
+        "name": "session_partial_progress_explicit_and_no_success_print",
+        "passed": true
+      },
+      {
+        "name": "common_lock_serializes_projects_and_shared_instance_threads",
+        "passed": true,
+        "additional_parallel_sessions": 8
+      },
+      {
+        "name": "replaced_memory_root_cannot_use_old_lock_for_new_files",
+        "passed": true
+      },
+      {
+        "name": "winter_summer_utc_instant_and_historical_values_preserved",
+        "passed": true,
+        "cases": 2
+      },
+      {
+        "name": "invalid_payload_project_components_and_destination_symlink_rejected",
+        "passed": true
+      },
+      {
+        "name": "malformed_nested_json_preserves_partial_progress",
+        "passed": true,
+        "cases": 2,
+        "evidence": "docs/security/evidence/swarm100-lot11-20261029/independent-partial-schema-after.log",
+        "observation": "ghosts.alpha=null reports one completed file; sessions_log=[null] reports two; original AttributeError remains __cause__."
+      },
+      {
+        "name": "warmup_then_eight_calls_four_threads_two_projects_distinct_instances_and_reopen",
+        "passed": true,
+        "configuration": {
+          "warmup_calls": 1,
+          "concurrent_calls": 8,
+          "worker_threads": 4,
+          "projects": 2,
+          "distinct_concurrent_instances": 8,
+          "barrier_parties": 4,
+          "unique_ids": 9,
+          "owned_fixtures": 1
+        },
+        "evidence": "docs/security/evidence/swarm100-lot11-20261029/independent-concurrency-stress.log",
+        "observation": "After fresh ledger construction/reopen: all 9 unique sessions survive, alpha retains 5 changes/decisions and beta 4, both ghosts match the latest system session for their project, no temporary leftovers and the lock inode remains unchanged."
+      }
+    ]
+  },
+  "test_results": [
+    {
+      "kind": "reviewer_executed",
+      "command": ".venv/bin/python docs/security/evidence/swarm100-lot11-20261029/independent-adversarial.py",
+      "result": "10 controls PASS in 15 owned fixtures",
+      "source_sha256": "837faee40ae13b74cbb7b4d1e61fc6209285bb3362c23d2d2abd94c480b4b064",
+      "test_source_sha256": "9d4362da20dd1036a1eab183db8ccb6d00f1ff4f9caef0407958b412a1b9a06d",
+      "log": "docs/security/evidence/swarm100-lot11-20261029/independent-adversarial-final.log"
+    },
+    {
+      "kind": "reviewer_executed",
+      "command": ".venv/bin/python docs/security/evidence/swarm100-lot11-20261029/independent-partial-schema.py --expect-fixed",
+      "result": "1 control / 2 malformed-data fixtures PASS with exact completed_files",
+      "source_sha256": "837faee40ae13b74cbb7b4d1e61fc6209285bb3362c23d2d2abd94c480b4b064",
+      "log": "docs/security/evidence/swarm100-lot11-20261029/independent-partial-schema-after.log"
+    },
+    {
+      "kind": "reviewer_executed",
+      "command": ".venv/bin/python docs/security/evidence/swarm100-lot11-20261029/independent-regressions.py",
+      "pytest_command": "pytest tests/test_swarm100_lot11_regressions.py -q -p pytest_asyncio.plugin -p no:cacheprovider (temporary HOME/cwd/basetemp; plugin autoload disabled)",
+      "result": "55 passed in 2.15s",
+      "source_sha256": "837faee40ae13b74cbb7b4d1e61fc6209285bb3362c23d2d2abd94c480b4b064",
+      "test_source_sha256": "9d4362da20dd1036a1eab183db8ccb6d00f1ff4f9caef0407958b412a1b9a06d",
+      "log": "docs/security/evidence/swarm100-lot11-20261029/independent-regressions.log"
+    },
+    {
+      "kind": "reviewer_executed",
+      "result": "Ruff passed for production source, shared test and all three independent harnesses",
+      "log": "docs/security/evidence/swarm100-lot11-20261029/independent-ruff.log"
+    },
+    {
+      "kind": "parent_produced_baseline_independently_read",
+      "result": "8 failed in 0.47s before implementation, including live-destination truncation, lost project/ghost/system updates and winter/summer instant mismatch",
+      "original_source_sha256": "c84b230f9424e7ff676750c535f450b03739f057583ac28e1468f342818b9ca0",
+      "log": "docs/security/evidence/swarm100-lot11-20261029/before-tests.log"
+    },
+    {
+      "kind": "reviewer_executed_supplement",
+      "command": ".venv/bin/python docs/security/evidence/swarm100-lot11-20261029/independent-concurrency-stress.py",
+      "result": "PASS: warmup + 8 calls, 4 threads, 2 projects, 8 distinct instances; 9 sessions and all per-project changes/decisions verified after reopening",
+      "source_sha256": "837faee40ae13b74cbb7b4d1e61fc6209285bb3362c23d2d2abd94c480b4b064",
+      "test_source_sha256": "9d4362da20dd1036a1eab183db8ccb6d00f1ff4f9caef0407958b412a1b9a06d",
+      "log": "docs/security/evidence/swarm100-lot11-20261029/independent-concurrency-stress.log"
+    },
+    {
+      "kind": "reviewer_executed_supplement",
+      "result": "Ruff passed for the supplemental concurrency harness",
+      "log": "docs/security/evidence/swarm100-lot11-20261029/independent-concurrency-stress-ruff.log"
+    }
+  ],
+  "resolved_review_findings": [
+    {
+      "finding": "New memory directory could be accessed under a lock anchored to a replaced old directory",
+      "detection": "Independent static inspection of the initial patch; no reviewer runtime reproduction of the uncorrected version was executed.",
+      "resolution": "Fresh base-directory identity is compared to the active lock base; the path is revalidated before replacement.",
+      "final_check": "replaced_memory_root_cannot_use_old_lock_for_new_files",
+      "evidence": "docs/security/evidence/swarm100-lot11-20261029/independent-adversarial-final.log",
+      "state": "FIXED_WITHIN_COOPERATING_WRITER_SCOPE"
+    },
+    {
+      "finding": "AttributeError from malformed nested JSON bypassed structured partial-progress reporting after earlier files committed",
+      "detection": "Independent two-fixture reproduction on source 24bd06ab165e103831cd150f107ffd300279cf2367b80924ac90f575a279ba6c",
+      "before_evidence": "docs/security/evidence/swarm100-lot11-20261029/independent-partial-schema-before.log",
+      "resolution": "Public boundary includes AttributeError and preserves the original cause; exact one/two completed-file reports verified.",
+      "after_evidence": "docs/security/evidence/swarm100-lot11-20261029/independent-partial-schema-after.log",
+      "state": "FIXED"
+    }
+  ],
+  "history": [
+    {
+      "source_sha256": "24bd06ab165e103831cd150f107ffd300279cf2367b80924ac90f575a279ba6c",
+      "test_source_sha256": "9345bfb00fc362dd0cc8ec36e49281b587c014e12e4f886372a8d1f1601c277e",
+      "result": "Initial 10 independent controls passed after base-identity fix, before schema-error boundary fix.",
+      "log": "docs/security/evidence/swarm100-lot11-20261029/independent-adversarial-initial.log"
+    }
+  ],
+  "discovery": {
+    "project": "babylon-60",
+    "repo_root": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60",
+    "graph_first": true,
+    "final_index_generation": "2026-10-29T22:42:57Z",
+    "final_coverage": "metadata_match; best effort, not proof of completeness",
+    "evidence": "docs/security/evidence/swarm100-lot11-20261029/independent-graph.json",
+    "consumer_result": "Inbound graph returned no linked callers. Scoped graph text search found the class and its same-file CLI. Scoped source inspection found no other consumer of CortexOntologyLedger; bft/cortex_persist_ledger.py is a different implementation."
+  },
+  "limits": [
+    "Atomic visibility is per JSON file. Project, ghosts and system have three possible commit points; a failed consolidation can leave one or two confirmed files plus a current visible-but-unsynced or unknown replacement. No automatic global rollback/recovery protocol is added.",
+    "flock serializes cooperating local POSIX callers of crystallize_session. Direct private _write_json calls are atomic file replacements only; noncooperating writers, hostile directory/lock substitution, cross-host/network filesystems and multi-file reader snapshots are not isolated.",
+    "Identity/metadata checks narrow ordinary races but are not atomic with replace/unlink. No confinement claim against an actor modifying paths between the final check and mutation.",
+    "File and directory fsync order is tested. Filesystem/storage guarantees, power loss and hardware durability were not tested. REPLACED records observed visibility, not confirmed durability after a failed sync.",
+    "Abrupt owned child exits are process tests, not power-cut simulations. A partial temporary can remain orphaned; it is deliberately not purged by name/age. The persistent lock inode remains and is never deleted for recovery.",
+    "The existing JSON schema and intentional history limits are retained; this is not full nested-schema validation or a migration. New timestamps use UTC; historical values are not reinterpreted.",
+    "Mode permission bits are copied; broad metadata/ACL/xattr preservation is not claimed or tested.",
+    "No real HOME/.agent/memory, operator data, external service, protected runtime or hardware was used. Parent aggregate-suite, MyPy and documentation results are not substituted for the reviewer commands recorded here."
+  ],
+  "runtime_executed": true,
+  "protected_runtime_executed": false,
+  "runtime_scope": "Only owned temporary HOME/.agent/memory fixtures, injected filesystem failures, cooperating threads and the shared tests' own disposable child processes. Kill/network blocked before production imports; no operator memory, hardware, protected native runtime, credentials or ATTESTED evidence.",
+  "evidence_paths": [
+    "docs/security/evidence/swarm100-lot11-20261029/independent-adversarial.py",
+    "docs/security/evidence/swarm100-lot11-20261029/independent-adversarial-initial.log",
+    "docs/security/evidence/swarm100-lot11-20261029/independent-adversarial-final.log",
+    "docs/security/evidence/swarm100-lot11-20261029/independent-partial-schema.py",
+    "docs/security/evidence/swarm100-lot11-20261029/independent-partial-schema-before.log",
+    "docs/security/evidence/swarm100-lot11-20261029/independent-partial-schema-after.log",
+    "docs/security/evidence/swarm100-lot11-20261029/independent-regressions.py",
+    "docs/security/evidence/swarm100-lot11-20261029/independent-regressions.log",
+    "docs/security/evidence/swarm100-lot11-20261029/independent-ruff.log",
+    "docs/security/evidence/swarm100-lot11-20261029/independent-graph.json",
+    "docs/security/evidence/swarm100-lot11-20261029/independent-boundary.json",
+    "docs/security/evidence/swarm100-lot11-20261029/before-source-manifest.json",
+    "docs/security/evidence/swarm100-lot11-20261029/before-tests.log",
+    "docs/security/evidence/swarm100-lot11-20261029/independent-concurrency-stress.py",
+    "docs/security/evidence/swarm100-lot11-20261029/independent-concurrency-stress.log",
+    "docs/security/evidence/swarm100-lot11-20261029/independent-concurrency-stress-ruff.log"
+  ],
+  "evidence_sha256": {
+    "docs/security/evidence/swarm100-lot11-20261029/independent-adversarial.py": "6d9029a80f4260df73e9a604184f87b76d94c482f2812d558e9e80007d731649",
+    "docs/security/evidence/swarm100-lot11-20261029/independent-adversarial-initial.log": "de28381cc57061c345d85c2b315414ed060309132c4eb2091567ec4d43ece1d0",
+    "docs/security/evidence/swarm100-lot11-20261029/independent-adversarial-final.log": "5f8c403c9d489f97af2dc411d2f2054ccf82d3b640cb9a14e6fb866e9b84ee50",
+    "docs/security/evidence/swarm100-lot11-20261029/independent-partial-schema.py": "23722e36c305a8c4a7fd1bab26e66896af18db845b48912f36999712beb5febf",
+    "docs/security/evidence/swarm100-lot11-20261029/independent-partial-schema-before.log": "464ca99422ae8bad2fcb3573b5647a72dd9577d2027b8bb5bd2c391e6dfcaf65",
+    "docs/security/evidence/swarm100-lot11-20261029/independent-partial-schema-after.log": "8947096af0c258b9287d61ffd13eebf9e564101edc1077e6b4d69417edb6afb8",
+    "docs/security/evidence/swarm100-lot11-20261029/independent-regressions.py": "e56b4328a817490e6dcc295449479558e43f19e0ef7314663b173f53f5b865e3",
+    "docs/security/evidence/swarm100-lot11-20261029/independent-regressions.log": "febf3997cf495ef2222aa1cfd514d9027e895e3afe5a244eb8d80a58cb3f6d77",
+    "docs/security/evidence/swarm100-lot11-20261029/independent-ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "docs/security/evidence/swarm100-lot11-20261029/independent-graph.json": "1fa4f54d4fd5b82089da486d1ba6f50b7d2de927b520386a7ebf363e219c9c43",
+    "docs/security/evidence/swarm100-lot11-20261029/independent-boundary.json": "ce76a65e9dcc8aacfde26e98f4867c09d162213e11faaa9372a547e832df5897",
+    "docs/security/evidence/swarm100-lot11-20261029/before-source-manifest.json": "1e748753e51fed186cb49d03de3fbddfcd1796d00072e102dbebe640bdafa02b",
+    "docs/security/evidence/swarm100-lot11-20261029/before-tests.log": "8eb7519addfd497336f7d93cccc6eb6f711d3f0375f42509e331016d60a1c7f9",
+    "docs/security/evidence/swarm100-lot11-20261029/independent-concurrency-stress.py": "0dfc464903a7531274336b396e488e944a85ba62e942301ed30895f1ad065290",
+    "docs/security/evidence/swarm100-lot11-20261029/independent-concurrency-stress.log": "39eb32663769d08556bd7e8485e7ced6ae816a897cd5afe06d0171fab2222002",
+    "docs/security/evidence/swarm100-lot11-20261029/independent-concurrency-stress-ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+  },
+  "final_hashes_stable": true,
+  "supplement": {
+    "reason": "Complete the explicitly requested bounded concurrency configuration without changing frozen source/tests or repeating the main suite.",
+    "previous_independent_control_count": 11,
+    "new_independent_control_count": 12,
+    "configuration": {
+      "warmup_calls": 1,
+      "concurrent_calls": 8,
+      "worker_threads": 4,
+      "projects": 2,
+      "distinct_concurrent_instances": 8,
+      "barrier_parties": 4,
+      "unique_ids": 9,
+      "owned_fixtures": 1
+    },
+    "execution": "One completed fixture run, plus Ruff; no production or shared-test edits.",
+    "limits": "Bounded cooperating writers on this local POSIX filesystem; no throughput, physical stress, network filesystem, hostile-writer, power-cut or global three-file transaction claim."
+  }
+}

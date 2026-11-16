@@ -1,0 +1,103 @@
+{
+  "python": "3.14.7",
+  "sqlite": "3.53.4",
+  "scope": "Temporary fixtures; no production data, deployment, native stress or hardware attestation",
+  "results": [
+    {
+      "check": "related-tests",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "pytest",
+        "tests/test_swarm100_round2_regressions.py",
+        "tests/test_standalone_verifier.py",
+        "tests/test_memory_governance_falsification.py",
+        "tests/test_compliance_exporter.py",
+        "tests/test_m0_evidence_pack_acceptance.py",
+        "tests/test_autodidact_omega_v2.py",
+        "tests/test_autodidact_omega_pipeline.py",
+        "tests/test_cortex_persist_batch_regressions.py",
+        "tests/test_ledger_cross_equivalence.py",
+        "tests/test_fl027_provenance_authority.py",
+        "-q",
+        "-rs",
+        "-o",
+        "addopts=--tb=short"
+      ],
+      "exit_code": 0,
+      "log": "related-tests.log",
+      "log_sha256": "28275ed196e795bd02882ab8c9d729d30b03b05e22c479913790cf24e14c2196"
+    },
+    {
+      "check": "ruff",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "ruff",
+        "check",
+        "01_KISH_ENGINE/babylon60/compliance_exporter/m0_evidence_pack.py",
+        "01_KISH_ENGINE/babylon60/verifier/cli.py",
+        "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+        "01_KISH_ENGINE/babylon60/memory/governance.py",
+        "01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py",
+        "01_KISH_ENGINE/babylon60/autodidact/crystal_compiler.py",
+        "01_KISH_ENGINE/babylon60/crypto/shredder.py",
+        "scripts/c5_cortex/consolidate_dbs.py",
+        "tools/skill_library/global/c5-browser-forensics-and-extension-triage/scripts/browser_forensics.py",
+        "tests/test_swarm100_round2_regressions.py",
+        "tests/test_m0_evidence_pack_acceptance.py"
+      ],
+      "exit_code": 0,
+      "log": "ruff.log",
+      "log_sha256": "28398017c49646cc0f5b122f6d074b97d5beb43f67a31e50ec561b5031beea9f"
+    },
+    {
+      "check": "mypy",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "mypy",
+        "--follow-imports=silent",
+        "01_KISH_ENGINE/babylon60/compliance_exporter/m0_evidence_pack.py",
+        "01_KISH_ENGINE/babylon60/verifier/cli.py",
+        "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py",
+        "01_KISH_ENGINE/babylon60/memory/governance.py",
+        "01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py",
+        "01_KISH_ENGINE/babylon60/autodidact/crystal_compiler.py",
+        "01_KISH_ENGINE/babylon60/crypto/shredder.py",
+        "scripts/c5_cortex/consolidate_dbs.py",
+        "tools/skill_library/global/c5-browser-forensics-and-extension-triage/scripts/browser_forensics.py"
+      ],
+      "exit_code": 0,
+      "log": "mypy.log",
+      "log_sha256": "b0c9bf0bd0b4f9f97c425cf1073ee45aa125dfd070c767dd8a5933031068544d"
+    },
+    {
+      "check": "diff-check",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "diff-check.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "source_sha256": {
+    "01_KISH_ENGINE/babylon60/compliance_exporter/m0_evidence_pack.py": "82dc6e8cf8c106a5c7a8c2f68b9ee188457a6d3e618968d38e83acdefc1ddd2c",
+    "01_KISH_ENGINE/babylon60/verifier/cli.py": "ac06ddc82d3c8920af4f10fc328076d817421b10b38b5a238a0e560d4f6a9599",
+    "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py": "624eb292a797ac7094c4b84357606180465b09f3b7381f5292dba44ac4484634",
+    "01_KISH_ENGINE/babylon60/memory/governance.py": "af068410fd1bc165027cbf18f72f0dd8c08a033f32dbb6ab1d2003a02e8b75fc",
+    "01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py": "15292238c8f9b7e87f70ce0b4e8256569bb1cc612497102afa5b373092e85db6",
+    "01_KISH_ENGINE/babylon60/autodidact/crystal_compiler.py": "bd2a08e1e421690740a95743af291b37706129ed5634a9d554a0f18c8723abbe",
+    "01_KISH_ENGINE/babylon60/crypto/shredder.py": "d37ef6f1f53ac5195566087516d927a1604a19a5dc7a2c75492052e77d6c9988",
+    "scripts/c5_cortex/consolidate_dbs.py": "b1b91c5232c7713048427179f9638b5aef7561ea7a60ecd6d8af8709e8fb547a",
+    "tools/skill_library/global/c5-browser-forensics-and-extension-triage/scripts/browser_forensics.py": "739394836cb01e679667570eb96e94ed625e73390f9d66ebab32c1101b9f5324",
+    "tests/test_swarm100_round2_regressions.py": "7a21e0c1e333540dc69bd5471eb2356b6b56fe810d37268ea495e5bae43cc230",
+    "tests/test_m0_evidence_pack_acceptance.py": "904bd4d9cf92b649a0eca19763b47ce21f09db1a6bb52edd034e1c9420593463"
+  }
+}

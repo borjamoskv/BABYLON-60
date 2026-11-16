@@ -1,0 +1,437 @@
+{
+  "shard": "026",
+  "findings": [
+    {
+      "title": "Concurrent sign-offs can fork the audit hash chain",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/verification/verification_gate.py",
+      "line": 252,
+      "evidence": "register_sign_off reads the latest digest before the INSERT transaction; verify_ledger_integrity requires every row to reference the immediately preceding row.",
+      "trigger": "Two VerificationGate connections using the same database read the same latest digest before either inserts.",
+      "impact": "Both inserts can commit with the same predecessor; subsequent integrity verification rejects the otherwise legitimate audit chain.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Enterprise PoC reports success without asserting verifier outcomes",
+      "severity": "P2",
+      "path": "scripts/c5_demos/poc_agents_archi_enterprise.py",
+      "line": 166,
+      "evidence": "run_cmd returns returncode; lines 152 and 166 assign code but do not check it; lines 170-175 unconditionally print successful completion and compliance assertions.",
+      "trigger": "The verifier incorrectly accepts the modified chain, or verification exits with an unrelated error while the ledger file exists.",
+      "impact": "The example still claims successful tamper rejection and compliance, hiding the regression being demonstrated.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "TLA liveness comments claim a physical deadline absent from the model",
+      "severity": "P2",
+      "path": "00_ABZU_KERNEL/formal_verification/BabylonBFT.tla",
+      "line": 77,
+      "evidence": "Spec uses weak fairness and Termination is eventual state completion; no clock, deadline, bounded delay, or physical-time constant is modeled.",
+      "trigger": "Readers use the advertised termination in T seconds or absence of network deadlocks as an operational guarantee.",
+      "impact": "Unbounded eventual progress under assumed fairness is presented as bounded physical termination, overstating the proof scope.",
+      "confidence": "high",
+      "kind": "docs"
+    },
+    {
+      "title": "Backward conditioning uses the initial prior at the wrong timestep",
+      "severity": "P2",
+      "path": "tools/skill_library/global/categorical-hallucination-audit/scripts/audit_kl_d.py",
+      "line": 50,
+      "evidence": "For target_t < min(window), joint = pi0 * T_steps[:, observed] uses pi0 directly; it does not propagate pi0 to target_t.",
+      "trigger": "pi0 describes timestep zero, target_t is positive, and the earliest observation is later than target_t in a nonstationary Markov chain.",
+      "impact": "Posterior probabilities, hallucination rates and surprisal can be incorrect. The prior must first be advanced to the target timestep or its time origin made explicit.",
+      "confidence": "high",
+      "kind": "example"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "01_KISH_ENGINE/babylon60/core/causal_topology.py",
+      "line": 19,
+      "description": "All nodes begin with color 0 and labels are discarded, so JSON values, field names and array order can collide structurally. No callers of these module-level helpers were found in the targeted 01_KISH_ENGINE/tests search; no execution-bypass claim is made."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".agents/skills/c5-audiovisual-acreativo-sota-project/references/modules/c5-anti-slop-ui/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          76
+        ]
+      ],
+      "inventory_sha256": "81d9185732149190c4c086daab656c9592e7c14df3b2d01dbeb504e358c534cd",
+      "observed_sha256": "81d9185732149190c4c086daab656c9592e7c14df3b2d01dbeb504e358c534cd",
+      "changed_source": false,
+      "notes": "Static source inspection only."
+    },
+    {
+      "path": ".licenses/literature_search_arxiv_LICENSE.txt",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          1
+        ]
+      ],
+      "inventory_sha256": "2a84203c73b2ca2e129184516a710e2ee8db9a6d4739ce6edb9bf1d71fde6ebe",
+      "observed_sha256": "2a84203c73b2ca2e129184516a710e2ee8db9a6d4739ce6edb9bf1d71fde6ebe",
+      "changed_source": false,
+      "notes": "Static source inspection only."
+    },
+    {
+      "path": "00_ABZU_KERNEL/formal_verification/BabylonBFT.tla",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          81
+        ]
+      ],
+      "inventory_sha256": "835a3123f95cb2848307bef8f7c32e7a90467ca25a980b519f7daf1030d2db0f",
+      "observed_sha256": "835a3123f95cb2848307bef8f7c32e7a90467ca25a980b519f7daf1030d2db0f",
+      "changed_source": false,
+      "notes": "Static source inspection only."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/core/causal_topology.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          76
+        ]
+      ],
+      "inventory_sha256": "b838f639ef2cead9cbbb00206452aacc96fdaa3aab4152ea877624709b542cfa",
+      "observed_sha256": "b838f639ef2cead9cbbb00206452aacc96fdaa3aab4152ea877624709b542cfa",
+      "changed_source": false,
+      "notes": "Static source inspection only."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/mcp/mail_integration.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          84
+        ]
+      ],
+      "inventory_sha256": "1c2fbadcdd83956e2d6ee875a52ece945e458cc7f8ccf889bd4116e16750a972",
+      "observed_sha256": "1c2fbadcdd83956e2d6ee875a52ece945e458cc7f8ccf889bd4116e16750a972",
+      "changed_source": false,
+      "notes": "Static source inspection only."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/verification/verification_gate.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          425
+        ]
+      ],
+      "inventory_sha256": "42765e56f489add69663fa708e43c6f71aed4593bf9e302570ae77f2c040aa5f",
+      "observed_sha256": "42765e56f489add69663fa708e43c6f71aed4593bf9e302570ae77f2c040aa5f",
+      "changed_source": false,
+      "notes": "Static source inspection only."
+    },
+    {
+      "path": "auditoria_ai_act.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          70
+        ]
+      ],
+      "inventory_sha256": "aaab0b2100eacf7681aa69ba4188144cbc67ff3f6254071733e9cd3df835d02f",
+      "observed_sha256": "aaab0b2100eacf7681aa69ba4188144cbc67ff3f6254071733e9cd3df835d02f",
+      "changed_source": false,
+      "notes": "Static source inspection only."
+    },
+    {
+      "path": "docs/03_guides/USER_GUIDE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          159
+        ]
+      ],
+      "inventory_sha256": "993a07efd4b0439bbd1b4060443d19e8d8714a5c9a2ab26c0855048c91a37aa1",
+      "observed_sha256": "993a07efd4b0439bbd1b4060443d19e8d8714a5c9a2ab26c0855048c91a37aa1",
+      "changed_source": false,
+      "notes": "Static source inspection only."
+    },
+    {
+      "path": "docs/security/evidence/external-audit-remediation-2026-10-24/artifact-state.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          28
+        ]
+      ],
+      "inventory_sha256": "5761c583222fced16cb55a22f2138aab51933d43eee96a069ca6f06dcc347c8a",
+      "observed_sha256": "5761c583222fced16cb55a22f2138aab51933d43eee96a069ca6f06dcc347c8a",
+      "changed_source": false,
+      "notes": "Static source inspection only."
+    },
+    {
+      "path": "proof/lean/BabylonAeonChain.lean",
+      "status": "partial",
+      "ranges": [
+        [
+          1,
+          360
+        ],
+        [
+          1515,
+          1528
+        ],
+        [
+          3023,
+          3035
+        ],
+        [
+          4530,
+          4542
+        ],
+        [
+          6037,
+          6049
+        ],
+        [
+          7440,
+          7551
+        ]
+      ],
+      "inventory_sha256": "233b3e079981dbcc75850dbfdfbacbb5151af2e15f49289391494cf61e31370e",
+      "observed_sha256": "233b3e079981dbcc75850dbfdfbacbb5151af2e15f49289391494cf61e31370e",
+      "changed_source": false,
+      "notes": "Partial manual review in stated ranges. Additional source-text grammar scan inspected all 7551 lines in <=200-line chunks: 7500 literal Event rows match the repeated thread/sequence/action construction across five blocks; all 36 nonblank nonliteral lines emitted for review. This structural scan does not constitute complete manual review or Lean evaluation."
+    },
+    {
+      "path": "scripts/c5_demos/poc_agents_archi_enterprise.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          182
+        ]
+      ],
+      "inventory_sha256": "73715c88b1f4984c19118a4a904eee0fd026fe38495192828734041143beae37",
+      "observed_sha256": "73715c88b1f4984c19118a4a904eee0fd026fe38495192828734041143beae37",
+      "changed_source": false,
+      "notes": "Static source inspection only."
+    },
+    {
+      "path": "scripts/c5_quality_gates/lint_doc_aesthetics.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          132
+        ]
+      ],
+      "inventory_sha256": "95709fcb3126fbdbfd1b786a9bb6046a8563f25bc6fb08da00ed2dcbc9ba60fd",
+      "observed_sha256": "95709fcb3126fbdbfd1b786a9bb6046a8563f25bc6fb08da00ed2dcbc9ba60fd",
+      "changed_source": false,
+      "notes": "Static source inspection only."
+    },
+    {
+      "path": "scripts/kimi_nexus/kimi_ask.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          24
+        ]
+      ],
+      "inventory_sha256": "524b5ec22fc4646691edf5074d1582a0c41a35184e0cc0ffcae0e60905cacf68",
+      "observed_sha256": "524b5ec22fc4646691edf5074d1582a0c41a35184e0cc0ffcae0e60905cacf68",
+      "changed_source": false,
+      "notes": "Static source inspection only."
+    },
+    {
+      "path": "tests/babylon60/primitives/test_tonnetz_monitor.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          33
+        ]
+      ],
+      "inventory_sha256": "56b6d2c3af89b18543346f6dde81d4ef0fdf5cc43aed7222c07f4b4d81acf1f8",
+      "observed_sha256": "56b6d2c3af89b18543346f6dde81d4ef0fdf5cc43aed7222c07f4b4d81acf1f8",
+      "changed_source": false,
+      "notes": "Static source inspection only."
+    },
+    {
+      "path": "tests/test_cognitive_pilot_gemini_judging.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          231
+        ]
+      ],
+      "inventory_sha256": "b8590880863b24912ac932b542c04a0e640b8dda34dce7404729ea13654539d2",
+      "observed_sha256": "b8590880863b24912ac932b542c04a0e640b8dda34dce7404729ea13654539d2",
+      "changed_source": false,
+      "notes": "Static source inspection only."
+    },
+    {
+      "path": "tests/test_response_signature.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          228
+        ]
+      ],
+      "inventory_sha256": "4e5770c27715923dc09d89e1f8a31ac3fcf283175f26660964b9ddf370b99442",
+      "observed_sha256": "4e5770c27715923dc09d89e1f8a31ac3fcf283175f26660964b9ddf370b99442",
+      "changed_source": false,
+      "notes": "Static source inspection only."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/ai-gateway/features.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          96
+        ]
+      ],
+      "inventory_sha256": "efbc7d2d4464c1aab4881f059589439e2979b9967568878c32f7cb3e72cc6ccf",
+      "observed_sha256": "efbc7d2d4464c1aab4881f059589439e2979b9967568878c32f7cb3e72cc6ccf",
+      "changed_source": false,
+      "notes": "Static source inspection only."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/flagship/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          178
+        ]
+      ],
+      "inventory_sha256": "5daaa2c1895e625b06f9dd413f7548603aa0159fb4781145b0cdbcb0a6f07c44",
+      "observed_sha256": "5daaa2c1895e625b06f9dd413f7548603aa0159fb4781145b0cdbcb0a6f07c44",
+      "changed_source": false,
+      "notes": "Static source inspection only."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/smart-placement/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          174
+        ]
+      ],
+      "inventory_sha256": "8e56c052e6b513b9ab565f0eaf0e7f84bca236dfc30bb77ec6715b70821a5b92",
+      "observed_sha256": "8e56c052e6b513b9ab565f0eaf0e7f84bca236dfc30bb77ec6715b70821a5b92",
+      "changed_source": false,
+      "notes": "Static source inspection only."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/wrangler/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          135
+        ]
+      ],
+      "inventory_sha256": "67bab7fd889e3296fa48f88398f52b44e0e52f159ab1442ecd594059f3f741f1",
+      "observed_sha256": "67bab7fd889e3296fa48f88398f52b44e0e52f159ab1442ecd594059f3f741f1",
+      "changed_source": false,
+      "notes": "Static source inspection only."
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/remotion-audio-reactive-video/examples/audio_reactive_kernel.wgsl",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          53
+        ]
+      ],
+      "inventory_sha256": "7de0f07c22e98115b0c69862fe7a9fcc5b3d28b23be983a0c7da6fabb5bd2924",
+      "observed_sha256": "7de0f07c22e98115b0c69862fe7a9fcc5b3d28b23be983a0c7da6fabb5bd2924",
+      "changed_source": false,
+      "notes": "Static source inspection only."
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_30_site_playbooks_doordash.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "inventory_sha256": "4b37c93d602a76e23b7b3f7f125749238b9c7f27030c85c96084ad4d8d0e3bc4",
+      "observed_sha256": "4b37c93d602a76e23b7b3f7f125749238b9c7f27030c85c96084ad4d8d0e3bc4",
+      "changed_source": false,
+      "notes": "Static source inspection only."
+    },
+    {
+      "path": "tools/skill_library/global/c5-ring0-babylon-kernel/references/modules/c5-ctm-formal-architect/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          102
+        ]
+      ],
+      "inventory_sha256": "45cd7b865bed66d29e73ea13eecf637dd13028dd79457d8730ccfd3e9ce1abb7",
+      "observed_sha256": "45cd7b865bed66d29e73ea13eecf637dd13028dd79457d8730ccfd3e9ce1abb7",
+      "changed_source": false,
+      "notes": "Static source inspection only."
+    },
+    {
+      "path": "tools/skill_library/global/categorical-hallucination-audit/scripts/audit_kl_d.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          119
+        ]
+      ],
+      "inventory_sha256": "34f7e6532eed0d70c2cd0d5795c5b269b02cdc44b2e0e8a69fdf89eb9728a0dc",
+      "observed_sha256": "34f7e6532eed0d70c2cd0d5795c5b269b02cdc44b2e0e8a69fdf89eb9728a0dc",
+      "changed_source": false,
+      "notes": "Static source inspection only."
+    },
+    {
+      "path": "tools/skill_library/workspace/biographical-thermo/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "inventory_sha256": "648c9b217addece0219d6332757de035927018e1119344fed6417f536e602ab3",
+      "observed_sha256": "648c9b217addece0219d6332757de035927018e1119344fed6417f536e602ab3",
+      "changed_source": false,
+      "notes": "Static source inspection only."
+    }
+  ],
+  "tool_limitations": [
+    "Native codebase-memory graph tools are not exposed in this session; used targeted source reads and rg.",
+    "No tests, runtime, build, proof compilation, network operations, commit or push were executed.",
+    "BabylonAeonChain.lean is only partially reviewed; declaration search covered the file but most literal event-list lines were not individually reviewed.",
+    "One combined output was truncated around kimi_ask.json and was followed by a complete reread of that file.",
+    "Repository was already dirty on main; assigned files all matched inventory hashes at both metadata checks.",
+    "Follow-up expanded manual Lean review to lines 1-360 and performed full-file literal-grammar source inspection in 200-line chunks; complete manual coverage still not claimed."
+  ],
+  "tests_run": []
+}

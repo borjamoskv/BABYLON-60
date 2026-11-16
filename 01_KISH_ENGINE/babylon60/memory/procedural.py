@@ -9,6 +9,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import math
 from typing import Any, Dict, Optional
 
 
@@ -48,20 +49,31 @@ class ProceduralMemory:
         permanent: bool = False,
     ) -> ProceduralEngram:
         """Record an execution event and update striatal valuation."""
+        if not isinstance(skill_slug, str) or not skill_slug.strip():
+            raise ValueError("skill_slug must be a non-empty string")
+        if not isinstance(success, bool) or not isinstance(permanent, bool):
+            raise ValueError("success and permanent must be booleans")
+        if (
+            isinstance(latency_ms, bool)
+            or not isinstance(latency_ms, (int, float))
+            or not math.isfinite(float(latency_ms))
+            or float(latency_ms) < 0.0
+        ):
+            raise ValueError("latency_ms must be a finite non-negative number")
+
         engram = self._engrams.get(skill_slug)
         if not engram:
-            engram = ProceduralEngram(skill_slug=skill_slug, permanent=permanent)
+            engram = ProceduralEngram(skill_slug=skill_slug, permanent=bool(permanent and success))
             self._engrams[skill_slug] = engram
 
         engram.usage_count += 1
         if success:
             engram.success_count += 1
             engram.striatal_value = min(1.0, engram.striatal_value + 0.05)
+            if permanent:
+                engram.permanent = True
+                engram.striatal_value = max(0.9, engram.striatal_value)
         else:
             engram.striatal_value = max(0.1, engram.striatal_value - 0.1)
-
-        if permanent:
-            engram.permanent = True
-            engram.striatal_value = max(0.9, engram.striatal_value)
 
         return engram

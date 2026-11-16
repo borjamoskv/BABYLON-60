@@ -1,0 +1,303 @@
+{
+  "reviewer": "/root/lot12_review_identity_snapshots",
+  "date": "2026-10-30",
+  "decision": "APPROVED_WITH_EXPLICIT_SCOPE",
+  "open_actionable_findings": [],
+  "candidate_ids": [
+    "SW100-C0528",
+    "SW100-C0529",
+    "SW100-C0337",
+    "SW100-C0345",
+    "SW100-C0533"
+  ],
+  "source_sha256": {
+    "scripts/c5_l1_ledger/ledger_snapshot_engine.py": "60eb867625b819350f09654e51234ba9ed41313213aa93d9092564da6362d405",
+    "01_KISH_ENGINE/babylon60/crypto/identity.py": "43f60f696fc05f0b6fd63d5c17045e105e249bc08cee3cc68e8e6ee419edade8",
+    "01_KISH_ENGINE/babylon60/crypto/keys.py": "d5b8e5336c00eac48e87b1288325c03054c6d15e821074256388ffd9e2782136",
+    "scripts/c5_l1_ledger/seal_bounty_aeon.py": "a3686548681ee16f73a088d06bd67443d73272afe868fc5e9c381e69d40cc6b0"
+  },
+  "test_source_sha256": {
+    "tests/test_swarm100_lot12_s1_regressions.py": "160420dff65c0bf043328c7165cfddb64f467c7eb884b8c0920aa0d4ba311d36",
+    "tests/test_ledger_snapshot_engine.py": "b947465315f0d4e74c8248c22e930bf48476a999869b9221aeda2b0d7db62ace",
+    "tests/test_swarm100_lot12_s2_identity_regressions.py": "74a7223a73709bfd1fa64e4f627a05ca051e9a0cfd75676c4320ec887a4c1f63",
+    "tests/test_crypto_canonical.py": "7b147f6a3dcc18265cd3123eb44799cc2dfbb684a29784ae4f8a1ef2790eb032",
+    "tests/test_bounty_aeon_sealer.py": "8a5d7c0b9289cf78c1830721f3aebe7ce0aa5d4c47aa15ca1df2220aedc5cd65",
+    "docs/security/evidence/swarm100-lot12-20261030/review_identity_snapshots/test_independent_identity.py": "70489da5279d3763d2b2805ceda1862d93cf01df7490534b8cb83a4cecbda6c1",
+    "docs/security/evidence/swarm100-lot12-20261030/review_identity_snapshots/test_independent_snapshots.py": "e6ed29125b9e53a6f58c4659be65a3789252a4e15c9048013976c42fdcee3566"
+  },
+  "checks": {
+    "combined_regressions": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "python",
+        "docs/security/evidence/swarm100-lot12-20261030/run_confined_tests.py",
+        "tests/test_swarm100_lot12_s1_regressions.py",
+        "tests/test_ledger_snapshot_engine.py",
+        "tests/test_swarm100_lot12_s2_identity_regressions.py",
+        "tests/test_crypto_canonical.py",
+        "tests/test_bounty_aeon_sealer.py::test_conformal_merkle_tree_inclusion_and_falsification",
+        "docs/security/evidence/swarm100-lot12-20261030/review_identity_snapshots/test_independent_identity.py",
+        "docs/security/evidence/swarm100-lot12-20261030/review_identity_snapshots/test_independent_snapshots.py",
+        "-q",
+        "-o",
+        "addopts=--tb=short"
+      ],
+      "exit_code": 0,
+      "source_sha256_before": {
+        "scripts/c5_l1_ledger/ledger_snapshot_engine.py": "60eb867625b819350f09654e51234ba9ed41313213aa93d9092564da6362d405",
+        "01_KISH_ENGINE/babylon60/crypto/identity.py": "43f60f696fc05f0b6fd63d5c17045e105e249bc08cee3cc68e8e6ee419edade8",
+        "01_KISH_ENGINE/babylon60/crypto/keys.py": "d5b8e5336c00eac48e87b1288325c03054c6d15e821074256388ffd9e2782136",
+        "scripts/c5_l1_ledger/seal_bounty_aeon.py": "a3686548681ee16f73a088d06bd67443d73272afe868fc5e9c381e69d40cc6b0"
+      },
+      "source_sha256_after": {
+        "scripts/c5_l1_ledger/ledger_snapshot_engine.py": "60eb867625b819350f09654e51234ba9ed41313213aa93d9092564da6362d405",
+        "01_KISH_ENGINE/babylon60/crypto/identity.py": "43f60f696fc05f0b6fd63d5c17045e105e249bc08cee3cc68e8e6ee419edade8",
+        "01_KISH_ENGINE/babylon60/crypto/keys.py": "d5b8e5336c00eac48e87b1288325c03054c6d15e821074256388ffd9e2782136",
+        "scripts/c5_l1_ledger/seal_bounty_aeon.py": "a3686548681ee16f73a088d06bd67443d73272afe868fc5e9c381e69d40cc6b0"
+      },
+      "test_source_sha256": {
+        "tests/test_swarm100_lot12_s1_regressions.py": "160420dff65c0bf043328c7165cfddb64f467c7eb884b8c0920aa0d4ba311d36",
+        "tests/test_ledger_snapshot_engine.py": "b947465315f0d4e74c8248c22e930bf48476a999869b9221aeda2b0d7db62ace",
+        "tests/test_swarm100_lot12_s2_identity_regressions.py": "74a7223a73709bfd1fa64e4f627a05ca051e9a0cfd75676c4320ec887a4c1f63",
+        "tests/test_crypto_canonical.py": "7b147f6a3dcc18265cd3123eb44799cc2dfbb684a29784ae4f8a1ef2790eb032",
+        "tests/test_bounty_aeon_sealer.py": "8a5d7c0b9289cf78c1830721f3aebe7ce0aa5d4c47aa15ca1df2220aedc5cd65",
+        "docs/security/evidence/swarm100-lot12-20261030/review_identity_snapshots/test_independent_identity.py": "70489da5279d3763d2b2805ceda1862d93cf01df7490534b8cb83a4cecbda6c1",
+        "docs/security/evidence/swarm100-lot12-20261030/review_identity_snapshots/test_independent_snapshots.py": "e6ed29125b9e53a6f58c4659be65a3789252a4e15c9048013976c42fdcee3566"
+      },
+      "scope": "Same confined temporary HOME/CORTEX stores and software fixtures as original independent run.",
+      "log": "docs/security/evidence/swarm100-lot12-20261030/review_identity_snapshots/revalidated-regressions.log",
+      "observed": "66 passed:47 author/related cases plus19 independently authored adversarial cases"
+    },
+    "independent_controls": {
+      "executed_with": "docs/security/evidence/swarm100-lot12-20261030/review_identity_snapshots/revalidated-regressions-command.json",
+      "observed": "19 passed in the combined run, including None/noncallable exception-note cleanup controls"
+    },
+    "ruff": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "ruff",
+        "check",
+        "docs/security/evidence/swarm100-lot12-20261030/review_identity_snapshots/test_independent_identity.py",
+        "docs/security/evidence/swarm100-lot12-20261030/review_identity_snapshots/test_independent_snapshots.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/review_identity_snapshots/revalidated-ruff.log"
+    },
+    "source_ruff": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "ruff",
+        "check",
+        "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+        "01_KISH_ENGINE/babylon60/crypto/identity.py",
+        "01_KISH_ENGINE/babylon60/crypto/keys.py",
+        "scripts/c5_l1_ledger/seal_bounty_aeon.py",
+        "tests/test_swarm100_lot12_s1_regressions.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/review_identity_snapshots/revalidated-source-ruff.log"
+    },
+    "source_mypy": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "mypy",
+        "--follow-imports=silent",
+        "--check-untyped-defs",
+        "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+        "01_KISH_ENGINE/babylon60/crypto/identity.py",
+        "01_KISH_ENGINE/babylon60/crypto/keys.py",
+        "scripts/c5_l1_ledger/seal_bounty_aeon.py"
+      ],
+      "exit_code": 0,
+      "log": "docs/security/evidence/swarm100-lot12-20261030/review_identity_snapshots/revalidated-mypy.log"
+    }
+  },
+  "red_evidence_review": {
+    "baseline_source_hashes_match": true,
+    "s1_observed": "6 original failures; later remaining failures reproduced on frozen concurrent source and corrected without source reset",
+    "s2_identity_observed": "6 failures,1passed: existing seed replacement/symlink overwrite, stale metadata/revocation loss, corrupt identity entering forge",
+    "references": [
+      "docs/security/evidence/swarm100-lot12-20261030/s1/before-tests.log",
+      "docs/security/evidence/swarm100-lot12-20261030/s1/red-replay.json",
+      "docs/security/evidence/swarm100-lot12-20261030/s2_identity/before-tests.log"
+    ],
+    "post_approval_added_case": {
+      "log": "docs/security/evidence/swarm100-lot12-20261030/s1/post-freeze-added-case-before.log",
+      "observed": "1failed against prior approved source; current case passes"
+    }
+  },
+  "independent_controls": [
+    "Identity fixed-UUID staging collision preserves the foreign inode and never publishes a seed.",
+    "Directory fsync failure after seed publication raises; a complete, loadable seed may remain, and owned staging is cleaned without pretending rollback.",
+    "Existing and dangling seed symlinks and a symlink storage directory reject without modifying the fixture neighbor.",
+    "Persisted revocation defeats stale readers even when the controlled keyring refuses deletion; copied private material is not destroyed.",
+    "Metadata replacement failure reports an error and leaves the previous valid revocation state; mismatched replacement private keys are not returned.",
+    "Five nine-thread bursts preserve eight concurrent additions plus six prior keys and their revocations, including fresh reload checks.",
+    "Real corrupted JSON and real wrong-passphrase AEAD failures preserve seed bytes and reach neither quote, timestamp nor output publication.",
+    "Snapshot fixed-UUID foreign zero-byte DB and foreign staging collisions preserve their inodes/content and clean only owned outputs.",
+    "Snapshot DB fsync and directory sync failures publish no success/event and preserve the original fixture DB.",
+    "Thirty-two snapshots under a fixed clock and a real WAL writer see matching committed halves before/after four transactions, never the uncommitted partial update; all DB hashes/integrity reopen correctly.",
+    "Optional exception note method set to None and to a noncallable integer: the exact primary error object is propagated, staging cleanup continues, and no manifest is published."
+  ],
+  "per_id": {
+    "SW100-C0528": {
+      "recommendation": "FIXED",
+      "scope": "Logical repository defaults, missing/corrupt/read-only-open race rejection before outputs or actor invocation; copied real directory layout.",
+      "state": "FIXED",
+      "rationale": "Repository root now preserves the logical path with absolute().parents[2]. Missing/corrupt source rejects before output creation; read-only SQLite URI prevents recreation when source disappears between existence check and open. Actual copied-tree/default-path, WAL and failed-main fixtures pass; no real ledger actor ran.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+          "start_line": 44,
+          "end_line": 105,
+          "observation": "Logical default source is validated and opened read-only before any snapshot output; absent/corrupt/raced-away source rejects."
+        },
+        {
+          "path": "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+          "start_line": 166,
+          "end_line": 173,
+          "observation": "Snapshot failure propagates before the event-recording coroutine can construct the actor."
+        }
+      ]
+    },
+    "SW100-C0529": {
+      "recommendation": "FIXED",
+      "scope": "Exclusive DB/staging/final publication with coherent identity and synced pair; fixed clock, collisions, concurrency and WAL fixtures.",
+      "state": "FIXED",
+      "rationale": "Snapshot identity combines fixed-clock timestamp and UUID; DB and staging files use exclusive no-follow creation, and complete manifest publishes with an exclusive hard link. DB/JSON/directory fsyncs execute before success; colliding foreign empty DB/staging/manifests remain intact. Concurrent and WAL snapshots reopen as coherent hash-matching pairs. Local cooperative POSIX only; no power-cut recovery claim.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+          "start_line": 44,
+          "end_line": 105,
+          "observation": "Unique pair identity and exclusive DB reservation; synced DB precedes complete manifest publication."
+        },
+        {
+          "path": "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+          "start_line": 108,
+          "end_line": 124,
+          "observation": "Writes the full manifest and syncs its exclusive staging inode."
+        },
+        {
+          "path": "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+          "start_line": 127,
+          "end_line": 133,
+          "observation": "Cleanup checks the owned inode rather than deleting a foreign collision."
+        },
+        {
+          "path": "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+          "start_line": 136,
+          "end_line": 141,
+          "observation": "Directory sync is required before returning successful publication."
+        }
+      ]
+    },
+    "SW100-C0337": {
+      "recommendation": "FIXED",
+      "scope": "Exclusive publication of a complete software identity; existing files/symlinks preserved; failures observable.",
+      "state": "FIXED",
+      "rationale": "A fully written, fsynced 0600 temporary seed is linked exclusively to the final name, never truncating an existing identity or seed symlink. Descriptor-relative no-follow loads reject seed/directory symlinks. Creation races yield one complete winner; errors, including post-publication fsync failure, remain observable without pretending rollback.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/crypto/identity.py",
+          "start_line": 77,
+          "end_line": 130,
+          "observation": "Complete synced seed inode is published by exclusive link; existing identity/foreign staging is preserved."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/crypto/identity.py",
+          "start_line": 132,
+          "end_line": 158,
+          "observation": "No-follow regular-file load authenticates AEAD and propagates corruption/decryption failure."
+        }
+      ]
+    },
+    "SW100-C0345": {
+      "recommendation": "FIXED",
+      "scope": "Cooperating local instances reload under flock; serialized metadata mutations/rotation and fresh reads preserve concurrent additions/revocations.",
+      "state": "FIXED",
+      "rationale": "Each local cooperating operation acquires a fresh flock descriptor and reloads persisted metadata under that lock. Complete synced replacement and current reads retain concurrent additions and revocations; rotation is serialized. Stale readers cannot recover a revoked private key even after backend deletion fails, and mismatched keyring/private material is rejected. Metadata/keyring are separate stores, not a joint crash-atomic transaction.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/crypto/keys.py",
+          "start_line": 85,
+          "end_line": 108,
+          "observation": "One fresh cooperating store lock covers reload and the complete read/modify/write operation."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/crypto/keys.py",
+          "start_line": 132,
+          "end_line": 148,
+          "observation": "Complete synced temporary metadata is atomically replaced under the shared lock."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/crypto/keys.py",
+          "start_line": 197,
+          "end_line": 238,
+          "observation": "Current revocation/expiry metadata and matching private/public key are required."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/crypto/keys.py",
+          "start_line": 287,
+          "end_line": 291,
+          "observation": "Revocation and replacement generation share the store operation lock."
+        }
+      ]
+    },
+    "SW100-C0533": {
+      "recommendation": "FIXED",
+      "scope": "Only legitimate absence initiates exclusive creation. Corruption/decryption errors preserve identity and now fail before quote/TSA/output.",
+      "state": "FIXED",
+      "rationale": "The consumer creates an identity only on FileNotFoundError. Invalid JSON and AEAD/wrong-passphrase errors propagate without forging/replacing the seed and now precede quote/TSA/output operations. Real temporary corrupted/wrong-passphrase seeds preserve exact bytes; valid software fixture integration still signs the complete v2 manifest.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_l1_ledger/seal_bounty_aeon.py",
+          "start_line": 52,
+          "end_line": 203,
+          "observation": "Identity load/create is restricted to genuine absence, before quote/TSA; other load failures stop the flow and preserve existing identity."
+        }
+      ]
+    }
+  },
+  "resolved_review_observations": [
+    {
+      "observation": "Identity loading originally remained after quote/TSA. Communicated to author/parent; author moved it before those boundaries before final independent run.",
+      "verification": "Both injected JSON failure and actual corrupt/wrong-passphrase identity controls pass."
+    }
+  ],
+  "limits": [
+    "All runtime effects confined to synthetic HOME/CORTEX_DB_PATH, copied scripts, real temporary SQLite/WAL and software keys. TCP/DNS and dotenv disabled. No operator identity, ledger actor, hardware, TSA, deployment or Git mutation executed.",
+    "Local cooperative POSIX filesystem locking/hard-link/directory-fsync contract only; no isolation from a malicious same-UID writer replacing ancestors or lockfiles.",
+    "No physical power-cut test. Abrupt process failure may leave unpublished DB/staging artifacts; no automatic orphan deletion/recovery claim.",
+    "A failure after atomic publication can leave complete new identity/metadata visible; failure is explicit, not an atomic rollback guarantee.",
+    "Keyring and metadata remain separate stores without a joint crash-atomic transaction; in-memory fallback is not durable secret storage. Revocation blocks current API access, not previously copied private keys.",
+    "Snapshot hashes bind content integrity, not authenticated authorship. The sealer hardcoded passphrase and general artifact overwrite policy are outside these five findings.",
+    "A concurrent edit sequence was preserved by S1 before user reserved the file. Review approves only the final hashes above.",
+    "Optional exception-note absence/noncallability was simulated on Python3.14; no actual Python3.10 interpreter run or full platform-compatibility certification is claimed."
+  ],
+  "revalidation_after_source_change": {
+    "previous_review": "docs/security/evidence/swarm100-lot12-20261030/review_identity_snapshots/historical-before-current-change.json",
+    "previous_review_sha256": "8c9843290458b28a8b25031c483e6f8e66c94f3399b7cd39f73a87637cb0c168",
+    "source_diff": "docs/security/evidence/swarm100-lot12-20261030/review_identity_snapshots/post-approval-logic.diff",
+    "ast_diff": "docs/security/evidence/swarm100-lot12-20261030/review_identity_snapshots/post-approval-ast.diff",
+    "test_diff": "docs/security/evidence/swarm100-lot12-20261030/s1/post-freeze-test-change.diff",
+    "logical_assessment": "Only production behavior change is guarding optional exception notes with getattr/callable so cleanup retains the original error and continues when notes are absent/noncallable. Test changes add that regression and accurate typing; previous assertions retained. Both text and AST changes reviewed.",
+    "author_result_sha256": {
+      "s1": "8aa5dfac23b0b4440a9b4965bbdfa8828c6c24a9204691577c5418b640fb8604",
+      "s2_identity": "3ae1cc2e8aa8b3d13a678c17690e6e5ebb052dae5de485f66bf7821b9d324c8d"
+    },
+    "observed": "New author case fails against previous approved source with TypeError when add_note=None;66 current combined cases pass under stable current source/test hashes. No source edits by this reviewer."
+  }
+}

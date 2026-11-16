@@ -1,0 +1,70 @@
+F401 [*] `typing.Any` imported but unused
+  --> scripts/c5_cli/doxastic_kripke_engine.py:26:20
+   |
+24 | import hashlib
+25 | import json
+26 | from typing import Any, Dict, FrozenSet, List, Optional, Set, Tuple
+   |                    ^^^
+help: Remove unused import: `typing.Any`
+   |
+25 | import json
+   - from typing import Any, Dict, FrozenSet, List, Optional, Set, Tuple
+26 + from typing import Dict, FrozenSet, List, Optional, Set, Tuple
+27 |
+   |
+
+F541 [*] f-string without any placeholders
+   --> scripts/c5_cli/doxastic_kripke_engine.py:341:11
+    |
+339 |     print("\n► [DEMO 3] FIREWALL ANTI-SYCOPHANCY (Ring-0 Gate)")
+340 |     ok, msg = engine.assert_external_claim("Sally", "marble", "location", "box")
+341 |     print(f"  • Claim externo complaciente: 'Sally cree que la canica está en box'")
+    |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+342 |     print(f"  ╰─► Veredicto Ring-0: [PASS={ok}]")
+343 |     print(f"      {msg}")
+    |
+help: Remove extraneous `f` prefix
+    |
+340 |     ok, msg = engine.assert_external_claim("Sally", "marble", "location", "box")
+    -     print(f"  • Claim externo complaciente: 'Sally cree que la canica está en box'")
+341 +     print("  • Claim externo complaciente: 'Sally cree que la canica está en box'")
+342 |     print(f"  ╰─► Veredicto Ring-0: [PASS={ok}]")
+    |
+
+F401 [*] `pytest` imported but unused
+  --> tests/test_doxastic_kripke_engine.py:11:8
+   |
+ 9 | """
+10 |
+11 | import pytest
+   |        ^^^^^^
+12 | import sys
+13 | from pathlib import Path
+   |
+help: Remove unused import: `pytest`
+   |
+10 |
+   - import pytest
+11 | import sys
+   |
+
+F401 [*] `doxastic_kripke_engine.DoxasticVetoException` imported but unused
+  --> tests/test_doxastic_kripke_engine.py:21:5
+   |
+19 |     KripkeDoxasticEngine,
+20 |     PerceptualEvent,
+21 |     DoxasticVetoException,
+   |     ^^^^^^^^^^^^^^^^^^^^^
+22 | )
+   |
+help: Remove unused import: `doxastic_kripke_engine.DoxasticVetoException`
+   |
+20 |     PerceptualEvent,
+   -     DoxasticVetoException,
+21 | )
+   |
+
+Found 4 errors.
+[*] 4 fixable with the `--fix` option.
+Uninstalled 1 package in 2ms
+Installed 1 package in 2ms

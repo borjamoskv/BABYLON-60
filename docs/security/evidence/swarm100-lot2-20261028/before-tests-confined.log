@@ -1,0 +1,411 @@
+FFFFFFFFFFFFFFF.FFFFFFFFF.FFFFFFFFFFFFFFFFFFFF                           [100%]
+=================================== FAILURES ===================================
+______ test_itera_preserves_live_sqlite_and_cleans_only_bytecode[data.db] ______
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:116: in test_itera_preserves_live_sqlite_and_cleans_only_bytecode
+    assert_preserved(path, writer)
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:72: in assert_preserved
+    assert Path(str(path) + "-wal").is_file(), "Committed WAL was deleted"
+E   AssertionError: Committed WAL was deleted
+E   assert False
+E    +  where False = is_file()
+E    +    where is_file = PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_itera_preserves_live_sqli0/data.db-wal').is_file
+E    +      where PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_itera_preserves_live_sqli0/data.db-wal') = Path(('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_itera_preserves_live_sqli0/data.db' + '-wal'))
+E    +        where '/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_itera_preserves_live_sqli0/data.db' = str(PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_itera_preserves_live_sqli0/data.db'))
+_ test_itera_preserves_live_sqlite_and_cleans_only_bytecode[__pycache__/data.db] _
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:116: in test_itera_preserves_live_sqlite_and_cleans_only_bytecode
+    assert_preserved(path, writer)
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:72: in assert_preserved
+    assert Path(str(path) + "-wal").is_file(), "Committed WAL was deleted"
+E   AssertionError: Committed WAL was deleted
+E   assert False
+E    +  where False = is_file()
+E    +    where is_file = PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_itera_preserves_live_sqli1/__pycache__/data.db-wal').is_file
+E    +      where PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_itera_preserves_live_sqli1/__pycache__/data.db-wal') = Path(('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_itera_preserves_live_sqli1/__pycache__/data.db' + '-wal'))
+E    +        where '/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_itera_preserves_live_sqli1/__pycache__/data.db' = str(PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_itera_preserves_live_sqli1/__pycache__/data.db'))
+________________ test_cohort_one_preserves_live_sqlite[data.db] ________________
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:131: in test_cohort_one_preserves_live_sqlite
+    assert_preserved(path, writer)
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:72: in assert_preserved
+    assert Path(str(path) + "-wal").is_file(), "Committed WAL was deleted"
+E   AssertionError: Committed WAL was deleted
+E   assert False
+E    +  where False = is_file()
+E    +    where is_file = PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_cohort_one_preserves_live0/data.db-wal').is_file
+E    +      where PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_cohort_one_preserves_live0/data.db-wal') = Path(('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_cohort_one_preserves_live0/data.db' + '-wal'))
+E    +        where '/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_cohort_one_preserves_live0/data.db' = str(PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_cohort_one_preserves_live0/data.db'))
+__________ test_cohort_one_preserves_live_sqlite[__pycache__/data.db] __________
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:131: in test_cohort_one_preserves_live_sqlite
+    assert_preserved(path, writer)
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:72: in assert_preserved
+    assert Path(str(path) + "-wal").is_file(), "Committed WAL was deleted"
+E   AssertionError: Committed WAL was deleted
+E   assert False
+E    +  where False = is_file()
+E    +    where is_file = PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_cohort_one_preserves_live1/__pycache__/data.db-wal').is_file
+E    +      where PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_cohort_one_preserves_live1/__pycache__/data.db-wal') = Path(('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_cohort_one_preserves_live1/__pycache__/data.db' + '-wal'))
+E    +        where '/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_cohort_one_preserves_live1/__pycache__/data.db' = str(PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_cohort_one_preserves_live1/__pycache__/data.db'))
+_______ test_cohort_one_preserves_live_sqlite[__pycache__/database.pyc] ________
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:131: in test_cohort_one_preserves_live_sqlite
+    assert_preserved(path, writer)
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:72: in assert_preserved
+    assert Path(str(path) + "-wal").is_file(), "Committed WAL was deleted"
+E   AssertionError: Committed WAL was deleted
+E   assert False
+E    +  where False = is_file()
+E    +    where is_file = PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_cohort_one_preserves_live2/__pycache__/database.pyc-wal').is_file
+E    +      where PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_cohort_one_preserves_live2/__pycache__/database.pyc-wal') = Path(('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_cohort_one_preserves_live2/__pycache__/database.pyc' + '-wal'))
+E    +        where '/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_cohort_one_preserves_live2/__pycache__/database.pyc' = str(PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_cohort_one_preserves_live2/__pycache__/database.pyc'))
+________________ test_cohort_one_does_not_clean_other_projects _________________
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:148: in test_cohort_one_does_not_clean_other_projects
+    assert foreign.exists()
+E   AssertionError: assert False
+E    +  where False = exists()
+E    +    where exists = PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_cohort_one_does_not_clean0/other/__pycache__/foreign.pyc').exists
+_ test_skill_preserves_sqlite_in_every_cleanup_category[primary-False-data.db] _
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:159: in test_skill_preserves_sqlite_in_every_cleanup_category
+    assert_preserved(path, writer)
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:72: in assert_preserved
+    assert Path(str(path) + "-wal").is_file(), "Committed WAL was deleted"
+E   AssertionError: Committed WAL was deleted
+E   assert False
+E    +  where False = is_file()
+E    +    where is_file = PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in0/workspace/data.db-wal').is_file
+E    +      where PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in0/workspace/data.db-wal') = Path(('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in0/workspace/data.db' + '-wal'))
+E    +        where '/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in0/workspace/data.db' = str(PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in0/workspace/data.db'))
+_ test_skill_preserves_sqlite_in_every_cleanup_category[primary-False-scratch_fixture/data.db] _
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:159: in test_skill_preserves_sqlite_in_every_cleanup_category
+    assert_preserved(path, writer)
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:72: in assert_preserved
+    assert Path(str(path) + "-wal").is_file(), "Committed WAL was deleted"
+E   AssertionError: Committed WAL was deleted
+E   assert False
+E    +  where False = is_file()
+E    +    where is_file = PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in1/workspace/scratch_fixture/data.db-wal').is_file
+E    +      where PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in1/workspace/scratch_fixture/data.db-wal') = Path(('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in1/workspace/scratch_fixture/data.db' + '-wal'))
+E    +        where '/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in1/workspace/scratch_fixture/data.db' = str(PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in1/workspace/scratch_fixture/data.db'))
+_ test_skill_preserves_sqlite_in_every_cleanup_category[primary-False-out/data.db] _
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:159: in test_skill_preserves_sqlite_in_every_cleanup_category
+    assert_preserved(path, writer)
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:72: in assert_preserved
+    assert Path(str(path) + "-wal").is_file(), "Committed WAL was deleted"
+E   AssertionError: Committed WAL was deleted
+E   assert False
+E    +  where False = is_file()
+E    +    where is_file = PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in2/workspace/out/data.db-wal').is_file
+E    +      where PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in2/workspace/out/data.db-wal') = Path(('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in2/workspace/out/data.db' + '-wal'))
+E    +        where '/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in2/workspace/out/data.db' = str(PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in2/workspace/out/data.db'))
+_ test_skill_preserves_sqlite_in_every_cleanup_category[primary-False-__pycache__/data.db] _
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:159: in test_skill_preserves_sqlite_in_every_cleanup_category
+    assert_preserved(path, writer)
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:72: in assert_preserved
+    assert Path(str(path) + "-wal").is_file(), "Committed WAL was deleted"
+E   AssertionError: Committed WAL was deleted
+E   assert False
+E    +  where False = is_file()
+E    +    where is_file = PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in3/workspace/__pycache__/data.db-wal').is_file
+E    +      where PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in3/workspace/__pycache__/data.db-wal') = Path(('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in3/workspace/__pycache__/data.db' + '-wal'))
+E    +        where '/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in3/workspace/__pycache__/data.db' = str(PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in3/workspace/__pycache__/data.db'))
+_ test_skill_preserves_sqlite_in_every_cleanup_category[primary-False-database.tmp] _
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:159: in test_skill_preserves_sqlite_in_every_cleanup_category
+    assert_preserved(path, writer)
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:75: in assert_preserved
+    assert reader.execute("SELECT payload FROM records ORDER BY id").fetchall() == [("committed-in-wal",)]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   sqlite3.OperationalError: no such table: records
+_ test_skill_preserves_sqlite_in_every_cleanup_category[primary-True-data.db] __
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:160: in test_skill_preserves_sqlite_in_every_cleanup_category
+    assert stats["wal_orphans"] == 0
+E   assert 2 == 0
+_ test_skill_preserves_sqlite_in_every_cleanup_category[primary-True-scratch_fixture/data.db] _
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:160: in test_skill_preserves_sqlite_in_every_cleanup_category
+    assert stats["wal_orphans"] == 0
+E   assert 2 == 0
+_ test_skill_preserves_sqlite_in_every_cleanup_category[primary-True-out/data.db] _
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:160: in test_skill_preserves_sqlite_in_every_cleanup_category
+    assert stats["wal_orphans"] == 0
+E   assert 2 == 0
+_ test_skill_preserves_sqlite_in_every_cleanup_category[primary-True-__pycache__/data.db] _
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:160: in test_skill_preserves_sqlite_in_every_cleanup_category
+    assert stats["wal_orphans"] == 0
+E   assert 2 == 0
+_ test_skill_preserves_sqlite_in_every_cleanup_category[bundled-False-data.db] _
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:159: in test_skill_preserves_sqlite_in_every_cleanup_category
+    assert_preserved(path, writer)
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:72: in assert_preserved
+    assert Path(str(path) + "-wal").is_file(), "Committed WAL was deleted"
+E   AssertionError: Committed WAL was deleted
+E   assert False
+E    +  where False = is_file()
+E    +    where is_file = PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in10/workspace/data.db-wal').is_file
+E    +      where PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in10/workspace/data.db-wal') = Path(('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in10/workspace/data.db' + '-wal'))
+E    +        where '/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in10/workspace/data.db' = str(PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in10/workspace/data.db'))
+_ test_skill_preserves_sqlite_in_every_cleanup_category[bundled-False-scratch_fixture/data.db] _
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:159: in test_skill_preserves_sqlite_in_every_cleanup_category
+    assert_preserved(path, writer)
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:72: in assert_preserved
+    assert Path(str(path) + "-wal").is_file(), "Committed WAL was deleted"
+E   AssertionError: Committed WAL was deleted
+E   assert False
+E    +  where False = is_file()
+E    +    where is_file = PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in11/workspace/scratch_fixture/data.db-wal').is_file
+E    +      where PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in11/workspace/scratch_fixture/data.db-wal') = Path(('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in11/workspace/scratch_fixture/data.db' + '-wal'))
+E    +        where '/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in11/workspace/scratch_fixture/data.db' = str(PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in11/workspace/scratch_fixture/data.db'))
+_ test_skill_preserves_sqlite_in_every_cleanup_category[bundled-False-out/data.db] _
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:159: in test_skill_preserves_sqlite_in_every_cleanup_category
+    assert_preserved(path, writer)
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:72: in assert_preserved
+    assert Path(str(path) + "-wal").is_file(), "Committed WAL was deleted"
+E   AssertionError: Committed WAL was deleted
+E   assert False
+E    +  where False = is_file()
+E    +    where is_file = PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in12/workspace/out/data.db-wal').is_file
+E    +      where PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in12/workspace/out/data.db-wal') = Path(('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in12/workspace/out/data.db' + '-wal'))
+E    +        where '/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in12/workspace/out/data.db' = str(PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in12/workspace/out/data.db'))
+_ test_skill_preserves_sqlite_in_every_cleanup_category[bundled-False-__pycache__/data.db] _
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:159: in test_skill_preserves_sqlite_in_every_cleanup_category
+    assert_preserved(path, writer)
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:72: in assert_preserved
+    assert Path(str(path) + "-wal").is_file(), "Committed WAL was deleted"
+E   AssertionError: Committed WAL was deleted
+E   assert False
+E    +  where False = is_file()
+E    +    where is_file = PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in13/workspace/__pycache__/data.db-wal').is_file
+E    +      where PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in13/workspace/__pycache__/data.db-wal') = Path(('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in13/workspace/__pycache__/data.db' + '-wal'))
+E    +        where '/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in13/workspace/__pycache__/data.db' = str(PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_sqlite_in13/workspace/__pycache__/data.db'))
+_ test_skill_preserves_sqlite_in_every_cleanup_category[bundled-False-database.tmp] _
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:159: in test_skill_preserves_sqlite_in_every_cleanup_category
+    assert_preserved(path, writer)
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:75: in assert_preserved
+    assert reader.execute("SELECT payload FROM records ORDER BY id").fetchall() == [("committed-in-wal",)]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   sqlite3.OperationalError: no such table: records
+_ test_skill_preserves_sqlite_in_every_cleanup_category[bundled-True-data.db] __
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:160: in test_skill_preserves_sqlite_in_every_cleanup_category
+    assert stats["wal_orphans"] == 0
+E   assert 2 == 0
+_ test_skill_preserves_sqlite_in_every_cleanup_category[bundled-True-scratch_fixture/data.db] _
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:160: in test_skill_preserves_sqlite_in_every_cleanup_category
+    assert stats["wal_orphans"] == 0
+E   assert 2 == 0
+_ test_skill_preserves_sqlite_in_every_cleanup_category[bundled-True-out/data.db] _
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:160: in test_skill_preserves_sqlite_in_every_cleanup_category
+    assert stats["wal_orphans"] == 0
+E   assert 2 == 0
+_ test_skill_preserves_sqlite_in_every_cleanup_category[bundled-True-__pycache__/data.db] _
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:160: in test_skill_preserves_sqlite_in_every_cleanup_category
+    assert stats["wal_orphans"] == 0
+E   assert 2 == 0
+_______ test_skill_does_not_read_or_reset_global_sessions[primary-False] _______
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:186: in test_skill_does_not_read_or_reset_global_sessions
+    assert not accesses
+E   AssertionError: assert not ['/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_does_not_read_or_re0/home/.gemini/antigravity/conversation_summaries.db']
+_______ test_skill_does_not_read_or_reset_global_sessions[primary-True] ________
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:186: in test_skill_does_not_read_or_reset_global_sessions
+    assert not accesses
+E   AssertionError: assert not ['/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_does_not_read_or_re1/home/.gemini/antigravity/conversation_summaries.db']
+_______ test_skill_does_not_read_or_reset_global_sessions[bundled-False] _______
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:186: in test_skill_does_not_read_or_reset_global_sessions
+    assert not accesses
+E   AssertionError: assert not ['/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_does_not_read_or_re2/home/.gemini/antigravity/conversation_summaries.db']
+_______ test_skill_does_not_read_or_reset_global_sessions[bundled-True] ________
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:186: in test_skill_does_not_read_or_reset_global_sessions
+    assert not accesses
+E   AssertionError: assert not ['/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_does_not_read_or_re3/home/.gemini/antigravity/conversation_summaries.db']
+________________ test_skill_does_not_even_resolve_home[primary] ________________
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:197: in test_skill_does_not_even_resolve_home
+    skill.purge_anergy(workspace, dry_run=True)
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/anergy-purge-protocol/scripts/anergy_purge.py:193: in purge_anergy
+    db_path = Path.home() / ".gemini" / "antigravity" / "conversation_summaries.db"
+              ^^^^^^^^^^^
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:196: in <lambda>
+    monkeypatch.setattr(Path, "home", classmethod(lambda cls: pytest.fail("No implicit global access")))
+                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: No implicit global access
+________________ test_skill_does_not_even_resolve_home[bundled] ________________
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:197: in test_skill_does_not_even_resolve_home
+    skill.purge_anergy(workspace, dry_run=True)
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/anergy-purge-protocol/scripts/anergy_purge.py:193: in purge_anergy
+    db_path = Path.home() / ".gemini" / "antigravity" / "conversation_summaries.db"
+              ^^^^^^^^^^^
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:196: in <lambda>
+    monkeypatch.setattr(Path, "home", classmethod(lambda cls: pytest.fail("No implicit global access")))
+                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: No implicit global access
+___________ test_skill_dry_run_reports_zero_recovered_bytes[primary] ___________
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:207: in test_skill_dry_run_reports_zero_recovered_bytes
+    assert stats["total_bytes_recovered"] == 0
+E   assert 24 == 0
+___________ test_skill_dry_run_reports_zero_recovered_bytes[bundled] ___________
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:207: in test_skill_dry_run_reports_zero_recovered_bytes
+    assert stats["total_bytes_recovered"] == 0
+E   assert 24 == 0
+__ test_skill_cleans_owned_artifacts_and_preserves_protected_content[primary] __
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:224: in test_skill_cleans_owned_artifacts_and_preserves_protected_content
+    assert protected.read_text() == "canonical evidence"
+           ^^^^^^^^^^^^^^^^^^^^^
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py:787: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py:771: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: '/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_cleans_owned_artifa0/workspace/out/artifact_bundle_v3/keep.tmp'
+__ test_skill_cleans_owned_artifacts_and_preserves_protected_content[bundled] __
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:224: in test_skill_cleans_owned_artifacts_and_preserves_protected_content
+    assert protected.read_text() == "canonical evidence"
+           ^^^^^^^^^^^^^^^^^^^^^
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py:787: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py:771: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: '/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_cleans_owned_artifa1/workspace/out/artifact_bundle_v3/keep.tmp'
+___________ test_skill_skips_symlinked_outside_directories[primary] ____________
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:237: in test_skill_skips_symlinked_outside_directories
+    assert victim.exists()
+E   AssertionError: assert False
+E    +  where False = exists()
+E    +    where exists = PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_skips_symlinked_out0/outside/keep.tmp').exists
+___________ test_skill_skips_symlinked_outside_directories[bundled] ____________
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:237: in test_skill_skips_symlinked_outside_directories
+    assert victim.exists()
+E   AssertionError: assert False
+E    +  where False = exists()
+E    +    where exists = PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_skips_symlinked_out1/outside/keep.tmp').exists
+_________ test_skill_preserves_candidate_if_inspection_fails[primary] __________
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:254: in test_skill_preserves_candidate_if_inspection_fails
+    assert candidate.exists()
+E   AssertionError: assert False
+E    +  where False = exists()
+E    +    where exists = PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_candidate0/workspace/denied.tmp').exists
+_________ test_skill_preserves_candidate_if_inspection_fails[bundled] __________
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:254: in test_skill_preserves_candidate_if_inspection_fails
+    assert candidate.exists()
+E   AssertionError: assert False
+E    +  where False = exists()
+E    +    where exists = PosixPath('/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-borjafernandezangulo/pytest-715/test_skill_preserves_candidate1/workspace/denied.tmp').exists
+___________ test_consolidation_refusal_preserves_exact_journal_rows ____________
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:265: in test_consolidation_refusal_preserves_exact_journal_rows
+    with pytest.raises(RuntimeError, match="CONSOLIDATION_UNSUPPORTED"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE RuntimeError
+______________ test_consolidation_rejects_before_open_or_creation ______________
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:283: in test_consolidation_rejects_before_open_or_creation
+    await module.autoconsolidate(db_path=str(path))
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_cortex/autoconsolidate.py:39: in autoconsolidate
+    db = await connect(db_path)
+         ^^^^^^^^^^^^^^^^^^^^^^
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:278: in forbidden
+    pytest.fail("Consolidation must reject before connecting")
+E   Failed: Consolidation must reject before connecting
+_________ test_invalid_batch_size_rejects_without_creating_database[0] _________
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:292: in test_invalid_batch_size_rejects_without_creating_database
+    await module.autoconsolidate(batch_size=size, db_path=str(path))
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_cortex/autoconsolidate.py:41: in autoconsolidate
+    cursor = await db.execute("SELECT id FROM journal ORDER BY lamport_t")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.venv/lib/python3.14/site-packages/aiosqlite/core.py:223: in execute
+    cursor = await self._execute(self._conn.execute, sql, parameters)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.venv/lib/python3.14/site-packages/aiosqlite/core.py:160: in _execute
+    return await future
+           ^^^^^^^^^^^^
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.venv/lib/python3.14/site-packages/aiosqlite/core.py:63: in _connection_worker_thread
+    result = function()
+             ^^^^^^^^^^
+E   sqlite3.OperationalError: no such table: journal
+________ test_invalid_batch_size_rejects_without_creating_database[-1] _________
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:292: in test_invalid_batch_size_rejects_without_creating_database
+    await module.autoconsolidate(batch_size=size, db_path=str(path))
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_cortex/autoconsolidate.py:41: in autoconsolidate
+    cursor = await db.execute("SELECT id FROM journal ORDER BY lamport_t")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.venv/lib/python3.14/site-packages/aiosqlite/core.py:223: in execute
+    cursor = await self._execute(self._conn.execute, sql, parameters)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.venv/lib/python3.14/site-packages/aiosqlite/core.py:160: in _execute
+    return await future
+           ^^^^^^^^^^^^
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.venv/lib/python3.14/site-packages/aiosqlite/core.py:63: in _connection_worker_thread
+    result = function()
+             ^^^^^^^^^^
+E   sqlite3.OperationalError: no such table: journal
+_______ test_invalid_batch_size_rejects_without_creating_database[True] ________
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:292: in test_invalid_batch_size_rejects_without_creating_database
+    await module.autoconsolidate(batch_size=size, db_path=str(path))
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_cortex/autoconsolidate.py:41: in autoconsolidate
+    cursor = await db.execute("SELECT id FROM journal ORDER BY lamport_t")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.venv/lib/python3.14/site-packages/aiosqlite/core.py:223: in execute
+    cursor = await self._execute(self._conn.execute, sql, parameters)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.venv/lib/python3.14/site-packages/aiosqlite/core.py:160: in _execute
+    return await future
+           ^^^^^^^^^^^^
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.venv/lib/python3.14/site-packages/aiosqlite/core.py:63: in _connection_worker_thread
+    result = function()
+             ^^^^^^^^^^
+E   sqlite3.OperationalError: no such table: journal
+_________ test_invalid_batch_size_rejects_without_creating_database[2] _________
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/tests/test_swarm100_lot2_regressions.py:292: in test_invalid_batch_size_rejects_without_creating_database
+    await module.autoconsolidate(batch_size=size, db_path=str(path))
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/scripts/c5_cortex/autoconsolidate.py:41: in autoconsolidate
+    cursor = await db.execute("SELECT id FROM journal ORDER BY lamport_t")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.venv/lib/python3.14/site-packages/aiosqlite/core.py:223: in execute
+    cursor = await self._execute(self._conn.execute, sql, parameters)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.venv/lib/python3.14/site-packages/aiosqlite/core.py:160: in _execute
+    return await future
+           ^^^^^^^^^^^^
+/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.venv/lib/python3.14/site-packages/aiosqlite/core.py:63: in _connection_worker_thread
+    result = function()
+             ^^^^^^^^^^
+E   sqlite3.OperationalError: no such table: journal
+=========================== short test summary info ============================
+FAILED tests/test_swarm100_lot2_regressions.py::test_itera_preserves_live_sqlite_and_cleans_only_bytecode[data.db]
+FAILED tests/test_swarm100_lot2_regressions.py::test_itera_preserves_live_sqlite_and_cleans_only_bytecode[__pycache__/data.db]
+FAILED tests/test_swarm100_lot2_regressions.py::test_cohort_one_preserves_live_sqlite[data.db]
+FAILED tests/test_swarm100_lot2_regressions.py::test_cohort_one_preserves_live_sqlite[__pycache__/data.db]
+FAILED tests/test_swarm100_lot2_regressions.py::test_cohort_one_preserves_live_sqlite[__pycache__/database.pyc]
+FAILED tests/test_swarm100_lot2_regressions.py::test_cohort_one_does_not_clean_other_projects
+FAILED tests/test_swarm100_lot2_regressions.py::test_skill_preserves_sqlite_in_every_cleanup_category[primary-False-data.db]
+FAILED tests/test_swarm100_lot2_regressions.py::test_skill_preserves_sqlite_in_every_cleanup_category[primary-False-scratch_fixture/data.db]
+FAILED tests/test_swarm100_lot2_regressions.py::test_skill_preserves_sqlite_in_every_cleanup_category[primary-False-out/data.db]
+FAILED tests/test_swarm100_lot2_regressions.py::test_skill_preserves_sqlite_in_every_cleanup_category[primary-False-__pycache__/data.db]
+FAILED tests/test_swarm100_lot2_regressions.py::test_skill_preserves_sqlite_in_every_cleanup_category[primary-False-database.tmp]
+FAILED tests/test_swarm100_lot2_regressions.py::test_skill_preserves_sqlite_in_every_cleanup_category[primary-True-data.db]
+FAILED tests/test_swarm100_lot2_regressions.py::test_skill_preserves_sqlite_in_every_cleanup_category[primary-True-scratch_fixture/data.db]
+FAILED tests/test_swarm100_lot2_regressions.py::test_skill_preserves_sqlite_in_every_cleanup_category[primary-True-out/data.db]
+FAILED tests/test_swarm100_lot2_regressions.py::test_skill_preserves_sqlite_in_every_cleanup_category[primary-True-__pycache__/data.db]
+FAILED tests/test_swarm100_lot2_regressions.py::test_skill_preserves_sqlite_in_every_cleanup_category[bundled-False-data.db]
+FAILED tests/test_swarm100_lot2_regressions.py::test_skill_preserves_sqlite_in_every_cleanup_category[bundled-False-scratch_fixture/data.db]
+FAILED tests/test_swarm100_lot2_regressions.py::test_skill_preserves_sqlite_in_every_cleanup_category[bundled-False-out/data.db]
+FAILED tests/test_swarm100_lot2_regressions.py::test_skill_preserves_sqlite_in_every_cleanup_category[bundled-False-__pycache__/data.db]
+FAILED tests/test_swarm100_lot2_regressions.py::test_skill_preserves_sqlite_in_every_cleanup_category[bundled-False-database.tmp]
+FAILED tests/test_swarm100_lot2_regressions.py::test_skill_preserves_sqlite_in_every_cleanup_category[bundled-True-data.db]
+FAILED tests/test_swarm100_lot2_regressions.py::test_skill_preserves_sqlite_in_every_cleanup_category[bundled-True-scratch_fixture/data.db]
+FAILED tests/test_swarm100_lot2_regressions.py::test_skill_preserves_sqlite_in_every_cleanup_category[bundled-True-out/data.db]
+FAILED tests/test_swarm100_lot2_regressions.py::test_skill_preserves_sqlite_in_every_cleanup_category[bundled-True-__pycache__/data.db]
+FAILED tests/test_swarm100_lot2_regressions.py::test_skill_does_not_read_or_reset_global_sessions[primary-False]
+FAILED tests/test_swarm100_lot2_regressions.py::test_skill_does_not_read_or_reset_global_sessions[primary-True]
+FAILED tests/test_swarm100_lot2_regressions.py::test_skill_does_not_read_or_reset_global_sessions[bundled-False]
+FAILED tests/test_swarm100_lot2_regressions.py::test_skill_does_not_read_or_reset_global_sessions[bundled-True]
+FAILED tests/test_swarm100_lot2_regressions.py::test_skill_does_not_even_resolve_home[primary]
+FAILED tests/test_swarm100_lot2_regressions.py::test_skill_does_not_even_resolve_home[bundled]
+FAILED tests/test_swarm100_lot2_regressions.py::test_skill_dry_run_reports_zero_recovered_bytes[primary]
+FAILED tests/test_swarm100_lot2_regressions.py::test_skill_dry_run_reports_zero_recovered_bytes[bundled]
+FAILED tests/test_swarm100_lot2_regressions.py::test_skill_cleans_owned_artifacts_and_preserves_protected_content[primary]
+FAILED tests/test_swarm100_lot2_regressions.py::test_skill_cleans_owned_artifacts_and_preserves_protected_content[bundled]
+FAILED tests/test_swarm100_lot2_regressions.py::test_skill_skips_symlinked_outside_directories[primary]
+FAILED tests/test_swarm100_lot2_regressions.py::test_skill_skips_symlinked_outside_directories[bundled]
+FAILED tests/test_swarm100_lot2_regressions.py::test_skill_preserves_candidate_if_inspection_fails[primary]
+FAILED tests/test_swarm100_lot2_regressions.py::test_skill_preserves_candidate_if_inspection_fails[bundled]
+FAILED tests/test_swarm100_lot2_regressions.py::test_consolidation_refusal_preserves_exact_journal_rows
+FAILED tests/test_swarm100_lot2_regressions.py::test_consolidation_rejects_before_open_or_creation
+FAILED tests/test_swarm100_lot2_regressions.py::test_invalid_batch_size_rejects_without_creating_database[0]
+FAILED tests/test_swarm100_lot2_regressions.py::test_invalid_batch_size_rejects_without_creating_database[-1]
+FAILED tests/test_swarm100_lot2_regressions.py::test_invalid_batch_size_rejects_without_creating_database[True]
+FAILED tests/test_swarm100_lot2_regressions.py::test_invalid_batch_size_rejects_without_creating_database[2]
+44 failed, 2 passed in 1.31s

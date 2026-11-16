@@ -1,0 +1,344 @@
+{
+  "shard": "020",
+  "findings": [
+    {
+      "title": "Linux fallback discards ordinary objdump instruction lines",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/kernel/sovereign_binary_analyzer.py",
+      "line": 281,
+      "evidence": "_disassemble_system_cli selects objdump -d at line 271, then skips every line containing a colon unless it starts with 0x (281). Ordinary objdump address lines use ADDRESS: without 0x. ELF metadata has no sections (181), so Capstone also returns empty (203-213).",
+      "trigger": "Analyze an ELF file on Linux using disassemble_section.",
+      "impact": "The advertised ELF disassembly and resulting CFG are empty even for a valid executable.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Conditional branch classification omits common branch instructions",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/kernel/sovereign_binary_analyzer.py",
+      "line": 229,
+      "evidence": "The finite is_branch list at 229-244 excludes x86 jle/jge/ja/jae/jb/jbe and ARM b.ge/b.le/b.hi/b.ls. build_cfg only splits and links instructions marked is_branch at 342-347 and 373-385.",
+      "trigger": "Disassemble code containing one of the omitted conditional branches using Capstone.",
+      "impact": "CFG treats the branch as a normal instruction, omits its target edge and can merge multiple basic blocks, yielding incorrect control-flow analysis.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Manuscript presents scripted simulation as empirical LLM comparison",
+      "severity": "P2",
+      "path": "docs/papers/interoceptive-control/manuscript/paper_draft.md",
+      "line": 115,
+      "evidence": "Lines 115-132 describe independent LLM configurations, observed budget acknowledgements and proof of semantic failure. benchmarks/run_ablation_matrix.py:29-32 returns a fixed 1000 tokens; 67-70 explicitly programs the soft overshoot; 52 and 113 assign violation counts by formula/constant. The gate used there is Python (src/spinal_gate.py:82-98), whereas manuscript:106 claims native code.",
+      "trigger": "Use the paper table and analysis as evidence for LLM budget compliance or native runtime confinement.",
+      "impact": "Readers receive empirical and native-enforcement claims that this cited deterministic harness cannot establish; label results as simulation and remove unmeasured behavioral claims.",
+      "confidence": "high",
+      "kind": "docs"
+    },
+    {
+      "title": "Bearer-prefix example accepts arbitrary credentials",
+      "severity": "P2",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workers/patterns.md",
+      "line": 150,
+      "evidence": "The complete Auth example at 148-150 only checks startsWith(\"Bearer \"); no token comparison, signature verification, issuer, audience or expiry check follows before execution proceeds.",
+      "trigger": "Copy the Security & Rate Limiting authentication example and send Authorization: Bearer arbitrary.",
+      "impact": "Any caller can pass the illustrated authentication check and reach subsequent request handling.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "GitHub Actions secret example embeds secret directly in shell program",
+      "severity": "P2",
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/secrets-store/configuration.md",
+      "line": 169,
+      "evidence": "The YAML run script interpolates secrets.API_KEY directly into echo \"${{ secrets.API_KEY }}\" before shell evaluation; unlike the token at 167, the secret value is not passed through an environment variable.",
+      "trigger": "Use this example with a secret containing shell expansion syntax such as a literal command substitution.",
+      "impact": "The runner interprets secret contents as shell code, causing unintended command execution or corruption of the value being stored.",
+      "confidence": "high",
+      "kind": "example"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".agents/skills/c5-alpha-extraction-pipeline/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          22
+        ]
+      ],
+      "sha256_match": true
+    },
+    {
+      "path": ".github/workflows/verify_lean.yml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          132
+        ]
+      ],
+      "sha256_match": true
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/orchestrator.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          144
+        ]
+      ],
+      "sha256_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/compliance_exporter/templates/signature_block.html.j2",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          8
+        ]
+      ],
+      "sha256_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/sovereign_binary_analyzer.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          485
+        ]
+      ],
+      "sha256_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/verification/__init__.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          45
+        ]
+      ],
+      "sha256_match": true
+    },
+    {
+      "path": "ONTOLOGY.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          29
+        ]
+      ],
+      "sha256_match": true
+    },
+    {
+      "path": "docs/02_ontology/axiom_ontology.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          59
+        ]
+      ],
+      "sha256_match": true
+    },
+    {
+      "path": "docs/papers/interoceptive-control/manuscript/paper_draft.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          159
+        ]
+      ],
+      "sha256_match": true
+    },
+    {
+      "path": "proof/bundles/attestation_bundle_v2/timestamp",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          1
+        ]
+      ],
+      "sha256_match": true
+    },
+    {
+      "path": "scripts/c5_demos/nul-zk-falsification/Cargo.toml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          17
+        ]
+      ],
+      "sha256_match": true
+    },
+    {
+      "path": "scripts/c5_quality_gates/fl_pkg_01.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          642
+        ]
+      ],
+      "sha256_match": true
+    },
+    {
+      "path": "scripts/guards/render_signature_panel.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          171
+        ]
+      ],
+      "sha256_match": true
+    },
+    {
+      "path": "tests/acs_authenticated.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          654
+        ]
+      ],
+      "sha256_match": true
+    },
+    {
+      "path": "tests/test_c5_memory_shield.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          55
+        ]
+      ],
+      "sha256_match": true
+    },
+    {
+      "path": "tests/test_re_drm_rust.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          83
+        ]
+      ],
+      "sha256_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/agents-sdk/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          182
+        ]
+      ],
+      "sha256_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/email-workers/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          112
+        ]
+      ],
+      "sha256_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/secrets-store/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          185
+        ]
+      ],
+      "sha256_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workers/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          198
+        ]
+      ],
+      "sha256_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/tests/test_flstudio_production.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          91
+        ]
+      ],
+      "sha256_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_24_food_ordering.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "sha256_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-poster-and-sign-craft/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          43
+        ]
+      ],
+      "sha256_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-wetware-and-venture-ops/references/modules/c5-venture-pitch-architect/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          82
+        ]
+      ],
+      "sha256_match": true
+    },
+    {
+      "path": "tools/skill_library/workspace/adaptive-cron/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "sha256_match": true
+    }
+  ],
+  "tool_limitations": [
+    "No native codebase-memory graph tools exposed; targeted text reads used.",
+    "Static audit only; no tests, builds, runtime launches, network API validation or physical-property verification performed.",
+    "External SDK examples reviewed for self-contained defects; current API signatures not verified."
+  ],
+  "tests_run": []
+}

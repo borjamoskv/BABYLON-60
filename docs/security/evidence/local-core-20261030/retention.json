@@ -1,0 +1,12 @@
+{
+  "external_evidence_root": "/Users/borjafernandezangulo/.codex/local-core-evidence/capture-20261029T230935Z",
+  "excluded_from_git": [
+    "Private key material",
+    "SQLite databases and WAL files",
+    "Compiled binaries",
+    "Virtual environments and caches"
+  ],
+  "note": "Databases and compiled candidate remain in private local evidence for independent reproduction; no private key blob was copied or logged.",
+  "missing_optional_copy_paths": [],
+  "raw_test_logs": "Exact raw bytes are archived in raw-test-logs.tar.gz; member paths and SHA256 are recorded in evidence-sha256.json. Extract only into a disposable evidence directory."
+}

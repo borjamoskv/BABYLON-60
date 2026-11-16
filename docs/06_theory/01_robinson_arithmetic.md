@@ -36,7 +36,7 @@ Presburger, con suma y sin multiplicación general, es decidible; PA añade indu
 
 **Propuesta, NO_VERIFICADA:** representar transiciones y comprobar testigos finitos. Ni la Σ₁-completitud ni siete axiomas convierten un kernel en verificador universal O(1) por paso. Hay que definir formato, semántica, coste de aritmética y correspondencia con el código.
 
-El bloque histórico `document_epistemic_validity` postulaba la validez de cualquier objeto. Se retira como prueba de Q o del runtime. Este documento es exposición matemática, no una formalización Lean de los resultados citados.
+El bloque histórico `[OBSOLETO: document_epistemic_validity]` postulaba la validez de cualquier objeto. Se retira como prueba de Q o del runtime. Este documento es exposición matemática, no una formalización Lean de los resultados citados.
 
 ## 4. Referencias
 

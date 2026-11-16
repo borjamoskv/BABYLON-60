@@ -1,0 +1,59 @@
+{
+  "attest": {
+    "command": [
+      "/Users/borjafernandezangulo/.codex/worktrees/pending-local-audit/BABYLON-60/.venv/bin/mypy",
+      "--follow-imports=silent",
+      "--check-untyped-defs",
+      "01_KISH_ENGINE/babylon60/cli/llm_attest.py"
+    ],
+    "exit_code": 0
+  },
+  "markov": {
+    "command": [
+      "/Users/borjafernandezangulo/.codex/worktrees/pending-local-audit/BABYLON-60/.venv/bin/mypy",
+      "--follow-imports=silent",
+      "--check-untyped-defs",
+      "scripts/c5_cli/markov_bridge.py"
+    ],
+    "exit_code": 0
+  },
+  "graphs": {
+    "command": [
+      "/Users/borjafernandezangulo/.codex/worktrees/pending-local-audit/BABYLON-60/.venv/bin/mypy",
+      "--follow-imports=silent",
+      "--check-untyped-defs",
+      "scripts/c5_demos/poc_graph_isomorphism_wl.py",
+      "scripts/c5_isomorphisms/c5_ultimate_causal_determinant.py"
+    ],
+    "exit_code": 0
+  },
+  "approval-experiment": {
+    "command": [
+      "/Users/borjafernandezangulo/.codex/worktrees/pending-local-audit/BABYLON-60/.venv/bin/mypy",
+      "--follow-imports=silent",
+      "--check-untyped-defs",
+      "01_KISH_ENGINE/babylon60/cortex/approval_experiment.py",
+      "01_KISH_ENGINE/babylon60/cortex/approval_human_trial.py",
+      "01_KISH_ENGINE/babylon60/cortex/approval_integrity.py",
+      "01_KISH_ENGINE/babylon60/cortex/approval_trial_cases.py",
+      "01_KISH_ENGINE/babylon60/cortex/approval_trial_status.py"
+    ],
+    "exit_code": 0
+  },
+  "babylon-work": {
+    "command": [
+      "/Users/borjafernandezangulo/.codex/worktrees/pending-local-audit/BABYLON-60/.venv/bin/mypy",
+      "--follow-imports=silent",
+      "--check-untyped-defs",
+      "tools/babylon_work/effects.py",
+      "tools/babylon_work/server.py",
+      "tools/babylon_work/__init__.py",
+      "tools/babylon_work/runtime.py",
+      "tools/babylon_work/providers.py",
+      "tools/babylon_work/workspace.py",
+      "tools/babylon_work/runs.py",
+      "01_KISH_ENGINE/babylon60/mcp/effect_dispatch.py"
+    ],
+    "exit_code": 0
+  }
+}

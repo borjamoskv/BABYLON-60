@@ -1,23 +1,21 @@
 {
-  "timestamp": 1794068727.051372,
-  "source_commit": "e649125257edc4e925a6cd0350ec7c8646fbdb74",
-  "source_tree_digest": "690139397148991ab4557eb6d828077f134241c617f13a5ee71210763ee44f01",
-  "environment_digest": "aeca6fa7e3697e1c1b2553f47405e844d61eae784d6724b396ba9c7775b1bf7c",
+  "timestamp": 1794859626.737418,
+  "source_commit": "5d9ebd1bff3b3573edce5085cf374644d39e328a",
+  "source_tree_digest": "cbed9e600cc60c2f1515310b4619694b12d53f4630e32aa6aa4ad2095debc06f",
+  "environment_digest": "939ab07082a168af7d12ce81b54786b94b7852df21e8fc5b32cadcd0567d50e9",
   "environment": {
     "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
     "cargo": "cargo 1.97.1 (c980f4866 2026-06-30)",
-    "python": "3.14.7",
+    "python": "3.14.0",
     "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
     "machine": "arm64"
   },
-  "claims_manifest_digest": "d4ca80d4e82978ce6e0ff5572a425f4126179e9e891fae2b3fe1b97c850e070d",
-  "total_claims": 28,
-  "verified": 8,
+  "claims_manifest_digest": "e20e4db64dd4ef771cdb7a91744924d0c53a4e3ba632c592fdcecfa56864715c",
+  "total_claims": 31,
+  "verified": 12,
   "partial": 19,
-  "experimental": 1,
-  "failed_claims": [
-    "mcp_authority_gate"
-  ],
+  "experimental": 0,
+  "failed_claims": [],
   "claims": [
     {
       "id": "inv_01_manifest_layout",
@@ -26,7 +24,7 @@
       "evidence_level": "L2_IMPLEMENTATION",
       "verified": true,
       "suite_passed": true,
-      "duration_s": 4.911,
+      "duration_s": 0.392,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -36,7 +34,7 @@
       "evidence_level": "L1_FORMAL",
       "verified": true,
       "suite_passed": true,
-      "duration_s": 164.351,
+      "duration_s": 86.262,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -46,7 +44,7 @@
       "evidence_level": "L2_IMPLEMENTATION",
       "verified": true,
       "suite_passed": true,
-      "duration_s": 0.473,
+      "duration_s": 0.344,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -56,7 +54,7 @@
       "evidence_level": "L2_IMPLEMENTATION",
       "verified": true,
       "suite_passed": true,
-      "duration_s": 0.183,
+      "duration_s": 0.167,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -66,7 +64,7 @@
       "evidence_level": "L2_IMPLEMENTATION",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 0.207,
+      "duration_s": 0.189,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -76,7 +74,7 @@
       "evidence_level": "L2_IMPLEMENTATION",
       "verified": true,
       "suite_passed": true,
-      "duration_s": 14.139,
+      "duration_s": 15.411,
       "component": "01_KISH_ENGINE"
     },
     {
@@ -86,7 +84,7 @@
       "evidence_level": "L2_IMPLEMENTATION",
       "verified": true,
       "suite_passed": true,
-      "duration_s": 19.951,
+      "duration_s": 19.067,
       "component": "01_KISH_ENGINE"
     },
     {
@@ -96,7 +94,7 @@
       "evidence_level": "L1_FORMAL",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 3.229,
+      "duration_s": 2.866,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -106,7 +104,7 @@
       "evidence_level": "L2_IMPLEMENTATION",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 0.507,
+      "duration_s": 0.279,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -116,7 +114,7 @@
       "evidence_level": "L2_IMPLEMENTATION",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 0.195,
+      "duration_s": 0.17,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -126,19 +124,18 @@
       "evidence_level": "L2_IMPLEMENTATION",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 4.772,
+      "duration_s": 3.046,
       "component": "00_ABZU_KERNEL"
     },
     {
       "id": "mcp_authority_gate",
       "statement": "MCP server enforces AX-0: stochastic AI clients cannot self-authorize protected actions",
-      "status": "experimental",
+      "status": "verified",
       "evidence_level": "L2_IMPLEMENTATION",
-      "verified": false,
-      "suite_passed": false,
-      "duration_s": 2.338,
-      "component": "01_KISH_ENGINE",
-      "error": "============================= test session starts ==============================\nplatform darwin -- Python 3.14.7, pytest-9.0.3, pluggy-1.6.0\nrootdir: /Users/borjafernandezangulo/10_PROJECTS/BABYLON-6"
+      "verified": true,
+      "suite_passed": true,
+      "duration_s": 0.9,
+      "component": "01_KISH_ENGINE"
     },
     {
       "id": "AUTH_001",
@@ -147,7 +144,7 @@
       "evidence_level": "L2_IMPLEMENTATION",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 0.303,
+      "duration_s": 0.22,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -157,7 +154,7 @@
       "evidence_level": "L2_IMPLEMENTATION",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 2.927,
+      "duration_s": 0.638,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -167,7 +164,7 @@
       "evidence_level": "L2_IMPLEMENTATION",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 0.257,
+      "duration_s": 0.227,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -177,7 +174,7 @@
       "evidence_level": "L4_EXPERIMENTAL",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 5.334,
+      "duration_s": 5.554,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -187,7 +184,7 @@
       "evidence_level": "L2_IMPLEMENTATION",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 0.536,
+      "duration_s": 0.475,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -197,7 +194,7 @@
       "evidence_level": "L4_EXPERIMENTAL",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 58.936,
+      "duration_s": 29.379,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -207,7 +204,7 @@
       "evidence_level": "L4_EXPERIMENTAL",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 4.661,
+      "duration_s": 2.015,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -217,7 +214,7 @@
       "evidence_level": "L4_EXPERIMENTAL",
       "verified": true,
       "suite_passed": true,
-      "duration_s": 1.501,
+      "duration_s": 1.413,
       "component": "02_EDIN_SWARMS"
     },
     {
@@ -227,7 +224,7 @@
       "evidence_level": "L2_IMPLEMENTATION",
       "verified": true,
       "suite_passed": true,
-      "duration_s": 0.233,
+      "duration_s": 0.165,
       "component": "01_KISH_ENGINE"
     },
     {
@@ -237,7 +234,7 @@
       "evidence_level": "L2_IMPLEMENTATION",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 2.106,
+      "duration_s": 1.055,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -247,7 +244,7 @@
       "evidence_level": "L4_EXPERIMENTAL",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 0.284,
+      "duration_s": 0.269,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -257,7 +254,7 @@
       "evidence_level": "L3_ISOLATION",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 1.975,
+      "duration_s": 1.736,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -267,7 +264,7 @@
       "evidence_level": "L4_EXPERIMENTAL",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 1.207,
+      "duration_s": 1.223,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -277,7 +274,7 @@
       "evidence_level": "L4_EXPERIMENTAL",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 2.587,
+      "duration_s": 2.784,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -287,7 +284,27 @@
       "evidence_level": "L2_IMPLEMENTATION",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 0.292,
+      "duration_s": 0.254,
+      "component": "00_ABZU_KERNEL"
+    },
+    {
+      "id": "ring0_linux_tpm2_wire",
+      "statement": "The Ring-0 TPM 2.0 wire encoder builds a bit-exact 73-byte TPM2_Quote command matching TCG TPM 2.0 Part 3 section 16.4, and parse_quote_response parses TPMS_ATTEST with fail-closed bounds (extraData == causal digest, PCR match, ECDSA signature non-zero)",
+      "status": "verified",
+      "evidence_level": "L2_IMPLEMENTATION",
+      "verified": true,
+      "suite_passed": true,
+      "duration_s": 0.167,
+      "component": "00_ABZU_KERNEL"
+    },
+    {
+      "id": "ring0_aws_nitro_wire",
+      "statement": "The Ring-0 NSM encoder produces the deterministic canonical CBOR Attestation request {Attestation: {user_data: bstr(32 causal digest), nonce: bstr(8 big-endian logical_tick)}} as 73 bytes with shortest-form heads (RFC 8949 section 4.2.1), matching a frozen golden vector",
+      "status": "verified",
+      "evidence_level": "L2_IMPLEMENTATION",
+      "verified": true,
+      "suite_passed": true,
+      "duration_s": 0.168,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -297,7 +314,17 @@
       "evidence_level": "L3_ISOLATION",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 5.075,
+      "duration_s": 3.747,
+      "component": "01_KISH_ENGINE"
+    },
+    {
+      "id": "FL_AIACT_02_regulatory_evidence_graph",
+      "statement": "Regulatory Evidence Graph (babylon.assurance.claim.v1) and BABYLON Assurance Gateway enforce AcceptEvidence(c,a) => Bound(c,a) & Applicable(c,a) & Verified(c) and TechnicalPASS != LegalConformity across 1,000 controlled mutations and 40 holdout cases with 0 false acceptances, 0 false rejections, and selective preservation of orthogonal claims",
+      "status": "verified",
+      "evidence_level": "L2_IMPLEMENTATION",
+      "verified": true,
+      "suite_passed": true,
+      "duration_s": 0.994,
       "component": "01_KISH_ENGINE"
     }
   ]

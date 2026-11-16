@@ -1,0 +1,93 @@
+[
+  {
+    "candidate_id": "SW100-C0071",
+    "status": "REPRODUCED",
+    "severity": "P1",
+    "round2_finding_id": "V01"
+  },
+  {
+    "candidate_id": "SW100-C0072",
+    "status": "REPRODUCED",
+    "severity": "P1",
+    "round2_finding_id": "V02"
+  },
+  {
+    "candidate_id": "SW100-C0172",
+    "status": "REPRODUCED",
+    "severity": "P1",
+    "round2_finding_id": "V03"
+  },
+  {
+    "candidate_id": "SW100-C0177",
+    "status": "REPRODUCED",
+    "severity": "P1",
+    "round2_finding_id": "V04"
+  },
+  {
+    "candidate_id": "SW100-C0184",
+    "status": "REPRODUCED",
+    "severity": "P1",
+    "round2_finding_id": "V05"
+  },
+  {
+    "candidate_id": "SW100-C0291",
+    "status": "REPRODUCED",
+    "severity": "P1",
+    "round2_finding_id": "V06"
+  },
+  {
+    "candidate_id": "SW100-C0303",
+    "status": "REPRODUCED",
+    "severity": "P2",
+    "round2_finding_id": "V07"
+  },
+  {
+    "candidate_id": "SW100-C0364",
+    "status": "REPRODUCED",
+    "severity": "P1",
+    "round2_finding_id": "V08"
+  },
+  {
+    "candidate_id": "SW100-C0483",
+    "status": "REPRODUCED",
+    "severity": "P1",
+    "round2_finding_id": "V09"
+  },
+  {
+    "candidate_id": "SW100-C0484",
+    "status": "REPRODUCED",
+    "severity": "P1",
+    "round2_finding_id": "V10"
+  },
+  {
+    "candidate_id": "SW100-C0539",
+    "status": "REPRODUCED",
+    "severity": "P1",
+    "round2_finding_id": "V11"
+  },
+  {
+    "candidate_id": "SW100-C0391",
+    "status": "DUPLICATE",
+    "duplicate_of": "SW100-C0096"
+  },
+  {
+    "candidate_id": "SW100-C0461",
+    "status": "DUPLICATE",
+    "duplicate_of": "SW100-C0103"
+  },
+  {
+    "candidate_id": "SW100-C0555",
+    "status": "DUPLICATE",
+    "duplicate_of": "SW100-C0288"
+  },
+  {
+    "candidate_id": "SW100-C0489",
+    "status": "DUPLICATE",
+    "duplicate_of": "SW100-C0372"
+  },
+  {
+    "candidate_id": "SW100-C0505",
+    "status": "DUPLICATE",
+    "duplicate_of": "SW100-C0379"
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "name": "semantic-gate",
+    "command": [
+      "python3",
+      "scripts/c5_quality_gates/audit_semantic_contracts.py",
+      "--workspace-only"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "budget-gate",
+    "command": [
+      "python3",
+      "scripts/c5_quality_gates/audit_token_budget.py",
+      "--workspace-only",
+      "--skip-ghost-listeners"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "topology-gate",
+    "command": [
+      "python3",
+      "scripts/guards/verify_active_topology.py"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "diff-check",
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit_code": 0
+  }
+]

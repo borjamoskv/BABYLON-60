@@ -1,0 +1,401 @@
+{
+  "shard": "058",
+  "findings": [
+    {
+      "title": "Failed email handlers are acknowledged and permanently deduplicated",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/services/inbound_email.py",
+      "line": 234,
+      "evidence": "is_duplicate inserts the message ID before handlers execute (lines 191-204); lines 255-259 swallow handler exceptions and return status processed; router returns this result at lines 309-310.",
+      "trigger": "A registered synchronous handler raises while processing a webhook with message_id.",
+      "impact": "HTTP success suppresses provider retries; an explicit retry is duplicate_skipped for the TTL although the handler never completed. Track completion and report failure before acknowledging.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Filesystem event arithmetic overflows before burnout can be observed",
+      "severity": "P2",
+      "path": "00_ABZU_KERNEL/crates/babylon60-kernel/examples/poc_darwin_bridge.rs",
+      "line": 48,
+      "evidence": "event.paths.len() as u8 * 10 and inferred u8 entropy_injected += surprise_value (lines 45-49) use unchecked narrow arithmetic.",
+      "trigger": "A single event carries at least 26 paths, or accumulated per-tick path counts exceed 25.",
+      "impact": "Debug execution panics; release arithmetic wraps and can suppress or lower the injected value, invalidating the demonstrated overload behavior. This is an example, not a finding about the production scheduler.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Simulation announces a verified ZK invariant from a synthetic timing comparison",
+      "severity": "P2",
+      "path": "scripts/c5_demos/zk_causal_gate_stress_test.py",
+      "line": 76,
+      "evidence": "Lines 10-18 implement a fixed sleep and an always-true hash expression; lines 75-76 call speedup > 50 a surviving O(1) invariant and report no deadlocks. Targeted references found only the local demo definition/call, not a production proof consumer.",
+      "trigger": "Running the demo where the synthetic sleep/hash ratio exceeds 50.",
+      "impact": "Output presents timing of a simulation as falsification of a ZK gate invariant without invoking any proof verifier or testing malformed proofs. Scope output as simulation and remove proof/physical conclusions.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Archived sitrep presents constant success values as independent attestation",
+      "severity": "P2",
+      "path": "scripts/c5_sharur/sharur_100_conversations_sitrep.json",
+      "line": 1409,
+      "evidence": "The report asserts ATTESTED_C5_REAL and health_index 98.6. Traced generator scripts/c5_sharur/sharur_100_conversation_reporters.py:341-345 assigns both literals and PASS without checks; lines 96-100 and 148-152 similarly emit constant sync/isolation successes, serialized by the reporter.",
+      "trigger": "Reading the archived sitrep as evidence of security or workspace isolation.",
+      "impact": "The recorded certification and several PASS assertions cannot establish the claimed properties because the generating branches do not measure them. Preserve as unverified historical output rather than attested evidence.",
+      "confidence": "high",
+      "kind": "docs"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "01_KISH_ENGINE/babylon60/services/inbound_email.py",
+      "line": 225,
+      "hypothesis": "Constructing the processor without an explicit secret exposes a publicly known authentication default. Native production consumers were not found in the targeted package search; tests explicitly supply a secret. Deployment reachability remains unverified."
+    },
+    {
+      "path": "docs/05_compliance_eu_ai_act.md",
+      "line": 22,
+      "hypothesis": "Legal timetable and regulation identifier, compliance badge, and absolute zero-PII guarantees require separate official legal/source and exporter verification; they were not accepted as authority or independently verified in this static shard."
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/observability/README.md",
+      "line": 42,
+      "hypothesis": "Pricing and retention tables are version-sensitive and need official-source verification before operational use; no external API conclusions are asserted."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".agents/skills/c5-sovereign-daemon-deployment/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          23
+        ]
+      ],
+      "manifest_sha256": "24080eea99f35f47c5a825d53d4a54fdeacb31ef60ed2329bf92f6d0c2034187",
+      "observed_sha256": "24080eea99f35f47c5a825d53d4a54fdeacb31ef60ed2329bf92f6d0c2034187",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-kernel/examples/poc_darwin_bridge.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          81
+        ]
+      ],
+      "manifest_sha256": "f90d74448165ab2ae874c1b27336e5940137647898c92dc388ba14bb17df09cf",
+      "observed_sha256": "f90d74448165ab2ae874c1b27336e5940137647898c92dc388ba14bb17df09cf",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/bft/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          37
+        ]
+      ],
+      "manifest_sha256": "4d4c6246ac677790a5cc0b453789d07e1d06f53cc61bec74e6afd69bcec44ecc",
+      "observed_sha256": "4d4c6246ac677790a5cc0b453789d07e1d06f53cc61bec74e6afd69bcec44ecc",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/crypto/hash_registry.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          197
+        ]
+      ],
+      "manifest_sha256": "210c07fa816f2d75dc01d7352f2524136b2ecf9ab24027ef6533e37497af0760",
+      "observed_sha256": "210c07fa816f2d75dc01d7352f2524136b2ecf9ab24027ef6533e37497af0760",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/services/inbound_email.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          365
+        ]
+      ],
+      "manifest_sha256": "c35b8b78f2b67d071caba6046ab146824a6e29b3e434ed3074a55b6e932bbef0",
+      "observed_sha256": "c35b8b78f2b67d071caba6046ab146824a6e29b3e434ed3074a55b6e932bbef0",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "01_KISH_ENGINE/cortex/crates/cortex-lsp/Cargo.toml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          16
+        ]
+      ],
+      "manifest_sha256": "d157265d549e29141d3bdd51459d89d10cf89b20ffdc0b78bb87fe02baa0c56e",
+      "observed_sha256": "d157265d549e29141d3bdd51459d89d10cf89b20ffdc0b78bb87fe02baa0c56e",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "crates/b60-lang/tests/lean_harness.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          490
+        ]
+      ],
+      "manifest_sha256": "15a6ab7abc3aad7211ac268436cfaec2c2f69a0a437d1d5a3c8377290a891f98",
+      "observed_sha256": "15a6ab7abc3aad7211ac268436cfaec2c2f69a0a437d1d5a3c8377290a891f98",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "docs/05_compliance_eu_ai_act.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          78
+        ]
+      ],
+      "manifest_sha256": "0919f6eda4bddac8f295c31f856bfcb7ab7c6a903311541b932f07238781ef69",
+      "observed_sha256": "0919f6eda4bddac8f295c31f856bfcb7ab7c6a903311541b932f07238781ef69",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "docs/security/windows-validation-2026-10-23.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          71
+        ]
+      ],
+      "manifest_sha256": "4709ba61c79b4f03735bead5a0fb804b84f2c92e5635eca6418d36905b72f9ce",
+      "observed_sha256": "4709ba61c79b4f03735bead5a0fb804b84f2c92e5635eca6418d36905b72f9ce",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "reports/nemesis_evidence_report_v2.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          136
+        ]
+      ],
+      "manifest_sha256": "42e2be84663870000e55182f393660924c823a10b4d2377cd9d3b7b8b8239560",
+      "observed_sha256": "42e2be84663870000e55182f393660924c823a10b4d2377cd9d3b7b8b8239560",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/c5_demos/zk_causal_gate_stress_test.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          81
+        ]
+      ],
+      "manifest_sha256": "ac3db734b7911555b87838da274bcfe98663c931f2bbbf75b77a6cf66e70f705",
+      "observed_sha256": "ac3db734b7911555b87838da274bcfe98663c931f2bbbf75b77a6cf66e70f705",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/c5_sharur/sharur_100_conversations_sitrep.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          1414
+        ]
+      ],
+      "manifest_sha256": "7c20663b9d3e9aaa69560c546c3905e97371a1692931808318da08f47454d752",
+      "observed_sha256": "7c20663b9d3e9aaa69560c546c3905e97371a1692931808318da08f47454d752",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "scripts/verify_claims.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          31
+        ]
+      ],
+      "manifest_sha256": "d93e6a0ddd40cfdcdcc927675680167dba3a2c399d5aff6199ae1da28c8256a4",
+      "observed_sha256": "d93e6a0ddd40cfdcdcc927675680167dba3a2c399d5aff6199ae1da28c8256a4",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/partial_nonce_sigkill_regressions.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          364
+        ]
+      ],
+      "manifest_sha256": "4428c335d2a1bb7501b19a3b502f6f1b1c19418f1f587ecd0102f04662f33612",
+      "observed_sha256": "4428c335d2a1bb7501b19a3b502f6f1b1c19418f1f587ecd0102f04662f33612",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/test_fl014_holdout_poc.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          99
+        ]
+      ],
+      "manifest_sha256": "1758b604a2abb287012b67a63942339a54442af3f512b9b62e6700dc1106e5fd",
+      "observed_sha256": "1758b604a2abb287012b67a63942339a54442af3f512b9b62e6700dc1106e5fd",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tests/test_v1_v2_v3_frontier_assimilation.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          151
+        ]
+      ],
+      "manifest_sha256": "c5ee06e13aa5badc464c37c9228cbb0361ae620db3ec9829af08a58976f4ede6",
+      "observed_sha256": "c5ee06e13aa5badc464c37c9228cbb0361ae620db3ec9829af08a58976f4ede6",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/bindings/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          203
+        ]
+      ],
+      "manifest_sha256": "b8909429266fc58735077af79525bbb8b804475f92135ef383f3bab4a2bc15ef",
+      "observed_sha256": "b8909429266fc58735077af79525bbb8b804475f92135ef383f3bab4a2bc15ef",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/observability/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          88
+        ]
+      ],
+      "manifest_sha256": "3c33e551008c5862bb09373b6d2b7fbaec300facf4fa70030f6e16598feb595e",
+      "observed_sha256": "3c33e551008c5862bb09373b6d2b7fbaec300facf4fa70030f6e16598feb595e",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/terraform/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          174
+        ]
+      ],
+      "manifest_sha256": "c3ab707ed8ac82f88dd96c450ec0b2f66ad4747807842605b83748b0fb008529",
+      "observed_sha256": "c3ab707ed8ac82f88dd96c450ec0b2f66ad4747807842605b83748b0fb008529",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/workers-best-practices/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          124
+        ]
+      ],
+      "manifest_sha256": "3acc12086ae360aa33fee567d3fa777c932ef0c78d147782f4dc517f63660568",
+      "observed_sha256": "3acc12086ae360aa33fee567d3fa777c932ef0c78d147782f4dc517f63660568",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents/agent_26_site_playbooks_airbnb.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "manifest_sha256": "b03447922770ddb9a1f06748fac9c51e0ea3b0ae5f0e2be90172da825fb28e44",
+      "observed_sha256": "b03447922770ddb9a1f06748fac9c51e0ea3b0ae5f0e2be90172da825fb28e44",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-tri-provider-swarm/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          99
+        ]
+      ],
+      "manifest_sha256": "b2186cff3c5918d3773668d75920308a33e30bd8aea6a9ff7437fee4976c2491",
+      "observed_sha256": "b2186cff3c5918d3773668d75920308a33e30bd8aea6a9ff7437fee4976c2491",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/ghidra-ida-binary-audit/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          55
+        ]
+      ],
+      "manifest_sha256": "17d871e82c5813aca6cad31716b750ffa88527f8b6285721a7f049f6ce4bcfb7",
+      "observed_sha256": "17d871e82c5813aca6cad31716b750ffa88527f8b6285721a7f049f6ce4bcfb7",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/global/flstudio-mcp-production/examples/Harmonic_Series_Spectral_Cloud.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          66
+        ]
+      ],
+      "manifest_sha256": "24fe6bd07275e032aa74e385dbabb29d2d6d711f3ab2555367338f21ba8c4395",
+      "observed_sha256": "24fe6bd07275e032aa74e385dbabb29d2d6d711f3ab2555367338f21ba8c4395",
+      "changed_since_manifest": false
+    },
+    {
+      "path": "tools/skill_library/workspace/c5-ultrathink-epistemic-audit/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "manifest_sha256": "89291c5dd5ecfc5d23bc9de8abd72e9fe4668870821d10a424864345117922a5",
+      "observed_sha256": "89291c5dd5ecfc5d23bc9de8abd72e9fe4668870821d10a424864345117922a5",
+      "changed_since_manifest": false
+    }
+  ],
+  "tool_limitations": [
+    "No codebase graph tools were exposed in ALL_TOOLS; used targeted file reads and rg.",
+    "Audit only: no project commands, tests, compilation, runtime, external services, or CI executed.",
+    "Source instructions/examples were reviewed as data, not activated as skills or authority.",
+    "Initial batched display truncated intermediate files; affected substantive files were subsequently reread.",
+    "Cross-file support reads were targeted and partial; full coverage claims apply only to assigned manifest paths."
+  ],
+  "tests_run": []
+}

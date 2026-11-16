@@ -1,0 +1,148 @@
+{
+  "scope": "Actual compiler with disposable fixture claims and explicit disposable software signing seed; repo read-only",
+  "source_sha256": {
+    "01_KISH_ENGINE/babylon60/compliance_exporter/m0_evidence_pack.py": "73ce7d7678e5de4e05c1bd1248e78abd180eef5f430f44f7147279c001b56e41",
+    "01_KISH_ENGINE/babylon60/verifier/standalone_verify.py": "bc5045430f0910c80906d669f3d9d622066c490f2a29560e512d7ddbedb78dcd"
+  },
+  "initial_guarded_attempt": {
+    "result": "Stopped before process execution when platform.platform attempted opening /dev/null for uname subprocess",
+    "correction": "Intercept platform.platform environment-description boundary with explicit fixture label"
+  },
+  "interceptions": [
+    "platform.platform() replaced with explicit fixture label to avoid uname process; no evidence generation logic replaced",
+    "Package namespace adapter avoids unrelated __init__ imports; no compiler/verifier function substituted",
+    "Python audit hook rejects process and socket boundaries and write-open paths outside audit directory; no rejected boundary reached",
+    "No adversarial campaign, hardware/biometrics, deployment or network executed"
+  ],
+  "default_compile": {
+    "on_disk_manifest_status": "EVIDENCE_VERIFIABLE_WITHIN_DECLARED_SCOPE",
+    "nemesis_sha256": "5ace01b44b765fc93713980d012b1f2f6d9c2f4fd711393cd342070d53990733",
+    "campaign_observations": {
+      "AUTH-002": "ZERO_UNAUTHORIZED_EFFECTS_OVER_10000_TRIALS",
+      "BYPASS-001": "INODE_UNCHANGED_EPERM_CONFIRMED",
+      "CRASH-004": "ZERO_DUPLICATE_EFFECTS_REPLAYS_REJECTED",
+      "RACE-003": "VICTIM_CANARY_INTACT_0_ESCAPES"
+    },
+    "campaign_outcomes": {
+      "AUTH-002": "SUPPORTED_WITHIN_SCOPE",
+      "BYPASS-001": "SUPPORTED_WITHIN_SCOPE",
+      "CRASH-004": "SUPPORTED_WITHIN_SCOPE",
+      "RACE-003": "SUPPORTED_WITHIN_SCOPE"
+    },
+    "simulation_marker_present": false,
+    "signature_independently_verified": true,
+    "signed_file_checksums_independently_verified": true,
+    "ledger_rows": [
+      [
+        "EFFECT_DECISION_DENY",
+        "{\"action\":\"DELETE_FILE\",\"decision\":\"DENY\",\"enforcement_mode\":\"BROKER_MEDIATED\",\"observed_mutation\":false,\"reason\":\"MISSING_COSE_CAPABILITY_TICKET\",\"resource\":\"/vault/protected_financial_ledger.db\"}"
+      ],
+      [
+        "NEMESIS_BYPASS_INTERCEPTED",
+        "{\"action\":\"DIRECT_UNLINK_SYSCALL\",\"decision\":\"DENY_EPERM\",\"enforcement_mode\":\"OS_ENFORCED\",\"observed_mutation\":false,\"reason\":\"MACOS_SEATBELT_SANDBOX_DENY_FILE_WRITE_UNLINK\",\"resource\":\"/vault/protected_financial_ledger.db\"}"
+      ],
+      [
+        "EFFECT_COMMITTED_RECEIPT",
+        "{\"action\":\"APPEND_AUDIT_LOG\",\"decision\":\"ALLOW\",\"enforcement_mode\":\"BROKER_MEDIATED\",\"observed_mutation\":true,\"receipt_stage\":\"COMMITTED\",\"resource\":\"/vault/audit_trail.log\"}"
+      ]
+    ],
+    "repository_functions_called": [
+      [
+        "compliance_exporter/m0_evidence_pack.py",
+        "<lambda>"
+      ],
+      [
+        "compliance_exporter/m0_evidence_pack.py",
+        "_build_minimal_pdf"
+      ],
+      [
+        "compliance_exporter/m0_evidence_pack.py",
+        "_classify_enforcement_mode"
+      ],
+      [
+        "compliance_exporter/m0_evidence_pack.py",
+        "_create_default_ledger_and_trace"
+      ],
+      [
+        "compliance_exporter/m0_evidence_pack.py",
+        "_normalize_claim_status"
+      ],
+      [
+        "compliance_exporter/m0_evidence_pack.py",
+        "_sha256_bytes"
+      ],
+      [
+        "compliance_exporter/m0_evidence_pack.py",
+        "_sha256_file"
+      ],
+      [
+        "compliance_exporter/m0_evidence_pack.py",
+        "_sign_ed25519_bytes"
+      ],
+      [
+        "compliance_exporter/m0_evidence_pack.py",
+        "build_regulatory_contribution_matrix"
+      ],
+      [
+        "compliance_exporter/m0_evidence_pack.py",
+        "compile_pack"
+      ],
+      [
+        "compliance_exporter/m0_evidence_pack.py",
+        "escape_pdf_text"
+      ],
+      [
+        "compliance_exporter/m0_evidence_pack.py",
+        "load_canonical_claims"
+      ],
+      [
+        "verifier/standalone_verify.py",
+        "build_cortex_merkle_tree"
+      ],
+      [
+        "verifier/standalone_verify.py",
+        "canonical_json"
+      ],
+      [
+        "verifier/standalone_verify.py",
+        "compute_cortex_hash"
+      ]
+    ]
+  },
+  "invalid_claims_deletion": {
+    "output_dir": "/private/tmp/babylon60-audit-round2-20261028/final-replay/a/fixture/invalid-claims-output",
+    "sentinel_before_sha256": "59ac7474a40c3cb45bfcd5efedf1ade1d4f419509e10141e58ad39b3fab6bbeb",
+    "exception": {
+      "type": "FileNotFoundError",
+      "message": "Canonical CLAIMS.toml not found at /private/tmp/babylon60-audit-round2-20261028/final-replay/a/fixture/MISSING-CLAIMS.toml"
+    },
+    "sentinel_exists_after": false,
+    "directory_entries_after": [
+      "compliance",
+      "evidence",
+      "verification"
+    ]
+  },
+  "invalid_ledger_deletion": {
+    "output_dir": "/private/tmp/babylon60-audit-round2-20261028/final-replay/a/fixture/invalid-ledger-output",
+    "sentinel_before_sha256": "59ac7474a40c3cb45bfcd5efedf1ade1d4f419509e10141e58ad39b3fab6bbeb",
+    "exception": {
+      "type": "FileNotFoundError",
+      "message": "[Errno 2] No such file or directory: '/private/tmp/babylon60-audit-round2-20261028/final-replay/a/fixture/MISSING-LEDGER.sqlite'"
+    },
+    "sentinel_exists_after": false,
+    "directory_entries_after": [
+      "compliance",
+      "evidence",
+      "evidence/nemesis-results.json",
+      "verification"
+    ]
+  },
+  "blocked_external_attempts": [],
+  "counterexample_classification": "Both findings reproduced. Evidence generation is not a runtime authorization bypass; destructive path requires caller-supplied existing output directory.",
+  "limitations": [
+    "Namespace adapter intentionally skips broad package initialization",
+    "Python audit hook is a test guard, not an OS sandbox or universal isolation proof",
+    "No real campaign or operator key involved; signed output proves byte integrity only"
+  ]
+}

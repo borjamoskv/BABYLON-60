@@ -1,0 +1,158 @@
+[
+  {
+    "candidate_id": "SW100-C0167",
+    "decision": "ALREADY_FIXED",
+    "severity": "P1",
+    "remediation_state": "FIXED",
+    "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+    "current_source_sha256": "837faee40ae13b74cbb7b4d1e61fc6209285bb3362c23d2d2abd94c480b4b064",
+    "rationale": "Replaced live truncation with a validated finite JSON payload, exclusive same-directory temporary, write-all loop, file fsync, descriptor-relative atomic replace and parent fsync. Identity checks and cleanup only of the created temporary avoid rewriting unrelated targets. Faults before/after replace report observed replacement state instead of fabricated success; per-session completed files and original causes remain explicit. Original partial-write reproduction lost the prior JSON; final fixtures preserve old or new valid content by commit boundary, including controlled abrupt child exit. This closes per-file truncation/durability mechanics, not a transaction across the three files.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+        "start_line": 193,
+        "end_line": 261,
+        "observation": "Exclusive temporary/full write/fsync/replace/parent sync and explicit failure state."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+        "start_line": 36,
+        "end_line": 44,
+        "observation": "Replacement visibility is distinct from durability confirmation."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+        "start_line": 47,
+        "end_line": 54,
+        "observation": "Reports completed files and current replacement state without rollback."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+        "start_line": 263,
+        "end_line": 271,
+        "observation": "Wraps ordinary errors with partial progress and never announces failure as success."
+      }
+    ],
+    "guards": [
+      "Atomicity is per file. Project, ghosts and system are three sequential commits; no journal, recovery protocol or indivisible multi-file transaction is claimed.",
+      "PersistenceWriteError distinguishes NOT_ATTEMPTED/NOT_REPLACED/REPLACED/UNKNOWN. Directory fsync failure after replace leaves new JSON visible with durability unconfirmed; no blind rollback occurs.",
+      "ConsolidationError preserves ordinary failure cause and completed_files, including AttributeError from malformed containers after earlier files committed. No success is printed on failure.",
+      "Fresh flock descriptor per public session serializes cooperating writers sharing base_dir across instances/projects. Private _write_json is per-file atomic only, not independently protected RMW.",
+      "Lock is persistent, never deleted/truncated or recovered by age/PID. Logical memory-directory and lock identities are revalidated; no atomic compare/replace against hostile noncooperators or ancestor renames is certified.",
+      "Only existing owned single-link regular memory JSON files and no-follow directories are supported. Read-only destinations reject. Basic permission bits are retained; ACLs/xattrs are not guaranteed preserved.",
+      "UTC aware timestamps preserve new instants; historical timestamp strings and inherited schema/retention transformations are not migrated.",
+      "fsync and replace executed on local POSIX fixtures; this is not a physical power-cut or network-filesystem durability/locking proof. Abrupt child termination can leave an uncommitted temporary, which is neither read nor deleted by guesswork.",
+      "Original os.kill was inert in baseline fixtures; patched ordinary errors raise exceptions. Owned fixture children only, synthetic HOME seeded before import, TCP/DNS blocked. No operator memory/process, protected runtime, real keys/hardware/ATTESTED or publication.",
+      "This is core/cortex_persist.py, not the separate BFT cortex_persist_ledger implementation. Previous lot sources/dependencies/lockfiles remain unchanged. Global telemetry omitted."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot11-20261029/before-tests.log",
+      "docs/security/evidence/swarm100-lot11-20261029/related-tests.log",
+      "docs/security/evidence/swarm100-lot11-20261029/independent-review.json",
+      "docs/security/evidence/swarm100-lot11-20261029/scope-check.json",
+      "docs/security/evidence/swarm100-lot11-20261029/validation.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/09.json",
+    "runtime_scope": "Owned synthetic HOME memory; actual JSON/fcntl/fsync/replace, deterministic threads and controlled Python children; no operator memory/process or protected runtime.",
+    "resolution_type": "CODE_AND_CONFINED_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0168",
+    "decision": "ALREADY_FIXED",
+    "severity": "P2",
+    "remediation_state": "FIXED",
+    "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+    "current_source_sha256": "837faee40ae13b74cbb7b4d1e61fc6209285bb3362c23d2d2abd94c480b4b064",
+    "rationale": "A persistent base_dir operation lock with a new flock descriptor per public call now covers the entire read/modify/write sequence for project, ghosts and system. Same and different project instances/threads/processes share that lock; no per-project split or lockfile deletion is used. Fresh base/lock identity checks reject directory substitution so a prior lock cannot authorize writes to a new memory directory. Deterministic old-code interleavings lost project/ghost/session updates; patched thread/process fixtures retain them, with inherited bounded retention unchanged. The guarantee is cooperative, local POSIX locking, not arbitrary writer or multi-file reader isolation.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+        "start_line": 153,
+        "end_line": 170,
+        "observation": "Fresh descriptor and persistent common flock cover all public session updates."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+        "start_line": 87,
+        "end_line": 101,
+        "observation": "No-follow directory chain and active base identity comparison."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+        "start_line": 142,
+        "end_line": 150,
+        "observation": "Revalidates logical base and bound lock before data accesses/replacement."
+      },
+      {
+        "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+        "start_line": 273,
+        "end_line": 349,
+        "observation": "Original data transforms/retention run within common exclusion."
+      }
+    ],
+    "guards": [
+      "Atomicity is per file. Project, ghosts and system are three sequential commits; no journal, recovery protocol or indivisible multi-file transaction is claimed.",
+      "PersistenceWriteError distinguishes NOT_ATTEMPTED/NOT_REPLACED/REPLACED/UNKNOWN. Directory fsync failure after replace leaves new JSON visible with durability unconfirmed; no blind rollback occurs.",
+      "ConsolidationError preserves ordinary failure cause and completed_files, including AttributeError from malformed containers after earlier files committed. No success is printed on failure.",
+      "Fresh flock descriptor per public session serializes cooperating writers sharing base_dir across instances/projects. Private _write_json is per-file atomic only, not independently protected RMW.",
+      "Lock is persistent, never deleted/truncated or recovered by age/PID. Logical memory-directory and lock identities are revalidated; no atomic compare/replace against hostile noncooperators or ancestor renames is certified.",
+      "Only existing owned single-link regular memory JSON files and no-follow directories are supported. Read-only destinations reject. Basic permission bits are retained; ACLs/xattrs are not guaranteed preserved.",
+      "UTC aware timestamps preserve new instants; historical timestamp strings and inherited schema/retention transformations are not migrated.",
+      "fsync and replace executed on local POSIX fixtures; this is not a physical power-cut or network-filesystem durability/locking proof. Abrupt child termination can leave an uncommitted temporary, which is neither read nor deleted by guesswork.",
+      "Original os.kill was inert in baseline fixtures; patched ordinary errors raise exceptions. Owned fixture children only, synthetic HOME seeded before import, TCP/DNS blocked. No operator memory/process, protected runtime, real keys/hardware/ATTESTED or publication.",
+      "This is core/cortex_persist.py, not the separate BFT cortex_persist_ledger implementation. Previous lot sources/dependencies/lockfiles remain unchanged. Global telemetry omitted."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot11-20261029/before-tests.log",
+      "docs/security/evidence/swarm100-lot11-20261029/related-tests.log",
+      "docs/security/evidence/swarm100-lot11-20261029/independent-review.json",
+      "docs/security/evidence/swarm100-lot11-20261029/scope-check.json",
+      "docs/security/evidence/swarm100-lot11-20261029/validation.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/09.json",
+    "runtime_scope": "Owned synthetic HOME memory; actual JSON/fcntl/fsync/replace, deterministic threads and controlled Python children; no operator memory/process or protected runtime.",
+    "resolution_type": "CODE_AND_CONFINED_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0169",
+    "decision": "ALREADY_FIXED",
+    "severity": "P2",
+    "remediation_state": "FIXED",
+    "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+    "current_source_sha256": "837faee40ae13b74cbb7b4d1e61fc6209285bb3362c23d2d2abd94c480b4b064",
+    "rationale": "Removed the literal +02:00 suffix applied to UTC clock fields. New timestamps use datetime.now(timezone.utc).isoformat(), retaining the actual aware instant and precision. Fixed summer and winter UTC instants compare equal after parsing, and historical strings remain unchanged under normal retained data. This changes storage timestamps, not operator presentation timezone or consensus logical-clock claims.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+        "start_line": 172,
+        "end_line": 173,
+        "observation": "Explicit UTC-aware ISO timestamp for new data."
+      }
+    ],
+    "guards": [
+      "Atomicity is per file. Project, ghosts and system are three sequential commits; no journal, recovery protocol or indivisible multi-file transaction is claimed.",
+      "PersistenceWriteError distinguishes NOT_ATTEMPTED/NOT_REPLACED/REPLACED/UNKNOWN. Directory fsync failure after replace leaves new JSON visible with durability unconfirmed; no blind rollback occurs.",
+      "ConsolidationError preserves ordinary failure cause and completed_files, including AttributeError from malformed containers after earlier files committed. No success is printed on failure.",
+      "Fresh flock descriptor per public session serializes cooperating writers sharing base_dir across instances/projects. Private _write_json is per-file atomic only, not independently protected RMW.",
+      "Lock is persistent, never deleted/truncated or recovered by age/PID. Logical memory-directory and lock identities are revalidated; no atomic compare/replace against hostile noncooperators or ancestor renames is certified.",
+      "Only existing owned single-link regular memory JSON files and no-follow directories are supported. Read-only destinations reject. Basic permission bits are retained; ACLs/xattrs are not guaranteed preserved.",
+      "UTC aware timestamps preserve new instants; historical timestamp strings and inherited schema/retention transformations are not migrated.",
+      "fsync and replace executed on local POSIX fixtures; this is not a physical power-cut or network-filesystem durability/locking proof. Abrupt child termination can leave an uncommitted temporary, which is neither read nor deleted by guesswork.",
+      "Original os.kill was inert in baseline fixtures; patched ordinary errors raise exceptions. Owned fixture children only, synthetic HOME seeded before import, TCP/DNS blocked. No operator memory/process, protected runtime, real keys/hardware/ATTESTED or publication.",
+      "This is core/cortex_persist.py, not the separate BFT cortex_persist_ledger implementation. Previous lot sources/dependencies/lockfiles remain unchanged. Global telemetry omitted."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot11-20261029/before-tests.log",
+      "docs/security/evidence/swarm100-lot11-20261029/related-tests.log",
+      "docs/security/evidence/swarm100-lot11-20261029/independent-review.json",
+      "docs/security/evidence/swarm100-lot11-20261029/scope-check.json",
+      "docs/security/evidence/swarm100-lot11-20261029/validation.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/09.json",
+    "runtime_scope": "Owned synthetic HOME memory; actual JSON/fcntl/fsync/replace, deterministic threads and controlled Python children; no operator memory/process or protected runtime.",
+    "resolution_type": "CODE_AND_CONFINED_REGRESSIONS_VERIFIED"
+  }
+]

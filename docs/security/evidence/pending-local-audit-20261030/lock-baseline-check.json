@@ -1,0 +1,13 @@
+{
+  "command": [
+    "cargo",
+    "check",
+    "-q",
+    "--locked",
+    "-p",
+    "babylon60_root",
+    "--lib"
+  ],
+  "exit_code": 0,
+  "seconds": 4.166975041967817
+}

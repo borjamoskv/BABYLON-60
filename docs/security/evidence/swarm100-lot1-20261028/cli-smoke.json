@@ -1,0 +1,35 @@
+{
+  "runtime_scope": "Actual Python CLI, synthetic keys and temporary files only; no --emit executed, no network or campaigns read.",
+  "observations": [
+    {
+      "case": "trusted signed current fixture",
+      "expected_exit_code": 0,
+      "actual_exit_code": 0,
+      "result": "PASS"
+    },
+    {
+      "case": "changed artifact",
+      "expected_exit_code": 1,
+      "actual_exit_code": 1,
+      "result": "PASS"
+    },
+    {
+      "case": "missing trust key",
+      "expected_exit_code": 1,
+      "actual_exit_code": 1,
+      "result": "PASS"
+    },
+    {
+      "case": "no implicit emission",
+      "expected_exit_code": 2,
+      "actual_exit_code": 2,
+      "result": "PASS"
+    },
+    {
+      "case": "emit rejects verification paths",
+      "expected_exit_code": 2,
+      "actual_exit_code": 2,
+      "result": "PASS"
+    }
+  ]
+}

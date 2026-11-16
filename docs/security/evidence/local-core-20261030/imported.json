@@ -1,0 +1,176 @@
+[
+  {
+    "path": "01_KISH_ENGINE/babylon60/bft/consensus_committer.py",
+    "unit": "02-consensus",
+    "source_sha256": "0dc69808ab64404e0bed3a893fa71e46380ee54ed00981e7522a17dbe43be0d5",
+    "integrated_sha256": "0dc69808ab64404e0bed3a893fa71e46380ee54ed00981e7522a17dbe43be0d5"
+  },
+  {
+    "path": "01_KISH_ENGINE/babylon60/bft/consensus_ledger.py",
+    "unit": "02-consensus",
+    "source_sha256": "445ed059d9c5e018132cc5afa89ea5f5e07bb795386844fc255e5ad7567953bf",
+    "integrated_sha256": "445ed059d9c5e018132cc5afa89ea5f5e07bb795386844fc255e5ad7567953bf"
+  },
+  {
+    "path": "01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py",
+    "unit": "03-ledger",
+    "source_sha256": "15292238c8f9b7e87f70ce0b4e8256569bb1cc612497102afa5b373092e85db6",
+    "integrated_sha256": "15292238c8f9b7e87f70ce0b4e8256569bb1cc612497102afa5b373092e85db6"
+  },
+  {
+    "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+    "unit": "03-ledger",
+    "source_sha256": "a6fb163e3c668ea18d987dc0544111e8de83bc458e2f365bc1ae144b1022df2f",
+    "integrated_sha256": "a6fb163e3c668ea18d987dc0544111e8de83bc458e2f365bc1ae144b1022df2f"
+  },
+  {
+    "path": "01_KISH_ENGINE/babylon60/core/cortex_persist.py",
+    "unit": "04-json-memory",
+    "source_sha256": "837faee40ae13b74cbb7b4d1e61fc6209285bb3362c23d2d2abd94c480b4b064",
+    "integrated_sha256": "837faee40ae13b74cbb7b4d1e61fc6209285bb3362c23d2d2abd94c480b4b064"
+  },
+  {
+    "path": "01_KISH_ENGINE/babylon60/database/core.py",
+    "unit": "01-database",
+    "source_sha256": "61a93089d652c2f6cc44c734aaba60e7f2cd9af3da157a810a4ccfd627ecacea",
+    "integrated_sha256": "61a93089d652c2f6cc44c734aaba60e7f2cd9af3da157a810a4ccfd627ecacea"
+  },
+  {
+    "path": "01_KISH_ENGINE/babylon60/mcp/cortex_mcp_server.py",
+    "unit": "08-mcp-dispatch",
+    "source_sha256": "ae79aebe7b9f65b31eae72dce580c13417ddf298bc6246a091582d8761a7932b",
+    "integrated_sha256": "ae79aebe7b9f65b31eae72dce580c13417ddf298bc6246a091582d8761a7932b"
+  },
+  {
+    "path": "01_KISH_ENGINE/babylon60/mcp/effect_dispatch.py",
+    "unit": "08-mcp-dispatch",
+    "source_sha256": "359bf7595fc9283977e122ef16177e06bb34eb1565e522ab221387a79cab7dee",
+    "integrated_sha256": "41ba8ef0f6cda8c0d0aac2399cfbe9f51714b1d41fe6c06bfd26a2a8c99a6b47"
+  },
+  {
+    "path": "01_KISH_ENGINE/babylon60/mcp/mail_integration.py",
+    "unit": "08-mcp-dispatch",
+    "source_sha256": "1c2fbadcdd83956e2d6ee875a52ece945e458cc7f8ccf889bd4116e16750a972",
+    "integrated_sha256": "1c2fbadcdd83956e2d6ee875a52ece945e458cc7f8ccf889bd4116e16750a972"
+  },
+  {
+    "path": "crates/b60-lang/src/bin/fsm_poc.rs",
+    "unit": "06-formal-harness",
+    "source_sha256": "ec8e7250c972599dffe89b0ab174fe19663612c71a58ce95fa25ff44b34743c9",
+    "integrated_sha256": "ec8e7250c972599dffe89b0ab174fe19663612c71a58ce95fa25ff44b34743c9"
+  },
+  {
+    "path": "crates/b60-lang/src/bin/fsm_stress.rs",
+    "unit": "06-formal-harness",
+    "source_sha256": "b0901878bb1f090f85d157e630f6662cf98600f7d891012d02da38487f26d5b2",
+    "integrated_sha256": "b0901878bb1f090f85d157e630f6662cf98600f7d891012d02da38487f26d5b2"
+  },
+  {
+    "path": "crates/b60-lang/src/bin/support/lean_harness.rs",
+    "unit": "06-formal-harness",
+    "source_sha256": "0742b61c2bd2987894f6d67f7054d020d011491c3c75e672bacffeba24488359",
+    "integrated_sha256": "0742b61c2bd2987894f6d67f7054d020d011491c3c75e672bacffeba24488359"
+  },
+  {
+    "path": "crates/b60-lang/tests/lean_harness.rs",
+    "unit": "06-formal-harness",
+    "source_sha256": "15a6ab7abc3aad7211ac268436cfaec2c2f69a0a437d1d5a3c8377290a891f98",
+    "integrated_sha256": "15a6ab7abc3aad7211ac268436cfaec2c2f69a0a437d1d5a3c8377290a891f98"
+  },
+  {
+    "path": "proof/lean/AX0.lean",
+    "unit": "06-formal-harness",
+    "source_sha256": "ff038f17b706f18c3fba64e1e907e34e5efa3b578fc02d98f08b1013cce77fd0",
+    "integrated_sha256": "ff038f17b706f18c3fba64e1e907e34e5efa3b578fc02d98f08b1013cce77fd0"
+  },
+  {
+    "path": "proof/lean/BabylonTrace.lean",
+    "unit": "06-formal-harness",
+    "source_sha256": "83b00a15497eaf2d2362fda7dfa6ce8090c59435dfede6ecb7fac54ad18c76ba",
+    "integrated_sha256": "83b00a15497eaf2d2362fda7dfa6ce8090c59435dfede6ecb7fac54ad18c76ba"
+  },
+  {
+    "path": "proof/lean/NemesisWave4.lean",
+    "unit": "06-formal-harness",
+    "source_sha256": "78ac71a9f718b05d5c1d6a936b1d317f2a3b94aa9ed4f9d1a307ab5317da8a0f",
+    "integrated_sha256": "78ac71a9f718b05d5c1d6a936b1d317f2a3b94aa9ed4f9d1a307ab5317da8a0f"
+  },
+  {
+    "path": "scripts/c5_demos/c5_biometric_gate.swift",
+    "unit": "07-native-signing",
+    "source_sha256": "900acf7818f1d8dca4d6e8405db49361d4fc040ddd0231bdb73668cc7af5fd4e",
+    "integrated_sha256": "900acf7818f1d8dca4d6e8405db49361d4fc040ddd0231bdb73668cc7af5fd4e"
+  },
+  {
+    "path": "src/secure_fs.rs",
+    "unit": "05-native-recovery",
+    "source_sha256": "9d34f7d50683b237b0eb7705721738a6595ea6661d4ed85d6fce5ee9cdb564bf",
+    "integrated_sha256": "9d34f7d50683b237b0eb7705721738a6595ea6661d4ed85d6fce5ee9cdb564bf"
+  },
+  {
+    "path": "tests/adversarial_nemesis.rs",
+    "unit": "05-native-recovery",
+    "source_sha256": "b0d7a90986e0707dd556825ea91daf594138b4792093bf3120112d3b5afb2b77",
+    "integrated_sha256": "b0d7a90986e0707dd556825ea91daf594138b4792093bf3120112d3b5afb2b77"
+  },
+  {
+    "path": "tests/fl_rec01_recovery_provenance.rs",
+    "unit": "05-native-recovery",
+    "source_sha256": "92c0e3104ba07e2520ed233b65d8ac1b89dfff7712bc1ed639f9d080a861ecb8",
+    "integrated_sha256": "92c0e3104ba07e2520ed233b65d8ac1b89dfff7712bc1ed639f9d080a861ecb8"
+  },
+  {
+    "path": "tests/nemesis_wave3.rs",
+    "unit": "05-native-recovery",
+    "source_sha256": "4194bf28be72e6e82609711e831fbc8aa956c66cd99ec7dd7f2323b6def96ab8",
+    "integrated_sha256": "4194bf28be72e6e82609711e831fbc8aa956c66cd99ec7dd7f2323b6def96ab8"
+  },
+  {
+    "path": "tests/test_biometric_signing_contract.py",
+    "unit": "07-native-signing",
+    "source_sha256": "a6039d0cb27591cba30cba77a18cfe6ea7a83d021daf20156154cac806d32755",
+    "integrated_sha256": "a6039d0cb27591cba30cba77a18cfe6ea7a83d021daf20156154cac806d32755"
+  },
+  {
+    "path": "tests/test_consensus_atomic_commit.py",
+    "unit": "02-consensus",
+    "source_sha256": "f848f5bd04c9db651872b60f6c15c9dd9d97da7c2af4368a4a8fd77255858bca",
+    "integrated_sha256": "f848f5bd04c9db651872b60f6c15c9dd9d97da7c2af4368a4a8fd77255858bca"
+  },
+  {
+    "path": "tests/test_consensus_fault_recovery.py",
+    "unit": "02-consensus",
+    "source_sha256": "423c4fb3e38bab7277dd834c7787cef815412c7d6f1ccd8340885159437d9ec0",
+    "integrated_sha256": "423c4fb3e38bab7277dd834c7787cef815412c7d6f1ccd8340885159437d9ec0"
+  },
+  {
+    "path": "tests/test_consensus_recovery_regressions.py",
+    "unit": "02-consensus",
+    "source_sha256": "7efa360439867fbcba21d3937de01d667fc4a81d63d13b49237a83827d29577b",
+    "integrated_sha256": "7efa360439867fbcba21d3937de01d667fc4a81d63d13b49237a83827d29577b"
+  },
+  {
+    "path": "tests/test_database_config_cleanup.py",
+    "unit": "01-database",
+    "source_sha256": "6a24830632ccb70e0f058aa78df3be3287bf033d3b4710a437961f539114dc76",
+    "integrated_sha256": "6a24830632ccb70e0f058aa78df3be3287bf033d3b4710a437961f539114dc76"
+  },
+  {
+    "path": "tests/test_fl_mcp01_dispatch.py",
+    "unit": "08-mcp-dispatch",
+    "source_sha256": "cfb2aeb5c75c8b07d649218a195e2896f566f2ffae2d29bbebc4c3c3df952448",
+    "integrated_sha256": "cfb2aeb5c75c8b07d649218a195e2896f566f2ffae2d29bbebc4c3c3df952448"
+  },
+  {
+    "path": "tests/test_swarm100_lot11_regressions.py",
+    "unit": "04-json-memory",
+    "source_sha256": "9d4362da20dd1036a1eab183db8ccb6d00f1ff4f9caef0407958b412a1b9a06d",
+    "integrated_sha256": "9d4362da20dd1036a1eab183db8ccb6d00f1ff4f9caef0407958b412a1b9a06d"
+  },
+  {
+    "path": "tests/test_swarm100_lot5_regressions.py",
+    "unit": "03-ledger",
+    "source_sha256": "dbf22efcf0d183f982b7a7a125a00d2d09dcd30908a79027fee1a3159baf7250",
+    "integrated_sha256": "dbf22efcf0d183f982b7a7a125a00d2d09dcd30908a79027fee1a3159baf7250"
+  }
+]

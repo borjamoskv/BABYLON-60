@@ -1,0 +1,243 @@
+[
+  {
+    "candidate_id": "SW100-C0018",
+    "decision": "ALREADY_FIXED",
+    "severity": "P1",
+    "remediation_state": "FIXED",
+    "path": "01_KISH_ENGINE/babylon60/commands/itera.py",
+    "current_source_sha256": "1d7a6b220a8dee0902df04777f0d048ade7dc002b09879978edbcff078f78fe7",
+    "rationale": "Legacy find deletion of WAL/SHM and recursive cache removal are gone. Descriptor-relative cleanup removes only current-interpreter bytecode under cwd, preserves directories/SQLite and rejects symlink or replaced/uninspectable files. Temporary SQLite and cache regressions pass; legacy find was modeled strictly within the fixture, not invoked on the operator workspace.",
+    "source_checks": [
+      {
+        "path": "01_KISH_ENGINE/babylon60/commands/itera.py",
+        "start_line": 12,
+        "end_line": 48,
+        "observation": "Legacy find deletion of WAL/SHM and recursive cache removal are gone. Descriptor-relative cleanup removes only current-interpreter bytecode under cwd, preserves directories/SQLite and rejects symlink or replaced/uninspectable files. Temporary SQLite and cache regressions pass; legacy find was modeled strictly within the fixture, not invoked on the operator workspace."
+      }
+    ],
+    "guards": [
+      "Temporary in-memory/filesystem fixtures only; no operator data or global purge executed.",
+      "Sizes are logical unlinked-file bytes, not measured physical space or energy."
+    ],
+    "runtime_executed": true,
+    "runtime_scope": "Real Python helpers and temporary SQLite; isolated legacy find interpreter for ITERA only.",
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot2-20261028/before-tests-confined.log",
+      "docs/security/evidence/swarm100-lot2-20261028/consolidation-before.json",
+      "docs/security/evidence/swarm100-lot2-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot2-20261028/independent-review.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/03.json",
+    "resolution_type": "CODE_AND_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0219",
+    "decision": "ALREADY_FIXED",
+    "severity": "P1",
+    "remediation_state": "FIXED",
+    "path": "scripts/repatriated/c5_sharur_100_anergy_purge.py",
+    "current_source_sha256": "7e8a21a0e3a80e7155911b4e88b00e2e72265b8267d248effd677b448530b8fa",
+    "rationale": "Cohort1 no longer scans WORKSPACE/CORTEX roots or deletes SQLite state. It selects cwd or an explicit workspace and removes only identified bytecode, using descriptor-relative O_NOFOLLOW operations and identity checks. Existing cohorts2-5/main are outside this correction and were not executed. Dry-run records zero actual removals.",
+    "source_checks": [
+      {
+        "path": "scripts/repatriated/c5_sharur_100_anergy_purge.py",
+        "start_line": 85,
+        "end_line": 130,
+        "observation": "Cohort1 no longer scans WORKSPACE/CORTEX roots or deletes SQLite state. It selects cwd or an explicit workspace and removes only identified bytecode, using descriptor-relative O_NOFOLLOW operations and identity checks. Existing cohorts2-5/main are outside this correction and were not executed. Dry-run records zero actual removals."
+      }
+    ],
+    "guards": [
+      "Temporary in-memory/filesystem fixtures only; no operator data or global purge executed.",
+      "Sizes are logical unlinked-file bytes, not measured physical space or energy."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot2-20261028/before-tests-confined.log",
+      "docs/security/evidence/swarm100-lot2-20261028/consolidation-before.json",
+      "docs/security/evidence/swarm100-lot2-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot2-20261028/independent-review.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/09.json",
+    "runtime_scope": "Real Python helpers and temporary SQLite; isolated legacy find interpreter for ITERA only.",
+    "resolution_type": "CODE_AND_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0387",
+    "decision": "ALREADY_FIXED",
+    "severity": "P1",
+    "remediation_state": "FIXED",
+    "path": "tools/skill_library/global/anergy-purge-protocol/scripts/anergy_purge.py",
+    "current_source_sha256": "21307153c17e3337fef4dbb91fc3053c02a8a2617a9cf644490ece5ce0c0614e",
+    "rationale": "Both purge copies preserve SQLite names/known headers and never classify or delete WAL/SHM as orphan caches. Files are processed individually under opened directory descriptors; no recursive directory removal. Live WAL, unusual locations, protected artifacts, symlinks and inspection failures pass controlled fixtures. This is not an atomic sandbox against hostile post-stat rename or arbitrary encrypted formats disguised as artifacts.",
+    "source_checks": [
+      {
+        "path": "tools/skill_library/global/anergy-purge-protocol/scripts/anergy_purge.py",
+        "start_line": 78,
+        "end_line": 152,
+        "observation": "Both purge copies preserve SQLite names/known headers and never classify or delete WAL/SHM as orphan caches. Files are processed individually under opened directory descriptors; no recursive directory removal. Live WAL, unusual locations, protected artifacts, symlinks and inspection failures pass controlled fixtures. This is not an atomic sandbox against hostile post-stat rename or arbitrary encrypted formats disguised as artifacts."
+      }
+    ],
+    "guards": [
+      "Temporary in-memory/filesystem fixtures only; no operator data or global purge executed.",
+      "Sizes are logical unlinked-file bytes, not measured physical space or energy."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot2-20261028/before-tests-confined.log",
+      "docs/security/evidence/swarm100-lot2-20261028/consolidation-before.json",
+      "docs/security/evidence/swarm100-lot2-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot2-20261028/independent-review.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/15.json",
+    "runtime_scope": "Real Python helpers and temporary SQLite; isolated legacy find interpreter for ITERA only.",
+    "resolution_type": "CODE_AND_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0563",
+    "decision": "ALREADY_FIXED",
+    "severity": "P1",
+    "remediation_state": "FIXED",
+    "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/anergy-purge-protocol/scripts/anergy_purge.py",
+    "current_source_sha256": "21307153c17e3337fef4dbb91fc3053c02a8a2617a9cf644490ece5ce0c0614e",
+    "rationale": "Global conversation maintenance and Path.home/sqlite3 access were removed from both workspace purge copies. Dry-run and ordinary mode leave two synthetic sessions active without resolving/opening the global path. The output reports global sessions NOT_CHECKED, with zero reset count.",
+    "source_checks": [
+      {
+        "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/anergy-purge-protocol/scripts/anergy_purge.py",
+        "start_line": 78,
+        "end_line": 152,
+        "observation": "Global conversation maintenance and Path.home/sqlite3 access were removed from both workspace purge copies. Dry-run and ordinary mode leave two synthetic sessions active without resolving/opening the global path. The output reports global sessions NOT_CHECKED, with zero reset count."
+      }
+    ],
+    "guards": [
+      "Temporary in-memory/filesystem fixtures only; no operator data or global purge executed.",
+      "Sizes are logical unlinked-file bytes, not measured physical space or energy."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot2-20261028/before-tests-confined.log",
+      "docs/security/evidence/swarm100-lot2-20261028/consolidation-before.json",
+      "docs/security/evidence/swarm100-lot2-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot2-20261028/independent-review.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/18.json",
+    "runtime_scope": "Real Python helpers and temporary SQLite; isolated legacy find interpreter for ITERA only.",
+    "resolution_type": "CODE_AND_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0460",
+    "decision": "REPRODUCED",
+    "severity": "P1",
+    "remediation_state": "MITIGATED",
+    "path": "scripts/c5_cortex/autoconsolidate.py",
+    "current_source_sha256": "b77ad4fbd80b3872e95b58f935b951f928179de72150374dac9fa3d5b216a025",
+    "rationale": "Original code deleted three real temporary journal rows without a replacement. No durable load/merge/save contract or schema consumer was found in the scoped search. Consolidation and the legacy JournalEntry operations now raise CONSOLIDATION_UNSUPPORTED before path resolution or database access, preserving exact rows and unrelated writes. This is rejection-based mitigation, not implemented consolidation; functional durability/transaction guarantees remain unavailable.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_cortex/autoconsolidate.py",
+        "start_line": 36,
+        "end_line": 40,
+        "observation": "Original code deleted three real temporary journal rows without a replacement. No durable load/merge/save contract or schema consumer was found in the scoped search. Consolidation and the legacy JournalEntry operations now raise CONSOLIDATION_UNSUPPORTED before path resolution or database access, preserving exact rows and unrelated writes. This is rejection-based mitigation, not implemented consolidation; functional durability/transaction guarantees remain unavailable."
+      }
+    ],
+    "guards": [
+      "Temporary in-memory/filesystem fixtures only; no operator data or global purge executed.",
+      "Sizes are logical unlinked-file bytes, not measured physical space or energy."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot2-20261028/before-tests-confined.log",
+      "docs/security/evidence/swarm100-lot2-20261028/consolidation-before.json",
+      "docs/security/evidence/swarm100-lot2-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot2-20261028/independent-review.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/08.json",
+    "runtime_scope": "Real Python helpers and temporary SQLite; isolated legacy find interpreter for ITERA only.",
+    "resolution_type": "CODE_AND_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0562",
+    "decision": "DUPLICATE",
+    "remediation_state": "FIXED",
+    "severity": "P1",
+    "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/anergy-purge-protocol/scripts/anergy_purge.py",
+    "current_source_sha256": "21307153c17e3337fef4dbb91fc3053c02a8a2617a9cf644490ece5ce0c0614e",
+    "rationale": "Same defect as SW100-C0387 in a separate byte-identical purge copy. Both implementations are patched and exercised by the shared regression suite; preserve this affected path and inherit FIXED.",
+    "source_checks": [
+      {
+        "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/anergy-purge-protocol/scripts/anergy_purge.py",
+        "start_line": 78,
+        "end_line": 152,
+        "observation": "Same defect as SW100-C0387 in a separate byte-identical purge copy. Both implementations are patched and exercised by the shared regression suite; preserve this affected path and inherit FIXED."
+      }
+    ],
+    "guards": [
+      "Separate physical copy retained; no operator global data read."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot2-20261028/before-tests-confined.log",
+      "docs/security/evidence/swarm100-lot2-20261028/consolidation-before.json",
+      "docs/security/evidence/swarm100-lot2-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot2-20261028/independent-review.json"
+    ],
+    "canonical_id": "SW100-C0387",
+    "runtime_scope": "Both Python purge implementations; only temporary workspace/session fixtures."
+  },
+  {
+    "candidate_id": "SW100-C0388",
+    "decision": "DUPLICATE",
+    "severity": "P2",
+    "remediation_state": "FIXED",
+    "path": "tools/skill_library/global/anergy-purge-protocol/scripts/anergy_purge.py",
+    "current_source_sha256": "21307153c17e3337fef4dbb91fc3053c02a8a2617a9cf644490ece5ce0c0614e",
+    "rationale": "Same defect as SW100-C0563 in a separate byte-identical purge copy. Both implementations are patched and exercised by the shared regression suite; preserve this affected path and inherit FIXED.",
+    "source_checks": [
+      {
+        "path": "tools/skill_library/global/anergy-purge-protocol/scripts/anergy_purge.py",
+        "start_line": 78,
+        "end_line": 152,
+        "observation": "Same defect as SW100-C0563 in a separate byte-identical purge copy. Both implementations are patched and exercised by the shared regression suite; preserve this affected path and inherit FIXED."
+      }
+    ],
+    "guards": [
+      "Separate physical copy retained; no operator global data read."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot2-20261028/before-tests-confined.log",
+      "docs/security/evidence/swarm100-lot2-20261028/consolidation-before.json",
+      "docs/security/evidence/swarm100-lot2-20261028/related-tests.log",
+      "docs/security/evidence/swarm100-lot2-20261028/independent-review.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/15.json",
+    "canonical_id": "SW100-C0563",
+    "runtime_scope": "Both Python purge implementations; only temporary workspace/session fixtures."
+  },
+  {
+    "candidate_id": "SW100-C0223",
+    "decision": "CONFIRMED_STATIC",
+    "severity": "P2",
+    "remediation_state": "OPEN",
+    "path": "scripts/repatriated/c5_sharur_100_anergy_purge.py",
+    "current_source_sha256": "7e8a21a0e3a80e7155911b4e88b00e2e72265b8267d248effd677b448530b8fa",
+    "rationale": "The Lean cleanup traverses all WORKSPACE and recursively removes each unprotected .lake directory. It does not test whether the containing project is archived or whether package checkouts contain local work. Active dependency checkouts and build products are therefore within its deletion scope. No purge ran. Re-reviewed after Lot2: cohort2 still deletes unprotected .lake directories across WORKSPACE; cohort1's change does not fix this separate behavior. No cohort2/main execution was performed.",
+    "source_checks": [
+      {
+        "path": "scripts/repatriated/c5_sharur_100_anergy_purge.py",
+        "start_line": 135,
+        "end_line": 178,
+        "observation": "The separate .lake traversal/removal remains unchanged and OPEN."
+      }
+    ],
+    "guards": [
+      "Protected substrings restrict some projects.",
+      "There is no archived-state, disposable-product or clean-checkout test."
+    ],
+    "runtime_executed": false,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-round3-20261028/09-review-method.md",
+      "docs/security/evidence/swarm100-lot2-20261028/independent-review.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/09.json"
+  }
+]

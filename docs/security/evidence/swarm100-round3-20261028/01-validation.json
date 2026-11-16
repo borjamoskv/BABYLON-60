@@ -1,0 +1,25 @@
+{
+  "reviewer": "01",
+  "validated_at": "2026-10-28T15:55:54.462098+00:00",
+  "candidate_count": 30,
+  "exact_assignment_ids": true,
+  "current_source_hashes_unchanged": true,
+  "reproductions_passed": 7,
+  "fixture_execution_scope": "Isolated Python source subsets in memory; no product entrypoint, native protected runtime, service or network execution.",
+  "commands": [
+    {
+      "command": "python3 docs/security/evidence/swarm100-round3-20261028/01-reproductions.py",
+      "exit_code": 0
+    },
+    {
+      "command": "ruff check docs/security/evidence/swarm100-round3-20261028/01-reproductions.py",
+      "exit_code": 0,
+      "output": "All checks passed!"
+    }
+  ],
+  "artifact_hashes": {
+    "01-reproductions.py": "5d5d338a543469cd195549060cc540718716703476ef4e3731e091cd72f0c8fa",
+    "01-reproductions.json": "8f84b418fac27d06f51f851f8c38070b1058ce574eb3521fa3a3b707c896dd4a",
+    "reviews/01.json": "afe718e4dcab7eea99624a1906fc40a6ff3bb571a27eb08ffdcbc31bb50c5571"
+  }
+}

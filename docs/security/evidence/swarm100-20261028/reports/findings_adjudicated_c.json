@@ -1,0 +1,67 @@
+{
+  "adjudications": [
+    {
+      "shard": 51,
+      "title": "JSON integrity verification trusts embedded statement hashes",
+      "decision": "retained",
+      "severity": "P1",
+      "source_checks": [
+        "crystal_compiler.py190..270 directly trusts supplied statement_hash",
+        "cli/main_dispatcher.py655..676 exposes success via verify-crystal"
+      ],
+      "rationale": "Preserve valid root/hash fields while changing content. No content rehash on verification.",
+      "verification": "static source and consumer tracing only; no PoC/tests executed"
+    },
+    {
+      "shard": 53,
+      "title": "Derivation creates FormalProof for an unrelated goal",
+      "decision": "retained",
+      "severity": "P1",
+      "source_checks": [
+        "epistemology.py1..175 checks premise labels then concatenates contents",
+        "engine.py165..205 sets derived arbitrary goal CANONICAL"
+      ],
+      "rationale": "Epistemic unrelated goal bypasses only modal Hume restriction; no entailment or proof checker.",
+      "verification": "static source and consumer tracing only; no PoC/tests executed"
+    },
+    {
+      "shard": 59,
+      "title": "Identity forging truncates existing master seed and is not atomic",
+      "decision": "retained",
+      "severity": "P1",
+      "source_checks": [
+        "identity.py70..135 open(w) replaces existing seed",
+        "scripts/c5_l1_ledger/seal_bounty_aeon.py118..140 catches any load exception then forges"
+      ],
+      "rationale": "Wrong passphrase/corrupt encrypted payload triggers replacement; confidentiality of passphrase not assessed here.",
+      "verification": "static source and consumer tracing only; no PoC/tests executed"
+    },
+    {
+      "shard": 62,
+      "title": "Serialize ledger read-modify-append across writers",
+      "decision": "retained",
+      "severity": "P1",
+      "source_checks": [
+        "ledger.rs105..185 chain read precedes independent append without lock",
+        "ledger.rs188..189 rejects duplicate index",
+        "main.rs210..238 displays committed success"
+      ],
+      "rationale": "Two CLI processes reading same tail produce same index/predecessor. No locking guard surrounds public append API.",
+      "verification": "static source and consumer tracing only; no PoC/tests executed"
+    },
+    {
+      "shard": 65,
+      "title": "Shredding never prevents AES decryption",
+      "decision": "retained",
+      "severity": "P1",
+      "source_checks": [
+        "shredder.py177..248 reports success after marker insert",
+        "shredder.py347..365 adds in-memory shredded fact string",
+        "aes.py80..140 decrypt_str derives tenant key without fact id or shredded check"
+      ],
+      "rationale": "Retained ciphertext remains decryptable with same retained tenant/master key. Scoped to cryptographic erasure claim; separate application read filters may hide records but cannot destroy key material.",
+      "verification": "static source and consumer tracing only; no PoC/tests executed"
+    }
+  ],
+  "tests_run": []
+}

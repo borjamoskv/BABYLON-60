@@ -1,0 +1,10 @@
+{
+  "source_sha256": {
+    "proof/bundles/attestation_bundle_v1/verify": "9dae74bb71d75c7c5f93216b41d82caed7771dc48c034024366630046fe4ab87",
+    "scripts/generate_attestation_bundle.py": "e043c9463b2ed0c0d5c0a9d353ab3a5a1e11747129473c778db3eb06fa897553",
+    "scripts/generate_attestation_bundle_v2.py": "4ce522faf18df94eb9710fedf017a162104cb79f747562436f8eb80f0a9cc884"
+  },
+  "test_source_sha256": {
+    "tests/test_swarm100_lot4_regressions.py": "7a3cb593a78f3aff16c9edb9db12ef300565f88b8e4fd13a3d8e4bf76fb9e733"
+  }
+}

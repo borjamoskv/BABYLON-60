@@ -1,0 +1,45 @@
+{
+  "reviewer": "independent_verifier",
+  "reviewed_at_utc": "2026-10-29T23:37:05.797513+00:00",
+  "decision": "HARDWARE_ACCEPTANCE_APPROVED_WITH_EXPLICIT_SCOPE",
+  "candidate": "b9640a52ca031d1978232255d31e69efb011f9b9",
+  "execution_id": "hardware-1c298c8e371ae6ac02c57e39045c55ec",
+  "public_key_fingerprint_sha256_sec1": "fd7e4f541f712d8ed5d717ae2fdc3df71807e97b130f1d375d3b964120845c4a",
+  "causal_sha256": "14a9dcf83236795386c679ead54f1b3e4fda32f66650c877bd267908e557274e",
+  "signature": "P-256 ECDSA DER over exact stored proof verified independently",
+  "hardware_route": "Reviewed native CryptoKit SecureEnclave existing-key inspection plus single live signed authorization under the operator-confirmed pin",
+  "operator_matches_os_user": true,
+  "signed_artifacts_match_database_bytes": true,
+  "signed_approval_count": 1,
+  "event_count": 1,
+  "consumed_count": 1,
+  "observer_processes": 5,
+  "reopened_effect_unchanged": true,
+  "replay_denied": true,
+  "consumption_rejection_independently_isolated": true,
+  "attempts_recorded": 1,
+  "native_source_and_artifact_hashes_unchanged": true,
+  "worktree_clean": true,
+  "native_independent_tests": {
+    "passed": 135,
+    "failed": 0,
+    "skipped": 0,
+    "separate_surface_deselected": 1
+  },
+  "evidence": [
+    "hardware-independent-observation.json",
+    "final-native-run/report.json",
+    "../hardware-final/candidate.json",
+    "../hardware-final/key-inspection.json",
+    "../hardware-final/signed-proof.json",
+    "../hardware-final/hardware-receipt.json",
+    "../hardware-final/consumption-probe.json"
+  ],
+  "limits": [
+    "One local ledger-append route on this candidate and host; no global certification.",
+    "Local trusted native-path evidence; no remote hardware attestation certificate or invented token_id.",
+    "No physical power-loss, hostile-kernel or arbitrary OS-sandbox guarantee.",
+    "Restarted MCP has a new session; durable consumption is established separately by persisted row and exact-task rejection.",
+    "No gate or authentication invocation performed by the independent reviewer."
+  ]
+}

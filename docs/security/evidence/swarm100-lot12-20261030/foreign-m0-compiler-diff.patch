@@ -1,0 +1,27 @@
+diff --git a/01_KISH_ENGINE/babylon60/compliance_exporter/m0_evidence_pack.py b/01_KISH_ENGINE/babylon60/compliance_exporter/m0_evidence_pack.py
+index 39ae51e3..be6a83b9 100644
+--- a/01_KISH_ENGINE/babylon60/compliance_exporter/m0_evidence_pack.py
++++ b/01_KISH_ENGINE/babylon60/compliance_exporter/m0_evidence_pack.py
+@@ -162,6 +162,8 @@ def build_regulatory_contribution_matrix(
+     evidence contribution and explicit organizational/legal boundaries.
+     Never emits `COMPLIANT` automatically from `TEST_PASSED`.
+     """
++    from .regulatory import CATALOGUE, CATALOGUE_DIGEST
++
+     frameworks = [
+         {
+             "framework_id": "EU_AI_ACT_ART_12",
+@@ -284,6 +286,13 @@ def build_regulatory_contribution_matrix(
+ 
+     return {
+         "schema": "babylon60.m0.regulatory_matrix.v1",
++        "eu_ai_act_catalogue": {
++            "version": CATALOGUE["version"], "digest": CATALOGUE_DIGEST,
++            "reviewed_at": CATALOGUE["reviewed_at"], "source": CATALOGUE["legal_source"],
++            "requirements": CATALOGUE["requirements"],
++            "applicability": "REQUIRES_SYSTEM_PROFILE_AND_ACCOUNTABLE_REVIEW",
++            "automated_legal_conformity": False,
++        },
+         "derivation_rule": "CONTROL -> TEST -> EVIDENCE -> REGULATORY_REQUIREMENT -> ASSESSMENT",
+         "commercial_and_legal_invariant": (
+             "BABYLON-60 never generates COMPLIANT automatically from TEST_PASSED. "

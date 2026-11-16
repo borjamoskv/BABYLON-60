@@ -1,0 +1,167 @@
+- generic [active] [ref=e1]:
+  - link "Saltar al contenido" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=e3]:
+    - checkbox "Abrir o cerrar menú de navegación" [ref=e4]
+    - generic [ref=e5]:
+      - link "BABYLON Home" [ref=e6] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e7]: BABYLON
+      - navigation "Navegación principal" [ref=e8]:
+        - link "AI ACT" [ref=e9] [cursor=pointer]:
+          - /url: /eu-ai-act/
+        - link "CORTEX" [ref=e10] [cursor=pointer]:
+          - /url: /cortex/
+        - link "GUARD" [ref=e11] [cursor=pointer]:
+          - /url: /babylon/
+        - link "ENTERPRISE" [ref=e12] [cursor=pointer]:
+          - /url: /enterprise/
+        - link "PRUEBAS Y LÍMITES" [ref=e13] [cursor=pointer]:
+          - /url: /pruebas-y-limites/
+        - link "RESEARCH" [ref=e14] [cursor=pointer]:
+          - /url: /research/
+        - link "BLOG" [ref=e15] [cursor=pointer]:
+          - /url: /blog/
+        - link "DOCS" [ref=e16] [cursor=pointer]:
+          - /url: /documentacion/
+      - generic [ref=e17]:
+        - link "SOLICITAR ACCESO" [ref=e18] [cursor=pointer]:
+          - /url: /cortex/
+        - link "Cambiar a EN" [ref=e19] [cursor=pointer]:
+          - /url: /en/research/
+          - generic [ref=e20]: EN
+  - main [ref=e21]:
+    - generic [ref=e23]:
+      - generic [ref=e24]:
+        - generic [ref=e25]:
+          - generic [ref=e26]: LABORATORIO EPISTÉMICO
+          - generic [ref=e27]: FRONTIER R&D
+        - heading "Research & Cartografía de Frontera" [level=1] [ref=e28]
+        - paragraph [ref=e29]: Ingeniería inversa de modelos, arqueología de señales RLHF y termodinámica de sistemas
+        - paragraph [ref=e30]: Investigación técnica profunda y descompilaciones de arquitecturas cognitivas, modelos fundacionales y dinámicas de aprendizaje por refuerzo.
+      - generic [ref=e31]:
+        - heading "LÍNEAS DE INVESTIGACIÓN ACTIVAS" [level=2] [ref=e32]
+        - generic [ref=e33]:
+          - generic [ref=e34]:
+            - generic [ref=e35]:
+              - generic [ref=e36]: "01"
+              - generic [ref=e37]: EN INVESTIGACIÓN
+            - heading "Capability Cartography (Frontier-RevEng-OMEGA)" [level=3] [ref=e38]
+            - paragraph [ref=e39]: Sondeo empírico de espacios latentes en modelos cerrados y de frontera para mapear capacidades emergentes no declaradas.
+          - generic [ref=e40]:
+            - generic [ref=e41]:
+              - generic [ref=e42]: "02"
+              - generic [ref=e43]: EN INVESTIGACIÓN
+            - heading "RLHF Signal Archaeology & Jailbreak Epistemics" [level=3] [ref=e44]
+            - paragraph [ref=e45]: Análisis forense de capas de alineación, detección de sesgos estocásticos y desarticulación de atractores de complacencia.
+          - generic [ref=e46]:
+            - generic [ref=e47]:
+              - generic [ref=e48]: "03"
+              - generic [ref=e49]: EN INVESTIGACIÓN
+            - heading "Termodinámica de la Información y Límites de Landauer" [level=3] [ref=e50]
+            - paragraph [ref=e51]: Formalización de la disipación entrópica en el procesamiento de tokens, compresión geométrica y unicidad de Markov.
+          - generic [ref=e52]:
+            - generic [ref=e53]:
+              - generic [ref=e54]: "04"
+              - generic [ref=e55]: EN INVESTIGACIÓN
+            - heading "Modelos Formales en Lean 4 y Lógica Lineal" [level=3] [ref=e56]
+            - paragraph [ref=e57]: Especificaciones ejecutables y pruebas de no-interferencia inductiva para arquitecturas multi-agente concurrentes.
+      - generic [ref=e58]:
+        - heading "FORMALIZACIÓN EN LEAN 4 & ESPECIFICACIONES EJECUTABLES" [level=2] [ref=e59]
+        - paragraph [ref=e60]: "Ejemplos y un teorema universal sobre el modelo de estados AX0, comprobables con Lake. No certifican el runtime ni una revisión externa:"
+        - generic [ref=e61]:
+          - generic [ref=e62]:
+            - generic [ref=e63]: VERIFICACIÓN FORMAL · LEAN 4 CORE
+            - heading "Trazas y seguridad inductiva del modelo AX0" [level=3] [ref=e64]
+            - paragraph [ref=e65]: "Demostración constructiva en tiempo de compilación por reflexión pura (`rfl`) y prueba inductiva universal sobre trazas finitas arbitrarias (`proof/lean/AX0.lean`):"
+            - paragraph [ref=e66]:
+              - link "Descargar la fuente completa AX0.lean" [ref=e67] [cursor=pointer]:
+                - /url: /verification/proof/lean/AX0.lean
+            - paragraph [ref=e68]: La prueba se refiere al modelo formal; la correspondencia con el ejecutor Rust requiere evidencia separada.
+          - generic [ref=e69]:
+            - generic [ref=e70]:
+              - heading "1. Teorema Constructivo AUTH_001 (Reflexión rfl)" [level=4] [ref=e71]
+              - paragraph [ref=e72]: "Comprueba ejemplos concretos del modelo: ejecución válida, rechazo de doble despacho y rechazo de despacho sin reserva. No modela nonces ni persistencia del ejecutor."
+              - generic [ref=e73]: ✓ EJEMPLOS COMPROBADOS POR rfl
+            - generic [ref=e75]:
+              - heading "2. Seguridad Inductiva Universal (auth_001_universal_inductive_safety)" [level=4] [ref=e76]
+              - paragraph [ref=e77]: Para toda traza finita que validateTrace acepta desde Proposed, demuestra countDispatches ≤ 1. El teorema universal usa inducción y declara el axioma propext.
+              - generic [ref=e78]: "✓ TEOREMA INDUCTIVO · AXIOMAS: propext"
+          - group [ref=e80]:
+            - generic "Inspeccionar código fuente formal de Lean 4 (AX0.lean) proof/lean/AX0.lean" [ref=e81] [cursor=pointer]:
+              - generic [ref=e84]: Inspeccionar código fuente formal de Lean 4 (AX0.lean)
+              - generic [ref=e85]: proof/lean/AX0.lean
+      - generic [ref=e86]:
+        - generic [ref=e87]:
+          - heading "Publicaciones y Colaboraciones Académicas" [level=3] [ref=e88]
+          - paragraph [ref=e89]: Líneas de investigación dirigidas por Borja Fernández Angulo · Investigador en Sistemas Complejos
+          - paragraph [ref=e90]: Desarrollamos investigación original en la intersección de teoría de sistemas, termodinámica de información, lógica lineal y seguridad de agentes en silicio.
+        - link "Contactar con el autor →" [ref=e91] [cursor=pointer]:
+          - /url: mailto:borja@babylon60.com?subject=Colaboracion%20Research%20BABYLON
+  - contentinfo [ref=e92]:
+    - generic [ref=e93]:
+      - generic [ref=e94]:
+        - generic [ref=e95]:
+          - heading "AUDITORÍA DE FUENTES Y PROCEDENCIA CRIPTOGRÁFICA" [level=4] [ref=e96]
+          - generic [ref=e97]:
+            - generic [ref=e98]:
+              - text: "Sustrato origen:"
+              - link "borjamoskv/BABYLON-60" [ref=e99] [cursor=pointer]:
+                - /url: https://github.com/borjamoskv/BABYLON-60
+              - text: (Código publicado · consultar licencia y revisión)
+            - generic [ref=e100]:
+              - text: "Commit:"
+              - code [ref=e101]: 8add5b83845e161236af039997be9943b1c0221d+dirty
+            - generic [ref=e102]:
+              - text: "Rama:"
+              - code [ref=e103]: codex/integration-review-20261023
+            - generic [ref=e104]: "Fecha de snapshot: 2026-10-24T01:29:50.822Z"
+        - generic [ref=e105]:
+          - heading "Contacto e Investigación:" [level=4] [ref=e106]
+          - generic [ref=e107]:
+            - generic [ref=e108]: Borja Fernández Angulo
+            - generic [ref=e109]: Investigador en Sistemas Complejos
+            - link "borja@babylon60.com" [ref=e111] [cursor=pointer]:
+              - /url: mailto:borja@babylon60.com
+      - generic [ref=e112]:
+        - generic [ref=e113]: "Fuentes primarias auditadas (SHA-256):"
+        - generic [ref=e114]:
+          - generic [ref=e115]:
+            - generic [ref=e116]: CLAIMS.toml
+            - code [ref=e117]: 79f3269add7ccc0d...d162aa53
+          - generic [ref=e118]:
+            - generic [ref=e119]: scripts/c5_quality_gates/claims_sitrep.json
+            - code [ref=e120]: 988ff4ea1a8de822...c1c7a746
+          - generic [ref=e121]:
+            - generic [ref=e122]: RELEASE_MANIFEST.json
+            - code [ref=e123]: e0d5f43ea76bba9c...e7786fd9
+          - generic [ref=e124]:
+            - generic [ref=e125]: scripts/c5_quality_gates/compile_claims_manifest.py
+            - code [ref=e126]: 9fd62031792cde40...834dd65a
+          - generic [ref=e127]:
+            - generic [ref=e128]: docs/01_spec/spec_nemesis.md
+            - code [ref=e129]: 13d1e8401688f60a...ca083380
+          - generic [ref=e130]:
+            - generic [ref=e131]: reports/nemesis_verified_report.json
+            - code [ref=e132]: 9aa033bf12de94c1...fc94b7a6
+          - generic [ref=e133]:
+            - generic [ref=e134]: reports/nemesis_evidence_report.json
+            - code [ref=e135]: fe8fb8c6003167cc...cf2f3beb
+          - generic [ref=e136]:
+            - generic [ref=e137]: reports/nemesis-kernel-report.json
+            - code [ref=e138]: 443dfc30371b82b3...88695288
+          - generic [ref=e139]:
+            - generic [ref=e140]: reports/nemesis-crash-report.json
+            - code [ref=e141]: eb1e55af821ccc65...ca2f23f9
+          - generic [ref=e142]:
+            - generic [ref=e143]: reports/nemesis-model-report.json
+            - code [ref=e144]: cc0f1e7fac03efbe...10135ade
+          - generic [ref=e145]:
+            - generic [ref=e146]: reports/ax0-adversarial-report.json
+            - code [ref=e147]: 77945423639ba1da...94a9adae
+          - generic [ref=e148]:
+            - generic [ref=e149]: proof/lean/AX0.lean
+            - code [ref=e150]: b0c763ec1fe82695...67994cd1
+      - generic [ref=e151]:
+        - generic [ref=e152]: BABYLON-60 es una arquitectura experimental de gobernanza en silicio y evidencia local-first.
+        - generic [ref=e153]: © 2026 Borja Fernández Angulo

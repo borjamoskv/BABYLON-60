@@ -1,0 +1,10 @@
+{
+  "source_head_now": "71a4d56a059f5709882e6ee628f2bc890ad4f18a",
+  "captured_base": "28257bd74fce31446b0350d094e9dab148a1aea7",
+  "captured_paths": 1048,
+  "content_changed_since_capture": [],
+  "missing_since_capture": [],
+  "integration_head": "b9640a52ca031d1978232255d31e69efb011f9b9",
+  "integration_clean": true,
+  "note": "Source HEAD advanced in another chat. This task writes only isolated worktrees and external evidence."
+}

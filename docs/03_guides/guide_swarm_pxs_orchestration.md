@@ -1,10 +1,10 @@
 ---
-title: Guía de Orquestación de Enjambres Multi-Agente Kimi K3 (PxS)
+title: Guía de Orquestación de Enjambres Multi-Agente (PxS)
 status: Causal-Determinist
 version: 1.0.0
 ---
 
-# Guía de Orquestación de Enjambres Multi-Agente Kimi K3 ($P \times S$)
+# Guía de Orquestación de Enjambres Multi-Agente ($P \times S$)
 
 <div align="center">
 
@@ -13,13 +13,13 @@ version: 1.0.0
 
 </div>
 
-Esta guía describe el protocolo de arquitectura y despliegue para enjambres multi-agente basados en la topología **Kimi K3 ($P \times S$)** en el ecosistema **BABYLON-60**.
+Esta guía describe el protocolo de arquitectura y despliegue para enjambres multi-agente basados en la topología **$P \times S$** en el ecosistema **BABYLON-60**. Los enjambres son locales (vLLM o MLX), orquestables desde Antigravity; OpenRouter opcional.
 
 ---
 
 ## 1. Topología $P \times S$ y Prevención de Thrashing
 
-Para evitar la anergía por contención de memoria en arquitecturas de memoria unificada (Apple Silicon ARM64), el orquestador Kimi K3 impone la división estricta de tareas:
+Para evitar la anergía por contención de memoria en arquitecturas de memoria unificada (Apple Silicon ARM64), el orquestador de enjambre impone la división estricta de tareas:
 
 $$ \text{Capacidad Máxima} = P \times S \le \text{Cores Físicos CPU} $$
 
@@ -28,7 +28,7 @@ $$ \text{Capacidad Máxima} = P \times S \le \text{Cores Físicos CPU} $$
 
 ```mermaid
 graph TD
-    User["Prompt Usuario"] --> Decomposer["TaskDecomposer (Planner K3)"]
+    User["Prompt Usuario"] --> Decomposer["TaskDecomposer (Planner)"]
     Decomposer --> FanOut["AgentPager (Fan-Out PxS)"]
     FanOut --> Sync["Barrera Futex / Semaphore"]
     Sync --> Sub0["Subagente 0 (MCTS 2.8s)"]

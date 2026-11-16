@@ -1,0 +1,75 @@
+{
+  "reviewer": "03",
+  "status": "PASS_WITH_OBSERVED_LIMITATIONS",
+  "source_sha256_before": {
+    "scripts/c5_cortex/cortex_objectives_transducer.py": "18805a13c7a3c2853b8824c9424dbff05c2d27ebad9c89e2f3b2c98aaf7692ca",
+    "tests/test_swarm100_lot8_regressions.py": "9ae951ddf064df9e9721d0b1183b5683543aa1dd742c6d3aa2ec0ead45a23c51"
+  },
+  "source_sha256_after": {
+    "scripts/c5_cortex/cortex_objectives_transducer.py": "18805a13c7a3c2853b8824c9424dbff05c2d27ebad9c89e2f3b2c98aaf7692ca",
+    "tests/test_swarm100_lot8_regressions.py": "6df5efd0e57b915ea3c014225841950056ee9b3a0d76b5174d1f471ce6e8b7ec"
+  },
+  "checks": [
+    {
+      "name": "only_yaml_excludes_other_worktree_files",
+      "passed": true
+    },
+    {
+      "name": "three_rejecting_hooks_once_preserve_head_and_index",
+      "passed": true,
+      "cases": 3
+    },
+    {
+      "name": "declared_two_file_commit_runs_all_normal_hooks",
+      "passed": true
+    },
+    {
+      "name": "no_op_returns_observed_existing_head_without_commit",
+      "passed": true
+    },
+    {
+      "name": "prepared_or_special_index_rejected_byte_identically",
+      "passed": true,
+      "cases": 5
+    },
+    {
+      "name": "unsupported_output_types_or_untracked_paths_rejected",
+      "passed": true,
+      "cases": 4
+    },
+    {
+      "name": "ambient_index_selector_and_nonallowlisted_paths_rejected_before_git",
+      "passed": true
+    },
+    {
+      "name": "nonhook_git_error_no_retry_no_staging",
+      "passed": true
+    },
+    {
+      "name": "concurrent_foreign_staging_excluded_and_preserved",
+      "passed": true
+    },
+    {
+      "name": "consumer_propagates_failure_without_success_claim",
+      "passed": true,
+      "limitation": "Generated YAML stays modified; persistence rollback is outside this lot."
+    }
+  ],
+  "check_count": 10,
+  "limitations": [
+    {
+      "name": "concurrent_same_output_staging_window",
+      "observed": true,
+      "detail": "Another writer staging a selected path after final preflight loses that staged version when --only commits current worktree. No global transaction or same-output concurrency guarantee.",
+      "returned_hash_matches_head": true
+    },
+    {
+      "name": "trusted_hook_can_widen_commit_before_postvalidation",
+      "observed": true,
+      "detail": "Hook using git add stages an extra route in Git temporary index. Helper rejects postvalidation without undoing the already created commit; hooks are not sandboxed."
+    }
+  ],
+  "git_scope": "Only owned temporary repositories, isolated HOME/global/system config, synthetic author, signing disabled; no network/native protected runtime.",
+  "temporary_repositories": 21,
+  "git_commands": 540
+}

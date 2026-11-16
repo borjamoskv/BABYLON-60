@@ -1,0 +1,50 @@
+{
+  "capture_date_client": "2026-10-30",
+  "source_state": "working-tree bytes; includes relevant uncommitted content where shown",
+  "git_head": "71a4d56a059f5709882e6ee628f2bc890ad4f18a",
+  "git_branch": "main",
+  "repository_dirty": true,
+  "canonical_sources": [
+    {
+      "origin_path": "01_KISH_ENGINE/babylon60/guards/capability_guard.py",
+      "package_path": "snapshot/src/babylon60/guards/capability_guard.py",
+      "sha256": "a98c659b79bfd805db90c03bd67c1ec530c7c39573dd2615a223917f1654e261",
+      "bytes": 1107,
+      "git_status_at_capture": ""
+    },
+    {
+      "origin_path": "01_KISH_ENGINE/babylon60/guards/capabilities.py",
+      "package_path": "snapshot/src/babylon60/guards/capabilities.py",
+      "sha256": "633edc9551bdd3183409a8e5ce70e32cf15de31f017762f59547fec6d80d68d9",
+      "bytes": 398,
+      "git_status_at_capture": ""
+    },
+    {
+      "origin_path": ".babylon60rules",
+      "package_path": "context/babylon60rules.txt",
+      "sha256": "896ef66813dae7b753c365db39817a8f144f525dc1ae4f3259660b1f53db557c",
+      "bytes": 5082,
+      "git_status_at_capture": ""
+    },
+    {
+      "origin_path": "AGENTS.md",
+      "package_path": "context/AGENTS-source.txt",
+      "sha256": "1c40bfdd2083849bc1f3c266a67871a1594068bc843207c4a1244fe0884f138b",
+      "bytes": 4808,
+      "git_status_at_capture": ""
+    },
+    {
+      "origin_path": "docs/03_guides/agent_contracts.md",
+      "package_path": "context/agent-contracts-source.txt",
+      "sha256": "4f137f727344d4ee7b746c746958d234fb37e16af33d5968216952faf06a3cae",
+      "bytes": 31061,
+      "git_status_at_capture": "M docs/03_guides/agent_contracts.md"
+    }
+  ],
+  "generated_support_files": [
+    "snapshot/AGENTS.md",
+    "snapshot/src/babylon60/__init__.py",
+    "snapshot/src/babylon60/guards/__init__.py"
+  ],
+  "limits": "Only the class and its enum are copied as runtime source. Empty package initializers isolate imports; this is not a full BABYLON runtime snapshot."
+}

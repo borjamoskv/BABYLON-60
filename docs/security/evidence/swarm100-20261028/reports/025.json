@@ -1,0 +1,371 @@
+{
+  "shard": "025",
+  "findings": [
+    {
+      "title": "Audit workers approve source without reading or checking it",
+      "severity": "P2",
+      "path": "scripts/c5_quality_gates/legion_100_agents_full_monorepo.py",
+      "line": 21,
+      "evidence": "Worker only calls os.stat and sleeps, then emits APPROVED with exergy=21000 for nonempty files (21\u201332). Final verdict unconditionally says TOPOLOG\u00cdA INTACTA / RFO=0 (78).",
+      "trigger": "Run the advertised audit on any nonempty malformed or unsafe source.",
+      "impact": "Output represents file existence/size as an affirmative audit verdict and fabricated quality metric.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Commit linter inspects working tree instead of staged bytes",
+      "severity": "P2",
+      "path": "tools/skill_library/global/c5-ring0-babylon-kernel/references/modules/babylon-shield/babylon_exergy_linter.sh",
+      "line": 19,
+      "evidence": "Names come from git diff --cached (8), but grep reads \"$FILE\" in working tree (19\u201342). Loop also word-splits filenames (17).",
+      "trigger": "Stage a violation and remove it only in the working tree, or stage a source filename containing spaces.",
+      "impact": "The advertised precommit gate can approve staged violations or skip their real path; no active hook integration is asserted.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Non-Darwin arm reports anti-debug protection despite skipping it",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/core/c5_memory_shield.py",
+      "line": 70,
+      "evidence": "enforce_anti_debug returns immediately when platform != darwin (43\u201344), yet arm unconditionally sets antidebug_ok=True (69\u201374). tests/test_c5_memory_shield.py:54 asserts True on every platform.",
+      "trigger": "Call arm on Linux.",
+      "impact": "Audit status claims anti-debug protection was armed although no anti-debug mechanism ran.",
+      "confidence": "high",
+      "kind": "runtime"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".agents/skills/c5-audiovisual-acreativo-sota-project/references/modules/audiovisual-sota/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          38
+        ]
+      ],
+      "inventory_sha256": "9466223b2accde47aed0b2769f83bc094f5a908d21471296ac872d85f29df641",
+      "observed_sha256": "9466223b2accde47aed0b2769f83bc094f5a908d21471296ac872d85f29df641",
+      "changed_source": false
+    },
+    {
+      "path": ".gitmodules",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          3
+        ]
+      ],
+      "inventory_sha256": "dc3fa0b19391261f748e381f80264049cfc51c1e0851ad5f9c21c701c5bf007c",
+      "observed_sha256": "dc3fa0b19391261f748e381f80264049cfc51c1e0851ad5f9c21c701c5bf007c",
+      "changed_source": false
+    },
+    {
+      "path": "00_ABZU_KERNEL/formal_verification/BabylonBFT.cfg",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          12
+        ]
+      ],
+      "inventory_sha256": "fe1d2c569e8a87fd8c3634330c23efb8c0dc165fcd5d56f692b4ceeb89918608",
+      "observed_sha256": "fe1d2c569e8a87fd8c3634330c23efb8c0dc165fcd5d56f692b4ceeb89918608",
+      "changed_source": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/core/c5_memory_shield.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          76
+        ]
+      ],
+      "inventory_sha256": "5d38e5ac55a4d7faeea340300adc7e9cfa1e873e3627750c183102a4774922bd",
+      "observed_sha256": "5d38e5ac55a4d7faeea340300adc7e9cfa1e873e3627750c183102a4774922bd",
+      "changed_source": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/mcp/effect_dispatch.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          346
+        ]
+      ],
+      "inventory_sha256": "41ba8ef0f6cda8c0d0aac2399cfbe9f51714b1d41fe6c06bfd26a2a8c99a6b47",
+      "observed_sha256": "41ba8ef0f6cda8c0d0aac2399cfbe9f51714b1d41fe6c06bfd26a2a8c99a6b47",
+      "changed_source": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/verification/moloch_landauer_gate.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          200
+        ]
+      ],
+      "inventory_sha256": "54a7cf8d8d25621c7a66108489380987c9b1136df9c70b9237b3c2930521eb18",
+      "observed_sha256": "54a7cf8d8d25621c7a66108489380987c9b1136df9c70b9237b3c2930521eb18",
+      "changed_source": false
+    },
+    {
+      "path": "assets/babylon60_brutalist_logo.svg",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          165
+        ]
+      ],
+      "inventory_sha256": "5d8060117f59f2d84a6f9cba2100d3ca56eacfc5a8e5e5924ab40d86aecee95f",
+      "observed_sha256": "5d8060117f59f2d84a6f9cba2100d3ca56eacfc5a8e5e5924ab40d86aecee95f",
+      "changed_source": false
+    },
+    {
+      "path": "docs/03_guides/QUICKSTART_ENTERPRISE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          141
+        ]
+      ],
+      "inventory_sha256": "6af20ac91249722e03090b7301ab7bebf704e9e87603df70502d144f62c50a4e",
+      "observed_sha256": "6af20ac91249722e03090b7301ab7bebf704e9e87603df70502d144f62c50a4e",
+      "changed_source": false
+    },
+    {
+      "path": "docs/security/cose-authorization-profile.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          18
+        ]
+      ],
+      "inventory_sha256": "b3a4b93e9352862183503d2f244c195227ffe47165cfc8a790e27f361e8b3daf",
+      "observed_sha256": "b3a4b93e9352862183503d2f244c195227ffe47165cfc8a790e27f361e8b3daf",
+      "changed_source": false
+    },
+    {
+      "path": "proof/lean/BabylonAOTOracle.lean",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          91
+        ]
+      ],
+      "inventory_sha256": "2fa25bdbd878bbd13cc722a463a4f59c00b3419225d8f4d2150aac565353cd20",
+      "observed_sha256": "2fa25bdbd878bbd13cc722a463a4f59c00b3419225d8f4d2150aac565353cd20",
+      "changed_source": false
+    },
+    {
+      "path": "scripts/c5_demos/poc_agentic_firewall_intercept.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          78
+        ]
+      ],
+      "inventory_sha256": "f5352964a1c3ae5c7408f941d4713f9934395247e0110a5a9c496b8000beb2f1",
+      "observed_sha256": "f5352964a1c3ae5c7408f941d4713f9934395247e0110a5a9c496b8000beb2f1",
+      "changed_source": false
+    },
+    {
+      "path": "scripts/c5_quality_gates/legion_100_agents_full_monorepo.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          83
+        ]
+      ],
+      "inventory_sha256": "f8eda84e6ea9db461d19348501cc98b164a66e0ebec5936cef9bb44149882a18",
+      "observed_sha256": "f8eda84e6ea9db461d19348501cc98b164a66e0ebec5936cef9bb44149882a18",
+      "changed_source": false
+    },
+    {
+      "path": "scripts/guards/verify_windows_migrations.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          160
+        ]
+      ],
+      "inventory_sha256": "6defd282fbcdf7acbdf5b6d16e07f7b9b3a9823ea8b16581a08db55bf2140aec",
+      "observed_sha256": "6defd282fbcdf7acbdf5b6d16e07f7b9b3a9823ea8b16581a08db55bf2140aec",
+      "changed_source": false
+    },
+    {
+      "path": "tests/babylon60/primitives/test_sovereign_primitives.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          115
+        ]
+      ],
+      "inventory_sha256": "456b20dd473e29d9c4bd608f36509e9e20630494d915756e3d0c00ee830e6896",
+      "observed_sha256": "456b20dd473e29d9c4bd608f36509e9e20630494d915756e3d0c00ee830e6896",
+      "changed_source": false
+    },
+    {
+      "path": "tests/test_codex_onboarding.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          611
+        ]
+      ],
+      "inventory_sha256": "02f01d38cd7981a87696adc10dbb2a15b4637e5bf676b2d7a04fec0fcacfb31b",
+      "observed_sha256": "02f01d38cd7981a87696adc10dbb2a15b4637e5bf676b2d7a04fec0fcacfb31b",
+      "changed_source": false
+    },
+    {
+      "path": "tests/test_representation_geometry.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          99
+        ]
+      ],
+      "inventory_sha256": "c6138a62a49ffa33c98d77b93df0ac5b3edf242971105d2dfb6f0e26d1945de1",
+      "observed_sha256": "c6138a62a49ffa33c98d77b93df0ac5b3edf242971105d2dfb6f0e26d1945de1",
+      "changed_source": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/ai-gateway/dynamic-routing.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          82
+        ]
+      ],
+      "inventory_sha256": "56f3539a61bae2fda7d8a98c81ed14e820caf733f27e6cce2fffeeaf7a6c1db5",
+      "observed_sha256": "56f3539a61bae2fda7d8a98c81ed14e820caf733f27e6cce2fffeeaf7a6c1db5",
+      "changed_source": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/flagship/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          202
+        ]
+      ],
+      "inventory_sha256": "a067854b48b4f6cbbb7fac4ca886ef6a14ddd1fc108650ec2f096ca730d55c02",
+      "observed_sha256": "a067854b48b4f6cbbb7fac4ca886ef6a14ddd1fc108650ec2f096ca730d55c02",
+      "changed_source": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/smart-placement/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          196
+        ]
+      ],
+      "inventory_sha256": "e9267bbc9cde1db801743f451cd65a2d1b335b382199d817d1be2df29d06cc7a",
+      "observed_sha256": "e9267bbc9cde1db801743f451cd65a2d1b335b382199d817d1be2df29d06cc7a",
+      "changed_source": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workflows/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          175
+        ]
+      ],
+      "inventory_sha256": "1b8353188349a7b52441b62212a4989a3718456b7e9e7967fd2965dedc373d28",
+      "observed_sha256": "1b8353188349a7b52441b62212a4989a3718456b7e9e7967fd2965dedc373d28",
+      "changed_source": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/remotion-audio-reactive-video/examples/SpectralFlux.ts",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          122
+        ]
+      ],
+      "inventory_sha256": "41b875c2e1202272a4e595bed68388039fe2b4cbbab7ca03de286b4bbf5299db",
+      "observed_sha256": "41b875c2e1202272a4e595bed68388039fe2b4cbbab7ca03de286b4bbf5299db",
+      "changed_source": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_29_site_playbooks_craigslist.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "inventory_sha256": "bee102bbe500ede072b037e2ddffbf9783c5e5e77028e5420e8dd419bc044f05",
+      "observed_sha256": "bee102bbe500ede072b037e2ddffbf9783c5e5e77028e5420e8dd419bc044f05",
+      "changed_source": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-ring0-babylon-kernel/references/modules/babylon-shield/babylon_exergy_linter.sh",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          53
+        ]
+      ],
+      "inventory_sha256": "976b392518ab55a5a1d20446cb4e9604a7651f962c4fe975206755148214c919",
+      "observed_sha256": "976b392518ab55a5a1d20446cb4e9604a7651f962c4fe975206755148214c919",
+      "changed_source": false
+    },
+    {
+      "path": "tools/skill_library/global/categorical-hallucination-audit/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "inventory_sha256": "1038d9563c5e2dda9813139b8fbce1ced4577e3dc9b1947dd910facdce15b5c7",
+      "observed_sha256": "1038d9563c5e2dda9813139b8fbce1ced4577e3dc9b1947dd910facdce15b5c7",
+      "changed_source": false
+    },
+    {
+      "path": "tools/skill_library/workspace/babylon60-kernel-invariants/agents/openai.yaml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          4
+        ]
+      ],
+      "inventory_sha256": "f32f8d67665d0253ba85072453438e1d6346e3d164b3f7fdf1a6121ea401d057",
+      "observed_sha256": "f32f8d67665d0253ba85072453438e1d6346e3d164b3f7fdf1a6121ea401d057",
+      "changed_source": false
+    }
+  ],
+  "tool_limitations": [
+    "Native codebase graph tools not exposed; targeted source reads used.",
+    "No runtime, tests, deployment or external API claims verified."
+  ],
+  "tests_run": []
+}

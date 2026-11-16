@@ -1,0 +1,1124 @@
+{
+  "scope": "Eighteen documentary outside-scope OPEN records (including C0381 P1); two primary source withdrawals and one secondary withdrawal are pending adjudication. No product edits/restoration, extra closures or generic freshness bypass.",
+  "updates": [
+    {
+      "candidate_id": "SW100-C0209",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/memory/provenance_arbiter.py",
+      "current_source_sha256": "bd6025b36a087a4adb000c55a0f5c99ddeaf3eb153efee0605dfd051a3e6982d",
+      "rationale": "OUTSIDE_SCOPE_FRESHNESS_PENDING_READJUDICATION: separate commit 8c14809a, which is not an ancestor of the Lote12 initial HEAD, replaced prefix-only acceptance with a full 64-hex BLAKE3 syntax check and blocks the historical malformed b3: trigger. The current docstring explicitly states that evidence bytes are not fetched; effective levels and runtime scope still inspect supplied fields. This read-only refresh does not rerun the old counterexample, assert that the corrected malformed-digest trigger still works, or verify receipt content/authenticity. The inherited CONFIRMED_STATIC/P2/OPEN record is retained pending separate adjudication of current evidence-binding semantics, outside the 30 Lote12 outcomes.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/memory/provenance_arbiter.py",
+          "start_line": 45,
+          "end_line": 46,
+          "observation": "Current digest syntax requires b3: followed by exactly64 hexadecimal digits; the historical malformed b3: trigger is blocked."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/memory/provenance_arbiter.py",
+          "start_line": 165,
+          "end_line": 183,
+          "observation": "Checks syntax and optional supplied content identity; docstring expressly says evidence bytes are not fetched."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/memory/provenance_arbiter.py",
+          "start_line": 185,
+          "end_line": 211,
+          "observation": "Invalid syntax falls back to CLAIMED; remaining level selection examines supplied field presence and ticks."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/memory/provenance_arbiter.py",
+          "start_line": 278,
+          "end_line": 283,
+          "observation": "Claim minimum defaults to CLAIMED."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/memory/provenance_arbiter.py",
+          "start_line": 319,
+          "end_line": 347,
+          "observation": "Only envelope integrity is checked; origin starts true for an unspecified platform."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/memory/provenance_arbiter.py",
+          "start_line": 415,
+          "end_line": 455,
+          "observation": "Runtime guard requires presence/derivation and then returns ATTESTED."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/memory/__init__.py",
+          "start_line": 30,
+          "end_line": 40,
+          "observation": "Evaluator is publicly imported by memory package."
+        }
+      ],
+      "guards": [
+        "Missing receipt/runtime, wrong derivation, requested platform mismatch and optional expected-content mismatch reject/abstain.",
+        "Those guards do not verify the supplied receipt digest's content or authenticity.",
+        "This override maintains documented freshness only. No remediation outcome or runtime validation is added; inherited decision/severity/state remains unchanged."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-freshness.json",
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh.json",
+        "docs/security/evidence/swarm100-round3-20261028/15-source-evidence.json"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/15.json",
+      "runtime_scope": "Static-only source/history freshness review; no product runtime, reproduction, signing, network, biometrics or protected effect executed.",
+      "resolution_type": "OUTSIDE_SCOPE_PREEXISTING_SOURCE_REFRESH_NO_CLOSURE",
+      "source_refresh": {
+        "pending_separate_readjudication": true,
+        "outside_lot12_production_scope": true,
+        "old_source_sha256": "e0a3488fcfd1f231c7d3e0c34e92262c4e028b1b8bd65e908d4404a51d482342",
+        "old_source_git_revision": "8c14809a^",
+        "previous_runtime_executed": false,
+        "original_decision_and_state_retained": true,
+        "previous_rationale": "Confirmed arbiter-level false attestation: nonempty content/host plus derivation EXECUTION_RECEIPT, a runtime label and receipt digest 'b3:' satisfy the runtime scope branch. Integrity only checks that prefix; the claim defaults to minimum CLAIMED, and origin is true when no platform is requested. No receipt bytes, signature or content/runtime binding are verified. Package export exists, but no protected runtime consumer was located; this is not demonstrated deployment authorization bypass.",
+        "outside_scope_change_commit": "8c14809a",
+        "known_preexisting_before_lot12": false,
+        "chronology": "Outside-scope concurrent/separate work: this commit is not an ancestor of the initial Lote12 HEAD. No assertion that this drift existed at task start."
+      }
+    },
+    {
+      "candidate_id": "SW100-C0403",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py",
+      "current_source_sha256": "f2a05503bc085cba2734ee29290de1ebf62f776b1ed2f6f080314720c8d8ba9a",
+      "rationale": "OUTSIDE_SCOPE_FRESHNESS_PENDING_READJUDICATION: the pre-existing ledger change closes owned SQLite connections and shifts the anchor method by four lines. Every previously checked anchor fragment is byte-identical in the current file: invalid nonempty signing seed still reaches broad except and SigningKey.generate before anchor_payload. This is static range/branch maintenance, not a new signing or Rekor reproduction. CONFIRMED_STATIC/P2/OPEN is preserved for separate remediation; no source was edited by Lote12 for this record.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py",
+          "start_line": 801,
+          "end_line": 818,
+          "observation": "Public anchor method prepares the ledger head."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py",
+          "start_line": 822,
+          "end_line": 833,
+          "observation": "Broad exception replaces configured identity with random key."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py",
+          "start_line": 835,
+          "end_line": 844,
+          "observation": "Client creation/import guard followed by anchor_payload."
+        }
+      ],
+      "guards": [
+        "Absent seed intentionally generates an ephemeral key too; finding is specifically invalid nonempty configuration.",
+        "Client import failure may stop anchoring, but valid installed or supplied client receives the unexpected identity.",
+        "This override maintains documented freshness only. No remediation outcome or runtime validation is added; inherited decision/severity/state remains unchanged."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-freshness.json",
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh.json",
+        "docs/security/evidence/swarm100-round3-20261028/19-review-method.json"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/19.json",
+      "runtime_scope": "Static-only source/history freshness review; no product runtime, reproduction, signing, network, biometrics or protected effect executed.",
+      "resolution_type": "OUTSIDE_SCOPE_PREEXISTING_SOURCE_REFRESH_NO_CLOSURE",
+      "source_refresh": {
+        "pending_separate_readjudication": true,
+        "outside_lot12_production_scope": true,
+        "old_source_sha256": "15292238c8f9b7e87f70ce0b4e8256569bb1cc612497102afa5b373092e85db6",
+        "old_source_git_revision": "147f39ad^",
+        "previous_runtime_executed": false,
+        "original_decision_and_state_retained": true,
+        "previous_rationale": "The current dirty source still catches any invalid nonempty configured seed and generates a fresh key. The resulting public key/signature are passed to anchor_payload, so malformed configuration can silently change signing identity. Line shifts and changed source hash do not constitute remediation. No Rekor request was made.",
+        "outside_scope_change_commit": "147f39ad",
+        "known_preexisting_before_lot12": true
+      }
+    },
+    {
+      "candidate_id": "SW100-C0415",
+      "decision": "REPRODUCED",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "scripts/c5_cli/doxastic_kripke_engine.py",
+      "current_source_sha256": "05e99aa3d405c37c4cb02a67d380f1a057cfcd14473b3b83270d6fc95f040f35",
+      "rationale": "OUTSIDE_SCOPE_FRESHNESS_PENDING_READJUDICATION: pre-existing commit 5efff02a removes an unused import and a redundant f-string prefix. The visibility update, second-order query and demo fragments are byte-identical to the source of the historical reproduction. The current second-order method still returns the target query after membership checks; no fresh private-observer scenario was executed here. REPRODUCED/P2/OPEN is inherited from history pending separate adjudication/remediation, not counted among the 30 Lote12 outcomes.",
+      "source_checks": [
+        {
+          "path": "scripts/c5_cli/doxastic_kripke_engine.py",
+          "start_line": 160,
+          "end_line": 195,
+          "observation": "Per-agent visibility controls first-order world updates."
+        },
+        {
+          "path": "scripts/c5_cli/doxastic_kripke_engine.py",
+          "start_line": 228,
+          "end_line": 243,
+          "observation": "Second-order query ignores observer state after membership check."
+        },
+        {
+          "path": "scripts/c5_cli/doxastic_kripke_engine.py",
+          "start_line": 303,
+          "end_line": 316,
+          "observation": "Demo consumes the second-order result."
+        },
+        {
+          "path": "tests/test_doxastic_kripke_engine.py",
+          "start_line": 77,
+          "end_line": 86,
+          "observation": "Current test covers informed observer only."
+        }
+      ],
+      "guards": [
+        "First-order visibility guards correctly preserve the absent observer's own world.",
+        "Unknown agents return None.",
+        "The existing second-order test uses an observer who witnessed the scenario and does not test private target updates.",
+        "This override maintains documented freshness only. No remediation outcome or runtime validation is added; inherited decision/severity/state remains unchanged."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-freshness.json",
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh.json",
+        "docs/security/evidence/swarm100-round3-20261028/06-reproductions.json",
+        "docs/security/evidence/swarm100-round3-20261028/06-reproductions.py",
+        "docs/security/evidence/swarm100-round3-20261028/06-source-snapshot.json"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/06.json",
+      "runtime_scope": "Static-only source/history freshness review; no product runtime, reproduction, signing, network, biometrics or protected effect executed.",
+      "resolution_type": "OUTSIDE_SCOPE_PREEXISTING_SOURCE_REFRESH_NO_CLOSURE",
+      "source_refresh": {
+        "pending_separate_readjudication": true,
+        "outside_lot12_production_scope": true,
+        "old_source_sha256": "564186b81b2b53ace810cb6ad9c4674fefc46ca11299c67e5cc26a12595bb806",
+        "old_source_git_revision": "5efff02a^",
+        "previous_runtime_executed": true,
+        "original_decision_and_state_retained": true,
+        "previous_rationale": "The actual in-memory classes were exercised with two synthetic agents: both saw basket, then observer left while target saw a move to box. Observer's first-order belief remained basket but query_second_order_belief(observer,target) returned target's private box belief. The method only checks agent membership and delegates to the target, so no observer-conditioned second-order model exists. Reachability found only in its demonstration and test; no production security consumer was established.",
+        "outside_scope_change_commit": "5efff02a",
+        "known_preexisting_before_lot12": true
+      }
+    },
+    {
+      "candidate_id": "SW100-C0487",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift",
+      "current_source_sha256": "79b6ea08597c31f5b39a705464823dd0d23175f189c8005d0e84c9d385d7a92d",
+      "rationale": "OUTSIDE_SCOPE_FRESHNESS_PENDING_READJUDICATION: pre-existing public-key-inspection functionality added a JSONSerialization-based inspection response and shifted the signing path. The old CLI-input, causal-hash and successful-signing receipt fragments are byte-identical; the successful-signing receipt still uses quote-only interpolation. The properly encoded inspection response is a different mode and does not rewrite that receipt branch. This is static review only: no gate, biometric prompt, hardware key, signature or native binary was run. CONFIRMED_STATIC/P2/OPEN is retained for separate remediation, outside the 30 Lote12 outcomes.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift",
+          "start_line": 261,
+          "end_line": 299,
+          "observation": "CLI stores raw action, prompt, scope and agent arguments."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift",
+          "start_line": 330,
+          "end_line": 334,
+          "observation": "Causal-hash requirement is distinct from text serialization."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift",
+          "start_line": 471,
+          "end_line": 499,
+          "observation": "Receipt uses manually interpolated JSON with quote-only escaping."
+        }
+      ],
+      "guards": [
+        "Actual signing verifies its signature before receipt emission.",
+        "Quote replacement covers only double quotes.",
+        "Causal hash is required outside preview, but does not constrain action/prompt/scope characters.",
+        "This override maintains documented freshness only. No remediation outcome or runtime validation is added; inherited decision/severity/state remains unchanged."
+      ],
+      "runtime_executed": false,
+      "runtime_scope": "Static-only source/history freshness review; no product runtime, reproduction, signing, network, biometrics or protected effect executed.",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-freshness.json",
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh.json",
+        "docs/security/evidence/swarm100-round3-20261028/03-source-evidence.json"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/03.json",
+      "resolution_type": "OUTSIDE_SCOPE_PREEXISTING_SOURCE_REFRESH_NO_CLOSURE",
+      "source_refresh": {
+        "pending_separate_readjudication": true,
+        "outside_lot12_production_scope": true,
+        "old_source_sha256": "18d96a6ef76b88b80735d646f208a062ed817311d12e48cfaccb9dc394c93efa",
+        "old_source_git_revision": "ef37ea2a^",
+        "previous_runtime_executed": false,
+        "original_decision_and_state_retained": true,
+        "previous_rationale": "The successful signing path constructs JSON by interpolating strings after replacing quotes only. CLI action/prompt/scope accept raw strings; backslashes, newlines and other control characters are not JSON encoded. An authorized successful invocation with such input can emit malformed JSON or decode to altered field values. The signing and causal-hash controls do not sanitize these serialization fields. This is static analysis of receipt emission; no biometrics, Secure Enclave operation or native binary was run.",
+        "outside_scope_change_commit": "ef37ea2a",
+        "known_preexisting_before_lot12": true
+      }
+    },
+    {
+      "candidate_id": "SW100-C0062",
+      "decision": "REPRODUCED",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py",
+      "current_source_sha256": "817ea23c237293bc27e51a14cdb4ba97d9c5462089d7067621b5706251052ece",
+      "rationale": "OUTSIDE_SCOPE_FRESHNESS_PENDING_READJUDICATION: concurrent work outside the29Lote12 sources adds technical-report fields and regulatory CLI routing. The lifecycle and separate signature-check methods remain byte-identical to the reviewed Git HEAD source, shifted by12lines. The lifecycle method still checks revocation/expiry without invoking the separate signature verifier; no unsigned-certificate scenario was rerun here. The new regulatory authorization path and its security properties are outside this refresh. Preserve REPRODUCED/P2/OPEN pending separate adjudication; this is not another Lote12 remediation outcome.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py",
+          "start_line": 389,
+          "end_line": 428,
+          "observation": "Separate Ed25519 signature-verification method exists."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py",
+          "start_line": 431,
+          "end_line": 476,
+          "observation": "Lifecycle promises signature checking but only verifies revocation and expiry."
+        },
+        {
+          "path": "tests/test_compliance_exporter.py",
+          "start_line": 100,
+          "end_line": 126,
+          "observation": "Lifecycle tests assert active/revoked/expired status without testing unsigned rejection."
+        }
+      ],
+      "guards": [
+        "CRL membership, presence/format of valid_until and expiration are checked.",
+        "verify_certificate_signature exists separately, but lifecycle does not call it and callers in the inspected tests treat lifecycle valid as sufficient.",
+        "This override maintains documented current-source freshness only; inherited decision/severity/OPEN state is retained without a new reproduction or remediation outcome."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-freshness.json",
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh.json",
+        "docs/security/evidence/swarm100-round3-20261028/13-pure-checks.json",
+        "docs/security/evidence/swarm100-round3-20261028/13-pure-checks.py",
+        "docs/security/evidence/swarm100-round3-20261028/13-source-checks.json"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/13.json",
+      "runtime_scope": "Static-only concurrent source/history freshness review; no reproduction, regulatory action, certificate signing, network, ledger or protected effect executed.",
+      "resolution_type": "OUTSIDE_SCOPE_CONCURRENT_SOURCE_REFRESH_NO_CLOSURE",
+      "source_refresh": {
+        "pending_separate_readjudication": true,
+        "outside_lot12_production_scope": true,
+        "old_source_sha256": "d7747b65250fa8292a301082981ccd89830c53f815dd410dd87bc120becb57e1",
+        "old_source_git_revision": "2aef1202a019daa36b3985f8e957e846c2400671",
+        "previous_runtime_executed": true,
+        "original_decision_and_state_retained": true,
+        "previous_rationale": "The unchanged method body returns ACTIVE/valid=True for an unsigned future-dated synthetic certificate. The isolated AST check also confirmed revoked and expired controls reject, demonstrating that those guards work but signature authentication is absent. The separate signature verifier is not called here. Reproduction covers this method only, not issuer trust, signing hardware or an external relying party.",
+        "known_preexisting_before_lot12": false,
+        "chronology": "Uncommitted concurrent work appeared while final metadata review was running; unrelated to the Lote12 production patches.",
+        "latest_concurrent_edit": "Module documentation now explicitly distinguishes technical reports from legal conformity; reviewed lifecycle/signature/packet fragments remain byte-identical and keep their verified ranges."
+      }
+    },
+    {
+      "candidate_id": "SW100-C0063",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py",
+      "current_source_sha256": "817ea23c237293bc27e51a14cdb4ba97d9c5462089d7067621b5706251052ece",
+      "rationale": "OUTSIDE_SCOPE_FRESHNESS_PENDING_READJUDICATION: concurrent technical-report/CLI work outside the29Lote12 sources shifts but does not change the recorded proof-plus-caller-decision-data packet method. Its checked fragment is byte-identical to the reviewed Git HEAD source. The secondary ledger method still builds an inclusion proof from entry_hash leaves and has a refreshed current function range after earlier connection-lifetime edits. No packet/signing/ledger runtime was executed. Preserve CONFIRMED_STATIC/P2/OPEN pending separate adjudication; no current regulatory-approval bypass or new remediation is asserted.",
+      "source_checks": [
+        {
+          "path": "01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py",
+          "start_line": 478,
+          "end_line": 510,
+          "observation": "Proof and caller decision data are collected independently then signed."
+        },
+        {
+          "path": "01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py",
+          "start_line": 620,
+          "end_line": 634,
+          "observation": "Current get_event_proof reads entry_hash leaves and creates an inclusion proof; no caller decision_data is bound by that proof."
+        },
+        {
+          "path": "tests/test_compliance_exporter.py",
+          "start_line": 138,
+          "end_line": 159,
+          "observation": "Test stores action_id events but packet uses unrelated APPROVE_LOAN decision data."
+        }
+      ],
+      "guards": [
+        "Ledger integrity_verified is required and get_event_proof bounds-checks seq.",
+        "Redaction protects selected fields and the signature binds the packet contents, but neither proves that its decision_data was the logged event.",
+        "This override maintains documented current-source freshness only; inherited decision/severity/OPEN state is retained without a new reproduction or remediation outcome."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-freshness.json",
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh.json",
+        "docs/security/evidence/swarm100-round3-20261028/13-source-checks.json"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/13.json",
+      "runtime_scope": "Static-only concurrent source/history freshness review; no reproduction, regulatory action, certificate signing, network, ledger or protected effect executed.",
+      "resolution_type": "OUTSIDE_SCOPE_CONCURRENT_SOURCE_REFRESH_NO_CLOSURE",
+      "source_refresh": {
+        "pending_separate_readjudication": true,
+        "outside_lot12_production_scope": true,
+        "old_source_sha256": "d7747b65250fa8292a301082981ccd89830c53f815dd410dd87bc120becb57e1",
+        "old_source_git_revision": "2aef1202a019daa36b3985f8e957e846c2400671",
+        "previous_runtime_executed": false,
+        "original_decision_and_state_retained": true,
+        "previous_rationale": "The packet attaches caller-supplied redacted decision_data to an independently obtained event proof and signs the combined object, without fetching or recomputing the logged event from that data. get_event_proof proves an entry-hash leaf, not the decision data. The existing test deliberately supplies loan data against action_id/risk_score events. Static confirmation of missing correspondence; signer, hardware quote and ledger were not executed.",
+        "known_preexisting_before_lot12": false,
+        "chronology": "Uncommitted concurrent work appeared while final metadata review was running; unrelated to the Lote12 production patches.",
+        "latest_concurrent_edit": "Module documentation now explicitly distinguishes technical reports from legal conformity; reviewed lifecycle/signature/packet fragments remain byte-identical and keep their verified ranges."
+      }
+    },
+    {
+      "candidate_id": "SW100-C0425",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "examples/navier_stokes_larsa_oracle.rs",
+      "current_source_sha256": "4098a7b3b2c30bd5e09c614a31048e8acaaec9760b341cef87e9e3274ec2c385",
+      "rationale": "OUTSIDE_SCOPE_CONCURRENT_SOURCE_REFRESH_PENDING_READJUDICATION: The old missing/failed-oracle numeric fallback is not asserted in current code. The inspected evaluation branch now reports Beta failure for unavailable/rejected oracle results and chooses a failure verdict unless an accepted oracle status matches the local condition. This does not certify the oracle contract, other demonstration modes, physics claims or a deployed runtime. Concurrent work rewrote this example; preserve CONFIRMED_STATIC/P2/OPEN pending separate adjudication.",
+      "source_checks": [
+        {
+          "path": "examples/navier_stokes_larsa_oracle.rs",
+          "start_line": 122,
+          "end_line": 145,
+          "observation": "Current oracle result determines Beta state and verdict; missing/launch-error results follow failure handling instead of the historical numeric-approval fallback."
+        }
+      ],
+      "guards": [
+        "Old observations and guards are preserved as historical source_refresh data; no claim that the old trigger persists in the rewritten code.",
+        "This is static metadata freshness only. Keep the inherited P2/OPEN state pending separate adjudication, without another unique finding or closure."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh.json",
+        "docs/security/evidence/swarm100-round3-20261028/11-review-notes.md",
+        "docs/security/evidence/swarm100-round3-20261028/11-source-checks.json"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/11.json",
+      "runtime_scope": "Static-only concurrent example review; no Rust build, Lean checker, native execution, simulation or protected effect.",
+      "resolution_type": "OUTSIDE_SCOPE_CONCURRENT_SOURCE_REFRESH_NO_CLOSURE",
+      "source_refresh": {
+        "pending_separate_readjudication": true,
+        "outside_lot12_production_scope": true,
+        "old_source_sha256": "087958c0a61b879fd6466be1dcb2a7e7bed7b5f5a424b296abd2ed70b555bf35",
+        "old_source_git_revision": "HEAD",
+        "known_preexisting_before_lot12": false,
+        "previous_runtime_executed": false,
+        "previous_rationale": "Both a missing oracle and a failed process launch can restore Beta using the numeric BKM threshold and gamma flag. That path can reach SingularityCandidateIsolated and the final native Lean verification wording, without formal oracle execution. A launched oracle returning a non-10 status correctly fails, which does not protect the missing/launch-error paths. Confirmed only for this example; no native run or production authorization bypass is asserted.",
+        "previous_guards": [
+          "Existing oracle exit code must be 10 to certify.",
+          "Fallback paths explicitly replace missing certification with a numeric predicate."
+        ],
+        "original_decision_and_state_retained": true,
+        "chronology": "Unrelated Rust example rewrite observed during repeated final reconciliation attempts; no Lote12 product edit."
+      }
+    },
+    {
+      "candidate_id": "SW100-C0458",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "examples/poc_bifurcation_5_lifetimes.rs",
+      "current_source_sha256": "99b6c3846236dedecbae049fddd2dd7320af40659bc44ae135bba4d0d7e40264",
+      "rationale": "OUTSIDE_SCOPE_CONCURRENT_SOURCE_REFRESH_PENDING_READJUDICATION: The old owner-state-reset trigger is not asserted in current code. Allocation now checks register occupancy in both owner states and reference_map before inserting state; this is an inspected change to the example model. No Rust checker scenario or memory-safety proof was executed in this metadata refresh. Preserve CONFIRMED_STATIC/P2/OPEN pending separate adjudication rather than inferring a closure from unrelated work.",
+      "source_checks": [
+        {
+          "path": "examples/poc_bifurcation_5_lifetimes.rs",
+          "start_line": 65,
+          "end_line": 73,
+          "observation": "Current Alloc calls require_unused before inserting owner state; old unconditional overwrite observation is superseded."
+        },
+        {
+          "path": "examples/poc_bifurcation_5_lifetimes.rs",
+          "start_line": 183,
+          "end_line": 189,
+          "observation": "Current require_unused rejects a register already present in states or reference_map."
+        }
+      ],
+      "guards": [
+        "Old observations and guards are preserved as historical source_refresh data; no claim that the old trigger persists in the rewritten code.",
+        "This is static metadata freshness only. Keep the inherited P2/OPEN state pending separate adjudication, without another unique finding or closure."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh.json",
+        "docs/security/evidence/swarm100-round3-20261028/14-review-evidence.json"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/14.json",
+      "runtime_scope": "Static-only concurrent example review; no Rust build, Lean checker, native execution, simulation or protected effect.",
+      "resolution_type": "OUTSIDE_SCOPE_CONCURRENT_SOURCE_REFRESH_NO_CLOSURE",
+      "source_refresh": {
+        "pending_separate_readjudication": true,
+        "outside_lot12_production_scope": true,
+        "old_source_sha256": "7ec891cf54d31fe46333372ba4ac60b22bd080b277782fdc71b3d415f04c6269",
+        "old_source_git_revision": "HEAD",
+        "known_preexisting_before_lot12": false,
+        "previous_runtime_executed": false,
+        "previous_rationale": "In this example checker, Alloc unconditionally replaces any owner state with Unborrowed without checking or clearing reference_map. After Alloc R0; BorrowMut R1<-R0; Alloc R0; Free R0, Free sees Unborrowed and returns Ok while reference_map retains R1->R0. This invalidates the example's modeled borrow invariant; it is not evidence of a Rust memory-safety exploit in production. No native example ran.",
+        "previous_guards": [
+          "Free rejects a live borrow only if the states entry still records it.",
+          "EndBorrow clears reference_map when explicitly called, but reallocation does not call it."
+        ],
+        "original_decision_and_state_retained": true,
+        "chronology": "Unrelated Rust example rewrite observed during repeated final reconciliation attempts; no Lote12 product edit."
+      }
+    },
+    {
+      "candidate_id": "SW100-C0513",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "examples/poc_lean4_emitter.rs",
+      "current_source_sha256": "5a4fa9bc39c3d4cc8a17aa6d97f3f10a1dd5fc21e6769b6816fc1d8878b1fcb8",
+      "rationale": "OUTSIDE_SCOPE_CONCURRENT_SOURCE_REFRESH_PENDING_READJUDICATION: The old inline Lean predicate and independent-zero-offset chunk construction are not asserted as current behavior. The rewritten example validates even chunk boundaries and sequence range, emits offset-numbered synthetic events, includes a separate ExampleSeqlockTrace model and passes the chunk offset to isValidTrace. That imported formal model, end-to-end runtime correspondence and new generated proofs were not checked here. Preserve CONFIRMED_STATIC/P2/OPEN pending separate formal adjudication; no new proof claim or Lote12 closure.",
+      "source_checks": [
+        {
+          "path": "examples/poc_lean4_emitter.rs",
+          "start_line": 67,
+          "end_line": 110,
+          "observation": "Current emitter validates positive even chunk boundaries, uses sequence offsets and includes a separate Lean model; the previous inline predicate is no longer present here."
+        }
+      ],
+      "guards": [
+        "Old observations and guards are preserved as historical source_refresh data; no claim that the old trigger persists in the rewritten code.",
+        "This is static metadata freshness only. Keep the inherited P2/OPEN state pending separate adjudication, without another unique finding or closure."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh.json",
+        "docs/security/evidence/swarm100-round3-20261028/16-source-evidence.json"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/16.json",
+      "runtime_scope": "Static-only concurrent example review; no Rust build, Lean checker, native execution, simulation or protected effect.",
+      "resolution_type": "OUTSIDE_SCOPE_CONCURRENT_SOURCE_REFRESH_NO_CLOSURE",
+      "source_refresh": {
+        "pending_separate_readjudication": true,
+        "outside_lot12_production_scope": true,
+        "old_source_sha256": "ff76d77179f17f5dfec8846dd5ff800ad6113fb21a65fb82c09cc25ac2be85d3",
+        "old_source_git_revision": "HEAD",
+        "known_preexisting_before_lot12": false,
+        "previous_runtime_executed": false,
+        "previous_rationale": "The emitted validateTransition explicitly ignores currentSeq and enforces only write-state/parity constraints. An odd WriteBegin at sequence 9 followed by even WriteEnd at sequence 2 satisfies those predicates despite decreasing sequence. Each chunk theorem starts at 0,false and isValidTrace returns true on an empty suffix regardless of pending write state, so no cross-chunk state contract is established. The Rust generator supplies its own synthetic pattern rather than accepting arbitrary runtime traces; the confirmed issue is the stronger end-to-end causality claim made for this limited example verifier.",
+        "previous_guards": [
+          "Lean process exit status is checked.",
+          "The predicate rejects nested writes and incorrect parity, but not decreasing sequence or chunk discontinuity.",
+          "No Lean compiler or native emitter was run; counterexample is a direct predicate analysis."
+        ],
+        "original_decision_and_state_retained": true,
+        "chronology": "Unrelated Rust example rewrite observed during repeated final reconciliation attempts; no Lote12 product edit."
+      }
+    },
+    {
+      "candidate_id": "SW100-C0516",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "rationale": "SOURCE_WITHDRAWAL_PENDING_READJUDICATION: the product source path is absent after unrelated removal. The inherited CONFIRMED_STATIC/P2/OPEN decision is retained without claiming that the historical defect is active or fixed. Current checks refer only to the exact audited Git archive; a separate last-present archive preserves the intermediate rewritten version. Source disappearance alone does not establish complete retirement of copies, consumers, packaged artifacts or deployment. No source was restored and no Rust runtime/build or new counterexample was executed.",
+      "guards": [
+        "Absence is explicitly pending withdrawal review, never a FIXED disposition.",
+        "Only exact local Git archives are checked; no absent product file is treated as current executable code."
+      ],
+      "source_checks": [
+        {
+          "path": "docs/security/evidence/swarm100-lot12-20261030/withdrawn-source-archives/poc_navier_stokes_hunter.af86782a.rs.txt",
+          "start_line": 210,
+          "end_line": 234,
+          "observation": "Archived historical source observation only; product path is absent, so no current runtime claim: Waiting branch skips progress and tick guard."
+        },
+        {
+          "path": "docs/security/evidence/swarm100-lot12-20261030/withdrawn-source-archives/poc_navier_stokes_hunter.af86782a.rs.txt",
+          "start_line": 308,
+          "end_line": 325,
+          "observation": "Archived historical source observation only; product path is absent, so no current runtime claim: AWAIT is reachable and EXECUTE is the wake-up path."
+        },
+        {
+          "path": "docs/security/evidence/swarm100-lot12-20261030/withdrawn-source-archives/poc_navier_stokes_hunter.af86782a.rs.txt",
+          "start_line": 350,
+          "end_line": 357,
+          "observation": "Archived historical source observation only; product path is absent, so no current runtime claim: Failsafe is below the unconditional continue."
+        }
+      ],
+      "runtime_executed": false,
+      "path": "examples/poc_navier_stokes_hunter.rs",
+      "current_source_sha256": null,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh.json",
+        "docs/security/evidence/swarm100-lot12-20261030/withdrawn-source-archives/poc_navier_stokes_hunter.af86782a.rs.txt",
+        "docs/security/evidence/swarm100-lot12-20261030/withdrawn-source-archives/poc_navier_stokes_hunter.b5d44467.last-present.rs.txt",
+        "docs/security/evidence/swarm100-lot12-20261030/withdrawn-source-observations.json",
+        "docs/security/evidence/swarm100-round3-20261028/05-source-checks.json"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/05.json",
+      "source_state": "REMOVED_PENDING_READJUDICATION",
+      "source_withdrawal": {
+        "path": "examples/poc_navier_stokes_hunter.rs",
+        "git_revision": "3d8b4840c6ce0c5d7dab2d760cbb4ac5b0d71b8b",
+        "git_blob_sha256": "af86782ac5088f92ee292626218e369d586edc159f31db3e70b20278706dd8ac",
+        "archive_path": "docs/security/evidence/swarm100-lot12-20261030/withdrawn-source-archives/poc_navier_stokes_hunter.af86782a.rs.txt"
+      },
+      "runtime_scope": "Absence, local Git blob and archived historical source inspection only; no product runtime.",
+      "resolution_type": "SOURCE_WITHDRAWAL_PENDING_READJUDICATION_NO_CLOSURE",
+      "source_refresh": {
+        "pending_separate_readjudication": true,
+        "outside_lot12_production_scope": true,
+        "previous_registry_source_sha256": "af86782ac5088f92ee292626218e369d586edc159f31db3e70b20278706dd8ac",
+        "previous_prepared_override": {
+          "candidate_id": "SW100-C0516",
+          "decision": "CONFIRMED_STATIC",
+          "severity": "P2",
+          "remediation_state": "OPEN",
+          "rationale": "OUTSIDE_SCOPE_CONCURRENT_SOURCE_REFRESH_PENDING_READJUDICATION: The prior waiting-only budget bypass is not asserted in current code: a dispatch budget check and clock increment now precede Waiting/WaitingTimer handling. Concurrent commit94837ce1 rewrote this example outside the29Lote12 sources. No native example or new termination reproduction was run here. Preserve inherited CONFIRMED_STATIC/P2/OPEN only pending separate re-adjudication; do not infer another Lote12 closure.",
+          "guards": [
+            "Historical observations/guards are preserved in source_refresh; the old failure is not asserted against these rewritten branches.",
+            "This metadata-only review adds no runtime proof and no closure. Separate adjudication remains required."
+          ],
+          "source_checks": [
+            {
+              "path": "examples/poc_navier_stokes_hunter.rs",
+              "start_line": 228,
+              "end_line": 255,
+              "observation": "Current scheduler bounds every dispatch and increments the logical clock before waiting/continue paths; the old budget-bypass observation is no longer asserted."
+            }
+          ],
+          "runtime_executed": false,
+          "path": "examples/poc_navier_stokes_hunter.rs",
+          "current_source_sha256": "b5d4446757baf4aede27bf92497b2071c164cd0a2e470968ccd50a83f79d9bf9",
+          "evidence_paths": [
+            "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh-validation.json",
+            "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh.json",
+            "docs/security/evidence/swarm100-round3-20261028/05-source-checks.json"
+          ],
+          "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/05.json",
+          "runtime_scope": "Static-only concurrent Rust example review; no build/native execution, operator data or protected effect.",
+          "resolution_type": "OUTSIDE_SCOPE_CONCURRENT_SOURCE_REFRESH_NO_CLOSURE",
+          "source_refresh": {
+            "pending_separate_readjudication": true,
+            "outside_lot12_production_scope": true,
+            "old_source_sha256": "af86782ac5088f92ee292626218e369d586edc159f31db3e70b20278706dd8ac",
+            "old_source_git_revision": "94837ce1dd366f55a479a210c0d91e7fa959038c^",
+            "outside_scope_change_commit": "94837ce1dd366f55a479a210c0d91e7fa959038c",
+            "known_preexisting_before_lot12": false,
+            "previous_runtime_executed": false,
+            "previous_rationale": "An AWAIT instruction puts a coroutine in Waiting; a subsequent Waiting turn unconditionally requeues it and continues before either clock increment or max_ticks enforcement. If no coroutine can EXECUTE the symbol, the queue remains nonempty forever. This concerns the example interpreter/harness, not the production scheduler; the native example was not run.",
+            "previous_guards": [
+              "EXECUTE wakes matching waiters only while some ready coroutine reaches that instruction.",
+              "max_ticks is checked after ready-instruction execution and therefore cannot bound the waiting-only loop."
+            ],
+            "original_decision_and_state_retained": true,
+            "chronology": "Unrelated example rewrite appeared and was committed while the final canonical reconciler was running."
+          }
+        },
+        "previous_rationale": "An AWAIT instruction puts a coroutine in Waiting; a subsequent Waiting turn unconditionally requeues it and continues before either clock increment or max_ticks enforcement. If no coroutine can EXECUTE the symbol, the queue remains nonempty forever. This concerns the example interpreter/harness, not the production scheduler; the native example was not run.",
+        "previous_guards": [
+          "EXECUTE wakes matching waiters only while some ready coroutine reaches that instruction.",
+          "max_ticks is checked after ready-instruction execution and therefore cannot bound the waiting-only loop."
+        ],
+        "original_decision_and_state_retained": true,
+        "last_present_archive": {
+          "path": "examples/poc_navier_stokes_hunter.rs",
+          "git_revision": "fdef72d277426a61246c5fb8bb1404d4efe7d2a3",
+          "git_blob_sha256": "b5d4446757baf4aede27bf92497b2071c164cd0a2e470968ccd50a83f79d9bf9",
+          "archive_path": "docs/security/evidence/swarm100-lot12-20261030/withdrawn-source-archives/poc_navier_stokes_hunter.b5d44467.last-present.rs.txt"
+        },
+        "chronology": "Unrelated source removal was observed on resumption; Git archives preserve audited and last-present versions."
+      }
+    },
+    {
+      "candidate_id": "SW100-C0517",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "rationale": "SOURCE_WITHDRAWAL_PENDING_READJUDICATION: the product source path is absent after unrelated removal. The inherited CONFIRMED_STATIC/P2/OPEN decision is retained without claiming that the historical defect is active or fixed. Current checks refer only to the exact audited Git archive; a separate last-present archive preserves the intermediate rewritten version. Source disappearance alone does not establish complete retirement of copies, consumers, packaged artifacts or deployment. No source was restored and no Rust runtime/build or new counterexample was executed.",
+      "guards": [
+        "Absence is explicitly pending withdrawal review, never a FIXED disposition.",
+        "Only exact local Git archives are checked; no absent product file is treated as current executable code."
+      ],
+      "source_checks": [
+        {
+          "path": "docs/security/evidence/swarm100-lot12-20261030/withdrawn-source-archives/poc_navier_stokes_hunter.af86782a.rs.txt",
+          "start_line": 360,
+          "end_line": 365,
+          "observation": "Archived historical source observation only; product path is absent, so no current runtime claim: ExecutionResult hardcodes the peak."
+        },
+        {
+          "path": "docs/security/evidence/swarm100-lot12-20261030/withdrawn-source-archives/poc_navier_stokes_hunter.af86782a.rs.txt",
+          "start_line": 373,
+          "end_line": 400,
+          "observation": "Archived historical source observation only; product path is absent, so no current runtime claim: Consumer prints and asserts the constant while independently testing other fields."
+        }
+      ],
+      "runtime_executed": false,
+      "path": "examples/poc_navier_stokes_hunter.rs",
+      "current_source_sha256": null,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh.json",
+        "docs/security/evidence/swarm100-lot12-20261030/withdrawn-source-archives/poc_navier_stokes_hunter.af86782a.rs.txt",
+        "docs/security/evidence/swarm100-lot12-20261030/withdrawn-source-archives/poc_navier_stokes_hunter.b5d44467.last-present.rs.txt",
+        "docs/security/evidence/swarm100-lot12-20261030/withdrawn-source-observations.json",
+        "docs/security/evidence/swarm100-round3-20261028/05-source-checks.json"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/05.json",
+      "source_state": "REMOVED_PENDING_READJUDICATION",
+      "source_withdrawal": {
+        "path": "examples/poc_navier_stokes_hunter.rs",
+        "git_revision": "3d8b4840c6ce0c5d7dab2d760cbb4ac5b0d71b8b",
+        "git_blob_sha256": "af86782ac5088f92ee292626218e369d586edc159f31db3e70b20278706dd8ac",
+        "archive_path": "docs/security/evidence/swarm100-lot12-20261030/withdrawn-source-archives/poc_navier_stokes_hunter.af86782a.rs.txt"
+      },
+      "runtime_scope": "Absence, local Git blob and archived historical source inspection only; no product runtime.",
+      "resolution_type": "SOURCE_WITHDRAWAL_PENDING_READJUDICATION_NO_CLOSURE",
+      "source_refresh": {
+        "pending_separate_readjudication": true,
+        "outside_lot12_production_scope": true,
+        "previous_registry_source_sha256": "af86782ac5088f92ee292626218e369d586edc159f31db3e70b20278706dd8ac",
+        "previous_prepared_override": {
+          "candidate_id": "SW100-C0517",
+          "decision": "CONFIRMED_STATIC",
+          "severity": "P2",
+          "remediation_state": "OPEN",
+          "rationale": "OUTSIDE_SCOPE_CONCURRENT_SOURCE_REFRESH_PENDING_READJUDICATION: The prior fabricated-peak observation is not asserted in current code: the example now accumulates an Option maximum of R10 register values, returns that observation and labels it a symbolic counter. Concurrent commit94837ce1 outside Lote12 replaced the old fixed vorticity_peak field. No native benchmark, physics simulation or new counterexample was executed here. Preserve inherited CONFIRMED_STATIC/P2/OPEN pending separate re-adjudication, without another Lote12 closure.",
+          "guards": [
+            "Historical observations/guards are preserved in source_refresh; the old failure is not asserted against these rewritten branches.",
+            "This metadata-only review adds no runtime proof and no closure. Separate adjudication remains required."
+          ],
+          "source_checks": [
+            {
+              "path": "examples/poc_navier_stokes_hunter.rs",
+              "start_line": 421,
+              "end_line": 438,
+              "observation": "Current result derives an optional maximum from observed R10 values instead of returning the historical literal59."
+            },
+            {
+              "path": "examples/poc_navier_stokes_hunter.rs",
+              "start_line": 441,
+              "end_line": 481,
+              "observation": "Current main reports a symbolic counter and compares the returned observation to the expected fixture threshold; no physical vorticity proof is claimed."
+            }
+          ],
+          "runtime_executed": false,
+          "path": "examples/poc_navier_stokes_hunter.rs",
+          "current_source_sha256": "b5d4446757baf4aede27bf92497b2071c164cd0a2e470968ccd50a83f79d9bf9",
+          "evidence_paths": [
+            "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh-validation.json",
+            "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh.json",
+            "docs/security/evidence/swarm100-round3-20261028/05-source-checks.json"
+          ],
+          "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/05.json",
+          "runtime_scope": "Static-only concurrent Rust example review; no build/native execution, operator data or protected effect.",
+          "resolution_type": "OUTSIDE_SCOPE_CONCURRENT_SOURCE_REFRESH_NO_CLOSURE",
+          "source_refresh": {
+            "pending_separate_readjudication": true,
+            "outside_lot12_production_scope": true,
+            "old_source_sha256": "af86782ac5088f92ee292626218e369d586edc159f31db3e70b20278706dd8ac",
+            "old_source_git_revision": "94837ce1dd366f55a479a210c0d91e7fa959038c^",
+            "outside_scope_change_commit": "94837ce1dd366f55a479a210c0d91e7fa959038c",
+            "known_preexisting_before_lot12": false,
+            "previous_runtime_executed": false,
+            "previous_rationale": "Every returning engine execution reports vorticity_peak=59, and main asserts that this reported constant equals 59. Consequently the vorticity assertion does not test a calculated peak. Other blowup and ledger assertions may still exercise their own behavior; the finding is restricted to the vorticity evidence and success wording.",
+            "previous_guards": [
+              "main also checks blowup state and repeated ledger hashes; neither derives or validates vorticity_peak."
+            ],
+            "original_decision_and_state_retained": true,
+            "chronology": "Unrelated example rewrite appeared and was committed while the final canonical reconciler was running."
+          }
+        },
+        "previous_rationale": "Every returning engine execution reports vorticity_peak=59, and main asserts that this reported constant equals 59. Consequently the vorticity assertion does not test a calculated peak. Other blowup and ledger assertions may still exercise their own behavior; the finding is restricted to the vorticity evidence and success wording.",
+        "previous_guards": [
+          "main also checks blowup state and repeated ledger hashes; neither derives or validates vorticity_peak."
+        ],
+        "original_decision_and_state_retained": true,
+        "last_present_archive": {
+          "path": "examples/poc_navier_stokes_hunter.rs",
+          "git_revision": "fdef72d277426a61246c5fb8bb1404d4efe7d2a3",
+          "git_blob_sha256": "b5d4446757baf4aede27bf92497b2071c164cd0a2e470968ccd50a83f79d9bf9",
+          "archive_path": "docs/security/evidence/swarm100-lot12-20261030/withdrawn-source-archives/poc_navier_stokes_hunter.b5d44467.last-present.rs.txt"
+        },
+        "chronology": "Unrelated source removal was observed on resumption; Git archives preserve audited and last-present versions."
+      }
+    },
+    {
+      "candidate_id": "SW100-C0445",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "00_ABZU_KERNEL/crates/babylon60-runtime/src/main.rs",
+      "current_source_sha256": "af8be5002dbf1ea7fd3bbfac41e235624303c0e28ac3dec58648e731ce7402f8",
+      "rationale": "SECONDARY_SOURCE_WITHDRAWAL_PENDING_READJUDICATION: the primary interpreter source remains byte-identical to its reviewed version and retains its historical OPEN/P2/CONFIRMED_STATIC decision. The supporting tools/examples/navier_stokes_hunter.b60 file is now absent due to unrelated removal. Its old example-based observation is represented only by an exact pinned Git archive; no current example reachability, reproduction, fix or complete retirement is inferred. The primary opcode-dispatch issue still requires separate adjudication in its own scope.",
+      "source_checks": [
+        {
+          "path": "00_ABZU_KERNEL/crates/babylon60-runtime/src/main.rs",
+          "start_line": 299,
+          "end_line": 318,
+          "observation": "Dispatch enters opcode match after tokenization."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/babylon60-runtime/src/main.rs",
+          "start_line": 396,
+          "end_line": 430,
+          "observation": "Remaining supported opcodes followed by silent fallback and normal continuation."
+        },
+        {
+          "path": "00_ABZU_KERNEL/crates/babylon60-runtime/src/main.rs",
+          "start_line": 437,
+          "end_line": 475,
+          "observation": "CLI reads script lines directly into Machine and calls run."
+        },
+        {
+          "path": "docs/security/evidence/swarm100-lot12-20261030/withdrawn-source-archives/navier_stokes_hunter.2546fef1.b60.txt",
+          "start_line": 28,
+          "end_line": 49,
+          "observation": "Historical supporting example in exact Git archive, not a current executable input: Example requires DAH, LAL and NU operations."
+        }
+      ],
+      "guards": [
+        "Empty lines/comments/labels are explicitly skipped, but unknown instructions are not rejected.",
+        "Finding is scoped to this interpreter and example, not all b60 implementations."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh.json",
+        "docs/security/evidence/swarm100-lot12-20261030/withdrawn-source-archives/navier_stokes_hunter.2546fef1.b60.txt",
+        "docs/security/evidence/swarm100-lot12-20261030/withdrawn-source-observations.json",
+        "docs/security/evidence/swarm100-round3-20261028/reviews/00-notes.json"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/00.json",
+      "source_reference_withdrawals": [
+        {
+          "path": "tools/examples/navier_stokes_hunter.b60",
+          "git_revision": "fdef72d277426a61246c5fb8bb1404d4efe7d2a3",
+          "git_blob_sha256": "2546fef1626b071581f37f8270d6a8496c4760913baf8709b0c0da5c0b861fbf",
+          "archive_path": "docs/security/evidence/swarm100-lot12-20261030/withdrawn-source-archives/navier_stokes_hunter.2546fef1.b60.txt"
+        }
+      ],
+      "runtime_scope": "Unchanged primary source and historical supporting-example archive inspection only; no DSL/Rust runtime.",
+      "resolution_type": "SECONDARY_SOURCE_WITHDRAWAL_PENDING_READJUDICATION_NO_CLOSURE",
+      "source_refresh": {
+        "pending_separate_readjudication": true,
+        "outside_lot12_production_scope": true,
+        "previous_rationale": "The opcode match falls through to an empty arm, then records the line and advances PC/tick. Direct CLI input is not prevalidated. DAH, LAL and NU in the supplied example consequently do nothing, so its arithmetic/conditional threshold behavior is absent in this interpreter.",
+        "original_decision_and_state_retained": true,
+        "chronology": "Supporting example removed outside Lote12; primary source not edited."
+      }
+    },
+    {
+      "candidate_id": "SW100-C0174",
+      "decision": "REPRODUCED",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "tools/skill_library/workspace/c5-anti-slop-ui/scripts/audit_ui_slop.py",
+      "current_source_sha256": "b40369b080b2f7a01bd6b8b5a1d0dc1cb23207048621b9c573227d62b7892334",
+      "rationale": "OUTSIDE_SCOPE_CONCURRENT_SOURCE_REFRESH_PENDING_READJUDICATION: The recorded full-ancestor substring skip and blanket compliance wording are not asserted as current behavior. The rewritten lexical auditor excludes exact child directory names, counts collected files and labels conformity unverified; no fresh synthetic HTML reproduction or UI/WCAG assessment was run. Preserve inherited REPRODUCED/P2/OPEN pending separate re-adjudication, without treating this unrelated rewrite as another Lote12 closure.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/workspace/c5-anti-slop-ui/scripts/audit_ui_slop.py",
+          "start_line": 94,
+          "end_line": 108,
+          "observation": "Current file collection excludes exact directory names during os.walk rather than matching full ancestor-path substrings."
+        },
+        {
+          "path": "tools/skill_library/workspace/c5-anti-slop-ui/scripts/audit_ui_slop.py",
+          "start_line": 122,
+          "end_line": 150,
+          "observation": "Current CLI reports file coverage and lexical-only unverified scope; a tree with no supported files exits2."
+        }
+      ],
+      "guards": [
+        "Historical rationale and guards are preserved separately; only the explicit current source observations above are maintained.",
+        "No fix, complete retirement, new reproduction or additional selected outcome is inferred from outside-scope edits."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh.json",
+        "docs/security/evidence/swarm100-round3-20261028/17-pure-checks.json",
+        "docs/security/evidence/swarm100-round3-20261028/17-pure-checks.py",
+        "docs/security/evidence/swarm100-round3-20261028/17-source-evidence.json"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/17.json",
+      "runtime_scope": "Static source/document inspection only; no build, native execution, UI/browser, shell payload or protected effect.",
+      "resolution_type": "OUTSIDE_SCOPE_CONCURRENT_SOURCE_REFRESH_NO_CLOSURE",
+      "source_refresh": {
+        "pending_separate_readjudication": true,
+        "outside_lot12_production_scope": true,
+        "old_source_sha256": "f5686da74c66d1879ffbfb522fb7b6111d53ff952f6cbbd228127154dbe3518f",
+        "old_source_git_revision": "dc37db58bf3760a19cdb637fd1cef75375a230d3",
+        "historical_blob_hash_verified": true,
+        "previous_runtime_executed": true,
+        "previous_rationale": "Direct inspection of synthetic HTML text-[17px] reports C5-UI-002, but directory audit of the same file under build-review/src returns no findings. Ignore logic searches substrings of full ancestor path. main treats empty findings as compliant without scanned-file coverage. Isolated pure source execution reproduces the missed lint coverage.",
+        "previous_guards": [
+          "Direct file audit bypasses directory exclusion and catches violation.",
+          "Intended build-output exclusions overmatch arbitrary ancestor components."
+        ],
+        "original_decision_and_state_retained": true,
+        "chronology": "Additional unrelated source/document changes observed on resumption after the operator paused concurrent edits."
+      }
+    },
+    {
+      "candidate_id": "SW100-C0267",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "docs/03_guides/tutorial_hello_causal.md",
+      "current_source_sha256": "4ae1086d703bfbb7e64a62cf32b0105b8ea68a53c2a671d62e5ff7c10bbf0a3e",
+      "rationale": "OUTSIDE_SCOPE_CONCURRENT_SOURCE_REFRESH_PENDING_READJUDICATION: The surrounding tutorial changed outside Lote12, but the inspected current paragraph still calls absence of CRITICAL HALT positive proof that every invariant held, without a completeness/trusted-monitoring premise. This remains an instructional evidence-quality observation, not a current runtime or medical/financial claim. Preserve CONFIRMED_STATIC/P2/OPEN; no runtime or fresh reproduction was executed.",
+      "source_checks": [
+        {
+          "path": "docs/03_guides/tutorial_hello_causal.md",
+          "start_line": 190,
+          "end_line": 200,
+          "observation": "Current tutorial still states absence of CRITICAL HALT proves all invariants; surrounding text supplies no exhaustive trusted-monitoring premise."
+        }
+      ],
+      "guards": [
+        "Historical rationale and guards are preserved separately; only the explicit current source observations above are maintained.",
+        "No fix, complete retirement, new reproduction or additional selected outcome is inferred from outside-scope edits."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh.json"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/01.json",
+      "runtime_scope": "Static source/document inspection only; no build, native execution, UI/browser, shell payload or protected effect.",
+      "resolution_type": "OUTSIDE_SCOPE_CONCURRENT_SOURCE_REFRESH_NO_CLOSURE",
+      "source_refresh": {
+        "pending_separate_readjudication": true,
+        "outside_lot12_production_scope": true,
+        "old_source_sha256": "04263be666811331b3db3d8d11acf3b53151faba79078b3b2c9bdd707e35d250",
+        "old_source_git_revision": "dc37db58bf3760a19cdb637fd1cef75375a230d3",
+        "historical_blob_hash_verified": true,
+        "previous_runtime_executed": false,
+        "previous_rationale": "The tutorial explicitly claims absence of CRITICAL HALT is positive proof that every invariant held. Its surrounding example gives only a particular overflow log and says logs can be purged; it provides no complete/trusted monitoring premise. An incomplete or missing log therefore cannot support the advertised universal conclusion. Current document still contains the claim; this is an instructional evidence-quality defect, not a tested runtime failure.",
+        "previous_guards": [
+          "The overflow example describes one monitored failure, which does not cover all invariants or logging failures.",
+          "Canonical repository rules demand bounded evidence, but they do not alter this tutorial sentence."
+        ],
+        "original_decision_and_state_retained": true,
+        "chronology": "Additional unrelated source/document changes observed on resumption after the operator paused concurrent edits."
+      }
+    },
+    {
+      "candidate_id": "SW100-C0381",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "path": "src/babylon60.rs",
+      "current_source_sha256": "138e7aef605d3b6788c0413db4d87bcfb4bc4c260ec80f9d69cbb0bef5682db2",
+      "rationale": "OUTSIDE_SCOPE_CONCURRENT_SOURCE_REFRESH_PENDING_READJUDICATION: The interpreter was refactored outside Lote12, but its current quarantine exporter still replaces fixed manifest/graph paths with fs::write. The previous WORM wording was withdrawn; this review does not repeat that wording as current. Retention of an earlier export still lacks exclusive per-run publication in the inspected branch. Preserve CONFIRMED_STATIC/P1/OPEN without running a write/loss reproduction or expanding the Lote12 patch.",
+      "source_checks": [
+        {
+          "path": "src/babylon60.rs",
+          "start_line": 724,
+          "end_line": 747,
+          "observation": "Current run wrapper still selects the quarantine/normal local exporters."
+        },
+        {
+          "path": "src/babylon60.rs",
+          "start_line": 751,
+          "end_line": 780,
+          "observation": "Quarantine exporter still uses fixed paths and fs::write; the comment now explicitly disclaims WORM guarantees."
+        }
+      ],
+      "guards": [
+        "Historical rationale and guards are preserved separately; only the explicit current source observations above are maintained.",
+        "No fix, complete retirement, new reproduction or additional selected outcome is inferred from outside-scope edits."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh.json",
+        "docs/security/evidence/swarm100-round3-20261028/04-source-evidence.json"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/04.json",
+      "runtime_scope": "Static source/document inspection only; no build, native execution, UI/browser, shell payload or protected effect.",
+      "resolution_type": "OUTSIDE_SCOPE_CONCURRENT_SOURCE_REFRESH_NO_CLOSURE",
+      "source_refresh": {
+        "pending_separate_readjudication": true,
+        "outside_lot12_production_scope": true,
+        "old_source_sha256": "202a32f58401f3c7f44dc72a0fb701205c8b5b118ef342e8a1779cd469919125",
+        "old_source_git_revision": "dc37db58bf3760a19cdb637fd1cef75375a230d3",
+        "historical_blob_hash_verified": true,
+        "previous_runtime_executed": false,
+        "previous_rationale": "Confirmed for the registered babylon60-dsl exporter. Both quarantine files have constant names and fs::write replaces existing contents; neither existence rejection nor a per-run directory preserves prior bundles. A second quarantine in the same writable working directory overwrites the first. This is source-level evidence of retention failure, not an executed loss of operator data.",
+        "previous_guards": [
+          "create_dir_all and expect handle directory/write errors but do not implement write-once semantics.",
+          "Requires two exports into the same writable working directory; no filesystem/runtime execution performed."
+        ],
+        "original_decision_and_state_retained": true,
+        "chronology": "Additional unrelated source/document changes observed on resumption after the operator paused concurrent edits."
+      }
+    },
+    {
+      "candidate_id": "SW100-C0382",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "src/babylon60.rs",
+      "current_source_sha256": "138e7aef605d3b6788c0413db4d87bcfb4bc4c260ec80f9d69cbb0bef5682db2",
+      "rationale": "OUTSIDE_SCOPE_CONCURRENT_SOURCE_REFRESH_PENDING_READJUDICATION: The surrounding interpreter changed, but the inspected nonzero-remainder branch still stores (value*60)/divisor and increments scale once without requiring an exact remainder. The historical1/7 arithmetic observation remains scoped to that branch; no Rust/DSL execution was performed here. Preserve CONFIRMED_STATIC/P2/OPEN without another remediation outcome.",
+      "source_checks": [
+        {
+          "path": "src/babylon60.rs",
+          "start_line": 521,
+          "end_line": 552,
+          "observation": "Current BA.EXACT still computes one fractional digit using integer division and increments scale without checking the remaining remainder."
+        }
+      ],
+      "guards": [
+        "Historical rationale and guards are preserved separately; only the explicit current source observations above are maintained.",
+        "No fix, complete retirement, new reproduction or additional selected outcome is inferred from outside-scope edits."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh.json",
+        "docs/security/evidence/swarm100-round3-20261028/04-source-evidence.json"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/04.json",
+      "runtime_scope": "Static source/document inspection only; no build, native execution, UI/browser, shell payload or protected effect.",
+      "resolution_type": "OUTSIDE_SCOPE_CONCURRENT_SOURCE_REFRESH_NO_CLOSURE",
+      "source_refresh": {
+        "pending_separate_readjudication": true,
+        "outside_lot12_production_scope": true,
+        "old_source_sha256": "202a32f58401f3c7f44dc72a0fb701205c8b5b118ef342e8a1779cd469919125",
+        "old_source_git_revision": "dc37db58bf3760a19cdb637fd1cef75375a230d3",
+        "historical_blob_hash_verified": true,
+        "previous_runtime_executed": false,
+        "previous_rationale": "The nonzero-remainder BA.EXACT path multiplies by 60 only once and divides with integer truncation. For value 1 and divisor 7 it stores 8 at scale 1, representing 8/60 rather than 1/7, and appends BA.EXACT without testing the new remainder. Current source still contains the candidate defect.",
+        "previous_guards": [
+          "Divisor zero and scale >= 4 enter quarantine; neither applies to 1/7 at initial scale.",
+          "No Rust arithmetic or DSL runtime executed."
+        ],
+        "original_decision_and_state_retained": true,
+        "chronology": "Additional unrelated source/document changes observed on resumption after the operator paused concurrent edits."
+      }
+    },
+    {
+      "candidate_id": "SW100-C0383",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "src/babylon60.rs",
+      "current_source_sha256": "138e7aef605d3b6788c0413db4d87bcfb4bc4c260ec80f9d69cbb0bef5682db2",
+      "rationale": "OUTSIDE_SCOPE_CONCURRENT_SOURCE_REFRESH_PENDING_READJUDICATION: The interpreter refactor does not remove the inspected malformed-ALLOC path: static proof omits opcode arity validation and execution still indexes required operands directly. This is current source inspection only, not a fresh panic reproduction or general parser/runtime guarantee. Preserve CONFIRMED_STATIC/P2/OPEN.",
+      "source_checks": [
+        {
+          "path": "src/babylon60.rs",
+          "start_line": 177,
+          "end_line": 207,
+          "observation": "Static proof still checks supplied branch labels but does not establish ALLOC operand arity."
+        },
+        {
+          "path": "src/babylon60.rs",
+          "start_line": 434,
+          "end_line": 449,
+          "observation": "Recognized ALLOC still indexes tokens[1] and tokens[2] after only an empty-token guard."
+        }
+      ],
+      "guards": [
+        "Historical rationale and guards are preserved separately; only the explicit current source observations above are maintained.",
+        "No fix, complete retirement, new reproduction or additional selected outcome is inferred from outside-scope edits."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh.json",
+        "docs/security/evidence/swarm100-round3-20261028/04-source-evidence.json"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/04.json",
+      "runtime_scope": "Static source/document inspection only; no build, native execution, UI/browser, shell payload or protected effect.",
+      "resolution_type": "OUTSIDE_SCOPE_CONCURRENT_SOURCE_REFRESH_NO_CLOSURE",
+      "source_refresh": {
+        "pending_separate_readjudication": true,
+        "outside_lot12_production_scope": true,
+        "old_source_sha256": "202a32f58401f3c7f44dc72a0fb701205c8b5b118ef342e8a1779cd469919125",
+        "old_source_git_revision": "dc37db58bf3760a19cdb637fd1cef75375a230d3",
+        "historical_blob_hash_verified": true,
+        "previous_runtime_executed": false,
+        "previous_rationale": "A program containing ALLOC passes static_proof because only present branch-label operands are validated; run_program then indexes tokens[1] and tokens[2] without an arity check. A short ALLOC therefore reaches a Rust bounds panic instead of the quarantine error path. This conclusion is confined to malformed DSL input.",
+        "previous_guards": [
+          "Empty lines and undefined existing label operands are handled.",
+          "Unknown opcodes quarantine at lines 488–494, but a recognized malformed ALLOC does not enter that arm."
+        ],
+        "original_decision_and_state_retained": true,
+        "chronology": "Additional unrelated source/document changes observed on resumption after the operator paused concurrent edits."
+      }
+    },
+    {
+      "candidate_id": "SW100-C0384",
+      "decision": "CONFIRMED_STATIC",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "src/babylon60.rs",
+      "current_source_sha256": "138e7aef605d3b6788c0413db4d87bcfb4bc4c260ec80f9d69cbb0bef5682db2",
+      "rationale": "OUTSIDE_SCOPE_CONCURRENT_SOURCE_REFRESH_PENDING_READJUDICATION: The old opcode-omission trigger is not asserted against the current refactor: canonical event encoding now includes opcode and current graph/hash use that encoding. This metadata refresh does not validate proof.ir correspondence, signatures, artifact consumers or a new mutation test. Preserve inherited CONFIRMED_STATIC/P2/OPEN pending separate re-adjudication rather than inferring a closure from unrelated code.",
+      "source_checks": [
+        {
+          "path": "src/babylon60.rs",
+          "start_line": 52,
+          "end_line": 75,
+          "observation": "Current canonical event encoding explicitly includes opcode with length-prefixed fields."
+        },
+        {
+          "path": "src/babylon60.rs",
+          "start_line": 119,
+          "end_line": 132,
+          "observation": "Current graph and graph hash use canonical event lines."
+        }
+      ],
+      "guards": [
+        "Historical rationale and guards are preserved separately; only the explicit current source observations above are maintained.",
+        "No fix, complete retirement, new reproduction or additional selected outcome is inferred from outside-scope edits."
+      ],
+      "runtime_executed": false,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/outside-scope-source-refresh.json",
+        "docs/security/evidence/swarm100-round3-20261028/04-source-evidence.json"
+      ],
+      "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/04.json",
+      "runtime_scope": "Static source/document inspection only; no build, native execution, UI/browser, shell payload or protected effect.",
+      "resolution_type": "OUTSIDE_SCOPE_CONCURRENT_SOURCE_REFRESH_NO_CLOSURE",
+      "source_refresh": {
+        "pending_separate_readjudication": true,
+        "outside_lot12_production_scope": true,
+        "old_source_sha256": "202a32f58401f3c7f44dc72a0fb701205c8b5b118ef342e8a1779cd469919125",
+        "old_source_git_revision": "dc37db58bf3760a19cdb637fd1cef75375a230d3",
+        "historical_blob_hash_verified": true,
+        "previous_runtime_executed": false,
+        "previous_rationale": "The exported global hash commits only id, sorted parent IDs, logical timestamp, payload, and the literal SIG_OK field. DAGEvent.compute_hash includes opcode, but that event hash is also omitted from export. Changing opcode can change proof.ir semantics while leaving graph.canonical and global_hash unchanged; proof.ir is independently written and has no included digest. No assertion is made about a downstream verifier accepting an altered artifact.",
+        "previous_guards": [
+          "Canonical sorting stabilizes serialization order but does not bind omitted semantic fields.",
+          "No artifact mutation or verifier runtime tested."
+        ],
+        "original_decision_and_state_retained": true,
+        "chronology": "Additional unrelated source/document changes observed on resumption after the operator paused concurrent edits."
+      }
+    }
+  ],
+  "source_sha256": {
+    "01_KISH_ENGINE/babylon60/memory/provenance_arbiter.py": "bd6025b36a087a4adb000c55a0f5c99ddeaf3eb153efee0605dfd051a3e6982d",
+    "01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py": "f2a05503bc085cba2734ee29290de1ebf62f776b1ed2f6f080314720c8d8ba9a",
+    "scripts/c5_cli/doxastic_kripke_engine.py": "05e99aa3d405c37c4cb02a67d380f1a057cfcd14473b3b83270d6fc95f040f35",
+    "01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift": "79b6ea08597c31f5b39a705464823dd0d23175f189c8005d0e84c9d385d7a92d",
+    "01_KISH_ENGINE/babylon60/compliance_exporter/eu_ai_act.py": "817ea23c237293bc27e51a14cdb4ba97d9c5462089d7067621b5706251052ece",
+    "examples/navier_stokes_larsa_oracle.rs": "4098a7b3b2c30bd5e09c614a31048e8acaaec9760b341cef87e9e3274ec2c385",
+    "examples/poc_bifurcation_5_lifetimes.rs": "99b6c3846236dedecbae049fddd2dd7320af40659bc44ae135bba4d0d7e40264",
+    "examples/poc_lean4_emitter.rs": "5a4fa9bc39c3d4cc8a17aa6d97f3f10a1dd5fc21e6769b6816fc1d8878b1fcb8",
+    "00_ABZU_KERNEL/crates/babylon60-runtime/src/main.rs": "af8be5002dbf1ea7fd3bbfac41e235624303c0e28ac3dec58648e731ce7402f8",
+    "tools/skill_library/workspace/c5-anti-slop-ui/scripts/audit_ui_slop.py": "b40369b080b2f7a01bd6b8b5a1d0dc1cb23207048621b9c573227d62b7892334",
+    "docs/03_guides/tutorial_hello_causal.md": "4ae1086d703bfbb7e64a62cf32b0105b8ea68a53c2a671d62e5ff7c10bbf0a3e",
+    "src/babylon60.rs": "138e7aef605d3b6788c0413db4d87bcfb4bc4c260ec80f9d69cbb0bef5682db2"
+  },
+  "source_states": {
+    "examples/poc_navier_stokes_hunter.rs": "REMOVED_PENDING_READJUDICATION"
+  }
+}

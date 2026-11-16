@@ -1,0 +1,341 @@
+{
+  "shard": "011",
+  "findings": [
+    {
+      "title": "Default evidence pack fabricates successful adversarial observations without marking simulation",
+      "severity": "P1",
+      "path": "01_KISH_ENGINE/babylon60/compliance_exporter/m0_evidence_pack.py",
+      "line": 599,
+      "evidence": "default_nemesis hardcodes INODE_UNCHANGED_EPERM_CONFIRMED, ZERO_UNAUTHORIZED_EFFECTS_OVER_10000_TRIALS and other successes; lines 642-646 serialize them without executing campaigns. Lines 668 and 832-860 create synthetic ledger/report and describe control execution.",
+      "trigger": "Call compile_pack(output_dir) without externally supplied campaign evidence.",
+      "impact": "Signed audit deliverables present invented observations as independently verifiable control execution; hashes authenticate generated content, not those claimed experiments.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Output directory is recursively deleted before validating compilation inputs",
+      "severity": "P1",
+      "path": "01_KISH_ENGINE/babylon60/compliance_exporter/m0_evidence_pack.py",
+      "line": 585,
+      "evidence": "if out_path.exists(): shutil.rmtree(out_path) precedes load_canonical_claims at line 595; no pack marker or empty-directory check.",
+      "trigger": "Caller supplies an existing directory containing unrelated files, or recompiles into an existing directory and canonical claims loading then fails.",
+      "impact": "Unrelated files or the last good evidence pack are permanently removed before a replacement is ready.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Existing-ledger integrity verdict is ignored by compiler",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/compliance_exporter/m0_evidence_pack.py",
+      "line": 654,
+      "evidence": "verify_offline_evidence returns verified/integrity_verified flags; compile_pack reads only total_entries and merkle_root at 655-658. Verifier lines 321-345 returns false with empty root for invalid ordering/version.",
+      "trigger": "Compile using existing_ledger_path whose chain or sequence is invalid.",
+      "impact": "Compilation can return and sign a success-shaped deliverable around rejected evidence instead of aborting; independent verifier may subsequently reject it.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Unverified evidence status is accepted as verified citation",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/kernel/grounding_interceptor.py",
+      "line": 145,
+      "evidence": "register persists record.status without restricting it; lookup returns any cache record; intercept patent/arXiv/DOI branches accept if record without checking status.",
+      "trigger": "Register/load an EvidenceRecord with status REVOKED or UNVERIFIED and a 64-character nonempty digest, then intercept its citation under STRICT_ABORT.",
+      "impact": "Citation passes strict enforcement, appears in verified_citations and contributes to a COMMITTED result despite its explicit unverified status.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Failed SQLite registration leaves evidence trusted in memory",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/kernel/grounding_interceptor.py",
+      "line": 123,
+      "evidence": "register assigns self._cache[key] = record before opening and committing SQLite at lines 125-144; no rollback removes the cache entry on failure.",
+      "trigger": "SQLite INSERT/connect fails, for example locked database or read-only database, and caller handles exception while retaining registry.",
+      "impact": "lookup and interceptor accept evidence whose durable registration failed; current process and reopened registry disagree about trusted evidence.",
+      "confidence": "high",
+      "kind": "runtime"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".agents/skills/_skill_checks/declarative.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          102
+        ]
+      ],
+      "hash_match": true
+    },
+    {
+      "path": ".github/workflows/loom.yml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          35
+        ]
+      ],
+      "hash_match": true
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/gateway/mod.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          3
+        ]
+      ],
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/compliance_exporter/m0_evidence_pack.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          977
+        ]
+      ],
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/grounding_interceptor.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          388
+        ]
+      ],
+      "hash_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/utils/watchdog_poc_v2.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          21
+        ]
+      ],
+      "hash_match": true
+    },
+    {
+      "path": "CLAUDE.md",
+      "status": "metadata_only",
+      "ranges": [],
+      "hash_match": null,
+      "symlink_target": ".babylon60rules"
+    },
+    {
+      "path": "docs/01_spec/spec_graph_canonical.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          97
+        ]
+      ],
+      "hash_match": true
+    },
+    {
+      "path": "docs/adr/ADR-003-bft-attestation-architecture.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          71
+        ]
+      ],
+      "hash_match": true
+    },
+    {
+      "path": "proof/bundles/attestation_bundle_v2/claims.snapshot",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          177
+        ]
+      ],
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_demos/falsacion_cache_stress.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          91
+        ]
+      ],
+      "hash_match": true
+    },
+    {
+      "path": "scripts/c5_quality_gates/check_depth.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          49
+        ]
+      ],
+      "hash_match": true
+    },
+    {
+      "path": "scripts/docs_lint.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          368
+        ]
+      ],
+      "hash_match": true
+    },
+    {
+      "path": "src/spsc.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          30
+        ]
+      ],
+      "hash_match": true
+    },
+    {
+      "path": "tests/test_biometric_signing_contract.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          107
+        ]
+      ],
+      "hash_match": true
+    },
+    {
+      "path": "tests/test_opsec_sentinel_patterns.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          19
+        ]
+      ],
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare-email-service/references/deliverability.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          285
+        ]
+      ],
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/durable-objects/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          197
+        ]
+      ],
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/realtimekit/gotchas.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          169
+        ]
+      ],
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workers-vpc/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          202
+        ]
+      ],
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/examples/Synthwave_Dark_Flamenco_Generator.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          202
+        ]
+      ],
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_15_box_desktop.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-media-platform-epistemology/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-wetware-and-venture-ops/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          41
+        ]
+      ],
+      "hash_match": true
+    },
+    {
+      "path": "tools/skill_library/global/webkit-memory-audit/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "hash_match": true
+    }
+  ],
+  "tool_limitations": [
+    "No codebase-memory graph tools exposed in native session; targeted text reads and rg used.",
+    "Static audit only; no repository tests, builds, runtime experiments, network API verification, or physical claims verification performed.",
+    "External SDK reference documents were read for internal consistency; current external API correctness was not certified.",
+    "All assigned text SHA-256 digests matched shard manifest; CLAUDE.md metadata target matched and was not followed."
+  ],
+  "tests_run": []
+}

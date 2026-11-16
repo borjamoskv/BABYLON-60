@@ -24,6 +24,7 @@ from social_agent.channels.d1_listener import D1MailListener  # noqa: E402
 from social_agent.channels.instagram import InstagramGraphClient  # noqa: E402
 from social_agent.channels.linkedin import LinkedInClient  # noqa: E402
 from social_agent.creatives.carousel_builder import CarouselBuilder, CarouselSlide  # noqa: E402
+from social_agent.creatives.reel_builder import ReelBuilder  # noqa: E402
 from social_agent.gates.biometric import BiometricGate  # noqa: E402
 from social_agent.hume_filter import HumeGuillotine  # noqa: E402
 
@@ -89,7 +90,10 @@ def test_d1_otp_extraction():
     # Instagram
     body1 = "Hi babylon60.ai, please use the following code to confirm your identity: 729649 If this wasn't you..."
     assert D1MailListener.extract_otp_from_text(body1) == "729649"
-    assert D1MailListener.detect_platform("security@mail.instagram.com", "instagram@babylon60.com", "Verify") == "instagram"
+    assert (
+        D1MailListener.detect_platform("security@mail.instagram.com", "instagram@babylon60.com", "Verify")
+        == "instagram"
+    )
 
     body2 = "182743 is your Instagram code"
     assert D1MailListener.extract_otp_from_text(body2) == "182743"
@@ -102,7 +106,9 @@ def test_d1_otp_extraction():
     # LinkedIn
     body_li = "LinkedIn: Introduce tu código de verificación 849201 para confirmar linkedin@babylon60.com"
     assert D1MailListener.extract_otp_from_text(body_li) == "849201"
-    assert D1MailListener.detect_platform("security-noreply@linkedin.com", "linkedin@babylon60.com", body_li) == "linkedin"
+    assert (
+        D1MailListener.detect_platform("security-noreply@linkedin.com", "linkedin@babylon60.com", body_li) == "linkedin"
+    )
 
 
 def test_instagram_client_simulation():
@@ -114,8 +120,8 @@ def test_instagram_client_simulation():
     )
     assert res.success
     assert res.is_simulation
-    assert res.media_id.startswith("sim_media_")
-    assert res.container_id.startswith("sim_container_")
+    assert res.media_id is not None and res.media_id.startswith("sim_media_")
+    assert res.container_id is not None and res.container_id.startswith("sim_container_")
 
 
 def test_linkedin_formatting_and_simulation():
@@ -140,7 +146,7 @@ def test_linkedin_formatting_and_simulation():
     res = client.publish_text_post(post_text, dry_run=True)
     assert res.success
     assert res.is_simulation
-    assert res.post_urn.startswith("urn:li:share:sim_")
+    assert res.post_urn is not None and res.post_urn.startswith("urn:li:share:sim_")
 
 
 def test_biometric_gate_causal_hash():
@@ -150,3 +156,32 @@ def test_biometric_gate_causal_hash():
     h2 = BiometricGate.compute_causal_hash(payload)
     assert len(h1) == 64
     assert h1 == h2
+
+
+def test_carousel_reel_rendering():
+    """Validates multi-slide 1080x1920 MP4 Reel generation via ReelBuilder."""
+    reel_builder = ReelBuilder()
+    if not reel_builder.is_available():
+        pytest.skip("ffmpeg not available")
+
+    carousel_builder = CarouselBuilder()
+    slides = [
+        CarouselSlide(
+            header="01 / REEL TEST",
+            body_paragraphs=["Verificación de concatenación vertical 9:16."],
+            code_snippet="assert reel.size == (1080, 1920);",
+        )
+    ]
+
+    with tempfile.TemporaryDirectory() as tmpdir:
+        out_dir = Path(tmpdir)
+        slide_paths = carousel_builder.build_carousel(
+            title="Test Reel 9:16",
+            subtitle="KISHAR-60 Motion",
+            slides_data=slides,
+            output_dir=out_dir,
+        )
+        out_mp4 = out_dir / "test_reel.mp4"
+        rendered = reel_builder.render_carousel_reel(slide_paths, out_mp4, seconds_per_slide=1)
+        assert rendered.exists()
+        assert rendered.stat().st_size > 1000

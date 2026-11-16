@@ -1,0 +1,404 @@
+{
+  "shard": "076",
+  "findings": [
+    {
+      "title": "Shutdown stops consumer before draining its queue",
+      "severity": "P1",
+      "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+      "line": 155,
+      "evidence": "stop() sets _stop_event before awaiting queue.join(); _worker loops only while that event is unset (line 366).",
+      "trigger": "Call stop() with at least one queued event before the worker consumes it.",
+      "impact": "Worker exits without task_done for pending items; stop() and their futures can wait indefinitely.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Encrypted retries cannot satisfy ledger idempotency",
+      "severity": "P1",
+      "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+      "line": 496,
+      "evidence": "event_id derives from plaintext at 489-492; each retry encrypts anew at 496; existing ciphertext is compared byte-for-byte at 433.",
+      "trigger": "Retry the same LedgerEvent with CORTEX_VAULT_KEY enabled.",
+      "impact": "Randomized Fernet ciphertext differs, so an otherwise idempotent retry is rejected as a collision; nested rollback then terminates the worker.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Rollback is repeated after the transaction has already rolled back",
+      "severity": "P1",
+      "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+      "line": 505,
+      "evidence": "_execute_insert_tx rolls back in its except block at 476-478; _process unconditionally rolls back again at 505 and closes the connection if that fails.",
+      "trigger": "Any insert transaction error, such as a SQL CHECK constraint violation.",
+      "impact": "The second ROLLBACK has no active transaction; the connection is closed and worker fails, leaving other queued futures unresolved. The collision path additionally rolls back at 434 before its exception handler rolls back again.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Attestation combines separate database snapshots",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+      "line": 278,
+      "evidence": "Counts and maxima are selected at 279-285, hashes at 287-289, without BEGIN; verify_chain opens another connection at 302.",
+      "trigger": "Append commits between those reads while get_state_attestation runs.",
+      "impact": "Reported totals, roots and integrity flag can describe different ledger states; anchor_to_rekor can publish an internally inconsistent head.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "License authority falls back to a publicly derivable signing key",
+      "severity": "P1",
+      "path": "tools/tamkarum_license_provisioner.py",
+      "line": 97,
+      "evidence": "Absent or wrong-length BABYLON_LICENSE_ED25519_SEED falls back to SHA-256 of a source-code literal (98-102), then output is labeled VALID_AUTHENTICATED_LICENSE (115).",
+      "trigger": "Generate a certificate without an explicitly configured valid signing seed.",
+      "impact": "Anyone with this source can derive the identical authority key and forge certificates signed with the default key. No runtime verifier consumer was established; finding applies to issued certificate authenticity.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Example reports global regularity from hard-coded predicates",
+      "severity": "P2",
+      "path": "examples/omega_100_synthesis.rs",
+      "line": 116,
+      "evidence": "evaluate receives literal false,true,true and an empty evidence string (116-120); the selected branch prints REGULARIDAD GLOBAL CL\u00c1SICA DEMOSTRADA (124).",
+      "trigger": "Run this example and interpret its verdict as mathematical evidence.",
+      "impact": "Output asserts a global PDE result without deriving its input predicates from the numerical simulation or a proof; the example overstates its evidence.",
+      "confidence": "high",
+      "kind": "example/docs"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".babylon60rules",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          31
+        ]
+      ],
+      "inventory_sha256": "896ef66813dae7b753c365db39817a8f144f525dc1ae4f3259660b1f53db557c",
+      "observed_sha256": "896ef66813dae7b753c365db39817a8f144f525dc1ae4f3259660b1f53db557c",
+      "changed_source": false
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-proof-ir/src/lib.rs",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          35
+        ]
+      ],
+      "inventory_sha256": "4d2a872d5dcb899bacc30155970d831e0949a506d3550d762ed3b947a51e152e",
+      "observed_sha256": "4d2a872d5dcb899bacc30155970d831e0949a506d3550d762ed3b947a51e152e",
+      "changed_source": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/bft/ledger_actor.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          530
+        ]
+      ],
+      "inventory_sha256": "c0dddf3e209bb945fa1f49a3d372b66b18968ebfcc2ea864ce35b26ebb16b237",
+      "observed_sha256": "c0dddf3e209bb945fa1f49a3d372b66b18968ebfcc2ea864ce35b26ebb16b237",
+      "changed_source": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/genomics/__init__.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          43
+        ]
+      ],
+      "inventory_sha256": "f8b781db6f462e23188766a5945d1d4aeed3d4891c53fdb7ae0847f2f40a17bb",
+      "observed_sha256": "f8b781db6f462e23188766a5945d1d4aeed3d4891c53fdb7ae0847f2f40a17bb",
+      "changed_source": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/transducers/landauer.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          181
+        ]
+      ],
+      "inventory_sha256": "e79019ac8cb4e2dbb6a19515c8863702a51163a01b48df6370dacde5f6d37fa7",
+      "observed_sha256": "e79019ac8cb4e2dbb6a19515c8863702a51163a01b48df6370dacde5f6d37fa7",
+      "changed_source": false
+    },
+    {
+      "path": "01_KISH_ENGINE/services/email_inbound/wrangler.toml",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          6
+        ]
+      ],
+      "inventory_sha256": "fd3853434c57ef52e89174dd5a63bdda55ea2ad68c5a8e3811b634d7711bb5a1",
+      "observed_sha256": "fd3853434c57ef52e89174dd5a63bdda55ea2ad68c5a8e3811b634d7711bb5a1",
+      "changed_source": false
+    },
+    {
+      "path": "crates/eridu-infer/AGENTS.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          14
+        ]
+      ],
+      "inventory_sha256": "e48c1390a6adefd15599401f81c7135a37dce5a7846d2a2d38e8813b94287b8c",
+      "observed_sha256": "e48c1390a6adefd15599401f81c7135a37dce5a7846d2a2d38e8813b94287b8c",
+      "changed_source": false
+    },
+    {
+      "path": "docs/06_theory/BABYLON60_PROOF_CARRYING_EXECUTION.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          40
+        ]
+      ],
+      "inventory_sha256": "4467a1331e8e4cc36c4da70c480664fde3ac457733f964b2eb170e63528c2378",
+      "observed_sha256": "4467a1331e8e4cc36c4da70c480664fde3ac457733f964b2eb170e63528c2378",
+      "changed_source": false
+    },
+    {
+      "path": "examples/omega_100_synthesis.rs",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          163
+        ]
+      ],
+      "inventory_sha256": "cdb1812cd86594cdd9c9b282cfb99b6533cbedf89bc03fc1fe5acd6f5c0373df",
+      "observed_sha256": "cdb1812cd86594cdd9c9b282cfb99b6533cbedf89bc03fc1fe5acd6f5c0373df",
+      "changed_source": false
+    },
+    {
+      "path": "scripts/c5_cli/moskv1_service.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          311
+        ]
+      ],
+      "inventory_sha256": "811be9941a8c6616382f323dc29120e85968855b95fd29538a91f97938de5b33",
+      "observed_sha256": "811be9941a8c6616382f323dc29120e85968855b95fd29538a91f97938de5b33",
+      "changed_source": false
+    },
+    {
+      "path": "scripts/c5_git_utils/install_git_hooks.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          89
+        ]
+      ],
+      "inventory_sha256": "b91a75134c18737e80459c3d3dc0ead4dd2ef65bb29443500583fa4417c5c123",
+      "observed_sha256": "b91a75134c18737e80459c3d3dc0ead4dd2ef65bb29443500583fa4417c5c123",
+      "changed_source": false
+    },
+    {
+      "path": "scripts/c5_thermo/benchmark_ledger_throughput.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          85
+        ]
+      ],
+      "inventory_sha256": "356559fb35e7a6405bfbcfeb2aeac2e613619d372a7fef595097aa0df8f5e35a",
+      "observed_sha256": "356559fb35e7a6405bfbcfeb2aeac2e613619d372a7fef595097aa0df8f5e35a",
+      "changed_source": false
+    },
+    {
+      "path": "src/crystallized_rules.rs",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          77
+        ]
+      ],
+      "inventory_sha256": "ccc2ec0c4498801e7551ee691d198ebd67838c6c3aacd675e7734e19c83ee5a1",
+      "observed_sha256": "ccc2ec0c4498801e7551ee691d198ebd67838c6c3aacd675e7734e19c83ee5a1",
+      "changed_source": false
+    },
+    {
+      "path": "tests/test_ast_markov_blanket_evasion.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          97
+        ]
+      ],
+      "inventory_sha256": "7fc41fbb6644a21cdba01732f2f5122c6804c243a252be5fff41237fed49735e",
+      "observed_sha256": "7fc41fbb6644a21cdba01732f2f5122c6804c243a252be5fff41237fed49735e",
+      "changed_source": false
+    },
+    {
+      "path": "tests/test_itera2_invariants.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          201
+        ]
+      ],
+      "inventory_sha256": "c96ad8549b4b245e13c12399e901ea5b745ce35edcfe7d706d6050cb0c2680e5",
+      "observed_sha256": "c96ad8549b4b245e13c12399e901ea5b745ce35edcfe7d706d6050cb0c2680e5",
+      "changed_source": false
+    },
+    {
+      "path": "tools/examples/fibonacci.b60",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          23
+        ]
+      ],
+      "inventory_sha256": "b9889d6bc4d93e4dffd933aa86945c4cf4dae8a5c03710ade92de4a00f275a6c",
+      "observed_sha256": "b9889d6bc4d93e4dffd933aa86945c4cf4dae8a5c03710ade92de4a00f275a6c",
+      "changed_source": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/c3/patterns.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          82
+        ]
+      ],
+      "inventory_sha256": "4e446fec9a271af8763872c5a13847155b6147653d2ad43b1268457e575cb58b",
+      "observed_sha256": "4e446fec9a271af8763872c5a13847155b6147653d2ad43b1268457e575cb58b",
+      "changed_source": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/pipelines/gotchas.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          58
+        ]
+      ],
+      "inventory_sha256": "b0d85c6a6519bac88f9d08d5fd9449515c2ca6750cb220ffc1c2e1394e87e2f3",
+      "observed_sha256": "b0d85c6a6519bac88f9d08d5fd9449515c2ca6750cb220ffc1c2e1394e87e2f3",
+      "changed_source": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/vectorize/api.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          88
+        ]
+      ],
+      "inventory_sha256": "1a9eb04dc17cd4c346fdca49f10b8059a8897e3cbc28ea5ec6ca898874b86318",
+      "observed_sha256": "1a9eb04dc17cd4c346fdca49f10b8059a8897e3cbc28ea5ec6ca898874b86318",
+      "changed_source": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-adaptive-annealing-engine/SKILL.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          42
+        ]
+      ],
+      "inventory_sha256": "b279247e87c4a5a6542a1d2df2acc8428cedc8a5de73cdeb012be7f3ab1141ae",
+      "observed_sha256": "b279247e87c4a5a6542a1d2df2acc8428cedc8a5de73cdeb012be7f3ab1141ae",
+      "changed_source": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents/agent_44_site_playbooks_target.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          60
+        ]
+      ],
+      "inventory_sha256": "bfc65d85117f85450bf1442d444b33be3a0f05bb482a914ab29625b74258d005",
+      "observed_sha256": "bfc65d85117f85450bf1442d444b33be3a0f05bb482a914ab29625b74258d005",
+      "changed_source": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-epistemic-dissemination-engine/SKILL.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          40
+        ]
+      ],
+      "inventory_sha256": "25dde24952c97a1ec441cacd93e78525f72faa204168e9568593d6ecf66a36a6",
+      "observed_sha256": "25dde24952c97a1ec441cacd93e78525f72faa204168e9568593d6ecf66a36a6",
+      "changed_source": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/whatsapp-nexus-protocol/MODULE.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          190
+        ]
+      ],
+      "inventory_sha256": "bed0dd8010d10bfa0fb66d304a236ea4ba88cbae591a99838838617a031c7f03",
+      "observed_sha256": "bed0dd8010d10bfa0fb66d304a236ea4ba88cbae591a99838838617a031c7f03",
+      "changed_source": false
+    },
+    {
+      "path": "tools/skill_library/global/ghidra-ida-binary-audit/SKILL.md",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          39
+        ]
+      ],
+      "inventory_sha256": "2c79bca0872f9ba8ba85191fb2d441f6fa8482ea8c847ab871fa55d56e0b87ae",
+      "observed_sha256": "2c79bca0872f9ba8ba85191fb2d441f6fa8482ea8c847ab871fa55d56e0b87ae",
+      "changed_source": false
+    },
+    {
+      "path": "tools/tamkarum_license_provisioner.py",
+      "status": "reviewed_full",
+      "ranges_read": [
+        [
+          1,
+          228
+        ]
+      ],
+      "inventory_sha256": "312b37a43a708ef232ccedf7fbd6bc57c33c181e00fee72eba13b9d6fb2a9096",
+      "observed_sha256": "312b37a43a708ef232ccedf7fbd6bc57c33c181e00fee72eba13b9d6fb2a9096",
+      "changed_source": false
+    }
+  ],
+  "tool_limitations": [
+    "Native graph tools were not exposed in the session (tool-name discovery returned no search_graph/get_architecture/index_repository). Targeted source reads used instead.",
+    "Static audit only; no repository tests, runtime execution, external API documentation verification, or downstream license verifier tracing."
+  ],
+  "tests_run": []
+}

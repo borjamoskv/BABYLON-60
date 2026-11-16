@@ -1,0 +1,37 @@
+[
+  {
+    "candidate_id": "SW100-C0438",
+    "path": "scripts/c5_thermo/c5_exergy_optimizer_monitor.py",
+    "severity": "P1",
+    "decision": "CONFIRMED_STATIC",
+    "remediation_state": "OPEN",
+    "rationale": "git_sentinel_commit invokes unrestricted git commit on the existing index, so unrelated already-staged changes are included. Its caller later performs unrestricted amend. _git suppresses signing and returns stdout without checking returncode; the stale added script path may fail while subsequent commit still consumes existing staged content. Source-level Git integrity risk; no git mutation was executed.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_thermo/c5_exergy_optimizer_monitor.py",
+        "start_line": 53,
+        "end_line": 60,
+        "observation": "Git helper disables signing and ignores returncode."
+      },
+      {
+        "path": "scripts/c5_thermo/c5_exergy_optimizer_monitor.py",
+        "start_line": 199,
+        "end_line": 203,
+        "observation": "Commit has no path restriction or clean-index guard; add uses scripts/c5_exergy_optimizer_monitor.py."
+      },
+      {
+        "path": "scripts/c5_thermo/c5_exergy_optimizer_monitor.py",
+        "start_line": 220,
+        "end_line": 227,
+        "observation": "Dirty state is printed but does not block mutation."
+      },
+      {
+        "path": "scripts/c5_thermo/c5_exergy_optimizer_monitor.py",
+        "start_line": 258,
+        "end_line": 280,
+        "observation": "Main unconditionally commits, stages STATUS and amends, then prints completion."
+      }
+    ],
+    "source_sha256": "2f2b8cfcede8d34ad2f57ecfe765060debf85a946d2645ea38dd228e0196c861"
+  }
+]

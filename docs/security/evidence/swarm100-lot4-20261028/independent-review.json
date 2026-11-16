@@ -1,0 +1,494 @@
+{
+  "reviewer": "03",
+  "date": "2026-10-28",
+  "lot": 4,
+  "decision": "APPROVED_WITH_EXPLICIT_SCOPE",
+  "open_actionable_findings": [],
+  "source_sha256": {
+    "proof/bundles/attestation_bundle_v1/verify": "9dae74bb71d75c7c5f93216b41d82caed7771dc48c034024366630046fe4ab87",
+    "scripts/generate_attestation_bundle.py": "e043c9463b2ed0c0d5c0a9d353ab3a5a1e11747129473c778db3eb06fa897553",
+    "scripts/generate_attestation_bundle_v2.py": "4ce522faf18df94eb9710fedf017a162104cb79f747562436f8eb80f0a9cc884"
+  },
+  "test_source_sha256": {
+    "tests/test_swarm100_lot4_regressions.py": "7a3cb593a78f3aff16c9edb9db12ef300565f88b8e4fd13a3d8e4bf76fb9e733"
+  },
+  "scope": {
+    "production_paths": [
+      "proof/bundles/attestation_bundle_v1/verify",
+      "scripts/generate_attestation_bundle.py",
+      "scripts/generate_attestation_bundle_v2.py"
+    ],
+    "production_edited_by_reviewer": false,
+    "shared_tests_edited_by_reviewer": false,
+    "evidence_directory": "docs/security/evidence/swarm100-lot4-20261028",
+    "graph_discovery": "No native codebase graph tools exposed; used scoped source/caller searches."
+  },
+  "source_checks": [
+    {
+      "path": "proof/bundles/attestation_bundle_v1/verify",
+      "start_line": 64,
+      "end_line": 67,
+      "observation": "Duplicate keys, nonfinite constants and overflowing floats are rejected; canonicalization also rejects invalid UTF-8 surrogates."
+    },
+    {
+      "path": "proof/bundles/attestation_bundle_v1/verify",
+      "start_line": 83,
+      "end_line": 104,
+      "observation": "Descriptor-relative traversal uses O_NOFOLLOW for every selected path component. Final files are regular/bounded and pre/post stat identity is compared."
+    },
+    {
+      "path": "proof/bundles/attestation_bundle_v1/verify",
+      "start_line": 111,
+      "end_line": 114,
+      "observation": "Each bound record exactly matches path, regular type, integer size and recomputed BLAKE3 of observed bytes."
+    },
+    {
+      "path": "proof/bundles/attestation_bundle_v1/verify",
+      "start_line": 117,
+      "end_line": 149,
+      "observation": "Requires a newly created directory and O_EXCL files; existing outputs are refused. Own written entries are removed on observed write failure."
+    },
+    {
+      "path": "proof/bundles/attestation_bundle_v1/verify",
+      "start_line": 152,
+      "end_line": 197,
+      "observation": "Captures selected bytes once; claims/components/serialized manifest are bounded before output. Unknown platform observations become UNKNOWN, suites remain NOT_EXECUTED, Git HEAD is only an observation, and no signing/private-key lookup occurs."
+    },
+    {
+      "path": "proof/bundles/attestation_bundle_v1/verify",
+      "start_line": 200,
+      "end_line": 201,
+      "observation": "P-256 signing message is the explicit v3 domain followed by the complete canonical manifest."
+    },
+    {
+      "path": "proof/bundles/attestation_bundle_v1/verify",
+      "start_line": 204,
+      "end_line": 296,
+      "observation": "Rejects legacy/unknown schemas and overclaimed fields, validates age and exact component inventory, rehashes external selected artifacts, requires an explicit external P-256 trust anchor for signature verification, and never derives tests/hardware certification from a signature."
+    },
+    {
+      "path": "proof/bundles/attestation_bundle_v1/verify",
+      "start_line": 299,
+      "end_line": 311,
+      "observation": "Requires an explicit new output directory; generation failures return 1 and successful output is identified as UNSIGNED/NOT_EXECUTED/UNVERIFIED."
+    },
+    {
+      "path": "proof/bundles/attestation_bundle_v1/verify",
+      "start_line": 314,
+      "end_line": 329,
+      "observation": "Requires external artifact root; caught verification failures return 1 and default unsigned verification returns NOT_AUTHENTICATED with status 2."
+    },
+    {
+      "path": "scripts/generate_attestation_bundle.py",
+      "start_line": 7,
+      "end_line": 14,
+      "observation": "Import-safe wrapper delegates only when explicitly called or executed; no historical bundle writes or reused signature constants."
+    },
+    {
+      "path": "scripts/generate_attestation_bundle_v2.py",
+      "start_line": 12,
+      "end_line": 19,
+      "observation": "Import-safe wrapper delegates to canonical core, which copies its portable verifier into each new unsigned snapshot."
+    }
+  ],
+  "candidates": [
+    {
+      "candidate_id": "SW100-C0061",
+      "decision": "REPRODUCED",
+      "severity": "P1",
+      "remediation_state": "FIXED",
+      "path": "proof/bundles/attestation_bundle_v1/verify",
+      "current_source_sha256": "9dae74bb71d75c7c5f93216b41d82caed7771dc48c034024366630046fe4ab87",
+      "rationale": "The old unbound legacy contract is refused. The v3 contract binds exact component bytes and a named typed selected-file inventory; supplied external artifact bytes are rehashed and the entire canonical manifest is signed. Mutation with recomputed untrusted digest strings still breaks a valid fixture signature. This fixes the reviewed integrity claim without certifying execution or hardware.",
+      "source_checks": [
+        {
+          "path": "proof/bundles/attestation_bundle_v1/verify",
+          "start_line": 83,
+          "end_line": 104,
+          "observation": "Descriptor-relative traversal uses O_NOFOLLOW for every selected path component. Final files are regular/bounded and pre/post stat identity is compared."
+        },
+        {
+          "path": "proof/bundles/attestation_bundle_v1/verify",
+          "start_line": 111,
+          "end_line": 114,
+          "observation": "Each bound record exactly matches path, regular type, integer size and recomputed BLAKE3 of observed bytes."
+        },
+        {
+          "path": "proof/bundles/attestation_bundle_v1/verify",
+          "start_line": 200,
+          "end_line": 201,
+          "observation": "P-256 signing message is the explicit v3 domain followed by the complete canonical manifest."
+        },
+        {
+          "path": "proof/bundles/attestation_bundle_v1/verify",
+          "start_line": 204,
+          "end_line": 296,
+          "observation": "Rejects legacy/unknown schemas and overclaimed fields, validates age and exact component inventory, rehashes external selected artifacts, requires an explicit external P-256 trust anchor for signature verification, and never derives tests/hardware certification from a signature."
+        }
+      ],
+      "guards": [
+        "Only selected-file integrity is asserted; test execution stays NOT_EXECUTED, hardware UNVERIFIED and certification NONE.",
+        "Software-only fixture signatures validate message binding, not operator identity or hardware authorization."
+      ],
+      "runtime_executed": true,
+      "runtime_scope": "Reviewed source/copies executed only with synthetic temporary roots, stub Git/platform and temporary software keys.",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot4-20261028/before-tests.log",
+        "docs/security/evidence/swarm100-lot4-20261028/before-source-manifest.json",
+        "docs/security/evidence/swarm100-lot4-20261028/independent-pytest.log",
+        "docs/security/evidence/swarm100-lot4-20261028/independent-pytest.json",
+        "docs/security/evidence/swarm100-lot4-20261028/independent-adversarial.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0083",
+      "decision": "REPRODUCED",
+      "severity": "P1",
+      "remediation_state": "FIXED",
+      "path": "scripts/generate_attestation_bundle.py",
+      "current_source_sha256": "e043c9463b2ed0c0d5c0a9d353ab3a5a1e11747129473c778db3eb06fa897553",
+      "rationale": "The v1 wrapper is import-safe and emits only explicit new unsigned snapshots through the canonical core. Constant PASS counts and reused signing material are removed; fixture generation without runners reports NOT_EXECUTED and never creates/reads a key store.",
+      "source_checks": [
+        {
+          "path": "proof/bundles/attestation_bundle_v1/verify",
+          "start_line": 152,
+          "end_line": 197,
+          "observation": "Captures selected bytes once; claims/components/serialized manifest are bounded before output. Unknown platform observations become UNKNOWN, suites remain NOT_EXECUTED, Git HEAD is only an observation, and no signing/private-key lookup occurs."
+        },
+        {
+          "path": "proof/bundles/attestation_bundle_v1/verify",
+          "start_line": 299,
+          "end_line": 311,
+          "observation": "Requires an explicit new output directory; generation failures return 1 and successful output is identified as UNSIGNED/NOT_EXECUTED/UNVERIFIED."
+        },
+        {
+          "path": "scripts/generate_attestation_bundle.py",
+          "start_line": 7,
+          "end_line": 14,
+          "observation": "Import-safe wrapper delegates only when explicitly called or executed; no historical bundle writes or reused signature constants."
+        }
+      ],
+      "guards": [
+        "Only selected-file integrity is asserted; test execution stays NOT_EXECUTED, hardware UNVERIFIED and certification NONE.",
+        "Software-only fixture signatures validate message binding, not operator identity or hardware authorization."
+      ],
+      "runtime_executed": true,
+      "runtime_scope": "Reviewed source/copies executed only with synthetic temporary roots, stub Git/platform and temporary software keys.",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot4-20261028/before-tests.log",
+        "docs/security/evidence/swarm100-lot4-20261028/before-source-manifest.json",
+        "docs/security/evidence/swarm100-lot4-20261028/independent-pytest.log",
+        "docs/security/evidence/swarm100-lot4-20261028/independent-pytest.json",
+        "docs/security/evidence/swarm100-lot4-20261028/independent-adversarial.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0086",
+      "decision": "REPRODUCED",
+      "severity": "P1",
+      "remediation_state": "FIXED",
+      "path": "scripts/generate_attestation_bundle_v2.py",
+      "current_source_sha256": "4ce522faf18df94eb9710fedf017a162104cb79f747562436f8eb80f0a9cc884",
+      "rationale": "The v2 wrapper no longer invents suite outcomes or signs them. Snapshot tests have a strict pending schema, and even software-signed fabricated PASS metadata is rejected by the verifier.",
+      "source_checks": [
+        {
+          "path": "proof/bundles/attestation_bundle_v1/verify",
+          "start_line": 152,
+          "end_line": 197,
+          "observation": "Captures selected bytes once; claims/components/serialized manifest are bounded before output. Unknown platform observations become UNKNOWN, suites remain NOT_EXECUTED, Git HEAD is only an observation, and no signing/private-key lookup occurs."
+        },
+        {
+          "path": "proof/bundles/attestation_bundle_v1/verify",
+          "start_line": 204,
+          "end_line": 296,
+          "observation": "Rejects legacy/unknown schemas and overclaimed fields, validates age and exact component inventory, rehashes external selected artifacts, requires an explicit external P-256 trust anchor for signature verification, and never derives tests/hardware certification from a signature."
+        },
+        {
+          "path": "scripts/generate_attestation_bundle_v2.py",
+          "start_line": 12,
+          "end_line": 19,
+          "observation": "Import-safe wrapper delegates to canonical core, which copies its portable verifier into each new unsigned snapshot."
+        }
+      ],
+      "guards": [
+        "Only selected-file integrity is asserted; test execution stays NOT_EXECUTED, hardware UNVERIFIED and certification NONE.",
+        "Software-only fixture signatures validate message binding, not operator identity or hardware authorization."
+      ],
+      "runtime_executed": true,
+      "runtime_scope": "Reviewed source/copies executed only with synthetic temporary roots, stub Git/platform and temporary software keys.",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot4-20261028/before-tests.log",
+        "docs/security/evidence/swarm100-lot4-20261028/before-source-manifest.json",
+        "docs/security/evidence/swarm100-lot4-20261028/independent-pytest.log",
+        "docs/security/evidence/swarm100-lot4-20261028/independent-pytest.json",
+        "docs/security/evidence/swarm100-lot4-20261028/independent-adversarial.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0087",
+      "decision": "REPRODUCED",
+      "severity": "P1",
+      "remediation_state": "FIXED",
+      "path": "scripts/generate_attestation_bundle_v2.py",
+      "current_source_sha256": "4ce522faf18df94eb9710fedf017a162104cb79f747562436f8eb80f0a9cc884",
+      "rationale": "New snapshots carry the canonical portable verifier, require an artifact root, and recompute every declared selected-file digest. Changed/missing/symlink/FIFO artifacts are rejected. The pre-existing historical v2 verifier is separate and remains open.",
+      "source_checks": [
+        {
+          "path": "proof/bundles/attestation_bundle_v1/verify",
+          "start_line": 83,
+          "end_line": 104,
+          "observation": "Descriptor-relative traversal uses O_NOFOLLOW for every selected path component. Final files are regular/bounded and pre/post stat identity is compared."
+        },
+        {
+          "path": "proof/bundles/attestation_bundle_v1/verify",
+          "start_line": 152,
+          "end_line": 197,
+          "observation": "Captures selected bytes once; claims/components/serialized manifest are bounded before output. Unknown platform observations become UNKNOWN, suites remain NOT_EXECUTED, Git HEAD is only an observation, and no signing/private-key lookup occurs."
+        },
+        {
+          "path": "proof/bundles/attestation_bundle_v1/verify",
+          "start_line": 204,
+          "end_line": 296,
+          "observation": "Rejects legacy/unknown schemas and overclaimed fields, validates age and exact component inventory, rehashes external selected artifacts, requires an explicit external P-256 trust anchor for signature verification, and never derives tests/hardware certification from a signature."
+        },
+        {
+          "path": "scripts/generate_attestation_bundle_v2.py",
+          "start_line": 12,
+          "end_line": 19,
+          "observation": "Import-safe wrapper delegates to canonical core, which copies its portable verifier into each new unsigned snapshot."
+        }
+      ],
+      "guards": [
+        "Only selected-file integrity is asserted; test execution stays NOT_EXECUTED, hardware UNVERIFIED and certification NONE.",
+        "Software-only fixture signatures validate message binding, not operator identity or hardware authorization."
+      ],
+      "runtime_executed": true,
+      "runtime_scope": "Reviewed source/copies executed only with synthetic temporary roots, stub Git/platform and temporary software keys.",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot4-20261028/before-tests.log",
+        "docs/security/evidence/swarm100-lot4-20261028/before-source-manifest.json",
+        "docs/security/evidence/swarm100-lot4-20261028/independent-pytest.log",
+        "docs/security/evidence/swarm100-lot4-20261028/independent-pytest.json",
+        "docs/security/evidence/swarm100-lot4-20261028/independent-adversarial.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0060",
+      "decision": "REPRODUCED",
+      "severity": "P2",
+      "remediation_state": "FIXED",
+      "path": "proof/bundles/attestation_bundle_v1/verify",
+      "current_source_sha256": "9dae74bb71d75c7c5f93216b41d82caed7771dc48c034024366630046fe4ab87",
+      "rationale": "The entrypoint propagates explicit status: invalid legacy/signature/hash/schema inputs return nonzero, default unsigned verification returns 2, and only explicitly scoped integrity checks can succeed. Original failure is documented in the baseline and final negative fixture checks pass.",
+      "source_checks": [
+        {
+          "path": "proof/bundles/attestation_bundle_v1/verify",
+          "start_line": 204,
+          "end_line": 296,
+          "observation": "Rejects legacy/unknown schemas and overclaimed fields, validates age and exact component inventory, rehashes external selected artifacts, requires an explicit external P-256 trust anchor for signature verification, and never derives tests/hardware certification from a signature."
+        },
+        {
+          "path": "proof/bundles/attestation_bundle_v1/verify",
+          "start_line": 314,
+          "end_line": 329,
+          "observation": "Requires external artifact root; caught verification failures return 1 and default unsigned verification returns NOT_AUTHENTICATED with status 2."
+        }
+      ],
+      "guards": [
+        "Only selected-file integrity is asserted; test execution stays NOT_EXECUTED, hardware UNVERIFIED and certification NONE.",
+        "Software-only fixture signatures validate message binding, not operator identity or hardware authorization."
+      ],
+      "runtime_executed": true,
+      "runtime_scope": "Reviewed source/copies executed only with synthetic temporary roots, stub Git/platform and temporary software keys.",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot4-20261028/before-tests.log",
+        "docs/security/evidence/swarm100-lot4-20261028/before-source-manifest.json",
+        "docs/security/evidence/swarm100-lot4-20261028/independent-pytest.log",
+        "docs/security/evidence/swarm100-lot4-20261028/independent-pytest.json",
+        "docs/security/evidence/swarm100-lot4-20261028/independent-adversarial.json"
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0088",
+      "decision": "REPRODUCED",
+      "severity": "P2",
+      "remediation_state": "FIXED",
+      "path": "scripts/generate_attestation_bundle_v2.py",
+      "current_source_sha256": "4ce522faf18df94eb9710fedf017a162104cb79f747562436f8eb80f0a9cc884",
+      "rationale": "Fabricated chip, filesystem/compiler/entropy and verified-silicon constants are gone. The core records observed platform strings or explicit UNKNOWN, with hardware UNVERIFIED and certification NONE. Synthetic-platform and missing-observation fixtures verify those exact limits.",
+      "source_checks": [
+        {
+          "path": "proof/bundles/attestation_bundle_v1/verify",
+          "start_line": 152,
+          "end_line": 197,
+          "observation": "Captures selected bytes once; claims/components/serialized manifest are bounded before output. Unknown platform observations become UNKNOWN, suites remain NOT_EXECUTED, Git HEAD is only an observation, and no signing/private-key lookup occurs."
+        },
+        {
+          "path": "proof/bundles/attestation_bundle_v1/verify",
+          "start_line": 204,
+          "end_line": 296,
+          "observation": "Rejects legacy/unknown schemas and overclaimed fields, validates age and exact component inventory, rehashes external selected artifacts, requires an explicit external P-256 trust anchor for signature verification, and never derives tests/hardware certification from a signature."
+        },
+        {
+          "path": "scripts/generate_attestation_bundle_v2.py",
+          "start_line": 12,
+          "end_line": 19,
+          "observation": "Import-safe wrapper delegates to canonical core, which copies its portable verifier into each new unsigned snapshot."
+        }
+      ],
+      "guards": [
+        "Only selected-file integrity is asserted; test execution stays NOT_EXECUTED, hardware UNVERIFIED and certification NONE.",
+        "Software-only fixture signatures validate message binding, not operator identity or hardware authorization."
+      ],
+      "runtime_executed": true,
+      "runtime_scope": "Reviewed source/copies executed only with synthetic temporary roots, stub Git/platform and temporary software keys.",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot4-20261028/before-tests.log",
+        "docs/security/evidence/swarm100-lot4-20261028/before-source-manifest.json",
+        "docs/security/evidence/swarm100-lot4-20261028/independent-pytest.log",
+        "docs/security/evidence/swarm100-lot4-20261028/independent-pytest.json",
+        "docs/security/evidence/swarm100-lot4-20261028/independent-adversarial.json"
+      ]
+    }
+  ],
+  "resolved_review_findings": [
+    {
+      "id": "REVIEW-JSON-NONFINITE",
+      "state": "FIXED",
+      "observation": "Initial parser could parse 1e999 as infinity in otherwise unchecked component metadata.",
+      "resolution": "Canonical validation rejects overflow and the environment schema now has exact keys/nonempty strings.",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot4-20261028/independent-adversarial.json"
+      ]
+    },
+    {
+      "id": "REVIEW-CLAIMS-BUDGET",
+      "state": "FIXED",
+      "observation": "Independently reproduced a 4,194,305-byte claims input that generated successfully but could not be verified.",
+      "resolution": "Claims are bounded to MAX_METADATA before capture/output and every generated component is bounded.",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot4-20261028/independent-claims-budget-before.json",
+        "docs/security/evidence/swarm100-lot4-20261028/independent-adversarial.json"
+      ]
+    },
+    {
+      "id": "REVIEW-UNKNOWN-PLATFORM",
+      "state": "FIXED",
+      "observation": "Independently reproduced a successful snapshot with empty platform.machine that its verifier refused.",
+      "resolution": "Missing or blank observed platform fields are encoded as UNKNOWN while hardware remains UNVERIFIED.",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot4-20261028/independent-platform-before.json",
+        "docs/security/evidence/swarm100-lot4-20261028/independent-adversarial.json"
+      ]
+    },
+    {
+      "id": "REVIEW-MANIFEST-BUDGET",
+      "state": "FIXED",
+      "observation": "Independently reproduced a 4,336,732-byte manifest from 256 valid selected-file paths; generation succeeded but verification refused its size.",
+      "resolution": "The actual canonical serialized manifest must fit MAX_METADATA before creating output; final independent fixture uses the real 4 MiB bound and real long paths.",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot4-20261028/independent-manifest-budget-before.json",
+        "docs/security/evidence/swarm100-lot4-20261028/independent-adversarial.json"
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "name": "Independent final Lot4 regressions",
+      "status": "PASS",
+      "passed": 88,
+      "exit_code": 0,
+      "elapsed_seconds": 23.392,
+      "source_hashes_stable": true,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot4-20261028/independent-pytest.json",
+        "docs/security/evidence/swarm100-lot4-20261028/independent-pytest.log"
+      ],
+      "warning": "One expected Unknown config option asyncio_mode warning because automatic pytest plugins were disabled."
+    },
+    {
+      "name": "Independent adversarial fixture harness",
+      "status": "PASS",
+      "passed": 11,
+      "failed": 0,
+      "source_hashes_stable": true,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot4-20261028/independent-adversarial.py",
+        "docs/security/evidence/swarm100-lot4-20261028/independent-adversarial.json"
+      ]
+    },
+    {
+      "name": "Final Ruff sources, tests and independent harness",
+      "status": "PASS",
+      "exit_code": 0,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot4-20261028/independent-static-final.log"
+      ]
+    },
+    {
+      "name": "Historical v2 verifier source unchanged",
+      "status": "PASS",
+      "source_sha256": "bc1bff6c68dee804263e0f6e3a1c48bb879ad9c21ceed7881dbc83ffe6a1d8f2"
+    }
+  ],
+  "historical_checks": [
+    {
+      "name": "Provided prepatch baseline reviewed, not rerun by this reviewer",
+      "failed": 13,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot4-20261028/before-tests.log",
+        "docs/security/evidence/swarm100-lot4-20261028/before-source-manifest.json"
+      ]
+    },
+    {
+      "name": "Earlier independent suite before platform/manifest adjustments",
+      "passed": 86,
+      "source_sha256": {
+        "proof/bundles/attestation_bundle_v1/verify": "668ef1b2511a52fff1acf5f1ac4bfd325e3fd4b6789116f47bf01c733fa21b19",
+        "scripts/generate_attestation_bundle.py": "e043c9463b2ed0c0d5c0a9d353ab3a5a1e11747129473c778db3eb06fa897553",
+        "scripts/generate_attestation_bundle_v2.py": "4ce522faf18df94eb9710fedf017a162104cb79f747562436f8eb80f0a9cc884",
+        "tests/test_swarm100_lot4_regressions.py": "e9d6ad307fc40a2089c6c20869608dea1ac4d244caf86d791f4f2df75a413afd"
+      },
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot4-20261028/independent-pytest-pre-platform.json",
+        "docs/security/evidence/swarm100-lot4-20261028/independent-pytest-pre-platform.log"
+      ]
+    },
+    {
+      "name": "Earlier independent adversarial checks before platform/manifest adjustments",
+      "passed": 9,
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot4-20261028/independent-adversarial-pre-platform.json"
+      ]
+    }
+  ],
+  "outside_scope_open": [
+    {
+      "candidate_id": "SW100-C0135",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "proof/bundles/attestation_bundle_v2/verify",
+      "current_source_sha256": "bc1bff6c68dee804263e0f6e3a1c48bb879ad9c21ceed7881dbc83ffe6a1d8f2",
+      "reason": "The historical standalone verifier retains stored-string artifact comparison; changing the producer does not remediate that historical copy."
+    },
+    {
+      "candidate_id": "SW100-C0136",
+      "severity": "P2",
+      "remediation_state": "OPEN",
+      "path": "proof/bundles/attestation_bundle_v2/verify",
+      "current_source_sha256": "bc1bff6c68dee804263e0f6e3a1c48bb879ad9c21ceed7881dbc83ffe6a1d8f2",
+      "reason": "The historical standalone verifier retains the previously identified unconditional report claims; it was not edited or executed."
+    }
+  ],
+  "runtime_executed": true,
+  "protected_runtime_executed": false,
+  "limitations": [
+    "All generation/verification execution used owned temporary roots/HOME and synthetic artifacts. No real Git, operator key, network publication, native/hardware effect or ATTESTED object was executed/generated.",
+    "Successful verification only establishes the declared selected-file byte integrity at observation time and, when an external key is supplied, software signature validity relative to that explicitly trusted key. It does not attest the whole repository, associate bytes with Git HEAD, certify suites, or establish hardware/operator identity.",
+    "Freshness uses local wall-clock age, not a trusted timestamp authority or an anti-replay ledger.",
+    "Portable verification requires its Python BLAKE3 dependency and cryptography for signature checks; executing verifier code still assumes that verifier implementation itself is trusted.",
+    "Per-file reads and normal failure cleanup were checked. No crash-atomic publication or immunity to a concurrent same-UID writer is claimed.",
+    "Historical signed materials were not regenerated. Legacy v1 input is intentionally refused by the new contract; historical v2 C0135/C0136 remain OPEN.",
+    "Parent-reported MyPy and broader related-suite outcomes are not represented as independently executed checks in this review."
+  ]
+}

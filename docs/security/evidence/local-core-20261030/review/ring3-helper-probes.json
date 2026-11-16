@@ -1,0 +1,17 @@
+{
+  "scope": "software-only synthetic helper probes",
+  "source_sha256": "241eab6330f473a6fcc3da5ff1d4512c098a9c73e102bdb7e5b4d34500aa71cf",
+  "results": [
+    {
+      "case": "missing-operator",
+      "rejected": false,
+      "problem": "Helper accepted a fixture that should be rejected"
+    },
+    {
+      "case": "bool-int-task-mismatch",
+      "rejected": false,
+      "problem": "Helper accepted a fixture that should be rejected"
+    }
+  ],
+  "hardware_attempted": false
+}

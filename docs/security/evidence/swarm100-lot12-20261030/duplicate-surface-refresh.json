@@ -1,0 +1,74 @@
+{
+  "scope": "Explicit reviewed duplicate surface freshness; no product patch, new unique issue or inherited closure.",
+  "updates": [
+    {
+      "candidate_id": "SW100-C0461",
+      "decision": "DUPLICATE",
+      "canonical_id": "SW100-C0103",
+      "severity": "P1",
+      "remediation_state": "OPEN",
+      "independent_surface_state": "OPEN",
+      "independent_surface_kind": "SEPARATE_UNPATCHED_PHYSICAL_COPY",
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/youtube-analysis-pipeline/scripts/yt_audit.py",
+      "current_source_sha256": "ecda4dca2ee77aa986d1898aad7fbd998bc07723bf7126c1e697fbd155638d62",
+      "rationale": "The finding remains the same command-injection issue as canonical C0103, but this independently stored packaged copy is outside the29Lote12 production files and remains byte-identical to its original vulnerable source. Its current run_cmd still sets shell=True and fetch_youtube_audit still interpolates caller URL/output directory into shell strings. The canonical primary copy now uses literal argv and shell=False; that verified repair does not apply to this distinct unpatched file. Preserve DUPLICATE identity while keeping this surface OPEN through an explicit independently reviewed surface state. This is static source/AST inspection only; no shell payload, download, request, or operator data was executed. It adds no unique finding or inferred remediation closure.",
+      "source_checks": [
+        {
+          "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/youtube-analysis-pipeline/scripts/yt_audit.py",
+          "start_line": 7,
+          "end_line": 17,
+          "observation": "Unpatched independent copy calls subprocess.run with shell=True; metadata command interpolates caller URL into a shell string."
+        },
+        {
+          "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/youtube-analysis-pipeline/scripts/yt_audit.py",
+          "start_line": 35,
+          "end_line": 42,
+          "observation": "Subtitle/list commands still interpolate URL and output directory into shell command strings."
+        },
+        {
+          "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/youtube-analysis-pipeline/scripts/yt_audit.py",
+          "start_line": 48,
+          "end_line": 55,
+          "observation": "Copy CLI forwards positional caller URL and output directory directly to fetch_youtube_audit."
+        }
+      ],
+      "guards": [
+        "Canonical identity deduplicates the defect; it does not establish remediation of a distinct physical source copy.",
+        "The independent_surface_state field is explicit reviewed metadata for this path/hash, not permission to bypass current-source, range or evidence validation.",
+        "Only reviewed root DUPLICATE overrides may declare a surface state; validate a distinct canonical path/physical file and require a current hash, nonempty source checks and evidence.",
+        "No product source was modified and no additional unique finding is introduced. Lote13 unique selection must continue excluding DUPLICATE IDs while the queue exposes this pending surface separately."
+      ],
+      "runtime_executed": false,
+      "runtime_scope": "Static source/AST/hash/inode inspection only; no product module import, malicious shell, yt-dlp execution or network request.",
+      "evidence_paths": [
+        "docs/security/evidence/swarm100-lot12-20261030/duplicate-surface-refresh.json",
+        "docs/security/evidence/swarm100-lot12-20261030/duplicate-surface-refresh-validation.json",
+        "docs/security/evidence/swarm100-lot12-20261030/before-source-manifest.json",
+        "docs/security/evidence/swarm100-lot12-20261030/review_inputs/independent-review.json"
+      ],
+      "resolution_type": "DUPLICATE_IDENTITY_WITH_INDEPENDENT_UNPATCHED_SURFACE",
+      "surface_review": {
+        "canonical_path": "tools/skill_library/global/youtube-analysis-pipeline/scripts/yt_audit.py",
+        "canonical_source_sha256": "61d95dcae8a1a3c86c1ffcad16f748b02ddd104362fdf5f41812a7f75955e684",
+        "copy_matches_original_source_sha256": true,
+        "copy_is_distinct_regular_non_symlink": true,
+        "outside_selected_production_scope": true,
+        "canonical_remediation_state": "FIXED",
+        "prior_current_state_after_blind_inheritance": "FIXED",
+        "review_scope": "No behavioral reproduction; source is unpatched and compiler AST confirms shell=True sink."
+      }
+    }
+  ],
+  "recommended_reconciler_rule": {
+    "applicability": "Only an explicit current root override whose decision is DUPLICATE and independent_surface_state is OPEN.",
+    "requirements": [
+      "Validate normal current source hash, source checks, evidence paths and original-path identity first.",
+      "Require independent_surface_state == remediation_state == OPEN.",
+      "Require original/canonical source paths to differ and physical surfaces not to be the same file; this review verified both ordinary regular files and distinct inodes.",
+      "Preserve canonical_id and DUPLICATE decision; do not create another unique finding.",
+      "In the duplicate inheritance loop, preserve the explicit independently reviewed surface state instead of overwriting it with the canonical state.",
+      "Expose pending duplicate surfaces separately in summary/queue and keep duplicate IDs excluded from unique Lote13 selection."
+    ],
+    "no_override_behavior": "Existing canonical state inheritance remains unchanged when no independently reviewed surface override exists."
+  }
+}

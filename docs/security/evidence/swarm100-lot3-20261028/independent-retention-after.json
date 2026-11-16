@@ -1,0 +1,27 @@
+{
+  "source_sha256": "92236e509279cd93355ca574c76070008b7adfabc8cd93ceb87acf3b18f02c0f",
+  "checks": [
+    {
+      "case": "collision",
+      "passed": true,
+      "exception": "FileExistsError"
+    },
+    {
+      "case": "unsafe-directory",
+      "passed": true,
+      "exception": "ValueError"
+    },
+    {
+      "case": "malformed-json",
+      "passed": true,
+      "exception": "JSONDecodeError"
+    },
+    {
+      "case": "replace-failure",
+      "passed": true,
+      "exception": "OSError"
+    }
+  ],
+  "passed": 4,
+  "scope": "Temporary storage-only data; no ATTESTED, gate, Git, Swift or network."
+}

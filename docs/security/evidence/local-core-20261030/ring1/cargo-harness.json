@@ -1,0 +1,23 @@
+{
+  "name": "cargo-harness",
+  "command": [
+    "cargo",
+    "test",
+    "--locked",
+    "-p",
+    "b60-lang",
+    "--features",
+    "stress-bins",
+    "--bin",
+    "fsm_poc",
+    "--bin",
+    "fsm_stress",
+    "--test",
+    "lean_harness"
+  ],
+  "cwd": "/Users/borjafernandezangulo/.codex/worktrees/local-core-ring1/BABYLON-60",
+  "target_dir": "/Users/borjafernandezangulo/.codex/local-core-evidence/capture-20261029T230935Z/rust-target",
+  "exit_code": 0,
+  "elapsed_seconds": 14.454,
+  "log": "/Users/borjafernandezangulo/.codex/local-core-evidence/capture-20261029T230935Z/ring1/cargo-harness.log"
+}

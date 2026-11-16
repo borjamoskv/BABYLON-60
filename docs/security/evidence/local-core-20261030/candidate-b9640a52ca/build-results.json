@@ -1,0 +1,34 @@
+{
+  "revision": "b9640a52ca031d1978232255d31e69efb011f9b9",
+  "results": [
+    {
+      "name": "cargo-build",
+      "command": [
+        "cargo",
+        "build",
+        "-q",
+        "--locked",
+        "-p",
+        "babylon60_root",
+        "--lib",
+        "--features",
+        "python"
+      ],
+      "returncode": 0,
+      "seconds": 6.0335470830323175
+    },
+    {
+      "name": "swift-build",
+      "command": [
+        "xcrun",
+        "swiftc",
+        "-O",
+        "/Users/borjafernandezangulo/.codex/worktrees/local-core-integration/BABYLON-60/01_KISH_ENGINE/babylon60/guards/c5_biometric_gate.swift",
+        "-o",
+        "/Users/borjafernandezangulo/.codex/worktrees/local-core-integration/BABYLON-60/01_KISH_ENGINE/babylon60/guards/c5_biometric_gate"
+      ],
+      "returncode": 0,
+      "seconds": 2.6946811670204625
+    }
+  ]
+}

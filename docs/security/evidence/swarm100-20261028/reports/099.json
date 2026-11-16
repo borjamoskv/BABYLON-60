@@ -1,0 +1,370 @@
+{
+  "shard": "099",
+  "findings": [
+    {
+      "title": "Synchronous verifiers bypass timeout and block the event loop",
+      "severity": "P2",
+      "path": "02_EDIN_SWARMS/agents_archi/topologies/edin.py",
+      "line": 45,
+      "evidence": "Only coroutine functions enter asyncio.wait_for at lines 42\u201343; the synchronous branch calls verify_fn(item) directly at line 45. Semaphore capacity is unvalidated at line 35.",
+      "trigger": "Pass an ordinary blocking verification function, including one that never returns.",
+      "impact": "timeout_s is ignored and all verification tasks/event-loop work can stall; sync work also runs serially despite the parallel interface.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Returned SQLite cursor is attached to an already closed connection",
+      "severity": "P2",
+      "path": "01_KISH_ENGINE/babylon60/kernel/bft_sqlite.py",
+      "line": 68,
+      "evidence": "execute_with_backoff returns cursor inside with self._connection(); the context manager finally closes conn at line 55. The batch method repeats this at lines 98 and 108.",
+      "trigger": "A caller uses the advertised sqlite3.Cursor return value to fetch results from a SELECT or reuse the cursor.",
+      "impact": "The returned cursor cannot fetch/re-execute after the context closes its connection. Existing located callers only write, so no current caller failure is asserted.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Causal verifier still targets removed packages directory",
+      "severity": "P2",
+      "path": "scripts/c5_verifiers/verify_causal_invariants.py",
+      "line": 29,
+      "evidence": "packages_dir is repo_root/packages at line 18; bft_dir derives from it at line 29 and absent-directory check immediately returns False at lines 30\u201332. Read-only metadata shows no packages directory; assigned real BFT sources reside in 01_KISH_ENGINE/babylon60/bft.",
+      "trigger": "Run this verifier on the current checkout.",
+      "impact": "The verification exits before examining current BFT sources or WAL; its structural check also requires the obsolete packages/babylon60 path.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Demo presents simulated authentication and print-only fail-stop as actual guarantees",
+      "severity": "P2",
+      "path": "scripts/c5_demos/c5_killer_demo_60s.py",
+      "line": 100,
+      "evidence": "USER supplies the asserted operator at lines 99\u2013100, signature/key are fixed MOCK byte strings at lines 105\u2013106, effect is a hardcoded result at line 113, and fail-stop only prints at line 179. Line 189 claims the demo proves Human Gate, Cryptographic Provenance and Fail-Stop.",
+      "trigger": "Run or present this demonstration as its documented 13-step hardware authorization demonstration.",
+      "impact": "Viewers receive success/ATTESTED/kernel-transition claims without a biometric call, actual signature, dispatch gate or kernel-state transition. This is an example/evidence defect, not an asserted production bypass.",
+      "confidence": "high",
+      "kind": "example"
+    }
+  ],
+  "hypotheses": [],
+  "coverage": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          199
+        ]
+      ],
+      "inventory_sha256": "0951862a3a34645a9b2f7473c1170eabb05a67a7b75cdbf709436327f0f2efcc",
+      "observed_sha256": "0951862a3a34645a9b2f7473c1170eabb05a67a7b75cdbf709436327f0f2efcc",
+      "inventory_match": true
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/c5_live_server.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          45
+        ]
+      ],
+      "inventory_sha256": "60e77facbe2cf6d644cde824265bec02d969a0524992f601d3b3daae7750990b",
+      "observed_sha256": "60e77facbe2cf6d644cde824265bec02d969a0524992f601d3b3daae7750990b",
+      "inventory_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/cognitive_pilot/store.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          434
+        ]
+      ],
+      "inventory_sha256": "2f502fc14d313b461d9bdfde0c9d5e57bd7b5a348e90e760735edf4c7317e56b",
+      "observed_sha256": "2f502fc14d313b461d9bdfde0c9d5e57bd7b5a348e90e760735edf4c7317e56b",
+      "inventory_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/bft_sqlite.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          124
+        ]
+      ],
+      "inventory_sha256": "4203bfdfe29fa23c379114f0fc6aab8b101055c175d600cbcb9a5228fed84d17",
+      "observed_sha256": "4203bfdfe29fa23c379114f0fc6aab8b101055c175d600cbcb9a5228fed84d17",
+      "inventory_match": true
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/utils/linguistic_entropy.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          12
+        ]
+      ],
+      "inventory_sha256": "e2097fb97f5a558facdb25112c4ea7113905c4d67414bee521cc00f65848757e",
+      "observed_sha256": "e2097fb97f5a558facdb25112c4ea7113905c4d67414bee521cc00f65848757e",
+      "inventory_match": true
+    },
+    {
+      "path": "02_EDIN_SWARMS/agents_archi/topologies/edin.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          81
+        ]
+      ],
+      "inventory_sha256": "7f414645f33cea2a7733a3c6d42ed7ab806fc7925194f1f4f512e69db1fc00c6",
+      "observed_sha256": "7f414645f33cea2a7733a3c6d42ed7ab806fc7925194f1f4f512e69db1fc00c6",
+      "inventory_match": true
+    },
+    {
+      "path": "docs/01_spec/AUDIT_SCIENTIFIC_GUARANTEES_2026.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          209
+        ]
+      ],
+      "inventory_sha256": "1b9f2f1c494fdb936c6f9ae9fbb8d37a98a7aad8a9caabe7b2d3bf509ba1e2eb",
+      "observed_sha256": "1b9f2f1c494fdb936c6f9ae9fbb8d37a98a7aad8a9caabe7b2d3bf509ba1e2eb",
+      "inventory_match": true
+    },
+    {
+      "path": "docs/INBOUND_EMAIL_SETUP.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          151
+        ]
+      ],
+      "inventory_sha256": "a6db7abb87fc8a050639c09b4b3529d317a341b7e72af4351254fac3109203dc",
+      "observed_sha256": "a6db7abb87fc8a050639c09b4b3529d317a341b7e72af4351254fac3109203dc",
+      "inventory_match": true
+    },
+    {
+      "path": "ontology/v1/schema.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          345
+        ]
+      ],
+      "inventory_sha256": "43ddecd8ed35c89c0e1f6ba5a84824ad84f74772b63084555d465744f7b06be9",
+      "observed_sha256": "43ddecd8ed35c89c0e1f6ba5a84824ad84f74772b63084555d465744f7b06be9",
+      "inventory_match": true
+    },
+    {
+      "path": "scripts/c5_demos/c5_killer_demo_60s.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          192
+        ]
+      ],
+      "inventory_sha256": "3804b9655110642c4c03316aa68b5a9143858db5eb638ba33308a4fd51566603",
+      "observed_sha256": "3804b9655110642c4c03316aa68b5a9143858db5eb638ba33308a4fd51566603",
+      "inventory_match": true
+    },
+    {
+      "path": "scripts/c5_quality_gates/audit_domain_bleed.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          186
+        ]
+      ],
+      "inventory_sha256": "6b9631cb93dfaf13357653d05ab38328168cc7be8e60aae0a07b091827c38633",
+      "observed_sha256": "6b9631cb93dfaf13357653d05ab38328168cc7be8e60aae0a07b091827c38633",
+      "inventory_match": true
+    },
+    {
+      "path": "scripts/c5_verifiers/verify_causal_invariants.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          93
+        ]
+      ],
+      "inventory_sha256": "68970e02f17ba7a088ef30d87f7fcda9d483c35599b827da4f9fc305744cd282",
+      "observed_sha256": "68970e02f17ba7a088ef30d87f7fcda9d483c35599b827da4f9fc305744cd282",
+      "inventory_match": true
+    },
+    {
+      "path": "src/mcp_python.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          140
+        ]
+      ],
+      "inventory_sha256": "f99c1b0d2c297b0c2c84c60c9a8b5a6ec3e499dc276157ff3f17e4d9339ab094",
+      "observed_sha256": "f99c1b0d2c297b0c2c84c60c9a8b5a6ec3e499dc276157ff3f17e4d9339ab094",
+      "inventory_match": true
+    },
+    {
+      "path": "tests/test_audit_supply_chain.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          87
+        ]
+      ],
+      "inventory_sha256": "db02982e54207d1fa1fb7ac7bb1054565a4f381067b65f4972ae3f151dc48dcd",
+      "observed_sha256": "db02982e54207d1fa1fb7ac7bb1054565a4f381067b65f4972ae3f151dc48dcd",
+      "inventory_match": true
+    },
+    {
+      "path": "tests/test_merkle_cross_bisimulation.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          172
+        ]
+      ],
+      "inventory_sha256": "dd02529873823ac43d25a2b77fe1804f46cc33b61ff750aa991a7cf55db41db1",
+      "observed_sha256": "dd02529873823ac43d25a2b77fe1804f46cc33b61ff750aa991a7cf55db41db1",
+      "inventory_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/agents-sdk/references/observability.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          44
+        ]
+      ],
+      "inventory_sha256": "4563c0b9856b0f2ce9728470473caab565442cb2eb40044434d771805b9aa7f1",
+      "observed_sha256": "4563c0b9856b0f2ce9728470473caab565442cb2eb40044434d771805b9aa7f1",
+      "inventory_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/ddos/configuration.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          93
+        ]
+      ],
+      "inventory_sha256": "2b1546a843f4f782cbe4207fad97e6fd7a68d80b71af44a29873f707fc46985c",
+      "observed_sha256": "2b1546a843f4f782cbe4207fad97e6fd7a68d80b71af44a29873f707fc46985c",
+      "inventory_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/r2/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          200
+        ]
+      ],
+      "inventory_sha256": "d229e1d53595db452fb893ab5053d37781e782bd46f5ead3193599474abbba88",
+      "observed_sha256": "d229e1d53595db452fb893ab5053d37781e782bd46f5ead3193599474abbba88",
+      "inventory_match": true
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/workers-ai/patterns.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          120
+        ]
+      ],
+      "inventory_sha256": "1ebfd949690bd1e8150435c1bd1bf7b5cd3e6ab35eec5442f7af8bf39ea80198",
+      "observed_sha256": "1ebfd949690bd1e8150435c1bd1bf7b5cd3e6ab35eec5442f7af8bf39ea80198",
+      "inventory_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/flstudio-mcp-production/examples/C5_Full_Track_Arranger.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          128
+        ]
+      ],
+      "inventory_sha256": "74bb86b23fe90b8c6aad73f737b1ca5cafb85447e0eafff4372d7c2137daa191",
+      "observed_sha256": "74bb86b23fe90b8c6aad73f737b1ca5cafb85447e0eafff4372d7c2137daa191",
+      "inventory_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents/agent_03_skill_authoring.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          61
+        ]
+      ],
+      "inventory_sha256": "c389e640a717176aaa7ef6785758d2f9d309954016b74d69c1e04e339734efbd",
+      "observed_sha256": "c389e640a717176aaa7ef6785758d2f9d309954016b74d69c1e04e339734efbd",
+      "inventory_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-epistemic-thermodynamics/references/modules/epistemic-extinction-protocol/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          74
+        ]
+      ],
+      "inventory_sha256": "aac7da450c8673316d0231e01c82b4b6fc11968c5b482a721e5d2984e9e87754",
+      "observed_sha256": "aac7da450c8673316d0231e01c82b4b6fc11968c5b482a721e5d2984e9e87754",
+      "inventory_match": true
+    },
+    {
+      "path": "tools/skill_library/global/c5-tamkarum-60/SKILL.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "inventory_sha256": "7dd1f606f95b35eaa06c29055d43d4599c13358ad994d28541bd0b252d15ec2c",
+      "observed_sha256": "7dd1f606f95b35eaa06c29055d43d4599c13358ad994d28541bd0b252d15ec2c",
+      "inventory_match": true
+    },
+    {
+      "path": "tools/skill_library/global/remotion-audio-reactive-video/examples/SpectralFlux.ts",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          122
+        ]
+      ],
+      "inventory_sha256": "41b875c2e1202272a4e595bed68388039fe2b4cbbab7ca03de286b4bbf5299db",
+      "observed_sha256": "41b875c2e1202272a4e595bed68388039fe2b4cbbab7ca03de286b4bbf5299db",
+      "inventory_match": true
+    }
+  ],
+  "tool_limitations": [
+    "Native codebase-memory graph tools unavailable; targeted text and metadata reads used.",
+    "Static audit only: no tests, project runtime, network API checks, build, deployment or biometric operations executed.",
+    "Repository dirty at inspection; existing changes preserved. Cross-file metadata/search used only for adjudication."
+  ],
+  "tests_run": []
+}

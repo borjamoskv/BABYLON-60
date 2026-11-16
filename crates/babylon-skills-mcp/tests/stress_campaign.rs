@@ -204,13 +204,21 @@ fn adversarial_stress_campaign_100k_dispatches() {
     println!("    • Blocked with PolicyDenied:        {blocked_escalations} (100% Fail-Closed)");
     assert_eq!(blocked_escalations, 10_000);
 
-    // --- SCENARIO 4: Real Repository Catalog Stress (docs/skills.json + .agents/skills) ---
-    println!("\n[+] Scenario 4: Real BABYLON-60 Workspace Burst (131 skills)...");
+    // --- SCENARIO 4: Real Repository Catalog Stress ---
     let repo_root = Path::new(env!("CARGO_MANIFEST_DIR")).parent().unwrap().parent().unwrap();
     let real_catalog = repo_root.join("docs/skills.json");
     let real_skills_dir = repo_root.join(".agents/skills");
+    let parsed_catalog: serde_json::Value =
+        serde_json::from_slice(&std::fs::read(&real_catalog).expect("read catalog")).expect("parse catalog");
+    let entries = parsed_catalog["entries"].as_array().expect("entries array");
+    let expected_total = entries.len();
+    let expected_workspace = entries
+        .iter()
+        .filter(|e| e.get("scope").and_then(|v| v.as_str()) == Some("workspace"))
+        .count();
+    println!("\n[+] Scenario 4: Real BABYLON-60 Workspace Burst ({expected_total} skills)...");
 
-    let real_snap = ImmutableSkillsSnapshot::load(Some(&real_catalog), Some(&real_skills_dir), Some(131))
+    let real_snap = ImmutableSkillsSnapshot::load(Some(&real_catalog), Some(&real_skills_dir), Some(expected_total))
         .expect("load real catalog");
     let real_gateway = SkillsMcpGateway::new(real_snap, false);
 
@@ -222,7 +230,7 @@ fn adversarial_stress_campaign_100k_dispatches() {
             "method": "skills/list",
             "params": { "scope": "workspace" }
         })).unwrap();
-        assert_eq!(resp["result"]["total"], 26);
+        assert_eq!(resp["result"]["total"], expected_workspace);
     }
     let real_duration = real_start.elapsed();
     println!("    • 5,000 Full Catalog Serialization Bursts: {real_duration:.3?}");

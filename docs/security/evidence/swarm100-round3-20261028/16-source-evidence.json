@@ -1,0 +1,721 @@
+{
+  "reviewer": "16",
+  "captured_at_utc": "2026-10-28T15:48:26.468020+00:00",
+  "method": "Independent static inspection of current worktree sources, enclosing guards, direct consumers and targeted repository path metadata. No production imports, native executions, external effects, operator data access or runtime reproduction. Graph tools not exposed by native session; targeted reads used.",
+  "path_metadata": [
+    {
+      "path": "packages",
+      "exists": false,
+      "is_directory": false,
+      "is_symlink": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/bft",
+      "exists": true,
+      "is_directory": true,
+      "is_symlink": false
+    }
+  ],
+  "source_checks": [
+    {
+      "path": "docs/reference/interpreter.py",
+      "source_sha256": "80835f9cd8db946fffc50eb4f598c979f39fc1cc531005f4f354861e049e1236",
+      "start_line": 59,
+      "end_line": 76,
+      "excerpt": "59: # --- 9. El Ledger como objeto matemático (DAG) ---\n60: @dataclass\n61: class Event:\n62:     event_id: str\n63:     parents: List[str]\n64:     logical_timestamp: LogicalClock\n65:     payload: str\n66:     signature: str\n67: \n68:     def hash(self) -> str:\n69:         # Note: In v3.0, the global graph hash is calculated over the canonical serialization,\n70:         # but individual events still have their own hash for the Merkle structure.\n71:         data = f\"{self.event_id}{self.parents}{self.logical_timestamp.tick}{self.payload}{self.signature}\"\n72:         return hashlib.sha256(data.encode()).hexdigest()\n73: \n74:     def serialize_canonical(self) -> str:\n75:         parents_sorted = \",\".join(sorted(self.parents))\n76:         return f\"{self.event_id}|{parents_sorted}|{self.logical_timestamp.tick}|{self.payload}|{self.signature}\""
+    },
+    {
+      "path": "docs/reference/interpreter.py",
+      "source_sha256": "80835f9cd8db946fffc50eb4f598c979f39fc1cc531005f4f354861e049e1236",
+      "start_line": 79,
+      "end_line": 94,
+      "excerpt": "79: class DAGLedger:\n80:     def __init__(self):\n81:         self.events: Dict[str, Event] = {}\n82: \n83:     def append(self, event: Event):\n84:         for parent in event.parents:\n85:             assert parent in self.events, f\"Missing parent event {parent} - causality broken\"\n86:         self.events[event.event_id] = event\n87: \n88:     def generate_canonical_graph(self) -> str:\n89:         # Topological sort with tie-breaking (lexicographical by event_id)\n90:         # For simplicity in this reference interpreter, we sort all keys.\n91:         # A true topological sort is required for complex DAGs.\n92:         sorted_keys = sorted(self.events.keys())\n93:         lines = [self.events[k].serialize_canonical() for k in sorted_keys]\n94:         return \"\\n\".join(lines) + \"\\n\""
+    },
+    {
+      "path": "docs/reference/interpreter.py",
+      "source_sha256": "80835f9cd8db946fffc50eb4f598c979f39fc1cc531005f4f354861e049e1236",
+      "start_line": 142,
+      "end_line": 152,
+      "excerpt": "142:     def export_artifact(self, program: VMProgram):\n143:         # Artifact Bundle (Phase 0: Runtime Bootstrap)\n144:         canonical_graph = self.ledger.generate_canonical_graph()\n145:         graph_sha256 = hashlib.sha256(canonical_graph.encode()).hexdigest()\n146: \n147:         manifest = {\n148:             \"version\": \"1.0\",\n149:             \"components\": [\"trace.bin\", \"graph.canonical\", \"proof.ir\", \"metadata.json\", \"hashes/\", \"signature/\"],\n150:             \"global_hash\": hashlib.sha256(b\"artifact_state_v3\").hexdigest(),\n151:         }\n152:         return manifest, canonical_graph, graph_sha256"
+    },
+    {
+      "path": "docs/reference/interpreter.py",
+      "source_sha256": "80835f9cd8db946fffc50eb4f598c979f39fc1cc531005f4f354861e049e1236",
+      "start_line": 97,
+      "end_line": 102,
+      "excerpt": "97: # --- 10. Compilador autoconsciente ---\n98: class VMProgram:\n99:     def __init__(self, instructions: List[str]):\n100:         self.instructions = instructions\n101:         binary_rep = \"\\n\".join(instructions).encode()\n102:         self.sha256 = hashlib.sha256(binary_rep).hexdigest()"
+    },
+    {
+      "path": "docs/reference/interpreter.py",
+      "source_sha256": "80835f9cd8db946fffc50eb4f598c979f39fc1cc531005f4f354861e049e1236",
+      "start_line": 171,
+      "end_line": 175,
+      "excerpt": "171:     if state != \"HALTED\":\n172:         manifest, canonical_graph, graph_sha256 = vm.export_artifact(program)\n173:         print(f\"[Exporter] Canonical graph generated. graph.sha256: {graph_sha256}\")\n174:         print(\"[Exporter] Proof IR extracted. Dispatched to Lean/Coq Backends.\")\n175:         print(\"[Bootstrap v3.0] Artifact Bundle securely formalized.\")"
+    },
+    {
+      "path": "docs/reference/interpreter.py",
+      "source_sha256": "80835f9cd8db946fffc50eb4f598c979f39fc1cc531005f4f354861e049e1236",
+      "start_line": 105,
+      "end_line": 120,
+      "excerpt": "105: class B60Compiler:\n106:     def compile(self, source: str) -> VMProgram:\n107:         ast = self.parse(source)\n108:         self.static_proof(ast)\n109:         return self.emit(ast)\n110: \n111:     def parse(self, source: str):\n112:         return [line.split(\"#\")[0].strip() for line in source.split(\"\\n\") if line.split(\"#\")[0].strip()]\n113: \n114:     def static_proof(self, ast):\n115:         # Verifies: impossible dependencies, circular waits, uninitialized regs, unreachable events.\n116:         pass\n117: \n118:     def emit(self, ast) -> VMProgram:\n119:         # Reproducible Compilation (SHA256 identical, no timestamps)\n120:         return VMProgram(instructions=ast)"
+    },
+    {
+      "path": "docs/reference/interpreter.py",
+      "source_sha256": "80835f9cd8db946fffc50eb4f598c979f39fc1cc531005f4f354861e049e1236",
+      "start_line": 134,
+      "end_line": 152,
+      "excerpt": "134:     def execute(self, program: VMProgram):\n135:         for instr in program.instructions:\n136:             if instr == \"CRITICAL HALT\":\n137:                 self.state = \"HALTED\"\n138:                 break\n139:             # ... execution logic with proof-aware hooks ...\n140:         return self.state\n141: \n142:     def export_artifact(self, program: VMProgram):\n143:         # Artifact Bundle (Phase 0: Runtime Bootstrap)\n144:         canonical_graph = self.ledger.generate_canonical_graph()\n145:         graph_sha256 = hashlib.sha256(canonical_graph.encode()).hexdigest()\n146: \n147:         manifest = {\n148:             \"version\": \"1.0\",\n149:             \"components\": [\"trace.bin\", \"graph.canonical\", \"proof.ir\", \"metadata.json\", \"hashes/\", \"signature/\"],\n150:             \"global_hash\": hashlib.sha256(b\"artifact_state_v3\").hexdigest(),\n151:         }\n152:         return manifest, canonical_graph, graph_sha256"
+    },
+    {
+      "path": "docs/reference/interpreter.py",
+      "source_sha256": "80835f9cd8db946fffc50eb4f598c979f39fc1cc531005f4f354861e049e1236",
+      "start_line": 155,
+      "end_line": 175,
+      "excerpt": "155: if __name__ == \"__main__\":\n156:     if len(sys.argv) < 2:\n157:         print(\"Usage: python3 babylon60.py <script.b60>\")\n158:         sys.exit(1)\n159: \n160:     with open(sys.argv[1], \"r\") as f:\n161:         code = f.read()\n162: \n163:     compiler = B60Compiler()\n164:     program = compiler.compile(code)\n165:     print(f\"[Compiler] SSA + Typed IR generated. Binary SHA256: {program.sha256}\")\n166: \n167:     vm = B60MinimalVM()\n168:     state = vm.execute(program)\n169: \n170:     print(f\"[Runtime] Execution State: {state}\")\n171:     if state != \"HALTED\":\n172:         manifest, canonical_graph, graph_sha256 = vm.export_artifact(program)\n173:         print(f\"[Exporter] Canonical graph generated. graph.sha256: {graph_sha256}\")\n174:         print(\"[Exporter] Proof IR extracted. Dispatched to Lean/Coq Backends.\")\n175:         print(\"[Bootstrap v3.0] Artifact Bundle securely formalized.\")"
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/gateway/circuit_breaker.rs",
+      "source_sha256": "514c522864cc6a1d360698c34b28f876d61798fbd0202752a44d4feba5515305",
+      "start_line": 157,
+      "end_line": 184,
+      "excerpt": "157:     pub fn with_tier3(tier3: Arc<Tier3Engine>) -> Self {\n158:         Self {\n159:             tier3: Some(tier3),\n160:             ring_policy: RingPolicy::default(),\n161:             t1_timeout_ms: 2000,\n162:             t2_timeout_ms: 2000,\n163:         }\n164:     }\n165: \n166:     pub fn with_config(\n167:         tier3: Option<Arc<Tier3Engine>>,\n168:         ring_policy: RingPolicy,\n169:         t1_timeout_ms: u64,\n170:         t2_timeout_ms: u64,\n171:     ) -> Self {\n172:         Self {\n173:             tier3,\n174:             ring_policy,\n175:             t1_timeout_ms,\n176:             t2_timeout_ms,\n177:         }\n178:     }\n179: \n180:     /// Mock: Call Tier 1 (Antigravity/Gemini). Replace with real HTTP client.\n181:     async fn call_tier1(&self, _req: &ManifoldRequest) -> Result<String, AnergyError> {\n182:         tokio::time::sleep(Duration::from_millis(100)).await;\n183:         Ok(\"Response from Tier 1 (Antigravity)\".to_string())\n184:     }"
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/gateway/circuit_breaker.rs",
+      "source_sha256": "514c522864cc6a1d360698c34b28f876d61798fbd0202752a44d4feba5515305",
+      "start_line": 227,
+      "end_line": 243,
+      "excerpt": "227:     pub async fn execute_with_failover(&self, req: ManifoldRequest) -> Result<GatewayResponse, AnergyError> {\n228:         let start = Instant::now();\n229: \n230:         // Step 1: Try Tier 1\n231:         let t1_future = self.call_tier1(&req);\n232:         match timeout(Duration::from_millis(self.t1_timeout_ms), t1_future).await {\n233:             Ok(Ok(content)) => {\n234:                 let latency_ms = start.elapsed().as_millis() as u64;\n235:                 return Ok(GatewayResponse::new(content, CognitiveTier::Tier1Antigravity, latency_ms));\n236:             }\n237:             _ => {\n238:                 // T1 failed or timed out. Proceed to failover logic.\n239:             }\n240:         }\n241: \n242:         // Step 2: Check Ring policy for T3\n243:         let t3_allowed = self.ring_policy.t3_allowed(req.target_ring) && self.tier3.is_some();"
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/gateway/circuit_breaker.rs",
+      "source_sha256": "514c522864cc6a1d360698c34b28f876d61798fbd0202752a44d4feba5515305",
+      "start_line": 312,
+      "end_line": 334,
+      "excerpt": "312: impl Attestor for CognitiveGateway {\n313:     async fn query(&self, goal: &Statement) -> Justification {\n314:         // Construct the ManifoldRequest\n315:         let payload_hash_str = hash_statement(goal);\n316:         // We hash the hash string to get a u64 for the ManifoldRequest\n317:         let mut hasher = std::collections::hash_map::DefaultHasher::new();\n318:         use std::hash::{Hash, Hasher};\n319:         payload_hash_str.hash(&mut hasher);\n320:         let payload_hash = hasher.finish();\n321: \n322:         let req = ManifoldRequest {\n323:             payload_hash,\n324:             complexity_score: 3, // Default heuristic for generic queries\n325:             target_ring: 2,      // Assume ring 2 to allow Tier3 by default; production would adapt this based on `goal.obligations`.\n326:             prompt: goal.content.clone(),\n327:             max_tokens: 1024,\n328:         };\n329: \n330:         match self.execute_with_failover(req).await {\n331:             Ok(resp) => Justification::ExogenousInjection {\n332:                 source: format!(\"LLM_GATEWAY:{}\", resp.resolved_by),\n333:                 context: resp.content,\n334:             },"
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/poc_t3_ollama_real.rs",
+      "source_sha256": "ac6f209febfb7c29db2254b8d93da0504652d53e09006ebc4b9bde19220cf3eb",
+      "start_line": 38,
+      "end_line": 68,
+      "excerpt": "38:     // 2. Gateway setup\n39:     // Using short timeouts for T1/T2 to ensure T3 wins if it's healthy and fast.\n40:     let gateway = CognitiveGateway::with_tier3(engine.clone());\n41: \n42:     // Check health directly\n43:     let health = engine.health().await;\n44:     println!(\"[*] Estado de salud inicial de T3 (Ollama): {:?}\", health);\n45: \n46:     // 3. Dispatch real request\n47:     let prompt = \"Define 'entropía' en una sola frase breve.\";\n48:     let req = ManifoldRequest {\n49:         payload_hash: 0xC5C5,\n50:         complexity_score: 3,\n51:         target_ring: 2, // Allowed for T3\n52:         prompt: prompt.to_string(),\n53:         max_tokens: 50,\n54:     };\n55: \n56:     println!(\"\\n[*] Despachando prompt al Gateway: \\\"{}\\\"\", prompt);\n57:     let start = Instant::now();\n58: \n59:     match gateway.execute_with_failover(req).await {\n60:         Ok(response) => {\n61:             let elapsed = start.elapsed().as_millis();\n62:             println!(\"═══════════════════════════════════════════════════════════════════\");\n63:             println!(\"✅ INFERENCIA COMPLETADA EN {} ms\", elapsed);\n64:             println!(\"   Resuelto por : {}\", response.resolved_by);\n65:             println!(\"   Latencia int.: {} ms\", response.latency_ms);\n66:             println!(\"   BLAKE3 Hash  : {}\", response.content_hash);\n67:             println!(\"═══════════════════════════════════════════════════════════════════\");\n68:             println!(\"📝 OUTPUT:\\n\\n{}\\n\", response.content.trim());"
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/bin/poc_oracle_nexus.rs",
+      "source_sha256": "9504feb0fc756893ad1ab29d42f70559d5b7f6f7a7c3950a62a3dc56dc5dccbb",
+      "start_line": 30,
+      "end_line": 59,
+      "excerpt": "30:     // 2. Initialize Gateway (with Ollama)\n31:     let model_name = \"qwen2.5:0.5b\"; \n32:     let backend_result = OllamaBackend::new(\"http://localhost:11434\", model_name);\n33:     \n34:     let engine = match backend_result {\n35:         Ok(backend) => Arc::new(Tier3Engine::new(Arc::new(backend))),\n36:         Err(e) => {\n37:             println!(\"❌ Fallo al inicializar HTTP Client para Ollama: {}\", e);\n38:             return;\n39:         }\n40:     };\n41:     let gateway = CognitiveGateway::with_tier3(engine.clone());\n42:     println!(\"[*] CognitiveGateway inicializado (Tier 3 -> {})\", model_name);\n43: \n44:     // 3. Initialize Orchestrator (Injecting Gateway as Attestor)\n45:     let mut orchestrator = Orchestrator::new(ledger, Box::new(gateway));\n46:     println!(\"[*] Orchestrator enlazado al Gateway (Attestor Interface)\\n\");\n47: \n48:     // 4. Formulate an Epistemic Goal\n49:     let goal = Statement {\n50:         content: \"Explica qué es un DAG (Directed Acyclic Graph) en 10 palabras.\".into(),\n51:         modality: Modality::Epistemic,\n52:         obligations: vec![Obligation::Freshness], // Requiere justificación fresca (que provee ExogenousInjection)\n53:     };\n54: \n55:     println!(\"[*] Inyectando Intención: \\\"{}\\\"\", goal.content);\n56:     let start = Instant::now();\n57: \n58:     // 5. Resolve Intent\n59:     match orchestrator.resolve_intent(&goal, \"c5-oracle-nexus\").await {"
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/gateway/circuit_breaker.rs",
+      "source_sha256": "514c522864cc6a1d360698c34b28f876d61798fbd0202752a44d4feba5515305",
+      "start_line": 12,
+      "end_line": 16,
+      "excerpt": "12: //! Invariants Enforced:\n13: //! - INV_CB_01: Ring-0 requests NEVER reach Tier 3 (Fail-Stop).\n14: //! - INV_CB_02: All responses carry BLAKE3 attestation hash.\n15: //! - INV_CB_03: Tier 3 health state gates race participation.\n16: //! - INV_CB_04: RingPolicy is configurable, not hardcoded."
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/gateway/circuit_breaker.rs",
+      "source_sha256": "514c522864cc6a1d360698c34b28f876d61798fbd0202752a44d4feba5515305",
+      "start_line": 110,
+      "end_line": 129,
+      "excerpt": "110: /// Configurable policy for which rings allow Tier 3 dispatch.\n111: #[derive(Debug, Clone)]\n112: pub struct RingPolicy {\n113:     /// Rings where Tier 3 local inference is permitted (default: [1, 2, 3]).\n114:     pub t3_allowed_rings: Vec<u8>,\n115: }\n116: \n117: impl Default for RingPolicy {\n118:     fn default() -> Self {\n119:         Self {\n120:             t3_allowed_rings: vec![1, 2, 3],\n121:         }\n122:     }\n123: }\n124: \n125: impl RingPolicy {\n126:     /// Check if Tier 3 is allowed for a given ring level.\n127:     pub fn t3_allowed(&self, ring: u8) -> bool {\n128:         self.t3_allowed_rings.contains(&ring)\n129:     }"
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/gateway/circuit_breaker.rs",
+      "source_sha256": "514c522864cc6a1d360698c34b28f876d61798fbd0202752a44d4feba5515305",
+      "start_line": 166,
+      "end_line": 178,
+      "excerpt": "166:     pub fn with_config(\n167:         tier3: Option<Arc<Tier3Engine>>,\n168:         ring_policy: RingPolicy,\n169:         t1_timeout_ms: u64,\n170:         t2_timeout_ms: u64,\n171:     ) -> Self {\n172:         Self {\n173:             tier3,\n174:             ring_policy,\n175:             t1_timeout_ms,\n176:             t2_timeout_ms,\n177:         }\n178:     }"
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/gateway/circuit_breaker.rs",
+      "source_sha256": "514c522864cc6a1d360698c34b28f876d61798fbd0202752a44d4feba5515305",
+      "start_line": 242,
+      "end_line": 274,
+      "excerpt": "242:         // Step 2: Check Ring policy for T3\n243:         let t3_allowed = self.ring_policy.t3_allowed(req.target_ring) && self.tier3.is_some();\n244: \n245:         // Step 3: Ring-0 or policy forbids T3 → T2 only\n246:         if !t3_allowed {\n247:             let t2_future = self.call_tier2(&req);\n248:             match timeout(Duration::from_millis(self.t2_timeout_ms), t2_future).await {\n249:                 Ok(Ok(content)) => {\n250:                     let latency_ms = start.elapsed().as_millis() as u64;\n251:                     return Ok(GatewayResponse::new(content, CognitiveTier::Tier2OpenRouter, latency_ms));\n252:                 }\n253:                 _ => {\n254:                     if req.target_ring == 0 {\n255:                         return Err(AnergyError::SystemHalt(\n256:                             \"Fail-Stop: Tier 1 & 2 down. T3 not authorized for RING-0.\"\n257:                         ));\n258:                     }\n259:                     return Err(AnergyError::RingPolicyViolation {\n260:                         ring: req.target_ring,\n261:                         tier: \"Tier3\",\n262:                     });\n263:                 }\n264:             }\n265:         }\n266: \n267:         // Step 4: Race T2 vs T3\n268:         // Pin futures on the stack so select! borrows them (avoids move semantics).\n269:         let t2_future = self.call_tier2(&req);\n270:         let t3_future = self.call_tier3(&req);\n271:         tokio::pin!(t2_future);\n272:         tokio::pin!(t3_future);\n273: \n274:         tokio::select! {"
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/strike-rs/src/gateway/tier3.rs",
+      "source_sha256": "fadac1e715e582527ad3470a9045a866d1297d2ed7e489c3609ed52d91fcacd2",
+      "start_line": 232,
+      "end_line": 249,
+      "excerpt": "232:     /// Execute inference with health tracking and attestation.\n233:     pub async fn execute(&self, prompt: &str, max_tokens: u32) -> Result<InferenceOutput, Tier3Error> {\n234:         // 1. Cooldown gate\n235:         if self.is_in_cooldown() {\n236:             let remaining = {\n237:                 let last = self.last_failure_epoch_ms.load(Ordering::Relaxed);\n238:                 let cooldown = self.current_cooldown_ms();\n239:                 last.saturating_add(cooldown).saturating_sub(epoch_ms())\n240:             };\n241:             return Err(Tier3Error::CooldownActive { remaining_ms: remaining });\n242:         }\n243: \n244:         // 2. Execute with timeout\n245:         let start = Instant::now();\n246:         let result = timeout(\n247:             Duration::from_millis(self.inference_timeout_ms),\n248:             self.backend.infer(prompt, max_tokens),\n249:         ).await;"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/cortex/gemini_labs_nexus.py",
+      "source_sha256": "4dd008708e114dd964dc0c54dbf627a1176e6cafa333cde8f1fc234674f1a21e",
+      "start_line": 19,
+      "end_line": 40,
+      "excerpt": "19: try:\n20:     from fastmcp import FastMCP\n21: \n22:     HAS_FASTMCP = True\n23: except ImportError:\n24:     HAS_FASTMCP = False\n25: \n26: try:\n27:     from lingua import Language, LanguageDetector, LanguageDetectorBuilder\n28: \n29:     HAS_LINGUA = True\n30: except ImportError:\n31:     HAS_LINGUA = False\n32: \n33: # Import AST Sandbox from primitives\n34: sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), \"..\", \"..\")))\n35: from babylon60.primitives.sandbox import ASTSandbox\n36: \n37: # Initialize FastMCP Server\n38: mcp_app = FastMCP(\"Gemini Labs Nexus MCP Server\") if HAS_FASTMCP else None\n39: \n40: GEMINI_API_KEY = os.getenv(\"GEMINI_API_KEY\") or os.getenv(\"GOOGLE_API_KEY\")"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/cortex/gemini_labs_nexus.py",
+      "source_sha256": "4dd008708e114dd964dc0c54dbf627a1176e6cafa333cde8f1fc234674f1a21e",
+      "start_line": 110,
+      "end_line": 126,
+      "excerpt": "110: def append_auto_log(event_type: str, payload: Dict[str, Any], receipt: Dict[str, Any]) -> None:\n111:     \"\"\"Appends interaction event to sandbox-resilient JSONL telemetry ledger.\"\"\"\n112:     try:\n113:         os.makedirs(LOGS_DIR, exist_ok=True)\n114:         log_entry = {\n115:             \"timestamp\": int(time.time()),\n116:             \"iso_timestamp\": time.strftime(\"%Y-%m-%dT%H:%M:%SZ\", time.gmtime()),\n117:             \"event_type\": event_type,\n118:             \"payload_summary\": {\n119:                 \"prompt_sha256\": hashlib.sha256(str(payload.get(\"prompt\", \"\")).encode(\"utf-8\")).hexdigest()[:16],\n120:                 \"model\": payload.get(\"model\", \"N/A\"),\n121:                 \"is_safe\": payload.get(\"is_safe\", True),\n122:             },\n123:             \"scitt_receipt\": receipt,\n124:         }\n125:         with open(LOG_FILE, \"a\", encoding=\"utf-8\") as f:\n126:             f.write(json.dumps(log_entry, ensure_ascii=False) + \"\\n\")"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/cortex/gemini_labs_nexus.py",
+      "source_sha256": "4dd008708e114dd964dc0c54dbf627a1176e6cafa333cde8f1fc234674f1a21e",
+      "start_line": 133,
+      "end_line": 155,
+      "excerpt": "133: if mcp_app:\n134: \n135:     @mcp_app.tool()\n136:     def gemini_labs_generate(prompt: str, model: str = \"gemini-2.5-pro\") -> str:\n137:         \"\"\"Generates AI response using Gemini Labs API bridge with SCITT attestation and auto-logging.\"\"\"\n138:         start_time = time.perf_counter()\n139:         system_prompt = inject_language_context(\n140:             \"Eres Gemini Labs MCP Server operando bajo invariantes C5-REAL.\", prompt\n141:         )\n142: \n143:         # Simulated or actual API response\n144:         response_text = f\"[Gemini Labs Nexus Engine ({model})]: Respuesta generada determinísticamente para el prompt.\"\n145:         latency_ms = (time.perf_counter() - start_time) * 1000\n146: \n147:         receipt = generate_scitt_receipt({\"latency_ms\": round(latency_ms, 3), \"model\": model}, response_text)\n148: \n149:         append_auto_log(\"GEMINI_GENERATE\", {\"prompt\": prompt, \"model\": model}, receipt)\n150: \n151:         return json.dumps(\n152:             {\"prompt\": prompt, \"response\": response_text, \"system_prompt\": system_prompt, \"scitt_receipt\": receipt},\n153:             indent=2,\n154:             ensure_ascii=False,\n155:         )"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/cortex/gemini_labs_nexus.py",
+      "source_sha256": "4dd008708e114dd964dc0c54dbf627a1176e6cafa333cde8f1fc234674f1a21e",
+      "start_line": 168,
+      "end_line": 178,
+      "excerpt": "168: def main() -> None:\n169:     \"\"\"Main entrypoint for running Gemini Labs Nexus server in stdio mode.\"\"\"\n170:     if mcp_app:\n171:         mcp_app.run(transport=\"stdio\")\n172:     else:\n173:         print(\"FastMCP is not installed. Gemini Labs Nexus running in Standalone Fallback Mode.\")\n174:         test_res = eval_code_with_sandbox(\"x = 10 + 20\")\n175:         receipt = generate_scitt_receipt({\"ast_sandbox_validated\": test_res[\"is_safe\"]}, \"x = 10 + 20\")\n176:         append_auto_log(\"STANDALONE_TEST\", {\"prompt\": \"x = 10 + 20\", \"is_safe\": test_res[\"is_safe\"]}, receipt)\n177:         print(\"AST Sandbox Fallback Test Verdict:\", test_res)\n178:         print(\"Auto-log written to:\", LOG_FILE)"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/cortex/gemini_labs_nexus.py",
+      "source_sha256": "4dd008708e114dd964dc0c54dbf627a1176e6cafa333cde8f1fc234674f1a21e",
+      "start_line": 71,
+      "end_line": 91,
+      "excerpt": "71: def generate_scitt_receipt(claims: Dict[str, Any], payload: str) -> Dict[str, Any]:\n72:     \"\"\"Generates an IETF RFC 9943 Compliant SCITT Attestation Receipt.\"\"\"\n73:     payload_bytes = payload.encode(\"utf-8\")\n74:     merkle_root = hashlib.sha3_256(payload_bytes).hexdigest()\n75:     timestamp = int(time.time())\n76: \n77:     return {\n78:         \"@context\": \"https://ietf.org/scitt/v1\",\n79:         \"type\": \"GEMINI_LABS_C5_SCITT_RECEIPT\",\n80:         \"issuer\": \"did:c5real:babylon60:gemini_labs_nexus\",\n81:         \"timestamp\": timestamp,\n82:         \"merkle_root_sha3_256\": merkle_root,\n83:         \"claims\": {\n84:             \"c5_real_compliant\": True,\n85:             \"ast_sandbox_validated\": claims.get(\"ast_sandbox_validated\", True),\n86:             \"verification_latency_ms\": claims.get(\"latency_ms\", 0.0),\n87:             \"model\": claims.get(\"model\", \"gemini-2.5-pro\"),\n88:             \"eu_ai_act_article_15_compliant\": True,\n89:         },\n90:         \"signature_ed25519\": f\"sig_ed25519_{merkle_root[:32]}\",\n91:     }"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/cortex/gemini_labs_nexus.py",
+      "source_sha256": "4dd008708e114dd964dc0c54dbf627a1176e6cafa333cde8f1fc234674f1a21e",
+      "start_line": 133,
+      "end_line": 165,
+      "excerpt": "133: if mcp_app:\n134: \n135:     @mcp_app.tool()\n136:     def gemini_labs_generate(prompt: str, model: str = \"gemini-2.5-pro\") -> str:\n137:         \"\"\"Generates AI response using Gemini Labs API bridge with SCITT attestation and auto-logging.\"\"\"\n138:         start_time = time.perf_counter()\n139:         system_prompt = inject_language_context(\n140:             \"Eres Gemini Labs MCP Server operando bajo invariantes C5-REAL.\", prompt\n141:         )\n142: \n143:         # Simulated or actual API response\n144:         response_text = f\"[Gemini Labs Nexus Engine ({model})]: Respuesta generada determinísticamente para el prompt.\"\n145:         latency_ms = (time.perf_counter() - start_time) * 1000\n146: \n147:         receipt = generate_scitt_receipt({\"latency_ms\": round(latency_ms, 3), \"model\": model}, response_text)\n148: \n149:         append_auto_log(\"GEMINI_GENERATE\", {\"prompt\": prompt, \"model\": model}, receipt)\n150: \n151:         return json.dumps(\n152:             {\"prompt\": prompt, \"response\": response_text, \"system_prompt\": system_prompt, \"scitt_receipt\": receipt},\n153:             indent=2,\n154:             ensure_ascii=False,\n155:         )\n156: \n157:     @mcp_app.tool()\n158:     def gemini_labs_code_eval(code: str) -> str:\n159:         \"\"\"Validates python code against AST Sandbox and returns C5-REAL verdict with auto-logging.\"\"\"\n160:         verdict = eval_code_with_sandbox(code)\n161:         receipt = generate_scitt_receipt({\"ast_sandbox_validated\": verdict[\"is_safe\"]}, code)\n162: \n163:         append_auto_log(\"CODE_EVAL\", {\"prompt\": code, \"is_safe\": verdict[\"is_safe\"]}, receipt)\n164: \n165:         return json.dumps({\"code\": code, \"verdict\": verdict, \"scitt_receipt\": receipt}, indent=2)"
+    },
+    {
+      "path": "crates/b60-lang/src/vm.rs",
+      "source_sha256": "633d03c82686e0c10adc1b659a4a4063160053f78153584fd9f6147fec02a889",
+      "start_line": 23,
+      "end_line": 56,
+      "excerpt": "23:     pub fn from_parts(seconds: u64, fraction: u64) -> Self {\n24:         let carry = fraction / FRACTION_BASE;\n25:         SexaRegister {\n26:             seconds: seconds + carry,\n27:             sexa_fraction: fraction % FRACTION_BASE,\n28:         }\n29:     }\n30: \n31:     pub fn add(&self, other: &Self) -> Self {\n32:         let total_frac = self.sexa_fraction + other.sexa_fraction;\n33:         let carry = total_frac / FRACTION_BASE;\n34:         SexaRegister {\n35:             seconds: self.seconds + other.seconds + carry,\n36:             sexa_fraction: total_frac % FRACTION_BASE,\n37:         }\n38:     }\n39: \n40:     pub fn sub(&self, other: &Self) -> Result<Self, &'static str> {\n41:         if self.seconds < other.seconds || (self.seconds == other.seconds && self.sexa_fraction < other.sexa_fraction) {\n42:             return Err(\"Underflow sexagesimal: tiempo no puede ser negativo\");\n43:         }\n44:         let (secs, frac) = if self.sexa_fraction >= other.sexa_fraction {\n45:             (self.seconds - other.seconds, self.sexa_fraction - other.sexa_fraction)\n46:         } else {\n47:             (self.seconds - other.seconds - 1, (FRACTION_BASE + self.sexa_fraction) - other.sexa_fraction)\n48:         };\n49:         Ok(SexaRegister { seconds: secs, sexa_fraction: frac })\n50:     }\n51: \n52:     pub fn mul_scalar(&self, factor: u64) -> Self {\n53:         let total_units = (self.seconds as u128 * FRACTION_BASE as u128 + self.sexa_fraction as u128) * (factor as u128);\n54:         let secs = (total_units / FRACTION_BASE as u128) as u64;\n55:         let frac = (total_units % FRACTION_BASE as u128) as u64;\n56:         SexaRegister { seconds: secs, sexa_fraction: frac }"
+    },
+    {
+      "path": "crates/b60-lang/src/vm.rs",
+      "source_sha256": "633d03c82686e0c10adc1b659a4a4063160053f78153584fd9f6147fec02a889",
+      "start_line": 140,
+      "end_line": 150,
+      "excerpt": "140:     fn poison_and_abort(&mut self, code: u8, msg: String) -> Result<(), String> {\n141:         self.manifest.status_flag = MANIFEST_POISONED;\n142:         self.is_halted = true;\n143:         self.exit_code = code;\n144:         let mut halt_receipt = [0u8; 32];\n145:         halt_receipt[0] = 0xDE;\n146:         halt_receipt[1] = 0xAD;\n147:         halt_receipt[2] = 0x60;\n148:         halt_receipt[3] = 0x60;\n149:         self.worm_ledger.push(halt_receipt);\n150:         Err(msg)"
+    },
+    {
+      "path": "crates/b60-lang/src/vm.rs",
+      "source_sha256": "633d03c82686e0c10adc1b659a4a4063160053f78153584fd9f6147fec02a889",
+      "start_line": 230,
+      "end_line": 251,
+      "excerpt": "230:                 SexaOpCode::SexaAdd => {\n231:                     self.registers[0] = self.registers[0].add(&self.registers[1]);\n232:                 }\n233: \n234:                 SexaOpCode::SexaSub => {\n235:                     match self.registers[0].sub(&self.registers[1]) {\n236:                         Ok(res) => self.registers[0] = res,\n237:                         Err(e) => return self.poison_and_abort(1, format!(\"PC {}: {}\", self.pc, e)),\n238:                     }\n239:                 }\n240: \n241:                 SexaOpCode::SexaMulRational => {\n242:                     let factor = self.registers[1].seconds;\n243:                     self.registers[0] = self.registers[0].mul_scalar(factor);\n244:                 }\n245: \n246:                 SexaOpCode::SexaDivRational => {\n247:                     let divisor = self.registers[1].seconds;\n248:                     match self.registers[0].div_exact(divisor) {\n249:                         Ok(res) => self.registers[0] = res,\n250:                         Err(e) => return self.poison_and_abort(1, format!(\"PC {}: {}\", self.pc, e)),\n251:                     }"
+    },
+    {
+      "path": "crates/b60-lang/src/ffi.rs",
+      "source_sha256": "94d2633044e106a01ca41304a7d430968bc56cdea2a5e2c785cb8c192f42f83b",
+      "start_line": 137,
+      "end_line": 163,
+      "excerpt": "137: /// Ejecuta una tira de bytecode sexagesimal en la VM F60\n138: ///\n139: /// # Safety\n140: /// `bytecode_ptr` debe apuntar a un slice legible de al menos `bytecode_len` bytes.\n141: /// Si no es nulo, `out_cycles` debe ser válido para escribir un `u64`.\n142: #[no_mangle]\n143: pub unsafe extern \"C\" fn b60_run_bytecode(\n144:     bytecode_ptr: *const u8,\n145:     bytecode_len: usize,\n146:     out_cycles: *mut u64,\n147: ) -> i32 {\n148:     if bytecode_ptr.is_null() || bytecode_len == 0 {\n149:         return -1;\n150:     }\n151:     let bytecode = slice::from_raw_parts(bytecode_ptr, bytecode_len);\n152:     let mut vm = F60VM::new();\n153: \n154:     match vm.execute(bytecode) {\n155:         Ok(()) => {\n156:             if !out_cycles.is_null() {\n157:                 *out_cycles = vm.pc as u64;\n158:             }\n159:             0\n160:         }\n161:         Err(_) => -2,\n162:     }\n163: }"
+    },
+    {
+      "path": "crates/b60-lang/src/vm.rs",
+      "source_sha256": "633d03c82686e0c10adc1b659a4a4063160053f78153584fd9f6147fec02a889",
+      "start_line": 153,
+      "end_line": 164,
+      "excerpt": "153:     pub fn execute(&mut self, bytecode: &[u8]) -> Result<(), String> {\n154:         let mut steps = 0usize;\n155:         let max_steps = 100_000usize;\n156: \n157:         while self.pc < bytecode.len() && !self.is_halted {\n158:             steps += 1;\n159:             if steps > max_steps {\n160:                 return self.poison_and_abort(\n161:                     1,\n162:                     \"FAIL-CLOSED (0xDEAD_6060): Horizonte de combustible agotado (bucle no contractible)\".to_string(),\n163:                 );\n164:             }"
+    },
+    {
+      "path": "crates/b60-lang/src/vm.rs",
+      "source_sha256": "633d03c82686e0c10adc1b659a4a4063160053f78153584fd9f6147fec02a889",
+      "start_line": 195,
+      "end_line": 227,
+      "excerpt": "195:                 SexaOpCode::Jump => {\n196:                     if self.pc + 2 <= bytecode.len() {\n197:                         let target = u16::from_le_bytes([bytecode[self.pc], bytecode[self.pc + 1]]) as usize;\n198:                         self.pc = target;\n199:                     } else {\n200:                         return self.poison_and_abort(1, \"JUMP: operando de destino truncado\".to_string());\n201:                     }\n202:                 }\n203: \n204:                 SexaOpCode::JumpIfZero => {\n205:                     if self.pc + 3 <= bytecode.len() {\n206:                         let reg_idx = (bytecode[self.pc] % 8) as usize;\n207:                         let target = u16::from_le_bytes([bytecode[self.pc + 1], bytecode[self.pc + 2]]) as usize;\n208:                         self.pc += 3;\n209:                         if self.registers[reg_idx].seconds == 0 && self.registers[reg_idx].sexa_fraction == 0 {\n210:                             self.pc = target;\n211:                         }\n212:                     } else {\n213:                         return self.poison_and_abort(1, \"JZ: operandos truncados\".to_string());\n214:                     }\n215:                 }\n216: \n217:                 SexaOpCode::JumpIfNotZero => {\n218:                     if self.pc + 3 <= bytecode.len() {\n219:                         let reg_idx = (bytecode[self.pc] % 8) as usize;\n220:                         let target = u16::from_le_bytes([bytecode[self.pc + 1], bytecode[self.pc + 2]]) as usize;\n221:                         self.pc += 3;\n222:                         if self.registers[reg_idx].seconds != 0 || self.registers[reg_idx].sexa_fraction != 0 {\n223:                             self.pc = target;\n224:                         }\n225:                     } else {\n226:                         return self.poison_and_abort(1, \"JNZ: operandos truncados\".to_string());\n227:                     }"
+    },
+    {
+      "path": "crates/b60-lang/src/vm.rs",
+      "source_sha256": "633d03c82686e0c10adc1b659a4a4063160053f78153584fd9f6147fec02a889",
+      "start_line": 380,
+      "end_line": 393,
+      "excerpt": "380:                 unhandled => {\n381:                     return self.poison_and_abort(\n382:                         1,\n383:                         format!(\n384:                             \"FAIL-CLOSED (0xDEAD_6060): OpCode {:?} (0x{:02X}) carece de sustrato verificado en F60-VM\",\n385:                             unhandled,\n386:                             unhandled as u8\n387:                         ),\n388:                     );\n389:                 }\n390:             }\n391:         }\n392:         Ok(())\n393:     }"
+    },
+    {
+      "path": "crates/b60-lang/src/ffi.rs",
+      "source_sha256": "94d2633044e106a01ca41304a7d430968bc56cdea2a5e2c785cb8c192f42f83b",
+      "start_line": 148,
+      "end_line": 162,
+      "excerpt": "148:     if bytecode_ptr.is_null() || bytecode_len == 0 {\n149:         return -1;\n150:     }\n151:     let bytecode = slice::from_raw_parts(bytecode_ptr, bytecode_len);\n152:     let mut vm = F60VM::new();\n153: \n154:     match vm.execute(bytecode) {\n155:         Ok(()) => {\n156:             if !out_cycles.is_null() {\n157:                 *out_cycles = vm.pc as u64;\n158:             }\n159:             0\n160:         }\n161:         Err(_) => -2,\n162:     }"
+    },
+    {
+      "path": "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+      "source_sha256": "126474f8d45284fee75951c5a9ddd7abc350352be7df3adb6df8653aeb8e3ca2",
+      "start_line": 24,
+      "end_line": 26,
+      "excerpt": "24: REPO_ROOT = Path(__file__).parent.parents[2]\n25: SNAPSHOT_DIR = REPO_ROOT / \"audit\" / \"snapshots\"\n26: DB_PATH = REPO_ROOT / \"cortex.db\""
+    },
+    {
+      "path": "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+      "source_sha256": "126474f8d45284fee75951c5a9ddd7abc350352be7df3adb6df8653aeb8e3ca2",
+      "start_line": 43,
+      "end_line": 74,
+      "excerpt": "43: def create_snapshot() -> Path:\n44:     SNAPSHOT_DIR.mkdir(parents=True, exist_ok=True)\n45:     timestamp = datetime.now(timezone.utc).strftime(\"%Y%m%d_%H%M%S\")\n46:     dest_db = SNAPSHOT_DIR / f\"cortex_snapshot_{timestamp}.db\"\n47: \n48:     # SQLite VACUUM INTO to safely create a consistent snapshot without blocking WAL\n49:     if DB_PATH.exists():\n50:         conn = sqlite3.connect(DB_PATH)\n51:         try:\n52:             conn.execute(\"VACUUM INTO ?\", (str(dest_db),))\n53:         finally:\n54:             conn.close()\n55:     else:\n56:         # Create empty db if cortex.db doesn't exist yet\n57:         sqlite3.connect(dest_db).close()\n58: \n59:     db_hash = compute_sha256(dest_db)\n60:     commit_sha = get_latest_commit()\n61: \n62:     manifest = {\n63:         \"snapshot_file\": dest_db.name,\n64:         \"sha256\": db_hash,\n65:         \"commit_sha\": commit_sha,\n66:         \"author\": AUTHOR,\n67:         \"created_at\": datetime.now(timezone.utc).isoformat(),\n68:     }\n69: \n70:     manifest_path = SNAPSHOT_DIR / f\"manifest_{timestamp}.json\"\n71:     with open(manifest_path, \"w\") as f:\n72:         json.dump(manifest, f, indent=2)\n73: \n74:     return manifest_path"
+    },
+    {
+      "path": "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+      "source_sha256": "126474f8d45284fee75951c5a9ddd7abc350352be7df3adb6df8653aeb8e3ca2",
+      "start_line": 77,
+      "end_line": 105,
+      "excerpt": "77: async def record_snapshot_event(manifest_path: Path) -> None:\n78:     with open(manifest_path) as f:\n79:         data = json.load(f)\n80: \n81:     actor = BFTLedgerActor(DB_PATH)\n82:     await actor.start()\n83:     try:\n84:         event = LedgerEvent(\n85:             stream=\"audit\",\n86:             entity_id=str(uuid.uuid5(uuid.NAMESPACE_URL, f\"snapshot:{data['sha256']}\")),\n87:             event_type=\"ledger_snapshot\",\n88:             payload=data,\n89:             cortex_taint=f\"snapshot_engine:{AUTHOR}\",\n90:             source_db=\"cortex.db\",\n91:             source_table=\"snapshots\",\n92:             source_pk=str(uuid.uuid4()),\n93:         )\n94:         await actor.append(event)\n95:     finally:\n96:         await actor.stop()\n97: \n98: \n99: def main() -> int:\n100:     print(f\"📸 Igniting Ledger Snapshot Engine by {AUTHOR}...\")\n101:     manifest_path = create_snapshot()\n102:     import asyncio\n103: \n104:     asyncio.run(record_snapshot_event(manifest_path))\n105:     print(f\"🟢 Ledger snapshot created successfully: {manifest_path.name}\")"
+    },
+    {
+      "path": "tests/test_ledger_snapshot_engine.py",
+      "source_sha256": "b947465315f0d4e74c8248c22e930bf48476a999869b9221aeda2b0d7db62ace",
+      "start_line": 25,
+      "end_line": 43,
+      "excerpt": "25: def test_create_snapshot(tmp_path: Path) -> None:\n26:     db_file = tmp_path / \"cortex.db\"\n27:     conn = sqlite3.connect(db_file)\n28:     conn.execute(\"CREATE TABLE test (id INT)\")\n29:     conn.commit()\n30:     conn.close()\n31: \n32:     snap_dir = tmp_path / \"audit\" / \"snapshots\"\n33:     with (\n34:         patch(\"scripts.c5_l1_ledger.ledger_snapshot_engine.DB_PATH\", db_file),\n35:         patch(\"scripts.c5_l1_ledger.ledger_snapshot_engine.SNAPSHOT_DIR\", snap_dir),\n36:     ):\n37:         manifest_path = create_snapshot()\n38:         assert manifest_path.exists()\n39:         with open(manifest_path) as mf:\n40:             data = json.load(mf)\n41:             assert data[\"author\"] == AUTHOR\n42:             assert \"sha256\" in data\n43:             assert (snap_dir / data[\"snapshot_file\"]).exists()"
+    },
+    {
+      "path": "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+      "source_sha256": "126474f8d45284fee75951c5a9ddd7abc350352be7df3adb6df8653aeb8e3ca2",
+      "start_line": 43,
+      "end_line": 57,
+      "excerpt": "43: def create_snapshot() -> Path:\n44:     SNAPSHOT_DIR.mkdir(parents=True, exist_ok=True)\n45:     timestamp = datetime.now(timezone.utc).strftime(\"%Y%m%d_%H%M%S\")\n46:     dest_db = SNAPSHOT_DIR / f\"cortex_snapshot_{timestamp}.db\"\n47: \n48:     # SQLite VACUUM INTO to safely create a consistent snapshot without blocking WAL\n49:     if DB_PATH.exists():\n50:         conn = sqlite3.connect(DB_PATH)\n51:         try:\n52:             conn.execute(\"VACUUM INTO ?\", (str(dest_db),))\n53:         finally:\n54:             conn.close()\n55:     else:\n56:         # Create empty db if cortex.db doesn't exist yet\n57:         sqlite3.connect(dest_db).close()"
+    },
+    {
+      "path": "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+      "source_sha256": "126474f8d45284fee75951c5a9ddd7abc350352be7df3adb6df8653aeb8e3ca2",
+      "start_line": 62,
+      "end_line": 74,
+      "excerpt": "62:     manifest = {\n63:         \"snapshot_file\": dest_db.name,\n64:         \"sha256\": db_hash,\n65:         \"commit_sha\": commit_sha,\n66:         \"author\": AUTHOR,\n67:         \"created_at\": datetime.now(timezone.utc).isoformat(),\n68:     }\n69: \n70:     manifest_path = SNAPSHOT_DIR / f\"manifest_{timestamp}.json\"\n71:     with open(manifest_path, \"w\") as f:\n72:         json.dump(manifest, f, indent=2)\n73: \n74:     return manifest_path"
+    },
+    {
+      "path": "scripts/c5_l1_ledger/ledger_snapshot_engine.py",
+      "source_sha256": "126474f8d45284fee75951c5a9ddd7abc350352be7df3adb6df8653aeb8e3ca2",
+      "start_line": 99,
+      "end_line": 106,
+      "excerpt": "99: def main() -> int:\n100:     print(f\"📸 Igniting Ledger Snapshot Engine by {AUTHOR}...\")\n101:     manifest_path = create_snapshot()\n102:     import asyncio\n103: \n104:     asyncio.run(record_snapshot_event(manifest_path))\n105:     print(f\"🟢 Ledger snapshot created successfully: {manifest_path.name}\")\n106:     return 0"
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+      "source_sha256": "41b377c18066b2d1b25c73317aa75a86cd99188f62a257162ad0c47bacde80a4",
+      "start_line": 96,
+      "end_line": 96,
+      "excerpt": "96: TEMP_EMBEDDINGS_PATH = \"/tmp/c5_source_embeddings.npz\""
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+      "source_sha256": "41b377c18066b2d1b25c73317aa75a86cd99188f62a257162ad0c47bacde80a4",
+      "start_line": 621,
+      "end_line": 637,
+      "excerpt": "621:         emb_dict[f'emb_{i}'] = src_f.embedding\n622:         emb_dict[f'norm_{i}'] = src_f.normed_embedding\n623:         if src_f.angles:\n624:             emb_dict[f'angles_embs_{i}'] = np.array([a[0] for a in src_f.angles], dtype=np.float32)\n625:             emb_dict[f'angles_yaws_{i}'] = np.array([a[2] for a in src_f.angles], dtype=np.float32)\n626: \n627:     np.savez_compressed(TEMP_EMBEDDINGS_PATH, **emb_dict)\n628:     del app_rec\n629:     if fan_sess_prep:\n630:         del fan_sess_prep\n631: \n632:     t0_all = time.time()\n633: \n634:     if workers == 1:\n635:         render_worker_chunk(\n636:             video_path=video_input,\n637:             source_faces=src_faces,"
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+      "source_sha256": "41b377c18066b2d1b25c73317aa75a86cd99188f62a257162ad0c47bacde80a4",
+      "start_line": 668,
+      "end_line": 707,
+      "excerpt": "668:         for w_idx in range(workers):\n669:             sf = w_idx * chunk_size\n670:             ef = total_frames if (w_idx == workers - 1) else (w_idx + 1) * chunk_size\n671:             part_p = f\"/tmp/c5_part_{session_id}_{w_idx}.mp4\"\n672:             part_files.append(part_p)\n673: \n674:             cmd = [\n675:                 PYTHON_BIN, SCRIPT_PATH,\n676:                 \"--video\", video_input,\n677:                 \"--identity\", args.identity,\n678:                 \"--worker-mode\",\n679:                 \"--start-frame\", str(sf),\n680:                 \"--end-frame\", str(ef),\n681:                 \"--part-output\", part_p,\n682:                 \"--worker-id\", str(w_idx),\n683:                 \"--bitrate\", args.bitrate,\n684:                 \"--enhancer\", args.enhancer,\n685:                 \"--enhance-weight\", str(args.enhance_weight),\n686:                 \"--grain\", str(args.grain),\n687:                 \"--mask\", args.mask,\n688:                 \"--blend\", args.blend,\n689:                 \"--color-transfer\", args.color_transfer,\n690:                 \"--lighting\", args.lighting,\n691:                 \"--preserve-mouth\", args.preserve_mouth,\n692:                 \"--preserve-eyes\", args.preserve_eyes,\n693:                 \"--target-face-index\", str(args.target_face_index)\n694:             ]\n695:             if args.no_smooth: cmd.append(\"--no-smooth\")\n696:             if args.no_stabilize_patch: cmd.append(\"--no-stabilize-patch\")\n697:             if args.swap_all: cmd.append(\"--swap-all\")\n698: \n699:             p = subprocess.Popen(cmd)\n700:             subprocs.append(p)\n701:             if w_idx < workers - 1:\n702:                 time.sleep(2)\n703: \n704:         for idx, p in enumerate(subprocs):\n705:             ret = p.wait()\n706:             if ret != 0:\n707:                 raise RuntimeError(f\"Worker {idx} terminó con error (exit code {ret}).\")"
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+      "source_sha256": "41b377c18066b2d1b25c73317aa75a86cd99188f62a257162ad0c47bacde80a4",
+      "start_line": 808,
+      "end_line": 826,
+      "excerpt": "808:     # Si se invoca como worker interno\n809:     if args.worker_mode:\n810:         if not os.path.isfile(TEMP_EMBEDDINGS_PATH):\n811:             raise FileNotFoundError(f\"Embeddings temporales no encontrados: {TEMP_EMBEDDINGS_PATH}\")\n812:         npz = np.load(TEMP_EMBEDDINGS_PATH)\n813:         num_faces = len([k for k in npz.files if k.startswith('emb_')])\n814:         src_faces = []\n815:         for i in range(num_faces):\n816:             emb = npz[f'emb_{i}']\n817:             norm = npz[f'norm_{i}']\n818:             angles = []\n819:             if f'angles_embs_{i}' in npz and f'angles_yaws_{i}' in npz:\n820:                 a_embs = npz[f'angles_embs_{i}']\n821:                 a_yaws = npz[f'angles_yaws_{i}']\n822:                 for j in range(len(a_yaws)):\n823:                     e = a_embs[j]\n824:                     n = e / np.maximum(np.linalg.norm(e), 1e-7)\n825:                     angles.append((e, n, float(a_yaws[j])))\n826:             src_faces.append(MinimalSourceFace(emb, norm, angles=angles))"
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+      "source_sha256": "41b377c18066b2d1b25c73317aa75a86cd99188f62a257162ad0c47bacde80a4",
+      "start_line": 249,
+      "end_line": 275,
+      "excerpt": "249:     cap = cv2.VideoCapture(video_path)\n250:     cap.set(cv2.CAP_PROP_POS_FRAMES, start_frame)\n251: \n252:     ffmpeg_cmd = [\n253:         'ffmpeg', '-y',\n254:         '-f', 'rawvideo',\n255:         '-vcodec', 'rawvideo',\n256:         '-s', f'{width}x{height}',\n257:         '-pix_fmt', 'bgr24',\n258:         '-r', f'{fps}',\n259:         '-i', '-',\n260:         '-vf', 'cas=strength=0.6,unsharp=5:5:0.7:5:5:0.3,format=yuv420p',\n261:         '-c:v', 'h264_videotoolbox',\n262:         '-b:v', bitrate,\n263:         '-pix_fmt', 'yuv420p',\n264:         out_part_path\n265:     ]\n266:     ffmpeg_proc = subprocess.Popen(ffmpeg_cmd, stdin=subprocess.PIPE, stderr=subprocess.DEVNULL)\n267: \n268:     num_frames = end_frame - start_frame\n269:     t_start = time.time()\n270:     dt = 1.0 / max(fps, 1.0)\n271: \n272:     for idx in range(num_frames):\n273:         ret, frame = cap.read()\n274:         if not ret:\n275:             break"
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+      "source_sha256": "41b377c18066b2d1b25c73317aa75a86cd99188f62a257162ad0c47bacde80a4",
+      "start_line": 428,
+      "end_line": 442,
+      "excerpt": "428:         try:\n429:             ffmpeg_proc.stdin.write(res.tobytes())\n430:         except (BrokenPipeError, IOError):\n431:             print(f\"[!] Worker {worker_id} detectó cierre de tubería FFmpeg.\", flush=True)\n432:             break\n433: \n434:         if (idx + 1) % 30 == 0 or idx == num_frames - 1:\n435:             el = time.time() - t_start\n436:             cur_fps = (idx + 1) / el if el > 0 else 0\n437:             pct = (idx + 1) / num_frames * 100\n438:             print(f\"  [Worker {worker_id}] Frame {idx+1:04d}/{num_frames} ({pct:5.1f}%) | {cur_fps:.2f} FPS\", flush=True)\n439: \n440:     cap.release()\n441:     ffmpeg_proc.stdin.close()\n442:     ffmpeg_proc.wait()"
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+      "source_sha256": "41b377c18066b2d1b25c73317aa75a86cd99188f62a257162ad0c47bacde80a4",
+      "start_line": 704,
+      "end_line": 729,
+      "excerpt": "704:         for idx, p in enumerate(subprocs):\n705:             ret = p.wait()\n706:             if ret != 0:\n707:                 raise RuntimeError(f\"Worker {idx} terminó con error (exit code {ret}).\")\n708: \n709:         concat_list = f\"/tmp/c5_concat_list_{session_id}.txt\"\n710:         with open(concat_list, \"w\") as fp:\n711:             for pf in part_files:\n712:                 fp.write(f\"file '{pf}'\\n\")\n713: \n714:         concat_video = f\"/tmp/c5_merged_chunks_{session_id}.mp4\"\n715:         subprocess.run(['ffmpeg', '-y', '-f', 'concat', '-safe', '0', '-i', concat_list, '-c', 'copy', concat_video], check=True, stderr=subprocess.DEVNULL)\n716: \n717:     print(f\"[*] Muxing de pista sonora final -> {output_path}...\", flush=True)\n718:     if has_audio:\n719:         subprocess.run([\n720:             'ffmpeg', '-y',\n721:             '-i', concat_video,\n722:             '-i', audio_tmp,\n723:             '-c:v', 'copy',\n724:             '-c:a', 'aac', '-b:a', '192k',\n725:             '-shortest',\n726:             output_path\n727:         ], check=True, stderr=subprocess.DEVNULL)\n728:     else:\n729:         shutil.move(concat_video, output_path)"
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/c5-neural-face-swap-cuadrilla/scripts/c5_face_swap_cli.py",
+      "source_sha256": "41b377c18066b2d1b25c73317aa75a86cd99188f62a257162ad0c47bacde80a4",
+      "start_line": 745,
+      "end_line": 758,
+      "excerpt": "745:     total_time = time.time() - t0_all\n746:     avg_fps = total_frames / total_time if total_time > 0 else 0\n747:     print(f\"\\n[DONE] Render completado en {total_time:.1f}s ({total_time/60:.2f} min) | {avg_fps:.2f} FPS efectivos agregados\", flush=True)\n748:     print(f\"  -> Archivo local: {output_path}\", flush=True)\n749: \n750:     if os.path.isdir(MOVIES_DIR):\n751:         canon_path = os.path.join(MOVIES_DIR, os.path.basename(output_path))\n752:         if os.path.abspath(output_path) != os.path.abspath(canon_path):\n753:             subprocess.run(['cp', '-f', output_path, canon_path], check=True)\n754:             print(f\"  -> Replicado en biblioteca canónica: {canon_path}\", flush=True)\n755:         else:\n756:             print(f\"  -> Ya reside en la biblioteca canónica: {canon_path}\", flush=True)\n757: \n758:     return output_path"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/bft/bounty_claim_attester.py",
+      "source_sha256": "d15a2d2e01379343df172270a392506538ae8cbffba5eac77f18510098852ba0",
+      "start_line": 28,
+      "end_line": 61,
+      "excerpt": "28: @dataclass(frozen=True)\n29: class BountyClaimReceipt:\n30:     \"\"\"Recibo criptográfico inmutable de atestación de vulnerabilidad.\"\"\"\n31: \n32:     claim_id: str\n33:     advisory_id: str\n34:     domain: str\n35:     finding_summary: str\n36:     risk_score: float\n37:     payload_hash: str\n38:     timestamp_utc: str\n39:     hardware_anchor: str\n40:     attestation_merkle_root: str\n41: \n42:     def to_dict(self) -> Dict[str, object]:\n43:         \"\"\"Convierte el recibo a diccionario canónico.\"\"\"\n44:         return asdict(self)\n45: \n46:     def compute_claim_hash(self) -> str:\n47:         \"\"\"Calcula el hash determinista SHA3-256 del recibo de reclamación.\"\"\"\n48:         canonical_str = json.dumps(\n49:             {\n50:                 \"claim_id\": self.claim_id,\n51:                 \"advisory_id\": self.advisory_id,\n52:                 \"domain\": self.domain,\n53:                 \"finding_summary\": self.finding_summary,\n54:                 \"risk_score\": self.risk_score,\n55:                 \"payload_hash\": self.payload_hash,\n56:                 \"timestamp_utc\": self.timestamp_utc,\n57:                 \"hardware_anchor\": self.hardware_anchor,\n58:             },\n59:             sort_keys=True,\n60:         )\n61:         return hashlib.sha3_256(canonical_str.encode(\"utf-8\")).hexdigest()"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/bft/bounty_claim_attester.py",
+      "source_sha256": "d15a2d2e01379343df172270a392506538ae8cbffba5eac77f18510098852ba0",
+      "start_line": 77,
+      "end_line": 118,
+      "excerpt": "77:     def generate_receipt(\n78:         self,\n79:         advisory_id: str,\n80:         domain: str,\n81:         finding_summary: str,\n82:         risk_score: float,\n83:         raw_payload: Mapping[str, object],\n84:     ) -> BountyClaimReceipt:\n85:         \"\"\"Emite un recibo inmutable sellando el hallazgo con anclaje hardware.\"\"\"\n86:         timestamp = datetime.now(timezone.utc).isoformat()\n87: \n88:         # 1. Hashing SHA3-256 determinista del payload analizado\n89:         payload_bytes = json.dumps(raw_payload, sort_keys=True).encode(\"utf-8\")\n90:         payload_hash = hashlib.sha3_256(payload_bytes).hexdigest()\n91: \n92:         # 2. Uso del hardware UUID memoizado O(1)\n93:         hw_uuid = self._cached_hw_uuid\n94: \n95:         # 3. Cálculo de Merkle Root preliminar\n96:         leaf_hashes = [payload_hash, self._cached_hw_hash]\n97:         merkle_root = build_merkle_tree(leaf_hashes)\n98: \n99:         # 4. ID único determinista de la reclamación\n100:         claim_id = f\"CLAIM-{advisory_id}-{payload_hash[:12].upper()}\"\n101: \n102:         return BountyClaimReceipt(\n103:             claim_id=claim_id,\n104:             advisory_id=advisory_id,\n105:             domain=domain,\n106:             finding_summary=finding_summary,\n107:             risk_score=risk_score,\n108:             payload_hash=payload_hash,\n109:             timestamp_utc=timestamp,\n110:             hardware_anchor=hw_uuid,\n111:             attestation_merkle_root=merkle_root,\n112:         )\n113: \n114:     def verify_receipt(self, receipt: BountyClaimReceipt) -> bool:\n115:         \"\"\"Verifica la coherencia del hash y el árbol Merkle del recibo.\"\"\"\n116:         leaf_hashes = [receipt.payload_hash, hashlib.sha3_256(receipt.hardware_anchor.encode()).hexdigest()]\n117:         recomputed_root = build_merkle_tree(leaf_hashes)\n118:         return recomputed_root == receipt.attestation_merkle_root"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/bft/bounty_pipeline_orchestrator.py",
+      "source_sha256": "24df531cfbb817964c4da27b4220351c4080eb4ab9b54c789b11a16d7b07909b",
+      "start_line": 125,
+      "end_line": 140,
+      "excerpt": "125:         # 4. Fase de Atestación Criptográfica (Proof of Claim)\n126:         receipts: List[BountyClaimReceipt] = []\n127:         if auto_attest_high_risk:\n128:             # Atestar hallazgos EVM\n129:             for res in evm_results:\n130:                 if res.risk_score >= risk_threshold:\n131:                     target_id = res.contract_address or \"UNKNOWN-EVM-TARGET\"\n132:                     receipt = self.attester.generate_receipt(\n133:                         advisory_id=target_id,\n134:                         domain=BountyDomain.DOMAIN_EVM.value,\n135:                         finding_summary=\"; \".join(res.findings),\n136:                         risk_score=res.risk_score,\n137:                         raw_payload=res.to_dict(),\n138:                     )\n139:                     receipts.append(receipt)\n140:                     self.cold_ledger.enqueue_receipt(receipt)"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/crypto/identity.py",
+      "source_sha256": "4c98615751f6c55215f4bc60122346085c00bcb5cb540af18eba49883211d1b8",
+      "start_line": 75,
+      "end_line": 109,
+      "excerpt": "75:     def forge_identity(self, passphrase: str) -> IdentityPayload:\n76:         \"\"\"\n77:         Generates a new L0 TRNG seed, encrypts it via Argon2id + AES-GCM,\n78:         and saves it to disk with strict 0600 permissions.\n79:         \"\"\"\n80:         self.storage_dir.mkdir(parents=True, exist_ok=True)\n81: \n82:         # TRNG Seed for Ed25519\n83:         seed = os.urandom(32)\n84: \n85:         # Salt for KDF\n86:         salt = os.urandom(16)\n87:         kek = self._derive_kek(passphrase, salt)\n88: \n89:         # AES-GCM Encryption\n90:         aesgcm = AESGCM(kek)\n91:         nonce = os.urandom(_NONCE_LENGTH)\n92:         ciphertext = aesgcm.encrypt(nonce, seed, None)\n93: \n94:         payload = {\n95:             \"salt_b64\": base64.b64encode(salt).decode(\"ascii\"),\n96:             \"nonce_b64\": base64.b64encode(nonce).decode(\"ascii\"),\n97:             \"ciphertext_b64\": base64.b64encode(ciphertext).decode(\"ascii\"),\n98:         }\n99: \n100:         # Write to disk securely (0600)\n101:         self.seed_path.touch(mode=0o600, exist_ok=True)\n102:         with open(self.seed_path, \"w\", encoding=\"utf-8\") as f:\n103:             json.dump(payload, f)\n104: \n105:         # Ensure permissions are strictly 0600\n106:         self.seed_path.chmod(0o600)\n107: \n108:         logger.info(\"L0 Identity Forged and encrypted via Argon2id.\")\n109:         return self._generate_keypair_from_seed(seed)"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/crypto/identity.py",
+      "source_sha256": "4c98615751f6c55215f4bc60122346085c00bcb5cb540af18eba49883211d1b8",
+      "start_line": 111,
+      "end_line": 131,
+      "excerpt": "111:     def load_identity(self, passphrase: str) -> IdentityPayload:\n112:         \"\"\"Loads and decrypts the L0 Identity using the provided passphrase.\"\"\"\n113:         if not self.seed_path.exists():\n114:             raise FileNotFoundError(\"Master seed not found. Cannot load identity.\")\n115: \n116:         with open(self.seed_path, encoding=\"utf-8\") as f:\n117:             payload = json.load(f)\n118: \n119:         salt = base64.b64decode(payload[\"salt_b64\"])\n120:         nonce = base64.b64decode(payload[\"nonce_b64\"])\n121:         ciphertext = base64.b64decode(payload[\"ciphertext_b64\"])\n122: \n123:         kek = self._derive_kek(passphrase, salt)\n124:         aesgcm = AESGCM(kek)\n125: \n126:         try:\n127:             seed = aesgcm.decrypt(nonce, ciphertext, None)\n128:             return self._generate_keypair_from_seed(seed)\n129:         except Exception as e:  # noqa: BLE001\n130:             logger.error(\"Failed to decrypt master seed. Incorrect passphrase or corrupted file.\")\n131:             raise ValueError(\"Identity Decryption Failed\") from e"
+    },
+    {
+      "path": "scripts/c5_l1_ledger/seal_bounty_aeon.py",
+      "source_sha256": "154e38e4308b098e7687b266f337ec684b5ebd9488afcf186ab52c85139f8916",
+      "start_line": 126,
+      "end_line": 134,
+      "excerpt": "126:     try:\n127:         identity = forge.load_identity(passphrase)\n128:     except Exception:\n129:         identity = forge.forge_identity(passphrase)\n130: \n131:     # Generar firma Ed25519 sobre la raíz Merkle\n132:     priv_bytes = base64.b64decode(identity.private_key_b64)\n133:     priv_key = ed25519.Ed25519PrivateKey.from_private_bytes(priv_bytes)\n134:     sig_bytes = priv_key.sign(bytes.fromhex(master_root))"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/oncology_primitives.py",
+      "source_sha256": "6f24b87083e7aa578c0e1a82141ff9a73ab38b4280bec38c6afa706372812ffd",
+      "start_line": 1780,
+      "end_line": 1837,
+      "excerpt": "1780:     {\n1781:         \"id\": \"ONC-145\",\n1782:         \"name\": \"Tumor mutational burden (TMB)\",\n1783:         \"category\": \"genome\",\n1784:         \"category_label\": \"Inestabilidad genomica y mutagenesis\",\n1785:         \"layer\": \"molecular\",\n1786:         \"role\": \"biomarker\",\n1787:         \"description\": \"Densidad cuantitativa de mutaciones somaticas (SNVs e indels) por megabase en la region codificante (corte clinico estandar >= 10 mut/Mb en panel estandarizado de 38 Mb).\",\n1788:         \"therapeutic_relevance\": \"TMB alto incrementa la probabilidad de presentacion de neoantigenos inmunogenicos en el complejo MHC-I, prediciendo beneficio clinico al bloqueo de PD-1 en tumores solidos.\",\n1789:         \"reference\": \"Schumacher & Schreiber, Science 2015; Marabelle et al., Lancet Oncol 2020\",\n1790:         \"confidence\": \"C5-established\",\n1791:         \"genomic_mechanics\": {\n1792:             \"chromosomal_imbalance_index\": \"fraction_genome_altered > 0.2\",\n1793:             \"gene_dosage_leverage\": \"proteotoxic_stress_dependency\",\n1794:             \"target_pathway\": \"SAC_bub1b_mps1\",\n1795:             \"mitotic_spindle_checkpoint\": \"active_surveillance\",\n1796:         },\n1797:     },\n1798:     {\n1799:         \"id\": \"ONC-146\",\n1800:         \"name\": \"Mutational signatures (COSMIC)\",\n1801:         \"category\": \"genome\",\n1802:         \"category_label\": \"Inestabilidad genomica y mutagenesis\",\n1803:         \"layer\": \"molecular\",\n1804:         \"role\": \"biomarker\",\n1805:         \"description\": \"Deconstruccion matematica de perfiles trinucleotidos (catálogo COSMIC v3.4 SBS/ID/CN) que revela las huellas digitales mutacionales de procesos endogenos y exogenos (desaminacion 5mC SBS1, APOBEC SBS2/13, HRD SBS3, tabaco SBS4, UV SBS7).\",\n1806:         \"therapeutic_relevance\": \"Permiten inferir la etiologia oncogenica subyacente, estratificar la agresividad tumoral y predecir dianas accionables (ej. firma HRD/SBS3 predice sensibilidad a platino y PARPi).\",\n1807:         \"reference\": \"Alexandrov et al., Nature 2013; Alexandrov et al., Nature 2020\",\n1808:         \"confidence\": \"C5-established\",\n1809:         \"genomic_mechanics\": {\n1810:             \"calculation\": \"somatic_snv_indel_count / target_region_mb\",\n1811:             \"tmb_high_threshold_per_mb\": 10.0,\n1812:             \"target_region_default_mb\": 38.0,\n1813:             \"biomarker_clinical_utility\": \"anti_pd1_response_prediction\",\n1814:         },\n1815:     },\n1816:     {\n1817:         \"id\": \"ONC-147\",\n1818:         \"name\": \"APOBEC mutagenesis\",\n1819:         \"category\": \"genome\",\n1820:         \"category_label\": \"Inestabilidad genomica y mutagenesis\",\n1821:         \"layer\": \"molecular\",\n1822:         \"role\": \"process\",\n1823:         \"description\": \"Hiperactividad desregulada de enzimas citidina-desaminasas (APOBEC3A/APOBEC3B) sobre ADN de cadena sencilla que catalizan C->T o C->G preferentemente en contextos trinucleotidos TCW (W = A o T).\",\n1824:         \"therapeutic_relevance\": \"Genera lluvias mutacionales agrupadas y alto volumen de neoantigenos; su actividad sostenida promueve evolucion clonal, evasión inmunológica y resistencia adquirida a terapias dirigidas.\",\n1825:         \"reference\": \"Swanton et al., Cancer Discov 2015; Bozek et al., Genome Biol 2023\",\n1826:         \"confidence\": \"C5-established\",\n1827:         \"genomic_mechanics\": {\n1828:             \"sbs_catalog_version\": \"COSMIC_v3.4\",\n1829:             \"deconstruct_sigs_metric\": \"cosine_similarity >= 0.85\",\n1830:             \"etiology_mapping\": {\n1831:                 \"SBS1\": \"5mC_deamination\",\n1832:                 \"SBS2_SBS13\": \"APOBEC_cytidine_deaminase\",\n1833:                 \"SBS3\": \"HRD_BRCAness\",\n1834:                 \"SBS4\": \"tobacco_PAH\",\n1835:                 \"SBS7\": \"UV_pyrimidine_dimers\",\n1836:             },\n1837:         },"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/oncology_primitives.py",
+      "source_sha256": "6f24b87083e7aa578c0e1a82141ff9a73ab38b4280bec38c6afa706372812ffd",
+      "start_line": 1839,
+      "end_line": 1908,
+      "excerpt": "1839:     {\n1840:         \"id\": \"ONC-148\",\n1841:         \"name\": \"Chromothripsis\",\n1842:         \"category\": \"genome\",\n1843:         \"category_label\": \"Inestabilidad genomica y mutagenesis\",\n1844:         \"layer\": \"molecular\",\n1845:         \"role\": \"process\",\n1846:         \"description\": \"Evento catastrofico en una sola division celular (a menudo en micronucleos tras segregacion anomala) donde uno o varios cromosomas se fragmentan masivamente y re-ensamblan aleatoriamente por NHEJ/MMEJ propensos a error.\",\n1847:         \"therapeutic_relevance\": \"Origina amplificaciones masivas en aglomerados de oncogenes clave (ecDNA que contiene MYC, MDM2, CDK4 o EGFR) al tiempo que deleciona supresores tumorales en los puntos de fractura.\",\n1848:         \"reference\": \"Stephens et al., Cell 2011; Ly et al., Nat Genet 2019\",\n1849:         \"confidence\": \"C5-established\",\n1850:         \"genomic_mechanics\": {\n1851:             \"motif_context\": \"TCW -> TTW / TGW (W = A or T)\",\n1852:             \"enrichment_ratio_cut\": 2.0,\n1853:             \"cosmic_signatures\": [\"SBS2\", \"SBS13\"],\n1854:             \"driver_neoantigen_leverage\": \"high_immunogenicity_clusters\",\n1855:         },\n1856:     },\n1857:     {\n1858:         \"id\": \"ONC-149\",\n1859:         \"name\": \"Kataegis\",\n1860:         \"category\": \"genome\",\n1861:         \"category_label\": \"Inestabilidad genomica y mutagenesis\",\n1862:         \"layer\": \"molecular\",\n1863:         \"role\": \"process\",\n1864:         \"description\": \"Hipermutacion focal y ultra-densa (lluvia mutacional co-localizada con distancia intermutacional <= 1000 pb) comunmente coordinada en la misma hebra de ADN y catalizada de forma procesiva por encimas APOBEC en horquillas colapsadas o roturas DSB.\",\n1865:         \"therapeutic_relevance\": \"Marca regiones de extrema inestabilidad estructural y co-ocurre con eventos de reordenamiento genómico y cromotripsis, sirviendo como huella de estres replicativo terminal.\",\n1866:         \"reference\": \"Nik-Zainal et al., Cell 2012\",\n1867:         \"confidence\": \"C5-established\",\n1868:         \"genomic_mechanics\": {\n1869:             \"genomic_hallmark\": \"localized_shattering_and_re_ligation\",\n1870:             \"copy_number_oscillations\": \"2_to_3_states_in_dense_cluster\",\n1871:             \"oncogene_amplification_link\": [\"MYC\", \"MDM2\", \"CDK4\", \"EGFR\"],\n1872:             \"repair_mechanism\": \"NHEJ_MMEJ_catastrophe\",\n1873:         },\n1874:     },\n1875:     {\n1876:         \"id\": \"ONC-150\",\n1877:         \"name\": \"Whole-genome doubling\",\n1878:         \"category\": \"genome\",\n1879:         \"category_label\": \"Inestabilidad genomica y mutagenesis\",\n1880:         \"layer\": \"molecular\",\n1881:         \"role\": \"process\",\n1882:         \"description\": \"Duplicacion completa del genoma (WGD) mediada por fallo en citoquinesis o endorreduplicacion que transforma una celula diploide en tetraploide transitoria o aneuploide pseudodiploide.\",\n1883:         \"therapeutic_relevance\": \"Amortigua el impacto letal de perdidas cromosomicas sub-o-cromosomicas, facilita la tolerancia a aneuploidias severas, confiere resistencia multiresistente y predice mal pronostico global.\",\n1884:         \"reference\": \"Bielski et al., Nat Genet 2018; Lopez et al., Nat Genet 2020\",\n1885:         \"confidence\": \"C5-established\",\n1886:         \"genomic_mechanics\": {\n1887:             \"definition\": \"localized_hypermutation_rain\",\n1888:             \"intermutational_distance_bp\": \"<= 1000\",\n1889:             \"associated_enzyme\": \"APOBEC3A_APOBEC3B\",\n1890:             \"strand_coordination\": \"processive_deamination_on_ssDNA\",\n1891:         },\n1892:     },\n1893:     {\n1894:         \"id\": \"ONC-151\",\n1895:         \"name\": \"Loss of heterozygosity (LOH)\",\n1896:         \"category\": \"genome\",\n1897:         \"category_label\": \"Inestabilidad genomica y mutagenesis\",\n1898:         \"layer\": \"molecular\",\n1899:         \"role\": \"process\",\n1900:         \"description\": \"Perdida del alelo funcional restante o silenciado en un gen supresor tumoral (ej. BRCA1/2, TP53, RB1), concretando el segundo golpe de la hipotesis de Knudson ya sea por delecion fisica, recombinacion mitotica o disomia uniparental.\",\n1901:         \"therapeutic_relevance\": \"El calculo de la fraccion genomica con LOH subcromosomica (>15 Mb) compone el indice HRD-LOH score, validado clínicamente para indicar sensibilidad a inhibidores de PARP en cancer de ovario y mama.\",\n1902:         \"reference\": \"Knudson, PNAS 1971; Abkevich et al., Br J Cancer 2012\",\n1903:         \"confidence\": \"C5-established\",\n1904:         \"genomic_mechanics\": {\n1905:             \"ploidy_state\": \"tetraploid_or_near_tetraploid_transition\",\n1906:             \"buffer_capacity\": \"tolerates_deleterious_chromosomal_losses\",\n1907:             \"prognostic_impact\": \"high_relapse_risk_and_multidrug_resistance\",\n1908:         },"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/oncology_primitives.py",
+      "source_sha256": "6f24b87083e7aa578c0e1a82141ff9a73ab38b4280bec38c6afa706372812ffd",
+      "start_line": 1910,
+      "end_line": 1960,
+      "excerpt": "1910:     {\n1911:         \"id\": \"ONC-152\",\n1912:         \"name\": \"Oncogene-induced replication stress\",\n1913:         \"category\": \"genome\",\n1914:         \"category_label\": \"Inestabilidad genomica y mutagenesis\",\n1915:         \"layer\": \"molecular\",\n1916:         \"role\": \"process\",\n1917:         \"description\": \"Estres mecanico en la maquinaria de replicacion inducido por oncogenes hiperactivos (MYC, CCND1, KRAS) que fuerzan la activacion prematura de origenes, collapse de horquillas de replicacion y acumulacion de ADN monocatenario cubierto por RPA.\",\n1918:         \"therapeutic_relevance\": \"Crea una dependencia existencial del tumor sobre el punto de control intra-S y G2/M dependiente del eje ATR-CHK1-WEE1, explotable mediante inhibidores selectivos (adavosertib, ceralasertib).\",\n1919:         \"reference\": \"Halazonetis, Gorgoulis & Bartek, Science 2008; Zeman & Cimprich, Nat Cell Biol 2014\",\n1920:         \"confidence\": \"C5-established\",\n1921:         \"genomic_mechanics\": {\n1922:             \"mechanism\": \"biallelic_inactivation_knudson_2nd_hit\",\n1923:             \"hrd_loh_score\": \"number_of_subchromosomal_LOH_regions > 15Mb\",\n1924:             \"diagnostic_panel\": \"SNP_array_or_WGS_b_allele_frequency_shift\",\n1925:         },\n1926:     },\n1927:     {\n1928:         \"id\": \"ONC-153\",\n1929:         \"name\": \"Extrachromosomal DNA (ecDNA)\",\n1930:         \"category\": \"genome\",\n1931:         \"category_label\": \"Inestabilidad genomica y mutagenesis\",\n1932:         \"layer\": \"molecular\",\n1933:         \"role\": \"process\",\n1934:         \"description\": \"Amplicones de ADN circular sin centromero ni telomeros (tamaños de 1 a 3 Mb) que se replican y segregan de manera aleatoria y no mendeliana durante la mitosis, concentrando oncogenes (EGFR, MYC, ERBB2) en un estado de cromatina ultra-abierta.\",\n1935:         \"therapeutic_relevance\": \"Confieren enorme plasticidad transcripcional (hasta 100x copias de oncogene), posibilitan la adaptacion ultrarrapida bajo presion farmacologica por fluctuacion de copias y representan una diana terapeutica de vanguardia (intervencion en hubs transcripcionales).\",\n1936:         \"reference\": \"Turner et al., Nature 2017; Wu et al., Nature 2019\",\n1937:         \"confidence\": \"C5-established\",\n1938:         \"genomic_mechanics\": {\n1939:             \"origin_firing_aberration\": \"premature_S_phase_entry_fork_stalling\",\n1940:             \"checkpoint_dependency\": [\"ATR\", \"CHK1\", \"WEE1\"],\n1941:             \"biomarker\": \"RPA_ssDNA_accumulation_and_gamma_H2AX\",\n1942:         },\n1943:     },\n1944:     {\n1945:         \"id\": \"ONC-154\",\n1946:         \"name\": \"Telomerase (TERT)\",\n1947:         \"category\": \"telomere\",\n1948:         \"category_label\": \"Telomeros, senescencia e inmortalidad\",\n1949:         \"layer\": \"cellular\",\n1950:         \"role\": \"target\",\n1951:         \"description\": \"Transcriptasa inversa que elonga telomeros y confiere inmortalidad.\",\n1952:         \"therapeutic_relevance\": \"Inhibicion de telomerasa (investigacion).\",\n1953:         \"reference\": \"Kim et al., Science 1994\",\n1954:         \"confidence\": \"C5-established\",\n1955:         \"genomic_mechanics\": {\n1956:             \"topology\": \"circular_amplicon_lacking_centromere\",\n1957:             \"copy_number_leverage\": \"up_to_100x_oncogene_amplification\",\n1958:             \"chromatin_state\": \"highly_accessible_super_enhancer_hub\",\n1959:             \"segregation_dynamics\": \"non_mendelian_random_segregation_under_drug_selection\",\n1960:         },"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/oncology_primitives.py",
+      "source_sha256": "6f24b87083e7aa578c0e1a82141ff9a73ab38b4280bec38c6afa706372812ffd",
+      "start_line": 3716,
+      "end_line": 3723,
+      "excerpt": "3716: assert len(PRIMITIVES) == 300, \"La ontologia debe contener exactamente 300 primitivas\"\n3717: \n3718: _BY_ID: dict[str, dict[str, Any]] = {str(p[\"id\"]): p for p in PRIMITIVES}\n3719: \n3720: \n3721: def get(primitive_id: str) -> Optional[dict[str, Any]]:\n3722:     \"\"\"Devuelve la primitiva por id (p.ej. 'ONC-001') o None.\"\"\"\n3723:     return _BY_ID.get(primitive_id)"
+    },
+    {
+      "path": "01_KISH_ENGINE/extensions/moskv-fx-scavenger/content.js",
+      "source_sha256": "0f358e27ff27becc2ae53df14978d5b65fb0479f77d803e751d54843b549d6d6",
+      "start_line": 9,
+      "end_line": 15,
+      "excerpt": "9:     // Escucha comandos del background.js\n10:     chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {\n11:         if (request.action === \"START_FSM\") {\n12:             runFSM(request.prompt)\n13:                 .then(result => sendResponse(result))\n14:                 .catch(error => sendResponse({ status: \"FATAL_ENTROPY\", error: error.message }));\n15:             return true; // Keep the message channel open for async response"
+    },
+    {
+      "path": "01_KISH_ENGINE/extensions/moskv-fx-scavenger/content.js",
+      "source_sha256": "0f358e27ff27becc2ae53df14978d5b65fb0479f77d803e751d54843b549d6d6",
+      "start_line": 65,
+      "end_line": 74,
+      "excerpt": "65:     // --- ESTADO: SUBMITTING ---\n66:     const taskId = await submitTask(projectId, prompt);\n67:     console.log(`[Moskv-FX-Scavenger] Transición: QUEUED. Task ID: ${taskId}`);\n68: \n69:     // --- ESTADO: POLLING / GENERATING ---\n70:     const resultUrl = await pollStatus(taskId);\n71:     \n72:     // --- ESTADO: CRYSTALLIZED ---\n73:     console.log(`[Moskv-FX-Scavenger] Transición: CRYSTALLIZED. URL: ${resultUrl}`);\n74:     return { status: \"CRYSTALLIZED\", url: resultUrl };"
+    },
+    {
+      "path": "01_KISH_ENGINE/extensions/moskv-fx-scavenger/content.js",
+      "source_sha256": "0f358e27ff27becc2ae53df14978d5b65fb0479f77d803e751d54843b549d6d6",
+      "start_line": 121,
+      "end_line": 168,
+      "excerpt": "121: async function pollStatus(taskId, timeoutMs = 90000) {\n122:     const startTime = Date.now();\n123:     let currentInterval = 1500;\n124:     const maxInterval = 6000;\n125: \n126:     const inputParam = encodeURIComponent(JSON.stringify({\n127:         \"0\": { \"json\": { \"taskId\": taskId } }\n128:     }));\n129: \n130:     while (Date.now() - startTime < timeoutMs) {\n131:         const controller = new AbortController();\n132:         const timeout = setTimeout(() => controller.abort(), 10000);\n133: \n134:         try {\n135:             const response = await fetch(`/fx/api/trpc/generation.getTaskStatus?batch=1&input=${inputParam}`, {\n136:                 method: 'GET',\n137:                 signal: controller.signal\n138:             });\n139: \n140:             if (!response.ok) {\n141:                 console.warn(`[Moskv-FX-Scavenger] Micro-caída de red (Idempotencia). HTTP ${response.status}`);\n142:             } else {\n143:                 const data = await response.json();\n144:                 const statusJson = data?.[0]?.result?.data?.json;\n145:                 \n146:                 if (statusJson?.status === \"SUCCESS\" && statusJson?.signedUrl) {\n147:                     return statusJson.signedUrl;\n148:                 } else if (statusJson?.status === \"FAILED\") {\n149:                     throw new Error(\"Servidor reportó FAILED. Veto Absoluto.\");\n150:                 }\n151:             }\n152:         } catch (e) {\n153:             if (e.name === \"AbortError\") {\n154:                 console.warn(\"[Moskv-FX-Scavenger] Polling timeout local, reintentando...\");\n155:             } else {\n156:                 console.error(\"[Moskv-FX-Scavenger] Error en sondeo:\", e.message);\n157:             }\n158:         } finally {\n159:             clearTimeout(timeout);\n160:         }\n161: \n162:         // Backoff exponencial con jitter determinista para no saturar tRPC\n163:         currentInterval = Math.min(currentInterval * 1.35 + Math.random() * 300, maxInterval);\n164:         await new Promise(r => setTimeout(r, currentInterval));\n165:     }\n166: \n167:     throw new Error(\"Límite de Chaitin superado (Timeout). Colapso de la FSM.\");\n168: }"
+    },
+    {
+      "path": "crates/mxc_broker_poc/src/main.rs",
+      "source_sha256": "52c3430b68be8dc8402bf4c87f1413feb17e5788a3e600ec6db3e5ef9f7ed3cf",
+      "start_line": 35,
+      "end_line": 58,
+      "excerpt": "35: impl CausalFileDescriptor {\n36:     pub fn bind_causal_path(intent: &VerifiedIntent, path: &Path) -> Result<Self, Omega0Error> {\n37:         let c_path = CString::new(path.as_os_str().as_bytes()).unwrap();\n38:         \n39:         let fd = unsafe { \n40:             libc::open(\n41:                 c_path.as_ptr(), \n42:                 libc::O_RDONLY | libc::O_NOFOLLOW | libc::O_CLOEXEC\n43:             ) \n44:         };\n45:         \n46:         if fd < 0 { \n47:             return Err(Omega0Error::HumeViolation(\"Ruta topológica inaccesible\")); \n48:         }\n49:         \n50:         let inode = Self::get_inode(fd)?;\n51:         \n52:         if inode != intent.target_inode {\n53:             unsafe { libc::close(fd); }\n54:             return Err(Omega0Error::HumeViolation(\"Divergencia de Inodo: Intento TOCTOU interceptado y bloqueado\"));\n55:         }\n56:         \n57:         Ok(CausalFileDescriptor { fd, inode })\n58:     }"
+    },
+    {
+      "path": "crates/mxc_broker_poc/src/main.rs",
+      "source_sha256": "52c3430b68be8dc8402bf4c87f1413feb17e5788a3e600ec6db3e5ef9f7ed3cf",
+      "start_line": 69,
+      "end_line": 83,
+      "excerpt": "69:     pub fn verified_commit(&self, data: &[u8], target_path: &Path) -> Result<(), Omega0Error> {\n70:         let mut temp_file = NamedTempFile::new()?;\n71:         temp_file.write_all(data)?;\n72:         temp_file.flush()?;\n73:         temp_file.persist(target_path).map_err(|e| Omega0Error::IoError(e.error))?;\n74:         Ok(())\n75:     }\n76: }\n77: \n78: impl Drop for CausalFileDescriptor {\n79:     fn drop(&mut self) {\n80:         if self.fd >= 0 {\n81:             unsafe { libc::close(self.fd); }\n82:         }\n83:     }"
+    },
+    {
+      "path": "crates/mxc_broker_poc/src/main.rs",
+      "source_sha256": "52c3430b68be8dc8402bf4c87f1413feb17e5788a3e600ec6db3e5ef9f7ed3cf",
+      "start_line": 102,
+      "end_line": 128,
+      "excerpt": "102:     // Intento 1: Intento Legítimo\n103:     let intent_valid = VerifiedIntent { target_inode: real_inode };\n104:     match CausalFileDescriptor::bind_causal_path(&intent_valid, test_path) {\n105:         Ok(causal_fd) => {\n106:             println!(\"[+] Intento Válido: Resolución O_PATH/O_SYMLINK exitosa.\");\n107:             match causal_fd.verified_commit(b\"Estado Mutado de Alta Exergia\", test_path) {\n108:                 Ok(_) => println!(\"[+] Verified Commit (rename atómico) exitoso. Cero *torn writes*.\"),\n109:                 Err(e) => println!(\"[-] Fallo en commit: {:?}\", e),\n110:             }\n111:         },\n112:         Err(e) => println!(\"[-] Intento Válido Fallido: {:?}\", e),\n113:     }\n114: \n115:     // El inodo cambió por el atomic rename, actualizamos\n116:     let new_inode = get_current_inode(test_path);\n117:     println!(\"Inodo Mutado tras Commit: {}\", new_inode);\n118: \n119:     // Intento 2: Ataque TOCTOU simulado\n120:     // El agente intenta escribir referenciando un inodo falso (simulando que cambió el archivo en la ruta tras la validación)\n121:     let intent_malicious = VerifiedIntent { target_inode: 0xDEADBEEF }; \n122:     match CausalFileDescriptor::bind_causal_path(&intent_malicious, test_path) {\n123:         Ok(_) => println!(\"[-] ERROR FATAL: El ataque TOCTOU evadió el cerrojo.\"),\n124:         Err(Omega0Error::HumeViolation(msg)) => {\n125:             println!(\"[+] Atestación SCITT: Ataque TOCTOU rechazado correctamente en tiempo de tipos.\");\n126:             println!(\"    Razón: {}\", msg);\n127:         },\n128:         Err(e) => println!(\"[-] Error Inesperado: {:?}\", e),"
+    },
+    {
+      "path": "crates/mxc_broker_poc/src/main.rs",
+      "source_sha256": "52c3430b68be8dc8402bf4c87f1413feb17e5788a3e600ec6db3e5ef9f7ed3cf",
+      "start_line": 139,
+      "end_line": 151,
+      "excerpt": "139:     #[test]\n140:     fn causal_binding_accepts_regular_file_but_never_follows_symlink() {\n141:         let dir = tempfile::tempdir().unwrap();\n142:         let target = dir.path().join(\"target\");\n143:         let link = dir.path().join(\"link\");\n144:         std::fs::write(&target, b\"unchanged\").unwrap();\n145:         std::os::unix::fs::symlink(&target, &link).unwrap();\n146:         let intent = VerifiedIntent { target_inode: std::fs::metadata(&target).unwrap().ino() };\n147:         assert!(CausalFileDescriptor::bind_causal_path(&intent, &target).is_ok());\n148:         assert!(CausalFileDescriptor::bind_causal_path(&intent, &link).is_err());\n149:         let link_intent = VerifiedIntent { target_inode: std::fs::symlink_metadata(&link).unwrap().ino() };\n150:         assert!(CausalFileDescriptor::bind_causal_path(&link_intent, &link).is_err());\n151:         assert_eq!(std::fs::read(&target).unwrap(), b\"unchanged\");"
+    },
+    {
+      "path": "examples/poc_lean4_emitter.rs",
+      "source_sha256": "ff76d77179f17f5dfec8846dd5ff800ad6113fb21a65fb82c09cc25ac2be85d3",
+      "start_line": 13,
+      "end_line": 49,
+      "excerpt": "13:     pub fn prove_end_to_end(total_events: usize) -> Result<(), String> {\n14:         println!(\"🚀 Iniciando Proof-Carrying Execution (Rust -> Lean 4)\");\n15:         println!(\"📊 Total de eventos a verificar: {}\", total_events);\n16:         \n17:         fs::create_dir_all(LEAN_OUTPUT_DIR).map_err(|e| e.to_string())?;\n18: \n19:         let num_chunks = total_events.div_ceil(CHUNK_SIZE);\n20:         \n21:         for chunk_idx in 0..num_chunks {\n22:             let start = chunk_idx * CHUNK_SIZE;\n23:             let end = std::cmp::min(start + CHUNK_SIZE, total_events);\n24:             let size = end - start;\n25:             \n26:             // 1. Emitir archivo Lean\n27:             let file_path = format!(\"{}/chunk_{}.lean\", LEAN_OUTPUT_DIR, chunk_idx);\n28:             Self::emit_lean_chunk(&file_path, size, start)?;\n29:             \n30:             // 2. Invocar Oráculo (Lean 4)\n31:             println!(\"⚖️  Evaluando Chunk {} (Eventos {} a {}) en Lean 4...\", chunk_idx, start, end - 1);\n32:             let t0 = Instant::now();\n33:             let status = Command::new(\"lean\")\n34:                 .arg(&file_path)\n35:                 .status()\n36:                 .map_err(|e| format!(\"Fallo al invocar Lean: {}\", e))?;\n37:                 \n38:             let elapsed = t0.elapsed();\n39:             \n40:             if status.success() {\n41:                 println!(\"✅ EXIT 0: Chunk {} validado en {:.2?}.\", chunk_idx, elapsed);\n42:             } else {\n43:                 println!(\"❌ EXIT != 0: Paradoja en Chunk {}.\", chunk_idx);\n44:                 return Err(\"Traza corrompida detectada por Lean 4.\".into());\n45:             }\n46:         }\n47:         \n48:         println!(\"🏆 Verificación End-to-End completada con éxito. Causalidad preservada.\");\n49:         Ok(())"
+    },
+    {
+      "path": "examples/poc_lean4_emitter.rs",
+      "source_sha256": "ff76d77179f17f5dfec8846dd5ff800ad6113fb21a65fb82c09cc25ac2be85d3",
+      "start_line": 52,
+      "end_line": 63,
+      "excerpt": "52:     fn emit_lean_chunk(path: &str, size: usize, offset: usize) -> Result<(), String> {\n53:         let mut events_str = String::new();\n54:         let mut seq = offset * 2 + 1; // Para mantener la lógica impar/par de la prueba\n55:         \n56:         for i in 0..size {\n57:             if i % 2 == 0 {\n58:                 events_str.push_str(&format!(\"  {{ thread := 1, seq := {}, action := Action.WriteBegin }},\\n\", seq));\n59:             } else {\n60:                 events_str.push_str(&format!(\"  {{ thread := 1, seq := {}, action := Action.WriteEnd }},\\n\", seq + 1));\n61:                 seq += 2;\n62:             }\n63:         }"
+    },
+    {
+      "path": "examples/poc_lean4_emitter.rs",
+      "source_sha256": "ff76d77179f17f5dfec8846dd5ff800ad6113fb21a65fb82c09cc25ac2be85d3",
+      "start_line": 82,
+      "end_line": 97,
+      "excerpt": "82: def validateTransition (_currentSeq : Nat) (inWrite : Bool) (event : SeqlockEvent) : Option (Nat × Bool) :=\n83:   match event.action with\n84:   | Action.WriteBegin => if inWrite then none else if event.seq % 2 == 0 then none else some (event.seq, true)\n85:   | Action.WriteEnd => if not inWrite then none else if event.seq % 2 != 0 then none else some (event.seq, false)\n86:   | Action.Read => if inWrite then none else if event.seq % 2 != 0 then none else some (event.seq, inWrite)\n87: \n88: def isValidTrace (trace : List SeqlockEvent) (currentSeq : Nat) (inWrite : Bool) : Bool :=\n89:   match trace with\n90:   | [] => true\n91:   | e :: es => match validateTransition currentSeq inWrite e with | none => false | some (newSeq, newInWrite) => isValidTrace es newSeq newInWrite\n92: \n93: def chunk_trace : List SeqlockEvent := [\n94: {}\n95: ]\n96: \n97: theorem chunk_is_valid : isValidTrace chunk_trace 0 false = true := by decide"
+    },
+    {
+      "path": "scripts/c5_demos/c5_legal_oracle.py",
+      "source_sha256": "a120f1e54f7a617d4559cbbfff0d342c3a3fc7b73e59f5fa45267ab5c80ffb04",
+      "start_line": 54,
+      "end_line": 66,
+      "excerpt": "54: def fetch_arxiv_legal_oracle():\n55:     print(\"[*] Oráculo Legal: Escaneando arXiv (cs.CY, cs.CR) en busca de vectores coercitivos...\")\n56:     url = \"http://export.arxiv.org/api/query?search_query=cat:cs.CY+OR+cat:cs.CR&sortBy=submittedDate&sortOrder=descending&max_results=100\"\n57:     req = urllib.request.Request(url, headers={'User-Agent': 'BABYLON-60-Sovereign-Agent'})\n58:     \n59:     try:\n60:         with urllib.request.urlopen(req, timeout=15) as response:\n61:             xml_data = response.read()\n62:     except Exception as e:\n63:         print(f\"[!] Fricción de red: {e}\")\n64:         return [], []\n65: \n66:     root = ET.fromstring(xml_data)"
+    },
+    {
+      "path": "scripts/c5_demos/c5_legal_oracle.py",
+      "source_sha256": "a120f1e54f7a617d4559cbbfff0d342c3a3fc7b73e59f5fa45267ab5c80ffb04",
+      "start_line": 99,
+      "end_line": 120,
+      "excerpt": "99: def main():\n100:     start_time = time.perf_counter()\n101:     print(\"========================================================================\")\n102:     print(\" █ AUTOCOGNITION-Ω | ORÁCULO DE FRICCIÓN LEGAL | VECTOR 2\")\n103:     print(\"========================================================================\")\n104:     \n105:     threats, shields = fetch_arxiv_legal_oracle()\n106:     \n107:     sitrep = {\n108:         \"timestamp\": datetime.now(timezone.utc).isoformat(),\n109:         \"scan_time_ms\": int((time.perf_counter() - start_time) * 1000),\n110:         \"top_threats\": threats,\n111:         \"top_shields\": shields\n112:     }\n113:     \n114:     with open(SITREP_PATH, 'w', encoding='utf-8') as f:\n115:         json.dump(sitrep, f, indent=4)\n116:         \n117:     print(f\"\\n[+] Oráculo finalizado en {sitrep['scan_time_ms']} ms.\")\n118:     \n119:     print(\"\\n--- 🚨 TOP VECTORES DE COERCIÓN (AMENAZAS BUROCRÁTICAS) ---\")\n120:     if not threats: print(\"    Cero amenazas inminentes detectadas en el radar de corto alcance.\")"
+    },
+    {
+      "path": "scripts/c5_demos/c5_legal_oracle.py",
+      "source_sha256": "a120f1e54f7a617d4559cbbfff0d342c3a3fc7b73e59f5fa45267ab5c80ffb04",
+      "start_line": 126,
+      "end_line": 137,
+      "excerpt": "126:     print(\"--- 🛡️ TOP VECTORES DE EVASIÓN (ESCUDOS CRIPTOGRÁFICOS) ---\")\n127:     if not shields: print(\"    Cero arquitecturas defensivas recientes detectadas.\")\n128:     for i, target in enumerate(shields, 1):\n129:         print(f\"[{i}] BLINDAJE: {target['shield_score']} | {target['title']}\")\n130:         print(f\"    Matemática Evasiva: {', '.join(target['shield_triggers'])}\")\n131:         print(f\"    URI: {target['id']}\\n\")\n132: \n133:     print(\"========================================================================\")\n134:     print(\"DICTAMEN: Radar legal operativo. A la espera de directiva del Operador Raíz.\")\n135: \n136: if __name__ == \"__main__\":\n137:     main()"
+    },
+    {
+      "path": "scripts/c5_demos/z3_firewall_stress_test.py",
+      "source_sha256": "19b0aa2e2f9f36c9de40f7971e3099f516f2311132ef4f85e67a967f6b868681",
+      "start_line": 23,
+      "end_line": 56,
+      "excerpt": "23: def run_stress_test(iterations: int = 1000) -> None:\n24:     print(f\"=== INICIANDO PRUEBA DE ESTRÉS Z3 FIREWALL ({iterations} ITERACIONES) ===\")\n25:     firewall = Z3Firewall(timeout_ms=500)\n26: \n27:     # Reducimos los logs de Z3Firewall para evitar asfixia I/O en consola\n28:     import logging\n29: \n30:     logging.getLogger(\"babylon60.kernel.z3_firewall\").setLevel(logging.CRITICAL)\n31: \n32:     # Warmup para que Z3 cargue su DLL y Contexto Global (evita falso positivo de leak)\n33:     try:\n34:         firewall.validate_mcp_contract(1, 1.0)\n35:     except Exception:\n36:         pass\n37: \n38:     start_mem = measure_memory_mb()\n39:     print(f\"Memoria Inicial (Post-Warmup): {start_mem:.2f} MB\")\n40: \n41:     start_time = time.perf_counter()\n42:     apoptosis_count = 0\n43:     success_count = 0\n44: \n45:     for i in range(iterations):\n46:         # Alternamos entre propuestas válidas y alucinaciones estocásticas\n47:         if i % 2 == 0:\n48:             # Valid (Exergy 0.70, 5 params)\n49:             if firewall.validate_mcp_contract(parameters_count=5, estimated_exergy=0.70):\n50:                 success_count += 1\n51:         else:\n52:             # Invalid (Exergy 0.50, 2 params) -> Debería disparar apoptosis\n53:             try:\n54:                 firewall.validate_mcp_contract(parameters_count=2, estimated_exergy=0.50)\n55:             except Saga1ApoptosisError:\n56:                 apoptosis_count += 1"
+    },
+    {
+      "path": "scripts/c5_demos/z3_firewall_stress_test.py",
+      "source_sha256": "19b0aa2e2f9f36c9de40f7971e3099f516f2311132ef4f85e67a967f6b868681",
+      "start_line": 62,
+      "end_line": 84,
+      "excerpt": "62:     total_time = time.perf_counter() - start_time\n63:     end_mem = measure_memory_mb()\n64:     mem_delta = end_mem - start_mem\n65:     avg_latency = (total_time / iterations) * 1000\n66: \n67:     print(\"\\n=== REPORTE TERMODINÁMICO ===\")\n68:     print(f\"Iteraciones Totales : {iterations}\")\n69:     print(f\"Validaciones (SAT)  : {success_count}\")\n70:     print(f\"Apoptosis (UNSAT)   : {apoptosis_count}\")\n71:     print(f\"Tiempo Total        : {total_time:.3f} s\")\n72:     print(f\"Latencia Promedio   : {avg_latency:.3f} ms / llamada\")\n73:     print(f\"Deriva de Memoria   : {mem_delta:+.2f} MB\")\n74:     print(\"===============================\\n\")\n75: \n76:     if avg_latency > 50.0:\n77:         print(\"[WARNING] Fricción Térmica Detectada: Latencia promedio supera 50ms.\")\n78:         sys.exit(1)\n79:     if mem_delta > 10.0:\n80:         print(\"[WARNING] Fuga de Memoria Detectada: Deriva superior a 10MB.\")\n81:         sys.exit(1)\n82: \n83:     print(\"[OK] Prueba de estrés superada. Firewall Z3 opera en Ring-0 bajo límites de Landauer.\")\n84:     sys.exit(0)"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/z3_firewall.py",
+      "source_sha256": "33caa69fccbe87759645451790959c4ab9de3250cb144e9f230ac07e02e04be6",
+      "start_line": 80,
+      "end_line": 122,
+      "excerpt": "80:     def validate_mcp_contract(self, parameters_count: int, estimated_exergy: float) -> bool:\n81:         \"\"\"\n82:         Falsación termodinámica de un contrato MCP.\n83:         Reglas topológicas:\n84:         - El número de parámetros debe ser > 0 y <= 10 (límite de complejidad).\n85:         - La ganancia exergética debe ser >= 0.65 (Invariante C6).\n86:         \"\"\"\n87:         if z3 is None:\n88:             self._trigger_apoptosis(\"Z3 solver no disponible en Ring-0: violación de la Invariante MUSHUSHU-0\")\n89:             return False\n90: \n91:         start_z3 = time.perf_counter()\n92:         solver = z3.Solver()\n93:         solver.set(\"timeout\", self.timeout_ms)\n94: \n95:         # Variables SMT\n96:         p_count = z3.Int(\"p_count\")\n97:         # Z3 Reals para floating point math simple\n98:         exergy = z3.Real(\"exergy\")\n99: \n100:         solver.add(p_count == parameters_count)\n101:         # Convertimos float a Z3 Real (aproximación fraccional)\n102:         solver.add(exergy == z3.RealVal(estimated_exergy))\n103: \n104:         # Restricciones C6-ABSOLUTE\n105:         solver.add(p_count > 0)\n106:         solver.add(p_count <= 10)\n107:         solver.add(exergy >= z3.RealVal(0.65))\n108: \n109:         result = solver.check()\n110:         z3_time = (time.perf_counter() - start_z3) * 1000\n111: \n112:         del p_count, exergy, solver\n113: \n114:         if result != z3.sat:\n115:             status = \"TIMEOUT/UNKNOWN\" if result == z3.unknown else \"UNSAT\"\n116:             self._trigger_apoptosis(\n117:                 f\"Falsación Z3 ({status} en {z3_time:.3f}ms) para Contrato MCP (params: {parameters_count}, exergy: {estimated_exergy})\"\n118:             )\n119:             return False\n120: \n121:         logger.info(f\"[RING-0 FIREWALL] ✅ Contrato validado por Z3: SAT ({z3_time:.3f} ms)\")\n122:         return True"
+    },
+    {
+      "path": "scripts/c5_log_custody/c5_organize_captures.py",
+      "source_sha256": "9d7b4f95cc26a8724d62a5830f0c87c040784da8b79704f172fbbd480d32e814",
+      "start_line": 93,
+      "end_line": 98,
+      "excerpt": "93: def main() -> None:\n94:     print(\"[*] ULTRATHINK P0: Organizing and crystallizing Causal-Determinist forensic evidence catalog...\")\n95:     if not EVIDENCE_DIR.exists():\n96:         print(\"[-] Error: Evidence directory missing.\")\n97:         return\n98:     catalog_entries: list[dict[str, Any]] = []"
+    },
+    {
+      "path": "scripts/c5_log_custody/c5_organize_captures.py",
+      "source_sha256": "9d7b4f95cc26a8724d62a5830f0c87c040784da8b79704f172fbbd480d32e814",
+      "start_line": 113,
+      "end_line": 145,
+      "excerpt": "113:     for fname, desc in primary_files:\n114:         fpath = EVIDENCE_DIR / fname\n115:         if fpath.exists():\n116:             catalog_entries.append(\n117:                 {\n118:                     \"id\": fname.split(\"_\")[1],\n119:                     \"filename\": fname,\n120:                     \"description\": desc,\n121:                     \"timestamp\": \"Pre-Session Baseline / 2026-07-13\",\n122:                     \"size_kb\": fpath.stat().st_size / 1024.0,\n123:                     \"sha256\": sha256_file(fpath),\n124:                     \"sha3_256\": sha3_file(fpath),\n125:                 }\n126:             )\n127:     for orig_name, canonical_name, desc, ts in MAPPINGS:\n128:         orig_path = SESSION_SUBDIR / orig_name\n129:         target_path = EVIDENCE_DIR / canonical_name\n130:         if orig_path.exists():\n131:             shutil.copy2(orig_path, target_path)\n132:             catalog_entries.append(\n133:                 {\n134:                     \"id\": canonical_name.split(\"_\")[1],\n135:                     \"filename\": canonical_name,\n136:                     \"description\": desc,\n137:                     \"timestamp\": f\"2026-07-14 {ts} CEST\",\n138:                     \"size_kb\": target_path.stat().st_size / 1024.0,\n139:                     \"sha256\": sha256_file(target_path),\n140:                     \"sha3_256\": sha3_file(target_path),\n141:                 }\n142:             )\n143:         else:\n144:             print(f\"[!] Warning: Origin file {orig_name} not found in {SESSION_SUBDIR}\")\n145:     catalog_entries.sort(key=lambda x: int(x[\"id\"]))"
+    },
+    {
+      "path": "scripts/c5_log_custody/c5_organize_captures.py",
+      "source_sha256": "9d7b4f95cc26a8724d62a5830f0c87c040784da8b79704f172fbbd480d32e814",
+      "start_line": 152,
+      "end_line": 162,
+      "excerpt": "152:         \"> **Objeto:** Indexación cronológica, biyectiva y con sellado hash inmutable (`SHA256 / SHA3-256`) de las 11 evidencias fotográficas que demuestran la Confesión por Actos Propios, la validación pública (Likes/Recomendación), el borrado precipitado y el posterior bloqueo unilateral (`HTTP Error 403 / Account Ban`).\",\n153:         \"\",\n154:         \"---\",\n155:         \"\",\n156:         \"```yaml\",\n157:         'Claim: \"Las 11 capturas de pantalla periciales han sido normalizadas canónicamente, indexadas y selladas con firmas criptográficas de grado forense (SHA256 y SHA3-256), acreditando la cronología ininterrumpida desde la lectura al dedo y el reconocimiento público de Dario Amodeo hasta la represalia cinético-lógica (Error 403).\"',\n158:         \"Proof:\",\n159:         '  Base: \"11 ficheros PNG en cortex/legal_dossier/evidencias_capturas/\"',\n160:         \"  Range: [1.0, 1.0]\",\n161:         \"  Confidence: Causal-Determinist\",\n162:         \"  Catalog_Attestation: SHA3_CATALOG_VERIFIED\","
+    },
+    {
+      "path": "scripts/c5_log_custody/c5_organize_captures.py",
+      "source_sha256": "9d7b4f95cc26a8724d62a5830f0c87c040784da8b79704f172fbbd480d32e814",
+      "start_line": 172,
+      "end_line": 175,
+      "excerpt": "172:     for entry in catalog_entries:\n173:         md_lines.append(\n174:             f\"| **`#{entry['id']}`** | `evidencias_capturas/{entry['filename']}` | `{entry['timestamp']}` | `{entry['size_kb']:.1f} KB` | `{entry['sha256']}` | **{entry['description']}** |\"\n175:         )"
+    },
+    {
+      "path": "scripts/c5_log_custody/c5_organize_captures.py",
+      "source_sha256": "9d7b4f95cc26a8724d62a5830f0c87c040784da8b79704f172fbbd480d32e814",
+      "start_line": 194,
+      "end_line": 196,
+      "excerpt": "194:     write_if_changed(INDEX_FILE, \"\\n\".join(md_lines) + \"\\n\")\n195:     print(f\"[+] Successfully organized {len(catalog_entries)} forensic captures into {EVIDENCE_DIR}\")\n196:     print(f\"[+] Index created: {INDEX_FILE}\")"
+    },
+    {
+      "path": "scripts/c5_setup/unboxing_moskv1.py",
+      "source_sha256": "1a83a212c0413118f7cd649f356744a2c4f74c04eda4c746ac492c80ed3c1178",
+      "start_line": 44,
+      "end_line": 46,
+      "excerpt": "44: def check_touchid_gate(repo_root: Path) -> bool:\n45:     swift_gate = repo_root / \"01_KISH_ENGINE\" / \"babylon60\" / \"guards\" / \"c5_biometric_gate.swift\"\n46:     return swift_gate.exists() and platform.system() == \"Darwin\""
+    },
+    {
+      "path": "scripts/c5_setup/unboxing_moskv1.py",
+      "source_sha256": "1a83a212c0413118f7cd649f356744a2c4f74c04eda4c746ac492c80ed3c1178",
+      "start_line": 62,
+      "end_line": 73,
+      "excerpt": "62:     # 1. Telemetría de Sustrato\n63:     cpu_arch = platform.machine()\n64:     cpu_count = os.cpu_count() or 1\n65:     has_touchid = check_touchid_gate(repo_root)\n66: \n67:     print(f\"{GREEN}=== ATESTACIÓN DEL SUSTRATO FÍSICO ==={NC}\")\n68:     print(f\"  > ARQUITECTURA:       {cpu_arch} (Ring-0 Nativo)\")\n69:     print(f\"  > CAPACIDAD SWARM:    {cpu_count} Núcleos Lógicos Detectados (Regla P × S)\")\n70:     print(\"  > LÍNEA DE CACHÉ:     64 Bytes (Zero-Split Coherence INV-1)\")\n71:     print(f\"  > CERROJO BIOLÓGICO:  {'Secure Enclave TouchID [LISTO]' if has_touchid else 'Software Fallback'}\")\n72:     print(\"  > PROTOCOLO MESI:     Cero-Anergía Enganchado (RFO = 0)\")\n73:     print(\"  > ANCLA DE APOPTOSIS: Armada (Fail-Stop 0xDEAD_6060)\\n\")"
+    },
+    {
+      "path": "scripts/c5_setup/unboxing_moskv1.py",
+      "source_sha256": "1a83a212c0413118f7cd649f356744a2c4f74c04eda4c746ac492c80ed3c1178",
+      "start_line": 86,
+      "end_line": 100,
+      "excerpt": "86:     # 3. Intentar Handoff al Binario Nativo si está disponible\n87:     kernel_bin = repo_root / \"target\" / \"debug\" / \"babylon60_kernel\"\n88:     if kernel_bin.exists():\n89:         print(f\"{CYAN}[*] Delegando control de tiempo real al binario C-ABI en silicio...{NC}\\n\")\n90:         os.execv(str(kernel_bin), [str(kernel_bin), \"unbox\"])\n91:         return\n92: \n93:     # Si no está compilado, ofrecer comandos de arranque\n94:     print(f\"{MAGENTA}=== PRIMEROS PASOS DE ALTA EXERGÍA ==={NC}\")\n95:     print(\"  1. Compilar el núcleo de máxima exergía:\")\n96:     print(f\"     {CYAN}cargo build --bin babylon60_kernel{NC}\")\n97:     print(\"  2. Medir la latencia física del seqlock (1.000.000 ciclos lock-free):\")\n98:     print(f\"     {CYAN}cargo run --bin babylon60_kernel -- bench{NC}\")\n99:     print(\"  3. Lanzar la suite de verificación de invariantes:\")\n100:     print(f\"     {CYAN}cargo test --test cortex_test{NC}\\n\")"
+    },
+    {
+      "path": "scripts/c5_verifiers/verify_causal_invariants.py",
+      "source_sha256": "68970e02f17ba7a088ef30d87f7fcda9d483c35599b827da4f9fc305744cd282",
+      "start_line": 17,
+      "end_line": 32,
+      "excerpt": "17: repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), \"..\", \"..\"))\n18: packages_dir = os.path.join(repo_root, \"packages\")\n19: if packages_dir not in sys.path:\n20:     sys.path.insert(0, packages_dir)\n21: if repo_root not in sys.path:\n22:     sys.path.insert(0, repo_root)\n23: \n24: \n25: def verify_causal_invariants() -> bool:\n26:     print(\"=== ORÁCULO DE VERIFICACIÓN: INVARIANTES DE CAUSALIDAD ROBINSON-MOSKV & CORTEX PERSIST ===\")\n27: \n28:     # Check 1: Audit packages/babylon60/bft/ for illegal clock reliance\n29:     bft_dir = os.path.join(packages_dir, \"babylon60\", \"bft\")\n30:     if not os.path.exists(bft_dir):\n31:         print(f\"  [FAIL] Directorio BFT no encontrado en {bft_dir}\")\n32:         return False"
+    },
+    {
+      "path": "scripts/c5_verifiers/verify_causal_invariants.py",
+      "source_sha256": "68970e02f17ba7a088ef30d87f7fcda9d483c35599b827da4f9fc305744cd282",
+      "start_line": 54,
+      "end_line": 70,
+      "excerpt": "54:     # Check 2: CortexPersistLedger Import and WAL Invariances\n55:     try:\n56:         from babylon60.bft.cortex_persist_ledger import CortexPersistLedger\n57:         import tempfile\n58: \n59:         with tempfile.TemporaryDirectory() as tmp_dir:\n60:             db_path = os.path.join(tmp_dir, \"test_cortex.db\")\n61:             ledger = CortexPersistLedger(db_path=db_path)\n62:             conn = ledger._get_connection()\n63:             journal_mode = conn.execute(\"PRAGMA journal_mode;\").fetchone()[0]\n64:             assert journal_mode.lower() == \"wal\", f\"Journal mode is {journal_mode}, expected 'wal'\"\n65:             conn.close()\n66: \n67:         print(\"  [OK] Pilar 2 (Cortex Persist Ledger): SQLite WAL mode e invariantes BFT verificados.\")\n68:     except Exception as e:\n69:         print(f\"  [FAIL] Pilar 2: Fallo en prueba runtime de CortexPersistLedger: {e}\")\n70:         return False"
+    },
+    {
+      "path": "scripts/c5_verifiers/verify_causal_invariants.py",
+      "source_sha256": "68970e02f17ba7a088ef30d87f7fcda9d483c35599b827da4f9fc305744cd282",
+      "start_line": 72,
+      "end_line": 93,
+      "excerpt": "72:     # Check 3: Monorepo Structural Integrity\n73:     core_components = [\n74:         os.path.join(repo_root, \"src\"),\n75:         os.path.join(repo_root, \"packages\", \"babylon60\"),\n76:         os.path.join(repo_root, \"apps\"),\n77:         os.path.join(repo_root, \"Cargo.toml\"),\n78:         os.path.join(repo_root, \"pyproject.toml\")\n79:     ]\n80:     missing = [comp for comp in core_components if not os.path.exists(comp)]\n81:     if missing:\n82:         print(f\"  [FAIL] Pilar 3: Faltan componentes estructurales en Monorepo BABYLON-60: {missing}\")\n83:         return False\n84:     print(\"  [OK] Pilar 3 (Monorepo Políglota): Componentes multimodular (Rust, Python, Web) verificados.\")\n85: \n86: \n87:     print(\"\\n✅ INVARIANTES DE CAUSALIDAD Y MONOREPO VERIFICADOS: Teorema Robinson-Moskv & Cortex Persist activos.\")\n88:     return True\n89: \n90: \n91: if __name__ == \"__main__\":\n92:     success = verify_causal_invariants()\n93:     sys.exit(0 if success else 1)"
+    },
+    {
+      "path": "src/bin/babylon_top.rs",
+      "source_sha256": "4872c42ed9045615d677967609306da18fe8f9ed50ae33242c5503aca21063df",
+      "start_line": 1,
+      "end_line": 8,
+      "excerpt": "1: //! # `babylon top` — Telemetry & Causal Receipt Stream Monitor\n2: //!\n3: //! Milestone M0 / P2 Specification:\n4: //! Renders the live stream of Receipts, CORTEX idea threads, and NEMESIS assertions.\n5: //!\n6: //! Invariant Law O10 Compliance:\n7: //! `UI ≠ AUTHORITY` — This interface is a strictly passive projection of observable evidence.\n8: //! It possesses zero capability and can never execute unmediated effects."
+    },
+    {
+      "path": "src/bin/babylon_top.rs",
+      "source_sha256": "4872c42ed9045615d677967609306da18fe8f9ed50ae33242c5503aca21063df",
+      "start_line": 22,
+      "end_line": 35,
+      "excerpt": "22:     let status_flag = manifest.status_flag.load(std::sync::atomic::Ordering::Relaxed);\n23:     let seq = manifest.seq.load(std::sync::atomic::Ordering::Relaxed);\n24:     let epoch = manifest.epoch_id.load(std::sync::atomic::Ordering::Relaxed);\n25: \n26:     let state_str = if status_flag == 0 { \"RUNNING\" } else { \"POISONED\" };\n27: \n28:     println!(\"\\x1b[2J\\x1b[H\"); // Clear screen & move to top\n29:     println!(\"╔══════════════════════════════════════════════════════════════════════════════════════════╗\");\n30:     println!(\"║                           BABYLON-60 APEX TOP — TELEMETRY HUD                            ║\");\n31:     println!(\"║                                  [ LAW O10: UI ≠ AUTHORITY ]                             ║\");\n32:     println!(\"╠══════════════════════════════════════════════════════════════════════════════════════════╣\");\n33:     println!(\"║  EPOCH: {:<6} │ SEQ: {:<10} │ KERNEL: {:<10} │ CYCLE: {:<8} │ ARCH: {:<12} ║\",\n34:         epoch, seq, state_str, cycle, std::env::consts::ARCH);\n35:     println!(\"║  HARDWARE GATE: Apple Silicon Secure Enclave (Touch ID NIST P-256) │ FAIL-CLOSED [ACTIVE]  ║\");"
+    },
+    {
+      "path": "src/bin/babylon_top.rs",
+      "source_sha256": "4872c42ed9045615d677967609306da18fe8f9ed50ae33242c5503aca21063df",
+      "start_line": 44,
+      "end_line": 76,
+      "excerpt": "44:     // Read real SQLite if exists, otherwise fallback to in-memory status\n45:     if Path::new(db_path).exists() {\n46:         if let Ok(conn) = Connection::open(db_path) {\n47:             let stmt = conn.prepare(\n48:                 \"SELECT idea_id, core_concept, score, dormant_days FROM idea_threads ORDER BY score DESC LIMIT 3\"\n49:             );\n50:             if let Ok(mut stmt) = stmt {\n51:                 let rows = stmt.query_map([], |row| {\n52:                     Ok((\n53:                         row.get::<_, String>(0)?,\n54:                         row.get::<_, String>(1)?,\n55:                         row.get::<_, f64>(2)?,\n56:                         row.get::<_, i64>(3)?,\n57:                     ))\n58:                 });\n59:                 if let Ok(rows) = rows {\n60:                     let mut count = 0;\n61:                     for r in rows.flatten() {\n62:                         count += 1;\n63:                         println!(\"║  • {:<16} │ Score: {:<5.2} │ Dormant: {:<3}d │ Concept: {:<35} ║\",\n64:                             r.0, r.2, r.3, r.1);\n65:                     }\n66:                     if count == 0 {\n67:                         println!(\"║  (Corpus active: 0 dormant idea threads awaiting resurrection)                           ║\");\n68:                     }\n69:                 }\n70:             }\n71:         }\n72:     } else {\n73:         println!(\"║  • idea_kudurru_l1  │ Score: 18.75 │ Dormant:  30d │ Concept: KUDURRU-64 L1 Zero-Split        ║\");\n74:         println!(\"║  • idea_landauer_01 │ Score: 16.40 │ Dormant:  45d │ Concept: Landauer Bound in Silicon       ║\");\n75:         println!(\"║  [Trust Boundary]: 2 Proposals Dispatched to Authority Context (Inference ⇎ Authority)   ║\");\n76:     }"
+    },
+    {
+      "path": "src/bin/babylon_top.rs",
+      "source_sha256": "4872c42ed9045615d677967609306da18fe8f9ed50ae33242c5503aca21063df",
+      "start_line": 81,
+      "end_line": 101,
+      "excerpt": "81:     println!(\"╠══════════════════════════════════════════════════════════════════════════════════════════╣\");\n82:     println!(\"║ [BABYLON · CONTROL — CAUSAL RECEIPT STREAM]                                              ║\");\n83:     println!(\"╟──────────────────────────────────────────────────────────────────────────────────────────╢\");\n84:     println!(\"║  STAGE PIPELINE: REQUESTED ──► AUTHORIZED ──► DISPATCHED ──► OBSERVED ──► COMMITTED     ║\");\n85:     println!(\"║                                                                                          ║\");\n86:     println!(\"║  [RC-001] FsMutate │ ALLOW │ Stage: COMMITTED  │ Target: file:///tmp/babylon_scratch.dat ║\");\n87:     println!(\"║           Digest: 0x20202020... │ Signer: key_secure_enclave_01 │ Anchored: Epoch 1      ║\");\n88:     println!(\"║  [RC-002] FsDelete │ DENY  │ Stage: AUTHORIZED │ Target: file:///etc/hosts               ║\");\n89:     println!(\"║           Reason: POL_RESTRICTED_ROOT (Fail-Closed Veto) │ Dispatched: FALSE             ║\");\n90: \n91:     // -----------------------------------------------------------------------\n92:     // PANEL 3: NEMESIS (Verify)\n93:     // -----------------------------------------------------------------------\n94:     println!(\"╠══════════════════════════════════════════════════════════════════════════════════════════╣\");\n95:     println!(\"║ [NEMESIS · VERIFY — POPPERIAN FALSIFICATION]                                             ║\");\n96:     println!(\"╟──────────────────────────────────────────────────────────────────────────────────────────╢\");\n97:     println!(\"║  • NEM-I1 (EFFECT_AUTHORIZATION)   │ Status: SUPPORTED  │ Last Challenge: 10,000 toctou iter ║\");\n98:     println!(\"║  • NEM-I2 (VERIFIED_COMMIT)        │ Status: SUPPORTED  │ Last Challenge: crash_injection    ║\");\n99:     println!(\"║  • NEM-I3 (PATH_OBLIVION)          │ Status: SUPPORTED  │ Last Challenge: symlink_swap_race  ║\");\n100:     println!(\"║  • NEM-I4 (CRASH_RECOVERABILITY)   │ Status: SUPPORTED  │ Last Challenge: sigkill_mid_tx     ║\");\n101:     println!(\"║  Attestation: [Assertion + Evidence + Artifact(0x99) + Environment(0x88) + T] [SEALED]   ║\");"
+    },
+    {
+      "path": "src/bin/babylon_top.rs",
+      "source_sha256": "4872c42ed9045615d677967609306da18fe8f9ed50ae33242c5503aca21063df",
+      "start_line": 105,
+      "end_line": 123,
+      "excerpt": "105: fn main() {\n106:     let args: Vec<String> = env::args().collect();\n107:     let watch_mode = args.iter().any(|a| a == \"--watch\" || a == \"-w\");\n108:     let db_path = args.iter()\n109:         .find(|a| a.starts_with(\"--db=\"))\n110:         .map(|a| &a[5..])\n111:         .unwrap_or(\"target/cortex.db\");\n112: \n113:     let manifest: &'static SharedManifest = Box::leak(Box::new(SharedManifest::new()));\n114: \n115:     let mut cycle = 1;\n116:     loop {\n117:         render_screen(db_path, manifest, cycle);\n118:         if !watch_mode {\n119:             break;\n120:         }\n121:         std::thread::sleep(Duration::from_millis(1000));\n122:         cycle += 1;\n123:     }"
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/ai-gateway/sdk-integration.md",
+      "source_sha256": "cbff034669a30dbb4f3be053db71b8954f34c94ae5af4d9dbe1dac6af1f7a69b",
+      "start_line": 5,
+      "end_line": 32,
+      "excerpt": "5: ```typescript\n6: import { createAiGateway } from 'ai-gateway-provider';\n7: import { createOpenAI } from '@ai-sdk/openai';\n8: import { generateText } from 'ai';\n9: \n10: const gateway = createAiGateway({\n11:   accountId: process.env.CF_ACCOUNT_ID,\n12:   gateway: process.env.CF_GATEWAY_ID,\n13:   apiKey: process.env.CF_API_TOKEN // Optional for auth gateways\n14: });\n15: \n16: const openai = createOpenAI({ apiKey: process.env.OPENAI_API_KEY });\n17: \n18: // Single model\n19: const { text } = await generateText({\n20:   model: gateway(openai('gpt-4o')),\n21:   prompt: 'Hello'\n22: });\n23: \n24: // Automatic fallback array\n25: const { text } = await generateText({\n26:   model: gateway([\n27:     openai('gpt-4o'),\n28:     anthropic('claude-sonnet-4-5'),\n29:     openai('gpt-4o-mini')\n30:   ]),\n31:   prompt: 'Complex task'\n32: });"
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/ai-gateway/sdk-integration.md",
+      "source_sha256": "cbff034669a30dbb4f3be053db71b8954f34c94ae5af4d9dbe1dac6af1f7a69b",
+      "start_line": 59,
+      "end_line": 67,
+      "excerpt": "59: ## Anthropic SDK\n60: \n61: ```typescript\n62: const client = new Anthropic({\n63:   apiKey: process.env.ANTHROPIC_API_KEY,\n64:   baseURL: `https://gateway.ai.cloudflare.com/v1/${accountId}/${gatewayId}/anthropic`,\n65:   defaultHeaders: { 'cf-aig-authorization': `Bearer ${cfToken}` }\n66: });\n67: ```"
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/f5tts-voice-cloning-sota/scripts/synthesize_vocal_clone.py",
+      "source_sha256": "7f579d14afdf8388c7e40f6accba159f184f6a7f9f7d9f91bec7f34f575f6311",
+      "start_line": 22,
+      "end_line": 46,
+      "excerpt": "22: def main():\n23:     parser = argparse.ArgumentParser(description=\"Síntesis Vocal AOT C5-REAL (F5-TTS)\")\n24:     parser.add_argument(\"--speaker\", required=True, help=\"ID del perfil vocal (ej. borja, luengo, gon, patxi, alain_electro)\")\n25:     parser.add_argument(\"--text\", required=True, help=\"Texto en español a sintetizar\")\n26:     parser.add_argument(\"--output\", help=\"Ruta de salida del audio (.wav u .opus)\")\n27:     args = parser.parse_args()\n28: \n29:     manifest_path = os.path.expanduser(\"~/Music/VOICE_CLONES/voices_manifest.json\")\n30:     if not os.path.exists(manifest_path):\n31:         print(f\"Error: No se encuentra el manifiesto de voces en {manifest_path}\", file=sys.stderr)\n32:         sys.exit(1)\n33: \n34:     with open(manifest_path, \"r\", encoding=\"utf-8\") as f:\n35:         manifest = json.load(f)\n36: \n37:     speaker_key = args.speaker.lower().replace(\" \", \"_\")\n38:     if speaker_key not in manifest:\n39:         print(f\"Error: Perfil '{speaker_key}' no encontrado. Disponibles: {list(manifest.keys())}\", file=sys.stderr)\n40:         sys.exit(1)\n41: \n42:     speaker_data = manifest[speaker_key]\n43:     refs = speaker_data.get(\"references\", [])\n44:     if not refs:\n45:         print(f\"Error: No hay audios de referencia para {speaker_key}\", file=sys.stderr)\n46:         sys.exit(1)"
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/f5tts-voice-cloning-sota/scripts/synthesize_vocal_clone.py",
+      "source_sha256": "7f579d14afdf8388c7e40f6accba159f184f6a7f9f7d9f91bec7f34f575f6311",
+      "start_line": 55,
+      "end_line": 59,
+      "excerpt": "55:     out_path = args.output\n56:     if not out_path:\n57:         out_dir = os.path.expanduser(\"~/Music/VOICE_SYNTHESIS\")\n58:         os.makedirs(out_dir, exist_ok=True)\n59:         out_path = os.path.join(out_dir, f\"{speaker_key}_synthesis.opus\")"
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/f5tts-voice-cloning-sota/scripts/synthesize_vocal_clone.py",
+      "source_sha256": "7f579d14afdf8388c7e40f6accba159f184f6a7f9f7d9f91bec7f34f575f6311",
+      "start_line": 107,
+      "end_line": 129,
+      "excerpt": "107:     raw_tmp = \"/tmp/f5_raw_synthesis.wav\"\n108:     sf.write(raw_tmp, wav, out_sr)\n109: \n110:     # Masterización broadcast FFmpeg\n111:     filter_chain = (\n112:         \"volume=0.88,\"\n113:         \"highpass=f=55,lowpass=f=7800,\"\n114:         \"equalizer=f=180:width_type=q:width=1.2:gain=1.5,\"\n115:         \"equalizer=f=3200:width_type=q:width=1.0:gain=1.8,\"\n116:         \"asoftclip=type=atan:param=1.2,\"\n117:         \"acompressor=threshold=-20dB:ratio=2.5:attack=15:release=70:makeup=1.0dB,\"\n118:         \"loudnorm=I=-16:TP=-1.5:LRA=7\"\n119:     )\n120: \n121:     cmd_opus = [\n122:         \"ffmpeg\", \"-y\", \"-i\", raw_tmp,\n123:         \"-af\", filter_chain,\n124:         \"-c:a\", \"libopus\", \"-b:a\", \"24k\", \"-vbr\", \"on\", \"-application\", \"voip\",\n125:         out_path\n126:     ]\n127:     subprocess.run(cmd_opus, check=True)\n128: \n129:     print(f\"✓ Síntesis masterizada guardada en: {out_path}\")"
+    },
+    {
+      "path": "tools/skill_library/global/c5-audiovisual-acreativo-sota/references/modules/f5tts-voice-cloning-sota/scripts/synthesize_vocal_clone.py",
+      "source_sha256": "7f579d14afdf8388c7e40f6accba159f184f6a7f9f7d9f91bec7f34f575f6311",
+      "start_line": 131,
+      "end_line": 140,
+      "excerpt": "131:     # Copiar a portapapeles de macOS\n132:     try:\n133:         osascript_cmd = f'set the clipboard to POSIX file \"{out_path}\"'\n134:         subprocess.run([\"osascript\", \"-e\", osascript_cmd], check=True)\n135:         print(\"✓ Audio copiado al portapapeles de macOS (Listo para Cmd+V en WhatsApp)\")\n136:     except Exception as e:\n137:         print(f\"Aviso portapapeles: {e}\")\n138: \n139: if __name__ == \"__main__\":\n140:     main()"
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-sovereign-identity-hardening/scripts/check_pwned_pass.sh",
+      "source_sha256": "3589f071058fa0500ac0769217b67eb068f119fe970aa16ebd9a61b4ce00899e",
+      "start_line": 7,
+      "end_line": 21,
+      "excerpt": "7: set -euo pipefail\n8: \n9: if [ $# -eq 0 ]; then\n10:     echo \"[-] Error: Especifica la contraseña o hash a auditar.\"\n11:     echo \"    Uso: $0 \\\"TuContraseñaAComprobar\\\"\"\n12:     exit 1\n13: fi\n14: \n15: PASSWORD=\"$1\"\n16: \n17: # 1. Obtener el hash SHA-1 en mayúsculas sin salto de línea\n18: if command -v shasum >/dev/null 2>&1; then\n19:     SHA1_HASH=$(echo -n \"$PASSWORD\" | shasum -a 1 | awk '{print toupper($1)}')\n20: elif command -v openssl >/dev/null 2>&1; then\n21:     SHA1_HASH=$(echo -n \"$PASSWORD\" | openssl sha1 | awk '{print toupper($2)}')"
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-sovereign-identity-hardening/scripts/check_pwned_pass.sh",
+      "source_sha256": "3589f071058fa0500ac0769217b67eb068f119fe970aa16ebd9a61b4ce00899e",
+      "start_line": 27,
+      "end_line": 38,
+      "excerpt": "27: # 2. Extraer prefijo (primeros 5 caracteres) y sufijo (resto)\n28: PREFIX=\"${SHA1_HASH:0:5}\"\n29: SUFFIX=\"${SHA1_HASH:5}\"\n30: \n31: echo \"[+] Auditando prefijo de k-Anonimato: $PREFIX...\"\n32: \n33: # 3. Consultar la API de Pwned Passwords enviando SOLO los 5 caracteres del prefijo\n34: RESPONSE=$(curl -s --fail \"https://api.pwnedpasswords.com/range/$PREFIX\" || true)\n35: \n36: if [ -z \"$RESPONSE\" ]; then\n37:     echo \"[-] Error: No se pudo conectar a la API de Pwned Passwords.\"\n38:     exit 1"
+    },
+    {
+      "path": "tools/skill_library/global/youtube-analysis-pipeline/scripts/yt_audit.py",
+      "source_sha256": "ecda4dca2ee77aa986d1898aad7fbd998bc07723bf7126c1e697fbd155638d62",
+      "start_line": 7,
+      "end_line": 17,
+      "excerpt": "7: def run_cmd(cmd):\n8:     try:\n9:         res = subprocess.run(cmd, shell=True, capture_output=True, text=True, check=True)\n10:         return res.stdout.strip()\n11:     except subprocess.CalledProcessError as e:\n12:         return f\"ERROR: {e.stderr}\"\n13: \n14: def fetch_youtube_audit(url, output_dir=\"scratch\"):\n15:     os.makedirs(output_dir, exist_ok=True)\n16:     print(f\"[+] Extrayendo metadatos para: {url}\")\n17:     meta_json = run_cmd(f'yt-dlp --dump-json \"{url}\" 2>/dev/null')"
+    },
+    {
+      "path": "tools/skill_library/global/youtube-analysis-pipeline/scripts/yt_audit.py",
+      "source_sha256": "ecda4dca2ee77aa986d1898aad7fbd998bc07723bf7126c1e697fbd155638d62",
+      "start_line": 35,
+      "end_line": 42,
+      "excerpt": "35:     print(\"[+] Intentando descarga de subtítulos (es, en, ko, ja, de)...\")\n36:     sub_cmd = f'yt-dlp --ignore-errors --no-check-certificate --write-auto-subs --write-subs --sub-langs \"es,en,ko,ko-orig,ja,de,fr\" --skip-download \"{url}\" -o \"{output_dir}/transcript.%(ext)s\" 2>&1'\n37:     sub_out = run_cmd(sub_cmd)\n38: \n39:     vtt_files = [f for f in os.listdir(output_dir) if f.endswith(\".vtt\")]\n40:     if not vtt_files:\n41:         print(\"[-] Subtítulos predeterminados bloqueados o no encontrados. Consultando list-subs...\")\n42:         list_subs = run_cmd(f'yt-dlp --list-subs \"{url}\" 2>/dev/null')"
+    },
+    {
+      "path": "tools/skill_library/global/youtube-analysis-pipeline/scripts/yt_audit.py",
+      "source_sha256": "ecda4dca2ee77aa986d1898aad7fbd998bc07723bf7126c1e697fbd155638d62",
+      "start_line": 48,
+      "end_line": 55,
+      "excerpt": "48: if __name__ == \"__main__\":\n49:     if len(sys.argv) < 2:\n50:         print(\"Uso: python3 yt_audit.py <YOUTUBE_URL> [OUTPUT_DIR]\")\n51:         sys.exit(1)\n52: \n53:     target_url = sys.argv[1]\n54:     out_dir = sys.argv[2] if len(sys.argv) > 2 else \".\"\n55:     fetch_youtube_audit(target_url, out_dir)"
+    }
+  ]
+}

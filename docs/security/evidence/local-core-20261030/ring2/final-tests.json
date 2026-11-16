@@ -1,0 +1,26 @@
+{
+  "command": [
+    "uv",
+    "run",
+    "--locked",
+    "--extra",
+    "dev",
+    "python",
+    "-I",
+    "/Users/borjafernandezangulo/.codex/local-core-evidence/capture-20261029T230935Z/ring2/run_pytest.py",
+    "tests/test_database_config_cleanup.py",
+    "tests/test_consensus_atomic_commit.py",
+    "tests/test_consensus_fault_recovery.py",
+    "tests/test_consensus_recovery_regressions.py",
+    "tests/test_swarm100_lot5_regressions.py",
+    "tests/test_swarm100_lot11_regressions.py",
+    "tests/test_cortex_persist_batch_regressions.py",
+    "tests/test_cortex_query_filters.py",
+    "tests/test_ledger_resilience.py",
+    "tests/test_ledger_vault_verify.py",
+    "tests/test_local_core_cortex_connections.py",
+    "-q"
+  ],
+  "returncode": 0,
+  "elapsed_seconds": 5.509
+}

@@ -1,0 +1,427 @@
+{
+  "shard": "044",
+  "findings": [
+    {
+      "title": "Malformed bracket order panics instead of returning compile error",
+      "severity": "P2",
+      "path": "crates/b60-lang/src/compiler.rs",
+      "line": 131,
+      "evidence": "NIG finds '[' and ']' independently then slices line[start..=end] without checking start <= end; DAH and LAL repeat it.",
+      "trigger": "Compile NIG X ] [ Y (three or more tokens).",
+      "impact": "Rust string slicing panics at an invalid range, aborting compilation rather than returning Result::Err.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Named registers silently alias after six variables",
+      "severity": "P2",
+      "path": "crates/b60-lang/src/compiler.rs",
+      "line": 43,
+      "evidence": "next_idx = 2 + ((sym_table.len() as u8) % 6) assigns the seventh distinct symbol register 2 again. VM LoadReg writes that physical register (vm.rs:283-290).",
+      "trigger": "Compile a script with seven distinct symbolic destinations.",
+      "impact": "Writing the seventh variable corrupts the first variable; compilation succeeds without exhausting-register diagnostic.",
+      "confidence": "high",
+      "kind": "runtime"
+    },
+    {
+      "title": "Installer commits unrelated staged changes and hides copy failures",
+      "severity": "P2",
+      "path": "scripts/c5_setup/install_into_repo.sh",
+      "line": 32,
+      "evidence": "Every cp is suppressed with || true; git commit has no pathspec and the script has no fail-fast handling.",
+      "trigger": "Run installer in a repository with unrelated staged changes or with missing source assets.",
+      "impact": "Existing staged work can be included in its generated commit; failed installation still prints READY.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "Claimed monotonicity accepts positive energy increments",
+      "severity": "P2",
+      "path": "scripts/repatriated/poc_port_hamiltonian_deliberation.py",
+      "line": 104,
+      "evidence": "The printed dH/dt <= 0 check uses np.diff(energy_ph) <= 0.05, while the final verdict is printed unconditionally.",
+      "trigger": "A trajectory has energy increases up to 0.05, or any check evaluates false.",
+      "impact": "The demonstration reports monotonicity or eradicated divergence without establishing either property; this is a toy numerical trajectory, not a model evaluation.",
+      "confidence": "high",
+      "kind": "example"
+    },
+    {
+      "title": "NIG silently truncates multi-place literals to 255",
+      "severity": "P2",
+      "path": "crates/b60-lang/src/compiler.rs",
+      "line": 132,
+      "evidence": "parse_cuneiform_literal returns u64 but NIG/DAH/LAL lower val.min(255) to a single byte instead of rejecting or representing the value. VM SexaPack reads one byte of seconds (vm.rs:270-278).",
+      "trigger": "Compile NIG X [ Y - - ], a sexagesimal literal equal to 3600.",
+      "impact": "The accepted program stores 255 instead of 3600 with no diagnostic.",
+      "confidence": "high",
+      "kind": "runtime"
+    }
+  ],
+  "hypotheses": [
+    {
+      "path": "01_KISH_ENGINE/babylon60/api/batch_accumulator.py",
+      "line": 143,
+      "observation": "Odd duplication makes roots for [a,b,c] and [a,b,c,c] equal; no cardinality or domain separation is committed.",
+      "uncertainty": "Consumer security reliance on cardinality was not traced; no authorization-bypass claim is made."
+    }
+  ],
+  "coverage": [
+    {
+      "path": ".agents/skills/c5-epistemic-thermodynamics-project/scripts/route.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          8
+        ]
+      ],
+      "sha256_expected": "88aac236a6050ef905dba48128adb132657dd3b16cb03ce302ea59b89117ab09",
+      "sha256_observed": "88aac236a6050ef905dba48128adb132657dd3b16cb03ce302ea59b89117ab09",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "00_ABZU_KERNEL/crates/babylon60-compiler/src/semantic_solver.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          732
+        ]
+      ],
+      "sha256_expected": "d1b83c17afb3f8955a5af3b6790db207e64c5448c3481e9e4b8fda6f3f5c4bf4",
+      "sha256_observed": "d1b83c17afb3f8955a5af3b6790db207e64c5448c3481e9e4b8fda6f3f5c4bf4",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/api/batch_accumulator.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          249
+        ]
+      ],
+      "sha256_expected": "2cc1eee4ebbda30c9485b2ad5109ebb2f42b84b597a717c5716bdb697f735950",
+      "sha256_observed": "2cc1eee4ebbda30c9485b2ad5109ebb2f42b84b597a717c5716bdb697f735950",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/core/url_cache.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          122
+        ]
+      ],
+      "sha256_expected": "fd9c35466c86dc4ee69fa51831f662d2a8c16e46d32f8b8034e96ee35d7c5263",
+      "sha256_observed": "fd9c35466c86dc4ee69fa51831f662d2a8c16e46d32f8b8034e96ee35d7c5263",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/primitives/base60.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          264
+        ]
+      ],
+      "sha256_expected": "83ead501c211d69e1f5f68da19978f53e500299b4f26836e9653709f66bde7b0",
+      "sha256_observed": "83ead501c211d69e1f5f68da19978f53e500299b4f26836e9653709f66bde7b0",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "01_KISH_ENGINE/cortex/crates/cortex-core/src/provenance.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          136
+        ]
+      ],
+      "sha256_expected": "1c2f8693ce5c9cdb4faabdc1336730745b8ba5930426bce0555418b525de54ae",
+      "sha256_observed": "1c2f8693ce5c9cdb4faabdc1336730745b8ba5930426bce0555418b525de54ae",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "crates/b60-lang/src/compiler.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          320
+        ]
+      ],
+      "sha256_expected": "e1be982667c360a0c71ba2c5f54e2344939bc4a1d4b62b66eb5e55aa43e211f1",
+      "sha256_observed": "e1be982667c360a0c71ba2c5f54e2344939bc4a1d4b62b66eb5e55aa43e211f1",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "docs/03_guides/guide_skill_arsenal_taxonomy.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          219
+        ]
+      ],
+      "sha256_expected": "c9cb1a2fca9be0a21b6018a16ff6d628e3fd160c9045ac301b405cb21ef6bc84",
+      "sha256_observed": "c9cb1a2fca9be0a21b6018a16ff6d628e3fd160c9045ac301b405cb21ef6bc84",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "docs/security/evidence/recovery-audit-2026-10-26.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          90
+        ]
+      ],
+      "sha256_expected": "51f2d5907b3d871c9ae456558ea1c6de292ec239fe87b334b6747c5bb1a56fad",
+      "sha256_observed": "51f2d5907b3d871c9ae456558ea1c6de292ec239fe87b334b6747c5bb1a56fad",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "proof/lean/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          54
+        ]
+      ],
+      "sha256_expected": "04bb03416dad9c63bd4142a8a5f2c5ae0935eb20dbf5820e6ef5471584e92f6c",
+      "sha256_observed": "04bb03416dad9c63bd4142a8a5f2c5ae0935eb20dbf5820e6ef5471584e92f6c",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "scripts/c5_demos/poc_rust_ffi_topological_leap.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          145
+        ]
+      ],
+      "sha256_expected": "b928304c22ca2a9ba80c7c8de48304b3f07b557a3d5f792ef925bb5f5f35e3e8",
+      "sha256_observed": "b928304c22ca2a9ba80c7c8de48304b3f07b557a3d5f792ef925bb5f5f35e3e8",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "scripts/c5_setup/install_into_repo.sh",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          34
+        ]
+      ],
+      "sha256_expected": "63251a0eb2467336de0fa225edee101e573bb4f42d6d9acc8aadd13b6fee1485",
+      "sha256_observed": "63251a0eb2467336de0fa225edee101e573bb4f42d6d9acc8aadd13b6fee1485",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "scripts/repatriated/poc_port_hamiltonian_deliberation.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          106
+        ]
+      ],
+      "sha256_expected": "ac9b7395d64cd81bfe5b11fd3d0f83f73c825a6e323bb4eadf5db255c840c4a6",
+      "sha256_observed": "ac9b7395d64cd81bfe5b11fd3d0f83f73c825a6e323bb4eadf5db255c840c4a6",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "tests/fl_rec01_recovery_provenance.rs",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          432
+        ]
+      ],
+      "sha256_expected": "92c0e3104ba07e2520ed233b65d8ac1b89dfff7712bc1ed639f9d080a861ecb8",
+      "sha256_observed": "92c0e3104ba07e2520ed233b65d8ac1b89dfff7712bc1ed639f9d080a861ecb8",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "tests/test_cortex_ssm_mamba.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          67
+        ]
+      ],
+      "sha256_expected": "61706511f0b74896a6993843344ffec5767d5140dbeeec5b4eed32c556c8ff5b",
+      "sha256_observed": "61706511f0b74896a6993843344ffec5767d5140dbeeec5b4eed32c556c8ff5b",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "tests/test_skills_manifest.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          119
+        ]
+      ],
+      "sha256_expected": "9497f411820f69ef57fa3d0d84342b7c1878a0d26ff6de15e8d7ee3df4bdd83e",
+      "sha256_observed": "9497f411820f69ef57fa3d0d84342b7c1878a0d26ff6de15e8d7ee3df4bdd83e",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/api/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          66
+        ]
+      ],
+      "sha256_expected": "f5c1e63c45d540fae02993c8c665d908bb5ae12a2953e3750839a352d2295f84",
+      "sha256_observed": "f5c1e63c45d540fae02993c8c665d908bb5ae12a2953e3750839a352d2295f84",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/kv/api.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          160
+        ]
+      ],
+      "sha256_expected": "94a2fc711801bf91b2697d3690ca5b5f6c7732f22ec50965e1eb0eafed204ff4",
+      "sha256_observed": "94a2fc711801bf91b2697d3690ca5b5f6c7732f22ec50965e1eb0eafed204ff4",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/cloudflare/references/stream/api-live.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          195
+        ]
+      ],
+      "sha256_expected": "e7b22992f52df4585aad1574e33b2ab01ab5ada737aedc1fc10adc02c2bddb41",
+      "sha256_observed": "e7b22992f52df4585aad1574e33b2ab01ab5ada737aedc1fc10adc02c2bddb41",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "tools/skill_library/codex_overrides/turnstile-spin/README.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          51
+        ]
+      ],
+      "sha256_expected": "185e4f6a2f7ee9a911fca356907b900c9faf617e2d1353f345b96efda1a27a23",
+      "sha256_observed": "185e4f6a2f7ee9a911fca356907b900c9faf617e2d1353f345b96efda1a27a23",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-autonomous-agent-primitives/agents/agent_12_shopping.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          61
+        ]
+      ],
+      "sha256_expected": "5d61ee516134e624815b369997ec154b5893b61bff15ce6efc376b204e050e34",
+      "sha256_observed": "5d61ee516134e624815b369997ec154b5893b61bff15ce6efc376b204e050e34",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/c5-autonomous-agent-primitives/agents_registry.json",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          1104
+        ]
+      ],
+      "sha256_expected": "8f51652242cd2c950b0567e5d68c346096117f210a2abb933262eedc9c6e2803",
+      "sha256_observed": "8f51652242cd2c950b0567e5d68c346096117f210a2abb933262eedc9c6e2803",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-html-report-injection-audit/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          48
+        ]
+      ],
+      "sha256_expected": "3d6b0ab284d24c332b88c7b8e7ab5e507b6ce2b5cc9fb0adfd272142550dd0c8",
+      "sha256_observed": "3d6b0ab284d24c332b88c7b8e7ab5e507b6ce2b5cc9fb0adfd272142550dd0c8",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "tools/skill_library/global/existence-gap-audit/tests/test_regression.py",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          209
+        ]
+      ],
+      "sha256_expected": "95f95756583952365d0ec66ac632de58526fa93aade126e1247068813ac033cb",
+      "sha256_observed": "95f95756583952365d0ec66ac632de58526fa93aade126e1247068813ac033cb",
+      "changed_since_manifest": false,
+      "symlink": false
+    },
+    {
+      "path": "tools/skill_library/workspace/c5-epistemic-thermodynamics-project/references/modules/symbiotic-cognitive-architecture/MODULE.md",
+      "status": "reviewed_full",
+      "ranges": [
+        [
+          1,
+          131
+        ]
+      ],
+      "sha256_expected": "bf013041f7743108ec248faf62906facc91f3d6847f2c19511de45703c79da01",
+      "sha256_observed": "bf013041f7743108ec248faf62906facc91f3d6847f2c19511de45703c79da01",
+      "changed_since_manifest": false,
+      "symlink": false
+    }
+  ],
+  "tool_limitations": [
+    "Native codebase-memory graph tools unavailable; targeted source reads used.",
+    "Audit only: no tests, compilation, application runtime or external API verification.",
+    "No Cloudflare documentation behavior certified; bundled examples read statically.",
+    "Cross-file api/session.py lookup failed because file absent; no absence claim inferred."
+  ],
+  "tests_run": []
+}

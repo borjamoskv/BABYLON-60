@@ -1,0 +1,21 @@
+{
+  "reviewer": "15",
+  "validated_count": 29,
+  "exact_id_order": true,
+  "unique_ids": true,
+  "json_schema_fields": true,
+  "current_hashes_match": true,
+  "all_evidence_files_exist": true,
+  "source_evidence_ranges": 74,
+  "pure_checks_passed": 5,
+  "decisions": {
+    "CONFIRMED_STATIC": 23,
+    "REPRODUCED": 5,
+    "NEEDS_VALIDATION": 1
+  },
+  "remediation_states": {
+    "OPEN": 28,
+    "UNKNOWN": 1
+  },
+  "shared_workspace_gates": "Delegated to parent once centrally; this reviewer did not run global telemetry or gates."
+}

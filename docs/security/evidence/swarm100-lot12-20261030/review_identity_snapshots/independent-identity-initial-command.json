@@ -1,0 +1,20 @@
+{
+  "command": [
+    "uv",
+    "run",
+    "--locked",
+    "--no-sync",
+    "python",
+    "docs/security/evidence/swarm100-lot12-20261030/run_confined_tests.py",
+    "docs/security/evidence/swarm100-lot12-20261030/review_identity_snapshots/test_independent_identity.py",
+    "-q",
+    "-o",
+    "addopts=--tb=short"
+  ],
+  "exit_code": 0,
+  "source_sha256": {
+    "01_KISH_ENGINE/babylon60/crypto/identity.py": "565b1541050ab06aba7e09f183a4d4e76b136b87872f788636bde54b41dde416",
+    "01_KISH_ENGINE/babylon60/crypto/keys.py": "eb46e4dbf20959e62712122cd61215a3ba2a3189ca4c83e21afff8803a593b39",
+    "scripts/c5_l1_ledger/seal_bounty_aeon.py": "a3686548681ee16f73a088d06bd67443d73272afe868fc5e9c381e69d40cc6b0"
+  }
+}

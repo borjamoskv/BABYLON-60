@@ -1,0 +1,145 @@
+{
+  "group": "S6 formal/E2E",
+  "date": "2026-10-30",
+  "production_scope": [
+    "scripts/c5_destiladora/proof_emitter_lean4.py",
+    "scripts/babylon60/gen_oncology_primitives.py",
+    "scripts/c5_destiladora/test_destiladora_e2e.py"
+  ],
+  "source_sha256": {
+    "scripts/c5_destiladora/proof_emitter_lean4.py": "09c13761b760338fc9d747725c66f04f7a166acac92e5d2c950ad3ed047167fb",
+    "scripts/babylon60/gen_oncology_primitives.py": "291fec22430e3841a4770943ca0cc584fb0ac6195ddaa3ae4c5cf9567ae8b1e1",
+    "scripts/c5_destiladora/test_destiladora_e2e.py": "3d43668716203b1d41ccce51dc5ed2cfa924175dd460aa62e241c689f49c856f",
+    "tests/test_swarm100_lot12_s6_formal_regressions.py": "5e43a2ab6ecc5be4eaaddfff72cd272bad9bc1cf952e6643d0fe6cb9a709b41c"
+  },
+  "before": {
+    "tests": 5,
+    "failed": 5,
+    "log": "docs/security/evidence/swarm100-lot12-20261030/s6_formal/before-tests-final.log",
+    "source_hashes_match_before_manifest": true,
+    "initial_fixture_correction": "First C0360 dynamic rejection test was insufficient because preexisting emitted meta syntax was invalid; final prepatch test rejects the emitted global axiom directly. A separate normalized original model compiles False with real Lean; normalizations are recorded."
+  },
+  "after": {
+    "tests_passed": 23,
+    "tests_skipped": 0,
+    "checks": {
+      "regressions": {
+        "command": [
+          "uv",
+          "run",
+          "--locked",
+          "--no-sync",
+          "pytest",
+          "tests/test_swarm100_lot12_s6_formal_regressions.py",
+          "-q",
+          "-o",
+          "addopts=--tb=short"
+        ],
+        "exit_code": 0,
+        "log": "docs/security/evidence/swarm100-lot12-20261030/s6_formal/regressions.log",
+        "log_sha256": "2d9df45b098405285f8778a8e5247f554b4a962fb49ed33d5f8e07d805520914"
+      },
+      "ruff": {
+        "command": [
+          "uv",
+          "run",
+          "--locked",
+          "--no-sync",
+          "ruff",
+          "check",
+          "scripts/c5_destiladora/proof_emitter_lean4.py",
+          "scripts/babylon60/gen_oncology_primitives.py",
+          "scripts/c5_destiladora/test_destiladora_e2e.py",
+          "tests/test_swarm100_lot12_s6_formal_regressions.py"
+        ],
+        "exit_code": 0,
+        "log": "docs/security/evidence/swarm100-lot12-20261030/s6_formal/ruff.log",
+        "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+      },
+      "mypy": {
+        "command": [
+          "uv",
+          "run",
+          "--locked",
+          "--no-sync",
+          "mypy",
+          "--follow-imports=silent",
+          "--check-untyped-defs",
+          "scripts/c5_destiladora/proof_emitter_lean4.py",
+          "scripts/babylon60/gen_oncology_primitives.py",
+          "scripts/c5_destiladora/test_destiladora_e2e.py"
+        ],
+        "exit_code": 0,
+        "log": "docs/security/evidence/swarm100-lot12-20261030/s6_formal/mypy.log",
+        "log_sha256": "8228fcc5ce46d42d01caf3cd941f4e9c5f2bcc372bb5b147a2f0572d2dd675a8"
+      },
+      "lean_binary": "/Users/borjafernandezangulo/.elan/toolchains/leanprover--lean4---v4.35.0/bin/lean"
+    }
+  },
+  "candidates": [
+    {
+      "candidate_id": "SW100-C0378",
+      "proposed_state": "MITIGATED",
+      "behavior": "No PROVED promotion without a precondition/implementation correspondence checker; emits NOT_VERIFIED/NOT_EXECUTED. Withdraws legacy PROVED database eligibility, including rows already COMPILED/DEPLOYED. Unmodified Rust consumer selects zero rules.",
+      "before_observation": "Three preconditions including False promoted by a recorded successful compiler result; captured original also reproduced with real Lean4.35 and False in temporary SQLite.",
+      "evidence": [
+        "docs/security/evidence/swarm100-lot12-20261030/s6_formal/before-tests-final.log",
+        "docs/security/evidence/swarm100-lot12-20261030/s6_formal/original-formal-reproduction.json",
+        "docs/security/evidence/swarm100-lot12-20261030/s6_formal/original-fixed-model.lean",
+        "docs/security/evidence/swarm100-lot12-20261030/s6_formal/regressions.log"
+      ],
+      "limits": [
+        "No implemented translator/correspondence checker; certified code generation remains unavailable.",
+        "Already generated/deployed Rust artifacts are not retired by changing database eligibility.",
+        "No native Rust or hardware attestation claim."
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0360",
+      "proposed_state": "FIXED",
+      "behavior": "Removes universally inconsistent axiom. Bound theorem requires a length premise; catalog cardinality is checked on exactly300 parsed entries. Escapes reserved meta constructor and data strings and closes namespace; emits an axiom-free catalog theorem checked by Lean.",
+      "before_observation": "Original generator emits axiom; after syntax/recursion normalizations recorded separately, Lean proves False using List.replicate301. New catalog compiles and cannot discharge a301-element bound.",
+      "evidence": [
+        "docs/security/evidence/swarm100-lot12-20261030/s6_formal/before-tests-final.log",
+        "docs/security/evidence/swarm100-lot12-20261030/s6_formal/original-formal-reproduction.json",
+        "docs/security/evidence/swarm100-lot12-20261030/s6_formal/original-axiom-counterexample-normalized.lean",
+        "docs/security/evidence/swarm100-lot12-20261030/s6_formal/regressions.log"
+      ],
+      "limits": [
+        "Only emitted catalog cardinality/bounded-list logic is proved, not biological or therapeutic truth.",
+        "Counterexample normalization is explicit and not represented as unmodified generator compilation."
+      ]
+    },
+    {
+      "candidate_id": "SW100-C0385",
+      "proposed_state": "FIXED",
+      "behavior": "Demo runs in child process with private temporary HOME/DB configured before lazy pipeline imports. No repository database/reset, Rust generation, cargo invocation, provider claim, hardware claim or synthetic benchmark. Exceptions clean private roots. CLI returns failure while pipeline unverified.",
+      "before_observation": "Original script reset existing fixture cluster from PROVED to ACCUMULATING via unqualified UPDATE. SQLlogical state observed; filebytes alone were insufficient under WAL.",
+      "evidence": [
+        "docs/security/evidence/swarm100-lot12-20261030/s6_formal/before-tests-final.log",
+        "docs/security/evidence/swarm100-lot12-20261030/s6_formal/regressions.log"
+      ],
+      "limits": [
+        "Demo uses synthetic samples and does not certify runtime or performance.",
+        "Verified end-to-end code generation remains unavailable because C0378 is mitigated."
+      ]
+    }
+  ],
+  "concurrency": {
+    "emitter": "2 warmups;24 calls across8 threads,32 rows,zeroPROVED/lost rows",
+    "demo": "1 warmup;6 child demos across3 threads,distinct roots cleaned",
+    "exception_cleanup": [
+      "ingest",
+      "extract",
+      "prove"
+    ]
+  },
+  "independent_review": "Pending parent-assigned reviewer; no self-certification.",
+  "no_changes": [
+    "dependencies",
+    "lockfiles",
+    "operator database/identity",
+    "common registry/report",
+    "Git commit/push"
+  ]
+}

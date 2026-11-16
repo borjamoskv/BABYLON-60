@@ -1,0 +1,8 @@
+Uninstalled 1 package in 2ms
+Installed 1 package in 2ms
+........................................................................ [ 44%]
+..............................................................s......... [ 88%]
+..................                                                       [100%]
+=========================== short test summary info ============================
+SKIPPED [1] tests/test_autodidact_omega_v2.py:235: strike_rs rust extension is not built in this environment
+161 passed, 1 skipped in 9.23s

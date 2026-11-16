@@ -14,7 +14,7 @@ Durante la destilación de la proyección pública acotada ([`scripts/c5_git_uti
 
 ## 2. Resolución de Enlaces y Verificación de Digests
 
-- **En `BABYLON-60-VAULT`:** Todos los enlaces relativos `evidence/<lote>/<archivo>` dentro de `docs/security/*.md` resuelven localmente sobre `docs/security/evidence/<lote>/<archivo>`.
+- **Resolución Canónica:** Las referencias a evidencias de seguridad en `docs/security/*.md` enlazan canónicamente a este documento de retención (`RETENTION.md`) y al inventario de custodia en [`../../evidence/README.md`](../../evidence/README.md). En la bóveda privada (`BABYLON-60-VAULT`), los archivos físicos correspondientes residen bajo `docs/security/evidence/<lote>/<archivo>` y se acceden vía VDR bajo NDA.
 - **En la Proyección Pública (`BABYLON-60`):** La cláusula canónica de custodia y el inventario de categorías retenidas se encuentran en [`evidence/README.md`](../../evidence/README.md).
 - **Evidencias de Validación en Host (`~/.babylon60/validation/`):** Los paquetes comprimidos generados por `cognitive_pilot` y `validate_linux_arm64.sh` se almacenan fuera del árbol Git con sus digests `SHA-256` sellados en [`cognitive-pilot-real-evaluation-2026-10-23.md`](cognitive-pilot-real-evaluation-2026-10-23.md) y [`linux-arm64-validation-2026-10-23.md`](linux-arm64-validation-2026-10-23.md).
 - **Solicitud de Acceso VDR / NDA:** Contacto institucional exclusivamente vía `access@babylon60.com`.

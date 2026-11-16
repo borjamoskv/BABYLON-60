@@ -1,0 +1,83 @@
+{
+  "candidate_id": "SW100-C0279",
+  "decision": "NEEDS_VALIDATION",
+  "severity": "P2",
+  "remediation_state": "UNKNOWN",
+  "path": "scripts/c5_sharur/agent_beeper.py",
+  "current_source_sha256": "2601874532f18a3286ab7b0cf306672b20ae4eab61b40e57c1ccdaf6283f39cb",
+  "rationale": "Independent follow-up preserves NEEDS_VALIDATION. The retained global latch and repeated return of its payload are real implementation behavior, also reproduced by reviewer 19; the missing evidence is the intended repeat-delivery contract, not the latch mechanics. Targeted source/document searches across scripts, 01_KISH_ENGINE, 02_EDIN_SWARMS, tests, docs, .agents and tools/skill_library located only sharur_swarm_core as an importer of this particular agent_beeper class. That caller creates a fresh instance per run, waits once per tenant, broadcasts once and explicitly calls the result a Barrier Event, so persistent state is compatible with its documented use and also allows late waiters to pass. The matching lifecycle guide likewise shows one wait followed by one task. Conversely, this class advertises pub/sub and Event-Sourcing without explicitly limiting the API to one use or specifying retained-state semantics. Thus the current caller does not prove a general one-shot API contract, and generic naming does not prove required successive-message delivery. Other AgentPager classes with reset() are distinct implementations and supply no such missing contract. No harmed repeat-wait consumer or per-generation delivery requirement was found in the stated search scope. Keep the candidate unresolved until a contract/test requires a next broadcast after consumption, or the API is explicitly documented as a retained one-use barrier. Native graph tools were unavailable in the session; no production/native runtime, network or operator data was used.",
+  "source_checks": [
+    {
+      "path": "scripts/c5_sharur/agent_beeper.py",
+      "start_line": 6,
+      "end_line": 25,
+      "observation": "The module claims Event-Sourcing and the class calls itself pub/sub; neither states whether repeated broadcasts are separate consumable messages or a retained latest state."
+    },
+    {
+      "path": "scripts/c5_sharur/agent_beeper.py",
+      "start_line": 47,
+      "end_line": 74,
+      "observation": "wait_for_beep consumes pending unicast payloads but returns the global payload whenever the shared event is set, without a per-agent broadcast generation."
+    },
+    {
+      "path": "scripts/c5_sharur/agent_beeper.py",
+      "start_line": 76,
+      "end_line": 86,
+      "observation": "beep_swarm overwrites the retained payload and permanently sets the event. No reset or broadcast-consumption API is defined in this 86-line module."
+    },
+    {
+      "path": "scripts/c5_sharur/sharur_swarm_core.py",
+      "start_line": 39,
+      "end_line": 61,
+      "observation": "A tenant waits once and then returns its result; there is no repeated receive loop."
+    },
+    {
+      "path": "scripts/c5_sharur/sharur_swarm_core.py",
+      "start_line": 80,
+      "end_line": 101,
+      "observation": "Each run constructs a fresh pager, sends one OMEGA_COLLAPSE_SIGNAL and gathers tenants. The caller explicitly labels this a Barrier Event."
+    },
+    {
+      "path": "tools/skill_library/global/c5-cortex-swarm-orchestrator/references/modules/dynamic-subagent-lifecycle/MODULE.md",
+      "start_line": 70,
+      "end_line": 86,
+      "observation": "The matching tenant-ID wait example performs one wait followed by one task; the documented global Event pattern gives no reuse/reset/next-message contract."
+    },
+    {
+      "path": "02_EDIN_SWARMS/agents_archi/orchestrator/swarm.py",
+      "start_line": 129,
+      "end_line": 146,
+      "observation": "This separately defined AgentPager has no tenant-ID/payload interface and exposes explicit reset; it is not the class imported by sharur_swarm_core."
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py",
+      "start_line": 150,
+      "end_line": 167,
+      "observation": "The other kernel AgentPager is also a distinct resettable Event wrapper; its interface cannot establish a reset obligation for the candidate class."
+    },
+    {
+      "path": "tools/skill_library/global/c5-ring0-babylon-kernel/references/modules/c5-silicon-stress-suite/MODULE.md",
+      "start_line": 55,
+      "end_line": 73,
+      "observation": "The local multicast example explicitly describes a single signal and imports the separate agents_archi implementation."
+    },
+    {
+      "path": "docs/security/evidence/swarm100-round3-20261028/19-pure-fixtures.py",
+      "start_line": 23,
+      "end_line": 38,
+      "observation": "Prior reviewer fixture demonstrates retained broadcast behavior, but itself records that intended reuse remains unvalidated; it does not establish an affected consumer."
+    }
+  ],
+  "guards": [
+    "The located concrete caller creates a fresh pager per invocation and each tenant awaits only once, so the permanent latch is safe for that observed barrier usage.",
+    "Global state remains available to late-arriving waiters; clearing a broadcast indiscriminately could itself break fan-out/barrier semantics.",
+    "A later beep_swarm overwrites the retained payload, but wait_for_beep does not wait for that later generation. Whether this violates API semantics is not specified.",
+    "The pub/sub/Event-Sourcing labels and suspension docstring do not define consume-once delivery, replay, retention or permitted pager lifetime.",
+    "Distinct resettable AgentPager implementations and their tests are not consumers of scripts/c5_sharur/agent_beeper.py."
+  ],
+  "runtime_executed": false,
+  "evidence_paths": [
+    "docs/security/evidence/swarm100-round3-20261028/19-pure-fixtures.py",
+    "docs/security/evidence/swarm100-round3-20261028/19-pure-fixtures-results.json"
+  ]
+}

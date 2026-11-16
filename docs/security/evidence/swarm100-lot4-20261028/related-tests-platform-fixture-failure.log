@@ -1,0 +1,24 @@
+........................................................................ [ 14%]
+.............................F.......................................... [ 29%]
+........................................................................ [ 43%]
+........................................................................ [ 58%]
+........................................................................ [ 72%]
+........................................................................ [ 87%]
+....................................s...........................         [100%]
+=================================== FAILURES ===================================
+____ test_missing_platform_observations_are_explicit_unknown_and_verifiable ____
+proof/bundles/attestation_bundle_v1/verify:180: in build_snapshot
+    cwd=root, stderr=subprocess.DEVNULL).decode('ascii').strip()
+                     ^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'types.SimpleNamespace' object has no attribute 'DEVNULL'
+
+During handling of the above exception, another exception occurred:
+tests/test_swarm100_lot4_regressions.py:469: in test_missing_platform_observations_are_explicit_unknown_and_verifiable
+    api['build_snapshot'](fixture.root,output,ARTIFACTS,'v2-wrapper')
+proof/bundles/attestation_bundle_v1/verify:181: in build_snapshot
+    except (OSError, subprocess.SubprocessError, UnicodeError):
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'types.SimpleNamespace' object has no attribute 'SubprocessError'
+=========================== short test summary info ============================
+SKIPPED [1] tests/test_autodidact_omega_v2.py:235: strike_rs rust extension is not built in this environment
+1 failed, 494 passed, 1 skipped in 79.81s (0:01:19)

@@ -1,0 +1,140 @@
+[
+  {
+    "candidate_id": "SW100-C0499",
+    "decision": "ALREADY_FIXED",
+    "severity": "P1",
+    "remediation_state": "FIXED",
+    "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+    "current_source_sha256": "18805a13c7a3c2853b8824c9424dbff05c2d27ebad9c89e2f3b2c98aaf7692ca",
+    "rationale": "Removed automatic hook-disabled retry. Git commit --only runs once with normal hooks and configured signing; nonzero Git/hook results raise rather than returning an old HEAD or localized diagnostic as success. No-op is decided by a successful scoped binary diff and stable HEAD/index before any commit. Parent, branch and committed-path postvalidation reject unexpected results without undoing another actor. Seven original red reproductions are now covered by the final confined regression suite; normal and rejecting hooks are both observed. Git/config/hooks remain a trust boundary, not a sandbox.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+        "start_line": 64,
+        "end_line": 154,
+        "observation": "One scoped commit with normal hooks; failures/no-op/postconditions do not become fabricated success."
+      },
+      {
+        "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+        "start_line": 235,
+        "end_line": 260,
+        "observation": "Git rejection propagates before success output."
+      },
+      {
+        "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+        "start_line": 263,
+        "end_line": 297,
+        "observation": "Git rejection propagates before success output."
+      },
+      {
+        "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+        "start_line": 300,
+        "end_line": 326,
+        "observation": "Git rejection propagates before success output."
+      },
+      {
+        "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+        "start_line": 359,
+        "end_line": 372,
+        "observation": "Git rejection propagates before success output; selects only actual producer outputs."
+      }
+    ],
+    "guards": [
+      "Commits/hooks ran only in owned temporary repositories with synthetic HOME/identity and isolated Git config. No helper/commit/amend on the real checkout, real signing, network, hardware or ATTESTED.",
+      "Normal Git hooks and signing configuration are retained. No --no-verify, hooksPath override, implicit git add, reset, clean, stash or retry bypass is issued.",
+      "Whole-file selection only: previous unstaged edits inside a selected generated output are not separated by hunk. Unselected PROJECT.md edits are excluded from YAML-only consumers.",
+      "Selected outputs must already be tracked regular files. New/untracked outputs and unsupported index/repository states are explicitly rejected, not silently staged.",
+      "Index preparation present at preflight, including intent-to-add and special flags, is rejected without refreshing/writing it. Git --only manages its own temporary staging/rollback for ordinary hook rejection.",
+      "Concurrent writers of the SAME selected output are outside the transaction guarantee: late partial staging can be superseded by --only. This limitation was reproduced and is not claimed fixed.",
+      "Git/config/hooks are trusted executable code. A hook may expand the commit tree or move refs before postvalidation; the helper detects an unexpected result but does not prevent or roll back that effect. This limitation was reproduced.",
+      "Preflight/interleaved staging of unrelated paths is preserved/excluded in fixtures; no OS-level sandbox or global multi-process Git transaction is certified.",
+      "Consumers propagate Git failure before printing success, but YAML/PROJECT already written by their producers remain dirty for review; persistence rollback is outside these IDs."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot8-20261029/before-tests.log",
+      "docs/security/evidence/swarm100-lot8-20261029/related-tests.log",
+      "docs/security/evidence/swarm100-lot8-20261029/independent-review.json",
+      "docs/security/evidence/swarm100-lot8-20261029/scope-check.json",
+      "docs/security/evidence/swarm100-lot8-20261029/validation.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/00.json",
+    "runtime_scope": "Actual Git/harmless hooks only in owned temporary repositories, isolated HOME/config; no real-checkout mutation/signing/network/protected runtime.",
+    "resolution_type": "CODE_AND_CONFINED_REGRESSIONS_VERIFIED"
+  },
+  {
+    "candidate_id": "SW100-C0500",
+    "decision": "ALREADY_FIXED",
+    "severity": "P1",
+    "remediation_state": "FIXED",
+    "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+    "current_source_sha256": "18805a13c7a3c2853b8824c9424dbff05c2d27ebad9c89e2f3b2c98aaf7692ca",
+    "rationale": "Replaced repository-wide add/full-index commit with explicit per-consumer output selection and Git --only, without manual staging/reset. YAML-only commands exclude unrelated PROJECT edits; iteration passes only outputs whose producers reported changes. The helper validates root, selector environment, Git state, clean ordinary index including intent-to-add, and tracked regular allowlisted paths. Existing staged/partial content is rejected byte-for-byte; unrelated dirty/untracked data and late staging remain outside the commit. Native fixtures include spaces, binary content, repeated commits and a linked worktree. Guarantees are at whole-file/preflight granularity; concurrent writers of selected outputs and hook-created effects remain documented limitations.",
+    "source_checks": [
+      {
+        "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+        "start_line": 64,
+        "end_line": 154,
+        "observation": "Allowlist, clean-index/flags/state preflight, no git add and path-restricted commit."
+      },
+      {
+        "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+        "start_line": 38,
+        "end_line": 43,
+        "observation": "Reads regular index through O_NOFOLLOW without implicit refresh."
+      },
+      {
+        "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+        "start_line": 46,
+        "end_line": 61,
+        "observation": "Checks selected path components/type without following symlinks."
+      },
+      {
+        "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+        "start_line": 235,
+        "end_line": 260,
+        "observation": "Only YAML is selected."
+      },
+      {
+        "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+        "start_line": 263,
+        "end_line": 297,
+        "observation": "Only YAML is selected."
+      },
+      {
+        "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+        "start_line": 300,
+        "end_line": 326,
+        "observation": "Only YAML is selected."
+      },
+      {
+        "path": "scripts/c5_cortex/cortex_objectives_transducer.py",
+        "start_line": 359,
+        "end_line": 372,
+        "observation": "Selects YAML and/or PROJECT according to producer mutation flags."
+      }
+    ],
+    "guards": [
+      "Commits/hooks ran only in owned temporary repositories with synthetic HOME/identity and isolated Git config. No helper/commit/amend on the real checkout, real signing, network, hardware or ATTESTED.",
+      "Normal Git hooks and signing configuration are retained. No --no-verify, hooksPath override, implicit git add, reset, clean, stash or retry bypass is issued.",
+      "Whole-file selection only: previous unstaged edits inside a selected generated output are not separated by hunk. Unselected PROJECT.md edits are excluded from YAML-only consumers.",
+      "Selected outputs must already be tracked regular files. New/untracked outputs and unsupported index/repository states are explicitly rejected, not silently staged.",
+      "Index preparation present at preflight, including intent-to-add and special flags, is rejected without refreshing/writing it. Git --only manages its own temporary staging/rollback for ordinary hook rejection.",
+      "Concurrent writers of the SAME selected output are outside the transaction guarantee: late partial staging can be superseded by --only. This limitation was reproduced and is not claimed fixed.",
+      "Git/config/hooks are trusted executable code. A hook may expand the commit tree or move refs before postvalidation; the helper detects an unexpected result but does not prevent or roll back that effect. This limitation was reproduced.",
+      "Preflight/interleaved staging of unrelated paths is preserved/excluded in fixtures; no OS-level sandbox or global multi-process Git transaction is certified.",
+      "Consumers propagate Git failure before printing success, but YAML/PROJECT already written by their producers remain dirty for review; persistence rollback is outside these IDs."
+    ],
+    "runtime_executed": true,
+    "evidence_paths": [
+      "docs/security/evidence/swarm100-lot8-20261029/before-tests.log",
+      "docs/security/evidence/swarm100-lot8-20261029/related-tests.log",
+      "docs/security/evidence/swarm100-lot8-20261029/independent-review.json",
+      "docs/security/evidence/swarm100-lot8-20261029/scope-check.json",
+      "docs/security/evidence/swarm100-lot8-20261029/validation.json"
+    ],
+    "review_file": "docs/security/evidence/swarm100-round3-20261028/reviews/00.json",
+    "runtime_scope": "Actual Git/harmless hooks only in owned temporary repositories, isolated HOME/config; no real-checkout mutation/signing/network/protected runtime.",
+    "resolution_type": "CODE_AND_CONFINED_REGRESSIONS_VERIFIED"
+  }
+]

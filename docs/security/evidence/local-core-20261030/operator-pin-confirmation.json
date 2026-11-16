@@ -1,0 +1,6 @@
+{
+  "source": "Explicit user reply in this chat",
+  "decision": "Use this existing key only for this acceptance test",
+  "public_key_sha256_sec1": "fd7e4f541f712d8ed5d717ae2fdc3df71807e97b130f1d375d3b964120845c4a",
+  "scope": "Process-local pin; one live Touch ID attempt; one event in a disposable ledger; no global configuration changes"
+}

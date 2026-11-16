@@ -1,0 +1,13 @@
+{
+  "command": [
+    "uv",
+    "run",
+    "--locked",
+    "--no-sync",
+    "ruff",
+    "check",
+    "docs/security/evidence/swarm100-lot12-20261030/review_identity_snapshots/test_independent_identity.py",
+    "docs/security/evidence/swarm100-lot12-20261030/review_identity_snapshots/test_independent_snapshots.py"
+  ],
+  "exit_code": 0
+}

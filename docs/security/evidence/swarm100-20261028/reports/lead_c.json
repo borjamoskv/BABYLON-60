@@ -1,0 +1,266 @@
+{
+  "lead": "C",
+  "expected_auditors": 25,
+  "child_dispatch_count": 24,
+  "reports_received": 25,
+  "children": [
+    {
+      "shard": 51,
+      "agent": "/root/swarm100_c/audit051",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/051.json",
+      "coverage_count": 25
+    },
+    {
+      "shard": 52,
+      "agent": "/root/swarm100_c/audit052",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/052.json",
+      "coverage_count": 25
+    },
+    {
+      "shard": 53,
+      "agent": "/root/swarm100_c/audit053",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/053.json",
+      "coverage_count": 25
+    },
+    {
+      "shard": 54,
+      "agent": "/root/swarm100_c/audit054",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/054.json",
+      "coverage_count": 25
+    },
+    {
+      "shard": 55,
+      "agent": "/root/swarm100_c/audit055",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/055.json",
+      "coverage_count": 25
+    },
+    {
+      "shard": 56,
+      "agent": "/root/swarm100_c/audit056",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/056.json",
+      "coverage_count": 25
+    },
+    {
+      "shard": 57,
+      "agent": "/root/swarm100_c/audit057",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/057.json",
+      "coverage_count": 25
+    },
+    {
+      "shard": 58,
+      "agent": "/root/swarm100_c/audit058",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/058.json",
+      "coverage_count": 25
+    },
+    {
+      "shard": 59,
+      "agent": "/root/swarm100_c/audit059",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/059.json",
+      "coverage_count": 25
+    },
+    {
+      "shard": 60,
+      "agent": "/root/swarm100_c/audit060",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/060.json",
+      "coverage_count": 25
+    },
+    {
+      "shard": 61,
+      "agent": "/root/swarm100_c/audit061",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/061.json",
+      "coverage_count": 25
+    },
+    {
+      "shard": 62,
+      "agent": "/root/swarm100_c/audit062",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/062.json",
+      "coverage_count": 25
+    },
+    {
+      "shard": 63,
+      "agent": "/root/swarm100_c/audit063",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/063.json",
+      "coverage_count": 25
+    },
+    {
+      "shard": 64,
+      "agent": "/root/swarm100_c/audit064",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/064.json",
+      "coverage_count": 25
+    },
+    {
+      "shard": 65,
+      "agent": "/root/swarm100_c/audit065",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/065.json",
+      "coverage_count": 25
+    },
+    {
+      "shard": 66,
+      "agent": "/root/swarm100_c/audit066",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/066.json",
+      "coverage_count": 25
+    },
+    {
+      "shard": 67,
+      "agent": "/root/swarm100_c/audit067",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/067.json",
+      "coverage_count": 25
+    },
+    {
+      "shard": 68,
+      "agent": "/root/swarm100_c/audit068",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/068.json",
+      "coverage_count": 25
+    },
+    {
+      "shard": 69,
+      "agent": "/root/swarm100_c/audit069",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/069.json",
+      "coverage_count": 25
+    },
+    {
+      "shard": 70,
+      "agent": "/root/swarm100_c/audit070",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/070.json",
+      "coverage_count": 25
+    },
+    {
+      "shard": 71,
+      "agent": "/root/swarm100_c/audit071",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/071.json",
+      "coverage_count": 25
+    },
+    {
+      "shard": 72,
+      "agent": "/root/swarm100_c/audit072",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/072.json",
+      "coverage_count": 25
+    },
+    {
+      "shard": 73,
+      "agent": "/root/swarm100_c/audit073",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/073.json",
+      "coverage_count": 25
+    },
+    {
+      "shard": 74,
+      "agent": "/root/swarm100_c/audit074",
+      "status": "report_complete",
+      "report": "/tmp/babylon60-audit-20261028/reports/074.json",
+      "coverage_count": 25
+    }
+  ],
+  "own_report": {
+    "shard": 50,
+    "agent": "lead_c",
+    "status": "report_complete",
+    "report": "/tmp/babylon60-audit-20261028/reports/050.json",
+    "coverage_count": 25
+  },
+  "coverage_counts": {
+    "reviewed_full": 619,
+    "reviewed_partial": 5,
+    "partial": 1
+  },
+  "coverage_gaps": [
+    {
+      "shard": 59,
+      "path": "docs/skills-lock.json",
+      "status": "reviewed_partial",
+      "ranges": [
+        [
+          1,
+          160
+        ]
+      ]
+    },
+    {
+      "shard": 60,
+      "path": "docs/skills.json",
+      "status": "reviewed_partial",
+      "ranges": [
+        [
+          1,
+          100
+        ]
+      ]
+    },
+    {
+      "shard": 60,
+      "path": "sbom.cargo.cdx.json",
+      "status": "reviewed_partial",
+      "ranges": [
+        [
+          1,
+          100
+        ]
+      ]
+    },
+    {
+      "shard": 61,
+      "path": "sbom.python.cdx.json",
+      "status": "partial",
+      "ranges": [
+        [
+          1,
+          120
+        ]
+      ]
+    },
+    {
+      "shard": 62,
+      "path": "skills-lock.json",
+      "status": "reviewed_partial",
+      "ranges": [
+        [
+          1,
+          200
+        ]
+      ]
+    },
+    {
+      "shard": 63,
+      "path": "01_KISH_ENGINE/cortex/transducers/video_remotion/package-lock.json",
+      "status": "reviewed_partial",
+      "ranges": [
+        [
+          1,
+          100
+        ]
+      ]
+    }
+  ],
+  "finding_counts_unadjudicated": {
+    "P2": 98,
+    "P1": 33,
+    "P3": 2
+  },
+  "adjudication_report": "/tmp/babylon60-audit-20261028/reports/findings_adjudicated_c.json",
+  "limitations": [
+    "Audit-only no child tests/runtime. One child052 inherited full context instead of requested none; no model/effort override and no extra delegation.",
+    "Partial generated JSON/lock coverage remains explicit."
+  ]
+}

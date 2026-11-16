@@ -1,0 +1,100 @@
+[
+  {
+    "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "start_line": 2134,
+    "end_line": 2138,
+    "observation": "Local ID remains the vault key.",
+    "source_sha256": "b898d7fabe6b598f204eca17116b2cba25cf8c05e49612451568f4c5273ca44a",
+    "lines": [
+      "    conn = sqlite3.connect(db_path, timeout=5)",
+      "    with conn:",
+      "        rec_id = str(data.get(\"id\") or data.get(\"permalink\") or data.get(\"url\") or f\"{data.get('platform')}_{int(time.time())}\")",
+      "        plat = data.get(\"platform\", \"unknown\")",
+      "        target_type = data.get(\"type\", \"unknown\")"
+    ]
+  },
+  {
+    "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "start_line": 2152,
+    "end_line": 2156,
+    "observation": "ID collisions still replace captures.",
+    "source_sha256": "b898d7fabe6b598f204eca17116b2cba25cf8c05e49612451568f4c5273ca44a",
+    "lines": [
+      "",
+      "        conn.execute(\"\"\"",
+      "            INSERT OR REPLACE INTO socint_vault",
+      "            (record_id, platform, target_type, url, author, title, raw_content, metrics_json, epistemic_counts_json, snr_score)",
+      "            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
+    ]
+  },
+  {
+    "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "start_line": 3036,
+    "end_line": 3040,
+    "observation": "Batch JSON retains the unrelated Markdown-separator defect.",
+    "source_sha256": "b898d7fabe6b598f204eca17116b2cba25cf8c05e49612451568f4c5273ca44a",
+    "lines": [
+      "        final_output = generate_csv_report(extracted_items_for_csv)",
+      "    else:",
+      "        final_output = \"\\n\\n---\\n\\n\".join(all_reports)",
+      "",
+      "    if args.output:"
+    ]
+  },
+  {
+    "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "start_line": 1630,
+    "end_line": 1634,
+    "observation": "Watch-page body remains transcript data.",
+    "source_sha256": "b898d7fabe6b598f204eca17116b2cba25cf8c05e49612451568f4c5273ca44a",
+    "lines": [
+      "            status, body, _ = http_get(jina_url, timeout=12)",
+      "            if body:",
+      "                transcript_text = body[:10000]",
+      "        except Exception:",
+      "            pass"
+    ]
+  },
+  {
+    "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "start_line": 2345,
+    "end_line": 2349,
+    "observation": "The unrelated audio-transcript label remains.",
+    "source_sha256": "b898d7fabe6b598f204eca17116b2cba25cf8c05e49612451568f4c5273ca44a",
+    "lines": [
+      "            f\"- **URL:** [{data.get('url')}]({data.get('url')})\",",
+      "            \"\",",
+      "            \"### Transcripción de Audio\",",
+      "            f\"{data.get('transcript', '')[:2000]}...\",",
+      "            \"\","
+    ]
+  },
+  {
+    "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "start_line": 174,
+    "end_line": 178,
+    "observation": "Regex hits remain a verified-fact count.",
+    "source_sha256": "b898d7fabe6b598f204eca17116b2cba25cf8c05e49612451568f4c5273ca44a",
+    "lines": [
+      "        return {",
+      "            \"counts\": {",
+      "                \"hechos_verificados\": len(facts),",
+      "                \"evidencia_experimental\": len(experimental),",
+      "                \"modelos_doctrina\": len(models),"
+    ]
+  },
+  {
+    "path": "tools/skill_library/global/c5-secops-infra-devtools/references/modules/c5-socint-extraction-suite/scripts/socint_extract.py",
+    "start_line": 2506,
+    "end_line": 2510,
+    "observation": "Consumer keeps the unrelated verified-fact label.",
+    "source_sha256": "b898d7fabe6b598f204eca17116b2cba25cf8c05e49612451568f4c5273ca44a",
+    "lines": [
+      "            \"\",",
+      "            f\"- **Ratio de Señal/Ruido (SNR):** `{epistemic_audit.get('signal_ratio') * 100:.1f}%`\",",
+      "            f\"- **Hechos Verificados:** `{c.get('hechos_verificados')}`\",",
+      "            f\"- **Evidencia Experimental & Telemetría:** `{c.get('evidencia_experimental')}`\",",
+      "            f\"- **Modelos & Doctrina:** `{c.get('modelos_doctrina')}`\","
+    ]
+  }
+]

@@ -1,0 +1,22 @@
+{
+  "reviewer": "08",
+  "validation": "PASS",
+  "candidate_count": 29,
+  "exact_ids_and_order": true,
+  "required_fields_present": true,
+  "source_hashes_match_current_worktree": true,
+  "source_ranges_valid": true,
+  "credential_value_absent_from_outputs": true,
+  "decisions": {
+    "CONFIRMED_STATIC": 29
+  },
+  "severities": {
+    "P2": 27,
+    "P3": 1,
+    "P1": 1
+  },
+  "source_changed_since_candidate": [],
+  "runtime_executed": false,
+  "product_source_edited": false,
+  "omitted": "No native/runtime, operator databases, deployments or remote mutations; repository-wide gates coordinated by parent."
+}

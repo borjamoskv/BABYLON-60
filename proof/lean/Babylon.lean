@@ -249,6 +249,9 @@ theorem theorem_chentsov_markov_monotonicity (fisher_in fisher_out : Nat)
     fisher_out ≤ fisher_in := by
   exact h_contractive
 
+/-- Alias semánticamente exacto para `#044`: propagación de la hipótesis `h_contractive : fisher_out ≤ fisher_in`. -/
+abbrev chentsov_contraction_hypothesis_passthrough := @theorem_chentsov_markov_monotonicity
+
 /-! Clasificación de longitudes y división entera de presupuestos -/
 
 /-- Etiquetas del clasificador de longitudes y presupuesto declarados. -/
@@ -298,6 +301,9 @@ theorem theorem_ffi_semantic_isomorphism (s1 f1 s2 f2 : Nat)
     (ffi_sexa_add_model s1 f1 s2 f2).2 = (add_tick60 ⟨s1, f1, h_f1⟩ ⟨s2, f2, h_f2⟩).sexa_fraction := by
   dsimp [ffi_sexa_add_model, add_tick60]
 
+/-- Alias semánticamente exacto para `#047`: coincidencia de la componente fraccionaria entre `ffi_sexa_add_model` y `add_tick60`. -/
+abbrev ffi_model_fraction_agrees := @theorem_ffi_semantic_isomorphism
+
 /-- Contador y campo de memoria con igualdad exigida por tipo, no medición de heap. -/
 structure ReplSession where
   commands_evaluated : Nat
@@ -342,12 +348,71 @@ theorem theorem_causal_light_cone_preservation (e : CausalEdge) :
     e.from_ts < e.to_ts := by
   exact e.h_causal
 
+/-- Clausura transitiva de aristas causales componibles sobre marcas lógicas Nat; modela el orden parcial del protocolo abstracto sin certificar red ni almacenamiento físico. -/
+inductive CausalPath : Nat → Nat → Nat → Nat → Prop where
+  | single (e : CausalEdge) : CausalPath e.from_id e.from_ts e.to_id e.to_ts
+  | step {u ts_u w ts_w : Nat}
+      (p : CausalPath u ts_u w ts_w)
+      (e : CausalEdge)
+      (h_id : e.from_id = w)
+      (h_ts : e.from_ts = ts_w) :
+      CausalPath u ts_u e.to_id e.to_ts
+
+/-- Testigo constructivo de no-vacuidad para un camino causal compuesto de dos pasos. -/
+theorem causal_path_inhabited : ∃ u ts_u v ts_v, CausalPath u ts_u v ts_v := by
+  let e1 : CausalEdge := { from_id := 0, to_id := 1, from_ts := 0, to_ts := 1, h_causal := by decide }
+  let e2 : CausalEdge := { from_id := 1, to_id := 2, from_ts := 1, to_ts := 2, h_causal := by decide }
+  exact ⟨0, 0, 2, 2, CausalPath.step (CausalPath.single e1) e2 rfl rfl⟩
+
+/-- Monotonicidad estricta del reloj lógico a lo largo de cualquier camino en CausalPath. -/
+theorem theorem_causal_path_strict_monotonicity {u ts_u v ts_v : Nat}
+    (p : CausalPath u ts_u v ts_v) :
+    ts_u < ts_v := by
+  induction p with
+  | single e =>
+    exact e.h_causal
+  | step _ e _ h_ts ih =>
+    rw [← h_ts] at ih
+    exact Nat.lt_trans ih e.h_causal
+
+/-- Irreflexividad del cierre transitivo CausalPath: ningún camino causal puede formar un ciclo sobre la misma marca lógica. -/
+theorem theorem_causal_path_irreflexive (u ts : Nat) :
+    ¬ CausalPath u ts u ts := by
+  intro h_cycle
+  have h_lt : ts < ts := theorem_causal_path_strict_monotonicity h_cycle
+  exact Nat.lt_irrefl ts h_lt
+
+/-- Asimetría estricta del cierre transitivo CausalPath: dos eventos no pueden precederse mutuamente. -/
+theorem theorem_causal_path_asymmetric {u ts_u v ts_v : Nat}
+    (h_uv : CausalPath u ts_u v ts_v) :
+    ¬ CausalPath v ts_v u ts_u := by
+  intro h_vu
+  have h1 : ts_u < ts_v := theorem_causal_path_strict_monotonicity h_uv
+  have h2 : ts_v < ts_u := theorem_causal_path_strict_monotonicity h_vu
+  exact Nat.lt_irrefl ts_u (Nat.lt_trans h1 h2)
+
 /-- Contradicción entre stage_u=stage_v y stage_u<stage_v. La conjunción de hipótesis es inhabitable; no prueba independencia de tareas reales. -/
 theorem theorem_concurrent_wave_independence (stage_u stage_v : Nat)
     (h_same_wave : stage_u = stage_v) (h_interfering : stage_u < stage_v) :
     False := by
   rw [h_same_wave] at h_interfering
   exact Nat.lt_irrefl stage_v h_interfering
+
+/-- info: 'Babylon.causal_path_inhabited' does not depend on any axioms -/
+#guard_msgs in
+#print axioms causal_path_inhabited
+
+/-- info: 'Babylon.theorem_causal_path_strict_monotonicity' does not depend on any axioms -/
+#guard_msgs in
+#print axioms theorem_causal_path_strict_monotonicity
+
+/-- info: 'Babylon.theorem_causal_path_irreflexive' does not depend on any axioms -/
+#guard_msgs in
+#print axioms theorem_causal_path_irreflexive
+
+/-- info: 'Babylon.theorem_causal_path_asymmetric' does not depend on any axioms -/
+#guard_msgs in
+#print axioms theorem_causal_path_asymmetric
 
 /-- info: 'Babylon.extincion_origen_espurio_constructiva' does not depend on any axioms -/
 #guard_msgs in

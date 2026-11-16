@@ -1,0 +1,59 @@
+{
+  "audit_date": "2026-10-24",
+  "timezone": "Europe/Madrid",
+  "environment": {
+    "python": "3.14.0 (v3.14.0:ebf955df7a8, Oct  7 2025, 08:20:14) [Clang 16.0.0 (clang-1600.0.26.6)]",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O"
+  },
+  "runs": [
+    {
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.14/bin/python3",
+        "verify.py"
+      ],
+      "returncode": 0,
+      "stdout": "INTEGRITY OK: 16 artifacts; manifest SHA-256 82f77891b6e9301134855b3d57fedc036d33e2ccaf81f052afcc79c5c061cabb\nScope: packaged bytes only. This does not re-run the private runtime harness.\nRecorded claim-run failures: 0 (none)\nSecure Enclave human presence: NO_VERIFICADO by these automated tests.\nSigning identity: NOT VERIFIED. Use --release-public-key with an independently trusted key.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.14/bin/python3",
+        "verify.py",
+        "--expected-manifest-sha256",
+        "82f77891b6e9301134855b3d57fedc036d33e2ccaf81f052afcc79c5c061cabb"
+      ],
+      "returncode": 0,
+      "stdout": "INTEGRITY OK: 16 artifacts; manifest SHA-256 82f77891b6e9301134855b3d57fedc036d33e2ccaf81f052afcc79c5c061cabb\nScope: packaged bytes only. This does not re-run the private runtime harness.\nRecorded claim-run failures: 0 (none)\nSecure Enclave human presence: NO_VERIFICADO by these automated tests.\nSigning identity: NOT VERIFIED. Use --release-public-key with an independently trusted key.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "lake",
+        "--version"
+      ],
+      "returncode": 0,
+      "stdout": "Lake version 5.0.0-src+6a10ac8 (Lean version 4.34.0-rc2)\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "lake",
+        "env",
+        "lean",
+        "--version"
+      ],
+      "returncode": 0,
+      "stdout": "Lean (version 4.34.0-rc2, arm64-apple-darwin24.6.0, commit 6a10ac8c22beadecabdbb0919c2b50214762f91d, Release)\n",
+      "stderr": "info: babylon60_verification: no previous manifest, creating one from scratch\ninfo: toolchain not updated; already up-to-date\n"
+    },
+    {
+      "argv": [
+        "lake",
+        "build"
+      ],
+      "returncode": 0,
+      "stdout": "\u2714 [2/3] Built AX0 (2.2s)\nBuild completed successfully (3 jobs).\n",
+      "stderr": ""
+    }
+  ]
+}

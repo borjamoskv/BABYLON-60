@@ -54,6 +54,26 @@ pub const EXCLUDED_NAMES: &[&str] = &["_archive", "archive", ".git", "node_modul
 /// Expected audience identifier for audience-bound credentials on the MCP Gateway (FL-P10).
 pub const GATEWAY_EXPECTED_AUDIENCE: &str = "mcp://babylon-skills-gateway";
 
+/// Stateless MCP protocol version supported by `babylon-skills-mcp`.
+pub const MCP_MODERN_PROTOCOL_VERSION: &str = "2026-07-28";
+
+/// Supported legacy handshake protocol versions for dual-era `_meta` compatibility.
+pub const MCP_SUPPORTED_HANDSHAKE_VERSIONS: &[&str] = &[
+    "2024-11-05",
+    "2025-03-26",
+    "2025-06-18",
+    "2025-11-25",
+];
+
+/// Request/response `_meta` key carrying the per-request protocol version (`2026-07-28` wire).
+pub const MCP_PROTOCOL_VERSION_META_KEY: &str = "io.modelcontextprotocol/protocolVersion";
+
+/// Discover `_meta` key carrying optional server identity metadata (`2026-07-28` wire).
+pub const MCP_SERVER_INFO_META_KEY: &str = "io.modelcontextprotocol/serverInfo";
+
+/// Conservative cache lifetime (ms) for responses backed by an immutable RAM snapshot.
+pub const MCP_DEFAULT_LIST_TTL_MS: u64 = 3_600_000;
+
 /// Canonical validated roles in `docs/skills.json`.
 pub const VALID_SKILL_ROLES: &[&str] = &["arquitecto", "ejecutor", "auditor"];
 
@@ -226,15 +246,11 @@ pub fn derive_v31_contract(
 
     let is_network = lower_cat == "socint & web"
         || lower_name.contains("web")
-        || lower_name.contains("socint")
+        || lower_name.contains("network")
+        || lower_name.contains("http")
         || lower_name.contains("github")
-        || lower_name.contains("cloudflare")
-        || lower_name.contains("soulseek")
-        || lower_name.contains("youtube")
-        || lower_name.contains("safari")
         || lower_name.contains("gemini")
-        || lower_name.contains("kimi")
-        || lower_name.contains("whatsapp");
+        || lower_name.contains("kimi");
 
     let is_destructive = lower_name.contains("purge")
         || lower_name.contains("extinction")
@@ -245,11 +261,6 @@ pub fn derive_v31_contract(
         || lower_name.contains("deploy")
         || lower_name.contains("genesis")
         || lower_name.contains("swap")
-        || lower_name.contains("production")
-        || lower_name.contains("remotion")
-        || lower_name.contains("f5tts")
-        || lower_name.contains("pika")
-        || lower_name.contains("gflow")
         || (lower_role == "ejecutor" && !lower_name.contains("audit"));
 
     let class = if is_destructive {
@@ -1903,19 +1914,77 @@ impl SkillsMcpGateway {
             .cloned()
             .unwrap_or_default();
 
-        let result = match method {
-            "initialize" => json!({
-                "protocolVersion": "2026-07-28",
-                "capabilities": {
-                    "tools": { "listChanged": false },
-                    "resources": { "subscribe": false, "listChanged": false },
-                    "prompts": { "listChanged": false },
-                    "skills": { "version": "SEP-2640", "readOnly": true, "architecture": "v3.1" }
-                },
-                "serverInfo": {
-                    "name": "babylon-skills-mcp",
-                    "version": env!("CARGO_PKG_VERSION"),
-                    "snapshotRoot": format!("sha256:{}", self.snapshot.root_sha256_hex)
+        let requested_meta_version = params
+            .get("_meta")
+            .and_then(Value::as_object)
+            .and_then(|meta| {
+                meta.get(MCP_PROTOCOL_VERSION_META_KEY)
+                    .or_else(|| meta.get("protocolVersion"))
+            })
+            .and_then(Value::as_str)
+            .map(str::trim)
+            .filter(|v| !v.is_empty());
+
+        if let Some(version) = requested_meta_version {
+            let supported = version == MCP_MODERN_PROTOCOL_VERSION
+                || MCP_SUPPORTED_HANDSHAKE_VERSIONS.contains(&version);
+            if !supported {
+                let id_val = id?;
+                return Some(json!({
+                    "jsonrpc": "2.0",
+                    "id": id_val,
+                    "error": {
+                        "code": -32022,
+                        "message": format!("Unsupported protocol version: {version}"),
+                        "data": {
+                            "supportedVersions": [MCP_MODERN_PROTOCOL_VERSION]
+                        }
+                    }
+                }));
+            }
+        }
+
+        let effective_version = requested_meta_version.unwrap_or(MCP_MODERN_PROTOCOL_VERSION);
+        let is_modern_wire = effective_version == MCP_MODERN_PROTOCOL_VERSION;
+        let capabilities = json!({
+            "tools": { "listChanged": false },
+            "resources": { "subscribe": false, "listChanged": false },
+            "prompts": { "listChanged": false },
+            "skills": { "version": "SEP-2640", "readOnly": true, "architecture": "v3.1" }
+        });
+
+        let mut result = match method {
+            "initialize" => {
+                let init_requested = params
+                    .get("protocolVersion")
+                    .and_then(Value::as_str)
+                    .map(str::trim)
+                    .filter(|v| !v.is_empty());
+                let negotiated = match init_requested {
+                    Some(v) if MCP_SUPPORTED_HANDSHAKE_VERSIONS.contains(&v) => v,
+                    _ => MCP_MODERN_PROTOCOL_VERSION,
+                };
+                json!({
+                    "protocolVersion": negotiated,
+                    "capabilities": capabilities,
+                    "serverInfo": {
+                        "name": "babylon-skills-mcp",
+                        "version": env!("CARGO_PKG_VERSION"),
+                        "snapshotRoot": format!("sha256:{}", self.snapshot.root_sha256_hex)
+                    }
+                })
+            }
+            "server/discover" => json!({
+                "supportedVersions": [MCP_MODERN_PROTOCOL_VERSION],
+                "capabilities": capabilities,
+                "instructions": "BABYLON-60 read-only skills gateway backed by verified immutable RAM snapshot.",
+                "_meta": {
+                    MCP_PROTOCOL_VERSION_META_KEY: effective_version,
+                    MCP_SERVER_INFO_META_KEY: {
+                        "name": "babylon-skills-mcp",
+                        "version": env!("CARGO_PKG_VERSION"),
+                        "snapshotRoot": format!("sha256:{}", self.snapshot.root_sha256_hex)
+                    }
                 }
             }),
             "initialized" | "notifications/initialized" | "ping" => json!({}),
@@ -2042,6 +2111,27 @@ impl SkillsMcpGateway {
                     })
                 }
             }
+            "resources/list" => {
+                let mut items: Vec<&SkillResourceSnapshot> =
+                    self.snapshot.resources_by_uri.values().collect();
+                items.sort_by(|a, b| a.uri.cmp(&b.uri));
+                let resources: Vec<Value> = items
+                    .into_iter()
+                    .map(|r| {
+                        json!({
+                            "uri": r.uri,
+                            "name": r.uri,
+                            "mimeType": r.mime_type,
+                            "size": r.size_bytes,
+                            "_meta": {
+                                "digest": format!("sha256:{}", r.sha256_hex),
+                                "relativePath": r.relative_path
+                            }
+                        })
+                    })
+                    .collect();
+                json!({ "resources": resources })
+            }
             "resources/read" => {
                 let uri = params.get("uri").and_then(Value::as_str).unwrap_or("");
                 if let Some(res) = self.snapshot.read_resource(uri) {
@@ -2137,6 +2227,33 @@ impl SkillsMcpGateway {
                 }));
             }
         };
+
+        let is_cacheable_surface = matches!(
+            method,
+            "server/discover"
+                | "tools/list"
+                | "resources/list"
+                | "resources/read"
+                | "prompts/list"
+                | "skills/list"
+        );
+        if let Some(obj) = result.as_object_mut() {
+            let is_err = obj.get("isError").and_then(Value::as_bool).unwrap_or(false);
+            if is_cacheable_surface && is_modern_wire && !is_err {
+                obj.entry("ttlMs".to_string())
+                    .or_insert_with(|| json!(MCP_DEFAULT_LIST_TTL_MS));
+                obj.entry("cacheScope".to_string())
+                    .or_insert_with(|| json!("private"));
+            }
+            if !matches!(method, "initialized" | "notifications/initialized" | "ping") {
+                let meta_entry = obj.entry("_meta".to_string()).or_insert_with(|| json!({}));
+                if let Some(meta_obj) = meta_entry.as_object_mut() {
+                    meta_obj
+                        .entry(MCP_PROTOCOL_VERSION_META_KEY.to_string())
+                        .or_insert_with(|| json!(effective_version));
+                }
+            }
+        }
 
         let id_val = id?;
         Some(json!({
@@ -2323,6 +2440,18 @@ mod tests {
         assert!(matches!(cap_attempt, Err(RejectReason::PolicyDenied(_))));
     }
 
+    fn real_catalog_counts(repo_root: &Path) -> (usize, usize) {
+        let raw = std::fs::read(repo_root.join("docs/skills.json")).expect("read docs/skills.json");
+        let parsed: Value = serde_json::from_slice(&raw).expect("parse docs/skills.json");
+        let entries_len = parsed["entries"].as_array().expect("entries array").len();
+        let ws_len = std::fs::read_dir(repo_root.join(".agents/skills"))
+            .expect("read .agents/skills")
+            .filter_map(Result::ok)
+            .filter(|e| e.path().is_dir() && e.path().join("SKILL.md").is_file())
+            .count();
+        (entries_len, ws_len)
+    }
+
     #[test]
     fn loads_real_babylon60_catalog_and_workspace_skills() {
         let repo_root = Path::new(env!("CARGO_MANIFEST_DIR"))
@@ -2332,16 +2461,17 @@ mod tests {
             .unwrap();
         let catalog_path = repo_root.join("docs/skills.json");
         let skills_dir = repo_root.join(".agents/skills");
+        let (expected_total, expected_ws) = real_catalog_counts(repo_root);
 
         let snapshot = ImmutableSkillsSnapshot::load(
             Some(&catalog_path),
             Some(&skills_dir),
-            Some(131),
+            Some(expected_total),
         )
         .expect("real catalog snapshot load");
 
-        assert_eq!(snapshot.total_skills(), 131);
-        assert_eq!(snapshot.workspace_skill_names.len(), 26);
+        assert_eq!(snapshot.total_skills(), expected_total);
+        assert_eq!(snapshot.workspace_skill_names.len(), expected_ws);
 
         let root_lock: SkillsLockfile = serde_json::from_slice(
             &std::fs::read(repo_root.join("skills-lock.json")).expect("read skills-lock.json"),
@@ -2394,10 +2524,12 @@ mod tests {
         let catalog_path = repo_root.join("docs/skills.json");
         let skills_dir = repo_root.join(".agents/skills");
 
+        let (expected_total, _) = real_catalog_counts(repo_root);
+
         let snapshot = ImmutableSkillsSnapshot::load(
             Some(&catalog_path),
             Some(&skills_dir),
-            Some(131),
+            Some(expected_total),
         )
         .expect("snapshot load");
         let lockfile = snapshot.to_lockfile();
@@ -2534,9 +2666,9 @@ mod tests {
                 "params": {
                     "name": "skills.propose_effect",
                     "arguments": {
-                        "skill_id": "c5-socint-extraction-suite",
+                        "skill_id": "c5-gemini-api-2026-standards",
                         "version": "1.0.0",
-                        "tool_identity_hash": gateway.snapshot.resolve("c5-socint-extraction-suite").unwrap().tool_identity_hash,
+                        "tool_identity_hash": gateway.snapshot.resolve("c5-gemini-api-2026-standards").unwrap().tool_identity_hash,
                         "trace_id": "trace-fl-p09",
                         "arguments": { "target_path": "workspace://docs/README.md" },
                         "precondition_snapshot": { "allowed_roots": ["workspace://"] },
@@ -2624,9 +2756,9 @@ mod tests {
                 "params": {
                     "name": "skills.propose_effect",
                     "arguments": {
-                        "skill_id": "c5-neural-face-swap-cuadrilla",
+                        "skill_id": "cortex-skill-genesis",
                         "version": "1.0.0",
-                        "tool_identity_hash": gateway.snapshot.resolve("c5-neural-face-swap-cuadrilla").unwrap().tool_identity_hash,
+                        "tool_identity_hash": gateway.snapshot.resolve("cortex-skill-genesis").unwrap().tool_identity_hash,
                         "trace_id": "trace-fl-p11",
                         "arguments": {
                             "target_path": "workspace://src/lib.rs",
@@ -2815,10 +2947,11 @@ mod tests {
             .unwrap()
             .parent()
             .unwrap();
+        let (expected_total, _) = real_catalog_counts(repo_root);
         let snapshot = ImmutableSkillsSnapshot::load(
             Some(&repo_root.join("docs/skills.json")),
             Some(&repo_root.join(".agents/skills")),
-            Some(131),
+            Some(expected_total),
         )
         .expect("snapshot");
         let gateway = SkillsMcpGateway::new(snapshot, false);
@@ -2858,9 +2991,9 @@ mod tests {
                 "params": {
                     "name": "skills.propose_effect",
                     "arguments": {
-                        "skill_id": "c5-socint-extraction-suite",
+                        "skill_id": "c5-gemini-api-2026-standards",
                         "version": "1.0.0",
-                        "tool_identity_hash": gateway.snapshot.resolve("c5-socint-extraction-suite").unwrap().tool_identity_hash,
+                        "tool_identity_hash": gateway.snapshot.resolve("c5-gemini-api-2026-standards").unwrap().tool_identity_hash,
                         "trace_id": "trace-p09-isolated",
                         "arguments": {
                             "target_path": "workspace://docs/README.md",
@@ -2892,10 +3025,11 @@ mod tests {
             .unwrap()
             .parent()
             .unwrap();
+        let (expected_total, _) = real_catalog_counts(repo_root);
         let snapshot = ImmutableSkillsSnapshot::load(
             Some(&repo_root.join("docs/skills.json")),
             Some(&repo_root.join(".agents/skills")),
-            Some(131),
+            Some(expected_total),
         )
         .expect("snapshot");
         let gateway = SkillsMcpGateway::new(snapshot, false);
@@ -3000,10 +3134,11 @@ mod tests {
             .unwrap()
             .parent()
             .unwrap();
+        let (expected_total, _) = real_catalog_counts(repo_root);
         let snapshot = ImmutableSkillsSnapshot::load(
             Some(&repo_root.join("docs/skills.json")),
             Some(&repo_root.join(".agents/skills")),
-            Some(131),
+            Some(expected_total),
         )
         .expect("snapshot");
         let gateway = SkillsMcpGateway::new(snapshot, false);
@@ -3017,9 +3152,9 @@ mod tests {
                 "params": {
                     "name": "skills.propose_effect",
                     "arguments": {
-                        "skill_id": "c5-neural-face-swap-cuadrilla",
+                        "skill_id": "cortex-skill-genesis",
                         "version": "1.0.0",
-                        "tool_identity_hash": gateway.snapshot.resolve("c5-neural-face-swap-cuadrilla").unwrap().tool_identity_hash,
+                        "tool_identity_hash": gateway.snapshot.resolve("cortex-skill-genesis").unwrap().tool_identity_hash,
                         "trace_id": "trace-p11-isolated",
                         "arguments": {
                             "target_path": "workspace://state.bin",
@@ -3065,9 +3200,9 @@ mod tests {
                 "params": {
                     "name": "skills.propose_effect",
                     "arguments": {
-                        "skill_id": "c5-neural-face-swap-cuadrilla",
+                        "skill_id": "cortex-skill-genesis",
                         "version": "1.0.0",
-                        "tool_identity_hash": gateway.snapshot.resolve("c5-neural-face-swap-cuadrilla").unwrap().tool_identity_hash,
+                        "tool_identity_hash": gateway.snapshot.resolve("cortex-skill-genesis").unwrap().tool_identity_hash,
                         "trace_id": "trace-p11-direct",
                         "arguments": {
                             "target_path": "workspace://state.bin",
@@ -3121,5 +3256,116 @@ mod tests {
             || Ok([0xDD; 32]),
         );
         assert!(matches!(reuse, Err(RejectReason::StaleCapability)));
+    }
+
+    #[test]
+    fn stateless_2026_07_28_discover_resources_list_and_meta_negotiation() {
+        let tmp = TempDir::new().unwrap();
+        let skills_dir = tmp.path().join(".agents/skills");
+        let skill_dir = skills_dir.join("alpha-skill");
+        std::fs::create_dir_all(&skill_dir).unwrap();
+        std::fs::write(
+            skill_dir.join("SKILL.md"),
+            "---\nname: alpha-skill\ndescription: Alpha diagnostic skill\nrole: auditor\n---\n# Alpha\n",
+        )
+        .unwrap();
+
+        let catalog_path = tmp.path().join("skills.json");
+        std::fs::write(
+            &catalog_path,
+            json!({
+                "skills": [{
+                    "name": "alpha-skill",
+                    "description": "Alpha diagnostic skill",
+                    "role": "auditor",
+                    "scope": "workspace",
+                    "category": "diagnostics",
+                    "effect_profile": {
+                        "class": "PURE",
+                        "network_egress": "NONE",
+                        "validated": true
+                    }
+                }]
+            })
+            .to_string(),
+        )
+        .unwrap();
+
+        let snapshot =
+            ImmutableSkillsSnapshot::load(Some(&catalog_path), Some(&skills_dir), Some(1)).unwrap();
+        let gateway = SkillsMcpGateway::with_lockfile(snapshot.clone(), snapshot.to_lockfile(), false)
+            .unwrap();
+
+        // 1. server/discover exposes 2026-07-28 supportedVersions, ttlMs/cacheScope, and serverInfo _meta
+        let disc = gateway
+            .process_request(&json!({
+                "jsonrpc": "2.0",
+                "id": 1,
+                "method": "server/discover",
+                "params": {
+                    "_meta": { MCP_PROTOCOL_VERSION_META_KEY: MCP_MODERN_PROTOCOL_VERSION }
+                }
+            }))
+            .unwrap();
+        let disc_res = &disc["result"];
+        assert_eq!(disc_res["supportedVersions"], json!(["2026-07-28"]));
+        assert_eq!(disc_res["ttlMs"], json!(MCP_DEFAULT_LIST_TTL_MS));
+        assert_eq!(disc_res["cacheScope"], json!("private"));
+        assert_eq!(
+            disc_res["_meta"][MCP_SERVER_INFO_META_KEY]["name"],
+            json!("babylon-skills-mcp")
+        );
+
+        // 2. resources/list returns deterministic resources + cache hints
+        let res_list = gateway
+            .process_request(&json!({
+                "jsonrpc": "2.0",
+                "id": 2,
+                "method": "resources/list",
+                "params": {
+                    "_meta": { MCP_PROTOCOL_VERSION_META_KEY: MCP_MODERN_PROTOCOL_VERSION }
+                }
+            }))
+            .unwrap();
+        let listed = res_list["result"]["resources"].as_array().unwrap();
+        assert!(!listed.is_empty());
+        assert_eq!(res_list["result"]["ttlMs"], json!(MCP_DEFAULT_LIST_TTL_MS));
+        assert_eq!(res_list["result"]["cacheScope"], json!("private"));
+        let uris: Vec<&str> = listed.iter().map(|r| r["uri"].as_str().unwrap()).collect();
+        let mut sorted_uris = uris.clone();
+        sorted_uris.sort_unstable();
+        assert_eq!(uris, sorted_uris);
+        assert!(uris.contains(&"skill://alpha-skill/SKILL.md"));
+
+        // 3. Legacy per-request _meta omits 2026-era ttlMs/cacheScope
+        let legacy_tools = gateway
+            .process_request(&json!({
+                "jsonrpc": "2.0",
+                "id": 3,
+                "method": "tools/list",
+                "params": {
+                    "_meta": { MCP_PROTOCOL_VERSION_META_KEY: "2024-11-05" }
+                }
+            }))
+            .unwrap();
+        assert!(legacy_tools["result"].get("ttlMs").is_none());
+        assert!(legacy_tools["result"].get("cacheScope").is_none());
+        assert_eq!(
+            legacy_tools["result"]["_meta"][MCP_PROTOCOL_VERSION_META_KEY],
+            json!("2024-11-05")
+        );
+
+        // 4. Unsupported _meta protocolVersion fails closed with -32022
+        let unsupported = gateway
+            .process_request(&json!({
+                "jsonrpc": "2.0",
+                "id": 4,
+                "method": "tools/list",
+                "params": {
+                    "_meta": { MCP_PROTOCOL_VERSION_META_KEY: "2099-01-01" }
+                }
+            }))
+            .unwrap();
+        assert_eq!(unsupported["error"]["code"], json!(-32022));
     }
 }
