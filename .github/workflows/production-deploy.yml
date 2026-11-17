@@ -148,7 +148,7 @@ jobs:
           done
       - name: Install archive transport
         run: sudo apt-get update && sudo apt-get install -y skopeo
-      - uses: sigstore/cosign-installer@59acb6260d9c0ba8f4a2f9d9b48431a222b68e20
+      - uses: sigstore/cosign-installer@756fe2d284c7292c4e9b62c8a28f1e5629c59532
       - name: Login after verification
         env:
           GH_TOKEN: ${{ github.token }}
