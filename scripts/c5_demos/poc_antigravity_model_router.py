@@ -1,29 +1,43 @@
 #!/usr/bin/env python3
 # ============================================================================
-# BABYLON-60 v4.0 Sovereign Hardened
-# █ TOPOLOGY ROUTER POC | DOMAIN: antigravity.router | STATE: C5-REAL
+# BABYLON-60 v5.1 Sovereign Hardened
+# █ UNIVERSAL TOPOLOGY ROUTER POC | DOMAIN: cognitive_pilot.autoroute | STATE: C5-REAL
 # ============================================================================
 """
-[AX-4] TOPOLOGY: Falsación Empírica del Router Causal de Modelos de Antigravity IDE.
+[AX-4] TOPOLOGY: Falsación Empírica del Router Universal de Capacidades (v3.0).
 
 Valida empíricamente:
-1. Cero Fuga de Secretos (INV_SOVEREIGN_AIRGAP): 100% de tareas con claves/PII enrutadas a GPT-OSS 120B local.
-2. Invariante de Rigor Deductivo: Demostraciones formales y Epistemic Halts enrutados a Claude Opus 4.6.
-3. Invariante de Silicio: Rust/C-FFI/Tipos enrutados a Claude Sonnet 4.6.
-4. Invariante de Throughput: Contexto masivo y tool loops enrutados a Gemini 3.8 Flash.
-5. Latencia determinista: < 10 microsegundos por decisión en lote de 1.000 iteraciones.
+1. Cero Fuga de Secretos (INV_SOVEREIGN_AIRGAP): 100% de tareas con claves/PII enrutadas
+   exclusivamente a loopback local 127.0.0.1 (litert://gemma4-26b / Ollama), NUNCA a
+   modelos remotos como GPT-OSS 120B (Medium) [Notice].
+2. Invariante de Rigor Deductivo: Demostraciones formales (Lean 4 / Z3) y Epistemic Halts
+   enrutados a Estrato 3 Apex (Claude Opus 5.5 High / Orchestrator Carbon).
+3. Invariante de Sistemas y Reposo (Omega_0): Ingeniería de sistemas y refactorizaciones
+   acotadas cubiertas por Estrato 2 (Orchestrator Argon / Claude Sonnet 5.5).
+4. Invariante de Throughput: Consultas de triaje enrutadas a Estrato 1 (Gemini 3.8 Flash / Hydrogen Low).
+5. Latencia determinista O(1): < 50 microsegundos por decisión en lote de 1.000 iteraciones.
 6. Atestación criptográfica: Recibos SHA3-256 + HMAC de cada decisión.
 """
 
 from __future__ import annotations
 
-import hashlib
-import hmac
-import random
-import time
 from dataclasses import dataclass
 from enum import Enum, auto
+import hashlib
+import hmac
+from pathlib import Path
+import random
+import sys
+import time
 from typing import Dict, List
+
+repo_root = Path(__file__).absolute().parents[2]
+kish_root = repo_root / "01_KISH_ENGINE"
+for candidate in (repo_root, kish_root):
+    if str(candidate) not in sys.path and candidate.is_dir():
+        sys.path.insert(0, str(candidate))
+
+from babylon60.cognitive_pilot.universal_autoroute import DEFAULT_HMAC_KEY  # noqa: E402
 
 
 class ContextSize(Enum):
@@ -64,92 +78,98 @@ class RouteDecision:
     model_name: str
     regime: str
     target_selector: str
+    locality: str
     failover_model: str
     receipt_hmac: str
     latency_ns: int
 
 
 class AntigravityModelRouter:
-    """
-    Router determinista de alta exergía para Antigravity IDE.
-    Garantiza complejidad O(1) y sellado de recibos criptográficos.
-    """
+    """Router determinista O(1) alineado con C5-UNIVERSAL-AUTOROUTE v3.0."""
 
-    def __init__(self, hmac_key: bytes = b"ANTIGRAVITY_SOVEREIGN_C5_KEY_2026") -> None:
+    def __init__(self, hmac_key: bytes = DEFAULT_HMAC_KEY) -> None:
         self.hmac_key = hmac_key
 
-    def _sign_decision(self, task_id: str, model_name: str, regime: str) -> str:
-        payload = f"{task_id}:{model_name}:{regime}".encode("utf-8")
+    def _sign_decision(self, task_id: str, model_name: str, regime: str, locality: str) -> str:
+        payload = f"{task_id}:{model_name}:{regime}:{locality}".encode("utf-8")
         h = hashlib.sha3_256(payload).digest()
         return hmac.new(self.hmac_key, h, hashlib.sha256).hexdigest()[:16]
 
     def route(self, task: TaskVector) -> RouteDecision:
         t0 = time.perf_counter_ns()
 
-        # 1. Invariante de Soberanía Absoluta (INV_SOVEREIGN_AIRGAP)
+        # 1. Invariante de Soberanía Absoluta (INV_SOVEREIGN_AIRGAP -> Loopback 127.0.0.1 exclusivo)
         if task.contains_unredacted_secrets or task.sov == Sovereignty.S2_AIRGAP_CRYPTO:
-            model = "GPT-OSS 120B"
-            regime = "Medium"
-            selector = "GPT-OSS 120B (Medium)"
-            failover = "FAIL_STOP_0xDEAD"
-            rule = "R-AIRGAP"
+            model = "litert://gemma4-26b"
+            regime = "Local-AirGap"
+            selector = "litert://gemma4-26b (127.0.0.1)"
+            locality = "loopback"
+            failover = "FAIL_STOP_AIRGAP"
+            rule = "R-AIRGAP-LOCAL"
 
-        # 2. Epistemic Halt o Demostración Formal Axiomática (Lean 4 / Z3)
+        # 2. Epistemic Halt o Demostración Formal Axiomática (Lean 4 / Z3 / Seqlock Ring-0)
         elif task.is_epistemic_halt or task.deduct == DeductiveDepth.D3_AXIOMATIC_FORMAL:
-            model = "Claude Opus 4.6"
-            regime = "Thinking"
-            selector = "Claude Opus 4.6 (Thinking)"
-            failover = "Claude Sonnet 4.6"
+            model = "Claude Opus 5.5"
+            regime = "High"
+            selector = "Claude Opus 5.5 (High)"
+            locality = "remote"
+            failover = "Orchestrator (Carbon)"
             rule = "R-LEAN4/HALT"
 
-        # 3. Contexto Masivo (> 128k tokens)
+        # 3. Contexto Masivo (> 128k tokens) con Síntesis Multifichero
         elif task.ctx in (ContextSize.C2_128K_500K, ContextSize.C3_500K_2M):
-            model = "Gemini 3.8 Flash"
-            regime = "High"
-            selector = "Gemini 3.8 Flash (High)"
-            failover = "Gemini 3.7 Flash"
-            rule = "R-BIGCTX"
+            model = "Orchestrator (Carbon)"
+            regime = "Orchestrator"
+            selector = "Orchestrator (Carbon)"
+            locality = "remote"
+            failover = "Gemini 4 Argon (Medium)"
+            rule = "R-BIGCTX-ORCH"
 
-        # 4. Ingeniería de Silicio, Rust, C-FFI o Tipado Estricto (MyPy)
+        # 4. Ingeniería de Silicio, Rust, C-FFI o Tipado Estricto (< 128K)
         elif task.deduct == DeductiveDepth.D2_SYSTEMS_TYPES:
-            model = "Claude Sonnet 4.6"
-            regime = "Thinking"
-            selector = "Claude Sonnet 4.6 (Thinking)"
-            failover = "Gemini 3.8 Flash"
+            model = "Claude Sonnet 5.5"
+            regime = "Low"
+            selector = "Claude Sonnet 5.5 (Low)"
+            locality = "remote"
+            failover = "Orchestrator (Argon)"
             rule = "R-SYSTEMS"
 
-        # 5. Multimodalidad Técnica o Síntesis Cruzada
-        elif task.is_multimodal:
-            model = "Gemini 3.1 Pro"
-            regime = "Low"
-            selector = "Gemini 3.1 Pro Low"
-            failover = "Gemini 3.8 Flash"
-            rule = "R-VISION"
+        # 5. Multimodalidad Técnica o Ejecución Estándar (Punto de Reposo Omega_0)
+        elif task.is_multimodal or task.deduct == DeductiveDepth.D1_STRUCTURED_AST:
+            model = "Orchestrator (Argon)"
+            regime = "Orchestrator"
+            selector = "Orchestrator (Argon)"
+            locality = "remote"
+            failover = "Gemini 4 Argon (Low)"
+            rule = "R-OMEGA0-ARGON"
 
-        # 6. Workers Paralelos de Enjambre
+        # 6. Workers Paralelos de Enjambre (d=1 Leaf Subagent)
         elif task.is_swarm_worker:
-            model = "Gemini 3.7 Flash"
-            regime = "Medium"
-            selector = "Gemini 3.7 Flash (Medium / Fast)"
-            failover = "Gemini 3.8 Flash"
+            model = "Gemini 4 Hydrogen"
+            regime = "Low"
+            selector = "Gemini 4 Hydrogen (Low)"
+            locality = "remote"
+            failover = "Gemini 3.8 Flash (High (Fast))"
             rule = "R-SWARM_W"
 
-        # 7. Hot-Path / Tool-Use Loop por Defecto
+        # 7. Hot-Path / Triaje Cinético por Defecto
         else:
             model = "Gemini 3.8 Flash"
-            regime = "Medium"
-            selector = "Gemini 3.8 Flash (Medium / Fast)"
-            failover = "Gemini 3.7 Flash"
+            regime = "High (Fast)"
+            selector = "Gemini 3.8 Flash (High (Fast))"
+            locality = "remote"
+            failover = "Gemini 4 Hydrogen (Low)"
             rule = "R-TOOLHOT"
 
         t1 = time.perf_counter_ns()
-        receipt = self._sign_decision(task.task_id, model, regime)
+        receipt = self._sign_decision(task.task_id, model, regime, locality)
 
         return RouteDecision(
             rule_id=rule,
             model_name=model,
             regime=regime,
             target_selector=selector,
+            locality=locality,
             failover_model=failover,
             receipt_hmac=receipt,
             latency_ns=t1 - t0,
@@ -158,7 +178,7 @@ class AntigravityModelRouter:
 
 def run_stress_test(iterations: int = 1000) -> None:
     print("=" * 78)
-    print("█ BABYLON-60 / ANTIGRAVITY MODEL ROUTER — STRESS TEST 1000 ITERACIONES")
+    print("█ BABYLON-60 / UNIVERSAL AUTOROUTE v3.0 — STRESS TEST 1000 ITERACIONES")
     print("=" * 78)
 
     router = AntigravityModelRouter()
@@ -169,7 +189,6 @@ def run_stress_test(iterations: int = 1000) -> None:
     systems_violations = 0
 
     random.seed(42)
-
     t_start = time.perf_counter()
 
     for i in range(iterations):
@@ -200,12 +219,12 @@ def run_stress_test(iterations: int = 1000) -> None:
         latencies.append(decision.latency_ns)
         distribution[decision.model_name] = distribution.get(decision.model_name, 0) + 1
 
-        if (has_secrets or sov == Sovereignty.S2_AIRGAP_CRYPTO) and decision.model_name != "GPT-OSS 120B":
+        if (has_secrets or sov == Sovereignty.S2_AIRGAP_CRYPTO) and decision.locality != "loopback":
             airgap_violations += 1
 
         if (
             is_halt
-            and decision.model_name != "Claude Opus 4.6"
+            and decision.model_name != "Claude Opus 5.5"
             and not has_secrets
             and sov != Sovereignty.S2_AIRGAP_CRYPTO
         ):
@@ -217,12 +236,11 @@ def run_stress_test(iterations: int = 1000) -> None:
             and (not is_halt)
             and (deduct == DeductiveDepth.D2_SYSTEMS_TYPES)
             and (ctx in (ContextSize.C0_UNDER_32K, ContextSize.C1_32K_128K))
-            and decision.model_name != "Claude Sonnet 4.6"
+            and decision.model_name != "Claude Sonnet 5.5"
         ):
             systems_violations += 1
 
     t_total = time.perf_counter() - t_start
-
     avg_latency_us = (sum(latencies) / len(latencies)) / 1_000
     p99_latency_us = sorted(latencies)[int(len(latencies) * 0.99)] / 1_000
 
@@ -234,7 +252,7 @@ def run_stress_test(iterations: int = 1000) -> None:
     for model, count in sorted(distribution.items(), key=lambda x: x[1], reverse=True):
         pct = (count / iterations) * 100
         bar = "█" * int(pct / 2)
-        print(f"    - {model:<22}: {count:>4} ({pct:>5.1f}%) {bar}")
+        print(f"    - {model:<24}: {count:>4} ({pct:>5.1f}%) {bar}")
 
     print("\n[+] Auditoría de Invariantes C5:")
     print(f"    - Fugas de Secretos / Air-Gap:   {airgap_violations} (Objetivo: 0)")
@@ -245,7 +263,7 @@ def run_stress_test(iterations: int = 1000) -> None:
     assert halt_violations == 0, "FATAL: Invariante INV_EPISTEMIC_HALT violada!"
     assert systems_violations == 0, "FATAL: Invariante INV_SYSTEMS_RUST violada!"
 
-    print("\n[✓] CERTIFICACIÓN EXITOSA: PoC supera el 100% de los asertos termodinámicos.\n")
+    print("\n[✓] CERTIFICACIÓN EXITOSA: PoC v3.0 supera el 100% de los asertos termodinámicos.\n")
 
 
 if __name__ == "__main__":

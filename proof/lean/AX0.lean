@@ -196,5 +196,104 @@ theorem verifiedAuthInvariant : VerifiedAuthInvariant := {
 #guard_msgs in
 #print axioms verifiedAuthInvariant
 
+-- ===============================================================================
+-- C5-REAL v2: PUNTO DE LINEALIZACIÓN (LP), REVOCACIÓN Y ANTI-ABA (C5-03, O8, O9)
+-- ===============================================================================
+
+/-- Contexto en el punto de linealización atómico (LP) con BitVec 64 (INV_C5_BITVEC_SOUNDNESS). -/
+structure LinearizationContext where
+  capEpoch         : BitVec 64
+  activeEpoch      : BitVec 64
+  capBootId        : BitVec 64
+  activeBootId     : BitVec 64
+  expectedVersion  : BitVec 64
+  actualVersion    : BitVec 64
+  nonceFresh       : Bool
+  mediatedByOs     : Bool
+deriving Repr, BEq, DecidableEq
+
+/-- Predicado decidible de validación en el punto de linealización común (LP). -/
+def validAtLP (ctx : LinearizationContext) : Bool :=
+  (ctx.capEpoch == ctx.activeEpoch) &&
+  (ctx.capBootId == ctx.activeBootId) &&
+  (ctx.expectedVersion == ctx.actualVersion) &&
+  ctx.nonceFresh &&
+  ctx.mediatedByOs
+
+/-- C5-03: Ninguna capacidad cuya época haya sido revocada (capEpoch ≠ activeEpoch) pasa LP. -/
+theorem c5_03_revoked_epoch_rejected_at_lp (ctx : LinearizationContext)
+    (h_revoked : ctx.capEpoch ≠ ctx.activeEpoch) :
+    validAtLP ctx = false := by
+  unfold validAtLP
+  have h_beq : (ctx.capEpoch == ctx.activeEpoch) = false := beq_false_of_ne h_revoked
+  rw [h_beq]
+  rfl
+
+/-- O8 (ABA): Si la versión monótona del recurso avanzó (A -> B -> A), LP rechaza la operación. -/
+theorem o8_aba_version_drift_rejected_at_lp (ctx : LinearizationContext)
+    (h_aba : ctx.expectedVersion ≠ ctx.actualVersion) :
+    validAtLP ctx = false := by
+  unfold validAtLP
+  have h_beq : (ctx.expectedVersion == ctx.actualVersion) = false := beq_false_of_ne h_aba
+  rw [h_beq]
+  cases (ctx.capEpoch == ctx.activeEpoch) <;>
+  cases (ctx.capBootId == ctx.activeBootId) <;> rfl
+
+/-- O9 (Reboot Lease): Si el boot_id cambió tras reinicio, LP rechaza la capacidad. -/
+theorem o9_reboot_lease_rejected_at_lp (ctx : LinearizationContext)
+    (h_reboot : ctx.capBootId ≠ ctx.activeBootId) :
+    validAtLP ctx = false := by
+  unfold validAtLP
+  have h_beq : (ctx.capBootId == ctx.activeBootId) = false := beq_false_of_ne h_reboot
+  rw [h_beq]
+  cases (ctx.capEpoch == ctx.activeEpoch) <;> rfl
+
+-- ===============================================================================
+-- INVARIANTE DE TERCER ORDEN: IDENTIDAD VERIFICACIÓN POST-MERGE -> EJECUCIÓN
+-- ===============================================================================
+
+/-- Gate de tercer orden (GlobalGate post-composición): Execute(a) => H(a) = H(a_verified) ∧ Authorized(a). -/
+structure ThirdOrderArtifactGate where
+  executedDigest          : BitVec 64
+  verifiedPostMergeDigest : BitVec 64
+  authorized              : Bool
+  verifierIsolated        : Bool
+deriving Repr, BEq, DecidableEq
+
+def canExecuteMergedArtifact (g : ThirdOrderArtifactGate) : Bool :=
+  (g.executedDigest == g.verifiedPostMergeDigest) && g.authorized && g.verifierIsolated
+
+theorem c5_third_order_identity_preservation (g : ThirdOrderArtifactGate) :
+    canExecuteMergedArtifact g = true →
+    g.executedDigest = g.verifiedPostMergeDigest ∧ g.authorized = true ∧ g.verifierIsolated = true := by
+  unfold canExecuteMergedArtifact
+  intro h
+  cases h_eq : (g.executedDigest == g.verifiedPostMergeDigest)
+  · rw [h_eq] at h
+    contradiction
+  · cases h_auth : g.authorized
+    · rw [h_eq, h_auth] at h
+      contradiction
+    · cases h_iso : g.verifierIsolated
+      · rw [h_eq, h_auth, h_iso] at h
+        contradiction
+      · exact ⟨of_decide_eq_true h_eq, rfl, rfl⟩
+
+theorem c5_third_order_inhabited :
+    ∃ g : ThirdOrderArtifactGate, canExecuteMergedArtifact g = true :=
+  ⟨{ executedDigest := 0x6060#64
+   , verifiedPostMergeDigest := 0x6060#64
+   , authorized := true
+   , verifierIsolated := true }, rfl⟩
+
+/-- info: 'c5_03_revoked_epoch_rejected_at_lp' does not depend on any axioms -/
+#guard_msgs in
+#print axioms c5_03_revoked_epoch_rejected_at_lp
+
+/-- info: 'c5_third_order_identity_preservation' does not depend on any axioms -/
+#guard_msgs in
+#print axioms c5_third_order_identity_preservation
+
+
 
 

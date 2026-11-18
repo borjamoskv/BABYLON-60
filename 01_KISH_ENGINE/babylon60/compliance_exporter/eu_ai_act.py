@@ -632,9 +632,14 @@ def main_cli() -> int:
     parser = argparse.ArgumentParser(
         description="BABYLON-60 EU AI Act evidence, assessment and regulated authorization"
     )
-    parser.add_argument("--mode", choices=["report", "assess", "approve", "authorize-release"], default="report")
+    parser.add_argument(
+        "--mode",
+        choices=["report", "assess", "approve", "authorize-release", "gateway-bundle"],
+        default="report",
+    )
     parser.add_argument("--profile")
     parser.add_argument("--assessment")
+    parser.add_argument("--claims-graph", help="Ruta al documento JSON del Regulatory Evidence Graph (FL-AIACT-02)")
     parser.add_argument("--trust-store", default=os.environ.get("BABYLON60_REGULATORY_POLICY"))
     parser.add_argument("--native-gate", default=os.environ.get("BABYLON60_REGULATORY_GATE"))
     parser.add_argument("--commit")

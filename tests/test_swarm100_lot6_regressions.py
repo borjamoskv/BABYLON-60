@@ -22,7 +22,6 @@ def fixture(tmp_path, monkeypatch):
         "HOME": str(tmp_path),
         "PATH": "/usr/bin:/bin",
         "LC_ALL": "C",
-        "KIMI_API_KEY": "fixture-moonshot-secret",
         "OPENROUTER_API_KEY": "fixture-openrouter-secret",
     }
 
@@ -104,7 +103,6 @@ async def test_c0132_unknown_selector_rejects_before_credentials_or_client(fixtu
 @pytest.mark.parametrize(
     "backend,variable,url",
     [
-        ("MOONSHOT_REMOTE", "MOONSHOT_API_URL", "http://api.moonshot.cn/v1/chat/completions"),
         ("OPENROUTER_REMOTE", "OPENROUTER_API_URL", "http://openrouter.ai/api/v1/chat/completions"),
     ],
 )
@@ -122,7 +120,6 @@ async def test_c0133_http_provider_override_rejects_before_credentials(fixture, 
 @pytest.mark.parametrize(
     "backend,field,url",
     [
-        ("MOONSHOT_REMOTE", "moonshot_url", "http://api.moonshot.cn/v1/chat/completions"),
         ("OPENROUTER_REMOTE", "openrouter_url", "http://openrouter.ai/api/v1/chat/completions"),
     ],
 )
@@ -139,7 +136,7 @@ def test_import_does_not_load_dotenv(fixture):
 
 
 @pytest.mark.asyncio
-@pytest.mark.parametrize("backend", ["", None, True, [], {}, "MOONSHOT", "local", "local_mlx_typo"])
+@pytest.mark.parametrize("backend", ["", None, True, [], {}, "OPENROUTER", "moonshot", "local", "local_mlx_typo"])
 async def test_invalid_backend_does_not_resolve_any_environment_value(fixture, backend):
     m = fixture.module
     with pytest.raises(m.SecurityError):
@@ -147,7 +144,7 @@ async def test_invalid_backend_does_not_resolve_any_environment_value(fixture, b
     assert fixture.reads == [] and fixture.posts == [] and fixture.clients == []
 
 
-@pytest.mark.parametrize("backend", ["", None, False, [], {}, "unknown"])
+@pytest.mark.parametrize("backend", ["", None, False, [], {}, "unknown", "moonshot"])
 def test_direct_config_invalid_backend_fails_before_defaults(fixture, backend):
     with pytest.raises(fixture.module.SecurityError):
         fixture.module.SwarmConfig(backend=backend)
@@ -157,7 +154,7 @@ def test_direct_config_invalid_backend_fails_before_defaults(fixture, backend):
 @pytest.mark.asyncio
 @pytest.mark.parametrize(
     "backend,host,field",
-    [("MOONSHOT_REMOTE", "api.moonshot.cn", "moonshot_url"), ("OPENROUTER_REMOTE", "openrouter.ai", "openrouter_url")],
+    [("OPENROUTER_REMOTE", "openrouter.ai", "openrouter_url")],
 )
 @pytest.mark.parametrize(
     "pattern",
@@ -197,7 +194,6 @@ async def test_invalid_provider_urls_reject_without_credentials_or_transport(fix
 @pytest.mark.parametrize(
     "backend,field,url,secret",
     [
-        ("MOONSHOT_REMOTE", "moonshot_url", "https://api.moonshot.cn/v1/chat/completions", "fixture-moonshot-secret"),
         (
             "OPENROUTER_REMOTE",
             "openrouter_url",
@@ -219,14 +215,10 @@ async def test_valid_remote_routes_preserve_exact_payload_and_selected_key(fixtu
     assert request.headers["Authorization"] == "Bearer " + secret
     body = json.loads(request.content)
     assert body["messages"] == messages
-    assert body["model"] == ("moonshot-v1-auto" if backend == "MOONSHOT_REMOTE" else "openrouter/auto")
+    assert body["model"] == "openrouter/auto"
     assert fixture.clients[0]["follow_redirects"] is False
     assert fixture.clients[0]["trust_env"] is False
-    reads = set(fixture.reads)
-    if backend == "MOONSHOT_REMOTE":
-        assert "OPENROUTER_API_KEY" not in reads
-    else:
-        assert not {"KIMI_API_KEY", "MOONSHOT_API_KEY"} & reads
+    assert {name for name in fixture.reads if "KEY" in name} == {"OPENROUTER_API_KEY"}
     assert secret not in repr(config)
 
 
@@ -242,12 +234,10 @@ async def test_valid_remote_routes_preserve_exact_payload_and_selected_key(fixtu
 )
 async def test_local_backend_never_reads_remote_keys_or_sends_bearer(fixture, backend, url):
     m = fixture.module
-    fixture.env["MOONSHOT_API_URL"] = "http://unsafe.invalid"
     fixture.env["OPENROUTER_API_URL"] = "http://unsafe.invalid"
     config = m.SwarmConfig(
         backend=getattr(m.InferenceBackend, backend),
         local_url=url,
-        moonshot_key="fixture-unselected-moonshot",
         openrouter_key="fixture-unselected-openrouter",
     )
     assert config.api_key == ""
@@ -263,7 +253,7 @@ async def test_local_backend_never_reads_remote_keys_or_sends_bearer(fixture, ba
     "url",
     [
         "http://evil.invalid/v1/chat",
-        "https://api.moonshot.cn/v1/chat",
+        "https://openrouter.ai/api/v1/chat",
         "http://user:pass@localhost/v1/chat",
         "http://127.0.0.1:0/v1/chat",
     ],
@@ -277,9 +267,7 @@ async def test_local_role_cannot_select_external_or_ambiguous_url(fixture, url):
 
 
 @pytest.mark.asyncio
-@pytest.mark.parametrize(
-    "backend,field", [("MOONSHOT_REMOTE", "moonshot_url"), ("OPENROUTER_REMOTE", "openrouter_url")]
-)
+@pytest.mark.parametrize("backend,field", [("OPENROUTER_REMOTE", "openrouter_url")])
 async def test_explicit_remote_loopback_gateway_remains_supported(fixture, backend, field):
     m = fixture.module
     url = "http://127.0.0.1:9876/v1/chat/completions"
@@ -292,21 +280,27 @@ async def test_explicit_remote_loopback_gateway_remains_supported(fixture, backe
 @pytest.mark.asyncio
 @pytest.mark.parametrize(
     "destination",
-    ["http://api.moonshot.cn/v1/chat", "https://evil.invalid/v1/chat", "https://openrouter.ai/api/v1/chat"],
+    [
+        "http://openrouter.ai/api/v1/chat",
+        "https://evil.invalid/v1/chat",
+        "https://openrouter.ai/api/v1/other",
+        "http://127.0.0.1:8000/v1/chat",
+    ],
 )
 async def test_redirect_never_forwards_credentials_or_prompt(fixture, destination):
     m = fixture.module
     fixture.responses.append(
         lambda request: httpx.Response(
-            307, headers={"Location": destination}, text="fixture-moonshot-secret fixture-private-prompt"
+            307, headers={"Location": destination}, text="fixture-openrouter-secret fixture-private-prompt"
         )
     )
-    client = m.RobustLLMClient(m.SwarmConfig())
+    client = m.RobustLLMClient(m.SwarmConfig(backend=m.InferenceBackend.OPENROUTER_REMOTE))
     result = await client.call([{"role": "user", "content": "fixture-private-prompt"}])
     assert result == "Error HTTP 307"
     assert len(fixture.posts) == 1 and len(fixture.clients) == 1
     assert fixture.clients[0]["follow_redirects"] is False
-    assert "fixture-moonshot-secret" not in result and "fixture-private-prompt" not in result
+    assert fixture.posts[0].headers["Authorization"] == "Bearer fixture-openrouter-secret"
+    assert "fixture-openrouter-secret" not in result and "fixture-private-prompt" not in result
 
 
 @pytest.mark.asyncio
@@ -314,7 +308,7 @@ async def test_environment_proxy_is_explicitly_disabled(fixture, monkeypatch):
     m = fixture.module
     monkeypatch.setenv("HTTP_PROXY", "http://fixture-proxy.invalid:8000")
     monkeypatch.setenv("HTTPS_PROXY", "http://fixture-proxy.invalid:8000")
-    client = m.RobustLLMClient(m.SwarmConfig())
+    client = m.RobustLLMClient(m.SwarmConfig(backend=m.InferenceBackend.OPENROUTER_REMOTE))
     assert await client.call([]) == "fixture-ok"
     assert fixture.clients[0]["trust_env"] is False
     assert len(fixture.posts) == 1
@@ -326,7 +320,11 @@ async def test_retry_keeps_original_provider_key_model_and_timeout(fixture, monk
 
     m = fixture.module
     config = m.SwarmConfig(
-        moonshot_model="fixture-moonshot-model", request_timeout_s=5, max_retries=2, retry_base_delay_s=0
+        backend=m.InferenceBackend.OPENROUTER_REMOTE,
+        openrouter_model="fixture-original-model",
+        request_timeout_s=5,
+        max_retries=2,
+        retry_base_delay_s=0,
     )
     client = m.RobustLLMClient(config)
     entered, release = m.asyncio.Event(), m.asyncio.Event()
@@ -339,20 +337,20 @@ async def test_retry_keeps_original_provider_key_model_and_timeout(fixture, monk
     fixture.responses.append(lambda request: httpx.Response(429, headers={"Retry-After": "0"}))
     task = m.asyncio.create_task(client.call([{"role": "user", "content": "fixture-private-prompt"}]))
     await m.asyncio.wait_for(entered.wait(), timeout=2)
-    config.backend = m.InferenceBackend.OPENROUTER_REMOTE
-    config.openrouter_url = "https://openrouter.ai/api/v1/chat/completions"
+    config.openrouter_url = "http://127.0.0.1:9876/v1/chat/completions"
     config.openrouter_key = "fixture-rotated-key"
     config.openrouter_model = "fixture-new-model"
     config.request_timeout_s = 99
     release.set()
     assert await m.asyncio.wait_for(task, timeout=2) == "fixture-ok"
     assert len(fixture.posts) == 2
-    assert all(str(request.url) == "https://api.moonshot.cn/v1/chat/completions" for request in fixture.posts)
-    assert all(request.headers["Authorization"] == "Bearer fixture-moonshot-secret" for request in fixture.posts)
-    assert all(json.loads(request.content)["model"] == "fixture-moonshot-model" for request in fixture.posts)
+    assert all(str(request.url) == "https://openrouter.ai/api/v1/chat/completions" for request in fixture.posts)
+    assert all(request.headers["Authorization"] == "Bearer fixture-openrouter-secret" for request in fixture.posts)
+    assert all(json.loads(request.content)["model"] == "fixture-original-model" for request in fixture.posts)
     assert all(item["timeout"] == 5 for item in fixture.clients)
     assert await client.call([]) == "fixture-ok"
-    assert str(fixture.posts[-1].url) == "https://openrouter.ai/api/v1/chat/completions"
+    assert str(fixture.posts[-1].url) == "http://127.0.0.1:9876/v1/chat/completions"
+    assert fixture.clients[-1]["timeout"] == 99
     assert fixture.posts[-1].headers["Authorization"] == "Bearer fixture-rotated-key"
     assert json.loads(fixture.posts[-1].content)["model"] == "fixture-new-model"
 
@@ -361,13 +359,13 @@ async def test_retry_keeps_original_provider_key_model_and_timeout(fixture, monk
 @pytest.mark.parametrize("mode", ["backend", "url", "local-url"])
 async def test_mutated_invalid_config_rejected_before_next_call_transport(fixture, mode):
     m = fixture.module
-    config = m.SwarmConfig()
+    config = m.SwarmConfig(backend=m.InferenceBackend.OPENROUTER_REMOTE)
     client = m.RobustLLMClient(config)
     fixture.reads.clear()
     if mode == "backend":
         config.backend = "unknown"
     elif mode == "url":
-        config.moonshot_url = "http://api.moonshot.cn/v1/chat"
+        config.openrouter_url = "http://openrouter.ai/api/v1/chat"
     else:
         config.backend = m.InferenceBackend.LOCAL_MLX
         config.local_url = "http://evil.invalid/v1/chat"
@@ -381,10 +379,10 @@ async def test_mutated_invalid_config_rejected_before_next_call_transport(fixtur
 @pytest.mark.parametrize("mode", ["url", "backend"])
 async def test_client_construction_revalidates_mutated_config(fixture, mode):
     m = fixture.module
-    config = m.SwarmConfig()
+    config = m.SwarmConfig(backend=m.InferenceBackend.OPENROUTER_REMOTE)
     fixture.reads.clear()
     if mode == "url":
-        config.moonshot_url = "http://api.moonshot.cn/v1/chat"
+        config.openrouter_url = "http://openrouter.ai/api/v1/chat"
     else:
         config.backend = "unknown"
     with pytest.raises(m.SecurityError):
@@ -397,14 +395,15 @@ async def test_client_construction_revalidates_mutated_config(fixture, mode):
 @pytest.mark.parametrize(
     "url,backend,headers",
     [
-        ("http://api.moonshot.cn/v1/chat", "MOONSHOT_REMOTE", {}),
-        ("https://openrouter.ai/api/v1/chat", "MOONSHOT_REMOTE", {}),
+        ("http://openrouter.ai/api/v1/chat", "OPENROUTER_REMOTE", {}),
+        ("https://evil.invalid/v1/chat", "OPENROUTER_REMOTE", {}),
+        ("https://openrouter.ai/api/v1/chat", "LOCAL_VLLM", {}),
         ("http://localhost:8000/v1/chat", "LOCAL_VLLM", {"authorization": "Bearer fixture-secret"}),
-        ("https://api.moonshot.cn/v1/chat", "MOONSHOT_REMOTE", {"Host": "evil.invalid"}),
-        ("https://api.moonshot.cn/v1/chat", "MOONSHOT_REMOTE", {"Proxy-Authorization": "fixture-secret"}),
+        ("https://openrouter.ai/api/v1/chat", "OPENROUTER_REMOTE", {"Host": "evil.invalid"}),
+        ("https://openrouter.ai/api/v1/chat", "OPENROUTER_REMOTE", {"Proxy-Authorization": "fixture-secret"}),
         (
-            "https://api.moonshot.cn/v1/chat",
-            "MOONSHOT_REMOTE",
+            "https://openrouter.ai/api/v1/chat",
+            "OPENROUTER_REMOTE",
             {"Authorization": "Bearer fixture-secret\r\nX: injected"},
         ),
     ],
@@ -420,7 +419,7 @@ async def test_low_level_transport_rejects_bypass_attempts(fixture, url, backend
 @pytest.mark.parametrize("mode", ["connect", "read-timeout", "unexpected", "http-error"])
 async def test_error_diagnostics_do_not_echo_secrets(fixture, mode):
     m = fixture.module
-    secret = "fixture-moonshot-secret fixture-private-prompt"
+    secret = "fixture-openrouter-secret fixture-private-prompt"
 
     def failure(request):
         if mode == "connect":
@@ -432,9 +431,12 @@ async def test_error_diagnostics_do_not_echo_secrets(fixture, mode):
         return httpx.Response(401, text=secret)
 
     fixture.responses.append(failure)
-    result = await m.RobustLLMClient(m.SwarmConfig(max_retries=1)).call([])
+    result = await m.RobustLLMClient(m.SwarmConfig(backend=m.InferenceBackend.OPENROUTER_REMOTE, max_retries=1)).call(
+        []
+    )
     assert result.startswith("Error")
-    assert "fixture-moonshot-secret" not in result and "fixture-private-prompt" not in result
+    assert len(fixture.posts) == 1
+    assert "fixture-openrouter-secret" not in result and "fixture-private-prompt" not in result
 
 
 @pytest.mark.asyncio
@@ -447,7 +449,7 @@ async def test_cancelled_call_is_not_retried(fixture, monkeypatch):
         await m.asyncio.Event().wait()
 
     monkeypatch.setattr(m, "_http_post_single_attempt", request)
-    client = m.RobustLLMClient(m.SwarmConfig(max_retries=3))
+    client = m.RobustLLMClient(m.SwarmConfig(backend=m.InferenceBackend.OPENROUTER_REMOTE, max_retries=3))
     task = m.asyncio.create_task(client.call([]))
     await m.asyncio.wait_for(entered.wait(), timeout=2)
     task.cancel()
@@ -462,14 +464,13 @@ def test_api_key_property_resolves_only_selected_valid_provider(fixture):
     assert local.api_key == "" and fixture.reads == []
     router = m.SwarmConfig(backend=m.InferenceBackend.OPENROUTER_REMOTE)
     assert router.api_key == "fixture-openrouter-secret"
-    assert not {"KIMI_API_KEY", "MOONSHOT_API_KEY"} & set(fixture.reads)
+    assert {name for name in fixture.reads if "KEY" in name} == {"OPENROUTER_API_KEY"}
 
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize(
     "selector,host",
     [
-        "moonshot api.moonshot.cn".split(),
         "openrouter openrouter.ai".split(),
         "local_vllm localhost".split(),
         "local_mlx localhost".split(),
@@ -489,7 +490,7 @@ async def test_public_entrypoint_preserves_known_selector_routes(fixture, select
 @pytest.mark.asyncio
 async def test_explicit_empty_key_suppresses_environment_fallback(fixture):
     m = fixture.module
-    config = m.SwarmConfig(moonshot_key="")
+    config = m.SwarmConfig(backend=m.InferenceBackend.OPENROUTER_REMOTE, openrouter_key="")
     fixture.reads.clear()
     assert await m.RobustLLMClient(config).call([]) == "fixture-ok"
     assert not any("KEY" in name for name in fixture.reads)
@@ -499,7 +500,7 @@ async def test_explicit_empty_key_suppresses_environment_fallback(fixture):
 @pytest.mark.asyncio
 async def test_open_circuit_does_not_resolve_credentials(fixture):
     m = fixture.module
-    client = m.RobustLLMClient(m.SwarmConfig(circuit_breaker_threshold=1))
+    client = m.RobustLLMClient(m.SwarmConfig(backend=m.InferenceBackend.OPENROUTER_REMOTE, circuit_breaker_threshold=1))
     client._consecutive_failures = 1
     fixture.reads.clear()
     assert (await client.call([])).startswith("🔴 Circuit breaker")
@@ -511,7 +512,7 @@ async def test_open_circuit_does_not_resolve_credentials(fixture):
 @pytest.mark.parametrize("key", [b"fixture-secret", "fixture-secret\r\nInjected: true"])
 async def test_invalid_credential_format_rejects_before_client(fixture, key):
     m = fixture.module
-    client = m.RobustLLMClient(m.SwarmConfig(moonshot_key=key))
+    client = m.RobustLLMClient(m.SwarmConfig(backend=m.InferenceBackend.OPENROUTER_REMOTE, openrouter_key=key))
     with pytest.raises(m.SecurityError) as failure:
         await client.call([])
     assert "fixture-secret" not in str(failure.value)
@@ -522,21 +523,38 @@ async def test_invalid_credential_format_rejects_before_client(fixture, key):
 async def test_low_level_helper_requires_backend_contract(fixture):
     m = fixture.module
     with pytest.raises(m.SecurityError):
-        await m._http_post_single_attempt("https://api.moonshot.cn/v1/chat", {}, {}, 1, "unknown")
+        await m._http_post_single_attempt("https://openrouter.ai/api/v1/chat", {}, {}, 1, "unknown")
     with pytest.raises(TypeError):
-        await m._http_post_single_attempt("https://api.moonshot.cn/v1/chat", {}, {}, 1)
+        await m._http_post_single_attempt("https://openrouter.ai/api/v1/chat", {}, {}, 1)
     assert fixture.posts == [] and fixture.clients == []
 
 
-@pytest.mark.asyncio
-async def test_selected_key_alias_keeps_previous_precedence(fixture):
+def test_default_backend_is_local_and_resolves_no_remote_credential(fixture):
     m = fixture.module
-    fixture.env.pop("KIMI_API_KEY")
-    fixture.env["MOONSHOT_API_KEY"] = "fixture-alternate-moonshot-key"
-    client = m.RobustLLMClient(m.SwarmConfig())
-    assert await client.call([]) == "fixture-ok"
-    assert fixture.posts[0].headers["Authorization"] == "Bearer fixture-alternate-moonshot-key"
-    assert "OPENROUTER_API_KEY" not in fixture.reads
+    fixture.env["OPENROUTER_API_URL"] = "http://unsafe.invalid"
+    config = m.SwarmConfig()
+    assert config.backend is m.InferenceBackend.LOCAL_VLLM
+    assert config.backend not in m.PROVIDER_HOSTS
+    assert m.urlsplit(config.api_url).hostname in m.LOOPBACK_HOSTS
+    assert config.api_key == ""
+    assert isinstance(config.model_name, str)
+    m.RobustLLMClient(config)
+    assert fixture.reads == []
+    assert set(m.PROVIDER_HOSTS) == {m.InferenceBackend.OPENROUTER_REMOTE}
+    assert not hasattr(m.InferenceBackend, "MOONSHOT_REMOTE")
+
+
+@pytest.mark.asyncio
+async def test_unconfigured_entrypoint_stays_on_loopback_without_bearer(fixture):
+    m = fixture.module
+    fixture.env["OPENROUTER_API_URL"] = "http://unsafe.invalid"
+    result = await m.run_swarm_orchestrator("fixture-private-prompt")
+    assert result == "El Planner no pudo descomponer la tarea."
+    (request,) = fixture.posts
+    assert request.url.host in m.LOOPBACK_HOSTS
+    assert "Authorization" not in request.headers
+    assert "fixture-openrouter-secret" not in request.content.decode()
+    assert fixture.reads == []
 
 
 @pytest.mark.asyncio
@@ -551,13 +569,13 @@ async def test_private_prompt_is_not_logged_by_planner_or_subagent(fixture, capl
     result = await m.execute_subagent(0, prompt, client, pager, m.asyncio.Semaphore(1), 0)
     assert result["status"] == "OK"
     assert prompt not in caplog.text
-    assert "fixture-moonshot-secret" not in caplog.text
+    assert "fixture-openrouter-secret" not in caplog.text
 
 
 @pytest.mark.asyncio
 async def test_warmup_and_parallel_provider_calls_keep_credentials_separate(fixture):
     m = fixture.module
-    first = m.RobustLLMClient(m.SwarmConfig())
+    first = m.RobustLLMClient(m.SwarmConfig(backend=m.InferenceBackend.LOCAL_VLLM))
     second = m.RobustLLMClient(m.SwarmConfig(backend=m.InferenceBackend.OPENROUTER_REMOTE))
     assert await first.call([]) == "fixture-ok"  # Warmup, no network/performance claim.
     assert (
@@ -565,6 +583,10 @@ async def test_warmup_and_parallel_provider_calls_keep_credentials_separate(fixt
         == ["fixture-ok"] * 32
     )
     assert len(fixture.posts) == 33
+    assert sum(request.url.host == "openrouter.ai" for request in fixture.posts) == 16
     for request in fixture.posts:
-        key = "fixture-moonshot-secret" if request.url.host == "api.moonshot.cn" else "fixture-openrouter-secret"
-        assert request.headers["Authorization"] == "Bearer " + key
+        if request.url.host == "openrouter.ai":
+            assert request.headers["Authorization"] == "Bearer fixture-openrouter-secret"
+        else:
+            assert request.url.host == "localhost"
+            assert "Authorization" not in request.headers

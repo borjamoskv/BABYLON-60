@@ -5,7 +5,7 @@ Estado: ejecutado por instrucción del operador; véase el
 La planificación inicial seleccionó un P1 CONFIRMED_STATIC/OPEN:
 C0438, en la única fuente productiva prevista
 `scripts/c5_thermo/c5_exergy_optimizer_monitor.py`. La
-[selección con hash](evidence/swarm100-lot8-20261029/lot9-selection.json)
+[selección con hash](RETENTION.md)
 conserva evidencia estática y versión anterior a cualquier futuro parche.
 No quedan P1 OPEN previamente reproducidos; este lote continúa la familia de
 commits que incluyen trabajo ajeno y omiten controles.

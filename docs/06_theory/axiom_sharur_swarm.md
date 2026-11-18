@@ -28,6 +28,6 @@ Como estimación ideal, con trabajo total L, p trabajadores y duración máxima 
 
 ## 4. Estado Lean
 
-La estructura histórica `SharurSwarm` compila como declaración aislada con Lean 4.35.0. Sus campos `strict_concurrency_bound` y `zero_mutability_invariant` son obligaciones suministradas al construir una instancia. `granular_fail_fast` repetía una consecuencia del segundo campo y no modelaba excepciones, aislamiento de procesos ni plazos.
+La estructura histórica `[OBSOLETO: SharurSwarm]` compila como declaración aislada con Lean 4.35.0. Sus campos `[OBSOLETO: strict_concurrency_bound]` y `[OBSOLETO: zero_mutability_invariant]` son obligaciones suministradas al construir una instancia. `[OBSOLETO: granular_fail_fast]` repetía una consecuencia del segundo campo y no modelaba excepciones, aislamiento de procesos ni plazos.
 
 Se retira el bloque como certificado de un enjambre real; no se ha construido aquí una instancia ni probado el scheduler. Un conjunto vacío de hallazgos solo significa que los predicados ejecutados no encontraron casos en su cobertura, no que el repositorio sea correcto globalmente.

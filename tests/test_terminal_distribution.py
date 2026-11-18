@@ -51,6 +51,9 @@ def fixture_tree(tmp_path):
     for rel in ["01_KISH_ENGINE/babylon60", "02_EDIN_SWARMS/agents_archi", ".agents/skills"]:
         shutil.copytree(ROOT / rel, root / rel, ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
     for rel in [
+        "CLAIMS.toml",
+        "docs/03_guides/BEFORE_AND_AFTER.md",
+        "docs/03_guides/USER_GUIDE.md",
         "docs/03_guides/guide_codex_first_use.md",
         "docs/03_guides/guide_first_conversation_pilot.md",
         "docs/security/governance-comparison-2026-10-24.md",
@@ -112,6 +115,8 @@ def test_terminal_bundle_contains_importable_cli_and_mcp(tmp_path):
             "01_KISH_ENGINE/babylon60/mcp_instructions.md",
             "01_KISH_ENGINE/babylon60/experience.py",
             "01_KISH_ENGINE/babylon60/onboarding.py",
+            "docs/03_guides/BEFORE_AND_AFTER.md",
+            "docs/03_guides/USER_GUIDE.md",
             "docs/03_guides/guide_codex_first_use.md",
             "docs/03_guides/guide_first_conversation_pilot.md",
             "scripts/c5_quality_gates/experience_pilot.py",
@@ -127,6 +132,7 @@ def test_terminal_bundle_contains_importable_cli_and_mcp(tmp_path):
         bundle.extractall(unpack)
     assert validate_local_links([unpack / name for name in GOVERNANCE_DOCUMENTS]) == []
     for name in [
+        "docs/03_guides/BEFORE_AND_AFTER.md",
         "docs/03_guides/guide_codex_first_use.md",
         "docs/03_guides/guide_first_conversation_pilot.md",
         "01_KISH_ENGINE/babylon60/presentation.md",

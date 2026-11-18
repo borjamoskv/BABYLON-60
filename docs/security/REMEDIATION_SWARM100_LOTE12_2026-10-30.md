@@ -17,10 +17,10 @@ Reproducir cada ID antes de su parche, aplicar correcciones en las rutas
 seleccionadas, ejecutar regresiones y revisión independiente, reconciliar
 el inventario conservando historia y preparar el siguiente lote. Aplican los
 [contratos de persistencia, concurrencia, confianza y verificación](../03_guides/agent_contracts.md).
-La [selección original](evidence/swarm100-lot12-plan-20261029/selection-30.json)
+La [selección original](RETENTION.md)
 coincidía con los hashes de las 29 fuentes al iniciar. El
-[contrato ejecutado](evidence/swarm100-lot12-20261030/execution-contract.json)
-y el [control de alcance](evidence/swarm100-lot12-20261030/scope-check.json)
+[contrato ejecutado](RETENTION.md)
+y el [control de alcance](RETENTION.md)
 registran rutas, restricciones y hashes finales.
 
 Solo HOME/directorios/repositorios/SQLite temporales, procesos hijos propios y
@@ -46,8 +46,8 @@ externo lo requería. No se ejecutó telemetría global.
 | Correspondencia formal | C0378 | MITIGATED: no se promueve a PROVED sin puente comprobado entre precondición e implementación; elegibilidad heredada retirada de la tabla, sin revocar binarios existentes. |
 
 Los dictámenes, rangos actuales y límites por ID están en la
-[revisión agregada](evidence/swarm100-lot12-20261030/independent-review.json).
-Los [30 cambios de estado](evidence/swarm100-lot12-20261030/candidate-status-updates.json)
+[revisión agregada](RETENTION.md).
+Los [30 cambios de estado](RETENTION.md)
 remiten a esa evidencia. FIXED no certifica propiedades ajenas al fallo concreto.
 
 ## Reproducción, pruebas y revisión
@@ -60,12 +60,12 @@ Los fallos de montaje o invocación de herramientas se identifican separados
 de los defectos productivos; no se cuentan como prueba de un hallazgo.
 
 **1387 pruebas aprobadas y 2 omitidas** en la
-[suite acumulada](evidence/swarm100-lot12-20261030/related-tests.log), con hashes
+[suite acumulada](RETENTION.md), con hashes
 de las 29 fuentes idénticos antes y después. Se omiten `strike_rs` no compilado
 y el positivo de límites reales de memoria que requiere Linux. Hay un aviso de
 deprecación heredado del módulo hygiene. Pasan Ruff, MyPy en las 27 fuentes
 Python, sintaxis Bash, sintaxis ESM y cuatro fixtures Worker Node.
-Los [comandos, códigos y hashes](evidence/swarm100-lot12-20261030/validation.json)
+Los [comandos, códigos y hashes](RETENTION.md)
 delimitan lo ejecutado; el análisis de tipos silencia dependencias transitivas.
 
 Seis revisiones independientes ejecutaron regresiones y controles propios con
@@ -92,7 +92,7 @@ El inventario conserva los 598 IDs: **509 OPEN, 79 FIXED, 6 MITIGATED y
 4 NOT_APPLICABLE**. Hay **503 hallazgos únicos OPEN: 25 P1, 468 P2 y 10 P3**.
 Se refrescaron rangos/hashes de 23 colaterales conservando sus estados y de
 registros en fuentes cambiadas por trabajo ajeno, distinguiendo cambios previos
-y concurrentes. El [registro de esa revisión](evidence/swarm100-lot12-20261030/outside-scope-source-refresh.json)
+y concurrentes. El [registro de esa revisión](RETENTION.md)
 no declara nuevas correcciones. C0295/C0386/C0436, C0209 y C0516/C0517 requieren
 readjudicación de sus disparadores históricos; no se afirma que persistan.
 

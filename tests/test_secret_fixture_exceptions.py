@@ -22,13 +22,20 @@ ROOT = Path(__file__).absolute().parents[1]
 RULES = tuple(PUBLIC_FIXTURE_EXCEPTIONS)
 
 
+def _require_fixture_file(relative: str) -> Path:
+    source = ROOT / relative
+    if not source.is_file():
+        pytest.skip(f"local-only evidence fixture absent in checkout: {relative}")
+    return source
+
+
 @pytest.mark.parametrize("relative,pattern,fingerprint", RULES)
 def test_exact_reviewed_fixture_requires_all_three_fields(
     relative: str,
     pattern: str,
     fingerprint: str,
 ) -> None:
-    source = ROOT / relative
+    source = _require_fixture_file(relative)
     strict = scan_file(str(source))
     assert any(item["type"] == pattern and item["fingerprint"] == fingerprint for item in strict), fingerprint
     qualified = scan_file(str(source), str(ROOT))
@@ -42,7 +49,7 @@ def test_another_secret_on_the_same_line_and_file_is_still_detected(
     pattern: str,
     fingerprint: str,
 ) -> None:
-    source = ROOT / relative
+    source = _require_fixture_file(relative)
     strict = scan_file(str(source))
     line = next(item["line"] for item in strict if item["type"] == pattern and item["fingerprint"] == fingerprint)
     lines = source.read_text().splitlines(keepends=True)
@@ -66,9 +73,10 @@ def test_a_different_path_does_not_inherit_a_public_fixture_exception(
     pattern: str,
     fingerprint: str,
 ) -> None:
+    source = _require_fixture_file(relative)
     candidate = tmp_path / "different-path" / Path(relative).name
     candidate.parent.mkdir(parents=True, exist_ok=True)
-    candidate.write_bytes((ROOT / relative).read_bytes())
+    candidate.write_bytes(source.read_bytes())
     observed = scan_file(str(candidate), str(tmp_path))
     assert any(item["type"] == pattern and item["fingerprint"] == fingerprint for item in observed), fingerprint
 

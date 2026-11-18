@@ -1,26 +1,6 @@
 {
   "version": 2,
   "skills": {
-    "c5-wetware-and-venture-ops-project": {
-      "name": "c5-wetware-and-venture-ops-project",
-      "canonical_alias": "wetware-hub",
-      "display_name": "Wetware Hub · Operaciones y Carga Cognitiva",
-      "description": "Enruta el módulo del proyecto para el límite de disipación y el cron adaptativo. Dispara con \"wetware project hub\", \"wetware-hub\", \"venture project hub\", \"hub wetware proyecto\", \"adaptive-cron\".",
-      "role": "arquitecto",
-      "allowed_roles": [
-        "arquitecto",
-        "ejecutor",
-        "auditor"
-      ],
-      "directives": {
-        "worktree_mode": "spec-only",
-        "phase": "design",
-        "handoff": {
-          "upstream": "operador",
-          "downstream": "ejecutor"
-        }
-      }
-    },
     "lora-swarm-pipeline": {
       "name": "lora-swarm-pipeline",
       "canonical_alias": "swarm-lora-pipeline",
@@ -93,24 +73,6 @@
         }
       }
     },
-    "biographical-thermo": {
-      "name": "biographical-thermo",
-      "canonical_alias": "epistemic-biographical-thermo",
-      "display_name": "Mapeo Termodinámico Biográfico e Histórico",
-      "description": "Analiza trayectorias vitales, historia y filosofía mediante Mapeo Estructural C5-REAL (Termodinámica Discreta).",
-      "role": "auditor",
-      "allowed_roles": [
-        "auditor"
-      ],
-      "directives": {
-        "worktree_mode": "audit-only",
-        "phase": "verification",
-        "handoff": {
-          "upstream": "ejecutor",
-          "downstream": "operador"
-        }
-      }
-    },
     "shared-manifest-kernel": {
       "name": "shared-manifest-kernel",
       "canonical_alias": "kernel-shared-manifest",
@@ -165,29 +127,11 @@
         }
       }
     },
-    "adaptive-cron": {
-      "name": "adaptive-cron",
-      "canonical_alias": "wetware-adaptive-cron",
-      "display_name": "Cálculo de Límite de Disipación Crítica (Adaptive Cron)",
-      "description": "Resume carga operativa mediante observables verificables y conserva el control de sesión del operador.",
-      "role": "arquitecto",
-      "allowed_roles": [
-        "arquitecto"
-      ],
-      "directives": {
-        "worktree_mode": "spec-only",
-        "phase": "design",
-        "handoff": {
-          "upstream": "operador",
-          "downstream": "ejecutor"
-        }
-      }
-    },
     "c5-epistemic-thermodynamics-project": {
       "name": "c5-epistemic-thermodynamics-project",
       "canonical_alias": "epistemic-hub",
       "display_name": "Epistemic Hub · Termodinámica Epistémica (Proyecto)",
-      "description": "Enruta auditoría epistémica del proyecto, síntesis MDL, extracción de fuentes, biografía, simbiosis cognitiva y explicación clara. Dispara con \"epistemic-hub\", \"epistemic project hub\", \"auditoría epistémica\", \"cloud-chamber\", \"alpha extraction\", \"grill-me-v2\", \"wait-what\".",
+      "description": "Enruta auditoría epistémica del proyecto, síntesis MDL, extracción de fuentes, simbiosis cognitiva y explicación clara. Dispara con \"epistemic-hub\", \"epistemic project hub\", \"auditoría epistémica\", \"cloud-chamber\", \"alpha extraction\", \"grill-me-v2\", \"wait-what\".",
       "role": "arquitecto",
       "allowed_roles": [
         "arquitecto",
@@ -301,7 +245,7 @@
       "name": "c5-anti-slop-ui",
       "canonical_alias": "media-ui-linter",
       "display_name": "Linter y Directivas Frontend Anti-Slop (C5-REAL)",
-      "description": "Revisa diseño y accesibilidad de interfaces; distingue comprobaciones léxicas parciales de verificación sobre la interfaz renderizada.",
+      "description": "Erradica el AI Slop y el pastiche estético en interfaces de usuario (WCAG AAA, escalas modulares áureas, ritmo vertical, veto al atractor grisáceo de Tailwind). Dispara con \"anti-slop ui\", \"impeccable c5\", \"linter de diseño\", \"auditoría ui\", \"pulir frontend\", \"erradicar ai slop\".",
       "role": "auditor",
       "allowed_roles": [
         "auditor",
@@ -390,24 +334,6 @@
         }
       }
     },
-    "audiovisual-sota": {
-      "name": "audiovisual-sota",
-      "canonical_alias": "media-pipeline",
-      "display_name": "Media Pipeline · Renderizado Audiovisual Determinista",
-      "description": "Fuerza invariantes extremas en pipelines de renderizado audiovisual (FFmpeg/Remotion).",
-      "role": "ejecutor",
-      "allowed_roles": [
-        "ejecutor"
-      ],
-      "directives": {
-        "worktree_mode": "read-write",
-        "phase": "implementation",
-        "handoff": {
-          "upstream": "arquitecto",
-          "downstream": "auditor"
-        }
-      }
-    },
     "rlhf-sentinel": {
       "name": "rlhf-sentinel",
       "canonical_alias": "kernel-rlhf-sentinel",
@@ -423,26 +349,6 @@
         "handoff": {
           "upstream": "ejecutor",
           "downstream": "operador"
-        }
-      }
-    },
-    "c5-audiovisual-acreativo-sota-project": {
-      "name": "c5-audiovisual-acreativo-sota-project",
-      "canonical_alias": "media-hub",
-      "display_name": "Media Hub · Audiovisual Acreativo (Proyecto)",
-      "description": "Enruta módulos del proyecto para pipelines audiovisuales y auditoría de interfaces. Dispara con \"media-hub\", \"audiovisual project hub\", \"hub audiovisual proyecto\", \"media router proyecto\", \"audiovisual-sota\", \"anti-slop ui\".",
-      "role": "arquitecto",
-      "allowed_roles": [
-        "arquitecto",
-        "ejecutor",
-        "auditor"
-      ],
-      "directives": {
-        "worktree_mode": "spec-only",
-        "phase": "design",
-        "handoff": {
-          "upstream": "operador",
-          "downstream": "ejecutor"
         }
       }
     },
@@ -481,103 +387,27 @@
           "downstream": "auditor"
         }
       }
+    },
+    "cortex-kernel": {
+      "name": "cortex-kernel",
+      "canonical_alias": "kernel-root",
+      "display_name": "CORTEX Root Kernel",
+      "description": "Manifiesto de invariantes transversales del ecosistema CORTEX (árbol de roles, gobernanza declarativa y límites termodinámicos).",
+      "role": "arquitecto",
+      "allowed_roles": [
+        "arquitecto"
+      ],
+      "directives": {
+        "worktree_mode": "spec-only",
+        "phase": "design",
+        "handoff": {
+          "upstream": "operador",
+          "downstream": "ejecutor"
+        }
+      }
     }
   },
   "capabilities": {
-    "c5-wetware-and-venture-ops-project": {
-      "aliases": [
-        "/c5-wetware-and-venture-ops-project",
-        "adaptive-cron",
-        "c5-wetware-and-venture-ops-project",
-        "hub wetware proyecto",
-        "venture project hub",
-        "wetware project hub",
-        "wetware-hub"
-      ],
-      "intent": {
-        "actions": [
-          "analiza",
-          "analizar",
-          "audita",
-          "auditar",
-          "revisa",
-          "revisar",
-          "verifica",
-          "verificar",
-          "comprueba",
-          "comprobar",
-          "diagnostica",
-          "diagnosticar",
-          "investiga",
-          "investigar",
-          "corrige",
-          "corregir",
-          "arregla",
-          "repara",
-          "reparar",
-          "crea",
-          "crear",
-          "genera",
-          "generar",
-          "construye",
-          "construir",
-          "implementa",
-          "implementar",
-          "optimiza",
-          "optimizar",
-          "configura",
-          "configurar",
-          "prepara",
-          "preparar",
-          "calcula",
-          "calcular",
-          "mide",
-          "medir",
-          "evalua",
-          "evaluar",
-          "compara",
-          "comparar",
-          "organiza",
-          "organizar",
-          "extrae",
-          "extraer",
-          "convierte",
-          "convertir",
-          "adapta",
-          "adaptar",
-          "formaliza",
-          "formalizar",
-          "demuestra",
-          "demostrar",
-          "resuelve",
-          "resolver",
-          "limpia",
-          "limpiar",
-          "purga",
-          "purgar",
-          "despliega",
-          "desplegar",
-          "instala",
-          "instalar",
-          "conecta",
-          "conectar",
-          "abre",
-          "abrir",
-          "navega",
-          "navegar",
-          "controla",
-          "controlar",
-          "traduce",
-          "traducir",
-          "sintetiza",
-          "sintetizar",
-          "quiero",
-          "necesito",
-          "ayudame"
-        ],
-        "topics": []
-      }
-    },
     "lora-swarm-pipeline": {
       "aliases": [
         "/lora-swarm-pipeline",
@@ -695,28 +525,6 @@
         "path": "references/modules/wait-what/MODULE.md"
       }
     },
-    "biographical-thermo": {
-      "aliases": [
-        "/biographical-thermo",
-        "análisis biográfico termodinámico",
-        "biografía termodinámica",
-        "biographical-thermo",
-        "epistemic-biographical-thermo",
-        "trayectoria termodinámica"
-      ],
-      "intent": {
-        "topics": [
-          "análisis biográfico termodinámico",
-          "biografía termodinámica",
-          "epistemic-biographical-thermo",
-          "trayectoria termodinámica"
-        ]
-      },
-      "module": {
-        "hub": "c5-epistemic-thermodynamics-project",
-        "path": "references/modules/biographical-thermo/MODULE.md"
-      }
-    },
     "shared-manifest-kernel": {
       "aliases": [
         "/shared-manifest-kernel",
@@ -745,6 +553,9 @@
       "aliases": [
         "/grill-me",
         "/grill-me-v2",
+        "10 preguntas",
+        "contrapeso epistémico",
+        "decálogo epistémico",
         "grill-me-v2",
         "interrogatorio socrático",
         "socratic audit",
@@ -752,6 +563,9 @@
       ],
       "intent": {
         "topics": [
+          "10 preguntas",
+          "contrapeso epistémico",
+          "decálogo epistémico",
           "interrogatorio socrático",
           "socratic audit",
           "socratic-interrogator"
@@ -784,28 +598,6 @@
       "module": {
         "hub": "c5-cortex-swarm-orchestrator-project",
         "path": "references/modules/wizard/MODULE.md"
-      }
-    },
-    "adaptive-cron": {
-      "aliases": [
-        "/adaptive-cron",
-        "adaptive-cron",
-        "burnout cognitivo",
-        "cron adaptativo",
-        "límite de disipación crítica",
-        "wetware-adaptive-cron"
-      ],
-      "intent": {
-        "topics": [
-          "burnout cognitivo",
-          "cron adaptativo",
-          "límite de disipación crítica",
-          "wetware-adaptive-cron"
-        ]
-      },
-      "module": {
-        "hub": "c5-wetware-and-venture-ops-project",
-        "path": "references/modules/adaptive-cron/MODULE.md"
       }
     },
     "c5-epistemic-thermodynamics-project": {
@@ -1119,10 +911,6 @@
           "media-ui-linter",
           "pulir frontend"
         ]
-      },
-      "module": {
-        "hub": "c5-audiovisual-acreativo-sota-project",
-        "path": "references/modules/c5-anti-slop-ui/MODULE.md"
       }
     },
     "c5-cortex-swarm-orchestrator-project": {
@@ -1287,26 +1075,6 @@
         "path": "references/modules/thermo-audit/MODULE.md"
       }
     },
-    "audiovisual-sota": {
-      "aliases": [
-        "/audiovisual-sota",
-        "audiovisual-sota",
-        "invariantes remotion ffmpeg",
-        "media-pipeline",
-        "pipeline audiovisual"
-      ],
-      "intent": {
-        "topics": [
-          "invariantes remotion ffmpeg",
-          "media-pipeline",
-          "pipeline audiovisual"
-        ]
-      },
-      "module": {
-        "hub": "c5-audiovisual-acreativo-sota-project",
-        "path": "references/modules/audiovisual-sota/MODULE.md"
-      }
-    },
     "rlhf-sentinel": {
       "aliases": [
         "/rlhf-sentinel",
@@ -1329,101 +1097,6 @@
       "module": {
         "hub": "c5-ring0-babylon-kernel-project",
         "path": "references/modules/rlhf-sentinel/MODULE.md"
-      }
-    },
-    "c5-audiovisual-acreativo-sota-project": {
-      "aliases": [
-        "/c5-audiovisual-acreativo-sota-project",
-        "anti-slop ui",
-        "audiovisual project hub",
-        "audiovisual-sota",
-        "c5-audiovisual-acreativo-sota-project",
-        "hub audiovisual proyecto",
-        "media router proyecto",
-        "media-hub"
-      ],
-      "intent": {
-        "actions": [
-          "analiza",
-          "analizar",
-          "audita",
-          "auditar",
-          "revisa",
-          "revisar",
-          "verifica",
-          "verificar",
-          "comprueba",
-          "comprobar",
-          "diagnostica",
-          "diagnosticar",
-          "investiga",
-          "investigar",
-          "corrige",
-          "corregir",
-          "arregla",
-          "repara",
-          "reparar",
-          "crea",
-          "crear",
-          "genera",
-          "generar",
-          "construye",
-          "construir",
-          "implementa",
-          "implementar",
-          "optimiza",
-          "optimizar",
-          "configura",
-          "configurar",
-          "prepara",
-          "preparar",
-          "calcula",
-          "calcular",
-          "mide",
-          "medir",
-          "evalua",
-          "evaluar",
-          "compara",
-          "comparar",
-          "organiza",
-          "organizar",
-          "extrae",
-          "extraer",
-          "convierte",
-          "convertir",
-          "adapta",
-          "adaptar",
-          "formaliza",
-          "formalizar",
-          "demuestra",
-          "demostrar",
-          "resuelve",
-          "resolver",
-          "limpia",
-          "limpiar",
-          "purga",
-          "purgar",
-          "despliega",
-          "desplegar",
-          "instala",
-          "instalar",
-          "conecta",
-          "conectar",
-          "abre",
-          "abrir",
-          "navega",
-          "navegar",
-          "controla",
-          "controlar",
-          "traduce",
-          "traducir",
-          "sintetiza",
-          "sintetizar",
-          "quiero",
-          "necesito",
-          "ayudame"
-        ],
-        "topics": []
       }
     },
     "c5-alpha-extraction-pipeline": {
@@ -1468,6 +1141,23 @@
       "module": {
         "hub": "c5-ring0-babylon-kernel-project",
         "path": "references/modules/apple-bypass/MODULE.md"
+      }
+    },
+    "cortex-kernel": {
+      "aliases": [
+        "/cortex-kernel",
+        "cortex kernel",
+        "cortex-kernel",
+        "kernel axiomas",
+        "kernel-root"
+      ],
+      "intent": {
+        "topics": [
+          "cortex kernel",
+          "cortex-kernel",
+          "kernel axiomas",
+          "kernel-root"
+        ]
       }
     }
   },

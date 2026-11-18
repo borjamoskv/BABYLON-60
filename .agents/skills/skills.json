@@ -1,37 +1,11 @@
 {
   "version": "26.400",
-  "updated_at": "2026-10-18T18:29:58Z",
+  "updated_at": "2026-11-16T21:48:00Z",
   "exergy_scale_standard": "COMPILER_DERIVED_3_EVALUATORS (E1_Silicon + E2_Kolmogorov + E3_Causal = 21000)",
-  "total_skills": 26,
-  "average_exergy_density": 19205.19,
-  "description": "Grafo de adyacencia y topología conectada de las 131 habilidades soberanas del ecosistema CORTEX Engine integrado en BABYLON-60 (100% COMPILER_DERIVED)",
+  "total_skills": 22,
+  "average_exergy_density": 20000.39,
+  "description": "Grafo de adyacencia y topología conectada de las 130 habilidades soberanas del ecosistema CORTEX Engine integrado en BABYLON-60 (100% COMPILER_DERIVED)",
   "entries": [
-    {
-      "name": "adaptive-cron",
-      "tier": 19500,
-      "category": "Governance",
-      "display_name": "Cálculo de Límite de Disipación Crítica (Adaptive Cron)",
-      "role": "arquitecto",
-      "exergy_audit": {
-        "e1_silicon": 7000,
-        "e2_kolmogorov": 7000,
-        "e3_causal": 7000,
-        "ring0_bonus": 0,
-        "compiler_verified": true
-      },
-      "canonical_alias": "wetware-adaptive-cron",
-      "scope": "workspace",
-      "description": "Resume carga operativa mediante observables verificables y conserva el control de sesión del operador.",
-      "triggers": [
-        "/adaptive-cron",
-        "adaptive-cron",
-        "burnout cognitivo",
-        "cron adaptativo",
-        "límite de disipación crítica",
-        "wetware-adaptive-cron"
-      ],
-      "path": "adaptive-cron/SKILL.md"
-    },
     {
       "name": "apple-bypass",
       "tier": 19800,
@@ -57,31 +31,6 @@
         "liberar memoria mps"
       ],
       "path": "apple-bypass/SKILL.md"
-    },
-    {
-      "name": "audiovisual-sota",
-      "tier": 16800,
-      "category": "Operations",
-      "display_name": "Media Pipeline · Renderizado Audiovisual Determinista",
-      "role": "ejecutor",
-      "exergy_audit": {
-        "e1_silicon": 7000,
-        "e2_kolmogorov": 7000,
-        "e3_causal": 6700,
-        "ring0_bonus": 0,
-        "compiler_verified": true
-      },
-      "canonical_alias": "media-pipeline",
-      "scope": "workspace",
-      "description": "Fuerza invariantes extremas en pipelines de renderizado audiovisual (FFmpeg/Remotion).",
-      "triggers": [
-        "/audiovisual-sota",
-        "audiovisual-sota",
-        "invariantes remotion ffmpeg",
-        "media-pipeline",
-        "pipeline audiovisual"
-      ],
-      "path": "audiovisual-sota/SKILL.md"
     },
     {
       "name": "babylon60-architecture",
@@ -133,32 +82,6 @@
       "path": "babylon60-kernel-invariants/SKILL.md"
     },
     {
-      "name": "biographical-thermo",
-      "tier": 18500,
-      "category": "Nucleus",
-      "display_name": "Mapeo Termodinámico Biográfico e Histórico",
-      "role": "auditor",
-      "exergy_audit": {
-        "e1_silicon": 7000,
-        "e2_kolmogorov": 7000,
-        "e3_causal": 6700,
-        "ring0_bonus": 0,
-        "compiler_verified": true
-      },
-      "canonical_alias": "epistemic-biographical-thermo",
-      "scope": "workspace",
-      "description": "Analiza trayectorias vitales, historia y filosofía mediante Mapeo Estructural C5-REAL (Termodinámica Discreta).",
-      "triggers": [
-        "/biographical-thermo",
-        "análisis biográfico termodinámico",
-        "biografía termodinámica",
-        "biographical-thermo",
-        "epistemic-biographical-thermo",
-        "trayectoria termodinámica"
-      ],
-      "path": "biographical-thermo/SKILL.md"
-    },
-    {
       "name": "c5-alpha-extraction-pipeline",
       "tier": 18950,
       "category": "Operations",
@@ -199,7 +122,7 @@
       },
       "canonical_alias": "media-ui-linter",
       "scope": "workspace",
-      "description": "Revisa diseño y accesibilidad de interfaces; distingue comprobaciones léxicas parciales de verificación sobre la interfaz renderizada.",
+      "description": "Erradica el AI Slop y el pastiche estético en interfaces de usuario (WCAG AAA, escalas modulares áureas, ritmo vertical, veto al atractor grisáceo de Tailwind). Dispara con \"anti-slop ui\", \"impeccable c5\", \"linter de diseño\", \"auditoría ui\", \"pulir frontend\", \"erradicar ai slop\".",
       "triggers": [
         "/c5-anti-slop-ui",
         "anti-slop ui",
@@ -212,34 +135,6 @@
         "pulir frontend"
       ],
       "path": "c5-anti-slop-ui/SKILL.md"
-    },
-    {
-      "name": "c5-audiovisual-acreativo-sota-project",
-      "tier": 19000,
-      "category": "Multimedia & DSP",
-      "display_name": "Media Hub · Audiovisual Acreativo (Proyecto)",
-      "canonical_alias": "media-hub",
-      "role": "arquitecto",
-      "exergy_audit": {
-        "e1_silicon": 7000,
-        "e2_kolmogorov": 7000,
-        "e3_causal": 6700,
-        "ring0_bonus": 0,
-        "compiler_verified": true
-      },
-      "scope": "workspace",
-      "description": "Enruta módulos del proyecto para pipelines audiovisuales y auditoría de interfaces. Dispara con \"media-hub\", \"audiovisual project hub\", \"hub audiovisual proyecto\", \"media router proyecto\", \"audiovisual-sota\", \"anti-slop ui\".",
-      "triggers": [
-        "/c5-audiovisual-acreativo-sota-project",
-        "anti-slop ui",
-        "audiovisual project hub",
-        "audiovisual-sota",
-        "c5-audiovisual-acreativo-sota-project",
-        "hub audiovisual proyecto",
-        "media router proyecto",
-        "media-hub"
-      ],
-      "path": "c5-audiovisual-acreativo-sota-project/SKILL.md"
     },
     {
       "name": "c5-cortex-swarm-orchestrator-project",
@@ -285,7 +180,7 @@
         "compiler_verified": true
       },
       "scope": "workspace",
-      "description": "Enruta auditoría epistémica del proyecto, síntesis MDL, extracción de fuentes, biografía, simbiosis cognitiva y explicación clara. Dispara con \"epistemic-hub\", \"epistemic project hub\", \"auditoría epistémica\", \"cloud-chamber\", \"alpha extraction\", \"grill-me-v2\", \"wait-what\".",
+      "description": "Enruta auditoría epistémica del proyecto, síntesis MDL, extracción de fuentes, simbiosis cognitiva y explicación clara. Dispara con \"epistemic-hub\", \"epistemic project hub\", \"auditoría epistémica\", \"cloud-chamber\", \"alpha extraction\", \"grill-me-v2\", \"wait-what\".",
       "triggers": [
         "/c5-epistemic-thermodynamics-project",
         "alpha extraction",
@@ -412,33 +307,6 @@
       "path": "c5-ultrathink-epistemic-audit/SKILL.md"
     },
     {
-      "name": "c5-wetware-and-venture-ops-project",
-      "tier": 19200,
-      "category": "Governance",
-      "display_name": "Wetware Hub · Operaciones y Carga Cognitiva",
-      "canonical_alias": "wetware-hub",
-      "role": "arquitecto",
-      "exergy_audit": {
-        "e1_silicon": 7000,
-        "e2_kolmogorov": 7000,
-        "e3_causal": 6700,
-        "ring0_bonus": 0,
-        "compiler_verified": true
-      },
-      "scope": "workspace",
-      "description": "Enruta el módulo del proyecto para el límite de disipación y el cron adaptativo. Dispara con \"wetware project hub\", \"wetware-hub\", \"venture project hub\", \"hub wetware proyecto\", \"adaptive-cron\".",
-      "triggers": [
-        "/c5-wetware-and-venture-ops-project",
-        "adaptive-cron",
-        "c5-wetware-and-venture-ops-project",
-        "hub wetware proyecto",
-        "venture project hub",
-        "wetware project hub",
-        "wetware-hub"
-      ],
-      "path": "c5-wetware-and-venture-ops-project/SKILL.md"
-    },
-    {
       "name": "cloud-chamber",
       "tier": 20200,
       "category": "Nucleus",
@@ -465,6 +333,31 @@
       "path": "cloud-chamber/SKILL.md"
     },
     {
+      "name": "cortex-kernel",
+      "tier": 23000,
+      "category": "Kernel",
+      "display_name": "CORTEX Root Kernel",
+      "exergy_audit": {
+        "e1_silicon": 7000,
+        "e2_kolmogorov": 7000,
+        "e3_causal": 7000,
+        "ring0_bonus": 2000,
+        "compiler_verified": true
+      },
+      "canonical_alias": "kernel-root",
+      "scope": "kernel",
+      "role": "arquitecto",
+      "description": "Manifiesto de invariantes transversales del ecosistema CORTEX (árbol de roles, gobernanza declarativa y límites termodinámicos).",
+      "triggers": [
+        "/cortex-kernel",
+        "cortex kernel",
+        "cortex-kernel",
+        "kernel axiomas",
+        "kernel-root"
+      ],
+      "path": "cortex-kernel/SKILL.md"
+    },
+    {
       "name": "grill-me-v2",
       "tier": 19900,
       "category": "Governance",
@@ -483,6 +376,9 @@
       "triggers": [
         "/grill-me",
         "/grill-me-v2",
+        "10 preguntas",
+        "contrapeso epistémico",
+        "decálogo epistémico",
         "grill-me-v2",
         "interrogatorio socrático",
         "socratic audit",
@@ -721,6 +617,11 @@
     }
   ],
   "adjacency": [
+    {
+      "source": "cortex-kernel",
+      "target": "shared-manifest-kernel",
+      "relation": "enforces_hardware_invariants"
+    },
     {
       "source": "shared-manifest-kernel",
       "target": "thermo-audit",

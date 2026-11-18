@@ -9,6 +9,7 @@ import time
 import urllib.parse
 from pathlib import Path
 from types import SimpleNamespace
+from typing import Any
 
 import pytest
 
@@ -16,7 +17,7 @@ import pytest
 REPO_ROOT = Path(__file__).absolute().parent.parent
 
 
-def _load_functions(relative_path: str, names: tuple[str, ...], namespace: dict) -> dict:
+def _load_functions(relative_path: str, names: tuple[str, ...], namespace: dict[str, Any]) -> dict[str, Any]:
     """Compile real consumer bodies without module-level startup side effects."""
     source = REPO_ROOT / relative_path
     tree = ast.parse(source.read_text(encoding="utf-8"), filename=str(source))
@@ -31,7 +32,7 @@ def _load_functions(relative_path: str, names: tuple[str, ...], namespace: dict)
     return namespace
 
 
-def _write_candidate_and_stale_pack(root: Path) -> tuple[Path, dict]:
+def _write_candidate_and_stale_pack(root: Path) -> tuple[Path, dict[str, Any]]:
     path = root / "reports" / "eu_ai_act_compliance_pack.json"
     path.parent.mkdir()
     report = {"report_type": "SOURCE_CLAIMS_EXPORT", "result": "NOT_EVALUATED"}

@@ -41,7 +41,8 @@ def build(destination: Path, environment: str) -> None:
     metadata = {}
     capabilities = {}
     for scope in scopes:
-        shutil.copytree(SOURCE / scope, destination, dirs_exist_ok=True, ignore=EXCLUDE)
+        if (SOURCE / scope).is_dir():
+            shutil.copytree(SOURCE / scope, destination, dirs_exist_ok=True, ignore=EXCLUDE)
         metadata.update(catalog["scopes"][scope])
         capabilities.update(catalog["capabilities"][scope])
     shutil.copy2(SOURCE / "router.py", destination / "_skill_router.py")

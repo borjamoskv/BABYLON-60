@@ -25,7 +25,6 @@ from agents_archi import (
     Proposition,
     AOFValidator,
     AttestationEnvelope,
-    KimiClient,
     OpenRouterClient,
     OpenRouterRoleTier,
     QuotaBudgetTracker,
@@ -48,14 +47,27 @@ from agents_archi import (
 
 def test_swarm_config_pxs_and_routing() -> None:
     """Validates PxS ARM64 scaling and dynamic backend URLs."""
-    cfg = SwarmConfig(p_cores=8, s_threads=2, backend=InferenceBackend.MOONSHOT_REMOTE)
+    cfg = SwarmConfig(p_cores=8, s_threads=2, backend=InferenceBackend.OPENROUTER_REMOTE)
     assert cfg.max_concurrent == 16
-    assert "moonshot.cn" in cfg.api_url
+    assert "openrouter.ai" in cfg.api_url
 
     cfg_local = SwarmConfig(p_cores=4, s_threads=1, backend=InferenceBackend.LOCAL_VLLM)
     assert cfg_local.max_concurrent == 4
     assert "localhost:8000" in cfg_local.api_url
     assert cfg_local.api_key == ""
+
+
+def test_swarm_config_default_backend_is_local(monkeypatch: pytest.MonkeyPatch) -> None:
+    """An unconfigured swarm targets the local endpoint and holds no remote credential."""
+    monkeypatch.setenv("OPENROUTER_API_KEY", "fixture-unselected-openrouter")
+    cfg = SwarmConfig()
+    assert cfg.backend is InferenceBackend.LOCAL_VLLM
+    assert cfg.api_url == cfg.local_url
+    assert cfg.api_key == ""
+    assert cfg.openrouter_key is None
+    assert "fixture-unselected-openrouter" not in repr(cfg)
+    assert not hasattr(InferenceBackend, "MOONSHOT_REMOTE")
+    assert SwarmConfig(backend=InferenceBackend.OPENROUTER_REMOTE).api_key == "fixture-unselected-openrouter"
 
 
 @pytest.mark.asyncio
@@ -177,13 +189,7 @@ def test_attestation_envelope_integrity_and_tamper_detection() -> None:
 
 
 def test_client_adapters_safeguard() -> None:
-    """Validates unconfigured air-gap safeguards for Kimi and OpenRouter clients."""
-    kimi = KimiClient(api_key="")
-    assert not kimi.is_configured()
-    res = kimi.query("test query")
-    assert res["success"] is False
-    assert "Missing KIMI_API_KEY" in res["error"]
-
+    """Validates unconfigured air-gap safeguards for the OpenRouter client."""
     openrouter = OpenRouterClient(api_key="")
     assert not openrouter.is_configured()
     res2 = openrouter.query("test query")

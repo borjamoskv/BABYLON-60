@@ -264,7 +264,9 @@ pub unsafe extern "C" fn b60_eval_agent_intent(
         hasher.update(agent_bytes);
         hasher.update(budget.to_le_bytes());
         let hex_hash = format!("{:064x}", hasher.finalize());
-        let c_str = std::ffi::CString::new(hex_hash).unwrap();
+        let Ok(c_str) = std::ffi::CString::new(hex_hash) else {
+            return -1;
+        };
         let bytes = c_str.as_bytes_with_nul();
         unsafe {
             std::ptr::copy_nonoverlapping(
@@ -335,8 +337,14 @@ pub unsafe extern "C" fn b60_dag_validate(
         for i in 0..num_edges {
             let u = e_from[i];
             let v = e_to[i];
-            adj.get_mut(&u).unwrap().push(v);
-            *in_degree.get_mut(&v).unwrap() += 1;
+            let Some(neighbors) = adj.get_mut(&u) else {
+                return -1;
+            };
+            neighbors.push(v);
+            let Some(deg) = in_degree.get_mut(&v) else {
+                return -1;
+            };
+            *deg += 1;
         }
 
         let mut queue: std::collections::VecDeque<u32> = in_degree
@@ -414,4 +422,97 @@ pub unsafe extern "C" fn b60_dag_validate(
 #[no_mangle]
 pub extern "C" fn b60_dec_verify_mimetic(n: usize) -> i32 {
     crate::dec::verify_mimetic_nilpotency(n)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::ffi::CString;
+
+    #[test]
+    fn eval_agent_intent_handles_null_and_emits_sha256_root_without_panic() {
+        let agent = CString::new("agent-alpha").expect("valid cstr");
+        let tool = CString::new("ledger.read").expect("valid cstr");
+        let mut buf = [0 as c_char; 65];
+        let rc_null = unsafe {
+            b60_eval_agent_intent(
+                std::ptr::null(),
+                tool.as_ptr(),
+                10,
+                10,
+                100,
+                buf.as_mut_ptr(),
+                buf.len(),
+            )
+        };
+        assert_eq!(rc_null, -1);
+
+        let rc_ok = unsafe {
+            b60_eval_agent_intent(
+                agent.as_ptr(),
+                tool.as_ptr(),
+                10,
+                10,
+                100,
+                buf.as_mut_ptr(),
+                buf.len(),
+            )
+        };
+        assert_eq!(rc_ok, 0);
+        let emitted = unsafe { CStr::from_ptr(buf.as_ptr()) }
+            .to_str()
+            .expect("utf8 hex");
+        assert_eq!(emitted.len(), 64);
+    }
+
+    #[test]
+    fn dag_validate_accepts_acyclic_lamport_and_rejects_cycles_and_bad_edges() {
+        let ids = [1_u32, 2_u32, 3_u32];
+        let ts = [10_u64, 20_u64, 30_u64];
+        let from = [1_u32, 2_u32];
+        let to = [2_u32, 3_u32];
+        let mut stages = 0_usize;
+        let rc = unsafe {
+            b60_dag_validate(
+                ids.len(),
+                ids.as_ptr(),
+                ts.as_ptr(),
+                from.len(),
+                from.as_ptr(),
+                to.as_ptr(),
+                &mut stages,
+            )
+        };
+        assert_eq!(rc, 0);
+        assert_eq!(stages, 3);
+
+        let cyc_from = [1_u32, 2_u32];
+        let cyc_to = [2_u32, 1_u32];
+        let rc_cyc = unsafe {
+            b60_dag_validate(
+                2,
+                ids.as_ptr(),
+                ts.as_ptr(),
+                2,
+                cyc_from.as_ptr(),
+                cyc_to.as_ptr(),
+                &mut stages,
+            )
+        };
+        assert_eq!(rc_cyc, 1);
+
+        let ghost_to = [999_u32];
+        let rc_ghost = unsafe {
+            b60_dag_validate(
+                2,
+                ids.as_ptr(),
+                ts.as_ptr(),
+                1,
+                from.as_ptr(),
+                ghost_to.as_ptr(),
+                &mut stages,
+            )
+        };
+        assert_eq!(rc_ghost, -1);
+    }
 }

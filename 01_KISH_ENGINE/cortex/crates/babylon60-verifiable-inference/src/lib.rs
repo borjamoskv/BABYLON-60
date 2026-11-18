@@ -18,9 +18,9 @@ include!(concat!(env!("OUT_DIR"), "/inference_circuit.rs"));
 /// Llave de Verificación Determinista. Se genera de manera perezosa (Lazy)
 /// usando una semilla termodinámica fija para asegurar que el Prover y Verifier
 /// deriven el mismo Setup sin necesidad de serializar llaves masivas.
-static VK: OnceLock<VerifyingKey<Bls12_381>> = OnceLock::new();
+static VK: OnceLock<Option<VerifyingKey<Bls12_381>>> = OnceLock::new();
 
-fn get_verifying_key() -> &'static VerifyingKey<Bls12_381> {
+fn get_verifying_key() -> Option<&'static VerifyingKey<Bls12_381>> {
     VK.get_or_init(|| {
         let mut rng = ChaCha20Rng::seed_from_u64(0xC5C5C5C5C5C5C5C5u64); // Invariante Determinista
         let empty_circuit = InferenceConstraint::<BlsFr> {
@@ -28,10 +28,11 @@ fn get_verifying_key() -> &'static VerifyingKey<Bls12_381> {
             nonce: None,
             expected_hash: None,
         };
-        let (_, vk) = Groth16::<Bls12_381>::setup(empty_circuit, &mut rng)
-            .expect("Fallo fatal en el Trusted Setup determinista");
-        vk
+        Groth16::<Bls12_381>::setup(empty_circuit, &mut rng)
+            .ok()
+            .map(|(_, vk)| vk)
     })
+    .as_ref()
 }
 
 /// Convierte un string hexadecimal a un elemento del campo Fr (BLS12-381)
@@ -91,9 +92,31 @@ pub extern "C" fn verify_inference_payload(
         // public expected_hash: Field
         let public_inputs = vec![nonce_fr, expected_hash_fr];
         
-        let vk = get_verifying_key();
+        let Some(vk) = get_verifying_key() else {
+            return false;
+        };
         return Groth16::<Bls12_381>::verify(vk, &public_inputs, &proof).unwrap_or(false);
     }
 
     false
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::ffi::CString;
+
+    #[test]
+    fn deterministic_verifying_key_initializes_and_ffi_rejects_invalid_inputs_without_panic() {
+        assert!(get_verifying_key().is_some());
+        assert!(!verify_inference_payload(std::ptr::null(), 1, std::ptr::null()));
+
+        let bad_payload = CString::new("deadbeef").expect("cstr");
+        let bad_proof = CString::new("00").expect("cstr");
+        assert!(!verify_inference_payload(
+            bad_payload.as_ptr(),
+            42,
+            bad_proof.as_ptr(),
+        ));
+    }
 }

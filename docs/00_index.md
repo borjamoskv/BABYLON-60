@@ -60,7 +60,7 @@
 | [`guide_legaltech_eu_ai_act.md`](03_guides/guide_legaltech_eu_ai_act.md) | `03_guides/guide_legaltech_eu_ai_act.md` | Guía de Auditoría LegalTech & Cumplimiento Regulador EU AI Act |
 | [`guide_repository_source_of_truth.md`](03_guides/guide_repository_source_of_truth.md) | `03_guides/guide_repository_source_of_truth.md` | Fuente de Verdad Canónica del Repositorio |
 | [`guide_skill_arsenal_taxonomy.md`](03_guides/guide_skill_arsenal_taxonomy.md) | `03_guides/guide_skill_arsenal_taxonomy.md` | MOSKV-1 — TAXONOMÍA ARSENAL DE SKILLS POR EXERGÍA (v26.200) |
-| [`guide_swarm_pxs_orchestration.md`](03_guides/guide_swarm_pxs_orchestration.md) | `03_guides/guide_swarm_pxs_orchestration.md` | Guía de Orquestación de Enjambres Multi-Agente Kimi K3 ($P \times S$) |
+| [`guide_swarm_pxs_orchestration.md`](03_guides/guide_swarm_pxs_orchestration.md) | `03_guides/guide_swarm_pxs_orchestration.md` | Guía de Orquestación de Enjambres Multi-Agente ($P \times S$) |
 | [`tutorial_hello_causal.md`](03_guides/tutorial_hello_causal.md) | `03_guides/tutorial_hello_causal.md` | Tutorial: Hola Mundo Causal en BABYLON-60 |
 
 ### 🔬 Deep Research, SOTA & Philosophical Manifestos

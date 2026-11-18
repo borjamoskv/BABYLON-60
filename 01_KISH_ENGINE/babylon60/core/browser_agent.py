@@ -47,8 +47,8 @@ class BrowserResearchAgent:
         """Emits an immutable BFT Attestation into the ledger (INV_INGESTA_08)."""
         url_hash = hashlib.sha256(url.encode("utf-8")).hexdigest()
         payload_sha256 = hashlib.sha256(payload.encode("utf-8")).hexdigest()
-        attestation_id = hashlib.sha256(f"{url_hash}:{payload_sha256}:{time.time()}".encode("utf-8")).hexdigest()
         lamport_t = self._next_lamport_t()
+        attestation_id = hashlib.sha256(f"{url_hash}:{payload_sha256}:{lamport_t}".encode("utf-8")).hexdigest()
         now = int(time.time())
 
         self.cache.conn.execute(

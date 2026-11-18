@@ -4,6 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 import shutil
+import zipfile
 
 import pytest
 
@@ -138,3 +139,131 @@ def test_v5_manifest_rejects_version_drift_before_writes(evidence_root: Path) ->
     with pytest.raises(ValueError, match="Version drift"):
         compiler.emit_claims_artifacts(compiler.compile_claims_evidence())
     assert not (evidence_root / "evidence.json").exists()
+
+
+def test_emit_claims_artifacts_records_bundle_zip_inventory_and_rejects_symlinks(
+    evidence_root: Path, tmp_path: Path
+) -> None:
+    bundle_zip = tmp_path / "bundle.zip"
+    readme_bytes = b"# Babylon60 Bundle\n"
+    with zipfile.ZipFile(bundle_zip, "w") as zf:
+        zf.writestr("README.md", readme_bytes)
+        zf.writestr("RELEASE_MANIFEST.json", b'{"stale": true}\n')
+
+    manifest_path = compiler.emit_claims_artifacts(compiler.compile_claims_evidence(), bundle_path=bundle_zip)[2]
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    expected_digest = hashlib.sha256(b"README.md\x00" + len(readme_bytes).to_bytes(8, "big") + readme_bytes).hexdigest()
+    assert manifest["release_bundle"] == {
+        "name": "bundle.zip",
+        "sha256": hashlib.sha256(bundle_zip.read_bytes()).hexdigest(),
+        "size_bytes": len(bundle_zip.read_bytes()),
+        "tree_digest": expected_digest,
+        "source_files": ["README.md", "RELEASE_MANIFEST.json"],
+    }
+
+    bad_zip = tmp_path / "symlink_bundle.zip"
+    with zipfile.ZipFile(bad_zip, "w") as zf:
+        info = zipfile.ZipInfo("bad_link")
+        info.external_attr = 0o120777 << 16
+        zf.writestr(info, "/etc/passwd")
+    with pytest.raises(ValueError, match="Symlink entry forbidden"):
+        compiler.emit_claims_artifacts(compiler.compile_claims_evidence(), bundle_path=bad_zip)
+
+
+def test_emit_claims_artifacts_reads_packager_list_files_when_present(evidence_root: Path) -> None:
+    packager = evidence_root / "scripts" / "package_release.sh"
+    packager.write_text("#!/bin/sh\necho CLAIMS.toml\necho RELEASE_MANIFEST.json\n", encoding="utf-8")
+    manifest_path = compiler.emit_claims_artifacts(compiler.compile_claims_evidence())[2]
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    claims_bytes = (evidence_root / "CLAIMS.toml").read_bytes()
+    expected_digest = hashlib.sha256(
+        b"CLAIMS.toml\x00" + len(claims_bytes).to_bytes(8, "big") + claims_bytes
+    ).hexdigest()
+    assert manifest["release_bundle"] == {
+        "name": "Babylon60-v5.0.0-terminal-mcp.zip",
+        "tree_digest": expected_digest,
+        "source_files": ["CLAIMS.toml", "RELEASE_MANIFEST.json"],
+    }
+
+
+def _configure_invariant_fixture(evidence_root: Path, *, state: str = "candidate") -> None:
+    claims_text = (
+        '[claim.safety]\nstatement = "denies replay"\nstatus = "verified_local"\n\n'
+        "[invariants.mcp_lifecycle_confinement]\n"
+        'claim_id = "CLAIM-MCP-006"\n'
+        'status = "NO_VERIFICADO"\n'
+        'summary = "Objetivo acotado sin recibo"\n'
+        "required_for_release = true\n"
+        'evidence_level = "L3_ISOLATION"\n'
+        'component = "00_ABZU_KERNEL"\n'
+    )
+    (evidence_root / "CLAIMS.toml").write_text(claims_text, encoding="utf-8")
+    (evidence_root / "babylon.toml").write_text(
+        f'[release]\nversion = "5.0.0"\nstate = "{state}"\n\n'
+        "[release.gate_attestations.mcp_confinement]\n"
+        'claim_id = "CLAIM-MCP-006"\n'
+        'status = "NO_VERIFICADO"\n'
+        "token_replay_window_seconds = 300\n",
+        encoding="utf-8",
+    )
+    sitrep_path = evidence_root / "scripts/c5_quality_gates/claims_sitrep.json"
+    report = json.loads(sitrep_path.read_text(encoding="utf-8"))
+    report["claims_manifest_digest"] = hashlib.sha256(claims_text.encode("utf-8")).hexdigest()
+    report["invariant_alignment_errors"] = []
+    report["invariants"] = [
+        {
+            "key": "mcp_lifecycle_confinement",
+            "claim_id": "CLAIM-MCP-006",
+            "status": "NO_VERIFICADO",
+            "evidence_level": "L3_ISOLATION",
+            "component": "00_ABZU_KERNEL",
+            "required_for_release": True,
+            "summary": "Objetivo acotado sin recibo",
+            "gate_aligned": True,
+        }
+    ]
+    sitrep_path.write_text(json.dumps(report), encoding="utf-8")
+
+
+def test_compile_rejects_invariant_alignment_errors_in_sitrep(evidence_root: Path) -> None:
+    sitrep_path = evidence_root / "scripts/c5_quality_gates/claims_sitrep.json"
+    report = json.loads(sitrep_path.read_text(encoding="utf-8"))
+    report["invariant_alignment_errors"] = [
+        "babylon.toml gate_attestations.mcp_confinement.effect_tx_quarantine='ACTIVE' sobre-reivindica"
+    ]
+    sitrep_path.write_text(json.dumps(report), encoding="utf-8")
+
+    with pytest.raises(ValueError, match="invariant alignment errors"):
+        compiler.compile_claims_evidence()
+
+
+def test_compile_rejects_missing_or_unaligned_invariants_in_sitrep(evidence_root: Path) -> None:
+    _configure_invariant_fixture(evidence_root, state="candidate")
+    sitrep_path = evidence_root / "scripts/c5_quality_gates/claims_sitrep.json"
+
+    # 1. Missing invariants array when CLAIMS.toml declares [invariants.*]
+    report = json.loads(sitrep_path.read_text(encoding="utf-8"))
+    del report["invariants"]
+    sitrep_path.write_text(json.dumps(report), encoding="utf-8")
+    with pytest.raises(ValueError, match="Invariant evidence is missing"):
+        compiler.compile_claims_evidence()
+
+    # 2. Unaligned invariant record (gate_aligned=False)
+    report["invariants"] = [{"key": "mcp_lifecycle_confinement", "gate_aligned": False}]
+    sitrep_path.write_text(json.dumps(report), encoding="utf-8")
+    with pytest.raises(ValueError, match="unaligned \\[invariants\\.\\*\\]"):
+        compiler.compile_claims_evidence()
+
+
+def test_compile_and_emit_reject_stable_state_when_required_invariant_unverified(evidence_root: Path) -> None:
+    _configure_invariant_fixture(evidence_root, state="candidate")
+    evidence = compiler.compile_claims_evidence()
+    _, _, manifest_path = compiler.emit_claims_artifacts(evidence)
+    assert json.loads(manifest_path.read_text(encoding="utf-8"))["state"] == "candidate"
+
+    # Flipping babylon.toml to stable-terminal-mcp must fail closed in both compile and emit
+    _configure_invariant_fixture(evidence_root, state="stable-terminal-mcp")
+    with pytest.raises(ValueError, match="release\\.state='stable-terminal-mcp'"):
+        compiler.compile_claims_evidence()
+    with pytest.raises(ValueError, match="release\\.state='stable-terminal-mcp'"):
+        compiler.emit_claims_artifacts(evidence)

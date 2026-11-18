@@ -3,6 +3,7 @@
 use std::sync::Arc;
 use tokio::sync::Mutex;
 use axum::{
+    http::StatusCode,
     extract::{
         ws::{Message, WebSocket, WebSocketUpgrade},
         State,
@@ -114,125 +115,28 @@ async fn models_handler() -> impl IntoResponse {
     })
 }
 
-/// Handler de inferencia compatible con OpenAI (`/v1/chat/completions`) sellado por BABYLON-60.
+/// Handler compatible con OpenAI (`/v1/chat/completions`).
+///
+/// C0526: este crate no contiene motor de inferencia. Mientras no exista uno, el endpoint
+/// responde 503 con un error explícito. No se sella recibo ni se cuentan tokens, porque no hay
+/// inferencia que atestar, y nunca se devuelve texto prefabricado atribuido a un modelo.
 async fn chat_completions_handler(
-    State(state): State<Arc<AppState>>,
+    State(_state): State<Arc<AppState>>,
     Json(req): Json<ChatCompletionRequest>,
-) -> impl IntoResponse {
-    let last_prompt = req.messages.last().map(|m| m.content.as_str()).unwrap_or("");
-
-    // 1. Adquisición de página alineada de 16 KB en UMA (RFO = 0) y estadiaje de entrada
-    let uma_ptr_addr = {
-        let mut pool = state.uma_pool.lock().await;
-        let mut buf = pool.acquire().expect("Fallo adquiriendo página UMA de 16 KB");
-        let bytes = last_prompt.as_bytes();
-        let copy_len = bytes.len().min(buf.len());
-        buf.as_mut_slice()[..copy_len].copy_from_slice(&bytes[..copy_len]);
-        let addr = buf.as_ptr() as usize;
-        pool.release(buf);
-        addr
-    };
-
-    // 2. Evaluación en Anillo-0 del Causal Gate y publicación en SharedManifest (64B)
-    let receipt = {
-        let mut gate = state.gate.lock().await;
-        gate.evaluate_and_seal(&req.model, last_prompt).unwrap_or_else(|e| {
-            panic!("Fallo en la evaluación del Causal Gate: {}", e);
-        })
-    };
-
-    let gguf_tensors = state.gguf_model.as_ref().map(|m| m.tensor_count).unwrap_or(0);
-    let summary_prompt: String = last_prompt.chars().take(120).collect();
-    let generated_response = match req.model.as_str() {
-        "deepseek-r1-distill-qwen-32b" => {
-            format!(
-                "<think>\n\
-                [ANÁLISIS DEDUCTIVO EN ANILLO-0 · SUSTRATO APPLE SILICON METAL · UMA 0x{:X}]\n\
-                1. Delimitación de hechos y pretensión: Se audita la consulta bajo el ordenamiento jurídico español y europeo.\n\
-                2. Marco normativo aplicable: TRLC (reforma Ley 16/2022), Código Civil (Arts. 1101, 1255), RGPD y EU AI Act (Arts. 9-15).\n\
-                3. Ponderación de riesgos y contradicciones: Confinamiento estricto en circuito cerrado local (127.0.0.1, GGUF tensors={}).\n\
-                4. Dictamen resolutivo emitido con certeza probatoria en logical_tick={}.\n\
-                </think>\n\n\
-                ## DICTAMEN JURÍDICO ATESTIGUADO (ERIDU-INFER / BABYLON-60)\n\n\
-                **Dictamen emitido para:** Despacho Jurídico Soberano\n\
-                **Sello de Conformidad Criptográfica:** `{}`\n\
-                **Registro Inmutable WORM:** `{}`\n\n\
-                ### 1. Fundamentos de Derecho\n\
-                En relación con la consulta formulada («{}...»):\n\n\
-                - **Responsabilidad Concursal y Órganos de Gobierno:** Conforme al Texto Refundido de la Ley Concursal (reforma Ley 16/2022), la responsabilidad de los administradores societarios se rige por el canon objetivo del Art. 226 y ss. TRLC, exigiéndose acreditar el perjuicio patrimonial efectivo para la masa.\n\
-                - **Periodo Sospechoso y Rescisión:** Las acciones rescisorias concursales permiten reintegrar a la masa activa los actos perjudiciales realizados en los dos años anteriores a la declaración, sin requerir dolo ni intención fraudulenta.\n\
-                - **Gobernanza y Confinamiento de Datos:** El procesamiento se ha ejecutado íntegramente en memoria unificada local (Zero Data Leakage), garantizando el secreto profesional y el estricto cumplimiento del deber de confidencialidad.\n\n\
-                ### 2. Dictamen Operativo y Recomendaciones\n\
-                Se aconseja consolidar la evidencia documental mediante atestación criptográfica previa y protocolizar los acuerdos sociales en sede notarial para mitigar contingencias frente a la administración concursal.\n\n\
-                ---\n\
-                *Dictamen procesado en local bajo supervisión humana (Art. 14 EU AI Act).* ",
-                uma_ptr_addr, gguf_tensors, receipt.logical_tick, receipt.attestation_seal, receipt.prompt_hash, summary_prompt
-            )
-        }
-        "llama-3.3-70b-instruct" => {
-            format!(
-                "## ALEGATO / REDACCIÓN JURÍDICA FORMAL (LLAMA 3.3 70B INSTRUCT)\n\n\
-                **Referencia de Atestación:** `{}`\n\
-                **Hash de Entrada WORM:** `{}`\n\n\
-                **A LA SALA / AL JUZGADO DE LO MERCANTIL:**\n\n\
-                Que por medio del presente escrito, y en contestación a los requerimientos notificados («{}...»):\n\n\
-                **PRIMERO.-** De la observancia de la legalidad ordinaria y los principios rectores del derecho mercantil y procesal.\n\
-                **SEGUNDO.-** De la inexistencia de daño o quebranto patrimonial imputable a la actuación de nuestro representado.\n\
-                **TERCERO.-** Conclusión: Procede acordar el archivo y sobreseimiento de las actuaciones incoadas.\n\n\
-                ---\n\
-                *Atestación emitida por ERIDU-INFER · Conforme con Arts. 12-14 EU AI Act.*",
-                receipt.attestation_seal, receipt.prompt_hash, summary_prompt
-            )
-        }
-        _ => {
-            format!(
-                "[BABYLON-60 / ERIDU-INFER · ATTESTED IN SILICON · SEAL: {}]\n\n\
-                Procesamiento local completado sobre el sustrato Apple Silicon Metal.\n\
-                Modelo Activo: {}\n\
-                Hash Causal WORM: {}\n\n\
-                Consulta: «{}...»\n\n\
-                Resultado: Análisis ejecutado con éxito bajo el Causal Gate sin fuga externa de datos.",
-                receipt.attestation_seal, receipt.model_id, receipt.prompt_hash, summary_prompt
-            )
-        }
-    };
-
-    let prompt_tokens = (last_prompt.len() / 4) as u32;
-    let completion_tokens = (generated_response.len() / 4) as u32;
-
-    // 3. Update all telemetry fields under a single exclusive guard.
-    state.telemetry.update(|telemetry| {
-        telemetry.tokens_generated = telemetry.tokens_generated.saturating_add(completion_tokens as u64);
-        telemetry.prompt_tokens = telemetry.prompt_tokens.saturating_add(prompt_tokens as u64);
-        telemetry.last_latency_micros = receipt.logical_tick;
-        telemetry.active_context_length = prompt_tokens.saturating_add(completion_tokens);
-        telemetry.is_generating = false;
-    });
-
-    Json(ChatCompletionResponse {
-        id: format!("chatcmpl-{}", receipt.attestation_seal),
-        object: "chat.completion".to_string(),
-        created: Utc::now().timestamp(),
-        model: req.model,
-        choices: vec![ChatChoice {
-            index: 0,
-            message: ChatMessage {
-                role: "assistant".to_string(),
-                content: generated_response,
-                name: None,
-            },
-            finish_reason: "stop".to_string(),
-        }],
-        usage: UsageInfo {
-            prompt_tokens,
-            completion_tokens,
-            total_tokens: prompt_tokens + completion_tokens,
-        },
-        babylon_attestation_hash: receipt.prompt_hash,
-    })
+) -> axum::response::Response {
+    (
+        StatusCode::SERVICE_UNAVAILABLE,
+        Json(serde_json::json!({
+            "error": {
+                "type": "inference_unavailable",
+                "message": "No hay motor de inferencia conectado; no se generó ninguna respuesta.",
+                "model": req.model
+            }
+        })),
+    )
+        .into_response()
 }
 
-/// WebSocket handler para compatibilidad wire-format con `lms` CLI.
 async fn ws_handler(
     ws: WebSocketUpgrade,
     State(_state): State<Arc<AppState>>,
@@ -281,4 +185,34 @@ pub async fn bind_listener() -> (TcpListener, u16) {
         .await
         .expect("No se pudo enlazar ni a los puertos candidatos ni a 1234");
     (fallback, 1234)
+}
+
+#[cfg(test)]
+mod c0526_tests {
+    use super::*;
+    use axum::http::StatusCode;
+
+    #[tokio::test]
+    async fn completion_without_inference_backend_is_unavailable_not_canned_text() {
+        for model in ["deepseek-r1-distill-qwen-32b", "llama-3.3-70b-instruct", "otro-modelo"] {
+            let state = Arc::new(AppState::new().unwrap());
+            let req = ChatCompletionRequest {
+                model: model.to_string(),
+                messages: vec![ChatMessage {
+                    role: "user".to_string(),
+                    content: "¿Responde un modelo?".to_string(),
+                    name: None,
+                }],
+                stream: false,
+                temperature: None,
+                max_tokens: None,
+            };
+            let response = chat_completions_handler(State(state), Json(req)).await.into_response();
+            assert_eq!(
+                response.status(),
+                StatusCode::SERVICE_UNAVAILABLE,
+                "C0526: {model} devolvió una completion sin inferencia observada"
+            );
+        }
+    }
 }

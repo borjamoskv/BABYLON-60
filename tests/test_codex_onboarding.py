@@ -486,7 +486,35 @@ def test_doctor_keeps_behavior_unverified_and_uses_expected_executable(
     assert ledger.read_bytes() == b"production data"
 
 
-def test_probe_uses_protocol_sequence_and_temporary_paths(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+@pytest.mark.parametrize(
+    ("overrides", "expected_error"),
+    [
+        pytest.param({}, None, id="valid"),
+        pytest.param(
+            {"initialize": {"result": {"protocolVersion": "unsupported"}}},
+            "versión MCP",
+            id="unsupported-protocol",
+        ),
+        pytest.param(
+            {"initialize": {"result": {"protocolVersion": None}}},
+            "versión MCP",
+            id="missing-protocol",
+        ),
+        pytest.param({"initialize": {"id": True}}, "identificador", id="boolean-id"),
+        pytest.param({"tools/list": {"id": 2.0}}, "identificador", id="floating-id"),
+        pytest.param({"tools/list": {"result": {"tools": [None]}}}, "herramientas", id="null-tool"),
+        pytest.param({"tools/list": {"result": {"tools": [{}]}}}, "herramientas", id="unnamed-tool"),
+        pytest.param({"tools/list": {"result": {"tools": [{"name": ""}]}}}, "herramientas", id="empty-tool-name"),
+        pytest.param({"tools/list": {"result": {"tools": [{"name": "   "}]}}}, "herramientas", id="blank-tool-name"),
+        pytest.param({"tools/list": {"result": {"tools": [{"name": 42}]}}}, "herramientas", id="numeric-tool-name"),
+    ],
+)
+def test_probe_uses_protocol_sequence_and_temporary_paths(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    overrides: dict[str, object],
+    expected_error: str | None,
+) -> None:
     """A tiny protocol peer checks initialized before tools and temporary writes."""
     script = tmp_path / "peer.py"
     audit = tmp_path / "probe-audit.json"
@@ -494,6 +522,7 @@ def test_probe_uses_protocol_sequence_and_temporary_paths(tmp_path: Path, monkey
         "import json, os, sys\nfrom pathlib import Path\n"
         f"expected_instructions = {load_mcp_instructions()!r}\n"
         f"expected_guide = {load_presentation_guide()!r}\n"
+        f"overrides = {overrides!r}\n"
         "args = sys.argv[1:]\n"
         f"Path({str(audit)!r}).write_text(json.dumps({{'cwd': os.getcwd(), 'home': os.environ['BABYLON_HOME'], 'gate': os.environ['BABYLON_CAUSAL_GATE_DB'], 'ledger': args[args.index('--ledger') + 1], 'pythonpath': os.environ.get('PYTHONPATH')}}))\n"
         "initialized = False\n"
@@ -503,10 +532,19 @@ def test_probe_uses_protocol_sequence_and_temporary_paths(tmp_path: Path, monkey
         " elif method == 'notifications/initialized': initialized = True; continue\n"
         " elif method == 'tools/list':\n  assert initialized\n  result = {'tools': [{'name': 'read'}]}\n"
         " elif method == 'resources/read': result = {'contents': [{'uri': request['params']['uri'], 'text': expected_guide}]}\n"
-        " print(json.dumps({'jsonrpc': '2.0', 'id': request['id'], 'result': result}), flush=True)\n",
+        " response = {'jsonrpc': '2.0', 'id': request['id'], 'result': result}\n"
+        " for key, value in overrides.get(method, {}).items():\n"
+        "  if key == 'result':\n"
+        "   for field, replacement in value.items():\n"
+        "    if replacement is None: result.pop(field, None)\n"
+        "    else: result[field] = replacement\n"
+        "  else: response[key] = value\n"
+        " print(json.dumps({'jsonrpc': '2.0', 'method': 'notifications/progress'}), flush=True)\n"
+        " print(json.dumps(response), flush=True)\n",
         encoding="utf-8",
     )
     real_popen = subprocess.Popen
+    peers: list[subprocess.Popen[bytes]] = []
 
     def peer(
         command: list[str],
@@ -518,7 +556,7 @@ def test_probe_uses_protocol_sequence_and_temporary_paths(tmp_path: Path, monkey
         env: dict[str, str],
     ) -> subprocess.Popen[bytes]:
         assert command[1:3] == ["-m", "babylon60.mcp.cortex_mcp_server"]
-        return real_popen(
+        process = real_popen(
             [command[0], str(script), *command[3:]],
             stdin=stdin,
             stdout=stdout,
@@ -526,11 +564,21 @@ def test_probe_uses_protocol_sequence_and_temporary_paths(tmp_path: Path, monkey
             cwd=cwd,
             env=env,
         )
+        peers.append(process)
+        return process
 
     monkeypatch.setattr(subprocess, "Popen", peer)
     monkeypatch.setenv("PYTHONPATH", "must-not-propagate")
-    details = onboarding._probe(onboarding._transport(tmp_path / "productive"))
-    assert details["isolated"] is True
+    transport = onboarding._transport(tmp_path / "productive")
+    if expected_error is None:
+        details = onboarding._probe(transport)
+        assert details["isolated"] is True
+        assert details["protocol"] == "2024-11-05"
+        assert details["tools"] == 1
+    else:
+        with pytest.raises(onboarding._IntegrationError, match=expected_error):
+            onboarding._probe(transport)
+    assert len(peers) == 1 and peers[0].poll() is not None
     observation = json.loads(audit.read_text())
     assert observation["pythonpath"] is None
     directory = Path(observation["ledger"]).parent

@@ -33,8 +33,17 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(REPO_ROOT / "01_KISH_ENGINE"))
+REPO_ROOT = Path(__file__).absolute().parents[2]
+
+
+def _ensure_confined_to_repo(path: Path, root: Path = REPO_ROOT) -> Path:
+    resolved = path.resolve()
+    if not resolved.is_relative_to(root.resolve()):
+        raise ValueError(f"Unconfined path outside REPO_ROOT: {path}")
+    return resolved
+
+
+sys.path.insert(0, str(_ensure_confined_to_repo(REPO_ROOT / "01_KISH_ENGINE")))
 
 from babylon60.bft.cortex_persist_ledger import CortexEvent, CortexPersistLedger  # noqa: E402
 
@@ -464,10 +473,10 @@ def main() -> None:
     print("└──────────────────────────────────────────────────────")
 
     # Persistir sitrep JSON
-    output_path = REPO_ROOT / "scripts/c5_quality_gates/swarm_100_sitrep.json"
+    output_path = _ensure_confined_to_repo(REPO_ROOT / "scripts/c5_quality_gates/swarm_100_sitrep.json")
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(sitrep, f, indent=2, ensure_ascii=False)
-    print(f"\n[✓] Sitrep formal exportado a: {output_path.relative_to(REPO_ROOT)}")
+    print(f"\n[✓] Sitrep formal exportado a: {output_path.relative_to(REPO_ROOT.resolve())}")
 
     # Veredicto de salida
     if (

@@ -4,9 +4,53 @@ use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 use std::fs::{self, OpenOptions};
 use std::io::{BufRead, BufReader, Write};
+use std::sync::Mutex;
 use std::time::{SystemTime, UNIX_EPOCH};
 
 use crate::env;
+
+static LEDGER_MUTEX: Mutex<()> = Mutex::new(());
+
+struct FileLockGuard {
+    #[cfg(unix)]
+    file: fs::File,
+}
+
+impl FileLockGuard {
+    fn acquire() -> Result<Self, String> {
+        env::ensure_dirs().map_err(|e| format!("Failed to create directories: {}", e))?;
+        #[cfg(unix)]
+        {
+            use std::os::unix::io::AsRawFd;
+            let lock_path = env::keys_dir().join("ledger.lock");
+            let file = OpenOptions::new()
+                .create(true)
+                .read(true)
+                .write(true)
+                .open(&lock_path)
+                .map_err(|e| format!("Failed to open ledger lockfile: {}", e))?;
+            let rc = unsafe { libc::flock(file.as_raw_fd(), libc::LOCK_EX) };
+            if rc != 0 {
+                return Err("Failed to acquire exclusive flock on ledger.lock".to_string());
+            }
+            Ok(Self { file })
+        }
+        #[cfg(not(unix))]
+        {
+            Ok(Self {})
+        }
+    }
+}
+
+#[cfg(unix)]
+impl Drop for FileLockGuard {
+    fn drop(&mut self) {
+        use std::os::unix::io::AsRawFd;
+        unsafe {
+            let _ = libc::flock(self.file.as_raw_fd(), libc::LOCK_UN);
+        }
+    }
+}
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct Block {
@@ -64,7 +108,28 @@ pub fn get_or_create_node_keys() -> Result<(SigningKey, VerifyingKey), String> {
     let sk_hex = hex::encode(sk.to_bytes());
     let vk_hex = hex::encode(vk.to_bytes());
 
-    fs::write(&key_path, sk_hex).map_err(|e| format!("Failed to write node.key: {}", e))?;
+    #[cfg(unix)]
+    {
+        use std::os::unix::fs::{OpenOptionsExt, PermissionsExt};
+        let mut key_file = OpenOptions::new()
+            .write(true)
+            .create(true)
+            .truncate(true)
+            .mode(0o600)
+            .open(&key_path)
+            .map_err(|e| format!("Failed to open node.key: {}", e))?;
+        key_file
+            .write_all(sk_hex.as_bytes())
+            .map_err(|e| format!("Failed to write node.key: {}", e))?;
+        key_file
+            .sync_all()
+            .map_err(|e| format!("Failed to sync node.key: {}", e))?;
+        let _ = fs::set_permissions(&key_path, fs::Permissions::from_mode(0o600));
+    }
+    #[cfg(not(unix))]
+    {
+        fs::write(&key_path, sk_hex).map_err(|e| format!("Failed to write node.key: {}", e))?;
+    }
     fs::write(&pub_path, vk_hex).map_err(|e| format!("Failed to write node.pub: {}", e))?;
 
     Ok((sk, vk))
@@ -118,6 +183,10 @@ pub fn get_chain_blocks() -> Result<Vec<Block>, String> {
 }
 
 pub fn append_event(payload: serde_json::Value) -> Result<Block, String> {
+    let _guard = LEDGER_MUTEX
+        .lock()
+        .map_err(|_| "Ledger mutex poisoned".to_string())?;
+    let _file_lock = FileLockGuard::acquire()?;
     env::ensure_dirs().map_err(|e| format!("Failed to create directories: {}", e))?;
     let (sk, vk) = get_or_create_node_keys()?;
     let blocks = get_chain_blocks()?;
@@ -164,6 +233,7 @@ pub fn append_event(payload: serde_json::Value) -> Result<Block, String> {
         .map_err(|e| format!("Failed to open ledger for appending: {}", e))?;
 
     writeln!(file, "{}", serialized).map_err(|e| format!("Failed to write block: {}", e))?;
+    file.sync_all().map_err(|e| format!("Failed to sync ledger block: {}", e))?;
 
     Ok(block)
 }
@@ -261,8 +331,42 @@ pub fn verify_chain() -> Result<ChainAuditReport, String> {
         latest_block_hash: last.block_hash.clone(),
         start_timestamp: first.timestamp,
         end_timestamp: last.timestamp,
-        eu_ai_act_compliance: "EU_AI_ACT_ART12_RECORD_KEEPING_COMPLIANT".to_string(),
+        eu_ai_act_compliance: "ART12_TECHNICAL_RECORD_VERIFIED_LEGAL_REVIEW_REQUIRED".to_string(),
     })
+}
+
+/// Computes a keyed/salted BLAKE3 commitment (`BLAKE3_DERIVE_KEY_SALTED`) over sensitive/PII bytes.
+/// Per GDPR Arts. 5(1)(e)/17 and EDPB guidance on immutable ledgers, raw personal data and unsalted
+/// hashes of personal data must not be persisted on an immutable ledger; destroying `subject_salt`
+/// in the off-ledger erasable store after the statutory retention period (Arts. 19/26.6 >= 6 months)
+/// achieves crypto-shredding without breaking the hash chain.
+pub fn compute_salted_pii_commitment(subject_salt: &[u8], sensitive_bytes: &[u8]) -> Result<String, String> {
+    if subject_salt.len() < 16 {
+        return Err("GDPR salted commitment requires at least 16 bytes of entropy in subject_salt".to_string());
+    }
+    let derived_key = blake3::derive_key("BABYLON-60::GDPR::SALTED_PII_COMMITMENT::V1", subject_salt);
+    let mut hasher = blake3::Hasher::new_keyed(&derived_key);
+    hasher.update(sensitive_bytes);
+    Ok(hasher.finalize().to_hex().to_string())
+}
+
+/// Appends an event to the ledger storing only `public_metadata` and a `BLAKE3_DERIVE_KEY_SALTED`
+/// commitment over `sensitive_bytes`, keeping raw personal data off the immutable ledger.
+pub fn append_salted_commitment_event(
+    public_metadata: serde_json::Value,
+    subject_salt: &[u8],
+    sensitive_bytes: &[u8],
+) -> Result<Block, String> {
+    let commitment = compute_salted_pii_commitment(subject_salt, sensitive_bytes)?;
+    let envelope_payload = serde_json::json!({
+        "public_metadata": public_metadata,
+        "salted_commitment": commitment,
+        "commitment_scheme": "BLAKE3_DERIVE_KEY_SALTED",
+        "raw_personal_data_on_immutable_ledger": false,
+        "unsalted_pii_hash_on_ledger": false,
+        "off_ledger_erasable_store": true,
+    });
+    append_event(envelope_payload)
 }
 
 pub fn export_scitt_voucher(block: &Block) -> serde_json::Value {
@@ -280,6 +384,8 @@ pub fn export_scitt_voucher(block: &Block) -> serde_json::Value {
         "regulatory_attestation": {
             "standard": "Regulation (EU) 2024/1689 (EU AI Act)",
             "article": "Article 12 - Record-keeping and High-Risk AI Traceability",
+            "technical_status": "SUPPORTED_WITHIN_DOMAIN",
+            "legal_conformity": "NOT_DETERMINED",
             "fail_closed": true,
             "tamper_evident": true
         }
@@ -298,14 +404,66 @@ mod tests {
 
         let (sk, vk) = get_or_create_node_keys().expect("BFT Fallback");
         assert_eq!(sk.verifying_key(), vk);
+        #[cfg(unix)]
+        {
+            use std::os::unix::fs::PermissionsExt;
+            let key_mode = fs::metadata(env::keys_dir().join("node.key"))
+                .expect("node.key metadata")
+                .permissions()
+                .mode()
+                & 0o777;
+            assert_eq!(key_mode, 0o600, "node.key must be confined to 0o600");
+        }
 
         let p1 = serde_json::json!({"test": "action1", "agent": "A1"});
         let b1 = append_event(p1).expect("BFT Fallback");
         assert_eq!(b1.index, 0);
 
+        let salt = b"ephemeral-subject-salt-0123456789";
+        let secret_pii = b"applicant_id=99812;prompt=confidential_cv_content";
+        let b2 = append_salted_commitment_event(
+            serde_json::json!({"event_type": "hr_screening_decision", "retention_months": 6}),
+            salt,
+            secret_pii,
+        )
+        .expect("Salted append must succeed");
+        assert_eq!(b2.index, 1);
+        let serialized_b2 = serde_json::to_string(&b2.payload).expect("serialize");
+        assert!(!serialized_b2.contains("confidential_cv_content"));
+        assert_eq!(b2.payload["commitment_scheme"], "BLAKE3_DERIVE_KEY_SALTED");
+        assert_eq!(b2.payload["raw_personal_data_on_immutable_ledger"], false);
+
+        // Short salt (<16 bytes) must fail closed
+        assert!(compute_salted_pii_commitment(b"short", secret_pii).is_err());
+
         let audit = verify_chain().expect("BFT Fallback");
         assert!(audit.valid);
-        assert!(audit.total_blocks > 0);
+        assert_eq!(audit.total_blocks, 2);
+        assert_eq!(
+            audit.eu_ai_act_compliance,
+            "ART12_TECHNICAL_RECORD_VERIFIED_LEGAL_REVIEW_REQUIRED"
+        );
+        assert!(!audit.eu_ai_act_compliance.ends_with("_COMPLIANT"));
+
+        let voucher = export_scitt_voucher(&b2);
+        assert_eq!(voucher["regulatory_attestation"]["legal_conformity"], "NOT_DETERMINED");
+
+        // Concurrent multi-threaded append must preserve strict linear hash chain
+        let mut handles = Vec::new();
+        for t in 0..4 {
+            handles.push(std::thread::spawn(move || {
+                for seq in 0..5 {
+                    append_event(serde_json::json!({"thread": t, "seq": seq}))
+                        .expect("concurrent append must succeed under lock");
+                }
+            }));
+        }
+        for h in handles {
+            h.join().expect("thread join");
+        }
+        let audit_after_concurrency = verify_chain().expect("chain must remain valid after concurrency");
+        assert!(audit_after_concurrency.valid);
+        assert_eq!(audit_after_concurrency.total_blocks, 22);
 
         let _ = fs::remove_dir_all(&tmp_dir);
     }

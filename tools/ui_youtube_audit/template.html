@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BABYLON-60 · Ring-3 Video Audit HUD</title>
+  <style>
+    :root {
+      --bg-base: #08090c;
+      --bg-window: rgba(12, 14, 19, 0.98);
+      --bg-card: rgba(19, 22, 30, 0.92);
+      --bg-card-hover: rgba(28, 33, 44, 0.96);
+      --border-card: rgba(255, 255, 255, 0.08);
+      --border-accent: #dfba63;
+      --border-cyan: #38bdf8;
+      --text-main: #f5f7fa;
+      --text-sub: #9499a8;
+      --text-dim: #595e6d;
+
+      /* Babylonian Imperial Palette & Accents */
+      --gold-light: #f7e7c6;
+      --gold-mid: #dfba63;
+      --gold-deep: #be8e2b;
+      --lapis-blue: #22436d;
+      --cyan-silicon: #38bdf8;
+      --green-scitt: #34d399;
+      --amber-warn: #fbbf24;
+      --red-apoptosis: #f87171;
+
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background: radial-gradient(circle at 50% 0%, #151824 0%, #08090c 100%);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 18px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 8px;
+    }
+
+    .badge-ring {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: rgba(223, 186, 99, 0.12);
+      color: var(--gold-mid);
+      border: 1px solid rgba(223, 186, 99, 0.35);
+      font-weight: 600;
+    }
+
+    .hud-title {
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 18px;
+    }
+
+    @media (max-width: 1040px) {
+      .grid-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-card);
+      padding-bottom: 8px;
+    }
+
+    .card-title {
+      font-size: 12px;
+      font-family: var(--font-mono);
+      color: var(--gold-light);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 600;
+    }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      height: 0;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--border-card);
+      background: #000;
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Keyboard Shortcuts Pill HUD */
+    .shortcut-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      background: rgba(8, 9, 12, 0.7);
+      border: 1px solid var(--border-card);
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-sub);
+    }
+
+    .key-badge {
+      background: #1c2128;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-bottom-width: 2px;
+      border-radius: 3px;
+      padding: 1px 5px;
+      color: var(--cyan-silicon);
+      font-weight: 600;
+    }
+
+    /* Key action toast overlay */
+    #keyToast {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      background: rgba(14, 27, 44, 0.95);
+      border: 1px solid var(--cyan-silicon);
+      color: var(--cyan-silicon);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      padding: 8px 14px;
+      border-radius: 6px;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(-8px);
+      transition: all 0.18s ease;
+      z-index: 9999;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+    }
+
+    #keyToast.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .chapters-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .chapter-tag {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-card);
+      color: var(--text-main);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .chapter-tag:hover {
+      border-color: var(--gold-mid);
+      color: var(--gold-light);
+      background: rgba(223, 186, 99, 0.1);
+    }
+
+    /* Claims Matrix */
+    .filter-group {
+      display: flex;
+      gap: 6px;
+    }
+
+    .filter-btn {
+      background: transparent;
+      border: 1px solid var(--border-card);
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .filter-btn.active, .filter-btn:hover {
+      color: var(--text-main);
+      border-color: var(--cyan-silicon);
+      background: rgba(56, 189, 248, 0.1);
+    }
+
+    .claims-scroll {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 480px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .claim-box {
+      background: rgba(14, 16, 22, 0.8);
+      border: 1px solid var(--border-card);
+      border-radius: 6px;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 12.5px;
+      transition: border-color 0.15s ease;
+    }
+
+    .claim-box:hover {
+      border-color: rgba(255, 255, 255, 0.18);
+    }
+
+    .claim-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .time-seek {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--cyan-silicon);
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .time-seek:hover {
+      text-decoration: underline;
+    }
+
+    .status-pill {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+
+    .status-ok {
+      background: rgba(52, 211, 153, 0.12);
+      color: var(--green-scitt);
+      border: 1px solid rgba(52, 211, 153, 0.35);
+    }
+
+    .status-warn {
+      background: rgba(251, 191, 36, 0.12);
+      color: var(--amber-warn);
+      border: 1px solid rgba(251, 191, 36, 0.35);
+    }
+
+    .status-err {
+      background: rgba(248, 113, 113, 0.12);
+      color: var(--red-apoptosis);
+      border: 1px solid rgba(248, 113, 113, 0.35);
+    }
+
+    .claim-evidence {
+      font-size: 11.5px;
+      color: var(--text-sub);
+      border-left: 2px solid var(--border-card);
+      padding-left: 8px;
+    }
+
+    /* Operator Editor Panel */
+    .editor-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1.5fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 860px) {
+      .editor-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .field-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-sub);
+    }
+
+    select, textarea {
+      background: #0f1117;
+      border: 1px solid var(--border-card);
+      border-radius: 4px;
+      color: var(--text-main);
+      padding: 7px 10px;
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+    }
+
+    select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--gold-mid);
+    }
+
+    .copy-btn {
+      background: linear-gradient(180deg, #be8e2b 0%, #996e1a 100%);
+      color: #fff;
+      border: 1px solid var(--gold-mid);
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      font-weight: 600;
+      padding: 9px 18px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: filter 0.15s ease;
+    }
+
+    .copy-btn:hover {
+      filter: brightness(1.15);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Toast for Keyboard Shortcut Feedback -->
+  <div id="keyToast">Action</div>
+
+  <header>
+    <div class="hud-title">
+      <span class="badge-ring">RING-3 · VIDEO AUDIT HUD</span>
+      <span id="hudVideoTitle">{{TITLE}}</span>
+    </div>
+    <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-sub); text-align: right;">
+      <span>ID: <code id="hudVideoId" style="color:var(--cyan-silicon);">{{VIDEO_ID}}</code></span> · 
+      <span>Duración: <span id="hudDuration">{{DURATION}}</span></span>
+    </div>
+  </header>
+
+  <div class="grid-container">
+    <!-- LEFT COLUMN: EMBEDDED PLAYER & KEYBOARD BAR -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Canal Audiovisual Interactivo</span>
+        <span class="key-badge">YouTube IFrame API</span>
+      </div>
+
+      <div class="video-wrapper">
+        <iframe id="videoIframe" src="https://www.youtube.com/embed/{{VIDEO_ID}}?enablejsapi=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+
+      <!-- KEYBOARD SHORTCUTS BAR -->
+      <div class="shortcut-bar">
+        <span>Atajos:</span>
+        <span><span class="key-badge">Space</span> / <span class="key-badge">K</span> Play/Pause</span>
+        <span><span class="key-badge">J</span> -10s</span>
+        <span><span class="key-badge">L</span> +10s</span>
+        <span><span class="key-badge">←</span>/<span class="key-badge">→</span> ±5s</span>
+        <span><span class="key-badge">0</span>-<span class="key-badge">9</span> % Seek</span>
+      </div>
+
+      <div class="card-title" style="margin-top: 4px;">Capítulos & Marcas Temporales</div>
+      <div class="chapters-grid" id="chaptersContainer">
+        <!-- Rendered dynamically from window.AUDIT_DATA.chapters -->
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN: EPISTEMIC CLAIMS MATRIX -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Matriz Epistémica de Afirmaciones</span>
+        <div class="filter-group">
+          <button class="filter-btn active" onclick="applyFilter('all')">Todos</button>
+          <button class="filter-btn" onclick="applyFilter('ok')">✅ Validados</button>
+          <button class="filter-btn" onclick="applyFilter('warn')">⚠️ Matizados</button>
+          <button class="filter-btn" onclick="applyFilter('err')">❌ Falsados</button>
+        </div>
+      </div>
+
+      <div class="claims-scroll" id="claimsContainer">
+        <!-- Rendered dynamically from window.AUDIT_DATA.claims -->
+      </div>
+    </div>
+  </div>
+
+  <!-- OPERATOR EDITOR PANEL (Two-Way Feedback Projector) -->
+  <div class="card" style="border-color: rgba(223, 186, 99, 0.4);">
+    <div class="card-header">
+      <span class="card-title" style="color:var(--gold-mid);">Editor Desechable C5-REAL · Proyector de Retroalimentación</span>
+      <span class="badge-ring">P0 PROMPT GATE</span>
+    </div>
+
+    <div class="editor-grid">
+      <div class="field-group">
+        <label class="field-label">Fase de Acción:</label>
+        <select id="operatorPhase">
+          <option value="especificaciones">1. Especificaciones de Arquitectura</option>
+          <option value="falsacion-silicio" selected>2. Falsación en Silicio (PoC)</option>
+          <option value="revision-codigo">3. Revisión de Pull Request</option>
+          <option value="cristal-ontologico">4. Cristal Ontológico 21k</option>
+        </select>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">Nivel de Confinamiento:</label>
+        <select id="operatorConfinement">
+          <option value="ring0">Ring-0 / Kernel Bare-Metal</option>
+          <option value="ring1">Ring-1 / Kish Engine (Heurística)</option>
+          <option value="ring3" selected>Ring-3 / Interfaz Somática HTML</option>
+        </select>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">Directiva Específica para el Próximo Turno:</label>
+        <textarea id="operatorNotes" rows="2" placeholder="Ej: Implementar test de estrés popperiano sobre el límite de tokens..."></textarea>
+      </div>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px;">
+      <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-dim);">
+        Atajos activos en toda la página (excepto al escribir en campos de texto).
+      </span>
+      <button class="copy-btn" onclick="exportPrompt()">
+        <span>📋</span> Copiar como Prompt para Agente
+      </button>
+    </div>
+  </div>
+
+  <script>
+    /* =========================================================================
+       CONFIGURACIÓN MAESTRA DEL PRESET (window.AUDIT_DATA)
+       Inyectar metadatos para instanciar cualquier auditoría de vídeo.
+       ========================================================================= */
+    window.AUDIT_DATA = window.AUDIT_DATA || {
+      videoId: "MBWwn15rmXU",
+      title: "La irrazonable eficacia del HTML (Claude Code / Anthropic)",
+      duration: "12m 11s",
+      totalSeconds: 731,
+      chapters: [
+        { seconds: 0, label: "00:00 Introducción" },
+        { seconds: 80, label: "01:20 6 Razones HTML" },
+        { seconds: 275, label: "04:35 Cómo Empezar" },
+        { seconds: 305, label: "05:05 4 Familias de Uso" },
+        { seconds: 508, label: "08:28 Editores Desechables" },
+        { seconds: 603, label: "10:03 Dudas & Trade-offs" },
+        { seconds: 673, label: "11:13 Human-in-the-Loop" }
+      ],
+      claims: [
+        {
+          seconds: 40,
+          timestamp: "[00:40]",
+          type: "ok",
+          statusText: "✅ Verificado",
+          claim: "El humano promedio no lee especificaciones en Markdown de más de 100 líneas generadas por IA.",
+          evidence: "Psicofísica de la lectura: saturación de atención lineal en ausencia de anclaje espacial."
+        },
+        {
+          seconds: 83,
+          timestamp: "[01:23]",
+          type: "ok",
+          statusText: "✅ Verificado",
+          claim: "HTML aporta densidad imposible en Markdown: tablas reales, CSS, SVG, canvas y controles reactivos.",
+          evidence: "Ancho de banda visual (~10^7 bps) vs lectura secuencial de texto plano (~45 bps)."
+        },
+        {
+          seconds: 268,
+          timestamp: "[10:08]",
+          type: "warn",
+          statusText: "⚠️ Engañosa",
+          claim: "HTML gasta más tokens, pero con la ventana de 1M de Claude Opus el gasto extra casi no se nota.",
+          evidence: "Confunde tamaño de ventana con coste marginal y latencia (2.5x tokens por generación)."
+        },
+        {
+          seconds: 283,
+          timestamp: "[10:41]",
+          type: "ok",
+          statusText: "✅ Verificado",
+          claim: "HTML puede tardar entre 2 y 4 veces más que Markdown en generarse.",
+          evidence: "Medición empírica en silicio: ratio de tokens HTML/MD oscila entre 2.2 y 3.8."
+        },
+        {
+          seconds: 124,
+          timestamp: "[04:37]",
+          type: "err",
+          statusText: "❌ Falsado",
+          claim: "No hacen falta skills ni plantillas; basta pedir HTML desde cero cada vez.",
+          evidence: "Falsa economía: sin un contrato de diseño se disipa cuota en maquetación redundante e inconsistencias."
+        },
+        {
+          seconds: 287,
+          timestamp: "[10:49]",
+          type: "ok",
+          statusText: "✅ Verificado",
+          claim: "Las diferencias entre versiones de un HTML generan mucho ruido sintáctico en Git.",
+          evidence: "Invariante AST: el wrapper churn del DOM destruye la trazabilidad en diffs unificados."
+        },
+        {
+          seconds: 235,
+          timestamp: "[08:46]",
+          type: "ok",
+          statusText: "✅ Alta Exergía",
+          claim: "El truco del editor desechable es terminar siempre con un botón de 'copiar como prompt'.",
+          evidence: "Cierra el lazo cibernético comonádico proyectando el estado visual hacia el token stream."
+        }
+      ]
+    };
+
+    // Render Dynamic Content
+    function renderAuditHUD() {
+      const data = window.AUDIT_DATA;
+      document.getElementById('hudVideoTitle').textContent = data.title;
+      document.getElementById('hudVideoId').textContent = data.videoId;
+      document.getElementById('hudDuration').textContent = data.duration;
+      document.getElementById('videoIframe').src = `https://www.youtube.com/embed/${data.videoId}?enablejsapi=1`;
+
+      // Render chapters
+      const chapContainer = document.getElementById('chaptersContainer');
+      chapContainer.innerHTML = '';
+      data.chapters.forEach(c => {
+        const btn = document.createElement('button');
+        btn.className = 'chapter-tag';
+        btn.textContent = c.label;
+        btn.onclick = () => seekTo(c.seconds);
+        chapContainer.appendChild(btn);
+      });
+
+      // Render claims
+      const claimsContainer = document.getElementById('claimsContainer');
+      claimsContainer.innerHTML = '';
+      data.claims.forEach(cl => {
+        const box = document.createElement('div');
+        box.className = 'claim-box';
+        box.setAttribute('data-type', cl.type);
+
+        const statusClass = cl.type === 'ok' ? 'status-ok' : (cl.type === 'warn' ? 'status-warn' : 'status-err');
+
+        box.innerHTML = `
+          <div class="claim-header">
+            <span class="time-seek" onclick="seekTo(${cl.seconds})">${cl.timestamp} Salto</span>
+            <span class="status-pill ${statusClass}">${cl.statusText}</span>
+          </div>
+          <div>${cl.claim}</div>
+          <div class="claim-evidence">${cl.evidence}</div>
+        `;
+        claimsContainer.appendChild(box);
+      });
+    }
+
+    // Video Seek Function via YouTube PostMessage API
+    let isPlaying = false;
+    let currentVideoDuration = window.AUDIT_DATA.totalSeconds || 731;
+
+    function seekTo(seconds) {
+      showToast(`Seek: ${formatTime(seconds)}`);
+      const iframe = document.getElementById('videoIframe');
+      iframe.contentWindow.postMessage(JSON.stringify({
+        event: 'command',
+        func: 'seekTo',
+        args: [seconds, true]
+      }), '*');
+    }
+
+    function togglePlay() {
+      const iframe = document.getElementById('videoIframe');
+      isPlaying = !isPlaying;
+      showToast(isPlaying ? 'Play ▶' : 'Pause ⏸');
+      iframe.contentWindow.postMessage(JSON.stringify({
+        event: 'command',
+        func: isPlaying ? 'playVideo' : 'pauseVideo',
+        args: []
+      }), '*');
+    }
+
+    function formatTime(s) {
+      const m = Math.floor(s / 60);
+      const sec = Math.floor(s % 60);
+      return `${m}:${sec < 10 ? '0' : ''}${sec}`;
+    }
+
+    // Floating Feedback Toast
+    let toastTimeout;
+    function showToast(msg) {
+      const t = document.getElementById('keyToast');
+      t.textContent = msg;
+      t.classList.add('visible');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => t.classList.remove('visible'), 1200);
+    }
+
+    // Keyboard Shortcuts Listener
+    window.addEventListener('keydown', (e) => {
+      // Guard: Ignore if user is inside an input, select or textarea
+      if (['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) return;
+
+      switch(e.key.toLowerCase()) {
+        case ' ':
+          e.preventDefault();
+          togglePlay();
+          break;
+        case 'k':
+          e.preventDefault();
+          togglePlay();
+          break;
+        case 'j':
+          e.preventDefault();
+          seekToDelta(-10);
+          break;
+        case 'l':
+          e.preventDefault();
+          seekToDelta(10);
+          break;
+        case 'arrowleft':
+          e.preventDefault();
+          seekToDelta(-5);
+          break;
+        case 'arrowright':
+          e.preventDefault();
+          seekToDelta(5);
+          break;
+        default:
+          if (e.key >= '0' && e.key <= '9') {
+            const pct = parseInt(e.key) * 10;
+            const targetSec = (currentVideoDuration * pct) / 100;
+            showToast(`Seek ${pct}% (${formatTime(targetSec)})`);
+            seekTo(targetSec);
+          }
+          break;
+      }
+    });
+
+    let estimatedCurrentTime = 0;
+    function seekToDelta(delta) {
+      estimatedCurrentTime = Math.max(0, Math.min(currentVideoDuration, estimatedCurrentTime + delta));
+      seekTo(estimatedCurrentTime);
+    }
+
+    // Filter Claims
+    function applyFilter(type) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+
+      document.querySelectorAll('.claim-box').forEach(box => {
+        if (type === 'all' || box.getAttribute('data-type') === type) {
+          box.style.display = 'flex';
+        } else {
+          box.style.display = 'none';
+        }
+      });
+    }
+
+    // Export Prompt to Clipboard
+    function exportPrompt() {
+      const phase = document.getElementById('operatorPhase').value;
+      const conf = document.getElementById('operatorConfinement').value;
+      const notes = document.getElementById('operatorNotes').value.trim() || 'Avanzar al siguiente hito formal de verificación en silicio.';
+      const vidId = window.AUDIT_DATA.videoId;
+
+      const prompt = `[DIRECTIVA OPERATIVA BABYLON-60 · RING-3 FEEDBACK]:\n` +
+        `- Contexto de Auditoría: Vídeo YouTube ID ${vidId}\n` +
+        `- Fase de Acción: ${phase}\n` +
+        `- Confinamiento: ${conf}\n` +
+        `- Directiva del Operador: ${notes}\n` +
+        `- Verificación Requerida: Comprobación determinista en silicio y sellado SHA3-256.`;
+
+      navigator.clipboard.writeText(prompt).then(() => {
+        showToast('✔ Prompt formal copiado al portapapeles (pbcopy)');
+      });
+    }
+
+    // Initialize on load
+    window.addEventListener('DOMContentLoaded', renderAuditHUD);
+  </script>
+</body>
+</html>

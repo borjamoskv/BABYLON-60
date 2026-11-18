@@ -156,6 +156,31 @@ def test_python_fallback_shared_manifest() -> None:
     assert writer.manifest.seq % 2 == 0
 
 
+def test_python_fallback_rejects_odd_sequence_and_writer_contention() -> None:
+    """Certifica que el fallback Python rechaza publicar sobre seq impar o escritor ocupado."""
+    writer = SharedManifestFFIWriter(dylib_path="/tmp/nonexistent_libbabylon60.dylib")
+    assert writer.is_native is False
+
+    h1 = hashlib.sha3_256(b"epoch_1").digest()
+    h2 = hashlib.sha3_256(b"epoch_2").digest()
+    assert writer.publish(1, h1) is True
+    assert writer.manifest.seq == 2
+
+    # Si un escritor activo posee la secuencia impar (seq & 1 != 0), publish rechaza sin corromper
+    writer.manifest.seq = 3
+    assert writer.publish(2, h2) is False
+    assert writer.manifest.seq == 3
+    assert writer.manifest.epoch_id == 1
+    assert writer.read() is None
+
+    # Al liberarse a par (seq = 4), la lectura y publicación vuelven a ser admisibles
+    writer.manifest.seq = 4
+    assert writer.read() == (1, h1)
+    assert writer.publish(2, h2) is True
+    assert writer.manifest.seq == 6
+    assert writer.read() == (2, h2)
+
+
 def test_fail_stop_poisoned_state() -> None:
     """Certifica el protocolo Fail-Stop / POISONED (INV-4) tanto en nativo como fallback."""
     # 1. Modo Nativo

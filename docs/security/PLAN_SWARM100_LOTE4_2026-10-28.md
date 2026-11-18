@@ -3,7 +3,7 @@
 Estado: ejecutado bajo autorización posterior del operador; véase el
 [informe de corrección](REMEDIATION_SWARM100_LOTE4_2026-10-28.md). La selección
 inicial agrupó P1 CONFIRMED_STATIC/OPEN por afinidad. No quedan P1 OPEN con reproducción previa.
-Los [hashes y observaciones de selección](evidence/swarm100-lot3-20261028/lot4-selection.json)
+Los [hashes y observaciones de selección](RETENTION.md)
 fijaron las tres fuentes antes de editar; la ejecución conservó ese límite.
 
 | ID | Fuente prevista | Resultado exigido |

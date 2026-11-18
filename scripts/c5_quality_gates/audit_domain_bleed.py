@@ -19,7 +19,7 @@ import sys
 from pathlib import Path
 from typing import List, Tuple
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).absolute().parents[2]
 
 # Canonical allowed root directories
 CANONICAL_ROOT_DIRS = {
@@ -28,8 +28,8 @@ CANONICAL_ROOT_DIRS = {
     "00_ABZU_KERNEL", "01_KISH_ENGINE", "02_EDIN_SWARMS",
     "L1_sink", "__pycache__", "apps", "artifact_bundle_v3", "assets",
     "attestation_bundle_v1", "attestation_bundle_v2", "babylonmail",
-    "compliance_reports", "contracts", "crates", "data", "deploy", "dist",
-    "docs", "examples", "experiments", "keys", "ledger", "logs", "ontology",
+    "compliance_reports", "config", "contracts", "crates", "data", "deploy", "dist",
+    "docs", "evidence", "examples", "experiments", "keys", "ledger", "logs", "ontology",
     "papers", "proof", "reports", "scratch", "scripts", "site", "src", "target",
     "tests", "tools", "ui", "Babylon60.app"
 }
@@ -74,8 +74,8 @@ def check_commercial_confinement() -> List[Tuple[str, str]]:
                     content = p.read_text(encoding="utf-8", errors="ignore")
                     if re.search(r"Tax\s*/\s*VAT\s*ID:\s*ES[A-Z0-9]{8}", content):
                         violations.append((str(p), f"Número CIF/VAT real de cliente en código: '{f}'"))
-                except Exception:
-                    pass
+                except OSError:
+                    continue
     return violations
 
 
@@ -137,6 +137,104 @@ def check_ontological_laws_confinement() -> List[Tuple[str, str]]:
     return violations
 
 
+EXTRINSIC_FORBIDDEN_PATHS = (
+    "tools/flstudio",
+    "tools/mac_prompt",
+    "apps/gflow-studio",
+    "apps/mandato",
+    "assets/voice_samples",
+    "docs/04_audit/campaigns",
+    "tools/skill_library/codex_overrides",
+)
+
+EXTRINSIC_FORBIDDEN_SKILLS = frozenset({
+    "flstudio-mcp-production",
+    "djstudio-mcp",
+    "suno-bracket-tagging",
+    "soulseek-p2p-audio-acquisition",
+    "f5tts-voice-cloning-sota",
+    "c5-spatial-audio-architect",
+    "c5-rubin-acoustic-linter",
+    "c5-media-platform-epistemology",
+    "c5-audiovisual-acreativo-sota",
+    "c5-audiovisual-acreativo-sota-project",
+    "audiovisual-sota",
+    "youtube-remotion-sota",
+    "remotion-audio-reactive-video",
+    "pika-generative-video-pipeline",
+    "gflow-browser-cinema-sovereign",
+    "c5-video-quality-audit",
+    "c5-neural-face-swap-cuadrilla",
+    "c5-poster-and-sign-craft",
+    "youtube-analysis-pipeline",
+    "c5-solar-thermodynamic-architecture",
+    "somatic-ble-transduction",
+    "c5-somatic-panic-deescalation",
+    "c5-2e-neuropharmacological-sovereignty",
+    "c5-wetware-divergente",
+    "c5-wetware-and-venture-ops",
+    "c5-wetware-and-venture-ops-project",
+    "c5-spaced-repetition-architect",
+    "biographical-thermo",
+    "adaptive-cron",
+    "c5-venture-pitch-architect",
+    "c5-weighted-decision-matrix",
+    "c5-codebase-valuation-audit",
+    "c5-epistemic-dissemination-engine",
+    "c5-tamkarum-60",
+    "c5-real-legaltech-analysis",
+    "whatsapp-nexus-protocol",
+    "safari-browser-agent",
+    "c5-socint-extraction-suite",
+    "c5-browser-forensics-and-extension-triage",
+    "c5-sovereign-identity-hardening",
+    "cloudflare-mcp-usage",
+    "github-architect",
+    "github-api-rate-limit-optimization",
+    "homebrew-ecosystem-management",
+    "jujutsu-vcs-management",
+    "macos-lulu-firewall-diagnostics",
+    "vscode-git-packed-refs-diagnostics",
+    "electron-mac-bundle-collision-diagnostics",
+    "electron-asar-forensic-audit",
+    "ghidra-ida-binary-audit",
+    "webkit-memory-audit",
+    "c5-sre-postmortem-architect",
+    "c5-secops-infra-devtools",
+})
+
+
+def check_extrinsic_domain_isolation() -> List[Tuple[str, str]]:
+    """Reject re-entry of extracted D1-D4 personal/media skills or local creative repos."""
+    import json
+
+    violations: List[Tuple[str, str]] = []
+    for rel in EXTRINSIC_FORBIDDEN_PATHS:
+        target = REPO_ROOT / rel
+        if target.exists():
+            violations.append((str(target), f"Superficie extrínseca re-inyectada en BABYLON-60: '{rel}'"))
+
+    for base_rel in ("tools/skill_library/global", "tools/skill_library/workspace", ".agents/skills"):
+        base = REPO_ROOT / base_rel
+        if not base.is_dir():
+            continue
+        for child in sorted(base.iterdir()):
+            if child.is_dir() and child.name in EXTRINSIC_FORBIDDEN_SKILLS:
+                violations.append((str(child), f"Skill extrínseco D1-D4 presente en '{base_rel}': '{child.name}'"))
+
+    skills_json = REPO_ROOT / "docs" / "skills.json"
+    if skills_json.is_file():
+        try:
+            entries = json.loads(skills_json.read_text(encoding="utf-8")).get("entries", [])
+            for entry in entries:
+                name = entry.get("name")
+                if name in EXTRINSIC_FORBIDDEN_SKILLS:
+                    violations.append((str(skills_json), f"Skill extrínseco '{name}' registrado en docs/skills.json"))
+        except (OSError, ValueError):
+            pass
+    return violations
+
+
 def run_all_audits() -> int:
     print("=" * 78)
     print("█ [C5-REAL] AUDITORÍA DETERMINISTA DE FUGA DE DOMINIO (DOMAIN BLEED)")
@@ -144,28 +242,33 @@ def run_all_audits() -> int:
 
     all_violations: List[Tuple[str, str]] = []
 
-    print("[1/5] Verificando confinamiento de directorios de anillos...")
+    print("[1/6] Verificando confinamiento de directorios de anillos...")
     v = check_directory_confinement()
     all_violations.extend(v)
     print(f"      Estado: {'PASS (0 hallazgos)' if not v else f'FAIL ({len(v)} violaciones)'}")
 
-    print("[2/5] Verificando confinamiento comercial (Zero Invoices / Zero CIF)...")
+    print("[2/6] Verificando confinamiento comercial (Zero Invoices / Zero CIF)...")
     v = check_commercial_confinement()
     all_violations.extend(v)
     print(f"      Estado: {'PASS (0 hallazgos)' if not v else f'FAIL ({len(v)} violaciones)'}")
 
-    print("[3/5] Verificando confinamiento de activos de audio (Zero Bloat)...")
+    print("[3/6] Verificando confinamiento de activos de audio (Zero Bloat)...")
     v = check_audio_bloat_confinement()
     all_violations.extend(v)
     print(f"      Estado: {'PASS (0 hallazgos)' if not v else f'FAIL ({len(v)} violaciones)'}")
 
-    print("[4/5] Verificando confinamiento de bases de datos SQLite...")
+    print("[4/6] Verificando confinamiento de bases de datos SQLite...")
     v = check_database_confinement()
     all_violations.extend(v)
     print(f"      Estado: {'PASS (0 hallazgos)' if not v else f'FAIL ({len(v)} violaciones)'}")
 
-    print("[5/5] Verificando pureza de las 14 Leyes Ontológicas (O1-O14)...")
+    print("[5/6] Verificando pureza de las 14 Leyes Ontológicas (O1-O14)...")
     v = check_ontological_laws_confinement()
+    all_violations.extend(v)
+    print(f"      Estado: {'PASS (0 hallazgos)' if not v else f'FAIL ({len(v)} violaciones)'}")
+
+    print("[6/6] Verificando aislamiento de skills y apps extrínsecas (D1-D4)...")
+    v = check_extrinsic_domain_isolation()
     all_violations.extend(v)
     print(f"      Estado: {'PASS (0 hallazgos)' if not v else f'FAIL ({len(v)} violaciones)'}")
 

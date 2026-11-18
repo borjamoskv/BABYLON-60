@@ -20,7 +20,7 @@ import subprocess
 import sys
 import threading
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 import blake3
 import pytest
@@ -86,7 +86,7 @@ class Client:
         assert init["result"]["serverInfo"]["name"] == "cortex-memory"
         self.notify("notifications/initialized")
 
-    def raw(self, line: str) -> dict | None:
+    def raw(self, line: str) -> dict[str, Any] | None:
         """Send an arbitrary frame; return the parsed response (None if no frame expected)."""
         assert self.proc.stdin and self.proc.stdout
         self.proc.stdin.write(line + "\n")
@@ -95,7 +95,7 @@ class Client:
         if not out:
             raise EOFError("adapter closed stdout")
         self.stdout_lines.append(out)
-        return json.loads(out)
+        return cast(dict[str, Any] | None, json.loads(out))
 
     def ping(self) -> bool:
         return self.rpc("ping", {}).get("result") == {}
@@ -105,7 +105,7 @@ class Client:
         self.proc.stdin.write(json.dumps({"jsonrpc": "2.0", "method": method}) + "\n")
         self.proc.stdin.flush()
 
-    def rpc(self, method: str, params: dict) -> dict:
+    def rpc(self, method: str, params: dict[str, Any]) -> dict[str, Any]:
         assert self.proc.stdin and self.proc.stdout
         self.mid += 1
         self.proc.stdin.write(json.dumps({"jsonrpc": "2.0", "id": self.mid, "method": method, "params": params}) + "\n")
@@ -114,11 +114,11 @@ class Client:
         if not line:
             raise EOFError("adapter closed stdout")
         self.stdout_lines.append(line)
-        msg = json.loads(line)
+        msg = cast(dict[str, Any], json.loads(line))
         assert msg["id"] == self.mid
         return msg
 
-    def call(self, name: str, **args: object) -> dict:
+    def call(self, name: str, **args: object) -> dict[str, Any]:
         res = self.rpc("tools/call", {"name": name, "arguments": args})["result"]
         return {"error": res["isError"], **res["structuredContent"]}
 
@@ -136,7 +136,7 @@ class Client:
         assert rest == ""
         for line in self.stdout_lines:
             assert json.loads(line)["jsonrpc"] == "2.0"
-        return self.proc.stderr.read()
+        return str(self.proc.stderr.read())
 
 
 @pytest.fixture(scope="module")
@@ -165,7 +165,7 @@ def ws(tmp_path_factory: pytest.TempPathFactory) -> Path:
     return d
 
 
-def ledger_rows(ws: Path, sql: str, params: tuple = ()) -> list[tuple]:
+def ledger_rows(ws: Path, sql: str, params: tuple[Any, ...] = ()) -> list[tuple[Any, ...]]:
     with sqlite3.connect(ws / "ledger.db") as conn:
         return conn.execute(sql, params).fetchall()
 
@@ -219,7 +219,7 @@ def test_fail_closed_launch(ws: Path, case: str) -> None:
         "exit": proc.returncode,
         "stdout_bytes": 0,
         "stderr": proc.stderr.strip()[-160:],
-    }  # type: ignore[index]
+    }
 
 
 # ---------------------------------------------------------------- A / B
@@ -673,11 +673,12 @@ def test_r2_state_digest_covers_items_beyond_first_page(ws: Path, tmp_path: Path
 # ---------------------------------------------------------------- R3: two processes, one ledger
 
 
-def _race(ws: Path, args_a: dict, args_b: dict) -> tuple[dict, dict]:
+def _race(ws: Path, args_a: dict[str, Any], args_b: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
     ca, cb = Client(ws, ws / "writer.json"), Client(ws, ws / "writer.json")
-    barrier, out = threading.Barrier(2), {}
+    barrier: threading.Barrier = threading.Barrier(2)
+    out: dict[str, dict[str, Any]] = {}
 
-    def go(key: str, client: Client, args: dict) -> None:
+    def go(key: str, client: Client, args: dict[str, Any]) -> None:
         barrier.wait()
         out[key] = client.call("memory_append", **args)
 
@@ -784,7 +785,7 @@ def test_r3b_concurrent_supersede_same_target(ws: Path) -> None:
 # ---------------------------------------------------------------- R4: read-only auditor
 
 
-def _replay_cli(path: Path, *extra: str) -> subprocess.CompletedProcess:
+def _replay_cli(path: Path, *extra: str) -> subprocess.CompletedProcess[str]:
     return subprocess.run(
         [sys.executable, "-m", "babylon60.mcp.cortex_memory_core", str(path), *extra],
         capture_output=True,

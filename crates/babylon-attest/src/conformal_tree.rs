@@ -192,7 +192,9 @@ pub struct AeonVerificationResult {
 }
 
 /// Verifies the cryptographic integrity and Ed25519 signature of an L1 Aeon manifest file.
-pub fn verify_manifest_file(manifest_path: &Path) -> Result<AeonVerificationResult, String> {
+/// C0341: `trusted_pubkey_b64` es el ancla externa que aporta el verificador. La clave que
+/// trae el propio manifiesto no basta: un manifiesto autofirmado no se aprueba.
+pub fn verify_manifest_file(manifest_path: &Path, trusted_pubkey_b64: &str) -> Result<AeonVerificationResult, String> {
     let data = fs::read_to_string(manifest_path)
         .map_err(|e| format!("No se pudo leer el manifiesto: {}", e))?;
     let manifest: AeonManifest = serde_json::from_str(&data)
@@ -213,6 +215,13 @@ pub fn verify_manifest_file(manifest_path: &Path) -> Result<AeonVerificationResu
     if pub_bytes.len() != 32 {
         return Err(format!("Longitud de clave pública inválida: {}", pub_bytes.len()));
     }
+    let trusted = base64::engine::general_purpose::STANDARD
+        .decode(trusted_pubkey_b64)
+        .map_err(|e| format!("Ancla externa: base64 inválido: {}", e))?;
+    if trusted.len() != 32 {
+        return Err(format!("Ancla externa: longitud de clave inválida: {}", trusted.len()));
+    }
+    let anchored = trusted == pub_bytes;
     let mut pub_arr = [0u8; 32];
     pub_arr.copy_from_slice(&pub_bytes);
     let vk = VerifyingKey::from_bytes(&pub_arr)
@@ -233,7 +242,7 @@ pub fn verify_manifest_file(manifest_path: &Path) -> Result<AeonVerificationResu
         .unwrap_or("UNKNOWN")
         .to_string();
 
-    let overall_valid = sig_valid && manifest.status == "FROZEN_C5_REAL";
+    let overall_valid = sig_valid && anchored && manifest.status == "FROZEN_C5_REAL";
 
     Ok(AeonVerificationResult {
         aeon_id: manifest.aeon_id,
@@ -289,5 +298,41 @@ mod tests {
             "merkle_root_attest",
         );
         assert_eq!(h.len(), 64);
+    }
+
+    #[test]
+    fn c0341_self_signed_manifest_without_external_anchor_is_rejected() {
+        // Manifiesto firmado con su propia clave, sin ancla externa: no debe aprobarse.
+        use base64::Engine;
+        use ed25519_dalek::{Signer, SigningKey};
+        let sk = SigningKey::from_bytes(&[7u8; 32]);
+        let root = "ab".repeat(32);
+        let root_bytes = hex::decode(&root).unwrap();
+        let sig = sk.sign(&root_bytes);
+        let b64 = base64::engine::general_purpose::STANDARD;
+        let manifest = serde_json::json!({
+            "aeon_id": "AEON-SELF",
+            "status": "FROZEN_C5_REAL",
+            "timestamp_utc": "2026-01-01T00:00:00Z",
+            "total_claims_sealed": 1,
+            "merkle_root": root,
+            "op_return_hex": null,
+            "hardware_attestation": {},
+            "sovereign_identity": {
+                "l0_public_key_b64": b64.encode(sk.verifying_key().to_bytes()),
+                "ed25519_signature_b64": b64.encode(sig.to_bytes()),
+                "signed_payload": ""
+            }
+        });
+        let path = std::env::temp_dir().join(format!("c0341-{}.json", std::process::id()));
+        std::fs::write(&path, manifest.to_string()).unwrap();
+        let other = SigningKey::from_bytes(&[9u8; 32]);
+        let foreign_anchor = b64.encode(other.verifying_key().to_bytes());
+        let res = verify_manifest_file(&path, &foreign_anchor).unwrap();
+        assert!(!res.overall_valid, "C0341: manifiesto auto-firmado aceptado con ancla ajena");
+        let own_anchor = b64.encode(sk.verifying_key().to_bytes());
+        let res = verify_manifest_file(&path, &own_anchor).unwrap();
+        let _ = std::fs::remove_file(&path);
+        assert!(res.overall_valid, "sanity: con el ancla correcta la firma válida debe aprobarse");
     }
 }

@@ -11,7 +11,7 @@ import yaml
 ROOT = Path(__file__).absolute().parents[1]
 
 
-Step = TypedDict("Step", {"id": str, "run": str, "uses": str, "if": str}, total=False)
+Step = TypedDict("Step", {"id": str, "run": str, "uses": str, "if": str, "env": dict[str, str]}, total=False)
 
 
 class Strategy(TypedDict):
@@ -61,6 +61,26 @@ def test_general_test_matrices_use_linux_without_dropping_coverage() -> None:
     commands = "\n".join(step.get("run", "") for step in ci["rust"]["steps"])
     for command in ("cargo check --workspace --locked", "cargo test --workspace --locked", "cargo clippy --locked"):
         assert command in commands
+    quality_commands = "\n".join(step.get("run", "") for step in ci["quality"]["steps"])
+    assert "scripts/c5_quality_gates/detect_ghost_nodes.py --scope product" in quality_commands
+    assert "tests/test_ghost_node_detector.py" in quality_commands
+
+
+def test_python_suite_runs_native_broker_tests_against_a_separate_python_build() -> None:
+    steps = workflow("python-tests.yml")["jobs"]["test"]["steps"]
+    default_build = next((step for step in steps if "-p babylon-attest" in step.get("run", "")), None)
+    python_build = next((step for step in steps if "--features python" in step.get("run", "")), None)
+    suite = next((step for step in steps if "pytest tests/ 02_EDIN_SWARMS/tests/" in step.get("run", "")), None)
+    assert default_build is not None, "missing the default cargo build step"
+    assert python_build is not None, "missing the separate `--features python` build step"
+    assert suite is not None, "missing the pytest suite step"
+    # Own step and target dir: target/debug keeps the library behind BABYLON60_DYLIB_PATH free of pyo3.
+    assert "python" not in default_build["run"] and "--all-features" not in default_build["run"]
+    assert "cargo build --locked" in python_build["run"] and "--target-dir target/py" in python_build["run"]
+    assert steps.index(python_build) < steps.index(suite)
+    assert suite["env"]["BABYLON60_DYLIB_PATH"].endswith("/target/debug/libbabylon60.so")
+    # Without this variable the native-broker tests skip instead of running.
+    assert suite["env"]["BABYLON60_TEST_CAPABILITY_LIBRARY"].endswith("/target/py/debug/libbabylon60.so")
 
 
 def test_full_macos_certification_requires_a_release_or_explicit_opt_in() -> None:

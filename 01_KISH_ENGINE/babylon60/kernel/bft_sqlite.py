@@ -2,7 +2,7 @@ import sqlite3
 import time
 import random
 import logging
-from collections.abc import Generator
+from collections.abc import Generator, Iterator
 from contextlib import contextmanager
 from typing import Any
 
@@ -20,6 +20,53 @@ class BFTDatabaseError(Exception):
     """Excepción termodinámica para fallos BFT irrecuperables en SQLite."""
 
     pass
+
+
+class MaterializedCursor:
+    """Cursor desacoplado que conserva las filas leídas tras el cierre seguro de la conexión."""
+
+    def __init__(
+        self,
+        rows: list[Any],
+        description: Any = None,
+        rowcount: int = -1,
+        lastrowid: int | None = None,
+    ) -> None:
+        self._rows = list(rows)
+        self._pos = 0
+        self.description = description
+        self.rowcount = rowcount
+        self.lastrowid = lastrowid
+
+    def fetchone(self) -> Any:
+        if self._pos >= len(self._rows):
+            return None
+        row = self._rows[self._pos]
+        self._pos += 1
+        return row
+
+    def fetchall(self) -> list[Any]:
+        if self._pos >= len(self._rows):
+            return []
+        rows = self._rows[self._pos :]
+        self._pos = len(self._rows)
+        return rows
+
+    def fetchmany(self, size: int = 1) -> list[Any]:
+        if size <= 0 or self._pos >= len(self._rows):
+            return []
+        end = min(self._pos + size, len(self._rows))
+        rows = self._rows[self._pos : end]
+        self._pos = end
+        return rows
+
+    def close(self) -> None:
+        self._pos = len(self._rows)
+
+    def __iter__(self) -> Iterator[Any]:
+        while self._pos < len(self._rows):
+            yield self._rows[self._pos]
+            self._pos += 1
 
 
 class BFTSQLite:
@@ -44,19 +91,20 @@ class BFTSQLite:
     @contextmanager
     def _connection(self) -> Generator[sqlite3.Connection, None, None]:
         """Provee una conexión configurada para serialización estricta y WAL."""
-        conn = sqlite3.connect(self.db_path, isolation_level="IMMEDIATE")
+        conn = sqlite3.connect(self.db_path, timeout=5.0, isolation_level="IMMEDIATE")
         conn.row_factory = sqlite3.Row
         try:
+            conn.execute("PRAGMA busy_timeout=5000;")
             conn.execute("PRAGMA journal_mode=WAL;")
             conn.execute("PRAGMA synchronous=FULL;")
-            conn.execute("PRAGMA busy_timeout=5000;")
             yield conn
         finally:
             conn.close()
 
-    def execute_with_backoff(self, query: str, params: tuple[Any, ...] = ()) -> sqlite3.Cursor:
+    def execute_with_backoff(self, query: str, params: tuple[Any, ...] = ()) -> MaterializedCursor:
         """
-        Ejecuta un query con mitigación de bloqueos vía Exponential Backoff.
+        Ejecuta un query con mitigación de bloqueos vía Exponential Backoff
+        y materializa las filas antes de cerrar la conexión para evitar cursores huérfanos.
         """
         retries = 0
         while retries <= self.max_retries:
@@ -64,8 +112,15 @@ class BFTSQLite:
                 with self._connection() as conn:
                     cursor = conn.cursor()
                     cursor.execute(query, params)
+                    rows = cursor.fetchall() if cursor.description is not None else []
+                    result = MaterializedCursor(
+                        rows=rows,
+                        description=cursor.description,
+                        rowcount=cursor.rowcount,
+                        lastrowid=cursor.lastrowid,
+                    )
                     conn.commit()
-                    return cursor
+                    return result
             except sqlite3.OperationalError as e:
                 if "database is locked" in str(e).lower() or "busy" in str(e).lower():
                     if retries == self.max_retries:
@@ -87,13 +142,12 @@ class BFTSQLite:
 
         raise BFTDatabaseError(f"Max retries exceeded ({self.max_retries}) without acquiring lock on {self.db_path}.")
 
-    def executemany_with_backoff(self, query: str, seq_of_params: list[tuple[Any, ...]]) -> sqlite3.Cursor:
+    def executemany_with_backoff(self, query: str, seq_of_params: list[tuple[Any, ...]]) -> MaterializedCursor:
         """
         Ejecuta un query por lotes con mitigación de bloqueos vía Exponential Backoff.
         """
         if not seq_of_params:
-            with self._connection() as conn:
-                return conn.cursor()
+            return MaterializedCursor(rows=[], rowcount=0)
 
         retries = 0
         while retries <= self.max_retries:
@@ -101,8 +155,15 @@ class BFTSQLite:
                 with self._connection() as conn:
                     cursor = conn.cursor()
                     cursor.executemany(query, seq_of_params)
+                    rows = cursor.fetchall() if cursor.description is not None else []
+                    result = MaterializedCursor(
+                        rows=rows,
+                        description=cursor.description,
+                        rowcount=cursor.rowcount,
+                        lastrowid=cursor.lastrowid,
+                    )
                     conn.commit()
-                    return cursor
+                    return result
             except sqlite3.OperationalError as e:
                 if "database is locked" in str(e).lower() or "busy" in str(e).lower():
                     if retries == self.max_retries:

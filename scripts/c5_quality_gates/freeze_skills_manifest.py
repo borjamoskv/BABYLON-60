@@ -62,7 +62,9 @@ def inventory(root: Path, top_levels: set[str] | None = None) -> Manifest:
                     visit(child, ancestors | {identity})
         elif stat.S_ISREG(info.st_mode):
             digest = hashlib.sha256()
-            with path.open("rb") as stream:
+            flags = os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0)
+            fd = os.open(path, flags)
+            with os.fdopen(fd, "rb") as stream:
                 for block in iter(lambda: stream.read(1024 * 1024), b""):
                     digest.update(block)
             entry.update({"bytes": info.st_size, "sha256": digest.hexdigest()})

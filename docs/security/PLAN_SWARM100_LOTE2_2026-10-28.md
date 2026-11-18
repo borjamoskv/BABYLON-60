@@ -3,7 +3,7 @@
 Estado: ejecutado bajo autorización, con cuatro P1 corregidos y C0460
 MITIGATED. [Resultado y verificación](REMEDIATION_SWARM100_LOTE2_2026-10-28.md).
 Los hashes iniciales constan en la
-[selección](evidence/swarm100-lot1-20261028/lot2-selection.json).
+[selección](RETENTION.md).
 Después del Lote 1 no quedan P1 OPEN con dictamen REPRODUCED; este bloque
 selecciona cinco P1 CONFIRMED_STATIC y una copia duplicada. Primero deben
 reproducirse en fixtures; este plan no acredita su ejecución ni su corrección.

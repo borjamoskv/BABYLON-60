@@ -22,10 +22,9 @@ import json
 import pathlib
 import re
 import subprocess
-import sys
 from typing import Any
 
-REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
+REPO_ROOT = pathlib.Path(__file__).absolute().parents[2]
 LEAN_DIR = REPO_ROOT / "proof" / "lean"
 SCOPE_2025_JSON = REPO_ROOT / "docs" / "06_theory" / "evidence" / "lean-scope-20261025.json"
 DEFAULT_JSON_OUT = REPO_ROOT / "docs" / "06_theory" / "evidence" / "lean-census-372-v511.json"
@@ -35,12 +34,8 @@ DEFAULT_JSON_OUT = REPO_ROOT / "docs" / "06_theory" / "evidence" / "lean-census-
 POST_2025_AXIOMS: dict[str, list[str] | str] = {
     "verifiedAuthInvariant": ["propext"],
     "Babylon60.L0Ledger.genesis_satisfies_invariant": [],
-    "Babylon60.L0Ledger.append_preserves_l0_invariant": ["propext"],
-    "Babylon60.L0Ledger.append_strictly_increases_tick": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound",
-    ],
+    "Babylon60.L0Ledger.append_preserves_l0_invariant": [],
+    "Babylon60.L0Ledger.append_strictly_increases_tick": [],
     "Babylon60.L0Ledger.merkle_root_uniqueness": [],
     "Babylon60.L0Ledger.l0_trigger_inhabited": [],
     "B60.Ledger.fl018_missing_critical_check_rejected": ["propext", "Quot.sound"],
@@ -61,6 +56,13 @@ POST_2025_AXIOMS: dict[str, list[str] | str] = {
     "LarsaEquivocationSafety.quorum_threshold_no_u64_overflow": ["propext", "Quot.sound"],
     "LarsaEquivocationSafety.bounded_arithmetic_f1": [],
     "LarsaEquivocationSafety.verifiedQuorumInvariant": ["propext", "Quot.sound"],
+}
+
+CANONICAL_SEMANTIC_ALIASES: dict[int, str] = {
+    44: "Babylon.chentsov_contraction_hypothesis_passthrough",
+    47: "Babylon.ffi_model_fraction_agrees",
+    64: "Babylon60.L0Ledger.append_entry_injective",
+    132: "B60.NavierStokes.SobolevKato.bkm_monitor_flags_accepted_by_decide",
 }
 
 NEGATIVE_FIXTURE_FILES = {"BabylonAutoTrace.lean", "BabylonStressCorrupt.lean"}
@@ -90,10 +92,10 @@ THEOREM_SCOPE_OVERRIDES: dict[int, tuple[str, str]] = {
     41: ("U-ALG", "Existencia de cociente entero k tal que winding_phase = 60 * k cuando winding_phase % 60 = 0; propiedad de divisibilidad en Int, no grupo fundamental ni homotopía topológica."),
     42: ("U-ALG", "Reflexividad sobre la función mmr_peaks_bound n definida como n.log2 + 1; no cuenta picos de una estructura Merkle Mountain Range real."),
     43: ("U-ALG", "Identidad aditiva en Nat cuando el término cruzado se supone cero (cross_term = 0); no define divergencia KL ni variedad de Fisher."),
-    44: ("U-ALG", "Implicación identidad: recibe h_contractive : fisher_out ≤ fisher_in como hipótesis y la devuelve directamente (exact h_contractive); no define un canal de Markov ni demuestra el teorema de Chentsov."),
+    44: ("U-ALG", "Implicación identidad (alias canónico: Babylon.chentsov_contraction_hypothesis_passthrough): recibe h_contractive : fisher_out ≤ fisher_in como hipótesis y la devuelve directamente (exact h_contractive); no define un canal de Markov ni demuestra el teorema de Chentsov."),
     45: ("U-ALG", "Selecciona la rama RejectedCheapTalk de evaluate_agent_intent bajo las guardas booleanas de presupuesto y ratio; clasificador aritmético de longitudes, no detector semántico de confabulación."),
     46: ("U-ALG", "Desigualdad estándar de división entera en Nat ((total_energy / step_cost) * step_cost ≤ total_energy), válida incluso para step_cost = 0; no modela una relación de paso ni demuestra terminación."),
-    47: ("U-ALG", "Igualdad de la segunda componente entre dos funciones puras en Lean (ffi_sexa_add_model y add_tick60); no invoca código C externo ni verifica ABI o punteros FFI."),
+    47: ("U-ALG", "Igualdad de la segunda componente entre dos funciones puras en Lean (ffi_sexa_add_model y add_tick60; alias canónico: Babylon.ffi_model_fraction_agrees); no invoca código C externo ni verifica ABI o punteros FFI."),
     48: ("U-IND", "Inducción sobre N pasos de run_repl_steps mostrando que el campo hot_manifest_bytes del registro ReplSession permanece igual a la constante 64."),
     49: ("U-ALG", "Extrae el campo de orden estricto h_causal : from_ts < to_ts exigido al construir CausalEdge."),
     50: ("U-ALG", "Contradicción aritmética elemental entre las hipótesis simultáneas stage_u = stage_v y stage_u < stage_v; no modela memoria compartida ni ausencia de carreras en hilos reales."),
@@ -108,9 +110,9 @@ THEOREM_SCOPE_OVERRIDES: dict[int, tuple[str, str]] = {
     59: ("I-DEC", "Comprobación cerrada sobre la lista literal aeon_events de 1.500 eventos (seq 49000 → 50000)."),
     60: ("NEG-FIXTURE", "Fixture negativo de rechazo semántico esperado (AUDIT_LEAN_SCOPE_2026 §8): la lista auto_execution_trace contiene una transición inválida y decide refuta la igualdad = true."),
     61: ("U-ALG", "El estado inicial con entries = [] satisface vacuamente L0StateInvariant por ausencia de elementos en la lista."),
-    62: ("U-IND", "Preservación de L0StateInvariant al prepender una entrada que cumple TriggerAllowsInsert sobre una lista que ya cumplía el invariante."),
-    63: ("U-ALG", "Incremento estricto de headTick (db.headTick < (appendEntry db newEntry).headTick) bajo la precondición newEntry.logicalTick = db.headTick + 1 de TriggerAllowsInsert."),
-    64: ("U-ALG", "Inyectividad de inserción y alineación de paso bajo TriggerAllowsInsert: deduce e1.logicalTick = e2.logicalTick, e1.prevMerkleRoot = e2.prevMerkleRoot y e1 = e2 cuando (appendEntry db e1).entries = (appendEntry db e2).entries; no modela funciones hash criptográficas ni resistencia a colisiones."),
+    62: ("U-IND", "Preservación constructiva (0 axiomas) de L0StateInvariant al prepender una entrada que cumple TriggerAllowsInsert sobre una lista que ya cumplía el invariante; integrada en el puente runtime_commit_mediation_bridge (§6.3)."),
+    63: ("U-ALG", "Incremento estricto constructivo (0 axiomas via Nat.lt_succ_self, sin Classical.choice) de headTick (db.headTick < (appendEntry db newEntry).headTick) bajo la precondición newEntry.logicalTick = db.headTick + 1 de TriggerAllowsInsert."),
+    64: ("U-ALG", "Inyectividad de inserción y alineación de paso bajo TriggerAllowsInsert (alias canónico: Babylon60.L0Ledger.append_entry_injective): deduce e1.logicalTick = e2.logicalTick, e1.prevMerkleRoot = e2.prevMerkleRoot y e1 = e2 cuando (appendEntry db e1).entries = (appendEntry db e2).entries; no modela funciones hash criptográficas ni resistencia a colisiones."),
     65: ("W-EX", "Testigo constructivo de habitabilidad (AP-10) para TriggerAllowsInsert sobre witnessDbL0 y witnessEntryL0."),
     66: ("NEG-FIXTURE", "Fixture negativo de rechazo semántico esperado (AUDIT_LEAN_SCOPE_2026 §8): lista de 1.501 eventos con lectura impar final donde decide rechaza la igualdad = true."),
     67: ("I-DEC", "Comprobación cerrada por decide sobre una traza literal válida de 6.000 eventos en BabylonStressTrace.lean."),
@@ -167,7 +169,7 @@ THEOREM_SCOPE_OVERRIDES: dict[int, tuple[str, str]] = {
     129: ("I-DEC", "Comprobación cerrada por decide de inclusión entre dos intervalos concretos [20, 80] ⊆ [10, 100]."),
     130: ("I-DEC", "Comprobación cerrada por decide: 150 ≤ 200 evaluando gronwallBound 100 [1, 0, 0]."),
     131: ("I-DEC", "Comprobación cerrada por decide de que la lista concreta [1, 2, 3, 4, 5, 10, 20, 50, 60] es estrictamente creciente en verifyCausalTrace."),
-    132: ("I-DEC", "Aceptación de tres indicadores booleanos fijados en true (isMillenniumRegular { bkmIntegralBounded := true, constantinFeffermanSmooth := true, sobolevH3Controlled := true } = true); no define campos de velocidad/presión ni demuestra regularidad analítica de las ecuaciones de Navier-Stokes."),
+    132: ("I-DEC", "Aceptación de tres indicadores booleanos fijados en true (alias canónico: B60.NavierStokes.SobolevKato.bkm_monitor_flags_accepted_by_decide; isMillenniumRegular { bkmIntegralBounded := true, constantinFeffermanSmooth := true, sobolevH3Controlled := true } = true); no define campos de velocidad/presión ni demuestra regularidad analítica de las ecuaciones de Navier-Stokes."),
     133: ("I-DEC", "Comprobación cerrada por decide de validateEcpTrace sobre la traza concreta validWave4Trace de 3 eventos."),
     134: ("I-DEC", "Comprobación cerrada por decide que rechaza la traza concreta corruptFencingRaceTrace en validateEcpTrace."),
     135: ("I-DEC", "Comprobación cerrada por decide que rechaza la traza concreta corruptBlindRetryTrace en validateEcpTrace."),
@@ -267,6 +269,30 @@ def extract_full_signature(lines: list[str], start_idx: int, first_rest: str) ->
     return sig
 
 
+def extract_structure_body(lines: list[str], start_line_no: int) -> tuple[str, list[str]]:
+    """Extracts the complete indented block and field lines of a Lean 4 structure."""
+    idx0 = start_line_no - 1
+    block = [lines[idx0]]
+    fields: list[str] = []
+    j = idx0 + 1
+    while j < len(lines):
+        raw = lines[j]
+        s = raw.strip()
+        if not s:
+            block.append(raw)
+            j += 1
+            continue
+        if not raw.startswith((" ", "\t")):
+            break
+        block.append(raw)
+        if not s.startswith(("--", "/--", "-/")) and not s.startswith("deriving "):
+            fields.append(s)
+        j += 1
+    while block and not block[-1].strip():
+        block.pop()
+    return "\n".join(block), fields
+
+
 def classify_codec_theorem(idx: int, name: str, fname: str) -> tuple[str, str]:
     if idx in THEOREM_SCOPE_OVERRIDES:
         return THEOREM_SCOPE_OVERRIDES[idx]
@@ -305,10 +331,12 @@ def build_census() -> dict[str, Any]:
     modules_summary: list[dict[str, Any]] = []
     theorems_list: list[dict[str, Any]] = []
     constructions_list: list[dict[str, Any]] = []
+    structures_list: list[dict[str, Any]] = []
 
     thm_counter = 0
     con_counter = 0
     core228_counter = 0
+    struct_counter = 0
 
     for f in files:
         content = f.read_text(encoding="utf-8")
@@ -364,21 +392,22 @@ def build_census() -> dict[str, Any]:
                 else:
                     axioms_val = "UNRESOLVED"
 
-                theorems_list.append(
-                    {
-                        "id": f"#{thm_counter:03d}",
-                        "index": thm_counter,
-                        "file": f.name,
-                        "line": line_no,
-                        "kind": kind,
-                        "name": name,
-                        "qualified_name": fqn,
-                        "signature": sig,
-                        "result_class": res_class,
-                        "axioms": axioms_val,
-                        "scope_note": scope_note,
-                    }
-                )
+                thm_entry: dict[str, Any] = {
+                    "id": f"#{thm_counter:03d}",
+                    "index": thm_counter,
+                    "file": f.name,
+                    "line": line_no,
+                    "kind": kind,
+                    "name": name,
+                    "qualified_name": fqn,
+                    "signature": sig,
+                    "result_class": res_class,
+                    "axioms": axioms_val,
+                    "scope_note": scope_note,
+                }
+                if thm_counter in CANONICAL_SEMANTIC_ALIASES:
+                    thm_entry["canonical_alias"] = CANONICAL_SEMANTIC_ALIASES[thm_counter]
+                theorems_list.append(thm_entry)
                 continue
 
             m_con = re.match(r"^(def|inductive|structure|abbrev)\s+([^\s(:{]+)", line)
@@ -392,27 +421,48 @@ def build_census() -> dict[str, Any]:
                     core228_counter += 1
                     core_id = f"#C{core228_counter:03d}"
 
+                struct_body = None
+                struct_fields: list[str] | None = None
+                struct_id = None
                 if ckind == "def":
                     mod_def_count += 1
                 elif ckind == "inductive":
                     mod_ind_count += 1
                 elif ckind == "structure":
                     mod_str_count += 1
+                    struct_counter += 1
+                    struct_id = f"#S{struct_counter:02d}"
+                    struct_body, struct_fields = extract_structure_body(lines, line_no)
+                    structures_list.append(
+                        {
+                            "struct_id": struct_id,
+                            "index": struct_counter,
+                            "file": f.name,
+                            "line": line_no,
+                            "name": cname,
+                            "qualified_name": fqn,
+                            "fields": struct_fields,
+                            "body": struct_body,
+                        }
+                    )
                 elif ckind == "abbrev":
                     mod_abb_count += 1
 
-                constructions_list.append(
-                    {
-                        "all_index": con_counter,
-                        "core228_id": core_id,
-                        "file": f.name,
-                        "line": line_no,
-                        "kind": ckind,
-                        "name": cname,
-                        "qualified_name": fqn,
-                        "in_core_228": is_core_228,
-                    }
-                )
+                con_entry: dict[str, Any] = {
+                    "all_index": con_counter,
+                    "core228_id": core_id,
+                    "file": f.name,
+                    "line": line_no,
+                    "kind": ckind,
+                    "name": cname,
+                    "qualified_name": fqn,
+                    "in_core_228": is_core_228,
+                }
+                if struct_id is not None:
+                    con_entry["struct_id"] = struct_id
+                    con_entry["fields"] = struct_fields
+                    con_entry["body"] = struct_body
+                constructions_list.append(con_entry)
 
         modules_summary.append(
             {
@@ -468,6 +518,7 @@ def build_census() -> dict[str, Any]:
         "theorem_class_distribution": class_counts,
         "modules": modules_summary,
         "theorems": theorems_list,
+        "structures": structures_list,
         "constructions": constructions_list,
     }
 
@@ -486,7 +537,7 @@ def render_markdown(data: dict[str, Any]) -> str:
     lines.append("")
     lines.append("> [!IMPORTANT]")
     lines.append("> **Alcance Epistémico y Metodológico (Encabezado Canónico Corregido):**")
-    lines.append(f"> El catálogo distribuye **144 declaraciones de teoremas** (`#001–#144`) entre **22 módulos con teoremas** y enumera **4 módulos auxiliares sin teoremas** (**26 módulos `.lean` propietarios** en [`proof/lean/`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/proof/lean/)). Incluye lemas generales de codificación/inyectividad, preservación inductiva de invariantes sobre trazas, identidades algebraicas/aritméticas, testigos constructivos de existencia y comprobaciones de instancias concretas.")
+    lines.append("> El catálogo distribuye **144 declaraciones de teoremas** (`#001–#144`) entre **22 módulos con teoremas** y enumera **4 módulos auxiliares sin teoremas** (**26 módulos `.lean` propietarios** en [`proof/lean/`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/proof/lean/)). Incluye lemas generales de codificación/inyectividad, preservación inductiva de invariantes sobre trazas, identidades algebraicas/aritméticas, testigos constructivos de existencia y comprobaciones de instancias concretas.")
     lines.append("> Las propiedades se refieren estrictamente a los **modelos discretos formalizados**. Su validación reproducible identifica la revisión Git, el hash `SHA-256` de cada módulo, el nombre completamente cualificado y las dependencias axiomáticas (`#print axioms`). Las garantías operacionales sobre el runtime Rust exigen además los contratos y tests de correspondencia de [`CLAIMS.toml`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/CLAIMS.toml).")
     lines.append("")
     lines.append("---")
@@ -513,7 +564,7 @@ def render_markdown(data: dict[str, Any]) -> str:
     lines.append(f"| `W-EX` | **Testigos Constructivos de No-Vacuidad (`AP-10`)** | **{cd.get('W-EX', 0)}** | {cd.get('W-EX', 0)*100/144:.1f} % | Pruebas existenciales (`∃ x, P x`) y empaquetados `VerifiedInvariant` que acreditan que las precondiciones de disparo no son vacuas. |")
     lines.append(f"| `I-DEC` | **Comprobaciones de Instancias Cerradas Positivas** | **{cd.get('I-DEC', 0)}** | {cd.get('I-DEC', 0)*100/144:.1f} % | Evaluaciones decidibles (`by decide` / `rfl`) sobre trazas concretas, constantes en punto fijo o configuraciones finitas de banderas. |")
     lines.append(f"| `NEG-FIXTURE` | **Fixtures Negativos de Rechazo Esperado** | **{cd.get('NEG-FIXTURE', 0)}** | {cd.get('NEG-FIXTURE', 0)*100/144:.1f} % | `#060` (`BabylonAutoTrace.lean`) y `#066` (`BabylonStressCorrupt.lean`): fuentes negativas diseñadas para que `decide` refute la igualdad `= true` ante una traza corrupta. |")
-    lines.append(f"| **TOTAL** | **39 Instancias Cerradas (`I-DEC` + `NEG-FIXTURE` = 27,1 %) + 105 Universales/Testigos (72,9 %)** | **144** | **100,0 %** | — |")
+    lines.append("| **TOTAL** | **39 Instancias Cerradas (`I-DEC` + `NEG-FIXTURE` = 27,1 %) + 105 Universales/Testigos (72,9 %)** | **144** | **100,0 %** | — |")
     lines.append("")
     lines.append("---")
     lines.append("")
@@ -576,23 +627,41 @@ def render_markdown(data: dict[str, Any]) -> str:
         lines.append(
             f"{thm['index']}. **`{thm['id']}`** · [`{thm['qualified_name']}`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/proof/lean/{thm['file']}#L{thm['line']}) · **Clase:** `[{thm['result_class']}]` · **Axiomas:** `{ax_str}`  "
         )
+        if thm.get("canonical_alias"):
+            lines.append(f"   - **Alias semántico exacto:** `{thm['canonical_alias']}`")
         lines.append(f"   - **Enunciado:** `{thm['kind']} {thm['name']} {thm['signature']}`")
         lines.append(f"   - **Alcance exacto:** {thm['scope_note']}")
     lines.append("")
     lines.append("---")
     lines.append("")
-    lines.append("## 4. Anexo Contrastable: Las 228 Definiciones e Inductivos (`#C001–#C228`) y las 47 Estructuras/Abreviaturas (`275` Construcciones No-Teorema)")
+    lines.append(
+        f"## 4. Anexo Contrastable: Las 228 Definiciones e Inductivos (`#C001–#C228`) y las {t['structures_total'] + t['abbrevs_total']} Estructuras/Abreviaturas (`{t['non_theorem_declarations_total']}` Construcciones No-Teorema)"
+    )
     lines.append("")
-    lines.append("Esta tabla enumera 1:1 todas las declaraciones de tipos y funciones en `proof/lean/*.lean` que sustentan los 144 teoremas, permitiendo verificar mecánicamente tanto el subtotal **`205 def + 23 inductive = 228`** (`144 + 228 = 372`) como el total incluyendo **`34 structure + 13 abbrev`** (`275` construcciones no-teorema; `144 + 275 = 419` declaraciones totales).")
+    lines.append(
+        f"Esta tabla enumera 1:1 todas las declaraciones de tipos y funciones en `proof/lean/*.lean` que sustentan los 144 teoremas, permitiendo verificar mecánicamente tanto el subtotal **`{t['defs_total']} def + {t['inductives_total']} inductive = {t['core_228_constructions_total']}`** (`144 + 228 = 372`) como el total incluyendo **`{t['structures_total']} structure + {t['abbrevs_total']} abbrev`** (`{t['non_theorem_declarations_total']}` construcciones no-teorema; `144 + {t['non_theorem_declarations_total']} = {t['all_top_level_declarations_total']}` declaraciones totales)."
+    )
     lines.append("")
     lines.append("| # Global | ID Core-228 | Módulo:Línea | Especie | Nombre Cualificado |")
     lines.append("|:---:|:---:|:---|:---:|:---|")
     for c in data["constructions"]:
-        cid = f"`{c['core228_id']}`" if c["core228_id"] else "*(struct/abbrev)*"
+        cid = f"`{c['core228_id']}`" if c["core228_id"] else (f"`{c['struct_id']}`" if c.get("struct_id") else "*(abbrev)*")
         lines.append(
             f"| {c['all_index']:03d} | {cid} | [{c['file']}:{c['line']}](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/proof/lean/{c['file']}#L{c['line']}) | `{c['kind']}` | `{c['qualified_name']}` |"
         )
     lines.append("")
+    lines.append("### 4.1 Cuerpo Íntegro y Obligaciones Internas de las 34 Estructuras (`#S01–#S34`)")
+    lines.append("")
+    lines.append("Para eliminar cualquier opacidad sobre hipótesis u obligaciones alojadas como campos de tipos (`Codec`, `AeonState`, `CausalEdge`, `DiscreteChainComplex`, `VerifiedAuthInvariant`, `VerifiedQuorumInvariant`, etc.), se transcribe el cuerpo completo de las 34 declaraciones `structure` del árbol propietario:")
+    lines.append("")
+    for s in data["structures"]:
+        lines.append(
+            f"#### `{s['struct_id']}` · [`{s['qualified_name']}`](file:///Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/proof/lean/{s['file']}#L{s['line']}) (`{s['file']}:{s['line']}`)"
+        )
+        lines.append("```lean")
+        lines.append(s["body"])
+        lines.append("```")
+        lines.append("")
     lines.append("---")
     lines.append("")
     lines.append("**Borja Fernández Angulo** · *Investigador en Sistemas Complejos*")
@@ -600,10 +669,237 @@ def render_markdown(data: dict[str, Any]) -> str:
     return "\n".join(lines)
 
 
+def _typ_esc(s: str) -> str:
+    s = s.replace("`", "")
+    out: list[str] = []
+    for ch in s:
+        if ch in ("\\", "#", "$", "*", "_", "@", "<", ">", "[", "]", "~"):
+            out.append("\\" + ch)
+        else:
+            out.append(ch)
+    return "".join(out)
+
+
+def _typ_mono(s: str, size: str = "8pt") -> str:
+    return f'#text(font: ("Menlo", "DejaVu Sans Mono"), size: {size})[{_typ_esc(s)}]'
+
+
+def render_typst(data: dict[str, Any]) -> str:
+    t = data["totals"]
+    cd = data["theorem_class_distribution"]
+    aux_roles = {
+        "BabylonAOTOracle.lean": "Parser binario y bucle IO por bloques de 8 KiB (main); compila con v4.34.0-rc2.",
+        "BabylonOracle.lean": "Parser CSV y validador de pasos abstractos (main); compila con v4.34.0-rc2.",
+        "HolographicPoC.lean": "Widget HtmlDisplay de ejemplo (ProofWidgets); compila con imports locales precompilados.",
+        "NavierStokesOracle.lean": "Clasificador ejecutable de flags/umbrales sobre trazas discretas (main); compila con v4.34.0-rc2.",
+    }
+    lines: list[str] = [
+        '#set page(paper: "a4", margin: (top: 20mm, bottom: 20mm, left: 18mm, right: 18mm), numbering: "1 / 1")',
+        '#set text(font: "New Computer Modern", size: 9.5pt, lang: "es")',
+        '#set par(justify: true, leading: 0.58em)',
+        '#show heading: set block(sticky: true, above: 1.2em, below: 0.6em)',
+        "",
+        "#align(center)[",
+        "  #set par(justify: false)",
+        '  #text(size: 15pt, weight: "bold")[Inventario de 144 Declaraciones de Teoremas y 228 Construcciones de BABYLON-60 en Lean 4]',
+        "  #v(4pt)",
+        '  #text(size: 10pt)[*Autoría en Sala Limpia:* Borja Fernández Angulo (_Investigador en Sistemas Complejos_)]',
+        "  #v(2pt)",
+        f'  #text(size: 8.5pt, fill: rgb("#475569"))[Revisión de Silicio (`proof/lean`): `{data["generated_from_commit"][:12]}` · Toolchain: `{data["toolchain"]}` · Esquema: `{data["schema"]}`]',
+        "]",
+        "#v(6pt)",
+        '#block(fill: rgb("#f8fafc"), stroke: (left: 3pt + rgb("#0284c7"), rest: 0.5pt + rgb("#cbd5e1")), inset: 9pt, radius: 3pt)[',
+        '  *Alcance Epistémico y Metodológico (Encabezado Canónico Corregido):* El catálogo distribuye *144 declaraciones de teoremas* (`#001–#144`) entre *22 módulos con teoremas* y enumera *4 módulos auxiliares sin teoremas* (*26 módulos `.lean` propietarios* en `proof/lean/`). Incluye lemas generales de codificación/inyectividad (`U-CODEC`), preservación inductiva de invariantes sobre trazas (`U-IND`), identidades algebraicas/aritméticas (`U-ALG`), testigos constructivos de existencia (`W-EX`) y comprobaciones de instancias concretas (`I-DEC` + `NEG-FIXTURE`). Las propiedades se refieren estrictamente a los *modelos discretos formalizados*. Las garantías operacionales sobre el runtime Rust exigen además los contratos y tests de correspondencia de `CLAIMS.toml`.',
+        "]",
+        "",
+        "= 1. Conciliación Aritmética y Taxonomía de Resultados",
+        "",
+        "== 1.1 Recuento Mecánico Verificado (22 + 4 = 26 Módulos · 144 + 228 = 372 Construcciones)",
+        "",
+        "#table(",
+        "  columns: (2.3fr, 0.7fr, 3.5fr),",
+        "  inset: 5pt,",
+        "  align: (left, center, left),",
+        '  stroke: 0.5pt + rgb("#cbd5e1"),',
+        '  table.header([*Métrica del Árbol Propietario (`proof/lean/*.lean`)*], [*Recuento*], [*Desglose y Verificación*]),',
+        f'  [*Módulos propietarios totales*], [*{t["proprietary_modules_total"]}*], [*{t["modules_with_theorems"]}* módulos con declaraciones `theorem` + *{t["auxiliary_modules_without_theorems"]}* módulos auxiliares (`BabylonAOTOracle.lean`, `BabylonOracle.lean`, `HolographicPoC.lean`, `NavierStokesOracle.lean`)],',
+        f'  [*Declaraciones de teoremas (`theorem`)*], [*{t["theorems_total"]}*], [Identificadores consecutivos `#001–#144` sin huecos ni duplicados (142 en módulos positivos + 2 en fixtures negativos)],',
+        f'  [*Definiciones e inductivos (`def` + `inductive`)*], [*{t["core_228_constructions_total"]}*], [*{t["defs_total"]}* `def` + *{t["inductives_total"]}* `inductive` (enumerados 1:1 como `#C001–#C228` en la Sección 4)],',
+        f'  [*Suma canónica (`144 + 228`)*], [*{t["theorems_plus_core_228"]}*], [Conciliación exacta de las *372 construcciones formales* declaradas en `IP_PROVENANCE.md`],',
+        f'  [*Estructuras y abreviaturas (`structure` + `abbrev`)*], [*{t["structures_total"] + t["abbrevs_total"]}*], [*{t["structures_total"]}* `structure` (suma `406` con `144 + 228`) + *{t["abbrevs_total"]}* `abbrev` (*{t["all_top_level_declarations_total"]}* declaraciones totales)],',
+        ")",
+        "",
+        "== 1.2 Clasificación de las 144 Declaraciones por Clase de Resultado y Alcance",
+        "",
+        "#table(",
+        "  columns: (0.9fr, 1.8fr, 0.55fr, 0.65fr, 3.1fr),",
+        "  inset: 5pt,",
+        "  align: (center, left, center, center, left),",
+        '  stroke: 0.5pt + rgb("#cbd5e1"),',
+        "  table.header([*Código*], [*Clase de Resultado*], [*Cant.*], [*%*], [*Alcance Formal Exacto*]),",
+        f'  [`U-CODEC`], [*Codificación e Inyectividad*], [*{cd.get("U-CODEC", 0)}*], [{cd.get("U-CODEC", 0)*100/144:.1f}%], [Roundtrip (`decode_encode`, `encode_decode`), inyectividad y validez sobre dominios explícitos (`AcsEnvelope`, `CanonicalEnvelope`, `CanonicalHead`, `TicketEnvelope`).],',
+        f'  [`U-IND`], [*Preservación Inductiva Universal*], [*{cd.get("U-IND", 0)}*], [{cd.get("U-IND", 0)*100/144:.1f}%], [Inducción estructural sobre listas/trazas de longitud arbitraria (`AX0` cota $<= 1$ despacho, `BabylonL0Ledger` preservación L0, `BabylonTrace` paridad, `Destiladora`, `MolochLandauer`, `SmallStep`).],',
+        f'  [`U-ALG`], [*Lemas de Un Paso y Aritmética*], [*{cd.get("U-ALG", 0)}*], [{cd.get("U-ALG", 0)*100/144:.1f}%], [Propiedades universales de un paso (`ValidBabylonTransition`, `CompositeGateState`), cotas `u64` (`f < 2^62`), identidades algebraicas y proyecciones de hipótesis/campos.],',
+        f'  [`W-EX`], [*Testigos Constructivos (`AP-10`)*], [*{cd.get("W-EX", 0)}*], [{cd.get("W-EX", 0)*100/144:.1f}%], [Pruebas existenciales y empaquetados `VerifiedInvariant` que acreditan que las precondiciones de disparo no son vacuas.],',
+        f'  [`I-DEC`], [*Instancias Cerradas Positivas*], [*{cd.get("I-DEC", 0)}*], [{cd.get("I-DEC", 0)*100/144:.1f}%], [Evaluaciones decidibles (`by decide` / `rfl`) sobre trazas concretas, constantes en punto fijo o configuraciones finitas de banderas.],',
+        f'  [`NEG-FIXTURE`], [*Fixtures Negativos Esperados*], [*{cd.get("NEG-FIXTURE", 0)}*], [{cd.get("NEG-FIXTURE", 0)*100/144:.1f}%], [`#060` (`BabylonAutoTrace.lean`) y `#066` (`BabylonStressCorrupt.lean`): fuentes negativas cuyo rechazo por `decide` es el resultado esperado.],',
+        '  [*TOTAL*], [*39 Cerradas (27.1%) + 105 Universales/Testigos (72.9%)*], [*144*], [*100%*], [—],',
+        ")",
+        "",
+        "= 2. Distribución por Módulo Propietario (22 con Teoremas + 4 Auxiliares = 26)",
+        "",
+        "== 2.1 Los 22 Módulos con Declaraciones de Teoremas",
+        "",
+        "#table(",
+        "  columns: (0.35fr, 2.35fr, 0.5fr, 0.75fr, 0.38fr, 0.38fr, 0.38fr, 0.38fr, 1.75fr),",
+        "  inset: 4.5pt,",
+        "  align: (center, left, center, center, center, center, center, center, left),",
+        '  stroke: 0.5pt + rgb("#cbd5e1"),',
+        '  table.header([*\\#*], [*Módulo `.lean`*], [*Thm*], [*Rango*], [*def*], [*ind*], [*str*], [*abb*], [*Estatus y Alcance*]),',
+    ]
+    idx_with_thm = 0
+    for m in data["modules"]:
+        if not m["has_theorems"]:
+            continue
+        idx_with_thm += 1
+        fname = m["file"]
+        status = (
+            "Fixture negativo (rechazo esperado)"
+            if m["is_negative_fixture"]
+            else "Compila (v4.34.0-rc2); alcance del modelo"
+        )
+        lines.append(
+            f'  [{idx_with_thm}], [{_typ_mono(fname, "7.5pt")}], [*{m["theorems"]}*], [{_typ_mono(m["theorem_range"], "7.5pt")}], [{m["defs"]}], [{m["inductives"]}], [{m["structures"]}], [{m["abbrevs"]}], [{_typ_esc(status)}],'
+        )
+    lines.extend(
+        [
+            ")",
+            "",
+            "== 2.2 Los 4 Módulos Auxiliares sin Declaraciones `theorem`",
+            "",
+            "#table(",
+            "  columns: (0.35fr, 1.8fr, 0.5fr, 0.4fr, 0.4fr, 0.4fr, 0.4fr, 3.0fr),",
+            "  inset: 4.5pt,",
+            "  align: (center, left, center, center, center, center, center, left),",
+            '  stroke: 0.5pt + rgb("#cbd5e1"),',
+            '  table.header([*\\#*], [*Módulo Auxiliar `.lean`*], [*Thm*], [*def*], [*ind*], [*str*], [*abb*], [*Rol en `proof/lean/` y Estatus*]),',
+        ]
+    )
+    idx_aux = 0
+    for m in data["modules"]:
+        if m["has_theorems"]:
+            continue
+        idx_aux += 1
+        fname = m["file"]
+        lines.append(
+            f'  [{idx_aux}], [{_typ_mono(fname, "7.5pt")}], [*0*], [{m["defs"]}], [{m["inductives"]}], [{m["structures"]}], [{m["abbrevs"]}], [{_typ_esc(aux_roles.get(fname, "Módulo auxiliar"))}],'
+        )
+    lines.extend(
+        [
+            ")",
+            "",
+            "= 3. Catálogo Trazable 1:1 de las 144 Declaraciones de Teoremas (`#001` – `#144`)",
+            "",
+        ]
+    )
+    current_file = None
+    for thm in data["theorems"]:
+        if thm["file"] != current_file:
+            current_file = thm["file"]
+            lines.append(f"== Módulo: {_typ_esc(current_file)}")
+            lines.append("")
+        ax_str = (
+            ", ".join(thm["axioms"])
+            if isinstance(thm["axioms"], list) and thm["axioms"]
+            else ("ninguno ([])" if thm["axioms"] == [] else str(thm["axioms"]))
+        )
+        full_stmt = f"{thm['kind']} {thm['name']} {thm['signature']}"
+        lines.append(
+            '#block(breakable: true, width: 100%, inset: (left: 6pt, top: 3pt, bottom: 3pt), stroke: (left: 1.5pt + rgb("#64748b")))['
+        )
+        lines.append(
+            f'  *{_typ_esc(thm["id"])}* · {_typ_mono(thm["qualified_name"], "8pt")} ({_typ_esc(thm["file"])}:{thm["line"]}) · *Clase:* [{_typ_mono(thm["result_class"], "7.5pt")}] · *Axiomas:* {_typ_mono(ax_str, "7.5pt")}'
+        )
+        if thm.get("canonical_alias"):
+            lines.append(
+                f'  #v(1pt) *Alias semántico exacto:* {_typ_mono(thm["canonical_alias"], "7.5pt")}'
+            )
+        lines.append("  #v(1.5pt)")
+        lines.append(
+            f'  #par(justify: false)[*Enunciado:* {_typ_mono(full_stmt, "7.5pt")}]'
+        )
+        lines.append(
+            f'  *Alcance exacto:* {_typ_esc(thm["scope_note"])}'
+        )
+        lines.append("]")
+        lines.append("#v(2pt)")
+
+    lines.extend(
+        [
+            "",
+            f"= 4. Anexo Contrastable: Las 228 Definiciones e Inductivos (`#C001–#C228`) y las {t['structures_total'] + t['abbrevs_total']} Estructuras/Abreviaturas ({t['non_theorem_declarations_total']} Construcciones No-Teorema)",
+            "",
+            f"Esta tabla enumera 1:1 todas las declaraciones de tipos y funciones en `proof/lean/*.lean` que sustentan los 144 teoremas, permitiendo verificar mecánicamente tanto el subtotal *{t['defs_total']} def + {t['inductives_total']} inductive = {t['core_228_constructions_total']}* (`144 + 228 = 372`) como el total incluyendo *{t['structures_total']} structure + {t['abbrevs_total']} abbrev* (`{t['non_theorem_declarations_total']}` construcciones no-teorema; `144 + {t['non_theorem_declarations_total']} = {t['all_top_level_declarations_total']}` declaraciones totales).",
+            "",
+            "#table(",
+            "  columns: (0.55fr, 0.9fr, 1.8fr, 0.8fr, 2.6fr),",
+            "  inset: 4pt,",
+            "  align: (center, center, left, center, left),",
+            '  stroke: 0.4pt + rgb("#cbd5e1"),',
+            '  table.header([*\\#*], [*ID Core-228*], [*Módulo:Línea*], [*Especie*], [*Nombre Cualificado*]),',
+        ]
+    )
+    for c in data["constructions"]:
+        cid = (
+            _typ_mono(c["core228_id"], "7.5pt")
+            if c["core228_id"]
+            else (_typ_mono(c["struct_id"], "7.5pt") if c.get("struct_id") else "_abbrev_")
+        )
+        loc = f"{c['file']}:{c['line']}"
+        lines.append(
+            f'  [{c["all_index"]:03d}], [{cid}], [{_typ_mono(loc, "7.5pt")}], [{_typ_mono(c["kind"], "7.5pt")}], [{_typ_mono(c["qualified_name"], "7.5pt")}],'
+        )
+    lines.extend(
+        [
+            ")",
+            "",
+            "== 4.1 Cuerpo Íntegro y Obligaciones Internas de las 34 Estructuras (`#S01–#S34`)",
+            "",
+        ]
+    )
+    for s in data["structures"]:
+        lines.append(
+            '#block(breakable: true, width: 100%, inset: 5pt, stroke: 0.4pt + rgb("#cbd5e1"), radius: 2pt)['
+        )
+        lines.append(
+            f'  *{_typ_esc(s["struct_id"])}* · {_typ_mono(s["qualified_name"], "8pt")} ({_typ_esc(s["file"])}:{s["line"]})'
+        )
+        lines.append("  #v(2pt)")
+        for bline in s["body"].splitlines():
+            lines.append(f'  #par(justify: false)[{_typ_mono(bline, "7pt")}]')
+        lines.append("]")
+        lines.append("#v(2pt)")
+    lines.extend(
+        [
+            "",
+            "#v(10pt)",
+            "#line(length: 100%, stroke: 0.5pt + rgb(\"#94a3b8\"))",
+            "#align(right)[",
+            "  *Borja Fernández Angulo* · _Investigador en Sistemas Complejos_ \\",
+            "  BABYLON-60 Sovereign Core — Compilado en silicio con Typst 0.15+",
+            "]",
+            "",
+        ]
+    )
+    return "\n".join(lines)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Export deterministic Lean 4 formal census")
     parser.add_argument("--json-out", type=pathlib.Path, default=DEFAULT_JSON_OUT)
     parser.add_argument("--markdown-out", type=pathlib.Path, default=None)
+    parser.add_argument("--typst-out", type=pathlib.Path, default=None)
+    parser.add_argument("--pdf-out", type=pathlib.Path, default=None)
     parser.add_argument("--verify", action="store_true", help="Assert exact cardinal invariants")
     args = parser.parse_args()
 
@@ -617,11 +913,14 @@ def main() -> None:
         assert totals["theorems_total"] == 144, f"Expected 144 theorems, got {totals['theorems_total']}"
         assert totals["core_228_constructions_total"] == 228, f"Expected 228 core constructions, got {totals['core_228_constructions_total']}"
         assert totals["theorems_plus_core_228"] == 372, f"Expected 372 total (144+228), got {totals['theorems_plus_core_228']}"
+        assert totals["structures_total"] == 34, f"Expected 34 structures, got {totals['structures_total']}"
+        assert len(census["structures"]) == 34, f"Expected 34 structure bodies, got {len(census['structures'])}"
+        assert all(s.get("body") and s.get("fields") for s in census["structures"]), "Missing body or fields in structures"
         unresolved = [t["qualified_name"] for t in census["theorems"] if t["axioms"] == "UNRESOLVED"]
         assert not unresolved, f"Unresolved axioms for: {unresolved}"
         print(
             "[LEAN-CENSUS PASS] 26 modules (22+4) | 144 theorems | 228 def+inductive (372) | "
-            f"+34 struct +13 abbrev = {totals['all_top_level_declarations_total']} total declarations | 0 unresolved axioms"
+            f"+{totals['structures_total']} struct (full bodies) +{totals['abbrevs_total']} abbrev = {totals['all_top_level_declarations_total']} total declarations | 0 unresolved axioms"
         )
 
     args.json_out.parent.mkdir(parents=True, exist_ok=True)
@@ -631,6 +930,25 @@ def main() -> None:
         md = render_markdown(census)
         args.markdown_out.parent.mkdir(parents=True, exist_ok=True)
         args.markdown_out.write_text(md, encoding="utf-8")
+
+    if args.typst_out or args.pdf_out:
+        typ_src = render_typst(census)
+        if args.typst_out:
+            args.typst_out.parent.mkdir(parents=True, exist_ok=True)
+            args.typst_out.write_text(typ_src, encoding="utf-8")
+            typ_path = args.typst_out
+        else:
+            typ_path = args.pdf_out.with_suffix(".typ")
+            typ_path.parent.mkdir(parents=True, exist_ok=True)
+            typ_path.write_text(typ_src, encoding="utf-8")
+        if args.pdf_out:
+            args.pdf_out.parent.mkdir(parents=True, exist_ok=True)
+            subprocess.run(
+                ["/opt/homebrew/bin/typst", "compile", str(typ_path), str(args.pdf_out)],
+                check=True,
+            )
+            if not args.typst_out:
+                typ_path.unlink(missing_ok=True)
 
 
 if __name__ == "__main__":

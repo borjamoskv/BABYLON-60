@@ -216,7 +216,7 @@ La auditoría regulatoria sanciona al sistema por incumplimiento de los Arts. 9,
 
 ### [CONDICIONES DE BLINDAJE FORMAL]
 
-1. **Delimitación Epistémica en el Expediente Técnico (`INV_C5_EVIDENTIARY_DELIMITATION`):** Circunscribir formalmente el alcance de SCITT L5 y LARSA-120 al cumplimiento del Artículo 12 (Trazabilidad y Registro Forense) y del Artículo 15 (Ciberseguridad y Resiliencia). Prohibir en la documentación y contratos cualquier reclamo de que la verificación de tipos o el árbol de Merkle automatizan los Artículos 9, 10 o 14 ([`c5_enterprise_compliance_offer_invariant.md`](../../.agents/rules/c5_enterprise_compliance_offer_invariant.md)).
+1. **Delimitación Epistémica en el Expediente Técnico (`INV_C5_EVIDENTIARY_DELIMITATION`):** Circunscribir formalmente el alcance de SCITT L5 y LARSA-120 al cumplimiento del Artículo 12 (Trazabilidad y Registro Forense) y del Artículo 15 (Ciberseguridad y Resiliencia). Prohibir en la documentación y contratos cualquier reclamo de que la verificación de tipos o el árbol de Merkle automatizan los Artículos 9, 10 o 14 ([`agent_contracts.md` (Ring-3)](../03_guides/agent_contracts.md#ring-3)).
 2. **Protocolo de Fricción Cognitiva en la Interfaz (`INV_C5_COGNITIVE_FRICTION`):** Para acciones de alto riesgo que requieran firma humana en el ledger L5, el kernel debe rechazar confirmaciones booleanas simples (ACK) o firmas emitidas con latencia inferior al umbral fisiológico de lectura cognitiva ($\Delta t_{\text{human}} < \tau_{\min} = 1.0\text{ s}$), exigiendo que el operador firme un compromiso contrafactual junto con una línea de parada de hardware (*kill-switch* en Ring-0 independiente del quórum BFT).
 
 ---

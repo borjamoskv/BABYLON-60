@@ -103,11 +103,11 @@ def test_fl_m01_transitive_revocation_closure_100_chain(engine: MemoryGovernance
     assert engine.ledger.verify_integrity() is True
 
 
-@pytest.fixture(params=["shared", "separate"])
-def disbelief_case(engine: MemoryGovernanceEngine, request: pytest.FixtureRequest, tmp_path: Path) -> DisbeliefCase:
+@pytest.fixture(params=["shared", "injected"])
+def disbelief_case(engine: MemoryGovernanceEngine, request: pytest.FixtureRequest) -> DisbeliefCase:
     """A sealed retraction with a source, counter-evidence, and one dependent."""
-    if request.param == "separate":
-        engine.ledger = type(engine.ledger)(tmp_path / "separate_ledger.db")
+    if request.param == "injected":
+        engine.ledger = type(engine.ledger)(engine.db_path)
     fact = engine.add_record(
         tenant_id="tenant-alpha",
         principal="operator-root",

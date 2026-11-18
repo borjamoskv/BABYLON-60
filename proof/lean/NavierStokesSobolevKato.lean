@@ -142,4 +142,7 @@ theorem millennium_navier_stokes_regular_by_decide :
     isMillenniumRegular { bkmIntegralBounded := true, constantinFeffermanSmooth := true, sobolevH3Controlled := true } = true := by
   decide
 
+/-- Alias semánticamente exacto para `#132`: aceptación decidible de tres flags booleanos en el monitor discreto. -/
+abbrev bkm_monitor_flags_accepted_by_decide := @millennium_navier_stokes_regular_by_decide
+
 end B60.NavierStokes.SobolevKato

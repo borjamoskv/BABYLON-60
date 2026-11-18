@@ -1,17 +1,20 @@
 #!/usr/bin/env python3
-"""Motor canónico de cálculo de firma C5-REAL y auditoría agnóstica de selector (MOSKV-1).
+"""Motor canónico de cálculo de firma C5-REAL y auditoría universal de selector (MOSKV-1).
 
 Calcula y genera la firma de salida de 6 campos integrando:
 1. Detección dinámica agnóstica de plataforma (Antigravity, Claude Code, Codex, Cursor, CLI).
-2. Clasificación universal en 3 Estratos de Capacidad/Esfuerzo (sin modelos prefijados).
-3. Herencia causal multi-turno para pulsos somáticos ("ok", "sigue", "itera", "ejecuta") y contratos /goal.
-4. Telemetría de silicio en tiempo real (Apple Silicon M3 Pro / Darwin) y exergía léxica (c5-lexical-v2).
+2. Clasificación universal en el Álgebra de Capacidades (Soberanía x Estrato x Esfuerzo x Topología)
+   delegada a babylon60.cognitive_pilot.universal_autoroute (sin modelos prefijados en lógica).
+3. Herencia causal multi-turno para pulsos somáticos, menciones @[...], aprobaciones /plan
+   ("Comments on artifact URI:") y contratos /goal.
+4. Telemetría de silicio en tiempo real (Apple Silicon M3 Pro / Darwin) e índice léxico (c5-lexical-v2).
 """
 
 from __future__ import annotations
 
 import argparse
 from collections.abc import Mapping
+from dataclasses import asdict
 import json
 import os
 from pathlib import Path
@@ -19,96 +22,28 @@ import re
 import subprocess
 import sys
 
+repo_root = Path(__file__).absolute().parents[2]
+kish_root = repo_root / "01_KISH_ENGINE"
+for candidate in (repo_root, kish_root):
+    if str(candidate) not in sys.path and candidate.is_dir():
+        sys.path.insert(0, str(candidate))
 
-repo_root = Path(__file__).resolve().parents[2]
-if str(repo_root) not in sys.path:
-    sys.path.insert(0, str(repo_root))
-
-SETTINGS_CHANGE_RE = re.compile(
-    r"setting `Model Selection` from .*? to (.*?)(?:\.\s*No need|\.\s*$|\n|$)",
-    re.IGNORECASE,
-)
-USER_REQUEST_RE = re.compile(
-    r"<USER_REQUEST>\s*(.*?)\s*</USER_REQUEST>",
-    re.DOTALL,
-)
-CONTRACT_LEVEL_RE = re.compile(
-    r"ROTAR SELECTOR A:.*?\|\s*NIVEL:\s*([A-Za-zÁÉÍÓÚáéíóú0-9_() -]+)",
-    re.IGNORECASE,
-)
-CONTINUATION_PULSES = frozenset(
-    {
-        "ok",
-        "dale",
-        "sigue",
-        "procede",
-        "adelante",
-        "ejecuta",
-        "ejecútalo",
-        "ejecutalo",
-        "hazlo",
-        "si",
-        "sí",
-        "go",
-        "continue",
-    }
-)
-DIALECTICAL_PULSES = frozenset(
-    {
-        "itera",
-        "itrera",
-        "itra",
-        "iteraa",
-        "iytera",
-        "falsabiliza",
-        "falsabilia",
-        "falsabliza",
-        "falsa",
-        "apex",
-        "salto topológico",
-        "salto topologico",
-    }
+from babylon60.cognitive_pilot.universal_autoroute import (  # noqa: E402
+    CONTINUATION_PULSES,
+    DIALECTICAL_PULSES,
+    SETTINGS_CHANGE_RE,
+    classify_universal_capability,
+    evaluate_universal_route,
+    extract_latest_task_context,
+    extract_turn_request_with_metadata,
+    infer_universal_target,
+    parse_universal_selector,
 )
 
 
 def parse_selector_string(selection: str, explicit_mode: str = "") -> tuple[str, str]:
     """Extrae (model_display, mode_display) de cualquier cadena de selector o entorno."""
-    raw = selection.strip()
-    if not raw or raw.casefold() in {"none", "unknown", "no expuesto", "n/a"}:
-        return "No expuesto", "No expuesto"
-
-    if explicit_mode and explicit_mode.strip():
-        return raw, explicit_mode.strip()
-
-    # Caso: "Gemini 3.8 Flash High (Fast)"
-    m_flash_fast = re.match(r"^(.*?)\s+(High\s*\(Fast\)|Fast|Low|Medium|High)$", raw, re.IGNORECASE)
-    if m_flash_fast:
-        return m_flash_fast.group(1).strip(), m_flash_fast.group(2).strip()
-
-    # Caso: "Gemini 4 Argon (High)" o "GPT-OSS 120B (Medium)"
-    m_paren = re.search(r"\(([^()]+)\)\s*$", raw)
-    if m_paren:
-        inner = m_paren.group(1).strip()
-        if inner.casefold() in {
-            "low",
-            "medium",
-            "high",
-            "fast",
-            "high (fast)",
-            "max",
-            "máx",
-            "máximo",
-            "extended",
-        }:
-            return raw, inner
-
-    # Inferencia limpia de modo por nombre si el host solo expone el ID del modelo
-    low_raw = raw.casefold()
-    if re.search(r"\b(flash|haiku|mini|nano|lite|instant)\b", low_raw):
-        return raw, "Fast"
-    if re.search(r"\b(opus|o1|o3|ultra|deep)\b", low_raw):
-        return raw, "High"
-    return raw, "Standard"
+    return parse_universal_selector(selection, explicit_mode)
 
 
 def detect_active_model_and_mode(
@@ -130,7 +65,10 @@ def detect_active_model_and_mode(
     if hook_payload:
         hp_model = str(hook_payload.get("model") or "").strip()
         hp_mode = str(
-            hook_payload.get("thinking_level") or hook_payload.get("effort") or hook_payload.get("cognitive_mode") or ""
+            hook_payload.get("thinking_level")
+            or hook_payload.get("effort")
+            or hook_payload.get("cognitive_mode")
+            or ""
         ).strip()
         if hp_model:
             model, mode = parse_selector_string(hp_model, hp_mode)
@@ -161,7 +99,6 @@ def detect_active_model_and_mode(
                 if not raw_line.strip():
                     continue
                 record = json.loads(raw_line)
-                # Formato Antigravity: <USER_SETTINGS_CHANGE> en USER_INPUT
                 if record.get("type") == "USER_INPUT":
                     content = str(record.get("content", ""))
                     matches = list(SETTINGS_CHANGE_RE.finditer(content))
@@ -169,7 +106,6 @@ def detect_active_model_and_mode(
                         selection = matches[-1].group(1).rstrip(".").strip()
                         model, mode = parse_selector_string(selection)
                         return model, mode, "selector UI"
-                # Formato Claude Code JSONL: {"type": "assistant", "message": {"model": "..."}}
                 msg_obj = record.get("message")
                 if isinstance(msg_obj, dict) and msg_obj.get("model"):
                     c_model = str(msg_obj["model"]).strip()
@@ -182,116 +118,20 @@ def detect_active_model_and_mode(
     return "No expuesto", "No expuesto", "sin metadatos"
 
 
+def _extract_turn_request_text(content: str) -> str:
+    """Extrae el texto del turno expandiendo @[...] y herencias de artefactos aprobados."""
+    return extract_turn_request_with_metadata(content)
+
+
 def extract_latest_user_request(transcript_path: Path | None) -> str:
-    """Extrae el contexto de tarea del último turno (con herencia causal para pulsos breves)."""
-    if transcript_path is None or not transcript_path.is_file():
-        return ""
-    try:
-        lines = transcript_path.read_text(encoding="utf-8", errors="ignore").splitlines()
-        user_requests: list[str] = []
-        recent_contracts: list[str] = []
-
-        for raw_line in reversed(lines):
-            if not raw_line.strip():
-                continue
-            record = json.loads(raw_line)
-            rtype = record.get("type")
-            content = str(record.get("content", ""))
-            if rtype == "USER_INPUT":
-                m = USER_REQUEST_RE.search(content)
-                req = m.group(1).strip() if m else content.strip()
-                if req:
-                    user_requests.append(req)
-            elif rtype == "PLANNER_RESPONSE" and (
-                "CONTRATO /GOAL BLOQUEADO" in content or "ROTAR SELECTOR A:" in content
-            ):
-                recent_contracts.append(content)
-            if len(user_requests) >= 3 and recent_contracts:
-                break
-
-        if not user_requests:
-            return ""
-
-        latest = user_requests[0]
-        latest_norm = re.sub(r"[/!?.]+", "", latest.casefold()).strip()
-
-        # Si es un pulso de continuación ("ok", "dale", "sigue", "ejecuta"):
-        # hereda el contrato /goal emitido por el agente o las peticiones previas del operador.
-        if latest_norm in CONTINUATION_PULSES:
-            prev_context = " | ".join(user_requests[1:4]) if len(user_requests) > 1 else ""
-            if recent_contracts:
-                return f"{recent_contracts[0]} [CONTEXTO HILO: {prev_context}]"
-            if prev_context:
-                return f"{latest} [CONTEXTO PREVIO: {prev_context}]"
-
-        # Si es un pulso dialéctico ("itera", "falsabiliza", "apex"):
-        # conserva la marca de iteración más el contexto previo para no degradar a Estrato 1.
-        if latest_norm in DIALECTICAL_PULSES:
-            prev = " ".join(user_requests[1:3]) if len(user_requests) > 1 else ""
-            return f"implementa iteración dialéctica ({latest_norm}) {prev}".strip()
-
-        # Herencia de dominio conversacional: si el turno actual es breve (<120 chars),
-        # adjunta el contexto de los últimos 2 turnos del operador para no perder invariantes
-        # de dominio (ej. LegalTech, Ring-0) ante pulsos cortos o citas de bloques.
-        if len(latest) < 120 and len(user_requests) > 1:
-            prev_context = " | ".join(user_requests[1:4])
-            return f"{latest} [CONTEXTO HILO: {prev_context}]"
-
-        return latest
-    except Exception:
-        return ""
+    """Extrae el contexto de tarea del último turno (con herencia causal para pulsos y /plan)."""
+    task_text, _, _, _ = extract_latest_task_context(transcript_path)
+    return task_text
 
 
 def classify_capability_tier(model: str, mode: str) -> dict[str, object]:
-    """Clasifica cualquier combinación (LLM, Modo) en los 3 Estratos Universales C5."""
-    m_low = model.casefold().strip()
-    mode_low = mode.casefold().strip()
-
-    if not m_low or m_low.startswith("no expuesto") or m_low in {"none", "unknown", "n/a"}:
-        return {
-            "tier": 0,
-            "effort": "no_expuesto",
-            "label": "No expuesto",
-        }
-
-    # Estrato 1 — Triaje / Fast (modelos ligeros/rápidos o esfuerzo mínimo/fast)
-    if re.search(r"\b(flash|haiku|mini|nano|lite|instant)\b", m_low) or re.search(
-        r"\b(fast|minimal|instant)\b", mode_low
-    ):
-        return {
-            "tier": 1,
-            "effort": "fast",
-            "label": "Estrato 1 (Triaje / Fast)",
-        }
-
-    # Estrato 3 — Razonamiento Profundo / Apex (modelos pesados o esfuerzo High/Max/Extended)
-    is_explicit_low_or_med = bool(re.search(r"\b(low|bajo|medium|medio|standard)\b", mode_low))
-    is_high_mode = bool(
-        re.search(r"\b(high|alto|max|máx|máximo|extended|ultrathink|deep)\b", mode_low)
-        or re.search(r"\b(high|max|máx)\b", m_low)
-    )
-    is_apex_model = bool(re.search(r"\b(opus|o1|o3|ultra)\b", m_low) or "deep-research" in m_low)
-
-    if is_high_mode or (is_apex_model and not is_explicit_low_or_med):
-        return {
-            "tier": 3,
-            "effort": "high",
-            "label": "Estrato 3 (Razonamiento Profundo / High)",
-        }
-
-    # Estrato 2 — Ejecución Acotada (Low vs Medium)
-    if any(k in mode_low for k in ("low", "bajo")) or "(low)" in m_low or "-low" in m_low:
-        return {
-            "tier": 2,
-            "effort": "low",
-            "label": "Estrato 2 (Ejecución Acotada / Low)",
-        }
-
-    return {
-        "tier": 2,
-        "effort": "medium",
-        "label": "Estrato 2 (Ejecución Acotada / Medium)",
-    }
+    """Clasifica cualquier combinación (LLM, Modo) en los Estratos Universales C5."""
+    return classify_universal_capability(model, mode)
 
 
 def infer_optimal_tier(
@@ -301,99 +141,34 @@ def infer_optimal_tier(
     has_contract: bool | None = None,
     task_tier: str | None = None,
 ) -> dict[str, object]:
-    """Determina el Estrato y Nivel óptimos requeridos por la tarea activa."""
-    if task_tier:
-        t_norm = task_tier.casefold().strip()
-        if t_norm in {"1", "fast", "triage", "triaje"}:
-            return {"tier": 1, "effort": "fast", "label": "Estrato 1 (Triaje / Fast)"}
-        if t_norm in {"2", "2-low", "low", "bajo"}:
-            return {"tier": 2, "effort": "low", "label": "Estrato 2 (Ejecución Acotada / Low)"}
-        if t_norm in {"2-medium", "medium", "medio"}:
-            return {"tier": 2, "effort": "medium", "label": "Estrato 2 (Ejecución Acotada / Medium)"}
-        if t_norm in {"3", "high", "alto", "max", "apex"}:
-            return {"tier": 3, "effort": "high", "label": "Estrato 3 (Razonamiento Profundo / High)"}
-
-    text_low = task_text.casefold()
-    norm_pulse = re.sub(r"[/!?.]+", "", text_low).strip()
-
-    # 1. Detección de Contrato /goal explícito en el texto
-    m_contract = CONTRACT_LEVEL_RE.search(task_text)
-    if m_contract:
-        prescribed = m_contract.group(1).casefold()
-        if "fast" in prescribed:
-            return {"tier": 1, "effort": "fast", "label": "Estrato 1 (Triaje / Fast)"}
-        if "high" in prescribed or "max" in prescribed:
-            return {"tier": 3, "effort": "high", "label": "Estrato 3 (Razonamiento Profundo / High)"}
-        if "medium" in prescribed:
-            return {"tier": 2, "effort": "medium", "label": "Estrato 2 (Ejecución Acotada / Medium)"}
-        return {"tier": 2, "effort": "low", "label": "Estrato 2 (Ejecución Acotada / Low)"}
-
-    detected_contract = (
-        has_contract
-        if has_contract is not None
-        else ("1. objetivo exacto:" in text_low or "archivos permitidos" in text_low)
+    """Determina el Estrato, Esfuerzo y Topología óptimos requeridos por la tarea activa."""
+    target = infer_universal_target(
+        task_text,
+        files_count=files_count,
+        has_contract=has_contract,
+        task_tier=task_tier,
     )
-    if detected_contract:
-        if files_count > 4:
-            return {"tier": 2, "effort": "medium", "label": "Estrato 2 (Ejecución Acotada / Medium)"}
-        return {"tier": 2, "effort": "low", "label": "Estrato 2 (Ejecución Acotada / Low)"}
+    return {
+        "tier": target.tier,
+        "effort": target.effort,
+        "reasoning_effort": target.reasoning_effort,
+        "topology": target.topology,
+        "label": target.label,
+        "sovereignty": target.sovereignty,
+    }
 
-    # 2. Veto Fail-Closed a Estrato 1 (Flash/Fast) en Dominio LegalTech y Deliberación del Sanedrín
-    legaltech_and_sanedrin_keywords = (
-        "legaltech",
-        "eu ai act",
-        "auditoría legal",
-        "dictamen jurídico",
-        "contrato mercantil",
-        "jurisprudencia",
-        "sanedrín",
-        "sanedrin",
-    )
-    if any(kw in text_low for kw in legaltech_and_sanedrin_keywords):
-        return {"tier": 2, "effort": "medium", "label": "Estrato 2 (Ejecución Acotada / Medium)"}
 
-    # 2b. Detección de Estrato 3 (Arquitectura Crítica Ring-0 / Verificación Formal / Concurrencia)
-    ring0_keywords = (
-        "lean 4",
-        "lean4",
-        "lake build",
-        "z3",
-        "seqlock",
-        "sharedmanifest",
-        "spsc",
-        "concurrencia",
-        "arquitectura crítica",
-        "debugging raíz",
-        "thermos audit",
-        "auditoría termonuclear",
-        "salto topológico",
-        "salto topologico",
-    )
-    if any(kw in text_low for kw in ring0_keywords):
-        return {"tier": 3, "effort": "high", "label": "Estrato 3 (Razonamiento Profundo / High)"}
-
-    # 3. Detección de Estrato 2 (Ejecución Acotada: Medium para >4 archivos, Low para implementación/iteración <=4)
-    if files_count > 4 or "refactor multifichero" in text_low:
-        return {"tier": 2, "effort": "medium", "label": "Estrato 2 (Ejecución Acotada / Medium)"}
-
-    impl_keywords = (
-        "implementa",
-        "impleentalo",
-        "impleméntalo",
-        "codifica",
-        "parchea",
-        "refactoriza",
-        "añade",
-        "edita",
-        "corrige el bug",
-        "ejecuta el contrato",
-        "iteración dialéctica",
-    )
-    if norm_pulse in DIALECTICAL_PULSES or any(kw in text_low for kw in impl_keywords) or (1 <= files_count <= 4):
-        return {"tier": 2, "effort": "low", "label": "Estrato 2 (Ejecución Acotada / Low)"}
-
-    # 4. Por defecto: Estrato 1 (Consultas, triaje, bash rápido o destilación Fase 1)
-    return {"tier": 1, "effort": "fast", "label": "Estrato 1 (Triaje / Fast)"}
+def _infer_host_from_source(source: str) -> str:
+    src_low = source.casefold()
+    if "claude" in src_low:
+        return "claude_code"
+    if "codex" in src_low or "openai" in src_low:
+        return "codex_cli"
+    if "gemini" in src_low:
+        return "gemini_cli"
+    if "selector ui" in src_low:
+        return "antigravity_ui"
+    return "generic"
 
 
 def evaluate_selector_fitness(
@@ -402,51 +177,34 @@ def evaluate_selector_fitness(
     task_text: str = "",
     *,
     source: str = "selector UI",
+    host: str | None = None,
     files_count: int = 0,
     has_contract: bool | None = None,
     task_tier: str | None = None,
+    context_tokens: int = 0,
+    rework_failures: int = 0,
+    infra_blocked: bool = False,
+    contains_unredacted_secrets: bool = False,
+    session_id: str | None = None,
 ) -> dict[str, object]:
-    """Evalúa si el LLM y Modo activos coinciden con el Estrato óptimo de la tarea."""
-    active = classify_capability_tier(model, mode)
-    optimal = infer_optimal_tier(
+    """Evalúa si el LLM y Modo activos son coherentes con el Álgebra Universal e Histéresis."""
+    effective_host = host or _infer_host_from_source(source)
+    verdict = evaluate_universal_route(
+        model,
+        mode,
         task_text,
+        source=source,
+        host=effective_host,
         files_count=files_count,
         has_contract=has_contract,
         task_tier=task_tier,
+        context_tokens=context_tokens,
+        rework_failures=rework_failures,
+        infra_blocked=infra_blocked,
+        contains_unredacted_secrets=contains_unredacted_secrets,
+        session_id=session_id,
     )
-
-    if active["tier"] == 0:
-        return {
-            "status": "NO_EXPUESTO",
-            "active": active,
-            "optimal": optimal,
-            "llm_field": "No expuesto",
-            "mode_field": "No expuesto",
-            "warning": None,
-        }
-
-    is_optimal = (active["tier"] == optimal["tier"]) and (active["effort"] == optimal["effort"])
-    opt_effort_display = str(optimal["effort"]).capitalize()
-
-    if is_optimal:
-        return {
-            "status": "ÓPTIMO",
-            "active": active,
-            "optimal": optimal,
-            "llm_field": f"{model} ({source} — ÓPTIMO: {active['label']})",
-            "mode_field": f"{mode} ({source} — ÓPTIMO)",
-            "warning": None,
-        }
-
-    warning = f"⚠️ DESAJUSTE DE SELECTOR: Activo = {model} | {mode} [{active['label']}] | Óptimo = {optimal['label']}"
-    return {
-        "status": "DESAJUSTADO",
-        "active": active,
-        "optimal": optimal,
-        "llm_field": f"{model} ({source} — DESAJUSTADO -> Óptimo: {optimal['label']})",
-        "mode_field": f"{mode} ({source} — DESAJUSTADO -> Óptimo: {opt_effort_display})",
-        "warning": warning,
-    }
+    return asdict(verdict)
 
 
 def format_pre_invocation_audit_line(
@@ -462,27 +220,42 @@ def format_pre_invocation_audit_line(
         env=env,
         hook_payload=hook_payload,
     )
-    task_text = extract_latest_user_request(t_path)
+    task_text, context_tokens, rework_failures, infra_blocked = extract_latest_task_context(t_path)
     if not task_text and hook_payload and hook_payload.get("prompt"):
         task_text = str(hook_payload["prompt"])
 
-    fitness = evaluate_selector_fitness(model, mode, task_text, source=source)
+    session_id = str(hook_payload.get("conversationId") or "") if hook_payload else None
+    fitness = evaluate_selector_fitness(
+        model,
+        mode,
+        task_text,
+        source=source,
+        context_tokens=context_tokens,
+        rework_failures=rework_failures,
+        infra_blocked=infra_blocked,
+        session_id=session_id,
+    )
     raw_active = fitness.get("active")
     active: dict[str, object] = raw_active if isinstance(raw_active, dict) else {}
     raw_optimal = fitness.get("optimal")
     optimal: dict[str, object] = raw_optimal if isinstance(raw_optimal, dict) else {}
 
     if fitness["status"] == "NO_EXPUESTO":
-        return f"🧠 [AUDITORÍA DE SELECTOR · RING-4]: ACTIVO = No expuesto | TAREA ESTIMADA = {optimal['label']}"
+        return f"🧠 [AUDITORÍA DE SELECTOR · RING-4]: ACTIVO = No expuesto | TAREA ESTIMADA = {optimal.get('label', 'No expuesto')}"
 
     if fitness["status"] == "ÓPTIMO":
-        verdict = f"ÓPTIMO ({active['label']})"
+        verdict = f"ÓPTIMO ({active.get('label', '')})"
+        if fitness.get("recommended_action") == "lower_effort" and not fitness.get("notice_suppressed"):
+            verdict += " | AVISO = Esfuerzo Extra activo en tarea de triaje (bajar a Low/Medium ahorra cuota)"
     else:
-        verdict = f"⚠️ DESAJUSTADO -> Óptimo: {optimal['label']}"
+        opt_target = fitness.get("concrete_option") or optimal.get("label", "")
+        verdict = f"⚠️ DESAJUSTADO -> Óptimo: {optimal.get('label', '')}"
+        if opt_target and str(opt_target) not in str(optimal.get("label", "")) and not fitness.get("notice_suppressed"):
+            verdict += f" [Sugerido: {opt_target}]"
 
     return (
         f"🧠 [AUDITORÍA DE SELECTOR · RING-4]: "
-        f"ACTIVO = {model} | Modo: {mode} ({source}) [{active['label']}] | "
+        f"ACTIVO = {model} | Modo: {mode} ({source}) [{active.get('label', '')}] | "
         f"VEREDICTO = {verdict}"
     )
 
@@ -526,7 +299,7 @@ def generate_signature(
     audit_selector: bool = True,
 ) -> str:
     if repo_root is None:
-        repo_root = Path(__file__).resolve().parents[2]
+        repo_root = Path(__file__).absolute().parents[2]
 
     detected_model, detected_mode, source = detect_active_model_and_mode(transcript_path=transcript_path)
     final_model = model if (model is not None and model.strip()) else detected_model
@@ -564,11 +337,12 @@ def main() -> int:
     parser.add_argument("--body", type=Path, help="Ruta al archivo con el cuerpo del mensaje")
     parser.add_argument("--model", default=None, help="Modelo activo (si se omite, se auto-detecta)")
     parser.add_argument("--mode", default=None, help="Modo cognitivo activo (si se omite, se auto-detecta)")
+    parser.add_argument("--host", default=None, help="Perfil de host opcional (antigravity_ui, claude_code, codex_cli, etc.)")
     parser.add_argument("--transcript", type=Path, default=None, help="Ruta opcional a transcript.jsonl")
     parser.add_argument("--task-text", default="", help="Texto de la tarea o prompt para evaluar adecuación")
     parser.add_argument(
         "--task-tier",
-        choices=["fast", "low", "medium", "high"],
+        choices=["fast", "low", "medium", "high", "xhigh", "extra"],
         default=None,
         help="Estrato óptimo explícito de la tarea",
     )
@@ -585,18 +359,23 @@ def main() -> int:
         det_model, det_mode, source = detect_active_model_and_mode(transcript_path=args.transcript)
         use_model = args.model or det_model
         use_mode = args.mode or det_mode
-        task = args.task_text or extract_latest_user_request(args.transcript)
+        task, ctx_tokens, rework_failures, infra_blocked = extract_latest_task_context(args.transcript)
+        effective_task = args.task_text or task
         report = evaluate_selector_fitness(
             use_model,
             use_mode,
-            task,
+            effective_task,
             source=source,
+            host=args.host,
             task_tier=args.task_tier,
+            context_tokens=ctx_tokens,
+            rework_failures=rework_failures,
+            infra_blocked=infra_blocked,
         )
         print(json.dumps(report, ensure_ascii=False, indent=2))
         return 0
 
-    repo_root = Path(__file__).resolve().parents[2]
+    repo_root = Path(__file__).absolute().parents[2]
     body_text = args.body.read_text(encoding="utf-8") if args.body else sys.stdin.read()
 
     sig = generate_signature(

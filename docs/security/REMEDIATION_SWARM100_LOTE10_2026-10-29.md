@@ -3,14 +3,14 @@
 C0574 (P1) y C0575 (P2) pasan a FIXED para la selección insegura de locks y
 bases de datos durante la purga. La única fuente productiva editada es
 `scripts/c5_verifiers/purge_residuals.py`. El
-[registro reconciliado](evidence/swarm100-round3-20261028/registry.json)
-y la [validación final](evidence/swarm100-lot10-20261029/validation.json)
+[registro reconciliado](RETENTION.md)
+y la [validación final](RETENTION.md)
 conservan estados, comandos, hashes y límites.
 
 ## Reproducción y aceptación
 
-Las [nueve reproducciones previas](evidence/swarm100-lot10-20261029/before-tests.log)
-fallaron contra el [hash previsto](evidence/swarm100-lot10-20261029/before-source-manifest.json).
+Las [nueve reproducciones previas](RETENTION.md)
+fallaron contra el [hash previsto](RETENTION.md).
 Se observaron desaparición de las rutas de locks abiertos, pérdida de la
 exclusión de Git, desaparición de rutas SQLite/WAL/SHM y archivos parecidos, pérdida
 de una base dentro de una caché y una afirmación de 0% entropía sin evidencia.
@@ -23,7 +23,7 @@ con el módulo bloqueado antes de recoger los tests. Pasan MyPy con
 check-untyped-defs, Ruff y los controles documentales. Fuente y pruebas conservan
 sus hashes antes/después de la suite.
 
-La [revisión independiente](evidence/swarm100-lot10-20261029/independent-review.json)
+La [revisión independiente](RETENTION.md)
 aprueba **11 controles en 14 raíces temporales**, repite las 60 regresiones y
 Ruff y no deja hallazgos accionables abiertos dentro de estos dos IDs.
 Contrasta inode/contenido/exclusión Git, SQLite activa incluso bajo nombre .pyc,
@@ -41,7 +41,7 @@ archivos regulares .pyc dentro de __pycache__, del usuario actual, con un único
 hardlink y cabecera reconocida de la versión Python en ejecución. Nunca elimina
 directorios. Conserva .DS_Store opacos, .pyo, bytecode fuera de __pycache__,
 cabeceras desconocidas/truncadas y contenido de cachés no acreditadas. Este
-[refinamiento previo al parche](evidence/swarm100-lot10-20261029/task-contract.md)
+[refinamiento previo al parche](RETENTION.md)
 evita que rmtree destruya datos colocados dentro de una carpeta llamada caché.
 
 Git, scratch, dependencias/builds y cachés opacas se excluyen del recorrido.
@@ -93,7 +93,7 @@ repositorio libre y cualquier certificación derivada del listado de borrados.
   real del proyecto, bases del operador, firma/hardware, runtime protegido,
   publicación o ATTESTED. Se omite la telemetría global.
 
-El [control de alcance](evidence/swarm100-lot10-20261029/scope-check.json)
+El [control de alcance](RETENTION.md)
 confirma intactos los lotes anteriores, dependencias y lockfiles. Es una
 reescritura completa del único script autorizado; no se modificaron otros
 archivos productivos.

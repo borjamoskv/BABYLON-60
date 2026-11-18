@@ -491,10 +491,16 @@ print("Sello Criptográfico:", response.id)</code></pre>
         if (data.choices && data.choices[0]) {
           outputBox.textContent = data.choices[0].message.content;
           activeSeal.textContent = `SEAL: ${data.id}`;
-          receiptDetails.innerHTML = `
-            <div class="receipt-badge">WORM HASH: ${data.babylon_attestation_hash}</div>
-            <div class="receipt-badge" style="border-color: var(--accent-green); color: var(--accent-green);">ESTADO: CONFORME EU AI ACT</div>
-          `;
+          // C0493: el hash llega de la respuesta; se inserta como texto.
+          const hashBadge = document.createElement('div');
+          hashBadge.className = 'receipt-badge';
+          hashBadge.textContent = 'WORM HASH: ' + String(data.babylon_attestation_hash ?? '');
+          const stateBadge = document.createElement('div');
+          stateBadge.className = 'receipt-badge';
+          stateBadge.style.borderColor = 'var(--accent-green)';
+          stateBadge.style.color = 'var(--accent-green)';
+          stateBadge.textContent = 'ESTADO: CONFORME EU AI ACT';
+          receiptDetails.replaceChildren(hashBadge, stateBadge);
         } else {
           outputBox.textContent = "Error en respuesta: " + JSON.stringify(data);
         }
@@ -513,17 +519,39 @@ print("Sello Criptográfico:", response.id)</code></pre>
           tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: var(--text-muted);">Sin transacciones registradas aún en esta sesión.</td></tr>';
           return;
         }
-        tbody.innerHTML = list.map(r => `
-          <tr>
-            <td>${r.timestamp_utc.replace('T', ' ').substring(0, 19)}</td>
-            <td><strong style="color: var(--accent-blue);">${r.attestation_seal}</strong></td>
-            <td>${r.model_id}</td>
-            <td style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);">${r.prompt_hash.substring(0, 16)}...</td>
-            <td><span class="badge-ok">VERIFICADO (ART. 12-14)</span></td>
-          </tr>
-        `).join('');
+        // C0493: los campos del ledger se insertan como texto (textContent), nunca como HTML.
+        const cell = (text, style, wrapTag, className) => {
+          const td = document.createElement('td');
+          if (style) td.style.cssText = style;
+          let target = td;
+          if (wrapTag) {
+            target = document.createElement(wrapTag);
+            if (className) target.className = className;
+            td.appendChild(target);
+          }
+          target.textContent = String(text ?? '');
+          return td;
+        };
+        const rows = list.map(r => {
+          const tr = document.createElement('tr');
+          tr.appendChild(cell(String(r.timestamp_utc ?? '').replace('T', ' ').substring(0, 19)));
+          const seal = cell(r.attestation_seal, '', 'strong');
+          seal.firstChild.style.color = 'var(--accent-blue)';
+          tr.appendChild(seal);
+          tr.appendChild(cell(r.model_id));
+          tr.appendChild(cell(String(r.prompt_hash ?? '').substring(0, 16) + '...', 'font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);'));
+          tr.appendChild(cell('VERIFICADO (ART. 12-14)', '', 'span', 'badge-ok'));
+          return tr;
+        });
+        tbody.replaceChildren(...rows);
       } catch (e) {
-        tbody.innerHTML = `<tr><td colspan="5" style="color: #ff7b72;">Fallo al leer ledger: ${e.message}</td></tr>`;
+        const tr = document.createElement('tr');
+        const td = document.createElement('td');
+        td.colSpan = 5;
+        td.style.color = '#ff7b72';
+        td.textContent = 'Fallo al leer ledger: ' + e.message;
+        tr.appendChild(td);
+        tbody.replaceChildren(tr);
       }
     }
 

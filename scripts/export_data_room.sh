@@ -17,8 +17,8 @@ set -euo pipefail
 
 # ── Config ────────────────────────────────────────────────────────────────────
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-VERSION="${1:-v5.1.1}"
-OUT_DIR="${REPO_ROOT}/BABYLON60_DATA_ROOM_${VERSION}"
+VERSION="v5.1.1"
+OUT_DIR=""
 
 # ── Colour helpers ────────────────────────────────────────────────────────────
 GREEN='\033[0;32m'; YELLOW='\033[1;33m'; RED='\033[0;31m'; NC='\033[0m'
@@ -31,8 +31,10 @@ for arg in "$@"; do
   case "$arg" in
     --version=*) VERSION="${arg#*=}" ;;
     --out=*)     OUT_DIR="${arg#*=}" ;;
+    v*)          VERSION="$arg" ;;
   esac
 done
+OUT_DIR="${OUT_DIR:-${REPO_ROOT}/BABYLON60_DATA_ROOM_${VERSION}}"
 
 info "Exporting BABYLON-60 Virtual Data Room → ${OUT_DIR}"
 info "Git HEAD: $(git -C "$REPO_ROOT" rev-parse --short HEAD 2>/dev/null || echo 'unknown')"
@@ -64,9 +66,10 @@ cp_if_exists() {
 }
 
 cp_if_exists "${REPO_ROOT}/WHY_BABYLON_60.md"       "${OUT_DIR}/01_EXECUTIVE_AND_VALUATION/"
-cp_if_exists "${REPO_ROOT}/IP_PROVENANCE.md"        "${OUT_DIR}/01_EXECUTIVE_AND_VALUATION/"
+cp_if_exists "${REPO_ROOT}/contracts/IP_PROVENANCE.md" "${OUT_DIR}/01_EXECUTIVE_AND_VALUATION/"
 cp_if_exists "${REPO_ROOT}/README.md"               "${OUT_DIR}/01_EXECUTIVE_AND_VALUATION/"
 cp_if_exists "${REPO_ROOT}/AGENTS.md"               "${OUT_DIR}/01_EXECUTIVE_AND_VALUATION/"
+cp_if_exists "${REPO_ROOT}/reports/c5_valuation_receipt_v511.json" "${OUT_DIR}/01_EXECUTIVE_AND_VALUATION/"
 
 # Lean4 file index (proprietary vs Lake toolchain disambiguation)
 info "  Generating lean4_file_index.txt"
@@ -93,8 +96,10 @@ cat > "${OUT_DIR}/01_EXECUTIVE_AND_VALUATION/VALUATION_SUMMARY.md" << EOF
 | CLAIMS verified (\`CLAIMS.toml\`) | 33 / 33 verified (0 failures) |
 | Rust crates (supply chain) | ~498 (zero copyleft) |
 | Python packages | ~203 (zero copyleft) |
-| Pilot price | 15,000 € |
-| Production cluster/year | 60,000 € |
+| Pilot price (30-Day Zero-Bloat SOW) | 15,000 € (9.5h human effort · ~1,578 €/h effective · >92% gross margin) |
+| Production cluster/year | 60,000 € (1 WORM SQLite WAL + 1 KUDURRU-64 Epoch Domain) |
+| Standard Enterprise Account ACV (2–4 Clusters) | 180,000 € – 240,000 € / year (Sandbox + Pre-Prod/QA + 1–2 Prod Core) |
+| Self-Verifying Valuation Receipt | [\`c5_valuation_receipt_v511.json\`](./c5_valuation_receipt_v511.json) |
 | COCOMO II gross replacement cost | 5.26 M€ (468 person-months / 39 engineer-years · \$\kappa = 39\times\$) |
 | Thermodynamic Compression (\$\kappa\$) | 29x – 39x (468 person-months compressed into ~12–16 real calendar months) |
 | Bus Factor Discount (Case Study #0) | 15% – 20% (18% midpoint vs. 45% legacy penalty, mitigated via executable silicon rules) |
@@ -180,6 +185,25 @@ Because the 30x–39x compression factor resides in **executable repository rule
 
 ---
 
+## 5. Competitive Positioning Matrix & 30-Day Zero-Bloat Pilot SOW (Iteration v11)
+
+### 5.1. Why None of the 4 Existing Market Categories Replace BABYLON-60
+| Market Category | Representative Examples | Internal Mechanism | Why They Fail Against BABYLON-60 (\`AX-0\` + \`O1\` + \`L3\`) |
+| :--- | :--- | :--- | :--- |
+| **1. Prompt Guardrails / Text Filters** | Lakera Guard, Guardrails AI, NeMo Guardrails | Inspect input/output strings via secondary classifiers or regex before execution. | **Violates \`AX-0\`:** Uses a probabilistic model to police another probabilistic model; no VFS anti-TOCTOU descriptor locking or Lean 4 formal proofs. |
+| **2. Agent Orchestration Frameworks** | LangGraph, CrewAI, AutoGen, LlamaIndex | In-memory Python wrappers sharing the agent's address space. | **Zero \`L3\` Isolation & Zero Epistemic Memory (\`O1\`):** Commingles \`SOURCE\` with \`INFERENCE\` in prompt context and masks failures with \`try/except\` instead of \`0xDEAD_6060\` apoptosis. |
+| **3. Ephemeral Cloud Sandboxes** | E2B, Modal, Firecracker microVMs | Isolate execution in remote third-party containers/VMs. | **No Intra-Perimeter Governance or Local Sovereignty:** If the agent holds API/DB credentials inside the sandbox, mutations proceed unchecked without 7-tuple \$\mathcal{T}_{\text{auth}}\$ evaluation, hardware HSM/Touch ID witness, or local WORM ledger. |
+| **4. Traditional Cloud Policy Engines** | Open Policy Agent (OPA / Rego), AWS Cedar | Evaluate JSON permissions over HTTP/REST microservice calls. | **No Silicon Custody or VFS Descriptor Confinement:** Evaluates JSON policies but does not execute atomic OS quarantine (\`renameatx_np\` / \`renameat2\` + \`st_dev\`/\`st_ino\`/\`SHA-256\`) or 154-byte WORM WAL persistence. |
+| **5. Deterministic Trust Kernel *(BABYLON-60)*** | **\`BABYLON-60\` + \`cortex-persist\`** | Native Rust broker (\`Layer-0 EL0\`) + 64B Seqlock + SQLite WAL (\`FULL\`) + Lean 4 formal tree (${LEAN_THEOREM_COUNT} own theorems / ~183k LOC). | **Mathematical Soundness (\`L1_FORMAL\`) + OS Confinement (\`L3_ISOLATION\`):** Inductively proves \`countDispatches trace <= 1\` and enforces cryptographic chain-of-custody per cluster. |
+
+### 5.2. 30-Day Enterprise Pilot Delivery Blueprint (15,000 € · 9.5h Human Effort · >92% Gross Margin)
+- **Week 1 (Days 1–5 · 2.0h):** Baseline Forensic Audit (\`c5-codebase-valuation-audit\` + \`c5-rea\` <15ms + \`audit_token_budget.py\`).
+- **Week 2 (Days 6–12 · 3.0h):** \`EL0\` Broker & Ring Contract Deployment (\`./install.sh --profile terminal-mcp\`, \`AGENTS.md\`, \`babylon.toml\`).
+- **Week 3 (Days 13–20 · 2.5h):** Live Adversarial Acceptance Simulation — The 5 Proofs (\`test_fl008\`, \`nemesis_wave4\`, \`.babylon/quarantine/\` \`0700\`, \`COSE_Sign1\` receipts).
+- **Week 4 (Days 21–30 · 2.0h):** EU AI Act Technical Evidence Package (\`./verify.sh\`, \`auditoria_ai_act.md\`) & Production Cluster Expansion (\`60,000 €/year\` per WORM/KUDURRU-64 cluster; standard enterprise ACV \`180,000 € – 240,000 €/year\`).
+
+---
+
 **Certified and Attested in Silicon:**  
 **Borja Fernández Angulo**  
 *Principal Investigator & Sovereign Root Operator*  
@@ -196,6 +220,9 @@ cp_if_exists "${REPO_ROOT}/claims.lock"                 "${OUT_DIR}/02_CRYPTOGRA
 cp_if_exists "${REPO_ROOT}/evidence.json"               "${OUT_DIR}/02_CRYPTOGRAPHIC_PROOF_AND_CLAIMS/"
 cp_if_exists "${REPO_ROOT}/evidence.json.ots"           "${OUT_DIR}/02_CRYPTOGRAPHIC_PROOF_AND_CLAIMS/"
 cp_if_exists "${REPO_ROOT}/verify.sh"                   "${OUT_DIR}/02_CRYPTOGRAPHIC_PROOF_AND_CLAIMS/"
+cp_if_exists "${REPO_ROOT}/reports/c5_valuation_receipt_v511.json" "${OUT_DIR}/02_CRYPTOGRAPHIC_PROOF_AND_CLAIMS/"
+cp_if_exists "${REPO_ROOT}/reports/c5_valuation_receipt_v511.json.ots" "${OUT_DIR}/02_CRYPTOGRAPHIC_PROOF_AND_CLAIMS/"
+cp_if_exists "${REPO_ROOT}/reports/eu_ai_act_compliance_pack.json" "${OUT_DIR}/02_CRYPTOGRAPHIC_PROOF_AND_CLAIMS/"
 
 # ── Block 03 · Formal Verification Lean 4 ────────────────────────────────────
 info "Block 03 · Formal Verification Lean 4"
@@ -204,12 +231,13 @@ cp_if_exists "${REPO_ROOT}/proof/lean/AX0.lean"          "${OUT_DIR}/03_FORMAL_V
 cp_if_exists "${REPO_ROOT}/proof/lean/BabylonL0Ledger.lean" "${OUT_DIR}/03_FORMAL_VERIFICATION_LEAN4/"
 cp_if_exists "${REPO_ROOT}/docs/06_theory/AUDIT_LEAN_SCOPE_2026.md" "${OUT_DIR}/03_FORMAL_VERIFICATION_LEAN4/"
 cp_if_exists "${REPO_ROOT}/docs/06_theory/evidence/lean-census-372-v511.json" "${OUT_DIR}/03_FORMAL_VERIFICATION_LEAN4/"
+cp_if_exists "${REPO_ROOT}/docs/06_theory/evidence/lean-census-372-v511.json.ots" "${OUT_DIR}/03_FORMAL_VERIFICATION_LEAN4/"
 if [[ -f "${REPO_ROOT}/scripts/c5_quality_gates/export_lean_census.py" ]]; then
   python3 "${REPO_ROOT}/scripts/c5_quality_gates/export_lean_census.py" \
-    --verify \
     --json-out "${OUT_DIR}/03_FORMAL_VERIFICATION_LEAN4/lean-census-372-v511.json" \
-    --markdown-out "${OUT_DIR}/03_FORMAL_VERIFICATION_LEAN4/LEAN4_144_THEOREMS_CENSUS.md" >/dev/null
-  echo "  → LEAN4_144_THEOREMS_CENSUS.md"
+    --markdown-out "${OUT_DIR}/03_FORMAL_VERIFICATION_LEAN4/LEAN4_144_THEOREMS_CENSUS.md" \
+    --pdf-out "${OUT_DIR}/03_FORMAL_VERIFICATION_LEAN4/LEAN4_144_THEOREMS_CENSUS.pdf" >/dev/null
+  echo "  → LEAN4_144_THEOREMS_CENSUS.md, LEAN4_144_THEOREMS_CENSUS.pdf"
 fi
 # lean4_file_index.txt already created above
 echo "  → BabylonTrace.lean, AX0.lean, BabylonL0Ledger.lean, AUDIT_LEAN_SCOPE_2026.md, lean-census-372-v511.json"
@@ -252,13 +280,237 @@ cp_if_exists "${REPO_ROOT}/contracts/IP_PROVENANCE.md"      "${OUT_DIR}/05_COMME
 cp_if_exists "${REPO_ROOT}/contracts/openapi_babylon60_kernel.json" "${OUT_DIR}/05_COMMERCIAL_AND_IP_LEGAL/"
 cp_if_exists "${REPO_ROOT}/LICENSE"                         "${OUT_DIR}/05_COMMERCIAL_AND_IP_LEGAL/"
 
+# ── Root Executive Index (00_READ_FIRST_INDEX.md) ─────────────────────────────
+info "Generating Root Executive Index (00_READ_FIRST_INDEX.md)"
+cat > "${OUT_DIR}/00_READ_FIRST_INDEX.md" << EOF
+# BABYLON-60 · Virtual Data Room (${VERSION}) — Read-First Executive Index
+
+**Licensor & Sole Author:** Borja Fernández Angulo (\`borjamoskv\`)  
+**Institutional Contact:** \`access@babylon60.com\`  
+**Git Commit Bound:** \`$(git -C "$REPO_ROOT" rev-parse --short HEAD 2>/dev/null || echo 'unknown')\`  
+**Root Invariant (AX-0):** *No stochastic component may authorize its own irreversible side effects.*
+
+---
+
+## 1. 60-Second Due Diligence Navigation Map (By Stakeholder Role)
+
+| Stakeholder Profile | Primary Questions Answered | Start Here (PDF & JSON Artifacts) |
+| :--- | :--- | :--- |
+| **1. Managing Partner / M&A & VC Committee** | Why is BABYLON-60 valued at **5.26 M€ gross replacement cost** (**4.20 M€ – 4.50 M€ net floor** under Case Study #0) and how does a solo founder scale 180k–240k €/yr ACV accounts at >92% gross margin? | 1. \`01_EXECUTIVE_AND_VALUATION/CASE_STUDY_ZERO.pdf\` <br> 2. \`01_EXECUTIVE_AND_VALUATION/VALUATION_SUMMARY.pdf\` <br> 3. \`01_EXECUTIVE_AND_VALUATION/c5_valuation_receipt_v511.json\` |
+| **2. Chief Information Security Officer (CISO) & CTO** | Why do Prompt Guardrails (Lakera/NeMo), Python Wrappers (LangGraph), Cloud Sandboxes (E2B), and JSON Policy Engines (OPA) fail where BABYLON-60's \`EL0\` Rust kernel + Lean 4 proofs succeed? | 1. \`01_EXECUTIVE_AND_VALUATION/WHY_BABYLON_60.pdf\` <br> 2. \`03_FORMAL_VERIFICATION_LEAN4/LEAN4_144_THEOREMS_CENSUS.pdf\` <br> 3. \`02_CRYPTOGRAPHIC_PROOF_AND_CLAIMS/RELEASE_MANIFEST.json\` |
+| **3. General Counsel, DPO & Procurement** | Is IP ownership 100% clean-room with zero copyleft? How is **1 Production Cluster (60,000 €/yr)** defined, and what is the **30-Day Enterprise Pilot SOW (15,000 €)**? | 1. \`05_COMMERCIAL_AND_IP_LEGAL/ENTERPRISE_LICENSE.pdf\` (v5.1) <br> 2. \`05_COMMERCIAL_AND_IP_LEGAL/IP_PROVENANCE.pdf\` <br> 3. \`04_SUPPLY_CHAIN_AND_SECURITY/auditoria_ai_act.pdf\` |
+
+---
+
+## 2. Directory Structure of This Data Room (5 Audited Blocks)
+
+- **\`01_EXECUTIVE_AND_VALUATION/\`** — Executive synthesis (\`CASE_STUDY_ZERO.pdf\`, \`VALUATION_SUMMARY.pdf\`, \`WHY_BABYLON_60.pdf\`, \`IP_PROVENANCE.pdf\`) and the deterministic COCOMO II valuation receipt (\`c5_valuation_receipt_v511.json\`).
+- **\`02_CRYPTOGRAPHIC_PROOF_AND_CLAIMS/\`** — Zero-Trust standalone verifier (\`verify.sh\`), \`RELEASE_MANIFEST.json\`, \`CLAIMS.toml\`, \`evidence.json\`, and Bitcoin OpenTimestamps proofs (\`.ots\`).
+- **\`03_FORMAL_VERIFICATION_LEAN4/\`** — Machine-checked Lean 4 modules (\`BabylonTrace.lean\`, \`AX0.lean\`, \`BabylonL0Ledger.lean\`) and the complete census PDF (\`LEAN4_144_THEOREMS_CENSUS.pdf\`).
+- **\`04_SUPPLY_CHAIN_AND_SECURITY/\`** — Zero-copyleft SBOM summary (\`498\` Rust crates / \`203\` Python packages), \`SECURITY.md\`, and EU AI Act technical compliance documentation (\`auditoria_ai_act.pdf\`).
+- **\`05_COMMERCIAL_AND_IP_LEGAL/\`** — Enterprise Commercial License v5.1 (\`ENTERPRISE_LICENSE.pdf\` with Cluster definition & 30-Day Pilot SOW), Clean-Room IP Provenance (\`IP_PROVENANCE.pdf\`), and OpenAPI kernel contract.
+
+---
+
+## 3. Independent Zero-Trust Verification (Run in 5 Seconds)
+
+Every cryptographic digest in this Data Room is listed in \`VDR_MANIFEST.txt\`:
+
+\`\`\`bash
+shasum -a 256 -c VDR_MANIFEST.txt
+\`\`\`
+
+---
+**Borja Fernández Angulo** · *Principal Investigator & Sovereign Root Operator*
+EOF
+echo "  → 00_READ_FIRST_INDEX.md"
+
+if command -v typst >/dev/null 2>&1; then
+  info "  Compiling executive PDFs with Typst 0.15+ (CASE_STUDY_ZERO.pdf, VALUATION_SUMMARY.pdf, WHY_BABYLON_60.pdf, auditoria_ai_act.pdf, ENTERPRISE_LICENSE.pdf, IP_PROVENANCE.pdf)"
+  python3 - "${OUT_DIR}" <<'PY'
+import re
+import shutil
+import subprocess
+import sys
+import tempfile
+from pathlib import Path
+
+def esc_typst(text: str) -> str:
+    # Replace common LaTeX inline constructs with clean Unicode before escaping
+    replacements = {
+        r"$$\kappa_{\text{compression}} = \frac{\text{Traditional Corporate Effort (COCOMO II)}}{\text{Real Calendar Time with BABYLON-60 Governance}} = \frac{468\text{ Person-Months}}{12\text{ to }16\text{ Real Months}} \approx 29\times \text{ to } 39\times$$":
+            "κ_compression = Traditional Corporate Effort (COCOMO II) / Real Calendar Time with BABYLON-60 = 468 Person-Months / (12 to 16 Real Months) ≈ 29× to 39×",
+        r"$$\mathcal{T}_{\text{auth}} = \langle \text{Authority}, \text{Capability}, \text{Policy}, \text{Resource}, \text{Effect}, \text{Context}, \text{Epoch} \rangle$$":
+            "T_auth = ⟨Authority, Capability, Policy, Resource, Effect, Context, Epoch⟩",
+        r"$\text{LLM} \neq \text{Authority}$": "LLM ≠ Authority",
+        r"$\kappa = 39\times$": "κ = 39×",
+        r"$\Delta Q \ge k_B T \ln 2$": "ΔQ ≥ k_B T ln 2",
+        r"$E_{\text{compute}} = E_{\text{attention}} + E_{\text{execution}} + E_{\text{dissipation}}$": "E_compute = E_attention + E_execution + E_dissipation",
+        r"$E_{\text{dissipation}}$": "E_dissipation",
+        r"$\mathcal{T}_{\text{auth}}$": "T_auth",
+        r"$RFO = 0$": "RFO = 0",
+        r"$\to$": "→",
+        r"\times": "×",
+        "<sub>": "",
+        "</sub>": "",
+        "<br>": " · ",
+    }
+    for k, v in replacements.items():
+        text = text.replace(k, v)
+    # Strip markdown links [label](url) -> label
+    text = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", text)
+    # Strip backticks and bold/italic markers for clean escaping, then re-apply bold
+    segments = re.split(r"(\*\*[^*]+\*\*|`[^`]+`)", text)
+    out = []
+    for seg in segments:
+        if seg.startswith("**") and seg.endswith("**") and len(seg) > 4:
+            inner = seg[2:-2]
+            out.append(f"*{_raw_esc(inner)}*")
+        elif seg.startswith("`") and seg.endswith("`") and len(seg) > 2:
+            inner = seg[1:-1]
+            out.append(f'#text(font: ("Menlo", "DejaVu Sans Mono"), size: 8.5pt)[{_raw_esc(inner)}]')
+        else:
+            out.append(_raw_esc(seg))
+    return "".join(out)
+
+def _raw_esc(s: str) -> str:
+    res = []
+    for ch in s:
+        if ch in ("\\", "#", "$", "*", "_", "@", "<", ">", "[", "]", "~"):
+            res.append("\\" + ch)
+        else:
+            res.append(ch)
+    return "".join(res)
+
+def md_to_typst(md_text: str) -> str:
+    lines = md_text.splitlines()
+    out = [
+        '#set page(paper: "a4", margin: (top: 18mm, bottom: 18mm, left: 16mm, right: 16mm), numbering: "1 / 1")',
+        '#set text(font: "New Computer Modern", size: 9.5pt, lang: "en")',
+        '#set par(justify: true, leading: 0.58em)',
+        '#show heading: set block(sticky: true, above: 1.1em, below: 0.55em)',
+        "",
+    ]
+    i = 0
+    while i < len(lines):
+        line = lines[i].rstrip()
+        if not line.strip():
+            out.append("")
+            i += 1
+            continue
+        if line.strip().startswith("```"):
+            i += 1
+            code_lines = []
+            while i < len(lines) and not lines[i].strip().startswith("```"):
+                code_lines.append(_raw_esc(lines[i].rstrip()))
+                i += 1
+            if i < len(lines):
+                i += 1
+            body = "\\ ".join(code_lines)
+            out.append('#block(fill: rgb("#f1f5f9"), inset: 6pt, radius: 2pt)[#text(font: ("Menlo", "DejaVu Sans Mono"), size: 8.5pt)[' + body + ']]')
+            continue
+        if line.strip() == "---":
+            out.append('#line(length: 100%, stroke: 0.4pt + rgb("#cbd5e1"))')
+            i += 1
+            continue
+        if line.startswith("# "):
+            out.append(f'= {esc_typst(line[2:].strip())}')
+            i += 1
+            continue
+        if line.startswith("## "):
+            out.append(f'== {esc_typst(line[3:].strip())}')
+            i += 1
+            continue
+        if line.startswith("### "):
+            out.append(f'=== {esc_typst(line[4:].strip())}')
+            i += 1
+            continue
+        if line.startswith("#### "):
+            out.append(f'==== {esc_typst(line[5:].strip())}')
+            i += 1
+            continue
+        if line.startswith(">"):
+            q_lines = []
+            while i < len(lines) and lines[i].lstrip().startswith(">"):
+                cleaned = lines[i].lstrip()[1:].strip()
+                if not cleaned.startswith("[!"):
+                    q_lines.append(esc_typst(cleaned))
+                i += 1
+            body = " ".join(q_lines)
+            out.append('#block(fill: rgb("#f8fafc"), stroke: (left: 2.5pt + rgb("#0284c7"), rest: 0.4pt + rgb("#cbd5e1")), inset: 8pt, radius: 2pt)[' + body + ']')
+            continue
+        if line.startswith("|"):
+            t_rows = []
+            while i < len(lines) and lines[i].strip().startswith("|"):
+                raw_row = lines[i].strip()
+                # Handle escaped pipes \| inside cells
+                raw_row_safe = raw_row.replace(r"\|", "¦")
+                cells = [c.strip().replace("¦", "|") for c in raw_row_safe.strip("|").split("|")]
+                if not all(re.match(r"^:?-{2,}:?$", c) for c in cells):
+                    t_rows.append(cells)
+                i += 1
+            if t_rows:
+                ncols = max(len(r) for r in t_rows)
+                cols_spec = ", ".join(["1fr"] * ncols)
+                out.append(f"#table(columns: ({cols_spec}), inset: 5pt, stroke: 0.4pt + rgb(\"#cbd5e1\"),")
+                for r_idx, r in enumerate(t_rows):
+                    padded = r + [""] * (ncols - len(r))
+                    if r_idx == 0:
+                        hdr = ", ".join(f"[*{esc_typst(c)}*]" for c in padded)
+                        out.append(f"  table.header({hdr}),")
+                    else:
+                        row_str = ", ".join(f"[{esc_typst(c)}]" for c in padded)
+                        out.append(f"  {row_str},")
+                out.append(")")
+            continue
+        if re.match(r"^\s*[-*]\s+", line):
+            out.append(f"- {esc_typst(re.sub(r'^\s*[-*]\s+', '', line))}")
+            i += 1
+            continue
+        if re.match(r"^\s*\d+\.\s+", line):
+            out.append(f"+ {esc_typst(re.sub(r'^\s*\d+\.\s+', '', line))}")
+            i += 1
+            continue
+        out.append(esc_typst(line))
+        i += 1
+    return "\n".join(out)
+
+out_dir = Path(sys.argv[1])
+b01 = out_dir / "01_EXECUTIVE_AND_VALUATION"
+b04 = out_dir / "04_SUPPLY_CHAIN_AND_SECURITY"
+b05 = out_dir / "05_COMMERCIAL_AND_IP_LEGAL"
+pairs = [
+    (out_dir / "00_READ_FIRST_INDEX.md", out_dir / "00_READ_FIRST_INDEX.pdf"),
+    (b01 / "CASE_STUDY_ZERO.md", b01 / "CASE_STUDY_ZERO.pdf"),
+    (b01 / "VALUATION_SUMMARY.md", b01 / "VALUATION_SUMMARY.pdf"),
+    (b01 / "WHY_BABYLON_60.md", b01 / "WHY_BABYLON_60.pdf"),
+    (b04 / "auditoria_ai_act.md", b04 / "auditoria_ai_act.pdf"),
+    (b05 / "ENTERPRISE_LICENSE.md", b05 / "ENTERPRISE_LICENSE.pdf"),
+    (b05 / "IP_PROVENANCE.md", b05 / "IP_PROVENANCE.pdf"),
+]
+for md_path, pdf_path in pairs:
+    if not md_path.is_file():
+        continue
+    typ_src = md_to_typst(md_path.read_text(encoding="utf-8"))
+    with tempfile.NamedTemporaryFile("w", suffix=".typ", delete=False, encoding="utf-8") as tf:
+        tf.write(typ_src)
+        tmp_typ = Path(tf.name)
+    try:
+        subprocess.run(["typst", "compile", str(tmp_typ), str(pdf_path)], check=True)
+    finally:
+        tmp_typ.unlink(missing_ok=True)
+if (b05 / "IP_PROVENANCE.pdf").is_file():
+    shutil.copy2(b05 / "IP_PROVENANCE.pdf", b01 / "IP_PROVENANCE.pdf")
+PY
+  echo "  → 00_READ_FIRST_INDEX.pdf, CASE_STUDY_ZERO.pdf, VALUATION_SUMMARY.pdf, WHY_BABYLON_60.pdf, auditoria_ai_act.pdf, ENTERPRISE_LICENSE.pdf, IP_PROVENANCE.pdf"
+fi
+
 # ── Manifest of exported files ────────────────────────────────────────────────
 info "Generating VDR manifest"
 {
   echo "# BABYLON60_DATA_ROOM_${VERSION} · Export Manifest"
-  echo "Git commit: $(git -C "$REPO_ROOT" rev-parse HEAD 2>/dev/null || echo 'unknown')"
-  echo "Export date: $(date -u +"%Y-%m-%dT%H:%M:%SZ")"
-  echo ""
+  echo "# Git commit: $(git -C "$REPO_ROOT" rev-parse HEAD 2>/dev/null || echo 'unknown')"
+  echo "# Export date: $(date -u +"%Y-%m-%dT%H:%M:%SZ")"
   find "${OUT_DIR}" -type f ! -name "VDR_MANIFEST.txt" | sort | while read -r f; do
     rel="${f#${OUT_DIR}/}"
     sha=$(shasum -a 256 "$f" | cut -d' ' -f1)

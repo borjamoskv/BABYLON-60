@@ -22,7 +22,10 @@ use std::process::{Command, Output};
 
 /// Niveles de evidencia epistémica de BABYLON-60 (`Iteración Ω`).
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
-#[cfg_attr(feature = "cortex-persist", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(
+    feature = "cortex-persist",
+    derive(serde::Serialize, serde::Deserialize)
+)]
 pub enum EvidenceLevel {
     /// L1: La política o especificación satisface invariantes matemáticos (Lean 4 / Loom).
     L1Formal,
@@ -48,7 +51,10 @@ impl EvidenceLevel {
 
 /// Tipo de nodo en el grafo de alcanzabilidad de autoridad $G = (V, A)$.
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "cortex-persist", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(
+    feature = "cortex-persist",
+    derive(serde::Serialize, serde::Deserialize)
+)]
 pub enum AuthorityNode {
     /// Proceso del agente no confiable ($a$).
     AgentProcess(String),
@@ -64,7 +70,10 @@ pub enum AuthorityNode {
 
 /// Relación de acceso o transición dirigida $(u \to v) \in A$.
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "cortex-persist", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(
+    feature = "cortex-persist",
+    derive(serde::Serialize, serde::Deserialize)
+)]
 pub struct AccessEdge {
     /// Nodo origen.
     pub from: AuthorityNode,
@@ -76,7 +85,10 @@ pub struct AccessEdge {
 
 /// Resultado de la auditoría de alcanzabilidad de `NEMESIS` sobre $G = (V, A)$.
 #[derive(Debug, Clone, PartialEq, Eq)]
-#[cfg_attr(feature = "cortex-persist", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(
+    feature = "cortex-persist",
+    derive(serde::Serialize, serde::Deserialize)
+)]
 pub struct MediationVerdict {
     /// `true` si y solo si todo camino $\pi: a \leadsto r$ contiene un nodo `BabylonBroker`.
     pub complete_mediation_holds: bool,
@@ -127,7 +139,12 @@ impl AuthorityGraph {
     }
 
     /// Registra una arista dirigida $(u \to v) \in A$.
-    pub fn add_edge(&mut self, from: AuthorityNode, to: AuthorityNode, mechanism: impl Into<String>) {
+    pub fn add_edge(
+        &mut self,
+        from: AuthorityNode,
+        to: AuthorityNode,
+        mechanism: impl Into<String>,
+    ) {
         self.add_node(from.clone());
         self.add_node(to.clone());
         self.adj
@@ -262,18 +279,27 @@ impl MacOsAgentConfinement {
             profile.push_str(&format!("(deny mach-lookup (global-name \"{}\"))\n", svc));
         }
         for path in &self.protected_subpaths {
-            let escaped = path.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+            let escaped = path
+                .to_string_lossy()
+                .replace('\\', "\\\\")
+                .replace('"', "\\\"");
             profile.push_str(&format!("(deny file-write* (subpath \"{}\"))\n", escaped));
         }
         if let Some(sock) = &self.allowed_ipc_socket {
-            let escaped = sock.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+            let escaped = sock
+                .to_string_lossy()
+                .replace('\\', "\\\\")
+                .replace('"', "\\\"");
             profile.push_str(&format!(
                 "(allow network-outbound (literal \"{}\"))\n",
                 escaped
             ));
             if let Ok(canon) = std::fs::canonicalize(sock) {
                 if canon != *sock {
-                    let c_esc = canon.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+                    let c_esc = canon
+                        .to_string_lossy()
+                        .replace('\\', "\\\\")
+                        .replace('"', "\\\"");
                     profile.push_str(&format!(
                         "(allow network-outbound (literal \"{}\"))\n",
                         c_esc
@@ -327,7 +353,11 @@ impl MacOsAgentConfinement {
         for path in &self.protected_subpaths {
             let res = AuthorityNode::ProtectedResource(path.to_string_lossy().into_owned());
             // El broker posee el descriptor y privilegio de mutación sobre el recurso protegido
-            g.add_edge(broker.clone(), res, "ScopedHandle + COSE_Sign1 verified effect");
+            g.add_edge(
+                broker.clone(),
+                res,
+                "ScopedHandle + COSE_Sign1 verified effect",
+            );
         }
 
         g
@@ -336,7 +366,10 @@ impl MacOsAgentConfinement {
 
 /// Errores deterministas de `INV_C5_COMPUTER_USE_TRUST_GATEWAY`.
 #[derive(Debug, Clone, PartialEq, Eq)]
-#[cfg_attr(feature = "cortex-persist", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(
+    feature = "cortex-persist",
+    derive(serde::Serialize, serde::Deserialize)
+)]
 pub enum TrustGatewayError {
     /// El elemento de la interfaz mutó su identidad, rol o título antes del despacho.
     ControlMutatedBeforeDispatch {
@@ -406,7 +439,11 @@ impl SeatbeltComputerUseProfile {
 
     /// Renderiza el perfil Seatbelt (`version 1`).
     pub fn render(&self) -> String {
-        let refs: Vec<&Path> = self.protected_subpaths.iter().map(|p| p.as_path()).collect();
+        let refs: Vec<&Path> = self
+            .protected_subpaths
+            .iter()
+            .map(|p| p.as_path())
+            .collect();
         let confinement = MacOsAgentConfinement::new(&refs, self.broker_socket.as_deref());
         confinement.to_seatbelt_profile()
     }
@@ -444,7 +481,10 @@ impl SeatbeltComputerUseProfile {
 
 /// Enlace semántico pre-despacho sobre un elemento de interfaz `(node_id, role, title)`.
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
-#[cfg_attr(feature = "cortex-persist", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(
+    feature = "cortex-persist",
+    derive(serde::Serialize, serde::Deserialize)
+)]
 pub struct SemanticControlBinding {
     /// Identificador único del nodo en el árbol de accesibilidad.
     pub node_id: String,
@@ -474,11 +514,7 @@ impl SemanticControlBinding {
             Ok(())
         } else {
             Err(TrustGatewayError::ControlMutatedBeforeDispatch {
-                expected: (
-                    self.node_id.clone(),
-                    self.role.clone(),
-                    self.title.clone(),
-                ),
+                expected: (self.node_id.clone(), self.role.clone(), self.title.clone()),
                 observed: (
                     current.node_id.clone(),
                     current.role.clone(),
@@ -491,7 +527,10 @@ impl SemanticControlBinding {
 
 /// Delta esperado tras una acción mediada en el ciclo OODA.
 #[derive(Debug, Clone, PartialEq, Eq)]
-#[cfg_attr(feature = "cortex-persist", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(
+    feature = "cortex-persist",
+    derive(serde::Serialize, serde::Deserialize)
+)]
 pub struct ExpectedDelta {
     /// Digest o huella canónica del estado posterior esperado.
     pub expected_state_digest: String,
@@ -609,7 +648,10 @@ impl EmergencyEscapeBrake {
 
 /// Jerarquía de canales de ejecución de escritorio por orden de menor entropía (`REA / RFO = 0`).
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "cortex-persist", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(
+    feature = "cortex-persist",
+    derive(serde::Serialize, serde::Deserialize)
+)]
 pub enum DesktopChannelTier {
     /// 1. Ejecución directa vía CLI o `secure_fs` (`O_CREAT | O_EXCL` / `RENAME_EXCL`).
     CliHeadless,
@@ -623,7 +665,10 @@ pub enum DesktopChannelTier {
 
 /// Ticket criptográfico de despacho autorizado (`INV_C5_COMPUTER_USE_TRUST_GATEWAY`).
 #[derive(Debug, Clone, PartialEq, Eq)]
-#[cfg_attr(feature = "cortex-persist", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(
+    feature = "cortex-persist",
+    derive(serde::Serialize, serde::Deserialize)
+)]
 pub struct AuthorizedDispatchTicket {
     /// Identificador del bundle de la aplicación (`CFBundleIdentifier`).
     pub app_bundle_id: String,
@@ -648,7 +693,10 @@ pub struct ReaPreflightGate;
 /// Versioned signed intent. Times are Unix seconds supplied by the trusted broker;
 /// epoch is the broker's current authority epoch, not a caller-selected policy.
 #[derive(Debug, Clone, PartialEq, Eq)]
-#[cfg_attr(feature = "cortex-persist", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(
+    feature = "cortex-persist",
+    derive(serde::Serialize, serde::Deserialize)
+)]
 pub struct SignedDispatchIntent {
     /// Existing dispatch fields, including the untrusted claimed public key.
     pub ticket: AuthorizedDispatchTicket,
@@ -673,32 +721,56 @@ impl SignedDispatchIntent {
             match n {
                 0..=23 => out.push(tag | n as u8),
                 24..=255 => out.extend_from_slice(&[tag | 24, n as u8]),
-                256..=65535 => { out.push(tag | 25); out.extend_from_slice(&(n as u16).to_be_bytes()); }
-                65536..=4294967295 => { out.push(tag | 26); out.extend_from_slice(&(n as u32).to_be_bytes()); }
-                _ => { out.push(tag | 27); out.extend_from_slice(&n.to_be_bytes()); }
+                256..=65535 => {
+                    out.push(tag | 25);
+                    out.extend_from_slice(&(n as u16).to_be_bytes());
+                }
+                65536..=4294967295 => {
+                    out.push(tag | 26);
+                    out.extend_from_slice(&(n as u32).to_be_bytes());
+                }
+                _ => {
+                    out.push(tag | 27);
+                    out.extend_from_slice(&n.to_be_bytes());
+                }
             }
         }
         fn bytes(out: &mut Vec<u8>, major: u8, value: &[u8]) {
-            head(out, major, value.len() as u64); out.extend_from_slice(value);
+            head(out, major, value.len() as u64);
+            out.extend_from_slice(value);
         }
         let mut out = Vec::new();
         head(&mut out, 4, 13);
         bytes(&mut out, 3, b"BABYLON-DESKTOP-DISPATCH-v1");
         bytes(&mut out, 3, self.ticket.app_bundle_id.as_bytes());
         bytes(&mut out, 3, self.ticket.action.as_bytes());
-        head(&mut out, 0, match self.ticket.channel {
-            DesktopChannelTier::CliHeadless => 0, DesktopChannelTier::AsarIpcOrSdef => 1,
-            DesktopChannelTier::AxSemanticTree => 2, DesktopChannelTier::OpaqueCustomCanvas => 3,
-        });
+        head(
+            &mut out,
+            0,
+            match self.ticket.channel {
+                DesktopChannelTier::CliHeadless => 0,
+                DesktopChannelTier::AsarIpcOrSdef => 1,
+                DesktopChannelTier::AxSemanticTree => 2,
+                DesktopChannelTier::OpaqueCustomCanvas => 3,
+            },
+        );
         bytes(&mut out, 2, &self.ticket.preflight_scitt_digest);
-        out.push(if self.ticket.no_overwrite_excl { 0xf5 } else { 0xf4 });
+        out.push(if self.ticket.no_overwrite_excl {
+            0xf5
+        } else {
+            0xf4
+        });
         if let Some(control) = &self.control {
             head(&mut out, 4, 3);
             for value in [&control.node_id, &control.role, &control.title] {
                 bytes(&mut out, 3, value.as_bytes());
             }
-        } else { out.push(0xf6); }
-        for value in [self.epoch, self.issued_at, self.expires_at] { head(&mut out, 0, value); }
+        } else {
+            out.push(0xf6);
+        }
+        for value in [self.epoch, self.issued_at, self.expires_at] {
+            head(&mut out, 0, value);
+        }
         bytes(&mut out, 2, &self.nonce);
         bytes(&mut out, 2, &self.ticket.enclave_pubkey_sec1);
         // Explicit schema version, independent of the domain separator.
@@ -724,10 +796,14 @@ impl TrustedDispatchVerifier {
 
     fn check_directory(path: &Path) -> Result<(), TrustGatewayError> {
         use std::os::unix::fs::MetadataExt;
-        let parent = path.parent().ok_or_else(|| Self::error("missing trusted store directory"))?;
+        let parent = path
+            .parent()
+            .ok_or_else(|| Self::error("missing trusted store directory"))?;
         let meta = std::fs::symlink_metadata(parent).map_err(Self::error)?;
         if !meta.is_dir() || meta.mode() & 0o077 != 0 || meta.uid() != unsafe { libc::geteuid() } {
-            return Err(Self::error("store requires broker-owned private directory (0700)"));
+            return Err(Self::error(
+                "store requires broker-owned private directory (0700)",
+            ));
         }
         Ok(())
     }
@@ -738,8 +814,13 @@ impl TrustedDispatchVerifier {
         use std::os::unix::fs::OpenOptionsExt;
         Self::check_directory(path)?;
         p256::ecdsa::VerifyingKey::from_sec1_bytes(trusted_sec1).map_err(Self::error)?;
-        let file = std::fs::OpenOptions::new().write(true).create_new(true)
-            .mode(0o600).custom_flags(libc::O_NOFOLLOW).open(path).map_err(Self::error)?;
+        let file = std::fs::OpenOptions::new()
+            .write(true)
+            .create_new(true)
+            .mode(0o600)
+            .custom_flags(libc::O_NOFOLLOW)
+            .open(path)
+            .map_err(Self::error)?;
         file.sync_all().map_err(Self::error)?;
         let connection = Self::connect(path)?;
         connection.execute_batch("BEGIN IMMEDIATE;
@@ -747,32 +828,55 @@ impl TrustedDispatchVerifier {
             CREATE TABLE dispatch_nonces (nonce BLOB PRIMARY KEY NOT NULL CHECK(length(nonce)=32));")
             .map_err(Self::error)?;
         let key = p256::ecdsa::VerifyingKey::from_sec1_bytes(trusted_sec1).map_err(Self::error)?;
-        connection.execute("INSERT INTO dispatch_trust VALUES (1, ?1)",
-            [key.to_sec1_point(false).as_bytes()]).map_err(Self::error)?;
-        connection.execute_batch("COMMIT; PRAGMA wal_checkpoint(FULL);").map_err(Self::error)?;
-        std::fs::File::open(path.parent().unwrap()).and_then(|dir| dir.sync_all()).map_err(Self::error)?;
+        connection
+            .execute(
+                "INSERT INTO dispatch_trust VALUES (1, ?1)",
+                [key.to_sec1_point(false).as_bytes()],
+            )
+            .map_err(Self::error)?;
+        connection
+            .execute_batch("COMMIT; PRAGMA wal_checkpoint(FULL);")
+            .map_err(Self::error)?;
+        std::fs::File::open(path.parent().unwrap())
+            .and_then(|dir| dir.sync_all())
+            .map_err(Self::error)?;
         Ok(Self { key, connection })
     }
 
     fn connect(path: &Path) -> Result<rusqlite::Connection, TrustGatewayError> {
-        use std::os::unix::fs::{MetadataExt, OpenOptionsExt};
         use rusqlite::OpenFlags;
+        use std::os::unix::fs::{MetadataExt, OpenOptionsExt};
         // Broker ownership is a prerequisite, not protection from a malicious
         // process running as the broker UID. Ancestor paths must remain trusted.
-        let descriptor = std::fs::OpenOptions::new().read(true).write(true)
-            .custom_flags(libc::O_NOFOLLOW).open(path).map_err(Self::error)?;
+        let descriptor = std::fs::OpenOptions::new()
+            .read(true)
+            .write(true)
+            .custom_flags(libc::O_NOFOLLOW)
+            .open(path)
+            .map_err(Self::error)?;
         let meta = descriptor.metadata().map_err(Self::error)?;
         if !meta.is_file() || meta.mode() & 0o077 != 0 || meta.uid() != unsafe { libc::geteuid() } {
-            return Err(Self::error("nonce database requires broker-owned private regular file (0600)"));
+            return Err(Self::error(
+                "nonce database requires broker-owned private regular file (0600)",
+            ));
         }
-        let connection = rusqlite::Connection::open_with_flags(path,
-            OpenFlags::SQLITE_OPEN_READ_WRITE | OpenFlags::SQLITE_OPEN_NOFOLLOW)
+        let connection = rusqlite::Connection::open_with_flags(
+            path,
+            OpenFlags::SQLITE_OPEN_READ_WRITE | OpenFlags::SQLITE_OPEN_NOFOLLOW,
+        )
+        .map_err(Self::error)?;
+        connection
+            .execute_batch("PRAGMA journal_mode=WAL; PRAGMA synchronous=FULL;")
             .map_err(Self::error)?;
-        connection.execute_batch("PRAGMA journal_mode=WAL; PRAGMA synchronous=FULL;")
+        let mode: String = connection
+            .query_row("PRAGMA journal_mode", [], |row| row.get(0))
             .map_err(Self::error)?;
-        let mode: String = connection.query_row("PRAGMA journal_mode", [], |row| row.get(0)).map_err(Self::error)?;
-        let sync: i64 = connection.query_row("PRAGMA synchronous", [], |row| row.get(0)).map_err(Self::error)?;
-        if mode != "wal" || sync != 2 { return Err(Self::error("durable nonce store unavailable")); }
+        let sync: i64 = connection
+            .query_row("PRAGMA synchronous", [], |row| row.get(0))
+            .map_err(Self::error)?;
+        if mode != "wal" || sync != 2 {
+            return Err(Self::error("durable nonce store unavailable"));
+        }
         Ok(connection)
     }
 
@@ -781,39 +885,145 @@ impl TrustedDispatchVerifier {
         Self::check_directory(path)?;
         let key = p256::ecdsa::VerifyingKey::from_sec1_bytes(trusted_sec1).map_err(Self::error)?;
         let connection = Self::connect(path)?;
-        let stored: Vec<u8> = connection.query_row("SELECT key FROM dispatch_trust WHERE id=1", [], |r| r.get(0)).map_err(Self::error)?;
-        if stored != key.to_sec1_point(false).as_bytes() { return Err(Self::error("provisioned trust key mismatch")); }
+        let stored: Vec<u8> = connection
+            .query_row("SELECT key FROM dispatch_trust WHERE id=1", [], |r| {
+                r.get(0)
+            })
+            .map_err(Self::error)?;
+        if stored != key.to_sec1_point(false).as_bytes() {
+            return Err(Self::error("provisioned trust key mismatch"));
+        }
         Ok(Self { key, connection })
     }
 
     /// Validate then durably consume the nonce before permitting dispatch. A crash
     /// after consumption may lose an action, but must never authorize its replay.
     /// `now` and `epoch` MUST be obtained by the broker, not from request fields.
-    pub fn verify_and_consume(&mut self, intent: &SignedDispatchIntent, grammar_tokens: usize,
-        observed: Option<&SemanticControlBinding>, now: u64, epoch: u64,
+    pub fn verify_and_consume(
+        &mut self,
+        intent: &SignedDispatchIntent,
+        grammar_tokens: usize,
+        observed: Option<&SemanticControlBinding>,
+        now: u64,
+        epoch: u64,
     ) -> Result<(), TrustGatewayError> {
         use p256::ecdsa::{signature::Verifier, Signature};
         let ticket = &intent.ticket;
-        ReaPreflightGate::validate_structure(ticket, grammar_tokens, intent.control.as_ref(), observed)?;
-        if ticket.app_bundle_id.is_empty() || ticket.action.is_empty() || !ticket.no_overwrite_excl
-            || intent.nonce == [0;32] || intent.epoch != epoch || intent.issued_at > now
-            || intent.expires_at <= now || intent.expires_at <= intent.issued_at
-            || intent.expires_at - intent.issued_at > 60 {
-            return Err(Self::error("invalid dispatch scope, epoch, or validity window"));
+        ReaPreflightGate::validate_structure(
+            ticket,
+            grammar_tokens,
+            intent.control.as_ref(),
+            observed,
+        )?;
+        if ticket.app_bundle_id.is_empty()
+            || ticket.action.is_empty()
+            || !ticket.no_overwrite_excl
+            || intent.nonce == [0; 32]
+            || intent.epoch != epoch
+            || intent.issued_at > now
+            || intent.expires_at <= now
+            || intent.expires_at <= intent.issued_at
+            || intent.expires_at - intent.issued_at > 60
+        {
+            return Err(Self::error(
+                "invalid dispatch scope, epoch, or validity window",
+            ));
         }
         if ticket.enclave_pubkey_sec1 != self.key.to_sec1_point(false).as_bytes() {
             return Err(Self::error("ticket key is not the provisioned key"));
         }
         if let Some(control) = &intent.control {
-            control.verify_before_dispatch(observed.ok_or_else(|| Self::error("missing observed control"))?)?;
+            control.verify_before_dispatch(
+                observed.ok_or_else(|| Self::error("missing observed control"))?,
+            )?;
         }
         let signature = Signature::from_der(&ticket.enclave_signature_der).map_err(Self::error)?;
-        self.key.verify(&intent.signing_bytes(), &signature).map_err(Self::error)?;
-        let tx = self.connection.transaction_with_behavior(rusqlite::TransactionBehavior::Immediate).map_err(Self::error)?;
-        tx.execute("INSERT INTO dispatch_nonces(nonce) VALUES (?1)", [&intent.nonce[..]])
-            .map_err(|e| Self::error(format!("nonce replay or persistence failure: {e}")))?;
+        self.key
+            .verify(&intent.signing_bytes(), &signature)
+            .map_err(Self::error)?;
+        let tx = self
+            .connection
+            .transaction_with_behavior(rusqlite::TransactionBehavior::Immediate)
+            .map_err(Self::error)?;
+        tx.execute(
+            "INSERT INTO dispatch_nonces(nonce) VALUES (?1)",
+            [&intent.nonce[..]],
+        )
+        .map_err(|e| Self::error(format!("nonce replay or persistence failure: {e}")))?;
         tx.commit().map_err(Self::error)?;
         Ok(())
+    }
+
+    /// Reads the unforgeable OS kernel boot session UUID (`kern.bootsessionuuid` on macOS,
+    /// `/proc/sys/kernel/random/boot_id` on Linux) to bind ephemeral capabilities to a single boot (`O9`).
+    pub fn current_boot_session_id() -> Result<[u8; 36], TrustGatewayError> {
+        #[cfg(target_os = "macos")]
+        {
+            let name = std::ffi::CString::new("kern.bootsessionuuid").map_err(Self::error)?;
+            let mut buf = [0u8; 64];
+            let mut size = buf.len();
+            let rc = unsafe {
+                libc::sysctlbyname(
+                    name.as_ptr(),
+                    buf.as_mut_ptr() as *mut libc::c_void,
+                    &mut size,
+                    std::ptr::null_mut(),
+                    0,
+                )
+            };
+            if rc != 0 || size < 36 {
+                return Err(Self::error(
+                    "failed to read kern.bootsessionuuid from kernel",
+                ));
+            }
+            let mut out = [0u8; 36];
+            out.copy_from_slice(&buf[..36]);
+            if out == [0u8; 36] {
+                return Err(Self::error("empty kernel boot session uuid"));
+            }
+            Ok(out)
+        }
+        #[cfg(not(target_os = "macos"))]
+        {
+            let raw =
+                std::fs::read_to_string("/proc/sys/kernel/random/boot_id").map_err(Self::error)?;
+            let trimmed = raw.trim().as_bytes();
+            if trimmed.len() != 36 {
+                return Err(Self::error("invalid kernel boot_id length"));
+            }
+            let mut out = [0u8; 36];
+            out.copy_from_slice(trimmed);
+            Ok(out)
+        }
+    }
+
+    /// O9 (Reboot Lease Defense): Enforces that an unconsumed capability cannot cross a host reboot
+    /// (`issued_boot_id == active_boot_id`) and satisfies the local monotonic clock deadline (`monotonic_now_ns < monotonic_deadline_ns`).
+    #[allow(clippy::too_many_arguments)]
+    pub fn verify_and_consume_with_boot_lease(
+        &mut self,
+        intent: &SignedDispatchIntent,
+        grammar_tokens: usize,
+        observed: Option<&SemanticControlBinding>,
+        now: u64,
+        epoch: u64,
+        issued_boot_id: &[u8; 36],
+        active_boot_id: &[u8; 36],
+        monotonic_now_ns: u64,
+        monotonic_deadline_ns: u64,
+    ) -> Result<(), TrustGatewayError> {
+        if *issued_boot_id == [0u8; 36]
+            || *active_boot_id == [0u8; 36]
+            || issued_boot_id != active_boot_id
+        {
+            return Err(Self::error(
+                "O9 reboot lease violation: boot_session_id mismatch",
+            ));
+        }
+        if monotonic_deadline_ns == 0 || monotonic_now_ns >= monotonic_deadline_ns {
+            return Err(Self::error("O9 monotonic lease expired"));
+        }
+        self.verify_and_consume(intent, grammar_tokens, observed, now, epoch)
     }
 }
 
@@ -874,7 +1084,8 @@ impl ReaPreflightGate {
                 (Some(exp), Some(obs)) => exp.verify_before_dispatch(obs)?,
                 _ => {
                     return Err(TrustGatewayError::InvalidSecureEnclaveTicket(
-                        "AX_SEMANTIC_TREE dispatch requires pre-dispatch SemanticControlBinding".to_string(),
+                        "AX_SEMANTIC_TREE dispatch requires pre-dispatch SemanticControlBinding"
+                            .to_string(),
                     ));
                 }
             }
@@ -898,16 +1109,32 @@ mod trusted_dispatch_tests {
     fn lean_golden_intent(ax: bool) -> SignedDispatchIntent {
         SignedDispatchIntent {
             ticket: AuthorizedDispatchTicket {
-                app_bundle_id: "a".into(), action: "b".into(),
-                channel: if ax { DesktopChannelTier::AxSemanticTree } else { DesktopChannelTier::CliHeadless },
-                preflight_scitt_digest: [8; 32], no_overwrite_excl: true,
-                enclave_pubkey_sec1: hex::decode(concat!("04",
+                app_bundle_id: "a".into(),
+                action: "b".into(),
+                channel: if ax {
+                    DesktopChannelTier::AxSemanticTree
+                } else {
+                    DesktopChannelTier::CliHeadless
+                },
+                preflight_scitt_digest: [8; 32],
+                no_overwrite_excl: true,
+                enclave_pubkey_sec1: hex::decode(concat!(
+                    "04",
                     "6b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c296",
-                    "4fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5")).unwrap(),
+                    "4fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5"
+                ))
+                .unwrap(),
                 enclave_signature_der: Vec::new(),
             },
-            control: if ax { Some(SemanticControlBinding::new("id", "AXButton", "Export")) } else { None },
-            epoch: 7, issued_at: 1000, expires_at: 1030, nonce: [9; 32],
+            control: if ax {
+                Some(SemanticControlBinding::new("id", "AXButton", "Export"))
+            } else {
+                None
+            },
+            epoch: 7,
+            issued_at: 1000,
+            expires_at: 1030,
+            nonce: [9; 32],
         }
     }
 
@@ -915,7 +1142,10 @@ mod trusted_dispatch_tests {
     #[ignore = "standalone golden-vector export for cross-language Lean comparison"]
     fn export_lean_ticket_vectors() {
         for (name, ax) in [("CLI", false), ("AX", true)] {
-            println!("TICKET_{name}={}", hex::encode(lean_golden_intent(ax).signing_bytes()));
+            println!(
+                "TICKET_{name}={}",
+                hex::encode(lean_golden_intent(ax).signing_bytes())
+            );
         }
         let mut edge = lean_golden_intent(false);
         edge.ticket.app_bundle_id = "á😀".into();
@@ -944,131 +1174,252 @@ mod trusted_dispatch_tests {
             let mut cursor = std::io::Cursor::new(&bytes);
             let decoded: ciborium::Value = ciborium::from_reader(&mut cursor).unwrap();
             assert_eq!(cursor.position() as usize, bytes.len());
-            let ciborium::Value::Array(fields) = decoded else { panic!("ticket must be CBOR array"); };
+            let ciborium::Value::Array(fields) = decoded else {
+                panic!("ticket must be CBOR array");
+            };
             assert_eq!(fields.len(), 13);
-            assert_eq!(fields[0], ciborium::Value::Text("BABYLON-DESKTOP-DISPATCH-v1".into()));
+            assert_eq!(
+                fields[0],
+                ciborium::Value::Text("BABYLON-DESKTOP-DISPATCH-v1".into())
+            );
             assert_eq!(fields[4], ciborium::Value::Bytes(vec![8; 32]));
             assert_eq!(fields[10], ciborium::Value::Bytes(vec![9; 32]));
             intent.ticket.enclave_signature_der = vec![0x30, 0x06, 0x02, 0x01, 1, 0x02, 0x01, 1];
-            assert_eq!(intent.signing_bytes(), bytes, "DER is external, not a COSE field");
+            assert_eq!(
+                intent.signing_bytes(),
+                bytes,
+                "DER is external, not a COSE field"
+            );
         }
     }
 
     // Ephemeral SOFTWARE keys only. These tests do not simulate TouchID attestation.
-    struct Fixture { directory: PathBuf, key: SigningKey }
+    struct Fixture {
+        directory: PathBuf,
+        key: SigningKey,
+    }
     impl Fixture {
         fn new() -> Self {
             // SQLite NOFOLLOW rejects symlink ancestors too (macOS /var).
-            let directory = std::fs::canonicalize(std::env::temp_dir()).unwrap()
-                .join(format!("dispatch-{}-{}", std::process::id(), rand::random::<u64>()));
-            std::fs::DirBuilder::new().mode(0o700).create(&directory).unwrap();
-            Self { directory, key: SigningKey::generate() }
+            let directory = std::fs::canonicalize(std::env::temp_dir())
+                .unwrap()
+                .join(format!(
+                    "dispatch-{}-{}",
+                    std::process::id(),
+                    rand::random::<u64>()
+                ));
+            std::fs::DirBuilder::new()
+                .mode(0o700)
+                .create(&directory)
+                .unwrap();
+            Self {
+                directory,
+                key: SigningKey::generate(),
+            }
         }
-        fn path(&self) -> PathBuf { self.directory.join("nonces.sqlite") }
-        fn key_bytes(&self) -> Vec<u8> { self.key.verifying_key().to_sec1_point(false).as_bytes().to_vec() }
-        fn provision(&self) -> TrustedDispatchVerifier { TrustedDispatchVerifier::provision_new(&self.path(), &self.key_bytes()).unwrap() }
+        fn path(&self) -> PathBuf {
+            self.directory.join("nonces.sqlite")
+        }
+        fn key_bytes(&self) -> Vec<u8> {
+            self.key
+                .verifying_key()
+                .to_sec1_point(false)
+                .as_bytes()
+                .to_vec()
+        }
+        fn provision(&self) -> TrustedDispatchVerifier {
+            TrustedDispatchVerifier::provision_new(&self.path(), &self.key_bytes()).unwrap()
+        }
         fn intent(&self) -> SignedDispatchIntent {
             let mut intent = SignedDispatchIntent {
-                ticket: AuthorizedDispatchTicket { app_bundle_id: "test.app".into(), action: "export:/output/song.wav".into(),
-                    channel: DesktopChannelTier::AxSemanticTree, preflight_scitt_digest: [8;32], no_overwrite_excl: true,
-                    enclave_pubkey_sec1: self.key_bytes(), enclave_signature_der: Vec::new() },
-                control: Some(SemanticControlBinding::new("id", "AXButton", "Export")), epoch: 7,
-                issued_at: 1000, expires_at: 1030, nonce: rand::random(),
+                ticket: AuthorizedDispatchTicket {
+                    app_bundle_id: "test.app".into(),
+                    action: "export:/output/song.wav".into(),
+                    channel: DesktopChannelTier::AxSemanticTree,
+                    preflight_scitt_digest: [8; 32],
+                    no_overwrite_excl: true,
+                    enclave_pubkey_sec1: self.key_bytes(),
+                    enclave_signature_der: Vec::new(),
+                },
+                control: Some(SemanticControlBinding::new("id", "AXButton", "Export")),
+                epoch: 7,
+                issued_at: 1000,
+                expires_at: 1030,
+                nonce: rand::random(),
             };
-            self.sign(&mut intent); intent
+            self.sign(&mut intent);
+            intent
         }
         fn sign(&self, intent: &mut SignedDispatchIntent) {
             let signature: Signature = self.key.sign(&intent.signing_bytes());
             intent.ticket.enclave_signature_der = signature.to_der().as_bytes().to_vec();
         }
     }
-    impl Drop for Fixture { fn drop(&mut self) { let _ = std::fs::remove_dir_all(&self.directory); } }
+    impl Drop for Fixture {
+        fn drop(&mut self) {
+            let _ = std::fs::remove_dir_all(&self.directory);
+        }
+    }
 
     #[test]
     fn trusted_signature_succeeds_once_and_replay_survives_reopen() {
-        let fixture = Fixture::new(); let intent = fixture.intent();
+        let fixture = Fixture::new();
+        let intent = fixture.intent();
         let mut verifier = fixture.provision();
-        assert!(verifier.verify_and_consume(&intent, 42, intent.control.as_ref(), 1001, 7).is_ok());
-        assert!(verifier.verify_and_consume(&intent, 42, intent.control.as_ref(), 1001, 7).is_err());
+        assert!(verifier
+            .verify_and_consume(&intent, 42, intent.control.as_ref(), 1001, 7)
+            .is_ok());
+        assert!(verifier
+            .verify_and_consume(&intent, 42, intent.control.as_ref(), 1001, 7)
+            .is_err());
         drop(verifier);
-        let mut reopened = TrustedDispatchVerifier::open(&fixture.path(), &fixture.key_bytes()).unwrap();
-        assert!(reopened.verify_and_consume(&intent, 42, intent.control.as_ref(), 1001, 7).is_err());
-        assert!(TrustedDispatchVerifier::provision_new(&fixture.path(), &fixture.key_bytes()).is_err());
+        let mut reopened =
+            TrustedDispatchVerifier::open(&fixture.path(), &fixture.key_bytes()).unwrap();
+        assert!(reopened
+            .verify_and_consume(&intent, 42, intent.control.as_ref(), 1001, 7)
+            .is_err());
+        assert!(
+            TrustedDispatchVerifier::provision_new(&fixture.path(), &fixture.key_bytes()).is_err()
+        );
     }
 
     #[test]
     fn every_signed_field_is_bound() {
-        let fixture = Fixture::new(); let original = fixture.intent(); let mut verifier = fixture.provision();
+        let fixture = Fixture::new();
+        let original = fixture.intent();
+        let mut verifier = fixture.provision();
         type IntentMutation = Box<dyn Fn(&mut SignedDispatchIntent)>;
         let mutations: Vec<IntentMutation> = vec![
-            Box::new(|i| i.ticket.app_bundle_id.push('x')), Box::new(|i| i.ticket.action.push('x')),
+            Box::new(|i| i.ticket.app_bundle_id.push('x')),
+            Box::new(|i| i.ticket.action.push('x')),
             Box::new(|i| i.ticket.channel = DesktopChannelTier::CliHeadless),
-            Box::new(|i| i.ticket.preflight_scitt_digest[0] ^= 1), Box::new(|i| i.ticket.no_overwrite_excl = false),
+            Box::new(|i| i.ticket.preflight_scitt_digest[0] ^= 1),
+            Box::new(|i| i.ticket.no_overwrite_excl = false),
             Box::new(|i| i.control.as_mut().unwrap().node_id.push('x')),
             Box::new(|i| i.control.as_mut().unwrap().role.push('x')),
             Box::new(|i| i.control.as_mut().unwrap().title.push('x')),
-            Box::new(|i| i.epoch += 1), Box::new(|i| i.issued_at -= 1), Box::new(|i| i.expires_at += 1),
-            Box::new(|i| i.nonce[0] ^= 1), Box::new(|i| i.ticket.enclave_pubkey_sec1[10] ^= 1),
+            Box::new(|i| i.epoch += 1),
+            Box::new(|i| i.issued_at -= 1),
+            Box::new(|i| i.expires_at += 1),
+            Box::new(|i| i.nonce[0] ^= 1),
+            Box::new(|i| i.ticket.enclave_pubkey_sec1[10] ^= 1),
         ];
         for mutate in mutations {
-            let mut tampered = original.clone(); mutate(&mut tampered);
-            assert!(verifier.verify_and_consume(&tampered, 42, tampered.control.as_ref(), 1001, tampered.epoch).is_err());
+            let mut tampered = original.clone();
+            mutate(&mut tampered);
+            assert!(verifier
+                .verify_and_consume(
+                    &tampered,
+                    42,
+                    tampered.control.as_ref(),
+                    1001,
+                    tampered.epoch
+                )
+                .is_err());
         }
         // Failed validation never burns a legitimate nonce.
-        assert!(verifier.verify_and_consume(&original, 42, original.control.as_ref(), 1001, 7).is_ok());
+        assert!(verifier
+            .verify_and_consume(&original, 42, original.control.as_ref(), 1001, 7)
+            .is_ok());
     }
 
     #[test]
     fn wrong_key_expiry_epoch_and_control_rejected() {
-        let fixture = Fixture::new(); let other = Fixture::new(); let mut verifier = fixture.provision();
-        let mut intent = fixture.intent(); other.sign(&mut intent);
-        assert!(verifier.verify_and_consume(&intent, 42, intent.control.as_ref(), 1001, 7).is_err());
+        let fixture = Fixture::new();
+        let other = Fixture::new();
+        let mut verifier = fixture.provision();
+        let mut intent = fixture.intent();
+        other.sign(&mut intent);
+        assert!(verifier
+            .verify_and_consume(&intent, 42, intent.control.as_ref(), 1001, 7)
+            .is_err());
         intent = other.intent();
-        assert!(verifier.verify_and_consume(&intent, 42, intent.control.as_ref(), 1001, 7).is_err());
+        assert!(verifier
+            .verify_and_consume(&intent, 42, intent.control.as_ref(), 1001, 7)
+            .is_err());
         assert!(TrustedDispatchVerifier::open(&fixture.path(), &other.key_bytes()).is_err());
         intent = fixture.intent();
-        for (now, epoch) in [(999,7), (1030,7), (1001,8)] {
-            assert!(verifier.verify_and_consume(&intent, 42, intent.control.as_ref(), now, epoch).is_err());
+        for (now, epoch) in [(999, 7), (1030, 7), (1001, 8)] {
+            assert!(verifier
+                .verify_and_consume(&intent, 42, intent.control.as_ref(), now, epoch)
+                .is_err());
         }
         let wrong_control = SemanticControlBinding::new("id", "AXButton", "Delete");
-        assert!(verifier.verify_and_consume(&intent, 42, Some(&wrong_control), 1001, 7).is_err());
-        assert!(verifier.verify_and_consume(&intent, 42, None, 1001, 7).is_err());
-        assert!(ReaPreflightGate::verify_dispatch_ready(&intent.ticket, 42, intent.control.as_ref(), intent.control.as_ref()).is_err());
+        assert!(verifier
+            .verify_and_consume(&intent, 42, Some(&wrong_control), 1001, 7)
+            .is_err());
+        assert!(verifier
+            .verify_and_consume(&intent, 42, None, 1001, 7)
+            .is_err());
+        assert!(ReaPreflightGate::verify_dispatch_ready(
+            &intent.ticket,
+            42,
+            intent.control.as_ref(),
+            intent.control.as_ref()
+        )
+        .is_err());
     }
 
     #[test]
     fn independent_connections_cannot_consume_nonce_twice() {
-        let fixture = Fixture::new(); let intent = fixture.intent(); let mut first = fixture.provision();
-        let mut second = TrustedDispatchVerifier::open(&fixture.path(), &fixture.key_bytes()).unwrap();
-        assert!(first.verify_and_consume(&intent, 42, intent.control.as_ref(), 1001, 7).is_ok());
-        assert!(second.verify_and_consume(&intent, 42, intent.control.as_ref(), 1001, 7).is_err());
+        let fixture = Fixture::new();
+        let intent = fixture.intent();
+        let mut first = fixture.provision();
+        let mut second =
+            TrustedDispatchVerifier::open(&fixture.path(), &fixture.key_bytes()).unwrap();
+        assert!(first
+            .verify_and_consume(&intent, 42, intent.control.as_ref(), 1001, 7)
+            .is_ok());
+        assert!(second
+            .verify_and_consume(&intent, 42, intent.control.as_ref(), 1001, 7)
+            .is_err());
     }
 
     #[test]
     fn concurrent_verifiers_authorize_at_most_once() {
-        let fixture = Fixture::new(); let intent = fixture.intent(); drop(fixture.provision());
+        let fixture = Fixture::new();
+        let intent = fixture.intent();
+        drop(fixture.provision());
         let barrier = std::sync::Arc::new(std::sync::Barrier::new(2));
-        let workers: Vec<_> = (0..2).map(|_| {
-            let path = fixture.path(); let key = fixture.key_bytes();
-            let intent = intent.clone(); let barrier = barrier.clone();
-            std::thread::spawn(move || {
-                let mut verifier = TrustedDispatchVerifier::open(&path, &key).unwrap();
-                barrier.wait();
-                verifier.verify_and_consume(&intent, 42, intent.control.as_ref(), 1001, 7).is_ok()
+        let workers: Vec<_> = (0..2)
+            .map(|_| {
+                let path = fixture.path();
+                let key = fixture.key_bytes();
+                let intent = intent.clone();
+                let barrier = barrier.clone();
+                std::thread::spawn(move || {
+                    let mut verifier = TrustedDispatchVerifier::open(&path, &key).unwrap();
+                    barrier.wait();
+                    verifier
+                        .verify_and_consume(&intent, 42, intent.control.as_ref(), 1001, 7)
+                        .is_ok()
+                })
             })
-        }).collect();
-        let accepted = workers.into_iter().map(|worker| usize::from(worker.join().unwrap())).sum::<usize>();
+            .collect();
+        let accepted = workers
+            .into_iter()
+            .map(|worker| usize::from(worker.join().unwrap()))
+            .sum::<usize>();
         assert_eq!(accepted, 1);
     }
 
     #[test]
     fn signed_cli_intent_accepted_but_overlong_window_rejected() {
-        let fixture = Fixture::new(); let mut verifier = fixture.provision(); let mut intent = fixture.intent();
-        intent.ticket.channel = DesktopChannelTier::CliHeadless; intent.control = None;
-        intent.expires_at = intent.issued_at + 61; fixture.sign(&mut intent);
-        assert!(verifier.verify_and_consume(&intent, 42, None, 1001, 7).is_err());
-        intent.expires_at = intent.issued_at + 60; fixture.sign(&mut intent);
-        assert!(verifier.verify_and_consume(&intent, 42, None, 1001, 7).is_ok());
+        let fixture = Fixture::new();
+        let mut verifier = fixture.provision();
+        let mut intent = fixture.intent();
+        intent.ticket.channel = DesktopChannelTier::CliHeadless;
+        intent.control = None;
+        intent.expires_at = intent.issued_at + 61;
+        fixture.sign(&mut intent);
+        assert!(verifier
+            .verify_and_consume(&intent, 42, None, 1001, 7)
+            .is_err());
+        intent.expires_at = intent.issued_at + 60;
+        fixture.sign(&mut intent);
+        assert!(verifier
+            .verify_and_consume(&intent, 42, None, 1001, 7)
+            .is_ok());
     }
 
     #[test]
@@ -1076,7 +1427,8 @@ mod trusted_dispatch_tests {
         let fixture = Fixture::new();
         assert!(TrustedDispatchVerifier::open(&fixture.path(), &fixture.key_bytes()).is_err());
         assert!(!fixture.path().exists());
-        let verifier = fixture.provision(); drop(verifier);
+        let verifier = fixture.provision();
+        drop(verifier);
         let alias = fixture.directory.join("alias.sqlite");
         std::os::unix::fs::symlink(fixture.path(), &alias).unwrap();
         assert!(TrustedDispatchVerifier::open(&alias, &fixture.key_bytes()).is_err());
@@ -1085,21 +1437,31 @@ mod trusted_dispatch_tests {
     #[test]
     fn lax_database_permissions_and_symlink_parent_rejected() {
         use std::os::unix::fs::PermissionsExt;
-        let fixture = Fixture::new(); drop(fixture.provision());
+        let fixture = Fixture::new();
+        drop(fixture.provision());
         let alias_parent = fixture.directory.join("parent-link");
         std::os::unix::fs::symlink(&fixture.directory, &alias_parent).unwrap();
-        assert!(TrustedDispatchVerifier::open(&alias_parent.join("nonces.sqlite"), &fixture.key_bytes()).is_err());
+        assert!(TrustedDispatchVerifier::open(
+            &alias_parent.join("nonces.sqlite"),
+            &fixture.key_bytes()
+        )
+        .is_err());
         std::fs::set_permissions(fixture.path(), std::fs::Permissions::from_mode(0o644)).unwrap();
         assert!(TrustedDispatchVerifier::open(&fixture.path(), &fixture.key_bytes()).is_err());
     }
 
     #[test]
     fn dispatch_restart_child() {
-        let Ok(path) = std::env::var("BABYLON_TICKET_TEST_STORE") else { return; };
-        let intent: SignedDispatchIntent = serde_json::from_str(&std::env::var("BABYLON_TICKET_TEST_INTENT").unwrap()).unwrap();
+        let Ok(path) = std::env::var("BABYLON_TICKET_TEST_STORE") else {
+            return;
+        };
+        let intent: SignedDispatchIntent =
+            serde_json::from_str(&std::env::var("BABYLON_TICKET_TEST_INTENT").unwrap()).unwrap();
         let key = hex::decode(std::env::var("BABYLON_TICKET_TEST_KEY").unwrap()).unwrap();
         let mut verifier = TrustedDispatchVerifier::open(Path::new(&path), &key).unwrap();
-        verifier.verify_and_consume(&intent, 42, intent.control.as_ref(), 1001, 7).unwrap();
+        verifier
+            .verify_and_consume(&intent, 42, intent.control.as_ref(), 1001, 7)
+            .unwrap();
         // Exit without dropping SQLite: exercise reopening a committed WAL after
         // process termination, rather than relying on orderly connection cleanup.
         std::process::exit(0);
@@ -1107,16 +1469,83 @@ mod trusted_dispatch_tests {
 
     #[test]
     fn replay_rejected_after_process_restart() {
-        let fixture = Fixture::new(); let intent = fixture.intent(); drop(fixture.provision());
+        let fixture = Fixture::new();
+        let intent = fixture.intent();
+        drop(fixture.provision());
         let status = Command::new(std::env::current_exe().unwrap())
-            .args(["--exact", "omega_mediation::trusted_dispatch_tests::dispatch_restart_child"])
+            .args([
+                "--exact",
+                "omega_mediation::trusted_dispatch_tests::dispatch_restart_child",
+            ])
             .env("BABYLON_TICKET_TEST_STORE", fixture.path())
-            .env("BABYLON_TICKET_TEST_INTENT", serde_json::to_string(&intent).unwrap())
+            .env(
+                "BABYLON_TICKET_TEST_INTENT",
+                serde_json::to_string(&intent).unwrap(),
+            )
             .env("BABYLON_TICKET_TEST_KEY", hex::encode(fixture.key_bytes()))
-            .status().unwrap();
+            .status()
+            .unwrap();
         assert!(status.success());
-        let mut verifier = TrustedDispatchVerifier::open(&fixture.path(), &fixture.key_bytes()).unwrap();
-        assert!(verifier.verify_and_consume(&intent, 42, intent.control.as_ref(), 1001, 7).is_err());
+        let mut verifier =
+            TrustedDispatchVerifier::open(&fixture.path(), &fixture.key_bytes()).unwrap();
+        assert!(verifier
+            .verify_and_consume(&intent, 42, intent.control.as_ref(), 1001, 7)
+            .is_err());
+    }
+
+    #[test]
+    fn test_o9_reboot_lease_and_monotonic_expiry_rejected() {
+        let fixture = Fixture::new();
+        let intent = fixture.intent();
+        let mut verifier = fixture.provision();
+
+        let boot_a = TrustedDispatchVerifier::current_boot_session_id().unwrap();
+        assert_ne!(boot_a, [0u8; 36]);
+        let mut boot_b = boot_a;
+        boot_b[0] ^= 0x01; // Simulated reboot session UUID change
+
+        // 1. Different boot_session_id (O9 Reboot Lease Violation) -> rejected before nonce consumption
+        let err_reboot = verifier.verify_and_consume_with_boot_lease(
+            &intent,
+            42,
+            intent.control.as_ref(),
+            1001,
+            7,
+            &boot_a,
+            &boot_b,
+            100_000,
+            200_000,
+        );
+        assert!(err_reboot.is_err());
+
+        // 2. Expired monotonic deadline -> rejected before nonce consumption
+        let err_mono = verifier.verify_and_consume_with_boot_lease(
+            &intent,
+            42,
+            intent.control.as_ref(),
+            1001,
+            7,
+            &boot_a,
+            &boot_a,
+            200_000,
+            200_000,
+        );
+        assert!(err_mono.is_err());
+
+        // 3. Matching boot_session_id and valid monotonic deadline -> accepted and consumes nonce
+        assert!(verifier
+            .verify_and_consume_with_boot_lease(
+                &intent,
+                42,
+                intent.control.as_ref(),
+                1001,
+                7,
+                &boot_a,
+                &boot_a,
+                100_000,
+                200_000,
+            )
+            .is_ok());
     }
 }
 
@@ -1133,7 +1562,10 @@ mod trusted_dispatch_tests {
 ///    La observación puede **falsar** `INV-Ω` al descubrir aristas ocultas ($E_{\text{obs}} \setminus E_{\text{decl}} \neq \emptyset$),
 ///    pero **nunca previene** un efecto por sí misma ni demuestra aislamiento universal.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "cortex-persist", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(
+    feature = "cortex-persist",
+    derive(serde::Serialize, serde::Deserialize)
+)]
 pub enum SecurityMechanismPlane {
     /// Verificación sobre el grafo o modelo formal declarado (`L1_FORMAL`).
     FormalVerification,
@@ -1171,7 +1603,10 @@ impl SecurityMechanismPlane {
 
 /// Veredicto epistémico de `ShadowEdgeDiff` sobre la mediación real en el dominio ensayado.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "cortex-persist", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(
+    feature = "cortex-persist",
+    derive(serde::Serialize, serde::Deserialize)
+)]
 pub enum ShadowDiffVerdict {
     /// Soportado dentro del dominio experimental acotado (visibilidad completa, cero aristas
     /// sombra y testigo físico independiente que confirma ausencia de mutación no mediada).
@@ -1207,16 +1642,19 @@ impl TryFrom<ShadowDiffVerdict> for crate::ontology::nemesis::NemesisVerdict {
             ShadowDiffVerdict::SupportedWithinDomain => Ok(Self::SupportedWithinDomain),
             ShadowDiffVerdict::Falsified => Ok(Self::Falsified),
             ShadowDiffVerdict::Untested => Ok(Self::Untested),
-            ShadowDiffVerdict::Inconclusive => Err(
-                "INCONCLUSIVE shadow observation cannot be promoted to SUPPORTED_WITHIN_DOMAIN",
-            ),
+            ShadowDiffVerdict::Inconclusive => {
+                Err("INCONCLUSIVE shadow observation cannot be promoted to SUPPORTED_WITHIN_DOMAIN")
+            }
         }
     }
 }
 
 /// Modalidad temporal del observador de recursos del sistema operativo.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "cortex-persist", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(
+    feature = "cortex-persist",
+    derive(serde::Serialize, serde::Deserialize)
+)]
 pub enum ObservationModality {
     /// Sondeo puntual de tabla de descriptores/mapas (`lsof` / `/dev/fd`).
     /// Ciego a operaciones efímeras `open -> write -> close` entre muestras (`SD-004`)
@@ -1238,7 +1676,10 @@ impl ObservationModality {
 
 /// Estado de visibilidad del observador `OsResourceObserver` al inspeccionar un proceso.
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "cortex-persist", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(
+    feature = "cortex-persist",
+    derive(serde::Serialize, serde::Deserialize)
+)]
 pub enum ObserverVisibility {
     /// La tabla de descriptores y regiones del proceso objetivo se inspeccionó íntegramente.
     Complete,
@@ -1269,7 +1710,10 @@ impl ObserverVisibility {
 
 /// Clasificación de un recurso observado en el proceso del agente a nivel de sistema operativo.
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "cortex-persist", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(
+    feature = "cortex-persist",
+    derive(serde::Serialize, serde::Deserialize)
+)]
 pub enum ObservedResourceKind {
     /// Descriptor de archivo regular (`tREG`, ej. `SD-001` heredado tras `fork/exec`).
     RegularFile,
@@ -1287,7 +1731,10 @@ pub enum ObservedResourceKind {
 
 /// Entrada individual observada en la tabla de recursos del proceso del agente.
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "cortex-persist", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(
+    feature = "cortex-persist",
+    derive(serde::Serialize, serde::Deserialize)
+)]
 pub struct ObservedResourceEntry {
     /// PID del proceso del agente inspeccionado.
     pub pid: u32,
@@ -1303,7 +1750,10 @@ pub struct ObservedResourceEntry {
 
 /// Instantánea de solo lectura de los recursos abiertos/mapeados por un proceso de agente.
 #[derive(Debug, Clone, PartialEq, Eq)]
-#[cfg_attr(feature = "cortex-persist", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(
+    feature = "cortex-persist",
+    derive(serde::Serialize, serde::Deserialize)
+)]
 pub struct ProcessResourceSnapshot {
     /// PID del proceso inspeccionado.
     pub pid: u32,
@@ -1465,44 +1915,44 @@ impl OsResourceObserver {
                 if fname.is_empty() {
                     return;
                 }
-                let (descriptor_or_region, kind, mechanism) =
-                    if fd_tag == "txt" || fd_tag == "mem" {
-                        (
-                            format!("mmap:{fd_tag}"),
-                            ObservedResourceKind::SharedMemoryMap,
-                            "os_vm_map_shared_vnode".to_string(),
-                        )
-                    } else if ftype == "unix" {
-                        (
-                            format!("fd:{fd_tag}"),
-                            ObservedResourceKind::UnixSocket,
-                            "os_af_unix_socket".to_string(),
-                        )
-                    } else if ftype == "REG" {
-                        (
-                            format!("fd:{fd_tag}"),
-                            ObservedResourceKind::RegularFile,
-                            "os_fd_table_reg".to_string(),
-                        )
-                    } else if ftype == "DIR" {
-                        (
-                            format!("fd:{fd_tag}"),
-                            ObservedResourceKind::Directory,
-                            "os_fd_table_dir".to_string(),
-                        )
-                    } else if ftype == "PIPE" || ftype == "FIFO" {
-                        (
-                            format!("fd:{fd_tag}"),
-                            ObservedResourceKind::PipeOrFifo,
-                            "os_fd_table_pipe".to_string(),
-                        )
-                    } else {
-                        (
-                            format!("fd:{fd_tag}"),
-                            ObservedResourceKind::Other(ftype),
-                            "os_fd_table_other".to_string(),
-                        )
-                    };
+                let (descriptor_or_region, kind, mechanism) = if fd_tag == "txt" || fd_tag == "mem"
+                {
+                    (
+                        format!("mmap:{fd_tag}"),
+                        ObservedResourceKind::SharedMemoryMap,
+                        "os_vm_map_shared_vnode".to_string(),
+                    )
+                } else if ftype == "unix" {
+                    (
+                        format!("fd:{fd_tag}"),
+                        ObservedResourceKind::UnixSocket,
+                        "os_af_unix_socket".to_string(),
+                    )
+                } else if ftype == "REG" {
+                    (
+                        format!("fd:{fd_tag}"),
+                        ObservedResourceKind::RegularFile,
+                        "os_fd_table_reg".to_string(),
+                    )
+                } else if ftype == "DIR" {
+                    (
+                        format!("fd:{fd_tag}"),
+                        ObservedResourceKind::Directory,
+                        "os_fd_table_dir".to_string(),
+                    )
+                } else if ftype == "PIPE" || ftype == "FIFO" {
+                    (
+                        format!("fd:{fd_tag}"),
+                        ObservedResourceKind::PipeOrFifo,
+                        "os_fd_table_pipe".to_string(),
+                    )
+                } else {
+                    (
+                        format!("fd:{fd_tag}"),
+                        ObservedResourceKind::Other(ftype),
+                        "os_fd_table_other".to_string(),
+                    )
+                };
 
                 out_entries.push(ObservedResourceEntry {
                     pid,
@@ -1612,7 +2062,10 @@ fn compute_domain_sha256(domain: &[u8], payload: &[u8]) -> [u8; 32] {
 /// Permite detectar mutaciones producidas por descriptores efímeros abiertos y cerrados
 /// entre intervalos de sondeo (`SD-004`) o por regiones `mmap` compartidas (`SD-003`).
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "cortex-persist", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(
+    feature = "cortex-persist",
+    derive(serde::Serialize, serde::Deserialize)
+)]
 pub struct PhysicalResourceWitness {
     /// Ruta del recurso protegido monitorizado.
     pub resource_path: PathBuf,
@@ -1695,7 +2148,10 @@ impl PhysicalResourceWitness {
 
 /// Artefacto de evidencia determinista compatible con CORTEX / WORM.
 #[derive(Debug, Clone, PartialEq, Eq)]
-#[cfg_attr(feature = "cortex-persist", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(
+    feature = "cortex-persist",
+    derive(serde::Serialize, serde::Deserialize)
+)]
 pub struct CortexShadowEvidenceArtifact {
     /// Identificador de la prueba adversarial (ej. `"SD-001"` .. `"SD-005"`).
     pub test_id: String,
@@ -1733,7 +2189,13 @@ impl CortexShadowEvidenceArtifact {
         let safe_id: String = self
             .test_id
             .chars()
-            .map(|c| if c.is_ascii_alphanumeric() || c == '-' || c == '_' { c } else { '_' })
+            .map(|c| {
+                if c.is_ascii_alphanumeric() || c == '-' || c == '_' {
+                    c
+                } else {
+                    '_'
+                }
+            })
             .collect();
         let file_path = dir.join(format!("{safe_id}_shadow_evidence.json"));
         let payload = serde_json::to_vec_pretty(self)
@@ -1760,7 +2222,10 @@ impl CortexShadowEvidenceArtifact {
 
 /// Resultado completo del motor de diferencia de grafos `ShadowEdgeDiff`.
 #[derive(Debug, Clone, PartialEq, Eq)]
-#[cfg_attr(feature = "cortex-persist", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(
+    feature = "cortex-persist",
+    derive(serde::Serialize, serde::Deserialize)
+)]
 pub struct ShadowDiffReport {
     /// Reloj lógico canónico inyectado (`INV_C5_CANONICAL_LOGICAL_TICK`).
     pub logical_tick: u64,
@@ -1793,8 +2258,12 @@ impl ShadowDiffReport {
         canonical_bytes.extend_from_slice(&self.logical_tick.to_le_bytes());
         canonical_bytes.extend_from_slice(self.verdict.as_str().as_bytes());
         canonical_bytes.extend_from_slice(self.mechanism_plane.as_str().as_bytes());
-        canonical_bytes.push(u8::from(self.declared_mediation_verdict.complete_mediation_holds));
-        canonical_bytes.push(u8::from(self.augmented_mediation_verdict.complete_mediation_holds));
+        canonical_bytes.push(u8::from(
+            self.declared_mediation_verdict.complete_mediation_holds,
+        ));
+        canonical_bytes.push(u8::from(
+            self.augmented_mediation_verdict.complete_mediation_holds,
+        ));
         canonical_bytes.extend_from_slice(self.observer_modality.as_str().as_bytes());
         for edge in &self.shadow_edges {
             canonical_bytes.extend_from_slice(format!("{:?}", edge).as_bytes());
@@ -1804,14 +2273,17 @@ impl ShadowDiffReport {
             canonical_bytes.extend_from_slice(&witness.pre_state_sha256);
             canonical_bytes.extend_from_slice(&witness.post_state_sha256);
         }
-        let digest = compute_domain_sha256(b"BABYLON60/CORTEX-SHADOW-EVIDENCE/v1", &canonical_bytes);
+        let digest =
+            compute_domain_sha256(b"BABYLON60/CORTEX-SHADOW-EVIDENCE/v1", &canonical_bytes);
 
         CortexShadowEvidenceArtifact {
             test_id: test_id_str,
             logical_tick: self.logical_tick,
             verdict: self.verdict,
             mechanism_plane: self.mechanism_plane,
-            declared_graph_mediation_holds: self.declared_mediation_verdict.complete_mediation_holds,
+            declared_graph_mediation_holds: self
+                .declared_mediation_verdict
+                .complete_mediation_holds,
             augmented_graph_mediation_holds: self
                 .augmented_mediation_verdict
                 .complete_mediation_holds,
@@ -1944,14 +2416,15 @@ impl ShadowEdgeDiff {
                 }
                 ObservedResourceKind::UnixSocket => {
                     let target_str = entry.target_path.to_string_lossy();
-                    if target_str.starts_with('/') && !normalized_allowed_sockets.contains(&norm_target) {
+                    if target_str.starts_with('/')
+                        && !normalized_allowed_sockets.contains(&norm_target)
+                    {
                         let in_perimeter = perimeter_dirs.is_empty()
-                            || perimeter_dirs
-                                .iter()
-                                .any(|d| norm_target.starts_with(d));
+                            || perimeter_dirs.iter().any(|d| norm_target.starts_with(d));
                         if in_perimeter {
-                            let ipc_node =
-                                AuthorityNode::IpcChannel(norm_target.to_string_lossy().into_owned());
+                            let ipc_node = AuthorityNode::IpcChannel(
+                                norm_target.to_string_lossy().into_owned(),
+                            );
                             let sink_node = AuthorityNode::ProtectedResource(format!(
                                 "unmediated_ipc_endpoint:{}",
                                 norm_target.display()
@@ -2000,9 +2473,8 @@ impl ShadowEdgeDiff {
                         )
                     });
 
-                let already_covered_by_fd = shadow_edges
-                    .iter()
-                    .any(|e| e.to == target_protected_node);
+                let already_covered_by_fd =
+                    shadow_edges.iter().any(|e| e.to == target_protected_node);
 
                 if !already_covered_by_fd {
                     let transient_cap = AuthorityNode::CapabilityHandle(format!(
@@ -2071,6 +2543,225 @@ impl ShadowEdgeDiff {
     }
 }
 
+// ============================================================================
+// O10 · VERIFIER-CAPTURE GATE (C5-06 / C5-08) & O8 · REVOCATION-RACE (C5-04)
+// ============================================================================
+
+/// Veredicto determinista del oráculo `O10 · Verifier-Capture` (`C5-06`, `C5-08`).
+#[derive(Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(
+    feature = "cortex-persist",
+    derive(serde::Serialize, serde::Deserialize)
+)]
+pub enum VerifierCaptureVerdict {
+    /// La propuesta modifica únicamente artefactos de implementación sin tocar oráculos confiables.
+    CleanImplementationProposal {
+        /// Rutas de implementación admitidas.
+        implementation_paths: Vec<String>,
+    },
+    /// Rechazo `O10`: la misma propuesta modifica simultáneamente el artefacto bajo prueba
+    /// y los tests/oráculos que lo validan.
+    CaptureDetectedCoModification {
+        /// Rutas de implementación en la propuesta.
+        implementation_paths: Vec<String>,
+        /// Rutas de oráculo/verificador contaminadas en la misma propuesta.
+        oracle_paths: Vec<String>,
+    },
+    /// Rechazo `O10`: el agente proponente intenta mutar directamente oráculos confiables
+    /// sin autorización de gobernanza externa independiente.
+    UnauthorizedOracleMutation {
+        /// Rutas de oráculo/verificador rechazadas.
+        oracle_paths: Vec<String>,
+    },
+}
+
+/// Gate determinista contra captura del verificador (`O10 · Verifier-Capture`).
+///
+/// Impide que un agente apruebe su propia propuesta modificando en el mismo lote
+/// el código evaluado y las condiciones de aceptación (`tests/`, `CLAIMS.toml`,
+/// `claims.lock`, `scripts/c5_quality_gates/`, `scripts/guards/`, `proof/`).
+#[derive(Debug, Clone, Default)]
+pub struct VerifierCaptureGate;
+
+impl VerifierCaptureGate {
+    /// Prefijos y rutas exactas de la base de verificación confiable (TCB de oráculos).
+    pub const TRUSTED_ORACLE_PREFIXES: &'static [&'static str] = &[
+        "tests/",
+        "scripts/c5_quality_gates/",
+        "scripts/guards/",
+        "proof/",
+        "CLAIMS.toml",
+        "claims.lock",
+        "docs/security/intelligence-authority-acceptance.md",
+    ];
+
+    /// Clasifica si una ruta relativa normalizada pertenece al conjunto de oráculos confiables.
+    pub fn is_trusted_oracle_path(path: &str) -> bool {
+        let trimmed = path.trim_start_matches("./").trim_start_matches('/');
+        for prefix in Self::TRUSTED_ORACLE_PREFIXES {
+            if trimmed == *prefix || trimmed.starts_with(prefix) {
+                return true;
+            }
+        }
+        trimmed.ends_with("_test.rs")
+            || trimmed.ends_with("_tests.rs")
+            || trimmed.contains("/tests/")
+    }
+
+    /// Evalúa un conjunto de rutas propuestas por un agente frente al oráculo `O10`.
+    pub fn evaluate_proposal<S: AsRef<str>>(
+        proposed_paths: &[S],
+        external_governance_authorized: bool,
+    ) -> VerifierCaptureVerdict {
+        let mut implementation_paths = Vec::new();
+        let mut oracle_paths = Vec::new();
+
+        for raw in proposed_paths {
+            let clean = raw
+                .as_ref()
+                .trim_start_matches("./")
+                .trim_start_matches('/')
+                .to_string();
+            if clean.is_empty() {
+                continue;
+            }
+            if Self::is_trusted_oracle_path(&clean) {
+                oracle_paths.push(clean);
+            } else {
+                implementation_paths.push(clean);
+            }
+        }
+
+        implementation_paths.sort();
+        implementation_paths.dedup();
+        oracle_paths.sort();
+        oracle_paths.dedup();
+
+        // Regla O10 estricta: nunca se permite co-modificar en la misma propuesta de agente
+        // el artefacto evaluado y los oráculos que definen su PASS.
+        if !implementation_paths.is_empty() && !oracle_paths.is_empty() {
+            return VerifierCaptureVerdict::CaptureDetectedCoModification {
+                implementation_paths,
+                oracle_paths,
+            };
+        }
+
+        if !oracle_paths.is_empty() && !external_governance_authorized {
+            return VerifierCaptureVerdict::UnauthorizedOracleMutation { oracle_paths };
+        }
+
+        VerifierCaptureVerdict::CleanImplementationProposal {
+            implementation_paths,
+        }
+    }
+}
+
+/// Resultado en el punto de linealización ante una carrera de revocación (`O8 · Revocation-Race`).
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[cfg_attr(
+    feature = "cortex-persist",
+    derive(serde::Serialize, serde::Deserialize)
+)]
+pub enum LinearizationCommitResult {
+    /// La capacidad seguía vigente en el punto de linealización; recibe un fencing token monótono.
+    Committed {
+        /// Época activa verificada en el punto de linealización.
+        epoch: u64,
+        /// Fencing token estrictamente creciente asignado al efecto (`C5-04`).
+        fencing_token: u64,
+    },
+    /// La capacidad fue revocada antes del punto de linealización; cero efectos aplicados.
+    RejectedRevokedBeforeLinearization {
+        /// Época de la capacidad presentada.
+        capability_epoch: u64,
+        /// Época activa en el punto de linealización.
+        active_epoch: u64,
+    },
+}
+
+#[derive(Debug)]
+struct LinearizationInner {
+    active_epoch: u64,
+    last_fencing_token: u64,
+    revoked_capability_ids: HashSet<[u8; 32]>,
+    committed_effects: Vec<([u8; 32], u64, u64)>,
+}
+
+/// Gate de punto de linealización con fencing tokens para `O8 · Revocation-Race` (`C5-04`).
+///
+/// Serializa el punto exacto de compromiso entre revocaciones concurrentes y despachos,
+/// impidiendo que una operación pre-validada haga commit si su capacidad o época fue
+/// revocada antes de adquirir el punto de linealización.
+#[derive(Debug)]
+pub struct LinearizationRevocationGate {
+    inner: std::sync::Mutex<LinearizationInner>,
+}
+
+impl LinearizationRevocationGate {
+    /// Crea un gate en la época inicial `initial_epoch`.
+    pub fn new(initial_epoch: u64) -> Self {
+        Self {
+            inner: std::sync::Mutex::new(LinearizationInner {
+                active_epoch: initial_epoch,
+                last_fencing_token: 0,
+                revoked_capability_ids: HashSet::new(),
+                committed_effects: Vec::new(),
+            }),
+        }
+    }
+
+    /// Revoca atómicamente una capacidad específica y avanza la época activa en el punto de linealización.
+    pub fn revoke_capability_and_advance_epoch(&self, capability_id: [u8; 32]) -> u64 {
+        let mut guard = match self.inner.lock() {
+            Ok(g) => g,
+            Err(poisoned) => poisoned.into_inner(),
+        };
+        guard.revoked_capability_ids.insert(capability_id);
+        guard.active_epoch = guard.active_epoch.saturating_add(1);
+        guard.active_epoch
+    }
+
+    /// Intenta comprometer una operación en el punto de linealización verificando época y revocación.
+    pub fn try_linearize_commit(
+        &self,
+        capability_id: [u8; 32],
+        capability_epoch: u64,
+    ) -> LinearizationCommitResult {
+        let mut guard = match self.inner.lock() {
+            Ok(g) => g,
+            Err(poisoned) => poisoned.into_inner(),
+        };
+
+        if capability_epoch != guard.active_epoch
+            || guard.revoked_capability_ids.contains(&capability_id)
+        {
+            return LinearizationCommitResult::RejectedRevokedBeforeLinearization {
+                capability_epoch,
+                active_epoch: guard.active_epoch,
+            };
+        }
+
+        guard.last_fencing_token = guard.last_fencing_token.saturating_add(1);
+        let token = guard.last_fencing_token;
+        let epoch = guard.active_epoch;
+        guard.committed_effects.push((capability_id, epoch, token));
+
+        LinearizationCommitResult::Committed {
+            epoch,
+            fencing_token: token,
+        }
+    }
+
+    /// Devuelve el historial de efectos comprometidos `(capability_id, epoch, fencing_token)`.
+    pub fn committed_effects(&self) -> Vec<([u8; 32], u64, u64)> {
+        let guard = match self.inner.lock() {
+            Ok(g) => g,
+            Err(poisoned) => poisoned.into_inner(),
+        };
+        guard.committed_effects.clone()
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -2086,10 +2777,11 @@ mod tests {
         assert!(rendered.contains("(deny network*)"));
         assert!(SeatbeltComputerUseProfile::validate_profile_text(
             &rendered.replace("(deny network*)", "")
-        ).is_err());
-        assert!(rendered.contains(
-            "(allow network-outbound (literal \"/tmp/babylon_broker.sock\"))"
-        ));
+        )
+        .is_err());
+        assert!(
+            rendered.contains("(allow network-outbound (literal \"/tmp/babylon_broker.sock\"))")
+        );
         assert!(rendered.contains("(deny hid-control)"));
         assert!(rendered.contains("(deny appleevent-send)"));
         for svc in MacOsAgentConfinement::DENIED_COMPUTER_USE_MACH_SERVICES {
@@ -2146,9 +2838,8 @@ mod tests {
         assert_eq!(res_ok, Ok(250));
 
         // Refutación en las 3 ventanas [100, 250, 500] ms -> DeltaMismatch
-        let res_err = verifier.verify_observations(&expected, |_window_ms| {
-            "sha256:dialog_stuck".to_string()
-        });
+        let res_err =
+            verifier.verify_observations(&expected, |_window_ms| "sha256:dialog_stuck".to_string());
         assert_eq!(
             res_err,
             Err(TrustGatewayError::DeltaMismatch {
@@ -2203,9 +2894,7 @@ mod tests {
         let mut ax_ticket = valid_ticket.clone();
         ax_ticket.channel = DesktopChannelTier::AxSemanticTree;
         assert!(matches!(
-            ReaPreflightGate::verify_dispatch_ready(
-                &ax_ticket, 42, Some(&binding), Some(&binding)
-            ),
+            ReaPreflightGate::verify_dispatch_ready(&ax_ticket, 42, Some(&binding), Some(&binding)),
             Err(TrustGatewayError::InvalidSecureEnclaveTicket(_))
         ));
 
@@ -2233,7 +2922,116 @@ mod tests {
         assert!(!SecurityMechanismPlane::PreventiveEnforcement.proves_universal_isolation());
         assert!(!SecurityMechanismPlane::EmpiricalObservation.proves_universal_isolation());
     }
+
+    #[test]
+    fn o10_verifier_capture_gate_rejects_co_modified_artifact_and_oracle() {
+        // Caso 1: Propuesta limpia de implementación pasa
+        let clean =
+            VerifierCaptureGate::evaluate_proposal(&["src/executor.rs", "src/tamkarum.rs"], false);
+        assert_eq!(
+            clean,
+            VerifierCaptureVerdict::CleanImplementationProposal {
+                implementation_paths: vec![
+                    "src/executor.rs".to_string(),
+                    "src/tamkarum.rs".to_string(),
+                ],
+            }
+        );
+
+        // Caso 2: Ataque O10 (co-modificar artefacto y test/oráculo en la misma propuesta)
+        let co_mod = VerifierCaptureGate::evaluate_proposal(
+            &[
+                "./src/executor.rs",
+                "tests/a02_effect_authorization.rs",
+                "CLAIMS.toml",
+            ],
+            true,
+        );
+        assert_eq!(
+            co_mod,
+            VerifierCaptureVerdict::CaptureDetectedCoModification {
+                implementation_paths: vec!["src/executor.rs".to_string()],
+                oracle_paths: vec![
+                    "CLAIMS.toml".to_string(),
+                    "tests/a02_effect_authorization.rs".to_string(),
+                ],
+            }
+        );
+
+        // Caso 3: Mutación directa de oráculo por agente sin autorización de gobernanza externa
+        let unauth_oracle = VerifierCaptureGate::evaluate_proposal(
+            &["scripts/c5_quality_gates/audit_semantic_contracts.py"],
+            false,
+        );
+        assert_eq!(
+            unauth_oracle,
+            VerifierCaptureVerdict::UnauthorizedOracleMutation {
+                oracle_paths: vec![
+                    "scripts/c5_quality_gates/audit_semantic_contracts.py".to_string()
+                ],
+            }
+        );
+    }
+
+    #[test]
+    fn o8_revocation_race_at_linearization_point_never_commits_revoked_capability() {
+        use std::sync::{Arc, Barrier};
+        use std::thread;
+
+        let gate = Arc::new(LinearizationRevocationGate::new(10));
+        let cap_target = [0x42u8; 32];
+
+        // Control positivo antes de la revocación: época 10 hace commit con fencing_token = 1
+        assert_eq!(
+            gate.try_linearize_commit(cap_target, 10),
+            LinearizationCommitResult::Committed {
+                epoch: 10,
+                fencing_token: 1,
+            }
+        );
+
+        // Carrera O8: revocación ejecutada justo antes del punto de linealización de 16 trabajadores
+        // que ya habían superado su pre-chequeo local en la época 10.
+        let new_epoch = gate.revoke_capability_and_advance_epoch(cap_target);
+        assert_eq!(new_epoch, 11);
+
+        let workers = 16usize;
+        let barrier = Arc::new(Barrier::new(workers));
+        let mut handles = Vec::with_capacity(workers);
+
+        for _ in 0..workers {
+            let gate_ref = Arc::clone(&gate);
+            let barrier_ref = Arc::clone(&barrier);
+            handles.push(thread::spawn(move || {
+                barrier_ref.wait();
+                gate_ref.try_linearize_commit(cap_target, 10)
+            }));
+        }
+
+        for h in handles {
+            let res = h.join().expect("worker panicked");
+            assert_eq!(
+                res,
+                LinearizationCommitResult::RejectedRevokedBeforeLinearization {
+                    capability_epoch: 10,
+                    active_epoch: 11,
+                }
+            );
+        }
+
+        // Incluso si un atacante falsifica el número de época nueva (11) para la misma capacidad revocada,
+        // el conjunto de revocación en el punto de linealización lo bloquea.
+        assert_eq!(
+            gate.try_linearize_commit(cap_target, 11),
+            LinearizationCommitResult::RejectedRevokedBeforeLinearization {
+                capability_epoch: 11,
+                active_epoch: 11,
+            }
+        );
+
+        // Solo el único efecto previo a la revocación consta comprometido
+        let committed = gate.committed_effects();
+        assert_eq!(committed.len(), 1);
+        assert_eq!(committed[0], (cap_target, 10, 1));
+    }
 }
-
-
-

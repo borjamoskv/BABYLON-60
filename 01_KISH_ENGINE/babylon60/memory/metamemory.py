@@ -11,6 +11,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from collections.abc import Sequence
 from enum import Enum
+import math
 from typing import List
 from uuid import uuid4
 
@@ -64,6 +65,7 @@ class MetamemoryMonitor:
 
     def __init__(self, *, ledger: CortexPersistLedger | None = None) -> None:
         self._fok_scores: dict[tuple[str, str], float] = {}
+        self._in_memory_attempts: dict[str, tuple[str, str, bool]] = {}
         self._ledger = ledger
 
     def _outcomes(self, intent: str, context: str) -> list[dict[str, object]]:
@@ -100,22 +102,50 @@ class MetamemoryMonitor:
             return FokJudgment(fok_score=0.1, tip_of_tongue=False)
 
         intent_lower = intent.lower()
-        matched = []
-        highest_score = 0.5
+        terms = [t for t in intent_lower.split() if len(t) > 2]
+        matched: list[str] = []
+        matched_scores: list[float] = []
 
         for c in candidates:
-            surface = getattr(c, "_fok_surface", getattr(c, "name", "")).lower()
-            terms = [t for t in intent_lower.split() if len(t) > 2]
+            name = str(getattr(c, "name", getattr(c, "skill_slug", "")))
+            surface = str(getattr(c, "_fok_surface", name)).lower()
+            striatal = getattr(c, "striatal_value", None)
+            if striatal is not None:
+                if (
+                    isinstance(striatal, bool)
+                    or not isinstance(striatal, (int, float))
+                    or not math.isfinite(float(striatal))
+                ):
+                    raise ValueError("striatal_value must be a finite number in [0.0, 1.0]")
+                striatal_f = float(striatal)
+                if striatal_f < 0.0 or striatal_f > 1.0:
+                    raise ValueError("striatal_value must be in [0.0, 1.0]")
+            else:
+                striatal_f = None
+
             if not terms:
-                score = 0.7
+                has_hit = bool(surface.strip())
+                ratio = 1.0 if has_hit else 0.0
+                score = 0.7 if has_hit else 0.2
             else:
                 hits = sum(1 for term in terms if term in surface)
-                score = min(1.0, 0.4 + (hits / len(terms)) * 0.6)
-            if score > highest_score:
-                highest_score = score
-            if score > 0.5:
-                matched.append(getattr(c, "name", ""))
+                has_hit = hits > 0
+                ratio = hits / len(terms)
+                if not has_hit:
+                    score = 0.2
+                elif ratio >= 0.5:
+                    score = min(1.0, 0.4 + ratio * 0.6)
+                else:
+                    score = 0.2 + ratio * 0.3
 
+            if striatal_f is not None and has_hit:
+                score = min(score, striatal_f) if striatal_f < 0.35 else score * striatal_f
+
+            if has_hit:
+                matched.append(name)
+                matched_scores.append(score)
+
+        highest_score = max(matched_scores) if matched_scores else 0.2
         tip_of_tongue = highest_score < 0.35 and len(matched) > 0
         return FokJudgment(
             fok_score=highest_score,
@@ -129,8 +159,48 @@ class MetamemoryMonitor:
         if not cards:
             return MetaJudgment(confidence=0.3, fok=0.4, jol=0.3, tip_of_tongue=False)
 
-        avg_conf = sum(c.retrieval_confidence for c in cards) / len(cards)
-        return MetaJudgment(confidence=avg_conf, fok=avg_conf, jol=avg_conf)
+        invalid_statuses = {"REVOKED", "REVOKED_DEPENDENCY", "DISBELIEVED", "DISBELIEVED_DEPENDENCY", "CORRUPTED"}
+        effective_scores: list[float] = []
+        matched_ids: list[str] = []
+        any_repair_or_weak = False
+
+        for c in cards:
+            for field_name, val in (
+                ("retrieval_confidence", c.retrieval_confidence),
+                ("existence_probability", c.existence_probability),
+            ):
+                if isinstance(val, bool) or not isinstance(val, (int, float)) or not math.isfinite(float(val)):
+                    raise ValueError(f"{field_name} must be a finite number in [0.0, 1.0]")
+                if float(val) < 0.0 or float(val) > 1.0:
+                    raise ValueError(f"{field_name} must be in [0.0, 1.0]")
+
+            status_upper = str(c.consolidation_status).upper()
+            if status_upper in invalid_statuses:
+                eff = 0.0
+                any_repair_or_weak = True
+            else:
+                eff = float(c.retrieval_confidence) * float(c.existence_probability)
+                if c.repair_needed:
+                    eff *= 0.5
+                    any_repair_or_weak = True
+                if status_upper == "STALE":
+                    eff *= 0.5
+                    any_repair_or_weak = True
+                if 0.0 < float(c.existence_probability) < 0.35:
+                    any_repair_or_weak = True
+            effective_scores.append(eff)
+            if eff > 0.0:
+                matched_ids.append(c.memory_id)
+
+        avg_conf = sum(effective_scores) / len(effective_scores)
+        tip_of_tongue = any_repair_or_weak or (0.0 < avg_conf < 0.35)
+        return MetaJudgment(
+            confidence=avg_conf,
+            fok=avg_conf,
+            jol=avg_conf,
+            tip_of_tongue=tip_of_tongue,
+            relevance_matches=matched_ids,
+        )
 
     def record_outcome(self, intent: str, success: bool, *, context: str = "", attempt_id: str | None = None) -> None:
         """Record caller supplied outcome metadata; persistence is opt-in."""
@@ -145,6 +215,13 @@ class MetamemoryMonitor:
         ):
             raise ValueError("attempt_id must be a nonempty string of at most 256 characters")
         if self._ledger is None:
+            if attempt_id is not None:
+                prev = self._in_memory_attempts.get(attempt_id)
+                if prev is not None:
+                    if prev != (intent, context, success):
+                        raise ValueError("attempt_id already names a different outcome")
+                    return
+                self._in_memory_attempts[attempt_id] = (intent, context, success)
             current = self.get_feeling_of_knowing(intent, context=context)
             self._fok_scores[(intent, context)] = max(0.0, min(1.0, current + (0.05 if success else -0.1)))
             return

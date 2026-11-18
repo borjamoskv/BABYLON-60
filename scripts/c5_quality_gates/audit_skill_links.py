@@ -141,12 +141,35 @@ def inspect(roots: list[Path], remote: bool = True) -> AuditReport:
     return {"links": len(links), "unique_remote_urls": len(urls), "findings": findings, "responses": responses}
 
 
-if __name__ == "__main__":
+def _blocking_finding(finding: Finding, *, local_only: bool, allowed_403_hosts: set[str]) -> bool:
+    if finding["status"] == "broken":
+        return True
+    if local_only:
+        return False
+    parsed = urlparse(finding["target"])
+    host = (parsed.hostname or "").lower()
+    if (
+        finding["status"] == "unverified"
+        and finding["reason"] == "403"
+        and not parsed.fragment
+        and host in allowed_403_hosts
+    ):
+        return False
+    return True
+
+
+def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, action="append", required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--local-only", action="store_true")
-    args = parser.parse_args()
+    parser.add_argument(
+        "--allow-unverified-403-host",
+        action="append",
+        default=[],
+        help="Hostname permitted to remain unverified solely on HTTP 403 without fragment.",
+    )
+    args = parser.parse_args(argv)
     result = inspect(args.root, not args.local_only)
     args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
     print(json.dumps({k: v for k, v in result.items() if k not in {"findings", "responses"}}))
@@ -156,4 +179,13 @@ if __name__ == "__main__":
         "unverified",
         sum(v["status"] == "unverified" for v in result["findings"]),
     )
-    raise SystemExit(1 if any(f["status"] == "broken" or not args.local_only for f in result["findings"]) else 0)
+    allowed_403_hosts = {host.strip().lower() for host in args.allow_unverified_403_host if host.strip()}
+    has_blocker = any(
+        _blocking_finding(f, local_only=args.local_only, allowed_403_hosts=allowed_403_hosts)
+        for f in result["findings"]
+    )
+    return 1 if has_blocker else 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

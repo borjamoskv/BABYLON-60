@@ -19,7 +19,7 @@ from typing import Literal, TypedDict, cast
 from blake3 import blake3
 
 
-REPO = Path(__file__).resolve().parents[2]
+REPO = Path(__file__).absolute().parents[2]
 CONDITIONS = ("control", "babylon")
 ROLES = ("target_user", "independent", "adjudicator")
 EVIDENCE_KINDS = {"session", "timing", "verification", "corrections", "rework"}

@@ -3,9 +3,9 @@ name: c5-epistemic-thermodynamics-project
 canonical_alias: epistemic-hub
 display_name: Epistemic Hub · Termodinámica Epistémica (Proyecto)
 description: Enruta auditoría epistémica del proyecto, síntesis MDL, extracción de
-  fuentes, biografía, simbiosis cognitiva y explicación clara. Dispara con "epistemic-hub",
-  "epistemic project hub", "auditoría epistémica", "cloud-chamber", "alpha extraction",
-  "grill-me-v2", "wait-what".
+  fuentes, simbiosis cognitiva y explicación clara. Dispara con "epistemic-hub", "epistemic
+  project hub", "auditoría epistémica", "cloud-chamber", "alpha extraction", "grill-me-v2",
+  "wait-what".
 role: arquitecto
 allowed_roles:
 - arquitecto
@@ -48,7 +48,6 @@ Los recursos de cada módulo se resuelven desde su carpeta preservada.
 
 | Procedimiento | Intención contextual |
 | --- | --- |
-| [biographical-thermo](references/modules/biographical-thermo/MODULE.md) | Analiza trayectorias vitales, historia y filosofía mediante Mapeo Estructural C5-REAL (Termodinámica Discreta). |
 | [c5-alpha-extraction-pipeline](references/modules/c5-alpha-extraction-pipeline/MODULE.md) | Protocol to extract high-exergy algorithmic alpha from arXiv and GitHub directly from raw sources (LaTeX/Git) bypassing PDFs, followed by LARSA-120 formalization. |
 | [c5-ultrathink-epistemic-audit](references/modules/c5-ultrathink-epistemic-audit/MODULE.md) | Auditoría epistémica profunda (ULTRATHINK) basada en el marco termodinámico C5-REAL. Ejecuta un desacople ontológico estricto entre "Estado/Memoria" y "Lógica/Cálculo", mapeando conceptos a invariantes termodinámicas (Curry-Howard, Landauer). |
 | [cloud-chamber](references/modules/cloud-chamber/MODULE.md) | Ejecuta la Metodología de Cámara de Niebla forzando síntesis de alta densidad topológica (MDL / Invariantes C5-REAL). |

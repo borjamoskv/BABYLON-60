@@ -27,7 +27,7 @@ graph TD
     G01 --> DevSecOps["QUICKSTART_ENTERPRISE.md\n(Puesta en Marcha)"]
     G01 --> G02["guide_c5_axiom_verification.md\n(Verificación Axiomática C5)"]
     G02 --> G03["guide_bio_silico_transduction.md\n(Transducción Bio-Silicio)"]
-    G02 --> G04["guide_swarm_pxs_orchestration.md\n(Enjambres Kimi K3)"]
+    G02 --> G04["guide_swarm_pxs_orchestration.md\n(Enjambres Locales PxS)"]
     G02 --> G05["guide_legaltech_eu_ai_act.md\n(Gobernanza & EU AI Act)"]
     G01 --> G06["guide_skill_arsenal_taxonomy.md\n(Taxonomía Skills CORTEX)"]
     G01 --> G08["tutorial_hello_causal.md\n(Tutorial Causal)"]
@@ -42,7 +42,7 @@ graph TD
 | **01** | [guide_babylon60_complete.md](./guide_babylon60_complete.md) | Arquitectura & Monorepo | Interface Industrial Noir 2026, Modo Dual 2E | `[OBSOLETO: INV_C5_15]` |
 | **02** | [guide_c5_axiom_verification.md](./guide_c5_axiom_verification.md) | Verificación Axiomática | Axiomas A1–A4, `axiom_verifier_z3.py` | `[OBSOLETO: INV_C5_REAL_A4]` |
 | **03** | [guide_bio_silico_transduction.md](./guide_bio_silico_transduction.md) | Transducción Bio-Silicio | Ontología 300 Oncología, Grafos `[OBSOLETO: NodeSpec]` | `supp(f^\dagger_p(y)) \subseteq \text{supp}(p)` |
-| **04** | [guide_swarm_pxs_orchestration.md](./guide_swarm_pxs_orchestration.md) | Enjambres Multi-Agente | Kimi K3 ($P \times S$), Futex, MCTS 2.8s | `ru_nivcsw \le 2132` |
+| **04** | [guide_swarm_pxs_orchestration.md](./guide_swarm_pxs_orchestration.md) | Enjambres Multi-Agente | Topología $P \times S$ local (vLLM o MLX), Futex, MCTS 2.8s | `ru_nivcsw \le 2132` |
 | **05** | [guide_legaltech_eu_ai_act.md](./guide_legaltech_eu_ai_act.md) | Gobernanza & LegalTech | EU AI Act (Art. 9–14), Smart Contracts | `[OBSOLETO: RULE_CAUSAL_HITL_VERIFY_01]` |
 | **06** | [guide_skill_arsenal_taxonomy.md](./guide_skill_arsenal_taxonomy.md) | Taxonomía CORTEX | Skill Chains, Triggers, Exergía de Skills | `[OBSOLETO: INV_C5_28]` |
 | **07** | [QUICKSTART_ENTERPRISE.md](./QUICKSTART_ENTERPRISE.md) | Despliegue Enterprise | Inicialización Daemon, Entorno Soberano | `[OBSOLETO: INV_BFT_04]` |

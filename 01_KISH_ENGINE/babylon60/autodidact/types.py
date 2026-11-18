@@ -38,6 +38,9 @@ class Obligation(str, Enum):
     CONFIDENCE = "confidence"
     FRESHNESS = "freshness"
     COMPLETENESS = "completeness"
+    ENVIRONMENT_MATCH = "environment_match"
+    MODEL_ORTHOGONALITY = "model_orthogonality"
+    OBSERVED_CONSTRAINTS = "observed_constraints"
 
 
 class EvidenceSource(str, Enum):
@@ -127,6 +130,65 @@ class FalsificationVerdict:
             "contradiction_node": self.contradiction_node,
             "telemetry": self.telemetry,
             "evidence_digest": self.evidence_digest,
+        }
+
+
+@dataclass(frozen=True)
+class ScopedClaimRecord:
+    """Afirmación delimitada por alcance y evidencia (FL-022-v2 & BORJARIO IR B3/B6).
+
+    Prohíbe etiquetas ontológicas absolutas (`status = SAFE`) exigiendo alcance explícito
+    (`verified_profile`, `observed_profile`), desacoplamiento de modelos
+    (`optimizer_model != verifier_model`), identidad criptográfica entre verificación y
+    despliegue (`artifact_digest == deployed_digest`) y cumplimiento de restricciones observadas.
+    """
+
+    claim_id: str
+    claim: str
+    verifier_model: str
+    optimizer_model: str
+    artifact_digest: str
+    deployed_digest: str
+    verified_profile: str
+    observed_profile: str
+    logical_tick: int
+    critical_constraints_pass: bool
+    result: str  # "SUPPORTED" | "OBSERVED" | "FALSIFIED" | "REJECTED_OUT_OF_SCOPE"
+
+    def __post_init__(self) -> None:
+        if not self.verified_profile.strip() or not self.observed_profile.strip():
+            raise ValueError("BJR-E013: ScopedClaimRecord requires explicit verified_profile and observed_profile.")
+        if self.result not in ("SUPPORTED", "OBSERVED", "FALSIFIED", "REJECTED_OUT_OF_SCOPE"):
+            raise ValueError(
+                f"BJR-E021: Invalid claim result '{self.result}'; ontological 'SAFE' labels are forbidden."
+            )
+
+    @property
+    def is_valid_fl022_v2(self) -> bool:
+        return (
+            bool(self.artifact_digest)
+            and self.artifact_digest == self.deployed_digest
+            and bool(self.verifier_model)
+            and bool(self.optimizer_model)
+            and self.verifier_model != self.optimizer_model
+            and self.verified_profile == self.observed_profile
+            and self.critical_constraints_pass is True
+            and self.result in ("SUPPORTED", "OBSERVED")
+        )
+
+    def to_justification_parameters(self) -> Dict[str, Any]:
+        return {
+            "claim_id": self.claim_id,
+            "claim": self.claim,
+            "verifier_model": self.verifier_model,
+            "optimizer_model": self.optimizer_model,
+            "artifact_digest": self.artifact_digest,
+            "deployed_digest": self.deployed_digest,
+            "verified_profile": self.verified_profile,
+            "observed_profile": self.observed_profile,
+            "logical_tick": self.logical_tick,
+            "critical_constraints_pass": self.critical_constraints_pass,
+            "result": self.result,
         }
 
 

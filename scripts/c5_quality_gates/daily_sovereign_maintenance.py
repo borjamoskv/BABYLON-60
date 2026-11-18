@@ -23,7 +23,7 @@ import sys
 import time
 from typing import Any
 
-SCRIPTS_DIR = Path(__file__).resolve().parent.parent
+SCRIPTS_DIR = Path(__file__).absolute().parent.parent
 REPO_ROOT = SCRIPTS_DIR.parent
 AUDIT_DAILY_DIR = REPO_ROOT / ".audit" / "daily"
 
@@ -50,8 +50,8 @@ def notify_macos(title: str, message: str) -> None:
             f'display notification "{clean_msg}" with title "{clean_title}" sound name "Submarine"',
         ]
         subprocess.run(cmd, capture_output=True, check=False)
-    except Exception:
-        pass
+    except OSError:
+        return
 
 
 def phase_1_anergy_purge() -> dict[str, Any]:
@@ -65,8 +65,8 @@ def phase_1_anergy_purge() -> dict[str, Any]:
                 try:
                     shutil.rmtree(p, ignore_errors=True)
                     purged_items += 1
-                except Exception:
-                    pass
+                except OSError:
+                    continue
 
     # Purge __pycache__
     for p in REPO_ROOT.rglob("__pycache__"):
@@ -74,16 +74,16 @@ def phase_1_anergy_purge() -> dict[str, Any]:
             try:
                 shutil.rmtree(p, ignore_errors=True)
                 purged_items += 1
-            except Exception:
-                pass
+            except OSError:
+                continue
 
     # Purge .DS_Store
     for p in REPO_ROOT.rglob(".DS_Store"):
         try:
             p.unlink(missing_ok=True)
             purged_items += 1
-        except Exception:
-            pass
+        except OSError:
+            continue
 
     # Auditar aislamiento SQLite de Ring-2
     sqlite_audit_script = SCRIPTS_DIR / "c5_quality_gates" / "audit_ring2_sqlite_isolation.py"
