@@ -1,7 +1,7 @@
 {
   "schema_version": "3.1.0",
-  "catalog_sha256": "af53ff614d1cdd56f993759669b97b1ad19646343d84da4f839b1242c61750b2",
-  "snapshot_root_sha256": "94b80ace02a4866448f036dddf35ca6d5107169cf13ca8367063f8bf248af7a8",
+  "catalog_sha256": "21e52f534ef3159570579c1335f53b1ea9700cc6ca80cc31ff2ed4c1758eb229",
+  "snapshot_root_sha256": "0345d5fad4ed8ab3a32149aff23f52293469c6858b6141845a6de8feba9c1a02",
   "total_skills": 77,
   "skills": {
     "anergy-purge-protocol": {
@@ -162,6 +162,7 @@
       "domain": "governance",
       "summary": "Patrones de arquitectura de Babylon60 IDE (instaladores 1-clic autorreparables, tokens Ed25519 SCITT, OpenRouter Gateway, SSO corporativo y escala exérgica 1-21000).",
       "tags": [
+        "/babylon60-architecture",
         "arquitectura babylon60",
         "babylon60 ide",
         "babylon60-architecture",
@@ -195,6 +196,7 @@
       "domain": "kernel",
       "summary": "Audita y prepara correcciones del kernel BABYLON-60 para SPSC, SQLite L0, relojes causales, consenso LARSA y correspondencia Rust–Lean. Usa el puente MCP local cuando esté disponible y distingue pruebas ejecutadas de obligaciones pendientes.",
       "tags": [
+        "/babylon60-kernel-invariants",
         "babylon60-kernel-invariants",
         "kernel-invariants-audit"
       ],
@@ -296,10 +298,10 @@
       "domain": "operations",
       "summary": "Protocol to extract high-exergy algorithmic alpha from arXiv and GitHub directly from raw sources (LaTeX/Git) bypassing PDFs, followed by LARSA-120 formalization.",
       "tags": [
+        "/c5-alpha-extraction-pipeline",
         "alpha extraction",
         "alpha-extractor",
         "c5-alpha-extraction-pipeline",
-        "deep research arxiv",
         "extraer alfa algorítmico",
         "larsa 120 alpha"
       ],
@@ -332,6 +334,7 @@
       "domain": "governance",
       "summary": "Erradica el AI Slop y el pastiche estético en interfaces de usuario (WCAG AAA, escalas modulares áureas, ritmo vertical, veto al atractor grisáceo de Tailwind). Dispara con \"anti-slop ui\", \"impeccable c5\", \"linter de diseño\", \"auditoría ui\", \"pulir frontend\", \"erradicar ai slop\".",
       "tags": [
+        "/c5-anti-slop-ui",
         "anti-slop ui",
         "auditoría ui",
         "c5-anti-slop-ui",
@@ -479,6 +482,7 @@
       "domain": "governance",
       "summary": "Enruta módulos del proyecto para minería LoRA con enjambres, instalación guiada y redacción para agentes. Dispara con \"swarm-hub\", \"cortex project hub\", \"hub cortex proyecto\", \"swarm router proyecto\", \"lora swarm\", \"wizard\", \"writing-for-agents\".",
       "tags": [
+        "/c5-cortex-swarm-orchestrator-project",
         "c5-cortex-swarm-orchestrator-project",
         "cortex project hub",
         "hub cortex proyecto",
@@ -700,6 +704,7 @@
       "domain": "nucleus",
       "summary": "Enruta auditoría epistémica del proyecto, síntesis MDL, extracción de fuentes, simbiosis cognitiva y explicación clara. Dispara con \"epistemic-hub\", \"epistemic project hub\", \"auditoría epistémica\", \"cloud-chamber\", \"alpha extraction\", \"grill-me-v2\", \"wait-what\".",
       "tags": [
+        "/c5-epistemic-thermodynamics-project",
         "alpha extraction",
         "auditoría epistémica",
         "c5-epistemic-thermodynamics-project",
@@ -1244,6 +1249,7 @@
       "summary": "Disección binaria AOT/Mach-O y Electron ASAR en memoria (<15ms), síntesis Clean-Room (TS/Rust/Python) y firewall Popperiano Existence-Gap.",
       "tags": [
         "/c5-rea",
+        "/c5-rea-clean-room",
         "c5-rea",
         "c5-rea-clean-room",
         "clean-room synthesis",
@@ -1318,6 +1324,7 @@
       "domain": "kernel",
       "summary": "Enruta módulos BABYLON-60 del proyecto: SPSC, SQLite L0, arquitectura IDE, SharedManifest, launchd, Apple Silicon y auditoría de contención. Dispara con \"kernel-hub\", \"babylon kernel hub\", \"shared manifest\", \"thermo-audit\", \"rlhf sentinel\", \"apple-bypass\".",
       "tags": [
+        "/c5-ring0-babylon-kernel-project",
         "apple-bypass",
         "babylon kernel hub",
         "c5-ring0-babylon-kernel-project",
@@ -1502,6 +1509,7 @@
       "domain": "operations",
       "summary": "Protocolo estricto para desplegar el Sovereign Spark Daemon (Antigravity Engine en Rust) sobre el sistema init local de macOS (launchd) para ejecución 24/7 ininterrumpida.",
       "tags": [
+        "/c5-sovereign-daemon-deployment",
         "c5-sovereign-daemon-deployment",
         "daemon 24/7",
         "desplegar sovereign daemon",
@@ -1763,6 +1771,7 @@
       "domain": "nucleus",
       "summary": "Auditoría epistémica profunda (ULTRATHINK) basada en el marco termodinámico C5-REAL. Ejecuta un desacople ontológico estricto entre \"Estado/Memoria\" y \"Lógica/Cálculo\", mapeando conceptos a invariantes termodinámicas (Curry-Howard, Landauer).",
       "tags": [
+        "/c5-ultrathink-epistemic-audit",
         "auditoría epistémica",
         "auditoría ultrathink",
         "c5-ultrathink-epistemic-audit",
@@ -2310,7 +2319,11 @@
       "domain": "governance",
       "summary": "Versión avanzada de interrogatorio socrático (C5-REAL) para alinear decisiones de diseño y purgar asunciones infundadas.",
       "tags": [
+        "/grill-me",
         "/grill-me-v2",
+        "10 preguntas",
+        "contrapeso epistémico",
+        "decálogo epistémico",
         "grill-me-v2",
         "interrogatorio socrático",
         "socratic audit",
@@ -2379,6 +2392,7 @@
       "domain": "operations",
       "summary": "Pipeline de minería con enjambre de agentes, extracción N-Zonas (SHA-256), ShareGPT/ChatML y clustering semántico.",
       "tags": [
+        "/lora-swarm-pipeline",
         "dataset swarm",
         "enjambre lora",
         "enjambre sharegpt",
@@ -2528,6 +2542,7 @@
       "domain": "kernel",
       "summary": "Patrón de diseño C-ABI de 64 Bytes (Seqlock SPMC, Cero-Punteros, Fail-Stop SCITT y soporte IPC multiplataforma macOS/Linux/Windows).",
       "tags": [
+        "/shared-manifest-kernel",
         "ipc lock-free",
         "kernel-shared-manifest",
         "ring-0 shm",
@@ -2646,6 +2661,7 @@
       "domain": "governance",
       "summary": "Protocolo de formalización de la díada simbiótica operador-agente, evaluación de Valor Ontológico (V_A), Tensor de Transducción Polímata y colapso autopoyético con el comando \"itera simbiótica\".",
       "tags": [
+        "/symbiotic-cognitive-architecture",
         "epistemic-symbiotic-cognition",
         "itera simbiótica",
         "simbiosis cognitiva",
