@@ -1,0 +1,383 @@
+{
+  "schema": "babylon.assurance.gateway_bundle.v1",
+  "execution_evidence": {
+    "system_identity": {
+      "system_id": "SYS-ANNEX-III-CREDIT-EVAL-01",
+      "operator_role": "deployer",
+      "intended_purpose_id": "7ee87b0c25ef4dc423793981fab17448a126d4d8986df8b9a21302ef66816abe",
+      "artifact_sha256": "cf383cde8c1596367afb0580f5860692d2743b19380b0500b16101d7504e8aef",
+      "runtime_profile_sha256": "1481692cc9bb75b61330fb4a0f6c6b89a85d49d01484cf57edb393a767d74858",
+      "policy_sha256": "af619e0ec73abcf8256c381bda3b3d75746200c4a96a8b76d71fbb794333bc97",
+      "model_identity": "google:gemini-4-argon:2026-11",
+      "model_identity_valid": true,
+      "model_identity_status": "EXTERNAL_MODEL_WITH_DECLARED_UNCERTAINTY",
+      "is_external_opaque_model": true,
+      "deployer_category": "private_enterprise",
+      "annex_iii_use_case": "annex_iii_5b_creditworthiness"
+    },
+    "reproducible_test_receipts": [
+      {
+        "claim_id": "CLM-A9-DEPLOYER-RISK",
+        "article": 9,
+        "predicate": "annex_iii_article_9_deployer_controls_verified == true",
+        "scope": "simulated_annex_iii_5b_creditworthiness_deployer",
+        "evidence_digest": "d3ead22e1c501bd0291b14f32cd75ef5175b06f88217be8c1fae2a010c13f6de",
+        "test_suite_digest": "f4cc233b952d16bffac8d4be5a14a2807826ae33a74a9502260a3e046bcba5ca",
+        "independent_witness": true,
+        "accepted": true
+      },
+      {
+        "claim_id": "CLM-A10-DEPLOYER-INPUT-DATA",
+        "article": 10,
+        "predicate": "annex_iii_article_10_deployer_controls_verified == true",
+        "scope": "simulated_annex_iii_5b_creditworthiness_deployer",
+        "evidence_digest": "a92cd169e7d7c4b1955339ccb896302c5a61b4565245119c8943eebe94a36d83",
+        "test_suite_digest": "10b94365186d1b6f9edb912229b1926242e6b6c1f5d8ebff75b55193b54e7e7b",
+        "independent_witness": true,
+        "accepted": true
+      },
+      {
+        "claim_id": "CLM-A11-DEPLOYER-TECH-DOC",
+        "article": 11,
+        "predicate": "annex_iii_article_11_deployer_controls_verified == true",
+        "scope": "simulated_annex_iii_5b_creditworthiness_deployer",
+        "evidence_digest": "8cb2a421424b4d811b7a93ec734569702a907861a4d3243de06bc9e8307f8a62",
+        "test_suite_digest": "0a7a1dd9eaa4a3873f2ad143bf8f32d69d47a9c331f5b7730c3e7a0513bc139e",
+        "independent_witness": true,
+        "accepted": true
+      },
+      {
+        "claim_id": "CLM-A12-DEPLOYER-LOGS",
+        "article": 12,
+        "predicate": "annex_iii_article_12_deployer_controls_verified == true",
+        "scope": "simulated_annex_iii_5b_creditworthiness_deployer",
+        "evidence_digest": "c0367efca171e6c141b0d306c745775fd7b22fdab099a5f8b08a792f5b3d6af9",
+        "test_suite_digest": "5b29dc43def4a2323291d13b732f3b22e5cb71176f40ba6b46155c096c41010c",
+        "independent_witness": true,
+        "accepted": true
+      },
+      {
+        "claim_id": "CLM-A13-DEPLOYER-INSTRUCTIONS",
+        "article": 13,
+        "predicate": "annex_iii_article_13_deployer_controls_verified == true",
+        "scope": "simulated_annex_iii_5b_creditworthiness_deployer",
+        "evidence_digest": "147cd159d12016eb01f377c63c78e9ab755b6eadd927996d3b1d673c42c158f4",
+        "test_suite_digest": "9b4fae43c19e6fabb4eecb3d6042cdf8fd4e48bf6a3ce01560bf47355d513135",
+        "independent_witness": true,
+        "accepted": true
+      },
+      {
+        "claim_id": "CLM-A14-DEPLOYER-OVERSIGHT",
+        "article": 14,
+        "predicate": "annex_iii_article_14_deployer_controls_verified == true",
+        "scope": "simulated_annex_iii_5b_creditworthiness_deployer",
+        "evidence_digest": "3ff8dbc62458e6952b6b063d08a4a2cd8a8e9e17a55dd1f96b67bb3bea4263c1",
+        "test_suite_digest": "c79abfb5543fbb7afa65f4dc0b45d8764b7abd47d83c9ffacd5035b39a94e164",
+        "independent_witness": true,
+        "accepted": true
+      },
+      {
+        "claim_id": "CLM-A15-DEPLOYER-SECURITY",
+        "article": 15,
+        "predicate": "annex_iii_article_15_deployer_controls_verified == true",
+        "scope": "simulated_annex_iii_5b_creditworthiness_deployer",
+        "evidence_digest": "45a5d852483fff7b5f6575526f008ecfc4ba8d3ef0c3ff62404aac4367661755",
+        "test_suite_digest": "f004ab7349a0ddab3ec84a307665f3d8072d72b205f7320e1b37feb43ebcc583",
+        "independent_witness": true,
+        "accepted": true
+      },
+      {
+        "claim_id": "CLM-A26-DEPLOYER-GOVERNANCE",
+        "article": 26,
+        "predicate": "annex_iii_article_26_deployer_controls_verified == true",
+        "scope": "simulated_annex_iii_5b_creditworthiness_deployer",
+        "evidence_digest": "1979d1c66f59f8e259f6d3e90a1f1ffa512ff5b958ae8217a9bfb73fe8169ed3",
+        "test_suite_digest": "7b69a1234c2d56261cf3bd1afbd7ceea2c9d51386ad60727b42d889a0265a21a",
+        "independent_witness": true,
+        "accepted": true
+      },
+      {
+        "claim_id": "CLM-A27-FRIA-ASSESSMENT",
+        "article": 27,
+        "predicate": "annex_iii_article_27_deployer_controls_verified == true",
+        "scope": "simulated_annex_iii_5b_creditworthiness_deployer",
+        "evidence_digest": "f1e0ef780c87da0f9c78abd0a2f197e4a058ff2a1af569c3b46e4509bb61cbf4",
+        "test_suite_digest": "592de7aaf0f2dfad24dd2bb014adcbc75283cf89c61557dff82316ab5b3cf8c7",
+        "independent_witness": true,
+        "accepted": true
+      }
+    ],
+    "retention_and_gdpr_controls": [
+      {
+        "claim_id": "CLM-A9-DEPLOYER-RISK",
+        "data_class": "operational_event_logs",
+        "retention_months": 24,
+        "retention_valid": true,
+        "retention_status": "RETENTION_COMPLIANT_WITH_STATUTORY_BOUNDS"
+      },
+      {
+        "claim_id": "CLM-A10-DEPLOYER-INPUT-DATA",
+        "data_class": "gdpr_personal_or_prompt_data",
+        "retention_months": 6,
+        "retention_valid": true,
+        "retention_status": "RETENTION_COMPLIANT_WITH_STATUTORY_BOUNDS"
+      },
+      {
+        "claim_id": "CLM-A11-DEPLOYER-TECH-DOC",
+        "data_class": "operational_event_logs",
+        "retention_months": 24,
+        "retention_valid": true,
+        "retention_status": "RETENTION_COMPLIANT_WITH_STATUTORY_BOUNDS"
+      },
+      {
+        "claim_id": "CLM-A12-DEPLOYER-LOGS",
+        "data_class": "operational_event_logs",
+        "retention_months": 6,
+        "retention_valid": true,
+        "retention_status": "RETENTION_COMPLIANT_WITH_STATUTORY_BOUNDS"
+      },
+      {
+        "claim_id": "CLM-A13-DEPLOYER-INSTRUCTIONS",
+        "data_class": "operational_event_logs",
+        "retention_months": 24,
+        "retention_valid": true,
+        "retention_status": "RETENTION_COMPLIANT_WITH_STATUTORY_BOUNDS"
+      },
+      {
+        "claim_id": "CLM-A14-DEPLOYER-OVERSIGHT",
+        "data_class": "operational_event_logs",
+        "retention_months": 24,
+        "retention_valid": true,
+        "retention_status": "RETENTION_COMPLIANT_WITH_STATUTORY_BOUNDS"
+      },
+      {
+        "claim_id": "CLM-A15-DEPLOYER-SECURITY",
+        "data_class": "operational_event_logs",
+        "retention_months": 24,
+        "retention_valid": true,
+        "retention_status": "RETENTION_COMPLIANT_WITH_STATUTORY_BOUNDS"
+      },
+      {
+        "claim_id": "CLM-A26-DEPLOYER-GOVERNANCE",
+        "data_class": "operational_event_logs",
+        "retention_months": 24,
+        "retention_valid": true,
+        "retention_status": "RETENTION_COMPLIANT_WITH_STATUTORY_BOUNDS"
+      },
+      {
+        "claim_id": "CLM-A27-FRIA-ASSESSMENT",
+        "data_class": "operational_event_logs",
+        "retention_months": 36,
+        "retention_valid": true,
+        "retention_status": "RETENTION_COMPLIANT_WITH_STATUTORY_BOUNDS"
+      }
+    ],
+    "unauthorized_effects": 0
+  },
+  "assurance_dossier": {
+    "regulation": {
+      "id": "EU-AI-ACT",
+      "base": "Regulation (EU) 2024/1689",
+      "amendment": "Regulation (EU) 2026/1744",
+      "consolidated_at": "2026-07-27",
+      "catalogue_digest": "46d0076102c8bbfe17faf35646089a6d3815e734f049d0ac7bf5c0ba63b15692"
+    },
+    "value_chain_positioning": "ART_25_4_TECHNICAL_EVIDENCE_AND_ASSURANCE_INTERFACE",
+    "fria_article_27_required": true,
+    "obligation_nodes": [
+      {
+        "claim_id": "CLM-A9-DEPLOYER-RISK",
+        "article": 9,
+        "bound_dimensions": [
+          "intended_purpose_id",
+          "model_identity",
+          "policy_sha256"
+        ],
+        "bound": true,
+        "applicable": true,
+        "verified": true,
+        "accepted": true,
+        "verdict": "SUPPORTED_WITHIN_TESTED_DOMAIN",
+        "technical_status": "TECHNICAL_EVIDENCE_VALID",
+        "legal_status": "NOT_ASSESSED",
+        "reasons": []
+      },
+      {
+        "claim_id": "CLM-A10-DEPLOYER-INPUT-DATA",
+        "article": 10,
+        "bound_dimensions": [
+          "intended_purpose_id",
+          "model_identity"
+        ],
+        "bound": true,
+        "applicable": true,
+        "verified": true,
+        "accepted": true,
+        "verdict": "SUPPORTED_WITHIN_TESTED_DOMAIN",
+        "technical_status": "TECHNICAL_EVIDENCE_VALID",
+        "legal_status": "NOT_ASSESSED",
+        "reasons": []
+      },
+      {
+        "claim_id": "CLM-A11-DEPLOYER-TECH-DOC",
+        "article": 11,
+        "bound_dimensions": [
+          "intended_purpose_id",
+          "artifact_sha256"
+        ],
+        "bound": true,
+        "applicable": true,
+        "verified": true,
+        "accepted": true,
+        "verdict": "SUPPORTED_WITHIN_TESTED_DOMAIN",
+        "technical_status": "TECHNICAL_EVIDENCE_VALID",
+        "legal_status": "NOT_ASSESSED",
+        "reasons": []
+      },
+      {
+        "claim_id": "CLM-A12-DEPLOYER-LOGS",
+        "article": 12,
+        "bound_dimensions": [
+          "artifact_sha256",
+          "runtime_profile_sha256"
+        ],
+        "bound": true,
+        "applicable": true,
+        "verified": true,
+        "accepted": true,
+        "verdict": "SUPPORTED_WITHIN_TESTED_DOMAIN",
+        "technical_status": "TECHNICAL_EVIDENCE_VALID",
+        "legal_status": "NOT_ASSESSED",
+        "reasons": []
+      },
+      {
+        "claim_id": "CLM-A13-DEPLOYER-INSTRUCTIONS",
+        "article": 13,
+        "bound_dimensions": [
+          "intended_purpose_id"
+        ],
+        "bound": true,
+        "applicable": true,
+        "verified": true,
+        "accepted": true,
+        "verdict": "SUPPORTED_WITHIN_TESTED_DOMAIN",
+        "technical_status": "TECHNICAL_EVIDENCE_VALID",
+        "legal_status": "NOT_ASSESSED",
+        "reasons": []
+      },
+      {
+        "claim_id": "CLM-A14-DEPLOYER-OVERSIGHT",
+        "article": 14,
+        "bound_dimensions": [
+          "intended_purpose_id",
+          "policy_sha256"
+        ],
+        "bound": true,
+        "applicable": true,
+        "verified": true,
+        "accepted": true,
+        "verdict": "SUPPORTED_WITHIN_TESTED_DOMAIN",
+        "technical_status": "TECHNICAL_EVIDENCE_VALID",
+        "legal_status": "NOT_ASSESSED",
+        "reasons": []
+      },
+      {
+        "claim_id": "CLM-A15-DEPLOYER-SECURITY",
+        "article": 15,
+        "bound_dimensions": [
+          "artifact_sha256",
+          "runtime_profile_sha256",
+          "policy_sha256"
+        ],
+        "bound": true,
+        "applicable": true,
+        "verified": true,
+        "accepted": true,
+        "verdict": "SUPPORTED_WITHIN_TESTED_DOMAIN",
+        "technical_status": "TECHNICAL_EVIDENCE_VALID",
+        "legal_status": "NOT_ASSESSED",
+        "reasons": []
+      },
+      {
+        "claim_id": "CLM-A26-DEPLOYER-GOVERNANCE",
+        "article": 26,
+        "bound_dimensions": [
+          "intended_purpose_id",
+          "policy_sha256"
+        ],
+        "bound": true,
+        "applicable": true,
+        "verified": true,
+        "accepted": true,
+        "verdict": "SUPPORTED_WITHIN_TESTED_DOMAIN",
+        "technical_status": "TECHNICAL_EVIDENCE_VALID",
+        "legal_status": "NOT_ASSESSED",
+        "reasons": []
+      },
+      {
+        "claim_id": "CLM-A27-FRIA-ASSESSMENT",
+        "article": 27,
+        "bound_dimensions": [
+          "intended_purpose_id",
+          "policy_sha256"
+        ],
+        "bound": true,
+        "applicable": true,
+        "verified": true,
+        "accepted": true,
+        "verdict": "SUPPORTED_WITHIN_TESTED_DOMAIN",
+        "technical_status": "TECHNICAL_EVIDENCE_VALID",
+        "legal_status": "NOT_ASSESSED",
+        "reasons": []
+      }
+    ],
+    "missing_critical_articles": [],
+    "critical_checks_missing": 0,
+    "fl_aiact_01_v2_gate": {
+      "cross_artifact_evidence_reuse": 0,
+      "stale_critical_evidence_accept": 0,
+      "unauthorized_status_promotions": 0,
+      "undetected_requirement_drift": 0,
+      "unauthorized_deployment_effects": 0,
+      "blocked_cross_artifact_or_unbound": 0,
+      "blocked_stale_or_expired_evidence": 0,
+      "blocked_unauthorized_promotions": 0,
+      "blocked_requirement_drift": 0,
+      "legitimate_deployment_acceptance": 1,
+      "review_required_claims": 9,
+      "total_claims_evaluated": 9,
+      "audit_reconstruction_completeness_bps": 10000
+    },
+    "technical_status": "TECHNICAL_EVIDENCE_VALID",
+    "legal_status": "LEGAL_REVIEW_REQUIRED",
+    "verdict": "SUPPORTED_WITHIN_TESTED_DOMAIN",
+    "eu_ai_act_certified": false,
+    "boundary_statement": "TechnicalPASS != LegalConformity; conformity assessment remains an accountable provider/deployer obligation."
+  },
+  "continuous_evidence_monitoring": {
+    "change_classification": {
+      "classification": "NO_CHANGE",
+      "changed_dimensions": [],
+      "requires_substantial_modification_assessment": false,
+      "requires_post_market_corrective_action": false,
+      "incident_count": 0
+    },
+    "accepted_orthogonal_claim_ids": [
+      "CLM-A9-DEPLOYER-RISK",
+      "CLM-A10-DEPLOYER-INPUT-DATA",
+      "CLM-A11-DEPLOYER-TECH-DOC",
+      "CLM-A12-DEPLOYER-LOGS",
+      "CLM-A13-DEPLOYER-INSTRUCTIONS",
+      "CLM-A14-DEPLOYER-OVERSIGHT",
+      "CLM-A15-DEPLOYER-SECURITY",
+      "CLM-A26-DEPLOYER-GOVERNANCE",
+      "CLM-A27-FRIA-ASSESSMENT"
+    ],
+    "invalidated_or_stale_claim_ids": [],
+    "stale_or_invalid_claims_rejected": 0,
+    "requires_substantial_modification_assessment": false,
+    "requires_post_market_corrective_action": false
+  },
+  "graph_evaluation_digest": "edf6d5e7b4ef5de303184fe1e1659c21c225d5317648bbe0ea980de7f569e7ce",
+  "eu_ai_act_certified": false
+}

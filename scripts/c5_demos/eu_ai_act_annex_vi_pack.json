@@ -1,0 +1,45 @@
+{
+  "@context": "https://schema.org/AIConformityAssessment",
+  "type": "EU_AI_Act_Annex_VI_Declaration",
+  "regulatory_framework": "Regulation (EU) 2024/1689",
+  "conformity_procedure": "Internal Control (Article 43.2 & Annex VI)",
+  "issued_by": "BABYLON-60 Sovereign Node (Self-Attested)",
+  "timestamp": "2026-09-21T21:16:28.445802+00:00",
+  "overall_status": "CONFORMANT",
+  "market_access_declaration": "CE_MARKING_AUTHORIZED",
+  "confidentiality_claim": "Protected under Article 78 EU AI Act & Directive (EU) 2016/943",
+  "checklist": [
+    {
+      "code": "CHK-12.1",
+      "article": "Art\u00edculo 12 EU AI Act",
+      "guide": "Gu\u00eda 12 (Conservaci\u00f3n de Registros)",
+      "status": "PASS",
+      "evidence": "2 tareas registradas con marcas de tiempo T+ y logs de transici\u00f3n.",
+      "hash": "b1b73671fddc3b131e7e1ac8638a5d74341b1b646f5b78980508163f21578705"
+    },
+    {
+      "code": "CHK-14.1",
+      "article": "Art\u00edculo 14 EU AI Act",
+      "guide": "Gu\u00eda 06 (Supervisi\u00f3n Humana)",
+      "status": "PASS",
+      "evidence": "Atestaci\u00f3n de Hardware (Secure Enclave P-256) validada para 1 tareas cr\u00edticas.",
+      "hash": "a06344e99c14e31d07062cec0bcd830c"
+    },
+    {
+      "code": "CHK-78.1",
+      "article": "Art\u00edculo 78 EU AI Act & Directiva 2016/943",
+      "guide": "Gu\u00eda 15 (Documentaci\u00f3n T\u00e9cnica)",
+      "status": "PASS",
+      "evidence": "Verificaci\u00f3n por Zero-Knowledge: Cero claves privadas ni matrices de pesos expuestas.",
+      "hash": "c4178e1fe8c9fcf1475c9dd60f6856704006624c65a284f6aa401bcef0c1b4ed"
+    },
+    {
+      "code": "CHK-09.2",
+      "article": "Art\u00edculo 15 EU AI Act",
+      "guide": "Gu\u00eda 09 (Precisi\u00f3n y Robustez)",
+      "status": "PASS",
+      "evidence": "Latencia de ciclo registrada: 0.219 ms (Cumple est\u00e1ndar de alta disponibilidad).",
+      "hash": "76924be2b83afe2d42629b1d7379201f47053a93a8b94dbdca25cbab40f90bd8"
+    }
+  ]
+}

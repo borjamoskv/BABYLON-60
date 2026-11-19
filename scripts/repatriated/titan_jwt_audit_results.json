@@ -1,0 +1,28 @@
+{
+  "rows_exposed": 17300000000000.0,
+  "databases_count": 17,
+  "tables_count": 9863,
+  "bounty_paid_usd": 5000.0,
+  "estimated_data_volume_pb": {
+    "min_128b": 1.97,
+    "avg_512b": 7.87,
+    "max_2048b": 31.47
+  },
+  "economic_metrics": {
+    "usd_per_billion_rows": 0.289,
+    "usd_per_row": "2.89e-10",
+    "usd_per_pb_avg": 635.56
+  },
+  "cryptographic_failure": {
+    "flaw_type": "CWE-347: Improper Verification of Cryptographic Signature",
+    "rfc_violation": "RFC 8725 Section 3.1 (Algorithm Verification)",
+    "entropy_collapse_bits": 128.0
+  },
+  "epistemic_audit": {
+    "total_claims": 5,
+    "verified_claims": 5,
+    "false_claims": 0,
+    "sensationalism_penalty": 0.8,
+    "final_credibility_score": 9.2
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "Cond 0 (Disembodied)": {
+    "mean_tokens": 50000.0,
+    "mean_steps": 50.0,
+    "mean_violations": 10.0,
+    "primary_termination": "EXTERNAL_TIMEOUT_WALL"
+  },
+  "Cond 1 (Soft Prompt)": {
+    "mean_tokens": 21000.0,
+    "mean_steps": 21.0,
+    "mean_violations": 6.0,
+    "primary_termination": "SOFT_PROMPT_SELF_HALT"
+  },
+  "Cond 2 (Silicon Gate)": {
+    "mean_tokens": 26000.0,
+    "mean_steps": 26.0,
+    "mean_violations": 0.0,
+    "primary_termination": "SPINAL_REFLEX_FAIL_STOP"
+  }
+}

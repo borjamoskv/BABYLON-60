@@ -1,0 +1,112 @@
+name: Windows CLI and MCP
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: windows-terminal-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.12'
+      - name: Build source archive and record its revision
+        shell: bash
+        run: |
+          BUNDLE="$(bash scripts/package_release.sh "$RUNNER_TEMP/terminal-package")"
+          python - "$BUNDLE" <<'PY'
+          import hashlib, json, pathlib, subprocess, sys
+          bundle = pathlib.Path(sys.argv[1])
+          metadata = {
+              "commit": subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip(),
+              "bundle": bundle.name,
+              "sha256": hashlib.sha256(bundle.read_bytes()).hexdigest(),
+          }
+          bundle.with_name("source.json").write_text(json.dumps(metadata), encoding="utf-8")
+          PY
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: windows-terminal-package
+          path: ${{ runner.temp }}/terminal-package/*
+
+  windows:
+    needs: package
+    runs-on: windows-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.11', '3.12']
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: ${{ matrix.python }}
+      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+        with:
+          name: windows-terminal-package
+          path: ${{ runner.temp }}/terminal-package
+      - name: Install test client dependencies
+        run: uv sync --locked --python "${{ matrix.python }}" --extra dev --extra gemini
+      - name: Record native Windows environment and source revision
+        shell: pwsh
+        run: |
+          $source = Get-Content -LiteralPath "${{ runner.temp }}/terminal-package/source.json" -Raw | ConvertFrom-Json
+          $commit = (& git rev-parse HEAD | Out-String).Trim()
+          if ($LASTEXITCODE -ne 0 -or $commit -ne $source.commit) {
+            throw "The Windows checkout does not match the packaged source revision"
+          }
+          $evidence = [ordered]@{
+            checkout_commit = $commit
+            source = $source
+            runner_os = $env:RUNNER_OS
+            runner_arch = $env:RUNNER_ARCH
+            windows_version = [Environment]::OSVersion.VersionString
+            powershell_version = $PSVersionTable.PSVersion.ToString()
+            python_version = (& uv run --no-sync python --version | Out-String).Trim()
+            uv_version = (& uv --version | Out-String).Trim()
+            installer_sha256 = (Get-FileHash -LiteralPath install.ps1 -Algorithm SHA256).Hash.ToLowerInvariant()
+          }
+          $evidence | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath windows-terminal-environment.json -Encoding utf8
+      - name: Install archive and verify CLI and MCP
+        env:
+          BABYLON_WINDOWS_ARTIFACT: ${{ runner.temp }}/terminal-package
+        run: uv run --locked --no-sync pytest tests/test_windows_terminal.py tests/test_first_use_installers.py::test_powershell_argument_and_dry_run_paths_without_installation -q --junitxml=windows-terminal-results.xml
+      - name: Execute every installation migration
+        if: always()
+        env:
+          BABYLON_TEST_INSTALL_BUNDLE: "1"
+          BABYLON_MIGRATION_EVIDENCE: ${{ github.workspace }}/windows-migration-evidence
+          BABYLON_MIGRATION_REVISION: ${{ github.sha }}
+          BABYLON_MIGRATION_RUN: ${{ github.run_id }}-${{ github.run_attempt }}
+        run: uv run --locked --no-sync pytest tests/test_onco_distribution.py::test_source_installer_respects_wheel_exclusions --maxfail=0 -q --junitxml=windows-migration-results.xml
+      - name: Require all four native migrations and their evidence
+        if: always()
+        run: >-
+          python scripts/guards/verify_windows_migrations.py
+          --junit windows-migration-results.xml --evidence windows-migration-evidence
+          --revision "${{ github.sha }}" --run-id "${{ github.run_id }}-${{ github.run_attempt }}"
+          --python "${{ matrix.python }}" --installer install.ps1 --output windows-migration-verdict.json
+      - name: Preserve Windows evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: windows-terminal-python-${{ matrix.python }}
+          path: |
+            windows-terminal-results.xml
+            windows-terminal-environment.json
+            windows-migration-results.xml
+            windows-migration-evidence/
+            windows-migration-verdict.json
+          if-no-files-found: error

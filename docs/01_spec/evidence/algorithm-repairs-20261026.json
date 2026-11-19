@@ -1,0 +1,794 @@
+{
+  "date": "2026-10-26",
+  "status": "detected_algorithm_failures_repaired_with_bounded_regression_evidence",
+  "scope": "Entropy domain/mask/equivalence and the two audited graph functions, summary-model constants, regression tests and documentation; no deployment or full production guarantee",
+  "checks": {
+    "cargo-check": {
+      "command": [
+        "cargo",
+        "check",
+        "-q",
+        "--locked",
+        "-p",
+        "babylon60-kernel"
+      ],
+      "working_directory": ".",
+      "environment": {},
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "entropy-unit-tests": {
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "-p",
+        "babylon60-kernel",
+        "--lib",
+        "semantic_entropy::tests"
+      ],
+      "working_directory": ".",
+      "environment": {},
+      "exit_code": 0,
+      "stdout": "\nrunning 4 tests\ntest semantic_entropy::tests::test_polysemy_quadrant4 ... ok\ntest semantic_entropy::tests::test_genuine_knowledge_quadrant1 ... ok\ntest semantic_entropy::tests::test_confabulation_quadrant2 ... ok\ntest semantic_entropy::tests::test_incorrect_belief_quadrant3 ... ok\n\ntest result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 25 filtered out; finished in 0.00s\n\n",
+      "stderr": "    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.47s\n     Running unittests src/lib.rs (target/debug/deps/babylon60_kernel-9265b6522013a53e)\n"
+    },
+    "entropy-regressions-debug": {
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "-p",
+        "babylon60-kernel",
+        "--test",
+        "semantic_entropy_regressions"
+      ],
+      "working_directory": ".",
+      "environment": {},
+      "exit_code": 0,
+      "stdout": "\nrunning 11 tests\ntest a_column_outside_the_declared_domain_is_not_admitted ... ok\ntest a_non_reflexive_relation_is_not_admitted ... ok\ntest a_row_outside_the_declared_domain_is_not_admitted ... ok\ntest a_symmetric_nontransitive_relation_is_not_admitted ... ok\ntest exact_endpoint_and_existing_nominal_values_are_preserved ... ok\ntest out_of_range_sample_counts_are_not_admitted ... ok\ntest an_asymmetric_reflexive_relation_is_not_admitted ... ok\ntest eight_sample_clique_has_one_class ... ok\ntest invalid_inputs_have_typed_errors_under_either_external_flag ... ok\ntest all_n4_relations_match_an_independent_equivalence_predicate ... ok\ntest all_5295_partitions_match_independent_arithmetic_and_permutations ... ok\n\ntest result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.16s\n\n",
+      "stderr": "    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.10s\n     Running tests/semantic_entropy_regressions.rs (target/debug/deps/semantic_entropy_regressions-79004bf74127f26a)\n"
+    },
+    "entropy-regressions-release": {
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "-p",
+        "babylon60-kernel",
+        "--release",
+        "--test",
+        "semantic_entropy_regressions"
+      ],
+      "working_directory": ".",
+      "environment": {},
+      "exit_code": 0,
+      "stdout": "\nrunning 11 tests\ntest a_column_outside_the_declared_domain_is_not_admitted ... ok\ntest a_non_reflexive_relation_is_not_admitted ... ok\ntest a_row_outside_the_declared_domain_is_not_admitted ... ok\ntest a_symmetric_nontransitive_relation_is_not_admitted ... ok\ntest an_asymmetric_reflexive_relation_is_not_admitted ... ok\ntest invalid_inputs_have_typed_errors_under_either_external_flag ... ok\ntest exact_endpoint_and_existing_nominal_values_are_preserved ... ok\ntest eight_sample_clique_has_one_class ... ok\ntest out_of_range_sample_counts_are_not_admitted ... ok\ntest all_n4_relations_match_an_independent_equivalence_predicate ... ok\ntest all_5295_partitions_match_independent_arithmetic_and_permutations ... ok\n\ntest result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s\n\n",
+      "stderr": "    Finished `release` profile [optimized] target(s) in 0.14s\n     Running tests/semantic_entropy_regressions.rs (target/release/deps/semantic_entropy_regressions-99725b2f5055f373)\n"
+    },
+    "entropy-stress-compiles": {
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "-p",
+        "babylon60-kernel",
+        "--test",
+        "stress_semantic_entropy_100k",
+        "--no-run"
+      ],
+      "working_directory": ".",
+      "environment": {},
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.10s\n  Executable tests/stress_semantic_entropy_100k.rs (target/debug/deps/stress_semantic_entropy_100k-9f77f3f9f5494438)\n"
+    },
+    "python-and-lean-regressions": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "pytest",
+        "tests/test_graph_isomorphism_regressions.py",
+        "tests/test_inv_c5_28_falsification.py",
+        "tests/test_semantic_entropy_lean_alignment.py",
+        "tests/test_audit_public_claims.py",
+        "-q"
+      ],
+      "working_directory": ".",
+      "environment": {
+        "BABYLON_REQUIRE_LEAN": "1"
+      },
+      "exit_code": 0,
+      "stdout": ".................................................                        [100%]\n49 passed in 4.14s\n",
+      "stderr": "Uninstalled 1 package in 4ms\nInstalled 1 package in 4ms\n"
+    },
+    "ruff": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "ruff",
+        "check",
+        "scripts/c5_demos/poc_graph_isomorphism_wl.py",
+        "scripts/c5_isomorphisms/c5_ultimate_causal_determinant.py",
+        "tests/test_graph_isomorphism_regressions.py",
+        "tests/test_inv_c5_28_falsification.py",
+        "tests/test_semantic_entropy_lean_alignment.py"
+      ],
+      "working_directory": ".",
+      "environment": {},
+      "exit_code": 0,
+      "stdout": "All checks passed!\n",
+      "stderr": "Uninstalled 1 package in 2ms\nInstalled 1 package in 2ms\n"
+    },
+    "rust-format": {
+      "command": [
+        "rustfmt",
+        "--check",
+        "--edition",
+        "2021",
+        "00_ABZU_KERNEL/crates/babylon60-kernel/src/semantic_entropy.rs",
+        "00_ABZU_KERNEL/crates/babylon60-kernel/tests/semantic_entropy_regressions.rs"
+      ],
+      "working_directory": ".",
+      "environment": {},
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "graph-cli": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "python",
+        "scripts/c5_demos/poc_graph_isomorphism_wl.py"
+      ],
+      "working_directory": ".",
+      "environment": {},
+      "exit_code": 0,
+      "stdout": "WL filter(g_a): WL1_V2:f34aa2fe33225b7bb6f39ea760dadafcfc167a00da52dfd75e5168a8c229f89b\nWL filter(g_b): WL1_V2:f34aa2fe33225b7bb6f39ea760dadafcfc167a00da52dfd75e5168a8c229f89b\nWL filter(g_c): WL1_V2:6811bad9035362b9fac54c99ee95619b22e46d8abf2196e98a127e6d23c89cbc\nExact isomorphism(g_a, g_b): True\nExact isomorphism(g_a, g_c): False\n",
+      "stderr": "Uninstalled 1 package in 2ms\nInstalled 1 package in 2ms\n"
+    },
+    "document-links": {
+      "command": [
+        "python3",
+        ".audit/algorithm-repairs-20261026/check_documents.py"
+      ],
+      "working_directory": ".",
+      "exit_code": 0,
+      "stdout": "{\n  \"links\": 389,\n  \"failures\": [],\n  \"coverage\": {\n    \"docs/01_spec in docs/00_index.md\": {\n      \"documents\": 14,\n      \"missing\": []\n    },\n    \"docs/01_spec in docs/README.md\": {\n      \"documents\": 14,\n      \"missing\": []\n    },\n    \"docs/06_theory in docs/00_index.md\": {\n      \"documents\": 31,\n      \"missing\": []\n    },\n    \"docs/06_theory in docs/README.md\": {\n      \"documents\": 31,\n      \"missing\": []\n    },\n    \"docs/06_theory in docs/06_theory/00_index.md\": {\n      \"documents\": 31,\n      \"missing\": []\n    }\n  },\n  \"preserved_artifacts\": 17\n}\n",
+      "stderr": ""
+    },
+    "semantic-contracts": {
+      "command": [
+        "python3",
+        "scripts/c5_quality_gates/audit_semantic_contracts.py",
+        "--workspace-only"
+      ],
+      "working_directory": ".",
+      "exit_code": 0,
+      "stdout": "PASS: known semantic patterns (62 documents, 41 Python files), local links/anchors in 15 governance documents; not a proof of semantic consistency or runtime.\n",
+      "stderr": ""
+    },
+    "token-budget": {
+      "command": [
+        "python3",
+        "scripts/c5_quality_gates/audit_token_budget.py",
+        "--workspace-only",
+        "--skip-ghost-listeners"
+      ],
+      "working_directory": ".",
+      "exit_code": 0,
+      "stdout": "=== [C5-REAL] AUDITORÍA DE PRESUPUESTO DE TOKENS ===\n■ .babylon60rules (workspace, counted once): 5,082 B (~1,270 estimated tokens)\n■ AGENTS.md (workspace, counted once): 4,808 B (~1,202 estimated tokens)\n■ Global rules: NOT_CHECKED (workspace-only)\n■ Reglas always_on (Global: 0, Workspace: 0): 0 B (~0 estimated tokens)\n■ INSPECTED ALWAYS_ON: 9,890 B / 40,000 B (~2,472 estimated tokens; actual client context not measured)\n■ Reglas condicionales (model_decision): 0 global + 7 workspace (bodies excluded from this budget; client loading not measured)\n■ Ghost Listeners (conversation_summaries.db): NOT_CHECKED (explicitly skipped)\nPASS: Workspace token budget within inline ceiling; global rules and cross-scope duplicates not checked.\n",
+      "stderr": ""
+    },
+    "active-topology": {
+      "command": [
+        "python3",
+        "scripts/guards/verify_active_topology.py"
+      ],
+      "working_directory": ".",
+      "exit_code": 0,
+      "stdout": "PASS: instruction files, required direct symlinks and MCP registration references (worktree; VS Code if present)\n",
+      "stderr": ""
+    },
+    "diff-check": {
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "--",
+        "00_ABZU_KERNEL/crates/babylon60-kernel/src/semantic_entropy.rs",
+        "scripts/c5_demos/SemanticEntropyApoptosis.lean",
+        "scripts/c5_demos/poc_graph_isomorphism_wl.py",
+        "scripts/c5_isomorphisms/c5_ultimate_causal_determinant.py",
+        "tests/test_inv_c5_28_falsification.py",
+        "docs/01_spec",
+        "docs/00_index.md",
+        "docs/README.md"
+      ],
+      "working_directory": ".",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  "tests": {
+    "rust_nominal_unique": 4,
+    "rust_regression_unique": 11,
+    "rust_profiles": [
+      "debug",
+      "release"
+    ],
+    "python_total": 49,
+    "graph_in_python": 44,
+    "lean_alignment_in_python": 1,
+    "public_contract_in_python": 4,
+    "unique_total": 64,
+    "additional_release_repetitions": 11,
+    "lean_axiom_guards": 12
+  },
+  "finite_domains": {
+    "entropy_partitions_n1_through_n8": 5295,
+    "entropy_relations_n4": 65536,
+    "graph_oracle_three_node_pairs": 2080,
+    "graph_oracle_four_node_pairs": 105
+  },
+  "entropy": {
+    "scope": "Bounded integer entropy arithmetic and input validation; no solver or factual truth guarantee",
+    "baseline_check": {
+      "command": [
+        "cargo",
+        "check",
+        "-q",
+        "--locked",
+        "-p",
+        "babylon60-kernel"
+      ],
+      "exit_code": 0
+    },
+    "api": {
+      "compute_quotient_entropy": "Result<(u32,u8), SemanticEntropyInputError>",
+      "evaluate": "Same function signature; InvalidInput{error} variant added; validated inputs preserve existing four classifications",
+      "input_domain": "1 <= n <=8, only n×n submatrix bits, reflexive/symmetric/transitive relation",
+      "errors": [
+        "SampleCountOutOfRange",
+        "BitsOutsideDomain",
+        "NotReflexive",
+        "NotSymmetric",
+        "NotTransitive"
+      ]
+    },
+    "regression_evidence": {
+      "red": "regressions-red.json",
+      "isolated_red_reproduction": "behavioral-red-reproduction.json",
+      "red_behavioral_failures": 7,
+      "green": "green-checks.json",
+      "green_unit_tests": 4,
+      "green_regression_tests": 11,
+      "profiles": [
+        "debug",
+        "release"
+      ],
+      "valid_partitions": 5295,
+      "relation_exhaustion_n4": 65536,
+      "permutations": "all cyclic sample rotations, reversal, and class-label renaming for each generated partition",
+      "reference": "Independent label-count Shannon contributions in test-only floating point; direct triple equivalence oracle for n4 relations"
+    },
+    "stress_compatibility": {
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "-p",
+        "babylon60-kernel",
+        "--test",
+        "stress_semantic_entropy_100k",
+        "--no-run"
+      ],
+      "exit_code": 0,
+      "note": "Compiled only, no stress/benchmark execution"
+    },
+    "checks": {
+      "LUT_unchanged": true,
+      "threshold_55706_unchanged": true,
+      "production_source_allocates": false,
+      "production_source_floating_point": false,
+      "preserved": {
+        "Cargo.lock": "7c772f6e6ffd29594c5b9bdadb004be09c57af67b60b7be1b56c034a174491b4",
+        "00_ABZU_KERNEL/crates/babylon60-kernel/Cargo.toml": "1fce7afd9c97f75f4cf542bbfa7aa5f6c8b66370629ddab0c8e06a3b2432b8d1",
+        "00_ABZU_KERNEL/crates/babylon60-kernel/tests/stress_semantic_entropy_100k.rs": "e29893b4b9e6115cf54b81feefbc225e8c8ea07163b809a1e363020a7423750f"
+      }
+    },
+    "source_sha256": {
+      "00_ABZU_KERNEL/crates/babylon60-kernel/src/semantic_entropy.rs": "942bc29b7266929d226ef85dae3dad095f5f80eb178dce502d14ab4d551fd53c",
+      "00_ABZU_KERNEL/crates/babylon60-kernel/tests/semantic_entropy_regressions.rs": "e3bf7a352f6df2cc3e56aded791216a92d3de40bf43bb5f269196f741cb07981"
+    },
+    "caller_discovery": "Graph compute has only evaluate caller. Current literal search in kernel/crates/scripts/tests/01_KISH_ENGINE/root src/examples found no external compute caller or exhaustive verdict match requiring changes; graph false-positive cortex-guard edges not used as integration evidence.",
+    "limits": [
+      "Source-level bounded computation, not full u64 exhaustive proof",
+      "Bool external flag remains supplied; UNKNOWN/error is not represented as solver evidence",
+      "No benchmark, protected runtime effects or physical energy/timing measurements",
+      "No universal Rust–Lean refinement proof"
+    ]
+  },
+  "graphs": {
+    "date": "2026-10-26",
+    "status": "repaired_with_bounded_regression_evidence",
+    "modified_files": [
+      "scripts/c5_demos/poc_graph_isomorphism_wl.py",
+      "scripts/c5_isomorphisms/c5_ultimate_causal_determinant.py",
+      "tests/test_graph_isomorphism_regressions.py",
+      "tests/test_inv_c5_28_falsification.py"
+    ],
+    "before_sha256": {
+      "uv.lock": "d78739746ac5d442a074ad73cbc7fc06d6e803558126f65fbc3d6d251d4c1fb4",
+      "Cargo.lock": "7c772f6e6ffd29594c5b9bdadb004be09c57af67b60b7be1b56c034a174491b4",
+      "tests/test_inv_c5_28_falsification.py": "a6c886c81b43c219614e871cbbee5ee6363c2e705876cc529f78faf370e7b3e2",
+      "scripts/c5_isomorphisms/c5_ultimate_causal_determinant.py": "300daae21574c2546936afad90958009f918bcb73301ec694e8b1857a73d8e32",
+      "scripts/c5_demos/poc_graph_isomorphism_wl.py": "11dde4fe7aa9eeacced702275372d959d217a95efaa05ddca45365a5a5ece0d3"
+    },
+    "after_sha256": {
+      "scripts/c5_demos/poc_graph_isomorphism_wl.py": "ac10dfda74ebe68926f6ad7b82e6f3611ed736f2bef819c09fb638de5d7cc095",
+      "scripts/c5_isomorphisms/c5_ultimate_causal_determinant.py": "138dcb231d90607494c8f48f3146433188beda2cc2aff6ca73b58092e35bece1",
+      "tests/test_graph_isomorphism_regressions.py": "583eb19d54347d1fde441853111281b770f49e64512f942981a1146d206c2632",
+      "tests/test_inv_c5_28_falsification.py": "a1d46874571b8d2bb78061a6311362b7755582b36f4af662172419a488971686"
+    },
+    "red": [
+      {
+        "command": [
+          "uv",
+          "run",
+          "--locked",
+          "pytest",
+          "tests/test_graph_isomorphism_regressions.py",
+          "-q"
+        ],
+        "exit_code": 1,
+        "log": "red.log",
+        "finding": "Original verify_isomorphism returned True for audited non-isomorphic DAG pair; run stopped after first failure by project pytest configuration."
+      },
+      {
+        "command": [
+          "uv",
+          "run",
+          "--locked",
+          "pytest",
+          "tests/test_graph_isomorphism_regressions.py::test_undirected_hash_uses_simultaneous_colors_for_every_node_order",
+          "-q"
+        ],
+        "exit_code": 1,
+        "log": "red-order.log",
+        "finding": "Original helper produced three different digests over six permutations of the same three-node path."
+      }
+    ],
+    "green": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "pytest",
+        "tests/test_graph_isomorphism_regressions.py",
+        "tests/test_inv_c5_28_falsification.py",
+        "-q"
+      ],
+      "result": "44 passed",
+      "log": "green-final.log",
+      "new_regression_cases": 41,
+      "existing_cases": 3,
+      "independent_oracle_pairs": 2185
+    },
+    "ruff": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "ruff",
+        "check",
+        "scripts/c5_demos/poc_graph_isomorphism_wl.py",
+        "scripts/c5_isomorphisms/c5_ultimate_causal_determinant.py",
+        "tests/test_graph_isomorphism_regressions.py",
+        "tests/test_inv_c5_28_falsification.py"
+      ],
+      "result": "All checks passed!",
+      "log": "ruff-final.log"
+    },
+    "diff_check": {
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "--",
+        "scripts/c5_demos/poc_graph_isomorphism_wl.py",
+        "scripts/c5_isomorphisms/c5_ultimate_causal_determinant.py",
+        "tests/test_inv_c5_28_falsification.py"
+      ],
+      "exit_code": 0
+    },
+    "demo": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "python",
+        "scripts/c5_demos/poc_graph_isomorphism_wl.py"
+      ],
+      "log": "demo.log",
+      "result": "Finite renamed pair accepted, different graph rejected; no protected effects"
+    },
+    "api": {
+      "directed_graph": "Adjacency dict containing every vertex, list/tuple of neighbors; repeated neighbors and loops preserved; IDs are arbitrary hashable names and not semantic labels",
+      "invalid_inputs": "ValueError, including before size/hash early returns",
+      "exact_decision": "verify_isomorphism returns bool only after completed exact search; optional keyword-only max_search_states defaults to100000 candidate extensions",
+      "search_exhaustion": "IsomorphismSearchLimitExceeded(RuntimeError), not a guessed boolean",
+      "directed_hash_profile": "WL1_V2 prefix and domain b60-wl-directed-multigraph-v2; max iterations nonnegative integer capped at10",
+      "undirected_hash_profile": "64hex SHA3-256 with class attribute WL_HASH_PROFILE=b60-wl-undirected-v2; one simultaneous round, loops count twice and parallel edges retained"
+    },
+    "test_contract_correction": "Existing test_inv_c5_28_bypass_attempt_raises_error no longer tests a local fake VF2 stub returning True. It calls the actual matcher and checks malformed graph validation. Other docstrings now describe selected pairs, not universal WL distinctness or O(1) construction.",
+    "review": "Read-only review by graph_test_review found no blocker in iterative mapping/backtracking, multiplicity/direction/loop checks, or budget semantics; it did not execute tests.",
+    "probe": {
+      "date": "2026-10-26",
+      "scope": "Direct imports of graph functions only; no protected main/SQLite actor execution or performance benchmark",
+      "directed_profile": "b60-wl-directed-multigraph-v2",
+      "undirected_profile": "b60-wl-undirected-v2",
+      "dag_pair": {
+        "edges_g": [
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            1,
+            6
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            3,
+            4
+          ]
+        ],
+        "edges_h": [
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            3,
+            7
+          ]
+        ],
+        "nodes": 8,
+        "same_wl_digest": "WL1_V2:0616fa3366920637bb631adb0c1ac3681006b4fb47044616d47b5a575f337a24",
+        "exact_isomorphic": false,
+        "reason_independent_of_matcher": "Different weak component counts, one versus two"
+      },
+      "order_permutations": {
+        "a,b,c": "dcb3481f2375fe0902f93a3cfd8497eb5a386a2a907025972428c65f0438b5bb",
+        "a,c,b": "dcb3481f2375fe0902f93a3cfd8497eb5a386a2a907025972428c65f0438b5bb",
+        "b,a,c": "dcb3481f2375fe0902f93a3cfd8497eb5a386a2a907025972428c65f0438b5bb",
+        "b,c,a": "dcb3481f2375fe0902f93a3cfd8497eb5a386a2a907025972428c65f0438b5bb",
+        "c,a,b": "dcb3481f2375fe0902f93a3cfd8497eb5a386a2a907025972428c65f0438b5bb",
+        "c,b,a": "dcb3481f2375fe0902f93a3cfd8497eb5a386a2a907025972428c65f0438b5bb"
+      },
+      "distinct_undirected_digests": 1,
+      "budget_exhaustion": {
+        "classification": "IsomorphismSearchLimitExceeded",
+        "message": "exact isomorphism search budget exhausted",
+        "boolean_verdict": null
+      },
+      "oracle_corpus": {
+        "three_node_directed_graphs": 64,
+        "three_node_unordered_pairs_with_replacement": 2080,
+        "four_node_multigraphs_including_relabelings": 14,
+        "four_node_unordered_pairs_with_replacement": 105,
+        "oracle": "Independent exhaustive enumeration of bijections and adjacency Counters, no WL or implementation helpers"
+      },
+      "source_sha256": {
+        "scripts/c5_demos/poc_graph_isomorphism_wl.py": "ac10dfda74ebe68926f6ad7b82e6f3611ed736f2bef819c09fb638de5d7cc095",
+        "scripts/c5_isomorphisms/c5_ultimate_causal_determinant.py": "138dcb231d90607494c8f48f3146433188beda2cc2aff6ca73b58092e35bece1",
+        "tests/test_graph_isomorphism_regressions.py": "583eb19d54347d1fde441853111281b770f49e64512f942981a1146d206c2632",
+        "tests/test_inv_c5_28_falsification.py": "a1d46874571b8d2bb78061a6311362b7755582b36f4af662172419a488971686"
+      },
+      "limits": [
+        "Finite regression corpus, not a formal universal isomorphism proof",
+        "Default exact-search budget counts candidate extensions; not elapsed time or total preprocessing cost",
+        "WL equality remains indeterminate and does not establish isomorphism",
+        "v2 digest bytes change legacy profiles; no historical commitments rewritten",
+        "Undirected helper intentionally retains one-round incomplete semantics",
+        "No new dependency or lockfile changes"
+      ]
+    },
+    "unchanged_lockfiles": [
+      "uv.lock",
+      "Cargo.lock"
+    ],
+    "limits": [
+      "Finite regression corpus, not a formal universal isomorphism proof",
+      "Default exact-search budget counts candidate extensions; not elapsed time or total preprocessing cost",
+      "WL equality remains indeterminate and does not establish isomorphism",
+      "v2 digest bytes change legacy profiles; no historical commitments rewritten",
+      "Undirected helper intentionally retains one-round incomplete semantics",
+      "No new dependency or lockfile changes",
+      "No complete graph canonization or general polynomial-time bound claimed",
+      "No main of ultimate determinant, SQLite actor, deployment or production runtime executed",
+      "Legacy audit extractor that copied only three old functions must not be treated as a test of the new helper-based implementation"
+    ]
+  },
+  "red_controls": {
+    "entropy": {
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "-p",
+        "babylon60-kernel",
+        "--test",
+        "semantic_entropy_regressions"
+      ],
+      "exit_code": 101,
+      "stdout": "\nrunning 7 tests\ntest a_row_outside_the_declared_domain_is_not_admitted ... FAILED\ntest a_column_outside_the_declared_domain_is_not_admitted ... FAILED\ntest a_symmetric_nontransitive_relation_is_not_admitted ... FAILED\ntest eight_sample_clique_has_one_class ... FAILED\ntest an_asymmetric_reflexive_relation_is_not_admitted ... FAILED\ntest out_of_range_sample_counts_are_not_admitted ... FAILED\ntest a_non_reflexive_relation_is_not_admitted ... FAILED\n\nfailures:\n\n---- a_row_outside_the_declared_domain_is_not_admitted stdout ----\n\nthread 'a_row_outside_the_declared_domain_is_not_admitted' (10276680) panicked at 00_ABZU_KERNEL/crates/babylon60-kernel/tests/semantic_entropy_regressions.rs:53:5:\nassertion failed: !is_admitted(BitmaskSemanticKernel::evaluate(0x0104_0201, 3, true))\n\n---- a_column_outside_the_declared_domain_is_not_admitted stdout ----\n\nthread 'a_column_outside_the_declared_domain_is_not_admitted' (10276678) panicked at 00_ABZU_KERNEL/crates/babylon60-kernel/tests/semantic_entropy_regressions.rs:47:5:\nassertion failed: !is_admitted(BitmaskSemanticKernel::evaluate(0x0004_0209, 3, true))\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n\n---- a_symmetric_nontransitive_relation_is_not_admitted stdout ----\n\nthread 'a_symmetric_nontransitive_relation_is_not_admitted' (10276681) panicked at 00_ABZU_KERNEL/crates/babylon60-kernel/tests/semantic_entropy_regressions.rs:41:5:\nassertion failed: !is_admitted(BitmaskSemanticKernel::evaluate(0x0006_0703, 3, true))\n\n---- eight_sample_clique_has_one_class stdout ----\n\nthread 'eight_sample_clique_has_one_class' (10276683) panicked at 00_ABZU_KERNEL/crates/babylon60-kernel/src/semantic_entropy.rs:60:42:\nattempt to shift left with overflow\n\n---- an_asymmetric_reflexive_relation_is_not_admitted stdout ----\n\nthread 'an_asymmetric_reflexive_relation_is_not_admitted' (10276682) panicked at 00_ABZU_KERNEL/crates/babylon60-kernel/tests/semantic_entropy_regressions.rs:35:5:\nassertion failed: !is_admitted(BitmaskSemanticKernel::evaluate(0x0004_0203, 3, true))\n\n---- out_of_range_sample_counts_are_not_admitted stdout ----\n\nthread 'out_of_range_sample_counts_are_not_admitted' (10276684) panicked at 00_ABZU_KERNEL/crates/babylon60-kernel/tests/semantic_entropy_regressions.rs:23:9:\nn=0\n\n---- a_non_reflexive_relation_is_not_admitted stdout ----\n\nthread 'a_non_reflexive_relation_is_not_admitted' (10276679) panicked at 00_ABZU_KERNEL/crates/babylon60-kernel/tests/semantic_entropy_regressions.rs:29:5:\nassertion failed: !is_admitted(BitmaskSemanticKernel::evaluate(0, 3, true))\n\n\nfailures:\n    a_column_outside_the_declared_domain_is_not_admitted\n    a_non_reflexive_relation_is_not_admitted\n    a_row_outside_the_declared_domain_is_not_admitted\n    a_symmetric_nontransitive_relation_is_not_admitted\n    an_asymmetric_reflexive_relation_is_not_admitted\n    eight_sample_clique_has_one_class\n    out_of_range_sample_counts_are_not_admitted\n\ntest result: FAILED. 0 passed; 7 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n",
+      "stderr": "   Compiling crossbeam-epoch v0.9.20\n   Compiling num-traits v0.2.19\n   Compiling either v1.17.0\n   Compiling crypto-common v0.1.7\n   Compiling same-file v1.0.6\n   Compiling signature v2.2.0\n   Compiling regex-syntax v0.8.11\n   Compiling plotters-backend v0.3.7\n   Compiling clap_builder v4.6.6\n   Compiling constant_time_eq v0.4.2\n   Compiling cast v0.3.0\n   Compiling digest v0.10.7\n   Compiling walkdir v2.5.0\n   Compiling ed25519 v2.2.3\n   Compiling itertools v0.10.5\n   Compiling blake3 v1.8.5\n   Compiling notify-types v2.1.0\n   Compiling crossbeam-deque v0.8.7\n   Compiling sha2 v0.10.9\n   Compiling curve25519-dalek v4.1.3\n   Compiling plotters-svg v0.3.7\n   Compiling rayon-core v1.13.0\n   Compiling tinytemplate v1.2.1\n   Compiling fsevent-sys v4.1.0\n   Compiling is-terminal v0.4.17\n   Compiling oorandom v11.1.5\n   Compiling anes v0.1.6\n   Compiling notify v8.2.0\n   Compiling ed25519-dalek v2.2.0\n   Compiling babylon60-kernel v5.0.1 (<repo>/00_ABZU_KERNEL/crates/babylon60-kernel)\n   Compiling rayon v1.12.0\n   Compiling regex-automata v0.4.18\n   Compiling criterion-plot v0.5.0\n   Compiling clap v4.6.6\n   Compiling plotters v0.3.7\n   Compiling regex v1.13.1\n   Compiling criterion v0.5.1\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 7.52s\n     Running tests/semantic_entropy_regressions.rs (target/debug/deps/semantic_entropy_regressions-79004bf74127f26a)\nerror: test failed, to rerun pass `-p babylon60-kernel --test semantic_entropy_regressions`\n",
+      "scope": "New behavioral tests against unchanged original source; expected test failures, not compile errors"
+    },
+    "graphs": [
+      {
+        "command": [
+          "uv",
+          "run",
+          "--locked",
+          "pytest",
+          "tests/test_graph_isomorphism_regressions.py",
+          "-q"
+        ],
+        "exit_code": 1,
+        "log": "red.log",
+        "finding": "Original verify_isomorphism returned True for audited non-isomorphic DAG pair; run stopped after first failure by project pytest configuration."
+      },
+      {
+        "command": [
+          "uv",
+          "run",
+          "--locked",
+          "pytest",
+          "tests/test_graph_isomorphism_regressions.py::test_undirected_hash_uses_simultaneous_colors_for_every_node_order",
+          "-q"
+        ],
+        "exit_code": 1,
+        "log": "red-order.log",
+        "finding": "Original helper produced three different digests over six permutations of the same three-node path."
+      }
+    ],
+    "lean": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "pytest",
+        "tests/test_semantic_entropy_lean_alignment.py",
+        "-q"
+      ],
+      "environment": {
+        "BABYLON_REQUIRE_LEAN": "1"
+      },
+      "exit_code": 1,
+      "expected": "behavioral assertion failure: four model thresholds and two rejection codes disagree with actual Rust constants; Lean itself executes",
+      "output": "F\n=================================== FAILURES ===================================\n______________ test_lean_summary_thresholds_and_codes_match_rust _______________\ntests/test_semantic_entropy_lean_alignment.py:72: in test_lean_summary_thresholds_and_codes_match_rust\n    assert result.returncode == 0, result.stdout + result.stderr\nE   AssertionError: <temp>/SemanticEntropyAlignment.lean:85:75: error: Tactic `decide` proved that the proposition\nE       claim_genuine.tauSem = 55706\nE     is false\nE     <temp>/SemanticEntropyAlignment.lean:86:87: error: Tactic `decide` proved that the proposition\nE       claim_confabulation.tauSem = 55706\nE     is false\nE     <temp>/SemanticEntropyAlignment.lean:87:93: error: Tactic `decide` proved that the proposition\nE       claim_incorrect_belief.tauSem = 55706\nE     is false\nE     <temp>/SemanticEntropyAlignment.lean:88:77: error: Tactic `decide` proved that the proposition\nE       claim_polysemy.tauSem = 55706\nE     is false\nE     <temp>/SemanticEntropyAlignment.lean:89:164: error: Tactic `decide` proved that the proposition\nE       evaluateCausalGate { claimId := 99, hSemScaled := 55706, tauSem := 55706, isZ3Sat := false } =\nE         CausalStatus.Apoptosis 3735904353\nE     is false\nE     <temp>/SemanticEntropyAlignment.lean:90:167: error: Tactic `decide` proved that the proposition\nE       evaluateCausalGate { claimId := 99, hSemScaled := 55707, tauSem := 55706, isZ3Sat := false } =\nE         CausalStatus.Apoptosis 3735904352\nE     is false\nE     'Babylon60.Epistemology.audit_claim_genuine_threshold' depends on axioms: [sorryAx]\nE     <temp>/SemanticEntropyAlignment.lean:93:0: error: ❌️ Docstring on `#guard_msgs` does not match generated message:\nE     \nE     - info: 'Babylon60.Epistemology.audit_claim_genuine_threshold' does not depend on any axioms\nE     + info: 'Babylon60.Epistemology.audit_claim_genuine_threshold' depends on axioms: [sorryAx]\nE     'Babylon60.Epistemology.audit_claim_confabulation_threshold' depends on axioms: [sorryAx]\nE     <temp>/SemanticEntropyAlignment.lean:96:0: error: ❌️ Docstring on `#guard_msgs` does not match generated message:\nE     \nE     - info: 'Babylon60.Epistemology.audit_claim_confabulation_threshold' does not depend on any axioms\nE     + info: 'Babylon60.Epistemology.audit_claim_confabulation_threshold' depends on axioms: [sorryAx]\nE     'Babylon60.Epistemology.audit_claim_incorrect_belief_threshold' depends on axioms: [sorryAx]\nE     <temp>/SemanticEntropyAlignment.lean:99:0: error: ❌️ Docstring on `#guard_msgs` does not match generated message:\nE     \nE     - info: 'Babylon60.Epistemology.audit_claim_incorrect_belief_threshold' does not depend on any axioms\nE     + info: 'Babylon60.Epistemology.audit_claim_incorrect_belief_threshold' depends on axioms: [sorryAx]\nE     'Babylon60.Epistemology.audit_claim_polysemy_threshold' depends on axioms: [sorryAx]\nE     <temp>/SemanticEntropyAlignment.lean:102:0: error: ❌️ Docstring on `#guard_msgs` does not match generated message:\nE     \nE     - info: 'Babylon60.Epistemology.audit_claim_polysemy_threshold' does not depend on any axioms\nE     + info: 'Babylon60.Epistemology.audit_claim_polysemy_threshold' depends on axioms: [sorryAx]\nE     'Babylon60.Epistemology.audit_at_threshold' depends on axioms: [sorryAx]\nE     <temp>/SemanticEntropyAlignment.lean:105:0: error: ❌️ Docstring on `#guard_msgs` does not match generated message:\nE     \nE     - info: 'Babylon60.Epistemology.audit_at_threshold' does not depend on any axioms\nE     + info: 'Babylon60.Epistemology.audit_at_threshold' depends on axioms: [sorryAx]\nE     'Babylon60.Epistemology.audit_above_threshold' depends on axioms: [sorryAx]\nE     <temp>/SemanticEntropyAlignment.lean:108:0: error: ❌️ Docstring on `#guard_msgs` does not match generated message:\nE     \nE     - info: 'Babylon60.Epistemology.audit_above_threshold' does not depend on any axioms\nE     + info: 'Babylon60.Epistemology.audit_above_threshold' depends on axioms: [sorryAx]\nE     \nE   assert 1 == 0\nE    +  where 1 = CompletedProcess(args=['/opt/homebrew/bin/lean', '/private/var/folders/r_/hw1ds2nj49zffr6r4m_81r5h0000gn/T/pytest-of-b...epend on any axioms\\n+ info: 'Babylon60.Epistemology.audit_above_threshold' depends on axioms: [sorryAx]\\n\", stderr='').returncode\n=========================== short test summary info ============================\nFAILED tests/test_semantic_entropy_lean_alignment.py::test_lean_summary_thresholds_and_codes_match_rust\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 3.52s\nUninstalled 1 package in 4ms\nInstalled 1 package in 3ms\n"
+    }
+  },
+  "lean_model": {
+    "source": "scripts/c5_demos/SemanticEntropyApoptosis.lean",
+    "threshold": 55706,
+    "negative_codes": [
+      "0xDEAD_6060",
+      "0xDEAD_6061"
+    ],
+    "checked_with": "Pinned Lean 4.34.0-rc2, source copied unchanged by pytest fixture; 7 alignment/border theorems and 5 original theorems require empty axiom dependencies",
+    "limits": [
+      "Summary input only, no matrix or LUT validation model",
+      "Verified merges Rust positive variants",
+      "UNKNOWN/error of external solver is not modelled",
+      "Numeric and finite boundary alignment is not a Rust-Lean refinement proof"
+    ]
+  },
+  "documentation": {
+    "local_links_checked": 389,
+    "failures": [],
+    "coverage": {
+      "docs/01_spec in docs/00_index.md": {
+        "documents": 14,
+        "missing": []
+      },
+      "docs/01_spec in docs/README.md": {
+        "documents": 14,
+        "missing": []
+      },
+      "docs/06_theory in docs/00_index.md": {
+        "documents": 31,
+        "missing": []
+      },
+      "docs/06_theory in docs/README.md": {
+        "documents": 31,
+        "missing": []
+      },
+      "docs/06_theory in docs/06_theory/00_index.md": {
+        "documents": 31,
+        "missing": []
+      }
+    },
+    "preserved": {
+      "uv.lock": {
+        "sha256": "d78739746ac5d442a074ad73cbc7fc06d6e803558126f65fbc3d6d251d4c1fb4",
+        "unchanged": true
+      },
+      "pyproject.toml": {
+        "sha256": "50d4594dd2125fcbe7df0578394b5d2c2e6ac7c7dddb4b5fc9be68229eb8d0cd",
+        "unchanged": true
+      },
+      "Cargo.lock": {
+        "sha256": "7c772f6e6ffd29594c5b9bdadb004be09c57af67b60b7be1b56c034a174491b4",
+        "unchanged": true
+      },
+      "00_ABZU_KERNEL/crates/babylon60-kernel/Cargo.toml": {
+        "sha256": "1fce7afd9c97f75f4cf542bbfa7aa5f6c8b66370629ddab0c8e06a3b2432b8d1",
+        "unchanged": true
+      },
+      "docs/01_spec/evidence/scientific-guarantees-20261026.json": {
+        "sha256": "344d700347f7e6ae65c7f9a38711702c07224b5c15b77fa9a0c2b0f3ceaff075",
+        "unchanged": true
+      },
+      "docs/06_theory/evidence/lean-scope-20261025.json": {
+        "sha256": "d69b85b123e211928c100cc2f16f193702ad7a1e0385f3961473df2bc45a1806",
+        "unchanged": true
+      },
+      "docs/06_theory/evidence/lean-naming-20261026.json": {
+        "sha256": "e38296a0764fda98468853141d9b4600665372d8e2b4b2d4baad0220eef74a26",
+        "unchanged": true
+      },
+      "docs/06_theory/evidence/lean-reporting-20261026.json": {
+        "sha256": "28b6041bd363afe77a4db4136a01ad5ea15cec73b098670bedfeb8725061d52c",
+        "unchanged": true
+      },
+      "docs/06_theory/evidence/lean-harness-20261026.json": {
+        "sha256": "ac7f462b8cc7a9bae8511bef7e0a04c6680cf47883a29d09d3f42ae74c25dfc2",
+        "unchanged": true
+      },
+      "proof/lean/lean-toolchain": {
+        "sha256": "108ca2895820de2c74101f81de81756b41ca0165dfdc8ced16a82c3f810152d0",
+        "unchanged": true
+      },
+      "proof/lean/lake-manifest.json": {
+        "sha256": "9325276f014362af0d80077ed4126abdec7dc79d64bf576708cc542b155220fa",
+        "unchanged": true
+      },
+      "proof/lean/lakefile.toml": {
+        "sha256": "99c1cf005aac1e3793aaba1ea1775d8e4d6c3e94b2f1dbd9b08723b2283aa631",
+        "unchanged": true
+      },
+      "00_ABZU_KERNEL/crates/babylon60-kernel/tests/stress_semantic_entropy_100k.rs": {
+        "sha256": "e29893b4b9e6115cf54b81feefbc225e8c8ea07163b809a1e363020a7423750f",
+        "unchanged": true
+      },
+      "crates/b60-lang/src/bin/fsm_poc.rs": {
+        "sha256": "ec8e7250c972599dffe89b0ab174fe19663612c71a58ce95fa25ff44b34743c9",
+        "unchanged": true
+      },
+      "crates/b60-lang/src/bin/fsm_stress.rs": {
+        "sha256": "b0901878bb1f090f85d157e630f6662cf98600f7d891012d02da38487f26d5b2",
+        "unchanged": true
+      },
+      "crates/b60-lang/src/bin/support/lean_harness.rs": {
+        "sha256": "0742b61c2bd2987894f6d67f7054d020d011491c3c75e672bacffeba24488359",
+        "unchanged": true
+      },
+      "crates/b60-lang/tests/lean_harness.rs": {
+        "sha256": "15a6ab7abc3aad7211ac268436cfaec2c2f69a0a437d1d5a3c8377290a891f98",
+        "unchanged": true
+      }
+    },
+    "LUT_and_Rust_threshold_unchanged": true,
+    "documents": [
+      "README.md",
+      "docs/README.md",
+      "docs/00_index.md",
+      "docs/06_theory/00_index.md",
+      "docs/06_theory/BABYLON60_PROOF_CARRYING_EXECUTION.md",
+      "docs/01_spec/AUDIT_SCIENTIFIC_GUARANTEES_2026.md",
+      "docs/01_spec/spec_architecture.md",
+      "docs/01_spec/spec_cryptographic_profile.md",
+      "docs/01_spec/spec_exergy_ontology.md",
+      "docs/01_spec/spec_graph_canonical.md",
+      "docs/01_spec/spec_invariants.md",
+      "docs/01_spec/spec_security_model.md",
+      "docs/01_spec/spec_semantic_entropy_dual_firewall.md"
+    ]
+  },
+  "source_sha256": {
+    "00_ABZU_KERNEL/crates/babylon60-kernel/src/semantic_entropy.rs": "942bc29b7266929d226ef85dae3dad095f5f80eb178dce502d14ab4d551fd53c",
+    "00_ABZU_KERNEL/crates/babylon60-kernel/tests/semantic_entropy_regressions.rs": "e3bf7a352f6df2cc3e56aded791216a92d3de40bf43bb5f269196f741cb07981",
+    "scripts/c5_demos/SemanticEntropyApoptosis.lean": "3d52ddf02eca41ec7caa0ac9a29ac70db166332e38b832c5f2222c4a84978c24",
+    "scripts/c5_demos/poc_graph_isomorphism_wl.py": "ac10dfda74ebe68926f6ad7b82e6f3611ed736f2bef819c09fb638de5d7cc095",
+    "scripts/c5_isomorphisms/c5_ultimate_causal_determinant.py": "138dcb231d90607494c8f48f3146433188beda2cc2aff6ca73b58092e35bece1",
+    "tests/test_graph_isomorphism_regressions.py": "583eb19d54347d1fde441853111281b770f49e64512f942981a1146d206c2632",
+    "tests/test_inv_c5_28_falsification.py": "a1d46874571b8d2bb78061a6311362b7755582b36f4af662172419a488971686",
+    "tests/test_semantic_entropy_lean_alignment.py": "caae0c5b91877bc9e7a4fc97362f3922af636ca982c18a665ddb8b940abd315d"
+  },
+  "document_sha256": {
+    "docs/01_spec/AUDIT_SCIENTIFIC_GUARANTEES_2026.md": "4b1934c56e4a939f7e10027f82868ded6c700b196a9e341df57ab84420b7e756",
+    "docs/01_spec/spec_semantic_entropy_dual_firewall.md": "0176a8e00554db5c41608a57187f230fe80f1e56110ed337802ae2cd416168df",
+    "docs/01_spec/spec_graph_canonical.md": "72da4621117a3f5333143ab780206b5df0ef0ead44a24be7bcad845291ac9edd",
+    "docs/01_spec/spec_invariants.md": "9d85a1c474ce49d882d4af6bd45a4ee68b9f4dec87de27d032733157e3c4f9f9",
+    "docs/00_index.md": "ffd15024d16d72b828f4b975ceb41e2ed40e631249a3f092f2846254ba2e5aa9",
+    "docs/README.md": "1a5311f2aefb28e7c9774f7a58d1a6023d25c403c4ef1d37de7786639a5e6999"
+  },
+  "compatibility": {
+    "entropy_compute": "Return type changed to Result<(u32,u8),SemanticEntropyInputError>; callers must handle failure",
+    "entropy_evaluate": "Same arguments, added InvalidInput enum variant; exhaustive downstream matches require handling it",
+    "valid_entropy_values": "LUT and Rust threshold unchanged",
+    "directed_graph": "Adjacency dict directed multigraph, bool after completed exact check; malformed ValueError and budget exhaustion explicit RuntimeError subclass",
+    "graph_hash_profiles": [
+      "WL1_V2 / b60-wl-directed-multigraph-v2",
+      "64hex / b60-wl-undirected-v2"
+    ],
+    "historical_hash_comparison": "Only same profile and parameters; old commitments not migrated or rewritten; 64hex length alone does not identify profile",
+    "CLAIMS_manifest_unchanged": true
+  },
+  "review": "Independent source review found no blocker in input validation, equivalence predicate, exact mapping/backtracking, budget semantics or Lean fixture; tests separately run by root",
+  "limits": [
+    "Finite regression evidence, not a universal formal graph proof or full u64 exhaustive entropy validation",
+    "Exact search is exponential in worst case; candidate-extension budget does not bound preprocessing, elapsed time or memory",
+    "WL equality still indeterminate until exact search succeeds",
+    "External Bool still supplied: no solver UNKNOWN/error provenance or factual truth guarantee",
+    "No energy/latency benchmark; stress target compiled only",
+    "No full repository test run, deployment, protected runtime or release certification",
+    "No dependencies/lockfiles changed; pre-existing unrelated dirty work preserved",
+    "Global rules and ghost-listener telemetry not inspected"
+  ],
+  "historical_evidence": "Prior audit JSONs retained byte for byte; their old source hashes/failures remain historical. New source hashes bind the repaired version. Old helper-extraction collectors are not current tests; use the regression recipes.",
+  "audit_collector_correction": "The first packaging attempt rejected pre-existing intentional two-space Markdown hard breaks; the collector now permits CommonMark hard breaks while retaining source whitespace and git diff checks. No source/test failure was concealed."
+}

@@ -1,0 +1,5247 @@
+{
+  "schema": "babylon60.lean4.formal_census.v2",
+  "generated_from_commit": "60140d24ff44505d5ebb566324f1db6a9c2e51a1",
+  "toolchain": "leanprover/lean4:v4.34.0-rc2",
+  "totals": {
+    "proprietary_modules_total": 26,
+    "modules_with_theorems": 22,
+    "auxiliary_modules_without_theorems": 4,
+    "theorems_total": 144,
+    "defs_total": 205,
+    "inductives_total": 23,
+    "core_228_constructions_total": 228,
+    "theorems_plus_core_228": 372,
+    "structures_total": 34,
+    "abbrevs_total": 13,
+    "non_theorem_declarations_total": 275,
+    "all_top_level_declarations_total": 419
+  },
+  "theorem_class_distribution": {
+    "I-DEC": 37,
+    "U-IND": 9,
+    "W-EX": 6,
+    "U-CODEC": 37,
+    "U-ALG": 53,
+    "NEG-FIXTURE": 2
+  },
+  "modules": [
+    {
+      "file": "AX0.lean",
+      "lines": 200,
+      "sha256": "6ad2712458ada48095b9aa15e483d82c1a9b635fb98ccb89cc77fbb053dd35c3",
+      "has_theorems": true,
+      "is_negative_fixture": false,
+      "theorems": 7,
+      "theorem_range": "#001–#007",
+      "defs": 8,
+      "inductives": 2,
+      "core_228_count": 10,
+      "structures": 1,
+      "abbrevs": 1,
+      "total_non_theorem": 12
+    },
+    {
+      "file": "AcsEnvelope.lean",
+      "lines": 370,
+      "sha256": "3bbc1baa9f4fc94ddb50573bf83c097dde8dabd407b18ef36b4c6b86f0cfd008",
+      "has_theorems": true,
+      "is_negative_fixture": false,
+      "theorems": 20,
+      "theorem_range": "#008–#027",
+      "defs": 47,
+      "inductives": 2,
+      "core_228_count": 49,
+      "structures": 0,
+      "abbrevs": 5,
+      "total_non_theorem": 54
+    },
+    {
+      "file": "Babylon.lean",
+      "lines": 464,
+      "sha256": "909bdb5bcd6c8f2ee8e93d5ed97949419c7d8fa772c42e6d6d049fdfa574606e",
+      "has_theorems": true,
+      "is_negative_fixture": false,
+      "theorems": 26,
+      "theorem_range": "#028–#053",
+      "defs": 19,
+      "inductives": 7,
+      "core_228_count": 26,
+      "structures": 9,
+      "abbrevs": 0,
+      "total_non_theorem": 35
+    },
+    {
+      "file": "BabylonAOTOracle.lean",
+      "lines": 91,
+      "sha256": "2fa25bdbd878bbd13cc722a463a4f59c00b3419225d8f4d2150aac565353cd20",
+      "has_theorems": false,
+      "is_negative_fixture": false,
+      "theorems": 0,
+      "theorem_range": "—",
+      "defs": 4,
+      "inductives": 0,
+      "core_228_count": 4,
+      "structures": 0,
+      "abbrevs": 0,
+      "total_non_theorem": 4
+    },
+    {
+      "file": "BabylonAeonChain.lean",
+      "lines": 7551,
+      "sha256": "233b3e079981dbcc75850dbfdfbacbb5151af2e15f49289391494cf61e31370e",
+      "has_theorems": true,
+      "is_negative_fixture": false,
+      "theorems": 5,
+      "theorem_range": "#054–#058",
+      "defs": 5,
+      "inductives": 0,
+      "core_228_count": 5,
+      "structures": 0,
+      "abbrevs": 0,
+      "total_non_theorem": 5
+    },
+    {
+      "file": "BabylonAeonStress.lean",
+      "lines": 1521,
+      "sha256": "3ccd72bb384f92cc8af895bc8c4503c5ad86dbf3544861340e866d98c0b8eef0",
+      "has_theorems": true,
+      "is_negative_fixture": false,
+      "theorems": 1,
+      "theorem_range": "#059",
+      "defs": 1,
+      "inductives": 0,
+      "core_228_count": 1,
+      "structures": 0,
+      "abbrevs": 0,
+      "total_non_theorem": 1
+    },
+    {
+      "file": "BabylonAutoTrace.lean",
+      "lines": 24,
+      "sha256": "4d38fe24b1f65835473812a1b8099de49a793fbc42ce1ce96daaa501f87a651d",
+      "has_theorems": true,
+      "is_negative_fixture": true,
+      "theorems": 1,
+      "theorem_range": "#060",
+      "defs": 1,
+      "inductives": 0,
+      "core_228_count": 1,
+      "structures": 0,
+      "abbrevs": 0,
+      "total_non_theorem": 1
+    },
+    {
+      "file": "BabylonL0Ledger.lean",
+      "lines": 203,
+      "sha256": "4746c570cc8028644bd2aeb8b8ed92edce60a239cbf6b1c1cb6dd3daffb552b8",
+      "has_theorems": true,
+      "is_negative_fixture": false,
+      "theorems": 5,
+      "theorem_range": "#061–#065",
+      "defs": 7,
+      "inductives": 1,
+      "core_228_count": 8,
+      "structures": 3,
+      "abbrevs": 1,
+      "total_non_theorem": 12
+    },
+    {
+      "file": "BabylonOracle.lean",
+      "lines": 65,
+      "sha256": "496f397b0f9e43a3b59c2480b737372062d3349fdeee775e6328f863f5692750",
+      "has_theorems": false,
+      "is_negative_fixture": false,
+      "theorems": 0,
+      "theorem_range": "—",
+      "defs": 2,
+      "inductives": 0,
+      "core_228_count": 2,
+      "structures": 0,
+      "abbrevs": 0,
+      "total_non_theorem": 2
+    },
+    {
+      "file": "BabylonStressCorrupt.lean",
+      "lines": 1525,
+      "sha256": "4a1f254a48998625538f972a1a88aeff14381aea9d7bd63029d2e9ab3f3c4ff3",
+      "has_theorems": true,
+      "is_negative_fixture": true,
+      "theorems": 1,
+      "theorem_range": "#066",
+      "defs": 1,
+      "inductives": 0,
+      "core_228_count": 1,
+      "structures": 0,
+      "abbrevs": 0,
+      "total_non_theorem": 1
+    },
+    {
+      "file": "BabylonStressTrace.lean",
+      "lines": 6022,
+      "sha256": "f19d80ec05dda8cfc4858b778f2a9b6869055a7fb322681f6eecdaf8ce97252b",
+      "has_theorems": true,
+      "is_negative_fixture": false,
+      "theorems": 1,
+      "theorem_range": "#067",
+      "defs": 1,
+      "inductives": 0,
+      "core_228_count": 1,
+      "structures": 0,
+      "abbrevs": 0,
+      "total_non_theorem": 1
+    },
+    {
+      "file": "BabylonTrace.lean",
+      "lines": 379,
+      "sha256": "f597735fa1902184365c2ffddb0b228b41babf078a91b7729c8b70ade6abdd1f",
+      "has_theorems": true,
+      "is_negative_fixture": false,
+      "theorems": 17,
+      "theorem_range": "#068–#084",
+      "defs": 12,
+      "inductives": 1,
+      "core_228_count": 13,
+      "structures": 4,
+      "abbrevs": 1,
+      "total_non_theorem": 18
+    },
+    {
+      "file": "C5Affine.lean",
+      "lines": 23,
+      "sha256": "22d65535f432825ba16a4baa1258a25da9689b72197fbd93fb33381785add050",
+      "has_theorems": true,
+      "is_negative_fixture": false,
+      "theorems": 1,
+      "theorem_range": "#085",
+      "defs": 1,
+      "inductives": 1,
+      "core_228_count": 2,
+      "structures": 0,
+      "abbrevs": 0,
+      "total_non_theorem": 2
+    },
+    {
+      "file": "C5PortHamiltonian.lean",
+      "lines": 53,
+      "sha256": "47af8878686bd3dbeff1d7c3e2d002d8e32183296b7a49401299e799973872fc",
+      "has_theorems": true,
+      "is_negative_fixture": false,
+      "theorems": 3,
+      "theorem_range": "#086–#088",
+      "defs": 3,
+      "inductives": 0,
+      "core_228_count": 3,
+      "structures": 1,
+      "abbrevs": 0,
+      "total_non_theorem": 4
+    },
+    {
+      "file": "CanonicalEnvelope.lean",
+      "lines": 247,
+      "sha256": "e5d66ba2214af13aa5ad8eaea4b9eae7f79ea95661f0639350b0f91932fb09c9",
+      "has_theorems": true,
+      "is_negative_fixture": false,
+      "theorems": 7,
+      "theorem_range": "#089–#095",
+      "defs": 15,
+      "inductives": 0,
+      "core_228_count": 15,
+      "structures": 1,
+      "abbrevs": 1,
+      "total_non_theorem": 17
+    },
+    {
+      "file": "CanonicalHead.lean",
+      "lines": 119,
+      "sha256": "95274337d3b41d604e95d2fc50f0ae4a68856c05d4ac641aa1a21dd54f7408c1",
+      "has_theorems": true,
+      "is_negative_fixture": false,
+      "theorems": 4,
+      "theorem_range": "#096–#099",
+      "defs": 6,
+      "inductives": 0,
+      "core_228_count": 6,
+      "structures": 0,
+      "abbrevs": 0,
+      "total_non_theorem": 6
+    },
+    {
+      "file": "Destiladora_838c463da193b48f.lean",
+      "lines": 128,
+      "sha256": "5a32a31bd6f8932b27a5b2481d2d3800990f41ae5653575f624c785d44bb0b03",
+      "has_theorems": true,
+      "is_negative_fixture": false,
+      "theorems": 7,
+      "theorem_range": "#100–#106",
+      "defs": 8,
+      "inductives": 2,
+      "core_228_count": 10,
+      "structures": 2,
+      "abbrevs": 0,
+      "total_non_theorem": 12
+    },
+    {
+      "file": "ExampleSeqlockTrace.lean",
+      "lines": 75,
+      "sha256": "2df7df3eee160fe70fd4110c50c73da8f8e8b3140eee382a8d9485e4df0a33b7",
+      "has_theorems": true,
+      "is_negative_fixture": false,
+      "theorems": 1,
+      "theorem_range": "#107",
+      "defs": 3,
+      "inductives": 1,
+      "core_228_count": 4,
+      "structures": 1,
+      "abbrevs": 0,
+      "total_non_theorem": 5
+    },
+    {
+      "file": "HolographicPoC.lean",
+      "lines": 24,
+      "sha256": "d51f82f9967190657371ee7d43188dc140c6871b7c3680822599bd8cb595af72",
+      "has_theorems": false,
+      "is_negative_fixture": false,
+      "theorems": 0,
+      "theorem_range": "—",
+      "defs": 1,
+      "inductives": 0,
+      "core_228_count": 1,
+      "structures": 0,
+      "abbrevs": 0,
+      "total_non_theorem": 1
+    },
+    {
+      "file": "LarsaEquivocationSafety.lean",
+      "lines": 145,
+      "sha256": "5a20a9c2f4a1d82b85ec5a942ea7e0f28001dedf785ca5d0462e11dfeb7f452b",
+      "has_theorems": true,
+      "is_negative_fixture": false,
+      "theorems": 7,
+      "theorem_range": "#108–#114",
+      "defs": 3,
+      "inductives": 0,
+      "core_228_count": 3,
+      "structures": 2,
+      "abbrevs": 0,
+      "total_non_theorem": 5
+    },
+    {
+      "file": "MolochLandauer.lean",
+      "lines": 126,
+      "sha256": "b050072b0cfe8763c58bfeb0e5e66a5d54839e0b97743955ecd2fb2d0a93f60e",
+      "has_theorems": true,
+      "is_negative_fixture": false,
+      "theorems": 5,
+      "theorem_range": "#115–#119",
+      "defs": 6,
+      "inductives": 1,
+      "core_228_count": 7,
+      "structures": 1,
+      "abbrevs": 0,
+      "total_non_theorem": 8
+    },
+    {
+      "file": "NavierStokesBKM.lean",
+      "lines": 150,
+      "sha256": "353d51830eacf849875964e376ee27f6e222b3b2626a998cf972f88ae1db910b",
+      "has_theorems": true,
+      "is_negative_fixture": false,
+      "theorems": 5,
+      "theorem_range": "#120–#124",
+      "defs": 9,
+      "inductives": 2,
+      "core_228_count": 11,
+      "structures": 4,
+      "abbrevs": 0,
+      "total_non_theorem": 15
+    },
+    {
+      "file": "NavierStokesOracle.lean",
+      "lines": 64,
+      "sha256": "753edd7466ee342ed0d20999855c3ffe26ab7014482d1c38f5a855b0d8d3ffbc",
+      "has_theorems": false,
+      "is_negative_fixture": false,
+      "theorems": 0,
+      "theorem_range": "—",
+      "defs": 2,
+      "inductives": 0,
+      "core_228_count": 2,
+      "structures": 0,
+      "abbrevs": 0,
+      "total_non_theorem": 2
+    },
+    {
+      "file": "NavierStokesSobolevKato.lean",
+      "lines": 145,
+      "sha256": "f744326608118898f44ece1ea7c9c0546233066dac20a05d83d4fd7e7d04d208",
+      "has_theorems": true,
+      "is_negative_fixture": false,
+      "theorems": 8,
+      "theorem_range": "#125–#132",
+      "defs": 13,
+      "inductives": 0,
+      "core_228_count": 13,
+      "structures": 4,
+      "abbrevs": 0,
+      "total_non_theorem": 17
+    },
+    {
+      "file": "NemesisWave4.lean",
+      "lines": 211,
+      "sha256": "78ac71a9f718b05d5c1d6a936b1d317f2a3b94aa9ed4f9d1a307ab5317da8a0f",
+      "has_theorems": true,
+      "is_negative_fixture": false,
+      "theorems": 6,
+      "theorem_range": "#133–#138",
+      "defs": 9,
+      "inductives": 3,
+      "core_228_count": 12,
+      "structures": 1,
+      "abbrevs": 0,
+      "total_non_theorem": 13
+    },
+    {
+      "file": "TicketEnvelope.lean",
+      "lines": 213,
+      "sha256": "55f2630ed20779f226c22ffa1bf772f5901c7f1d65ff864b4c7609c0b6e6b096",
+      "has_theorems": true,
+      "is_negative_fixture": false,
+      "theorems": 6,
+      "theorem_range": "#139–#144",
+      "defs": 18,
+      "inductives": 0,
+      "core_228_count": 18,
+      "structures": 0,
+      "abbrevs": 4,
+      "total_non_theorem": 22
+    }
+  ],
+  "theorems": [
+    {
+      "id": "#001",
+      "index": 1,
+      "file": "AX0.lean",
+      "line": 65,
+      "kind": "theorem",
+      "name": "auth_001_valid_execution",
+      "qualified_name": "auth_001_valid_execution",
+      "signature": ": validateTrace trace_happy .Proposed = true",
+      "result_class": "I-DEC",
+      "axioms": [],
+      "scope_note": "Comprobación cerrada por rfl sobre la traza concreta trace_happy de 3 eventos en la FSM abstracta."
+    },
+    {
+      "id": "#002",
+      "index": 2,
+      "file": "AX0.lean",
+      "line": 70,
+      "kind": "theorem",
+      "name": "auth_001_reject_double_dispatch",
+      "qualified_name": "auth_001_reject_double_dispatch",
+      "signature": ": validateTrace trace_double_dispatch .Proposed = false",
+      "result_class": "I-DEC",
+      "axioms": [],
+      "scope_note": "Comprobación cerrada por rfl que rechaza la traza concreta trace_double_dispatch en la FSM abstracta."
+    },
+    {
+      "id": "#003",
+      "index": 3,
+      "file": "AX0.lean",
+      "line": 75,
+      "kind": "theorem",
+      "name": "auth_001_reject_illegal_dispatch",
+      "qualified_name": "auth_001_reject_illegal_dispatch",
+      "signature": ": validateTrace trace_illegal_dispatch .Proposed = false",
+      "result_class": "I-DEC",
+      "axioms": [],
+      "scope_note": "Comprobación cerrada por rfl que rechaza la traza concreta trace_illegal_dispatch en la FSM abstracta."
+    },
+    {
+      "id": "#004",
+      "index": 4,
+      "file": "AX0.lean",
+      "line": 80,
+      "kind": "theorem",
+      "name": "auth_001_crash_recovery",
+      "qualified_name": "auth_001_crash_recovery",
+      "signature": ": validateTrace trace_crash .Proposed = true",
+      "result_class": "I-DEC",
+      "axioms": [],
+      "scope_note": "Comprobación cerrada por rfl de la traza concreta trace_crash ([.reserve, .dispatch, .ackCrash]); no demuestra recuperación general de estado persistido en disco ni reconciliación de efectos externos."
+    },
+    {
+      "id": "#005",
+      "index": 5,
+      "file": "AX0.lean",
+      "line": 98,
+      "kind": "theorem",
+      "name": "max_dispatches_from_state",
+      "qualified_name": "max_dispatches_from_state",
+      "signature": "(trace : List AuthEvent) (s : AuthState) : validateTrace trace s = true → countDispatches trace ≤ maxAllowedDispatches s",
+      "result_class": "U-IND",
+      "axioms": [
+        "propext"
+      ],
+      "scope_note": "Lema inductivo universal sobre cualquier traza finita admitida desde el estado s en la FSM AuthState."
+    },
+    {
+      "id": "#006",
+      "index": 6,
+      "file": "AX0.lean",
+      "line": 144,
+      "kind": "theorem",
+      "name": "auth_001_universal_inductive_safety",
+      "qualified_name": "auth_001_universal_inductive_safety",
+      "signature": "(trace : List AuthEvent) : validateTrace trace .Proposed = true → countDispatches trace ≤ 1",
+      "result_class": "U-IND",
+      "axioms": [
+        "propext"
+      ],
+      "scope_note": "Cota inductiva universal: toda traza aceptada desde Proposed contiene como máximo un evento dispatch (0 o 1) en el modelo FSM; no establece liveness, persistencia física ni correspondencia con syscalls del SO."
+    },
+    {
+      "id": "#007",
+      "index": 7,
+      "file": "AX0.lean",
+      "line": 190,
+      "kind": "theorem",
+      "name": "verifiedAuthInvariant",
+      "qualified_name": "verifiedAuthInvariant",
+      "signature": ": VerifiedAuthInvariant",
+      "result_class": "W-EX",
+      "axioms": [
+        "propext"
+      ],
+      "scope_note": "Empaqueta la cota inductiva universal (#006) con el testigo no vacío trace_happy (patrón AP-10 VerifiedAuthInvariant)."
+    },
+    {
+      "id": "#008",
+      "index": 8,
+      "file": "AcsEnvelope.lean",
+      "line": 169,
+      "kind": "theorem",
+      "name": "typedCose_decode_encode",
+      "qualified_name": "B60.ACS.typedCose_decode_encode",
+      "signature": "(alg : Algorithm) (c : Codec α) [DecidablePred c.valid] (x : α × Bytes) (h : (typedCose alg c).valid x) : decodeChecked (typedCose alg c) ((typedCose alg c).encode x) = some x",
+      "result_class": "U-CODEC",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Roundtrip universal de decodificación tras codificación (`decode (encode x) = some x`, o con sufijo arbitrario en `decodeFrom`) bajo `.valid x` en `AcsEnvelope.lean` (`typedCose_decode_encode`); no certifica por sí sola autenticidad criptográfica de claves ni frescura anti-replay en runtime."
+    },
+    {
+      "id": "#009",
+      "index": 9,
+      "file": "AcsEnvelope.lean",
+      "line": 174,
+      "kind": "theorem",
+      "name": "typedCose_encode_decode",
+      "qualified_name": "B60.ACS.typedCose_encode_decode",
+      "signature": "(alg : Algorithm) (c : Codec α) [DecidablePred c.valid] (wire : Bytes) (x : α × Bytes) (h : decodeChecked (typedCose alg c) wire = some x) : (typedCose alg c).encode x = wire",
+      "result_class": "U-CODEC",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Re-codificación canónica determinista (`decode wire = some x → encode x = wire`) que excluye maleabilidad de representación en el modelo en `AcsEnvelope.lean` (`typedCose_encode_decode`); no certifica por sí sola autenticidad criptográfica de claves ni frescura anti-replay en runtime."
+    },
+    {
+      "id": "#010",
+      "index": 10,
+      "file": "AcsEnvelope.lean",
+      "line": 178,
+      "kind": "theorem",
+      "name": "typedCose_decode_valid",
+      "qualified_name": "B60.ACS.typedCose_decode_valid",
+      "signature": "(alg : Algorithm) (c : Codec α) [DecidablePred c.valid] (wire : Bytes) (x : α × Bytes) (h : decodeChecked (typedCose alg c) wire = some x) : (typedCose alg c).valid x",
+      "result_class": "U-CODEC",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Soundness del decodificador comprobado (`decodeChecked wire = some x → valid x`) sobre el dominio del codec en `AcsEnvelope.lean` (`typedCose_decode_valid`); no certifica por sí sola autenticidad criptográfica de claves ni frescura anti-replay en runtime."
+    },
+    {
+      "id": "#011",
+      "index": 11,
+      "file": "AcsEnvelope.lean",
+      "line": 182,
+      "kind": "theorem",
+      "name": "typedSignature_decode_encode",
+      "qualified_name": "B60.ACS.typedSignature_decode_encode",
+      "signature": "(alg : Algorithm) (c : Codec α) [DecidablePred c.valid] (x : α) (h : (typedSignatureStructure alg c).valid x) : decodeChecked (typedSignatureStructure alg c) ((typedSignatureStructure alg c).encode x) = some x",
+      "result_class": "U-CODEC",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Roundtrip universal de decodificación tras codificación (`decode (encode x) = some x`, o con sufijo arbitrario en `decodeFrom`) bajo `.valid x` en `AcsEnvelope.lean` (`typedSignature_decode_encode`); no certifica por sí sola autenticidad criptográfica de claves ni frescura anti-replay en runtime."
+    },
+    {
+      "id": "#012",
+      "index": 12,
+      "file": "AcsEnvelope.lean",
+      "line": 187,
+      "kind": "theorem",
+      "name": "typedSignature_encode_decode",
+      "qualified_name": "B60.ACS.typedSignature_encode_decode",
+      "signature": "(alg : Algorithm) (c : Codec α) [DecidablePred c.valid] (wire : Bytes) (x : α) (h : decodeChecked (typedSignatureStructure alg c) wire = some x) : (typedSignatureStructure alg c).encode x = wire",
+      "result_class": "U-CODEC",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Re-codificación canónica determinista (`decode wire = some x → encode x = wire`) que excluye maleabilidad de representación en el modelo en `AcsEnvelope.lean` (`typedSignature_encode_decode`); no certifica por sí sola autenticidad criptográfica de claves ni frescura anti-replay en runtime."
+    },
+    {
+      "id": "#013",
+      "index": 13,
+      "file": "AcsEnvelope.lean",
+      "line": 191,
+      "kind": "theorem",
+      "name": "typedSignature_decode_valid",
+      "qualified_name": "B60.ACS.typedSignature_decode_valid",
+      "signature": "(alg : Algorithm) (c : Codec α) [DecidablePred c.valid] (wire : Bytes) (x : α) (h : decodeChecked (typedSignatureStructure alg c) wire = some x) : (typedSignatureStructure alg c).valid x",
+      "result_class": "U-CODEC",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Soundness del decodificador comprobado (`decodeChecked wire = some x → valid x`) sobre el dominio del codec en `AcsEnvelope.lean` (`typedSignature_decode_valid`); no certifica por sí sola autenticidad criptográfica de claves ni frescura anti-replay en runtime."
+    },
+    {
+      "id": "#014",
+      "index": 14,
+      "file": "AcsEnvelope.lean",
+      "line": 200,
+      "kind": "theorem",
+      "name": "call_decoded_valid",
+      "qualified_name": "B60.ACS.call_decoded_valid",
+      "signature": "(wire : Bytes) (x : Call) (h : decodeCall wire = some x) : callCodec.valid x",
+      "result_class": "U-CODEC",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Soundness del decodificador comprobado (`decodeChecked wire = some x → valid x`) sobre el dominio del codec en `AcsEnvelope.lean` (`call_decoded_valid`); no certifica por sí sola autenticidad criptográfica de claves ni frescura anti-replay en runtime."
+    },
+    {
+      "id": "#015",
+      "index": 15,
+      "file": "AcsEnvelope.lean",
+      "line": 203,
+      "kind": "theorem",
+      "name": "grant_decoded_valid",
+      "qualified_name": "B60.ACS.grant_decoded_valid",
+      "signature": "(wire : Bytes) (x : Grant) (h : decodeGrant wire = some x) : grantCodec.valid x",
+      "result_class": "U-CODEC",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Soundness del decodificador comprobado (`decodeChecked wire = some x → valid x`) sobre el dominio del codec en `AcsEnvelope.lean` (`grant_decoded_valid`); no certifica por sí sola autenticidad criptográfica de claves ni frescura anti-replay en runtime."
+    },
+    {
+      "id": "#016",
+      "index": 16,
+      "file": "AcsEnvelope.lean",
+      "line": 206,
+      "kind": "theorem",
+      "name": "forensic_decoded_valid",
+      "qualified_name": "B60.ACS.forensic_decoded_valid",
+      "signature": "(wire : Bytes) (x : Forensic) (h : decodeForensic wire = some x) : forensicCodec.valid x",
+      "result_class": "U-CODEC",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Soundness del decodificador comprobado (`decodeChecked wire = some x → valid x`) sobre el dominio del codec en `AcsEnvelope.lean` (`forensic_decoded_valid`); no certifica por sí sola autenticidad criptográfica de claves ni frescura anti-replay en runtime."
+    },
+    {
+      "id": "#017",
+      "index": 17,
+      "file": "AcsEnvelope.lean",
+      "line": 210,
+      "kind": "theorem",
+      "name": "call_decode_encode",
+      "qualified_name": "B60.ACS.call_decode_encode",
+      "signature": "(x : Call) (h : callCodec.valid x) : decodeCall (callCodec.encode x) = some x",
+      "result_class": "U-CODEC",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Roundtrip universal de decodificación tras codificación (`decode (encode x) = some x`, o con sufijo arbitrario en `decodeFrom`) bajo `.valid x` en `AcsEnvelope.lean` (`call_decode_encode`); no certifica por sí sola autenticidad criptográfica de claves ni frescura anti-replay en runtime."
+    },
+    {
+      "id": "#018",
+      "index": 18,
+      "file": "AcsEnvelope.lean",
+      "line": 213,
+      "kind": "theorem",
+      "name": "grant_decode_encode",
+      "qualified_name": "B60.ACS.grant_decode_encode",
+      "signature": "(x : Grant) (h : grantCodec.valid x) : decodeGrant (grantCodec.encode x) = some x",
+      "result_class": "U-CODEC",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Roundtrip universal de decodificación tras codificación (`decode (encode x) = some x`, o con sufijo arbitrario en `decodeFrom`) bajo `.valid x` en `AcsEnvelope.lean` (`grant_decode_encode`); no certifica por sí sola autenticidad criptográfica de claves ni frescura anti-replay en runtime."
+    },
+    {
+      "id": "#019",
+      "index": 19,
+      "file": "AcsEnvelope.lean",
+      "line": 216,
+      "kind": "theorem",
+      "name": "forensic_decode_encode",
+      "qualified_name": "B60.ACS.forensic_decode_encode",
+      "signature": "(x : Forensic) (h : forensicCodec.valid x) : decodeForensic (forensicCodec.encode x) = some x",
+      "result_class": "U-CODEC",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Roundtrip universal de decodificación tras codificación (`decode (encode x) = some x`, o con sufijo arbitrario en `decodeFrom`) bajo `.valid x` en `AcsEnvelope.lean` (`forensic_decode_encode`); no certifica por sí sola autenticidad criptográfica de claves ni frescura anti-replay en runtime."
+    },
+    {
+      "id": "#020",
+      "index": 20,
+      "file": "AcsEnvelope.lean",
+      "line": 219,
+      "kind": "theorem",
+      "name": "call_encode_decode",
+      "qualified_name": "B60.ACS.call_encode_decode",
+      "signature": "(wire : Bytes) (x : Call) (h : decodeCall wire = some x) : callCodec.encode x = wire",
+      "result_class": "U-CODEC",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Re-codificación canónica determinista (`decode wire = some x → encode x = wire`) que excluye maleabilidad de representación en el modelo en `AcsEnvelope.lean` (`call_encode_decode`); no certifica por sí sola autenticidad criptográfica de claves ni frescura anti-replay en runtime."
+    },
+    {
+      "id": "#021",
+      "index": 21,
+      "file": "AcsEnvelope.lean",
+      "line": 222,
+      "kind": "theorem",
+      "name": "grant_encode_decode",
+      "qualified_name": "B60.ACS.grant_encode_decode",
+      "signature": "(wire : Bytes) (x : Grant) (h : decodeGrant wire = some x) : grantCodec.encode x = wire",
+      "result_class": "U-CODEC",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Re-codificación canónica determinista (`decode wire = some x → encode x = wire`) que excluye maleabilidad de representación en el modelo en `AcsEnvelope.lean` (`grant_encode_decode`); no certifica por sí sola autenticidad criptográfica de claves ni frescura anti-replay en runtime."
+    },
+    {
+      "id": "#022",
+      "index": 22,
+      "file": "AcsEnvelope.lean",
+      "line": 225,
+      "kind": "theorem",
+      "name": "forensic_encode_decode",
+      "qualified_name": "B60.ACS.forensic_encode_decode",
+      "signature": "(wire : Bytes) (x : Forensic) (h : decodeForensic wire = some x) : forensicCodec.encode x = wire",
+      "result_class": "U-CODEC",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Re-codificación canónica determinista (`decode wire = some x → encode x = wire`) que excluye maleabilidad de representación en el modelo en `AcsEnvelope.lean` (`forensic_encode_decode`); no certifica por sí sola autenticidad criptográfica de claves ni frescura anti-replay en runtime."
+    },
+    {
+      "id": "#023",
+      "index": 23,
+      "file": "AcsEnvelope.lean",
+      "line": 228,
+      "kind": "theorem",
+      "name": "call_injective",
+      "qualified_name": "B60.ACS.call_injective",
+      "signature": "(x y : Call) (hx : callCodec.valid x) (hy : callCodec.valid y) (h : callCodec.encode x = callCodec.encode y) : x = y",
+      "result_class": "U-CODEC",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Inyectividad universal del codificador sobre el subconjunto de entradas que satisfacen el predicado `.valid` en `AcsEnvelope.lean` (`call_injective`); no certifica por sí sola autenticidad criptográfica de claves ni frescura anti-replay en runtime."
+    },
+    {
+      "id": "#024",
+      "index": 24,
+      "file": "AcsEnvelope.lean",
+      "line": 231,
+      "kind": "theorem",
+      "name": "cose_decode_encode",
+      "qualified_name": "B60.ACS.cose_decode_encode",
+      "signature": "(alg : Algorithm) (x : Bytes × Bytes) (h : (coseSign1 alg).valid x) : decode (coseSign1 alg) ((coseSign1 alg).encode x) = some x",
+      "result_class": "U-CODEC",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Roundtrip universal de decodificación tras codificación (`decode (encode x) = some x`, o con sufijo arbitrario en `decodeFrom`) bajo `.valid x` en `AcsEnvelope.lean` (`cose_decode_encode`); no certifica por sí sola autenticidad criptográfica de claves ni frescura anti-replay en runtime."
+    },
+    {
+      "id": "#025",
+      "index": 25,
+      "file": "AcsEnvelope.lean",
+      "line": 234,
+      "kind": "theorem",
+      "name": "cose_encode_decode",
+      "qualified_name": "B60.ACS.cose_encode_decode",
+      "signature": "(alg : Algorithm) (wire : Bytes) (x : Bytes × Bytes) (h : decode (coseSign1 alg) wire = some x) : (coseSign1 alg).encode x = wire",
+      "result_class": "U-CODEC",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Re-codificación canónica determinista (`decode wire = some x → encode x = wire`) que excluye maleabilidad de representación en el modelo en `AcsEnvelope.lean` (`cose_encode_decode`); no certifica por sí sola autenticidad criptográfica de claves ni frescura anti-replay en runtime."
+    },
+    {
+      "id": "#026",
+      "index": 26,
+      "file": "AcsEnvelope.lean",
+      "line": 237,
+      "kind": "theorem",
+      "name": "signature_decode_encode",
+      "qualified_name": "B60.ACS.signature_decode_encode",
+      "signature": "(alg : Algorithm) (payload : Bytes) (h : (signatureStructure alg).valid payload) : decode (signatureStructure alg) ((signatureStructure alg).encode payload) = some payload",
+      "result_class": "U-CODEC",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Roundtrip universal de decodificación tras codificación (`decode (encode x) = some x`, o con sufijo arbitrario en `decodeFrom`) bajo `.valid x` en `AcsEnvelope.lean` (`signature_decode_encode`); no certifica por sí sola autenticidad criptográfica de claves ni frescura anti-replay en runtime."
+    },
+    {
+      "id": "#027",
+      "index": 27,
+      "file": "AcsEnvelope.lean",
+      "line": 240,
+      "kind": "theorem",
+      "name": "signature_encode_decode",
+      "qualified_name": "B60.ACS.signature_encode_decode",
+      "signature": "(alg : Algorithm) (wire payload : Bytes) (h : decode (signatureStructure alg) wire = some payload) : (signatureStructure alg).encode payload = wire",
+      "result_class": "U-CODEC",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Re-codificación canónica determinista (`decode wire = some x → encode x = wire`) que excluye maleabilidad de representación en el modelo en `AcsEnvelope.lean` (`signature_encode_decode`); no certifica por sí sola autenticidad criptográfica de claves ni frescura anti-replay en runtime."
+    },
+    {
+      "id": "#028",
+      "index": 28,
+      "file": "Babylon.lean",
+      "line": 38,
+      "kind": "theorem",
+      "name": "extincion_origen_espurio",
+      "qualified_name": "Babylon.extincion_origen_espurio",
+      "signature": "{X Y : Type} {p : ProbDist X} {f : Morphism X Y} (bd : BayesianDisintegration p f) (x_fake : X) (y : Y) (h : p x_fake = 0) : bd.f_dag_p y x_fake = 0",
+      "result_class": "U-ALG",
+      "axioms": [],
+      "scope_note": "Proyecta el campo h_no_hallucination exigido al construir BayesianDisintegration: conserva p x_fake = 0 en f_dag_p; no identifica falsedad de origen ni modela adversarios."
+    },
+    {
+      "id": "#029",
+      "index": 29,
+      "file": "Babylon.lean",
+      "line": 44,
+      "kind": "theorem",
+      "name": "extincion_origen_espurio_constructiva",
+      "qualified_name": "Babylon.extincion_origen_espurio_constructiva",
+      "signature": "{X Y : Type} (prior : ProbDist X) (f : Morphism X Y) (pushforward : Y → Nat) (x : X) (y : Y) (h_prior : prior x = 0) : bayesian_inverse prior f pushforward y x = 0",
+      "result_class": "U-ALG",
+      "axioms": [],
+      "scope_note": "Rama cero por definición de bayesian_inverse sobre Nat cuando prior x = 0; cociente entero truncado sin normalización probabilística."
+    },
+    {
+      "id": "#030",
+      "index": 30,
+      "file": "Babylon.lean",
+      "line": 52,
+      "kind": "theorem",
+      "name": "circuit_breaker_activado",
+      "qualified_name": "Babylon.circuit_breaker_activado",
+      "signature": "{X Y : Type} {p : ProbDist X} {f : Morphism X Y} (bd : BayesianDisintegration p f) (x : X) (y_unseen : Y) (h : bd.pushforward y_unseen = 0) : bd.f_dag_p y_unseen x = 0",
+      "result_class": "U-ALG",
+      "axioms": [],
+      "scope_note": "Proyecta el campo h_circuit_breaker de BayesianDisintegration cuando pushforward y_unseen = 0; fila cero por convención de subprobabilidad/rechazo, no aborto físico."
+    },
+    {
+      "id": "#031",
+      "index": 31,
+      "file": "Babylon.lean",
+      "line": 58,
+      "kind": "theorem",
+      "name": "circuit_breaker_activado_constructiva",
+      "qualified_name": "Babylon.circuit_breaker_activado_constructiva",
+      "signature": "{X Y : Type} (prior : ProbDist X) (f : Morphism X Y) (pushforward : Y → Nat) (x : X) (y_unseen : Y) (h : pushforward y_unseen = 0) : bayesian_inverse prior f pushforward y_unseen x = 0",
+      "result_class": "U-ALG",
+      "axioms": [],
+      "scope_note": "Rama de denominador cero en bayesian_inverse sobre Nat (devuelve 0 para todo x cuando pushforward y_unseen = 0); no construye un posterior normalizado en el sentido de Markov/Fritz."
+    },
+    {
+      "id": "#032",
+      "index": 32,
+      "file": "Babylon.lean",
+      "line": 67,
+      "kind": "theorem",
+      "name": "resiliencia_bft_inyeccion",
+      "qualified_name": "Babylon.resiliencia_bft_inyeccion",
+      "signature": "{X Y : Type} {p : ProbDist X} {f : Morphism X Y} (bd : BayesianDisintegration p f) (x_fake : X) (y : Y) (h_prior : p x_fake = 0) : bd.f_dag_p y x_fake = 0",
+      "result_class": "U-ALG",
+      "axioms": [],
+      "scope_note": "Proposición idéntica a #028 (proyecta bd.h_no_hallucination bajo p x_fake = 0); el nombre histórico no añade protocolo BFT ni modelo de prompt injection."
+    },
+    {
+      "id": "#033",
+      "index": 33,
+      "file": "Babylon.lean",
+      "line": 97,
+      "kind": "theorem",
+      "name": "homeostasis_tonnetz_garantizada",
+      "qualified_name": "Babylon.homeostasis_tonnetz_garantizada",
+      "signature": "(m : TonnetzMonitor) : m.phi 0 0 = (TonnetzState.HomeostaticPure, 0)",
+      "result_class": "U-ALG",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Extrae el campo h_homeostasis del registro TonnetzMonitor en (0, 0); no mide percepción acústica ni límites físicos."
+    },
+    {
+      "id": "#034",
+      "index": 34,
+      "file": "Babylon.lean",
+      "line": 129,
+      "kind": "theorem",
+      "name": "lemma_monotonic_entropy_growth",
+      "qualified_name": "Babylon.lemma_monotonic_entropy_growth",
+      "signature": "(s1 s2 : AeonState) (_h_same : s1.aeon_id = s2.aeon_id) (_h_p1 : s1.phase = AeonPhase.Expansion) (_h_p2 : s2.phase = AeonPhase.Expansion) (h_growth : s1.tick ≤ s2.tick → s1.entropy ≤ s2.entropy) (h_t : s1.tick ≤ s2.tick) : s1.entropy ≤ s2.entropy",
+      "result_class": "U-ALG",
+      "axioms": [],
+      "scope_note": "Aplica la implicación hipótética h_growth : s1.tick ≤ s2.tick → s1.entropy ≤ s2.entropy a h_t; la monotonía se recibe como hipótesis y no se deriva de termodinámica."
+    },
+    {
+      "id": "#035",
+      "index": 35,
+      "file": "Babylon.lean",
+      "line": 139,
+      "kind": "theorem",
+      "name": "lemma_hot_memory_invariance",
+      "qualified_name": "Babylon.lemma_hot_memory_invariance",
+      "signature": "(s : AeonState) : s.hot_memory_bytes ≤ HOT_MEMORY_LIMIT",
+      "result_class": "U-ALG",
+      "axioms": [],
+      "scope_note": "Reescribe el campo h_bounded : s.hot_memory_bytes = 64 del registro AeonState; acota un campo Nat, no mide layout ni heap real."
+    },
+    {
+      "id": "#036",
+      "index": 36,
+      "file": "Babylon.lean",
+      "line": 156,
+      "kind": "theorem",
+      "name": "lemma_conformal_hot_dissipation_zero",
+      "qualified_name": "Babylon.lemma_conformal_hot_dissipation_zero",
+      "signature": "(s_sat : AeonState) (next_id : Nat) (merkle : Nat) : let s_next := conformal_reset s_sat next_id merkle s_next.entropy = 0 ∧ s_next.exergy = s_sat.exergy ∧ s_next.hot_memory_bytes = HOT_MEMORY_LIMIT",
+      "result_class": "U-ALG",
+      "axioms": [],
+      "scope_note": "Igualdades definicionales de los campos de conformal_reset por reducción (entropy = 0, exergy conservada, hot_memory_bytes = 64); no contiene magnitud física de calor."
+    },
+    {
+      "id": "#037",
+      "index": 37,
+      "file": "Babylon.lean",
+      "line": 163,
+      "kind": "theorem",
+      "name": "theorem_penrose_landauer_cycle_stability",
+      "qualified_name": "Babylon.theorem_penrose_landauer_cycle_stability",
+      "signature": "(s_sat : AeonState) (next_id : Nat) (merkle : Nat) : let s_next := conformal_reset s_sat next_id merkle s_next.entropy = 0 ∧ s_next.hot_memory_bytes ≤ HOT_MEMORY_LIMIT ∧ s_next.phase = AeonPhase.Expansion",
+      "result_class": "U-ALG",
+      "axioms": [],
+      "scope_note": "Valores y cota de campos del registro construido por conformal_reset; no demuestra estabilidad cíclica física ni cosmológica."
+    },
+    {
+      "id": "#038",
+      "index": 38,
+      "file": "Babylon.lean",
+      "line": 172,
+      "kind": "theorem",
+      "name": "theorem_landauer_cache_bypass",
+      "qualified_name": "Babylon.theorem_landauer_cache_bypass",
+      "signature": "(s_sat : AeonState) : let s_next := conformal_reset s_sat (s_sat.aeon_id + 1) s_sat.merkle_root s_next.entropy = 0 ∧ s_next.exergy = s_sat.exergy ∧ s_next.hot_memory_bytes = HOT_MEMORY_LIMIT ∧ s_next.aeon_id = s_sat.aeon_id + 1",
+      "result_class": "U-ALG",
+      "axioms": [],
+      "scope_note": "Igualdades definicionales sobre el registro devuelto por conformal_reset; el nombre histórico no demuestra un bypass físico del límite de Landauer."
+    },
+    {
+      "id": "#039",
+      "index": 39,
+      "file": "Babylon.lean",
+      "line": 199,
+      "kind": "theorem",
+      "name": "theorem_sexa_fraction_exact",
+      "qualified_name": "Babylon.theorem_sexa_fraction_exact",
+      "signature": "(a b : Tick60) : (add_tick60 a b).sexa_fraction = (add_tick60 b a).sexa_fraction",
+      "result_class": "U-ALG",
+      "axioms": [],
+      "scope_note": "Conmutatividad de la coordenada fraccionaria (add_tick60 a b).sexa_fraction = (add_tick60 b a).sexa_fraction; no prueba por sí sola exactitud de representación del valor completo con acarreo."
+    },
+    {
+      "id": "#040",
+      "index": 40,
+      "file": "Babylon.lean",
+      "line": 205,
+      "kind": "theorem",
+      "name": "theorem_liouville_involution",
+      "qualified_name": "Babylon.theorem_liouville_involution",
+      "signature": "(x y : Nat) : (x ^^^ y) ^^^ y = x",
+      "result_class": "U-ALG",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Identidad algebraica involutiva de XOR sobre Nat ((x ^^^ y) ^^^ y = x); el nombre histórico no formaliza conservación de volumen en espacio de fases (Liouville)."
+    },
+    {
+      "id": "#041",
+      "index": 41,
+      "file": "Babylon.lean",
+      "line": 210,
+      "kind": "theorem",
+      "name": "theorem_homotopy_closed_path",
+      "qualified_name": "Babylon.theorem_homotopy_closed_path",
+      "signature": "(winding_phase : Int) (h : winding_phase % 60 = 0) : ∃ (k : Int), winding_phase = 60 * k",
+      "result_class": "U-ALG",
+      "axioms": [
+        "propext"
+      ],
+      "scope_note": "Existencia de cociente entero k tal que winding_phase = 60 * k cuando winding_phase % 60 = 0; propiedad de divisibilidad en Int, no grupo fundamental ni homotopía topológica."
+    },
+    {
+      "id": "#042",
+      "index": 42,
+      "file": "Babylon.lean",
+      "line": 218,
+      "kind": "theorem",
+      "name": "theorem_mmr_logarithmic_bound",
+      "qualified_name": "Babylon.theorem_mmr_logarithmic_bound",
+      "signature": "(n : Nat) : mmr_peaks_bound n ≤ n.log2 + 1",
+      "result_class": "U-ALG",
+      "axioms": [],
+      "scope_note": "Reflexividad sobre la función mmr_peaks_bound n definida como n.log2 + 1; no cuenta picos de una estructura Merkle Mountain Range real."
+    },
+    {
+      "id": "#043",
+      "index": 43,
+      "file": "Babylon.lean",
+      "line": 241,
+      "kind": "theorem",
+      "name": "theorem_fisher_pythagorean_divergence",
+      "qualified_name": "Babylon.theorem_fisher_pythagorean_divergence",
+      "signature": "(d_pq d_qr : Nat) (cross_term : Nat) (h_ortho : cross_term = 0) : d_pq + d_qr + cross_term = d_pq + d_qr",
+      "result_class": "U-ALG",
+      "axioms": [],
+      "scope_note": "Identidad aditiva en Nat cuando el término cruzado se supone cero (cross_term = 0); no define divergencia KL ni variedad de Fisher."
+    },
+    {
+      "id": "#044",
+      "index": 44,
+      "file": "Babylon.lean",
+      "line": 247,
+      "kind": "theorem",
+      "name": "theorem_chentsov_markov_monotonicity",
+      "qualified_name": "Babylon.theorem_chentsov_markov_monotonicity",
+      "signature": "(fisher_in fisher_out : Nat) (h_contractive : fisher_out ≤ fisher_in) : fisher_out ≤ fisher_in",
+      "result_class": "U-ALG",
+      "axioms": [],
+      "scope_note": "Implicación identidad: recibe h_contractive : fisher_out ≤ fisher_in como hipótesis y la devuelve directamente (exact h_contractive); no define un canal de Markov ni demuestra el teorema de Chentsov."
+    },
+    {
+      "id": "#045",
+      "index": 45,
+      "file": "Babylon.lean",
+      "line": 273,
+      "kind": "theorem",
+      "name": "theorem_agent_cheap_talk_rejection",
+      "qualified_name": "Babylon.theorem_agent_cheap_talk_rejection",
+      "signature": "(reasoning_len payload_len ratio_max budget budget_max : Nat) (h_budget : ¬ (budget > budget_max)) (h_cheap : (reasoning_len > 100 && (reasoning_len / effective_payload payload_len > ratio_max)) = true) : evaluate_agent_intent reasoning_len payload_len ratio_max budget budget_max = AgentIntentVerdict.RejectedCheapTalk (reasoning_len / effective_payload payload_len)",
+      "result_class": "U-ALG",
+      "axioms": [
+        "propext"
+      ],
+      "scope_note": "Selecciona la rama RejectedCheapTalk de evaluate_agent_intent bajo las guardas booleanas de presupuesto y ratio; clasificador aritmético de longitudes, no detector semántico de confabulación."
+    },
+    {
+      "id": "#046",
+      "index": 46,
+      "file": "Babylon.lean",
+      "line": 282,
+      "kind": "theorem",
+      "name": "theorem_agent_finite_horizon",
+      "qualified_name": "Babylon.theorem_agent_finite_horizon",
+      "signature": "(total_energy step_cost : Nat) : (total_energy / step_cost) * step_cost ≤ total_energy",
+      "result_class": "U-ALG",
+      "axioms": [
+        "propext"
+      ],
+      "scope_note": "Desigualdad estándar de división entera en Nat ((total_energy / step_cost) * step_cost ≤ total_energy), válida incluso para step_cost = 0; no modela una relación de paso ni demuestra terminación."
+    },
+    {
+      "id": "#047",
+      "index": 47,
+      "file": "Babylon.lean",
+      "line": 296,
+      "kind": "theorem",
+      "name": "theorem_ffi_semantic_isomorphism",
+      "qualified_name": "Babylon.theorem_ffi_semantic_isomorphism",
+      "signature": "(s1 f1 s2 f2 : Nat) (h_f1 : f1 < FRACTION_BASE) (h_f2 : f2 < FRACTION_BASE) : (ffi_sexa_add_model s1 f1 s2 f2).2 = (add_tick60 ⟨s1, f1, h_f1⟩ ⟨s2, f2, h_f2⟩).sexa_fraction",
+      "result_class": "U-ALG",
+      "axioms": [],
+      "scope_note": "Igualdad de la segunda componente entre dos funciones puras en Lean (ffi_sexa_add_model y add_tick60); no invoca código C externo ni verifica ABI o punteros FFI."
+    },
+    {
+      "id": "#048",
+      "index": 48,
+      "file": "Babylon.lean",
+      "line": 320,
+      "kind": "theorem",
+      "name": "theorem_repl_closure",
+      "qualified_name": "Babylon.theorem_repl_closure",
+      "signature": "(steps : Nat) (s : ReplSession) : (run_repl_steps steps s).hot_manifest_bytes = HOT_MEMORY_LIMIT",
+      "result_class": "U-IND",
+      "axioms": [],
+      "scope_note": "Inducción sobre N pasos de run_repl_steps mostrando que el campo hot_manifest_bytes del registro ReplSession permanece igual a la constante 64."
+    },
+    {
+      "id": "#049",
+      "index": 49,
+      "file": "Babylon.lean",
+      "line": 341,
+      "kind": "theorem",
+      "name": "theorem_causal_light_cone_preservation",
+      "qualified_name": "Babylon.theorem_causal_light_cone_preservation",
+      "signature": "(e : CausalEdge) : e.from_ts < e.to_ts",
+      "result_class": "U-ALG",
+      "axioms": [],
+      "scope_note": "Extrae el campo de orden estricto h_causal : from_ts < to_ts exigido al construir CausalEdge."
+    },
+    {
+      "id": "#050",
+      "index": 50,
+      "file": "Babylon.lean",
+      "line": 346,
+      "kind": "theorem",
+      "name": "theorem_concurrent_wave_independence",
+      "qualified_name": "Babylon.theorem_concurrent_wave_independence",
+      "signature": "(stage_u stage_v : Nat) (h_same_wave : stage_u = stage_v) (h_interfering : stage_u < stage_v) : False",
+      "result_class": "U-ALG",
+      "axioms": [],
+      "scope_note": "Contradicción aritmética elemental entre las hipótesis simultáneas stage_u = stage_v y stage_u < stage_v; no modela memoria compartida ni ausencia de carreras en hilos reales."
+    },
+    {
+      "id": "#051",
+      "index": 51,
+      "file": "Babylon.lean",
+      "line": 375,
+      "kind": "theorem",
+      "name": "b60_small_step_confluence",
+      "qualified_name": "Babylon.b60_small_step_confluence",
+      "signature": "(s s1 s2 : ReplSession) (h1 : SmallStep s s1) (h2 : SmallStep s s2) : s1 = s2 ∨ (∃ s3, SmallStep s1 s3 ∧ SmallStep s2 s3)",
+      "result_class": "U-IND",
+      "axioms": [],
+      "scope_note": "Propiedad de confluencia (diamante) para la relación funcional determinista SmallStep (cuyo paso es único por construcción sobre ReplSession)."
+    },
+    {
+      "id": "#052",
+      "index": 52,
+      "file": "Babylon.lean",
+      "line": 437,
+      "kind": "theorem",
+      "name": "theorem_toponym_stratum_retraction",
+      "qualified_name": "Babylon.theorem_toponym_stratum_retraction",
+      "signature": "(lvl : EscalationStratum) : toponymToStratum (stratumToToponym lvl) = some lvl",
+      "result_class": "U-ALG",
+      "axioms": [],
+      "scope_note": "Retracción finita por casos sobre los 4 constructores de EscalationStratum (toponymToStratum ∘ stratumToToponym = some)."
+    },
+    {
+      "id": "#053",
+      "index": 53,
+      "file": "Babylon.lean",
+      "line": 451,
+      "kind": "theorem",
+      "name": "theorem_parasitic_dir_quotient_invariance",
+      "qualified_name": "Babylon.theorem_parasitic_dir_quotient_invariance",
+      "signature": "(lvl : EscalationStratum) (r : PrivilegeRing) (d1 d2 : Nat) : triadCausalQuotient ⟨lvl, r, d1⟩ = triadCausalQuotient ⟨lvl, r, d2⟩",
+      "result_class": "U-ALG",
+      "axioms": [],
+      "scope_note": "Invarianza por proyección: triadCausalQuotient ignora el tercer campo parasitic_dirs_count del registro TriadTopologyState."
+    },
+    {
+      "id": "#054",
+      "index": 54,
+      "file": "BabylonAeonChain.lean",
+      "line": 1520,
+      "kind": "theorem",
+      "name": "aeon_0_step",
+      "qualified_name": "B60.Ledger.aeon_0_step",
+      "signature": ": runAeon (some { seq := 0, writer := none }) aeon_0_events = some { seq := 1000, writer := none }",
+      "result_class": "I-DEC",
+      "axioms": [],
+      "scope_note": "Comprobación cerrada sobre el fragmento literal aeon_0_events (1.500 eventos, seq 0 → 1000)."
+    },
+    {
+      "id": "#055",
+      "index": 55,
+      "file": "BabylonAeonChain.lean",
+      "line": 3027,
+      "kind": "theorem",
+      "name": "aeon_1_step",
+      "qualified_name": "B60.Ledger.aeon_1_step",
+      "signature": ": runAeon (some { seq := 1000, writer := none }) aeon_1_events = some { seq := 2000, writer := none }",
+      "result_class": "I-DEC",
+      "axioms": [],
+      "scope_note": "Comprobación cerrada sobre el fragmento literal aeon_1_events (1.500 eventos, seq 1000 → 2000)."
+    },
+    {
+      "id": "#056",
+      "index": 56,
+      "file": "BabylonAeonChain.lean",
+      "line": 4534,
+      "kind": "theorem",
+      "name": "aeon_2_step",
+      "qualified_name": "B60.Ledger.aeon_2_step",
+      "signature": ": runAeon (some { seq := 2000, writer := none }) aeon_2_events = some { seq := 3000, writer := none }",
+      "result_class": "I-DEC",
+      "axioms": [],
+      "scope_note": "Comprobación cerrada sobre el fragmento literal aeon_2_events (1.500 eventos, seq 2000 → 3000)."
+    },
+    {
+      "id": "#057",
+      "index": 57,
+      "file": "BabylonAeonChain.lean",
+      "line": 6041,
+      "kind": "theorem",
+      "name": "aeon_3_step",
+      "qualified_name": "B60.Ledger.aeon_3_step",
+      "signature": ": runAeon (some { seq := 3000, writer := none }) aeon_3_events = some { seq := 4000, writer := none }",
+      "result_class": "I-DEC",
+      "axioms": [],
+      "scope_note": "Comprobación cerrada sobre el fragmento literal aeon_3_events (1.500 eventos, seq 3000 → 4000)."
+    },
+    {
+      "id": "#058",
+      "index": 58,
+      "file": "BabylonAeonChain.lean",
+      "line": 7548,
+      "kind": "theorem",
+      "name": "aeon_4_step",
+      "qualified_name": "B60.Ledger.aeon_4_step",
+      "signature": ": runAeon (some { seq := 4000, writer := none }) aeon_4_events = some { seq := 5000, writer := none }",
+      "result_class": "I-DEC",
+      "axioms": [],
+      "scope_note": "Comprobación cerrada sobre el fragmento literal aeon_4_events (1.500 eventos, seq 4000 → 5000)."
+    },
+    {
+      "id": "#059",
+      "index": 59,
+      "file": "BabylonAeonStress.lean",
+      "line": 1518,
+      "kind": "theorem",
+      "name": "aeon_valid",
+      "qualified_name": "B60.Ledger.aeon_valid",
+      "signature": ": runAeon (some { seq := 49000, writer := none }) aeon_events = some { seq := 50000, writer := none }",
+      "result_class": "I-DEC",
+      "axioms": [],
+      "scope_note": "Comprobación cerrada sobre la lista literal aeon_events de 1.500 eventos (seq 49000 → 50000)."
+    },
+    {
+      "id": "#060",
+      "index": 60,
+      "file": "BabylonAutoTrace.lean",
+      "line": 21,
+      "kind": "theorem",
+      "name": "trace_is_paradox_free_auto",
+      "qualified_name": "B60.Ledger.trace_is_paradox_free_auto",
+      "signature": ": validateTrace auto_execution_trace = true",
+      "result_class": "NEG-FIXTURE",
+      "axioms": "N/A (negative fixture: expected decide rejection)",
+      "scope_note": "Fixture negativo de rechazo semántico esperado (AUDIT_LEAN_SCOPE_2026 §8): la lista auto_execution_trace contiene una transición inválida y decide refuta la igualdad = true."
+    },
+    {
+      "id": "#061",
+      "index": 61,
+      "file": "BabylonL0Ledger.lean",
+      "line": 90,
+      "kind": "theorem",
+      "name": "genesis_satisfies_invariant",
+      "qualified_name": "Babylon60.L0Ledger.genesis_satisfies_invariant",
+      "signature": "(initialFacts : List AnchoredFact) : L0StateInvariant { facts := initialFacts, entries := [], headTick := 0, headMerkle := 0 }",
+      "result_class": "U-ALG",
+      "axioms": [],
+      "scope_note": "El estado inicial con entries = [] satisface vacuamente L0StateInvariant por ausencia de elementos en la lista."
+    },
+    {
+      "id": "#062",
+      "index": 62,
+      "file": "BabylonL0Ledger.lean",
+      "line": 100,
+      "kind": "theorem",
+      "name": "append_preserves_l0_invariant",
+      "qualified_name": "Babylon60.L0Ledger.append_preserves_l0_invariant",
+      "signature": "(db : L0Database) (newEntry : LedgerEntry) (h_inv : L0StateInvariant db) (h_trig : TriggerAllowsInsert db newEntry) : L0StateInvariant (appendEntry db newEntry)",
+      "result_class": "U-IND",
+      "axioms": [
+        "propext"
+      ],
+      "scope_note": "Preservación de L0StateInvariant al prepender una entrada que cumple TriggerAllowsInsert sobre una lista que ya cumplía el invariante."
+    },
+    {
+      "id": "#063",
+      "index": 63,
+      "file": "BabylonL0Ledger.lean",
+      "line": 117,
+      "kind": "theorem",
+      "name": "append_strictly_increases_tick",
+      "qualified_name": "Babylon60.L0Ledger.append_strictly_increases_tick",
+      "signature": "(db : L0Database) (newEntry : LedgerEntry) (h_trig : TriggerAllowsInsert db newEntry) : db.headTick < (appendEntry db newEntry).headTick",
+      "result_class": "U-ALG",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "scope_note": "Incremento estricto de headTick (db.headTick < (appendEntry db newEntry).headTick) bajo la precondición newEntry.logicalTick = db.headTick + 1 de TriggerAllowsInsert."
+    },
+    {
+      "id": "#064",
+      "index": 64,
+      "file": "BabylonL0Ledger.lean",
+      "line": 132,
+      "kind": "theorem",
+      "name": "merkle_root_uniqueness",
+      "qualified_name": "Babylon60.L0Ledger.merkle_root_uniqueness",
+      "signature": "(db : L0Database) (e1 e2 : LedgerEntry) (h1 : TriggerAllowsInsert db e1) (h2 : TriggerAllowsInsert db e2) (h_eq : (appendEntry db e1).entries = (appendEntry db e2).entries) : e1.logicalTick = e2.logicalTick ∧ e1.prevMerkleRoot = e2.prevMerkleRoot ∧ e1 = e2",
+      "result_class": "U-ALG",
+      "axioms": [],
+      "scope_note": "Inyectividad de inserción y alineación de paso bajo TriggerAllowsInsert: deduce e1.logicalTick = e2.logicalTick, e1.prevMerkleRoot = e2.prevMerkleRoot y e1 = e2 cuando (appendEntry db e1).entries = (appendEntry db e2).entries; no modela funciones hash criptográficas ni resistencia a colisiones."
+    },
+    {
+      "id": "#065",
+      "index": 65,
+      "file": "BabylonL0Ledger.lean",
+      "line": 173,
+      "kind": "theorem",
+      "name": "l0_trigger_inhabited",
+      "qualified_name": "Babylon60.L0Ledger.l0_trigger_inhabited",
+      "signature": ": ∃ (db : L0Database) (e : LedgerEntry), TriggerAllowsInsert db e",
+      "result_class": "W-EX",
+      "axioms": [],
+      "scope_note": "Testigo constructivo de habitabilidad (AP-10) para TriggerAllowsInsert sobre witnessDbL0 y witnessEntryL0."
+    },
+    {
+      "id": "#066",
+      "index": 66,
+      "file": "BabylonStressCorrupt.lean",
+      "line": 1522,
+      "kind": "theorem",
+      "name": "trace_is_paradox_free_auto",
+      "qualified_name": "B60.Ledger.trace_is_paradox_free_auto",
+      "signature": ": validateTrace auto_execution_trace = true",
+      "result_class": "NEG-FIXTURE",
+      "axioms": "N/A (negative fixture: expected decide rejection)",
+      "scope_note": "Fixture negativo de rechazo semántico esperado (AUDIT_LEAN_SCOPE_2026 §8): lista de 1.501 eventos con lectura impar final donde decide rechaza la igualdad = true."
+    },
+    {
+      "id": "#067",
+      "index": 67,
+      "file": "BabylonStressTrace.lean",
+      "line": 6019,
+      "kind": "theorem",
+      "name": "trace_is_paradox_free_auto",
+      "qualified_name": "B60.Ledger.trace_is_paradox_free_auto",
+      "signature": ": validateTrace auto_execution_trace = true",
+      "result_class": "I-DEC",
+      "axioms": [],
+      "scope_note": "Comprobación cerrada por decide sobre una traza literal válida de 6.000 eventos en BabylonStressTrace.lean."
+    },
+    {
+      "id": "#068",
+      "index": 68,
+      "file": "BabylonTrace.lean",
+      "line": 91,
+      "kind": "theorem",
+      "name": "trace_is_paradox_free",
+      "qualified_name": "B60.Ledger.trace_is_paradox_free",
+      "signature": ": validateTrace trace_perfect = true",
+      "result_class": "I-DEC",
+      "axioms": [],
+      "scope_note": "Comprobación cerrada por decide sobre la traza literal trace_perfect de 5 eventos en BabylonTrace.lean."
+    },
+    {
+      "id": "#069",
+      "index": 69,
+      "file": "BabylonTrace.lean",
+      "line": 109,
+      "kind": "theorem",
+      "name": "step_read_even",
+      "qualified_name": "B60.Ledger.step_read_even",
+      "signature": "(s : LockState) (ev : Event) (next : LockState) : step s ev = some next → (ev.action = Action.read → ev.seq % 2 = 0)",
+      "result_class": "U-ALG",
+      "axioms": [
+        "propext"
+      ],
+      "scope_note": "Lema de un paso: si step s ev = some next y ev.action = Action.read, la secuencia declarada en el evento es par (ev.seq % 2 = 0)."
+    },
+    {
+      "id": "#070",
+      "index": 70,
+      "file": "BabylonTrace.lean",
+      "line": 129,
+      "kind": "theorem",
+      "name": "runAeon_reads_even",
+      "qualified_name": "B60.Ledger.runAeon_reads_even",
+      "signature": "(s : LockState) (trace : List Event) (finalState : LockState) : runAeon (some s) trace = some finalState → TraceReadsEven trace",
+      "result_class": "U-IND",
+      "axioms": [
+        "propext"
+      ],
+      "scope_note": "Lema inductivo sobre listas de eventos: si runAeon (some s) trace = some finalState, todo evento de lectura en trace declara secuencia par (TraceReadsEven trace)."
+    },
+    {
+      "id": "#071",
+      "index": 71,
+      "file": "BabylonTrace.lean",
+      "line": 156,
+      "kind": "theorem",
+      "name": "no_torn_reads_universal",
+      "qualified_name": "B60.Ledger.no_torn_reads_universal",
+      "signature": "(trace : List Event) : validateTrace trace = true → TraceReadsEven trace",
+      "result_class": "U-IND",
+      "axioms": [
+        "propext"
+      ],
+      "scope_note": "Propiedad inductiva universal sobre el modelo de eventos: validateTrace trace = true → TraceReadsEven trace. Certifica paridad de las secuencias declaradas en eventos read; no modela el payload leído ni orden de memoria físico en Rust."
+    },
+    {
+      "id": "#072",
+      "index": 72,
+      "file": "BabylonTrace.lean",
+      "line": 223,
+      "kind": "theorem",
+      "name": "no_heuristic_override_on_veto",
+      "qualified_name": "B60.Ledger.no_heuristic_override_on_veto",
+      "signature": "(e : BabylonEvent) (h_veto : e.formalVeto = true) : ¬ ValidBabylonTransition e",
+      "result_class": "U-ALG",
+      "axioms": [],
+      "scope_note": "Rechazo de transición en BabylonEvent cuando el campo booleano formalVeto = true."
+    },
+    {
+      "id": "#073",
+      "index": 73,
+      "file": "BabylonTrace.lean",
+      "line": 231,
+      "kind": "theorem",
+      "name": "no_commit_without_witness",
+      "qualified_name": "B60.Ledger.no_commit_without_witness",
+      "signature": "(e : BabylonEvent) (h_nw : e.formalWitnessOk = false) : ¬ ValidBabylonTransition e",
+      "result_class": "U-ALG",
+      "axioms": [],
+      "scope_note": "Rechazo de transición en BabylonEvent cuando el campo booleano formalWitnessOk = false."
+    },
+    {
+      "id": "#074",
+      "index": 74,
+      "file": "BabylonTrace.lean",
+      "line": 239,
+      "kind": "theorem",
+      "name": "expired_lease_rejected",
+      "qualified_name": "B60.Ledger.expired_lease_rejected",
+      "signature": "(e : BabylonEvent) (h_exp : e.leaseEpoch < e.kernelEpoch) : ¬ ValidBabylonTransition e",
+      "result_class": "U-ALG",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Rechazo de transición en BabylonEvent cuando leaseEpoch < kernelEpoch."
+    },
+    {
+      "id": "#075",
+      "index": 75,
+      "file": "BabylonTrace.lean",
+      "line": 246,
+      "kind": "theorem",
+      "name": "fl011_seqlock_integrity",
+      "qualified_name": "B60.Ledger.fl011_seqlock_integrity",
+      "signature": "(e : BabylonEvent) (h_valid : ValidBabylonTransition e) : e.seqStart % 2 = 0 ∧ e.seqStart = e.seqEnd",
+      "result_class": "U-ALG",
+      "axioms": [],
+      "scope_note": "Extrae las conjunciones e.seqStart % 2 = 0 y e.seqStart = e.seqEnd de ValidBabylonTransition e."
+    },
+    {
+      "id": "#076",
+      "index": 76,
+      "file": "BabylonTrace.lean",
+      "line": 252,
+      "kind": "theorem",
+      "name": "torn_seq_rejected",
+      "qualified_name": "B60.Ledger.torn_seq_rejected",
+      "signature": "(e : BabylonEvent) (h_torn : e.seqStart ≠ e.seqEnd) : ¬ ValidBabylonTransition e",
+      "result_class": "U-ALG",
+      "axioms": [],
+      "scope_note": "Rechazo de transición en BabylonEvent cuando seqStart ≠ seqEnd (corolario directo de #075)."
+    },
+    {
+      "id": "#077",
+      "index": 77,
+      "file": "BabylonTrace.lean",
+      "line": 262,
+      "kind": "theorem",
+      "name": "trace_step_ok_valid",
+      "qualified_name": "B60.Ledger.trace_step_ok_valid",
+      "signature": ": ValidBabylonTransition trace_step_ok",
+      "result_class": "I-DEC",
+      "axioms": [],
+      "scope_note": "Comprobación cerrada por decide de ValidBabylonTransition sobre el registro concreto trace_step_ok."
+    },
+    {
+      "id": "#078",
+      "index": 78,
+      "file": "BabylonTrace.lean",
+      "line": 307,
+      "kind": "theorem",
+      "name": "fl018_missing_critical_check_rejected",
+      "qualified_name": "B60.Ledger.fl018_missing_critical_check_rejected",
+      "signature": "(s : CompositeGateState) (h_incomplete : (s.verifiedCriticalMask &&& s.requiredCriticalMask) ≠ s.requiredCriticalMask) : ¬ ValidCompositeAcceptance s",
+      "result_class": "U-ALG",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Rechazo en CompositeGateState (BitVec 64) cuando (verifiedCriticalMask &&& requiredCriticalMask) ≠ requiredCriticalMask."
+    },
+    {
+      "id": "#079",
+      "index": 79,
+      "file": "BabylonTrace.lean",
+      "line": 313,
+      "kind": "theorem",
+      "name": "fl018_artifact_hash_mismatch_rejected",
+      "qualified_name": "B60.Ledger.fl018_artifact_hash_mismatch_rejected",
+      "signature": "(s : CompositeGateState) (h_diff : s.acceptedArtifactHash ≠ s.verifiedArtifactHash) : ¬ ValidCompositeAcceptance s",
+      "result_class": "U-ALG",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Rechazo en CompositeGateState cuando acceptedArtifactHash ≠ verifiedArtifactHash."
+    },
+    {
+      "id": "#080",
+      "index": 80,
+      "file": "BabylonTrace.lean",
+      "line": 319,
+      "kind": "theorem",
+      "name": "fl018_stale_epoch_rejected",
+      "qualified_name": "B60.Ledger.fl018_stale_epoch_rejected",
+      "signature": "(s : CompositeGateState) (h_stale : ¬ (s.minPolicyEpoch ≤ s.evidenceEpoch)) : ¬ ValidCompositeAcceptance s",
+      "result_class": "U-ALG",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Rechazo en CompositeGateState cuando ¬(minPolicyEpoch ≤ evidenceEpoch)."
+    },
+    {
+      "id": "#081",
+      "index": 81,
+      "file": "BabylonTrace.lean",
+      "line": 325,
+      "kind": "theorem",
+      "name": "fl026_zero_threshold_rejected",
+      "qualified_name": "B60.Ledger.fl026_zero_threshold_rejected",
+      "signature": "(s : CompositeGateState) (h_zero : s.quorumThreshold = 0#64) : ¬ ValidCompositeAcceptance s",
+      "result_class": "U-ALG",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Rechazo en CompositeGateState cuando quorumThreshold = 0#64."
+    },
+    {
+      "id": "#082",
+      "index": 82,
+      "file": "BabylonTrace.lean",
+      "line": 344,
+      "kind": "theorem",
+      "name": "composite_gate_ok_valid",
+      "qualified_name": "B60.Ledger.composite_gate_ok_valid",
+      "signature": ": ValidCompositeAcceptance composite_gate_ok",
+      "result_class": "I-DEC",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Comprobación cerrada por decide de ValidCompositeAcceptance sobre el estado concreto composite_gate_ok."
+    },
+    {
+      "id": "#083",
+      "index": 83,
+      "file": "BabylonTrace.lean",
+      "line": 347,
+      "kind": "theorem",
+      "name": "fl018_composite_acceptance_inhabited",
+      "qualified_name": "B60.Ledger.fl018_composite_acceptance_inhabited",
+      "signature": ": ∃ s : CompositeGateState, ValidCompositeAcceptance s",
+      "result_class": "W-EX",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Testigo de habitabilidad (AP-10) para ValidCompositeAcceptance usando composite_gate_ok."
+    },
+    {
+      "id": "#084",
+      "index": 84,
+      "file": "BabylonTrace.lean",
+      "line": 354,
+      "kind": "theorem",
+      "name": "composite_gate_ple_91pct_rejected",
+      "qualified_name": "B60.Ledger.composite_gate_ple_91pct_rejected",
+      "signature": ": ¬ ValidCompositeAcceptance composite_gate_ple_91pct_fail",
+      "result_class": "I-DEC",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Comprobación cerrada por decide que rechaza el estado concreto composite_gate_ple_91pct_fail (máscara 0x3FF vs 0x7FF)."
+    },
+    {
+      "id": "#085",
+      "index": 85,
+      "file": "C5Affine.lean",
+      "line": 21,
+      "kind": "theorem",
+      "name": "no_double_free",
+      "qualified_name": "no_double_free",
+      "signature": "(r : AffineResource) (h : r = AffineResource.consumed) : consume r = none",
+      "result_class": "U-ALG",
+      "axioms": [
+        "propext"
+      ],
+      "scope_note": "Evaluación de consume sobre el constructor AffineResource.consumed devolviendo none; tipo inductivo puro y duplicable en Lean, no sistema de tipos lineales ni verificador de heap/aliasing."
+    },
+    {
+      "id": "#086",
+      "index": 86,
+      "file": "C5PortHamiltonian.lean",
+      "line": 31,
+      "kind": "theorem",
+      "name": "skew_symmetric_circulation_zero",
+      "qualified_name": "C5REAL.Proof.skew_symmetric_circulation_zero",
+      "signature": "(x y : Int) : x * (-y) + y * x = 0",
+      "result_class": "U-ALG",
+      "axioms": [
+        "propext"
+      ],
+      "scope_note": "Identidad algebraica en el anillo Int: x * (-y) + y * x = 0."
+    },
+    {
+      "id": "#087",
+      "index": 87,
+      "file": "C5PortHamiltonian.lean",
+      "line": 39,
+      "kind": "theorem",
+      "name": "lyapunov_monotonic_dissipation_verified",
+      "qualified_name": "C5REAL.Proof.lyapunov_monotonic_dissipation_verified",
+      "signature": ": let s0 : LatentFixed2D := { x := 1000, y := 1000 } let s1 := stepPHLD s0 20 doubleHamiltonian s1 ≤ doubleHamiltonian s0",
+      "result_class": "I-DEC",
+      "axioms": [],
+      "scope_note": "Comprobación cerrada por decide de un único paso discreto stepPHLD desde s0 = (1000, 1000) con r_percent = 20; no demuestra monotonía global de Lyapunov (existe contraejemplo en (0, 1) documentado en AUDIT_LEAN_SCOPE_2026 §5)."
+    },
+    {
+      "id": "#088",
+      "index": 88,
+      "file": "C5PortHamiltonian.lean",
+      "line": 49,
+      "kind": "theorem",
+      "name": "kudurru_64_alignment_verified",
+      "qualified_name": "C5REAL.Proof.kudurru_64_alignment_verified",
+      "signature": ": isAligned64 0 = true ∧ isAligned64 64 = true ∧ isAligned64 128 = true",
+      "result_class": "I-DEC",
+      "axioms": [],
+      "scope_note": "Comprobación cerrada por decide de que 0, 64 y 128 tienen resto 0 módulo 64; no verifica alineamiento físico del asignador en Rust."
+    },
+    {
+      "id": "#089",
+      "index": 89,
+      "file": "CanonicalEnvelope.lean",
+      "line": 56,
+      "kind": "theorem",
+      "name": "decode_encode",
+      "qualified_name": "B60.CBOR.decode_encode",
+      "signature": "(c : Codec α) (x : α) (h : c.valid x) : decode c (c.encode x) = some x",
+      "result_class": "U-CODEC",
+      "axioms": [
+        "propext"
+      ],
+      "scope_note": "Roundtrip universal de decodificación tras codificación (`decode (encode x) = some x`, o con sufijo arbitrario en `decodeFrom`) bajo `.valid x` en `CanonicalEnvelope.lean` (`decode_encode`); no certifica por sí sola autenticidad criptográfica de claves ni frescura anti-replay en runtime."
+    },
+    {
+      "id": "#090",
+      "index": 90,
+      "file": "CanonicalEnvelope.lean",
+      "line": 62,
+      "kind": "theorem",
+      "name": "encode_decode",
+      "qualified_name": "B60.CBOR.encode_decode",
+      "signature": "(c : Codec α) (input : Bytes) (x : α) (h : decode c input = some x) : c.encode x = input",
+      "result_class": "U-CODEC",
+      "axioms": [
+        "propext"
+      ],
+      "scope_note": "Re-codificación canónica determinista (`decode wire = some x → encode x = wire`) que excluye maleabilidad de representación en el modelo en `CanonicalEnvelope.lean` (`encode_decode`); no certifica por sí sola autenticidad criptográfica de claves ni frescura anti-replay en runtime."
+    },
+    {
+      "id": "#091",
+      "index": 91,
+      "file": "CanonicalEnvelope.lean",
+      "line": 72,
+      "kind": "theorem",
+      "name": "encode_injective",
+      "qualified_name": "B60.CBOR.encode_injective",
+      "signature": "(c : Codec α) (x y : α) (hx : c.valid x) (hy : c.valid y) (he : c.encode x = c.encode y) : x = y",
+      "result_class": "U-CODEC",
+      "axioms": [
+        "propext"
+      ],
+      "scope_note": "Inyectividad universal del codificador sobre el subconjunto de entradas que satisfacen el predicado `.valid` en `CanonicalEnvelope.lean` (`encode_injective`); no certifica por sí sola autenticidad criptográfica de claves ni frescura anti-replay en runtime."
+    },
+    {
+      "id": "#092",
+      "index": 92,
+      "file": "CanonicalEnvelope.lean",
+      "line": 83,
+      "kind": "theorem",
+      "name": "decodeChecked_encode",
+      "qualified_name": "B60.CBOR.decodeChecked_encode",
+      "signature": "(c : Codec α) [DecidablePred c.valid] (x : α) (h : c.valid x) : decodeChecked c (c.encode x) = some x",
+      "result_class": "U-CODEC",
+      "axioms": [
+        "propext"
+      ],
+      "scope_note": "Propiedad universal de composición/delimitación de codecs sobre dominios válidos explícitos en `CanonicalEnvelope.lean` (`decodeChecked_encode`); no certifica por sí sola autenticidad criptográfica de claves ni frescura anti-replay en runtime."
+    },
+    {
+      "id": "#093",
+      "index": 93,
+      "file": "CanonicalEnvelope.lean",
+      "line": 87,
+      "kind": "theorem",
+      "name": "decodeChecked_valid",
+      "qualified_name": "B60.CBOR.decodeChecked_valid",
+      "signature": "(c : Codec α) [DecidablePred c.valid] (input : Bytes) (x : α) (h : decodeChecked c input = some x) : c.valid x",
+      "result_class": "U-CODEC",
+      "axioms": [
+        "propext"
+      ],
+      "scope_note": "Soundness del decodificador comprobado (`decodeChecked wire = some x → valid x`) sobre el dominio del codec en `CanonicalEnvelope.lean` (`decodeChecked_valid`); no certifica por sí sola autenticidad criptográfica de claves ni frescura anti-replay en runtime."
+    },
+    {
+      "id": "#094",
+      "index": 94,
+      "file": "CanonicalEnvelope.lean",
+      "line": 99,
+      "kind": "theorem",
+      "name": "encode_decodeChecked",
+      "qualified_name": "B60.CBOR.encode_decodeChecked",
+      "signature": "(c : Codec α) [DecidablePred c.valid] (input : Bytes) (x : α) (h : decodeChecked c input = some x) : c.encode x = input",
+      "result_class": "U-CODEC",
+      "axioms": [
+        "propext"
+      ],
+      "scope_note": "Re-codificación canónica determinista (`decode wire = some x → encode x = wire`) que excluye maleabilidad de representación en el modelo en `CanonicalEnvelope.lean` (`encode_decodeChecked`); no certifica por sí sola autenticidad criptográfica de claves ni frescura anti-replay en runtime."
+    },
+    {
+      "id": "#095",
+      "index": 95,
+      "file": "CanonicalEnvelope.lean",
+      "line": 185,
+      "kind": "theorem",
+      "name": "parseMany_encodeMany",
+      "qualified_name": "B60.CBOR.parseMany_encodeMany",
+      "signature": "(c : Codec α) (xs : List α) (h : ∀ x ∈ xs, c.valid x) (suffix : Bytes) : parseMany c xs.length (encodeMany c xs ++ suffix) = some (xs, suffix)",
+      "result_class": "U-CODEC",
+      "axioms": [
+        "propext"
+      ],
+      "scope_note": "Propiedad universal de composición/delimitación de codecs sobre dominios válidos explícitos en `CanonicalEnvelope.lean` (`parseMany_encodeMany`); no certifica por sí sola autenticidad criptográfica de claves ni frescura anti-replay en runtime."
+    },
+    {
+      "id": "#096",
+      "index": 96,
+      "file": "CanonicalHead.lean",
+      "line": 24,
+      "kind": "theorem",
+      "name": "decodeBE_encodeBE_suffix",
+      "qualified_name": "B60.CBOR.decodeBE_encodeBE_suffix",
+      "signature": "(k n : Nat) (suffix : List UInt8) (hn : n < 256^k) : decodeBE k (encodeBE k n ++ suffix) = some (n, suffix)",
+      "result_class": "U-CODEC",
+      "axioms": [
+        "propext"
+      ],
+      "scope_note": "Propiedad universal de composición/delimitación de codecs sobre dominios válidos explícitos en `CanonicalHead.lean` (`decodeBE_encodeBE_suffix`); no certifica por sí sola autenticidad criptográfica de claves ni frescura anti-replay en runtime."
+    },
+    {
+      "id": "#097",
+      "index": 97,
+      "file": "CanonicalHead.lean",
+      "line": 60,
+      "kind": "theorem",
+      "name": "decodePayload_encodeBE",
+      "qualified_name": "B60.CBOR.decodePayload_encodeBE",
+      "signature": "(major width minimum n : Nat) (suffix : List UInt8) (hn : n < 256^width) (hmin : ¬ n < minimum) : decodePayload major width minimum (encodeBE width n ++ suffix) = some (major, n, suffix)",
+      "result_class": "U-CODEC",
+      "axioms": [
+        "propext"
+      ],
+      "scope_note": "Propiedad universal de composición/delimitación de codecs sobre dominios válidos explícitos en `CanonicalHead.lean` (`decodePayload_encodeBE`); no certifica por sí sola autenticidad criptográfica de claves ni frescura anti-replay en runtime."
+    },
+    {
+      "id": "#098",
+      "index": 98,
+      "file": "CanonicalHead.lean",
+      "line": 79,
+      "kind": "theorem",
+      "name": "headByte_parts",
+      "qualified_name": "B60.CBOR.headByte_parts",
+      "signature": "(major info : Nat) (hm : major < 8) (hi : info < 32) : (headByte major info).toNat / 32 = major ∧ (headByte major info).toNat % 32 = info",
+      "result_class": "U-CODEC",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Propiedad universal de composición/delimitación de codecs sobre dominios válidos explícitos en `CanonicalHead.lean` (`headByte_parts`); no certifica por sí sola autenticidad criptográfica de claves ni frescura anti-replay en runtime."
+    },
+    {
+      "id": "#099",
+      "index": 99,
+      "file": "CanonicalHead.lean",
+      "line": 89,
+      "kind": "theorem",
+      "name": "decodeHead_encodeHead_suffix",
+      "qualified_name": "B60.CBOR.decodeHead_encodeHead_suffix",
+      "signature": "(major n : Nat) (suffix : List UInt8) (hm : major < 8) (hn : n < 2^64) : decodeHead (encodeHead major n ++ suffix) = some (major, n, suffix)",
+      "result_class": "U-CODEC",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Propiedad universal de composición/delimitación de codecs sobre dominios válidos explícitos en `CanonicalHead.lean` (`decodeHead_encodeHead_suffix`); no certifica por sí sola autenticidad criptográfica de claves ni frescura anti-replay en runtime."
+    },
+    {
+      "id": "#100",
+      "index": 100,
+      "file": "Destiladora_838c463da193b48f.lean",
+      "line": 22,
+      "kind": "theorem",
+      "name": "thm_seqlock_mutation_odd",
+      "qualified_name": "B60.Destiladora.C_838c463da193b48f.thm_seqlock_mutation_odd",
+      "signature": "(k : Nat) : (seqlock_write_begin (2 * k)) % 2 = 1",
+      "result_class": "U-ALG",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Paridad impar ((2 * k + 1) % 2 = 1) de la función aritmética seqlock_write_begin sobre Nat."
+    },
+    {
+      "id": "#101",
+      "index": 101,
+      "file": "Destiladora_838c463da193b48f.lean",
+      "line": 27,
+      "kind": "theorem",
+      "name": "thm_seqlock_commit_even",
+      "qualified_name": "B60.Destiladora.C_838c463da193b48f.thm_seqlock_commit_even",
+      "signature": "(k : Nat) : (seqlock_write_commit (2 * k)) % 2 = 0",
+      "result_class": "U-ALG",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Paridad par ((2 * k + 2) % 2 = 0) de la función aritmética seqlock_write_commit sobre Nat."
+    },
+    {
+      "id": "#102",
+      "index": 102,
+      "file": "Destiladora_838c463da193b48f.lean",
+      "line": 63,
+      "kind": "theorem",
+      "name": "thm_reject_poisoned",
+      "qualified_name": "B60.Destiladora.C_838c463da193b48f.thm_reject_poisoned",
+      "signature": "(seq : Nat) (w : Option Nat) (ctx : FastPathContext) : evalFastPath { poisoned := true, seq := seq, writer := w } ctx = FastPathVerdict.Miss",
+      "result_class": "U-ALG",
+      "axioms": [],
+      "scope_note": "Si el campo booleano poisoned = true en SystemState, evalFastPath devuelve FastPathVerdict.Miss."
+    },
+    {
+      "id": "#103",
+      "index": 103,
+      "file": "Destiladora_838c463da193b48f.lean",
+      "line": 67,
+      "kind": "theorem",
+      "name": "thm_hit_exact_signature",
+      "qualified_name": "B60.Destiladora.C_838c463da193b48f.thm_hit_exact_signature",
+      "signature": ": evalFastPath { poisoned := false, seq := 0, writer := none } { astPrefix := expectedAstPrefix, filesCount := expectedFilesCount } = FastPathVerdict.Hit",
+      "result_class": "I-DEC",
+      "axioms": [],
+      "scope_note": "Comprobación cerrada de evalFastPath devolviendo Hit cuando astPrefix y filesCount coinciden con las constantes esperadas en estado no envenenado."
+    },
+    {
+      "id": "#104",
+      "index": 104,
+      "file": "Destiladora_838c463da193b48f.lean",
+      "line": 72,
+      "kind": "theorem",
+      "name": "thm_miss_bitflip_signature",
+      "qualified_name": "B60.Destiladora.C_838c463da193b48f.thm_miss_bitflip_signature",
+      "signature": ": evalFastPath { poisoned := false, seq := 0, writer := none } { astPrefix := expectedAstPrefix + 1, filesCount := expectedFilesCount } = FastPathVerdict.Miss",
+      "result_class": "I-DEC",
+      "axioms": [],
+      "scope_note": "Comprobación cerrada de evalFastPath devolviendo Miss cuando astPrefix difiere en +1 de la constante esperada."
+    },
+    {
+      "id": "#105",
+      "index": 105,
+      "file": "Destiladora_838c463da193b48f.lean",
+      "line": 93,
+      "kind": "theorem",
+      "name": "thm_invariant_838c463da193b48f_step",
+      "qualified_name": "B60.Destiladora.C_838c463da193b48f.thm_invariant_838c463da193b48f_step",
+      "signature": "(s : SystemState) (a : Action) (h_inv : invariant s) : invariant (transition s a)",
+      "result_class": "U-ALG",
+      "axioms": [
+        "propext"
+      ],
+      "scope_note": "Preservación en un paso del predicado invariant (s.poisoned = true ∨ s.seq % 2 = 0) por la función transition."
+    },
+    {
+      "id": "#106",
+      "index": 106,
+      "file": "Destiladora_838c463da193b48f.lean",
+      "line": 111,
+      "kind": "theorem",
+      "name": "thm_invariant_838c463da193b48f",
+      "qualified_name": "B60.Destiladora.C_838c463da193b48f.thm_invariant_838c463da193b48f",
+      "signature": "(s : SystemState) (trace : List Action) (h_inv : invariant s) : invariant (runTrace s trace)",
+      "result_class": "U-IND",
+      "axioms": [
+        "propext"
+      ],
+      "scope_note": "Preservación inductiva del predicado invariant a lo largo de cualquier lista finita de acciones en runTrace."
+    },
+    {
+      "id": "#107",
+      "index": 107,
+      "file": "ExampleSeqlockTrace.lean",
+      "line": 46,
+      "kind": "theorem",
+      "name": "inv_inhabited",
+      "qualified_name": "B60.ExampleSeqlockTrace.inv_inhabited",
+      "signature": ": ∃ trace, trace ≠ [] ∧ isValidTrace trace 0 = true",
+      "result_class": "W-EX",
+      "axioms": [
+        "propext"
+      ],
+      "scope_note": "Testigo constructivo de existencia de una traza no vacía validCycle aceptada por isValidTrace en aritmética BitVec 64/32."
+    },
+    {
+      "id": "#108",
+      "index": 108,
+      "file": "LarsaEquivocationSafety.lean",
+      "line": 25,
+      "kind": "theorem",
+      "name": "canonical_quorum_intersection",
+      "qualified_name": "LarsaEquivocationSafety.canonical_quorum_intersection",
+      "signature": "(f : Nat) : let q := quorum_threshold f let n := total_nodes f q + q - n = f + 1",
+      "result_class": "U-ALG",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Identidad aritmética en Nat: (2*f + 1) + (2*f + 1) - (3*f + 1) = f + 1; ingrediente aritmético de intersección de quórum, no prueba por sí sola cardinalidad de conjuntos finitos de votantes ni protocolo BFT completo."
+    },
+    {
+      "id": "#109",
+      "index": 109,
+      "file": "LarsaEquivocationSafety.lean",
+      "line": 39,
+      "kind": "theorem",
+      "name": "unilateral_expulsion_weakens_intersection",
+      "qualified_name": "LarsaEquivocationSafety.unilateral_expulsion_weakens_intersection",
+      "signature": "(f : Nat) (h_f : f ≥ 1) : let q_prime := 2 * f let n_prime := 3 * f q_prime + q_prime - n_prime = f",
+      "result_class": "U-ALG",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Identidad aritmética en Nat para f ≥ 1: 2*f + 2*f - 3*f = f."
+    },
+    {
+      "id": "#110",
+      "index": 110,
+      "file": "LarsaEquivocationSafety.lean",
+      "line": 67,
+      "kind": "theorem",
+      "name": "instance_inhabited",
+      "qualified_name": "LarsaEquivocationSafety.instance_inhabited",
+      "signature": ": ∃ inst : ConsensusInstance, inst.n = 4 ∧ inst.q = 3",
+      "result_class": "W-EX",
+      "axioms": [],
+      "scope_note": "Testigo de existencia de ConsensusInstance con n = 4 y q = 3 (para f = 1)."
+    },
+    {
+      "id": "#111",
+      "index": 111,
+      "file": "LarsaEquivocationSafety.lean",
+      "line": 78,
+      "kind": "theorem",
+      "name": "total_nodes_no_u64_overflow",
+      "qualified_name": "LarsaEquivocationSafety.total_nodes_no_u64_overflow",
+      "signature": "(f : Nat) (h_bound : f < 2 ^ 62) : 3 * f + 1 < 2 ^ 64",
+      "result_class": "U-ALG",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Cota aritmética universal sin overflow en 64 bits: para todo f < 2^62, 3 * f + 1 < 2^64."
+    },
+    {
+      "id": "#112",
+      "index": 112,
+      "file": "LarsaEquivocationSafety.lean",
+      "line": 86,
+      "kind": "theorem",
+      "name": "quorum_threshold_no_u64_overflow",
+      "qualified_name": "LarsaEquivocationSafety.quorum_threshold_no_u64_overflow",
+      "signature": "(f : Nat) (h_bound : f < 2 ^ 62) : 2 * f + 1 < 2 ^ 64",
+      "result_class": "U-ALG",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Cota aritmética universal sin overflow en 64 bits: para todo f < 2^62, 2 * f + 1 < 2^64."
+    },
+    {
+      "id": "#113",
+      "index": 113,
+      "file": "LarsaEquivocationSafety.lean",
+      "line": 94,
+      "kind": "theorem",
+      "name": "bounded_arithmetic_f1",
+      "qualified_name": "LarsaEquivocationSafety.bounded_arithmetic_f1",
+      "signature": ": total_nodes 1 < 2 ^ 64 ∧ quorum_threshold 1 < 2 ^ 64",
+      "result_class": "I-DEC",
+      "axioms": [],
+      "scope_note": "Comprobación cerrada por decide de las cotas < 2^64 para f = 1."
+    },
+    {
+      "id": "#114",
+      "index": 114,
+      "file": "LarsaEquivocationSafety.lean",
+      "line": 110,
+      "kind": "theorem",
+      "name": "verifiedQuorumInvariant",
+      "qualified_name": "LarsaEquivocationSafety.verifiedQuorumInvariant",
+      "signature": ": VerifiedQuorumInvariant",
+      "result_class": "W-EX",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Empaqueta la identidad aritmética #108 y el testigo #110 en la estructura VerifiedQuorumInvariant."
+    },
+    {
+      "id": "#115",
+      "index": 115,
+      "file": "MolochLandauer.lean",
+      "line": 59,
+      "kind": "theorem",
+      "name": "moloch_payoff_is_zero",
+      "qualified_name": "Babylon.MolochLandauer.moloch_payoff_is_zero",
+      "signature": "(a : AgentAction) (h_moloch : is_moloch_extraction a = true) : net_exergy_payoff a = 0",
+      "result_class": "U-ALG",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "En la función de puntuación truncada en Nat (net_exergy_payoff), si is_moloch_extraction a = true entonces la resta truncada produce 0."
+    },
+    {
+      "id": "#116",
+      "index": 116,
+      "file": "MolochLandauer.lean",
+      "line": 68,
+      "kind": "theorem",
+      "name": "constructive_action_positive_payoff",
+      "qualified_name": "Babylon.MolochLandauer.constructive_action_positive_payoff",
+      "signature": "(a : AgentAction) (h_class : a.action_class = .Constructive) (h_ext : a.externalized_entropy = 0) (h_ben : a.claimed_benefit > a.internal_dissipation) : net_exergy_payoff a > 0",
+      "result_class": "U-ALG",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Para una acción con action_class = .Constructive, externalized_entropy = 0 y claimed_benefit > internal_dissipation, la fórmula net_exergy_payoff devuelve un valor > 0."
+    },
+    {
+      "id": "#117",
+      "index": 117,
+      "file": "MolochLandauer.lean",
+      "line": 82,
+      "kind": "theorem",
+      "name": "cooperation_dominates_moloch",
+      "qualified_name": "Babylon.MolochLandauer.cooperation_dominates_moloch",
+      "signature": "(a_coop a_ext : AgentAction) (h_coop_class : a_coop.action_class = .Constructive) (h_coop_ext : a_coop.externalized_entropy = 0) (h_coop_ben : a_coop.claimed_benefit > a_coop.internal_dissipation) (h_moloch : is_moloch_extraction a_ext = true) : net_exergy_payoff a_coop > net_exergy_payoff a_ext",
+      "result_class": "U-ALG",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Combina #115 y #116 para dos registros AgentAction que satisfacen esas hipótesis; compara la función de puntuación sobre ambos registros, sin demostrar equilibrio de Nash ni dominancia estratégica en un juego multi-agente."
+    },
+    {
+      "id": "#118",
+      "index": 118,
+      "file": "MolochLandauer.lean",
+      "line": 95,
+      "kind": "theorem",
+      "name": "landauer_compensates_entropy",
+      "qualified_name": "Babylon.MolochLandauer.landauer_compensates_entropy",
+      "signature": "(a : AgentAction) : landauer_penalty a ≥ a.externalized_entropy",
+      "result_class": "U-ALG",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Por definición de landauer_penalty en Nat, su valor es ≥ a.externalized_entropy."
+    },
+    {
+      "id": "#119",
+      "index": 119,
+      "file": "MolochLandauer.lean",
+      "line": 115,
+      "kind": "theorem",
+      "name": "trace_entropy_solvency_universal",
+      "qualified_name": "Babylon.MolochLandauer.trace_entropy_solvency_universal",
+      "signature": "(trace : List AgentAction) : total_landauer_penalties trace ≥ total_externalized_entropy trace",
+      "result_class": "U-IND",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Inducción sobre listas finitas de AgentAction: la suma de landauer_penalty es ≥ la suma de externalized_entropy."
+    },
+    {
+      "id": "#120",
+      "index": 120,
+      "file": "NavierStokesBKM.lean",
+      "line": 95,
+      "kind": "theorem",
+      "name": "constantin_fefferman_depletion_holds",
+      "qualified_name": "B60.NavierStokes.constantin_fefferman_depletion_holds",
+      "signature": ": auditTrace trace_depleted = AuditResult.SmoothDepleted",
+      "result_class": "I-DEC",
+      "axioms": [],
+      "scope_note": "Comprobación cerrada por decide de auditTrace sobre la lista concreta trace_depleted de 3 pasos."
+    },
+    {
+      "id": "#121",
+      "index": 121,
+      "file": "NavierStokesBKM.lean",
+      "line": 108,
+      "kind": "theorem",
+      "name": "genuine_blowup_candidate_isolated",
+      "qualified_name": "B60.NavierStokes.genuine_blowup_candidate_isolated",
+      "signature": ": auditTrace trace_singular_candidate = AuditResult.FiniteTimeBlowupCandidate",
+      "result_class": "I-DEC",
+      "axioms": [],
+      "scope_note": "Comprobación cerrada por decide de auditTrace sobre la lista concreta trace_singular_candidate de 3 pasos."
+    },
+    {
+      "id": "#122",
+      "index": 122,
+      "file": "NavierStokesBKM.lean",
+      "line": 126,
+      "kind": "theorem",
+      "name": "discrete_curl_grad_nilpotent",
+      "qualified_name": "B60.NavierStokes.discrete_curl_grad_nilpotent",
+      "signature": "(c : DiscreteChainComplex) (phi : Nat) : c.d1_eval (c.d0_eval phi) = 0",
+      "result_class": "U-ALG",
+      "axioms": [],
+      "scope_note": "Extrae la hipótesis de campo h_curl_grad : d1_eval (d0_eval phi) = 0 suministrada dentro del registro DiscreteChainComplex."
+    },
+    {
+      "id": "#123",
+      "index": 123,
+      "file": "NavierStokesBKM.lean",
+      "line": 131,
+      "kind": "theorem",
+      "name": "discrete_div_curl_nilpotent",
+      "qualified_name": "B60.NavierStokes.discrete_div_curl_nilpotent",
+      "signature": "(c : DiscreteChainComplex) (u : Nat) : c.d2_eval (c.d1_eval u) = 0",
+      "result_class": "U-ALG",
+      "axioms": [],
+      "scope_note": "Extrae la hipótesis de campo h_div_curl : d2_eval (d1_eval u) = 0 suministrada dentro del registro DiscreteChainComplex."
+    },
+    {
+      "id": "#124",
+      "index": 124,
+      "file": "NavierStokesBKM.lean",
+      "line": 146,
+      "kind": "theorem",
+      "name": "coexact_field_is_solenoidal",
+      "qualified_name": "B60.NavierStokes.coexact_field_is_solenoidal",
+      "signature": ": isStrictlySolenoidal 0 = true",
+      "result_class": "I-DEC",
+      "axioms": [],
+      "scope_note": "Comprobación cerrada por decide de isStrictlySolenoidal 0 = true (comprueba 0 == 0)."
+    },
+    {
+      "id": "#125",
+      "index": 125,
+      "file": "NavierStokesSobolevKato.lean",
+      "line": 27,
+      "kind": "theorem",
+      "name": "sobolev_embedding_h2_in_c0",
+      "qualified_name": "B60.NavierStokes.SobolevKato.sobolev_embedding_h2_in_c0",
+      "signature": ": isSobolevContinuousEmbedding 120 0 = true",
+      "result_class": "I-DEC",
+      "axioms": [],
+      "scope_note": "Comprobación aritmética cerrada por decide: 120 > 0 * 60 + 90 en isSobolevContinuousEmbedding; no construye espacios funcionales H^2 ni C^0."
+    },
+    {
+      "id": "#126",
+      "index": 126,
+      "file": "NavierStokesSobolevKato.lean",
+      "line": 32,
+      "kind": "theorem",
+      "name": "sobolev_embedding_h3_in_c1",
+      "qualified_name": "B60.NavierStokes.SobolevKato.sobolev_embedding_h3_in_c1",
+      "signature": ": isSobolevContinuousEmbedding 180 1 = true",
+      "result_class": "I-DEC",
+      "axioms": [],
+      "scope_note": "Comprobación aritmética cerrada por decide: 180 > 1 * 60 + 90 en isSobolevContinuousEmbedding; no construye espacios funcionales H^3 ni C^1."
+    },
+    {
+      "id": "#127",
+      "index": 127,
+      "file": "NavierStokesSobolevKato.lean",
+      "line": 44,
+      "kind": "theorem",
+      "name": "kato_local_existence_h3",
+      "qualified_name": "B60.NavierStokes.SobolevKato.kato_local_existence_h3",
+      "signature": ": isKatoLocalWellPosed 180 = true",
+      "result_class": "I-DEC",
+      "axioms": [],
+      "scope_note": "Comprobación aritmética cerrada por decide: 180 > 150 en isKatoLocalWellPosed; no demuestra existencia local de soluciones PDE."
+    },
+    {
+      "id": "#128",
+      "index": 128,
+      "file": "NavierStokesSobolevKato.lean",
+      "line": 55,
+      "kind": "theorem",
+      "name": "curry_howard_taylor_green_step",
+      "qualified_name": "B60.NavierStokes.SobolevKato.curry_howard_taylor_green_step",
+      "signature": ": verifyDissipationCurryHoward 1000 980 10 1 1 = true",
+      "result_class": "I-DEC",
+      "axioms": [],
+      "scope_note": "Comprobación aritmética cerrada por decide: 980 + 2 * 1 * 10 * 1 ≤ 1000 en verifyDissipationCurryHoward."
+    },
+    {
+      "id": "#129",
+      "index": 129,
+      "file": "NavierStokesSobolevKato.lean",
+      "line": 71,
+      "kind": "theorem",
+      "name": "interval_containment_reflection",
+      "qualified_name": "B60.NavierStokes.SobolevKato.interval_containment_reflection",
+      "signature": ": intervalContains { lower := 10, upper := 100 } { lower := 20, upper := 80 } = true",
+      "result_class": "I-DEC",
+      "axioms": [],
+      "scope_note": "Comprobación cerrada por decide de inclusión entre dos intervalos concretos [20, 80] ⊆ [10, 100]."
+    },
+    {
+      "id": "#130",
+      "index": 130,
+      "file": "NavierStokesSobolevKato.lean",
+      "line": 86,
+      "kind": "theorem",
+      "name": "gronwall_bkm_regularity_certified",
+      "qualified_name": "B60.NavierStokes.SobolevKato.gronwall_bkm_regularity_certified",
+      "signature": ": isGronwallBounded 150 (gronwallBound 100 [1, 0, 0]) = true",
+      "result_class": "I-DEC",
+      "axioms": [],
+      "scope_note": "Comprobación cerrada por decide: 150 ≤ 200 evaluando gronwallBound 100 [1, 0, 0]."
+    },
+    {
+      "id": "#131",
+      "index": 131,
+      "file": "NavierStokesSobolevKato.lean",
+      "line": 110,
+      "kind": "theorem",
+      "name": "causal_monotonicity_trace_proof",
+      "qualified_name": "B60.NavierStokes.SobolevKato.causal_monotonicity_trace_proof",
+      "signature": ": verifyCausalTrace [1, 2, 3, 4, 5, 10, 20, 50, 60] = true",
+      "result_class": "I-DEC",
+      "axioms": [],
+      "scope_note": "Comprobación cerrada por decide de que la lista concreta [1, 2, 3, 4, 5, 10, 20, 50, 60] es estrictamente creciente en verifyCausalTrace."
+    },
+    {
+      "id": "#132",
+      "index": 132,
+      "file": "NavierStokesSobolevKato.lean",
+      "line": 141,
+      "kind": "theorem",
+      "name": "millennium_navier_stokes_regular_by_decide",
+      "qualified_name": "B60.NavierStokes.SobolevKato.millennium_navier_stokes_regular_by_decide",
+      "signature": ": isMillenniumRegular { bkmIntegralBounded := true, constantinFeffermanSmooth := true, sobolevH3Controlled := true } = true",
+      "result_class": "I-DEC",
+      "axioms": [],
+      "scope_note": "Aceptación de tres indicadores booleanos fijados en true (isMillenniumRegular { bkmIntegralBounded := true, constantinFeffermanSmooth := true, sobolevH3Controlled := true } = true); no define campos de velocidad/presión ni demuestra regularidad analítica de las ecuaciones de Navier-Stokes."
+    },
+    {
+      "id": "#133",
+      "index": 133,
+      "file": "NemesisWave4.lean",
+      "line": 164,
+      "kind": "theorem",
+      "name": "ecp_v2_valid_trace_certified",
+      "qualified_name": "NemesisWave4.ecp_v2_valid_trace_certified",
+      "signature": ": validateEcpTrace initialMonitor validWave4Trace = true",
+      "result_class": "I-DEC",
+      "axioms": [],
+      "scope_note": "Comprobación cerrada por decide de validateEcpTrace sobre la traza concreta validWave4Trace de 3 eventos."
+    },
+    {
+      "id": "#134",
+      "index": 134,
+      "file": "NemesisWave4.lean",
+      "line": 168,
+      "kind": "theorem",
+      "name": "fl014_fencing_race_rejected",
+      "qualified_name": "NemesisWave4.fl014_fencing_race_rejected",
+      "signature": ": validateEcpTrace initialMonitor corruptFencingRaceTrace = false",
+      "result_class": "I-DEC",
+      "axioms": [],
+      "scope_note": "Comprobación cerrada por decide que rechaza la traza concreta corruptFencingRaceTrace en validateEcpTrace."
+    },
+    {
+      "id": "#135",
+      "index": 135,
+      "file": "NemesisWave4.lean",
+      "line": 172,
+      "kind": "theorem",
+      "name": "fl014_blind_retry_rejected",
+      "qualified_name": "NemesisWave4.fl014_blind_retry_rejected",
+      "signature": ": validateEcpTrace initialMonitor corruptBlindRetryTrace = false",
+      "result_class": "I-DEC",
+      "axioms": [],
+      "scope_note": "Comprobación cerrada por decide que rechaza la traza concreta corruptBlindRetryTrace en validateEcpTrace."
+    },
+    {
+      "id": "#136",
+      "index": 136,
+      "file": "NemesisWave4.lean",
+      "line": 176,
+      "kind": "theorem",
+      "name": "fl014_budget_composition_rejected",
+      "qualified_name": "NemesisWave4.fl014_budget_composition_rejected",
+      "signature": ": validateEcpTrace initialMonitor corruptBudgetCompositionTrace = false",
+      "result_class": "I-DEC",
+      "axioms": [],
+      "scope_note": "Comprobación cerrada por decide que rechaza la traza concreta corruptBudgetCompositionTrace en validateEcpTrace."
+    },
+    {
+      "id": "#137",
+      "index": 137,
+      "file": "NemesisWave4.lean",
+      "line": 180,
+      "kind": "theorem",
+      "name": "fl013_darwin_uf_immutable_degraded",
+      "qualified_name": "NemesisWave4.fl013_darwin_uf_immutable_degraded",
+      "signature": ": evaluateSealStrength false true false true = some IsolationStrength.degradedSameUidOrInProcess",
+      "result_class": "I-DEC",
+      "axioms": [],
+      "scope_note": "Comprobación cerrada por decide de evaluateSealStrength false true false true = some .degradedSameUidOrInProcess."
+    },
+    {
+      "id": "#138",
+      "index": 138,
+      "file": "NemesisWave4.lean",
+      "line": 184,
+      "kind": "theorem",
+      "name": "fl015_transitive_drift_rejected",
+      "qualified_name": "NemesisWave4.fl015_transitive_drift_rejected",
+      "signature": ": validateDeploymentPermit 0xAAA1 0xBBB2 5 5 100 500 = false",
+      "result_class": "I-DEC",
+      "axioms": [],
+      "scope_note": "Comprobación cerrada por decide de validateDeploymentPermit 0xAAA1 0xBBB2 5 5 100 500 = false."
+    },
+    {
+      "id": "#139",
+      "index": 139,
+      "file": "TicketEnvelope.lean",
+      "line": 81,
+      "kind": "theorem",
+      "name": "decode_encode",
+      "qualified_name": "B60.Ticket.decode_encode",
+      "signature": "(t : Ticket) : decode (encode t) = some t",
+      "result_class": "U-CODEC",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Roundtrip universal de decodificación tras codificación (`decode (encode x) = some x`, o con sufijo arbitrario en `decodeFrom`) bajo `.valid x` en `TicketEnvelope.lean` (`decode_encode`); no certifica por sí sola autenticidad criptográfica de claves ni frescura anti-replay en runtime."
+    },
+    {
+      "id": "#140",
+      "index": 140,
+      "file": "TicketEnvelope.lean",
+      "line": 84,
+      "kind": "theorem",
+      "name": "encode_decode",
+      "qualified_name": "B60.Ticket.encode_decode",
+      "signature": "(input : Bytes) (t : Ticket) (h : decode input = some t) : encode t = input",
+      "result_class": "U-CODEC",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Re-codificación canónica determinista (`decode wire = some x → encode x = wire`) que excluye maleabilidad de representación en el modelo en `TicketEnvelope.lean` (`encode_decode`); no certifica por sí sola autenticidad criptográfica de claves ni frescura anti-replay en runtime."
+    },
+    {
+      "id": "#141",
+      "index": 141,
+      "file": "TicketEnvelope.lean",
+      "line": 98,
+      "kind": "theorem",
+      "name": "encode_injective",
+      "qualified_name": "B60.Ticket.encode_injective",
+      "signature": "(a b : Ticket) (h : encode a = encode b) : a = b",
+      "result_class": "U-CODEC",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Inyectividad universal del codificador sobre el subconjunto de entradas que satisfacen el predicado `.valid` en `TicketEnvelope.lean` (`encode_injective`); no certifica por sí sola autenticidad criptográfica de claves ni frescura anti-replay en runtime."
+    },
+    {
+      "id": "#142",
+      "index": 142,
+      "file": "TicketEnvelope.lean",
+      "line": 103,
+      "kind": "theorem",
+      "name": "decoded_valid",
+      "qualified_name": "B60.Ticket.decoded_valid",
+      "signature": "(input : Bytes) (t : Ticket) (_ : decode input = some t) : payloadCodec.valid t.val ∧ shape t.val = true",
+      "result_class": "U-CODEC",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Soundness del decodificador comprobado (`decodeChecked wire = some x → valid x`) sobre el dominio del codec en `TicketEnvelope.lean` (`decoded_valid`); no certifica por sí sola autenticidad criptográfica de claves ni frescura anti-replay en runtime."
+    },
+    {
+      "id": "#143",
+      "index": 143,
+      "file": "TicketEnvelope.lean",
+      "line": 113,
+      "kind": "theorem",
+      "name": "decode_encode_external",
+      "qualified_name": "B60.Ticket.decode_encode_external",
+      "signature": "(s : SignedTicket) : decodeExternal (encodeExternal s) = some s",
+      "result_class": "U-CODEC",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Roundtrip universal de decodificación tras codificación (`decode (encode x) = some x`, o con sufijo arbitrario en `decodeFrom`) bajo `.valid x` en `TicketEnvelope.lean` (`decode_encode_external`); no certifica por sí sola autenticidad criptográfica de claves ni frescura anti-replay en runtime."
+    },
+    {
+      "id": "#144",
+      "index": 144,
+      "file": "TicketEnvelope.lean",
+      "line": 117,
+      "kind": "theorem",
+      "name": "encode_decode_external",
+      "qualified_name": "B60.Ticket.encode_decode_external",
+      "signature": "(fields : Bytes × Bytes) (s : SignedTicket) (h : decodeExternal fields = some s) : encodeExternal s = fields",
+      "result_class": "U-CODEC",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "scope_note": "Re-codificación canónica determinista (`decode wire = some x → encode x = wire`) que excluye maleabilidad de representación en el modelo en `TicketEnvelope.lean` (`encode_decode_external`); no certifica por sí sola autenticidad criptográfica de claves ni frescura anti-replay en runtime."
+    }
+  ],
+  "constructions": [
+    {
+      "all_index": 1,
+      "core228_id": "#C001",
+      "file": "AX0.lean",
+      "line": 11,
+      "kind": "inductive",
+      "name": "AuthState",
+      "qualified_name": "AuthState",
+      "in_core_228": true
+    },
+    {
+      "all_index": 2,
+      "core228_id": "#C002",
+      "file": "AX0.lean",
+      "line": 20,
+      "kind": "inductive",
+      "name": "AuthEvent",
+      "qualified_name": "AuthEvent",
+      "in_core_228": true
+    },
+    {
+      "all_index": 3,
+      "core228_id": "#C003",
+      "file": "AX0.lean",
+      "line": 28,
+      "kind": "def",
+      "name": "step",
+      "qualified_name": "step",
+      "in_core_228": true
+    },
+    {
+      "all_index": 4,
+      "core228_id": "#C004",
+      "file": "AX0.lean",
+      "line": 51,
+      "kind": "def",
+      "name": "validateTrace",
+      "qualified_name": "validateTrace",
+      "in_core_228": true
+    },
+    {
+      "all_index": 5,
+      "core228_id": "#C005",
+      "file": "AX0.lean",
+      "line": 63,
+      "kind": "def",
+      "name": "trace_happy",
+      "qualified_name": "trace_happy",
+      "in_core_228": true
+    },
+    {
+      "all_index": 6,
+      "core228_id": "#C006",
+      "file": "AX0.lean",
+      "line": 68,
+      "kind": "def",
+      "name": "trace_double_dispatch",
+      "qualified_name": "trace_double_dispatch",
+      "in_core_228": true
+    },
+    {
+      "all_index": 7,
+      "core228_id": "#C007",
+      "file": "AX0.lean",
+      "line": 73,
+      "kind": "def",
+      "name": "trace_illegal_dispatch",
+      "qualified_name": "trace_illegal_dispatch",
+      "in_core_228": true
+    },
+    {
+      "all_index": 8,
+      "core228_id": "#C008",
+      "file": "AX0.lean",
+      "line": 78,
+      "kind": "def",
+      "name": "trace_crash",
+      "qualified_name": "trace_crash",
+      "in_core_228": true
+    },
+    {
+      "all_index": 9,
+      "core228_id": "#C009",
+      "file": "AX0.lean",
+      "line": 86,
+      "kind": "def",
+      "name": "countDispatches",
+      "qualified_name": "countDispatches",
+      "in_core_228": true
+    },
+    {
+      "all_index": 10,
+      "core228_id": "#C010",
+      "file": "AX0.lean",
+      "line": 91,
+      "kind": "def",
+      "name": "maxAllowedDispatches",
+      "qualified_name": "maxAllowedDispatches",
+      "in_core_228": true
+    },
+    {
+      "all_index": 11,
+      "core228_id": null,
+      "file": "AX0.lean",
+      "line": 151,
+      "kind": "abbrev",
+      "name": "Auth001SafetyProp",
+      "qualified_name": "Auth001SafetyProp",
+      "in_core_228": false
+    },
+    {
+      "all_index": 12,
+      "core228_id": null,
+      "file": "AX0.lean",
+      "line": 185,
+      "kind": "structure",
+      "name": "VerifiedAuthInvariant",
+      "qualified_name": "VerifiedAuthInvariant",
+      "in_core_228": false
+    },
+    {
+      "all_index": 13,
+      "core228_id": "#C011",
+      "file": "AcsEnvelope.lean",
+      "line": 21,
+      "kind": "def",
+      "name": "restrict",
+      "qualified_name": "B60.ACS.restrict",
+      "in_core_228": true
+    },
+    {
+      "all_index": 14,
+      "core228_id": "#C012",
+      "file": "AcsEnvelope.lean",
+      "line": 31,
+      "kind": "def",
+      "name": "utf8",
+      "qualified_name": "B60.ACS.utf8",
+      "in_core_228": true
+    },
+    {
+      "all_index": 15,
+      "core228_id": "#C013",
+      "file": "AcsEnvelope.lean",
+      "line": 33,
+      "kind": "def",
+      "name": "text",
+      "qualified_name": "B60.ACS.text",
+      "in_core_228": true
+    },
+    {
+      "all_index": 16,
+      "core228_id": "#C014",
+      "file": "AcsEnvelope.lean",
+      "line": 34,
+      "kind": "def",
+      "name": "digest",
+      "qualified_name": "B60.ACS.digest",
+      "in_core_228": true
+    },
+    {
+      "all_index": 17,
+      "core228_id": "#C015",
+      "file": "AcsEnvelope.lean",
+      "line": 35,
+      "kind": "def",
+      "name": "u32",
+      "qualified_name": "B60.ACS.u32",
+      "in_core_228": true
+    },
+    {
+      "all_index": 18,
+      "core228_id": "#C016",
+      "file": "AcsEnvelope.lean",
+      "line": 36,
+      "kind": "def",
+      "name": "principal",
+      "qualified_name": "B60.ACS.principal",
+      "in_core_228": true
+    },
+    {
+      "all_index": 19,
+      "core228_id": "#C017",
+      "file": "AcsEnvelope.lean",
+      "line": 37,
+      "kind": "def",
+      "name": "effect",
+      "qualified_name": "B60.ACS.effect",
+      "in_core_228": true
+    },
+    {
+      "all_index": 20,
+      "core228_id": "#C018",
+      "file": "AcsEnvelope.lean",
+      "line": 38,
+      "kind": "def",
+      "name": "enforcement",
+      "qualified_name": "B60.ACS.enforcement",
+      "in_core_228": true
+    },
+    {
+      "all_index": 21,
+      "core228_id": null,
+      "file": "AcsEnvelope.lean",
+      "line": 41,
+      "kind": "abbrev",
+      "name": "Context",
+      "qualified_name": "B60.ACS.Context",
+      "in_core_228": false
+    },
+    {
+      "all_index": 22,
+      "core228_id": "#C019",
+      "file": "AcsEnvelope.lean",
+      "line": 44,
+      "kind": "def",
+      "name": "contextCodec",
+      "qualified_name": "B60.ACS.contextCodec",
+      "in_core_228": true
+    },
+    {
+      "all_index": 23,
+      "core228_id": null,
+      "file": "AcsEnvelope.lean",
+      "line": 49,
+      "kind": "abbrev",
+      "name": "Key",
+      "qualified_name": "B60.ACS.Key",
+      "in_core_228": false
+    },
+    {
+      "all_index": 24,
+      "core228_id": "#C020",
+      "file": "AcsEnvelope.lean",
+      "line": 50,
+      "kind": "def",
+      "name": "keyCodec",
+      "qualified_name": "B60.ACS.keyCodec",
+      "in_core_228": true
+    },
+    {
+      "all_index": 25,
+      "core228_id": null,
+      "file": "AcsEnvelope.lean",
+      "line": 53,
+      "kind": "abbrev",
+      "name": "Grant",
+      "qualified_name": "B60.ACS.Grant",
+      "in_core_228": false
+    },
+    {
+      "all_index": 26,
+      "core228_id": "#C021",
+      "file": "AcsEnvelope.lean",
+      "line": 54,
+      "kind": "def",
+      "name": "grantCodec",
+      "qualified_name": "B60.ACS.grantCodec",
+      "in_core_228": true
+    },
+    {
+      "all_index": 27,
+      "core228_id": null,
+      "file": "AcsEnvelope.lean",
+      "line": 59,
+      "kind": "abbrev",
+      "name": "Call",
+      "qualified_name": "B60.ACS.Call",
+      "in_core_228": false
+    },
+    {
+      "all_index": 28,
+      "core228_id": "#C022",
+      "file": "AcsEnvelope.lean",
+      "line": 62,
+      "kind": "def",
+      "name": "callCodec",
+      "qualified_name": "B60.ACS.callCodec",
+      "in_core_228": true
+    },
+    {
+      "all_index": 29,
+      "core228_id": "#C023",
+      "file": "AcsEnvelope.lean",
+      "line": 67,
+      "kind": "inductive",
+      "name": "Outcome",
+      "qualified_name": "B60.ACS.Outcome",
+      "in_core_228": true
+    },
+    {
+      "all_index": 30,
+      "core228_id": "#C024",
+      "file": "AcsEnvelope.lean",
+      "line": 73,
+      "kind": "def",
+      "name": "rejectedCodec",
+      "qualified_name": "B60.ACS.rejectedCodec",
+      "in_core_228": true
+    },
+    {
+      "all_index": 31,
+      "core228_id": "#C025",
+      "file": "AcsEnvelope.lean",
+      "line": 74,
+      "kind": "def",
+      "name": "unknownCodec",
+      "qualified_name": "B60.ACS.unknownCodec",
+      "in_core_228": true
+    },
+    {
+      "all_index": 32,
+      "core228_id": "#C026",
+      "file": "AcsEnvelope.lean",
+      "line": 75,
+      "kind": "def",
+      "name": "verifiedCodec",
+      "qualified_name": "B60.ACS.verifiedCodec",
+      "in_core_228": true
+    },
+    {
+      "all_index": 33,
+      "core228_id": "#C027",
+      "file": "AcsEnvelope.lean",
+      "line": 77,
+      "kind": "def",
+      "name": "outcomeCodec",
+      "qualified_name": "B60.ACS.outcomeCodec",
+      "in_core_228": true
+    },
+    {
+      "all_index": 34,
+      "core228_id": null,
+      "file": "AcsEnvelope.lean",
+      "line": 104,
+      "kind": "abbrev",
+      "name": "Forensic",
+      "qualified_name": "B60.ACS.Forensic",
+      "in_core_228": false
+    },
+    {
+      "all_index": 35,
+      "core228_id": "#C028",
+      "file": "AcsEnvelope.lean",
+      "line": 107,
+      "kind": "def",
+      "name": "forensicCodec",
+      "qualified_name": "B60.ACS.forensicCodec",
+      "in_core_228": true
+    },
+    {
+      "all_index": 36,
+      "core228_id": "#C029",
+      "file": "AcsEnvelope.lean",
+      "line": 111,
+      "kind": "inductive",
+      "name": "Algorithm",
+      "qualified_name": "B60.ACS.Algorithm",
+      "in_core_228": true
+    },
+    {
+      "all_index": 37,
+      "core228_id": "#C030",
+      "file": "AcsEnvelope.lean",
+      "line": 114,
+      "kind": "def",
+      "name": "protectedHeader",
+      "qualified_name": "B60.ACS.protectedHeader",
+      "in_core_228": true
+    },
+    {
+      "all_index": 38,
+      "core228_id": "#C031",
+      "file": "AcsEnvelope.lean",
+      "line": 119,
+      "kind": "def",
+      "name": "signatureStructure",
+      "qualified_name": "B60.ACS.signatureStructure",
+      "in_core_228": true
+    },
+    {
+      "all_index": 39,
+      "core228_id": "#C032",
+      "file": "AcsEnvelope.lean",
+      "line": 124,
+      "kind": "def",
+      "name": "coseSign1",
+      "qualified_name": "B60.ACS.coseSign1",
+      "in_core_228": true
+    },
+    {
+      "all_index": 40,
+      "core228_id": "#C033",
+      "file": "AcsEnvelope.lean",
+      "line": 139,
+      "kind": "def",
+      "name": "wrapped",
+      "qualified_name": "B60.ACS.wrapped",
+      "in_core_228": true
+    },
+    {
+      "all_index": 41,
+      "core228_id": "#C034",
+      "file": "AcsEnvelope.lean",
+      "line": 151,
+      "kind": "def",
+      "name": "typedCose",
+      "qualified_name": "B60.ACS.typedCose",
+      "in_core_228": true
+    },
+    {
+      "all_index": 42,
+      "core228_id": "#C035",
+      "file": "AcsEnvelope.lean",
+      "line": 160,
+      "kind": "def",
+      "name": "typedSignatureStructure",
+      "qualified_name": "B60.ACS.typedSignatureStructure",
+      "in_core_228": true
+    },
+    {
+      "all_index": 43,
+      "core228_id": "#C036",
+      "file": "AcsEnvelope.lean",
+      "line": 196,
+      "kind": "def",
+      "name": "decodeCall",
+      "qualified_name": "B60.ACS.decodeCall",
+      "in_core_228": true
+    },
+    {
+      "all_index": 44,
+      "core228_id": "#C037",
+      "file": "AcsEnvelope.lean",
+      "line": 197,
+      "kind": "def",
+      "name": "decodeGrant",
+      "qualified_name": "B60.ACS.decodeGrant",
+      "in_core_228": true
+    },
+    {
+      "all_index": 45,
+      "core228_id": "#C038",
+      "file": "AcsEnvelope.lean",
+      "line": 198,
+      "kind": "def",
+      "name": "decodeForensic",
+      "qualified_name": "B60.ACS.decodeForensic",
+      "in_core_228": true
+    },
+    {
+      "all_index": 46,
+      "core228_id": "#C039",
+      "file": "AcsEnvelope.lean",
+      "line": 281,
+      "kind": "def",
+      "name": "nibble",
+      "qualified_name": "B60.ACS.nibble",
+      "in_core_228": true
+    },
+    {
+      "all_index": 47,
+      "core228_id": "#C040",
+      "file": "AcsEnvelope.lean",
+      "line": 282,
+      "kind": "def",
+      "name": "unhex",
+      "qualified_name": "B60.ACS.unhex",
+      "in_core_228": true
+    },
+    {
+      "all_index": 48,
+      "core228_id": "#C041",
+      "file": "AcsEnvelope.lean",
+      "line": 285,
+      "kind": "def",
+      "name": "hex",
+      "qualified_name": "B60.ACS.hex",
+      "in_core_228": true
+    },
+    {
+      "all_index": 49,
+      "core228_id": "#C042",
+      "file": "AcsEnvelope.lean",
+      "line": 287,
+      "kind": "def",
+      "name": "fill32",
+      "qualified_name": "B60.ACS.fill32",
+      "in_core_228": true
+    },
+    {
+      "all_index": 50,
+      "core228_id": "#C043",
+      "file": "AcsEnvelope.lean",
+      "line": 290,
+      "kind": "def",
+      "name": "golden_root",
+      "qualified_name": "B60.ACS.golden_root",
+      "in_core_228": true
+    },
+    {
+      "all_index": 51,
+      "core228_id": "#C044",
+      "file": "AcsEnvelope.lean",
+      "line": 291,
+      "kind": "def",
+      "name": "golden_delegated",
+      "qualified_name": "B60.ACS.golden_delegated",
+      "in_core_228": true
+    },
+    {
+      "all_index": 52,
+      "core228_id": "#C045",
+      "file": "AcsEnvelope.lean",
+      "line": 292,
+      "kind": "def",
+      "name": "golden_grant",
+      "qualified_name": "B60.ACS.golden_grant",
+      "in_core_228": true
+    },
+    {
+      "all_index": 53,
+      "core228_id": "#C046",
+      "file": "AcsEnvelope.lean",
+      "line": 293,
+      "kind": "def",
+      "name": "golden_call",
+      "qualified_name": "B60.ACS.golden_call",
+      "in_core_228": true
+    },
+    {
+      "all_index": 54,
+      "core228_id": "#C047",
+      "file": "AcsEnvelope.lean",
+      "line": 294,
+      "kind": "def",
+      "name": "golden_call_signing",
+      "qualified_name": "B60.ACS.golden_call_signing",
+      "in_core_228": true
+    },
+    {
+      "all_index": 55,
+      "core228_id": "#C048",
+      "file": "AcsEnvelope.lean",
+      "line": 295,
+      "kind": "def",
+      "name": "golden_forensic",
+      "qualified_name": "B60.ACS.golden_forensic",
+      "in_core_228": true
+    },
+    {
+      "all_index": 56,
+      "core228_id": "#C049",
+      "file": "AcsEnvelope.lean",
+      "line": 296,
+      "kind": "def",
+      "name": "golden_forensic_signing",
+      "qualified_name": "B60.ACS.golden_forensic_signing",
+      "in_core_228": true
+    },
+    {
+      "all_index": 57,
+      "core228_id": "#C050",
+      "file": "AcsEnvelope.lean",
+      "line": 297,
+      "kind": "def",
+      "name": "golden_cose_ed",
+      "qualified_name": "B60.ACS.golden_cose_ed",
+      "in_core_228": true
+    },
+    {
+      "all_index": 58,
+      "core228_id": "#C051",
+      "file": "AcsEnvelope.lean",
+      "line": 298,
+      "kind": "def",
+      "name": "golden_cose_p256",
+      "qualified_name": "B60.ACS.golden_cose_p256",
+      "in_core_228": true
+    },
+    {
+      "all_index": 59,
+      "core228_id": "#C052",
+      "file": "AcsEnvelope.lean",
+      "line": 300,
+      "kind": "def",
+      "name": "fixtureContext",
+      "qualified_name": "B60.ACS.fixtureContext",
+      "in_core_228": true
+    },
+    {
+      "all_index": 60,
+      "core228_id": "#C053",
+      "file": "AcsEnvelope.lean",
+      "line": 304,
+      "kind": "def",
+      "name": "fixtureGrant",
+      "qualified_name": "B60.ACS.fixtureGrant",
+      "in_core_228": true
+    },
+    {
+      "all_index": 61,
+      "core228_id": "#C054",
+      "file": "AcsEnvelope.lean",
+      "line": 305,
+      "kind": "def",
+      "name": "fixtureCall",
+      "qualified_name": "B60.ACS.fixtureCall",
+      "in_core_228": true
+    },
+    {
+      "all_index": 62,
+      "core228_id": "#C055",
+      "file": "AcsEnvelope.lean",
+      "line": 309,
+      "kind": "def",
+      "name": "fixtureForensic",
+      "qualified_name": "B60.ACS.fixtureForensic",
+      "in_core_228": true
+    },
+    {
+      "all_index": 63,
+      "core228_id": "#C056",
+      "file": "AcsEnvelope.lean",
+      "line": 338,
+      "kind": "def",
+      "name": "toHex",
+      "qualified_name": "B60.ACS.toHex",
+      "in_core_228": true
+    },
+    {
+      "all_index": 64,
+      "core228_id": "#C057",
+      "file": "AcsEnvelope.lean",
+      "line": 342,
+      "kind": "def",
+      "name": "runtimeVectors",
+      "qualified_name": "B60.ACS.runtimeVectors",
+      "in_core_228": true
+    },
+    {
+      "all_index": 65,
+      "core228_id": "#C058",
+      "file": "AcsEnvelope.lean",
+      "line": 352,
+      "kind": "def",
+      "name": "run",
+      "qualified_name": "B60.ACS.run",
+      "in_core_228": true
+    },
+    {
+      "all_index": 66,
+      "core228_id": "#C059",
+      "file": "AcsEnvelope.lean",
+      "line": 370,
+      "kind": "def",
+      "name": "main",
+      "qualified_name": "main",
+      "in_core_228": true
+    },
+    {
+      "all_index": 67,
+      "core228_id": "#C060",
+      "file": "Babylon.lean",
+      "line": 14,
+      "kind": "def",
+      "name": "ProbDist",
+      "qualified_name": "Babylon.ProbDist",
+      "in_core_228": true
+    },
+    {
+      "all_index": 68,
+      "core228_id": "#C061",
+      "file": "Babylon.lean",
+      "line": 15,
+      "kind": "def",
+      "name": "Morphism",
+      "qualified_name": "Babylon.Morphism",
+      "in_core_228": true
+    },
+    {
+      "all_index": 69,
+      "core228_id": "#C062",
+      "file": "Babylon.lean",
+      "line": 18,
+      "kind": "def",
+      "name": "bayesian_inverse",
+      "qualified_name": "Babylon.bayesian_inverse",
+      "in_core_228": true
+    },
+    {
+      "all_index": 70,
+      "core228_id": null,
+      "file": "Babylon.lean",
+      "line": 28,
+      "kind": "structure",
+      "name": "BayesianDisintegration",
+      "qualified_name": "Babylon.BayesianDisintegration",
+      "in_core_228": false
+    },
+    {
+      "all_index": 71,
+      "core228_id": "#C063",
+      "file": "Babylon.lean",
+      "line": 74,
+      "kind": "inductive",
+      "name": "TonnetzState",
+      "qualified_name": "Babylon.TonnetzState",
+      "in_core_228": true
+    },
+    {
+      "all_index": 72,
+      "core228_id": "#C064",
+      "file": "Babylon.lean",
+      "line": 81,
+      "kind": "def",
+      "name": "canonical_tonnetz_monitor",
+      "qualified_name": "Babylon.canonical_tonnetz_monitor",
+      "in_core_228": true
+    },
+    {
+      "all_index": 73,
+      "core228_id": null,
+      "file": "Babylon.lean",
+      "line": 90,
+      "kind": "structure",
+      "name": "TonnetzMonitor",
+      "qualified_name": "Babylon.TonnetzMonitor",
+      "in_core_228": false
+    },
+    {
+      "all_index": 74,
+      "core228_id": "#C065",
+      "file": "Babylon.lean",
+      "line": 104,
+      "kind": "inductive",
+      "name": "AeonPhase",
+      "qualified_name": "Babylon.AeonPhase",
+      "in_core_228": true
+    },
+    {
+      "all_index": 75,
+      "core228_id": "#C066",
+      "file": "Babylon.lean",
+      "line": 111,
+      "kind": "def",
+      "name": "HOT_MEMORY_LIMIT",
+      "qualified_name": "Babylon.HOT_MEMORY_LIMIT",
+      "in_core_228": true
+    },
+    {
+      "all_index": 76,
+      "core228_id": "#C067",
+      "file": "Babylon.lean",
+      "line": 114,
+      "kind": "def",
+      "name": "LANDAUER_FLOOR_AJ",
+      "qualified_name": "Babylon.LANDAUER_FLOOR_AJ",
+      "in_core_228": true
+    },
+    {
+      "all_index": 77,
+      "core228_id": null,
+      "file": "Babylon.lean",
+      "line": 117,
+      "kind": "structure",
+      "name": "AeonState",
+      "qualified_name": "Babylon.AeonState",
+      "in_core_228": false
+    },
+    {
+      "all_index": 78,
+      "core228_id": "#C068",
+      "file": "Babylon.lean",
+      "line": 145,
+      "kind": "def",
+      "name": "conformal_reset",
+      "qualified_name": "Babylon.conformal_reset",
+      "in_core_228": true
+    },
+    {
+      "all_index": 79,
+      "core228_id": "#C069",
+      "file": "Babylon.lean",
+      "line": 183,
+      "kind": "def",
+      "name": "FRACTION_BASE",
+      "qualified_name": "Babylon.FRACTION_BASE",
+      "in_core_228": true
+    },
+    {
+      "all_index": 80,
+      "core228_id": null,
+      "file": "Babylon.lean",
+      "line": 185,
+      "kind": "structure",
+      "name": "Tick60",
+      "qualified_name": "Babylon.Tick60",
+      "in_core_228": false
+    },
+    {
+      "all_index": 81,
+      "core228_id": "#C070",
+      "file": "Babylon.lean",
+      "line": 190,
+      "kind": "def",
+      "name": "add_tick60",
+      "qualified_name": "Babylon.add_tick60",
+      "in_core_228": true
+    },
+    {
+      "all_index": 82,
+      "core228_id": "#C071",
+      "file": "Babylon.lean",
+      "line": 215,
+      "kind": "def",
+      "name": "mmr_peaks_bound",
+      "qualified_name": "Babylon.mmr_peaks_bound",
+      "in_core_228": true
+    },
+    {
+      "all_index": 83,
+      "core228_id": null,
+      "file": "Babylon.lean",
+      "line": 225,
+      "kind": "structure",
+      "name": "TransductionTensor60",
+      "qualified_name": "Babylon.TransductionTensor60",
+      "in_core_228": false
+    },
+    {
+      "all_index": 84,
+      "core228_id": null,
+      "file": "Babylon.lean",
+      "line": 232,
+      "kind": "structure",
+      "name": "BeliefDistribution",
+      "qualified_name": "Babylon.BeliefDistribution",
+      "in_core_228": false
+    },
+    {
+      "all_index": 85,
+      "core228_id": "#C072",
+      "file": "Babylon.lean",
+      "line": 237,
+      "kind": "def",
+      "name": "fisher_metric_action",
+      "qualified_name": "Babylon.fisher_metric_action",
+      "in_core_228": true
+    },
+    {
+      "all_index": 86,
+      "core228_id": "#C073",
+      "file": "Babylon.lean",
+      "line": 255,
+      "kind": "inductive",
+      "name": "AgentIntentVerdict",
+      "qualified_name": "Babylon.AgentIntentVerdict",
+      "in_core_228": true
+    },
+    {
+      "all_index": 87,
+      "core228_id": "#C074",
+      "file": "Babylon.lean",
+      "line": 261,
+      "kind": "def",
+      "name": "effective_payload",
+      "qualified_name": "Babylon.effective_payload",
+      "in_core_228": true
+    },
+    {
+      "all_index": 88,
+      "core228_id": "#C075",
+      "file": "Babylon.lean",
+      "line": 264,
+      "kind": "def",
+      "name": "evaluate_agent_intent",
+      "qualified_name": "Babylon.evaluate_agent_intent",
+      "in_core_228": true
+    },
+    {
+      "all_index": 89,
+      "core228_id": "#C076",
+      "file": "Babylon.lean",
+      "line": 289,
+      "kind": "def",
+      "name": "ffi_sexa_add_model",
+      "qualified_name": "Babylon.ffi_sexa_add_model",
+      "in_core_228": true
+    },
+    {
+      "all_index": 90,
+      "core228_id": null,
+      "file": "Babylon.lean",
+      "line": 302,
+      "kind": "structure",
+      "name": "ReplSession",
+      "qualified_name": "Babylon.ReplSession",
+      "in_core_228": false
+    },
+    {
+      "all_index": 91,
+      "core228_id": "#C077",
+      "file": "Babylon.lean",
+      "line": 309,
+      "kind": "def",
+      "name": "eval_repl_step",
+      "qualified_name": "Babylon.eval_repl_step",
+      "in_core_228": true
+    },
+    {
+      "all_index": 92,
+      "core228_id": "#C078",
+      "file": "Babylon.lean",
+      "line": 315,
+      "kind": "def",
+      "name": "run_repl_steps",
+      "qualified_name": "Babylon.run_repl_steps",
+      "in_core_228": true
+    },
+    {
+      "all_index": 93,
+      "core228_id": null,
+      "file": "Babylon.lean",
+      "line": 333,
+      "kind": "structure",
+      "name": "CausalEdge",
+      "qualified_name": "Babylon.CausalEdge",
+      "in_core_228": false
+    },
+    {
+      "all_index": 94,
+      "core228_id": "#C079",
+      "file": "Babylon.lean",
+      "line": 371,
+      "kind": "inductive",
+      "name": "SmallStep",
+      "qualified_name": "Babylon.SmallStep",
+      "in_core_228": true
+    },
+    {
+      "all_index": 95,
+      "core228_id": "#C080",
+      "file": "Babylon.lean",
+      "line": 390,
+      "kind": "inductive",
+      "name": "PrivilegeRing",
+      "qualified_name": "Babylon.PrivilegeRing",
+      "in_core_228": true
+    },
+    {
+      "all_index": 96,
+      "core228_id": "#C081",
+      "file": "Babylon.lean",
+      "line": 398,
+      "kind": "inductive",
+      "name": "SumerianToponym",
+      "qualified_name": "Babylon.SumerianToponym",
+      "in_core_228": true
+    },
+    {
+      "all_index": 97,
+      "core228_id": "#C082",
+      "file": "Babylon.lean",
+      "line": 408,
+      "kind": "inductive",
+      "name": "EscalationStratum",
+      "qualified_name": "Babylon.EscalationStratum",
+      "in_core_228": true
+    },
+    {
+      "all_index": 98,
+      "core228_id": "#C083",
+      "file": "Babylon.lean",
+      "line": 417,
+      "kind": "def",
+      "name": "stratumToToponym",
+      "qualified_name": "Babylon.stratumToToponym",
+      "in_core_228": true
+    },
+    {
+      "all_index": 99,
+      "core228_id": "#C084",
+      "file": "Babylon.lean",
+      "line": 426,
+      "kind": "def",
+      "name": "toponymToStratum",
+      "qualified_name": "Babylon.toponymToStratum",
+      "in_core_228": true
+    },
+    {
+      "all_index": 100,
+      "core228_id": null,
+      "file": "Babylon.lean",
+      "line": 441,
+      "kind": "structure",
+      "name": "WorkspaceModuleNode",
+      "qualified_name": "Babylon.WorkspaceModuleNode",
+      "in_core_228": false
+    },
+    {
+      "all_index": 101,
+      "core228_id": "#C085",
+      "file": "Babylon.lean",
+      "line": 447,
+      "kind": "def",
+      "name": "triadCausalQuotient",
+      "qualified_name": "Babylon.triadCausalQuotient",
+      "in_core_228": true
+    },
+    {
+      "all_index": 102,
+      "core228_id": "#C086",
+      "file": "BabylonAOTOracle.lean",
+      "line": 15,
+      "kind": "def",
+      "name": "decodePacked",
+      "qualified_name": "B60.AOTOracle.decodePacked",
+      "in_core_228": true
+    },
+    {
+      "all_index": 103,
+      "core228_id": "#C087",
+      "file": "BabylonAOTOracle.lean",
+      "line": 26,
+      "kind": "def",
+      "name": "readUInt64LE",
+      "qualified_name": "B60.AOTOracle.readUInt64LE",
+      "in_core_228": true
+    },
+    {
+      "all_index": 104,
+      "core228_id": "#C088",
+      "file": "BabylonAOTOracle.lean",
+      "line": 79,
+      "kind": "def",
+      "name": "main",
+      "qualified_name": "B60.AOTOracle.main",
+      "in_core_228": true
+    },
+    {
+      "all_index": 105,
+      "core228_id": "#C089",
+      "file": "BabylonAOTOracle.lean",
+      "line": 91,
+      "kind": "def",
+      "name": "main",
+      "qualified_name": "main",
+      "in_core_228": true
+    },
+    {
+      "all_index": 106,
+      "core228_id": "#C090",
+      "file": "BabylonAeonChain.lean",
+      "line": 17,
+      "kind": "def",
+      "name": "aeon_0_events",
+      "qualified_name": "B60.Ledger.aeon_0_events",
+      "in_core_228": true
+    },
+    {
+      "all_index": 107,
+      "core228_id": "#C091",
+      "file": "BabylonAeonChain.lean",
+      "line": 1524,
+      "kind": "def",
+      "name": "aeon_1_events",
+      "qualified_name": "B60.Ledger.aeon_1_events",
+      "in_core_228": true
+    },
+    {
+      "all_index": 108,
+      "core228_id": "#C092",
+      "file": "BabylonAeonChain.lean",
+      "line": 3031,
+      "kind": "def",
+      "name": "aeon_2_events",
+      "qualified_name": "B60.Ledger.aeon_2_events",
+      "in_core_228": true
+    },
+    {
+      "all_index": 109,
+      "core228_id": "#C093",
+      "file": "BabylonAeonChain.lean",
+      "line": 4538,
+      "kind": "def",
+      "name": "aeon_3_events",
+      "qualified_name": "B60.Ledger.aeon_3_events",
+      "in_core_228": true
+    },
+    {
+      "all_index": 110,
+      "core228_id": "#C094",
+      "file": "BabylonAeonChain.lean",
+      "line": 6045,
+      "kind": "def",
+      "name": "aeon_4_events",
+      "qualified_name": "B60.Ledger.aeon_4_events",
+      "in_core_228": true
+    },
+    {
+      "all_index": 111,
+      "core228_id": "#C095",
+      "file": "BabylonAeonStress.lean",
+      "line": 15,
+      "kind": "def",
+      "name": "aeon_events",
+      "qualified_name": "B60.Ledger.aeon_events",
+      "in_core_228": true
+    },
+    {
+      "all_index": 112,
+      "core228_id": "#C096",
+      "file": "BabylonAutoTrace.lean",
+      "line": 14,
+      "kind": "def",
+      "name": "auto_execution_trace",
+      "qualified_name": "B60.Ledger.auto_execution_trace",
+      "in_core_228": true
+    },
+    {
+      "all_index": 113,
+      "core228_id": null,
+      "file": "BabylonL0Ledger.lean",
+      "line": 11,
+      "kind": "abbrev",
+      "name": "Hash32",
+      "qualified_name": "Babylon60.L0Ledger.Hash32",
+      "in_core_228": false
+    },
+    {
+      "all_index": 114,
+      "core228_id": "#C097",
+      "file": "BabylonL0Ledger.lean",
+      "line": 14,
+      "kind": "inductive",
+      "name": "AttestationTier",
+      "qualified_name": "Babylon60.L0Ledger.AttestationTier",
+      "in_core_228": true
+    },
+    {
+      "all_index": 115,
+      "core228_id": null,
+      "file": "BabylonL0Ledger.lean",
+      "line": 22,
+      "kind": "structure",
+      "name": "AnchoredFact",
+      "qualified_name": "Babylon60.L0Ledger.AnchoredFact",
+      "in_core_228": false
+    },
+    {
+      "all_index": 116,
+      "core228_id": null,
+      "file": "BabylonL0Ledger.lean",
+      "line": 28,
+      "kind": "structure",
+      "name": "LedgerEntry",
+      "qualified_name": "Babylon60.L0Ledger.LedgerEntry",
+      "in_core_228": false
+    },
+    {
+      "all_index": 117,
+      "core228_id": null,
+      "file": "BabylonL0Ledger.lean",
+      "line": 40,
+      "kind": "structure",
+      "name": "L0Database",
+      "qualified_name": "Babylon60.L0Ledger.L0Database",
+      "in_core_228": false
+    },
+    {
+      "all_index": 118,
+      "core228_id": "#C098",
+      "file": "BabylonL0Ledger.lean",
+      "line": 56,
+      "kind": "def",
+      "name": "EntryWellFormed",
+      "qualified_name": "Babylon60.L0Ledger.EntryWellFormed",
+      "in_core_228": true
+    },
+    {
+      "all_index": 119,
+      "core228_id": "#C099",
+      "file": "BabylonL0Ledger.lean",
+      "line": 61,
+      "kind": "def",
+      "name": "L0StateInvariant",
+      "qualified_name": "Babylon60.L0Ledger.L0StateInvariant",
+      "in_core_228": true
+    },
+    {
+      "all_index": 120,
+      "core228_id": "#C100",
+      "file": "BabylonL0Ledger.lean",
+      "line": 70,
+      "kind": "def",
+      "name": "TriggerAllowsInsert",
+      "qualified_name": "Babylon60.L0Ledger.TriggerAllowsInsert",
+      "in_core_228": true
+    },
+    {
+      "all_index": 121,
+      "core228_id": "#C101",
+      "file": "BabylonL0Ledger.lean",
+      "line": 80,
+      "kind": "def",
+      "name": "appendEntry",
+      "qualified_name": "Babylon60.L0Ledger.appendEntry",
+      "in_core_228": true
+    },
+    {
+      "all_index": 122,
+      "core228_id": "#C102",
+      "file": "BabylonL0Ledger.lean",
+      "line": 148,
+      "kind": "def",
+      "name": "witnessFactL0",
+      "qualified_name": "Babylon60.L0Ledger.witnessFactL0",
+      "in_core_228": true
+    },
+    {
+      "all_index": 123,
+      "core228_id": "#C103",
+      "file": "BabylonL0Ledger.lean",
+      "line": 151,
+      "kind": "def",
+      "name": "witnessEntryL0",
+      "qualified_name": "Babylon60.L0Ledger.witnessEntryL0",
+      "in_core_228": true
+    },
+    {
+      "all_index": 124,
+      "core228_id": "#C104",
+      "file": "BabylonL0Ledger.lean",
+      "line": 161,
+      "kind": "def",
+      "name": "witnessDbL0",
+      "qualified_name": "Babylon60.L0Ledger.witnessDbL0",
+      "in_core_228": true
+    },
+    {
+      "all_index": 125,
+      "core228_id": "#C105",
+      "file": "BabylonOracle.lean",
+      "line": 15,
+      "kind": "def",
+      "name": "parseLine",
+      "qualified_name": "B60.Oracle.parseLine",
+      "in_core_228": true
+    },
+    {
+      "all_index": 126,
+      "core228_id": "#C106",
+      "file": "BabylonOracle.lean",
+      "line": 54,
+      "kind": "def",
+      "name": "main",
+      "qualified_name": "main",
+      "in_core_228": true
+    },
+    {
+      "all_index": 127,
+      "core228_id": "#C107",
+      "file": "BabylonStressCorrupt.lean",
+      "line": 18,
+      "kind": "def",
+      "name": "auto_execution_trace",
+      "qualified_name": "B60.Ledger.auto_execution_trace",
+      "in_core_228": true
+    },
+    {
+      "all_index": 128,
+      "core228_id": "#C108",
+      "file": "BabylonStressTrace.lean",
+      "line": 16,
+      "kind": "def",
+      "name": "auto_execution_trace",
+      "qualified_name": "B60.Ledger.auto_execution_trace",
+      "in_core_228": true
+    },
+    {
+      "all_index": 129,
+      "core228_id": "#C109",
+      "file": "BabylonTrace.lean",
+      "line": 15,
+      "kind": "inductive",
+      "name": "Action",
+      "qualified_name": "B60.Ledger.Action",
+      "in_core_228": true
+    },
+    {
+      "all_index": 130,
+      "core228_id": null,
+      "file": "BabylonTrace.lean",
+      "line": 21,
+      "kind": "structure",
+      "name": "Event",
+      "qualified_name": "B60.Ledger.Event",
+      "in_core_228": false
+    },
+    {
+      "all_index": 131,
+      "core228_id": null,
+      "file": "BabylonTrace.lean",
+      "line": 27,
+      "kind": "structure",
+      "name": "LockState",
+      "qualified_name": "B60.Ledger.LockState",
+      "in_core_228": false
+    },
+    {
+      "all_index": 132,
+      "core228_id": "#C110",
+      "file": "BabylonTrace.lean",
+      "line": 35,
+      "kind": "def",
+      "name": "step",
+      "qualified_name": "B60.Ledger.step",
+      "in_core_228": true
+    },
+    {
+      "all_index": 133,
+      "core228_id": "#C111",
+      "file": "BabylonTrace.lean",
+      "line": 61,
+      "kind": "def",
+      "name": "runAeon",
+      "qualified_name": "B60.Ledger.runAeon",
+      "in_core_228": true
+    },
+    {
+      "all_index": 134,
+      "core228_id": "#C112",
+      "file": "BabylonTrace.lean",
+      "line": 66,
+      "kind": "def",
+      "name": "validateTraceRecursive",
+      "qualified_name": "B60.Ledger.validateTraceRecursive",
+      "in_core_228": true
+    },
+    {
+      "all_index": 135,
+      "core228_id": "#C113",
+      "file": "BabylonTrace.lean",
+      "line": 71,
+      "kind": "def",
+      "name": "validateTrace",
+      "qualified_name": "B60.Ledger.validateTrace",
+      "in_core_228": true
+    },
+    {
+      "all_index": 136,
+      "core228_id": "#C114",
+      "file": "BabylonTrace.lean",
+      "line": 79,
+      "kind": "def",
+      "name": "trace_perfect",
+      "qualified_name": "B60.Ledger.trace_perfect",
+      "in_core_228": true
+    },
+    {
+      "all_index": 137,
+      "core228_id": "#C115",
+      "file": "BabylonTrace.lean",
+      "line": 95,
+      "kind": "def",
+      "name": "trace_corrupt",
+      "qualified_name": "B60.Ledger.trace_corrupt",
+      "in_core_228": true
+    },
+    {
+      "all_index": 138,
+      "core228_id": "#C116",
+      "file": "BabylonTrace.lean",
+      "line": 105,
+      "kind": "def",
+      "name": "TraceReadsEven",
+      "qualified_name": "B60.Ledger.TraceReadsEven",
+      "in_core_228": true
+    },
+    {
+      "all_index": 139,
+      "core228_id": null,
+      "file": "BabylonTrace.lean",
+      "line": 168,
+      "kind": "abbrev",
+      "name": "NoTornReadsProp",
+      "qualified_name": "B60.Ledger.NoTornReadsProp",
+      "in_core_228": false
+    },
+    {
+      "all_index": 140,
+      "core228_id": null,
+      "file": "BabylonTrace.lean",
+      "line": 197,
+      "kind": "structure",
+      "name": "BabylonEvent",
+      "qualified_name": "B60.Ledger.BabylonEvent",
+      "in_core_228": false
+    },
+    {
+      "all_index": 141,
+      "core228_id": "#C117",
+      "file": "BabylonTrace.lean",
+      "line": 210,
+      "kind": "def",
+      "name": "ValidBabylonTransition",
+      "qualified_name": "B60.Ledger.ValidBabylonTransition",
+      "in_core_228": true
+    },
+    {
+      "all_index": 142,
+      "core228_id": "#C118",
+      "file": "BabylonTrace.lean",
+      "line": 258,
+      "kind": "def",
+      "name": "trace_step_ok",
+      "qualified_name": "B60.Ledger.trace_step_ok",
+      "in_core_228": true
+    },
+    {
+      "all_index": 143,
+      "core228_id": null,
+      "file": "BabylonTrace.lean",
+      "line": 281,
+      "kind": "structure",
+      "name": "CompositeGateState",
+      "qualified_name": "B60.Ledger.CompositeGateState",
+      "in_core_228": false
+    },
+    {
+      "all_index": 144,
+      "core228_id": "#C119",
+      "file": "BabylonTrace.lean",
+      "line": 293,
+      "kind": "def",
+      "name": "ValidCompositeAcceptance",
+      "qualified_name": "B60.Ledger.ValidCompositeAcceptance",
+      "in_core_228": true
+    },
+    {
+      "all_index": 145,
+      "core228_id": "#C120",
+      "file": "BabylonTrace.lean",
+      "line": 334,
+      "kind": "def",
+      "name": "composite_gate_ok",
+      "qualified_name": "B60.Ledger.composite_gate_ok",
+      "in_core_228": true
+    },
+    {
+      "all_index": 146,
+      "core228_id": "#C121",
+      "file": "BabylonTrace.lean",
+      "line": 351,
+      "kind": "def",
+      "name": "composite_gate_ple_91pct_fail",
+      "qualified_name": "B60.Ledger.composite_gate_ple_91pct_fail",
+      "in_core_228": true
+    },
+    {
+      "all_index": 147,
+      "core228_id": "#C122",
+      "file": "C5Affine.lean",
+      "line": 8,
+      "kind": "inductive",
+      "name": "AffineResource",
+      "qualified_name": "AffineResource",
+      "in_core_228": true
+    },
+    {
+      "all_index": 148,
+      "core228_id": "#C123",
+      "file": "C5Affine.lean",
+      "line": 14,
+      "kind": "def",
+      "name": "consume",
+      "qualified_name": "consume",
+      "in_core_228": true
+    },
+    {
+      "all_index": 149,
+      "core228_id": null,
+      "file": "C5PortHamiltonian.lean",
+      "line": 11,
+      "kind": "structure",
+      "name": "LatentFixed2D",
+      "qualified_name": "C5REAL.Proof.LatentFixed2D",
+      "in_core_228": false
+    },
+    {
+      "all_index": 150,
+      "core228_id": "#C124",
+      "file": "C5PortHamiltonian.lean",
+      "line": 17,
+      "kind": "def",
+      "name": "doubleHamiltonian",
+      "qualified_name": "C5REAL.Proof.doubleHamiltonian",
+      "in_core_228": true
+    },
+    {
+      "all_index": 151,
+      "core228_id": "#C125",
+      "file": "C5PortHamiltonian.lean",
+      "line": 21,
+      "kind": "def",
+      "name": "stepPHLD",
+      "qualified_name": "C5REAL.Proof.stepPHLD",
+      "in_core_228": true
+    },
+    {
+      "all_index": 152,
+      "core228_id": "#C126",
+      "file": "C5PortHamiltonian.lean",
+      "line": 46,
+      "kind": "def",
+      "name": "isAligned64",
+      "qualified_name": "C5REAL.Proof.isAligned64",
+      "in_core_228": true
+    },
+    {
+      "all_index": 153,
+      "core228_id": null,
+      "file": "CanonicalEnvelope.lean",
+      "line": 14,
+      "kind": "abbrev",
+      "name": "Bytes",
+      "qualified_name": "B60.CBOR.Bytes",
+      "in_core_228": false
+    },
+    {
+      "all_index": 154,
+      "core228_id": "#C127",
+      "file": "CanonicalEnvelope.lean",
+      "line": 16,
+      "kind": "def",
+      "name": "between",
+      "qualified_name": "B60.CBOR.between",
+      "in_core_228": true
+    },
+    {
+      "all_index": 155,
+      "core228_id": "#C128",
+      "file": "CanonicalEnvelope.lean",
+      "line": 20,
+      "kind": "def",
+      "name": "validUtf8",
+      "qualified_name": "B60.CBOR.validUtf8",
+      "in_core_228": true
+    },
+    {
+      "all_index": 156,
+      "core228_id": null,
+      "file": "CanonicalEnvelope.lean",
+      "line": 44,
+      "kind": "structure",
+      "name": "Codec",
+      "qualified_name": "B60.CBOR.Codec",
+      "in_core_228": false
+    },
+    {
+      "all_index": 157,
+      "core228_id": "#C129",
+      "file": "CanonicalEnvelope.lean",
+      "line": 51,
+      "kind": "def",
+      "name": "decode",
+      "qualified_name": "B60.CBOR.decode",
+      "in_core_228": true
+    },
+    {
+      "all_index": 158,
+      "core228_id": "#C130",
+      "file": "CanonicalEnvelope.lean",
+      "line": 79,
+      "kind": "def",
+      "name": "decodeChecked",
+      "qualified_name": "B60.CBOR.decodeChecked",
+      "in_core_228": true
+    },
+    {
+      "all_index": 159,
+      "core228_id": "#C131",
+      "file": "CanonicalEnvelope.lean",
+      "line": 111,
+      "kind": "def",
+      "name": "pair",
+      "qualified_name": "B60.CBOR.pair",
+      "in_core_228": true
+    },
+    {
+      "all_index": 160,
+      "core228_id": "#C132",
+      "file": "CanonicalEnvelope.lean",
+      "line": 122,
+      "kind": "def",
+      "name": "«prefix»",
+      "qualified_name": "B60.CBOR.«prefix»",
+      "in_core_228": true
+    },
+    {
+      "all_index": 161,
+      "core228_id": "#C133",
+      "file": "CanonicalEnvelope.lean",
+      "line": 130,
+      "kind": "def",
+      "name": "uint",
+      "qualified_name": "B60.CBOR.uint",
+      "in_core_228": true
+    },
+    {
+      "all_index": 162,
+      "core228_id": "#C134",
+      "file": "CanonicalEnvelope.lean",
+      "line": 140,
+      "kind": "def",
+      "name": "blob",
+      "qualified_name": "B60.CBOR.blob",
+      "in_core_228": true
+    },
+    {
+      "all_index": 163,
+      "core228_id": "#C135",
+      "file": "CanonicalEnvelope.lean",
+      "line": 150,
+      "kind": "def",
+      "name": "bstr",
+      "qualified_name": "B60.CBOR.bstr",
+      "in_core_228": true
+    },
+    {
+      "all_index": 164,
+      "core228_id": "#C136",
+      "file": "CanonicalEnvelope.lean",
+      "line": 154,
+      "kind": "def",
+      "name": "tstr",
+      "qualified_name": "B60.CBOR.tstr",
+      "in_core_228": true
+    },
+    {
+      "all_index": 165,
+      "core228_id": "#C137",
+      "file": "CanonicalEnvelope.lean",
+      "line": 156,
+      "kind": "def",
+      "name": "boolean",
+      "qualified_name": "B60.CBOR.boolean",
+      "in_core_228": true
+    },
+    {
+      "all_index": 166,
+      "core228_id": "#C138",
+      "file": "CanonicalEnvelope.lean",
+      "line": 165,
+      "kind": "def",
+      "name": "null",
+      "qualified_name": "B60.CBOR.null",
+      "in_core_228": true
+    },
+    {
+      "all_index": 167,
+      "core228_id": "#C139",
+      "file": "CanonicalEnvelope.lean",
+      "line": 174,
+      "kind": "def",
+      "name": "parseMany",
+      "qualified_name": "B60.CBOR.parseMany",
+      "in_core_228": true
+    },
+    {
+      "all_index": 168,
+      "core228_id": "#C140",
+      "file": "CanonicalEnvelope.lean",
+      "line": 181,
+      "kind": "def",
+      "name": "encodeMany",
+      "qualified_name": "B60.CBOR.encodeMany",
+      "in_core_228": true
+    },
+    {
+      "all_index": 169,
+      "core228_id": "#C141",
+      "file": "CanonicalEnvelope.lean",
+      "line": 195,
+      "kind": "def",
+      "name": "arrayOf",
+      "qualified_name": "B60.CBOR.arrayOf",
+      "in_core_228": true
+    },
+    {
+      "all_index": 170,
+      "core228_id": "#C142",
+      "file": "CanonicalHead.lean",
+      "line": 13,
+      "kind": "def",
+      "name": "encodeBE",
+      "qualified_name": "B60.CBOR.encodeBE",
+      "in_core_228": true
+    },
+    {
+      "all_index": 171,
+      "core228_id": "#C143",
+      "file": "CanonicalHead.lean",
+      "line": 17,
+      "kind": "def",
+      "name": "decodeBE",
+      "qualified_name": "B60.CBOR.decodeBE",
+      "in_core_228": true
+    },
+    {
+      "all_index": 172,
+      "core228_id": "#C144",
+      "file": "CanonicalHead.lean",
+      "line": 47,
+      "kind": "def",
+      "name": "headByte",
+      "qualified_name": "B60.CBOR.headByte",
+      "in_core_228": true
+    },
+    {
+      "all_index": 173,
+      "core228_id": "#C145",
+      "file": "CanonicalHead.lean",
+      "line": 49,
+      "kind": "def",
+      "name": "encodeHead",
+      "qualified_name": "B60.CBOR.encodeHead",
+      "in_core_228": true
+    },
+    {
+      "all_index": 174,
+      "core228_id": "#C146",
+      "file": "CanonicalHead.lean",
+      "line": 56,
+      "kind": "def",
+      "name": "decodePayload",
+      "qualified_name": "B60.CBOR.decodePayload",
+      "in_core_228": true
+    },
+    {
+      "all_index": 175,
+      "core228_id": "#C147",
+      "file": "CanonicalHead.lean",
+      "line": 67,
+      "kind": "def",
+      "name": "decodeHead",
+      "qualified_name": "B60.CBOR.decodeHead",
+      "in_core_228": true
+    },
+    {
+      "all_index": 176,
+      "core228_id": "#C148",
+      "file": "Destiladora_838c463da193b48f.lean",
+      "line": 15,
+      "kind": "def",
+      "name": "expectedAstPrefix",
+      "qualified_name": "B60.Destiladora.C_838c463da193b48f.expectedAstPrefix",
+      "in_core_228": true
+    },
+    {
+      "all_index": 177,
+      "core228_id": "#C149",
+      "file": "Destiladora_838c463da193b48f.lean",
+      "line": 16,
+      "kind": "def",
+      "name": "expectedFilesCount",
+      "qualified_name": "B60.Destiladora.C_838c463da193b48f.expectedFilesCount",
+      "in_core_228": true
+    },
+    {
+      "all_index": 178,
+      "core228_id": "#C150",
+      "file": "Destiladora_838c463da193b48f.lean",
+      "line": 19,
+      "kind": "def",
+      "name": "seqlock_write_begin",
+      "qualified_name": "B60.Destiladora.C_838c463da193b48f.seqlock_write_begin",
+      "in_core_228": true
+    },
+    {
+      "all_index": 179,
+      "core228_id": "#C151",
+      "file": "Destiladora_838c463da193b48f.lean",
+      "line": 20,
+      "kind": "def",
+      "name": "seqlock_write_commit",
+      "qualified_name": "B60.Destiladora.C_838c463da193b48f.seqlock_write_commit",
+      "in_core_228": true
+    },
+    {
+      "all_index": 180,
+      "core228_id": null,
+      "file": "Destiladora_838c463da193b48f.lean",
+      "line": 33,
+      "kind": "structure",
+      "name": "SystemState",
+      "qualified_name": "B60.Destiladora.C_838c463da193b48f.SystemState",
+      "in_core_228": false
+    },
+    {
+      "all_index": 181,
+      "core228_id": null,
+      "file": "Destiladora_838c463da193b48f.lean",
+      "line": 39,
+      "kind": "structure",
+      "name": "FastPathContext",
+      "qualified_name": "B60.Destiladora.C_838c463da193b48f.FastPathContext",
+      "in_core_228": false
+    },
+    {
+      "all_index": 182,
+      "core228_id": "#C152",
+      "file": "Destiladora_838c463da193b48f.lean",
+      "line": 44,
+      "kind": "inductive",
+      "name": "FastPathVerdict",
+      "qualified_name": "B60.Destiladora.C_838c463da193b48f.FastPathVerdict",
+      "in_core_228": true
+    },
+    {
+      "all_index": 183,
+      "core228_id": "#C153",
+      "file": "Destiladora_838c463da193b48f.lean",
+      "line": 49,
+      "kind": "inductive",
+      "name": "Action",
+      "qualified_name": "B60.Destiladora.C_838c463da193b48f.Action",
+      "in_core_228": true
+    },
+    {
+      "all_index": 184,
+      "core228_id": "#C154",
+      "file": "Destiladora_838c463da193b48f.lean",
+      "line": 55,
+      "kind": "def",
+      "name": "evalFastPath",
+      "qualified_name": "B60.Destiladora.C_838c463da193b48f.evalFastPath",
+      "in_core_228": true
+    },
+    {
+      "all_index": 185,
+      "core228_id": "#C155",
+      "file": "Destiladora_838c463da193b48f.lean",
+      "line": 78,
+      "kind": "def",
+      "name": "transition",
+      "qualified_name": "B60.Destiladora.C_838c463da193b48f.transition",
+      "in_core_228": true
+    },
+    {
+      "all_index": 186,
+      "core228_id": "#C156",
+      "file": "Destiladora_838c463da193b48f.lean",
+      "line": 86,
+      "kind": "def",
+      "name": "runTrace",
+      "qualified_name": "B60.Destiladora.C_838c463da193b48f.runTrace",
+      "in_core_228": true
+    },
+    {
+      "all_index": 187,
+      "core228_id": "#C157",
+      "file": "Destiladora_838c463da193b48f.lean",
+      "line": 90,
+      "kind": "def",
+      "name": "invariant",
+      "qualified_name": "B60.Destiladora.C_838c463da193b48f.invariant",
+      "in_core_228": true
+    },
+    {
+      "all_index": 188,
+      "core228_id": "#C158",
+      "file": "ExampleSeqlockTrace.lean",
+      "line": 7,
+      "kind": "inductive",
+      "name": "Action",
+      "qualified_name": "B60.ExampleSeqlockTrace.Action",
+      "in_core_228": true
+    },
+    {
+      "all_index": 189,
+      "core228_id": null,
+      "file": "ExampleSeqlockTrace.lean",
+      "line": 10,
+      "kind": "structure",
+      "name": "SeqlockEvent",
+      "qualified_name": "B60.ExampleSeqlockTrace.SeqlockEvent",
+      "in_core_228": false
+    },
+    {
+      "all_index": 190,
+      "core228_id": "#C159",
+      "file": "ExampleSeqlockTrace.lean",
+      "line": 15,
+      "kind": "def",
+      "name": "validateTransition",
+      "qualified_name": "B60.ExampleSeqlockTrace.validateTransition",
+      "in_core_228": true
+    },
+    {
+      "all_index": 191,
+      "core228_id": "#C160",
+      "file": "ExampleSeqlockTrace.lean",
+      "line": 31,
+      "kind": "def",
+      "name": "isValidTrace",
+      "qualified_name": "B60.ExampleSeqlockTrace.isValidTrace",
+      "in_core_228": true
+    },
+    {
+      "all_index": 192,
+      "core228_id": "#C161",
+      "file": "ExampleSeqlockTrace.lean",
+      "line": 40,
+      "kind": "def",
+      "name": "validCycle",
+      "qualified_name": "B60.ExampleSeqlockTrace.validCycle",
+      "in_core_228": true
+    },
+    {
+      "all_index": 193,
+      "core228_id": "#C162",
+      "file": "HolographicPoC.lean",
+      "line": 16,
+      "kind": "def",
+      "name": "AlertaColapso",
+      "qualified_name": "AlertaColapso",
+      "in_core_228": true
+    },
+    {
+      "all_index": 194,
+      "core228_id": "#C163",
+      "file": "LarsaEquivocationSafety.lean",
+      "line": 14,
+      "kind": "def",
+      "name": "quorum_threshold",
+      "qualified_name": "LarsaEquivocationSafety.quorum_threshold",
+      "in_core_228": true
+    },
+    {
+      "all_index": 195,
+      "core228_id": "#C164",
+      "file": "LarsaEquivocationSafety.lean",
+      "line": 17,
+      "kind": "def",
+      "name": "total_nodes",
+      "qualified_name": "LarsaEquivocationSafety.total_nodes",
+      "in_core_228": true
+    },
+    {
+      "all_index": 196,
+      "core228_id": null,
+      "file": "LarsaEquivocationSafety.lean",
+      "line": 47,
+      "kind": "structure",
+      "name": "ConsensusInstance",
+      "qualified_name": "LarsaEquivocationSafety.ConsensusInstance",
+      "in_core_228": false
+    },
+    {
+      "all_index": 197,
+      "core228_id": "#C165",
+      "file": "LarsaEquivocationSafety.lean",
+      "line": 55,
+      "kind": "def",
+      "name": "instance_f1",
+      "qualified_name": "LarsaEquivocationSafety.instance_f1",
+      "in_core_228": true
+    },
+    {
+      "all_index": 198,
+      "core228_id": null,
+      "file": "LarsaEquivocationSafety.lean",
+      "line": 104,
+      "kind": "structure",
+      "name": "VerifiedQuorumInvariant",
+      "qualified_name": "LarsaEquivocationSafety.VerifiedQuorumInvariant",
+      "in_core_228": false
+    },
+    {
+      "all_index": 199,
+      "core228_id": "#C166",
+      "file": "MolochLandauer.lean",
+      "line": 14,
+      "kind": "inductive",
+      "name": "ActionClass",
+      "qualified_name": "Babylon.MolochLandauer.ActionClass",
+      "in_core_228": true
+    },
+    {
+      "all_index": 200,
+      "core228_id": null,
+      "file": "MolochLandauer.lean",
+      "line": 22,
+      "kind": "structure",
+      "name": "AgentAction",
+      "qualified_name": "Babylon.MolochLandauer.AgentAction",
+      "in_core_228": false
+    },
+    {
+      "all_index": 201,
+      "core228_id": "#C167",
+      "file": "MolochLandauer.lean",
+      "line": 33,
+      "kind": "def",
+      "name": "is_moloch_extraction",
+      "qualified_name": "Babylon.MolochLandauer.is_moloch_extraction",
+      "in_core_228": true
+    },
+    {
+      "all_index": 202,
+      "core228_id": "#C168",
+      "file": "MolochLandauer.lean",
+      "line": 42,
+      "kind": "def",
+      "name": "landauer_penalty",
+      "qualified_name": "Babylon.MolochLandauer.landauer_penalty",
+      "in_core_228": true
+    },
+    {
+      "all_index": 203,
+      "core228_id": "#C169",
+      "file": "MolochLandauer.lean",
+      "line": 49,
+      "kind": "def",
+      "name": "net_exergy_payoff",
+      "qualified_name": "Babylon.MolochLandauer.net_exergy_payoff",
+      "in_core_228": true
+    },
+    {
+      "all_index": 204,
+      "core228_id": "#C170",
+      "file": "MolochLandauer.lean",
+      "line": 53,
+      "kind": "def",
+      "name": "is_admissible",
+      "qualified_name": "Babylon.MolochLandauer.is_admissible",
+      "in_core_228": true
+    },
+    {
+      "all_index": 205,
+      "core228_id": "#C171",
+      "file": "MolochLandauer.lean",
+      "line": 105,
+      "kind": "def",
+      "name": "total_externalized_entropy",
+      "qualified_name": "Babylon.MolochLandauer.total_externalized_entropy",
+      "in_core_228": true
+    },
+    {
+      "all_index": 206,
+      "core228_id": "#C172",
+      "file": "MolochLandauer.lean",
+      "line": 110,
+      "kind": "def",
+      "name": "total_landauer_penalties",
+      "qualified_name": "Babylon.MolochLandauer.total_landauer_penalties",
+      "in_core_228": true
+    },
+    {
+      "all_index": 207,
+      "core228_id": "#C173",
+      "file": "NavierStokesBKM.lean",
+      "line": 11,
+      "kind": "inductive",
+      "name": "VortexAction",
+      "qualified_name": "B60.NavierStokes.VortexAction",
+      "in_core_228": true
+    },
+    {
+      "all_index": 208,
+      "core228_id": null,
+      "file": "NavierStokesBKM.lean",
+      "line": 19,
+      "kind": "structure",
+      "name": "FluidEvent",
+      "qualified_name": "B60.NavierStokes.FluidEvent",
+      "in_core_228": false
+    },
+    {
+      "all_index": 209,
+      "core228_id": null,
+      "file": "NavierStokesBKM.lean",
+      "line": 25,
+      "kind": "structure",
+      "name": "FluidState",
+      "qualified_name": "B60.NavierStokes.FluidState",
+      "in_core_228": false
+    },
+    {
+      "all_index": 210,
+      "core228_id": "#C174",
+      "file": "NavierStokesBKM.lean",
+      "line": 35,
+      "kind": "def",
+      "name": "BKM_CRITICAL_THRESHOLD",
+      "qualified_name": "B60.NavierStokes.BKM_CRITICAL_THRESHOLD",
+      "in_core_228": true
+    },
+    {
+      "all_index": 211,
+      "core228_id": "#C175",
+      "file": "NavierStokesBKM.lean",
+      "line": 38,
+      "kind": "def",
+      "name": "CONSTANTIN_FEFFERMAN_SMOOTH_FLOOR",
+      "qualified_name": "B60.NavierStokes.CONSTANTIN_FEFFERMAN_SMOOTH_FLOOR",
+      "in_core_228": true
+    },
+    {
+      "all_index": 212,
+      "core228_id": "#C176",
+      "file": "NavierStokesBKM.lean",
+      "line": 41,
+      "kind": "def",
+      "name": "step",
+      "qualified_name": "B60.NavierStokes.step",
+      "in_core_228": true
+    },
+    {
+      "all_index": 213,
+      "core228_id": "#C177",
+      "file": "NavierStokesBKM.lean",
+      "line": 59,
+      "kind": "def",
+      "name": "runTrace",
+      "qualified_name": "B60.NavierStokes.runTrace",
+      "in_core_228": true
+    },
+    {
+      "all_index": 214,
+      "core228_id": "#C178",
+      "file": "NavierStokesBKM.lean",
+      "line": 63,
+      "kind": "def",
+      "name": "initialState",
+      "qualified_name": "B60.NavierStokes.initialState",
+      "in_core_228": true
+    },
+    {
+      "all_index": 215,
+      "core228_id": "#C179",
+      "file": "NavierStokesBKM.lean",
+      "line": 67,
+      "kind": "inductive",
+      "name": "AuditResult",
+      "qualified_name": "B60.NavierStokes.AuditResult",
+      "in_core_228": true
+    },
+    {
+      "all_index": 216,
+      "core228_id": "#C180",
+      "file": "NavierStokesBKM.lean",
+      "line": 73,
+      "kind": "def",
+      "name": "auditTrace",
+      "qualified_name": "B60.NavierStokes.auditTrace",
+      "in_core_228": true
+    },
+    {
+      "all_index": 217,
+      "core228_id": "#C181",
+      "file": "NavierStokesBKM.lean",
+      "line": 87,
+      "kind": "def",
+      "name": "trace_depleted",
+      "qualified_name": "B60.NavierStokes.trace_depleted",
+      "in_core_228": true
+    },
+    {
+      "all_index": 218,
+      "core228_id": "#C182",
+      "file": "NavierStokesBKM.lean",
+      "line": 100,
+      "kind": "def",
+      "name": "trace_singular_candidate",
+      "qualified_name": "B60.NavierStokes.trace_singular_candidate",
+      "in_core_228": true
+    },
+    {
+      "all_index": 219,
+      "core228_id": null,
+      "file": "NavierStokesBKM.lean",
+      "line": 117,
+      "kind": "structure",
+      "name": "DiscreteChainComplex",
+      "qualified_name": "B60.NavierStokes.DiscreteChainComplex",
+      "in_core_228": false
+    },
+    {
+      "all_index": 220,
+      "core228_id": null,
+      "file": "NavierStokesBKM.lean",
+      "line": 136,
+      "kind": "structure",
+      "name": "HelmholtzHodgeComponents",
+      "qualified_name": "B60.NavierStokes.HelmholtzHodgeComponents",
+      "in_core_228": false
+    },
+    {
+      "all_index": 221,
+      "core228_id": "#C183",
+      "file": "NavierStokesBKM.lean",
+      "line": 142,
+      "kind": "def",
+      "name": "isStrictlySolenoidal",
+      "qualified_name": "B60.NavierStokes.isStrictlySolenoidal",
+      "in_core_228": true
+    },
+    {
+      "all_index": 222,
+      "core228_id": "#C184",
+      "file": "NavierStokesOracle.lean",
+      "line": 15,
+      "kind": "def",
+      "name": "parseLine",
+      "qualified_name": "B60.NavierStokes.Oracle.parseLine",
+      "in_core_228": true
+    },
+    {
+      "all_index": 223,
+      "core228_id": "#C185",
+      "file": "NavierStokesOracle.lean",
+      "line": 57,
+      "kind": "def",
+      "name": "main",
+      "qualified_name": "main",
+      "in_core_228": true
+    },
+    {
+      "all_index": 224,
+      "core228_id": null,
+      "file": "NavierStokesSobolevKato.lean",
+      "line": 13,
+      "kind": "structure",
+      "name": "DiscreteHilbertSpace",
+      "qualified_name": "B60.NavierStokes.SobolevKato.DiscreteHilbertSpace",
+      "in_core_228": false
+    },
+    {
+      "all_index": 225,
+      "core228_id": "#C186",
+      "file": "NavierStokesSobolevKato.lean",
+      "line": 23,
+      "kind": "def",
+      "name": "isSobolevContinuousEmbedding",
+      "qualified_name": "B60.NavierStokes.SobolevKato.isSobolevContinuousEmbedding",
+      "in_core_228": true
+    },
+    {
+      "all_index": 226,
+      "core228_id": "#C187",
+      "file": "NavierStokesSobolevKato.lean",
+      "line": 40,
+      "kind": "def",
+      "name": "isKatoLocalWellPosed",
+      "qualified_name": "B60.NavierStokes.SobolevKato.isKatoLocalWellPosed",
+      "in_core_228": true
+    },
+    {
+      "all_index": 227,
+      "core228_id": "#C188",
+      "file": "NavierStokesSobolevKato.lean",
+      "line": 51,
+      "kind": "def",
+      "name": "verifyDissipationCurryHoward",
+      "qualified_name": "B60.NavierStokes.SobolevKato.verifyDissipationCurryHoward",
+      "in_core_228": true
+    },
+    {
+      "all_index": 228,
+      "core228_id": null,
+      "file": "NavierStokesSobolevKato.lean",
+      "line": 62,
+      "kind": "structure",
+      "name": "SexagesimalInterval",
+      "qualified_name": "B60.NavierStokes.SobolevKato.SexagesimalInterval",
+      "in_core_228": false
+    },
+    {
+      "all_index": 229,
+      "core228_id": "#C189",
+      "file": "NavierStokesSobolevKato.lean",
+      "line": 67,
+      "kind": "def",
+      "name": "intervalContains",
+      "qualified_name": "B60.NavierStokes.SobolevKato.intervalContains",
+      "in_core_228": true
+    },
+    {
+      "all_index": 230,
+      "core228_id": "#C190",
+      "file": "NavierStokesSobolevKato.lean",
+      "line": 79,
+      "kind": "def",
+      "name": "gronwallBound",
+      "qualified_name": "B60.NavierStokes.SobolevKato.gronwallBound",
+      "in_core_228": true
+    },
+    {
+      "all_index": 231,
+      "core228_id": "#C191",
+      "file": "NavierStokesSobolevKato.lean",
+      "line": 82,
+      "kind": "def",
+      "name": "isGronwallBounded",
+      "qualified_name": "B60.NavierStokes.SobolevKato.isGronwallBounded",
+      "in_core_228": true
+    },
+    {
+      "all_index": 232,
+      "core228_id": null,
+      "file": "NavierStokesSobolevKato.lean",
+      "line": 93,
+      "kind": "structure",
+      "name": "CausalStepState",
+      "qualified_name": "B60.NavierStokes.SobolevKato.CausalStepState",
+      "in_core_228": false
+    },
+    {
+      "all_index": 233,
+      "core228_id": "#C192",
+      "file": "NavierStokesSobolevKato.lean",
+      "line": 99,
+      "kind": "def",
+      "name": "transitionCausalStep",
+      "qualified_name": "B60.NavierStokes.SobolevKato.transitionCausalStep",
+      "in_core_228": true
+    },
+    {
+      "all_index": 234,
+      "core228_id": "#C193",
+      "file": "NavierStokesSobolevKato.lean",
+      "line": 105,
+      "kind": "def",
+      "name": "verifyCausalTrace",
+      "qualified_name": "B60.NavierStokes.SobolevKato.verifyCausalTrace",
+      "in_core_228": true
+    },
+    {
+      "all_index": 235,
+      "core228_id": "#C194",
+      "file": "NavierStokesSobolevKato.lean",
+      "line": 117,
+      "kind": "def",
+      "name": "AXIOM_ID_SOBOLEV_EMBEDDING",
+      "qualified_name": "B60.NavierStokes.SobolevKato.AXIOM_ID_SOBOLEV_EMBEDDING",
+      "in_core_228": true
+    },
+    {
+      "all_index": 236,
+      "core228_id": "#C195",
+      "file": "NavierStokesSobolevKato.lean",
+      "line": 118,
+      "kind": "def",
+      "name": "AXIOM_ID_KATO_LOCAL_EXISTENCE",
+      "qualified_name": "B60.NavierStokes.SobolevKato.AXIOM_ID_KATO_LOCAL_EXISTENCE",
+      "in_core_228": true
+    },
+    {
+      "all_index": 237,
+      "core228_id": "#C196",
+      "file": "NavierStokesSobolevKato.lean",
+      "line": 119,
+      "kind": "def",
+      "name": "AXIOM_ID_BKM_CRITERION",
+      "qualified_name": "B60.NavierStokes.SobolevKato.AXIOM_ID_BKM_CRITERION",
+      "in_core_228": true
+    },
+    {
+      "all_index": 238,
+      "core228_id": "#C197",
+      "file": "NavierStokesSobolevKato.lean",
+      "line": 120,
+      "kind": "def",
+      "name": "AXIOM_ID_GRONWALL_LEMMA",
+      "qualified_name": "B60.NavierStokes.SobolevKato.AXIOM_ID_GRONWALL_LEMMA",
+      "in_core_228": true
+    },
+    {
+      "all_index": 239,
+      "core228_id": null,
+      "file": "NavierStokesSobolevKato.lean",
+      "line": 131,
+      "kind": "structure",
+      "name": "RegularityCertificate",
+      "qualified_name": "B60.NavierStokes.SobolevKato.RegularityCertificate",
+      "in_core_228": false
+    },
+    {
+      "all_index": 240,
+      "core228_id": "#C198",
+      "file": "NavierStokesSobolevKato.lean",
+      "line": 137,
+      "kind": "def",
+      "name": "isMillenniumRegular",
+      "qualified_name": "B60.NavierStokes.SobolevKato.isMillenniumRegular",
+      "in_core_228": true
+    },
+    {
+      "all_index": 241,
+      "core228_id": "#C199",
+      "file": "NemesisWave4.lean",
+      "line": 15,
+      "kind": "inductive",
+      "name": "WalState",
+      "qualified_name": "NemesisWave4.WalState",
+      "in_core_228": true
+    },
+    {
+      "all_index": 242,
+      "core228_id": "#C200",
+      "file": "NemesisWave4.lean",
+      "line": 23,
+      "kind": "inductive",
+      "name": "IsolationStrength",
+      "qualified_name": "NemesisWave4.IsolationStrength",
+      "in_core_228": true
+    },
+    {
+      "all_index": 243,
+      "core228_id": null,
+      "file": "NemesisWave4.lean",
+      "line": 30,
+      "kind": "structure",
+      "name": "ResourceMonitorState",
+      "qualified_name": "NemesisWave4.ResourceMonitorState",
+      "in_core_228": false
+    },
+    {
+      "all_index": 244,
+      "core228_id": "#C201",
+      "file": "NemesisWave4.lean",
+      "line": 41,
+      "kind": "inductive",
+      "name": "EcpEvent",
+      "qualified_name": "NemesisWave4.EcpEvent",
+      "in_core_228": true
+    },
+    {
+      "all_index": 245,
+      "core228_id": "#C202",
+      "file": "NemesisWave4.lean",
+      "line": 50,
+      "kind": "def",
+      "name": "stepEcp",
+      "qualified_name": "NemesisWave4.stepEcp",
+      "in_core_228": true
+    },
+    {
+      "all_index": 246,
+      "core228_id": "#C203",
+      "file": "NemesisWave4.lean",
+      "line": 91,
+      "kind": "def",
+      "name": "validateEcpTrace",
+      "qualified_name": "NemesisWave4.validateEcpTrace",
+      "in_core_228": true
+    },
+    {
+      "all_index": 247,
+      "core228_id": "#C204",
+      "file": "NemesisWave4.lean",
+      "line": 99,
+      "kind": "def",
+      "name": "evaluateSealStrength",
+      "qualified_name": "NemesisWave4.evaluateSealStrength",
+      "in_core_228": true
+    },
+    {
+      "all_index": 248,
+      "core228_id": "#C205",
+      "file": "NemesisWave4.lean",
+      "line": 112,
+      "kind": "def",
+      "name": "validateDeploymentPermit",
+      "qualified_name": "NemesisWave4.validateDeploymentPermit",
+      "in_core_228": true
+    },
+    {
+      "all_index": 249,
+      "core228_id": "#C206",
+      "file": "NemesisWave4.lean",
+      "line": 121,
+      "kind": "def",
+      "name": "initialMonitor",
+      "qualified_name": "NemesisWave4.initialMonitor",
+      "in_core_228": true
+    },
+    {
+      "all_index": 250,
+      "core228_id": "#C207",
+      "file": "NemesisWave4.lean",
+      "line": 132,
+      "kind": "def",
+      "name": "validWave4Trace",
+      "qualified_name": "NemesisWave4.validWave4Trace",
+      "in_core_228": true
+    },
+    {
+      "all_index": 251,
+      "core228_id": "#C208",
+      "file": "NemesisWave4.lean",
+      "line": 141,
+      "kind": "def",
+      "name": "corruptFencingRaceTrace",
+      "qualified_name": "NemesisWave4.corruptFencingRaceTrace",
+      "in_core_228": true
+    },
+    {
+      "all_index": 252,
+      "core228_id": "#C209",
+      "file": "NemesisWave4.lean",
+      "line": 149,
+      "kind": "def",
+      "name": "corruptBlindRetryTrace",
+      "qualified_name": "NemesisWave4.corruptBlindRetryTrace",
+      "in_core_228": true
+    },
+    {
+      "all_index": 253,
+      "core228_id": "#C210",
+      "file": "NemesisWave4.lean",
+      "line": 156,
+      "kind": "def",
+      "name": "corruptBudgetCompositionTrace",
+      "qualified_name": "NemesisWave4.corruptBudgetCompositionTrace",
+      "in_core_228": true
+    },
+    {
+      "all_index": 254,
+      "core228_id": null,
+      "file": "TicketEnvelope.lean",
+      "line": 19,
+      "kind": "abbrev",
+      "name": "Control",
+      "qualified_name": "B60.Ticket.Control",
+      "in_core_228": false
+    },
+    {
+      "all_index": 255,
+      "core228_id": "#C211",
+      "file": "TicketEnvelope.lean",
+      "line": 20,
+      "kind": "def",
+      "name": "controlTriple",
+      "qualified_name": "B60.Ticket.controlTriple",
+      "in_core_228": true
+    },
+    {
+      "all_index": 256,
+      "core228_id": "#C212",
+      "file": "TicketEnvelope.lean",
+      "line": 22,
+      "kind": "def",
+      "name": "controlCodec",
+      "qualified_name": "B60.Ticket.controlCodec",
+      "in_core_228": true
+    },
+    {
+      "all_index": 257,
+      "core228_id": null,
+      "file": "TicketEnvelope.lean",
+      "line": 46,
+      "kind": "abbrev",
+      "name": "Payload",
+      "qualified_name": "B60.Ticket.Payload",
+      "in_core_228": false
+    },
+    {
+      "all_index": 258,
+      "core228_id": "#C213",
+      "file": "TicketEnvelope.lean",
+      "line": 49,
+      "kind": "def",
+      "name": "payloadCodec",
+      "qualified_name": "B60.Ticket.payloadCodec",
+      "in_core_228": true
+    },
+    {
+      "all_index": 259,
+      "core228_id": "#C214",
+      "file": "TicketEnvelope.lean",
+      "line": 54,
+      "kind": "def",
+      "name": "utf8",
+      "qualified_name": "B60.Ticket.utf8",
+      "in_core_228": true
+    },
+    {
+      "all_index": 260,
+      "core228_id": "#C215",
+      "file": "TicketEnvelope.lean",
+      "line": 55,
+      "kind": "def",
+      "name": "text",
+      "qualified_name": "B60.Ticket.text",
+      "in_core_228": true
+    },
+    {
+      "all_index": 261,
+      "core228_id": "#C216",
+      "file": "TicketEnvelope.lean",
+      "line": 58,
+      "kind": "def",
+      "name": "shape",
+      "qualified_name": "B60.Ticket.shape",
+      "in_core_228": true
+    },
+    {
+      "all_index": 262,
+      "core228_id": null,
+      "file": "TicketEnvelope.lean",
+      "line": 74,
+      "kind": "abbrev",
+      "name": "Ticket",
+      "qualified_name": "B60.Ticket.Ticket",
+      "in_core_228": false
+    },
+    {
+      "all_index": 263,
+      "core228_id": "#C217",
+      "file": "TicketEnvelope.lean",
+      "line": 76,
+      "kind": "def",
+      "name": "encode",
+      "qualified_name": "B60.Ticket.encode",
+      "in_core_228": true
+    },
+    {
+      "all_index": 264,
+      "core228_id": "#C218",
+      "file": "TicketEnvelope.lean",
+      "line": 77,
+      "kind": "def",
+      "name": "decode",
+      "qualified_name": "B60.Ticket.decode",
+      "in_core_228": true
+    },
+    {
+      "all_index": 265,
+      "core228_id": null,
+      "file": "TicketEnvelope.lean",
+      "line": 107,
+      "kind": "abbrev",
+      "name": "SignedTicket",
+      "qualified_name": "B60.Ticket.SignedTicket",
+      "in_core_228": false
+    },
+    {
+      "all_index": 266,
+      "core228_id": "#C219",
+      "file": "TicketEnvelope.lean",
+      "line": 108,
+      "kind": "def",
+      "name": "encodeExternal",
+      "qualified_name": "B60.Ticket.encodeExternal",
+      "in_core_228": true
+    },
+    {
+      "all_index": 267,
+      "core228_id": "#C220",
+      "file": "TicketEnvelope.lean",
+      "line": 109,
+      "kind": "def",
+      "name": "decodeExternal",
+      "qualified_name": "B60.Ticket.decodeExternal",
+      "in_core_228": true
+    },
+    {
+      "all_index": 268,
+      "core228_id": "#C221",
+      "file": "TicketEnvelope.lean",
+      "line": 129,
+      "kind": "def",
+      "name": "hexDigit",
+      "qualified_name": "B60.Ticket.hexDigit",
+      "in_core_228": true
+    },
+    {
+      "all_index": 269,
+      "core228_id": "#C222",
+      "file": "TicketEnvelope.lean",
+      "line": 135,
+      "kind": "def",
+      "name": "parseHexChars",
+      "qualified_name": "B60.Ticket.parseHexChars",
+      "in_core_228": true
+    },
+    {
+      "all_index": 270,
+      "core228_id": "#C223",
+      "file": "TicketEnvelope.lean",
+      "line": 144,
+      "kind": "def",
+      "name": "parseHex",
+      "qualified_name": "B60.Ticket.parseHex",
+      "in_core_228": true
+    },
+    {
+      "all_index": 271,
+      "core228_id": "#C224",
+      "file": "TicketEnvelope.lean",
+      "line": 145,
+      "kind": "def",
+      "name": "hex",
+      "qualified_name": "B60.Ticket.hex",
+      "in_core_228": true
+    },
+    {
+      "all_index": 272,
+      "core228_id": "#C225",
+      "file": "TicketEnvelope.lean",
+      "line": 150,
+      "kind": "def",
+      "name": "generatorKey",
+      "qualified_name": "B60.Ticket.generatorKey",
+      "in_core_228": true
+    },
+    {
+      "all_index": 273,
+      "core228_id": "#C226",
+      "file": "TicketEnvelope.lean",
+      "line": 154,
+      "kind": "def",
+      "name": "fixturePayload",
+      "qualified_name": "B60.Ticket.fixturePayload",
+      "in_core_228": true
+    },
+    {
+      "all_index": 274,
+      "core228_id": "#C227",
+      "file": "TicketEnvelope.lean",
+      "line": 161,
+      "kind": "def",
+      "name": "fixture",
+      "qualified_name": "B60.Ticket.fixture",
+      "in_core_228": true
+    },
+    {
+      "all_index": 275,
+      "core228_id": "#C228",
+      "file": "TicketEnvelope.lean",
+      "line": 200,
+      "kind": "def",
+      "name": "main",
+      "qualified_name": "main",
+      "in_core_228": true
+    }
+  ]
+}

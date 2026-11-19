@@ -1,0 +1,3 @@
+# La salida de compilación va a ../scratch/, ya ignorado por Git a cualquier profundidad.
+[build]
+target-dir = "../scratch/rust-target"

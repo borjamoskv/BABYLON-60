@@ -1,0 +1,248 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
+# Causal-Determinist: ANERGY TOKEN PURGE ENGINE
+# =================================================================================
+# SYS_ID: LEA_OMEGA (Loose End Annihilator)
+# REALITY_LEVEL: Causal-Determinist (0% Anergy / 100% Deterministic Execution)
+# PROTOCOL: Anergy_Token_Purge -> Organizes Root Directory Entropy
+# [CORTEX-TAINT:borjamoskv:anergy_token_purge:2026-07-18T05:00:00Z]
+
+import os
+import shutil
+import datetime
+import hashlib
+import json
+import yaml
+import subprocess
+import shlex
+import stat
+from pathlib import Path
+from typing import List, Dict, Tuple, Any
+
+PROJECT_ROOT = str(Path(__file__).absolute().parents[3])
+ARCHIVE_ROOT = os.path.join(PROJECT_ROOT, ".cortex", "archive")
+ARCHIVE_SCRIPTS = os.path.join(ARCHIVE_ROOT, "scripts")
+ARCHIVE_DATA = os.path.join(ARCHIVE_ROOT, "data")
+ARCHIVE_DBS = os.path.join(ARCHIVE_ROOT, "dbs")
+AUDIT_YAML = os.path.join(PROJECT_ROOT, "cortex", "audits", "anergy_purge_audit.yaml")
+
+# Do not move these protected root files (Invariant Core)
+PROTECTED_FILES = {
+    ".coderabbit.yaml",
+    ".gitattributes",
+    ".gitignore",
+    ".gitmodules",
+    "AGENTS.md",
+    "Anergy_Audit.yml",
+    "COLLAPSE_P0.sh",
+    "Dockerfile",
+    "ETHOS.md",
+    "LEARN_SHIP_ITERATE_INVARIANT.md",
+    "LICENSE.md",
+    "LLM_THERMODYNAMICS_LAYERS.md",
+    "LLM_THERMODYNAMICS_LAYERS_5_8.md",
+    "MANIFIESTO_CENTURIA.md",
+    "MOSKV_1_APEX_BLUEPRINT.md",
+    "Makefile",
+    "PROJECT.md",
+    "README.md",
+    "README_APEX.md",
+    "SECURITY.md",
+    "STATUS.md",
+    "TEXTBOOK_EXERGY_INVARIANT.md",
+    "VECTOR_A_MASTER_LEDGER_DESIGN.md",
+    "pyproject.toml",
+    "uv.lock",
+    "cortex_purge_anergy.py",
+    "cortex_ssm_mamba_core.py",
+    "cortex_mamba_block.py",
+    "cortex_mamba_network.py",
+    "cortex_mamba_inference.py",
+    "cortex_bpe_tokenizer.py",
+    "core_graph_ledger.py",
+    "io_persist_ledger.py",
+    "net_mamba_ledger_engine.py",
+    "index.html",
+    "license_sovereign_validator.py",
+    "cortex_chaos_monad.py",
+    "package.json",
+    "package-lock.json",
+    "tsconfig.json",
+    "RELEASE_MANIFEST.json",
+    "skills-lock.json",
+}
+
+
+def _assert_confined_path(target_path: str, root: str) -> None:
+    root_clean = os.path.abspath(root)
+    if os.path.islink(root_clean):
+        raise BFTCausalInvariantError(f"PROJECT_ROOT cannot be a symlink: {root}")
+    target_abs = os.path.abspath(target_path)
+    try:
+        rel = os.path.relpath(target_abs, root_clean)
+    except ValueError as exc:
+        raise BFTCausalInvariantError(f"Target path on different mount: {target_path}") from exc
+    if rel == ".." or rel.startswith(".." + os.sep):
+        raise BFTCausalInvariantError(f"Target path escapes PROJECT_ROOT: {target_path}")
+    curr = root_clean
+    for part in Path(rel).parts:
+        if part in ("", "."):
+            continue
+        curr = os.path.join(curr, part)
+        if os.path.lexists(curr) and os.path.islink(curr):
+            raise BFTCausalInvariantError(f"Symlink component rejected in archive path: {curr}")
+    real_root = os.path.realpath(root_clean)
+    real_target = os.path.realpath(target_abs)
+    if real_target != real_root and not real_target.startswith(real_root + os.sep):
+        raise BFTCausalInvariantError(f"Resolved destination escapes PROJECT_ROOT: {target_path}")
+
+
+def _git_tracked_root_files(root: str) -> set[str]:
+    if not os.path.lexists(os.path.join(root, ".git")):
+        return set()
+    try:
+        res = subprocess.run(
+            ["git", "-C", root, "ls-files", "-z"],
+            capture_output=True,
+            check=True,
+            timeout=5,
+        )
+    except (OSError, subprocess.SubprocessError) as exc:
+        raise BFTCausalInvariantError("Unable to query git tracked files for purge safety") from exc
+    tracked: set[str] = set()
+    for entry in res.stdout.decode("utf-8", errors="surrogateescape").split("\0"):
+        if entry and "/" not in entry and "\\" not in entry:
+            tracked.add(entry)
+    return tracked
+
+
+def ensure_dirs() -> None:
+    for d in [ARCHIVE_SCRIPTS, ARCHIVE_DATA, ARCHIVE_DBS]:
+        _assert_confined_path(d, PROJECT_ROOT)
+        os.makedirs(d, exist_ok=True)
+        _assert_confined_path(d, PROJECT_ROOT)
+
+
+def _get_target_dir(item: str) -> str | None:
+    if item.startswith("."):
+        return None
+    # Python sources and bytecode can be importable without appearing in a
+    # handwritten allowlist. They are never archival candidates.
+    if item.endswith((".py", ".pyc", ".pyo", ".so", ".pyd")):
+        return None
+    if item.endswith(".db"):
+        return ARCHIVE_DBS
+    if item.endswith((".json", ".jsonl", ".csv", ".npz", ".png", ".html", ".sarif", ".yaml", ".yml")):
+        return ARCHIVE_DATA
+    return None
+
+
+def categorize_and_move() -> Tuple[int, int, List[Dict[str, Any]]]:
+    moved_count: int = 0
+    moved_bytes: int = 0
+    actions: List[Dict[str, Any]] = []
+    _assert_confined_path(PROJECT_ROOT, PROJECT_ROOT)
+    tracked_files = _git_tracked_root_files(PROJECT_ROOT)
+
+    for item in os.listdir(PROJECT_ROOT):
+        item_path = os.path.join(PROJECT_ROOT, item)
+        if (
+            not stat.S_ISREG(os.lstat(item_path).st_mode)
+            or item in PROTECTED_FILES
+            or item in tracked_files
+            or item.startswith(".")
+        ):
+            continue
+
+        target_dir = _get_target_dir(item)
+        if not target_dir:
+            continue
+
+        _assert_confined_path(target_dir, PROJECT_ROOT)
+        dest_path = os.path.join(target_dir, item)
+        _assert_confined_path(dest_path, PROJECT_ROOT)
+        if os.path.lexists(dest_path):
+            raise FileExistsError(f"Archive destination already exists: {dest_path}")
+        size = os.path.getsize(item_path)
+        shutil.move(item_path, dest_path)
+        moved_count += 1
+        moved_bytes += size
+        actions.append({"file": item, "destination": target_dir, "bytes": size})
+
+    return moved_count, moved_bytes, actions
+
+
+def main() -> None:
+    print("[*] Causal-Determinist: Initiating Anergy Token Purge (Root Directory Entropy Collapse)...")
+    ensure_dirs()
+    count, total_bytes, actions = categorize_and_move()
+
+    # Generate deterministic Merkle root (Cortex Taint)
+    payload = json.dumps(actions, sort_keys=True).encode("utf-8")
+    cortex_taint = hashlib.sha3_256(payload).hexdigest()
+
+    audit_report = {
+        "Claim": "Root directory Anergy (loose scripts, DBs, and datasets) has been structurally purged and archived, restoring 00_WORKSPACE.md hierarchy invariant.",
+        "Proof": {"Base": "sha3_256::cortex_taint", "Range": [count, count], "Confidence": "Causal-Determinist"},
+        "Operator": "borjamoskv",
+        "System_Level": "Causal-Determinist",
+        "Anergy_Files_Purged": count,
+        "Anergy_Bytes_Purged": total_bytes,
+        "Cortex_Taint": cortex_taint,
+        "Timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+    }
+
+    audit_dir = os.path.dirname(AUDIT_YAML)
+    _assert_confined_path(audit_dir, PROJECT_ROOT)
+    os.makedirs(audit_dir, exist_ok=True)
+    _assert_confined_path(AUDIT_YAML, PROJECT_ROOT)
+    with open(AUDIT_YAML, "w", encoding="utf-8") as f:
+        yaml.dump(audit_report, f, sort_keys=False, allow_unicode=True)
+
+    print(f"[+] Purga completada. {count} ficheros movidos ({total_bytes} bytes).")
+    print(f"[+] Cortex Taint Hash: {cortex_taint}")
+    print(f"[+] Audit saved en: {AUDIT_YAML}")
+
+
+class BFTCausalInvariantError(Exception):
+    """BFT Causal Invariant Exception for Anergy Purge Engine."""
+
+
+def safe_purge_anergy(target_db_path: str, cortex_taint: str) -> bool:
+    """
+    Versión segura y auditada para purgar la anergia del ledger.
+    Evita inyecciones de comandos de la IA sanitizando las entradas.
+    """
+    # 1. Validar estrictamente la ruta para evitar Path Traversal
+    db_path = Path(target_db_path).resolve()
+    if not db_path.exists() or db_path.suffix != ".db":
+        raise FileNotFoundError(f"Ruta de base de datos inválida o insegura: {target_db_path}")
+
+    # 2. Sanitizar el taint de la IA usando shlex
+    sanitized_taint = shlex.quote(cortex_taint)
+
+    # 3. Forzar el uso de listas en subprocess eliminando shell=True
+    # Evita que caracteres como ';', '&&' o '|' inyectados ejecuten código arbitrario
+    if shutil.which("uv") is not None:
+        cmd = ["uv", "run", "cortex-purge", "--db", str(db_path), "--taint", sanitized_taint]
+    else:
+        # Fallback per INV_C5_16: try running cortex-purge directly if uv is absent
+        cmd = ["cortex-purge", "--db", str(db_path), "--taint", sanitized_taint]
+
+    try:
+        result = subprocess.run(
+            cmd,
+            capture_output=True,
+            text=True,
+            check=True,
+            env={**os.environ, "CORTEX_ISOLATION": "1"},  # Mantener aislamiento per-tenant
+        )
+        return "PURGE_SUCCESS" in result.stdout
+    except subprocess.CalledProcessError as e:
+        raise BFTCausalInvariantError(f"Fallo crítico en la purga: {e.stderr}")
+
+
+if __name__ == "__main__":
+    main()

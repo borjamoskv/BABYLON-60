@@ -1,0 +1,155 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
+from typing import Any, Dict, List
+import json
+import hashlib
+import argparse
+import sys
+import base64
+
+from babylon60.core.jcs import jcs_canonicalize as jcs_canonicalize, load_jcs_input
+
+try:
+    from nacl.signing import VerifyKey
+    from nacl.exceptions import BadSignatureError
+
+    NACL_AVAILABLE = True
+except ImportError:
+    NACL_AVAILABLE = False
+
+
+def hash_sha256(data: bytes) -> str:
+    return f"sha256:{hashlib.sha256(data).hexdigest()}"
+
+
+def hash_sha3_256(data: bytes) -> str:
+    return f"sha3-256:{hashlib.sha3_256(data).hexdigest()}"
+
+
+_HEX_CHARS = set("0123456789abcdef")
+
+
+def _recompute_declared(declared_hash: str, canonical_payload: bytes) -> tuple[str | None, str]:
+    """INV_C5_03: despacho por primitivo declarado. SHA3-256 es el arco canónico;
+    `sha256:` se acepta SOLO como legacy y se marca en el reporte; hex desnudo de
+    64 chars se interpreta como SHA3-256 bare (recibos de shadow_router). Prefijo
+    desconocido → fail-closed (None)."""
+    if declared_hash.startswith("sha3-256:"):
+        return hash_sha3_256(canonical_payload), "sha3-256"
+    if declared_hash.startswith("sha256:"):
+        return hash_sha256(canonical_payload), "sha256-legacy"
+    if len(declared_hash) == 64 and set(declared_hash) <= _HEX_CHARS:
+        return hashlib.sha3_256(canonical_payload).hexdigest(), "sha3-256-bare"
+    return None, "unknown"
+
+
+def verify_ed25519(public_key_b64: str, signature_b64: str, message: bytes) -> bool:
+    if not NACL_AVAILABLE:
+        print("ERROR: PyNaCl not installed. Cannot verify Ed25519 signatures.")
+        return False
+    try:
+        pub_key_bytes = _decode_base64url(public_key_b64, 32)
+        if not isinstance(signature_b64, str):
+            return False
+        sig_bytes = _decode_base64url(signature_b64.removeprefix("base64url:"), 64)
+        vk = VerifyKey(pub_key_bytes)
+        vk.verify(message, sig_bytes)
+        return True
+    except (BadSignatureError, ValueError, TypeError):
+        return False
+    except RuntimeError as e:
+        print(f"Signature decoding error: {e}")
+        return False
+
+
+def _decode_base64url(value: str, size: int) -> bytes:
+    """Accept padded/unpadded URL-safe data, rejecting garbage and nonzero pad bits."""
+    if not isinstance(value, str):
+        raise ValueError("Base64url input must be a string")
+    raw = value.rstrip("=")
+    padded = raw + "=" * (-len(raw) % 4)
+    if value not in (raw, padded):
+        raise ValueError("Invalid Base64url padding")
+    decoded = base64.b64decode(padded, altchars=b"-_", validate=True)
+    if len(decoded) != size or base64.urlsafe_b64encode(decoded).decode("ascii").rstrip("=") != raw:
+        raise ValueError("Invalid or noncanonical Base64url encoding")
+    return decoded
+
+
+def verify_merkle_leaf(payload_hash: str) -> str:
+    clean_hash = payload_hash.replace("sha256:", "")
+    leaf_bytes = b"\x00" + bytes.fromhex(clean_hash)
+    return hashlib.sha256(leaf_bytes).hexdigest()
+
+
+def verify_merkle_node(left_hex: str, right_hex: str) -> str:
+    node_bytes = b"\x01" + bytes.fromhex(left_hex) + bytes.fromhex(right_hex)
+    return hashlib.sha256(node_bytes).hexdigest()
+
+
+def verify_merkle_proof(leaf_hash: str, proof: List[str], root: str, index: int) -> bool:
+    if type(index) is not int or index < 0 or not isinstance(proof, list) or index.bit_length() > len(proof):
+        return False
+    if any(not isinstance(h, str) or len(h) != 64 or not set(h) <= _HEX_CHARS for h in (leaf_hash, root, *proof)):
+        return False
+    current = leaf_hash
+    for i, sibling in enumerate(proof):
+        is_left = not bool(index >> i & 1)
+        if is_left:
+            current = verify_merkle_node(current, sibling)
+        else:
+            current = verify_merkle_node(sibling, current)
+    return current == root
+
+
+def verify_receipt(receipt_path: str) -> Dict[str, Any]:
+    with open(receipt_path, "r") as f:
+        receipt = load_jcs_input(f.read())
+    if not isinstance(receipt, dict):
+        raise ValueError("Receipt must be a JSON object")
+    if "payload" not in receipt or "payload_hash" not in receipt or "signature" not in receipt:
+        print("ERROR: Receipt does not conform to v0.2 structure (payload, payload_hash, signature).")
+        sys.exit(1)
+    payload = receipt["payload"]
+    declared_hash = receipt["payload_hash"]
+    sig_block = receipt["signature"]
+    canonical_payload = jcs_canonicalize(payload)
+    calculated_hash, hash_primitive = _recompute_declared(declared_hash, canonical_payload)
+    hash_valid = calculated_hash is not None and calculated_hash == declared_hash
+    sig_valid = False
+    if sig_block.get("algorithm") == "Ed25519":
+        sig_valid = verify_ed25519(
+            sig_block.get("key_id", "").replace("did:key:", ""),
+            sig_block.get("value", ""),
+            declared_hash.encode("utf-8"),
+        )
+    else:
+        print(f"ERROR: Algorithm {sig_block.get('algorithm')} is not implemented. Failing closed.")
+        sig_valid = False
+    report = {
+        "receipt_id": receipt.get("receipt_id", "unknown"),
+        "schema": receipt.get("schema", "unknown"),
+        "payload_hash_valid": hash_valid,
+        "hash_primitive": hash_primitive,
+        "signature_valid": sig_valid,
+        "status": "verified" if hash_valid and sig_valid else "invalid",
+    }
+    if "request_commitment" in payload:
+        report["prompt_verification"] = "unverifiable_without_secret"
+    print(json.dumps(report, indent=2))
+    if not hash_valid or not sig_valid:
+        sys.exit(1)
+    return report
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Verify Proof-of-Route v0.2 Receipts")
+    parser.add_argument("receipt_file", help="Path to the JSON receipt")
+    args = parser.parse_args()
+    verify_receipt(args.receipt_file)
+
+
+if __name__ == "__main__":
+    main()

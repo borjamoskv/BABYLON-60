@@ -1,0 +1,47 @@
+name: Sovereign Rust Workspace Verification (Crates.io Publish Frozen per D1)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify-sovereign-crates:
+    name: Verify Sovereign Workspace Lock & License Parity
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+
+      - name: Setup Protoc (INV_C5_PROTOC_CI)
+        uses: arduino/setup-protoc@c65c819552d16ad3c9b72d9dfd5ba5237b9c906b
+
+      - name: Setup Rust Toolchain
+        uses: dtolnay/rust-toolchain@b725eda525362e7cf34af9a7243cac1e3f01a7ec
+        with:
+          toolchain: stable
+
+      - name: Cache Cargo Dependencies
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ runner.os }}-cargo-verify-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Verify Sovereign Workspace Build (--locked)
+        run: |
+          set -e
+          echo "==> Publicación en crates.io congelada por decisión soberana D1 (INV_C5_LICENSE_PARITY_GATE)"
+          cargo check --workspace --locked
+          python3 scripts/c5_quality_gates/audit_license_compliance.py

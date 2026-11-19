@@ -1,0 +1,19 @@
+name: Build & Publish Container Image to GHCR
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+  packages: write
+  id-token: write
+  attestations: write
+
+concurrency:
+  group: docker-ghcr
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    uses: ./.github/workflows/production-deploy.yml
