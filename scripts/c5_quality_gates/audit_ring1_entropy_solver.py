@@ -202,9 +202,13 @@ def _run_checked(cmd: list[str], cwd: Path, env: dict[str, str] | None = None) -
         timeout=300,
         check=False,
     )
+    # The final 600 characters can contain only a build warning or the
+    # aggregate count. Keep libtest's case identifiers before truncating.
+    failed_tests = re.findall(r"^(?:test )?([\w:]+) (?:\.\.\.|---) FAILED$", proc.stdout, re.MULTILINE)
     return {
         "command": cmd,
         "returncode": proc.returncode,
+        "failed_tests": failed_tests if proc.returncode else [],
         "passed": proc.returncode == 0,
         "stderr_tail": proc.stderr[-600:] if proc.returncode != 0 else "",
         "stdout_tail": proc.stdout[-600:] if proc.returncode != 0 else "",
@@ -355,6 +359,9 @@ def main() -> int:
                     f"  [SUITE-FAIL] {name}: {item.get('stdout_tail', '')} {item.get('stderr_tail', '')}",
                     file=sys.stderr,
                 )
+
+                for test_name in item.get("failed_tests", []):
+                    print(f"FAILED {name}::{test_name}", file=sys.stderr)
 
     return 0 if report["passed"] else 1
 

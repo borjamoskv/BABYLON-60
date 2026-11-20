@@ -5,6 +5,8 @@ buffer handed to the C kernel is shorter. The guard must measure the real buffer
 Uses a recording stand-in for the native kernel; no native library is required.
 """
 
+import sys
+
 import pytest
 
 from babylon60.transducers import void_vec
@@ -62,5 +64,11 @@ class _ShrinkingBuffer:
 
 @pytest.mark.parametrize("make_vector", [lambda: _BytesDunderLies(b"\x00" * 8), _ShrinkingBuffer])
 def test_kernel_receives_exactly_count_times_stride(recording_kernel, make_vector):
+    if make_vector is _ShrinkingBuffer and sys.version_info < (3, 12):
+        # Python-level buffer exporters are supported from Python 3.12 (PEP 688).
+        with pytest.raises(TypeError):
+            void_vec.void_batch_hamming_dist(b"\x00" * 8, [make_vector()])
+        assert recording_kernel == []
+        return
     void_vec.void_batch_hamming_dist(b"\x00" * 8, [make_vector()])
     assert recording_kernel == [(8, 1, 8)], f"búfer de la FFI distinto del comprobado: {recording_kernel}"
