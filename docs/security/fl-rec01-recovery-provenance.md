@@ -96,7 +96,7 @@ migración explícita.
 
 No se ha ejecutado la campaña comparativa completa A/B/C de 5.000 casos,
 compactación de contexto ni aislamiento de procedencia entre sesiones. La
-[sonda original](evidence/recovery-audit-2026-10-26.rs) conserva las aserciones
+[sonda original](RETENTION.md) conserva las aserciones
 del contraejemplo histórico: con el código corregido deja de reproducirlo y
 falla intencionadamente. Las regresiones de aceptación vigentes son las once
 pruebas enlazadas arriba.

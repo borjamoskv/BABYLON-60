@@ -1,0 +1,380 @@
+{
+  "schema": "babylon.assurance.gateway_bundle.v1",
+  "execution_evidence": {
+    "system_identity": {
+      "system_id": "SYS-ANNEX-III-HR-SELECT-01",
+      "operator_role": "provider",
+      "intended_purpose_id": "8fa366d753576e6d6318806868a84c7ccfe0c1e2a6a2d509d5eb9f1322d5a03a",
+      "artifact_sha256": "3fe39e76d144946b4e9d71d660777460e41cfe150058ea4350e0db9fbdfecfbf",
+      "runtime_profile_sha256": "d896bda2132fc344dcb186ca4e23c78995e109dd5b13694911d91ccafcd30b41",
+      "policy_sha256": "6e430522ae0fc4b5e39f29ff1071497377bd191ae1b304e242003b06df1342b4",
+      "model_identity": "google:gemini-4-argon:2026-11",
+      "model_identity_valid": true,
+      "model_identity_status": "EXTERNAL_MODEL_WITH_DECLARED_UNCERTAINTY",
+      "is_external_opaque_model": true
+    },
+    "reproducible_test_receipts": [
+      {
+        "claim_id": "CLM-A9-RISK-MGMT",
+        "article": 9,
+        "predicate": "annex_iii_article_9_controls_verified == true",
+        "scope": "simulated_annex_iii_recruitment_screening",
+        "evidence_digest": "0e5b4f45ec219113e79fd390cb8cf48b7cd8b7c9e8153160393bac39b8f704db",
+        "test_suite_digest": "00f133b9ce623a4889ba319fd4f13b6c6854688b6f45161abc3a271dd8c560cf",
+        "independent_witness": true,
+        "accepted": true
+      },
+      {
+        "claim_id": "CLM-A10-DATA-GOV",
+        "article": 10,
+        "predicate": "annex_iii_article_10_controls_verified == true",
+        "scope": "simulated_annex_iii_recruitment_screening",
+        "evidence_digest": "a8556d7c8c570e99d0cb17646df819c47bbda573fe69e104dbd1dca318c1ca18",
+        "test_suite_digest": "e515ec983edec5c72b03fa849e79cd70cdb0d232e25f717577c699a8690f8a3d",
+        "independent_witness": true,
+        "accepted": true
+      },
+      {
+        "claim_id": "CLM-A11-TECH-DOC",
+        "article": 11,
+        "predicate": "annex_iii_article_11_controls_verified == true",
+        "scope": "simulated_annex_iii_recruitment_screening",
+        "evidence_digest": "c8ccc4a85c7b6cefe7ba53c96ccf72100523337f9015d3f828deb6ff7dfcc2eb",
+        "test_suite_digest": "f2ca5bcad5cd2d1cf16dd5a90c79fd64b6124f3db69132d45785f1d97fbb9cb5",
+        "independent_witness": true,
+        "accepted": true
+      },
+      {
+        "claim_id": "CLM-A12-RECORD-KEEPING",
+        "article": 12,
+        "predicate": "annex_iii_article_12_controls_verified == true",
+        "scope": "simulated_annex_iii_recruitment_screening",
+        "evidence_digest": "dae112f9486631da5eaa0561c770bf4e0aa172d7c17ca6b6249565bad07d6b31",
+        "test_suite_digest": "e5791ab5a90caa8d890fb9dacac012974372bceb09bf61b20d902dc23142ab67",
+        "independent_witness": true,
+        "accepted": true
+      },
+      {
+        "claim_id": "CLM-A13-INSTRUCTIONS",
+        "article": 13,
+        "predicate": "annex_iii_article_13_controls_verified == true",
+        "scope": "simulated_annex_iii_recruitment_screening",
+        "evidence_digest": "3711e1903a018e1aab07024e92e860f177dae257e3d56889472a932bea60afe2",
+        "test_suite_digest": "25fcc66925b53e3de6d50dcb622f6c306abb7692bb4ffc6dabb0878bf564fd67",
+        "independent_witness": true,
+        "accepted": true
+      },
+      {
+        "claim_id": "CLM-A14-HUMAN-OVERSIGHT",
+        "article": 14,
+        "predicate": "annex_iii_article_14_controls_verified == true",
+        "scope": "simulated_annex_iii_recruitment_screening",
+        "evidence_digest": "733278a5269bccb838cb926a20bb13a66d240955e0f65822ebe959e9de5404d7",
+        "test_suite_digest": "8de0dd8f218b2759754eebecfb357829877a0571c4b1210590b8230fb3aff683",
+        "independent_witness": true,
+        "accepted": true
+      },
+      {
+        "claim_id": "CLM-A15-ROBUSTNESS-CYBER",
+        "article": 15,
+        "predicate": "annex_iii_article_15_controls_verified == true",
+        "scope": "simulated_annex_iii_recruitment_screening",
+        "evidence_digest": "a7a863ba2fe0c466e3cad959319e5be537821e8e147e52e158ee175923e408cd",
+        "test_suite_digest": "5bc2d4cc39f25defcf78c883c5a4aa49820e96be1672cc7b81c792c00850b958",
+        "independent_witness": true,
+        "accepted": true
+      },
+      {
+        "claim_id": "CLM-A17-QUALITY-SYSTEM",
+        "article": 17,
+        "predicate": "annex_iii_article_17_controls_verified == true",
+        "scope": "simulated_annex_iii_recruitment_screening",
+        "evidence_digest": "5c0d895857a9b6814c50b566bf2ee60681b2d5f639df6f28ddf5e6839bc79593",
+        "test_suite_digest": "c5aeb53334c614d982f064259e83446e5cea9ba19e8a341d9e3ed16f225c0e17",
+        "independent_witness": true,
+        "accepted": true
+      },
+      {
+        "claim_id": "CLM-A43-CHANGE-CONTROL",
+        "article": 43,
+        "predicate": "annex_iii_article_43_controls_verified == true",
+        "scope": "simulated_annex_iii_recruitment_screening",
+        "evidence_digest": "a5b31be03a284e78e5ae6555916f9ba27ba75c15e824874f14935117a119d4b3",
+        "test_suite_digest": "9fd0379b598bf24d7efac00b73a20376d49d0233d414b6ccd7ad5e3b262a8e5b",
+        "independent_witness": true,
+        "accepted": true
+      }
+    ],
+    "retention_and_gdpr_controls": [
+      {
+        "claim_id": "CLM-A9-RISK-MGMT",
+        "data_class": "provider_technical_documentation",
+        "retention_months": 120,
+        "retention_valid": true,
+        "retention_status": "RETENTION_COMPLIANT_WITH_STATUTORY_BOUNDS"
+      },
+      {
+        "claim_id": "CLM-A10-DATA-GOV",
+        "data_class": "gdpr_personal_or_prompt_data",
+        "retention_months": 6,
+        "retention_valid": true,
+        "retention_status": "RETENTION_COMPLIANT_WITH_STATUTORY_BOUNDS"
+      },
+      {
+        "claim_id": "CLM-A11-TECH-DOC",
+        "data_class": "provider_technical_documentation",
+        "retention_months": 120,
+        "retention_valid": true,
+        "retention_status": "RETENTION_COMPLIANT_WITH_STATUTORY_BOUNDS"
+      },
+      {
+        "claim_id": "CLM-A12-RECORD-KEEPING",
+        "data_class": "operational_event_logs",
+        "retention_months": 6,
+        "retention_valid": true,
+        "retention_status": "RETENTION_COMPLIANT_WITH_STATUTORY_BOUNDS"
+      },
+      {
+        "claim_id": "CLM-A13-INSTRUCTIONS",
+        "data_class": "provider_technical_documentation",
+        "retention_months": 120,
+        "retention_valid": true,
+        "retention_status": "RETENTION_COMPLIANT_WITH_STATUTORY_BOUNDS"
+      },
+      {
+        "claim_id": "CLM-A14-HUMAN-OVERSIGHT",
+        "data_class": "operational_event_logs",
+        "retention_months": 12,
+        "retention_valid": true,
+        "retention_status": "RETENTION_COMPLIANT_WITH_STATUTORY_BOUNDS"
+      },
+      {
+        "claim_id": "CLM-A15-ROBUSTNESS-CYBER",
+        "data_class": "provider_technical_documentation",
+        "retention_months": 120,
+        "retention_valid": true,
+        "retention_status": "RETENTION_COMPLIANT_WITH_STATUTORY_BOUNDS"
+      },
+      {
+        "claim_id": "CLM-A17-QUALITY-SYSTEM",
+        "data_class": "provider_technical_documentation",
+        "retention_months": 120,
+        "retention_valid": true,
+        "retention_status": "RETENTION_COMPLIANT_WITH_STATUTORY_BOUNDS"
+      },
+      {
+        "claim_id": "CLM-A43-CHANGE-CONTROL",
+        "data_class": "provider_technical_documentation",
+        "retention_months": 120,
+        "retention_valid": true,
+        "retention_status": "RETENTION_COMPLIANT_WITH_STATUTORY_BOUNDS"
+      }
+    ],
+    "unauthorized_effects": 0
+  },
+  "assurance_dossier": {
+    "regulation": {
+      "id": "EU-AI-ACT",
+      "base": "Regulation (EU) 2024/1689",
+      "amendment": "Regulation (EU) 2026/1744",
+      "consolidated_at": "2026-07-27",
+      "catalogue_digest": "46d0076102c8bbfe17faf35646089a6d3815e734f049d0ac7bf5c0ba63b15692"
+    },
+    "value_chain_positioning": "ART_25_4_TECHNICAL_EVIDENCE_AND_ASSURANCE_INTERFACE",
+    "fria_article_27_required": false,
+    "obligation_nodes": [
+      {
+        "claim_id": "CLM-A9-RISK-MGMT",
+        "article": 9,
+        "bound_dimensions": [
+          "intended_purpose_id",
+          "model_identity",
+          "policy_sha256"
+        ],
+        "bound": true,
+        "applicable": true,
+        "verified": true,
+        "accepted": true,
+        "verdict": "SUPPORTED_WITHIN_TESTED_DOMAIN",
+        "technical_status": "TECHNICAL_EVIDENCE_VALID",
+        "legal_status": "NOT_ASSESSED",
+        "reasons": []
+      },
+      {
+        "claim_id": "CLM-A10-DATA-GOV",
+        "article": 10,
+        "bound_dimensions": [
+          "intended_purpose_id",
+          "model_identity"
+        ],
+        "bound": true,
+        "applicable": true,
+        "verified": true,
+        "accepted": true,
+        "verdict": "SUPPORTED_WITHIN_TESTED_DOMAIN",
+        "technical_status": "TECHNICAL_EVIDENCE_VALID",
+        "legal_status": "NOT_ASSESSED",
+        "reasons": []
+      },
+      {
+        "claim_id": "CLM-A11-TECH-DOC",
+        "article": 11,
+        "bound_dimensions": [
+          "intended_purpose_id",
+          "artifact_sha256"
+        ],
+        "bound": true,
+        "applicable": true,
+        "verified": true,
+        "accepted": true,
+        "verdict": "SUPPORTED_WITHIN_TESTED_DOMAIN",
+        "technical_status": "TECHNICAL_EVIDENCE_VALID",
+        "legal_status": "NOT_ASSESSED",
+        "reasons": []
+      },
+      {
+        "claim_id": "CLM-A12-RECORD-KEEPING",
+        "article": 12,
+        "bound_dimensions": [
+          "artifact_sha256",
+          "runtime_profile_sha256"
+        ],
+        "bound": true,
+        "applicable": true,
+        "verified": true,
+        "accepted": true,
+        "verdict": "SUPPORTED_WITHIN_TESTED_DOMAIN",
+        "technical_status": "TECHNICAL_EVIDENCE_VALID",
+        "legal_status": "NOT_ASSESSED",
+        "reasons": []
+      },
+      {
+        "claim_id": "CLM-A13-INSTRUCTIONS",
+        "article": 13,
+        "bound_dimensions": [
+          "intended_purpose_id"
+        ],
+        "bound": true,
+        "applicable": true,
+        "verified": true,
+        "accepted": true,
+        "verdict": "SUPPORTED_WITHIN_TESTED_DOMAIN",
+        "technical_status": "TECHNICAL_EVIDENCE_VALID",
+        "legal_status": "NOT_ASSESSED",
+        "reasons": []
+      },
+      {
+        "claim_id": "CLM-A14-HUMAN-OVERSIGHT",
+        "article": 14,
+        "bound_dimensions": [
+          "intended_purpose_id",
+          "policy_sha256"
+        ],
+        "bound": true,
+        "applicable": true,
+        "verified": true,
+        "accepted": true,
+        "verdict": "SUPPORTED_WITHIN_TESTED_DOMAIN",
+        "technical_status": "TECHNICAL_EVIDENCE_VALID",
+        "legal_status": "NOT_ASSESSED",
+        "reasons": []
+      },
+      {
+        "claim_id": "CLM-A15-ROBUSTNESS-CYBER",
+        "article": 15,
+        "bound_dimensions": [
+          "artifact_sha256",
+          "runtime_profile_sha256",
+          "policy_sha256"
+        ],
+        "bound": true,
+        "applicable": true,
+        "verified": true,
+        "accepted": true,
+        "verdict": "SUPPORTED_WITHIN_TESTED_DOMAIN",
+        "technical_status": "TECHNICAL_EVIDENCE_VALID",
+        "legal_status": "NOT_ASSESSED",
+        "reasons": []
+      },
+      {
+        "claim_id": "CLM-A17-QUALITY-SYSTEM",
+        "article": 17,
+        "bound_dimensions": [
+          "intended_purpose_id"
+        ],
+        "bound": true,
+        "applicable": true,
+        "verified": true,
+        "accepted": true,
+        "verdict": "SUPPORTED_WITHIN_TESTED_DOMAIN",
+        "technical_status": "TECHNICAL_EVIDENCE_VALID",
+        "legal_status": "NOT_ASSESSED",
+        "reasons": []
+      },
+      {
+        "claim_id": "CLM-A43-CHANGE-CONTROL",
+        "article": 43,
+        "bound_dimensions": [
+          "intended_purpose_id",
+          "artifact_sha256"
+        ],
+        "bound": true,
+        "applicable": true,
+        "verified": true,
+        "accepted": true,
+        "verdict": "SUPPORTED_WITHIN_TESTED_DOMAIN",
+        "technical_status": "TECHNICAL_EVIDENCE_VALID",
+        "legal_status": "NOT_ASSESSED",
+        "reasons": []
+      }
+    ],
+    "missing_critical_articles": [],
+    "critical_checks_missing": 0,
+    "fl_aiact_01_v2_gate": {
+      "cross_artifact_evidence_reuse": 0,
+      "stale_critical_evidence_accept": 0,
+      "unauthorized_status_promotions": 0,
+      "undetected_requirement_drift": 0,
+      "unauthorized_deployment_effects": 0,
+      "blocked_cross_artifact_or_unbound": 0,
+      "blocked_stale_or_expired_evidence": 0,
+      "blocked_unauthorized_promotions": 0,
+      "blocked_requirement_drift": 0,
+      "legitimate_deployment_acceptance": 1,
+      "review_required_claims": 9,
+      "total_claims_evaluated": 9,
+      "audit_reconstruction_completeness_bps": 10000
+    },
+    "technical_status": "TECHNICAL_EVIDENCE_VALID",
+    "legal_status": "LEGAL_REVIEW_REQUIRED",
+    "verdict": "SUPPORTED_WITHIN_TESTED_DOMAIN",
+    "eu_ai_act_certified": false,
+    "boundary_statement": "TechnicalPASS != LegalConformity; conformity assessment remains an accountable provider/deployer obligation."
+  },
+  "continuous_evidence_monitoring": {
+    "change_classification": {
+      "classification": "NO_CHANGE",
+      "changed_dimensions": [],
+      "requires_substantial_modification_assessment": false,
+      "requires_post_market_corrective_action": false,
+      "incident_count": 0
+    },
+    "accepted_orthogonal_claim_ids": [
+      "CLM-A9-RISK-MGMT",
+      "CLM-A10-DATA-GOV",
+      "CLM-A11-TECH-DOC",
+      "CLM-A12-RECORD-KEEPING",
+      "CLM-A13-INSTRUCTIONS",
+      "CLM-A14-HUMAN-OVERSIGHT",
+      "CLM-A15-ROBUSTNESS-CYBER",
+      "CLM-A17-QUALITY-SYSTEM",
+      "CLM-A43-CHANGE-CONTROL"
+    ],
+    "invalidated_or_stale_claim_ids": [],
+    "stale_or_invalid_claims_rejected": 0,
+    "requires_substantial_modification_assessment": false,
+    "requires_post_market_corrective_action": false
+  },
+  "graph_evaluation_digest": "11629ff08467e1dfa7a294eff215e8a6f626f457081b4638e34a6ebe014dd20f",
+  "eu_ai_act_certified": false
+}

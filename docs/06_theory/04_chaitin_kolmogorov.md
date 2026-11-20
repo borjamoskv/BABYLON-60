@@ -34,7 +34,7 @@ Se retiran «exactamente c_T bits», $c_T\approx K(\mathrm{axiomas})$ como igual
 
 Trabajo físico, compresión y demostrabilidad no son magnitudes intercambiables. La segunda ley no demuestra no computabilidad ni Gödel, y un hash no preserva toda la información de un historial. La tabla termodinámica histórica se retira como argumento; puede emplearse solo como metáfora declarada.
 
-El bloque `document_epistemic_validity` no formalizaba K ni Ω. Este documento conserva resultados matemáticos con convenciones explícitas, sin certificación Lean o de rendimiento.
+El bloque `[OBSOLETO: document_epistemic_validity]` no formalizaba K ni Ω. Este documento conserva resultados matemáticos con convenciones explícitas, sin certificación Lean o de rendimiento.
 
 ## 5. Referencias
 

@@ -82,7 +82,7 @@ class TunnelBus:
         conn = sqlite3.connect(str(self.db_path), timeout=5.0)
         conn.row_factory = sqlite3.Row
         conn.execute("PRAGMA journal_mode=WAL;")
-        conn.execute("PRAGMA synchronous=NORMAL;")
+        conn.execute("PRAGMA synchronous=FULL;")
         conn.execute("PRAGMA busy_timeout=5000;")
         return conn
 

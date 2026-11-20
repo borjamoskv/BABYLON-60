@@ -85,6 +85,9 @@ enum Commands {
         /// Path to the L1 Aeon JSON manifest file
         #[arg(short, long)]
         manifest: PathBuf,
+        /// Ancla externa: clave pública Ed25519 de confianza (base64). Obligatoria (C0341).
+        #[arg(long)]
+        trusted_key: String,
     },
 
     /// Benchmark Merkle tree synthesis and O(log2 N) proof verification
@@ -509,14 +512,14 @@ fn main() {
                 }
             }
         }
-        Commands::VerifyAeon { manifest } => {
+        Commands::VerifyAeon { manifest, trusted_key } => {
             println!("╔══════════════════════════════════════════════════════════════════════════╗");
             println!("║  BABYLON-60 ATTEST (RUST KERNEL) | L1 AEON MANIFEST VERIFIER             ║");
             println!("║  STATE: C5-REAL | ENGINE: ed25519-dalek / BLAKE3 | ZERO-COPY             ║");
             println!("╚══════════════════════════════════════════════════════════════════════════╝");
             println!("[*] Verificando manifiesto L1: {}", manifest.display());
 
-            match babylon_attest::conformal_tree::verify_manifest_file(&manifest) {
+            match babylon_attest::conformal_tree::verify_manifest_file(&manifest, &trusted_key) {
                 Ok(res) => {
                     println!("\n[+] DICTAMEN DE ATESTACIÓN FORMAL (RUST NATIVO):");
                     println!("    • Aeón ID:          {}", res.aeon_id);

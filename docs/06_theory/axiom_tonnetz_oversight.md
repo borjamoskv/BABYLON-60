@@ -34,6 +34,6 @@ Un canal sonoro podría ser una medida de apoyo. Un acorde, una etiqueta `eu_ai_
 
 ## 5. Estado formal
 
-La estructura histórica `TonnetzOversight` pedía `triadic_homeostasis_limit`, `thermodynamic_degradation_dissonance` y `dissonance_exclusion` como campos. Definir esas obligaciones no construye una instancia ni prueba percepción o cumplimiento. El primer campo describía un valor puntual, no un límite asintótico.
+La estructura histórica `[OBSOLETO: TonnetzOversight]` pedía `[OBSOLETO: triadic_homeostasis_limit]`, `[OBSOLETO: thermodynamic_degradation_dissonance]` y `[OBSOLETO: dissonance_exclusion]` como campos. Definir esas obligaciones no construye una instancia ni prueba percepción o cumplimiento. El primer campo describía un valor puntual, no un límite asintótico.
 
 La extracción original falla con Lean 4.35.0 por ausencia de tipos/clases numéricas resueltos para `Real`. Se retira el bloque como prueba. **Correspondencia Lean–implementación y eficacia perceptiva: NO_VERIFICADAS.** Una futura formalización deberá especificar entradas, umbrales y función de salida reales; su alcance seguirá limitado al modelo.

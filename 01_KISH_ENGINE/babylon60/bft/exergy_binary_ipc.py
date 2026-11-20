@@ -25,6 +25,7 @@ import os
 from pathlib import Path
 import platform
 import struct
+import threading
 from typing import Any, Dict, Mapping, Optional, Tuple
 
 import cbor2
@@ -208,6 +209,7 @@ class SharedManifestFFIWriter:
     def __init__(self, dylib_path: Optional[str] = None) -> None:
         self.is_native: bool = False
         self._native_lib: Optional[ctypes.CDLL] = None
+        self._fallback_lock = threading.Lock()
 
         target_dylib = dylib_path or find_babylon60_dylib()
         if target_dylib:
@@ -267,17 +269,29 @@ class SharedManifestFFIWriter:
             h_arr = (ctypes.c_uint64 * 4)(*h_words)
             return bool(self._native_lib.babylon60_publish(self._ptr, ctypes.c_uint64(epoch), h_arr))
 
-        # Fallback Seqlock en Python
-        m = self._manifest_struct
-        current_seq = m.seq
-        m.seq = current_seq + 1
+        # Fallback Seqlock en Python (paridad estricta con shared_manifest_core.rs)
+        if not self._fallback_lock.acquire(blocking=False):
+            return False
+        try:
+            if self.is_halted():
+                return False
+            m = self._manifest_struct
+            current_seq = m.seq
+            if current_seq & 1 != 0:
+                return False
+            m.seq = (current_seq + 1) & 0xFFFF_FFFF
+            if self.is_halted():
+                m.seq = (current_seq + 2) & 0xFFFF_FFFF
+                return False
 
-        m.epoch_id = epoch
-        for i in range(4):
-            m.payload_hash[i] = h_words[i]
+            m.epoch_id = epoch
+            for i in range(4):
+                m.payload_hash[i] = h_words[i]
 
-        m.seq = current_seq + 2
-        return True
+            m.seq = (current_seq + 2) & 0xFFFF_FFFF
+            return True
+        finally:
+            self._fallback_lock.release()
 
     def read(self) -> Optional[Tuple[int, bytes]]:
         """Lee de forma consistente (epoch, hash) del manifest respetando el protocolo Seqlock."""
@@ -296,12 +310,14 @@ class SharedManifestFFIWriter:
         m = self._manifest_struct
         for _ in range(10_000):
             s1 = m.seq
-            if s1 % 2 == 1:
+            if s1 & 1 != 0:
                 continue
             epoch = m.epoch_id
             words = [m.payload_hash[i] for i in range(4)]
             s2 = m.seq
-            if s1 == s2 and s2 % 2 == 0:
+            if s1 == s2 and (s2 & 1 == 0):
+                if self.is_halted():
+                    return None
                 return epoch, struct.pack("<4Q", *words)
 
         return None

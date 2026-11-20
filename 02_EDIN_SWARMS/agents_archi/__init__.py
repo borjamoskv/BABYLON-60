@@ -56,7 +56,6 @@ from .protocols import (
     AttestationEnvelope,
 )
 from .clients import (
-    KimiClient,
     OpenRouterClient,
     OpenRouterRoleTier,
     QuotaBudgetTracker,
@@ -109,7 +108,6 @@ __all__ = [
     "AOFValidator",
     "AttestationEnvelope",
     # Clients
-    "KimiClient",
     "OpenRouterClient",
     "OpenRouterRoleTier",
     "QuotaBudgetTracker",

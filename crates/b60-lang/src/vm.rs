@@ -20,21 +20,34 @@ impl SexaRegister {
         SexaRegister { seconds: 0, sexa_fraction: 0 }
     }
 
-    pub fn from_parts(seconds: u64, fraction: u64) -> Self {
+    /// C0326: el desbordamiento es un error tipado, idéntico en debug y release (sin pánico ni wrap).
+    pub fn from_parts(seconds: u64, fraction: u64) -> Result<Self, &'static str> {
         let carry = fraction / FRACTION_BASE;
-        SexaRegister {
-            seconds: seconds + carry,
+        let seconds = seconds
+            .checked_add(carry)
+            .ok_or("Overflow sexagesimal: segundos fuera de rango")?;
+        Ok(SexaRegister {
+            seconds,
             sexa_fraction: fraction % FRACTION_BASE,
-        }
+        })
     }
 
-    pub fn add(&self, other: &Self) -> Self {
-        let total_frac = self.sexa_fraction + other.sexa_fraction;
+    /// C0326: suma con error tipado en desbordamiento (fracción y segundos).
+    pub fn add(&self, other: &Self) -> Result<Self, &'static str> {
+        let total_frac = self
+            .sexa_fraction
+            .checked_add(other.sexa_fraction)
+            .ok_or("Overflow sexagesimal: fracción fuera de rango")?;
         let carry = total_frac / FRACTION_BASE;
-        SexaRegister {
-            seconds: self.seconds + other.seconds + carry,
+        let seconds = self
+            .seconds
+            .checked_add(other.seconds)
+            .and_then(|s| s.checked_add(carry))
+            .ok_or("Overflow sexagesimal: segundos fuera de rango")?;
+        Ok(SexaRegister {
+            seconds,
             sexa_fraction: total_frac % FRACTION_BASE,
-        }
+        })
     }
 
     pub fn sub(&self, other: &Self) -> Result<Self, &'static str> {
@@ -228,7 +241,10 @@ impl F60VM {
                 }
 
                 SexaOpCode::SexaAdd => {
-                    self.registers[0] = self.registers[0].add(&self.registers[1]);
+                    match self.registers[0].add(&self.registers[1]) {
+                        Ok(res) => self.registers[0] = res,
+                        Err(e) => return self.poison_and_abort(1, format!("PC {}: {}", self.pc, e)),
+                    }
                 }
 
                 SexaOpCode::SexaSub => {
@@ -274,7 +290,10 @@ impl F60VM {
                         let frac_part = bytecode[self.pc + 1] as u64;
                         self.pc += 2;
                         let fraction = frac_part * (FRACTION_BASE / 60);
-                        self.registers[0] = SexaRegister::from_parts(sec, fraction);
+                        match SexaRegister::from_parts(sec, fraction) {
+                            Ok(res) => self.registers[0] = res,
+                            Err(e) => return self.poison_and_abort(1, format!("PC {}: {}", self.pc, e)),
+                        }
                     } else {
                         return self.poison_and_abort(1, "SEXA_PACK: operandos truncados".to_string());
                     }
@@ -410,5 +429,18 @@ mod tests {
         assert!(res.is_err());
         assert_eq!(vm.manifest.status_flag, MANIFEST_POISONED);
         assert_eq!(vm.exit_code, 1);
+    }
+
+    #[test]
+    fn c0326_add_overflow_is_typed_error_not_panic_or_wrap() {
+        // Overflow de segundos: debe ser error tipado en debug y en release (sin wrap silencioso).
+        let max = SexaRegister { seconds: u64::MAX, sexa_fraction: 0 };
+        let one = SexaRegister { seconds: 1, sexa_fraction: 0 };
+        assert!(max.add(&one).is_err());
+    }
+
+    #[test]
+    fn c0326_from_parts_overflow_is_typed_error_not_panic_or_wrap() {
+        assert!(SexaRegister::from_parts(u64::MAX, FRACTION_BASE).is_err());
     }
 }

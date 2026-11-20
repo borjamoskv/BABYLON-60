@@ -28,7 +28,7 @@ Esto no prohíbe toda verificación de programas, todo razonamiento externo ni t
 
 Separar quien propone y quien verifica es una **decisión de diseño** compatible con límites formales. Gödel no obliga a un protocolo `CRITICAL_HALT`, no demuestra su implementación y no determina una jerarquía de privilegios del sistema operativo. Para trasladar los teoremas hay que identificar teoría, codificación y predicado de demostrabilidad concretos.
 
-Se retira el axioma genérico `document_epistemic_validity`: no formalizaba diagonalización, incompletitud ni Löb. No se aporta aquí una prueba Lean de esos resultados.
+Se retira el axioma genérico `[OBSOLETO: document_epistemic_validity]`: no formalizaba diagonalización, incompletitud ni Löb. No se aporta aquí una prueba Lean de esos resultados.
 
 ## 5. Referencias
 

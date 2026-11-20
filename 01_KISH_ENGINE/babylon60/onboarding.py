@@ -31,6 +31,7 @@ from babylon60.experience import (
 
 _NAME = "babylon60"
 _MODULE = "babylon60.mcp.cortex_mcp_server"
+_PROBE_PROTOCOL_VERSION = "2024-11-05"
 _START = b"<!-- babylon60:codex:start -->"
 _END = b"<!-- babylon60:codex:end -->"
 _NEXT = "Abre una conversación nueva de Codex para cargar las preferencias y el MCP."
@@ -563,7 +564,14 @@ def _probe(transport: dict[str, object]) -> dict[str, object]:
                     value = json.loads(raw)
                     if not isinstance(value, dict) or value.get("jsonrpc") != "2.0":
                         raise _IntegrationError("La respuesta del MCP no respeta JSON-RPC 2.0.")
-                    if value.get("id") != identifier:
+                    if "id" not in value and isinstance(value.get("method"), str):
+                        continue
+                    # bool and float compare equal to int in Python, but this
+                    # probe only correlates the integer IDs it actually sent.
+                    response_id = value.get("id")
+                    if type(response_id) is not int:
+                        raise _IntegrationError("El MCP respondió con un identificador de tipo incorrecto.")
+                    if response_id != identifier:
                         continue
                     if "error" in value or not isinstance(value.get("result"), dict):
                         raise _IntegrationError(f"El MCP rechazó {method}; revisa la instalación del paquete.")
@@ -575,11 +583,13 @@ def _probe(transport: dict[str, object]) -> dict[str, object]:
                     1,
                     "initialize",
                     {
-                        "protocolVersion": "2024-11-05",
+                        "protocolVersion": _PROBE_PROTOCOL_VERSION,
                         "capabilities": {},
                         "clientInfo": {"name": "babylon60-doctor", "version": "1"},
                     },
                 )
+                if initialized.get("protocolVersion") != _PROBE_PROTOCOL_VERSION:
+                    raise _IntegrationError("El MCP respondió con una versión MCP no admitida por la sonda.")
                 if initialized.get("instructions") != load_mcp_instructions():
                     raise _IntegrationError("Las instrucciones MCP no coinciden con el contrato del paquete instalado.")
                 send({"jsonrpc": "2.0", "method": "notifications/initialized", "params": {}})
@@ -587,6 +597,11 @@ def _probe(transport: dict[str, object]) -> dict[str, object]:
                 advertised_tools = tools.get("tools")
                 if not isinstance(advertised_tools, list) or not advertised_tools:
                     raise _IntegrationError("El MCP no anuncia sus herramientas.")
+                if any(
+                    not isinstance(tool, dict) or not isinstance(tool.get("name"), str) or not tool["name"].strip()
+                    for tool in advertised_tools
+                ):
+                    raise _IntegrationError("El MCP anuncia herramientas sin un nombre válido.")
                 guide = request(3, "resources/read", {"uri": "babylon://presentation/guide"})
                 contents = guide.get("contents")
                 if not isinstance(contents, list) or not any(

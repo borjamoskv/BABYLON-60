@@ -9,8 +9,10 @@ from __future__ import annotations
 
 import argparse
 from contextlib import closing
+import os
 from pathlib import Path
 import sqlite3
+import stat
 import sys
 from typing import TYPE_CHECKING, TypedDict
 
@@ -144,9 +146,18 @@ def main() -> int:
         instruction_sizes = {}
         for name in ROOT_INSTRUCTIONS:
             path = args.workspace / name
-            if path.is_symlink() or not path.is_file():
-                raise ValueError(f"{path}: expected a regular instruction file")
-            instruction_sizes[name] = len(path.read_bytes())
+            flags = os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0)
+            try:
+                fd = os.open(path, flags)
+            except OSError as exc:
+                raise ValueError(f"{path}: expected a regular instruction file ({exc})") from exc
+            try:
+                info = os.fstat(fd)
+                if not stat.S_ISREG(info.st_mode):
+                    raise ValueError(f"{path}: expected a regular instruction file")
+                instruction_sizes[name] = info.st_size
+            finally:
+                os.close(fd)
     except (OSError, ValueError) as exc:
         print(f"NO_VERIFICADO: {exc}", file=sys.stderr)
         return 2

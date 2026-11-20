@@ -7,7 +7,7 @@
 Sovereign Swarm Orchestration Engine — 02_EDIN_SWARMS (edin.swarms) (C5-REAL v4.0).
 
 Core features:
-  - Multi-Backend Inference: Moonshot / OpenRouter / local vLLM / Apple Silicon MLX
+  - Multi-Backend Inference: local vLLM (default) / Apple Silicon MLX / OpenRouter
   - macOS ARM64 Kernel Telemetry (ru_nivcsw, ru_nvcsw, RSS)
   - Zero-Friction Interruption via AgentPager (O(1) futex wait)
   - Circuit Breaker & Exponential Backoff
@@ -31,18 +31,9 @@ logger = logging.getLogger("02_EDIN_SWARMS.orchestrator.swarm")
 class InferenceBackend(Enum):
     """Supported inference execution backends."""
 
-    MOONSHOT_REMOTE = "moonshot"
     OPENROUTER_REMOTE = "openrouter"
     LOCAL_VLLM = "local_vllm"
     LOCAL_MLX = "local_mlx"
-
-
-def _get_default_moonshot_url() -> str:
-    return os.getenv("MOONSHOT_API_URL") or "https://api.moonshot.cn/v1/chat/completions"
-
-
-def _get_default_moonshot_key() -> str:
-    return os.getenv("KIMI_API_KEY") or os.getenv("MOONSHOT_API_KEY") or ""
 
 
 def _get_default_openrouter_url() -> str:
@@ -59,15 +50,14 @@ class SwarmConfig:
 
     p_cores: int = 4
     s_threads: int = 1
-    backend: InferenceBackend = InferenceBackend.MOONSHOT_REMOTE
+    # Local by default: an unconfigured swarm never resolves a remote
+    # credential nor sends anything off loopback.
+    backend: InferenceBackend = InferenceBackend.LOCAL_VLLM
 
     # Endpoints
-    moonshot_url: str = field(default_factory=_get_default_moonshot_url)
-    moonshot_key: str = field(default_factory=_get_default_moonshot_key)
-    moonshot_model: str = os.getenv("MOONSHOT_MODEL", "moonshot-v1-auto")
-
     openrouter_url: str = field(default_factory=_get_default_openrouter_url)
-    openrouter_key: str = field(default_factory=_get_default_openrouter_key)
+    # None defers the OPENROUTER_API_KEY lookup until that backend is selected.
+    openrouter_key: Optional[str] = field(default=None, repr=False)
     openrouter_model: str = os.getenv("OPENROUTER_MODEL", "thinkingmachines/inkling:free")
     openrouter_fallback_models: List[str] = field(
         default_factory=lambda: [
@@ -103,24 +93,20 @@ class SwarmConfig:
 
     @property
     def api_url(self) -> str:
-        if self.backend == InferenceBackend.MOONSHOT_REMOTE:
-            return self.moonshot_url
         if self.backend == InferenceBackend.OPENROUTER_REMOTE:
             return self.openrouter_url
         return self.local_url
 
     @property
     def api_key(self) -> str:
-        if self.backend == InferenceBackend.MOONSHOT_REMOTE:
-            return self.moonshot_key
         if self.backend == InferenceBackend.OPENROUTER_REMOTE:
-            return self.openrouter_key
+            if self.openrouter_key is not None:
+                return self.openrouter_key
+            return _get_default_openrouter_key()
         return ""
 
     @property
     def model_name(self) -> str:
-        if self.backend == InferenceBackend.MOONSHOT_REMOTE:
-            return self.moonshot_model
         if self.backend == InferenceBackend.OPENROUTER_REMOTE:
             return self.openrouter_model
         return self.local_model
@@ -297,16 +283,14 @@ class RobustLLMClient:
             self._consecutive_failures += 1
             return LLMCallError(str(veto_err))
 
-        # If air-gapped / unconfigured, return deterministic mock output in tests
-        if not self.config.api_key and self.config.backend in (
-            InferenceBackend.MOONSHOT_REMOTE,
-            InferenceBackend.OPENROUTER_REMOTE,
-        ):
-            return "[AIR-GAP MOCK] Deterministic response for swarm execution"
+        api_key = self.config.api_key
+        if self.config.backend == InferenceBackend.OPENROUTER_REMOTE and not api_key.strip():
+            self._consecutive_failures += 1
+            return LLMCallError("OpenRouter credentials unavailable: configure openrouter_key or OPENROUTER_API_KEY")
 
         headers = {"Content-Type": "application/json"}
-        if self.config.api_key:
-            headers["Authorization"] = f"Bearer {self.config.api_key}"
+        if api_key:
+            headers["Authorization"] = f"Bearer {api_key}"
 
         use_native_gateway_fallback = "models" in payload
         # When OpenRouter gateway native `models` fallback is active, avoid multiplying RPD consumption

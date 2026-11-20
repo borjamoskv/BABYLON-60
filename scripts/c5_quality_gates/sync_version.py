@@ -22,25 +22,36 @@ import re
 import sys
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).absolute().parents[2]
 
 
-def get_canonical_version(config_file: Path) -> str:
-    content = config_file.read_text(encoding="utf-8")
+def _ensure_confined_to_repo(path: Path, root: Path = REPO_ROOT) -> Path:
+    resolved = path.resolve()
+    if not resolved.is_relative_to(root.resolve()):
+        raise ValueError(f"Unconfined path outside REPO_ROOT: {path}")
+    return resolved
+
+
+def get_canonical_version(config_file: Path, root: Path = REPO_ROOT) -> str:
+    confined = _ensure_confined_to_repo(config_file, root)
+    content = confined.read_text(encoding="utf-8")
     match = re.search(r'\[release\][^\[]*?version\s*=\s*"([^"]+)"', content, re.DOTALL)
     if not match:
         raise ValueError(f"No [release] version found in {config_file}")
     return match.group(1).strip()
 
 
-def check_or_update_file(path: Path, pattern: str, replacement: str, dry_run: bool = False) -> bool:
+def check_or_update_file(
+    path: Path, pattern: str, replacement: str, dry_run: bool = False, root: Path = REPO_ROOT
+) -> bool:
     if not path.exists():
-        print(f"  [!] Missing target file: {path.relative_to(REPO_ROOT)}", file=sys.stderr)
+        print(f"  [!] Missing target file: {path.relative_to(root)}", file=sys.stderr)
         return False
 
-    content = path.read_text(encoding="utf-8")
+    confined = _ensure_confined_to_repo(path, root)
+    content = confined.read_text(encoding="utf-8")
     if not re.search(pattern, content):
-        print(f"  [!] Pattern not matched in: {path.relative_to(REPO_ROOT)}", file=sys.stderr)
+        print(f"  [!] Pattern not matched in: {path.relative_to(root)}", file=sys.stderr)
         return False
 
     new_content = re.sub(pattern, replacement, content, count=1)
@@ -48,16 +59,17 @@ def check_or_update_file(path: Path, pattern: str, replacement: str, dry_run: bo
         return True  # Already up to date
 
     if not dry_run:
-        path.write_text(new_content, encoding="utf-8")
-        print(f"  [✓] Updated: {path.relative_to(REPO_ROOT)}")
+        confined.write_text(new_content, encoding="utf-8")
+        print(f"  [✓] Updated: {path.relative_to(root)}")
     else:
-        print(f"  [DRIFT] File out of sync: {path.relative_to(REPO_ROOT)}")
+        print(f"  [DRIFT] File out of sync: {path.relative_to(root)}")
     return False
 
 
-def validate_release_license(config_file: Path) -> bool:
+def validate_release_license(config_file: Path, root: Path = REPO_ROOT) -> bool:
     """Release metadata references the existing license; it cannot grant a new one."""
-    content = config_file.read_text(encoding="utf-8")
+    confined = _ensure_confined_to_repo(config_file, root)
+    content = confined.read_text(encoding="utf-8")
     release = re.search(r"(?ms)^\[release\]\s*(.*?)(?=^\[|\Z)", content)
     if release is None:
         print("  [!] Missing [release] license metadata", file=sys.stderr)
@@ -117,13 +129,14 @@ def sync_all(dry_run: bool = False) -> bool:
     # 5. README.md badge and footer
     readme_md = REPO_ROOT / "README.md"
     if readme_md.exists():
-        content = readme_md.read_text(encoding="utf-8")
+        confined_readme = _ensure_confined_to_repo(readme_md, REPO_ROOT)
+        content = confined_readme.read_text(encoding="utf-8")
         updated = re.sub(r"version-[0-9\.]+", f"version-{canonical_version}", content)
         updated = re.sub(r"BABYLON-60 v[0-9\.]+", f"BABYLON-60 v{canonical_version}", updated)
         if content != updated:
             drift_detected = True
             if not dry_run:
-                readme_md.write_text(updated, encoding="utf-8")
+                confined_readme.write_text(updated, encoding="utf-8")
                 print("  [✓] Updated: README.md")
             else:
                 print("  [DRIFT] File out of sync: README.md")
@@ -136,7 +149,7 @@ def sync_all(dry_run: bool = False) -> bool:
     return True
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="Synchronize version from babylon.toml")
     parser.add_argument("--check", action="store_true", help="Fail if version drift exists")
     parser.add_argument("--sync", action="store_true", default=True, help="Update all files")

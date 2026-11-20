@@ -764,19 +764,50 @@ fn export_quarantine_bundle(ledger: &DAGLedger) {
         graph_hash
     );
 
-    fs::create_dir_all("artifact_bundle_v3/quarantine")
+    // C0381: cada exportación forense va a un directorio propio; nunca sustituye una anterior.
+    let dir = exclusive_export_dir(
+        std::path::Path::new("artifact_bundle_v3/quarantine"),
+        &graph_hash,
+    )
+    .expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
+    write_new(&dir.join("manifest.json"), quarantine_manifest.as_bytes())
         .expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
-    fs::write(
-        "artifact_bundle_v3/quarantine/manifest.json",
-        quarantine_manifest,
-    )
-    .expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
-    fs::write(
-        "artifact_bundle_v3/quarantine/graph.canonical",
-        &canonical_graph,
-    )
-    .expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
-    println!("Local diagnostics: artifact_bundle_v3/quarantine/ (unsigned)");
+    write_new(&dir.join("graph.canonical"), canonical_graph.as_bytes())
+        .expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
+    println!("Local diagnostics: {}/ (unsigned)", dir.display());
+}
+
+/// Crea un directorio exclusivo `<base>/<hash>-NNNN`. `mkdir` es atómico, así que dos
+/// exportaciones con el mismo hash, incluso concurrentes y con reloj fijo, obtienen
+/// directorios distintos (C0381). No depende del reloj.
+fn exclusive_export_dir(
+    base: &std::path::Path,
+    graph_hash: &str,
+) -> std::io::Result<std::path::PathBuf> {
+    fs::create_dir_all(base)?;
+    for n in 0..10_000u32 {
+        let candidate = base.join(format!("{graph_hash}-{n:04}"));
+        match fs::create_dir(&candidate) {
+            Ok(()) => return Ok(candidate),
+            Err(e) if e.kind() == std::io::ErrorKind::AlreadyExists => continue,
+            Err(e) => return Err(e),
+        }
+    }
+    Err(std::io::Error::new(
+        std::io::ErrorKind::AlreadyExists,
+        "export slots exhausted",
+    ))
+}
+
+/// Escribe un fichero que no debe existir todavía; falla en lugar de sobrescribir.
+fn write_new(path: &std::path::Path, contents: &[u8]) -> std::io::Result<()> {
+    use std::io::Write;
+    let mut file = fs::OpenOptions::new()
+        .write(true)
+        .create_new(true)
+        .open(path)?;
+    file.write_all(contents)?;
+    file.sync_all()
 }
 
 fn export_artifact_bundle(ledger: &DAGLedger) {

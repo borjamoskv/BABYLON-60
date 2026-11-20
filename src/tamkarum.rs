@@ -5,6 +5,8 @@
 //!
 //! Governed by MUSHUSHU-0 fail-stop apoptosis (`0xDEAD_6060`) upon treasury violation.
 
+use std::sync::atomic::{AtomicU32, AtomicU64, Ordering};
+
 use crate::manifest::POISONED;
 
 /// KudurruBudgetGate — Exactly 64 bytes resident in a single L1 cache line.
@@ -84,7 +86,12 @@ impl KudurruBudgetGate {
 
     /// Evaluates a proposed spend using Kelly-fraction weighting.
     /// Returns `BudgetVerdict`.
-    pub fn evaluate_bid(&mut self, proposed_bid_cents: u32, win_prob_scaled: u32, odds_ratio_scaled: u32) -> BudgetVerdict {
+    pub fn evaluate_bid(
+        &mut self,
+        proposed_bid_cents: u32,
+        win_prob_scaled: u32,
+        odds_ratio_scaled: u32,
+    ) -> BudgetVerdict {
         // Circuit breaker: 60 epochs underperforming triggers immediate apoptosis (0xDEAD_6060)
         if self.consecutive_underperforming_epochs >= 60 {
             return BudgetVerdict::ApoptosisHalt { signal: POISONED };
@@ -99,7 +106,9 @@ impl KudurruBudgetGate {
         }
 
         // Check daily ceiling
-        let projected = self.spent_today_cents.saturating_add(proposed_bid_cents as u64);
+        let projected = self
+            .spent_today_cents
+            .saturating_add(proposed_bid_cents as u64);
         if projected > self.max_daily_budget_cents {
             return BudgetVerdict::ExceedsDailyBudget {
                 attempted_total_cents: projected,
@@ -127,9 +136,187 @@ impl KudurruBudgetGate {
     pub fn record_epoch_telemetry(&mut self, observed_roas_basis_points: u32) {
         self.current_roas_basis_points = observed_roas_basis_points;
         if observed_roas_basis_points < self.min_roas_basis_points {
-            self.consecutive_underperforming_epochs = self.consecutive_underperforming_epochs.saturating_add(1);
+            self.consecutive_underperforming_epochs =
+                self.consecutive_underperforming_epochs.saturating_add(1);
         } else {
             self.consecutive_underperforming_epochs = 0;
+        }
+    }
+}
+
+/// Ticket emitido tras una reserva atómica exitosa antes del despacho (`C5-07` / `O9`).
+///
+/// Carece deliberadamente de `Copy` y `Clone` para imponer propiedad afín/lineal
+/// e impedir la duplicación de derechos de reembolso sobre el presupuesto diario.
+#[derive(Debug, PartialEq, Eq)]
+pub struct BudgetReservationTicket {
+    /// Importe reservado en céntimos.
+    pub reserved_cents: u32,
+    /// Saldo acumulado en el punto de linealización tras admitir la reserva.
+    pub committed_total_cents: u64,
+    /// Marca interna de liberación para garantizar idempotencia estricta.
+    released: bool,
+}
+
+/// Gate concurrente de reserva atómica previa al despacho (`C5-07` / `O9 · Budget-Race`).
+///
+/// Garantiza mediante `compare_exchange_weak` (`Acquire`/`Release`) que múltiples agentes
+/// compitiendo en paralelo por el presupuesto restante nunca excedan `max_daily_budget_cents`.
+#[repr(C, align(64))]
+#[derive(Debug)]
+pub struct AtomicKudurruBudgetGate {
+    /// Límite diario máximo en céntimos.
+    pub max_daily_budget_cents: u64,
+    /// Saldo comprometido/reservado atómicamente en la época actual.
+    pub spent_today_cents: AtomicU64,
+    /// Tope por puja individual en céntimos.
+    pub max_bid_cents: u32,
+    /// ROAS mínimo aceptable en puntos básicos.
+    pub min_roas_basis_points: u32,
+    /// ROAS observado actual en puntos básicos.
+    pub current_roas_basis_points: AtomicU32,
+    /// Épocas consecutivas por debajo de `min_roas_basis_points`.
+    pub consecutive_underperforming_epochs: AtomicU32,
+    /// Digest SHA-256 del recibo de atestación biométrica Touch ID.
+    pub biometric_attestation_hash: [u8; 32],
+}
+
+const _: () = {
+    assert!(std::mem::size_of::<AtomicKudurruBudgetGate>() == 64);
+    assert!(std::mem::align_of::<AtomicKudurruBudgetGate>() == 64);
+};
+
+impl AtomicKudurruBudgetGate {
+    /// Construye un nuevo gate concurrente alineado a 64 bytes.
+    pub const fn new(
+        max_daily_budget_cents: u64,
+        max_bid_cents: u32,
+        min_roas_basis_points: u32,
+        attestation_hash: [u8; 32],
+    ) -> Self {
+        Self {
+            max_daily_budget_cents,
+            spent_today_cents: AtomicU64::new(0),
+            max_bid_cents,
+            min_roas_basis_points,
+            current_roas_basis_points: AtomicU32::new(min_roas_basis_points),
+            consecutive_underperforming_epochs: AtomicU32::new(0),
+            biometric_attestation_hash: attestation_hash,
+        }
+    }
+
+    /// Reserva atómicamente `proposed_bid_cents` antes del despacho (`O9 · Budget-Race`).
+    ///
+    /// Devuelve `BudgetVerdict::Allowed` únicamente si el hilo gana la transición CAS
+    /// sin superar `max_daily_budget_cents`.
+    pub fn try_reserve_bid(
+        &self,
+        proposed_bid_cents: u32,
+        win_prob_scaled: u32,
+        odds_ratio_scaled: u32,
+    ) -> Result<BudgetReservationTicket, BudgetVerdict> {
+        if self
+            .consecutive_underperforming_epochs
+            .load(Ordering::Acquire)
+            >= 60
+        {
+            return Err(BudgetVerdict::ApoptosisHalt { signal: POISONED });
+        }
+
+        if proposed_bid_cents > self.max_bid_cents {
+            return Err(BudgetVerdict::ExceedsBidCap {
+                attempted_bid_cents: proposed_bid_cents,
+                bid_cap_cents: self.max_bid_cents,
+            });
+        }
+
+        if win_prob_scaled == 0 || odds_ratio_scaled == 0 {
+            return Err(BudgetVerdict::ExceedsBidCap {
+                attempted_bid_cents: proposed_bid_cents,
+                bid_cap_cents: 0,
+            });
+        }
+
+        let bid_u64 = proposed_bid_cents as u64;
+        let mut current = self.spent_today_cents.load(Ordering::Relaxed);
+        loop {
+            let projected = current.saturating_add(bid_u64);
+            if projected > self.max_daily_budget_cents {
+                return Err(BudgetVerdict::ExceedsDailyBudget {
+                    attempted_total_cents: projected,
+                    limit_cents: self.max_daily_budget_cents,
+                });
+            }
+
+            match self.spent_today_cents.compare_exchange_weak(
+                current,
+                projected,
+                Ordering::AcqRel,
+                Ordering::Relaxed,
+            ) {
+                Ok(_) => {
+                    return Ok(BudgetReservationTicket {
+                        reserved_cents: proposed_bid_cents,
+                        committed_total_cents: projected,
+                        released: false,
+                    });
+                }
+                Err(actual) => current = actual,
+            }
+        }
+    }
+
+    /// Libera de forma idempotente y libre de underflow una reserva previa no despachada.
+    ///
+    /// Si el ticket ya fue liberado previamente, actúa como no-op devolviendo el saldo actual.
+    /// Emplea un bucle CAS (`compare_exchange_weak`) saturado en `0` para impedir cualquier
+    /// underflow aritmético en `spent_today_cents`.
+    pub fn rollback_unspent_reservation_idempotent(
+        &self,
+        ticket: &mut BudgetReservationTicket,
+    ) -> u64 {
+        if ticket.released || ticket.reserved_cents == 0 {
+            return self.spent_today();
+        }
+        ticket.released = true;
+        let release = ticket.reserved_cents as u64;
+        let mut current = self.spent_today_cents.load(Ordering::Relaxed);
+        loop {
+            let next = current.saturating_sub(release);
+            match self.spent_today_cents.compare_exchange_weak(
+                current,
+                next,
+                Ordering::AcqRel,
+                Ordering::Relaxed,
+            ) {
+                Ok(_) => return next,
+                Err(actual) => current = actual,
+            }
+        }
+    }
+
+    /// Consume el ticket por valor y libera la reserva no despachada sin riesgo de underflow.
+    pub fn rollback_unspent_reservation(&self, mut ticket: BudgetReservationTicket) -> u64 {
+        self.rollback_unspent_reservation_idempotent(&mut ticket)
+    }
+
+    /// Devuelve el total reservado/gastado actualmente con orden `Acquire`.
+    pub fn spent_today(&self) -> u64 {
+        self.spent_today_cents.load(Ordering::Acquire)
+    }
+
+    /// Exporta una instantánea determinista compatible con `KudurruBudgetGate` C-ABI (64 B).
+    pub fn snapshot(&self) -> KudurruBudgetGate {
+        KudurruBudgetGate {
+            max_daily_budget_cents: self.max_daily_budget_cents,
+            spent_today_cents: self.spent_today_cents.load(Ordering::Acquire),
+            max_bid_cents: self.max_bid_cents,
+            min_roas_basis_points: self.min_roas_basis_points,
+            current_roas_basis_points: self.current_roas_basis_points.load(Ordering::Acquire),
+            consecutive_underperforming_epochs: self
+                .consecutive_underperforming_epochs
+                .load(Ordering::Acquire),
+            biometric_attestation_hash: self.biometric_attestation_hash,
         }
     }
 }
@@ -137,11 +324,15 @@ impl KudurruBudgetGate {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::sync::{Arc, Barrier};
+    use std::thread;
 
     #[test]
     fn test_kudurru_layout_64b_alignment() {
         assert_eq!(std::mem::size_of::<KudurruBudgetGate>(), 64);
         assert_eq!(std::mem::align_of::<KudurruBudgetGate>(), 64);
+        assert_eq!(std::mem::size_of::<AtomicKudurruBudgetGate>(), 64);
+        assert_eq!(std::mem::align_of::<AtomicKudurruBudgetGate>(), 64);
     }
 
     #[test]
@@ -149,7 +340,12 @@ mod tests {
         let mut gate = KudurruBudgetGate::new(10_000, 500, 250, [0xAA; 32]);
         // Valid bid: 200 cents
         let verdict = gate.evaluate_bid(200, 5000, 200);
-        assert_eq!(verdict, BudgetVerdict::Allowed { approved_bid_cents: 200 });
+        assert_eq!(
+            verdict,
+            BudgetVerdict::Allowed {
+                approved_bid_cents: 200
+            }
+        );
         assert_eq!(gate.spent_today_cents, 200);
 
         // Exceeds bid cap (500 limit)
@@ -164,7 +360,12 @@ mod tests {
 
         // Exceeds daily budget (10000 limit)
         let verdict_budget = gate.evaluate_bid(400, 5000, 200);
-        assert_eq!(verdict_budget, BudgetVerdict::Allowed { approved_bid_cents: 400 });
+        assert_eq!(
+            verdict_budget,
+            BudgetVerdict::Allowed {
+                approved_bid_cents: 400
+            }
+        );
         assert_eq!(gate.spent_today_cents, 600);
     }
 
@@ -178,6 +379,117 @@ mod tests {
         assert_eq!(gate.consecutive_underperforming_epochs, 60);
 
         let verdict = gate.evaluate_bid(100, 5000, 200);
-        assert_eq!(verdict, BudgetVerdict::ApoptosisHalt { signal: 0xDEAD_6060 });
+        assert_eq!(
+            verdict,
+            BudgetVerdict::ApoptosisHalt {
+                signal: 0xDEAD_6060
+            }
+        );
+    }
+
+    #[test]
+    fn test_o9_budget_race_concurrent_agents_never_exceed_limit() {
+        // Presupuesto global estricto de 5_000 céntimos; cada reserva pide 100 céntimos.
+        // Exactamente 50 reservas deben ser admitidas entre 32 hilos x 100 intentos = 3_200 intentos.
+        let gate = Arc::new(AtomicKudurruBudgetGate::new(5_000, 500, 250, [0xBB; 32]));
+        let threads = 32usize;
+        let attempts_per_thread = 100usize;
+        let barrier = Arc::new(Barrier::new(threads));
+
+        let mut handles = Vec::with_capacity(threads);
+        for _ in 0..threads {
+            let gate_ref = Arc::clone(&gate);
+            let barrier_ref = Arc::clone(&barrier);
+            handles.push(thread::spawn(move || {
+                barrier_ref.wait();
+                let mut admitted = 0usize;
+                let mut admitted_cents = 0u64;
+                for _ in 0..attempts_per_thread {
+                    match gate_ref.try_reserve_bid(100, 5000, 200) {
+                        Ok(ticket) => {
+                            admitted += 1;
+                            admitted_cents += ticket.reserved_cents as u64;
+                            assert!(ticket.committed_total_cents <= 5_000);
+                        }
+                        Err(BudgetVerdict::ExceedsDailyBudget { limit_cents, .. }) => {
+                            assert_eq!(limit_cents, 5_000);
+                        }
+                        Err(other) => panic!("unexpected verdict in O9 race: {other:?}"),
+                    }
+                }
+                (admitted, admitted_cents)
+            }));
+        }
+
+        let mut total_admitted = 0usize;
+        let mut total_cents = 0u64;
+        for handle in handles {
+            let (adm, cents) = handle.join().expect("worker thread panicked");
+            total_admitted += adm;
+            total_cents += cents;
+        }
+
+        assert_eq!(total_admitted, 50);
+        assert_eq!(total_cents, 5_000);
+        assert_eq!(gate.spent_today(), 5_000);
+    }
+
+    #[test]
+    fn test_o9_atomic_reservation_rollback_restores_capacity() {
+        let gate = AtomicKudurruBudgetGate::new(300, 200, 250, [0xCC; 32]);
+        let t1 = gate
+            .try_reserve_bid(200, 5000, 200)
+            .expect("first reservation");
+        assert_eq!(gate.spent_today(), 200);
+
+        // Segunda reserva de 200 debe fallar porque 200 + 200 > 300
+        assert_eq!(
+            gate.try_reserve_bid(200, 5000, 200),
+            Err(BudgetVerdict::ExceedsDailyBudget {
+                attempted_total_cents: 400,
+                limit_cents: 300,
+            })
+        );
+
+        // Rollback de t1 antes de ejecutar el efecto externo libera exactamente 200
+        assert_eq!(gate.rollback_unspent_reservation(t1), 0);
+        assert_eq!(gate.spent_today(), 0);
+
+        // Ahora una nueva reserva de 200 vuelve a ser admitida
+        let t2 = gate
+            .try_reserve_bid(200, 5000, 200)
+            .expect("reservation after rollback");
+        assert_eq!(t2.committed_total_cents, 200);
+    }
+
+    #[test]
+    fn test_o9_atomic_reservation_rollback_is_idempotent_and_underflow_free() {
+        let gate = AtomicKudurruBudgetGate::new(500, 250, 250, [0xDD; 32]);
+        let mut t1 = gate
+            .try_reserve_bid(200, 5000, 200)
+            .expect("first reservation");
+        let _t2 = gate
+            .try_reserve_bid(150, 5000, 200)
+            .expect("second reservation");
+        assert_eq!(gate.spent_today(), 350);
+
+        // Primera liberación de t1 descuenta exactamente 200 -> quedan 150 de t2
+        assert_eq!(gate.rollback_unspent_reservation_idempotent(&mut t1), 150);
+        assert_eq!(gate.spent_today(), 150);
+
+        // Segunda y tercera invocación sobre el mismo ticket son no-op idempotentes (no restan de t2)
+        assert_eq!(gate.rollback_unspent_reservation_idempotent(&mut t1), 150);
+        assert_eq!(gate.rollback_unspent_reservation(t1), 150);
+        assert_eq!(gate.spent_today(), 150);
+
+        // Incluso ante un ticket huérfano cuando el saldo es menor que reserved_cents,
+        // el bucle CAS satura en 0 en memoria sin envolver AtomicU64 a u64::MAX.
+        let orphan_ticket = BudgetReservationTicket {
+            reserved_cents: 500,
+            committed_total_cents: 500,
+            released: false,
+        };
+        assert_eq!(gate.rollback_unspent_reservation(orphan_ticket), 0);
+        assert_eq!(gate.spent_today(), 0);
     }
 }

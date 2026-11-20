@@ -138,7 +138,7 @@ def evaluate_triad_gates_z3(params: TriadTopologyParameters) -> Dict[str, Any]:
         s.add(z3.Not(cond))
         ok = s.check() == z3.unsat
         s.pop()
-        return ok
+        return bool(ok)
 
     gates = {
         "G1_AIR_GAP_TUTTE": _prove(k12 == 0),

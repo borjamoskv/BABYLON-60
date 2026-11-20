@@ -34,9 +34,9 @@ el runtime ni firma los informes históricos de la release.
 | --- | --- |
 | RELEASE_MANIFEST no vinculado a CLAIMS | Confirmado en el espejo público `eb20966c61cb6214c3d80392bb8d504045d7f7c5`: digest `e34750…` frente a `79f326…`. El verificador corregido exige igualdad con CLAIMS y con los cinco contadores del sitrep. |
 | Éxito antes de completar validaciones | Confirmado: imprimía INTEGRITY OK antes de comprobar el sitrep. Ahora se imprime tras validar hashes, vínculos y contadores. |
-| No preservar el manifiesto anterior | El parche conserva los bytes previos en `reports/historical-release-manifest.json`. El sustituto procede del árbol local del motor, está ligado a la ejecución histórica existente y sigue sin firma. Su procedencia queda en `artifact_updates`. No se inventa una ejecución nueva. |
+| No preservar el manifiesto anterior | El parche conserva los bytes previos en `reports/historical-release-manifest.json`. El sustituto procede del árbol local del motor, está ligado a la ejecución histórica existente y sigue sin firma. Su procedencia queda en `[OBSOLETO: artifact_updates]`. No se inventa una ejecución nueva. |
 | Fecha de empaquetado confundida con fecha de prueba | El nuevo manifiesto fecha su generación; el timestamp histórico de claims permanece intacto. Se conserva el hash del manifiesto anterior. |
-| Atestado de 16 bytes | Confirmado en el informe histórico del espejo: coincide con el prefijo del hash y no acredita una firma Ed25519. Se mantiene visible como limitación. Durante la tarea llegó una corrección del motor que separa `manifest_hash_prefix_16b` de `signature: null`; no es una nueva firma. |
+| Atestado de 16 bytes | Confirmado en el informe histórico del espejo: coincide con el prefijo del hash y no acredita una firma Ed25519. Se mantiene visible como limitación. Durante la tarea llegó una corrección del motor que separa `[OBSOLETO: manifest_hash_prefix_16b]` de `signature: null`; no es una nueva firma. |
 | Release sin firma | Confirmado. No se genera una clave para simular identidad. La comprobación opcional sigue exigiendo una clave independiente. |
 | 28 flags verified frente a 9 estados verified | Confirmado en el registro histórico. La proyección web distingue ahora estado verificado de suite ejecutada con éxito. Cambios previos/concurrentes del motor añaden `suite_passed`; sus pruebas dirigidas pasan. No se reescribió el sitrep histórico del espejo. |
 | Verified(tx) distinto | La discrepancia del informe está confirmada; el árbol del motor ya tenía una corrección que alinea locator, pre-state hash y ledger precondition, con EffectObserved separado. Se preserva; no equivale a una prueba de runtime. |
@@ -72,7 +72,7 @@ el runtime ni firma los informes históricos de la release.
 | npm run build | 111 archivos revisados, 0 errores/avisos; 48 páginas construidas |
 | npm run verify | Gates de copy, enlaces, evidencia, recursos, AI Act y ensayos pasan; 42 tests Node pasan |
 | Playwright local: Research ES y Enterprise EN | Insignias y premisas correctas, sin los textos retirados, sin desbordamiento horizontal en el viewport observado y sin scripts ejecutables |
-| Semántica, presupuesto y topología locales | Los tres comandos exigidos pasan; [salidas completas](evidence/external-audit-remediation-2026-10-24/quality-gates.json). Se omiten configuración global y telemetría Ghost Listeners explícitamente. |
+| Semántica, presupuesto y topología locales | Los tres comandos exigidos pasan; [salidas completas](RETENTION.md). Se omiten configuración global y telemetría Ghost Listeners explícitamente. |
 
 La CSP se comprueba en un servidor local que aplica la cabecera de `dist/_headers`.
 Cloudflare aplica ese archivo a activos estáticos; las respuestas de Functions
@@ -113,7 +113,7 @@ La publicación web no se da por completada. El proxy inspeccionado conserva las
 cabeceras de Pages; no se le atribuye la causa de la CSP antigua sin comprobarla.
 El borrador legal permanece fuera de `dist` y no se publica.
 
-[Estado de publicación y pruebas](evidence/external-audit-remediation-2026-10-24/publication-status.json).
+[Estado de publicación y pruebas](RETENTION.md).
 
 ### Intento de migración autorizado posteriormente
 
@@ -132,7 +132,7 @@ regresión reproduce el fallo antes del cambio; las 11 pruebas dirigidas pasan
 después. La previsualización nativa confirma el texto de origen sin solicitar
 biometría. Se conserva el rechazo de claves extrañas, hashes distintos,
 caducidad y replay. La parte legal continúa pendiente y fuera de la publicación.
-[Estado de migración](evidence/external-audit-remediation-2026-10-24/key-migration-status.json).
+[Estado de migración](RETENTION.md).
 
 Para una release autenticada faltan una revisión fijada y la ejecución pertinente,
 la firma con identidad de confianza y la validación de hardware que corresponda.

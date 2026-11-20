@@ -80,10 +80,14 @@ def void_batch_hamming_dist(query: bytes, batch: list[bytes]) -> list[int]:
     Uses Sovereign Batch SIMD Accelerator (Neon/AVX-512) for x100 throughput.
     """
     count = len(batch)
+    # El kernel C asume stride fijo: se mide el búfer real (nbytes), no len(), que un
+    # subtipo puede falsear (C0502).
+    q_len = memoryview(query).nbytes
+    if any(memoryview(b).nbytes != q_len for b in batch):
+        raise ValueError("todos los vectores del lote deben tener la longitud de la consulta")
     if _accel_func and count > 0:
-        q_len = len(query)
         # Concatenate batch into a single buffer for C-interface
-        flat_batch = b"".join(batch)
+        flat_batch = b"".join(bytes(b) for b in batch)
         results = (ctypes.c_uint64 * count)()
         _accel_func(query, flat_batch, results, count, q_len)
         return list(results)
@@ -121,6 +125,8 @@ def void_hamming_dist(a: bytes, b: bytes) -> int:
     Calculates the Hamming Distance between two bit-packed vectors.
     Uses Sovereign Batch SIMD Accelerator (Neon) if available.
     """
+    if memoryview(a).nbytes != memoryview(b).nbytes:
+        raise ValueError("los vectores deben tener la misma longitud")
     if _accel:
         return void_batch_hamming_dist(a, [b])[0]
 

@@ -4,7 +4,7 @@ Estado: ejecutado el 29/10/2026 bajo autorización posterior; véase el
 [informe de corrección](REMEDIATION_SWARM100_LOTE6_2026-10-29.md). Agrupó dos P1 inicialmente
 CONFIRMED_STATIC/OPEN por afinidad en una fuente productiva prevista:
 `01_KISH_ENGINE/babylon60/kernel/swarm_orchestrator.py`. No quedan P1 OPEN
-con reproducción previa. La [selección con hash](evidence/swarm100-lot5-20261028/lot6-selection.json)
+con reproducción previa. La [selección con hash](RETENTION.md)
 fijó la versión antes de editar; la ejecución respetó la fuente única.
 
 | ID | Fallo a reproducir | Resultado exigido |

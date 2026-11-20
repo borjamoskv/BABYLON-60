@@ -98,22 +98,13 @@ fn main() {
         std::process::exit(1);
     }
 
-    // 5. Verificación del Marcado CE
-    let is_conformant = content.contains("\"overall_status\": \"CONFORMANT\"");
-    let is_ce_auth = content.contains("\"market_access_declaration\": \"CE_MARKING_AUTHORIZED\"");
-
+    // 5. Dictamen. Las comprobaciones 1-4 solo buscan texto: no prueban autoría ni integridad.
+    // Sin firma verificada y ancla externa no hay dictamen (C0054, fail-closed). Este binario
+    // no incluye verificador criptográfico, así que el rechazo es el único resultado posible.
     println!("------------------------------------------------------------------------");
     let elapsed = start.elapsed();
-
-    if is_conformant && is_ce_auth {
-        println!("DICTAMEN DEL VERIFICADOR: [ CONFORMIDAD ABSOLUTA CERTIFICADA ]");
-        println!(" -> Estatus: MARCADO CE LEGALMENTE VALIDO PARA EL MERCADO EUROPEO");
-        println!(" -> Base Legal: Procedimiento de Control Interno (Artículo 43.2 EU AI Act)");
-        println!(" -> Tiempo de Verificación Criptográfica: {} microsegundos ({:.3} ms)", elapsed.as_micros(), elapsed.as_secs_f64() * 1000.0);
-        println!("========================================================================");
-        println!("[+] Certificado emitido determinísticamente. Listo para archivo en expediente AESIA.");
-    } else {
-        eprintln!("DICTAMEN DEL VERIFICADOR: [ NO CONFORME - RECHAZADO ]");
-        std::process::exit(1);
-    }
+    eprintln!("DICTAMEN DEL VERIFICADOR: [ NO CONFORME - RECHAZADO ]");
+    eprintln!(" -> Motivo: firma y ancla no verificadas (checker criptográfico ausente).");
+    eprintln!(" -> Las coincidencias de texto no son certificación. Tiempo: {} microsegundos.", elapsed.as_micros());
+    std::process::exit(1);
 }

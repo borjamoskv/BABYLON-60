@@ -112,7 +112,7 @@ experiments/
 !/experiments/
 /experiments/*
 !/experiments/oncology/
-
+!/experiments/agentdojo_guard/
 # Límite Topológico del Workspace
 data/
 !/experiments/oncology/data/
@@ -155,3 +155,7 @@ tools/flstudio/
 # Data Room exports
 BABYLON60_DATA_ROOM_*
 *.tar.gz
+b60_swarm_l0.db
+b60_swarm_l0.db-wal
+b60_swarm_l0.db-shm
+.babylon/

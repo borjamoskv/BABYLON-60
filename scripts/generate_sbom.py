@@ -103,17 +103,66 @@ def _extract_uv_pkg_sha256(pkg: Dict[str, Any]) -> str:
     return ""
 
 
+def collect_uv_package_variants(uv_lock_path: Path) -> List[Dict[str, Any]]:
+    """Return all distinct (name, version) variants and their resolution markers from uv.lock.
+
+    Preserves multi-marker package resolutions (e.g. numpy, beartype, lingua-language-detector)
+    without deduplicating by package name alone.
+    """
+    parsed = tomllib.loads(uv_lock_path.read_bytes().decode("utf-8"))
+    packages: List[Dict[str, Any]] = parsed.get("package", [])
+    markers_by_pkg_ver: Dict[tuple[str, str], set[str]] = {}
+    for pkg in packages:
+        for dep_list_key in ("dependencies", "dev-dependencies"):
+            for dep in pkg.get(dep_list_key, []) or []:
+                if isinstance(dep, Mapping) and dep.get("name") and dep.get("version") and dep.get("marker"):
+                    key = (str(dep["name"]), str(dep["version"]))
+                    markers_by_pkg_ver.setdefault(key, set()).add(str(dep["marker"]))
+        optional_deps = pkg.get("optional-dependencies")
+        if isinstance(optional_deps, Mapping):
+            for dep_group in optional_deps.values():
+                for dep in dep_group or []:
+                    if isinstance(dep, Mapping) and dep.get("name") and dep.get("version") and dep.get("marker"):
+                        key = (str(dep["name"]), str(dep["version"]))
+                        markers_by_pkg_ver.setdefault(key, set()).add(str(dep["marker"]))
+
+    seen: set[tuple[str, str, str]] = set()
+    variants: List[Dict[str, Any]] = []
+    for pkg in sorted(packages, key=lambda p: (str(p.get("name", "")), str(p.get("version", "")))):
+        name = str(pkg.get("name", ""))
+        version = str(pkg.get("version", ""))
+        source_repr = json.dumps(pkg.get("source", {}), sort_keys=True)
+        dedup_key = (name, version, source_repr)
+        if dedup_key in seen:
+            continue
+        seen.add(dedup_key)
+        variants.append(
+            {
+                "name": name,
+                "version": version,
+                "sha256": _extract_uv_pkg_sha256(pkg),
+                "markers": sorted(markers_by_pkg_ver.get((name, version), set())),
+            }
+        )
+    return variants
+
+
 def build_uv_cyclonedx(uv_lock_path: Path) -> Dict[str, Any]:
-    """Parse uv.lock and return a deterministic CycloneDX 1.5 BOM dict."""
+    """Parse uv.lock and return a deterministic CycloneDX 1.5 BOM dict preserving all version variants."""
     raw = uv_lock_path.read_bytes()
     lock_sha256 = _sha256_bytes(raw)
     parsed = tomllib.loads(raw.decode("utf-8"))
     packages: List[Dict[str, Any]] = parsed.get("package", [])
 
     components: List[Dict[str, Any]] = []
+    seen_bom_refs: set[tuple[str, str, str]] = set()
     for pkg in sorted(packages, key=lambda p: (str(p.get("name", "")), str(p.get("version", "")))):
         name = str(pkg.get("name", ""))
         version = str(pkg.get("version", ""))
+        source_repr = json.dumps(pkg.get("source", {}), sort_keys=True)
+        if (name, version, source_repr) in seen_bom_refs:
+            continue
+        seen_bom_refs.add((name, version, source_repr))
         sha256_hex = _extract_uv_pkg_sha256(pkg)
         comp: Dict[str, Any] = {
             "type": "library",

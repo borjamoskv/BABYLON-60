@@ -36,6 +36,7 @@ from babylon60.autodidact.types import (
     Modality,
     Obligation,
     RawEvidence,
+    ScopedClaimRecord,
     Statement,
     StatementStatus,
 )
@@ -55,6 +56,7 @@ __all__ = [
     "EvidenceSource",
     "RawEvidence",
     "FalsificationVerdict",
+    "ScopedClaimRecord",
     "EpistemicCrystal",
     "hash_statement",
     "hash_justification",

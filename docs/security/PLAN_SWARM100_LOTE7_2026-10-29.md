@@ -4,7 +4,7 @@ Estado: ejecutado por instrucción del operador; véase el
 [informe de cierre](REMEDIATION_SWARM100_LOTE7_2026-10-29.md).
 La planificación histórica agrupaba dos P1 CONFIRMED_STATIC/OPEN
 en una fuente productiva prevista: `scripts/c5_verifiers/fast_smt_gate.py`.
-La [selección con hash](evidence/swarm100-lot6-20261029/lot7-selection.json)
+La [selección con hash](RETENTION.md)
 fija la versión a reconfirmar antes de editar. No quedan P1 OPEN con
 reproducción previa; se elige este grupo por afinidad y por sus afirmaciones
 no comprobadas de verificación/compliance.

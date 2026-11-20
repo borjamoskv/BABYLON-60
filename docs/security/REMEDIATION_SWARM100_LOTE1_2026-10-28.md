@@ -45,29 +45,29 @@ no consiste en rechazar siempre.
 
 ## Verificación
 
-- [Fuentes originales](evidence/swarm100-lot1-20261028/before-source-manifest.json):
+- [Fuentes originales](RETENTION.md):
   los cuatro hashes coincidían con la selección antes de editar.
-- [Primera ejecución](evidence/swarm100-lot1-20261028/before-tests.log):
+- [Primera ejecución](RETENTION.md):
   **48 failed, 3 passed**, 51 casos sobre los hashes originales. Incluye los
   tres escenarios de los arneses aislados convertidos a regresiones.
-- [Batería final relacionada](evidence/swarm100-lot1-20261028/related-tests.log):
+- [Batería final relacionada](RETENTION.md):
   **242 passed, 1 skipped**, trece archivos: la batería anterior, AgentPager y
   62 regresiones de este lote. La omisión requiere `strike_rs`, no construido.
   El alcance es la batería Python relacionada; no toda la suite del repositorio.
-- [CLI real con fixtures](evidence/swarm100-lot1-20261028/cli-smoke.json):
+- [CLI real con fixtures](RETENTION.md):
   cinco controles de salida pasan, incluida firma autorizada positiva y
   rechazo tras cambiar un archivo, sin clave, sin modo o con flags incompatibles.
-- [Revisión independiente](evidence/swarm100-lot1-20261028/independent-review.json):
+- [Revisión independiente](RETENTION.md):
   62 pruebas, hashes y cobertura revisados; ningún hallazgo accionable pendiente
   dentro del alcance. Detectó que `--emit` ignoraba flags de verificación.
-  [Cinco regresiones fallaron](evidence/swarm100-lot1-20261028/emit-controls-before.log)
+  [Cinco regresiones fallaron](RETENTION.md)
   antes del ajuste; ahora esos flags se rechazan antes de llamar al emisor.
-- [Ruff](evidence/swarm100-lot1-20261028/ruff.log) y MyPy sobre las cuatro fuentes:
+- [Ruff](RETENTION.md) y MyPy sobre las cuatro fuentes:
   aprobados. Cada copia SOCINT se comprueba por separado por su nombre de módulo.
   La deuda inicial de Ruff está conservada; quitar prefijos f innecesarios y
   renombrar una variable ambigua no alteró el AST funcional ajeno al parche,
   según la revisión independiente.
-- [Validación final](evidence/swarm100-lot1-20261028/validation.json): comandos,
+- [Validación final](RETENTION.md): comandos,
   códigos de salida, hashes, enlaces, controles documentales y contabilidad.
 
 Se refrescó la evidencia de C0265, C0268, C0269 y C0270 porque comparten un
@@ -98,7 +98,7 @@ Quedan **562 hallazgos únicos OPEN** originales: 77 P1, 475 P2 y 10 P3;
 tres mitigados y el P1 adicional SW100-R3-0001 siguen pendientes. La reducción
 desde 567 combina cuatro correcciones directas y la deduplicación de C0264.
 En los 582 IDs de la ronda quedan 564 OPEN, 12 FIXED, 2 MITIGATED y
-4 NOT_APPLICABLE. Los [cambios por ID](evidence/swarm100-lot1-20261028/candidate-status-updates.json)
+4 NOT_APPLICABLE. Los [cambios por ID](RETENTION.md)
 y el registro reconciliado conservan historia y hash vigente.
 
 El [Lote 2](PLAN_SWARM100_LOTE2_2026-10-28.md) contiene cinco P1 estáticos sobre

@@ -1,0 +1,221 @@
+{
+  "schema_version": "1.0.0",
+  "description": "Declarative host and fleet capability profiles for C5-UNIVERSAL-AUTOROUTE v3.0. Decouples model labels from core routing logic.",
+  "profiles": {
+    "antigravity_ui": {
+      "host_kind": "ide_selector",
+      "resting_default": "Orchestrator (Argon)",
+      "how_to_apply": "Selector de modelo en la barra inferior de Antigravity IDE",
+      "options": [
+        {
+          "label": "Orchestrator (Argon)",
+          "family": "gemini-4",
+          "stratum": 2,
+          "effort": "adaptive",
+          "adaptive_strata": [1, 2],
+          "cache_discount": 0.95,
+          "locality": "remote",
+          "notes": "Bucle nativo Argon (Plan RO) -> Hydrogen (Exec RW) -> Argon (Recovery). Punto de reposo Omega_0."
+        },
+        {
+          "label": "Orchestrator (Carbon)",
+          "family": "gemini-4",
+          "stratum": 3,
+          "effort": "adaptive",
+          "adaptive_strata": [2, 3],
+          "cache_discount": 0.95,
+          "locality": "remote",
+          "notes": "Bucle nativo Carbon (Plan RO) -> Hydrogen (Exec RW) -> Carbon (Recovery) para arquitectura y migraciones complejas."
+        },
+        {
+          "label": "Gemini 4 Carbon",
+          "family": "gemini-4",
+          "stratum": 3,
+          "efforts": ["Low", "Medium", "High", "Extra"],
+          "cache_discount": 0.95,
+          "min_max_output_tokens": 32768,
+          "locality": "remote"
+        },
+        {
+          "label": "Gemini 4 Argon",
+          "family": "gemini-4",
+          "stratum": 2,
+          "efforts": ["Low", "Medium", "High", "Extra"],
+          "cache_discount": 0.95,
+          "min_max_output_tokens": 32768,
+          "locality": "remote"
+        },
+        {
+          "label": "Gemini 4 Hydrogen",
+          "family": "gemini-4",
+          "stratum": 1,
+          "efforts": ["Low", "Medium", "High", "Extra"],
+          "cache_discount": 0.95,
+          "locality": "remote",
+          "notes": "Motor cinético rápido; el nivel Extra (XHigh) eleva el gasto de salida por razonamiento extendido."
+        },
+        {
+          "label": "Gemini 3.8 Flash",
+          "family": "gemini-3.8",
+          "stratum": 1,
+          "efforts": ["Low", "Medium", "High"],
+          "cache_discount": 0.75,
+          "locality": "remote"
+        },
+        {
+          "label": "Claude Opus 5.5",
+          "family": "claude-5.5",
+          "stratum": 3,
+          "efforts": ["Low", "Medium", "High"],
+          "cache_discount": 0.95,
+          "locality": "remote",
+          "specialties": ["formal_ring0", "epistemic_halt", "systems_typed"]
+        },
+        {
+          "label": "Claude Sonnet 5.5",
+          "family": "claude-5.5",
+          "stratum": 2,
+          "efforts": ["Low", "Medium", "High"],
+          "cache_discount": 0.95,
+          "locality": "remote",
+          "specialties": ["systems_typed", "scoped_impl"]
+        },
+        {
+          "label": "GPT-OSS 120B (Medium)",
+          "family": "gpt-oss",
+          "stratum": 2,
+          "efforts": ["Medium"],
+          "cache_discount": 0.0,
+          "locality": "remote",
+          "notes": "Endpoint OSS remoto en el IDE ([Notice]); NO constituye aislamiento físico local 127.0.0.1."
+        }
+      ]
+    },
+    "claude_code": {
+      "host_kind": "cli_or_ide",
+      "resting_default": "claude-sonnet-5-5",
+      "how_to_apply": "Comando /model o variable CLAUDE_CODE_EFFORT={low,medium,high}",
+      "options": [
+        {
+          "label": "claude-opus-5-5",
+          "family": "claude-5.5",
+          "stratum": 3,
+          "efforts": ["low", "medium", "high"],
+          "cache_discount": 0.95,
+          "locality": "remote"
+        },
+        {
+          "label": "claude-sonnet-5-5",
+          "family": "claude-5.5",
+          "stratum": 2,
+          "efforts": ["low", "medium", "high"],
+          "cache_discount": 0.95,
+          "locality": "remote"
+        },
+        {
+          "label": "claude-haiku-5-5",
+          "family": "claude-5.5",
+          "stratum": 1,
+          "efforts": ["low", "medium"],
+          "cache_discount": 0.90,
+          "locality": "remote"
+        }
+      ]
+    },
+    "codex_cli": {
+      "host_kind": "cli_or_ide",
+      "resting_default": "gpt-5.6 (medium)",
+      "how_to_apply": "Comando /model o variable OPENAI_REASONING_EFFORT={low,medium,high}",
+      "options": [
+        {
+          "label": "o3",
+          "family": "openai-o",
+          "stratum": 3,
+          "efforts": ["low", "medium", "high"],
+          "cache_discount": 0.75,
+          "locality": "remote"
+        },
+        {
+          "label": "gpt-5.6",
+          "family": "openai-gpt",
+          "stratum": 2,
+          "efforts": ["low", "medium", "high"],
+          "cache_discount": 0.75,
+          "locality": "remote"
+        },
+        {
+          "label": "gpt-5-mini",
+          "family": "openai-gpt",
+          "stratum": 1,
+          "efforts": ["low", "medium"],
+          "cache_discount": 0.75,
+          "locality": "remote"
+        }
+      ]
+    },
+    "gemini_cli": {
+      "host_kind": "cli_or_ide",
+      "resting_default": "gemini-4-argon",
+      "how_to_apply": "Variable GEMINI_MODEL y GEMINI_THINKING_LEVEL={low,medium,high}",
+      "options": [
+        {
+          "label": "gemini-4-carbon",
+          "family": "gemini-4",
+          "stratum": 3,
+          "efforts": ["low", "medium", "high"],
+          "cache_discount": 0.95,
+          "min_max_output_tokens": 32768,
+          "locality": "remote"
+        },
+        {
+          "label": "gemini-4-argon",
+          "family": "gemini-4",
+          "stratum": 2,
+          "efforts": ["low", "medium", "high"],
+          "cache_discount": 0.95,
+          "min_max_output_tokens": 32768,
+          "locality": "remote"
+        },
+        {
+          "label": "gemini-3.8-flash",
+          "family": "gemini-3.8",
+          "stratum": 1,
+          "efforts": ["high"],
+          "cache_discount": 0.75,
+          "locality": "remote"
+        }
+      ]
+    },
+    "local_loopback": {
+      "host_kind": "local_runtime",
+      "resting_default": "litert://gemma4-26b",
+      "how_to_apply": "LiteRTAgentConfig o LocalOpenAIAgentConfig apuntando a 127.0.0.1",
+      "options": [
+        {
+          "label": "litert://gemma4-26b",
+          "family": "local-litert",
+          "stratum": 2,
+          "efforts": ["Standard"],
+          "cache_discount": 1.0,
+          "locality": "loopback"
+        },
+        {
+          "label": "http://127.0.0.1:11434/v1",
+          "family": "local-ollama",
+          "stratum": 2,
+          "efforts": ["Standard"],
+          "cache_discount": 1.0,
+          "locality": "loopback"
+        },
+        {
+          "label": "http://127.0.0.1:8000/v1",
+          "family": "local-vllm",
+          "stratum": 2,
+          "efforts": ["Standard"],
+          "cache_discount": 1.0,
+          "locality": "loopback"
+        }
+      ]
+    }
+  }
+}

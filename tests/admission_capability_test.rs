@@ -302,3 +302,68 @@ fn test_fl008_scope_rejects_prefix_confusion_and_path_traversal() {
     }
 }
 
+
+#[test]
+fn test_fl008_commit_once_rejects_replay_and_does_not_consume_on_failure() {
+    use babylon60::capability::{sha256_digest, McpCapabilityBroker, McpToolDef};
+    use babylon60::ontology::babylon::EffectKind;
+
+    let server = [0xC2u8; 32];
+    let code_hash = sha256_digest(b"agentdojo_send_money_v1");
+    let tool = McpToolDef {
+        name: "send_money".to_string(),
+        code_hash,
+        allowed_effects: vec![EffectKind::NetTransmit],
+        target_resource_scope: "agentdojo://banking/send_money".to_string(),
+    };
+    let mut broker = McpCapabilityBroker::new();
+    broker.register_server(server, true, 1);
+    broker.register_tool(&server, tool.clone()).expect("register");
+    broker.authorize_tool(&server, tool).expect("authorize");
+
+    let resource = "agentdojo://banking/send_money";
+    let args = br#"{"amount":100,"recipient":"GB29NWBK60161331926819"}"#;
+    let token = broker
+        .request_capability(&server, "send_money", &code_hash, args, resource, EffectKind::NetTransmit, 1)
+        .expect("issue");
+    let tick = token.issued_epoch();
+
+    // Failed commit (poisoned recipient) must not consume the token.
+    let poisoned = br#"{"amount":100,"recipient":"ATTACKER_IBAN"}"#;
+    assert_eq!(
+        broker.commit_execution_once(&token, &server, "send_money", &code_hash, poisoned, resource, EffectKind::NetTransmit, tick),
+        Err(RejectReason::ConfigurationDrift)
+    );
+
+    // First legitimate commit succeeds exactly once.
+    let evidence = broker
+        .commit_execution_once(&token, &server, "send_money", &code_hash, args, resource, EffectKind::NetTransmit, tick)
+        .expect("first commit");
+    assert_eq!(&evidence.token_id, token.token_id());
+
+    // Replay with identical bindings is rejected.
+    assert_eq!(
+        broker.commit_execution_once(&token, &server, "send_money", &code_hash, args, resource, EffectKind::NetTransmit, tick),
+        Err(RejectReason::NonceAlreadyConsumed(*token.token_id()))
+    );
+
+    // Different code hash and different effect are still rejected on a fresh token.
+    let fresh = broker
+        .request_capability(&server, "send_money", &code_hash, b"other", resource, EffectKind::NetTransmit, 1)
+        .expect("issue fresh");
+    let wrong_hash = sha256_digest(b"tampered");
+    assert_eq!(
+        broker.commit_execution_once(&fresh, &server, "send_money", &wrong_hash, b"other", resource, EffectKind::NetTransmit, tick),
+        Err(RejectReason::ToolIdentityMismatch)
+    );
+    assert_eq!(
+        broker.commit_execution_once(&fresh, &server, "send_money", &code_hash, b"other", resource, EffectKind::FsDelete, tick),
+        Err(RejectReason::CapabilityEscalation)
+    );
+
+    // Revocation (epoch advance) makes the unconsumed token stale.
+    broker.revoke_tool(&server, "send_money").expect("revoke");
+    assert!(broker
+        .commit_execution_once(&fresh, &server, "send_money", &code_hash, b"other", resource, EffectKind::NetTransmit, tick)
+        .is_err());
+}

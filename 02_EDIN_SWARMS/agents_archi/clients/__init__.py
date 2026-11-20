@@ -5,7 +5,6 @@
 # ============================================================================
 """Clients package for agents.archi."""
 
-from .kimi import KimiClient
 from .openrouter import (
     OpenRouterClient,
     OpenRouterRoleTier,
@@ -15,7 +14,6 @@ from .openrouter import (
 )
 
 __all__ = [
-    "KimiClient",
     "OpenRouterClient",
     "OpenRouterRoleTier",
     "QuotaBudgetTracker",

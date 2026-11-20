@@ -1,11 +1,11 @@
 {
   "format": "babylon60.claims.lock.v1",
   "version": "5.1.0",
-  "commit": "e02cc29e7bfea6d987215a30a43fe10ecd397832",
-  "source_tree_digest": "f446f24929afc508525c8322a7211dac0e67bc94346036b16273a6a1c0fd527d",
-  "timestamp": "2026-11-06T23:54:16Z",
-  "claims_manifest_digest": "d4ca80d4e82978ce6e0ff5572a425f4126179e9e891fae2b3fe1b97c850e070d",
-  "evidence_root": "sha3-256:411e0639ecb6239f73bee9483865abae653b4931dcfa49b984f5340f38eeea20",
+  "commit": "5d9ebd1bff3b3573edce5085cf374644d39e328a",
+  "source_tree_digest": "cbed9e600cc60c2f1515310b4619694b12d53f4630e32aa6aa4ad2095debc06f",
+  "timestamp": "2026-11-16T20:07:06Z",
+  "claims_manifest_digest": "e20e4db64dd4ef771cdb7a91744924d0c53a4e3ba632c592fdcecfa56864715c",
+  "evidence_root": "sha3-256:70bb1d48561ec4f1767d3435e8a642e65298280c368920813a515274e5344cfc",
   "claims_pinned": {
     "inv_01_manifest_layout": {
       "status": "verified",
@@ -142,10 +142,25 @@
       "component": "00_ABZU_KERNEL",
       "hash": "68fc60baae585b6127e8fdf0ff797f6127cbe18447de59bc6f2008318959f510"
     },
+    "ring0_linux_tpm2_wire": {
+      "status": "verified",
+      "component": "00_ABZU_KERNEL",
+      "hash": "5ebd6d33b1543710e5df2a53c317f1dcbfaaf78d1a899a5f22557852d0d03c9e"
+    },
+    "ring0_aws_nitro_wire": {
+      "status": "verified",
+      "component": "00_ABZU_KERNEL",
+      "hash": "520b6761b84313789ee41bf173d532991cafb4d8c56708a4c6c5fbd2608aa884"
+    },
     "mcp_seatbelt_confinement": {
       "status": "verified_local",
       "component": "01_KISH_ENGINE",
       "hash": "a6e3ee16fcf428c3838642e478bba1c20f84fa48d0f4b166cf461bb57df2aab5"
+    },
+    "FL_AIACT_02_regulatory_evidence_graph": {
+      "status": "verified",
+      "component": "01_KISH_ENGINE",
+      "hash": "34b97974fe4176e84cbda5f44f29718d8aed9ef91c492d8294b3c75e27ca8679"
     }
   }
 }

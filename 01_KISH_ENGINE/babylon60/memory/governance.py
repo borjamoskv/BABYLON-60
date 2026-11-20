@@ -218,6 +218,28 @@ class MemoryRecordView:
     revocation_receipt_id: Optional[str] = None
 
 
+@dataclass(frozen=True)
+class _PendingMemoryRecord:
+    """Signed input snapshot; database checks still run under the writer lock."""
+
+    record_id: str
+    tenant_id: str
+    principal: str
+    content: str
+    kind: MemoryKind
+    modality: MemoryModality
+    trust_level: TrustLevel
+    policy_epoch: int
+    subject_key: Optional[str]
+    parents: Tuple[str, ...]
+    depends_on: Tuple[str, ...]
+    valid_from_tick: Optional[int]
+    valid_to_tick: Optional[int]
+    salt_hex: str
+    commitment: str
+    signature: str
+
+
 class MemoryGovernanceEngine:
     """Sovereign memory governance engine backed by SQLite WAL and CortexPersistLedger."""
 
@@ -225,6 +247,10 @@ class MemoryGovernanceEngine:
         self.db_path = Path(db_path)
         self.db_path.parent.mkdir(parents=True, exist_ok=True)
         self.ledger = ledger if ledger is not None else CortexPersistLedger(self.db_path)
+        if not self.db_path.exists() or not os.path.samefile(self.db_path, self.ledger.db_path):
+            raise GovernanceViolationError(
+                "Memory governance and ledger must share the same database for atomic writes"
+            )
         self._principal_keys: Dict[Tuple[str, str], bytes] = {}
         self._host_epoch: int = 1
         self._init_governance_schema()
@@ -388,7 +414,7 @@ class MemoryGovernanceEngine:
         salt_hex: Optional[str] = None,
         client_supplied_tx_time: Optional[int] = None,
     ) -> MemoryRecordView:
-        """Insert a verified, signed memory record and bind it to the WORM ledger."""
+        """Commit the signed record, lineage and ledger event in one SQLite transaction."""
         # Law O13: Reject caller-supplied transaction clock
         if client_supplied_tx_time is not None:
             raise GovernanceViolationError(
@@ -411,165 +437,244 @@ class MemoryGovernanceEngine:
         key = self._principal_keys.get((tenant_id, principal))
         if key is None:
             raise SignatureVerificationError(f"Unregistered principal {principal!r} in tenant {tenant_id!r}")
-        expected_sig = sign_memory_commitment(key, principal, tenant_id, commitment, self._host_epoch)
+        policy_epoch = self._host_epoch
+        expected_sig = sign_memory_commitment(key, principal, tenant_id, commitment, policy_epoch)
         if signature is not None and not hmac.compare_digest(signature, expected_sig):
             raise SignatureVerificationError("Invalid cryptographic signature for MemoryRecord")
-        actual_sig = expected_sig
 
+        record = _PendingMemoryRecord(
+            record_id=rec_id,
+            tenant_id=tenant_id,
+            principal=principal,
+            content=content,
+            kind=kind,
+            modality=modality,
+            trust_level=trust_level,
+            policy_epoch=policy_epoch,
+            subject_key=subject_key,
+            parents=parent_ids,
+            depends_on=dep_ids,
+            valid_from_tick=valid_from_tick,
+            valid_to_tick=valid_to_tick,
+            salt_hex=salt,
+            commitment=commitment,
+            signature=expected_sig,
+        )
         with closing(self._get_connection()) as conn, conn:
+            # All database-dependent checks share the writer lock with revocation.
             conn.execute("BEGIN IMMEDIATE")
-            all_upstream = list(dict.fromkeys([*parent_ids, *dep_ids]))
-            upstream_modalities: List[str] = []
+            self._validate_record_insertion(conn, record)
+            upstream = self._validate_record_dependencies(conn, record)
+            superseded, initial_status = self._plan_record_supersession(conn, record, upstream)
+            self._persist_record(conn, record, superseded, initial_status)
+            # Verify and project before COMMIT: read failures must roll back too.
+            result = self._read_record(conn, rec_id, tenant_id=tenant_id, include_inactive=True)
+        return result
 
-            # Reuse each scar's salt to compare commitments, independently of
-            # the candidate's UUID, principal, salt, or chosen dependencies.
-            scars = conn.execute(
-                "SELECT r.commitment, b.salt_hex FROM cortex_disbelief_proofs p "
-                "JOIN cortex_memory_records r ON r.record_id = p.disbelieved_record_id "
-                "JOIN cortex_memory_blobs b ON b.record_id = r.record_id "
-                "WHERE p.tenant_id = ? AND r.kind = ? AND r.modality = ?",
-                (tenant_id, kind.value, modality.value),
-            ).fetchall()
-            for scar_commitment, scar_salt in scars:
-                candidate = compute_salted_commitment(scar_salt, content, modality, kind)
-                if hmac.compare_digest(candidate, scar_commitment):
-                    raise GovernanceViolationError("Previously disbelieved attribution cannot be reinserted")
+    def _validate_record_insertion(self, conn: sqlite3.Connection, record: _PendingMemoryRecord) -> None:
+        """Reject duplicates, invalid windows and disbelieved content before any write."""
+        existing_rec = conn.execute(
+            "SELECT 1 FROM cortex_memory_records WHERE record_id = ?",
+            (record.record_id,),
+        ).fetchone()
+        if existing_rec is not None:
+            raise GovernanceViolationError(f"Duplicate record_id already exists: {record.record_id}")
 
-            for up_id in all_upstream:
-                row = conn.execute(
-                    "SELECT tenant_id, modality, status FROM cortex_memory_records WHERE record_id = ?",
-                    (up_id,),
-                ).fetchone()
-                if row is None:
-                    raise GovernanceViolationError(f"Missing upstream dependency record: {up_id}")
-                up_tenant, up_mod, up_status = row
-                if up_tenant != tenant_id:
-                    grant = conn.execute(
-                        "SELECT 1 FROM cortex_tenant_grants WHERE owner_tenant = ? AND grantee_tenant = ? AND record_id = ?",
-                        (up_tenant, tenant_id, up_id),
-                    ).fetchone()
-                    if grant is None:
-                        raise TenantIsolationError(
-                            f"Cross-tenant reference from {tenant_id!r} to {up_tenant!r} on {up_id} denied"
-                        )
-                if up_status != MemoryStatus.ACTIVE.value:
-                    raise GovernanceViolationError(
-                        f"Cannot derive from or depend on non-active record {up_id} (status={up_status})"
-                    )
-                upstream_modalities.append(str(up_mod))
-
-            # Hume's Guillotine: Deontic derived record requires at least one Deontic premise or Sovereign authority
-            if modality == MemoryModality.DEONTIC and all_upstream:
-                if MemoryModality.DEONTIC.value not in upstream_modalities and trust_level != TrustLevel.SOVEREIGN:
-                    raise HumeGuillotineError(
-                        "Hume's Guillotine violation: cannot derive Deontic memory from purely Epistemic parents"
-                    )
-
-            self._check_no_cycle(conn, rec_id, all_upstream)
-
-            # Append immutable commitment to WORM CortexPersistLedger (no plaintext stored in WORM)
-            ledger_res = self.ledger.append_event(
-                CortexEvent(
-                    event_type="MEMORY_RECORD_COMMITTED",
-                    payload={
-                        "record_id": rec_id,
-                        "tenant_id": tenant_id,
-                        "principal": principal,
-                        "kind": kind.value,
-                        "modality": modality.value,
-                        "trust_level": int(trust_level),
-                        "policy_epoch": self._host_epoch,
-                        "commitment": commitment,
-                        "signature": actual_sig,
-                        "parents": list(parent_ids),
-                        "depends_on": list(dep_ids),
-                    },
-                    cortex_taint=f"MEM_COMMIT:{tenant_id}:{rec_id}:{commitment[:16]}",
-                    agent_id=principal,
-                ),
-                # Separate ledger files retain their own durable transaction;
-                # the governance writer lock still serializes derivation/revocation.
-                connection=conn if os.path.samefile(self.db_path, self.ledger.db_path) else None,
+        if (
+            record.valid_from_tick is not None
+            and record.valid_to_tick is not None
+            and record.valid_to_tick <= record.valid_from_tick
+        ):
+            raise GovernanceViolationError(
+                f"Invalid temporal window: valid_to_tick ({record.valid_to_tick}) must exceed valid_from_tick ({record.valid_from_tick})"
             )
-            tx_lamport = int(ledger_res["lamport_t"])
-            v_from = valid_from_tick if valid_from_tick is not None else tx_lamport
-            tokens_json = _canonical_json(self._tokenize(content))
 
-            superseded_ids: List[str] = []
-            if subject_key is not None:
-                prev_rows = conn.execute(
-                    "SELECT record_id, trust_level FROM cortex_memory_records "
-                    "WHERE tenant_id = ? AND subject_key = ? AND status = 'ACTIVE'",
-                    (tenant_id, subject_key),
+        # Reuse each scar's salt to compare commitments, independently of
+        # the candidate's UUID, principal, salt, or chosen dependencies.
+        scars = conn.execute(
+            "SELECT r.commitment, b.salt_hex FROM cortex_disbelief_proofs p "
+            "JOIN cortex_memory_records r ON r.record_id = p.disbelieved_record_id "
+            "JOIN cortex_memory_blobs b ON b.record_id = r.record_id "
+            "WHERE p.tenant_id = ? AND r.kind = ? AND r.modality = ?",
+            (record.tenant_id, record.kind.value, record.modality.value),
+        ).fetchall()
+        for scar_commitment, scar_salt in scars:
+            candidate = compute_salted_commitment(scar_salt, record.content, record.modality, record.kind)
+            if hmac.compare_digest(candidate, scar_commitment):
+                raise GovernanceViolationError("Previously disbelieved attribution cannot be reinserted")
+
+        if record.valid_to_tick is not None and record.valid_from_tick is None:
+            tip = conn.execute("SELECT COALESCE(MAX(lamport_t), 0) FROM cortex_ledger").fetchone()
+            next_tick = int(tip[0]) + 1
+            if record.valid_to_tick <= next_tick:
+                raise GovernanceViolationError(
+                    f"Invalid temporal window: valid_to_tick ({record.valid_to_tick}) "
+                    f"must exceed transaction tick ({next_tick})"
+                )
+
+    def _validate_record_dependencies(self, conn: sqlite3.Connection, record: _PendingMemoryRecord) -> List[str]:
+        """Check access, activity, modality and cycles in the locked database state."""
+        all_upstream = list(dict.fromkeys([*record.parents, *record.depends_on]))
+        upstream_modalities: List[str] = []
+        for up_id in all_upstream:
+            row = conn.execute(
+                "SELECT tenant_id, modality, status FROM cortex_memory_records WHERE record_id = ?",
+                (up_id,),
+            ).fetchone()
+            if row is None:
+                raise GovernanceViolationError(f"Missing upstream dependency record: {up_id}")
+            up_tenant, up_mod, up_status = row
+            if up_tenant != record.tenant_id:
+                grant = conn.execute(
+                    "SELECT 1 FROM cortex_tenant_grants WHERE owner_tenant = ? AND grantee_tenant = ? AND record_id = ?",
+                    (up_tenant, record.tenant_id, up_id),
+                ).fetchone()
+                if grant is None:
+                    raise TenantIsolationError(
+                        f"Cross-tenant reference from {record.tenant_id!r} to {up_tenant!r} on {up_id} denied"
+                    )
+            if up_status != MemoryStatus.ACTIVE.value:
+                raise GovernanceViolationError(
+                    f"Cannot derive from or depend on non-active record {up_id} (status={up_status})"
+                )
+            upstream_modalities.append(str(up_mod))
+
+        # Hume's Guillotine: Deontic derived record requires at least one Deontic premise or Sovereign authority
+        if record.modality == MemoryModality.DEONTIC and all_upstream:
+            if MemoryModality.DEONTIC.value not in upstream_modalities and record.trust_level != TrustLevel.SOVEREIGN:
+                raise HumeGuillotineError(
+                    "Hume's Guillotine violation: cannot derive Deontic memory from purely Epistemic parents"
+                )
+
+        self._check_no_cycle(conn, record.record_id, all_upstream)
+
+        return all_upstream
+
+    def _plan_record_supersession(
+        self, conn: sqlite3.Connection, record: _PendingMemoryRecord, upstream: Sequence[str]
+    ) -> Tuple[List[str], MemoryStatus]:
+        """Resolve authority once and reject dependencies this insertion would invalidate."""
+        if record.subject_key is None:
+            return [], MemoryStatus.ACTIVE
+        previous = conn.execute(
+            "SELECT record_id, trust_level FROM cortex_memory_records "
+            "WHERE tenant_id = ? AND subject_key = ? AND status = 'ACTIVE'",
+            (record.tenant_id, record.subject_key),
+        ).fetchall()
+        superseded = [rid for rid, trust in previous if int(record.trust_level) >= int(trust)]
+        status = MemoryStatus.STALE if len(superseded) < len(previous) else MemoryStatus.ACTIVE
+        if upstream:
+            invalidated = set(superseded)
+            for rid in superseded:
+                rows = conn.execute(
+                    """
+                    WITH RECURSIVE downstream(id) AS (
+                        SELECT child_id FROM cortex_memory_edges
+                        WHERE parent_id = ? AND edge_kind IN ('DERIVES_FROM', 'DEPENDS_ON')
+                        UNION
+                        SELECT e.child_id FROM cortex_memory_edges e
+                        JOIN downstream d ON e.parent_id = d.id
+                        WHERE e.edge_kind IN ('DERIVES_FROM', 'DEPENDS_ON')
+                    )
+                    SELECT id FROM downstream;
+                    """,
+                    (rid,),
                 ).fetchall()
-                for prev_id, prev_trust in prev_rows:
-                    if int(trust_level) >= int(prev_trust):
-                        conn.execute(
-                            "UPDATE cortex_memory_records SET status = ?, valid_to_tick = ? WHERE record_id = ?",
-                            (MemoryStatus.STALE.value, tx_lamport, prev_id),
-                        )
-                        superseded_ids.append(prev_id)
-                        # Invalidate compiled summaries (IdeaThreads) derived from the superseded fact
-                        self._mark_dependents_stale(conn, prev_id, tx_lamport)
+                invalidated.update(row[0] for row in rows)
+            for rid in upstream:
+                if rid in invalidated:
+                    raise GovernanceViolationError(
+                        f"Cannot derive from or depend on record {rid} "
+                        f"that is simultaneously superseded by subject_key {record.subject_key!r}"
+                    )
+        return superseded, status
 
-            initial_status = MemoryStatus.ACTIVE
-            if subject_key is not None:
-                higher_exists = conn.execute(
-                    "SELECT 1 FROM cortex_memory_records "
-                    "WHERE tenant_id = ? AND subject_key = ? AND status = 'ACTIVE' AND trust_level > ?",
-                    (tenant_id, subject_key, int(trust_level)),
-                ).fetchone()
-                if higher_exists is not None:
-                    initial_status = MemoryStatus.STALE
+    def _persist_record(
+        self,
+        conn: sqlite3.Connection,
+        record: _PendingMemoryRecord,
+        superseded_ids: Sequence[str],
+        initial_status: MemoryStatus,
+    ) -> None:
+        """Write through the caller's transaction; never open or commit a second writer."""
+        # Append immutable commitment to WORM CortexPersistLedger (no plaintext stored in WORM)
+        ledger_res = self.ledger.append_event(
+            CortexEvent(
+                event_type="MEMORY_RECORD_COMMITTED",
+                payload={
+                    "record_id": record.record_id,
+                    "tenant_id": record.tenant_id,
+                    "principal": record.principal,
+                    "kind": record.kind.value,
+                    "modality": record.modality.value,
+                    "trust_level": int(record.trust_level),
+                    "policy_epoch": record.policy_epoch,
+                    "commitment": record.commitment,
+                    "signature": record.signature,
+                    "parents": list(record.parents),
+                    "depends_on": list(record.depends_on),
+                },
+                cortex_taint=f"MEM_COMMIT:{record.tenant_id}:{record.record_id}:{record.commitment[:16]}",
+                agent_id=record.principal,
+            ),
+            connection=conn,
+        )
+        tx_lamport = int(ledger_res["lamport_t"])
+        v_from = record.valid_from_tick if record.valid_from_tick is not None else tx_lamport
+        tokens_json = _canonical_json(self._tokenize(record.content))
 
+        for prev_id in superseded_ids:
             conn.execute(
-                """
-                INSERT INTO cortex_memory_records (
-                    record_id, tenant_id, principal, kind, modality, trust_level,
-                    policy_epoch, subject_key, valid_from_tick, valid_to_tick,
-                    tx_lamport_t, commitment, signature, status, revocation_receipt_id, ledger_event_id
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL, ?)
-                """,
-                (
-                    rec_id,
-                    tenant_id,
-                    principal,
-                    kind.value,
-                    modality.value,
-                    int(trust_level),
-                    self._host_epoch,
-                    subject_key,
-                    v_from,
-                    valid_to_tick,
-                    tx_lamport,
-                    commitment,
-                    actual_sig,
-                    initial_status.value,
-                    str(ledger_res["event_id"]),
-                ),
+                "UPDATE cortex_memory_records SET status = ?, valid_to_tick = ? WHERE record_id = ?",
+                (MemoryStatus.STALE.value, tx_lamport, prev_id),
             )
-            conn.execute(
-                "INSERT INTO cortex_memory_blobs (record_id, salt_hex, plaintext, tokens_json) VALUES (?, ?, ?, ?)",
-                (rec_id, salt, content, tokens_json),
-            )
-            for prev_id in superseded_ids:
-                conn.execute(
-                    "INSERT OR IGNORE INTO cortex_memory_edges (parent_id, child_id, edge_kind) VALUES (?, ?, ?)",
-                    (prev_id, rec_id, EdgeKind.SUPERSEDES.value),
-                )
-            for p_id in parent_ids:
-                conn.execute(
-                    "INSERT OR IGNORE INTO cortex_memory_edges (parent_id, child_id, edge_kind) VALUES (?, ?, ?)",
-                    (p_id, rec_id, EdgeKind.DERIVES_FROM.value),
-                )
-            for d_id in dep_ids:
-                conn.execute(
-                    "INSERT OR IGNORE INTO cortex_memory_edges (parent_id, child_id, edge_kind) VALUES (?, ?, ?)",
-                    (d_id, rec_id, EdgeKind.DEPENDS_ON.value),
-                )
-            conn.commit()
+            self._mark_dependents_stale(conn, prev_id, tx_lamport)
 
-        return self.get_record(rec_id, tenant_id=tenant_id, include_inactive=True)
+        conn.execute(
+            """
+            INSERT INTO cortex_memory_records (
+                record_id, tenant_id, principal, kind, modality, trust_level,
+                policy_epoch, subject_key, valid_from_tick, valid_to_tick,
+                tx_lamport_t, commitment, signature, status, revocation_receipt_id, ledger_event_id
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL, ?)
+            """,
+            (
+                record.record_id,
+                record.tenant_id,
+                record.principal,
+                record.kind.value,
+                record.modality.value,
+                int(record.trust_level),
+                record.policy_epoch,
+                record.subject_key,
+                v_from,
+                record.valid_to_tick,
+                tx_lamport,
+                record.commitment,
+                record.signature,
+                initial_status.value,
+                str(ledger_res["event_id"]),
+            ),
+        )
+        conn.execute(
+            "INSERT INTO cortex_memory_blobs (record_id, salt_hex, plaintext, tokens_json) VALUES (?, ?, ?, ?)",
+            (record.record_id, record.salt_hex, record.content, tokens_json),
+        )
+        for prev_id in superseded_ids:
+            conn.execute(
+                "INSERT OR IGNORE INTO cortex_memory_edges (parent_id, child_id, edge_kind) VALUES (?, ?, ?)",
+                (prev_id, record.record_id, EdgeKind.SUPERSEDES.value),
+            )
+        for p_id in record.parents:
+            conn.execute(
+                "INSERT OR IGNORE INTO cortex_memory_edges (parent_id, child_id, edge_kind) VALUES (?, ?, ?)",
+                (p_id, record.record_id, EdgeKind.DERIVES_FROM.value),
+            )
+        for d_id in record.depends_on:
+            conn.execute(
+                "INSERT OR IGNORE INTO cortex_memory_edges (parent_id, child_id, edge_kind) VALUES (?, ?, ?)",
+                (d_id, record.record_id, EdgeKind.DEPENDS_ON.value),
+            )
 
     def _mark_dependents_stale(self, conn: sqlite3.Connection, root_id: str, tick: int) -> List[str]:
         """Mark downstream derived summaries/skills as STALE when an underlying fact mutates."""
@@ -624,15 +729,15 @@ class MemoryGovernanceEngine:
 
             descendant_rows = conn.execute(
                 """
-                WITH RECURSIVE closure(id, depth) AS (
-                    SELECT ?, 0
+                WITH RECURSIVE closure(id) AS (
+                    SELECT ?
                     UNION
-                    SELECT e.child_id, c.depth + 1
+                    SELECT e.child_id
                     FROM cortex_memory_edges e
                     JOIN closure c ON e.parent_id = c.id
-                    WHERE e.edge_kind IN ('DERIVES_FROM', 'DEPENDS_ON') AND c.depth < 1024
+                    WHERE e.edge_kind IN ('DERIVES_FROM', 'DEPENDS_ON')
                 )
-                SELECT DISTINCT id FROM closure;
+                SELECT id FROM closure;
                 """,
                 (rec_id,),
             ).fetchall()
@@ -656,7 +761,7 @@ class MemoryGovernanceEngine:
                     cortex_taint=f"MEM_REVOKE:{tenant_id}:{rec_id}",
                     agent_id=principal,
                 ),
-                connection=conn if os.path.samefile(self.db_path, self.ledger.db_path) else None,
+                connection=conn,
             )
             receipt_id = str(receipt["event_id"])
             tx_lamport = int(receipt["lamport_t"])
@@ -673,9 +778,10 @@ class MemoryGovernanceEngine:
                     "WHERE record_id = ?",
                     (MemoryStatus.REVOKED_DEPENDENCY.value, tx_lamport, receipt_id, dep_id),
                 )
-            # Remove queryable blobs and tokens; this does not certify physical or cryptographic erasure.
+            # Remove queryable blobs, tokens, and any delegated cross-tenant read grants.
             for cid in closure_ids:
                 conn.execute("DELETE FROM cortex_memory_blobs WHERE record_id = ?", (cid,))
+                conn.execute("DELETE FROM cortex_tenant_grants WHERE record_id = ?", (cid,))
             conn.commit()
 
         return {
@@ -693,14 +799,18 @@ class MemoryGovernanceEngine:
         rec_id = _validate_canonical_uuid(record_id)
         if (owner_tenant, principal) not in self._principal_keys:
             raise SignatureVerificationError("Unauthorized principal for owner_tenant")
-        with self._get_connection() as conn:
+        with closing(self._get_connection()) as conn, conn:
             conn.execute("BEGIN IMMEDIATE")
             row = conn.execute(
-                "SELECT tenant_id, tx_lamport_t FROM cortex_memory_records WHERE record_id = ?",
+                "SELECT tenant_id, tx_lamport_t, status FROM cortex_memory_records WHERE record_id = ?",
                 (rec_id,),
             ).fetchone()
             if row is None or row[0] != owner_tenant:
                 raise TenantIsolationError("Record does not belong to owner_tenant")
+            if row[2] != MemoryStatus.ACTIVE.value:
+                raise GovernanceViolationError(
+                    f"Cannot grant cross-tenant read on non-active record {rec_id} (status={row[2]})"
+                )
             conn.execute(
                 "INSERT OR REPLACE INTO cortex_tenant_grants (owner_tenant, grantee_tenant, record_id, granted_at_lamport) "
                 "VALUES (?, ?, ?, ?)",
@@ -709,91 +819,98 @@ class MemoryGovernanceEngine:
             conn.commit()
 
     def get_record(self, record_id: str, *, tenant_id: str, include_inactive: bool = False) -> MemoryRecordView:
-        """Retrieve a single memory record enforcing tenant isolation and commitment verification."""
+        """Read the record, grant and lineage from a single committed snapshot."""
         rec_id = _validate_canonical_uuid(record_id)
-        with self._get_connection() as conn:
-            row = conn.execute(
-                """
-                SELECT r.record_id, r.tenant_id, r.principal, r.kind, r.modality,
-                       r.trust_level, r.policy_epoch, r.subject_key, r.valid_from_tick,
-                       r.valid_to_tick, r.tx_lamport_t, r.commitment, r.signature,
-                       r.status, r.revocation_receipt_id, b.salt_hex, b.plaintext
-                FROM cortex_memory_records r
-                LEFT JOIN cortex_memory_blobs b ON r.record_id = b.record_id
-                WHERE r.record_id = ?
-                """,
-                (rec_id,),
+        with closing(self._get_connection()) as conn, conn:
+            conn.execute("BEGIN")
+            return self._read_record(conn, rec_id, tenant_id=tenant_id, include_inactive=include_inactive)
+
+    def _read_record(
+        self, conn: sqlite3.Connection, rec_id: str, *, tenant_id: str, include_inactive: bool
+    ) -> MemoryRecordView:
+        """Project and verify using the transaction owned by the caller."""
+        row = conn.execute(
+            """
+            SELECT r.record_id, r.tenant_id, r.principal, r.kind, r.modality,
+                   r.trust_level, r.policy_epoch, r.subject_key, r.valid_from_tick,
+                   r.valid_to_tick, r.tx_lamport_t, r.commitment, r.signature,
+                   r.status, r.revocation_receipt_id, b.salt_hex, b.plaintext
+            FROM cortex_memory_records r
+            LEFT JOIN cortex_memory_blobs b ON r.record_id = b.record_id
+            WHERE r.record_id = ?
+            """,
+            (rec_id,),
+        ).fetchone()
+        if row is None:
+            raise KeyError(rec_id)
+        (
+            r_id,
+            r_tenant,
+            r_principal,
+            r_kind,
+            r_mod,
+            r_trust,
+            r_epoch,
+            r_subj,
+            r_vfrom,
+            r_vto,
+            r_tx,
+            r_comm,
+            r_sig,
+            r_status,
+            r_rev_id,
+            b_salt,
+            b_plain,
+        ) = row
+
+        if r_tenant != tenant_id:
+            grant = conn.execute(
+                "SELECT 1 FROM cortex_tenant_grants WHERE owner_tenant = ? AND grantee_tenant = ? AND record_id = ?",
+                (r_tenant, tenant_id, r_id),
             ).fetchone()
-            if row is None:
-                raise KeyError(rec_id)
-            (
-                r_id,
-                r_tenant,
-                r_principal,
-                r_kind,
-                r_mod,
-                r_trust,
-                r_epoch,
-                r_subj,
-                r_vfrom,
-                r_vto,
-                r_tx,
-                r_comm,
-                r_sig,
-                r_status,
-                r_rev_id,
-                b_salt,
-                b_plain,
-            ) = row
+            if grant is None:
+                raise TenantIsolationError(f"Tenant {tenant_id!r} denied access to {r_id}")
 
-            if r_tenant != tenant_id:
-                grant = conn.execute(
-                    "SELECT 1 FROM cortex_tenant_grants WHERE owner_tenant = ? AND grantee_tenant = ? AND record_id = ?",
-                    (r_tenant, tenant_id, r_id),
-                ).fetchone()
-                if grant is None:
-                    raise TenantIsolationError(f"Tenant {tenant_id!r} denied access to {r_id}")
+        status_enum = MemoryStatus(r_status)
+        if not include_inactive and status_enum != MemoryStatus.ACTIVE:
+            raise GovernanceViolationError(f"Record {r_id} is not ACTIVE (status={r_status})")
 
-            status_enum = MemoryStatus(r_status)
-            if not include_inactive and status_enum != MemoryStatus.ACTIVE:
-                raise GovernanceViolationError(f"Record {r_id} is not ACTIVE (status={r_status})")
+        kind_enum = MemoryKind(r_kind)
+        mod_enum = MemoryModality(r_mod)
 
-            kind_enum = MemoryKind(r_kind)
-            mod_enum = MemoryModality(r_mod)
+        # Verify cryptographic signature and commitment integrity on read (FL-M04)
+        key = self._principal_keys.get((r_tenant, r_principal))
+        if key is None:
+            raise SignatureVerificationError(f"Missing verification key for ({r_tenant}, {r_principal})")
+        expected_sig = sign_memory_commitment(key, r_principal, r_tenant, r_comm, int(r_epoch))
+        if not hmac.compare_digest(r_sig, expected_sig):
+            raise SignatureVerificationError(f"Signature tampering detected on record {r_id}")
 
-            # Verify cryptographic signature and commitment integrity on read (FL-M04)
-            key = self._principal_keys.get((r_tenant, r_principal))
-            if key is None:
-                raise SignatureVerificationError(f"Missing verification key for ({r_tenant}, {r_principal})")
-            expected_sig = sign_memory_commitment(key, r_principal, r_tenant, r_comm, int(r_epoch))
-            if not hmac.compare_digest(r_sig, expected_sig):
-                raise SignatureVerificationError(f"Signature tampering detected on record {r_id}")
+        if status_enum in (
+            MemoryStatus.ACTIVE,
+            MemoryStatus.DISBELIEVED,
+            MemoryStatus.DISBELIEVED_DEPENDENCY,
+        ) and (b_plain is None or b_salt is None):
+            raise SignatureVerificationError(f"Missing memory blob or salt on record {r_id}")
+        if b_plain is not None and b_salt is not None:
+            recomputed = compute_salted_commitment(b_salt, b_plain, mod_enum, kind_enum)
+            if not hmac.compare_digest(recomputed, r_comm):
+                raise SignatureVerificationError(f"Payload tampering detected against commitment on {r_id}")
 
-            if status_enum in (
-                MemoryStatus.ACTIVE,
-                MemoryStatus.DISBELIEVED,
-                MemoryStatus.DISBELIEVED_DEPENDENCY,
-            ) and (b_plain is None or b_salt is None):
-                raise SignatureVerificationError(f"Missing memory blob or salt on record {r_id}")
-            if b_plain is not None and b_salt is not None:
-                recomputed = compute_salted_commitment(b_salt, b_plain, mod_enum, kind_enum)
-                if not hmac.compare_digest(recomputed, r_comm):
-                    raise SignatureVerificationError(f"Payload tampering detected against commitment on {r_id}")
-
-            parents = tuple(
-                r[0]
-                for r in conn.execute(
-                    "SELECT parent_id FROM cortex_memory_edges WHERE child_id = ? AND edge_kind = 'DERIVES_FROM'",
-                    (r_id,),
-                ).fetchall()
-            )
-            deps = tuple(
-                r[0]
-                for r in conn.execute(
-                    "SELECT parent_id FROM cortex_memory_edges WHERE child_id = ? AND edge_kind = 'DEPENDS_ON'",
-                    (r_id,),
-                ).fetchall()
-            )
+        parents = tuple(
+            r[0]
+            for r in conn.execute(
+                "SELECT parent_id FROM cortex_memory_edges WHERE child_id = ? AND edge_kind = 'DERIVES_FROM'",
+                (r_id,),
+            ).fetchall()
+        )
+        deps = tuple(
+            r[0]
+            for r in conn.execute(
+                "SELECT parent_id FROM cortex_memory_edges WHERE child_id = ? AND edge_kind = 'DEPENDS_ON'",
+                (r_id,),
+            ).fetchall()
+        )
 
         return MemoryRecordView(
             record_id=r_id,
@@ -898,10 +1015,27 @@ class MemoryGovernanceEngine:
         from the current active premises for the same subject keys.
         """
         view = self.get_record(summary_id, tenant_id=tenant_id, include_inactive=True)
-        if view.status == MemoryStatus.REVOKED or view.status == MemoryStatus.REVOKED_DEPENDENCY:
-            raise GovernanceViolationError(f"Summary {summary_id} was revoked and cannot be used")
+        if view.status in (
+            MemoryStatus.REVOKED,
+            MemoryStatus.REVOKED_DEPENDENCY,
+            MemoryStatus.DISBELIEVED,
+            MemoryStatus.DISBELIEVED_DEPENDENCY,
+        ):
+            raise GovernanceViolationError(
+                f"Summary {summary_id} was invalidated (status={view.status.value}) and cannot be certified or rebuilt"
+            )
 
         parent_views = [self.get_record(pid, tenant_id=tenant_id, include_inactive=True) for pid in view.parents]
+        for p in parent_views:
+            if p.status in (
+                MemoryStatus.REVOKED,
+                MemoryStatus.REVOKED_DEPENDENCY,
+                MemoryStatus.DISBELIEVED,
+                MemoryStatus.DISBELIEVED_DEPENDENCY,
+            ):
+                raise GovernanceViolationError(
+                    f"Summary {summary_id} cannot be rebuilt because premise {p.record_id} has status {p.status.value}"
+                )
         all_parents_active = all(p.status == MemoryStatus.ACTIVE for p in parent_views)
         if view.status == MemoryStatus.ACTIVE and all_parents_active:
             return view
@@ -965,7 +1099,7 @@ class MemoryGovernanceEngine:
         if key is None:
             raise SignatureVerificationError(f"Unregistered principal {principal!r} in tenant {tenant_id!r}")
 
-        with self._get_connection() as conn:
+        with closing(self._get_connection()) as conn, conn:
             conn.execute("BEGIN IMMEDIATE")
             attr_row = conn.execute(
                 "SELECT tenant_id, kind, trust_level, commitment, status FROM cortex_memory_records WHERE record_id = ?",
@@ -1053,49 +1187,47 @@ class MemoryGovernanceEngine:
                 (attr_id, attr_id),
             ).fetchall()
             dependent_ids = tuple(r[0] for r in descendant_rows)
-            conn.commit()
 
-        witness_digest = compute_disbelief_witness_digest(
-            tenant_id=tenant_id,
-            disbelieved_record_id=attr_id,
-            disbelieved_commitment=attr_comm,
-            preserved_fact_ids=preserved_fact_ids,
-            preserved_fact_commitments=preserved_fact_commitments,
-            counter_evidence_record_id=counter_id,
-            counter_evidence_commitment=counter_comm,
-            rationale=rationale,
-            policy_epoch=self._host_epoch,
-        )
-        proof_sig = sign_memory_commitment(
-            key, principal, tenant_id, f"DISBELIEVE:{p_id}:{witness_digest}", self._host_epoch
-        )
-
-        ledger_res = self.ledger.append_event(
-            CortexEvent(
-                event_type="ATTRIBUTION_DISBELIEVED",
-                payload={
-                    "proof_id": p_id,
-                    "tenant_id": tenant_id,
-                    "principal": principal,
-                    "disbelieved_record_id": attr_id,
-                    "disbelieved_commitment": attr_comm,
-                    "preserved_fact_ids": list(preserved_fact_ids),
-                    "preserved_fact_commitments": list(preserved_fact_commitments),
-                    "counter_evidence_record_id": counter_id,
-                    "counter_evidence_commitment": counter_comm,
-                    "affected_dependents": list(dependent_ids),
-                    "witness_digest": witness_digest,
-                    "signature": proof_sig,
-                },
-                cortex_taint=f"MEM_DISBELIEVE:{tenant_id}:{attr_id}:{witness_digest[:16]}",
-                agent_id=principal,
+            witness_digest = compute_disbelief_witness_digest(
+                tenant_id=tenant_id,
+                disbelieved_record_id=attr_id,
+                disbelieved_commitment=attr_comm,
+                preserved_fact_ids=preserved_fact_ids,
+                preserved_fact_commitments=preserved_fact_commitments,
+                counter_evidence_record_id=counter_id,
+                counter_evidence_commitment=counter_comm,
+                rationale=rationale,
+                policy_epoch=self._host_epoch,
             )
-        )
-        event_id = str(ledger_res["event_id"])
-        tx_lamport = int(ledger_res["lamport_t"])
+            proof_sig = sign_memory_commitment(
+                key, principal, tenant_id, f"DISBELIEVE:{p_id}:{witness_digest}", self._host_epoch
+            )
 
-        with self._get_connection() as conn:
-            conn.execute("BEGIN IMMEDIATE")
+            ledger_res = self.ledger.append_event(
+                CortexEvent(
+                    event_type="ATTRIBUTION_DISBELIEVED",
+                    payload={
+                        "proof_id": p_id,
+                        "tenant_id": tenant_id,
+                        "principal": principal,
+                        "disbelieved_record_id": attr_id,
+                        "disbelieved_commitment": attr_comm,
+                        "preserved_fact_ids": list(preserved_fact_ids),
+                        "preserved_fact_commitments": list(preserved_fact_commitments),
+                        "counter_evidence_record_id": counter_id,
+                        "counter_evidence_commitment": counter_comm,
+                        "affected_dependents": list(dependent_ids),
+                        "witness_digest": witness_digest,
+                        "signature": proof_sig,
+                    },
+                    cortex_taint=f"MEM_DISBELIEVE:{tenant_id}:{attr_id}:{witness_digest[:16]}",
+                    agent_id=principal,
+                ),
+                connection=conn,
+            )
+            event_id = str(ledger_res["event_id"])
+            tx_lamport = int(ledger_res["lamport_t"])
+
             conn.execute(
                 "UPDATE cortex_memory_records SET status = ?, valid_to_tick = ?, revocation_receipt_id = ? "
                 "WHERE record_id = ?",

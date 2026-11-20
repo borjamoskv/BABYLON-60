@@ -117,9 +117,40 @@ pub fn subscribe_exergy_packet(service_name_str: &str) -> Result<Option<ExergyPa
     let subscriber = service.subscriber_builder().create()?;
     
     if let Some(sample) = subscriber.receive()? {
-        let env = &*sample;
-        let unpacked = ExergyPacket::unpack(&env.data[..env.len])?;
-        return Ok(Some(unpacked));
+        return decode_exergy_sample(&*sample).map(Some);
     }
     Ok(None)
+}
+
+/// Decodifica un sobre recibido por IPC. `len` procede de memoria compartida (C0091).
+pub fn decode_exergy_sample(env: &IpcEnvelope) -> Result<ExergyPacket, Box<dyn std::error::Error>> {
+    // La longitud se valida contra la capacidad antes de cortar; sin pánico ante valores fuera de rango.
+    let raw = env
+        .data
+        .get(..env.len)
+        .ok_or("sobre IPC: longitud fuera de la capacidad")?;
+    Ok(ExergyPacket::unpack(raw)?)
+}
+
+#[cfg(test)]
+mod c0091_tests {
+    use super::*;
+
+    #[test]
+    fn decode_rejects_len_beyond_capacity_without_panic() {
+        let env = IpcEnvelope {
+            len: 9000,
+            data: [0u8; 8192],
+        };
+        assert!(decode_exergy_sample(&env).is_err());
+    }
+
+    #[test]
+    fn decode_rejects_invalid_payload_without_panic() {
+        let env = IpcEnvelope {
+            len: 4,
+            data: [0u8; 8192],
+        };
+        assert!(decode_exergy_sample(&env).is_err());
+    }
 }

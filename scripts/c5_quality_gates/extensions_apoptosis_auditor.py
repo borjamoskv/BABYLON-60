@@ -16,7 +16,7 @@ import ast
 import sys
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parent.parent.parent
+REPO_ROOT = Path(__file__).absolute().parent.parent.parent
 EXT_DIR = REPO_ROOT / "babylon60" / "extensions"
 
 def find_all_python_files(root: Path) -> list[Path]:

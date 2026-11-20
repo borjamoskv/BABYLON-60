@@ -354,7 +354,7 @@ def test_skill_proposal_cannot_replace_signed_dispatch_approval(tmp_path, native
     from babylon60.mcp.skills_snapshot import GATEWAY_EXPECTED_AUDIENCE
 
     server = make_server(tmp_path, native_library)
-    skill = server._skills_snapshot.resolve("c5-neural-face-swap-cuadrilla")
+    skill = server._skills_snapshot.resolve("cortex-skill-genesis")
     assert skill is not None
     proposal = server._skills_snapshot.propose_skill_effect(
         {

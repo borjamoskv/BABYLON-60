@@ -169,8 +169,18 @@ impl ObjectIdentity {
     /// [NEMESIS Security Core] Estabiliza la identidad mediante bracket TOCTOU y ciclo de
     /// quiescencia: si un escritor concurrente muta el archivo durante el cálculo del hash,
     /// reintenta hasta `MAX_STABILIZATION_ATTEMPTS` veces. Si no converge en silicio, aborta fail-closed con `IdentityUnstable`.
-    #[allow(clippy::unnecessary_cast)]
     pub fn from_fd(fd: RawFd, capability_root_id: [u8; 32]) -> Result<Self, SecureFsError> {
+        Self::from_fd_with_hasher(fd, capability_root_id, compute_fd_hash)
+    }
+
+    // Keep the real descriptor/stat bracket shared with deterministic tests of
+    // mutations inside the hashing interval. Production always uses compute_fd_hash.
+    #[allow(clippy::unnecessary_cast)]
+    fn from_fd_with_hasher(
+        fd: RawFd,
+        capability_root_id: [u8; 32],
+        mut hash_fd: impl FnMut(RawFd) -> Result<[u8; 32], SecureFsError>,
+    ) -> Result<Self, SecureFsError> {
         let mut attempts = 0;
         loop {
             attempts += 1;
@@ -183,7 +193,7 @@ impl ObjectIdentity {
                 return Err(SecureFsError::InvalidFileType(stat.st_mode as u32));
             }
             
-            let hash = compute_fd_hash(fd)?;
+            let hash = hash_fd(fd)?;
 
             // TOCTOU Bracket: re-stat the file to ensure it was not mutated during hash computation
             let mut stat_after: libc::stat = unsafe { std::mem::zeroed() };
@@ -876,14 +886,56 @@ fn map_nofollow_open_err(err: std::io::Error) -> SecureFsError {
     }
 }
 
+/// Sello temporal/causal de inodo registrado en `pin_object` para detectar ataques ABA (`C5-04` / `O8`).
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+struct PinnedInodeStamp {
+    mtime_sec: i64,
+    mtime_nsec: i64,
+    ctime_sec: i64,
+    ctime_nsec: i64,
+    invalidated_by_mutation: bool,
+}
+
+type PinnedStampMap = std::sync::Mutex<std::collections::HashMap<(u64, u64, [u8; 32]), PinnedInodeStamp>>;
+
+fn pinned_inode_stamps() -> &'static PinnedStampMap {
+    static STAMPS: std::sync::OnceLock<PinnedStampMap> = std::sync::OnceLock::new();
+    STAMPS.get_or_init(|| std::sync::Mutex::new(std::collections::HashMap::new()))
+}
+
+fn record_pinned_inode_stamp(dev: u64, ino: u64, cap_root: [u8; 32], stat: &libc::stat) {
+    if let Ok(mut guard) = pinned_inode_stamps().lock() {
+        guard.insert(
+            (dev, ino, cap_root),
+            PinnedInodeStamp {
+                mtime_sec: stat.st_mtime as i64,
+                mtime_nsec: stat.st_mtime_nsec as i64,
+                ctime_sec: stat.st_ctime as i64,
+                ctime_nsec: stat.st_ctime_nsec as i64,
+                invalidated_by_mutation: false,
+            },
+        );
+    }
+}
+
+fn invalidate_inode_stamps_on_mutation(dev: u64, ino: u64) {
+    if let Ok(mut guard) = pinned_inode_stamps().lock() {
+        for ((d, i, _), stamp) in guard.iter_mut() {
+            if *d == dev && *i == ino {
+                stamp.invalidated_by_mutation = true;
+            }
+        }
+    }
+}
+
 /// Resuelve componente a componente los directorios intermedios bajo `root_fd`
 /// con `O_RDONLY | O_DIRECTORY | O_NOFOLLOW | O_CLOEXEC`, impidiendo carreras TOCTOU
-/// en componentes intermedios de ruta.
+/// en componentes intermedios de ruta y diferenciales de parser Unicode NFD (`O11`).
 fn resolve_confined_parent_nofollow(
     root_fd: RawFd,
     rel_path: &str,
 ) -> Result<ResolvedParentDir, SecureFsError> {
-    if rel_path.is_empty() {
+    if rel_path.is_empty() || crate::capability::has_nfd_combining_or_expansion_hazard(rel_path) {
         return Err(SecureFsError::SymlinkEscapeAttempt);
     }
     let path = Path::new(rel_path);
@@ -915,7 +967,7 @@ fn resolve_confined_parent_nofollow(
             libc::openat(
                 curr_fd,
                 dir_c.as_ptr(),
-                libc::O_RDONLY | libc::O_DIRECTORY | libc::O_NOFOLLOW | libc::O_CLOEXEC,
+                libc::O_RDONLY | libc::O_DIRECTORY | libc::O_NOFOLLOW | O_CLOEXEC_FLAG,
             )
         };
         if next_fd < 0 {
@@ -938,6 +990,8 @@ fn resolve_confined_parent_nofollow(
         leaf_name,
     })
 }
+
+const O_CLOEXEC_FLAG: libc::c_int = libc::O_CLOEXEC;
 
 fn openat_confined_nofollow(
     root_fd: RawFd,
@@ -990,7 +1044,13 @@ impl SecureFsBackend for NativeSecureFs {
     {
         let fd = openat_confined_nofollow(root_fd, rel_path, libc::O_RDONLY)?;
         match ObjectIdentity::from_fd(fd, capability_root_id) {
-            Ok(id) => Ok((fd, id)),
+            Ok(id) => {
+                let mut stat: libc::stat = unsafe { std::mem::zeroed() };
+                if unsafe { libc::fstat(fd, &mut stat) } == 0 {
+                    record_pinned_inode_stamp(id.locator.dev, id.locator.ino, capability_root_id, &stat);
+                }
+                Ok((fd, id))
+            }
             Err(e) => { unsafe { libc::close(fd) }; Err(e) }
         }
     }
@@ -1038,6 +1098,12 @@ impl SecureFsBackend for NativeSecureFs {
         if fd < 0 {
             return Err(map_nofollow_open_err(std::io::Error::last_os_error()));
         }
+        let mut q_stat: libc::stat = unsafe { std::mem::zeroed() };
+        if unsafe { libc::fstat(fd, &mut q_stat) } != 0 {
+            let err = std::io::Error::last_os_error();
+            unsafe { libc::close(fd) };
+            return Err(SecureFsError::IoError(err));
+        }
         let actual = match ObjectIdentity::from_fd(fd, expected.locator.capability_root_id) {
             Ok(id) => { unsafe { libc::close(fd) }; id }
             Err(e) => { unsafe { libc::close(fd) }; return Err(e); }
@@ -1060,6 +1126,25 @@ impl SecureFsBackend for NativeSecureFs {
                 expected_hash: expected.state.hash,
                 actual_hash: actual.state.hash,
             });
+        }
+        // O8 (ABA Defense): Detectar transición A -> B -> A que restaura el hash pero altera la versión/mtime del inodo
+        if let Ok(guard) = pinned_inode_stamps().lock() {
+            if let Some(stamp) = guard.get(&(
+                expected.locator.dev,
+                expected.locator.ino,
+                expected.locator.capability_root_id,
+            )) {
+                let mtime_drifted = (q_stat.st_mtime as i64) != stamp.mtime_sec
+                    || (q_stat.st_mtime_nsec as i64) != stamp.mtime_nsec;
+                if stamp.invalidated_by_mutation || mtime_drifted {
+                    return Err(SecureFsError::SecurityMismatch {
+                        expected_ino: expected.locator.ino,
+                        actual_ino: actual.locator.ino,
+                        expected_hash: expected.state.hash,
+                        actual_hash: actual.state.hash,
+                    });
+                }
+            }
         }
 
         Ok(VerifiedTx {
@@ -1127,6 +1212,29 @@ impl SecureFsBackend for NativeSecureFs {
                 actual_hash: current_hash,
             });
         }
+        // O8 (ABA Defense): Verificar que el inodo no sufrió una transición intermedia A -> B -> A
+        // (incluso si el atacante restauró el contenido A e intentó falsificar mtime con utimensat, ctime delata la mutación).
+        if let Ok(guard) = pinned_inode_stamps().lock() {
+            if let Some(stamp) = guard.get(&(
+                authorized_identity.locator.dev,
+                authorized_identity.locator.ino,
+                authorized_identity.locator.capability_root_id,
+            )) {
+                let stamp_drifted = (stat.st_mtime as i64) != stamp.mtime_sec
+                    || (stat.st_mtime_nsec as i64) != stamp.mtime_nsec
+                    || (stat.st_ctime as i64) != stamp.ctime_sec
+                    || (stat.st_ctime_nsec as i64) != stamp.ctime_nsec;
+                if stamp.invalidated_by_mutation || stamp_drifted {
+                    unsafe { libc::close(fd) };
+                    return Err(SecureFsError::SecurityMismatch {
+                        expected_ino: authorized_identity.locator.ino,
+                        actual_ino: stat.st_ino as u64,
+                        expected_hash: authorized_identity.state.hash,
+                        actual_hash: current_hash,
+                    });
+                }
+            }
+        }
 
         // Check every write/resize/sync result. Never report commit on partial I/O.
         let mut written = 0usize;
@@ -1160,6 +1268,10 @@ impl SecureFsBackend for NativeSecureFs {
             unsafe { libc::close(fd) };
             return Err(SecureFsError::IoError(error));
         }
+        invalidate_inode_stamps_on_mutation(
+            authorized_identity.locator.dev,
+            authorized_identity.locator.ino,
+        );
         let post_hash = compute_fd_hash(fd);
         unsafe { libc::close(fd) };
         post_hash
@@ -1636,14 +1748,8 @@ impl<B: SecureFsBackend> EffectTxOrchestrator<B> {
                 ino: target_locator.1,
             });
         }
-        let usage_map = self
-            .usage_history
-            .lock()
-            .map_err(|_| SecureFsError::LedgerError("usage_history mutex poisoned".into()))?;
-        let current = usage_map
-            .get(&(auth.authority_id, auth.epoch))
-            .cloned()
-            .unwrap_or_default();
+        // C0052: el uso autoritativo es el persistido, compartido por todas las instancias.
+        let current = self.reload_budget_usage(auth)?;
         if current.effects_count + 1 > policy.max_effects {
             return Err(SecureFsError::BudgetExceeded(format!(
                 "effects_count {} + 1 exceeds max_effects {}",
@@ -1657,6 +1763,28 @@ impl<B: SecureFsBackend> EffectTxOrchestrator<B> {
             )));
         }
         Ok(())
+    }
+
+    /// Uso acumulado de `(authority_id, epoch)` leído de `.budget_usage.bin`, la fuente
+    /// compartida entre instancias del broker (C0052). Un fichero ausente equivale a uso cero.
+    fn reload_budget_usage(&self, auth: &AuthorityContext) -> Result<AuthorityUsageHistory, SecureFsError> {
+        let budget_usage_path = self.quarantine.dir_path.join(".budget_usage.bin");
+        let mut usage = AuthorityUsageHistory::default();
+        match std::fs::read(&budget_usage_path) {
+            Ok(bytes) => {
+                for chunk in bytes.as_chunks::<48>().0 {
+                    let epoch = u64::from_le_bytes(chunk[32..40].try_into().unwrap());
+                    if chunk[..32] == auth.authority_id && epoch == auth.epoch {
+                        let effect_bytes = u64::from_le_bytes(chunk[40..48].try_into().unwrap());
+                        usage.effects_count += 1;
+                        usage.total_bytes = usage.total_bytes.saturating_add(effect_bytes);
+                    }
+                }
+            }
+            Err(e) if e.kind() == std::io::ErrorKind::NotFound => {}
+            Err(e) => return Err(SecureFsError::LedgerError(format!("read .budget_usage.bin: {e}"))),
+        }
+        Ok(usage)
     }
 
     fn commit_budget_usage(
@@ -2124,27 +2252,31 @@ impl<B: SecureFsBackend> EffectTxOrchestrator<B> {
 
         let nonce_name = format!("del_{}", hex::encode(tx_nonce));
 
+        // 05 RESERVE + 06 DURABLE: presupuesto e intención ANTES de mover el archivo (C0046).
+        // Un fallo previo a la cuarentena deja el archivo en su ruta; tras ella, el registro
+        // permite recuperarlo sin repetir el cargo.
+        self.commit_budget_usage(auth, authorized_identity.state.size)?;
+        if enforce_nonce_ledger {
+            let reserved = WalRecord::new(
+                WalRecordState::AttemptReserved,
+                EffectType::Delete,
+                auth.epoch,
+                auth.nonce,
+                locator_pair.0,
+                locator_pair.1,
+                authorized_identity.state.hash,
+                [0u8; 32],
+            );
+            self.append_wal_record(reserved)?;
+        }
+
         // PREPARE → QUARANTINE: Secuestro atómico. Desde aquí original_path es proscrito (NEM-I3).
         B::quarantine(parent_fd, basename, self.quarantine.dir_fd, &nonce_name)?;
 
         // QUARANTINE → VERIFY: Verificación post-aislamiento. Adversario ya no puede interferir.
         match B::verify_quarantined(self.quarantine.dir_fd, &nonce_name, authorized_identity) {
             Ok(vtx) => {
-                // 05 RESERVE + 06 DURABLE: Persistir intención y presupuesto ANTES del unlink irreversible
-                self.commit_budget_usage(auth, authorized_identity.state.size)?;
-                if enforce_nonce_ledger {
-                    let reserved = WalRecord::new(
-                        WalRecordState::AttemptReserved,
-                        EffectType::Delete,
-                        auth.epoch,
-                        auth.nonce,
-                        locator_pair.0,
-                        locator_pair.1,
-                        authorized_identity.state.hash,
-                        [0u8; 32],
-                    );
-                    self.append_wal_record(reserved)?;
-                }
+                // 05 y 06 se persistieron antes de la cuarentena (C0046): la intención ya existe.
                 // 07 EXECUTE + 08 OBSERVE: Destrucción observada en silicio.
                 if let Err(e) = B::destroy_quarantined(self.quarantine.dir_fd, vtx) {
                     if enforce_nonce_ledger {
@@ -2183,6 +2315,101 @@ impl<B: SecureFsBackend> EffectTxOrchestrator<B> {
                 Ok(EffectTxState::SecurityAbort)
             }
             Err(e) => Err(e),
+        }
+    }
+
+    /// Confina por descriptor (`O_DIRECTORY | O_NOFOLLOW`), aísla en cuarentena, reverifica
+    /// `(dev, ino, sha256)` y destruye un artefacto regular relativo a `root_path` bajo
+    /// Effect Commit Protocol v2 (`CLAIM-MCP-006`).
+    pub fn quarantine_and_destroy_relative(
+        &self,
+        root_path: &Path,
+        rel_path: &str,
+        authority_id: [u8; 32],
+        tx_nonce: [u8; 32],
+        expected_sha256: Option<[u8; 32]>,
+    ) -> Result<ObjectIdentity, SecureFsError> {
+        use std::os::unix::io::AsRawFd;
+
+        struct OwnedDirFd(RawFd);
+        impl Drop for OwnedDirFd {
+            fn drop(&mut self) {
+                if self.0 >= 0 {
+                    unsafe { libc::close(self.0) };
+                }
+            }
+        }
+
+        if tx_nonce == [0u8; 32] {
+            return Err(SecureFsError::InvalidAuthorizationNonce);
+        }
+        let root_c = CString::new(root_path.as_os_str().as_bytes())
+            .map_err(|_| SecureFsError::SymlinkEscapeAttempt)?;
+        let raw_root_fd = unsafe {
+            libc::open(
+                root_c.as_ptr(),
+                libc::O_RDONLY | libc::O_DIRECTORY | libc::O_NOFOLLOW | libc::O_CLOEXEC,
+            )
+        };
+        if raw_root_fd < 0 {
+            return Err(map_nofollow_open_err(std::io::Error::last_os_error()));
+        }
+        let root_fd = OwnedDirFd(raw_root_fd);
+
+        let mut root_stat: libc::stat = unsafe { std::mem::zeroed() };
+        if unsafe { libc::fstat(root_fd.0, &mut root_stat) } != 0 {
+            return Err(SecureFsError::IoError(std::io::Error::last_os_error()));
+        }
+        if (root_stat.st_dev as u64) != self.quarantine.dev {
+            return Err(SecureFsError::CrossDeviceUnsupported);
+        }
+
+        let file = open_readonly_confined(root_fd.0, rel_path)?;
+        let identity = ObjectIdentity::from_fd(file.as_raw_fd(), authority_id)?;
+        drop(file);
+
+        if let Some(expected) = expected_sha256 {
+            if identity.state.hash != expected {
+                return Err(SecureFsError::SecurityMismatch {
+                    expected_ino: identity.locator.ino,
+                    actual_ino: identity.locator.ino,
+                    expected_hash: expected,
+                    actual_hash: identity.state.hash,
+                });
+            }
+        }
+
+        let resolved = resolve_confined_parent_nofollow(root_fd.0, rel_path)?;
+        let basename = resolved
+            .leaf_name
+            .to_str()
+            .map_err(|_| SecureFsError::SymlinkEscapeAttempt)?;
+
+        self.set_budget_policy(
+            authority_id,
+            EffectBudgetPolicy {
+                max_effects: u64::MAX,
+                max_total_bytes: u64::MAX,
+                allowed_targets: vec![(identity.locator.dev, identity.locator.ino)],
+            },
+        )?;
+        let auth = AuthorityContext {
+            authority_id,
+            epoch: self.get_epoch(),
+            effect: EffectType::Delete,
+            nonce: tx_nonce,
+        };
+
+        match self.secure_delete_scoped(resolved.dir_fd, basename, &auth, &identity, &tx_nonce)? {
+            EffectTxState::Committed => Ok(identity),
+            EffectTxState::Aborted | EffectTxState::SecurityAbort => {
+                Err(SecureFsError::SecurityMismatch {
+                    expected_ino: identity.locator.ino,
+                    actual_ino: identity.locator.ino,
+                    expected_hash: identity.state.hash,
+                    actual_hash: [0u8; 32],
+                })
+            }
         }
     }
 
@@ -2258,7 +2485,9 @@ impl<B: SecureFsBackend> EffectTxOrchestrator<B> {
 
         let expected_post_hash: [u8; 32] = Sha256::digest(payload).into();
 
-        // 05 RESERVE + 06 DURABLE: Persistir ATTEMPT_RESERVED ANTES de la syscall irreversible
+        // 05 RESERVE + 06 DURABLE: presupuesto y ATTEMPT_RESERVED ANTES de la syscall irreversible.
+        // Cargar antes de ejecutar evita efectos aplicados sin cargo tras un crash (C0053).
+        self.commit_budget_usage(auth, payload.len() as u64)?;
         if enforce_nonce_ledger {
             let reserved = WalRecord::new(
                 WalRecordState::AttemptReserved,
@@ -2294,9 +2523,7 @@ impl<B: SecureFsBackend> EffectTxOrchestrator<B> {
             }
         };
 
-        self.commit_budget_usage(auth, payload.len() as u64)?;
-
-        // 09 RECEIPT: Persistir OUTCOME_KNOWN con observación física verificada
+        // 09 RECEIPT: Persistir OUTCOME_KNOWN con observación física verificada (cargo ya persistido en 05)
         if enforce_nonce_ledger {
             let known = WalRecord::new(
                 WalRecordState::OutcomeKnown,
@@ -2397,6 +2624,8 @@ impl<B: SecureFsBackend> EffectTxOrchestrator<B> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::os::fd::AsRawFd;
+    use std::os::unix::fs::OpenOptionsExt;
 
     fn fixture_authority(orch: &EffectTxOrchestrator, id: &ObjectIdentity, effect: EffectType, nonce: [u8; 32]) -> AuthorityContext {
         let authority_id = id.locator.capability_root_id;
@@ -2440,6 +2669,75 @@ mod tests {
         assert_eq!(id.locator.ino, id.ino);
         assert_eq!(id.state.hash, Sha256::digest(content).as_slice());
         assert_eq!(id.state.size, content.len() as u64);
+    }
+
+    #[test]
+    fn identity_rejects_mutation_during_every_hash_attempt() {
+        let td = TestDir::new();
+        let path = td.path().join("persistent_mutation.dat");
+        let content = b"persistent mutation";
+        std::fs::write(&path, content).unwrap();
+        let file = std::fs::OpenOptions::new()
+            .read(true)
+            .write(true)
+            .custom_flags(libc::O_NOFOLLOW | libc::O_CLOEXEC)
+            .open(&path)
+            .unwrap();
+        let mut attempts = 0;
+
+        let result = ObjectIdentity::from_fd_with_hasher(file.as_raw_fd(), [0x18; 32], |fd| {
+            let hash = compute_fd_hash(fd)?;
+            attempts += 1;
+            // Force a real size change between the two fstats on every attempt;
+            // no writer scheduling or timestamp resolution is assumed.
+            let new_size = (content.len() + attempts) as libc::off_t;
+            assert_eq!(unsafe { libc::ftruncate(fd, new_size) }, 0);
+            Ok(hash)
+        });
+
+        assert!(matches!(result, Err(SecureFsError::IdentityUnstable)), "{result:?}");
+        assert_eq!(attempts, ObjectIdentity::MAX_STABILIZATION_ATTEMPTS);
+        let mut expected = content.to_vec();
+        expected.resize(content.len() + attempts, 0);
+        assert_eq!(std::fs::read(&path).unwrap(), expected);
+    }
+
+    #[test]
+    fn identity_converges_after_transient_mutation_during_hash() {
+        let td = TestDir::new();
+        let path = td.path().join("transient_mutation.dat");
+        let content = b"transient mutation";
+        std::fs::write(&path, content).unwrap();
+        let file = std::fs::OpenOptions::new()
+            .read(true)
+            .write(true)
+            .custom_flags(libc::O_NOFOLLOW | libc::O_CLOEXEC)
+            .open(&path)
+            .unwrap();
+        let capability_root_id = [0x18; 32];
+        let before = ObjectIdentity::from_fd(file.as_raw_fd(), capability_root_id).unwrap();
+        let mut attempts = 0;
+
+        let identity = ObjectIdentity::from_fd_with_hasher(file.as_raw_fd(), capability_root_id, |fd| {
+            let hash = compute_fd_hash(fd)?;
+            attempts += 1;
+            if attempts == 1 {
+                assert_eq!(unsafe { libc::ftruncate(fd, (content.len() + 1) as libc::off_t) }, 0);
+            }
+            Ok(hash)
+        }).unwrap();
+
+        assert_eq!(attempts, 2);
+        let mut expected = content.to_vec();
+        expected.push(0);
+        assert_eq!(std::fs::read(&path).unwrap(), expected);
+        let expected_hash: [u8; 32] = Sha256::digest(&expected).into();
+        assert_eq!(identity.locator, before.locator);
+        assert_eq!(identity.state.mode, before.state.mode);
+        assert_eq!(identity.state.size, expected.len() as u64);
+        assert_eq!(identity.state.hash, expected_hash);
+        assert_ne!(identity.state.hash, before.state.hash);
+        assert_eq!(identity, ObjectIdentity::from_fd(file.as_raw_fd(), capability_root_id).unwrap());
     }
 
     #[test]
@@ -2572,5 +2870,95 @@ mod tests {
                 "Symlink on .babylon must be rejected via openat(O_NOFOLLOW)"
             );
         }
+    }
+
+    #[test]
+    fn test_o8_aba_mutation_and_delete_rejected() {
+        let td = TestDir::new();
+        let fp = td.path().join("aba_target.dat");
+        std::fs::write(&fp, b"STATE_A").unwrap();
+        let orch = EffectTxOrchestrator::<NativeSecureFs>::new(td.path()).unwrap();
+        let root_fd = open_dir(td.path());
+
+        // Principal 1 pins the object at STATE_A
+        let cap_stale = [0x88; 32];
+        let (fd_stale, id_stale) = NativeSecureFs::pin_object(root_fd, "aba_target.dat", cap_stale).unwrap();
+        unsafe { libc::close(fd_stale) };
+
+        // Intervening ABA transition: STATE_A -> STATE_B -> STATE_A via broker mutations
+        let cap_inter = [0x89; 32];
+        orch.set_budget_policy(cap_inter, EffectBudgetPolicy {
+            max_effects: 4,
+            max_total_bytes: 4096,
+            allowed_targets: vec![(id_stale.locator.dev, id_stale.locator.ino)],
+        }).unwrap();
+
+        let (fd_ab, id_ab) = NativeSecureFs::pin_object(root_fd, "aba_target.dat", cap_inter).unwrap();
+        unsafe { libc::close(fd_ab) };
+        let auth_ab = AuthorityContext {
+            authority_id: cap_inter,
+            epoch: orch.get_epoch(),
+            effect: EffectType::Mutate,
+            nonce: [0xA1; 32],
+        };
+        let (s_ab, _) = orch.secure_mutate_scoped(root_fd, "aba_target.dat", &auth_ab, &id_ab, b"STATE_B").unwrap();
+        assert_eq!(s_ab, EffectTxState::Committed);
+
+        let (fd_ba, id_ba) = NativeSecureFs::pin_object(root_fd, "aba_target.dat", cap_inter).unwrap();
+        unsafe { libc::close(fd_ba) };
+        let auth_ba = AuthorityContext {
+            authority_id: cap_inter,
+            epoch: orch.get_epoch(),
+            effect: EffectType::Mutate,
+            nonce: [0xA2; 32],
+        };
+        let (s_ba, _) = orch.secure_mutate_scoped(root_fd, "aba_target.dat", &auth_ba, &id_ba, b"STATE_A").unwrap();
+        assert_eq!(s_ba, EffectTxState::Committed);
+        assert_eq!(std::fs::read(&fp).unwrap(), b"STATE_A");
+
+        // Now Principal 1 attempts to mutate or delete using `id_stale` pinned BEFORE A -> B -> A.
+        // Even though SHA-256(STATE_A) matches again, O8 ABA defense must reject `id_stale` fail-closed.
+        let auth_stale_mut = fixture_authority(&orch, &id_stale, EffectType::Mutate, [0xA3; 32]);
+        let mut_res = orch.secure_mutate_scoped(root_fd, "aba_target.dat", &auth_stale_mut, &id_stale, b"PWNED");
+        assert!(
+            matches!(mut_res, Err(SecureFsError::SecurityMismatch { .. })),
+            "O8 ABA VIOLATION: stale identity across A->B->A must be rejected on mutate, got: {mut_res:?}"
+        );
+
+        let del_nonce = [0xA4; 32];
+        let auth_stale_del = AuthorityContext {
+            authority_id: cap_stale,
+            epoch: orch.get_epoch(),
+            effect: EffectType::Delete,
+            nonce: del_nonce,
+        };
+        let del_res = orch.secure_delete_scoped(root_fd, "aba_target.dat", &auth_stale_del, &id_stale, &del_nonce).unwrap();
+        assert_eq!(
+            del_res,
+            EffectTxState::SecurityAbort,
+            "O8 ABA VIOLATION: stale identity across A->B->A must trigger SecurityAbort on delete"
+        );
+        unsafe { libc::close(root_fd) };
+    }
+
+    #[test]
+    fn test_o11_nfd_path_rejected_in_secure_fs() {
+        let td = TestDir::new();
+        std::fs::write(td.path().join("caf\u{00E9}.dat"), b"nfc content").unwrap();
+        let root_fd = open_dir(td.path());
+
+        // NFC succeeds
+        let (fd_ok, _) = NativeSecureFs::pin_object(root_fd, "caf\u{00E9}.dat", [0x11; 32]).unwrap();
+        unsafe { libc::close(fd_ok) };
+
+        // NFD decomposed ("cafe" + U+0301) is rejected before touching APFS
+        let nfd_err = NativeSecureFs::pin_object(root_fd, "cafe\u{0301}.dat", [0x11; 32]).unwrap_err();
+        assert!(matches!(nfd_err, SecureFsError::SymlinkEscapeAttempt));
+
+        // Shell variable expansion token is rejected
+        let var_err = NativeSecureFs::pin_object(root_fd, "$HOME/caf\u{00E9}.dat", [0x11; 32]).unwrap_err();
+        assert!(matches!(var_err, SecureFsError::SymlinkEscapeAttempt));
+
+        unsafe { libc::close(root_fd) };
     }
 }

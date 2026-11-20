@@ -42,6 +42,6 @@ Se retira el «corolario» que prometía fallo de inicialización si no se calcu
 
 ## 4. Estado formal
 
-El bloque Lean anterior declaraba `morphism_primacy` y `exergy_homeostasis_abort` como axiomas. El primero empleaba elementos `x y : C` como si fueran tipos en `x → y`; el segundo postulaba `Score < 700 → F > 0`, que ni siquiera representa una transición Abort. Tampoco definía una categoría ni implementaba A4.
+El bloque Lean anterior declaraba `[OBSOLETO: morphism_primacy]` y `[OBSOLETO: exergy_homeostasis_abort]` como axiomas. El primero empleaba elementos `x y : C` como si fueran tipos en `x → y`; el segundo postulaba `Score < 700 → F > 0`, que ni siquiera representa una transición Abort. Tampoco definía una categoría ni implementaba A4.
 
 La extracción original falla con Lean 4.35.0: comentario de documentación mal situado, tipos y clases numéricas sin resolver. Se retira como prueba y no se sustituye por un teorema trivial. **Formalización de A1–A4: NO_VERIFICADA.** La compilación futura de una especificación tampoco demostraría su correspondencia física ni la implementación del kernel.

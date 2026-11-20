@@ -2,6 +2,7 @@
 # BABYLON-60 v4.0 Sovereign Hardened
 # █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 # ============================================================================
+import errno
 import os
 import sys
 import json
@@ -9,6 +10,7 @@ import fcntl
 import secrets
 import stat
 import threading
+import time
 from contextlib import contextmanager
 from datetime import datetime, timezone
 from dataclasses import dataclass
@@ -58,6 +60,11 @@ class ConsolidationError(RuntimeError):
 
 class CortexOntologyLedger:
     """Motor estricto para el volcado de memoria de MOSKV-1 hacia la ontología global."""
+
+    # Bounded wait for the cooperative lock; a stalled holder must not hang callers forever.
+    LOCK_TIMEOUT_SECONDS = 30.0
+    # Entries leaving the bounded lists are appended here before the truncating write.
+    RETENTION_ARCHIVE = "retention-archive.jsonl"
 
     def __init__(self, project_id: str) -> None:
         if (
@@ -118,6 +125,56 @@ class CortexOntologyLedger:
             raise RuntimeError("CORTEX requires owned, single-link regular files")
         return value
 
+    @staticmethod
+    def _require_exact_name(parent: int, name: str) -> None:
+        """Reject a name that reaches its file only through filesystem name folding.
+
+        On case- or normalization-insensitive volumes two project IDs can open
+        one file while keying separate entries in ghosts.json.
+        """
+        if name in os.listdir(parent):
+            return
+        try:
+            os.stat(name, dir_fd=parent, follow_symlinks=False)
+        except FileNotFoundError:
+            return
+        raise ValueError("Project ID differs from its stored filename by case or normalization")
+
+    @staticmethod
+    def _same_version(first: os.stat_result, second: os.stat_result) -> bool:
+        return os.path.samestat(first, second) and (
+            first.st_mode,
+            first.st_uid,
+            first.st_nlink,
+            first.st_size,
+            first.st_mtime_ns,
+            first.st_ctime_ns,
+        ) == (
+            second.st_mode,
+            second.st_uid,
+            second.st_nlink,
+            second.st_size,
+            second.st_mtime_ns,
+            second.st_ctime_ns,
+        )
+
+    @staticmethod
+    def _durable_sync(descriptor: int) -> None:
+        """fsync, then ask Darwin to flush the drive cache.
+
+        On macOS fsync alone leaves data in the drive's volatile cache. Where
+        F_FULLFSYNC is absent or unsupported by the volume, fsync is the
+        strongest request available and its result stands.
+        """
+        os.fsync(descriptor)
+        full_sync = getattr(fcntl, "F_FULLFSYNC", None)
+        if full_sync is not None:
+            try:
+                fcntl.fcntl(descriptor, full_sync)
+            except OSError as error:
+                if error.errno not in (errno.ENOTSUP, errno.ENOTTY, errno.EINVAL, errno.ENODEV):
+                    raise
+
     @contextmanager
     def _parent_handle(self, path: str) -> Iterator[tuple[int, str]]:
         self._check_paths()
@@ -134,6 +191,7 @@ class CortexOntologyLedger:
             else:
                 descriptor = os.open(folder, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=base)
                 try:
+                    self._require_exact_name(descriptor, name)
                     yield descriptor, name
                 finally:
                     os.close(descriptor)
@@ -142,7 +200,11 @@ class CortexOntologyLedger:
         with self._base_handle() as base:
             for name in ("projects", "snapshots"):
                 descriptor = os.open(name, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=base)
-                os.close(descriptor)
+                try:
+                    if name == "projects":
+                        self._require_exact_name(descriptor, self.project_id + ".json")
+                finally:
+                    os.close(descriptor)
             for name in ("ghosts.json", "system.json"):
                 descriptor = os.open(name, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=base)
                 try:
@@ -160,6 +222,22 @@ class CortexOntologyLedger:
             if not os.path.samestat(self._regular_file(descriptor), current):
                 raise RuntimeError("CORTEX operation lock identity changed")
 
+    def _acquire_operation_lock(self, descriptor: int) -> None:
+        deadline = time.monotonic() + self.LOCK_TIMEOUT_SECONDS
+        try:
+            fcntl.flock(descriptor, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            return
+        except BlockingIOError:
+            pass
+        while time.monotonic() < deadline:
+            time.sleep(0.02)
+            try:
+                fcntl.flock(descriptor, fcntl.LOCK_EX | fcntl.LOCK_NB)
+                return
+            except BlockingIOError:
+                continue
+        raise TimeoutError("CORTEX operation lock wait exceeded its bound")
+
     @contextmanager
     def _exclusive_session(self) -> Iterator[None]:
         if getattr(self._operation, "active", None) is not None:
@@ -170,12 +248,15 @@ class CortexOntologyLedger:
             )
             try:
                 self._regular_file(descriptor)
-                fcntl.flock(descriptor, fcntl.LOCK_EX)
+                self._acquire_operation_lock(descriptor)
                 self._operation.active = (base, descriptor)
+                # Versions read in this session; a write is refused if its file moved on since.
+                self._operation.observed = {}
                 try:
                     self._check_operation_lock()
                     yield
                 finally:
+                    self._operation.observed = None
                     self._operation.active = None
                     fcntl.flock(descriptor, fcntl.LOCK_UN)
             finally:
@@ -190,10 +271,15 @@ class CortexOntologyLedger:
             with self._parent_handle(path) as (parent, name):
                 descriptor = os.open(name, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=parent)
                 with os.fdopen(descriptor, "r", encoding="utf-8") as stream:
-                    self._regular_file(stream.fileno())
+                    version = self._regular_file(stream.fileno())
                     value = json.load(stream, parse_constant=self._invalid_constant)
                     if not isinstance(value, dict):
                         raise ValueError("JSON memory must contain an object")
+                    observed = getattr(self._operation, "observed", None)
+                    if observed is not None:
+                        # Taken before the content was read: a later change by any
+                        # writer, cooperating or not, differs from this version.
+                        observed[str(Path(path).absolute())] = version
                     return value
         except (ValueError, OSError) as error:
             raise RuntimeError(f"CORTEX JSON read failed for {Path(path).name}") from error
@@ -245,8 +331,53 @@ class CortexOntologyLedger:
         finally:
             os.close(descriptor)
 
+    def _archive_dropped(self, source: str, entries: List[Any], now: str) -> None:
+        """Append entries leaving a bounded list, before the write that drops them.
+
+        Delivery is at-least-once: a session retried after a later failure
+        archives the same entries again.
+        """
+        if not entries:
+            return
+        self._check_operation_lock()
+        payload = "".join(
+            json.dumps(
+                {"archived_at": now, "project": self.project_id, "source": source, "entry": entry},
+                ensure_ascii=False,
+                allow_nan=False,
+            )
+            + "\n"
+            for entry in entries
+        ).encode("utf-8")
+        with self._base_handle() as base:
+            folder = os.open("snapshots", os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=base)
+            try:
+                descriptor = os.open(
+                    self.RETENTION_ARCHIVE,
+                    os.O_RDWR | os.O_APPEND | os.O_CREAT | os.O_NOFOLLOW | os.O_NONBLOCK,
+                    0o600,
+                    dir_fd=folder,
+                )
+                try:
+                    size = self._regular_file(descriptor).st_size
+                    if size and os.pread(descriptor, 1, size - 1) != b"\n":
+                        payload = b"\n" + payload  # A torn earlier append must not absorb this record.
+                    self._write_all(descriptor, payload)
+                    self._durable_sync(descriptor)
+                finally:
+                    os.close(descriptor)
+                self._durable_sync(folder)
+            finally:
+                os.close(folder)
+
     def _write_json(self, path: str, data: Dict[str, Any]) -> None:
-        """Atomic replacement per file, not a read/modify/write lock for direct callers."""
+        """Atomic replacement per file.
+
+        Inside a session the write is refused when the file is no longer the
+        version that session read. Direct callers get no read/modify/write
+        protection, and a writer that ignores the lock can still slip in
+        between the final check and the replacement.
+        """
         if not isinstance(data, dict):
             raise ValueError("JSON memory must contain an object")
         payload = json.dumps(data, indent=2, ensure_ascii=False, allow_nan=False).encode("utf-8")
@@ -262,6 +393,11 @@ class CortexOntologyLedger:
                     os.close(target)
                 if not before.st_mode & stat.S_IWUSR:
                     raise PermissionError("JSON destination is read-only")
+                observed = getattr(self._operation, "observed", None)
+                if observed is not None:
+                    version = observed.pop(str(Path(path).absolute()), None)
+                    if version is not None and not self._same_version(version, before):
+                        raise RuntimeError("JSON destination changed since this session read it")
                 temporary = ".cortex-persist-" + secrets.token_hex(16) + ".tmp"
                 descriptor = os.open(
                     temporary, os.O_RDWR | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600, dir_fd=parent
@@ -269,24 +405,10 @@ class CortexOntologyLedger:
                 try:
                     self._write_all(descriptor, payload)
                     os.fchmod(descriptor, stat.S_IMODE(before.st_mode) & 0o777)
-                    os.fsync(descriptor)
+                    self._durable_sync(descriptor)
                     staged = self._regular_file(descriptor)
                     current = os.stat(name, dir_fd=parent, follow_symlinks=False)
-                    if not os.path.samestat(before, current) or (
-                        before.st_mode,
-                        before.st_uid,
-                        before.st_nlink,
-                        before.st_size,
-                        before.st_mtime_ns,
-                        before.st_ctime_ns,
-                    ) != (
-                        current.st_mode,
-                        current.st_uid,
-                        current.st_nlink,
-                        current.st_size,
-                        current.st_mtime_ns,
-                        current.st_ctime_ns,
-                    ):
+                    if not self._same_version(before, current):
                         raise RuntimeError("JSON destination changed during write")
                     if not os.path.samestat(staged, os.stat(temporary, dir_fd=parent, follow_symlinks=False)):
                         raise RuntimeError("JSON temporary identity changed")
@@ -298,7 +420,7 @@ class CortexOntologyLedger:
                         replacement_state = self._observe_replacement(parent, name, staged, before)
                         raise
                     replacement_state = "REPLACED"
-                    os.fsync(parent)
+                    self._durable_sync(parent)
                 finally:
                     self._discard_temporary(parent, temporary, descriptor, sys.exception())
         except (OSError, RuntimeError, ValueError) as error:
@@ -337,6 +459,7 @@ class CortexOntologyLedger:
             # Anti-Sybil check
             if not any(isinstance(r, dict) and r.get("desc") == ch for r in recent[:5]):
                 recent.insert(0, {"ts": now, "desc": ch})
+        self._archive_dropped("recent_changes", recent[10:], now)
         proj_data["recent_changes"] = recent[:10]
 
         decisions = list(proj_data.get("decisions", []))
@@ -384,6 +507,7 @@ class CortexOntologyLedger:
             },
         )
 
+        self._archive_dropped("sessions_log", sessions[30:], now)
         system_data["sessions_log"] = sessions[:30]
         if "meta" not in system_data:
             system_data["meta"] = {}

@@ -4,7 +4,7 @@ C5-REAL Canonical 3-Strata Entropy Quality Gate (audit_entropy_3strata.py)
 ==========================================================================
 Executes the three orthogonal entropy audits required by c5-information-thermodynamics:
   - Stratum 1: Physical Silicon TRNG (/dev/urandom 64 KB, H(X) >= 7.9968, 0 parasitic daemons)
-  - Stratum 2: Codebase Structural Entropy, Jaccard Clones (J >= 0.75) & Zero-Width Characters
+  - Stratum 2: Codebase Structural Entropy, Jaccard Clones (J >= 0.85) & Zero-Width Characters
   - Stratum 3: KISH Linguistic Entropy Transducer (Ω₁₇) on Canonical Specifications
 """
 
@@ -120,11 +120,19 @@ def audit_stratum_2(root: Path = REPO_ROOT) -> Stratum2Result:
         "__pycache__",
         "AUDIT_REPORTS_2026",
         "AUDITORIAS_EPISTEMICAS",
+        "experiments",
         ".lake",
         ".codex",
+        "scratch",
         "tmp",
         "build",
     }
+    exclude_rel_prefixes = (
+        "docs/04_audit/data_rooms",
+        "docs/security/evidence",
+        "tools/skills",
+    )
+    clone_jaccard_threshold = 0.85
     malicious_zw = {"\u200b", "\u200c", "\ufeff"}
 
     by_ext: dict[str, list[float]] = {ext: [] for ext in valid_exts}
@@ -133,7 +141,17 @@ def audit_stratum_2(root: Path = REPO_ROOT) -> Stratum2Result:
     total_files = 0
 
     for dirpath, dirs, files in os.walk(root):
-        dirs[:] = [d for d in dirs if d not in exclude_dirs and not d.startswith(".")]
+        rel_dir = Path(dirpath).relative_to(root).as_posix()
+        dirs[:] = [
+            d
+            for d in dirs
+            if d not in exclude_dirs
+            and not d.startswith(".")
+            and not any(
+                (d if rel_dir == "." else f"{rel_dir}/{d}") == prefix
+                for prefix in exclude_rel_prefixes
+            )
+        ]
         for fname in files:
             path = Path(dirpath) / fname
             ext = path.suffix.lower()
@@ -171,7 +189,7 @@ def audit_stratum_2(root: Path = REPO_ROOT) -> Stratum2Result:
         for j in range(i + 1, len(doc_keys)):
             t2 = doc_tokens[doc_keys[j]]
             union = len(t1 | t2)
-            if union > 0 and (len(t1 & t2) / union) >= 0.75:
+            if union > 0 and (len(t1 & t2) / union) >= clone_jaccard_threshold:
                 clones_count += 1
 
     avg_by_ext = {

@@ -104,6 +104,23 @@ def verify(js: JustifiedStatement, nogoods: Optional[Set[str]] = None) -> bool:
         elif obligation == Obligation.COMPLETENESS:
             if j.kind == "Conjecture":
                 return False
+        elif obligation == Obligation.ENVIRONMENT_MATCH:
+            v_prof = str(j.parameters.get("verified_profile", "")).strip()
+            o_prof = str(j.parameters.get("observed_profile", "")).strip()
+            if not v_prof or not o_prof or v_prof != o_prof:
+                return False
+        elif obligation == Obligation.MODEL_ORTHOGONALITY:
+            opt_model = str(j.parameters.get("optimizer_model", "")).strip()
+            ver_model = str(j.parameters.get("verifier_model", "")).strip()
+            if not opt_model or not ver_model or opt_model == ver_model:
+                return False
+        elif obligation == Obligation.OBSERVED_CONSTRAINTS:
+            art_dig = str(j.parameters.get("artifact_digest", "")).strip()
+            dep_dig = str(j.parameters.get("deployed_digest", "")).strip()
+            if not art_dig or art_dig != dep_dig:
+                return False
+            if j.parameters.get("critical_constraints_pass") is not True:
+                return False
 
     return True
 
@@ -135,8 +152,9 @@ def derive(
             if hasattr(strike_rs, "py_enforce_hume_guillotine"):
                 strike_rs.py_enforce_hume_guillotine(has_deontic_premise, goal.modality.value)
         except RuntimeError as ex:
-            raise HumeViolationError(str(ex))
-        except (ImportError, Exception):
+            raise HumeViolationError(str(ex)) from ex
+        except ImportError:
+            # Sin extensión nativa: la comprobación Python de abajo es la autoritativa.
             pass
 
         if not has_deontic_premise:

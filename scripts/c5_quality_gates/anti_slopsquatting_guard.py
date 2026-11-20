@@ -33,11 +33,11 @@ def get_staged_python_files() -> list[Path]:
         res = subprocess.run(
             ["git", "diff", "--cached", "--name-only", "--diff-filter=ACM"],
             capture_output=True,
-            text=True,
+            text=False,
             check=True,
         )
         files = []
-        for line in res.stdout.strip().splitlines():
+        for line in res.stdout.decode("utf-8", errors="surrogateescape").strip().splitlines():
             line = line.strip()
             if line.endswith(".py") and Path(line).exists():
                 files.append(Path(line))
@@ -73,7 +73,7 @@ def audit_file(file_path: Path) -> list[str]:
 
 
 def get_all_python_files() -> list[Path]:
-    repo_root = Path(__file__).resolve().parent.parent.parent
+    repo_root = Path(__file__).absolute().parent.parent.parent
     targets = ["01_KISH_ENGINE", "02_EDIN_SWARMS", "scripts", "tests"]
     files = []
     for t in targets:
@@ -118,8 +118,8 @@ def audit_zombie_core_dependencies(repo_root: Path, all_files: list[Path]) -> li
                         imported_modules.add(alias.name.split(".")[0].lower())
                 elif isinstance(node, ast.ImportFrom) and node.module:
                     imported_modules.add(node.module.split(".")[0].lower())
-        except Exception:
-            pass
+        except (OSError, UnicodeDecodeError, SyntaxError):
+            continue
 
     violations = []
     for dep in deps:
@@ -134,7 +134,7 @@ def audit_zombie_core_dependencies(repo_root: Path, all_files: list[Path]) -> li
 
 def main() -> int:
     audit_all = "--all" in sys.argv
-    repo_root = Path(__file__).resolve().parent.parent.parent
+    repo_root = Path(__file__).absolute().parent.parent.parent
     if audit_all:
         files = get_all_python_files()
         label = "repository"

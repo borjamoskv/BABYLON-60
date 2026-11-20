@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from pathlib import Path
 from typing import List, Optional
@@ -68,9 +69,11 @@ def parse_crl_arg(crl_arg: Optional[str]) -> Optional[List[str]]:
     if not crl_arg.strip():
         raise ValueError("CRL_INVALID: empty revocation input")
     path = Path(crl_arg)
-    if path.exists() or path.is_symlink() or "/" in crl_arg or path.suffix.lower() == ".json":
+    if path.exists() or "/" in crl_arg or path.suffix.lower() == ".json":
         try:
-            with open(path, "r", encoding="utf-8") as f:
+            flags = os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0)
+            fd = os.open(path, flags)
+            with os.fdopen(fd, "r", encoding="utf-8") as f:
                 data = json.load(f)
             if isinstance(data, dict):
                 keys = set(data) & {"revoked_certificates", "revocations"}

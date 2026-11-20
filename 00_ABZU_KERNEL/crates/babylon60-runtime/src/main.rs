@@ -5,8 +5,7 @@
 // █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 // ============================================================================
 use num_bigint::BigInt;
-use num_integer::Integer;
-use num_traits::{Zero, One, ToPrimitive, Pow};
+use num_traits::{Zero, ToPrimitive, Pow};
 use serde::{Deserialize, Serialize};
 use sha2::{Sha256, Digest};
 use std::collections::{HashMap, VecDeque};
@@ -40,15 +39,11 @@ impl F60 {
             self.scale = 0;
             return;
         }
-        let base = BigInt::from(60_u64).pow(self.scale);
-        let g = self.num.gcd(&base);
-        if g > BigInt::one() {
-            self.num /= &g;
-            let mut g_temp = g;
-            while (&g_temp % 60u64).is_zero() && self.scale > 0 {
-                g_temp /= 60u64;
-                self.scale -= 1;
-            }
+        // C0442: cada factor 60 extraído del numerador baja la escala en uno; el valor se conserva.
+        let sixty = BigInt::from(60_u64);
+        while self.scale > 0 && (&self.num % &sixty).is_zero() {
+            self.num /= &sixty;
+            self.scale -= 1;
         }
     }
 
@@ -323,18 +318,10 @@ impl Machine {
                         self.critical_halt("DIVIDE_BY_ZERO");
                     }
 
-                    let mut num = coro.r[idx1].val.num.clone();
-                    let mut scale = coro.r[idx1].val.scale;
-                    
-                    while (&num % &val2.num) != BigInt::zero() {
-                        num *= 60u64;
-                        scale += 1;
-                        if scale > 20 { // Saturation limit
-                            self.critical_halt("FALSATION_ERROR: TRUNCATION (Blowup de Numerador excedió límite de Escala F60)");
-                        }
+                    match exact_div(&coro.r[idx1].val, &val2) {
+                        Ok(v) => coro.r[idx1].val = v,
+                        Err(e) => self.critical_halt(&e),
                     }
-                    
-                    coro.r[idx1].val = F60::new(num / val2.num, scale);
                 }
                 "FORK" => {
                     let label = &tokens[1];
@@ -473,4 +460,53 @@ fn main() {
     };
 
     machine.run();
+}
+
+/// División exacta de BA.EXACT (C0443). a/b = (a.num·60^sb) / (b.num·60^sa); se busca la menor
+/// escala t con cociente entero, de modo que Q/60^t = a/b sin perder valor.
+fn exact_div(a: &F60, b: &F60) -> Result<F60, String> {
+    if b.num.is_zero() {
+        return Err("DIVIDE_BY_ZERO".into());
+    }
+    let sixty = BigInt::from(60u64);
+    let numer_base = a.num.clone() * sixty.clone().pow(b.scale);
+    let denom = b.num.clone() * sixty.clone().pow(a.scale);
+    for t in 0..=20u32 {
+        let n = &numer_base * sixty.clone().pow(t);
+        if (&n % &denom).is_zero() {
+            return Ok(F60::new(n / &denom, t));
+        }
+    }
+    Err("FALSATION_ERROR: TRUNCATION (Blowup de Numerador excedió límite de Escala F60)".into())
+}
+
+#[cfg(test)]
+mod c0442_c0443_tests {
+    use super::*;
+
+    /// Igualdad de valores racionales: a.num/60^a.scale == b.num/60^b.scale.
+    fn same_value(a: &F60, b: &F60) -> bool {
+        let sixty = BigInt::from(60u64);
+        let la = sixty.clone().pow(a.scale);
+        let lb = sixty.pow(b.scale);
+        a.num.clone() * lb == b.num.clone() * la
+    }
+
+    #[test]
+    fn reduce_preserves_value_for_partial_base_factors() {
+        // C0442: 2/60 debe seguir valiendo 2/60 tras reducir.
+        let raw = F60 { num: BigInt::from(2), scale: 1 };
+        let reduced = F60::new(BigInt::from(2), 1);
+        assert!(same_value(&raw, &reduced), "C0442: {:?} no conserva el valor de {:?}", reduced, raw);
+    }
+
+    #[test]
+    fn exact_div_respects_divisor_scale() {
+        // C0443: (1/60) / (1/3600) = 60.
+        let a = F60 { num: BigInt::from(1), scale: 1 };
+        let b = F60 { num: BigInt::from(1), scale: 2 };
+        let expected = F60 { num: BigInt::from(60), scale: 0 };
+        let got = exact_div(&a, &b).unwrap();
+        assert!(same_value(&got, &expected), "C0443: cociente {:?} ≠ 60", got);
+    }
 }
