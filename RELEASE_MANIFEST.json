@@ -3,16 +3,16 @@
   "release": "5.1.0",
   "version": "5.1.0",
   "state": "candidate",
-  "commit": "f5914be850992ba4dce5d93440733a4702e439a6",
-  "source_tree_digest": "b2656315d3b386fccfd62b02f67e84907486c986857d7d98b00508cbad633a15",
+  "commit": "d113e85d87ab51ff1b67fd170933438b292c804f",
+  "source_tree_digest": "ebd24f75691b12897aeba2cedd2041c7ceb9ea9d5f04e3bd3df58b6f84c341b6",
   "axiom_root": "AX-0: No stochastic component may authorize its own irreversible effects (LLM != authority)",
   "claims_manifest_digest": "6b73bd3fe2be1f2b4bdc7df80d5ef4203e32f67656f8008d03e399897bc20606",
-  "compiled_at_iso": "2026-11-20T04:35:20Z",
+  "compiled_at_iso": "2026-11-20T05:21:54Z",
   "prior_release": {
     "version": "5.1.0",
-    "commit": "9a8aee1bc3d89893b8c0292790088b21df4b182e",
+    "commit": "f5914be850992ba4dce5d93440733a4702e439a6",
     "manifest_schema": "babylon60.release.v5",
-    "manifest_sha256": "a4b22519107f651e02c773bf36c8347db61ffd12072bc5576e17c2ad45c32f93"
+    "manifest_sha256": "28d5b3b64e7dca9bf82675bcbefd85a396b9774091b8772053c3b0b8dbfb4a74"
   },
   "version_sync": {
     "babylon_toml": "5.1.0",
@@ -100,7 +100,7 @@
   },
   "release_bundle": {
     "name": "Babylon60-v5.1.0-terminal-mcp.zip",
-    "tree_digest": "537314fd7d196bfc3cee48c3654e3dca859a186628ce6c9917afdbe2f8c4a4c6",
+    "tree_digest": "4e3646a34a356c0b4e17be70c7a05517da7f7711decef50658a1f13214e17bf1",
     "source_files": [
       ".agents/skills/_skill_checks/declarative.py",
       ".agents/skills/_skill_router.py",
@@ -155,6 +155,7 @@
       ".agents/skills/wizard/SKILL.md",
       ".agents/skills/writing-for-agents/SKILL.md",
       ".babylon60rules",
+      "00_ABZU_KERNEL/crates/babylon60-kernel/src/shared_manifest.rs",
       "01_KISH_ENGINE/babylon60/__init__.py",
       "01_KISH_ENGINE/babylon60/adapters/__init__.py",
       "01_KISH_ENGINE/babylon60/adapters/adapter_config.json",
@@ -261,6 +262,7 @@
       "01_KISH_ENGINE/babylon60/confine/_persistence_catalog.py",
       "01_KISH_ENGINE/babylon60/confine/_persistence_parsers.py",
       "01_KISH_ENGINE/babylon60/confine/aliases.py",
+      "01_KISH_ENGINE/babylon60/confine/arguments.py",
       "01_KISH_ENGINE/babylon60/confine/cli.py",
       "01_KISH_ENGINE/babylon60/confine/gitconfig.py",
       "01_KISH_ENGINE/babylon60/confine/journal.py",
@@ -543,6 +545,10 @@
       "scripts/c5_quality_gates/prompt_exergy_oracle.py",
       "scripts/package_release.sh",
       "scripts/verify_release.sh",
+      "src/ffi.rs",
+      "src/ffi_oracle.rs",
+      "src/larsa_bft.rs",
+      "src/shared_manifest_core.rs",
       "uv.lock",
       "verify.sh"
     ]

@@ -1,7 +1,7 @@
 {
-  "timestamp": 1795149320.362317,
-  "source_commit": "f5914be850992ba4dce5d93440733a4702e439a6",
-  "source_tree_digest": "b2656315d3b386fccfd62b02f67e84907486c986857d7d98b00508cbad633a15",
+  "timestamp": 1795152114.8572118,
+  "source_commit": "d113e85d87ab51ff1b67fd170933438b292c804f",
+  "source_tree_digest": "ebd24f75691b12897aeba2cedd2041c7ceb9ea9d5f04e3bd3df58b6f84c341b6",
   "environment_digest": "7b2b4aa88ffd12dd0e57e90cf1250bedadbf95850888d97fbdcb75aa1c6bf828",
   "environment": {
     "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
@@ -24,7 +24,7 @@
       "evidence_level": "L2_IMPLEMENTATION",
       "verified": true,
       "suite_passed": true,
-      "duration_s": 0.849,
+      "duration_s": 0.43,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -34,7 +34,7 @@
       "evidence_level": "L1_FORMAL",
       "verified": true,
       "suite_passed": true,
-      "duration_s": 71.207,
+      "duration_s": 72.893,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -44,7 +44,7 @@
       "evidence_level": "L2_IMPLEMENTATION",
       "verified": true,
       "suite_passed": true,
-      "duration_s": 0.52,
+      "duration_s": 0.461,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -54,7 +54,7 @@
       "evidence_level": "L2_IMPLEMENTATION",
       "verified": true,
       "suite_passed": true,
-      "duration_s": 0.142,
+      "duration_s": 0.228,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -64,7 +64,7 @@
       "evidence_level": "L2_IMPLEMENTATION",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 0.156,
+      "duration_s": 0.177,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -74,7 +74,7 @@
       "evidence_level": "L2_IMPLEMENTATION",
       "verified": true,
       "suite_passed": true,
-      "duration_s": 20.509,
+      "duration_s": 19.82,
       "component": "01_KISH_ENGINE"
     },
     {
@@ -84,7 +84,7 @@
       "evidence_level": "L2_IMPLEMENTATION",
       "verified": true,
       "suite_passed": true,
-      "duration_s": 11.739,
+      "duration_s": 13.58,
       "component": "01_KISH_ENGINE"
     },
     {
@@ -94,7 +94,7 @@
       "evidence_level": "L1_FORMAL",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 3.151,
+      "duration_s": 3.885,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -104,7 +104,7 @@
       "evidence_level": "L2_IMPLEMENTATION",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 0.474,
+      "duration_s": 0.49,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -114,7 +114,7 @@
       "evidence_level": "L2_IMPLEMENTATION",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 0.13,
+      "duration_s": 0.131,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -124,7 +124,7 @@
       "evidence_level": "L2_IMPLEMENTATION",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 4.534,
+      "duration_s": 5.573,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -134,7 +134,7 @@
       "evidence_level": "L2_IMPLEMENTATION",
       "verified": true,
       "suite_passed": true,
-      "duration_s": 0.758,
+      "duration_s": 1.012,
       "component": "01_KISH_ENGINE"
     },
     {
@@ -144,7 +144,7 @@
       "evidence_level": "L2_IMPLEMENTATION",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 0.18,
+      "duration_s": 0.227,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -154,7 +154,7 @@
       "evidence_level": "L2_IMPLEMENTATION",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 0.467,
+      "duration_s": 0.53,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -164,7 +164,7 @@
       "evidence_level": "L2_IMPLEMENTATION",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 0.16,
+      "duration_s": 0.214,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -174,7 +174,7 @@
       "evidence_level": "L4_EXPERIMENTAL",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 5.964,
+      "duration_s": 5.792,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -184,7 +184,7 @@
       "evidence_level": "L2_IMPLEMENTATION",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 0.554,
+      "duration_s": 0.436,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -194,7 +194,7 @@
       "evidence_level": "L4_EXPERIMENTAL",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 26.905,
+      "duration_s": 31.89,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -204,7 +204,7 @@
       "evidence_level": "L4_EXPERIMENTAL",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 2.264,
+      "duration_s": 2.144,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -214,7 +214,7 @@
       "evidence_level": "L4_EXPERIMENTAL",
       "verified": true,
       "suite_passed": true,
-      "duration_s": 2.315,
+      "duration_s": 1.5,
       "component": "02_EDIN_SWARMS"
     },
     {
@@ -224,7 +224,7 @@
       "evidence_level": "L2_IMPLEMENTATION",
       "verified": true,
       "suite_passed": true,
-      "duration_s": 0.206,
+      "duration_s": 0.165,
       "component": "01_KISH_ENGINE"
     },
     {
@@ -234,7 +234,7 @@
       "evidence_level": "L2_IMPLEMENTATION",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 1.67,
+      "duration_s": 1.591,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -244,7 +244,7 @@
       "evidence_level": "L4_EXPERIMENTAL",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 0.197,
+      "duration_s": 0.219,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -254,7 +254,7 @@
       "evidence_level": "L3_ISOLATION",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 1.26,
+      "duration_s": 1.471,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -264,7 +264,7 @@
       "evidence_level": "L4_EXPERIMENTAL",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 0.719,
+      "duration_s": 0.785,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -274,7 +274,7 @@
       "evidence_level": "L4_EXPERIMENTAL",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 1.577,
+      "duration_s": 1.724,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -284,7 +284,7 @@
       "evidence_level": "L2_IMPLEMENTATION",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 0.285,
+      "duration_s": 0.349,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -294,7 +294,7 @@
       "evidence_level": "L2_IMPLEMENTATION",
       "verified": true,
       "suite_passed": true,
-      "duration_s": 0.162,
+      "duration_s": 0.147,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -304,7 +304,7 @@
       "evidence_level": "L2_IMPLEMENTATION",
       "verified": true,
       "suite_passed": true,
-      "duration_s": 0.138,
+      "duration_s": 0.145,
       "component": "00_ABZU_KERNEL"
     },
     {
@@ -314,7 +314,7 @@
       "evidence_level": "L3_ISOLATION",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 3.493,
+      "duration_s": 3.89,
       "component": "01_KISH_ENGINE"
     },
     {
@@ -324,7 +324,7 @@
       "evidence_level": "L2_IMPLEMENTATION",
       "verified": true,
       "suite_passed": true,
-      "duration_s": 0.727,
+      "duration_s": 1.126,
       "component": "01_KISH_ENGINE"
     },
     {
@@ -334,7 +334,7 @@
       "evidence_level": "L2_IMPLEMENTATION",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 0.399,
+      "duration_s": 0.505,
       "component": "01_KISH_ENGINE"
     }
   ],
@@ -363,7 +363,7 @@
       "evidence_suite": "python3 scripts/c5_quality_gates/audit_ffi_and_sqlite_hygiene.py && uv run --locked pytest tests/test_claim_l0_007_hygiene.py tests/test_local_core_cortex_connections.py tests/test_database_config_cleanup.py -q",
       "gate_aligned": true,
       "suite_passed": true,
-      "duration_s": 4.197
+      "duration_s": 5.273
     },
     {
       "key": "lean4_observable_harness",
@@ -387,7 +387,7 @@
       "evidence_suite": "cargo build --locked -p babylon60_root --lib --features python && uv run --locked pytest tests/test_claim_mcp_006_lifecycle.py -q",
       "gate_aligned": true,
       "suite_passed": true,
-      "duration_s": 6.546
+      "duration_s": 6.682
     },
     {
       "key": "semantic_entropy_and_solver",
@@ -400,7 +400,7 @@
       "evidence_suite": "uv run --locked python3 scripts/c5_quality_gates/audit_ring1_entropy_solver.py && uv run --locked pytest tests/test_claim_ring1_009_entropy_solver.py -q",
       "gate_aligned": true,
       "suite_passed": true,
-      "duration_s": 19.129
+      "duration_s": 19.097
     }
   ]
 }
