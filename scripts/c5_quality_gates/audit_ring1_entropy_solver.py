@@ -16,6 +16,7 @@ Verifies on live sources without mutating historical 2026-10-26 JSON receipts:
 from __future__ import annotations
 
 import argparse
+from concurrent.futures import ThreadPoolExecutor
 import hashlib
 import json
 import math
@@ -210,6 +211,36 @@ def _run_checked(cmd: list[str], cwd: Path, env: dict[str, str] | None = None) -
     }
 
 
+# Use the same package selection for compilation and execution so Cargo can
+# reuse dependency features and linked release test binaries across phases.
+_RELEASE_CMD = ["cargo", "test", "--locked", "--release", "-p", "babylon60-kernel", "-p", "babylon60-compiler"]
+_KERNEL_TARGETS = [
+    "--test",
+    "semantic_entropy_regressions",
+    "--test",
+    "semantic_solver_outcomes",
+    "--test",
+    "stress_semantic_entropy_100k",
+]
+_COMPILER_TARGETS = [
+    "--test",
+    "semantic_solver_adapter",
+    "--test",
+    "solver_trust",
+    "--test",
+    "nemesis_ring1_entropy_solver",
+]
+
+
+def _run_release_suites(repo_root: Path) -> dict[str, Any]:
+    build = _run_checked([*_RELEASE_CMD, *_KERNEL_TARGETS, *_COMPILER_TARGETS, "--no-run", "-q"], repo_root)
+    suites = {"release_build": build}
+    if build["passed"]:
+        for name, targets in (("kernel_release", _KERNEL_TARGETS), ("compiler_nemesis_release", _COMPILER_TARGETS)):
+            suites[name] = _run_checked([*_RELEASE_CMD, *targets, "-q"], repo_root)
+    return suites
+
+
 def run_ring1_audit(
     repo_root: Path = REPO_ROOT,
     *,
@@ -225,58 +256,21 @@ def run_ring1_audit(
 
     suites: dict[str, Any] = {}
     if not static_only:
-        suites["kernel_release"] = _run_checked(
-            [
-                "cargo",
-                "test",
-                "--locked",
-                "-p",
-                "babylon60-kernel",
-                "--release",
-                "--test",
-                "semantic_entropy_regressions",
-                "--test",
-                "semantic_solver_outcomes",
-                "--test",
-                "stress_semantic_entropy_100k",
-                "-q",
-            ],
-            cwd=repo_root,
-        )
-        suites["compiler_nemesis_release"] = _run_checked(
-            [
-                "cargo",
-                "test",
-                "--locked",
-                "-p",
-                "babylon60-compiler",
-                "--release",
-                "--test",
-                "semantic_solver_adapter",
-                "--test",
-                "solver_trust",
-                "--test",
-                "nemesis_ring1_entropy_solver",
-                "-q",
-            ],
-            cwd=repo_root,
-        )
-
-        # Lean 4 zero-axiom model alignment
-        has_lean = shutil.which("lean") is not None
-        if has_lean or require_lean:
-            lean_env = os.environ.copy()
-            lean_env["BABYLON_REQUIRE_LEAN"] = "1"
-            suites["lean4_zero_axiom_alignment"] = _run_checked(
-                [sys.executable, "-m", "pytest", "tests/test_semantic_entropy_lean_alignment.py", "-q"],
-                cwd=repo_root,
-                env=lean_env,
+        with ThreadPoolExecutor(max_workers=1) as executor:
+            lean_future = None
+            if shutil.which("lean") is not None or require_lean:
+                lean_future = executor.submit(
+                    _run_checked,
+                    [sys.executable, "-m", "pytest", "tests/test_semantic_entropy_lean_alignment.py", "-q"],
+                    repo_root,
+                    {**os.environ, "BABYLON_REQUIRE_LEAN": "1"},
+                )
+            suites.update(_run_release_suites(repo_root))
+            suites["lean4_zero_axiom_alignment"] = (
+                lean_future.result()
+                if lean_future is not None
+                else {"status": "SKIPPED_NO_LEAN_TOOLCHAIN", "passed": True}
             )
-        else:
-            suites["lean4_zero_axiom_alignment"] = {
-                "status": "SKIPPED_NO_LEAN_TOOLCHAIN",
-                "passed": True,
-            }
 
         # Audited Z3 binary suite (BLAKE3 pin enforced inside Z3Adapter::solve)
         z3_candidate = os.environ.get("BABYLON_Z3_BIN", "/opt/homebrew/bin/z3")
@@ -285,18 +279,8 @@ def run_ring1_audit(
             z3_env = os.environ.copy()
             z3_env["BABYLON_Z3_BIN"] = z3_candidate
             z3_cmd = [
-                "cargo",
-                "test",
-                "--locked",
-                "-p",
-                "babylon60-compiler",
-                "--release",
-                "--test",
-                "solver_trust",
-                "--test",
-                "semantic_solver_adapter",
-                "--test",
-                "nemesis_ring1_entropy_solver",
+                *_RELEASE_CMD,
+                *_COMPILER_TARGETS,
                 "--no-fail-fast",
                 "--",
                 "--ignored",
@@ -367,7 +351,10 @@ def main() -> int:
         )
         for name, item in report["suites"].items():
             if not item.get("passed", False):
-                print(f"  [SUITE-FAIL] {name}: {item.get('stdout_tail', '')} {item.get('stderr_tail', '')}", file=sys.stderr)
+                print(
+                    f"  [SUITE-FAIL] {name}: {item.get('stdout_tail', '')} {item.get('stderr_tail', '')}",
+                    file=sys.stderr,
+                )
 
     return 0 if report["passed"] else 1
 
