@@ -43,6 +43,20 @@ class BFT_Validator:
             raise PermissionError(f"BFT_CONSENSUS_FAILURE: {valid_votes}/{required_votes} votes. State compromised.")
         return mutation_hash
 
+    def stored_votes_match(self, payload: Mapping[str, object], f: int, proof: bytes | None, digest: str) -> bool:
+        """Check a persisted certificate against the signed mutation and trusted committee."""
+        if not isinstance(proof, bytes):
+            return False
+        try:
+            votes = cbor2.loads(proof)
+            return (
+                isinstance(votes, dict)
+                and canonicalize_cbor(votes) == proof
+                and self.validate_votes(payload, f, votes) == digest
+            )
+        except (ValueError, TypeError, PermissionError, cbor2.CBORDecodeError, cbor2.CBOREncodeError):
+            return False
+
     def validate_fuzzy_opinions(
         self, opinions: Dict[str, Dict[str, float]], weights: Dict[str, float] | None = None
     ) -> Dict[str, float]:

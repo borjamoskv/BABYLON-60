@@ -28,7 +28,7 @@ def _validate_synchronous(synchronous: str) -> str:
     return synchronous
 
 
-def resolve_db_path(db_path: str | Path) -> Path:
+def resolve_db_path(db_path: str | Path, *, create_parent: bool = True) -> Path:
     """Resuelve la ruta de la base de datos a un directorio soberano unificado ~/.babylon60/dbs/
     para erradicar la entropía y proliferación de DBs dispersas en el repositorio."""
     p = Path(db_path)
@@ -40,7 +40,8 @@ def resolve_db_path(db_path: str | Path) -> Path:
     if not babylon_home:
         babylon_home = str(Path.home() / ".babylon60")
     central_dir = Path(babylon_home) / "dbs"
-    central_dir.mkdir(parents=True, exist_ok=True)
+    if create_parent:
+        central_dir.mkdir(parents=True, exist_ok=True)
     return central_dir / p.name
 
 
