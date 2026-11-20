@@ -61,6 +61,11 @@ required = [
     "docs/03_guides/guide_portable_signature.md", "docs/03_guides/guide_agent_workflow.md",
     # Target of the "Matriz de Falsación" links in agent_contracts.md.
     "docs/01_spec/INVARIANTS_RED_TEAM_FALSIFICATION.md",
+    "src/ffi.rs",
+    "src/shared_manifest_core.rs",
+    "src/ffi_oracle.rs",
+    "src/larsa_bft.rs",
+    "00_ABZU_KERNEL/crates/babylon60-kernel/src/shared_manifest.rs",
 ]
 packages = ["01_KISH_ENGINE/babylon60", "02_EDIN_SWARMS/agents_archi", ".agents/skills"]
 # Keep retired namespaces excluded when packaging an older source checkout.

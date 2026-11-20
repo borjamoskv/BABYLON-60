@@ -14,6 +14,7 @@ from __future__ import annotations
 import datetime
 import hashlib
 import json
+import re
 import sqlite3
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple, Union
@@ -615,7 +616,7 @@ def verify_compliance_certificate(
         {
             "valid": bool,
             "signature_valid": bool,
-            "merkle_valid": bool,
+            "merkle_valid": bool | None,  # None when no root was recomputed
             "detail": str,
         }
     """
@@ -633,7 +634,7 @@ def verify_compliance_certificate(
                         return {
                             "valid": False,
                             "signature_valid": False,
-                            "merkle_valid": False,
+                            "merkle_valid": None,
                             "detail": "SCHEMA_INVALID: root element is not a JSON object",
                         }
                     cert = loaded
@@ -641,7 +642,7 @@ def verify_compliance_certificate(
                 return {
                     "valid": False,
                     "signature_valid": False,
-                    "merkle_valid": False,
+                    "merkle_valid": None,
                     "detail": f"FILE_READ_ERROR: {exc}",
                 }
         else:
@@ -652,7 +653,7 @@ def verify_compliance_certificate(
                     return {
                         "valid": False,
                         "signature_valid": False,
-                        "merkle_valid": False,
+                        "merkle_valid": None,
                         "detail": "SCHEMA_INVALID: root element is not a JSON object",
                     }
                 cert = loaded
@@ -660,14 +661,14 @@ def verify_compliance_certificate(
                 return {
                     "valid": False,
                     "signature_valid": False,
-                    "merkle_valid": False,
+                    "merkle_valid": None,
                     "detail": f"INVALID_CERTIFICATE_INPUT: '{cert_dict_or_path}' is neither existing file nor valid JSON",
                 }
     else:
         return {
             "valid": False,
             "signature_valid": False,
-            "merkle_valid": False,
+            "merkle_valid": None,
             "detail": f"UNSUPPORTED_INPUT_TYPE: {type(cert_dict_or_path).__name__}",
         }
 
@@ -687,7 +688,7 @@ def verify_compliance_certificate(
             return {
                 "valid": False,
                 "signature_valid": False,
-                "merkle_valid": False,
+                "merkle_valid": None,
                 "detail": f"SCHEMA_INVALID: missing required field '{rf}'",
             }
 
@@ -696,7 +697,7 @@ def verify_compliance_certificate(
         return {
             "valid": False,
             "signature_valid": False,
-            "merkle_valid": False,
+            "merkle_valid": None,
             "detail": "SCHEMA_INVALID: 'signature' must be a JSON object",
         }
 
@@ -705,7 +706,7 @@ def verify_compliance_certificate(
             return {
                 "valid": False,
                 "signature_valid": False,
-                "merkle_valid": False,
+                "merkle_valid": None,
                 "detail": f"SCHEMA_INVALID: signature block missing '{sf}'",
             }
 
@@ -721,7 +722,7 @@ def verify_compliance_certificate(
         return {
             "valid": False,
             "signature_valid": False,
-            "merkle_valid": False,
+            "merkle_valid": None,
             "detail": f"CANONICALIZATION_ERROR: {exc}",
         }
 
@@ -732,7 +733,7 @@ def verify_compliance_certificate(
             return {
                 "valid": False,
                 "signature_valid": False,
-                "merkle_valid": False,
+                "merkle_valid": None,
                 "detail": "PAYLOAD_HASH_MISMATCH: canonical payload SHA-256 does not match signature header",
             }
 
@@ -745,7 +746,7 @@ def verify_compliance_certificate(
         return {
             "valid": False,
             "signature_valid": False,
-            "merkle_valid": False,
+            "merkle_valid": None,
             "detail": f"SIGNATURE_VERIFICATION_FAILED: {sig_detail}",
         }
 
@@ -756,7 +757,7 @@ def verify_compliance_certificate(
         return {
             "valid": False,
             "signature_valid": True,
-            "merkle_valid": False,
+            "merkle_valid": None,
             "detail": "LIFECYCLE_INVALID: cannot parse 'valid_until' timestamp",
         }
 
@@ -765,7 +766,7 @@ def verify_compliance_certificate(
         return {
             "valid": False,
             "signature_valid": True,
-            "merkle_valid": False,
+            "merkle_valid": None,
             "detail": f"CERTIFICATE_EXPIRED: expired at {cert.get('valid_until')}",
         }
 
@@ -776,7 +777,7 @@ def verify_compliance_certificate(
             return {
                 "valid": False,
                 "signature_valid": True,
-                "merkle_valid": False,
+                "merkle_valid": None,
                 "detail": "CERTIFICATE_REVOKED: status in certificate revocation header is REVOKED",
             }
 
@@ -785,17 +786,23 @@ def verify_compliance_certificate(
         return {
             "valid": False,
             "signature_valid": True,
-            "merkle_valid": False,
+            "merkle_valid": None,
             "detail": f"CERTIFICATE_REVOKED: {cert_id} found in Certificate Revocation List (CRL)",
         }
 
     # 5. Ledger & Merkle Root Verification
-    merkle_valid = True
-    merkle_detail = "STANDALONE_NO_LEDGER_SUPPLIED"
+    expected_root = cert["global_merkle_root"]
+    if not isinstance(expected_root, str) or not re.fullmatch(r"(?:b3:)?[0-9a-fA-F]{64}", expected_root):
+        return {
+            "valid": False,
+            "signature_valid": True,
+            "merkle_valid": None,
+            "detail": "INVALID_MERKLE_ROOT_FORMAT",
+        }
 
+    merkle_valid = None
+    merkle_detail = "STANDALONE_NO_LEDGER_SUPPLIED"
     if ledger_path is not None:
-        # User explicitly supplied a ledger
-        expected_root = cert.get("global_merkle_root", "")
         ev_res = verify_offline_evidence(ledger_path, expected_merkle_root=expected_root)
         if not ev_res["verified"]:
             return {
@@ -804,23 +811,18 @@ def verify_compliance_certificate(
                 "merkle_valid": False,
                 "detail": f"LEDGER_VERIFICATION_FAILED: {ev_res['detail']}",
             }
-        merkle_valid = True
-        merkle_detail = f"LEDGER_VERIFIED: {ev_res['detail']}"
-    else:
-        # Validate format of global_merkle_root
-        g_root = cert.get("global_merkle_root", "")
-        if not isinstance(g_root, str) or len(g_root) != 64:
-            return {
-                "valid": False,
-                "signature_valid": True,
-                "merkle_valid": False,
-                "detail": f"INVALID_MERKLE_ROOT_FORMAT: expected 64 hex characters, got '{g_root}'",
-            }
+        if ev_res["integrity_verified"]:
+            merkle_valid = True
+            merkle_detail = f"LEDGER_VERIFIED: {ev_res['detail']}"
+        else:
+            merkle_detail = ev_res["detail"]
 
     return {
         "valid": True,
         "signature_valid": True,
         "merkle_valid": merkle_valid,
+        "regulatory_assessment": cert.get("regulatory_assessment", "NOT_PROVIDED"),
+        "legal_conformity": cert.get("legal_conformity", "NOT_PROVIDED"),
         "detail": f"CERTIFICATE_VALID_AND_VERIFIED ({merkle_detail})",
     }
 

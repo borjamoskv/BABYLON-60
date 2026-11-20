@@ -192,6 +192,16 @@ def test_plan_artifact_approval_inheritance_and_anti_nagging_suppression(tmp_pat
     assert v2.constitutional_notice is None
 
 
+def test_route_results_keep_selector_and_request_data_independent() -> None:
+    first = evaluate_universal_route("Orchestrator (Argon)", "Orchestrator", "Edita primero.py")
+    first.active["tier"] = 99
+    first.signals["task_text"] = "changed"
+    second = evaluate_universal_route("Orchestrator (Argon)", "Orchestrator", "Edita segundo.py")
+    assert second.active["tier"] == 2
+    assert second.signals["task_text"] == "Edita segundo.py"
+    assert second.receipt_hmac != first.receipt_hmac
+
+
 def test_cross_platform_hygiene_and_sub_100us_latency() -> None:
     src_path = kish_root / "babylon60" / "cognitive_pilot" / "universal_autoroute.py"
     source_code = src_path.read_text(encoding="utf-8")

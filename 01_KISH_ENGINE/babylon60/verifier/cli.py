@@ -116,7 +116,7 @@ def main(argv: Optional[List[str]] = None) -> int:
                     {
                         "valid": False,
                         "signature_valid": False,
-                        "merkle_valid": False,
+                        "merkle_valid": None,
                         "detail": f"CERT_FILE_NOT_FOUND: '{args.cert}'",
                     },
                     indent=2,
@@ -130,27 +130,30 @@ def main(argv: Optional[List[str]] = None) -> int:
         crl_list = parse_crl_arg(args.crl)
     except ValueError as exc:
         if args.json:
-            print(json.dumps({"valid": False, "signature_valid": False, "merkle_valid": False, "detail": str(exc)}))
+            print(json.dumps({"valid": False, "signature_valid": False, "merkle_valid": None, "detail": str(exc)}))
         else:
             print(f"[✗] {exc}", file=sys.stderr)
         return 1
-    result = verify_compliance_certificate(
-        cert_dict_or_path=cert_path,
-        ledger_path=args.ledger,
-        crl=crl_list,
-    )
+    try:
+        with cert_path.open(encoding="utf-8") as stream:
+            cert_summary = json.load(stream)
+        if not isinstance(cert_summary, dict):
+            raise ValueError("certificate must be a JSON object")
+    except (OSError, ValueError) as exc:
+        detail = f"CERT_READ_ERROR: {exc}"
+        if args.json:
+            print(json.dumps({"valid": False, "signature_valid": False, "merkle_valid": None, "detail": detail}))
+        else:
+            print(f"[✗] {detail}", file=sys.stderr)
+        return 1
 
+    result = verify_compliance_certificate(cert_summary, ledger_path=args.ledger, crl=crl_list)
     if args.json:
         print(json.dumps(result, indent=2))
         return 0 if result["valid"] else 1
-
-    # Load certificate summary info for visual report
-    cert_summary = {}
-    try:
-        with open(cert_path, "r", encoding="utf-8") as f:
-            cert_summary = json.load(f)
-    except Exception:
-        pass
+    if not result["valid"]:
+        print(f"[✗] CERTIFICATE VERIFICATION FAILED: {result['detail']}")
+        return 1
 
     cert_id = cert_summary.get("certificate_id", "UNKNOWN")
     system_id = cert_summary.get("system_identifier", "UNKNOWN")
@@ -161,11 +164,6 @@ def main(argv: Optional[List[str]] = None) -> int:
     sig_block = cert_summary.get("signature", {})
     algorithm = sig_block.get("algorithm", "Ed25519")
     pubkey = sig_block.get("public_key", "UNKNOWN")
-
-    is_valid = result["valid"]
-    sig_valid = result["signature_valid"]
-    merkle_valid = result["merkle_valid"]
-    detail = result["detail"]
 
     sep = "=" * 72
     print(sep)
@@ -182,27 +180,16 @@ def main(argv: Optional[List[str]] = None) -> int:
         print(f"  Underlying Ledger  : {args.ledger}")
     print("-" * 72)
 
-    def status_icon(ok: bool) -> str:
-        return "[✓] PASS" if ok else "[✗] FAIL"
-
-    print(f"  {status_icon(True)} Schema Integrity          : Valid canonical compliance envelope")
-    print(
-        f"  {status_icon(sig_valid)} Ed25519 Cryptographic Sig : {'VALID & UNTAMPERED' if sig_valid else 'FAILED / CORRUPTED'}"
-    )
-    print(
-        f"  {status_icon(merkle_valid)} Merkle Evidence Root      : {'VERIFIED MATCH' if merkle_valid else 'MISMATCH OR UNVERIFIED'}"
-    )
-    print(f"  {status_icon(is_valid)} Lifecycle & Revocation    : {detail}")
-    print("-" * 72)
-
-    if is_valid:
-        print("  VERDICT: [✓] CERTIFICATE IS CRYPTOGRAPHICALLY VALID AND COMPLIANT")
-        print(sep)
-        return 0
+    print("  [✓] Ed25519 signature verified")
+    if result["merkle_valid"] is True:
+        print("  [✓] Merkle Evidence Root: VERIFIED MATCH")
     else:
-        print("  VERDICT: [✗] CERTIFICATE VERIFICATION FAILED (NON-COMPLIANT / TAMPERED)")
-        print(sep)
-        return 1
+        print(f"  [–] Merkle Evidence Root: NOT RECOMPUTED ({result['detail']})")
+    print(f"  Reported regulatory assessment: {result['regulatory_assessment']}")
+    print(f"  Reported legal conformity: {result['legal_conformity']}")
+    print("  VERDICT: [✓] CERTIFICATE SIGNATURE AND LIFECYCLE CHECKS PASSED")
+    print(sep)
+    return 0
 
 
 if __name__ == "__main__":

@@ -898,6 +898,9 @@ def cmd_transduce(args: argparse.Namespace) -> int:
 
 def cmd_run(args: argparse.Namespace) -> int:
     """Run an agent command under OS read confinement (Landlock or Seatbelt)."""
+    if sys.platform not in {"darwin", "linux"}:
+        print("Confinement requires Linux or macOS.", file=sys.stderr)
+        return 1
     from babylon60.confine.cli import run_command
 
     return run_command(args)
@@ -905,6 +908,9 @@ def cmd_run(args: argparse.Namespace) -> int:
 
 def cmd_log(args: argparse.Namespace) -> int:
     """Show and verify the chained confinement journal."""
+    if sys.platform not in {"darwin", "linux"}:
+        print("Confinement requires Linux or macOS.", file=sys.stderr)
+        return 1
     from babylon60.confine.cli import log_command
 
     return log_command(args)
@@ -1346,7 +1352,7 @@ def main() -> None:
     p_doctor.add_argument("--json", action="store_true", help="Return readiness checks as JSON")
     p_doctor.set_defaults(func=cmd_doctor)
 
-    from babylon60.confine.cli import register_confine_subparsers
+    from babylon60.confine.arguments import register_confine_subparsers
 
     register_confine_subparsers(subparsers, cmd_run, cmd_log)
 

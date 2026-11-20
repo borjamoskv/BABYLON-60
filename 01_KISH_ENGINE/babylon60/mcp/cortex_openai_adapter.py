@@ -24,6 +24,9 @@ import httpx
 from babylon60.mcp.cortex_ptc_ralph import _safe_ident, render_mcp_tools_sdk_py
 
 
+MAX_DISCOVERY_PAGES = 256
+
+
 class ProjectionError(ValueError):
     """The original descriptor or call cannot be represented without loss."""
 
@@ -137,7 +140,7 @@ class CortexOpenAIAdapter:
         descriptors: list[dict[str, Any]] = []
         cursor: str | None = None
         seen: set[str] = set()
-        while True:
+        for _ in range(MAX_DISCOVERY_PAGES):
             page = await session.list_tools(params=PaginatedRequestParams(cursor=cursor) if cursor else None)
             data = page.model_dump(mode="json", by_alias=True, exclude_none=False)
             descriptors.extend(tool for tool in data["tools"] if tool["name"] in wanted)
@@ -147,6 +150,8 @@ class CortexOpenAIAdapter:
             if cursor in seen:
                 raise ProjectionError("MCP tools/list repeated its cursor")
             seen.add(cursor)
+        else:
+            raise ProjectionError(f"MCP tools/list exceeded {MAX_DISCOVERY_PAGES} pages")
         if {tool["name"] for tool in descriptors} != wanted:
             raise ProjectionError("An allowed tool is missing from tools/list")
         return cls(session, descriptors, metadata=metadata)

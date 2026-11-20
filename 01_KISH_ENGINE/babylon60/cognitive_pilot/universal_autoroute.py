@@ -13,7 +13,8 @@ proveedores, idiomas humanos o clientes IDE concretos, cumpliendo:
 from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
-from dataclasses import asdict, dataclass, field
+from dataclasses import dataclass, field
+from functools import lru_cache
 import hashlib
 import hmac
 import json
@@ -373,6 +374,18 @@ def _infer_family_and_locality(model_low: str) -> tuple[str, str, float]:
 
 def classify_universal_capability(model: str, mode: str) -> dict[str, object]:
     """Clasifica cualquier par (LLM, Modo) separando Estrato de Pesos y Nivel de Razonamiento."""
+    # Each verdict owns its dictionary. Only bounded selector metadata is reused.
+    if len(model) + len(mode) > 256:
+        return _classify_selector(model, mode)
+    return _cached_selector(model, mode).copy()
+
+
+@lru_cache(maxsize=128)
+def _cached_selector(model: str, mode: str) -> dict[str, object]:
+    return _classify_selector(model, mode)
+
+
+def _classify_selector(model: str, mode: str) -> dict[str, object]:
     m_low = model.casefold().strip()
     mode_low = mode.casefold().strip()
 
@@ -767,45 +780,8 @@ def infer_universal_target(
     contains_unredacted_secrets: bool = False,
 ) -> CapabilityTarget:
     """Proyecta la tarea sobre el Álgebra Universal de Capacidades."""
-    if task_tier:
-        t_norm = task_tier.casefold().strip()
-        if t_norm in {"1", "fast", "triage", "triaje"}:
-            return CapabilityTarget(
-                tier=1,
-                effort="fast",
-                reasoning_effort="fast",
-                topology="direct",
-                label="Estrato 1 (Triaje / Fast)",
-                acceptable_tiers=(1,),
-            )
-        if t_norm in {"2", "2-low", "low", "bajo"}:
-            return CapabilityTarget(
-                tier=2,
-                effort="low",
-                reasoning_effort="low",
-                topology="two_phase_contract",
-                label="Estrato 2 (Ejecución Acotada / Low)",
-                acceptable_tiers=(2,),
-            )
-        if t_norm in {"2-medium", "medium", "medio"}:
-            return CapabilityTarget(
-                tier=2,
-                effort="medium",
-                reasoning_effort="medium",
-                topology="native_orchestrator",
-                label="Estrato 2 (Ejecución Acotada / Medium)",
-                acceptable_tiers=(2, 3),
-            )
-        if t_norm in {"3", "high", "xhigh", "x-high", "extra", "alto", "max", "apex"}:
-            return CapabilityTarget(
-                tier=3,
-                effort="high",
-                reasoning_effort="high",
-                topology="direct",
-                label="Estrato 3 (Razonamiento Profundo / High)",
-                acceptable_tiers=(3,),
-            )
-
+    if task_tier and (override := _explicit_tier_target(task_tier)) is not None:
+        return override
     signals = extract_structural_signals(
         task_text,
         files_count=files_count,
@@ -815,7 +791,51 @@ def infer_universal_target(
         infra_blocked=infra_blocked,
         contains_unredacted_secrets=contains_unredacted_secrets,
     )
+    return _target_from_signals(signals)
 
+
+def _explicit_tier_target(task_tier: str) -> CapabilityTarget | None:
+    t_norm = task_tier.casefold().strip()
+    if t_norm in {"1", "fast", "triage", "triaje"}:
+        return CapabilityTarget(
+            tier=1,
+            effort="fast",
+            reasoning_effort="fast",
+            topology="direct",
+            label="Estrato 1 (Triaje / Fast)",
+            acceptable_tiers=(1,),
+        )
+    if t_norm in {"2", "2-low", "low", "bajo"}:
+        return CapabilityTarget(
+            tier=2,
+            effort="low",
+            reasoning_effort="low",
+            topology="two_phase_contract",
+            label="Estrato 2 (Ejecución Acotada / Low)",
+            acceptable_tiers=(2,),
+        )
+    if t_norm in {"2-medium", "medium", "medio"}:
+        return CapabilityTarget(
+            tier=2,
+            effort="medium",
+            reasoning_effort="medium",
+            topology="native_orchestrator",
+            label="Estrato 2 (Ejecución Acotada / Medium)",
+            acceptable_tiers=(2, 3),
+        )
+    if t_norm in {"3", "high", "xhigh", "x-high", "extra", "alto", "max", "apex"}:
+        return CapabilityTarget(
+            tier=3,
+            effort="high",
+            reasoning_effort="high",
+            topology="direct",
+            label="Estrato 3 (Razonamiento Profundo / High)",
+            acceptable_tiers=(3,),
+        )
+    return None
+
+
+def _target_from_signals(signals: StructuralSignals) -> CapabilityTarget:
     # 0. Invariante de Soberanía Local (S0_LOCAL_AIRGAP)
     if signals.sovereignty == "local_airgap":
         return CapabilityTarget(
@@ -1124,16 +1144,8 @@ def evaluate_universal_route(
         infra_blocked=infra_blocked,
         contains_unredacted_secrets=contains_unredacted_secrets,
     )
-    target = infer_universal_target(
-        task_text,
-        files_count=files_count,
-        has_contract=has_contract,
-        task_tier=task_tier,
-        context_tokens=context_tokens,
-        rework_failures=rework_failures,
-        infra_blocked=infra_blocked,
-        contains_unredacted_secrets=contains_unredacted_secrets,
-    )
+    override = _explicit_tier_target(task_tier) if task_tier else None
+    target = override or _target_from_signals(signals)
     optimal_dict = {
         "tier": target.tier,
         "effort": target.effort,
@@ -1175,7 +1187,7 @@ def evaluate_universal_route(
             notice_suppressed=False,
             cache_preserved=True,
             sdk_guardrails=sdk_guardrails,
-            signals=asdict(signals),
+            signals=vars(signals).copy(),
             receipt_hmac=receipt,
             latency_ns=t1 - t0,
             llm_field="No expuesto",
@@ -1208,7 +1220,7 @@ def evaluate_universal_route(
             notice_suppressed=False,
             cache_preserved=False,
             sdk_guardrails=sdk_guardrails,
-            signals=asdict(signals),
+            signals=vars(signals).copy(),
             receipt_hmac=receipt,
             latency_ns=t1 - t0,
             llm_field=f"{model} ({source} — DESAJUSTADO -> Óptimo: {target.label})",
@@ -1251,7 +1263,7 @@ def evaluate_universal_route(
             notice_suppressed=False,
             cache_preserved=True,
             sdk_guardrails=sdk_guardrails,
-            signals=asdict(signals),
+            signals=vars(signals).copy(),
             receipt_hmac=receipt,
             latency_ns=t1 - t0,
             llm_field=f"{model} ({source} — ÓPTIMO: {active['label']})",
@@ -1289,7 +1301,7 @@ def evaluate_universal_route(
             notice_suppressed=suppressed,
             cache_preserved=True,
             sdk_guardrails=sdk_guardrails,
-            signals=asdict(signals),
+            signals=vars(signals).copy(),
             receipt_hmac=receipt,
             latency_ns=t1 - t0,
             llm_field=f"{model} ({source} — ÓPTIMO: {active['label']})",
@@ -1347,7 +1359,7 @@ def evaluate_universal_route(
         notice_suppressed=suppressed,
         cache_preserved=cache_preserved,
         sdk_guardrails=sdk_guardrails,
-        signals=asdict(signals),
+        signals=vars(signals).copy(),
         receipt_hmac=receipt,
         latency_ns=t1 - t0,
         llm_field=f"{model} ({source} — DESAJUSTADO -> Óptimo: {target.label})",

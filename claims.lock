@@ -1,10 +1,10 @@
 {
   "format": "babylon60.claims.lock.v1",
   "version": "5.1.0",
-  "commit": "9a8aee1bc3d89893b8c0292790088b21df4b182e",
-  "source_tree_digest": "161eed7b53cd5c728eb9a55c96c39e0c436aeaa61d3de9e7ea19456ba751e7ea",
-  "timestamp": "2026-11-17T18:08:29Z",
-  "claims_manifest_digest": "b77c0ceef5cebf9a2f57c4d5eeefc0e64ab31b573fe74b346f5e9aae23c19e10",
+  "commit": "52249211f40b41d1e4db7964bd4c1256866f144b",
+  "source_tree_digest": "df53a2d421cd439ab7af58768db496cb34a8415769c02962a8e63997144dbcf1",
+  "timestamp": "2026-11-20T05:40:28Z",
+  "claims_manifest_digest": "6b73bd3fe2be1f2b4bdc7df80d5ef4203e32f67656f8008d03e399897bc20606",
   "evidence_root": "sha3-256:0a01b0fd3aa81dc3171a8a9e8d84803aef7ee0235510cdddd2b260d54484d03d",
   "claims_pinned": {
     "inv_01_manifest_layout": {

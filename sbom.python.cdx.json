@@ -698,17 +698,17 @@
       "version": "2.56.3"
     },
     {
-      "bom-ref": "pkg:pypi/google-genai@2.17.0",
+      "bom-ref": "pkg:pypi/google-genai@2.34.0",
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "6b640a2390c82b4a240873eddb9f518c6d2c33244b2de16ed3d14526a6da7f57"
+          "content": "8e182cf3f73384167b96861cf0aef5102b5070f2db1ea11002879e913806ef37"
         }
       ],
       "name": "google-genai",
-      "purl": "pkg:pypi/google-genai@2.17.0",
+      "purl": "pkg:pypi/google-genai@2.34.0",
       "type": "library",
-      "version": "2.17.0"
+      "version": "2.34.0"
     },
     {
       "bom-ref": "pkg:pypi/griffelib@2.1.0",
@@ -2649,7 +2649,7 @@
       },
       {
         "name": "babylon60:lockfile_sha256",
-        "value": "75efd04de9e269ee96cd9f748ef947b6983e3c688c96351ead5b01dd68e67260"
+        "value": "33d5aeb7c03eb8799d6fa444ff957677fa596830ab34c6a13c4353e4ea5f798d"
       }
     ]
   },

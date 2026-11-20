@@ -269,3 +269,41 @@ async def test_actor_concurrent_reads_use_consistent_snapshots(tmp_path):
         assert (await actor.get_checkpoint()).entries == 49
     finally:
         await asyncio.wait_for(actor.stop(), timeout=5)
+
+
+@pytest.mark.asyncio
+async def test_actor_attestation_keeps_snapshot_across_concurrent_commit(tmp_path, monkeypatch):
+    import aiosqlite
+
+    actor = BFTLedgerActor(tmp_path / "attestation.db")
+    await actor.start()
+    first = LedgerEvent("test", "a", "created", {}, "test", "fixture", "events", "a")
+    second = replace(first, entity_id="b", source_pk="b")
+    try:
+        await actor.append(first)
+        # Drain the previous append and its trailing WAL checkpoint before opening the reader.
+        await actor.stop()
+        await actor.start()
+        before = await actor.get_state_attestation()
+        original_fetchone = aiosqlite.Cursor.fetchone
+        committed = False
+
+        async def fetchone(cursor):
+            nonlocal committed
+            row = await original_fetchone(cursor)
+            if not committed and cursor.description[0][0] == "COUNT(*)":
+                committed = True
+                await actor.append(second)
+            return row
+
+        monkeypatch.setattr(aiosqlite.Cursor, "fetchone", fetchone)
+        during = await asyncio.wait_for(actor.get_state_attestation(), timeout=5)
+        assert committed
+        assert during["integrity_verified"]
+        for key in ("total_entries", "max_seq", "max_lamport", "merkle_root", "mmr_root"):
+            assert during[key] == before[key]
+        after = await actor.get_state_attestation()
+        assert after["total_entries"] == after["max_seq"] == 2
+        assert after["merkle_root"] != during["merkle_root"]
+    finally:
+        await actor.stop()

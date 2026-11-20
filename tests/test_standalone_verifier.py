@@ -56,7 +56,7 @@ def test_verify_valid_certificate_standalone(sample_bundle_dir: str) -> None:
     result = verify_compliance_certificate(cert)
     assert result["valid"] is True
     assert result["signature_valid"] is True
-    assert result["merkle_valid"] is True
+    assert result["merkle_valid"] is None
     assert "CERTIFICATE_VALID_AND_VERIFIED" in result["detail"]
 
 
@@ -77,7 +77,7 @@ def test_verify_valid_certificate_from_file(sample_bundle_dir: str) -> None:
         result = verify_compliance_certificate(cert_file)
         assert result["valid"] is True
         assert result["signature_valid"] is True
-        assert result["merkle_valid"] is True
+        assert result["merkle_valid"] is None
     finally:
         if os.path.exists(cert_file):
             os.remove(cert_file)
@@ -259,7 +259,7 @@ def test_adversarial_mismatched_ledger(sample_bundle_dir: str) -> None:
         assert "LEDGER_VERIFICATION_FAILED" in res["detail"]
 
 
-def test_cli_execution_valid_and_invalid(sample_bundle_dir: str) -> None:
+def test_cli_execution_valid_and_invalid(sample_bundle_dir: str, capsys: pytest.CaptureFixture[str]) -> None:
     """Verifica que babylon-verify CLI emite códigos de salida correctos (0 para válido, 1 para inválido)."""
     exporter = EUAIActComplianceExporter(artifact_bundle_path=sample_bundle_dir)
     cert = exporter.generate_certificate(system_id="SYS-CLI-07", operator_name="Test Corp")
@@ -272,10 +272,26 @@ def test_cli_execution_valid_and_invalid(sample_bundle_dir: str) -> None:
         # CLI sobre certificado válido -> exit code 0
         code_valid = cli_main(["--cert", valid_cert_path, "--quiet"])
         assert code_valid == 0
+        output = capsys.readouterr().out
+        assert "NOT RECOMPUTED" in output
+        assert "Reported legal conformity: NOT_DETERMINED" in output
+        assert "Reported regulatory assessment: PENDING_REVIEW" in output
+        assert "AND COMPLIANT" not in output
 
         # CLI con --json
         code_json = cli_main(["--cert", valid_cert_path, "--json"])
         assert code_json == 0
+        result = json.loads(capsys.readouterr().out)
+        assert result["merkle_valid"] is None
+        assert result["signature_valid"] is True
+        assert result["regulatory_assessment"] == "PENDING_REVIEW"
+        manifest_path = os.path.join(sample_bundle_dir, "manifest.json")
+        with open(manifest_path, "w", encoding="utf-8") as manifest:
+            json.dump({"global_hash": cert["global_merkle_root"]}, manifest)
+        assert cli_main(["--cert", valid_cert_path, "--ledger", manifest_path, "--json"]) == 0
+        commitment_only = json.loads(capsys.readouterr().out)
+        assert commitment_only["merkle_valid"] is None
+        assert "NO_CONTENT_VERIFICATION" in commitment_only["detail"]
 
         # Crear certificado manipulado
         tampered = dict(cert)
