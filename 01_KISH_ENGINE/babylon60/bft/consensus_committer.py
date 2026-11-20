@@ -10,6 +10,7 @@ import os
 import stat
 from typing import Dict, Mapping
 from dataclasses import dataclass
+from babylon60.bft.consensus_validator import BFT_Validator
 from babylon60.database import core as database_core
 from babylon60.core.crypto_utils import canonicalize_cbor, hash_sha3_256
 
@@ -142,7 +143,15 @@ class BFT_Committer:
             if name not in columns:
                 self.conn.execute(f"ALTER TABLE state_log ADD COLUMN {name} {sql_type}")
 
-    def commit_mutation(self, mutation: StateMutation, mutation_hash: str, f: int, signatures: Dict[str, str]) -> bool:
+    def commit_mutation(
+        self,
+        mutation: StateMutation,
+        mutation_hash: str,
+        f: int,
+        signatures: Dict[str, str],
+        *,
+        validator: BFT_Validator | None = None,
+    ) -> bool:
         self.require_autocommit()
         expected = (
             canonicalize_cbor(mutation.payload),
@@ -160,8 +169,16 @@ class BFT_Committer:
         try:
             existing = self.conn.execute(select_record, (mutation_hash,)).fetchone()
             if existing is not None:
-                if existing[1:] != expected:
-                    raise ValueError(f"Fail-fast: INV_BFT_04 Collision for mutation_hash {mutation_hash}")
+                collision = f"Fail-fast: INV_BFT_04 Collision for mutation_hash {mutation_hash}"
+                if existing[1:-1] != expected[:-1]:
+                    raise ValueError(collision)
+                if existing[-1] != expected[-1]:
+                    # A retry can carry a different certificate for the same mutation.
+                    # Authenticate the original certificate before acknowledging the row.
+                    if validator is None or not validator.stored_votes_match(
+                        mutation.signing_payload(f), f, existing[-1], mutation_hash
+                    ):
+                        raise ValueError(collision)
                 self.conn.commit()
                 return True
             changes_before = self.conn.total_changes
@@ -190,12 +207,14 @@ class BFT_Committer:
             raise
 
     def get_audit_rows(self) -> list[AuditRow] | None:
-        cursor = self.conn.cursor()
-        try:
-            cursor.execute(
-                "SELECT id, mutation_hash, agent_id, payload, ts, causal_taint, fault_budget, quorum_votes "
-                "FROM state_log ORDER BY id"
-            )
-            return cursor.fetchall()
-        except sqlite3.OperationalError:
-            return None
+        return read_audit_rows(self.conn)
+
+
+def read_audit_rows(conn: sqlite3.Connection) -> list[AuditRow] | None:
+    try:
+        return conn.execute(
+            "SELECT id, mutation_hash, agent_id, payload, ts, causal_taint, fault_budget, quorum_votes "
+            "FROM state_log ORDER BY id"
+        ).fetchall()
+    except sqlite3.OperationalError:
+        return None
