@@ -27,6 +27,27 @@ VECTORS = json.loads((ROOT / "tests/fixtures/cortex_ptc_presence.json").read_tex
 TOOL = {"name": VECTORS["tool"], "inputSchema": VECTORS["schema"]}
 
 
+@pytest.mark.asyncio
+@pytest.mark.parametrize("last_cursor", [None, "more"])
+async def test_discovery_page_budget(monkeypatch, last_cursor):
+    from unittest.mock import AsyncMock
+    from mcp.types import ListToolsResult, Tool
+    from babylon60.mcp import cortex_openai_adapter
+
+    monkeypatch.setattr(cortex_openai_adapter, "MAX_DISCOVERY_PAGES", 2)
+    session = AsyncMock()
+    session.list_tools.side_effect = [
+        ListToolsResult(tools=[Tool(**TOOL)], nextCursor="next"),
+        ListToolsResult(tools=[], nextCursor=last_cursor),
+    ]
+    if last_cursor:
+        with pytest.raises(ProjectionError, match="exceeded 2 pages"):
+            await CortexOpenAIAdapter.discover(session, allowed_tools=[TOOL["name"]])
+    else:
+        await CortexOpenAIAdapter.discover(session, allowed_tools=[TOOL["name"]])
+    assert session.list_tools.await_count == 2
+
+
 @asynccontextmanager
 async def note_session(observation: Path):
     async with cortex_stdio_session(

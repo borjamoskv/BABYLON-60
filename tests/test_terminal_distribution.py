@@ -41,6 +41,11 @@ def fixture_tree(tmp_path):
         "docs/03_guides/guide_portable_signature.md",
         "docs/03_guides/guide_agent_workflow.md",
         "docs/01_spec/INVARIANTS_RED_TEAM_FALSIFICATION.md",
+        "src/ffi.rs",
+        "src/shared_manifest_core.rs",
+        "src/ffi_oracle.rs",
+        "src/larsa_bft.rs",
+        "00_ABZU_KERNEL/crates/babylon60-kernel/src/shared_manifest.rs",
     ]:
         (root / rel).parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(ROOT / rel, root / rel)

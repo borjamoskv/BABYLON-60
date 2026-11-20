@@ -260,10 +260,7 @@ fn main() {
     let mut p_slot = PayloadSlot::zeroed();
 
     // 1. Consumidor FFI fija su pin en tick 100
-    poison_manifest
-        .reader_pin
-        .ffi_reader_pin_tick
-        .store(100, Ordering::Release);
+    poison_manifest.ffi_pin(100);
 
     // 2. Productor avanza dentro de tolerancia (delta = 50 <= 64)
     p_slot.logical_tick = 150;
@@ -278,10 +275,10 @@ fn main() {
         Err(POISON_SENTINEL),
         "FAIL: Productor no disparó apoptosis asimétrica"
     );
+    poison_manifest.ffi_unpin();
     let ctl = poison_manifest
-        .writer_ctl
-        .control_word
-        .load(Ordering::Acquire);
+        .check_or_trigger_apoptosis(170)
+        .expect_err("terminal state must persist after releasing the pin");
     assert_eq!(ctl, POISON_SENTINEL);
     assert_ne!(ctl & POISON_BIT, 0, "FAIL: POISON_BIT no está activo");
     println!("  > Productor tick 170 (delta = 70 > 64): Apoptosis disparada (POISON_SENTINEL = 0x{:016X})", POISON_SENTINEL);
