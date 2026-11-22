@@ -39,7 +39,7 @@ jobs:
       - uses: arduino/setup-protoc@c65c819552d16ad3c9b72d9dfd5ba5237b9c906b
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78
+      - uses: astral-sh/setup-uv@1db35dd8eee11c5894872e0b383ae6c406cf738d
       - run: uv sync --locked --extra dev --extra gemini
 
       - name: Cache elan + toolchains

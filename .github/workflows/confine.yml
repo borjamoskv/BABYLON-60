@@ -38,7 +38,7 @@ jobs:
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
         with:
           python-version: '3.12'
-      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78
+      - uses: astral-sh/setup-uv@1db35dd8eee11c5894872e0b383ae6c406cf738d
       - run: uv sync --locked --extra dev
       - name: Landlock confinement tests (unprivileged runner user)
         # The -q -rsxX log names failures, xfails and xpasses, gives a skip's place and reason but not its
@@ -68,7 +68,7 @@ jobs:
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
         with:
           python-version: '3.12'
-      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78
+      - uses: astral-sh/setup-uv@1db35dd8eee11c5894872e0b383ae6c406cf738d
       - run: uv sync --locked --extra dev
       - name: Seatbelt confinement tests
         # The -q -rsxX log names failures, xfails and xpasses, gives a skip's place and reason but not its
