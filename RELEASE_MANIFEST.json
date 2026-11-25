@@ -3,16 +3,16 @@
   "release": "5.1.0",
   "version": "5.1.0",
   "state": "candidate",
-  "commit": "9fab86010522a3990e9b311b36fe0e13a5fbb191",
-  "source_tree_digest": "591c2ab48de06952aa446ffef8eab4e09a35e43f971d4a2eed7d3358152d49ac",
+  "commit": "5c67b42cfd5ff1812235a2d480e470f36dcab025",
+  "source_tree_digest": "bd8f2999991e4e972979abab1a0bd52cefdfe8c2802e23f63b6cc5c817c98e59",
   "axiom_root": "AX-0: No stochastic component may authorize its own irreversible effects (LLM != authority)",
   "claims_manifest_digest": "4fe991ad35b0451a32fd766f26269341e8695f9d631f95a6b3c8067d0d2110be",
-  "compiled_at_iso": "2026-11-25T17:43:08Z",
+  "compiled_at_iso": "2026-11-25T18:20:48Z",
   "prior_release": {
     "version": "5.1.0",
-    "commit": "9be5f04d8d04f6a23f1f1695e723e61fa4df038e",
+    "commit": "9fab86010522a3990e9b311b36fe0e13a5fbb191",
     "manifest_schema": "babylon60.release.v5",
-    "manifest_sha256": "f31aecda684a204b9118084f0c7c72f230bb2a006c9327e313c2aec96702989a"
+    "manifest_sha256": "ec09e709ad1f6a8c1c5815c38e26ead369facdd9c8dbd49182f12a60842a3fe6"
   },
   "version_sync": {
     "babylon_toml": "5.1.0",
