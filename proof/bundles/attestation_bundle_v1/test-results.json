@@ -1,0 +1,12 @@
+{
+  "gates": {
+    "copy_lint": "PASS",
+    "link_checker": "PASS",
+    "evidence_validator": "PASS",
+    "claims_total": 21,
+    "claims_supported": 8,
+    "invariants_stale": 6
+  },
+  "timestamp": 1791134309,
+  "scope": "Local snapshot evaluation"
+}

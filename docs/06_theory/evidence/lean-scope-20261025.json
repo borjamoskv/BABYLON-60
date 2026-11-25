@@ -1,0 +1,784 @@
+{
+  "date": "2026-10-25",
+  "toolchain": "leanprover/lean4:v4.34.0-rc2",
+  "scope": "23 direct Lean files, comments-only changes; individual elaboration with appended #print axioms; no execution of main",
+  "source_inventory": [
+    {
+      "file": "AX0.lean",
+      "lines": 180,
+      "imports": [],
+      "theorems": [
+        "auth_001_valid_execution",
+        "auth_001_reject_double_dispatch",
+        "auth_001_reject_illegal_dispatch",
+        "auth_001_crash_recovery",
+        "max_dispatches_from_state",
+        "auth_001_universal_inductive_safety"
+      ],
+      "axiom_declarations": [],
+      "event_literals": 0
+    },
+    {
+      "file": "AcsEnvelope.lean",
+      "lines": 363,
+      "imports": [
+        "CanonicalEnvelope"
+      ],
+      "theorems": [
+        "B60.ACS.typedCose_decode_encode",
+        "B60.ACS.typedCose_encode_decode",
+        "B60.ACS.typedCose_decode_valid",
+        "B60.ACS.typedSignature_decode_encode",
+        "B60.ACS.typedSignature_encode_decode",
+        "B60.ACS.typedSignature_decode_valid",
+        "B60.ACS.call_decoded_valid",
+        "B60.ACS.grant_decoded_valid",
+        "B60.ACS.forensic_decoded_valid",
+        "B60.ACS.call_decode_encode",
+        "B60.ACS.grant_decode_encode",
+        "B60.ACS.forensic_decode_encode",
+        "B60.ACS.call_encode_decode",
+        "B60.ACS.grant_encode_decode",
+        "B60.ACS.forensic_encode_decode",
+        "B60.ACS.call_injective",
+        "B60.ACS.cose_decode_encode",
+        "B60.ACS.cose_encode_decode",
+        "B60.ACS.signature_decode_encode",
+        "B60.ACS.signature_encode_decode"
+      ],
+      "axiom_declarations": [],
+      "event_literals": 0
+    },
+    {
+      "file": "Babylon.lean",
+      "lines": 644,
+      "imports": [],
+      "theorems": [
+        "Babylon.extincion_origen_espurio",
+        "Babylon.extincion_origen_espurio_constructiva",
+        "Babylon.circuit_breaker_activado",
+        "Babylon.circuit_breaker_activado_constructiva",
+        "Babylon.resiliencia_bft_inyeccion",
+        "Babylon.homeostasis_tonnetz_garantizada",
+        "Babylon.lemma_monotonic_entropy_growth",
+        "Babylon.lemma_hot_memory_invariance",
+        "Babylon.lemma_conformal_hot_dissipation_zero",
+        "Babylon.theorem_penrose_landauer_cycle_stability",
+        "Babylon.theorem_landauer_cache_bypass",
+        "Babylon.theorem_sexa_fraction_exact",
+        "Babylon.theorem_liouville_involution",
+        "Babylon.theorem_homotopy_closed_path",
+        "Babylon.theorem_mmr_logarithmic_bound",
+        "Babylon.theorem_fisher_pythagorean_divergence",
+        "Babylon.theorem_chentsov_markov_monotonicity",
+        "Babylon.theorem_agent_cheap_talk_rejection",
+        "Babylon.theorem_agent_finite_horizon",
+        "Babylon.theorem_ffi_semantic_isomorphism",
+        "Babylon.theorem_repl_closure",
+        "Babylon.theorem_causal_light_cone_preservation",
+        "Babylon.theorem_concurrent_wave_independence",
+        "Babylon.b60_small_step_confluence",
+        "Babylon.theorem_toponym_stratum_retraction",
+        "Babylon.theorem_parasitic_dir_quotient_invariance"
+      ],
+      "axiom_declarations": [],
+      "event_literals": 0
+    },
+    {
+      "file": "BabylonAOTOracle.lean",
+      "lines": 88,
+      "imports": [
+        "BabylonTrace"
+      ],
+      "theorems": [],
+      "axiom_declarations": [],
+      "event_literals": 3
+    },
+    {
+      "file": "BabylonAeonChain.lean",
+      "lines": 7549,
+      "imports": [
+        "BabylonTrace"
+      ],
+      "theorems": [
+        "B60.Ledger.aeon_0_step",
+        "B60.Ledger.aeon_1_step",
+        "B60.Ledger.aeon_2_step",
+        "B60.Ledger.aeon_3_step",
+        "B60.Ledger.aeon_4_step"
+      ],
+      "axiom_declarations": [],
+      "event_literals": 7500
+    },
+    {
+      "file": "BabylonAeonStress.lean",
+      "lines": 1514,
+      "imports": [
+        "BabylonTrace"
+      ],
+      "theorems": [
+        "B60.Ledger.aeon_valid"
+      ],
+      "axiom_declarations": [],
+      "event_literals": 1500
+    },
+    {
+      "file": "BabylonAutoTrace.lean",
+      "lines": 20,
+      "imports": [
+        "BabylonTrace"
+      ],
+      "theorems": [
+        "B60.Ledger.trace_is_paradox_free_auto"
+      ],
+      "axiom_declarations": [],
+      "event_literals": 3
+    },
+    {
+      "file": "BabylonOracle.lean",
+      "lines": 61,
+      "imports": [
+        "BabylonTrace"
+      ],
+      "theorems": [],
+      "axiom_declarations": [],
+      "event_literals": 3
+    },
+    {
+      "file": "BabylonStressCorrupt.lean",
+      "lines": 1516,
+      "imports": [
+        "BabylonTrace"
+      ],
+      "theorems": [
+        "B60.Ledger.trace_is_paradox_free_auto"
+      ],
+      "axiom_declarations": [],
+      "event_literals": 1501
+    },
+    {
+      "file": "BabylonStressTrace.lean",
+      "lines": 6015,
+      "imports": [
+        "BabylonTrace"
+      ],
+      "theorems": [
+        "B60.Ledger.trace_is_paradox_free_auto"
+      ],
+      "axiom_declarations": [],
+      "event_literals": 6000
+    },
+    {
+      "file": "BabylonTrace.lean",
+      "lines": 277,
+      "imports": [
+        "Init"
+      ],
+      "theorems": [
+        "B60.Ledger.trace_is_paradox_free",
+        "B60.Ledger.step_read_even",
+        "B60.Ledger.runAeon_reads_even",
+        "B60.Ledger.no_torn_reads_universal",
+        "B60.Ledger.no_heuristic_override_on_veto",
+        "B60.Ledger.no_commit_without_witness",
+        "B60.Ledger.expired_lease_rejected",
+        "B60.Ledger.fl011_seqlock_integrity",
+        "B60.Ledger.torn_seq_rejected",
+        "B60.Ledger.trace_step_ok_valid"
+      ],
+      "axiom_declarations": [],
+      "event_literals": 10
+    },
+    {
+      "file": "C5Affine.lean",
+      "lines": 19,
+      "imports": [],
+      "theorems": [
+        "no_double_free"
+      ],
+      "axiom_declarations": [],
+      "event_literals": 0
+    },
+    {
+      "file": "C5PortHamiltonian.lean",
+      "lines": 66,
+      "imports": [],
+      "theorems": [
+        "C5REAL.Proof.skew_symmetric_circulation_zero",
+        "C5REAL.Proof.lyapunov_monotonic_dissipation_verified",
+        "C5REAL.Proof.kudurru_64_alignment_verified"
+      ],
+      "axiom_declarations": [],
+      "event_literals": 0
+    },
+    {
+      "file": "CanonicalEnvelope.lean",
+      "lines": 240,
+      "imports": [
+        "CanonicalHead"
+      ],
+      "theorems": [
+        "B60.CBOR.decode_encode",
+        "B60.CBOR.encode_decode",
+        "B60.CBOR.encode_injective",
+        "B60.CBOR.decodeChecked_encode",
+        "B60.CBOR.decodeChecked_valid",
+        "B60.CBOR.encode_decodeChecked",
+        "B60.CBOR.parseMany_encodeMany"
+      ],
+      "axiom_declarations": [],
+      "event_literals": 0
+    },
+    {
+      "file": "CanonicalHead.lean",
+      "lines": 112,
+      "imports": [
+        "Init"
+      ],
+      "theorems": [
+        "B60.CBOR.decodeBE_encodeBE_suffix",
+        "B60.CBOR.decodePayload_encodeBE",
+        "B60.CBOR.headByte_parts",
+        "B60.CBOR.decodeHead_encodeHead_suffix"
+      ],
+      "axiom_declarations": [],
+      "event_literals": 0
+    },
+    {
+      "file": "Destiladora_838c463da193b48f.lean",
+      "lines": 127,
+      "imports": [
+        "Init"
+      ],
+      "theorems": [
+        "B60.Destiladora.C_838c463da193b48f.thm_seqlock_mutation_odd",
+        "B60.Destiladora.C_838c463da193b48f.thm_seqlock_commit_even",
+        "B60.Destiladora.C_838c463da193b48f.thm_reject_poisoned",
+        "B60.Destiladora.C_838c463da193b48f.thm_hit_exact_signature",
+        "B60.Destiladora.C_838c463da193b48f.thm_miss_bitflip_signature",
+        "B60.Destiladora.C_838c463da193b48f.thm_invariant_838c463da193b48f_step",
+        "B60.Destiladora.C_838c463da193b48f.thm_invariant_838c463da193b48f"
+      ],
+      "axiom_declarations": [],
+      "event_literals": 0
+    },
+    {
+      "file": "HolographicPoC.lean",
+      "lines": 15,
+      "imports": [
+        "ProofWidgets.Component.HtmlDisplay",
+        "Lean"
+      ],
+      "theorems": [],
+      "axiom_declarations": [],
+      "event_literals": 0
+    },
+    {
+      "file": "MolochLandauer.lean",
+      "lines": 202,
+      "imports": [],
+      "theorems": [
+        "Babylon.MolochLandauer.moloch_payoff_is_zero",
+        "Babylon.MolochLandauer.constructive_action_positive_payoff",
+        "Babylon.MolochLandauer.cooperation_dominates_moloch",
+        "Babylon.MolochLandauer.landauer_compensates_entropy",
+        "Babylon.MolochLandauer.trace_entropy_solvency_universal"
+      ],
+      "axiom_declarations": [],
+      "event_literals": 0
+    },
+    {
+      "file": "NavierStokesBKM.lean",
+      "lines": 153,
+      "imports": [],
+      "theorems": [
+        "B60.NavierStokes.constantin_fefferman_depletion_holds",
+        "B60.NavierStokes.genuine_blowup_candidate_isolated",
+        "B60.NavierStokes.discrete_curl_grad_nilpotent",
+        "B60.NavierStokes.discrete_div_curl_nilpotent",
+        "B60.NavierStokes.coexact_field_is_solenoidal"
+      ],
+      "axiom_declarations": [],
+      "event_literals": 9
+    },
+    {
+      "file": "NavierStokesOracle.lean",
+      "lines": 61,
+      "imports": [
+        "NavierStokesBKM"
+      ],
+      "theorems": [],
+      "axiom_declarations": [],
+      "event_literals": 4
+    },
+    {
+      "file": "NavierStokesSobolevKato.lean",
+      "lines": 144,
+      "imports": [],
+      "theorems": [
+        "B60.NavierStokes.SobolevKato.sobolev_embedding_h2_in_c0",
+        "B60.NavierStokes.SobolevKato.sobolev_embedding_h3_in_c1",
+        "B60.NavierStokes.SobolevKato.kato_local_existence_h3",
+        "B60.NavierStokes.SobolevKato.curry_howard_taylor_green_step",
+        "B60.NavierStokes.SobolevKato.interval_containment_reflection",
+        "B60.NavierStokes.SobolevKato.gronwall_bkm_regularity_certified",
+        "B60.NavierStokes.SobolevKato.causal_monotonicity_trace_proof",
+        "B60.NavierStokes.SobolevKato.millennium_navier_stokes_regular_by_decide"
+      ],
+      "axiom_declarations": [],
+      "event_literals": 0
+    },
+    {
+      "file": "NemesisWave4.lean",
+      "lines": 220,
+      "imports": [],
+      "theorems": [
+        "NemesisWave4.ecp_v2_valid_trace_certified",
+        "NemesisWave4.fl014_fencing_race_rejected",
+        "NemesisWave4.fl014_blind_retry_rejected",
+        "NemesisWave4.fl014_budget_composition_rejected",
+        "NemesisWave4.fl013_darwin_uf_immutable_degraded",
+        "NemesisWave4.fl015_transitive_drift_rejected"
+      ],
+      "axiom_declarations": [],
+      "event_literals": 0
+    },
+    {
+      "file": "TicketEnvelope.lean",
+      "lines": 206,
+      "imports": [
+        "CanonicalEnvelope"
+      ],
+      "theorems": [
+        "B60.Ticket.decode_encode",
+        "B60.Ticket.encode_decode",
+        "B60.Ticket.encode_injective",
+        "B60.Ticket.decoded_valid",
+        "B60.Ticket.decode_encode_external",
+        "B60.Ticket.encode_decode_external"
+      ],
+      "axiom_declarations": [],
+      "event_literals": 0
+    }
+  ],
+  "individual_compilation": [
+    {
+      "file": "AX0.lean",
+      "exit_code": 0,
+      "theorems_requested": 6,
+      "first_error": ""
+    },
+    {
+      "file": "Babylon.lean",
+      "exit_code": 0,
+      "theorems_requested": 26,
+      "first_error": ""
+    },
+    {
+      "file": "BabylonTrace.lean",
+      "exit_code": 0,
+      "theorems_requested": 10,
+      "first_error": ""
+    },
+    {
+      "file": "C5Affine.lean",
+      "exit_code": 0,
+      "theorems_requested": 1,
+      "first_error": ""
+    },
+    {
+      "file": "C5PortHamiltonian.lean",
+      "exit_code": 0,
+      "theorems_requested": 3,
+      "first_error": ""
+    },
+    {
+      "file": "CanonicalHead.lean",
+      "exit_code": 0,
+      "theorems_requested": 4,
+      "first_error": ""
+    },
+    {
+      "file": "Destiladora_838c463da193b48f.lean",
+      "exit_code": 0,
+      "theorems_requested": 7,
+      "first_error": ""
+    },
+    {
+      "file": "HolographicPoC.lean",
+      "exit_code": 1,
+      "theorems_requested": 0,
+      "first_error": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.audit/lean-scope-20261025/modules/HolographicPoC.lean:8:0: error: unknown module prefix 'ProofWidgets'"
+    },
+    {
+      "file": "MolochLandauer.lean",
+      "exit_code": 0,
+      "theorems_requested": 5,
+      "first_error": ""
+    },
+    {
+      "file": "NavierStokesBKM.lean",
+      "exit_code": 0,
+      "theorems_requested": 5,
+      "first_error": ""
+    },
+    {
+      "file": "NavierStokesSobolevKato.lean",
+      "exit_code": 0,
+      "theorems_requested": 8,
+      "first_error": ""
+    },
+    {
+      "file": "NemesisWave4.lean",
+      "exit_code": 0,
+      "theorems_requested": 6,
+      "first_error": ""
+    },
+    {
+      "file": "BabylonAOTOracle.lean",
+      "exit_code": 0,
+      "theorems_requested": 0,
+      "first_error": ""
+    },
+    {
+      "file": "BabylonAeonChain.lean",
+      "exit_code": 0,
+      "theorems_requested": 5,
+      "first_error": ""
+    },
+    {
+      "file": "BabylonAeonStress.lean",
+      "exit_code": 0,
+      "theorems_requested": 1,
+      "first_error": ""
+    },
+    {
+      "file": "BabylonAutoTrace.lean",
+      "exit_code": 1,
+      "theorems_requested": 1,
+      "first_error": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.audit/lean-scope-20261025/modules/BabylonAutoTrace.lean:20:2: error: Tactic `decide` proved that the proposition"
+    },
+    {
+      "file": "BabylonOracle.lean",
+      "exit_code": 0,
+      "theorems_requested": 0,
+      "first_error": ""
+    },
+    {
+      "file": "BabylonStressCorrupt.lean",
+      "exit_code": 1,
+      "theorems_requested": 1,
+      "first_error": "/Users/borjafernandezangulo/10_PROJECTS/BABYLON-60/.audit/lean-scope-20261025/modules/BabylonStressCorrupt.lean:1521:2: error: Tactic `decide` proved that the proposition"
+    },
+    {
+      "file": "BabylonStressTrace.lean",
+      "exit_code": 0,
+      "theorems_requested": 1,
+      "first_error": ""
+    },
+    {
+      "file": "CanonicalEnvelope.lean",
+      "exit_code": 0,
+      "theorems_requested": 7,
+      "first_error": ""
+    },
+    {
+      "file": "NavierStokesOracle.lean",
+      "exit_code": 0,
+      "theorems_requested": 0,
+      "first_error": ""
+    },
+    {
+      "file": "AcsEnvelope.lean",
+      "exit_code": 0,
+      "theorems_requested": 20,
+      "first_error": ""
+    },
+    {
+      "file": "TicketEnvelope.lean",
+      "exit_code": 0,
+      "theorems_requested": 6,
+      "first_error": ""
+    }
+  ],
+  "axioms_of_successfully_compiled_named_theorems": {
+    "auth_001_valid_execution": [],
+    "auth_001_reject_double_dispatch": [],
+    "auth_001_reject_illegal_dispatch": [],
+    "auth_001_crash_recovery": [],
+    "max_dispatches_from_state": [
+      "propext"
+    ],
+    "auth_001_universal_inductive_safety": [
+      "propext"
+    ],
+    "Babylon.extincion_origen_espurio": [],
+    "Babylon.extincion_origen_espurio_constructiva": [],
+    "Babylon.circuit_breaker_activado": [],
+    "Babylon.circuit_breaker_activado_constructiva": [],
+    "Babylon.resiliencia_bft_inyeccion": [],
+    "Babylon.homeostasis_tonnetz_garantizada": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Babylon.lemma_monotonic_entropy_growth": [],
+    "Babylon.lemma_hot_memory_invariance": [],
+    "Babylon.lemma_conformal_hot_dissipation_zero": [],
+    "Babylon.theorem_penrose_landauer_cycle_stability": [],
+    "Babylon.theorem_landauer_cache_bypass": [],
+    "Babylon.theorem_sexa_fraction_exact": [],
+    "Babylon.theorem_liouville_involution": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Babylon.theorem_homotopy_closed_path": [
+      "propext"
+    ],
+    "Babylon.theorem_mmr_logarithmic_bound": [],
+    "Babylon.theorem_fisher_pythagorean_divergence": [],
+    "Babylon.theorem_chentsov_markov_monotonicity": [],
+    "Babylon.theorem_agent_cheap_talk_rejection": [
+      "propext"
+    ],
+    "Babylon.theorem_agent_finite_horizon": [
+      "propext"
+    ],
+    "Babylon.theorem_ffi_semantic_isomorphism": [],
+    "Babylon.theorem_repl_closure": [],
+    "Babylon.theorem_causal_light_cone_preservation": [],
+    "Babylon.theorem_concurrent_wave_independence": [],
+    "Babylon.b60_small_step_confluence": [],
+    "Babylon.theorem_toponym_stratum_retraction": [],
+    "Babylon.theorem_parasitic_dir_quotient_invariance": [],
+    "B60.Ledger.trace_is_paradox_free": [],
+    "B60.Ledger.step_read_even": [
+      "propext"
+    ],
+    "B60.Ledger.runAeon_reads_even": [
+      "propext"
+    ],
+    "B60.Ledger.no_torn_reads_universal": [
+      "propext"
+    ],
+    "B60.Ledger.no_heuristic_override_on_veto": [],
+    "B60.Ledger.no_commit_without_witness": [],
+    "B60.Ledger.expired_lease_rejected": [
+      "propext",
+      "Quot.sound"
+    ],
+    "B60.Ledger.fl011_seqlock_integrity": [],
+    "B60.Ledger.torn_seq_rejected": [],
+    "B60.Ledger.trace_step_ok_valid": [],
+    "no_double_free": [
+      "propext"
+    ],
+    "C5REAL.Proof.skew_symmetric_circulation_zero": [
+      "propext"
+    ],
+    "C5REAL.Proof.lyapunov_monotonic_dissipation_verified": [],
+    "C5REAL.Proof.kudurru_64_alignment_verified": [],
+    "B60.CBOR.decodeBE_encodeBE_suffix": [
+      "propext"
+    ],
+    "B60.CBOR.decodePayload_encodeBE": [
+      "propext"
+    ],
+    "B60.CBOR.headByte_parts": [
+      "propext",
+      "Quot.sound"
+    ],
+    "B60.CBOR.decodeHead_encodeHead_suffix": [
+      "propext",
+      "Quot.sound"
+    ],
+    "B60.Destiladora.C_838c463da193b48f.thm_seqlock_mutation_odd": [
+      "propext",
+      "Quot.sound"
+    ],
+    "B60.Destiladora.C_838c463da193b48f.thm_seqlock_commit_even": [
+      "propext",
+      "Quot.sound"
+    ],
+    "B60.Destiladora.C_838c463da193b48f.thm_reject_poisoned": [],
+    "B60.Destiladora.C_838c463da193b48f.thm_hit_exact_signature": [],
+    "B60.Destiladora.C_838c463da193b48f.thm_miss_bitflip_signature": [],
+    "B60.Destiladora.C_838c463da193b48f.thm_invariant_838c463da193b48f_step": [
+      "propext"
+    ],
+    "B60.Destiladora.C_838c463da193b48f.thm_invariant_838c463da193b48f": [
+      "propext"
+    ],
+    "Babylon.MolochLandauer.moloch_payoff_is_zero": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Babylon.MolochLandauer.constructive_action_positive_payoff": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Babylon.MolochLandauer.cooperation_dominates_moloch": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Babylon.MolochLandauer.landauer_compensates_entropy": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Babylon.MolochLandauer.trace_entropy_solvency_universal": [
+      "propext",
+      "Quot.sound"
+    ],
+    "B60.NavierStokes.constantin_fefferman_depletion_holds": [],
+    "B60.NavierStokes.genuine_blowup_candidate_isolated": [],
+    "B60.NavierStokes.discrete_curl_grad_nilpotent": [],
+    "B60.NavierStokes.discrete_div_curl_nilpotent": [],
+    "B60.NavierStokes.coexact_field_is_solenoidal": [],
+    "B60.NavierStokes.SobolevKato.sobolev_embedding_h2_in_c0": [],
+    "B60.NavierStokes.SobolevKato.sobolev_embedding_h3_in_c1": [],
+    "B60.NavierStokes.SobolevKato.kato_local_existence_h3": [],
+    "B60.NavierStokes.SobolevKato.curry_howard_taylor_green_step": [],
+    "B60.NavierStokes.SobolevKato.interval_containment_reflection": [],
+    "B60.NavierStokes.SobolevKato.gronwall_bkm_regularity_certified": [],
+    "B60.NavierStokes.SobolevKato.causal_monotonicity_trace_proof": [],
+    "B60.NavierStokes.SobolevKato.millennium_navier_stokes_regular_by_decide": [],
+    "NemesisWave4.ecp_v2_valid_trace_certified": [],
+    "NemesisWave4.fl014_fencing_race_rejected": [],
+    "NemesisWave4.fl014_blind_retry_rejected": [],
+    "NemesisWave4.fl014_budget_composition_rejected": [],
+    "NemesisWave4.fl013_darwin_uf_immutable_degraded": [],
+    "NemesisWave4.fl015_transitive_drift_rejected": [],
+    "B60.Ledger.aeon_0_step": [],
+    "B60.Ledger.aeon_1_step": [],
+    "B60.Ledger.aeon_2_step": [],
+    "B60.Ledger.aeon_3_step": [],
+    "B60.Ledger.aeon_4_step": [],
+    "B60.Ledger.aeon_valid": [],
+    "B60.Ledger.trace_is_paradox_free_auto": [],
+    "B60.CBOR.decode_encode": [
+      "propext"
+    ],
+    "B60.CBOR.encode_decode": [
+      "propext"
+    ],
+    "B60.CBOR.encode_injective": [
+      "propext"
+    ],
+    "B60.CBOR.decodeChecked_encode": [
+      "propext"
+    ],
+    "B60.CBOR.decodeChecked_valid": [
+      "propext"
+    ],
+    "B60.CBOR.encode_decodeChecked": [
+      "propext"
+    ],
+    "B60.CBOR.parseMany_encodeMany": [
+      "propext"
+    ],
+    "B60.ACS.typedCose_decode_encode": [
+      "propext",
+      "Quot.sound"
+    ],
+    "B60.ACS.typedCose_encode_decode": [
+      "propext",
+      "Quot.sound"
+    ],
+    "B60.ACS.typedCose_decode_valid": [
+      "propext",
+      "Quot.sound"
+    ],
+    "B60.ACS.typedSignature_decode_encode": [
+      "propext",
+      "Quot.sound"
+    ],
+    "B60.ACS.typedSignature_encode_decode": [
+      "propext",
+      "Quot.sound"
+    ],
+    "B60.ACS.typedSignature_decode_valid": [
+      "propext",
+      "Quot.sound"
+    ],
+    "B60.ACS.call_decoded_valid": [
+      "propext",
+      "Quot.sound"
+    ],
+    "B60.ACS.grant_decoded_valid": [
+      "propext",
+      "Quot.sound"
+    ],
+    "B60.ACS.forensic_decoded_valid": [
+      "propext",
+      "Quot.sound"
+    ],
+    "B60.ACS.call_decode_encode": [
+      "propext",
+      "Quot.sound"
+    ],
+    "B60.ACS.grant_decode_encode": [
+      "propext",
+      "Quot.sound"
+    ],
+    "B60.ACS.forensic_decode_encode": [
+      "propext",
+      "Quot.sound"
+    ],
+    "B60.ACS.call_encode_decode": [
+      "propext",
+      "Quot.sound"
+    ],
+    "B60.ACS.grant_encode_decode": [
+      "propext",
+      "Quot.sound"
+    ],
+    "B60.ACS.forensic_encode_decode": [
+      "propext",
+      "Quot.sound"
+    ],
+    "B60.ACS.call_injective": [
+      "propext",
+      "Quot.sound"
+    ],
+    "B60.ACS.cose_decode_encode": [
+      "propext",
+      "Quot.sound"
+    ],
+    "B60.ACS.cose_encode_decode": [
+      "propext",
+      "Quot.sound"
+    ],
+    "B60.ACS.signature_decode_encode": [
+      "propext",
+      "Quot.sound"
+    ],
+    "B60.ACS.signature_encode_decode": [
+      "propext",
+      "Quot.sound"
+    ],
+    "B60.Ticket.decode_encode": [
+      "propext",
+      "Quot.sound"
+    ],
+    "B60.Ticket.encode_decode": [
+      "propext",
+      "Quot.sound"
+    ],
+    "B60.Ticket.encode_injective": [
+      "propext",
+      "Quot.sound"
+    ],
+    "B60.Ticket.decoded_valid": [
+      "propext",
+      "Quot.sound"
+    ],
+    "B60.Ticket.decode_encode_external": [
+      "propext",
+      "Quot.sound"
+    ],
+    "B60.Ticket.encode_decode_external": [
+      "propext",
+      "Quot.sound"
+    ]
+  },
+  "warning": "No axiom dependency list discharges local hypotheses, structure fields or external correspondence obligations."
+}

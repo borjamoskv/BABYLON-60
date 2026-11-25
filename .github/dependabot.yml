@@ -1,0 +1,39 @@
+version: 2
+updates:
+  - package-ecosystem: "cargo"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "[AX-0] DEPS"
+    groups:
+      iceoryx-ecosystem:
+        patterns:
+          - "iceoryx2*"
+      grpc-ecosystem:
+        patterns:
+          - "tonic*"
+          - "prost*"
+          - "tokio*"
+      crypto-stack:
+        patterns:
+          - "rand*"
+          - "ed25519-dalek*"
+          - "blake3*"
+          - "p256*"
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "[AX-0] DEPS"
+    groups:
+      python-deps:
+        patterns:
+          - "*"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "[AX-0] CI"

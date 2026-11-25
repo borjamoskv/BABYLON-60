@@ -1,0 +1,22 @@
+rules:
+  - code: "ERR_042"
+    title: "INCUMPLIMIENTO DE RETRANQUEO A LINDEROS"
+    description: "Edificabilidad técnica superada en Fachada Norte."
+    target: "IFCWALL"
+    property: "SetbackDistance"
+    operator: ">="
+    threshold: 3.0
+    unit: "m"
+    legal_citation: "PGOU Madrid - Sección II, Art. 14.3.a ('Distancias mínimas a colindantes')"
+    severity: "error"
+
+  - code: "ERR_089"
+    title: "EXCESO DE CONSUMO DE ENERGÍA PRIMARIA NO RENOVABLE"
+    description: "Demanda térmica supera el umbral límite CTE Zona D3."
+    target: "IFCBUILDING"
+    property: "PrimaryEnergyConsumption"
+    operator: "<="
+    threshold: 28.0
+    unit: "kWh/m²·año"
+    legal_citation: "CTE DB-HE0 (Sección 3.1, Tabla 3.1a)"
+    severity: "error"

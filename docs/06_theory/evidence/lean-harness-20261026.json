@@ -1,0 +1,257 @@
+{
+  "date": "2026-10-26",
+  "status": "bounded_checks_passed",
+  "scope": "Rust subprocess protocol, error propagation and closed synthetic Lean traces; not production/concurrency certification",
+  "toolchain": "leanprover/lean4:v4.34.0-rc2",
+  "baseline": {
+    "case": "old_stress_accepts_generic_lean_failure",
+    "exit_code": 0,
+    "reports_successful_rejection": true,
+    "input": "isolated fake lake exits 1 with import failure; no Lean proof"
+  },
+  "test_totals": {
+    "rust_process_cli_csv_tests_passed": 13,
+    "real_lean_test_passed": 1,
+    "total_tests_passed": 14,
+    "real_lean_cases": [
+      "nominal true",
+      "corrupt false",
+      "nominal expected false is error",
+      "missing import is error",
+      "invalid syntax is error"
+    ]
+  },
+  "checks": {
+    "rust-check": {
+      "command": [
+        "cargo",
+        "check",
+        "-q",
+        "--locked",
+        "-p",
+        "b60-lang",
+        "--features",
+        "stress-bins",
+        "--bin",
+        "fsm_poc",
+        "--bin",
+        "fsm_stress"
+      ],
+      "working_directory": ".",
+      "exit_code": 0,
+      "output": ""
+    },
+    "rust-tests": {
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "-p",
+        "b60-lang",
+        "--features",
+        "stress-bins",
+        "--bin",
+        "fsm_poc",
+        "--bin",
+        "fsm_stress",
+        "--test",
+        "lean_harness"
+      ],
+      "working_directory": ".",
+      "exit_code": 0,
+      "output": "\nrunning 1 test\ntest tests::csv_oracle_distinguishes_model_verdicts_from_execution_errors ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.23s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 13 tests\ntest real_lean_proves_both_verdicts_and_rejects_a_wrong_expectation ... ignored, requires the project-pinned Lake toolchain and built BabylonTrace import\ntest a_missing_program_is_a_spawn_error ... ok\ntest captures_both_streams_beyond_pipe_capacity ... ok\ntest a_signal_is_an_execution_error_even_after_a_rejection_marker ... ok\ntest both_clis_reject_invalid_arguments_before_invoking_lean ... ok\ntest emits_the_expected_theorem_in_a_temporary_source_and_removes_it ... ok\ntest accepts_only_the_single_expected_marker_for_each_verdict ... ok\ntest both_clis_require_the_nominal_control_before_the_negative_control ... ok\ntest stderr_and_compiler_errors_cannot_count_as_a_semantic_rejection ... ok\ntest nonzero_exit_is_an_error_even_after_the_expected_marker ... ok\ntest missing_duplicate_conflicting_and_extra_output_are_errors ... ok\ntest both_clis_fail_globally_on_nominal_negative_or_wrong_verdict_errors ... ok\ntest timeout_terminates_the_process_group_including_a_descendant ... ok\n\ntest result: ok. 12 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 5.06s\n\n   Compiling b60-lang v5.0.1 (<repo>/crates/b60-lang)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.74s\n     Running unittests src/bin/fsm_poc.rs (target/debug/deps/fsm_poc-9aa1d0c73f7a2d42)\n     Running unittests src/bin/fsm_stress.rs (target/debug/deps/fsm_stress-b393391fd59fe8f8)\n     Running tests/lean_harness.rs (target/debug/deps/lean_harness-2e380448adc5067b)\n"
+    },
+    "lake-build": {
+      "command": [
+        "lake",
+        "--no-cache",
+        "--wfail",
+        "build"
+      ],
+      "working_directory": "proof/lean",
+      "exit_code": 0,
+      "output": "Build completed successfully (21 jobs).\n"
+    },
+    "real-lean-tests": {
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "-p",
+        "b60-lang",
+        "--features",
+        "stress-bins",
+        "--test",
+        "lean_harness",
+        "real_lean",
+        "--",
+        "--ignored"
+      ],
+      "working_directory": ".",
+      "exit_code": 0,
+      "output": "\nrunning 1 test\ntest real_lean_proves_both_verdicts_and_rejects_a_wrong_expectation ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 12 filtered out; finished in 5.49s\n\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.16s\n     Running tests/lean_harness.rs (target/debug/deps/lean_harness-2e380448adc5067b)\n"
+    },
+    "poc-jit-cli": {
+      "command": [
+        "cargo",
+        "run",
+        "-q",
+        "--locked",
+        "-p",
+        "b60-lang",
+        "--features",
+        "stress-bins",
+        "--bin",
+        "fsm_poc",
+        "--",
+        "--jit-only"
+      ],
+      "working_directory": ".",
+      "exit_code": 0,
+      "output": "[JIT] Nominal trace: Lean proved validateTrace = true (3 events).\n[JIT] Negative trace: Lean proved validateTrace = false (3 events).\n"
+    },
+    "stress-quick-cli": {
+      "command": [
+        "cargo",
+        "run",
+        "-q",
+        "--locked",
+        "-p",
+        "b60-lang",
+        "--features",
+        "stress-bins",
+        "--bin",
+        "fsm_stress",
+        "--",
+        "--quick"
+      ],
+      "working_directory": ".",
+      "exit_code": 0,
+      "output": "[JIT] Synthetic trace checks against BabylonTrace; timings are local observations.\n[JIT] Proved true: 30 events | emit 0.0002s | Lean 0.9996s\n[JIT] Proved false: 31 events | Lean 0.9845s\n"
+    },
+    "rust-format": {
+      "command": [
+        "rustfmt",
+        "--check",
+        "--edition",
+        "2021",
+        "--config",
+        "skip_children=true",
+        "crates/b60-lang/src/bin/fsm_poc.rs",
+        "crates/b60-lang/src/bin/fsm_stress.rs",
+        "crates/b60-lang/src/bin/support/lean_harness.rs",
+        "crates/b60-lang/tests/lean_harness.rs"
+      ],
+      "working_directory": ".",
+      "exit_code": 0,
+      "output": ""
+    },
+    "semantic-contracts": {
+      "command": [
+        "python3",
+        "scripts/c5_quality_gates/audit_semantic_contracts.py",
+        "--workspace-only"
+      ],
+      "working_directory": ".",
+      "exit_code": 0,
+      "output": "PASS: known semantic patterns (62 documents, 41 Python files), local links/anchors in 15 governance documents; not a proof of semantic consistency or runtime.\n"
+    },
+    "token-budget": {
+      "command": [
+        "python3",
+        "scripts/c5_quality_gates/audit_token_budget.py",
+        "--workspace-only",
+        "--skip-ghost-listeners"
+      ],
+      "working_directory": ".",
+      "exit_code": 0,
+      "output": "=== [C5-REAL] AUDITORÍA DE PRESUPUESTO DE TOKENS ===\n■ .babylon60rules (workspace, counted once): 5,082 B (~1,270 estimated tokens)\n■ AGENTS.md (workspace, counted once): 4,808 B (~1,202 estimated tokens)\n■ Global rules: NOT_CHECKED (workspace-only)\n■ Reglas always_on (Global: 0, Workspace: 0): 0 B (~0 estimated tokens)\n■ INSPECTED ALWAYS_ON: 9,890 B / 40,000 B (~2,472 estimated tokens; actual client context not measured)\n■ Reglas condicionales (model_decision): 0 global + 7 workspace (bodies excluded from this budget; client loading not measured)\n■ Ghost Listeners (conversation_summaries.db): NOT_CHECKED (explicitly skipped)\nPASS: Workspace token budget within inline ceiling; global rules and cross-scope duplicates not checked.\n"
+    },
+    "active-topology": {
+      "command": [
+        "python3",
+        "scripts/guards/verify_active_topology.py"
+      ],
+      "working_directory": ".",
+      "exit_code": 0,
+      "output": "PASS: instruction files, required direct symlinks and MCP registration references (worktree; VS Code if present)\n"
+    },
+    "diff-check": {
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "--",
+        "crates/b60-lang/src/bin/fsm_poc.rs",
+        "crates/b60-lang/src/bin/fsm_stress.rs",
+        "proof/lean",
+        "docs/06_theory",
+        "docs/00_index.md",
+        "docs/README.md"
+      ],
+      "working_directory": ".",
+      "exit_code": 0,
+      "output": ""
+    }
+  },
+  "first_attempt": {
+    "result": "one test failed: descendant pidfile missing under parallel tests with 1s deadline; others passed",
+    "log_reference": ".audit/lean-harness-20261026/first-run-rust-tests.log",
+    "diagnosis": "The same test passed isolated at 1s; startup margin was increased to 5s to allow interpreter startup under parallel subprocess load. Final parallel suite still requires descendant termination and passed. This is not a measured 1s latency guarantee."
+  },
+  "source_sha256": {
+    "crates/b60-lang/src/bin/fsm_poc.rs": "0a400ee8100c4444a72be92233034b5daa534457f5515dee7af2ee3308c8e79b",
+    "crates/b60-lang/src/bin/fsm_stress.rs": "de9bac987ca70a89e9ec30e8dc79944d6c9624b3da61355f5b5d150c07b63d63",
+    "crates/b60-lang/src/bin/support/lean_harness.rs": "0742b61c2bd2987894f6d67f7054d020d011491c3c75e672bacffeba24488359",
+    "crates/b60-lang/tests/lean_harness.rs": "031cbf2e63b8b24c893736d373a03f541895f957dff7d9e1bec7b254894d5c42"
+  },
+  "preservation": {
+    "Cargo.lock": {
+      "unchanged_from_start": true,
+      "sha256": "7c772f6e6ffd29594c5b9bdadb004be09c57af67b60b7be1b56c034a174491b4"
+    },
+    "crates/b60-lang/Cargo.toml": {
+      "unchanged_from_start": true,
+      "sha256": "a79063dea3f221cd890a94601e0f8025e2f0757122f69b6ba11591d6e1eca95d"
+    },
+    "proof/lean/BabylonAutoTrace.lean": {
+      "unchanged_from_start": true,
+      "sha256": "4d38fe24b1f65835473812a1b8099de49a793fbc42ce1ce96daaa501f87a651d"
+    },
+    "proof/lean/BabylonStressTrace.lean": {
+      "unchanged_from_start": true,
+      "sha256": "f19d80ec05dda8cfc4858b778f2a9b6869055a7fb322681f6eecdaf8ce97252b"
+    },
+    "proof/lean/BabylonStressCorrupt.lean": {
+      "unchanged_from_start": true,
+      "sha256": "4a1f254a48998625538f972a1a88aeff14381aea9d7bd63029d2e9ab3f3c4ff3"
+    }
+  },
+  "documentation": {
+    "links_checked": 60,
+    "failures": [],
+    "index_coverage": {
+      "docs/06_theory/00_index.md": {
+        "theory_documents": 30,
+        "missing": []
+      },
+      "docs/00_index.md": {
+        "theory_documents": 30,
+        "missing": []
+      },
+      "docs/README.md": {
+        "theory_documents": 30,
+        "missing": []
+      }
+    }
+  },
+  "limits": [
+    "Default massive AOT and full stress runs not executed",
+    "AOT verdict classification tested with isolated process substitutes; no per-input Lean kernel proof for CSV executable",
+    "Synthetic sequential traces do not demonstrate Rust atomics, memory ordering, payload integrity or physical causality",
+    "Unix timeout terminates the process group; other platforms only the direct child; not hostile process containment",
+    "Trusted local Lake/toolchain/imports; no attestation of an arbitrary supplied executable",
+    "No dependency or lockfile changes",
+    "No global rules, ghost-listener telemetry, CI status or protected runtime certification"
+  ]
+}

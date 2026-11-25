@@ -1,0 +1,345 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://babylon60.com/ontology/v1/schema.json",
+  "title": "BABYLON-60 Canonical Ontology Specification",
+  "version": "1.0.0",
+  "description": "Frozen canonical ontology v1.0.0 for CORTEX, BABYLON, and NEMESIS. Enforces strict demarcation between facts, authorization decisions, effects, evidence, and attestations under the 14 Ontological Laws (O1-O14).",
+  "$defs": {
+    "DomainCortex": {
+      "type": "object",
+      "description": "Domain 1: CORTEX (Remember) - Source corpus, memory ingestion, idea threads, and contextual inferences.",
+      "properties": {
+        "SourceRecord": { "$ref": "#/$defs/SourceRecord" },
+        "MemoryEvent": { "$ref": "#/$defs/MemoryEvent" },
+        "IdeaThread": { "$ref": "#/$defs/IdeaThread" },
+        "Inference": { "$ref": "#/$defs/Inference" }
+      }
+    },
+    "SourceRecord": {
+      "type": "object",
+      "description": "Audit-grade original record, raw document, or ingestible artefact. Law O1: SOURCE != INFERENCE.",
+      "properties": {
+        "source_id": { "type": "string", "format": "uri" },
+        "provider": { "type": "string" },
+        "raw_hash": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "ingested_at": { "type": "string", "format": "date-time" },
+        "content_length": { "type": "integer", "minimum": 0 },
+        "mime_type": { "type": "string" }
+      },
+      "required": ["source_id", "provider", "raw_hash", "ingested_at"]
+    },
+    "MemoryEvent": {
+      "type": "object",
+      "description": "Ingestion trace or normalized episodic observation anchored to an auditable SourceRecord.",
+      "properties": {
+        "event_id": { "type": "string" },
+        "source_ref": { "type": "string", "format": "uri" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "event_type": { "type": "string" },
+        "normalized_text": { "type": "string" },
+        "entities": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "raw_hash": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "extractor_version": { "type": "string" }
+      },
+      "required": ["event_id", "source_ref", "timestamp", "raw_hash"]
+    },
+    "IdeaThread": {
+      "type": "object",
+      "description": "Synthesized conceptual thread grouping recurrent MemoryEvents over time.",
+      "properties": {
+        "idea_id": { "type": "string" },
+        "core_concept": { "type": "string" },
+        "first_seen": { "type": "string", "format": "date-time" },
+        "last_seen": { "type": "string", "format": "date-time" },
+        "recurrence_count": { "type": "integer", "minimum": 1 },
+        "dormant_days": { "type": "integer", "minimum": 0 },
+        "events": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "score": { "type": "number" }
+      },
+      "required": ["idea_id", "core_concept", "first_seen", "last_seen", "events"]
+    },
+    "Inference": {
+      "type": "object",
+      "description": "Model-derived contextual interpretation or proposed action. Laws O1 & O2: INFERENCE != SOURCE, INFERENCE != AUTHORITY.",
+      "properties": {
+        "inference_id": { "type": "string" },
+        "derived_from_threads": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "model_id": { "type": "string" },
+        "prompt_digest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "generated_at": { "type": "string", "format": "date-time" },
+        "proposal_payload": { "type": "object" },
+        "confidence": { "type": "number", "minimum": 0.0, "maximum": 1.0 }
+      },
+      "required": ["inference_id", "model_id", "proposal_payload", "generated_at"]
+    },
+    "ProposalContext": {
+      "type": "object",
+      "description": "Structured advisory context output by CORTEX to the trust boundary. Does not possess authority.",
+      "properties": {
+        "proposal_id": { "type": "string" },
+        "inference_ref": { "type": "string" },
+        "suggested_action": { "type": "string" },
+        "justification": { "type": "string" },
+        "evaluated_risk": { "type": "string" }
+      },
+      "required": ["proposal_id", "inference_ref", "suggested_action"]
+    },
+    "DomainBabylon": {
+      "type": "object",
+      "description": "Domain 2: BABYLON (Control) - Authorization decisions, mediated effects, and lifecycle receipts.",
+      "properties": {
+        "Authority": { "$ref": "#/$defs/Authority" },
+        "Capability": { "$ref": "#/$defs/Capability" },
+        "Policy": { "$ref": "#/$defs/Policy" },
+        "Resource": { "$ref": "#/$defs/Resource" },
+        "EffectRequest": { "$ref": "#/$defs/EffectRequest" },
+        "Decision": { "$ref": "#/$defs/Decision" },
+        "Effect": { "$ref": "#/$defs/Effect" },
+        "EffectOutcome": { "$ref": "#/$defs/EffectOutcome" },
+        "Receipt": { "$ref": "#/$defs/Receipt" }
+      }
+    },
+    "Authority": {
+      "type": "object",
+      "description": "Sovereign principal, hardware gate (Touch ID / Secure Enclave), or epoch holder enabled to govern. Law O3: AUTHORITY != CAPABILITY.",
+      "properties": {
+        "authority_id": { "type": "string" },
+        "principal_type": { "type": "string", "enum": ["BIOMETRIC_OPERATOR", "SECURE_ENCLAVE", "ATTESTED_KERNEL", "DELEGATED_ROLE"] },
+        "public_key_hex": { "type": "string" },
+        "active_epoch": { "type": "integer", "minimum": 0 }
+      },
+      "required": ["authority_id", "principal_type", "active_epoch"]
+    },
+    "Capability": {
+      "type": "object",
+      "description": "Bounded authorization token granting specific operations over defined resources within an epoch.",
+      "properties": {
+        "capability_id": { "type": "string" },
+        "issuer_authority_id": { "type": "string" },
+        "target_resource": { "type": "string" },
+        "allowed_effects": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "valid_until_epoch": { "type": "integer" },
+        "signature": { "type": "string" }
+      },
+      "required": ["capability_id", "issuer_authority_id", "target_resource", "allowed_effects", "valid_until_epoch"]
+    },
+    "Policy": {
+      "type": "object",
+      "description": "Deterministic gatekeeper rule specifying constraints and predicates for authorization decisions.",
+      "properties": {
+        "policy_id": { "type": "string" },
+        "version": { "type": "string" },
+        "predicate_code": { "type": "string" },
+        "enforcement_mode": { "type": "string", "enum": ["FAIL_CLOSED", "AUDIT_ONLY"] }
+      },
+      "required": ["policy_id", "version", "predicate_code", "enforcement_mode"]
+    },
+    "Resource": {
+      "type": "object",
+      "description": "Target entity or substrate location subject to potential effect mediation.",
+      "properties": {
+        "resource_uri": { "type": "string", "format": "uri" },
+        "resource_type": { "type": "string", "enum": ["VFS_FILE", "VFS_DIRECTORY", "NETWORK_SOCKET", "PROCESS", "CRYPTO_KEY", "LEDGER_ENTRY"] },
+        "locator_identity": { "type": "string" }
+      },
+      "required": ["resource_uri", "resource_type"]
+    },
+    "EffectRequest": {
+      "type": "object",
+      "description": "Formal invocation demanding state mutation. Law O4: REQUEST != DECISION.",
+      "properties": {
+        "request_id": { "type": "string" },
+        "authority_id": { "type": "string" },
+        "capability_id": { "type": "string" },
+        "resource_uri": { "type": "string", "format": "uri" },
+        "proposed_effect": { "$ref": "#/$defs/Effect" },
+        "context_digest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "requested_epoch": { "type": "integer" },
+        "requested_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["request_id", "authority_id", "capability_id", "resource_uri", "proposed_effect", "requested_epoch", "requested_at"]
+    },
+    "Decision": {
+      "type": "object",
+      "description": "Result of evaluating the 7-tuple (Authority, Capability, Policy, Resource, Effect, Context, Epoch). Law O5: DECISION != EFFECT.",
+      "properties": {
+        "decision_id": { "type": "string" },
+        "request_id": { "type": "string" },
+        "outcome": { "type": "string", "enum": ["ALLOW", "DENY", "REQUIRE_APPROVAL", "SECURITY_ABORT"] },
+        "evaluated_tuple_digest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "matched_policies": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "reason": { "type": "string" },
+        "decided_epoch": { "type": "integer" },
+        "decided_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["decision_id", "request_id", "outcome", "evaluated_tuple_digest", "decided_epoch", "decided_at"]
+    },
+    "Effect": {
+      "type": "object",
+      "description": "Externally observable state transition mediated by BABYLON. Irreversibility is an orthogonal property, not its definition.",
+      "properties": {
+        "effect_id": { "type": "string" },
+        "effect_kind": { "type": "string", "enum": ["FS_READ", "FS_MUTATE", "FS_DELETE", "FS_CHMOD", "FS_RENAME", "NET_TRANSMIT", "PROC_SPAWN", "PROC_TERMINATE", "KEY_DESTROY", "LEDGER_APPEND"] },
+        "reversibility": { "type": "string", "enum": ["REVERSIBLE", "COMPENSATABLE", "IRREVERSIBLE"] },
+        "target_resource": { "type": "string" },
+        "parameters": { "type": "object" }
+      },
+      "required": ["effect_id", "effect_kind", "reversibility", "target_resource"]
+    },
+    "EffectOutcome": {
+      "type": "object",
+      "description": "Observed physical consequence measured after dispatch in silicio. Law O6: EFFECT != OBSERVED OUTCOME.",
+      "properties": {
+        "outcome_id": { "type": "string" },
+        "effect_id": { "type": "string" },
+        "status": { "type": "string", "enum": ["SUCCESS", "FAILURE", "PARTIAL", "TIMED_OUT", "INTERCEPTED"] },
+        "pre_state_digest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "post_state_digest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "divergence_detected": { "type": "boolean" },
+        "observed_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["outcome_id", "effect_id", "status", "divergence_detected", "observed_at"]
+    },
+    "Receipt": {
+      "type": "object",
+      "description": "Cryptographic record of evidence about an EffectOutcome through the 5 lifecycle stages. Law O7: RECEIPT != TRUTH.",
+      "properties": {
+        "receipt_id": { "type": "string" },
+        "effect_id": { "type": "string" },
+        "outcome_id": { "type": "string" },
+        "stage": { "type": "string", "enum": ["REQUESTED", "AUTHORIZED", "DISPATCHED", "OBSERVED", "COMMITTED"] },
+        "evidence_digest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "cose_sign1_hex": { "type": "string" },
+        "signer_kid": { "type": "string" },
+        "anchored_epoch": { "type": "integer" },
+        "anchored_txid": { "type": "string" },
+        "issued_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["receipt_id", "effect_id", "stage", "evidence_digest", "issued_at"]
+    },
+    "DomainNemesis": {
+      "type": "object",
+      "description": "Domain 3: NEMESIS (Verify) - Popperian challenges, fault models, falsification testing, and binding attestations.",
+      "properties": {
+        "Assertion": { "$ref": "#/$defs/Assertion" },
+        "FaultModel": { "$ref": "#/$defs/FaultModel" },
+        "Test": { "$ref": "#/$defs/Test" },
+        "Evidence": { "$ref": "#/$defs/Evidence" },
+        "Attestation": { "$ref": "#/$defs/Attestation" }
+      }
+    },
+    "Assertion": {
+      "type": "object",
+      "description": "Security invariant or formal claim subjected to adversarial falsification. Law O8: EVIDENCE != ASSERTION.",
+      "properties": {
+        "assertion_id": { "type": "string" },
+        "name": { "type": "string" },
+        "formal_predicate": { "type": "string" },
+        "status": { "type": "string", "enum": ["UNTESTED", "SUPPORTED", "FALSIFIED", "STALE"] },
+        "domain_scope": { "type": "string" },
+        "last_challenged_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["assertion_id", "name", "formal_predicate", "status"]
+    },
+    "FaultModel": {
+      "type": "object",
+      "description": "Explicit perturbation or adversarial attack vector deployed to test system boundaries.",
+      "properties": {
+        "model_id": { "type": "string" },
+        "vector_name": { "type": "string" },
+        "perturbation_mechanism": { "type": "string", "enum": ["RACE_CONDITION", "MEMORY_CORRUPTION", "CRASH_MID_TRANS", "TOCTOU_SWAP", "FD_EXHAUSTION", "FORGED_NONCE", "REPLAY_ATTACK", "CROSS_DEV_ESCAPE"] },
+        "parameters": { "type": "object" }
+      },
+      "required": ["model_id", "vector_name", "perturbation_mechanism"]
+    },
+    "Test": {
+      "type": "object",
+      "description": "Adversarial execution harness confronting an Assertion with a FaultModel.",
+      "properties": {
+        "test_id": { "type": "string" },
+        "assertion_id": { "type": "string" },
+        "fault_model_id": { "type": "string" },
+        "iterations": { "type": "integer", "minimum": 1 },
+        "concurrency_level": { "type": "integer", "minimum": 1 }
+      },
+      "required": ["test_id", "assertion_id", "fault_model_id", "iterations"]
+    },
+    "Evidence": {
+      "type": "object",
+      "description": "Observable metrics, traces, and receipts produced during a Test run. Supports or falsifies an Assertion.",
+      "properties": {
+        "evidence_id": { "type": "string" },
+        "test_id": { "type": "string" },
+        "associated_receipts": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "metrics": { "type": "object" },
+        "result": { "type": "string", "enum": ["FALSIFICATION_SUCCESSFUL", "FALSIFICATION_FAILED"] },
+        "recorded_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["evidence_id", "test_id", "result", "recorded_at"]
+    },
+    "Attestation": {
+      "type": "object",
+      "description": "Cryptographic binding between subject + evidence + environment + claims + time. Law O9: ATTESTATION != TRUTH.",
+      "properties": {
+        "attestation_id": { "type": "string" },
+        "subject_id": { "type": "string" },
+        "assertion_id": { "type": "string" },
+        "evidence_hashes": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+        },
+        "artifact_digest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "environment_digest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "claims": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "issued_at": { "type": "string", "format": "date-time" },
+        "signature_hex": { "type": "string" },
+        "signer_authority_id": { "type": "string" }
+      },
+      "required": ["attestation_id", "subject_id", "assertion_id", "evidence_hashes", "artifact_digest", "environment_digest", "issued_at", "signature_hex"]
+    },
+    "OntologicalLaws": {
+      "type": "object",
+      "description": "The 14 Invariant Laws governing identity, causality, and demarcation across all BABYLON domains.",
+      "properties": {
+        "O1_SOURCE_NEQ_INFERENCE": { "type": "string", "const": "SOURCE != INFERENCE" },
+        "O2_INFERENCE_NEQ_AUTHORITY": { "type": "string", "const": "INFERENCE != AUTHORITY" },
+        "O3_AUTHORITY_NEQ_CAPABILITY": { "type": "string", "const": "AUTHORITY != CAPABILITY" },
+        "O4_REQUEST_NEQ_DECISION": { "type": "string", "const": "REQUEST != DECISION" },
+        "O5_DECISION_NEQ_EFFECT": { "type": "string", "const": "DECISION != EFFECT" },
+        "O6_EFFECT_NEQ_OBSERVED_OUTCOME": { "type": "string", "const": "EFFECT != OBSERVED_OUTCOME" },
+        "O7_RECEIPT_NEQ_TRUTH": { "type": "string", "const": "RECEIPT != TRUTH" },
+        "O8_EVIDENCE_NEQ_ASSERTION": { "type": "string", "const": "EVIDENCE != ASSERTION" },
+        "O9_ATTESTATION_NEQ_TRUTH": { "type": "string", "const": "ATTESTATION != TRUTH" },
+        "O10_UI_NEQ_AUTHORITY": { "type": "string", "const": "UI != AUTHORITY" },
+        "O11_MACHINE_INFERENCE_NEQ_PREDICTION_ERROR": { "type": "string", "const": "MACHINE INFERENCE != PREDICTION ERROR" },
+        "O12_TRACEABILITY_NEQ_AUTHORIZATION": { "type": "string", "const": "TRACEABILITY != AUTHORIZATION" },
+        "O13_CLIENT_CLOCK_NEQ_SYSTEM_TIME": { "type": "string", "const": "CLIENT CLOCK != SYSTEM TIME" },
+        "O14_INTERFACE_AUTHORIZATION_NEQ_ENVIRONMENT_CONFINEMENT": { "type": "string", "const": "INTERFACE AUTHORIZATION != ENVIRONMENT CONFINEMENT" },
+        "TRANSVERSAL_LAW_1": { "type": "string", "const": "No stochastic interpretation may create authority by itself" },
+        "TRANSVERSAL_LAW_2": { "type": "string", "const": "No mediated effect may commit without an explicit Decision" },
+        "INFERENCE_CANNOT_CREATE_CAPABILITY": { "type": "string", "const": "Inference cannot create Capability" }
+      }
+    }
+  }
+}

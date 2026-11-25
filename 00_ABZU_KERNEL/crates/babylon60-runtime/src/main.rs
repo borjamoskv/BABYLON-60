@@ -1,0 +1,603 @@
+#![deny(clippy::float_arithmetic)]
+#![deny(clippy::float_cmp)]
+// ============================================================================
+// BABYLON-60 v4.0 Sovereign Hardened
+// █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+// ============================================================================
+use num_bigint::BigInt;
+use num_traits::{Zero, ToPrimitive, Pow};
+use serde::{Deserialize, Serialize};
+use sha2::{Sha256, Digest};
+use std::collections::{HashMap, VecDeque};
+use std::env;
+use std::fs;
+
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[allow(clippy::upper_case_acronyms)]
+enum B60Type {
+    I64,
+    TIME,
+    F60,
+    UNALLOCATED,
+}
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+struct F60 {
+    num: BigInt,
+    scale: u32,
+}
+
+impl F60 {
+    fn new(num: BigInt, scale: u32) -> Self {
+        let mut f = F60 { num, scale };
+        f.reduce();
+        f
+    }
+
+    fn reduce(&mut self) {
+        if self.num.is_zero() {
+            self.scale = 0;
+            return;
+        }
+        // C0442: cada factor 60 extraído del numerador baja la escala en uno; el valor se conserva.
+        let sixty = BigInt::from(60_u64);
+        while self.scale > 0 && (&self.num % &sixty).is_zero() {
+            self.num /= &sixty;
+            self.scale -= 1;
+        }
+    }
+
+    #[allow(dead_code, clippy::float_arithmetic)]
+    fn to_f64(&self) -> f64 {
+        let num_f = self.num.to_f64().unwrap_or(0.0);
+        let den_f = 60_f64.powi(self.scale as i32);
+        num_f / den_f
+    }
+}
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+struct Register {
+    val: F60,
+    typ: B60Type,
+}
+
+#[derive(Clone, Debug)]
+enum CoroutineState {
+    Ready,
+    Waiting(String), // AWAIT symbol
+    WaitingTimer(u64), // AFTER tick
+    Running,
+    Completed,
+    Halted,
+}
+
+#[derive(Clone, Debug)]
+struct Coroutine {
+    #[allow(dead_code)]
+    id: usize,
+    pc: usize,
+    state: CoroutineState,
+    r: Vec<Register>,
+}
+
+#[derive(Serialize)]
+struct OpTrace {
+    action: String,
+    symbol: String,
+    status: String,
+}
+
+#[derive(Serialize)]
+struct F60Delta {
+    cell_id: String,
+    delta_numerator: String,
+    delta_scale: u32,
+}
+
+#[derive(Serialize)]
+struct TickSequence {
+    tick: u64,
+    opcode: String,
+    registers_snapshot: HashMap<String, String>,
+}
+
+#[derive(Serialize)]
+struct ExportSchema {
+    initial_state_hash: String,
+    tick_sequence: Vec<TickSequence>,
+    op_trace: Vec<OpTrace>,
+    f60_deltas: Vec<F60Delta>,
+    energy_vector: Vec<String>,
+    replay_hash: String,
+    theorem_prover_payload: String,
+}
+
+struct Machine {
+    q: VecDeque<Coroutine>,
+    l: Vec<TickSequence>,
+    op_trace: Vec<OpTrace>,
+    f60_deltas: Vec<F60Delta>,
+    c: u64, // Clock
+    labels: HashMap<String, usize>,
+    lines: Vec<String>,
+    next_cid: usize,
+    emitted_events: std::collections::HashSet<String>,
+}
+
+fn parse_b60_digit(token: &str) -> i64 {
+    if token == "-" { return 0; }
+    let tens = token.chars().filter(|&c| c == '<').count() as i64;
+    let ones = token.chars().filter(|&c| c == 'Y' || c == 'v' || c == 'T').count() as i64;
+    tens * 10 + ones
+}
+
+fn parse_b60_number(b60_str: &str) -> F60 {
+    let inner = b60_str.trim_matches(|c| c == '[' || c == ']' || c == ' ');
+    if inner.is_empty() { return F60::new(BigInt::zero(), 0); }
+    let places: Vec<&str> = inner.split_whitespace().collect();
+    let mut total = BigInt::zero();
+    let mut power = (places.len() - 1) as u32;
+    for p in places {
+        total += BigInt::from(parse_b60_digit(p)) * BigInt::from(60u64).pow(power);
+        power = power.saturating_sub(1);
+    }
+    F60::new(total, 0)
+}
+
+fn get_reg_index(reg_str: &str) -> usize {
+    if let Some(num) = reg_str.strip_prefix('R') {
+        num.parse().unwrap_or(0)
+    } else {
+        0
+    }
+}
+
+impl Machine {
+    fn eval_expr(&self, expr: &str, r: &[Register]) -> F60 {
+        if expr.starts_with('[') {
+            parse_b60_number(expr)
+        } else if expr.starts_with('R') {
+            let idx = get_reg_index(expr);
+            r[idx].val.clone()
+        } else if expr == "UNIT.HOUR" {
+            F60::new(BigInt::from(3600u64), 0)
+        } else if expr == "UNIT.MINUTE" {
+            F60::new(BigInt::from(60u64), 0)
+        } else {
+            F60::new(BigInt::zero(), 0)
+        }
+    }
+
+    fn critical_halt(&mut self, reason: &str) {
+        println!("[ MOSKV KERNEL ] CRITICAL HALT: {}", reason);
+        self.export_artifact();
+        std::process::exit(1);
+    }
+
+    fn export_artifact(&self) {
+        println!("[ MOSKV KERNEL ] CAUSAL SNAPSHOT -> ARTIFACT EXPORT");
+        let mut hasher = Sha256::new();
+        hasher.update(b"BABYLON-60-INIT");
+        let initial_res = hasher.finalize();
+        let initial_hash: String = initial_res.iter().map(|b| format!("{:02x}", b)).collect();
+
+        let mut hasher2 = Sha256::new();
+        hasher2.update(self.c.to_be_bytes());
+        let replay_res = hasher2.finalize();
+        let replay_hash: String = replay_res.iter().map(|b| format!("{:02x}", b)).collect();
+
+        let artifact = ExportSchema {
+            initial_state_hash: initial_hash,
+            tick_sequence: self.l.iter().map(|t| TickSequence {
+                tick: t.tick,
+                opcode: t.opcode.clone(),
+                registers_snapshot: t.registers_snapshot.clone(),
+            }).collect(),
+            op_trace: self.op_trace.iter().map(|o| OpTrace {
+                action: o.action.clone(),
+                symbol: o.symbol.clone(),
+                status: o.status.clone(),
+            }).collect(),
+            f60_deltas: self.f60_deltas.iter().map(|f| F60Delta {
+                cell_id: f.cell_id.clone(),
+                delta_numerator: f.delta_numerator.clone(),
+                delta_scale: f.delta_scale,
+            }).collect(),
+            energy_vector: vec!["EXERGY: 1.0".to_string()],
+            replay_hash,
+            theorem_prover_payload: "inductive B60State where ...".to_string(),
+        };
+
+        let json = serde_json::to_string_pretty(&artifact).expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
+        fs::write("proof_artifact.json", json).expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
+        println!("[ MOSKV KERNEL ] Escrito a proof_artifact.json");
+    }
+
+    fn run(&mut self) {
+        while !self.q.is_empty() {
+            let mut coro = self.q.pop_front().expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
+            
+            match coro.state {
+                CoroutineState::Completed | CoroutineState::Halted => continue,
+                CoroutineState::Waiting(ref sym) => {
+                    if self.emitted_events.contains(sym) {
+                        coro.state = CoroutineState::Ready;
+                    } else {
+                        self.q.push_back(coro);
+                        self.c += 1;
+                        continue;
+                    }
+                }
+                CoroutineState::WaitingTimer(target_tick) => {
+                    if self.c >= target_tick {
+                        coro.state = CoroutineState::Ready;
+                    } else {
+                        self.q.push_back(coro);
+                        self.c += 1;
+                        continue;
+                    }
+                }
+                _ => {}
+            }
+
+            coro.state = CoroutineState::Running;
+
+            if coro.pc >= self.lines.len() {
+                coro.state = CoroutineState::Completed;
+                continue;
+            }
+
+            let line = self.lines[coro.pc].trim().to_string();
+            if line.is_empty() || line == "DUB" || line.starts_with("MUB ") || line.starts_with('#') {
+                coro.pc += 1;
+                coro.state = CoroutineState::Ready;
+                self.q.push_back(coro);
+                self.c += 1;
+                continue;
+            }
+
+            let tokens = tokenize_line(&line);
+            if tokens.is_empty() { 
+                coro.pc += 1; 
+                coro.state = CoroutineState::Ready;
+                self.q.push_back(coro);
+                continue; 
+            }
+
+            let cmd = tokens[0].as_str();
+            // Una línea sin los operandos que exige su opcode (p. ej. "NIG R1 # comentario")
+            // es un programa inválido: halt crítico definido, no pánico por índice.
+            if tokens.len() < min_arity(cmd) {
+                self.critical_halt(&format!("ARITY_ERROR: {} requiere {} tokens", cmd, min_arity(cmd)));
+            }
+            match cmd {
+                "ALLOC" => {
+                    let typ_str = &tokens[1];
+                    let idx = get_reg_index(&tokens[2]);
+                    coro.r[idx].typ = match typ_str.as_str() {
+                        "TIME" => B60Type::TIME,
+                        "F60" => B60Type::F60,
+                        _ => B60Type::I64,
+                    };
+                }
+                "NIG" => {
+                    let idx = get_reg_index(&tokens[1]);
+                    coro.r[idx].val = self.eval_expr(&tokens[2], &coro.r);
+                    if tokens.len() > 3 {
+                        let mult = self.eval_expr(&tokens[3], &coro.r);
+                        match mul_f60(&coro.r[idx].val, &mult) {
+                            Ok(v) => coro.r[idx].val = v,
+                            Err(e) => self.critical_halt(&e),
+                        }
+                    }
+                }
+                "BA.EXACT" => {
+                    let idx1 = get_reg_index(&tokens[1]);
+                    let val2 = self.eval_expr(&tokens[2], &coro.r);
+                    
+                    if val2.num.is_zero() {
+                        self.critical_halt("DIVIDE_BY_ZERO");
+                    }
+
+                    match exact_div(&coro.r[idx1].val, &val2) {
+                        Ok(v) => coro.r[idx1].val = v,
+                        Err(e) => self.critical_halt(&e),
+                    }
+                }
+                "FORK" => {
+                    let label = &tokens[1];
+                    if let Some(&target) = self.labels.get(label) {
+                        let new_coro = Coroutine {
+                            id: self.next_cid,
+                            pc: target,
+                            state: CoroutineState::Ready,
+                            r: coro.r.clone(),
+                        };
+                        self.next_cid += 1;
+                        self.q.push_back(new_coro);
+                        
+                        self.op_trace.push(OpTrace {
+                            action: "FORK".to_string(),
+                            symbol: label.clone(),
+                            status: "RESOLVED".to_string(),
+                        });
+                    }
+                }
+                "AFTER" => {
+                    let idx = get_reg_index(&tokens[1]);
+                    let ticks = match ticks_from_f60(&coro.r[idx].val) {
+                        Ok(t) => t,
+                        Err(e) => {
+                            self.critical_halt(&e);
+                            0
+                        }
+                    };
+                    let label = &tokens[2];
+                    if let Some(&target) = self.labels.get(label) {
+                        let Some(wake_at) = self.c.checked_add(ticks) else {
+                            self.critical_halt("AFTER: el tick de despertar desborda u64");
+                            return;
+                        };
+                        coro.state = CoroutineState::WaitingTimer(wake_at);
+                        coro.pc = target;
+                        self.q.push_back(coro);
+                        self.c += 1;
+                        continue;
+                    }
+                }
+                "AWAIT" => {
+                    let sym = tokens[1].trim_matches('"').to_string();
+                    let label = &tokens[2];
+                    if let Some(&target) = self.labels.get(label) {
+                        coro.state = CoroutineState::Waiting(sym.clone());
+                        coro.pc = target;
+                        self.op_trace.push(OpTrace {
+                            action: "AWAIT".to_string(),
+                            symbol: sym.clone(),
+                            status: "PENDING".to_string(),
+                        });
+                        self.q.push_back(coro);
+                        self.c += 1;
+                        continue;
+                    }
+                }
+                "EXECUTE" => {
+                    let action = tokens[1].trim_matches('"').to_string();
+                    println!("[MOSKV LEDGER DISPATCH] ⚡ {} (Tick: {})", action, self.c);
+                    self.emitted_events.insert(action.clone());
+                    self.op_trace.push(OpTrace {
+                        action: "EXECUTE".to_string(),
+                        symbol: action.clone(),
+                        status: "RESOLVED".to_string(),
+                    });
+                }
+                "SAR.B60" => {
+                    let idx = get_reg_index(&tokens[1]);
+                    println!("SAR (B60): num={} scale={}", coro.r[idx].val.num, coro.r[idx].val.scale);
+                }
+                "GIN" => {
+                    let label = &tokens[1];
+                    if let Some(&target) = self.labels.get(label) {
+                        coro.pc = target;
+                        coro.state = CoroutineState::Ready;
+                        self.q.push_back(coro);
+                        self.c += 1;
+                        continue;
+                    }
+                }
+                "HALT" => {
+                    coro.state = CoroutineState::Halted;
+                    self.q.push_back(coro);
+                    self.c += 1;
+                    continue;
+                }
+                _ => {}
+            }
+
+            let mut snap = HashMap::new();
+            snap.insert("PC".to_string(), coro.pc.to_string());
+            self.l.push(TickSequence {
+                tick: self.c,
+                opcode: line.clone(),
+                registers_snapshot: snap,
+            });
+
+            coro.pc += 1;
+            coro.state = CoroutineState::Ready;
+            self.q.push_back(coro);
+            self.c += 1;
+        }
+
+        self.export_artifact();
+    }
+}
+
+fn main() {
+    let args: Vec<String> = env::args().collect();
+    if args.len() < 2 {
+        eprintln!("Usage: {} <script.b60>", args[0]);
+        std::process::exit(1);
+    }
+
+    let code = fs::read_to_string(&args[1]).expect("Failed to read script");
+    let lines: Vec<String> = code.lines().map(|l| l.trim().to_string()).collect();
+    
+    let mut labels = HashMap::new();
+    for (i, line) in lines.iter().enumerate() {
+        if line.starts_with("MUB ") {
+            let name = line.split_whitespace().nth(1).expect("C5-REAL: Termodinámica forzada. Unwrap purgado.");
+            labels.insert(name.to_string(), i);
+        }
+    }
+
+    let initial_r = vec![Register { val: F60::new(BigInt::zero(), 0), typ: B60Type::UNALLOCATED }; 64];
+    let root_coro = Coroutine {
+        id: 0,
+        pc: 0,
+        state: CoroutineState::Ready,
+        r: initial_r,
+    };
+
+    let mut machine = Machine {
+        q: VecDeque::from(vec![root_coro]),
+        l: Vec::new(),
+        op_trace: Vec::new(),
+        f60_deltas: Vec::new(),
+        c: 0,
+        labels,
+        lines,
+        next_cid: 1,
+        emitted_events: std::collections::HashSet::new(),
+    };
+
+    machine.run();
+}
+
+/// Divide una línea en tokens; los corchetes y las cadenas forman un único token.
+fn tokenize_line(line: &str) -> Vec<String> {
+    let mut tokens = Vec::new();
+    let mut in_bracket = false;
+    let mut in_string = false;
+    let mut cur = String::new();
+    for c in line.chars() {
+        if c == '#' && !in_string && !in_bracket {
+            // Comentario en línea: el resto no son operandos (antes se leía como multiplicador 0).
+            break;
+        }
+        if c == '"' {
+            in_string = !in_string;
+            cur.push(c);
+        } else if c == '[' && !in_string {
+            in_bracket = true;
+            cur.push(c);
+        } else if c == ']' && !in_string {
+            in_bracket = false;
+            cur.push(c);
+            tokens.push(cur.trim().to_string());
+            cur.clear();
+        } else if c.is_whitespace() && !in_bracket && !in_string {
+            if !cur.is_empty() {
+                tokens.push(cur.clone());
+                cur.clear();
+            }
+        } else {
+            cur.push(c);
+        }
+    }
+    if !cur.is_empty() {
+        tokens.push(cur);
+    }
+    tokens
+}
+
+/// Límite de escala F60, el mismo que aplica BA.EXACT (`exact_div`).
+const MAX_F60_SCALE: u32 = 20;
+
+/// Producto exacto de NIG con multiplicador (C0442): (a/60^sa)·(b/60^sb) = (a·b)/60^(sa+sb).
+/// La escala resultante, ya reducida, no puede superar MAX_F60_SCALE ni desbordar u32.
+fn mul_f60(a: &F60, b: &F60) -> Result<F60, String> {
+    let scale = a
+        .scale
+        .checked_add(b.scale)
+        .ok_or("FALSATION_ERROR: TRUNCATION (escala F60 desbordada)")?;
+    let product = F60::new(&a.num * &b.num, scale);
+    if product.scale > MAX_F60_SCALE {
+        return Err("FALSATION_ERROR: TRUNCATION (escala F60 del producto excede el límite)".into());
+    }
+    Ok(product)
+}
+
+/// Tokens mínimos (opcode incluido) que exige cada instrucción.
+fn min_arity(cmd: &str) -> usize {
+    match cmd {
+        "ALLOC" | "NIG" | "BA.EXACT" | "AFTER" | "AWAIT" => 3,
+        "FORK" | "EXECUTE" | "GIN" => 2,
+        _ => 1,
+    }
+}
+
+/// Ticks de AFTER (C0442): solo un entero no negativo es un número de ticks. Un valor F60
+/// reducido es entero exactamente cuando su escala es 0.
+fn ticks_from_f60(v: &F60) -> Result<u64, String> {
+    if v.scale != 0 {
+        return Err("AFTER: el número de ticks debe ser entero".into());
+    }
+    v.num
+        .to_u64()
+        .ok_or_else(|| "AFTER: el número de ticks debe ser no negativo y caber en u64".into())
+}
+
+/// División exacta de BA.EXACT (C0443). a/b = (a.num·60^sb) / (b.num·60^sa); se busca la menor
+/// escala t con cociente entero, de modo que Q/60^t = a/b sin perder valor.
+fn exact_div(a: &F60, b: &F60) -> Result<F60, String> {
+    if b.num.is_zero() {
+        return Err("DIVIDE_BY_ZERO".into());
+    }
+    let sixty = BigInt::from(60u64);
+    let numer_base = a.num.clone() * sixty.clone().pow(b.scale);
+    let denom = b.num.clone() * sixty.clone().pow(a.scale);
+    for t in 0..=20u32 {
+        let n = &numer_base * sixty.clone().pow(t);
+        if (&n % &denom).is_zero() {
+            return Ok(F60::new(n / &denom, t));
+        }
+    }
+    Err("FALSATION_ERROR: TRUNCATION (Blowup de Numerador excedió límite de Escala F60)".into())
+}
+
+#[cfg(test)]
+mod c0442_c0443_tests {
+    use super::*;
+
+    /// Igualdad de valores racionales: a.num/60^a.scale == b.num/60^b.scale.
+    fn same_value(a: &F60, b: &F60) -> bool {
+        let sixty = BigInt::from(60u64);
+        let la = sixty.clone().pow(a.scale);
+        let lb = sixty.pow(b.scale);
+        a.num.clone() * lb == b.num.clone() * la
+    }
+
+    #[test]
+    fn reduce_preserves_value_for_partial_base_factors() {
+        // C0442: 2/60 debe seguir valiendo 2/60 tras reducir.
+        let raw = F60 { num: BigInt::from(2), scale: 1 };
+        let reduced = F60::new(BigInt::from(2), 1);
+        assert!(same_value(&raw, &reduced), "C0442: {:?} no conserva el valor de {:?}", reduced, raw);
+    }
+
+    #[test]
+    fn exact_div_respects_divisor_scale() {
+        // C0443: (1/60) / (1/3600) = 60.
+        let a = F60 { num: BigInt::from(1), scale: 1 };
+        let b = F60 { num: BigInt::from(1), scale: 2 };
+        let expected = F60 { num: BigInt::from(60), scale: 0 };
+        let got = exact_div(&a, &b).unwrap();
+        assert!(same_value(&got, &expected), "C0443: cociente {:?} ≠ 60", got);
+    }
+
+    #[test]
+    fn nig_multiplier_respects_both_scales() {
+        // 120 × (1/60) = 2
+        let a = F60::new(BigInt::from(120), 0);
+        let b = F60 { num: BigInt::from(1), scale: 1 };
+        let expected = F60 { num: BigInt::from(2), scale: 0 };
+        let got = mul_f60(&a, &b).unwrap();
+        assert!(same_value(&got, &expected), "C0442: producto {:?} ≠ 2", got);
+    }
+
+    #[test]
+    fn inline_comment_is_not_an_operand() {
+        // "# 20" se tomaba como multiplicador desconocido (= 0) y anulaba el registro.
+        assert_eq!(tokenize_line("NIG R1 [ << ]  # 20"), vec!["NIG", "R1", "[ << ]"]);
+        assert_eq!(tokenize_line("EXECUTE \"a # b\""), vec!["EXECUTE", "\"a # b\""]);
+        assert_eq!(tokenize_line("# solo comentario"), Vec::<String>::new());
+    }
+
+    #[test]
+    fn after_ticks_require_a_non_negative_integer() {
+        assert_eq!(ticks_from_f60(&F60::new(BigInt::from(5), 0)).unwrap(), 5);
+        // 1/2 tick (30 en escala 1) no es un número entero de ticks.
+        assert!(ticks_from_f60(&F60::new(BigInt::from(30), 1)).is_err(), "C0442: tick fraccionario aceptado");
+        assert!(ticks_from_f60(&F60::new(BigInt::from(-3), 0)).is_err(), "C0442: tick negativo convertido en 0");
+    }
+}

@@ -1,0 +1,42 @@
+name: Rust Dependency Security
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+    paths:
+      - 'Cargo.toml'
+      - 'Cargo.lock'
+      - '00_ABZU_KERNEL/**/Cargo.toml'
+      - 'crates/**/Cargo.toml'
+      - '01_KISH_ENGINE/cortex/**/Cargo.toml'
+      - '.github/workflows/dependency-audit.yml'
+  schedule:
+    - cron: '30 3 * * 1'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  audit:
+    if: github.repository != 'borjamoskv/BABYLON-60-VAULT' || github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: dtolnay/rust-toolchain@b725eda525362e7cf34af9a7243cac1e3f01a7ec
+        with:
+          toolchain: stable
+      - name: Install auditor
+        run: cargo install cargo-audit --locked --version 0.22.2
+      - name: Fail on vulnerabilities and unsound dependencies
+        run: cargo audit --deny unsound --json > rustsec.json
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always()
+        with:
+          name: rustsec-report
+          path: rustsec.json

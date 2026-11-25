@@ -1,0 +1,9 @@
+{
+  "duration_ms": 98,
+  "quarantine_isolation_invariant": "VERIFIED_ATOMIC_RENAME",
+  "swaps_prevented": 125,
+  "timestamp_epoch": 1791030000,
+  "unauthorized_effects": 0,
+  "verdict": "PASS_ZERO_TOCTOU_EXPLOITS",
+  "workers_dispatched": 250
+}

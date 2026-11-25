@@ -1,0 +1,1099 @@
+{
+  "date": "2026-10-26",
+  "status": "bounded_documentary_acceptance_passed_with_component_failures_confirmed",
+  "scope": "Seven technical specifications, three selected claims, related public presentation and indexes; not whole repository or protected runtime certification",
+  "claim_groups": [
+    {
+      "id": "SG-1",
+      "classification": "truth implication refuted; numeric domain failures observed; conditional Bool model preserved"
+    },
+    {
+      "id": "SG-2",
+      "classification": "false graph-isomorphism positive and order dependence reproduced in two selected functions"
+    },
+    {
+      "id": "SG-3",
+      "classification": "naming performance claims NO_VERIFICADO; style conventions retained"
+    },
+    {
+      "id": "SG-4",
+      "classification": "model/layout/admission results narrowed; no payload/cache/deadline guarantee"
+    },
+    {
+      "id": "SG-5",
+      "classification": "security mechanisms conditional on trusted checkpoints, authority and confinement; source inspection only"
+    },
+    {
+      "id": "SG-6",
+      "classification": "certification badges withdrawn; declarations and versioned evidence distinguished"
+    }
+  ],
+  "checks": {
+    "public-claim-contracts": {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "pytest",
+        "tests/test_audit_public_claims.py",
+        "-q"
+      ],
+      "working_directory": ".",
+      "environment_overrides": {},
+      "exit_code": 0,
+      "stdout": "....                                                                     [100%]\n4 passed in 0.34s\n",
+      "stderr": "Uninstalled 1 package in 3ms\nInstalled 1 package in 5ms\n"
+    },
+    "claims-list": {
+      "command": [
+        "python3",
+        "scripts/c5_quality_gates/verify_claims.py",
+        "--list"
+      ],
+      "working_directory": ".",
+      "environment_overrides": {},
+      "exit_code": 0,
+      "stdout": "[DECLARED] AUTH_001 [REQUIRED]  (declared: verified_local | level: L2_IMPLEMENTATION)\n    statement : A consumed authorization cannot be dispatched a second time by the executor, including after process death and reopening the file ledger\n    evidence  : cargo test --locked --lib executor::tests::replay_rejected_after_reopening_file_ledger -- --exact\n[DECLARED] AUTH_002 [REQUIRED]  (declared: verified_local | level: L2_IMPLEMENTATION)\n    statement : EDIN workers cannot execute protected effects directly without verified COSE authorization over the IPC Unix socket boundary\n    evidence  : cargo test --locked --lib executor::ipc_tests --features cortex-persist,cortex-telemetry\n[DECLARED] AUTH_003 [REQUIRED]  (declared: verified_local | level: L2_IMPLEMENTATION)\n    statement : A dispatch without a durable result becomes UNKNOWN at restart and is never retried automatically\n    evidence  : cargo test --locked --lib executor::tests::interrupted_after_dispatch_becomes_unknown_on_reopen -- --exact\n[DECLARED] AUTH_004 [REQUIRED]  (declared: verified_local | level: L4_EXPERIMENTAL)\n    statement : A resource whose precondition digest or inode identity changes between authorization and effect is rejected before mutation; for filesystem DELETE_FILE, the TOCTOU gap is closed via atomic quarantine isolation and post-rename verification\n    evidence  : cargo test --locked --lib secure_fs && cargo test --locked --test adversarial_nemesis --features cortex-persist\n[DECLARED] AUTH_005 [REQUIRED]  (declared: verified_local | level: L2_IMPLEMENTATION)\n    statement : Signing or persistence failures produce explicit errors; no zeroed or synthetic signature is emitted\n    evidence  : cargo test --locked --lib receipt::tests::test_receipt_signing_failure_returns_explicit_error_never_zeros -- --exact && cargo test --locked --lib halt::tests::halt_without_operational_key_is_unsigned_never_synthetic -- --exact && cargo test --locked --lib halt::tests::halt_unwritable_path_reports_persistence_failed -- --exact\n[DECLARED] AUTH_006 [REQUIRED]  (declared: verified_local | level: L4_EXPERIMENTAL)\n    statement : Under 1000 one-process-per-iteration runs covering 3 SIGKILL crash points and a no-crash control, no nonce produces more than one effect, no DISPATCHED survives restart, and every archived authorization replay is rejected\n    evidence  : D=$(mktemp -d)/run && cargo run --locked --release --example poc_v5_crash_harness -- parent --iterations 1000 --dir $D\n[DECLARED] AUTH_007_secure_fs_quarantine [REQUIRED]  (declared: verified_local | level: L4_EXPERIMENTAL)\n    statement : EffectTx guarantees SAFETY and NON-INTERFERENCE for DELETE_FILE: under 100 concurrent workers and swap race attacks, unauthorized destructions == 0 and unquarantined deletions == 0\n    evidence  : cargo test --locked --test adversarial_nemesis --features cortex-persist\n[DECLARED] FL_007_admission_bounded_liveness [REQUIRED]  (declared: verified_local | level: L2_IMPLEMENTATION)\n    statement : AdmissionController checks the observed atomic depth against capacity and a service-time estimate multiplied by depth cast to u32 before reserving a slot; this heuristic does not guarantee actual waiting time or starvation freedom\n    evidence  : cargo test --locked --features cortex-persist --test admission_capability_test test_fl007\n[DECLARED] FL_008_scoped_capability_broker [REQUIRED]  (declared: verified_local | level: L4_EXPERIMENTAL)\n    statement : ScopedHandle and McpCapabilityBroker enforce: Tool Available != Tool Authorized != Effect Authorized. Under 10,000 adversarial trials across 5 attack vectors, unauthorized_effects == 0, capability_escalations == 0, stale_token_acceptances == 0, tool_identity_confusions == 0, and configuration_drifts == 0\n    evidence  : cargo test --locked --features cortex-persist --test admission_capability_test test_fl008\n[DECLARED] FL_014_wave4_receipt_loss_and_closure_drift [REQUIRED]  (declared: verified_local | level: L4_EXPERIMENTAL)\n    statement : Under SIGKILL between physical syscall and receipt commit (FL014_RECEIPT_LOSS), blind automatic retries are rejected with AmbiguousOutcomeRequiresReconciliation and explicit inode reconciliation consolidates the receipt without duplicate effect; transitive dependency or skill/policy drift (FL015_TRANSITIVE_DRIFT / POLICY_ROLLBACK / RUNTIME_LOAD) invalidates deployment permits fail-closed\n    evidence  : cargo test --locked -q --test nemesis_wave4 --features cortex-persist\n[DECLARED] FL_016_owasp_acs_vop1_and_drift_guard [REQUIRED]  (declared: verified_local | level: L4_EXPERIMENTAL)\n    statement : BabylonAcsGuard enforces OWASP ACS v0.1.0 over AF_UNIX peer-verified sockets, rejects Fail-Open (on_decision_failure='proceed') with 0xDEAD_6060, compresses human wait stalls by >514x (n=30 cohorts, CI95), reconciles VOP-1 UNKNOWN states against physical witness digests, and invalidates capabilities upon skill/tool/policy drift (BabylonDriftGuard)\n    evidence  : cargo test --locked --test acs_authenticated --features cortex-persist && cargo test --locked --test nemesis_wave3 --features cortex-persist\n[DECLARED] INV_OMEGA_complete_mediation [REQUIRED]  (declared: verified_local | level: L3_ISOLATION)\n    statement : Confined AI agent processes cannot mutate or unlink protected OS resources or the SQLite ledger directly (macOS Seatbelt / EPERM); all reachability paths G=(V,A) from agent to protected resources are mediated by the BABYLON broker, and the 5-test Omega Campaign (BYPASS-001, AUTH-002, RACE-003, CRASH-004, REVOCATION-005) passes on real OS files\n    evidence  : cargo test --locked --features cortex-persist --test omega_mediation_campaign\n[DECLARED] cortex_persist_sqlite  (declared: verified | level: L2_IMPLEMENTATION)\n    statement : Persistent ledger with SQLite WAL, BEGIN IMMEDIATE and legacy SHA3-256 row hash chaining\n    evidence  : pytest tests/ -k test_ledger\n[DECLARED] cose_ed25519_receipt  (declared: verified | level: L2_IMPLEMENTATION)\n    statement : Receipts are formatted according to RFC 9942 and cryptographically signed with Ed25519\n    evidence  : cargo test --locked --lib receipt::tests::test_receipt_ed25519_sign_verify_cycle\n[DECLARED] heterogeneous_verification_quorum  (declared: verified_local | level: L2_IMPLEMENTATION)\n    statement : Heterogeneous 2/3 verification quorum over 3 engines (Rust, Lean 4, Z3)\n    evidence  : cargo test --locked --lib larsa_bft\n[DECLARED] inv_01_manifest_layout  (declared: verified | level: L2_IMPLEMENTATION)\n    statement : SharedManifest layout is 64 bytes with 64-byte alignment and documented field offsets; layout alone does not establish cache coherence, RFO traffic or performance\n    evidence  : cargo test --locked --lib manifest::tests::layout_is_64_bytes_aligned_with_documented_offsets -- --exact\n[DECLARED] inv_02_seqlock_concurrency  (declared: verified | level: L1_FORMAL)\n    statement : Seqlock SPMC protocol model (loom replica of seqlock.rs, 1 writer x 1-2 readers) yields no torn read under bounded model checking (max 2 preemptions); production code is not itself model-checked\n    evidence  : CARGO_BUILD_JOBS=1 LOOM_MAX_PREEMPTIONS=2 RUSTFLAGS=\"--cfg loom\" CARGO_TARGET_DIR=target/loom cargo test --locked --test seqlock_loom --release\n[DECLARED] inv_04_fail_stop_halt  (declared: verified | level: L2_IMPLEMENTATION)\n    statement : Epistemic halt closes admission (POISONED, 0xDEAD_6060) and records SignedDurable / UnsignedDurable / PersistenceFailed evidence within a bounded budget; never a synthetic signature\n    evidence  : cargo test --locked --lib halt::tests\n[DECLARED] lean4_formal_trace  (declared: verified_local | level: L1_FORMAL)\n    statement : For accepted abstract traces, BabylonTrace proves even declared read sequences (TraceReadsEven), and AX0 proves countDispatches <= 1 from Proposed; neither theorem models Rust payload loads or physical memory ordering\n    evidence  : ELAN_TOOLCHAIN=leanprover/lean4:v4.34.0-rc2 lean proof/lean/BabylonTrace.lean && ELAN_TOOLCHAIN=leanprover/lean4:v4.34.0-rc2 lean proof/lean/AX0.lean\n[DECLARED] mcp_authority_gate  (declared: verified | level: L2_IMPLEMENTATION)\n    statement : MCP server enforces AX-0: stochastic AI clients cannot self-authorize protected actions\n    evidence  : pytest tests/test_ax0_mcp_isolation.py\n[DECLARED] mcp_seatbelt_confinement [REQUIRED]  (declared: verified_local | level: L3_ISOLATION)\n    statement : The macOS MCP backend checks the real stdio protocol and Seatbelt confinement before admitting a candidate, with bounded execution and fail-closed rejection\n    evidence  : uv run --locked pytest tests/test_mcp_deduction.py tests/test_mcp_seatbelt.py tests/test_audit_mcp_confinement.py -q\n[DECLARED] merkle_attestation  (declared: verified | level: L2_IMPLEMENTATION)\n    statement : Merkle state roots computed deterministically and queryable via MCP\n    evidence  : pytest tests/ -k test_merkle\n[DECLARED] secure_enclave_p256  (declared: verified_local | level: L2_IMPLEMENTATION)\n    statement : The Apple Secure Enclave bridge verifies P-256 signatures; its automated cryptographic test uses software keys\n    evidence  : cargo test --locked --lib enclave::tests::test_enclave_cryptographic_verification_p256\n[DECLARED] sharur_100_swarm_concurrency [REQUIRED]  (declared: verified | level: L4_EXPERIMENTAL)\n    statement : SHARUR-3600 Legion of 100 concurrent workers sustains ledger contention, enforces AX-0, and achieves 100% fail-closed rate across 50 adversarial attacks\n    evidence  : pytest tests/test_swarm_100_concurrency.py\n[DECLARED] signed_dispatch_intent [REQUIRED]  (declared: verified_local | level: L2_IMPLEMENTATION)\n    statement : P-256 verification binds the complete canonical CBOR dispatch intent and consumes its nonce in SQLite WAL/FULL before dispatch, rejecting replay across connections and after SIGKILL\n    evidence  : cargo test --locked --lib omega_mediation::trusted_dispatch_tests --features cortex-persist\n[DECLARED] tamkarum_budget_gate  (declared: verified | level: L2_IMPLEMENTATION)\n    statement : KudurruBudgetGate enforces 64-byte L1 cache line layout, Kelly Criterion bid caps, and MUSHUSHU-0 fail-stop apoptosis (0xDEAD_6060)\n    evidence  : cargo test --locked --lib tamkarum::tests\n[DECLARED] worm_durability  (declared: verified_in_memory | level: L2_IMPLEMENTATION)\n    statement : In-memory HashChainedLedger provides cryptographic tamper detection\n    evidence  : cargo test --locked --lib worm\n[DECLARED] zero_anergy  (declared: partial_trace | level: L2_IMPLEMENTATION)\n    statement : The local benchmark reports elapsed time, throughput and average latency for 1,000,000 sequential seqlock publish/read iterations; it does not measure RFO traffic, idle CPU or energy consumption\n    evidence  : cargo run --locked --bin babylon60_kernel -- bench\nDeclared claims listed. No outcome asserted.\n",
+      "stderr": ""
+    },
+    "lean-BabylonTrace": {
+      "command": [
+        "lean",
+        "proof/lean/BabylonTrace.lean"
+      ],
+      "working_directory": ".",
+      "environment_overrides": {
+        "ELAN_TOOLCHAIN": "leanprover/lean4:v4.34.0-rc2"
+      },
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "lean-AX0": {
+      "command": [
+        "lean",
+        "proof/lean/AX0.lean"
+      ],
+      "working_directory": ".",
+      "environment_overrides": {
+        "ELAN_TOOLCHAIN": "leanprover/lean4:v4.34.0-rc2"
+      },
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "semantic-lean": {
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "<repo>/.audit/scientific-guarantees-20261026/semantic/SemanticEntropyAudit.lean"
+      ],
+      "working_directory": "proof/lean",
+      "environment_overrides": {},
+      "exit_code": 0,
+      "stdout": "'Babylon60.Epistemology.audit_verified_iff_supplied_flag' depends on axioms: [propext]\n'Babylon60.Epistemology.audit_flag_does_not_encode_truth' does not depend on any axioms\n'Babylon60.Epistemology.genuine_knowledge_is_verified' does not depend on any axioms\n'Babylon60.Epistemology.confabulation_triggers_0x6060' does not depend on any axioms\n'Babylon60.Epistemology.incorrect_belief_triggers_0x6061' does not depend on any axioms\n'Babylon60.Epistemology.polysemy_is_verified' does not depend on any axioms\n'Babylon60.Epistemology.falsity_never_reaches_ring1_commit' does not depend on any axioms\n",
+      "stderr": ""
+    },
+    "semantic-math": {
+      "command": [
+        "python3",
+        ".audit/scientific-guarantees-20261026/semantic/math/check_math.py"
+      ],
+      "working_directory": ".",
+      "environment_overrides": {},
+      "exit_code": 0,
+      "stdout": "{\n  \"mismatches\": 0,\n  \"examples\": [],\n  \"partition_bound_violations\": 0,\n  \"thresholds\": {\n    \"rust_q16\": 55706,\n    \"rust_bits\": 0.850006103515625,\n    \"lean_q16\": 22282,\n    \"lean_bits\": 0.339996337890625\n  }\n}\n",
+      "stderr": ""
+    },
+    "rust-probe-build-checked": {
+      "command": [
+        "rustc",
+        "--edition=2021",
+        "-C",
+        "overflow-checks=on",
+        ".audit/scientific-guarantees-20261026/semantic/math/probe.rs",
+        "-o",
+        "<repo>/.audit/scientific-guarantees-20261026/probe-checked-root"
+      ],
+      "working_directory": ".",
+      "environment_overrides": {},
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "rust-probe-checked": {
+      "command": [
+        "<repo>/.audit/scientific-guarantees-20261026/probe-checked-root"
+      ],
+      "working_directory": ".",
+      "environment_overrides": {},
+      "exit_code": 0,
+      "stdout": "invalid_zero: ((0, 0), VerifiedGenuine { h_sem_q16: 0, num_classes: 0 })\ninvalid_nine: ((0, 0), VerifiedGenuine { h_sem_q16: 0, num_classes: 0 })\neight_clique: PANIC\nzero_relation_three: ((0, 3), VerifiedGenuine { h_sem_q16: 0, num_classes: 3 })\noverlapping_nontransitive_three: ((51114, 2), VerifiedGenuine { h_sem_q16: 51114, num_classes: 2 })\n",
+      "stderr": ""
+    },
+    "rust-probe-build-unchecked": {
+      "command": [
+        "rustc",
+        "--edition=2021",
+        "-C",
+        "opt-level=3",
+        "-C",
+        "overflow-checks=off",
+        ".audit/scientific-guarantees-20261026/semantic/math/probe.rs",
+        "-o",
+        "<repo>/.audit/scientific-guarantees-20261026/probe-unchecked-root"
+      ],
+      "working_directory": ".",
+      "environment_overrides": {},
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "rust-probe-unchecked": {
+      "command": [
+        "<repo>/.audit/scientific-guarantees-20261026/probe-unchecked-root"
+      ],
+      "working_directory": ".",
+      "environment_overrides": {},
+      "exit_code": 0,
+      "stdout": "invalid_zero: ((0, 0), VerifiedGenuine { h_sem_q16: 0, num_classes: 0 })\ninvalid_nine: ((0, 0), VerifiedGenuine { h_sem_q16: 0, num_classes: 0 })\neight_clique: ((0, 8), VerifiedGenuine { h_sem_q16: 0, num_classes: 8 })\nzero_relation_three: ((0, 3), VerifiedGenuine { h_sem_q16: 0, num_classes: 3 })\noverlapping_nontransitive_three: ((51114, 2), VerifiedGenuine { h_sem_q16: 51114, num_classes: 2 })\n",
+      "stderr": ""
+    },
+    "graph-counterexamples": {
+      "command": [
+        "python3",
+        ".audit/scientific-guarantees-20261026/graph/check_counterexamples.py"
+      ],
+      "working_directory": ".",
+      "environment_overrides": {},
+      "exit_code": 0,
+      "stdout": "{\n  \"scope\": \"Isolated extraction of existing stdlib-only functions; no production effects or benchmark.\",\n  \"dag_pair\": {\n    \"edges_g\": [\n      [\n        0,\n        4\n      ],\n      [\n        0,\n        5\n      ],\n      [\n        1,\n        5\n      ],\n      [\n        1,\n        6\n      ],\n      [\n        2,\n        6\n      ],\n      [\n        2,\n        7\n      ],\n      [\n        3,\n        7\n      ],\n      [\n        3,\n        4\n      ]\n    ],\n    \"edges_h\": [\n      [\n        0,\n        4\n      ],\n      [\n        0,\n        5\n      ],\n      [\n        1,\n        4\n      ],\n      [\n        1,\n        5\n      ],\n      [\n        2,\n        6\n      ],\n      [\n        2,\n        7\n      ],\n      [\n        3,\n        6\n      ],\n      [\n        3,\n        7\n      ]\n    ],\n    \"nodes\": 8,\n    \"edges_each\": 8,\n    \"weak_components_g\": 1,\n    \"weak_components_h\": 2,\n    \"isomorphic\": false,\n    \"poc_wl_hash_g\": \"2f574a2a66f5a49b72fa06f19f9d6d102c522960008fc4145c21ba03328c6927\",\n    \"poc_wl_hash_h\": \"2f574a2a66f5a49b72fa06f19f9d6d102c522960008fc4145c21ba03328c6927\",\n    \"poc_verify_isomorphism\": true,\n    \"directed_in_out_histograms_equal_for_rounds\": 10\n  },\n  \"inplace_order_dependence\": {\n    \"same_edges\": [\n      [\n        \"a\",\n        \"b\"\n      ],\n      [\n        \"b\",\n        \"c\"\n      ]\n    ],\n    \"first_order\": [\n      \"a\",\n      \"b\",\n      \"c\"\n    ],\n    \"second_order\": [\n      \"b\",\n      \"a\",\n      \"c\"\n    ],\n    \"first_digest\": \"198d970bee779e72e9214b6504c0b6f0abafa4dcb75582cf3c0e6fb3838625cb\",\n    \"second_digest\": \"8f0a62f5c05a251ca4dca60679166a264b3cdb166b550921fafbca454d07d655\",\n    \"digests_equal\": false\n  },\n  \"interpretation\": [\n    \"Equal 1-WL hash is not an isomorphism certificate, even on this DAG pair.\",\n    \"The PoC verify_isomorphism result is a false positive for exact graph isomorphism.\",\n    \"The extracted in-place method changes its digest when only the node iteration order changes.\",\n    \"These cases do not assert the behavior of every graph implementation or a protected runtime.\"\n  ]\n}\n",
+      "stderr": ""
+    },
+    "rustc-version": {
+      "command": [
+        "rustc",
+        "--version"
+      ],
+      "working_directory": ".",
+      "environment_overrides": {},
+      "exit_code": 0,
+      "stdout": "rustc 1.97.1 (8bab26f4f 2026-07-14)\n",
+      "stderr": ""
+    },
+    "lean-version": {
+      "command": [
+        "lean",
+        "--version"
+      ],
+      "working_directory": ".",
+      "environment_overrides": {
+        "ELAN_TOOLCHAIN": "leanprover/lean4:v4.34.0-rc2"
+      },
+      "exit_code": 0,
+      "stdout": "Lean (version 4.34.0-rc2, arm64-apple-darwin24.6.0, commit 6a10ac8c22beadecabdbb0919c2b50214762f91d, Release)\n",
+      "stderr": ""
+    },
+    "document-links": {
+      "command": [
+        "python3",
+        ".audit/scientific-guarantees-20261026/check_documents.py"
+      ],
+      "working_directory": ".",
+      "exit_code": 0,
+      "stdout": "{\n  \"local_links_checked\": 375,\n  \"failures\": [],\n  \"coverage\": {\n    \"docs/01_spec in docs/00_index.md\": {\n      \"count\": 14,\n      \"missing\": []\n    },\n    \"docs/01_spec in docs/README.md\": {\n      \"count\": 14,\n      \"missing\": []\n    },\n    \"docs/06_theory in docs/00_index.md\": {\n      \"count\": 31,\n      \"missing\": []\n    },\n    \"docs/06_theory in docs/README.md\": {\n      \"count\": 31,\n      \"missing\": []\n    },\n    \"docs/06_theory in docs/06_theory/00_index.md\": {\n      \"count\": 31,\n      \"missing\": []\n    }\n  },\n  \"preserved_artifacts\": 44\n}\n",
+      "stderr": ""
+    },
+    "semantic-contracts": {
+      "command": [
+        "python3",
+        "scripts/c5_quality_gates/audit_semantic_contracts.py",
+        "--workspace-only"
+      ],
+      "working_directory": ".",
+      "exit_code": 0,
+      "stdout": "PASS: known semantic patterns (62 documents, 41 Python files), local links/anchors in 15 governance documents; not a proof of semantic consistency or runtime.\n",
+      "stderr": ""
+    },
+    "token-budget": {
+      "command": [
+        "python3",
+        "scripts/c5_quality_gates/audit_token_budget.py",
+        "--workspace-only",
+        "--skip-ghost-listeners"
+      ],
+      "working_directory": ".",
+      "exit_code": 0,
+      "stdout": "=== [C5-REAL] AUDITORÍA DE PRESUPUESTO DE TOKENS ===\n■ .babylon60rules (workspace, counted once): 5,082 B (~1,270 estimated tokens)\n■ AGENTS.md (workspace, counted once): 4,808 B (~1,202 estimated tokens)\n■ Global rules: NOT_CHECKED (workspace-only)\n■ Reglas always_on (Global: 0, Workspace: 0): 0 B (~0 estimated tokens)\n■ INSPECTED ALWAYS_ON: 9,890 B / 40,000 B (~2,472 estimated tokens; actual client context not measured)\n■ Reglas condicionales (model_decision): 0 global + 7 workspace (bodies excluded from this budget; client loading not measured)\n■ Ghost Listeners (conversation_summaries.db): NOT_CHECKED (explicitly skipped)\nPASS: Workspace token budget within inline ceiling; global rules and cross-scope duplicates not checked.\n",
+      "stderr": ""
+    },
+    "active-topology": {
+      "command": [
+        "python3",
+        "scripts/guards/verify_active_topology.py"
+      ],
+      "working_directory": ".",
+      "exit_code": 0,
+      "stdout": "PASS: instruction files, required direct symlinks and MCP registration references (worktree; VS Code if present)\n",
+      "stderr": ""
+    },
+    "diff-check": {
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "--",
+        "CLAIMS.toml",
+        "README.md",
+        "docs/01_spec",
+        "docs/00_index.md",
+        "docs/README.md",
+        "docs/06_theory/00_index.md",
+        "docs/06_theory/BABYLON60_PROOF_CARRYING_EXECUTION.md"
+      ],
+      "working_directory": ".",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  "documentation": {
+    "documents": [
+      "README.md",
+      "docs/README.md",
+      "docs/00_index.md",
+      "docs/06_theory/00_index.md",
+      "docs/06_theory/BABYLON60_PROOF_CARRYING_EXECUTION.md",
+      "docs/01_spec/AUDIT_SCIENTIFIC_GUARANTEES_2026.md",
+      "docs/01_spec/spec_architecture.md",
+      "docs/01_spec/spec_cryptographic_profile.md",
+      "docs/01_spec/spec_exergy_ontology.md",
+      "docs/01_spec/spec_graph_canonical.md",
+      "docs/01_spec/spec_invariants.md",
+      "docs/01_spec/spec_security_model.md",
+      "docs/01_spec/spec_semantic_entropy_dual_firewall.md"
+    ],
+    "local_links_checked": 375,
+    "failures": [],
+    "index_coverage": {
+      "docs/01_spec in docs/00_index.md": {
+        "count": 14,
+        "missing": []
+      },
+      "docs/01_spec in docs/README.md": {
+        "count": 14,
+        "missing": []
+      },
+      "docs/06_theory in docs/00_index.md": {
+        "count": 31,
+        "missing": []
+      },
+      "docs/06_theory in docs/README.md": {
+        "count": 31,
+        "missing": []
+      },
+      "docs/06_theory in docs/06_theory/00_index.md": {
+        "count": 31,
+        "missing": []
+      }
+    },
+    "preserved": {
+      "uv.lock": {
+        "unchanged": true,
+        "sha256": "d78739746ac5d442a074ad73cbc7fc06d6e803558126f65fbc3d6d251d4c1fb4"
+      },
+      "Cargo.lock": {
+        "unchanged": true,
+        "sha256": "7c772f6e6ffd29594c5b9bdadb004be09c57af67b60b7be1b56c034a174491b4"
+      },
+      "docs/06_theory/evidence/lean-scope-20261025.json": {
+        "unchanged": true,
+        "sha256": "d69b85b123e211928c100cc2f16f193702ad7a1e0385f3961473df2bc45a1806"
+      },
+      "docs/06_theory/evidence/lean-naming-20261026.json": {
+        "unchanged": true,
+        "sha256": "e38296a0764fda98468853141d9b4600665372d8e2b4b2d4baad0220eef74a26"
+      },
+      "docs/06_theory/evidence/lean-reporting-20261026.json": {
+        "unchanged": true,
+        "sha256": "28b6041bd363afe77a4db4136a01ad5ea15cec73b098670bedfeb8725061d52c"
+      },
+      "docs/06_theory/evidence/lean-harness-20261026.json": {
+        "unchanged": true,
+        "sha256": "ac7f462b8cc7a9bae8511bef7e0a04c6680cf47883a29d09d3f42ae74c25dfc2"
+      },
+      "proof/lean/C5PortHamiltonian.lean": {
+        "unchanged": true,
+        "sha256": "47af8878686bd3dbeff1d7c3e2d002d8e32183296b7a49401299e799973872fc"
+      },
+      "proof/lean/Babylon.lean": {
+        "unchanged": true,
+        "sha256": "909bdb5bcd6c8f2ee8e93d5ed97949419c7d8fa772c42e6d6d049fdfa574606e"
+      },
+      "proof/lean/AcsEnvelope.lean": {
+        "unchanged": true,
+        "sha256": "3bbc1baa9f4fc94ddb50573bf83c097dde8dabd407b18ef36b4c6b86f0cfd008"
+      },
+      "proof/lean/BabylonAeonStress.lean": {
+        "unchanged": true,
+        "sha256": "3ccd72bb384f92cc8af895bc8c4503c5ad86dbf3544861340e866d98c0b8eef0"
+      },
+      "proof/lean/CanonicalHead.lean": {
+        "unchanged": true,
+        "sha256": "95274337d3b41d604e95d2fc50f0ae4a68856c05d4ac641aa1a21dd54f7408c1"
+      },
+      "proof/lean/BabylonAOTOracle.lean": {
+        "unchanged": true,
+        "sha256": "2fa25bdbd878bbd13cc722a463a4f59c00b3419225d8f4d2150aac565353cd20"
+      },
+      "proof/lean/BabylonAutoTrace.lean": {
+        "unchanged": true,
+        "sha256": "4d38fe24b1f65835473812a1b8099de49a793fbc42ce1ce96daaa501f87a651d"
+      },
+      "proof/lean/MolochLandauer.lean": {
+        "unchanged": true,
+        "sha256": "b050072b0cfe8763c58bfeb0e5e66a5d54839e0b97743955ecd2fb2d0a93f60e"
+      },
+      "proof/lean/C5Affine.lean": {
+        "unchanged": true,
+        "sha256": "22d65535f432825ba16a4baa1258a25da9689b72197fbd93fb33381785add050"
+      },
+      "proof/lean/lean-toolchain": {
+        "unchanged": true,
+        "sha256": "108ca2895820de2c74101f81de81756b41ca0165dfdc8ced16a82c3f810152d0"
+      },
+      "proof/lean/TicketEnvelope.lean": {
+        "unchanged": true,
+        "sha256": "55f2630ed20779f226c22ffa1bf772f5901c7f1d65ff864b4c7609c0b6e6b096"
+      },
+      "proof/lean/NavierStokesBKM.lean": {
+        "unchanged": true,
+        "sha256": "353d51830eacf849875964e376ee27f6e222b3b2626a998cf972f88ae1db910b"
+      },
+      "proof/lean/BabylonStressTrace.lean": {
+        "unchanged": true,
+        "sha256": "f19d80ec05dda8cfc4858b778f2a9b6869055a7fb322681f6eecdaf8ce97252b"
+      },
+      "proof/lean/BabylonOracle.lean": {
+        "unchanged": true,
+        "sha256": "496f397b0f9e43a3b59c2480b737372062d3349fdeee775e6328f863f5692750"
+      },
+      "proof/lean/lake-manifest.json": {
+        "unchanged": true,
+        "sha256": "9325276f014362af0d80077ed4126abdec7dc79d64bf576708cc542b155220fa"
+      },
+      "proof/lean/NavierStokesOracle.lean": {
+        "unchanged": true,
+        "sha256": "753edd7466ee342ed0d20999855c3ffe26ab7014482d1c38f5a855b0d8d3ffbc"
+      },
+      "proof/lean/NemesisWave4.lean": {
+        "unchanged": true,
+        "sha256": "78ac71a9f718b05d5c1d6a936b1d317f2a3b94aa9ed4f9d1a307ab5317da8a0f"
+      },
+      "proof/lean/Destiladora_838c463da193b48f.lean": {
+        "unchanged": true,
+        "sha256": "5a32a31bd6f8932b27a5b2481d2d3800990f41ae5653575f624c785d44bb0b03"
+      },
+      "proof/lean/CanonicalEnvelope.lean": {
+        "unchanged": true,
+        "sha256": "e5d66ba2214af13aa5ad8eaea4b9eae7f79ea95661f0639350b0f91932fb09c9"
+      },
+      "proof/lean/AX0.lean": {
+        "unchanged": true,
+        "sha256": "ff038f17b706f18c3fba64e1e907e34e5efa3b578fc02d98f08b1013cce77fd0"
+      },
+      "proof/lean/lakefile.toml": {
+        "unchanged": true,
+        "sha256": "99c1cf005aac1e3793aaba1ea1775d8e4d6c3e94b2f1dbd9b08723b2283aa631"
+      },
+      "proof/lean/BabylonStressCorrupt.lean": {
+        "unchanged": true,
+        "sha256": "4a1f254a48998625538f972a1a88aeff14381aea9d7bd63029d2e9ab3f3c4ff3"
+      },
+      "proof/lean/BabylonTrace.lean": {
+        "unchanged": true,
+        "sha256": "83b00a15497eaf2d2362fda7dfa6ce8090c59435dfede6ecb7fac54ad18c76ba"
+      },
+      "proof/lean/NavierStokesSobolevKato.lean": {
+        "unchanged": true,
+        "sha256": "f744326608118898f44ece1ea7c9c0546233066dac20a05d83d4fd7e7d04d208"
+      },
+      "proof/lean/BabylonAeonChain.lean": {
+        "unchanged": true,
+        "sha256": "233b3e079981dbcc75850dbfdfbacbb5151af2e15f49289391494cf61e31370e"
+      },
+      "proof/lean/HolographicPoC.lean": {
+        "unchanged": true,
+        "sha256": "d51f82f9967190657371ee7d43188dc140c6871b7c3680822599bd8cb595af72"
+      },
+      "tests/test_inv_c5_28_falsification.py": {
+        "unchanged": true,
+        "sha256": "a6c886c81b43c219614e871cbbee5ee6363c2e705876cc529f78faf370e7b3e2"
+      },
+      "scripts/c5_isomorphisms/c5_ultimate_causal_determinant.py": {
+        "unchanged": true,
+        "sha256": "300daae21574c2546936afad90958009f918bcb73301ec694e8b1857a73d8e32"
+      },
+      "scripts/c5_demos/poc_graph_isomorphism_wl.py": {
+        "unchanged": true,
+        "sha256": "11dde4fe7aa9eeacced702275372d959d217a95efaa05ddca45365a5a5ece0d3"
+      },
+      "scripts/c5_l1_ledger/l1_sink_bitcoin.py": {
+        "unchanged": true,
+        "sha256": "5e4742e653b72c4c85ccbb56f96e6114221f9a8ac7ad340336f2f125cabcc350"
+      },
+      "00_ABZU_KERNEL/crates/babylon60-kernel/src/semantic_entropy.rs": {
+        "unchanged": true,
+        "sha256": "8ac72745d387f12e36d4ebf79d76796d148b4b46b4d75d23c98bd554e61d817c"
+      },
+      "scripts/c5_demos/SemanticEntropyApoptosis.lean": {
+        "unchanged": true,
+        "sha256": "3670a507f5431e4cd9f4c19a1dc2bd30ce2ac87974c25f5f2761dc7d01d8ee71"
+      },
+      "scripts/c5_demos/falsacion_semantic_entropy_stress.py": {
+        "unchanged": true,
+        "sha256": "061f50724c9208cf29215429c5da0d620383167b66478ab05470eff270e48466"
+      },
+      "scripts/c5_verifiers/verify_semantic_entropy_gate.py": {
+        "unchanged": true,
+        "sha256": "fa0aa7130cf812823f0fb5dea2aa1c9860c885d6870e6d89d75eac124a3214a9"
+      },
+      "crates/b60-lang/src/bin/fsm_poc.rs": {
+        "unchanged": true,
+        "sha256": "ec8e7250c972599dffe89b0ab174fe19663612c71a58ce95fa25ff44b34743c9"
+      },
+      "crates/b60-lang/src/bin/fsm_stress.rs": {
+        "unchanged": true,
+        "sha256": "b0901878bb1f090f85d157e630f6662cf98600f7d891012d02da38487f26d5b2"
+      },
+      "crates/b60-lang/src/bin/support/lean_harness.rs": {
+        "unchanged": true,
+        "sha256": "0742b61c2bd2987894f6d67f7054d020d011491c3c75e672bacffeba24488359"
+      },
+      "crates/b60-lang/tests/lean_harness.rs": {
+        "unchanged": true,
+        "sha256": "15a6ab7abc3aad7211ac268436cfaec2c2f69a0a437d1d5a3c8377290a891f98"
+      }
+    }
+  },
+  "manifest_compatibility": {
+    "claim_ids_unchanged": true,
+    "status_vocabulary_and_values_preserved": true,
+    "release_required_flags_preserved": true,
+    "claim_count": 28,
+    "fresh_full_claim_campaign_executed": false
+  },
+  "semantic": {
+    "file": "docs/01_spec/spec_semantic_entropy_dual_firewall.md",
+    "date": "2026-10-26",
+    "status": "document_corrected; bounded_model_and_numeric_checks_passed; runtime_bugs_unfixed",
+    "claims": [
+      {
+        "id": "SEM-1",
+        "prior": "Production Ready / Verified / hallucination detector in silicon",
+        "finding": "The module branches on a caller-supplied Bool and numeric entropy; no factual proposition, solver call, external proof provenance or execution of side effects in evaluate.",
+        "status": "GUARANTEE_WITHDRAWN; broader production integration NO_VERIFICADO"
+      },
+      {
+        "id": "SEM-2",
+        "prior": "SMT SAT or Lean witness certifies every factual claim",
+        "finding": "SAT is consistency of encoded assertions. The original Lean theorem only rejects isZ3Sat=false. Audit proves Verified iff supplied flag=true; an external false proposition remains false next to Verified=true.",
+        "status": "GENERAL_TRUTH_IMPLICATION_REFUTED; conditional model property preserved"
+      },
+      {
+        "id": "SEM-3",
+        "prior": "Bitmask computes a valid semantic quotient for all N<=8",
+        "finding": "n8 tested panic or incorrect mask, n0/9 with true returns VerifiedGenuine, symmetric nontransitive matrix counts overlapping rows.",
+        "status": "REFUTED_IN_ISOLATED_PROBES; Rust fixes pending"
+      },
+      {
+        "id": "SEM-4",
+        "prior": "Exact entropy / Q16 integer range / Rust-Lean correspondence",
+        "finding": "All valid LUT entries match nearest rounding; Q16 is approximate. Correct entropy bound n8 is3bits=196608Q16. Rusttau55706 differs from Leantau22282 and error codes differ.",
+        "status": "NUMERIC_LUT_SUPPORTED; CORRESPONDENCE_NOT_PROVED"
+      },
+      {
+        "id": "SEM-5",
+        "prior": "1.92ns and universal sub10ns; zero Landauer dissipation",
+        "finding": "No reproduced latency/energy evidence; multithread batch wall-time/operations is amortized throughput statistic. Integer code does not imply zero physical dissipation.",
+        "status": "NO_VERIFICADO; physical guarantee withdrawn"
+      }
+    ],
+    "checks": {
+      "lean": {
+        "command": [
+          "lake",
+          "env",
+          "lean",
+          "<repo>/.audit/scientific-guarantees-20261026/semantic/SemanticEntropyAudit.lean"
+        ],
+        "cwd": "proof/lean",
+        "exit_code": 0,
+        "stdout": "'Babylon60.Epistemology.audit_verified_iff_supplied_flag' depends on axioms: [propext]\n'Babylon60.Epistemology.audit_flag_does_not_encode_truth' does not depend on any axioms\n'Babylon60.Epistemology.genuine_knowledge_is_verified' does not depend on any axioms\n'Babylon60.Epistemology.confabulation_triggers_0x6060' does not depend on any axioms\n'Babylon60.Epistemology.incorrect_belief_triggers_0x6061' does not depend on any axioms\n'Babylon60.Epistemology.polysemy_is_verified' does not depend on any axioms\n'Babylon60.Epistemology.falsity_never_reaches_ring1_commit' does not depend on any axioms\n",
+        "stderr": "",
+        "scope": "Original demo copied unchanged; two audit theorems appended and axiom reports for seven named theorems."
+      },
+      "rust_probes": "math/probe-results.json",
+      "numeric_lut": "math/math-results.json",
+      "local_links_checked": [
+        "../../00_ABZU_KERNEL/crates/babylon60-kernel/src/semantic_entropy.rs",
+        "../../scripts/c5_demos/SemanticEntropyApoptosis.lean",
+        "../../00_ABZU_KERNEL/crates/babylon60-kernel/tests/stress_semantic_entropy_100k.rs"
+      ],
+      "source_hashes_preserved": {
+        "00_ABZU_KERNEL/crates/babylon60-kernel/src/semantic_entropy.rs": "8ac72745d387f12e36d4ebf79d76796d148b4b46b4d75d23c98bd554e61d817c",
+        "scripts/c5_demos/SemanticEntropyApoptosis.lean": "3670a507f5431e4cd9f4c19a1dc2bd30ce2ac87974c25f5f2761dc7d01d8ee71",
+        "scripts/c5_demos/falsacion_semantic_entropy_stress.py": "061f50724c9208cf29215429c5da0d620383167b66478ab05470eff270e48466",
+        "scripts/c5_verifiers/verify_semantic_entropy_gate.py": "fa0aa7130cf812823f0fb5dea2aa1c9860c885d6870e6d89d75eac124a3214a9"
+      },
+      "new_document_sha256": "c221a158d64730eaa11c68e8139942600494b82f888efa1e056cb5a774efca16",
+      "whitespace": "pass"
+    },
+    "sources": [
+      {
+        "title": "Detecting hallucinations in large language models using semantic entropy",
+        "authors": "Sebastian Farquhar, Jannik Kossen, Lorenz Kuhn, Yarin Gal",
+        "year": 2024,
+        "publication": "Nature630:625–630",
+        "doi": "10.1038/s41586-024-07421-0",
+        "url": "https://doi.org/10.1038/s41586-024-07421-0",
+        "supports": "Detects confabulations statistically; does not guarantee factuality for systematic bad outputs."
+      },
+      {
+        "title": "Semantic Uncertainty: Linguistic Invariances for Uncertainty Estimation in Natural Language Generation",
+        "authors": "Lorenz Kuhn, Yarin Gal, Sebastian Farquhar",
+        "year": 2023,
+        "publication": "ICLR2023",
+        "doi": "10.48550/arXiv.2302.09664",
+        "url": "https://arxiv.org/abs/2302.09664",
+        "supports": "Semantic classes and empirical utility as uncertainty estimator; not a universal truth certificate."
+      },
+      {
+        "title": "The SMT-LIB Standard version2.7",
+        "authors": "Clark Barrett, Pascal Fontaine, Cesare Tinelli",
+        "year": 2025,
+        "publication": "SMT-LIB reference release July7,2025 §4.2.5",
+        "url": "https://smt-lib.org/papers/smt-lib-reference-v2.7-r2025-07-07.pdf",
+        "supports": "SAT/UNSAT/UNKNOWN are outcomes for assertions and assumptions; validity implication can be checked by asserting antecedents and negated conclusion."
+      }
+    ],
+    "graph": {
+      "project": "babylon-60",
+      "index_succeeded_at": "2026-10-26T18:17:33Z",
+      "symbols": [
+        "BitmaskSemanticKernel.compute_quotient_entropy",
+        "BitmaskSemanticKernel.evaluate",
+        "Babylon60.Epistemology.evaluateCausalGate"
+      ],
+      "limits": [
+        "Lean file partially indexed near closing lines",
+        "Graph inbound edge to cortex-guard main did not match literal method use in current source; no integration conclusion drawn from it."
+      ]
+    },
+    "limits": [
+      "No code/dependency/index edits",
+      "No Cargo/crate-wide test run",
+      "No default100k stress/latency/energy measurements",
+      "No production or factual accuracy certification",
+      "Parent runs global documentation gates"
+    ]
+  },
+  "semantic_numeric_checks": {
+    "source_sha256": "8ac72745d387f12e36d4ebf79d76796d148b4b46b4d75d23c98bd554e61d817c",
+    "meaning": "Audits numeric table against its stated nearest-integer formula, not thermodynamic energy or semantic correctness",
+    "table_mismatches": [],
+    "mismatch_count": 0,
+    "partition_count": 66,
+    "partition_quantization_bound_violations": [],
+    "thresholds": {
+      "rust_q16": 55706,
+      "rust_bits": 0.850006103515625,
+      "lean_q16": 22282,
+      "lean_bits": 0.339996337890625
+    },
+    "max_discrete_entropy_for_8_samples_bits": 3,
+    "max_discrete_entropy_for_8_samples_q16": 196608
+  },
+  "semantic_rust_probes": {
+    "date": "2026-10-26",
+    "scope": "isolated std-only Rust probes including the unchanged actual kernel source; no production execution or energy/latency measurement",
+    "commands": [
+      {
+        "argv": [
+          "python3",
+          ".audit/scientific-guarantees-20261026/semantic/math/check_math.py"
+        ],
+        "exit_code": 0,
+        "result_file": ".audit/scientific-guarantees-20261026/semantic/math/math-results.json"
+      },
+      {
+        "argv": [
+          "rustc",
+          "--edition=2021",
+          "-C",
+          "overflow-checks=on",
+          ".audit/scientific-guarantees-20261026/semantic/math/probe.rs",
+          "-o",
+          ".audit/scientific-guarantees-20261026/semantic/math/probe-checked"
+        ],
+        "exit_code": 0
+      },
+      {
+        "argv": [
+          ".audit/scientific-guarantees-20261026/semantic/math/probe-checked"
+        ],
+        "exit_code": 0,
+        "stdout": "invalid_zero: ((0, 0), VerifiedGenuine { h_sem_q16: 0, num_classes: 0 })\ninvalid_nine: ((0, 0), VerifiedGenuine { h_sem_q16: 0, num_classes: 0 })\neight_clique: PANIC\nzero_relation_three: ((0, 3), VerifiedGenuine { h_sem_q16: 0, num_classes: 3 })\noverlapping_nontransitive_three: ((51114, 2), VerifiedGenuine { h_sem_q16: 51114, num_classes: 2 })\n"
+      },
+      {
+        "argv": [
+          "rustc",
+          "--edition=2021",
+          "-C",
+          "opt-level=3",
+          "-C",
+          "overflow-checks=off",
+          ".audit/scientific-guarantees-20261026/semantic/math/probe.rs",
+          "-o",
+          ".audit/scientific-guarantees-20261026/semantic/math/probe-unchecked"
+        ],
+        "exit_code": 0
+      },
+      {
+        "argv": [
+          ".audit/scientific-guarantees-20261026/semantic/math/probe-unchecked"
+        ],
+        "exit_code": 0,
+        "stdout": "invalid_zero: ((0, 0), VerifiedGenuine { h_sem_q16: 0, num_classes: 0 })\ninvalid_nine: ((0, 0), VerifiedGenuine { h_sem_q16: 0, num_classes: 0 })\neight_clique: ((0, 8), VerifiedGenuine { h_sem_q16: 0, num_classes: 8 })\nzero_relation_three: ((0, 3), VerifiedGenuine { h_sem_q16: 0, num_classes: 3 })\noverlapping_nontransitive_three: ((51114, 2), VerifiedGenuine { h_sem_q16: 51114, num_classes: 2 })\n"
+      }
+    ],
+    "source_sha256": {
+      "00_ABZU_KERNEL/crates/babylon60-kernel/src/semantic_entropy.rs": "8ac72745d387f12e36d4ebf79d76796d148b4b46b4d75d23c98bd554e61d817c",
+      "scripts/c5_demos/SemanticEntropyApoptosis.lean": "3670a507f5431e4cd9f4c19a1dc2bd30ce2ac87974c25f5f2761dc7d01d8ee71"
+    },
+    "findings": [
+      "Q16 LUT has zero mismatches against the stated round-to-nearest formula for valid cells; it remains an approximation to Shannon entropy.",
+      "N=8 is allowed by range guard but shift of a u8 by 8 panics with overflow checks; observed unchecked optimized build returns incorrect zero class mask.",
+      "No n validity error propagates from compute_quotient_entropy: n=0,9 give (0,0), and caller-provided true produces VerifiedGenuine.",
+      "Row grouping assumes an actual equivalence relation; arbitrary symmetric NLI relation need not be transitive.",
+      "Entropy of up to8 nonempty classes can reach3bits=196608Q16, exceeding65535.",
+      "Rust threshold is approximately0.85bits; Lean example22282 approximately0.34bits, not0.85."
+    ],
+    "limits": [
+      "No crate-wide Cargo check/test performed",
+      "No source edits",
+      "No conclusion about factual truth from VerifiedGenuine enum",
+      "Observed debug/optimized probe behavior is not a guarantee across all compiler/target configurations"
+    ]
+  },
+  "graph_counterexamples": {
+    "scope": "Isolated extraction of existing stdlib-only functions; no production effects or benchmark.",
+    "dag_pair": {
+      "edges_g": [
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          2,
+          7
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "edges_h": [
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          2,
+          7
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          3,
+          7
+        ]
+      ],
+      "nodes": 8,
+      "edges_each": 8,
+      "weak_components_g": 1,
+      "weak_components_h": 2,
+      "isomorphic": false,
+      "poc_wl_hash_g": "2f574a2a66f5a49b72fa06f19f9d6d102c522960008fc4145c21ba03328c6927",
+      "poc_wl_hash_h": "2f574a2a66f5a49b72fa06f19f9d6d102c522960008fc4145c21ba03328c6927",
+      "poc_verify_isomorphism": true,
+      "directed_in_out_histograms_equal_for_rounds": 10
+    },
+    "inplace_order_dependence": {
+      "same_edges": [
+        [
+          "a",
+          "b"
+        ],
+        [
+          "b",
+          "c"
+        ]
+      ],
+      "first_order": [
+        "a",
+        "b",
+        "c"
+      ],
+      "second_order": [
+        "b",
+        "a",
+        "c"
+      ],
+      "first_digest": "198d970bee779e72e9214b6504c0b6f0abafa4dcb75582cf3c0e6fb3838625cb",
+      "second_digest": "8f0a62f5c05a251ca4dca60679166a264b3cdb166b550921fafbca454d07d655",
+      "digests_equal": false
+    },
+    "interpretation": [
+      "Equal 1-WL hash is not an isomorphism certificate, even on this DAG pair.",
+      "The PoC verify_isomorphism result is a false positive for exact graph isomorphism.",
+      "The extracted in-place method changes its digest when only the node iteration order changes.",
+      "These cases do not assert the behavior of every graph implementation or a protected runtime."
+    ]
+  },
+  "security_document_review": {
+    "date": "2026-10-26",
+    "documents": {
+      "docs/01_spec/spec_security_model.md": {
+        "before_sha256": "7d6dda8cebd7fb040faada3bad2d9aad1cae133b2ce1930fa5a021d4db80ff3c",
+        "after_sha256": "8610e95a9e9b5cab6c87232bbfb9563925535bfe141c5ef06a146f381f77d93b"
+      },
+      "docs/01_spec/spec_architecture.md": {
+        "before_sha256": "032c08a50298040b531a0ed5b6bbd491db1f134b578c6096ccade56460d30b7c",
+        "after_sha256": "1a8220f7036873c55fbac7866ae854585aa577399d52bf672385e186b69a49c7"
+      }
+    },
+    "local_links_checked": 19,
+    "link_failures": [],
+    "links": [
+      {
+        "document": "docs/01_spec/spec_security_model.md",
+        "target": "../../CLAIMS.toml"
+      },
+      {
+        "document": "docs/01_spec/spec_security_model.md",
+        "target": "../../01_KISH_ENGINE/babylon60/bft/ledger_actor.py"
+      },
+      {
+        "document": "docs/01_spec/spec_security_model.md",
+        "target": "../../01_KISH_ENGINE/babylon60/bft/cortex_crypto_kernel.py"
+      },
+      {
+        "document": "docs/01_spec/spec_security_model.md",
+        "target": "../../01_KISH_ENGINE/babylon60/database/core.py"
+      },
+      {
+        "document": "docs/01_spec/spec_security_model.md",
+        "target": "spec_cryptographic_profile.md"
+      },
+      {
+        "document": "docs/01_spec/spec_security_model.md",
+        "target": "../../tests/test_ledger_resilience.py"
+      },
+      {
+        "document": "docs/01_spec/spec_security_model.md",
+        "target": "../../tests/test_ledger_vault_verify.py"
+      },
+      {
+        "document": "docs/01_spec/spec_security_model.md",
+        "target": "../../tests/test_ledger_cross_equivalence.py"
+      },
+      {
+        "document": "docs/01_spec/spec_architecture.md",
+        "target": "spec_security_model.md"
+      },
+      {
+        "document": "docs/01_spec/spec_architecture.md",
+        "target": "../../01_KISH_ENGINE/babylon60/bft/ledger_actor.py"
+      },
+      {
+        "document": "docs/01_spec/spec_architecture.md",
+        "target": "../../01_KISH_ENGINE/babylon60/bft/ledger_actor.py"
+      },
+      {
+        "document": "docs/01_spec/spec_architecture.md",
+        "target": "../../01_KISH_ENGINE/babylon60/bft/cortex_persist_ledger.py"
+      },
+      {
+        "document": "docs/01_spec/spec_architecture.md",
+        "target": "../../01_KISH_ENGINE/babylon60/database/core.py"
+      },
+      {
+        "document": "docs/01_spec/spec_architecture.md",
+        "target": "../../00_ABZU_KERNEL/crates/strike-rs/Cargo.toml"
+      },
+      {
+        "document": "docs/01_spec/spec_architecture.md",
+        "target": "spec_cryptographic_profile.md"
+      },
+      {
+        "document": "docs/01_spec/spec_architecture.md",
+        "target": "../../CLAIMS.toml"
+      },
+      {
+        "document": "docs/01_spec/spec_architecture.md",
+        "target": "../../tests/test_ledger_resilience.py"
+      },
+      {
+        "document": "docs/01_spec/spec_architecture.md",
+        "target": "../../tests/test_ledger_cross_equivalence.py"
+      },
+      {
+        "document": "docs/01_spec/spec_architecture.md",
+        "target": "../03_guides/agent_contracts.md#ring-0"
+      }
+    ],
+    "runtime_tests_executed": false,
+    "scope": "Documentation and source inspection, no runtime or physical guarantees",
+    "graph_status": "babylon-60 reindex succeeded 2026-10-26T18:17:33Z",
+    "sources": [
+      {
+        "title": "RFC1122 loopback",
+        "url": "https://www.rfc-editor.org/rfc/rfc1122.html#section-3.2.1.3",
+        "scope": "Loopback addresses are host-local; zero-egress application guarantee does not follow."
+      },
+      {
+        "title": "RFC8032 Ed25519 verify",
+        "url": "https://www.rfc-editor.org/rfc/rfc8032.html#section-5.1.7",
+        "scope": "Message signature verification relative to public key, not factual truth/person identity."
+      },
+      {
+        "title": "SQLite WAL",
+        "url": "https://www.sqlite.org/wal.html",
+        "scope": "Transactions, commit, checkpoint, concurrency; not application intent replay."
+      },
+      {
+        "title": "SQLite synchronous",
+        "url": "https://www.sqlite.org/pragma.html#pragma_synchronous",
+        "scope": "FULL mode synchronization and storage assumptions."
+      },
+      {
+        "title": "git-commit-tree",
+        "url": "https://git-scm.com/docs/git-commit-tree#_date_formats",
+        "scope": "Commit timestamps are configurable."
+      },
+      {
+        "title": "Lamport1978",
+        "url": "https://lamport.azurewebsites.net/pubs/time-clocks.pdf",
+        "scope": "Happened-before relation and conditional logical clock ordering."
+      }
+    ],
+    "diff_check": {
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  "source_sha256": {
+    "src/admission.rs": "b536233e53d3c4de02e55cea947eb16257e11681915d2222ec4679e0c8dd9581",
+    "tests/admission_capability_test.rs": "f20d99f3cbc71cb7bb72ea101090cacd5e92897779e97fbd90d01b6968ca4237",
+    "src/manifest.rs": "05b05b57fa86e867e91e93fb95949a6694585457d9961b3edbe1fd7d44006cb1",
+    "proof/lean/BabylonTrace.lean": "83b00a15497eaf2d2362fda7dfa6ce8090c59435dfede6ecb7fac54ad18c76ba",
+    "proof/lean/AX0.lean": "ff038f17b706f18c3fba64e1e907e34e5efa3b578fc02d98f08b1013cce77fd0",
+    "01_KISH_ENGINE/babylon60/bft/ledger_actor.py": "c0dddf3e209bb945fa1f49a3d372b66b18968ebfcc2ea864ce35b26ebb16b237",
+    "01_KISH_ENGINE/babylon60/bft/cortex_crypto_kernel.py": "446647419015408a58623f7ec3ef4302f4bf8edd715bef45d8dfb745a377ba94",
+    "01_KISH_ENGINE/babylon60/database/core.py": "302ca30b9ce9df4d27e2a46f9d259694bbb7deafaa2f43970d189edf060b125a",
+    "01_KISH_ENGINE/babylon60/attestation/merkle_b3.py": "e8bb8e8d73e8c23a97f5fca3a9420ac2b50775e853ea21e84fc2e46971347f2b",
+    "00_ABZU_KERNEL/crates/babylon60-kernel/src/semantic_entropy.rs": "8ac72745d387f12e36d4ebf79d76796d148b4b46b4d75d23c98bd554e61d817c",
+    "scripts/c5_demos/SemanticEntropyApoptosis.lean": "3670a507f5431e4cd9f4c19a1dc2bd30ce2ac87974c25f5f2761dc7d01d8ee71",
+    "scripts/c5_demos/poc_graph_isomorphism_wl.py": "11dde4fe7aa9eeacced702275372d959d217a95efaa05ddca45365a5a5ece0d3",
+    "scripts/c5_isomorphisms/c5_ultimate_causal_determinant.py": "300daae21574c2546936afad90958009f918bcb73301ec694e8b1857a73d8e32"
+  },
+  "modified_document_sha256": {
+    "README.md": "32743efd67d92c8f28608191616428a6b956137f3f067da5946bcffcf08bb26e",
+    "docs/README.md": "e544c7cf730aa469108ee2aa766452d536d78479bd355d260054885069b90ca1",
+    "docs/00_index.md": "83ad4039adde5cb00644933c8f177fabdb951ab7de415314a620c7794be3455e",
+    "docs/06_theory/00_index.md": "c095bf496e972f8c6f3f4fa5372905a7923d4790fd69c4de50268cbfb50f7762",
+    "docs/06_theory/BABYLON60_PROOF_CARRYING_EXECUTION.md": "4467a1331e8e4cc36c4da70c480664fde3ac457733f964b2eb170e63528c2378",
+    "docs/01_spec/AUDIT_SCIENTIFIC_GUARANTEES_2026.md": "74a3a65dc3bf4a63f54673e3bc7a667aed0215e377cbeacd7af6cb6096cff06f",
+    "docs/01_spec/spec_architecture.md": "1a8220f7036873c55fbac7866ae854585aa577399d52bf672385e186b69a49c7",
+    "docs/01_spec/spec_cryptographic_profile.md": "12185dbe327866b10fc130d151ffcba977c6b23483ad29a01df0f70dffa23b24",
+    "docs/01_spec/spec_exergy_ontology.md": "8855cb9beb0116ce4a8398b1848e9f3178e8e1be70f073726bde2707d126dea5",
+    "docs/01_spec/spec_graph_canonical.md": "542ac9219b36b66df415e53e256904b1f54d4c814427b13aab6e0e7b5acc2ba3",
+    "docs/01_spec/spec_invariants.md": "7e93dc329d7ace69deb02bf60ab14d71f1eacf8130c4eb26cc7e903fc6572027",
+    "docs/01_spec/spec_security_model.md": "8610e95a9e9b5cab6c87232bbfb9563925535bfe141c5ef06a146f381f77d93b",
+    "docs/01_spec/spec_semantic_entropy_dual_firewall.md": "c221a158d64730eaa11c68e8139942600494b82f888efa1e056cb5a774efca16",
+    "CLAIMS.toml": "4c554ba882f74fe42698ffcf83d3e6043f2e6be3383e1548bf04c12017e144dd"
+  },
+  "primary_sources": [
+    {
+      "title": "Detecting hallucinations in large language models using semantic entropy",
+      "authors": "Sebastian Farquhar, Jannik Kossen, Lorenz Kuhn, Yarin Gal",
+      "year": 2024,
+      "publication": "Nature630:625–630",
+      "doi": "10.1038/s41586-024-07421-0",
+      "url": "https://doi.org/10.1038/s41586-024-07421-0",
+      "supports": "Detects confabulations statistically; does not guarantee factuality for systematic bad outputs."
+    },
+    {
+      "title": "Semantic Uncertainty: Linguistic Invariances for Uncertainty Estimation in Natural Language Generation",
+      "authors": "Lorenz Kuhn, Yarin Gal, Sebastian Farquhar",
+      "year": 2023,
+      "publication": "ICLR2023",
+      "doi": "10.48550/arXiv.2302.09664",
+      "url": "https://arxiv.org/abs/2302.09664",
+      "supports": "Semantic classes and empirical utility as uncertainty estimator; not a universal truth certificate."
+    },
+    {
+      "title": "The SMT-LIB Standard version2.7",
+      "authors": "Clark Barrett, Pascal Fontaine, Cesare Tinelli",
+      "year": 2025,
+      "publication": "SMT-LIB reference release July7,2025 §4.2.5",
+      "url": "https://smt-lib.org/papers/smt-lib-reference-v2.7-r2025-07-07.pdf",
+      "supports": "SAT/UNSAT/UNKNOWN are outcomes for assertions and assumptions; validity implication can be checked by asserting antecedents and negated conclusion."
+    },
+    {
+      "title": "RFC1122 loopback",
+      "url": "https://www.rfc-editor.org/rfc/rfc1122.html#section-3.2.1.3",
+      "scope": "Loopback addresses are host-local; zero-egress application guarantee does not follow."
+    },
+    {
+      "title": "RFC8032 Ed25519 verify",
+      "url": "https://www.rfc-editor.org/rfc/rfc8032.html#section-5.1.7",
+      "scope": "Message signature verification relative to public key, not factual truth/person identity."
+    },
+    {
+      "title": "SQLite WAL",
+      "url": "https://www.sqlite.org/wal.html",
+      "scope": "Transactions, commit, checkpoint, concurrency; not application intent replay."
+    },
+    {
+      "title": "SQLite synchronous",
+      "url": "https://www.sqlite.org/pragma.html#pragma_synchronous",
+      "scope": "FULL mode synchronization and storage assumptions."
+    },
+    {
+      "title": "git-commit-tree",
+      "url": "https://git-scm.com/docs/git-commit-tree#_date_formats",
+      "scope": "Commit timestamps are configurable."
+    },
+    {
+      "title": "Lamport1978",
+      "url": "https://lamport.azurewebsites.net/pubs/time-clocks.pdf",
+      "scope": "Happened-before relation and conditional logical clock ordering."
+    },
+    {
+      "title": "Little1961, A Proof for the Queuing Formula L=lambdaW",
+      "url": "https://doi.org/10.1287/opre.9.3.383",
+      "supports": "Relation of averages under assumptions, not an individual deadline"
+    },
+    {
+      "title": "RFC8949, CBOR deterministic encoding",
+      "url": "https://www.rfc-editor.org/rfc/rfc8949.html#section-4.2",
+      "supports": "Explicit deterministic profile and ordering"
+    },
+    {
+      "title": "RFC9052 COSE signing/verifying",
+      "url": "https://www.rfc-editor.org/rfc/rfc9052.html#section-4.4",
+      "supports": "Application checks identity and authorization beyond cryptographic signature verification"
+    },
+    {
+      "title": "Arvind et al, color refinement",
+      "url": "https://arxiv.org/abs/1502.01255",
+      "supports": "Limits of color refinement for graph isomorphism"
+    },
+    {
+      "title": "Berkholz et al, canonical color refinement",
+      "url": "https://arxiv.org/abs/1509.08251",
+      "supports": "Algorithm-specific complexity of stable color refinement, not full graph canonization"
+    },
+    {
+      "title": "Sennrich et al2016, BPE",
+      "url": "https://aclanthology.org/P16-1162/",
+      "supports": "Segmentation depends on trained merges and preprocessing"
+    },
+    {
+      "title": "RFC9162 Merkle tree definition",
+      "url": "https://www.rfc-editor.org/rfc/rfc9162.html#section-2.1.1",
+      "supports": "Recursive tree commitments differ from a flat digest"
+    }
+  ],
+  "graph_index": {
+    "project": "babylon-60",
+    "state": "succeeded",
+    "finished_at": "2026-10-26T18:17:33Z",
+    "limits": [
+      "Partial Lean parse coverage",
+      "Ambiguous semantic-kernel inbound graph edge not used as integration evidence"
+    ]
+  },
+  "observed_component_failures": {
+    "semantic_n8": "panic with overflow checks; incorrect zero mask in observed optimized unchecked build",
+    "semantic_invalid_inputs": "n0/n9 with true can yield VerifiedGenuine",
+    "semantic_nontransitive_relation": "overlapping class counts for symmetric nontransitive relation",
+    "graph_demo": "non-isomorphic DAG pair accepted",
+    "graph_method": "digest changes under node-order permutation"
+  },
+  "audit_process_corrections": [
+    "Initial semantic audit math parser stopped at Rust type semicolon; corrected parser then found zero LUT mismatches; not a source error",
+    "Initial Lean audit fixture failed because an unused simp argument became an error under warningAsError; that argument was removed only from the added audit theorem, leaving the original demo unchanged",
+    "Initial document-link scan found pre-existing docs/00_index.md STATUS link; corrected to ../LICENSE"
+  ],
+  "pending": [
+    "Fix semantic entropy input/mask and equivalence-relation validation with implementation tests",
+    "Represent UNKNOWN/error separately from external Bool",
+    "Repair graph false-positive acceptance and order dependence with exact/domain-specific checks",
+    "Prove appropriate Rust-Lean correspondence and effect handling",
+    "Resolve normative SHA256 witness/checksum versus hardware-only contract discrepancy via authorized versioned change",
+    "Revalidate any claims campaigns/release evidence against exact changed manifest before publishing"
+  ],
+  "limits": [
+    "No algorithm code modified; component failures remain pending",
+    "No full Cargo/crate/production stress suite",
+    "No energy/latency benchmark or factual-classification evaluation",
+    "No ledger/confinement/power-loss/biometric runtime campaign",
+    "Existing claim identifiers/status values/required release flags preserved; non-selected statuses not revalidated",
+    "No dependency or lockfile edits; locked uv synchronized existing environment",
+    "No release evidence regenerated or signed",
+    "No global rules or ghost-listener telemetry inspected"
+  ]
+}

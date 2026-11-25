@@ -1,0 +1,16 @@
+{
+  "timestamp_utc": "2026-09-22T22:38:18.406712+00:00",
+  "total_probes": 1000,
+  "total_time_ms": 10.934584002825432,
+  "avg_latency_us": 10.297705,
+  "trap_rate_percent": 100.0,
+  "legitimate_fidelity_percent": 100.0,
+  "firewall_breakdown": {
+    "CORTAFUEGOS_1_2_AMNESIA_Y_PUNTERO": 200,
+    "CORTAFUEGOS_3_PURGA_GRAMATICAL_CHEAP_TALK": 200,
+    "CORTAFUEGOS_5_FRACTURA_SUBSTRING_MISMATCH": 200,
+    "CORTAFUEGOS_5_TERRITORIO_INEXISTENTE": 200,
+    "NONE_VERIFIED": 200
+  },
+  "verdict": "OMEGA_POINT_ABSOLUTE_FIDELITY_ACHIEVED"
+}

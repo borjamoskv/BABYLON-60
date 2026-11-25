@@ -1,0 +1,406 @@
+{
+  "timestamp": 1795568335.0565279,
+  "source_commit": "0b978eb871ca95627fbf5a97ea93bb54dfc7f9b1",
+  "source_tree_digest": "12afcab165901ee4bbd2931b6d058da14c2a03b79f851125db6e420e1d40666f",
+  "environment_digest": "939ab07082a168af7d12ce81b54786b94b7852df21e8fc5b32cadcd0567d50e9",
+  "environment": {
+    "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+    "cargo": "cargo 1.97.1 (c980f4866 2026-06-30)",
+    "python": "3.14.0",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "machine": "arm64"
+  },
+  "claims_manifest_digest": "4fe991ad35b0451a32fd766f26269341e8695f9d631f95a6b3c8067d0d2110be",
+  "total_claims": 32,
+  "verified": 7,
+  "partial": 25,
+  "experimental": 0,
+  "failed_claims": [],
+  "claims": [
+    {
+      "id": "inv_01_manifest_layout",
+      "statement": "SharedManifest layout is 64 bytes with 64-byte alignment and documented field offsets; layout alone does not establish cache coherence, RFO traffic or performance",
+      "status": "verified",
+      "evidence_level": "L2_IMPLEMENTATION",
+      "verified": true,
+      "suite_passed": true,
+      "duration_s": 1.074,
+      "component": "00_ABZU_KERNEL"
+    },
+    {
+      "id": "inv_02_seqlock_concurrency",
+      "statement": "Seqlock SPMC protocol model (loom replica of shared_manifest_core.rs, wrapped by seqlock.rs; 1 writer x 1-2 readers) yields no torn read under bounded model checking (max 2 preemptions); production code is not itself model-checked",
+      "status": "verified",
+      "evidence_level": "L1_FORMAL",
+      "verified": true,
+      "suite_passed": true,
+      "duration_s": 143.169,
+      "component": "00_ABZU_KERNEL"
+    },
+    {
+      "id": "inv_04_fail_stop_halt",
+      "statement": "Epistemic halt sets the admission flag to POISONED (0xDEAD_6060) and records SignedDurable / UnsignedDurable / PersistenceFailed evidence on real temporary files; without an operational key it writes no signed file and never a synthetic signature",
+      "status": "verified_local",
+      "evidence_level": "L2_IMPLEMENTATION",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 0.362,
+      "component": "00_ABZU_KERNEL"
+    },
+    {
+      "id": "cose_ed25519_receipt",
+      "statement": "Halt receipts are COSE_Sign1 structures (coset) with protected alg = EdDSA (-8) and an attached CBOR halt payload; a same-process Ed25519 sign/verify roundtrip recovers epoch, timestamp and reason. Conformance with RFC 9942 (COSE Receipts) is NO_VERIFICADO and not implemented",
+      "status": "verified_in_memory",
+      "evidence_level": "L2_IMPLEMENTATION",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 0.133,
+      "component": "00_ABZU_KERNEL"
+    },
+    {
+      "id": "secure_enclave_p256",
+      "statement": "The Apple Secure Enclave bridge verifies P-256 signatures; its automated cryptographic test uses software keys",
+      "status": "verified_local",
+      "evidence_level": "L2_IMPLEMENTATION",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 0.153,
+      "component": "00_ABZU_KERNEL"
+    },
+    {
+      "id": "cortex_persist_sqlite",
+      "statement": "Persistent SQLite ledger rows are hash-chained with the legacy SHA3-256 implementation; tests detect row tampering and truncation and assert PRAGMA synchronous=FULL. WAL mode and BEGIN IMMEDIATE are used by the code but not asserted by the selected tests",
+      "status": "verified_local",
+      "evidence_level": "L2_IMPLEMENTATION",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 46.113,
+      "component": "01_KISH_ENGINE"
+    },
+    {
+      "id": "merkle_attestation",
+      "statement": "Merkle state roots are computed deterministically, with Python/Rust bisimulation of the BLAKE3 conformal tree; exposure of the root through MCP is not exercised by this evidence (NO_VERIFICADO)",
+      "status": "verified",
+      "evidence_level": "L2_IMPLEMENTATION",
+      "verified": true,
+      "suite_passed": true,
+      "duration_s": 43.578,
+      "component": "01_KISH_ENGINE"
+    },
+    {
+      "id": "lean4_formal_trace",
+      "statement": "For accepted abstract traces, BabylonTrace proves even declared read sequences (TraceReadsEven), and AX0 proves countDispatches <= 1 from Proposed; neither theorem models Rust payload loads or physical memory ordering",
+      "status": "verified_local",
+      "evidence_level": "L1_FORMAL",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 3.144,
+      "component": "00_ABZU_KERNEL"
+    },
+    {
+      "id": "worm_durability",
+      "statement": "In-memory HashChainedLedger provides cryptographic tamper detection",
+      "status": "verified_in_memory",
+      "evidence_level": "L2_IMPLEMENTATION",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 0.512,
+      "component": "00_ABZU_KERNEL"
+    },
+    {
+      "id": "heterogeneous_verification_quorum",
+      "statement": "Heterogeneous 2/3 verification quorum over 3 engines (Rust, Lean 4, Z3)",
+      "status": "verified_local",
+      "evidence_level": "L2_IMPLEMENTATION",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 0.328,
+      "component": "00_ABZU_KERNEL"
+    },
+    {
+      "id": "zero_anergy",
+      "statement": "The local benchmark reports elapsed time, throughput and average latency for 1,000,000 sequential seqlock publish/read iterations; it does not measure RFO traffic, idle CPU or energy consumption",
+      "status": "partial_trace",
+      "evidence_level": "L2_IMPLEMENTATION",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 17.043,
+      "component": "00_ABZU_KERNEL"
+    },
+    {
+      "id": "mcp_authority_gate",
+      "statement": "The MCP server does not list a sign-off tool, and calls to causal_register_sign_off fail closed with an AX-0 error, both in-process and over stdio, while the gate keeps refusing the task",
+      "status": "verified",
+      "evidence_level": "L2_IMPLEMENTATION",
+      "verified": true,
+      "suite_passed": true,
+      "duration_s": 6.092,
+      "component": "01_KISH_ENGINE"
+    },
+    {
+      "id": "AUTH_001",
+      "statement": "A consumed authorization cannot be dispatched a second time by the executor, including after process death and reopening the file ledger",
+      "status": "verified_local",
+      "evidence_level": "L2_IMPLEMENTATION",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 0.594,
+      "component": "00_ABZU_KERNEL"
+    },
+    {
+      "id": "AUTH_002",
+      "statement": "EDIN workers cannot execute protected effects directly without verified COSE authorization over the IPC Unix socket boundary",
+      "status": "verified_local",
+      "evidence_level": "L2_IMPLEMENTATION",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 2.788,
+      "component": "00_ABZU_KERNEL"
+    },
+    {
+      "id": "AUTH_003",
+      "statement": "A dispatch without a durable result becomes UNKNOWN at restart and is never retried automatically",
+      "status": "verified_local",
+      "evidence_level": "L2_IMPLEMENTATION",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 0.737,
+      "component": "00_ABZU_KERNEL"
+    },
+    {
+      "id": "AUTH_004",
+      "statement": "A resource whose precondition digest or inode identity changes between authorization and effect is rejected before mutation; for filesystem DELETE_FILE, the TOCTOU gap is closed via atomic quarantine isolation and post-rename verification",
+      "status": "verified_local",
+      "evidence_level": "L4_EXPERIMENTAL",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 8.127,
+      "component": "00_ABZU_KERNEL"
+    },
+    {
+      "id": "AUTH_005",
+      "statement": "Signing or persistence failures produce explicit errors; no zeroed or synthetic signature is emitted",
+      "status": "verified_local",
+      "evidence_level": "L2_IMPLEMENTATION",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 1.953,
+      "component": "00_ABZU_KERNEL"
+    },
+    {
+      "id": "AUTH_006",
+      "statement": "Under 1000 one-process-per-iteration runs covering 3 SIGKILL crash points and a no-crash control, no nonce produces more than one effect, no DISPATCHED survives restart, and every archived authorization replay is rejected",
+      "status": "verified_local",
+      "evidence_level": "L4_EXPERIMENTAL",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 159.731,
+      "component": "00_ABZU_KERNEL"
+    },
+    {
+      "id": "AUTH_007_secure_fs_quarantine",
+      "statement": "EffectTx guarantees SAFETY and NON-INTERFERENCE for DELETE_FILE: under 100 concurrent workers and swap race attacks, unauthorized destructions == 0 and unquarantined deletions == 0",
+      "status": "verified_local",
+      "evidence_level": "L4_EXPERIMENTAL",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 2.572,
+      "component": "00_ABZU_KERNEL"
+    },
+    {
+      "id": "sharur_100_swarm_concurrency",
+      "statement": "The SHARUR-100 stress campaign runs 100 threads: 50 append concurrently to CortexPersistLedger with 0 errors and a verified hash chain. The 50 adversarial rejections are simulated by label checks inside the campaign script, not by the production AX-0 gate",
+      "status": "partial_trace",
+      "evidence_level": "L4_EXPERIMENTAL",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 3.031,
+      "component": "02_EDIN_SWARMS"
+    },
+    {
+      "id": "tamkarum_budget_gate",
+      "statement": "KudurruBudgetGate and AtomicKudurruBudgetGate are 64 bytes with 64-byte alignment. They reject bids above a static max_bid_cents, above the daily ceiling (the atomic CAS never exceeds it in a 32-thread test) and with zero win-probability or odds. After 60 consecutive sub-minimum ROAS epochs they return ApoptosisHalt{0xDEAD_6060} to the caller. Bounded loom models (2 threads, max 2 preemptions) check that concurrent reservations never exceed the daily budget, that rolling back an unspent reservation alongside a concurrent reservation stays consistent, and that concurrent epoch telemetry keeps a consistent underperformance counter",
+      "status": "verified_in_memory",
+      "evidence_level": "L2_IMPLEMENTATION",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 135.885,
+      "component": "01_KISH_ENGINE"
+    },
+    {
+      "id": "FL_007_admission_bounded_liveness",
+      "statement": "AdmissionController checks the observed atomic depth against capacity and a service-time estimate multiplied by depth cast to u32 before reserving a slot; this heuristic does not guarantee actual waiting time or starvation freedom",
+      "status": "verified_local",
+      "evidence_level": "L2_IMPLEMENTATION",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 1.744,
+      "component": "00_ABZU_KERNEL"
+    },
+    {
+      "id": "FL_008_scoped_capability_broker",
+      "statement": "ScopedHandle and McpCapabilityBroker enforce: Tool Available != Tool Authorized != Effect Authorized. Under 10,000 adversarial trials across 5 attack vectors, unauthorized_effects == 0, capability_escalations == 0, stale_token_acceptances == 0, tool_identity_confusions == 0, and configuration_drifts == 0",
+      "status": "verified_local",
+      "evidence_level": "L4_EXPERIMENTAL",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 0.3,
+      "component": "00_ABZU_KERNEL"
+    },
+    {
+      "id": "INV_OMEGA_complete_mediation",
+      "statement": "Confined AI agent processes cannot mutate or unlink protected OS resources or the SQLite ledger directly (macOS Seatbelt / EPERM); all reachability paths G=(V,A) from agent to protected resources are mediated by the BABYLON broker, and the 5-test Omega Campaign (BYPASS-001, AUTH-002, RACE-003, CRASH-004, REVOCATION-005) passes on real OS files",
+      "status": "verified_local",
+      "evidence_level": "L3_ISOLATION",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 2.409,
+      "component": "00_ABZU_KERNEL"
+    },
+    {
+      "id": "FL_014_wave4_receipt_loss_and_closure_drift",
+      "statement": "Under SIGKILL between physical syscall and receipt commit (FL014_RECEIPT_LOSS), blind automatic retries are rejected with AmbiguousOutcomeRequiresReconciliation and explicit inode reconciliation consolidates the receipt without duplicate effect; transitive dependency or skill/policy drift (FL015_TRANSITIVE_DRIFT / POLICY_ROLLBACK / RUNTIME_LOAD) invalidates deployment permits fail-closed",
+      "status": "verified_local",
+      "evidence_level": "L4_EXPERIMENTAL",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 2.076,
+      "component": "00_ABZU_KERNEL"
+    },
+    {
+      "id": "FL_016_owasp_acs_vop1_and_drift_guard",
+      "statement": "BabylonAcsGuard enforces OWASP ACS v0.1.0 over AF_UNIX peer-verified sockets, rejects Fail-Open (on_decision_failure='proceed') with 0xDEAD_6060, compresses human wait stalls by >514x (n=30 cohorts, CI95), reconciles VOP-1 UNKNOWN states against physical witness digests, and invalidates capabilities upon skill/tool/policy drift (BabylonDriftGuard)",
+      "status": "verified_local",
+      "evidence_level": "L4_EXPERIMENTAL",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 2.474,
+      "component": "00_ABZU_KERNEL"
+    },
+    {
+      "id": "signed_dispatch_intent",
+      "statement": "P-256 verification binds the complete canonical CBOR dispatch intent and consumes its nonce in SQLite WAL/FULL before dispatch, rejecting replay across connections and after SIGKILL",
+      "status": "verified_local",
+      "evidence_level": "L2_IMPLEMENTATION",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 0.443,
+      "component": "00_ABZU_KERNEL"
+    },
+    {
+      "id": "ring0_linux_tpm2_wire",
+      "statement": "The Ring-0 TPM 2.0 wire encoder builds a bit-exact 73-byte TPM2_Quote command matching TCG TPM 2.0 Part 3 section 16.4, and parse_quote_response parses TPMS_ATTEST with fail-closed bounds (extraData == causal digest, PCR match, ECDSA signature non-zero)",
+      "status": "verified",
+      "evidence_level": "L2_IMPLEMENTATION",
+      "verified": true,
+      "suite_passed": true,
+      "duration_s": 0.385,
+      "component": "00_ABZU_KERNEL"
+    },
+    {
+      "id": "ring0_aws_nitro_wire",
+      "statement": "The Ring-0 NSM encoder produces the deterministic canonical CBOR Attestation request {Attestation: {user_data: bstr(32 causal digest), nonce: bstr(8 big-endian logical_tick)}} as 73 bytes with shortest-form heads (RFC 8949 section 4.2.1), matching a frozen golden vector",
+      "status": "verified",
+      "evidence_level": "L2_IMPLEMENTATION",
+      "verified": true,
+      "suite_passed": true,
+      "duration_s": 0.303,
+      "component": "00_ABZU_KERNEL"
+    },
+    {
+      "id": "mcp_seatbelt_confinement",
+      "statement": "The macOS MCP backend checks the real stdio protocol and Seatbelt confinement before admitting a candidate, with bounded execution and fail-closed rejection",
+      "status": "verified_local",
+      "evidence_level": "L3_ISOLATION",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 7.471,
+      "component": "01_KISH_ENGINE"
+    },
+    {
+      "id": "FL_AIACT_02_regulatory_evidence_graph",
+      "statement": "The Regulatory Evidence Graph evaluator (babylon.assurance.claim.v1) enforces AcceptEvidence(c,a) => Bound(c,a) & Applicable(c,a) & Verified(c) and TechnicalPASS != LegalConformity across 1,000 controlled mutations (8 families x 125) and 40 in-test boundary cases (4 modes x 10), with 0 false acceptances, 0 false rejections and selective preservation of orthogonal claims; the BABYLON Assurance Gateway wraps this evaluator and is not exercised by the mutation loop",
+      "status": "verified",
+      "evidence_level": "L2_IMPLEMENTATION",
+      "verified": true,
+      "suite_passed": true,
+      "duration_s": 2.577,
+      "component": "01_KISH_ENGINE"
+    },
+    {
+      "id": "universal_autoroute_mcp_evaluate",
+      "statement": "CortexMCPServer exposes the read-only babylon_autoroute_evaluate tool (and cortex_autoroute_evaluate alias) evaluating task complexity, model/effort fitness, KV-cache prefix hysteresis, and S0_LOCAL_AIRGAP secret routing with average latency < 100 us in the local 500-iteration test",
+      "status": "verified_local",
+      "evidence_level": "L2_IMPLEMENTATION",
+      "verified": false,
+      "suite_passed": true,
+      "duration_s": 1.537,
+      "component": "01_KISH_ENGINE"
+    }
+  ],
+  "total_invariants": 5,
+  "invariant_alignment_errors": [],
+  "invariants": [
+    {
+      "key": "ax0_hardware_closure",
+      "claim_id": "CLAIM-AX0-HW-005",
+      "status": "NO_VERIFICADO",
+      "evidence_level": "L3_ISOLATION",
+      "component": "00_ABZU_KERNEL",
+      "required_for_release": true,
+      "summary": "Objetivo: cierre local nativo con atestaci\u00f3n f\u00edsica de Secure Enclave / Touch ID (P-256 SEC1 / COSE_Sign1) y observaci\u00f3n independiente. En esta proyecci\u00f3n no hay suite ejecutable ni recibo vinculado al \u00e1rbol.",
+      "evidence_suite": "",
+      "gate_aligned": true
+    },
+    {
+      "key": "kernel_ledger_and_sqlite_hygiene",
+      "claim_id": "CLAIM-L0-007",
+      "status": "VERIFIED",
+      "evidence_level": "L2_IMPLEMENTATION",
+      "component": "01_KISH_ENGINE",
+      "required_for_release": true,
+      "summary": "Superficie de p\u00e1nico nula en fronteras Rust C-ABI/PyO3 (ffi_panic_surface == 0 sobre 66 puntos de entrada y helpers transitivos), cero fugas de descriptores OS SQLite bajo gc.disable() en /dev/fd (/proc/self/fd), escrituras at\u00f3micas por archivo en CortexOntologyLedger, idempotencia y rollback de lote en CortexPersistLedger y commit at\u00f3mico en BFT_Committer.",
+      "evidence_suite": "python3 scripts/c5_quality_gates/audit_ffi_and_sqlite_hygiene.py && uv run --locked pytest tests/test_claim_l0_007_hygiene.py tests/test_local_core_cortex_connections.py tests/test_database_config_cleanup.py -q",
+      "gate_aligned": true,
+      "suite_passed": true,
+      "duration_s": 8.854
+    },
+    {
+      "key": "lean4_observable_harness",
+      "claim_id": "CLAIM-FORMAL-008",
+      "status": "NO_VERIFICADO",
+      "evidence_level": "L1_FORMAL",
+      "component": "proof/lean",
+      "required_for_release": true,
+      "summary": "Objetivo: harness formal en Lean 4 con ramas observables expl\u00edcitas de aceptaci\u00f3n y rechazo vinculadas a KudurruBudgetGate (64B) y Leyes O11-O14. Ning\u00fan comando de evidencia compila proof/lean para esta invariante.",
+      "evidence_suite": "",
+      "gate_aligned": true
+    },
+    {
+      "key": "mcp_lifecycle_confinement",
+      "claim_id": "CLAIM-MCP-006",
+      "status": "VERIFIED_LOCAL",
+      "evidence_level": "L3_ISOLATION",
+      "component": "00_ABZU_KERNEL",
+      "required_for_release": true,
+      "summary": "Autoridad del broker MCP confinada al ciclo de vida de cada invocaci\u00f3n ef\u00edmera: consumo at\u00f3mico single-use (commit_once) en McpCapabilityBroker, cuarentena at\u00f3mica EffectTx en detonaci\u00f3n, persistencia SQLite WAL synchronous=FULL de execution_id ante SIGKILL y aislamiento stdio/Seatbelt en macOS; recibo Touch ID hardware fuera de la proyecci\u00f3n p\u00fablica.",
+      "evidence_suite": "cargo build --locked -p babylon60_root --lib --features python && uv run --locked pytest tests/test_claim_mcp_006_lifecycle.py -q",
+      "gate_aligned": true,
+      "suite_passed": true,
+      "duration_s": 20.978
+    },
+    {
+      "key": "semantic_entropy_and_solver",
+      "claim_id": "CLAIM-RING1-009",
+      "status": "VERIFIED",
+      "evidence_level": "L4_EXPERIMENTAL",
+      "component": "00_ABZU_KERNEL",
+      "required_for_release": true,
+      "summary": "Estabilidad num\u00e9rica determinista en punto fijo Q16 (error m\u00e1ximo <= 1.90 ULP, cero inversiones de umbral o monoton\u00eda en las 5.295 particiones de Bell) y terminaci\u00f3n/mediaci\u00f3n fail-closed de Z3Adapter y ReplayJournal bajo campa\u00f1a adversarial NEMESIS de 6 vectores y modelo Lean 4 sin axiomas.",
+      "evidence_suite": "uv run --locked python3 scripts/c5_quality_gates/audit_ring1_entropy_solver.py && uv run --locked pytest tests/test_claim_ring1_009_entropy_solver.py -q",
+      "gate_aligned": true,
+      "suite_passed": true,
+      "duration_s": 64.475
+    }
+  ]
+}

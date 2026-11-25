@@ -1,0 +1,9 @@
+{
+  "schema": "babylon60.euai.policy.v1",
+  "release_profile": "infrastructure",
+  "native_validation": {"status": "NO_VERIFICADO"},
+  "reviewers": {},
+  "revoked_reviews": [],
+  "revoked_authorizations": [],
+  "note": "Generic infrastructure only. High-risk publication requires protected environment policy, an exact profile digest, provisioned keys and independent native evidence."
+}

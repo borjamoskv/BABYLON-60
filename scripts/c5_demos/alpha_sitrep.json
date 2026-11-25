@@ -1,0 +1,39 @@
+{
+    "timestamp": "2026-09-21T20:00:45.244591",
+    "scan_time_ms": 760,
+    "top_targets": [
+        {
+            "id": "http://arxiv.org/abs/2609.21996v1",
+            "title": "A Lie Detector Test for Language Models: Reading Knowledge a Model Won't Reveal",
+            "published": "2026-09-18T16:57:00Z",
+            "exergy": 7825,
+            "exergy_triggers": [
+                "causal"
+            ],
+            "anergy_triggers": [],
+            "abstract_preview": "Large language models can hold knowledge they do not report. A model may sandbag on a capability evaluation, or answer against what it internally knows, and its outputs alone cannot tell whether it is..."
+        },
+        {
+            "id": "http://arxiv.org/abs/2609.21870v1",
+            "title": "Neural Cellular Automata Learn General Features in their Hidden Channels",
+            "published": "2026-09-18T14:58:18Z",
+            "exergy": 7805,
+            "exergy_triggers": [
+                "invariant"
+            ],
+            "anergy_triggers": [],
+            "abstract_preview": "Modern deep learning models achieve impressive generalization through over-parameterization, but this paradigm often struggles with overfitting and memorization in few-shot regimes. Neural Cellular Au..."
+        },
+        {
+            "id": "http://arxiv.org/abs/2609.21694v1",
+            "title": "Bayesian classification of astronomical spectra with class uncertainties",
+            "published": "2026-09-18T12:28:56Z",
+            "exergy": 7760,
+            "exergy_triggers": [
+                "entropy"
+            ],
+            "anergy_triggers": [],
+            "abstract_preview": "Context: We developed a probabilistic machine learning method with the aim of performing the O(10)-way classification of low- and high-resolution spectra of stellar and extragalactic targets for the u..."
+        }
+    ]
+}

@@ -1,0 +1,104 @@
+{
+  "schema": "babylon60.test_results.v2",
+  "epistemic_taxonomy": {
+    "SUPPORTED_WITHIN_DOMAIN": [
+      "FL-001 (SharedManifest seqlock cache-line residency on Apple Silicon Darwin arm64)",
+      "FL-002 (Single-writer invariant & RFO elimination)",
+      "FL-003 (Fail-stop epistemic halt & COSE_Sign1 RFC 9942 receipt)",
+      "FL-004 (Append-only WORM ledger SHA-256 chain)",
+      "FL-005 (Effect Adapter TOCTOU Identity: 0 victim mutations, 0 escapes across 128 workers)",
+      "FL-006 (Crash Consistency & ACK Durability: ACK(m) => durable(m) across 6 boundaries with SIGKILL)",
+      "FL-007 (Admission Controller & Bounded Liveness: ACCEPTED != RECEIVED)",
+      "FL-008 (Capability Broker: Confused Deputy Prevention with ScopedHandle)",
+      "NEM-I1 (Effect Authorization failure rejection)",
+      "NEM-I2 (Verified Commit & Effect Observation)",
+      "NEM-I3 (Path Oblivion & Atomic Quarantine 0700)",
+      "NEM-I6 (Authority Epoch & Freshness Gate)"
+    ],
+    "FALSIFIED": [
+      "Naive pathname-based broker check-then-act (falsified by concurrent symlink swap race)",
+      "Unsynced userspace write() as ACK guarantee (falsified by mid-flight process drop)"
+    ],
+    "UNTESTED": [
+      "Non-POSIX bare-metal microkernel targets (seL4 / Fuchsia zircon ports)",
+      "Hardware multi-socket NUMA cache line bounce outside Apple Silicon unified memory",
+      "Flash controller NAND physical capacitor drop before internal buffer write",
+      "Solar flare multi-bit cosmic memory inversion without ECC RAM",
+      "Post-quantum NTRU / ML-DSA signature acceleration in ring-0",
+      "Direct GPU memory VRAM effect mediation",
+      "Cold boot memory bus extraction resistance"
+    ],
+    "UNFALSIFIABLE": [
+      "Absolute omniscient error elimination in LLM cognitive proposals (barred by Law O1/O2)",
+      "Ontological infallibility outside bounded Trusted Computing Base (barred by Law O7/O9)"
+    ]
+  },
+  "matrix_counts": {
+    "total_claims": 21,
+    "supported_within_domain": 12,
+    "falsified": 2,
+    "untested": 5,
+    "unfalsifiable": 2
+  },
+  "wave_ii_empirical_evidence": {
+    "FL-005": {
+      "name": "EFFECT_ADAPTER_TOCTOU_IDENTITY",
+      "hypothesis": "authorized(path, t0) \u2227 execute(path, t1) \u27f9 same_inode(path, t0, t1)",
+      "workers": 128,
+      "iterations": 1280,
+      "victim_mutations": 0,
+      "victim_deletions": 0,
+      "symlink_escapes_intercepted": 384,
+      "victim_canary_intact": true,
+      "naive_baseline_vulnerable": true,
+      "status": "SUPPORTED_WITHIN_DOMAIN"
+    },
+    "FL-006": {
+      "name": "CRASH_CONSISTENCY_ACK_DURABILITY",
+      "hypothesis": "ACK(m) \u27f9 durable(m)",
+      "iterations": 350,
+      "causal_boundaries_tested": 6,
+      "replays_rejected": 156,
+      "lost_acked_messages": 0,
+      "ghost_acks": 0,
+      "duplicate_effects": 0,
+      "sqlite_wal_integrity": "PASS (ok)",
+      "status": "SUPPORTED_WITHIN_DOMAIN"
+    },
+    "FL-007": {
+      "name": "ADMISSION_CONTROL_BOUNDED_LIVENESS",
+      "hypothesis": "accepted(m) \u27f9 bounded_time[committed(m) \u2228 explicitly_rejected(m)]",
+      "workers": 50,
+      "requests_per_worker": 1000,
+      "total_requests": 50000,
+      "accepted_requests": 8124,
+      "rejected_requests": 41876,
+      "contract_violations": 0,
+      "status": "SUPPORTED_WITHIN_DOMAIN"
+    },
+    "FL-008": {
+      "name": "MCP_CAPABILITY_ACTIVATION_AUTHORITY",
+      "hypothesis": "Execute(e) \u27f9 ValidCapability(e, t_commit)",
+      "adversarial_attempts": 10000,
+      "scenarios_tested": 4,
+      "unauthorized_effects": 0,
+      "capability_escalations": 0,
+      "stale_token_acceptances": 0,
+      "tool_identity_confusions": 0,
+      "effect_evidence_coverage": 100.0,
+      "status": "SUPPORTED_WITHIN_DOMAIN"
+    }
+  },
+  "adversarial_nemesis_suite": {
+    "tests_total": 19,
+    "passed": 19,
+    "failed": 0
+  },
+  "ontology_contract_suite": {
+    "tests_total": 8,
+    "passed": 8,
+    "bounded_liveness_contract": "PASS"
+  },
+  "timestamp": 1791809968,
+  "scope": "Falsification Wave II (Silicon Certified)"
+}

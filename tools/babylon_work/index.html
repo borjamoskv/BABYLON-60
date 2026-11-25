@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Babylon Work: encargos, documentos y contexto en un espacio local.">
+  <title>Babylon Work</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23242621'/%3E%3Ctext x='8' y='24' font-family='sans-serif' font-size='25' fill='%23e5f382'%3Eb%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/work.css">
+  <script src="/work.js" defer></script>
+  <script src="/runtime-ui.js" defer></script>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" aria-label="Espacio de trabajo">
+      <a class="brand" href="#" id="home"><span class="brand-mark">b</span><span>BABYLON <span class="brand-work">WORK</span></span></a>
+      <div class="project"><span class="project-symbol">B60</span><div><strong>BABYLON-60</strong><span>Espacio local</span></div></div>
+      <button class="new-task" id="new-task"><span aria-hidden="true">＋</span> Nuevo encargo <kbd>N</kbd></button>
+      <nav class="main-nav" aria-label="Navegación">
+        <button data-view="tasks" class="nav-item selected"><span aria-hidden="true">▤</span> Mis encargos <span id="task-count" class="count">0</span></button>
+        <button data-view="sources" class="nav-item"><span aria-hidden="true">◫</span> Fuentes del proyecto</button>
+        <button data-view="about" class="nav-item"><span aria-hidden="true">◇</span> Conexiones y alcance</button>
+      </nav>
+      <div class="recent-heading">RECIENTES</div>
+      <div id="recent-tasks" class="recent-tasks"><p class="quiet">Tus encargos aparecerán aquí.</p></div>
+      <div class="sidebar-bottom"><span class="connection-dot" id="connection-dot"></span><div><strong id="connection-label">Conectando…</strong><span>Prototipo 0.2 · en tu equipo</span></div></div>
+    </aside>
+    <main>
+      <header class="topbar"><span id="breadcrumb">Mi espacio <span aria-hidden="true">/</span> Encargos</span><span class="local-tag">LOCAL <span aria-hidden="true">↗</span></span></header>
+      <div class="notice" id="notice" role="status" hidden></div>
+      <section id="tasks-view" class="page">
+        <div class="eyebrow">TU MESA DE TRABAJO</div>
+        <h1>El contexto permanece.<br>El trabajo avanza<span class="accent">.</span></h1>
+        <p class="intro">Dale un objetivo a tu próximo encargo. Sus fuentes, decisiones y documentos se quedan juntos, listos para continuar.</p>
+        <form id="quick-form" class="quick-form">
+          <label for="quick-prompt" class="visually-hidden">Objetivo del nuevo encargo</label>
+          <textarea id="quick-prompt" placeholder="¿Qué quieres preparar?" rows="2" maxlength="6000" required></textarea>
+          <div class="quick-bottom"><span id="model-summary">Detectando conexiones de IA…</span><button class="primary" type="submit">Crear encargo <span aria-hidden="true">↗</span></button></div>
+        </form>
+        <div class="suggestions"><span>EMPIEZA CON</span><button data-example="document">Documentar la instalación <span aria-hidden="true">↗</span></button><button data-example="review">Revisar la arquitectura <span aria-hidden="true">↗</span></button><button data-example="research">Preparar una investigación <span aria-hidden="true">↗</span></button></div>
+        <div class="section-heading"><h2>Tus encargos</h2><span id="saved-count">Guardados en este equipo</span></div>
+        <div id="task-list" class="task-list"></div>
+        <div id="empty-state" class="empty-state"><span class="empty-mark" aria-hidden="true">↳</span><div><strong>Un buen encargo empieza con un resultado claro.</strong><p>Crea el primero arriba. Podrás pausarlo y retomarlo con todo su contexto.</p></div></div>
+        <div class="footnote">Fuentes del proyecto · Trabajos persistentes · Ejecución con autorización independiente</div>
+      </section>
+      <section id="task-view" class="page task-page" hidden>
+        <button class="back" id="back-tasks">← Todos los encargos</button>
+        <div class="task-heading"><div><div class="eyebrow" id="task-kind"></div><h1 id="task-title"></h1></div><span id="task-status" class="status"></span></div>
+        <p id="task-goal" class="task-goal"></p>
+        <div class="task-toolbar"><div class="task-tabs" role="tablist" aria-label="Contenido del encargo"><button role="tab" id="tab-document" aria-controls="panel-document" aria-selected="true" data-tab="document">Documento</button><button role="tab" id="tab-context" aria-controls="panel-context" aria-selected="false" data-tab="context">Contexto</button><button role="tab" id="tab-activity" aria-controls="panel-activity" aria-selected="false" data-tab="activity">Actividad</button><button role="tab" id="tab-runs" aria-controls="panel-runs" aria-selected="false" data-tab="runs">Ejecución</button></div><div class="task-controls"><button id="run-ai" class="primary" disabled>Trabajar con IA ↗</button><button id="pause-task" class="secondary">Pausar</button><button id="export-task" class="secondary">Exportar .md <span aria-hidden="true">↓</span></button></div></div>
+        <div class="work-layout">
+          <div>
+            <section id="panel-document" role="tabpanel" aria-labelledby="tab-document">
+              <div id="prepare-state" class="prepare-state"><span class="document-symbol" aria-hidden="true">▤</span><h2>Del objetivo al primer resultado.</h2><p>La IA trabajará con el objetivo, las decisiones y las fuentes de este encargo.</p><button class="primary" id="prepare-ai" disabled>Realizar encargo con IA ↗</button><button class="back prepare-excerpts" id="prepare-task">Preparar extractos sin IA</button></div>
+              <div id="document-state" class="document-state" hidden><div class="document-bar"><span id="document-name">documento.md</span><div class="document-modes"><button id="preview-mode" aria-pressed="true">Vista previa</button><button id="edit-mode" aria-pressed="false">Editar</button></div></div><article id="document-preview" class="document-preview"></article><label for="document-editor" class="visually-hidden">Contenido del documento en Markdown</label><textarea id="document-editor" class="document-editor" maxlength="100000" spellcheck="false" hidden></textarea><div class="document-footer"><span id="save-state" aria-live="polite">Guardado localmente</span><button id="save-document" class="primary" disabled>Guardar cambios</button></div></div>
+            </section>
+            <section id="panel-context" role="tabpanel" aria-labelledby="tab-context" hidden><h2>Lo que conviene recordar</h2><p class="quiet">Decisiones explícitas del encargo. Puedes revisarlas antes de continuar.</p><div id="decision-list" class="decision-list"></div><form id="decision-form" class="decision-form"><label for="decision-input">Añadir una decisión</label><textarea id="decision-input" placeholder="Por ejemplo: conservar compatibilidad con la CLI actual." rows="3" maxlength="2000" required></textarea><button class="secondary" type="submit">Guardar en el contexto</button></form></section>
+            <section id="panel-activity" role="tabpanel" aria-labelledby="tab-activity" hidden><h2>Historial del encargo</h2><p class="quiet">Acciones de este espacio. Este historial no es una atestación del kernel.</p><ol id="activity-list" class="activity-list"></ol></section>
+            <section id="panel-runs" role="tabpanel" aria-labelledby="tab-runs" hidden><h2>Trabajos y comprobaciones</h2><p class="quiet">La IA prepara documentos. El broker autoriza por separado cada comprobación.</p><form id="checks-form" class="checks-form"><label for="check-command">Comprobación protegida</label><div class="checks-controls"><select id="check-command" required></select><button class="secondary" id="prepare-checks" disabled>Preparar solicitud</button></div><p id="checks-help" class="quiet">Comprobando el broker…</p></form><div id="runs-list" class="runs-list" aria-live="polite"></div></section>
+          </div>
+          <aside class="context-rail" aria-label="Fuentes y alcance del encargo"><section><div class="rail-label">SIGUIENTE PASO</div><p id="next-step"></p><button id="complete-task" class="secondary">Terminar revisión <span aria-hidden="true">✓</span></button></section><section><div class="rail-label">FUENTES DEL BORRADOR</div><div id="task-sources"></div></section><section><div class="rail-label">ALCANCE ACTIVO</div><div class="scope-line"><span aria-hidden="true">✓</span> Leer fuentes del catálogo</div><div class="scope-line"><span aria-hidden="true">✓</span> Guardar en este espacio</div><div class="scope-line disabled"><span aria-hidden="true">—</span> Comandos libres</div><div class="scope-line disabled"><span aria-hidden="true">—</span> Aplicar código generado</div><div class="scope-line disabled"><span aria-hidden="true">—</span> Publicar resultados</div></section><div class="rail-bottom">Tu revisión cierra el encargo.<br>Las pruebas se acreditan por separado.</div></aside>
+        </div>
+      </section>
+      <section id="sources-view" class="page" hidden><div class="eyebrow">CONTEXTO DEL PROYECTO</div><h1>Fuentes a la vista<span class="accent">.</span></h1><p class="intro">El preparador lee estos archivos reales. Cada borrador conserva el identificador de contenido de las fuentes que utilizó.</p><div id="source-list" class="source-list"></div></section>
+      <section id="about-view" class="page" hidden><div class="eyebrow">CONEXIONES Y ALCANCE</div><h1>Conexiones reales.<br>Permisos concretos<span class="accent">.</span></h1><p class="intro">La disponibilidad de un modelo no le concede permisos sobre el equipo. Cada comprobación protegida necesita su propia firma.</p><div id="runtime-connections"></div><div class="capability"><div><h2>Identidad del operador</h2><p id="signing-setup">Comprobando configuración…</p></div><span id="signing-status" class="status pending">Comprobando</span></div><p class="quiet setup-note">La clave pública de confianza se configura en el entorno del servidor con BABYLON_ENCLAVE_PINNED_PUBKEY. No se acepta una clave enviada por el modelo o el navegador. El control del escritorio y la ejecución de comandos libres quedan fuera de este catálogo.</p></section>
+    </main>
+  </div>
+  <dialog id="new-dialog"><form id="new-form"><div class="dialog-heading"><h2>Nuevo encargo</h2><button type="button" class="icon-button" data-close="new-dialog" aria-label="Cerrar nuevo encargo">×</button></div><label for="new-title">Título</label><input id="new-title" maxlength="160" placeholder="Un resultado concreto" required><label for="new-kind">Tipo de trabajo</label><select id="new-kind"><option value="document">Documentación</option><option value="review">Revisión técnica</option><option value="research">Investigación</option></select><label for="new-prompt">Objetivo</label><textarea id="new-prompt" rows="4" maxlength="6000" placeholder="Qué necesitas, para quién y qué debe incluir." required></textarea><button class="primary" type="submit">Crear encargo <span aria-hidden="true">↗</span></button></form></dialog>
+  <dialog id="source-dialog"><div class="dialog-heading"><div><span class="eyebrow">ARCHIVO DEL PROYECTO</span><h2 id="source-title"></h2></div><button type="button" class="icon-button" data-close="source-dialog" aria-label="Cerrar fuente">×</button></div><p id="source-path" class="quiet"></p><p id="source-digest" class="source-digest"></p><pre id="source-content"></pre></dialog>
+  <dialog id="complete-dialog"><form id="complete-form"><div class="dialog-heading"><h2>Terminar el encargo</h2><button type="button" class="icon-button" data-close="complete-dialog" aria-label="Cerrar revisión">×</button></div><p>El documento quedará guardado y podrás reabrirlo cuando lo necesites.</p><label class="check-label"><input type="checkbox" id="reviewed" required> He revisado el documento y sus fuentes.</label><p class="quiet">Esta revisión no certifica pruebas de software ni efectos del sistema.</p><button class="primary" type="submit">Marcar como terminado</button></form></dialog>
+  <dialog id="access-dialog"><form id="access-form"><div class="eyebrow">ACCESO LOCAL</div><h2>Conecta con tu espacio.</h2><p>Introduce la clave local que aparece en el terminal al iniciar Babylon Work.</p><label for="access-key">Clave de esta sesión</label><input id="access-key" type="password" autocomplete="off" required><button class="primary" type="submit">Conectar</button></form></dialog>
+  <dialog id="ai-dialog"><form id="ai-form"><div class="dialog-heading"><h2>Realizar encargo con IA</h2><button type="button" class="icon-button" data-close="ai-dialog" aria-label="Cerrar encargo con IA">×</button></div><label for="ai-provider">Proveedor</label><select id="ai-provider" required></select><label for="ai-model">Modelo</label><select id="ai-model" required></select><p id="ai-location" class="quiet"></p><label for="ai-instruction">Instrucción adicional · opcional</label><textarea id="ai-instruction" rows="3" maxlength="4000" placeholder="Por ejemplo: redacta una guía breve para una persona sin conocimientos técnicos."></textarea><p class="quiet">Se usarán el objetivo, el borrador guardado y extractos de las fuentes. El resultado quedará pendiente de revisión.</p><button class="primary" type="submit">Iniciar trabajo ↗</button></form></dialog>
+  <dialog id="run-result-dialog"><div class="dialog-heading"><h2>Resultado conservado</h2><button type="button" class="icon-button" data-close="run-result-dialog" aria-label="Cerrar resultado">×</button></div><label for="run-result">Documento del trabajo</label><textarea id="run-result" rows="16" readonly></textarea><p class="quiet">Puedes copiarlo. El documento del encargo no se ha sobrescrito.</p></dialog>
+  <div class="toast" id="toast" role="status" hidden></div>
+</body>
+</html>

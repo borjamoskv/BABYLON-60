@@ -1,0 +1,1658 @@
+{
+  "schema": "babylon60.lean_census.v1",
+  "source_evidence": "docs/06_theory/evidence/lean-census-372-v511.json",
+  "theorem_declarations_count": 144,
+  "non_theorem_constructions_count": 275,
+  "non_theorem_constructions": [
+    {
+      "id": "#C001",
+      "reference": "[`AX0.lean:11`](../../proof/lean/AX0.lean#L11)",
+      "kind": "inductive",
+      "qualified_name": "AuthState"
+    },
+    {
+      "id": "#C002",
+      "reference": "[`AX0.lean:20`](../../proof/lean/AX0.lean#L20)",
+      "kind": "inductive",
+      "qualified_name": "AuthEvent"
+    },
+    {
+      "id": "#C003",
+      "reference": "[`AX0.lean:28`](../../proof/lean/AX0.lean#L28)",
+      "kind": "def",
+      "qualified_name": "step"
+    },
+    {
+      "id": "#C004",
+      "reference": "[`AX0.lean:51`](../../proof/lean/AX0.lean#L51)",
+      "kind": "def",
+      "qualified_name": "validateTrace"
+    },
+    {
+      "id": "#C005",
+      "reference": "[`AX0.lean:63`](../../proof/lean/AX0.lean#L63)",
+      "kind": "def",
+      "qualified_name": "trace_happy"
+    },
+    {
+      "id": "#C006",
+      "reference": "[`AX0.lean:68`](../../proof/lean/AX0.lean#L68)",
+      "kind": "def",
+      "qualified_name": "trace_double_dispatch"
+    },
+    {
+      "id": "#C007",
+      "reference": "[`AX0.lean:73`](../../proof/lean/AX0.lean#L73)",
+      "kind": "def",
+      "qualified_name": "trace_illegal_dispatch"
+    },
+    {
+      "id": "#C008",
+      "reference": "[`AX0.lean:78`](../../proof/lean/AX0.lean#L78)",
+      "kind": "def",
+      "qualified_name": "trace_crash"
+    },
+    {
+      "id": "#C009",
+      "reference": "[`AX0.lean:86`](../../proof/lean/AX0.lean#L86)",
+      "kind": "def",
+      "qualified_name": "countDispatches"
+    },
+    {
+      "id": "#C010",
+      "reference": "[`AX0.lean:91`](../../proof/lean/AX0.lean#L91)",
+      "kind": "def",
+      "qualified_name": "maxAllowedDispatches"
+    },
+    {
+      "id": "—",
+      "reference": "[`AX0.lean:151`](../../proof/lean/AX0.lean#L151)",
+      "kind": "abbrev",
+      "qualified_name": "Auth001SafetyProp"
+    },
+    {
+      "id": "—",
+      "reference": "[`AX0.lean:185`](../../proof/lean/AX0.lean#L185)",
+      "kind": "structure",
+      "qualified_name": "VerifiedAuthInvariant"
+    },
+    {
+      "id": "#C011",
+      "reference": "[`AcsEnvelope.lean:21`](../../proof/lean/AcsEnvelope.lean#L21)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.restrict"
+    },
+    {
+      "id": "#C012",
+      "reference": "[`AcsEnvelope.lean:31`](../../proof/lean/AcsEnvelope.lean#L31)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.utf8"
+    },
+    {
+      "id": "#C013",
+      "reference": "[`AcsEnvelope.lean:33`](../../proof/lean/AcsEnvelope.lean#L33)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.text"
+    },
+    {
+      "id": "#C014",
+      "reference": "[`AcsEnvelope.lean:34`](../../proof/lean/AcsEnvelope.lean#L34)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.digest"
+    },
+    {
+      "id": "#C015",
+      "reference": "[`AcsEnvelope.lean:35`](../../proof/lean/AcsEnvelope.lean#L35)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.u32"
+    },
+    {
+      "id": "#C016",
+      "reference": "[`AcsEnvelope.lean:36`](../../proof/lean/AcsEnvelope.lean#L36)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.principal"
+    },
+    {
+      "id": "#C017",
+      "reference": "[`AcsEnvelope.lean:37`](../../proof/lean/AcsEnvelope.lean#L37)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.effect"
+    },
+    {
+      "id": "#C018",
+      "reference": "[`AcsEnvelope.lean:38`](../../proof/lean/AcsEnvelope.lean#L38)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.enforcement"
+    },
+    {
+      "id": "—",
+      "reference": "[`AcsEnvelope.lean:41`](../../proof/lean/AcsEnvelope.lean#L41)",
+      "kind": "abbrev",
+      "qualified_name": "B60.ACS.Context"
+    },
+    {
+      "id": "#C019",
+      "reference": "[`AcsEnvelope.lean:44`](../../proof/lean/AcsEnvelope.lean#L44)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.contextCodec"
+    },
+    {
+      "id": "—",
+      "reference": "[`AcsEnvelope.lean:49`](../../proof/lean/AcsEnvelope.lean#L49)",
+      "kind": "abbrev",
+      "qualified_name": "B60.ACS.Key"
+    },
+    {
+      "id": "#C020",
+      "reference": "[`AcsEnvelope.lean:50`](../../proof/lean/AcsEnvelope.lean#L50)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.keyCodec"
+    },
+    {
+      "id": "—",
+      "reference": "[`AcsEnvelope.lean:53`](../../proof/lean/AcsEnvelope.lean#L53)",
+      "kind": "abbrev",
+      "qualified_name": "B60.ACS.Grant"
+    },
+    {
+      "id": "#C021",
+      "reference": "[`AcsEnvelope.lean:54`](../../proof/lean/AcsEnvelope.lean#L54)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.grantCodec"
+    },
+    {
+      "id": "—",
+      "reference": "[`AcsEnvelope.lean:59`](../../proof/lean/AcsEnvelope.lean#L59)",
+      "kind": "abbrev",
+      "qualified_name": "B60.ACS.Call"
+    },
+    {
+      "id": "#C022",
+      "reference": "[`AcsEnvelope.lean:62`](../../proof/lean/AcsEnvelope.lean#L62)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.callCodec"
+    },
+    {
+      "id": "#C023",
+      "reference": "[`AcsEnvelope.lean:67`](../../proof/lean/AcsEnvelope.lean#L67)",
+      "kind": "inductive",
+      "qualified_name": "B60.ACS.Outcome"
+    },
+    {
+      "id": "#C024",
+      "reference": "[`AcsEnvelope.lean:73`](../../proof/lean/AcsEnvelope.lean#L73)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.rejectedCodec"
+    },
+    {
+      "id": "#C025",
+      "reference": "[`AcsEnvelope.lean:74`](../../proof/lean/AcsEnvelope.lean#L74)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.unknownCodec"
+    },
+    {
+      "id": "#C026",
+      "reference": "[`AcsEnvelope.lean:75`](../../proof/lean/AcsEnvelope.lean#L75)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.verifiedCodec"
+    },
+    {
+      "id": "#C027",
+      "reference": "[`AcsEnvelope.lean:77`](../../proof/lean/AcsEnvelope.lean#L77)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.outcomeCodec"
+    },
+    {
+      "id": "—",
+      "reference": "[`AcsEnvelope.lean:104`](../../proof/lean/AcsEnvelope.lean#L104)",
+      "kind": "abbrev",
+      "qualified_name": "B60.ACS.Forensic"
+    },
+    {
+      "id": "#C028",
+      "reference": "[`AcsEnvelope.lean:107`](../../proof/lean/AcsEnvelope.lean#L107)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.forensicCodec"
+    },
+    {
+      "id": "#C029",
+      "reference": "[`AcsEnvelope.lean:111`](../../proof/lean/AcsEnvelope.lean#L111)",
+      "kind": "inductive",
+      "qualified_name": "B60.ACS.Algorithm"
+    },
+    {
+      "id": "#C030",
+      "reference": "[`AcsEnvelope.lean:114`](../../proof/lean/AcsEnvelope.lean#L114)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.protectedHeader"
+    },
+    {
+      "id": "#C031",
+      "reference": "[`AcsEnvelope.lean:119`](../../proof/lean/AcsEnvelope.lean#L119)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.signatureStructure"
+    },
+    {
+      "id": "#C032",
+      "reference": "[`AcsEnvelope.lean:124`](../../proof/lean/AcsEnvelope.lean#L124)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.coseSign1"
+    },
+    {
+      "id": "#C033",
+      "reference": "[`AcsEnvelope.lean:139`](../../proof/lean/AcsEnvelope.lean#L139)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.wrapped"
+    },
+    {
+      "id": "#C034",
+      "reference": "[`AcsEnvelope.lean:151`](../../proof/lean/AcsEnvelope.lean#L151)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.typedCose"
+    },
+    {
+      "id": "#C035",
+      "reference": "[`AcsEnvelope.lean:160`](../../proof/lean/AcsEnvelope.lean#L160)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.typedSignatureStructure"
+    },
+    {
+      "id": "#C036",
+      "reference": "[`AcsEnvelope.lean:196`](../../proof/lean/AcsEnvelope.lean#L196)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.decodeCall"
+    },
+    {
+      "id": "#C037",
+      "reference": "[`AcsEnvelope.lean:197`](../../proof/lean/AcsEnvelope.lean#L197)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.decodeGrant"
+    },
+    {
+      "id": "#C038",
+      "reference": "[`AcsEnvelope.lean:198`](../../proof/lean/AcsEnvelope.lean#L198)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.decodeForensic"
+    },
+    {
+      "id": "#C039",
+      "reference": "[`AcsEnvelope.lean:281`](../../proof/lean/AcsEnvelope.lean#L281)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.nibble"
+    },
+    {
+      "id": "#C040",
+      "reference": "[`AcsEnvelope.lean:282`](../../proof/lean/AcsEnvelope.lean#L282)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.unhex"
+    },
+    {
+      "id": "#C041",
+      "reference": "[`AcsEnvelope.lean:285`](../../proof/lean/AcsEnvelope.lean#L285)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.hex"
+    },
+    {
+      "id": "#C042",
+      "reference": "[`AcsEnvelope.lean:287`](../../proof/lean/AcsEnvelope.lean#L287)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.fill32"
+    },
+    {
+      "id": "#C043",
+      "reference": "[`AcsEnvelope.lean:290`](../../proof/lean/AcsEnvelope.lean#L290)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.golden_root"
+    },
+    {
+      "id": "#C044",
+      "reference": "[`AcsEnvelope.lean:291`](../../proof/lean/AcsEnvelope.lean#L291)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.golden_delegated"
+    },
+    {
+      "id": "#C045",
+      "reference": "[`AcsEnvelope.lean:292`](../../proof/lean/AcsEnvelope.lean#L292)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.golden_grant"
+    },
+    {
+      "id": "#C046",
+      "reference": "[`AcsEnvelope.lean:293`](../../proof/lean/AcsEnvelope.lean#L293)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.golden_call"
+    },
+    {
+      "id": "#C047",
+      "reference": "[`AcsEnvelope.lean:294`](../../proof/lean/AcsEnvelope.lean#L294)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.golden_call_signing"
+    },
+    {
+      "id": "#C048",
+      "reference": "[`AcsEnvelope.lean:295`](../../proof/lean/AcsEnvelope.lean#L295)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.golden_forensic"
+    },
+    {
+      "id": "#C049",
+      "reference": "[`AcsEnvelope.lean:296`](../../proof/lean/AcsEnvelope.lean#L296)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.golden_forensic_signing"
+    },
+    {
+      "id": "#C050",
+      "reference": "[`AcsEnvelope.lean:297`](../../proof/lean/AcsEnvelope.lean#L297)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.golden_cose_ed"
+    },
+    {
+      "id": "#C051",
+      "reference": "[`AcsEnvelope.lean:298`](../../proof/lean/AcsEnvelope.lean#L298)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.golden_cose_p256"
+    },
+    {
+      "id": "#C052",
+      "reference": "[`AcsEnvelope.lean:300`](../../proof/lean/AcsEnvelope.lean#L300)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.fixtureContext"
+    },
+    {
+      "id": "#C053",
+      "reference": "[`AcsEnvelope.lean:304`](../../proof/lean/AcsEnvelope.lean#L304)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.fixtureGrant"
+    },
+    {
+      "id": "#C054",
+      "reference": "[`AcsEnvelope.lean:305`](../../proof/lean/AcsEnvelope.lean#L305)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.fixtureCall"
+    },
+    {
+      "id": "#C055",
+      "reference": "[`AcsEnvelope.lean:309`](../../proof/lean/AcsEnvelope.lean#L309)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.fixtureForensic"
+    },
+    {
+      "id": "#C056",
+      "reference": "[`AcsEnvelope.lean:338`](../../proof/lean/AcsEnvelope.lean#L338)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.toHex"
+    },
+    {
+      "id": "#C057",
+      "reference": "[`AcsEnvelope.lean:342`](../../proof/lean/AcsEnvelope.lean#L342)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.runtimeVectors"
+    },
+    {
+      "id": "#C058",
+      "reference": "[`AcsEnvelope.lean:352`](../../proof/lean/AcsEnvelope.lean#L352)",
+      "kind": "def",
+      "qualified_name": "B60.ACS.run"
+    },
+    {
+      "id": "#C059",
+      "reference": "[`AcsEnvelope.lean:370`](../../proof/lean/AcsEnvelope.lean#L370)",
+      "kind": "def",
+      "qualified_name": "main"
+    },
+    {
+      "id": "#C060",
+      "reference": "[`Babylon.lean:14`](../../proof/lean/Babylon.lean#L14)",
+      "kind": "def",
+      "qualified_name": "Babylon.ProbDist"
+    },
+    {
+      "id": "#C061",
+      "reference": "[`Babylon.lean:15`](../../proof/lean/Babylon.lean#L15)",
+      "kind": "def",
+      "qualified_name": "Babylon.Morphism"
+    },
+    {
+      "id": "#C062",
+      "reference": "[`Babylon.lean:18`](../../proof/lean/Babylon.lean#L18)",
+      "kind": "def",
+      "qualified_name": "Babylon.bayesian_inverse"
+    },
+    {
+      "id": "—",
+      "reference": "[`Babylon.lean:28`](../../proof/lean/Babylon.lean#L28)",
+      "kind": "structure",
+      "qualified_name": "Babylon.BayesianDisintegration"
+    },
+    {
+      "id": "#C063",
+      "reference": "[`Babylon.lean:74`](../../proof/lean/Babylon.lean#L74)",
+      "kind": "inductive",
+      "qualified_name": "Babylon.TonnetzState"
+    },
+    {
+      "id": "#C064",
+      "reference": "[`Babylon.lean:81`](../../proof/lean/Babylon.lean#L81)",
+      "kind": "def",
+      "qualified_name": "Babylon.canonical_tonnetz_monitor"
+    },
+    {
+      "id": "—",
+      "reference": "[`Babylon.lean:90`](../../proof/lean/Babylon.lean#L90)",
+      "kind": "structure",
+      "qualified_name": "Babylon.TonnetzMonitor"
+    },
+    {
+      "id": "#C065",
+      "reference": "[`Babylon.lean:104`](../../proof/lean/Babylon.lean#L104)",
+      "kind": "inductive",
+      "qualified_name": "Babylon.AeonPhase"
+    },
+    {
+      "id": "#C066",
+      "reference": "[`Babylon.lean:111`](../../proof/lean/Babylon.lean#L111)",
+      "kind": "def",
+      "qualified_name": "Babylon.HOT_MEMORY_LIMIT"
+    },
+    {
+      "id": "#C067",
+      "reference": "[`Babylon.lean:114`](../../proof/lean/Babylon.lean#L114)",
+      "kind": "def",
+      "qualified_name": "Babylon.LANDAUER_FLOOR_AJ"
+    },
+    {
+      "id": "—",
+      "reference": "[`Babylon.lean:117`](../../proof/lean/Babylon.lean#L117)",
+      "kind": "structure",
+      "qualified_name": "Babylon.AeonState"
+    },
+    {
+      "id": "#C068",
+      "reference": "[`Babylon.lean:145`](../../proof/lean/Babylon.lean#L145)",
+      "kind": "def",
+      "qualified_name": "Babylon.conformal_reset"
+    },
+    {
+      "id": "#C069",
+      "reference": "[`Babylon.lean:183`](../../proof/lean/Babylon.lean#L183)",
+      "kind": "def",
+      "qualified_name": "Babylon.FRACTION_BASE"
+    },
+    {
+      "id": "—",
+      "reference": "[`Babylon.lean:185`](../../proof/lean/Babylon.lean#L185)",
+      "kind": "structure",
+      "qualified_name": "Babylon.Tick60"
+    },
+    {
+      "id": "#C070",
+      "reference": "[`Babylon.lean:190`](../../proof/lean/Babylon.lean#L190)",
+      "kind": "def",
+      "qualified_name": "Babylon.add_tick60"
+    },
+    {
+      "id": "#C071",
+      "reference": "[`Babylon.lean:215`](../../proof/lean/Babylon.lean#L215)",
+      "kind": "def",
+      "qualified_name": "Babylon.mmr_peaks_bound"
+    },
+    {
+      "id": "—",
+      "reference": "[`Babylon.lean:225`](../../proof/lean/Babylon.lean#L225)",
+      "kind": "structure",
+      "qualified_name": "Babylon.TransductionTensor60"
+    },
+    {
+      "id": "—",
+      "reference": "[`Babylon.lean:232`](../../proof/lean/Babylon.lean#L232)",
+      "kind": "structure",
+      "qualified_name": "Babylon.BeliefDistribution"
+    },
+    {
+      "id": "#C072",
+      "reference": "[`Babylon.lean:237`](../../proof/lean/Babylon.lean#L237)",
+      "kind": "def",
+      "qualified_name": "Babylon.fisher_metric_action"
+    },
+    {
+      "id": "#C073",
+      "reference": "[`Babylon.lean:255`](../../proof/lean/Babylon.lean#L255)",
+      "kind": "inductive",
+      "qualified_name": "Babylon.AgentIntentVerdict"
+    },
+    {
+      "id": "#C074",
+      "reference": "[`Babylon.lean:261`](../../proof/lean/Babylon.lean#L261)",
+      "kind": "def",
+      "qualified_name": "Babylon.effective_payload"
+    },
+    {
+      "id": "#C075",
+      "reference": "[`Babylon.lean:264`](../../proof/lean/Babylon.lean#L264)",
+      "kind": "def",
+      "qualified_name": "Babylon.evaluate_agent_intent"
+    },
+    {
+      "id": "#C076",
+      "reference": "[`Babylon.lean:289`](../../proof/lean/Babylon.lean#L289)",
+      "kind": "def",
+      "qualified_name": "Babylon.ffi_sexa_add_model"
+    },
+    {
+      "id": "—",
+      "reference": "[`Babylon.lean:302`](../../proof/lean/Babylon.lean#L302)",
+      "kind": "structure",
+      "qualified_name": "Babylon.ReplSession"
+    },
+    {
+      "id": "#C077",
+      "reference": "[`Babylon.lean:309`](../../proof/lean/Babylon.lean#L309)",
+      "kind": "def",
+      "qualified_name": "Babylon.eval_repl_step"
+    },
+    {
+      "id": "#C078",
+      "reference": "[`Babylon.lean:315`](../../proof/lean/Babylon.lean#L315)",
+      "kind": "def",
+      "qualified_name": "Babylon.run_repl_steps"
+    },
+    {
+      "id": "—",
+      "reference": "[`Babylon.lean:333`](../../proof/lean/Babylon.lean#L333)",
+      "kind": "structure",
+      "qualified_name": "Babylon.CausalEdge"
+    },
+    {
+      "id": "#C079",
+      "reference": "[`Babylon.lean:371`](../../proof/lean/Babylon.lean#L371)",
+      "kind": "inductive",
+      "qualified_name": "Babylon.SmallStep"
+    },
+    {
+      "id": "#C080",
+      "reference": "[`Babylon.lean:390`](../../proof/lean/Babylon.lean#L390)",
+      "kind": "inductive",
+      "qualified_name": "Babylon.PrivilegeRing"
+    },
+    {
+      "id": "#C081",
+      "reference": "[`Babylon.lean:398`](../../proof/lean/Babylon.lean#L398)",
+      "kind": "inductive",
+      "qualified_name": "Babylon.SumerianToponym"
+    },
+    {
+      "id": "#C082",
+      "reference": "[`Babylon.lean:408`](../../proof/lean/Babylon.lean#L408)",
+      "kind": "inductive",
+      "qualified_name": "Babylon.EscalationStratum"
+    },
+    {
+      "id": "#C083",
+      "reference": "[`Babylon.lean:417`](../../proof/lean/Babylon.lean#L417)",
+      "kind": "def",
+      "qualified_name": "Babylon.stratumToToponym"
+    },
+    {
+      "id": "#C084",
+      "reference": "[`Babylon.lean:426`](../../proof/lean/Babylon.lean#L426)",
+      "kind": "def",
+      "qualified_name": "Babylon.toponymToStratum"
+    },
+    {
+      "id": "—",
+      "reference": "[`Babylon.lean:441`](../../proof/lean/Babylon.lean#L441)",
+      "kind": "structure",
+      "qualified_name": "Babylon.WorkspaceModuleNode"
+    },
+    {
+      "id": "#C085",
+      "reference": "[`Babylon.lean:447`](../../proof/lean/Babylon.lean#L447)",
+      "kind": "def",
+      "qualified_name": "Babylon.triadCausalQuotient"
+    },
+    {
+      "id": "#C086",
+      "reference": "[`BabylonAOTOracle.lean:15`](../../proof/lean/BabylonAOTOracle.lean#L15)",
+      "kind": "def",
+      "qualified_name": "B60.AOTOracle.decodePacked"
+    },
+    {
+      "id": "#C087",
+      "reference": "[`BabylonAOTOracle.lean:26`](../../proof/lean/BabylonAOTOracle.lean#L26)",
+      "kind": "def",
+      "qualified_name": "B60.AOTOracle.readUInt64LE"
+    },
+    {
+      "id": "#C088",
+      "reference": "[`BabylonAOTOracle.lean:79`](../../proof/lean/BabylonAOTOracle.lean#L79)",
+      "kind": "def",
+      "qualified_name": "B60.AOTOracle.main"
+    },
+    {
+      "id": "#C089",
+      "reference": "[`BabylonAOTOracle.lean:91`](../../proof/lean/BabylonAOTOracle.lean#L91)",
+      "kind": "def",
+      "qualified_name": "main"
+    },
+    {
+      "id": "#C090",
+      "reference": "[`BabylonAeonChain.lean:17`](../../proof/lean/BabylonAeonChain.lean#L17)",
+      "kind": "def",
+      "qualified_name": "B60.Ledger.aeon_0_events"
+    },
+    {
+      "id": "#C091",
+      "reference": "[`BabylonAeonChain.lean:1524`](../../proof/lean/BabylonAeonChain.lean#L1524)",
+      "kind": "def",
+      "qualified_name": "B60.Ledger.aeon_1_events"
+    },
+    {
+      "id": "#C092",
+      "reference": "[`BabylonAeonChain.lean:3031`](../../proof/lean/BabylonAeonChain.lean#L3031)",
+      "kind": "def",
+      "qualified_name": "B60.Ledger.aeon_2_events"
+    },
+    {
+      "id": "#C093",
+      "reference": "[`BabylonAeonChain.lean:4538`](../../proof/lean/BabylonAeonChain.lean#L4538)",
+      "kind": "def",
+      "qualified_name": "B60.Ledger.aeon_3_events"
+    },
+    {
+      "id": "#C094",
+      "reference": "[`BabylonAeonChain.lean:6045`](../../proof/lean/BabylonAeonChain.lean#L6045)",
+      "kind": "def",
+      "qualified_name": "B60.Ledger.aeon_4_events"
+    },
+    {
+      "id": "#C095",
+      "reference": "[`BabylonAeonStress.lean:15`](../../proof/lean/BabylonAeonStress.lean#L15)",
+      "kind": "def",
+      "qualified_name": "B60.Ledger.aeon_events"
+    },
+    {
+      "id": "#C096",
+      "reference": "[`BabylonAutoTrace.lean:14`](../../proof/lean/BabylonAutoTrace.lean#L14)",
+      "kind": "def",
+      "qualified_name": "B60.Ledger.auto_execution_trace"
+    },
+    {
+      "id": "—",
+      "reference": "[`BabylonL0Ledger.lean:11`](../../proof/lean/BabylonL0Ledger.lean#L11)",
+      "kind": "abbrev",
+      "qualified_name": "Babylon60.L0Ledger.Hash32"
+    },
+    {
+      "id": "#C097",
+      "reference": "[`BabylonL0Ledger.lean:14`](../../proof/lean/BabylonL0Ledger.lean#L14)",
+      "kind": "inductive",
+      "qualified_name": "Babylon60.L0Ledger.AttestationTier"
+    },
+    {
+      "id": "—",
+      "reference": "[`BabylonL0Ledger.lean:22`](../../proof/lean/BabylonL0Ledger.lean#L22)",
+      "kind": "structure",
+      "qualified_name": "Babylon60.L0Ledger.AnchoredFact"
+    },
+    {
+      "id": "—",
+      "reference": "[`BabylonL0Ledger.lean:28`](../../proof/lean/BabylonL0Ledger.lean#L28)",
+      "kind": "structure",
+      "qualified_name": "Babylon60.L0Ledger.LedgerEntry"
+    },
+    {
+      "id": "—",
+      "reference": "[`BabylonL0Ledger.lean:40`](../../proof/lean/BabylonL0Ledger.lean#L40)",
+      "kind": "structure",
+      "qualified_name": "Babylon60.L0Ledger.L0Database"
+    },
+    {
+      "id": "#C098",
+      "reference": "[`BabylonL0Ledger.lean:56`](../../proof/lean/BabylonL0Ledger.lean#L56)",
+      "kind": "def",
+      "qualified_name": "Babylon60.L0Ledger.EntryWellFormed"
+    },
+    {
+      "id": "#C099",
+      "reference": "[`BabylonL0Ledger.lean:61`](../../proof/lean/BabylonL0Ledger.lean#L61)",
+      "kind": "def",
+      "qualified_name": "Babylon60.L0Ledger.L0StateInvariant"
+    },
+    {
+      "id": "#C100",
+      "reference": "[`BabylonL0Ledger.lean:70`](../../proof/lean/BabylonL0Ledger.lean#L70)",
+      "kind": "def",
+      "qualified_name": "Babylon60.L0Ledger.TriggerAllowsInsert"
+    },
+    {
+      "id": "#C101",
+      "reference": "[`BabylonL0Ledger.lean:80`](../../proof/lean/BabylonL0Ledger.lean#L80)",
+      "kind": "def",
+      "qualified_name": "Babylon60.L0Ledger.appendEntry"
+    },
+    {
+      "id": "#C102",
+      "reference": "[`BabylonL0Ledger.lean:148`](../../proof/lean/BabylonL0Ledger.lean#L148)",
+      "kind": "def",
+      "qualified_name": "Babylon60.L0Ledger.witnessFactL0"
+    },
+    {
+      "id": "#C103",
+      "reference": "[`BabylonL0Ledger.lean:151`](../../proof/lean/BabylonL0Ledger.lean#L151)",
+      "kind": "def",
+      "qualified_name": "Babylon60.L0Ledger.witnessEntryL0"
+    },
+    {
+      "id": "#C104",
+      "reference": "[`BabylonL0Ledger.lean:161`](../../proof/lean/BabylonL0Ledger.lean#L161)",
+      "kind": "def",
+      "qualified_name": "Babylon60.L0Ledger.witnessDbL0"
+    },
+    {
+      "id": "#C105",
+      "reference": "[`BabylonOracle.lean:15`](../../proof/lean/BabylonOracle.lean#L15)",
+      "kind": "def",
+      "qualified_name": "B60.Oracle.parseLine"
+    },
+    {
+      "id": "#C106",
+      "reference": "[`BabylonOracle.lean:54`](../../proof/lean/BabylonOracle.lean#L54)",
+      "kind": "def",
+      "qualified_name": "main"
+    },
+    {
+      "id": "#C107",
+      "reference": "[`BabylonStressCorrupt.lean:18`](../../proof/lean/BabylonStressCorrupt.lean#L18)",
+      "kind": "def",
+      "qualified_name": "B60.Ledger.auto_execution_trace"
+    },
+    {
+      "id": "#C108",
+      "reference": "[`BabylonStressTrace.lean:16`](../../proof/lean/BabylonStressTrace.lean#L16)",
+      "kind": "def",
+      "qualified_name": "B60.Ledger.auto_execution_trace"
+    },
+    {
+      "id": "#C109",
+      "reference": "[`BabylonTrace.lean:15`](../../proof/lean/BabylonTrace.lean#L15)",
+      "kind": "inductive",
+      "qualified_name": "B60.Ledger.Action"
+    },
+    {
+      "id": "—",
+      "reference": "[`BabylonTrace.lean:21`](../../proof/lean/BabylonTrace.lean#L21)",
+      "kind": "structure",
+      "qualified_name": "B60.Ledger.Event"
+    },
+    {
+      "id": "—",
+      "reference": "[`BabylonTrace.lean:27`](../../proof/lean/BabylonTrace.lean#L27)",
+      "kind": "structure",
+      "qualified_name": "B60.Ledger.LockState"
+    },
+    {
+      "id": "#C110",
+      "reference": "[`BabylonTrace.lean:35`](../../proof/lean/BabylonTrace.lean#L35)",
+      "kind": "def",
+      "qualified_name": "B60.Ledger.step"
+    },
+    {
+      "id": "#C111",
+      "reference": "[`BabylonTrace.lean:61`](../../proof/lean/BabylonTrace.lean#L61)",
+      "kind": "def",
+      "qualified_name": "B60.Ledger.runAeon"
+    },
+    {
+      "id": "#C112",
+      "reference": "[`BabylonTrace.lean:66`](../../proof/lean/BabylonTrace.lean#L66)",
+      "kind": "def",
+      "qualified_name": "B60.Ledger.validateTraceRecursive"
+    },
+    {
+      "id": "#C113",
+      "reference": "[`BabylonTrace.lean:71`](../../proof/lean/BabylonTrace.lean#L71)",
+      "kind": "def",
+      "qualified_name": "B60.Ledger.validateTrace"
+    },
+    {
+      "id": "#C114",
+      "reference": "[`BabylonTrace.lean:79`](../../proof/lean/BabylonTrace.lean#L79)",
+      "kind": "def",
+      "qualified_name": "B60.Ledger.trace_perfect"
+    },
+    {
+      "id": "#C115",
+      "reference": "[`BabylonTrace.lean:95`](../../proof/lean/BabylonTrace.lean#L95)",
+      "kind": "def",
+      "qualified_name": "B60.Ledger.trace_corrupt"
+    },
+    {
+      "id": "#C116",
+      "reference": "[`BabylonTrace.lean:105`](../../proof/lean/BabylonTrace.lean#L105)",
+      "kind": "def",
+      "qualified_name": "B60.Ledger.TraceReadsEven"
+    },
+    {
+      "id": "—",
+      "reference": "[`BabylonTrace.lean:168`](../../proof/lean/BabylonTrace.lean#L168)",
+      "kind": "abbrev",
+      "qualified_name": "B60.Ledger.NoTornReadsProp"
+    },
+    {
+      "id": "—",
+      "reference": "[`BabylonTrace.lean:197`](../../proof/lean/BabylonTrace.lean#L197)",
+      "kind": "structure",
+      "qualified_name": "B60.Ledger.BabylonEvent"
+    },
+    {
+      "id": "#C117",
+      "reference": "[`BabylonTrace.lean:210`](../../proof/lean/BabylonTrace.lean#L210)",
+      "kind": "def",
+      "qualified_name": "B60.Ledger.ValidBabylonTransition"
+    },
+    {
+      "id": "#C118",
+      "reference": "[`BabylonTrace.lean:258`](../../proof/lean/BabylonTrace.lean#L258)",
+      "kind": "def",
+      "qualified_name": "B60.Ledger.trace_step_ok"
+    },
+    {
+      "id": "—",
+      "reference": "[`BabylonTrace.lean:281`](../../proof/lean/BabylonTrace.lean#L281)",
+      "kind": "structure",
+      "qualified_name": "B60.Ledger.CompositeGateState"
+    },
+    {
+      "id": "#C119",
+      "reference": "[`BabylonTrace.lean:293`](../../proof/lean/BabylonTrace.lean#L293)",
+      "kind": "def",
+      "qualified_name": "B60.Ledger.ValidCompositeAcceptance"
+    },
+    {
+      "id": "#C120",
+      "reference": "[`BabylonTrace.lean:334`](../../proof/lean/BabylonTrace.lean#L334)",
+      "kind": "def",
+      "qualified_name": "B60.Ledger.composite_gate_ok"
+    },
+    {
+      "id": "#C121",
+      "reference": "[`BabylonTrace.lean:351`](../../proof/lean/BabylonTrace.lean#L351)",
+      "kind": "def",
+      "qualified_name": "B60.Ledger.composite_gate_ple_91pct_fail"
+    },
+    {
+      "id": "#C122",
+      "reference": "[`C5Affine.lean:8`](../../proof/lean/C5Affine.lean#L8)",
+      "kind": "inductive",
+      "qualified_name": "AffineResource"
+    },
+    {
+      "id": "#C123",
+      "reference": "[`C5Affine.lean:14`](../../proof/lean/C5Affine.lean#L14)",
+      "kind": "def",
+      "qualified_name": "consume"
+    },
+    {
+      "id": "—",
+      "reference": "[`C5PortHamiltonian.lean:11`](../../proof/lean/C5PortHamiltonian.lean#L11)",
+      "kind": "structure",
+      "qualified_name": "C5REAL.Proof.LatentFixed2D"
+    },
+    {
+      "id": "#C124",
+      "reference": "[`C5PortHamiltonian.lean:17`](../../proof/lean/C5PortHamiltonian.lean#L17)",
+      "kind": "def",
+      "qualified_name": "C5REAL.Proof.doubleHamiltonian"
+    },
+    {
+      "id": "#C125",
+      "reference": "[`C5PortHamiltonian.lean:21`](../../proof/lean/C5PortHamiltonian.lean#L21)",
+      "kind": "def",
+      "qualified_name": "C5REAL.Proof.stepPHLD"
+    },
+    {
+      "id": "#C126",
+      "reference": "[`C5PortHamiltonian.lean:46`](../../proof/lean/C5PortHamiltonian.lean#L46)",
+      "kind": "def",
+      "qualified_name": "C5REAL.Proof.isAligned64"
+    },
+    {
+      "id": "—",
+      "reference": "[`CanonicalEnvelope.lean:14`](../../proof/lean/CanonicalEnvelope.lean#L14)",
+      "kind": "abbrev",
+      "qualified_name": "B60.CBOR.Bytes"
+    },
+    {
+      "id": "#C127",
+      "reference": "[`CanonicalEnvelope.lean:16`](../../proof/lean/CanonicalEnvelope.lean#L16)",
+      "kind": "def",
+      "qualified_name": "B60.CBOR.between"
+    },
+    {
+      "id": "#C128",
+      "reference": "[`CanonicalEnvelope.lean:20`](../../proof/lean/CanonicalEnvelope.lean#L20)",
+      "kind": "def",
+      "qualified_name": "B60.CBOR.validUtf8"
+    },
+    {
+      "id": "—",
+      "reference": "[`CanonicalEnvelope.lean:44`](../../proof/lean/CanonicalEnvelope.lean#L44)",
+      "kind": "structure",
+      "qualified_name": "B60.CBOR.Codec"
+    },
+    {
+      "id": "#C129",
+      "reference": "[`CanonicalEnvelope.lean:51`](../../proof/lean/CanonicalEnvelope.lean#L51)",
+      "kind": "def",
+      "qualified_name": "B60.CBOR.decode"
+    },
+    {
+      "id": "#C130",
+      "reference": "[`CanonicalEnvelope.lean:79`](../../proof/lean/CanonicalEnvelope.lean#L79)",
+      "kind": "def",
+      "qualified_name": "B60.CBOR.decodeChecked"
+    },
+    {
+      "id": "#C131",
+      "reference": "[`CanonicalEnvelope.lean:111`](../../proof/lean/CanonicalEnvelope.lean#L111)",
+      "kind": "def",
+      "qualified_name": "B60.CBOR.pair"
+    },
+    {
+      "id": "#C132",
+      "reference": "[`CanonicalEnvelope.lean:122`](../../proof/lean/CanonicalEnvelope.lean#L122)",
+      "kind": "def",
+      "qualified_name": "B60.CBOR.«prefix»"
+    },
+    {
+      "id": "#C133",
+      "reference": "[`CanonicalEnvelope.lean:130`](../../proof/lean/CanonicalEnvelope.lean#L130)",
+      "kind": "def",
+      "qualified_name": "B60.CBOR.uint"
+    },
+    {
+      "id": "#C134",
+      "reference": "[`CanonicalEnvelope.lean:140`](../../proof/lean/CanonicalEnvelope.lean#L140)",
+      "kind": "def",
+      "qualified_name": "B60.CBOR.blob"
+    },
+    {
+      "id": "#C135",
+      "reference": "[`CanonicalEnvelope.lean:150`](../../proof/lean/CanonicalEnvelope.lean#L150)",
+      "kind": "def",
+      "qualified_name": "B60.CBOR.bstr"
+    },
+    {
+      "id": "#C136",
+      "reference": "[`CanonicalEnvelope.lean:154`](../../proof/lean/CanonicalEnvelope.lean#L154)",
+      "kind": "def",
+      "qualified_name": "B60.CBOR.tstr"
+    },
+    {
+      "id": "#C137",
+      "reference": "[`CanonicalEnvelope.lean:156`](../../proof/lean/CanonicalEnvelope.lean#L156)",
+      "kind": "def",
+      "qualified_name": "B60.CBOR.boolean"
+    },
+    {
+      "id": "#C138",
+      "reference": "[`CanonicalEnvelope.lean:165`](../../proof/lean/CanonicalEnvelope.lean#L165)",
+      "kind": "def",
+      "qualified_name": "B60.CBOR.null"
+    },
+    {
+      "id": "#C139",
+      "reference": "[`CanonicalEnvelope.lean:174`](../../proof/lean/CanonicalEnvelope.lean#L174)",
+      "kind": "def",
+      "qualified_name": "B60.CBOR.parseMany"
+    },
+    {
+      "id": "#C140",
+      "reference": "[`CanonicalEnvelope.lean:181`](../../proof/lean/CanonicalEnvelope.lean#L181)",
+      "kind": "def",
+      "qualified_name": "B60.CBOR.encodeMany"
+    },
+    {
+      "id": "#C141",
+      "reference": "[`CanonicalEnvelope.lean:195`](../../proof/lean/CanonicalEnvelope.lean#L195)",
+      "kind": "def",
+      "qualified_name": "B60.CBOR.arrayOf"
+    },
+    {
+      "id": "#C142",
+      "reference": "[`CanonicalHead.lean:13`](../../proof/lean/CanonicalHead.lean#L13)",
+      "kind": "def",
+      "qualified_name": "B60.CBOR.encodeBE"
+    },
+    {
+      "id": "#C143",
+      "reference": "[`CanonicalHead.lean:17`](../../proof/lean/CanonicalHead.lean#L17)",
+      "kind": "def",
+      "qualified_name": "B60.CBOR.decodeBE"
+    },
+    {
+      "id": "#C144",
+      "reference": "[`CanonicalHead.lean:47`](../../proof/lean/CanonicalHead.lean#L47)",
+      "kind": "def",
+      "qualified_name": "B60.CBOR.headByte"
+    },
+    {
+      "id": "#C145",
+      "reference": "[`CanonicalHead.lean:49`](../../proof/lean/CanonicalHead.lean#L49)",
+      "kind": "def",
+      "qualified_name": "B60.CBOR.encodeHead"
+    },
+    {
+      "id": "#C146",
+      "reference": "[`CanonicalHead.lean:56`](../../proof/lean/CanonicalHead.lean#L56)",
+      "kind": "def",
+      "qualified_name": "B60.CBOR.decodePayload"
+    },
+    {
+      "id": "#C147",
+      "reference": "[`CanonicalHead.lean:67`](../../proof/lean/CanonicalHead.lean#L67)",
+      "kind": "def",
+      "qualified_name": "B60.CBOR.decodeHead"
+    },
+    {
+      "id": "#C148",
+      "reference": "[`Destiladora_838c463da193b48f.lean:15`](../../proof/lean/Destiladora_838c463da193b48f.lean#L15)",
+      "kind": "def",
+      "qualified_name": "B60.Destiladora.C_838c463da193b48f.expectedAstPrefix"
+    },
+    {
+      "id": "#C149",
+      "reference": "[`Destiladora_838c463da193b48f.lean:16`](../../proof/lean/Destiladora_838c463da193b48f.lean#L16)",
+      "kind": "def",
+      "qualified_name": "B60.Destiladora.C_838c463da193b48f.expectedFilesCount"
+    },
+    {
+      "id": "#C150",
+      "reference": "[`Destiladora_838c463da193b48f.lean:19`](../../proof/lean/Destiladora_838c463da193b48f.lean#L19)",
+      "kind": "def",
+      "qualified_name": "B60.Destiladora.C_838c463da193b48f.seqlock_write_begin"
+    },
+    {
+      "id": "#C151",
+      "reference": "[`Destiladora_838c463da193b48f.lean:20`](../../proof/lean/Destiladora_838c463da193b48f.lean#L20)",
+      "kind": "def",
+      "qualified_name": "B60.Destiladora.C_838c463da193b48f.seqlock_write_commit"
+    },
+    {
+      "id": "—",
+      "reference": "[`Destiladora_838c463da193b48f.lean:33`](../../proof/lean/Destiladora_838c463da193b48f.lean#L33)",
+      "kind": "structure",
+      "qualified_name": "B60.Destiladora.C_838c463da193b48f.SystemState"
+    },
+    {
+      "id": "—",
+      "reference": "[`Destiladora_838c463da193b48f.lean:39`](../../proof/lean/Destiladora_838c463da193b48f.lean#L39)",
+      "kind": "structure",
+      "qualified_name": "B60.Destiladora.C_838c463da193b48f.FastPathContext"
+    },
+    {
+      "id": "#C152",
+      "reference": "[`Destiladora_838c463da193b48f.lean:44`](../../proof/lean/Destiladora_838c463da193b48f.lean#L44)",
+      "kind": "inductive",
+      "qualified_name": "B60.Destiladora.C_838c463da193b48f.FastPathVerdict"
+    },
+    {
+      "id": "#C153",
+      "reference": "[`Destiladora_838c463da193b48f.lean:49`](../../proof/lean/Destiladora_838c463da193b48f.lean#L49)",
+      "kind": "inductive",
+      "qualified_name": "B60.Destiladora.C_838c463da193b48f.Action"
+    },
+    {
+      "id": "#C154",
+      "reference": "[`Destiladora_838c463da193b48f.lean:55`](../../proof/lean/Destiladora_838c463da193b48f.lean#L55)",
+      "kind": "def",
+      "qualified_name": "B60.Destiladora.C_838c463da193b48f.evalFastPath"
+    },
+    {
+      "id": "#C155",
+      "reference": "[`Destiladora_838c463da193b48f.lean:78`](../../proof/lean/Destiladora_838c463da193b48f.lean#L78)",
+      "kind": "def",
+      "qualified_name": "B60.Destiladora.C_838c463da193b48f.transition"
+    },
+    {
+      "id": "#C156",
+      "reference": "[`Destiladora_838c463da193b48f.lean:86`](../../proof/lean/Destiladora_838c463da193b48f.lean#L86)",
+      "kind": "def",
+      "qualified_name": "B60.Destiladora.C_838c463da193b48f.runTrace"
+    },
+    {
+      "id": "#C157",
+      "reference": "[`Destiladora_838c463da193b48f.lean:90`](../../proof/lean/Destiladora_838c463da193b48f.lean#L90)",
+      "kind": "def",
+      "qualified_name": "B60.Destiladora.C_838c463da193b48f.invariant"
+    },
+    {
+      "id": "#C158",
+      "reference": "[`ExampleSeqlockTrace.lean:7`](../../proof/lean/ExampleSeqlockTrace.lean#L7)",
+      "kind": "inductive",
+      "qualified_name": "B60.ExampleSeqlockTrace.Action"
+    },
+    {
+      "id": "—",
+      "reference": "[`ExampleSeqlockTrace.lean:10`](../../proof/lean/ExampleSeqlockTrace.lean#L10)",
+      "kind": "structure",
+      "qualified_name": "B60.ExampleSeqlockTrace.SeqlockEvent"
+    },
+    {
+      "id": "#C159",
+      "reference": "[`ExampleSeqlockTrace.lean:15`](../../proof/lean/ExampleSeqlockTrace.lean#L15)",
+      "kind": "def",
+      "qualified_name": "B60.ExampleSeqlockTrace.validateTransition"
+    },
+    {
+      "id": "#C160",
+      "reference": "[`ExampleSeqlockTrace.lean:31`](../../proof/lean/ExampleSeqlockTrace.lean#L31)",
+      "kind": "def",
+      "qualified_name": "B60.ExampleSeqlockTrace.isValidTrace"
+    },
+    {
+      "id": "#C161",
+      "reference": "[`ExampleSeqlockTrace.lean:40`](../../proof/lean/ExampleSeqlockTrace.lean#L40)",
+      "kind": "def",
+      "qualified_name": "B60.ExampleSeqlockTrace.validCycle"
+    },
+    {
+      "id": "#C162",
+      "reference": "[`HolographicPoC.lean:16`](../../proof/lean/HolographicPoC.lean#L16)",
+      "kind": "def",
+      "qualified_name": "AlertaColapso"
+    },
+    {
+      "id": "#C163",
+      "reference": "[`LarsaEquivocationSafety.lean:14`](../../proof/lean/LarsaEquivocationSafety.lean#L14)",
+      "kind": "def",
+      "qualified_name": "LarsaEquivocationSafety.quorum_threshold"
+    },
+    {
+      "id": "#C164",
+      "reference": "[`LarsaEquivocationSafety.lean:17`](../../proof/lean/LarsaEquivocationSafety.lean#L17)",
+      "kind": "def",
+      "qualified_name": "LarsaEquivocationSafety.total_nodes"
+    },
+    {
+      "id": "—",
+      "reference": "[`LarsaEquivocationSafety.lean:47`](../../proof/lean/LarsaEquivocationSafety.lean#L47)",
+      "kind": "structure",
+      "qualified_name": "LarsaEquivocationSafety.ConsensusInstance"
+    },
+    {
+      "id": "#C165",
+      "reference": "[`LarsaEquivocationSafety.lean:55`](../../proof/lean/LarsaEquivocationSafety.lean#L55)",
+      "kind": "def",
+      "qualified_name": "LarsaEquivocationSafety.instance_f1"
+    },
+    {
+      "id": "—",
+      "reference": "[`LarsaEquivocationSafety.lean:104`](../../proof/lean/LarsaEquivocationSafety.lean#L104)",
+      "kind": "structure",
+      "qualified_name": "LarsaEquivocationSafety.VerifiedQuorumInvariant"
+    },
+    {
+      "id": "#C166",
+      "reference": "[`MolochLandauer.lean:14`](../../proof/lean/MolochLandauer.lean#L14)",
+      "kind": "inductive",
+      "qualified_name": "Babylon.MolochLandauer.ActionClass"
+    },
+    {
+      "id": "—",
+      "reference": "[`MolochLandauer.lean:22`](../../proof/lean/MolochLandauer.lean#L22)",
+      "kind": "structure",
+      "qualified_name": "Babylon.MolochLandauer.AgentAction"
+    },
+    {
+      "id": "#C167",
+      "reference": "[`MolochLandauer.lean:33`](../../proof/lean/MolochLandauer.lean#L33)",
+      "kind": "def",
+      "qualified_name": "Babylon.MolochLandauer.is_moloch_extraction"
+    },
+    {
+      "id": "#C168",
+      "reference": "[`MolochLandauer.lean:42`](../../proof/lean/MolochLandauer.lean#L42)",
+      "kind": "def",
+      "qualified_name": "Babylon.MolochLandauer.landauer_penalty"
+    },
+    {
+      "id": "#C169",
+      "reference": "[`MolochLandauer.lean:49`](../../proof/lean/MolochLandauer.lean#L49)",
+      "kind": "def",
+      "qualified_name": "Babylon.MolochLandauer.net_exergy_payoff"
+    },
+    {
+      "id": "#C170",
+      "reference": "[`MolochLandauer.lean:53`](../../proof/lean/MolochLandauer.lean#L53)",
+      "kind": "def",
+      "qualified_name": "Babylon.MolochLandauer.is_admissible"
+    },
+    {
+      "id": "#C171",
+      "reference": "[`MolochLandauer.lean:105`](../../proof/lean/MolochLandauer.lean#L105)",
+      "kind": "def",
+      "qualified_name": "Babylon.MolochLandauer.total_externalized_entropy"
+    },
+    {
+      "id": "#C172",
+      "reference": "[`MolochLandauer.lean:110`](../../proof/lean/MolochLandauer.lean#L110)",
+      "kind": "def",
+      "qualified_name": "Babylon.MolochLandauer.total_landauer_penalties"
+    },
+    {
+      "id": "#C173",
+      "reference": "[`NavierStokesBKM.lean:11`](../../proof/lean/NavierStokesBKM.lean#L11)",
+      "kind": "inductive",
+      "qualified_name": "B60.NavierStokes.VortexAction"
+    },
+    {
+      "id": "—",
+      "reference": "[`NavierStokesBKM.lean:19`](../../proof/lean/NavierStokesBKM.lean#L19)",
+      "kind": "structure",
+      "qualified_name": "B60.NavierStokes.FluidEvent"
+    },
+    {
+      "id": "—",
+      "reference": "[`NavierStokesBKM.lean:25`](../../proof/lean/NavierStokesBKM.lean#L25)",
+      "kind": "structure",
+      "qualified_name": "B60.NavierStokes.FluidState"
+    },
+    {
+      "id": "#C174",
+      "reference": "[`NavierStokesBKM.lean:35`](../../proof/lean/NavierStokesBKM.lean#L35)",
+      "kind": "def",
+      "qualified_name": "B60.NavierStokes.BKM_CRITICAL_THRESHOLD"
+    },
+    {
+      "id": "#C175",
+      "reference": "[`NavierStokesBKM.lean:38`](../../proof/lean/NavierStokesBKM.lean#L38)",
+      "kind": "def",
+      "qualified_name": "B60.NavierStokes.CONSTANTIN_FEFFERMAN_SMOOTH_FLOOR"
+    },
+    {
+      "id": "#C176",
+      "reference": "[`NavierStokesBKM.lean:41`](../../proof/lean/NavierStokesBKM.lean#L41)",
+      "kind": "def",
+      "qualified_name": "B60.NavierStokes.step"
+    },
+    {
+      "id": "#C177",
+      "reference": "[`NavierStokesBKM.lean:59`](../../proof/lean/NavierStokesBKM.lean#L59)",
+      "kind": "def",
+      "qualified_name": "B60.NavierStokes.runTrace"
+    },
+    {
+      "id": "#C178",
+      "reference": "[`NavierStokesBKM.lean:63`](../../proof/lean/NavierStokesBKM.lean#L63)",
+      "kind": "def",
+      "qualified_name": "B60.NavierStokes.initialState"
+    },
+    {
+      "id": "#C179",
+      "reference": "[`NavierStokesBKM.lean:67`](../../proof/lean/NavierStokesBKM.lean#L67)",
+      "kind": "inductive",
+      "qualified_name": "B60.NavierStokes.AuditResult"
+    },
+    {
+      "id": "#C180",
+      "reference": "[`NavierStokesBKM.lean:73`](../../proof/lean/NavierStokesBKM.lean#L73)",
+      "kind": "def",
+      "qualified_name": "B60.NavierStokes.auditTrace"
+    },
+    {
+      "id": "#C181",
+      "reference": "[`NavierStokesBKM.lean:87`](../../proof/lean/NavierStokesBKM.lean#L87)",
+      "kind": "def",
+      "qualified_name": "B60.NavierStokes.trace_depleted"
+    },
+    {
+      "id": "#C182",
+      "reference": "[`NavierStokesBKM.lean:100`](../../proof/lean/NavierStokesBKM.lean#L100)",
+      "kind": "def",
+      "qualified_name": "B60.NavierStokes.trace_singular_candidate"
+    },
+    {
+      "id": "—",
+      "reference": "[`NavierStokesBKM.lean:117`](../../proof/lean/NavierStokesBKM.lean#L117)",
+      "kind": "structure",
+      "qualified_name": "B60.NavierStokes.DiscreteChainComplex"
+    },
+    {
+      "id": "—",
+      "reference": "[`NavierStokesBKM.lean:136`](../../proof/lean/NavierStokesBKM.lean#L136)",
+      "kind": "structure",
+      "qualified_name": "B60.NavierStokes.HelmholtzHodgeComponents"
+    },
+    {
+      "id": "#C183",
+      "reference": "[`NavierStokesBKM.lean:142`](../../proof/lean/NavierStokesBKM.lean#L142)",
+      "kind": "def",
+      "qualified_name": "B60.NavierStokes.isStrictlySolenoidal"
+    },
+    {
+      "id": "#C184",
+      "reference": "[`NavierStokesOracle.lean:15`](../../proof/lean/NavierStokesOracle.lean#L15)",
+      "kind": "def",
+      "qualified_name": "B60.NavierStokes.Oracle.parseLine"
+    },
+    {
+      "id": "#C185",
+      "reference": "[`NavierStokesOracle.lean:57`](../../proof/lean/NavierStokesOracle.lean#L57)",
+      "kind": "def",
+      "qualified_name": "main"
+    },
+    {
+      "id": "—",
+      "reference": "[`NavierStokesSobolevKato.lean:13`](../../proof/lean/NavierStokesSobolevKato.lean#L13)",
+      "kind": "structure",
+      "qualified_name": "B60.NavierStokes.SobolevKato.DiscreteHilbertSpace"
+    },
+    {
+      "id": "#C186",
+      "reference": "[`NavierStokesSobolevKato.lean:23`](../../proof/lean/NavierStokesSobolevKato.lean#L23)",
+      "kind": "def",
+      "qualified_name": "B60.NavierStokes.SobolevKato.isSobolevContinuousEmbedding"
+    },
+    {
+      "id": "#C187",
+      "reference": "[`NavierStokesSobolevKato.lean:40`](../../proof/lean/NavierStokesSobolevKato.lean#L40)",
+      "kind": "def",
+      "qualified_name": "B60.NavierStokes.SobolevKato.isKatoLocalWellPosed"
+    },
+    {
+      "id": "#C188",
+      "reference": "[`NavierStokesSobolevKato.lean:51`](../../proof/lean/NavierStokesSobolevKato.lean#L51)",
+      "kind": "def",
+      "qualified_name": "B60.NavierStokes.SobolevKato.verifyDissipationCurryHoward"
+    },
+    {
+      "id": "—",
+      "reference": "[`NavierStokesSobolevKato.lean:62`](../../proof/lean/NavierStokesSobolevKato.lean#L62)",
+      "kind": "structure",
+      "qualified_name": "B60.NavierStokes.SobolevKato.SexagesimalInterval"
+    },
+    {
+      "id": "#C189",
+      "reference": "[`NavierStokesSobolevKato.lean:67`](../../proof/lean/NavierStokesSobolevKato.lean#L67)",
+      "kind": "def",
+      "qualified_name": "B60.NavierStokes.SobolevKato.intervalContains"
+    },
+    {
+      "id": "#C190",
+      "reference": "[`NavierStokesSobolevKato.lean:79`](../../proof/lean/NavierStokesSobolevKato.lean#L79)",
+      "kind": "def",
+      "qualified_name": "B60.NavierStokes.SobolevKato.gronwallBound"
+    },
+    {
+      "id": "#C191",
+      "reference": "[`NavierStokesSobolevKato.lean:82`](../../proof/lean/NavierStokesSobolevKato.lean#L82)",
+      "kind": "def",
+      "qualified_name": "B60.NavierStokes.SobolevKato.isGronwallBounded"
+    },
+    {
+      "id": "—",
+      "reference": "[`NavierStokesSobolevKato.lean:93`](../../proof/lean/NavierStokesSobolevKato.lean#L93)",
+      "kind": "structure",
+      "qualified_name": "B60.NavierStokes.SobolevKato.CausalStepState"
+    },
+    {
+      "id": "#C192",
+      "reference": "[`NavierStokesSobolevKato.lean:99`](../../proof/lean/NavierStokesSobolevKato.lean#L99)",
+      "kind": "def",
+      "qualified_name": "B60.NavierStokes.SobolevKato.transitionCausalStep"
+    },
+    {
+      "id": "#C193",
+      "reference": "[`NavierStokesSobolevKato.lean:105`](../../proof/lean/NavierStokesSobolevKato.lean#L105)",
+      "kind": "def",
+      "qualified_name": "B60.NavierStokes.SobolevKato.verifyCausalTrace"
+    },
+    {
+      "id": "#C194",
+      "reference": "[`NavierStokesSobolevKato.lean:117`](../../proof/lean/NavierStokesSobolevKato.lean#L117)",
+      "kind": "def",
+      "qualified_name": "B60.NavierStokes.SobolevKato.AXIOM_ID_SOBOLEV_EMBEDDING"
+    },
+    {
+      "id": "#C195",
+      "reference": "[`NavierStokesSobolevKato.lean:118`](../../proof/lean/NavierStokesSobolevKato.lean#L118)",
+      "kind": "def",
+      "qualified_name": "B60.NavierStokes.SobolevKato.AXIOM_ID_KATO_LOCAL_EXISTENCE"
+    },
+    {
+      "id": "#C196",
+      "reference": "[`NavierStokesSobolevKato.lean:119`](../../proof/lean/NavierStokesSobolevKato.lean#L119)",
+      "kind": "def",
+      "qualified_name": "B60.NavierStokes.SobolevKato.AXIOM_ID_BKM_CRITERION"
+    },
+    {
+      "id": "#C197",
+      "reference": "[`NavierStokesSobolevKato.lean:120`](../../proof/lean/NavierStokesSobolevKato.lean#L120)",
+      "kind": "def",
+      "qualified_name": "B60.NavierStokes.SobolevKato.AXIOM_ID_GRONWALL_LEMMA"
+    },
+    {
+      "id": "—",
+      "reference": "[`NavierStokesSobolevKato.lean:131`](../../proof/lean/NavierStokesSobolevKato.lean#L131)",
+      "kind": "structure",
+      "qualified_name": "B60.NavierStokes.SobolevKato.RegularityCertificate"
+    },
+    {
+      "id": "#C198",
+      "reference": "[`NavierStokesSobolevKato.lean:137`](../../proof/lean/NavierStokesSobolevKato.lean#L137)",
+      "kind": "def",
+      "qualified_name": "B60.NavierStokes.SobolevKato.isMillenniumRegular"
+    },
+    {
+      "id": "#C199",
+      "reference": "[`NemesisWave4.lean:15`](../../proof/lean/NemesisWave4.lean#L15)",
+      "kind": "inductive",
+      "qualified_name": "NemesisWave4.WalState"
+    },
+    {
+      "id": "#C200",
+      "reference": "[`NemesisWave4.lean:23`](../../proof/lean/NemesisWave4.lean#L23)",
+      "kind": "inductive",
+      "qualified_name": "NemesisWave4.IsolationStrength"
+    },
+    {
+      "id": "—",
+      "reference": "[`NemesisWave4.lean:30`](../../proof/lean/NemesisWave4.lean#L30)",
+      "kind": "structure",
+      "qualified_name": "NemesisWave4.ResourceMonitorState"
+    },
+    {
+      "id": "#C201",
+      "reference": "[`NemesisWave4.lean:41`](../../proof/lean/NemesisWave4.lean#L41)",
+      "kind": "inductive",
+      "qualified_name": "NemesisWave4.EcpEvent"
+    },
+    {
+      "id": "#C202",
+      "reference": "[`NemesisWave4.lean:50`](../../proof/lean/NemesisWave4.lean#L50)",
+      "kind": "def",
+      "qualified_name": "NemesisWave4.stepEcp"
+    },
+    {
+      "id": "#C203",
+      "reference": "[`NemesisWave4.lean:91`](../../proof/lean/NemesisWave4.lean#L91)",
+      "kind": "def",
+      "qualified_name": "NemesisWave4.validateEcpTrace"
+    },
+    {
+      "id": "#C204",
+      "reference": "[`NemesisWave4.lean:99`](../../proof/lean/NemesisWave4.lean#L99)",
+      "kind": "def",
+      "qualified_name": "NemesisWave4.evaluateSealStrength"
+    },
+    {
+      "id": "#C205",
+      "reference": "[`NemesisWave4.lean:112`](../../proof/lean/NemesisWave4.lean#L112)",
+      "kind": "def",
+      "qualified_name": "NemesisWave4.validateDeploymentPermit"
+    },
+    {
+      "id": "#C206",
+      "reference": "[`NemesisWave4.lean:121`](../../proof/lean/NemesisWave4.lean#L121)",
+      "kind": "def",
+      "qualified_name": "NemesisWave4.initialMonitor"
+    },
+    {
+      "id": "#C207",
+      "reference": "[`NemesisWave4.lean:132`](../../proof/lean/NemesisWave4.lean#L132)",
+      "kind": "def",
+      "qualified_name": "NemesisWave4.validWave4Trace"
+    },
+    {
+      "id": "#C208",
+      "reference": "[`NemesisWave4.lean:141`](../../proof/lean/NemesisWave4.lean#L141)",
+      "kind": "def",
+      "qualified_name": "NemesisWave4.corruptFencingRaceTrace"
+    },
+    {
+      "id": "#C209",
+      "reference": "[`NemesisWave4.lean:149`](../../proof/lean/NemesisWave4.lean#L149)",
+      "kind": "def",
+      "qualified_name": "NemesisWave4.corruptBlindRetryTrace"
+    },
+    {
+      "id": "#C210",
+      "reference": "[`NemesisWave4.lean:156`](../../proof/lean/NemesisWave4.lean#L156)",
+      "kind": "def",
+      "qualified_name": "NemesisWave4.corruptBudgetCompositionTrace"
+    },
+    {
+      "id": "—",
+      "reference": "[`TicketEnvelope.lean:19`](../../proof/lean/TicketEnvelope.lean#L19)",
+      "kind": "abbrev",
+      "qualified_name": "B60.Ticket.Control"
+    },
+    {
+      "id": "#C211",
+      "reference": "[`TicketEnvelope.lean:20`](../../proof/lean/TicketEnvelope.lean#L20)",
+      "kind": "def",
+      "qualified_name": "B60.Ticket.controlTriple"
+    },
+    {
+      "id": "#C212",
+      "reference": "[`TicketEnvelope.lean:22`](../../proof/lean/TicketEnvelope.lean#L22)",
+      "kind": "def",
+      "qualified_name": "B60.Ticket.controlCodec"
+    },
+    {
+      "id": "—",
+      "reference": "[`TicketEnvelope.lean:46`](../../proof/lean/TicketEnvelope.lean#L46)",
+      "kind": "abbrev",
+      "qualified_name": "B60.Ticket.Payload"
+    },
+    {
+      "id": "#C213",
+      "reference": "[`TicketEnvelope.lean:49`](../../proof/lean/TicketEnvelope.lean#L49)",
+      "kind": "def",
+      "qualified_name": "B60.Ticket.payloadCodec"
+    },
+    {
+      "id": "#C214",
+      "reference": "[`TicketEnvelope.lean:54`](../../proof/lean/TicketEnvelope.lean#L54)",
+      "kind": "def",
+      "qualified_name": "B60.Ticket.utf8"
+    },
+    {
+      "id": "#C215",
+      "reference": "[`TicketEnvelope.lean:55`](../../proof/lean/TicketEnvelope.lean#L55)",
+      "kind": "def",
+      "qualified_name": "B60.Ticket.text"
+    },
+    {
+      "id": "#C216",
+      "reference": "[`TicketEnvelope.lean:58`](../../proof/lean/TicketEnvelope.lean#L58)",
+      "kind": "def",
+      "qualified_name": "B60.Ticket.shape"
+    },
+    {
+      "id": "—",
+      "reference": "[`TicketEnvelope.lean:74`](../../proof/lean/TicketEnvelope.lean#L74)",
+      "kind": "abbrev",
+      "qualified_name": "B60.Ticket.Ticket"
+    },
+    {
+      "id": "#C217",
+      "reference": "[`TicketEnvelope.lean:76`](../../proof/lean/TicketEnvelope.lean#L76)",
+      "kind": "def",
+      "qualified_name": "B60.Ticket.encode"
+    },
+    {
+      "id": "#C218",
+      "reference": "[`TicketEnvelope.lean:77`](../../proof/lean/TicketEnvelope.lean#L77)",
+      "kind": "def",
+      "qualified_name": "B60.Ticket.decode"
+    },
+    {
+      "id": "—",
+      "reference": "[`TicketEnvelope.lean:107`](../../proof/lean/TicketEnvelope.lean#L107)",
+      "kind": "abbrev",
+      "qualified_name": "B60.Ticket.SignedTicket"
+    },
+    {
+      "id": "#C219",
+      "reference": "[`TicketEnvelope.lean:108`](../../proof/lean/TicketEnvelope.lean#L108)",
+      "kind": "def",
+      "qualified_name": "B60.Ticket.encodeExternal"
+    },
+    {
+      "id": "#C220",
+      "reference": "[`TicketEnvelope.lean:109`](../../proof/lean/TicketEnvelope.lean#L109)",
+      "kind": "def",
+      "qualified_name": "B60.Ticket.decodeExternal"
+    },
+    {
+      "id": "#C221",
+      "reference": "[`TicketEnvelope.lean:129`](../../proof/lean/TicketEnvelope.lean#L129)",
+      "kind": "def",
+      "qualified_name": "B60.Ticket.hexDigit"
+    },
+    {
+      "id": "#C222",
+      "reference": "[`TicketEnvelope.lean:135`](../../proof/lean/TicketEnvelope.lean#L135)",
+      "kind": "def",
+      "qualified_name": "B60.Ticket.parseHexChars"
+    },
+    {
+      "id": "#C223",
+      "reference": "[`TicketEnvelope.lean:144`](../../proof/lean/TicketEnvelope.lean#L144)",
+      "kind": "def",
+      "qualified_name": "B60.Ticket.parseHex"
+    },
+    {
+      "id": "#C224",
+      "reference": "[`TicketEnvelope.lean:145`](../../proof/lean/TicketEnvelope.lean#L145)",
+      "kind": "def",
+      "qualified_name": "B60.Ticket.hex"
+    },
+    {
+      "id": "#C225",
+      "reference": "[`TicketEnvelope.lean:150`](../../proof/lean/TicketEnvelope.lean#L150)",
+      "kind": "def",
+      "qualified_name": "B60.Ticket.generatorKey"
+    },
+    {
+      "id": "#C226",
+      "reference": "[`TicketEnvelope.lean:154`](../../proof/lean/TicketEnvelope.lean#L154)",
+      "kind": "def",
+      "qualified_name": "B60.Ticket.fixturePayload"
+    },
+    {
+      "id": "#C227",
+      "reference": "[`TicketEnvelope.lean:161`](../../proof/lean/TicketEnvelope.lean#L161)",
+      "kind": "def",
+      "qualified_name": "B60.Ticket.fixture"
+    },
+    {
+      "id": "#C228",
+      "reference": "[`TicketEnvelope.lean:200`](../../proof/lean/TicketEnvelope.lean#L200)",
+      "kind": "def",
+      "qualified_name": "main"
+    }
+  ]
+}

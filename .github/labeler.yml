@@ -1,0 +1,53 @@
+"ring-0: kernel":
+  - changed-files:
+      - any-glob-to-any-file:
+          - "00_ABZU_KERNEL/**/*"
+          - "crates/**/*"
+          - "src/**/*"
+
+"ring-1: formal":
+  - changed-files:
+      - any-glob-to-any-file:
+          - "proof/**/*"
+          - "contracts/**/*"
+          - "01_KISH_ENGINE/**/*"
+
+"ring-2: governance":
+  - changed-files:
+      - any-glob-to-any-file:
+          - ".github/**/*"
+          - ".agents/**/*"
+          - "02_EDIN_SWARMS/**/*"
+          - "scripts/**/*"
+          - "tests/**/*"
+
+"ring-3: docs":
+  - changed-files:
+      - any-glob-to-any-file:
+          - "docs/**/*"
+          - "**/*.md"
+
+"engine: rust":
+  - changed-files:
+      - any-glob-to-any-file:
+          - "**/*.rs"
+          - "**/Cargo.toml"
+          - "Cargo.lock"
+
+"engine: python":
+  - changed-files:
+      - any-glob-to-any-file:
+          - "**/*.py"
+          - "pyproject.toml"
+          - "uv.lock"
+
+"engine: lean4":
+  - changed-files:
+      - any-glob-to-any-file:
+          - "proof/lean/**/*"
+          - "**/*.lean"
+
+"config: github":
+  - changed-files:
+      - any-glob-to-any-file:
+          - ".github/**/*"

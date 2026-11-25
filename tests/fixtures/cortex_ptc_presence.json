@@ -1,0 +1,35 @@
+{
+  "description": "An omitted note, a null note and an empty note carry different update intentions",
+  "tool": "update_note",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "nota": {"type": ["string", "null"]}
+    },
+    "required": [],
+    "additionalProperties": false
+  },
+  "tests": [
+    {
+      "description": "preserve",
+      "initial_state": {"nota": "original"},
+      "data": {},
+      "expected_arguments": {},
+      "expected_state": {"nota": "original"}
+    },
+    {
+      "description": "clear",
+      "initial_state": {"nota": "original"},
+      "data": {"nota": null},
+      "expected_arguments": {"nota": null},
+      "expected_state": {"nota": null}
+    },
+    {
+      "description": "empty",
+      "initial_state": {"nota": "original"},
+      "data": {"nota": ""},
+      "expected_arguments": {"nota": ""},
+      "expected_state": {"nota": ""}
+    }
+  ]
+}

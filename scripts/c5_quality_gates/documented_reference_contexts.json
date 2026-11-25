@@ -1,0 +1,1565 @@
+{
+  "schema_version": 1,
+  "references": [
+    {
+      "path": ".agents/skills/c5-cortex-swarm-orchestrator-project/references/modules/lora-swarm-pipeline/MODULE.md",
+      "symbol": "filename_zone_chunk",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": ".agents/skills/c5-cortex-swarm-orchestrator-project/references/modules/lora-swarm-pipeline/MODULE.md#filename_zone_chunk",
+      "context_sha256": "282245065b377ed6dcf324deeeb4a9ef5d06eb353128e7a6fcbf0a9d3a9b7e50"
+    },
+    {
+      "path": ".agents/skills/c5-epistemic-thermodynamics-project/references/modules/symbiotic-cognitive-architecture/MODULE.md",
+      "symbol": "MIMETIC_ITER",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": ".agents/skills/c5-epistemic-thermodynamics-project/references/modules/symbiotic-cognitive-architecture/MODULE.md#MIMETIC_ITER",
+      "context_sha256": "bf73c89b4bff935b21713d8e9bb45a7183388b532267c7989448e46587e234fb"
+    },
+    {
+      "path": ".agents/skills/c5-ring0-babylon-kernel-project/references/modules/c5-rea-clean-room/MODULE.md",
+      "symbol": "EvidenceEnvelopeV2",
+      "kind": "external",
+      "reason": "Formato de evidencia encapsulada del pipeline externo C5-REA (declarado como dependencia externa no incluida).",
+      "evidence": "- **Compresión de Kolmogorov (`EvidenceEnvelopeV2`):** Prohibido inyectar volcados AST crudos al contexto del LLM; toda evidencia debe viajar encapsulada en `EvidenceEnvelopeV2` (`~60 KB`).",
+      "context_sha256": "2c0c5a58f4dce9182bc8472db5992ab8eb4815effb397f4c684625e9c5748c91"
+    },
+    {
+      "path": ".agents/skills/c5-ring0-babylon-kernel-project/references/modules/c5-rea-clean-room/MODULE.md",
+      "symbol": "REA_CLI",
+      "kind": "external",
+      "reason": "Variable de ruta hacia la CLI externa de C5-REA, declarada explícitamente como dependencia externa no incluida en la distribución.",
+      "evidence": "1. **CLI y Servidor MCP Autónomo (`rea_swarm_audit`):** dependencia externa, no incluida en la distribución. Preferir las herramientas MCP expuestas en la sesión. Para la CLI, localizar el checkout elegido y fijar `REA_CLI` a la ruta absoluta comprobada de su `c5_rea_cli.py`; consultar su ayuda antes de usar estos ejemplos. Si falta esa dependencia, declarar la vía no disponible y continuar el análisis estático pertinente, sin inventar una ruta del autor.",
+      "context_sha256": "f45147733066a5822fb50b9c7275e8c689d5f34ffcbd194223adcdfa4c6c059b"
+    },
+    {
+      "path": ".agents/skills/c5-ring0-babylon-kernel-project/references/modules/c5-rea-clean-room/MODULE.md",
+      "symbol": "rea_swarm_audit",
+      "kind": "external",
+      "reason": "Servidor MCP autónomo externo de C5-REA, declarado explícitamente como dependencia externa no incluida en la distribución.",
+      "evidence": "1. **CLI y Servidor MCP Autónomo (`rea_swarm_audit`):** dependencia externa, no incluida en la distribución. Preferir las herramientas MCP expuestas en la sesión. Para la CLI, localizar el checkout elegido y fijar `REA_CLI` a la ruta absoluta comprobada de su `c5_rea_cli.py`; consultar su ayuda antes de usar estos ejemplos. Si falta esa dependencia, declarar la vía no disponible y continuar el análisis estático pertinente, sin inventar una ruta del autor.",
+      "context_sha256": "f45147733066a5822fb50b9c7275e8c689d5f34ffcbd194223adcdfa4c6c059b"
+    },
+    {
+      "path": ".agents/skills/c5-ring0-babylon-kernel-project/references/modules/rlhf-sentinel/MODULE.md",
+      "symbol": "ACTIVE_EPOCH_PTR",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": ".agents/skills/c5-ring0-babylon-kernel-project/references/modules/rlhf-sentinel/MODULE.md#ACTIVE_EPOCH_PTR",
+      "context_sha256": "27a76e4801b3c6da4fd68bf18d5fbb0b2b43dfcc32ec252c1735733947a9d5ad"
+    },
+    {
+      "path": ".agents/skills/c5-ring0-babylon-kernel-project/references/modules/thermo-audit/MODULE.md",
+      "symbol": "INV_C5_BATCH_AMORTIZATION",
+      "kind": "document_contract",
+      "reason": "Identificador normativo de invariante documentada en docs/03_guides/agent_contracts.md; no es un símbolo ejecutable.",
+      "evidence": "3. **Invariante P×S y Amortización Exergética ($B \\ge B^*$):** Verifica si hay concurrencia desbocada que pueda causar *Thrashing* o cuellos de botella asíncronos. Prohíbe la persistencia individual `F_FULLFSYNC` en SQLite L0 WAL (techo de 2.000 TPS); exige amortización de lotes $B \\ge B^* \\ge \\lceil \\frac{1-\\epsilon}{\\epsilon} \\cdot \\frac{\\tau_{\\text{SE-Sign}} + \\tau_{\\text{WAL-Sync}}}{\\tau_{\\text{Ring-0}}} \\rceil$ para garantizar $\\eta_{\\text{exergía}} \\ge 95\\%$ (`INV_C5_BATCH_AMORTIZATION`). En LARSA-120, la prueba de equivocación $\\mathcal{O}(1)$ dispara `ViewChange(v+1)` con evidencia, pero la evicción de validadores se compromete por consenso determinista en la vista siguiente (`INV_C5_LARSA_VIEWCHANGE_EVICTION`).",
+      "context_sha256": "22468f59582149246e3cd7559516db7c0ee62bb7ec448b3fcf3424c98f962014"
+    },
+    {
+      "path": ".agents/skills/c5-ring0-babylon-kernel-project/references/modules/thermo-audit/MODULE.md",
+      "symbol": "INV_C5_ZERO_POINTER_FFI",
+      "kind": "document_contract",
+      "reason": "Identificador normativo de invariante documentada en docs/03_guides/agent_contracts.md; no es un símbolo ejecutable.",
+      "evidence": "2. **Conservación de Sincronización y Memoria de Frontera:** Analiza los bloqueos de hilos y la gestión de memoria cruzando C-FFI. Prohíbe la exposición de `epoch::Guard`, `Arc<T>` o punteros crudos fuera de Rust (`INV_C5_ZERO_POINTER_FFI`). En Apple Silicon (Darwin ARM64), exige alineación estricta de 128 bytes (`#[repr(C, align(128))]`, `INV_C5_APPLE_128B_PING_PONG`) y arquitectura Ping-Pong Left-Right Wait-Free (layout cuádruple de 512B con flip atómico de `control_word`), erradicando el false sharing físico y las invalidaciones RFO de Seqlock. Exige **Apoptosis Asimétrica Externa** (`INV_C5_ASYMMETRIC_APOPTOSIS`): si el consumidor FFI retiene el slot por más de `MAX_FFI_HOLD_TICKS = 64` ticks, el productor de Ring-0 fuerza el centinela con bandera ortogonal `POISON_SENTINEL = POISON_BIT | 0x5EAD_6060_0000_0000` (con `POISON_BIT = 1 << 63`) para evitar colisiones con la generación monótona a $1.87 \\times 10^9$ ticks.",
+      "context_sha256": "6b61a08a787a9c3bb887fbeaeae913bd4fd2e478ada401b000774098fa745d96"
+    },
+    {
+      "path": ".agents/skills/c5-ring0-babylon-kernel-project/references/modules/thermo-audit/MODULE.md",
+      "symbol": "external_aad",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": ".agents/skills/c5-ring0-babylon-kernel-project/references/modules/thermo-audit/MODULE.md#external_aad",
+      "context_sha256": "06166d414b54296b64c04ba26d99f37602824e692ccc152c85ccf74971466270"
+    },
+    {
+      "path": ".agents/skills/c5-ring0-babylon-kernel-project/references/modules/thermo-audit/MODULE.md",
+      "symbol": "hf_transfer",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": ".agents/skills/c5-ring0-babylon-kernel-project/references/modules/thermo-audit/MODULE.md#hf_transfer",
+      "context_sha256": "8f2fda58b351a436696023f5027004086fb3393f1ed3726158183ed53717217e"
+    },
+    {
+      "path": ".agents/skills/c5-ring0-babylon-kernel-project/references/modules/thermo-audit/MODULE.md",
+      "symbol": "huggingface_hub",
+      "kind": "external",
+      "reason": "Nombre del paquete cliente Python externo de Hugging Face Hub citado en la guía de migración 1.x.",
+      "evidence": "4. **Transferencia y memoria:** Verifica la versión instalada del cliente y mide memoria máxima con una carga reproducible. En `huggingface_hub` 1.x se retiró `hf_transfer`; no prescribas su variable heredada ni atribuyas consumo nulo de RAM a una implementación nativa. Consulta la [migración oficial](https://huggingface.co/docs/huggingface_hub/en/concepts/migration#hf_transfer) y elige el modo soportado según la restricción de recursos; un modo de alto rendimiento no implica menor uso de memoria.",
+      "context_sha256": "8f2fda58b351a436696023f5027004086fb3393f1ed3726158183ed53717217e"
+    },
+    {
+      "path": ".github/copilot-instructions.md",
+      "symbol": "NO_VERIFICADO",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": ".github/copilot-instructions.md#NO_VERIFICADO",
+      "context_sha256": "c096fd30af35142921bb16b426d840c790331469cee97dd1b03e968286427431"
+    },
+    {
+      "path": "01_KISH_ENGINE/babylon60/kernel/README.md",
+      "symbol": "mcp_seatbelt_confinement",
+      "kind": "document_contract",
+      "reason": "Identificador de claim/capacidad registrado en evidence.json y claims.lock; no declara una función homónima.",
+      "evidence": "> Proporciona la validación de aislamiento de servidores MCP (`mcp_seatbelt_confinement`), síntesis de servidores MCP efímeros con digest `BLAKE3`, cortafuegos neurosimbólico Z3, automatización CDP, conectores de inferencia y utilidades de consenso BFT.",
+      "context_sha256": "1d87bcada4bfdb60b14bcfca9d06619928d4254aa74373c10c2043307c9727f0"
+    },
+    {
+      "path": "02_EDIN_SWARMS/README.md",
+      "symbol": "INV_C5_OPENROUTER_ROUTING",
+      "kind": "document_contract",
+      "reason": "Etiqueta del contrato o estado definido en documentación; su definición normativa no acredita una implementación.",
+      "evidence": "| `clients/openrouter.py` | Pasarela unificada hacia OpenRouter para modelos de frontera. | `INV_C5_OPENROUTER_ROUTING` |",
+      "context_sha256": "68c93c13c875d4e50c9858ffd1ffb3b10ee36b32dcdcb332ee35b9eaceb0bb60"
+    },
+    {
+      "path": "02_EDIN_SWARMS/README.md",
+      "symbol": "INV_C5_SCITT_RFC9942",
+      "kind": "document_contract",
+      "reason": "Etiqueta del contrato o estado definido en documentación; su definición normativa no acredita una implementación.",
+      "evidence": "| `protocols/attestation.py` | Sobres criptográficos SCITT / COSE_Sign1 para mensajería inter-agente. | `INV_C5_SCITT_RFC9942` |",
+      "context_sha256": "9e9a1a774a651c3a2bd7c0af1fd922b4f78d7e786bcc97c49f7efacd11e3414a"
+    },
+    {
+      "path": "02_EDIN_SWARMS/docs/INGENIERIA_INVERSA_SWARM_ARCHITECTURES.md",
+      "symbol": "StateGraph",
+      "kind": "external",
+      "reason": "Identificador de una API externa descrita en este documento (LangGraph, CrewAI, Agents SDK o Tauri); no se declara como símbolo local.",
+      "evidence": "LangGraph implementa un modelo de computación basado en el framework Pregel de Google para procesamiento de grafos, utilizando `StateGraph` y reducers de estado (`Annotated[list, add_messages]`).",
+      "context_sha256": "992cc724ccb9a2158a5e2340c1d0c543ef1f9c2d1afb00d17a4bddc77c5d5edd"
+    },
+    {
+      "path": "02_EDIN_SWARMS/docs/INGENIERIA_INVERSA_SWARM_ARCHITECTURES.md",
+      "symbol": "add_conditional_edges",
+      "kind": "external",
+      "reason": "Identificador de una API externa descrita en este documento (LangGraph, CrewAI, Agents SDK o Tauri); no se declara como símbolo local.",
+      "evidence": "*   **Fragilidad de Edges Condicionales:** Las decisiones de bifurcación dependen de funciones condicionales (`add_conditional_edges`) que inspeccionan cadenas de texto o nombres de herramientas. La más mínima alucinación en el formato de salida rompe la transición del grafo, requiriendo manejadores de fallback que inyectan más tokens y ruido al prompt.",
+      "context_sha256": "c50d2a9adcc708e0e8ee71bbde963ec8685cd97e35f3e42bbd75a72096164504"
+    },
+    {
+      "path": "02_EDIN_SWARMS/docs/INGENIERIA_INVERSA_SWARM_ARCHITECTURES.md",
+      "symbol": "backstory",
+      "kind": "external",
+      "reason": "Identificador de una API externa descrita en este documento (LangGraph, CrewAI, Agents SDK o Tauri); no se declara como símbolo local.",
+      "evidence": "CrewAI estructura los enjambres imitando organigramas corporativos humanos: asigna `role`, `goal` y `backstory` a cada agente, orquestados por un \"Manager Agent\" o en pipelines secuenciales.",
+      "context_sha256": "3f979bd445291f8345442eb36ef5dbc2b7d17261e315f70994663b9a8c9ea895"
+    },
+    {
+      "path": "02_EDIN_SWARMS/docs/INGENIERIA_INVERSA_SWARM_ARCHITECTURES.md",
+      "symbol": "max_turns",
+      "kind": "external",
+      "reason": "Identificador de una API externa descrita en este documento (LangGraph, CrewAI, Agents SDK o Tauri); no se declara como símbolo local.",
+      "evidence": "*   **Ausencia de Atestación de Terminación (Bucle Infinito):** El paso de control entre agentes se resuelve como una función de tool calling dentro del mismo bucle de inferencia. Si el agente A transfiere a B y B a A debido a un atractor estocástico en la inferencia, el sistema entra en un ciclo infinito de handoffs consumiendo cuota hasta el límite de recursión (`max_turns`).",
+      "context_sha256": "cbb4d4061e8ae4578d5cabe8d898dc4b6d38dd69aadd20eb9f45749208819cb2"
+    },
+    {
+      "path": "AGENTS.md",
+      "symbol": "get_code_snippet",
+      "kind": "external",
+      "reason": "External code-graph MCP tool name referenced in workspace discovery guidance.",
+      "evidence": "External code-graph MCP tool contract",
+      "context_sha256": "13162673ade542981299c26bc84aba6bb4cc9512686241f735c0259d39568ff9"
+    },
+    {
+      "path": "AGENTS.md",
+      "symbol": "query_graph",
+      "kind": "external",
+      "reason": "External code-graph MCP tool name referenced in workspace discovery guidance.",
+      "evidence": "External code-graph MCP tool contract",
+      "context_sha256": "13162673ade542981299c26bc84aba6bb4cc9512686241f735c0259d39568ff9"
+    },
+    {
+      "path": "AGENTS.md",
+      "symbol": "search_graph",
+      "kind": "external",
+      "reason": "External code-graph MCP tool name referenced in workspace discovery guidance.",
+      "evidence": "External code-graph MCP tool contract",
+      "context_sha256": "13162673ade542981299c26bc84aba6bb4cc9512686241f735c0259d39568ff9"
+    },
+    {
+      "path": "CLAUDE.md",
+      "symbol": "NO_VERIFICADO",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": "CLAUDE.md#NO_VERIFICADO",
+      "context_sha256": "c096fd30af35142921bb16b426d840c790331469cee97dd1b03e968286427431"
+    },
+    {
+      "path": "IP_PROVENANCE.md",
+      "symbol": "aesop",
+      "kind": "external",
+      "reason": "Librería externa de automatización del ecosistema Lean 4 bajo .lake/packages/ (excluida del escaneo de código propio).",
+      "evidence": "- **Perímetro de Toolchain Formal Certificado (`.lake/packages/`):** **611 archivos `.lean`** (~162.867 LOC) de librerías base de verificación (`batteries` [305], `aesop` [254], `proofwidgets` [37], `alloy` [15]) contra los cuales compila determinísticamente el núcleo propio.",
+      "context_sha256": "94cb01860d53553f6881a23c9715eb2159f737367a028749df9d176a1608a385"
+    },
+    {
+      "path": "IP_PROVENANCE.md",
+      "symbol": "alloy",
+      "kind": "external",
+      "reason": "Librería externa FFI/C del ecosistema Lean 4 bajo .lake/packages/ (excluida del escaneo de código propio).",
+      "evidence": "- **Perímetro de Toolchain Formal Certificado (`.lake/packages/`):** **611 archivos `.lean`** (~162.867 LOC) de librerías base de verificación (`batteries` [305], `aesop` [254], `proofwidgets` [37], `alloy` [15]) contra los cuales compila determinísticamente el núcleo propio.",
+      "context_sha256": "94cb01860d53553f6881a23c9715eb2159f737367a028749df9d176a1608a385"
+    },
+    {
+      "path": "IP_PROVENANCE.md",
+      "symbol": "batteries",
+      "kind": "external",
+      "reason": "Librería estándar extendida del ecosistema Lean 4 bajo .lake/packages/ (excluida del escaneo de código propio).",
+      "evidence": "- **Perímetro de Toolchain Formal Certificado (`.lake/packages/`):** **611 archivos `.lean`** (~162.867 LOC) de librerías base de verificación (`batteries` [305], `aesop` [254], `proofwidgets` [37], `alloy` [15]) contra los cuales compila determinísticamente el núcleo propio.",
+      "context_sha256": "94cb01860d53553f6881a23c9715eb2159f737367a028749df9d176a1608a385"
+    },
+    {
+      "path": "IP_PROVENANCE.md",
+      "symbol": "proofwidgets",
+      "kind": "external",
+      "reason": "Librería externa de widgets del ecosistema Lean 4 bajo .lake/packages/ (excluida del escaneo de código propio).",
+      "evidence": "- **Perímetro de Toolchain Formal Certificado (`.lake/packages/`):** **611 archivos `.lean`** (~162.867 LOC) de librerías base de verificación (`batteries` [305], `aesop` [254], `proofwidgets` [37], `alloy` [15]) contra los cuales compila determinísticamente el núcleo propio.",
+      "context_sha256": "94cb01860d53553f6881a23c9715eb2159f737367a028749df9d176a1608a385"
+    },
+    {
+      "path": "README.md",
+      "symbol": "FL_014",
+      "kind": "document_contract",
+      "reason": "Etiqueta de requisito de integridad y recuperación WAL tras SIGKILL; su definición documental no declara un símbolo homónimo.",
+      "evidence": "`AUTH_003` and `FL_014` simulate the interruption inside the test process",
+      "context_sha256": "6c032dbb204a9835d6680be3ae88a14bffb098f044b3f332621ea9aef2cc5eb2"
+    },
+    {
+      "path": "README.md",
+      "symbol": "osxkeychain",
+      "kind": "external",
+      "reason": "Helper externo de credenciales de Git en macOS (git-credential-osxkeychain) citado al documentar límites de confinamiento; no declara un símbolo local.",
+      "evidence": "`osxkeychain` credentials are `NO_VERIFICADO` and probably usable inside.",
+      "context_sha256": "d97847d095b50bf3ac22bcc878b2716eedb1e6ab56ec5d29e7bb6658f2219f89"
+    },
+    {
+      "path": "README.md",
+      "symbol": "securityd",
+      "kind": "external",
+      "reason": "Daemon del sistema operativo macOS (servicio del llavero / Keychain) citado como límite declarado de confinamiento; no declara un símbolo local.",
+      "evidence": "`securityd` and POSIX shared memory stays open (declared limits);",
+      "context_sha256": "129b5796864f87ca1e07132889fc9174deb02a1cf55af5ba2f5002f7d1e48703"
+    },
+    {
+      "path": "README.md",
+      "symbol": "signed_dispatch_intent",
+      "kind": "document_contract",
+      "reason": "Identificador de claim registrado en evidence.json y claims.lock; no declara una función homónima.",
+      "evidence": "process (macOS, file ledger). `signed_dispatch_intent` reopens the nonce",
+      "context_sha256": "e708783d0dc71ff384d20be9b937eceebbd77af30827fe8f275bfb6a841c1490"
+    },
+    {
+      "path": "README.md",
+      "symbol": "uid_map",
+      "kind": "external",
+      "reason": "Interfaz procfs del kernel Linux (/proc/<pid>/uid_map) para espacios de nombres de usuario; no declara un símbolo local.",
+      "evidence": "sandboxes need: the user namespace is created, but its `uid_map` cannot be",
+      "context_sha256": "3a4e76151d451640504836d457e6e03e1c2eeb9e2cec17cd2c50084d89af46ed"
+    },
+    {
+      "path": "README_ES.md",
+      "symbol": "FL_014",
+      "kind": "document_contract",
+      "reason": "Etiqueta de requisito de integridad y recuperación WAL tras SIGKILL; su definición documental no declara un símbolo homónimo.",
+      "evidence": "SQLite; `AUTH_001`, `AUTH_003` y `FL_014` simulan la interrupción dentro del",
+      "context_sha256": "25023eec90d89fc6af709138021eb17377d23ef820d20a2cdec551749f91d4c9"
+    },
+    {
+      "path": "README_ES.md",
+      "symbol": "osxkeychain",
+      "kind": "external",
+      "reason": "Helper externo de credenciales de Git en macOS (git-credential-osxkeychain) citado al documentar límites de confinamiento; no declara un símbolo local.",
+      "evidence": "credenciales de `osxkeychain` están `NO_VERIFICADO` y probablemente se pueden",
+      "context_sha256": "880051631d5a0aff56912a27ebc893822aa96af55ca557f08bf643e1d91898fc"
+    },
+    {
+      "path": "README_ES.md",
+      "symbol": "securityd",
+      "kind": "external",
+      "reason": "Daemon del sistema operativo macOS (servicio del llavero / Keychain) citado como límite declarado de confinamiento; no declara un símbolo local.",
+      "evidence": "servicios Mach y red IP. El llavero sigue al alcance a través de `securityd`",
+      "context_sha256": "988c85feb8b5a0df55575b7a69d661aa6d4f4ad3a552dd09b1ca7b353a7e640a"
+    },
+    {
+      "path": "README_ES.md",
+      "symbol": "signed_dispatch_intent",
+      "kind": "document_contract",
+      "reason": "Identificador de claim registrado en evidence.json y claims.lock; no declara una función homónima.",
+      "evidence": "propio proceso hijo (macOS, ledger en archivo). `signed_dispatch_intent`",
+      "context_sha256": "5360be0b057ab6265812bc3ad6a1fd9456aabd6c489d225ac43cae11e169e806"
+    },
+    {
+      "path": "README_ES.md",
+      "symbol": "uid_map",
+      "kind": "external",
+      "reason": "Interfaz procfs del kernel Linux (/proc/<pid>/uid_map) para espacios de nombres de usuario; no declara un símbolo local.",
+      "evidence": "espacio de nombres de usuario, pero no escribir su `uid_map` ni cambiar",
+      "context_sha256": "1ba3115fdc5feda7671771790d164076df1c44172bbc41a0eece1e9c1f9c60e9"
+    },
+    {
+      "path": "auditoria_ai_act.md",
+      "symbol": "CUATRECASAS_AUDIT",
+      "kind": "literal",
+      "reason": "Valor, tecla, nombre ilustrativo o etiqueta documental; no declara una función o clase local.",
+      "evidence": "**Sistema de muestra:** `SISTEMA_HIPOTECARIO_ALFA` | **Operador de muestra:** `CUATRECASAS_AUDIT`",
+      "context_sha256": "71da4646f94a028ccb11a2dafb8c895374784f4cb79f04ee6e236bcd1de334c1"
+    },
+    {
+      "path": "auditoria_ai_act.md",
+      "symbol": "Darwin_arm64",
+      "kind": "literal",
+      "reason": "Valor, tecla, nombre ilustrativo o etiqueta documental; no declara una función o clase local.",
+      "evidence": "| Plataforma / Modelo | `Darwin_arm64` |",
+      "context_sha256": "3cc4f428c573496d99da92bd707b1a55e83686a11fce1dbc2d0f2be82841f7e1"
+    },
+    {
+      "path": "auditoria_ai_act.md",
+      "symbol": "QUARANTINE_SEAL_07cfe8cff8971c3869086ade1a7d4dc24025ec1f0f29f46c5359ec8887508060",
+      "kind": "literal",
+      "reason": "Valor, tecla, nombre ilustrativo o etiqueta documental; no declara una función o clase local.",
+      "evidence": "- **Global Merkle Root:** `QUARANTINE_SEAL_07cfe8cff8971c3869086ade1a7d4dc24025ec1f0f29f46c5359ec8887508060`",
+      "context_sha256": "10462b5510469e533c0f6f1dee97983008346ea245aad2ee8f54cb4749205dd5"
+    },
+    {
+      "path": "auditoria_ai_act.md",
+      "symbol": "SISTEMA_HIPOTECARIO_ALFA",
+      "kind": "literal",
+      "reason": "Valor, tecla, nombre ilustrativo o etiqueta documental; no declara una función o clase local.",
+      "evidence": "**Sistema de muestra:** `SISTEMA_HIPOTECARIO_ALFA` | **Operador de muestra:** `CUATRECASAS_AUDIT`",
+      "context_sha256": "71da4646f94a028ccb11a2dafb8c895374784f4cb79f04ee6e236bcd1de334c1"
+    },
+    {
+      "path": "auditoria_ai_act.md",
+      "symbol": "e51092cd77c2d88e57c04ae343de82ccf803238bcc343d4adcae40d32dfc6942",
+      "kind": "literal",
+      "reason": "Valor, tecla, nombre ilustrativo o etiqueta documental; no declara una función o clase local.",
+      "evidence": "- **SHA-256 del payload firmado:** `e51092cd77c2d88e57c04ae343de82ccf803238bcc343d4adcae40d32dfc6942`",
+      "context_sha256": "728d91ab0dee4fa52a7f0e7e505bc3342f9f6ea30332ac79c32d4d025eaf95d9"
+    },
+    {
+      "path": "auditoria_ai_act.md",
+      "symbol": "e524452453d984d2d681c715cdada561e9e0170297ea106c3a39d1927ecb31e8",
+      "kind": "literal",
+      "reason": "Valor, tecla, nombre ilustrativo o etiqueta documental; no declara una función o clase local.",
+      "evidence": "| **Art. 12: Conservación de Registros / Logging WORM** | Ledger DAG Merkle-Causal + Sello Criptográfico de Cuarentena WORM | EVIDENCE_MISMATCH_NON_COMPLIANT | `e524452453d984d2d681c715cdada561e9e0170297ea106c3a39d1927ecb31e8` |",
+      "context_sha256": "91fec3fdaa73cecba82ca00f6d4d9abea8d08c922eaa068622a14986c17c49af"
+    },
+    {
+      "path": "auditoria_ai_act.md",
+      "symbol": "ea670d0af686abb83de344450329dd0152dc1d074fd78b14b04e0b1ace8104233cec5e6f79bae7ba30822a9d1066de0a9c80b7441c038fa684bc8392fa662802",
+      "kind": "literal",
+      "reason": "Valor, tecla, nombre ilustrativo o etiqueta documental; no declara una función o clase local.",
+      "evidence": "- **Firma:** `ea670d0af686abb83de344450329dd0152dc1d074fd78b14b04e0b1ace8104233cec5e6f79bae7ba30822a9d1066de0a9c80b7441c038fa684bc8392fa662802`",
+      "context_sha256": "411cbf890dfd5792a20cb8a6593f7b460ffdec07af557475cdb73c6d0d383e6c"
+    },
+    {
+      "path": "contracts/ENTERPRISE_LICENSE.md",
+      "symbol": "AUTH_007",
+      "kind": "document_contract",
+      "reason": "Etiqueta de caso/requisito del catálogo de autorización citado en la prueba de aceptación.",
+      "evidence": "| **Week 3: Adversarial Acceptance Simulation (The 5 Proofs)** (*Days 13–20*) | Reproducible execution for Licensee's CISO of the **5 Adversarial Acceptance Proofs** (malicious prompt injection veto, unauthorized deletion interception `AUTH_002`/`AUTH_007`, TOCTOU race immunity, and `SIGKILL` crash idempotency `AUTH_003`/`AUTH_006`). | Automated suites `admission_capability_test` (`test_fl008`), `nemesis_wave4`, and atomic `0700` quarantine `.babylon/quarantine/` with RFC 9942 `COSE_Sign1` receipts. |",
+      "context_sha256": "68da77ace04b5db3fee17f081bde4e49415cbb38c076ae4ed1d7466bb2c191a2"
+    },
+    {
+      "path": "contracts/ENTERPRISE_LICENSE.md",
+      "symbol": "INV_C5_ENTERPRISE_OFFER",
+      "kind": "document_contract",
+      "reason": "Identificador normativo de demarcación del alcance comercial Enterprise (EU AI Act).",
+      "evidence": "> **Scope Demarcation (`INV_C5_ENTERPRISE_OFFER`):** Technical controls verified during the Pilot attest to BABYLON-60's audited silicon and software boundary (traceability under Art. 12, hardware/cryptographic authorization gating under Art. 14, and fail-stop robustness under Art. 15). Full organizational compliance with Regulation (EU) 2024/1689 remains subject to Licensee's internal governance, human-supervisor training, and data-retention policies.",
+      "context_sha256": "2e00117725aebce449cd7537de85f67104f9aedd949952c628e557940c4f1b37"
+    },
+    {
+      "path": "contracts/ENTERPRISE_LICENSE.md",
+      "symbol": "admission_capability_test",
+      "kind": "literal",
+      "reason": "Nombre del target de integración Rust en tests/admission_capability_test.rs (no un identificador dentro de un archivo fuente).",
+      "evidence": "| **Week 3: Adversarial Acceptance Simulation (The 5 Proofs)** (*Days 13–20*) | Reproducible execution for Licensee's CISO of the **5 Adversarial Acceptance Proofs** (malicious prompt injection veto, unauthorized deletion interception `AUTH_002`/`AUTH_007`, TOCTOU race immunity, and `SIGKILL` crash idempotency `AUTH_003`/`AUTH_006`). | Automated suites `admission_capability_test` (`test_fl008`), `nemesis_wave4`, and atomic `0700` quarantine `.babylon/quarantine/` with RFC 9942 `COSE_Sign1` receipts. |",
+      "context_sha256": "68da77ace04b5db3fee17f081bde4e49415cbb38c076ae4ed1d7466bb2c191a2"
+    },
+    {
+      "path": "contracts/ENTERPRISE_LICENSE.md",
+      "symbol": "babylon_top",
+      "kind": "literal",
+      "reason": "Nombre del binario Rust declarado en Cargo.toml cuya implementación reside en src/bin/babylon_top.rs.",
+      "evidence": "| **1. Primary Epoch Arbiter (`Layer-0 EL0`)** | 64-byte `SharedManifest` (`#[repr(C, align(64))]`) + SPMC Seqlock protocol + `babylon_top` binary. | One cluster corresponds to **1 authority domain and monotonic epoch** ($\\mathcal{T}_{\\text{auth}}$ 7-tuple). Environments with distinct security policies (*Development/CI*, *Staging/Pre-Production*, *Critical Production*) cannot share the same shared-memory manifest or epoch without violating `L3_ISOLATION`. |",
+      "context_sha256": "acdf9ac6b64593bfe3bfbf93ca660fd0ac0f31ee0045130047ef9a5ee9e40da7"
+    },
+    {
+      "path": "contracts/ENTERPRISE_LICENSE.md",
+      "symbol": "test_fl008",
+      "kind": "literal",
+      "reason": "Prefijo abreviado de las pruebas Rust test_fl008_* en tests/admission_capability_test.rs y tests/nemesis_wave3.rs.",
+      "evidence": "| **Week 3: Adversarial Acceptance Simulation (The 5 Proofs)** (*Days 13–20*) | Reproducible execution for Licensee's CISO of the **5 Adversarial Acceptance Proofs** (malicious prompt injection veto, unauthorized deletion interception `AUTH_002`/`AUTH_007`, TOCTOU race immunity, and `SIGKILL` crash idempotency `AUTH_003`/`AUTH_006`). | Automated suites `admission_capability_test` (`test_fl008`), `nemesis_wave4`, and atomic `0700` quarantine `.babylon/quarantine/` with RFC 9942 `COSE_Sign1` receipts. |",
+      "context_sha256": "68da77ace04b5db3fee17f081bde4e49415cbb38c076ae4ed1d7466bb2c191a2"
+    },
+    {
+      "path": "contracts/IP_PROVENANCE.md",
+      "symbol": "TurbineEngine",
+      "kind": "external",
+      "reason": "Symbol from external repository micro-axiom-0 compared during IP provenance verification.",
+      "evidence": "External micro-axiom-0 provenance comparison",
+      "context_sha256": "cc4d1243831e70a98ec95a67392813a3b87f360d266806a832e8a6158d56306f"
+    },
+    {
+      "path": "contracts/IP_PROVENANCE.md",
+      "symbol": "aesop",
+      "kind": "external",
+      "reason": "Librería externa de automatización del ecosistema Lean 4 bajo .lake/packages/ (excluida del escaneo de código propio).",
+      "evidence": "- **Dependencias del árbol Lake (`.lake/packages/`):** **611 archivos `.lean`** (~162.867 LOC) correspondientes a librerías certificadas del ecosistema Lean 4 (`batteries` [305], `aesop` [254], `proofwidgets` [37], `alloy` [15]) bajo licencia Apache-2.0.",
+      "context_sha256": "4126686adad52c22369ac2aeeb8f22e7fddeca71e8db9cd0af69e87e573d7aa4"
+    },
+    {
+      "path": "contracts/IP_PROVENANCE.md",
+      "symbol": "alloy",
+      "kind": "external",
+      "reason": "Librería externa FFI/C del ecosistema Lean 4 bajo .lake/packages/ (excluida del escaneo de código propio).",
+      "evidence": "- **Dependencias del árbol Lake (`.lake/packages/`):** **611 archivos `.lean`** (~162.867 LOC) correspondientes a librerías certificadas del ecosistema Lean 4 (`batteries` [305], `aesop` [254], `proofwidgets` [37], `alloy` [15]) bajo licencia Apache-2.0.",
+      "context_sha256": "4126686adad52c22369ac2aeeb8f22e7fddeca71e8db9cd0af69e87e573d7aa4"
+    },
+    {
+      "path": "contracts/IP_PROVENANCE.md",
+      "symbol": "batteries",
+      "kind": "external",
+      "reason": "Librería estándar extendida del ecosistema Lean 4 bajo .lake/packages/ (excluida del escaneo de código propio).",
+      "evidence": "- **Dependencias del árbol Lake (`.lake/packages/`):** **611 archivos `.lean`** (~162.867 LOC) correspondientes a librerías certificadas del ecosistema Lean 4 (`batteries` [305], `aesop` [254], `proofwidgets` [37], `alloy` [15]) bajo licencia Apache-2.0.",
+      "context_sha256": "4126686adad52c22369ac2aeeb8f22e7fddeca71e8db9cd0af69e87e573d7aa4"
+    },
+    {
+      "path": "contracts/IP_PROVENANCE.md",
+      "symbol": "proofwidgets",
+      "kind": "external",
+      "reason": "Librería externa de widgets del ecosistema Lean 4 bajo .lake/packages/ (excluida del escaneo de código propio).",
+      "evidence": "- **Dependencias del árbol Lake (`.lake/packages/`):** **611 archivos `.lean`** (~162.867 LOC) correspondientes a librerías certificadas del ecosistema Lean 4 (`batteries` [305], `aesop` [254], `proofwidgets` [37], `alloy` [15]) bajo licencia Apache-2.0.",
+      "context_sha256": "4126686adad52c22369ac2aeeb8f22e7fddeca71e8db9cd0af69e87e573d7aa4"
+    },
+    {
+      "path": "crates/eridu-infer/AGENTS.md",
+      "symbol": "INV_C5_ARGON_GOVERNANCE",
+      "kind": "document_contract",
+      "reason": "Identificador de invariante normativa de presupuesto de tokens y anti-exploración.",
+      "evidence": "## 3. Exploration Restrictions (`INV_C5_ARGON_GOVERNANCE`)",
+      "context_sha256": "aec37956bc5c9eeae147648f16802d244477aeafdf18733695280139afaa9064"
+    },
+    {
+      "path": "crates/eridu-infer/SPEC.md",
+      "symbol": "MTLStorageModeShared",
+      "kind": "external",
+      "reason": "Constante del framework Metal de Apple para almacenamiento en memoria unificada.",
+      "evidence": "- **Alineación de Memoria Unificada (UMA):** Bloques de tensores y pools de buffers alineados estrictamente a páginas de 16 KB (Darwin ARM64) y líneas de 128 bytes, garantizando paso de punteros directos a Metal Shaders (`MTLStorageModeShared`) con factor de copia cero ($RFO = 0$).",
+      "context_sha256": "af5fe45192cd0e28016499ef3ca9bbacd5684723187b572b98d92dc7282e010f"
+    },
+    {
+      "path": "docs/01_spec/ERRATA_RELEASE_v5_1_0.md",
+      "symbol": "FL_014_wave4_receipt_loss_and_closure_drift",
+      "kind": "document_contract",
+      "reason": "Identificador de claim/control en evidence.json y claims.lock.",
+      "evidence": "| `FL_014_wave4_receipt_loss_and_closure_drift` | `00_ABZU_KERNEL` | `verified_local` | Ante `SIGKILL` entre syscall físico y recibo (`FL014_RECEIPT_LOSS`), bloquea reintentos automáticos ciegos (`AmbiguousOutcomeRequiresReconciliation`) y reconcilia contra testigo físico de inodo; invalida permisos ante deriva transitiva, rollback de política o carga dinámica (`FL015_TRANSITIVE_DRIFT` / `FL015_POLICY_ROLLBACK` / `FL015_RUNTIME_LOAD`, distintos del ensayo de fuga semántica `FL-015` de Wave III en `tests/nemesis_wave3.rs`). |",
+      "context_sha256": "93c68657ab443cdf49544ecd40a1ea3ff54afacf45cb4876d98f645e372ea032"
+    },
+    {
+      "path": "docs/01_spec/ERRATA_RELEASE_v5_1_0.md",
+      "symbol": "FL_016_owasp_acs_vop1_and_drift_guard",
+      "kind": "document_contract",
+      "reason": "Identificador de claim/control en evidence.json y claims.lock.",
+      "evidence": "| `FL_016_owasp_acs_vop1_and_drift_guard` | `00_ABZU_KERNEL` | `verified_local` | `BabylonAcsGuard` aplica controles sobre sockets Unix verificados por peer, rechaza configuraciones Fail-Open con `0xDEAD_6060`, reconcilia estados `UNKNOWN` contra testigos físicos e invalida capacidades ante deriva (`BabylonDriftGuard`). |",
+      "context_sha256": "aeb11240c331d6b8211ac603c78f6812656f7508f4441b65d17ca84b012be993"
+    },
+    {
+      "path": "docs/01_spec/ERRATA_RELEASE_v5_1_0.md",
+      "symbol": "heterogeneous_verification_quorum",
+      "kind": "document_contract",
+      "reason": "Identificador de claim/control en evidence.json y claims.lock.",
+      "evidence": "| `heterogeneous_verification_quorum` | `00_ABZU_KERNEL` | `verified_local` | Quórum heterogéneo local 2/3 de verificación sobre 3 motores (Rust, Lean 4, Z3); no constituye consenso BFT distribuido en red. |",
+      "context_sha256": "fab28cb32fa826156c3f590368830386760f94d047b9121cb74e945c9e443bb6"
+    },
+    {
+      "path": "docs/01_spec/ERRATA_RELEASE_v5_1_0.md",
+      "symbol": "mcp_seatbelt_confinement",
+      "kind": "document_contract",
+      "reason": "Identificador de claim/control en evidence.json y claims.lock.",
+      "evidence": "| `mcp_seatbelt_confinement` | `01_KISH_ENGINE` | `verified_local` | El backend MCP en macOS verifica el protocolo stdio real y el confinamiento Seatbelt antes de admitir un candidato, con ejecución acotada y rechazo fail-closed. |",
+      "context_sha256": "65d15fb7f04d00bb5f56b858c01006b0d63df059acfd6cb988ebcd67bf56a6c5"
+    },
+    {
+      "path": "docs/01_spec/ERRATA_RELEASE_v5_1_0.md",
+      "symbol": "sharur_100_swarm_concurrency",
+      "kind": "document_contract",
+      "reason": "Identificador de claim/control en evidence.json y claims.lock.",
+      "evidence": "| `sharur_100_swarm_concurrency` | `02_EDIN_SWARMS` | `verified` | Enjambre de 100 workers concurrentes sostiene contención sobre el ledger, aplica `AX-0` y rechaza en modo fail-closed los 50 vectores adversariales del arnés. |",
+      "context_sha256": "2fb2aefce892eda1ff6f85ed1acc637ba09706f40b98d83d023342a4c312b20d"
+    },
+    {
+      "path": "docs/01_spec/ERRATA_RELEASE_v5_1_0.md",
+      "symbol": "signed_dispatch_intent",
+      "kind": "document_contract",
+      "reason": "Identificador de claim/control en evidence.json y claims.lock.",
+      "evidence": "| `signed_dispatch_intent` | `00_ABZU_KERNEL` | `verified_local` | La verificación P-256 vincula el intent CBOR canónico completo y consume su nonce en SQLite WAL/FULL antes del despacho, rechazando replay post-`SIGKILL`. |",
+      "context_sha256": "4f4b8a8e9696bf2deb45faa6db125dc71b5812b980b995eb4fec3d9bb2b5eb99"
+    },
+    {
+      "path": "docs/01_spec/ERRATA_RELEASE_v5_1_0.md",
+      "symbol": "tamkarum_budget_gate",
+      "kind": "document_contract",
+      "reason": "Identificador de claim/control en evidence.json y claims.lock.",
+      "evidence": "| `tamkarum_budget_gate` | `01_KISH_ENGINE` | `verified` | `KudurruBudgetGate` verifica layout de 64 bytes, cotas de Kelly y parada `0xDEAD_6060`. |",
+      "context_sha256": "97a4fd09cc240b54850b12e8d8bf2f7626dd69b34065c4c36799281ddc676cd1"
+    },
+    {
+      "path": "docs/01_spec/ERRATA_RELEASE_v5_1_0.md",
+      "symbol": "worm_durability",
+      "kind": "document_contract",
+      "reason": "Identificador de claim/control en evidence.json y claims.lock.",
+      "evidence": "| `worm_durability` | `00_ABZU_KERNEL` | `verified_in_memory` | `HashChainedLedger` en memoria detecta alteraciones criptográficas en la cadena de hashes. |",
+      "context_sha256": "8aa3050c78c6c927c33f798bcf3ead5e4fc79e06b33cf2d00ede8ca5ae97fd7e"
+    },
+    {
+      "path": "docs/01_spec/INVARIANTS_RED_TEAM_FALSIFICATION.md",
+      "symbol": "CASPAL",
+      "kind": "external",
+      "reason": "Instrucción atómica ARMv8.2-A LSE de 128 bits referenciada en la documentación de arquitectura.",
+      "evidence": "En arquitecturas de memoria débilmente ordenada (ARMv8.2-A / Apple Silicon), las operaciones atómicas de 128 bits requieren `CASPAL` (LSE), no la instrucción x86 `cmpxchg16b`. Asimismo, si el registro de entrada en la época actual escribe `local_epoch.store(global_epoch, Ordering::Release)` e inmediatamente lee el puntero compartido con `shared_ptr.load(Ordering::Acquire)`, el hardware puede reordenar el par STLR seguido de LDAR a direcciones distintas a menos que se fuerce una barrera completa `core::sync::atomic::fence(Ordering::SeqCst)` (instrucción `DMB ISH`).",
+      "context_sha256": "acf4f9c743913e194127e02dbf37b576e8218a9f29e35e7d29c0e5b7f3c1e010"
+    },
+    {
+      "path": "docs/01_spec/INVARIANTS_RED_TEAM_FALSIFICATION.md",
+      "symbol": "INV_C5_BATCH_AMORTIZATION",
+      "kind": "document_contract",
+      "reason": "Identificador normativo de invariante documentada en docs/03_guides/agent_contracts.md; no es un símbolo ejecutable.",
+      "evidence": "2. **Amortización Estructural de Lote (`INV_C5_BATCH_AMORTIZATION`):** Prohibido el consenso LARSA y el `F_FULLFSYNC` por evento individual en el hot-path. El motor impone $B \\ge B^*$ calculado según la calibración de latencia del hardware host, restaurando $\\eta_{\\text{exergía}} \\ge 95\\%$.",
+      "context_sha256": "58e4361b7aae691995e779c19d2242e5e4cd9f6a47fe54404abc00bf794177c0"
+    },
+    {
+      "path": "docs/01_spec/INVARIANTS_RED_TEAM_FALSIFICATION.md",
+      "symbol": "INV_C5_COGNITIVE_FRICTION",
+      "kind": "document_contract",
+      "reason": "Identificador normativo de invariante documentada en docs/03_guides/agent_contracts.md; no es un símbolo ejecutable.",
+      "evidence": "2. **Protocolo de Fricción Cognitiva en la Interfaz (`INV_C5_COGNITIVE_FRICTION`):** Para acciones de alto riesgo que requieran firma humana en el ledger L5, el kernel debe rechazar confirmaciones booleanas simples (ACK) o firmas emitidas con latencia inferior al umbral fisiológico de lectura cognitiva ($\\Delta t_{\\text{human}} < \\tau_{\\min} = 1.0\\text{ s}$), exigiendo que el operador firme un compromiso contrafactual junto con una línea de parada de hardware (*kill-switch* en Ring-0 independiente del quórum BFT).",
+      "context_sha256": "dbe3e4da5424dfbd587bd56dc13b413a791e9a01e77bdbb4918f33e6aac0fdf4"
+    },
+    {
+      "path": "docs/01_spec/INVARIANTS_RED_TEAM_FALSIFICATION.md",
+      "symbol": "INV_C5_EPOCH_DMB_FENCE",
+      "kind": "document_contract",
+      "reason": "Identificador normativo de invariante documentada en docs/03_guides/agent_contracts.md; no es un símbolo ejecutable.",
+      "evidence": "3. **Barrera Secuencial Explícita (`INV_C5_EPOCH_DMB_FENCE`):** Todo anclaje de época emite `core::sync::atomic::fence(Ordering::SeqCst)` (`DMB ISH` en ARM64) entre la escritura de la época local del hilo y la primera carga del puntero atómico compartido. Validar en CI bajo `cargo +nightly miri test -Zmiri-strict-provenance -Zmiri-symbolic-alignment-check`.",
+      "context_sha256": "4abe58c8250a0bdc13b7625871e82f0535e816e1cdaed4d43b1228a959f32afa"
+    },
+    {
+      "path": "docs/01_spec/INVARIANTS_RED_TEAM_FALSIFICATION.md",
+      "symbol": "INV_C5_EVIDENTIARY_DELIMITATION",
+      "kind": "document_contract",
+      "reason": "Identificador normativo de invariante documentada en docs/03_guides/agent_contracts.md; no es un símbolo ejecutable.",
+      "evidence": "1. **Delimitación Epistémica en el Expediente Técnico (`INV_C5_EVIDENTIARY_DELIMITATION`):** Circunscribir formalmente el alcance de SCITT L5 y LARSA-120 al cumplimiento del Artículo 12 (Trazabilidad y Registro Forense) y del Artículo 15 (Ciberseguridad y Resiliencia). Prohibir en la documentación y contratos cualquier reclamo de que la verificación de tipos o el árbol de Merkle automatizan los Artículos 9, 10 o 14 ([`agent_contracts.md` (Ring-3)](../03_guides/agent_contracts.md#ring-3)).",
+      "context_sha256": "97ce19f7d4ae171c5fc7190f52b8de498cd059344d5b2525ffee16b6f239b09c"
+    },
+    {
+      "path": "docs/01_spec/INVARIANTS_RED_TEAM_FALSIFICATION.md",
+      "symbol": "INV_C5_SMT_PCC_OUT_OF_BAND",
+      "kind": "document_contract",
+      "reason": "Identificador normativo de invariante documentada en docs/03_guides/agent_contracts.md; no es un símbolo ejecutable.",
+      "evidence": "3. **Extirpación de Z3 del Hot-Path (*Proof-Carrying Code Out-of-Band*, `INV_C5_SMT_PCC_OUT_OF_BAND`):** El solver SMT jamás puede ejecutarse dentro del bucle del kernel en Ring-0. Si se requiere resolución SMT, el productor externo debe ejecutar Z3 fuera de línea para generar un certificado de prueba verificable (formato Alethe o LRAT), y el kernel únicamente ejecuta un verificador de certificados lineal determinista en tiempo $\\mathcal{O}(|\\pi|)$ con techo estricto de pasos. Cualquier certificado que supere $K$ pasos es rechazado en tiempo constante sin invocar búsqueda heurística.",
+      "context_sha256": "e7a604667a43016ca86bb9b386696354bc14dc5974cf823921957ead716a9b91"
+    },
+    {
+      "path": "docs/01_spec/INVARIANTS_RED_TEAM_FALSIFICATION.md",
+      "symbol": "INV_C5_ZERO_POINTER_FFI",
+      "kind": "document_contract",
+      "reason": "Identificador normativo de invariante documentada en docs/03_guides/agent_contracts.md; no es un símbolo ejecutable.",
+      "evidence": "1. **Veto absoluto a Guard, `Arc` y Punteros Crudos en C-FFI (`INV_C5_ZERO_POINTER_FFI`):** Ninguna función `extern \"C\"` puede devolver un puntero crudo, mantener un `epoch::Guard` o cruzar con `Arc<T>`. El cruce FFI opera exclusivamente por copia de valor acotada en buffers preasignados por el llamador o mediante Generational Arena Handles de 64 bits (`(u32 idx, u32 gen)`), resolviendo el acceso dentro de una clausura síncrona en Rust.",
+      "context_sha256": "1c26a6268d741df4f5c6bf11151579dd74dbc13ce388d2677caed91573a620c9"
+    },
+    {
+      "path": "docs/01_spec/INVARIANTS_RED_TEAM_FALSIFICATION.md",
+      "symbol": "LDADDAL",
+      "kind": "external",
+      "reason": "Instrucción atómica ARM64 LSE de suma con adquisición/liberación referenciada en la documentación de arquitectura.",
+      "evidence": "Un hilo suspendido por el sistema operativo o detenido en el GC/GIL externo **no tiene la CPU**; por tanto, no puede autoevaluar si ha superado un timeout local ($\\tau_{\\max}$) para disparar su propia apoptosis. La apoptosis debe ser disparada de forma **asimétrica por los productores de Ring-0** al detectar que el tick lógico o registro de hardware (`cntvct_el0` en ARM64) del slot FFI ha vencido. Asimismo, transferir `Arc::into_raw` a través de C-FFI delega la liberación a finalizadores de GC (`PyCapsule_Destructor`, `napi_finalize`) con latencia no determinista, inyectando instrucciones atómicas `LDADDAL` que contaminan el bus de coherencia.",
+      "context_sha256": "0cfb34a6951a6545e8daa190037d520138ba93f16f8768ed9cbb48aca27c55a8"
+    },
+    {
+      "path": "docs/01_spec/INVARIANTS_RED_TEAM_FALSIFICATION.md",
+      "symbol": "PyCapsule_Destructor",
+      "kind": "external",
+      "reason": "Callback destructor externo de la C-API de CPython.",
+      "evidence": "Un hilo suspendido por el sistema operativo o detenido en el GC/GIL externo **no tiene la CPU**; por tanto, no puede autoevaluar si ha superado un timeout local ($\\tau_{\\max}$) para disparar su propia apoptosis. La apoptosis debe ser disparada de forma **asimétrica por los productores de Ring-0** al detectar que el tick lógico o registro de hardware (`cntvct_el0` en ARM64) del slot FFI ha vencido. Asimismo, transferir `Arc::into_raw` a través de C-FFI delega la liberación a finalizadores de GC (`PyCapsule_Destructor`, `napi_finalize`) con latencia no determinista, inyectando instrucciones atómicas `LDADDAL` que contaminan el bus de coherencia.",
+      "context_sha256": "0cfb34a6951a6545e8daa190037d520138ba93f16f8768ed9cbb48aca27c55a8"
+    },
+    {
+      "path": "docs/01_spec/INVARIANTS_RED_TEAM_FALSIFICATION.md",
+      "symbol": "cmpxchg16b",
+      "kind": "external",
+      "reason": "Instrucción atómica x86-64 de 128 bits referenciada en la documentación de arquitectura.",
+      "evidence": "En arquitecturas de memoria débilmente ordenada (ARMv8.2-A / Apple Silicon), las operaciones atómicas de 128 bits requieren `CASPAL` (LSE), no la instrucción x86 `cmpxchg16b`. Asimismo, si el registro de entrada en la época actual escribe `local_epoch.store(global_epoch, Ordering::Release)` e inmediatamente lee el puntero compartido con `shared_ptr.load(Ordering::Acquire)`, el hardware puede reordenar el par STLR seguido de LDAR a direcciones distintas a menos que se fuerce una barrera completa `core::sync::atomic::fence(Ordering::SeqCst)` (instrucción `DMB ISH`).",
+      "context_sha256": "acf4f9c743913e194127e02dbf37b576e8218a9f29e35e7d29c0e5b7f3c1e010"
+    },
+    {
+      "path": "docs/01_spec/INVARIANTS_RED_TEAM_FALSIFICATION.md",
+      "symbol": "defer_destroy",
+      "kind": "external",
+      "reason": "Operación externa de Epoch-Based Reclamation (crossbeam-epoch) citada como referencia de diseño.",
+      "evidence": "En la recolección basada en épocas (Epoch-Based Reclamation, con épocas modulares $\\mathcal{E} \\in \\{0, 1, 2\\}$), el avance de la época global $\\mathcal{E}_G$ exige que todos los hilos activos con un Guard fijado en $\\mathcal{E}_{G-1}$ salgan de su sección crítica. Si un hilo gestionado por un runtime externo (Python bajo el GIL, o JVM/Go con pausas Stop-The-World de GC) cruza la frontera C-FFI, adquiere un Guard (o retiene un descriptor vinculado a una época activa) y es suspendido por el planificador del lenguaje huésped al liberar el GIL o esperar un Future de I/O, la época local de ese hilo queda congelada indefinidamente. Un único hilo extranjero bloqueado impide que $\\mathcal{E}_G$ avance en todo el kernel; las listas de retiro (`defer_destroy` / limbo bags) de todos los núcleos productores crecen de forma monótona a razón de $\\mathcal{O}(\\lambda_{\\text{alloc}} \\cdot \\Delta t_{\\text{bloq}})$, agotando la memoria física disponible (OOM) aunque el 99% de los núcleos operen sin contención.",
+      "context_sha256": "f72fe7cdbd6fbae366700acb23541f834537ea44e5130d05bc0af12db88774fe"
+    },
+    {
+      "path": "docs/01_spec/INVARIANTS_RED_TEAM_FALSIFICATION.md",
+      "symbol": "napi_finalize",
+      "kind": "external",
+      "reason": "Callback de finalización externo de Node-API (N-API).",
+      "evidence": "Un hilo suspendido por el sistema operativo o detenido en el GC/GIL externo **no tiene la CPU**; por tanto, no puede autoevaluar si ha superado un timeout local ($\\tau_{\\max}$) para disparar su propia apoptosis. La apoptosis debe ser disparada de forma **asimétrica por los productores de Ring-0** al detectar que el tick lógico o registro de hardware (`cntvct_el0` en ARM64) del slot FFI ha vencido. Asimismo, transferir `Arc::into_raw` a través de C-FFI delega la liberación a finalizadores de GC (`PyCapsule_Destructor`, `napi_finalize`) con latencia no determinista, inyectando instrucciones atómicas `LDADDAL` que contaminan el bus de coherencia.",
+      "context_sha256": "0cfb34a6951a6545e8daa190037d520138ba93f16f8768ed9cbb48aca27c55a8"
+    },
+    {
+      "path": "docs/01_spec/INVARIANTS_RED_TEAM_FALSIFICATION.md",
+      "symbol": "native_decide",
+      "kind": "external",
+      "reason": "Táctica estándar del núcleo de Lean 4 evaluada mediante código nativo compilado.",
+      "evidence": "En lógica constructiva y clásica, toda implicación con antecedente contradictorio ($\\forall s, \\text{Pre}(s) \\rightarrow \\text{Post}(s)$ donde $\\neg \\exists s, \\text{Pre}(s)$) es trivialmente verdadera ($\\bot \\rightarrow P$). Si las precondiciones de estado del kernel en Lean 4 contienen restricciones mutuamente excluyentes (por ejemplo, asumir simultáneamente que el buffer SPSC está lleno y que `head == tail` sin bit de paridad de vuelta), el teorema compila con `0 sorry` y `0 admit`, otorgando un certificado matemático falso sobre código inalcanzable o roto. Adicionalmente, el uso de `native_decide` delega la reducción al compilador de código nativo de Lean y su runtime en C, sacando la prueba del kernel verificador e introduciendo toda la cadena de compilación C en la Trusted Computing Base (TCB).",
+      "context_sha256": "69505ef77534eaa4a29dc86b5f18b2dabfa2ad731e26b8d0534083898f9da1bb"
+    },
+    {
+      "path": "docs/01_spec/INVARIANTS_RED_TEAM_FALSIFICATION.md",
+      "symbol": "noalias",
+      "kind": "external",
+      "reason": "Atributo de aliasing de punteros en compiladores LLVM/Rust citado en la matriz de falsación.",
+      "evidence": "El paso de punteros entre Rust y C convirtiendo referencias o punteros a enteros (`ptr as usize` o `uint64_t` devuelto al runtime externo y reconstruido mediante `usize as *mut T`) destruye la procedencia del puntero (*pointer provenance*) bajo los modelos formales Stacked Borrows y Tree Borrows de LLVM/Rust. Cuando el compilador aplica optimizaciones `noalias`, asume que un puntero reconstruido desde un entero no puede aliasar con referencias exclusivas `&mut T` o compartidas activas, generando código máquina que reordena lecturas/escrituras y produce comportamiento indefinido (UB) silencioso.",
+      "context_sha256": "9d319b8837d78ae03ed51e39ca4e4acf7d10288fb7cff08b2555623126265eb4"
+    },
+    {
+      "path": "docs/01_spec/INVARIANTS_RED_TEAM_FALSIFICATION.md",
+      "symbol": "unpin",
+      "kind": "literal",
+      "reason": "Forma abreviada en prosa para la operación ffi_unpin definida en src/shared_manifest_core.rs.",
+      "evidence": "Si `ffi_reader_pin_tick` permanece anclado más de `MAX_FFI_HOLD_TICKS` ticks sin `unpin`, el productor Ring-0 escribe `POISON_SENTINEL` en `control_word` y congela la rotación de `active_idx` hasta reinicio del consumidor (circuit-breaker de frontera FFI).",
+      "context_sha256": "b1220517b3ee04bcb43fd44b29e9dce5819e809653f02ae95f4d1301573a27f2"
+    },
+    {
+      "path": "docs/01_spec/spec_architecture.md",
+      "symbol": "parentRef",
+      "kind": "proposal",
+      "reason": "Campo de protocolo propuesto para enlaces de DAG en esta especificación; distinguido explícitamente de los ledgers actuales.",
+      "evidence": "Aquí `parentRef` exige el campo y formato de referencia definidos por el protocolo; que el digest aparezca en cualquier lugar de un payload no basta para establecer parentesco. `P⁺` es el cierre transitivo. Esta es una definición propuesta para un DAG, no una prueba de causalidad física ni una afirmación de que todos los ledgers actuales implementen ese esquema.",
+      "context_sha256": "17836b50346668a799aa5462d3f2c44de2d884c2055ad4fbe5c47d9b73184a24"
+    },
+    {
+      "path": "docs/01_spec/spec_causal_hitl_governance.md",
+      "symbol": "CapabilityV2",
+      "kind": "proposal",
+      "reason": "Tipo de espacio de capacidades del modelo formal LTS descrito en esta especificación.",
+      "evidence": "- $P, K$: política activa y espacio de capacidades tipadas (`CapabilityV2`).",
+      "context_sha256": "daf765e83b68f01384e118e0079a9c5ff6359073caee791ea5f3e7c3d2315cd0"
+    },
+    {
+      "path": "docs/01_spec/spec_cortex_memory_mcp.md",
+      "symbol": "NODE_PATH",
+      "kind": "external",
+      "reason": "Variable de entorno estándar de Node.js citada en nota técnica sobre resolución de módulos ESM; no es un símbolo del repositorio.",
+      "evidence": "*(Nota Node ESM: `NODE_PATH` no resuelve imports bare de paquetes en módulos ESM nativos `.mjs`; la ejecución requiere que la copia del script se encuentre en un directorio con acceso a `node_modules`)*.",
+      "context_sha256": "ec40c704bcc9868161ef79df6d79d118c51d25fa256fc8535689b1c4566c7997"
+    },
+    {
+      "path": "docs/01_spec/spec_exergy_ontology.md",
+      "symbol": "calc_user_revenue_usd",
+      "kind": "literal",
+      "reason": "Ejemplo ilustrativo de convención de nomenclatura/prefijos en esta especificación; no declara una función local.",
+      "evidence": "`calculateTotalRevenueFromUserTransactions` y `calc_user_revenue_usd` se conservan como ejemplos de nombres con distinto alcance y unidades. Se retiran sus conteos «6» y «3» tokens: no se aportaban tokenizer, versión, entrada exacta ni salida reproducible. Tampoco se infiere menor calidad de atención de una segmentación mayor. Para sostener una mejora se necesita comparar nombres con semántica equivalente, tokenizer/modelo identificados, corpus y métricas de tarea.",
+      "context_sha256": "e4466f72f3b53b0a5d7c2dfd4f9dc5c98c6637cbe52b78eaee2a6da0de68403d"
+    },
+    {
+      "path": "docs/01_spec/spec_exergy_ontology.md",
+      "symbol": "calculateTotalRevenueFromUserTransactions",
+      "kind": "literal",
+      "reason": "Ejemplo ilustrativo de convención de nomenclatura/prefijos en esta especificación; no declara una función local.",
+      "evidence": "`calculateTotalRevenueFromUserTransactions` y `calc_user_revenue_usd` se conservan como ejemplos de nombres con distinto alcance y unidades. Se retiran sus conteos «6» y «3» tokens: no se aportaban tokenizer, versión, entrada exacta ni salida reproducible. Tampoco se infiere menor calidad de atención de una segmentación mayor. Para sostener una mejora se necesita comparar nombres con semántica equivalente, tokenizer/modelo identificados, corpus y métricas de tarea.",
+      "context_sha256": "e4466f72f3b53b0a5d7c2dfd4f9dc5c98c6637cbe52b78eaee2a6da0de68403d"
+    },
+    {
+      "path": "docs/01_spec/spec_exergy_ontology.md",
+      "symbol": "cfg_max_timeout_ms",
+      "kind": "literal",
+      "reason": "Ejemplo ilustrativo de convención de nomenclatura/prefijos en esta especificación; no declara una función local.",
+      "evidence": "| `cfg_` | Configuración | `cfg_max_timeout_ms` |",
+      "context_sha256": "913c3d8bc956e1b0f778dd113f61ec35d53a22b1447366195f65f9c6d96f5832"
+    },
+    {
+      "path": "docs/01_spec/spec_exergy_ontology.md",
+      "symbol": "core_",
+      "kind": "literal",
+      "reason": "Ejemplo ilustrativo de convención de nomenclatura/prefijos en esta especificación; no declara una función local.",
+      "evidence": "| `core_` | Primitivas que se pretende mantener puras | `core_matrix_mul` |",
+      "context_sha256": "7af4f5e5cc182f111a8361bc5d3088278b55b8a4c30a12a518d5a55ff3870499"
+    },
+    {
+      "path": "docs/01_spec/spec_exergy_ontology.md",
+      "symbol": "core_matrix_mul",
+      "kind": "literal",
+      "reason": "Ejemplo ilustrativo de convención de nomenclatura/prefijos en esta especificación; no declara una función local.",
+      "evidence": "| `core_` | Primitivas que se pretende mantener puras | `core_matrix_mul` |",
+      "context_sha256": "7af4f5e5cc182f111a8361bc5d3088278b55b8a4c30a12a518d5a55ff3870499"
+    },
+    {
+      "path": "docs/01_spec/spec_exergy_ontology.md",
+      "symbol": "io_read_wal_chunk",
+      "kind": "literal",
+      "reason": "Ejemplo ilustrativo de convención de nomenclatura/prefijos en esta especificación; no declara una función local.",
+      "evidence": "| `io_` | Disco, red o hardware | `io_read_wal_chunk` |",
+      "context_sha256": "5de3131a682e565209af047e1463e14a59c7ef2ecf0d6bc1bd6cbd0ffb8413ab"
+    },
+    {
+      "path": "docs/01_spec/spec_exergy_ontology.md",
+      "symbol": "mut_append_ledger",
+      "kind": "literal",
+      "reason": "Ejemplo ilustrativo de convención de nomenclatura/prefijos en esta especificación; no declara una función local.",
+      "evidence": "| `mut_` | Operaciones con mutación | `mut_append_ledger` |",
+      "context_sha256": "6406c924ec4763512eb19dd93d110f76e15a2fe56cca140501670263a84244c7"
+    },
+    {
+      "path": "docs/01_spec/spec_exergy_ontology.md",
+      "symbol": "test_ssm_invariants",
+      "kind": "literal",
+      "reason": "Ejemplo ilustrativo de convención de nomenclatura/prefijos en esta especificación; no declara una función local.",
+      "evidence": "| `test_` | Casos de comprobación | `test_ssm_invariants` |",
+      "context_sha256": "7c176da8349fdb41d15073708575a1d39e4a4ce07cf7862c9f36fa12c6f79e17"
+    },
+    {
+      "path": "docs/01_spec/spec_finding_evidence_contract.md",
+      "symbol": "log_digest",
+      "kind": "proposal",
+      "reason": "Campo propuesto para el esquema ReproductionRun en el contrato de evidencia de hallazgos.",
+      "evidence": "| Registro | `log_digest` de stdout/stderr y versión del ejecutor en el `ReproductionRun`. | Reproducibilidad y auditoría. |",
+      "context_sha256": "f367fc01920dac9a5176d68d1411b9411f09e53be465868ad000825d3d712324"
+    },
+    {
+      "path": "docs/01_spec/spec_graph_canonical.md",
+      "symbol": "EncColor",
+      "kind": "proposal",
+      "reason": "Operador matemático de codificación inyectiva del algoritmo 1-WL descrito en esta especificación.",
+      "evidence": "Los dos multiconjuntos separan entradas y salidas; las etiquetas de arista se omiten solo si el dominio no las tiene. `EncColor` representa una codificación no ambigua e inyectiva en el modelo matemático. Un hash de anchura fija es una implementación con posibilidad de colisión, no una función inyectiva sobre todas las entradas. Ambos grafos comparados necesitan el mismo esquema, parámetros, etiquetas iniciales y codificación.",
+      "context_sha256": "df4b9253233cef6ba4209aeb584f674684187b052e47132cc4d3ec7612b479de"
+    },
+    {
+      "path": "docs/01_spec/spec_graph_canonical.md",
+      "symbol": "SIG_OK",
+      "kind": "literal",
+      "reason": "Marcador de ejemplo ilustrativo del perfil; el texto explicita que no es una firma verificable.",
+      "evidence": "`SIG_OK` es un marcador de ejemplo, no una firma verificable. El campo antes denominado SIGNATURE no especificaba una representación autenticada; un digest y un HMAC tampoco son intercambiables con una firma pública.",
+      "context_sha256": "720f3546413c72040adf8da3fc8fded452c2489eab70edd57f45add8bda553e3"
+    },
+    {
+      "path": "docs/01_spec/spec_invariants.md",
+      "symbol": "INV_C5_SEMANTIC_ENTROPY_DUAL_FIREWALL",
+      "kind": "document_contract",
+      "reason": "Etiqueta del contrato o estado definido en documentación; su definición normativa no acredita una implementación.",
+      "evidence": "### 1.6 `INV_C5_SEMANTIC_ENTROPY_DUAL_FIREWALL`: Zero-Float Dual-Firewall Invariant",
+      "context_sha256": "0c82f964aac6624eda8b8cf266aa5695873633ff13f7bf03f7adc43f6fa17446"
+    },
+    {
+      "path": "docs/01_spec/spec_security_model.md",
+      "symbol": "GIT_AUTHOR_DATE",
+      "kind": "external",
+      "reason": "Variable de entorno estándar de Git.",
+      "evidence": "Git conserva fechas configurables mediante `GIT_AUTHOR_DATE` y `GIT_COMMITTER_DATE`; el commit local es una referencia de contenido e historia declarada, no una autoridad de tiempo independiente. [Documentación oficial de Git](https://git-scm.com/docs/git-commit-tree#_date_formats).",
+      "context_sha256": "df5db3a17fdbaaf294a34a9238f2ae67956ec5c024032e1ec69d399f1fc96817"
+    },
+    {
+      "path": "docs/01_spec/spec_security_model.md",
+      "symbol": "GIT_COMMITTER_DATE",
+      "kind": "external",
+      "reason": "Variable de entorno estándar de Git.",
+      "evidence": "Git conserva fechas configurables mediante `GIT_AUTHOR_DATE` y `GIT_COMMITTER_DATE`; el commit local es una referencia de contenido e historia declarada, no una autoridad de tiempo independiente. [Documentación oficial de Git](https://git-scm.com/docs/git-commit-tree#_date_formats).",
+      "context_sha256": "df5db3a17fdbaaf294a34a9238f2ae67956ec5c024032e1ec69d399f1fc96817"
+    },
+    {
+      "path": "docs/01_spec/spec_semantic_entropy_dual_firewall.md",
+      "symbol": "INV_C5_SEMANTIC_ENTROPY_DUAL_FIREWALL",
+      "kind": "document_contract",
+      "reason": "Etiqueta del contrato o estado definido en documentación; su definición normativa no acredita una implementación.",
+      "evidence": "Fuentes locales: [módulo Rust](../../00_ABZU_KERNEL/crates/babylon60-kernel/src/semantic_entropy.rs), [modelo Lean](../../scripts/c5_demos/SemanticEntropyApoptosis.lean) y [test sintético de cuatro cuadrantes](../../00_ABZU_KERNEL/crates/babylon60-kernel/tests/stress_semantic_entropy_100k.rs). Identificador de diseño: `INV_C5_SEMANTIC_ENTROPY_DUAL_FIREWALL`.",
+      "context_sha256": "034b2176aa9f69180618da4591abb912b80236b6c819d038038ebe5d67b3620f"
+    },
+    {
+      "path": "docs/02_ontology/babylon_ontology_v1.md",
+      "symbol": "STALE",
+      "kind": "document_contract",
+      "reason": "Etiqueta del contrato o estado definido en documentación; su definición normativa no acredita una implementación.",
+      "evidence": "- `STALE`: Invalidada por deriva de código, entorno o caducidad temporal.",
+      "context_sha256": "71bafa5aa994fb9465399f0db00b7e6e15889cbf49d5f42e384c0d4f8d3d7a3c"
+    },
+    {
+      "path": "docs/03_guides/agent_contracts.md",
+      "symbol": "AttestationReceipt",
+      "kind": "document_contract",
+      "reason": "Identificador normativo del contrato criptográfico de recibo P-256 en INV_C5_COMPUTER_USE_TRUST_GATEWAY; aún sin declaración homónima en código fuente.",
+      "evidence": "2. *Ticket Criptográfico:* `Desktop.execute` exige `AuthorizedDispatchTicket` con `AttestationReceipt` (SEC1 X9.63 65 B + ECDSA DER del Secure Enclave).",
+      "context_sha256": "8a54898ea6cc35ce5808253354661f5244f56ff749a08402964c6b35e1897b7f"
+    },
+    {
+      "path": "docs/03_guides/agent_contracts.md",
+      "symbol": "BufferError",
+      "kind": "external",
+      "reason": "Excepción estándar de la biblioteca de Python para punteros exportados sobre mmap.",
+      "evidence": "- **Aniquilación Afín en Canales de Memoria Compartida (INV_C5_MMAP_AFFINE_ANNIHILATION):** Todo puente C-ABI sobre `mmap` (`SeqlockSwarmChannel`, `SharedManifest`) DEBE liberar vistas `ctypes` (`close()`, `__exit__`) antes de cerrar `mmap` (evitando `BufferError` en Python 3.14+).",
+      "context_sha256": "09f365cb4a1d82db9d78e98cee58cbfa9e88068b04c382b1ed0b664fdb7a1381"
+    },
+    {
+      "path": "docs/03_guides/agent_contracts.md",
+      "symbol": "E0277",
+      "kind": "external",
+      "reason": "Código de error estándar del compilador rustc para rasgos no satisfechos.",
+      "evidence": "- **Invariante de Agrupación Atómica en Dependencias Multi-Crate (INV_C5_DEPENDENCY_GROUP_ATOMICITY):** Agrupar obligatoriamente en Dependabot/Renovate familias acopladas (`tonic`/`prost`/`tokio`, `rand`/`ed25519-dalek`) evitando fracturas `E0277`.",
+      "context_sha256": "c92d18a2450aec0df1e3b483ae0a41c6d19e19df1eb633aa259f21eb0097095d"
+    },
+    {
+      "path": "docs/03_guides/agent_contracts.md",
+      "symbol": "INV_C5_EPOCH_DMB_FENCE",
+      "kind": "document_contract",
+      "reason": "Identificador normativo de invariante documentada en docs/03_guides/agent_contracts.md; no es un símbolo ejecutable.",
+      "evidence": "- **Veto a Guard, Arc y Cero Punteros en C-FFI (INV_C5_ZERO_POINTER_FFI & INV_C5_ASYMMETRIC_APOPTOSIS):** Prohibido devolver punteros crudos, cruzar con `Arc<T>` (latencia no determinista de finalizadores GC y contaminación `LDADDAL`) o mantener `epoch::Guard` al retornar a través de `extern \"C\"`. El cruce FFI opera exclusivamente por copia de valor en buffers preasignados o mediante Generational Arena Handles de 64 bits (`(u32 idx, u32 gen)`). La apoptosis ante congelación del GIL/GC es disparada de forma asimétrica por el productor de Ring-0 (`INV_C5_ASYMMETRIC_APOPTOSIS`) si `current_tick - pinned_at > MAX_FFI_HOLD_TICKS = 64`. Todo anclaje de época emite `core::sync::atomic::fence(Ordering::SeqCst)` (`DMB ISH` en ARM64, `INV_C5_EPOCH_DMB_FENCE`). Validar en CI con `cargo +nightly miri test -Zmiri-strict-provenance`.",
+      "context_sha256": "c83ea74e0b78fe3bf502d3010e13be470239e904e759d38e07f4b5c10cf471eb"
+    },
+    {
+      "path": "docs/03_guides/agent_contracts.md",
+      "symbol": "INV_C5_SMT_PCC_OUT_OF_BAND",
+      "kind": "document_contract",
+      "reason": "Contract invariant identifier defined in docs/03_guides/agent_contracts.md.",
+      "evidence": "docs/03_guides/agent_contracts.md#ring-1",
+      "context_sha256": "e66f7674b35ced390503c2e47942400fc5243b3aad9e6e45b0dc9640a3880cf0"
+    },
+    {
+      "path": "docs/03_guides/agent_contracts.md",
+      "symbol": "LDADDAL",
+      "kind": "external",
+      "reason": "Instrucción atómica ARM64 LSE de suma con adquisición/liberación referenciada en la documentación de arquitectura.",
+      "evidence": "- **Veto a Guard, Arc y Cero Punteros en C-FFI (INV_C5_ZERO_POINTER_FFI & INV_C5_ASYMMETRIC_APOPTOSIS):** Prohibido devolver punteros crudos, cruzar con `Arc<T>` (latencia no determinista de finalizadores GC y contaminación `LDADDAL`) o mantener `epoch::Guard` al retornar a través de `extern \"C\"`. El cruce FFI opera exclusivamente por copia de valor en buffers preasignados o mediante Generational Arena Handles de 64 bits (`(u32 idx, u32 gen)`). La apoptosis ante congelación del GIL/GC es disparada de forma asimétrica por el productor de Ring-0 (`INV_C5_ASYMMETRIC_APOPTOSIS`) si `current_tick - pinned_at > MAX_FFI_HOLD_TICKS = 64`. Todo anclaje de época emite `core::sync::atomic::fence(Ordering::SeqCst)` (`DMB ISH` en ARM64, `INV_C5_EPOCH_DMB_FENCE`). Validar en CI con `cargo +nightly miri test -Zmiri-strict-provenance`.",
+      "context_sha256": "c83ea74e0b78fe3bf502d3010e13be470239e904e759d38e07f4b5c10cf471eb"
+    },
+    {
+      "path": "docs/03_guides/agent_contracts.md",
+      "symbol": "native_decide",
+      "kind": "external",
+      "reason": "Táctica estándar del núcleo de Lean 4 evaluada mediante código nativo compilado.",
+      "evidence": "- **Isomorfismo de Ancho Fijo y No-Vacuidad (INV_C5_BITVEC_SOUNDNESS & INV_C5_NON_VACUITY_WITNESS):** Prohibir `Nat` o `Int` con GMP en especificaciones extraídas hacia Rust (`Lean4Emitter`); toda aritmética verificada debe formularse en `BitVec 64`/`32` con semántica modular equivalente a `u64::wrapping_*`. Todo teorema de seguridad $\\forall s, \\text{Inv}(s) \\to \\text{Safe}(\\text{step}(s))$ exige un testigo adjunto `theorem inv_inhabited : ∃ s, Inv s` probado constructivamente, con veto a `Classical.choice` y `native_decide` en TCB.",
+      "context_sha256": "530d1abf5e72e00ae6ed0be6f6817353d16afff1df3e79d1f2ae1ff93e6657bc"
+    },
+    {
+      "path": "docs/03_guides/guide_agent_workflow.md",
+      "symbol": "INV_C5_AUTONOMOUS_FORENSIC_RECOVERY",
+      "kind": "document_contract",
+      "reason": "Identificador normativo de invariante documentada en docs/03_guides/agent_contracts.md; no es un símbolo ejecutable.",
+      "evidence": "| Exploración y preguntas | Acotada en AGENTS y `INV_C5_AUTONOMOUS_FORENSIC_RECOVERY`. | Buscar primero en fuentes pertinentes; ampliar por indicios, sin exigir todos los históricos. |\n| GOB-03 | passed | [Exploración y bloqueos](../../AGENTS.md#ejecución); alcance acotado de `INV_C5_AUTONOMOUS_FORENSIC_RECOVERY`. |",
+      "context_sha256": "70c8f0f74d83473d4f28de2aa324ac7430f758138dfd8cfefd8a8c86c262a582"
+    },
+    {
+      "path": "docs/03_guides/guide_agent_workflow.md",
+      "symbol": "INV_C5_CI_FALSIFICATION",
+      "kind": "document_contract",
+      "reason": "Identificador normativo de invariante documentada en docs/03_guides/agent_contracts.md; no es un símbolo ejecutable.",
+      "evidence": "| CI (`INV_C5_CI_FALSIFICATION`) | Acotada a evaluar CI o una revisión. | Contrastar commit y ejecución, no badges ni ejecuciones de otra revisión. |",
+      "context_sha256": "15b5632104ca70eb55256d9350b7cb00df23cb2358e386967d5eb62eb7bb17d5"
+    },
+    {
+      "path": "docs/03_guides/guide_agent_workflow.md",
+      "symbol": "INV_C5_DEEP_ACOPLE",
+      "kind": "document_contract",
+      "reason": "Identificador normativo de invariante documentada en docs/03_guides/agent_contracts.md; no es un símbolo ejecutable.",
+      "evidence": "| Fuentes académicas (`INV_C5_DEEP_ACOPLE`) | Preferencia por estructura; PDF permitido. | Conservar fórmulas/figuras y procedencia; un artículo no obliga a implementar un PoC. |",
+      "context_sha256": "30710ba3131078123f2616e22b516d8798d1c345679feeb4e22adae4e18a173c"
+    },
+    {
+      "path": "docs/03_guides/guide_agent_workflow.md",
+      "symbol": "INV_C5_SOVEREIGN_ANTIGRAVITY",
+      "kind": "document_contract",
+      "reason": "Identificador normativo de invariante documentada en docs/03_guides/agent_contracts.md; no es un símbolo ejecutable.",
+      "evidence": "| Local-first (`INV_C5_SOVEREIGN_ANTIGRAVITY`) | Preferencia; Rust conserva su ámbito arquitectónico. | Verificar requisitos, recuperación y medidas; ningún lenguaje acredita continuidad. |",
+      "context_sha256": "7093b6dad74a1c428e27f0b7bb80ac6f5ba749526e0c3e437b2657035cd28619"
+    },
+    {
+      "path": "docs/03_guides/guide_babylon60_complete.md",
+      "symbol": "Enter",
+      "kind": "literal",
+      "reason": "Valor, tecla, nombre ilustrativo o etiqueta documental; no declara una función o clase local.",
+      "evidence": "* **Fast Submit Keybinding**: Pressing **`Enter`** in the prompt textarea triggers immediate prompt execution. Pressing **`Shift + Enter`** inserts a standard newline.",
+      "context_sha256": "0256bd60613255c5ec893513cbd63ff2855239cb956eb8505bfa67f711f685d3"
+    },
+    {
+      "path": "docs/03_guides/guide_primer_bloqueo.md",
+      "symbol": "AWS_CONFIG_FILE",
+      "kind": "external",
+      "reason": "Variable de entorno estándar del CLI/SDK de AWS citada al documentar la política de paso de entorno de run; no declara un símbolo local.",
+      "evidence": "`AWS_PROFILE`, `AWS_REGION`, `AWS_DEFAULT_REGION`, `AWS_CONFIG_FILE` o",
+      "context_sha256": "c3a83165e68fea0835e02c20ecead721723e403deda08ff062f39e4db780c233"
+    },
+    {
+      "path": "docs/03_guides/guide_primer_bloqueo.md",
+      "symbol": "AWS_DEFAULT_REGION",
+      "kind": "external",
+      "reason": "Variable de entorno estándar del CLI/SDK de AWS citada al documentar la política de paso de entorno de run; no declara un símbolo local.",
+      "evidence": "`AWS_PROFILE`, `AWS_REGION`, `AWS_DEFAULT_REGION`, `AWS_CONFIG_FILE` o",
+      "context_sha256": "c3a83165e68fea0835e02c20ecead721723e403deda08ff062f39e4db780c233"
+    },
+    {
+      "path": "docs/03_guides/guide_primer_bloqueo.md",
+      "symbol": "AWS_PROFILE",
+      "kind": "external",
+      "reason": "Variable de entorno estándar del CLI/SDK de AWS citada al documentar la política de paso de entorno de run; no declara un símbolo local.",
+      "evidence": "`AWS_PROFILE`, `AWS_REGION`, `AWS_DEFAULT_REGION`, `AWS_CONFIG_FILE` o",
+      "context_sha256": "c3a83165e68fea0835e02c20ecead721723e403deda08ff062f39e4db780c233"
+    },
+    {
+      "path": "docs/03_guides/guide_primer_bloqueo.md",
+      "symbol": "AWS_REGION",
+      "kind": "external",
+      "reason": "Variable de entorno estándar del CLI/SDK de AWS citada al documentar la política de paso de entorno de run; no declara un símbolo local.",
+      "evidence": "`AWS_PROFILE`, `AWS_REGION`, `AWS_DEFAULT_REGION`, `AWS_CONFIG_FILE` o",
+      "context_sha256": "c3a83165e68fea0835e02c20ecead721723e403deda08ff062f39e4db780c233"
+    },
+    {
+      "path": "docs/03_guides/guide_primer_bloqueo.md",
+      "symbol": "AWS_ROLE_ARN",
+      "kind": "external",
+      "reason": "Variable de entorno estándar del CLI/SDK de AWS citada al documentar la política de paso de entorno de run; no declara un símbolo local.",
+      "evidence": "`AWS_ROLE_ARN`; `~/.aws` sigue protegido. `run` dice cuáles retira, nunca",
+      "context_sha256": "e29cd76ff1ac442e76ebdb4c638fbf88307425dd3dca150ba2a85b7b1903cf62"
+    },
+    {
+      "path": "docs/03_guides/guide_primer_bloqueo.md",
+      "symbol": "cgroup",
+      "kind": "external",
+      "reason": "Entrada estándar del pseudo-sistema de archivos procfs de Linux (/proc/<pid>/cgroup); no declara un símbolo local.",
+      "evidence": "siendo legible en `/proc/<pid>/cmdline`, igual que su `status`, `cgroup` y",
+      "context_sha256": "db1067ae47ee019b813d6c0ce7c0e66cbb16db8888794aa86e886ae325847edf"
+    },
+    {
+      "path": "docs/03_guides/guide_primer_bloqueo.md",
+      "symbol": "osxkeychain",
+      "kind": "external",
+      "reason": "Helper externo de credenciales de Git en macOS (git-credential-osxkeychain) citado al documentar límites de confinamiento; no declara un símbolo local.",
+      "evidence": "| Firmar commits y credenciales de git | En Linux no funcionan dentro: las claves, los agentes y los almacenes de credenciales quedan fuera. `git commit -S` con gpg: «gpg: signing failed: Permission denied», con o sin `gpg-agent` en marcha. `git credential fill` con `credential.helper=store`: «could not read Username» (`~/.git-credentials` está protegido); con `credential.helper=cache`: «unable to connect to cache daemon: Operation not permitted». Firmar con una clave SSH y `git push` por SSH: `NO_VERIFICADO`, no hay `ssh` en la máquina de medida; `~/.ssh` está protegido (V01) y el socket de `ssh-agent` se niega (V16). En macOS el llavero sigue al alcance por `securityd` (límite declarado arriba): las credenciales de `osxkeychain`, el helper habitual allí, están `NO_VERIFICADO` y probablemente se pueden usar dentro | Linux x86_64, uid 65534, 11-11-2026. macOS: `NO_VERIFICADO` |",
+      "context_sha256": "aea7e1eb9f3d25372f5ef7dddaa679875cd834f545f47acdeedfd4fa11194b63"
+    },
+    {
+      "path": "docs/03_guides/guide_primer_bloqueo.md",
+      "symbol": "securityd",
+      "kind": "external",
+      "reason": "Daemon del sistema operativo macOS (servicio del llavero / Keychain) citado como límite declarado de confinamiento; no declara un símbolo local.",
+      "evidence": "la memoria compartida POSIX y el llavero por `securityd`, que Claude Code\n| Firmar commits y credenciales de git | En Linux no funcionan dentro: las claves, los agentes y los almacenes de credenciales quedan fuera. `git commit -S` con gpg: «gpg: signing failed: Permission denied», con o sin `gpg-agent` en marcha. `git credential fill` con `credential.helper=store`: «could not read Username» (`~/.git-credentials` está protegido); con `credential.helper=cache`: «unable to connect to cache daemon: Operation not permitted». Firmar con una clave SSH y `git push` por SSH: `NO_VERIFICADO`, no hay `ssh` en la máquina de medida; `~/.ssh` está protegido (V01) y el socket de `ssh-agent` se niega (V16). En macOS el llavero sigue al alcance por `securityd` (límite declarado arriba): las credenciales de `osxkeychain`, el helper habitual allí, están `NO_VERIFICADO` y probablemente se pueden usar dentro | Linux x86_64, uid 65534, 11-11-2026. macOS: `NO_VERIFICADO` |",
+      "context_sha256": "d33360c0d63716867f3ac840ecfb82efb28253416fc58578b43ca4adeb5ece72"
+    },
+    {
+      "path": "docs/03_guides/guide_primer_bloqueo.md",
+      "symbol": "uid_map",
+      "kind": "external",
+      "reason": "Interfaz procfs del kernel Linux (/proc/<pid>/uid_map) para espacios de nombres de usuario; no declara un símbolo local.",
+      "evidence": "| Sandbox propio del agente anidado | En Linux se puede crear un espacio de nombres de usuario (`unshare -U true` sale con 0), pero no escribir su `uid_map` (`/proc` está concedido solo en lectura) ni cambiar montajes, y un sandbox anidado como bubblewrap necesita las dos cosas. `unshare -Urm true` funciona sin confinar y confinado responde «unshare: cannot open /proc/self/uid_map: Permission denied»; `unshare -Um true`, «unshare: cannot change root filesystem propagation: Operation not permitted». Claude Code 2.1.322 usa bubblewrap para su sandbox en Linux; bwrap no está instalado aquí, así que el sandbox de Claude Code anidado está `NO_VERIFICADO`, igual que el de Codex y Seatbelt dentro de Seatbelt | Linux x86_64, uid 65534, 11-11-2026 |",
+      "context_sha256": "42238918e4d3004136b47bdfde706f0b4d67af2b98c68bc88a9e2b50313ca9ee"
+    },
+    {
+      "path": "docs/03_guides/guide_primer_bloqueo.md",
+      "symbol": "xcrun_db",
+      "kind": "external",
+      "reason": "Archivo de caché externo de la utilidad xcrun(1) de Apple Xcode/Command Line Tools; no declara un símbolo local.",
+      "evidence": "caché, `xcrun_db`, en el directorio T del usuario, que sigue negado; no",
+      "context_sha256": "9c66312cf4315a5e606d8cb5047cdc00fc923b3cddfca535ee4dc5b217b65d50"
+    },
+    {
+      "path": "docs/03_guides/guide_primer_bloqueo.md",
+      "symbol": "xcrun_nocache",
+      "kind": "external",
+      "reason": "Variable de entorno externa documentada en la página de manual xcrun(1) de Apple; no declara un símbolo local.",
+      "evidence": "`xcrun_nocache` como «no consultar la caché», como `--no-cache`, que,",
+      "context_sha256": "873613a18fb7204f039940cdbaf2da066d89d454d69ef03819af454321b1a27b"
+    },
+    {
+      "path": "docs/03_guides/guide_signed_authorization.md",
+      "symbol": "babylon_authorityd",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": "docs/03_guides/guide_signed_authorization.md#babylon_authorityd",
+      "context_sha256": "88b824525828e4e977f34a0c64bb0a9f47211b2fc9cb08eb0376fb46d4107650"
+    },
+    {
+      "path": "docs/04_audit/deuda_tecnica_t01_ring0_linux_gates.md",
+      "symbol": "ATTESTED_IN_SILICON",
+      "kind": "document_contract",
+      "reason": "Etiqueta de estado epistémico de la invariante INV_C5_HUME_GUILLOTINE.",
+      "evidence": "- **INV_C5_HUME_GUILLOTINE:** Prohibido declarar verificado en silicio (`ATTESTED_IN_SILICON`) aquello que en tiempo de ejecución solo devuelve una constante o mock configurado.",
+      "context_sha256": "77cc19d8554d1f9a8c446598692d6a7f3badb27d88d12eb406cfcb2cbcc938e1"
+    },
+    {
+      "path": "docs/04_audit/deuda_tecnica_t01_ring0_linux_gates.md",
+      "symbol": "TPM2B_ATTEST",
+      "kind": "proposal",
+      "reason": "Estructura estándar TCG TPM 2.0 pendiente de parser zero-alloc en src/ring0.rs (Deuda Técnica T-01).",
+      "evidence": "1. **Parser de `TPMS_ATTEST`:** Implementar extractor zero-alloc en `src/ring0.rs` que lea la estructura `TPM2B_ATTEST` retornada por `TPM2_Quote`, verifique el magic `TPM_GENERATED_VALUE` (0xFF544347), valide que `extraData` coincida con el digest causal, extraiga la lista de PCRs medidos y confirme coincidencia con `expected_pcr_composite`.",
+      "context_sha256": "a0dec4bf056e22ed1d46f8ff71e69cc5f7ec917a87a92c76721ea15ed01da6ff"
+    },
+    {
+      "path": "docs/04_audit/deuda_tecnica_t01_ring0_linux_gates.md",
+      "symbol": "TPMS_ATTEST",
+      "kind": "proposal",
+      "reason": "Estructura estándar TCG TPM 2.0 pendiente de parser zero-alloc en src/ring0.rs (Deuda Técnica T-01).",
+      "evidence": "1. **Parser de `TPMS_ATTEST`:** Implementar extractor zero-alloc en `src/ring0.rs` que lea la estructura `TPM2B_ATTEST` retornada por `TPM2_Quote`, verifique el magic `TPM_GENERATED_VALUE` (0xFF544347), valide que `extraData` coincida con el digest causal, extraiga la lista de PCRs medidos y confirme coincidencia con `expected_pcr_composite`.",
+      "context_sha256": "a0dec4bf056e22ed1d46f8ff71e69cc5f7ec917a87a92c76721ea15ed01da6ff"
+    },
+    {
+      "path": "docs/04_audit/deuda_tecnica_t01_ring0_linux_gates.md",
+      "symbol": "swtpm",
+      "kind": "external",
+      "reason": "Emulador TPM 2.0 por software externo citado como opción de pruebas en Linux.",
+      "evidence": "> - **TD-RING0-001 (Golden vectors de codificación):** CERRADA (Opción B) vía `src/ring0/wire.rs`. Opciones A (`swtpm`) y C (`mock-nsm`) permanecen ABIERTAS.\n- Pruebas de integración o arnés con emuladores (`tpm2-abrmd`, `swtpm`, o mocks de `/dev/nsm`).\n- Habilitar target CI en Linux utilizando `swtpm` o contenedor Docker con soporte TPM emulado.",
+      "context_sha256": "5c2f66819657d8a467c24c2c6a1dee37c099167b4f47f28fd392378ec2209750"
+    },
+    {
+      "path": "docs/04_research/sota_evolution_roadmap.md",
+      "symbol": "mcp_lsp_apply_workspace_edit",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": "docs/04_research/sota_evolution_roadmap.md#mcp_lsp_apply_workspace_edit",
+      "context_sha256": "53f7d966731d96535c31ae23caf875abaaeb8dd39b586a05b541d03109e8d0bc"
+    },
+    {
+      "path": "docs/04_research/sota_evolution_roadmap.md",
+      "symbol": "mcp_lsp_extract_fn",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": "docs/04_research/sota_evolution_roadmap.md#mcp_lsp_extract_fn",
+      "context_sha256": "53f7d966731d96535c31ae23caf875abaaeb8dd39b586a05b541d03109e8d0bc"
+    },
+    {
+      "path": "docs/04_research/sota_evolution_roadmap.md",
+      "symbol": "mcp_lsp_rename",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": "docs/04_research/sota_evolution_roadmap.md#mcp_lsp_rename",
+      "context_sha256": "53f7d966731d96535c31ae23caf875abaaeb8dd39b586a05b541d03109e8d0bc"
+    },
+    {
+      "path": "docs/04_research/sota_evolution_roadmap.md",
+      "symbol": "pylsp",
+      "kind": "external",
+      "reason": "Servidor LSP externo citado como objetivo del roadmap, no módulo implementado aquí.",
+      "evidence": "* **Descripción:** Implementar un servidor MCP que actúe como proxy hacia `rust-analyzer` (Rust) y `pylsp` (Python).",
+      "context_sha256": "b21586fc710434931b78ab07c5ad6c8dd40b037d2be767e04a051e5f34acaae7"
+    },
+    {
+      "path": "docs/05_compliance_eu_ai_act.md",
+      "symbol": "EU_AI_ACT_AUTHORIZATION_BASE_URL",
+      "kind": "document_contract",
+      "reason": "Variable de entorno de configuración descrita en la especificación de cumplimiento EU AI Act.",
+      "evidence": "La política versionada predeterminada declara `infrastructure`. Para publicar bajo alto riesgo, el operador configura en el entorno protegido `EU_AI_ACT_POLICY_JSON`, incluyendo `release_profile: eu_ai_act_high_risk`, `release_profile_digest`, claves, validación y revocaciones. `EU_AI_ACT_AUTHORIZATION_BASE_URL` señala un endpoint HTTPS controlado por el operador; tras construir el archivo y antes de aprobar `Production`, se deposita el recibo en `<base>/<run_id>/<run_attempt>.json`. No se admiten redirecciones. El transporte no sustituye las firmas.",
+      "context_sha256": "be8315e0b6b32dc22bb0b586f91298dc445b9fd0eb15f8cc8122c055b711f07a"
+    },
+    {
+      "path": "docs/05_compliance_eu_ai_act.md",
+      "symbol": "EU_AI_ACT_POLICY_JSON",
+      "kind": "document_contract",
+      "reason": "Variable de entorno de configuración descrita en la especificación de cumplimiento EU AI Act.",
+      "evidence": "La política versionada predeterminada declara `infrastructure`. Para publicar bajo alto riesgo, el operador configura en el entorno protegido `EU_AI_ACT_POLICY_JSON`, incluyendo `release_profile: eu_ai_act_high_risk`, `release_profile_digest`, claves, validación y revocaciones. `EU_AI_ACT_AUTHORIZATION_BASE_URL` señala un endpoint HTTPS controlado por el operador; tras construir el archivo y antes de aprobar `Production`, se deposita el recibo en `<base>/<run_id>/<run_attempt>.json`. No se admiten redirecciones. El transporte no sustituye las firmas.",
+      "context_sha256": "be8315e0b6b32dc22bb0b586f91298dc445b9fd0eb15f8cc8122c055b711f07a"
+    },
+    {
+      "path": "docs/06_theory/10_physical_realization.md",
+      "symbol": "COUNTER_ACK",
+      "kind": "literal",
+      "reason": "Nombre de señal DSL definido en el ejemplo tools/examples/counter_sync.b60.",
+      "evidence": "El programa [counter_sync.b60](../../tools/examples/counter_sync.b60) se ejecuta con `cargo run --locked --bin babylon60-dsl -- tools/examples/counter_sync.b60`. Dos corrutinas intercambian señales `COUNTER_SYNC` y `COUNTER_ACK`, incrementan sus contadores hasta 59 y terminan con `HALT`.",
+      "context_sha256": "988b8ed3bb68d10c95d46d867f8578303e89e11fe9b154153582816c0f9cba1f"
+    },
+    {
+      "path": "docs/06_theory/10_physical_realization.md",
+      "symbol": "COUNTER_SYNC",
+      "kind": "literal",
+      "reason": "Nombre de señal DSL definido en el ejemplo tools/examples/counter_sync.b60.",
+      "evidence": "El programa [counter_sync.b60](../../tools/examples/counter_sync.b60) se ejecuta con `cargo run --locked --bin babylon60-dsl -- tools/examples/counter_sync.b60`. Dos corrutinas intercambian señales `COUNTER_SYNC` y `COUNTER_ACK`, incrementan sus contadores hasta 59 y terminan con `HALT`.",
+      "context_sha256": "988b8ed3bb68d10c95d46d867f8578303e89e11fe9b154153582816c0f9cba1f"
+    },
+    {
+      "path": "docs/06_theory/AUDIT_LEAN_SCOPE_2026.md",
+      "symbol": "NavierStokesSobolevKato",
+      "kind": "literal",
+      "reason": "Nombre del módulo Lean 4 en proof/lean/NavierStokesSobolevKato.lean.",
+      "evidence": "En `NavierStokesSobolevKato`, los nombres Sobolev/Kato/Grönwall se aplican a desigualdades numéricas cerradas. `millennium_navier_stokes_regular_by_decide` evalúa una conjunción de tres flags suministrados como true. No define velocidad, presión, condiciones iniciales o una norma funcional. Se contrasta ese alcance con el [problema continuo publicado por Clay Mathematics Institute](https://www.claymath.org/millennium/navier-stokes-equation/), sin tratar flags como pruebas analíticas.",
+      "context_sha256": "547f2b265763eaa981eacd14203378e9b0c39e818b1be7edef61651ed6930146"
+    },
+    {
+      "path": "docs/06_theory/AUDIT_LEAN_SCOPE_2026.md",
+      "symbol": "lean4checker",
+      "kind": "external",
+      "reason": "External Lean 4 kernel proof checker CLI cited in validation scope note.",
+      "evidence": "leanprover/lean4checker CLI",
+      "context_sha256": "beeb91cfb1108331f5768fc08f9399e5105b249ceda93ca5b4b76a9bb8a4349d"
+    },
+    {
+      "path": "docs/06_theory/AUDIT_LEAN_SCOPE_2026.md",
+      "symbol": "real_lean",
+      "kind": "literal",
+      "reason": "Forma abreviada en prosa para real_lean_proves_both_verdicts_and_rejects_a_wrong_expectation en crates/b60-lang/tests/lean_harness.rs.",
+      "evidence": "Se añaden `--jit-only` a fsm_poc y `--quick` a fsm_stress para controles acotados, sin cambiar los tamaños de sus recorridos por defecto. Las pruebas Rust del [protocolo y CLI](../../crates/b60-lang/tests/lean_harness.rs) usan sustitutos de proceso aislados para fallos; el test explícito `real_lean` usa la toolchain e imports locales para demostrar ambas igualdades y rechazar una expectativa incompatible. Las recetas están en el [README de Lean](../../proof/lean/README.md#harness-rust-y-controles-de-rechazo).",
+      "context_sha256": "f721e3ed312a178d5a9abd05628e37df282d86c5a051640b49f74da629edf201"
+    },
+    {
+      "path": "docs/06_theory/AUDIT_LEAN_SCOPE_2026.md",
+      "symbol": "trace_reads_even_on_validation",
+      "kind": "historical",
+      "reason": "Editorial alias mapped to B60.Ledger.no_torn_reads_universal in Lean scope audit table.",
+      "evidence": "docs/06_theory/AUDIT_LEAN_SCOPE_2026.md #071",
+      "context_sha256": "80523b7f6aff7d9ff7eef8e2b14bc327845284d41676b63098fae76d23fc20e8"
+    },
+    {
+      "path": "docs/06_theory/CONTINUIDAD_SIN_OBEDIENCIA_TEORIA_ARQUITECTONICA.md",
+      "symbol": "CapabilityToken",
+      "kind": "proposal",
+      "reason": "Tipo del ejemplo de diseño de esta sección, cuya propuesta se distingue explícitamente del runtime actual.",
+      "evidence": "El siguiente ejemplo propone representar cada frontera mediante tipos Rust. `CommittedEffect`, `CapabilityToken` y `PostconditionWitness` son tipos del modelo ilustrativo de esta sección; no son símbolos del runtime actual ni una garantía comprobada en silicio. El fragmento no es un programa autónomo: faltan motores, errores y funciones. `dispatch` solo construye un valor etiquetado y no realiza un efecto; `PostconditionWitness` tiene campos públicos y su presencia no garantiza autenticidad. Consumo por valor no demuestra por sí solo resistencia a replay externo. El contrato propuesto exige controles adicionales:",
+      "context_sha256": "6bb3ec1dabf7d0bbf110b7991a9e311b0560016a6dd83dc77a152641a8d30dd9"
+    },
+    {
+      "path": "docs/06_theory/CONTINUIDAD_SIN_OBEDIENCIA_TEORIA_ARQUITECTONICA.md",
+      "symbol": "CommittedEffect",
+      "kind": "proposal",
+      "reason": "Tipo del ejemplo de diseño de esta sección, cuya propuesta se distingue explícitamente del runtime actual.",
+      "evidence": "El siguiente ejemplo propone representar cada frontera mediante tipos Rust. `CommittedEffect`, `CapabilityToken` y `PostconditionWitness` son tipos del modelo ilustrativo de esta sección; no son símbolos del runtime actual ni una garantía comprobada en silicio. El fragmento no es un programa autónomo: faltan motores, errores y funciones. `dispatch` solo construye un valor etiquetado y no realiza un efecto; `PostconditionWitness` tiene campos públicos y su presencia no garantiza autenticidad. Consumo por valor no demuestra por sí solo resistencia a replay externo. El contrato propuesto exige controles adicionales:",
+      "context_sha256": "6bb3ec1dabf7d0bbf110b7991a9e311b0560016a6dd83dc77a152641a8d30dd9"
+    },
+    {
+      "path": "docs/06_theory/CONTINUIDAD_SIN_OBEDIENCIA_TEORIA_ARQUITECTONICA.md",
+      "symbol": "PostconditionWitness",
+      "kind": "proposal",
+      "reason": "Tipo del ejemplo de diseño de esta sección, cuya propuesta se distingue explícitamente del runtime actual.",
+      "evidence": "El siguiente ejemplo propone representar cada frontera mediante tipos Rust. `CommittedEffect`, `CapabilityToken` y `PostconditionWitness` son tipos del modelo ilustrativo de esta sección; no son símbolos del runtime actual ni una garantía comprobada en silicio. El fragmento no es un programa autónomo: faltan motores, errores y funciones. `dispatch` solo construye un valor etiquetado y no realiza un efecto; `PostconditionWitness` tiene campos públicos y su presencia no garantiza autenticidad. Consumo por valor no demuestra por sí solo resistencia a replay externo. El contrato propuesto exige controles adicionales:",
+      "context_sha256": "6bb3ec1dabf7d0bbf110b7991a9e311b0560016a6dd83dc77a152641a8d30dd9"
+    },
+    {
+      "path": "docs/06_theory/LEAN_CENSUS_SCOPE_2026.md",
+      "symbol": "INV_C5_1K_LINE_RULE",
+      "kind": "document_contract",
+      "reason": "Documentary rule identifier governing split of 275 Lean census entries into JSON.",
+      "evidence": "docs/06_theory/LEAN_CENSUS_SCOPE_2026.md",
+      "context_sha256": "a80fdd9d170d85fa75ab8c3fe98bf4cbf669fa300b05d3352a2b77587e68291a"
+    },
+    {
+      "path": "docs/06_theory/LEAN_CENSUS_SCOPE_2026.md",
+      "symbol": "trace_reads_even_on_validation",
+      "kind": "historical",
+      "reason": "Editorial alias mapped to B60.Ledger.no_torn_reads_universal in Lean census.",
+      "evidence": "proof/lean/BabylonTrace.lean#L156",
+      "context_sha256": "7c26a23b2961219dee3b5345d2d09f1160642e2005173c850157a0d0f7d7c43c"
+    },
+    {
+      "path": "docs/06_theory/c5_thermodynamic_invariants_compendium.md",
+      "symbol": "gap_antitone",
+      "kind": "literal",
+      "reason": "Teorema declarado dentro del bloque Lean autocontenido embebido en este mismo documento.",
+      "evidence": "Reproducir: extraer este único bloque a un archivo y ejecutar `lean <archivo.lean>`. Los cuatro `#guard_msgs` fijan las dependencias exactas: `gap_conservation` y `gap_antitone` dependen de `propext` (extensionalidad proposicional de Lean); los otros dos no dependen de axiomas. No hay axiomas científicos añadidos, `sorryAx` ni `Classical.choice`. Resultado local: Lean 4.35.0, compilación sin errores el 2026-10-24. No se infiere de ello una certificación del resto del corpus.",
+      "context_sha256": "252c75e5c326304ae08322ff745ce03bb3fc1b5ca2ba4bccf27e7c21eabc5a26"
+    },
+    {
+      "path": "docs/06_theory/c5_thermodynamic_invariants_compendium.md",
+      "symbol": "gap_conservation",
+      "kind": "literal",
+      "reason": "Teorema declarado dentro del bloque Lean autocontenido embebido en este mismo documento.",
+      "evidence": "Reproducir: extraer este único bloque a un archivo y ejecutar `lean <archivo.lean>`. Los cuatro `#guard_msgs` fijan las dependencias exactas: `gap_conservation` y `gap_antitone` dependen de `propext` (extensionalidad proposicional de Lean); los otros dos no dependen de axiomas. No hay axiomas científicos añadidos, `sorryAx` ni `Classical.choice`. Resultado local: Lean 4.35.0, compilación sin errores el 2026-10-24. No se infiere de ello una certificación del resto del corpus.",
+      "context_sha256": "252c75e5c326304ae08322ff745ce03bb3fc1b5ca2ba4bccf27e7c21eabc5a26"
+    },
+    {
+      "path": "docs/DEBT_REGISTRY.md",
+      "symbol": "TPMS_ATTEST",
+      "kind": "proposal",
+      "reason": "Estructura estándar TCG TPM 2.0 citada en TD-RING0-001 (pendiente de cierre en Linux).",
+      "evidence": "- **Opción A (swtpm + CI Linux): ABIERTA.** Requiere un seam para la ruta del dispositivo (hoy `/dev/tpmrm0` está fija en `src/ring0.rs`) y un runner Linux con `tpm_vtpm_proxy`. Cubre `open()`, la ida y vuelta de `TPM2_Quote`, el parseo de `TPMS_ATTEST` y la cadena del AK.",
+      "context_sha256": "66473a97b2179366fbc3ba5b5c9933ba9b47009e95de9a932c53beeee4d30bac"
+    },
+    {
+      "path": "docs/DEBT_REGISTRY.md",
+      "symbol": "tpm_vtpm_proxy",
+      "kind": "external",
+      "reason": "Módulo del kernel Linux externo para emulador vTPM requerido por TD-RING0-001 Opción A.",
+      "evidence": "- **Opción A (swtpm + CI Linux): ABIERTA.** Requiere un seam para la ruta del dispositivo (hoy `/dev/tpmrm0` está fija en `src/ring0.rs`) y un runner Linux con `tpm_vtpm_proxy`. Cubre `open()`, la ida y vuelta de `TPM2_Quote`, el parseo de `TPMS_ATTEST` y la cadena del AK.",
+      "context_sha256": "66473a97b2179366fbc3ba5b5c9933ba9b47009e95de9a932c53beeee4d30bac"
+    },
+    {
+      "path": "docs/DOCS_GRAMMAR.md",
+      "symbol": "deserializes",
+      "kind": "literal",
+      "reason": "Palabra de vocabulario permitida o prohibida en la gramática de documentación, no símbolo de código.",
+      "evidence": "`emits`, `transitions`, `invalidates`, `seals`, `compiles`, `deserializes`.",
+      "context_sha256": "f38bcf09242f28f5d3294d0ee8ff799b74371986649d30c21cf5fcb79db239b4"
+    },
+    {
+      "path": "docs/DOCS_GRAMMAR.md",
+      "symbol": "effectively",
+      "kind": "literal",
+      "reason": "Palabra de vocabulario permitida o prohibida en la gramática de documentación, no símbolo de código.",
+      "evidence": "**Prohibited:** adverbs of degree (`effectively`, `significantly`, `seamlessly`),",
+      "context_sha256": "2700f05d040bfff2d8fe347ae10e78b741374d01503a440ad3e4a54822da621b"
+    },
+    {
+      "path": "docs/DOCS_GRAMMAR.md",
+      "symbol": "enclaves",
+      "kind": "literal",
+      "reason": "Palabra de vocabulario permitida o prohibida en la gramática de documentación, no símbolo de código.",
+      "evidence": "`maps`, `writes`, `reads`, `aborts`, `signs`, `routes`, `poisons`, `enclaves`,",
+      "context_sha256": "e455e1da93735e7f2b0f5a7bb4376222d981bb12d4879514ec9a9c253bfa450f"
+    },
+    {
+      "path": "docs/DOCS_GRAMMAR.md",
+      "symbol": "poisons",
+      "kind": "literal",
+      "reason": "Palabra de vocabulario permitida o prohibida en la gramática de documentación, no símbolo de código.",
+      "evidence": "`maps`, `writes`, `reads`, `aborts`, `signs`, `routes`, `poisons`, `enclaves`,",
+      "context_sha256": "e455e1da93735e7f2b0f5a7bb4376222d981bb12d4879514ec9a9c253bfa450f"
+    },
+    {
+      "path": "docs/DOCS_GRAMMAR.md",
+      "symbol": "routes",
+      "kind": "literal",
+      "reason": "Palabra de vocabulario permitida o prohibida en la gramática de documentación, no símbolo de código.",
+      "evidence": "`maps`, `writes`, `reads`, `aborts`, `signs`, `routes`, `poisons`, `enclaves`,",
+      "context_sha256": "e455e1da93735e7f2b0f5a7bb4376222d981bb12d4879514ec9a9c253bfa450f"
+    },
+    {
+      "path": "docs/DOCS_GRAMMAR.md",
+      "symbol": "significantly",
+      "kind": "literal",
+      "reason": "Palabra de vocabulario permitida o prohibida en la gramática de documentación, no símbolo de código.",
+      "evidence": "**Prohibited:** adverbs of degree (`effectively`, `significantly`, `seamlessly`),",
+      "context_sha256": "2700f05d040bfff2d8fe347ae10e78b741374d01503a440ad3e4a54822da621b"
+    },
+    {
+      "path": "docs/RFC_OPEN_CORE_VERIFIER_SPEC.md",
+      "symbol": "Infinity",
+      "kind": "literal",
+      "reason": "Valor, tecla, nombre ilustrativo o etiqueta documental; no declara una función o clase local.",
+      "evidence": "4. **Prohibición de Valores No Estándar:** Prohibición explícita de `NaN`, `Infinity`, o `-Infinity` (`allow_nan=False`).",
+      "context_sha256": "44d50c21dffe74e8140f3279601e1ef2f34c1488568b5be0cd1fb2d0d157fcec"
+    },
+    {
+      "path": "docs/WHITEPAPER.md",
+      "symbol": "Lemma",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": "docs/WHITEPAPER.md#Lemma",
+      "context_sha256": "5f3644858fd784af1b0bc43391534a758f1507ec299fc13a79d082894e2863a8"
+    },
+    {
+      "path": "docs/papers/interoceptive-control/manuscript/paper_draft.md",
+      "symbol": "ALLOW_HALT",
+      "kind": "document_contract",
+      "reason": "Etiqueta de estado del protocolo formal descrito en el manuscrito.",
+      "evidence": "- **O5 / O6 Invariance:** A decision to halt (`ALLOW_HALT`) is not identical to physical termination; our architecture delegates the halt to an unprivileged OS/runtime signal, avoiding reliance on LLM self-interruption.",
+      "context_sha256": "b695d5feb3a61439b759ca4724a2e7b09a6377ed0551940be226d0cea0d655fd"
+    },
+    {
+      "path": "docs/security/AUDIT_CONCURRENT_MAIN_2026-10-30.md",
+      "symbol": "export_lean4",
+      "kind": "historical",
+      "reason": "Función del exportador de oncología, retirado del núcleo con experiments/oncology; el hallazgo AC-06 la cita como registro histórico. En VAULT solo se resuelve por scripts de docs/security/evidence, que la proyección pública omite.",
+      "evidence": "experiments/oncology/scripts/export_ontology.py:101 en 7b2af6d5 (def export_lean4)",
+      "context_sha256": "c0aed1fb6e79afd99623b9e53d1df075948d8716e3a1a4ab0cd0a189862569b6"
+    },
+    {
+      "path": "docs/security/AUDIT_SWARM100_ROUND3_2026-10-28.md",
+      "symbol": "ALREADY_FIXED",
+      "kind": "literal",
+      "reason": "Status literal in archived Swarm-100 Round 3 audit summary.",
+      "evidence": "docs/security/AUDIT_SWARM100_ROUND3_2026-10-28.md",
+      "context_sha256": "23245468d301c7ae90349d7bfb4c4f3f95cb4c25de03a1d00ff3f0ed84b1a6ce"
+    },
+    {
+      "path": "docs/security/AUDIT_SWARM100_ROUND3_2026-10-28.md",
+      "symbol": "NEEDS_VALIDATION",
+      "kind": "literal",
+      "reason": "Status literal in archived Swarm-100 Round 3 audit summary.",
+      "evidence": "docs/security/AUDIT_SWARM100_ROUND3_2026-10-28.md",
+      "context_sha256": "eb3c0a869eab46495d93323cc960d42a6024d349d23e58fcbe3719f9cc0a4c1d"
+    },
+    {
+      "path": "docs/security/AUDIT_SWARM100_ROUND3_2026-10-28.md",
+      "symbol": "remediation_state",
+      "kind": "literal",
+      "reason": "JSON field name cited in archived Swarm-100 Round 3 audit summary.",
+      "evidence": "docs/security/AUDIT_SWARM100_ROUND3_2026-10-28.md",
+      "context_sha256": "42d259d0cc799809ef6ac6d9ad25c29791a4f3e39067c8b10498f44c2719533e"
+    },
+    {
+      "path": "docs/security/EU_AI_ACT_GATE_2026-10-30.md",
+      "symbol": "actionlint",
+      "kind": "external",
+      "reason": "Linter estático externo para flujos de trabajo de GitHub Actions.",
+      "evidence": "| `actionlint` sobre CI y publicación | Correcto |",
+      "context_sha256": "71920a084ce06053c807d0dc11b6c7c51cc6fc63a968c7d9f8e0243c71ff7463"
+    },
+    {
+      "path": "docs/security/EU_AI_ACT_NATIVE_2026-10-30.md",
+      "symbol": "babylon60_regulatory_gate",
+      "kind": "historical",
+      "reason": "Source file stem of src/bin/babylon60_regulatory_gate.rs (Cargo binary babylon-regulatory-gate) cited in 2026-10-30 audit record.",
+      "evidence": "Cargo.toml [[bin]] babylon-regulatory-gate",
+      "context_sha256": "9ec246c7c5515b52b1c12ebe928af774d8a2d389ef99f5f6dcb4b3c58e6bdf95"
+    },
+    {
+      "path": "docs/security/MAIN_SAFETY_FIXES_2026-10-30.md",
+      "symbol": "semantic_solver_adapter",
+      "kind": "literal",
+      "reason": "Nombre del target de integración Rust en 00_ABZU_KERNEL/crates/babylon60-compiler/tests/semantic_solver_adapter.rs.",
+      "evidence": "La suite `semantic_solver_adapter` comparte un presupuesto de procesos externo",
+      "context_sha256": "225452889ab3df34d7bec257b7ac99c1f86367d5cf1248fe1f8ad5b9b72cd761"
+    },
+    {
+      "path": "docs/security/PLAN_SWARM100_LOTE1_2026-10-28.md",
+      "symbol": "merkle_seal",
+      "kind": "literal",
+      "reason": "JSON object field name from archived Lote 1 skill-audit remediation plan.",
+      "evidence": "docs/security/PLAN_SWARM100_LOTE1_2026-10-28.md",
+      "context_sha256": "17e5fc31a950af37e39277d7753f7a91ff077acaa8fc0a77d998699dda964e63"
+    },
+    {
+      "path": "docs/security/REMEDIATION_SWARM100_LOTE1_2026-10-28.md",
+      "symbol": "merkle_seal",
+      "kind": "literal",
+      "reason": "JSON object field name from archived Lote 1 skill-audit remediation report.",
+      "evidence": "docs/security/REMEDIATION_SWARM100_LOTE1_2026-10-28.md",
+      "context_sha256": "3bb5f5d7633f7637fe4b7f051a41d24c368a2dcb1e53d17da097708255f55f8c"
+    },
+    {
+      "path": "docs/security/cortex-openai-adapter-20261118.md",
+      "symbol": "ExceptionGroup",
+      "kind": "external",
+      "reason": "Python 3.11+ built-in ExceptionGroup class cited in live adapter failure record.",
+      "evidence": "Python stdlib built-in ExceptionGroup",
+      "context_sha256": "abc246c5fa774ecb65d6718798dd4d88f5b37622b3d1a5dd173e02f734076a51"
+    },
+    {
+      "path": "docs/security/cortex-source-revalidation-20261118.md",
+      "symbol": "RefScanSink",
+      "kind": "external",
+      "reason": "C++ class from external Nix 2.34.9 src/libstore/references.cc cited in architecture transfer note.",
+      "evidence": "NixOS/nix 2.34.9 src/libstore/references.cc",
+      "context_sha256": "465705d7bdffda69e9178795d864a0e747b33d5be625cdf08e47f4597702166d"
+    },
+    {
+      "path": "docs/security/experimental-audit-plan-2026-10-26.md",
+      "symbol": "metadata_match",
+      "kind": "literal",
+      "reason": "Valor de estado devuelto por la consulta de frescura del índice de código reportado en esta auditoría.",
+      "evidence": "rutas principales devolvió `metadata_match`. El grafo es una ayuda de búsqueda,",
+      "context_sha256": "7a5cb556a121ed789d292d9e8cbc269cdfba010fa407e0acc8acbeef369af84c"
+    },
+    {
+      "path": "docs/security/external-audit-remediation-2026-10-24.md",
+      "symbol": "_headers",
+      "kind": "external",
+      "reason": "Archivo de configuración de cabeceras HTTP de Cloudflare Pages.",
+      "evidence": "| CSP script-src none frente a unsafe-inline | Confirmado en la configuración. `_headers` pasa a script-src none; el navegador local recibe esa política y las rutas comprobadas no contienen scripts ejecutables. No se afirma que ya esté desplegada. |",
+      "context_sha256": "a1feed67949623560671404f29d7eecf051f6ed1920890ab91a46b80a5cddfbe"
+    },
+    {
+      "path": "docs/security/governance-comparison-2026-10-24.md",
+      "symbol": "SHA256SUMS",
+      "kind": "literal",
+      "reason": "Nombre de archivo estándar de manifiesto de sumas SHA-256 citado en el inventario.",
+      "evidence": "- `SHA256SUMS`: inventario final verificable de los artefactos conservados.",
+      "context_sha256": "476fa05ddf5ef26be33fb9b7f7d72b98919a24986f8597a05a27f68995f02e36"
+    },
+    {
+      "path": "docs/security/harness-audit-2026-10-24.md",
+      "symbol": "NOASSERTION",
+      "kind": "external",
+      "reason": "Identificador SPDX estándar devuelto por GitHub para licencias no declaradas.",
+      "evidence": "inicio del desarrollo. `NOASSERTION` es el identificador devuelto por GitHub;",
+      "context_sha256": "a0357d4262f84a000664363e4d5ed8b30c858b2827673c5fbde6413c72ea2e8c"
+    },
+    {
+      "path": "docs/security/harness-audit-2026-10-24.md",
+      "symbol": "NXDOMAIN",
+      "kind": "external",
+      "reason": "Código de respuesta DNS estándar (RFC 1035 / 8020) para dominio inexistente.",
+      "evidence": "La consulta DNS A a `1.1.1.1` devolvió `NXDOMAIN` para `babylon60.co`; eso describe",
+      "context_sha256": "491d83c6d761c0402e377b46ff62b4e6c8e6a8396647b2b6fe10fdc2b181e3c5"
+    },
+    {
+      "path": "docs/security/harness-audit-2026-10-24.md",
+      "symbol": "PreToolUse",
+      "kind": "external",
+      "reason": "Evento de ciclo de vida de hook externo en Claude Code.",
+      "evidence": "| Claude Code con hooks | `PreToolUse` permite bloquear, pedir autorización o permitir llamadas dentro del agente | La política debe cubrir las rutas relevantes; el aislamiento de filesystem/red se configura aparte |",
+      "context_sha256": "31e592ecb7e8c1303627898991403ebaca5ab2e238d70c049e1b8012079acf14"
+    },
+    {
+      "path": "docs/security/integration-review-2026-10-23.md",
+      "symbol": "babylon_authorityd",
+      "kind": "literal",
+      "reason": "Nombre del binario Rust declarado en Cargo.toml (src/bin/babylon_authorityd.rs).",
+      "evidence": "Se construyeron `strike_rs` y `babylon_authorityd`; la extensión se cargó desde",
+      "context_sha256": "48ae501a72e98ae0c7e5b5dc470636153c5f4de4aba5694dbf8011f1024d96f0"
+    },
+    {
+      "path": "docs/security/intelligence-authority-acceptance.md",
+      "symbol": "FL_014_wave4_receipt_loss_and_closure_drift",
+      "kind": "document_contract",
+      "reason": "Identificador de claim/control en evidence.json y claims.lock.",
+      "evidence": "| IA-04 | `AUTH_003`, `AUTH_006`, `FL_014_wave4_receipt_loss_and_closure_drift` | Matriz de puntos de caída, reintentos y concurrencia; no extrapolar SIGKILL a corte eléctrico ni un ejecutor a múltiples ejecutores. |",
+      "context_sha256": "ebf7371f97f5ce322d062bfcbf666343fdeb386b584942b3ed952980f6874e66"
+    },
+    {
+      "path": "docs/security/intelligence-authority-acceptance.md",
+      "symbol": "mcp_seatbelt_confinement",
+      "kind": "document_contract",
+      "reason": "Identificador de claim/control en evidence.json y claims.lock.",
+      "evidence": "| IA-02 | `AUTH_002`, `INV_OMEGA_complete_mediation`, `mcp_seatbelt_confinement` | Agente comprometido extremo a extremo y cobertura explícita de todos los canales del perímetro ensayado. |",
+      "context_sha256": "827fc188766748594d59ca69cd33c87f959abec3ef4b31a2324793c96386e208"
+    },
+    {
+      "path": "docs/security/kernel-audit-2026-10-15.md",
+      "symbol": "MIRI_SYSROOT",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": "docs/security/kernel-audit-2026-10-15.md#MIRI_SYSROOT",
+      "context_sha256": "4346a8d14763dd9dd6b9514021aaeb67fb8a448fa0006937a99299f0f6479939"
+    },
+    {
+      "path": "docs/security/kernel-audit-2026-10-15.md",
+      "symbol": "c82af23b105fc3e646c377b1423d6bb7793f2611",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": "docs/security/kernel-audit-2026-10-15.md#c82af23b105fc3e646c377b1423d6bb7793f2611",
+      "context_sha256": "30c3a4c5ea7b20220a0c0840bcb115f6e4442df1a013d5af05c56cb6579d012d"
+    },
+    {
+      "path": "docs/security/kernel-audit-2026-10-15.md",
+      "symbol": "spsc_ownership_regressions",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": "docs/security/kernel-audit-2026-10-15.md#spsc_ownership_regressions",
+      "context_sha256": "4346a8d14763dd9dd6b9514021aaeb67fb8a448fa0006937a99299f0f6479939"
+    },
+    {
+      "path": "docs/security/kernel-audit-2026-10-15.md",
+      "symbol": "test_spsc_ring_buffer",
+      "kind": "document_contract",
+      "reason": "Reviewed documentary or external reference identifier",
+      "evidence": "docs/security/kernel-audit-2026-10-15.md#test_spsc_ring_buffer",
+      "context_sha256": "4346a8d14763dd9dd6b9514021aaeb67fb8a448fa0006937a99299f0f6479939"
+    },
+    {
+      "path": "docs/security/linux-arm64-validation-2026-10-23.md",
+      "symbol": "manylinux_2_38",
+      "kind": "external",
+      "reason": "Etiqueta estándar de plataforma wheel Python (PEP 600).",
+      "evidence": "`z3-solver==5.1.0.0` fijada en `uv.lock` requiere `manylinux_2_38`; el fallback",
+      "context_sha256": "5143cedca736c79fc1756e932dbbfd4a3e654ce514314f53d34903cdba30b691"
+    },
+    {
+      "path": "docs/security/linux-arm64-validation-2026-10-23.md",
+      "symbol": "noexec",
+      "kind": "external",
+      "reason": "Opción de montaje POSIX que impide la ejecución directa de binarios.",
+      "evidence": "3. Docker montó `/tmp` con `noexec`, impidiendo la fixture de proceso del",
+      "context_sha256": "5fc40e27ca07895e53d2b6b8ee21be4689752847e25eebd4c69b918c967eb19c"
+    },
+    {
+      "path": "docs/security/windows-validation-2026-10-23.md",
+      "symbol": "actionlint",
+      "kind": "external",
+      "reason": "Linter estático externo para flujos de trabajo de GitHub Actions.",
+      "evidence": "scripts `.ps1` distribuidos y el nuevo step de evidencia. `actionlint`, whitespace,",
+      "context_sha256": "8ae370604bd79b24911481489ead68be646e5fc8d42d4f20ada9c18c982d0332"
+    },
+    {
+      "path": "docs/security/windows-validation-2026-10-23.md",
+      "symbol": "startup_failure",
+      "kind": "external",
+      "reason": "Estado de conclusión externo emitido por GitHub Actions cuando falla la inicialización de un workflow.",
+      "evidence": "otras ramas, schedules y workflows, también terminaron en `startup_failure`.",
+      "context_sha256": "1c1a4d682bd2a0492c0e9db67e40fb52eea4181e5ffd9e3dbedc5a0e2e3d448e"
+    },
+    {
+      "path": "evidence/README.md",
+      "symbol": "BABYLON60_DATA_ROOM",
+      "kind": "literal",
+      "reason": "Nombre de paquete documental/VDR bajo NDA referido en la política de custodia de evidencias.",
+      "evidence": "2. **Inspección de Evidencias Retenidas (Due Diligence / VDR bajo NDA):** Las entidades auditoras o contrapartes autorizadas pueden solicitar el paquete exportado del *Virtual Data Room* (`BABYLON60_DATA_ROOM`) o la verificación de hashes específicos contra la bóveda `BABYLON-60-VAULT` a través del canal institucional `access@babylon60.com`.",
+      "context_sha256": "d8c533b7cc6ef83ba2bd38a7553a163a4d761305a521d2a58212e434a74bc623"
+    },
+    {
+      "path": "evidence/README.md",
+      "symbol": "INV_C5_DUAL_REMOTE",
+      "kind": "document_contract",
+      "reason": "Identificador normativo de segregación OPSEC entre la bóveda privada y el espejo público.",
+      "evidence": "Por diseño de seguridad operativa (**OPSEC**) e higiene del espejo público (`INV_C5_DUAL_REMOTE` y `Zero Historical Bloat`), los lotes crudos de auditoría adversarial, trazas forenses de hardware y bibliotecas internas se conservan íntegramente en la bóveda privada (**`BABYLON-60-VAULT`**) y se excluyen de forma determinista de la proyección pública (**`BABYLON-60`**) mediante [`scripts/c5_git_utils/c5_distill_public_mirror.sh`](../scripts/c5_git_utils/c5_distill_public_mirror.sh) y [`scripts/verify_release.sh`](../scripts/verify_release.sh).",
+      "context_sha256": "7d80d24cb7cdcbce60c01b8ad3a7fe2b9c94f1cc467fde9ef8ff9f8d1aee25f5"
+    },
+    {
+      "path": "src/README.md",
+      "symbol": "AUTH_007",
+      "kind": "document_contract",
+      "reason": "Etiqueta de caso/requisito del catálogo de autorización descrito en este índice de fuentes.",
+      "evidence": "- `AUTH_001`–`AUTH_007`: Rechazo de replays tras `SIGKILL` y reapertura del ledger, aislamiento por socket Unix, transición a `UNKNOWN` sin reintentos automáticos ciegos, y cuarentena atómica con `O_NOFOLLOW` y `renameatx_np`/`renameat2`.",
+      "context_sha256": "becbe4137150a82650c2db001f0080521a4087be1d80e9c717b1bafd4045ea3d"
+    },
+    {
+      "path": "src/README.md",
+      "symbol": "FL_007",
+      "kind": "document_contract",
+      "reason": "Etiqueta de requisito de control de admisión acotado descrito en este índice de fuentes.",
+      "evidence": "- `FL_007` y `FL_008`: Control de admisión acotado por Ley de Little y handles de capacidad acoplados a `dev/ino` y época de política.",
+      "context_sha256": "1687052416044dcb6283e80794d90a76d6c3ce4f4ad73b0bd60463d219f4d212"
+    },
+    {
+      "path": "src/README.md",
+      "symbol": "FL_008",
+      "kind": "document_contract",
+      "reason": "Etiqueta de requisito de capacidades acotadas descrito en este índice de fuentes.",
+      "evidence": "- `FL_007` y `FL_008`: Control de admisión acotado por Ley de Little y handles de capacidad acoplados a `dev/ino` y época de política.",
+      "context_sha256": "6f6fc9227ad8fc23fc03e38768ab4145c620c3c0f4b7384c32815d92e7c820ba"
+    },
+    {
+      "path": "src/README.md",
+      "symbol": "FL_014",
+      "kind": "document_contract",
+      "reason": "Etiqueta de requisito de mediación WAL y registro binario descrito en este índice de fuentes.",
+      "evidence": "- `INV_OMEGA_complete_mediation` y `FL_014`: Confinamiento de procesos en macOS (`sandbox-exec`) y registro WAL binario de 154 bytes protegido con `BLAKE3` (`.effect_wal.bin`).",
+      "context_sha256": "e6504f7067c345813c5d66ca93ac2846749384e546f4ad0872d87e725e8f3068"
+    },
+    {
+      "path": "tests/README.md",
+      "symbol": "AUTH_007",
+      "kind": "document_contract",
+      "reason": "Etiqueta de caso/requisito del catálogo de autorización verificada por las suites enlazadas.",
+      "evidence": "* **[`adversarial_nemesis.rs`](adversarial_nemesis.rs)**, **[`nemesis_wave3.rs`](nemesis_wave3.rs)** & **[`nemesis_wave4.rs`](nemesis_wave4.rs)**: Pruebas adversariales de carrera TOCTOU en `DELETE_FILE` (`AUTH_004`, `AUTH_007`), pérdida de recibo tras `SIGKILL` (`FL_014`) y deriva de políticas (`FL_016`).",
+      "context_sha256": "53d9a49a235743715b55cb00455b9f9a5c4a69554e1134bdf1970eb641d85120"
+    },
+    {
+      "path": "tests/README.md",
+      "symbol": "FL_007",
+      "kind": "document_contract",
+      "reason": "Etiqueta de requisito de control de admisión verificada por las suites enlazadas.",
+      "evidence": "* **[`admission_capability_test.rs`](admission_capability_test.rs)** & **[`acs_authenticated.rs`](acs_authenticated.rs)**: Control de admisión acotado (`FL_007`), broker de capacidades acotadas (`FL_008`) y guardia OWASP ACS v0.1.0 (`FL_016`).",
+      "context_sha256": "d8d998aea4e284d1862e275720df2fc41326f5fb76d457db296dd70bc1af9795"
+    },
+    {
+      "path": "tests/README.md",
+      "symbol": "FL_008",
+      "kind": "document_contract",
+      "reason": "Etiqueta de requisito de broker de capacidades verificada por las suites enlazadas.",
+      "evidence": "* **[`admission_capability_test.rs`](admission_capability_test.rs)** & **[`acs_authenticated.rs`](acs_authenticated.rs)**: Control de admisión acotado (`FL_007`), broker de capacidades acotadas (`FL_008`) y guardia OWASP ACS v0.1.0 (`FL_016`).",
+      "context_sha256": "d8d998aea4e284d1862e275720df2fc41326f5fb76d457db296dd70bc1af9795"
+    },
+    {
+      "path": "tests/README.md",
+      "symbol": "FL_014",
+      "kind": "document_contract",
+      "reason": "Etiqueta de requisito de recuperación tras SIGKILL verificada por las suites enlazadas.",
+      "evidence": "* **[`adversarial_nemesis.rs`](adversarial_nemesis.rs)**, **[`nemesis_wave3.rs`](nemesis_wave3.rs)** & **[`nemesis_wave4.rs`](nemesis_wave4.rs)**: Pruebas adversariales de carrera TOCTOU en `DELETE_FILE` (`AUTH_004`, `AUTH_007`), pérdida de recibo tras `SIGKILL` (`FL_014`) y deriva de políticas (`FL_016`).",
+      "context_sha256": "53d9a49a235743715b55cb00455b9f9a5c4a69554e1134bdf1970eb641d85120"
+    },
+    {
+      "path": "tests/README.md",
+      "symbol": "FL_016",
+      "kind": "document_contract",
+      "reason": "Etiqueta de requisito de deriva de políticas y guardia ACS verificada por las suites enlazadas.",
+      "evidence": "* **[`adversarial_nemesis.rs`](adversarial_nemesis.rs)**, **[`nemesis_wave3.rs`](nemesis_wave3.rs)** & **[`nemesis_wave4.rs`](nemesis_wave4.rs)**: Pruebas adversariales de carrera TOCTOU en `DELETE_FILE` (`AUTH_004`, `AUTH_007`), pérdida de recibo tras `SIGKILL` (`FL_014`) y deriva de políticas (`FL_016`).\n* **[`admission_capability_test.rs`](admission_capability_test.rs)** & **[`acs_authenticated.rs`](acs_authenticated.rs)**: Control de admisión acotado (`FL_007`), broker de capacidades acotadas (`FL_008`) y guardia OWASP ACS v0.1.0 (`FL_016`).",
+      "context_sha256": "1cdf526b90f0c410eb6c1dbd9226cb5bc12566f52e7374b0988937410d62fcae"
+    }
+  ]
+}
