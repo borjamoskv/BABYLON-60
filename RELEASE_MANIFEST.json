@@ -3,16 +3,16 @@
   "release": "5.1.0",
   "version": "5.1.0",
   "state": "candidate",
-  "commit": "75db94978ccb69e8bec006498370e0baf6983aa3",
-  "source_tree_digest": "0fdc01f8715f375147035141ad9df259fe69583458ae34e5e74e3ceb2b4d34fc",
+  "commit": "6a38558b424e6e331da92b400beb9add2e47e8b9",
+  "source_tree_digest": "6bdeaed45dab3a3b036236bc85be6115b91241a1aaa9dead60934e633576c085",
   "axiom_root": "AX-0: No stochastic component may authorize its own irreversible effects (LLM != authority)",
   "claims_manifest_digest": "4fe991ad35b0451a32fd766f26269341e8695f9d631f95a6b3c8067d0d2110be",
-  "compiled_at_iso": "2026-11-25T16:54:19Z",
+  "compiled_at_iso": "2026-11-25T17:09:16Z",
   "prior_release": {
     "version": "5.1.0",
-    "commit": "0b978eb871ca95627fbf5a97ea93bb54dfc7f9b1",
+    "commit": "75db94978ccb69e8bec006498370e0baf6983aa3",
     "manifest_schema": "babylon60.release.v5",
-    "manifest_sha256": "7aa4e61b0c474be83ad25e356c62b257cec5e9edac9bfa97a08d144543fc8f95"
+    "manifest_sha256": "2cda2a847812b28f00f1215461b0c5d2d6108f22fe83c104096f7adeed56413c"
   },
   "version_sync": {
     "babylon_toml": "5.1.0",
@@ -80,8 +80,8 @@
     "pyproject.toml": "7d81f06ffeaea76ec484884b2ac38f0d98c760c8a25779754d17a5e5c6065d05",
     "uv.lock": "33d5aeb7c03eb8799d6fa444ff957677fa596830ab34c6a13c4353e4ea5f798d",
     "LICENSE": "4c0feb0f48586176789f42815859e2714a0486cccc72fbc9e3422eb29d155536",
-    "README.md": "765cdc2f86fb9de8aa1edc675b45f5cc0192853341490c89d120e2794970ca53",
-    "README_ES.md": "ed8690c15c9beb7d4bf84f2b80b378a735f86ac529c7ef433fe6f70c8fa30239",
+    "README.md": "ab6e0190688f40855c4304e8c60a21cc6dd373dfcfbd8dc9301c9acc1339aa4a",
+    "README_ES.md": "2286e8dfa7678fa4d3af29acb5560a9a1fe07de295ddcf36d7f5563afced79b5",
     "WHY_BABYLON_60.md": "d3f522dfb1f7fc11ca77847c82c935988b63d0131c9e8ff47ba8369a84e380d5"
   },
   "claims": {
@@ -101,7 +101,7 @@
   },
   "release_bundle": {
     "name": "Babylon60-v5.1.0-terminal-mcp.zip",
-    "tree_digest": "612ad93f2ebbb5ced6245e5114f25a99ae46525aa6bc08c7bde3da3e3da62768",
+    "tree_digest": "d5af6c3bcf61a3813ff3ea75a44bc4d3d7f30fb1222512894ae00b27a14eb57c",
     "source_files": [
       ".agents/skills/_skill_checks/declarative.py",
       ".agents/skills/_skill_router.py",
@@ -528,6 +528,8 @@
       "claims.lock",
       "docs/01_spec/INVARIANTS_RED_TEAM_FALSIFICATION.md",
       "docs/03_guides/BEFORE_AND_AFTER.md",
+      "docs/03_guides/README_REFERENCE.md",
+      "docs/03_guides/README_REFERENCE_ES.md",
       "docs/03_guides/USER_GUIDE.md",
       "docs/03_guides/agent_contracts.md",
       "docs/03_guides/guide_agent_workflow.md",

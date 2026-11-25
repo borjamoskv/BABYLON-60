@@ -1,7 +1,7 @@
 {
-  "timestamp_iso": "2026-11-25T16:54:19Z",
-  "source_commit": "75db94978ccb69e8bec006498370e0baf6983aa3",
-  "source_tree_digest": "0fdc01f8715f375147035141ad9df259fe69583458ae34e5e74e3ceb2b4d34fc",
+  "timestamp_iso": "2026-11-25T17:09:16Z",
+  "source_commit": "6a38558b424e6e331da92b400beb9add2e47e8b9",
+  "source_tree_digest": "6bdeaed45dab3a3b036236bc85be6115b91241a1aaa9dead60934e633576c085",
   "claims_manifest_digest": "4fe991ad35b0451a32fd766f26269341e8695f9d631f95a6b3c8067d0d2110be",
   "environment_digest": "939ab07082a168af7d12ce81b54786b94b7852df21e8fc5b32cadcd0567d50e9",
   "total_claims": 32,
@@ -18,7 +18,7 @@
       "status": "verified",
       "verified": true,
       "suite_passed": true,
-      "duration_s": 0.85,
+      "duration_s": 0.465,
       "leaf_hash": "c0f1c88f062f169ca5cc40211502a4ad25b43719b21a7fac9fddf6cc2a04cfe0"
     },
     {
@@ -28,7 +28,7 @@
       "status": "verified",
       "verified": true,
       "suite_passed": true,
-      "duration_s": 76.589,
+      "duration_s": 71.184,
       "leaf_hash": "43a34c5ad1fdef2200b9efb7ca8b1b90bff4526fd9596f34dc6f7c4a2cfc5b2b"
     },
     {
@@ -38,7 +38,7 @@
       "status": "verified_local",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 0.573,
+      "duration_s": 0.611,
       "leaf_hash": "49c998c5a085b009178b6286fa4addfa2f077d4dcb632ad7f4db45ea69e2cc26"
     },
     {
@@ -48,7 +48,7 @@
       "status": "verified_in_memory",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 0.146,
+      "duration_s": 0.151,
       "leaf_hash": "278bd6f783f358fb0c483dffb34e8b9e9a49eabe28feb5c92adf7966aa7d7a25"
     },
     {
@@ -58,7 +58,7 @@
       "status": "verified_local",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 0.179,
+      "duration_s": 0.168,
       "leaf_hash": "651e13f39271c4a996b7c0670c684e8cf9948804e908c48058763fbea8e6de12"
     },
     {
@@ -68,7 +68,7 @@
       "status": "verified_local",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 40.637,
+      "duration_s": 25.652,
       "leaf_hash": "5d9ab21566093414fe5c9dbf26a366d69a1de933aaabc5b377ac11e8a78ef26f"
     },
     {
@@ -78,7 +78,7 @@
       "status": "verified",
       "verified": true,
       "suite_passed": true,
-      "duration_s": 29.207,
+      "duration_s": 17.847,
       "leaf_hash": "e3b05a17e6a0bdd8fd64e4f23e47c5168234eb2597258896183daa72b6bc066d"
     },
     {
@@ -88,7 +88,7 @@
       "status": "verified_local",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 3.196,
+      "duration_s": 3.348,
       "leaf_hash": "29db672ed24cb349efcf514b82e3ecdb06848c5ca8986dee330954547b0838e8"
     },
     {
@@ -98,7 +98,7 @@
       "status": "verified_in_memory",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 0.425,
+      "duration_s": 0.47,
       "leaf_hash": "2904a8f651abcb925bdec67fb0c5a8365eb424a4a56fc3430f7187ee09874636"
     },
     {
@@ -108,7 +108,7 @@
       "status": "verified_local",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 0.135,
+      "duration_s": 0.153,
       "leaf_hash": "cbb63d7354600f0aa6954983023fe372e3daf8fdabc63b18d25736f80b03fa64"
     },
     {
@@ -118,7 +118,7 @@
       "status": "partial_trace",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 8.812,
+      "duration_s": 5.307,
       "leaf_hash": "9feabe477f3d8fc94ef2c5daa6c8acd53dea16e5e4fe4fc83a99917e8b8819d6"
     },
     {
@@ -128,7 +128,7 @@
       "status": "verified",
       "verified": true,
       "suite_passed": true,
-      "duration_s": 0.77,
+      "duration_s": 1.11,
       "leaf_hash": "46053906fc6de1ca916eace4b2009792cda941896284fdcaaa35629e7598f717"
     },
     {
@@ -138,7 +138,7 @@
       "status": "verified_local",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 0.568,
+      "duration_s": 0.265,
       "leaf_hash": "b58940c2f551fbae8dc7bce12ad6fae94bd878b0c2e10973bb6e1dbad16b8030"
     },
     {
@@ -148,7 +148,7 @@
       "status": "verified_local",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 4.718,
+      "duration_s": 0.473,
       "leaf_hash": "e2d194450b11728778e00ea7a16b47413e87a0fceb8bf0d449e891fdd067802b"
     },
     {
@@ -158,7 +158,7 @@
       "status": "verified_local",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 0.207,
+      "duration_s": 0.202,
       "leaf_hash": "f2ca0059f56f72aeb799de83f9866c2ed5a5190010cdaafc5981c2afae5f45fb"
     },
     {
@@ -168,7 +168,7 @@
       "status": "verified_local",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 6.869,
+      "duration_s": 6.461,
       "leaf_hash": "bf94432355c5b2633509d0714971685411ed3d521f2e92de05672ff3f5c9aa32"
     },
     {
@@ -178,7 +178,7 @@
       "status": "verified_local",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 0.415,
+      "duration_s": 0.433,
       "leaf_hash": "b26a94cfb9e3c913a481b1d3958130ff3ae038d302186b1b6cd91227353d0d6e"
     },
     {
@@ -188,7 +188,7 @@
       "status": "verified_local",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 93.705,
+      "duration_s": 27.724,
       "leaf_hash": "8c1d24a831368d31162e5db6bd22a212b5e83708d89d872aa904799417f0a04e"
     },
     {
@@ -198,7 +198,7 @@
       "status": "verified_local",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 2.236,
+      "duration_s": 2.196,
       "leaf_hash": "3a9216e21869eef8eb7dcd078a26e40bbe567ab91dfa7c0926cf2db09f7e2f47"
     },
     {
@@ -208,7 +208,7 @@
       "status": "partial_trace",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 2.034,
+      "duration_s": 1.594,
       "leaf_hash": "c409665eec80527e934c372110b8f0ae58fb0fa26915e31583dd4af49ad4399c"
     },
     {
@@ -218,7 +218,7 @@
       "status": "verified_in_memory",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 72.303,
+      "duration_s": 0.609,
       "leaf_hash": "c027614e223227a061c3d5c1cc63a4d820a26550bd25dccfa4f35e5dad304808"
     },
     {
@@ -228,7 +228,7 @@
       "status": "verified_local",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 1.01,
+      "duration_s": 1.837,
       "leaf_hash": "d8b4435670fcc75cc8a38e6d1306536f1a60d832d259bcf98d6e6285d2bb21c4"
     },
     {
@@ -238,7 +238,7 @@
       "status": "verified_local",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 0.186,
+      "duration_s": 0.224,
       "leaf_hash": "fff80f1328ae419a3d2b8ebf42cd051aa296411002d3d59e9abcd363ade1f81d"
     },
     {
@@ -248,7 +248,7 @@
       "status": "verified_local",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 1.264,
+      "duration_s": 1.609,
       "leaf_hash": "cea2e4525bb20aef923788c14ac5bf730f1bdfdb905bd7409db778a3a873b22e"
     },
     {
@@ -258,7 +258,7 @@
       "status": "verified_local",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 0.896,
+      "duration_s": 0.874,
       "leaf_hash": "f74405c5be9b7ed50c8175892d64dac8e772f1930f0a45e9febce5470addaa89"
     },
     {
@@ -268,7 +268,7 @@
       "status": "verified_local",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 1.648,
+      "duration_s": 2.012,
       "leaf_hash": "fb1140acf0bc2645def591d6d51f27be8c5ed338777a40ca0c7976929b934b17"
     },
     {
@@ -278,7 +278,7 @@
       "status": "verified_local",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 0.192,
+      "duration_s": 0.213,
       "leaf_hash": "68fc60baae585b6127e8fdf0ff797f6127cbe18447de59bc6f2008318959f510"
     },
     {
@@ -288,7 +288,7 @@
       "status": "verified",
       "verified": true,
       "suite_passed": true,
-      "duration_s": 0.139,
+      "duration_s": 0.137,
       "leaf_hash": "5ebd6d33b1543710e5df2a53c317f1dcbfaaf78d1a899a5f22557852d0d03c9e"
     },
     {
@@ -298,7 +298,7 @@
       "status": "verified",
       "verified": true,
       "suite_passed": true,
-      "duration_s": 0.142,
+      "duration_s": 0.139,
       "leaf_hash": "520b6761b84313789ee41bf173d532991cafb4d8c56708a4c6c5fbd2608aa884"
     },
     {
@@ -308,7 +308,7 @@
       "status": "verified_local",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 3.56,
+      "duration_s": 3.598,
       "leaf_hash": "a6e3ee16fcf428c3838642e478bba1c20f84fa48d0f4b166cf461bb57df2aab5"
     },
     {
@@ -318,7 +318,7 @@
       "status": "verified",
       "verified": true,
       "suite_passed": true,
-      "duration_s": 0.715,
+      "duration_s": 0.769,
       "leaf_hash": "f32ca13a8c3cd5c4975910ea3a2387fe402275dec194c7ccc6990e9aaed3c05d"
     },
     {
@@ -328,7 +328,7 @@
       "status": "verified_local",
       "verified": false,
       "suite_passed": true,
-      "duration_s": 0.408,
+      "duration_s": 0.47,
       "leaf_hash": "e7907951ab62fa0404b485bc1067b6ea690b0c4de2eb1d1d5ab0ed1c04c47a53"
     }
   ]
