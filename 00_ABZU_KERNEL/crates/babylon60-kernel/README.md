@@ -26,9 +26,10 @@ The **`babylon60-kernel`** crate is a `#![no_std]` Rust library providing the de
 
 ## ⚡ Technical Invariants
 
-1. **`#![no_std]` Compatibility**: Compiles with `extern crate alloc;`, using alloc; bare-metal boot and platform compatibility require separate evidence.
+1. **`#![no_std]` Compatibility**: Uses `extern crate alloc;`; bare-metal boot and platform compatibility require separate evidence.
 2. **Deterministic quantization**: Each 60 Hz step is floor(2^32/60) raw units. Before saturation the deficit is 16 raw units per 60 ticks (about 0.322 ms/day). No floating-point arithmetic is used for this clock; exact rational or physical timing is not claimed.
-3. **In-Memory Quarantine Snapshot**: Captures deterministic state (`QuarantineSnapshot::freeze`) before halting execution.
+3. **PMU observations**: Linux counters are enabled and return raw cumulative counts only for a nonzero, fully scheduled interval. Missing or multiplexed data is None; zero measured events is Some(0). This does not measure energy.
+4. **In-Memory Quarantine Snapshot**: Captures deterministic state (`QuarantineSnapshot::freeze`) before halting execution.
 
 ---
 

@@ -70,6 +70,22 @@ fn tick_of_done(out: &Output) -> u64 {
 }
 
 #[test]
+fn integer_literal_and_rational_values_reach_real_dispatch() {
+    for value in [0_u64, 1, 59, 60, 3600, i64::MAX as u64] {
+        let program = format!(
+            "DUB\nMUB MAIN\nALLOC F60 R0\nNIG R0 {}\nSAR.B60 R0\nHALT\n",
+            b60_literal(value)
+        );
+        let out = run(&program);
+        assert!(out.status.success(), "{}", stdout(&out));
+        assert!(stdout(&out).lines().any(|line| line == format!("SAR (B60): num={value} scale=0")));
+    }
+    let out = run(&format!("DUB\nMUB MAIN\n{ONE_SIXTIETH}SAR.B60 R1\nHALT\n"));
+    assert!(out.status.success(), "{}", stdout(&out));
+    assert!(stdout(&out).lines().any(|line| line == "SAR (B60): num=1 scale=1"));
+}
+
+#[test]
 fn nig_multiplier_scale_reaches_the_interpreter() {
     // R0 = 60 × (1/60) = 1: AFTER espera 1 tick. Con la escala ignorada, R0 = 60 y espera 60.
     let program = format!(

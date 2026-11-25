@@ -50,6 +50,10 @@ jobs:
       - run: uv sync --locked --extra dev --extra gemini
       - name: Check locked workspace
         run: cargo check --workspace --locked
+      - name: ABZU minimal native profile
+        run: |
+          cargo check --locked -p babylon60_root --lib --no-default-features --features microkernel
+          cargo check --locked -p babylon60-kernel --lib
       - name: B60 DSL engine and CLI regressions
         run: cargo test --locked -p babylon60_root --bin babylon-dsl --test b60_dsl_cli
       - name: Test workspace with isolated IPC scheduling
@@ -91,6 +95,8 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Check the locked workspace on Darwin
         run: cargo check --workspace --locked
+      - name: ABZU scheduler and PMU availability on Darwin
+        run: cargo test --locked -p babylon60-kernel --lib scheduler::
       - name: Exercise the real Darwin confinement boundary
         run: >-
           cargo test --locked --test omega_mediation_campaign --features cortex-persist

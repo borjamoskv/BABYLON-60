@@ -22,10 +22,10 @@ Este directorio aloja los sub-crates especializados en `00_ABZU_KERNEL/crates/` 
 ## Límites de convergencia y perfil mínimo
 
 - Q32.32: cada tick usa floor(2^32/60) = 71582788 unidades; el déficit es 16 unidades cada 60 ticks, aproximadamente 0.322 ms/día antes de saturación. El reloj lógico cuenta ticks, no segundos físicos.
-- El runtime representa racionales num/60^scale, y AFTER exige ticks enteros no negativos. El parser ISA del compiler no acepta AFTER ni BA.EXACT. No existe una equivalencia de ejecución general demostrada entre estas capas (NO_VERIFICADO).
-- TLA+ especifica TypeOK, StrictConsensus y Termination bajo weak fairness para tres agentes y quórum dos; no demuestra BFT de red ni una cota temporal física. Sin resultado TLC nuevo.
-- La telemetría PMU del scheduler distingue None (no disponible) de Some(0); los contadores no miden energía. NUL-ZK prueba IR y texto generado, no generación/verificación de pruebas criptográficas.
-- El perfil nativo mínimo selecciona explícitamente el paquete y las features existentes. Los experimentos permanecen en el workspace y su CI integral, sin cambiar Cargo.lock ni los formatos persistidos.
+- El runtime representa racionales num/60^scale, y AFTER exige ticks enteros no negativos. El parser ISA del compiler no acepta AFTER ni BA.EXACT. El subconjunto entero común se contrasta con un oráculo explícito en tests compiler→kernel y dispatch del runtime, sin equiparar sus relojes ni gramáticas. No existe una equivalencia general demostrada (NO_VERIFICADO).
+- TLA+ especifica TypeOK, StrictConsensus y Termination bajo weak fairness para tres agentes y quórum dos; no demuestra BFT de red ni una cota temporal física. Los estados terminales son absorbentes; el chequeo de deadlock puede permanecer activo. Sin resultado TLC nuevo.
+- La telemetría PMU habilita contadores Linux y distingue None (sin muestra completa, incluida multiplexación) de Some(0). Son conteos acumulados no sincronizados, no energía. NUL-ZK prueba IR y texto generado, no generación/verificación de pruebas criptográficas.
+- El perfil nativo mínimo selecciona explícitamente el paquete y las features existentes. Los experimentos permanecen en el workspace y su CI integral. La matriz comprueba explícitamente el perfil mínimo y los tests de scheduler en Darwin; Cargo.lock y formatos persistidos permanecen intactos.
 
 ```sh
 cargo check --locked -p babylon60_root --lib --no-default-features --features microkernel
@@ -34,6 +34,13 @@ cargo test --locked -p babylon60-kernel
 cargo test --locked -p babylon60-compiler
 cargo test --locked -p babylon60-runtime
 cargo test --locked -p nul-zk
+```
+
+Para reproducir el modelo TLA+ con un JAR TLC previamente obtenido y verificado:
+
+```sh
+cd 00_ABZU_KERNEL/formal_verification
+java -cp "$TLA2TOOLS_JAR" tlc2.TLC -config BabylonBFT.cfg BabylonBFT.tla
 ```
 
 Estos comandos son recetas de verificación, no recibos de ejecución. La evidencia normativa se delimita en [CLAIMS.toml](../CLAIMS.toml).

@@ -28,25 +28,49 @@ impl ExergyTelemetry {
     pub fn new() -> Self {
         #[cfg(target_os = "linux")]
         {
-            let l1d = Builder::new().kind(perf_event::events::Hardware::CACHE_MISSES).build().ok();
-            let branch = Builder::new().kind(perf_event::events::Hardware::BRANCH_MISSES).build().ok();
-            Self { cache_misses: l1d, branch_misses: branch }
+            let cache_misses = Builder::new()
+                .kind(perf_event::events::Hardware::CACHE_MISSES)
+                .build()
+                .ok()
+                .and_then(|mut counter| {
+                    counter.enable().ok()?;
+                    Some(counter)
+                });
+            let branch_misses = Builder::new()
+                .kind(perf_event::events::Hardware::BRANCH_MISSES)
+                .build()
+                .ok()
+                .and_then(|mut counter| {
+                    counter.enable().ok()?;
+                    Some(counter)
+                });
+            Self { cache_misses, branch_misses }
         }
         #[cfg(not(target_os = "linux"))]
         Self {}
     }
 
-    /// Each counter is independently unavailable if unsupported or unreadable.
+    /// Cumulative raw counts, independently sampled; not a synchronized interval.
+    /// Unavailable if unreadable, never scheduled or multiplexed (no estimated scaling).
     pub fn sample_entropy(&mut self) -> (Option<u64>, Option<u64>) {
         #[cfg(target_os = "linux")]
         {
-            let cache = self.cache_misses.as_mut().and_then(|c| c.read().ok());
-            let br = self.branch_misses.as_mut().and_then(|c| c.read().ok());
+            let sample = |counter: &mut Counter| {
+                let data = counter.read_count_and_time().ok()?;
+                observed_count(data.count, data.time_enabled, data.time_running)
+            };
+            let cache = self.cache_misses.as_mut().and_then(sample);
+            let br = self.branch_misses.as_mut().and_then(sample);
             (cache, br)
         }
         #[cfg(not(target_os = "linux"))]
         (None, None)
     }
+}
+
+#[cfg(any(target_os = "linux", test))]
+fn observed_count(count: u64, enabled: u64, running: u64) -> Option<u64> {
+    (running > 0 && running == enabled).then_some(count)
 }
 
 use crate::scheduler::time::{LogicalClock, SimulationClock};
@@ -118,6 +142,22 @@ mod tests {
         let elapsed = (0..60).fold(SimulationClock::new(0), |clock, _| clock.advance(tick));
         assert_eq!(elapsed.0, scale - 16);
         assert_eq!(day * scale - day * 60 * tick, 1_382_400);
+    }
+
+    #[test]
+    fn pmu_observation_requires_actual_unmultiplexed_runtime() {
+        assert_eq!(observed_count(0, 0, 0), None);
+        assert_eq!(observed_count(0, 100, 0), None);
+        assert_eq!(observed_count(0, 100, 100), Some(0));
+        assert_eq!(observed_count(42, 100, 50), None);
+        assert_eq!(observed_count(42, 100, 100), Some(42));
+    }
+
+    #[cfg(target_os = "linux")]
+    #[test]
+    fn missing_linux_counters_are_independently_unavailable() {
+        let mut telemetry = ExergyTelemetry { cache_misses: None, branch_misses: None };
+        assert_eq!(telemetry.sample_entropy(), (None, None));
     }
 
     #[cfg(not(target_os = "linux"))]

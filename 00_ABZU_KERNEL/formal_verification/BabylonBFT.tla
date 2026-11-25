@@ -42,8 +42,14 @@ CheckConsensus ==
     /\ state' = IF Cardinality(agreeing) >= Quorum THEN "ConsensusReached" ELSE "Failed"
     /\ UNCHANGED <<responded, agreeing>>
 
+\* Absorción explícita: los estados terminales tienen sucesor idéntico.
+\* No añade comportamiento a [][Next]_vars; permite mantener el chequeo de deadlock.
+TerminalStutter ==
+    /\ state \in {"ConsensusReached", "Failed"}
+    /\ UNCHANGED vars
+
 \* Función de Transición Global
-Next == Start \/ (\E a \in Agents : AgentResponds(a)) \/ CheckConsensus
+Next == Start \/ (\E a \in Agents : AgentResponds(a)) \/ CheckConsensus \/ TerminalStutter
 
 \* -------------------------------------------------------------------------
 \* HIPÓTESIS DE WEAK FAIRNESS (sin límites físicos)

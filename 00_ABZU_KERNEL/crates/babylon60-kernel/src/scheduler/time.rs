@@ -61,6 +61,17 @@ mod tests {
     use super::*;
 
     #[test]
+    fn clock_saturation_and_fractional_display_are_explicit() {
+        assert_eq!(LogicalClock(u64::MAX).tick().0, u64::MAX);
+        assert_eq!(SimulationClock::from_raw(u64::MAX - 1).advance(2).0, u64::MAX);
+        assert_eq!(SimulationClock::from_secs(u64::MAX).0, u64::MAX);
+        let before_second = SimulationClock::from_raw(SimulationClock::SCALE - 16);
+        assert_eq!(before_second.as_secs(), 0);
+        assert_eq!(before_second.subsec_millis(), 999);
+        assert_eq!(SimulationClock::from_secs(1).subsec_millis(), 0);
+    }
+
+    #[test]
     fn test_simulation_clock_fixed_point() {
         let t1 = SimulationClock::from_secs(10);
         let t2 = SimulationClock::from_secs(5);
