@@ -422,7 +422,6 @@ def test_exported_pack_preserves_pending_evaluation_and_content_digest() -> None
             assert item["pending_evaluation"] is True
 
 
-
 def test_fresh_source_claims_export_matches_canonical_toml(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     """Generate a new, unsigned export without changing a tracked historical receipt."""
     import sys
@@ -436,9 +435,10 @@ def test_fresh_source_claims_export_matches_canonical_toml(tmp_path: Path, monke
     raw = (REPO_ROOT / "CLAIMS.toml").read_bytes()
     claims = tomllib.loads(raw.decode("utf-8"))["claim"]
     report = json.loads(output.read_text(encoding="utf-8"))
-    assert report.pop("report_sha256") == hashlib.sha256(
-        json.dumps(report, indent=2, ensure_ascii=False).encode("utf-8")
-    ).hexdigest()
+    assert (
+        report.pop("report_sha256")
+        == hashlib.sha256(json.dumps(report, indent=2, ensure_ascii=False).encode("utf-8")).hexdigest()
+    )
     assert report["source_claims_sha256"] == hashlib.sha256(raw).hexdigest()
     assert report["publication_authorized"] is False
     assert report["legal_conformity"] == "NOT_DETERMINED"
