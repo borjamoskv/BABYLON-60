@@ -12,6 +12,106 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 
 
+@pytest.mark.parametrize(
+    ("option", "expected_exit"), [("--help", 0), ("-h", 0), ("--unknown-option", 2), ("--run-invariants", 2)]
+)
+def test_claim_verifier_help_and_unknown_options_never_run_suites(monkeypatch, capsys, option, expected_exit):
+    from scripts.c5_quality_gates import verify_claims
+
+    monkeypatch.setattr(sys, "argv", ["verify_claims.py", option])
+
+    def forbid_suite(*args, **kwargs):
+        pytest.fail("help or an invalid option must not start claim verification")
+
+    monkeypatch.setattr(verify_claims, "source_commit", forbid_suite)
+    monkeypatch.setattr(verify_claims, "run_command", forbid_suite)
+    with pytest.raises(SystemExit) as exc:
+        verify_claims.main()
+    assert exc.value.code == expected_exit
+    stdout, stderr = capsys.readouterr()
+    assert "usage:" in (stdout if expected_exit == 0 else stderr)
+
+
+@pytest.mark.parametrize(
+    "options",
+    [
+        ["--list", "--check-invariants"],
+        ["--check-invariants", "--list"],
+        ["--list", "--check-invariants", "--run-invariants"],
+    ],
+)
+def test_claim_verifier_rejects_ambiguous_modes(monkeypatch, options):
+    from scripts.c5_quality_gates import verify_claims
+
+    monkeypatch.setattr(sys, "argv", ["verify_claims.py", *options])
+    monkeypatch.setattr(verify_claims, "source_commit", lambda *args: pytest.fail("must not execute"))
+    with pytest.raises(SystemExit) as exc:
+        verify_claims.main()
+    assert exc.value.code == 2
+
+
+@pytest.mark.parametrize(
+    ("options", "expected_exit"),
+    [
+        (["--help"], 0),
+        (["--help", "--execute"], 0),
+        (["--execute", "--help"], 0),
+        (["--unknown", "--execute"], 2),
+        (["--exec"], 2),
+        (["--list", "--execute"], 2),
+        (["--execute", "--list"], 2),
+        (["--list", "--strict"], 2),
+        (["--strict", "--list"], 2),
+    ],
+)
+def test_claim_wrapper_help_and_unknown_options_never_run_suites(monkeypatch, capsys, options, expected_exit):
+    from scripts import verify_claims
+
+    monkeypatch.setattr(sys, "argv", ["verify_claims.py", *options])
+
+    def forbid_suite(*args, **kwargs):
+        pytest.fail("help or an invalid option must not start claim verification")
+
+    monkeypatch.setattr(subprocess, "run", forbid_suite)
+    with pytest.raises(SystemExit) as exc:
+        verify_claims.main()
+    assert exc.value.code == expected_exit
+    stdout, stderr = capsys.readouterr()
+    assert "usage:" in (stdout if expected_exit == 0 else stderr)
+
+
+@pytest.mark.parametrize(
+    "options", [["--check-invariants", "--run-invariants"], ["--run-invariants", "--check-invariants"]]
+)
+def test_claim_invariant_runner_accepts_explicit_check_mode(monkeypatch, options):
+    from scripts.c5_quality_gates import verify_claims
+
+    monkeypatch.setattr(sys, "argv", ["verify_claims.py", *options])
+    calls = []
+    monkeypatch.setattr(verify_claims, "execute_invariant_suites", lambda *args: calls.append(args))
+    assert verify_claims.main() == 0
+    assert len(calls) == 1
+
+
+@pytest.mark.parametrize(
+    ("options", "list_only"), [([], True), (["--list"], True), (["--execute"], False), (["--strict"], False)]
+)
+def test_claim_wrapper_modes_are_preserved(monkeypatch, options, list_only):
+    from scripts import verify_claims
+
+    monkeypatch.setattr(sys, "argv", ["verify_claims.py", *options])
+    calls = []
+
+    def record_run(command):
+        calls.append(command)
+        return subprocess.CompletedProcess(command, 0)
+
+    monkeypatch.setattr(subprocess, "run", record_run)
+    assert verify_claims.main() == 0
+    assert len(calls) == 1
+    assert ("--list" in calls[0]) is list_only
+
+
 def test_energy_claim_is_scoped_and_compatible_with_listing():
     claim = tomllib.loads((ROOT / "CLAIMS.toml").read_text())["claim"]["zero_anergy"]
     assert claim["status"] == "partial_trace"

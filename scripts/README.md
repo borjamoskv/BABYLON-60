@@ -36,7 +36,7 @@ rutas anteriores y hashes de contenido.
 | [`generate_scripts_readme.py`](generate_scripts_readme.py) | `Python` | 38cfeca0bce0 | ruff: noqa: E402 |
 | [`lead_data_policy.py`](lead_data_policy.py) | `Python` | 4719ae7e7a9a | Private storage and provenance boundaries for synthetic and commercial records. |
 | [`runner.py`](runner.py) | `Python` | 7d32901ad426 | runner.py - Central CLI Dispatcher for BABYLON-60 Sovereign Scripts Suite |
-| [`verify_claims.py`](verify_claims.py) | `Python` | 5e4d5a1dcbac | Modes: |
+| [`verify_claims.py`](verify_claims.py) | `Python` | 7f0c1e2c9ae3 | Modes: |
 | [`zero_touch_onboarding_daemon.py`](zero_touch_onboarding_daemon.py) | `Python` | fbe663b0237b | Author: Borja Fernández Angulo (borjamoskv) |
 | [`c5_deploy_pipeline.sh`](c5_deploy_pipeline.sh) | `Shell` | fd08aabed385 | 1. Verificación Estructural |
 | [`create_macos_app.sh`](create_macos_app.sh) | `Shell` | 5839b13cede7 | Cero dependencias externas. Genera un bundle .app compatible con Finder y Dock. |
@@ -210,7 +210,7 @@ rutas anteriores y hashes de contenido.
 | [`c5_quality_gates/symlink_depth_auditor.py`](c5_quality_gates/symlink_depth_auditor.py) | `Python` | 61c3592f192c | Symlink Depth Auditor (INV_C5_12 Enforcer). |
 | [`c5_quality_gates/sync_docs_index.py`](c5_quality_gates/sync_docs_index.py) | `Python` | c25ca94286bb | ruff: noqa: E402 |
 | [`c5_quality_gates/sync_version.py`](c5_quality_gates/sync_version.py) | `Python` | 583c2ebdac4c | Canonical Version Synchronizer. |
-| [`c5_quality_gates/verify_claims.py`](c5_quality_gates/verify_claims.py) | `Python` | 9de9566f97e2 | Gobernanza determinista fail-closed: Todo claim en CLAIMS.toml es auditado contra evidencia en silicio. |
+| [`c5_quality_gates/verify_claims.py`](c5_quality_gates/verify_claims.py) | `Python` | 258f55b56bab | Gobernanza determinista fail-closed: Todo claim en CLAIMS.toml es auditado contra evidencia en silicio. |
 | [`c5_quality_gates/verify_distribution.py`](c5_quality_gates/verify_distribution.py) | `Python` | 1fdc12bf90e6 | C5-REAL Distribution Quality Gate: verify_distribution.py |
 
 ### 🚀 Host & Repository Setup Scripts

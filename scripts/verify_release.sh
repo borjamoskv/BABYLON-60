@@ -204,16 +204,22 @@ claims_toml_path = repo_root / "CLAIMS.toml"
 
 for req in (manifest_path, evidence_path, lock_path, claims_toml_path):
     if not req.is_file():
-        fail(f"Missing required verification input: {req}", check_name="manifest_integrity")
+        fail(f"Missing required verification input: {req}", check_name="verification_inputs")
 
 actual_manifest_sha256 = hashlib.sha256(manifest_path.read_bytes()).hexdigest()
-if expected_manifest_sha256 and actual_manifest_sha256 != expected_manifest_sha256:
-    fail(
-        f"RELEASE_MANIFEST.json SHA-256 mismatch against --expected-manifest-sha256: "
-        f"expected {expected_manifest_sha256}, got {actual_manifest_sha256}",
-        check_name="manifest_integrity",
+if expected_manifest_sha256:
+    if actual_manifest_sha256 != expected_manifest_sha256:
+        fail(
+            f"RELEASE_MANIFEST.json SHA-256 mismatch against --expected-manifest-sha256: "
+            f"expected {expected_manifest_sha256}, got {actual_manifest_sha256}",
+            check_name="manifest_sha256_pin",
+        )
+    record_check("manifest_sha256_pin", "PASS", True, f"sha256={actual_manifest_sha256[:16]}...; reference supplied")
+else:
+    record_check(
+        "manifest_sha256_pin", "NOT_CHECKED", False,
+        f"sha256={actual_manifest_sha256[:16]}...; no --expected-manifest-sha256",
     )
-record_check("manifest_integrity", "PASS", True, f"sha256={actual_manifest_sha256[:16]}...")
 
 manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
 evidence = json.loads(evidence_path.read_text(encoding="utf-8"))
@@ -276,7 +282,7 @@ if lock_tree_digest and lock_tree_digest != manifest_tree_digest:
 env_digest = str(evidence.get("environment_digest") or "").strip()
 if not env_digest:
     fail("Missing execution subject environment_digest in evidence.json", check_name="provenance_alignment")
-record_check("provenance_alignment", "PASS", True, f"commit={manifest_commit[:12]}")
+record_check("provenance_alignment", "PASS", True, f"commit={manifest_commit[:12]}; metadata only; Git commit not checked")
 
 # 2. Verify zero failed claims and recompute every leaf hash + Merkle root
 claims_summary = manifest.get("claims", {})
@@ -483,7 +489,10 @@ if actual_tree_digest != expected_tree_digest:
         f"expected {expected_tree_digest}, got {actual_tree_digest}",
         check_name="source_tree_digest",
     )
-record_check("source_tree_digest", "PASS", True, f"sha256={actual_tree_digest[:16]}...")
+record_check(
+    "source_tree_digest", "PASS", True,
+    f"sha256={actual_tree_digest[:16]}...; indexed or inventoried paths only; excluded and extra files not checked",
+)
 
 # 4. Verify packaged release bundle if specified or recorded in manifest
 bundle_meta = manifest.get("release_bundle")
@@ -591,7 +600,8 @@ if sig_hex:
                 f"Ed25519 cryptographic signature verification failed: {res.stderr.strip()}",
                 check_name="cryptographic_signature",
             )
-    record_check("cryptographic_signature", "PASS", True, "Ed25519")
+    key_scope = "public key matched --pubkey" if expected_pubkey else "no --pubkey supplied"
+    record_check("cryptographic_signature", "PASS", True, f"Ed25519; {key_scope}")
 else:
     record_check("cryptographic_signature", "NOT_CHECKED", False, "unsigned manifest")
 
