@@ -96,7 +96,8 @@ jobs:
       - name: Check the locked workspace on Darwin
         run: cargo check --workspace --locked
       - name: ABZU scheduler and PMU availability on Darwin
-        run: cargo test --locked -p babylon60-kernel --lib scheduler::
+        run: >-
+          cargo test --locked -p babylon60-kernel --lib scheduler::
       - name: Exercise the real Darwin confinement boundary
         run: >-
           cargo test --locked --test omega_mediation_campaign --features cortex-persist
