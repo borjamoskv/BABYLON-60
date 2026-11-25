@@ -22,7 +22,8 @@ operador determinan sus permisos.
 > Las garantías se limitan al [alcance y la evidencia declarados](#qué-está-verificado).
 
 [Probar](#probar-en-5-minutos) · [Con tu agente](#con-tu-agente) ·
-[Instalar / integrar](#instalación) · [Límites](#lo-que-run-no-impide) ·
+[Instalar / integrar](#instalación) · [Solución de problemas](#solución-de-problemas) ·
+[Límites](#lo-que-run-no-impide) ·
 [Verificar](#qué-está-verificado) · [Referencia](#documentación) ·
 [Preguntas frecuentes](#preguntas-frecuentes-para-humanos)
 
@@ -82,21 +83,23 @@ históricas están en la [referencia de la demo](docs/03_guides/README_REFERENCE
 
 ## Con tu agente
 
-Tras instalar, ejecuta desde **la carpeta de tu proyecto**, sustituyendo
-`~/BABYLON-60` por la ruta del clon:
+**Solo macOS / Linux.** Primero [instala Babylon](#instalación) y la CLI de tu
+agente. Después ejecuta desde **la carpeta de tu proyecto**, sustituyendo
+`$HOME/BABYLON-60` por la ruta absoluta de las fuentes. Conserva las comillas
+para que también funcionen las rutas con espacios.
 
 **Codex:**
 
 ```bash
-cd ~/tu-proyecto
-~/BABYLON-60/.venv/bin/babylon60 run --preset codex -- codex
+cd "$HOME/tu-proyecto"
+"$HOME/BABYLON-60/.venv/bin/babylon60" run --preset codex -- codex
 ```
 
 **O bien Claude Code:**
 
 ```bash
-cd ~/tu-proyecto
-~/BABYLON-60/.venv/bin/babylon60 run --preset claude-code -- claude
+cd "$HOME/tu-proyecto"
+"$HOME/BABYLON-60/.venv/bin/babylon60" run --preset claude-code -- claude
 ```
 
 Se puede escribir en el workspace, la carpeta temporal privada y las rutas
@@ -123,9 +126,32 @@ a una versión 1.0.2 antigua con otro contenido. El instalador requiere `uv`,
 Python 3.11+ y un checkout limpio. Instala la CLI de terminal y el servidor MCP,
 sin abrir una aplicación de escritorio.
 
-Primero [obtén el código](#obtener-el-código) y ejecuta los comandos desde su
-carpeta raíz. **macOS / Linux:** si no ejecutaste la demo, ejecuta primero
-`bash install.sh`. Después puedes configurar un cliente:
+Primero [obtén el código](#obtener-el-código). Ejecuta estos comandos desde su
+carpeta raíz. **macOS / Linux:** omite `bash install.sh` si ya instalaste con la demo.
+
+```bash
+bash install.sh
+.venv/bin/babylon60 --help
+```
+
+**Windows (PowerShell):** instala desde un clon limpio o el ZIP fuente.
+Windows admite la CLI y el servidor MCP, pero no el confinamiento de procesos:
+
+```powershell
+pwsh -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -DryRun
+pwsh -NoProfile -ExecutionPolicy Bypass -File .\install.ps1
+.\.venv\Scripts\babylon60.exe --help
+```
+
+Si no tienes `pwsh`, también sirve `powershell`. `-ExecutionPolicy` afecta
+solo a ese proceso. El dry run muestra el plan; no instala nada.
+
+**Comprobación:** `--help` debe mostrar el uso y comandos como `setup`, `doctor`
+y `run`. Confirma que la CLI arranca. Integrar un cliente es un paso separado.
+
+### Conectar un cliente (opcional)
+
+**macOS / Linux:**
 
 ```bash
 .venv/bin/babylon60 setup --client codex --dry-run
@@ -133,17 +159,13 @@ carpeta raíz. **macOS / Linux:** si no ejecutaste la demo, ejecuta primero
 .venv/bin/babylon60 doctor --client codex
 ```
 
-**Windows (PowerShell):** instala desde un clon limpio o el ZIP fuente.
-Windows admite la CLI y el servidor MCP, pero no el confinamiento de procesos:
+**Windows (PowerShell):**
 
 ```powershell
-pwsh -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -DryRun -Client codex
-pwsh -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -Client codex
+.\.venv\Scripts\babylon60.exe setup --client codex --dry-run
+.\.venv\Scripts\babylon60.exe setup --client codex
 .\.venv\Scripts\babylon60.exe doctor --client codex
 ```
-
-Si no tienes `pwsh`, también sirve `powershell`. `-ExecutionPolicy` afecta
-solo a ese proceso.
 
 En ambas plataformas, sustituye `codex` por `claude`, `cursor` o `gemini` según
 tu cliente; Codex necesita su CLI en PATH. Setup registra MCP e instrucciones
@@ -164,6 +186,17 @@ En un checkout Git, anota `git rev-parse HEAD`; en un ZIP extraído, consulta
 no el workspace Rust completo. Los enlaces con **↗** abren el repositorio en línea.
 
 [Instalación avanzada y retirada](docs/03_guides/README_REFERENCE_ES.md#instalación).
+
+## Solución de problemas
+
+| Síntoma | Siguiente paso |
+| :--- | :--- |
+| `uv is required` | [Instala uv](https://docs.astral.sh/uv/getting-started/installation/), abre de nuevo la terminal y repite el instalador. |
+| El instalador exige un checkout limpio | Revisa `git status --short`. Conserva tus cambios; instala desde otro clon limpio o extrae el ZIP fuente en una carpeta nueva. |
+| No aparece `babylon60` o muestra comandos antiguos | Usa `.venv/bin/babylon60` desde la raíz de las fuentes, o `.\.venv\Scripts\babylon60.exe` en Windows. El instalador no lo añade al PATH. |
+| `run` rechaza el workspace | Usa una carpeta propia del proyecto. Se rechazan las fuentes de Babylon, la raíz de tu HOME y los temporales compartidos. Consulta las [restricciones del workspace](#con-tu-agente). |
+| Gemini lista MCP pero lo desactiva | Revisa la confianza de la carpeta del proyecto en Gemini; aparecer en la lista no acredita conexión. Consulta la [configuración del cliente](#conectar-un-cliente-opcional). |
+| `verify.sh` indica que un hash no coincide | Los archivos y el recibo difieren. Usa las fuentes intactas que corresponden al manifiesto o regenera la evidencia tras probar tus cambios. Editar un hash no lo repara. |
 
 <a id="límites-conocidos"></a>
 
@@ -214,6 +247,8 @@ Setup no arranca ese adaptador. [Arquitectura y alcance de la memoria](docs/03_g
 [`CLAIMS.toml`](CLAIMS.toml) registra estado, alcance y nivel de evidencia por
 declaración. Los modelos formales, los tests software y la verificación física
 del hardware son evidencias distintas. La demo tiene sus propias ejecuciones registradas.
+Desde la raíz de las fuentes, usa una shell con Bash y `python3` disponibles;
+el comando siguiente no es nativo de PowerShell.
 
 ```bash
 bash verify.sh
@@ -238,20 +273,20 @@ eléctricos físicos. Babylon no certifica por sí solo conformidad jurídica.
 [Guía de usuario](docs/03_guides/USER_GUIDE.md) ·
 [Índice documental ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/docs/README.md) · [Web](https://babylon60.com/)
 
-Las secciones detalladas que antes estaban en esta página siguen disponibles aquí:
+Elige un tema para consultar el método, los ejemplos o la evidencia registrada:
 
-| Tema | Referencia |
+| Referencia | Qué encontrarás |
 | :--- | :--- |
-| <a id="qué-verás"></a>Qué verás | [Leer](docs/03_guides/README_REFERENCE_ES.md#qué-verás) |
-| <a id="qué-hace-la-demo"></a>Qué hace la demo | [Leer](docs/03_guides/README_REFERENCE_ES.md#qué-hace-la-demo) |
-| <a id="ejecuciones-registradas"></a>Ejecuciones registradas | [Leer](docs/03_guides/README_REFERENCE_ES.md#ejecuciones-registradas) |
-| <a id="lo-que-deja-de-funcionar-dentro"></a>Lo que deja de funcionar dentro | [Leer](docs/03_guides/README_REFERENCE_ES.md#lo-que-deja-de-funcionar-dentro) |
-| <a id="más-allá-del-confinamiento"></a>Más allá del confinamiento | [Leer](docs/03_guides/README_REFERENCE_ES.md#más-allá-del-confinamiento) |
-| <a id="vocabulario"></a>Vocabulario | [Leer](docs/03_guides/README_REFERENCE_ES.md#vocabulario) |
-| <a id="cinco-pruebas-de-aceptación"></a>Cinco pruebas de aceptación | [Leer](docs/03_guides/README_REFERENCE_ES.md#cinco-pruebas-de-aceptación) |
-| <a id="cotas-de-incidentes-sigkill-de-proceso-vs-corte-eléctrico-físico"></a>Cotas de Incidentes (SIGKILL de Proceso vs. Corte Eléctrico Físico) | [Leer](docs/03_guides/README_REFERENCE_ES.md#cotas-de-incidentes-sigkill-de-proceso-vs-corte-eléctrico-físico) |
-| <a id="matriz-normativa-de-hashes-blake3--sha-256--sha3-256"></a>Matriz Normativa de Hashes (BLAKE3 · SHA-256 · SHA3-256) | [Leer](docs/03_guides/README_REFERENCE_ES.md#matriz-normativa-de-hashes-blake3--sha-256--sha3-256) |
-| <a id="mapa-del-repositorio"></a>Mapa del repositorio | [Leer](docs/03_guides/README_REFERENCE_ES.md#mapa-del-repositorio) |
+| <a id="qué-verás"></a>[Salida de la demo](docs/03_guides/README_REFERENCE_ES.md#qué-verás) | Ejemplo de salida y veredictos |
+| <a id="qué-hace-la-demo"></a>[Método de la demo](docs/03_guides/README_REFERENCE_ES.md#qué-hace-la-demo) | Vectores de ataque, controles y límites |
+| <a id="ejecuciones-registradas"></a>[Ejecuciones registradas](docs/03_guides/README_REFERENCE_ES.md#ejecuciones-registradas) | Resultados por plataforma y revisión |
+| <a id="lo-que-deja-de-funcionar-dentro"></a>[Compatibilidad](docs/03_guides/README_REFERENCE_ES.md#lo-que-deja-de-funcionar-dentro) | Funciones afectadas por el confinamiento |
+| <a id="más-allá-del-confinamiento"></a>[Otros componentes](docs/03_guides/README_REFERENCE_ES.md#más-allá-del-confinamiento) | Broker, memoria y su configuración separada |
+| <a id="vocabulario"></a>[Vocabulario](docs/03_guides/README_REFERENCE_ES.md#vocabulario) | Términos del proyecto y su alcance |
+| <a id="cinco-pruebas-de-aceptación"></a>[Pruebas de aceptación](docs/03_guides/README_REFERENCE_ES.md#cinco-pruebas-de-aceptación) | Cinco comprobaciones de las garantías declaradas |
+| <a id="cotas-de-incidentes-sigkill-de-proceso-vs-corte-eléctrico-físico"></a>[Pruebas de caída](docs/03_guides/README_REFERENCE_ES.md#cotas-de-incidentes-sigkill-de-proceso-vs-corte-eléctrico-físico) | Terminación de proceso frente a corte eléctrico físico |
+| <a id="matriz-normativa-de-hashes-blake3--sha-256--sha3-256"></a>[Matriz de hashes](docs/03_guides/README_REFERENCE_ES.md#matriz-normativa-de-hashes-blake3--sha-256--sha3-256) | Dónde se aplica cada algoritmo de hash |
+| <a id="mapa-del-repositorio"></a>[Mapa del repositorio](docs/03_guides/README_REFERENCE_ES.md#mapa-del-repositorio) | Directorios de fuentes y responsabilidades |
 
 ## Preguntas Frecuentes para Humanos
 

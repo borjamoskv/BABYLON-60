@@ -21,7 +21,8 @@ an action; the configured policy and operator determine its permissions.
 > Guarantees apply only to the [declared scope and evidence](#what-is-verified).
 
 [Try it](#try-it-in-5-minutes) · [With your agent](#with-your-agent) ·
-[Install / integrate](#installation) · [Limits](#what-run-does-not-stop) ·
+[Install / integrate](#installation) · [Troubleshooting](#troubleshooting) ·
+[Limits](#what-run-does-not-stop) ·
 [Verify](#what-is-verified) · [Reference](#documentation) ·
 [FAQ](#frequently-asked-questions)
 
@@ -81,21 +82,22 @@ by platform and revision; historical counts are in the
 
 ## With your agent
 
-After installation, run from **your project's directory**, replacing
-`~/BABYLON-60` with the clone's path:
+**macOS / Linux only.** [Install Babylon](#installation) and your agent's CLI
+first. Then run from **your project's directory**, replacing `$HOME/BABYLON-60`
+with the absolute source path. Keep the quotes so paths with spaces also work.
 
 **Codex:**
 
 ```bash
-cd ~/your-project
-~/BABYLON-60/.venv/bin/babylon60 run --preset codex -- codex
+cd "$HOME/your-project"
+"$HOME/BABYLON-60/.venv/bin/babylon60" run --preset codex -- codex
 ```
 
 **Or Claude Code:**
 
 ```bash
-cd ~/your-project
-~/BABYLON-60/.venv/bin/babylon60 run --preset claude-code -- claude
+cd "$HOME/your-project"
+"$HOME/BABYLON-60/.venv/bin/babylon60" run --preset claude-code -- claude
 ```
 
 Write access covers the workspace, private temporary directory and paths the
@@ -120,9 +122,32 @@ to an older 1.0.2 package with different content. The installer needs `uv`,
 Python 3.11+ and a clean checkout. It installs the terminal CLI and MCP server,
 without opening a desktop app.
 
-[Get the source](#get-the-source) first and run the following commands from its
-root folder. **macOS / Linux:** if you have not run the demo, run
-`bash install.sh` first. Then optionally configure a client:
+[Get the source](#get-the-source) first. Run these commands from its root folder.
+**macOS / Linux:** skip `bash install.sh` if you already installed via the demo.
+
+```bash
+bash install.sh
+.venv/bin/babylon60 --help
+```
+
+**Windows (PowerShell):** install from a clean clone or the source ZIP.
+Windows supports the CLI and MCP server, not process confinement:
+
+```powershell
+pwsh -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -DryRun
+pwsh -NoProfile -ExecutionPolicy Bypass -File .\install.ps1
+.\.venv\Scripts\babylon60.exe --help
+```
+
+`powershell` also works if `pwsh` is unavailable. `-ExecutionPolicy` affects
+only that process. A dry run previews installation; it does not install anything.
+
+**Check:** `--help` should print usage and commands including `setup`, `doctor`
+and `run`. This confirms the CLI starts. Client integration is a separate step.
+
+### Connect a client (optional)
+
+**macOS / Linux:**
 
 ```bash
 .venv/bin/babylon60 setup --client codex --dry-run
@@ -130,17 +155,13 @@ root folder. **macOS / Linux:** if you have not run the demo, run
 .venv/bin/babylon60 doctor --client codex
 ```
 
-**Windows (PowerShell):** install from a clean clone or the source ZIP.
-Windows supports the CLI and MCP server, not process confinement:
+**Windows (PowerShell):**
 
 ```powershell
-pwsh -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -DryRun -Client codex
-pwsh -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -Client codex
+.\.venv\Scripts\babylon60.exe setup --client codex --dry-run
+.\.venv\Scripts\babylon60.exe setup --client codex
 .\.venv\Scripts\babylon60.exe doctor --client codex
 ```
-
-`powershell` also works if `pwsh` is unavailable. `-ExecutionPolicy` affects
-only that process.
 
 For either platform, replace `codex` with `claude`, `cursor` or `gemini` as
 needed; Codex integration requires its CLI in PATH. Setup registers MCP and
@@ -160,6 +181,17 @@ checkout, record `git rev-parse HEAD`; for an extracted ZIP, read `commit` in
 complete Rust workspace. Links marked **↗** open the full repository online.
 
 [Advanced setup and removal](docs/03_guides/README_REFERENCE.md#installation).
+
+## Troubleshooting
+
+| Symptom | Next step |
+| :--- | :--- |
+| `uv is required` | [Install uv](https://docs.astral.sh/uv/getting-started/installation/), reopen the terminal and rerun the installer. |
+| Installer asks for a clean checkout | Inspect `git status --short`. Keep your changes; install from a separate clean clone or extract the source ZIP into a new folder. |
+| `babylon60` is missing or shows old commands | Use `.venv/bin/babylon60` from the source root, or `.\.venv\Scripts\babylon60.exe` on Windows. The installer does not add it to PATH. |
+| `run` rejects the workspace | Use a dedicated project directory. The Babylon sources, your home root and shared temporary directories are rejected. See [workspace restrictions](#with-your-agent). |
+| Gemini lists MCP but disables it | Check the project's folder-trust setting in Gemini; listing alone does not establish a connection. See [client setup](#connect-a-client-optional). |
+| `verify.sh` reports a hash mismatch | The files and receipt disagree. Use the intact source matching the manifest, or regenerate evidence after testing your changes. Editing a hash is not a repair. |
 
 <a id="known-limits"></a>
 
@@ -209,6 +241,8 @@ that adapter. [Architecture and memory scope](docs/03_guides/README_REFERENCE.md
 [`CLAIMS.toml`](CLAIMS.toml) records per-claim status, scope and evidence
 levels. Formal models, software tests and physical hardware verification are
 different kinds of evidence. Demo results have their own recorded runs.
+From the source root, use a shell with Bash and `python3` available; the command
+below is not a native PowerShell command.
 
 ```bash
 bash verify.sh
@@ -233,20 +267,20 @@ loss. Babylon does not itself certify legal compliance.
 [User guide (ES)](docs/03_guides/USER_GUIDE.md) ·
 [Documentation index ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/docs/README.md) · [Website](https://babylon60.com/)
 
-Detailed sections previously on this page remain available here:
+Choose a topic for the method, examples or recorded evidence:
 
-| Topic | Reference |
+| Reference | What you will find |
 | :--- | :--- |
-| <a id="what-you-will-see"></a>What you will see | [Read](docs/03_guides/README_REFERENCE.md#what-you-will-see) |
-| <a id="what-the-demo-does"></a>What the demo does | [Read](docs/03_guides/README_REFERENCE.md#what-the-demo-does) |
-| <a id="recorded-runs"></a>Recorded runs | [Read](docs/03_guides/README_REFERENCE.md#recorded-runs) |
-| <a id="what-stops-working-inside"></a>What stops working inside | [Read](docs/03_guides/README_REFERENCE.md#what-stops-working-inside) |
-| <a id="beyond-confinement"></a>Beyond confinement | [Read](docs/03_guides/README_REFERENCE.md#beyond-confinement) |
-| <a id="vocabulary"></a>Vocabulary | [Read](docs/03_guides/README_REFERENCE.md#vocabulary) |
-| <a id="five-acceptance-tests"></a>Five acceptance tests | [Read](docs/03_guides/README_REFERENCE.md#five-acceptance-tests) |
-| <a id="incident-bounds-process-sigkill-vs-physical-power-loss"></a>Incident Bounds (Process SIGKILL vs. Physical Power Loss) | [Read](docs/03_guides/README_REFERENCE.md#incident-bounds-process-sigkill-vs-physical-power-loss) |
-| <a id="normative-hash-matrix-blake3--sha-256--sha3-256"></a>Normative Hash Matrix (BLAKE3 · SHA-256 · SHA3-256) | [Read](docs/03_guides/README_REFERENCE.md#normative-hash-matrix-blake3--sha-256--sha3-256) |
-| <a id="repository-map"></a>Repository map | [Read](docs/03_guides/README_REFERENCE.md#repository-map) |
+| <a id="what-you-will-see"></a>[Demo output](docs/03_guides/README_REFERENCE.md#what-you-will-see) | Example output and verdicts |
+| <a id="what-the-demo-does"></a>[Demo method](docs/03_guides/README_REFERENCE.md#what-the-demo-does) | Attack vectors, controls and boundaries |
+| <a id="recorded-runs"></a>[Recorded runs](docs/03_guides/README_REFERENCE.md#recorded-runs) | Results by platform and revision |
+| <a id="what-stops-working-inside"></a>[Compatibility](docs/03_guides/README_REFERENCE.md#what-stops-working-inside) | Features affected by confinement |
+| <a id="beyond-confinement"></a>[Other components](docs/03_guides/README_REFERENCE.md#beyond-confinement) | Broker, memory and their separate setup |
+| <a id="vocabulary"></a>[Vocabulary](docs/03_guides/README_REFERENCE.md#vocabulary) | Project terms and their scope |
+| <a id="five-acceptance-tests"></a>[Acceptance tests](docs/03_guides/README_REFERENCE.md#five-acceptance-tests) | Five checks for the declared guarantees |
+| <a id="incident-bounds-process-sigkill-vs-physical-power-loss"></a>[Crash testing](docs/03_guides/README_REFERENCE.md#incident-bounds-process-sigkill-vs-physical-power-loss) | Process termination versus physical power loss |
+| <a id="normative-hash-matrix-blake3--sha-256--sha3-256"></a>[Hash matrix](docs/03_guides/README_REFERENCE.md#normative-hash-matrix-blake3--sha-256--sha3-256) | Where each digest algorithm applies |
+| <a id="repository-map"></a>[Repository map](docs/03_guides/README_REFERENCE.md#repository-map) | Source directories and responsibilities |
 
 ## Frequently Asked Questions
 

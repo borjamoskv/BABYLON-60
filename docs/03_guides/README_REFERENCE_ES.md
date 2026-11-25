@@ -224,6 +224,10 @@ con un LLM siguen `NO_VERIFICADO`.
 
 ## Instalación
 
+Para la primera instalación, el [inicio rápido](../../README_ES.md#instalación)
+separa la instalación de la CLI de la integración opcional del cliente. Consulta
+la [solución de problemas](../../README_ES.md#solución-de-problemas) para errores de arranque.
+
 La distribución con soporte es la CLI de terminal (`babylon60`) y el servidor
 de memoria MCP por stdio (`babylon60-mcp`). Requiere Python 3.11 o posterior y
 `uv`. Si ya ejecutaste la demo, el clon y la CLI ya están: sáltate el primer
@@ -475,7 +479,8 @@ Más a fondo: [por qué y arquitectura (`WHY_BABYLON_60.md`)](../../WHY_BABYLON_
   La evidencia de una versión publicada solo vale para el commit de origen y
   el digest del paquete registrados.
 
-**Verifica el checkout que vas a usar:**
+**Verifica el checkout que vas a usar:** desde su raíz, con Bash y `python3`
+disponibles en la shell. No es un comando nativo de PowerShell.
 
 ```bash
 bash verify.sh

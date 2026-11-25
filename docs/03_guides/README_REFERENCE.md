@@ -212,6 +212,10 @@ and `codex --version` on Linux x86_64; full sessions with an LLM are still
 
 ## Installation
 
+For a first installation, the [quick start](../../README.md#installation)
+separates CLI installation from optional client integration. See
+[troubleshooting](../../README.md#troubleshooting) for common startup errors.
+
 The supported distribution is the terminal CLI (`babylon60`) and the stdio MCP
 memory server (`babylon60-mcp`). It requires Python 3.11 or later and `uv`. If
 you already ran the demo, the clone and the CLI are in place: skip the first
@@ -460,7 +464,8 @@ Going deeper: [why and architecture (`WHY_BABYLON_60.md`, ES)](../../WHY_BABYLON
   implementation and isolation need separate evidence. A release's evidence
   applies only to its recorded source commit and bundle digest.
 
-**Verify the checkout you use:**
+**Verify the checkout you use:** from its root, with Bash and `python3`
+available in the shell. This is not a native PowerShell command.
 
 ```bash
 bash verify.sh
