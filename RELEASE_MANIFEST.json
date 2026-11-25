@@ -3,16 +3,16 @@
   "release": "5.1.0",
   "version": "5.1.0",
   "state": "candidate",
-  "commit": "9be5f04d8d04f6a23f1f1695e723e61fa4df038e",
-  "source_tree_digest": "190212f8d4c0e1f4d2679ad379b5e7ac411905828ff538c2e649c3b91acddbf9",
+  "commit": "9fab86010522a3990e9b311b36fe0e13a5fbb191",
+  "source_tree_digest": "591c2ab48de06952aa446ffef8eab4e09a35e43f971d4a2eed7d3358152d49ac",
   "axiom_root": "AX-0: No stochastic component may authorize its own irreversible effects (LLM != authority)",
   "claims_manifest_digest": "4fe991ad35b0451a32fd766f26269341e8695f9d631f95a6b3c8067d0d2110be",
-  "compiled_at_iso": "2026-11-25T17:35:44Z",
+  "compiled_at_iso": "2026-11-25T17:43:08Z",
   "prior_release": {
     "version": "5.1.0",
-    "commit": "6574bb8119d32985ae5704e2bbeb2115d7ebc0b9",
+    "commit": "9be5f04d8d04f6a23f1f1695e723e61fa4df038e",
     "manifest_schema": "babylon60.release.v5",
-    "manifest_sha256": "2ae3e9d608c936da81ac985da7b5326ca951c759ee58e26d0ff2e5bc819b54a7"
+    "manifest_sha256": "f31aecda684a204b9118084f0c7c72f230bb2a006c9327e313c2aec96702989a"
   },
   "version_sync": {
     "babylon_toml": "5.1.0",
@@ -101,7 +101,7 @@
   },
   "release_bundle": {
     "name": "Babylon60-v5.1.0-terminal-mcp.zip",
-    "tree_digest": "cd0f95747bcf8ecfa6e89bfa6804a653e475b808766cfb433959598cc498c9c0",
+    "tree_digest": "1a5a56ab1c9935865077845d1c8b009d21653c440b6b0b787734ace68b8e1e6e",
     "source_files": [
       ".agents/skills/_skill_checks/declarative.py",
       ".agents/skills/_skill_router.py",
