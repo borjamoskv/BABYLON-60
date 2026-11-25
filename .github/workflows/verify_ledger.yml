@@ -25,4 +25,12 @@ jobs:
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
-        run: python3 scripts/guards/verify_commit_trailers.py --base "$BASE_SHA" --head "$HEAD_SHA"
+        shell: bash
+        run: |
+          # A rewritten tip may no longer be reachable from any branch or tag.
+          # Root projections are handled by the verifier without the old base.
+          if ! git cat-file -e "$BASE_SHA^{commit}" 2>/dev/null \
+            && git rev-parse --verify "$HEAD_SHA^" >/dev/null 2>&1; then
+            git fetch --no-tags origin "$BASE_SHA"
+          fi
+          python3 scripts/guards/verify_commit_trailers.py --base "$BASE_SHA" --head "$HEAD_SHA"
