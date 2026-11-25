@@ -30,6 +30,27 @@
 └───────────────────────────────┘ └────────────────────────────┘
 ```
 
+### Perfiles SHARUR y concurrencia
+
+SHARUR-3600 designa el modelo sexagesimal de direccionamiento (60²), no una
+promesa de 3600 agentes simultáneos. [EdinTopology](agents_archi/topologies/edin.py)
+configura entre 1 y 100 workers; la concurrencia efectiva del planificador es
+`min(worker_count, max_batch_concurrency)` (100 y 16 por defecto).
+Una función síncrona ya iniciada puede seguir ejecutándose tras el timeout
+de su espera; esta cota no acredita un límite físico global de hilos o llamadas.
+
+| Perfil | Qué describe la fuente | Referencia |
+| --- | --- | --- |
+| 21 | Workers configurados para una campaña | [Script](../scripts/c5_sharur/sharur_21_agentes.py) |
+| 100 | Simulación de tareas; perfil EDIN configurable; campaña separada con evidencia parcial | [Simulación](../scripts/sharur/run_sharur_3600.py), [CLAIMS](../CLAIMS.toml) |
+| 222 | 220 workers y dos coordinadores declarados | [Topología](../docs/04_research/sharur_222_swarm_topology.md) |
+| 1000 | Simulación de tareas, no 1000 agentes LLM ejecutados | [Script](../scripts/sharur/run_sharur_1000.py) |
+| 10000 | Objetivo de diseño CTA | [Especificación](../docs/10_sharur_swarm_cta_spec.md) |
+
+Registrar por campaña tareas, concurrencia configurada y observada, tipo de
+worker (real o simulado) y recibo. No extrapolar el alcance del claim
+`sharur_100_swarm_concurrency` a otros perfiles.
+
 ### Invariantes Estructurales de Aislamiento
 1. **Aislamiento de Ring-0:** Los agentes estocásticos (LLMs) **NUNCA** tienen acceso directo de mutación sobre las estructuras de memoria del kernel (`00_ABZU_KERNEL`).
 2. **Barrera BFT Mandatoria:** Toda propuesta de estado o resultado generado por un worker de un enjambre debe empaquetarse en un `AttestationEnvelope` firmado y pasar por el consenso BFT antes de persistirse.
@@ -46,7 +67,7 @@ Los módulos siguientes residen bajo el paquete Python `02_EDIN_SWARMS/agents_ar
 | `orchestrator/swarm.py` | Orquestador multi-backend con circuit breaker y futex pager (`edin.swarms`). | `INV_C5_18` (Zero-Worktree) |
 | `orchestrator/lifecycle.py` | Máquina de estados de subagentes y watchdog anti-deadlock. | `INV_C5_TURING_CASTRATION` |
 | `topologies/router.py` | Despachador central de habilidades con tolerancia a typos. | `INV_C5_ROUTER_LEVENSHTEIN` |
-| `topologies/edin.py` | Topología de verificación paralela SHARUR-3600 (Legión activa de 100 workers). | `INV_C5_EDIN_BARRIER` |
+| `topologies/edin.py` | Topología EDIN de verificación paralela (hasta 100 workers configurados; límite de planificación independiente). | `INV_C5_EDIN_BARRIER` |
 | `protocols/aof.py` | Marco Operativo Agéntico (PSAFE v3.0 / AOF v2.0 / Guillotina de Hume). | `INV_C5_HUME_GUILLOTINE` |
 | `protocols/attestation.py` | Sobres criptográficos SCITT / COSE_Sign1 para mensajería inter-agente. | `INV_C5_SCITT_RFC9942` |
 | `clients/openrouter.py` | Pasarela unificada hacia OpenRouter para modelos de frontera. | `INV_C5_OPENROUTER_ROUTING` |

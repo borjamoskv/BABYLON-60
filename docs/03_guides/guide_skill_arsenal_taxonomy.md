@@ -28,6 +28,8 @@ Regla_Linguistica: Soberanía Lingüística Total (C5-REAL en Español / GitHub 
 
 ---
 
+La [nomenclatura canónica](../../ARCHITECTURE_MANIFEST.md#0-nomenclatura-y-alcance) distingue componentes de aliases de selección. Las etiquetas históricas BFT, Ring-0 y Legión 100 no acreditan consenso distribuido, privilegios de CPU ni concurrencia real. Una entrada de catálogo no implica distribución, ejecución o autorización. Preservar IDs y disparadores; limitar garantías a CLAIMS.toml y a los recibos correspondientes.
+
 ## 1. Topología Funtorial y Grafos de Adyacencia (MASS Stage 2)
 
 ```mermaid

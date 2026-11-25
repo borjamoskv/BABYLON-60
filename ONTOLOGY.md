@@ -19,6 +19,8 @@ An agent's identity does not reside in the model ID of an external API. The iden
 - Its deterministic hypervisor anchor (MOSKV-1 operating in Ring-0), which executes fail-stop apoptosis upon detecting stochastic hallucinations.
 
 ## 4. The 3 Rings of Sovereign Execution
+
+ABZU (native substrate), KISH (application engine) and EDIN (agent orchestration) identify logical user-space layers, not CPU privilege levels. See the [canonical nomenclature](ARCHITECTURE_MANIFEST.md#0-nomenclatura-y-alcance). Names and aliases confer no authority; claims are bounded by [CLAIMS.toml](CLAIMS.toml).
 To resolve the identity problem, BABYLON-60 stratifies agency into three strict causal rings:
 
 - **Ring-2 (Stochastic Swarms):** High-entropy scavengers and reasoning subagents. They process noise, formulate plans, and hypothesize, but possess **zero authority** to commit state.

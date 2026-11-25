@@ -1,10 +1,54 @@
 # BABYLON-60: Manifiesto Arquitectónico y Topología Soberana
 
 > **Marco**: C5-REAL v4.3 — Arquitectura Tripartita y Suelo Termodinámico  
-> **Estatus Epistémico**: Alta Exergía / Clausura Epistémica Atestada  
+> **Estatus Epistémico**: Marco de diseño; evidencia delimitada en CLAIMS.toml  
 > **Fundamentación Formal**: [BabylonTrace.lean](proof/lean/BabylonTrace.lean) · [thermodynamics.rs](src/thermodynamics.rs) · [manifest.rs](src/manifest.rs)
 
 Este documento sella la arquitectura fundacional de **BABYLON-60**. El sistema rechaza la condición de monolito orquestador pasivo y se organiza como una **Federación Tripartita de Dominios Causales**, gobernada por el colapso de la hipertrofia tipológica (de 896 tipos nominales a 101 invariantes y finalmente a la tríada aristotélica en silicio).
+
+---
+
+## 0. Nomenclatura y alcance
+
+Los nombres históricos son metáforas de diseño, no pruebas ni permisos. Los anillos
+son capas lógicas en espacio de usuario (EL0), no niveles de privilegio de CPU.
+Este manifiesto incluye modelos y objetivos históricos; las garantías vigentes
+se limitan a [CLAIMS.toml](CLAIMS.toml) y a la evidencia de la revisión correspondiente.
+
+| Identificador | Responsabilidad primaria / descriptor EN | Sufijo y alcance | Fuente técnica |
+| --- | --- | --- | --- |
+| BABYLON-60 | Plataforma de control de agentes / Agent control platform | 60: identidad sexagesimal, no radix universal | [README](README.md) |
+| ABZU | Sustrato nativo / Native kernel substrate | Anillo lógico 0 | [ABZU](00_ABZU_KERNEL/README.md) |
+| KISH | Motor de aplicación / Application engine | Anillo lógico 1 | [KISH](01_KISH_ENGINE/README.md) |
+| EDIN | Orquestación / Agent orchestration | Anillo lógico 2 | [EDIN](02_EDIN_SWARMS/README.md) |
+| ENKI-60 | Aritmética sexagesimal / Sexagesimal arithmetic | 60: base conceptual; F60 usa Q32.32 | [ABZU](00_ABZU_KERNEL/README.md), [Base60](01_KISH_ENGINE/babylon60/primitives/base60.py) |
+| KUDURRU-64 | Publicación de manifiesto / Shared manifest publication | 64 bytes de tamaño y alineamiento, no garantía universal de caché | [manifest.rs](src/manifest.rs), claim `inv_01_manifest_layout` |
+| MUSHUSHU-0 | Validación y contención / Formal validation and enforcement | 0: referencia al anillo lógico, no tasa de fallos | [Taxonomía](docs/03_guides/guide_skill_arsenal_taxonomy.md) |
+| LARSA-120 | Coordinación de verificadores / Heterogeneous verification quorum | 120: grados entre vértices del modelo; no BFT de red | [larsa_bft.rs](src/larsa_bft.rs) |
+| SHARUR-3600 | Exploración paralela / Swarm orchestration | 3600 = 60²: modelo de direccionamiento, no capacidad medida | [EDIN](02_EDIN_SWARMS/README.md) |
+| ERIDU-INFER | Adaptación de inferencia / Experimental local inference adapter | Fuera del TCB verificado según su documentación | [eridu-infer](crates/eridu-infer/README.md) |
+| CORTEX | Memoria y procedencia / Persistent memory and provenance | Sin autoridad propia de autorización | [Ontología](docs/02_ontology/babylon_ontology_v1.md) |
+| NEMESIS | Falsación / Adversarial falsification | Nombre griego, no certificación absoluta | [Ontología](docs/02_ontology/babylon_ontology_v1.md) |
+| MOSKV-1 | Gobernanza / Agency governance | 1: identificador, no métrica de capacidad | [ONTOLOGY](ONTOLOGY.md) |
+| Sanedrín | Revisión multiperspectiva / Simulated architectural review | Tradición judía; el acta no acredita un protocolo operativo | [Acta](docs/04_research/sanedrin_reflexive_forking_audit.md) |
+
+### Referencias históricas
+
+- ABZU (acadio apsû), Enki/Ea y Eridu: [ORACC](https://oracc.museum.upenn.edu/amgg/listofdeities/enki/index.html).
+- Kish: sede de la realeza tras el diluvio mítico según la [Lista Real Sumeria, Oxford ETCSL 2.1.1](https://etcsl.orinst.ox.ac.uk/edition2/etcslgloss.php?charenc=gcirc&lookup=c211.43), no primera ciudad histórica.
+- EDIN (eden/edin), llanura o estepa: [ORACC](https://oracc.museum.upenn.edu/dsst/cbd/sux/E.html).
+- KUDURRU y Mušḫuššu (grafía histórica, sin renombrar MUSHUSHU): monumento de concesiones y dragón asociado a Marduk/Nabu: [Met 1985.45](https://www.metmuseum.org/art/collection/search/327048).
+- LARSA: soporte de vaso con tres cabras salvajes, 2000–1800 a. C.: [Louvre AO 15705](https://collections.louvre.fr/ark:/53355/cl010140481). Los 120° son un modelo moderno.
+- SHARUR (Šar-ur), maza personificada de la tradición de Ninurta: [Oxford ETCSL 1.6.2](https://etcsl.orinst.ox.ac.uk/edition2/etcslgloss.php?charenc=gcirc&lookup=c162.255).
+- Base 60 posicional babilónica: [MacTutor, St Andrews](https://mathshistory.st-andrews.ac.uk/HistTopics/Babylonian_numerals/).
+- NEMESIS: [Oxford Classical Dictionary](https://doi.org/10.1093/acrefore/9780199381135.013.4373).
+
+### Compatibilidad
+
+Los aliases `c5-enki-60`, `c5-kudurru-64`, `c5-larsa-120`, `c5-mushushu-0`
+y `c5-sharur-3600` conservan sus identificadores y disparadores.
+Un alias selecciona un procedimiento; no acredita su distribución, ejecución
+ni autoridad. No modifica imports, rutas, contratos ni la frontera AX-0.
 
 ---
 
@@ -45,7 +89,7 @@ La arquitectura se divide en tres fronteras estrictas (anillos ontológicos), ca
   - *Cold Archival Sink*: SQLite WAL para persistencia asíncrona fuera de ruta crítica.
 * **Métrica Termodinámica**: Baja frecuencia ($\tau_{\text{slow}}$), deliberada, con disipación de Landauer exacta ($1.10 \times 10^{-18}\text{ J}$ por publicación).
 
-### 🧠 2. `01_KISH_ENGINE` / `kish.engine` (La Primera Ciudad / Anillo-1)
+### 🧠 2. `01_KISH_ENGINE` / `kish.engine` (Sede de la realeza posdiluviana según la Lista Real Sumeria / Anillo-1)
 * **Función**: Motor de cálculo reflexivo, memoria de trabajo asíncrona e interfaz humano-máquina.
 * **Componentes Físicos**:
   - Servidor `LSP Paracortex` nativo en Rust.
@@ -56,7 +100,7 @@ La arquitectura se divide en tres fronteras estrictas (anillos ontológicos), ca
 ### 🕸️ 3. `02_EDIN_SWARMS` / `edin.swarms` (La Estepa Abierta / Anillo-2)
 * **Función**: Exploración estocástica, paralelismo masivo y verificación cruzada.
 * **Componentes Físicos**:
-  - Matriz de Enjambre `SHARUR-3600` con particionamiento sexagesimal de tareas.
+  - Matriz de Enjambre `SHARUR-3600`: direccionamiento sexagesimal; [perfiles de concurrencia independientes](02_EDIN_SWARMS/README.md#perfiles-sharur-y-concurrencia).
   - Despachador Swarm Router con tolerancia a fallos.
   - Validador Deontológico AOF (`INV_C5_HUME_GUILLOTINE`): separación de premisas descriptivas y normativas.
 * **Métrica Termodinámica**: Fluida, exploratoria y reversible. **Nunca tiene acceso directo de escritura a Ring-0.**
@@ -120,22 +164,22 @@ sequenceDiagram
 
 ---
 
-## 4. La Tríada de Larsa: Consenso Isostático BFT
+## 4. La Tríada de Larsa: Quórum Heterogéneo Local
 
-El diseño isostático del núcleo se basa en la **Tríada de Larsa** (Soporte de Tres Íbices, siglo XVIII a.C.), estableciendo una tolerancia a fallos híbrida (CFT/BFT) sobre la Trinidad Arquitectónica a $120^\circ$:
+El modelo se inspira en el soporte de vaso de Larsa AO 15705 (2000–1800 a. C.). Los tres vértices a $120^\circ$ representan la verificación heterogénea local, no una propiedad arqueológica:
 
 *   **Íbice $\alpha$ (Rust / C-ABI)** @ $0^\circ$: Límite de Landauer, hardware soberano y ejecución de ruta caliente.
 *   **Íbice $\beta$ (Lean 4 / Prover)** @ $120^\circ$: Isomorfismo Curry-Howard, verificación rigurosa y prueba de clausura.
 *   **Íbice $\gamma$ (Z3 SMT / Verifier)** @ $240^\circ$: Oráculo *firewall* temprano neurosimbólico.
 
 **Mecánica de Consenso:**
-El sistema garantiza estabilidad mientras el quórum $2/3$ se mantenga activo frente a fallos. La caída simultánea de dos vértices (e.g. Z3 y Lean 4 colapsan por hipertrofia termodinámica) acciona inexorablemente el fail-stop apoptótico (`0xDEAD_6060`), impidiendo la corrupción de la base por el ruido estocástico de Ring-2.
+La regla de disponibilidad 2/3 de [LarsaTriadConsensus](src/larsa_bft.rs) distingue salud del quórum y veredicto de una traza. Dos vértices activos no bastan para demostrar corrección ni tolerancia bizantina distribuida. Los resultados se limitan al modelo y las pruebas correspondientes.
 
 ---
 
 ## 5. El Kernel Sexagesimal F60 (La Matemática de Enki)
 
-Todo cómputo de exergía, direccionamiento y telemetría de hiper-precisión en Ring-0 abandona la base decimal por el estándar geométrico mesopotámico **F60 (Base 60)**, evitando truncamientos IEEE-754 en fracciones complejas y alineándose con la matemática de Enki (Abzu/Ring-0):
+ENKI-60 toma la base sexagesimal como referencia. El planificador F60 usa punto fijo Q32.32; Base60 es una representación de identificadores separada. No se deduce precisión ilimitada ni radix 60 universal. Ejemplos de representación sexagesimal:
 
 *   $\Xi = 21.000 \implies [5, 50, 0]_{60}$ (Cota máxima de Exergía Informativa).
 *   $\text{L1 Cache Line} = 64 \text{ B} \implies [1, 4]_{60}$.
@@ -164,4 +208,4 @@ Toda mutación arquitectónica dentro del monorepositorio `BABYLON-60` debe acat
 
 ---
 
-*C5-REAL v4.4 / Atestado Algorítmicamente y Verificado en Silicio bajo Auspicio de Enki.*
+*C5-REAL v4.4 / Nomenclatura histórica y arquitectura de diseño; garantías limitadas a evidencia reproducible.*

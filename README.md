@@ -6,6 +6,8 @@
 
 **More intelligence. Not more authority.**
 
+**Architecture vocabulary:** [Existing component names](ARCHITECTURE_MANIFEST.md#0-nomenclatura-y-alcance) identify logical user-space roles, not CPU privilege or additional guarantees. SHARUR-3600 is a theoretical addressing model, not measured simultaneous agent capacity. LARSA-120 is a local heterogeneous verification quorum, not distributed Byzantine consensus. Evidence and scope: [CLAIMS.toml](CLAIMS.toml).
+
 BABYLON-60 provides local controls for AI agents: OS confinement for their
 processes and signed authorization for selected MCP tools. The model proposes
 an action; the configured policy and operator determine its permissions.
