@@ -40,20 +40,36 @@ valida que un evento sea una fuente original o una inferencia correcta.
 
 ## Probar en 5 minutos
 
-**Requisitos:** `git`, Python 3.11+, [`uv`](https://docs.astral.sh/uv/getting-started/installation/)
-y macOS con `/usr/bin/sandbox-exec`, o Linux x86_64 con Landlock ABI 3+
-activado (kernel 6.2+). Linux aarch64 está `NO_VERIFICADO`. En Windows sigue
+**Requisitos:** Python 3.11+ y [`uv`](https://docs.astral.sh/uv/getting-started/installation/);
+`git` solo hace falta para clonar. La demo también necesita macOS con
+`/usr/bin/sandbox-exec` o Linux x86_64 con Landlock ABI 3+ activado
+(kernel 6.2+). Linux aarch64 está `NO_VERIFICADO`. En Windows sigue
 [Instalación](#instalación); la demo de confinamiento no está disponible.
 
-Clona una vez y elige la demo o la integración de cliente de las siguientes secciones:
+### Obtener el código
 
-```bash
+Clona una vez en cualquier plataforma o extrae el ZIP fuente de terminal en una
+carpeta nueva. Para clonar, estos comandos también funcionan en PowerShell:
+
+```console
 git clone --depth 1 https://github.com/borjamoskv/BABYLON-60.git
 cd BABYLON-60
+```
+
+¿Ya tienes el código? Abre su carpeta raíz y omite la clonación. Después elige:
+
+| Objetivo | Siguiente paso |
+| :--- | :--- |
+| Probar el confinamiento en macOS / Linux | Ejecuta la demo de abajo |
+| Instalar la CLI o integrar MCP, también en Windows | Sigue [Instalación](#instalación) |
+
+**Demo — solo macOS / Linux:**
+
+```bash
 bash install.sh --demo
 ```
 
-El instalador crea la CLI en `.venv` dentro del clon; no la añade al PATH.
+El instalador crea la CLI en `.venv` dentro de la carpeta fuente; no la añade al PATH.
 La demo utiliza un script atacante en Python, **no un LLM**, que sigue una
 instrucción maliciosa de un README contra una clave señuelo en un HOME
 desechable. Nunca toca tu `~/.ssh` real.
@@ -69,10 +85,17 @@ históricas están en la [referencia de la demo](docs/03_guides/README_REFERENCE
 Tras instalar, ejecuta desde **la carpeta de tu proyecto**, sustituyendo
 `~/BABYLON-60` por la ruta del clon:
 
+**Codex:**
+
 ```bash
 cd ~/tu-proyecto
 ~/BABYLON-60/.venv/bin/babylon60 run --preset codex -- codex
-# O bien:
+```
+
+**O bien Claude Code:**
+
+```bash
+cd ~/tu-proyecto
 ~/BABYLON-60/.venv/bin/babylon60 run --preset claude-code -- claude
 ```
 
@@ -100,8 +123,9 @@ a una versión 1.0.2 antigua con otro contenido. El instalador requiere `uv`,
 Python 3.11+ y un checkout limpio. Instala la CLI de terminal y el servidor MCP,
 sin abrir una aplicación de escritorio.
 
-**macOS / Linux:** si no ejecutaste la demo, ejecuta primero `bash install.sh`
-desde el clon. Después puedes configurar un cliente:
+Primero [obtén el código](#obtener-el-código) y ejecuta los comandos desde su
+carpeta raíz. **macOS / Linux:** si no ejecutaste la demo, ejecuta primero
+`bash install.sh`. Después puedes configurar un cliente:
 
 ```bash
 .venv/bin/babylon60 setup --client codex --dry-run
@@ -135,7 +159,9 @@ antiguos en una raíz incorrecta y conserva los archivos anteriores.
 
 El estado permanece en `~/.babylon60` (o `$BABYLON_HOME`). El manifiesto marca
 v5.1.0 como `candidate`; la etiqueta Git es anterior a `run`, `demo` y `log`.
-Anota `git rev-parse HEAD` para identificar la revisión que instalas.
+En un checkout Git, anota `git rev-parse HEAD`; en un ZIP extraído, consulta
+`commit` en `RELEASE_MANIFEST.json`. El ZIP contiene la CLI y guías seleccionadas,
+no el workspace Rust completo. Los enlaces con **↗** abren el repositorio en línea.
 
 [Instalación avanzada y retirada](docs/03_guides/README_REFERENCE_ES.md#instalación).
 
@@ -176,7 +202,7 @@ flowchart LR
 
 El broker rechaza las herramientas MCP con efectos si falta la biblioteca
 nativa Rust o una aprobación válida para esa tarea exacta. El instalador no
-compila la biblioteca; consulta la [configuración del broker](docs/security/fl-mcp01-authority-drift.md#uso-y-comprobación)
+compila la biblioteca; consulta la [configuración del broker ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/docs/security/fl-mcp01-authority-drift.md#uso-y-comprobación)
 y la [autorización firmada](docs/03_guides/guide_signed_authorization.md).
 
 El registro de eventos es distinto del adaptador CORTEX Memory versionado,
@@ -210,7 +236,7 @@ eléctricos físicos. Babylon no certifica por sí solo conformidad jurídica.
 
 [Referencia técnica completa](docs/03_guides/README_REFERENCE_ES.md) ·
 [Guía de usuario](docs/03_guides/USER_GUIDE.md) ·
-[Índice documental](docs/README.md) · [Web](https://babylon60.com/)
+[Índice documental ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/docs/README.md) · [Web](https://babylon60.com/)
 
 Las secciones detalladas que antes estaban en esta página siguen disponibles aquí:
 

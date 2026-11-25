@@ -39,20 +39,36 @@ whether an event is an original source or a sound inference.
 
 ## Try it in 5 minutes
 
-**Requirements:** `git`, Python 3.11+, [`uv`](https://docs.astral.sh/uv/getting-started/installation/),
-and either macOS with `/usr/bin/sandbox-exec` or Linux x86_64 with Landlock
-ABI 3+ enabled (kernel 6.2+). Linux aarch64 is `NO_VERIFICADO`. Windows users
+**Requirements:** Python 3.11+ and [`uv`](https://docs.astral.sh/uv/getting-started/installation/);
+`git` is needed only to clone. The demo also needs macOS with
+`/usr/bin/sandbox-exec` or Linux x86_64 with Landlock ABI 3+ enabled
+(kernel 6.2+). Linux aarch64 is `NO_VERIFICADO`. Windows users
 should follow [Installation](#installation); the confinement demo is unavailable.
 
-Clone once, then choose the demo below or client integration in the next sections:
+### Get the source
 
-```bash
+Clone once on any platform, or extract the terminal source ZIP into a new folder.
+For a clone, these commands also work in PowerShell:
+
+```console
 git clone --depth 1 https://github.com/borjamoskv/BABYLON-60.git
 cd BABYLON-60
+```
+
+Already have the source? Open its root folder and skip cloning. Then choose:
+
+| Goal | Next step |
+| :--- | :--- |
+| Try confinement on macOS / Linux | Run the demo below |
+| Install the CLI or integrate MCP, including on Windows | Follow [Installation](#installation) |
+
+**Demo — macOS / Linux only:**
+
+```bash
 bash install.sh --demo
 ```
 
-The installer creates the CLI in the clone's `.venv`; it does not add it to
+The installer creates the CLI in the source folder's `.venv`; it does not add it to
 PATH. The demo uses a Python attacker script, **not an LLM**, to follow a
 malicious README instruction against a decoy key in a disposable home.
 It never touches your real `~/.ssh`.
@@ -68,10 +84,17 @@ by platform and revision; historical counts are in the
 After installation, run from **your project's directory**, replacing
 `~/BABYLON-60` with the clone's path:
 
+**Codex:**
+
 ```bash
 cd ~/your-project
 ~/BABYLON-60/.venv/bin/babylon60 run --preset codex -- codex
-# Or:
+```
+
+**Or Claude Code:**
+
+```bash
+cd ~/your-project
 ~/BABYLON-60/.venv/bin/babylon60 run --preset claude-code -- claude
 ```
 
@@ -97,8 +120,9 @@ to an older 1.0.2 package with different content. The installer needs `uv`,
 Python 3.11+ and a clean checkout. It installs the terminal CLI and MCP server,
 without opening a desktop app.
 
-**macOS / Linux:** if you have not run the demo, run `bash install.sh` from
-the clone first. Then optionally configure a client:
+[Get the source](#get-the-source) first and run the following commands from its
+root folder. **macOS / Linux:** if you have not run the demo, run
+`bash install.sh` first. Then optionally configure a client:
 
 ```bash
 .venv/bin/babylon60 setup --client codex --dry-run
@@ -130,8 +154,10 @@ check discovery; folder trust can still disable a listed server. Rerunning
 setup repairs older wrong-root registrations and preserves the old files.
 
 State remains in `~/.babylon60` (or `$BABYLON_HOME`). The manifest labels
-v5.1.0 as `candidate`; the Git tag predates `run`, `demo` and `log`. Record
-`git rev-parse HEAD` for the revision you actually install.
+v5.1.0 as `candidate`; the Git tag predates `run`, `demo` and `log`. In a Git
+checkout, record `git rev-parse HEAD`; for an extracted ZIP, read `commit` in
+`RELEASE_MANIFEST.json`. The ZIP contains the CLI and selected guides, not the
+complete Rust workspace. Links marked **↗** open the full repository online.
 
 [Advanced setup and removal](docs/03_guides/README_REFERENCE.md#installation).
 
@@ -171,7 +197,7 @@ flowchart LR
 
 The broker refuses MCP effect tools without the native Rust library and a
 valid approval for that exact task. The installer does not build the library;
-see [broker setup (ES)](docs/security/fl-mcp01-authority-drift.md#uso-y-comprobación)
+see [broker setup (ES) ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/docs/security/fl-mcp01-authority-drift.md#uso-y-comprobación)
 and [signed authorization (ES)](docs/03_guides/guide_signed_authorization.md).
 
 The event ledger is distinct from the versioned CORTEX Memory adapter, which
@@ -205,7 +231,7 @@ loss. Babylon does not itself certify legal compliance.
 
 [Full technical reference](docs/03_guides/README_REFERENCE.md) ·
 [User guide (ES)](docs/03_guides/USER_GUIDE.md) ·
-[Documentation index](docs/README.md) · [Website](https://babylon60.com/)
+[Documentation index ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/docs/README.md) · [Website](https://babylon60.com/)
 
 Detailed sections previously on this page remain available here:
 

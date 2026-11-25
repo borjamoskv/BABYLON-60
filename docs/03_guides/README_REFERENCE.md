@@ -4,6 +4,16 @@
 
 This reference contains the detailed methods, historical runs and implementation scope behind the README. Recorded runs retain their original revisions; they are not fresh results for your checkout. Run shell commands from the repository root unless stated otherwise.
 
+The terminal ZIP includes selected guides, not the full Rust workspace or test
+suites. Links marked **↗** open the public repository's `main` branch online;
+that revision may differ from the installed source. Use a full checkout for
+Rust builds and the complete test recipes below.
+
+[Demo](#demo-methodology-and-recorded-runs) · [Agent options](#with-your-agent) ·
+[Installation](#installation) · [Memory](#beyond-confinement) ·
+[Architecture](#how-it-works) · [Evidence](#what-is-verified) ·
+[Repository map](#repository-map) · [FAQ](#frequently-asked-questions)
+
 ## Demo: methodology and recorded runs
 
 ### What you will see
@@ -29,7 +39,7 @@ verdict: BLOCKED
 The clone fetches a later revision with more vectors (V01–V25: 22 apply on
 Linux, 19 on macOS) and a sixth limit, L6, so your totals will differ. To
 reproduce these exact figures, fetch `f9543fb` as the
-[guide shows (ES)](../../docs/03_guides/guide_primer_bloqueo.md#probar).
+[guide shows (ES) ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/docs/03_guides/guide_primer_bloqueo.md#probar).
 
 ### What the demo does
 
@@ -55,7 +65,7 @@ reproduce these exact figures, fetch `f9543fb` as the
   was blocked and every control worked, `FALSIFIED` (1) when a confined
   attempt succeeded, `INCONCLUSIVE` (2) on any other error, and 3 when there
   is no confinement backend. `install.sh --demo` exits with the demo's code
-  ([exit codes, ES](../../docs/03_guides/guide_primer_bloqueo.md#códigos-de-salida)).
+  ([exit codes, ES ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/docs/03_guides/guide_primer_bloqueo.md#códigos-de-salida)).
 - **A journal records every attempt.** It is a BLAKE3 hash chain, and
   `.venv/bin/babylon60 log` re-verifies it and prints its head. The digests
   are not keyed: the check catches an event edited, inserted or removed
@@ -73,7 +83,7 @@ reproduce these exact figures, fetch `f9543fb` as the
 ### Recorded runs
 
 Revision `f9543fb`
-([figures, method and evidence, ES](../../docs/03_guides/guide_primer_bloqueo.md#qué-verás)):
+([figures, method and evidence, ES ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/docs/03_guides/guide_primer_bloqueo.md#qué-verás)):
 
 | Environment | Confined attempts | Blocked | Passed |
 | :--- | ---: | ---: | ---: |
@@ -95,7 +105,7 @@ declared limits that run measured remain open:
 
 These limit IDs are unrelated to the evidence levels `L1`–`L4` in
 [What is verified](#what-is-verified). The full list is in
-[Declared limits (ES)](../../docs/03_guides/guide_primer_bloqueo.md#límites-declarados).
+[Declared limits (ES) ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/docs/03_guides/guide_primer_bloqueo.md#límites-declarados).
 
 ---
 
@@ -196,7 +206,7 @@ and `codex --version` on Linux x86_64; full sessions with an LLM are still
   opening the browser. The clipboard is denied unless you pass
   `--allow-clipboard`, which also lets the agent read what you copy.
 
-[Details and what remains `NO_VERIFICADO` (ES)](../../docs/03_guides/guide_primer_bloqueo.md#con-tu-agente).
+[Details and what remains `NO_VERIFICADO` (ES) ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/docs/03_guides/guide_primer_bloqueo.md#con-tu-agente).
 
 ---
 
@@ -289,8 +299,8 @@ files with Unicode paths on Python 3.11.
 - Versions: the `v5.1.0` git tag predates `babylon60 run`, `demo` and `log`,
   which arrived later on `main`, and
   [`RELEASE_MANIFEST.json`](../../RELEASE_MANIFEST.json) records the release as a
-  `candidate`. For a pilot, record the commit you install
-  (`git rev-parse HEAD`).
+  `candidate`. For a pilot, record `git rev-parse HEAD` in a checkout, or the
+  manifest's `commit` field when installing from an extracted ZIP.
 - To uninstall, run `.venv/bin/babylon60 setup --client <client> --remove` for
   each activated client, then delete the folder and, unless you want to keep
   the journal, ledgers and approvals, `~/.babylon60` (or `$BABYLON_HOME`)
@@ -311,7 +321,7 @@ The CLI and the MCP server also provide:
 
 Recording an event does not establish that it is an original source or a valid
 inference. For versioned memory items and explicit dependencies, the separate
-[CORTEX Memory adapter (ES)](../../docs/01_spec/spec_cortex_memory_mcp.md) requires a
+[CORTEX Memory adapter (ES) ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/docs/01_spec/spec_cortex_memory_mcp.md) requires a
 signed launch binding and a native broker library; `setup` does not start it.
 That adapter does not automatically classify `SourceRecord`/`INFERENCE` or
 verify whether a justification is sufficient.
@@ -412,7 +422,7 @@ The left column is prompt-level control, not other harnesses' sandboxes:
 Claude Code and Codex ship their own. The agent's own shell and file tools do
 not pass through the broker; under `babylon60 run` they work inside its
 grants, without signatures
-([harness comparison profile](../../docs/harness-profile/README.md)).
+([harness comparison profile ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/docs/harness-profile/README.md)).
 
 ### Vocabulary
 
@@ -429,7 +439,7 @@ grants, without signatures
 | `NO_VERIFICADO` | "Not verified": the project's status token for anything without recorded evidence |
 
 Going deeper: [why and architecture (`WHY_BABYLON_60.md`, ES)](../../WHY_BABYLON_60.md) ·
-[the broker's descriptor and anti-TOCTOU engineering (ES)](../../src/README.md#ingeniería-de-descriptores-y-confinamiento-anti-toctou).
+[the broker's descriptor and anti-TOCTOU engineering (ES) ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/src/README.md#ingeniería-de-descriptores-y-confinamiento-anti-toctou).
 
 ---
 
@@ -445,7 +455,7 @@ Going deeper: [why and architecture (`WHY_BABYLON_60.md`, ES)](../../WHY_BABYLON
   status labels.
 - The confinement of `babylon60 demo` and `run` has no entry there. Its
   evidence is the recorded runs in the
-  [first-block guide (ES)](../../docs/03_guides/guide_primer_bloqueo.md#qué-verás).
+  [first-block guide (ES) ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/docs/03_guides/guide_primer_bloqueo.md#qué-verás).
 - Formal claims hold for the specifications and assumptions they name;
   implementation and isolation need separate evidence. A release's evidence
   applies only to its recorded source commit and bundle digest.
@@ -470,7 +480,7 @@ signed release or an independent security evaluation.
 
 | Level | What it attests | Example |
 | :--- | :--- | :--- |
-| `L1_FORMAL` | A Lean 4 proof, or bounded exploration with Loom, over a declared model | `no_torn_reads_universal` proves the parity of Seqlock reads in accepted traces; the model holds no payloads and no Rust memory ordering ([scope, ES](../../docs/06_theory/AUDIT_LEAN_SCOPE_2026.md)) |
+| `L1_FORMAL` | A Lean 4 proof, or bounded exploration with Loom, over a declared model | `no_torn_reads_universal` proves the parity of Seqlock reads in accepted traces; the model holds no payloads and no Rust memory ordering ([scope, ES ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/docs/06_theory/AUDIT_LEAN_SCOPE_2026.md)) |
 | `L2_IMPLEMENTATION` | Code behaviour, checked by tests | `SovereignExecutor` accepts only a `COSE_Sign1` over a 214-byte canonical payload, with the algorithm pinned to each admitted key |
 | `L3_ISOLATION` | That the agent cannot reach the resource without going through the broker | `INV_OMEGA_complete_mediation`, macOS only: under campaign Ω's Seatbelt profile the OS denies direct writes and deletes on the protected folders and the ledger, checked by the five tests `BYPASS-001`, `AUTH-002`, `RACE-003`, `CRASH-004` and `REVOCATION-005`. Linux has no `L3` entry |
 | `L4_EXPERIMENTAL` | Reproducible adversarial campaigns on the real file system | `AUTH_006`: 1,000 runs, one process each, with `SIGKILL` at 3 crash points plus a no-crash control (macOS); no nonce produces more than one effect |
@@ -503,7 +513,7 @@ signed artifacts that third parties can verify.
 | Cause crashes, retries and concurrency | No single-use authorization produces duplicate effects; ambiguous outcomes are not retried blindly. |
 | Tamper with the verifier | Zero effects outside authorization within the claimed scope, checked by an independent observer that also detects the tested tampering. |
 
-The [technical acceptance protocol (ES)](../../docs/security/intelligence-authority-acceptance.md)
+The [technical acceptance protocol (ES) ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/docs/security/intelligence-authority-acceptance.md)
 scopes each experiment and the pending evidence. Passing a finite campaign
 does not prove universal invulnerability.
 
@@ -520,7 +530,7 @@ does not prove universal invulnerability.
   dispatch stays blocked, and retrying a file effect whose WAL record has no
   known outcome fails with `AmbiguousOutcomeRequiresReconciliation` until it
   is reconciled. There are no blind retries and consumed nonces are rejected.
-  The [ACS integration tests](../../tests/acs_authenticated.rs) also kill a child
+  The [ACS integration tests ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/tests/acs_authenticated.rs) also kill a child
   with `SIGKILL` and check replay rejection after reopening the store.
 - **Physical power loss: `NO_VERIFICADO`.** The software enforces
   `PRAGMA synchronous = FULL` and `fsync`, but killing a process neither cuts
@@ -540,22 +550,22 @@ does not prove universal invulnerability.
   Merkle trees ([`merkle_b3.py`](../../01_KISH_ENGINE/babylon60/attestation/merkle_b3.py))
   use the full prefixes `B60-LEAF-v1\0`, `B60-NODE-v1\0` and `B60-ROOT-v1\0`.
   In the Rust broker today, the intent and policy digests inside the 214-byte
-  authorization payload ([`executor.rs`](../../src/executor.rs)) and the
+  authorization payload ([`executor.rs` ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/src/executor.rs)) and the
   tool-identity digests of `McpCapabilityBroker`
-  ([`capability.rs`](../../src/capability.rs)) are `SHA-256`.
+  ([`capability.rs` ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/src/capability.rs)) are `SHA-256`.
 - **`SHA-256`** pre-hashes the Secure Enclave signatures
-  ([`enclave.rs`](../../src/enclave.rs)) and digests content over an open descriptor
-  (`compute_fd_hash` in [`secure_fs.rs`](../../src/secure_fs.rs)). Each 154-byte
+  ([`enclave.rs` ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/src/enclave.rs)) and digests content over an open descriptor
+  (`compute_fd_hash` in [`secure_fs.rs` ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/src/secure_fs.rs)). Each 154-byte
   record in `.effect_wal.bin` carries a
   `SHA-256` over the first 122 bytes, with no version tag: an integrity
   checksum, not writer authentication. Migrating it to BLAKE3 requires
   explicit versioning.
 - **`SHA3-256`** keeps dual verification in
   [`standalone_verify.py`](../../01_KISH_ENGINE/babylon60/verifier/standalone_verify.py)
-  and is excluded from `COSE_Sign1` receipts ([`receipt.rs`](../../src/receipt.rs))
+  and is excluded from `COSE_Sign1` receipts ([`receipt.rs` ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/src/receipt.rs))
   because it is not in the IANA registry.
 
-The [revised cryptographic profile (ES)](../../docs/01_spec/spec_cryptographic_profile.md)
+The [revised cryptographic profile (ES) ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/docs/01_spec/spec_cryptographic_profile.md)
 details formats and domains, and spells out the mismatch between this matrix's
 SHA-256 uses and the narrower restriction in the Ring-0 contract.
 
@@ -566,7 +576,7 @@ SHA-256 uses and the narrower restriction in the Ring-0 contract.
   retries; the agent must not be able to modify policy, grants, authorization
   keys, the broker, the effect observer or the reference evidence. Compromise
   of the host administrator, the kernel or every evidence root is out of scope
-  ([perimeter and threats, ES](../../docs/security/intelligence-authority-acceptance.md#2-perímetro-y-amenazas)).
+  ([perimeter and threats, ES ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/docs/security/intelligence-authority-acceptance.md#2-perímetro-y-amenazas)).
 - The code runs in user space (`EL0` on macOS ARM64), not in the kernel. The
   broker is part of the deployment's trusted computing base (TCB).
 - `L3` covers only processes launched under the confinement profile. SQLite
@@ -577,7 +587,7 @@ SHA-256 uses and the narrower restriction in the Ring-0 contract.
   Rust broker, confinement and biometrics need a separate port.
 - BABYLON-60 provides reproducible technical evidence, but does not by itself
   certify compliance with the EU AI Act.
-- The [scientific review of guarantees (ES)](../../docs/01_spec/AUDIT_SCIENTIFIC_GUARANTEES_2026.md)
+- The [scientific review of guarantees (ES) ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/docs/01_spec/AUDIT_SCIENTIFIC_GUARANTEES_2026.md)
   separates formal results, observations and requirements; it does not
   re-validate every historical campaign.
 
@@ -587,14 +597,14 @@ SHA-256 uses and the narrower restriction in the Ring-0 contract.
 
 | Path | Contents |
 | :--- | :--- |
-| [`src/`](../../src/README.md) | Rust broker (`EL0`, C-ABI): `executor.rs`, `secure_fs.rs`, `capability.rs`, `omega_mediation.rs`, `enclave.rs`, `admission.rs`, `seqlock.rs` and `manifest.rs` |
-| [`00_ABZU_KERNEL/`](../../00_ABZU_KERNEL/README.md) | Native crates, all in user space: the `#![no_std]` library `babylon60-kernel` with the `F60` scheduler, the `.b60` compiler, fuzzing harnesses, the experimental `nul-zk` and `strike-rs`, and a TLA+ specification |
-| [`01_KISH_ENGINE/`](../../01_KISH_ENGINE/README.md) | Python package `babylon60`: CLI, MCP server, confinement (`confine/`), SQLite ledger (`bft/`), evidence verifier and exporter |
-| [`02_EDIN_SWARMS/`](../../02_EDIN_SWARMS/README.md) | Sub-agent lifecycle, topology routing and adversarial concurrency campaigns |
-| [`crates/`](../../crates/) | Workspace crates: `b60-lang`, `babylon-attest`, `babylon-skills-mcp`, `eridu-infer` and others |
-| [`proof/`](../../proof/README.md) | Lean 4: [`BabylonTrace.lean`](../../proof/lean/BabylonTrace.lean), [`AX0.lean`](../../proof/lean/AX0.lean) and [`Babylon.lean`](../../proof/lean/Babylon.lean) |
-| [`docs/`](../../docs/README.md) · [`tests/`](../../tests/README.md) · [`tools/`](../../tools/README.md) · [`scripts/`](../../scripts/README.md) | Guides and specifications, falsification suites, utilities and quality gates |
-| [`experiments/`](../../experiments/agentdojo_guard/README.md) | Independent evaluation harnesses, such as the AgentDojo guard experiments, with their own dependencies; outside the core distribution |
+| [`src/` ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/src/README.md) | Rust broker (`EL0`, C-ABI): `executor.rs`, `secure_fs.rs`, `capability.rs`, `omega_mediation.rs`, `enclave.rs`, `admission.rs`, `seqlock.rs` and `manifest.rs` |
+| [`00_ABZU_KERNEL/` ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/00_ABZU_KERNEL/README.md) | Native crates, all in user space: the `#![no_std]` library `babylon60-kernel` with the `F60` scheduler, the `.b60` compiler, fuzzing harnesses, the experimental `nul-zk` and `strike-rs`, and a TLA+ specification |
+| [`01_KISH_ENGINE/` ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/01_KISH_ENGINE/README.md) | Python package `babylon60`: CLI, MCP server, confinement (`confine/`), SQLite ledger (`bft/`), evidence verifier and exporter |
+| [`02_EDIN_SWARMS/` ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/02_EDIN_SWARMS/README.md) | Sub-agent lifecycle, topology routing and adversarial concurrency campaigns |
+| [`crates/` ↗](https://github.com/borjamoskv/BABYLON-60/tree/main/crates) | Workspace crates: `b60-lang`, `babylon-attest`, `babylon-skills-mcp`, `eridu-infer` and others |
+| [`proof/` ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/proof/README.md) | Lean 4: [`BabylonTrace.lean` ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/proof/lean/BabylonTrace.lean), [`AX0.lean` ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/proof/lean/AX0.lean) and [`Babylon.lean` ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/proof/lean/Babylon.lean) |
+| [`docs/` ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/docs/README.md) · [`tests/` ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/tests/README.md) · [`tools/` ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/tools/README.md) · [`scripts/` ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/scripts/README.md) | Guides and specifications, falsification suites, utilities and quality gates |
+| [`experiments/` ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/experiments/agentdojo_guard/README.md) | Independent evaluation harnesses, such as the AgentDojo guard experiments, with their own dependencies; outside the core distribution |
 
 For contributors:
 
@@ -606,7 +616,7 @@ For contributors:
   (`cargo run --bin babylon-dsl -- file.b60`).
 - Source bundle: `bash scripts/package_release.sh /output/path`; the installer
   also works from it.
-- The [kernel MCP bridge (ES)](../../docs/03_guides/guide_kernel_mcp.md) needs the
+- The [kernel MCP bridge (ES) ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/docs/03_guides/guide_kernel_mcp.md) needs the
   full checkout and a separate environment.
 
 ---
@@ -653,16 +663,16 @@ For contributors:
 - **Why is it called BABYLON-60?**
   The `60` refers to sexagesimal (base-60) positional notation; 60 has the
   prime factors 2, 3 and 5. It is the origin of the rational `F60` scheduler
-  ([`00_ABZU_KERNEL/README.md`](../../00_ABZU_KERNEL/README.md), ES;
-  [WHITEPAPER.md](../../docs/WHITEPAPER.md)) and of the ledger's Base-60 encoding
+  ([`00_ABZU_KERNEL/README.md` ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/00_ABZU_KERNEL/README.md), ES;
+  [WHITEPAPER.md ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/docs/WHITEPAPER.md)) and of the ledger's Base-60 encoding
   ([`base60.py`](../../01_KISH_ENGINE/babylon60/primitives/base60.py)). Base 60
   represents time fractions such as `1/3` exactly; fractions such as `1/7`,
   whose denominator has other prime factors, still do not terminate
-  ([arithmetic scope, ES](../../docs/06_theory/TETRADA_CAUSAL_BABYLON60.md)).
+  ([arithmetic scope, ES ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/docs/06_theory/TETRADA_CAUSAL_BABYLON60.md)).
   **BABYLON** names the control-and-authorization pillar of the triad with
   **CORTEX** (memory and provenance) and **NEMESIS** (verification and
   adversarial testing). The monorepo's top-level folders carry Sumerian place
-  names ([SPECIFICATION.md](../../docs/SPECIFICATION.md)), and the logo merges the
+  names ([SPECIFICATION.md ↗](https://github.com/borjamoskv/BABYLON-60/blob/main/docs/SPECIFICATION.md)), and the logo merges the
   letter `B` with the stacked digits `6` and `0` (`B ≡ 60`).
 
 ---

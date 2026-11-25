@@ -35,6 +35,10 @@ def fixture_tree(tmp_path):
         "docs/03_guides/README_REFERENCE.md",
         "docs/03_guides/README_REFERENCE_ES.md",
         "LICENSE",
+        "SECURITY.md",
+        "CITATION.cff",
+        "docs/COMMERCIAL_LICENSE.md",
+        "assets/brand/github-art-brut.png",
         "docs/skills.json",
         "docs/skills-lock.json",
         "skills-lock.json",
@@ -60,8 +64,14 @@ def fixture_tree(tmp_path):
         shutil.copytree(ROOT / rel, root / rel, ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
     for rel in [
         "CLAIMS.toml",
+        "RELEASE_MANIFEST.json",
+        "evidence.json",
+        "claims.lock",
+        "sbom.cargo.cdx.json",
+        "sbom.python.cdx.json",
         "docs/03_guides/BEFORE_AND_AFTER.md",
         "docs/03_guides/USER_GUIDE.md",
+        "docs/03_guides/guide_signed_authorization.md",
         "docs/03_guides/guide_codex_first_use.md",
         "docs/03_guides/guide_first_conversation_pilot.md",
         "docs/security/governance-comparison-2026-10-24.md",
@@ -109,16 +119,17 @@ def test_terminal_bundle_contains_importable_cli_and_mcp(tmp_path):
     assert len(bundles) == 1
     assert Path(result.stdout.strip()) == bundles[0]
     unpack = tmp_path / "unpacked"
+    readme_documents = (
+        "README.md",
+        "README_ES.md",
+        "docs/03_guides/README_REFERENCE.md",
+        "docs/03_guides/README_REFERENCE_ES.md",
+    )
     with zipfile.ZipFile(bundles[0]) as bundle:
         names = bundle.namelist()
         for name in GOVERNANCE_DOCUMENTS:
             assert bundle.read(name) == (ROOT / name).read_bytes(), f"Stale governance in bundle: {name}"
-        for name in (
-            "README.md",
-            "README_ES.md",
-            "docs/03_guides/README_REFERENCE.md",
-            "docs/03_guides/README_REFERENCE_ES.md",
-        ):
+        for name in readme_documents:
             assert bundle.read(name) == (ROOT / name).read_bytes(), f"Stale README in bundle: {name}"
         oracle = "scripts/c5_quality_gates/prompt_exergy_oracle.py"
         assert bundle.read(oracle) == (ROOT / oracle).read_bytes()
@@ -146,6 +157,7 @@ def test_terminal_bundle_contains_importable_cli_and_mcp(tmp_path):
         assert not any(".app/" in name or name.startswith("ui/") for name in names)
         bundle.extractall(unpack)
     assert validate_local_links([unpack / name for name in GOVERNANCE_DOCUMENTS]) == []
+    assert validate_local_links([unpack / name for name in readme_documents]) == []
     for name in [
         "docs/03_guides/BEFORE_AND_AFTER.md",
         "docs/03_guides/guide_codex_first_use.md",
