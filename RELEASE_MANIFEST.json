@@ -563,9 +563,9 @@
     ]
   },
   "signing_authority": {
-    "algorithm": null,
-    "scope": "unsigned_local_evidence",
-    "public_key": null
+    "algorithm": "Ed25519",
+    "scope": "detached_release_attestation",
+    "public_key": "92bfd41f1aef7550a2414331e70d82348b8c7dfdb433662b08abdb51f3b49f65"
   },
-  "signature": null
+  "signature": "533f18b13ee2932a38108d3f3c9955a0c72124f8c349254e0fa9f10277aa759f42452d9c564aabc7d73bfaf2deed73cc36c662d348355a0ab6b7ce37e172d600"
 }
