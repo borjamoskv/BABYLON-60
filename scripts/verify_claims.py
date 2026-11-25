@@ -9,17 +9,23 @@ Modes:
 
 from __future__ import annotations
 
+import argparse
 import subprocess
 import sys
 from pathlib import Path
 
-CANONICAL_VERIFIER = (
-    Path(__file__).absolute().parent / "c5_quality_gates" / "verify_claims.py"
-)
+CANONICAL_VERIFIER = Path(__file__).absolute().parent / "c5_quality_gates" / "verify_claims.py"
 
 
 def main() -> int:
-    execute = "--execute" in sys.argv or "--strict" in sys.argv
+    parser = argparse.ArgumentParser(description=__doc__, allow_abbrev=False)
+    parser.add_argument("--list", action="store_true", help="List declared claims without running evidence suites")
+    parser.add_argument("--execute", action="store_true", help="Run all claim evidence suites")
+    parser.add_argument("--strict", action="store_true", help="Run all claim evidence suites")
+    args = parser.parse_args()
+    if args.list and (args.execute or args.strict):
+        parser.error("--list cannot be combined with --execute or --strict")
+    execute = args.execute or args.strict
     cmd = [sys.executable, str(CANONICAL_VERIFIER)]
     if not execute:
         cmd.append("--list")

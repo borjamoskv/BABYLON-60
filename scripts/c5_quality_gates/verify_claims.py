@@ -8,6 +8,7 @@ el proceso finaliza con código de salida 1 (Fail-Closed).
 
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
 import os
@@ -765,10 +766,7 @@ def execute_invariant_suites(
         rec["suite_passed"] = ok
         rec["duration_s"] = round(dur, 3)
         if ok:
-            print(
-                f"[VERIFIED-INVARIANT] invariants.{rec['key']} ({rec['claim_id']}) "
-                f"-> PASS ({dur:.2f}s)"
-            )
+            print(f"[VERIFIED-INVARIANT] invariants.{rec['key']} ({rec['claim_id']}) -> PASS ({dur:.2f}s)")
         else:
             rec["gate_aligned"] = False
             summary_err = extract_failure_summary(out, redactions=redactions)
@@ -779,6 +777,18 @@ def execute_invariant_suites(
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__, allow_abbrev=False)
+    parser.add_argument("--list", action="store_true", help="List declared claims without running evidence suites")
+    parser.add_argument("--check-invariants", action="store_true", help="Check invariant metadata alignment only")
+    parser.add_argument(
+        "--run-invariants", action="store_true", help="With --check-invariants, also run invariant evidence suites"
+    )
+    args = parser.parse_args()
+    if args.list and (args.check_invariants or args.run_invariants):
+        parser.error("--list cannot be combined with invariant-checking options")
+    if args.run_invariants and not args.check_invariants:
+        parser.error("--run-invariants requires --check-invariants")
+
     repo_root = Path(__file__).absolute().parent.parent.parent
     claims_file = repo_root / "CLAIMS.toml"
 
@@ -796,9 +806,9 @@ def main() -> int:
     invariants = manifest.get("invariants", {})
     metadata = manifest.get("metadata", {})
     babylon_release = load_babylon_release(repo_root)
-    list_only = "--list" in sys.argv
-    check_invariants_only = "--check-invariants" in sys.argv
-    run_invariants = "--run-invariants" in sys.argv
+    list_only = args.list
+    check_invariants_only = args.check_invariants
+    run_invariants = args.run_invariants
 
     if list_only:
         for cid, c in sorted(claims.items()):

@@ -351,6 +351,13 @@ def test_verify_sh_expected_manifest_sha256_pin(tmp_path: Path) -> None:
     manifest_sha = hashlib.sha256((root / "RELEASE_MANIFEST.json").read_bytes()).hexdigest()
     command = ["bash", str(root_verifier), "--repo-root", str(root), "--bundle", str(bundle_path)]
 
+    res_unpinned = subprocess.run(command, cwd=REPO_ROOT, capture_output=True, text=True, timeout=15)
+    assert res_unpinned.returncode == 0, res_unpinned.stderr
+    assert "[CHECK] manifest_sha256_pin: NOT_CHECKED [optional]" in res_unpinned.stdout
+    assert "no --expected-manifest-sha256" in res_unpinned.stdout
+    assert "metadata only; Git commit not checked" in res_unpinned.stdout
+    assert "indexed or inventoried paths only; excluded and extra files not checked" in res_unpinned.stdout
+
     res_ok = subprocess.run(
         [*command, "--expected-manifest-sha256", manifest_sha],
         cwd=REPO_ROOT,
@@ -359,6 +366,7 @@ def test_verify_sh_expected_manifest_sha256_pin(tmp_path: Path) -> None:
         timeout=15,
     )
     assert res_ok.returncode == 0, res_ok.stderr
+    assert "[CHECK] manifest_sha256_pin: PASS [required]" in res_ok.stdout
 
     res_bad = subprocess.run(
         [*command, "--expected-manifest-sha256", "0" * 64],
@@ -369,6 +377,50 @@ def test_verify_sh_expected_manifest_sha256_pin(tmp_path: Path) -> None:
     )
     assert res_bad.returncode != 0
     assert "RELEASE_MANIFEST.json SHA-256 mismatch against --expected-manifest-sha256" in res_bad.stderr
+    assert "[CHECK] manifest_sha256_pin: FAIL [required]" in res_bad.stderr
+
+    signed_root, signed_bundle, pubkey = _create_release_fixture(tmp_path / "signed", signed=True)
+    res_signed = subprocess.run(
+        [
+            "bash",
+            str(root_verifier),
+            "--repo-root",
+            str(signed_root),
+            "--bundle",
+            str(signed_bundle),
+            "--require-signature",
+            "--pubkey",
+            pubkey,
+        ],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        timeout=15,
+    )
+    assert res_signed.returncode == 0, res_signed.stderr
+    assert "[CHECK] manifest_sha256_pin: NOT_CHECKED [optional]" in res_signed.stdout
+    assert "[CHECK] cryptographic_signature: PASS [required]" in res_signed.stdout
+    assert "public key matched --pubkey" in res_signed.stdout
+    assert "signed=yes" in res_signed.stdout
+
+    res_unpinned_key = subprocess.run(
+        [
+            "bash",
+            str(root_verifier),
+            "--repo-root",
+            str(signed_root),
+            "--bundle",
+            str(signed_bundle),
+            "--require-signature",
+        ],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        timeout=15,
+    )
+    assert res_unpinned_key.returncode == 0, res_unpinned_key.stderr
+    assert "[CHECK] cryptographic_signature: PASS [required]" in res_unpinned_key.stdout
+    assert "no --pubkey supplied" in res_unpinned_key.stdout
 
 
 def test_unsigned_candidate_cannot_satisfy_required_signature(tmp_path: Path) -> None:
