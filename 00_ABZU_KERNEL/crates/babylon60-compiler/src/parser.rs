@@ -174,3 +174,36 @@ pub fn parse(source: &str) -> Result<B60Program, ParseError> {
     }
     Ok(B60Program { instructions })
 }
+
+#[cfg(test)]
+mod omega18_domain_tests {
+    use super::*;
+
+    #[test]
+    fn compiled_integer_loads_match_kernel_transition_oracle() {
+        use kernel::eval::{step, HaltReason};
+        use kernel::isa::Value;
+        use kernel::state::MachineState;
+
+        for value in [i64::MIN, -1, 0, 1, 59, 60, 3600, i64::MAX] {
+            let program = parse(&format!("LOADIMM {value}\nHALT")).unwrap();
+            assert_eq!(program.instructions.len(), 2);
+            let state = step(MachineState::new(), &program.instructions[0]).unwrap();
+            assert_eq!(state.read_reg(KernelReg::R1).value, Value::ImmI64(value));
+            assert_eq!(state.logical_clock.0, 1);
+            assert_eq!(state.pc, 1);
+            assert_eq!(state.sim_clock.0, 0);
+            assert_eq!(step(state, &program.instructions[1]), Err(HaltReason::Graceful));
+        }
+    }
+
+    #[test]
+    fn kernel_bytecode_frontend_does_not_accept_runtime_temporal_grammar() {
+        assert_eq!(
+            parse("LOADIMM 60").unwrap().instructions,
+            vec![Instruction { opcode: Opcode::LoadImm(KernelReg::R1, 60) }]
+        );
+        assert!(parse("AFTER R1 DONE").is_err());
+        assert!(parse("BA.EXACT R1 R2").is_err());
+    }
+}

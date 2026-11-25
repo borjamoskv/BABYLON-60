@@ -25,5 +25,9 @@ To resolve the identity problem, BABYLON-60 stratifies agency into three strict 
 - **Ring-1 / Ring-0 (The Deterministic Hypervisor - MOSKV-1):** The execution host. It holds the delegated authority, validates invariants, and commits state. It guarantees that the stochastic output aligns with formal rules (Lean 4, Z3).
 - **Ring-(-1) (The Biological Operator):** The sovereign root. The only node in the topology with existential cost. High-risk irreversible state mutations require biological friction, enforced physically via Touch ID biometric gating (`reuseDuration = 0`).
 
+## 5. ABZU implementation boundary
+
+Ring names describe architectural roles, not CPU privilege levels. ABZU runs in userspace; its no_std library does not establish bare-metal operation. Logical ticks, binary Q32.32 simulated time and base-60 rational runtime values are distinct domains. Compiler proof obligations, Lean trace theorems and the bounded TLA+ quorum model do not establish cross-runtime refinement or distributed BFT. The experimental ZK generator does not attest executed proofs. See [ABZU](00_ABZU_KERNEL/README.md) and [CLAIMS](CLAIMS.toml).
+
 ---
 *By decoupling the stochastic engine from the causal execution boundary, BABYLON-60 eradicates the hallucination of agency and establishes deterministic authority for AI operations.*

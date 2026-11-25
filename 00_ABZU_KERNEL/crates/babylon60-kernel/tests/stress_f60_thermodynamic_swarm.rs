@@ -11,7 +11,7 @@ fn stress_test_10k_swarm_thermodynamic_limits() {
     println!("================================================================================");
 
     const NUM_AGENTS: usize = 10_000;
-    const NUM_TICKS: u64 = 60; // 1 segundo completo de simulación F60 a 60 Hz
+    const NUM_TICKS: u64 = 60; // 60 ticks nominales; Q32.32 cuantizado
     
     println!("[*] Inicializando topología: {} agentes en memoria continua...", NUM_AGENTS);
     let init_start = Instant::now();
@@ -108,7 +108,7 @@ fn stress_test_10k_swarm_thermodynamic_limits() {
     println!(" -> Agentes Aislados por Burnout     : {} / {} ({:.1}%)", 
              burnout_count, NUM_AGENTS, (burnout_count as f64 / NUM_AGENTS as f64) * 100.0);
     println!(" -> Reloj F60 Lógico Alcanzado       : tick #{}", scheduler.logical_clock.0);
-    println!(" -> Reloj F60 Simulado Q32.32        : {} segundos exactos", scheduler.simulation_clock.as_secs());
+    println!(" -> Reloj F60 Simulado Q32.32        : {} unidades crudas (2^-32 s)", scheduler.simulation_clock.0);
     println!(" -> Integridad del Kernel            : 100% (CERO PANICS / CERO MEMORY LEAKS)");
     println!("================================================================================\n");
 

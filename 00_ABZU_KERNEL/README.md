@@ -10,12 +10,40 @@ Este directorio aloja los sub-crates especializados en `00_ABZU_KERNEL/crates/` 
 
 | Ruta Relativa | Propósito Funcional | Estado y Alcance |
 | :--- | :--- | :--- |
-| [`crates/babylon60-kernel/`](./crates/babylon60-kernel/README.md) | Sustrato `#![no_std]`, planificador sexagesimal `F60` (`Q32.32`), ISA `.b60`, cadena Merkle `BLAKE3` y cuarentena forense en memoria. | Biblioteca `#![no_std]` compilable y testeada |
-| [`crates/babylon60-compiler/`](./crates/babylon60-compiler/README.md) | Compilador y parser del DSL `.b60` hacia bytecode IR y emisor de trazas para Lean 4 (`lean_backend.py`). | Alpha / Compilador DSL |
+| [`crates/babylon60-kernel/`](./crates/babylon60-kernel/README.md) | Sustrato `#![no_std]`, planificador nominal a 60 Hz (`Q32.32` cuantizado), ISA `.b60`, cadena Merkle `BLAKE3` y cuarentena forense en memoria. | Biblioteca `#![no_std]` compilable y testeada |
+| [`crates/babylon60-compiler/`](./crates/babylon60-compiler/README.md) | Parser de un subconjunto ISA, frontend de asignaciones/alloc/free y emisor experimental de trazas Lean 4. | Alpha / Compilador DSL |
+| `crates/babylon60-proof-ir/` | Estructuras de obligaciones e invariantes abstractos; no es un verificador. | Biblioteca auxiliar |
+| `crates/babylon60-runtime/` | Intérprete con racionales de base 60 (`BigInt`), independiente del evaluador ISA. | Runtime experimental |
 | `crates/babylon60-fuzz/` | Harnesses de *fuzzing* para parsers y primitivas del kernel. | Pruebas de fuzzing |
-| `crates/nul-zk/` | Circuitos y primitivas experimentales de conocimiento cero sobre Arkworks. | Experimental |
+| `crates/nul-zk/` | Generador experimental de IR de circuitos y código fuente Arkworks; no acredita pruebas ZK ejecutadas. | Experimental |
 | [`crates/strike-rs/`](./crates/strike-rs/README.md) | Acelerador nativo PyO3 con hashing topológico `BLAKE3` (`exergy_binary_ipc.rs`) y pruebas de concepto sobre memoria compartida. | Experimental (PyO3 / IPC) |
-| `formal_verification/BabylonBFT.tla` | Especificación formal en TLA+ (`BabylonBFT.tla` y `BabylonBFT.cfg`) del protocolo de consenso BFT. | Especificación formal TLA+ |
+| `formal_verification/BabylonBFT.tla` | Especificación formal en TLA+ (`BabylonBFT.tla` y `BabylonBFT.cfg`) del protocolo de consenso BFT. | Modelo TLA+ acotado; ejecución TLC no acreditada aquí |
+
+## Límites de convergencia y perfil mínimo
+
+- Q32.32: cada tick usa floor(2^32/60) = 71582788 unidades; el déficit es 16 unidades cada 60 ticks, aproximadamente 0.322 ms/día antes de saturación. El reloj lógico cuenta ticks, no segundos físicos.
+- El runtime representa racionales num/60^scale, y AFTER exige ticks enteros no negativos. El parser ISA del compiler no acepta AFTER ni BA.EXACT. El subconjunto entero común se contrasta con un oráculo explícito en tests compiler→kernel y dispatch del runtime, sin equiparar sus relojes ni gramáticas. No existe una equivalencia general demostrada (NO_VERIFICADO).
+- TLA+ especifica TypeOK, StrictConsensus y Termination bajo weak fairness para tres agentes y quórum dos; no demuestra BFT de red ni una cota temporal física. Los estados terminales son absorbentes; el chequeo de deadlock puede permanecer activo. Sin resultado TLC nuevo.
+- La telemetría PMU habilita contadores Linux y distingue None (sin muestra completa, incluida multiplexación) de Some(0). Son conteos acumulados no sincronizados, no energía. NUL-ZK prueba IR y texto generado, no generación/verificación de pruebas criptográficas.
+- El perfil nativo mínimo selecciona explícitamente el paquete y las features existentes. Los experimentos permanecen en el workspace y su CI integral. La matriz comprueba explícitamente el perfil mínimo y los tests de scheduler en Darwin; Cargo.lock y formatos persistidos permanecen intactos.
+
+```sh
+cargo check --locked -p babylon60_root --lib --no-default-features --features microkernel
+cargo check --locked -p babylon60-kernel --lib
+cargo test --locked -p babylon60-kernel
+cargo test --locked -p babylon60-compiler
+cargo test --locked -p babylon60-runtime
+cargo test --locked -p nul-zk
+```
+
+Para reproducir el modelo TLA+ con un JAR TLC previamente obtenido y verificado:
+
+```sh
+cd 00_ABZU_KERNEL/formal_verification
+java -cp "$TLA2TOOLS_JAR" tlc2.TLC -config BabylonBFT.cfg BabylonBFT.tla
+```
+
+Estos comandos son recetas de verificación, no recibos de ejecución. La evidencia normativa se delimita en [CLAIMS.toml](../CLAIMS.toml).
 
 ## 🛡️ Pautas de Diseño de la Cámara
 - **Alineación C-ABI explícita:** Estructuras compartidas como `SharedManifest` mantienen layout fijo de 64 bytes (`align(64)`) verificado en tiempo de compilación y en tests (`inv_01_manifest_layout`).

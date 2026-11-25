@@ -38,6 +38,8 @@ an action; the configured policy and operator determine its permissions.
 SQLite events with provenance supplied by the caller; this does not validate
 whether an event is an original source or a sound inference.
 
+The [ABZU native research substrate](00_ABZU_KERNEL/README.md) is a userspace library and experimental toolchain, not a privileged OS kernel. Its Q32.32 scheduler, rational runtime and formal models have separate evidence boundaries.
+
 ## Try it in 5 minutes
 
 **Requirements:** Python 3.11+ and [`uv`](https://docs.astral.sh/uv/getting-started/installation/);

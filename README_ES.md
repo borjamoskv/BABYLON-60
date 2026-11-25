@@ -39,6 +39,8 @@ operador determinan sus permisos.
 almacena eventos SQLite con procedencia declarada por quien llama; eso no
 valida que un evento sea una fuente original o una inferencia correcta.
 
+El [sustrato nativo ABZU](00_ABZU_KERNEL/README.md) es una biblioteca en espacio de usuario y un conjunto de herramientas experimentales, no un kernel privilegiado del SO. El scheduler Q32.32, el runtime racional y los modelos formales tienen ámbitos de evidencia separados.
+
 ## Probar en 5 minutos
 
 **Requisitos:** Python 3.11+ y [`uv`](https://docs.astral.sh/uv/getting-started/installation/);

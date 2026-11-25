@@ -3,8 +3,8 @@ EXTENDS Integers, FiniteSets
 
 \* ============================================================================
 \* BABYLON-60 | FORMAL VERIFICATION TLA+ 
-\* ESTADO: PUNTO ÓMEGA (21.000 EXERGÍA)
-\* LIVENESS: Demostración Termodinámica (Ausencia Absoluta de Deadlocks Temporales)
+\* ALCANCE: modelo abstracto de un orquestador y un quórum
+\* LIVENESS: terminación eventual bajo weak fairness; sin cota física
 \* ============================================================================
 
 CONSTANTS Agents, Quorum
@@ -42,20 +42,26 @@ CheckConsensus ==
     /\ state' = IF Cardinality(agreeing) >= Quorum THEN "ConsensusReached" ELSE "Failed"
     /\ UNCHANGED <<responded, agreeing>>
 
+\* Absorción explícita: los estados terminales tienen sucesor idéntico.
+\* No añade comportamiento a [][Next]_vars; permite mantener el chequeo de deadlock.
+TerminalStutter ==
+    /\ state \in {"ConsensusReached", "Failed"}
+    /\ UNCHANGED vars
+
 \* Función de Transición Global
-Next == Start \/ (\E a \in Agents : AgentResponds(a)) \/ CheckConsensus
+Next == Start \/ (\E a \in Agents : AgentResponds(a)) \/ CheckConsensus \/ TerminalStutter
 
 \* -------------------------------------------------------------------------
-\* CONDICIONES TERMODINÁMICAS DE FAIRNESS (Límites Físicos en $T$)
+\* HIPÓTESIS DE WEAK FAIRNESS (sin límites físicos)
 \* -------------------------------------------------------------------------
-\* Obligamos matemáticamente al verificador a asumir que ninguna acción se 
-\* quedará colgada infinitamente. Si una acción puede ocurrir (ej. Timeout), OCURRIRÁ.
+\* Weak fairness exige que una acción continuamente habilitada no se posponga
+\* para siempre; no establece un plazo ni modela fallos de red.
 Fairness == 
     /\ WF_vars(Start)
     /\ WF_vars(CheckConsensus)
     /\ \A a \in Agents : WF_vars(AgentResponds(a))
 
-\* LA ESPECIFICACIÓN COMPLETA: Estado Inicial + Transiciones + Implacabilidad del Tiempo
+\* ESPECIFICACIÓN: estado inicial, transiciones y fairness
 Spec == Init /\ [][Next]_vars /\ Fairness
 
 \* -------------------------------------------------------------------------
@@ -71,11 +77,10 @@ StrictConsensus ==
     (state = "ConsensusReached") => (Cardinality(agreeing) >= Quorum)
 
 \* -------------------------------------------------------------------------
-\* INVARIANTE DE TEMPORALIDAD C5-REAL (Liveness)
+\* PROPIEDAD TEMPORAL (Liveness)
 \* -------------------------------------------------------------------------
-\* Operador Diamante "<>" (Eventually): DEMUESTRA que sin importar los caminos
-\* probabilísticos o los fallos bizantinos de la red, el sistema colapsará 
-\* obligatoriamente en $T$ segundos hacia una resolución determinista.
+\* Eventually: el modelo pide alcanzar ConsensusReached o Failed bajo Spec.
+\* No modela consenso entre réplicas, autenticación, mensajes, ni tiempo real.
 Termination == <>(state = "ConsensusReached" \/ state = "Failed")
 
 =============================================================================

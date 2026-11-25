@@ -3,11 +3,11 @@
 // █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 // ============================================================================
 
-/// Instruction cycle counter within the VM. Strictly monotonic.
+/// Instruction cycle counter within the VM; nondecreasing and saturating at u64::MAX.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct LogicalClock(pub u64);
 
-/// Exact Q32.32 Fixed-Point Time representation (F60 domain).
+/// Binary Q32.32 fixed-point time representation (not exact for general sexagesimal fractions).
 /// Higher 32 bits represent integer seconds/units, lower 32 bits represent fractional units.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct SimulationClock(pub u64);
@@ -59,6 +59,17 @@ impl SimulationClock {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn clock_saturation_and_fractional_display_are_explicit() {
+        assert_eq!(LogicalClock(u64::MAX).tick().0, u64::MAX);
+        assert_eq!(SimulationClock::from_raw(u64::MAX - 1).advance(2).0, u64::MAX);
+        assert_eq!(SimulationClock::from_secs(u64::MAX).0, u64::MAX);
+        let before_second = SimulationClock::from_raw(SimulationClock::SCALE - 16);
+        assert_eq!(before_second.as_secs(), 0);
+        assert_eq!(before_second.subsec_millis(), 999);
+        assert_eq!(SimulationClock::from_secs(1).subsec_millis(), 0);
+    }
 
     #[test]
     fn test_simulation_clock_fixed_point() {

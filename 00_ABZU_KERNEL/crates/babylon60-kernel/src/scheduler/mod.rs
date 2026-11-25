@@ -2,7 +2,7 @@
 // BABYLON-60 v4.0 | SCHEDULER (Tier 1 C5-REAL)
 // ============================================================================
 //! The sexagesimal scheduler for the Causal-Determinist Execution Engine.
-//! It enforces F60 exactness on the time dimension to avoid generative entropy.
+//! It uses deterministic, quantized Q32.32 time; logical ticks are integer counts.
 
 pub mod time;
 
@@ -10,10 +10,10 @@ pub mod time;
 use perf_event::{Builder, Counter};
 
 /// C5-REAL Exergy Telemetry (Pillar 5)
-/// Samples hardware PMU counters to verify Landauer limits.
+/// Samples available hardware PMU counters; these do not establish energy or Landauer limits.
 pub struct ExergyTelemetry {
     #[cfg(target_os = "linux")]
-    l1d_misses: Option<Counter>,
+    cache_misses: Option<Counter>,
     #[cfg(target_os = "linux")]
     branch_misses: Option<Counter>,
 }
@@ -28,24 +28,49 @@ impl ExergyTelemetry {
     pub fn new() -> Self {
         #[cfg(target_os = "linux")]
         {
-            let l1d = Builder::new().kind(perf_event::events::Hardware::CACHE_MISSES).build().ok();
-            let branch = Builder::new().kind(perf_event::events::Hardware::BRANCH_MISSES).build().ok();
-            Self { l1d_misses: l1d, branch_misses: branch }
+            let cache_misses = Builder::new()
+                .kind(perf_event::events::Hardware::CACHE_MISSES)
+                .build()
+                .ok()
+                .and_then(|mut counter| {
+                    counter.enable().ok()?;
+                    Some(counter)
+                });
+            let branch_misses = Builder::new()
+                .kind(perf_event::events::Hardware::BRANCH_MISSES)
+                .build()
+                .ok()
+                .and_then(|mut counter| {
+                    counter.enable().ok()?;
+                    Some(counter)
+                });
+            Self { cache_misses, branch_misses }
         }
         #[cfg(not(target_os = "linux"))]
         Self {}
     }
 
-    pub fn sample_entropy(&mut self) -> (u64, u64) {
+    /// Cumulative raw counts, independently sampled; not a synchronized interval.
+    /// Unavailable if unreadable, never scheduled or multiplexed (no estimated scaling).
+    pub fn sample_entropy(&mut self) -> (Option<u64>, Option<u64>) {
         #[cfg(target_os = "linux")]
         {
-            let l1 = self.l1d_misses.as_mut().and_then(|c| c.read().ok()).unwrap_or(0);
-            let br = self.branch_misses.as_mut().and_then(|c| c.read().ok()).unwrap_or(0);
-            (l1, br)
+            let sample = |counter: &mut Counter| {
+                let data = counter.read_count_and_time().ok()?;
+                observed_count(data.count, data.time_enabled, data.time_running)
+            };
+            let cache = self.cache_misses.as_mut().and_then(sample);
+            let br = self.branch_misses.as_mut().and_then(sample);
+            (cache, br)
         }
         #[cfg(not(target_os = "linux"))]
-        (0, 0)
+        (None, None)
     }
+}
+
+#[cfg(any(target_os = "linux", test))]
+fn observed_count(count: u64, enabled: u64, running: u64) -> Option<u64> {
+    (running > 0 && running == enabled).then_some(count)
 }
 
 use crate::scheduler::time::{LogicalClock, SimulationClock};
@@ -59,7 +84,7 @@ pub enum AgentExecutionState {
 }
 
 /// Planificador Determinista Sexagesimal acoplado a la Manta de Markov (F60 / 60Hz).
-/// Garantiza cero asignaciones dinámicas y estricto determinismo termodinámico.
+/// El reloj usa aritmética entera determinista; no acredita comportamiento termodinámico físico.
 pub struct F60ThermodynamicScheduler {
     pub logical_clock: LogicalClock,
     pub simulation_clock: SimulationClock,
@@ -72,7 +97,8 @@ impl Default for F60ThermodynamicScheduler {
 }
 
 impl F60ThermodynamicScheduler {
-    /// Duración de un tick de 60Hz en representación fija Q32.32 (SimulationClock::SCALE / 60).
+    /// Floor of one 60 Hz interval in Q32.32. The remainder is 16/60 raw units.
+    /// Before saturation, 60 steps lose 16 raw units; this is not exact rational F60.
     pub const TICK_60HZ: u64 = SimulationClock::SCALE / 60;
 
     pub const fn new() -> Self {
@@ -105,6 +131,40 @@ mod tests {
     use super::*;
     use crate::shared_manifest::SharedManifest;
     use crate::thermodynamics::MarkovBlanket;
+
+    #[test]
+    fn q32_tick_quantization_is_bounded_not_exact() {
+        let scale = SimulationClock::SCALE;
+        let tick = F60ThermodynamicScheduler::TICK_60HZ;
+        assert_eq!(tick, 71_582_788);
+        assert_eq!(scale - 60 * tick, 16);
+        let day = 86_400_u64;
+        let elapsed = (0..60).fold(SimulationClock::new(0), |clock, _| clock.advance(tick));
+        assert_eq!(elapsed.0, scale - 16);
+        assert_eq!(day * scale - day * 60 * tick, 1_382_400);
+    }
+
+    #[test]
+    fn pmu_observation_requires_actual_unmultiplexed_runtime() {
+        assert_eq!(observed_count(0, 0, 0), None);
+        assert_eq!(observed_count(0, 100, 0), None);
+        assert_eq!(observed_count(0, 100, 100), Some(0));
+        assert_eq!(observed_count(42, 100, 50), None);
+        assert_eq!(observed_count(42, 100, 100), Some(42));
+    }
+
+    #[cfg(target_os = "linux")]
+    #[test]
+    fn missing_linux_counters_are_independently_unavailable() {
+        let mut telemetry = ExergyTelemetry { cache_misses: None, branch_misses: None };
+        assert_eq!(telemetry.sample_entropy(), (None, None));
+    }
+
+    #[cfg(not(target_os = "linux"))]
+    #[test]
+    fn unavailable_pmu_is_not_a_zero_measurement() {
+        assert_eq!(ExergyTelemetry::new().sample_entropy(), (None, None));
+    }
 
     #[test]
     fn test_f60_scheduler_active_inference_tick() {
