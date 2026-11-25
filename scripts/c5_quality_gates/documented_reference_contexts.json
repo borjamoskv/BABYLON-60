@@ -218,15 +218,15 @@
       "context_sha256": "94cb01860d53553f6881a23c9715eb2159f737367a028749df9d176a1608a385"
     },
     {
-      "path": "README.md",
+      "path": "docs/03_guides/README_REFERENCE.md",
       "symbol": "FL_014",
       "kind": "document_contract",
       "reason": "Etiqueta de requisito de integridad y recuperación WAL tras SIGKILL; su definición documental no declara un símbolo homónimo.",
-      "evidence": "`AUTH_003` and `FL_014` simulate the interruption inside the test process",
+      "evidence": "`AUTH_003` and `FL_014` simulate the interruption inside the test process\nprocess per ledger; `FL_014` ran on local APFS). On restart, a dispatch",
       "context_sha256": "6c032dbb204a9835d6680be3ae88a14bffb098f044b3f332621ea9aef2cc5eb2"
     },
     {
-      "path": "README.md",
+      "path": "docs/03_guides/README_REFERENCE.md",
       "symbol": "osxkeychain",
       "kind": "external",
       "reason": "Helper externo de credenciales de Git en macOS (git-credential-osxkeychain) citado al documentar límites de confinamiento; no declara un símbolo local.",
@@ -234,7 +234,7 @@
       "context_sha256": "d97847d095b50bf3ac22bcc878b2716eedb1e6ab56ec5d29e7bb6658f2219f89"
     },
     {
-      "path": "README.md",
+      "path": "docs/03_guides/README_REFERENCE.md",
       "symbol": "securityd",
       "kind": "external",
       "reason": "Daemon del sistema operativo macOS (servicio del llavero / Keychain) citado como límite declarado de confinamiento; no declara un símbolo local.",
@@ -242,7 +242,7 @@
       "context_sha256": "129b5796864f87ca1e07132889fc9174deb02a1cf55af5ba2f5002f7d1e48703"
     },
     {
-      "path": "README.md",
+      "path": "docs/03_guides/README_REFERENCE.md",
       "symbol": "signed_dispatch_intent",
       "kind": "document_contract",
       "reason": "Identificador de claim registrado en evidence.json y claims.lock; no declara una función homónima.",
@@ -250,7 +250,7 @@
       "context_sha256": "e708783d0dc71ff384d20be9b937eceebbd77af30827fe8f275bfb6a841c1490"
     },
     {
-      "path": "README.md",
+      "path": "docs/03_guides/README_REFERENCE.md",
       "symbol": "uid_map",
       "kind": "external",
       "reason": "Interfaz procfs del kernel Linux (/proc/<pid>/uid_map) para espacios de nombres de usuario; no declara un símbolo local.",
@@ -258,15 +258,15 @@
       "context_sha256": "3a4e76151d451640504836d457e6e03e1c2eeb9e2cec17cd2c50084d89af46ed"
     },
     {
-      "path": "README_ES.md",
+      "path": "docs/03_guides/README_REFERENCE_ES.md",
       "symbol": "FL_014",
       "kind": "document_contract",
       "reason": "Etiqueta de requisito de integridad y recuperación WAL tras SIGKILL; su definición documental no declara un símbolo homónimo.",
-      "evidence": "SQLite; `AUTH_001`, `AUTH_003` y `FL_014` simulan la interrupción dentro del",
+      "evidence": "SQLite; `AUTH_001`, `AUTH_003` y `FL_014` simulan la interrupción dentro del\nun solo proceso ejecutor por ledger; `FL_014` corrió en APFS local). Al",
       "context_sha256": "25023eec90d89fc6af709138021eb17377d23ef820d20a2cdec551749f91d4c9"
     },
     {
-      "path": "README_ES.md",
+      "path": "docs/03_guides/README_REFERENCE_ES.md",
       "symbol": "osxkeychain",
       "kind": "external",
       "reason": "Helper externo de credenciales de Git en macOS (git-credential-osxkeychain) citado al documentar límites de confinamiento; no declara un símbolo local.",
@@ -274,7 +274,7 @@
       "context_sha256": "880051631d5a0aff56912a27ebc893822aa96af55ca557f08bf643e1d91898fc"
     },
     {
-      "path": "README_ES.md",
+      "path": "docs/03_guides/README_REFERENCE_ES.md",
       "symbol": "securityd",
       "kind": "external",
       "reason": "Daemon del sistema operativo macOS (servicio del llavero / Keychain) citado como límite declarado de confinamiento; no declara un símbolo local.",
@@ -282,7 +282,7 @@
       "context_sha256": "988c85feb8b5a0df55575b7a69d661aa6d4f4ad3a552dd09b1ca7b353a7e640a"
     },
     {
-      "path": "README_ES.md",
+      "path": "docs/03_guides/README_REFERENCE_ES.md",
       "symbol": "signed_dispatch_intent",
       "kind": "document_contract",
       "reason": "Identificador de claim registrado en evidence.json y claims.lock; no declara una función homónima.",
@@ -290,7 +290,7 @@
       "context_sha256": "5360be0b057ab6265812bc3ad6a1fd9456aabd6c489d225ac43cae11e169e806"
     },
     {
-      "path": "README_ES.md",
+      "path": "docs/03_guides/README_REFERENCE_ES.md",
       "symbol": "uid_map",
       "kind": "external",
       "reason": "Interfaz procfs del kernel Linux (/proc/<pid>/uid_map) para espacios de nombres de usuario; no declara un símbolo local.",

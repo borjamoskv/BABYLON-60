@@ -69,6 +69,7 @@ required = [
     "scripts/c5_quality_gates/prompt_exergy_oracle.py",
     "babylon.toml", "Cargo.toml", "Cargo.lock", "WHY_BABYLON_60.md",
     "pyproject.toml", "uv.lock", "README.md", "README_ES.md", "LICENSE", "docs/skills.json", "docs/skills-lock.json",
+    "docs/03_guides/README_REFERENCE.md", "docs/03_guides/README_REFERENCE_ES.md",
     ".babylon60rules", "AGENTS.md", "docs/03_guides/agent_contracts.md",
     "docs/03_guides/guide_portable_signature.md", "docs/03_guides/guide_agent_workflow.md",
     # Target of the "Matriz de Falsación" links in agent_contracts.md.

@@ -9,6 +9,8 @@ from urllib.parse import unquote, urlsplit
 
 import pytest
 
+from scripts.c5_quality_gates.governance_documents import validate_local_links
+
 ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -29,9 +31,10 @@ def test_energy_claim_is_scoped_and_compatible_with_listing():
 
 
 # README.md is the English front page and README_ES.md its Spanish translation;
-# both carry the same scoped contract, each in its own words.
+# both link to the same scoped technical contract, each in its own language.
 README_CONTRACTS = {
     "README.md": {
+        "reference": "docs/03_guides/README_REFERENCE.md",
         "faq_heading": "Frequently Asked Questions",
         "no_fallback": "no retries and no fallback authentication",
         "hash_matrix": "Normative Hash Matrix (`BLAKE3` · `SHA-256` · `SHA3-256`)",
@@ -39,6 +42,7 @@ README_CONTRACTS = {
         "incident_bounds": "Incident Bounds (Process `SIGKILL` vs. Physical Power Loss)",
     },
     "README_ES.md": {
+        "reference": "docs/03_guides/README_REFERENCE_ES.md",
         "faq_heading": "Preguntas Frecuentes para Humanos",
         "no_fallback": "sin reintentos ni autenticación alternativa",
         "hash_matrix": "Matriz Normativa de Hashes (`BLAKE3` · `SHA-256` · `SHA3-256`)",
@@ -76,19 +80,27 @@ def test_normative_hash_matrix_and_incident_bounds_declared():
 
     for readme, contract in README_CONTRACTS.items():
         readme_text = (ROOT / readme).read_text(encoding="utf-8")
-        assert contract["hash_matrix"] in readme_text, readme
-        assert "SHA256_LEGACY_EFFECT_WAL" in readme_text, readme
-        assert contract["legacy_wal"] in readme_text, readme
-        assert contract["incident_bounds"] in readme_text, readme
+        reference = contract["reference"]
+        assert f"]({reference}#" in readme_text, readme
+        reference_text = (ROOT / reference).read_text(encoding="utf-8")
+        assert contract["hash_matrix"] in reference_text, reference
+        assert "SHA256_LEGACY_EFFECT_WAL" in reference_text, reference
+        assert contract["legacy_wal"] in reference_text, reference
+        assert contract["incident_bounds"] in reference_text, reference
 
     why_text = (ROOT / "WHY_BABYLON_60.md").read_text()
     assert "registros legados de 154 bytes en `.effect_wal.bin` (`SHA-256` sobre los primeros 122 bytes)" in why_text
 
 
 def test_monorepo_readmes_have_valid_local_links_and_no_legacy_packages_paths():
+    entry_documents = [ROOT / name for name in README_CONTRACTS]
+    references = [ROOT / contract["reference"] for contract in README_CONTRACTS.values()]
+    assert validate_local_links(entry_documents + references) == []
     readmes = [
         "README.md",
         "README_ES.md",
+        "docs/03_guides/README_REFERENCE.md",
+        "docs/03_guides/README_REFERENCE_ES.md",
         "docs/README.md",
         "src/README.md",
         "00_ABZU_KERNEL/README.md",

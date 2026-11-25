@@ -37,7 +37,8 @@ version: 5.0.1
 | 🐍 **Python Developer** utilizando el Orchestrator y MCP | [Complete Guide →](./03_guides/guide_babylon60_complete.md) · [01_KISH_ENGINE/README.md](../01_KISH_ENGINE/README.md) |
 | 🔬 **Researcher / Philosopher** estudiando C5-REAL | [Formal Theory →](./06_theory/00_index.md) · [proof/README.md](../proof/README.md) · [Whitepaper →](./WHITEPAPER.md) |
 | 🎵 **Musician / Audio Engineer** | Monitor Tonnetz — Revisión previa: propuesta |
-| 📖 **First-time reader** | [Hello Causal Tutorial →](./03_guides/tutorial_hello_causal.md) |
+| 📖 **First-time reader** | [Quickstart (EN)](../README.md) · [Inicio rápido (ES)](../README_ES.md) |
+| **Methods, recorded runs and implementation scope** | [Technical reference (EN)](./03_guides/README_REFERENCE.md) · [Referencia técnica (ES)](./03_guides/README_REFERENCE_ES.md) |
 
 ---
 
