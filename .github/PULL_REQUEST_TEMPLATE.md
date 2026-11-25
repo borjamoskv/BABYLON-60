@@ -12,3 +12,4 @@
 - [ ] Presupuesto de tokens: `python3 scripts/c5_quality_gates/audit_token_budget.py --workspace-only --skip-ghost-listeners`
 - [ ] Topología activa: `python3 scripts/guards/verify_active_topology.py`
 - [ ] Tests dirigidos del ámbito modificado (`cargo check/test --locked` o `uv run --locked pytest <ruta> -q`).
+- [ ] Si cambia nomenclatura, aliases o arquitectura: contrastar responsabilidad, sufijo y descriptor con [el registro canónico](../ARCHITECTURE_MANIFEST.md#0-nomenclatura-y-alcance); preservar IDs y contratos, verificar paridad semántica EN/ES y separar metáfora, simulación, configuración y evidencia. Registrar fuentes, diff y controles ejecutados; marcar N/A con motivo si no aplica.

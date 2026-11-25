@@ -6,6 +6,8 @@
 
 **Más inteligencia. La misma autoridad.**
 
+**Vocabulario arquitectónico:** [Los nombres de componentes existentes](ARCHITECTURE_MANIFEST.md#0-nomenclatura-y-alcance) identifican roles lógicos en espacio de usuario, no privilegios de CPU ni garantías adicionales. SHARUR-3600 es un modelo teórico de direccionamiento, no capacidad medida de agentes simultáneos. LARSA-120 es un quórum heterogéneo local, no consenso bizantino distribuido. Alcance y evidencia: [CLAIMS.toml](CLAIMS.toml).
+
 BABYLON-60 ofrece controles locales para agentes de IA: confinamiento de sus
 procesos por el sistema operativo y autorización firmada para determinadas
 herramientas MCP. El modelo propone una acción; la política configurada y el
