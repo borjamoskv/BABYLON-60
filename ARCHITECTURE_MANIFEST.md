@@ -34,14 +34,23 @@ se limitan a [CLAIMS.toml](CLAIMS.toml) y a la evidencia de la revisión corresp
 
 ### Referencias históricas
 
-- ABZU (acadio apsû), Enki/Ea y Eridu: [ORACC](https://oracc.museum.upenn.edu/amgg/listofdeities/enki/index.html).
-- Kish: sede de la realeza tras el diluvio mítico según la [Lista Real Sumeria, Oxford ETCSL 2.1.1](https://etcsl.orinst.ox.ac.uk/edition2/etcslgloss.php?charenc=gcirc&lookup=c211.43), no primera ciudad histórica.
-- EDIN (eden/edin), llanura o estepa: [ORACC](https://oracc.museum.upenn.edu/dsst/cbd/sux/E.html).
+- ABZU (acadio apsû), Enki/Ea y Eridu: [ORACC](https://oracc.museum.upenn.edu/amgg/Listofdeities/Enki/index.html).
+- Kish: sede de la realeza tras el diluvio mítico según la [Lista Real Sumeria, Oxford ETCSL 2.1.1](https://etcsl.orinst.ox.ac.uk/cgi-bin/etcsl.cgi?text=t.2.1.1), no primera ciudad histórica.
+- EDIN (eden/edin), llanura o estepa: [ORACC Sign List](https://oracc.museum.upenn.edu/osl/signlist/selpages/o0000167-sux.html) y [testimonio léxico](https://oracc.museum.upenn.edu/dcclt/signlists/Q000156), líneas 46–48.
 - KUDURRU y Mušḫuššu (grafía histórica, sin renombrar MUSHUSHU): monumento de concesiones y dragón asociado a Marduk/Nabu: [Met 1985.45](https://www.metmuseum.org/art/collection/search/327048).
 - LARSA: soporte de vaso con tres cabras salvajes, 2000–1800 a. C.: [Louvre AO 15705](https://collections.louvre.fr/ark:/53355/cl010140481). Los 120° son un modelo moderno.
-- SHARUR (Šar-ur), maza personificada de la tradición de Ninurta: [Oxford ETCSL 1.6.2](https://etcsl.orinst.ox.ac.uk/edition2/etcslgloss.php?charenc=gcirc&lookup=c162.255).
+- SHARUR (Šar-ur, šar₂-ur₃), maza personificada de la tradición de Ninurta: [Oxford ETCSL 1.6.2, línea 253](https://etcsl.orinst.ox.ac.uk/edition2/etcslgloss.php?charenc=gcirc&lookup=c162.253). Por separado, [ePSD2 šar](https://oracc.museum.upenn.edu/epsd2/cbd/sux/o0038872.html) documenta el numeral 3600 y el sentido de totalidad. Su combinación en SHARUR-3600 es una convención moderna, no una traducción literal del nombre de la maza.
 - Base 60 posicional babilónica: [MacTutor, St Andrews](https://mathshistory.st-andrews.ac.uk/HistTopics/Babylonian_numerals/).
-- NEMESIS: [Oxford Classical Dictionary](https://doi.org/10.1093/acrefore/9780199381135.013.4373).
+- NEMESIS: [Oxford Classical Dictionary](https://academic.oup.com/edited-volume/61673/chapter-abstract/549687781).
+
+### Estratos lingüísticos
+
+ABZU, EDIN y Šar-ur pertenecen al vocabulario o a la tradición literaria sumeria;
+Enki/Ea enlaza las tradiciones sumeria y acadia. Kish, Larsa, Eridu y Babylon
+son referencias geográficas mesopotámicas. KUDURRU y Mušḫuššu remiten a la
+tradición babilónica de concesiones y símbolos divinos. NEMESIS y Sanedrín son
+referencias externas a Mesopotamia; CORTEX y MOSKV-1 son nombres modernos del
+proyecto. Las grafías académicas documentan el origen sin alterar los IDs ASCII.
 
 ### Compatibilidad
 
@@ -185,7 +194,7 @@ ENKI-60 toma la base sexagesimal como referencia. El planificador F60 usa punto 
 *   $\text{L1 Cache Line} = 64 \text{ B} \implies [1, 4]_{60}$.
 *   $\text{Hora Canónica} = 3600 \text{ s} \implies [1, 0, 0]_{60}$.
 
-La adopción de F60 optimiza los cálculos de compactación de estado (INV_C5_AEON) garantizando simetría perfecta en particiones (factores 2, 3, 4, 5, 6, 10, 12, 15, 20, 30).
+La base 60 admite divisores enteros 2, 3, 4, 5, 6, 10, 12, 15, 20 y 30. Esta propiedad aritmética no demuestra por sí sola compactación óptima, simetría de una implementación Q32.32 ni exactitud de todas las fracciones; tales propiedades requieren su propia especificación y evidencia.
 
 ---
 

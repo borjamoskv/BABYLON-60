@@ -53,8 +53,8 @@ worker (real o simulado) y recibo. No extrapolar el alcance del claim
 
 ### Invariantes Estructurales de Aislamiento
 1. **Aislamiento de Ring-0:** Los agentes estocásticos (LLMs) **NUNCA** tienen acceso directo de mutación sobre las estructuras de memoria del kernel (`00_ABZU_KERNEL`).
-2. **Barrera BFT Mandatoria:** Toda propuesta de estado o resultado generado por un worker de un enjambre debe empaquetarse en un `AttestationEnvelope` firmado y pasar por el consenso BFT antes de persistirse.
-3. **Topología PxS Anti-Thrashing:** En hardware Apple Silicon (ARM64), la concurrencia de hilos se fija a la regla empírica $P \times S$ para impedir el estrangulamiento por cambios de contexto involuntarios (`ru_nivcsw`).
+2. **Separación de propuesta y autorización:** Un resultado de worker es una propuesta, no autoridad de commit. El flujo de atestación y validación depende del componente y del efecto; esta descripción no acredita que todos los resultados pasen por un protocolo BFT distribuido. LARSA-120 designa el quórum heterogéneo local descrito en el [manifiesto](../ARCHITECTURE_MANIFEST.md#0-nomenclatura-y-alcance).
+3. **Topología PxS Anti-Thrashing:** La regla $P \times S$ es una heurística de diseño para dimensionar perfiles; no una garantía de ausencia de thrashing. El planificador EDIN usa su propio límite de concurrencia configurable, y las mediciones de `ru_nivcsw` deben atribuirse a la campaña y al hardware correspondientes.
 
 ---
 
