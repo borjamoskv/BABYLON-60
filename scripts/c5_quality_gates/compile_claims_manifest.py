@@ -83,6 +83,7 @@ RELEASE_ARTIFACTS = (
     "uv.lock",
     "LICENSE",
     "README.md",
+    "README_ES.md",
     "WHY_BABYLON_60.md",
 )
 
@@ -404,6 +405,15 @@ def _collect_release_bundle_info(version: str, bundle_path: Path | None) -> Dict
     }
 
 
+def _write_release_json(path: Path, document: Dict[str, Any]) -> None:
+    """Do not carry a timestamp proof forward to a different document."""
+    payload = (json.dumps(document, indent=2, ensure_ascii=False) + "\n").encode("utf-8")
+    previous = path.read_bytes() if path.exists() else None
+    path.write_bytes(payload)
+    if previous != payload:
+        path.with_name(path.name + ".ots").unlink(missing_ok=True)
+
+
 def emit_claims_artifacts(
     evidence: Dict[str, Any],
     bundle_path: Path | None = None,
@@ -433,10 +443,7 @@ def emit_claims_artifacts(
 
     # 1. evidence.json
     evidence_json_path = REPO_ROOT / "evidence.json"
-    evidence_json_path.write_text(
-        json.dumps(evidence, indent=2, ensure_ascii=False) + "\n",
-        encoding="utf-8",
-    )
+    _write_release_json(evidence_json_path, evidence)
 
     # 2. claims.lock
     lock_data = {
@@ -457,10 +464,7 @@ def emit_claims_artifacts(
         },
     }
     claims_lock_path = REPO_ROOT / "claims.lock"
-    claims_lock_path.write_text(
-        json.dumps(lock_data, indent=2, ensure_ascii=False) + "\n",
-        encoding="utf-8",
-    )
+    _write_release_json(claims_lock_path, lock_data)
 
     # 3. RELEASE_MANIFEST.json (signed only when a key is provisioned)
     pubkey_hex = signing_key.public_key().public_bytes_raw().hex() if signing_key else None
@@ -513,10 +517,7 @@ def emit_claims_artifacts(
     manifest_full["signature"] = signature
 
     release_manifest_path = REPO_ROOT / "RELEASE_MANIFEST.json"
-    release_manifest_path.write_text(
-        json.dumps(manifest_full, indent=2, ensure_ascii=False) + "\n",
-        encoding="utf-8",
-    )
+    _write_release_json(release_manifest_path, manifest_full)
 
     sig_path = REPO_ROOT / "RELEASE_MANIFEST.json.sig"
     if signature and pubkey_hex:

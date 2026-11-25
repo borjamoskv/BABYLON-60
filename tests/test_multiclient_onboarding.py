@@ -23,10 +23,11 @@ def _configure_env(monkeypatch: pytest.MonkeyPatch, tmp_path: Path, client: str)
         profile_path = home / "rules" / "babylon60.mdc"
         monkeypatch.setenv("CURSOR_HOME", str(home))
     else:
-        home = tmp_path / "gemini_home"
+        gemini_root = tmp_path / "gemini_home"
+        home = gemini_root / ".gemini"
         mcp_path = home / "settings.json"
         profile_path = home / "GEMINI.md"
-        monkeypatch.setenv("GEMINI_CLI_HOME", str(home))
+        monkeypatch.setenv("GEMINI_CLI_HOME", str(gemini_root))
     return home, data_home, profile_path, mcp_path
 
 
@@ -81,6 +82,7 @@ def test_multiclient_lifecycle_dry_run_setup_doctor_idempotent_remove(
     assert checks["configuration"] == "OK"
     assert checks["mcp"] == "OK"
     assert checks["contract"] == "OK"
+    assert checks["client_loading"] == "NO_VERIFICADO"
     assert checks["behavior"] == "NO_VERIFICADO"
     probe = doc_report["probe"]
     assert isinstance(probe, dict)
@@ -101,6 +103,57 @@ def test_multiclient_lifecycle_dry_run_setup_doctor_idempotent_remove(
     not_conf = onboarding.setup_client(client, remove=True)
     assert not_conf["ok"] is True
     assert not_conf["status"] == "not_configured"
+
+
+@pytest.mark.parametrize("override", [None, ""])
+def test_gemini_default_home_uses_dot_gemini(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, override: str | None
+) -> None:
+    user_root = tmp_path / "user"
+    monkeypatch.setattr(Path, "home", lambda: user_root)
+    monkeypatch.setenv("BABYLON_HOME", str(tmp_path / "state"))
+    if override is None:
+        monkeypatch.delenv("GEMINI_CLI_HOME", raising=False)
+    else:
+        monkeypatch.setenv("GEMINI_CLI_HOME", override)
+
+    assert onboarding.setup_client("gemini")["ok"] is True
+    assert (user_root / ".gemini" / "settings.json").is_file()
+    assert (user_root / ".gemini" / "GEMINI.md").is_file()
+    assert not (user_root / "settings.json").exists()
+
+
+def test_gemini_legacy_location_is_not_connected_and_repair_preserves_files(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    home, data_home, profile_path, mcp_path = _configure_env(monkeypatch, tmp_path, "gemini")
+    assert onboarding.setup_client("gemini")["ok"] is True
+
+    # Recreate the persisted layout of older versions: files at the override root.
+    legacy_home = home.parent
+    legacy_files = {}
+    for path in (profile_path, mcp_path):
+        legacy = legacy_home / path.name
+        path.rename(legacy)
+        legacy_files[legacy] = legacy.read_bytes()
+    state_path = data_home / "integrations" / "gemini.json"
+    state = json.loads(state_path.read_text())
+    record = state["clients"].pop(str(home))
+    record["profile_path"] = str(legacy_home / "GEMINI.md")
+    record["mcp_path"] = str(legacy_home / "settings.json")
+    state["clients"][str(legacy_home)] = record
+    state_path.write_text(json.dumps(state))
+
+    report = onboarding.doctor_client("gemini")
+    assert report["ok"] is False
+    checks = report["checks"]
+    assert isinstance(checks, dict)
+    assert checks["configuration"] == "ERROR"
+    assert onboarding.setup_client("gemini")["ok"] is True
+    assert "babylon60" in json.loads(mcp_path.read_text())["mcpServers"]
+    assert "babylon60:gemini:start" in profile_path.read_text()
+    assert onboarding.doctor_client("gemini")["ok"] is True
+    assert all(path.read_bytes() == content for path, content in legacy_files.items())
 
 
 @pytest.mark.parametrize("client", ["claude", "cursor", "gemini"])

@@ -31,6 +31,7 @@ def fixture_tree(tmp_path):
         "pyproject.toml",
         "uv.lock",
         "README.md",
+        "README_ES.md",
         "LICENSE",
         "docs/skills.json",
         "docs/skills-lock.json",
@@ -110,6 +111,8 @@ def test_terminal_bundle_contains_importable_cli_and_mcp(tmp_path):
         names = bundle.namelist()
         for name in GOVERNANCE_DOCUMENTS:
             assert bundle.read(name) == (ROOT / name).read_bytes(), f"Stale governance in bundle: {name}"
+        for name in ("README.md", "README_ES.md"):
+            assert bundle.read(name) == (ROOT / name).read_bytes(), f"Stale README in bundle: {name}"
         oracle = "scripts/c5_quality_gates/prompt_exergy_oracle.py"
         assert bundle.read(oracle) == (ROOT / oracle).read_bytes()
         assert "install.ps1" in names

@@ -743,7 +743,8 @@ def _json_client_layout(client: str) -> _JsonClientLayout:
         return _JsonClientLayout(
             client, "Cursor", home, data_home, state_path, home / "rules" / "babylon60.mdc", home / "mcp.json", True
         )
-    home = _absolute(os.environ.get("GEMINI_CLI_HOME", str(Path.home() / ".gemini")))
+    # GEMINI_CLI_HOME replaces the user's home root, not the .gemini directory.
+    home = _absolute(os.environ.get("GEMINI_CLI_HOME") or str(Path.home())) / ".gemini"
     return _JsonClientLayout(
         client, "Gemini CLI", home, data_home, state_path, home / "GEMINI.md", home / "settings.json", False
     )
@@ -983,7 +984,7 @@ def setup_client(client: str, *, dry_run: bool = False, remove: bool = False) ->
             "removed" if remove else "configured",
             f"Integración propia de Babylon retirada de {layout.label}; el ledger se conserva."
             if remove
-            else f"Babylon conectado a {layout.label} con preferencias de exergía y servidor MCP.",
+            else f"Configuración local de Babylon preparada para {layout.label}, con preferencias y servidor MCP.",
             next_msg,
             steps=steps,
         )
@@ -1000,6 +1001,7 @@ def doctor_client(client: str) -> dict[str, object]:
         "executable": "PENDIENTE",
         "mcp": "PENDIENTE",
         "contract": "PENDIENTE",
+        "client_loading": "NO_VERIFICADO",
         "behavior": "NO_VERIFICADO",
     }
     stage = "configuration"
@@ -1049,7 +1051,7 @@ def doctor_client(client: str) -> dict[str, object]:
         return _result(
             True,
             "connected",
-            f"Configuración de {layout.label}, conexión MCP y entrega del contrato verificadas con datos temporales. La mejora de las respuestas sigue NO_VERIFICADO.",
+            f"Configuración local de {layout.label} y transporte MCP comprobados con datos temporales. La carga por el cliente y la mejora de sus respuestas siguen NO_VERIFICADO.",
             f"Abre una sesión nueva de {layout.label} para cargar las preferencias y el MCP.",
             checks=checks,
             probe=details,

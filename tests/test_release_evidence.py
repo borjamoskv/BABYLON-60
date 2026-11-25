@@ -106,6 +106,24 @@ def test_invalid_configured_key_fails_before_artifact_writes(
     assert not (evidence_root / "evidence.json").exists()
 
 
+def test_regeneration_keeps_timestamp_only_for_identical_bytes(evidence_root: Path) -> None:
+    evidence = compiler.compile_claims_evidence()
+    compiler.emit_claims_artifacts(evidence)
+    evidence_stamp = evidence_root / "evidence.json.ots"
+    manifest_stamp = evidence_root / "RELEASE_MANIFEST.json.ots"
+    evidence_stamp.write_bytes(b"receipt for previous evidence bytes")
+    manifest_stamp.write_bytes(b"receipt for previous manifest bytes")
+
+    # The evidence is byte-identical; the manifest changes its prior_release link.
+    compiler.emit_claims_artifacts(evidence)
+    assert evidence_stamp.read_bytes() == b"receipt for previous evidence bytes"
+    assert not manifest_stamp.exists()
+
+    evidence["timestamp_iso"] = "2026-11-25T01:00:00Z"
+    compiler.emit_claims_artifacts(evidence)
+    assert not evidence_stamp.exists()
+
+
 def test_source_changes_after_verification_are_rejected(evidence_root: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(compiler, "source_tree_digest", lambda root: "e" * 64)
     with pytest.raises(ValueError, match="source changed"):
@@ -125,6 +143,9 @@ def test_v5_manifest_keeps_verifier_fields_and_chains_prior_release(evidence_roo
     prior_bytes = json.dumps({"manifest_schema": "babylon60.release.v5", "version": "4.9.0", "prior_commit": "f" * 40})
     (evidence_root / "RELEASE_MANIFEST.json").write_text(prior_bytes)
     (evidence_root / "Cargo.toml").write_text('[workspace.package]\nversion = "5.0.0"\n')
+    readmes = {"README.md": b"# English release guide\n", "README_ES.md": b"# Guia de la version\n"}
+    for name, content in readmes.items():
+        (evidence_root / name).write_bytes(content)
     evidence = compiler.compile_claims_evidence()
     _, _, manifest_path = compiler.emit_claims_artifacts(evidence)
     manifest = json.loads(manifest_path.read_text())
@@ -141,6 +162,8 @@ def test_v5_manifest_keeps_verifier_fields_and_chains_prior_release(evidence_roo
     }
     assert manifest["version_sync"]["cargo_workspace"] == "5.0.0"
     assert manifest["artifacts_sha256"]["CLAIMS.toml"] == evidence["claims_manifest_digest"]
+    for name, content in readmes.items():
+        assert manifest["artifacts_sha256"][name] == hashlib.sha256(content).hexdigest()
 
 
 def test_v5_manifest_rejects_version_drift_before_writes(evidence_root: Path) -> None:

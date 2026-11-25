@@ -716,6 +716,8 @@ def test_packaged_release_zip_standalone_verification_without_git(tmp_path: Path
         manifest_doc["claims_manifest_digest"] = claims_digest
     artifacts_meta = manifest_doc.get("artifacts_sha256")
     if isinstance(artifacts_meta, dict):
+        spanish_readme = extract_dir / "README_ES.md"
+        artifacts_meta["README_ES.md"] = hashlib.sha256(spanish_readme.read_bytes()).hexdigest()
         for rel_art in list(artifacts_meta):
             art_file = extract_dir / rel_art
             if art_file.is_file():
@@ -771,9 +773,19 @@ def test_packaged_release_zip_standalone_verification_without_git(tmp_path: Path
         timeout=15,
     )
     assert res_ok.returncode == 0, res_ok.stderr
-    assert "[CHECK] governance_artifacts: PASS [required] (files=10)" in res_ok.stdout
+    artifact_count = len(manifest_doc["artifacts_sha256"])
+    assert f"[CHECK] governance_artifacts: PASS [required] (files={artifact_count})" in res_ok.stdout
     assert "[CHECK] source_tree_digest: PASS [required]" in res_ok.stdout
     assert "[VERIFIED]" in res_ok.stdout
+
+    # Both languages are bound by the manifest, including in the extracted ZIP.
+    spanish_readme = extract_dir / "README_ES.md"
+    original_spanish = spanish_readme.read_bytes()
+    spanish_readme.write_bytes(original_spanish + b"\nAltered instructions.\n")
+    res_spanish = subprocess.run(["bash", "verify.sh"], cwd=extract_dir, capture_output=True, text=True, timeout=15)
+    assert res_spanish.returncode == 1
+    assert "[CHECK] governance_artifacts: FAIL [required]" in res_spanish.stderr
+    spanish_readme.write_bytes(original_spanish)
 
     # Modifying a non-governance source file in the git-less directory fails closed
     install_sh = extract_dir / "install.sh"
