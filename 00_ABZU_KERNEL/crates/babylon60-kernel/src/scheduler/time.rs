@@ -3,11 +3,11 @@
 // █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 // ============================================================================
 
-/// Instruction cycle counter within the VM. Strictly monotonic.
+/// Instruction cycle counter within the VM; nondecreasing and saturating at u64::MAX.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct LogicalClock(pub u64);
 
-/// Exact Q32.32 Fixed-Point Time representation (F60 domain).
+/// Binary Q32.32 fixed-point time representation (not exact for general sexagesimal fractions).
 /// Higher 32 bits represent integer seconds/units, lower 32 bits represent fractional units.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct SimulationClock(pub u64);

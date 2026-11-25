@@ -558,6 +558,16 @@ mod c0442_c0443_tests {
     }
 
     #[test]
+    fn rational_sixtieth_is_exact_but_not_a_fractional_logical_tick() {
+        let one = F60::new(BigInt::from(1), 0);
+        let sixty = F60::new(BigInt::from(60), 0);
+        let fraction = exact_div(&one, &sixty).unwrap();
+        assert!(same_value(&fraction, &F60::new(BigInt::from(1), 1)));
+        assert!(same_value(&mul_f60(&fraction, &sixty).unwrap(), &one));
+        assert!(ticks_from_f60(&fraction).is_err());
+    }
+
+    #[test]
     fn reduce_preserves_value_for_partial_base_factors() {
         // C0442: 2/60 debe seguir valiendo 2/60 tras reducir.
         let raw = F60 { num: BigInt::from(2), scale: 1 };

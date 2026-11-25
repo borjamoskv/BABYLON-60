@@ -1,11 +1,11 @@
 # ⚙️ BABYLON-60 Low-Level Kernel (`00_ABZU_KERNEL/crates/babylon60-kernel/`)
 
 [![Rust](https://img.shields.io/badge/Rust-≥1.89-orange?style=for-the-badge&logo=rust)](https://www.rust-lang.org/)
-[![no_std](https://img.shields.io/badge/no__std-Bare--Metal_Ready-brightgreen?style=for-the-badge)]()
-[![Formal Verification](https://img.shields.io/badge/Lean_4-Verified_Causality-green?style=for-the-badge)](../../../proof/lean/BabylonTrace.lean)
+[![no_std](https://img.shields.io/badge/no__std-Library-brightgreen?style=for-the-badge)]()
+[![Formal Verification](https://img.shields.io/badge/Lean_4-Abstract_Trace-green?style=for-the-badge)](../../../proof/lean/BabylonTrace.lean)
 [![Criterion Benchmarks](https://img.shields.io/badge/Benchmarks-Criterion_F60_&_WORM-purple?style=for-the-badge)](./benches/thermo_benches.rs)
 
-The **`babylon60-kernel`** crate is a `#![no_std]` Rust library providing the exact sexagesimal (`F60`) Q32.32 scheduler, in-memory forensic quarantine snapshot, BLAKE3 Merkle-causal event ledger, and `.b60` ISA evaluation engine.
+The **`babylon60-kernel`** crate is a `#![no_std]` Rust library providing the deterministic quantized Q32.32 scheduler, in-memory forensic quarantine snapshot, BLAKE3 Merkle-causal event ledger, and `.b60` ISA evaluation engine.
 
 ---
 
@@ -13,7 +13,7 @@ The **`babylon60-kernel`** crate is a `#![no_std]` Rust library providing the ex
 
 | Module | Location | Description |
 | :--- | :--- | :--- |
-| **Scheduler** | [`scheduler/`](./src/scheduler) | Exact sexagesimal (`F60`) Q32.32 time-slice manager (`0;20` exact ticks, zero `f64` floating-point drift). |
+| **Scheduler** | [`scheduler/`](./src/scheduler) | Q32.32 time-slice manager with integer ticks and a quantized nominal 60 Hz interval. |
 | **Forensic Quarantine** | [`forensic_quarantine/`](./src/forensic_quarantine) | In-memory snapshot (`QuarantineSnapshot::freeze`) with 64-bit FNV-1a integrity checksum upon anomaly detection (persistent durability is delegated to SQLite WAL in `01_KISH_ENGINE`). |
 | **B60 ISA** | [`isa.rs`](./src/isa.rs) | Bytecode Instruction Set Architecture definition for deterministic causal coroutines. |
 | **Evaluator** | [`eval.rs`](./src/eval.rs) | Pure evaluation loop enforcing single-step causal transition bounds. |
@@ -26,8 +26,8 @@ The **`babylon60-kernel`** crate is a `#![no_std]` Rust library providing the ex
 
 ## ⚡ Technical Invariants
 
-1. **`#![no_std]` Compatibility**: Compiles with `extern crate alloc;`, suitable for embedded or constrained user-space substrates.
-2. **Zero Floating-Point Drift**: Temporal calculations use exact Q32.32 sexagesimal fractions ($F_{60}$), eliminating rounding accumulation across runs.
+1. **`#![no_std]` Compatibility**: Compiles with `extern crate alloc;`, using alloc; bare-metal boot and platform compatibility require separate evidence.
+2. **Deterministic quantization**: Each 60 Hz step is floor(2^32/60) raw units. Before saturation the deficit is 16 raw units per 60 ticks (about 0.322 ms/day). No floating-point arithmetic is used for this clock; exact rational or physical timing is not claimed.
 3. **In-Memory Quarantine Snapshot**: Captures deterministic state (`QuarantineSnapshot::freeze`) before halting execution.
 
 ---

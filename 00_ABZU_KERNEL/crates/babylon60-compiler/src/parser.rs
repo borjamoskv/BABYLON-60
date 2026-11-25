@@ -174,3 +174,18 @@ pub fn parse(source: &str) -> Result<B60Program, ParseError> {
     }
     Ok(B60Program { instructions })
 }
+
+#[cfg(test)]
+mod omega18_domain_tests {
+    use super::*;
+
+    #[test]
+    fn kernel_bytecode_frontend_does_not_accept_runtime_temporal_grammar() {
+        assert_eq!(
+            parse("LOADIMM 60").unwrap().instructions,
+            vec![Instruction { opcode: Opcode::LoadImm(KernelReg::R1, 60) }]
+        );
+        assert!(parse("AFTER R1 DONE").is_err());
+        assert!(parse("BA.EXACT R1 R2").is_err());
+    }
+}

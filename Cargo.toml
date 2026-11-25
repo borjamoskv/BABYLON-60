@@ -8,6 +8,8 @@ exclude = [
     "packages/*",
     "00_ABZU_KERNEL/formal_verification"
 ]
+## Keep experimental crates in the lockfile and workspace-wide CI, not the default build.
+default-members = ["."]
 resolver = "2"
 
 [workspace.package]
