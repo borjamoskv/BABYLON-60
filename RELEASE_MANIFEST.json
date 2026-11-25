@@ -3,16 +3,16 @@
   "release": "5.1.0",
   "version": "5.1.0",
   "state": "candidate",
-  "commit": "0b978eb871ca95627fbf5a97ea93bb54dfc7f9b1",
-  "source_tree_digest": "12afcab165901ee4bbd2931b6d058da14c2a03b79f851125db6e420e1d40666f",
+  "commit": "75db94978ccb69e8bec006498370e0baf6983aa3",
+  "source_tree_digest": "0fdc01f8715f375147035141ad9df259fe69583458ae34e5e74e3ceb2b4d34fc",
   "axiom_root": "AX-0: No stochastic component may authorize its own irreversible effects (LLM != authority)",
   "claims_manifest_digest": "4fe991ad35b0451a32fd766f26269341e8695f9d631f95a6b3c8067d0d2110be",
-  "compiled_at_iso": "2026-11-25T00:58:55Z",
+  "compiled_at_iso": "2026-11-25T16:54:19Z",
   "prior_release": {
     "version": "5.1.0",
-    "commit": "9a8aee1bc3d89893b8c0292790088b21df4b182e",
+    "commit": "0b978eb871ca95627fbf5a97ea93bb54dfc7f9b1",
     "manifest_schema": "babylon60.release.v5",
-    "manifest_sha256": "a4b22519107f651e02c773bf36c8347db61ffd12072bc5576e17c2ad45c32f93"
+    "manifest_sha256": "7aa4e61b0c474be83ad25e356c62b257cec5e9edac9bfa97a08d144543fc8f95"
   },
   "version_sync": {
     "babylon_toml": "5.1.0",
@@ -80,7 +80,8 @@
     "pyproject.toml": "7d81f06ffeaea76ec484884b2ac38f0d98c760c8a25779754d17a5e5c6065d05",
     "uv.lock": "33d5aeb7c03eb8799d6fa444ff957677fa596830ab34c6a13c4353e4ea5f798d",
     "LICENSE": "4c0feb0f48586176789f42815859e2714a0486cccc72fbc9e3422eb29d155536",
-    "README.md": "18a648d5eb9f73bc9700463280b42685bf511bcbc16c30c02f34d3df087d2735",
+    "README.md": "765cdc2f86fb9de8aa1edc675b45f5cc0192853341490c89d120e2794970ca53",
+    "README_ES.md": "ed8690c15c9beb7d4bf84f2b80b378a735f86ac529c7ef433fe6f70c8fa30239",
     "WHY_BABYLON_60.md": "d3f522dfb1f7fc11ca77847c82c935988b63d0131c9e8ff47ba8369a84e380d5"
   },
   "claims": {
@@ -100,7 +101,7 @@
   },
   "release_bundle": {
     "name": "Babylon60-v5.1.0-terminal-mcp.zip",
-    "tree_digest": "4b51f114c244a17ff63f8b204ca9a0fa63f435596c61cbd573050fe62e50e7cc",
+    "tree_digest": "612ad93f2ebbb5ced6245e5114f25a99ae46525aa6bc08c7bde3da3e3da62768",
     "source_files": [
       ".agents/skills/_skill_checks/declarative.py",
       ".agents/skills/_skill_router.py",
@@ -520,6 +521,7 @@
       "Cargo.toml",
       "LICENSE",
       "README.md",
+      "README_ES.md",
       "RELEASE_MANIFEST.json",
       "WHY_BABYLON_60.md",
       "babylon.toml",
