@@ -31,6 +31,8 @@ Ejecutar comprobaciones proporcionales al cambio y leer su resultado antes de de
 
 Comprobar documentos y enlaces con `python3 scripts/c5_quality_gates/audit_semantic_contracts.py --workspace-only`, el presupuesto con `python3 scripts/c5_quality_gates/audit_token_budget.py --workspace-only --skip-ghost-listeners` y la topología con `python3 scripts/guards/verify_active_topology.py`. El alcance local excluye configuración global y declara la telemetría omitida. Antes de un commit autorizado, validar también la topología con `--staged`; este modo lee el índice Git. Si la respuesta incluye firma, validar su borrador con `--response <ruta>`.
 
+Para cambios en skills, aliases, routing, registros o generación, revisar el workflow Skill Convergence Audit del checkout del repositorio; no forma parte del paquete terminal. La aceptación exige resultados de la suite aplicable, paridad entre CLI y distribución instalada y, en la fuente canónica, las tres distribuciones generadas. Una proyección con `NOT_CHECKED` no acredita la convergencia completa. No confundir catálogo con procedimientos disponibles ni selección con autorización.
+
 Informar qué cambió, qué se comprobó y qué falló o queda pendiente. No certificar runtime mediante documentación ni publicar por inferencia de una autorización local. Commits: `[AX-<Num>] <DOMINIO>: <Descripción causal>`; merge explícito antes de push a `origin/main`.
 
 ## Modelo y salida

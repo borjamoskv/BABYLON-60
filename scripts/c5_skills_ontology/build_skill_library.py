@@ -124,6 +124,12 @@ def build(destination: Path, environment: str) -> None:
         generated.append(entry)
     registry["entries"] = generated
     registry["total_skills"] = len(generated)
+    tiers = [e["tier"] for e in generated if isinstance(e.get("tier"), (int, float))]
+    registry["average_exergy_density"] = round(sum(tiers) / len(tiers), 2) if tiers else None
+    registry["description"] = (
+        f"Catálogo de distribución {environment}: {len(generated)} entradas con SKILL.md; "
+        f"{len(tiers)} con tier de clasificación (no evidencia de ejecución)."
+    )
     registry["adjacency"] = [
         edge for edge in registry["adjacency"] if edge["source"] in metadata and edge["target"] in metadata
     ]

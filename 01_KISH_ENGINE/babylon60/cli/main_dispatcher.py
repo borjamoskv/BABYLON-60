@@ -357,7 +357,8 @@ def cmd_skills(args: argparse.Namespace) -> int:
     """Inspect, list, and route CORTEX declarative skills (SKILL.md fleet)."""
     import json
     import re
-    from importlib.resources import files
+    from importlib.resources import as_file, files
+    from runpy import run_path
     from typing import TYPE_CHECKING
     import yaml
 
@@ -368,10 +369,12 @@ def cmd_skills(args: argparse.Namespace) -> int:
     ws_skills_dir: Traversable = repo_root / ".agents" / "skills"
     skills_json_path: Traversable = repo_root / "docs" / "skills.json"
     skill_path_prefix = ".agents/skills"
+    provenance = "workspace_disk"
     packaged_resources = files("babylon60").joinpath("mcp", "resources")
     if not ws_skills_dir.is_dir():
         ws_skills_dir = packaged_resources.joinpath("skills")
         skill_path_prefix = "babylon60/mcp/resources/skills"
+        provenance = "installed_distribution"
     if not skills_json_path.is_file():
         skills_json_path = packaged_resources.joinpath("skills.json")
 
@@ -426,6 +429,7 @@ def cmd_skills(args: argparse.Namespace) -> int:
                 "description": desc,
                 "role": role,
                 "scope": "workspace",
+                "artifact_provenance": provenance,
                 "phase": phase,
                 "worktree_mode": worktree_mode,
                 "upstream": upstream,
@@ -457,6 +461,7 @@ def cmd_skills(args: argparse.Namespace) -> int:
                     "description": edesc,
                     "role": str(entry.get("role", "ejecutor")),
                     "scope": escope,
+                    "artifact_provenance": "catalog_only",
                     "phase": "catalog",
                     "worktree_mode": "read-only",
                     "upstream": "operador",
@@ -471,40 +476,49 @@ def cmd_skills(args: argparse.Namespace) -> int:
         if not query:
             print("Error: 'babylon60 skills route' requires --query <intent>.", file=sys.stderr)
             return 1
-        q_norm = query.lower().strip()
-        q_words = set(re.findall(r"\b[a-záéíóúñ0-9_-]{3,}\b", q_norm))
-        best_skill: dict[str, object] | None = None
-        best_score = 0.0
-        for s in loaded_skills.values():
-            if scope_filter != "all" and s["scope"] != scope_filter:
-                continue
-            if role_filter != "all" and s["role"] != role_filter:
-                continue
-            score = 0.0
-            if q_norm in {str(s["name"]).lower(), str(s["canonical_alias"]).lower()}:
-                score += 50.0
-            for trig in cast_str_list(s.get("triggers", [])):
-                if trig in q_norm:
-                    score += 15.0
-                else:
-                    common = set(trig.split()).intersection(q_words)
-                    score += len(common) * 3.0
-            name_words = set(str(s["name"]).replace("-", " ").split()) | set(
-                str(s["canonical_alias"]).replace("-", " ").split()
+        # The resolver is code shipped with this distribution, never a selected procedure.
+        # Catalog-only records remain inspectable but cannot be selected as available procedures.
+        eligible = {
+            name: skill
+            for name, skill in loaded_skills.items()
+            if skill["artifact_provenance"] != "catalog_only"
+            and (scope_filter == "all" or skill["scope"] == scope_filter)
+            and (role_filter == "all" or skill["role"] == role_filter)
+        }
+        try:
+            generated = json.loads(
+                ws_skills_dir.joinpath("skill_catalog.generated.json").read_text(encoding="utf-8")
             )
-            score += len(name_words.intersection(q_words)) * 2.5
-            desc_words = set(re.findall(r"\b[a-záéíóúñ0-9_-]{3,}\b", str(s["description"]).lower()))
-            score += len(desc_words.intersection(q_words)) * 0.5
-            if score > best_score:
-                best_score = score
-                best_skill = s
-
-        if not best_skill:
-            if as_json:
-                print(json.dumps({"query": query, "elected": None}, indent=2, ensure_ascii=False))
-            else:
-                print(f"[!] No skill matched query: {query}")
+            with as_file(ws_skills_dir.joinpath("_skill_router.py")) as resolver_path:
+                resolver = run_path(str(resolver_path))
+            records = [record for record in resolver["library_records"](generated) if record["name"] in eligible]
+            matches = resolver["select"](
+                query, records, getattr(args, "context", "") or "", policy=generated["policy"]
+            )
+            for match in matches:
+                relative = Path(match["module"])
+                if (
+                    relative.is_absolute()
+                    or ".." in relative.parts
+                    or not ws_skills_dir.joinpath(*relative.parts).is_file()
+                ):
+                    raise ValueError("Selected procedure is missing or outside the distribution")
+        except (OSError, ValueError, KeyError, TypeError) as error:
+            print(f"Skill routing unavailable: {error}", file=sys.stderr)
             return 1
+        if len(matches) != 1:
+            candidates = [match["name"] for match in matches]
+            if as_json:
+                print(json.dumps({"query": query, "elected": None, "candidates": candidates}, ensure_ascii=False))
+            else:
+                print(
+                    "[!] Ambiguous skill selection: " + ", ".join(candidates)
+                    if candidates
+                    else f"[!] No skill matched query: {query}"
+                )
+            return 3 if candidates else 2
+        best_skill = eligible[matches[0]["name"]]
+        procedure_path = f"{skill_path_prefix}/{matches[0]['module']}"
         alias_out = str(best_skill["canonical_alias"] or best_skill["name"])
         payload = {
             "query": query,
@@ -517,6 +531,8 @@ def cmd_skills(args: argparse.Namespace) -> int:
             "worktree_mode": best_skill["worktree_mode"],
             "handoff": {"upstream": best_skill["upstream"], "downstream": best_skill["downstream"]},
             "path": best_skill["path"],
+            "procedure_path": procedure_path,
+            "artifact_provenance": best_skill["artifact_provenance"],
         }
         if as_json:
             print(json.dumps(payload, indent=2, ensure_ascii=False))
@@ -544,6 +560,7 @@ def cmd_skills(args: argparse.Namespace) -> int:
                 "canonical_alias": s["canonical_alias"] or s["name"],
                 "role": s["role"],
                 "scope": s["scope"],
+                "artifact_provenance": s["artifact_provenance"],
                 "phase": s["phase"],
                 "worktree_mode": s["worktree_mode"],
             }
@@ -582,6 +599,8 @@ def cmd_skills(args: argparse.Namespace) -> int:
 
     status_payload = {
         "total_skills": len(skills),
+        "procedure_entries": sum(s["artifact_provenance"] != "catalog_only" for s in skills),
+        "catalog_only_entries": sum(s["artifact_provenance"] == "catalog_only" for s in skills),
         "by_scope": by_scope,
         "by_role": by_role,
         "workspace_canonical_alias_coverage": f"{ws_aliased}/{ws_total}",
@@ -594,7 +613,9 @@ def cmd_skills(args: argparse.Namespace) -> int:
     print("=" * 64)
     print("BABYLON-60 CORTEX DECLARATIVE SKILLS STATUS")
     print("=" * 64)
-    print(f"Total Loaded Skills:          {len(skills)}")
+    print(f"Total Catalog Entries:        {len(skills)}")
+    print(f"Procedure Entries:            {status_payload['procedure_entries']}")
+    print(f"Catalog-only Entries:         {status_payload['catalog_only_entries']}")
     print(f"Workspace Canonical Aliases:  {ws_aliased}/{ws_total}")
     print(f"Functorial Handoff DAG Edges: {status_payload['functorial_dag_edges']}")
     print("By Scope:                     " + ", ".join(f"{k}={v}" for k, v in sorted(by_scope.items())))
@@ -1472,7 +1493,8 @@ def main() -> None:
         default="all",
         help="Filter skills by role triad (default: all)",
     )
-    p_skills.add_argument("--query", default=None, help="Intent query to route to the optimal skill")
+    p_skills.add_argument("--query", default=None, help="Intent query for declarative skill selection")
+    p_skills.add_argument("--context", default="", help="Previous explicit objective for a continuation")
     p_skills.add_argument("--json", action="store_true", help="Output result as JSON")
     p_skills.set_defaults(func=cmd_skills)
 
